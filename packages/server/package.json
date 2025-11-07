@@ -2,7 +2,7 @@
   "name": "zzz-data-server",
   "type": "module",
   "version": "0.0.1",
-  "packageManager": "pnpm@10.18.1",
+  "packageManager": "pnpm@10.20.0",
   "scripts": {
     "dev": "wrangler dev",
     "deploy": "wrangler deploy --minify",
@@ -10,12 +10,12 @@
   },
   "dependencies": {
     "@hono/swagger-ui": "^0.5.2",
-    "@hono/zod-openapi": "^1.1.3",
-    "zod": "^4.1.11",
+    "@hono/zod-openapi": "^1.1.4",
+    "zod": "^4.1.12",
     "zzz-data": "workspace:*"
   },
   "devDependencies": {
-    "hono": "^4.9.10",
-    "wrangler": "^4.42.0"
+    "hono": "^4.10.4",
+    "wrangler": "^4.46.0"
   }
 }

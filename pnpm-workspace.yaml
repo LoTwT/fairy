@@ -3,6 +3,7 @@ packages:
 
 onlyBuiltDependencies:
   - esbuild
+  - protobufjs
   - puppeteer
   - sharp
   - simple-git-hooks

@@ -2,7 +2,7 @@
   "name": "zzz-data",
   "type": "module",
   "version": "0.0.1",
-  "packageManager": "pnpm@10.18.1",
+  "packageManager": "pnpm@10.20.0",
   "description": "zzz data",
   "author": "LoTwT <l709937065@gmail.com>",
   "license": "MIT",
@@ -45,12 +45,12 @@
     "release": "pnpm run build && pnpm publish"
   },
   "devDependencies": {
-    "@types/node": "^24.7.0",
+    "@types/node": "^24.10.0",
     "cheerio": "^1.1.2",
     "exceljs": "^4.4.0",
-    "p-limit": "^7.1.1",
-    "puppeteer": "^24.23.0",
-    "tsdown": "^0.15.6",
+    "p-limit": "^7.2.0",
+    "puppeteer": "^24.29.1",
+    "tsdown": "^0.16.0",
     "tsx": "^4.20.6"
   }
 }
