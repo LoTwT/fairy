@@ -6,13 +6,13 @@
   "description": "zzz data",
   "author": "LoTwT <l709937065@gmail.com>",
   "license": "MIT",
-  "homepage": "https://github.com/LoTwT/pkg-name#readme",
+  "homepage": "https://github.com/LoTwT/zzz-data#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LoTwT/pkg-name.git"
+    "url": "git+https://github.com/LoTwT/zzz-data.git"
   },
   "bugs": {
-    "url": "https://github.com/LoTwT/pkg-name/issues"
+    "url": "https://github.com/LoTwT/zzz-data/issues"
   },
   "keywords": [
     "zenless zone zero",
@@ -20,12 +20,12 @@
     "zzz data"
   ],
   "exports": {
-    ".": "./dist/index.js",
+    ".": "./dist/index.mjs",
     "./data/*": "./data/*"
   },
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
   "typesVersions": {
     "*": {
       "*": [
@@ -40,16 +40,11 @@
   ],
   "scripts": {
     "build": "tsdown",
-    "generate": "tsx ./scripts/generate.ts",
-    "scrape": "tsx ./scripts/scraper/index.ts",
     "release": "pnpm run build && pnpm publish"
   },
   "devDependencies": {
     "@types/node": "^24.10.0",
-    "cheerio": "^1.1.2",
     "exceljs": "^4.4.0",
-    "p-limit": "^7.2.0",
-    "puppeteer": "^24.29.1",
     "tsdown": "^0.16.0",
     "tsx": "^4.20.6"
   }

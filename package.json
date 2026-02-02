@@ -2,18 +2,14 @@
   "name": "zzz-data-monorepo",
   "type": "module",
   "version": "0.0.1",
+  "private": true,
   "packageManager": "pnpm@10.20.0",
   "scripts": {
+    "build": "pnpm -r run build",
     "prepare": "simple-git-hooks",
     "up": "taze latest -I -f -r",
     "prettier": "prettier --write .",
     "lint": "eslint .",
-    "data:build": "pnpm -C packages/zzz-data run build",
-    "data:scrape": "pnpm -C packages/zzz-data run scrape",
-    "data:generate": "pnpm -C packages/zzz-data run generate",
-    "data:release": "pnpm -C packages/zzz-data run release",
-    "server:dev": "pnpm -C packages/server run dev",
-    "server:deploy": "pnpm -C packages/server run deploy",
     "release": "bumpp -r && pnpm run data:release"
   },
   "devDependencies": {
