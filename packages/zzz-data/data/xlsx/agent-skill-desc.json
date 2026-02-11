@@ -1,0 +1,4256 @@
+[
+  {
+    "agent": "安比",
+    "skillName": "普通攻击：伏特速攻",
+    "skillDescription": "点按 <IconMap:Icon_Normal> 发动：\n    向前方进行至多四段的斩击，前三段造成物理伤害，第四段造成电属性伤害。",
+    "agentId": 1011
+  },
+  {
+    "agent": "安比",
+    "skillName": "普通攻击：落雷",
+    "skillDescription": "发动[普通攻击]第三段后，长按或停顿后点按 <IconMap:Icon_Normal> 发动：\n    向前方进行下落打击，造成电属性伤害；\n    招式发动期间抗打断等级提升。",
+    "agentId": 1011
+  },
+  {
+    "agent": "安比",
+    "skillName": "特殊技：电光挥击",
+    "skillDescription": "点按 <IconMap:Icon_Special> 发动：\n    向前方进行上挑斩击，造成电属性伤害；\n    若衔接在[普通攻击]第三段或[普通攻击：落雷]之后，则能够以更快的速度发动；\n    招式发动期间抗打断等级提升。",
+    "agentId": 1011
+  },
+  {
+    "agent": "安比",
+    "skillName": "强化特殊技：苍雷斩",
+    "skillDescription": "能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n    向前方进行强力上挑斩击，造成大量电属性伤害；\n    若衔接在[普通攻击]第三段或[普通攻击：落雷]之后，则能够以更快的速度发动；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1011
+  },
+  {
+    "agent": "安比",
+    "skillName": "闪避：滑步",
+    "skillDescription": "点按 <IconMap:Icon_Evade> 发动：\n    快速的冲刺闪避；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1011
+  },
+  {
+    "agent": "安比",
+    "skillName": "冲刺攻击：电弧斩",
+    "skillDescription": "闪避时，点按 <IconMap:Icon_Normal> 发动：\n    向身周进行斩击，造成物理伤害。",
+    "agentId": 1011
+  },
+  {
+    "agent": "安比",
+    "skillName": "闪避反击：迅雷",
+    "skillDescription": "触发[极限闪避]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动斩击，造成电属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1011
+  },
+  {
+    "agent": "安比",
+    "skillName": "连携技：电磁引擎",
+    "skillDescription": "触发[连携技]时，选择对应角色发动：\n    对前方小范围敌人发动强力上挑斩击，造成大量电属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1011
+  },
+  {
+    "agent": "安比",
+    "skillName": "终结技：过载引擎",
+    "skillDescription": "喧响等级达到[极]时，点按 <IconMap:Icon_UltimateReady> 发动：\n    对前方小范围敌人发动强力上挑斩击，并追加下落攻击，造成大量电属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1011
+  },
+  {
+    "agent": "安比",
+    "skillName": "快速支援：降雷",
+    "skillDescription": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n    对前方敌人发动斩击，造成电属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1011
+  },
+  {
+    "agent": "安比",
+    "skillName": "招架支援：电光一闪",
+    "skillDescription": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n    招架敌人的攻击，累积大量失衡值；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1011
+  },
+  {
+    "agent": "安比",
+    "skillName": "支援突击：回旋闪电",
+    "skillDescription": "发动[招架支援]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动回旋斩击，造成电属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1011
+  },
+  {
+    "agent": "猫又",
+    "skillName": "普通攻击：猫猫爪刺",
+    "skillDescription": "点按 <IconMap:Icon_Normal> 发动：\n    向前方进行至多五段的斩击，造成物理伤害；\n    发动最后一段斩击时，有33.33%的概率重复攻击三次。",
+    "agentId": 1021
+  },
+  {
+    "agent": "猫又",
+    "skillName": "普通攻击：赤色之刃",
+    "skillDescription": "在[普通攻击]前三段中，长按 <IconMap:Icon_Normal> 发动：\n    向前方进行斩击，可穿过前方敌人，并对其造成物理伤害；\n    招式发动时，有33.33%的概率重复攻击三次。",
+    "agentId": 1021
+  },
+  {
+    "agent": "猫又",
+    "skillName": "特殊技：奇袭",
+    "skillDescription": "点按 <IconMap:Icon_Special> 发动：\n    向前方进行下落打击，造成物理伤害；\n    招式发动期间抗打断等级提升。",
+    "agentId": 1021
+  },
+  {
+    "agent": "猫又",
+    "skillName": "强化特殊技：超~凶奇袭！",
+    "skillDescription": "能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n    向前方进行强力下落斩击，造成大量物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1021
+  },
+  {
+    "agent": "猫又",
+    "skillName": "闪避：打不着喵~",
+    "skillDescription": "点按 <IconMap:Icon_Evade> 发动：\n    快速的冲刺闪避；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1021
+  },
+  {
+    "agent": "猫又",
+    "skillName": "冲刺攻击：你在看哪边？",
+    "skillDescription": "闪避时，点按 <IconMap:Icon_Normal> 发动：\n    向前方进行斩击，造成物理伤害。",
+    "agentId": 1021
+  },
+  {
+    "agent": "猫又",
+    "skillName": "闪避反击：虚影双刺",
+    "skillDescription": "触发[极限闪避]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动斩击，造成物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1021
+  },
+  {
+    "agent": "猫又",
+    "skillName": "连携技：刃爪挥击",
+    "skillDescription": "触发[连携技]时，选择对应角色发动：\n    对前方大范围敌人发动强力斩击，造成大量物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1021
+  },
+  {
+    "agent": "猫又",
+    "skillName": "终结技：刃爪强袭",
+    "skillDescription": "喧响等级达到[极]时，点按 <IconMap:Icon_UltimateReady> 发动：\n    对前方大范围敌人发动强力斩击，造成大量物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1021
+  },
+  {
+    "agent": "猫又",
+    "skillName": "快速支援：借用猫爪",
+    "skillDescription": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n    对前方敌人发动斩击，造成物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1021
+  },
+  {
+    "agent": "猫又",
+    "skillName": "招架支援：应激防御",
+    "skillDescription": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n    招架敌人的攻击，累积大量失衡值；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1021
+  },
+  {
+    "agent": "猫又",
+    "skillName": "支援突击：迅影",
+    "skillDescription": "发动[招架支援]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动突进斩击，造成物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1021
+  },
+  {
+    "agent": "妮可",
+    "skillName": "普通攻击：狡兔连打",
+    "skillDescription": "点按 <IconMap:Icon_Normal> 发动：\n    向前方进行至多三段的打击，造成物理伤害。",
+    "agentId": 1031
+  },
+  {
+    "agent": "妮可",
+    "skillName": "普通攻击：为所欲为",
+    "skillDescription": "发动[特殊技]、[强化特殊技]、[连携技]、[终结技]等招式后，能够上弹并强化[普通攻击]与[冲刺攻击]，提升子弹的威力。",
+    "agentId": 1031
+  },
+  {
+    "agent": "妮可",
+    "skillName": "特殊技：糖衣炮弹",
+    "skillDescription": "点按 <IconMap:Icon_Special> 发动：\n    对前方敌人发动远程打击，造成以太伤害；\n    招式发动期间抗打断等级提升；\n    招式发动后自动上弹并强化[普通攻击]与[冲刺攻击]，最多触发8次。",
+    "agentId": 1031
+  },
+  {
+    "agent": "妮可",
+    "skillName": "强化特殊技：夹心糖衣炮弹",
+    "skillDescription": "能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n    对前方敌人发动强力远程打击，并在目标处生成能量场，持续牵引敌人，造成以太伤害；\n    长按 <IconMap:Icon_SpecialReady> 可以进行蓄力，在炮口生成小型能量场，持续消耗能量并对近处的敌人造成额外伤害；\n    招式发动期间拥有无敌效果；\n    招式命中敌人时，将触发[快速支援]；\n    招式发动后自动上弹并强化[普通攻击]与[冲刺攻击]，最多触发8次。",
+    "agentId": 1031
+  },
+  {
+    "agent": "妮可",
+    "skillName": "闪避：脱兔",
+    "skillDescription": "点按 <IconMap:Icon_Evade> 发动：\n    快速的冲刺闪避；\n    招式发动期间拥有无敌效果；\n    拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}发动闪避时，长按 <IconMap:Icon_Evade> ，可以在闪避中途上弹并强化[普通攻击]与[冲刺攻击]，最多触发8次。",
+    "agentId": 1031
+  },
+  {
+    "agent": "妮可",
+    "skillName": "冲刺攻击：惊喜开箱",
+    "skillDescription": "拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}发动闪避后，点按 <IconMap:Icon_Normal> 发动：\n    向对应方向冲刺，并对身周敌人进行打击，造成物理伤害；\n    未拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}发动闪避后，点按 <IconMap:Icon_Normal> 发动：\n    向后躲避，并对前方敌人发动远程打击，造成物理伤害；\n    招式发动后自动上弹并强化[普通攻击]与[冲刺攻击]，最多触发8次。",
+    "agentId": 1031
+  },
+  {
+    "agent": "妮可",
+    "skillName": "闪避反击：牵制炮击",
+    "skillDescription": "触发[极限闪避]后，点按 <IconMap:Icon_Normal> 发动：\n    向后闪避，并对前方敌人发动远程打击，造成以太伤害；\n    招式发动期间拥有无敌效果；\n    招式发动后自动上弹并强化[普通攻击]与[冲刺攻击]，最多触发8次。",
+    "agentId": 1031
+  },
+  {
+    "agent": "妮可",
+    "skillName": "连携技：高价以太爆弹",
+    "skillDescription": "触发[连携技]时，选择对应角色发动：\n    对前方小范围敌人发动强力远程打击，并在目标处生成能量场，持续牵引周围敌人，造成以太伤害；\n    招式发动期间拥有无敌效果；\n    招式命中敌人时，将触发[快速支援]；\n    招式发动后自动上弹并强化[普通攻击]与[冲刺攻击]，最多触发8次。",
+    "agentId": 1031
+  },
+  {
+    "agent": "妮可",
+    "skillName": "终结技：特制以太榴弹",
+    "skillDescription": "喧响等级达到[极]时，点按 <IconMap:Icon_UltimateReady> 发动：\n    对前方小范围敌人发动强力远程打击，并在目标处生成能量场，持续牵引周围敌人，造成以太伤害；\n    招式发动时，队伍中其他角色回复10点能量，下一名换入前场的角色额外回复20点能量；\n    招式发动期间拥有无敌效果；\n    招式命中敌人时，将触发[快速支援]；\n    招式发动后自动上弹并强化[普通攻击]与[冲刺攻击]，最多触发8次。",
+    "agentId": 1031
+  },
+  {
+    "agent": "妮可",
+    "skillName": "快速支援：救急炮击",
+    "skillDescription": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n    向后闪避，并对前方敌人发动远程打击，造成以太伤害；\n    招式发动期间拥有无敌效果；\n    招式发动后自动上弹并强化[普通攻击]与[冲刺攻击]，最多触发8次。",
+    "agentId": 1031
+  },
+  {
+    "agent": "妮可",
+    "skillName": "招架支援：狡兔出手！",
+    "skillDescription": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n    招架敌人的攻击，累积大量失衡值；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1031
+  },
+  {
+    "agent": "妮可",
+    "skillName": "支援突击：趁虚而入",
+    "skillDescription": "发动[招架支援]后，点按 <IconMap:Icon_Normal> 发动：\n    向前方突进后对敌人发动炮击，造成以太伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1031
+  },
+  {
+    "agent": "「11号」",
+    "skillName": "普通攻击：热身火花",
+    "skillDescription": "点按 <IconMap:Icon_Normal> 发动：\n    向前方进行至多四段的斩击，造成物理伤害。",
+    "agentId": 1041
+  },
+  {
+    "agent": "「11号」",
+    "skillName": "普通攻击：火力镇压",
+    "skillDescription": "在恰当的时机点按 <IconMap:Icon_Normal> 发动：\n    发动更加强力的斩击，造成火属性伤害。",
+    "agentId": 1041
+  },
+  {
+    "agent": "「11号」",
+    "skillName": "普通攻击：火力镇压",
+    "skillDescription": "在恰当的时机点按 <IconMap:Icon_Normal> 发动：\n    发动更加强力的斩击，造成火属性伤害。\n    必定触发[火力镇压]的状态下，在进攻即将结束时点按 <IconMap:Icon_Normal> 可更快速地衔接至下一段[普通攻击]。\n    在必定触发[火力镇压]的状态下，可解锁第五段[普通攻击]，发动[连携技]或[终结技]时，可强化下一次第五段[普通攻击]。强化第五段[普通攻击]发动时可消耗当前所有必定触发[火力镇压]的次数，每消耗一次造成额外火属性伤害。\n    触发[极限闪避]后，可保留当前普攻段数持续5秒，发动[闪避反击]后点按 <IconMap:Icon_Normal> 可从保留的普攻段数开始发动[普通攻击]。",
+    "agentId": 1041
+  },
+  {
+    "agent": "「11号」",
+    "skillName": "普通攻击:火力迸发",
+    "skillDescription": "长按 <IconMap:Icon_Normal> 发动：[普通攻击：火力充能]\n    [普通攻击：火力充能]发动过程中松开 <IconMap:Icon_Normal> 时发动[普通攻击：火力迸发]。\n    [普通攻击：火力迸发]发动过程中或[普通攻击：火力充能]发动瞬间受到敌方攻击时，可触发格挡反击，免疫该次伤害，并额外获得3次必定触发[火力镇压]的次数，点按 <IconMap:Icon_Normal> 可衔接至第三段[普通攻击]，上限为8次，\n    在蓄力过程中拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}时，可以发动[普通攻击：烈焰奔袭]。",
+    "agentId": 1041
+  },
+  {
+    "agent": "「11号」",
+    "skillName": "特殊技：烈火",
+    "skillDescription": "点按 <IconMap:Icon_Special> 发动：\n    向身周进行斩击，造成火属性伤害；\n    招式发动期间抗打断等级提升。",
+    "agentId": 1041
+  },
+  {
+    "agent": "「11号」",
+    "skillName": "强化特殊技：盛燃烈火",
+    "skillDescription": "能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n    向身周进行强力斩击，造成大量火属性伤害；\n    招式发动期间拥有无敌效果；\n    招式发动后，[普通攻击]和[冲刺攻击]必定触发[火力镇压]，最多持续30秒或触发8次。",
+    "agentId": 1041
+  },
+  {
+    "agent": "「11号」",
+    "skillName": "强化特殊技：盛燃烈火",
+    "skillDescription": "能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n    向身周进行强力斩击，造成大量火属性伤害；\n    招式发动期间拥有无敌效果；\n    招式发动后，[普通攻击]和[冲刺攻击]必定触发[火力镇压]，最多持续30秒或触发8次。\n    招式发动后，点击 <IconMap:Icon_Normal> 可直接衔接至第四段[普通攻击]。\n    招式发动后，将进入[戒备姿态]；在[戒备姿态]下，若[普通攻击]期间受到敌人攻击，会发动[普通攻击：火力充能]格挡此次攻击，随后发动[普通攻击：火力迸发]，在[普通攻击：火力迸发]发动后点按 <IconMap:Icon_Normal> 可从保留的普攻段数开始发动[普通攻击]。",
+    "agentId": 1041
+  },
+  {
+    "agent": "「11号」",
+    "skillName": "闪避：退火",
+    "skillDescription": "点按 <IconMap:Icon_Evade> 发动：\n    快速的冲刺闪避；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1041
+  },
+  {
+    "agent": "「11号」",
+    "skillName": "冲刺攻击：炽火",
+    "skillDescription": "闪避时，点按 <IconMap:Icon_Normal> 发动：\n    向前方进行斩击，造成物理伤害。",
+    "agentId": 1041
+  },
+  {
+    "agent": "「11号」",
+    "skillName": "冲刺攻击：火力镇压",
+    "skillDescription": "闪避时，点按 <IconMap:Icon_Normal> 发动：\n    向前方进行斩击，造成火属性伤害。",
+    "agentId": 1041
+  },
+  {
+    "agent": "「11号」",
+    "skillName": "闪避反击：逆火",
+    "skillDescription": "触发[极限闪避]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动强力斩击，造成大量火属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1041
+  },
+  {
+    "agent": "「11号」",
+    "skillName": "连携技：昂扬烈焰",
+    "skillDescription": "触发[连携技]时，选择对应角色发动：\n    对前方小范围敌人进行强力上挑斩击，造成大量火属性伤害；\n    招式发动期间拥有无敌效果；\n    招式发动后，[普通攻击]和[冲刺攻击]必定触发[火力镇压]，最多持续30秒或触发8次。",
+    "agentId": 1041
+  },
+  {
+    "agent": "「11号」",
+    "skillName": "连携技：昂扬烈焰",
+    "skillDescription": "触发[连携技]时，选择对应角色发动：\n    对前方小范围敌人进行强力上挑斩击，造成大量火属性伤害；\n    招式发动期间拥有无敌效果；\n    招式发动后，[普通攻击]和[冲刺攻击]必定触发[火力镇压]，最多持续30秒或触发8次。\n    招式发动后，点击 <IconMap:Icon_Normal> 可直接衔接至第四段[普通攻击]。 \n    招式发动后，将进入[戒备姿态]；在[戒备姿态]下，若[普通攻击]期间受到敌人攻击，会发动[普通攻击：火力充能]格挡此次攻击，随后发动[普通攻击：火力迸发]，在[普通攻击：火力迸发]发动后点按 <IconMap:Icon_Normal> 可从保留的普攻段数开始发动[普通攻击]。",
+    "agentId": 1041
+  },
+  {
+    "agent": "「11号」",
+    "skillName": "终结技：轰鸣烈焰",
+    "skillDescription": "喧响等级达到[极]时，点按 <IconMap:Icon_UltimateReady> 发动：\n    对前方小范围敌人进行强力上挑斩击，造成大量火属性伤害；\n    招式发动期间拥有无敌效果；\n    招式发动后，[普通攻击]和[冲刺攻击]必定触发[火力镇压]，最多持续30秒或触发8次。",
+    "agentId": 1041
+  },
+  {
+    "agent": "「11号」",
+    "skillName": "终结技：轰鸣烈焰",
+    "skillDescription": "喧响等级达到[极]时，点按 <IconMap:Icon_UltimateReady> 发动：\n    对前方小范围敌人进行强力上挑斩击，造成大量火属性伤害；\n    招式发动期间拥有无敌效果；\n    招式发动后，[普通攻击]和[冲刺攻击]必定触发[火力镇压]，最多持续30秒或触发8次。\n    招式发动后，点击 <IconMap:Icon_Normal> 可直接衔接至第四段[普通攻击]。\n    招式发动后，将进入[戒备姿态]；在[戒备姿态]下，若[普通攻击]期间受到敌人攻击，会发动[普通攻击：火力充能]格挡此次攻击，随后发动[普通攻击：火力迸发]，在[普通攻击：火力迸发]发动后点按 <IconMap:Icon_Normal> 可从保留的普攻段数开始发动[普通攻击]。",
+    "agentId": 1041
+  },
+  {
+    "agent": "「11号」",
+    "skillName": "快速支援：火力掩护",
+    "skillDescription": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n    对前方敌人发动斩击，造成火属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1041
+  },
+  {
+    "agent": "「11号」",
+    "skillName": "招架支援：巩固防线",
+    "skillDescription": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n    招架敌人的攻击，累积大量失衡值；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1041
+  },
+  {
+    "agent": "「11号」",
+    "skillName": "支援突击：重燃",
+    "skillDescription": "发动[招架支援]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动交叉斩击，造成火属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1041
+  },
+  {
+    "agent": "伊德海莉",
+    "skillName": "普通攻击：碎惘沉击",
+    "skillDescription": "点按 <IconMap:Icon_Normal> 发动：\n    向前方进行至多三段的打击，造成冰属性伤害。\n    第三段打击命中时，伊德海莉将回复10%生命值。",
+    "agentId": 1051
+  },
+  {
+    "agent": "伊德海莉",
+    "skillName": "普通攻击：霜寒拥覆",
+    "skillDescription": "长按 <IconMap:Icon_Normal> 发动：\n    伊德海莉开始蓄力，蓄力会持续消耗生命值，最多可以进行三段蓄力，松开 <IconMap:Icon_Normal> 时，伊德海莉将根据当前蓄力段数，前方发动强力蓄力锤击，造成大量冰属性伤害；\n    伊德海莉生命值越多，蓄力消耗生命值的速度越快，最多消耗生命值至最大生命值的25%；\n    蓄力段数达到2时，招式发动后，点击 <IconMap:Icon_Normal> ，可以直接衔接第三段[普通攻击：碎惘沉击]，通过这种方式发动的[普通攻击：碎惘沉击]伤害会根据当前的蓄力段数提升，最多提升30%，\n    蓄力段数达到3时，蓄力招式发动期间抗打断等级提升，点击 <IconMap:Icon_Normal> ，可以提前衔接至终结下砸。",
+    "agentId": 1051
+  },
+  {
+    "agent": "伊德海莉",
+    "skillName": "霜凝千钧",
+    "skillDescription": "在[普通攻击：霜寒拥覆]的蓄力或旋转横挥期间受到敌方攻击时，可以用触手格挡，使受到的伤害降低25%；\n    如果此时正在蓄力或蓄力段数未满，则会用触手借势反击敌人，回到蓄力姿态并立刻提升1段蓄力等级，对前方敌人造成冰属性伤害；\n    在霜凝千钧期间点击 <IconMap:Icon_Normal> ，伊德海莉会基于当前蓄力等级立刻发动[普通攻击：霜寒拥覆]的下砸终结攻击。\n    在霜凝千钧期间点击 <IconMap:Icon_Special> 、 <IconMap:Icon_SpecialReady_Rp> ，伊德海莉会发动必定触发[溯寒]的[特殊技：溯寒追碾]",
+    "agentId": 1051
+  },
+  {
+    "agent": "伊德海莉",
+    "skillName": "特殊技：断想",
+    "skillDescription": "点按 <IconMap:Icon_Special> 发动：\n    挑飞前方敌人，造成冰属性伤害；\n    招式发动期间抗打断等级提升。",
+    "agentId": 1051
+  },
+  {
+    "agent": "伊德海莉",
+    "skillName": "强化特殊技：缠霜",
+    "skillDescription": "闪能足够时，点按  <IconMap:Icon_SpecialReady_Rp> 发动：\n    连续上挑两次，并挥出冰雾，造成大量冰属性伤害；\n    [强化特殊技：缠霜]若成功命中敌人，会在招式发动结束时回复生命值，回复量相当于伊德海莉已损失生命值的33%；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1051
+  },
+  {
+    "agent": "伊德海莉",
+    "skillName": "特殊技：溯寒追碾",
+    "skillDescription": "在[普通攻击：霜寒拥覆]的蓄力或旋转横挥期间，点按 <IconMap:Icon_Special> 、 <IconMap:Icon_SpecialReady_Rp> 或在保持按住 <IconMap:Icon_Normal> 的同时点按 <IconMap:Icon_Evade> 发动：\n    挑飞前方敌人，造成冰属性伤害；\n    招式的攻击和敌人的攻击发生相撞时，会触发[溯寒]；\n    招式攻击命中处于失衡状态下的敌人，且闪能足够时，会触发[追碾]；\n    触发[溯寒]或[追碾]时，立刻提升蓄力等级至最大值；\n    招式发动期间点击 <IconMap:Icon_Normal> ，伊德海莉会基于当前蓄力等级立刻发动[普通攻击：霜寒拥覆]的下砸终结攻击。\n    招式发动期间抗打断等级提升。",
+    "agentId": 1051
+  },
+  {
+    "agent": "伊德海莉",
+    "skillName": "强化特殊技：极寒重碾",
+    "skillDescription": "触发[溯寒]或[追碾]，且闪能足够时，点按 <IconMap:Icon_SpecialReady_Rp> 或 <IconMap:Icon_Normal> 发动：\n    向前方冲刺、快速上挑并腾空跃起，随后发动强力的下砸攻击，造成大量冰属性伤害；\n    [强化特殊技：极寒重碾]若成功命中敌人，会在招式发动结束时回复生命值，回复量相当于伊德海莉已损失生命值的33%；\n    若在[溯寒]后发动招式，额外回复15闪能，1秒内最多触发1次。\n    招式发动后，点击 <IconMap:Icon_Normal> ，会基于当前蓄力等级立刻发动[普通攻击：霜寒拥覆]的下砸终结攻击。\n    招式发动期间拥有无敌效果。",
+    "agentId": 1051
+  },
+  {
+    "agent": "伊德海莉",
+    "skillName": "闪避：迁梦",
+    "skillDescription": "点按 <IconMap:Icon_Evade> 发动：\n    快速的冲刺闪避；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1051
+  },
+  {
+    "agent": "伊德海莉",
+    "skillName": "冲刺攻击：霜华突撼",
+    "skillDescription": "闪避时，点按 <IconMap:Icon_Normal> 发动：\n    向前方进行打击，造成冰属性伤害。",
+    "agentId": 1051
+  },
+  {
+    "agent": "伊德海莉",
+    "skillName": "闪避反击：冰曳回震",
+    "skillDescription": "触发[极限闪避]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动打击，造成冰属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1051
+  },
+  {
+    "agent": "伊德海莉",
+    "skillName": "连携技：踱寒践约",
+    "skillDescription": "触发[连携技]时，选择对应角色发动：\n    对前方小范围敌人发动强力打击，造成大量冰属性伤害；\n    处于[以太帷幕·涌泉]中时，会召唤触手进行协同攻击，进一步提升招式的威力；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1051
+  },
+  {
+    "agent": "伊德海莉",
+    "skillName": "以太帷幕·涌泉",
+    "skillDescription": "喧响等级达到[极]时，[普通攻击：霜寒拥覆]、[强化特殊技：缠霜]、[强化特殊技：极寒重碾]、[连携技：踱寒践约]最后一击命中敌人时，将消耗3000喧响值，并开启[以太帷幕·涌泉]，[以太帷幕·涌泉]生效期间，全队角色最大生命值提升5%，持续30秒，重复触发延长持续时间，最多延长至300秒；\n    伊德海莉处于[以太帷幕·涌泉]中时，[普通攻击：霜寒拥覆]的蓄力速度增加、蓄力消耗生命值速度增加。",
+    "agentId": 1051
+  },
+  {
+    "agent": "伊德海莉",
+    "skillName": "终结技：终幕·惘事渡却",
+    "skillDescription": "伊德海莉消耗喧响值开启[以太帷幕·涌泉]后，在30秒内点按 <IconMap:Icon_UltimateReady> 发动：\n    对前方大范围敌人进行强力打击，造成大量冰属性伤害；\n    招式发动期间拥有无敌效果；\n    伊德海莉每次消耗喧响值开启[以太帷幕·涌泉]，最多发动1次[终结技：终幕·惘事渡却]。",
+    "agentId": 1051
+  },
+  {
+    "agent": "伊德海莉",
+    "skillName": "快速支援：撼霜驰援",
+    "skillDescription": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n    对前方敌人发动打击，造成冰属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1051
+  },
+  {
+    "agent": "伊德海莉",
+    "skillName": "招架支援：闪震格拒",
+    "skillDescription": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n    招架敌人的攻击，累积大量失衡值；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1051
+  },
+  {
+    "agent": "伊德海莉",
+    "skillName": "支援突击：冰袭痛击",
+    "skillDescription": "发动[招架支援]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动冰片锤击，造成冰属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1051
+  },
+  {
+    "agent": "可琳",
+    "skillName": "普通攻击：扫除开始",
+    "skillDescription": "点按 <IconMap:Icon_Normal> 发动：\n    向前方进行至多五段的斩击，造成物理伤害；\n    在第三、第五段中连点或长按时，可以使用电锯持续斩击敌人。",
+    "agentId": 1061
+  },
+  {
+    "agent": "可琳",
+    "skillName": "特殊技：强力清扫",
+    "skillDescription": "点按 <IconMap:Icon_Special> 发动：\n    向前方进行持续斩击，随后引爆电锯，造成物理伤害；\n    连点或长按时，可以使用电锯持续斩击敌人；\n    招式发动期间抗打断等级提升，受到的伤害降低40%。",
+    "agentId": 1061
+  },
+  {
+    "agent": "可琳",
+    "skillName": "强化特殊技：小心裙角",
+    "skillDescription": "能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n    向前方进行持续强力斩击，随后引爆电锯，造成大量物理伤害；\n    连点或长按时，可以使用电锯持续斩击敌人，并随招式命中目标，逐渐消耗能量；\n    回旋斩击期间拥有无敌效果；\n    持续斩击期间抗打断等级提升，受到的伤害降低40%。",
+    "agentId": 1061
+  },
+  {
+    "agent": "可琳",
+    "skillName": "闪避：[离]",
+    "skillDescription": "点按 <IconMap:Icon_Evade> 发动：\n    快速的冲刺闪避；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1061
+  },
+  {
+    "agent": "可琳",
+    "skillName": "冲刺攻击：[断]",
+    "skillDescription": "闪避时，点按 <IconMap:Icon_Normal> 发动：\n    向前方发动斩击，造成物理伤害；\n    连点或长按时，可以使用电锯持续斩击敌人。",
+    "agentId": 1061
+  },
+  {
+    "agent": "可琳",
+    "skillName": "闪避反击：[舍]",
+    "skillDescription": "触发[极限闪避]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动斩击，随后引爆电锯，造成物理伤害；\n    连点或长按时，可以使用电锯持续斩击敌人；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1061
+  },
+  {
+    "agent": "可琳",
+    "skillName": "连携技：抱歉…",
+    "skillDescription": "触发[连携技]时，选择对应角色发动：\n    对前方小范围敌人发动强力斩击，造成大量物理伤害；\n    连点或长按时，可以使用电锯持续斩击敌人；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1061
+  },
+  {
+    "agent": "可琳",
+    "skillName": "终结技：非、非常抱歉！",
+    "skillDescription": "喧响等级达到[极]时，点按 <IconMap:Icon_UltimateReady> 发动：\n    对前方小范围敌人发动强力斩击，造成大量物理伤害；\n    连点或长按时，可以使用电锯持续斩击敌人；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1061
+  },
+  {
+    "agent": "可琳",
+    "skillName": "快速支援：应急措施",
+    "skillDescription": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n    对前方敌人发动斩击，随后引爆电锯，造成物理伤害；\n    连点或长按时，可以使用电锯持续斩击敌人；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1061
+  },
+  {
+    "agent": "可琳",
+    "skillName": "招架支援：请、请让我来！",
+    "skillDescription": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n    招架敌人的攻击，累积大量失衡值；\n    具有较为优秀的招架性能，承受高强度攻击时[支援点数]的消耗量降低；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1061
+  },
+  {
+    "agent": "可琳",
+    "skillName": "支援突击：快速清扫",
+    "skillDescription": "发动[招架支援]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动连续斩击，随后引爆电锯，造成物理伤害；\n    连点或长按时，可以使用电锯持续斩击敌人；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1061
+  },
+  {
+    "agent": "凯撒",
+    "skillName": "普通攻击：横行斩打",
+    "skillDescription": "点按 <IconMap:Icon_Normal> 发动：\n    向前方进行至多六段的斩击，造成物理伤害。",
+    "agentId": 1071
+  },
+  {
+    "agent": "凯撒",
+    "skillName": "普通攻击：此路不通！",
+    "skillDescription": "[支援点数]足够时，长按 <IconMap:Icon_Normal> 发动：\n    消耗1点[支援点数]，丢出手中的盾牌对四周进行攻击，造成物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1071
+  },
+  {
+    "agent": "凯撒",
+    "skillName": "特殊技：震荡盾击",
+    "skillDescription": "点按 <IconMap:Icon_Special> 发动：\n    使用盾牌向前方进行打击，造成物理伤害；\n    若在招式发动初期的较短时间内受到敌方攻击，将触发[精准格挡]，抵挡此次攻击伤害，并自动衔接发动[特殊技：喧嚣直刺]；\n    招式发动后，凯撒将进入格挡架势，期间自身受到的伤害降低40%，受到敌人攻击时将持盾格挡并被击退，随后点按 <IconMap:Icon_Special> 或 <IconMap:Icon_SpecialReady> ，可以触发[防御反击]，发动[特殊技：喧嚣直刺]或[强化特殊技：超强力盾击]；\n    触发[防御反击]时，招式发动期间拥有无敌效果。",
+    "agentId": 1071
+  },
+  {
+    "agent": "凯撒",
+    "skillName": "特殊技：喧嚣直刺",
+    "skillDescription": "[特殊技：震荡盾击]发动后，点按 <IconMap:Icon_Special> 发动：\n    向前方进行刺击，造成物理伤害；\n    未触发[精准格挡]和[防御反击]时，招式发动期间抗打断等级提升；\n    触发[精准格挡]或[防御反击]时，招式发动期间拥有无敌效果。",
+    "agentId": 1071
+  },
+  {
+    "agent": "凯撒",
+    "skillName": "强化特殊技：招架反击",
+    "skillDescription": "能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n    使用盾牌向前方进行打击，随后发动强力刺击，造成大量物理伤害；\n    若在招式发动初期受到敌方攻击，或通过盾牌打击触发[破招]时，将触发[精准格挡]，抵挡此次攻击伤害，并挥盾反击；触发[精准格挡]后，点按 <IconMap:Icon_SpecialReady> ，可以发动[强化特殊技：超强力盾击]，且无需消耗能量；\n    招式发动后，凯撒将进入格挡架势，期间自身受到的伤害降低40%，受到敌人攻击时将持盾格挡并被击退，随后点按 <IconMap:Icon_Special> 或 <IconMap:Icon_SpecialReady> ，可以触发[防御反击]，发动[特殊技：喧嚣直刺]或[强化特殊技：超强力盾击]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1071
+  },
+  {
+    "agent": "凯撒",
+    "skillName": "强化特殊技：超强力盾击",
+    "skillDescription": "[强化特殊技：招架反击]发动后，能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n    使用盾牌向前方进行打击，造成大量物理伤害；\n    若在招式发动初期受到敌方攻击，或通过盾牌打击触发[破招]时，将触发[精准格挡]，抵挡此次攻击伤害，并返还发动招式所消耗的能量；\n    以[精准格挡]或[防御反击]的方式发动时，无法再次触发[精准格挡]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1071
+  },
+  {
+    "agent": "凯撒",
+    "skillName": "攻防转换",
+    "skillDescription": "凯撒触发[精准格挡]、[防御反击]或[招架支援]时，自身冲击力提升{CAL:8+AvatarSkillLevel(1)*1,1,2}%，持续3秒。",
+    "agentId": 1071
+  },
+  {
+    "agent": "凯撒",
+    "skillName": "闪避：漂移",
+    "skillDescription": "点按 <IconMap:Icon_Evade> 发动：\n    快速的冲刺闪避；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1071
+  },
+  {
+    "agent": "凯撒",
+    "skillName": "冲刺攻击：猪突猛进",
+    "skillDescription": "闪避时，点按 <IconMap:Icon_Normal> 发动：\n    使用盾牌向前方进行打击，造成物理伤害。\n    招式发动期间自身受到的伤害降低40%，受到敌人攻击时将持盾格挡并被击退，随后点按 <IconMap:Icon_Special> 或 <IconMap:Icon_SpecialReady> ，可以触发[防御反击]，发动[特殊技：喧嚣直刺]或[强化特殊技：超强力盾击]。",
+    "agentId": 1071
+  },
+  {
+    "agent": "凯撒",
+    "skillName": "闪避反击：以牙还牙",
+    "skillDescription": "触发[极限闪避]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动刺击，造成物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1071
+  },
+  {
+    "agent": "凯撒",
+    "skillName": "连携技：路怒震打",
+    "skillDescription": "触发[连携技]时，选择对应角色发动：\n    对前方范围敌人发动强力下落打击，造成大量物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1071
+  },
+  {
+    "agent": "凯撒",
+    "skillName": "终结技：暴君猛击",
+    "skillDescription": "喧响等级达到[极]时，点按 <IconMap:Icon_UltimateReady> 发动：\n    丢出手中的盾牌对前方敌人发动强力旋转攻击，随后发动下落打击，造成大量物理伤害；\n    命中持有护盾的敌人时，招式造成的失衡值提升{CAL:40+AvatarSkillLevel(3)*5,1,2}%；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1071
+  },
+  {
+    "agent": "凯撒",
+    "skillName": "快速支援：变道支援",
+    "skillDescription": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n    对前方敌人发动刺击，造成物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1071
+  },
+  {
+    "agent": "凯撒",
+    "skillName": "招架支援：守御之盾",
+    "skillDescription": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n    招架敌人的攻击，累积大量失衡值；\n    具有较为优秀的招架性能，承受高强度攻击时[支援点数]的消耗量降低；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1071
+  },
+  {
+    "agent": "凯撒",
+    "skillName": "支援突击：支援之锋",
+    "skillDescription": "发动[招架支援]后，点按 <IconMap:Icon_Normal> 发动：\n    丢出手中的盾牌对前方敌人发动强力旋转攻击，随后发动斩击，造成物理伤害；\n    招式发动后点按 <IconMap:Icon_Special> 或 <IconMap:Icon_SpecialReady> ，可以触发[防御反击]，发动[特殊技：喧嚣直刺]或[强化特殊技：超强力盾击]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1071
+  },
+  {
+    "agent": "比利",
+    "skillName": "普通攻击：火力全开",
+    "skillDescription": "点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动穿透攻击，造成物理伤害；\n    连点或长按时，可以进入蹲姿射击，延长射击的持续时间；\n    蹲姿射击途中拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}时，可以发动翻滚射击，调整身位并造成物理伤害；\n    蹲姿射击途中停止连点或松开长按时，对前方敌人发动终结射击，造成物理伤害。",
+    "agentId": 1081
+  },
+  {
+    "agent": "比利",
+    "skillName": "特殊技：乖乖站好",
+    "skillDescription": "点按 <IconMap:Icon_Special> 发动：\n    向前方直线区域进行至多三段的穿透攻击，造成物理伤害；\n    招式发动期间抗打断等级提升。",
+    "agentId": 1081
+  },
+  {
+    "agent": "比利",
+    "skillName": "强化特殊技：清场时间",
+    "skillDescription": "能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n    向前方直线区域进行强力穿透攻击，造成大量物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1081
+  },
+  {
+    "agent": "比利",
+    "skillName": "闪避：好险好险",
+    "skillDescription": "点按 <IconMap:Icon_Evade> 发动：\n    快速的冲刺闪避；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1081
+  },
+  {
+    "agent": "比利",
+    "skillName": "冲刺攻击：星-徽-制-裁",
+    "skillDescription": "拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}发动闪避后，点按 <IconMap:Icon_Normal> 发动：\n    向身周大范围区域进行穿透攻击，造成物理伤害。\n    未拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}发动闪避后，点按 <IconMap:Icon_Normal> 发动：\n    向前方直线区域进行穿透攻击，造成物理伤害。",
+    "agentId": 1081
+  },
+  {
+    "agent": "比利",
+    "skillName": "闪避反击：公平决斗",
+    "skillDescription": "触发[极限闪避]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动穿透攻击，造成物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1081
+  },
+  {
+    "agent": "比利",
+    "skillName": "连携技：星徽荣耀幻影",
+    "skillDescription": "触发[连携技]时，选择对应角色发动：\n    对身周大范围敌人发动强力穿透攻击，造成大量物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1081
+  },
+  {
+    "agent": "比利",
+    "skillName": "终结技：星徽在此闪耀",
+    "skillDescription": "喧响等级达到[极]时，点按 <IconMap:Icon_UltimateReady> 发动：\n    对身周大范围敌人发动强力穿透攻击，造成大量物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1081
+  },
+  {
+    "agent": "比利",
+    "skillName": "快速支援：星徽-同伴之力",
+    "skillDescription": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n    对前方敌人发动穿透攻击，造成物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1081
+  },
+  {
+    "agent": "比利",
+    "skillName": "回避支援：闪转步伐",
+    "skillDescription": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n    回避敌人的攻击，并触发[极限视域]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1081
+  },
+  {
+    "agent": "比利",
+    "skillName": "支援突击：要害射击",
+    "skillDescription": "发动[回避支援]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方大范围敌人发动穿透攻击，造成物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1081
+  },
+  {
+    "agent": "雅",
+    "skillName": "普通攻击：风花",
+    "skillDescription": "点按 <IconMap:Icon_Normal> 发动：\n    向前方进行至多五段的斩击，前两段造成物理伤害，后三段造成烈霜伤害；\n    第五段[普通攻击]发动期间可以格挡敌人的攻击。",
+    "agentId": 1091
+  },
+  {
+    "agent": "雅",
+    "skillName": "普通攻击：霜月",
+    "skillDescription": "拥有2点或以上[落霜]时，长按 <IconMap:Icon_Normal> 发动：\n    星见雅收刀进入[霜月架势]并开始蓄力，每段蓄力会消耗2点[落霜]，最多可以进行三段蓄力，松开 <IconMap:Icon_Normal> 或[落霜]耗尽时，星见雅将根据当前蓄力段数，拔刀向前方发动强力斩击，造成大量烈霜伤害，随后退出[霜月架势]；\n    [霜月架势]期间拥有无敌效果；\n    星见雅最多拥有6点[落霜]，进入战场时，星见雅立刻获得3点[落霜]。",
+    "agentId": 1091
+  },
+  {
+    "agent": "雅",
+    "skillName": "特殊技：深雪",
+    "skillDescription": "点按 <IconMap:Icon_Special> 发动：\n    快速拔刀向前方进行斩击，造成烈霜伤害；\n    招式发动期间抗打断等级提升。",
+    "agentId": 1091
+  },
+  {
+    "agent": "雅",
+    "skillName": "强化特殊技：飞雪",
+    "skillDescription": "能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n    快速突进，对路径上的敌人发动强力斩击，造成大量烈霜伤害；\n    招式发动时，获得2点[落霜]；\n    招式发动期间拥有无敌效果。\n    招式发动后，能量足够时，再次点按 <IconMap:Icon_SpecialReady> 发动：\n    额外消耗能量，对前方范围内的敌人发动强力追击，造成大量烈霜伤害；\n    招式发动时，获得2点[落霜]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1091
+  },
+  {
+    "agent": "雅",
+    "skillName": "闪避：水鸟",
+    "skillDescription": "点按 <IconMap:Icon_Evade> 发动：\n    快速的冲刺闪避；\n    招式发动期间拥有无敌效果。\n    闪避时，连点或长按 <IconMap:Icon_Evade> 发动：\n    长距离的冲刺闪避；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1091
+  },
+  {
+    "agent": "雅",
+    "skillName": "冲刺攻击：冬蜂",
+    "skillDescription": "闪避时，点按 <IconMap:Icon_Normal> 发动：\n    向前方进行斩击，造成物理伤害；",
+    "agentId": 1091
+  },
+  {
+    "agent": "雅",
+    "skillName": "闪避反击：寒雀",
+    "skillDescription": "触发[极限闪避]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动斩击，造成烈霜伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1091
+  },
+  {
+    "agent": "雅",
+    "skillName": "连携技：春临",
+    "skillDescription": "触发[连携技]时，选择对应角色发动：\n    对前方大范围敌人发动强力斩击，造成大量烈霜伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1091
+  },
+  {
+    "agent": "雅",
+    "skillName": "终结技：名残雪",
+    "skillDescription": "喧响等级达到[极]时，点按 <IconMap:Icon_UltimateReady> 发动：\n    对前方大范围敌人发动强力斩击，略作延迟后发动终结一击，造成大量烈霜伤害；\n    招式发动时，获得3点[落霜]，自身造成的冰属性伤害提升30%，持续12秒；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1091
+  },
+  {
+    "agent": "雅",
+    "skillName": "快速支援：花信风",
+    "skillDescription": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n    对前方敌人发动斩击，造成烈霜伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1091
+  },
+  {
+    "agent": "雅",
+    "skillName": "招架支援：花筏",
+    "skillDescription": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n    招架敌人的攻击，累积大量失衡值；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1091
+  },
+  {
+    "agent": "雅",
+    "skillName": "支援突击：花辞",
+    "skillDescription": "发动[招架支援]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动突进斩击，造成烈霜伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1091
+  },
+  {
+    "agent": "珂蕾妲",
+    "skillName": "普通攻击：砸扁，粉碎",
+    "skillDescription": "点按 <IconMap:Icon_Normal> 发动：\n    向前方进行至多四段的打击，造成物理伤害；\n    当珂蕾妲拥有[熔炉升温]效果时，能够在第二段攻击后发动强化[普通攻击]，消耗[熔炉升温]效果并造成大量火属性伤害；\n    当珂蕾妲与本同时出战，发动强化[普通攻击]时，会由双方配合发动协同攻击，进一步提升招式的威力；\n    [普通攻击]第四段和强化[普通攻击]发动期间拥有无敌效果。",
+    "agentId": 1101
+  },
+  {
+    "agent": "珂蕾妲",
+    "skillName": "特殊技：爆破！铁锤时间",
+    "skillDescription": "点按 <IconMap:Icon_Special> 发动：\n    对前方进行打击并引发爆炸，造成火属性伤害；\n    若衔接在[普通攻击]第二、第四段或强化[普通攻击]后，则能够快速发动招式，直接引发爆炸；\n    当珂蕾妲与本同时出战，并衔接在强化[普通攻击]后快速发动招式时，会由双方配合发动协同攻击，进一步提升招式的威力；\n    招式发动期间抗打断等级提升。",
+    "agentId": 1101
+  },
+  {
+    "agent": "珂蕾妲",
+    "skillName": "强化特殊技：沸腾熔炉",
+    "skillDescription": "能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n    对前方进行打击并引发强力爆炸，造成大量火属性伤害，并获得[熔炉升温]效果；\n    若衔接在[普通攻击]第二、第四段或强化[普通攻击]后，则能够快速发动招式，直接引发爆炸；\n    当珂蕾妲与本同时出战，并衔接在强化[普通攻击]后快速发动招式时，会由双方配合发动协同攻击，进一步提升招式的威力；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1101
+  },
+  {
+    "agent": "珂蕾妲",
+    "skillName": "闪避：走着瞧",
+    "skillDescription": "点按 <IconMap:Icon_Evade> 发动：\n    快速的冲刺闪避；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1101
+  },
+  {
+    "agent": "珂蕾妲",
+    "skillName": "冲刺攻击：给我颤抖",
+    "skillDescription": "闪避时，点按 <IconMap:Icon_Normal> 发动：\n    向前方进行打击，造成物理伤害。",
+    "agentId": 1101
+  },
+  {
+    "agent": "珂蕾妲",
+    "skillName": "闪避反击：别小看我",
+    "skillDescription": "触发[极限闪避]后，点按 <IconMap:Icon_Normal> 发动：\n    向前方敌人发动打击并引发爆炸，造成火属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1101
+  },
+  {
+    "agent": "珂蕾妲",
+    "skillName": "连携技：天崩-地裂",
+    "skillDescription": "触发[连携技]时，选择对应角色发动：\n    在前方大范围区域发动强力爆炸，造成大量火属性伤害，并获得[熔炉升温]效果；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1101
+  },
+  {
+    "agent": "珂蕾妲",
+    "skillName": "终结技：锤进地心",
+    "skillDescription": "喧响等级达到[极]时，点按 <IconMap:Icon_UltimateReady> 发动：\n    在前方大范围区域发动强力爆炸，造成大量火属性伤害，并获得[熔炉升温]效果；\n    当珂蕾妲与本同时出战时，会由双方配合发动协同攻击，进一步提升招式的威力；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1101
+  },
+  {
+    "agent": "珂蕾妲",
+    "skillName": "快速支援：让我来",
+    "skillDescription": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n    向前方敌人发动打击，造成火属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1101
+  },
+  {
+    "agent": "珂蕾妲",
+    "skillName": "招架支援：护身锤",
+    "skillDescription": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n    招架敌人的攻击，累积大量失衡值；\n    具有较为优秀的招架性能，承受高强度攻击时[支援点数]的消耗量降低；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1101
+  },
+  {
+    "agent": "珂蕾妲",
+    "skillName": "支援突击：锤钟",
+    "skillDescription": "发动[招架支援]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动突进打击，造成火属性伤害，并获得[熔炉升温]效果；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1101
+  },
+  {
+    "agent": "安东",
+    "skillName": "普通攻击：热血上工操",
+    "skillDescription": "点按 <IconMap:Icon_Normal> 发动：\n    向前方进行至多四段的混合攻击，造成物理伤害；\n    第四段攻击为[打桩攻击]。",
+    "agentId": 1111
+  },
+  {
+    "agent": "安东",
+    "skillName": "普通攻击：热血上工操（爆发状态）",
+    "skillDescription": "[爆发状态]下，点按 <IconMap:Icon_Normal> 发动：\n    向前方进行至多三段的混合攻击，造成大量电属性伤害；\n    在第二段[电钻攻击]和第三段[打桩攻击]期间，连点或长按 <IconMap:Icon_Normal> 可以延长招式的持续时间。",
+    "agentId": 1111
+  },
+  {
+    "agent": "安东",
+    "skillName": "特殊技：兄弟，转起来！",
+    "skillDescription": "点按 <IconMap:Icon_Special> 发动：\n    对前方直线区域内敌人发动[打桩攻击]，造成电属性伤害；\n    招式发动期间抗打断等级提升。",
+    "agentId": 1111
+  },
+  {
+    "agent": "安东",
+    "skillName": "强化特殊技：兄弟，突破天际！",
+    "skillDescription": "能量足够时，若点按 <IconMap:Icon_SpecialReady> 发动：\n    对前方直线区域内敌人发动多段[打桩攻击]，造成大量电属性伤害；\n    招式发动期间拥有无敌效果；\n    招式发动后，安东将进入[爆发状态]；在[爆发状态]下，安东会使用更加强力的招式，造成大量电属性伤害，并随招式命中目标，逐渐消耗能量，持续至能量耗尽。",
+    "agentId": 1111
+  },
+  {
+    "agent": "安东",
+    "skillName": "特殊技：爆发钻击（爆发状态）",
+    "skillDescription": "[爆发状态]下，点按 <IconMap:Icon_Special> 发动：\n    对前方敌人发动[打桩攻击]，造成电属性伤害；\n    招式发动期间抗打断等级提升。",
+    "agentId": 1111
+  },
+  {
+    "agent": "安东",
+    "skillName": "闪避：动起来",
+    "skillDescription": "点按 <IconMap:Icon_Evade> 发动：\n    快速的冲刺闪避；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1111
+  },
+  {
+    "agent": "安东",
+    "skillName": "冲刺攻击：硬碰硬",
+    "skillDescription": "闪避时，点按 <IconMap:Icon_Normal> 发动：\n    向前方进行撞击，造成物理伤害。",
+    "agentId": 1111
+  },
+  {
+    "agent": "安东",
+    "skillName": "闪避反击：回敬拳击",
+    "skillDescription": "触发[极限闪避]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动连续重拳，造成物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1111
+  },
+  {
+    "agent": "安东",
+    "skillName": "闪避反击：过载钻击（爆发状态）",
+    "skillDescription": "[爆发状态]下，触发[极限闪避]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人使用[电钻攻击]，造成大量电属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1111
+  },
+  {
+    "agent": "安东",
+    "skillName": "连携技：转转转！",
+    "skillDescription": "触发[连携技]时，选择对应角色发动：\n    对前方地面进行大范围[打桩攻击]，对区域内的敌人造成大量电属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1111
+  },
+  {
+    "agent": "安东",
+    "skillName": "终结技：转转转转转！",
+    "skillDescription": "喧响等级达到[极]时，点按 <IconMap:Icon_UltimateReady> 发动：\n    对前方地面进行大范围[打桩攻击]，对区域内的敌人造成大量电属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1111
+  },
+  {
+    "agent": "安东",
+    "skillName": "快速支援：并肩作战",
+    "skillDescription": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n    对前方敌人发动连续重拳，造成物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1111
+  },
+  {
+    "agent": "安东",
+    "skillName": "快速支援：援护钻击（爆发状态）",
+    "skillDescription": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n    对前方敌人发动[电钻攻击]，造成大量电属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1111
+  },
+  {
+    "agent": "安东",
+    "skillName": "招架支援：钢腕",
+    "skillDescription": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n    招架敌人的攻击，累积大量失衡值；\n    具有较为优秀的招架性能，承受高强度攻击时[支援点数]的消耗量降低；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1111
+  },
+  {
+    "agent": "安东",
+    "skillName": "支援突击：极限突进",
+    "skillDescription": "发动[招架支援]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动[电钻攻击]并以[打桩攻击]收尾，造成电属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1111
+  },
+  {
+    "agent": "本",
+    "skillName": "普通攻击：对账",
+    "skillDescription": "点按 <IconMap:Icon_Normal> 发动：\n    向前方进行至多三段的打击，造成物理伤害。",
+    "agentId": 1121
+  },
+  {
+    "agent": "本",
+    "skillName": "特殊技：拳债统计",
+    "skillDescription": "点按 <IconMap:Icon_Special> 发动：\n    架起武器格挡敌人的攻击，随后对前方进行打击，造成物理伤害，若在格挡期间成功格挡敌人的攻击，将提升招式的威力，发动格挡反击，造成大量物理伤害；\n    长按 <IconMap:Icon_Special> 能够维持格挡；\n    维持格挡时获得护盾，护盾值随时间衰减；\n    退出格挡后移除护盾，护盾值随时间回复；\n    护盾值最高不超过本生命值上限的16%；\n    格挡发动时拥有无敌效果；\n    打击发动期间抗打断等级提升。",
+    "agentId": 1121
+  },
+  {
+    "agent": "本",
+    "skillName": "强化特殊技：到期还拳",
+    "skillDescription": "能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n    架起武器格挡敌人的攻击，随后对前方进行打击，造成火属性伤害，若在格挡期间成功格挡敌人的攻击，将提升招式的威力，发动格挡反击，造成大量火属性伤害；\n    长按 <IconMap:Icon_SpecialReady> 能够维持格挡；\n    维持格挡时获得护盾，护盾值随时间衰减；\n    退出格挡后移除护盾，护盾值随时间回复；\n    护盾值最高不超过本生命值上限的16%；\n    招式发动时，回复护盾至最大值；\n    招式发动后，再次点按 <IconMap:Icon_SpecialReady> ，能够向前方追加强力打击，造成大量火属性伤害；\n    格挡发动时拥有无敌效果；\n    打击发动期间拥有无敌效果。",
+    "agentId": 1121
+  },
+  {
+    "agent": "本",
+    "skillName": "闪避：发票漏洞",
+    "skillDescription": "点按 <IconMap:Icon_Evade> 发动：\n    快速的冲刺闪避；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1121
+  },
+  {
+    "agent": "本",
+    "skillName": "冲刺攻击：前来报销",
+    "skillDescription": "闪避时，点按 <IconMap:Icon_Normal> 发动：\n    向前方进行打击，造成物理伤害。",
+    "agentId": 1121
+  },
+  {
+    "agent": "本",
+    "skillName": "闪避反击：清算",
+    "skillDescription": "触发[极限闪避]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动打击，造成火属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1121
+  },
+  {
+    "agent": "本",
+    "skillName": "连携技：盖章，结算",
+    "skillDescription": "触发[连携技]时，选择对应角色发动：\n    对前方大范围敌人发动强力打击，造成大量火属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1121
+  },
+  {
+    "agent": "本",
+    "skillName": "终结技：拳债，全面清偿",
+    "skillDescription": "喧响等级达到[极]时，点按 <IconMap:Icon_UltimateReady> 发动：\n    对前方大范围敌人发动强力打击，造成大量火属性伤害；\n    招式发动时，额外回复3点支援点数；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1121
+  },
+  {
+    "agent": "本",
+    "skillName": "快速支援：联合追债",
+    "skillDescription": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n    对前方敌人发动打击，造成火属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1121
+  },
+  {
+    "agent": "本",
+    "skillName": "招架支援：分摊风险",
+    "skillDescription": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n    招架敌人的攻击，累积大量失衡值；\n    具有较为优秀的招架性能，承受高强度攻击时[支援点数]的消耗量降低；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1121
+  },
+  {
+    "agent": "本",
+    "skillName": "支援突击：违约惩罚",
+    "skillDescription": "发动[招架支援]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动突进打击，造成火属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1121
+  },
+  {
+    "agent": "苍角",
+    "skillName": "普通攻击：打年糕",
+    "skillDescription": "点按 <IconMap:Icon_Normal> 发动：\n    向前方进行至多三段攻击，造成物理伤害。",
+    "agentId": 1131
+  },
+  {
+    "agent": "苍角",
+    "skillName": "普通攻击：打年糕（霜染刃旗）",
+    "skillDescription": "[霜染刃旗]状态下，点按 <IconMap:Icon_Normal> 发动：\n    向前方进行至多三段更快速的攻击，造成冰属性伤害。",
+    "agentId": 1131
+  },
+  {
+    "agent": "苍角",
+    "skillName": "特殊技：吹凉便当",
+    "skillDescription": "点按 <IconMap:Icon_Special> 发动：\n    向前方扇出风场，随后释放终结一击，造成冰属性伤害；\n    招式发动期间抗打断等级提升，受到的伤害降低40%；\n    招式发动期间长按 <IconMap:Icon_Special> ，可以快速衔接[展旗]攻击。",
+    "agentId": 1131
+  },
+  {
+    "agent": "苍角",
+    "skillName": "强化特殊技：扇走蚊虫",
+    "skillDescription": "能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n    向前方扇出范围更远的风场，造成大量冰属性伤害；\n    多次点按可以连续发动招式，每次发动时将消耗一定能量，能量不足或停止点按时会自动释放终结一击，造成大量冰属性伤害；\n    招式发动期间抗打断等级提升，受到的伤害降低40%；\n    招式发动期间长按 <IconMap:Icon_Special> ，可以快速衔接[展旗]攻击。",
+    "agentId": 1131
+  },
+  {
+    "agent": "苍角",
+    "skillName": "特殊技：集合啦！",
+    "skillDescription": "长按 <IconMap:Icon_Special> 发动：\n    将武器插入地面变形为旗帜，发动[展旗]攻击，造成冰属性伤害，[展旗]攻击命中敌人时，将触发[快速支援]；\n    [展旗]攻击后再次点按 <IconMap:Icon_Normal> 或 <IconMap:Icon_Special> ，将发动一次特殊的收旗攻击，造成冰属性伤害；\n    发动[展旗]攻击时，若拥有三层[涡流]，则会消耗所有[涡流]，进入[霜染刃旗]状态；[霜染刃旗]状态下，苍角能够发动强化[普通攻击]和强化[冲刺攻击]，造成大量冰属性伤害，最多持续45秒或触发6次；\n    苍角的武器在以下情况下会获得[涡流]：\n    发动[强化特殊技]时，获得一层[涡流]；\n    发动[连携技]时，获得一层[涡流]；\n    发动[终结技]时，获得三层[涡流]；\n    [涡流]上限为三层。",
+    "agentId": 1131
+  },
+  {
+    "agent": "苍角",
+    "skillName": "闪避：抢食",
+    "skillDescription": "点按 <IconMap:Icon_Evade> 发动：\n    快速的冲刺闪避；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1131
+  },
+  {
+    "agent": "苍角",
+    "skillName": "冲刺攻击：对半分",
+    "skillDescription": "闪避时，点按 <IconMap:Icon_Normal> 发动：\n    向前方进行斩击，造成物理伤害。",
+    "agentId": 1131
+  },
+  {
+    "agent": "苍角",
+    "skillName": "冲刺攻击：对半分（霜染刃旗）",
+    "skillDescription": "[霜染刃旗]状态下，闪避时，点按 <IconMap:Icon_Normal> 发动：\n    向前方进行斩击，造成冰属性伤害。",
+    "agentId": 1131
+  },
+  {
+    "agent": "苍角",
+    "skillName": "闪避反击：别抢零食",
+    "skillDescription": "触发[极限闪避]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动斩击，造成冰属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1131
+  },
+  {
+    "agent": "苍角",
+    "skillName": "连携技：鹅鸡斩",
+    "skillDescription": "触发[连携技]时，选择对应角色发动：\n    快速对前方敌人发动多次打击，随后衔接[展旗]攻击，造成大量冰属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1131
+  },
+  {
+    "agent": "苍角",
+    "skillName": "终结技：大份鹅鸡斩",
+    "skillDescription": "喧响等级达到[极]时，点按 <IconMap:Icon_UltimateReady> 发动：\n    快速对前方敌人发动更多次打击，随后衔接[展旗]攻击，造成大量冰属性伤害；\n    招式发动时，苍角会进入[鬼面]状态，使自身的暴击率提升15%，持续15秒；\n    招式发动时，队伍中其他角色回复10点能量，下一名换入前场的角色额外回复20点能量；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1131
+  },
+  {
+    "agent": "苍角",
+    "skillName": "快速支援：双人套餐",
+    "skillDescription": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n    对前方敌人发动斩击，造成冰属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1131
+  },
+  {
+    "agent": "苍角",
+    "skillName": "招架支援：防守战术",
+    "skillDescription": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n    招架敌人的攻击，累积大量失衡值；\n    具有较为优秀的招架性能，承受高强度攻击时[支援点数]的消耗量降低；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1131
+  },
+  {
+    "agent": "苍角",
+    "skillName": "支援突击：席卷打击",
+    "skillDescription": "发动[招架支援]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动突进打击，造成冰属性伤害；\n    招式发动期间拥有无敌效果。\n    招式发动期间长按 <IconMap:Icon_Normal> ，可以快速衔接[展旗]攻击。",
+    "agentId": 1131
+  },
+  {
+    "agent": "莱卡恩",
+    "skillName": "普通攻击：狩月舞步",
+    "skillDescription": "点按 <IconMap:Icon_Normal> 发动：\n    向前方进行至多五段的打击，造成物理伤害；\n    长按 <IconMap:Icon_Normal> 可以进行蓄力，提升招式的威力，并造成冰属性伤害。",
+    "agentId": 1141
+  },
+  {
+    "agent": "莱卡恩",
+    "skillName": "特殊技：追猎时刻",
+    "skillDescription": "点按 <IconMap:Icon_Special> 发动：\n    向前方进行连续打击，造成冰属性伤害；\n    长按 <IconMap:Icon_Special> 可以进行蓄力，提升招式的威力；\n    招式发动期间抗打断等级提升。",
+    "agentId": 1141
+  },
+  {
+    "agent": "莱卡恩",
+    "skillName": "强化特殊技：狂猎时刻",
+    "skillDescription": "能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n    向前方进行强力连续打击，造成大量冰属性伤害；\n    长按 <IconMap:Icon_SpecialReady> 可以进行蓄力，消耗能量并提升招式的威力；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1141
+  },
+  {
+    "agent": "莱卡恩",
+    "skillName": "闪避：进退得体",
+    "skillDescription": "点按 <IconMap:Icon_Evade> 发动：\n    快速的冲刺闪避；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1141
+  },
+  {
+    "agent": "莱卡恩",
+    "skillName": "冲刺攻击：保持清洁",
+    "skillDescription": "闪避时，点按 <IconMap:Icon_Normal> 发动：\n    向前方滑铲进行连续打击，造成物理伤害。",
+    "agentId": 1141
+  },
+  {
+    "agent": "莱卡恩",
+    "skillName": "闪避反击：礼仪教导",
+    "skillDescription": "触发[极限闪避]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动打击，造成冰属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1141
+  },
+  {
+    "agent": "莱卡恩",
+    "skillName": "连携技：遵命",
+    "skillDescription": "触发[连携技]时，选择对应角色发动：\n    对前方小范围敌人发动强力连续打击，造成大量冰属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1141
+  },
+  {
+    "agent": "莱卡恩",
+    "skillName": "终结技：不辱使命",
+    "skillDescription": "喧响等级达到[极]时，点按 <IconMap:Icon_UltimateReady> 发动：\n    对前方大范围敌人发动强力连续打击，造成大量冰属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1141
+  },
+  {
+    "agent": "莱卡恩",
+    "skillName": "快速支援：狼群",
+    "skillDescription": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n    对前方敌人发动打击，造成冰属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1141
+  },
+  {
+    "agent": "莱卡恩",
+    "skillName": "招架支援：狩猎干预",
+    "skillDescription": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n    招架敌人的攻击，累积大量失衡值；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1141
+  },
+  {
+    "agent": "莱卡恩",
+    "skillName": "招架支援：狩猎干预",
+    "skillDescription": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n    招架敌人的攻击，累积大量失衡值；\n    具有较为优秀的招架性能，承受高强度攻击时[支援点数]的消耗量降低；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1141
+  },
+  {
+    "agent": "莱卡恩",
+    "skillName": "支援突击：复仇反扑",
+    "skillDescription": "发动[招架支援]后，点按 <IconMap:Icon_Normal> 发动：\n    在前方生成冰柱并对区域内的敌人发动打击，造成冰属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1141
+  },
+  {
+    "agent": "莱卡恩",
+    "skillName": "支援突击：复仇反扑·冰舞",
+    "skillDescription": "发动[招架支援]后，长按 <IconMap:Icon_Normal> 发动：\n    对前方敌人快速发动多段打击，造成冰属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1141
+  },
+  {
+    "agent": "露西",
+    "skillName": "普通攻击：淑女的球棍",
+    "skillDescription": "点按 <IconMap:Icon_Normal> 发动：\n    向前方进行至多四段的打击，造成物理伤害和火属性伤害；\n    当露西发动[普通攻击]第四段时，场上的亲卫队小猪会一起发动[亲卫队小猪：回旋挥击！]。",
+    "agentId": 1151
+  },
+  {
+    "agent": "露西",
+    "skillName": "亲卫队小猪：抄家伙！",
+    "skillDescription": "战斗中，亲卫队小猪会随机使用棒球棍、拳套、弹弓，自动对敌人发动攻击， 造成物理伤害。",
+    "agentId": 1151
+  },
+  {
+    "agent": "露西",
+    "skillName": "亲卫队小猪：回旋挥击！",
+    "skillDescription": "当露西发动[普通攻击]第四段，或自身获得[加油！]状态时，亲卫队小猪会挥舞棒球棍持续转圈，对周围敌人造成物理伤害。若无法立即发动，亲卫队小猪会记住所需发动次数。",
+    "agentId": 1151
+  },
+  {
+    "agent": "露西",
+    "skillName": "特殊技：安打！",
+    "skillDescription": "点按 <IconMap:Icon_Special> 发动：\n    将亲卫队小猪召回并击出[平直球]，亲卫队小猪命中敌人或墙壁时引发爆炸，造成火属性伤害。\n    长按 <IconMap:Icon_Special> 发动：\n    将亲卫队小猪召回并击出[高飞球]，亲卫队小猪从空中落地时引发爆炸，造成火属性伤害。",
+    "agentId": 1151
+  },
+  {
+    "agent": "露西",
+    "skillName": "强化特殊技：全垒打！",
+    "skillDescription": "能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n    将亲卫队小猪召回并击出[平直球]，亲卫队小猪命中敌人或墙壁时引发爆炸，造成大量火属性伤害；\n    招式发动期间拥有无敌效果；\n    招式命中敌人时，将触发[快速支援]。\n    能量足够时，长按 <IconMap:Icon_SpecialReady> 发动：\n    将亲卫队小猪召回并击出[高飞球]，亲卫队小猪从空中落地时引发爆炸，造成大量火属性伤害；\n    招式发动期间拥有无敌效果；\n    招式命中敌人时，将触发[快速支援]。",
+    "agentId": 1151
+  },
+  {
+    "agent": "露西",
+    "skillName": "加油！",
+    "skillDescription": "发动[强化特殊技]后，亲卫队小猪引发爆炸时，将为全队角色、邦布和亲卫队小猪施加[加油！]状态。[加油！]状态下，友方单位的攻击力提升，提升数值等同于露西{CAL:13+AvatarSkillLevel(1)*0.8,1,2}%初始攻击力+{CAL:40+AvatarSkillLevel(1)*4,1,2}点，最高不超过600点。击出[平直球]时，[加油！]状态持续10秒，击出[高飞球]时，[加油！]状态持续15秒，重复触发时刷新持续时间。",
+    "agentId": 1151
+  },
+  {
+    "agent": "露西",
+    "skillName": "闪避：坏球！",
+    "skillDescription": "点按 <IconMap:Icon_Evade> 发动：\n    快速的冲刺闪避；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1151
+  },
+  {
+    "agent": "露西",
+    "skillName": "冲刺攻击：豪勇猪突！",
+    "skillDescription": "闪避时，点按 <IconMap:Icon_Normal> 发动：\n    向前方进行快速打击，造成物理伤害。",
+    "agentId": 1151
+  },
+  {
+    "agent": "露西",
+    "skillName": "闪避反击：獠牙折转！",
+    "skillDescription": "极限闪避时，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动打击，造成火属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1151
+  },
+  {
+    "agent": "露西",
+    "skillName": "连携技：大满贯！",
+    "skillDescription": "触发[连携技]时，选择对应角色发动：\n    露西起跳将场上亲卫队小猪打出，对前方大范围敌人造成大量火属性伤害；\n    招式发动期间拥有无敌效果；\n    招式命中敌人时，将触发[快速支援]。",
+    "agentId": 1151
+  },
+  {
+    "agent": "露西",
+    "skillName": "终结技：再见全垒打！",
+    "skillDescription": "喧响等级达到[极]时，点按 <IconMap:Icon_UltimateReady> 发动：\n    将所有亲卫队小猪依次打出，对前方大范围敌人造成大量火属性伤害；\n    招式发动时，队伍中其他角色回复10点能量，下一名换入前场的角色额外回复20点能量；\n    招式发动期间拥有无敌效果；\n    招式命中敌人时，将触发[快速支援]。",
+    "agentId": 1151
+  },
+  {
+    "agent": "露西",
+    "skillName": "快速支援：触身球！",
+    "skillDescription": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n    对前方敌人发动打击，造成火属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1151
+  },
+  {
+    "agent": "露西",
+    "skillName": "招架支援：安全上垒！",
+    "skillDescription": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n    招架敌人的攻击，累积大量失衡值；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1151
+  },
+  {
+    "agent": "露西",
+    "skillName": "支援突击：触垒得分！",
+    "skillDescription": "发动[招架支援]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动打击，造成火属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1151
+  },
+  {
+    "agent": "莱特",
+    "skillName": "普通攻击：L式轰鸣拳",
+    "skillDescription": "点按或长按 <IconMap:Icon_Normal> 发动：\n    向前方进行至多五段的打击，造成物理伤害和火属性伤害；\n    在[普通攻击]第三段发动期间，拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}，同时连点或长按 <IconMap:Icon_Normal> ，可以持续发动连续体术追击，松开{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}，则衔接后继第四段[普通攻击]；\n    在[普通攻击]第五段轻拳起攻期间，拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}，同时连点或长按 <IconMap:Icon_Normal> ，可以循环发动轻拳起攻和第四段[普通攻击]，松开{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}，则衔接后继刺拳连击；\n    保持连点或长按 <IconMap:Icon_Normal> 时，可以延长刺拳连击的持续时间；\n    停止连点或长按 <IconMap:Icon_Normal> 后，或刺拳连击至持续时间上限后，将向前方发动终结一击，终结一击期间拥有无敌效果；\n    [普通攻击]第五段发动期间，莱特受到的伤害降低40%；\n    [士气喷发]状态下，[普通攻击]第五段发动期间抗打断等级提升，伤害降低效果提升至80%。",
+    "agentId": 1161
+  },
+  {
+    "agent": "莱特",
+    "skillName": "特殊技：V式日轮升拳",
+    "skillDescription": "点按 <IconMap:Icon_Special> 发动：\n    使用上勾拳向前方进行打击，造成火属性伤害；\n    招式发动期间抗打断等级提升。\n    垫步闪避期间，点按 <IconMap:Icon_Special> 发动：\n    使用组合拳向前方进行打击，造成火属性伤害；\n    发动该招式不会打断[普通攻击]的连击段数；\n    招式发动期间抗打断等级提升。",
+    "agentId": 1161
+  },
+  {
+    "agent": "莱特",
+    "skillName": "强化特殊技：V式日轮升拳-全冲程",
+    "skillDescription": "能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n    使用上勾拳离地跃起并向前方进行强力打击，造成大量火属性伤害；\n    招式发动期间，再次点按 <IconMap:Icon_SpecialReady> 可以额外消耗能量，发动强力追击，造成大量火属性伤害；\n    招式发动期间拥有无敌效果，\n    招式发动后，点按或长按 <IconMap:Icon_Normal> 可以直接衔接发动第四段[普通攻击]。\n    垫步闪避期间，能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n    使用组合拳向前方进行强力打击，造成大量火属性伤害；\n    发动该招式不会打断[普通攻击]的连击段数；\n    招式发动期间拥有无敌效果；\n    招式发动后，点按或长按 <IconMap:Icon_Normal> 可以直接衔接发动第五段[普通攻击]。",
+    "agentId": 1161
+  },
+  {
+    "agent": "莱特",
+    "skillName": "闪避：匿影滑步",
+    "skillDescription": "点按 <IconMap:Icon_Evade> 发动：\n    快速的冲刺闪避；\n    招式发动期间拥有无敌效果。\n    角色发动攻击期间，点按 <IconMap:Icon_Evade> 发动：\n    向{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}方向垫步闪避；\n    发动该招式不会打断[普通攻击]的连击段数；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1161
+  },
+  {
+    "agent": "莱特",
+    "skillName": "冲刺攻击：骸突",
+    "skillDescription": "闪避时，点按 <IconMap:Icon_Normal> 发动：\n    向前方进行快速打击，造成物理伤害。",
+    "agentId": 1161
+  },
+  {
+    "agent": "莱特",
+    "skillName": "闪避反击：烈闪",
+    "skillDescription": "触发[极限闪避]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动打击，造成火属性伤害；\n    招式发动期间拥有无敌效果；\n    招式发动后，点按或长按 <IconMap:Icon_Normal> 可以直接衔接发动第五段[普通攻击]。",
+    "agentId": 1161
+  },
+  {
+    "agent": "莱特",
+    "skillName": "连携技：V式灼日炎",
+    "skillDescription": "触发[连携技]时，选择对应角色发动：\n    对前方小范围敌人发动强力打击，造成大量火属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1161
+  },
+  {
+    "agent": "莱特",
+    "skillName": "终结技：W式桂冠终火",
+    "skillDescription": "喧响等级达到[极]时，点按 <IconMap:Icon_UltimateReady> 发动：\n    对身周大范围敌人发动强力打击，造成大量火属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1161
+  },
+  {
+    "agent": "莱特",
+    "skillName": "快速支援：烈闪-守",
+    "skillDescription": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n    对前方敌人发动打击，造成火属性伤害；\n    招式发动期间拥有无敌效果；\n    招式发动后，点按或长按 <IconMap:Icon_Normal> 可以直接衔接发动第五段[普通攻击]。",
+    "agentId": 1161
+  },
+  {
+    "agent": "莱特",
+    "skillName": "招架支援：瞬破",
+    "skillDescription": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n    招架敌人的攻击，累积大量失衡值；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1161
+  },
+  {
+    "agent": "莱特",
+    "skillName": "支援突击：骸突-刺",
+    "skillDescription": "发动[招架支援]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动打击，造成火属性伤害；\n    招式发动期间拥有无敌效果；\n    招式发动后，点按或长按 <IconMap:Icon_Normal> 可以直接衔接发动第五段[普通攻击]。",
+    "agentId": 1161
+  },
+  {
+    "agent": "柏妮思",
+    "skillName": "普通攻击：炽焰直调式",
+    "skillDescription": "点按 <IconMap:Icon_Normal> 发动：\n    向前方进行至多五段的攻击，造成物理伤害和火属性伤害。",
+    "agentId": 1171
+  },
+  {
+    "agent": "柏妮思",
+    "skillName": "普通攻击：炽焰搅拌式",
+    "skillDescription": "[燃油特调]状态下，长按 <IconMap:Icon_Normal> 发动：\n    持续回旋并向周身喷射火焰，随后发动终结一击，造成火属性伤害，保持长按可以延长喷射的持续时间；\n    招式发动时，将会消耗20点[燃点]；\n    招式发动期间抗打断等级提升；\n    终结一击发动后，点按 <IconMap:Icon_SpecialReady> 可以直接衔接发动[强化特殊技：灼热摇荡法·双份]。",
+    "agentId": 1171
+  },
+  {
+    "agent": "柏妮思",
+    "skillName": "普通攻击：炽焰搅拌式",
+    "skillDescription": "[燃油特调]状态下，长按 <IconMap:Icon_Normal> 发动：\n    持续回旋并向周身喷射火焰，随后发动终结一击，额外触发一次不消耗[燃点]的[余烬]，造成火属性伤害，保持长按可以延长喷射的持续时间；\n    招式造成的伤害同时视为[支援攻击]伤害；\n    招式发动时，将会消耗20点[燃点]；\n    招式发动期间抗打断等级提升；\n    终结一击发动后，点按 <IconMap:Icon_SpecialReady> 可以直接衔接发动[强化特殊技：灼热摇荡法·双份]。",
+    "agentId": 1171
+  },
+  {
+    "agent": "柏妮思",
+    "skillName": "特殊技：灼热熟成法",
+    "skillDescription": "点按 <IconMap:Icon_Special> 发动：\n    向前方发动一次火焰冲击，造成火属性伤害；\n    长按 <IconMap:Icon_Special> 可以进行蓄力，提升招式的威力；\n    招式发动期间抗打断等级提升。",
+    "agentId": 1171
+  },
+  {
+    "agent": "柏妮思",
+    "skillName": "强化特殊技：灼热摇荡法",
+    "skillDescription": "能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n    使用单手喷射器持续喷射火焰，随后向前方直线范围发动一次火焰冲击，造成大量火属性伤害，保持长按可以持续消耗能量并延长喷射的持续时间；\n    持续喷射期间拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}，可以发动侧身闪避，向对应方向调整身位；\n    持续喷射期间抗打断等级提升，受到的伤害降低40%；\n    侧身闪避和火焰冲击发动期间拥有无敌效果。",
+    "agentId": 1171
+  },
+  {
+    "agent": "柏妮思",
+    "skillName": "强化特殊技：灼热摇荡法",
+    "skillDescription": "能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n    使用单手喷射器持续喷射火焰，随后向前方直线范围发动一次火焰冲击，造成大量火属性伤害，保持长按可以持续消耗能量并延长喷射的持续时间；\n    持续喷射期间拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}，可以发动侧身闪避，向对应方向调整身位；\n    持续喷射期间抗打断等级提升，受到的伤害降低60%；\n    侧身闪避和火焰冲击发动期间拥有无敌效果。",
+    "agentId": 1171
+  },
+  {
+    "agent": "柏妮思",
+    "skillName": "强化特殊技：灼热摇荡法·双份",
+    "skillDescription": "[强化特殊技：灼热摇荡法]发动期间，能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n    使用双手喷射器持续喷射火焰，随后向前方直线范围发动一次强力的火焰冲击，造成大量火属性伤害，保持长按可以持续消耗能量并延长喷射的持续时间；\n    喷射发动瞬间和火焰冲击发动期间拥有无敌效果；\n    持续喷射期间抗打断等级提升，受到的伤害降低40%。",
+    "agentId": 1171
+  },
+  {
+    "agent": "柏妮思",
+    "skillName": "强化特殊技：灼热摇荡法·双份",
+    "skillDescription": "[强化特殊技：灼热摇荡法]发动期间，能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n    使用双手喷射器持续喷射火焰，随后向前方直线范围发动一次强力的火焰冲击，造成大量火属性伤害，保持长按可以持续消耗能量并延长喷射的持续时间；\n    喷射发动瞬间和火焰冲击发动期间拥有无敌效果；\n    持续喷射期间抗打断等级提升，受到的伤害降低60%。",
+    "agentId": 1171
+  },
+  {
+    "agent": "柏妮思",
+    "skillName": "强化特殊技：灼热抛接法",
+    "skillDescription": "拥有[流火]时，换入前场时发动：\n    队友触发12次[余烬]后，柏妮思获得一点[流火]，拥有[流火]时，柏妮思下一次换入前场时消耗一点[流火]自动发动该招式，该次入场视作以[快速支援]入场，[普通攻击：炽焰搅拌式]触发的[余烬]命中敌人时增加2次计数，拥有[流火]时不再增加计数，消耗[流火]时清空计数；\n    快速突进并越过敌人，向敌人发动一次火焰冲击，造成物理伤害和火属性伤害；\n    招式重击命中处于以太异常状态、电属性异常状态、火属性异常状态、物理属性异常状态、冰属性异常状态的目标时，触发一次[异放]：额外结算一次原属性异常480%/240%/600%/40%/60%的伤害；\n    [额外能力：星火燎原]的火属性异常积蓄值提升效果对该招式生效；\n    招式发动期间拥有无敌效果；\n    招式发动后，点按 <IconMap:Icon_SpecialReady> 可以直接衔接发动[强化特殊技：灼热摇荡法·双份]。",
+    "agentId": 1171
+  },
+  {
+    "agent": "柏妮思",
+    "skillName": "闪避：焰影疾行",
+    "skillDescription": "点按 <IconMap:Icon_Evade> 发动：\n    快速的冲刺闪避；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1171
+  },
+  {
+    "agent": "柏妮思",
+    "skillName": "冲刺攻击：危险发酵式",
+    "skillDescription": "闪避时，点按 <IconMap:Icon_Normal> 发动：\n    挥舞喷射器向前方进行突进攻击，造成火属性伤害。",
+    "agentId": 1171
+  },
+  {
+    "agent": "柏妮思",
+    "skillName": "闪避反击：摇荡闪",
+    "skillDescription": "触发[极限闪避]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动连续攻击并喷射火焰，造成物理伤害和火属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1171
+  },
+  {
+    "agent": "柏妮思",
+    "skillName": "连携技：燃油熔焰",
+    "skillDescription": "触发[连携技]时，选择对应角色发动：\n    快速突进并向周身喷射火焰，随后向前方扇形范围发动一次火焰冲击，造成大量火属性伤害；\n    招式发动期间拥有无敌效果；\n    招式发动后，点按 <IconMap:Icon_SpecialReady> 可以直接衔接发动[强化特殊技：灼热摇荡法·双份]。",
+    "agentId": 1171
+  },
+  {
+    "agent": "柏妮思",
+    "skillName": "终结技：纵享盛焰",
+    "skillDescription": "喧响等级达到[极]时，点按 <IconMap:Icon_UltimateReady> 发动：\n    快速突进后跃向空中，对前方大范围区域持续喷射火焰，造成大量火属性伤害；\n    跃向空中时，将触发[快速支援]，若响应[快速支援]，柏妮思会延长火焰喷射的持续时间；\n    招式发动时，回复50点[燃点]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1171
+  },
+  {
+    "agent": "柏妮思",
+    "skillName": "快速支援：提神特饮",
+    "skillDescription": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n    对前方敌人发动连续攻击并喷射火焰，造成物理伤害和火属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1171
+  },
+  {
+    "agent": "柏妮思",
+    "skillName": "快速支援：提神特饮",
+    "skillDescription": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n    对前方敌人发动连续攻击并喷射火焰，造成物理伤害和火属性伤害；\n    招式发动期间拥有无敌效果；\n    招式发动后，点按 <IconMap:Icon_SpecialReady> 可以直接衔接发动[强化特殊技：灼热摇荡法·双份]。",
+    "agentId": 1171
+  },
+  {
+    "agent": "柏妮思",
+    "skillName": "招架支援：烟熏油盅",
+    "skillDescription": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n    招架敌人的攻击，累积大量失衡值；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1171
+  },
+  {
+    "agent": "柏妮思",
+    "skillName": "支援突击：灼焰甘露",
+    "skillDescription": "发动[招架支援]后，点按 <IconMap:Icon_Normal> 发动：\n    腾空跃起，快速旋转前进并向周身喷射火焰，造成火属性伤害；\n    招式发动期间拥有无敌效果；\n    招式发动后，点按 <IconMap:Icon_SpecialReady> 可以直接衔接发动[强化特殊技：灼热摇荡法·双份]。",
+    "agentId": 1171
+  },
+  {
+    "agent": "格莉丝",
+    "skillName": "普通攻击：高压射钉",
+    "skillDescription": "点按 <IconMap:Icon_Normal> 发动：\n    向前方进行至多四段的攻击，造成物理伤害和电属性伤害；\n    在[普通攻击]期间向侧方拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}，可以发动垫步射击，调整身位并造成物理伤害；\n    格莉丝在[普通攻击]期间发动[特殊技]、[强化特殊技]、[闪避]、[冲刺攻击]、[闪避反击]时，不会打断[普通攻击]的连击段数。",
+    "agentId": 1181
+  },
+  {
+    "agent": "格莉丝",
+    "skillName": "普通攻击：高压射钉",
+    "skillDescription": "点按 <IconMap:Icon_Normal> 发动：\n    向前方进行至多四段的攻击，造成物理伤害和电属性伤害；\n    在[普通攻击]期间向侧方拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}，可以发动垫步射击，调整身位并造成物理伤害，在[普通攻击]第一/第二段后发动时，继续点按 <IconMap:Icon_Normal> 会从[普通攻击]第三/第四段连击继续；\n    格莉丝在[普通攻击]期间发动[特殊技]、[强化特殊技]、[闪避]、[冲刺攻击]、[闪避反击]时，不会打断[普通攻击]的连击段数。",
+    "agentId": 1181
+  },
+  {
+    "agent": "格莉丝",
+    "skillName": "特殊技：工程清障",
+    "skillDescription": "点按 <IconMap:Icon_Special> 发动：\n    向前方投掷一颗手雷，造成电属性伤害；\n    发动招式时，可以拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}，向对应方向调整身位；\n    招式发动期间抗打断等级提升。",
+    "agentId": 1181
+  },
+  {
+    "agent": "格莉丝",
+    "skillName": "特殊技：工程清障",
+    "skillDescription": "点按 <IconMap:Icon_Special> 发动：\n    向前方投掷一颗手雷，造成电属性伤害；\n    发动招式时，可以拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}，向对应方向调整身位；\n    消耗[电能]发动时可以闪避敌人的攻击；\n    招式发动期间抗打断等级提升。",
+    "agentId": 1181
+  },
+  {
+    "agent": "格莉丝",
+    "skillName": "强化特殊技：超规工程清障",
+    "skillDescription": "能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n    腾空跃起，并向前方投掷两颗手雷，造成大量电属性伤害；\n    发动招式时，可以拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}，向对应方向调整身位；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1181
+  },
+  {
+    "agent": "格莉丝",
+    "skillName": "强化特殊技：超规工程清障",
+    "skillDescription": "能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n    腾空跃起，并向前方投掷两颗手雷，造成大量电属性伤害；\n    发动招式时，可以拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}，向对应方向调整身位；\n    若[电能]层数到达上限，会额外投掷一枚[涡流集束手雷]，在爆炸位置生成电磁场，持续牵引敌人，造成电属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1181
+  },
+  {
+    "agent": "格莉丝",
+    "skillName": "[脉冲]",
+    "skillDescription": "发动[终结技]时，获得25层[脉冲]（上限25层），获得[电能]时会消耗一层[脉冲]；\n    消耗[脉冲]获得8层[电能]时，下次投掷手雷时会额外丢出一枚脉冲手雷，并在命中处于以太异常状态、电属性异常状态、火属性异常状态、物理属性异常状态、冰属性异常状态的目标时，触发一次[异放]：额外结算一次原属性异常560%/280%/700%/50%/70%的伤害；\n    [脉冲]状态下解锁[特殊技：工程清障·循环]。",
+    "agentId": 1181
+  },
+  {
+    "agent": "格莉丝",
+    "skillName": "特殊技：工程清障·循环",
+    "skillDescription": "[脉冲]状态下长按 <IconMap:Icon_Special> 发动：\n    招式期间持续向前方投掷手雷，造成电属性伤害，每次投掷手雷获得一层[电能]；\n    发动招式时，可以拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}，向对应方向调整身位，并可以闪避敌人的攻击；\n    招式发动期间抗打断等级提升。",
+    "agentId": 1181
+  },
+  {
+    "agent": "格莉丝",
+    "skillName": "闪避：安全条款",
+    "skillDescription": "点按 <IconMap:Icon_Evade> 发动：\n    快速的冲刺闪避；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1181
+  },
+  {
+    "agent": "格莉丝",
+    "skillName": "冲刺攻击：突击检查",
+    "skillDescription": "闪避时，点按 <IconMap:Icon_Normal> 发动：\n    向前方滑铲扫射，造成物理伤害。",
+    "agentId": 1181
+  },
+  {
+    "agent": "格莉丝",
+    "skillName": "闪避反击：违章处罚",
+    "skillDescription": "触发[极限闪避]后，点按 <IconMap:Icon_Normal> 发动：\n    对敌人投掷一颗手雷，造成电属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1181
+  },
+  {
+    "agent": "格莉丝",
+    "skillName": "闪避反击：违章处罚",
+    "skillDescription": "触发[极限闪避]后，点按 <IconMap:Icon_Normal> 发动：\n    对敌人投掷一颗手雷，造成电属性伤害，随后自动发动[普通攻击]第四段；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1181
+  },
+  {
+    "agent": "格莉丝",
+    "skillName": "连携技：协作施工",
+    "skillDescription": "触发[连携技]时，选择对应角色发动：\n    向空中抛出三颗手雷，随后扫射将其引爆，造成大量电属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1181
+  },
+  {
+    "agent": "格莉丝",
+    "skillName": "终结技：工程爆破请勿接近",
+    "skillDescription": "喧响等级达到[极]时，点按 <IconMap:Icon_UltimateReady> 发动：\n    丢出一枚特制的手雷，其在空中爆炸后会分裂成四颗更小的手雷，造成大量电属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1181
+  },
+  {
+    "agent": "格莉丝",
+    "skillName": "终结技：工程爆破请勿接近",
+    "skillDescription": "喧响等级达到[极]时，点按 <IconMap:Icon_UltimateReady> 发动：\n    丢出一枚特制的手雷，其在空中爆炸后会分裂成四颗更小的手雷，造成大量电属性伤害；\n    获得8层[电能]和25层[脉冲]（上限25层）；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1181
+  },
+  {
+    "agent": "格莉丝",
+    "skillName": "快速支援：事故解决方案",
+    "skillDescription": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n    对敌人投掷一颗手雷，造成电属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1181
+  },
+  {
+    "agent": "格莉丝",
+    "skillName": "回避支援：快速风险响应",
+    "skillDescription": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n    回避敌人的攻击，并触发[极限视域]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1181
+  },
+  {
+    "agent": "格莉丝",
+    "skillName": "支援突击：反击电针",
+    "skillDescription": "发动[回避支援]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动回旋扫射并投掷手雷，造成电属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1181
+  },
+  {
+    "agent": "艾莲",
+    "skillName": "普通攻击：利齿修剪法",
+    "skillDescription": "点按 <IconMap:Icon_Normal> 发动：\n    向前方进行至多三段的攻击，造成物理伤害；\n    第三段攻击期间，连点或长按 <IconMap:Icon_Normal> 可以延长招式的持续时间。",
+    "agentId": 1191
+  },
+  {
+    "agent": "艾莲",
+    "skillName": "普通攻击：急冻修剪法",
+    "skillDescription": "激活[急冻]效果后，点按 <IconMap:Icon_Normal> 发动：\n    向前方进行至多三段的攻击，造成冰属性伤害；\n    每段攻击消耗1点[急冻充能]；\n    第三段攻击期间，连点或长按 <IconMap:Icon_Normal> 可以延长招式的持续时间。",
+    "agentId": 1191
+  },
+  {
+    "agent": "艾莲",
+    "skillName": "普通攻击：冰刃浪",
+    "skillDescription": "第三段[普通攻击：急冻修剪法]、[冲刺攻击：冰渊潜袭]蓄力剪击、[闪避反击：暗礁]和[快速支援]发动后，若艾莲拥有[急冻充能]，点按 <IconMap:Icon_Normal> 可以发动[普通攻击：冰刃浪]，造成冰属性伤害；\n    招式消耗2点[急冻充能];\n    招式发动后，可直接衔接第三段[普通攻击]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1191
+  },
+  {
+    "agent": "艾莲",
+    "skillName": "普通攻击：霜锋",
+    "skillDescription": "第三段[普通攻击：急冻修剪法]、[强化特殊技：鲨卷风]、[闪避反击：暗礁]和[支援突击]发动后，将自动发动[普通攻击：霜锋]，对前方大范围敌人造成多段冰属性伤害，且对中/大体型的敌人会分别额外造成多段冰属性伤害；\n    招式发动后，艾莲将获得[快蓄]效果；\n    [普通攻击：霜锋]不影响原本招式派生;\n    招式发动期间拥有无敌效果。",
+    "agentId": 1191
+  },
+  {
+    "agent": "艾莲",
+    "skillName": "特殊技：摆尾",
+    "skillDescription": "点按 <IconMap:Icon_Special> 发动：\n    向前方进行快速甩尾攻击，造成冰属性伤害；\n    招式发动期间抗打断等级提升。",
+    "agentId": 1191
+  },
+  {
+    "agent": "艾莲",
+    "skillName": "强化特殊技：横扫",
+    "skillDescription": "能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n    向前方进行强力甩尾攻击，造成大量冰属性伤害；\n    命中敌人时，获得1点[急冻充能]；\n    招式发动期间拥有无敌效果；\n    招式发动后，可直接衔接第三段[普通攻击]。",
+    "agentId": 1191
+  },
+  {
+    "agent": "艾莲",
+    "skillName": "强化特殊技：鲨卷风",
+    "skillDescription": "[强化特殊技：横扫]发动后，能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n    向前方进行强力连续斩击，造成大量冰属性伤害；\n    命中敌人时，获得1点[急冻充能]；\n    招式发动期间拥有无敌效果；\n    招式发动后，可直接衔接第三段[普通攻击]。",
+    "agentId": 1191
+  },
+  {
+    "agent": "艾莲",
+    "skillName": "闪避：涡漩",
+    "skillDescription": "点按 <IconMap:Icon_Evade> 发动：\n    快速的冲刺闪避；\n    招式发动期间拥有无敌效果；\n    触发[极限闪避]时，艾莲将获得[快蓄]效果，缩短[冲刺攻击：冰渊潜袭]的蓄力时间，最多持续5秒或触发一次。",
+    "agentId": 1191
+  },
+  {
+    "agent": "艾莲",
+    "skillName": "冲刺：狩猎巡游",
+    "skillDescription": "长按或双击 <IconMap:Icon_Evade> 发动：\n    进入[巡游]状态，快速冲刺移动；\n    在[巡游]状态下使用{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}控制方向，松开{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}则会停下；\n    招式发动瞬间拥有短暂的无敌效果。",
+    "agentId": 1191
+  },
+  {
+    "agent": "艾莲",
+    "skillName": "冲刺攻击：冰渊潜袭",
+    "skillDescription": "在[巡游]状态下，点按 <IconMap:Icon_Normal> 发动：\n    对敌人进行回旋斩击，随后拉开剪刀，发动快速剪击，造成冰属性伤害；\n    快速剪击命中时，获得1点[急冻充能]。\n\n    在[巡游]状态下，长按 <IconMap:Icon_Normal> 发动：\n    对敌人进行回旋斩击，随后拉开剪刀，发动蓄力剪击，造成大量冰属性伤害；\n    蓄力剪击命中时，获得3点[急冻充能]，若敌人处于[冻结]状态下，则必定触发[碎冰]效果；\n    招式蓄力期间抗打断等级提升，受到的伤害降低40%；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1191
+  },
+  {
+    "agent": "艾莲",
+    "skillName": "冲刺攻击：冰渊潜袭",
+    "skillDescription": "在[巡游]状态下，点按 <IconMap:Icon_Normal> 发动：\n    对敌人进行回旋斩击，随后拉开剪刀，发动快速剪击，造成冰属性伤害；\n    快速剪击命中时，获得1点[急冻充能]。\n\n    在[巡游]状态下，长按 <IconMap:Icon_Normal> 发动：\n    对敌人进行回旋斩击，随后拉开剪刀，发动蓄力剪击，造成大量冰属性伤害；\n    蓄力剪击命中时，获得3点[急冻充能]，若敌人处于[冻结]状态下，则必定触发[碎冰]效果；\n    招式蓄力期间抗打断等级提升，受到的伤害降低40%；\n    招式蓄力期间受到敌人伤害时，可以免疫该次伤害，并立即完成蓄力；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1191
+  },
+  {
+    "agent": "艾莲",
+    "skillName": "急冻",
+    "skillDescription": "拥有[急冻充能]时，将激活[急冻]效果；激活[急冻]效果后，[普通攻击]和[冲刺攻击]将消耗[急冻充能]，造成大量冰属性伤害；艾莲最多可以拥有6点[急冻充能]。",
+    "agentId": 1191
+  },
+  {
+    "agent": "艾莲",
+    "skillName": "冲刺攻击：骇浪",
+    "skillDescription": "闪避时，点按 <IconMap:Icon_Normal> 发动：\n    向前方进行突进斩击，造成物理伤害；",
+    "agentId": 1191
+  },
+  {
+    "agent": "艾莲",
+    "skillName": "冲刺攻击：寒潮",
+    "skillDescription": "激活[急冻]效果后，闪避时，点按 <IconMap:Icon_Normal> 发动：\n    向前方进行突进斩击，造成冰属性伤害；\n    消耗1点[急冻充能]。",
+    "agentId": 1191
+  },
+  {
+    "agent": "艾莲",
+    "skillName": "闪避反击：暗礁",
+    "skillDescription": "触发[极限闪避]后，点按 <IconMap:Icon_Normal> 发动：\n    快速穿过敌人，拉开剪刀进行剪击，造成冰属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1191
+  },
+  {
+    "agent": "艾莲",
+    "skillName": "连携技：雪崩",
+    "skillDescription": "触发[连携技]时，选择对应角色发动：\n    从空中下砸并生成一阵冰风暴，造成大量冰属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1191
+  },
+  {
+    "agent": "艾莲",
+    "skillName": "终结技：永冬狂宴",
+    "skillDescription": "喧响等级达到[极]时，点按 <IconMap:Icon_UltimateReady> 发动：\n    从空中下砸并生成一阵冰风暴，随后使用剪刀进行强力一击，造成大量冰属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1191
+  },
+  {
+    "agent": "艾莲",
+    "skillName": "快速支援：护卫鲛",
+    "skillDescription": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n    快速穿过敌人，拉开剪刀进行剪击，造成冰属性伤害；\n    招式发动期间拥有无敌效果。\n    当前操作中的角色被击飞时，拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}，点按 <IconMap:Icon_Switch> 发动：\n    进入[巡游]状态，快速冲刺移动；\n    在[巡游]状态下使用{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}控制方向，松开{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}则会停下；\n    招式发动瞬间拥有短暂的无敌效果。\n    发动[快速支援]时，艾莲将获得[快蓄]效果，缩短[冲刺攻击：冰渊潜袭]的蓄力时间，最多持续5秒或触发一次。",
+    "agentId": 1191
+  },
+  {
+    "agent": "艾莲",
+    "skillName": "招架支援：迎头浪",
+    "skillDescription": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n    招架敌人的攻击，累积大量失衡值；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1191
+  },
+  {
+    "agent": "艾莲",
+    "skillName": "支援突击：巡洋鲨",
+    "skillDescription": "发动[招架支援]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动突进斩击，造成冰属性伤害；\n    招式攻击期间，连点或长按 <IconMap:Icon_Normal> 可以延长招式的持续时间；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1191
+  },
+  {
+    "agent": "悠真",
+    "skillName": "普通攻击：穿云",
+    "skillDescription": "点按 <IconMap:Icon_Normal> 发动：\n    向前方进行至多五段的穿透攻击，造成物理伤害和电属性伤害；\n    第五段攻击命中敌人时，可生成2枚[电壶]；\n    发动[连携技]后，悠真下一次发动[普通攻击：穿云]第五段命中敌人时，可生成6枚[电壶]。",
+    "agentId": 1201
+  },
+  {
+    "agent": "悠真",
+    "skillName": "普通攻击：穿云·移形",
+    "skillDescription": "[普通攻击：穿云]发动期间，拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}并点按 <IconMap:Icon_Normal> 发动：\n    发动远程穿透攻击，并向拖曳方向调整身位，对前方敌人造成物理伤害。",
+    "agentId": 1201
+  },
+  {
+    "agent": "悠真",
+    "skillName": "普通攻击：落羽",
+    "skillDescription": "第五段[普通攻击：穿云]、[特殊技]、[强化特殊技]或[连携技]发动后，长按 <IconMap:Icon_Special> 发动：\n    立即向前方敌人发射[落羽]，造成电属性伤害。\n    长按 <IconMap:Icon_Normal> 瞄准目标，松开 <IconMap:Icon_Normal> 发动：\n    引弓瞄准敌人后，向目标发射[落羽]，造成电属性伤害。",
+    "agentId": 1201
+  },
+  {
+    "agent": "悠真",
+    "skillName": "普通攻击：甲乙矢",
+    "skillDescription": "第五段[普通攻击：穿云]/[强化特殊技]/[连携技]命中敌人或地面时，可生成2/6/6枚[电壶]；\n    若场上不存在[电壶]，队伍中任意角色对敌人施加属性异常效果时，可生成6枚[电壶]，12秒内最多触发一次；\n    [电壶]同一时间内最多存在6枚，悠真发射[落羽]命中敌人时，若场上存在[电壶]，则会将其激活，向被[落羽]命中的目标发射[甲乙矢]，造成电属性伤害；\n    [甲乙矢]命中敌人时，会为其施加[电囚]效果，最多叠加8层，持续10秒，重复触发时刷新持续时间，[电囚]效果大于等于2层时，将在目标身上生成[十文字]标记。",
+    "agentId": 1201
+  },
+  {
+    "agent": "悠真",
+    "skillName": "特殊技：天罗",
+    "skillDescription": "点按 <IconMap:Icon_Special> 发动：\n    向前方发射箭矢，造成电属性伤害；\n    招式发动期间抗打断等级提升。",
+    "agentId": 1201
+  },
+  {
+    "agent": "悠真",
+    "skillName": "强化特殊技：地网",
+    "skillDescription": "能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n    向前方发射飞刃和强化箭矢，造成大量电属性伤害；\n    强化箭矢命中敌人或地面时，可生成6枚[电壶]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1201
+  },
+  {
+    "agent": "悠真",
+    "skillName": "强化特殊技：地网·巡弋",
+    "skillDescription": "能量足够时，在第四/五段[普通攻击：穿云]、[冲刺攻击：飞弦·斩]、[终结技]、[闪避反击：藏锋]、[快速支援：穿弦]发动后点按 <IconMap:Icon_SpecialReady> 发动：\n    向前方连续发射强化箭矢，造成大量电属性伤害；\n    第一发强化箭矢命中敌人或地面时，可生成6枚[电壶]，最后一发强化箭矢命中敌人时，激活场上的[电壶]，向目标发射[甲乙矢]，造成电属性伤害；\n    命中的目标持有的[电囚]效果层数接近上限时，会激活更少的[电壶]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1201
+  },
+  {
+    "agent": "悠真",
+    "skillName": "闪避：瞬闪",
+    "skillDescription": "点按 <IconMap:Icon_Evade> 发动：\n    快速的冲刺闪避；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1201
+  },
+  {
+    "agent": "悠真",
+    "skillName": "冲刺攻击：飞弦",
+    "skillDescription": "闪避时，点按 <IconMap:Icon_Normal> 发动：\n    向前方进行多段穿透攻击，造成物理伤害。",
+    "agentId": 1201
+  },
+  {
+    "agent": "悠真",
+    "skillName": "闪避反击：藏锋",
+    "skillDescription": "触发[极限闪避]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动穿透攻击，造成电属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1201
+  },
+  {
+    "agent": "悠真",
+    "skillName": "连携技：会·离",
+    "skillDescription": "触发[连携技]时，选择对应角色发动：\n    对前方大范围敌人发动穿透攻击，并发射强化箭矢，造成大量电属性伤害；\n    箭矢命中地面时，可生成6枚[电壶]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1201
+  },
+  {
+    "agent": "悠真",
+    "skillName": "终结技：残心",
+    "skillDescription": "喧响等级达到[极]时，点按 <IconMap:Icon_UltimateReady> 发动：\n    对前方敌人发动强力穿透攻击，造成大量电属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1201
+  },
+  {
+    "agent": "悠真",
+    "skillName": "残心·散华",
+    "skillDescription": "[终结技：残心]发动后自动派生：\n    对前方敌人发动大范围穿透攻击，造成电属性伤害，视为[终结技]伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1201
+  },
+  {
+    "agent": "悠真",
+    "skillName": "快速支援：穿弦",
+    "skillDescription": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n    对前方敌人发动穿透攻击，造成电属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1201
+  },
+  {
+    "agent": "悠真",
+    "skillName": "招架支援：构身",
+    "skillDescription": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n    招架敌人的攻击，累积大量失衡值；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1201
+  },
+  {
+    "agent": "悠真",
+    "skillName": "支援突击：构身·斩",
+    "skillDescription": "发动[招架支援]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动连续斩击，造成电属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1201
+  },
+  {
+    "agent": "悠真",
+    "skillName": "冲刺攻击：飞弦·斩",
+    "skillDescription": "当场上存在拥有[十文字]标记的敌人时，悠真会进入[醒觉]状态，并将[冲刺攻击：飞弦]替换为[冲刺攻击：飞弦·斩]。\n    [醒觉]状态下，闪避时，点按 <IconMap:Icon_Normal> 发动：\n    快速突进至距离自身最近的带有[十文字]标记的敌人身前，发动强力斩击，造成电属性伤害；\n    斩击命中目标时会消耗2层[电囚]效果，[电囚]效果少于2层时，将消除[十文字]标记；在[十文字]标记耗尽前，连续点按 <IconMap:Icon_Normal> ，可连续发动[冲刺攻击：飞弦·斩]；当场上不存在带有[十文字]标记的敌人时，悠真将退出[醒觉]状态；\n    [醒觉]状态下，[普通攻击：落羽]发动后，点按 <IconMap:Icon_Normal> 可以快速衔接发动[冲刺攻击：飞弦·斩]；\n    招式发动期间抗打断等级提升，受到的伤害降低40%。",
+    "agentId": 1201
+  },
+  {
+    "agent": "悠真",
+    "skillName": "冲刺攻击：飞弦·斩",
+    "skillDescription": "当场上存在拥有[十文字]标记的敌人时，悠真会进入[醒觉]状态，并将[冲刺攻击：飞弦]替换为[冲刺攻击：飞弦·斩]。\n    [醒觉]状态下，闪避时，点按 <IconMap:Icon_Normal> 发动：\n    快速突进至距离自身最近的带有[十文字]标记的敌人身前，发动强力斩击，造成电属性伤害，命中处于失衡状态的敌人时会触发[逐雷]，造成1次额外的电属性伤害；\n    斩击命中目标时会消耗2层[电囚]效果，[电囚]效果少于2层时，将消除[十文字]标记；在[十文字]标记耗尽前，连续点按 <IconMap:Icon_Normal> ，可连续发动[冲刺攻击：飞弦·斩]；当场上不存在带有[十文字]标记的敌人时，悠真将退出[醒觉]状态；\n    [醒觉]状态下，[普通攻击：落羽]发动后，点按 <IconMap:Icon_Normal> 可以快速衔接发动[冲刺攻击：飞弦·斩]；\n    第一段招式期间可以格挡敌人攻击，第二、第三段招式的追击效果增强；\n    招式发动期间抗打断等级提升，受到的伤害降低40%。",
+    "agentId": 1201
+  },
+  {
+    "agent": "丽娜",
+    "skillName": "普通攻击：痛打呆子",
+    "skillDescription": "点按 <IconMap:Icon_Normal> 发动：\n    指派杜苏拉和安娜塔莎发动至多四段的攻击，造成物理伤害和电属性伤害；\n    在杜苏拉和安娜塔莎攻击期间，丽娜执行其他行动，不会打断[普通攻击]的连击段数。",
+    "agentId": 1211
+  },
+  {
+    "agent": "丽娜",
+    "skillName": "普通攻击：赶走傻瓜",
+    "skillDescription": "长按 <IconMap:Icon_Normal> 或 <IconMap:Icon_Special> 发动：\n    召回杜苏拉和安娜塔莎，在身边回旋后进行范围攻击，造成电属性伤害；\n    招式发动期间抗打断等级提升。",
+    "agentId": 1211
+  },
+  {
+    "agent": "丽娜",
+    "skillName": "特殊技：砸扁笨蛋",
+    "skillDescription": "点按 <IconMap:Icon_Special> 发动：\n    指派安娜塔莎发动下砸攻击，造成电属性伤害；\n    招式发动期间抗打断等级提升。",
+    "agentId": 1211
+  },
+  {
+    "agent": "丽娜",
+    "skillName": "强化特殊技：笨蛋消失魔法",
+    "skillDescription": "能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n    指派杜苏拉和安娜塔莎发动持续下砸攻击，造成大量电属性伤害；\n    招式发动期间拥有无敌效果；\n    招式命中敌人时，将触发[快速支援]。",
+    "agentId": 1211
+  },
+  {
+    "agent": "丽娜",
+    "skillName": "闪避：抚平裙摆",
+    "skillDescription": "点按 <IconMap:Icon_Evade> 发动：\n    快速的冲刺闪避；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1211
+  },
+  {
+    "agent": "丽娜",
+    "skillName": "冲刺攻击：突然惊吓",
+    "skillDescription": "闪避时，点按 <IconMap:Icon_Normal> 发动：\n    指派杜苏拉和安娜塔莎发动穿透攻击，造成物理伤害。",
+    "agentId": 1211
+  },
+  {
+    "agent": "丽娜",
+    "skillName": "闪避反击：邦布回魂",
+    "skillDescription": "触发[极限闪避]后，点按 <IconMap:Icon_Normal> 发动：\n    指派杜苏拉和安娜塔莎，向前方旋转飞出并触发爆炸，造成电属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1211
+  },
+  {
+    "agent": "丽娜",
+    "skillName": "连携技：侍者守则",
+    "skillDescription": "触发[连携技]时，选择对应角色发动：\n    指派杜苏拉和安娜塔莎，向前方持续推进并生成球形电场，造成大量电属性伤害；\n    杜苏拉和安娜塔莎在推进期间无法响应[普通攻击]、[冲刺攻击]、[特殊技]或[强化特殊技]的指令，但可以通过发动[普通攻击：赶走傻瓜]将其召回丽娜身边；\n    招式发动期间拥有无敌效果；\n    招式命中敌人时，将触发[快速支援]。\n",
+    "agentId": 1211
+  },
+  {
+    "agent": "丽娜",
+    "skillName": "终结技：女王的侍从们",
+    "skillDescription": "喧响等级达到[极]时，点按 <IconMap:Icon_UltimateReady> 发动：\n    指派杜苏拉和安娜塔莎，向前方持续推进并发动高速回旋，造成大量电属性伤害；\n    杜苏拉和安娜塔莎在推进期间无法响应[普通攻击]、[冲刺攻击]、[特殊技]或[强化特殊技]的指令，但可以通过发动[普通攻击：赶走傻瓜]将其召回丽娜身边；\n    招式发动时，队伍中其他角色回复10点能量，下一名换入前场的角色额外回复20点能量；\n    招式发动期间拥有无敌效果；\n    招式命中敌人时，将触发[快速支援]。",
+    "agentId": 1211
+  },
+  {
+    "agent": "丽娜",
+    "skillName": "快速支援：二拍的阿勒芒德",
+    "skillDescription": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n    指派杜苏拉和安娜塔莎，向前方旋转飞出并触发爆炸，造成电属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1211
+  },
+  {
+    "agent": "丽娜",
+    "skillName": "回避支援：三拍的库朗特",
+    "skillDescription": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n    回避敌人的攻击，并触发[极限视域]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1211
+  },
+  {
+    "agent": "丽娜",
+    "skillName": "支援突击：四拍的加沃特",
+    "skillDescription": "发动[回避支援]后，点按 <IconMap:Icon_Normal> 发动：\n    指派杜苏拉和安娜塔莎，向前方持续推进并生成涡旋电场，造成电属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1211
+  },
+  {
+    "agent": "柳",
+    "skillName": "普通攻击：夜见尊神乐",
+    "skillDescription": "月城柳拥有[上弦]和[下弦]两种架势；\n    点按 <IconMap:Icon_Normal> 发动：\n    根据当前架势，向前方进行至多五段的斩击，造成物理伤害和电属性伤害；\n    在战斗中，月城柳可根据当前架势类型获得对应的架势增益：\n    [上弦]架势增益：自身造成的电属性伤害提升10%，[普通攻击]发动期间抗打断等级提升；\n    [下弦]架势增益：自身穿透率提升10%，[普通攻击]的打断等级提升；\n    架势切换后，月城柳仍可继续保有上一架势的架势增益，持续8秒。",
+    "agentId": 1221
+  },
+  {
+    "agent": "柳",
+    "skillName": "特殊技：流转",
+    "skillDescription": "点按 <IconMap:Icon_Special> 发动：\n    向前方进行斩击，造成电属性伤害，并切换当前架势；\n    招式发动期间抗打断等级提升；\n    若衔接在[普通攻击]第三、四、五段之后发动，则能够触发[快速流转]，以更快的速度进行斩击并切换当前架势；\n    [快速流转]发动期间可以格挡敌人的攻击；\n    触发[快速流转]后，可以直接衔接当前架势下第三段[普通攻击]。",
+    "agentId": 1221
+  },
+  {
+    "agent": "柳",
+    "skillName": "强化特殊技：月华流转",
+    "skillDescription": "能量足够时，长按 <IconMap:Icon_SpecialReady> 发动：\n    积蓄力量向前快速突刺，随后发动下落攻击，造成大量电属性伤害；\n    突刺发动时，月城柳会切换当前架势，并进入[森罗万象]状态，持续15秒，状态持续期间，从[普通攻击]第五段或其他招式衔接后继[普通攻击]时，将直接从第三段[普通攻击] 起手；\n    下落攻击命中处于属性异常状态下的敌人时，将会触发特殊的[紊乱]效果[极性紊乱]，对目标造成原本[紊乱]效果15%的伤害，并额外附加月城柳{CAL:5+AvatarSkillLevel(1)*2.25,100,2}%异常精通的伤害，[极性紊乱]不会清除目标所处的属性异常状态；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1221
+  },
+  {
+    "agent": "柳",
+    "skillName": "闪避：流岚",
+    "skillDescription": "点按 <IconMap:Icon_Evade> 发动：\n    快速的冲刺闪避；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1221
+  },
+  {
+    "agent": "柳",
+    "skillName": "冲刺攻击：飞掠",
+    "skillDescription": "闪避时，点按 <IconMap:Icon_Normal> 发动：\n    向前方进行斩击，造成物理伤害。",
+    "agentId": 1221
+  },
+  {
+    "agent": "柳",
+    "skillName": "闪避反击：疾反",
+    "skillDescription": "触发[极限闪避]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动斩击，造成电属性伤害；\n    招式发动期间拥有无敌效果；\n    招式发动后，可以直接衔接当前架势下第三段[普通攻击]。",
+    "agentId": 1221
+  },
+  {
+    "agent": "柳",
+    "skillName": "连携技：星月相随",
+    "skillDescription": "触发[连携技]时，选择对应角色发动：\n    切换当前架势，并对前方敌人发动强力斩击，造成大量电属性伤害；\n    招式发动期间拥有无敌效果；\n    招式发动后，可以直接衔接当前架势下第三段[普通攻击]。",
+    "agentId": 1221
+  },
+  {
+    "agent": "柳",
+    "skillName": "终结技：雷影天华",
+    "skillDescription": "喧响等级达到[极]时，点按 <IconMap:Icon_UltimateReady> 发动：\n    激发自身能力，在极短时间内对前方大范围敌人发动强力斩击，并追加落雷攻击，造成大量电属性伤害；\n    落雷攻击命中处于属性异常状态下的敌人时，将会触发特殊的[紊乱]效果[极性紊乱]，对目标造成原本[紊乱]效果15%的伤害，并额外附加月城柳{CAL:5+AvatarSkillLevel(3)*2.25,100,2}%异常精通的伤害，[极性紊乱]不会清除目标所处的属性异常状态；\n    招式发动期间拥有无敌效果；\n    招式发动后，可以直接衔接当前架势下第三段[普通攻击]。",
+    "agentId": 1221
+  },
+  {
+    "agent": "柳",
+    "skillName": "快速支援：风华斩",
+    "skillDescription": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n    对前方敌人发动斩击，造成电属性伤害；\n    招式发动期间拥有无敌效果；\n    招式发动后，可以直接衔接当前架势下第三段[普通攻击]。",
+    "agentId": 1221
+  },
+  {
+    "agent": "柳",
+    "skillName": "招架支援：流光反",
+    "skillDescription": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n    招架敌人的攻击，累积大量失衡值；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1221
+  },
+  {
+    "agent": "柳",
+    "skillName": "支援突击：飞絮刺",
+    "skillDescription": "发动[招架支援]后，点按 <IconMap:Icon_Normal> 发动：\n    切换当前架势，对前方敌人快速发动多段斩击，造成电属性伤害；\n    招式发动期间拥有无敌效果；\n    招式发动后，可以直接衔接当前架势下第三段[普通攻击]。",
+    "agentId": 1221
+  },
+  {
+    "agent": "朱鸢",
+    "skillName": "普通攻击：不许动！",
+    "skillDescription": "[突击模式]\n    点按 <IconMap:Icon_Normal> 发动：\n    交替使用体术、手枪和以太鹿弹，向前方进行至多五段的攻击，造成物理伤害和以太伤害；\n    第四、第五段攻击命中敌人时，获得1枚[强化霰弹]，同一招式中最多获得1枚；\n    招式发动期间，拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}并点按 <IconMap:Icon_Normal> ，可以发动[冲刺攻击：火力奇袭]，向对应方向调整身位；\n    [突击模式]下，长按 <IconMap:Icon_Normal> 时，将会切换攻击方式，进入[压制模式]。",
+    "agentId": 1241
+  },
+  {
+    "agent": "朱鸢",
+    "skillName": "普通攻击：请勿抵抗",
+    "skillDescription": "[压制模式]\n    长按 <IconMap:Icon_Normal> 发动：\n    使用霰弹枪向前方进行至多三段的穿透射击，造成物理伤害；开火时若拥有[强化霰弹]，则会消耗1枚[强化霰弹]，造成大量以太伤害；\n    招式发动期间，拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}可以发动[冲刺攻击：火力压制]，向对应方向调整身位；\n    [压制模式]下，松开 <IconMap:Icon_Normal> 时，将会切换攻击方式，回到[突击模式]。",
+    "agentId": 1241
+  },
+  {
+    "agent": "朱鸢",
+    "skillName": "特殊技：鹿弹射击",
+    "skillDescription": "点按 <IconMap:Icon_Special> 发动：\n    使用以太鹿弹进行射击，造成以太伤害，连续点按 <IconMap:Icon_Special> ，可以重复射击三次；\n    招式发动期间抗打断等级提升。",
+    "agentId": 1241
+  },
+  {
+    "agent": "朱鸢",
+    "skillName": "强化特殊技：全弹连射",
+    "skillDescription": "能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n    使用以太鹿弹进行连续射击，造成大量以太伤害；\n    招式发动时，获得3枚[强化霰弹]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1241
+  },
+  {
+    "agent": "朱鸢",
+    "skillName": "闪避：迂回",
+    "skillDescription": "点按 <IconMap:Icon_Evade> 发动：\n    快速的冲刺闪避；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1241
+  },
+  {
+    "agent": "朱鸢",
+    "skillName": "冲刺攻击：火力奇袭",
+    "skillDescription": "[突击模式]\n    闪避时，点按 <IconMap:Icon_Normal> 发动：\n    使用手枪进行射击，造成以太伤害。",
+    "agentId": 1241
+  },
+  {
+    "agent": "朱鸢",
+    "skillName": "冲刺攻击：火力压制",
+    "skillDescription": "[压制模式]\n    在[普通攻击：请勿抵抗]发动期间，拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}发动：\n    使用霰弹枪进行穿透射击，造成物理伤害；开火时若拥有[强化霰弹]，则会消耗1枚[强化霰弹]，造成大量以太伤害。",
+    "agentId": 1241
+  },
+  {
+    "agent": "朱鸢",
+    "skillName": "闪避反击：火力震爆",
+    "skillDescription": "触发[极限闪避]后，点按 <IconMap:Icon_Normal> 发动：\n    使用以太鹿弹对前方敌人发动射击，造成以太伤害；\n    招式发动时，获得1枚[强化霰弹]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1241
+  },
+  {
+    "agent": "朱鸢",
+    "skillName": "连携技：歼灭模式",
+    "skillDescription": "触发[连携技]时，选择对应角色发动：\n    使用完全变形武器进行饱和攻击，发射直线激光和追踪导弹，造成大量以太伤害；\n    招式发动时，获得3枚[强化霰弹]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1241
+  },
+  {
+    "agent": "朱鸢",
+    "skillName": "终结技：歼灭模式MAX",
+    "skillDescription": "喧响等级达到[极]时，点按 <IconMap:Icon_UltimateReady> 发动：\n    使用完全变形武器进行饱和攻击，发射直线激光和追踪导弹，造成大量以太伤害；\n    招式发动时，获得3枚[强化霰弹]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1241
+  },
+  {
+    "agent": "朱鸢",
+    "skillName": "快速支援：掩护射击",
+    "skillDescription": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n    使用以太鹿弹对前方敌人发动射击，造成以太伤害；\n    招式发动时，获得1枚[强化霰弹]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1241
+  },
+  {
+    "agent": "朱鸢",
+    "skillName": "回避支援：警戒援护",
+    "skillDescription": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n    回避敌人的攻击，并触发[极限视域]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1241
+  },
+  {
+    "agent": "朱鸢",
+    "skillName": "支援突击：自卫还击",
+    "skillDescription": "发动[回避支援]后，点按 <IconMap:Icon_Normal> 发动：\n    交替使用体术和霰弹枪进行攻击，造成物理伤害和以太伤害；\n    招式发动时，获得3枚[强化霰弹]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1241
+  },
+  {
+    "agent": "青衣",
+    "skillName": "普通攻击：一煞",
+    "skillDescription": "点按 <IconMap:Icon_Normal> 发动：\n    向前方进行至多四段的打击，造成物理伤害和电属性伤害；\n    第三段攻击期间，连续点按 <IconMap:Icon_Normal> 可以维持连击，持续打击敌人，在此期间发动[闪避]，不会打断[普通攻击]的连击段数；\n    第三段攻击期间，停止点按 <IconMap:Icon_Normal> 将会中断连击，自动衔接第四段攻击，维持连击超过一定时间后，第四段攻击将会得到强化；\n    第三、第四段攻击期间抗打断等级提升，受到的伤害降低40%。",
+    "agentId": 1251
+  },
+  {
+    "agent": "青衣",
+    "skillName": "普通攻击：醉花云",
+    "skillDescription": "长按 <IconMap:Icon_Normal> 发动：\n    向前方发动一次突进攻击，造成电属性伤害；\n    招式发动期间抗打断等级提升。",
+    "agentId": 1251
+  },
+  {
+    "agent": "青衣",
+    "skillName": "闪络",
+    "skillDescription": "青衣发动招式造成电属性伤害时，会累积[闪络电压]，当[闪络电压]累积至75%时，青衣将进入[闪络]状态。发动[普通攻击：醉花月云转]时，青衣会消耗所有[闪络电压]并退出[闪络]状态，所消耗的[闪络电压]中超过75%的部分，每1%能够使本次招式造成的伤害/失衡值额外提升1%/0.5%。[普通攻击：醉花月云转]本身不会累积[闪络电压]。",
+    "agentId": 1251
+  },
+  {
+    "agent": "青衣",
+    "skillName": "普通攻击：醉花月云转",
+    "skillDescription": "[闪络]状态下，长按 <IconMap:Icon_Normal> 发动：\n    向前方连续发动五次突进攻击，随后发动终结一击，造成大量电属性伤害，招式发动期间松开 <IconMap:Icon_Normal> ，可以提前发动终结一击；\n    在角色即将受到攻击时发动终结一击，可以触发[极限闪避]；\n    突进攻击发动期间抗打断等级提升，受到的伤害降低40%，终结一击发动期间具有无敌效果。",
+    "agentId": 1251
+  },
+  {
+    "agent": "青衣",
+    "skillName": "特殊技：昼锦堂",
+    "skillDescription": "点按 <IconMap:Icon_Special> 发动：\n    向前方快速上挑，随后发动下砸攻击，造成电属性伤害；\n    招式发动期间抗打断等级提升。",
+    "agentId": 1251
+  },
+  {
+    "agent": "青衣",
+    "skillName": "强化特殊技：月上海棠",
+    "skillDescription": "能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n    向前方快速上挑后腾空跃起，转身连打后发动强力的下砸攻击，造成大量电属性伤害，长按 <IconMap:Icon_SpecialReady> 时，可以额外消耗能量，提升转身连打的攻击次数；\n    招式发动期间拥有无敌效果；\n    招式发动后，可直接衔接第三段[普通攻击]。",
+    "agentId": 1251
+  },
+  {
+    "agent": "青衣",
+    "skillName": "闪避：雁过声",
+    "skillDescription": "点按 <IconMap:Icon_Evade> 发动：\n    快速的冲刺闪避；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1251
+  },
+  {
+    "agent": "青衣",
+    "skillName": "冲刺攻击：入破",
+    "skillDescription": "闪避时，点按 <IconMap:Icon_Normal> 发动：\n    向前突进后发动上挑攻击，造成物理伤害。",
+    "agentId": 1251
+  },
+  {
+    "agent": "青衣",
+    "skillName": "闪避反击：意不尽",
+    "skillDescription": "触发[极限闪避]后，点按 <IconMap:Icon_Normal> 发动：\n    腾空跃起后发动下落攻击，造成电属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1251
+  },
+  {
+    "agent": "青衣",
+    "skillName": "连携技：太平令",
+    "skillDescription": "触发[连携技]时，选择对应角色发动：\n    对前方大范围区域发动强力连续打击，造成大量电属性伤害；\n    攻击命中敌人时，目标每拥有一层[核心被动：千秋岁]中的[羁服]，招式对其造成的伤害提升3%；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1251
+  },
+  {
+    "agent": "青衣",
+    "skillName": "终结技：八声甘州",
+    "skillDescription": "喧响等级达到[极]时，点按 <IconMap:Icon_UltimateReady> 发动：\n    对前方大范围区域发动强力连续打击，随后发动终结一击，造成大量电属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1251
+  },
+  {
+    "agent": "青衣",
+    "skillName": "快速支援：风入松",
+    "skillDescription": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n    腾空跃起后发动下落攻击，造成电属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1251
+  },
+  {
+    "agent": "青衣",
+    "skillName": "招架支援：锦上花",
+    "skillDescription": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n    招架敌人的攻击，累积大量失衡值；\n    具有较为优秀的招架性能，承受高强度攻击时[支援点数]的消耗量降低；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1251
+  },
+  {
+    "agent": "青衣",
+    "skillName": "支援突击：清江引",
+    "skillDescription": "发动[招架支援]后，点按 <IconMap:Icon_Normal> 发动：\n    向前方快速突进攻击并向地面注入电能，随后拔起引发爆炸，造成电属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1251
+  },
+  {
+    "agent": "简",
+    "skillName": "普通攻击：跳步刃舞",
+    "skillDescription": "点按 <IconMap:Icon_Normal> 发动：\n    向前方进行至多六段的攻击，造成物理伤害。",
+    "agentId": 1261
+  },
+  {
+    "agent": "简",
+    "skillName": "狂热",
+    "skillDescription": "简触发[极限闪避]、[招架支援]或发动招式对敌人造成伤害时，会累积[狂热心流]，当[狂热心流]累积至上限时，简将进入[狂热]状态；\n    [狂热]状态下，简的物理异常积蓄效率提升25%，此外，若简的异常精通高于120点，每超过1点异常精通会使自身的攻击力提升2点，通过这种方式最多使自身的攻击力提升600点；\n    简在[狂热]状态下发动招式造成伤害时，会消耗[狂热心流]，触发[极限闪避]或[招架支援]时，可以回复[狂热心流]，当[狂热心流]耗尽时，将退出[狂热]状态。",
+    "agentId": 1261
+  },
+  {
+    "agent": "简",
+    "skillName": "普通攻击：萨霍夫跳",
+    "skillDescription": "进入[狂热]状态时，简将获得一次[普通攻击：萨霍夫跳]的可使用次数；\n    当有可使用次数时，长按 <IconMap:Icon_Normal> 发动：\n    向前方发动快速的连续攻击，随后发动终结一击，造成物理伤害；\n    连续攻击期间，保持长按可以延长招式的持续时间，松开 <IconMap:Icon_Normal> 可以提前发动终结一击；\n    连续攻击发动期间抗打断等级提升，受到的伤害降低40%，终结一击发动期间具有无敌效果；\n    在[狂热]状态下发动[普通攻击：萨霍夫跳]对敌人造成伤害时，可以回复[狂热心流]。",
+    "agentId": 1261
+  },
+  {
+    "agent": "简",
+    "skillName": "特殊技：掠空",
+    "skillDescription": "点按 <IconMap:Icon_Special> 发动：\n    腾空跃起，向前方发动连续踢击后横扫，造成物理伤害；\n    招式发动期间抗打断等级提升。",
+    "agentId": 1261
+  },
+  {
+    "agent": "简",
+    "skillName": "强化特殊技：掠空-横扫",
+    "skillDescription": "能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n    腾空跃起，向前方发动多次连续踢击后横扫，造成大量物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1261
+  },
+  {
+    "agent": "简",
+    "skillName": "闪避：残影",
+    "skillDescription": "点按 <IconMap:Icon_Evade> 发动：\n    快速的滑步闪避；\n    招式发动期间拥有无敌效果；\n    简拥有一次额外的闪避次数，在进入[狂热]状态前，简会交替使用两段闪避，在进入[狂热]状态后，简在闪避时可以穿过前方的敌人。",
+    "agentId": 1261
+  },
+  {
+    "agent": "简",
+    "skillName": "冲刺攻击：刀刃跳",
+    "skillDescription": "闪避时，点按 <IconMap:Icon_Normal> 发动：\n    若衔接在一段闪避后，将向前方进行上挑斩击，造成物理伤害；\n    若衔接在二段闪避后，将向前方进行连续斩击，造成物理伤害。",
+    "agentId": 1261
+  },
+  {
+    "agent": "简",
+    "skillName": "冲刺攻击：虚像突刺",
+    "skillDescription": "[狂热]状态下，闪避时，点按 <IconMap:Icon_Normal> 发动：\n    向前方进行三次快速的突进斩击，造成物理伤害。",
+    "agentId": 1261
+  },
+  {
+    "agent": "简",
+    "skillName": "闪避反击：疾影",
+    "skillDescription": "触发[极限闪避]后，点按 <IconMap:Icon_Normal> 发动：\n    若衔接在一段闪避后，将对前方敌人发动多次斩击，随后向下突刺，造成物理伤害；\n    若衔接在二段闪避后，将会跃起并对前方敌人发动三次连续攻击，造成物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1261
+  },
+  {
+    "agent": "简",
+    "skillName": "闪避反击：疾影连舞",
+    "skillDescription": "[狂热]状态下，触发[极限闪避]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动多次快速斩击，造成物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1261
+  },
+  {
+    "agent": "简",
+    "skillName": "连携技：罪孽生花",
+    "skillDescription": "触发[连携技]时，选择对应角色发动：\n    对前方大范围敌人发动穿梭斩击，造成大量物理伤害；\n    招式发动时，简将直接进入[狂热]状态，并使[狂热心流]回复至上限；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1261
+  },
+  {
+    "agent": "简",
+    "skillName": "终结技：终幕演出",
+    "skillDescription": "喧响等级达到[极]时，点按 <IconMap:Icon_UltimateReady> 发动：\n    对前方大范围敌人发动强力穿梭斩击，随后发动终结一击，造成大量物理伤害；\n    招式发动时，简将直接进入[狂热]状态，并使[狂热心流]回复至上限；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1261
+  },
+  {
+    "agent": "简",
+    "skillName": "快速支援：乌刺",
+    "skillDescription": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n    对前方敌人发动多次斩击，随后向下突刺，造成物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1261
+  },
+  {
+    "agent": "简",
+    "skillName": "快速支援：勾手跳",
+    "skillDescription": "[狂热]状态下，当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n    对前方敌人发动多次快速斩击，造成物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1261
+  },
+  {
+    "agent": "简",
+    "skillName": "招架支援：最后防线",
+    "skillDescription": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n    招架敌人的攻击，累积大量失衡值；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1261
+  },
+  {
+    "agent": "简",
+    "skillName": "支援突击：疾风扫",
+    "skillDescription": "发动[招架支援]后，点按 <IconMap:Icon_Normal> 发动：\n    腾空跃起后对敌人发动快速斩击，随后在前方大范围内再次发动横扫斩击，造成物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1261
+  },
+  {
+    "agent": "赛斯",
+    "skillName": "普通攻击：雷霆击",
+    "skillDescription": "点按 <IconMap:Icon_Normal> 发动：\n    向前方进行至多四段的攻击，造成物理伤害和电属性伤害。",
+    "agentId": 1271
+  },
+  {
+    "agent": "赛斯",
+    "skillName": "普通攻击：雷霆击-感电",
+    "skillDescription": "[意气]大于等于75%时，长按 <IconMap:Icon_Normal> 发动：\n    消耗75%[意气]向前方发动持续攻击，随后发动终结一击，造成电属性伤害；\n    终结一击命中敌人时，将触发队伍中上一位角色的[快速支援]；\n    招式发动期间抗打断等级提升。",
+    "agentId": 1271
+  },
+  {
+    "agent": "赛斯",
+    "skillName": "特殊技：电光盾冲",
+    "skillDescription": "点按 <IconMap:Icon_Special> 发动：\n    向前方发动两次盾击，造成电属性伤害；\n    招式发动期间抗打断等级提升。",
+    "agentId": 1271
+  },
+  {
+    "agent": "赛斯",
+    "skillName": "强化特殊技：电光盾冲-高伏特",
+    "skillDescription": "能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n    向前方发动连续斩击，造成大量电属性伤害；\n    长按 <IconMap:Icon_SpecialReady> 可以进行蓄力，蓄力完成后赛斯将向前方突进，发动高量级的连续斩击，造成大量电属性伤害；\n    招式发动时，会为自身累积75%[意气]；\n    招式蓄力期间抗打断等级提升，受到的伤害降低40%；\n    连续斩击期间拥有无敌效果。",
+    "agentId": 1271
+  },
+  {
+    "agent": "赛斯",
+    "skillName": "闪避：避障",
+    "skillDescription": "点按 <IconMap:Icon_Evade> 发动：\n    快速的冲刺闪避；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1271
+  },
+  {
+    "agent": "赛斯",
+    "skillName": "冲刺攻击：电光突袭",
+    "skillDescription": "闪避时，点按 <IconMap:Icon_Normal> 发动：\n    向前方进行盾冲攻击，造成物理伤害；\n    招式发动期间受到的伤害降低40%。",
+    "agentId": 1271
+  },
+  {
+    "agent": "赛斯",
+    "skillName": "闪避反击：以退为进",
+    "skillDescription": "触发[极限闪避]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动快速的下砸斩击，造成电属性伤害；\n    招式发动后，长按 <IconMap:Icon_SpecialReady> 衔接[强化特殊技：电光盾冲-高伏特]时，能够以更快的速度完成蓄力；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1271
+  },
+  {
+    "agent": "赛斯",
+    "skillName": "连携技：最终制裁",
+    "skillDescription": "触发[连携技]时，选择对应角色发动：\n    向前方进行连续斩击，造成大量电属性伤害；\n    招式发动时，会为自身累积75%[意气]；\n    招式发动后，长按 <IconMap:Icon_SpecialReady> 衔接[强化特殊技：电光盾冲-高伏特]时，能够以更快的速度完成蓄力；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1271
+  },
+  {
+    "agent": "赛斯",
+    "skillName": "终结技：正义必胜",
+    "skillDescription": "喧响等级达到[极]时，点按 <IconMap:Icon_UltimateReady> 发动：\n    向前方进行连续上挑攻击，随后发动终结一击，造成大量电属性伤害；\n    招式发动时，会为自身累积75%[意气]，额外回复3点支援点数；\n    招式发动后，长按 <IconMap:Icon_SpecialReady> 衔接[强化特殊技：电光盾冲-高伏特]时，能够以更快的速度完成蓄力；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1271
+  },
+  {
+    "agent": "赛斯",
+    "skillName": "快速支援：武力支援",
+    "skillDescription": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n    对前方敌人发动快速的下砸斩击，造成电属性伤害；\n    招式发动后，长按 <IconMap:Icon_SpecialReady> 衔接[强化特殊技：电光盾冲-高伏特]时，能够以更快的速度完成蓄力；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1271
+  },
+  {
+    "agent": "赛斯",
+    "skillName": "招架支援：迅雷盾",
+    "skillDescription": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n    招架敌人的攻击，累积大量失衡值；\n    招式发动时，会为自身累积25%[意气]；\n    具有较为优秀的招架性能，承受高强度攻击时[支援点数]的消耗量降低；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1271
+  },
+  {
+    "agent": "赛斯",
+    "skillName": "支援突击：治安裁决",
+    "skillDescription": "发动[招架支援]后，点按 <IconMap:Icon_Normal> 发动：\n    向前方发动突刺攻击，随后进行两次横扫斩击，造成电属性伤害；\n    招式命中敌人时，将触发队伍中上一位角色的[快速支援]；\n    招式发动后，长按 <IconMap:Icon_SpecialReady> 衔接[强化特殊技：电光盾冲-高伏特]时，能够以更快的速度完成蓄力；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1271
+  },
+  {
+    "agent": "派派",
+    "skillName": "普通攻击：准备发车",
+    "skillDescription": "点按 <IconMap:Icon_Normal> 发动：\n    向前方进行至多四段的斩击，造成物理伤害；",
+    "agentId": 1281
+  },
+  {
+    "agent": "派派",
+    "skillName": "特殊技：轮胎转",
+    "skillDescription": "点按 <IconMap:Icon_Special> 发动：\n    转动身体向周围发动旋转斩击，造成物理伤害；\n    长按 <IconMap:Icon_Special> 可以延长招式的持续时间，发动越来越强的旋转斩击，并提升招式的蓄力等级，最多提升2次；\n    若衔接在[普通攻击]前三段、[冲刺攻击]或[闪避反击]之后，则能够以提升后的蓄力等级快速发动[特殊技：轮胎转]；\n    招式发动期间抗打断等级提升，受到的伤害降低40%。",
+    "agentId": 1281
+  },
+  {
+    "agent": "派派",
+    "skillName": "特殊技：有亿点重",
+    "skillDescription": "在[特殊技：轮胎转]发动期间，松开 <IconMap:Icon_Special> 发动：\n    根据[特殊技：轮胎转]的蓄力等级，向前方发动下砸攻击，造成物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1281
+  },
+  {
+    "agent": "派派",
+    "skillName": "强化特殊技：引擎转",
+    "skillDescription": "能量足够时，在[特殊技：轮胎转]达到最高蓄力等级后，继续长按 <IconMap:Icon_SpecialReady> 发动：\n    快速转动身体，向周围发动旋转斩击，造成大量物理伤害；\n    发动期间持续消耗能量，最多持续3秒；\n    招式发动期间抗打断等级提升，受到的伤害降低40%。",
+    "agentId": 1281
+  },
+  {
+    "agent": "派派",
+    "skillName": "强化特殊技：非常重",
+    "skillDescription": "在[强化特殊技：引擎转]发动期间，松开 <IconMap:Icon_SpecialReady> 发动：\n    向前方发动强力的下砸攻击，造成大量物理伤害；\n    在[强化特殊技：引擎转]发动期间，持续时间达到上限或能量降低至20点时，将会自动发动[强化特殊技：非常重]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1281
+  },
+  {
+    "agent": "派派",
+    "skillName": "闪避：手刹漂移",
+    "skillDescription": "点按 <IconMap:Icon_Evade> 发动：\n    快速的冲刺闪避；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1281
+  },
+  {
+    "agent": "派派",
+    "skillName": "冲刺攻击：一脚油门",
+    "skillDescription": "闪避时，点按 <IconMap:Icon_Normal> 发动：\n    向前方进行斩击，造成物理伤害。",
+    "agentId": 1281
+  },
+  {
+    "agent": "派派",
+    "skillName": "闪避反击：动力漂移",
+    "skillDescription": "触发[极限闪避]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动下砸攻击，造成物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1281
+  },
+  {
+    "agent": "派派",
+    "skillName": "连携技：系好安全带",
+    "skillDescription": "触发[连携技]时，选择对应角色发动：\n    对前方敌人发动强力下砸攻击，造成大量物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1281
+  },
+  {
+    "agent": "派派",
+    "skillName": "终结技：坐~稳~啦~",
+    "skillDescription": "喧响等级达到[极]时，点按 <IconMap:Icon_UltimateReady> 发动：\n    快速转动身体，对前方大范围敌人发动强力的旋转斩击，随后发动下砸攻击，造成大量物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1281
+  },
+  {
+    "agent": "派派",
+    "skillName": "快速支援：点刹",
+    "skillDescription": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n    对前方敌人发动下砸攻击，造成物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1281
+  },
+  {
+    "agent": "派派",
+    "skillName": "招架支援：极限刹车",
+    "skillDescription": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n    招架敌人的攻击，累积大量失衡值；\n    具有较为优秀的招架性能，承受高强度攻击时[支援点数]的消耗量降低；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1281
+  },
+  {
+    "agent": "派派",
+    "skillName": "支援突击：弯道超车",
+    "skillDescription": "发动[招架支援]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动突进斩击，造成物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1281
+  },
+  {
+    "agent": "雨果",
+    "skillName": "普通攻击：暗渊四重奏",
+    "skillDescription": "点按 <IconMap:Icon_Normal> 发动：\n    向前方进行至多四段的攻击，造成物理伤害和冰属性伤害；\n    招式第四段攻击为射击攻击，射击攻击发动期间长按 <IconMap:Icon_Normal> 可以进行蓄力，从而发动蓄力射击；\n    第四段攻击招式发动期间抗打断等级提升，受到的伤害降低40%。",
+    "agentId": 1291
+  },
+  {
+    "agent": "雨果",
+    "skillName": "普通攻击：暗渊协奏曲",
+    "skillDescription": "发动[普通攻击：暗渊四重奏]第四段后、发动[闪避反击：诡影·斩]的射击攻击后、发动[快速支援：葬歌]的射击攻击后，点按或长按 <IconMap:Icon_Normal> 发动：\n    扔出镰刀向前方发动斩击，随后发动射击攻击，造成冰属性伤害；\n    射击攻击期间长按 <IconMap:Icon_Normal> 可以进行蓄力，从而发动蓄力射击；\n    招式发动期间抗打断等级提升，受到的伤害降低40%。",
+    "agentId": 1291
+  },
+  {
+    "agent": "雨果",
+    "skillName": "特殊技：魂狩·断罪",
+    "skillDescription": "点按 <IconMap:Icon_Special> 发动：\n    旋转镰刀后向前方发动斩击，造成冰属性伤害；\n    招式发动期间抗打断等级提升。",
+    "agentId": 1291
+  },
+  {
+    "agent": "雨果",
+    "skillName": "强化特殊技：魂狩·惩戒",
+    "skillDescription": "能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n    旋转镰刀攻击，随后进行终结一击，造成大量冰属性伤害；\n    招式视为非重击；\n    招式发动后可直接衔接[普通攻击：暗渊四重奏]的第四段攻击；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1291
+  },
+  {
+    "agent": "雨果",
+    "skillName": "闪避：诡影",
+    "skillDescription": "点按 <IconMap:Icon_Evade> 发动：\n    快速的冲刺闪避；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1291
+  },
+  {
+    "agent": "雨果",
+    "skillName": "冲刺攻击：诡影·破",
+    "skillDescription": "闪避时，点按 <IconMap:Icon_Normal> 发动：\n    向前方进行突进攻击，造成物理伤害。",
+    "agentId": 1291
+  },
+  {
+    "agent": "雨果",
+    "skillName": "闪避反击：诡影·斩",
+    "skillDescription": "触发[极限闪避]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动连续攻击，造成冰属性伤害；\n    招式发动期间长按 <IconMap:Icon_Normal> 可以发动射击攻击，射击攻击期间长按 <IconMap:Icon_Normal> 可以进行蓄力，从而发动蓄力射击；\n    发动射击攻击视为发动一次普通攻击，伤害视为普通攻击伤害；\n    招式发动后可直接衔接[普通攻击：暗渊四重奏]的第四段攻击；\n    招式射击期间抗打断等级提升，受到的伤害降低40%;\n    招式斩击期间与射击后撤期间拥有无敌效果。",
+    "agentId": 1291
+  },
+  {
+    "agent": "雨果",
+    "skillName": "连携技：命运戏法",
+    "skillDescription": "触发[连携技]时，选择对应角色发动：\n    快速突进向前方发动大范围斩击，随后发动射击攻击，造成大量冰属性伤害；\n    招式发动的射击攻击视为蓄力射击；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1291
+  },
+  {
+    "agent": "雨果",
+    "skillName": "终结技：渎神者",
+    "skillDescription": "喧响等级达到[极]时，点按 <IconMap:Icon_UltimateReady> 发动：\n    丢出镰刀对前方敌人发动强力旋转攻击，随后进行终结一击，造成大量冰属性伤害；\n    招式视为非重击；\n    招式发动后可直接衔接[普通攻击：暗渊四重奏]的第四段攻击；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1291
+  },
+  {
+    "agent": "雨果",
+    "skillName": "快速支援：葬歌",
+    "skillDescription": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n    对前方敌人发动连续攻击，造成冰属性伤害；\n    招式发动期间长按 <IconMap:Icon_Normal> 可以发动射击攻击，射击攻击期间长按 <IconMap:Icon_Normal> 可以进行蓄力，从而发动蓄力射击；\n    发动射击攻击视为发动一次普通攻击，伤害视为普通攻击伤害；\n    招式发动后可直接衔接[普通攻击：暗渊四重奏]的第四段攻击；\n    招式射击期间抗打断等级提升，受到的伤害降低40%;\n    招式斩击期间与射击后撤期间拥有无敌效果。",
+    "agentId": 1291
+  },
+  {
+    "agent": "雨果",
+    "skillName": "招架支援：死期未至",
+    "skillDescription": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n    招架敌人的攻击，累积大量失衡值；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1291
+  },
+  {
+    "agent": "雨果",
+    "skillName": "支援突击：王牌反转",
+    "skillDescription": "发动[招架支援]后，点按 <IconMap:Icon_Normal> 发动：\n    快速突进并发动两次斩击，造成冰属性伤害；\n    招式发动后可直接衔接[普通攻击：暗渊四重奏]的第四段攻击；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1291
+  },
+  {
+    "agent": "奥菲丝&「鬼火」",
+    "skillName": "普通攻击：高压火枪",
+    "skillDescription": "点按 <IconMap:Icon_Normal> 发动：\n    向前方进行至多五段攻击，随后向前发起强力火刀攻击，造成物理伤害和火属性伤害。",
+    "agentId": 1301
+  },
+  {
+    "agent": "奥菲丝&「鬼火」",
+    "skillName": "特殊技：热血满膛",
+    "skillDescription": "点按 <IconMap:Icon_Special> 发动：\n    向前突刺并进行尾巴攻击，造成火属性伤害；\n    招式发动期间抗打断等级提升。",
+    "agentId": 1301
+  },
+  {
+    "agent": "奥菲丝&「鬼火」",
+    "skillName": "特殊技：蚀光一闪",
+    "skillDescription": "队友攻击时自动发动：\n    进行四次激光追加攻击，造成火属性伤害；\n    每5秒最多触发一次；\n    招式发动时，回复20点[蓄炎]；\n    发动招式期间拥有无敌效果。",
+    "agentId": 1301
+  },
+  {
+    "agent": "奥菲丝&「鬼火」",
+    "skillName": "强化特殊技：小心脚下",
+    "skillDescription": "能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n    向前方进行激光扫射，造成火属性伤害；\n    招式发动后，可直接衔接普通攻击中的强力火刀攻击；\n    招式发动时，回复20点[蓄炎]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1301
+  },
+  {
+    "agent": "奥菲丝&「鬼火」",
+    "skillName": "强化特殊技：灼红旋涡",
+    "skillDescription": "位于后台且能量大于等于60点时，队友攻击时自动发动：\n    向四周进行激光扫射，造成火属性伤害；\n    招式发动时，回复20点[蓄炎]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1301
+  },
+  {
+    "agent": "奥菲丝&「鬼火」",
+    "skillName": "强化特殊技：蓄热充能",
+    "skillDescription": "[蓄炎]大于等于100点时，长按 <IconMap:Icon_Special> 发动：\n    消耗100点[蓄炎]，向前方持续发射激光，造成火属性伤害；\n    开始喷射时，将触发[快速支援]；\n    持续喷射一段时间后将会加大火力，使得招式的打断等级大幅提升；\n    喷射期间受到攻击时，将会招架敌人的攻击，并直接加大火力；\n    喷射达到最大时间时，自动发动[强化特殊技：燥焰迸射]；\n    低火力期间抗打断等级提升，受到的伤害减少40%，高火力期间拥有无敌效果。",
+    "agentId": 1301
+  },
+  {
+    "agent": "奥菲丝&「鬼火」",
+    "skillName": "强化特殊技：燥焰迸射",
+    "skillDescription": "[强化特殊技：蓄热充能]喷射至最大时间后自动发动：\n    向前发动旋转攻击，然后向前方发射激光，造成火属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1301
+  },
+  {
+    "agent": "奥菲丝&「鬼火」",
+    "skillName": "闪避：摇曳火光",
+    "skillDescription": "点按 <IconMap:Icon_Evade> 发动：\n    快速的冲刺闪避；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1301
+  },
+  {
+    "agent": "奥菲丝&「鬼火」",
+    "skillName": "冲刺攻击：突袭命令",
+    "skillDescription": "闪避时，点按 <IconMap:Icon_Normal> 发动：\n    向前发动快速攻击，造成物理伤害。",
+    "agentId": 1301
+  },
+  {
+    "agent": "奥菲丝&「鬼火」",
+    "skillName": "闪避反击：反攻战机",
+    "skillDescription": "触发[极限闪避]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动连击，造成物理伤害和火属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1301
+  },
+  {
+    "agent": "奥菲丝&「鬼火」",
+    "skillName": "连携技：枪管过热",
+    "skillDescription": "触发[连携技]时，选择对应角色发动：\n    向前发动旋转攻击，然后向前方发射激光，造成火属性伤害；\n    招式发动时，回复20点[蓄炎]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1301
+  },
+  {
+    "agent": "奥菲丝&「鬼火」",
+    "skillName": "终结技：与火共舞",
+    "skillDescription": "喧响等级达到[极]时，点按 <IconMap:Icon_UltimateReady> 发动：\n    向前发动旋转攻击，然后向前方发射激光，造成火属性伤害;\n    跃向空中时，将触发[快速支援]，若响应[快速支援]，奥菲丝&「鬼火」会延长激光喷射的持续时间；\n    招式发动时，回复20点[蓄炎]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1301
+  },
+  {
+    "agent": "奥菲丝&「鬼火」",
+    "skillName": "快速支援：焦痕劈斩",
+    "skillDescription": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n    对前方敌人发动连击，造成物理伤害和火属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1301
+  },
+  {
+    "agent": "奥菲丝&「鬼火」",
+    "skillName": "招架支援：炙刃炽铳",
+    "skillDescription": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n    招架敌人的攻击，累积大量失衡值；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1301
+  },
+  {
+    "agent": "奥菲丝&「鬼火」",
+    "skillName": "支援突击：沸热穿刺",
+    "skillDescription": "发动[招架支援]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动多次攻击，造成火属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1301
+  },
+  {
+    "agent": "耀嘉音",
+    "skillName": "普通攻击：《随想曲》",
+    "skillDescription": "点按 <IconMap:Icon_Normal> 发动：\n    向前方进行至多三段的攻击，造成以太伤害；\n    第三段攻击期间，可长按 <IconMap:Icon_Normal> 进行蓄力，持续聚集敌人，提升攻击范围，释放更加强力的攻击；\n    其他招式发动后，可长按 <IconMap:Icon_Normal> 直接发动第三段攻击。",
+    "agentId": 1311
+  },
+  {
+    "agent": "耀嘉音",
+    "skillName": "普通攻击：间奏",
+    "skillDescription": "[咏叹华彩]状态下，点按 <IconMap:Icon_Normal> 发动：\n    向前方释放[震音]进行攻击，造成以太伤害；\n    招式命中敌人时，将触发[快速支援]。",
+    "agentId": 1311
+  },
+  {
+    "agent": "耀嘉音",
+    "skillName": "普通攻击：副歌",
+    "skillDescription": "[咏叹华彩]状态下，触发[极限闪避]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动多道[震音]进行攻击，造成大量以太伤害；\n    招式命中敌人时，将触发[快速支援]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1311
+  },
+  {
+    "agent": "耀嘉音",
+    "skillName": "普通攻击：终曲",
+    "skillDescription": "[咏叹华彩]状态下，长按 <IconMap:Icon_Normal> 发动：\n    向前方释放[震音]进行攻击，造成以太伤害，并退出[咏叹华彩]状态；\n    招式发动时，会对自身施加[核心被动：《如歌的行板》]中的增益效果；\n    能量足够时，会消耗能量追加释放1道[震音]和3枚[音簇]进行攻击，该次[震音]会被视为[强化特殊技]。",
+    "agentId": 1311
+  },
+  {
+    "agent": "耀嘉音",
+    "skillName": "特殊技：《风铃与旧约》",
+    "skillDescription": "点按 <IconMap:Icon_Special>  发动：\n    快速位移，随后释放[震音]造成以太伤害，并进入[咏叹华彩]状态；\n    发动时若拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}，可以向对应方向位移；\n    发动时可长按 <IconMap:Icon_Special> 进行蓄力，持续聚集敌人，并根据蓄力时长追加释放1~4道[震音]；\n    招式命中敌人时，将触发[快速支援]；\n    快速位移期间拥有无敌效果。",
+    "agentId": 1311
+  },
+  {
+    "agent": "耀嘉音",
+    "skillName": "咏叹华彩",
+    "skillDescription": "耀嘉音进入[咏叹华彩]状态后，全队角色造成的伤害提升{CAL:0.08+AvatarSkillLevel(1)*0.01,100,2}%，全队角色暴击伤害提升{CAL:0.07+AvatarSkillLevel(1)*0.015,100,2}%;\n    [咏叹华彩]状态下，耀嘉音无法移动，但可以点按 <IconMap:Icon_Normal> 发动[普通攻击：间奏]，或点按 <IconMap:Icon_Evade> 发动闪避，触发[极限闪避]后，点按 <IconMap:Icon_Normal> ，可以发动[普通攻击：副歌]；\n    状态持续期间，耀嘉音的抗打断等级提升，受到的伤害降低40%，切换至其他角色后，耀嘉音会继续留在前场，并获得无敌效果，切换回耀嘉音时，则会自动衔接发动[特殊技：《风铃与旧约》]；\n    状态持续期间，长按 <IconMap:Icon_Normal> 发动[普通攻击：终曲]，或长按 <IconMap:Icon_Evade> ，可以退出[咏叹华彩]状态。",
+    "agentId": 1311
+  },
+  {
+    "agent": "耀嘉音",
+    "skillName": "和弦",
+    "skillDescription": "每拥有25点能量，耀嘉音将拥有1点[和弦]；\n    [咏叹华彩]状态下，耀嘉音拥有[和弦]时，能够在以下情况中触发[快速支援]：\n    · 操作中的角色攻击命中敌人时，3秒内最多触发一次；\n    · 操作中的角色重击命中敌人时，1秒内最多触发一次；\n    队伍中其他角色通过[快速支援]、[连携技]、[招架支援]或[回避支援]入场时，耀嘉音将消耗25点能量，并追加释放1道[震音]进行攻击，该次[震音]会被视为[强化特殊技]；\n    触发[快速支援]后，短时间内点按 <IconMap:Icon_Switch> 切换角色，将触发[精准支援]，耀嘉音会额外追加释放3枚[音簇]进行攻击，队伍中其他角色通过[连携技]、[招架支援]或[回避支援]入场时，将直接触发[精准支援]。",
+    "agentId": 1311
+  },
+  {
+    "agent": "耀嘉音",
+    "skillName": "闪避：《小华尔兹》",
+    "skillDescription": "点按 <IconMap:Icon_Evade> 发动：\n    快速的冲刺闪避；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1311
+  },
+  {
+    "agent": "耀嘉音",
+    "skillName": "冲刺攻击：《蚀月奏》",
+    "skillDescription": "闪避时，点按 <IconMap:Icon_Normal> 发动：\n    向前方进行攻击，造成以太伤害；\n    发动时若拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}，可以向对应方向位移。",
+    "agentId": 1311
+  },
+  {
+    "agent": "耀嘉音",
+    "skillName": "闪避反击：《折伞华尔兹》",
+    "skillDescription": "触发[极限闪避]后，点按 <IconMap:Icon_Normal> 发动：\n    向前方敌人发动攻击，造成以太伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1311
+  },
+  {
+    "agent": "耀嘉音",
+    "skillName": "连携技：《微醺协奏》",
+    "skillDescription": "触发[连携技]时，选择对应角色发动：\n    用歌声引导能量轰击，造成大量以太伤害；\n    招式发动期间拥有无敌效果；\n    招式命中敌人时，将触发[快速支援]；\n    招式发动后，耀嘉音将进入[咏叹华彩]状态。",
+    "agentId": 1311
+  },
+  {
+    "agent": "耀嘉音",
+    "skillName": "终结技：《幻想式奏鸣》",
+    "skillDescription": "喧响等级达到[极]时，点按 <IconMap:Icon_UltimateReady> 发动：\n    用歌声引导能量轰击，造成大量以太伤害，并为全队角色回复{CAL:-50+AvatarSkillLevel(3)*250,1,2}点生命值；\n    招式发动期间拥有无敌效果；\n    招式命中敌人时，将触发[快速支援]；\n    招式发动后，耀嘉音将进入[咏叹华彩]状态；\n    招式发动后，下两次发动的[快速支援]，将被替换为[连携技]；\n    次数耗尽前，全队角色[连携技]或[终结技]命中敌人时，将触发[快速支援]。",
+    "agentId": 1311
+  },
+  {
+    "agent": "耀嘉音",
+    "skillName": "快速支援：《一川烟火》",
+    "skillDescription": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n    向前方敌人发动攻击，造成以太伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1311
+  },
+  {
+    "agent": "耀嘉音",
+    "skillName": "回避支援：《两份相惜》",
+    "skillDescription": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n    回避敌人的攻击，并触发[极限视域]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1311
+  },
+  {
+    "agent": "耀嘉音",
+    "skillName": "支援突击：《三生初见》",
+    "skillDescription": "发动[回避支援]后，点按 <IconMap:Icon_Normal> 发动：\n    向前方发出能量光束，造成以太伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1311
+  },
+  {
+    "agent": "伊芙琳",
+    "skillName": "普通攻击：割弦",
+    "skillDescription": "点按 <IconMap:Icon_Normal> 发动：\n    向前方进行至多五段的攻击，造成物理伤害和火属性伤害；\n    第五段攻击命中敌人时，伊芙琳会使用[月辉丝·弦]链接主要目标，与其进入[牵缠禁制]。",
+    "agentId": 1321
+  },
+  {
+    "agent": "伊芙琳",
+    "skillName": "被动：绑缚",
+    "skillDescription": "伊芙琳发动招式对敌人造成伤害时，会累积[燎火]；\n    伊芙琳消耗[燎火]发动[绞勒式]，或消耗[喧响值]发动[终结技]时，会累积1点[燎索点]；\n    拥有3点[燎索点]后，伊芙琳下一次发动[绞勒式]时，会消耗所有[燎索点]，并将招式替换为打断等级较弱的[连携技：月辉丝·绊]。",
+    "agentId": 1321
+  },
+  {
+    "agent": "伊芙琳",
+    "skillName": "普通攻击：绞勒式·I型",
+    "skillDescription": "[燎火]大于等于50%时，长按 <IconMap:Icon_Normal> 或 <IconMap:Icon_Special> 发动：\n    消耗50%[燎火]，使用[月辉丝·弦]进行斩击，造成火属性伤害；\n    招式发动期间抗打断等级提升，受到的伤害降低40%；\n    招式发动后，累积1点[燎索点]。",
+    "agentId": 1321
+  },
+  {
+    "agent": "伊芙琳",
+    "skillName": "普通攻击：绞勒式·II型",
+    "skillDescription": "[燎火]大于等于50%时，[普通攻击：绞勒式·I型]发动后，继续长按  <IconMap:Icon_Normal> 或 <IconMap:Icon_Special> 发动：\n    消耗50%[燎火]，使用[月辉丝·弦]进行追击，造成火属性伤害；\n    招式发动期间抗打断等级提升，受到的伤害降低40%；\n    招式发动后，累积1点[燎索点]。",
+    "agentId": 1321
+  },
+  {
+    "agent": "伊芙琳",
+    "skillName": "特殊技：锁系控位",
+    "skillDescription": "未进入[牵缠禁制]前，点按 <IconMap:Icon_Special> 或 <IconMap:Icon_SpecialReady>  发动：\n    使用[月辉丝·弦]牵引敌人并突进踢击，造成火属性伤害；\n    攻击命中敌人时，伊芙琳会使用[月辉丝·弦]链接主要目标，与其进入[牵缠禁制]；\n    招式发动期间抗打断等级提升。",
+    "agentId": 1321
+  },
+  {
+    "agent": "伊芙琳",
+    "skillName": "特殊技：束裂式·I型",
+    "skillDescription": "进入[牵缠禁制]后，点按或长按 <IconMap:Icon_Special> 发动：\n    以被[牵缠禁制]的目标为中心，牵引周围敌人并引爆，造成火属性伤害，引爆后将退出[牵缠禁制]；\n    招式发动时，可以闪避敌人的攻击，若成功触发[极限闪避]，将额外累积25%[燎火]；\n    牵引周围敌人后，点按 <IconMap:Icon_Normal> ，可以取消引爆，直接衔接第三段[普通攻击]；\n    招式发动期间抗打断等级提升。",
+    "agentId": 1321
+  },
+  {
+    "agent": "伊芙琳",
+    "skillName": "强化特殊技：束裂式·终型",
+    "skillDescription": "进入[牵缠禁制]后，能量足够时，点按或长按 <IconMap:Icon_SpecialReady> 发动：\n    以被[牵缠禁制]的目标为中心，牵引周围敌人并引爆，造成大量火属性伤害，引爆后将退出[牵缠禁制]；\n    招式发动时，可以闪避敌人的攻击，若成功触发[极限闪避]，将额外累积25%[燎火]；\n    牵引周围敌人后，点按 <IconMap:Icon_Normal> ，可以取消引爆，直接衔接第三段[普通攻击]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1321
+  },
+  {
+    "agent": "伊芙琳",
+    "skillName": "闪避：弧步",
+    "skillDescription": "点按 <IconMap:Icon_Evade> 发动：\n    快速的冲刺闪避；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1321
+  },
+  {
+    "agent": "伊芙琳",
+    "skillName": "冲刺攻击：穿梭潜袭",
+    "skillDescription": "闪避时，点按 <IconMap:Icon_Normal> 发动：\n    踢击前方敌人，造成物理伤害；",
+    "agentId": 1321
+  },
+  {
+    "agent": "伊芙琳",
+    "skillName": "闪避反击：绞缢反制",
+    "skillDescription": "触发[极限闪避]后，点按 <IconMap:Icon_Normal> 发动：\n    挥动[月辉丝·弦]斩击周围敌人，造成火属性伤害；\n    攻击命中敌人时，伊芙琳会使用[月辉丝·弦]链接主要目标，与其进入[牵缠禁制]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1321
+  },
+  {
+    "agent": "伊芙琳",
+    "skillName": "连携技：月辉丝·绊",
+    "skillDescription": "触发[连携技]时，选择对应角色发动：\n    使用复数[月辉丝·弦]连续斩击前方范围内敌人并引爆，造成大量火属性伤害；\n    攻击命中敌人时，伊芙琳会使用[月辉丝·弦]链接主要目标，与其进入[牵缠禁制]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1321
+  },
+  {
+    "agent": "伊芙琳",
+    "skillName": "终结技：月辉丝·弦音",
+    "skillDescription": "喧响等级达到[极]时，点按 <IconMap:Icon_UltimateReady> 发动：\n    使用复数[月辉丝·弦]连续斩击前方范围内敌人并引爆，造成大量火属性伤害；\n    招式发动时，伊芙琳将脱掉风衣，并进入[焰舞觉醒]状态，持续整场战斗，[焰舞觉醒]状态下，伊芙琳消耗[燎索点]发动[连携技：月辉丝·绊]时，将会保留1点[燎索点]；\n    攻击命中敌人时，伊芙琳会使用[月辉丝·弦]链接主要目标，与其进入[牵缠禁制]；\n    招式发动期间拥有无敌效果；\n    招式发动后，累积1点[燎索点]。",
+    "agentId": 1321
+  },
+  {
+    "agent": "伊芙琳",
+    "skillName": "终结技：月辉丝·弦影",
+    "skillDescription": "[焰舞觉醒]状态下，喧响等级达到[极]时，点按 <IconMap:Icon_UltimateReady> 发动：\n    使用复数[月辉丝·弦]连续斩击前方范围内敌人并引爆，造成大量火属性伤害；\n    攻击命中敌人时，伊芙琳会使用[月辉丝·弦]链接主要目标，与其进入[牵缠禁制]；\n    招式发动期间拥有无敌效果；\n    招式发动后，累积1点[燎索点]。",
+    "agentId": 1321
+  },
+  {
+    "agent": "伊芙琳",
+    "skillName": "快速支援：烈锋",
+    "skillDescription": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n    挥动[月辉丝·弦]斩击周围敌人，造成火属性伤害；\n    攻击命中敌人时，伊芙琳会使用[月辉丝·弦]链接主要目标，与其进入[牵缠禁制]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1321
+  },
+  {
+    "agent": "伊芙琳",
+    "skillName": "招架支援：静默掩护",
+    "skillDescription": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n    招架敌人的攻击，累积大量失衡值；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1321
+  },
+  {
+    "agent": "伊芙琳",
+    "skillName": "支援突击：轨迹干涉",
+    "skillDescription": "发动[招架支援]后，点按 <IconMap:Icon_Normal> 发动：\n    挥动[月辉丝·弦]进行斩击，随后在前方引发爆炸，造成火属性伤害；\n    攻击命中敌人时，伊芙琳会使用[月辉丝·弦]链接主要目标，与其进入[牵缠禁制]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1321
+  },
+  {
+    "agent": "薇薇安",
+    "skillName": "普通攻击：翎羽拂击",
+    "skillDescription": "点按 <IconMap:Icon_Normal> 发动：\n    向前方进行至多四段的攻击，造成物理伤害和以太伤害；\n    发动第四段攻击后进入[淑女礼仪]状态；\n    拥有[飞羽]时，在第四段攻击过程中保持按住 <IconMap:Icon_Normal> 可进入[裙裾浮游]状态。",
+    "agentId": 1331
+  },
+  {
+    "agent": "薇薇安",
+    "skillName": "普通攻击：淑女礼仪·舞步",
+    "skillDescription": "[淑女礼仪]状态下，点按 <IconMap:Icon_Normal> 发动：\n    向前突进攻击，造成以太伤害，并在命中目标时回复1点[飞羽]；\n    招式发动期间拥有无敌效果；\n    若突进期间触发极限闪避，会额外回复1点[飞羽]；\n    招式发动后若拥有[飞羽]，会进入[裙裾浮游]状态，可以通过招式发动时保持长按 <IconMap:Icon_Evade> 取消。",
+    "agentId": 1331
+  },
+  {
+    "agent": "薇薇安",
+    "skillName": "普通攻击：裙裾浮游·悬落",
+    "skillDescription": "[裙裾浮游]状态下，点按 <IconMap:Icon_Normal> 发动：\n    向前方发动范围攻击，造成以太伤害；\n    招式发动后消耗全部[飞羽]，每消耗1点[飞羽]，都会获得1点[护羽]；\n    招式发动期间拥有无敌效果；\n    在[裙裾浮游]状态下切换角色时，薇薇安会自动发动[普通攻击：裙裾浮游·悬落]；\n    在[裙裾浮游]状态下点按 <IconMap:Icon_Evade> 可以退出[裙裾浮游]状态。",
+    "agentId": 1331
+  },
+  {
+    "agent": "薇薇安",
+    "skillName": "普通攻击：落羽生花",
+    "skillDescription": "队伍中任意角色发动[强化特殊技]命中目标后，薇薇安会消耗1点[护羽]并对目标发动一次[普通攻击：落羽生花]，造成以太伤害，同一招式最多触发一次，这一效果可以在薇薇安处于后场时触发；\n    [护羽]最多持有5点。",
+    "agentId": 1331
+  },
+  {
+    "agent": "薇薇安",
+    "skillName": "特殊技：银羽咏叹",
+    "skillDescription": "点按 <IconMap:Icon_Special> 发动：\n    快速向前方进行攻击，造成物理伤害和以太伤害；\n    招式发动期间抗打断等级提升。",
+    "agentId": 1331
+  },
+  {
+    "agent": "薇薇安",
+    "skillName": "强化特殊技：堇花悼亡",
+    "skillDescription": "能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n    向前方发动强力攻击，造成大量以太伤害，并回复3点[飞羽]；\n    招式发动期间拥有无敌效果；\n    招式发动后进入[裙裾浮游]状态，可以通过招式发动时保持长按 <IconMap:Icon_Evade> 进入[淑女礼仪]状态。",
+    "agentId": 1331
+  },
+  {
+    "agent": "薇薇安",
+    "skillName": "闪避：流光",
+    "skillDescription": "点按 <IconMap:Icon_Evade> 发动：\n    快速的冲刺闪避；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1331
+  },
+  {
+    "agent": "薇薇安",
+    "skillName": "冲刺攻击：银刺舞曲",
+    "skillDescription": "闪避时，点按 <IconMap:Icon_Normal> 发动：\n    向前方进行突刺，造成物理伤害；",
+    "agentId": 1331
+  },
+  {
+    "agent": "薇薇安",
+    "skillName": "闪避反击：羽刃反振",
+    "skillDescription": "触发[极限闪避]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动攻击，造成物理伤害和以太伤害；\n    招式发动期间拥有无敌效果；\n    招式发动后进入[淑女礼仪]状态；\n    拥有[飞羽]时，在招式发动过程中保持按住 <IconMap:Icon_Normal> 可进入[裙裾浮游]状态。",
+    "agentId": 1331
+  },
+  {
+    "agent": "薇薇安",
+    "skillName": "闪避：淑女滑步",
+    "skillDescription": "[淑女礼仪]状态下即将受到攻击时，会进行自动闪避，期间拥有无敌效果，但不会触发[极限闪避]；\n    每次进入[淑女礼仪]状态仅能触发一次。",
+    "agentId": 1331
+  },
+  {
+    "agent": "薇薇安",
+    "skillName": "连携技：星羽和声",
+    "skillDescription": "触发[连携技]时，选择对应角色发动：\n    对前方大范围敌人发动强力攻击，造成大量以太伤害，并回复2点[飞羽]；\n    招式发动期间拥有无敌效果；\n    招式发动后进入[裙裾浮游]状态，可以通过招式发动时保持长按 <IconMap:Icon_Evade> 取消。",
+    "agentId": 1331
+  },
+  {
+    "agent": "薇薇安",
+    "skillName": "终结技：飞鸟鸣颂",
+    "skillDescription": "喧响等级达到[极]时，点按 <IconMap:Icon_UltimateReady> 发动：\n    对前方大范围敌人发动强力攻击，造成大量以太伤害，并回复5点[飞羽]；\n    招式发动期间拥有无敌效果；\n    招式发动后进入[裙裾浮游]状态，可以通过招式发动时保持长按 <IconMap:Icon_Evade> 取消。",
+    "agentId": 1331
+  },
+  {
+    "agent": "薇薇安",
+    "skillName": "快速支援：凛羽之护",
+    "skillDescription": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n    对前方敌人发动攻击，造成物理伤害和以太伤害；\n    招式发动期间拥有无敌效果；\n    招式发动后进入[淑女礼仪]状态；\n    拥有[飞羽]时，在招式发动过程中保持按住 <IconMap:Icon_Normal> 可进入[裙裾浮游]状态。",
+    "agentId": 1331
+  },
+  {
+    "agent": "薇薇安",
+    "skillName": "招架支援：银伞列阵",
+    "skillDescription": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n    招架敌人的攻击，累积大量失衡值；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1331
+  },
+  {
+    "agent": "薇薇安",
+    "skillName": "支援突击：裁决羽刃",
+    "skillDescription": "发动[招架支援]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动攻击，造成以太伤害，并回复2点[飞羽]；\n    招式发动期间拥有无敌效果；\n    招式发动后进入[裙裾浮游]状态，可以通过招式发动时保持长按 <IconMap:Icon_Evade> 取消。",
+    "agentId": 1331
+  },
+  {
+    "agent": "照",
+    "skillName": "普通攻击：凛冽裁决",
+    "skillDescription": "点按 <IconMap:Icon_Normal> 发动：\n    向前方进行至多五段的斩击，第一段造成物理伤害，后四段造成冰属性伤害。",
+    "agentId": 1341
+  },
+  {
+    "agent": "照",
+    "skillName": "普通攻击：最终裁决",
+    "skillDescription": "长按 <IconMap:Icon_Normal> 发动：\n    预备后进入蓄力，松开时向前方进行斩击，造成大量冰属性伤害；\n    蓄力时，照将累积最多5秒蓄力时长，[普通攻击：最终裁决]、[连携技]或[支援突击]的终结一击命中时，将消耗蓄力时长造成额外伤害，每有1秒蓄力时长，造成照{CAL:0.12+AvatarSkillLevel(0)*0.01,100,2}%最大生命值的额外伤害；\n    照处于任意[以太帷幕]中时，如果在蓄力中成为非当前操作中角色，可以继续进行蓄力；\n    招式发动时，如果[霜寒值]满，消耗所有[霜寒值]，开启[以太帷幕·涌泉]，并触发[快速支援]，此时如果发动队友的[快速支援]，照将自动衔接[普通攻击：最终裁决]并进行蓄力；\n    招式发动期间抗打断等级提升，受到的伤害降低40%；\n    不为当前操作中角色时，招式发动期间拥有无敌效果。",
+    "agentId": 1341
+  },
+  {
+    "agent": "照",
+    "skillName": "特殊技：碎冰溢寒",
+    "skillDescription": "点按 <IconMap:Icon_Special> 发动：\n    向前方发动斩击，造成冰属性伤害；\n    招式发动时，消耗5%当前生命值，使全队角色每秒基于照{CAL:1+AvatarSkillLevel(1)*0.06,1,2}%最大生命值回复生命值，持续5秒，[特殊技：碎冰溢寒]和[强化特殊技：流霜冻土]的消耗生命效果每30秒最多触发一次。",
+    "agentId": 1341
+  },
+  {
+    "agent": "照",
+    "skillName": "强化特殊技：流霜冻土",
+    "skillDescription": "能量足够时，点按  <IconMap:Icon_SpecialReady> 发动：\n    向前方连续发动斩击，造成大量冰属性伤害；\n    招式发动时，消耗5%当前生命值，使全队角色每秒基于照{CAL:1+AvatarSkillLevel(1)*0.06,1,2}%最大生命值回复生命值，持续5秒，[特殊技：碎冰溢寒]和[强化特殊技：流霜冻土]的消耗生命效果每30秒最多触发一次；\n    招式发动时，积攒20点[霜寒值]，如果[霜寒值]满，消耗所有[霜寒值]，开启[以太帷幕·涌泉]；\n    招式发动时，如果处于任意[以太帷幕]中，将触发[快速支援]，此时如果发动队友的[快速支援]，照将自动衔接[普通攻击：最终裁决]并进行蓄力；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1341
+  },
+  {
+    "agent": "照",
+    "skillName": "闪避：脱兔踏",
+    "skillDescription": "点按 <IconMap:Icon_Evade> 发动：\n    快速的冲刺闪避；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1341
+  },
+  {
+    "agent": "照",
+    "skillName": "冲刺攻击：弹跳冲刺",
+    "skillDescription": "闪避时，点按 <IconMap:Icon_Normal> 发动：\n    向前方发动斩击，造成物理伤害和冰属性伤害。",
+    "agentId": 1341
+  },
+  {
+    "agent": "照",
+    "skillName": "闪避反击：倏忽闪",
+    "skillDescription": "触发[极限闪避]后，点按 <IconMap:Icon_Normal> 发动：\n    向前方发动下落斩击，造成冰属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1341
+  },
+  {
+    "agent": "照",
+    "skillName": "连携技：临时合作",
+    "skillDescription": "触发[连携技]时，选择对应角色发动：\n    向前方发动连续斩击，造成大量冰属性伤害；\n    招式发动后，积攒5点[霜寒值]，如果[霜寒值]满，消耗所有[霜寒值]，开启[以太帷幕·涌泉]；\n    招式发动后，如果处于任意[以太帷幕]中，将触发[快速支援]，此时如果发动队友的[快速支援]，照将自动衔接[普通攻击：最终裁决]并进行蓄力；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1341
+  },
+  {
+    "agent": "照",
+    "skillName": "终结技：兔兔连斩",
+    "skillDescription": "喧响等级达到[极]时，点按 <IconMap:Icon_UltimateReady> 发动：\n    向前方连续攻击，随后下落斩击敌人，造成大量冰属性伤害；\n    招式发动后，积攒20点[霜寒值]，如果[霜寒值]满，消耗所有[霜寒值]，开启[以太帷幕·涌泉]；\n    招式发动后，如果处于任意[以太帷幕]中，将触发[快速支援]，此时如果发动队友的[快速支援]，照将自动衔接[普通攻击：最终裁决]并进行蓄力；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1341
+  },
+  {
+    "agent": "照",
+    "skillName": "登场技：霜迸",
+    "skillDescription": "照的[霜寒值]满，且处于接战状态下时，点按 <IconMap:Icon_Switch> 发动：\n    向前方连续攻击，随后发动斩击，造成大量冰属性伤害；\n    招式发动时，消耗所有[霜寒值]，开启[以太帷幕·涌泉]；\n    招式发动时，触发[快速支援]，此时如果发动队友的[快速支援]，照将自动衔接[普通攻击：最终裁决]并进行蓄力；\n    招式发动时视为发动[快速支援]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1341
+  },
+  {
+    "agent": "照",
+    "skillName": "快速支援：查漏补缺",
+    "skillDescription": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n    向前方发动下落斩击，造成冰属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1341
+  },
+  {
+    "agent": "照",
+    "skillName": "招架支援：霜婵镇场",
+    "skillDescription": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n    招架敌人的攻击，累积大量失衡值；\n    具有较为优秀的招架性能，承受高强度攻击时[支援点数]的消耗量降低；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1341
+  },
+  {
+    "agent": "照",
+    "skillName": "支援突击：凛光返照",
+    "skillDescription": "发动[招架支援]后，点按 <IconMap:Icon_Normal> 发动：\n    向前方连续斩击，造成大量冰属性伤害；\n    招式发动时，如果[霜寒值]满，消耗所有[霜寒值]，开启[以太帷幕·涌泉]；\n    招式发动时，如果处于任意[以太帷幕]中，将触发[快速支援]，此时如果发动队友的[快速支援]，照将自动衔接[普通攻击：最终裁决]并进行蓄力；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1341
+  },
+  {
+    "agent": "波可娜",
+    "skillName": "普通攻击：捷击",
+    "skillDescription": "点按 <IconMap:Icon_Normal> 发动：\n    向前方进行至多三段的攻击，造成物理伤害；",
+    "agentId": 1351
+  },
+  {
+    "agent": "波可娜",
+    "skillName": "普通攻击：跃击",
+    "skillDescription": "长按 <IconMap:Icon_Normal> 发动：\n    向前跃进并发动连续斩击，造成物理伤害；",
+    "agentId": 1351
+  },
+  {
+    "agent": "波可娜",
+    "skillName": "特殊技：噬爪",
+    "skillDescription": "点按 <IconMap:Icon_Special> 发动：\n    向前方快速来回穿刺，造成物理伤害；\n    招式发动期间抗打断等级提升。",
+    "agentId": 1351
+  },
+  {
+    "agent": "波可娜",
+    "skillName": "特殊技：噬爪·噩梦袭影",
+    "skillDescription": "波可娜进入[猎步]状态后，队伍中其他操作中的角色的[特殊技]或[强化特殊技]重击命中敌人时触发：\n    围绕目标敌人，快速来回穿刺，造成物理伤害；\n    招式发动后，队伍中其他操作中的角色，发动任意攻击命中敌人时，波可娜会重复发动攻击，最多额外触发5次，且最后一次攻击会被替换为更加强力的终结一击；\n    招式发动期间拥有无敌效果；\n    [特殊技：噬爪·噩梦袭影]为[追加攻击]。",
+    "agentId": 1351
+  },
+  {
+    "agent": "波可娜",
+    "skillName": "强化特殊技：噬爪·瞬步",
+    "skillDescription": "能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n    向前方多次来回穿刺，造成大量物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1351
+  },
+  {
+    "agent": "波可娜",
+    "skillName": "闪避：翻正反射",
+    "skillDescription": "点按 <IconMap:Icon_Evade> 发动：\n    快速的冲刺闪避；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1351
+  },
+  {
+    "agent": "波可娜",
+    "skillName": "冲刺攻击：先下手为强",
+    "skillDescription": "闪避时，点按 <IconMap:Icon_Normal> 发动：\n    向前方突进斩击，造成物理伤害。",
+    "agentId": 1351
+  },
+  {
+    "agent": "波可娜",
+    "skillName": "闪避反击：睚眦必报",
+    "skillDescription": "触发[极限闪避]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动突刺并衔接快速斩击，造成物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1351
+  },
+  {
+    "agent": "波可娜",
+    "skillName": "连携技：嗨，想不到吧",
+    "skillDescription": "触发[连携技]时，选择对应角色发动：\n    向前方发动蓄力射击，造成大量物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1351
+  },
+  {
+    "agent": "波可娜",
+    "skillName": "终结技：噢，游戏时间",
+    "skillDescription": "喧响等级达到[极]时，点按 <IconMap:Icon_UltimateReady> 发动：\n    向前方大范围敌人发动强力射击，造成大量物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1351
+  },
+  {
+    "agent": "波可娜",
+    "skillName": "快速支援：雇佣合同·保镖业务",
+    "skillDescription": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n    对前方敌人发动突刺并衔接快速斩击，造成物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1351
+  },
+  {
+    "agent": "波可娜",
+    "skillName": "回避支援：雇佣合同·作战外包",
+    "skillDescription": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n    回避敌人的攻击，并触发[极限视域]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1351
+  },
+  {
+    "agent": "波可娜",
+    "skillName": "支援突击：单独计价",
+    "skillDescription": "发动[回避支援]后，点按 <IconMap:Icon_Normal> 发动：\n    向前腾空跃起后开枪射击，造成物理伤害；\n    招式发动时，将消耗1点[支援点数]，使自身进入[猎步]状态；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1351
+  },
+  {
+    "agent": "「扳机」",
+    "skillName": "普通攻击：冷膛射击",
+    "skillDescription": "点按 <IconMap:Icon_Normal> 发动：\n    向前方进行至多四段的射击，前三段造成物理伤害，第四段造成电属性伤害。",
+    "agentId": 1361
+  },
+  {
+    "agent": "「扳机」",
+    "skillName": "普通攻击：无音狙杀",
+    "skillDescription": "长按 <IconMap:Icon_Normal> 发动：\n    「扳机」进入[狙击姿态]，向前方连续射击，造成电属性伤害；\n    连续射击期间，受到敌方攻击时，「扳机」将自动回避攻击，8秒内最多触发一次；\n    连续射击期间，可以拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}，向左侧/右侧/后方调整身位；\n    自动回避攻击或在即将受到攻击时调整身位，将触发[极限闪避]，随后自动衔接发动蓄力反击；\n    松开 <IconMap:Icon_Normal> 后，「扳机」将后撤架枪并发动终结一击，随后退出[狙击姿态]；\n    蓄力反击和终结一击发动期间拥有无敌效果；\n    连续射击或蓄力反击命中敌人时，「扳机」将获得25点[绝意]值，[绝意]值上限100点；\n    终结一击命中敌人时，将触发队伍中上一位角色的[快速支援]，通过这种方式发动的[快速支援]25秒内最多触发一次。",
+    "agentId": 1361
+  },
+  {
+    "agent": "「扳机」",
+    "skillName": "普通攻击：协奏狙杀",
+    "skillDescription": "「扳机」拥有[绝意]值后，队伍中其他操作中的角色，发动[普通攻击]、[冲刺攻击]、[闪避反击]、[特殊技]、[快速支援]命中敌人时触发：\n    围绕目标敌人，连续发动两次快速射击，造成电属性伤害；\n    招式发动时，消耗3点[绝意]值；\n    招式发动期间拥有无敌效果；\n    [普通攻击：协奏狙杀]为[追加攻击]；\n    全队3秒内最多触发1次[普通攻击：协奏狙杀]。",
+    "agentId": 1361
+  },
+  {
+    "agent": "「扳机」",
+    "skillName": "普通攻击：协奏狙杀·冥狱",
+    "skillDescription": "「扳机」拥有[绝意]值后，队伍中其他操作中的角色，发动[强化特殊技]、[支援突击]、[终结技]重击命中敌人时触发：\n    围绕目标敌人，连续发动三次快速射击，随后发动终结一击，造成电属性伤害；\n    招式发动时，消耗5点[绝意]值；\n    招式发动期间拥有无敌效果；\n    [普通攻击：协奏狙杀·冥狱]为[追加攻击]；\n    全队同一类型的招式，20秒内最多触发2次[普通攻击：协奏狙杀·冥狱]；\n    [普通攻击：协奏狙杀]发动期间，触发[普通攻击：协奏狙杀·冥狱]会直接发动。",
+    "agentId": 1361
+  },
+  {
+    "agent": "「扳机」",
+    "skillName": "特殊技：幽闪",
+    "skillDescription": "点按 <IconMap:Icon_Special> 发动：\n    向前方发动突进斩击，造成电属性伤害；\n    招式发动期间抗打断等级提升。",
+    "agentId": 1361
+  },
+  {
+    "agent": "「扳机」",
+    "skillName": "强化特殊技：幽闪花葬",
+    "skillDescription": "能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n    向前方发动突进斩击，并在跃起后向地面追加一段强力射击，造成大量电属性伤害；\n    招式发动期间拥有无敌效果；\n    招式命中敌人时，将触发队伍中上一位角色的[快速支援]；\n    招式命中敌人时，「扳机」将进入[协战状态]，期间队伍中其他操作中的角色，发动任意攻击命中敌人时，即可触发[普通攻击：协奏狙杀]，无需消耗[绝意]值，且没有冷却时间的限制，持续8秒，可触发4次，重复进入[协战状态]时延长持续时间，并获得可触发次数；最多持续20秒，可触发10次。",
+    "agentId": 1361
+  },
+  {
+    "agent": "「扳机」",
+    "skillName": "闪避：魂隐",
+    "skillDescription": "点按 <IconMap:Icon_Evade> 发动：\n    快速的冲刺闪避；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1361
+  },
+  {
+    "agent": "「扳机」",
+    "skillName": "冲刺攻击：怨魂返",
+    "skillDescription": "闪避时，点按 <IconMap:Icon_Normal> 发动：\n    快速举枪射击，造成物理伤害。",
+    "agentId": 1361
+  },
+  {
+    "agent": "「扳机」",
+    "skillName": "闪避反击：极魂罚",
+    "skillDescription": "触发[极限闪避]后，点按 <IconMap:Icon_Normal> 发动：\n    转身回旋并对前方敌人发动快速射击，造成电属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1361
+  },
+  {
+    "agent": "「扳机」",
+    "skillName": "连携技：冥河之引",
+    "skillDescription": "触发[连携技]时，选择对应角色发动：\n    向前方连续发动强力射击，造成大量电属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1361
+  },
+  {
+    "agent": "「扳机」",
+    "skillName": "终结技：冥府挽歌",
+    "skillDescription": "喧响等级达到[极]时，点按 <IconMap:Icon_UltimateReady> 发动：\n    对前方大范围敌人发动强力射击，造成大量电属性伤害；\n    招式发动期间拥有无敌效果；\n    招式命中敌人时，将触发队伍中上一位角色的[快速支援]；\n    招式命中敌人时，「扳机」将进入[协战状态]，期间队伍中其他操作中的角色，发动任意攻击命中敌人时，即可触发[普通攻击：协奏狙杀]，无需消耗[绝意]值，且没有冷却时间的限制，持续12秒，可触发6次，重复进入[协战状态]时延长持续时间，并获得可触发次数；最多持续20秒，可触发10次。",
+    "agentId": 1361
+  },
+  {
+    "agent": "「扳机」",
+    "skillName": "快速支援：冷枪援护",
+    "skillDescription": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n    转身回旋并对前方敌人发动快速射击，造成电属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1361
+  },
+  {
+    "agent": "「扳机」",
+    "skillName": "招架支援：死线偏移",
+    "skillDescription": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n    招架敌人的攻击，累积大量失衡值；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1361
+  },
+  {
+    "agent": "「扳机」",
+    "skillName": "支援突击：殛雷穿心",
+    "skillDescription": "发动[招架支援]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动连续斩击，随后落地蓄力并追加一段强力射击，造成电属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1361
+  },
+  {
+    "agent": "仪玄",
+    "skillName": "普通攻击：霄云劲",
+    "skillDescription": "点按 <IconMap:Icon_Normal> 发动：\n    向前方进行至多五段的攻击，造成玄墨伤害，\n    招式第三段与第四段期间抗打断等级提升。",
+    "agentId": 1371
+  },
+  {
+    "agent": "仪玄",
+    "skillName": "普通攻击：墨影凝云",
+    "skillDescription": "长按 <IconMap:Icon_Evade> 发动：\n    展开大太极阵，造成玄墨伤害；\n    招式结束时自动释放[普通攻击：霄云劲]第五段攻击；\n    招式发动期间抗打断等级提升，受到的伤害降低40%。",
+    "agentId": 1371
+  },
+  {
+    "agent": "仪玄",
+    "skillName": "普通攻击：玄墨极阵",
+    "skillDescription": "拥有[玄墨值]时在[闪避：清霄同游]招式期间点按 <IconMap:Icon_Normal> 或拥有[玄墨值]时长按 <IconMap:Icon_Evade> 发动：\n    展开阵法，持续造成玄墨伤害；\n    招式结束时自动释放[普通攻击：青溟震击]；\n    动作持续引导期间，持续回复闪能，每秒回复7点，最多3秒；\n    招式发动期间拥有无敌效果且进入极限视域状态。",
+    "agentId": 1371
+  },
+  {
+    "agent": "仪玄",
+    "skillName": "普通攻击：青溟震击",
+    "skillDescription": "发动[普通攻击：玄墨极阵]达到最大时长自动释放：\n    张开翅膀发动爆炸攻击，造成大量玄墨伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1371
+  },
+  {
+    "agent": "仪玄",
+    "skillName": "特殊技：烬影诀",
+    "skillDescription": "点按 <IconMap:Icon_Special> 发动：\n    快速后撤后向前方发动攻击，造成玄墨伤害；\n    后撤期间可触发极限闪避效果，但不能衔接闪避反击；\n    招式发动期间抗打断等级提升。",
+    "agentId": 1371
+  },
+  {
+    "agent": "仪玄",
+    "skillName": "强化特殊技：墨痕化形",
+    "skillDescription": "闪能足够时，点按或长按 <IconMap:Icon_SpecialReady_Rp> 发动：\n    持续蓄力，松开 <IconMap:Icon_SpecialReady_Rp> 时发动翅膀上挑攻击，造成大量玄墨伤害；\n    蓄力期间，若受到敌人攻击，则可自动格挡并触发翅膀上挑攻击；\n    蓄力开始瞬间受到敌人攻击时，可触发完美格挡效果，免疫该次伤害，提高招式的打断等级至与重招架支援一致，回复10点闪能；\n    翅膀上挑攻击命中出现红色闪光或黄色闪光的敌人时，也可触发完美格挡效果，免疫该次伤害，提高招式的打断等级至与重招架支援一致，回复10点闪能；\n    完美格挡效果每0.5秒最多触发一次；\n    若蓄力至闪光或触发完美格挡效果，则翅膀上挑攻击后可额外追加符箓攻击；\n    招式发动后，可点按 <IconMap:Icon_Special> 发动[强化特殊技：霄云迅击-破]；\n    发动[强化特殊技：霄云迅击-破]后，若闪能足够，可点按 <IconMap:Icon_SpecialReady_Rp> 额外消耗20点闪能发动[强化特殊技：青溟震击-破]；\n    [强化特殊技：青溟震击-破]发动后，若[玄墨值]足够，长按 <IconMap:Icon_Evade> 可快速衔接[普通攻击：玄墨极阵]；\n    翅膀上挑攻击时拥有无敌效果，蓄力期间抗打断等级提升。",
+    "agentId": 1371
+  },
+  {
+    "agent": "仪玄",
+    "skillName": "强化特殊技：凝云术",
+    "skillDescription": "闪能足够时，长按 <IconMap:Icon_Normal> 发动：\n    持续蓄力，在敌人身边引导能量汇聚，持续造成伤害，最多持续2秒，造成大量玄墨伤害；\n    蓄力至最长时间或提前中断后，自动释放[强化特殊技：墨烬影消]；\n    招式发动瞬间可触发极限闪避，触发极限闪避后可进入极限视域；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1371
+  },
+  {
+    "agent": "仪玄",
+    "skillName": "强化特殊技：墨烬影消",
+    "skillDescription": "[强化特殊技：凝云术]过程中自动发动：\n    能量球出现与收缩时，均会造成玄墨伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1371
+  },
+  {
+    "agent": "仪玄",
+    "skillName": "闪避：隐云身法",
+    "skillDescription": "点按 <IconMap:Icon_Evade> 发动：\n    快速的冲刺闪避；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1371
+  },
+  {
+    "agent": "仪玄",
+    "skillName": "冲刺攻击：凌云破",
+    "skillDescription": "闪避时，点按 <IconMap:Icon_Normal> 发动：\n    向前方进行突进攻击，造成玄墨伤害。",
+    "agentId": 1371
+  },
+  {
+    "agent": "仪玄",
+    "skillName": "闪避：清霄同游",
+    "skillDescription": "拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}时长按 <IconMap:Icon_Evade> 发动：\n    进入可高速移动的[轻身]状态，当处于勘域模式中，在[轻身]状态下可自动收集一定范围内的物资收集点；\n    在[轻身]状态下使用{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}控制方向，松开{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}则会停下；\n    发动招式瞬间拥有无敌效果。",
+    "agentId": 1371
+  },
+  {
+    "agent": "仪玄",
+    "skillName": "闪避反击：除祟一击",
+    "skillDescription": "触发[极限闪避]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动连续攻击，造成玄墨伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1371
+  },
+  {
+    "agent": "仪玄",
+    "skillName": "连携技：玄墨迅击",
+    "skillDescription": "触发[连携技]时，选择对应角色发动：\n    快速突进向前发动攻击，随后进行展翅爆炸，造成大量玄墨伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1371
+  },
+  {
+    "agent": "仪玄",
+    "skillName": "终结技：青溟云影",
+    "skillDescription": "喧响等级达到[极]时，点按 <IconMap:Icon_UltimateReady> 发动：\n    持续发动羽翼攻击，随后引导万千符箓进行攻击，造成大量玄墨伤害；\n    释放招式时，仪玄会平均分配队伍中角色的生命值；\n    招式发动后，若[玄墨值]足够，长按 <IconMap:Icon_Evade> 可快速衔接[普通攻击：玄墨极阵]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1371
+  },
+  {
+    "agent": "仪玄",
+    "skillName": "终结技：符法千重",
+    "skillDescription": "[术法值]足够时，点按 <IconMap:Icon_UltimateReady> 发动：\n    消耗120点[术法值]，张开羽翼，随后引导万千符箓进行攻击，造成大量玄墨伤害；\n    [术法值]与[喧响值]同时足够时，优先释放该招式；\n    招式发动后，若[玄墨值]足够，长按 <IconMap:Icon_Evade> 可快速衔接[普通攻击：玄墨极阵]；\n    释放招式时，仪玄会平均分配队伍中角色的生命值；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1371
+  },
+  {
+    "agent": "仪玄",
+    "skillName": "快速支援：流云影身",
+    "skillDescription": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n    对前方敌人发动连续攻击，造成玄墨伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1371
+  },
+  {
+    "agent": "仪玄",
+    "skillName": "招架支援：清霄劲",
+    "skillDescription": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n    招架敌人的攻击，累积大量失衡值；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1371
+  },
+  {
+    "agent": "仪玄",
+    "skillName": "支援突击：霄云迅击",
+    "skillDescription": "发动[招架支援]后，点按 <IconMap:Icon_Normal> 发动：\n    快速突进并发动攻击，造成玄墨伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1371
+  },
+  {
+    "agent": "零号·安比",
+    "skillName": "普通攻击：电击穿",
+    "skillDescription": "点按 <IconMap:Icon_Normal> 发动：\n    向前方进行至多五段斩击，造成电属性伤害；\n    第四段攻击命中敌人后，连点或长按 <IconMap:Icon_Normal> 时，可以快速穿过前方敌人，最多重复发动5次。",
+    "agentId": 1381
+  },
+  {
+    "agent": "零号·安比",
+    "skillName": "普通攻击：电击穿",
+    "skillDescription": "点按 <IconMap:Icon_Normal> 发动：\n    向前方进行至多五段斩击，造成电属性伤害；\n    第三段普通攻击会持续聚集敌人；\n    第四段攻击命中敌人后，连点或长按 <IconMap:Icon_Normal> 时，可以快速穿过前方敌人，最多重复发动5次。",
+    "agentId": 1381
+  },
+  {
+    "agent": "零号·安比",
+    "skillName": "特殊技：星雷",
+    "skillDescription": "点按 <IconMap:Icon_Special> 发动：\n    向斜前方快速突进，随后进行交叉斩击，造成电属性伤害；\n    招式发动期间抗打断等级提升。",
+    "agentId": 1381
+  },
+  {
+    "agent": "零号·安比",
+    "skillName": "特殊技：苍光",
+    "skillDescription": "零号·安比攻击命中敌人时，会对目标施加[银星]标记，并为其进行充能；\n    每拥有三分之一充能，敌人将被施加1层[白雷]，最多叠加3层；\n    敌方目标拥有[白雷]时，点按 <IconMap:Icon_Special> 发动：\n    快速向前方位移，穿过敌人并进行斩击，对命中的敌人造成多段电属性伤害；\n    招式命中敌人时，将消耗1层[白雷]，发动[追加攻击]，造成1次额外的电属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1381
+  },
+  {
+    "agent": "零号·安比",
+    "skillName": "特殊技：雷殛",
+    "skillDescription": "针对同一名敌人，连续触发3次[白雷]的额外伤害时发动：\n    在敌方位置降下落雷，对范围内的敌人造成电属性伤害；\n    该伤害被视为[追加攻击]伤害。",
+    "agentId": 1381
+  },
+  {
+    "agent": "零号·安比",
+    "skillName": "特殊技：苍光·临界",
+    "skillDescription": "触发[特殊技：雷殛]伤害时：\n    若正在发动[强化特殊技：极雷断空]或[特殊技：苍光]，会在当前招式结束时自动发动[特殊技：苍光·临界]，连续斩击敌人造成多段电属性伤害，招式为[追加攻击]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1381
+  },
+  {
+    "agent": "零号·安比",
+    "skillName": "强化特殊技：极雷断空",
+    "skillDescription": "能量足够时，长按 <IconMap:Icon_SpecialReady> 发动：\n    将双剑拼接后向前方丢出进行高速斩击，造成大量电属性伤害；\n    招式命中敌人时，将为[银星]充能至上限；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1381
+  },
+  {
+    "agent": "零号·安比",
+    "skillName": "闪避：频闪",
+    "skillDescription": "点按 <IconMap:Icon_Evade> 发动：\n    快速的冲刺闪避；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1381
+  },
+  {
+    "agent": "零号·安比",
+    "skillName": "冲刺攻击：奔流",
+    "skillDescription": "闪避时，点按 <IconMap:Icon_Normal> 发动：\n    向前方横向斩击后，衔接突刺攻击，造成电属性伤害。",
+    "agentId": 1381
+  },
+  {
+    "agent": "零号·安比",
+    "skillName": "闪避反击：地闪回击",
+    "skillDescription": "触发[极限闪避]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动连续斩击，造成电属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1381
+  },
+  {
+    "agent": "零号·安比",
+    "skillName": "闪避反击：地闪回击",
+    "skillDescription": "触发[极限闪避]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动连续斩击，造成电属性伤害；命中敌人时获得15秒[电荷超载]状态，重复获得刷新持续时间；\n    [电荷超载]状态期间闪避性能提升，且发动[普通攻击]/[冲刺攻击]/[闪避反击]时敌方目标若拥有[白雷]，点按 <IconMap:Icon_Special> 可以随时打断当前招式并发动[特殊技：苍光]；\n    状态期间点按 <IconMap:Icon_SpecialReady> 时，若敌人未拥有[白雷]，能直接发动[强化特殊技：极雷断空]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1381
+  },
+  {
+    "agent": "零号·安比",
+    "skillName": "连携技：疾跃落雷",
+    "skillDescription": "触发[连携技]时，选择对应角色发动：\n    向前方跃起，随后快速俯冲并发动交叉斩击，造成大量电属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1381
+  },
+  {
+    "agent": "零号·安比",
+    "skillName": "终结技：斩空掠电",
+    "skillDescription": "喧响等级达到[极]时，点按 <IconMap:Icon_UltimateReady> 发动：\n    对前方大范围敌人发动强力连斩，并追加落雷攻击，造成大量电属性伤害；\n    招式命中敌人时，将为[银星]充能至上限；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1381
+  },
+  {
+    "agent": "零号·安比",
+    "skillName": "快速支援：云闪",
+    "skillDescription": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n    对前方敌人发动连续斩击，造成电属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1381
+  },
+  {
+    "agent": "零号·安比",
+    "skillName": "招架支援：逆极反袭",
+    "skillDescription": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n    招架敌人的攻击，累积大量失衡值；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1381
+  },
+  {
+    "agent": "零号·安比",
+    "skillName": "支援突击：直击先导",
+    "skillDescription": "发动[招架支援]后，点按 <IconMap:Icon_Normal> 发动：\n    向前突进并对前方敌人发动连续斩击，造成电属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1381
+  },
+  {
+    "agent": "橘福福",
+    "skillName": "普通攻击：恶虎七式·燎身爪",
+    "skillDescription": "点按 <IconMap:Icon_Normal> 发动：\n    向前方进行至多四段的斩击，造成物理伤害和火属性伤害；\n    第三段攻击期间，连续点按 <IconMap:Icon_Normal> 可以维持连击，持续打击敌人；\n    第三段攻击期间，长按或停顿后点按 <IconMap:Icon_Normal> ，将衔接第四段攻击；\n    第三段攻击期间抗打断等级提升，受到伤害降低40%。",
+    "agentId": 1391
+  },
+  {
+    "agent": "橘福福",
+    "skillName": "普通攻击：「虎威」",
+    "skillDescription": "战斗中，「虎威」会自动对敌人发动攻击， 造成火属性伤害；\n    命中敌人时，获得20点[威风]，招式内最多触发一次；[威风]上限为200点。",
+    "agentId": 1391
+  },
+  {
+    "agent": "橘福福",
+    "skillName": "特殊技：恶虎七式·下山虎",
+    "skillDescription": "点按 <IconMap:Icon_Special> 发动：\n    向前方进行旋转斩击后发动下落斩击，造成火属性伤害；\n    招式发动期间抗打断等级提升。",
+    "agentId": 1391
+  },
+  {
+    "agent": "橘福福",
+    "skillName": "强化特殊技：恶虎七式改·下山猛虎",
+    "skillDescription": "能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n    挥舞「虎威」向前方进行强力打击，造成大量火属性伤害；\n    发动时获得3点[威势]和80点[威风]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1391
+  },
+  {
+    "agent": "橘福福",
+    "skillName": "闪避：恶虎七式·风从虎",
+    "skillDescription": "点按 <IconMap:Icon_Evade> 发动：\n    快速的冲刺闪避；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1391
+  },
+  {
+    "agent": "橘福福",
+    "skillName": "冲刺攻击：恶虎七式·虎奔",
+    "skillDescription": "闪避时，点按 <IconMap:Icon_Normal> 发动：\n    向前发动快速斩击，造成物理伤害。",
+    "agentId": 1391
+  },
+  {
+    "agent": "橘福福",
+    "skillName": "冲刺攻击：恶虎七式·山君鼎戏",
+    "skillDescription": "[冲刺攻击：恶虎七式·虎奔]发动后，长按 <IconMap:Icon_Normal> 发动：\n    进入高速旋转状态，该状态下可以拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}进行移动，接触敌人时造成物理伤害；\n    橘福福通过其他招式获得[威势]后，会在高速旋转状态下带有火焰；接触敌人时消耗1点[威势]，改为造成火属性伤害并获得25点[威风]，[威势]上限为15点；\n    橘福福消耗[威势]造成火属性伤害时，若[威风]高于100点，会自动消耗100点[威风]发动[连携技：虎釜震煞]；\n    松开 <IconMap:Icon_Normal> 可退出旋转状态，并丢出「虎威」攻击敌人，造成火属性伤害；切换至其他角色时，橘福福会继续处于旋转状态，尝试撞击最近的敌人；\n    橘福福为当前操作中角色时，招式发动期间受到伤害降低40%，抗打断等级提升，不为当前操作中角色时，获得无敌效果。",
+    "agentId": 1391
+  },
+  {
+    "agent": "橘福福",
+    "skillName": "闪避反击：恶虎七式·离火回峰",
+    "skillDescription": "触发[极限闪避]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动多次斩击，造成火属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1391
+  },
+  {
+    "agent": "橘福福",
+    "skillName": "连携技：虎釜崩",
+    "skillDescription": "触发[连携技]时，选择对应角色发动：\n    挥舞「虎威」对前方小范围敌人进行强力打击，造成大量火属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1391
+  },
+  {
+    "agent": "橘福福",
+    "skillName": "连携技：虎釜震煞",
+    "skillDescription": "拥有至少100点[威风]时，触发[连携技]后自动发动：\n    消耗100点[威风]，打开「虎威」对前方小范围敌人发射火焰和爆米花打击敌人，造成大量火属性伤害；\n    拥有[威势]且不为操作中角色时，招式结束会进入高速旋转状态；\n    招式为[追加攻击]，发动期间拥有无敌效果。",
+    "agentId": 1391
+  },
+  {
+    "agent": "橘福福",
+    "skillName": "终结技：恶虎七式·猛虎炸开花",
+    "skillDescription": "喧响等级达到[极]时，点按 <IconMap:Icon_UltimateReady> 发动：\n    使用「虎威」进行两次下落攻击，造成大量火属性伤害；\n    发动时获得6点[威势]和100点[威风]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1391
+  },
+  {
+    "agent": "橘福福",
+    "skillName": "快速支援：怒决蹯",
+    "skillDescription": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n    对前方敌人发动斩击，造成火属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1391
+  },
+  {
+    "agent": "橘福福",
+    "skillName": "招架支援：岿然虎踞",
+    "skillDescription": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n    招架敌人的攻击，累积大量失衡值；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1391
+  },
+  {
+    "agent": "橘福福",
+    "skillName": "支援突击：彪形焰颌",
+    "skillDescription": "发动[招架支援]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动斩击后，使用「虎威」追加一次下落攻击，造成火属性伤害；\n    发动时获得1点[威势]，10秒内最多获得1次；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1391
+  },
+  {
+    "agent": "爱丽丝",
+    "skillName": "普通攻击：星仪序曲",
+    "skillDescription": "点按 <IconMap:Icon_Normal> 发动：\n    向前方进行至多五段的斩击，造成物理伤害；\n    爱丽丝通过属性异常积蓄触发[强击]时，下一次发动的[普通攻击]第五段获得强化。",
+    "agentId": 1401
+  },
+  {
+    "agent": "爱丽丝",
+    "skillName": "普通攻击：星芒圆舞曲",
+    "skillDescription": "爱丽丝的[剑仪]达到1格时，长按 <IconMap:Icon_Normal> 发动：\n    长按进入蓄力，消耗至多3格[剑仪]，松开 <IconMap:Icon_Normal> 或[剑仪]不满1格时，爱丽丝将根据当前蓄力段数以目标敌人为中心发动多段斩击，造成大量物理伤害；\n    三段蓄力的[普通攻击：星芒圆舞曲]的终结一击命中敌人时，触发特殊的[强击]效果[极性强击]，无视属性积蓄进度造成一次原本[强击]效果{CAL:0+100,1,2}%的伤害，并可以与包括物理异常效果在内的其他属性异常效果互相结算[紊乱]；\n    命中敌人时，不累积[剑仪]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1401
+  },
+  {
+    "agent": "爱丽丝",
+    "skillName": "特殊技：破晓突刺",
+    "skillDescription": "点按 <IconMap:Icon_Special> 发动：\n    丢出剑攻击并穿过前方敌人，造成物理伤害；\n    招式发动时可以触发[极限闪避]；\n    触发[极限闪避]后，点按 <IconMap:Icon_Normal> 可以衔接发动第五段[普通攻击]；\n    招式发动期间抗打断等级提升。",
+    "agentId": 1401
+  },
+  {
+    "agent": "爱丽丝",
+    "skillName": "强化特殊技：极光突刺·北十字",
+    "skillDescription": "能量足够时，向前拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}并点按 <IconMap:Icon_SpecialReady> 发动：\n    突刺攻击并穿过前方敌人，造成大量物理伤害；\n    招式发动时可以触发[极限闪避]，并回复10点[剑仪]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1401
+  },
+  {
+    "agent": "爱丽丝",
+    "skillName": "强化特殊技：极光突刺·南十字",
+    "skillDescription": "能量足够时，不拖曳或者向后方拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}并点按 <IconMap:Icon_SpecialReady> 发动：\n    后退并发动斩击随后向前穿刺，造成大量物理伤害；\n    招式发动时可以触发[极限闪避]，并回复10点[剑仪]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1401
+  },
+  {
+    "agent": "爱丽丝",
+    "skillName": "闪避：动若脱兔",
+    "skillDescription": "点按 <IconMap:Icon_Evade> 发动：\n    快速的冲刺闪避；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1401
+  },
+  {
+    "agent": "爱丽丝",
+    "skillName": "冲刺攻击：剑舞之风",
+    "skillDescription": "闪避时，点按 <IconMap:Icon_Normal> 发动：\n    向前方进行斩击，造成物理伤害。",
+    "agentId": 1401
+  },
+  {
+    "agent": "爱丽丝",
+    "skillName": "闪避反击：剑闪之仪",
+    "skillDescription": "触发[极限闪避]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动斩击和踢击，造成物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1401
+  },
+  {
+    "agent": "爱丽丝",
+    "skillName": "连携技：星落间章",
+    "skillDescription": "触发[连携技]时，选择对应角色发动：\n    对前方敌人发动强力多段斩击，造成大量物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1401
+  },
+  {
+    "agent": "爱丽丝",
+    "skillName": "终结技：星芒终章",
+    "skillDescription": "喧响等级达到[极]时，点按 <IconMap:Icon_UltimateReady> 发动：\n    对前方大范围敌人发动强力多段斩击，造成大量物理伤害；\n    招式发动时，回复200点[剑仪]；\n    命中敌人时，不累积[剑仪]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1401
+  },
+  {
+    "agent": "爱丽丝",
+    "skillName": "快速支援：交替穿刺",
+    "skillDescription": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n    对前方敌人发动斩击和踢击，造成物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1401
+  },
+  {
+    "agent": "爱丽丝",
+    "skillName": "招架支援：对抗防守",
+    "skillDescription": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n    招架敌人的攻击，累积大量失衡值；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1401
+  },
+  {
+    "agent": "爱丽丝",
+    "skillName": "支援突击：交叉还击",
+    "skillDescription": "发动[招架支援]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动突进斩击，造成物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1401
+  },
+  {
+    "agent": "柚叶",
+    "skillName": "普通攻击：狸之爪",
+    "skillDescription": "点按 <IconMap:Icon_Normal> 发动：\n    向前方进行至多五段的打击，造成物理伤害。",
+    "agentId": 1411
+  },
+  {
+    "agent": "柚叶",
+    "skillName": "普通攻击：狸之帐",
+    "skillDescription": "长按 <IconMap:Icon_Normal> 发动：\n    进入防御姿态，最多持续1.5秒，期间如果受到敌人攻击，会招架敌人的攻击，累积大量失衡值；\n    成功招架敌人攻击时，获得1点[甜度点]；\n    成功招架敌人攻击时拥有无敌效果。",
+    "agentId": 1411
+  },
+  {
+    "agent": "柚叶",
+    "skillName": "普通攻击：硬糖射击",
+    "skillDescription": "当柚叶拥有[甜度点]时，其他操作中的角色攻击命中敌人时，柚叶会围绕敌人旋转伞持续攻击后射出一发强力炮弹，造成物理伤害，该攻击重击命中敌人时，柚叶会消耗1点[甜度点]；\n    [普通攻击：硬糖射击]为[追加攻击]；\n    [普通攻击：硬糖射击]每8秒最多触发一次；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1411
+  },
+  {
+    "agent": "柚叶",
+    "skillName": "普通攻击：彩糖花火",
+    "skillDescription": "处于[甜蜜惊吓]状态下的敌人，每1秒会受到一次[普通攻击：彩糖花火]攻击；\n    [普通攻击：彩糖花火]攻击初始造成物理伤害；\n    [普通攻击：彩糖花火]攻击累积的属性异常积蓄值不参与异常伤害结算；\n    [普通攻击：彩糖花火]攻击的属性异常积蓄效率提升{CAL:0.07+AvatarSkillLevel(0)*0.015,100,4}%。",
+    "agentId": 1411
+  },
+  {
+    "agent": "柚叶",
+    "skillName": "普通攻击：彩糖花火·极",
+    "skillDescription": "处于[甜蜜惊吓]状态下的敌人，被[普通攻击：硬糖射击]或[支援突击：夹心硬糖射击]重击命中时，会受到一次[普通攻击：彩糖花火·极]攻击；\n    [普通攻击：彩糖花火·极]攻击初始造成物理伤害；\n    [普通攻击：彩糖花火·极]攻击累积的属性异常积蓄值不参与异常伤害结算；\n    [普通攻击：彩糖花火·极]攻击的属性异常积蓄效率提升{CAL:0.07+AvatarSkillLevel(0)*0.015,100,4}%。",
+    "agentId": 1411
+  },
+  {
+    "agent": "柚叶",
+    "skillName": "普通攻击：狸之助",
+    "skillDescription": "当柚叶位于后场时，狸猫阿釜会协助操作中的角色攻击敌人，造成物理伤害；\n    当柚叶发动[普通攻击：狸之帐]时，狸猫阿釜会协助柚叶攻击敌人，造成物理伤害；\n    狸猫阿釜可以继承柚叶的初始攻击力。",
+    "agentId": 1411
+  },
+  {
+    "agent": "柚叶",
+    "skillName": "特殊技：软糖轰击",
+    "skillDescription": "点按 <IconMap:Icon_Special> 发动：\n    向前方开炮射击，造成物理伤害。",
+    "agentId": 1411
+  },
+  {
+    "agent": "柚叶",
+    "skillName": "强化特殊技：小心蛀牙",
+    "skillDescription": "能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n    向敌人扔出炸弹，造成物理伤害；\n    重击命中敌人时，会使其陷入[甜蜜惊吓]状态；\n    发动时，获得2点[甜度点]；\n    招式命中敌人时，将触发[快速支援]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1411
+  },
+  {
+    "agent": "柚叶",
+    "skillName": "强化特殊技：小心蛀牙，就是现在！",
+    "skillDescription": "在[闪避反击：报复开始~]、[快速支援：甜点时间]、[支援突击：来块曲奇]、[支援突击：夹心硬糖射击]攻击后或触发[极限闪避]时，点按  <IconMap:Icon_SpecialReady>  发动：\n    向敌人快速扔出炸弹，造成物理伤害；\n    重击命中敌人时，会使其陷入[甜蜜惊吓]状态；\n    发动时，获得2点[甜度点]；\n    招式命中敌人时，将触发[快速支援]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1411
+  },
+  {
+    "agent": "柚叶",
+    "skillName": "甜蜜惊吓",
+    "skillDescription": "[甜蜜惊吓]状态持续{CAL:16+AvatarSkillLevel(1)*2,1,2}秒，重复触发时刷新持续时间；\n    处于[甜蜜惊吓]状态下的敌人，首次被操作中的角色以与其属性相同的攻击命中时，将对该敌人触发[十人十色]，使得[普通攻击：彩糖花火]和[普通攻击：彩糖花火·极]对该敌人的攻击属性转变为触发此次[十人十色]的角色的属性；\n    当敌人的[甜蜜惊吓]状态被重复触发时，原本的[十人十色]状态会被移除，可再次重复上述操作，改变[普通攻击：彩糖花火]和[普通攻击：彩糖花火·极]的属性。",
+    "agentId": 1411
+  },
+  {
+    "agent": "柚叶",
+    "skillName": "闪避：吓到了吗？",
+    "skillDescription": "点按 <IconMap:Icon_Evade> 发动：\n    快速的冲刺闪避；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1411
+  },
+  {
+    "agent": "柚叶",
+    "skillName": "冲刺攻击：你要倒霉了！",
+    "skillDescription": "闪避时，点按 <IconMap:Icon_Normal> 发动：\n    向前方进行快速打击，造成物理伤害。",
+    "agentId": 1411
+  },
+  {
+    "agent": "柚叶",
+    "skillName": "闪避反击：报复开始~",
+    "skillDescription": "触发[极限闪避]后，点按 <IconMap:Icon_Normal> 发动：\n    向前方进行快速打击，造成物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1411
+  },
+  {
+    "agent": "柚叶",
+    "skillName": "连携技：恶作剧合战",
+    "skillDescription": "触发[连携技]时，选择对应角色发动：\n    对前方小范围敌人发动强力打击，造成大量物理伤害；\n    招式发动时，获得1点[甜度点]；\n    招式命中敌人时，将触发[快速支援]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1411
+  },
+  {
+    "agent": "柚叶",
+    "skillName": "终结技：不投降就捣乱",
+    "skillDescription": "喧响等级达到[极]时，点按 <IconMap:Icon_UltimateReady> 发动：\n    对周身大范围敌人发动强力打击，造成大量物理伤害；\n    重击命中敌人时，会使其陷入[甜蜜惊吓]状态；\n    招式发动时，队伍中其他角色回复{CAL:7+AvatarSkillLevel(3)*1.5,1,2}点能量； \n    招式发动时，获得2点[甜度点]；\n    招式命中敌人时，将触发[快速支援]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1411
+  },
+  {
+    "agent": "柚叶",
+    "skillName": "快速支援：甜点时间",
+    "skillDescription": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n    对前方敌人发动打击，造成物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1411
+  },
+  {
+    "agent": "柚叶",
+    "skillName": "招架支援：趣能补给",
+    "skillDescription": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n    招架敌人的攻击，累积大量失衡值；\n    成功招架敌人攻击时，获得1点[甜度点]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1411
+  },
+  {
+    "agent": "柚叶",
+    "skillName": "支援突击：来块曲奇",
+    "skillDescription": "发动[招架支援]或通过[普通攻击：狸之帐]成功招架敌人攻击后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动打击，造成物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1411
+  },
+  {
+    "agent": "柚叶",
+    "skillName": "支援突击：夹心硬糖射击",
+    "skillDescription": "发动[招架支援]或通过[普通攻击：狸之帐]成功招架敌人攻击后，在恰当的时机点按 <IconMap:Icon_Normal> 发动：\n    旋转伞持续攻击后射出一发强力炮弹，造成物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1411
+  },
+  {
+    "agent": "潘引壶",
+    "skillName": "普通攻击：极意连打",
+    "skillDescription": "点按 <IconMap:Icon_Normal> 发动：\n    向前方进行至多四段的体术攻击，造成物理伤害。",
+    "agentId": 1421
+  },
+  {
+    "agent": "潘引壶",
+    "skillName": "特殊技：爆音点穴指",
+    "skillDescription": "点按 <IconMap:Icon_Special> 发动：\n    向前释放体术并丢出鞭炮，造成物理伤害；\n    招式发动期间抗打断等级提升。",
+    "agentId": 1421
+  },
+  {
+    "agent": "潘引壶",
+    "skillName": "特殊技：断脉破穴手",
+    "skillDescription": "拥有[破劲]时点按 <IconMap:Icon_Special> 发动：\n    [特殊技：断脉破穴手]围绕怪物进行攻击，造成物理伤害；\n    招式可连续发动三次，每发动一次[特殊技：断脉破穴手]攻击，将消耗1点[破劲]。\n    潘引壶为当前操作中的角色时，招式发动期间受到伤害降低40%，抗打断等级提升，不为当前操作中的角色时，获得无敌效果。",
+    "agentId": 1421
+  },
+  {
+    "agent": "潘引壶",
+    "skillName": "强化特殊技：贴山震脉靠",
+    "skillDescription": "能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n    [强化特殊技：贴山震脉靠]向前方进行强力打击，造成物理伤害；\n    招式发动时将获得3点[破劲]，当招式命中敌人时，将触发队伍中上一位角色的[快速支援]；\n    通过此次[快速支援]上场的代理人将会获得核心被动提供的贯穿力加成，潘引壶会在换人后留在场上自动释放[特殊技：断脉破穴手]直至[破劲]耗尽后下场；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1421
+  },
+  {
+    "agent": "潘引壶",
+    "skillName": "闪避：身轻如燕",
+    "skillDescription": "点按 <IconMap:Icon_Evade> 发动：\n    快速的冲刺闪避；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1421
+  },
+  {
+    "agent": "潘引壶",
+    "skillName": "冲刺攻击：热油鼎盛",
+    "skillDescription": "闪避时，点按 <IconMap:Icon_Normal> 发动：\n    向前发动快速体术攻击，造成物理伤害。",
+    "agentId": 1421
+  },
+  {
+    "agent": "潘引壶",
+    "skillName": "闪避反击：移峰倒海",
+    "skillDescription": "触发[极限闪避]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动体术攻击，造成物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1421
+  },
+  {
+    "agent": "潘引壶",
+    "skillName": "连携技：锅气灌顶",
+    "skillDescription": "触发[连携技]时，选择对应角色发动：\n    坐上[铁锅]快速旋转冲撞，对路径上敌人造成大量物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1421
+  },
+  {
+    "agent": "潘引壶",
+    "skillName": "终结技：满汉全席！",
+    "skillDescription": "喧响等级达到[极]时，点按 <IconMap:Icon_UltimateReady> 发动：\n    施展术法将气劲凝作炒饭掀出，对敌人造成大量物理伤害，为全队角色回复{CAL:100+AvatarSkillLevel(3)*60,1,2}点生命值，并为全队角色施加8秒持续回复生命值的效果，每秒回复{CAL:0.8+AvatarSkillLevel(3)*0.05,1,2}%生命值；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1421
+  },
+  {
+    "agent": "潘引壶",
+    "skillName": "快速支援：抬头见喜",
+    "skillDescription": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n    对前方敌人发动体术攻击，造成物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1421
+  },
+  {
+    "agent": "潘引壶",
+    "skillName": "招架支援：见敌卸甲",
+    "skillDescription": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n    招架敌人的攻击，累积大量失衡值；\n    具有较为优秀的招架性能，承受高强度攻击时[支援点数]的消耗量降低；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1421
+  },
+  {
+    "agent": "潘引壶",
+    "skillName": "支援突击：借势打势",
+    "skillDescription": "发动[招架支援]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动体术攻击，造成物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1421
+  },
+  {
+    "agent": "叶瞬光",
+    "skillName": "普通攻击：快剑",
+    "skillDescription": "点按 <IconMap:Icon_Normal> 发动：\n    向前方进行至多四段的斩击，造成物理伤害；\n    第四段攻击发动后，可以衔接[冲刺攻击：如影疾行]。",
+    "agentId": 1431
+  },
+  {
+    "agent": "叶瞬光",
+    "skillName": "普通攻击：流云剑意",
+    "skillDescription": "长按 <IconMap:Icon_Normal> 发动：\n    快速发动多道剑气，造成物理伤害，可以通过长按延长攻击；\n    招式发动期间，抗打断等级提升。",
+    "agentId": 1431
+  },
+  {
+    "agent": "叶瞬光",
+    "skillName": "普通攻击：明心境·分水行",
+    "skillDescription": "在[明心境]状态下并处于地面时，点按 <IconMap:Icon_Normal> 发动：\n    向前方进行至多三段的斩击，造成物理伤害；\n    第三段攻击发动时，若受到敌人攻击，可触发格挡效果，免疫该次伤害；\n    若拥有[青溟剑势]，第三段攻击将被替换为[普通攻击：明心境·扶摇势]。",
+    "agentId": 1431
+  },
+  {
+    "agent": "叶瞬光",
+    "skillName": "普通攻击：明心境·扶摇势",
+    "skillDescription": "在[明心境]状态下，拥有[青溟剑势]时，第二段 [普通攻击：明心境·分水行] 后，点按 <IconMap:Icon_Normal> 发动：\n    快速发动升空攻击，对敌人造成物理伤害，并进入空中状态；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1431
+  },
+  {
+    "agent": "叶瞬光",
+    "skillName": "普通攻击：明心境·斩流光 极",
+    "skillDescription": "在[普通攻击：明心境·斩流光 灭]发动后，拥有[青溟剑势]时，点按 <IconMap:Icon_Normal> 发动：\n    向前方进行大范围斩击，造成大量物理伤害，命中敌人时会消耗1点[青溟剑势]；\n    招式发动时，若受到敌人攻击，可触发格挡效果，免疫该次伤害，并提升招式打断等级；\n    招式发动后，若拥有[青溟剑势]，点按 <IconMap:Icon_SpecialReady> 可以消耗1点[青溟剑势]，发动一段[强化特殊技：明心境·飞光]，发动后会自动衔接[普通攻击：明心境·扶摇势]，并进入空中状态；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1431
+  },
+  {
+    "agent": "叶瞬光",
+    "skillName": "普通攻击：明心境·斩流光",
+    "skillDescription": "在[明心境]状态下，并处于空中时，点按 <IconMap:Icon_Normal> 发动：\n    向前下方进行至多两段的斩击，造成物理伤害；\n    发动期间不会退出[明心境]状态；\n    点按 <IconMap:Icon_SpecialReady> 或 <IconMap:Icon_Evade> 可以直接发动[普通攻击：明心境·斩流光 灭]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1431
+  },
+  {
+    "agent": "叶瞬光",
+    "skillName": "普通攻击：明心境·斩流光 灭",
+    "skillDescription": "发动第二段[普通攻击：明心境·斩流光]后，点按 <IconMap:Icon_Normal> 发动：\n    向前下方进行下坠攻击，并进入地面状态，造成物理伤害；\n    发动时若自身拥有2点及以上[青溟剑势]，则向前下方进行大范围下坠攻击，造成大量物理伤害，命中敌人时，会消耗2点[青溟剑势]，并获得[观止]效果；招式发动后，若拥有[青溟剑势]，点按 <IconMap:Icon_SpecialReady> 可以消耗1点[青溟剑势]，发动一段[强化特殊技：明心境·飞光]，发动后可快速衔接[普通攻击：明心境·斩流光 极]；\n    发动期间不会退出[明心境]状态；\n    招式发动时，若受到敌人攻击，可触发格挡效果，免疫该次伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1431
+  },
+  {
+    "agent": "叶瞬光",
+    "skillName": "观止",
+    "skillDescription": "发动[强化特殊技：明心境·飞光]期间，每次消耗[青溟剑势]时，若拥有[观止]效果，则不消耗[青溟剑势]，改为消耗[观止]效果，该效果不可叠加，持续至该次[明心境]状态结束。",
+    "agentId": 1431
+  },
+  {
+    "agent": "叶瞬光",
+    "skillName": "特殊技：引沧澜",
+    "skillDescription": "点按 <IconMap:Icon_Special> 发动：\n    若拥有闪避次数，则消耗1次闪避次数并视为同时发动了[闪避]；\n    若未拥有闪避次数或未触发[极限闪避]，对敌人发动快速剑气攻击，造成物理伤害；\n    若此时触发了[极限闪避]，对敌人发动飞剑攻击，造成物理伤害，并可直接衔接第二段[普通攻击：快剑]；\n    招式发动期间拥有短暂无敌效果。",
+    "agentId": 1431
+  },
+  {
+    "agent": "叶瞬光",
+    "skillName": "强化特殊技：定风波",
+    "skillDescription": "能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n    对敌人造成突进斩击和飞剑攻击，造成大量物理伤害；\n    发动时可以闪避敌人的攻击；\n    发动后获得1点[青溟剑势]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1431
+  },
+  {
+    "agent": "叶瞬光",
+    "skillName": "特殊技：明心境·拂衣去",
+    "skillDescription": "在[明心境]状态下，处于地面状态时，点按 <IconMap:Icon_SpecialReady> 发动：\n    发动快速的后撤斩击，造成物理伤害；\n    若拥有闪避次数，则消耗1次闪避次数并视为同时发动了[闪避]；\n    若此时触发了[极限闪避]，点按 <IconMap:Icon_Normal> 可以快速发动[普通攻击：明心境·斩流光 极]，并进入[极限视域]；\n    且该次[普通攻击：明心境·斩流光 极]发动后，可以直接衔接[普通攻击：明心境·扶摇势]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1431
+  },
+  {
+    "agent": "叶瞬光",
+    "skillName": "强化特殊技：明心境·飞光",
+    "skillDescription": "在[明心境]状态下，拥有[青溟剑势]时，长按 <IconMap:Icon_SpecialReady> 发动：\n    发动快速斩击，造成大量物理伤害并持续快速消耗[青溟剑势]，直至耗尽[青溟剑势]；\n    若[青溟剑势]不足或停止长按 <IconMap:Icon_SpecialReady> ，招式会提前结束；\n    发动期间不会退出[明心境]状态；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1431
+  },
+  {
+    "agent": "叶瞬光",
+    "skillName": "强化特殊技：明心境·归尘",
+    "skillDescription": "在[明心境]状态下，点按 <IconMap:Icon_UltimateReady> 或[青溟剑势]耗尽时长按 <IconMap:Icon_SpecialReady> 发动：\n    对大范围敌人造成大量物理伤害；\n    发动期间不会退出[明心境]状态；\n    招式发动后，关闭[以太帷幕·决裁]退出[明心境]状态；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1431
+  },
+  {
+    "agent": "叶瞬光",
+    "skillName": "闪避：不留行",
+    "skillDescription": "点按 <IconMap:Icon_Evade> 发动：\n    快速的冲刺闪避；\n    招式发动期间拥有无敌效果；\n    在[明心境]状态下，若触发[极限闪避]，点按 <IconMap:Icon_Normal> 可发动[普通攻击：明心境·扶摇势]。",
+    "agentId": 1431
+  },
+  {
+    "agent": "叶瞬光",
+    "skillName": "闪避：逍遥云踪",
+    "skillDescription": "拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}时长按 <IconMap:Icon_Evade> 发动：\n    进入高速移动状态，使用{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}控制方向，松开{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}则会停下。",
+    "agentId": 1431
+  },
+  {
+    "agent": "叶瞬光",
+    "skillName": "冲刺攻击：如影疾行",
+    "skillDescription": "闪避时，点按 <IconMap:Icon_Normal> 发动：\n    向前方进行斩击，造成物理伤害。",
+    "agentId": 1431
+  },
+  {
+    "agent": "叶瞬光",
+    "skillName": "闪避反击：燕袭",
+    "skillDescription": "触发[极限闪避]后，点按 <IconMap:Icon_Normal> 发动：\n    跃起并向前方进行刺击，造成物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1431
+  },
+  {
+    "agent": "叶瞬光",
+    "skillName": "连携技：斩邪祟",
+    "skillDescription": "触发[连携技]时，选择对应角色发动：\n    对前方大范围敌人发动强力斩击，造成大量物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1431
+  },
+  {
+    "agent": "叶瞬光",
+    "skillName": "终结技：逐云惊霆",
+    "skillDescription": "喧响等级达到[极]时，点按 <IconMap:Icon_UltimateReady> 发动：\n    召唤剑阵，进入[明心境]状态，开启[以太帷幕·决裁]，并获得6点[青溟剑势]，对敌人造成大量物理伤害；\n    招式发动时，若消耗了喧响值，则可以在该次[明心境]中点按 <IconMap:Icon_UltimateReady> 发动不消耗喧响值的[终结技：斩妄开天]；\n    招式发动后，将处于空中状态；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1431
+  },
+  {
+    "agent": "叶瞬光",
+    "skillName": "连携技：明心境·掣惊雷",
+    "skillDescription": "在[明心境]状态下，触发[连携技]时，选择对应角色发动：\n    对前方大范围敌人发动强力斩击，造成大量物理伤害；\n    发动期间不会退出[明心境]状态；\n    招式发动后，将处于空中状态；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1431
+  },
+  {
+    "agent": "叶瞬光",
+    "skillName": "终结技：斩妄开天",
+    "skillDescription": "消耗喧响值发动[终结技：逐云惊霆]后，在[明心境]状态下，点按 <IconMap:Icon_UltimateReady> 或[青溟剑势]消耗尽后，长按 <IconMap:Icon_SpecialReady> 发动：\n    召唤巨剑，对敌人造成大量物理伤害；\n    发动期间不会退出[明心境]状态；\n    招式发动后，会退出[明心境]并关闭[以太帷幕·决裁]；\n    该招式不消耗喧响值；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1431
+  },
+  {
+    "agent": "叶瞬光",
+    "skillName": "登场技：照影",
+    "skillDescription": "拥有6点[青溟剑势]时，在非[明心境]状态下，长按 <IconMap:Icon_Normal> 或接战状态下点按 <IconMap:Icon_Switch> 从后场切换至前场发动：\n    进入[明心境]，开启[以太帷幕·决裁]；\n    对前方大范围敌人造成物理伤害；\n    招式发动时视为发动[快速支援]；\n    招式发动后，将处于空中状态；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1431
+  },
+  {
+    "agent": "叶瞬光",
+    "skillName": "快速支援：援守",
+    "skillDescription": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n    跃起并向前方进行刺击，造成物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1431
+  },
+  {
+    "agent": "叶瞬光",
+    "skillName": "支援突击：止戈",
+    "skillDescription": "发动[招架支援]后，点按 <IconMap:Icon_Normal> 发动：\n    造成大量物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1431
+  },
+  {
+    "agent": "叶瞬光",
+    "skillName": "招架支援：归去时",
+    "skillDescription": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n    招架敌人的攻击，累积大量失衡值；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1431
+  },
+  {
+    "agent": "叶瞬光",
+    "skillName": "快速支援：明心境·策应",
+    "skillDescription": "在[明心境]状态下，当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n    向前方进行一次斩击，造成物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1431
+  },
+  {
+    "agent": "叶瞬光",
+    "skillName": "支援突击：明心境·抱一",
+    "skillDescription": "在[明心境]状态下，发动[招架支援]后，点按 <IconMap:Icon_Normal> 发动：\n    造成大量物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1431
+  },
+  {
+    "agent": "真斗",
+    "skillName": "普通攻击：炽风斩",
+    "skillDescription": "点按 <IconMap:Icon_Normal> 发动：\n    向前方进行至多三段的斩击，造成物理伤害；\n    在每一段攻击的发动阶段，点按 <IconMap:Icon_Special> 将触发[烬风]，使此次攻击造成更高火属性伤害。",
+    "agentId": 1441
+  },
+  {
+    "agent": "真斗",
+    "skillName": "普通攻击：炽风·胧切",
+    "skillDescription": "在[熔锋]状态下点按 <IconMap:Icon_Normal> 发动：\n    向前方进行至多四段的斩击，造成火属性伤害；\n    招式发动时，如果真斗的生命值在30%以上，则消耗3.5%最大生命值。",
+    "agentId": 1441
+  },
+  {
+    "agent": "真斗",
+    "skillName": "特殊技：归烬",
+    "skillDescription": "点按 <IconMap:Icon_Special> 发动：\n    向前方斩击敌人，造成火属性伤害；\n    如果招式发动期间受到敌人攻击，在发动斩击时回复20%已损失生命值，[特殊技：归烬]和[特殊技：归烬·舍身]的生命回复效果每20秒最多触发一次；\n    如果招式发动期间受到敌人攻击，强化此次斩击；\n    招式发动期间受到伤害降低40%；\n    招式发动期间抗打断等级提升。",
+    "agentId": 1441
+  },
+  {
+    "agent": "真斗",
+    "skillName": "特殊技：归烬·舍身",
+    "skillDescription": "长按 <IconMap:Icon_Special> 发动：\n    进入蓄力状态，最多消耗10%最大生命值并回复100点[炽心]，最多消耗生命值至最大生命值的30%；\n    松开按键时，发动[特殊技：归烬]，如果招式发动期间受到敌人攻击，在发动斩击时回复20%已损失生命值，[特殊技：归烬]和[特殊技：归烬·舍身]的生命回复效果每20秒最多触发一次；\n    如果招式发动期间受到敌人攻击或者蓄力达到一定时长，强化此次斩击；\n    招式发动期间受到伤害降低40%；\n    招式发动期间抗打断等级提升。",
+    "agentId": 1441
+  },
+  {
+    "agent": "真斗",
+    "skillName": "强化特殊技：归烬·天坠",
+    "skillDescription": "在[熔锋]状态下，闪能足够时，点按  <IconMap:Icon_SpecialReady_Rp> 发动：\n    跳起并发动向前方敌人发动下落斩击，造成大量火属性伤害；\n    招式发动时，回复33%最大生命值；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1441
+  },
+  {
+    "agent": "真斗",
+    "skillName": "闪避：曜刃",
+    "skillDescription": "点按 <IconMap:Icon_Evade> 发动：\n    快速的冲刺闪避；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1441
+  },
+  {
+    "agent": "真斗",
+    "skillName": "冲刺攻击：曜刃·残心",
+    "skillDescription": "闪避时，点按 <IconMap:Icon_Normal> 发动：\n    向前方进行肩撞攻击，造成物理伤害。",
+    "agentId": 1441
+  },
+  {
+    "agent": "真斗",
+    "skillName": "闪避反击：曜刃·掠阵",
+    "skillDescription": "触发[极限闪避]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动斩击和拳击，造成火属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1441
+  },
+  {
+    "agent": "真斗",
+    "skillName": "连携技：极炽炎爆",
+    "skillDescription": "触发[连携技]时，选择对应角色发动：\n    丢出手中的剑，随后冲向敌人引发爆炸，造成大量火属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1441
+  },
+  {
+    "agent": "真斗",
+    "skillName": "终结技：无想荒魂",
+    "skillDescription": "喧响等级达到[极]时，点按 <IconMap:Icon_UltimateReady> 发动：\n    跳起并发动向前方敌人发动下落斩击，随后引发爆炸，造成大量火属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1441
+  },
+  {
+    "agent": "真斗",
+    "skillName": "快速支援：孤影·归阵",
+    "skillDescription": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n    对前方敌人发动斩击和拳击，造成火属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1441
+  },
+  {
+    "agent": "真斗",
+    "skillName": "招架支援：孤影·岳峙",
+    "skillDescription": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n    招架敌人的攻击，累积大量失衡值，并造成火属性伤害；\n    招式发动时，回复75点[炽心]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1441
+  },
+  {
+    "agent": "真斗",
+    "skillName": "支援突击：孤影·断獠",
+    "skillDescription": "发动[招架支援]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动多段斩击，造成火属性伤害；\n    连点时，可以连续斩击敌人，最多额外连续斩击7次；\n    连续斩击时，如果真斗的生命值在30%以上，则消耗2%最大生命值；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1441
+  },
+  {
+    "agent": "卢西娅",
+    "skillName": "普通攻击：星轨连击",
+    "skillDescription": "点按 <IconMap:Icon_Normal> 发动：\n    向前方进行至多五段的打击，造成以太伤害；\n    其中，第五段攻击为[随想]，发动时复现以骸形象对前方圆形区域敌人造成以太伤害；\n    处于接战状态下且未处于[梦境]状态中时，卢西娅发动此[随想]可获得40点[梦境值]。",
+    "agentId": 1451
+  },
+  {
+    "agent": "卢西娅",
+    "skillName": "特殊技：死神协奏曲·风暴",
+    "skillDescription": "点按 <IconMap:Icon_Special> 发动：\n    特殊技为[随想]，发动时复现以骸形象向前方直线区域发动斩击，造成以太伤害；\n    处于接战状态下且未处于[梦境]状态中时，卢西娅发动此[随想]可获得20点[梦境值]，5秒内最多获得一次。",
+    "agentId": 1451
+  },
+  {
+    "agent": "卢西娅",
+    "skillName": "强化特殊技：死神协奏曲·破晓",
+    "skillDescription": "能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n    强化特殊技为[合唱]，发动时复现以骸形象向前方直线区域发动强力斩击，造成以太伤害；\n    卢西娅发动[合唱]时，为全队角色施加[破暗]状态；[破暗]状态下，贯穿力提升12点，卢西娅每拥有200点初始最大生命值，可使贯穿力额外提升{CAL:5+AvatarSkillLevel(1)*0.2,1,1}点，[破暗]状态最多可提升{CAL:612+AvatarSkillLevel(1)*24,1,2}点贯穿力，状态持续20秒，重复触发时刷新持续时间，当卢西娅的初始最大生命值达到24000点时，上述增益效果达到最大值；\n    [合唱]造成伤害时，卢西娅会根据最大生命值的{CAL:0.34+AvatarSkillLevel(1)*0.03,100,2}%额外提升最后一段攻击的伤害；\n    卢西娅发动强化特殊技后，若自身处于[梦境]状态且[以太帷幕·涌泉]生效中，则使[以太帷幕·涌泉]的持续时间延长16秒；\n    卢西娅发动强化特殊技后，可以直接衔接第五段[普通攻击]；\n    未处于[梦境]状态中时，卢西娅发动此[合唱]可获得60点[梦境值]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1451
+  },
+  {
+    "agent": "卢西娅",
+    "skillName": "闪避：曳影",
+    "skillDescription": "点按 <IconMap:Icon_Evade> 发动：\n    快速的冲刺闪避；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1451
+  },
+  {
+    "agent": "卢西娅",
+    "skillName": "冲刺攻击：折光",
+    "skillDescription": "闪避时，点按 <IconMap:Icon_Normal> 发动：\n    向前方进行快速打击，造成以太伤害。",
+    "agentId": 1451
+  },
+  {
+    "agent": "卢西娅",
+    "skillName": "闪避反击：星尘回响",
+    "skillDescription": "触发[极限闪避]后，点按 <IconMap:Icon_Normal> 发动：\n    闪避反击为[随想]，发动时复现以骸形象向前方圆形区域发动下落攻击，造成以太伤害；\n    未处于[梦境]状态中时，卢西娅发动此[随想]可获得20点[梦境值]，5秒内最多获得一次；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1451
+  },
+  {
+    "agent": "卢西娅",
+    "skillName": "连携技：璀色剧场",
+    "skillDescription": "触发[连携技]时，选择对应角色发动：\n    连携技为[合唱]，发动时复现以骸形象将前方圆形区域敌人吸近并造成以太伤害；\n    未处于[梦境]状态中时，卢西娅发动此[合唱]可获得40点[梦境值]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1451
+  },
+  {
+    "agent": "卢西娅",
+    "skillName": "终结技：进击，大铠甲！",
+    "skillDescription": "喧响等级达到[极]时，点按 <IconMap:Icon_UltimateReady> 发动：\n    终结技为[合唱]，发动时复现以骸形象，卢西娅骑乘以骸向前突进，保持按住方向键可控制骑乘方向并延长突进时间，最多延长至3秒，突进期间抗打断等级提升，受到的伤害降低40%，且卢西娅受到致命伤害时不会战败退场，生命值最多降低至1；\n    在突进停止时对周身大范围区域发动强力打击造成以太伤害，招式命中敌人时，将触发[快速支援]，招式发动后会留下[星光汇聚之地]，[星光汇聚之地]持续8秒，当前操作中的角色在[星光汇聚之地]内获得生命回复效果：每秒回复卢西娅最大生命值的{CAL:0.01+AvatarSkillLevel(3)*0.0005,100,2}%，该回复效果在角色离开[星光汇聚之地]4秒后或下场时消失；\n    若发动后卢西娅处于[梦境]状态且[以太帷幕·涌泉]生效中，则使[以太帷幕·涌泉]的持续时间延长32秒；\n    未处于[梦境]状态中时，卢西娅发动此[合唱]可获得100点[梦境值]，且若发动此[合唱]时自身处于[梦境]状态，则可在下一次退出[梦境]状态时获得100点[梦境值]并重新进入[梦境]状态，该效果不可重复获得；\n    强力打击发动期间拥有无敌效果。",
+    "agentId": 1451
+  },
+  {
+    "agent": "卢西娅",
+    "skillName": "快速支援：迷雾重击",
+    "skillDescription": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n    快速支援为[随想]，发动时复现以骸形象向前方圆形区域发动下落攻击，造成以太伤害；\n    未处于[梦境]状态中时，卢西娅发动此[随想]可获得20点[梦境值]，5秒内最多获得一次；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1451
+  },
+  {
+    "agent": "卢西娅",
+    "skillName": "招架支援：幻梦之声",
+    "skillDescription": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n    招架敌人的攻击，累积大量失衡值；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1451
+  },
+  {
+    "agent": "卢西娅",
+    "skillName": "支援突击：绘梦和声",
+    "skillDescription": "发动[招架支援]后，点按 <IconMap:Icon_Normal> 发动：\n    支援突击为[合唱]，发动时复现以骸形象向前方圆形区域发动强力下落攻击，造成以太伤害；\n    未处于[梦境]状态中时，卢西娅发动此[合唱]可获得40点[梦境值]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1451
+  },
+  {
+    "agent": "「席德」",
+    "skillName": "普通攻击：霜蕊轮舞",
+    "skillDescription": "点按 <IconMap:Icon_Normal> 发动：\n    向前方进行至多四段的攻击，前两段造成物理伤害，第三第四段造成电属性伤害；\n    第三段后撤动作至第四段攻击发动前受到攻击，可触发自动闪避。",
+    "agentId": 1461
+  },
+  {
+    "agent": "「席德」",
+    "skillName": "普通攻击：落华·重戮",
+    "skillDescription": "[普通攻击]第四段、[闪避反击]、[快速支援]、[支援突击]后，可通过长按或点按 <IconMap:Icon_Normal>  发动：\n    召唤机甲，进行蓄力冲拳攻击，造成大量电属性伤害；\n    [钢能]值达到120点时，可获得一次快速释放[普通攻击：落华·重戮]的机会，长按 <IconMap:Icon_Normal> 直接发动；[钢能]值不足120点或通过上述方式发动一次[普通攻击：落华·重戮]后，该效果移除；\n    命中敌人时不累积[钢能]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1461
+  },
+  {
+    "agent": "「席德」",
+    "skillName": "普通攻击：落华·崩坠",
+    "skillDescription": "「席德」拥有[钢能]值，自身招式命中敌人可累积[钢能]；\n    [钢能]最大150点，初始拥有60点[钢能]，达到120点时，在[普通攻击：落华·重戮]或[终结技：机芯花园·绽放！]发动后，可点按或长按 <IconMap:Icon_Normal>  消耗60点[钢能]释放[普通攻击：落华·崩坠一式]，并自动消耗60点[钢能]衔接发动[普通攻击：落华·崩坠二式]；\n    操控机甲，扫射并释放强力跳砸，造成大量电属性伤害；\n    命中敌人时不累积[钢能]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1461
+  },
+  {
+    "agent": "「席德」",
+    "skillName": "特殊技：苍霜零落",
+    "skillDescription": "点按 <IconMap:Icon_Special> 发动：\n    扔出钢轮，划出曲线轨迹造成电属性伤害。",
+    "agentId": 1461
+  },
+  {
+    "agent": "「席德」",
+    "skillName": "强化特殊技：铁萼雨幕",
+    "skillDescription": "能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n    进入飞行模式，可进行四向移动，连续发射弹幕对敌人造成大量电属性伤害；\n    长按 <IconMap:Icon_SpecialReady> 可以延长弹幕发射时间并持续消耗能量；\n    飞行期间，松开 <IconMap:Icon_SpecialReady> 可发动[强化特殊技：铁萼雨幕·离]；\n    一次飞行消耗60点能量时，自动发动[普通攻击：落华·重戮]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1461
+  },
+  {
+    "agent": "「席德」",
+    "skillName": "强化特殊技：铁萼雨幕·离",
+    "skillDescription": "[强化特殊技：铁萼雨幕]发动期间，松开 <IconMap:Icon_SpecialReady> 发动：\n    释放快速的炮击，造成电属性伤害；\n    命中敌人时不累积[钢能]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1461
+  },
+  {
+    "agent": "「席德」",
+    "skillName": "闪避：踏瓣花游",
+    "skillDescription": "点按 <IconMap:Icon_Evade> 发动：\n    快速的冲刺闪避；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1461
+  },
+  {
+    "agent": "「席德」",
+    "skillName": "冲刺攻击：磁陨轮舞",
+    "skillDescription": "闪避时，点按 <IconMap:Icon_Normal> 发动：\n    向前方扔出钢轮，造成物理伤害。",
+    "agentId": 1461
+  },
+  {
+    "agent": "「席德」",
+    "skillName": "闪避反击：裂萼纷华",
+    "skillDescription": "触发[极限闪避]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动连续的激光打击，造成电属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1461
+  },
+  {
+    "agent": "「席德」",
+    "skillName": "连携技：落霰风暴",
+    "skillDescription": "触发[连携技]时，选择对应角色发动：\n    召唤机甲，护住自身后，向前方发射炮击与大量导弹，造成大量电属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1461
+  },
+  {
+    "agent": "「席德」",
+    "skillName": "终结技：机芯花园·绽放！",
+    "skillDescription": "喧响等级达到[极]时，点按 <IconMap:Icon_UltimateReady> 发动：\n    亲自驾驭机甲，倾泻出大量导弹与流星般的致命光弹，并释放强力跳砸，造成大量电属性伤害；\n    招式发动后，累积60点[钢能]；\n    命中敌人时不累积[钢能]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1461
+  },
+  {
+    "agent": "「席德」",
+    "skillName": "快速支援：花雨齐射",
+    "skillDescription": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n    对前方敌人发动连续的激光打击，造成电属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1461
+  },
+  {
+    "agent": "「席德」",
+    "skillName": "招架支援：雏华屏障",
+    "skillDescription": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n    招架敌人的攻击，累积大量失衡值；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1461
+  },
+  {
+    "agent": "「席德」",
+    "skillName": "支援突击：绯芯爆裂",
+    "skillDescription": "发动[招架支援]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动连续浮游炮攻击，造成电属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1461
+  },
+  {
+    "agent": "般岳",
+    "skillName": "普通攻击：峥嵘",
+    "skillDescription": "点按 <IconMap:Icon_Normal> 发动：\n    向前方进行至多四段的攻击，造成火属性伤害；\n    招式发动期间，打断等级提升。",
+    "agentId": 1471
+  },
+  {
+    "agent": "般岳",
+    "skillName": "普通攻击：崔巍",
+    "skillDescription": "点按 <IconMap:Icon_Special> 发动：\n    向前方进行至多四段的攻击，造成火属性伤害；\n    招式发动期间，抗打断等级提升。",
+    "agentId": 1471
+  },
+  {
+    "agent": "般岳",
+    "skillName": "普通攻击：焚身",
+    "skillDescription": "不处于[怒相]状态且拥有120点[嗔火]时，长按 <IconMap:Icon_Normal> 发动：\n    对周身敌人造成火属性伤害，随后进入[怒相]状态。",
+    "agentId": 1471
+  },
+  {
+    "agent": "般岳",
+    "skillName": "普通攻击：引火",
+    "skillDescription": "不处于接战状态、生命值大于50%且[嗔火]不足120点时，长按 <IconMap:Icon_Normal> 发动：\n    般岳主动消耗生命值回复[嗔火]，[嗔火]回复至120点时般岳将直接进入[怒相]状态；\n    进入战场时，获得一次释放该招式的机会，在勘域模式中该效果180秒内最多触发一次；\n    般岳最多消耗生命值至最大生命值的50%。",
+    "agentId": 1471
+  },
+  {
+    "agent": "般岳",
+    "skillName": "普通攻击：倾山",
+    "skillDescription": "当般岳处于[怒相]状态时，长按 <IconMap:Icon_Normal> 消耗120点[嗔火]发动：\n    般岳轰出巨大的山体攻击敌人，造成大量火属性伤害；\n    发动该招式后，般岳退出[怒相]状态；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1471
+  },
+  {
+    "agent": "般岳",
+    "skillName": "普通攻击：摧岳",
+    "skillDescription": "当般岳处于[怒相]状态时，通过普通攻击派生或者快速键入指令的方式释放两次不同的[强化特殊技]后，长按 <IconMap:Icon_Normal> 发动：\n    般岳向前方打出珠子禁锢敌人造成大量火属性伤害；\n    随后般岳将自动释放[普通攻击：倾山]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1471
+  },
+  {
+    "agent": "般岳",
+    "skillName": "闪避：不动如山",
+    "skillDescription": "攻击过程中不拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}点按 <IconMap:Icon_Evade> 发动：\n    般岳进入防御姿态，期间如果受到敌人攻击，会招架敌人攻击，累积失衡值；\n    如果在招式发动的瞬间受到敌人的攻击，则可以触发完美格挡；\n    成功招架敌人攻击时拥有无敌效果。",
+    "agentId": 1471
+  },
+  {
+    "agent": "般岳",
+    "skillName": "强化特殊技：地动",
+    "skillDescription": "闪能足够时，可通过以下三种方式发动：\n    在第三段或第四段[普通攻击：峥嵘]后点按 <IconMap:Icon_SpecialReady_Rp> 发动；\n    在[支援突击]、[闪避反击]、[快速支援]后长按 <IconMap:Icon_SpecialReady_Rp> 发动；\n    在发动任意[强化特殊技]、[普通攻击：焚身]、[连携技]、[终结技]、[支援突击]、[闪避反击]、[快速支援]时，快速键入指令 <IconMap:Icon_Normal> <IconMap:Icon_SpecialReady_Rp> <IconMap:Icon_Normal> 发动；\n    般岳连续重击地面，对敌人造成火属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1471
+  },
+  {
+    "agent": "般岳",
+    "skillName": "强化特殊技：山摇",
+    "skillDescription": "闪能足够时，可通过以下两种方式发动：\n    在第一段或第二段[普通攻击：崔巍]后点按 <IconMap:Icon_Normal> 发动；\n    在发动任意[强化特殊技]、[普通攻击：焚身]、[连携技]、[终结技]、[支援突击]、[闪避反击]、[快速支援]时，快速键入指令 <IconMap:Icon_SpecialReady_Rp> <IconMap:Icon_SpecialReady_Rp> <IconMap:Icon_Normal> 发动；\n    般岳掀出山体，对敌人造成火属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1471
+  },
+  {
+    "agent": "般岳",
+    "skillName": "强化特殊技：论道",
+    "skillDescription": "闪能足够时，可通过以下三种方式发动：\n    在第三段或第四段[普通攻击：崔巍]后点按 <IconMap:Icon_Normal> 发动；\n    在[支援突击]、[闪避反击]、[快速支援]后长按 <IconMap:Icon_Normal> 发动；\n    在发动任意[强化特殊技]、[普通攻击：焚身]、[连携技]、[终结技]、[支援突击]、[闪避反击]、[快速支援]时，快速键入指令 <IconMap:Icon_SpecialReady_Rp> <IconMap:Icon_Normal> <IconMap:Icon_SpecialReady_Rp> 发动；\n    般岳扔出珠子对前方敌人造成火属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1471
+  },
+  {
+    "agent": "般岳",
+    "skillName": "强化特殊技：狮子吼",
+    "skillDescription": "闪能足够时，可通过以下两种方式发动：\n    在第一段或第二段[普通攻击：峥嵘]后点按 <IconMap:Icon_SpecialReady_Rp> 发动；\n    在发动任意[强化特殊技]、[普通攻击：焚身]、[连携技]、[终结技]、[支援突击]、[闪避反击]、[快速支援]时，快速键入指令 <IconMap:Icon_Normal> <IconMap:Icon_Normal> <IconMap:Icon_SpecialReady_Rp> 发动；\n    般岳向前方发动音波攻击，对敌人造成火属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1471
+  },
+  {
+    "agent": "般岳",
+    "skillName": "强化特殊技：山摇·怒",
+    "skillDescription": "闪能足够时，在发动[强化特殊技：地动]时快速键入指令 <IconMap:Icon_SpecialReady_Rp> <IconMap:Icon_SpecialReady_Rp> <IconMap:Icon_Normal> 发动：\n    般岳掀出更巨大的山体，对敌人造成火属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1471
+  },
+  {
+    "agent": "般岳",
+    "skillName": "强化特殊技：狮子吼·怒",
+    "skillDescription": "闪能足够时，在发动[强化特殊技：论道]时快速键入指令 <IconMap:Icon_Normal> <IconMap:Icon_Normal> <IconMap:Icon_SpecialReady_Rp> 发动：\n    般岳向前方发动更强力的音波攻击，对敌人造成火属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1471
+  },
+  {
+    "agent": "般岳",
+    "skillName": "取消",
+    "skillDescription": "当般岳通过快速键入指令的方式派生[强化特殊技]时，可以打断正在发动的[强化特殊技]，每一种[强化特殊技]都存在特殊的完美打断节点，在完美打断节点之后打断[强化特殊技]，被打断的[强化特殊技]的攻击效果将不会受到影响，在完美打断节点时打断[强化特殊技]，被视为触发了[完美取消]；\n    处于[怒相]状态且拥有[山威]时，更容易触发[完美取消]。",
+    "agentId": 1471
+  },
+  {
+    "agent": "般岳",
+    "skillName": "闪避：越岭",
+    "skillDescription": "点按 <IconMap:Icon_Evade> 发动：\n    快速的冲刺闪避；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1471
+  },
+  {
+    "agent": "般岳",
+    "skillName": "闪避：叫阵",
+    "skillDescription": "拖曳{LAYOUT_CONSOLECONTROLLER#操作杆}{LAYOUT_FALLBACK#摇杆}半周并点按 <IconMap:Icon_Evade> 发动：\n    向后闪避并挑衅敌人；\n    在任意[强化特殊技]后衔接派生[闪避：叫阵]，可在[闪避：叫阵]期间快速键入对应指令继续派生[强化特殊技]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1471
+  },
+  {
+    "agent": "般岳",
+    "skillName": "冲刺攻击：飞砂",
+    "skillDescription": "闪避时，点按 <IconMap:Icon_Normal> 或在[闪避：叫阵]时长按 <IconMap:Icon_Normal> 发动：\n    向前方打出珠子，造成火属性伤害；\n    招式发动后可直接衔接[普通攻击：峥嵘]的第二段攻击或[普通攻击：崔巍]的第二段攻击。",
+    "agentId": 1471
+  },
+  {
+    "agent": "般岳",
+    "skillName": "闪避反击：扬砾",
+    "skillDescription": "通过[闪避：越岭]触发[极限闪避]后，点按 <IconMap:Icon_Normal> 或通过[闪避：叫阵]触发[极限闪避]后，长按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动攻击，造成火属性伤害；\n    招式发动后可直接衔接[普通攻击：峥嵘]的第三段攻击或[普通攻击：崔巍]的第三段攻击；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1471
+  },
+  {
+    "agent": "般岳",
+    "skillName": "连携技：怒焰",
+    "skillDescription": "触发[连携技]时，选择对应角色发动：\n    向前方发动大范围攻击，造成大量火属性伤害；\n    若般岳的[嗔火]大于120点，攻击结束后般岳会自动进入[怒相]状态；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1471
+  },
+  {
+    "agent": "般岳",
+    "skillName": "终结技：撼天动地",
+    "skillDescription": "喧响等级达到[极]时，点按 <IconMap:Icon_UltimateReady> 发动：\n    向前方发动大范围攻击，造成大量火属性伤害；\n    若般岳的[嗔火]大于120点，攻击结束后般岳会自动进入[怒相]状态；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1471
+  },
+  {
+    "agent": "般岳",
+    "skillName": "快速支援：磐岩",
+    "skillDescription": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n    对前方敌人发动连续攻击，造成火属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1471
+  },
+  {
+    "agent": "般岳",
+    "skillName": "招架支援：铁壁",
+    "skillDescription": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n    招架敌人的攻击，累积大量失衡值；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1471
+  },
+  {
+    "agent": "般岳",
+    "skillName": "支援突击：昂霄",
+    "skillDescription": "发动[招架支援]后，点按 <IconMap:Icon_Normal> 发动：\n    快速突进并发动攻击，造成火属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1471
+  },
+  {
+    "agent": "般岳",
+    "skillName": "支援突击：冲霄",
+    "skillDescription": "通过[闪避：不动如山]成功招架敌人攻击后，点按 <IconMap:Icon_Normal> 发动：\n    快速突进并发动攻击，造成火属性伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1471
+  },
+  {
+    "agent": "琉音",
+    "skillName": "普通攻击：很高兴为您服务",
+    "skillDescription": "点按 <IconMap:Icon_Normal> 发动：\n    向前方进行至多四段攻击，造成物理伤害。",
+    "agentId": 1481
+  },
+  {
+    "agent": "琉音",
+    "skillName": "普通攻击：猜拳把戏",
+    "skillDescription": "[强化特殊技：石头]或[强化特殊技：剪刀]后点按 <IconMap:Icon_Normal> 发动：\n    分别进行至多两段攻击，造成物理伤害；\n    招式发动期间抗打断等级提升，受到的伤害降低40%。",
+    "agentId": 1481
+  },
+  {
+    "agent": "琉音",
+    "skillName": "强化特殊技：送客！",
+    "skillDescription": "拥有[客诉]时，长按 <IconMap:Icon_Normal> 发动：\n    向前方发动抱拳攻击，发动时消耗1点[客诉]，造成物理伤害；\n    招式发动后将触发上一位角色的[快速支援]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1481
+  },
+  {
+    "agent": "琉音",
+    "skillName": "特殊技：欢迎手势",
+    "skillDescription": "点按 <IconMap:Icon_Special> 发动：\n    丢出双环切割敌人，造成物理伤害；\n    招式发动期间抗打断等级提升。",
+    "agentId": 1481
+  },
+  {
+    "agent": "琉音",
+    "skillName": "强化特殊技：石头",
+    "skillDescription": "能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n    发动拳头攻击，造成物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1481
+  },
+  {
+    "agent": "琉音",
+    "skillName": "强化特殊技：剪刀",
+    "skillDescription": "能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n    发动剪刀攻击，造成物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1481
+  },
+  {
+    "agent": "琉音",
+    "skillName": "强化特殊技：布！",
+    "skillDescription": "能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n    发动布攻击，造成物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1481
+  },
+  {
+    "agent": "琉音",
+    "skillName": "闪避：号码占线",
+    "skillDescription": "点按 <IconMap:Icon_Evade> 发动：\n    快速的冲刺闪避；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1481
+  },
+  {
+    "agent": "琉音",
+    "skillName": "冲刺攻击：突然来电",
+    "skillDescription": "闪避时，点按 <IconMap:Icon_Normal> 发动：\n    向前方进行突进攻击，造成物理伤害。",
+    "agentId": 1481
+  },
+  {
+    "agent": "琉音",
+    "skillName": "闪避反击：无法接听",
+    "skillDescription": "触发[极限闪避]后，点按 <IconMap:Icon_Normal> 发动：\n    对前方敌人发动连续攻击，造成物理伤害；\n    招式发动后可直接衔接[普通攻击：很高兴为您服务]的第四段攻击；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1481
+  },
+  {
+    "agent": "琉音",
+    "skillName": "连携技：迎宾踏垫",
+    "skillDescription": "触发[连携技]时，选择对应角色发动：\n    向前方发动连续踢击，造成大量物理伤害；\n    招式发动后可直接衔接[普通攻击：很高兴为您服务]的第四段攻击；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1481
+  },
+  {
+    "agent": "琉音",
+    "skillName": "终结技：拨打用户即刻停机",
+    "skillDescription": "喧响等级达到[极]时，点按 <IconMap:Icon_UltimateReady> 发动：\n    快速突进向前方发动弹指攻击，造成大量物理伤害；\n    招式发动后可直接衔接[普通攻击：很高兴为您服务]的第四段攻击；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1481
+  },
+  {
+    "agent": "琉音",
+    "skillName": "快速支援：呼叫转移",
+    "skillDescription": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n    对前方敌人发动连续攻击，造成物理伤害；\n    招式发动后可直接衔接[普通攻击：很高兴为您服务]的第四段攻击；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1481
+  },
+  {
+    "agent": "琉音",
+    "skillName": "招架支援：拒绝通话",
+    "skillDescription": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n    招架敌人的攻击，累积大量失衡值；\n    具有较为优秀的招架性能，承受高强度攻击时[支援点数]的消耗量降低；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1481
+  },
+  {
+    "agent": "琉音",
+    "skillName": "支援突击：连环呼叫",
+    "skillDescription": "发动[招架支援]后，点按 <IconMap:Icon_Normal> 发动：\n    快速突进并发动斩击，造成物理伤害；\n    招式发动后可直接衔接[普通攻击：很高兴为您服务]的第四段攻击；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1481
+  },
+  {
+    "agent": "千夏",
+    "skillName": "普通攻击：鬼马流星锤",
+    "skillDescription": "点按 <IconMap:Icon_Normal> 发动：\n    向前方进行至多四段的攻击，造成物理伤害。",
+    "agentId": 1491
+  },
+  {
+    "agent": "千夏",
+    "skillName": "普通攻击：坏猫出没",
+    "skillDescription": "战斗中，千夏位于后场，且场上没有持有[猫的凝视]的敌人时，泡泡会消耗1个[磨爪器]并自动发动攻击， 造成物理伤害；\n    队伍中任意角色开启[以太帷幕]时，千夏获得2个[磨爪器]；\n    队伍中任意角色对敌人施加属性异常效果时，千夏获得1个[磨爪器]，10秒内最多触发1次；\n    泡泡可以继承千夏的初始攻击力，千夏最多持有6个[磨爪器]。",
+    "agentId": 1491
+  },
+  {
+    "agent": "千夏",
+    "skillName": "特殊技：星星发射",
+    "skillDescription": "点按 <IconMap:Icon_Special> 发动：\n    使用气枪发射泡泡攻击前方敌人， 造成物理伤害；技能发动后，泡泡会加入战斗。",
+    "agentId": 1491
+  },
+  {
+    "agent": "千夏",
+    "skillName": "强化特殊技：泡泡糖轰炸",
+    "skillDescription": "能量足够时，点按  <IconMap:Icon_SpecialReady> 发动：\n    扔出泡泡，砸向目标并造成物理伤害；技能发动后，泡泡会加入战斗；\n    技能发动时，为全队代理人添加[天使协律]效果，持续40秒；\n    招式重击命中敌人时，将触发[快速支援]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1491
+  },
+  {
+    "agent": "千夏",
+    "skillName": "强化特殊技：特别拍照技巧",
+    "skillDescription": "进入[天使协律]状态后，点按  <IconMap:Icon_SpecialReady> 可以发动，或在[强化特殊技：泡泡糖轰炸]发动期间，保持长按  <IconMap:Icon_SpecialReady> 快速发动：\n    与泡泡协同攻击目标敌人，造成物理伤害；技能发动后，泡泡会加入战斗；\n    重击发动前，开启[以太帷幕·妄想重奏]，[以太帷幕·妄想重奏]生效期间，全队角色攻击力额外提升50点，持续40秒，千夏重复开启[以太帷幕·妄想重奏]前，将关闭已有的[以太帷幕·妄想重奏]；\n    招式重击命中敌人时，将触发[快速支援]；\n    招式发动期间拥有无敌效果，每次进入[天使协律]，只能发动1次[强化特殊技：特别拍照技巧]。",
+    "agentId": 1491
+  },
+  {
+    "agent": "千夏",
+    "skillName": "闪避：打不着我",
+    "skillDescription": "点按 <IconMap:Icon_Evade> 发动：\n    快速的冲刺闪避；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1491
+  },
+  {
+    "agent": "千夏",
+    "skillName": "冲刺攻击：冲天锤",
+    "skillDescription": "闪避时，点按 <IconMap:Icon_Normal> 发动：\n    挑飞前方敌人，造成物理伤害。",
+    "agentId": 1491
+  },
+  {
+    "agent": "千夏",
+    "skillName": "闪避反击：妄想三振",
+    "skillDescription": "触发[极限闪避]后，点按 <IconMap:Icon_Normal> 发动：\n    连续锤击前方敌人，造成物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1491
+  },
+  {
+    "agent": "千夏",
+    "skillName": "连携技：别惹猫咪",
+    "skillDescription": "触发[连携技]时，选择对应角色发动：\n    骑着泡泡冲向前方敌人，造成大量物理伤害；\n    招式重击命中敌人时，将触发[快速支援]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1491
+  },
+  {
+    "agent": "千夏",
+    "skillName": "终结技：通通砸碎！",
+    "skillDescription": "喧响等级达到[极]时，点按 <IconMap:Icon_UltimateReady> 发动：\n    用锤子连续攻击后，打出泡泡并引发爆炸，对范围内敌人造成大量物理伤害；\n    重击发动时，获得6个[磨爪器]；\n    从高空下砸命中敌人时，将触发[快速支援]并为全队角色回复{CAL:-50+AvatarSkillLevel(3)*250,1,2}点生命值；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1491
+  },
+  {
+    "agent": "千夏",
+    "skillName": "快速支援：狂音连打",
+    "skillDescription": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n    连续锤击前方敌人，造成物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1491
+  },
+  {
+    "agent": "千夏",
+    "skillName": "招架支援：上台恐惧症",
+    "skillDescription": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n    招架敌人的攻击，累积大量失衡值；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1491
+  },
+  {
+    "agent": "千夏",
+    "skillName": "支援突击：弹跳练习",
+    "skillDescription": "发动[招架支援]后，点按 <IconMap:Icon_Normal> 发动：\n    骑着气锤连续跳跃，对前方敌人造成大量物理伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1491
+  },
+  {
+    "agent": "爱芮",
+    "skillName": "普通攻击：甜心律动",
+    "skillDescription": "点按 <IconMap:Icon_Normal> 发动：\n    向前方进行至多四段的攻击，造成以太伤害；\n    第四段攻击若命中敌人，在攻击完成后会在场上生成1个[应援能量]。",
+    "agentId": 1501
+  },
+  {
+    "agent": "爱芮",
+    "skillName": "普通攻击：绝对音准",
+    "skillDescription": "长按 <IconMap:Icon_Normal> 发动：\n    爱芮进入蓄力状态，最多可进行三段蓄力，松开 <IconMap:Icon_Normal> 或达到最大蓄力时间时，爱芮将根据当前蓄力段数，向前方发动强力下落攻击，造成大量以太伤害；\n    若爱芮在蓄力时，自身附近有[应援能量]，则会吸收[应援能量]，每成功吸收1个[应援能量]可立即提升蓄力等级1段，且获得1层增益效果：下一次[普通攻击：绝对音准]造成的以太异常积蓄值提升10%。该增益效果最多叠加2层，攻击结束后效果移除；\n    在[普通攻击：甜心律动]第四段、[特殊技：全糖电音·不加冰]、[强化特殊技]、第三段[普通攻击：绝对音准]、[快速支援]、[连携技]、[终结技]后，若附近的[应援能量]大于等于2个，则可通过长按 <IconMap:Icon_Normal> 消耗2个[应援能量]直接快速发动第三段[普通攻击：绝对音准]；在第三段[普通攻击：绝对音准]、[连携技]、[终结技]后，若附近的[应援能量]大于等于2个，也可通过在一段时间内点按 <IconMap:Icon_Normal> 消耗2个[应援能量]直接快速发动第三段[普通攻击：绝对音准]；\n    蓄力期间抗打断等级提升，受到的伤害降低40%，攻击发动期间拥有无敌效果。",
+    "agentId": 1501
+  },
+  {
+    "agent": "爱芮",
+    "skillName": "特殊技：全糖电音",
+    "skillDescription": "点按 <IconMap:Icon_Special> 发动：\n    向前方发动踢击，造成以太伤害；\n    招式发动期间抗打断等级提升。",
+    "agentId": 1501
+  },
+  {
+    "agent": "爱芮",
+    "skillName": "特殊技：全糖电音·不加冰",
+    "skillDescription": "在[普通攻击：甜心律动]第四段、[支援突击]、[连携技]和[终结技]后，点按 <IconMap:Icon_Special> 发动：\n    向前方发动更加迅捷的踢击，造成以太伤害，若攻击命中敌人，在攻击完成后会在场上生成1个[应援能量]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1501
+  },
+  {
+    "agent": "爱芮",
+    "skillName": "强化特殊技：坠入妄想",
+    "skillDescription": "能量足够时，点按  <IconMap:Icon_SpecialReady> 发动：\n    向前方进行强力踢击并追加音波攻击，造成以太伤害，若攻击命中敌人，在攻击完成后会在场上生成3个[应援能量]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1501
+  },
+  {
+    "agent": "爱芮",
+    "skillName": "强化特殊技：光速入坑",
+    "skillDescription": "[强化特殊技：坠入妄想]发动后，能量足够时，点按 <IconMap:Icon_SpecialReady> 发动：\n    向前方追加强力下落攻击，造成以太伤害，若攻击命中敌人，在攻击完成后会在场上生成3个[应援能量]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1501
+  },
+  {
+    "agent": "爱芮",
+    "skillName": "闪避：精准卡点",
+    "skillDescription": "点按 <IconMap:Icon_Evade> 发动：\n    快速的冲刺闪避；\n    若在[普通攻击：甜心律动]中发动，此动作期间不会重置普通攻击段数；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1501
+  },
+  {
+    "agent": "爱芮",
+    "skillName": "冲刺攻击：丝滑小连招",
+    "skillDescription": "闪避时，点按 <IconMap:Icon_Normal> 发动：\n    向前飞进行快速斩击，造成以太伤害；\n    若在[普通攻击：甜心律动]中发动，此动作期间不会重置普通攻击段数。",
+    "agentId": 1501
+  },
+  {
+    "agent": "爱芮",
+    "skillName": "闪避反击：滑动变奏",
+    "skillDescription": "触发[极限闪避]后，点按 <IconMap:Icon_Normal> 发动：\n    对目标发动强力斩击，造成以太伤害；\n    招式发动后，可直接衔接第三段[普通攻击：甜心律动]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1501
+  },
+  {
+    "agent": "爱芮",
+    "skillName": "连携技：梦幻联动",
+    "skillDescription": "触发[连携技]时，选择对应角色发动：\n    向前方进行连续攻击，造成大量以太伤害，技能发动时在场上生成4个[应援能量]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1501
+  },
+  {
+    "agent": "爱芮",
+    "skillName": "终结技：元气百分百",
+    "skillDescription": "喧响等级达到[极]时，点按 <IconMap:Icon_UltimateReady> 发动：\n    释放自身全力，进入[妄想时刻]并对目标发动多段强力射击，造成大量以太伤害；\n    进入[妄想时刻]时爱芮获得3层[全场应援]效果，同时开启[以太帷幕·妄想重奏]，[以太帷幕·妄想重奏]生效期间，全队角色攻击力额外提升50点，持续30秒，爱芮重复开启[以太帷幕·妄想重奏]前，将关闭已有的[以太帷幕·妄想重奏]；\n    爱芮在蓄力时，若自身有[全场应援]效果，则优先消耗[全场应援]进行蓄力，每消耗1层[全场应援]可提升2段蓄力等级；\n    在进入[妄想时刻]时，若自身已有[全场应援]效果，则会先将剩余层数的[全场应援]转化为[应援能量]生成在场上，每层[全场应援]可转化为2个[应援能量]；\n    [妄想时刻]最大持续15秒，在[妄想时刻]期间，爱芮的第三段[普通攻击：绝对音准]将会提升为强化版；\n    退出[妄想时刻]时，若自身有[全场应援]效果，也会将剩余层数[全场应援]转化为[应援能量]生成在场上，每层[全场应援]可转化为2个[应援能量]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1501
+  },
+  {
+    "agent": "爱芮",
+    "skillName": "快速支援：破碎幻梦",
+    "skillDescription": "当前操作中的角色被击飞时，点按 <IconMap:Icon_Switch> 发动：\n    对目标发动强力斩击，造成以太伤害；\n    招式发动后，可直接衔接第三段[普通攻击：甜心律动]；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1501
+  },
+  {
+    "agent": "爱芮",
+    "skillName": "招架支援：极限救场",
+    "skillDescription": "前场角色即将被攻击时，点按 <IconMap:Icon_Switch> 发动：\n    招架敌人的攻击，累积大量失衡值；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1501
+  },
+  {
+    "agent": "爱芮",
+    "skillName": "支援突击：安可曲目",
+    "skillDescription": "发动[招架支援]后，点按 <IconMap:Icon_Normal> 发动：\n    对目标发动强力连续斩击，造成大量以太伤害；\n    招式发动期间拥有无敌效果。",
+    "agentId": 1501
+  }
+]

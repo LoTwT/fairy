@@ -1,0 +1,2786 @@
+[
+  {
+    "id": 1011,
+    "agent": "安比",
+    "rank": 1,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 1011,
+    "agent": "安比",
+    "rank": 2,
+    "hpBonus": 414,
+    "atkBonus": 34,
+    "defBonus": 34
+  },
+  {
+    "id": 1011,
+    "agent": "安比",
+    "rank": 3,
+    "hpBonus": 828,
+    "atkBonus": 68,
+    "defBonus": 68
+  },
+  {
+    "id": 1011,
+    "agent": "安比",
+    "rank": 4,
+    "hpBonus": 1242,
+    "atkBonus": 102,
+    "defBonus": 101
+  },
+  {
+    "id": 1011,
+    "agent": "安比",
+    "rank": 5,
+    "hpBonus": 1656,
+    "atkBonus": 135,
+    "defBonus": 135
+  },
+  {
+    "id": 1011,
+    "agent": "安比",
+    "rank": 6,
+    "hpBonus": 2069,
+    "atkBonus": 169,
+    "defBonus": 169
+  },
+  {
+    "id": 1021,
+    "agent": "猫又",
+    "rank": 1,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 1021,
+    "agent": "猫又",
+    "rank": 2,
+    "hpBonus": 417,
+    "atkBonus": 47,
+    "defBonus": 32
+  },
+  {
+    "id": 1021,
+    "agent": "猫又",
+    "rank": 3,
+    "hpBonus": 834,
+    "atkBonus": 94,
+    "defBonus": 65
+  },
+  {
+    "id": 1021,
+    "agent": "猫又",
+    "rank": 4,
+    "hpBonus": 1251,
+    "atkBonus": 140,
+    "defBonus": 97
+  },
+  {
+    "id": 1021,
+    "agent": "猫又",
+    "rank": 5,
+    "hpBonus": 1668,
+    "atkBonus": 187,
+    "defBonus": 130
+  },
+  {
+    "id": 1021,
+    "agent": "猫又",
+    "rank": 6,
+    "hpBonus": 2086,
+    "atkBonus": 234,
+    "defBonus": 162
+  },
+  {
+    "id": 1031,
+    "agent": "妮可",
+    "rank": 1,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 1031,
+    "agent": "妮可",
+    "rank": 2,
+    "hpBonus": 449,
+    "atkBonus": 33,
+    "defBonus": 34
+  },
+  {
+    "id": 1031,
+    "agent": "妮可",
+    "rank": 3,
+    "hpBonus": 899,
+    "atkBonus": 67,
+    "defBonus": 69
+  },
+  {
+    "id": 1031,
+    "agent": "妮可",
+    "rank": 4,
+    "hpBonus": 1348,
+    "atkBonus": 100,
+    "defBonus": 103
+  },
+  {
+    "id": 1031,
+    "agent": "妮可",
+    "rank": 5,
+    "hpBonus": 1798,
+    "atkBonus": 133,
+    "defBonus": 137
+  },
+  {
+    "id": 1031,
+    "agent": "妮可",
+    "rank": 6,
+    "hpBonus": 2247,
+    "atkBonus": 167,
+    "defBonus": 172
+  },
+  {
+    "id": 1041,
+    "agent": "「11号」",
+    "rank": 1,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 1041,
+    "agent": "「11号」",
+    "rank": 2,
+    "hpBonus": 423,
+    "atkBonus": 46,
+    "defBonus": 34
+  },
+  {
+    "id": 1041,
+    "agent": "「11号」",
+    "rank": 3,
+    "hpBonus": 847,
+    "atkBonus": 91,
+    "defBonus": 68
+  },
+  {
+    "id": 1041,
+    "agent": "「11号」",
+    "rank": 4,
+    "hpBonus": 1270,
+    "atkBonus": 137,
+    "defBonus": 101
+  },
+  {
+    "id": 1041,
+    "agent": "「11号」",
+    "rank": 5,
+    "hpBonus": 1694,
+    "atkBonus": 183,
+    "defBonus": 135
+  },
+  {
+    "id": 1041,
+    "agent": "「11号」",
+    "rank": 6,
+    "hpBonus": 2117,
+    "atkBonus": 228,
+    "defBonus": 169
+  },
+  {
+    "id": 1051,
+    "agent": "伊德海莉",
+    "rank": 1,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 1051,
+    "agent": "伊德海莉",
+    "rank": 2,
+    "hpBonus": 469,
+    "atkBonus": 44,
+    "defBonus": 25
+  },
+  {
+    "id": 1051,
+    "agent": "伊德海莉",
+    "rank": 3,
+    "hpBonus": 938,
+    "atkBonus": 88,
+    "defBonus": 49
+  },
+  {
+    "id": 1051,
+    "agent": "伊德海莉",
+    "rank": 4,
+    "hpBonus": 1407,
+    "atkBonus": 132,
+    "defBonus": 74
+  },
+  {
+    "id": 1051,
+    "agent": "伊德海莉",
+    "rank": 5,
+    "hpBonus": 1875,
+    "atkBonus": 177,
+    "defBonus": 99
+  },
+  {
+    "id": 1051,
+    "agent": "伊德海莉",
+    "rank": 6,
+    "hpBonus": 2344,
+    "atkBonus": 221,
+    "defBonus": 124
+  },
+  {
+    "id": 1061,
+    "agent": "可琳",
+    "rank": 1,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 1061,
+    "agent": "可琳",
+    "rank": 2,
+    "hpBonus": 385,
+    "atkBonus": 41,
+    "defBonus": 33
+  },
+  {
+    "id": 1061,
+    "agent": "可琳",
+    "rank": 3,
+    "hpBonus": 770,
+    "atkBonus": 83,
+    "defBonus": 67
+  },
+  {
+    "id": 1061,
+    "agent": "可琳",
+    "rank": 4,
+    "hpBonus": 1155,
+    "atkBonus": 124,
+    "defBonus": 100
+  },
+  {
+    "id": 1061,
+    "agent": "可琳",
+    "rank": 5,
+    "hpBonus": 1540,
+    "atkBonus": 166,
+    "defBonus": 133
+  },
+  {
+    "id": 1061,
+    "agent": "可琳",
+    "rank": 6,
+    "hpBonus": 1925,
+    "atkBonus": 207,
+    "defBonus": 167
+  },
+  {
+    "id": 1071,
+    "agent": "凯撒",
+    "rank": 1,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 1071,
+    "agent": "凯撒",
+    "rank": 2,
+    "hpBonus": 526,
+    "atkBonus": 38,
+    "defBonus": 42
+  },
+  {
+    "id": 1071,
+    "agent": "凯撒",
+    "rank": 3,
+    "hpBonus": 1051,
+    "atkBonus": 76,
+    "defBonus": 83
+  },
+  {
+    "id": 1071,
+    "agent": "凯撒",
+    "rank": 4,
+    "hpBonus": 1577,
+    "atkBonus": 113,
+    "defBonus": 125
+  },
+  {
+    "id": 1071,
+    "agent": "凯撒",
+    "rank": 5,
+    "hpBonus": 2102,
+    "atkBonus": 151,
+    "defBonus": 166
+  },
+  {
+    "id": 1071,
+    "agent": "凯撒",
+    "rank": 6,
+    "hpBonus": 2628,
+    "atkBonus": 189,
+    "defBonus": 208
+  },
+  {
+    "id": 1081,
+    "agent": "比利",
+    "rank": 1,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 1081,
+    "agent": "比利",
+    "rank": 2,
+    "hpBonus": 381,
+    "atkBonus": 40,
+    "defBonus": 33
+  },
+  {
+    "id": 1081,
+    "agent": "比利",
+    "rank": 3,
+    "hpBonus": 762,
+    "atkBonus": 81,
+    "defBonus": 67
+  },
+  {
+    "id": 1081,
+    "agent": "比利",
+    "rank": 4,
+    "hpBonus": 1143,
+    "atkBonus": 121,
+    "defBonus": 100
+  },
+  {
+    "id": 1081,
+    "agent": "比利",
+    "rank": 5,
+    "hpBonus": 1524,
+    "atkBonus": 162,
+    "defBonus": 134
+  },
+  {
+    "id": 1081,
+    "agent": "比利",
+    "rank": 6,
+    "hpBonus": 1906,
+    "atkBonus": 202,
+    "defBonus": 167
+  },
+  {
+    "id": 1091,
+    "agent": "雅",
+    "rank": 1,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 1091,
+    "agent": "雅",
+    "rank": 2,
+    "hpBonus": 423,
+    "atkBonus": 45,
+    "defBonus": 33
+  },
+  {
+    "id": 1091,
+    "agent": "雅",
+    "rank": 3,
+    "hpBonus": 847,
+    "atkBonus": 90,
+    "defBonus": 67
+  },
+  {
+    "id": 1091,
+    "agent": "雅",
+    "rank": 4,
+    "hpBonus": 1270,
+    "atkBonus": 136,
+    "defBonus": 100
+  },
+  {
+    "id": 1091,
+    "agent": "雅",
+    "rank": 5,
+    "hpBonus": 1694,
+    "atkBonus": 181,
+    "defBonus": 134
+  },
+  {
+    "id": 1091,
+    "agent": "雅",
+    "rank": 6,
+    "hpBonus": 2117,
+    "atkBonus": 226,
+    "defBonus": 167
+  },
+  {
+    "id": 1101,
+    "agent": "珂蕾妲",
+    "rank": 1,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 1101,
+    "agent": "珂蕾妲",
+    "rank": 2,
+    "hpBonus": 448,
+    "atkBonus": 38,
+    "defBonus": 33
+  },
+  {
+    "id": 1101,
+    "agent": "珂蕾妲",
+    "rank": 3,
+    "hpBonus": 897,
+    "atkBonus": 76,
+    "defBonus": 66
+  },
+  {
+    "id": 1101,
+    "agent": "珂蕾妲",
+    "rank": 4,
+    "hpBonus": 1345,
+    "atkBonus": 113,
+    "defBonus": 98
+  },
+  {
+    "id": 1101,
+    "agent": "珂蕾妲",
+    "rank": 5,
+    "hpBonus": 1794,
+    "atkBonus": 151,
+    "defBonus": 131
+  },
+  {
+    "id": 1101,
+    "agent": "珂蕾妲",
+    "rank": 6,
+    "hpBonus": 2242,
+    "atkBonus": 189,
+    "defBonus": 164
+  },
+  {
+    "id": 1111,
+    "agent": "安东",
+    "rank": 1,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 1111,
+    "agent": "安东",
+    "rank": 2,
+    "hpBonus": 398,
+    "atkBonus": 41,
+    "defBonus": 34
+  },
+  {
+    "id": 1111,
+    "agent": "安东",
+    "rank": 3,
+    "hpBonus": 797,
+    "atkBonus": 81,
+    "defBonus": 69
+  },
+  {
+    "id": 1111,
+    "agent": "安东",
+    "rank": 4,
+    "hpBonus": 1195,
+    "atkBonus": 122,
+    "defBonus": 103
+  },
+  {
+    "id": 1111,
+    "agent": "安东",
+    "rank": 5,
+    "hpBonus": 1593,
+    "atkBonus": 163,
+    "defBonus": 137
+  },
+  {
+    "id": 1111,
+    "agent": "安东",
+    "rank": 6,
+    "hpBonus": 1992,
+    "atkBonus": 203,
+    "defBonus": 172
+  },
+  {
+    "id": 1121,
+    "agent": "本",
+    "rank": 1,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 1121,
+    "agent": "本",
+    "rank": 2,
+    "hpBonus": 473,
+    "atkBonus": 34,
+    "defBonus": 40
+  },
+  {
+    "id": 1121,
+    "agent": "本",
+    "rank": 3,
+    "hpBonus": 947,
+    "atkBonus": 67,
+    "defBonus": 80
+  },
+  {
+    "id": 1121,
+    "agent": "本",
+    "rank": 4,
+    "hpBonus": 1420,
+    "atkBonus": 101,
+    "defBonus": 120
+  },
+  {
+    "id": 1121,
+    "agent": "本",
+    "rank": 5,
+    "hpBonus": 1893,
+    "atkBonus": 134,
+    "defBonus": 160
+  },
+  {
+    "id": 1121,
+    "agent": "本",
+    "rank": 6,
+    "hpBonus": 2366,
+    "atkBonus": 168,
+    "defBonus": 200
+  },
+  {
+    "id": 1131,
+    "agent": "苍角",
+    "rank": 1,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 1131,
+    "agent": "苍角",
+    "rank": 2,
+    "hpBonus": 443,
+    "atkBonus": 34,
+    "defBonus": 33
+  },
+  {
+    "id": 1131,
+    "agent": "苍角",
+    "rank": 3,
+    "hpBonus": 886,
+    "atkBonus": 68,
+    "defBonus": 66
+  },
+  {
+    "id": 1131,
+    "agent": "苍角",
+    "rank": 4,
+    "hpBonus": 1329,
+    "atkBonus": 103,
+    "defBonus": 99
+  },
+  {
+    "id": 1131,
+    "agent": "苍角",
+    "rank": 5,
+    "hpBonus": 1772,
+    "atkBonus": 137,
+    "defBonus": 132
+  },
+  {
+    "id": 1131,
+    "agent": "苍角",
+    "rank": 6,
+    "hpBonus": 2214,
+    "atkBonus": 171,
+    "defBonus": 165
+  },
+  {
+    "id": 1141,
+    "agent": "莱卡恩",
+    "rank": 1,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 1141,
+    "agent": "莱卡恩",
+    "rank": 2,
+    "hpBonus": 464,
+    "atkBonus": 37,
+    "defBonus": 33
+  },
+  {
+    "id": 1141,
+    "agent": "莱卡恩",
+    "rank": 3,
+    "hpBonus": 929,
+    "atkBonus": 75,
+    "defBonus": 67
+  },
+  {
+    "id": 1141,
+    "agent": "莱卡恩",
+    "rank": 4,
+    "hpBonus": 1393,
+    "atkBonus": 112,
+    "defBonus": 100
+  },
+  {
+    "id": 1141,
+    "agent": "莱卡恩",
+    "rank": 5,
+    "hpBonus": 1857,
+    "atkBonus": 150,
+    "defBonus": 134
+  },
+  {
+    "id": 1141,
+    "agent": "莱卡恩",
+    "rank": 6,
+    "hpBonus": 2322,
+    "atkBonus": 187,
+    "defBonus": 167
+  },
+  {
+    "id": 1151,
+    "agent": "露西",
+    "rank": 1,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 1151,
+    "agent": "露西",
+    "rank": 2,
+    "hpBonus": 443,
+    "atkBonus": 34,
+    "defBonus": 34
+  },
+  {
+    "id": 1151,
+    "agent": "露西",
+    "rank": 3,
+    "hpBonus": 886,
+    "atkBonus": 68,
+    "defBonus": 68
+  },
+  {
+    "id": 1151,
+    "agent": "露西",
+    "rank": 4,
+    "hpBonus": 1329,
+    "atkBonus": 102,
+    "defBonus": 101
+  },
+  {
+    "id": 1151,
+    "agent": "露西",
+    "rank": 5,
+    "hpBonus": 1772,
+    "atkBonus": 135,
+    "defBonus": 135
+  },
+  {
+    "id": 1151,
+    "agent": "露西",
+    "rank": 6,
+    "hpBonus": 2214,
+    "atkBonus": 169,
+    "defBonus": 169
+  },
+  {
+    "id": 1161,
+    "agent": "莱特",
+    "rank": 1,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 1161,
+    "agent": "莱特",
+    "rank": 2,
+    "hpBonus": 432,
+    "atkBonus": 47,
+    "defBonus": 34
+  },
+  {
+    "id": 1161,
+    "agent": "莱特",
+    "rank": 3,
+    "hpBonus": 864,
+    "atkBonus": 95,
+    "defBonus": 68
+  },
+  {
+    "id": 1161,
+    "agent": "莱特",
+    "rank": 4,
+    "hpBonus": 1296,
+    "atkBonus": 142,
+    "defBonus": 101
+  },
+  {
+    "id": 1161,
+    "agent": "莱特",
+    "rank": 5,
+    "hpBonus": 1727,
+    "atkBonus": 190,
+    "defBonus": 135
+  },
+  {
+    "id": 1161,
+    "agent": "莱特",
+    "rank": 6,
+    "hpBonus": 2159,
+    "atkBonus": 237,
+    "defBonus": 169
+  },
+  {
+    "id": 1171,
+    "agent": "柏妮思",
+    "rank": 1,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 1171,
+    "agent": "柏妮思",
+    "rank": 2,
+    "hpBonus": 407,
+    "atkBonus": 44,
+    "defBonus": 33
+  },
+  {
+    "id": 1171,
+    "agent": "柏妮思",
+    "rank": 3,
+    "hpBonus": 813,
+    "atkBonus": 89,
+    "defBonus": 66
+  },
+  {
+    "id": 1171,
+    "agent": "柏妮思",
+    "rank": 4,
+    "hpBonus": 1220,
+    "atkBonus": 133,
+    "defBonus": 99
+  },
+  {
+    "id": 1171,
+    "agent": "柏妮思",
+    "rank": 5,
+    "hpBonus": 1626,
+    "atkBonus": 177,
+    "defBonus": 133
+  },
+  {
+    "id": 1171,
+    "agent": "柏妮思",
+    "rank": 6,
+    "hpBonus": 2033,
+    "atkBonus": 222,
+    "defBonus": 166
+  },
+  {
+    "id": 1181,
+    "agent": "格莉丝",
+    "rank": 1,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 1181,
+    "agent": "格莉丝",
+    "rank": 2,
+    "hpBonus": 413,
+    "atkBonus": 42,
+    "defBonus": 33
+  },
+  {
+    "id": 1181,
+    "agent": "格莉丝",
+    "rank": 3,
+    "hpBonus": 826,
+    "atkBonus": 85,
+    "defBonus": 66
+  },
+  {
+    "id": 1181,
+    "agent": "格莉丝",
+    "rank": 4,
+    "hpBonus": 1239,
+    "atkBonus": 127,
+    "defBonus": 99
+  },
+  {
+    "id": 1181,
+    "agent": "格莉丝",
+    "rank": 5,
+    "hpBonus": 1651,
+    "atkBonus": 170,
+    "defBonus": 133
+  },
+  {
+    "id": 1181,
+    "agent": "格莉丝",
+    "rank": 6,
+    "hpBonus": 2064,
+    "atkBonus": 212,
+    "defBonus": 166
+  },
+  {
+    "id": 1191,
+    "agent": "艾莲",
+    "rank": 1,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 1191,
+    "agent": "艾莲",
+    "rank": 2,
+    "hpBonus": 423,
+    "atkBonus": 48,
+    "defBonus": 33
+  },
+  {
+    "id": 1191,
+    "agent": "艾莲",
+    "rank": 3,
+    "hpBonus": 847,
+    "atkBonus": 96,
+    "defBonus": 67
+  },
+  {
+    "id": 1191,
+    "agent": "艾莲",
+    "rank": 4,
+    "hpBonus": 1270,
+    "atkBonus": 145,
+    "defBonus": 100
+  },
+  {
+    "id": 1191,
+    "agent": "艾莲",
+    "rank": 5,
+    "hpBonus": 1694,
+    "atkBonus": 193,
+    "defBonus": 134
+  },
+  {
+    "id": 1191,
+    "agent": "艾莲",
+    "rank": 6,
+    "hpBonus": 2117,
+    "atkBonus": 241,
+    "defBonus": 167
+  },
+  {
+    "id": 1201,
+    "agent": "悠真",
+    "rank": 1,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 1201,
+    "agent": "悠真",
+    "rank": 2,
+    "hpBonus": 409,
+    "atkBonus": 47,
+    "defBonus": 33
+  },
+  {
+    "id": 1201,
+    "agent": "悠真",
+    "rank": 3,
+    "hpBonus": 817,
+    "atkBonus": 94,
+    "defBonus": 66
+  },
+  {
+    "id": 1201,
+    "agent": "悠真",
+    "rank": 4,
+    "hpBonus": 1226,
+    "atkBonus": 141,
+    "defBonus": 99
+  },
+  {
+    "id": 1201,
+    "agent": "悠真",
+    "rank": 5,
+    "hpBonus": 1635,
+    "atkBonus": 188,
+    "defBonus": 133
+  },
+  {
+    "id": 1201,
+    "agent": "悠真",
+    "rank": 6,
+    "hpBonus": 2043,
+    "atkBonus": 235,
+    "defBonus": 166
+  },
+  {
+    "id": 1211,
+    "agent": "丽娜",
+    "rank": 1,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 1211,
+    "agent": "丽娜",
+    "rank": 2,
+    "hpBonus": 475,
+    "atkBonus": 37,
+    "defBonus": 33
+  },
+  {
+    "id": 1211,
+    "agent": "丽娜",
+    "rank": 3,
+    "hpBonus": 950,
+    "atkBonus": 74,
+    "defBonus": 66
+  },
+  {
+    "id": 1211,
+    "agent": "丽娜",
+    "rank": 4,
+    "hpBonus": 1425,
+    "atkBonus": 111,
+    "defBonus": 99
+  },
+  {
+    "id": 1211,
+    "agent": "丽娜",
+    "rank": 5,
+    "hpBonus": 1900,
+    "atkBonus": 147,
+    "defBonus": 133
+  },
+  {
+    "id": 1211,
+    "agent": "丽娜",
+    "rank": 6,
+    "hpBonus": 2375,
+    "atkBonus": 184,
+    "defBonus": 166
+  },
+  {
+    "id": 1221,
+    "agent": "柳",
+    "rank": 1,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 1221,
+    "agent": "柳",
+    "rank": 2,
+    "hpBonus": 430,
+    "atkBonus": 45,
+    "defBonus": 34
+  },
+  {
+    "id": 1221,
+    "agent": "柳",
+    "rank": 3,
+    "hpBonus": 859,
+    "atkBonus": 90,
+    "defBonus": 68
+  },
+  {
+    "id": 1221,
+    "agent": "柳",
+    "rank": 4,
+    "hpBonus": 1289,
+    "atkBonus": 134,
+    "defBonus": 101
+  },
+  {
+    "id": 1221,
+    "agent": "柳",
+    "rank": 5,
+    "hpBonus": 1719,
+    "atkBonus": 179,
+    "defBonus": 135
+  },
+  {
+    "id": 1221,
+    "agent": "柳",
+    "rank": 6,
+    "hpBonus": 2149,
+    "atkBonus": 224,
+    "defBonus": 169
+  },
+  {
+    "id": 1241,
+    "agent": "朱鸢",
+    "rank": 1,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 1241,
+    "agent": "朱鸢",
+    "rank": 2,
+    "hpBonus": 413,
+    "atkBonus": 47,
+    "defBonus": 33
+  },
+  {
+    "id": 1241,
+    "agent": "朱鸢",
+    "rank": 3,
+    "hpBonus": 826,
+    "atkBonus": 95,
+    "defBonus": 66
+  },
+  {
+    "id": 1241,
+    "agent": "朱鸢",
+    "rank": 4,
+    "hpBonus": 1239,
+    "atkBonus": 142,
+    "defBonus": 99
+  },
+  {
+    "id": 1241,
+    "agent": "朱鸢",
+    "rank": 5,
+    "hpBonus": 1651,
+    "atkBonus": 189,
+    "defBonus": 133
+  },
+  {
+    "id": 1241,
+    "agent": "朱鸢",
+    "rank": 6,
+    "hpBonus": 2064,
+    "atkBonus": 236,
+    "defBonus": 166
+  },
+  {
+    "id": 1251,
+    "agent": "青衣",
+    "rank": 1,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 1251,
+    "agent": "青衣",
+    "rank": 2,
+    "hpBonus": 455,
+    "atkBonus": 39,
+    "defBonus": 34
+  },
+  {
+    "id": 1251,
+    "agent": "青衣",
+    "rank": 3,
+    "hpBonus": 911,
+    "atkBonus": 78,
+    "defBonus": 68
+  },
+  {
+    "id": 1251,
+    "agent": "青衣",
+    "rank": 4,
+    "hpBonus": 1366,
+    "atkBonus": 117,
+    "defBonus": 101
+  },
+  {
+    "id": 1251,
+    "agent": "青衣",
+    "rank": 5,
+    "hpBonus": 1821,
+    "atkBonus": 156,
+    "defBonus": 135
+  },
+  {
+    "id": 1251,
+    "agent": "青衣",
+    "rank": 6,
+    "hpBonus": 2276,
+    "atkBonus": 195,
+    "defBonus": 169
+  },
+  {
+    "id": 1261,
+    "agent": "简",
+    "rank": 1,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 1261,
+    "agent": "简",
+    "rank": 2,
+    "hpBonus": 430,
+    "atkBonus": 45,
+    "defBonus": 33
+  },
+  {
+    "id": 1261,
+    "agent": "简",
+    "rank": 3,
+    "hpBonus": 859,
+    "atkBonus": 90,
+    "defBonus": 67
+  },
+  {
+    "id": 1261,
+    "agent": "简",
+    "rank": 4,
+    "hpBonus": 1289,
+    "atkBonus": 136,
+    "defBonus": 100
+  },
+  {
+    "id": 1261,
+    "agent": "简",
+    "rank": 5,
+    "hpBonus": 1719,
+    "atkBonus": 181,
+    "defBonus": 134
+  },
+  {
+    "id": 1261,
+    "agent": "简",
+    "rank": 6,
+    "hpBonus": 2149,
+    "atkBonus": 226,
+    "defBonus": 167
+  },
+  {
+    "id": 1271,
+    "agent": "赛斯",
+    "rank": 1,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 1271,
+    "agent": "赛斯",
+    "rank": 2,
+    "hpBonus": 480,
+    "atkBonus": 33,
+    "defBonus": 41
+  },
+  {
+    "id": 1271,
+    "agent": "赛斯",
+    "rank": 3,
+    "hpBonus": 960,
+    "atkBonus": 66,
+    "defBonus": 82
+  },
+  {
+    "id": 1271,
+    "agent": "赛斯",
+    "rank": 4,
+    "hpBonus": 1440,
+    "atkBonus": 99,
+    "defBonus": 123
+  },
+  {
+    "id": 1271,
+    "agent": "赛斯",
+    "rank": 5,
+    "hpBonus": 1920,
+    "atkBonus": 132,
+    "defBonus": 165
+  },
+  {
+    "id": 1271,
+    "agent": "赛斯",
+    "rank": 6,
+    "hpBonus": 2401,
+    "atkBonus": 165,
+    "defBonus": 206
+  },
+  {
+    "id": 1281,
+    "agent": "派派",
+    "rank": 1,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 1281,
+    "agent": "派派",
+    "rank": 2,
+    "hpBonus": 385,
+    "atkBonus": 39,
+    "defBonus": 34
+  },
+  {
+    "id": 1281,
+    "agent": "派派",
+    "rank": 3,
+    "hpBonus": 770,
+    "atkBonus": 78,
+    "defBonus": 68
+  },
+  {
+    "id": 1281,
+    "agent": "派派",
+    "rank": 4,
+    "hpBonus": 1155,
+    "atkBonus": 117,
+    "defBonus": 101
+  },
+  {
+    "id": 1281,
+    "agent": "派派",
+    "rank": 5,
+    "hpBonus": 1540,
+    "atkBonus": 156,
+    "defBonus": 135
+  },
+  {
+    "id": 1281,
+    "agent": "派派",
+    "rank": 6,
+    "hpBonus": 1925,
+    "atkBonus": 195,
+    "defBonus": 169
+  },
+  {
+    "id": 1291,
+    "agent": "雨果",
+    "rank": 1,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 1291,
+    "agent": "雨果",
+    "rank": 2,
+    "hpBonus": 438,
+    "atkBonus": 47,
+    "defBonus": 34
+  },
+  {
+    "id": 1291,
+    "agent": "雨果",
+    "rank": 3,
+    "hpBonus": 876,
+    "atkBonus": 95,
+    "defBonus": 68
+  },
+  {
+    "id": 1291,
+    "agent": "雨果",
+    "rank": 4,
+    "hpBonus": 1314,
+    "atkBonus": 142,
+    "defBonus": 102
+  },
+  {
+    "id": 1291,
+    "agent": "雨果",
+    "rank": 5,
+    "hpBonus": 1753,
+    "atkBonus": 189,
+    "defBonus": 136
+  },
+  {
+    "id": 1291,
+    "agent": "雨果",
+    "rank": 6,
+    "hpBonus": 2191,
+    "atkBonus": 236,
+    "defBonus": 170
+  },
+  {
+    "id": 1301,
+    "agent": "奥菲丝&「鬼火」",
+    "rank": 1,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 1301,
+    "agent": "奥菲丝&「鬼火」",
+    "rank": 2,
+    "hpBonus": 430,
+    "atkBonus": 48,
+    "defBonus": 34
+  },
+  {
+    "id": 1301,
+    "agent": "奥菲丝&「鬼火」",
+    "rank": 3,
+    "hpBonus": 859,
+    "atkBonus": 95,
+    "defBonus": 68
+  },
+  {
+    "id": 1301,
+    "agent": "奥菲丝&「鬼火」",
+    "rank": 4,
+    "hpBonus": 1289,
+    "atkBonus": 143,
+    "defBonus": 101
+  },
+  {
+    "id": 1301,
+    "agent": "奥菲丝&「鬼火」",
+    "rank": 5,
+    "hpBonus": 1719,
+    "atkBonus": 191,
+    "defBonus": 135
+  },
+  {
+    "id": 1301,
+    "agent": "奥菲丝&「鬼火」",
+    "rank": 6,
+    "hpBonus": 2149,
+    "atkBonus": 239,
+    "defBonus": 169
+  },
+  {
+    "id": 1311,
+    "agent": "耀嘉音",
+    "rank": 1,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 1311,
+    "agent": "耀嘉音",
+    "rank": 2,
+    "hpBonus": 475,
+    "atkBonus": 37,
+    "defBonus": 33
+  },
+  {
+    "id": 1311,
+    "agent": "耀嘉音",
+    "rank": 3,
+    "hpBonus": 950,
+    "atkBonus": 74,
+    "defBonus": 66
+  },
+  {
+    "id": 1311,
+    "agent": "耀嘉音",
+    "rank": 4,
+    "hpBonus": 1425,
+    "atkBonus": 110,
+    "defBonus": 99
+  },
+  {
+    "id": 1311,
+    "agent": "耀嘉音",
+    "rank": 5,
+    "hpBonus": 1900,
+    "atkBonus": 147,
+    "defBonus": 133
+  },
+  {
+    "id": 1311,
+    "agent": "耀嘉音",
+    "rank": 6,
+    "hpBonus": 2375,
+    "atkBonus": 184,
+    "defBonus": 166
+  },
+  {
+    "id": 1321,
+    "agent": "伊芙琳",
+    "rank": 1,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 1321,
+    "agent": "伊芙琳",
+    "rank": 2,
+    "hpBonus": 430,
+    "atkBonus": 48,
+    "defBonus": 34
+  },
+  {
+    "id": 1321,
+    "agent": "伊芙琳",
+    "rank": 3,
+    "hpBonus": 859,
+    "atkBonus": 95,
+    "defBonus": 68
+  },
+  {
+    "id": 1321,
+    "agent": "伊芙琳",
+    "rank": 4,
+    "hpBonus": 1289,
+    "atkBonus": 143,
+    "defBonus": 101
+  },
+  {
+    "id": 1321,
+    "agent": "伊芙琳",
+    "rank": 5,
+    "hpBonus": 1719,
+    "atkBonus": 191,
+    "defBonus": 135
+  },
+  {
+    "id": 1321,
+    "agent": "伊芙琳",
+    "rank": 6,
+    "hpBonus": 2149,
+    "atkBonus": 239,
+    "defBonus": 169
+  },
+  {
+    "id": 1331,
+    "agent": "薇薇安",
+    "rank": 1,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 1331,
+    "agent": "薇薇安",
+    "rank": 2,
+    "hpBonus": 423,
+    "atkBonus": 45,
+    "defBonus": 33
+  },
+  {
+    "id": 1331,
+    "agent": "薇薇安",
+    "rank": 3,
+    "hpBonus": 847,
+    "atkBonus": 90,
+    "defBonus": 67
+  },
+  {
+    "id": 1331,
+    "agent": "薇薇安",
+    "rank": 4,
+    "hpBonus": 1270,
+    "atkBonus": 136,
+    "defBonus": 100
+  },
+  {
+    "id": 1331,
+    "agent": "薇薇安",
+    "rank": 5,
+    "hpBonus": 1694,
+    "atkBonus": 181,
+    "defBonus": 134
+  },
+  {
+    "id": 1331,
+    "agent": "薇薇安",
+    "rank": 6,
+    "hpBonus": 2117,
+    "atkBonus": 226,
+    "defBonus": 167
+  },
+  {
+    "id": 1341,
+    "agent": "照",
+    "rank": 1,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 1341,
+    "agent": "照",
+    "rank": 2,
+    "hpBonus": 503,
+    "atkBonus": 39,
+    "defBonus": 39
+  },
+  {
+    "id": 1341,
+    "agent": "照",
+    "rank": 3,
+    "hpBonus": 1006,
+    "atkBonus": 79,
+    "defBonus": 77
+  },
+  {
+    "id": 1341,
+    "agent": "照",
+    "rank": 4,
+    "hpBonus": 1509,
+    "atkBonus": 118,
+    "defBonus": 116
+  },
+  {
+    "id": 1341,
+    "agent": "照",
+    "rank": 5,
+    "hpBonus": 2012,
+    "atkBonus": 157,
+    "defBonus": 155
+  },
+  {
+    "id": 1341,
+    "agent": "照",
+    "rank": 6,
+    "hpBonus": 2515,
+    "atkBonus": 197,
+    "defBonus": 194
+  },
+  {
+    "id": 1351,
+    "agent": "波可娜",
+    "rank": 1,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 1351,
+    "agent": "波可娜",
+    "rank": 2,
+    "hpBonus": 420,
+    "atkBonus": 34,
+    "defBonus": 33
+  },
+  {
+    "id": 1351,
+    "agent": "波可娜",
+    "rank": 3,
+    "hpBonus": 840,
+    "atkBonus": 68,
+    "defBonus": 67
+  },
+  {
+    "id": 1351,
+    "agent": "波可娜",
+    "rank": 4,
+    "hpBonus": 1260,
+    "atkBonus": 103,
+    "defBonus": 100
+  },
+  {
+    "id": 1351,
+    "agent": "波可娜",
+    "rank": 5,
+    "hpBonus": 1680,
+    "atkBonus": 137,
+    "defBonus": 134
+  },
+  {
+    "id": 1351,
+    "agent": "波可娜",
+    "rank": 6,
+    "hpBonus": 2100,
+    "atkBonus": 171,
+    "defBonus": 167
+  },
+  {
+    "id": 1361,
+    "agent": "「扳机」",
+    "rank": 1,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 1361,
+    "agent": "「扳机」",
+    "rank": 2,
+    "hpBonus": 437,
+    "atkBonus": 39,
+    "defBonus": 33
+  },
+  {
+    "id": 1361,
+    "agent": "「扳机」",
+    "rank": 3,
+    "hpBonus": 874,
+    "atkBonus": 77,
+    "defBonus": 66
+  },
+  {
+    "id": 1361,
+    "agent": "「扳机」",
+    "rank": 4,
+    "hpBonus": 1311,
+    "atkBonus": 116,
+    "defBonus": 99
+  },
+  {
+    "id": 1361,
+    "agent": "「扳机」",
+    "rank": 5,
+    "hpBonus": 1749,
+    "atkBonus": 154,
+    "defBonus": 133
+  },
+  {
+    "id": 1361,
+    "agent": "「扳机」",
+    "rank": 6,
+    "hpBonus": 2186,
+    "atkBonus": 193,
+    "defBonus": 166
+  },
+  {
+    "id": 1371,
+    "agent": "仪玄",
+    "rank": 1,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 1371,
+    "agent": "仪玄",
+    "rank": 2,
+    "hpBonus": 462,
+    "atkBonus": 45,
+    "defBonus": 24
+  },
+  {
+    "id": 1371,
+    "agent": "仪玄",
+    "rank": 3,
+    "hpBonus": 924,
+    "atkBonus": 90,
+    "defBonus": 49
+  },
+  {
+    "id": 1371,
+    "agent": "仪玄",
+    "rank": 4,
+    "hpBonus": 1386,
+    "atkBonus": 134,
+    "defBonus": 73
+  },
+  {
+    "id": 1371,
+    "agent": "仪玄",
+    "rank": 5,
+    "hpBonus": 1848,
+    "atkBonus": 179,
+    "defBonus": 97
+  },
+  {
+    "id": 1371,
+    "agent": "仪玄",
+    "rank": 6,
+    "hpBonus": 2310,
+    "atkBonus": 224,
+    "defBonus": 122
+  },
+  {
+    "id": 1381,
+    "agent": "零号·安比",
+    "rank": 1,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 1381,
+    "agent": "零号·安比",
+    "rank": 2,
+    "hpBonus": 423,
+    "atkBonus": 48,
+    "defBonus": 34
+  },
+  {
+    "id": 1381,
+    "agent": "零号·安比",
+    "rank": 3,
+    "hpBonus": 847,
+    "atkBonus": 95,
+    "defBonus": 68
+  },
+  {
+    "id": 1381,
+    "agent": "零号·安比",
+    "rank": 4,
+    "hpBonus": 1270,
+    "atkBonus": 143,
+    "defBonus": 101
+  },
+  {
+    "id": 1381,
+    "agent": "零号·安比",
+    "rank": 5,
+    "hpBonus": 1694,
+    "atkBonus": 191,
+    "defBonus": 135
+  },
+  {
+    "id": 1381,
+    "agent": "零号·安比",
+    "rank": 6,
+    "hpBonus": 2117,
+    "atkBonus": 239,
+    "defBonus": 169
+  },
+  {
+    "id": 1391,
+    "agent": "橘福福",
+    "rank": 1,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 1391,
+    "agent": "橘福福",
+    "rank": 2,
+    "hpBonus": 455,
+    "atkBonus": 39,
+    "defBonus": 33
+  },
+  {
+    "id": 1391,
+    "agent": "橘福福",
+    "rank": 3,
+    "hpBonus": 911,
+    "atkBonus": 79,
+    "defBonus": 66
+  },
+  {
+    "id": 1391,
+    "agent": "橘福福",
+    "rank": 4,
+    "hpBonus": 1366,
+    "atkBonus": 118,
+    "defBonus": 99
+  },
+  {
+    "id": 1391,
+    "agent": "橘福福",
+    "rank": 5,
+    "hpBonus": 1821,
+    "atkBonus": 157,
+    "defBonus": 132
+  },
+  {
+    "id": 1391,
+    "agent": "橘福福",
+    "rank": 6,
+    "hpBonus": 2276,
+    "atkBonus": 197,
+    "defBonus": 165
+  },
+  {
+    "id": 1401,
+    "agent": "爱丽丝",
+    "rank": 1,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 1401,
+    "agent": "爱丽丝",
+    "rank": 2,
+    "hpBonus": 423,
+    "atkBonus": 45,
+    "defBonus": 33
+  },
+  {
+    "id": 1401,
+    "agent": "爱丽丝",
+    "rank": 3,
+    "hpBonus": 847,
+    "atkBonus": 90,
+    "defBonus": 67
+  },
+  {
+    "id": 1401,
+    "agent": "爱丽丝",
+    "rank": 4,
+    "hpBonus": 1270,
+    "atkBonus": 136,
+    "defBonus": 100
+  },
+  {
+    "id": 1401,
+    "agent": "爱丽丝",
+    "rank": 5,
+    "hpBonus": 1694,
+    "atkBonus": 181,
+    "defBonus": 134
+  },
+  {
+    "id": 1401,
+    "agent": "爱丽丝",
+    "rank": 6,
+    "hpBonus": 2117,
+    "atkBonus": 226,
+    "defBonus": 167
+  },
+  {
+    "id": 1411,
+    "agent": "柚叶",
+    "rank": 1,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 1411,
+    "agent": "柚叶",
+    "rank": 2,
+    "hpBonus": 487,
+    "atkBonus": 39,
+    "defBonus": 34
+  },
+  {
+    "id": 1411,
+    "agent": "柚叶",
+    "rank": 3,
+    "hpBonus": 974,
+    "atkBonus": 78,
+    "defBonus": 68
+  },
+  {
+    "id": 1411,
+    "agent": "柚叶",
+    "rank": 4,
+    "hpBonus": 1461,
+    "atkBonus": 117,
+    "defBonus": 101
+  },
+  {
+    "id": 1411,
+    "agent": "柚叶",
+    "rank": 5,
+    "hpBonus": 1949,
+    "atkBonus": 156,
+    "defBonus": 135
+  },
+  {
+    "id": 1411,
+    "agent": "柚叶",
+    "rank": 6,
+    "hpBonus": 2436,
+    "atkBonus": 195,
+    "defBonus": 169
+  },
+  {
+    "id": 1421,
+    "agent": "潘引壶",
+    "rank": 1,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 1421,
+    "agent": "潘引壶",
+    "rank": 2,
+    "hpBonus": 466,
+    "atkBonus": 34,
+    "defBonus": 39
+  },
+  {
+    "id": 1421,
+    "agent": "潘引壶",
+    "rank": 3,
+    "hpBonus": 933,
+    "atkBonus": 68,
+    "defBonus": 79
+  },
+  {
+    "id": 1421,
+    "agent": "潘引壶",
+    "rank": 4,
+    "hpBonus": 1399,
+    "atkBonus": 102,
+    "defBonus": 118
+  },
+  {
+    "id": 1421,
+    "agent": "潘引壶",
+    "rank": 5,
+    "hpBonus": 1866,
+    "atkBonus": 136,
+    "defBonus": 157
+  },
+  {
+    "id": 1421,
+    "agent": "潘引壶",
+    "rank": 6,
+    "hpBonus": 2332,
+    "atkBonus": 170,
+    "defBonus": 197
+  },
+  {
+    "id": 1431,
+    "agent": "叶瞬光",
+    "rank": 1,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 1431,
+    "agent": "叶瞬光",
+    "rank": 2,
+    "hpBonus": 423,
+    "atkBonus": 48,
+    "defBonus": 33
+  },
+  {
+    "id": 1431,
+    "agent": "叶瞬光",
+    "rank": 3,
+    "hpBonus": 847,
+    "atkBonus": 96,
+    "defBonus": 67
+  },
+  {
+    "id": 1431,
+    "agent": "叶瞬光",
+    "rank": 4,
+    "hpBonus": 1270,
+    "atkBonus": 145,
+    "defBonus": 100
+  },
+  {
+    "id": 1431,
+    "agent": "叶瞬光",
+    "rank": 5,
+    "hpBonus": 1694,
+    "atkBonus": 193,
+    "defBonus": 134
+  },
+  {
+    "id": 1431,
+    "agent": "叶瞬光",
+    "rank": 6,
+    "hpBonus": 2117,
+    "atkBonus": 241,
+    "defBonus": 167
+  },
+  {
+    "id": 1441,
+    "agent": "真斗",
+    "rank": 1,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 1441,
+    "agent": "真斗",
+    "rank": 2,
+    "hpBonus": 426,
+    "atkBonus": 39,
+    "defBonus": 24
+  },
+  {
+    "id": 1441,
+    "agent": "真斗",
+    "rank": 3,
+    "hpBonus": 852,
+    "atkBonus": 78,
+    "defBonus": 49
+  },
+  {
+    "id": 1441,
+    "agent": "真斗",
+    "rank": 4,
+    "hpBonus": 1279,
+    "atkBonus": 116,
+    "defBonus": 73
+  },
+  {
+    "id": 1441,
+    "agent": "真斗",
+    "rank": 5,
+    "hpBonus": 1705,
+    "atkBonus": 155,
+    "defBonus": 98
+  },
+  {
+    "id": 1441,
+    "agent": "真斗",
+    "rank": 6,
+    "hpBonus": 2131,
+    "atkBonus": 194,
+    "defBonus": 122
+  },
+  {
+    "id": 1451,
+    "agent": "卢西娅",
+    "rank": 1,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 1451,
+    "agent": "卢西娅",
+    "rank": 2,
+    "hpBonus": 468,
+    "atkBonus": 39,
+    "defBonus": 33
+  },
+  {
+    "id": 1451,
+    "agent": "卢西娅",
+    "rank": 3,
+    "hpBonus": 936,
+    "atkBonus": 78,
+    "defBonus": 66
+  },
+  {
+    "id": 1451,
+    "agent": "卢西娅",
+    "rank": 4,
+    "hpBonus": 1403,
+    "atkBonus": 117,
+    "defBonus": 98
+  },
+  {
+    "id": 1451,
+    "agent": "卢西娅",
+    "rank": 5,
+    "hpBonus": 1871,
+    "atkBonus": 156,
+    "defBonus": 131
+  },
+  {
+    "id": 1451,
+    "agent": "卢西娅",
+    "rank": 6,
+    "hpBonus": 2339,
+    "atkBonus": 195,
+    "defBonus": 164
+  },
+  {
+    "id": 1461,
+    "agent": "「席德」",
+    "rank": 1,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 1461,
+    "agent": "「席德」",
+    "rank": 2,
+    "hpBonus": 423,
+    "atkBonus": 48,
+    "defBonus": 34
+  },
+  {
+    "id": 1461,
+    "agent": "「席德」",
+    "rank": 3,
+    "hpBonus": 847,
+    "atkBonus": 95,
+    "defBonus": 68
+  },
+  {
+    "id": 1461,
+    "agent": "「席德」",
+    "rank": 4,
+    "hpBonus": 1270,
+    "atkBonus": 143,
+    "defBonus": 101
+  },
+  {
+    "id": 1461,
+    "agent": "「席德」",
+    "rank": 5,
+    "hpBonus": 1694,
+    "atkBonus": 191,
+    "defBonus": 135
+  },
+  {
+    "id": 1461,
+    "agent": "「席德」",
+    "rank": 6,
+    "hpBonus": 2117,
+    "atkBonus": 239,
+    "defBonus": 169
+  },
+  {
+    "id": 1471,
+    "agent": "般岳",
+    "rank": 1,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 1471,
+    "agent": "般岳",
+    "rank": 2,
+    "hpBonus": 469,
+    "atkBonus": 44,
+    "defBonus": 25
+  },
+  {
+    "id": 1471,
+    "agent": "般岳",
+    "rank": 3,
+    "hpBonus": 938,
+    "atkBonus": 88,
+    "defBonus": 49
+  },
+  {
+    "id": 1471,
+    "agent": "般岳",
+    "rank": 4,
+    "hpBonus": 1407,
+    "atkBonus": 132,
+    "defBonus": 74
+  },
+  {
+    "id": 1471,
+    "agent": "般岳",
+    "rank": 5,
+    "hpBonus": 1875,
+    "atkBonus": 177,
+    "defBonus": 98
+  },
+  {
+    "id": 1471,
+    "agent": "般岳",
+    "rank": 6,
+    "hpBonus": 2344,
+    "atkBonus": 221,
+    "defBonus": 123
+  },
+  {
+    "id": 1481,
+    "agent": "琉音",
+    "rank": 1,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 1481,
+    "agent": "琉音",
+    "rank": 2,
+    "hpBonus": 455,
+    "atkBonus": 39,
+    "defBonus": 34
+  },
+  {
+    "id": 1481,
+    "agent": "琉音",
+    "rank": 3,
+    "hpBonus": 911,
+    "atkBonus": 78,
+    "defBonus": 68
+  },
+  {
+    "id": 1481,
+    "agent": "琉音",
+    "rank": 4,
+    "hpBonus": 1366,
+    "atkBonus": 117,
+    "defBonus": 101
+  },
+  {
+    "id": 1481,
+    "agent": "琉音",
+    "rank": 5,
+    "hpBonus": 1821,
+    "atkBonus": 156,
+    "defBonus": 135
+  },
+  {
+    "id": 1481,
+    "agent": "琉音",
+    "rank": 6,
+    "hpBonus": 2276,
+    "atkBonus": 195,
+    "defBonus": 169
+  },
+  {
+    "id": 1491,
+    "agent": "千夏",
+    "rank": 1,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 1491,
+    "agent": "千夏",
+    "rank": 2,
+    "hpBonus": 468,
+    "atkBonus": 39,
+    "defBonus": 33
+  },
+  {
+    "id": 1491,
+    "agent": "千夏",
+    "rank": 3,
+    "hpBonus": 936,
+    "atkBonus": 77,
+    "defBonus": 66
+  },
+  {
+    "id": 1491,
+    "agent": "千夏",
+    "rank": 4,
+    "hpBonus": 1403,
+    "atkBonus": 116,
+    "defBonus": 99
+  },
+  {
+    "id": 1491,
+    "agent": "千夏",
+    "rank": 5,
+    "hpBonus": 1871,
+    "atkBonus": 154,
+    "defBonus": 133
+  },
+  {
+    "id": 1491,
+    "agent": "千夏",
+    "rank": 6,
+    "hpBonus": 2339,
+    "atkBonus": 193,
+    "defBonus": 166
+  },
+  {
+    "id": 1501,
+    "agent": "爱芮",
+    "rank": 1,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 1501,
+    "agent": "爱芮",
+    "rank": 2,
+    "hpBonus": 428,
+    "atkBonus": 44,
+    "defBonus": 34
+  },
+  {
+    "id": 1501,
+    "agent": "爱芮",
+    "rank": 3,
+    "hpBonus": 855,
+    "atkBonus": 89,
+    "defBonus": 68
+  },
+  {
+    "id": 1501,
+    "agent": "爱芮",
+    "rank": 4,
+    "hpBonus": 1283,
+    "atkBonus": 133,
+    "defBonus": 103
+  },
+  {
+    "id": 1501,
+    "agent": "爱芮",
+    "rank": 5,
+    "hpBonus": 1710,
+    "atkBonus": 177,
+    "defBonus": 137
+  },
+  {
+    "id": 1501,
+    "agent": "爱芮",
+    "rank": 6,
+    "hpBonus": 2138,
+    "atkBonus": 222,
+    "defBonus": 171
+  },
+  {
+    "id": 1502,
+    "agent": "爱芮",
+    "rank": 1,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 1502,
+    "agent": "爱芮",
+    "rank": 2,
+    "hpBonus": 428,
+    "atkBonus": 44,
+    "defBonus": 34
+  },
+  {
+    "id": 1502,
+    "agent": "爱芮",
+    "rank": 3,
+    "hpBonus": 855,
+    "atkBonus": 89,
+    "defBonus": 68
+  },
+  {
+    "id": 1502,
+    "agent": "爱芮",
+    "rank": 4,
+    "hpBonus": 1283,
+    "atkBonus": 133,
+    "defBonus": 103
+  },
+  {
+    "id": 1502,
+    "agent": "爱芮",
+    "rank": 5,
+    "hpBonus": 1710,
+    "atkBonus": 177,
+    "defBonus": 137
+  },
+  {
+    "id": 1502,
+    "agent": "爱芮",
+    "rank": 6,
+    "hpBonus": 2138,
+    "atkBonus": 222,
+    "defBonus": 171
+  },
+  {
+    "id": 2031,
+    "agent": null,
+    "rank": 1,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 2031,
+    "agent": null,
+    "rank": 2,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 2031,
+    "agent": null,
+    "rank": 3,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 2031,
+    "agent": null,
+    "rank": 4,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 2031,
+    "agent": null,
+    "rank": 5,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 2031,
+    "agent": null,
+    "rank": 6,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 2032,
+    "agent": null,
+    "rank": 1,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 2032,
+    "agent": null,
+    "rank": 2,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 2032,
+    "agent": null,
+    "rank": 3,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 2032,
+    "agent": null,
+    "rank": 4,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 2032,
+    "agent": null,
+    "rank": 5,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 2032,
+    "agent": null,
+    "rank": 6,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 2033,
+    "agent": null,
+    "rank": 1,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 2033,
+    "agent": null,
+    "rank": 2,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 2033,
+    "agent": null,
+    "rank": 3,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 2033,
+    "agent": null,
+    "rank": 4,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 2033,
+    "agent": null,
+    "rank": 5,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 2033,
+    "agent": null,
+    "rank": 6,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 2034,
+    "agent": null,
+    "rank": 1,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 2034,
+    "agent": null,
+    "rank": 2,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 2034,
+    "agent": null,
+    "rank": 3,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 2034,
+    "agent": null,
+    "rank": 4,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 2034,
+    "agent": null,
+    "rank": 5,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 2034,
+    "agent": null,
+    "rank": 6,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 2035,
+    "agent": null,
+    "rank": 1,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 2035,
+    "agent": null,
+    "rank": 2,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 2035,
+    "agent": null,
+    "rank": 3,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 2035,
+    "agent": null,
+    "rank": 4,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 2035,
+    "agent": null,
+    "rank": 5,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 2035,
+    "agent": null,
+    "rank": 6,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 2036,
+    "agent": null,
+    "rank": 1,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 2036,
+    "agent": null,
+    "rank": 2,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 2036,
+    "agent": null,
+    "rank": 3,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 2036,
+    "agent": null,
+    "rank": 4,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 2036,
+    "agent": null,
+    "rank": 5,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 2036,
+    "agent": null,
+    "rank": 6,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 2041,
+    "agent": "叶瞬光",
+    "rank": 1,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 2041,
+    "agent": "叶瞬光",
+    "rank": 2,
+    "hpBonus": 382,
+    "atkBonus": 36,
+    "defBonus": 32
+  },
+  {
+    "id": 2041,
+    "agent": "叶瞬光",
+    "rank": 3,
+    "hpBonus": 765,
+    "atkBonus": 71,
+    "defBonus": 64
+  },
+  {
+    "id": 2041,
+    "agent": "叶瞬光",
+    "rank": 4,
+    "hpBonus": 1147,
+    "atkBonus": 107,
+    "defBonus": 96
+  },
+  {
+    "id": 2041,
+    "agent": "叶瞬光",
+    "rank": 5,
+    "hpBonus": 1530,
+    "atkBonus": 143,
+    "defBonus": 128
+  },
+  {
+    "id": 2041,
+    "agent": "叶瞬光",
+    "rank": 6,
+    "hpBonus": 1912,
+    "atkBonus": 178,
+    "defBonus": 159
+  },
+  {
+    "id": 2071,
+    "agent": "千夏",
+    "rank": 1,
+    "hpBonus": 0,
+    "atkBonus": 0,
+    "defBonus": 0
+  },
+  {
+    "id": 2071,
+    "agent": "千夏",
+    "rank": 2,
+    "hpBonus": 382,
+    "atkBonus": 36,
+    "defBonus": 32
+  },
+  {
+    "id": 2071,
+    "agent": "千夏",
+    "rank": 3,
+    "hpBonus": 765,
+    "atkBonus": 71,
+    "defBonus": 64
+  },
+  {
+    "id": 2071,
+    "agent": "千夏",
+    "rank": 4,
+    "hpBonus": 1147,
+    "atkBonus": 107,
+    "defBonus": 96
+  },
+  {
+    "id": 2071,
+    "agent": "千夏",
+    "rank": 5,
+    "hpBonus": 1530,
+    "atkBonus": 143,
+    "defBonus": 128
+  },
+  {
+    "id": 2071,
+    "agent": "千夏",
+    "rank": 6,
+    "hpBonus": 1912,
+    "atkBonus": 178,
+    "defBonus": 159
+  }
+]

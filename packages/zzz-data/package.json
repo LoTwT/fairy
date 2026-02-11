@@ -39,6 +39,8 @@
     "dist"
   ],
   "scripts": {
+    "generate": "tsx scripts/generate/index.ts",
+    "test": "vitest run",
     "build": "tsdown",
     "release": "pnpm run build && pnpm publish"
   },
@@ -46,6 +48,7 @@
     "@types/node": "^24.10.0",
     "exceljs": "^4.4.0",
     "tsdown": "^0.16.0",
-    "tsx": "^4.20.6"
+    "tsx": "^4.20.6",
+    "vitest": "^4.0.18"
   }
 }
