@@ -1,1 +1,1 @@
-export type * from "./types"
+// Public types — manually maintained, source-agnostic

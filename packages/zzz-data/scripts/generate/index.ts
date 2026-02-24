@@ -10,8 +10,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 const ROOT = resolve(__dirname, "../..")
 const XLSX_PATH = resolve(ROOT, "source.xlsx")
 const DATA_DIR = resolve(ROOT, "data/xlsx")
-const TYPES_DIR = resolve(ROOT, "src/types")
-const SRC_DIR = resolve(ROOT, "src")
+const TYPES_DIR = resolve(__dirname, "types")
 
 // ---------------------------------------------------------------------------
 // Type generation helpers
@@ -200,14 +199,6 @@ async function main() {
     "utf-8",
   )
   console.log(`✓ types/index.ts`)
-
-  // Generate src/index.ts
-  writeFileSync(
-    resolve(SRC_DIR, "index.ts"),
-    `export type * from "./types"\n`,
-    "utf-8",
-  )
-  console.log(`✓ src/index.ts`)
 
   console.log("\nDone!")
 }

@@ -40,13 +40,16 @@
   ],
   "scripts": {
     "generate": "tsx scripts/generate/index.ts",
+    "crawl": "tsx scripts/crawl/index.ts",
     "test": "vitest run",
     "build": "tsdown",
     "release": "pnpm run build && pnpm publish"
   },
   "devDependencies": {
     "@types/node": "^24.10.0",
+    "cheerio": "^1.0.0",
     "exceljs": "^4.4.0",
+    "playwright": "^1.52.0",
     "tsdown": "^0.16.0",
     "tsx": "^4.20.6",
     "vitest": "^4.0.18"
