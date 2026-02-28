@@ -12,10 +12,53 @@ packages/zzz-data/
 ├── scripts/crawl/            # 爬虫脚本
 │   └── index.ts             # 爬虫主入口（playwright + cheerio）
 ├── tests/generate.test.ts   # 结构一致性测试（xlsx ↔ config ↔ JSON）
+├── tests/calculator/        # 伤害计算模块测试
+│   ├── factors.test.ts      # 共享乘区（防御区、抗性区等）
+│   ├── normal.test.ts       # 常规伤害
+│   ├── sheer.test.ts        # 贯穿伤害
+│   ├── anomaly.test.ts      # 异常伤害
+│   └── disorder.test.ts     # 紊乱伤害
 ├── data/xlsx/*.json         # 生成的 JSON 数据（16 个文件）
 ├── data/crawl/*.json        # 爬虫输出的 JSON 数据
+├── src/calculator/          # 伤害计算模块（纯函数，可导出）
+│   ├── types.ts             # 所有参数/返回类型
+│   ├── factors.ts           # 各乘区独立函数（可自由组合）
+│   ├── normal.ts            # calcNormalDamage pipeline
+│   ├── sheer.ts             # calcSheerDamage pipeline
+│   ├── anomaly.ts           # calcAnomalyDamage pipeline
+│   ├── disorder.ts          # calcDisorderDamage pipeline
+│   └── index.ts             # re-export
 └── src/index.ts             # 公开类型入口（手动维护，与数据源无关）
 ```
+
+## 规格文档（docs/specs/）
+
+- [`damage-calculation.md`](../docs/specs/damage-calculation.md) — 四种伤害类型（常规/贯穿/异常/紊乱）的乘区公式、TypeScript 类型签名与参考数值
+
+## 计算器模块（src/calculator/）
+
+基于 [NGA 伤害计算帖](https://ngabbs.com/read.php?tid=44468012) 实现的纯函数伤害计算库。
+
+**设计原则：Factor Pipeline（可组合）**
+
+各乘区计算函数单独导出（`factors.ts`），标准伤害类型是预组合的 pipeline。当出现特殊机制时可直接组合底层函数，无需修改标准函数签名：
+
+```typescript
+// 跳过防御区、追加自定义乘区
+const base = calcBaseDamage(params)
+const bonus = calcBonusMultiplier(params.bonusDamageSum)
+const crit = calcExpectedCritMultiplier(params.crit)
+// defense = 跳过
+const resistance = calcResistanceMultiplier(params.resistance)
+const custom = myCustomMultiplier(params)
+const total = base * bonus * crit * resistance * custom
+```
+
+**公开 API（src/index.ts 导出）**：
+
+- 类型：`AnomalyType`、`DefenseParams`、`ResistanceParams`、`VulnerabilityParams`、`DazeVulnerabilityParams`、`CritParams`、`NormalDamageParams`、`SheerDamageParams`、`AnomalyDamageParams`、`DisorderDamageParams`、`DamageResult`
+- 乘区函数：`calcDefenseMultiplier`、`calcResistanceMultiplier`、`calcVulnerabilityMultiplier`、`calcDazeVulnerabilityMultiplier`、`calcExpectedCritMultiplier`、`calcSheerBonusMultiplier`、`calcAnomalyProficiencyMultiplier`、`calcDamageLevelMultiplier`、`calcDisorderDamageMultiplier` 等
+- Pipeline 函数：`calcNormalDamage`、`calcSheerDamage`、`calcAnomalyDamage`、`calcDisorderDamage`（各含 `Crit`/`NoCrit` 变体）
 
 ## 生成脚本设计
 
