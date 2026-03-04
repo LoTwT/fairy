@@ -1,0 +1,512 @@
+[
+  {
+    "id": "1521",
+    "slug": "1521",
+    "name": "",
+    "rarity": 4,
+    "specialty": "Attack",
+    "attributes": ["Electric"],
+    "attackTypes": ["Slash"],
+    "url": "https://zzz.gachabase.net/agents/1521/1521"
+  },
+  {
+    "id": "1511",
+    "slug": "1511",
+    "name": "",
+    "rarity": 4,
+    "specialty": "Stun",
+    "attributes": ["Ether"],
+    "attackTypes": ["Strike"],
+    "url": "https://zzz.gachabase.net/agents/1511/1511"
+  },
+  {
+    "id": "1501",
+    "slug": "aria",
+    "name": "Aria",
+    "rarity": 4,
+    "specialty": "Anomaly",
+    "attributes": ["Ether"],
+    "attackTypes": ["Strike"],
+    "url": "https://zzz.gachabase.net/agents/1501/aria"
+  },
+  {
+    "id": "1491",
+    "slug": "sunna",
+    "name": "Sunna",
+    "rarity": 4,
+    "specialty": "Support",
+    "attributes": ["Physical"],
+    "attackTypes": ["Strike"],
+    "url": "https://zzz.gachabase.net/agents/1491/sunna"
+  },
+  {
+    "id": "1431",
+    "slug": "ye-shunguang",
+    "name": "Ye Shunguang",
+    "rarity": 4,
+    "specialty": "Attack",
+    "attributes": ["Honed Edge"],
+    "attackTypes": ["Slash"],
+    "url": "https://zzz.gachabase.net/agents/1431/ye-shunguang"
+  },
+  {
+    "id": "1341",
+    "slug": "zhao",
+    "name": "Zhao",
+    "rarity": 4,
+    "specialty": "Defense",
+    "attributes": ["Ice"],
+    "attackTypes": ["Slash"],
+    "url": "https://zzz.gachabase.net/agents/1341/zhao"
+  },
+  {
+    "id": "1481",
+    "slug": "dialyn",
+    "name": "Dialyn",
+    "rarity": 4,
+    "specialty": "Stun",
+    "attributes": ["Physical"],
+    "attackTypes": ["Slash"],
+    "url": "https://zzz.gachabase.net/agents/1481/dialyn"
+  },
+  {
+    "id": "1471",
+    "slug": "banyue",
+    "name": "Banyue",
+    "rarity": 4,
+    "specialty": "Rupture",
+    "attributes": ["Fire"],
+    "attackTypes": ["Strike"],
+    "url": "https://zzz.gachabase.net/agents/1471/banyue"
+  },
+  {
+    "id": "1451",
+    "slug": "lucia-elowen",
+    "name": "Lucia",
+    "rarity": 4,
+    "specialty": "Support",
+    "attributes": ["Ether"],
+    "attackTypes": ["Strike"],
+    "url": "https://zzz.gachabase.net/agents/1451/lucia-elowen"
+  },
+  {
+    "id": "1441",
+    "slug": "komano-manato",
+    "name": "Manato",
+    "rarity": 3,
+    "specialty": "Rupture",
+    "attributes": ["Fire"],
+    "attackTypes": ["Slash"],
+    "url": "https://zzz.gachabase.net/agents/1441/komano-manato"
+  },
+  {
+    "id": "1051",
+    "slug": "yidhari-murphy",
+    "name": "Yidhari",
+    "rarity": 4,
+    "specialty": "Rupture",
+    "attributes": ["Ice"],
+    "attackTypes": ["Strike"],
+    "url": "https://zzz.gachabase.net/agents/1051/yidhari-murphy"
+  },
+  {
+    "id": "1371",
+    "slug": "yixuan",
+    "name": "Yixuan",
+    "rarity": 4,
+    "specialty": "Rupture",
+    "attributes": ["Auric Ink"],
+    "attackTypes": ["Strike"],
+    "url": "https://zzz.gachabase.net/agents/1371/yixuan"
+  },
+  {
+    "id": "1391",
+    "slug": "ju-fufu",
+    "name": "Ju Fufu",
+    "rarity": 4,
+    "specialty": "Stun",
+    "attributes": ["Fire"],
+    "attackTypes": ["Strike"],
+    "url": "https://zzz.gachabase.net/agents/1391/ju-fufu"
+  },
+  {
+    "id": "1421",
+    "slug": "pan-yinhu",
+    "name": "Pan Yinhu",
+    "rarity": 3,
+    "specialty": "Defense",
+    "attributes": ["Physical"],
+    "attackTypes": ["Strike"],
+    "url": "https://zzz.gachabase.net/agents/1421/pan-yinhu"
+  },
+  {
+    "id": "1461",
+    "slug": "seed",
+    "name": "Seed",
+    "rarity": 4,
+    "specialty": "Attack",
+    "attributes": ["Electric"],
+    "attackTypes": ["Slash", "Strike"],
+    "url": "https://zzz.gachabase.net/agents/1461/seed"
+  },
+  {
+    "id": "1401",
+    "slug": "alice-thymefield",
+    "name": "Alice",
+    "rarity": 4,
+    "specialty": "Anomaly",
+    "attributes": ["Physical"],
+    "attackTypes": ["Slash"],
+    "url": "https://zzz.gachabase.net/agents/1401/alice-thymefield"
+  },
+  {
+    "id": "1411",
+    "slug": "ukinami-yuzuha",
+    "name": "Yuzuha",
+    "rarity": 4,
+    "specialty": "Support",
+    "attributes": ["Physical"],
+    "attackTypes": ["Strike"],
+    "url": "https://zzz.gachabase.net/agents/1411/ukinami-yuzuha"
+  },
+  {
+    "id": "1381",
+    "slug": "soldier-0-anby",
+    "name": "Soldier 0 - Anby",
+    "rarity": 4,
+    "specialty": "Attack",
+    "attributes": ["Electric"],
+    "attackTypes": ["Slash"],
+    "url": "https://zzz.gachabase.net/agents/1381/soldier-0-anby"
+  },
+  {
+    "id": "1351",
+    "slug": "pulchra-fellini",
+    "name": "Pulchra",
+    "rarity": 3,
+    "specialty": "Stun",
+    "attributes": ["Physical"],
+    "attackTypes": ["Slash"],
+    "url": "https://zzz.gachabase.net/agents/1351/pulchra-fellini"
+  },
+  {
+    "id": "1331",
+    "slug": "vivian-banshee",
+    "name": "Vivian",
+    "rarity": 4,
+    "specialty": "Anomaly",
+    "attributes": ["Ether"],
+    "attackTypes": ["Slash"],
+    "url": "https://zzz.gachabase.net/agents/1331/vivian-banshee"
+  },
+  {
+    "id": "1271",
+    "slug": "seth-lowell",
+    "name": "Seth",
+    "rarity": 3,
+    "specialty": "Defense",
+    "attributes": ["Electric"],
+    "attackTypes": ["Slash"],
+    "url": "https://zzz.gachabase.net/agents/1271/seth-lowell"
+  },
+  {
+    "id": "1251",
+    "slug": "qingyi",
+    "name": "Qingyi",
+    "rarity": 4,
+    "specialty": "Stun",
+    "attributes": ["Electric"],
+    "attackTypes": ["Strike"],
+    "url": "https://zzz.gachabase.net/agents/1251/qingyi"
+  },
+  {
+    "id": "1241",
+    "slug": "zhu-yuan",
+    "name": "Zhu Yuan",
+    "rarity": 4,
+    "specialty": "Attack",
+    "attributes": ["Ether"],
+    "attackTypes": ["Pierce"],
+    "url": "https://zzz.gachabase.net/agents/1241/zhu-yuan"
+  },
+  {
+    "id": "1211",
+    "slug": "alexandrina-sebastiane",
+    "name": "Rina",
+    "rarity": 4,
+    "specialty": "Support",
+    "attributes": ["Electric"],
+    "attackTypes": ["Strike"],
+    "url": "https://zzz.gachabase.net/agents/1211/alexandrina-sebastiane"
+  },
+  {
+    "id": "1161",
+    "slug": "lighter",
+    "name": "Lighter",
+    "rarity": 4,
+    "specialty": "Stun",
+    "attributes": ["Fire"],
+    "attackTypes": ["Strike"],
+    "url": "https://zzz.gachabase.net/agents/1161/lighter"
+  },
+  {
+    "id": "1301",
+    "slug": "orphie-magnusson-magus",
+    "name": "Orphie & Magus",
+    "rarity": 4,
+    "specialty": "Attack",
+    "attributes": ["Fire"],
+    "attackTypes": ["Pierce", "Slash"],
+    "url": "https://zzz.gachabase.net/agents/1301/orphie-magnusson-magus"
+  },
+  {
+    "id": "1191",
+    "slug": "ellen-joe",
+    "name": "Ellen",
+    "rarity": 4,
+    "specialty": "Attack",
+    "attributes": ["Ice"],
+    "attackTypes": ["Slash"],
+    "url": "https://zzz.gachabase.net/agents/1191/ellen-joe"
+  },
+  {
+    "id": "1261",
+    "slug": "jane-doe",
+    "name": "Jane",
+    "rarity": 4,
+    "specialty": "Anomaly",
+    "attributes": ["Physical"],
+    "attackTypes": ["Slash"],
+    "url": "https://zzz.gachabase.net/agents/1261/jane-doe"
+  },
+  {
+    "id": "1281",
+    "slug": "piper-wheel",
+    "name": "Piper",
+    "rarity": 3,
+    "specialty": "Anomaly",
+    "attributes": ["Physical"],
+    "attackTypes": ["Slash"],
+    "url": "https://zzz.gachabase.net/agents/1281/piper-wheel"
+  },
+  {
+    "id": "1311",
+    "slug": "astra-yao",
+    "name": "Astra Yao",
+    "rarity": 4,
+    "specialty": "Support",
+    "attributes": ["Ether"],
+    "attackTypes": ["Strike"],
+    "url": "https://zzz.gachabase.net/agents/1311/astra-yao"
+  },
+  {
+    "id": "1361",
+    "slug": "trigger",
+    "name": "Trigger",
+    "rarity": 4,
+    "specialty": "Stun",
+    "attributes": ["Electric"],
+    "attackTypes": ["Pierce"],
+    "url": "https://zzz.gachabase.net/agents/1361/trigger"
+  },
+  {
+    "id": "1321",
+    "slug": "evelyn-chevalier",
+    "name": "Evelyn",
+    "rarity": 4,
+    "specialty": "Attack",
+    "attributes": ["Fire"],
+    "attackTypes": ["Slash"],
+    "url": "https://zzz.gachabase.net/agents/1321/evelyn-chevalier"
+  },
+  {
+    "id": "1221",
+    "slug": "tsukishiro-yanagi",
+    "name": "Yanagi",
+    "rarity": 4,
+    "specialty": "Anomaly",
+    "attributes": ["Electric"],
+    "attackTypes": ["Slash"],
+    "url": "https://zzz.gachabase.net/agents/1221/tsukishiro-yanagi"
+  },
+  {
+    "id": "1291",
+    "slug": "hugo-vlad",
+    "name": "Hugo",
+    "rarity": 4,
+    "specialty": "Attack",
+    "attributes": ["Ice"],
+    "attackTypes": ["Slash"],
+    "url": "https://zzz.gachabase.net/agents/1291/hugo-vlad"
+  },
+  {
+    "id": "1201",
+    "slug": "asaba-harumasa",
+    "name": "Harumasa",
+    "rarity": 4,
+    "specialty": "Attack",
+    "attributes": ["Electric"],
+    "attackTypes": ["Pierce", "Slash"],
+    "url": "https://zzz.gachabase.net/agents/1201/asaba-harumasa"
+  },
+  {
+    "id": "1171",
+    "slug": "burnice-white",
+    "name": "Burnice",
+    "rarity": 4,
+    "specialty": "Anomaly",
+    "attributes": ["Fire"],
+    "attackTypes": ["Pierce"],
+    "url": "https://zzz.gachabase.net/agents/1171/burnice-white"
+  },
+  {
+    "id": "1181",
+    "slug": "grace-howard",
+    "name": "Grace",
+    "rarity": 4,
+    "specialty": "Anomaly",
+    "attributes": ["Electric"],
+    "attackTypes": ["Pierce"],
+    "url": "https://zzz.gachabase.net/agents/1181/grace-howard"
+  },
+  {
+    "id": "1111",
+    "slug": "anton-ivanov",
+    "name": "Anton",
+    "rarity": 3,
+    "specialty": "Attack",
+    "attributes": ["Electric"],
+    "attackTypes": ["Pierce"],
+    "url": "https://zzz.gachabase.net/agents/1111/anton-ivanov"
+  },
+  {
+    "id": "1141",
+    "slug": "von-lycaon",
+    "name": "Lycaon",
+    "rarity": 4,
+    "specialty": "Stun",
+    "attributes": ["Ice"],
+    "attackTypes": ["Strike"],
+    "url": "https://zzz.gachabase.net/agents/1141/von-lycaon"
+  },
+  {
+    "id": "1131",
+    "slug": "soukaku",
+    "name": "Soukaku",
+    "rarity": 3,
+    "specialty": "Support",
+    "attributes": ["Ice"],
+    "attackTypes": ["Slash"],
+    "url": "https://zzz.gachabase.net/agents/1131/soukaku"
+  },
+  {
+    "id": "1081",
+    "slug": "billy-kid",
+    "name": "Billy",
+    "rarity": 3,
+    "specialty": "Attack",
+    "attributes": ["Physical"],
+    "attackTypes": ["Pierce"],
+    "url": "https://zzz.gachabase.net/agents/1081/billy-kid"
+  },
+  {
+    "id": "1061",
+    "slug": "corin-wickes",
+    "name": "Corin",
+    "rarity": 3,
+    "specialty": "Attack",
+    "attributes": ["Physical"],
+    "attackTypes": ["Slash"],
+    "url": "https://zzz.gachabase.net/agents/1061/corin-wickes"
+  },
+  {
+    "id": "1041",
+    "slug": "soldier-11",
+    "name": "Soldier 11",
+    "rarity": 4,
+    "specialty": "Attack",
+    "attributes": ["Fire"],
+    "attackTypes": ["Slash"],
+    "url": "https://zzz.gachabase.net/agents/1041/soldier-11"
+  },
+  {
+    "id": "1091",
+    "slug": "hoshimi-miyabi",
+    "name": "Miyabi",
+    "rarity": 4,
+    "specialty": "Anomaly",
+    "attributes": ["Frost"],
+    "attackTypes": ["Slash"],
+    "url": "https://zzz.gachabase.net/agents/1091/hoshimi-miyabi"
+  },
+  {
+    "id": "1121",
+    "slug": "ben-bigger",
+    "name": "Ben",
+    "rarity": 3,
+    "specialty": "Defense",
+    "attributes": ["Fire"],
+    "attackTypes": ["Strike"],
+    "url": "https://zzz.gachabase.net/agents/1121/ben-bigger"
+  },
+  {
+    "id": "1071",
+    "slug": "caesar-king",
+    "name": "Caesar",
+    "rarity": 4,
+    "specialty": "Defense",
+    "attributes": ["Physical"],
+    "attackTypes": ["Slash", "Strike"],
+    "url": "https://zzz.gachabase.net/agents/1071/caesar-king"
+  },
+  {
+    "id": "1151",
+    "slug": "luciana-de-montefio",
+    "name": "Lucy",
+    "rarity": 3,
+    "specialty": "Support",
+    "attributes": ["Fire"],
+    "attackTypes": ["Strike"],
+    "url": "https://zzz.gachabase.net/agents/1151/luciana-de-montefio"
+  },
+  {
+    "id": "1021",
+    "slug": "nekomiya-mana",
+    "name": "Nekomata",
+    "rarity": 4,
+    "specialty": "Attack",
+    "attributes": ["Physical"],
+    "attackTypes": ["Slash"],
+    "url": "https://zzz.gachabase.net/agents/1021/nekomiya-mana"
+  },
+  {
+    "id": "1031",
+    "slug": "nicole-demara",
+    "name": "Nicole",
+    "rarity": 3,
+    "specialty": "Support",
+    "attributes": ["Ether"],
+    "attackTypes": ["Strike"],
+    "url": "https://zzz.gachabase.net/agents/1031/nicole-demara"
+  },
+  {
+    "id": "1101",
+    "slug": "koleda-belobog",
+    "name": "Koleda",
+    "rarity": 4,
+    "specialty": "Stun",
+    "attributes": ["Fire"],
+    "attackTypes": ["Strike"],
+    "url": "https://zzz.gachabase.net/agents/1101/koleda-belobog"
+  },
+  {
+    "id": "1011",
+    "slug": "anby-demara",
+    "name": "Anby",
+    "rarity": 3,
+    "specialty": "Stun",
+    "attributes": ["Electric"],
+    "attackTypes": ["Slash"],
+    "url": "https://zzz.gachabase.net/agents/1011/anby-demara"
+  }
+]

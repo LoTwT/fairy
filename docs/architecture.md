@@ -10,7 +10,10 @@ packages/zzz-data/
 │   ├── config.ts            # worksheetConfigs 字段映射（source of truth）
 │   └── types/               # xlsx 结构的内部类型（由 generate 脚本产出，仅作历史参考，不对外暴露）
 ├── scripts/crawl/            # 爬虫脚本
-│   └── index.ts             # 爬虫主入口（playwright + cheerio）
+│   ├── index.ts             # 爬虫主入口（聚合 tasks，统一执行）
+│   ├── shared.ts            # 工具函数（fetchStatic/fetchJson/fetchDynamic/batchProcess/decodeSvelteKitData）
+│   ├── gachabase.ts         # gachabase.net 爬取任务（agent 列表 + 详情）
+│   └── buhflipexplode.ts    # buhflipexplode.com 爬取任务
 ├── tests/generate.test.ts   # 结构一致性测试（xlsx ↔ config ↔ JSON）
 ├── tests/calculator/        # 伤害计算模块测试
 │   ├── factors.test.ts      # 共享乘区（防御区、抗性区等）
@@ -19,7 +22,11 @@ packages/zzz-data/
 │   ├── anomaly.test.ts      # 异常伤害
 │   └── disorder.test.ts     # 紊乱伤害
 ├── data/xlsx/*.json         # 生成的 JSON 数据（16 个文件）
-├── data/crawl/*.json        # 爬虫输出的 JSON 数据
+├── data/crawl/              # 爬虫输出的 JSON 数据
+│   ├── en/                  # 英文数据
+│   │   ├── gachabase-agents.json        # agent 基础列表（id/slug/name/rarity/specialty/attributes/attackTypes）
+│   │   └── gachabase-agent-details.json # agent 详情（stats/skills/coreSkills/mindscapes/skins/potentialVisions 等）
+│   └── zh-CN/               # 中文数据（同上）
 ├── src/calculator/          # 伤害计算模块（纯函数，可导出）
 │   ├── types.ts             # 所有参数/返回类型
 │   ├── factors.ts           # 各乘区独立函数（可自由组合）
