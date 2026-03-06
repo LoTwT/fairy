@@ -1,0 +1,4265 @@
+[
+  {
+    "id": "13020",
+    "slug": "the-simmering-pot",
+    "name": "炎炙沸釜",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/5237426375793960994_272_14050658.webp",
+    "rarity": 3,
+    "specialty": {
+      "id": "2",
+      "name": "击破"
+    },
+    "exclusiveAgentName": null,
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 40
+    },
+    "advancedStat": {
+      "id": "12202",
+      "name": "冲击力",
+      "value": 0.06
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "红油辣锅",
+        "effect": "发动<span style=\"color: #FFFFFF\">[支援突击]</span> 时，装备者对目标造成的失衡值提升<span style=\"color: #2BAD00\">7.2%</span>，装备者造成的伤害提升<span style=\"color: #2BAD00\">7.2%</span>，持续30秒，重复触发时刷新持续时间。"
+      },
+      {
+        "level": 2,
+        "name": "红油辣锅",
+        "effect": "发动<span style=\"color: #FFFFFF\">[支援突击]</span> 时，装备者对目标造成的失衡值提升<span style=\"color: #2BAD00\">8.2%</span>，装备者造成的伤害提升<span style=\"color: #2BAD00\">8.2%</span>，持续30秒，重复触发时刷新持续时间。"
+      },
+      {
+        "level": 3,
+        "name": "红油辣锅",
+        "effect": "发动<span style=\"color: #FFFFFF\">[支援突击]</span> 时，装备者对目标造成的失衡值提升<span style=\"color: #2BAD00\">9.2%</span>，装备者造成的伤害提升<span style=\"color: #2BAD00\">9.2%</span>，持续30秒，重复触发时刷新持续时间。"
+      },
+      {
+        "level": 4,
+        "name": "红油辣锅",
+        "effect": "发动<span style=\"color: #FFFFFF\">[支援突击]</span> 时，装备者对目标造成的失衡值提升<span style=\"color: #2BAD00\">10.2%</span>，装备者造成的伤害提升<span style=\"color: #2BAD00\">10.2%</span>，持续30秒，重复触发时刷新持续时间。"
+      },
+      {
+        "level": 5,
+        "name": "红油辣锅",
+        "effect": "发动<span style=\"color: #FFFFFF\">[支援突击]</span> 时，装备者对目标造成的失衡值提升<span style=\"color: #2BAD00\">11.5%</span>，装备者造成的伤害提升<span style=\"color: #2BAD00\">11.5%</span>，持续30秒，重复触发时刷新持续时间。"
+      }
+    ]
+  },
+  {
+    "id": "14151",
+    "slug": "neon-fantasies",
+    "name": "霓虹妄想",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/14423666084058728060_272_14050658.webp",
+    "rarity": 4,
+    "specialty": {
+      "id": "2",
+      "name": "击破"
+    },
+    "exclusiveAgentName": "南宫羽",
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 48
+    },
+    "advancedStat": {
+      "id": "31402",
+      "name": "异常掌控",
+      "value": 0.12
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "迪斯科恶魔",
+        "effect": "(Test1)装备者的异常精通提升<span style=\"color: #2BAD00\">90</span>点；装备者<span style=\"color: #FFFFFF\">[强化特殊技]</span>或<span style=\"color: #FFFFFF\">[普通攻击]</span>造成<color=#ELEMENT_Ether>以太属性</color>伤害时，全队造成的伤害提升<span style=\"color: #2BAD00\">15%</span>，持续40秒，最多叠加2层，同一招式内最多触发一次，重复触发时刷新持续时间，拥有2层效果时，装备者的异常精通额外提升<span style=\"color: #2BAD00\">60</span>点，该效果全队唯一。"
+      },
+      {
+        "level": 2,
+        "name": "迪斯科恶魔",
+        "effect": "(Test1)装备者的异常精通提升<span style=\"color: #2BAD00\">90</span>点；装备者<span style=\"color: #FFFFFF\">[强化特殊技]</span>或<span style=\"color: #FFFFFF\">[普通攻击]</span>造成<color=#ELEMENT_Ether>以太属性</color>伤害时，全队造成的伤害提升<span style=\"color: #2BAD00\">15%</span>，持续40秒，最多叠加2层，同一招式内最多触发一次，重复触发时刷新持续时间，拥有2层效果时，装备者的异常精通额外提升<span style=\"color: #2BAD00\">60</span>点，该效果全队唯一。"
+      },
+      {
+        "level": 3,
+        "name": "迪斯科恶魔",
+        "effect": "(Test1)装备者的异常精通提升<span style=\"color: #2BAD00\">90</span>点；装备者<span style=\"color: #FFFFFF\">[强化特殊技]</span>或<span style=\"color: #FFFFFF\">[普通攻击]</span>造成<color=#ELEMENT_Ether>以太属性</color>伤害时，全队造成的伤害提升<span style=\"color: #2BAD00\">15%</span>，持续40秒，最多叠加2层，同一招式内最多触发一次，重复触发时刷新持续时间，拥有2层效果时，装备者的异常精通额外提升<span style=\"color: #2BAD00\">60</span>点，该效果全队唯一。"
+      },
+      {
+        "level": 4,
+        "name": "迪斯科恶魔",
+        "effect": "(Test1)装备者的异常精通提升<span style=\"color: #2BAD00\">90</span>点；装备者<span style=\"color: #FFFFFF\">[强化特殊技]</span>或<span style=\"color: #FFFFFF\">[普通攻击]</span>造成<color=#ELEMENT_Ether>以太属性</color>伤害时，全队造成的伤害提升<span style=\"color: #2BAD00\">15%</span>，持续40秒，最多叠加2层，同一招式内最多触发一次，重复触发时刷新持续时间，拥有2层效果时，装备者的异常精通额外提升<span style=\"color: #2BAD00\">60</span>点，该效果全队唯一。"
+      },
+      {
+        "level": 5,
+        "name": "迪斯科恶魔",
+        "effect": "(Test1)装备者的异常精通提升<span style=\"color: #2BAD00\">90</span>点；装备者<span style=\"color: #FFFFFF\">[强化特殊技]</span>或<span style=\"color: #FFFFFF\">[普通攻击]</span>造成<color=#ELEMENT_Ether>以太属性</color>伤害时，全队造成的伤害提升<span style=\"color: #2BAD00\">15%</span>，持续40秒，最多叠加2层，同一招式内最多触发一次，重复触发时刷新持续时间，拥有2层效果时，装备者的异常精通额外提升<span style=\"color: #2BAD00\">60</span>点，该效果全队唯一。"
+      }
+    ]
+  },
+  {
+    "id": "14152",
+    "slug": "serpentine-seeker",
+    "name": "鳞齿寻踪",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/305530623966086148_272_14050658.webp",
+    "rarity": 4,
+    "specialty": {
+      "id": "1",
+      "name": "强攻"
+    },
+    "exclusiveAgentName": "希希芙",
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 48
+    },
+    "advancedStat": {
+      "id": "30502",
+      "name": "能量自动回复",
+      "value": 0.24
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "仿生毒素",
+        "effect": "(Test1)暴击率提高<span style=\"color: #2BAD00\">25%</span>；装备者单次消耗的能量达到20点时，每消耗20点能量，获得3秒增益效果：造成<span style=\"color: #2EB6FF\">电属性伤害</span>时无视目标<span style=\"color: #2BAD00\">30%</span>防御力；重复获得时，延长持续时间，至多延长至30秒；进入接战状态时，获得10秒该增益；装备者为非当前操作中角色时，持续时间不再减少。"
+      },
+      {
+        "level": 2,
+        "name": "仿生毒素",
+        "effect": "(Test1)暴击率提高<span style=\"color: #2BAD00\">28.8%</span>；装备者单次消耗的能量达到20点时，每消耗20点能量，获得3秒增益效果：造成<span style=\"color: #2EB6FF\">电属性伤害</span>时无视目标<span style=\"color: #2BAD00\">34.5%</span>防御力；重复获得时，延长持续时间，至多延长至30秒；进入接战状态时，获得10秒该增益；装备者为非当前操作中角色时，持续时间不再减少。"
+      },
+      {
+        "level": 3,
+        "name": "仿生毒素",
+        "effect": "(Test1)暴击率提高<span style=\"color: #2BAD00\">32.5%</span>；装备者单次消耗的能量达到20点时，每消耗20点能量，获得3秒增益效果：造成<span style=\"color: #2EB6FF\">电属性伤害</span>时无视目标<span style=\"color: #2BAD00\">39%</span>防御力；重复获得时，延长持续时间，至多延长至30秒；进入接战状态时，获得10秒该增益；装备者为非当前操作中角色时，持续时间不再减少。"
+      },
+      {
+        "level": 4,
+        "name": "仿生毒素",
+        "effect": "(Test1)暴击率提高<span style=\"color: #2BAD00\">36.3%</span>；装备者单次消耗的能量达到20点时，每消耗20点能量，获得3秒增益效果：造成<span style=\"color: #2EB6FF\">电属性伤害</span>时无视目标<span style=\"color: #2BAD00\">43.5%</span>防御力；重复获得时，延长持续时间，至多延长至30秒；进入接战状态时，获得10秒该增益；装备者为非当前操作中角色时，持续时间不再减少。"
+      },
+      {
+        "level": 5,
+        "name": "仿生毒素",
+        "effect": "(Test1)暴击率提高<span style=\"color: #2BAD00\">40%</span>；装备者单次消耗的能量达到20点时，每消耗20点能量，获得3秒增益效果：造成<span style=\"color: #2EB6FF\">电属性伤害</span>时无视目标<span style=\"color: #2BAD00\">48%</span>防御力；重复获得时，延长持续时间，至多延长至30秒；进入接战状态时，获得10秒该增益；装备者为非当前操作中角色时，持续时间不再减少。"
+      }
+    ]
+  },
+  {
+    "id": "14150",
+    "slug": "angel-in-the-shell",
+    "name": "壳中之灵",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/9669739024892046384_272_14050658.webp",
+    "rarity": 4,
+    "specialty": {
+      "id": "3",
+      "name": "异常"
+    },
+    "exclusiveAgentName": "爱芮",
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 48
+    },
+    "advancedStat": {
+      "id": "31402",
+      "name": "异常掌控",
+      "value": 0.12
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "元气一击",
+        "effect": "装备者的异常精通提升<span style=\"color: #2BAD00\">90</span>点；<span style=\"color: #FE437E\">以太属性</span>的装备者进入前场或发动<span style=\"color: #FFFFFF\">[特殊技]</span>、<span style=\"color: #FFFFFF\">[强化特殊技]</span>时获得增益效果：对处于属性异常状态下的敌人造成的伤害提升<span style=\"color: #2BAD00\">20%</span>，触发的所有属性异常伤害提升<span style=\"color: #2BAD00\">10%</span>，效果持续15秒，重复触发时刷新持续时间，换回后场时该效果移除。"
+      },
+      {
+        "level": 2,
+        "name": "元气一击",
+        "effect": "装备者的异常精通提升<span style=\"color: #2BAD00\">103</span>点；<span style=\"color: #FE437E\">以太属性</span>的装备者进入前场或发动<span style=\"color: #FFFFFF\">[特殊技]</span>、<span style=\"color: #FFFFFF\">[强化特殊技]</span>时获得增益效果：对处于属性异常状态下的敌人造成的伤害提升<span style=\"color: #2BAD00\">23%</span>，触发的所有属性异常伤害提升<span style=\"color: #2BAD00\">11.5%</span>，效果持续15秒，重复触发时刷新持续时间，换回后场时该效果移除。"
+      },
+      {
+        "level": 3,
+        "name": "元气一击",
+        "effect": "装备者的异常精通提升<span style=\"color: #2BAD00\">117</span>点；<span style=\"color: #FE437E\">以太属性</span>的装备者进入前场或发动<span style=\"color: #FFFFFF\">[特殊技]</span>、<span style=\"color: #FFFFFF\">[强化特殊技]</span>时获得增益效果：对处于属性异常状态下的敌人造成的伤害提升<span style=\"color: #2BAD00\">26%</span>，触发的所有属性异常伤害提升<span style=\"color: #2BAD00\">13%</span>，效果持续15秒，重复触发时刷新持续时间，换回后场时该效果移除。"
+      },
+      {
+        "level": 4,
+        "name": "元气一击",
+        "effect": "装备者的异常精通提升<span style=\"color: #2BAD00\">130</span>点；<span style=\"color: #FE437E\">以太属性</span>的装备者进入前场或发动<span style=\"color: #FFFFFF\">[特殊技]</span>、<span style=\"color: #FFFFFF\">[强化特殊技]</span>时获得增益效果：对处于属性异常状态下的敌人造成的伤害提升<span style=\"color: #2BAD00\">29%</span>，触发的所有属性异常伤害提升<span style=\"color: #2BAD00\">14.5%</span>，效果持续15秒，重复触发时刷新持续时间，换回后场时该效果移除。"
+      },
+      {
+        "level": 5,
+        "name": "元气一击",
+        "effect": "装备者的异常精通提升<span style=\"color: #2BAD00\">144</span>点；<span style=\"color: #FE437E\">以太属性</span>的装备者进入前场或发动<span style=\"color: #FFFFFF\">[特殊技]</span>、<span style=\"color: #FFFFFF\">[强化特殊技]</span>时获得增益效果：对处于属性异常状态下的敌人造成的伤害提升<span style=\"color: #2BAD00\">32%</span>，触发的所有属性异常伤害提升<span style=\"color: #2BAD00\">16%</span>，效果持续15秒，重复触发时刷新持续时间，换回后场时该效果移除。"
+      }
+    ]
+  },
+  {
+    "id": "14149",
+    "slug": "thoughtbop",
+    "name": "思络成歌",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/7429951814988590005_272_14050658.webp",
+    "rarity": 4,
+    "specialty": {
+      "id": "4",
+      "name": "支援"
+    },
+    "exclusiveAgentName": "千夏",
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 48
+    },
+    "advancedStat": {
+      "id": "30502",
+      "name": "能量自动回复",
+      "value": 0.24
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "喧响独白",
+        "effect": "装备者为非操作中角色时，能量自动回复提升<span style=\"color: #2BAD00\">0.6</span>点/秒；装备者发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>造成<span style=\"color: #F0D12B\">物理伤害</span>时，使全队角色获得增益效果：角色造成伤害提升<span style=\"color: #2BAD00\">12.5%</span>，效果持续40秒，最多叠加2层，重复触发时刷新持续时间；拥有2层效果时，角色的攻击力额外提升<span style=\"color: #2BAD00\">10%</span>，该效果全队唯一。"
+      },
+      {
+        "level": 2,
+        "name": "喧响独白",
+        "effect": "装备者为非操作中角色时，能量自动回复提升<span style=\"color: #2BAD00\">0.69</span>点/秒；装备者发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>造成<span style=\"color: #F0D12B\">物理伤害</span>时，使全队角色获得增益效果：角色造成伤害提升<span style=\"color: #2BAD00\">14.3%</span>，效果持续40秒，最多叠加2层，重复触发时刷新持续时间；拥有2层效果时，角色的攻击力额外提升<span style=\"color: #2BAD00\">11.5%</span>，该效果全队唯一。"
+      },
+      {
+        "level": 3,
+        "name": "喧响独白",
+        "effect": "装备者为非操作中角色时，能量自动回复提升<span style=\"color: #2BAD00\">0.78</span>点/秒；装备者发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>造成<span style=\"color: #F0D12B\">物理伤害</span>时，使全队角色获得增益效果：角色造成伤害提升<span style=\"color: #2BAD00\">16.1%</span>，效果持续40秒，最多叠加2层，重复触发时刷新持续时间；拥有2层效果时，角色的攻击力额外提升<span style=\"color: #2BAD00\">13%</span>，该效果全队唯一。"
+      },
+      {
+        "level": 4,
+        "name": "喧响独白",
+        "effect": "装备者为非操作中角色时，能量自动回复提升<span style=\"color: #2BAD00\">0.87</span>点/秒；装备者发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>造成<span style=\"color: #F0D12B\">物理伤害</span>时，使全队角色获得增益效果：角色造成伤害提升<span style=\"color: #2BAD00\">17.9%</span>，效果持续40秒，最多叠加2层，重复触发时刷新持续时间；拥有2层效果时，角色的攻击力额外提升<span style=\"color: #2BAD00\">14.5%</span>，该效果全队唯一。"
+      },
+      {
+        "level": 5,
+        "name": "喧响独白",
+        "effect": "装备者为非操作中角色时，能量自动回复提升<span style=\"color: #2BAD00\">0.96</span>点/秒；装备者发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>造成<span style=\"color: #F0D12B\">物理伤害</span>时，使全队角色获得增益效果：角色造成伤害提升<span style=\"color: #2BAD00\">20%</span>，效果持续40秒，最多叠加2层，重复触发时刷新持续时间；拥有2层效果时，角色的攻击力额外提升<span style=\"color: #2BAD00\">16%</span>，该效果全队唯一。"
+      }
+    ]
+  },
+  {
+    "id": "14143",
+    "slug": "cloudcleave-radiance",
+    "name": "云霓孤光",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/8055566802664098205_272_14050658.webp",
+    "rarity": 4,
+    "specialty": {
+      "id": "1",
+      "name": "强攻"
+    },
+    "exclusiveAgentName": "叶瞬光",
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 50
+    },
+    "advancedStat": {
+      "id": "21103",
+      "name": "暴击伤害",
+      "value": 0.192
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "玉魄冰心",
+        "effect": "装备者造成的伤害无视目标<span style=\"color: #2BAD00\">20%</span><span style=\"color: #F0D12B\">物理属性伤害抗性</span>；装备者开启<span style=\"color: #FFFFFF\">[以太帷幕]</span>时，自身造成的伤害提升<span style=\"color: #2BAD00\">25%</span>，暴击伤害提升<span style=\"color: #2BAD00\">25%</span>，持续40秒，重复触发时刷新持续时间。"
+      },
+      {
+        "level": 2,
+        "name": "玉魄冰心",
+        "effect": "装备者造成的伤害无视目标<span style=\"color: #2BAD00\">22%</span><span style=\"color: #F0D12B\">物理属性伤害抗性</span>；装备者开启<span style=\"color: #FFFFFF\">[以太帷幕]</span>时，自身造成的伤害提升<span style=\"color: #2BAD00\">28.7%</span>，暴击伤害提升<span style=\"color: #2BAD00\">28.7%</span>，持续40秒，重复触发时刷新持续时间。"
+      },
+      {
+        "level": 3,
+        "name": "玉魄冰心",
+        "effect": "装备者造成的伤害无视目标<span style=\"color: #2BAD00\">24%</span><span style=\"color: #F0D12B\">物理属性伤害抗性</span>；装备者开启<span style=\"color: #FFFFFF\">[以太帷幕]</span>时，自身造成的伤害提升<span style=\"color: #2BAD00\">32.5%</span>，暴击伤害提升<span style=\"color: #2BAD00\">32.5%</span>，持续40秒，重复触发时刷新持续时间。"
+      },
+      {
+        "level": 4,
+        "name": "玉魄冰心",
+        "effect": "装备者造成的伤害无视目标<span style=\"color: #2BAD00\">26%</span><span style=\"color: #F0D12B\">物理属性伤害抗性</span>；装备者开启<span style=\"color: #FFFFFF\">[以太帷幕]</span>时，自身造成的伤害提升<span style=\"color: #2BAD00\">36.2%</span>，暴击伤害提升<span style=\"color: #2BAD00\">36.2%</span>，持续40秒，重复触发时刷新持续时间。"
+      },
+      {
+        "level": 5,
+        "name": "玉魄冰心",
+        "effect": "装备者造成的伤害无视目标<span style=\"color: #2BAD00\">28%</span><span style=\"color: #F0D12B\">物理属性伤害抗性</span>；装备者开启<span style=\"color: #FFFFFF\">[以太帷幕]</span>时，自身造成的伤害提升<span style=\"color: #2BAD00\">40%</span>，暴击伤害提升<span style=\"color: #2BAD00\">40%</span>，持续40秒，重复触发时刷新持续时间。"
+      }
+    ]
+  },
+  {
+    "id": "14134",
+    "slug": "half-sugar-bunny",
+    "name": "半糖雪兔",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/8302091321625222884_272_14050658.webp",
+    "rarity": 4,
+    "specialty": {
+      "id": "5",
+      "name": "防护"
+    },
+    "exclusiveAgentName": "照",
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 48
+    },
+    "advancedStat": {
+      "id": "11102",
+      "name": "生命值百分比",
+      "value": 0.12
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "易碎之甜",
+        "effect": "装备者的能量自动回复提升<span style=\"color: #2BAD00\">0.46</span>点/秒；全队角色攻击力提升<span style=\"color: #2BAD00\">10%</span>，最大生命值提升<span style=\"color: #2BAD00\">10%</span>，该效果全队唯一；装备者开启或延长<span style=\"color: #FFFFFF\">[以太帷幕]</span>时，使全队角色的暴击伤害提升<span style=\"color: #2BAD00\">30%</span>，持续60秒，重复触发刷新持续时间。"
+      },
+      {
+        "level": 2,
+        "name": "易碎之甜",
+        "effect": "装备者的能量自动回复提升<span style=\"color: #2BAD00\">0.53</span>点/秒；全队角色攻击力提升<span style=\"color: #2BAD00\">11.5%</span>，最大生命值提升<span style=\"color: #2BAD00\">11.5%</span>，该效果全队唯一；装备者开启或延长<span style=\"color: #FFFFFF\">[以太帷幕]</span>时，使全队角色的暴击伤害提升<span style=\"color: #2BAD00\">34.5%</span>，持续60秒，重复触发刷新持续时间。"
+      },
+      {
+        "level": 3,
+        "name": "易碎之甜",
+        "effect": "装备者的能量自动回复提升<span style=\"color: #2BAD00\">0.6</span>点/秒；全队角色攻击力提升<span style=\"color: #2BAD00\">13%</span>，最大生命值提升<span style=\"color: #2BAD00\">13%</span>，该效果全队唯一；装备者开启或延长<span style=\"color: #FFFFFF\">[以太帷幕]</span>时，使全队角色的暴击伤害提升<span style=\"color: #2BAD00\">39%</span>，持续60秒，重复触发刷新持续时间。"
+      },
+      {
+        "level": 4,
+        "name": "易碎之甜",
+        "effect": "装备者的能量自动回复提升<span style=\"color: #2BAD00\">0.67</span>点/秒；全队角色攻击力提升<span style=\"color: #2BAD00\">14.5%</span>，最大生命值提升<span style=\"color: #2BAD00\">14.5%</span>，该效果全队唯一；装备者开启或延长<span style=\"color: #FFFFFF\">[以太帷幕]</span>时，使全队角色的暴击伤害提升<span style=\"color: #2BAD00\">43.5%</span>，持续60秒，重复触发刷新持续时间。"
+      },
+      {
+        "level": 5,
+        "name": "易碎之甜",
+        "effect": "装备者的能量自动回复提升<span style=\"color: #2BAD00\">0.74</span>点/秒；全队角色攻击力提升<span style=\"color: #2BAD00\">16%</span>，最大生命值提升<span style=\"color: #2BAD00\">16%</span>，该效果全队唯一；装备者开启或延长<span style=\"color: #FFFFFF\">[以太帷幕]</span>时，使全队角色的暴击伤害提升<span style=\"color: #2BAD00\">48%</span>，持续60秒，重复触发刷新持续时间。"
+      }
+    ]
+  },
+  {
+    "id": "13019",
+    "slug": "cauldron-of-clarity",
+    "name": "青漪灵鼎",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/13683906103121238376_272_14050658.webp",
+    "rarity": 3,
+    "specialty": {
+      "id": "6",
+      "name": "命破"
+    },
+    "exclusiveAgentName": null,
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 40
+    },
+    "advancedStat": {
+      "id": "11102",
+      "name": "生命值百分比",
+      "value": 0.1
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "玄音唤灵",
+        "effect": "装备者发动<span style=\"color: #FFFFFF\">[强化特殊技]</span> 时可获得1层增益效果，每层增益效果使装备者造成的伤害提升<span style=\"color: #2BAD00\">4%</span>，最多叠加3层，持续20秒，每0.5秒最多触发1次，重复触发时刷新持续时间；拥有3层增益效果时，装备者的暴击率提升<span style=\"color: #2BAD00\">6.5%</span>。"
+      },
+      {
+        "level": 2,
+        "name": "玄音唤灵",
+        "effect": "装备者发动<span style=\"color: #FFFFFF\">[强化特殊技]</span> 时可获得1层增益效果，每层增益效果使装备者造成的伤害提升<span style=\"color: #2BAD00\">4.6%</span>，最多叠加3层，持续20秒，每0.5秒最多触发1次，重复触发时刷新持续时间；拥有3层增益效果时，装备者的暴击率提升<span style=\"color: #2BAD00\">7.5%</span>。"
+      },
+      {
+        "level": 3,
+        "name": "玄音唤灵",
+        "effect": "装备者发动<span style=\"color: #FFFFFF\">[强化特殊技]</span> 时可获得1层增益效果，每层增益效果使装备者造成的伤害提升<span style=\"color: #2BAD00\">5.2%</span>，最多叠加3层，持续20秒，每0.5秒最多触发1次，重复触发时刷新持续时间；拥有3层增益效果时，装备者的暴击率提升<span style=\"color: #2BAD00\">8.5%</span>。"
+      },
+      {
+        "level": 4,
+        "name": "玄音唤灵",
+        "effect": "装备者发动<span style=\"color: #FFFFFF\">[强化特殊技]</span> 时可获得1层增益效果，每层增益效果使装备者造成的伤害提升<span style=\"color: #2BAD00\">5.8%</span>，最多叠加3层，持续20秒，每0.5秒最多触发1次，重复触发时刷新持续时间；拥有3层增益效果时，装备者的暴击率提升<span style=\"color: #2BAD00\">9.4%</span>。"
+      },
+      {
+        "level": 5,
+        "name": "玄音唤灵",
+        "effect": "装备者发动<span style=\"color: #FFFFFF\">[强化特殊技]</span> 时可获得1层增益效果，每层增益效果使装备者造成的伤害提升<span style=\"color: #2BAD00\">6.4%</span>，最多叠加3层，持续20秒，每0.5秒最多触发1次，重复触发时刷新持续时间；拥有3层增益效果时，装备者的暴击率提升<span style=\"color: #2BAD00\">10.4%</span>。"
+      }
+    ]
+  },
+  {
+    "id": "14148",
+    "slug": "yesterday-calls",
+    "name": "昨夜来电",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/1288195807934587945_272_14050658.webp",
+    "rarity": 4,
+    "specialty": {
+      "id": "2",
+      "name": "击破"
+    },
+    "exclusiveAgentName": "琉音",
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 48
+    },
+    "advancedStat": {
+      "id": "20103",
+      "name": "暴击率",
+      "value": 0.096
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "7×24",
+        "effect": "位于后场时，装备者的能量自动回复提升<span style=\"color: #2BAD00\">1.5</span>点/秒；装备者发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>造成<span style=\"color: #F0D12B\">物理属性</span>伤害时，装备者攻击造成的失衡值提升<span style=\"color: #2BAD00\">9%</span>，最多叠加3层，持续10秒，叠加到3层时，全队角色暴击伤害额外提升<span style=\"color: #2BAD00\">30%</span>，持续40秒，重复触发时刷新持续时间，暴击伤害提升效果全队唯一。"
+      },
+      {
+        "level": 2,
+        "name": "7×24",
+        "effect": "位于后场时，装备者的能量自动回复提升<span style=\"color: #2BAD00\">1.7</span>点/秒；装备者发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>造成<span style=\"color: #F0D12B\">物理属性</span>伤害时，装备者攻击造成的失衡值提升<span style=\"color: #2BAD00\">10.3%</span>，最多叠加3层，持续10秒，叠加到3层时，全队角色暴击伤害额外提升<span style=\"color: #2BAD00\">34.5%</span>，持续40秒，重复触发时刷新持续时间，暴击伤害提升效果全队唯一。"
+      },
+      {
+        "level": 3,
+        "name": "7×24",
+        "effect": "位于后场时，装备者的能量自动回复提升<span style=\"color: #2BAD00\">1.9</span>点/秒；装备者发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>造成<span style=\"color: #F0D12B\">物理属性</span>伤害时，装备者攻击造成的失衡值提升<span style=\"color: #2BAD00\">11.7%</span>，最多叠加3层，持续10秒，叠加到3层时，全队角色暴击伤害额外提升<span style=\"color: #2BAD00\">39%</span>，持续40秒，重复触发时刷新持续时间，暴击伤害提升效果全队唯一。"
+      },
+      {
+        "level": 4,
+        "name": "7×24",
+        "effect": "位于后场时，装备者的能量自动回复提升<span style=\"color: #2BAD00\">2.1</span>点/秒；装备者发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>造成<span style=\"color: #F0D12B\">物理属性</span>伤害时，装备者攻击造成的失衡值提升<span style=\"color: #2BAD00\">13%</span>，最多叠加3层，持续10秒，叠加到3层时，全队角色暴击伤害额外提升<span style=\"color: #2BAD00\">43.5%</span>，持续40秒，重复触发时刷新持续时间，暴击伤害提升效果全队唯一。"
+      },
+      {
+        "level": 5,
+        "name": "7×24",
+        "effect": "位于后场时，装备者的能量自动回复提升<span style=\"color: #2BAD00\">2.3</span>点/秒；装备者发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>造成<span style=\"color: #F0D12B\">物理属性</span>伤害时，装备者攻击造成的失衡值提升<span style=\"color: #2BAD00\">14.5%</span>，最多叠加3层，持续10秒，叠加到3层时，全队角色暴击伤害额外提升<span style=\"color: #2BAD00\">48%</span>，持续40秒，重复触发时刷新持续时间，暴击伤害提升效果全队唯一。"
+      }
+    ]
+  },
+  {
+    "id": "14147",
+    "slug": "wrathful-vajra",
+    "name": "怒目金刚",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/2215766288012715839_272_14050658.webp",
+    "rarity": 4,
+    "specialty": {
+      "id": "6",
+      "name": "命破"
+    },
+    "exclusiveAgentName": "般岳",
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 48
+    },
+    "advancedStat": {
+      "id": "11102",
+      "name": "生命值百分比",
+      "value": 0.12
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "焚心业火",
+        "effect": "暴击率提升<span style=\"color: #2BAD00\">20%</span>；装备者发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>时，装备者造成的<span style=\"color: #FF5521\">火属性贯穿伤害</span>提升<span style=\"color: #2BAD00\">9%</span>，最多叠加2层，持续20秒，每层效果单独结算持续时间。"
+      },
+      {
+        "level": 2,
+        "name": "焚心业火",
+        "effect": "暴击率提升<span style=\"color: #2BAD00\">23%</span>；装备者发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>时，装备者造成的<span style=\"color: #FF5521\">火属性贯穿伤害</span>提升<span style=\"color: #2BAD00\">10.35%</span>，最多叠加2层，持续20秒，每层效果单独结算持续时间。"
+      },
+      {
+        "level": 3,
+        "name": "焚心业火",
+        "effect": "暴击率提升<span style=\"color: #2BAD00\">26%</span>；装备者发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>时，装备者造成的<span style=\"color: #FF5521\">火属性贯穿伤害</span>提升<span style=\"color: #2BAD00\">11.7%</span>，最多叠加2层，持续20秒，每层效果单独结算持续时间。"
+      },
+      {
+        "level": 4,
+        "name": "焚心业火",
+        "effect": "暴击率提升<span style=\"color: #2BAD00\">29%</span>；装备者发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>时，装备者造成的<span style=\"color: #FF5521\">火属性贯穿伤害</span>提升<span style=\"color: #2BAD00\">13.05%</span>，最多叠加2层，持续20秒，每层效果单独结算持续时间。"
+      },
+      {
+        "level": 5,
+        "name": "焚心业火",
+        "effect": "暴击率提升<span style=\"color: #2BAD00\">32%</span>；装备者发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>时，装备者造成的<span style=\"color: #FF5521\">火属性贯穿伤害</span>提升<span style=\"color: #2BAD00\">14.4%</span>，最多叠加2层，持续20秒，每层效果单独结算持续时间。"
+      }
+    ]
+  },
+  {
+    "id": "14105",
+    "slug": "krakens-cradle",
+    "name": "海妖摇篮",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/17270851181675704974_272_14050658.webp",
+    "rarity": 4,
+    "specialty": {
+      "id": "6",
+      "name": "命破"
+    },
+    "exclusiveAgentName": "伊德海莉",
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 48
+    },
+    "advancedStat": {
+      "id": "11102",
+      "name": "生命值百分比",
+      "value": 0.12
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "触抚心拥",
+        "effect": "装备者的生命值降低时，造成的<span style=\"color: #98EFF0\">冰属性贯穿伤害</span>提升<span style=\"color: #2BAD00\">6%</span>，最多叠加3层，持续25秒，每层效果单独结算持续时间，0.5秒内最多触发一次；装备者生命值降低至最大值的50%时，暴击率提升<span style=\"color: #2BAD00\">20%</span>。"
+      },
+      {
+        "level": 2,
+        "name": "触抚心拥",
+        "effect": "装备者的生命值降低时，造成的<span style=\"color: #98EFF0\">冰属性贯穿伤害</span>提升<span style=\"color: #2BAD00\">7%</span>，最多叠加3层，持续25秒，每层效果单独结算持续时间，0.5秒内最多触发一次；装备者生命值降低至最大值的50%时，暴击率提升<span style=\"color: #2BAD00\">23%</span>。"
+      },
+      {
+        "level": 3,
+        "name": "触抚心拥",
+        "effect": "装备者的生命值降低时，造成的<span style=\"color: #98EFF0\">冰属性贯穿伤害</span>提升<span style=\"color: #2BAD00\">8%</span>，最多叠加3层，持续25秒，每层效果单独结算持续时间，0.5秒内最多触发一次；装备者生命值降低至最大值的50%时，暴击率提升<span style=\"color: #2BAD00\">26%</span>。"
+      },
+      {
+        "level": 4,
+        "name": "触抚心拥",
+        "effect": "装备者的生命值降低时，造成的<span style=\"color: #98EFF0\">冰属性贯穿伤害</span>提升<span style=\"color: #2BAD00\">9%</span>，最多叠加3层，持续25秒，每层效果单独结算持续时间，0.5秒内最多触发一次；装备者生命值降低至最大值的50%时，暴击率提升<span style=\"color: #2BAD00\">29%</span>。"
+      },
+      {
+        "level": 5,
+        "name": "触抚心拥",
+        "effect": "装备者的生命值降低时，造成的<span style=\"color: #98EFF0\">冰属性贯穿伤害</span>提升<span style=\"color: #2BAD00\">10%</span>，最多叠加3层，持续25秒，每层效果单独结算持续时间，0.5秒内最多触发一次；装备者生命值降低至最大值的50%时，暴击率提升<span style=\"color: #2BAD00\">32%</span>。"
+      }
+    ]
+  },
+  {
+    "id": "14145",
+    "slug": "dreamlit-hearth",
+    "name": "铸梦炉歌",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/14424828666234304416_272_14050658.webp",
+    "rarity": 4,
+    "specialty": {
+      "id": "4",
+      "name": "支援"
+    },
+    "exclusiveAgentName": "卢西娅",
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 48
+    },
+    "advancedStat": {
+      "id": "11102",
+      "name": "生命值百分比",
+      "value": 0.12
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "月引颂篇",
+        "effect": "装备者的能量自动回复提升<span style=\"color: #2BAD00\">0.4</span>点/秒；当装备者开启<span style=\"color: #FFFFFF\">[以太帷幕]</span>或延长<span style=\"color: #FFFFFF\">[以太帷幕]</span>的持续时间时，全队角色造成伤害提升<span style=\"color: #2BAD00\">25%</span>，生命值上限提升<span style=\"color: #2BAD00\">15%</span>，效果持续45秒，重复触发时刷新持续时间，该效果全队唯一。"
+      },
+      {
+        "level": 2,
+        "name": "月引颂篇",
+        "effect": "装备者的能量自动回复提升<span style=\"color: #2BAD00\">0.46</span>点/秒；当装备者开启<span style=\"color: #FFFFFF\">[以太帷幕]</span>或延长<span style=\"color: #FFFFFF\">[以太帷幕]</span>的持续时间时，全队角色造成伤害提升<span style=\"color: #2BAD00\">28.8%</span>，生命值上限提升<span style=\"color: #2BAD00\">17.3%</span>，效果持续45秒，重复触发时刷新持续时间，该效果全队唯一。"
+      },
+      {
+        "level": 3,
+        "name": "月引颂篇",
+        "effect": "装备者的能量自动回复提升<span style=\"color: #2BAD00\">0.52</span>点/秒；当装备者开启<span style=\"color: #FFFFFF\">[以太帷幕]</span>或延长<span style=\"color: #FFFFFF\">[以太帷幕]</span>的持续时间时，全队角色造成伤害提升<span style=\"color: #2BAD00\">32.5%</span>，生命值上限提升<span style=\"color: #2BAD00\">19.5%</span>，效果持续45秒，重复触发时刷新持续时间，该效果全队唯一。"
+      },
+      {
+        "level": 4,
+        "name": "月引颂篇",
+        "effect": "装备者的能量自动回复提升<span style=\"color: #2BAD00\">0.58</span>点/秒；当装备者开启<span style=\"color: #FFFFFF\">[以太帷幕]</span>或延长<span style=\"color: #FFFFFF\">[以太帷幕]</span>的持续时间时，全队角色造成伤害提升<span style=\"color: #2BAD00\">36.3%</span>，生命值上限提升<span style=\"color: #2BAD00\">21.8%</span>，效果持续45秒，重复触发时刷新持续时间，该效果全队唯一。"
+      },
+      {
+        "level": 5,
+        "name": "月引颂篇",
+        "effect": "装备者的能量自动回复提升<span style=\"color: #2BAD00\">0.64</span>点/秒；当装备者开启<span style=\"color: #FFFFFF\">[以太帷幕]</span>或延长<span style=\"color: #FFFFFF\">[以太帷幕]</span>的持续时间时，全队角色造成伤害提升<span style=\"color: #2BAD00\">40%</span>，生命值上限提升<span style=\"color: #2BAD00\">24%</span>，效果持续45秒，重复触发时刷新持续时间，该效果全队唯一。"
+      }
+    ]
+  },
+  {
+    "id": "13144",
+    "slug": "grill-owisp",
+    "name": "燔火胧夜",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/2167835481448336366_272_14050658.webp",
+    "rarity": 3,
+    "specialty": {
+      "id": "6",
+      "name": "命破"
+    },
+    "exclusiveAgentName": "真斗",
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 42
+    },
+    "advancedStat": {
+      "id": "11102",
+      "name": "生命值百分比",
+      "value": 0.1
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "笼中火",
+        "effect": "装备者造成的<span style=\"color: #FF5521\">火属性伤害</span>提升<span style=\"color: #2BAD00\">15%</span>；装备者的生命值降低时，暴击率提升<span style=\"color: #2BAD00\">15%</span>，持续5秒。"
+      },
+      {
+        "level": 2,
+        "name": "笼中火",
+        "effect": "装备者造成的<span style=\"color: #FF5521\">火属性伤害</span>提升<span style=\"color: #2BAD00\">17.25%</span>；装备者的生命值降低时，暴击率提升<span style=\"color: #2BAD00\">17.25%</span>，持续5秒。"
+      },
+      {
+        "level": 3,
+        "name": "笼中火",
+        "effect": "装备者造成的<span style=\"color: #FF5521\">火属性伤害</span>提升<span style=\"color: #2BAD00\">19.5%</span>；装备者的生命值降低时，暴击率提升<span style=\"color: #2BAD00\">19.5%</span>，持续5秒。"
+      },
+      {
+        "level": 4,
+        "name": "笼中火",
+        "effect": "装备者造成的<span style=\"color: #FF5521\">火属性伤害</span>提升<span style=\"color: #2BAD00\">21.75%</span>；装备者的生命值降低时，暴击率提升<span style=\"color: #2BAD00\">21.75%</span>，持续5秒。"
+      },
+      {
+        "level": 5,
+        "name": "笼中火",
+        "effect": "装备者造成的<span style=\"color: #FF5521\">火属性伤害</span>提升<span style=\"color: #2BAD00\">24%</span>；装备者的生命值降低时，暴击率提升<span style=\"color: #2BAD00\">24%</span>，持续5秒。"
+      }
+    ]
+  },
+  {
+    "id": "14137",
+    "slug": "qingming-birdcage",
+    "name": "青溟笼舍",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/14664936329557540257_272_14050658.webp",
+    "rarity": 4,
+    "specialty": {
+      "id": "6",
+      "name": "命破"
+    },
+    "exclusiveAgentName": "仪玄",
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 50
+    },
+    "advancedStat": {
+      "id": "11102",
+      "name": "生命值百分比",
+      "value": 0.12
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "云流运转",
+        "effect": "暴击率提升<span style=\"color: #2BAD00\">20%</span>；装备者释放<span style=\"color: #FFFFFF\">[强化特殊技]</span>时角色获得1层<span style=\"color: #FFFFFF\">[青溟同行]</span>效果，最多叠加2层，持续15秒，进入接战状态时直接获得2层，重复触发时刷新持续时间；每层<span style=\"color: #FFFFFF\">[青溟同行]</span>效果使装备者造成的<span style=\"color: #FE437E\">以太伤害</span>提升<span style=\"color: #2BAD00\">8%</span>，[终结技]或[强化特殊技]造成的<span style=\"color: #FE437E\">以太贯穿伤害</span>提升<span style=\"color: #2BAD00\">10%</span>。"
+      },
+      {
+        "level": 2,
+        "name": "云流运转",
+        "effect": "暴击率提升<span style=\"color: #2BAD00\">23%</span>；装备者释放<span style=\"color: #FFFFFF\">[强化特殊技]</span>时角色获得1层<span style=\"color: #FFFFFF\">[青溟同行]</span>效果，最多叠加2层，持续15秒，进入接战状态时直接获得2层，重复触发时刷新持续时间；每层<span style=\"color: #FFFFFF\">[青溟同行]</span>效果使装备者造成的<span style=\"color: #FE437E\">以太伤害</span>提升<span style=\"color: #2BAD00\">9.2%</span>，[终结技]或[强化特殊技]造成的<span style=\"color: #FE437E\">以太贯穿伤害</span>提升<span style=\"color: #2BAD00\">11.5%</span>。"
+      },
+      {
+        "level": 3,
+        "name": "云流运转",
+        "effect": "暴击率提升<span style=\"color: #2BAD00\">26%</span>；装备者释放<span style=\"color: #FFFFFF\">[强化特殊技]</span>时角色获得1层<span style=\"color: #FFFFFF\">[青溟同行]</span>效果，最多叠加2层，持续15秒，进入接战状态时直接获得2层，重复触发时刷新持续时间；每层<span style=\"color: #FFFFFF\">[青溟同行]</span>效果使装备者造成的<span style=\"color: #FE437E\">以太伤害</span>提升<span style=\"color: #2BAD00\">10.4%</span>，[终结技]或[强化特殊技]造成的<span style=\"color: #FE437E\">以太贯穿伤害</span>提升<span style=\"color: #2BAD00\">13%</span>。"
+      },
+      {
+        "level": 4,
+        "name": "云流运转",
+        "effect": "暴击率提升<span style=\"color: #2BAD00\">29%</span>；装备者释放<span style=\"color: #FFFFFF\">[强化特殊技]</span>时角色获得1层<span style=\"color: #FFFFFF\">[青溟同行]</span>效果，最多叠加2层，持续15秒，进入接战状态时直接获得2层，重复触发时刷新持续时间；每层<span style=\"color: #FFFFFF\">[青溟同行]</span>效果使装备者造成的<span style=\"color: #FE437E\">以太伤害</span>提升<span style=\"color: #2BAD00\">11.6%</span>，[终结技]或[强化特殊技]造成的<span style=\"color: #FE437E\">以太贯穿伤害</span>提升<span style=\"color: #2BAD00\">14.5%</span>。"
+      },
+      {
+        "level": 5,
+        "name": "云流运转",
+        "effect": "暴击率提升<span style=\"color: #2BAD00\">32%</span>；装备者释放<span style=\"color: #FFFFFF\">[强化特殊技]</span>时角色获得1层<span style=\"color: #FFFFFF\">[青溟同行]</span>效果，最多叠加2层，持续15秒，进入接战状态时直接获得2层，重复触发时刷新持续时间；每层<span style=\"color: #FFFFFF\">[青溟同行]</span>效果使装备者造成的<span style=\"color: #FE437E\">以太伤害</span>提升<span style=\"color: #2BAD00\">12.8%</span>，[终结技]或[强化特殊技]造成的<span style=\"color: #FE437E\">以太贯穿伤害</span>提升<span style=\"color: #2BAD00\">16%</span>。"
+      }
+    ]
+  },
+  {
+    "id": "14133",
+    "slug": "flight-of-fancy",
+    "name": "飞鸟星梦",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/11876828231878856583_272_14050658.webp",
+    "rarity": 4,
+    "specialty": {
+      "id": "3",
+      "name": "异常"
+    },
+    "exclusiveAgentName": "薇薇安",
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 48
+    },
+    "advancedStat": {
+      "id": "31203",
+      "name": "异常精通",
+      "value": 36
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "银刺幽羽",
+        "effect": "属性异常积蓄效率提升<span style=\"color: #2BAD00\">40%</span>；装备者造成<span style=\"color: #FE437E\">以太伤害</span>时，自身异常精通提升<span style=\"color: #2BAD00\">20</span>点，持续5秒，最多叠加6层，0.5秒内最多触发一次，重复触发时刷新持续时间。"
+      },
+      {
+        "level": 2,
+        "name": "银刺幽羽",
+        "effect": "属性异常积蓄效率提升<span style=\"color: #2BAD00\">46%</span>；装备者造成<span style=\"color: #FE437E\">以太伤害</span>时，自身异常精通提升<span style=\"color: #2BAD00\">23</span>点，持续5秒，最多叠加6层，0.5秒内最多触发一次，重复触发时刷新持续时间。"
+      },
+      {
+        "level": 3,
+        "name": "银刺幽羽",
+        "effect": "属性异常积蓄效率提升<span style=\"color: #2BAD00\">52%</span>；装备者造成<span style=\"color: #FE437E\">以太伤害</span>时，自身异常精通提升<span style=\"color: #2BAD00\">26</span>点，持续5秒，最多叠加6层，0.5秒内最多触发一次，重复触发时刷新持续时间。"
+      },
+      {
+        "level": 4,
+        "name": "银刺幽羽",
+        "effect": "属性异常积蓄效率提升<span style=\"color: #2BAD00\">58%</span>；装备者造成<span style=\"color: #FE437E\">以太伤害</span>时，自身异常精通提升<span style=\"color: #2BAD00\">29</span>点，持续5秒，最多叠加6层，0.5秒内最多触发一次，重复触发时刷新持续时间。"
+      },
+      {
+        "level": 5,
+        "name": "银刺幽羽",
+        "effect": "属性异常积蓄效率提升<span style=\"color: #2BAD00\">64%</span>；装备者造成<span style=\"color: #FE437E\">以太伤害</span>时，自身异常精通提升<span style=\"color: #2BAD00\">32</span>点，持续5秒，最多叠加6层，0.5秒内最多触发一次，重复触发时刷新持续时间。"
+      }
+    ]
+  },
+  {
+    "id": "14146",
+    "slug": "cordis-germina",
+    "name": "机巧心种",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/6653494995125539789_272_14050658.webp",
+    "rarity": 4,
+    "specialty": {
+      "id": "1",
+      "name": "强攻"
+    },
+    "exclusiveAgentName": "「席德」",
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 48
+    },
+    "advancedStat": {
+      "id": "20103",
+      "name": "暴击率",
+      "value": 0.096
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "芽生炉心",
+        "effect": "暴击率提升<span style=\"color: #2BAD00\">15%</span>；装备者的<span style=\"color: #FFFFFF\">[普通攻击]</span>、<span style=\"color: #FFFFFF\">[强化特殊技]</span>造成伤害时，可分别获得1层增益效果，每层增益效果使装备者造成的<span style=\"color: #2EB6FF\">电属性伤害</span>提升<span style=\"color: #2BAD00\">12.5%</span>，最多叠加2层，持续40秒，每层效果单独结算持续时间，同一招式内最多触发一次；拥有2层增益效果时，装备者的<span style=\"color: #FFFFFF\">[普通攻击]</span>和<span style=\"color: #FFFFFF\">[终结技]</span>对敌人造成的伤害无视<span style=\"color: #2BAD00\">20%</span>防御力。"
+      },
+      {
+        "level": 2,
+        "name": "芽生炉心",
+        "effect": "暴击率提升<span style=\"color: #2BAD00\">17%</span>；装备者的<span style=\"color: #FFFFFF\">[普通攻击]</span>、<span style=\"color: #FFFFFF\">[强化特殊技]</span>造成伤害时，可分别获得1层增益效果，每层增益效果使装备者造成的<span style=\"color: #2EB6FF\">电属性伤害</span>提升<span style=\"color: #2BAD00\">14.5%</span>，最多叠加2层，持续40秒，每层效果单独结算持续时间，同一招式内最多触发一次；拥有2层增益效果时，装备者的<span style=\"color: #FFFFFF\">[普通攻击]</span>和<span style=\"color: #FFFFFF\">[终结技]</span>对敌人造成的伤害无视<span style=\"color: #2BAD00\">23%</span>防御力。"
+      },
+      {
+        "level": 3,
+        "name": "芽生炉心",
+        "effect": "暴击率提升<span style=\"color: #2BAD00\">19%</span>；装备者的<span style=\"color: #FFFFFF\">[普通攻击]</span>、<span style=\"color: #FFFFFF\">[强化特殊技]</span>造成伤害时，可分别获得1层增益效果，每层增益效果使装备者造成的<span style=\"color: #2EB6FF\">电属性伤害</span>提升<span style=\"color: #2BAD00\">16.5%</span>，最多叠加2层，持续40秒，每层效果单独结算持续时间，同一招式内最多触发一次；拥有2层增益效果时，装备者的<span style=\"color: #FFFFFF\">[普通攻击]</span>和<span style=\"color: #FFFFFF\">[终结技]</span>对敌人造成的伤害无视<span style=\"color: #2BAD00\">26%</span>防御力。"
+      },
+      {
+        "level": 4,
+        "name": "芽生炉心",
+        "effect": "暴击率提升<span style=\"color: #2BAD00\">21%</span>；装备者的<span style=\"color: #FFFFFF\">[普通攻击]</span>、<span style=\"color: #FFFFFF\">[强化特殊技]</span>造成伤害时，可分别获得1层增益效果，每层增益效果使装备者造成的<span style=\"color: #2EB6FF\">电属性伤害</span>提升<span style=\"color: #2BAD00\">18.5%</span>，最多叠加2层，持续40秒，每层效果单独结算持续时间，同一招式内最多触发一次；拥有2层增益效果时，装备者的<span style=\"color: #FFFFFF\">[普通攻击]</span>和<span style=\"color: #FFFFFF\">[终结技]</span>对敌人造成的伤害无视<span style=\"color: #2BAD00\">29%</span>防御力。"
+      },
+      {
+        "level": 5,
+        "name": "芽生炉心",
+        "effect": "暴击率提升<span style=\"color: #2BAD00\">23%</span>；装备者的<span style=\"color: #FFFFFF\">[普通攻击]</span>、<span style=\"color: #FFFFFF\">[强化特殊技]</span>造成伤害时，可分别获得1层增益效果，每层增益效果使装备者造成的<span style=\"color: #2EB6FF\">电属性伤害</span>提升<span style=\"color: #2BAD00\">20%</span>，最多叠加2层，持续40秒，每层效果单独结算持续时间，同一招式内最多触发一次；拥有2层增益效果时，装备者的<span style=\"color: #FFFFFF\">[普通攻击]</span>和<span style=\"color: #FFFFFF\">[终结技]</span>对敌人造成的伤害无视<span style=\"color: #2BAD00\">32%</span>防御力。"
+      }
+    ]
+  },
+  {
+    "id": "14141",
+    "slug": "metanukimorphosis",
+    "name": "狸法七变化",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/14502521081514906470_272_14050658.webp",
+    "rarity": 4,
+    "specialty": {
+      "id": "4",
+      "name": "支援"
+    },
+    "exclusiveAgentName": "柚叶",
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 48
+    },
+    "advancedStat": {
+      "id": "30502",
+      "name": "能量自动回复",
+      "value": 0.24
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "机巧玲珑",
+        "effect": "装备者的<span style=\"color: #FFFFFF\">[强化特殊技]</span>或<span style=\"color: #FFFFFF\">[终结技]</span>造成<span style=\"color: #F0D12B\">物理伤害</span>时，装备者<span style=\"color: #FFFFFF\">异常掌控</span>提升<span style=\"color: #2BAD00\">30</span>点，持续40秒；装备者的<span style=\"color: #FFFFFF\">[追加攻击]</span>命中敌人时，使全队角色的<span style=\"color: #FFFFFF\">异常精通</span>提升<span style=\"color: #2BAD00\">60</span>点，持续40秒，该效果全队唯一。"
+      },
+      {
+        "level": 2,
+        "name": "机巧玲珑",
+        "effect": "装备者的<span style=\"color: #FFFFFF\">[强化特殊技]</span>或<span style=\"color: #FFFFFF\">[终结技]</span>造成<span style=\"color: #F0D12B\">物理伤害</span>时，装备者<span style=\"color: #FFFFFF\">异常掌控</span>提升<span style=\"color: #2BAD00\">34</span>点，持续40秒；装备者的<span style=\"color: #FFFFFF\">[追加攻击]</span>命中敌人时，使全队角色的<span style=\"color: #FFFFFF\">异常精通</span>提升<span style=\"color: #2BAD00\">69</span>点，持续40秒，该效果全队唯一。"
+      },
+      {
+        "level": 3,
+        "name": "机巧玲珑",
+        "effect": "装备者的<span style=\"color: #FFFFFF\">[强化特殊技]</span>或<span style=\"color: #FFFFFF\">[终结技]</span>造成<span style=\"color: #F0D12B\">物理伤害</span>时，装备者<span style=\"color: #FFFFFF\">异常掌控</span>提升<span style=\"color: #2BAD00\">39</span>点，持续40秒；装备者的<span style=\"color: #FFFFFF\">[追加攻击]</span>命中敌人时，使全队角色的<span style=\"color: #FFFFFF\">异常精通</span>提升<span style=\"color: #2BAD00\">78</span>点，持续40秒，该效果全队唯一。"
+      },
+      {
+        "level": 4,
+        "name": "机巧玲珑",
+        "effect": "装备者的<span style=\"color: #FFFFFF\">[强化特殊技]</span>或<span style=\"color: #FFFFFF\">[终结技]</span>造成<span style=\"color: #F0D12B\">物理伤害</span>时，装备者<span style=\"color: #FFFFFF\">异常掌控</span>提升<span style=\"color: #2BAD00\">43</span>点，持续40秒；装备者的<span style=\"color: #FFFFFF\">[追加攻击]</span>命中敌人时，使全队角色的<span style=\"color: #FFFFFF\">异常精通</span>提升<span style=\"color: #2BAD00\">87</span>点，持续40秒，该效果全队唯一。"
+      },
+      {
+        "level": 5,
+        "name": "机巧玲珑",
+        "effect": "装备者的<span style=\"color: #FFFFFF\">[强化特殊技]</span>或<span style=\"color: #FFFFFF\">[终结技]</span>造成<span style=\"color: #F0D12B\">物理伤害</span>时，装备者<span style=\"color: #FFFFFF\">异常掌控</span>提升<span style=\"color: #2BAD00\">48</span>点，持续40秒；装备者的<span style=\"color: #FFFFFF\">[追加攻击]</span>命中敌人时，使全队角色的<span style=\"color: #FFFFFF\">异常精通</span>提升<span style=\"color: #2BAD00\">96</span>点，持续40秒，该效果全队唯一。"
+      }
+    ]
+  },
+  {
+    "id": "14124",
+    "slug": "riot-suppressor-mark-vi",
+    "name": "防暴者Ⅵ型",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/9053883884698072842_272_14050658.webp",
+    "rarity": 4,
+    "specialty": {
+      "id": "1",
+      "name": "强攻"
+    },
+    "exclusiveAgentName": "朱鸢",
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 48
+    },
+    "advancedStat": {
+      "id": "21103",
+      "name": "暴击伤害",
+      "value": 0.192
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "安全巡查",
+        "effect": "暴击率提升<span style=\"color: #2BAD00\">15%</span>；发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>时，为装备者提供8层充能效果，最多叠加8层；<span style=\"color: #FFFFFF\">[普通攻击]</span>或<span style=\"color: #FFFFFF\">[冲刺攻击]</span>造成<span style=\"color: #FE437E\">以太伤害</span>时，消耗1层充能，使当前招式造成的伤害提升<span style=\"color: #2BAD00\">35%</span>。"
+      },
+      {
+        "level": 2,
+        "name": "安全巡查",
+        "effect": "暴击率提升<span style=\"color: #2BAD00\">18.8%</span>；发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>时，为装备者提供8层充能效果，最多叠加8层；<span style=\"color: #FFFFFF\">[普通攻击]</span>或<span style=\"color: #FFFFFF\">[冲刺攻击]</span>造成<span style=\"color: #FE437E\">以太伤害</span>时，消耗1层充能，使当前招式造成的伤害提升<span style=\"color: #2BAD00\">43.5%</span>。"
+      },
+      {
+        "level": 3,
+        "name": "安全巡查",
+        "effect": "暴击率提升<span style=\"color: #2BAD00\">22.6%</span>；发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>时，为装备者提供8层充能效果，最多叠加8层；<span style=\"color: #FFFFFF\">[普通攻击]</span>或<span style=\"color: #FFFFFF\">[冲刺攻击]</span>造成<span style=\"color: #FE437E\">以太伤害</span>时，消耗1层充能，使当前招式造成的伤害提升<span style=\"color: #2BAD00\">52%</span>。"
+      },
+      {
+        "level": 4,
+        "name": "安全巡查",
+        "effect": "暴击率提升<span style=\"color: #2BAD00\">26.4%</span>；发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>时，为装备者提供8层充能效果，最多叠加8层；<span style=\"color: #FFFFFF\">[普通攻击]</span>或<span style=\"color: #FFFFFF\">[冲刺攻击]</span>造成<span style=\"color: #FE437E\">以太伤害</span>时，消耗1层充能，使当前招式造成的伤害提升<span style=\"color: #2BAD00\">60.5%</span>。"
+      },
+      {
+        "level": 5,
+        "name": "安全巡查",
+        "effect": "暴击率提升<span style=\"color: #2BAD00\">30%</span>；发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>时，为装备者提供8层充能效果，最多叠加8层；<span style=\"color: #FFFFFF\">[普通攻击]</span>或<span style=\"color: #FFFFFF\">[冲刺攻击]</span>造成<span style=\"color: #FE437E\">以太伤害</span>时，消耗1层充能，使当前招式造成的伤害提升<span style=\"color: #2BAD00\">70%</span>。"
+      }
+    ]
+  },
+  {
+    "id": "14129",
+    "slug": "myriad-eclipse",
+    "name": "千面日陨",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/18441994489171329950_272_14050658.webp",
+    "rarity": 4,
+    "specialty": {
+      "id": "1",
+      "name": "强攻"
+    },
+    "exclusiveAgentName": "雨果",
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 48
+    },
+    "advancedStat": {
+      "id": "20103",
+      "name": "暴击率",
+      "value": 0.096
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "万千非我",
+        "effect": "暴击伤害提升<span style=\"color: #2BAD00\">45%</span>；<span style=\"color: #FFFFFF\">[强化特殊技]</span>、<span style=\"color: #FFFFFF\">[连携技]</span>、<span style=\"color: #FFFFFF\">[终结技]</span>造成<span style=\"color: #98EFF0\">冰属性伤害</span>时，角色获得<span style=\"color: #FFFFFF\">[零度处刑宣言]</span>效果，持续3秒；<span style=\"color: #FFFFFF\">[零度处刑宣言]</span>效果期间，角色命中敌人时无视<span style=\"color: #2BAD00\">25%</span>防御力。"
+      },
+      {
+        "level": 2,
+        "name": "万千非我",
+        "effect": "暴击伤害提升<span style=\"color: #2BAD00\">51.75%</span>；<span style=\"color: #FFFFFF\">[强化特殊技]</span>、<span style=\"color: #FFFFFF\">[连携技]</span>、<span style=\"color: #FFFFFF\">[终结技]</span>造成<span style=\"color: #98EFF0\">冰属性伤害</span>时，角色获得<span style=\"color: #FFFFFF\">[零度处刑宣言]</span>效果，持续3秒；<span style=\"color: #FFFFFF\">[零度处刑宣言]</span>效果期间，角色命中敌人时无视<span style=\"color: #2BAD00\">28.75%</span>防御力。"
+      },
+      {
+        "level": 3,
+        "name": "万千非我",
+        "effect": "暴击伤害提升<span style=\"color: #2BAD00\">58.5%</span>；<span style=\"color: #FFFFFF\">[强化特殊技]</span>、<span style=\"color: #FFFFFF\">[连携技]</span>、<span style=\"color: #FFFFFF\">[终结技]</span>造成<span style=\"color: #98EFF0\">冰属性伤害</span>时，角色获得<span style=\"color: #FFFFFF\">[零度处刑宣言]</span>效果，持续3秒；<span style=\"color: #FFFFFF\">[零度处刑宣言]</span>效果期间，角色命中敌人时无视<span style=\"color: #2BAD00\">32.5%</span>防御力。"
+      },
+      {
+        "level": 4,
+        "name": "万千非我",
+        "effect": "暴击伤害提升<span style=\"color: #2BAD00\">65.25%</span>；<span style=\"color: #FFFFFF\">[强化特殊技]</span>、<span style=\"color: #FFFFFF\">[连携技]</span>、<span style=\"color: #FFFFFF\">[终结技]</span>造成<span style=\"color: #98EFF0\">冰属性伤害</span>时，角色获得<span style=\"color: #FFFFFF\">[零度处刑宣言]</span>效果，持续3秒；<span style=\"color: #FFFFFF\">[零度处刑宣言]</span>效果期间，角色命中敌人时无视<span style=\"color: #2BAD00\">36.25%</span>防御力。"
+      },
+      {
+        "level": 5,
+        "name": "万千非我",
+        "effect": "暴击伤害提升<span style=\"color: #2BAD00\">72%</span>；<span style=\"color: #FFFFFF\">[强化特殊技]</span>、<span style=\"color: #FFFFFF\">[连携技]</span>、<span style=\"color: #FFFFFF\">[终结技]</span>造成<span style=\"color: #98EFF0\">冰属性伤害</span>时，角色获得<span style=\"color: #FFFFFF\">[零度处刑宣言]</span>效果，持续3秒；<span style=\"color: #FFFFFF\">[零度处刑宣言]</span>效果期间，角色命中敌人时无视<span style=\"color: #2BAD00\">40%</span>防御力。"
+      }
+    ]
+  },
+  {
+    "id": "14131",
+    "slug": "elegant-vanity",
+    "name": "玲珑妆匣",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/17583747718610004501_272_14050658.webp",
+    "rarity": 4,
+    "specialty": {
+      "id": "4",
+      "name": "支援"
+    },
+    "exclusiveAgentName": "耀嘉音",
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 48
+    },
+    "advancedStat": {
+      "id": "12102",
+      "name": "攻击力百分比",
+      "value": 0.12
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "卓卓千华",
+        "effect": "队伍中任意角色通过<span style=\"color: #FFFFFF\">[快速支援]</span>、<span style=\"color: #FFFFFF\">[连携技]</span>、<span style=\"color: #FFFFFF\">[招架支援]</span>、<span style=\"color: #FFFFFF\">[回避支援]</span>入场时，为装备者回复<span style=\"color: #2BAD00\">5</span>点能量，5秒内最多触发一次；装备者消耗25点或以上能量时，全队角色造成的伤害提升<span style=\"color: #2BAD00\">10%</span>，最多叠加2层，持续20秒，重复触发时刷新持续时间，该效果全队唯一。"
+      },
+      {
+        "level": 2,
+        "name": "卓卓千华",
+        "effect": "队伍中任意角色通过<span style=\"color: #FFFFFF\">[快速支援]</span>、<span style=\"color: #FFFFFF\">[连携技]</span>、<span style=\"color: #FFFFFF\">[招架支援]</span>、<span style=\"color: #FFFFFF\">[回避支援]</span>入场时，为装备者回复<span style=\"color: #2BAD00\">5.5</span>点能量，5秒内最多触发一次；装备者消耗25点或以上能量时，全队角色造成的伤害提升<span style=\"color: #2BAD00\">11.5%</span>，最多叠加2层，持续20秒，重复触发时刷新持续时间，该效果全队唯一。"
+      },
+      {
+        "level": 3,
+        "name": "卓卓千华",
+        "effect": "队伍中任意角色通过<span style=\"color: #FFFFFF\">[快速支援]</span>、<span style=\"color: #FFFFFF\">[连携技]</span>、<span style=\"color: #FFFFFF\">[招架支援]</span>、<span style=\"color: #FFFFFF\">[回避支援]</span>入场时，为装备者回复<span style=\"color: #2BAD00\">6</span>点能量，5秒内最多触发一次；装备者消耗25点或以上能量时，全队角色造成的伤害提升<span style=\"color: #2BAD00\">13%</span>，最多叠加2层，持续20秒，重复触发时刷新持续时间，该效果全队唯一。"
+      },
+      {
+        "level": 4,
+        "name": "卓卓千华",
+        "effect": "队伍中任意角色通过<span style=\"color: #FFFFFF\">[快速支援]</span>、<span style=\"color: #FFFFFF\">[连携技]</span>、<span style=\"color: #FFFFFF\">[招架支援]</span>、<span style=\"color: #FFFFFF\">[回避支援]</span>入场时，为装备者回复<span style=\"color: #2BAD00\">6.5</span>点能量，5秒内最多触发一次；装备者消耗25点或以上能量时，全队角色造成的伤害提升<span style=\"color: #2BAD00\">14.5%</span>，最多叠加2层，持续20秒，重复触发时刷新持续时间，该效果全队唯一。"
+      },
+      {
+        "level": 5,
+        "name": "卓卓千华",
+        "effect": "队伍中任意角色通过<span style=\"color: #FFFFFF\">[快速支援]</span>、<span style=\"color: #FFFFFF\">[连携技]</span>、<span style=\"color: #FFFFFF\">[招架支援]</span>、<span style=\"color: #FFFFFF\">[回避支援]</span>入场时，为装备者回复<span style=\"color: #2BAD00\">7</span>点能量，5秒内最多触发一次；装备者消耗25点或以上能量时，全队角色造成的伤害提升<span style=\"color: #2BAD00\">16%</span>，最多叠加2层，持续20秒，重复触发时刷新持续时间，该效果全队唯一。"
+      }
+    ]
+  },
+  {
+    "id": "14130",
+    "slug": "bellicose-blaze",
+    "name": "嚣枪喧焰",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/3801614239057960492_272_14050658.webp",
+    "rarity": 4,
+    "specialty": {
+      "id": "1",
+      "name": "强攻"
+    },
+    "exclusiveAgentName": "奥菲丝&「鬼火」",
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 48
+    },
+    "advancedStat": {
+      "id": "30502",
+      "name": "能量自动回复",
+      "value": 0.24
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "喋声吞炎",
+        "effect": "暴击率提升<span style=\"color: #2BAD00\">20%</span>；装备者发动<span style=\"color: #FFFFFF\">[追加攻击]</span>造成<span style=\"color: #FF5521\">火属性伤害</span>时，装备者的攻击对敌人造成的伤害无视<span style=\"color: #2BAD00\">15%</span>防御力，持续8秒，3秒内最多获得1层，最多叠加2层，重复触发时刷新持续时间。"
+      },
+      {
+        "level": 2,
+        "name": "喋声吞炎",
+        "effect": "暴击率提升<span style=\"color: #2BAD00\">23%</span>；装备者发动<span style=\"color: #FFFFFF\">[追加攻击]</span>造成<span style=\"color: #FF5521\">火属性伤害</span>时，装备者的攻击对敌人造成的伤害无视<span style=\"color: #2BAD00\">17.2%</span>防御力，持续8秒，3秒内最多获得1层，最多叠加2层，重复触发时刷新持续时间。"
+      },
+      {
+        "level": 3,
+        "name": "喋声吞炎",
+        "effect": "暴击率提升<span style=\"color: #2BAD00\">26%</span>；装备者发动<span style=\"color: #FFFFFF\">[追加攻击]</span>造成<span style=\"color: #FF5521\">火属性伤害</span>时，装备者的攻击对敌人造成的伤害无视<span style=\"color: #2BAD00\">19.5%</span>防御力，持续8秒，3秒内最多获得1层，最多叠加2层，重复触发时刷新持续时间。"
+      },
+      {
+        "level": 4,
+        "name": "喋声吞炎",
+        "effect": "暴击率提升<span style=\"color: #2BAD00\">29%</span>；装备者发动<span style=\"color: #FFFFFF\">[追加攻击]</span>造成<span style=\"color: #FF5521\">火属性伤害</span>时，装备者的攻击对敌人造成的伤害无视<span style=\"color: #2BAD00\">21.7%</span>防御力，持续8秒，3秒内最多获得1层，最多叠加2层，重复触发时刷新持续时间。"
+      },
+      {
+        "level": 5,
+        "name": "喋声吞炎",
+        "effect": "暴击率提升<span style=\"color: #2BAD00\">32%</span>；装备者发动<span style=\"color: #FFFFFF\">[追加攻击]</span>造成<span style=\"color: #FF5521\">火属性伤害</span>时，装备者的攻击对敌人造成的伤害无视<span style=\"color: #2BAD00\">24%</span>防御力，持续8秒，3秒内最多获得1层，最多叠加2层，重复触发时刷新持续时间。"
+      }
+    ]
+  },
+  {
+    "id": "14132",
+    "slug": "heartstring-nocturne",
+    "name": "心弦夜响",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/17224156199016021346_272_14050658.webp",
+    "rarity": 4,
+    "specialty": {
+      "id": "1",
+      "name": "强攻"
+    },
+    "exclusiveAgentName": "伊芙琳",
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 48
+    },
+    "advancedStat": {
+      "id": "20103",
+      "name": "暴击率",
+      "value": 0.096
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "弦音相随",
+        "effect": "暴击伤害提升<span style=\"color: #2BAD00\">50%</span>；装备者进入接战状态、发动<span style=\"color: #FFFFFF\">[连携技]</span>、<span style=\"color: #FFFFFF\">[终结技]</span>时，获得1层<span style=\"color: #FFFFFF\">[心弦]</span>，每层<span style=\"color: #FFFFFF\">[心弦]</span>会使装备者的<span style=\"color: #FFFFFF\">[连携技]</span>和<span style=\"color: #FFFFFF\">[终结技]</span>无视目标<span style=\"color: #2BAD00\">12.5%</span><span style=\"color: #FF5521\">火属性伤害抗性</span>，最多叠加2层，持续30秒，重复触发时刷新持续时间。"
+      },
+      {
+        "level": 2,
+        "name": "弦音相随",
+        "effect": "暴击伤害提升<span style=\"color: #2BAD00\">57.5%</span>；装备者进入接战状态、发动<span style=\"color: #FFFFFF\">[连携技]</span>、<span style=\"color: #FFFFFF\">[终结技]</span>时，获得1层<span style=\"color: #FFFFFF\">[心弦]</span>，每层<span style=\"color: #FFFFFF\">[心弦]</span>会使装备者的<span style=\"color: #FFFFFF\">[连携技]</span>和<span style=\"color: #FFFFFF\">[终结技]</span>无视目标<span style=\"color: #2BAD00\">14.5%</span><span style=\"color: #FF5521\">火属性伤害抗性</span>，最多叠加2层，持续30秒，重复触发时刷新持续时间。"
+      },
+      {
+        "level": 3,
+        "name": "弦音相随",
+        "effect": "暴击伤害提升<span style=\"color: #2BAD00\">65%</span>；装备者进入接战状态、发动<span style=\"color: #FFFFFF\">[连携技]</span>、<span style=\"color: #FFFFFF\">[终结技]</span>时，获得1层<span style=\"color: #FFFFFF\">[心弦]</span>，每层<span style=\"color: #FFFFFF\">[心弦]</span>会使装备者的<span style=\"color: #FFFFFF\">[连携技]</span>和<span style=\"color: #FFFFFF\">[终结技]</span>无视目标<span style=\"color: #2BAD00\">16.5%</span><span style=\"color: #FF5521\">火属性伤害抗性</span>，最多叠加2层，持续30秒，重复触发时刷新持续时间。"
+      },
+      {
+        "level": 4,
+        "name": "弦音相随",
+        "effect": "暴击伤害提升<span style=\"color: #2BAD00\">72.5%</span>；装备者进入接战状态、发动<span style=\"color: #FFFFFF\">[连携技]</span>、<span style=\"color: #FFFFFF\">[终结技]</span>时，获得1层<span style=\"color: #FFFFFF\">[心弦]</span>，每层<span style=\"color: #FFFFFF\">[心弦]</span>会使装备者的<span style=\"color: #FFFFFF\">[连携技]</span>和<span style=\"color: #FFFFFF\">[终结技]</span>无视目标<span style=\"color: #2BAD00\">18.5%</span><span style=\"color: #FF5521\">火属性伤害抗性</span>，最多叠加2层，持续30秒，重复触发时刷新持续时间。"
+      },
+      {
+        "level": 5,
+        "name": "弦音相随",
+        "effect": "暴击伤害提升<span style=\"color: #2BAD00\">80%</span>；装备者进入接战状态、发动<span style=\"color: #FFFFFF\">[连携技]</span>、<span style=\"color: #FFFFFF\">[终结技]</span>时，获得1层<span style=\"color: #FFFFFF\">[心弦]</span>，每层<span style=\"color: #FFFFFF\">[心弦]</span>会使装备者的<span style=\"color: #FFFFFF\">[连携技]</span>和<span style=\"color: #FFFFFF\">[终结技]</span>无视目标<span style=\"color: #2BAD00\">20%</span><span style=\"color: #FF5521\">火属性伤害抗性</span>，最多叠加2层，持续30秒，重复触发时刷新持续时间。"
+      }
+    ]
+  },
+  {
+    "id": "14125",
+    "slug": "ice-jade-teapot",
+    "name": "玉壶青冰",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/3800981583187073749_272_14050658.webp",
+    "rarity": 4,
+    "specialty": {
+      "id": "2",
+      "name": "击破"
+    },
+    "exclusiveAgentName": "青衣",
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 48
+    },
+    "advancedStat": {
+      "id": "12202",
+      "name": "冲击力",
+      "value": 0.072
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "泠泠连奏",
+        "effect": "<span style=\"color: #FFFFFF\">[普通攻击]</span>命中敌人时，获得1层<span style=\"color: #FFFFFF\">[茶劲]</span>，每层<span style=\"color: #FFFFFF\">[茶劲]</span>使装备者的冲击力提升<span style=\"color: #2BAD00\">0.7%</span>，最多叠加30层，持续8秒，每层效果单独结算持续时间；获得<span style=\"color: #FFFFFF\">[茶劲]</span>时，若装备者拥有的<span style=\"color: #FFFFFF\">[茶劲]</span>层数大于等于15层，全队角色造成的伤害提升<span style=\"color: #2BAD00\">20%</span>，持续10秒，同名被动效果之间不可叠加。"
+      },
+      {
+        "level": 2,
+        "name": "泠泠连奏",
+        "effect": "<span style=\"color: #FFFFFF\">[普通攻击]</span>命中敌人时，获得1层<span style=\"color: #FFFFFF\">[茶劲]</span>，每层<span style=\"color: #FFFFFF\">[茶劲]</span>使装备者的冲击力提升<span style=\"color: #2BAD00\">0.88%</span>，最多叠加30层，持续8秒，每层效果单独结算持续时间；获得<span style=\"color: #FFFFFF\">[茶劲]</span>时，若装备者拥有的<span style=\"color: #FFFFFF\">[茶劲]</span>层数大于等于15层，全队角色造成的伤害提升<span style=\"color: #2BAD00\">23%</span>，持续10秒，同名被动效果之间不可叠加。"
+      },
+      {
+        "level": 3,
+        "name": "泠泠连奏",
+        "effect": "<span style=\"color: #FFFFFF\">[普通攻击]</span>命中敌人时，获得1层<span style=\"color: #FFFFFF\">[茶劲]</span>，每层<span style=\"color: #FFFFFF\">[茶劲]</span>使装备者的冲击力提升<span style=\"color: #2BAD00\">1.05%</span>，最多叠加30层，持续8秒，每层效果单独结算持续时间；获得<span style=\"color: #FFFFFF\">[茶劲]</span>时，若装备者拥有的<span style=\"color: #FFFFFF\">[茶劲]</span>层数大于等于15层，全队角色造成的伤害提升<span style=\"color: #2BAD00\">26%</span>，持续10秒，同名被动效果之间不可叠加。"
+      },
+      {
+        "level": 4,
+        "name": "泠泠连奏",
+        "effect": "<span style=\"color: #FFFFFF\">[普通攻击]</span>命中敌人时，获得1层<span style=\"color: #FFFFFF\">[茶劲]</span>，每层<span style=\"color: #FFFFFF\">[茶劲]</span>使装备者的冲击力提升<span style=\"color: #2BAD00\">1.22%</span>，最多叠加30层，持续8秒，每层效果单独结算持续时间；获得<span style=\"color: #FFFFFF\">[茶劲]</span>时，若装备者拥有的<span style=\"color: #FFFFFF\">[茶劲]</span>层数大于等于15层，全队角色造成的伤害提升<span style=\"color: #2BAD00\">29%</span>，持续10秒，同名被动效果之间不可叠加。"
+      },
+      {
+        "level": 5,
+        "name": "泠泠连奏",
+        "effect": "<span style=\"color: #FFFFFF\">[普通攻击]</span>命中敌人时，获得1层<span style=\"color: #FFFFFF\">[茶劲]</span>，每层<span style=\"color: #FFFFFF\">[茶劲]</span>使装备者的冲击力提升<span style=\"color: #2BAD00\">1.4%</span>，最多叠加30层，持续8秒，每层效果单独结算持续时间；获得<span style=\"color: #FFFFFF\">[茶劲]</span>时，若装备者拥有的<span style=\"color: #FFFFFF\">[茶劲]</span>层数大于等于15层，全队角色造成的伤害提升<span style=\"color: #2BAD00\">32%</span>，持续10秒，同名被动效果之间不可叠加。"
+      }
+    ]
+  },
+  {
+    "id": "14122",
+    "slug": "timeweaver",
+    "name": "时流贤者",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/2361211180638574087_272_14050658.webp",
+    "rarity": 4,
+    "specialty": {
+      "id": "3",
+      "name": "异常"
+    },
+    "exclusiveAgentName": "柳",
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 48
+    },
+    "advancedStat": {
+      "id": "12102",
+      "name": "攻击力百分比",
+      "value": 0.12
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "时喰奇谋",
+        "effect": "装备者的<span style=\"color: #2EB6FF\">电属性异常积蓄效率</span>提升<span style=\"color: #2BAD00\">30%</span>；<span style=\"color: #FFFFFF\">[特殊技]</span>或<span style=\"color: #FFFFFF\">[强化特殊技]</span>命中处于属性异常状态下的敌人时，装备者的异常精通提升<span style=\"color: #2BAD00\">75</span>点，持续15秒；<br/>当装备者的异常精通大于等于375点时，由装备者造成的<span style=\"color: #FFFFFF\">[紊乱]</span>伤害提升<span style=\"color: #2BAD00\">25%</span>。"
+      },
+      {
+        "level": 2,
+        "name": "时喰奇谋",
+        "effect": "装备者的<span style=\"color: #2EB6FF\">电属性异常积蓄效率</span>提升<span style=\"color: #2BAD00\">35%</span>；<span style=\"color: #FFFFFF\">[特殊技]</span>或<span style=\"color: #FFFFFF\">[强化特殊技]</span>命中处于属性异常状态下的敌人时，装备者的异常精通提升<span style=\"color: #2BAD00\">85</span>点，持续15秒；<br/>当装备者的异常精通大于等于375点时，由装备者造成的<span style=\"color: #FFFFFF\">[紊乱]</span>伤害提升<span style=\"color: #2BAD00\">27.5%</span>。"
+      },
+      {
+        "level": 3,
+        "name": "时喰奇谋",
+        "effect": "装备者的<span style=\"color: #2EB6FF\">电属性异常积蓄效率</span>提升<span style=\"color: #2BAD00\">40%</span>；<span style=\"color: #FFFFFF\">[特殊技]</span>或<span style=\"color: #FFFFFF\">[强化特殊技]</span>命中处于属性异常状态下的敌人时，装备者的异常精通提升<span style=\"color: #2BAD00\">95</span>点，持续15秒；<br/>当装备者的异常精通大于等于375点时，由装备者造成的<span style=\"color: #FFFFFF\">[紊乱]</span>伤害提升<span style=\"color: #2BAD00\">30%</span>。"
+      },
+      {
+        "level": 4,
+        "name": "时喰奇谋",
+        "effect": "装备者的<span style=\"color: #2EB6FF\">电属性异常积蓄效率</span>提升<span style=\"color: #2BAD00\">45%</span>；<span style=\"color: #FFFFFF\">[特殊技]</span>或<span style=\"color: #FFFFFF\">[强化特殊技]</span>命中处于属性异常状态下的敌人时，装备者的异常精通提升<span style=\"color: #2BAD00\">105</span>点，持续15秒；<br/>当装备者的异常精通大于等于375点时，由装备者造成的<span style=\"color: #FFFFFF\">[紊乱]</span>伤害提升<span style=\"color: #2BAD00\">32.5%</span>。"
+      },
+      {
+        "level": 5,
+        "name": "时喰奇谋",
+        "effect": "装备者的<span style=\"color: #2EB6FF\">电属性异常积蓄效率</span>提升<span style=\"color: #2BAD00\">50%</span>；<span style=\"color: #FFFFFF\">[特殊技]</span>或<span style=\"color: #FFFFFF\">[强化特殊技]</span>命中处于属性异常状态下的敌人时，装备者的异常精通提升<span style=\"color: #2BAD00\">115</span>点，持续15秒；<br/>当装备者的异常精通大于等于375点时，由装备者造成的<span style=\"color: #FFFFFF\">[紊乱]</span>伤害提升<span style=\"color: #2BAD00\">35%</span>。"
+      }
+    ]
+  },
+  {
+    "id": "14140",
+    "slug": "practiced-perfection",
+    "name": "十方锻星",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/2257960741162567074_272_14050658.webp",
+    "rarity": 4,
+    "specialty": {
+      "id": "3",
+      "name": "异常"
+    },
+    "exclusiveAgentName": "爱丽丝",
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 48
+    },
+    "advancedStat": {
+      "id": "12102",
+      "name": "攻击力百分比",
+      "value": 0.12
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "予你星屑",
+        "effect": "装备者的<span style=\"color: #FFFFFF\">[异常掌控]</span>提升<span style=\"color: #2BAD00\">60</span>点；触发<span style=\"color: #F0D12B\">[强击]</span>时，装备者造成的<span style=\"color: #F0D12B\">物理伤害</span>提升<span style=\"color: #2BAD00\">20%</span>，持续20秒，最多叠加2层，重复触发时刷新持续时间，装备者进入接战状态时，立即获得2层效果。"
+      },
+      {
+        "level": 2,
+        "name": "予你星屑",
+        "effect": "装备者的<span style=\"color: #FFFFFF\">[异常掌控]</span>提升<span style=\"color: #2BAD00\">69</span>点；触发<span style=\"color: #F0D12B\">[强击]</span>时，装备者造成的<span style=\"color: #F0D12B\">物理伤害</span>提升<span style=\"color: #2BAD00\">23%</span>，持续20秒，最多叠加2层，重复触发时刷新持续时间，装备者进入接战状态时，立即获得2层效果。"
+      },
+      {
+        "level": 3,
+        "name": "予你星屑",
+        "effect": "装备者的<span style=\"color: #FFFFFF\">[异常掌控]</span>提升<span style=\"color: #2BAD00\">78</span>点；触发<span style=\"color: #F0D12B\">[强击]</span>时，装备者造成的<span style=\"color: #F0D12B\">物理伤害</span>提升<span style=\"color: #2BAD00\">26%</span>，持续20秒，最多叠加2层，重复触发时刷新持续时间，装备者进入接战状态时，立即获得2层效果。"
+      },
+      {
+        "level": 4,
+        "name": "予你星屑",
+        "effect": "装备者的<span style=\"color: #FFFFFF\">[异常掌控]</span>提升<span style=\"color: #2BAD00\">87</span>点；触发<span style=\"color: #F0D12B\">[强击]</span>时，装备者造成的<span style=\"color: #F0D12B\">物理伤害</span>提升<span style=\"color: #2BAD00\">29%</span>，持续20秒，最多叠加2层，重复触发时刷新持续时间，装备者进入接战状态时，立即获得2层效果。"
+      },
+      {
+        "level": 5,
+        "name": "予你星屑",
+        "effect": "装备者的<span style=\"color: #FFFFFF\">[异常掌控]</span>提升<span style=\"color: #2BAD00\">96</span>点；触发<span style=\"color: #F0D12B\">[强击]</span>时，装备者造成的<span style=\"color: #F0D12B\">物理伤害</span>提升<span style=\"color: #2BAD00\">32%</span>，持续20秒，最多叠加2层，重复触发时刷新持续时间，装备者进入接战状态时，立即获得2层效果。"
+      }
+    ]
+  },
+  {
+    "id": "14139",
+    "slug": "roaring-fur-nace",
+    "name": "福虓炉炉",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/7259912763619678927_272_14050658.webp",
+    "rarity": 4,
+    "specialty": {
+      "id": "2",
+      "name": "击破"
+    },
+    "exclusiveAgentName": "橘福福",
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 48
+    },
+    "advancedStat": {
+      "id": "12102",
+      "name": "攻击力百分比",
+      "value": 0.12
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "虎气融融",
+        "effect": "装备者的<span style=\"color: #FFFFFF\">[强化特殊技]</span>、<span style=\"color: #FFFFFF\">[连携技]</span>和<span style=\"color: #FFFFFF\">[终结技]</span>造成的失衡值提升<span style=\"color: #2BAD00\">28%</span>；<br/>发动<span style=\"color: #FFFFFF\">[连携技]</span>或<span style=\"color: #FFFFFF\">[终结技]</span>并造成<span style=\"color: #FF5521\">火属性伤害</span>时，全队角色造成伤害提升<span style=\"color: #2BAD00\">10%</span>，最多叠加2层，持续30秒，每层效果单独结算持续时间，同一招式内最多触发一次，该效果全队唯一。"
+      },
+      {
+        "level": 2,
+        "name": "虎气融融",
+        "effect": "装备者的<span style=\"color: #FFFFFF\">[强化特殊技]</span>、<span style=\"color: #FFFFFF\">[连携技]</span>和<span style=\"color: #FFFFFF\">[终结技]</span>造成的失衡值提升<span style=\"color: #2BAD00\">32.2%</span>；<br/>发动<span style=\"color: #FFFFFF\">[连携技]</span>或<span style=\"color: #FFFFFF\">[终结技]</span>并造成<span style=\"color: #FF5521\">火属性伤害</span>时，全队角色造成伤害提升<span style=\"color: #2BAD00\">11.5%</span>，最多叠加2层，持续30秒，每层效果单独结算持续时间，同一招式内最多触发一次，该效果全队唯一。"
+      },
+      {
+        "level": 3,
+        "name": "虎气融融",
+        "effect": "装备者的<span style=\"color: #FFFFFF\">[强化特殊技]</span>、<span style=\"color: #FFFFFF\">[连携技]</span>和<span style=\"color: #FFFFFF\">[终结技]</span>造成的失衡值提升<span style=\"color: #2BAD00\">36.4%</span>；<br/>发动<span style=\"color: #FFFFFF\">[连携技]</span>或<span style=\"color: #FFFFFF\">[终结技]</span>并造成<span style=\"color: #FF5521\">火属性伤害</span>时，全队角色造成伤害提升<span style=\"color: #2BAD00\">13%</span>，最多叠加2层，持续30秒，每层效果单独结算持续时间，同一招式内最多触发一次，该效果全队唯一。"
+      },
+      {
+        "level": 4,
+        "name": "虎气融融",
+        "effect": "装备者的<span style=\"color: #FFFFFF\">[强化特殊技]</span>、<span style=\"color: #FFFFFF\">[连携技]</span>和<span style=\"color: #FFFFFF\">[终结技]</span>造成的失衡值提升<span style=\"color: #2BAD00\">40.6%</span>；<br/>发动<span style=\"color: #FFFFFF\">[连携技]</span>或<span style=\"color: #FFFFFF\">[终结技]</span>并造成<span style=\"color: #FF5521\">火属性伤害</span>时，全队角色造成伤害提升<span style=\"color: #2BAD00\">14.5%</span>，最多叠加2层，持续30秒，每层效果单独结算持续时间，同一招式内最多触发一次，该效果全队唯一。"
+      },
+      {
+        "level": 5,
+        "name": "虎气融融",
+        "effect": "装备者的<span style=\"color: #FFFFFF\">[强化特殊技]</span>、<span style=\"color: #FFFFFF\">[连携技]</span>和<span style=\"color: #FFFFFF\">[终结技]</span>造成的失衡值提升<span style=\"color: #2BAD00\">44.8%</span>；<br/>发动<span style=\"color: #FFFFFF\">[连携技]</span>或<span style=\"color: #FFFFFF\">[终结技]</span>并造成<span style=\"color: #FF5521\">火属性伤害</span>时，全队角色造成伤害提升<span style=\"color: #2BAD00\">16%</span>，最多叠加2层，持续30秒，每层效果单独结算持续时间，同一招式内最多触发一次，该效果全队唯一。"
+      }
+    ]
+  },
+  {
+    "id": "14126",
+    "slug": "sharpened-stinger",
+    "name": "淬锋钳刺",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/8152096239426011424_272_14050658.webp",
+    "rarity": 4,
+    "specialty": {
+      "id": "3",
+      "name": "异常"
+    },
+    "exclusiveAgentName": "简",
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 48
+    },
+    "advancedStat": {
+      "id": "31203",
+      "name": "异常精通",
+      "value": 36
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "恣横猎心",
+        "effect": "发动<span style=\"color: #FFFFFF\">[冲刺攻击]</span>时，获得1层<span style=\"color: #FFFFFF\">[猎意]</span>，每层<span style=\"color: #FFFFFF\">[猎意]</span>使装备者造成的<span style=\"color: #F0D12B\">物理伤害</span>提升<span style=\"color: #2BAD00\">12%</span>，最多叠加3层，持续10秒，0.5秒内最多触发一次，重复触发时刷新持续时间；进入接战状态或触发<span style=\"color: #FFFFFF\">[极限闪避]</span>时，直接获得3层<span style=\"color: #FFFFFF\">[猎意]</span>；<span style=\"color: #FFFFFF\">[猎意]</span>叠加至层数上限后，装备者的属性异常积蓄效率提升<span style=\"color: #2BAD00\">40%</span>。"
+      },
+      {
+        "level": 2,
+        "name": "恣横猎心",
+        "effect": "发动<span style=\"color: #FFFFFF\">[冲刺攻击]</span>时，获得1层<span style=\"color: #FFFFFF\">[猎意]</span>，每层<span style=\"color: #FFFFFF\">[猎意]</span>使装备者造成的<span style=\"color: #F0D12B\">物理伤害</span>提升<span style=\"color: #2BAD00\">15%</span>，最多叠加3层，持续10秒，0.5秒内最多触发一次，重复触发时刷新持续时间；进入接战状态或触发<span style=\"color: #FFFFFF\">[极限闪避]</span>时，直接获得3层<span style=\"color: #FFFFFF\">[猎意]</span>；<span style=\"color: #FFFFFF\">[猎意]</span>叠加至层数上限后，装备者的属性异常积蓄效率提升<span style=\"color: #2BAD00\">50%</span>。"
+      },
+      {
+        "level": 3,
+        "name": "恣横猎心",
+        "effect": "发动<span style=\"color: #FFFFFF\">[冲刺攻击]</span>时，获得1层<span style=\"color: #FFFFFF\">[猎意]</span>，每层<span style=\"color: #FFFFFF\">[猎意]</span>使装备者造成的<span style=\"color: #F0D12B\">物理伤害</span>提升<span style=\"color: #2BAD00\">18%</span>，最多叠加3层，持续10秒，0.5秒内最多触发一次，重复触发时刷新持续时间；进入接战状态或触发<span style=\"color: #FFFFFF\">[极限闪避]</span>时，直接获得3层<span style=\"color: #FFFFFF\">[猎意]</span>；<span style=\"color: #FFFFFF\">[猎意]</span>叠加至层数上限后，装备者的属性异常积蓄效率提升<span style=\"color: #2BAD00\">60%</span>。"
+      },
+      {
+        "level": 4,
+        "name": "恣横猎心",
+        "effect": "发动<span style=\"color: #FFFFFF\">[冲刺攻击]</span>时，获得1层<span style=\"color: #FFFFFF\">[猎意]</span>，每层<span style=\"color: #FFFFFF\">[猎意]</span>使装备者造成的<span style=\"color: #F0D12B\">物理伤害</span>提升<span style=\"color: #2BAD00\">21%</span>，最多叠加3层，持续10秒，0.5秒内最多触发一次，重复触发时刷新持续时间；进入接战状态或触发<span style=\"color: #FFFFFF\">[极限闪避]</span>时，直接获得3层<span style=\"color: #FFFFFF\">[猎意]</span>；<span style=\"color: #FFFFFF\">[猎意]</span>叠加至层数上限后，装备者的属性异常积蓄效率提升<span style=\"color: #2BAD00\">70%</span>。"
+      },
+      {
+        "level": 5,
+        "name": "恣横猎心",
+        "effect": "发动<span style=\"color: #FFFFFF\">[冲刺攻击]</span>时，获得1层<span style=\"color: #FFFFFF\">[猎意]</span>，每层<span style=\"color: #FFFFFF\">[猎意]</span>使装备者造成的<span style=\"color: #F0D12B\">物理伤害</span>提升<span style=\"color: #2BAD00\">24%</span>，最多叠加3层，持续10秒，0.5秒内最多触发一次，重复触发时刷新持续时间；进入接战状态或触发<span style=\"color: #FFFFFF\">[极限闪避]</span>时，直接获得3层<span style=\"color: #FFFFFF\">[猎意]</span>；<span style=\"color: #FFFFFF\">[猎意]</span>叠加至层数上限后，装备者的属性异常积蓄效率提升<span style=\"color: #2BAD00\">80%</span>。"
+      }
+    ]
+  },
+  {
+    "id": "14136",
+    "slug": "spectral-gaze",
+    "name": "索魂影眸",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/3319162674555138433_272_14050658.webp",
+    "rarity": 4,
+    "specialty": {
+      "id": "2",
+      "name": "击破"
+    },
+    "exclusiveAgentName": "「扳机」",
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 48
+    },
+    "advancedStat": {
+      "id": "20103",
+      "name": "暴击率",
+      "value": 0.096
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "捕风寻踪",
+        "effect": "装备者的<span style=\"color: #FFFFFF\">[追加攻击]</span>命中敌人并造成<span style=\"color: #2EB6FF\">电属性伤害</span>时，目标的防御力降低<span style=\"color: #2BAD00\">25%</span>，持续5秒，同名被动效果之间不可叠加；该效果触发时，如果自身不是当前操作中的角色，则装备者获得1层<span style=\"color: #FFFFFF\">[魂锁]</span>，最多叠加3层，同一招式内最多触发一次；每层<span style=\"color: #FFFFFF\">[魂锁]</span>，可使装备者的冲击力提升<span style=\"color: #2BAD00\">4%</span>，持续12秒，每层效果单独结算持续时间，<span style=\"color: #FFFFFF\">[魂锁]</span>层数叠满时，额外给装备者的冲击力提升<span style=\"color: #2BAD00\">8%</span>。"
+      },
+      {
+        "level": 2,
+        "name": "捕风寻踪",
+        "effect": "装备者的<span style=\"color: #FFFFFF\">[追加攻击]</span>命中敌人并造成<span style=\"color: #2EB6FF\">电属性伤害</span>时，目标的防御力降低<span style=\"color: #2BAD00\">28.75%</span>，持续5秒，同名被动效果之间不可叠加；该效果触发时，如果自身不是当前操作中的角色，则装备者获得1层<span style=\"color: #FFFFFF\">[魂锁]</span>，最多叠加3层，同一招式内最多触发一次；每层<span style=\"color: #FFFFFF\">[魂锁]</span>，可使装备者的冲击力提升<span style=\"color: #2BAD00\">4.6%</span>，持续12秒，每层效果单独结算持续时间，<span style=\"color: #FFFFFF\">[魂锁]</span>层数叠满时，额外给装备者的冲击力提升<span style=\"color: #2BAD00\">9.2%</span>。"
+      },
+      {
+        "level": 3,
+        "name": "捕风寻踪",
+        "effect": "装备者的<span style=\"color: #FFFFFF\">[追加攻击]</span>命中敌人并造成<span style=\"color: #2EB6FF\">电属性伤害</span>时，目标的防御力降低<span style=\"color: #2BAD00\">32.5%</span>，持续5秒，同名被动效果之间不可叠加；该效果触发时，如果自身不是当前操作中的角色，则装备者获得1层<span style=\"color: #FFFFFF\">[魂锁]</span>，最多叠加3层，同一招式内最多触发一次；每层<span style=\"color: #FFFFFF\">[魂锁]</span>，可使装备者的冲击力提升<span style=\"color: #2BAD00\">5.2%</span>，持续12秒，每层效果单独结算持续时间，<span style=\"color: #FFFFFF\">[魂锁]</span>层数叠满时，额外给装备者的冲击力提升<span style=\"color: #2BAD00\">10.4%</span>。"
+      },
+      {
+        "level": 4,
+        "name": "捕风寻踪",
+        "effect": "装备者的<span style=\"color: #FFFFFF\">[追加攻击]</span>命中敌人并造成<span style=\"color: #2EB6FF\">电属性伤害</span>时，目标的防御力降低<span style=\"color: #2BAD00\">36.25%</span>，持续5秒，同名被动效果之间不可叠加；该效果触发时，如果自身不是当前操作中的角色，则装备者获得1层<span style=\"color: #FFFFFF\">[魂锁]</span>，最多叠加3层，同一招式内最多触发一次；每层<span style=\"color: #FFFFFF\">[魂锁]</span>，可使装备者的冲击力提升<span style=\"color: #2BAD00\">5.8%</span>，持续12秒，每层效果单独结算持续时间，<span style=\"color: #FFFFFF\">[魂锁]</span>层数叠满时，额外给装备者的冲击力提升<span style=\"color: #2BAD00\">11.6%</span>。"
+      },
+      {
+        "level": 5,
+        "name": "捕风寻踪",
+        "effect": "装备者的<span style=\"color: #FFFFFF\">[追加攻击]</span>命中敌人并造成<span style=\"color: #2EB6FF\">电属性伤害</span>时，目标的防御力降低<span style=\"color: #2BAD00\">40%</span>，持续5秒，同名被动效果之间不可叠加；该效果触发时，如果自身不是当前操作中的角色，则装备者获得1层<span style=\"color: #FFFFFF\">[魂锁]</span>，最多叠加3层，同一招式内最多触发一次；每层<span style=\"color: #FFFFFF\">[魂锁]</span>，可使装备者的冲击力提升<span style=\"color: #2BAD00\">6.4%</span>，持续12秒，每层效果单独结算持续时间，<span style=\"color: #FFFFFF\">[魂锁]</span>层数叠满时，额外给装备者的冲击力提升<span style=\"color: #2BAD00\">12.8%</span>。"
+      }
+    ]
+  },
+  {
+    "id": "14138",
+    "slug": "severed-innocence",
+    "name": "牺牲洁纯",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/4990246965813297039_272_14050658.webp",
+    "rarity": 4,
+    "specialty": {
+      "id": "1",
+      "name": "强攻"
+    },
+    "exclusiveAgentName": "零号·安比",
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 48
+    },
+    "advancedStat": {
+      "id": "21103",
+      "name": "暴击伤害",
+      "value": 0.192
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "光静花冷",
+        "effect": "暴击伤害提升<span style=\"color: #2BAD00\">30%</span>；装备者发动<span style=\"color: #FFFFFF\">[普通攻击]</span> 、<span style=\"color: #FFFFFF\">[特殊技]</span>或<span style=\"color: #FFFFFF\">[追加攻击]</span>命中敌人时，可分别获得1层增益效果，每层增益效果使装备者的暴击伤害额外提升<span style=\"color: #2BAD00\">10%</span>，最多叠加3层，持续30秒，每层效果单独结算持续时间，同一招式内最多触发一次；拥有3层增益效果时，装备者造成的<span style=\"color: #2EB6FF\">电属性伤害</span>提升<span style=\"color: #2BAD00\">20%</span>。"
+      },
+      {
+        "level": 2,
+        "name": "光静花冷",
+        "effect": "暴击伤害提升<span style=\"color: #2BAD00\">34.5%</span>；装备者发动<span style=\"color: #FFFFFF\">[普通攻击]</span> 、<span style=\"color: #FFFFFF\">[特殊技]</span>或<span style=\"color: #FFFFFF\">[追加攻击]</span>命中敌人时，可分别获得1层增益效果，每层增益效果使装备者的暴击伤害额外提升<span style=\"color: #2BAD00\">11.5%</span>，最多叠加3层，持续30秒，每层效果单独结算持续时间，同一招式内最多触发一次；拥有3层增益效果时，装备者造成的<span style=\"color: #2EB6FF\">电属性伤害</span>提升<span style=\"color: #2BAD00\">23%</span>。"
+      },
+      {
+        "level": 3,
+        "name": "光静花冷",
+        "effect": "暴击伤害提升<span style=\"color: #2BAD00\">39%</span>；装备者发动<span style=\"color: #FFFFFF\">[普通攻击]</span> 、<span style=\"color: #FFFFFF\">[特殊技]</span>或<span style=\"color: #FFFFFF\">[追加攻击]</span>命中敌人时，可分别获得1层增益效果，每层增益效果使装备者的暴击伤害额外提升<span style=\"color: #2BAD00\">13%</span>，最多叠加3层，持续30秒，每层效果单独结算持续时间，同一招式内最多触发一次；拥有3层增益效果时，装备者造成的<span style=\"color: #2EB6FF\">电属性伤害</span>提升<span style=\"color: #2BAD00\">26%</span>。"
+      },
+      {
+        "level": 4,
+        "name": "光静花冷",
+        "effect": "暴击伤害提升<span style=\"color: #2BAD00\">43.5%</span>；装备者发动<span style=\"color: #FFFFFF\">[普通攻击]</span> 、<span style=\"color: #FFFFFF\">[特殊技]</span>或<span style=\"color: #FFFFFF\">[追加攻击]</span>命中敌人时，可分别获得1层增益效果，每层增益效果使装备者的暴击伤害额外提升<span style=\"color: #2BAD00\">14.5%</span>，最多叠加3层，持续30秒，每层效果单独结算持续时间，同一招式内最多触发一次；拥有3层增益效果时，装备者造成的<span style=\"color: #2EB6FF\">电属性伤害</span>提升<span style=\"color: #2BAD00\">29%</span>。"
+      },
+      {
+        "level": 5,
+        "name": "光静花冷",
+        "effect": "暴击伤害提升<span style=\"color: #2BAD00\">48%</span>；装备者发动<span style=\"color: #FFFFFF\">[普通攻击]</span> 、<span style=\"color: #FFFFFF\">[特殊技]</span>或<span style=\"color: #FFFFFF\">[追加攻击]</span>命中敌人时，可分别获得1层增益效果，每层增益效果使装备者的暴击伤害额外提升<span style=\"color: #2BAD00\">16%</span>，最多叠加3层，持续30秒，每层效果单独结算持续时间，同一招式内最多触发一次；拥有3层增益效果时，装备者造成的<span style=\"color: #2EB6FF\">电属性伤害</span>提升<span style=\"color: #2BAD00\">32%</span>。"
+      }
+    ]
+  },
+  {
+    "id": "14118",
+    "slug": "fusion-compiler",
+    "name": "嵌合编译器",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/13172456692747309131_272_14050658.webp",
+    "rarity": 4,
+    "specialty": {
+      "id": "3",
+      "name": "异常"
+    },
+    "exclusiveAgentName": "格莉丝",
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 46
+    },
+    "advancedStat": {
+      "id": "23103",
+      "name": "穿透率",
+      "value": 0.096
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "数据洪流",
+        "effect": "攻击力提升<span style=\"color: #2BAD00\">12%</span>；发动<span style=\"color: #FFFFFF\">[特殊技]</span>或<span style=\"color: #FFFFFF\">[强化特殊技]</span>时，装备者的异常精通提升<span style=\"color: #2BAD00\">25</span>点，最多叠加3层，持续8秒，每层效果单独结算持续时间。"
+      },
+      {
+        "level": 2,
+        "name": "数据洪流",
+        "effect": "攻击力提升<span style=\"color: #2BAD00\">15%</span>；发动<span style=\"color: #FFFFFF\">[特殊技]</span>或<span style=\"color: #FFFFFF\">[强化特殊技]</span>时，装备者的异常精通提升<span style=\"color: #2BAD00\">31</span>点，最多叠加3层，持续8秒，每层效果单独结算持续时间。"
+      },
+      {
+        "level": 3,
+        "name": "数据洪流",
+        "effect": "攻击力提升<span style=\"color: #2BAD00\">18%</span>；发动<span style=\"color: #FFFFFF\">[特殊技]</span>或<span style=\"color: #FFFFFF\">[强化特殊技]</span>时，装备者的异常精通提升<span style=\"color: #2BAD00\">37</span>点，最多叠加3层，持续8秒，每层效果单独结算持续时间。"
+      },
+      {
+        "level": 4,
+        "name": "数据洪流",
+        "effect": "攻击力提升<span style=\"color: #2BAD00\">21%</span>；发动<span style=\"color: #FFFFFF\">[特殊技]</span>或<span style=\"color: #FFFFFF\">[强化特殊技]</span>时，装备者的异常精通提升<span style=\"color: #2BAD00\">43</span>点，最多叠加3层，持续8秒，每层效果单独结算持续时间。"
+      },
+      {
+        "level": 5,
+        "name": "数据洪流",
+        "effect": "攻击力提升<span style=\"color: #2BAD00\">24%</span>；发动<span style=\"color: #FFFFFF\">[特殊技]</span>或<span style=\"color: #FFFFFF\">[强化特殊技]</span>时，装备者的异常精通提升<span style=\"color: #2BAD00\">50</span>点，最多叠加3层，持续8秒，每层效果单独结算持续时间。"
+      }
+    ]
+  },
+  {
+    "id": "14117",
+    "slug": "flamemaker-shaker",
+    "name": "灼心摇壶",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/13608970186740529905_272_14050658.webp",
+    "rarity": 4,
+    "specialty": {
+      "id": "3",
+      "name": "异常"
+    },
+    "exclusiveAgentName": "柏妮思",
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 48
+    },
+    "advancedStat": {
+      "id": "12102",
+      "name": "攻击力百分比",
+      "value": 0.12
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "焦油斟注",
+        "effect": "位于后场时，装备者的能量自动回复提升<span style=\"color: #2BAD00\">0.6</span>点/秒；<span style=\"color: #FFFFFF\">[强化特殊技]</span>或<span style=\"color: #FFFFFF\">[支援攻击]</span>命中敌人时，装备者造成的伤害提升<span style=\"color: #2BAD00\">3.5%</span>，最多叠加10层，持续6秒，0.3秒内最多触发一次，位于后场时叠加效率翻倍，重复触发时刷新持续时间；获得伤害提升效果时，若叠加层数大于等于5层，则装备者的异常精通额外提升<span style=\"color: #2BAD00\">50</span>点，异常精通提升效果不可叠加，持续6秒。"
+      },
+      {
+        "level": 2,
+        "name": "焦油斟注",
+        "effect": "位于后场时，装备者的能量自动回复提升<span style=\"color: #2BAD00\">0.75</span>点/秒；<span style=\"color: #FFFFFF\">[强化特殊技]</span>或<span style=\"color: #FFFFFF\">[支援攻击]</span>命中敌人时，装备者造成的伤害提升<span style=\"color: #2BAD00\">4.4%</span>，最多叠加10层，持续6秒，0.3秒内最多触发一次，位于后场时叠加效率翻倍，重复触发时刷新持续时间；获得伤害提升效果时，若叠加层数大于等于5层，则装备者的异常精通额外提升<span style=\"color: #2BAD00\">62</span>点，异常精通提升效果不可叠加，持续6秒。"
+      },
+      {
+        "level": 3,
+        "name": "焦油斟注",
+        "effect": "位于后场时，装备者的能量自动回复提升<span style=\"color: #2BAD00\">0.9</span>点/秒；<span style=\"color: #FFFFFF\">[强化特殊技]</span>或<span style=\"color: #FFFFFF\">[支援攻击]</span>命中敌人时，装备者造成的伤害提升<span style=\"color: #2BAD00\">5.2%</span>，最多叠加10层，持续6秒，0.3秒内最多触发一次，位于后场时叠加效率翻倍，重复触发时刷新持续时间；获得伤害提升效果时，若叠加层数大于等于5层，则装备者的异常精通额外提升<span style=\"color: #2BAD00\">75</span>点，异常精通提升效果不可叠加，持续6秒。"
+      },
+      {
+        "level": 4,
+        "name": "焦油斟注",
+        "effect": "位于后场时，装备者的能量自动回复提升<span style=\"color: #2BAD00\">1.05</span>点/秒；<span style=\"color: #FFFFFF\">[强化特殊技]</span>或<span style=\"color: #FFFFFF\">[支援攻击]</span>命中敌人时，装备者造成的伤害提升<span style=\"color: #2BAD00\">6.1%</span>，最多叠加10层，持续6秒，0.3秒内最多触发一次，位于后场时叠加效率翻倍，重复触发时刷新持续时间；获得伤害提升效果时，若叠加层数大于等于5层，则装备者的异常精通额外提升<span style=\"color: #2BAD00\">87</span>点，异常精通提升效果不可叠加，持续6秒。"
+      },
+      {
+        "level": 5,
+        "name": "焦油斟注",
+        "effect": "位于后场时，装备者的能量自动回复提升<span style=\"color: #2BAD00\">1.2</span>点/秒；<span style=\"color: #FFFFFF\">[强化特殊技]</span>或<span style=\"color: #FFFFFF\">[支援攻击]</span>命中敌人时，装备者造成的伤害提升<span style=\"color: #2BAD00\">7%</span>，最多叠加10层，持续6秒，0.3秒内最多触发一次，位于后场时叠加效率翻倍，重复触发时刷新持续时间；获得伤害提升效果时，若叠加层数大于等于5层，则装备者的异常精通额外提升<span style=\"color: #2BAD00\">100</span>点，异常精通提升效果不可叠加，持续6秒。"
+      }
+    ]
+  },
+  {
+    "id": "14001",
+    "slug": "cannon-rotor",
+    "name": "加农转子",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/17291691433245760086_272_14050658.webp",
+    "rarity": 3,
+    "specialty": {
+      "id": "1",
+      "name": "强攻"
+    },
+    "exclusiveAgentName": null,
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 40
+    },
+    "advancedStat": {
+      "id": "20103",
+      "name": "暴击率",
+      "value": 0.08
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "口径超规",
+        "effect": "攻击力提升<span style=\"color: #2BAD00\">7.5%</span>；攻击命中敌人并触发暴击时，额外造成200%攻击力的伤害，<span style=\"color: #2BAD00\">8</span>秒内最多触发一次。"
+      },
+      {
+        "level": 2,
+        "name": "口径超规",
+        "effect": "攻击力提升<span style=\"color: #2BAD00\">8.6%</span>；攻击命中敌人并触发暴击时，额外造成200%攻击力的伤害，<span style=\"color: #2BAD00\">7.5</span>秒内最多触发一次。"
+      },
+      {
+        "level": 3,
+        "name": "口径超规",
+        "effect": "攻击力提升<span style=\"color: #2BAD00\">9.7%</span>；攻击命中敌人并触发暴击时，额外造成200%攻击力的伤害，<span style=\"color: #2BAD00\">7</span>秒内最多触发一次。"
+      },
+      {
+        "level": 4,
+        "name": "口径超规",
+        "effect": "攻击力提升<span style=\"color: #2BAD00\">10.8%</span>；攻击命中敌人并触发暴击时，额外造成200%攻击力的伤害，<span style=\"color: #2BAD00\">6.5</span>秒内最多触发一次。"
+      },
+      {
+        "level": 5,
+        "name": "口径超规",
+        "effect": "攻击力提升<span style=\"color: #2BAD00\">12%</span>；攻击命中敌人并触发暴击时，额外造成200%攻击力的伤害，<span style=\"color: #2BAD00\">6</span>秒内最多触发一次。"
+      }
+    ]
+  },
+  {
+    "id": "14116",
+    "slug": "blazing-laurel",
+    "name": "焰心桂冠",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/689203601306621273_272_14050658.webp",
+    "rarity": 4,
+    "specialty": {
+      "id": "2",
+      "name": "击破"
+    },
+    "exclusiveAgentName": "莱特",
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 48
+    },
+    "advancedStat": {
+      "id": "12202",
+      "name": "冲击力",
+      "value": 0.072
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "流动之火",
+        "effect": "发动<span style=\"color: #FFFFFF\">[快速支援]</span>或<span style=\"color: #FFFFFF\">[极限支援]</span>时，装备者的冲击力提升<span style=\"color: #2BAD00\">25%</span>，持续8秒；装备者的<span style=\"color: #FFFFFF\">[普通攻击]</span>命中敌人时，对目标施加一层<span style=\"color: #FFFFFF\">[萎靡]</span>，最多叠加20层，持续30秒，重复触发时刷新持续时间；队伍中任意角色攻击命中敌人时，目标每拥有一层<span style=\"color: #FFFFFF\">[萎靡]</span>，本次攻击中<span style=\"color: #98EFF0\">冰属性伤害</span>和<span style=\"color: #FF5521\">火属性伤害</span>的暴击伤害提升<span style=\"color: #2BAD00\">1.5%</span>，该效果全队唯一。"
+      },
+      {
+        "level": 2,
+        "name": "流动之火",
+        "effect": "发动<span style=\"color: #FFFFFF\">[快速支援]</span>或<span style=\"color: #FFFFFF\">[极限支援]</span>时，装备者的冲击力提升<span style=\"color: #2BAD00\">28.75%</span>，持续8秒；装备者的<span style=\"color: #FFFFFF\">[普通攻击]</span>命中敌人时，对目标施加一层<span style=\"color: #FFFFFF\">[萎靡]</span>，最多叠加20层，持续30秒，重复触发时刷新持续时间；队伍中任意角色攻击命中敌人时，目标每拥有一层<span style=\"color: #FFFFFF\">[萎靡]</span>，本次攻击中<span style=\"color: #98EFF0\">冰属性伤害</span>和<span style=\"color: #FF5521\">火属性伤害</span>的暴击伤害提升<span style=\"color: #2BAD00\">1.72%</span>，该效果全队唯一。"
+      },
+      {
+        "level": 3,
+        "name": "流动之火",
+        "effect": "发动<span style=\"color: #FFFFFF\">[快速支援]</span>或<span style=\"color: #FFFFFF\">[极限支援]</span>时，装备者的冲击力提升<span style=\"color: #2BAD00\">32.5%</span>，持续8秒；装备者的<span style=\"color: #FFFFFF\">[普通攻击]</span>命中敌人时，对目标施加一层<span style=\"color: #FFFFFF\">[萎靡]</span>，最多叠加20层，持续30秒，重复触发时刷新持续时间；队伍中任意角色攻击命中敌人时，目标每拥有一层<span style=\"color: #FFFFFF\">[萎靡]</span>，本次攻击中<span style=\"color: #98EFF0\">冰属性伤害</span>和<span style=\"color: #FF5521\">火属性伤害</span>的暴击伤害提升<span style=\"color: #2BAD00\">1.95%</span>，该效果全队唯一。"
+      },
+      {
+        "level": 4,
+        "name": "流动之火",
+        "effect": "发动<span style=\"color: #FFFFFF\">[快速支援]</span>或<span style=\"color: #FFFFFF\">[极限支援]</span>时，装备者的冲击力提升<span style=\"color: #2BAD00\">36.25%</span>，持续8秒；装备者的<span style=\"color: #FFFFFF\">[普通攻击]</span>命中敌人时，对目标施加一层<span style=\"color: #FFFFFF\">[萎靡]</span>，最多叠加20层，持续30秒，重复触发时刷新持续时间；队伍中任意角色攻击命中敌人时，目标每拥有一层<span style=\"color: #FFFFFF\">[萎靡]</span>，本次攻击中<span style=\"color: #98EFF0\">冰属性伤害</span>和<span style=\"color: #FF5521\">火属性伤害</span>的暴击伤害提升<span style=\"color: #2BAD00\">2.17%</span>，该效果全队唯一。"
+      },
+      {
+        "level": 5,
+        "name": "流动之火",
+        "effect": "发动<span style=\"color: #FFFFFF\">[快速支援]</span>或<span style=\"color: #FFFFFF\">[极限支援]</span>时，装备者的冲击力提升<span style=\"color: #2BAD00\">40%</span>，持续8秒；装备者的<span style=\"color: #FFFFFF\">[普通攻击]</span>命中敌人时，对目标施加一层<span style=\"color: #FFFFFF\">[萎靡]</span>，最多叠加20层，持续30秒，重复触发时刷新持续时间；队伍中任意角色攻击命中敌人时，目标每拥有一层<span style=\"color: #FFFFFF\">[萎靡]</span>，本次攻击中<span style=\"color: #98EFF0\">冰属性伤害</span>和<span style=\"color: #FF5521\">火属性伤害</span>的暴击伤害提升<span style=\"color: #2BAD00\">2.4%</span>，该效果全队唯一。"
+      }
+    ]
+  },
+  {
+    "id": "14120",
+    "slug": "zanshin-herb-case",
+    "name": "残心青囊",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/14387961856592767944_272_14050658.webp",
+    "rarity": 4,
+    "specialty": {
+      "id": "1",
+      "name": "强攻"
+    },
+    "exclusiveAgentName": "悠真",
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 48
+    },
+    "advancedStat": {
+      "id": "21103",
+      "name": "暴击伤害",
+      "value": 0.192
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "啖若逆修",
+        "effect": "暴击率提升<span style=\"color: #2BAD00\">10%</span>；<span style=\"color: #FFFFFF\">[冲刺攻击]</span>造成的<span style=\"color: #2EB6FF\">电属性伤害</span>提升<span style=\"color: #2BAD00\">40%</span>；队伍中任意角色对敌人施加属性异常效果或造成失衡时，装备者的暴击率额外提升<span style=\"color: #2BAD00\">10%</span>，持续15秒。"
+      },
+      {
+        "level": 2,
+        "name": "啖若逆修",
+        "effect": "暴击率提升<span style=\"color: #2BAD00\">11.5%</span>；<span style=\"color: #FFFFFF\">[冲刺攻击]</span>造成的<span style=\"color: #2EB6FF\">电属性伤害</span>提升<span style=\"color: #2BAD00\">46%</span>；队伍中任意角色对敌人施加属性异常效果或造成失衡时，装备者的暴击率额外提升<span style=\"color: #2BAD00\">11.5%</span>，持续15秒。"
+      },
+      {
+        "level": 3,
+        "name": "啖若逆修",
+        "effect": "暴击率提升<span style=\"color: #2BAD00\">13%</span>；<span style=\"color: #FFFFFF\">[冲刺攻击]</span>造成的<span style=\"color: #2EB6FF\">电属性伤害</span>提升<span style=\"color: #2BAD00\">52%</span>；队伍中任意角色对敌人施加属性异常效果或造成失衡时，装备者的暴击率额外提升<span style=\"color: #2BAD00\">13%</span>，持续15秒。"
+      },
+      {
+        "level": 4,
+        "name": "啖若逆修",
+        "effect": "暴击率提升<span style=\"color: #2BAD00\">14.5%</span>；<span style=\"color: #FFFFFF\">[冲刺攻击]</span>造成的<span style=\"color: #2EB6FF\">电属性伤害</span>提升<span style=\"color: #2BAD00\">58%</span>；队伍中任意角色对敌人施加属性异常效果或造成失衡时，装备者的暴击率额外提升<span style=\"color: #2BAD00\">14.5%</span>，持续15秒。"
+      },
+      {
+        "level": 5,
+        "name": "啖若逆修",
+        "effect": "暴击率提升<span style=\"color: #2BAD00\">16%</span>；<span style=\"color: #FFFFFF\">[冲刺攻击]</span>造成的<span style=\"color: #2EB6FF\">电属性伤害</span>提升<span style=\"color: #2BAD00\">64%</span>；队伍中任意角色对敌人施加属性异常效果或造成失衡时，装备者的暴击率额外提升<span style=\"color: #2BAD00\">16%</span>，持续15秒。"
+      }
+    ]
+  },
+  {
+    "id": "14110",
+    "slug": "hellfire-gears",
+    "name": "燃狱齿轮",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/13548889107326396113_272_14050658.webp",
+    "rarity": 4,
+    "specialty": {
+      "id": "2",
+      "name": "击破"
+    },
+    "exclusiveAgentName": "珂蕾妲",
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 46
+    },
+    "advancedStat": {
+      "id": "12202",
+      "name": "冲击力",
+      "value": 0.072
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "热血施工",
+        "effect": "位于后场时，装备者的能量自动回复提升<span style=\"color: #2BAD00\">0.6</span>点/秒；发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>时，装备者的冲击力提升<span style=\"color: #2BAD00\">10%</span>，最多叠加2层，持续10秒，每层效果单独结算持续时间。"
+      },
+      {
+        "level": 2,
+        "name": "热血施工",
+        "effect": "位于后场时，装备者的能量自动回复提升<span style=\"color: #2BAD00\">0.75</span>点/秒；发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>时，装备者的冲击力提升<span style=\"color: #2BAD00\">12.5%</span>，最多叠加2层，持续10秒，每层效果单独结算持续时间。"
+      },
+      {
+        "level": 3,
+        "name": "热血施工",
+        "effect": "位于后场时，装备者的能量自动回复提升<span style=\"color: #2BAD00\">0.9</span>点/秒；发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>时，装备者的冲击力提升<span style=\"color: #2BAD00\">15%</span>，最多叠加2层，持续10秒，每层效果单独结算持续时间。"
+      },
+      {
+        "level": 4,
+        "name": "热血施工",
+        "effect": "位于后场时，装备者的能量自动回复提升<span style=\"color: #2BAD00\">1.05</span>点/秒；发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>时，装备者的冲击力提升<span style=\"color: #2BAD00\">17.5%</span>，最多叠加2层，持续10秒，每层效果单独结算持续时间。"
+      },
+      {
+        "level": 5,
+        "name": "热血施工",
+        "effect": "位于后场时，装备者的能量自动回复提升<span style=\"color: #2BAD00\">1.2</span>点/秒；发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>时，装备者的冲击力提升<span style=\"color: #2BAD00\">20%</span>，最多叠加2层，持续10秒，每层效果单独结算持续时间。"
+      }
+    ]
+  },
+  {
+    "id": "14102",
+    "slug": "steel-cushion",
+    "name": "钢铁肉垫",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/3727706231379869149_272_14050658.webp",
+    "rarity": 4,
+    "specialty": {
+      "id": "1",
+      "name": "强攻"
+    },
+    "exclusiveAgentName": "猫又",
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 46
+    },
+    "advancedStat": {
+      "id": "20103",
+      "name": "暴击率",
+      "value": 0.096
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "合金猫爪",
+        "effect": "<span style=\"color: #F0D12B\">物理伤害</span>提升<span style=\"color: #2BAD00\">20%</span>；从背后攻击命中敌人时，装备者造成的伤害提升<span style=\"color: #2BAD00\">25%</span>。"
+      },
+      {
+        "level": 2,
+        "name": "合金猫爪",
+        "effect": "<span style=\"color: #F0D12B\">物理伤害</span>提升<span style=\"color: #2BAD00\">25%</span>；从背后攻击命中敌人时，装备者造成的伤害提升<span style=\"color: #2BAD00\">31.5%</span>。"
+      },
+      {
+        "level": 3,
+        "name": "合金猫爪",
+        "effect": "<span style=\"color: #F0D12B\">物理伤害</span>提升<span style=\"color: #2BAD00\">30%</span>；从背后攻击命中敌人时，装备者造成的伤害提升<span style=\"color: #2BAD00\">38%</span>。"
+      },
+      {
+        "level": 4,
+        "name": "合金猫爪",
+        "effect": "<span style=\"color: #F0D12B\">物理伤害</span>提升<span style=\"color: #2BAD00\">35%</span>；从背后攻击命中敌人时，装备者造成的伤害提升<span style=\"color: #2BAD00\">44%</span>。"
+      },
+      {
+        "level": 5,
+        "name": "合金猫爪",
+        "effect": "<span style=\"color: #F0D12B\">物理伤害</span>提升<span style=\"color: #2BAD00\">40%</span>；从背后攻击命中敌人时，装备者造成的伤害提升<span style=\"color: #2BAD00\">50%</span>。"
+      }
+    ]
+  },
+  {
+    "id": "14104",
+    "slug": "the-brimstone",
+    "name": "硫磺石",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/4609234265709346596_272_14050658.webp",
+    "rarity": 4,
+    "specialty": {
+      "id": "1",
+      "name": "强攻"
+    },
+    "exclusiveAgentName": "「11号」",
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 46
+    },
+    "advancedStat": {
+      "id": "12102",
+      "name": "攻击力百分比",
+      "value": 0.12
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "炽烈吐息",
+        "effect": "<span style=\"color: #FFFFFF\">[普通攻击]</span>、<span style=\"color: #FFFFFF\">[冲刺攻击]</span>或<span style=\"color: #FFFFFF\">[闪避反击]</span>命中敌人时，装备者的攻击力提升<span style=\"color: #2BAD00\">3.5%</span>，最多叠加8层，持续8秒，0.5秒内最多触发一次，每层效果单独结算持续时间。"
+      },
+      {
+        "level": 2,
+        "name": "炽烈吐息",
+        "effect": "<span style=\"color: #FFFFFF\">[普通攻击]</span>、<span style=\"color: #FFFFFF\">[冲刺攻击]</span>或<span style=\"color: #FFFFFF\">[闪避反击]</span>命中敌人时，装备者的攻击力提升<span style=\"color: #2BAD00\">4.4%</span>，最多叠加8层，持续8秒，0.5秒内最多触发一次，每层效果单独结算持续时间。"
+      },
+      {
+        "level": 3,
+        "name": "炽烈吐息",
+        "effect": "<span style=\"color: #FFFFFF\">[普通攻击]</span>、<span style=\"color: #FFFFFF\">[冲刺攻击]</span>或<span style=\"color: #FFFFFF\">[闪避反击]</span>命中敌人时，装备者的攻击力提升<span style=\"color: #2BAD00\">5.2%</span>，最多叠加8层，持续8秒，0.5秒内最多触发一次，每层效果单独结算持续时间。"
+      },
+      {
+        "level": 4,
+        "name": "炽烈吐息",
+        "effect": "<span style=\"color: #FFFFFF\">[普通攻击]</span>、<span style=\"color: #FFFFFF\">[冲刺攻击]</span>或<span style=\"color: #FFFFFF\">[闪避反击]</span>命中敌人时，装备者的攻击力提升<span style=\"color: #2BAD00\">6%</span>，最多叠加8层，持续8秒，0.5秒内最多触发一次，每层效果单独结算持续时间。"
+      },
+      {
+        "level": 5,
+        "name": "炽烈吐息",
+        "effect": "<span style=\"color: #FFFFFF\">[普通攻击]</span>、<span style=\"color: #FFFFFF\">[冲刺攻击]</span>或<span style=\"color: #FFFFFF\">[闪避反击]</span>命中敌人时，装备者的攻击力提升<span style=\"color: #2BAD00\">7%</span>，最多叠加8层，持续8秒，0.5秒内最多触发一次，每层效果单独结算持续时间。"
+      }
+    ]
+  },
+  {
+    "id": "14003",
+    "slug": "six-shooter",
+    "name": "左轮转子",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/1048126356036618624_272_14050658.webp",
+    "rarity": 3,
+    "specialty": {
+      "id": "2",
+      "name": "击破"
+    },
+    "exclusiveAgentName": null,
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 40
+    },
+    "advancedStat": {
+      "id": "12202",
+      "name": "冲击力",
+      "value": 0.06
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "开火！",
+        "effect": "每3秒为装备者提供1层充能效果，最多叠加6层；发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>时，消耗所有充能，每层充能效果使招式造成的失衡值提升<span style=\"color: #2BAD00\">4%</span>。"
+      },
+      {
+        "level": 2,
+        "name": "开火！",
+        "effect": "每3秒为装备者提供1层充能效果，最多叠加6层；发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>时，消耗所有充能，每层充能效果使招式造成的失衡值提升<span style=\"color: #2BAD00\">4.6%</span>。"
+      },
+      {
+        "level": 3,
+        "name": "开火！",
+        "effect": "每3秒为装备者提供1层充能效果，最多叠加6层；发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>时，消耗所有充能，每层充能效果使招式造成的失衡值提升<span style=\"color: #2BAD00\">5.2%</span>。"
+      },
+      {
+        "level": 4,
+        "name": "开火！",
+        "effect": "每3秒为装备者提供1层充能效果，最多叠加6层；发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>时，消耗所有充能，每层充能效果使招式造成的失衡值提升<span style=\"color: #2BAD00\">5.8%</span>。"
+      },
+      {
+        "level": 5,
+        "name": "开火！",
+        "effect": "每3秒为装备者提供1层充能效果，最多叠加6层；发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>时，消耗所有充能，每层充能效果使招式造成的失衡值提升<span style=\"color: #2BAD00\">6.4%</span>。"
+      }
+    ]
+  },
+  {
+    "id": "14107",
+    "slug": "tusks-of-fury",
+    "name": "奔袭獠牙",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/74727045392462316_272_14050658.webp",
+    "rarity": 4,
+    "specialty": {
+      "id": "5",
+      "name": "防护"
+    },
+    "exclusiveAgentName": "凯撒",
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 48
+    },
+    "advancedStat": {
+      "id": "12202",
+      "name": "冲击力",
+      "value": 0.072
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "不破铁骑",
+        "effect": "装备者施加的护盾值提升<span style=\"color: #2BAD00\">30%</span>；队伍中任意角色触发<span style=\"color: #FFFFFF\">[破招]</span>或<span style=\"color: #FFFFFF\">[极限闪避]</span>时，全队角色造成的伤害提升<span style=\"color: #2BAD00\">18%</span>，造成的失衡值提升<span style=\"color: #2BAD00\">12%</span>，持续20秒，同名被动效果之间不可叠加。"
+      },
+      {
+        "level": 2,
+        "name": "不破铁骑",
+        "effect": "装备者施加的护盾值提升<span style=\"color: #2BAD00\">38%</span>；队伍中任意角色触发<span style=\"color: #FFFFFF\">[破招]</span>或<span style=\"color: #FFFFFF\">[极限闪避]</span>时，全队角色造成的伤害提升<span style=\"color: #2BAD00\">22.5%</span>，造成的失衡值提升<span style=\"color: #2BAD00\">15%</span>，持续20秒，同名被动效果之间不可叠加。"
+      },
+      {
+        "level": 3,
+        "name": "不破铁骑",
+        "effect": "装备者施加的护盾值提升<span style=\"color: #2BAD00\">46%</span>；队伍中任意角色触发<span style=\"color: #FFFFFF\">[破招]</span>或<span style=\"color: #FFFFFF\">[极限闪避]</span>时，全队角色造成的伤害提升<span style=\"color: #2BAD00\">27%</span>，造成的失衡值提升<span style=\"color: #2BAD00\">18%</span>，持续20秒，同名被动效果之间不可叠加。"
+      },
+      {
+        "level": 4,
+        "name": "不破铁骑",
+        "effect": "装备者施加的护盾值提升<span style=\"color: #2BAD00\">52%</span>；队伍中任意角色触发<span style=\"color: #FFFFFF\">[破招]</span>或<span style=\"color: #FFFFFF\">[极限闪避]</span>时，全队角色造成的伤害提升<span style=\"color: #2BAD00\">31.5%</span>，造成的失衡值提升<span style=\"color: #2BAD00\">21%</span>，持续20秒，同名被动效果之间不可叠加。"
+      },
+      {
+        "level": 5,
+        "name": "不破铁骑",
+        "effect": "装备者施加的护盾值提升<span style=\"color: #2BAD00\">60%</span>；队伍中任意角色触发<span style=\"color: #FFFFFF\">[破招]</span>或<span style=\"color: #FFFFFF\">[极限闪避]</span>时，全队角色造成的伤害提升<span style=\"color: #2BAD00\">36%</span>，造成的失衡值提升<span style=\"color: #2BAD00\">24%</span>，持续20秒，同名被动效果之间不可叠加。"
+      }
+    ]
+  },
+  {
+    "id": "14121",
+    "slug": "weeping-cradle",
+    "name": "啜泣摇篮",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/17487839183587550139_272_14050658.webp",
+    "rarity": 4,
+    "specialty": {
+      "id": "4",
+      "name": "支援"
+    },
+    "exclusiveAgentName": "丽娜",
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 46
+    },
+    "advancedStat": {
+      "id": "23103",
+      "name": "穿透率",
+      "value": 0.096
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "惩·罚",
+        "effect": "位于后场时，装备者的能量自动回复提升<span style=\"color: #2BAD00\">0.6</span>点/秒；装备者攻击命中敌人时，所有单位对目标造成的伤害提升<span style=\"color: #2BAD00\">10%</span>，持续3秒；效果持续期间，每0.5秒该增益效果额外提升<span style=\"color: #2BAD00\">1.7%</span>，最多额外提升<span style=\"color: #2BAD00\">10.2%</span>，重复触发时仅刷新持续时间，不刷新伤害提升效果，同名被动效果之间不可叠加。"
+      },
+      {
+        "level": 2,
+        "name": "惩·罚",
+        "effect": "位于后场时，装备者的能量自动回复提升<span style=\"color: #2BAD00\">0.75</span>点/秒；装备者攻击命中敌人时，所有单位对目标造成的伤害提升<span style=\"color: #2BAD00\">12.5%</span>，持续3秒；效果持续期间，每0.5秒该增益效果额外提升<span style=\"color: #2BAD00\">2%</span>，最多额外提升<span style=\"color: #2BAD00\">12%</span>，重复触发时仅刷新持续时间，不刷新伤害提升效果，同名被动效果之间不可叠加。"
+      },
+      {
+        "level": 3,
+        "name": "惩·罚",
+        "effect": "位于后场时，装备者的能量自动回复提升<span style=\"color: #2BAD00\">0.9</span>点/秒；装备者攻击命中敌人时，所有单位对目标造成的伤害提升<span style=\"color: #2BAD00\">15%</span>，持续3秒；效果持续期间，每0.5秒该增益效果额外提升<span style=\"color: #2BAD00\">2.5%</span>，最多额外提升<span style=\"color: #2BAD00\">15%</span>，重复触发时仅刷新持续时间，不刷新伤害提升效果，同名被动效果之间不可叠加。"
+      },
+      {
+        "level": 4,
+        "name": "惩·罚",
+        "effect": "位于后场时，装备者的能量自动回复提升<span style=\"color: #2BAD00\">1.05</span>点/秒；装备者攻击命中敌人时，所有单位对目标造成的伤害提升<span style=\"color: #2BAD00\">17.5%</span>，持续3秒；效果持续期间，每0.5秒该增益效果额外提升<span style=\"color: #2BAD00\">3%</span>，最多额外提升<span style=\"color: #2BAD00\">18%</span>，重复触发时仅刷新持续时间，不刷新伤害提升效果，同名被动效果之间不可叠加。"
+      },
+      {
+        "level": 5,
+        "name": "惩·罚",
+        "effect": "位于后场时，装备者的能量自动回复提升<span style=\"color: #2BAD00\">1.2</span>点/秒；装备者攻击命中敌人时，所有单位对目标造成的伤害提升<span style=\"color: #2BAD00\">20%</span>，持续3秒；效果持续期间，每0.5秒该增益效果额外提升<span style=\"color: #2BAD00\">3.3%</span>，最多额外提升<span style=\"color: #2BAD00\">19.8%</span>，重复触发时仅刷新持续时间，不刷新伤害提升效果，同名被动效果之间不可叠加。"
+      }
+    ]
+  },
+  {
+    "id": "14114",
+    "slug": "the-restrained",
+    "name": "拘缚者",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/17884298363682674960_272_14050658.webp",
+    "rarity": 4,
+    "specialty": {
+      "id": "2",
+      "name": "击破"
+    },
+    "exclusiveAgentName": "莱卡恩",
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 46
+    },
+    "advancedStat": {
+      "id": "12202",
+      "name": "冲击力",
+      "value": 0.072
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "束缚枷锁",
+        "effect": "攻击命中敌人时，<span style=\"color: #FFFFFF\">[普通攻击]</span>造成的伤害和失衡值提升<span style=\"color: #2BAD00\">6%</span>，最多叠加5层，持续8秒，同一招式内最多触发一次，每层效果单独结算持续时间。"
+      },
+      {
+        "level": 2,
+        "name": "束缚枷锁",
+        "effect": "攻击命中敌人时，<span style=\"color: #FFFFFF\">[普通攻击]</span>造成的伤害和失衡值提升<span style=\"color: #2BAD00\">7.5%</span>，最多叠加5层，持续8秒，同一招式内最多触发一次，每层效果单独结算持续时间。"
+      },
+      {
+        "level": 3,
+        "name": "束缚枷锁",
+        "effect": "攻击命中敌人时，<span style=\"color: #FFFFFF\">[普通攻击]</span>造成的伤害和失衡值提升<span style=\"color: #2BAD00\">9%</span>，最多叠加5层，持续8秒，同一招式内最多触发一次，每层效果单独结算持续时间。"
+      },
+      {
+        "level": 4,
+        "name": "束缚枷锁",
+        "effect": "攻击命中敌人时，<span style=\"color: #FFFFFF\">[普通攻击]</span>造成的伤害和失衡值提升<span style=\"color: #2BAD00\">10.5%</span>，最多叠加5层，持续8秒，同一招式内最多触发一次，每层效果单独结算持续时间。"
+      },
+      {
+        "level": 5,
+        "name": "束缚枷锁",
+        "effect": "攻击命中敌人时，<span style=\"color: #FFFFFF\">[普通攻击]</span>造成的伤害和失衡值提升<span style=\"color: #2BAD00\">12%</span>，最多叠加5层，持续8秒，同一招式内最多触发一次，每层效果单独结算持续时间。"
+      }
+    ]
+  },
+  {
+    "id": "14109",
+    "slug": "hailstorm-shrine",
+    "name": "霰落星殿",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/12108579259460836385_272_14050658.webp",
+    "rarity": 4,
+    "specialty": {
+      "id": "3",
+      "name": "异常"
+    },
+    "exclusiveAgentName": "雅",
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 50
+    },
+    "advancedStat": {
+      "id": "20103",
+      "name": "暴击率",
+      "value": 0.096
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "霜染寒星",
+        "effect": "暴击伤害提升<span style=\"color: #2BAD00\">50%</span>；发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>或队伍中任意角色对敌人施加属性异常效果时，装备者造成的<span style=\"color: #98EFF0\">冰属性伤害</span>提升<span style=\"color: #2BAD00\">20%</span>，最多叠加2层，持续15秒，每层效果单独结算持续时间。"
+      },
+      {
+        "level": 2,
+        "name": "霜染寒星",
+        "effect": "暴击伤害提升<span style=\"color: #2BAD00\">57%</span>；发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>或队伍中任意角色对敌人施加属性异常效果时，装备者造成的<span style=\"color: #98EFF0\">冰属性伤害</span>提升<span style=\"color: #2BAD00\">23%</span>，最多叠加2层，持续15秒，每层效果单独结算持续时间。"
+      },
+      {
+        "level": 3,
+        "name": "霜染寒星",
+        "effect": "暴击伤害提升<span style=\"color: #2BAD00\">65%</span>；发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>或队伍中任意角色对敌人施加属性异常效果时，装备者造成的<span style=\"color: #98EFF0\">冰属性伤害</span>提升<span style=\"color: #2BAD00\">26%</span>，最多叠加2层，持续15秒，每层效果单独结算持续时间。"
+      },
+      {
+        "level": 4,
+        "name": "霜染寒星",
+        "effect": "暴击伤害提升<span style=\"color: #2BAD00\">72%</span>；发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>或队伍中任意角色对敌人施加属性异常效果时，装备者造成的<span style=\"color: #98EFF0\">冰属性伤害</span>提升<span style=\"color: #2BAD00\">29%</span>，最多叠加2层，持续15秒，每层效果单独结算持续时间。"
+      },
+      {
+        "level": 5,
+        "name": "霜染寒星",
+        "effect": "暴击伤害提升<span style=\"color: #2BAD00\">80%</span>；发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>或队伍中任意角色对敌人施加属性异常效果时，装备者造成的<span style=\"color: #98EFF0\">冰属性伤害</span>提升<span style=\"color: #2BAD00\">32%</span>，最多叠加2层，持续15秒，每层效果单独结算持续时间。"
+      }
+    ]
+  },
+  {
+    "id": "13127",
+    "slug": "peacekeeper-specialized",
+    "name": "维序者-特化型",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/10755867759139457358_272_14050658.webp",
+    "rarity": 3,
+    "specialty": {
+      "id": "5",
+      "name": "防护"
+    },
+    "exclusiveAgentName": "赛斯",
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 42
+    },
+    "advancedStat": {
+      "id": "12102",
+      "name": "攻击力百分比",
+      "value": 0.1
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "标准格挡术",
+        "effect": "拥有护盾时，装备者的能量自动回复提升<span style=\"color: #2BAD00\">0.4</span>点/秒；<span style=\"color: #FFFFFF\">[强化特殊技]</span>和<span style=\"color: #FFFFFF\">[支援突击]</span>累积的属性异常积蓄值提升<span style=\"color: #2BAD00\">36%</span>。"
+      },
+      {
+        "level": 2,
+        "name": "标准格挡术",
+        "effect": "拥有护盾时，装备者的能量自动回复提升<span style=\"color: #2BAD00\">0.46</span>点/秒；<span style=\"color: #FFFFFF\">[强化特殊技]</span>和<span style=\"color: #FFFFFF\">[支援突击]</span>累积的属性异常积蓄值提升<span style=\"color: #2BAD00\">40%</span>。"
+      },
+      {
+        "level": 3,
+        "name": "标准格挡术",
+        "effect": "拥有护盾时，装备者的能量自动回复提升<span style=\"color: #2BAD00\">0.52</span>点/秒；<span style=\"color: #FFFFFF\">[强化特殊技]</span>和<span style=\"color: #FFFFFF\">[支援突击]</span>累积的属性异常积蓄值提升<span style=\"color: #2BAD00\">45%</span>。"
+      },
+      {
+        "level": 4,
+        "name": "标准格挡术",
+        "effect": "拥有护盾时，装备者的能量自动回复提升<span style=\"color: #2BAD00\">0.58</span>点/秒；<span style=\"color: #FFFFFF\">[强化特殊技]</span>和<span style=\"color: #FFFFFF\">[支援突击]</span>累积的属性异常积蓄值提升<span style=\"color: #2BAD00\">50%</span>。"
+      },
+      {
+        "level": 5,
+        "name": "标准格挡术",
+        "effect": "拥有护盾时，装备者的能量自动回复提升<span style=\"color: #2BAD00\">0.64</span>点/秒；<span style=\"color: #FFFFFF\">[强化特殊技]</span>和<span style=\"color: #FFFFFF\">[支援突击]</span>累积的属性异常积蓄值提升<span style=\"color: #2BAD00\">55%</span>。"
+      }
+    ]
+  },
+  {
+    "id": "14119",
+    "slug": "deep-sea-visitor",
+    "name": "深海访客",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/13630996402709424784_272_14050658.webp",
+    "rarity": 4,
+    "specialty": {
+      "id": "1",
+      "name": "强攻"
+    },
+    "exclusiveAgentName": "艾莲",
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 48
+    },
+    "advancedStat": {
+      "id": "20103",
+      "name": "暴击率",
+      "value": 0.096
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "诸洋之王",
+        "effect": "<span style=\"color: #98EFF0\">冰属性伤害</span>提升<span style=\"color: #2BAD00\">25%</span>；<span style=\"color: #FFFFFF\">[普通攻击]</span>命中敌人时，装备者的暴击率提升<span style=\"color: #2BAD00\">10%</span>，持续8秒；<span style=\"color: #FFFFFF\">[冲刺攻击]</span>造成<span style=\"color: #98EFF0\">冰属性伤害</span>时，装备者的暴击率额外提升<span style=\"color: #2BAD00\">10%</span>，持续15秒，每种增益效果单独结算持续时间。"
+      },
+      {
+        "level": 2,
+        "name": "诸洋之王",
+        "effect": "<span style=\"color: #98EFF0\">冰属性伤害</span>提升<span style=\"color: #2BAD00\">31.5%</span>；<span style=\"color: #FFFFFF\">[普通攻击]</span>命中敌人时，装备者的暴击率提升<span style=\"color: #2BAD00\">12.5%</span>，持续8秒；<span style=\"color: #FFFFFF\">[冲刺攻击]</span>造成<span style=\"color: #98EFF0\">冰属性伤害</span>时，装备者的暴击率额外提升<span style=\"color: #2BAD00\">12.5%</span>，持续15秒，每种增益效果单独结算持续时间。"
+      },
+      {
+        "level": 3,
+        "name": "诸洋之王",
+        "effect": "<span style=\"color: #98EFF0\">冰属性伤害</span>提升<span style=\"color: #2BAD00\">38%</span>；<span style=\"color: #FFFFFF\">[普通攻击]</span>命中敌人时，装备者的暴击率提升<span style=\"color: #2BAD00\">15%</span>，持续8秒；<span style=\"color: #FFFFFF\">[冲刺攻击]</span>造成<span style=\"color: #98EFF0\">冰属性伤害</span>时，装备者的暴击率额外提升<span style=\"color: #2BAD00\">15%</span>，持续15秒，每种增益效果单独结算持续时间。"
+      },
+      {
+        "level": 4,
+        "name": "诸洋之王",
+        "effect": "<span style=\"color: #98EFF0\">冰属性伤害</span>提升<span style=\"color: #2BAD00\">44.5%</span>；<span style=\"color: #FFFFFF\">[普通攻击]</span>命中敌人时，装备者的暴击率提升<span style=\"color: #2BAD00\">17.5%</span>，持续8秒；<span style=\"color: #FFFFFF\">[冲刺攻击]</span>造成<span style=\"color: #98EFF0\">冰属性伤害</span>时，装备者的暴击率额外提升<span style=\"color: #2BAD00\">17.5%</span>，持续15秒，每种增益效果单独结算持续时间。"
+      },
+      {
+        "level": 5,
+        "name": "诸洋之王",
+        "effect": "<span style=\"color: #98EFF0\">冰属性伤害</span>提升<span style=\"color: #2BAD00\">50%</span>；<span style=\"color: #FFFFFF\">[普通攻击]</span>命中敌人时，装备者的暴击率提升<span style=\"color: #2BAD00\">20%</span>，持续8秒；<span style=\"color: #FFFFFF\">[冲刺攻击]</span>造成<span style=\"color: #98EFF0\">冰属性伤害</span>时，装备者的暴击率额外提升<span style=\"color: #2BAD00\">20%</span>，持续15秒，每种增益效果单独结算持续时间。"
+      }
+    ]
+  },
+  {
+    "id": "13128",
+    "slug": "roaring-ride",
+    "name": "轰鸣座驾",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/10786185987247493831_272_14050658.webp",
+    "rarity": 3,
+    "specialty": {
+      "id": "3",
+      "name": "异常"
+    },
+    "exclusiveAgentName": "派派",
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 42
+    },
+    "advancedStat": {
+      "id": "12102",
+      "name": "攻击力百分比",
+      "value": 0.1
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "碰撞势能",
+        "effect": "<span style=\"color: #FFFFFF\">[强化特殊技]</span>命中敌人时，随机触发以下三种效果中的一种，持续5秒，0.3秒内最多触发一次，同类效果不可叠加，重复触发时刷新持续时间，多个效果可以同时存在：装备者的攻击力提升<span style=\"color: #2BAD00\">8%</span>；装备者的异常精通提升<span style=\"color: #2BAD00\">40</span>点；装备者的属性异常积蓄效率提升<span style=\"color: #2BAD00\">25%</span>。"
+      },
+      {
+        "level": 2,
+        "name": "碰撞势能",
+        "effect": "<span style=\"color: #FFFFFF\">[强化特殊技]</span>命中敌人时，随机触发以下三种效果中的一种，持续5秒，0.3秒内最多触发一次，同类效果不可叠加，重复触发时刷新持续时间，多个效果可以同时存在：装备者的攻击力提升<span style=\"color: #2BAD00\">9.2%</span>；装备者的异常精通提升<span style=\"color: #2BAD00\">46</span>点；装备者的属性异常积蓄效率提升<span style=\"color: #2BAD00\">28%</span>。"
+      },
+      {
+        "level": 3,
+        "name": "碰撞势能",
+        "effect": "<span style=\"color: #FFFFFF\">[强化特殊技]</span>命中敌人时，随机触发以下三种效果中的一种，持续5秒，0.3秒内最多触发一次，同类效果不可叠加，重复触发时刷新持续时间，多个效果可以同时存在：装备者的攻击力提升<span style=\"color: #2BAD00\">10.4%</span>；装备者的异常精通提升<span style=\"color: #2BAD00\">52</span>点；装备者的属性异常积蓄效率提升<span style=\"color: #2BAD00\">32%</span>。"
+      },
+      {
+        "level": 4,
+        "name": "碰撞势能",
+        "effect": "<span style=\"color: #FFFFFF\">[强化特殊技]</span>命中敌人时，随机触发以下三种效果中的一种，持续5秒，0.3秒内最多触发一次，同类效果不可叠加，重复触发时刷新持续时间，多个效果可以同时存在：装备者的攻击力提升<span style=\"color: #2BAD00\">11.6%</span>；装备者的异常精通提升<span style=\"color: #2BAD00\">58</span>点；装备者的属性异常积蓄效率提升<span style=\"color: #2BAD00\">36%</span>。"
+      },
+      {
+        "level": 5,
+        "name": "碰撞势能",
+        "effect": "<span style=\"color: #FFFFFF\">[强化特殊技]</span>命中敌人时，随机触发以下三种效果中的一种，持续5秒，0.3秒内最多触发一次，同类效果不可叠加，重复触发时刷新持续时间，多个效果可以同时存在：装备者的攻击力提升<span style=\"color: #2BAD00\">12.8%</span>；装备者的异常精通提升<span style=\"color: #2BAD00\">64</span>点；装备者的属性异常积蓄效率提升<span style=\"color: #2BAD00\">40%</span>。"
+      }
+    ]
+  },
+  {
+    "id": "13142",
+    "slug": "tremor-trigram-vessel",
+    "name": "震元奇枢",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/1569914992420386318_272_14050658.webp",
+    "rarity": 3,
+    "specialty": {
+      "id": "5",
+      "name": "防护"
+    },
+    "exclusiveAgentName": "潘引壶",
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 42
+    },
+    "advancedStat": {
+      "id": "12102",
+      "name": "攻击力百分比",
+      "value": 0.1
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "寻经定络",
+        "effect": "装备者的<span style=\"color: #FFFFFF\">[强化特殊技]</span>和<span style=\"color: #FFFFFF\">[终结技]</span>造成的伤害增加<span style=\"color: #2BAD00\">25%</span>；队伍中任意角色受到伤害或回复生命时，为装备者回复<span style=\"color: #2BAD00\">2</span>点能量，5秒内最多触发一次；"
+      },
+      {
+        "level": 2,
+        "name": "寻经定络",
+        "effect": "装备者的<span style=\"color: #FFFFFF\">[强化特殊技]</span>和<span style=\"color: #FFFFFF\">[终结技]</span>造成的伤害增加<span style=\"color: #2BAD00\">28.7%</span>；队伍中任意角色受到伤害或回复生命时，为装备者回复<span style=\"color: #2BAD00\">2.3</span>点能量，5秒内最多触发一次；"
+      },
+      {
+        "level": 3,
+        "name": "寻经定络",
+        "effect": "装备者的<span style=\"color: #FFFFFF\">[强化特殊技]</span>和<span style=\"color: #FFFFFF\">[终结技]</span>造成的伤害增加<span style=\"color: #2BAD00\">32.5%</span>；队伍中任意角色受到伤害或回复生命时，为装备者回复<span style=\"color: #2BAD00\">2.6</span>点能量，5秒内最多触发一次；"
+      },
+      {
+        "level": 4,
+        "name": "寻经定络",
+        "effect": "装备者的<span style=\"color: #FFFFFF\">[强化特殊技]</span>和<span style=\"color: #FFFFFF\">[终结技]</span>造成的伤害增加<span style=\"color: #2BAD00\">36.2%</span>；队伍中任意角色受到伤害或回复生命时，为装备者回复<span style=\"color: #2BAD00\">2.9</span>点能量，5秒内最多触发一次；"
+      },
+      {
+        "level": 5,
+        "name": "寻经定络",
+        "effect": "装备者的<span style=\"color: #FFFFFF\">[强化特殊技]</span>和<span style=\"color: #FFFFFF\">[终结技]</span>造成的伤害增加<span style=\"color: #2BAD00\">40%</span>；队伍中任意角色受到伤害或回复生命时，为装备者回复<span style=\"color: #2BAD00\">3.2</span>点能量，5秒内最多触发一次；"
+      }
+    ]
+  },
+  {
+    "id": "13135",
+    "slug": "box-cutter",
+    "name": "裁纸刀",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/9432089935397565383_272_14050658.webp",
+    "rarity": 3,
+    "specialty": {
+      "id": "2",
+      "name": "击破"
+    },
+    "exclusiveAgentName": "波可娜",
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 42
+    },
+    "advancedStat": {
+      "id": "12202",
+      "name": "冲击力",
+      "value": 0.06
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "小心手指",
+        "effect": "发动<span style=\"color: #FFFFFF\">[追加攻击]</span>时，装备者造成的<span style=\"color: #F0D12B\">物理伤害</span>提升<span style=\"color: #2BAD00\">15%</span>，造成的失衡值提升<span style=\"color: #2BAD00\">10%</span>，持续10秒。"
+      },
+      {
+        "level": 2,
+        "name": "小心手指",
+        "effect": "发动<span style=\"color: #FFFFFF\">[追加攻击]</span>时，装备者造成的<span style=\"color: #F0D12B\">物理伤害</span>提升<span style=\"color: #2BAD00\">17.3%</span>，造成的失衡值提升<span style=\"color: #2BAD00\">11.5%</span>，持续10秒。"
+      },
+      {
+        "level": 3,
+        "name": "小心手指",
+        "effect": "发动<span style=\"color: #FFFFFF\">[追加攻击]</span>时，装备者造成的<span style=\"color: #F0D12B\">物理伤害</span>提升<span style=\"color: #2BAD00\">19.5%</span>，造成的失衡值提升<span style=\"color: #2BAD00\">13%</span>，持续10秒。"
+      },
+      {
+        "level": 4,
+        "name": "小心手指",
+        "effect": "发动<span style=\"color: #FFFFFF\">[追加攻击]</span>时，装备者造成的<span style=\"color: #F0D12B\">物理伤害</span>提升<span style=\"color: #2BAD00\">21.8%</span>，造成的失衡值提升<span style=\"color: #2BAD00\">14.5%</span>，持续10秒。"
+      },
+      {
+        "level": 5,
+        "name": "小心手指",
+        "effect": "发动<span style=\"color: #FFFFFF\">[追加攻击]</span>时，装备者造成的<span style=\"color: #F0D12B\">物理伤害</span>提升<span style=\"color: #2BAD00\">24%</span>，造成的失衡值提升<span style=\"color: #2BAD00\">16%</span>，持续10秒。"
+      }
+    ]
+  },
+  {
+    "id": "14002",
+    "slug": "unfettered-game-ball",
+    "name": "逍遥游球",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/2863038979997465136_272_14050658.webp",
+    "rarity": 3,
+    "specialty": {
+      "id": "4",
+      "name": "支援"
+    },
+    "exclusiveAgentName": null,
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 40
+    },
+    "advancedStat": {
+      "id": "30502",
+      "name": "能量自动回复",
+      "value": 0.2
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "电玩，启动！",
+        "effect": "装备者攻击命中敌人时，若触发属性克制效果，则所有单位对该目标的暴击率提升<span style=\"color: #2BAD00\">12%</span>，持续12秒，同名被动效果之间不可叠加。"
+      },
+      {
+        "level": 2,
+        "name": "电玩，启动！",
+        "effect": "装备者攻击命中敌人时，若触发属性克制效果，则所有单位对该目标的暴击率提升<span style=\"color: #2BAD00\">13.5%</span>，持续12秒，同名被动效果之间不可叠加。"
+      },
+      {
+        "level": 3,
+        "name": "电玩，启动！",
+        "effect": "装备者攻击命中敌人时，若触发属性克制效果，则所有单位对该目标的暴击率提升<span style=\"color: #2BAD00\">15.5%</span>，持续12秒，同名被动效果之间不可叠加。"
+      },
+      {
+        "level": 4,
+        "name": "电玩，启动！",
+        "effect": "装备者攻击命中敌人时，若触发属性克制效果，则所有单位对该目标的暴击率提升<span style=\"color: #2BAD00\">17.5%</span>，持续12秒，同名被动效果之间不可叠加。"
+      },
+      {
+        "level": 5,
+        "name": "电玩，启动！",
+        "effect": "装备者攻击命中敌人时，若触发属性克制效果，则所有单位对该目标的暴击率提升<span style=\"color: #2BAD00\">20%</span>，持续12秒，同名被动效果之间不可叠加。"
+      }
+    ]
+  },
+  {
+    "id": "13009",
+    "slug": "electro-lip-gloss",
+    "name": "触电唇彩",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/8278823189502747467_272_14050658.webp",
+    "rarity": 3,
+    "specialty": {
+      "id": "3",
+      "name": "异常"
+    },
+    "exclusiveAgentName": null,
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 40
+    },
+    "advancedStat": {
+      "id": "31203",
+      "name": "异常精通",
+      "value": 30
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "致命拥吻",
+        "effect": "当场上存在处于属性异常状态下的敌人时，装备者的攻击力提升<span style=\"color: #2BAD00\">10%</span>，对目标造成的伤害额外提升<span style=\"color: #2BAD00\">15%</span>。"
+      },
+      {
+        "level": 2,
+        "name": "致命拥吻",
+        "effect": "当场上存在处于属性异常状态下的敌人时，装备者的攻击力提升<span style=\"color: #2BAD00\">11.5%</span>，对目标造成的伤害额外提升<span style=\"color: #2BAD00\">17.5%</span>。"
+      },
+      {
+        "level": 3,
+        "name": "致命拥吻",
+        "effect": "当场上存在处于属性异常状态下的敌人时，装备者的攻击力提升<span style=\"color: #2BAD00\">13%</span>，对目标造成的伤害额外提升<span style=\"color: #2BAD00\">20%</span>。"
+      },
+      {
+        "level": 4,
+        "name": "致命拥吻",
+        "effect": "当场上存在处于属性异常状态下的敌人时，装备者的攻击力提升<span style=\"color: #2BAD00\">14.5%</span>，对目标造成的伤害额外提升<span style=\"color: #2BAD00\">22.5%</span>。"
+      },
+      {
+        "level": 5,
+        "name": "致命拥吻",
+        "effect": "当场上存在处于属性异常状态下的敌人时，装备者的攻击力提升<span style=\"color: #2BAD00\">16%</span>，对目标造成的伤害额外提升<span style=\"color: #2BAD00\">25%</span>。"
+      }
+    ]
+  },
+  {
+    "id": "13101",
+    "slug": "demara-battery-mark-ii",
+    "name": "德玛拉电池Ⅱ型",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/3893124051674327734_272_14050658.webp",
+    "rarity": 3,
+    "specialty": {
+      "id": "2",
+      "name": "击破"
+    },
+    "exclusiveAgentName": "安比",
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 42
+    },
+    "advancedStat": {
+      "id": "12202",
+      "name": "冲击力",
+      "value": 0.06
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "电光石火",
+        "effect": "<span style=\"color: #2EB6FF\">电属性伤害</span>提升<span style=\"color: #2BAD00\">15%</span>；<span style=\"color: #FFFFFF\">[闪避反击]</span>或<span style=\"color: #FFFFFF\">[支援攻击]</span>命中敌人时，装备者的能量获得效率提升<span style=\"color: #2BAD00\">18%</span>，持续8秒。"
+      },
+      {
+        "level": 2,
+        "name": "电光石火",
+        "effect": "<span style=\"color: #2EB6FF\">电属性伤害</span>提升<span style=\"color: #2BAD00\">17.5%</span>；<span style=\"color: #FFFFFF\">[闪避反击]</span>或<span style=\"color: #FFFFFF\">[支援攻击]</span>命中敌人时，装备者的能量获得效率提升<span style=\"color: #2BAD00\">20.5%</span>，持续8秒。"
+      },
+      {
+        "level": 3,
+        "name": "电光石火",
+        "effect": "<span style=\"color: #2EB6FF\">电属性伤害</span>提升<span style=\"color: #2BAD00\">20%</span>；<span style=\"color: #FFFFFF\">[闪避反击]</span>或<span style=\"color: #FFFFFF\">[支援攻击]</span>命中敌人时，装备者的能量获得效率提升<span style=\"color: #2BAD00\">23%</span>，持续8秒。"
+      },
+      {
+        "level": 4,
+        "name": "电光石火",
+        "effect": "<span style=\"color: #2EB6FF\">电属性伤害</span>提升<span style=\"color: #2BAD00\">22%</span>；<span style=\"color: #FFFFFF\">[闪避反击]</span>或<span style=\"color: #FFFFFF\">[支援攻击]</span>命中敌人时，装备者的能量获得效率提升<span style=\"color: #2BAD00\">25%</span>，持续8秒。"
+      },
+      {
+        "level": 5,
+        "name": "电光石火",
+        "effect": "<span style=\"color: #2EB6FF\">电属性伤害</span>提升<span style=\"color: #2BAD00\">24%</span>；<span style=\"color: #FFFFFF\">[闪避反击]</span>或<span style=\"color: #FFFFFF\">[支援攻击]</span>命中敌人时，装备者的能量获得效率提升<span style=\"color: #2BAD00\">27.5%</span>，持续8秒。"
+      }
+    ]
+  },
+  {
+    "id": "13008",
+    "slug": "weeping-gemini",
+    "name": "双生泣星",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/5941300241046102669_272_14050658.webp",
+    "rarity": 3,
+    "specialty": {
+      "id": "3",
+      "name": "异常"
+    },
+    "exclusiveAgentName": null,
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 40
+    },
+    "advancedStat": {
+      "id": "12102",
+      "name": "攻击力百分比",
+      "value": 0.1
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "呜咽余波",
+        "effect": "队伍中任意角色对敌人施加属性异常效果时，为装备者提供1层增益效果，每层增益效果使装备者的异常精通提升<span style=\"color: #2BAD00\">30</span>点，最多叠加4层，目标从失衡状态恢复或死亡时，对应增益效果结束，每层效果单独结算持续时间。"
+      },
+      {
+        "level": 2,
+        "name": "呜咽余波",
+        "effect": "队伍中任意角色对敌人施加属性异常效果时，为装备者提供1层增益效果，每层增益效果使装备者的异常精通提升<span style=\"color: #2BAD00\">34</span>点，最多叠加4层，目标从失衡状态恢复或死亡时，对应增益效果结束，每层效果单独结算持续时间。"
+      },
+      {
+        "level": 3,
+        "name": "呜咽余波",
+        "effect": "队伍中任意角色对敌人施加属性异常效果时，为装备者提供1层增益效果，每层增益效果使装备者的异常精通提升<span style=\"color: #2BAD00\">38</span>点，最多叠加4层，目标从失衡状态恢复或死亡时，对应增益效果结束，每层效果单独结算持续时间。"
+      },
+      {
+        "level": 4,
+        "name": "呜咽余波",
+        "effect": "队伍中任意角色对敌人施加属性异常效果时，为装备者提供1层增益效果，每层增益效果使装备者的异常精通提升<span style=\"color: #2BAD00\">42</span>点，最多叠加4层，目标从失衡状态恢复或死亡时，对应增益效果结束，每层效果单独结算持续时间。"
+      },
+      {
+        "level": 5,
+        "name": "呜咽余波",
+        "effect": "队伍中任意角色对敌人施加属性异常效果时，为装备者提供1层增益效果，每层增益效果使装备者的异常精通提升<span style=\"color: #2BAD00\">48</span>点，最多叠加4层，目标从失衡状态恢复或死亡时，对应增益效果结束，每层效果单独结算持续时间。"
+      }
+    ]
+  },
+  {
+    "id": "13013",
+    "slug": "gilded-blossom",
+    "name": "鎏金花信",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/15104215860712795980_272_14050658.webp",
+    "rarity": 3,
+    "specialty": {
+      "id": "1",
+      "name": "强攻"
+    },
+    "exclusiveAgentName": null,
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 40
+    },
+    "advancedStat": {
+      "id": "12102",
+      "name": "攻击力百分比",
+      "value": 0.1
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "超规防盗措施",
+        "effect": "攻击力提升<span style=\"color: #2BAD00\">6</span>%，<span style=\"color: #FFFFFF\">[强化特殊技]</span>造成的伤害提升<span style=\"color: #2BAD00\">15</span>%。"
+      },
+      {
+        "level": 2,
+        "name": "超规防盗措施",
+        "effect": "攻击力提升<span style=\"color: #2BAD00\">6.9</span>%，<span style=\"color: #FFFFFF\">[强化特殊技]</span>造成的伤害提升<span style=\"color: #2BAD00\">17.2</span>%。"
+      },
+      {
+        "level": 3,
+        "name": "超规防盗措施",
+        "effect": "攻击力提升<span style=\"color: #2BAD00\">7.8</span>%，<span style=\"color: #FFFFFF\">[强化特殊技]</span>造成的伤害提升<span style=\"color: #2BAD00\">19.5</span>%。"
+      },
+      {
+        "level": 4,
+        "name": "超规防盗措施",
+        "effect": "攻击力提升<span style=\"color: #2BAD00\">8.7</span>%，<span style=\"color: #FFFFFF\">[强化特殊技]</span>造成的伤害提升<span style=\"color: #2BAD00\">21.8</span>%。"
+      },
+      {
+        "level": 5,
+        "name": "超规防盗措施",
+        "effect": "攻击力提升<span style=\"color: #2BAD00\">9.6</span>%，<span style=\"color: #FFFFFF\">[强化特殊技]</span>造成的伤害提升<span style=\"color: #2BAD00\">24</span>%。"
+      }
+    ]
+  },
+  {
+    "id": "13014",
+    "slug": "radiowave-journey",
+    "name": "电波漫步",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/12912807887204130966_272_14050658.webp",
+    "rarity": 3,
+    "specialty": {
+      "id": "6",
+      "name": "命破"
+    },
+    "exclusiveAgentName": null,
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 40
+    },
+    "advancedStat": {
+      "id": "11102",
+      "name": "生命值百分比",
+      "value": 0.1
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "自在步调",
+        "effect": "发动<span style=\"color: #FFFFFF\">[连携技]</span>或<span style=\"color: #FFFFFF\">[终结技]</span>时，装备者获得1层增益效果，每层增益效果使装备者的贯穿力提升<span style=\"color: #2BAD00\">80</span>点，最多叠加3层，持续12秒，每层效果单独结算持续时间。"
+      },
+      {
+        "level": 2,
+        "name": "自在步调",
+        "effect": "发动<span style=\"color: #FFFFFF\">[连携技]</span>或<span style=\"color: #FFFFFF\">[终结技]</span>时，装备者获得1层增益效果，每层增益效果使装备者的贯穿力提升<span style=\"color: #2BAD00\">92</span>点，最多叠加3层，持续12秒，每层效果单独结算持续时间。"
+      },
+      {
+        "level": 3,
+        "name": "自在步调",
+        "effect": "发动<span style=\"color: #FFFFFF\">[连携技]</span>或<span style=\"color: #FFFFFF\">[终结技]</span>时，装备者获得1层增益效果，每层增益效果使装备者的贯穿力提升<span style=\"color: #2BAD00\">104</span>点，最多叠加3层，持续12秒，每层效果单独结算持续时间。"
+      },
+      {
+        "level": 4,
+        "name": "自在步调",
+        "effect": "发动<span style=\"color: #FFFFFF\">[连携技]</span>或<span style=\"color: #FFFFFF\">[终结技]</span>时，装备者获得1层增益效果，每层增益效果使装备者的贯穿力提升<span style=\"color: #2BAD00\">116</span>点，最多叠加3层，持续12秒，每层效果单独结算持续时间。"
+      },
+      {
+        "level": 5,
+        "name": "自在步调",
+        "effect": "发动<span style=\"color: #FFFFFF\">[连携技]</span>或<span style=\"color: #FFFFFF\">[终结技]</span>时，装备者获得1层增益效果，每层增益效果使装备者的贯穿力提升<span style=\"color: #2BAD00\">128</span>点，最多叠加3层，持续12秒，每层效果单独结算持续时间。"
+      }
+    ]
+  },
+  {
+    "id": "13106",
+    "slug": "housekeeper",
+    "name": "家政员",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/6666468113399227453_272_14050658.webp",
+    "rarity": 3,
+    "specialty": {
+      "id": "1",
+      "name": "强攻"
+    },
+    "exclusiveAgentName": "可琳",
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 42
+    },
+    "advancedStat": {
+      "id": "12102",
+      "name": "攻击力百分比",
+      "value": 0.1
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "安心家用轮锯",
+        "effect": "位于后场时，装备者的能量自动回复提升<span style=\"color: #2BAD00\">0.45</span>点/秒；<span style=\"color: #FFFFFF\">[强化特殊技]</span>命中敌人时，装备者造成的<span style=\"color: #F0D12B\">物理伤害</span>提升<span style=\"color: #2BAD00\">3%</span>，最多叠加15层，持续1秒，重复触发时刷新持续时间。"
+      },
+      {
+        "level": 2,
+        "name": "安心家用轮锯",
+        "effect": "位于后场时，装备者的能量自动回复提升<span style=\"color: #2BAD00\">0.52</span>点/秒；<span style=\"color: #FFFFFF\">[强化特殊技]</span>命中敌人时，装备者造成的<span style=\"color: #F0D12B\">物理伤害</span>提升<span style=\"color: #2BAD00\">3.5%</span>，最多叠加15层，持续1秒，重复触发时刷新持续时间。"
+      },
+      {
+        "level": 3,
+        "name": "安心家用轮锯",
+        "effect": "位于后场时，装备者的能量自动回复提升<span style=\"color: #2BAD00\">0.58</span>点/秒；<span style=\"color: #FFFFFF\">[强化特殊技]</span>命中敌人时，装备者造成的<span style=\"color: #F0D12B\">物理伤害</span>提升<span style=\"color: #2BAD00\">4%</span>，最多叠加15层，持续1秒，重复触发时刷新持续时间。"
+      },
+      {
+        "level": 4,
+        "name": "安心家用轮锯",
+        "effect": "位于后场时，装备者的能量自动回复提升<span style=\"color: #2BAD00\">0.65</span>点/秒；<span style=\"color: #FFFFFF\">[强化特殊技]</span>命中敌人时，装备者造成的<span style=\"color: #F0D12B\">物理伤害</span>提升<span style=\"color: #2BAD00\">4.4%</span>，最多叠加15层，持续1秒，重复触发时刷新持续时间。"
+      },
+      {
+        "level": 5,
+        "name": "安心家用轮锯",
+        "effect": "位于后场时，装备者的能量自动回复提升<span style=\"color: #2BAD00\">0.72</span>点/秒；<span style=\"color: #FFFFFF\">[强化特殊技]</span>命中敌人时，装备者造成的<span style=\"color: #F0D12B\">物理伤害</span>提升<span style=\"color: #2BAD00\">4.8%</span>，最多叠加15层，持续1秒，重复触发时刷新持续时间。"
+      }
+    ]
+  },
+  {
+    "id": "13111",
+    "slug": "drill-rig-red-axis",
+    "name": "旋钻机-赤轴",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/12456785872476983902_272_14050658.webp",
+    "rarity": 3,
+    "specialty": {
+      "id": "1",
+      "name": "强攻"
+    },
+    "exclusiveAgentName": "安东",
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 42
+    },
+    "advancedStat": {
+      "id": "30502",
+      "name": "能量自动回复",
+      "value": 0.2
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "红莲电机",
+        "effect": "发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>或<span style=\"color: #FFFFFF\">[连携技]</span>时，<span style=\"color: #FFFFFF\">[普通攻击]</span>和<span style=\"color: #FFFFFF\">[冲刺攻击]</span>造成的<span style=\"color: #2EB6FF\">电属性伤害</span>提升<span style=\"color: #2BAD00\">50%</span>，持续10秒，15秒内最多触发一次。"
+      },
+      {
+        "level": 2,
+        "name": "红莲电机",
+        "effect": "发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>或<span style=\"color: #FFFFFF\">[连携技]</span>时，<span style=\"color: #FFFFFF\">[普通攻击]</span>和<span style=\"color: #FFFFFF\">[冲刺攻击]</span>造成的<span style=\"color: #2EB6FF\">电属性伤害</span>提升<span style=\"color: #2BAD00\">57.5%</span>，持续10秒，15秒内最多触发一次。"
+      },
+      {
+        "level": 3,
+        "name": "红莲电机",
+        "effect": "发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>或<span style=\"color: #FFFFFF\">[连携技]</span>时，<span style=\"color: #FFFFFF\">[普通攻击]</span>和<span style=\"color: #FFFFFF\">[冲刺攻击]</span>造成的<span style=\"color: #2EB6FF\">电属性伤害</span>提升<span style=\"color: #2BAD00\">65%</span>，持续10秒，15秒内最多触发一次。"
+      },
+      {
+        "level": 4,
+        "name": "红莲电机",
+        "effect": "发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>或<span style=\"color: #FFFFFF\">[连携技]</span>时，<span style=\"color: #FFFFFF\">[普通攻击]</span>和<span style=\"color: #FFFFFF\">[冲刺攻击]</span>造成的<span style=\"color: #2EB6FF\">电属性伤害</span>提升<span style=\"color: #2BAD00\">72.5%</span>，持续10秒，15秒内最多触发一次。"
+      },
+      {
+        "level": 5,
+        "name": "红莲电机",
+        "effect": "发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>或<span style=\"color: #FFFFFF\">[连携技]</span>时，<span style=\"color: #FFFFFF\">[普通攻击]</span>和<span style=\"color: #FFFFFF\">[冲刺攻击]</span>造成的<span style=\"color: #2EB6FF\">电属性伤害</span>提升<span style=\"color: #2BAD00\">80%</span>，持续10秒，15秒内最多触发一次。"
+      }
+    ]
+  },
+  {
+    "id": "13115",
+    "slug": "kaboom-the-cannon",
+    "name": "好斗的阿炮",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/4175156182529753901_272_14050658.webp",
+    "rarity": 3,
+    "specialty": {
+      "id": "4",
+      "name": "支援"
+    },
+    "exclusiveAgentName": "露西",
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 42
+    },
+    "advancedStat": {
+      "id": "30502",
+      "name": "能量自动回复",
+      "value": 0.2
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "踩踏事故",
+        "effect": "队伍中任意友方单位攻击命中敌人时，队伍中所有友方单位的攻击力提升<span style=\"color: #2BAD00\">2.5%</span>，最多叠加4层，持续8秒，每层效果单独结算持续时间，每名友方单位最多提供1层增益效果，同名被动效果之间不可叠加。"
+      },
+      {
+        "level": 2,
+        "name": "踩踏事故",
+        "effect": "队伍中任意友方单位攻击命中敌人时，队伍中所有友方单位的攻击力提升<span style=\"color: #2BAD00\">2.8%</span>，最多叠加4层，持续8秒，每层效果单独结算持续时间，每名友方单位最多提供1层增益效果，同名被动效果之间不可叠加。"
+      },
+      {
+        "level": 3,
+        "name": "踩踏事故",
+        "effect": "队伍中任意友方单位攻击命中敌人时，队伍中所有友方单位的攻击力提升<span style=\"color: #2BAD00\">3.2%</span>，最多叠加4层，持续8秒，每层效果单独结算持续时间，每名友方单位最多提供1层增益效果，同名被动效果之间不可叠加。"
+      },
+      {
+        "level": 4,
+        "name": "踩踏事故",
+        "effect": "队伍中任意友方单位攻击命中敌人时，队伍中所有友方单位的攻击力提升<span style=\"color: #2BAD00\">3.6%</span>，最多叠加4层，持续8秒，每层效果单独结算持续时间，每名友方单位最多提供1层增益效果，同名被动效果之间不可叠加。"
+      },
+      {
+        "level": 5,
+        "name": "踩踏事故",
+        "effect": "队伍中任意友方单位攻击命中敌人时，队伍中所有友方单位的攻击力提升<span style=\"color: #2BAD00\">4%</span>，最多叠加4层，持续8秒，每层效果单独结算持续时间，每名友方单位最多提供1层增益效果，同名被动效果之间不可叠加。"
+      }
+    ]
+  },
+  {
+    "id": "13113",
+    "slug": "bashful-demon",
+    "name": "含羞恶面",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/7276144844641234541_272_14050658.webp",
+    "rarity": 3,
+    "specialty": {
+      "id": "4",
+      "name": "支援"
+    },
+    "exclusiveAgentName": "苍角",
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 42
+    },
+    "advancedStat": {
+      "id": "12102",
+      "name": "攻击力百分比",
+      "value": 0.1
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "饕餮相",
+        "effect": "<span style=\"color: #98EFF0\">冰属性伤害</span>提升<span style=\"color: #2BAD00\">15%</span>；发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>时，全队角色攻击力提升<span style=\"color: #2BAD00\">2%</span>，最多叠加4层，持续12秒，重复触发时刷新持续时间，同名被动效果之间不可叠加。"
+      },
+      {
+        "level": 2,
+        "name": "饕餮相",
+        "effect": "<span style=\"color: #98EFF0\">冰属性伤害</span>提升<span style=\"color: #2BAD00\">17.5%</span>；发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>时，全队角色攻击力提升<span style=\"color: #2BAD00\">2.3%</span>，最多叠加4层，持续12秒，重复触发时刷新持续时间，同名被动效果之间不可叠加。"
+      },
+      {
+        "level": 3,
+        "name": "饕餮相",
+        "effect": "<span style=\"color: #98EFF0\">冰属性伤害</span>提升<span style=\"color: #2BAD00\">20%</span>；发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>时，全队角色攻击力提升<span style=\"color: #2BAD00\">2.6%</span>，最多叠加4层，持续12秒，重复触发时刷新持续时间，同名被动效果之间不可叠加。"
+      },
+      {
+        "level": 4,
+        "name": "饕餮相",
+        "effect": "<span style=\"color: #98EFF0\">冰属性伤害</span>提升<span style=\"color: #2BAD00\">22%</span>；发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>时，全队角色攻击力提升<span style=\"color: #2BAD00\">2.9%</span>，最多叠加4层，持续12秒，重复触发时刷新持续时间，同名被动效果之间不可叠加。"
+      },
+      {
+        "level": 5,
+        "name": "饕餮相",
+        "effect": "<span style=\"color: #98EFF0\">冰属性伤害</span>提升<span style=\"color: #2BAD00\">24%</span>；发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>时，全队角色攻击力提升<span style=\"color: #2BAD00\">3.2%</span>，最多叠加4层，持续12秒，重复触发时刷新持续时间，同名被动效果之间不可叠加。"
+      }
+    ]
+  },
+  {
+    "id": "13015",
+    "slug": "marcato-desire",
+    "name": "强音热望",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/15776112863445148120_272_14050658.webp",
+    "rarity": 3,
+    "specialty": {
+      "id": "1",
+      "name": "强攻"
+    },
+    "exclusiveAgentName": null,
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 40
+    },
+    "advancedStat": {
+      "id": "20103",
+      "name": "暴击率",
+      "value": 0.08
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "躁动全场",
+        "effect": "<span style=\"color: #FFFFFF\">[强化特殊技]</span>或<span style=\"color: #FFFFFF\">[连携技]</span>命中敌人时，装备者的攻击力提升<span style=\"color: #2BAD00\">6%</span>，持续8秒；目标处于属性异常状态下时，该增益效果额外提升<span style=\"color: #2BAD00\">6%</span>。"
+      },
+      {
+        "level": 2,
+        "name": "躁动全场",
+        "effect": "<span style=\"color: #FFFFFF\">[强化特殊技]</span>或<span style=\"color: #FFFFFF\">[连携技]</span>命中敌人时，装备者的攻击力提升<span style=\"color: #2BAD00\">6.9%</span>，持续8秒；目标处于属性异常状态下时，该增益效果额外提升<span style=\"color: #2BAD00\">6.9%</span>。"
+      },
+      {
+        "level": 3,
+        "name": "躁动全场",
+        "effect": "<span style=\"color: #FFFFFF\">[强化特殊技]</span>或<span style=\"color: #FFFFFF\">[连携技]</span>命中敌人时，装备者的攻击力提升<span style=\"color: #2BAD00\">7.8%</span>，持续8秒；目标处于属性异常状态下时，该增益效果额外提升<span style=\"color: #2BAD00\">7.8%</span>。"
+      },
+      {
+        "level": 4,
+        "name": "躁动全场",
+        "effect": "<span style=\"color: #FFFFFF\">[强化特殊技]</span>或<span style=\"color: #FFFFFF\">[连携技]</span>命中敌人时，装备者的攻击力提升<span style=\"color: #2BAD00\">8.7%</span>，持续8秒；目标处于属性异常状态下时，该增益效果额外提升<span style=\"color: #2BAD00\">8.7%</span>。"
+      },
+      {
+        "level": 5,
+        "name": "躁动全场",
+        "effect": "<span style=\"color: #FFFFFF\">[强化特殊技]</span>或<span style=\"color: #FFFFFF\">[连携技]</span>命中敌人时，装备者的攻击力提升<span style=\"color: #2BAD00\">9.6%</span>，持续8秒；目标处于属性异常状态下时，该增益效果额外提升<span style=\"color: #2BAD00\">9.6%</span>。"
+      }
+    ]
+  },
+  {
+    "id": "13010",
+    "slug": "bunny-band",
+    "name": "兔能环",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/17505149526367325467_272_14050658.webp",
+    "rarity": 3,
+    "specialty": {
+      "id": "5",
+      "name": "防护"
+    },
+    "exclusiveAgentName": null,
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 40
+    },
+    "advancedStat": {
+      "id": "13102",
+      "name": "防御力百分比",
+      "value": 0.16
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "摸摸兔兔",
+        "effect": "生命值上限提升<span style=\"color: #2BAD00\">8%</span>；拥有护盾时，装备者的攻击力提升<span style=\"color: #2BAD00\">10%</span>。"
+      },
+      {
+        "level": 2,
+        "name": "摸摸兔兔",
+        "effect": "生命值上限提升<span style=\"color: #2BAD00\">9.2%</span>；拥有护盾时，装备者的攻击力提升<span style=\"color: #2BAD00\">11.5%</span>。"
+      },
+      {
+        "level": 3,
+        "name": "摸摸兔兔",
+        "effect": "生命值上限提升<span style=\"color: #2BAD00\">10.4%</span>；拥有护盾时，装备者的攻击力提升<span style=\"color: #2BAD00\">13%</span>。"
+      },
+      {
+        "level": 4,
+        "name": "摸摸兔兔",
+        "effect": "生命值上限提升<span style=\"color: #2BAD00\">11.6%</span>；拥有护盾时，装备者的攻击力提升<span style=\"color: #2BAD00\">14.5%</span>。"
+      },
+      {
+        "level": 5,
+        "name": "摸摸兔兔",
+        "effect": "生命值上限提升<span style=\"color: #2BAD00\">12.8%</span>；拥有护盾时，装备者的攻击力提升<span style=\"color: #2BAD00\">16%</span>。"
+      }
+    ]
+  },
+  {
+    "id": "13103",
+    "slug": "the-vault",
+    "name": "聚宝箱",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/15411383610664024344_272_14050658.webp",
+    "rarity": 3,
+    "specialty": {
+      "id": "4",
+      "name": "支援"
+    },
+    "exclusiveAgentName": "妮可",
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 42
+    },
+    "advancedStat": {
+      "id": "30502",
+      "name": "能量自动回复",
+      "value": 0.2
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "财迷心窍",
+        "effect": "<span style=\"color: #FFFFFF\">[强化特殊技]</span>、<span style=\"color: #FFFFFF\">[连携技]</span>或<span style=\"color: #FFFFFF\">[终结技]</span>造成<span style=\"color: #FE437E\">以太伤害</span>时，所有单位对目标造成的伤害提升<span style=\"color: #2BAD00\">15%</span>，装备者的能量自动回复提升<span style=\"color: #2BAD00\">0.5</span>点/秒，持续2秒，同名被动效果之间不可叠加。"
+      },
+      {
+        "level": 2,
+        "name": "财迷心窍",
+        "effect": "<span style=\"color: #FFFFFF\">[强化特殊技]</span>、<span style=\"color: #FFFFFF\">[连携技]</span>或<span style=\"color: #FFFFFF\">[终结技]</span>造成<span style=\"color: #FE437E\">以太伤害</span>时，所有单位对目标造成的伤害提升<span style=\"color: #2BAD00\">17.5%</span>，装备者的能量自动回复提升<span style=\"color: #2BAD00\">0.58</span>点/秒，持续2秒，同名被动效果之间不可叠加。"
+      },
+      {
+        "level": 3,
+        "name": "财迷心窍",
+        "effect": "<span style=\"color: #FFFFFF\">[强化特殊技]</span>、<span style=\"color: #FFFFFF\">[连携技]</span>或<span style=\"color: #FFFFFF\">[终结技]</span>造成<span style=\"color: #FE437E\">以太伤害</span>时，所有单位对目标造成的伤害提升<span style=\"color: #2BAD00\">20%</span>，装备者的能量自动回复提升<span style=\"color: #2BAD00\">0.65</span>点/秒，持续2秒，同名被动效果之间不可叠加。"
+      },
+      {
+        "level": 4,
+        "name": "财迷心窍",
+        "effect": "<span style=\"color: #FFFFFF\">[强化特殊技]</span>、<span style=\"color: #FFFFFF\">[连携技]</span>或<span style=\"color: #FFFFFF\">[终结技]</span>造成<span style=\"color: #FE437E\">以太伤害</span>时，所有单位对目标造成的伤害提升<span style=\"color: #2BAD00\">22%</span>，装备者的能量自动回复提升<span style=\"color: #2BAD00\">0.72</span>点/秒，持续2秒，同名被动效果之间不可叠加。"
+      },
+      {
+        "level": 5,
+        "name": "财迷心窍",
+        "effect": "<span style=\"color: #FFFFFF\">[强化特殊技]</span>、<span style=\"color: #FFFFFF\">[连携技]</span>或<span style=\"color: #FFFFFF\">[终结技]</span>造成<span style=\"color: #FE437E\">以太伤害</span>时，所有单位对目标造成的伤害提升<span style=\"color: #2BAD00\">24%</span>，装备者的能量自动回复提升<span style=\"color: #2BAD00\">0.8</span>点/秒，持续2秒，同名被动效果之间不可叠加。"
+      }
+    ]
+  },
+  {
+    "id": "13007",
+    "slug": "original-transmorpher",
+    "name": "正版变身器",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/4098303117924185359_272_14050658.webp",
+    "rarity": 3,
+    "specialty": {
+      "id": "5",
+      "name": "防护"
+    },
+    "exclusiveAgentName": null,
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 40
+    },
+    "advancedStat": {
+      "id": "11102",
+      "name": "生命值百分比",
+      "value": 0.1
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "骑士飞踢",
+        "effect": "生命值上限提升<span style=\"color: #2BAD00\">8%</span>；受到敌方攻击时，装备者的冲击力提升<span style=\"color: #2BAD00\">10%</span>，持续12秒。"
+      },
+      {
+        "level": 2,
+        "name": "骑士飞踢",
+        "effect": "生命值上限提升<span style=\"color: #2BAD00\">9%</span>；受到敌方攻击时，装备者的冲击力提升<span style=\"color: #2BAD00\">11.5%</span>，持续12秒。"
+      },
+      {
+        "level": 3,
+        "name": "骑士飞踢",
+        "effect": "生命值上限提升<span style=\"color: #2BAD00\">10%</span>；受到敌方攻击时，装备者的冲击力提升<span style=\"color: #2BAD00\">13%</span>，持续12秒。"
+      },
+      {
+        "level": 4,
+        "name": "骑士飞踢",
+        "effect": "生命值上限提升<span style=\"color: #2BAD00\">11%</span>；受到敌方攻击时，装备者的冲击力提升<span style=\"color: #2BAD00\">14.5%</span>，持续12秒。"
+      },
+      {
+        "level": 5,
+        "name": "骑士飞踢",
+        "effect": "生命值上限提升<span style=\"color: #2BAD00\">12.5%</span>；受到敌方攻击时，装备者的冲击力提升<span style=\"color: #2BAD00\">16%</span>，持续12秒。"
+      }
+    ]
+  },
+  {
+    "id": "13112",
+    "slug": "big-cylinder",
+    "name": "比格气缸",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/8331231276527781665_272_14050658.webp",
+    "rarity": 3,
+    "specialty": {
+      "id": "5",
+      "name": "防护"
+    },
+    "exclusiveAgentName": "本",
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 42
+    },
+    "advancedStat": {
+      "id": "13102",
+      "name": "防御力百分比",
+      "value": 0.16
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "万斤顶",
+        "effect": "受到的伤害降低<span style=\"color: #2BAD00\">7.5%</span>；受到敌方攻击后，下一次攻击命中敌人时，额外造成装备者<span style=\"color: #2BAD00\">600%</span>防御力的伤害，且必定触发暴击，7.5秒内最多触发一次。"
+      },
+      {
+        "level": 2,
+        "name": "万斤顶",
+        "effect": "受到的伤害降低<span style=\"color: #2BAD00\">8.5%</span>；受到敌方攻击后，下一次攻击命中敌人时，额外造成装备者<span style=\"color: #2BAD00\">690%</span>防御力的伤害，且必定触发暴击，7.5秒内最多触发一次。"
+      },
+      {
+        "level": 3,
+        "name": "万斤顶",
+        "effect": "受到的伤害降低<span style=\"color: #2BAD00\">9.5%</span>；受到敌方攻击后，下一次攻击命中敌人时，额外造成装备者<span style=\"color: #2BAD00\">780%</span>防御力的伤害，且必定触发暴击，7.5秒内最多触发一次。"
+      },
+      {
+        "level": 4,
+        "name": "万斤顶",
+        "effect": "受到的伤害降低<span style=\"color: #2BAD00\">10.5%</span>；受到敌方攻击后，下一次攻击命中敌人时，额外造成装备者<span style=\"color: #2BAD00\">870%</span>防御力的伤害，且必定触发暴击，7.5秒内最多触发一次。"
+      },
+      {
+        "level": 5,
+        "name": "万斤顶",
+        "effect": "受到的伤害降低<span style=\"color: #2BAD00\">12%</span>；受到敌方攻击后，下一次攻击命中敌人时，额外造成装备者<span style=\"color: #2BAD00\">960%</span>防御力的伤害，且必定触发暴击，7.5秒内最多触发一次。"
+      }
+    ]
+  },
+  {
+    "id": "13016",
+    "slug": "reel-projector",
+    "name": "光影刻刀",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/9964315085084264143_272_14050658.webp",
+    "rarity": 3,
+    "specialty": {
+      "id": "5",
+      "name": "防护"
+    },
+    "exclusiveAgentName": null,
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 40
+    },
+    "advancedStat": {
+      "id": "12202",
+      "name": "冲击力",
+      "value": 0.06
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "镌刻倏忽",
+        "effect": "队伍中角色生命值大于等于50%，受到的伤害降低<span style=\"color: #2BAD00\">7.5%</span>，受到的[秽息浸染]值降低<span style=\"color: #2BAD00\">10%</span>，该效果全队唯一。"
+      },
+      {
+        "level": 2,
+        "name": "镌刻倏忽",
+        "effect": "队伍中角色生命值大于等于50%，受到的伤害降低<span style=\"color: #2BAD00\">8.6%</span>，受到的[秽息浸染]值降低<span style=\"color: #2BAD00\">11.5%</span>，该效果全队唯一。"
+      },
+      {
+        "level": 3,
+        "name": "镌刻倏忽",
+        "effect": "队伍中角色生命值大于等于50%，受到的伤害降低<span style=\"color: #2BAD00\">9.7%</span>，受到的[秽息浸染]值降低<span style=\"color: #2BAD00\">13%</span>，该效果全队唯一。"
+      },
+      {
+        "level": 4,
+        "name": "镌刻倏忽",
+        "effect": "队伍中角色生命值大于等于50%，受到的伤害降低<span style=\"color: #2BAD00\">10.8%</span>，受到的[秽息浸染]值降低<span style=\"color: #2BAD00\">14.5%</span>，该效果全队唯一。"
+      },
+      {
+        "level": 5,
+        "name": "镌刻倏忽",
+        "effect": "队伍中角色生命值大于等于50%，受到的伤害降低<span style=\"color: #2BAD00\">12%</span>，受到的[秽息浸染]值降低<span style=\"color: #2BAD00\">16%</span>，该效果全队唯一。"
+      }
+    ]
+  },
+  {
+    "id": "13108",
+    "slug": "starlight-engine-replica",
+    "name": "仿制星徽引擎",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/15621645452053854921_272_14050658.webp",
+    "rarity": 3,
+    "specialty": {
+      "id": "1",
+      "name": "强攻"
+    },
+    "exclusiveAgentName": "比利",
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 42
+    },
+    "advancedStat": {
+      "id": "12102",
+      "name": "攻击力百分比",
+      "value": 0.1
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "骑士光波：改",
+        "effect": "<span style=\"color: #FFFFFF\">[普通攻击]</span>或<span style=\"color: #FFFFFF\">[冲刺攻击]</span>命中6米外的敌人时，装备者对目标造成的<span style=\"color: #F0D12B\">物理伤害</span>提升<span style=\"color: #2BAD00\">36%</span>，持续8秒。"
+      },
+      {
+        "level": 2,
+        "name": "骑士光波：改",
+        "effect": "<span style=\"color: #FFFFFF\">[普通攻击]</span>或<span style=\"color: #FFFFFF\">[冲刺攻击]</span>命中6米外的敌人时，装备者对目标造成的<span style=\"color: #F0D12B\">物理伤害</span>提升<span style=\"color: #2BAD00\">41%</span>，持续8秒。"
+      },
+      {
+        "level": 3,
+        "name": "骑士光波：改",
+        "effect": "<span style=\"color: #FFFFFF\">[普通攻击]</span>或<span style=\"color: #FFFFFF\">[冲刺攻击]</span>命中6米外的敌人时，装备者对目标造成的<span style=\"color: #F0D12B\">物理伤害</span>提升<span style=\"color: #2BAD00\">46.5%</span>，持续8秒。"
+      },
+      {
+        "level": 4,
+        "name": "骑士光波：改",
+        "effect": "<span style=\"color: #FFFFFF\">[普通攻击]</span>或<span style=\"color: #FFFFFF\">[冲刺攻击]</span>命中6米外的敌人时，装备者对目标造成的<span style=\"color: #F0D12B\">物理伤害</span>提升<span style=\"color: #2BAD00\">52%</span>，持续8秒。"
+      },
+      {
+        "level": 5,
+        "name": "骑士光波：改",
+        "effect": "<span style=\"color: #FFFFFF\">[普通攻击]</span>或<span style=\"color: #FFFFFF\">[冲刺攻击]</span>命中6米外的敌人时，装备者对目标造成的<span style=\"color: #F0D12B\">物理伤害</span>提升<span style=\"color: #2BAD00\">57.5%</span>，持续8秒。"
+      }
+    ]
+  },
+  {
+    "id": "13011",
+    "slug": "spring-embrace",
+    "name": "春日融融",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/9243015773386100158_272_14050658.webp",
+    "rarity": 3,
+    "specialty": {
+      "id": "5",
+      "name": "防护"
+    },
+    "exclusiveAgentName": null,
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 40
+    },
+    "advancedStat": {
+      "id": "12102",
+      "name": "攻击力百分比",
+      "value": 0.1
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "热泉汤",
+        "effect": "受到的伤害降低<span style=\"color: #2BAD00\">7.5%</span>；受到敌方攻击时，装备者的能量获得效率提升<span style=\"color: #2BAD00\">10%</span>，持续12秒；装备者换回后场时，该增益效果将传递给当前操作中的角色，并刷新持续时间，同名被动效果之间不可叠加。"
+      },
+      {
+        "level": 2,
+        "name": "热泉汤",
+        "effect": "受到的伤害降低<span style=\"color: #2BAD00\">8.5%</span>；受到敌方攻击时，装备者的能量获得效率提升<span style=\"color: #2BAD00\">11.5%</span>，持续12秒；装备者换回后场时，该增益效果将传递给当前操作中的角色，并刷新持续时间，同名被动效果之间不可叠加。"
+      },
+      {
+        "level": 3,
+        "name": "热泉汤",
+        "effect": "受到的伤害降低<span style=\"color: #2BAD00\">9.5%</span>；受到敌方攻击时，装备者的能量获得效率提升<span style=\"color: #2BAD00\">13%</span>，持续12秒；装备者换回后场时，该增益效果将传递给当前操作中的角色，并刷新持续时间，同名被动效果之间不可叠加。"
+      },
+      {
+        "level": 4,
+        "name": "热泉汤",
+        "effect": "受到的伤害降低<span style=\"color: #2BAD00\">10.5%</span>；受到敌方攻击时，装备者的能量获得效率提升<span style=\"color: #2BAD00\">14.5%</span>，持续12秒；装备者换回后场时，该增益效果将传递给当前操作中的角色，并刷新持续时间，同名被动效果之间不可叠加。"
+      },
+      {
+        "level": 5,
+        "name": "热泉汤",
+        "effect": "受到的伤害降低<span style=\"color: #2BAD00\">12%</span>；受到敌方攻击时，装备者的能量获得效率提升<span style=\"color: #2BAD00\">16%</span>，持续12秒；装备者换回后场时，该增益效果将传递给当前操作中的角色，并刷新持续时间，同名被动效果之间不可叠加。"
+      }
+    ]
+  },
+  {
+    "id": "13012",
+    "slug": "puzzle-sphere",
+    "name": "幻变魔方",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/4127154233325250721_272_14050658.webp",
+    "rarity": 3,
+    "specialty": {
+      "id": "6",
+      "name": "命破"
+    },
+    "exclusiveAgentName": null,
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 40
+    },
+    "advancedStat": {
+      "id": "12102",
+      "name": "攻击力百分比",
+      "value": 0.1
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "奇机弄巧",
+        "effect": "发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>时，装备者暴击伤害提升<span style=\"color: #2BAD00\">16%</span>，持续12秒；且若目标当前生命值低于最大值的50%时，<span style=\"color: #FFFFFF\">[强化特殊技]</span>造成的伤害提升<span style=\"color: #2BAD00\">20%</span>。"
+      },
+      {
+        "level": 2,
+        "name": "奇机弄巧",
+        "effect": "发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>时，装备者暴击伤害提升<span style=\"color: #2BAD00\">18.4%</span>，持续12秒；且若目标当前生命值低于最大值的50%时，<span style=\"color: #FFFFFF\">[强化特殊技]</span>造成的伤害提升<span style=\"color: #2BAD00\">23%</span>。"
+      },
+      {
+        "level": 3,
+        "name": "奇机弄巧",
+        "effect": "发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>时，装备者暴击伤害提升<span style=\"color: #2BAD00\">20.8%</span>，持续12秒；且若目标当前生命值低于最大值的50%时，<span style=\"color: #FFFFFF\">[强化特殊技]</span>造成的伤害提升<span style=\"color: #2BAD00\">26%</span>。"
+      },
+      {
+        "level": 4,
+        "name": "奇机弄巧",
+        "effect": "发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>时，装备者暴击伤害提升<span style=\"color: #2BAD00\">23.2%</span>，持续12秒；且若目标当前生命值低于最大值的50%时，<span style=\"color: #FFFFFF\">[强化特殊技]</span>造成的伤害提升<span style=\"color: #2BAD00\">29%</span>。"
+      },
+      {
+        "level": 5,
+        "name": "奇机弄巧",
+        "effect": "发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>时，装备者暴击伤害提升<span style=\"color: #2BAD00\">25.6%</span>，持续12秒；且若目标当前生命值低于最大值的50%时，<span style=\"color: #FFFFFF\">[强化特殊技]</span>造成的伤害提升<span style=\"color: #2BAD00\">32%</span>。"
+      }
+    ]
+  },
+  {
+    "id": "12004",
+    "slug": "reverb-mark-i",
+    "name": "「残响」-Ⅰ型",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/17459247729230365622_272_14050658.webp",
+    "rarity": 2,
+    "specialty": {
+      "id": "4",
+      "name": "支援"
+    },
+    "exclusiveAgentName": null,
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 32
+    },
+    "advancedStat": {
+      "id": "12102",
+      "name": "攻击力百分比",
+      "value": 0.08
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "潮汐",
+        "effect": "发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>时，全队角色冲击力提升<span style=\"color: #2BAD00\">8%</span>，持续10秒，20秒内最多触发一次，同名被动效果之间不可叠加。"
+      },
+      {
+        "level": 2,
+        "name": "潮汐",
+        "effect": "发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>时，全队角色冲击力提升<span style=\"color: #2BAD00\">9%</span>，持续10秒，20秒内最多触发一次，同名被动效果之间不可叠加。"
+      },
+      {
+        "level": 3,
+        "name": "潮汐",
+        "effect": "发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>时，全队角色冲击力提升<span style=\"color: #2BAD00\">10%</span>，持续10秒，20秒内最多触发一次，同名被动效果之间不可叠加。"
+      },
+      {
+        "level": 4,
+        "name": "潮汐",
+        "effect": "发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>时，全队角色冲击力提升<span style=\"color: #2BAD00\">11%</span>，持续10秒，20秒内最多触发一次，同名被动效果之间不可叠加。"
+      },
+      {
+        "level": 5,
+        "name": "潮汐",
+        "effect": "发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>时，全队角色冲击力提升<span style=\"color: #2BAD00\">12%</span>，持续10秒，20秒内最多触发一次，同名被动效果之间不可叠加。"
+      }
+    ]
+  },
+  {
+    "id": "12005",
+    "slug": "reverb-mark-ii",
+    "name": "「残响」-Ⅱ型",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/4789109120989482936_272_14050658.webp",
+    "rarity": 2,
+    "specialty": {
+      "id": "4",
+      "name": "支援"
+    },
+    "exclusiveAgentName": null,
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 32
+    },
+    "advancedStat": {
+      "id": "30502",
+      "name": "能量自动回复",
+      "value": 0.16
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "音浪",
+        "effect": "发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>或<span style=\"color: #FFFFFF\">[连携技]</span>时，全队角色异常掌控和异常精通提升<span style=\"color: #2BAD00\">10</span>点，持续10秒，20秒内最多触发一次，同名被动效果之间不可叠加。"
+      },
+      {
+        "level": 2,
+        "name": "音浪",
+        "effect": "发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>或<span style=\"color: #FFFFFF\">[连携技]</span>时，全队角色异常掌控和异常精通提升<span style=\"color: #2BAD00\">12</span>点，持续10秒，20秒内最多触发一次，同名被动效果之间不可叠加。"
+      },
+      {
+        "level": 3,
+        "name": "音浪",
+        "effect": "发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>或<span style=\"color: #FFFFFF\">[连携技]</span>时，全队角色异常掌控和异常精通提升<span style=\"color: #2BAD00\">13</span>点，持续10秒，20秒内最多触发一次，同名被动效果之间不可叠加。"
+      },
+      {
+        "level": 4,
+        "name": "音浪",
+        "effect": "发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>或<span style=\"color: #FFFFFF\">[连携技]</span>时，全队角色异常掌控和异常精通提升<span style=\"color: #2BAD00\">15</span>点，持续10秒，20秒内最多触发一次，同名被动效果之间不可叠加。"
+      },
+      {
+        "level": 5,
+        "name": "音浪",
+        "effect": "发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>或<span style=\"color: #FFFFFF\">[连携技]</span>时，全队角色异常掌控和异常精通提升<span style=\"color: #2BAD00\">16</span>点，持续10秒，20秒内最多触发一次，同名被动效果之间不可叠加。"
+      }
+    ]
+  },
+  {
+    "id": "13006",
+    "slug": "precious-fossilized-core",
+    "name": "贵重骨核",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/13644397909319236033_272_14050658.webp",
+    "rarity": 3,
+    "specialty": {
+      "id": "2",
+      "name": "击破"
+    },
+    "exclusiveAgentName": null,
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 40
+    },
+    "advancedStat": {
+      "id": "12202",
+      "name": "冲击力",
+      "value": 0.06
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "巨兽猎手",
+        "effect": "敌方生命值大于等于50%时，装备者对目标造成的失衡值提升<span style=\"color: #2BAD00\">10%</span>，敌方生命值大于等于75%时，该增益效果额外提升<span style=\"color: #2BAD00\">10%</span>。"
+      },
+      {
+        "level": 2,
+        "name": "巨兽猎手",
+        "effect": "敌方生命值大于等于50%时，装备者对目标造成的失衡值提升<span style=\"color: #2BAD00\">11.5%</span>，敌方生命值大于等于75%时，该增益效果额外提升<span style=\"color: #2BAD00\">11.5%</span>。"
+      },
+      {
+        "level": 3,
+        "name": "巨兽猎手",
+        "effect": "敌方生命值大于等于50%时，装备者对目标造成的失衡值提升<span style=\"color: #2BAD00\">13%</span>，敌方生命值大于等于75%时，该增益效果额外提升<span style=\"color: #2BAD00\">13%</span>。"
+      },
+      {
+        "level": 4,
+        "name": "巨兽猎手",
+        "effect": "敌方生命值大于等于50%时，装备者对目标造成的失衡值提升<span style=\"color: #2BAD00\">14.5%</span>，敌方生命值大于等于75%时，该增益效果额外提升<span style=\"color: #2BAD00\">14.5%</span>。"
+      },
+      {
+        "level": 5,
+        "name": "巨兽猎手",
+        "effect": "敌方生命值大于等于50%时，装备者对目标造成的失衡值提升<span style=\"color: #2BAD00\">16%</span>，敌方生命值大于等于75%时，该增益效果额外提升<span style=\"color: #2BAD00\">16%</span>。"
+      }
+    ]
+  },
+  {
+    "id": "13005",
+    "slug": "steam-oven",
+    "name": "人为刀俎",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/11080232539185678824_272_14050658.webp",
+    "rarity": 3,
+    "specialty": {
+      "id": "2",
+      "name": "击破"
+    },
+    "exclusiveAgentName": null,
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 40
+    },
+    "advancedStat": {
+      "id": "30502",
+      "name": "能量自动回复",
+      "value": 0.2
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "浓厚汤底",
+        "effect": "每拥有10点能量值，装备者的冲击力提升<span style=\"color: #2BAD00\">2%</span>，最多叠加8层，能量消耗后该增益效果仍然保留，持续8秒，每层效果单独结算持续时间。"
+      },
+      {
+        "level": 2,
+        "name": "浓厚汤底",
+        "effect": "每拥有10点能量值，装备者的冲击力提升<span style=\"color: #2BAD00\">2.3%</span>，最多叠加8层，能量消耗后该增益效果仍然保留，持续8秒，每层效果单独结算持续时间。"
+      },
+      {
+        "level": 3,
+        "name": "浓厚汤底",
+        "effect": "每拥有10点能量值，装备者的冲击力提升<span style=\"color: #2BAD00\">2.6%</span>，最多叠加8层，能量消耗后该增益效果仍然保留，持续8秒，每层效果单独结算持续时间。"
+      },
+      {
+        "level": 4,
+        "name": "浓厚汤底",
+        "effect": "每拥有10点能量值，装备者的冲击力提升<span style=\"color: #2BAD00\">2.9%</span>，最多叠加8层，能量消耗后该增益效果仍然保留，持续8秒，每层效果单独结算持续时间。"
+      },
+      {
+        "level": 5,
+        "name": "浓厚汤底",
+        "effect": "每拥有10点能量值，装备者的冲击力提升<span style=\"color: #2BAD00\">3.2%</span>，最多叠加8层，能量消耗后该增益效果仍然保留，持续8秒，每层效果单独结算持续时间。"
+      }
+    ]
+  },
+  {
+    "id": "12011",
+    "slug": "magnetic-storm-bravo",
+    "name": "「电磁暴」-贰式",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/16783453157324086550_272_14050658.webp",
+    "rarity": 2,
+    "specialty": {
+      "id": "3",
+      "name": "异常"
+    },
+    "exclusiveAgentName": null,
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 32
+    },
+    "advancedStat": {
+      "id": "31203",
+      "name": "异常精通",
+      "value": 24
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "高压电涌",
+        "effect": "累积属性异常积蓄值时，装备者的异常精通提升<span style=\"color: #2BAD00\">25</span>点，持续10秒，20秒内最多触发一次。"
+      },
+      {
+        "level": 2,
+        "name": "高压电涌",
+        "effect": "累积属性异常积蓄值时，装备者的异常精通提升<span style=\"color: #2BAD00\">28</span>点，持续10秒，20秒内最多触发一次。"
+      },
+      {
+        "level": 3,
+        "name": "高压电涌",
+        "effect": "累积属性异常积蓄值时，装备者的异常精通提升<span style=\"color: #2BAD00\">32</span>点，持续10秒，20秒内最多触发一次。"
+      },
+      {
+        "level": 4,
+        "name": "高压电涌",
+        "effect": "累积属性异常积蓄值时，装备者的异常精通提升<span style=\"color: #2BAD00\">36</span>点，持续10秒，20秒内最多触发一次。"
+      },
+      {
+        "level": 5,
+        "name": "高压电涌",
+        "effect": "累积属性异常积蓄值时，装备者的异常精通提升<span style=\"color: #2BAD00\">40</span>点，持续10秒，20秒内最多触发一次。"
+      }
+    ]
+  },
+  {
+    "id": "12010",
+    "slug": "magnetic-storm-alpha",
+    "name": "「电磁暴」-壹式",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/622598703379351911_272_14050658.webp",
+    "rarity": 2,
+    "specialty": {
+      "id": "3",
+      "name": "异常"
+    },
+    "exclusiveAgentName": null,
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 32
+    },
+    "advancedStat": {
+      "id": "12102",
+      "name": "攻击力百分比",
+      "value": 0.08
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "紊乱电流",
+        "effect": "累积属性异常积蓄值时，装备者的异常掌控提升<span style=\"color: #2BAD00\">25</span>点，持续10秒，20秒内最多触发一次。"
+      },
+      {
+        "level": 2,
+        "name": "紊乱电流",
+        "effect": "累积属性异常积蓄值时，装备者的异常掌控提升<span style=\"color: #2BAD00\">28</span>点，持续10秒，20秒内最多触发一次。"
+      },
+      {
+        "level": 3,
+        "name": "紊乱电流",
+        "effect": "累积属性异常积蓄值时，装备者的异常掌控提升<span style=\"color: #2BAD00\">32</span>点，持续10秒，20秒内最多触发一次。"
+      },
+      {
+        "level": 4,
+        "name": "紊乱电流",
+        "effect": "累积属性异常积蓄值时，装备者的异常掌控提升<span style=\"color: #2BAD00\">36</span>点，持续10秒，20秒内最多触发一次。"
+      },
+      {
+        "level": 5,
+        "name": "紊乱电流",
+        "effect": "累积属性异常积蓄值时，装备者的异常掌控提升<span style=\"color: #2BAD00\">40</span>点，持续10秒，20秒内最多触发一次。"
+      }
+    ]
+  },
+  {
+    "id": "12014",
+    "slug": "identity-inflection",
+    "name": "「恒等式」-变格",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/10969179391400700480_272_14050658.webp",
+    "rarity": 2,
+    "specialty": {
+      "id": "5",
+      "name": "防护"
+    },
+    "exclusiveAgentName": null,
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 32
+    },
+    "advancedStat": {
+      "id": "13102",
+      "name": "防御力百分比",
+      "value": 0.128
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "致眩",
+        "effect": "受到敌方攻击时，攻击者造成的伤害降低<span style=\"color: #2BAD00\">6%</span>，持续12秒。"
+      },
+      {
+        "level": 2,
+        "name": "致眩",
+        "effect": "受到敌方攻击时，攻击者造成的伤害降低<span style=\"color: #2BAD00\">7%</span>，持续12秒。"
+      },
+      {
+        "level": 3,
+        "name": "致眩",
+        "effect": "受到敌方攻击时，攻击者造成的伤害降低<span style=\"color: #2BAD00\">8%</span>，持续12秒。"
+      },
+      {
+        "level": 4,
+        "name": "致眩",
+        "effect": "受到敌方攻击时，攻击者造成的伤害降低<span style=\"color: #2BAD00\">9%</span>，持续12秒。"
+      },
+      {
+        "level": 5,
+        "name": "致眩",
+        "effect": "受到敌方攻击时，攻击者造成的伤害降低<span style=\"color: #2BAD00\">10%</span>，持续12秒。"
+      }
+    ]
+  },
+  {
+    "id": "12007",
+    "slug": "vortex-revolver",
+    "name": "「湍流」-铳型",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/2118393471963685271_272_14050658.webp",
+    "rarity": 2,
+    "specialty": {
+      "id": "2",
+      "name": "击破"
+    },
+    "exclusiveAgentName": null,
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 32
+    },
+    "advancedStat": {
+      "id": "12102",
+      "name": "攻击力百分比",
+      "value": 0.08
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "暗涌",
+        "effect": "<span style=\"color: #FFFFFF\">[强化特殊技]</span>造成的失衡值提升<span style=\"color: #2BAD00\">10%</span>。"
+      },
+      {
+        "level": 2,
+        "name": "暗涌",
+        "effect": "<span style=\"color: #FFFFFF\">[强化特殊技]</span>造成的失衡值提升<span style=\"color: #2BAD00\">11.5%</span>。"
+      },
+      {
+        "level": 3,
+        "name": "暗涌",
+        "effect": "<span style=\"color: #FFFFFF\">[强化特殊技]</span>造成的失衡值提升<span style=\"color: #2BAD00\">13%</span>。"
+      },
+      {
+        "level": 4,
+        "name": "暗涌",
+        "effect": "<span style=\"color: #FFFFFF\">[强化特殊技]</span>造成的失衡值提升<span style=\"color: #2BAD00\">14.5%</span>。"
+      },
+      {
+        "level": 5,
+        "name": "暗涌",
+        "effect": "<span style=\"color: #FFFFFF\">[强化特殊技]</span>造成的失衡值提升<span style=\"color: #2BAD00\">16%</span>。"
+      }
+    ]
+  },
+  {
+    "id": "12013",
+    "slug": "identity-base",
+    "name": "「恒等式」-本格",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/3882764756299831416_272_14050658.webp",
+    "rarity": 2,
+    "specialty": {
+      "id": "5",
+      "name": "防护"
+    },
+    "exclusiveAgentName": null,
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 32
+    },
+    "advancedStat": {
+      "id": "13102",
+      "name": "防御力百分比",
+      "value": 0.128
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "沉击",
+        "effect": "受到敌方攻击时，装备者的防御力提升<span style=\"color: #2BAD00\">20%</span>，持续8秒。"
+      },
+      {
+        "level": 2,
+        "name": "沉击",
+        "effect": "受到敌方攻击时，装备者的防御力提升<span style=\"color: #2BAD00\">23%</span>，持续8秒。"
+      },
+      {
+        "level": 3,
+        "name": "沉击",
+        "effect": "受到敌方攻击时，装备者的防御力提升<span style=\"color: #2BAD00\">26%</span>，持续8秒。"
+      },
+      {
+        "level": 4,
+        "name": "沉击",
+        "effect": "受到敌方攻击时，装备者的防御力提升<span style=\"color: #2BAD00\">29%</span>，持续8秒。"
+      },
+      {
+        "level": 5,
+        "name": "沉击",
+        "effect": "受到敌方攻击时，装备者的防御力提升<span style=\"color: #2BAD00\">32%</span>，持续8秒。"
+      }
+    ]
+  },
+  {
+    "id": "13002",
+    "slug": "slice-of-time",
+    "name": "时光切片",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/17493638764316260072_272_14050658.webp",
+    "rarity": 3,
+    "specialty": {
+      "id": "4",
+      "name": "支援"
+    },
+    "exclusiveAgentName": null,
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 40
+    },
+    "advancedStat": {
+      "id": "23103",
+      "name": "穿透率",
+      "value": 0.08
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "说「茄子」",
+        "effect": "队伍中任意角色发动<span style=\"color: #FFFFFF\">[闪避反击]</span>/<span style=\"color: #FFFFFF\">[强化特殊技]</span>/<span style=\"color: #FFFFFF\">[支援攻击]</span>/<span style=\"color: #FFFFFF\">[连携技]</span>时，额外获得<span style=\"color: #2BAD00\">20</span>/<span style=\"color: #2BAD00\">25</span>/<span style=\"color: #2BAD00\">30</span>/<span style=\"color: #2BAD00\">35</span>点喧响值，并为装备者回复<span style=\"color: #2BAD00\">0.7</span>点能量，12秒内最多触发一次，不同招式分别结算冷却时间，同名被动效果之间不可叠加。"
+      },
+      {
+        "level": 2,
+        "name": "说「茄子」",
+        "effect": "队伍中任意角色发动<span style=\"color: #FFFFFF\">[闪避反击]</span>/<span style=\"color: #FFFFFF\">[强化特殊技]</span>/<span style=\"color: #FFFFFF\">[支援攻击]</span>/<span style=\"color: #FFFFFF\">[连携技]</span>时，额外获得<span style=\"color: #2BAD00\">23</span>/<span style=\"color: #2BAD00\">28.5</span>/<span style=\"color: #2BAD00\">34.5</span>/<span style=\"color: #2BAD00\">40</span>点喧响值，并为装备者回复<span style=\"color: #2BAD00\">0.8</span>点能量，12秒内最多触发一次，不同招式分别结算冷却时间，同名被动效果之间不可叠加。"
+      },
+      {
+        "level": 3,
+        "name": "说「茄子」",
+        "effect": "队伍中任意角色发动<span style=\"color: #FFFFFF\">[闪避反击]</span>/<span style=\"color: #FFFFFF\">[强化特殊技]</span>/<span style=\"color: #FFFFFF\">[支援攻击]</span>/<span style=\"color: #FFFFFF\">[连携技]</span>时，额外获得<span style=\"color: #2BAD00\">26</span>/<span style=\"color: #2BAD00\">32</span>/<span style=\"color: #2BAD00\">39</span>/<span style=\"color: #2BAD00\">45</span>点喧响值，并为装备者回复<span style=\"color: #2BAD00\">0.9</span>点能量，12秒内最多触发一次，不同招式分别结算冷却时间，同名被动效果之间不可叠加。"
+      },
+      {
+        "level": 4,
+        "name": "说「茄子」",
+        "effect": "队伍中任意角色发动<span style=\"color: #FFFFFF\">[闪避反击]</span>/<span style=\"color: #FFFFFF\">[强化特殊技]</span>/<span style=\"color: #FFFFFF\">[支援攻击]</span>/<span style=\"color: #FFFFFF\">[连携技]</span>时，额外获得<span style=\"color: #2BAD00\">29</span>/<span style=\"color: #2BAD00\">35.5</span>/<span style=\"color: #2BAD00\">43.5</span>/<span style=\"color: #2BAD00\">50</span>点喧响值，并为装备者回复<span style=\"color: #2BAD00\">1</span>点能量，12秒内最多触发一次，不同招式分别结算冷却时间，同名被动效果之间不可叠加。"
+      },
+      {
+        "level": 5,
+        "name": "说「茄子」",
+        "effect": "队伍中任意角色发动<span style=\"color: #FFFFFF\">[闪避反击]</span>/<span style=\"color: #FFFFFF\">[强化特殊技]</span>/<span style=\"color: #FFFFFF\">[支援攻击]</span>/<span style=\"color: #FFFFFF\">[连携技]</span>时，额外获得<span style=\"color: #2BAD00\">32</span>/<span style=\"color: #2BAD00\">40</span>/<span style=\"color: #2BAD00\">48</span>/<span style=\"color: #2BAD00\">55</span>点喧响值，并为装备者回复<span style=\"color: #2BAD00\">1.1</span>点能量，12秒内最多触发一次，不同招式分别结算冷却时间，同名被动效果之间不可叠加。"
+      }
+    ]
+  },
+  {
+    "id": "12012",
+    "slug": "magnetic-storm-charlie",
+    "name": "「电磁暴」-叁式",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/391165317762579724_272_14050658.webp",
+    "rarity": 2,
+    "specialty": {
+      "id": "3",
+      "name": "异常"
+    },
+    "exclusiveAgentName": null,
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 32
+    },
+    "advancedStat": {
+      "id": "23103",
+      "name": "穿透率",
+      "value": 0.064
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "过载电荷",
+        "effect": "队伍中任意角色对敌人施加属性异常效果时，装备者回复<span style=\"color: #2BAD00\">3.5</span>点能量，12秒内最多触发一次。"
+      },
+      {
+        "level": 2,
+        "name": "过载电荷",
+        "effect": "队伍中任意角色对敌人施加属性异常效果时，装备者回复<span style=\"color: #2BAD00\">4</span>点能量，12秒内最多触发一次。"
+      },
+      {
+        "level": 3,
+        "name": "过载电荷",
+        "effect": "队伍中任意角色对敌人施加属性异常效果时，装备者回复<span style=\"color: #2BAD00\">4.5</span>点能量，12秒内最多触发一次。"
+      },
+      {
+        "level": 4,
+        "name": "过载电荷",
+        "effect": "队伍中任意角色对敌人施加属性异常效果时，装备者回复<span style=\"color: #2BAD00\">5</span>点能量，12秒内最多触发一次。"
+      },
+      {
+        "level": 5,
+        "name": "过载电荷",
+        "effect": "队伍中任意角色对敌人施加属性异常效果时，装备者回复<span style=\"color: #2BAD00\">5.5</span>点能量，12秒内最多触发一次。"
+      }
+    ]
+  },
+  {
+    "id": "12006",
+    "slug": "reverb-mark-iii",
+    "name": "「残响」-Ⅲ型",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/9451400540761640542_272_14050658.webp",
+    "rarity": 2,
+    "specialty": {
+      "id": "4",
+      "name": "支援"
+    },
+    "exclusiveAgentName": null,
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 32
+    },
+    "advancedStat": {
+      "id": "11102",
+      "name": "生命值百分比",
+      "value": 0.08
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "强音",
+        "effect": "发动<span style=\"color: #FFFFFF\">[连携技]</span>或<span style=\"color: #FFFFFF\">[终结技]</span>时，全队角色攻击力提升<span style=\"color: #2BAD00\">8%</span>，持续10秒，20秒内最多触发一次，同名被动效果之间不可叠加。"
+      },
+      {
+        "level": 2,
+        "name": "强音",
+        "effect": "发动<span style=\"color: #FFFFFF\">[连携技]</span>或<span style=\"color: #FFFFFF\">[终结技]</span>时，全队角色攻击力提升<span style=\"color: #2BAD00\">9%</span>，持续10秒，20秒内最多触发一次，同名被动效果之间不可叠加。"
+      },
+      {
+        "level": 3,
+        "name": "强音",
+        "effect": "发动<span style=\"color: #FFFFFF\">[连携技]</span>或<span style=\"color: #FFFFFF\">[终结技]</span>时，全队角色攻击力提升<span style=\"color: #2BAD00\">10%</span>，持续10秒，20秒内最多触发一次，同名被动效果之间不可叠加。"
+      },
+      {
+        "level": 4,
+        "name": "强音",
+        "effect": "发动<span style=\"color: #FFFFFF\">[连携技]</span>或<span style=\"color: #FFFFFF\">[终结技]</span>时，全队角色攻击力提升<span style=\"color: #2BAD00\">11%</span>，持续10秒，20秒内最多触发一次，同名被动效果之间不可叠加。"
+      },
+      {
+        "level": 5,
+        "name": "强音",
+        "effect": "发动<span style=\"color: #FFFFFF\">[连携技]</span>或<span style=\"color: #FFFFFF\">[终结技]</span>时，全队角色攻击力提升<span style=\"color: #2BAD00\">12%</span>，持续10秒，20秒内最多触发一次，同名被动效果之间不可叠加。"
+      }
+    ]
+  },
+  {
+    "id": "13003",
+    "slug": "rainforest-gourmet",
+    "name": "雨林饕客",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/12756531416094013385_272_14050658.webp",
+    "rarity": 3,
+    "specialty": {
+      "id": "3",
+      "name": "异常"
+    },
+    "exclusiveAgentName": null,
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 40
+    },
+    "advancedStat": {
+      "id": "31203",
+      "name": "异常精通",
+      "value": 30
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "开饭了！",
+        "effect": "每消耗10点能量值，获得1层增益效果，每层增益效果使装备者的攻击力提升<span style=\"color: #2BAD00\">2.5%</span>，最多叠加10层，持续10秒，每层效果单独结算持续时间。"
+      },
+      {
+        "level": 2,
+        "name": "开饭了！",
+        "effect": "每消耗10点能量值，获得1层增益效果，每层增益效果使装备者的攻击力提升<span style=\"color: #2BAD00\">2.8%</span>，最多叠加10层，持续10秒，每层效果单独结算持续时间。"
+      },
+      {
+        "level": 3,
+        "name": "开饭了！",
+        "effect": "每消耗10点能量值，获得1层增益效果，每层增益效果使装备者的攻击力提升<span style=\"color: #2BAD00\">3.2%</span>，最多叠加10层，持续10秒，每层效果单独结算持续时间。"
+      },
+      {
+        "level": 4,
+        "name": "开饭了！",
+        "effect": "每消耗10点能量值，获得1层增益效果，每层增益效果使装备者的攻击力提升<span style=\"color: #2BAD00\">3.6%</span>，最多叠加10层，持续10秒，每层效果单独结算持续时间。"
+      },
+      {
+        "level": 5,
+        "name": "开饭了！",
+        "effect": "每消耗10点能量值，获得1层增益效果，每层增益效果使装备者的攻击力提升<span style=\"color: #2BAD00\">4%</span>，最多叠加10层，持续10秒，每层效果单独结算持续时间。"
+      }
+    ]
+  },
+  {
+    "id": "12008",
+    "slug": "vortex-arrow",
+    "name": "「湍流」-矢型",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/596613373516178711_272_14050658.webp",
+    "rarity": 2,
+    "specialty": {
+      "id": "2",
+      "name": "击破"
+    },
+    "exclusiveAgentName": null,
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 32
+    },
+    "advancedStat": {
+      "id": "12202",
+      "name": "冲击力",
+      "value": 0.048
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "巨浪",
+        "effect": "攻击命中敌人时，装备者对主要攻击目标造成的失衡值提升<span style=\"color: #2BAD00\">8%</span>。"
+      },
+      {
+        "level": 2,
+        "name": "巨浪",
+        "effect": "攻击命中敌人时，装备者对主要攻击目标造成的失衡值提升<span style=\"color: #2BAD00\">9%</span>。"
+      },
+      {
+        "level": 3,
+        "name": "巨浪",
+        "effect": "攻击命中敌人时，装备者对主要攻击目标造成的失衡值提升<span style=\"color: #2BAD00\">10%</span>。"
+      },
+      {
+        "level": 4,
+        "name": "巨浪",
+        "effect": "攻击命中敌人时，装备者对主要攻击目标造成的失衡值提升<span style=\"color: #2BAD00\">11%</span>。"
+      },
+      {
+        "level": 5,
+        "name": "巨浪",
+        "effect": "攻击命中敌人时，装备者对主要攻击目标造成的失衡值提升<span style=\"color: #2BAD00\">12%</span>。"
+      }
+    ]
+  },
+  {
+    "id": "12015",
+    "slug": "cinder-cobalt",
+    "name": "「灰烬」-钴蓝",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/6045294162516804468_272_14050658.webp",
+    "rarity": 2,
+    "specialty": {
+      "id": "6",
+      "name": "命破"
+    },
+    "exclusiveAgentName": null,
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 32
+    },
+    "advancedStat": {
+      "id": "11102",
+      "name": "生命值百分比",
+      "value": 0.08
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "黯火",
+        "effect": "成为接战状态下的当前操作角色时，装备者的攻击力提升<span style=\"color: #2BAD00\">7.2%</span>，持续10秒，20秒内最多触发一次。"
+      },
+      {
+        "level": 2,
+        "name": "黯火",
+        "effect": "成为接战状态下的当前操作角色时，装备者的攻击力提升<span style=\"color: #2BAD00\">8.2%</span>，持续10秒，20秒内最多触发一次。"
+      },
+      {
+        "level": 3,
+        "name": "黯火",
+        "effect": "成为接战状态下的当前操作角色时，装备者的攻击力提升<span style=\"color: #2BAD00\">9.3%</span>，持续10秒，20秒内最多触发一次。"
+      },
+      {
+        "level": 4,
+        "name": "黯火",
+        "effect": "成为接战状态下的当前操作角色时，装备者的攻击力提升<span style=\"color: #2BAD00\">10.4%</span>，持续10秒，20秒内最多触发一次。"
+      },
+      {
+        "level": 5,
+        "name": "黯火",
+        "effect": "成为接战状态下的当前操作角色时，装备者的攻击力提升<span style=\"color: #2BAD00\">11.5%</span>，持续10秒，20秒内最多触发一次。"
+      }
+    ]
+  },
+  {
+    "id": "13004",
+    "slug": "starlight-engine",
+    "name": "星徽引擎",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/18019646391641434626_272_14050658.webp",
+    "rarity": 3,
+    "specialty": {
+      "id": "1",
+      "name": "强攻"
+    },
+    "exclusiveAgentName": null,
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 40
+    },
+    "advancedStat": {
+      "id": "12102",
+      "name": "攻击力百分比",
+      "value": 0.1
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "骑士连打",
+        "effect": "发动<span style=\"color: #FFFFFF\">[闪避反击]</span>或<span style=\"color: #FFFFFF\">[快速支援]</span>时，装备者的攻击力提升<span style=\"color: #2BAD00\">12%</span>，持续12秒。"
+      },
+      {
+        "level": 2,
+        "name": "骑士连打",
+        "effect": "发动<span style=\"color: #FFFFFF\">[闪避反击]</span>或<span style=\"color: #FFFFFF\">[快速支援]</span>时，装备者的攻击力提升<span style=\"color: #2BAD00\">13.8%</span>，持续12秒。"
+      },
+      {
+        "level": 3,
+        "name": "骑士连打",
+        "effect": "发动<span style=\"color: #FFFFFF\">[闪避反击]</span>或<span style=\"color: #FFFFFF\">[快速支援]</span>时，装备者的攻击力提升<span style=\"color: #2BAD00\">15.6%</span>，持续12秒。"
+      },
+      {
+        "level": 4,
+        "name": "骑士连打",
+        "effect": "发动<span style=\"color: #FFFFFF\">[闪避反击]</span>或<span style=\"color: #FFFFFF\">[快速支援]</span>时，装备者的攻击力提升<span style=\"color: #2BAD00\">17.4%</span>，持续12秒。"
+      },
+      {
+        "level": 5,
+        "name": "骑士连打",
+        "effect": "发动<span style=\"color: #FFFFFF\">[闪避反击]</span>或<span style=\"color: #FFFFFF\">[快速支援]</span>时，装备者的攻击力提升<span style=\"color: #2BAD00\">19.2%</span>，持续12秒。"
+      }
+    ]
+  },
+  {
+    "id": "12009",
+    "slug": "vortex-hatchet",
+    "name": "「湍流」-斧型",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/8804320959502960521_272_14050658.webp",
+    "rarity": 2,
+    "specialty": {
+      "id": "2",
+      "name": "击破"
+    },
+    "exclusiveAgentName": null,
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 32
+    },
+    "advancedStat": {
+      "id": "30502",
+      "name": "能量自动回复",
+      "value": 0.16
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "疾潮",
+        "effect": "成为接战状态下的当前操作角色时，装备者的冲击力提升<span style=\"color: #2BAD00\">9%</span>，持续10秒，20秒内最多触发一次。"
+      },
+      {
+        "level": 2,
+        "name": "疾潮",
+        "effect": "成为接战状态下的当前操作角色时，装备者的冲击力提升<span style=\"color: #2BAD00\">10%</span>，持续10秒，20秒内最多触发一次。"
+      },
+      {
+        "level": 3,
+        "name": "疾潮",
+        "effect": "成为接战状态下的当前操作角色时，装备者的冲击力提升<span style=\"color: #2BAD00\">11%</span>，持续10秒，20秒内最多触发一次。"
+      },
+      {
+        "level": 4,
+        "name": "疾潮",
+        "effect": "成为接战状态下的当前操作角色时，装备者的冲击力提升<span style=\"color: #2BAD00\">12%</span>，持续10秒，20秒内最多触发一次。"
+      },
+      {
+        "level": 5,
+        "name": "疾潮",
+        "effect": "成为接战状态下的当前操作角色时，装备者的冲击力提升<span style=\"color: #2BAD00\">13%</span>，持续10秒，20秒内最多触发一次。"
+      }
+    ]
+  },
+  {
+    "id": "13001",
+    "slug": "street-superstar",
+    "name": "街头巨星",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/7474876093297000093_272_14050658.webp",
+    "rarity": 3,
+    "specialty": {
+      "id": "1",
+      "name": "强攻"
+    },
+    "exclusiveAgentName": null,
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 40
+    },
+    "advancedStat": {
+      "id": "12102",
+      "name": "攻击力百分比",
+      "value": 0.1
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "火热腔调",
+        "effect": "队伍中任意角色发动<span style=\"color: #FFFFFF\">[连携技]</span>时，为装备者提供1层充能效果，最多叠加3层；发动<span style=\"color: #FFFFFF\">[终结技]</span>时，消耗所有充能，每层充能效果使招式造成的伤害提升<span style=\"color: #2BAD00\">15%</span>。"
+      },
+      {
+        "level": 2,
+        "name": "火热腔调",
+        "effect": "队伍中任意角色发动<span style=\"color: #FFFFFF\">[连携技]</span>时，为装备者提供1层充能效果，最多叠加3层；发动<span style=\"color: #FFFFFF\">[终结技]</span>时，消耗所有充能，每层充能效果使招式造成的伤害提升<span style=\"color: #2BAD00\">17.2%</span>。"
+      },
+      {
+        "level": 3,
+        "name": "火热腔调",
+        "effect": "队伍中任意角色发动<span style=\"color: #FFFFFF\">[连携技]</span>时，为装备者提供1层充能效果，最多叠加3层；发动<span style=\"color: #FFFFFF\">[终结技]</span>时，消耗所有充能，每层充能效果使招式造成的伤害提升<span style=\"color: #2BAD00\">19.5%</span>。"
+      },
+      {
+        "level": 4,
+        "name": "火热腔调",
+        "effect": "队伍中任意角色发动<span style=\"color: #FFFFFF\">[连携技]</span>时，为装备者提供1层充能效果，最多叠加3层；发动<span style=\"color: #FFFFFF\">[终结技]</span>时，消耗所有充能，每层充能效果使招式造成的伤害提升<span style=\"color: #2BAD00\">21.7%</span>。"
+      },
+      {
+        "level": 5,
+        "name": "火热腔调",
+        "effect": "队伍中任意角色发动<span style=\"color: #FFFFFF\">[连携技]</span>时，为装备者提供1层充能效果，最多叠加3层；发动<span style=\"color: #FFFFFF\">[终结技]</span>时，消耗所有充能，每层充能效果使招式造成的伤害提升<span style=\"color: #2BAD00\">24%</span>。"
+      }
+    ]
+  },
+  {
+    "id": "12002",
+    "slug": "lunar-decrescent",
+    "name": "「月相」-晦",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/1850987664660578130_272_14050658.webp",
+    "rarity": 2,
+    "specialty": {
+      "id": "1",
+      "name": "强攻"
+    },
+    "exclusiveAgentName": null,
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 32
+    },
+    "advancedStat": {
+      "id": "12102",
+      "name": "攻击力百分比",
+      "value": 0.08
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "残月",
+        "effect": "发动<span style=\"color: #FFFFFF\">[连携技]</span>或<span style=\"color: #FFFFFF\">[终结技]</span>时，装备者造成的伤害提升<span style=\"color: #2BAD00\">15%</span>，持续6秒。"
+      },
+      {
+        "level": 2,
+        "name": "残月",
+        "effect": "发动<span style=\"color: #FFFFFF\">[连携技]</span>或<span style=\"color: #FFFFFF\">[终结技]</span>时，装备者造成的伤害提升<span style=\"color: #2BAD00\">17.5%</span>，持续6秒。"
+      },
+      {
+        "level": 3,
+        "name": "残月",
+        "effect": "发动<span style=\"color: #FFFFFF\">[连携技]</span>或<span style=\"color: #FFFFFF\">[终结技]</span>时，装备者造成的伤害提升<span style=\"color: #2BAD00\">20%</span>，持续6秒。"
+      },
+      {
+        "level": 4,
+        "name": "残月",
+        "effect": "发动<span style=\"color: #FFFFFF\">[连携技]</span>或<span style=\"color: #FFFFFF\">[终结技]</span>时，装备者造成的伤害提升<span style=\"color: #2BAD00\">22.5%</span>，持续6秒。"
+      },
+      {
+        "level": 5,
+        "name": "残月",
+        "effect": "发动<span style=\"color: #FFFFFF\">[连携技]</span>或<span style=\"color: #FFFFFF\">[终结技]</span>时，装备者造成的伤害提升<span style=\"color: #2BAD00\">25%</span>，持续6秒。"
+      }
+    ]
+  },
+  {
+    "id": "12003",
+    "slug": "lunar-noviluna",
+    "name": "「月相」-朔",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/11054165785664757010_272_14050658.webp",
+    "rarity": 2,
+    "specialty": {
+      "id": "1",
+      "name": "强攻"
+    },
+    "exclusiveAgentName": null,
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 32
+    },
+    "advancedStat": {
+      "id": "20103",
+      "name": "暴击率",
+      "value": 0.064
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "新月",
+        "effect": "发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>时，装备者回复<span style=\"color: #2BAD00\">3</span>点能量，12秒内最多触发一次。"
+      },
+      {
+        "level": 2,
+        "name": "新月",
+        "effect": "发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>时，装备者回复<span style=\"color: #2BAD00\">3.5</span>点能量，12秒内最多触发一次。"
+      },
+      {
+        "level": 3,
+        "name": "新月",
+        "effect": "发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>时，装备者回复<span style=\"color: #2BAD00\">4</span>点能量，12秒内最多触发一次。"
+      },
+      {
+        "level": 4,
+        "name": "新月",
+        "effect": "发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>时，装备者回复<span style=\"color: #2BAD00\">4.5</span>点能量，12秒内最多触发一次。"
+      },
+      {
+        "level": 5,
+        "name": "新月",
+        "effect": "发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>时，装备者回复<span style=\"color: #2BAD00\">5</span>点能量，12秒内最多触发一次。"
+      }
+    ]
+  },
+  {
+    "id": "12001",
+    "slug": "lunar-pleniluna",
+    "name": "「月相」-望",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/1211505729819342974_272_14050658.webp",
+    "rarity": 2,
+    "specialty": {
+      "id": "1",
+      "name": "强攻"
+    },
+    "exclusiveAgentName": null,
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 32
+    },
+    "advancedStat": {
+      "id": "12102",
+      "name": "攻击力百分比",
+      "value": 0.08
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "满月",
+        "effect": "<span style=\"color: #FFFFFF\">[普通攻击]</span>、<span style=\"color: #FFFFFF\">[冲刺攻击]</span>、<span style=\"color: #FFFFFF\">[闪避反击]</span>造成的伤害提升<span style=\"color: #2BAD00\">12%</span>。"
+      },
+      {
+        "level": 2,
+        "name": "满月",
+        "effect": "<span style=\"color: #FFFFFF\">[普通攻击]</span>、<span style=\"color: #FFFFFF\">[冲刺攻击]</span>、<span style=\"color: #FFFFFF\">[闪避反击]</span>造成的伤害提升<span style=\"color: #2BAD00\">14%</span>。"
+      },
+      {
+        "level": 3,
+        "name": "满月",
+        "effect": "<span style=\"color: #FFFFFF\">[普通攻击]</span>、<span style=\"color: #FFFFFF\">[冲刺攻击]</span>、<span style=\"color: #FFFFFF\">[闪避反击]</span>造成的伤害提升<span style=\"color: #2BAD00\">16%</span>。"
+      },
+      {
+        "level": 4,
+        "name": "满月",
+        "effect": "<span style=\"color: #FFFFFF\">[普通攻击]</span>、<span style=\"color: #FFFFFF\">[冲刺攻击]</span>、<span style=\"color: #FFFFFF\">[闪避反击]</span>造成的伤害提升<span style=\"color: #2BAD00\">18%</span>。"
+      },
+      {
+        "level": 5,
+        "name": "满月",
+        "effect": "<span style=\"color: #FFFFFF\">[普通攻击]</span>、<span style=\"color: #FFFFFF\">[冲刺攻击]</span>、<span style=\"color: #FFFFFF\">[闪避反击]</span>造成的伤害提升<span style=\"color: #2BAD00\">20%</span>。"
+      }
+    ]
+  }
+]

@@ -15,6 +15,9 @@ packages/zzz-data/
 │   ├── gachabase.ts         # gachabase.net 爬取任务（agent 列表 + 详情）
 │   └── buhflipexplode.ts    # buhflipexplode.com 爬取任务
 ├── tests/generate.test.ts   # 结构一致性测试（xlsx ↔ config ↔ JSON）
+├── tests/agent.test.ts      # Agent 属性公式测试
+├── tests/bangboo.test.ts    # Bangboo 属性公式测试
+├── tests/w-engine.test.ts   # 音擎属性公式测试
 ├── tests/calculator/        # 伤害计算模块测试
 │   ├── factors.test.ts      # 共享乘区（防御区、抗性区等）
 │   ├── normal.test.ts       # 常规伤害
@@ -24,9 +27,16 @@ packages/zzz-data/
 ├── data/xlsx/*.json         # 生成的 JSON 数据（16 个文件）
 ├── data/crawl/              # 爬虫输出的 JSON 数据
 │   ├── en/                  # 英文数据
-│   │   ├── gachabase-agents.json        # agent 基础列表（id/slug/name/rarity/specialty/attributes/attackTypes）
-│   │   └── gachabase-agent-details.json # agent 详情（stats/skills/coreSkills/mindscapes/skins/potentialVisions 等）
+│   │   ├── gachabase-agents.json          # agent 基础列表（id/slug/name/rarity/specialty/attributes/attackTypes）
+│   │   ├── gachabase-agent-details.json   # agent 详情（faction含icon/assets.mindscapeImages/stats/skills/coreSkills/mindscapes/skins/potentialVisions 等）
+│   │   ├── gachabase-w-engines.json       # 音擎列表（id/slug/name/rarity/specialty/exclusiveAgentName/baseStat/advancedStat/effects）
+│   │   ├── gachabase-w-engine-details.json# 音擎详情（exclusiveAgent/assets.splashArt/shortComment/longComment/levels lv0-60/stars star0-5）
+│   │   ├── gachabase-bangboo.json         # 邦布详情（baseStats+growthPerLevel/skills 3种×10级/optimizations 6级含statBoosts+statAdditions）
+│   │   └── gachabase-drive-discs.json     # 驱动盘套装（setEffects 2件/4件）
 │   └── zh-CN/               # 中文数据（同上）
+├── src/agent.ts             # Agent 基础属性计算公式（calcAgentStat）
+├── src/bangboo.ts           # Bangboo 基础属性计算公式（calcBangbooStat）
+├── src/w-engine.ts          # 音擎属性计算公式（calcWEngineBaseATK / calcWEngineSecondaryStat）
 ├── src/calculator/          # 伤害计算模块（纯函数，可导出）
 │   ├── types.ts             # 所有参数/返回类型
 │   ├── factors.ts           # 各乘区独立函数（可自由组合）
@@ -37,6 +47,22 @@ packages/zzz-data/
 │   └── index.ts             # re-export
 └── src/index.ts             # 公开类型入口（手动维护，与数据源无关）
 ```
+
+## 属性计算模块（src/agent.ts / src/bangboo.ts / src/w-engine.ts）
+
+基于 gachabase.net 数据验证的纯函数属性计算库，数据来自 `data/crawl/`。
+
+| 函数                       | 文件              | 公式                                                                      |
+| -------------------------- | ----------------- | ------------------------------------------------------------------------- |
+| `calcAgentStat`            | `src/agent.ts`    | `floor(value + growthPerLevel × (L−1)) + promotionBoost + coreSkillBoost` |
+| `calcBangbooStat`          | `src/bangboo.ts`  | `floor(value + (growthPerLevel ?? 0) × (L−1)) + optimizationBoost`        |
+| `calcWEngineBaseATK`       | `src/w-engine.ts` | `baseVal + floor((lvGrowth + starGrowth) × baseVal / 10000)`              |
+| `calcWEngineSecondaryStat` | `src/w-engine.ts` | `value × (1 + starAdvGrowth / 10000)`                                     |
+
+**注意事项：**
+
+- Agent / Bangboo 的晋阶/优化加成均为**累积值**，传入当前段的值即可，勿跨段求和
+- W-Engine 二级属性公式的除数**始终为 10000**，与属性类型（AM/AP/CRIT等）无关
 
 ## 规格文档（docs/specs/）
 
@@ -63,7 +89,10 @@ const total = base * bonus * crit * resistance * custom
 
 **公开 API（src/index.ts 导出）**：
 
-- 类型：`AnomalyType`、`DefenseParams`、`ResistanceParams`、`VulnerabilityParams`、`DazeVulnerabilityParams`、`CritParams`、`NormalDamageParams`、`SheerDamageParams`、`AnomalyDamageParams`、`DisorderDamageParams`、`DamageResult`
+- Agent 属性：`calcAgentStat(value, growthPerLevel, level, promotionBoost, coreSkillBoost)`
+- Bangboo 属性：`calcBangbooStat(value, growthPerLevel | null, level, optimizationBoost)`
+- 音擎属性：`calcWEngineBaseATK(baseVal, lvBaseStatGrowth, starBaseStatGrowth)`、`calcWEngineSecondaryStat(baseValue, starAdvancedStatGrowth)`
+- 伤害计算类型：`AnomalyType`、`DefenseParams`、`ResistanceParams`、`VulnerabilityParams`、`DazeVulnerabilityParams`、`CritParams`、`NormalDamageParams`、`SheerDamageParams`、`AnomalyDamageParams`、`DisorderDamageParams`、`DamageResult`
 - 乘区函数：`calcDefenseMultiplier`、`calcResistanceMultiplier`、`calcVulnerabilityMultiplier`、`calcDazeVulnerabilityMultiplier`、`calcExpectedCritMultiplier`、`calcSheerBonusMultiplier`、`calcAnomalyProficiencyMultiplier`、`calcDamageLevelMultiplier`、`calcDisorderDamageMultiplier` 等
 - Pipeline 函数：`calcNormalDamage`、`calcSheerDamage`、`calcAnomalyDamage`、`calcDisorderDamage`（各含 `Crit`/`NoCrit` 变体）
 

@@ -4,12 +4,32 @@
     "fullName": "",
     "faction": {
       "id": "14",
-      "name": "Metropolitan Order Division"
+      "name": "Metropolitan Order Division",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/5238983294860011276_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14152",
       "slug": "serpentine-seeker",
       "name": "Serpentine Seeker"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/2600884583711857246_272_14050658.webp",
+          "width": 1786,
+          "height": 834
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/17541719914679045807_272_14050658.webp",
+          "width": 1786,
+          "height": 834
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/9476876639892162755_272_14050658.webp",
+          "width": 1765,
+          "height": 843
+        }
+      ]
     },
     "profile": {
       "gender": "Female",
@@ -1268,12 +1288,32 @@
     "fullName": "",
     "faction": {
       "id": "13",
-      "name": "Angels of Delusion"
+      "name": "Angels of Delusion",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/11409802771427277562_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14151",
       "slug": "neon-fantasies",
       "name": "Neon Fantasies"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/14948226576323099130_272_14050658.webp",
+          "width": 1786,
+          "height": 834
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/16880846849280330183_272_14050658.webp",
+          "width": 1786,
+          "height": 834
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/9277761389448765930_272_14050658.webp",
+          "width": 1765,
+          "height": 843
+        }
+      ]
     },
     "profile": {
       "gender": "Female",
@@ -2499,12 +2539,32 @@
     "fullName": "Aria",
     "faction": {
       "id": "13",
-      "name": "Angels of Delusion"
+      "name": "Angels of Delusion",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/11409802771427277562_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14150",
       "slug": "angel-in-the-shell",
       "name": "Angel in the Shell"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/6505564976846798051_272_14050658.webp",
+          "width": 1681,
+          "height": 904
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/5240660267857213052_272_14050658.webp",
+          "width": 1681,
+          "height": 904
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/9357779311449170064_272_14050658.webp",
+          "width": 1681,
+          "height": 904
+        }
+      ]
     },
     "profile": {
       "gender": "Female",
@@ -4041,12 +4101,32 @@
     "fullName": "Sunna",
     "faction": {
       "id": "13",
-      "name": "Angels of Delusion"
+      "name": "Angels of Delusion",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/11409802771427277562_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14149",
       "slug": "thoughtbop",
       "name": "Thoughtbop"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/6791412126359466475_272_14050658.webp",
+          "width": 1845,
+          "height": 918
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/37783000184907997_272_14050658.webp",
+          "width": 1845,
+          "height": 918
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/8658074658130981787_272_14050658.webp",
+          "width": 1740,
+          "height": 918
+        }
+      ]
     },
     "profile": {
       "gender": "Female",
@@ -5380,12 +5460,32 @@
     "fullName": "Ye Shunguang",
     "faction": {
       "id": "10",
-      "name": "Yunkui Summit"
+      "name": "Yunkui Summit",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/7671087977302280904_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14143",
       "slug": "cloudcleave-radiance",
       "name": "Cloudcleave Radiance"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/17267673066410348162_272_14050658.webp",
+          "width": 2203,
+          "height": 872
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/14227232498926072139_272_14050658.webp",
+          "width": 2203,
+          "height": 872
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/5069369296550416574_272_14050658.webp",
+          "width": 2203,
+          "height": 872
+        }
+      ]
     },
     "profile": {
       "gender": "Female",
@@ -5394,7 +5494,7 @@
       "details": "...",
       "details2": "...",
       "aptitude": "",
-      "titles": ["[object Object]"]
+      "titles": ["Void Hunter: Qingming Arbiter"]
     },
     "skins": [
       {
@@ -7493,12 +7593,32 @@
     "fullName": "Zhao",
     "faction": {
       "id": "12",
-      "name": "Krampus Compliance Authority"
+      "name": "Krampus Compliance Authority",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/15686371877000194255_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14134",
       "slug": "half-sugar-bunny",
       "name": "Half-Sugar Bunny"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/1497341826893288180_272_14050658.webp",
+          "width": 2076,
+          "height": 889
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/14488552100789116858_272_14050658.webp",
+          "width": 2076,
+          "height": 889
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/13066023150816406357_272_14050658.webp",
+          "width": 2075,
+          "height": 890
+        }
+      ]
     },
     "profile": {
       "gender": "Female",
@@ -8839,12 +8959,32 @@
     "fullName": "Dialyn",
     "faction": {
       "id": "12",
-      "name": "Krampus Compliance Authority"
+      "name": "Krampus Compliance Authority",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/15686371877000194255_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14148",
       "slug": "yesterday-calls",
       "name": "Yesterday Calls"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/5089372950222753256_272_14050658.webp",
+          "width": 1903,
+          "height": 864
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/13762301501039432673_272_14050658.webp",
+          "width": 1903,
+          "height": 864
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/11497294951385431107_272_14050658.webp",
+          "width": 1829,
+          "height": 864
+        }
+      ]
     },
     "profile": {
       "gender": "Female",
@@ -10349,12 +10489,32 @@
     "fullName": "Banyue",
     "faction": {
       "id": "12",
-      "name": "Krampus Compliance Authority"
+      "name": "Krampus Compliance Authority",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/15686371877000194255_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14147",
       "slug": "wrathful-vajra",
       "name": "Wrathful Vajra"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/11113860880505700245_272_14050658.webp",
+          "width": 1863,
+          "height": 873
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/5624330345231401509_272_14050658.webp",
+          "width": 1863,
+          "height": 873
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/14199906076476178328_272_14050658.webp",
+          "width": 2257,
+          "height": 873
+        }
+      ]
     },
     "profile": {
       "gender": "Male",
@@ -12212,12 +12372,32 @@
     "fullName": "Lucia Elowen",
     "faction": {
       "id": "11",
-      "name": "Spook Shack"
+      "name": "Spook Shack",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/17552908058262675115_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14145",
       "slug": "dreamlit-hearth",
       "name": "Dreamlit Hearth"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/12681368389656118847_272_14050658.webp",
+          "width": 2109,
+          "height": 860
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/15742322777700334391_272_14050658.webp",
+          "width": 2109,
+          "height": 859
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/17764842359901731791_272_14050658.webp",
+          "width": 2112,
+          "height": 864
+        }
+      ]
     },
     "profile": {
       "gender": "Female",
@@ -13812,12 +13992,32 @@
     "fullName": "Komano Manato",
     "faction": {
       "id": "11",
-      "name": "Spook Shack"
+      "name": "Spook Shack",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/17552908058262675115_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "13144",
       "slug": "grill-owisp",
       "name": "Grill O'Wisp"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/16229459512716339829_272_14050658.webp",
+          "width": 1874,
+          "height": 896
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/13490838763861794098_272_14050658.webp",
+          "width": 1874,
+          "height": 896
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/4690289247152403636_272_14050658.webp",
+          "width": 1775,
+          "height": 896
+        }
+      ]
     },
     "profile": {
       "gender": "Male",
@@ -15344,12 +15544,32 @@
     "fullName": "Yidhari Murphy",
     "faction": {
       "id": "11",
-      "name": "Spook Shack"
+      "name": "Spook Shack",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/17552908058262675115_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14105",
       "slug": "krakens-cradle",
       "name": "Kraken's Cradle"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/11424863479058466234_272_14050658.webp",
+          "width": 2351,
+          "height": 888
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/12921470087618672704_272_14050658.webp",
+          "width": 2352,
+          "height": 888
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/9335220571248612617_272_14050658.webp",
+          "width": 2350,
+          "height": 888
+        }
+      ]
     },
     "profile": {
       "gender": "Female",
@@ -16903,12 +17123,32 @@
     "fullName": "Yixuan",
     "faction": {
       "id": "10",
-      "name": "Yunkui Summit"
+      "name": "Yunkui Summit",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/7671087977302280904_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14137",
       "slug": "qingming-birdcage",
       "name": "Qingming Birdcage"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/8060618149514491571_272_14050658.webp",
+          "width": 1565,
+          "height": 902
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/6813844492207546462_272_14050658.webp",
+          "width": 1564,
+          "height": 903
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/15359260999845748236_272_14050658.webp",
+          "width": 1593,
+          "height": 904
+        }
+      ]
     },
     "profile": {
       "gender": "Female",
@@ -16917,7 +17157,7 @@
       "details": "Yixuan is the 13th High Preceptor of Yunkui Summit and a Void Hunter-level investigator, officially recognized by Mayor Mayflower.<br/><br/>She was once an orphan, wandering the world with her sister from a young age. Later, the then-High Preceptor of Yunkui Summit took them in, and they became disciples, learning the craft of Yunkui Summit. During this time, Yixuan demonstrated exceptional talent. No matter the technique, she would quickly master it, not only understanding it thoroughly but also creating her own unique techniques. The Qingming Bird was one of the special techniques she and her sister developed together, which helped her eliminate enemies and banish evil spirits in various difficult and dangerous situations. After becoming the sect's High Preceptor, she accepted an invitation from Mayor Mayflower and joined the Hollow Investigative Association as a partnered special investigator.<br/><br/>After becoming High Preceptor, Yixuan took in many talented disciples to continue Yunkui Summit's lineage. However, her approach is rather casual, and often, even when teaching by example, her disciples can only guess her intentions... Yet, Yixuan isn't troubled by this, as she believes there's no standard answer to the so-called \"right path.\" What matters to her is that her disciples find their own \"right path.\" Of course, if they can understand and learn on their own, that's even better. As their Shifu, she simply lets things unfold naturally.",
       "details2": "When Yixuan was young, she loved eating char siu buns with her sister. but after the fall of the old capital, she lost all interest in them overnight and hasn't eaten them much since.<br/><br/>The disciples of Yunkui Summit are unaware of this, and just think their master is a bit picky.<br/><br/>Naturally, it's best to keep this a secret. Some memories and attachments should just be left to fade away with time.",
       "aptitude": "",
-      "titles": ["[object Object]"]
+      "titles": ["Grandmaster"]
     },
     "skins": [
       {
@@ -18597,12 +18837,32 @@
     "fullName": "Ju Fufu",
     "faction": {
       "id": "10",
-      "name": "Yunkui Summit"
+      "name": "Yunkui Summit",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/7671087977302280904_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14139",
       "slug": "roaring-fur-nace",
       "name": "Roaring Fur-nace"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/147837657712470017_272_14050658.webp",
+          "width": 1892,
+          "height": 865
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/5640675482733817933_272_14050658.webp",
+          "width": 1891,
+          "height": 870
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/4784327017856865283_272_14050658.webp",
+          "width": 1891,
+          "height": 870
+        }
+      ]
     },
     "profile": {
       "gender": "Female",
@@ -19970,12 +20230,32 @@
     "fullName": "Pan Yinhu",
     "faction": {
       "id": "10",
-      "name": "Yunkui Summit"
+      "name": "Yunkui Summit",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/7671087977302280904_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "13142",
       "slug": "tremor-trigram-vessel",
       "name": "Tremor Trigram Vessel"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/13580701963108378589_272_14050658.webp",
+          "width": 2012,
+          "height": 841
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/13223662936739656494_272_14050658.webp",
+          "width": 2006,
+          "height": 845
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/6635634566843330364_272_14050658.webp",
+          "width": 2007,
+          "height": 848
+        }
+      ]
     },
     "profile": {
       "gender": "Male",
@@ -21304,12 +21584,32 @@
     "fullName": "Seed",
     "faction": {
       "id": "5",
-      "name": "Defense Force - Obol Squad"
+      "name": "Defense Force - Obol Squad",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/8243276872445443322_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14146",
       "slug": "cordis-germina",
       "name": "Cordis Germina"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/8030637395332460777_272_14050658.webp",
+          "width": 2243,
+          "height": 892
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/12534753169251018480_272_14050658.webp",
+          "width": 2243,
+          "height": 892
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/10214507247954747862_272_14050658.webp",
+          "width": 2243,
+          "height": 893
+        }
+      ]
     },
     "profile": {
       "gender": "Female",
@@ -22655,12 +22955,32 @@
     "fullName": "Alice Thymefield",
     "faction": {
       "id": "11",
-      "name": "Spook Shack"
+      "name": "Spook Shack",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/17552908058262675115_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14140",
       "slug": "practiced-perfection",
       "name": "Practiced Perfection"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/8475596291127467996_272_14050658.webp",
+          "width": 1865,
+          "height": 874
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/13860720485768413409_272_14050658.webp",
+          "width": 1865,
+          "height": 874
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/17628549882280527529_272_14050658.webp",
+          "width": 1868,
+          "height": 874
+        }
+      ]
     },
     "profile": {
       "gender": "Female",
@@ -24104,12 +24424,32 @@
     "fullName": "Ukinami Yuzuha",
     "faction": {
       "id": "11",
-      "name": "Spook Shack"
+      "name": "Spook Shack",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/17552908058262675115_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14141",
       "slug": "metanukimorphosis",
       "name": "Metanukimorphosis"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/7391673824349632184_272_14050658.webp",
+          "width": 1783,
+          "height": 881
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/4053373423565418513_272_14050658.webp",
+          "width": 1783,
+          "height": 881
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/1518961328495041510_272_14050658.webp",
+          "width": 1783,
+          "height": 883
+        }
+      ]
     },
     "profile": {
       "gender": "Female",
@@ -25693,12 +26033,32 @@
     "fullName": "Soldier 0 - Anby",
     "faction": {
       "id": "5",
-      "name": "Defense Force - Silver Squad"
+      "name": "Defense Force - Silver Squad",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/4298615629659860261_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14138",
       "slug": "severed-innocence",
       "name": "Severed Innocence"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/11755952484462269705_272_14050658.webp",
+          "width": 2502,
+          "height": 840
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/14249176330166487341_272_14050658.webp",
+          "width": 2502,
+          "height": 840
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/7586854041753681957_272_14050658.webp",
+          "width": 2502,
+          "height": 840
+        }
+      ]
     },
     "profile": {
       "gender": "Female",
@@ -27374,12 +27734,32 @@
     "fullName": "Pulchra Fellini",
     "faction": {
       "id": "4",
-      "name": "Sons of Calydon"
+      "name": "Sons of Calydon",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/521623527699993423_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "13135",
       "slug": "box-cutter",
       "name": "Box Cutter"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/6788504353698071779_272_14050658.webp",
+          "width": 2163,
+          "height": 840
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/14041300411317691130_272_14050658.webp",
+          "width": 2163,
+          "height": 840
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/8057403214726448564_272_14050658.webp",
+          "width": 2163,
+          "height": 840
+        }
+      ]
     },
     "profile": {
       "gender": "Female",
@@ -28544,12 +28924,32 @@
     "fullName": "Vivian Banshee",
     "faction": {
       "id": "9",
-      "name": "Mockingbird"
+      "name": "Mockingbird",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/2759795726604600300_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14133",
       "slug": "flight-of-fancy",
       "name": "Flight of Fancy"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/9580364155409324144_272_14050658.webp",
+          "width": 1941,
+          "height": 902
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/9433420579390966670_272_14050658.webp",
+          "width": 1941,
+          "height": 902
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/14091185930948891959_272_14050658.webp",
+          "width": 1930,
+          "height": 902
+        }
+      ]
     },
     "profile": {
       "gender": "Female",
@@ -29849,12 +30249,32 @@
     "fullName": "Seth Lowell",
     "faction": {
       "id": "7",
-      "name": "Criminal Investigation Special Response Team"
+      "name": "Criminal Investigation Special Response Team",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/16986822238117422678_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "13127",
       "slug": "peacekeeper-specialized",
       "name": "Peacekeeper - Specialized"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/4343062883789187505_272_14050658.webp",
+          "width": 1710,
+          "height": 836
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/1930972294879800703_272_14050658.webp",
+          "width": 1710,
+          "height": 836
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/17683907918988837563_272_14050658.webp",
+          "width": 1709,
+          "height": 839
+        }
+      ]
     },
     "profile": {
       "gender": "Male",
@@ -31124,12 +31544,32 @@
     "fullName": "Qingyi",
     "faction": {
       "id": "7",
-      "name": "Criminal Investigation Special Response Team"
+      "name": "Criminal Investigation Special Response Team",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/16986822238117422678_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14125",
       "slug": "ice-jade-teapot",
       "name": "Ice-Jade Teapot"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/5732349766413360762_272_14050658.webp",
+          "width": 1524,
+          "height": 835
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/11926936216410887335_272_14050658.webp",
+          "width": 1524,
+          "height": 835
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/16452239645777464565_272_14050658.webp",
+          "width": 1524,
+          "height": 835
+        }
+      ]
     },
     "profile": {
       "gender": "Female",
@@ -32519,12 +32959,32 @@
     "fullName": "Zhu Yuan",
     "faction": {
       "id": "7",
-      "name": "Criminal Investigation Special Response Team"
+      "name": "Criminal Investigation Special Response Team",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/16986822238117422678_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14124",
       "slug": "riot-suppressor-mark-vi",
       "name": "Riot Suppressor Mark VI"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/7646272410317399989_272_14050658.webp",
+          "width": 1384,
+          "height": 834
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/1057359790988156108_272_14050658.webp",
+          "width": 1384,
+          "height": 834
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/8358494950685009059_272_14050658.webp",
+          "width": 1278,
+          "height": 837
+        }
+      ]
     },
     "profile": {
       "gender": "Female",
@@ -33997,12 +34457,32 @@
     "fullName": "Alexandrina Sebastiane",
     "faction": {
       "id": "2",
-      "name": "Victoria Housekeeping Co."
+      "name": "Victoria Housekeeping Co.",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/5711641249928527117_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14121",
       "slug": "weeping-cradle",
       "name": "Weeping Cradle"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/14434355623972073498_272_14050658.webp",
+          "width": 1392,
+          "height": 847
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/11405632558843844090_272_14050658.webp",
+          "width": 1392,
+          "height": 847
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/12749337470167599727_272_14050658.webp",
+          "width": 1397,
+          "height": 834
+        }
+      ]
     },
     "profile": {
       "gender": "Female",
@@ -35118,12 +35598,32 @@
     "fullName": "Lighter",
     "faction": {
       "id": "4",
-      "name": "Sons of Calydon"
+      "name": "Sons of Calydon",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/521623527699993423_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14116",
       "slug": "blazing-laurel",
       "name": "Blazing Laurel"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/253333416724656024_272_14050658.webp",
+          "width": 1928,
+          "height": 1080
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/2260344193270245575_272_14050658.webp",
+          "width": 1928,
+          "height": 1080
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/15276894237732702302_272_14050658.webp",
+          "width": 1928,
+          "height": 1080
+        }
+      ]
     },
     "profile": {
       "gender": "Male",
@@ -36850,12 +37350,32 @@
     "fullName": "Orphie Magnusson & Magus",
     "faction": {
       "id": "5",
-      "name": "Defense Force - Obol Squad"
+      "name": "Defense Force - Obol Squad",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/8243276872445443322_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14130",
       "slug": "bellicose-blaze",
       "name": "Bellicose Blaze"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/11429467651063073808_272_14050658.webp",
+          "width": 1587,
+          "height": 934
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/17937709520464669737_272_14050658.webp",
+          "width": 1587,
+          "height": 933
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/4979289872246553821_272_14050658.webp",
+          "width": 1589,
+          "height": 939
+        }
+      ]
     },
     "profile": {
       "gender": "Female",
@@ -38338,12 +38858,32 @@
     "fullName": "Ellen Joe",
     "faction": {
       "id": "2",
-      "name": "Victoria Housekeeping Co."
+      "name": "Victoria Housekeeping Co.",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/5711641249928527117_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14119",
       "slug": "deep-sea-visitor",
       "name": "Deep Sea Visitor"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/10631627849505849008_272_14050658.webp",
+          "width": 1657,
+          "height": 834
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/2508667211952070039_272_14050658.webp",
+          "width": 1657,
+          "height": 834
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/3062254325481637921_272_14050658.webp",
+          "width": 1676,
+          "height": 840
+        }
+      ]
     },
     "profile": {
       "gender": "Female",
@@ -40340,12 +40880,32 @@
     "fullName": "Jane Doe",
     "faction": {
       "id": "7",
-      "name": "Criminal Investigation Special Response Team"
+      "name": "Criminal Investigation Special Response Team",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/2525547181716714564_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14126",
       "slug": "sharpened-stinger",
       "name": "Sharpened Stinger"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/10440145410182589597_272_14050658.webp",
+          "width": 1868,
+          "height": 834
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/8690857391742333034_272_14050658.webp",
+          "width": 1868,
+          "height": 834
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/17638680115615612081_272_14050658.webp",
+          "width": 1868,
+          "height": 834
+        }
+      ]
     },
     "profile": {
       "gender": "Female",
@@ -41914,12 +42474,32 @@
     "fullName": "Piper Wheel",
     "faction": {
       "id": "4",
-      "name": "Sons of Calydon"
+      "name": "Sons of Calydon",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/521623527699993423_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "13128",
       "slug": "roaring-ride",
       "name": "Roaring Ride"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/17741385234290686240_272_14050658.webp",
+          "width": 1723,
+          "height": 839
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/5251990183635172984_272_14050658.webp",
+          "width": 1727,
+          "height": 845
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/10601434905177097933_272_14050658.webp",
+          "width": 1727,
+          "height": 845
+        }
+      ]
     },
     "profile": {
       "gender": "Female",
@@ -43260,12 +43840,32 @@
     "fullName": "Astra Yao",
     "faction": {
       "id": "8",
-      "name": "Stars of Lyra"
+      "name": "Stars of Lyra",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/16534533730913129813_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14131",
       "slug": "elegant-vanity",
       "name": "Elegant Vanity"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/16960464999531766075_272_14050658.webp",
+          "width": 1876,
+          "height": 840
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/9761144608433010253_272_14050658.webp",
+          "width": 1876,
+          "height": 840
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/14524020851015258571_272_14050658.webp",
+          "width": 1883,
+          "height": 840
+        }
+      ]
     },
     "profile": {
       "gender": "Female",
@@ -44785,12 +45385,32 @@
     "fullName": "Trigger",
     "faction": {
       "id": "5",
-      "name": "Defense Force - Obol Squad"
+      "name": "Defense Force - Obol Squad",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/8243276872445443322_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14136",
       "slug": "spectral-gaze",
       "name": "Spectral Gaze"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/3836529774192353585_272_14050658.webp",
+          "width": 2580,
+          "height": 875
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/3139931615470867967_272_14050658.webp",
+          "width": 2580,
+          "height": 875
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/15156496343168487200_272_14050658.webp",
+          "width": 2580,
+          "height": 875
+        }
+      ]
     },
     "profile": {
       "gender": "Female",
@@ -46202,12 +46822,32 @@
     "fullName": "Evelyn Chevalier",
     "faction": {
       "id": "8",
-      "name": "Stars of Lyra"
+      "name": "Stars of Lyra",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/16534533730913129813_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14132",
       "slug": "heartstring-nocturne",
       "name": "Heartstring Nocturne"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/4411830338285133610_272_14050658.webp",
+          "width": 2022,
+          "height": 840
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/15848412156683907020_272_14050658.webp",
+          "width": 2022,
+          "height": 840
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/15250553020561697967_272_14050658.webp",
+          "width": 1867,
+          "height": 840
+        }
+      ]
     },
     "profile": {
       "gender": "Female",
@@ -47673,12 +48313,32 @@
     "fullName": "Tsukishiro Yanagi",
     "faction": {
       "id": "6",
-      "name": "Hollow Special Operations Section 6"
+      "name": "Hollow Special Operations Section 6",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/2989597373971074975_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14122",
       "slug": "timeweaver",
       "name": "Timeweaver"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/2056070815412053964_272_14050658.webp",
+          "width": 1700,
+          "height": 840
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/16962986665536476440_272_14050658.webp",
+          "width": 1700,
+          "height": 840
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/16892056098042667930_272_14050658.webp",
+          "width": 1800,
+          "height": 840
+        }
+      ]
     },
     "profile": {
       "gender": "Female",
@@ -49163,12 +49823,32 @@
     "fullName": "Hugo Vlad",
     "faction": {
       "id": "9",
-      "name": "Mockingbird"
+      "name": "Mockingbird",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/2759795726604600300_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14129",
       "slug": "myriad-eclipse",
       "name": "Myriad Eclipse"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/3741956429440541733_272_14050658.webp",
+          "width": 1758,
+          "height": 888
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/18433905878444563141_272_14050658.webp",
+          "width": 1758,
+          "height": 888
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/7296497861490698232_272_14050658.webp",
+          "width": 1764,
+          "height": 888
+        }
+      ]
     },
     "profile": {
       "gender": "Male",
@@ -50702,12 +51382,32 @@
     "fullName": "Asaba Harumasa",
     "faction": {
       "id": "6",
-      "name": "Hollow Special Operations Section 6"
+      "name": "Hollow Special Operations Section 6",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/2989597373971074975_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14120",
       "slug": "zanshin-herb-case",
       "name": "Zanshin Herb Case"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/16386264873851160868_272_14050658.webp",
+          "width": 2066,
+          "height": 836
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/14982411204673508325_272_14050658.webp",
+          "width": 2200,
+          "height": 836
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/5061439434301935710_272_14050658.webp",
+          "width": 2166,
+          "height": 836
+        }
+      ]
     },
     "profile": {
       "gender": "Male",
@@ -52525,12 +53225,32 @@
     "fullName": "Burnice White",
     "faction": {
       "id": "4",
-      "name": "Sons of Calydon"
+      "name": "Sons of Calydon",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/521623527699993423_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14117",
       "slug": "flamemaker-shaker",
       "name": "Flamemaker Shaker"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/13033345791154533768_272_14050658.webp",
+          "width": 1740,
+          "height": 840
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/4856538542246925480_272_14050658.webp",
+          "width": 1740,
+          "height": 840
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/1209192670715052025_272_14050658.webp",
+          "width": 1740,
+          "height": 840
+        }
+      ]
     },
     "profile": {
       "gender": "Female",
@@ -54197,12 +54917,32 @@
     "fullName": "Grace Howard",
     "faction": {
       "id": "3",
-      "name": "Belobog Heavy Industries"
+      "name": "Belobog Heavy Industries",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/16906337941127751959_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14118",
       "slug": "fusion-compiler",
       "name": "Fusion Compiler"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/10132465421389598605_272_14050658.webp",
+          "width": 1913,
+          "height": 840
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/3658252388464147307_272_14050658.webp",
+          "width": 1914,
+          "height": 843
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/14342956699977155465_272_14050658.webp",
+          "width": 1913,
+          "height": 844
+        }
+      ]
     },
     "profile": {
       "gender": "Female",
@@ -55646,12 +56386,32 @@
     "fullName": "Anton Ivanov",
     "faction": {
       "id": "3",
-      "name": "Belobog Heavy Industries"
+      "name": "Belobog Heavy Industries",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/16906337941127751959_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "13111",
       "slug": "drill-rig-red-axis",
       "name": "Drill Rig - Red Axis"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/1140327079951396812_272_14050658.webp",
+          "width": 1670,
+          "height": 834
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/8719921245308790723_272_14050658.webp",
+          "width": 1674,
+          "height": 840
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/13081047549375116456_272_14050658.webp",
+          "width": 1674,
+          "height": 840
+        }
+      ]
     },
     "profile": {
       "gender": "Male",
@@ -57068,12 +57828,32 @@
     "fullName": "Von Lycaon",
     "faction": {
       "id": "2",
-      "name": "Victoria Housekeeping Co."
+      "name": "Victoria Housekeeping Co.",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/5711641249928527117_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14114",
       "slug": "the-restrained",
       "name": "The Restrained"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/2871119897940010277_272_14050658.webp",
+          "width": 1925,
+          "height": 840
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/12751842583103369577_272_14050658.webp",
+          "width": 1927,
+          "height": 846
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/13453418459206037792_272_14050658.webp",
+          "width": 1925,
+          "height": 845
+        }
+      ]
     },
     "profile": {
       "gender": "Male",
@@ -58888,12 +59668,32 @@
     "fullName": "Soukaku",
     "faction": {
       "id": "6",
-      "name": "Hollow Special Operations Section 6"
+      "name": "Hollow Special Operations Section 6",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/2989597373971074975_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "13113",
       "slug": "bashful-demon",
       "name": "Bashful Demon"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/113013204086111611_272_14050658.webp",
+          "width": 1734,
+          "height": 834
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/15883977675441198921_272_14050658.webp",
+          "width": 1734,
+          "height": 834
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/17383019012165378585_272_14050658.webp",
+          "width": 1836,
+          "height": 839
+        }
+      ]
     },
     "profile": {
       "gender": "Female",
@@ -60415,12 +61215,32 @@
     "fullName": "Billy Kid",
     "faction": {
       "id": "1",
-      "name": "Cunning Hares"
+      "name": "Cunning Hares",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/1493709431879618853_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "13108",
       "slug": "starlight-engine-replica",
       "name": "Starlight Engine Replica"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/13724408516463530480_272_14050658.webp",
+          "width": 2459,
+          "height": 837
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/11501735061054872568_272_14050658.webp",
+          "width": 2035,
+          "height": 842
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/11181990443599240522_272_14050658.webp",
+          "width": 2037,
+          "height": 845
+        }
+      ]
     },
     "profile": {
       "gender": "Male",
@@ -61707,12 +62527,32 @@
     "fullName": "Corin Wickes",
     "faction": {
       "id": "2",
-      "name": "Victoria Housekeeping Co."
+      "name": "Victoria Housekeeping Co.",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/5711641249928527117_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "13106",
       "slug": "housekeeper",
       "name": "Housekeeper"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/5318651579553077492_272_14050658.webp",
+          "width": 1584,
+          "height": 834
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/6006029093422955648_272_14050658.webp",
+          "width": 1585,
+          "height": 834
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/4875577758369500087_272_14050658.webp",
+          "width": 1587,
+          "height": 838
+        }
+      ]
     },
     "profile": {
       "gender": "Female",
@@ -63109,12 +63949,32 @@
     "fullName": "Soldier 11",
     "faction": {
       "id": "5",
-      "name": "Defense Force - Obol Squad"
+      "name": "Defense Force - Obol Squad",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/8243276872445443322_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14104",
       "slug": "the-brimstone",
       "name": "The Brimstone"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/17406197385564331533_272_14050658.webp",
+          "width": 1632,
+          "height": 834
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/10509876211754678430_272_14050658.webp",
+          "width": 1463,
+          "height": 834
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/12036804822240502002_272_14050658.webp",
+          "width": 1329,
+          "height": 842
+        }
+      ]
     },
     "profile": {
       "gender": "Female",
@@ -64693,12 +65553,32 @@
     "fullName": "Hoshimi Miyabi",
     "faction": {
       "id": "6",
-      "name": "Hollow Special Operations Section 6"
+      "name": "Hollow Special Operations Section 6",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/2989597373971074975_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14109",
       "slug": "hailstorm-shrine",
       "name": "Hailstorm Shrine"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/12871103703595835140_272_14050658.webp",
+          "width": 2136,
+          "height": 840
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/5880988376406808933_272_14050658.webp",
+          "width": 2136,
+          "height": 840
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/10564661941038493069_272_14050658.webp",
+          "width": 2136,
+          "height": 840
+        }
+      ]
     },
     "profile": {
       "gender": "Female",
@@ -64707,7 +65587,7 @@
       "details": "Hoshimi Miyabi, the Chief of Hollow Special Operations Section 6.<br/>Miyabi goes on a lot of field missions and still doesn't know which floor the regular monthly meeting is on.<br/>Even if you see Miyabi in the office, it's unlikely she's dealing with paperwork, and more likely polishing her sword.<br/><br/>Being conferred the title of Void Hunter due to her outstanding contributions, she's an elite amongst elites in Section 6.<br/>She has great prestige amongst the citizens.<br/>Once, Miyabi accidentally wandered into a \"Miyabi Fan Club\" hosted offline event.<br/>Miyabi was thought to be a fan with godlike impersonation skills, and that event resulted in a precious visual recording.<br/><br/>Hoshimi Miyabi is honest and pragmatic. She is not simply a martial artist obsessed with her art and without care for the world around her.<br/>Anyone who knows her will realize she's always pursued justice in her heart... even if it may eventually cause a revolution.",
       "details2": "Hoshimi Miyabi is the heir to a famed martial arts family in New Eridu.<br/>According to an insider, Miyabi's mother died when she was young and Miyabi's relationship with her father is rather odd.<br/>Note: Miyabi's father has not taken any civil or administrative positions within New Eridu.",
       "aptitude": "The information shows:<br/>Executive Officer Hoshimi Miyabi, Ether aptitude confidential, is allowed to perform basic tasks like investigating and extracting resources in known Hollows within the city (including Companion Hollows).",
-      "titles": ["[object Object]"]
+      "titles": ["Void Hunter: Isshin Muga"]
     },
     "skins": [
       {
@@ -66078,12 +66958,32 @@
     "fullName": "Ben Bigger",
     "faction": {
       "id": "3",
-      "name": "Belobog Heavy Industries"
+      "name": "Belobog Heavy Industries",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/16906337941127751959_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "13112",
       "slug": "big-cylinder",
       "name": "Big Cylinder"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/1432753163111255627_272_14050658.webp",
+          "width": 2016,
+          "height": 834
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/5290715913843334198_272_14050658.webp",
+          "width": 2015,
+          "height": 840
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/15156858186692548039_272_14050658.webp",
+          "width": 2061,
+          "height": 840
+        }
+      ]
     },
     "profile": {
       "gender": "Male",
@@ -67370,12 +68270,32 @@
     "fullName": "Caesar King",
     "faction": {
       "id": "4",
-      "name": "Sons of Calydon"
+      "name": "Sons of Calydon",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/521623527699993423_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14107",
       "slug": "tusks-of-fury",
       "name": "Tusks of Fury"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/8355318805256140048_272_14050658.webp",
+          "width": 2513,
+          "height": 840
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/16855603419140459078_272_14050658.webp",
+          "width": 2513,
+          "height": 840
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/1884019423301622244_272_14050658.webp",
+          "width": 2513,
+          "height": 840
+        }
+      ]
     },
     "profile": {
       "gender": "Female",
@@ -68990,12 +69910,32 @@
     "fullName": "Luciana de Montefio",
     "faction": {
       "id": "4",
-      "name": "Sons of Calydon"
+      "name": "Sons of Calydon",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/521623527699993423_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "13115",
       "slug": "kaboom-the-cannon",
       "name": "Kaboom the Cannon"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/8065580800478476726_272_14050658.webp",
+          "width": 1451,
+          "height": 833
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/8709964847045166920_272_14050658.webp",
+          "width": 1453,
+          "height": 834
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/8170411356618704515_272_14050658.webp",
+          "width": 1386,
+          "height": 834
+        }
+      ]
     },
     "profile": {
       "gender": "Female",
@@ -70473,12 +71413,32 @@
     "fullName": "Nekomiya Mana",
     "faction": {
       "id": "1",
-      "name": "Cunning Hares"
+      "name": "Cunning Hares",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/1493709431879618853_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14102",
       "slug": "steel-cushion",
       "name": "Steel Cushion"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/14325468030141254447_272_14050658.webp",
+          "width": 2016,
+          "height": 846
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/4949637224343104048_272_14050658.webp",
+          "width": 2016,
+          "height": 846
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/13595775705567649011_272_14050658.webp",
+          "width": 2010,
+          "height": 840
+        }
+      ]
     },
     "profile": {
       "gender": "Female",
@@ -71704,12 +72664,32 @@
     "fullName": "Nicole Demara",
     "faction": {
       "id": "1",
-      "name": "Cunning Hares"
+      "name": "Cunning Hares",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/1493709431879618853_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "13103",
       "slug": "the-vault",
       "name": "The Vault"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/5368780256679766926_272_14050658.webp",
+          "width": 1326,
+          "height": 840
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/17057239456181955679_272_14050658.webp",
+          "width": 1326,
+          "height": 840
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/13902489546801150391_272_14050658.webp",
+          "width": 1329,
+          "height": 847
+        }
+      ]
     },
     "profile": {
       "gender": "Female",
@@ -73236,12 +74216,32 @@
     "fullName": "Koleda Belobog",
     "faction": {
       "id": "3",
-      "name": "Belobog Heavy Industries"
+      "name": "Belobog Heavy Industries",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/16906337941127751959_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14110",
       "slug": "hellfire-gears",
       "name": "Hellfire Gears"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/688980348220857052_272_14050658.webp",
+          "width": 1726,
+          "height": 834
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/15420500910149710823_272_14050658.webp",
+          "width": 1729,
+          "height": 837
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/14754663321083507984_272_14050658.webp",
+          "width": 1726,
+          "height": 837
+        }
+      ]
     },
     "profile": {
       "gender": "Female",
@@ -74726,12 +75726,32 @@
     "fullName": "Anby Demara",
     "faction": {
       "id": "1",
-      "name": "Cunning Hares"
+      "name": "Cunning Hares",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/1493709431879618853_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "13101",
       "slug": "demara-battery-mark-ii",
       "name": "Demara Battery Mark II"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/9404571360497037135_272_14050658.webp",
+          "width": 1786,
+          "height": 834
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/1841974395150887001_272_14050658.webp",
+          "width": 1786,
+          "height": 834
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/5109880682762948653_272_14050658.webp",
+          "width": 1765,
+          "height": 843
+        }
+      ]
     },
     "profile": {
       "gender": "Female",

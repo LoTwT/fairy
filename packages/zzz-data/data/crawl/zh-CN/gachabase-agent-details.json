@@ -4,12 +4,32 @@
     "fullName": "希希芙",
     "faction": {
       "id": "14",
-      "name": "都市秩序部"
+      "name": "都市秩序部",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/5238983294860011276_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14152",
       "slug": "serpentine-seeker",
       "name": "鳞齿寻踪"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/2600884583711857246_272_14050658.webp",
+          "width": 1786,
+          "height": 834
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/17541719914679045807_272_14050658.webp",
+          "width": 1786,
+          "height": 834
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/9476876639892162755_272_14050658.webp",
+          "width": 1765,
+          "height": 843
+        }
+      ]
     },
     "profile": {
       "gender": "女",
@@ -1268,12 +1288,32 @@
     "fullName": "南宫羽",
     "faction": {
       "id": "13",
-      "name": "妄想天使"
+      "name": "妄想天使",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/11409802771427277562_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14151",
       "slug": "neon-fantasies",
       "name": "霓虹妄想"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/14948226576323099130_272_14050658.webp",
+          "width": 1786,
+          "height": 834
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/16880846849280330183_272_14050658.webp",
+          "width": 1786,
+          "height": 834
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/9277761389448765930_272_14050658.webp",
+          "width": 1765,
+          "height": 843
+        }
+      ]
     },
     "profile": {
       "gender": "女",
@@ -2499,12 +2539,32 @@
     "fullName": "爱芮",
     "faction": {
       "id": "13",
-      "name": "妄想天使"
+      "name": "妄想天使",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/11409802771427277562_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14150",
       "slug": "angel-in-the-shell",
       "name": "壳中之灵"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/6505564976846798051_272_14050658.webp",
+          "width": 1681,
+          "height": 904
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/5240660267857213052_272_14050658.webp",
+          "width": 1681,
+          "height": 904
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/9357779311449170064_272_14050658.webp",
+          "width": 1681,
+          "height": 904
+        }
+      ]
     },
     "profile": {
       "gender": "女",
@@ -4041,12 +4101,32 @@
     "fullName": "千夏",
     "faction": {
       "id": "13",
-      "name": "妄想天使"
+      "name": "妄想天使",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/11409802771427277562_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14149",
       "slug": "thoughtbop",
       "name": "思络成歌"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/6791412126359466475_272_14050658.webp",
+          "width": 1845,
+          "height": 918
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/37783000184907997_272_14050658.webp",
+          "width": 1845,
+          "height": 918
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/8658074658130981787_272_14050658.webp",
+          "width": 1740,
+          "height": 918
+        }
+      ]
     },
     "profile": {
       "gender": "女",
@@ -5380,12 +5460,32 @@
     "fullName": "叶瞬光",
     "faction": {
       "id": "10",
-      "name": "云岿山"
+      "name": "云岿山",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/7671087977302280904_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14143",
       "slug": "cloudcleave-radiance",
       "name": "云霓孤光"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/17267673066410348162_272_14050658.webp",
+          "width": 2203,
+          "height": 872
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/14227232498926072139_272_14050658.webp",
+          "width": 2203,
+          "height": 872
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/5069369296550416574_272_14050658.webp",
+          "width": 2203,
+          "height": 872
+        }
+      ]
     },
     "profile": {
       "gender": "女",
@@ -5394,7 +5494,7 @@
       "details": "...",
       "details2": "...",
       "aptitude": "",
-      "titles": ["[object Object]"]
+      "titles": ["虚狩·青溟司命"]
     },
     "skins": [
       {
@@ -7493,12 +7593,32 @@
     "fullName": "照",
     "faction": {
       "id": "12",
-      "name": "坎卜斯黑枝"
+      "name": "坎卜斯黑枝",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/15686371877000194255_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14134",
       "slug": "half-sugar-bunny",
       "name": "半糖雪兔"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/1497341826893288180_272_14050658.webp",
+          "width": 2076,
+          "height": 889
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/14488552100789116858_272_14050658.webp",
+          "width": 2076,
+          "height": 889
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/13066023150816406357_272_14050658.webp",
+          "width": 2075,
+          "height": 890
+        }
+      ]
     },
     "profile": {
       "gender": "女",
@@ -8839,12 +8959,32 @@
     "fullName": "琉音",
     "faction": {
       "id": "12",
-      "name": "坎卜斯黑枝"
+      "name": "坎卜斯黑枝",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/15686371877000194255_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14148",
       "slug": "yesterday-calls",
       "name": "昨夜来电"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/5089372950222753256_272_14050658.webp",
+          "width": 1903,
+          "height": 864
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/13762301501039432673_272_14050658.webp",
+          "width": 1903,
+          "height": 864
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/11497294951385431107_272_14050658.webp",
+          "width": 1829,
+          "height": 864
+        }
+      ]
     },
     "profile": {
       "gender": "女",
@@ -10349,12 +10489,32 @@
     "fullName": "般岳",
     "faction": {
       "id": "12",
-      "name": "坎卜斯黑枝"
+      "name": "坎卜斯黑枝",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/15686371877000194255_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14147",
       "slug": "wrathful-vajra",
       "name": "怒目金刚"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/11113860880505700245_272_14050658.webp",
+          "width": 1863,
+          "height": 873
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/5624330345231401509_272_14050658.webp",
+          "width": 1863,
+          "height": 873
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/14199906076476178328_272_14050658.webp",
+          "width": 2257,
+          "height": 873
+        }
+      ]
     },
     "profile": {
       "gender": "男",
@@ -12212,12 +12372,32 @@
     "fullName": "卢西娅·艾洛温",
     "faction": {
       "id": "11",
-      "name": "怪啖屋"
+      "name": "怪啖屋",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/17552908058262675115_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14145",
       "slug": "dreamlit-hearth",
       "name": "铸梦炉歌"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/12681368389656118847_272_14050658.webp",
+          "width": 2109,
+          "height": 860
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/15742322777700334391_272_14050658.webp",
+          "width": 2109,
+          "height": 859
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/17764842359901731791_272_14050658.webp",
+          "width": 2112,
+          "height": 864
+        }
+      ]
     },
     "profile": {
       "gender": "女",
@@ -13812,12 +13992,32 @@
     "fullName": "狛野 真斗",
     "faction": {
       "id": "11",
-      "name": "怪啖屋"
+      "name": "怪啖屋",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/17552908058262675115_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "13144",
       "slug": "grill-owisp",
       "name": "燔火胧夜"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/16229459512716339829_272_14050658.webp",
+          "width": 1874,
+          "height": 896
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/13490838763861794098_272_14050658.webp",
+          "width": 1874,
+          "height": 896
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/4690289247152403636_272_14050658.webp",
+          "width": 1775,
+          "height": 896
+        }
+      ]
     },
     "profile": {
       "gender": "男",
@@ -15344,12 +15544,32 @@
     "fullName": "伊德海莉·墨菲",
     "faction": {
       "id": "11",
-      "name": "怪啖屋"
+      "name": "怪啖屋",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/17552908058262675115_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14105",
       "slug": "krakens-cradle",
       "name": "海妖摇篮"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/11424863479058466234_272_14050658.webp",
+          "width": 2351,
+          "height": 888
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/12921470087618672704_272_14050658.webp",
+          "width": 2352,
+          "height": 888
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/9335220571248612617_272_14050658.webp",
+          "width": 2350,
+          "height": 888
+        }
+      ]
     },
     "profile": {
       "gender": "女",
@@ -16903,12 +17123,32 @@
     "fullName": "仪玄",
     "faction": {
       "id": "10",
-      "name": "云岿山"
+      "name": "云岿山",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/7671087977302280904_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14137",
       "slug": "qingming-birdcage",
       "name": "青溟笼舍"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/8060618149514491571_272_14050658.webp",
+          "width": 1565,
+          "height": 902
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/6813844492207546462_272_14050658.webp",
+          "width": 1564,
+          "height": 903
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/15359260999845748236_272_14050658.webp",
+          "width": 1593,
+          "height": 904
+        }
+      ]
     },
     "profile": {
       "gender": "女",
@@ -16917,7 +17157,7 @@
       "details": "仪玄是云岿山第十三代门主，也是被市长梅弗劳尔亲自认可的虚狩级调查员。<br/><br/>她曾经是一名孤儿，自小与姐姐一同流浪。后来两人被当时的云岿山门主收留，成为弟子学习术法。在此期间，仪玄展现出了极高的天赋。无论何种术法，她总能以极快的速度掌握，不仅能够融会贯通，还能创造出属于自己的特殊术法。而「青溟鸟」则是她和姐姐合作研发的特殊术法之一，在各种困难和险境中，辅助她消灭敌人，铲除邪祟。在成为门主之后，她接受了梅弗劳尔市长的邀请，以合作的方式加入了空洞调查协会，成为了特遣调查员。<br/><br/>自成为门主之后，仪玄也招收了不少颇有天赋的徒弟，继续延续云岿山的传承。可怎奈她行事风格颇为随意，很多时候即使是言传身教，弟子们也只能用「揣测」的方式，了解师父的本意究竟是什么…不过仪玄对此并不感到苦恼，毕竟对她而言，所谓的「正道」从来没有什么标准答案。让弟子们各自寻找到属于自己的「正道」，这才是她想传授的真意。当然，如果徒弟们能够自己领悟，自己学习自然最好。作为师父，只需要顺其自然而已。",
       "details2": "仪玄小时候喜欢和姐姐一起吃叉烧包，只不过在旧都陷落之后一夜之间对其失去了兴趣，从那之后便很少吃过了。<br/><br/>云岿山的弟子们并不知道这件事，只是觉得师父有些挑食而已。<br/><br/>当然，这件事最好对其他人保密。许多往事和执念，就让它们随着时间慢慢消逝吧。",
       "aptitude": "",
-      "titles": ["[object Object]"]
+      "titles": ["宗师"]
     },
     "skins": [
       {
@@ -18597,12 +18837,32 @@
     "fullName": "橘福福",
     "faction": {
       "id": "10",
-      "name": "云岿山"
+      "name": "云岿山",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/7671087977302280904_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14139",
       "slug": "roaring-fur-nace",
       "name": "福虓炉炉"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/147837657712470017_272_14050658.webp",
+          "width": 1892,
+          "height": 865
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/5640675482733817933_272_14050658.webp",
+          "width": 1891,
+          "height": 870
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/4784327017856865283_272_14050658.webp",
+          "width": 1891,
+          "height": 870
+        }
+      ]
     },
     "profile": {
       "gender": "女",
@@ -19970,12 +20230,32 @@
     "fullName": "潘引壶",
     "faction": {
       "id": "10",
-      "name": "云岿山"
+      "name": "云岿山",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/7671087977302280904_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "13142",
       "slug": "tremor-trigram-vessel",
       "name": "震元奇枢"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/13580701963108378589_272_14050658.webp",
+          "width": 2012,
+          "height": 841
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/13223662936739656494_272_14050658.webp",
+          "width": 2006,
+          "height": 845
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/6635634566843330364_272_14050658.webp",
+          "width": 2007,
+          "height": 848
+        }
+      ]
     },
     "profile": {
       "gender": "男",
@@ -21304,12 +21584,32 @@
     "fullName": "「席德」",
     "faction": {
       "id": "5",
-      "name": "防卫军·奥波勒斯小队"
+      "name": "防卫军·奥波勒斯小队",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/8243276872445443322_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14146",
       "slug": "cordis-germina",
       "name": "机巧心种"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/8030637395332460777_272_14050658.webp",
+          "width": 2243,
+          "height": 892
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/12534753169251018480_272_14050658.webp",
+          "width": 2243,
+          "height": 892
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/10214507247954747862_272_14050658.webp",
+          "width": 2243,
+          "height": 893
+        }
+      ]
     },
     "profile": {
       "gender": "女",
@@ -22655,12 +22955,32 @@
     "fullName": "爱丽丝·泰姆菲尔德",
     "faction": {
       "id": "11",
-      "name": "怪啖屋"
+      "name": "怪啖屋",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/17552908058262675115_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14140",
       "slug": "practiced-perfection",
       "name": "十方锻星"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/8475596291127467996_272_14050658.webp",
+          "width": 1865,
+          "height": 874
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/13860720485768413409_272_14050658.webp",
+          "width": 1865,
+          "height": 874
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/17628549882280527529_272_14050658.webp",
+          "width": 1868,
+          "height": 874
+        }
+      ]
     },
     "profile": {
       "gender": "女",
@@ -24104,12 +24424,32 @@
     "fullName": "浮波 柚叶",
     "faction": {
       "id": "11",
-      "name": "怪啖屋"
+      "name": "怪啖屋",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/17552908058262675115_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14141",
       "slug": "metanukimorphosis",
       "name": "狸法七变化"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/7391673824349632184_272_14050658.webp",
+          "width": 1783,
+          "height": 881
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/4053373423565418513_272_14050658.webp",
+          "width": 1783,
+          "height": 881
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/1518961328495041510_272_14050658.webp",
+          "width": 1783,
+          "height": 883
+        }
+      ]
     },
     "profile": {
       "gender": "女",
@@ -25693,12 +26033,32 @@
     "fullName": "零号·安比",
     "faction": {
       "id": "5",
-      "name": "防卫军·白银小队"
+      "name": "防卫军·白银小队",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/4298615629659860261_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14138",
       "slug": "severed-innocence",
       "name": "牺牲洁纯"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/11755952484462269705_272_14050658.webp",
+          "width": 2502,
+          "height": 840
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/14249176330166487341_272_14050658.webp",
+          "width": 2502,
+          "height": 840
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/7586854041753681957_272_14050658.webp",
+          "width": 2502,
+          "height": 840
+        }
+      ]
     },
     "profile": {
       "gender": "女",
@@ -27374,12 +27734,32 @@
     "fullName": "波可娜·费雷尼",
     "faction": {
       "id": "4",
-      "name": "卡吕冬之子"
+      "name": "卡吕冬之子",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/521623527699993423_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "13135",
       "slug": "box-cutter",
       "name": "裁纸刀"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/6788504353698071779_272_14050658.webp",
+          "width": 2163,
+          "height": 840
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/14041300411317691130_272_14050658.webp",
+          "width": 2163,
+          "height": 840
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/8057403214726448564_272_14050658.webp",
+          "width": 2163,
+          "height": 840
+        }
+      ]
     },
     "profile": {
       "gender": "女",
@@ -28544,12 +28924,32 @@
     "fullName": "薇薇安·班希",
     "faction": {
       "id": "9",
-      "name": "反舌鸟"
+      "name": "反舌鸟",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/2759795726604600300_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14133",
       "slug": "flight-of-fancy",
       "name": "飞鸟星梦"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/9580364155409324144_272_14050658.webp",
+          "width": 1941,
+          "height": 902
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/9433420579390966670_272_14050658.webp",
+          "width": 1941,
+          "height": 902
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/14091185930948891959_272_14050658.webp",
+          "width": 1930,
+          "height": 902
+        }
+      ]
     },
     "profile": {
       "gender": "女",
@@ -29849,12 +30249,32 @@
     "fullName": "赛斯·洛威尔",
     "faction": {
       "id": "7",
-      "name": "刑侦特勤组"
+      "name": "刑侦特勤组",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/16986822238117422678_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "13127",
       "slug": "peacekeeper-specialized",
       "name": "维序者-特化型"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/4343062883789187505_272_14050658.webp",
+          "width": 1710,
+          "height": 836
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/1930972294879800703_272_14050658.webp",
+          "width": 1710,
+          "height": 836
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/17683907918988837563_272_14050658.webp",
+          "width": 1709,
+          "height": 839
+        }
+      ]
     },
     "profile": {
       "gender": "男",
@@ -31124,12 +31544,32 @@
     "fullName": "青衣",
     "faction": {
       "id": "7",
-      "name": "刑侦特勤组"
+      "name": "刑侦特勤组",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/16986822238117422678_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14125",
       "slug": "ice-jade-teapot",
       "name": "玉壶青冰"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/5732349766413360762_272_14050658.webp",
+          "width": 1524,
+          "height": 835
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/11926936216410887335_272_14050658.webp",
+          "width": 1524,
+          "height": 835
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/16452239645777464565_272_14050658.webp",
+          "width": 1524,
+          "height": 835
+        }
+      ]
     },
     "profile": {
       "gender": "女",
@@ -32519,12 +32959,32 @@
     "fullName": "朱鸢",
     "faction": {
       "id": "7",
-      "name": "刑侦特勤组"
+      "name": "刑侦特勤组",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/16986822238117422678_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14124",
       "slug": "riot-suppressor-mark-vi",
       "name": "防暴者Ⅵ型"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/7646272410317399989_272_14050658.webp",
+          "width": 1384,
+          "height": 834
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/1057359790988156108_272_14050658.webp",
+          "width": 1384,
+          "height": 834
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/8358494950685009059_272_14050658.webp",
+          "width": 1278,
+          "height": 837
+        }
+      ]
     },
     "profile": {
       "gender": "女",
@@ -33997,12 +34457,32 @@
     "fullName": "亚历山德丽娜·莎芭丝缇安",
     "faction": {
       "id": "2",
-      "name": "维多利亚家政"
+      "name": "维多利亚家政",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/5711641249928527117_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14121",
       "slug": "weeping-cradle",
       "name": "啜泣摇篮"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/14434355623972073498_272_14050658.webp",
+          "width": 1392,
+          "height": 847
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/11405632558843844090_272_14050658.webp",
+          "width": 1392,
+          "height": 847
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/12749337470167599727_272_14050658.webp",
+          "width": 1397,
+          "height": 834
+        }
+      ]
     },
     "profile": {
       "gender": "女",
@@ -35118,12 +35598,32 @@
     "fullName": "莱特",
     "faction": {
       "id": "4",
-      "name": "卡吕冬之子"
+      "name": "卡吕冬之子",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/521623527699993423_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14116",
       "slug": "blazing-laurel",
       "name": "焰心桂冠"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/253333416724656024_272_14050658.webp",
+          "width": 1928,
+          "height": 1080
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/2260344193270245575_272_14050658.webp",
+          "width": 1928,
+          "height": 1080
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/15276894237732702302_272_14050658.webp",
+          "width": 1928,
+          "height": 1080
+        }
+      ]
     },
     "profile": {
       "gender": "男",
@@ -36850,12 +37350,32 @@
     "fullName": "奥菲丝·马格努森& 「鬼火」",
     "faction": {
       "id": "5",
-      "name": "防卫军·奥波勒斯小队"
+      "name": "防卫军·奥波勒斯小队",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/8243276872445443322_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14130",
       "slug": "bellicose-blaze",
       "name": "嚣枪喧焰"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/11429467651063073808_272_14050658.webp",
+          "width": 1587,
+          "height": 934
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/17937709520464669737_272_14050658.webp",
+          "width": 1587,
+          "height": 933
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/4979289872246553821_272_14050658.webp",
+          "width": 1589,
+          "height": 939
+        }
+      ]
     },
     "profile": {
       "gender": "女",
@@ -38338,12 +38858,32 @@
     "fullName": "艾莲·乔",
     "faction": {
       "id": "2",
-      "name": "维多利亚家政"
+      "name": "维多利亚家政",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/5711641249928527117_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14119",
       "slug": "deep-sea-visitor",
       "name": "深海访客"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/10631627849505849008_272_14050658.webp",
+          "width": 1657,
+          "height": 834
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/2508667211952070039_272_14050658.webp",
+          "width": 1657,
+          "height": 834
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/3062254325481637921_272_14050658.webp",
+          "width": 1676,
+          "height": 840
+        }
+      ]
     },
     "profile": {
       "gender": "女",
@@ -40340,12 +40880,32 @@
     "fullName": "简·杜",
     "faction": {
       "id": "7",
-      "name": "刑侦特勤组"
+      "name": "刑侦特勤组",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/2525547181716714564_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14126",
       "slug": "sharpened-stinger",
       "name": "淬锋钳刺"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/10440145410182589597_272_14050658.webp",
+          "width": 1868,
+          "height": 834
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/8690857391742333034_272_14050658.webp",
+          "width": 1868,
+          "height": 834
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/17638680115615612081_272_14050658.webp",
+          "width": 1868,
+          "height": 834
+        }
+      ]
     },
     "profile": {
       "gender": "女",
@@ -41914,12 +42474,32 @@
     "fullName": "派派·韦尔",
     "faction": {
       "id": "4",
-      "name": "卡吕冬之子"
+      "name": "卡吕冬之子",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/521623527699993423_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "13128",
       "slug": "roaring-ride",
       "name": "轰鸣座驾"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/17741385234290686240_272_14050658.webp",
+          "width": 1723,
+          "height": 839
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/5251990183635172984_272_14050658.webp",
+          "width": 1727,
+          "height": 845
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/10601434905177097933_272_14050658.webp",
+          "width": 1727,
+          "height": 845
+        }
+      ]
     },
     "profile": {
       "gender": "女",
@@ -43260,12 +43840,32 @@
     "fullName": "耀嘉音",
     "faction": {
       "id": "8",
-      "name": "天琴座"
+      "name": "天琴座",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/16534533730913129813_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14131",
       "slug": "elegant-vanity",
       "name": "玲珑妆匣"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/16960464999531766075_272_14050658.webp",
+          "width": 1876,
+          "height": 840
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/9761144608433010253_272_14050658.webp",
+          "width": 1876,
+          "height": 840
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/14524020851015258571_272_14050658.webp",
+          "width": 1883,
+          "height": 840
+        }
+      ]
     },
     "profile": {
       "gender": "女",
@@ -44785,12 +45385,32 @@
     "fullName": "「扳机」",
     "faction": {
       "id": "5",
-      "name": "防卫军·奥波勒斯小队"
+      "name": "防卫军·奥波勒斯小队",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/8243276872445443322_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14136",
       "slug": "spectral-gaze",
       "name": "索魂影眸"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/3836529774192353585_272_14050658.webp",
+          "width": 2580,
+          "height": 875
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/3139931615470867967_272_14050658.webp",
+          "width": 2580,
+          "height": 875
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/15156496343168487200_272_14050658.webp",
+          "width": 2580,
+          "height": 875
+        }
+      ]
     },
     "profile": {
       "gender": "女",
@@ -46202,12 +46822,32 @@
     "fullName": "伊芙琳·舒瓦利耶",
     "faction": {
       "id": "8",
-      "name": "天琴座"
+      "name": "天琴座",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/16534533730913129813_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14132",
       "slug": "heartstring-nocturne",
       "name": "心弦夜响"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/4411830338285133610_272_14050658.webp",
+          "width": 2022,
+          "height": 840
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/15848412156683907020_272_14050658.webp",
+          "width": 2022,
+          "height": 840
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/15250553020561697967_272_14050658.webp",
+          "width": 1867,
+          "height": 840
+        }
+      ]
     },
     "profile": {
       "gender": "女",
@@ -47673,12 +48313,32 @@
     "fullName": "月城 柳",
     "faction": {
       "id": "6",
-      "name": "对空洞特别行动部第六课"
+      "name": "对空洞特别行动部第六课",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/2989597373971074975_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14122",
       "slug": "timeweaver",
       "name": "时流贤者"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/2056070815412053964_272_14050658.webp",
+          "width": 1700,
+          "height": 840
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/16962986665536476440_272_14050658.webp",
+          "width": 1700,
+          "height": 840
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/16892056098042667930_272_14050658.webp",
+          "width": 1800,
+          "height": 840
+        }
+      ]
     },
     "profile": {
       "gender": "女",
@@ -49163,12 +49823,32 @@
     "fullName": "雨果·维拉德",
     "faction": {
       "id": "9",
-      "name": "反舌鸟"
+      "name": "反舌鸟",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/2759795726604600300_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14129",
       "slug": "myriad-eclipse",
       "name": "千面日陨"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/3741956429440541733_272_14050658.webp",
+          "width": 1758,
+          "height": 888
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/18433905878444563141_272_14050658.webp",
+          "width": 1758,
+          "height": 888
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/7296497861490698232_272_14050658.webp",
+          "width": 1764,
+          "height": 888
+        }
+      ]
     },
     "profile": {
       "gender": "男",
@@ -50702,12 +51382,32 @@
     "fullName": "浅羽 悠真",
     "faction": {
       "id": "6",
-      "name": "对空洞特别行动部第六课"
+      "name": "对空洞特别行动部第六课",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/2989597373971074975_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14120",
       "slug": "zanshin-herb-case",
       "name": "残心青囊"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/16386264873851160868_272_14050658.webp",
+          "width": 2066,
+          "height": 836
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/14982411204673508325_272_14050658.webp",
+          "width": 2200,
+          "height": 836
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/5061439434301935710_272_14050658.webp",
+          "width": 2166,
+          "height": 836
+        }
+      ]
     },
     "profile": {
       "gender": "男",
@@ -52525,12 +53225,32 @@
     "fullName": "柏妮思·怀特",
     "faction": {
       "id": "4",
-      "name": "卡吕冬之子"
+      "name": "卡吕冬之子",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/521623527699993423_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14117",
       "slug": "flamemaker-shaker",
       "name": "灼心摇壶"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/13033345791154533768_272_14050658.webp",
+          "width": 1740,
+          "height": 840
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/4856538542246925480_272_14050658.webp",
+          "width": 1740,
+          "height": 840
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/1209192670715052025_272_14050658.webp",
+          "width": 1740,
+          "height": 840
+        }
+      ]
     },
     "profile": {
       "gender": "女",
@@ -54197,12 +54917,32 @@
     "fullName": "格莉丝·霍华德",
     "faction": {
       "id": "3",
-      "name": "白祇重工"
+      "name": "白祇重工",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/16906337941127751959_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14118",
       "slug": "fusion-compiler",
       "name": "嵌合编译器"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/10132465421389598605_272_14050658.webp",
+          "width": 1913,
+          "height": 840
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/3658252388464147307_272_14050658.webp",
+          "width": 1914,
+          "height": 843
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/14342956699977155465_272_14050658.webp",
+          "width": 1913,
+          "height": 844
+        }
+      ]
     },
     "profile": {
       "gender": "女",
@@ -55646,12 +56386,32 @@
     "fullName": "安东·伊万诺夫",
     "faction": {
       "id": "3",
-      "name": "白祇重工"
+      "name": "白祇重工",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/16906337941127751959_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "13111",
       "slug": "drill-rig-red-axis",
       "name": "旋钻机-赤轴"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/1140327079951396812_272_14050658.webp",
+          "width": 1670,
+          "height": 834
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/8719921245308790723_272_14050658.webp",
+          "width": 1674,
+          "height": 840
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/13081047549375116456_272_14050658.webp",
+          "width": 1674,
+          "height": 840
+        }
+      ]
     },
     "profile": {
       "gender": "男",
@@ -57068,12 +57828,32 @@
     "fullName": "冯·莱卡恩",
     "faction": {
       "id": "2",
-      "name": "维多利亚家政"
+      "name": "维多利亚家政",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/5711641249928527117_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14114",
       "slug": "the-restrained",
       "name": "拘缚者"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/2871119897940010277_272_14050658.webp",
+          "width": 1925,
+          "height": 840
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/12751842583103369577_272_14050658.webp",
+          "width": 1927,
+          "height": 846
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/13453418459206037792_272_14050658.webp",
+          "width": 1925,
+          "height": 845
+        }
+      ]
     },
     "profile": {
       "gender": "男",
@@ -58888,12 +59668,32 @@
     "fullName": "苍角",
     "faction": {
       "id": "6",
-      "name": "对空洞特别行动部第六课"
+      "name": "对空洞特别行动部第六课",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/2989597373971074975_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "13113",
       "slug": "bashful-demon",
       "name": "含羞恶面"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/113013204086111611_272_14050658.webp",
+          "width": 1734,
+          "height": 834
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/15883977675441198921_272_14050658.webp",
+          "width": 1734,
+          "height": 834
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/17383019012165378585_272_14050658.webp",
+          "width": 1836,
+          "height": 839
+        }
+      ]
     },
     "profile": {
       "gender": "女",
@@ -60415,12 +61215,32 @@
     "fullName": "比利·奇德",
     "faction": {
       "id": "1",
-      "name": "狡兔屋"
+      "name": "狡兔屋",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/1493709431879618853_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "13108",
       "slug": "starlight-engine-replica",
       "name": "仿制星徽引擎"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/13724408516463530480_272_14050658.webp",
+          "width": 2459,
+          "height": 837
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/11501735061054872568_272_14050658.webp",
+          "width": 2035,
+          "height": 842
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/11181990443599240522_272_14050658.webp",
+          "width": 2037,
+          "height": 845
+        }
+      ]
     },
     "profile": {
       "gender": "男",
@@ -61707,12 +62527,32 @@
     "fullName": "可琳·威克斯",
     "faction": {
       "id": "2",
-      "name": "维多利亚家政"
+      "name": "维多利亚家政",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/5711641249928527117_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "13106",
       "slug": "housekeeper",
       "name": "家政员"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/5318651579553077492_272_14050658.webp",
+          "width": 1584,
+          "height": 834
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/6006029093422955648_272_14050658.webp",
+          "width": 1585,
+          "height": 834
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/4875577758369500087_272_14050658.webp",
+          "width": 1587,
+          "height": 838
+        }
+      ]
     },
     "profile": {
       "gender": "女",
@@ -63109,12 +63949,32 @@
     "fullName": "「11号」",
     "faction": {
       "id": "5",
-      "name": "防卫军·奥波勒斯小队"
+      "name": "防卫军·奥波勒斯小队",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/8243276872445443322_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14104",
       "slug": "the-brimstone",
       "name": "硫磺石"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/17406197385564331533_272_14050658.webp",
+          "width": 1632,
+          "height": 834
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/10509876211754678430_272_14050658.webp",
+          "width": 1463,
+          "height": 834
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/12036804822240502002_272_14050658.webp",
+          "width": 1329,
+          "height": 842
+        }
+      ]
     },
     "profile": {
       "gender": "女",
@@ -64693,12 +65553,32 @@
     "fullName": "星见 雅",
     "faction": {
       "id": "6",
-      "name": "对空洞特别行动部第六课"
+      "name": "对空洞特别行动部第六课",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/2989597373971074975_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14109",
       "slug": "hailstorm-shrine",
       "name": "霰落星殿"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/12871103703595835140_272_14050658.webp",
+          "width": 2136,
+          "height": 840
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/5880988376406808933_272_14050658.webp",
+          "width": 2136,
+          "height": 840
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/10564661941038493069_272_14050658.webp",
+          "width": 2136,
+          "height": 840
+        }
+      ]
     },
     "profile": {
       "gender": "女",
@@ -64707,7 +65587,7 @@
       "details": "星见雅，对空洞事务特别行动部第六课课长。<br/>雅常出外勤，至今不知道部内每月例会的会议室在几楼。<br/>即使在办公室内看到雅，雅也多半没有在处理文书工作，而是专注于保养佩刀。<br/><br/>因出色功勋荣获「虚狩」之名的她，是对空六课强者中的强者。<br/>在市民中亦颇有威望。<br/>某次，迷路的雅误入一场「星见雅后援会」的线下活动现场。<br/>雅被视为变装水平出神入化的粉丝，留下了珍贵的影像。<br/><br/>星见雅个性坦诚务实，并非耽溺修行、不通世务的武痴。<br/>了解她的人都会明白，她一直在追寻心中的正义——哪怕这正义终将掀起变革。",
       "details2": "星见雅是新艾利都知名武家的继承人。<br/>据知情人士透露，雅的母亲早逝。而雅与父亲的关系，似乎十分微妙。<br/>备注：雅的父亲并未担任新艾利都内任何公共职务。",
       "aptitude": "相关信息显示：<br/>执行官-星见雅，以太适性为保密，允许在都内已知空洞（包含伴生空洞）进行调查开采等基础工作。",
-      "titles": ["[object Object]"]
+      "titles": ["虚狩·心念无我"]
     },
     "skins": [
       {
@@ -66078,12 +66958,32 @@
     "fullName": "本·比格",
     "faction": {
       "id": "3",
-      "name": "白祇重工"
+      "name": "白祇重工",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/16906337941127751959_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "13112",
       "slug": "big-cylinder",
       "name": "比格气缸"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/1432753163111255627_272_14050658.webp",
+          "width": 2016,
+          "height": 834
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/5290715913843334198_272_14050658.webp",
+          "width": 2015,
+          "height": 840
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/15156858186692548039_272_14050658.webp",
+          "width": 2061,
+          "height": 840
+        }
+      ]
     },
     "profile": {
       "gender": "男",
@@ -67370,12 +68270,32 @@
     "fullName": "凯撒·金",
     "faction": {
       "id": "4",
-      "name": "卡吕冬之子"
+      "name": "卡吕冬之子",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/521623527699993423_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14107",
       "slug": "tusks-of-fury",
       "name": "奔袭獠牙"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/8355318805256140048_272_14050658.webp",
+          "width": 2513,
+          "height": 840
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/16855603419140459078_272_14050658.webp",
+          "width": 2513,
+          "height": 840
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/1884019423301622244_272_14050658.webp",
+          "width": 2513,
+          "height": 840
+        }
+      ]
     },
     "profile": {
       "gender": "女",
@@ -68990,12 +69910,32 @@
     "fullName": "露西亚娜·德·蒙特夫",
     "faction": {
       "id": "4",
-      "name": "卡吕冬之子"
+      "name": "卡吕冬之子",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/521623527699993423_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "13115",
       "slug": "kaboom-the-cannon",
       "name": "好斗的阿炮"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/8065580800478476726_272_14050658.webp",
+          "width": 1451,
+          "height": 833
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/8709964847045166920_272_14050658.webp",
+          "width": 1453,
+          "height": 834
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/8170411356618704515_272_14050658.webp",
+          "width": 1386,
+          "height": 834
+        }
+      ]
     },
     "profile": {
       "gender": "女",
@@ -70473,12 +71413,32 @@
     "fullName": "猫宫 又奈",
     "faction": {
       "id": "1",
-      "name": "狡兔屋"
+      "name": "狡兔屋",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/1493709431879618853_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14102",
       "slug": "steel-cushion",
       "name": "钢铁肉垫"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/14325468030141254447_272_14050658.webp",
+          "width": 2016,
+          "height": 846
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/4949637224343104048_272_14050658.webp",
+          "width": 2016,
+          "height": 846
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/13595775705567649011_272_14050658.webp",
+          "width": 2010,
+          "height": 840
+        }
+      ]
     },
     "profile": {
       "gender": "女",
@@ -71704,12 +72664,32 @@
     "fullName": "妮可·德玛拉",
     "faction": {
       "id": "1",
-      "name": "狡兔屋"
+      "name": "狡兔屋",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/1493709431879618853_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "13103",
       "slug": "the-vault",
       "name": "聚宝箱"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/5368780256679766926_272_14050658.webp",
+          "width": 1326,
+          "height": 840
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/17057239456181955679_272_14050658.webp",
+          "width": 1326,
+          "height": 840
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/13902489546801150391_272_14050658.webp",
+          "width": 1329,
+          "height": 847
+        }
+      ]
     },
     "profile": {
       "gender": "女",
@@ -73236,12 +74216,32 @@
     "fullName": "珂蕾妲·贝洛伯格",
     "faction": {
       "id": "3",
-      "name": "白祇重工"
+      "name": "白祇重工",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/16906337941127751959_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "14110",
       "slug": "hellfire-gears",
       "name": "燃狱齿轮"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/688980348220857052_272_14050658.webp",
+          "width": 1726,
+          "height": 834
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/15420500910149710823_272_14050658.webp",
+          "width": 1729,
+          "height": 837
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/14754663321083507984_272_14050658.webp",
+          "width": 1726,
+          "height": 837
+        }
+      ]
     },
     "profile": {
       "gender": "女",
@@ -74726,12 +75726,32 @@
     "fullName": "安比·德玛拉",
     "faction": {
       "id": "1",
-      "name": "狡兔屋"
+      "name": "狡兔屋",
+      "icon": "https://cdn.gachabase.net/prod/zzz/assets/1493709431879618853_272_14050658.webp"
     },
     "exclusiveWeapon": {
       "id": "13101",
       "slug": "demara-battery-mark-ii",
       "name": "德玛拉电池Ⅱ型"
+    },
+    "assets": {
+      "mindscapeImages": [
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/9404571360497037135_272_14050658.webp",
+          "width": 1786,
+          "height": 834
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/1841974395150887001_272_14050658.webp",
+          "width": 1786,
+          "height": 834
+        },
+        {
+          "url": "https://cdn.gachabase.net/prod/zzz/assets/5109880682762948653_272_14050658.webp",
+          "width": 1765,
+          "height": 843
+        }
+      ]
     },
     "profile": {
       "gender": "女",

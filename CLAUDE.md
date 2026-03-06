@@ -45,6 +45,7 @@ src/mastra/
 
 1. 在子包下跑测试：`pnpm run test`
 2. 在项目根目录跑 lint 和格式化：`pnpm run lint --fix && pnpm run prettier`
+3. 按「维护 CLAUDE.md」规则更新对应文档（本文件 + docs/ 下相关文档）
 
 ## 维护 CLAUDE.md
 
