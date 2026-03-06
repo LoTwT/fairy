@@ -49,11 +49,11 @@
     "release": "pnpm run build && pnpm publish"
   },
   "devDependencies": {
-    "@types/node": "^25.3.3",
+    "@types/node": "^25.3.5",
     "cheerio": "^1.2.0",
     "exceljs": "^4.4.0",
     "playwright": "^1.58.2",
-    "tsdown": "^0.20.3",
+    "tsdown": "^0.21.0",
     "tsx": "^4.21.0",
     "vitest": "^4.0.18"
   }
