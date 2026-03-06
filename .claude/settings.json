@@ -1,0 +1,14 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd /Users/caoyujie/codes/zzz-data && git status --short | grep -qE '\\.(ts|tsx|js|jsx|json|md)$' && pnpm run lint --fix && pnpm run prettier || true"
+          }
+        ]
+      }
+    ]
+  }
+}

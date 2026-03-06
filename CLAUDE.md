@@ -23,8 +23,8 @@ pnpm run start      # 启动生产服务器
 
 # 根目录命令
 pnpm run test       # 运行所有子包测试
-pnpm run lint --fix # eslint 检查并自动修复
-pnpm run prettier   # prettier 格式化
+pnpm run lint --fix # eslint 检查并自动修复（hook 自动执行，通常无需手动运行）
+pnpm run prettier   # prettier 格式化（hook 自动执行，通常无需手动运行）
 ```
 
 ## Mastra 开发须知
@@ -48,7 +48,8 @@ src/mastra/
 
 1. **立即对照「维护 CLAUDE.md」检查本次改动是否触发文档更新条件，若触发则先更新文档**
 2. 在子包下跑测试：`pnpm run test`
-3. **在项目根目录跑 lint 和格式化（必须）**：`pnpm run lint --fix && pnpm run prettier`
+
+> lint 和格式化由 Claude Code hook 在每次响应结束后自动执行（检测到 ts/js/json/md 变更时触发），无需手动运行。
 
 ## 维护 CLAUDE.md
 
