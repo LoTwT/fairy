@@ -33,12 +33,15 @@ packages/zzz-data/
 │   │   ├── gachabase-w-engine-details.json# 音擎详情（exclusiveAgent/assets.splashArt/shortComment/longComment/levels lv0-60/stars star0-5）
 │   │   ├── gachabase-bangboo.json         # 邦布详情（baseStats+growthPerLevel/skills 3种×10级/optimizations 6级含statBoosts+statAdditions）
 │   │   ├── gachabase-drive-discs.json     # 驱动盘套装（setEffects 2件/4件）
-│   │   ├── buhflipexplode-shiyu-defense.json      # 绝区零式守防：各版本各节点 rawHP/aoeHP/altHP（4个版本组）
-│   │   ├── buhflipexplode-deadly-assault.json     # 绝区零式强袭：各版本 Boss HP 及 20k/60k PP 两档汇总
-│   │   └── buhflipexplode-threshold-simulation.json # 绝区零临界模拟：Easy/Hard 两模式各版本节点 Boss+敌人 HP
+│   │   ├── buhflipexplode-shiyu-defense.json      # 原始 sd-versions.json（各版本组的节点结构、enemy refs、buffName 等）
+│   │   ├── buhflipexplode-deadly-assault.json     # 原始 da-versions.json（各版本 Boss refs、buff、daze/anom 倍率等）
+│   │   ├── buhflipexplode-threshold-simulation.json # 原始 ts-versions.json（Easy/Hard 各版本节点结构）
+│   │   ├── buhflipexplode-enemies.json            # 敌人数据库（name/baseHP/baseDEF/baseDaze/stunMult/stunTime/baseAnom/elementMult/tags/mods/desc 等）
+│   │   └── buhflipexplode-buffs.json              # Buff 名称→描述文本映射（DA/TS 使用）
 │   └── zh-CN/               # 中文数据（仅 gachabase 系列，buhflipexplode 仅英文）
 ├── src/agent.ts             # Agent 基础属性计算公式（calcAgentStat）
 ├── src/bangboo.ts           # Bangboo 基础属性计算公式（calcBangbooStat）
+├── src/buhflipexplode.ts    # buhflipexplode 数据工具（节点倍率表常量、原始 JSON 类型、纯计算函数）
 ├── src/w-engine.ts          # 音擎属性计算公式（calcWEngineBaseATK / calcWEngineSecondaryStat）
 ├── src/calculator/          # 伤害计算模块（纯函数，可导出）
 │   ├── types.ts             # 所有参数/返回类型

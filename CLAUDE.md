@@ -43,10 +43,10 @@ src/mastra/
 
 ## 工作流
 
-修改或生成代码后：
+修改或生成代码后，**每次**必须按顺序执行以下步骤，不得遗漏：
 
 1. 在子包下跑测试：`pnpm run test`
-2. 在项目根目录跑 lint 和格式化：`pnpm run lint --fix && pnpm run prettier`
+2. **在项目根目录跑 lint 和格式化（必须）**：`pnpm run lint --fix && pnpm run prettier`
 3. 按「维护 CLAUDE.md」规则更新对应文档（本文件 + docs/ 下相关文档）
 
 ## 维护 CLAUDE.md

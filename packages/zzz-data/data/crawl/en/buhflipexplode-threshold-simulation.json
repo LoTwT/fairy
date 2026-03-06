@@ -1,390 +1,1544 @@
 [
   {
     "name": "Easy Mode",
-    "versions": [
-      {
-        "id": "Easy Mode",
-        "name": "Easy Mode",
-        "time": "14/10/2025 - PRESENT",
-        "bossDazeMult": 100,
-        "enemyDazeMult": 100,
-        "bossAnomMult": 110,
-        "enemyAnomMult": 100,
-        "nodes": [
-          {
-            "node": 1,
-            "level": 55,
-            "buffNames": [
-              "Spirit Break",
-              "Worn Out",
-              "Chasing Blade",
-              "Raging Waves"
-            ],
-            "boss": {
-              "id": "15300",
-              "name": "Notorious: Dead End Butcher",
-              "type": 1,
-              "mult": 240,
-              "raw20k": 19086033,
-              "raw60k": 67901735,
-              "alt20k": 19086033,
-              "alt60k": 67901735
+    "versions": {
+      "Easy Mode": {
+        "versionName": "Easy Mode",
+        "versionTime": "14/10/2025 - PRESENT",
+        "versionBossDazeMult": 100,
+        "versionEnemyDazeMult": 100,
+        "versionBossAnomMult": 110,
+        "versionEnemyAnomMult": 100,
+        "versionEnemies": {
+          "nodes": [
+            {
+              "buffNames": [
+                "Spirit Break",
+                "Worn Out",
+                "Chasing Blade",
+                "Raging Waves"
+              ],
+              "sides": [
+                {
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "15300",
+                          "type": 1,
+                          "mult": 240,
+                          "count": 1
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "sideElementMult": [1, 1.2, 0.8, 1, 1],
+                  "sideHPMult": 220,
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "10026",
+                          "type": 1,
+                          "count": 2
+                        },
+                        {
+                          "id": "10029",
+                          "type": 1,
+                          "count": 3
+                        }
+                      ]
+                    },
+                    {
+                      "enemies": [
+                        {
+                          "id": "10208",
+                          "type": 0,
+                          "count": 1
+                        }
+                      ]
+                    }
+                  ]
+                },
+                null,
+                null,
+                null
+              ]
             },
-            "enemy": {
-              "rawHP": 6852767,
-              "aoeHP": 5290031,
-              "altHP": 5290031
-            }
-          },
-          {
-            "node": 2,
-            "level": 58,
-            "buffNames": [
-              "Lingering Illness",
-              "Final Assault",
-              "Aberration",
-              "Raging Waves"
-            ],
-            "boss": {
-              "id": "14301",
-              "name": "Notorious: Pompey",
-              "type": 1,
-              "mult": 205,
-              "raw20k": 17279621,
-              "raw60k": 61475123,
-              "alt20k": 17279621,
-              "alt60k": 61475123
+            {
+              "buffNames": [
+                "Lingering Illness",
+                "Final Assault",
+                "Aberration",
+                "Raging Waves"
+              ],
+              "sides": [
+                {
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "14301",
+                          "type": 1,
+                          "mult": 205,
+                          "count": 1
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "sideElementMult": [1.2, 1.2, 0.8, 1, 1],
+                  "sideHPMult": 220,
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "10126",
+                          "type": 1,
+                          "count": 1
+                        },
+                        {
+                          "id": "10016",
+                          "type": 1,
+                          "count": 2
+                        }
+                      ]
+                    },
+                    {
+                      "enemies": [
+                        {
+                          "id": "15200",
+                          "type": 0,
+                          "count": 1
+                        }
+                      ]
+                    }
+                  ]
+                },
+                null,
+                null,
+                {
+                  "sideElementMult": [0.8, 1, 1, 0.8, 1],
+                  "sideHPMult": 180,
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "12002",
+                          "type": 1,
+                          "count": 3
+                        },
+                        {
+                          "id": "10035",
+                          "type": 1,
+                          "count": 2
+                        }
+                      ]
+                    },
+                    {
+                      "enemies": [
+                        {
+                          "id": "10212",
+                          "type": 0,
+                          "count": 1
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
             },
-            "enemy": {
-              "rawHP": 15113139,
-              "aoeHP": 12674101,
-              "altHP": 12674101
-            }
-          },
-          {
-            "node": 3,
-            "level": 60,
-            "buffNames": [
-              "Worn Out",
-              "Combined Attack",
-              "Aberration",
-              "Raging Waves"
-            ],
-            "boss": {
-              "id": "14303",
-              "name": "Typhon Destroyer",
-              "type": 1,
-              "mult": 195,
-              "raw20k": 21948254,
-              "raw60k": 78084561,
-              "alt20k": 21948254,
-              "alt60k": 78084561
+            {
+              "buffNames": [
+                "Worn Out",
+                "Combined Attack",
+                "Aberration",
+                "Raging Waves"
+              ],
+              "sides": [
+                {
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "14303",
+                          "type": 1,
+                          "mult": 195,
+                          "count": 1
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "sideElementMult": [0.8, 1, 1, 0.8, 1],
+                  "sideHPMult": 220,
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "10127",
+                          "type": 1,
+                          "count": 1
+                        },
+                        {
+                          "id": "10011",
+                          "type": 1,
+                          "count": 4
+                        }
+                      ]
+                    },
+                    {
+                      "enemies": [
+                        {
+                          "id": "10129",
+                          "type": 0,
+                          "count": 1
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "sideElementMult": [1, 0.8, 1, 1, 1.2],
+                  "sideHPMult": 220,
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "10014",
+                          "type": 1,
+                          "count": 2
+                        },
+                        {
+                          "id": "10040",
+                          "type": 1,
+                          "count": 3
+                        }
+                      ]
+                    },
+                    {
+                      "enemies": [
+                        {
+                          "id": "10206",
+                          "type": 0,
+                          "count": 1
+                        }
+                      ]
+                    }
+                  ]
+                },
+                null,
+                {
+                  "sideElementMult": [1.2, 0.8, 1, 1, 0.8],
+                  "sideHPMult": 180,
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "11202",
+                          "type": 0,
+                          "count": 1
+                        },
+                        {
+                          "id": "10216",
+                          "type": 0,
+                          "count": 1
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
             },
-            "enemy": {
-              "rawHP": 33503335,
-              "aoeHP": 23453750,
-              "altHP": 22159434
+            {
+              "buffNames": [
+                "Clarity",
+                "Graceful Mastery",
+                "Interrupt",
+                "Raging Waves"
+              ],
+              "sides": [
+                {
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "20300",
+                          "type": 0,
+                          "mult": 115,
+                          "count": 1
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "sideElementMult": [1, 0.8, 1.2, 1.2, 0.8],
+                  "sideHPMult": 220,
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "10108",
+                          "type": 1,
+                          "count": 1
+                        },
+                        {
+                          "id": "10018",
+                          "type": 1,
+                          "count": 3
+                        }
+                      ]
+                    },
+                    {
+                      "enemies": [
+                        {
+                          "id": "12201",
+                          "type": 0,
+                          "count": 1
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "sideElementMult": [1, 1, 0.8, 1, 1.2],
+                  "sideHPMult": 220,
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "10010",
+                          "type": 1,
+                          "count": 4
+                        }
+                      ]
+                    },
+                    {
+                      "enemies": [
+                        {
+                          "id": "10201",
+                          "type": 0,
+                          "count": 1
+                        }
+                      ]
+                    }
+                  ]
+                },
+                null,
+                {
+                  "sideElementMult": [0.8, 1, 1, 1, 1.2],
+                  "sideHPMult": 180,
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "23202",
+                          "type": 0,
+                          "count": 1
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
             }
-          },
-          {
-            "node": 4,
-            "level": 65,
-            "buffNames": [
-              "Clarity",
-              "Graceful Mastery",
-              "Interrupt",
-              "Raging Waves"
-            ],
-            "boss": {
-              "id": "20300",
-              "name": "Miasma Priest",
-              "type": 0,
-              "mult": 115,
-              "raw20k": 25111160,
-              "raw60k": 89337127,
-              "alt20k": 24483382,
-              "alt60k": 87103699
-            },
-            "enemy": {
-              "rawHP": 32671903,
-              "aoeHP": 29207704,
-              "altHP": 28345639
-            }
-          }
-        ]
+          ]
+        }
       }
-    ]
+    }
   },
   {
     "name": "Hard Mode",
-    "versions": [
-      {
-        "id": "2.3.1",
-        "name": "Branching Echoes",
-        "time": "14/10/2025 - 05/02/2026",
-        "bossDazeMult": 100,
-        "enemyDazeMult": 100,
-        "bossAnomMult": 110,
-        "enemyAnomMult": 100,
-        "nodes": [
-          {
-            "node": 1,
-            "level": 60,
-            "buffNames": [
-              "Graceful Mastery",
-              "Interrupt",
-              "Meditation",
-              "Raging Waves"
-            ],
-            "boss": {
-              "id": "14300",
-              "name": "Notorious: Marionette",
-              "type": 0,
-              "mult": 220,
-              "raw20k": 28070387,
-              "raw60k": 99865067,
-              "alt20k": 28070387,
-              "alt60k": 99865067
+    "versions": {
+      "2.3.1": {
+        "versionName": "Branching Echoes",
+        "versionTime": "14/10/2025 - 05/02/2026",
+        "versionBossDazeMult": 100,
+        "versionEnemyDazeMult": 100,
+        "versionBossAnomMult": 110,
+        "versionEnemyAnomMult": 100,
+        "versionEnemies": {
+          "nodes": [
+            {
+              "buffNames": [
+                "Graceful Mastery",
+                "Interrupt",
+                "Meditation",
+                "Raging Waves"
+              ],
+              "sides": [
+                {
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "14300",
+                          "type": 0,
+                          "mult": 220,
+                          "count": 1
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "sideElementMult": [0.8, 1, 1, 0.8, 1],
+                  "sideHPMult": 300,
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "10110",
+                          "type": 1,
+                          "count": 1
+                        }
+                      ]
+                    },
+                    {
+                      "enemies": [
+                        {
+                          "id": "13201",
+                          "type": 0,
+                          "count": 1
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "sideElementMult": [1, 0.8, 1, 1.2, 1],
+                  "sideHPMult": 300,
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "10103",
+                          "type": 1,
+                          "count": 1
+                        }
+                      ]
+                    },
+                    {
+                      "enemies": [
+                        {
+                          "id": "22200",
+                          "type": 0,
+                          "count": 1
+                        }
+                      ]
+                    }
+                  ]
+                },
+                null,
+                {
+                  "sideElementMult": [0.8, 1, 1, 1.2, 0.8],
+                  "sideHPMult": 220,
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "10105",
+                          "type": 1,
+                          "count": 1
+                        },
+                        {
+                          "id": "10028",
+                          "type": 1,
+                          "count": 2
+                        }
+                      ]
+                    },
+                    {
+                      "enemies": [
+                        {
+                          "id": "20202",
+                          "type": 0,
+                          "count": 1
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
             },
-            "enemy": {
-              "rawHP": 44776503,
-              "aoeHP": 43783693,
-              "altHP": 40176478
-            }
-          },
-          {
-            "node": 2,
-            "level": 63,
-            "buffNames": [
-              "Collapse",
-              "Frosty Thunder",
-              "Spirit Break",
-              "Raging Waves"
-            ],
-            "boss": {
-              "id": "14302",
-              "name": "Sacrifice: Bringer",
-              "type": 1,
-              "mult": 350,
-              "raw20k": 36334986,
-              "raw60k": 129267753,
-              "alt20k": 36334986,
-              "alt60k": 129267753
+            {
+              "buffNames": [
+                "Collapse",
+                "Frosty Thunder",
+                "Spirit Break",
+                "Raging Waves"
+              ],
+              "sides": [
+                {
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "14302",
+                          "type": 1,
+                          "mult": 350,
+                          "count": 1
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "sideElementMult": [1, 1.2, 0.8, 1, 1],
+                  "sideHPMult": 300,
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "10116",
+                          "type": 1,
+                          "count": 1
+                        }
+                      ]
+                    },
+                    {
+                      "enemies": [
+                        {
+                          "id": "16203",
+                          "type": 0,
+                          "count": 1
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "sideElementMult": [1.2, 0.8, 1, 1, 0.8],
+                  "sideHPMult": 300,
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "10023",
+                          "type": 1,
+                          "count": 4
+                        },
+                        {
+                          "id": "10005",
+                          "type": 1,
+                          "count": 2
+                        }
+                      ]
+                    },
+                    {
+                      "enemies": [
+                        {
+                          "id": "11202",
+                          "type": 0,
+                          "count": 1
+                        },
+                        {
+                          "id": "10216",
+                          "type": 0,
+                          "count": 1
+                        }
+                      ]
+                    }
+                  ]
+                },
+                null,
+                {
+                  "sideElementMult": [1.2, 1, 1, 0.8, 1.2],
+                  "sideHPMult": 220,
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "10122",
+                          "type": 1,
+                          "count": 1
+                        },
+                        {
+                          "id": "10021",
+                          "type": 1,
+                          "count": 2
+                        }
+                      ]
+                    },
+                    {
+                      "enemies": [
+                        {
+                          "id": "10211",
+                          "type": 0,
+                          "count": 1
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
             },
-            "enemy": {
-              "rawHP": 53528547,
-              "aoeHP": 37720976,
-              "altHP": 35978771
-            }
-          },
-          {
-            "node": 3,
-            "level": 65,
-            "buffNames": [
-              "Meditation",
-              "Graceful Mastery",
-              "Chasing Blade",
-              "Raging Waves"
-            ],
-            "boss": {
-              "id": "20300",
-              "name": "Miasma Priest",
-              "type": 0,
-              "mult": 115,
-              "raw20k": 25111160,
-              "raw60k": 89337127,
-              "alt20k": 24483382,
-              "alt60k": 87103699
+            {
+              "buffNames": [
+                "Meditation",
+                "Graceful Mastery",
+                "Chasing Blade",
+                "Raging Waves"
+              ],
+              "sides": [
+                {
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "20300",
+                          "type": 0,
+                          "mult": 115,
+                          "count": 1
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "sideElementMult": [1.2, 0.8, 1, 1.2, 0.8],
+                  "sideHPMult": 300,
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "12101",
+                          "type": 1,
+                          "count": 1
+                        }
+                      ]
+                    },
+                    {
+                      "enemies": [
+                        {
+                          "id": "10217",
+                          "type": 0,
+                          "count": 1
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "sideElementMult": [1.2, 1, 0.8, 1, 1],
+                  "sideHPMult": 300,
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "21000",
+                          "type": 1,
+                          "count": 3
+                        }
+                      ]
+                    },
+                    {
+                      "enemies": [
+                        {
+                          "id": "15201",
+                          "type": 0,
+                          "count": 1
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "sideElementMult": [0.8, 1, 1, 0.8, 1],
+                  "sideHPMult": 300,
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "10213",
+                          "type": 0,
+                          "count": 1
+                        },
+                        {
+                          "id": "10102",
+                          "type": 1,
+                          "count": 1
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "sideElementMult": [0.8, 1, 1, 1.2, 0.8],
+                  "sideHPMult": 220,
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "10106",
+                          "type": 1,
+                          "count": 1
+                        }
+                      ]
+                    },
+                    {
+                      "enemies": [
+                        {
+                          "id": "20203",
+                          "type": 0,
+                          "count": 1
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
             },
-            "enemy": {
-              "rawHP": 58606897,
-              "aoeHP": 52451995,
-              "altHP": 50578888
-            }
-          },
-          {
-            "node": 4,
-            "level": 70,
-            "buffNames": [
-              "Gathering Point",
-              "Chasing Blade",
-              "Aberration",
-              "Raging Waves"
-            ],
-            "boss": {
-              "id": "23300",
-              "name": "Wandering Hunter",
-              "type": 0,
-              "mult": 140,
-              "raw20k": 34339001,
-              "raw60k": 122166703,
-              "alt20k": 33137136,
-              "alt60k": 117890869
+            {
+              "buffNames": [
+                "Gathering Point",
+                "Chasing Blade",
+                "Aberration",
+                "Raging Waves"
+              ],
+              "sides": [
+                {
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "23300",
+                          "type": 0,
+                          "mult": 140,
+                          "count": 1
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "sideElementMult": [1, 1, 1.2, 0.8, 1],
+                  "sideHPMult": 300,
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "20000",
+                          "type": 1,
+                          "count": 5
+                        }
+                      ]
+                    },
+                    {
+                      "enemies": [
+                        {
+                          "id": "20204",
+                          "type": 0,
+                          "count": 1
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "sideElementMult": [1, 1, 0.8, 1.2, 0.8],
+                  "sideHPMult": 300,
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "10010",
+                          "type": 1,
+                          "count": 1
+                        },
+                        {
+                          "id": "10029",
+                          "type": 1,
+                          "count": 3
+                        }
+                      ]
+                    },
+                    {
+                      "enemies": [
+                        {
+                          "id": "21200",
+                          "type": 0,
+                          "count": 1
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "sideElementMult": [0.8, 1, 1, 0.8, 1],
+                  "sideHPMult": 240,
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "10014",
+                          "type": 1,
+                          "count": 2
+                        },
+                        {
+                          "id": "10040",
+                          "type": 1,
+                          "count": 2
+                        }
+                      ]
+                    },
+                    {
+                      "enemies": [
+                        {
+                          "id": "16202",
+                          "type": 0,
+                          "count": 2
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "sideElementMult": [1, 0.8, 1, 1.2, 0.8],
+                  "sideHPMult": 220,
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "22000",
+                          "type": 1,
+                          "count": 3
+                        },
+                        {
+                          "id": "22001",
+                          "type": 1,
+                          "count": 3
+                        }
+                      ]
+                    },
+                    {
+                      "enemies": [
+                        {
+                          "id": "22203",
+                          "type": 0,
+                          "count": 1
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
             },
-            "enemy": {
-              "rawHP": 88512617,
-              "aoeHP": 63002898,
-              "altHP": 61113297
-            }
-          },
-          {
-            "node": 5,
-            "level": 70,
-            "buffNames": ["Artful", "Sonata", "Collapse", "Raging Waves"],
-            "boss": {
-              "id": "21300",
-              "name": "Miasmic Fiend: Unfathomable",
-              "type": 0,
-              "mult": 220,
-              "raw20k": 40614019,
-              "raw60k": 144491125,
-              "alt20k": 39598669,
-              "alt60k": 140878847
+            {
+              "buffNames": ["Artful", "Sonata", "Collapse", "Raging Waves"],
+              "sides": [
+                {
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "21300",
+                          "type": 0,
+                          "mult": 220,
+                          "count": 1
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "sideElementMult": [1, 1, 0.8, 1.2, 0.8],
+                  "sideHPMult": 300,
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "10010",
+                          "type": 1,
+                          "count": 1
+                        },
+                        {
+                          "id": "10029",
+                          "type": 1,
+                          "count": 3
+                        }
+                      ]
+                    },
+                    {
+                      "enemies": [
+                        {
+                          "id": "21200",
+                          "type": 0,
+                          "count": 1
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "sideElementMult": [1.2, 0.8, 1, 0.8, 1],
+                  "sideHPMult": 300,
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "20000",
+                          "type": 1,
+                          "count": 3
+                        }
+                      ]
+                    },
+                    {
+                      "enemies": [
+                        {
+                          "id": "20201",
+                          "type": 0,
+                          "count": 1
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "sideElementMult": [0.8, 1, 1, 0.8, 1],
+                  "sideHPMult": 240,
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "10014",
+                          "type": 1,
+                          "count": 2
+                        },
+                        {
+                          "id": "10040",
+                          "type": 1,
+                          "count": 2
+                        }
+                      ]
+                    },
+                    {
+                      "enemies": [
+                        {
+                          "id": "16202",
+                          "type": 0,
+                          "count": 2
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "sideElementMult": [1.2, 1, 0.8, 1, 1],
+                  "sideHPMult": 220,
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "21000",
+                          "type": 1,
+                          "count": 3
+                        }
+                      ]
+                    },
+                    {
+                      "enemies": [
+                        {
+                          "id": "15201",
+                          "type": 0,
+                          "count": 1
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
             },
-            "enemy": {
-              "rawHP": 82019214,
-              "aoeHP": 61582145,
-              "altHP": 61476662
+            {
+              "buffNames": [
+                "Fiery Assault",
+                "Spirit Break",
+                "Worn Out",
+                "Raging Waves"
+              ],
+              "sides": [
+                {
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "22300",
+                          "type": 0,
+                          "mult": 170,
+                          "count": 1
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "sideElementMult": [1, 1, 1, 0.8, 1.2],
+                  "sideHPMult": 300,
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "23102",
+                          "type": 0,
+                          "count": 1
+                        },
+                        {
+                          "id": "23101",
+                          "type": 0,
+                          "count": 1
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "sideElementMult": [1, 1, 1.2, 0.8, 1],
+                  "sideHPMult": 240,
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "20000",
+                          "type": 1,
+                          "count": 5
+                        }
+                      ]
+                    },
+                    {
+                      "enemies": [
+                        {
+                          "id": "20204",
+                          "type": 0,
+                          "count": 1
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "sideElementMult": [1.2, 0.8, 1, 0.8, 1],
+                  "sideHPMult": 300,
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "20000",
+                          "type": 1,
+                          "count": 3
+                        }
+                      ]
+                    },
+                    {
+                      "enemies": [
+                        {
+                          "id": "20201",
+                          "type": 0,
+                          "count": 1
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "sideElementMult": [0.8, 1, 1, 1.2, 0.8],
+                  "sideHPMult": 220,
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "10106",
+                          "type": 1,
+                          "count": 1
+                        }
+                      ]
+                    },
+                    {
+                      "enemies": [
+                        {
+                          "id": "20203",
+                          "type": 0,
+                          "count": 1
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
             }
-          },
-          {
-            "node": 6,
-            "level": 70,
-            "buffNames": [
-              "Fiery Assault",
-              "Spirit Break",
-              "Worn Out",
-              "Raging Waves"
-            ],
-            "boss": {
-              "id": "22300",
-              "name": "The Defiler",
-              "type": 0,
-              "mult": 170,
-              "raw20k": 33797362,
-              "raw60k": 120239733,
-              "alt20k": 32952428,
-              "alt60k": 117233740
-            },
-            "enemy": {
-              "rawHP": 77156946,
-              "aoeHP": 64157055,
-              "altHP": 56705313
-            }
-          }
-        ]
+          ]
+        }
       },
-      {
-        "id": "2.6.1",
-        "name": "Myriad Endgame",
-        "time": "05/02/2026 - xx/xx/20xx",
-        "bossDazeMult": 100,
-        "enemyDazeMult": 100,
-        "bossAnomMult": 110,
-        "enemyAnomMult": 100,
-        "nodes": [
-          {
-            "node": 1,
-            "level": 60,
-            "buffNames": [
-              "Aberration",
-              "Pinnacle",
-              "Ride the Current",
-              "Tempering Body"
-            ],
-            "boss": {
-              "id": "23300",
-              "name": "Wandering Hunter",
-              "type": 0,
-              "mult": 185,
-              "raw20k": 35483189,
-              "raw60k": 126237343,
-              "alt20k": 34241277,
-              "alt60k": 121819036
+      "2.6.1": {
+        "versionName": "Myriad Endgame",
+        "versionTime": "05/02/2026 - xx/xx/20xx",
+        "versionBossDazeMult": 100,
+        "versionEnemyDazeMult": 100,
+        "versionBossAnomMult": 110,
+        "versionEnemyAnomMult": 100,
+        "versionEnemies": {
+          "nodes": [
+            {
+              "buffNames": [
+                "Aberration",
+                "Pinnacle",
+                "Ride the Current",
+                "Tempering Body"
+              ],
+              "sides": [
+                {
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "23300",
+                          "type": 0,
+                          "mult": 185,
+                          "count": 1
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "sideElementMult": [1, 0.8, 1.2, 1.2, 0.8],
+                  "sideHPMult": 350,
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "20102",
+                          "type": 1,
+                          "count": 1
+                        }
+                      ]
+                    },
+                    {
+                      "enemies": [
+                        {
+                          "id": "10217",
+                          "type": 0,
+                          "count": 1
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "sideElementMult": [1.2, 0.8, 1, 1, 0.8],
+                  "sideHPMult": 350,
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "21000",
+                          "type": 1,
+                          "count": 5
+                        }
+                      ]
+                    },
+                    {
+                      "enemies": [
+                        {
+                          "id": "24200",
+                          "type": 0,
+                          "count": 1
+                        }
+                      ]
+                    }
+                  ]
+                },
+                null,
+                {
+                  "sideElementMult": [0.8, 1, 1, 0.8, 1],
+                  "sideHPMult": 260,
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "10127",
+                          "type": 1,
+                          "count": 1
+                        }
+                      ]
+                    },
+                    {
+                      "enemies": [
+                        {
+                          "id": "16202",
+                          "type": 0,
+                          "count": 2
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
             },
-            "enemy": {
-              "rawHP": 62037809,
-              "aoeHP": 47761461,
-              "altHP": 49403494
-            }
-          },
-          {
-            "node": 2,
-            "level": 65,
-            "buffNames": [
-              "Transformation Charge",
-              "Sonata",
-              "Focus Energy",
-              "Tempering Body"
-            ],
-            "boss": {
-              "id": "24300",
-              "name": "Ye Shiyuan the Thrall",
-              "type": 1,
-              "mult": 190,
-              "raw20k": 40741155,
-              "raw60k": 144943432,
-              "alt20k": 39722627,
-              "alt60k": 141319847
+            {
+              "buffNames": [
+                "Transformation Charge",
+                "Sonata",
+                "Focus Energy",
+                "Tempering Body"
+              ],
+              "sides": [
+                {
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "24300",
+                          "type": 1,
+                          "mult": 190,
+                          "count": 1
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "sideElementMult": [1.2, 0.8, 1, 0.8, 1],
+                  "sideHPMult": 350,
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "20000",
+                          "type": 1,
+                          "count": 4
+                        }
+                      ]
+                    },
+                    {
+                      "enemies": [
+                        {
+                          "id": "20201",
+                          "type": 0,
+                          "count": 1
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "sideElementMult": [1, 1, 0.8, 1.2, 0.8],
+                  "sideHPMult": 350,
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "10015",
+                          "type": 1,
+                          "count": 2
+                        },
+                        {
+                          "id": "10032",
+                          "type": 1,
+                          "count": 3
+                        }
+                      ]
+                    },
+                    {
+                      "enemies": [
+                        {
+                          "id": "21200",
+                          "type": 0,
+                          "count": 1
+                        }
+                      ]
+                    }
+                  ]
+                },
+                null,
+                {
+                  "sideElementMult": [0.8, 1, 1, 1.2, 0.8],
+                  "sideHPMult": 260,
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "10106",
+                          "type": 1,
+                          "count": 1
+                        }
+                      ]
+                    },
+                    {
+                      "enemies": [
+                        {
+                          "id": "20202",
+                          "type": 0,
+                          "count": 1
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
             },
-            "enemy": {
-              "rawHP": 62894700,
-              "aoeHP": 55589089,
-              "altHP": 48034991
-            }
-          },
-          {
-            "node": 3,
-            "level": 70,
-            "buffNames": [
-              "Aberration",
-              "Meditation",
-              "Blazing Sweep",
-              "Tempering Body"
-            ],
-            "boss": {
-              "id": "26300",
-              "name": "Discordant Solo: Vesper",
-              "type": 0,
-              "mult": 150,
-              "raw20k": 48404859,
-              "raw60k": 172208334,
-              "alt20k": 46952714,
-              "alt60k": 167042084
+            {
+              "buffNames": [
+                "Aberration",
+                "Meditation",
+                "Blazing Sweep",
+                "Tempering Body"
+              ],
+              "sides": [
+                {
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "26300",
+                          "type": 0,
+                          "mult": 150,
+                          "count": 1
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "sideElementMult": [0.8, 0.8, 1.2, 1, 1],
+                  "sideHPMult": 280,
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "10133",
+                          "type": 1,
+                          "count": 1
+                        }
+                      ]
+                    },
+                    {
+                      "enemies": [
+                        {
+                          "id": "23200",
+                          "type": 0,
+                          "count": 1
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "sideElementMult": [1.2, 1.2, 0.8, 1, 0.8],
+                  "sideHPMult": 350,
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "10116",
+                          "type": 1,
+                          "count": 1
+                        }
+                      ]
+                    },
+                    {
+                      "enemies": [
+                        {
+                          "id": "25100",
+                          "type": 1,
+                          "count": 1
+                        },
+                        {
+                          "id": "25102",
+                          "type": 1,
+                          "count": 1
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "sideElementMult": [1, 1.2, 1, 0.8, 0.8],
+                  "sideHPMult": 350,
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "21000",
+                          "type": 1,
+                          "count": 2
+                        },
+                        {
+                          "id": "20001",
+                          "type": 1,
+                          "count": 3
+                        }
+                      ]
+                    },
+                    {
+                      "enemies": [
+                        {
+                          "id": "25201",
+                          "type": 0,
+                          "count": 1
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "sideElementMult": [1, 0.8, 1, 1.2, 0.8],
+                  "sideHPMult": 260,
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "22000",
+                          "type": 1,
+                          "count": 2
+                        },
+                        {
+                          "id": "22001",
+                          "type": 1,
+                          "count": 3
+                        }
+                      ]
+                    },
+                    {
+                      "enemies": [
+                        {
+                          "id": "22203",
+                          "type": 0,
+                          "count": 1
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
             },
-            "enemy": {
-              "rawHP": 102121449,
-              "aoeHP": 83671997,
-              "altHP": 80912916
+            {
+              "buffNames": [
+                "Artful",
+                "Pinnacle",
+                "Blazing Sweep",
+                "Tempering Body"
+              ],
+              "sides": [
+                {
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "25300",
+                          "type": 0,
+                          "mult": 230,
+                          "count": 1
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "sideElementMult": [1.2, 1, 0.8, 1.2, 0.8],
+                  "sideHPMult": 300,
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "12105",
+                          "type": 1,
+                          "count": 1
+                        }
+                      ]
+                    },
+                    {
+                      "enemies": [
+                        {
+                          "id": "25200",
+                          "type": 0,
+                          "count": 1
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "sideElementMult": [1, 0.8, 1.2, 0.8, 0.8],
+                  "sideHPMult": 300,
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "24101",
+                          "type": 1,
+                          "count": 1
+                        }
+                      ]
+                    },
+                    {
+                      "enemies": [
+                        {
+                          "id": "20204",
+                          "type": 0,
+                          "count": 1
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "sideElementMult": [1, 0.8, 0.8, 1.2, 1],
+                  "sideHPMult": 300,
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "10119",
+                          "type": 1,
+                          "count": 1
+                        }
+                      ]
+                    },
+                    {
+                      "enemies": [
+                        {
+                          "id": "22200",
+                          "type": 0,
+                          "count": 1
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "sideElementMult": [0.8, 1, 1, 1, 1.2],
+                  "sideHPMult": 260,
+                  "waves": [
+                    {
+                      "enemies": [
+                        {
+                          "id": "10000",
+                          "type": 1,
+                          "count": 5
+                        }
+                      ]
+                    },
+                    {
+                      "enemies": [
+                        {
+                          "id": "23203",
+                          "type": 0,
+                          "count": 1
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
             }
-          },
-          {
-            "node": 4,
-            "level": 70,
-            "buffNames": [
-              "Artful",
-              "Pinnacle",
-              "Blazing Sweep",
-              "Tempering Body"
-            ],
-            "boss": {
-              "id": "25300",
-              "name": "Primordial Nightmare: \"The Creator\"",
-              "type": 0,
-              "mult": 230,
-              "raw20k": 68353395,
-              "raw60k": 243178568,
-              "alt20k": 64252192,
-              "alt60k": 228587854
-            },
-            "enemy": {
-              "rawHP": 95349869,
-              "aoeHP": 91698753,
-              "altHP": 84029450
-            }
-          }
-        ]
+          ]
+        }
       }
-    ]
+    }
   }
 ]

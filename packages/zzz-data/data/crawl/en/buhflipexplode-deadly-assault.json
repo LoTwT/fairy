@@ -1,1402 +1,842 @@
-[
-  {
-    "id": "1.4.1",
-    "name": "1.4 Phase 1",
-    "time": "20/12/2024 - 10/01/2025",
-    "dazeMult": 100,
-    "anomMult": 100,
+{
+  "1.4.1": {
+    "versionName": "1.4 Phase 1",
+    "versionTime": "20/12/2024 - 10/01/2025",
+    "versionDazeMult": 100,
+    "versionAnomMult": 100,
     "buffNames": ["Spirit Break", "Swift Resolution", "Interrupt"],
-    "hp": {
-      "raw20k": 54194949,
-      "raw60k": 192807540,
-      "alt20k": 54194949,
-      "alt60k": 192807540
-    },
-    "bosses": [
+    "versionEnemies": [
       {
         "id": "14302",
-        "name": "Sacrifice: Bringer",
         "type": 0,
-        "mult": 170,
-        "rawHP": 76362803,
-        "altHP": 76362803
+        "mult": 170
       },
       {
         "id": "12300",
-        "name": "Corrupted Overlord: Pompey",
         "type": 0,
-        "mult": 130,
-        "rawHP": 58395085,
-        "altHP": 58395085
+        "mult": 130
       },
       {
         "id": "14300",
-        "name": "Notorious: Marionette",
         "type": 0,
-        "mult": 100,
-        "rawHP": 58049652,
-        "altHP": 58049652
+        "mult": 100
       }
     ]
   },
-  {
-    "id": "1.4.2",
-    "name": "1.4 Phase 2",
-    "time": "10/01/2025 - 24/01/2025",
-    "dazeMult": 100,
-    "anomMult": 100,
+  "1.4.2": {
+    "versionName": "1.4 Phase 2",
+    "versionTime": "10/01/2025 - 24/01/2025",
+    "versionDazeMult": 100,
+    "versionAnomMult": 100,
     "buffNames": ["Graceful Mastery", "Swift Resolution", "Overthrow"],
-    "hp": {
-      "raw20k": 54797927,
-      "raw60k": 194952735,
-      "alt20k": 54797927,
-      "alt60k": 194952735
-    },
-    "bosses": [
+    "versionEnemies": [
       {
         "id": "14302",
-        "name": "Sacrifice: Bringer",
         "type": 0,
-        "mult": 170,
-        "rawHP": 76362803,
-        "altHP": 76362803
+        "mult": 170
       },
       {
         "id": "14303",
-        "name": "Typhon Destroyer",
         "type": 0,
-        "mult": 115,
-        "rawHP": 58889396,
-        "altHP": 58889396
+        "mult": 115
       },
       {
         "id": "10300",
-        "name": "Dead End Butcher",
         "type": 0,
-        "mult": 160,
-        "rawHP": 59700536,
-        "altHP": 59700536
+        "mult": 160
       }
     ]
   },
-  {
-    "id": "1.5.1",
-    "name": "1.5 Phase 1",
-    "time": "24/01/2025 - 07/02/2025",
-    "dazeMult": 100,
-    "anomMult": 100,
+  "1.5.1": {
+    "versionName": "1.5 Phase 1",
+    "versionTime": "24/01/2025 - 07/02/2025",
+    "versionDazeMult": 100,
+    "versionAnomMult": 100,
     "buffNames": ["Aberration", "Frosty Thunder", "Rapid Aid"],
-    "hp": {
-      "raw20k": 65130791,
-      "raw60k": 231713615,
-      "alt20k": 64365096,
-      "alt60k": 228989529
-    },
-    "bosses": [
+    "versionEnemies": [
       {
         "id": "15300",
-        "name": "Notorious: Dead End Butcher",
         "type": 0,
-        "mult": 192,
-        "rawHP": 85970436,
-        "altHP": 85970436
+        "mult": 192
       },
       {
         "id": "10304",
-        "name": "Unknown Corruption Complex",
         "type": 0,
-        "mult": 156,
-        "rawHP": 75669077,
-        "altHP": 72944991
+        "mult": 156
       },
       {
         "id": "12300",
-        "name": "Corrupted Overlord: Pompey",
         "type": 0,
-        "mult": 156,
-        "rawHP": 70074102,
-        "altHP": 70074102
+        "mult": 156
       }
     ]
   },
-  {
-    "id": "1.5.2",
-    "name": "1.5 Phase 2",
-    "time": "07/02/2025 - 21/02/2025",
-    "dazeMult": 100,
-    "anomMult": 100,
+  "1.5.2": {
+    "versionName": "1.5 Phase 2",
+    "versionTime": "07/02/2025 - 21/02/2025",
+    "versionDazeMult": 100,
+    "versionAnomMult": 100,
     "buffNames": ["Rapid Aid", "Dazing Force", "Interrupt"],
-    "hp": {
-      "raw20k": 61881103,
-      "raw60k": 220152313,
-      "alt20k": 61881103,
-      "alt60k": 220152313
-    },
-    "bosses": [
+    "versionEnemies": [
       {
         "id": "15300",
-        "name": "Notorious: Dead End Butcher",
         "type": 0,
-        "mult": 192,
-        "rawHP": 85970436,
-        "altHP": 85970436
+        "mult": 192
       },
       {
         "id": "14303",
-        "name": "Typhon Destroyer",
         "type": 0,
-        "mult": 126,
-        "rawHP": 64522295,
-        "altHP": 64522295
+        "mult": 126
       },
       {
         "id": "14300",
-        "name": "Notorious: Marionette",
         "type": 0,
-        "mult": 120,
-        "rawHP": 69659582,
-        "altHP": 69659582
+        "mult": 120
       }
     ]
   },
-  {
-    "id": "1.5.3",
-    "name": "1.5 Phase 3",
-    "time": "21/02/2025 - 07/03/2025",
-    "dazeMult": 100,
-    "anomMult": 100,
+  "1.5.3": {
+    "versionName": "1.5 Phase 3",
+    "versionTime": "21/02/2025 - 07/03/2025",
+    "versionDazeMult": 100,
+    "versionAnomMult": 100,
     "buffNames": ["Dazing Force", "Blazing Chill", "Final Assault"],
-    "hp": {
-      "raw20k": 65085739,
-      "raw60k": 231553337,
-      "alt20k": 65085739,
-      "alt60k": 231553337
-    },
-    "bosses": [
+    "versionEnemies": [
       {
         "id": "14301",
-        "name": "Notorious: Pompey",
         "type": 0,
-        "mult": 156,
-        "rawHP": 70074102,
-        "altHP": 70074102
+        "mult": 156
       },
       {
         "id": "14302",
-        "name": "Sacrifice: Bringer",
         "type": 1,
-        "mult": 200,
-        "rawHP": 89838592,
-        "altHP": 89838592
+        "mult": 200
       },
       {
         "id": "10300",
-        "name": "Dead End Butcher",
         "type": 1,
-        "mult": 192,
-        "rawHP": 71640643,
-        "altHP": 71640643
+        "mult": 192
       }
     ]
   },
-  {
-    "id": "1.5.4",
-    "name": "1.5 Phase 4",
-    "time": "07/03/2025 - 21/03/2025",
-    "dazeMult": 100,
-    "anomMult": 100,
+  "1.5.4": {
+    "versionName": "1.5 Phase 4",
+    "versionTime": "07/03/2025 - 21/03/2025",
+    "versionDazeMult": 100,
+    "versionAnomMult": 100,
     "buffNames": ["Electrospark", "Anomaly Surge", "Rapid Aid"],
-    "hp": {
-      "raw20k": 68238233,
-      "raw60k": 242768858,
-      "alt20k": 67472538,
-      "alt60k": 240044772
-    },
-    "bosses": [
+    "versionEnemies": [
       {
         "id": "10304",
-        "name": "Unknown Corruption Complex",
         "type": 0,
-        "mult": 156,
-        "rawHP": 75669077,
-        "altHP": 72944991
+        "mult": 156
       },
       {
         "id": "14302",
-        "name": "Sacrifice: Bringer",
         "type": 1,
-        "mult": 200,
-        "rawHP": 89838592,
-        "altHP": 89838592
+        "mult": 200
       },
       {
         "id": "14301",
-        "name": "Notorious: Pompey",
         "type": 1,
-        "mult": 172,
-        "rawHP": 77261189,
-        "altHP": 77261189
+        "mult": 172
       }
     ]
   },
-  {
-    "id": "1.6.1",
-    "name": "1.6 Phase 1",
-    "time": "21/03/2025 - 04/04/2025",
-    "dazeMult": 100,
-    "anomMult": 100,
+  "1.6.1": {
+    "versionName": "1.6 Phase 1",
+    "versionTime": "21/03/2025 - 04/04/2025",
+    "versionDazeMult": 100,
+    "versionAnomMult": 100,
     "buffNames": ["Swift Advance", "Graceful Mastery", "Rapid Aid"],
-    "hp": {
-      "raw20k": 65675219,
-      "raw60k": 233650510,
-      "alt20k": 64909524,
-      "alt60k": 230926424
-    },
-    "bosses": [
+    "versionEnemies": [
       {
         "id": "10304",
-        "name": "Unknown Corruption Complex",
         "type": 0,
-        "mult": 156,
-        "rawHP": 75669077,
-        "altHP": 72944991
+        "mult": 156
       },
       {
         "id": "12300",
-        "name": "Corrupted Overlord: Pompey",
         "type": 1,
-        "mult": 175,
-        "rawHP": 78608768,
-        "altHP": 78608768
+        "mult": 175
       },
       {
         "id": "14303",
-        "name": "Typhon Destroyer",
         "type": 1,
-        "mult": 155,
-        "rawHP": 79372665,
-        "altHP": 79372665
+        "mult": 155
       }
     ]
   },
-  {
-    "id": "1.6.2",
-    "name": "1.6 Phase 2",
-    "time": "04/04/2025 - 18/04/2025",
-    "dazeMult": 100,
-    "anomMult": 100,
+  "1.6.2": {
+    "versionName": "1.6 Phase 2",
+    "versionTime": "04/04/2025 - 18/04/2025",
+    "versionDazeMult": 100,
+    "versionAnomMult": 100,
     "buffNames": ["Swift Advance", "Worn Out", "Blazing Chill v2"],
-    "hp": {
-      "raw20k": 66433568,
-      "raw60k": 236348463,
-      "alt20k": 66433568,
-      "alt60k": 236348463
-    },
-    "bosses": [
+    "versionEnemies": [
       {
         "id": "14300",
-        "name": "Notorious: Marionette",
         "type": 0,
-        "mult": 135,
-        "rawHP": 78367030,
-        "altHP": 78367030
+        "mult": 135
       },
       {
         "id": "14303",
-        "name": "Typhon Destroyer",
         "type": 1,
-        "mult": 155,
-        "rawHP": 79372665,
-        "altHP": 79372665
+        "mult": 155
       },
       {
         "id": "14301",
-        "name": "Notorious: Pompey",
         "type": 1,
-        "mult": 175,
-        "rawHP": 78608768,
-        "altHP": 78608768
+        "mult": 175
       }
     ]
   },
-  {
-    "id": "1.6.3",
-    "name": "1.6 Phase 3",
-    "time": "18/04/2025 - 02/05/2025",
-    "dazeMult": 100,
-    "anomMult": 100,
+  "1.6.3": {
+    "versionName": "1.6 Phase 3",
+    "versionTime": "18/04/2025 - 02/05/2025",
+    "versionDazeMult": 100,
+    "versionAnomMult": 100,
     "buffNames": ["Worn Out", "Metamorphosis", "Final Assault"],
-    "hp": {
-      "raw20k": 68663248,
-      "raw60k": 244280919,
-      "alt20k": 67897553,
-      "alt60k": 241556833
-    },
-    "bosses": [
+    "versionEnemies": [
       {
         "id": "10300",
-        "name": "Dead End Butcher",
         "type": 1,
-        "mult": 175,
-        "rawHP": 65297461,
-        "altHP": 65297461
+        "mult": 175
       },
       {
         "id": "14302",
-        "name": "Sacrifice: Bringer",
         "type": 1,
-        "mult": 230,
-        "rawHP": 103314381,
-        "altHP": 103314381
+        "mult": 230
       },
       {
         "id": "10304",
-        "name": "Unknown Corruption Complex",
         "type": 0,
-        "mult": 156,
-        "rawHP": 75669077,
-        "altHP": 72944991
+        "mult": 156
       }
     ]
   },
-  {
-    "id": "1.7.1",
-    "name": "1.7 Phase 1",
-    "time": "02/05/2025 - 16/05/2025",
-    "dazeMult": 100,
-    "anomMult": 100,
+  "1.7.1": {
+    "versionName": "1.7 Phase 1",
+    "versionTime": "02/05/2025 - 16/05/2025",
+    "versionDazeMult": 100,
+    "versionAnomMult": 100,
     "buffNames": ["Rapid Aid", "Swift Advance", "Transformation Charge"],
-    "hp": {
-      "raw20k": 77015493,
-      "raw60k": 273995419,
-      "alt20k": 76156540,
-      "alt60k": 270939553
-    },
-    "bosses": [
+    "versionEnemies": [
       {
         "id": "14302",
-        "name": "Sacrifice: Bringer",
         "type": 1,
-        "mult": 246,
-        "rawHP": 110501469,
-        "altHP": 110501469
+        "mult": 246
       },
       {
         "id": "10304",
-        "name": "Unknown Corruption Complex",
         "type": 0,
-        "mult": 175,
-        "rawHP": 84885182,
-        "altHP": 81829316
+        "mult": 175
       },
       {
         "id": "12300",
-        "name": "Corrupted Overlord: Pompey",
         "type": 1,
-        "mult": 175,
-        "rawHP": 78608768,
-        "altHP": 78608768
+        "mult": 175
       }
     ]
   },
-  {
-    "id": "1.7.2",
-    "name": "1.7 Phase 2",
-    "time": "16/05/2025 - 30/05/2025",
-    "dazeMult": 100,
-    "anomMult": 100,
+  "1.7.2": {
+    "versionName": "1.7 Phase 2",
+    "versionTime": "16/05/2025 - 30/05/2025",
+    "versionDazeMult": 100,
+    "versionAnomMult": 100,
     "buffNames": ["Raging Storm", "Graceful Mastery", "Worn Out"],
-    "hp": {
-      "raw20k": 75780736,
-      "raw60k": 269602568,
-      "alt20k": 75780736,
-      "alt60k": 269602568
-    },
-    "bosses": [
+    "versionEnemies": [
       {
         "id": "14300",
-        "name": "Notorious: Marionette",
         "type": 0,
-        "mult": 145,
-        "rawHP": 84171995,
-        "altHP": 84171995
+        "mult": 145
       },
       {
         "id": "15300",
-        "name": "Notorious: Dead End Butcher",
         "type": 0,
-        "mult": 230,
-        "rawHP": 102985418,
-        "altHP": 102985418
+        "mult": 230
       },
       {
         "id": "14303",
-        "name": "Typhon Destroyer",
         "type": 1,
-        "mult": 161,
-        "rawHP": 82445155,
-        "altHP": 82445155
+        "mult": 161
       }
     ]
   },
-  {
-    "id": "1.7.3",
-    "name": "1.7 Phase 3",
-    "time": "30/05/2025 - 13/06/2025",
-    "dazeMult": 100,
-    "anomMult": 100,
+  "1.7.3": {
+    "versionName": "1.7 Phase 3",
+    "versionTime": "30/05/2025 - 13/06/2025",
+    "versionDazeMult": 100,
+    "versionAnomMult": 100,
     "buffNames": ["Collapse", "Sonata", "Aberration"],
-    "hp": {
-      "raw20k": 78519545,
-      "raw60k": 279346337,
-      "alt20k": 78519545,
-      "alt60k": 279346337
-    },
-    "bosses": [
+    "versionEnemies": [
       {
         "id": "14300",
-        "name": "Notorious: Marionette",
         "type": 1,
-        "mult": 145,
-        "rawHP": 84171995,
-        "altHP": 84171995
+        "mult": 145
       },
       {
         "id": "14302",
-        "name": "Sacrifice: Bringer",
         "type": 1,
-        "mult": 246,
-        "rawHP": 110501469,
-        "altHP": 110501469
+        "mult": 246
       },
       {
         "id": "14301",
-        "name": "Notorious: Pompey",
         "type": 1,
-        "mult": 188.5,
-        "rawHP": 84672873,
-        "altHP": 84672873
+        "mult": 188.5
       }
     ]
   },
-  {
-    "id": "2.0.1",
-    "name": "2.0 Phase 1",
-    "time": "13/06/2025 - 27/06/2025",
-    "dazeMult": 100,
-    "anomMult": 100,
+  "2.0.1": {
+    "versionName": "2.0 Phase 1",
+    "versionTime": "13/06/2025 - 27/06/2025",
+    "versionDazeMult": 100,
+    "versionAnomMult": 100,
     "buffNames": ["Meditation", "Interrupt", "Transformation Charge"],
-    "hp": {
-      "raw20k": 70479565,
-      "raw60k": 250742771,
-      "alt20k": 69824655,
-      "alt60k": 248412818
-    },
-    "bosses": [
+    "versionEnemies": [
       {
         "id": "20300",
-        "name": "Miasma Priest",
         "type": 0,
-        "mult": 85,
-        "rawHP": 77665112,
-        "altHP": 75335159
+        "mult": 85
       },
       {
         "id": "14300",
-        "name": "Notorious: Marionette",
         "type": 0,
-        "mult": 155,
-        "rawHP": 89976961,
-        "altHP": 89976961
+        "mult": 155
       },
       {
         "id": "14301",
-        "name": "Notorious: Pompey",
         "type": 1,
-        "mult": 185,
-        "rawHP": 83100698,
-        "altHP": 83100698
+        "mult": 185
       }
     ]
   },
-  {
-    "id": "2.0.2",
-    "name": "2.0 Phase 2",
-    "time": "27/06/2025 - 11/07/2025",
-    "dazeMult": 100,
-    "anomMult": 100,
+  "2.0.2": {
+    "versionName": "2.0 Phase 2",
+    "versionTime": "27/06/2025 - 11/07/2025",
+    "versionDazeMult": 100,
+    "versionAnomMult": 100,
     "buffNames": ["Lingering Illness", "Sonata", "Graceful Mastery"],
-    "hp": {
-      "raw20k": 80777860,
-      "raw60k": 287380667,
-      "alt20k": 79869825,
-      "alt60k": 284150180
-    },
-    "bosses": [
+    "versionEnemies": [
       {
         "id": "14301",
-        "name": "Notorious: Pompey",
         "type": 1,
-        "mult": 185,
-        "rawHP": 83100698,
-        "altHP": 83100698
+        "mult": 185
       },
       {
         "id": "10304",
-        "name": "Unknown Corruption Complex",
         "type": 0,
-        "mult": 185,
-        "rawHP": 89735764,
-        "altHP": 86505277
+        "mult": 185
       },
       {
         "id": "14302",
-        "name": "Sacrifice: Bringer",
         "type": 1,
-        "mult": 255,
-        "rawHP": 114544205,
-        "altHP": 114544205
+        "mult": 255
       }
     ]
   },
-  {
-    "id": "2.0.3",
-    "name": "2.0 Phase 3",
-    "time": "11/07/2025 - 25/07/2025",
-    "dazeMult": 100,
-    "anomMult": 100,
+  "2.0.3": {
+    "versionName": "2.0 Phase 3",
+    "versionTime": "11/07/2025 - 25/07/2025",
+    "versionDazeMult": 100,
+    "versionAnomMult": 100,
     "buffNames": ["Meditation", "Illusory Surge", "Rapid Aid"],
-    "hp": {
-      "raw20k": 75394609,
-      "raw60k": 268228855,
-      "alt20k": 74739698,
-      "alt60k": 265898902
-    },
-    "bosses": [
+    "versionEnemies": [
       {
         "id": "20300",
-        "name": "Miasma Priest",
         "type": 0,
-        "mult": 85,
-        "rawHP": 77665112,
-        "altHP": 75335159
+        "mult": 85
       },
       {
         "id": "12300",
-        "name": "Corrupted Overlord: Pompey",
         "type": 1,
-        "mult": 185,
-        "rawHP": 83100698,
-        "altHP": 83100698
+        "mult": 185
       },
       {
         "id": "15300",
-        "name": "Notorious: Dead End Butcher",
         "type": 0,
-        "mult": 240,
-        "rawHP": 107463045,
-        "altHP": 107463045
+        "mult": 240
       }
     ]
   },
-  {
-    "id": "2.1.1",
-    "name": "2.1 Phase 1",
-    "time": "25/07/2025 - 08/08/2025",
-    "dazeMult": 100,
-    "anomMult": 110,
+  "2.1.1": {
+    "versionName": "2.1 Phase 1",
+    "versionTime": "25/07/2025 - 08/08/2025",
+    "versionDazeMult": 100,
+    "versionAnomMult": 110,
     "buffNames": ["Meditation", "Artful", "Worn Out"],
-    "hp": {
-      "raw20k": 79549305,
-      "raw60k": 283009877,
-      "alt20k": 77920390,
-      "alt60k": 277214740
-    },
-    "bosses": [
+    "versionEnemies": [
       {
         "id": "20300",
-        "name": "Miasma Priest",
         "type": 0,
-        "mult": 100,
-        "rawHP": 91370720,
-        "altHP": 88629599
+        "mult": 100
       },
       {
         "id": "21300",
-        "name": "Miasmic Fiend: Unfathomable",
         "type": 0,
-        "mult": 155,
-        "rawHP": 101800565,
-        "altHP": 98746549
+        "mult": 155
       },
       {
         "id": "14301",
-        "name": "Notorious: Pompey",
         "type": 1,
-        "mult": 200,
-        "rawHP": 89838592,
-        "altHP": 89838592
+        "mult": 200
       }
     ]
   },
-  {
-    "id": "2.1.2",
-    "name": "2.1 Phase 2",
-    "time": "08/08/2025 - 22/08/2025",
-    "dazeMult": 100,
-    "anomMult": 110,
+  "2.1.2": {
+    "versionName": "2.1 Phase 2",
+    "versionTime": "08/08/2025 - 22/08/2025",
+    "versionDazeMult": 100,
+    "versionAnomMult": 110,
     "buffNames": ["Artful", "Power On", "Raging Storm"],
-    "hp": {
-      "raw20k": 89705459,
-      "raw60k": 319142085,
-      "alt20k": 88847027,
-      "alt60k": 316088069
-    },
-    "bosses": [
+    "versionEnemies": [
       {
         "id": "21300",
-        "name": "Miasmic Fiend: Unfathomable",
         "type": 0,
-        "mult": 155,
-        "rawHP": 101800565,
-        "altHP": 98746549
+        "mult": 155
       },
       {
         "id": "15300",
-        "name": "Notorious: Dead End Butcher",
         "type": 1,
-        "mult": 265,
-        "rawHP": 118657112,
-        "altHP": 118657112
+        "mult": 265
       },
       {
         "id": "14300",
-        "name": "Notorious: Marionette",
         "type": 0,
-        "mult": 170,
-        "rawHP": 98684408,
-        "altHP": 98684408
+        "mult": 170
       }
     ]
   },
-  {
-    "id": "2.1.3",
-    "name": "2.1 Phase 3",
-    "time": "22/08/2025 - 05/09/2025",
-    "dazeMult": 100,
-    "anomMult": 110,
+  "2.1.3": {
+    "versionName": "2.1 Phase 3",
+    "versionTime": "22/08/2025 - 05/09/2025",
+    "versionDazeMult": 100,
+    "versionAnomMult": 110,
     "buffNames": ["Power Boost", "Sonata", "Lingering Illness"],
-    "hp": {
-      "raw20k": 84224351,
-      "raw60k": 299642131,
-      "alt20k": 83453868,
-      "alt60k": 296901010
-    },
-    "bosses": [
+    "versionEnemies": [
       {
         "id": "15300",
-        "name": "Notorious: Dead End Butcher",
         "type": 1,
-        "mult": 265,
-        "rawHP": 118657112,
-        "altHP": 118657112
+        "mult": 265
       },
       {
         "id": "20300",
-        "name": "Miasma Priest",
         "type": 0,
-        "mult": 100,
-        "rawHP": 91370720,
-        "altHP": 88629599
+        "mult": 100
       },
       {
         "id": "14303",
-        "name": "Typhon Destroyer",
         "type": 1,
-        "mult": 175,
-        "rawHP": 89614299,
-        "altHP": 89614299
+        "mult": 175
       }
     ]
   },
-  {
-    "id": "2.2.1",
-    "name": "2.2 Phase 1",
-    "time": "05/09/2025 - 19/09/2025",
-    "dazeMult": 100,
-    "anomMult": 110,
+  "2.2.1": {
+    "versionName": "2.2 Phase 1",
+    "versionTime": "05/09/2025 - 19/09/2025",
+    "versionDazeMult": 100,
+    "versionAnomMult": 110,
     "buffNames": ["Fiery Assault", "Artful", "Harnessing Change"],
-    "hp": {
-      "raw20k": 92805142,
-      "raw60k": 330169721,
-      "alt20k": 90485014,
-      "alt60k": 321915480
-    },
-    "bosses": [
+    "versionEnemies": [
       {
         "id": "22300",
-        "name": "The Defiler",
         "type": 0,
-        "mult": 140,
-        "rawHP": 99020956,
-        "altHP": 96545433
+        "mult": 140
       },
       {
         "id": "21300",
-        "name": "Miasmic Fiend: Unfathomable",
         "type": 0,
-        "mult": 185,
-        "rawHP": 121503901,
-        "altHP": 118466304
+        "mult": 185
       },
       {
         "id": "20300",
-        "name": "Miasma Priest",
         "type": 0,
-        "mult": 120,
-        "rawHP": 109644864,
-        "altHP": 106903743
+        "mult": 120
       }
     ]
   },
-  {
-    "id": "2.2.2",
-    "name": "2.2 Phase 2",
-    "time": "19/09/2025 - 03/10/2025",
-    "dazeMult": 100,
-    "anomMult": 110,
+  "2.2.2": {
+    "versionName": "2.2 Phase 2",
+    "versionTime": "19/09/2025 - 03/10/2025",
+    "versionDazeMult": 100,
+    "versionAnomMult": 110,
     "buffNames": ["Chasing Blade", "Aberration", "Collapse"],
-    "hp": {
-      "raw20k": 94378093,
-      "raw60k": 335765757,
-      "alt20k": 93682265,
-      "alt60k": 333290234
-    },
-    "bosses": [
+    "versionEnemies": [
       {
         "id": "22300",
-        "name": "The Defiler",
         "type": 0,
-        "mult": 140,
-        "rawHP": 99020956,
-        "altHP": 96545433
+        "mult": 140
       },
       {
         "id": "15300",
-        "name": "Notorious: Dead End Butcher",
         "type": 1,
-        "mult": 300,
-        "rawHP": 134328806,
-        "altHP": 134328806
+        "mult": 300
       },
       {
         "id": "14301",
-        "name": "Notorious: Pompey",
         "type": 1,
-        "mult": 228,
-        "rawHP": 102415995,
-        "altHP": 102415995
+        "mult": 228
       }
     ]
   },
-  {
-    "id": "2.2.3",
-    "name": "2.2 Phase 3",
-    "time": "03/10/2025 - 17/10/2025",
-    "dazeMult": 100,
-    "anomMult": 110,
+  "2.2.3": {
+    "versionName": "2.2 Phase 3",
+    "versionTime": "03/10/2025 - 17/10/2025",
+    "versionDazeMult": 100,
+    "versionAnomMult": 110,
     "buffNames": ["Aberration", "Fiery Assault", "Clarity"],
-    "hp": {
-      "raw20k": 97694023,
-      "raw60k": 347562730,
-      "alt20k": 94891731,
-      "alt60k": 337593110
-    },
-    "bosses": [
+    "versionEnemies": [
       {
         "id": "21300",
-        "name": "Miasmic Fiend: Unfathomable",
         "type": 0,
-        "mult": 185,
-        "rawHP": 121503901,
-        "altHP": 118466304
+        "mult": 185
       },
       {
         "id": "10304",
-        "name": "Unknown Corruption Complex",
         "type": 0,
-        "mult": 240,
-        "rawHP": 116413965,
-        "altHP": 112223063
+        "mult": 240
       },
       {
         "id": "20300",
-        "name": "Miasma Priest",
         "type": 0,
-        "mult": 120,
-        "rawHP": 109644864,
-        "altHP": 106903743
+        "mult": 120
       }
     ]
   },
-  {
-    "id": "2.3.1",
-    "name": "2.3 Phase 1",
-    "time": "17/10/2025 - 31/10/2025",
-    "dazeMult": 100,
-    "anomMult": 110,
+  "2.3.1": {
+    "versionName": "2.3 Phase 1",
+    "versionTime": "17/10/2025 - 31/10/2025",
+    "versionDazeMult": 100,
+    "versionAnomMult": 110,
     "buffNames": ["Pinnacle", "Dream Delusion", "Combined Attack"],
-    "hp": {
-      "raw20k": 101305558,
-      "raw60k": 360411365,
-      "alt20k": 99732591,
-      "alt60k": 354815272
-    },
-    "bosses": [
+    "versionEnemies": [
       {
         "id": "20300",
-        "name": "Miasma Priest",
         "type": 0,
-        "mult": 125,
-        "rawHP": 114213400,
-        "altHP": 111358065
+        "mult": 125
       },
       {
         "id": "22300",
-        "name": "The Defiler",
         "type": 0,
-        "mult": 155,
-        "rawHP": 109630345,
-        "altHP": 106889587
+        "mult": 155
       },
       {
         "id": "15300",
-        "name": "Notorious: Dead End Butcher",
         "type": 1,
-        "mult": 305,
-        "rawHP": 136567620,
-        "altHP": 136567620
+        "mult": 305
       }
     ]
   },
-  {
-    "id": "2.3.2",
-    "name": "2.3 Phase 2",
-    "time": "31/10/2025 - 14/11/2025",
-    "dazeMult": 100,
-    "anomMult": 110,
+  "2.3.2": {
+    "versionName": "2.3 Phase 2",
+    "versionTime": "31/10/2025 - 14/11/2025",
+    "versionDazeMult": 100,
+    "versionAnomMult": 110,
     "buffNames": ["Pinnacle", "Dream Delusion", "Combined Attack"],
-    "hp": {
-      "raw20k": 102508567,
-      "raw60k": 364691268,
-      "alt20k": 99607368,
-      "alt60k": 354369773
-    },
-    "bosses": [
+    "versionEnemies": [
       {
         "id": "23300",
-        "name": "Wandering Hunter",
         "type": 0,
-        "mult": 138,
-        "rawHP": 120421465,
-        "altHP": 116206714
+        "mult": 138
       },
       {
         "id": "21300",
-        "name": "Miasmic Fiend: Unfathomable",
         "type": 0,
-        "mult": 205,
-        "rawHP": 134639458,
-        "altHP": 131273472
+        "mult": 205
       },
       {
         "id": "22300",
-        "name": "The Defiler",
         "type": 0,
-        "mult": 155,
-        "rawHP": 109630345,
-        "altHP": 106889587
+        "mult": 155
       }
     ]
   },
-  {
-    "id": "2.3.3",
-    "name": "2.3 Phase 3",
-    "time": "14/11/2025 - 28/11/2025",
-    "dazeMult": 100,
-    "anomMult": 110,
+  "2.3.3": {
+    "versionName": "2.3 Phase 3",
+    "versionTime": "14/11/2025 - 28/11/2025",
+    "versionDazeMult": 100,
+    "versionAnomMult": 110,
     "buffNames": ["Interrupt", "Gathering Point", "Raging Waves"],
-    "hp": {
-      "raw20k": 97618162,
-      "raw60k": 347292841,
-      "alt20k": 95630880,
-      "alt60k": 340222755
-    },
-    "bosses": [
+    "versionEnemies": [
       {
         "id": "23300",
-        "name": "Wandering Hunter",
         "type": 0,
-        "mult": 138,
-        "rawHP": 120421465,
-        "altHP": 116206714
+        "mult": 138
       },
       {
         "id": "14303",
-        "name": "Typhon Destroyer",
         "type": 1,
-        "mult": 220,
-        "rawHP": 112657976,
-        "altHP": 112657976
+        "mult": 220
       },
       {
         "id": "20300",
-        "name": "Miasma Priest",
         "type": 0,
-        "mult": 125,
-        "rawHP": 114213400,
-        "altHP": 111358065
+        "mult": 125
       }
     ]
   },
-  {
-    "id": "2.4.1",
-    "name": "2.4 Phase 1",
-    "time": "28/11/2025 - 12/12/2025",
-    "dazeMult": 100,
-    "anomMult": 110,
+  "2.4.1": {
+    "versionName": "2.4 Phase 1",
+    "versionTime": "28/11/2025 - 12/12/2025",
+    "versionDazeMult": 100,
+    "versionAnomMult": 110,
     "buffNames": ["Aberration", "Meditation", "Sever Pulse"],
-    "hp": {
-      "raw20k": 126522951,
-      "raw60k": 450126434,
-      "alt20k": 124257300,
-      "alt60k": 442066005
-    },
-    "bosses": [
+    "versionEnemies": [
       {
         "id": "14300",
-        "name": "Notorious: Marionette",
         "type": 1,
-        "mult": 220,
-        "rawHP": 127709235,
-        "altHP": 127709235
+        "mult": 220
       },
       {
         "id": "24300",
-        "name": "Ye Shiyuan the Thrall",
         "type": 0,
-        "mult": 180,
-        "rawHP": 161506628,
-        "altHP": 157468963
+        "mult": 180
       },
       {
         "id": "21300",
-        "name": "Miasmic Fiend: Unfathomable",
         "type": 0,
-        "mult": 245,
-        "rawHP": 160910571,
-        "altHP": 156887807
+        "mult": 245
       }
     ]
   },
-  {
-    "id": "2.4.2",
-    "name": "2.4 Phase 2",
-    "time": "12/12/2025 - 02/01/2026",
-    "dazeMult": 100,
-    "anomMult": 110,
+  "2.4.2": {
+    "versionName": "2.4 Phase 2",
+    "versionTime": "12/12/2025 - 02/01/2026",
+    "versionDazeMult": 100,
+    "versionAnomMult": 110,
     "buffNames": ["Graceful Mastery", "Break Through", "Tempering Body"],
-    "hp": {
-      "raw20k": 132129821,
-      "raw60k": 470073805,
-      "alt20k": 129638511,
-      "alt60k": 461210556
-    },
-    "bosses": [
+    "versionEnemies": [
       {
         "id": "23300",
-        "name": "Wandering Hunter",
         "type": 0,
-        "mult": 158,
-        "rawHP": 137873851,
-        "altHP": 133048267
+        "mult": 158
       },
       {
         "id": "24300",
-        "name": "Ye Shiyuan the Thrall",
         "type": 0,
-        "mult": 180,
-        "rawHP": 161506628,
-        "altHP": 157468963
+        "mult": 180
       },
       {
         "id": "14302",
-        "name": "Sacrifice: Bringer",
         "type": 1,
-        "mult": 380,
-        "rawHP": 170693326,
-        "altHP": 170693326
+        "mult": 380
       }
     ]
   },
-  {
-    "id": "2.5.1",
-    "name": "2.5 Phase 1",
-    "time": "02/01/2026 - 16/01/2026",
-    "dazeMult": 100,
-    "anomMult": 110,
+  "2.5.1": {
+    "versionName": "2.5 Phase 1",
+    "versionTime": "02/01/2026 - 16/01/2026",
+    "versionDazeMult": 100,
+    "versionAnomMult": 110,
     "buffNames": ["Dream Delusion", "Sonata", "Focus Energy"],
-    "hp": {
-      "raw20k": 147230586,
-      "raw60k": 523797287,
-      "alt20k": 140988255,
-      "alt60k": 501589159
-    },
-    "bosses": [
+    "versionEnemies": [
       {
         "id": "25300",
-        "name": "Primordial Nightmare: \"The Creator\"",
         "type": 0,
-        "mult": 205,
-        "rawHP": 216746115,
-        "altHP": 203741349
+        "mult": 205
       },
       {
         "id": "21300",
-        "name": "Miasmic Fiend: Unfathomable",
         "type": 0,
-        "mult": 235,
-        "rawHP": 154342793,
-        "altHP": 150484224
+        "mult": 235
       },
       {
         "id": "23300",
-        "name": "Wandering Hunter",
         "type": 0,
-        "mult": 175,
-        "rawHP": 152708379,
-        "altHP": 147363586
+        "mult": 175
       }
     ]
   },
-  {
-    "id": "2.5.2",
-    "name": "2.5 Phase 2",
-    "time": "16/01/2026 - 30/01/2026",
-    "dazeMult": 100,
-    "anomMult": 110,
+  "2.5.2": {
+    "versionName": "2.5 Phase 2",
+    "versionTime": "16/01/2026 - 30/01/2026",
+    "versionDazeMult": 100,
+    "versionAnomMult": 110,
     "buffNames": ["Harnessing Change", "Focus Energy", "Mutation"],
-    "hp": {
-      "raw20k": 111340416,
-      "raw60k": 396112041,
-      "alt20k": 109576704,
-      "alt60k": 389837344
-    },
-    "bosses": [
+    "versionEnemies": [
       {
         "id": "22300",
-        "name": "The Defiler",
         "type": 0,
-        "mult": 174,
-        "rawHP": 123068903,
-        "altHP": 119992181
+        "mult": 174
       },
       {
         "id": "14300",
-        "name": "Notorious: Marionette",
         "type": 1,
-        "mult": 250,
-        "rawHP": 145124130,
-        "altHP": 145124130
+        "mult": 250
       },
       {
         "id": "20300",
-        "name": "Miasma Priest",
         "type": 0,
-        "mult": 140,
-        "rawHP": 127919008,
-        "altHP": 124721033
+        "mult": 140
       }
     ]
   },
-  {
-    "id": "2.5.3",
-    "name": "2.5 Phase 3",
-    "time": "30/01/2026 - 13/02/2026",
-    "dazeMult": 100,
-    "anomMult": 110,
+  "2.5.3": {
+    "versionName": "2.5 Phase 3",
+    "versionTime": "30/01/2026 - 13/02/2026",
+    "versionDazeMult": 100,
+    "versionAnomMult": 110,
     "buffNames": ["Adjudication", "Frost Night", "Formation Breaker"],
-    "hp": {
-      "raw20k": 140659682,
-      "raw60k": 500420204,
-      "alt20k": 134176689,
-      "alt60k": 477355880
-    },
-    "bosses": [
+    "versionEnemies": [
       {
         "id": "25300",
-        "name": "Primordial Nightmare: \"The Creator\"",
         "type": 0,
-        "mult": 205,
-        "rawHP": 216746115,
-        "altHP": 203741349
+        "mult": 205
       },
       {
         "id": "10304",
-        "name": "Unknown Corruption Complex",
         "type": 0,
-        "mult": 270,
-        "rawHP": 130965710,
-        "altHP": 126250945
+        "mult": 270
       },
       {
         "id": "23300",
-        "name": "Wandering Hunter",
         "type": 0,
-        "mult": 175,
-        "rawHP": 152708379,
-        "altHP": 147363586
+        "mult": 175
       }
     ]
   },
-  {
-    "id": "2.6.1",
-    "name": "2.6 Phase 1",
-    "time": "13/02/2026 - 27/02/2026",
-    "dazeMult": 100,
-    "anomMult": 110,
+  "2.6.1": {
+    "versionName": "2.6 Phase 1",
+    "versionTime": "13/02/2026 - 27/02/2026",
+    "versionDazeMult": 100,
+    "versionAnomMult": 110,
     "buffNames": ["Overwhelming Might", "Mutation", "Ride the Current"],
-    "hp": {
-      "raw20k": 160761530,
-      "raw60k": 571935872,
-      "alt20k": 155556701,
-      "alt60k": 553418826
-    },
-    "bosses": [
+    "versionEnemies": [
       {
         "id": "25300",
-        "name": "Primordial Nightmare: \"The Creator\"",
         "type": 0,
-        "mult": 235,
-        "rawHP": 248465059,
-        "altHP": 233557156
+        "mult": 235
       },
       {
         "id": "20300",
-        "name": "Miasma Priest",
         "type": 0,
-        "mult": 158,
-        "rawHP": 144365738,
-        "altHP": 140756595
+        "mult": 158
       },
       {
         "id": "15300",
-        "name": "Notorious: Dead End Butcher",
         "type": 1,
-        "mult": 400,
-        "rawHP": 179105075,
-        "altHP": 179105075
+        "mult": 400
       }
     ]
   },
-  {
-    "id": "2.6.2",
-    "name": "2.6 Phase 2",
-    "time": "27/02/2026 - 13/03/2026",
-    "dazeMult": 100,
-    "anomMult": 110,
+  "2.6.2": {
+    "versionName": "2.6 Phase 2",
+    "versionTime": "27/02/2026 - 13/03/2026",
+    "versionDazeMult": 100,
+    "versionAnomMult": 110,
     "buffNames": ["Clarity", "Blazing Sweep", "Shatterboon"],
-    "hp": {
-      "raw20k": 146463477,
-      "raw60k": 521068172,
-      "alt20k": 142037690,
-      "alt60k": 505322699
-    },
-    "bosses": [
+    "versionEnemies": [
       {
         "id": "26300",
-        "name": "Discordant Solo: Vesper",
         "type": 0,
-        "mult": 200,
-        "rawHP": 229611112,
-        "altHP": 222722779
+        "mult": 200
       },
       {
         "id": "22300",
-        "name": "The Defiler",
         "type": 1,
-        "mult": 190,
-        "rawHP": 134385584,
-        "altHP": 131025945
+        "mult": 190
       },
       {
         "id": "23300",
-        "name": "Wandering Hunter",
         "type": 0,
-        "mult": 180,
-        "rawHP": 157071476,
-        "altHP": 151573975
+        "mult": 180
       }
     ]
   },
-  {
-    "id": "2.6.3",
-    "name": "2.6 Phase 3",
-    "time": "13/03/2026 - 27/03/2026",
-    "dazeMult": 100,
-    "anomMult": 110,
+  "2.6.3": {
+    "versionName": "2.6 Phase 3",
+    "versionTime": "13/03/2026 - 27/03/2026",
+    "versionDazeMult": 100,
+    "versionAnomMult": 110,
     "buffNames": ["Harnessing Change", "Psychics", "Heartcrusher"],
-    "hp": {
-      "raw20k": 126222924,
-      "raw60k": 449059037,
-      "alt20k": 123888045,
-      "alt60k": 440752317
-    },
-    "bosses": [
+    "versionEnemies": [
       {
         "id": "21300",
-        "name": "Miasmic Fiend: Unfathomable",
         "type": 0,
-        "mult": 260,
-        "rawHP": 170762239,
-        "altHP": 166493184
+        "mult": 260
       },
       {
         "id": "24300",
-        "name": "Ye Shiyuan the Thrall",
         "type": 1,
-        "mult": 180,
-        "rawHP": 161506628,
-        "altHP": 157468963
+        "mult": 180
       },
       {
         "id": "14301",
-        "name": "Notorious: Pompey",
         "type": 1,
-        "mult": 260,
-        "rawHP": 116790170,
-        "altHP": 116790170
+        "mult": 260
       }
     ]
   },
-  {
-    "id": "2.7.1",
-    "name": "2.7 Phase 1",
-    "time": "xx/xx/20xx - xx/xx/20xx",
-    "dazeMult": 100,
-    "anomMult": 110,
+  "2.7.1": {
+    "versionName": "2.7 Phase 1",
+    "versionTime": "xx/xx/20xx - xx/xx/20xx",
+    "versionDazeMult": 100,
+    "versionAnomMult": 110,
     "buffNames": ["Stormcutter", "2.7 Buff 1", "2.7 Buff 2"],
-    "hp": {
-      "raw20k": 191883322,
-      "raw60k": 682656823,
-      "alt20k": 184284437,
-      "alt60k": 655622524
-    },
-    "bosses": [
+    "versionEnemies": [
       {
         "id": "27300",
-        "name": "Sanguine Sweeper",
         "type": 0,
-        "mult": 180,
-        "rawHP": 220134891,
-        "altHP": 210228821
+        "mult": 180
       },
       {
         "id": "25300",
-        "name": "Primordial Nightmare: \"The Creator\"",
         "type": 0,
-        "mult": 270,
-        "rawHP": 285470493,
-        "altHP": 268342264
+        "mult": 270
       },
       {
         "id": "14300",
-        "name": "Notorious: Marionette",
         "type": 1,
-        "mult": 305,
-        "rawHP": 177051439,
-        "altHP": 177051439
+        "mult": 305
       }
     ]
   },
-  {
-    "id": "2.7.2",
-    "name": "2.7 Phase 2",
-    "time": "xx/xx/20xx - xx/xx/20xx",
-    "dazeMult": 100,
-    "anomMult": 110,
+  "2.7.2": {
+    "versionName": "2.7 Phase 2",
+    "versionTime": "xx/xx/20xx - xx/xx/20xx",
+    "versionDazeMult": 100,
+    "versionAnomMult": 110,
     "buffNames": ["Collapse", "Combined Attack", "2.7 Buff 1"],
-    "hp": {
-      "raw20k": 175608239,
-      "raw60k": 624755508,
-      "alt20k": 170305879,
-      "alt60k": 605891480
-    },
-    "bosses": [
+    "versionEnemies": [
       {
         "id": "26300",
-        "name": "Discordant Solo: Vesper",
         "type": 1,
-        "mult": 240,
-        "rawHP": 275533334,
-        "altHP": 267267334
+        "mult": 240
       },
       {
         "id": "10304",
-        "name": "Unknown Corruption Complex",
         "type": 0,
-        "mult": 350,
-        "rawHP": 169770365,
-        "altHP": 163658632
+        "mult": 350
       },
       {
         "id": "24300",
-        "name": "Ye Shiyuan the Thrall",
         "type": 1,
-        "mult": 200,
-        "rawHP": 179451809,
-        "altHP": 174965514
+        "mult": 200
       }
     ]
   },
-  {
-    "id": "2.7.3",
-    "name": "2.7 Phase 3",
-    "time": "xx/xx/20xx - xx/xx/20xx",
-    "dazeMult": 100,
-    "anomMult": 110,
+  "2.7.3": {
+    "versionName": "2.7 Phase 3",
+    "versionTime": "xx/xx/20xx - xx/xx/20xx",
+    "versionDazeMult": 100,
+    "versionAnomMult": 110,
     "buffNames": ["Heartcrusher", "2.7 Buff 1", "2.7 Buff 3"],
-    "hp": {
-      "raw20k": 183866830,
-      "raw60k": 654136819,
-      "alt20k": 175224203,
-      "alt60k": 623389235
-    },
-    "bosses": [
+    "versionEnemies": [
       {
         "id": "27300",
-        "name": "Sanguine Sweeper",
         "type": 1,
-        "mult": 180,
-        "rawHP": 220134891,
-        "altHP": 210228821
+        "mult": 180
       },
       {
         "id": "25300",
-        "name": "Primordial Nightmare: \"The Creator\"",
         "type": 0,
-        "mult": 270,
-        "rawHP": 285470493,
-        "altHP": 268342264
+        "mult": 270
       },
       {
         "id": "22300",
-        "name": "The Defiler",
         "type": 1,
-        "mult": 210,
-        "rawHP": 148531435,
-        "altHP": 144818150
+        "mult": 210
       }
     ]
   }
-]
+}
