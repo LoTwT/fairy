@@ -25,24 +25,23 @@ packages/zzz-data/
 │   ├── sheer.test.ts        # 贯穿伤害
 │   ├── anomaly.test.ts      # 异常伤害
 │   └── disorder.test.ts     # 紊乱伤害
-├── data/xlsx/*.json         # 生成的 JSON 数据（16 个文件）
-├── data/crawl/              # 爬虫输出的 JSON 数据
-│   ├── en/
-│   │   ├── gachabase/
-│   │   │   ├── agents.json          # agent 基础列表（id/slug/name/rarity/specialty/attributes/attackTypes）
-│   │   │   ├── agent-details.json   # agent 详情（faction含icon/assets.mindscapeImages/stats/skills/coreSkills/mindscapes/skins/potentialVisions 等）
-│   │   │   ├── w-engines.json       # 音擎列表（id/slug/name/rarity/specialty/exclusiveAgentName/baseStat/advancedStat/effects）
-│   │   │   ├── w-engine-details.json# 音擎详情（exclusiveAgent/assets.splashArt/shortComment/longComment/levels lv0-60/stars star0-5）
-│   │   │   ├── bangboo.json         # 邦布详情（baseStats+growthPerLevel/skills 3种×10级/optimizations 6级含statBoosts+statAdditions）
-│   │   │   └── drive-discs.json     # 驱动盘套装（setEffects 2件/4件）
-│   │   └── buhflipexplode/          # 仅英文
-│   │       ├── shiyu-defense.json        # 原始 sd-versions.json（各版本组的节点结构、enemy refs、buffName 等）
-│   │       ├── deadly-assault.json       # 原始 da-versions.json（各版本 Boss refs、buff、daze/anom 倍率等）
-│   │       ├── threshold-simulation.json # 原始 ts-versions.json（Easy/Hard 各版本节点结构）
-│   │       ├── enemies.json              # 敌人数据库（name/baseHP/baseDEF/baseDaze/stunMult/stunTime/baseAnom/elementMult/tags/mods/desc 等）
-│   │       └── buffs.json                # Buff 名称→描述文本映射（DA/TS 使用）
-│   └── zh-CN/
-│       └── gachabase/       # 同 en/gachabase/，仅 gachabase 系列
+├── data/xlsx/*.json         # 生成的 JSON 数据（16 个文件，仅内部使用，不发布）
+├── data/en/                 # 爬虫输出（英文，对外发布）
+│   ├── gachabase/
+│   │   ├── agents.json          # agent 基础列表（id/slug/name/rarity/specialty/attributes/attackTypes）
+│   │   ├── agent-details.json   # agent 详情（faction含icon/assets.mindscapeImages/stats/skills/coreSkills/mindscapes/skins/potentialVisions 等）
+│   │   ├── w-engines.json       # 音擎列表（id/slug/name/rarity/specialty/exclusiveAgentName/baseStat/advancedStat/effects）
+│   │   ├── w-engine-details.json# 音擎详情（exclusiveAgent/assets.splashArt/shortComment/longComment/levels lv0-60/stars star0-5）
+│   │   ├── bangboo.json         # 邦布详情（baseStats+growthPerLevel/skills 3种×10级/optimizations 6级含statBoosts+statAdditions）
+│   │   └── drive-discs.json     # 驱动盘套装（setEffects 2件/4件）
+│   └── buhflipexplode/
+│       ├── shiyu-defense.json        # 原始 sd-versions.json（各版本组的节点结构、enemy refs、buffName 等）
+│       ├── deadly-assault.json       # 原始 da-versions.json（各版本 Boss refs、buff、daze/anom 倍率等）
+│       ├── threshold-simulation.json # 原始 ts-versions.json（Easy/Hard 各版本节点结构）
+│       ├── enemies.json              # 敌人数据库（name/baseHP/baseDEF/baseDaze/stunMult/stunTime/baseAnom/elementMult/tags/mods/desc 等）
+│       └── buffs.json                # Buff 名称→描述文本映射（DA/TS 使用）
+└── data/zh-CN/              # 爬虫输出（中文，对外发布）
+    └── gachabase/           # 同 en/gachabase/，仅 gachabase 系列
 ├── src/gachabase/           # gachabase 数据工具
 │   ├── agent.ts             # Agent 基础属性计算公式（calcAgentStat）
 │   ├── bangboo.ts           # Bangboo 基础属性计算公式（calcBangbooStat）
@@ -63,7 +62,7 @@ packages/zzz-data/
 
 ## 属性计算模块（src/gachabase/）
 
-基于 gachabase.net 数据验证的纯函数属性计算库，数据来自 `data/crawl/`。
+基于 gachabase.net 数据验证的纯函数属性计算库，数据来自 `data/en/gachabase/`。
 
 | 函数                       | 文件                        | 公式                                                                      |
 | -------------------------- | --------------------------- | ------------------------------------------------------------------------- |

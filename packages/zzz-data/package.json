@@ -35,7 +35,8 @@
     }
   },
   "files": [
-    "data",
+    "data/en",
+    "data/zh-CN",
     "dist"
   ],
   "scripts": {

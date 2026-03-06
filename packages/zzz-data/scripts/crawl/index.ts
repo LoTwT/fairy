@@ -9,7 +9,7 @@ import { tasks as gachabaseTasks } from "./gachabase.js"
 import { fetchDynamic, fetchStatic } from "./shared.js"
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const outputDir = path.resolve(__dirname, "../../data/crawl")
+const outputDir = path.resolve(__dirname, "../../data")
 
 fs.mkdirSync(outputDir, { recursive: true })
 
