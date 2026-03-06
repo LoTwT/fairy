@@ -15,9 +15,10 @@ packages/zzz-data/
 │   ├── gachabase.ts         # gachabase.net 爬取任务（agent 列表 + 详情）
 │   └── buhflipexplode.ts    # buhflipexplode.com 爬取任务
 ├── tests/generate.test.ts   # 结构一致性测试（xlsx ↔ config ↔ JSON）
-├── tests/agent.test.ts      # Agent 属性公式测试
-├── tests/bangboo.test.ts    # Bangboo 属性公式测试
-├── tests/w-engine.test.ts   # 音擎属性公式测试
+├── tests/gachabase/         # gachabase 属性公式测试
+│   ├── agent.test.ts        # Agent 属性公式测试
+│   ├── bangboo.test.ts      # Bangboo 属性公式测试
+│   └── w-engine.test.ts     # 音擎属性公式测试
 ├── tests/calculator/        # 伤害计算模块测试
 │   ├── factors.test.ts      # 共享乘区（防御区、抗性区等）
 │   ├── normal.test.ts       # 常规伤害
@@ -26,23 +27,29 @@ packages/zzz-data/
 │   └── disorder.test.ts     # 紊乱伤害
 ├── data/xlsx/*.json         # 生成的 JSON 数据（16 个文件）
 ├── data/crawl/              # 爬虫输出的 JSON 数据
-│   ├── en/                  # 英文数据
-│   │   ├── gachabase-agents.json          # agent 基础列表（id/slug/name/rarity/specialty/attributes/attackTypes）
-│   │   ├── gachabase-agent-details.json   # agent 详情（faction含icon/assets.mindscapeImages/stats/skills/coreSkills/mindscapes/skins/potentialVisions 等）
-│   │   ├── gachabase-w-engines.json       # 音擎列表（id/slug/name/rarity/specialty/exclusiveAgentName/baseStat/advancedStat/effects）
-│   │   ├── gachabase-w-engine-details.json# 音擎详情（exclusiveAgent/assets.splashArt/shortComment/longComment/levels lv0-60/stars star0-5）
-│   │   ├── gachabase-bangboo.json         # 邦布详情（baseStats+growthPerLevel/skills 3种×10级/optimizations 6级含statBoosts+statAdditions）
-│   │   ├── gachabase-drive-discs.json     # 驱动盘套装（setEffects 2件/4件）
-│   │   ├── buhflipexplode-shiyu-defense.json      # 原始 sd-versions.json（各版本组的节点结构、enemy refs、buffName 等）
-│   │   ├── buhflipexplode-deadly-assault.json     # 原始 da-versions.json（各版本 Boss refs、buff、daze/anom 倍率等）
-│   │   ├── buhflipexplode-threshold-simulation.json # 原始 ts-versions.json（Easy/Hard 各版本节点结构）
-│   │   ├── buhflipexplode-enemies.json            # 敌人数据库（name/baseHP/baseDEF/baseDaze/stunMult/stunTime/baseAnom/elementMult/tags/mods/desc 等）
-│   │   └── buhflipexplode-buffs.json              # Buff 名称→描述文本映射（DA/TS 使用）
-│   └── zh-CN/               # 中文数据（仅 gachabase 系列，buhflipexplode 仅英文）
-├── src/agent.ts             # Agent 基础属性计算公式（calcAgentStat）
-├── src/bangboo.ts           # Bangboo 基础属性计算公式（calcBangbooStat）
-├── src/buhflipexplode.ts    # buhflipexplode 数据工具（节点倍率表常量、原始 JSON 类型、纯计算函数）
-├── src/w-engine.ts          # 音擎属性计算公式（calcWEngineBaseATK / calcWEngineSecondaryStat）
+│   ├── en/
+│   │   ├── gachabase/
+│   │   │   ├── agents.json          # agent 基础列表（id/slug/name/rarity/specialty/attributes/attackTypes）
+│   │   │   ├── agent-details.json   # agent 详情（faction含icon/assets.mindscapeImages/stats/skills/coreSkills/mindscapes/skins/potentialVisions 等）
+│   │   │   ├── w-engines.json       # 音擎列表（id/slug/name/rarity/specialty/exclusiveAgentName/baseStat/advancedStat/effects）
+│   │   │   ├── w-engine-details.json# 音擎详情（exclusiveAgent/assets.splashArt/shortComment/longComment/levels lv0-60/stars star0-5）
+│   │   │   ├── bangboo.json         # 邦布详情（baseStats+growthPerLevel/skills 3种×10级/optimizations 6级含statBoosts+statAdditions）
+│   │   │   └── drive-discs.json     # 驱动盘套装（setEffects 2件/4件）
+│   │   └── buhflipexplode/          # 仅英文
+│   │       ├── shiyu-defense.json        # 原始 sd-versions.json（各版本组的节点结构、enemy refs、buffName 等）
+│   │       ├── deadly-assault.json       # 原始 da-versions.json（各版本 Boss refs、buff、daze/anom 倍率等）
+│   │       ├── threshold-simulation.json # 原始 ts-versions.json（Easy/Hard 各版本节点结构）
+│   │       ├── enemies.json              # 敌人数据库（name/baseHP/baseDEF/baseDaze/stunMult/stunTime/baseAnom/elementMult/tags/mods/desc 等）
+│   │       └── buffs.json                # Buff 名称→描述文本映射（DA/TS 使用）
+│   └── zh-CN/
+│       └── gachabase/       # 同 en/gachabase/，仅 gachabase 系列
+├── src/gachabase/           # gachabase 数据工具
+│   ├── agent.ts             # Agent 基础属性计算公式（calcAgentStat）
+│   ├── bangboo.ts           # Bangboo 基础属性计算公式（calcBangbooStat）
+│   ├── w-engine.ts          # 音擎属性计算公式（calcWEngineBaseATK / calcWEngineSecondaryStat）
+│   └── index.ts             # re-export
+├── src/buhflipexplode/      # buhflipexplode 数据工具
+│   └── index.ts             # 节点倍率表常量、原始 JSON 类型、纯计算函数
 ├── src/calculator/          # 伤害计算模块（纯函数，可导出）
 │   ├── types.ts             # 所有参数/返回类型
 │   ├── factors.ts           # 各乘区独立函数（可自由组合）
@@ -54,16 +61,16 @@ packages/zzz-data/
 └── src/index.ts             # 公开类型入口（手动维护，与数据源无关）
 ```
 
-## 属性计算模块（src/agent.ts / src/bangboo.ts / src/w-engine.ts）
+## 属性计算模块（src/gachabase/）
 
 基于 gachabase.net 数据验证的纯函数属性计算库，数据来自 `data/crawl/`。
 
-| 函数                       | 文件              | 公式                                                                      |
-| -------------------------- | ----------------- | ------------------------------------------------------------------------- |
-| `calcAgentStat`            | `src/agent.ts`    | `floor(value + growthPerLevel × (L−1)) + promotionBoost + coreSkillBoost` |
-| `calcBangbooStat`          | `src/bangboo.ts`  | `floor(value + (growthPerLevel ?? 0) × (L−1)) + optimizationBoost`        |
-| `calcWEngineBaseATK`       | `src/w-engine.ts` | `baseVal + floor((lvGrowth + starGrowth) × baseVal / 10000)`              |
-| `calcWEngineSecondaryStat` | `src/w-engine.ts` | `value × (1 + starAdvGrowth / 10000)`                                     |
+| 函数                       | 文件                        | 公式                                                                      |
+| -------------------------- | --------------------------- | ------------------------------------------------------------------------- |
+| `calcAgentStat`            | `src/gachabase/agent.ts`    | `floor(value + growthPerLevel × (L−1)) + promotionBoost + coreSkillBoost` |
+| `calcBangbooStat`          | `src/gachabase/bangboo.ts`  | `floor(value + (growthPerLevel ?? 0) × (L−1)) + optimizationBoost`        |
+| `calcWEngineBaseATK`       | `src/gachabase/w-engine.ts` | `baseVal + floor((lvGrowth + starGrowth) × baseVal / 10000)`              |
+| `calcWEngineSecondaryStat` | `src/gachabase/w-engine.ts` | `value × (1 + starAdvGrowth / 10000)`                                     |
 
 **注意事项：**
 

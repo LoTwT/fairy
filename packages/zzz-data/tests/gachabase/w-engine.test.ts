@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest"
 import {
   calcWEngineBaseATK,
   calcWEngineSecondaryStat,
-} from "../src/w-engine.js"
+} from "../../src/gachabase/w-engine.js"
 
 // Reference data from gachabase-w-engine-details.json
 // S-rank lv60 star5: levels[60].baseStatGrowth=94090, stars[5].baseStatGrowth=44610, stars[5].advancedStatGrowth=15000

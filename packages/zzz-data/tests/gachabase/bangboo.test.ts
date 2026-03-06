@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { calcBangbooStat } from "../src/bangboo.js"
+import { calcBangbooStat } from "../../src/gachabase/bangboo.js"
 
 // Reference: bangboo 54010 (Biggest Fan), data from gachabase-bangboo.json
 // Verified at lv60, optimization level 6 (maxLevel=60)

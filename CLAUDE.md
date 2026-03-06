@@ -22,6 +22,7 @@ pnpm run build      # 构建生产服务器
 pnpm run start      # 启动生产服务器
 
 # 根目录命令
+pnpm run test       # 运行所有子包测试
 pnpm run lint --fix # eslint 检查并自动修复
 pnpm run prettier   # prettier 格式化
 ```
@@ -45,9 +46,9 @@ src/mastra/
 
 修改或生成代码后，**每次**必须按顺序执行以下步骤，不得遗漏：
 
-1. 在子包下跑测试：`pnpm run test`
-2. **在项目根目录跑 lint 和格式化（必须）**：`pnpm run lint --fix && pnpm run prettier`
-3. 按「维护 CLAUDE.md」规则更新对应文档（本文件 + docs/ 下相关文档）
+1. **立即对照「维护 CLAUDE.md」检查本次改动是否触发文档更新条件，若触发则先更新文档**
+2. 在子包下跑测试：`pnpm run test`
+3. **在项目根目录跑 lint 和格式化（必须）**：`pnpm run lint --fix && pnpm run prettier`
 
 ## 维护 CLAUDE.md
 

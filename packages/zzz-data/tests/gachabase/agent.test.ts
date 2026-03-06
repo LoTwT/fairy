@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { calcAgentStat } from "../src/agent.js"
+import { calcAgentStat } from "../../src/gachabase/agent.js"
 
 // Reference: agent 1521 (Nicole), data from gachabase-agent-details.json
 // Verified at lv60, promotion 6 (maxLevel=60), coreSkill level 6 (all unlocked)

@@ -1,6 +1,6 @@
 // Bangboo stat calculation formula — verified against gachabase.net
 //
-// Data source: data/crawl/{lang}/gachabase-bangboo.json
+// Data source: data/crawl/{lang}/gachabase/bangboo.json
 //
 // optimizationBoost stores cumulative values per optimization level.
 // Pass the boost value from the CURRENT unlocked level directly (do NOT sum across levels).

@@ -1,6 +1,6 @@
 // Agent stat calculation formula — verified against gachabase.net
 //
-// Data source: data/crawl/{lang}/gachabase-agent-details.json
+// Data source: data/crawl/{lang}/gachabase/agent-details.json
 //
 // Both promotionBoost and coreSkillBoost store cumulative values per level.
 // Pass the boost value from the CURRENT unlocked level directly (do NOT sum across levels).

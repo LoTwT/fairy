@@ -2,7 +2,7 @@
  * buhflipexplode.org data utilities
  *
  * Pure functions, constants, and TypeScript types for working with raw crawl
- * data from data/crawl/en/buhflipexplode-*.json (sourced from buhflipexplode.org).
+ * data from data/crawl/en/buhflipexplode/*.json (sourced from buhflipexplode.org).
  *
  * All formulas are extracted and verified against the site's sd.js / da.js / ts.js
  * source code.

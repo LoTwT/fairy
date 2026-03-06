@@ -1,8 +1,8 @@
 // W-Engine stat calculation formulas — verified against gachabase.net
 //
-// Data sources (from data/crawl/{lang}/):
+// Data sources (from data/crawl/{lang}/gachabase/):
 //   gachabase-w-engines.json      — baseStat.value, advancedStat.value, effects
-//   gachabase-w-engine-details.json — levels[lv].baseStatGrowth, stars[star].baseStatGrowth/advancedStatGrowth
+//   w-engine-details.json — levels[lv].baseStatGrowth, stars[star].baseStatGrowth/advancedStatGrowth
 
 /**
  * Calculate W-Engine Base ATK at a given level and star (breakthrough count).
@@ -10,8 +10,8 @@
  * Formula: baseVal + floor((lvGrowth + starGrowth) × baseVal / 10000)
  *
  * @param baseVal - baseStat.value from gachabase-w-engines.json (S-rank: 46/48/50, A-rank: 40/42)
- * @param lvBaseStatGrowth - levels[lv].baseStatGrowth from gachabase-w-engine-details.json (lv 0–60)
- * @param starBaseStatGrowth - stars[star].baseStatGrowth from gachabase-w-engine-details.json (star 0–5)
+ * @param lvBaseStatGrowth - levels[lv].baseStatGrowth from w-engine-details.json (lv 0–60)
+ * @param starBaseStatGrowth - stars[star].baseStatGrowth from w-engine-details.json (star 0–5)
  */
 export function calcWEngineBaseATK(
   baseVal: number,
@@ -34,7 +34,7 @@ export function calcWEngineBaseATK(
  * Integer stats (Anomaly Proficiency) are stored as integers (e.g. 36).
  *
  * @param baseValue - advancedStat.value from gachabase-w-engines.json
- * @param starAdvancedStatGrowth - stars[star].advancedStatGrowth from gachabase-w-engine-details.json (star 0–5)
+ * @param starAdvancedStatGrowth - stars[star].advancedStatGrowth from w-engine-details.json (star 0–5)
  */
 export function calcWEngineSecondaryStat(
   baseValue: number,
