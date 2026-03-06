@@ -9,7 +9,9 @@ Zenless Zone Zero 游戏数据包，从 `source.xlsx` 生成 JSON 数据，公�
 ```bash
 # zzz-data 子包命令（在 packages/zzz-data 下）
 pnpm run generate   # 从 source.xlsx 生成 data/xlsx/*.json（当前冻结，xlsx 数据源暂不可用）
-pnpm run crawl      # 爬虫脚本，爬取网页数据生成 data/crawl/*.json
+pnpm run crawl                 # 爬虫脚本，爬取所有数据生成 data/crawl/*.json
+pnpm run crawl:gachabase      # 只爬取 gachabase 数据
+pnpm run crawl:buhflipexplode # 只爬取 buhflipexplode 数据
 pnpm run test       # vitest 运行测试
 pnpm run build      # tsdown 编译，输出 dist/
 pnpm run release    # build + pnpm publish

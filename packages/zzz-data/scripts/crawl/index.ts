@@ -13,7 +13,11 @@ const outputDir = path.resolve(__dirname, "../../data/crawl")
 
 fs.mkdirSync(outputDir, { recursive: true })
 
-const tasks: CrawlTask[] = [...gachabaseTasks, ...buhflipexplodeTasks]
+const filter = process.argv[2] // e.g. "gachabase" | "buhflipexplode"
+const allTasks = [...gachabaseTasks, ...buhflipexplodeTasks]
+const tasks: CrawlTask[] = filter
+  ? allTasks.filter((t) => t.name.includes(filter))
+  : allTasks
 
 async function run() {
   if (tasks.length === 0) {

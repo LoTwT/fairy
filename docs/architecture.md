@@ -32,8 +32,11 @@ packages/zzz-data/
 │   │   ├── gachabase-w-engines.json       # 音擎列表（id/slug/name/rarity/specialty/exclusiveAgentName/baseStat/advancedStat/effects）
 │   │   ├── gachabase-w-engine-details.json# 音擎详情（exclusiveAgent/assets.splashArt/shortComment/longComment/levels lv0-60/stars star0-5）
 │   │   ├── gachabase-bangboo.json         # 邦布详情（baseStats+growthPerLevel/skills 3种×10级/optimizations 6级含statBoosts+statAdditions）
-│   │   └── gachabase-drive-discs.json     # 驱动盘套装（setEffects 2件/4件）
-│   └── zh-CN/               # 中文数据（同上）
+│   │   ├── gachabase-drive-discs.json     # 驱动盘套装（setEffects 2件/4件）
+│   │   ├── buhflipexplode-shiyu-defense.json      # 绝区零式守防：各版本各节点 rawHP/aoeHP/altHP（4个版本组）
+│   │   ├── buhflipexplode-deadly-assault.json     # 绝区零式强袭：各版本 Boss HP 及 20k/60k PP 两档汇总
+│   │   └── buhflipexplode-threshold-simulation.json # 绝区零临界模拟：Easy/Hard 两模式各版本节点 Boss+敌人 HP
+│   └── zh-CN/               # 中文数据（仅 gachabase 系列，buhflipexplode 仅英文）
 ├── src/agent.ts             # Agent 基础属性计算公式（calcAgentStat）
 ├── src/bangboo.ts           # Bangboo 基础属性计算公式（calcBangbooStat）
 ├── src/w-engine.ts          # 音擎属性计算公式（calcWEngineBaseATK / calcWEngineSecondaryStat）

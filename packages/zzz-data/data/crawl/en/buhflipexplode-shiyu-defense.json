@@ -1,0 +1,3268 @@
+[
+  {
+    "name": "Stable Node",
+    "versions": [
+      {
+        "id": "Stable Node",
+        "name": "Stable Node",
+        "time": "04/07/2024 - PRESENT",
+        "dazeMult": 100,
+        "anomMult": 100,
+        "nodes": [
+          {
+            "node": 1,
+            "level": 25,
+            "buffNames": ["Assault Up"],
+            "rawHP": 269970,
+            "aoeHP": 81386,
+            "altHP": 81386
+          },
+          {
+            "node": 2,
+            "level": 28,
+            "buffNames": ["Shock Up"],
+            "rawHP": 445890,
+            "aoeHP": 312304,
+            "altHP": 312304
+          },
+          {
+            "node": 3,
+            "level": 30,
+            "buffNames": ["Corruption Up"],
+            "rawHP": 528306,
+            "aoeHP": 401178,
+            "altHP": 401178
+          },
+          {
+            "node": 4,
+            "level": 33,
+            "buffNames": ["Burn Up"],
+            "rawHP": 880279,
+            "aoeHP": 478456,
+            "altHP": 478456
+          },
+          {
+            "node": 5,
+            "level": 35,
+            "buffNames": ["Shatter Up"],
+            "rawHP": 1055510,
+            "aoeHP": 744481,
+            "altHP": 744481
+          },
+          {
+            "node": 6,
+            "level": 38,
+            "buffNames": ["Superior Execution"],
+            "rawHP": 1427799,
+            "aoeHP": 897990,
+            "altHP": 897990
+          },
+          {
+            "node": 7,
+            "level": 40,
+            "buffNames": ["Perfect Parry"],
+            "rawHP": 1770658,
+            "aoeHP": 1564894,
+            "altHP": 1564894
+          },
+          {
+            "node": 8,
+            "level": 43,
+            "buffNames": ["Daze Up"],
+            "rawHP": 3105349,
+            "aoeHP": 2679044,
+            "altHP": 2679044
+          },
+          {
+            "node": 9,
+            "level": 45,
+            "buffNames": ["Fervent Duel"],
+            "rawHP": 4696566,
+            "aoeHP": 4391802,
+            "altHP": 4391802
+          },
+          {
+            "node": 10,
+            "level": 50,
+            "buffNames": ["Overload"],
+            "rawHP": 5241530,
+            "aoeHP": 5241530,
+            "altHP": 4946986
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Disputed Node",
+    "versions": [
+      {
+        "id": "Disputed Node",
+        "name": "Disputed Node",
+        "time": "13/08/2024 - PRESENT",
+        "dazeMult": 130,
+        "anomMult": 100,
+        "nodes": [
+          {
+            "node": 1,
+            "level": 40,
+            "buffNames": ["Frontier Buff"],
+            "rawHP": 836855,
+            "aoeHP": 836855,
+            "altHP": 836855
+          },
+          {
+            "node": 2,
+            "level": 43,
+            "buffNames": ["Frontier Buff"],
+            "rawHP": 1068520,
+            "aoeHP": 1068520,
+            "altHP": 1068520
+          },
+          {
+            "node": 3,
+            "level": 45,
+            "buffNames": ["Frontier Buff"],
+            "rawHP": 3151141,
+            "aoeHP": 3151141,
+            "altHP": 3151141
+          },
+          {
+            "node": 4,
+            "level": 48,
+            "buffNames": ["Frontier Buff"],
+            "rawHP": 4009667,
+            "aoeHP": 4009667,
+            "altHP": 4009667
+          },
+          {
+            "node": 5,
+            "level": 50,
+            "buffNames": ["Frontier Buff"],
+            "rawHP": 5108100,
+            "aoeHP": 5108100,
+            "altHP": 5108100
+          },
+          {
+            "node": 6,
+            "level": 53,
+            "buffNames": ["Frontier Buff"],
+            "rawHP": 6180192,
+            "aoeHP": 6180192,
+            "altHP": 5890480
+          },
+          {
+            "node": 7,
+            "level": 55,
+            "buffNames": ["Frontier Buff"],
+            "rawHP": 9806147,
+            "aoeHP": 6834384,
+            "altHP": 6834384
+          },
+          {
+            "node": 8,
+            "level": 60,
+            "buffNames": ["Frontier Buff"],
+            "rawHP": 14193329,
+            "aoeHP": 10158905,
+            "altHP": 9719096
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Ambush Node",
+    "versions": [
+      {
+        "id": "Ambush Node",
+        "name": "Ambush Node",
+        "time": "24/08/2024 - 06/11/2024",
+        "dazeMult": 130,
+        "anomMult": 100,
+        "nodes": [
+          {
+            "node": 1,
+            "level": 50,
+            "buffNames": ["Frontier Buff"],
+            "rawHP": 4121268,
+            "aoeHP": 2393524,
+            "altHP": null
+          },
+          {
+            "node": 2,
+            "level": 53,
+            "buffNames": ["Frontier Buff"],
+            "rawHP": 6099000,
+            "aoeHP": 4920643,
+            "altHP": null
+          },
+          {
+            "node": 3,
+            "level": 55,
+            "buffNames": ["Frontier Buff"],
+            "rawHP": 6951902,
+            "aoeHP": 5286077,
+            "altHP": null
+          },
+          {
+            "node": 4,
+            "level": 60,
+            "buffNames": ["Frontier Buff"],
+            "rawHP": 8639505,
+            "aoeHP": 6577931,
+            "altHP": null
+          },
+          {
+            "node": 5,
+            "level": 65,
+            "buffNames": ["Frontier Buff"],
+            "rawHP": 15830946,
+            "aoeHP": 10229302,
+            "altHP": null
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Critical Node",
+    "versions": [
+      {
+        "id": "1.0.1",
+        "name": "1.0 Phase 1",
+        "time": "04/07/2024 - 01/08/2024",
+        "dazeMult": 100,
+        "anomMult": 100,
+        "nodes": [
+          {
+            "node": 1,
+            "level": 50,
+            "buffNames": ["Bullying Tactics"],
+            "rawHP": 6563034,
+            "aoeHP": 4391127,
+            "altHP": 4391127
+          },
+          {
+            "node": 2,
+            "level": 53,
+            "buffNames": ["Bullying Tactics"],
+            "rawHP": 9129394,
+            "aoeHP": 6206067,
+            "altHP": 6206067
+          },
+          {
+            "node": 3,
+            "level": 55,
+            "buffNames": ["Bullying Tactics"],
+            "rawHP": 11130967,
+            "aoeHP": 6954112,
+            "altHP": 6954112
+          },
+          {
+            "node": 4,
+            "level": 58,
+            "buffNames": ["Bullying Tactics"],
+            "rawHP": 12840132,
+            "aoeHP": 7916075,
+            "altHP": 7916075
+          },
+          {
+            "node": 5,
+            "level": 60,
+            "buffNames": ["Bullying Tactics"],
+            "rawHP": 14163232,
+            "aoeHP": 8945502,
+            "altHP": 8945502
+          },
+          {
+            "node": 6,
+            "level": 65,
+            "buffNames": ["Bullying Tactics"],
+            "rawHP": 11656022,
+            "aoeHP": 9629927,
+            "altHP": 9629927
+          },
+          {
+            "node": 7,
+            "level": 70,
+            "buffNames": ["Bullying Tactics"],
+            "rawHP": 13997322,
+            "aoeHP": 12243622,
+            "altHP": 12243622
+          }
+        ]
+      },
+      {
+        "id": "1.0.2",
+        "name": "1.0 Phase 2",
+        "time": "01/08/2024 - 16/08/2024",
+        "dazeMult": 115,
+        "anomMult": 100,
+        "nodes": [
+          {
+            "node": 1,
+            "level": 50,
+            "buffNames": ["Daze Tactics"],
+            "rawHP": 5721328,
+            "aoeHP": 4353504,
+            "altHP": 4353504
+          },
+          {
+            "node": 2,
+            "level": 53,
+            "buffNames": ["Daze Tactics"],
+            "rawHP": 7779611,
+            "aoeHP": 5748995,
+            "altHP": 5748995
+          },
+          {
+            "node": 3,
+            "level": 55,
+            "buffNames": ["Daze Tactics"],
+            "rawHP": 9853193,
+            "aoeHP": 7158627,
+            "altHP": 7158627
+          },
+          {
+            "node": 4,
+            "level": 58,
+            "buffNames": ["Daze Tactics"],
+            "rawHP": 10439458,
+            "aoeHP": 7156539,
+            "altHP": 7156539
+          },
+          {
+            "node": 5,
+            "level": 60,
+            "buffNames": ["Daze Tactics"],
+            "rawHP": 13411446,
+            "aoeHP": 8165385,
+            "altHP": 8165385
+          },
+          {
+            "node": 6,
+            "level": 65,
+            "buffNames": ["Daze Tactics"],
+            "rawHP": 13635508,
+            "aoeHP": 10115844,
+            "altHP": 10115844
+          },
+          {
+            "node": 7,
+            "level": 70,
+            "buffNames": ["Daze Tactics"],
+            "rawHP": 16042291,
+            "aoeHP": 13308890,
+            "altHP": 12615129
+          }
+        ]
+      },
+      {
+        "id": "1.1.1",
+        "name": "1.1 Phase 1",
+        "time": "16/08/2024 - 01/09/2024",
+        "dazeMult": 115,
+        "anomMult": 100,
+        "nodes": [
+          {
+            "node": 1,
+            "level": 50,
+            "buffNames": ["Precise Synergy"],
+            "rawHP": 6848506,
+            "aoeHP": 5307229,
+            "altHP": 5307229
+          },
+          {
+            "node": 2,
+            "level": 53,
+            "buffNames": ["Precise Synergy"],
+            "rawHP": 7591825,
+            "aoeHP": 5985417,
+            "altHP": 5985417
+          },
+          {
+            "node": 3,
+            "level": 55,
+            "buffNames": ["Precise Synergy"],
+            "rawHP": 9694523,
+            "aoeHP": 6957183,
+            "altHP": 6957183
+          },
+          {
+            "node": 4,
+            "level": 58,
+            "buffNames": ["Precise Synergy"],
+            "rawHP": 10739849,
+            "aoeHP": 7639606,
+            "altHP": 7639606
+          },
+          {
+            "node": 5,
+            "level": 60,
+            "buffNames": ["Precise Synergy"],
+            "rawHP": 14740876,
+            "aoeHP": 9005221,
+            "altHP": 9005221
+          },
+          {
+            "node": 6,
+            "level": 65,
+            "buffNames": ["Precise Synergy"],
+            "rawHP": 12122627,
+            "aoeHP": 10361859,
+            "altHP": 10361859
+          },
+          {
+            "node": 7,
+            "level": 70,
+            "buffNames": ["Precise Synergy"],
+            "rawHP": 16843442,
+            "aoeHP": 14670408,
+            "altHP": 13923281
+          }
+        ]
+      },
+      {
+        "id": "1.1.2",
+        "name": "1.1 Phase 2",
+        "time": "01/09/2024 - 16/09/2024",
+        "dazeMult": 100,
+        "anomMult": 100,
+        "nodes": [
+          {
+            "node": 1,
+            "level": 50,
+            "buffNames": ["Irresistible Force"],
+            "rawHP": 5611991,
+            "aoeHP": 4382519,
+            "altHP": 4382519
+          },
+          {
+            "node": 2,
+            "level": 53,
+            "buffNames": ["Irresistible Force"],
+            "rawHP": 7912940,
+            "aoeHP": 6093188,
+            "altHP": 6093188
+          },
+          {
+            "node": 3,
+            "level": 55,
+            "buffNames": ["Irresistible Force"],
+            "rawHP": 9805130,
+            "aoeHP": 7263315,
+            "altHP": 7263315
+          },
+          {
+            "node": 4,
+            "level": 58,
+            "buffNames": ["Irresistible Force"],
+            "rawHP": 10639803,
+            "aoeHP": 7340096,
+            "altHP": 7340096
+          },
+          {
+            "node": 5,
+            "level": 60,
+            "buffNames": ["Irresistible Force"],
+            "rawHP": 13252904,
+            "aoeHP": 8257387,
+            "altHP": 8257387
+          },
+          {
+            "node": 6,
+            "level": 65,
+            "buffNames": ["Irresistible Force"],
+            "rawHP": 12958600,
+            "aoeHP": 11112028,
+            "altHP": 10522184
+          },
+          {
+            "node": 7,
+            "level": 70,
+            "buffNames": ["Irresistible Force"],
+            "rawHP": 16094830,
+            "aoeHP": 14284920,
+            "altHP": 13591159
+          }
+        ]
+      },
+      {
+        "id": "1.1.3",
+        "name": "1.1 Phase 3",
+        "time": "16/09/2024 - 01/10/2024",
+        "dazeMult": 100,
+        "anomMult": 100,
+        "nodes": [
+          {
+            "node": 1,
+            "level": 50,
+            "buffNames": ["Global Rollout"],
+            "rawHP": 4216798,
+            "aoeHP": 3296213,
+            "altHP": 3296213
+          },
+          {
+            "node": 2,
+            "level": 53,
+            "buffNames": ["Global Rollout"],
+            "rawHP": 5719562,
+            "aoeHP": 4240433,
+            "altHP": 4240433
+          },
+          {
+            "node": 3,
+            "level": 55,
+            "buffNames": ["Global Rollout"],
+            "rawHP": 6584520,
+            "aoeHP": 4825120,
+            "altHP": 4825120
+          },
+          {
+            "node": 4,
+            "level": 58,
+            "buffNames": ["Global Rollout"],
+            "rawHP": 8640664,
+            "aoeHP": 5379393,
+            "altHP": 5379393
+          },
+          {
+            "node": 5,
+            "level": 60,
+            "buffNames": ["Global Rollout"],
+            "rawHP": 10684109,
+            "aoeHP": 6629097,
+            "altHP": 6629097
+          },
+          {
+            "node": 6,
+            "level": 65,
+            "buffNames": ["Global Rollout"],
+            "rawHP": 9109945,
+            "aoeHP": 7664841,
+            "altHP": 7664841
+          },
+          {
+            "node": 7,
+            "level": 70,
+            "buffNames": ["Global Rollout"],
+            "rawHP": 12693801,
+            "aoeHP": 11301561,
+            "altHP": 10335256
+          }
+        ]
+      },
+      {
+        "id": "1.2.1",
+        "name": "1.2 Phase 1",
+        "time": "01/10/2024 - 16/10/2024",
+        "dazeMult": 100,
+        "anomMult": 100,
+        "nodes": [
+          {
+            "node": 1,
+            "level": 50,
+            "buffNames": ["Close Quarters Combat"],
+            "rawHP": 7278003,
+            "aoeHP": 4961257,
+            "altHP": 4961257
+          },
+          {
+            "node": 2,
+            "level": 53,
+            "buffNames": ["Close Quarters Combat"],
+            "rawHP": 8761216,
+            "aoeHP": 6481546,
+            "altHP": 6481546
+          },
+          {
+            "node": 3,
+            "level": 55,
+            "buffNames": ["Close Quarters Combat"],
+            "rawHP": 10952817,
+            "aoeHP": 7103027,
+            "altHP": 7103027
+          },
+          {
+            "node": 4,
+            "level": 58,
+            "buffNames": ["Close Quarters Combat"],
+            "rawHP": 12307732,
+            "aoeHP": 7498691,
+            "altHP": 7498691
+          },
+          {
+            "node": 5,
+            "level": 60,
+            "buffNames": ["Close Quarters Combat"],
+            "rawHP": 16541240,
+            "aoeHP": 10054554,
+            "altHP": 10054554
+          },
+          {
+            "node": 6,
+            "level": 65,
+            "buffNames": ["Close Quarters Combat"],
+            "rawHP": 13372144,
+            "aoeHP": 11048173,
+            "altHP": 11048173
+          },
+          {
+            "node": 7,
+            "level": 70,
+            "buffNames": ["Close Quarters Combat"],
+            "rawHP": 15513661,
+            "aoeHP": 11751690,
+            "altHP": 11751690
+          }
+        ]
+      },
+      {
+        "id": "1.2.2",
+        "name": "1.2 Phase 2",
+        "time": "16/10/2024 - 01/11/2024",
+        "dazeMult": 100,
+        "anomMult": 100,
+        "nodes": [
+          {
+            "node": 1,
+            "level": 50,
+            "buffNames": ["Unyielding Momentum"],
+            "rawHP": 7466038,
+            "aoeHP": 5211286,
+            "altHP": 5211286
+          },
+          {
+            "node": 2,
+            "level": 53,
+            "buffNames": ["Unyielding Momentum"],
+            "rawHP": 9320434,
+            "aoeHP": 6803161,
+            "altHP": 6803161
+          },
+          {
+            "node": 3,
+            "level": 55,
+            "buffNames": ["Unyielding Momentum"],
+            "rawHP": 11026541,
+            "aoeHP": 7341932,
+            "altHP": 7341932
+          },
+          {
+            "node": 4,
+            "level": 58,
+            "buffNames": ["Unyielding Momentum"],
+            "rawHP": 14391193,
+            "aoeHP": 8359447,
+            "altHP": 8359447
+          },
+          {
+            "node": 5,
+            "level": 60,
+            "buffNames": ["Unyielding Momentum"],
+            "rawHP": 14977224,
+            "aoeHP": 9608916,
+            "altHP": 9608916
+          },
+          {
+            "node": 6,
+            "level": 65,
+            "buffNames": ["Unyielding Momentum"],
+            "rawHP": 14503436,
+            "aoeHP": 11360594,
+            "altHP": 11360594
+          },
+          {
+            "node": 7,
+            "level": 70,
+            "buffNames": ["Unyielding Momentum"],
+            "rawHP": 16975128,
+            "aoeHP": 13369167,
+            "altHP": 12806732
+          }
+        ]
+      },
+      {
+        "id": "1.2.3",
+        "name": "1.2 Phase 3",
+        "time": "01/11/2024 - 16/11/2024",
+        "dazeMult": 120,
+        "anomMult": 100,
+        "nodes": [
+          {
+            "node": 1,
+            "level": 50,
+            "buffNames": ["Lightning Speed"],
+            "rawHP": 7052474,
+            "aoeHP": 4698368,
+            "altHP": 4698368
+          },
+          {
+            "node": 2,
+            "level": 53,
+            "buffNames": ["Lightning Speed"],
+            "rawHP": 8609794,
+            "aoeHP": 6089038,
+            "altHP": 6089038
+          },
+          {
+            "node": 3,
+            "level": 55,
+            "buffNames": ["Lightning Speed"],
+            "rawHP": 12324540,
+            "aoeHP": 8151118,
+            "altHP": 8151118
+          },
+          {
+            "node": 4,
+            "level": 58,
+            "buffNames": ["Lightning Speed"],
+            "rawHP": 12863564,
+            "aoeHP": 7855043,
+            "altHP": 7855043
+          },
+          {
+            "node": 5,
+            "level": 60,
+            "buffNames": ["Lightning Speed"],
+            "rawHP": 16875719,
+            "aoeHP": 9821149,
+            "altHP": 9821149
+          },
+          {
+            "node": 6,
+            "level": 65,
+            "buffNames": ["Lightning Speed"],
+            "rawHP": 14504804,
+            "aoeHP": 11207398,
+            "altHP": 11207398
+          },
+          {
+            "node": 7,
+            "level": 70,
+            "buffNames": ["Lightning Speed"],
+            "rawHP": 17951159,
+            "aoeHP": 14853197,
+            "altHP": 13597000
+          }
+        ]
+      },
+      {
+        "id": "1.3.1",
+        "name": "1.3 Phase 1",
+        "time": "16/11/2024 - 01/12/2024",
+        "dazeMult": 100,
+        "anomMult": 100,
+        "nodes": [
+          {
+            "node": 1,
+            "level": 50,
+            "buffNames": ["Whirling Currents"],
+            "rawHP": 8586250,
+            "aoeHP": 5984602,
+            "altHP": 5984602
+          },
+          {
+            "node": 2,
+            "level": 53,
+            "buffNames": ["Whirling Currents"],
+            "rawHP": 9584172,
+            "aoeHP": 7484456,
+            "altHP": 7484456
+          },
+          {
+            "node": 3,
+            "level": 55,
+            "buffNames": ["Whirling Currents"],
+            "rawHP": 11860471,
+            "aoeHP": 8399784,
+            "altHP": 8399784
+          },
+          {
+            "node": 4,
+            "level": 58,
+            "buffNames": ["Whirling Currents"],
+            "rawHP": 13322515,
+            "aoeHP": 7996092,
+            "altHP": 7996092
+          },
+          {
+            "node": 5,
+            "level": 60,
+            "buffNames": ["Whirling Currents"],
+            "rawHP": 17066487,
+            "aoeHP": 10629729,
+            "altHP": 10629729
+          },
+          {
+            "node": 6,
+            "level": 65,
+            "buffNames": ["Whirling Currents"],
+            "rawHP": 16410292,
+            "aoeHP": 13064739,
+            "altHP": 13064739
+          },
+          {
+            "node": 7,
+            "level": 70,
+            "buffNames": ["Whirling Currents"],
+            "rawHP": 18649809,
+            "aoeHP": 17396793,
+            "altHP": 16596299
+          }
+        ]
+      },
+      {
+        "id": "1.3.2",
+        "name": "1.3 Phase 2",
+        "time": "01/12/2024 - 17/12/2024",
+        "dazeMult": 120,
+        "anomMult": 100,
+        "nodes": [
+          {
+            "node": 1,
+            "level": 50,
+            "buffNames": ["Surging Starflow"],
+            "rawHP": 8614673,
+            "aoeHP": 6013025,
+            "altHP": 6013025
+          },
+          {
+            "node": 2,
+            "level": 53,
+            "buffNames": ["Surging Starflow"],
+            "rawHP": 10522528,
+            "aoeHP": 7757073,
+            "altHP": 7757073
+          },
+          {
+            "node": 3,
+            "level": 55,
+            "buffNames": ["Surging Starflow"],
+            "rawHP": 11008576,
+            "aoeHP": 8288156,
+            "altHP": 8288156
+          },
+          {
+            "node": 4,
+            "level": 58,
+            "buffNames": ["Surging Starflow"],
+            "rawHP": 16037375,
+            "aoeHP": 9985681,
+            "altHP": 9985681
+          },
+          {
+            "node": 5,
+            "level": 60,
+            "buffNames": ["Surging Starflow"],
+            "rawHP": 17939868,
+            "aoeHP": 10811501,
+            "altHP": 10811501
+          },
+          {
+            "node": 6,
+            "level": 65,
+            "buffNames": ["Surging Starflow"],
+            "rawHP": 15385123,
+            "aoeHP": 12628678,
+            "altHP": 12628678
+          },
+          {
+            "node": 7,
+            "level": 70,
+            "buffNames": ["Surging Starflow"],
+            "rawHP": 18842093,
+            "aoeHP": 15747305,
+            "altHP": 14946811
+          }
+        ]
+      },
+      {
+        "id": "1.3.3",
+        "name": "1.3 Phase 3",
+        "time": "17/12/2024 - 03/01/2025",
+        "dazeMult": 100,
+        "anomMult": 100,
+        "nodes": [
+          {
+            "node": 1,
+            "level": 50,
+            "buffNames": ["Anomaly Impact"],
+            "rawHP": 6015833,
+            "aoeHP": 4330787,
+            "altHP": 4330787
+          },
+          {
+            "node": 2,
+            "level": 53,
+            "buffNames": ["Anomaly Impact"],
+            "rawHP": 8247004,
+            "aoeHP": 5846791,
+            "altHP": 5846791
+          },
+          {
+            "node": 3,
+            "level": 55,
+            "buffNames": ["Anomaly Impact"],
+            "rawHP": 11982614,
+            "aoeHP": 7853545,
+            "altHP": 7853545
+          },
+          {
+            "node": 4,
+            "level": 58,
+            "buffNames": ["Anomaly Impact"],
+            "rawHP": 13688014,
+            "aoeHP": 8576101,
+            "altHP": 8576101
+          },
+          {
+            "node": 5,
+            "level": 60,
+            "buffNames": ["Anomaly Impact"],
+            "rawHP": 17313292,
+            "aoeHP": 10104306,
+            "altHP": 10104306
+          },
+          {
+            "node": 6,
+            "level": 65,
+            "buffNames": ["Anomaly Impact"],
+            "rawHP": 16968348,
+            "aoeHP": 13148810,
+            "altHP": 13148810
+          },
+          {
+            "node": 7,
+            "level": 70,
+            "buffNames": ["Anomaly Impact"],
+            "rawHP": 20920637,
+            "aoeHP": 16563061,
+            "altHP": 16563061
+          }
+        ]
+      },
+      {
+        "id": "1.4.1",
+        "name": "1.4 Phase 1",
+        "time": "03/01/2025 - 17/01/2025",
+        "dazeMult": 100,
+        "anomMult": 100,
+        "nodes": [
+          {
+            "node": 1,
+            "level": 50,
+            "buffNames": ["Explosive Assault"],
+            "rawHP": 7606994,
+            "aoeHP": 5252888,
+            "altHP": 5252888
+          },
+          {
+            "node": 2,
+            "level": 53,
+            "buffNames": ["Explosive Assault"],
+            "rawHP": 7688791,
+            "aoeHP": 5496123,
+            "altHP": 5496123
+          },
+          {
+            "node": 3,
+            "level": 55,
+            "buffNames": ["Explosive Assault"],
+            "rawHP": 12321320,
+            "aoeHP": 8211566,
+            "altHP": 8211566
+          },
+          {
+            "node": 4,
+            "level": 58,
+            "buffNames": ["Explosive Assault"],
+            "rawHP": 13367591,
+            "aoeHP": 8272478,
+            "altHP": 8272478
+          },
+          {
+            "node": 5,
+            "level": 60,
+            "buffNames": ["Explosive Assault"],
+            "rawHP": 20770118,
+            "aoeHP": 12087568,
+            "altHP": 12087568
+          },
+          {
+            "node": 6,
+            "level": 65,
+            "buffNames": ["Explosive Assault"],
+            "rawHP": 16854005,
+            "aoeHP": 13244265,
+            "altHP": 13244265
+          },
+          {
+            "node": 7,
+            "level": 70,
+            "buffNames": ["Explosive Assault"],
+            "rawHP": 20233515,
+            "aoeHP": 16340104,
+            "altHP": 15486244
+          }
+        ]
+      },
+      {
+        "id": "1.4.2",
+        "name": "1.4 Phase 2",
+        "time": "17/01/2025 - 31/01/2025",
+        "dazeMult": 100,
+        "anomMult": 100,
+        "nodes": [
+          {
+            "node": 1,
+            "level": 50,
+            "buffNames": ["Specialized Assist"],
+            "rawHP": 7263223,
+            "aoeHP": 5008471,
+            "altHP": 5008471
+          },
+          {
+            "node": 2,
+            "level": 53,
+            "buffNames": ["Specialized Assist"],
+            "rawHP": 8021525,
+            "aoeHP": 5949400,
+            "altHP": 5949400
+          },
+          {
+            "node": 3,
+            "level": 55,
+            "buffNames": ["Specialized Assist"],
+            "rawHP": 12264984,
+            "aoeHP": 8357184,
+            "altHP": 8357184
+          },
+          {
+            "node": 4,
+            "level": 58,
+            "buffNames": ["Specialized Assist"],
+            "rawHP": 13706255,
+            "aoeHP": 7874286,
+            "altHP": 7874286
+          },
+          {
+            "node": 5,
+            "level": 60,
+            "buffNames": ["Specialized Assist"],
+            "rawHP": 19829211,
+            "aoeHP": 12269360,
+            "altHP": 12269360
+          },
+          {
+            "node": 6,
+            "level": 65,
+            "buffNames": ["Specialized Assist"],
+            "rawHP": 16882674,
+            "aoeHP": 13436186,
+            "altHP": 12847645
+          },
+          {
+            "node": 7,
+            "level": 70,
+            "buffNames": ["Specialized Assist"],
+            "rawHP": 21597040,
+            "aoeHP": 16715004,
+            "altHP": 16715004
+          }
+        ]
+      },
+      {
+        "id": "1.5.1",
+        "name": "1.5 Phase 1",
+        "time": "31/01/2025 - 14/02/2025",
+        "dazeMult": 100,
+        "anomMult": 100,
+        "nodes": [
+          {
+            "node": 1,
+            "level": 50,
+            "buffNames": ["Critical Aid"],
+            "rawHP": 7007525,
+            "aoeHP": 4970598,
+            "altHP": 4970598
+          },
+          {
+            "node": 2,
+            "level": 53,
+            "buffNames": ["Critical Aid"],
+            "rawHP": 9174751,
+            "aoeHP": 6557039,
+            "altHP": 6557039
+          },
+          {
+            "node": 3,
+            "level": 55,
+            "buffNames": ["Critical Aid"],
+            "rawHP": 10220135,
+            "aoeHP": 8028712,
+            "altHP": 8028712
+          },
+          {
+            "node": 4,
+            "level": 58,
+            "buffNames": ["Critical Aid"],
+            "rawHP": 15946995,
+            "aoeHP": 9764201,
+            "altHP": 9764201
+          },
+          {
+            "node": 5,
+            "level": 60,
+            "buffNames": ["Critical Aid"],
+            "rawHP": 21809136,
+            "aoeHP": 12797904,
+            "altHP": 12797904
+          },
+          {
+            "node": 6,
+            "level": 65,
+            "buffNames": ["Critical Aid"],
+            "rawHP": 20662333,
+            "aoeHP": 16320068,
+            "altHP": 16320068
+          },
+          {
+            "node": 7,
+            "level": 70,
+            "buffNames": ["Critical Aid"],
+            "rawHP": 25779861,
+            "aoeHP": 19856333,
+            "altHP": 19856333
+          }
+        ]
+      },
+      {
+        "id": "1.5.2",
+        "name": "1.5 Phase 2",
+        "time": "14/02/2025 - 28/02/2025",
+        "dazeMult": 100,
+        "anomMult": 100,
+        "nodes": [
+          {
+            "node": 1,
+            "level": 50,
+            "buffNames": ["Ice-Fire Synergy"],
+            "rawHP": 6787250,
+            "aoeHP": 4613464,
+            "altHP": 4613464
+          },
+          {
+            "node": 2,
+            "level": 53,
+            "buffNames": ["Ice-Fire Synergy"],
+            "rawHP": 8224007,
+            "aoeHP": 5856657,
+            "altHP": 5856657
+          },
+          {
+            "node": 3,
+            "level": 55,
+            "buffNames": ["Ice-Fire Synergy"],
+            "rawHP": 11484228,
+            "aoeHP": 8091928,
+            "altHP": 8091928
+          },
+          {
+            "node": 4,
+            "level": 58,
+            "buffNames": ["Ice-Fire Synergy"],
+            "rawHP": 14178885,
+            "aoeHP": 8145814,
+            "altHP": 8145814
+          },
+          {
+            "node": 5,
+            "level": 60,
+            "buffNames": ["Ice-Fire Synergy"],
+            "rawHP": 23609599,
+            "aoeHP": 14321492,
+            "altHP": 14321492
+          },
+          {
+            "node": 6,
+            "level": 65,
+            "buffNames": ["Ice-Fire Synergy"],
+            "rawHP": 21776674,
+            "aoeHP": 18342578,
+            "altHP": 18342578
+          },
+          {
+            "node": 7,
+            "level": 70,
+            "buffNames": ["Ice-Fire Synergy"],
+            "rawHP": 25915243,
+            "aoeHP": 21032607,
+            "altHP": 21032607
+          }
+        ]
+      },
+      {
+        "id": "1.5.3",
+        "name": "1.5 Phase 3",
+        "time": "28/02/2025 - 14/03/2025",
+        "dazeMult": 100,
+        "anomMult": 100,
+        "nodes": [
+          {
+            "node": 1,
+            "level": 50,
+            "buffNames": ["Frightening Strike"],
+            "rawHP": 6329071,
+            "aoeHP": 4874671,
+            "altHP": 4874671
+          },
+          {
+            "node": 2,
+            "level": 53,
+            "buffNames": ["Frightening Strike"],
+            "rawHP": 8940946,
+            "aoeHP": 6323234,
+            "altHP": 6323234
+          },
+          {
+            "node": 3,
+            "level": 55,
+            "buffNames": ["Frightening Strike"],
+            "rawHP": 12250818,
+            "aoeHP": 7745296,
+            "altHP": 7745296
+          },
+          {
+            "node": 4,
+            "level": 58,
+            "buffNames": ["Frightening Strike"],
+            "rawHP": 13753558,
+            "aoeHP": 8186535,
+            "altHP": 8186535
+          },
+          {
+            "node": 5,
+            "level": 60,
+            "buffNames": ["Frightening Strike"],
+            "rawHP": 24313032,
+            "aoeHP": 14566181,
+            "altHP": 14566181
+          },
+          {
+            "node": 6,
+            "level": 65,
+            "buffNames": ["Frightening Strike"],
+            "rawHP": 19074512,
+            "aoeHP": 16538888,
+            "altHP": 16538888
+          },
+          {
+            "node": 7,
+            "level": 70,
+            "buffNames": ["Frightening Strike"],
+            "rawHP": 25566626,
+            "aoeHP": 20683990,
+            "altHP": 19616665
+          }
+        ]
+      },
+      {
+        "id": "1.6.1",
+        "name": "1.6 Phase 1",
+        "time": "14/03/2025 - 28/03/2025",
+        "dazeMult": 100,
+        "anomMult": 100,
+        "nodes": [
+          {
+            "node": 1,
+            "level": 50,
+            "buffNames": ["Chasing Fire and Thunder"],
+            "rawHP": 8043537,
+            "aoeHP": 5598885,
+            "altHP": 5598885
+          },
+          {
+            "node": 2,
+            "level": 53,
+            "buffNames": ["Chasing Fire and Thunder"],
+            "rawHP": 7446042,
+            "aoeHP": 5294217,
+            "altHP": 5294217
+          },
+          {
+            "node": 3,
+            "level": 55,
+            "buffNames": ["Chasing Fire and Thunder"],
+            "rawHP": 11553082,
+            "aoeHP": 8155849,
+            "altHP": 8155849
+          },
+          {
+            "node": 4,
+            "level": 58,
+            "buffNames": ["Chasing Fire and Thunder"],
+            "rawHP": 16037375,
+            "aoeHP": 9985681,
+            "altHP": 9985681
+          },
+          {
+            "node": 5,
+            "level": 60,
+            "buffNames": ["Chasing Fire and Thunder"],
+            "rawHP": 24686622,
+            "aoeHP": 14518330,
+            "altHP": 14518330
+          },
+          {
+            "node": 6,
+            "level": 65,
+            "buffNames": ["Chasing Fire and Thunder"],
+            "rawHP": 23678389,
+            "aoeHP": 20553427,
+            "altHP": 19555229
+          },
+          {
+            "node": 7,
+            "level": 70,
+            "buffNames": ["Chasing Fire and Thunder"],
+            "rawHP": 27773325,
+            "aoeHP": 22514108,
+            "altHP": 22514108
+          }
+        ]
+      },
+      {
+        "id": "1.6.2",
+        "name": "1.6 Phase 2",
+        "time": "28/03/2025 - 11/04/2025",
+        "dazeMult": 100,
+        "anomMult": 100,
+        "nodes": [
+          {
+            "node": 1,
+            "level": 50,
+            "buffNames": ["United in Spirit"],
+            "rawHP": 6314008,
+            "aoeHP": 4756432,
+            "altHP": 4756432
+          },
+          {
+            "node": 2,
+            "level": 53,
+            "buffNames": ["United in Spirit"],
+            "rawHP": 8019174,
+            "aoeHP": 5420948,
+            "altHP": 5420948
+          },
+          {
+            "node": 3,
+            "level": 55,
+            "buffNames": ["United in Spirit"],
+            "rawHP": 12565013,
+            "aoeHP": 9054038,
+            "altHP": 9054038
+          },
+          {
+            "node": 4,
+            "level": 58,
+            "buffNames": ["United in Spirit"],
+            "rawHP": 12969192,
+            "aoeHP": 8423408,
+            "altHP": 8423408
+          },
+          {
+            "node": 5,
+            "level": 60,
+            "buffNames": ["United in Spirit"],
+            "rawHP": 24180719,
+            "aoeHP": 14597668,
+            "altHP": 14597668
+          },
+          {
+            "node": 6,
+            "level": 65,
+            "buffNames": ["United in Spirit"],
+            "rawHP": 23721523,
+            "aoeHP": 19770100,
+            "altHP": 19770100
+          },
+          {
+            "node": 7,
+            "level": 70,
+            "buffNames": ["United in Spirit"],
+            "rawHP": 28057401,
+            "aoeHP": 23579697,
+            "altHP": 22459006
+          }
+        ]
+      },
+      {
+        "id": "1.6.3",
+        "name": "1.6 Phase 3",
+        "time": "11/04/2025 - 25/04/2025",
+        "dazeMult": 100,
+        "anomMult": 100,
+        "nodes": [
+          {
+            "node": 1,
+            "level": 50,
+            "buffNames": ["Oppressive Shackles"],
+            "rawHP": 7764139,
+            "aoeHP": 5422663,
+            "altHP": 5422663
+          },
+          {
+            "node": 2,
+            "level": 53,
+            "buffNames": ["Oppressive Shackles"],
+            "rawHP": 7308968,
+            "aoeHP": 4988686,
+            "altHP": 4988686
+          },
+          {
+            "node": 3,
+            "level": 55,
+            "buffNames": ["Oppressive Shackles"],
+            "rawHP": 11683745,
+            "aoeHP": 7863502,
+            "altHP": 7863502
+          },
+          {
+            "node": 4,
+            "level": 58,
+            "buffNames": ["Oppressive Shackles"],
+            "rawHP": 13254730,
+            "aoeHP": 9717521,
+            "altHP": 9717521
+          },
+          {
+            "node": 5,
+            "level": 60,
+            "buffNames": ["Oppressive Shackles"],
+            "rawHP": 25019761,
+            "aoeHP": 14305050,
+            "altHP": 14305050
+          },
+          {
+            "node": 6,
+            "level": 65,
+            "buffNames": ["Oppressive Shackles"],
+            "rawHP": 24568852,
+            "aoeHP": 20018223,
+            "altHP": 19020025
+          },
+          {
+            "node": 7,
+            "level": 70,
+            "buffNames": ["Oppressive Shackles"],
+            "rawHP": 31563479,
+            "aoeHP": 19544250,
+            "altHP": 23238036
+          }
+        ]
+      },
+      {
+        "id": "1.7.1",
+        "name": "1.7 Phase 1",
+        "time": "25/04/2025 - 09/05/2025",
+        "dazeMult": 100,
+        "anomMult": 100,
+        "nodes": [
+          {
+            "node": 1,
+            "level": 50,
+            "buffNames": ["The Sound of Change"],
+            "rawHP": 7269715,
+            "aoeHP": 5246215,
+            "altHP": 5246215
+          },
+          {
+            "node": 2,
+            "level": 53,
+            "buffNames": ["The Sound of Change"],
+            "rawHP": 8947728,
+            "aoeHP": 6612141,
+            "altHP": 6612141
+          },
+          {
+            "node": 3,
+            "level": 55,
+            "buffNames": ["The Sound of Change"],
+            "rawHP": 13566769,
+            "aoeHP": 9716577,
+            "altHP": 9716577
+          },
+          {
+            "node": 4,
+            "level": 58,
+            "buffNames": ["The Sound of Change"],
+            "rawHP": 17935374,
+            "aoeHP": 10701117,
+            "altHP": 10701117
+          },
+          {
+            "node": 5,
+            "level": 60,
+            "buffNames": ["The Sound of Change"],
+            "rawHP": 26248672,
+            "aoeHP": 16336550,
+            "altHP": 16336550
+          },
+          {
+            "node": 6,
+            "level": 65,
+            "buffNames": ["The Sound of Change"],
+            "rawHP": 25952902,
+            "aoeHP": 20292908,
+            "altHP": 19410097
+          },
+          {
+            "node": 7,
+            "level": 70,
+            "buffNames": ["The Sound of Change"],
+            "rawHP": 33119774,
+            "aoeHP": 27318933,
+            "altHP": 26038143
+          }
+        ]
+      },
+      {
+        "id": "1.7.2",
+        "name": "1.7 Phase 2",
+        "time": "09/05/2025 - 23/05/2025",
+        "dazeMult": 100,
+        "anomMult": 100,
+        "nodes": [
+          {
+            "node": 1,
+            "level": 50,
+            "buffNames": ["Majestic Frost"],
+            "rawHP": 6003001,
+            "aoeHP": 4253919,
+            "altHP": 4253919
+          },
+          {
+            "node": 2,
+            "level": 53,
+            "buffNames": ["Majestic Frost"],
+            "rawHP": 8528424,
+            "aoeHP": 5943578,
+            "altHP": 5943578
+          },
+          {
+            "node": 3,
+            "level": 55,
+            "buffNames": ["Majestic Frost"],
+            "rawHP": 14041385,
+            "aoeHP": 8787055,
+            "altHP": 8787055
+          },
+          {
+            "node": 4,
+            "level": 58,
+            "buffNames": ["Majestic Frost"],
+            "rawHP": 15505199,
+            "aoeHP": 10512298,
+            "altHP": 10512298
+          },
+          {
+            "node": 5,
+            "level": 60,
+            "buffNames": ["Majestic Frost"],
+            "rawHP": 26912707,
+            "aoeHP": 16041062,
+            "altHP": 16041062
+          },
+          {
+            "node": 6,
+            "level": 65,
+            "buffNames": ["Majestic Frost"],
+            "rawHP": 24605576,
+            "aoeHP": 21317444,
+            "altHP": 21317444
+          },
+          {
+            "node": 7,
+            "level": 70,
+            "buffNames": ["Majestic Frost"],
+            "rawHP": 31327051,
+            "aoeHP": 18974409,
+            "altHP": 23228631
+          }
+        ]
+      },
+      {
+        "id": "1.7.3",
+        "name": "1.7 Phase 3",
+        "time": "23/05/2025 - 06/06/2025",
+        "dazeMult": 100,
+        "anomMult": 100,
+        "nodes": [
+          {
+            "node": 1,
+            "level": 50,
+            "buffNames": ["Mountain Strike"],
+            "rawHP": 7038629,
+            "aoeHP": 4784332,
+            "altHP": 4784332
+          },
+          {
+            "node": 2,
+            "level": 53,
+            "buffNames": ["Mountain Strike"],
+            "rawHP": 8711523,
+            "aoeHP": 5684485,
+            "altHP": 5684485
+          },
+          {
+            "node": 3,
+            "level": 55,
+            "buffNames": ["Mountain Strike"],
+            "rawHP": 12517399,
+            "aoeHP": 8607543,
+            "altHP": 8607543
+          },
+          {
+            "node": 4,
+            "level": 58,
+            "buffNames": ["Mountain Strike"],
+            "rawHP": 16023257,
+            "aoeHP": 9565665,
+            "altHP": 9565665
+          },
+          {
+            "node": 5,
+            "level": 60,
+            "buffNames": ["Mountain Strike"],
+            "rawHP": 27906199,
+            "aoeHP": 16149021,
+            "altHP": 16149021
+          },
+          {
+            "node": 6,
+            "level": 65,
+            "buffNames": ["Mountain Strike"],
+            "rawHP": 25763682,
+            "aoeHP": 22026272,
+            "altHP": 21143461
+          },
+          {
+            "node": 7,
+            "level": 70,
+            "buffNames": ["Mountain Strike"],
+            "rawHP": 30187813,
+            "aoeHP": 25247459,
+            "altHP": 25247459
+          }
+        ]
+      },
+      {
+        "id": "2.0.1",
+        "name": "2.0 Phase 1",
+        "time": "06/06/2025 - 20/06/2025",
+        "dazeMult": 100,
+        "anomMult": 100,
+        "nodes": [
+          {
+            "node": 1,
+            "level": 50,
+            "buffNames": ["Frosty Lance, Phantom Thorn"],
+            "rawHP": 6715274,
+            "aoeHP": 5100014,
+            "altHP": 5100014
+          },
+          {
+            "node": 2,
+            "level": 53,
+            "buffNames": ["Frosty Lance, Phantom Thorn"],
+            "rawHP": 9127609,
+            "aoeHP": 6970830,
+            "altHP": 6970830
+          },
+          {
+            "node": 3,
+            "level": 55,
+            "buffNames": ["Frosty Lance, Phantom Thorn"],
+            "rawHP": 12880148,
+            "aoeHP": 8722867,
+            "altHP": 8722867
+          },
+          {
+            "node": 4,
+            "level": 58,
+            "buffNames": ["Frosty Lance, Phantom Thorn"],
+            "rawHP": 16472657,
+            "aoeHP": 10540438,
+            "altHP": 10540438
+          },
+          {
+            "node": 5,
+            "level": 60,
+            "buffNames": ["Frosty Lance, Phantom Thorn"],
+            "rawHP": 29249762,
+            "aoeHP": 16999306,
+            "altHP": 16999306
+          },
+          {
+            "node": 6,
+            "level": 65,
+            "buffNames": ["Frosty Lance, Phantom Thorn"],
+            "rawHP": 37644343,
+            "aoeHP": 23623369,
+            "altHP": 29038024
+          },
+          {
+            "node": 7,
+            "level": 70,
+            "buffNames": ["Frosty Lance, Phantom Thorn"],
+            "rawHP": 30188136,
+            "aoeHP": 30188136,
+            "altHP": 28679256
+          }
+        ]
+      },
+      {
+        "id": "2.0.2",
+        "name": "2.0 Phase 2",
+        "time": "20/06/2025 - 04/07/2025",
+        "dazeMult": 100,
+        "anomMult": 100,
+        "nodes": [
+          {
+            "node": 1,
+            "level": 50,
+            "buffNames": ["Tiger's Roaring Gale"],
+            "rawHP": 8515939,
+            "aoeHP": 6281544,
+            "altHP": 6281544
+          },
+          {
+            "node": 2,
+            "level": 53,
+            "buffNames": ["Tiger's Roaring Gale"],
+            "rawHP": 8123427,
+            "aoeHP": 5879385,
+            "altHP": 5879385
+          },
+          {
+            "node": 3,
+            "level": 55,
+            "buffNames": ["Tiger's Roaring Gale"],
+            "rawHP": 13591538,
+            "aoeHP": 8530570,
+            "altHP": 8530570
+          },
+          {
+            "node": 4,
+            "level": 58,
+            "buffNames": ["Tiger's Roaring Gale"],
+            "rawHP": 16372195,
+            "aoeHP": 9661904,
+            "altHP": 9661904
+          },
+          {
+            "node": 5,
+            "level": 60,
+            "buffNames": ["Tiger's Roaring Gale"],
+            "rawHP": 32283170,
+            "aoeHP": 18987164,
+            "altHP": 18987164
+          },
+          {
+            "node": 6,
+            "level": 65,
+            "buffNames": ["Tiger's Roaring Gale"],
+            "rawHP": 25759399,
+            "aoeHP": 22404886,
+            "altHP": 21270571
+          },
+          {
+            "node": 7,
+            "level": 70,
+            "buffNames": ["Tiger's Roaring Gale"],
+            "rawHP": 40218036,
+            "aoeHP": 36228868,
+            "altHP": 34934959
+          }
+        ]
+      },
+      {
+        "id": "2.0.3",
+        "name": "2.0 Phase 3",
+        "time": "04/07/2025 - 18/07/2025",
+        "dazeMult": 100,
+        "anomMult": 100,
+        "nodes": [
+          {
+            "node": 1,
+            "level": 50,
+            "buffNames": ["Blazing and Radiant Strike"],
+            "rawHP": 7706541,
+            "aoeHP": 5579141,
+            "altHP": 5579141
+          },
+          {
+            "node": 2,
+            "level": 53,
+            "buffNames": ["Blazing and Radiant Strike"],
+            "rawHP": 8138082,
+            "aoeHP": 5415556,
+            "altHP": 5415556
+          },
+          {
+            "node": 3,
+            "level": 55,
+            "buffNames": ["Blazing and Radiant Strike"],
+            "rawHP": 11527950,
+            "aoeHP": 8614468,
+            "altHP": 8614468
+          },
+          {
+            "node": 4,
+            "level": 58,
+            "buffNames": ["Blazing and Radiant Strike"],
+            "rawHP": 18464411,
+            "aoeHP": 11172746,
+            "altHP": 11172746
+          },
+          {
+            "node": 5,
+            "level": 60,
+            "buffNames": ["Blazing and Radiant Strike"],
+            "rawHP": 29944857,
+            "aoeHP": 17993962,
+            "altHP": 17993962
+          },
+          {
+            "node": 6,
+            "level": 65,
+            "buffNames": ["Blazing and Radiant Strike"],
+            "rawHP": 28985848,
+            "aoeHP": 27210301,
+            "altHP": 25927434
+          },
+          {
+            "node": 7,
+            "level": 70,
+            "buffNames": ["Blazing and Radiant Strike"],
+            "rawHP": 44106712,
+            "aoeHP": 30094560,
+            "altHP": 33470970
+          }
+        ]
+      },
+      {
+        "id": "2.1.1",
+        "name": "2.1 Phase 1",
+        "time": "18/07/2025 - 01/08/2025",
+        "dazeMult": 100,
+        "anomMult": 100,
+        "nodes": [
+          {
+            "node": 1,
+            "level": 50,
+            "buffNames": ["Peculiar Bloom"],
+            "rawHP": 6715274,
+            "aoeHP": 5100014,
+            "altHP": 5100014
+          },
+          {
+            "node": 2,
+            "level": 53,
+            "buffNames": ["Peculiar Bloom"],
+            "rawHP": 9531537,
+            "aoeHP": 7371002,
+            "altHP": 7371002
+          },
+          {
+            "node": 3,
+            "level": 55,
+            "buffNames": ["Peculiar Bloom"],
+            "rawHP": 14610286,
+            "aoeHP": 9575950,
+            "altHP": 9575950
+          },
+          {
+            "node": 4,
+            "level": 58,
+            "buffNames": ["Peculiar Bloom"],
+            "rawHP": 15686701,
+            "aoeHP": 10165611,
+            "altHP": 10165611
+          },
+          {
+            "node": 5,
+            "level": 60,
+            "buffNames": ["Peculiar Bloom"],
+            "rawHP": 33744837,
+            "aoeHP": 19854413,
+            "altHP": 19854413
+          },
+          {
+            "node": 6,
+            "level": 65,
+            "buffNames": ["Peculiar Bloom"],
+            "rawHP": 31783528,
+            "aoeHP": 30075820,
+            "altHP": 30075820
+          },
+          {
+            "node": 7,
+            "level": 70,
+            "buffNames": ["Peculiar Bloom"],
+            "rawHP": 40828217,
+            "aoeHP": 39023909,
+            "altHP": 35926517
+          }
+        ]
+      },
+      {
+        "id": "2.1.2",
+        "name": "2.1 Phase 2",
+        "time": "01/08/2025 - 15/08/2025",
+        "dazeMult": 100,
+        "anomMult": 100,
+        "nodes": [
+          {
+            "node": 1,
+            "level": 50,
+            "buffNames": ["Lone Blade's Pride"],
+            "rawHP": 6102180,
+            "aoeHP": 4410285,
+            "altHP": 4410285
+          },
+          {
+            "node": 2,
+            "level": 53,
+            "buffNames": ["Lone Blade's Pride"],
+            "rawHP": 9130829,
+            "aoeHP": 6419923,
+            "altHP": 6419923
+          },
+          {
+            "node": 3,
+            "level": 55,
+            "buffNames": ["Lone Blade's Pride"],
+            "rawHP": 13803278,
+            "aoeHP": 9280314,
+            "altHP": 9280314
+          },
+          {
+            "node": 4,
+            "level": 58,
+            "buffNames": ["Lone Blade's Pride"],
+            "rawHP": 16641495,
+            "aoeHP": 10028288,
+            "altHP": 10028288
+          },
+          {
+            "node": 5,
+            "level": 60,
+            "buffNames": ["Lone Blade's Pride"],
+            "rawHP": 38018068,
+            "aoeHP": 22148036,
+            "altHP": 22148036
+          },
+          {
+            "node": 6,
+            "level": 65,
+            "buffNames": ["Lone Blade's Pride"],
+            "rawHP": 40119335,
+            "aoeHP": 32298453,
+            "altHP": 31213331
+          },
+          {
+            "node": 7,
+            "level": 70,
+            "buffNames": ["Lone Blade's Pride"],
+            "rawHP": 36916903,
+            "aoeHP": 36916903,
+            "altHP": 35533440
+          }
+        ]
+      },
+      {
+        "id": "2.1.3",
+        "name": "2.1 Phase 3",
+        "time": "15/08/2025 - 29/08/2025",
+        "dazeMult": 100,
+        "anomMult": 100,
+        "nodes": [
+          {
+            "node": 1,
+            "level": 50,
+            "buffNames": ["Shock and Thunder"],
+            "rawHP": 7365211,
+            "aoeHP": 5179746,
+            "altHP": 5179746
+          },
+          {
+            "node": 2,
+            "level": 53,
+            "buffNames": ["Shock and Thunder"],
+            "rawHP": 10332060,
+            "aoeHP": 7621154,
+            "altHP": 7621154
+          },
+          {
+            "node": 3,
+            "level": 55,
+            "buffNames": ["Shock and Thunder"],
+            "rawHP": 14397746,
+            "aoeHP": 9579413,
+            "altHP": 9579413
+          },
+          {
+            "node": 4,
+            "level": 58,
+            "buffNames": ["Shock and Thunder"],
+            "rawHP": 18175692,
+            "aoeHP": 11317104,
+            "altHP": 11317104
+          },
+          {
+            "node": 5,
+            "level": 60,
+            "buffNames": ["Shock and Thunder"],
+            "rawHP": 30719660,
+            "aoeHP": 18908938,
+            "altHP": 18908938
+          },
+          {
+            "node": 6,
+            "level": 65,
+            "buffNames": ["Shock and Thunder"],
+            "rawHP": 32393885,
+            "aoeHP": 28978469,
+            "altHP": 27563345
+          },
+          {
+            "node": 7,
+            "level": 70,
+            "buffNames": ["Shock and Thunder"],
+            "rawHP": 48526592,
+            "aoeHP": 34914707,
+            "altHP": 38988031
+          }
+        ]
+      },
+      {
+        "id": "2.1.4",
+        "name": "2.1 Phase 4",
+        "time": "29/08/2025 - 12/09/2025",
+        "dazeMult": 100,
+        "anomMult": 100,
+        "nodes": [
+          {
+            "node": 1,
+            "level": 50,
+            "buffNames": ["Thunderslap"],
+            "rawHP": 8192151,
+            "aoeHP": 5656956,
+            "altHP": 5656956
+          },
+          {
+            "node": 2,
+            "level": 53,
+            "buffNames": ["Thunderslap"],
+            "rawHP": 8806291,
+            "aoeHP": 6712451,
+            "altHP": 6712451
+          },
+          {
+            "node": 3,
+            "level": 55,
+            "buffNames": ["Thunderslap"],
+            "rawHP": 12827150,
+            "aoeHP": 9411088,
+            "altHP": 9411088
+          },
+          {
+            "node": 4,
+            "level": 58,
+            "buffNames": ["Thunderslap"],
+            "rawHP": 18311890,
+            "aoeHP": 11385203,
+            "altHP": 11385203
+          },
+          {
+            "node": 5,
+            "level": 60,
+            "buffNames": ["Thunderslap"],
+            "rawHP": 31066848,
+            "aoeHP": 19221808,
+            "altHP": 19221808
+          },
+          {
+            "node": 6,
+            "level": 65,
+            "buffNames": ["Thunderslap"],
+            "rawHP": 33098204,
+            "aoeHP": 29381792,
+            "altHP": 29381792
+          },
+          {
+            "node": 7,
+            "level": 70,
+            "buffNames": ["Thunderslap"],
+            "rawHP": 43035738,
+            "aoeHP": 35423513,
+            "altHP": 33883431
+          }
+        ]
+      },
+      {
+        "id": "2.2.1",
+        "name": "2.2 Phase 1",
+        "time": "12/09/2025 - 26/09/2025",
+        "dazeMult": 100,
+        "anomMult": 100,
+        "nodes": [
+          {
+            "node": 1,
+            "level": 50,
+            "buffNames": ["Harmony of Strings"],
+            "rawHP": 7374498,
+            "aoeHP": 4839303,
+            "altHP": 4839303
+          },
+          {
+            "node": 2,
+            "level": 53,
+            "buffNames": ["Harmony of Strings"],
+            "rawHP": 9732338,
+            "aoeHP": 7371002,
+            "altHP": 7371002
+          },
+          {
+            "node": 3,
+            "level": 55,
+            "buffNames": ["Harmony of Strings"],
+            "rawHP": 14720016,
+            "aoeHP": 9708321,
+            "altHP": 9708321
+          },
+          {
+            "node": 4,
+            "level": 58,
+            "buffNames": ["Harmony of Strings"],
+            "rawHP": 18400812,
+            "aoeHP": 11385203,
+            "altHP": 11385203
+          },
+          {
+            "node": 5,
+            "level": 60,
+            "buffNames": ["Harmony of Strings"],
+            "rawHP": 43110374,
+            "aoeHP": 26708250,
+            "altHP": 26708250
+          },
+          {
+            "node": 6,
+            "level": 65,
+            "buffNames": ["Harmony of Strings"],
+            "rawHP": 42785574,
+            "aoeHP": 36909458,
+            "altHP": 36909458
+          },
+          {
+            "node": 7,
+            "level": 70,
+            "buffNames": ["Harmony of Strings"],
+            "rawHP": 43694047,
+            "aoeHP": 41310999,
+            "altHP": 39363921
+          }
+        ]
+      },
+      {
+        "id": "2.2.2",
+        "name": "2.2 Phase 2",
+        "time": "26/09/2025 - 10/10/2025",
+        "dazeMult": 100,
+        "anomMult": 100,
+        "nodes": [
+          {
+            "node": 1,
+            "level": 50,
+            "buffNames": ["Frosty Fire"],
+            "rawHP": 8040355,
+            "aoeHP": 5612155,
+            "altHP": 5612155
+          },
+          {
+            "node": 2,
+            "level": 53,
+            "buffNames": ["Frosty Fire"],
+            "rawHP": 9780438,
+            "aoeHP": 7065776,
+            "altHP": 7065776
+          },
+          {
+            "node": 3,
+            "level": 55,
+            "buffNames": ["Frosty Fire"],
+            "rawHP": 14701109,
+            "aoeHP": 10856509,
+            "altHP": 10856509
+          },
+          {
+            "node": 4,
+            "level": 58,
+            "buffNames": ["Frosty Fire"],
+            "rawHP": 18311890,
+            "aoeHP": 11385203,
+            "altHP": 11385203
+          },
+          {
+            "node": 5,
+            "level": 60,
+            "buffNames": ["Frosty Fire"],
+            "rawHP": 38689878,
+            "aoeHP": 22316933,
+            "altHP": 22316933
+          },
+          {
+            "node": 6,
+            "level": 65,
+            "buffNames": ["Frosty Fire"],
+            "rawHP": 28244324,
+            "aoeHP": 28244324,
+            "altHP": 28244324
+          },
+          {
+            "node": 7,
+            "level": 70,
+            "buffNames": ["Frosty Fire"],
+            "rawHP": 38893661,
+            "aoeHP": 38893661,
+            "altHP": 35941113
+          }
+        ]
+      },
+      {
+        "id": "2.2.3",
+        "name": "2.2 Phase 3",
+        "time": "10/10/2025 - 24/10/2025",
+        "dazeMult": 100,
+        "anomMult": 100,
+        "nodes": [
+          {
+            "node": 1,
+            "level": 50,
+            "buffNames": ["Cruising Shark in Red"],
+            "rawHP": 6563478,
+            "aoeHP": 5055213,
+            "altHP": 5055213
+          },
+          {
+            "node": 2,
+            "level": 53,
+            "buffNames": ["Cruising Shark in Red"],
+            "rawHP": 9939219,
+            "aoeHP": 6863367,
+            "altHP": 6863367
+          },
+          {
+            "node": 3,
+            "level": 55,
+            "buffNames": ["Cruising Shark in Red"],
+            "rawHP": 13884253,
+            "aoeHP": 8778001,
+            "altHP": 8778001
+          },
+          {
+            "node": 4,
+            "level": 58,
+            "buffNames": ["Cruising Shark in Red"],
+            "rawHP": 17230468,
+            "aoeHP": 10450671,
+            "altHP": 10450671
+          },
+          {
+            "node": 5,
+            "level": 60,
+            "buffNames": ["Cruising Shark in Red"],
+            "rawHP": 46635099,
+            "aoeHP": 27458798,
+            "altHP": 27458798
+          },
+          {
+            "node": 6,
+            "level": 65,
+            "buffNames": ["Cruising Shark in Red"],
+            "rawHP": 39366110,
+            "aoeHP": 36428052,
+            "altHP": 33289874
+          },
+          {
+            "node": 7,
+            "level": 70,
+            "buffNames": ["Cruising Shark in Red"],
+            "rawHP": 46160976,
+            "aoeHP": 44017994,
+            "altHP": 40528591
+          }
+        ]
+      },
+      {
+        "id": "2.3.1",
+        "name": "2.3 Phase 1",
+        "time": "24/10/2025 - 07/11/2025",
+        "dazeMult": 100,
+        "anomMult": 100,
+        "nodes": [
+          {
+            "node": 1,
+            "level": 50,
+            "buffNames": ["Harmony of Strings"],
+            "rawHP": 7711992,
+            "aoeHP": 5535960,
+            "altHP": 5535960
+          },
+          {
+            "node": 2,
+            "level": 53,
+            "buffNames": ["Harmony of Strings"],
+            "rawHP": 9238648,
+            "aoeHP": 6482325,
+            "altHP": 6482325
+          },
+          {
+            "node": 3,
+            "level": 55,
+            "buffNames": ["Harmony of Strings"],
+            "rawHP": 14351137,
+            "aoeHP": 8860032,
+            "altHP": 8860032
+          },
+          {
+            "node": 4,
+            "level": 58,
+            "buffNames": ["Harmony of Strings"],
+            "rawHP": 17035176,
+            "aoeHP": 10564639,
+            "altHP": 10564639
+          },
+          {
+            "node": 5,
+            "level": 60,
+            "buffNames": ["Harmony of Strings"],
+            "rawHP": 41943100,
+            "aoeHP": 27538565,
+            "altHP": 27538565
+          },
+          {
+            "node": 6,
+            "level": 65,
+            "buffNames": ["Harmony of Strings"],
+            "rawHP": 40413205,
+            "aoeHP": 35132625,
+            "altHP": 33453838
+          },
+          {
+            "node": 7,
+            "level": 70,
+            "buffNames": ["Harmony of Strings"],
+            "rawHP": 49750473,
+            "aoeHP": 34975331,
+            "altHP": 42362902
+          }
+        ]
+      },
+      {
+        "id": "2.3.2",
+        "name": "2.3 Phase 2",
+        "time": "07/11/2025 - 21/11/2025",
+        "dazeMult": 100,
+        "anomMult": 100,
+        "nodes": [
+          {
+            "node": 1,
+            "level": 50,
+            "buffNames": ["Frosty Fire"],
+            "rawHP": 7762249,
+            "aoeHP": 5227054,
+            "altHP": 5227054
+          },
+          {
+            "node": 2,
+            "level": 53,
+            "buffNames": ["Frosty Fire"],
+            "rawHP": 10743495,
+            "aoeHP": 7352227,
+            "altHP": 7352227
+          },
+          {
+            "node": 3,
+            "level": 55,
+            "buffNames": ["Frosty Fire"],
+            "rawHP": 13432540,
+            "aoeHP": 9039811,
+            "altHP": 9039811
+          },
+          {
+            "node": 4,
+            "level": 58,
+            "buffNames": ["Frosty Fire"],
+            "rawHP": 15020623,
+            "aoeHP": 9764333,
+            "altHP": 9764333
+          },
+          {
+            "node": 5,
+            "level": 60,
+            "buffNames": ["Frosty Fire"],
+            "rawHP": 44046496,
+            "aoeHP": 26042800,
+            "altHP": 26042800
+          },
+          {
+            "node": 6,
+            "level": 65,
+            "buffNames": ["Frosty Fire"],
+            "rawHP": 33039198,
+            "aoeHP": 26373955,
+            "altHP": 26373955
+          },
+          {
+            "node": 7,
+            "level": 70,
+            "buffNames": ["Frosty Fire"],
+            "rawHP": 44749272,
+            "aoeHP": 44749272,
+            "altHP": 41113394
+          }
+        ]
+      },
+      {
+        "id": "2.3.3",
+        "name": "2.3 Phase 3",
+        "time": "21/11/2025 - 05/12/2025",
+        "dazeMult": 100,
+        "anomMult": 100,
+        "nodes": [
+          {
+            "node": 1,
+            "level": 50,
+            "buffNames": ["Cruising Shark in Red"],
+            "rawHP": 8898828,
+            "aoeHP": 5697927,
+            "altHP": 5697927
+          },
+          {
+            "node": 2,
+            "level": 53,
+            "buffNames": ["Cruising Shark in Red"],
+            "rawHP": 10313464,
+            "aoeHP": 7237612,
+            "altHP": 7237612
+          },
+          {
+            "node": 3,
+            "level": 55,
+            "buffNames": ["Cruising Shark in Red"],
+            "rawHP": 15801356,
+            "aoeHP": 10969437,
+            "altHP": 10969437
+          },
+          {
+            "node": 4,
+            "level": 58,
+            "buffNames": ["Cruising Shark in Red"],
+            "rawHP": 16641495,
+            "aoeHP": 10028288,
+            "altHP": 10028288
+          },
+          {
+            "node": 5,
+            "level": 60,
+            "buffNames": ["Cruising Shark in Red"],
+            "rawHP": 33534535,
+            "aoeHP": 17985760,
+            "altHP": 17985760
+          },
+          {
+            "node": 6,
+            "level": 65,
+            "buffNames": ["Cruising Shark in Red"],
+            "rawHP": 33256332,
+            "aoeHP": 32185396,
+            "altHP": 30720648
+          },
+          {
+            "node": 7,
+            "level": 70,
+            "buffNames": ["Cruising Shark in Red"],
+            "rawHP": 49301115,
+            "aoeHP": 47019875,
+            "altHP": 43292186
+          }
+        ]
+      },
+      {
+        "id": "2.4.1",
+        "name": "2.4 Phase 1",
+        "time": "05/12/2025 - 19/12/2025",
+        "dazeMult": 100,
+        "anomMult": 100,
+        "nodes": [
+          {
+            "node": 1,
+            "level": 50,
+            "buffNames": ["Deceitful Steps"],
+            "rawHP": 6881959,
+            "aoeHP": 4861999,
+            "altHP": 4861999
+          },
+          {
+            "node": 2,
+            "level": 53,
+            "buffNames": ["Deceitful Steps"],
+            "rawHP": 8681847,
+            "aoeHP": 6307989,
+            "altHP": 6307989
+          },
+          {
+            "node": 3,
+            "level": 55,
+            "buffNames": ["Deceitful Steps"],
+            "rawHP": 12517399,
+            "aoeHP": 8607543,
+            "altHP": 8607543
+          },
+          {
+            "node": 4,
+            "level": 58,
+            "buffNames": ["Deceitful Steps"],
+            "rawHP": 17657633,
+            "aoeHP": 12088706,
+            "altHP": 12088706
+          },
+          {
+            "node": 5,
+            "level": 60,
+            "buffNames": ["Deceitful Steps"],
+            "rawHP": 41826574,
+            "aoeHP": 36660102,
+            "altHP": 36660102
+          },
+          {
+            "node": 6,
+            "level": 65,
+            "buffNames": ["Deceitful Steps"],
+            "rawHP": 59045014,
+            "aoeHP": 39985429,
+            "altHP": 38366942
+          },
+          {
+            "node": 7,
+            "level": 70,
+            "buffNames": ["Deceitful Steps"],
+            "rawHP": 61102319,
+            "aoeHP": 61102319,
+            "altHP": 56806537
+          }
+        ]
+      },
+      {
+        "id": "2.4.2",
+        "name": "2.4 Phase 2",
+        "time": "19/12/2025 - 29/12/2025",
+        "dazeMult": 100,
+        "anomMult": 100,
+        "nodes": [
+          {
+            "node": 1,
+            "level": 50,
+            "buffNames": ["Cloudbreaker"],
+            "rawHP": 6563478,
+            "aoeHP": 5055213,
+            "altHP": 5055213
+          },
+          {
+            "node": 2,
+            "level": 53,
+            "buffNames": ["Cloudbreaker"],
+            "rawHP": 9908465,
+            "aoeHP": 7197559,
+            "altHP": 7197559
+          },
+          {
+            "node": 3,
+            "level": 55,
+            "buffNames": ["Cloudbreaker"],
+            "rawHP": 14675274,
+            "aoeHP": 9949625,
+            "altHP": 9949625
+          },
+          {
+            "node": 4,
+            "level": 58,
+            "buffNames": ["Cloudbreaker"],
+            "rawHP": 17151111,
+            "aoeHP": 10446168,
+            "altHP": 10446168
+          },
+          {
+            "node": 5,
+            "level": 60,
+            "buffNames": ["Cloudbreaker"],
+            "rawHP": 53584215,
+            "aoeHP": 43749495,
+            "altHP": 43749495
+          },
+          {
+            "node": 6,
+            "level": 65,
+            "buffNames": ["Cloudbreaker"],
+            "rawHP": 48974705,
+            "aoeHP": 48974705,
+            "altHP": 44995511
+          },
+          {
+            "node": 7,
+            "level": 70,
+            "buffNames": ["Cloudbreaker"],
+            "rawHP": 60448127,
+            "aoeHP": 60448127,
+            "altHP": 55536717
+          }
+        ]
+      },
+      {
+        "id": "2.5.1",
+        "name": "2.5 Phase 1",
+        "time": "29/12/2025 - 09/01/2026",
+        "dazeMult": 100,
+        "anomMult": 100,
+        "nodes": [
+          {
+            "node": 1,
+            "level": 50,
+            "buffNames": [
+              "Dawn's Guiding Light",
+              "Piercing Thunder Strike",
+              "Accumulating Frost"
+            ],
+            "rawHP": 9218118,
+            "aoeHP": 6049128,
+            "altHP": 6049128
+          },
+          {
+            "node": 2,
+            "level": 55,
+            "buffNames": [
+              "Dawn's Guiding Light",
+              "Piercing Thunder Strike",
+              "Accumulating Frost"
+            ],
+            "rawHP": 15152970,
+            "aoeHP": 9993863,
+            "altHP": 9993863
+          },
+          {
+            "node": 3,
+            "level": 60,
+            "buffNames": [
+              "Dawn's Guiding Light",
+              "Piercing Thunder Strike",
+              "Accumulating Frost"
+            ],
+            "rawHP": 43110374,
+            "aoeHP": 26708250,
+            "altHP": 26708250
+          },
+          {
+            "node": 4,
+            "level": 65,
+            "buffNames": [
+              "Dawn's Guiding Light",
+              "Piercing Thunder Strike",
+              "Accumulating Frost"
+            ],
+            "rawHP": 40003936,
+            "aoeHP": 34127820,
+            "altHP": 34127820
+          },
+          {
+            "node": 5,
+            "level": 70,
+            "buffNames": [
+              "Dawn's Guiding Light",
+              "Piercing Thunder Strike",
+              "Accumulating Frost"
+            ],
+            "rawHP": 132341526,
+            "aoeHP": 110028903,
+            "altHP": 103681531
+          }
+        ]
+      },
+      {
+        "id": "2.5.2",
+        "name": "2.5 Phase 2",
+        "time": "09/01/2026 - 23/01/2026",
+        "dazeMult": 100,
+        "anomMult": 100,
+        "nodes": [
+          {
+            "node": 1,
+            "level": 50,
+            "buffNames": [
+              "Frost-Bitten Iron",
+              "Rush of Lightning and Fire",
+              "Blazing Stream"
+            ],
+            "rawHP": 7950118,
+            "aoeHP": 5604968,
+            "altHP": 5604968
+          },
+          {
+            "node": 2,
+            "level": 55,
+            "buffNames": [
+              "Frost-Bitten Iron",
+              "Rush of Lightning and Fire",
+              "Blazing Stream"
+            ],
+            "rawHP": 14209267,
+            "aoeHP": 9553267,
+            "altHP": 9553267
+          },
+          {
+            "node": 3,
+            "level": 60,
+            "buffNames": [
+              "Frost-Bitten Iron",
+              "Rush of Lightning and Fire",
+              "Blazing Stream"
+            ],
+            "rawHP": 45106179,
+            "aoeHP": 26277329,
+            "altHP": 26277329
+          },
+          {
+            "node": 4,
+            "level": 65,
+            "buffNames": [
+              "Frost-Bitten Iron",
+              "Rush of Lightning and Fire",
+              "Blazing Stream"
+            ],
+            "rawHP": 38787249,
+            "aoeHP": 31830940,
+            "altHP": 31830940
+          },
+          {
+            "node": 5,
+            "level": 70,
+            "buffNames": [
+              "Frost-Bitten Iron",
+              "Rush of Lightning and Fire",
+              "Blazing Stream"
+            ],
+            "rawHP": 133114436,
+            "aoeHP": 110812227,
+            "altHP": 104166147
+          }
+        ]
+      },
+      {
+        "id": "2.5.3",
+        "name": "2.5 Phase 3",
+        "time": "23/01/2026 - 06/02/2026",
+        "dazeMult": 100,
+        "anomMult": 100,
+        "nodes": [
+          {
+            "node": 1,
+            "level": 50,
+            "buffNames": [
+              "Fleeting Glory",
+              "Piercing Blade Abyss",
+              "Cleanse the Heart with Fire"
+            ],
+            "rawHP": 10240185,
+            "aoeHP": 7071195,
+            "altHP": 7071195
+          },
+          {
+            "node": 2,
+            "level": 55,
+            "buffNames": [
+              "Fleeting Glory",
+              "Piercing Blade Abyss",
+              "Cleanse the Heart with Fire"
+            ],
+            "rawHP": 17990105,
+            "aoeHP": 10885746,
+            "altHP": 10885746
+          },
+          {
+            "node": 3,
+            "level": 60,
+            "buffNames": [
+              "Fleeting Glory",
+              "Piercing Blade Abyss",
+              "Cleanse the Heart with Fire"
+            ],
+            "rawHP": 45196435,
+            "aoeHP": 26582027,
+            "altHP": 26582027
+          },
+          {
+            "node": 4,
+            "level": 65,
+            "buffNames": [
+              "Fleeting Glory",
+              "Piercing Blade Abyss",
+              "Cleanse the Heart with Fire"
+            ],
+            "rawHP": 40580189,
+            "aoeHP": 38094422,
+            "altHP": 36298408
+          },
+          {
+            "node": 5,
+            "level": 70,
+            "buffNames": [
+              "Fleeting Glory",
+              "Piercing Blade Abyss",
+              "Cleanse the Heart with Fire"
+            ],
+            "rawHP": 119756181,
+            "aoeHP": 100837000,
+            "altHP": 96696454
+          }
+        ]
+      },
+      {
+        "id": "2.6.1",
+        "name": "2.6 Phase 1",
+        "time": "06/02/2026 - 20/02/2026",
+        "dazeMult": 100,
+        "anomMult": 100,
+        "nodes": [
+          {
+            "node": 1,
+            "level": 50,
+            "buffNames": [
+              "Thunderclap Shimmer",
+              "Chaotic Electric Blitz",
+              "Everlasting Night Flame"
+            ],
+            "rawHP": 8394096,
+            "aoeHP": 6375019,
+            "altHP": 6375019
+          },
+          {
+            "node": 2,
+            "level": 55,
+            "buffNames": [
+              "Thunderclap Shimmer",
+              "Chaotic Electric Blitz",
+              "Everlasting Night Flame"
+            ],
+            "rawHP": 15040009,
+            "aoeHP": 9857599,
+            "altHP": 9857599
+          },
+          {
+            "node": 3,
+            "level": 60,
+            "buffNames": [
+              "Thunderclap Shimmer",
+              "Chaotic Electric Blitz",
+              "Everlasting Night Flame"
+            ],
+            "rawHP": 40036248,
+            "aoeHP": 23556084,
+            "altHP": 23556084
+          },
+          {
+            "node": 4,
+            "level": 65,
+            "buffNames": [
+              "Thunderclap Shimmer",
+              "Chaotic Electric Blitz",
+              "Everlasting Night Flame"
+            ],
+            "rawHP": 37709271,
+            "aoeHP": 35683177,
+            "altHP": 35683177
+          },
+          {
+            "node": 5,
+            "level": 70,
+            "buffNames": [
+              "Thunderclap Shimmer",
+              "Chaotic Electric Blitz",
+              "Everlasting Night Flame"
+            ],
+            "rawHP": 130455421,
+            "aoeHP": 106803074,
+            "altHP": 100047577
+          }
+        ]
+      },
+      {
+        "id": "2.6.2",
+        "name": "2.6 Phase 2",
+        "time": "20/02/2026 - 06/03/2026",
+        "dazeMult": 100,
+        "anomMult": 100,
+        "nodes": [
+          {
+            "node": 1,
+            "level": 50,
+            "buffNames": [
+              "Fleeting Glory",
+              "Accumulating Frost",
+              "Frostbite Variant"
+            ],
+            "rawHP": 9407320,
+            "aoeHP": 6614324,
+            "altHP": 6614324
+          },
+          {
+            "node": 2,
+            "level": 55,
+            "buffNames": [
+              "Fleeting Glory",
+              "Accumulating Frost",
+              "Frostbite Variant"
+            ],
+            "rawHP": 14209267,
+            "aoeHP": 9553267,
+            "altHP": 9553267
+          },
+          {
+            "node": 3,
+            "level": 60,
+            "buffNames": [
+              "Fleeting Glory",
+              "Accumulating Frost",
+              "Frostbite Variant"
+            ],
+            "rawHP": 45106179,
+            "aoeHP": 26277329,
+            "altHP": 26277329
+          },
+          {
+            "node": 4,
+            "level": 65,
+            "buffNames": [
+              "Fleeting Glory",
+              "Accumulating Frost",
+              "Frostbite Variant"
+            ],
+            "rawHP": 47599211,
+            "aoeHP": 38320198,
+            "altHP": 37032765
+          },
+          {
+            "node": 5,
+            "level": 70,
+            "buffNames": [
+              "Fleeting Glory",
+              "Accumulating Frost",
+              "Frostbite Variant"
+            ],
+            "rawHP": 154896248,
+            "aoeHP": 129845712,
+            "altHP": 122359849
+          }
+        ]
+      },
+      {
+        "id": "2.6.3",
+        "name": "2.6 Phase 3",
+        "time": "06/03/2026 - 20/03/2026",
+        "dazeMult": 100,
+        "anomMult": 100,
+        "nodes": [
+          {
+            "node": 1,
+            "level": 50,
+            "buffNames": [
+              "Thunder Crimson Blaze",
+              "Flameheart Lithic Core",
+              "Mecha Wings"
+            ],
+            "rawHP": 9639994,
+            "aoeHP": 6919950,
+            "altHP": 6919950
+          },
+          {
+            "node": 2,
+            "level": 55,
+            "buffNames": [
+              "Thunder Crimson Blaze",
+              "Flameheart Lithic Core",
+              "Mecha Wings"
+            ],
+            "rawHP": 14773240,
+            "aoeHP": 9120623,
+            "altHP": 9120623
+          },
+          {
+            "node": 3,
+            "level": 60,
+            "buffNames": [
+              "Thunder Crimson Blaze",
+              "Flameheart Lithic Core",
+              "Mecha Wings"
+            ],
+            "rawHP": 41081314,
+            "aoeHP": 25477242,
+            "altHP": 25477242
+          },
+          {
+            "node": 4,
+            "level": 65,
+            "buffNames": [
+              "Thunder Crimson Blaze",
+              "Flameheart Lithic Core",
+              "Mecha Wings"
+            ],
+            "rawHP": 38228706,
+            "aoeHP": 33233564,
+            "altHP": 31645522
+          },
+          {
+            "node": 5,
+            "level": 70,
+            "buffNames": [
+              "Thunder Crimson Blaze",
+              "Flameheart Lithic Core",
+              "Mecha Wings"
+            ],
+            "rawHP": 154518027,
+            "aoeHP": 131903870,
+            "altHP": 117078513
+          }
+        ]
+      },
+      {
+        "id": "2.6.4",
+        "name": "2.6 Phase 4",
+        "time": "20/03/2026 - 03/04/2026",
+        "dazeMult": 100,
+        "anomMult": 100,
+        "nodes": [
+          {
+            "node": 1,
+            "level": 50,
+            "buffNames": [
+              "Dawn's Guiding Light",
+              "Dazzling Beat",
+              "Frosty Fire"
+            ],
+            "rawHP": 10240185,
+            "aoeHP": 7071195,
+            "altHP": 7071195
+          },
+          {
+            "node": 2,
+            "level": 55,
+            "buffNames": [
+              "Dawn's Guiding Light",
+              "Dazzling Beat",
+              "Frosty Fire"
+            ],
+            "rawHP": 14209267,
+            "aoeHP": 9553267,
+            "altHP": 9553267
+          },
+          {
+            "node": 3,
+            "level": 60,
+            "buffNames": [
+              "Dawn's Guiding Light",
+              "Dazzling Beat",
+              "Frosty Fire"
+            ],
+            "rawHP": 45106179,
+            "aoeHP": 26277329,
+            "altHP": 26277329
+          },
+          {
+            "node": 4,
+            "level": 65,
+            "buffNames": [
+              "Dawn's Guiding Light",
+              "Dazzling Beat",
+              "Frosty Fire"
+            ],
+            "rawHP": 40580189,
+            "aoeHP": 38094422,
+            "altHP": 36298408
+          },
+          {
+            "node": 5,
+            "level": 70,
+            "buffNames": [
+              "Dawn's Guiding Light",
+              "Dazzling Beat",
+              "Frosty Fire"
+            ],
+            "rawHP": 149718185,
+            "aoeHP": 125982008,
+            "altHP": 118361364
+          }
+        ]
+      },
+      {
+        "id": "2.7.1",
+        "name": "2.7 Phase 1",
+        "time": "xx/xx/20xx - xx/xx/20xx",
+        "dazeMult": 100,
+        "anomMult": 100,
+        "nodes": [
+          {
+            "node": 1,
+            "level": 50,
+            "buffNames": ["Thunder Crimson Blaze", "TBD", "TBD"],
+            "rawHP": 9639994,
+            "aoeHP": 6919950,
+            "altHP": 6919950
+          },
+          {
+            "node": 2,
+            "level": 55,
+            "buffNames": ["Thunder Crimson Blaze", "TBD", "TBD"],
+            "rawHP": 14773240,
+            "aoeHP": 9120623,
+            "altHP": 9120623
+          },
+          {
+            "node": 3,
+            "level": 60,
+            "buffNames": ["Thunder Crimson Blaze", "TBD", "TBD"],
+            "rawHP": 41081314,
+            "aoeHP": 25477242,
+            "altHP": 25477242
+          },
+          {
+            "node": 4,
+            "level": 65,
+            "buffNames": ["Thunder Crimson Blaze", "TBD", "TBD"],
+            "rawHP": 41367456,
+            "aoeHP": 38429398,
+            "altHP": 36633384
+          },
+          {
+            "node": 5,
+            "level": 70,
+            "buffNames": ["Thunder Crimson Blaze", "TBD", "TBD"],
+            "rawHP": 160678790,
+            "aoeHP": 136906286,
+            "altHP": 120209636
+          }
+        ]
+      },
+      {
+        "id": "2.7.2",
+        "name": "2.7 Phase 2",
+        "time": "xx/xx/20xx - xx/xx/20xx",
+        "dazeMult": 100,
+        "anomMult": 100,
+        "nodes": [
+          {
+            "node": 1,
+            "level": 50,
+            "buffNames": ["Mecha Wings", "Piercing Thunder Strike", "TBD"],
+            "rawHP": 11068824,
+            "aoeHP": 7574861,
+            "altHP": 7574861
+          },
+          {
+            "node": 2,
+            "level": 55,
+            "buffNames": ["Mecha Wings", "Piercing Thunder Strike", "TBD"],
+            "rawHP": 14387479,
+            "aoeHP": 10180300,
+            "altHP": 10180300
+          },
+          {
+            "node": 3,
+            "level": 60,
+            "buffNames": ["Mecha Wings", "Piercing Thunder Strike", "TBD"],
+            "rawHP": 34945957,
+            "aoeHP": 23015906,
+            "altHP": 23015906
+          },
+          {
+            "node": 4,
+            "level": 65,
+            "buffNames": ["Mecha Wings", "Piercing Thunder Strike", "TBD"],
+            "rawHP": 43626706,
+            "aoeHP": 37130070,
+            "altHP": 37130070
+          },
+          {
+            "node": 5,
+            "level": 70,
+            "buffNames": ["Mecha Wings", "Piercing Thunder Strike", "TBD"],
+            "rawHP": 153197990,
+            "aoeHP": 129799990,
+            "altHP": 121854868
+          }
+        ]
+      },
+      {
+        "id": "2.7.3",
+        "name": "2.7 Phase 3",
+        "time": "xx/xx/20xx - xx/xx/20xx",
+        "dazeMult": 100,
+        "anomMult": 100,
+        "nodes": [
+          {
+            "node": 1,
+            "level": 50,
+            "buffNames": ["TBD", "TBD", "TBD"],
+            "rawHP": 9218118,
+            "aoeHP": 6049128,
+            "altHP": 6049128
+          },
+          {
+            "node": 2,
+            "level": 55,
+            "buffNames": ["TBD", "TBD", "TBD"],
+            "rawHP": 15152970,
+            "aoeHP": 9993863,
+            "altHP": 9993863
+          },
+          {
+            "node": 3,
+            "level": 60,
+            "buffNames": ["TBD", "TBD", "TBD"],
+            "rawHP": 40161792,
+            "aoeHP": 23243242,
+            "altHP": 23243242
+          },
+          {
+            "node": 4,
+            "level": 65,
+            "buffNames": ["TBD", "TBD", "TBD"],
+            "rawHP": 30119162,
+            "aoeHP": 29106115,
+            "altHP": 29106115
+          },
+          {
+            "node": 5,
+            "level": 70,
+            "buffNames": ["TBD", "TBD", "TBD"],
+            "rawHP": 174121352,
+            "aoeHP": 149700333,
+            "altHP": 128842727
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -41,6 +41,8 @@
   "scripts": {
     "generate": "tsx scripts/generate/index.ts",
     "crawl": "tsx scripts/crawl/index.ts",
+    "crawl:gachabase": "tsx scripts/crawl/index.ts gachabase",
+    "crawl:buhflipexplode": "tsx scripts/crawl/index.ts buhflipexplode",
     "test": "vitest run",
     "build": "tsdown",
     "release": "pnpm run build && pnpm publish"
