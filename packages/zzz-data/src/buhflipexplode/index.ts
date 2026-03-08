@@ -164,8 +164,8 @@ export interface BuhflipEnemy {
   desc?: [string, string]
   perf?: [string, string]
   misc?: string
-  spoilerDesc?: [string, string]
-  spoilerPerf?: [string, string]
+  spoilerDesc?: string
+  spoilerPerf?: string
 }
 
 /** `buhflipexplode-enemies.json` top-level shape */
@@ -180,6 +180,8 @@ export interface SDEnemyRef {
   count: number
 }
 export interface SDSide {
+  /** Elemental damage multipliers [ice, fire, electric, ether, physical] for this side */
+  sideElementMult: [number, number, number, number, number]
   sideHPMult: number
   waves: Array<{ enemies: SDEnemyRef[] }>
 }
