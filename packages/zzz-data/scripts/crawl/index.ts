@@ -6,6 +6,7 @@ import { fileURLToPath } from "node:url"
 import * as cheerio from "cheerio"
 import { tasks as buhflipexplodeTasks } from "./buhflipexplode.js"
 import { tasks as gachabaseTasks } from "./gachabase.js"
+import { tasks as mihoyoWikiTasks } from "./mihoyo-wiki.js"
 import { fetchDynamic, fetchStatic } from "./shared.js"
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -14,7 +15,7 @@ const outputDir = path.resolve(__dirname, "../../data")
 fs.mkdirSync(outputDir, { recursive: true })
 
 const filter = process.argv[2] // e.g. "gachabase" | "buhflipexplode"
-const allTasks = [...gachabaseTasks, ...buhflipexplodeTasks]
+const allTasks = [...gachabaseTasks, ...buhflipexplodeTasks, ...mihoyoWikiTasks]
 const tasks: CrawlTask[] = filter
   ? allTasks.filter((t) => t.name.includes(filter))
   : allTasks

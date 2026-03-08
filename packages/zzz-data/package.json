@@ -44,6 +44,7 @@
     "crawl": "tsx scripts/crawl/index.ts",
     "crawl:gachabase": "tsx scripts/crawl/index.ts gachabase",
     "crawl:buhflipexplode": "tsx scripts/crawl/index.ts buhflipexplode",
+    "crawl:mihoyo-wiki": "tsx scripts/crawl/index.ts mihoyo-wiki",
     "test": "vitest run",
     "build": "tsdown",
     "release": "pnpm run build && pnpm publish"

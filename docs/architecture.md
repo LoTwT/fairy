@@ -13,7 +13,8 @@ packages/zzz-data/
 │   ├── index.ts             # 爬虫主入口（聚合 tasks，统一执行）
 │   ├── shared.ts            # 工具函数（fetchStatic/fetchJson/fetchDynamic/batchProcess/decodeSvelteKitData）
 │   ├── gachabase.ts         # gachabase.net 爬取任务（agent 列表 + 详情）
-│   └── buhflipexplode.ts    # buhflipexplode.com 爬取任务
+│   ├── buhflipexplode.ts    # buhflipexplode.com 爬取任务
+│   └── mihoyo-wiki.ts       # baike.mihoyo.com 爬取任务（危局强袭战）
 ├── tests/generate.test.ts   # 结构一致性测试（xlsx ↔ config ↔ JSON）
 ├── tests/gachabase/         # gachabase 属性公式测试
 │   ├── agent.test.ts        # Agent 属性公式测试
@@ -41,7 +42,9 @@ packages/zzz-data/
 │       ├── enemies.json              # 敌人数据库（name/baseHP/baseDEF/baseDaze/stunMult/stunTime/baseAnom/elementMult/tags/mods/desc 等）
 │       └── buffs.json                # Buff 名称→描述文本映射（DA/TS 使用）
 └── data/zh-CN/              # 爬虫输出（中文，对外发布）
-    └── gachabase/           # 同 en/gachabase/，仅 gachabase 系列
+    ├── gachabase/           # 同 en/gachabase/，仅 gachabase 系列
+    └── mihoyo-wiki/
+        └── deadly-assault.json  # 危局强袭战历史期数（增益/Boss 弱点·抗性·机制·星级目标）
 ├── src/gachabase/           # gachabase 数据工具
 │   ├── agent.ts             # Agent 基础属性计算公式（calcAgentStat）
 │   ├── bangboo.ts           # Bangboo 基础属性计算公式（calcBangbooStat）

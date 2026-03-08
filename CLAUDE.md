@@ -12,6 +12,7 @@ pnpm run generate   # 从 source.xlsx 生成 data/xlsx/*.json（当前冻结，x
 pnpm run crawl                 # 爬虫脚本，爬取所有数据生成 data/crawl/*.json
 pnpm run crawl:gachabase      # 只爬取 gachabase 数据
 pnpm run crawl:buhflipexplode # 只爬取 buhflipexplode 数据
+pnpm run crawl:mihoyo-wiki    # 只爬取 baike.mihoyo.com 数据
 pnpm run test       # vitest 运行测试
 pnpm run build      # tsdown 编译，输出 dist/
 pnpm run release    # build + pnpm publish
