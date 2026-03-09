@@ -23,28 +23,28 @@
     "effects": [
       {
         "level": 1,
-        "name": "Spicy Red Oil Hotpot",
-        "effect": "When launching an <span style=\"color: #FFFFFF\">[Assist Follow-Up]</span>, the equipper's Daze inflicted on the target increases by <span style=\"color: #2BAD00\">7.2%</span>, and the equipper's DMG dealt increases by <span style=\"color: #2BAD00\">7.2%</span> for 30s. Repeated triggers reset the duration."
+        "name": "Red Chili Oil Hot Pot",
+        "effect": "When activating an <span style=\"color: #FFFFFF\">Assist Follow-Up</span>, the equipper's Daze inflicted on the target increases by <span style=\"color: #2BAD00\">7.2%</span>, and DMG dealt increases by <span style=\"color: #2BAD00\">7.2%</span> for 30s. Repeated triggers reset the duration."
       },
       {
         "level": 2,
-        "name": "Spicy Red Oil Hotpot",
-        "effect": "When launching an <span style=\"color: #FFFFFF\">[Assist Follow-Up]</span>, the equipper's Daze inflicted on the target increases by <span style=\"color: #2BAD00\">8.2%</span>, and the equipper's DMG dealt increases by <span style=\"color: #2BAD00\">8.2%</span> for 30s. Repeated triggers reset the duration."
+        "name": "Red Chili Oil Hot Pot",
+        "effect": "When activating an <span style=\"color: #FFFFFF\">Assist Follow-Up</span>, the equipper's Daze inflicted on the target increases by <span style=\"color: #2BAD00\">8.2%</span>, and DMG dealt increases by <span style=\"color: #2BAD00\">8.2%</span> for 30s. Repeated triggers reset the duration."
       },
       {
         "level": 3,
-        "name": "Spicy Red Oil Hotpot",
-        "effect": "When launching an <span style=\"color: #FFFFFF\">[Assist Follow-Up]</span>, the equipper's Daze inflicted on the target increases by <span style=\"color: #2BAD00\">9.2%</span>, and the equipper's DMG dealt increases by <span style=\"color: #2BAD00\">9.2%</span> for 30s. Repeated triggers reset the duration."
+        "name": "Red Chili Oil Hot Pot",
+        "effect": "When activating an <span style=\"color: #FFFFFF\">Assist Follow-Up</span>, the equipper's Daze inflicted on the target increases by <span style=\"color: #2BAD00\">9.2%</span>, and DMG dealt increases by <span style=\"color: #2BAD00\">9.2%</span> for 30s. Repeated triggers reset the duration."
       },
       {
         "level": 4,
-        "name": "Spicy Red Oil Hotpot",
-        "effect": "When launching an <span style=\"color: #FFFFFF\">[Assist Follow-Up]</span>, the equipper's Daze inflicted on the target increases by <span style=\"color: #2BAD00\">10.2%</span>, and the equipper's DMG dealt increases by <span style=\"color: #2BAD00\">10.2%</span> for 30s. Repeated triggers reset the duration."
+        "name": "Red Chili Oil Hot Pot",
+        "effect": "When activating an <span style=\"color: #FFFFFF\">Assist Follow-Up</span>, the equipper's Daze inflicted on the target increases by <span style=\"color: #2BAD00\">10.2%</span>, and DMG dealt increases by <span style=\"color: #2BAD00\">10.2%</span> for 30s. Repeated triggers reset the duration."
       },
       {
         "level": 5,
-        "name": "Spicy Red Oil Hotpot",
-        "effect": "When launching an <span style=\"color: #FFFFFF\">[Assist Follow-Up]</span>, the equipper's Daze inflicted on the target increases by <span style=\"color: #2BAD00\">11.5%</span>, and the equipper's DMG dealt increases by <span style=\"color: #2BAD00\">11.5%</span> for 30s. Repeated triggers reset the duration."
+        "name": "Red Chili Oil Hot Pot",
+        "effect": "When activating an <span style=\"color: #FFFFFF\">Assist Follow-Up</span>, the equipper's Daze inflicted on the target increases by <span style=\"color: #2BAD00\">11.5%</span>, and DMG dealt increases by <span style=\"color: #2BAD00\">11.5%</span> for 30s. Repeated triggers reset the duration."
       }
     ]
   },
@@ -58,7 +58,7 @@
       "id": "2",
       "name": "Stun"
     },
-    "exclusiveAgentName": "",
+    "exclusiveAgentName": "Nangong Yu",
     "baseStat": {
       "id": "12101",
       "name": "Base ATK",
@@ -73,27 +73,27 @@
       {
         "level": 1,
         "name": "Disco Demon",
-        "effect": "Increases the equipper's Anomaly Proficiency by <span style=\"color: #2BAD00\">90</span> points. When the equipper deals <color=#ELEMENT_Ether>Ether</color> attribute DMG with <span style=\"color: #FFFFFF\">[EX Special Attack]</span> or <span style=\"color: #FFFFFF\">[Basic Attack]</span>, the whole squad's DMG dealt increases by <span style=\"color: #2BAD00\">15%</span> for 40s. Max 2 stacks. Can trigger once per use of a skill. Repeated triggers reset the duration. When at 2 stacks, the equipper's Anomaly Proficiency is further increased by <span style=\"color: #2BAD00\">60</span>. Only one instance of this effect can exist in the same squad."
+        "effect": "Increases the equipper's Anomaly Proficiency by <span style=\"color: #2BAD00\">90</span> points. When the equipper deals <color=#ELEMENT_Ether>Ether</color> attribute DMG with <span style=\"color: #FFFFFF\">[EX Special Attack]</span> or <span style=\"color: #FFFFFF\">[Basic Attack]</span>, the whole squad's DMG dealt increases by <span style=\"color: #2BAD00\">15%</span> for 40s. Max 2 stacks. Can trigger once per use of a skill. Repeated triggers reset the duration. When at 2 stacks, the equipper's Anomaly Proficiency is further increased by <span style=\"color: #2BAD00\">60</span>. This effect is unique to the squad."
       },
       {
         "level": 2,
         "name": "Disco Demon",
-        "effect": "Increases the equipper's Anomaly Proficiency by <span style=\"color: #2BAD00\">90</span> points. When the equipper deals <color=#ELEMENT_Ether>Ether</color> attribute DMG with <span style=\"color: #FFFFFF\">[EX Special Attack]</span> or <span style=\"color: #FFFFFF\">[Basic Attack]</span>, the whole squad's DMG dealt increases by <span style=\"color: #2BAD00\">15%</span> for 40s. Max 2 stacks. Can trigger once per use of a skill. Repeated triggers reset the duration. When at 2 stacks, the equipper's Anomaly Proficiency is further increased by <span style=\"color: #2BAD00\">60</span>. Only one instance of this effect can exist in the same squad."
+        "effect": "Increases the equipper's Anomaly Proficiency by <span style=\"color: #2BAD00\">90</span> points. When the equipper deals <color=#ELEMENT_Ether>Ether</color> attribute DMG with <span style=\"color: #FFFFFF\">[EX Special Attack]</span> or <span style=\"color: #FFFFFF\">[Basic Attack]</span>, the whole squad's DMG dealt increases by <span style=\"color: #2BAD00\">15%</span> for 40s. Max 2 stacks. Can trigger once per use of a skill. Repeated triggers reset the duration. When at 2 stacks, the equipper's Anomaly Proficiency is further increased by <span style=\"color: #2BAD00\">60</span>. This effect is unique to the squad."
       },
       {
         "level": 3,
         "name": "Disco Demon",
-        "effect": "Increases the equipper's Anomaly Proficiency by <span style=\"color: #2BAD00\">90</span> points. When the equipper deals <color=#ELEMENT_Ether>Ether</color> attribute DMG with <span style=\"color: #FFFFFF\">[EX Special Attack]</span> or <span style=\"color: #FFFFFF\">[Basic Attack]</span>, the whole squad's DMG dealt increases by <span style=\"color: #2BAD00\">15%</span> for 40s. Max 2 stacks. Can trigger once per use of a skill. Repeated triggers reset the duration. When at 2 stacks, the equipper's Anomaly Proficiency is further increased by <span style=\"color: #2BAD00\">60</span>. Only one instance of this effect can exist in the same squad."
+        "effect": "Increases the equipper's Anomaly Proficiency by <span style=\"color: #2BAD00\">90</span> points. When the equipper deals <color=#ELEMENT_Ether>Ether</color> attribute DMG with <span style=\"color: #FFFFFF\">[EX Special Attack]</span> or <span style=\"color: #FFFFFF\">[Basic Attack]</span>, the whole squad's DMG dealt increases by <span style=\"color: #2BAD00\">15%</span> for 40s. Max 2 stacks. Can trigger once per use of a skill. Repeated triggers reset the duration. When at 2 stacks, the equipper's Anomaly Proficiency is further increased by <span style=\"color: #2BAD00\">60</span>. This effect is unique to the squad."
       },
       {
         "level": 4,
         "name": "Disco Demon",
-        "effect": "Increases the equipper's Anomaly Proficiency by <span style=\"color: #2BAD00\">90</span> points. When the equipper deals <color=#ELEMENT_Ether>Ether</color> attribute DMG with <span style=\"color: #FFFFFF\">[EX Special Attack]</span> or <span style=\"color: #FFFFFF\">[Basic Attack]</span>, the whole squad's DMG dealt increases by <span style=\"color: #2BAD00\">15%</span> for 40s. Max 2 stacks. Can trigger once per use of a skill. Repeated triggers reset the duration. When at 2 stacks, the equipper's Anomaly Proficiency is further increased by <span style=\"color: #2BAD00\">60</span>. Only one instance of this effect can exist in the same squad."
+        "effect": "Increases the equipper's Anomaly Proficiency by <span style=\"color: #2BAD00\">90</span> points. When the equipper deals <color=#ELEMENT_Ether>Ether</color> attribute DMG with <span style=\"color: #FFFFFF\">[EX Special Attack]</span> or <span style=\"color: #FFFFFF\">[Basic Attack]</span>, the whole squad's DMG dealt increases by <span style=\"color: #2BAD00\">15%</span> for 40s. Max 2 stacks. Can trigger once per use of a skill. Repeated triggers reset the duration. When at 2 stacks, the equipper's Anomaly Proficiency is further increased by <span style=\"color: #2BAD00\">60</span>. This effect is unique to the squad."
       },
       {
         "level": 5,
         "name": "Disco Demon",
-        "effect": "Increases the equipper's Anomaly Proficiency by <span style=\"color: #2BAD00\">90</span> points. When the equipper deals <color=#ELEMENT_Ether>Ether</color> attribute DMG with <span style=\"color: #FFFFFF\">[EX Special Attack]</span> or <span style=\"color: #FFFFFF\">[Basic Attack]</span>, the whole squad's DMG dealt increases by <span style=\"color: #2BAD00\">15%</span> for 40s. Max 2 stacks. Can trigger once per use of a skill. Repeated triggers reset the duration. When at 2 stacks, the equipper's Anomaly Proficiency is further increased by <span style=\"color: #2BAD00\">60</span>. Only one instance of this effect can exist in the same squad."
+        "effect": "Increases the equipper's Anomaly Proficiency by <span style=\"color: #2BAD00\">90</span> points. When the equipper deals <color=#ELEMENT_Ether>Ether</color> attribute DMG with <span style=\"color: #FFFFFF\">[EX Special Attack]</span> or <span style=\"color: #FFFFFF\">[Basic Attack]</span>, the whole squad's DMG dealt increases by <span style=\"color: #2BAD00\">15%</span> for 40s. Max 2 stacks. Can trigger once per use of a skill. Repeated triggers reset the duration. When at 2 stacks, the equipper's Anomaly Proficiency is further increased by <span style=\"color: #2BAD00\">60</span>. This effect is unique to the squad."
       }
     ]
   },
@@ -107,7 +107,7 @@
       "id": "1",
       "name": "Attack"
     },
-    "exclusiveAgentName": "",
+    "exclusiveAgentName": "Cissia",
     "baseStat": {
       "id": "12101",
       "name": "Base ATK",
@@ -121,28 +121,28 @@
     "effects": [
       {
         "level": 1,
-        "name": "Synthetic Venom",
-        "effect": "Increases CRIT Rate by <span style=\"color: #2BAD00\">25%</span>. When the equipper consumes at least 20 Energy in a single instance, for every 20 Energy consumed, gain a buff for 3s: Ignore <span style=\"color: #2BAD00\">30%</span> of the target's DEF when dealing <span style=\"color: #2EB6FF\">Electric DMG</span>. Gaining this buff again extends the duration, up to a maximum of 30s. When entering combat, gain this buff for 10s. When the equipper is not the active character on-field, the buff duration does not decrease."
+        "name": "Bioengineered Venom",
+        "effect": "Increases CRIT Rate by <span style=\"color: #2BAD00\">25%</span>. When the equipper consumes at least 20 Energy in a single instance, for every 20 Energy consumed, gain a buff for 3s: Ignore <span style=\"color: #2BAD00\">30%</span> of the target's DEF when dealing <span style=\"color: #2EB6FF\">Electric DMG</span>. Gaining this buff again extends the duration, up to a maximum of 30s. When entering Assist state, gain this buff for 10s. When the equipper is not the active character on-field, the buff duration does not decrease."
       },
       {
         "level": 2,
-        "name": "Synthetic Venom",
-        "effect": "Increases CRIT Rate by <span style=\"color: #2BAD00\">28.8%</span>. When the equipper consumes at least 20 Energy in a single instance, for every 20 Energy consumed, gain a buff for 3s: Ignore <span style=\"color: #2BAD00\">34.5%</span> of the target's DEF when dealing <span style=\"color: #2EB6FF\">Electric DMG</span>. Gaining this buff again extends the duration, up to a maximum of 30s. When entering combat, gain this buff for 10s. When the equipper is not the active character on-field, the buff duration does not decrease."
+        "name": "Bioengineered Venom",
+        "effect": "Increases CRIT Rate by <span style=\"color: #2BAD00\">28.8%</span>. When the equipper consumes at least 20 Energy in a single instance, for every 20 Energy consumed, gain a buff for 3s: Ignore <span style=\"color: #2BAD00\">34.5%</span> of the target's DEF when dealing <span style=\"color: #2EB6FF\">Electric DMG</span>. Gaining this buff again extends the duration, up to a maximum of 30s. When entering Assist state, gain this buff for 10s. When the equipper is not the active character on-field, the buff duration does not decrease."
       },
       {
         "level": 3,
-        "name": "Synthetic Venom",
-        "effect": "Increases CRIT Rate by <span style=\"color: #2BAD00\">32.5%</span>. When the equipper consumes at least 20 Energy in a single instance, for every 20 Energy consumed, gain a buff for 3s: Ignore <span style=\"color: #2BAD00\">39%</span> of the target's DEF when dealing <span style=\"color: #2EB6FF\">Electric DMG</span>. Gaining this buff again extends the duration, up to a maximum of 30s. When entering combat, gain this buff for 10s. When the equipper is not the active character on-field, the buff duration does not decrease."
+        "name": "Bioengineered Venom",
+        "effect": "Increases CRIT Rate by <span style=\"color: #2BAD00\">32.5%</span>. When the equipper consumes at least 20 Energy in a single instance, for every 20 Energy consumed, gain a buff for 3s: Ignore <span style=\"color: #2BAD00\">39%</span> of the target's DEF when dealing <span style=\"color: #2EB6FF\">Electric DMG</span>. Gaining this buff again extends the duration, up to a maximum of 30s. When entering Assist state, gain this buff for 10s. When the equipper is not the active character on-field, the buff duration does not decrease."
       },
       {
         "level": 4,
-        "name": "Synthetic Venom",
-        "effect": "Increases CRIT Rate by <span style=\"color: #2BAD00\">36.3%</span>. When the equipper consumes at least 20 Energy in a single instance, for every 20 Energy consumed, gain a buff for 3s: Ignore <span style=\"color: #2BAD00\">43.5%</span> of the target's DEF when dealing <span style=\"color: #2EB6FF\">Electric DMG</span>. Gaining this buff again extends the duration, up to a maximum of 30s. When entering combat, gain this buff for 10s. When the equipper is not the active character on-field, the buff duration does not decrease."
+        "name": "Bioengineered Venom",
+        "effect": "Increases CRIT Rate by <span style=\"color: #2BAD00\">36.3%</span>. When the equipper consumes at least 20 Energy in a single instance, for every 20 Energy consumed, gain a buff for 3s: Ignore <span style=\"color: #2BAD00\">43.5%</span> of the target's DEF when dealing <span style=\"color: #2EB6FF\">Electric DMG</span>. Gaining this buff again extends the duration, up to a maximum of 30s. When entering Assist state, gain this buff for 10s. When the equipper is not the active character on-field, the buff duration does not decrease."
       },
       {
         "level": 5,
-        "name": "Synthetic Venom",
-        "effect": "Increases CRIT Rate by <span style=\"color: #2BAD00\">40%</span>. When the equipper consumes at least 20 Energy in a single instance, for every 20 Energy consumed, gain a buff for 3s: Ignore <span style=\"color: #2BAD00\">48%</span> of the target's DEF when dealing <span style=\"color: #2EB6FF\">Electric DMG</span>. Gaining this buff again extends the duration, up to a maximum of 30s. When entering combat, gain this buff for 10s. When the equipper is not the active character on-field, the buff duration does not decrease."
+        "name": "Bioengineered Venom",
+        "effect": "Increases CRIT Rate by <span style=\"color: #2BAD00\">40%</span>. When the equipper consumes at least 20 Energy in a single instance, for every 20 Energy consumed, gain a buff for 3s: Ignore <span style=\"color: #2BAD00\">48%</span> of the target's DEF when dealing <span style=\"color: #2EB6FF\">Electric DMG</span>. Gaining this buff again extends the duration, up to a maximum of 30s. When entering Assist state, gain this buff for 10s. When the equipper is not the active character on-field, the buff duration does not decrease."
       }
     ]
   },

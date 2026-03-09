@@ -10,7 +10,7 @@ import { tasks as mihoyoWikiTasks } from "./mihoyo-wiki.js"
 import { fetchDynamic, fetchStatic } from "./shared.js"
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const outputDir = path.resolve(__dirname, "../../data")
+const outputDir = path.resolve(__dirname, "../../data/raw")
 
 fs.mkdirSync(outputDir, { recursive: true })
 

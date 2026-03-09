@@ -1,0 +1,444 @@
+[
+  {
+    "id": "33800",
+    "slug": "notes-from-the-chained",
+    "name": "囚徒手记",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/8927972225216233150_272_14050658.webp",
+    "tag": "冰属性伤害提升",
+    "setEffects": [
+      {
+        "pieces": 2,
+        "bonus": "<span style=\"color: #98EFF0\">冰属性伤害</span>+10%。"
+      },
+      {
+        "pieces": 4,
+        "bonus": "装备者触发<span style=\"color: #FFFFFF\">[异放]</span>时，装备者异常精通提升48点，持续30秒；重复触发时刷新持续时间；装备者触发<span style=\"color: #FFFFFF\">[冻结]</span>效果时，装备者造成的属性异常伤害、<span style=\"color: #FFFFFF\">[紊乱]</span>伤害提升16%，持续30秒，重复触发时刷新持续时间。"
+      }
+    ]
+  },
+  {
+    "id": "33700",
+    "slug": "bunny-in-wonderland",
+    "name": "雪兔梦游仙境",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/8070883109952236990_272_14050658.webp",
+    "tag": "生命值提升",
+    "setEffects": [
+      {
+        "pieces": 2,
+        "bonus": "生命值+10%"
+      },
+      {
+        "pieces": 4,
+        "bonus": "[防护]角色装备时：装备者发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>或队伍中任意队友发动<span style=\"color: #FFFFFF\">[招架支援]</span>、[回避支援]时，全队角色造成伤害提升6%，最多叠加3层，持续25秒，层数逐层衰减，获得或者衰减时刷新持续时间，同名被动效果之间不可叠加。"
+      }
+    ]
+  },
+  {
+    "id": "33500",
+    "slug": "white-water-ballad",
+    "name": "沧浪行歌",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/15256054950634286512_272_14050658.webp",
+    "tag": "物理伤害提升",
+    "setEffects": [
+      {
+        "pieces": 2,
+        "bonus": "<span style=\"color: #F0D12B\">物理伤害</span>+10%。"
+      },
+      {
+        "pieces": 4,
+        "bonus": "装备者处于任意<span style=\"color: #FFFFFF\">[以太帷幕]</span>中时，自身暴击率提高10%，离开<span style=\"color: #FFFFFF\">[以太帷幕]</span>后，该增益效果仍然保留，持续15秒；装备者为<span style=\"color: #FFFFFF\">[强攻]</span>角色时，开启<span style=\"color: #FFFFFF\">[以太帷幕]</span>或延长<span style=\"color: #FFFFFF\">[以太帷幕]</span>的持续时间会使自身暴击率提升10%和攻击力提升10%，持续30秒，重复触发时刷新持续时间。"
+      }
+    ]
+  },
+  {
+    "id": "33600",
+    "slug": "shining-aria",
+    "name": "流光咏叹",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/6405303809026053405_272_14050658.webp",
+    "tag": "以太伤害提升",
+    "setEffects": [
+      {
+        "pieces": 2,
+        "bonus": "<span style=\"color: #FE437E\">以太伤害</span>+10%。"
+      },
+      {
+        "pieces": 4,
+        "bonus": "装备者发动<span style=\"color: #FFFFFF\">[普通攻击]</span>命中敌人时，自身异常精通提升36点，持续8秒，重复触发时刷新持续时间；当场上有敌人进入失衡状态时，装备者造成的伤害提升25%，持续18秒，重复触发时刷新持续时间。"
+      }
+    ]
+  },
+  {
+    "id": "33300",
+    "slug": "dawns-bloom",
+    "name": "拂晓生花",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/9951647463642941889_272_14050658.webp",
+    "tag": "[普通攻击]伤害提升",
+    "setEffects": [
+      {
+        "pieces": 2,
+        "bonus": "<span style=\"color: #FFFFFF\">[普通攻击]</span>造成的伤害提升15%。"
+      },
+      {
+        "pieces": 4,
+        "bonus": "<span style=\"color: #FFFFFF\">[普通攻击]</span>造成的伤害提升20%，装备者为[强攻]角色时，发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>或<span style=\"color: #FFFFFF\">[终结技]</span>会使<span style=\"color: #FFFFFF\">[普通攻击]</span>造成的伤害额外提升20%，持续25秒，重复触发时刷新持续时间。"
+      }
+    ]
+  },
+  {
+    "id": "33400",
+    "slug": "moonlight-lullaby",
+    "name": "月光骑士颂",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/1295007943211081436_272_14050658.webp",
+    "tag": "能量自动回复提升",
+    "setEffects": [
+      {
+        "pieces": 2,
+        "bonus": "能量自动回复+20%。"
+      },
+      {
+        "pieces": 4,
+        "bonus": "装备者为[支援]角色时，发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>或<span style=\"color: #FFFFFF\">[终结技]</span>会使全队角色造成的伤害提升18%，持续25秒，重复触发时刷新持续时间，同名被动效果之间不可叠加。"
+      }
+    ]
+  },
+  {
+    "id": "33100",
+    "slug": "yunkui-tales",
+    "name": "云岿如我",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/595209732608804379_272_14050658.webp",
+    "tag": "生命值提升",
+    "setEffects": [
+      {
+        "pieces": 2,
+        "bonus": "生命值+10%"
+      },
+      {
+        "pieces": 4,
+        "bonus": "发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>、<span style=\"color: #FFFFFF\">[连携技]</span>、<span style=\"color: #FFFFFF\">[终结技]</span>时，暴击率提升4%，最多叠加3层，持续15秒，重复触发时刷新持续时间，拥有3层效果时，造成的贯穿伤害提升10%。"
+      }
+    ]
+  },
+  {
+    "id": "33000",
+    "slug": "phaethons-melody",
+    "name": "法厄同之歌",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/167598110323414469_272_14050658.webp",
+    "tag": "异常掌控提升",
+    "setEffects": [
+      {
+        "pieces": 2,
+        "bonus": "异常掌控+8%。"
+      },
+      {
+        "pieces": 4,
+        "bonus": "队伍中任意角色发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>时，装备者的异常精通提升45点，持续8秒；如果发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>的角色不是装备者本人时，装备者造成的<span style=\"color: #FE437E\">以太伤害</span>提升25%。"
+      }
+    ]
+  },
+  {
+    "id": "33200",
+    "slug": "king-of-the-summit",
+    "name": "山大王",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/3284579302654696866_272_14050658.webp",
+    "tag": "失衡值提升",
+    "setEffects": [
+      {
+        "pieces": 2,
+        "bonus": "攻击造成的失衡值提升6%"
+      },
+      {
+        "pieces": 4,
+        "bonus": "装备者为[击破]角色时，发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>或<span style=\"color: #FFFFFF\">[连携技]</span>会使全队角色暴击伤害提升15%，装备者的暴击率大于等于50%时暴击伤害额外提升15%，持续15秒，重复触发时刷新持续时间，同名被动效果之间不可叠加。"
+      }
+    ]
+  },
+  {
+    "id": "31200",
+    "slug": "shockstar-disco",
+    "name": "震星迪斯科",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/8153104799998832781_272_14050658.webp",
+    "tag": "冲击力提升",
+    "setEffects": [
+      {
+        "pieces": 2,
+        "bonus": "冲击力+6%。"
+      },
+      {
+        "pieces": 4,
+        "bonus": "<span style=\"color: #FFFFFF\">[普通攻击]</span>、<span style=\"color: #FFFFFF\">[冲刺攻击]</span>、<span style=\"color: #FFFFFF\">[闪避反击]</span>对主要攻击目标造成的失衡值提升20%。"
+      }
+    ]
+  },
+  {
+    "id": "31900",
+    "slug": "proto-punk",
+    "name": "原始朋克",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/2823002548560698438_272_14050658.webp",
+    "tag": "施加的护盾值提升",
+    "setEffects": [
+      {
+        "pieces": 2,
+        "bonus": "施加的护盾值提升15%。"
+      },
+      {
+        "pieces": 4,
+        "bonus": "队伍中任意角色发动<span style=\"color: #FFFFFF\">[招架支援]</span>或<span style=\"color: #FFFFFF\">[回避支援]</span>时，全队角色造成的伤害提升15%，持续10秒，同名被动效果之间不可叠加。"
+      }
+    ]
+  },
+  {
+    "id": "32500",
+    "slug": "polar-metal",
+    "name": "极地重金属",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/3698863287995628166_272_14050658.webp",
+    "tag": "冰属性伤害提升",
+    "setEffects": [
+      {
+        "pieces": 2,
+        "bonus": "<span style=\"color: #98EFF0\">冰属性伤害</span>+10%。"
+      },
+      {
+        "pieces": 4,
+        "bonus": "<span style=\"color: #FFFFFF\">[普通攻击]</span>和<span style=\"color: #FFFFFF\">[冲刺攻击]</span>造成的伤害提升20%，队伍中任意角色对敌人施加<span style=\"color: #98EFF0\">[冻结]</span>或触发<span style=\"color: #98EFF0\">[碎冰]</span>效果时，该增益效果额外提升20%，持续12秒。"
+      }
+    ]
+  },
+  {
+    "id": "31500",
+    "slug": "soul-rock",
+    "name": "灵魂摇滚",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/11852994127028461909_272_14050658.webp",
+    "tag": "防御力提升",
+    "setEffects": [
+      {
+        "pieces": 2,
+        "bonus": "防御力+16%。"
+      },
+      {
+        "pieces": 4,
+        "bonus": "受到敌方攻击并损失生命值时，装备者受到的伤害降低40%，持续2.5秒，15秒内最多触发一次。"
+      }
+    ]
+  },
+  {
+    "id": "32200",
+    "slug": "inferno-metal",
+    "name": "炎狱重金属",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/6552982482348001530_272_14050658.webp",
+    "tag": "火属性伤害提升",
+    "setEffects": [
+      {
+        "pieces": 2,
+        "bonus": "<span style=\"color: #FF5521\">火属性伤害</span>+10%。"
+      },
+      {
+        "pieces": 4,
+        "bonus": "攻击命中处于<span style=\"color: #FF5521\">[灼烧]</span>状态下的敌人时，装备者的暴击率提升28%，持续8秒。"
+      }
+    ]
+  },
+  {
+    "id": "32600",
+    "slug": "fanged-metal",
+    "name": "獠牙重金属",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/1250328841212571812_272_14050658.webp",
+    "tag": "物理伤害提升",
+    "setEffects": [
+      {
+        "pieces": 2,
+        "bonus": "<span style=\"color: #F0D12B\">物理伤害</span>+10%。"
+      },
+      {
+        "pieces": 4,
+        "bonus": "队伍中任意角色对敌人施加<span style=\"color: #F0D12B\">[强击]</span>效果时，装备者对目标造成的伤害提升35%，持续12秒。"
+      }
+    ]
+  },
+  {
+    "id": "31100",
+    "slug": "puffer-electro",
+    "name": "河豚电音",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/12062784149747603368_272_14050658.webp",
+    "tag": "穿透率提升",
+    "setEffects": [
+      {
+        "pieces": 2,
+        "bonus": "穿透率+8%。"
+      },
+      {
+        "pieces": 4,
+        "bonus": "<span style=\"color: #FFFFFF\">[终结技]</span>造成的伤害提升20%；发动<span style=\"color: #FFFFFF\">[终结技]</span>时，装备者的攻击力提升15%，持续12秒。"
+      }
+    ]
+  },
+  {
+    "id": "31600",
+    "slug": "swing-jazz",
+    "name": "摇摆爵士",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/10897754582695982645_272_14050658.webp",
+    "tag": "能量自动回复提升",
+    "setEffects": [
+      {
+        "pieces": 2,
+        "bonus": "能量自动回复+20%。"
+      },
+      {
+        "pieces": 4,
+        "bonus": "发动<span style=\"color: #FFFFFF\">[连携技]</span>或<span style=\"color: #FFFFFF\">[终结技]</span>时，全队角色造成的伤害提升15%，持续12秒，同名被动效果之间不可叠加。"
+      }
+    ]
+  },
+  {
+    "id": "32700",
+    "slug": "branch-blade-song",
+    "name": "折枝剑歌",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/12366742306052617196_272_14050658.webp",
+    "tag": "暴击伤害提升",
+    "setEffects": [
+      {
+        "pieces": 2,
+        "bonus": "暴击伤害+16%。"
+      },
+      {
+        "pieces": 4,
+        "bonus": "异常掌控大于等于115点时，装备者的暴击伤害提升30%；队伍中任意角色对敌人施加<span style=\"color: #98EFF0\">[冻结]</span>或触发<span style=\"color: #98EFF0\">[碎冰]</span>效果时，装备者的暴击率提升12%，持续15秒。"
+      }
+    ]
+  },
+  {
+    "id": "31400",
+    "slug": "hormone-punk",
+    "name": "激素朋克",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/10554887091494904227_272_14050658.webp",
+    "tag": "攻击力提升",
+    "setEffects": [
+      {
+        "pieces": 2,
+        "bonus": "攻击力+10%。"
+      },
+      {
+        "pieces": 4,
+        "bonus": "成为接战状态下的当前操作角色时，装备者的攻击力提升25%，持续10秒，20秒内最多触发一次。"
+      }
+    ]
+  },
+  {
+    "id": "32400",
+    "slug": "thunder-metal",
+    "name": "雷暴重金属",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/10396133369472090167_272_14050658.webp",
+    "tag": "电属性伤害提升",
+    "setEffects": [
+      {
+        "pieces": 2,
+        "bonus": "<span style=\"color: #2EB6FF\">电属性伤害</span>+10%。"
+      },
+      {
+        "pieces": 4,
+        "bonus": "当场上存在处于<span style=\"color: #2EB6FF\">[感电]</span>状态下的敌人时，装备者的攻击力提升28%。"
+      }
+    ]
+  },
+  {
+    "id": "31300",
+    "slug": "freedom-blues",
+    "name": "自由蓝调",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/33791772347458054_272_14050658.webp",
+    "tag": "异常精通提升",
+    "setEffects": [
+      {
+        "pieces": 2,
+        "bonus": "异常精通+30点。"
+      },
+      {
+        "pieces": 4,
+        "bonus": "<span style=\"color: #FFFFFF\">[强化特殊技]</span>命中敌人时，根据装备者的属性类型，使目标对应属性异常积蓄抗性降低20%，持续8秒，相同属性类型的效果不可叠加。"
+      }
+    ]
+  },
+  {
+    "id": "32900",
+    "slug": "shadow-harmony",
+    "name": "如影相随",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/1406942339580742274_272_14050658.webp",
+    "tag": "[追加攻击]和[冲刺攻击]伤害提升",
+    "setEffects": [
+      {
+        "pieces": 2,
+        "bonus": "<span style=\"color: #FFFFFF\">[追加攻击]</span>和<span style=\"color: #FFFFFF\">[冲刺攻击]</span>造成的伤害提升15%。"
+      },
+      {
+        "pieces": 4,
+        "bonus": "<span style=\"color: #FFFFFF\">[追加攻击]</span>或<span style=\"color: #FFFFFF\">[冲刺攻击]</span>命中敌人时，若造成的伤害与装备者的属性一致，则获得1层增益效果，同一招式内最多触发一次；每拥有1层增益效果，装备者的攻击力提升4%，暴击率提升4%，最多叠加3层，持续15秒，重复触发时刷新持续时间。"
+      }
+    ]
+  },
+  {
+    "id": "32300",
+    "slug": "chaotic-metal",
+    "name": "混沌重金属",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/10656303896342821109_272_14050658.webp",
+    "tag": "以太伤害提升",
+    "setEffects": [
+      {
+        "pieces": 2,
+        "bonus": "<span style=\"color: #FE437E\">以太伤害</span>+10%。"
+      },
+      {
+        "pieces": 4,
+        "bonus": "装备者的暴击伤害提升20%，队伍中任意角色触发<span style=\"color: #FE437E\">[侵蚀]</span>效果的额外伤害时，该增益效果额外提升5.5%，最多叠加6层，持续8秒，重复触发时刷新持续时间。"
+      }
+    ]
+  },
+  {
+    "id": "31800",
+    "slug": "chaos-jazz",
+    "name": "混沌爵士",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/8550517955469675130_272_14050658.webp",
+    "tag": "异常精通提升",
+    "setEffects": [
+      {
+        "pieces": 2,
+        "bonus": "异常精通+30点。"
+      },
+      {
+        "pieces": 4,
+        "bonus": "<span style=\"color: #FF5521\">火属性伤害</span>和<span style=\"color: #2EB6FF\">电属性伤害</span>提升15%；位于后场时，<span style=\"color: #FFFFFF\">[强化特殊技]</span>和<span style=\"color: #FFFFFF\">[支援攻击]</span>造成的伤害提升20%，换入前场后，该增益效果仍然保留，持续5秒，保留效果7.5秒内最多触发一次。"
+      }
+    ]
+  },
+  {
+    "id": "32800",
+    "slug": "astral-voice",
+    "name": "静听嘉音",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/10883627343944238887_272_14050658.webp",
+    "tag": "攻击力提升",
+    "setEffects": [
+      {
+        "pieces": 2,
+        "bonus": "攻击力+10%。"
+      },
+      {
+        "pieces": 4,
+        "bonus": "队伍中任意角色通过<span style=\"color: #FFFFFF\">[快速支援]</span>入场时，全队角色获得1层<span style=\"color: #FFFFFF\">[嘉音]</span>，最多叠加3层，持续15秒，重复触发时刷新持续时间，每拥有1层<span style=\"color: #FFFFFF\">[嘉音]</span>，通过<span style=\"color: #FFFFFF\">[快速支援]</span>入场的角色造成的伤害提升8%，同名被动效果之间不可叠加。"
+      }
+    ]
+  },
+  {
+    "id": "31000",
+    "slug": "woodpecker-electro",
+    "name": "啄木鸟电音",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/15146347244774769381_272_14050658.webp",
+    "tag": "暴击率提升",
+    "setEffects": [
+      {
+        "pieces": 2,
+        "bonus": "暴击率+8%。"
+      },
+      {
+        "pieces": 4,
+        "bonus": "<span style=\"color: #FFFFFF\">[普通攻击]</span>、<span style=\"color: #FFFFFF\">[闪避反击]</span>或<span style=\"color: #FFFFFF\">[强化特殊技]</span>命中敌人并触发暴击时，分别为装备者提供1层增益效果，每层增益效果使装备者的攻击力提升9%，持续6秒，不同招式分别结算持续时间。"
+      }
+    ]
+  }
+]

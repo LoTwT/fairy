@@ -9,6 +9,10 @@ packages/zzz-data/
 │   ├── index.ts             # 主入口（读 xlsx → 写 data/xlsx/*.json）
 │   ├── config.ts            # worksheetConfigs 字段映射（source of truth）
 │   └── types/               # xlsx 结构的内部类型（由 generate 脚本产出，仅作历史参考，不对外暴露）
+├── scripts/merge/            # 合并脚本
+│   ├── index.ts             # 合并主入口（聚合所有 merge 任务）
+│   ├── shared.ts            # 工具函数（readRaw/writeOut，RAW_DIR/OUT_DIR 常量）
+│   └── gachabase.ts         # gachabase 合并任务（裁剪纯展示字段，输出 data/{locale}/*.json）
 ├── scripts/crawl/            # 爬虫脚本
 │   ├── index.ts             # 爬虫主入口（聚合 tasks，统一执行）
 │   ├── shared.ts            # 工具函数（fetchStatic/fetchJson/fetchDynamic/batchProcess/decodeSvelteKitData）
@@ -27,24 +31,32 @@ packages/zzz-data/
 │   ├── anomaly.test.ts      # 异常伤害
 │   └── disorder.test.ts     # 紊乱伤害
 ├── data/xlsx/*.json         # 生成的 JSON 数据（16 个文件，仅内部使用，不发布）
-├── data/en/                 # 爬虫输出（英文，对外发布）
-│   ├── gachabase/
-│   │   ├── agents.json          # agent 基础列表（id/slug/name/rarity/specialty/attributes/attackTypes）
-│   │   ├── agent-details.json   # agent 详情（faction含icon/assets.mindscapeImages/stats/skills/coreSkills/mindscapes/skins/potentialVisions 等）
-│   │   ├── w-engines.json       # 音擎列表（id/slug/name/rarity/specialty/exclusiveAgentName/baseStat/advancedStat/effects）
-│   │   ├── w-engine-details.json# 音擎详情（exclusiveAgent/assets.splashArt/shortComment/longComment/levels lv0-60/stars star0-5）
-│   │   ├── bangboo.json         # 邦布详情（baseStats+growthPerLevel/skills 3种×10级/optimizations 6级含statBoosts+statAdditions）
-│   │   └── drive-discs.json     # 驱动盘套装（setEffects 2件/4件）
-│   └── buhflipexplode/
-│       ├── shiyu-defense.json        # 原始 sd-versions.json（各版本组的节点结构、enemy refs、buffName 等）
-│       ├── deadly-assault.json       # 原始 da-versions.json（各版本 Boss refs、buff、daze/anom 倍率等）
-│       ├── threshold-simulation.json # 原始 ts-versions.json（Easy/Hard 各版本节点结构）
-│       ├── enemies.json              # 敌人数据库（name/baseHP/baseDEF/baseDaze/stunMult/stunTime/baseAnom/elementMult/tags/mods/desc 等）
-│       └── buffs.json                # Buff 名称→描述文本映射（DA/TS 使用）
-└── data/zh-CN/              # 爬虫输出（中文，对外发布）
-    ├── gachabase/           # 同 en/gachabase/，仅 gachabase 系列
-    └── mihoyo-wiki/
-        └── deadly-assault.json  # 危局强袭战历史期数（增益/Boss 弱点·抗性·机制·星级目标）
+├── data/raw/                # 爬虫原始输出（仅内部使用，不发布）
+│   ├── en/
+│   │   ├── gachabase/           # agents / agent-details / w-engines / w-engine-details / bangboo / drive-discs
+│   │   └── buhflipexplode/      # shiyu-defense / deadly-assault / threshold-simulation / enemies / buffs
+│   └── zh-CN/
+│       ├── gachabase/           # 同 en/gachabase/，中文文本
+│       └── mihoyo-wiki/
+│           └── deadly-assault.json  # 危局强袭战历史期数（增益/Boss 弱点·抗性·机制·星级目标）
+├── data/                    # merge 脚本生成的整合数据（对外发布）
+│   ├── en/                      # 英文数据（来源：raw/en/gachabase/）
+│   │   ├── agents.json
+│   │   ├── agent-details.json
+│   │   ├── w-engines.json
+│   │   ├── w-engine-details.json
+│   │   ├── bangboo.json
+│   │   └── drive-discs.json
+│   └── zh-CN/                   # 中文数据（来源：raw/zh-CN/gachabase/）
+│       ├── agents.json
+│       ├── agent-details.json
+│       ├── w-engines.json
+│       ├── w-engine-details.json
+│       ├── bangboo.json
+│       └── drive-discs.json
+└── i18n/                    # 静态映射文件（merge 脚本引用，不发布）
+    ├── enemy-names.zh-CN.json   # enemy ID → 中文名
+    └── da-version-period.json   # buhflipexplode versionKey ↔ mihoyo-wiki period 编号
 ├── src/gachabase/           # gachabase 数据工具
 │   ├── agent.ts             # Agent 基础属性计算公式（calcAgentStat）
 │   ├── bangboo.ts           # Bangboo 基础属性计算公式（calcBangbooStat）

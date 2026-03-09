@@ -19836,7 +19836,8 @@
                         {
                           "id": "10131",
                           "type": 1,
-                          "count": 1
+                          "count": 1,
+                          "hpMult": 210
                         }
                       ]
                     },
@@ -21003,7 +21004,8 @@
                         {
                           "id": "10104",
                           "type": 1,
-                          "count": 1
+                          "count": 1,
+                          "hpMult": 240
                         }
                       ]
                     },
@@ -22655,7 +22657,8 @@
                         {
                           "id": "10115",
                           "type": 1,
-                          "count": 1
+                          "count": 1,
+                          "hpMult": 260
                         }
                       ]
                     },
@@ -23579,12 +23582,14 @@
                         {
                           "id": "24101",
                           "type": 1,
-                          "count": 1
+                          "count": 1,
+                          "hpMult": 220
                         },
                         {
                           "id": "20102",
                           "type": 1,
-                          "count": 1
+                          "count": 1,
+                          "hpMult": 220
                         }
                       ]
                     },
@@ -23608,12 +23613,14 @@
                         {
                           "id": "10121",
                           "type": 1,
-                          "count": 1
+                          "count": 1,
+                          "hpMult": 240
                         },
                         {
                           "id": "10126",
                           "type": 1,
-                          "count": 1
+                          "count": 1,
+                          "hpMult": 240
                         }
                       ]
                     },
@@ -23637,7 +23644,8 @@
                         {
                           "id": "20001",
                           "type": 1,
-                          "count": 3
+                          "count": 3,
+                          "hpMult": 200
                         }
                       ]
                     },
@@ -23646,12 +23654,14 @@
                         {
                           "id": "10107",
                           "type": 1,
-                          "count": 1
+                          "count": 1,
+                          "hpMult": 220
                         },
                         {
                           "id": "10002",
                           "type": 1,
-                          "count": 2
+                          "count": 2,
+                          "hpMult": 200
                         }
                       ]
                     },
@@ -24040,12 +24050,14 @@
                         {
                           "id": "10105",
                           "type": 1,
-                          "count": 1
+                          "count": 1,
+                          "hpMult": 240
                         },
                         {
                           "id": "10106",
                           "type": 1,
-                          "count": 1
+                          "count": 1,
+                          "hpMult": 240
                         }
                       ]
                     },
@@ -24069,12 +24081,14 @@
                         {
                           "id": "12103",
                           "type": 1,
-                          "count": 1
+                          "count": 1,
+                          "hpMult": 220
                         },
                         {
                           "id": "12105",
                           "type": 1,
-                          "count": 1
+                          "count": 1,
+                          "hpMult": 220
                         }
                       ]
                     },
@@ -24098,7 +24112,8 @@
                         {
                           "id": "10011",
                           "type": 1,
-                          "count": 3
+                          "count": 3,
+                          "hpMult": 200
                         }
                       ]
                     },
@@ -24107,12 +24122,14 @@
                         {
                           "id": "20102",
                           "type": 1,
-                          "count": 1
+                          "count": 1,
+                          "hpMult": 220
                         },
                         {
                           "id": "21000",
                           "type": 1,
-                          "count": 2
+                          "count": 2,
+                          "hpMult": 200
                         }
                       ]
                     },
@@ -24492,12 +24509,14 @@
                         {
                           "id": "24100",
                           "type": 1,
-                          "count": 1
+                          "count": 1,
+                          "hpMult": 220
                         },
                         {
                           "id": "10108",
                           "type": 1,
-                          "count": 1
+                          "count": 1,
+                          "hpMult": 220
                         }
                       ]
                     },
@@ -24521,12 +24540,14 @@
                         {
                           "id": "10108",
                           "type": 1,
-                          "count": 1
+                          "count": 1,
+                          "hpMult": 220
                         },
                         {
                           "id": "10119",
                           "type": 1,
-                          "count": 1
+                          "count": 1,
+                          "hpMult": 220
                         }
                       ]
                     },
@@ -24550,12 +24571,14 @@
                         {
                           "id": "10136",
                           "type": 1,
-                          "count": 1
+                          "count": 1,
+                          "hpMult": 240
                         },
                         {
                           "id": "10112",
                           "type": 1,
-                          "count": 1
+                          "count": 1,
+                          "hpMult": 240
                         }
                       ]
                     },
@@ -24939,12 +24962,14 @@
                         {
                           "id": "12103",
                           "type": 1,
-                          "count": 1
+                          "count": 1,
+                          "hpMult": 240
                         },
                         {
                           "id": "12105",
                           "type": 1,
-                          "count": 1
+                          "count": 1,
+                          "hpMult": 240
                         }
                       ]
                     },
@@ -24968,12 +24993,14 @@
                         {
                           "id": "10116",
                           "type": 1,
-                          "count": 1
+                          "count": 1,
+                          "hpMult": 220
                         },
                         {
                           "id": "10104",
                           "type": 1,
-                          "count": 1
+                          "count": 1,
+                          "hpMult": 220
                         }
                       ]
                     },
@@ -24997,12 +25024,14 @@
                         {
                           "id": "10136",
                           "type": 1,
-                          "count": 1
+                          "count": 1,
+                          "hpMult": 240
                         },
                         {
                           "id": "10112",
                           "type": 1,
-                          "count": 1
+                          "count": 1,
+                          "hpMult": 240
                         }
                       ]
                     },
@@ -25395,7 +25424,8 @@
                         {
                           "id": "21000",
                           "type": 1,
-                          "count": 3
+                          "count": 3,
+                          "hpMult": 220
                         }
                       ]
                     },
@@ -25404,12 +25434,14 @@
                         {
                           "id": "24101",
                           "type": 1,
-                          "count": 1
+                          "count": 1,
+                          "hpMult": 240
                         },
                         {
                           "id": "21000",
                           "type": 1,
-                          "count": 2
+                          "count": 2,
+                          "hpMult": 220
                         }
                       ]
                     },
@@ -25433,7 +25465,8 @@
                         {
                           "id": "10011",
                           "type": 1,
-                          "count": 3
+                          "count": 3,
+                          "hpMult": 220
                         }
                       ]
                     },
@@ -25442,12 +25475,14 @@
                         {
                           "id": "10127",
                           "type": 1,
-                          "count": 1
+                          "count": 1,
+                          "hpMult": 240
                         },
                         {
                           "id": "10011",
                           "type": 1,
-                          "count": 2
+                          "count": 2,
+                          "hpMult": 220
                         }
                       ]
                     },
@@ -25471,12 +25506,14 @@
                         {
                           "id": "20100",
                           "type": 1,
-                          "count": 1
+                          "count": 1,
+                          "hpMult": 220
                         },
                         {
                           "id": "20002",
                           "type": 1,
-                          "count": 5
+                          "count": 5,
+                          "hpMult": 200
                         }
                       ]
                     },
@@ -25870,7 +25907,8 @@
                         {
                           "id": "22001",
                           "type": 1,
-                          "count": 3
+                          "count": 3,
+                          "hpMult": 240
                         }
                       ]
                     },
@@ -25879,12 +25917,14 @@
                         {
                           "id": "10126",
                           "type": 1,
-                          "count": 1
+                          "count": 1,
+                          "hpMult": 260
                         },
                         {
                           "id": "22000",
                           "type": 1,
-                          "count": 2
+                          "count": 2,
+                          "hpMult": 240
                         }
                       ]
                     },
@@ -25908,12 +25948,14 @@
                         {
                           "id": "10105",
                           "type": 1,
-                          "count": 1
+                          "count": 1,
+                          "hpMult": 240
                         },
                         {
                           "id": "10106",
                           "type": 1,
-                          "count": 1
+                          "count": 1,
+                          "hpMult": 240
                         }
                       ]
                     },
@@ -25937,12 +25979,14 @@
                         {
                           "id": "10123",
                           "type": 1,
-                          "count": 1
+                          "count": 1,
+                          "hpMult": 180
                         },
                         {
                           "id": "10122",
                           "type": 1,
-                          "count": 1
+                          "count": 1,
+                          "hpMult": 180
                         }
                       ]
                     },
@@ -26322,7 +26366,8 @@
                         {
                           "id": "20000",
                           "type": 1,
-                          "count": 3
+                          "count": 3,
+                          "hpMult": 240
                         }
                       ]
                     },
@@ -26331,12 +26376,14 @@
                         {
                           "id": "12101",
                           "type": 1,
-                          "count": 1
+                          "count": 1,
+                          "hpMult": 260
                         },
                         {
                           "id": "20000",
                           "type": 1,
-                          "count": 2
+                          "count": 2,
+                          "hpMult": 240
                         }
                       ]
                     },
@@ -26360,12 +26407,14 @@
                         {
                           "id": "10136",
                           "type": 1,
-                          "count": 1
+                          "count": 1,
+                          "hpMult": 180
                         },
                         {
                           "id": "10124",
                           "type": 1,
-                          "count": 1
+                          "count": 1,
+                          "hpMult": 180
                         }
                       ]
                     },
@@ -26389,17 +26438,20 @@
                         {
                           "id": "10130",
                           "type": 1,
-                          "count": 1
+                          "count": 1,
+                          "hpMult": 240
                         },
                         {
                           "id": "10014",
                           "type": 1,
-                          "count": 2
+                          "count": 2,
+                          "hpMult": 220
                         },
                         {
                           "id": "10040",
                           "type": 1,
-                          "count": 3
+                          "count": 3,
+                          "hpMult": 220
                         }
                       ]
                     },
@@ -26773,19 +26825,21 @@
               "sides": [
                 {
                   "sideElementMult": [1, 1.2, 0.8, 1.2, 0.8],
-                  "sideHPMult": 430,
+                  "sideHPMult": 480,
                   "waves": [
                     {
                       "enemies": [
                         {
                           "id": "10116",
                           "type": 1,
-                          "count": 1
+                          "count": 1,
+                          "hpMult": 260
                         },
                         {
                           "id": "10104",
                           "type": 1,
-                          "count": 1
+                          "count": 1,
+                          "hpMult": 260
                         }
                       ]
                     },
@@ -26809,12 +26863,14 @@
                         {
                           "id": "10136",
                           "type": 1,
-                          "count": 1
+                          "count": 1,
+                          "hpMult": 250
                         },
                         {
                           "id": "10124",
                           "type": 1,
-                          "count": 1
+                          "count": 1,
+                          "hpMult": 250
                         }
                       ]
                     },
@@ -26838,12 +26894,14 @@
                         {
                           "id": "10105",
                           "type": 1,
-                          "count": 1
+                          "count": 1,
+                          "hpMult": 260
                         },
                         {
                           "id": "10106",
                           "type": 1,
-                          "count": 1
+                          "count": 1,
+                          "hpMult": 260
                         }
                       ]
                     },
@@ -27216,19 +27274,21 @@
               "sides": [
                 {
                   "sideElementMult": [1.2, 1, 1.2, 0.8, 1],
-                  "sideHPMult": 480,
+                  "sideHPMult": 430,
                   "waves": [
                     {
                       "enemies": [
                         {
                           "id": "10123",
                           "type": 1,
-                          "count": 1
+                          "count": 1,
+                          "hpMult": 250
                         },
                         {
                           "id": "10122",
                           "type": 1,
-                          "count": 1
+                          "count": 1,
+                          "hpMult": 250
                         }
                       ]
                     },
@@ -27252,12 +27312,14 @@
                         {
                           "id": "10121",
                           "type": 1,
-                          "count": 1
+                          "count": 1,
+                          "hpMult": 260
                         },
                         {
                           "id": "10126",
                           "type": 1,
-                          "count": 1
+                          "count": 1,
+                          "hpMult": 260
                         }
                       ]
                     },
@@ -27281,21 +27343,24 @@
                         {
                           "id": "20001",
                           "type": 1,
-                          "count": 3
+                          "count": 3,
+                          "hpMult": 220
                         }
                       ]
                     },
                     {
                       "enemies": [
                         {
-                          "id": "10110",
+                          "id": "10107",
                           "type": 1,
-                          "count": 1
+                          "count": 1,
+                          "hpMult": 250
                         },
                         {
                           "id": "10002",
                           "type": 1,
-                          "count": 2
+                          "count": 2,
+                          "hpMult": 220
                         }
                       ]
                     },
@@ -27673,14 +27738,15 @@
               "sides": [
                 {
                   "sideElementMult": [1, 1.2, 1, 0.8, 0.8],
-                  "sideHPMult": 430,
+                  "sideHPMult": 480,
                   "waves": [
                     {
                       "enemies": [
                         {
                           "id": "10011",
                           "type": 1,
-                          "count": 3
+                          "count": 3,
+                          "hpMult": 240
                         }
                       ]
                     },
@@ -27689,12 +27755,14 @@
                         {
                           "id": "10127",
                           "type": 1,
-                          "count": 1
+                          "count": 1,
+                          "hpMult": 260
                         },
                         {
                           "id": "21000",
                           "type": 1,
-                          "count": 2
+                          "count": 2,
+                          "hpMult": 240
                         }
                       ]
                     },
@@ -27718,7 +27786,8 @@
                         {
                           "id": "22001",
                           "type": 1,
-                          "count": 3
+                          "count": 3,
+                          "hpMult": 240
                         }
                       ]
                     },
@@ -27727,12 +27796,14 @@
                         {
                           "id": "25100",
                           "type": 1,
-                          "count": 1
+                          "count": 1,
+                          "hpMult": 260
                         },
                         {
                           "id": "22000",
                           "type": 1,
-                          "count": 2
+                          "count": 2,
+                          "hpMult": 240
                         }
                       ]
                     },
@@ -27749,19 +27820,21 @@
                 },
                 {
                   "sideElementMult": [0.8, 1, 1, 0.8, 1],
-                  "sideHPMult": 430,
+                  "sideHPMult": 480,
                   "waves": [
                     {
                       "enemies": [
                         {
                           "id": "10127",
                           "type": 1,
-                          "count": 1
+                          "count": 1,
+                          "hpMult": 260
                         },
                         {
                           "id": "10102",
                           "type": 1,
-                          "count": 1
+                          "count": 1,
+                          "hpMult": 260
                         }
                       ]
                     },

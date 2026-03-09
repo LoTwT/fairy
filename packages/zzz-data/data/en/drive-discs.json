@@ -29,7 +29,7 @@
       },
       {
         "pieces": 4,
-        "bonus": "[Defense] When equipped by a character: When the equipper activates an <span style=\"color: #FFFFFF\">[EX Special Attack]</span> or any squad member activates a <span style=\"color: #FFFFFF\">[Defensive Assist]</span> or [Evasive Assist], DMG dealt by all squad members increases by 6%, stacking up to 3 times and lasting 25s. Stacks decay one layer at a time. Duration is refreshed when gaining or losing stacks. Passive effects of the same name do not stack."
+        "bonus": "When the equipper is a Defense character: When the equipper launches an <span style=\"color: #FFFFFF\">EX Special Attack</span> or any squad member triggers a <span style=\"color: #FFFFFF\">Defensive Assist</span> or Evasive Assist, all squad members' DMG increases by 6%, stacking up to 3 times, lasting 25s. Stacks decay one at a time, and duration refreshes when gained or decayed. Passive effects of the same name do not stack."
       }
     ]
   },

@@ -1,0 +1,167 @@
+{
+  "2.7Buff1": {
+    "effect": "• When an Agent inflicts an Attribute Anomaly on an enemy, their Stun Recovery Speed decreases by 15%, and Agent ATK increases by 15% for 20s. Repeated triggers reset the duration.\n• When an enemy is Stunned, the whole squad recovers 20 Energy, and Attribute Anomaly DMG is increased by 30% for 30s. Repeated triggers refresh the duration. Energy Generation can trigger once every 30s."
+  },
+  "2.7Buff2": {
+    "effect": "• Agent's Ultimate DMG increases by 30%. After launching an Ultimate, the whole squad's Sheer DMG increases by 10% and CRIT DMG increases by 30% for 20s. Repeated triggers reset the duration.\n• After the Agent causes enemies to become Stunned, their Stun DMG Multiplier increases by 30%."
+  },
+  "2.7Buff3": {
+    "effect": "• Agent Basic Attack, Dodge Counter, and Ultimate DMG increases by 30%, and ignore 20% of the enemy's Ice RES.\n• When inflicting Disorder on an enemy, the Agent's ATK increases by 30%, the enemy's Stun Recovery Speed decreases by 15%, and their Stun DMG Multiplier increases by 25% for 20s. Repeated triggers reset the duration."
+  },
+  "2.7Buff4": {
+    "effect": "• When there are 1/2 Agents with the Attack specialty in your squad, the whole squad's ATK is increased by 10%/25%.\n• DMG dealt by the Agent's Basic Attack is increased by 40%, and ignores 20% of the enemy's Electric RES."
+  },
+  "aberration": {
+    "effect": "• Increases the Agent's Anomaly Buildup Rate by 20%.\n• When inflicting Attribute Anomaly on enemies, all squad members gain 60 points of Anomaly Proficiency, and DMG caused by Disorder increases by 40% for 15 seconds."
+  },
+  "adjudication": {
+    "effect": "• While in Ether Veil, Agent ATK increases by 20%, CRIT DMG increases by 20%.\n• Enemy Stun DMG Multiplier increases by 30%, and when Agent Basic Attacks and Ultimates hit enemies, they ignore 10% of Physical RES and 10% of DEF."
+  },
+  "anomalySurge": {
+    "effect": "• The Agent's Anomaly Buildup Rate increases by 10%, and when a shield is active, the Anomaly Buildup Rate further increases by 20%.\n• When attacking enemies in an Attribute Anomaly state, the Agent's DMG increases by 40%."
+  },
+  "artful": {
+    "effect": "• Agent DMG increases by 20% and Physical DMG increases by an additional 20%.\n• After inflicting an Attribute Anomaly on an enemy, the enemy's DEF decreases by 10% for 10s. After inflicting Disorder on an enemy, the enemy's DEF further decreases by 25% for 10s. Each effect's duration refreshes individually."
+  },
+  "blazingChill": {
+    "effect": "• The Agent's Fire Anomaly Buildup Rate and Ice Anomaly Buildup Rate increase by 20%, and ATK increases by 25%.\n• When inflicting Attribute Anomaly on enemies, the Agent restores 300 Decibels and increases Anomaly Proficiency by 80 points, lasting 15s."
+  },
+  "blazingChillV2": {
+    "effect": "• Agent Fire Anomaly Buildup Rate and Ice Anomaly Buildup Rate increase by 20%, and ATK increases by 25%.\n• When inflicting an Attribute Anomaly on enemies, the Agent restores 400 Decibels and Anomaly Proficiency is increased by 80, lasting 15s. Decibels recovery can be triggered once every 15s."
+  },
+  "blazingSweep": {
+    "effect": "• When an Agent inflicts Attribute Anomaly on an enemy, the enemy's All-Attribute RES decreases by 10%, and their Ether RES decreases by 10% for 15s. Repeated triggers refresh the duration.\n• Agent's Attribute Anomaly DMG increases by 15%, their Abloom DMG increases by 15%, and the Anomaly Buildup from their Chain Attacks and Ultimates increases by 20%."
+  },
+  "breakThrough": {
+    "effect": "• Agent Sheer DMG increases by 15%. When Agents with Rupture specialty hit enemies with attacks, ignore 20% of the target's All-DMG RES.\n• After activating an EX Special Attack, Agent Fire DMG increases by 40% for 15s. Repeated triggers reset the duration."
+  },
+  "chasingBlade": {
+    "effect": "• Aftershock DMG from Agents increases by 30% and their CRIT DMG increases by 30%.\n• When Agents of Attack specialty hits an enemy with EX Special Attack or Ultimate, the enemy's all DMG RES is reduced by 30% for 15 seconds. Repeated triggers reset the duration."
+  },
+  "clarity": {
+    "effect": "• Agent HP increases by 25%, and their Sheer DMG increases by 15%.\n• Agents with Rupture specialty deal 15% more DMG, and their Ultimate DMG is additionally increased by 15%."
+  },
+  "collapse": {
+    "effect": "• Agent Dodge Counter and EX Special Attack DMG increases by 30%.\n• When an Agent hits an enemy that is not Stunned, the Daze dealt increases by 10%. When hitting a Stunned enemy, CRIT DMG increases by 30%, and the enemy's Stun DMG Multiplier increases by 25%."
+  },
+  "combinedAttack": {
+    "effect": "• When there are 1/2 Agents with Attack specialty in the squad, the whole squad's CRIT DMG increases by 20%/60%.\n• After an EX Special Attack or Ultimate, the Agent's Electric DMG increases by 20%. For Agents with Attack specialty, their DMG further increases by 30% for 20s. Repeated triggers reset the duration."
+  },
+  "dazingForce": {
+    "effect": "• The Agent's Daze value dealt increases by 15%, and the DMG dealt by Chain Attack increases by 60%.\n• Each use of Chain Attack increases the all squad members' ATK by 10% for 20 seconds, stacking up to 4 times. The duration of each stack is calculated separately."
+  },
+  "dreamDelusion": {
+    "effect": "• Agent Anomaly Proficiency increases by 40.\n• When inflicting Attribute Anomaly on enemies, their DEF is reduced by 10%, and Agent Anomaly DMG against them increases by 20% for 10 seconds. Repeated triggers reset the duration."
+  },
+  "electrospark": {
+    "effect": "• The Agent's Fire DMG and Electric DMG will increase by 25%.\n• After triggering Chain Attack, Perfect Assist, or Quick Assist, the Agent's CRIT Rate increases by 20% and CRIT DMG increases by 40% for 20s."
+  },
+  "fieryAssault": {
+    "effect": "• When there are 1/2 Agents with Attack specialty in the squad, the whole squad deals 20%/40% bonus DMG.\n• After triggering a critical hit, the Agent's Electric DMG increases by 30%; for Agents with Attack specialty, their CRIT DMG further increases by 40% for 5s. Repeated triggers reset the duration."
+  },
+  "finalAssault": {
+    "effect": "• The Agent's Decibel Generation Rate increases by 20%.\n• Ultimate DMG increases by 30%. When the Ultimate hits an enemy, it reduces the enemy's DEF by 15% for 20s."
+  },
+  "focusEnergy": {
+    "effect": "• Agent ATK increases by 16%, and enemy Stun DMG Multiplier increases by 30%.\n• When in Ether Veil, Agent attacks that hit enemies ignore 10% of Physical RES and 15% of DEF."
+  },
+  "formationBreaker": {
+    "effect": "• After Stunning enemies, their Stun DMG Multiplier increases by 35%, and their Stun recovery speed decreases by 10%.\n• After an Agent uses an EX Special Attack, their CRIT DMG increases by 40% for 20s."
+  },
+  "frostNight": {
+    "effect": "• Agent Ice DMG and Physical DMG increase by 30%.\n• When inflicting Attribute Anomaly on enemies, the whole squad's ATK increases by 25% and Decibel Generation Rate increases by 20% for 20s. Repeated triggers reset the duration."
+  },
+  "frostyThunder": {
+    "effect": "• The Agent's Electric DMG and Ice DMG will increase by 25%.\n• DMG dealt by Basic Attack, Dodge Counter, and Dash Attack increases by 40%, ignoring 15% of the enemy's DEF."
+  },
+  "gatheringPoint": {
+    "effect": "• Agent Max HP increases by 20%, Ultimate DMG increases by 40%.\n• After using an EX Special Attack, Energy and Adrenaline Generation Rate increase by 20% and Ether DMG increases by 35% for 20s, and repeated triggers reset the duration."
+  },
+  "gracefulMastery": {
+    "effect": "• Increases Agent Anomaly Buildup Rate by 25% and Anomaly Proficiency by 40.\n• When an enemy suffers an Attribute Anomaly, Agents recover 500 additional Decibels and ATK increases by 30% for 15s. The Decibel recovery effect can trigger once every 15s."
+  },
+  "harnessingChange": {
+    "effect": "• Ultimate DMG increases by 30%. When launching Ultimate, the Agent's ATK increases by 15% for 15s. Repeated triggers reset the duration.\n• After enemies become Stunned, their Stun DMG Multiplier increases by 35%."
+  },
+  "heartcrusher": {
+    "effect": "• Agent CRIT DMG increases by 30%.\n• ATK of Agents with Attack specialty increases by 10%. Their Basic Attack DMG increases by 30% and ignore 15% of enemy DEF."
+  },
+  "illusorySurge": {
+    "effect": "• Agent Ether Anomaly Buildup Rate and Physical Anomaly Buildup Rate increases by 20%, Anomaly Proficiency increases by 60.\n• When an Agent hits enemies affected by Attribute Anomaly, DMG dealt increases by 25% and ignores 15% of enemy DEF."
+  },
+  "interrupt": {
+    "effect": "• Basic Attack, Dodge Counter, EX Special Attack, and Dash Attack DMG increases by 30%.\n• After triggering a Perfect Dodge or Perfect Assist, increases all squad members' ATK by 10% and CRIT DMG by 10% for 15s. Stacks up to 3 times. The duration of each stack is calculated separately."
+  },
+  "lingeringIllness": {
+    "effect": "• After Stunning enemies, their Stun DMG Multiplier increases by 25%, and their Stun recovery speed decreases by 10%.\n• After an Agent uses a Chain Attack, their ATK increases by 20% and CRIT DMG by 30% for 20s."
+  },
+  "meditation": {
+    "effect": "• Agent Max HP increases by 30%, Ultimate DMG increases by 40%.\n• After using an Ultimate, Energy and Adrenaline Generation Rate increase by 15%, Ether DMG and Ice DMG increase by 40% for 20s."
+  },
+  "metamorphosis": {
+    "effect": "• Agent Fire Anomaly Buildup Rate and Ether Anomaly Buildup Rate is increased by 20%, and Anomaly Proficiency by 80.\n• When triggering an Attribute Anomaly, the enemy's DEF is reduced by 15%, and the damage they receive from Attribute Anomalies will be increased by 40% for 15s. Repeated triggers reset the duration."
+  },
+  "mutation": {
+    "effect": "• Agent ATK increases by 25%, Anomaly Proficiency increases by 40.\n• After inflicting Attribute Anomaly on enemies, their All-DMG RES is reduced by 10%, and Agent Attribute Anomaly DMG against them is increased by 30% for 15s. Repeated triggers reset the duration."
+  },
+  "overthrow": {
+    "effect": "• Increases Agent Daze by 25% and Chain Attack DMG by 80%.\n• When a Chain Attack is triggered, the Agent recovers 20 Energy, and DMG increases by 50% for 20s."
+  },
+  "overwhelmingMight": {
+    "effect": "• Agent Max HP increases by 30%, Ultimate DMG increases by 40%.\n• After using an Ultimate, Energy and Adrenaline Generation Rate increase by 15%, Ether DMG and Fire DMG increase by 40% for 20s. Repeated triggers reset the duration."
+  },
+  "pinnacle": {
+    "effect": "• Rupture specialty Agent Sheer DMG increases by 10%, and reduces Miasma Shield 30% faster.\n• While in Ether Veil, Agent Sheer DMG additionally increases by 30%, and hitting an enemy makes its Stun DMG Multiplier increase by 45% for 10s. Repeated triggers reset the duration."
+  },
+  "powerBoost": {
+    "effect": "• For Agents, Electric DMG and Physical DMG increase by 30%.\n• When inflicting Attribute Anomaly on enemies, for the whole squad, ATK increases by 8% and Decibel Generation Rate increases by 8% for 20s, stacking up to 4 times. Repeated triggers reset the duration."
+  },
+  "powerOn": {
+    "effect": "• Agent Assist Attacks, EX Special Attacks, and Ultimates deal 25% more DMG.\n• When an Agent triggers Quick Assist or Chain Attack, Decibel Generation Rate increases by 30%, and attacks ignore 20% of enemy RES for 20s. Repeated triggers reset the duration."
+  },
+  "psychics": {
+    "effect": "• After an Agent inflicts an Attribute Anomaly on an enemy, the enemy's All-Attribute RES is reduced by 10%, and Ether RES is reduced by 15% for 15s. Repeated triggers refresh the duration.\n• Agent EX Special Attack, Chain Attack, and Ultimate Anomaly Buildup increases by 15%. Agent Attribute Anomaly DMG increases by 15%, and Abloom DMG increases by 20%."
+  },
+  "ragingStorm": {
+    "effect": "• Agent Special Attack, EX Special Attack, and Ultimate DMG increases by 30%.\n• When an EX Special Attack or Aftershock hits the enemy, the Agent's CRIT DMG increases by 30% for 20s, and the enemy's DEF is reduced by 15% for 15s. Repeated triggers reset the duration."
+  },
+  "ragingWaves": {
+    "effect": "• When an Agent with Rupture specialty has HP below 80%/50% of their Max HP, their attacks ignore 10%/25% of the enemy's Ice RES.\n• When Agents activate or extend an Ether Veil, the whole squad's Sheer DMG increases by 20%, CRIT DMG increases by 30% for 20s, repeated triggers reset the duration."
+  },
+  "rapidAid": {
+    "effect": "• The Agent's Energy Generation Rate increases by 25%, and the DMG dealt by Quick Assist increases by 50%.\n• Each use of Quick Assist increases all squad members' ATK by 10% for 20s, stacking up to 3 times. Repeated triggers reset the duration."
+  },
+  "rideTheCurrent": {
+    "effect": "• Agents within Ether Veil have their ATK increased by 15%, and when their Basic Attack or Ultimate hits an enemy, it ignores 15% of enemy DEF.\n• After an Agent with Support specialty activates an EX Special Attack, the whole squad's Physical DMG increases by 20% and their CRIT DMG increases by 40% for 20s. Repeated triggers reset the duration."
+  },
+  "severPulse": {
+    "effect": "• Agent Ultimate DMG increases by 30%, and when Agents Stun enemies, their Stun DMG Multiplier increases by 50%.\n• After Agents with the Stun specialty use EX Special Attack, when any squad member's attacks hit enemies, ignore 7% All-Attribute RES for 30s, stacking up to 3 times, and the duration of each stack is calculated separately."
+  },
+  "shatterboon": {
+    "effect": "• Agent Electric DMG and Physical DMG increase by 20%. When Basic Attack, Chain Attack, or Ultimate hits an enemy, CRIT DMG increases by 30%.\n• While within Ether Veil, Agent ATK increases by 10%, and attacks ignore 15% of enemy DEF."
+  },
+  "sonata": {
+    "effect": "• Agent Decibel Generation Rate increases by 20%.\n• Ultimates and EX Special Attacks ignore 20% of DMG RES on hit. After an Ultimate hits enemies, Agent Ultimate and EX Special Attack DMG increase by 50% for 30s, repeated triggers reset the duration."
+  },
+  "spiritBreak": {
+    "effect": "• Increases Agent Anomaly Buildup Rate by 30% and Disorder DMG by 40%.\n• When inflicting Disorder on an enemy, recovers all squad members' Energy by 10 and increases Agent's ATK by 25% for 30s. The Energy Generation effect can trigger once every 20s."
+  },
+  "stormcutter": {
+    "effect": "• Agent Special Attack, EX Special Attack, and Ultimate DMG increases by 30%.\n• When an EX Special Attack or an Ultimate hits the enemy, the Agent's CRIT DMG increases by 30% for 20s, and the enemy's DEF is reduced by 15% for 15s. Repeated triggers reset the duration."
+  },
+  "swiftAdvance": {
+    "effect": "• DMG dealt by Agent Aftershocks and Chain Attacks is increased by 30%.\n• When an Aftershock or Dodge Counter hits an enemy, all squad members' ATK is increased by 15%, and CRIT DMG is increased by 40% for 20s. Repeated triggers reset the duration."
+  },
+  "swiftResolution": {
+    "effect": "• Agent ATK increases by 20%, Decibel Generation Rate increases by 20%. Upon launching an Ultimate, Agent ATK increases by an additional 15% for 15s. Ultimate DMG increases by 40%, Daze dealt increases by 20%, and Anomaly Buildup increases by 20%."
+  },
+  "temperingBody": {
+    "effect": "• Agents deal 20% more DMG and attacks ignore 10% of enemy All-DMG RES.\n• Attack specialty Agents' ATK increases by 20%, Basic Attack DMG increases by 40%, and ignore 20% of enemy DEF."
+  },
+  "transformationCharge": {
+    "effect": "• Agent Ether Anomaly Buildup Rate and Physical Anomaly Buildup Rate is increased by 25%, and Anomaly Proficiency by 60 points.\n• When triggering an Attribute Anomaly, the enemy's DEF is reduced by 10%, and the damage they receive from Attribute Anomalies will be increased by 30% for 20s. Repeated triggers reset the duration."
+  },
+  "wornOut": {
+    "effect": "• The Daze dealt by Agents is increased by 10%, and the DMG dealt by Chain Attacks is increased by 50%.\n• When Chain Attacks hit an enemy, the enemy's Stun DMG Multiplier is increased by 25%, and all squad members' ATK is increased by 20% for 15s. Repeated triggers reset the duration."
+  }
+}

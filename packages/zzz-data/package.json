@@ -21,7 +21,7 @@
   ],
   "exports": {
     ".": "./dist/index.mjs",
-    "./data/*": "./data/*"
+    "./data/*/*": "./data/*/*.json"
   },
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
@@ -35,8 +35,8 @@
     }
   },
   "files": [
-    "data/en",
-    "data/zh-CN",
+    "data/en/*.json",
+    "data/zh-CN/*.json",
     "dist"
   ],
   "scripts": {
@@ -45,9 +45,11 @@
     "crawl:gachabase": "tsx scripts/crawl/index.ts gachabase",
     "crawl:buhflipexplode": "tsx scripts/crawl/index.ts buhflipexplode",
     "crawl:mihoyo-wiki": "tsx scripts/crawl/index.ts mihoyo-wiki",
+    "merge": "tsx scripts/merge/index.ts",
+    "data:prepare": "pnpm run crawl && pnpm run merge",
     "test": "vitest run",
     "build": "tsdown",
-    "release": "pnpm run build && pnpm publish"
+    "release": "pnpm run build && pnpm run merge && pnpm publish"
   },
   "devDependencies": {
     "@types/node": "^25.3.5",

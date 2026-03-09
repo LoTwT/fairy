@@ -9,13 +9,15 @@ Zenless Zone Zero 游戏数据包，从 `source.xlsx` 生成 JSON 数据，公�
 ```bash
 # zzz-data 子包命令（在 packages/zzz-data 下）
 pnpm run generate   # 从 source.xlsx 生成 data/xlsx/*.json（当前冻结，xlsx 数据源暂不可用）
-pnpm run crawl                 # 爬虫脚本，爬取所有数据生成 data/crawl/*.json
+pnpm run crawl                 # 爬虫脚本，爬取所有数据生成 data/raw/**/*.json
 pnpm run crawl:gachabase      # 只爬取 gachabase 数据
 pnpm run crawl:buhflipexplode # 只爬取 buhflipexplode 数据
 pnpm run crawl:mihoyo-wiki    # 只爬取 baike.mihoyo.com 数据
+pnpm run merge      # 合并脚本，从 data/raw/ + i18n/ 生成 data/*.json（对外发布）
+pnpm run data:prepare # crawl + merge 全流程
 pnpm run test       # vitest 运行测试
 pnpm run build      # tsdown 编译，输出 dist/
-pnpm run release    # build + pnpm publish
+pnpm run release    # build + merge + pnpm publish
 
 # zzz-agent 子包命令（在 packages/zzz-agent 下）
 pnpm run dev        # 启动 Mastra Studio（localhost:4111）
@@ -24,6 +26,7 @@ pnpm run start      # 启动生产服务器
 
 # 根目录命令
 pnpm run test       # 运行所有子包测试
+pnpm run data:prepare # crawl + merge 全流程（透传 zzz-data 子包）
 pnpm run lint --fix # eslint 检查并自动修复（hook 自动执行，通常无需手动运行）
 pnpm run prettier   # prettier 格式化（hook 自动执行，通常无需手动运行）
 ```
@@ -48,9 +51,8 @@ src/mastra/
 修改或生成代码后，**每次**必须按顺序执行以下步骤，不得遗漏：
 
 1. **立即对照「维护 CLAUDE.md」检查本次改动是否触发文档更新条件，若触发则先更新文档**
-2. 在子包下跑测试：`pnpm run test`
-
-> lint 和格式化由 Claude Code hook 在每次响应结束后自动执行（检测到 ts/js/json/md 变更时触发），无需手动运行。
+2. `pnpm run lint --fix && pnpm run prettier`
+3. 在子包下跑测试：`pnpm run test`
 
 ## 维护 CLAUDE.md
 

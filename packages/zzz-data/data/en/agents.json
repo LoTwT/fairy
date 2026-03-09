@@ -1,23 +1,23 @@
 [
   {
     "id": "1521",
-    "slug": "1521",
-    "name": "",
+    "slug": "cissia",
+    "name": "Cissia",
     "rarity": 4,
     "specialty": "Attack",
     "attributes": ["Electric"],
     "attackTypes": ["Slash"],
-    "url": "https://zzz.gachabase.net/agents/1521/1521"
+    "url": "https://zzz.gachabase.net/agents/1521/cissia"
   },
   {
     "id": "1511",
-    "slug": "1511",
-    "name": "",
+    "slug": "nangong-yu",
+    "name": "Nangong Yu",
     "rarity": 4,
     "specialty": "Stun",
     "attributes": ["Ether"],
     "attackTypes": ["Strike"],
-    "url": "https://zzz.gachabase.net/agents/1511/1511"
+    "url": "https://zzz.gachabase.net/agents/1511/nangong-yu"
   },
   {
     "id": "1501",

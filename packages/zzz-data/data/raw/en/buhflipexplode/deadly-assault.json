@@ -772,17 +772,17 @@
     "versionTime": "xx/xx/20xx - xx/xx/20xx",
     "versionDazeMult": 100,
     "versionAnomMult": 110,
-    "buffNames": ["Stormcutter", "2.7 Buff 1", "2.7 Buff 2"],
+    "buffNames": ["2.7 Buff 1", "2.7 Buff 2", "2.7 Buff 3"],
     "versionEnemies": [
       {
         "id": "27300",
         "type": 0,
-        "mult": 180
+        "mult": 190
       },
       {
-        "id": "25300",
+        "id": "20300",
         "type": 0,
-        "mult": 270
+        "mult": 160
       },
       {
         "id": "14300",
@@ -801,7 +801,7 @@
       {
         "id": "26300",
         "type": 1,
-        "mult": 240
+        "mult": 230
       },
       {
         "id": "10304",
@@ -820,12 +820,12 @@
     "versionTime": "xx/xx/20xx - xx/xx/20xx",
     "versionDazeMult": 100,
     "versionAnomMult": 110,
-    "buffNames": ["Heartcrusher", "2.7 Buff 1", "2.7 Buff 3"],
+    "buffNames": ["Heartcrusher", "2.7 Buff 1", "2.7 Buff 4"],
     "versionEnemies": [
       {
         "id": "27300",
         "type": 1,
-        "mult": 180
+        "mult": 190
       },
       {
         "id": "25300",

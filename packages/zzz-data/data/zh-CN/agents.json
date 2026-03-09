@@ -1,23 +1,23 @@
 [
   {
     "id": "1521",
-    "slug": "1521",
+    "slug": "cissia",
     "name": "希希芙",
     "rarity": 4,
     "specialty": "强攻",
     "attributes": ["电属性"],
     "attackTypes": ["斩击"],
-    "url": "https://zzz.gachabase.net/agents/1521/1521"
+    "url": "https://zzz.gachabase.net/agents/1521/cissia"
   },
   {
     "id": "1511",
-    "slug": "1511",
+    "slug": "nangong-yu",
     "name": "南宫羽",
     "rarity": 4,
     "specialty": "击破",
     "attributes": ["以太"],
     "attackTypes": ["打击"],
-    "url": "https://zzz.gachabase.net/agents/1511/1511"
+    "url": "https://zzz.gachabase.net/agents/1511/nangong-yu"
   },
   {
     "id": "1501",

@@ -68,13 +68,25 @@ export interface CoreSkillLevel {
 export interface AgentSkin {
   id: string
   name: string
-  description: string
   assets: {
     menuIcon: string
     tabIcon: string
     circleIcon: string
     splashArt: SplashArt
   }
+}
+
+export interface AgentMindscape {
+  level: number
+  name: string
+  description: string
+}
+
+export interface AgentPotentialVision {
+  id: string
+  name: string
+  abilityName: string
+  abilityDesc: string
 }
 
 export interface AgentDetails {
@@ -89,16 +101,14 @@ export interface AgentDetails {
     gender: string
     height: string
     birthday: string
-    details: string
-    details2: string
-    aptitude: string
-    titles: string[]
   }
   skins: AgentSkin[]
   stats: AgentStat[]
   promotions: AgentPromotion[]
   skills: AgentSkillGroup[]
   coreSkills: CoreSkillLevel[]
+  potentialVisions: AgentPotentialVision[]
+  mindscapes: AgentMindscape[]
 }
 
 // ─── w-engines.json ───────────────────────────────────────────────────────────
@@ -141,8 +151,6 @@ export interface WEngineDetails {
   id: string
   slug: string
   name: string
-  shortComment: string
-  longComment: string
   exclusiveAgent: { id: string; slug: string; name: string } | null
   assets: { splashArt: SplashArt }
   levels: WEngineLevel[]

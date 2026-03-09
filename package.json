@@ -11,6 +11,7 @@
     "up": "taze latest -I -f -r",
     "prettier": "prettier --write .",
     "lint": "eslint .",
+    "data:prepare": "pnpm --filter zzz-data run data:prepare",
     "release": "bumpp -r && pnpm run data:release"
   },
   "devDependencies": {
