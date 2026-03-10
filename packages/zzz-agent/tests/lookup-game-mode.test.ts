@@ -47,8 +47,33 @@ it("returns normalized damageContext for game mode enemies", async () => {
     difficulty: "Critical",
     node: 1,
     side: 1,
-    enemyName: "Raider",
+    enemyName: "Bulky Intimidator",
     attribute: "冰属性",
+    locale: "zh-CN",
+  })
+  const sdAmbiguous = await runTool(lookupGameMode, {
+    mode: "SD",
+    difficulty: "Critical",
+    node: 1,
+    side: 1,
+    enemyName: "Raider",
+    locale: "zh-CN",
+  })
+  const ts = await runTool(lookupGameMode, {
+    mode: "TS",
+    difficulty: "Hard",
+    node: 1,
+    side: 2,
+    enemyName: "秉火领颂",
+    attribute: "以太",
+    locale: "zh-CN",
+  })
+  const tsSideThree = await runTool(lookupGameMode, {
+    mode: "TS",
+    difficulty: "Hard",
+    node: 1,
+    side: 3,
+    enemyName: "秽息原牲",
     locale: "zh-CN",
   })
 
@@ -58,7 +83,15 @@ it("returns normalized damageContext for game mode enemies", async () => {
   expect((da as any).damageContext.elementMultiplier).toBe(1.2)
   expect((da as any).damageContext.recommendedDefenderResistance).toBe(-0.2)
   expect((sd as any).damageContext.attribute).toBe("ice")
-  expect((sd as any).damageContext.enemyName).toBe("Raider")
+  expect((sd as any).damageContext.enemyName).toBe("Bulky Intimidator")
   expect((sd as any).damageContext.node).toBe(1)
   expect((sd as any).damageContext.side).toBe(1)
+  expect((sdAmbiguous as any).selectedEnemy).toBeUndefined()
+  expect((sdAmbiguous as any).enemyCandidates).toHaveLength(2)
+  expect((sdAmbiguous as any).enemyCandidates[0]?.name).toBe("Raider")
+  expect((ts as any).damageContext.attribute).toBe("ether")
+  expect((ts as any).damageContext.enemyName).toBe("秉火领颂")
+  expect((ts as any).damageContext.elementMultiplier).toBe(1)
+  expect((ts as any).damageContext.sideElementMultiplier).toBe(1.2)
+  expect((tsSideThree as any).selectedEnemy.side).toBe(3)
 })

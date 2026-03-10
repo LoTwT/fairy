@@ -41,6 +41,9 @@ packages/zzz-data/
 │   ├── buhflipexplode.ts    # buhflipexplode.com 爬取任务
 │   └── mihoyo-wiki.ts       # baike.mihoyo.com 爬取任务（危局强袭战）
 ├── tests/generate.test.ts   # 结构一致性测试（xlsx ↔ config ↔ JSON）
+├── tests/cleaned/          # cleaned/helper layer 测试
+│   ├── enemy.test.ts       # elementMult map / damageContext helper 测试
+│   └── versions.test.ts    # versionTime / latest version helper 测试
 ├── tests/terms.test.ts      # canonical 术语映射与属性桶测试
 ├── tests/text.test.ts       # rich text 清洗 helper 测试
 ├── tests/game-modes.test.ts # game-modes raw category code contract 测试
@@ -97,6 +100,15 @@ packages/zzz-data/
 │   └── index.ts             # re-export
 ├── src/buhflipexplode/      # buhflipexplode 数据工具
 │   └── index.ts             # 节点倍率表常量、原始 JSON 类型、纯计算函数
+├── src/cleaned/            # cleaned/helper layer（不改 raw shape，只提供稳定消费视图）
+│   ├── encounter.ts        # 敌人选择、候选列表、encounter damage-context helper
+│   ├── enemy.ts            # elementMult map、按属性取倍率、damageContext helper
+│   ├── versions.ts         # versionTime 解析、模式查找、默认版本 helper
+│   ├── deadly-assault.ts   # DA buff / enemy 扁平化 helper
+│   ├── shiyu-defense.ts    # SD node / side / enemy 标准化视图 helper
+│   ├── threshold-simulation.ts # TS boss / regular side 标准化视图 helper
+│   ├── types.ts            # cleaned helper 返回类型
+│   └── index.ts            # re-export
 ├── src/game-modes.ts        # 对外发布的游戏模式 JSON 类型（buffs / DA / SD / TS）+ raw category code contract
 ├── src/terms.ts             # canonical 术语层（raw label → 规范导出映射）
 ├── src/text.ts              # rich text 字段类型与纯文本清洗 helper
@@ -115,7 +127,7 @@ packages/zzz-agent/
 ├── src/mastra/
 │ ├── index.ts # Mastra 实例入口
 │ ├── agents/zzz-agent.ts # ZZZ Agent prompt / tools / scorers wiring
-│ ├── tools/zzz/ # lookup / calcDamage 工具（含 compact 查询与 damageContext）
+│ ├── tools/zzz/ # lookup / calcDamage 工具（含 compact 查询与 damageContext；lookupGameMode 复用 zzz-data cleaned helper）
 │ └── scorers/zzz-scorer.ts # 评分器实现
 ├── tests/
 │ ├── lookup-game-mode.test.ts # lookupGameMode 默认版本与 damageContext 测试
@@ -171,6 +183,8 @@ const total = base * bonus * crit * resistance * custom
 - 音擎属性：`calcWEngineBaseATK(baseVal, lvBaseStatGrowth, starBaseStatGrowth)`、`calcWEngineSecondaryStat(baseValue, starAdvancedStatGrowth)`
 - gachabase 类型：`AgentListItem`、`AgentDetails`、`WEngineListItem`、`WEngineDetails`、`BangbooItem`、`DriveDiscItem` 等
 - 游戏模式类型：`BuffsJson`、`DeadlyAssaultJson`、`ShiyuDefenseJson`、`ThresholdSimulationJson`
+- cleaned helper：`toElementMultiplierMap()`、`getEnemyElementMultiplier()`、`buildEnemyDamageContext()`、`selectEncounterByEnemyName()`、`buildEncounterDamageContext()`、`analyzeVersionPeriod()`、`findDAVersion()`、`findSDMode()`、`resolveSDModeName()`、`getDefaultSDMode()`、`selectSDMode()`、`findSDVersion()`、`findTSMode()`、`resolveTSModeName()`、`getDefaultTSMode()`、`selectTSMode()`、`findTSVersion()`、`getLatestDAVersion()`、`getLatestSDVersion()`、`getLatestTSVersion()`、`toDABuffView()`、`getDABuffViews()`、`flattenDAEnemies()`、`selectDAEnemy()`、`buildDADamageContext()`、`findDAVersionsByEnemyName()`、`toSDNodeViews()`、`flattenSDEnemies()`、`selectSDEnemy()`、`buildSDDamageContext()`、`findSDVersionsByEnemyName()`、`toTSNodeViews()`、`flattenTSEnemies()`、`selectTSEnemy()`、`buildTSDamageContext()`、`findTSVersionsByEnemyName()`
+- cleaned 类型：`ElementMultiplierMap`、`EnemyDamageContext`、`EncounterSelectionResult`、`EncounterDamageContext`、`VersionPeriodInfo`、`DABuffView`、`DAEnemyView`、`SDNodeView`、`SDSideView`、`TSNodeView`、`TSSideView`、`TSFlattenedEnemyView`
 - 文本工具：`RichTextString`、`stripRichText()`
 - 游戏模式辅助：`EnemyCategoryCode`、`enemyCategoryCodes`、`isEnemyCategoryCode()`
 - 术语导出：`AgentSpecialty`、`AgentAttribute`、`AttackType`、`BaseResistanceAttribute`、`toAgentSpecialty()`、`toAgentAttribute()`、`toBaseResistanceAttribute()`、`getElementMultIndex()`

@@ -4,9 +4,10 @@ Zenless Zone Zero 数据与伤害计算库。
 
 ## 导出内容
 
-包入口 `src/index.ts` 当前导出四类内容：
+包入口 `src/index.ts` 当前导出六类内容：
 
 - `calculator`：伤害计算函数与类型
+- `cleaned`：不改 raw shape 的稳定 helper / 消费视图
 - `gachabase`：代理人 / 音擎 / 邦布属性计算函数与发布数据类型
 - `game-modes`：危局强袭战 / 式舆防卫战 / 阈限模拟发布数据类型
 - `terms`：canonical 术语类型与 raw label 映射函数
@@ -42,6 +43,18 @@ import {
 import { stripRichText } from "zzz-data"
 ```
 
+如果你想在不碰 raw JSON shape 的前提下直接消费敌人倍率或版本信息，优先使用 cleaned helpers：
+
+```ts
+import {
+  analyzeVersionPeriod,
+  buildEnemyDamageContext,
+  getLatestDAVersion,
+  selectEncounterByEnemyName,
+  toSDNodeViews,
+} from "zzz-data"
+```
+
 ## 常用示例
 
 ### 术语标准化
@@ -65,6 +78,79 @@ const plain = stripRichText(
   'Press <span style="color: #FFFFFF">[Basic Attack]</span><br/>Deal DMG.',
 )
 // "Press [Basic Attack]\nDeal DMG."
+```
+
+### 构建敌人伤害上下文
+
+```ts
+import { buildEnemyDamageContext } from "zzz-data"
+
+const context = buildEnemyDamageContext(enemy, "玄墨")
+// {
+//   resistanceBucket: "ether",
+//   elementMultiplier: 0.8,
+//   baseDefense: 476,
+//   ...
+// }
+```
+
+### 读取默认版本与时间区间
+
+```ts
+import { analyzeVersionPeriod, getLatestDAVersion } from "zzz-data"
+
+const version = getLatestDAVersion(deadlyAssault)
+const period = analyzeVersionPeriod(version!.versionTime)
+// { raw, startLabel, endLabel, isRange, isOngoing, isPlaceholder }
+```
+
+### 读取 SD / TS 的标准化节点视图
+
+```ts
+import { toSDNodeViews, toTSNodeViews } from "zzz-data"
+
+const sdNodes = toSDNodeViews(sdVersion)
+// [
+//   {
+//     node: 1,
+//     buffNames: ["增益 1"],
+//     buffDescriptions: ["说明 1"],
+//     sides: [{ side: 1, enemies: [...] }],
+//   },
+// ]
+
+const tsNodes = toTSNodeViews(tsVersion)
+// [
+//   {
+//     node: 1,
+//     buffNames: ["Boss 增益"],
+//     sides: [
+//       { side: 1, sideRole: "boss", enemies: [...] },
+//       { side: 2, sideRole: "regular", enemies: [...] },
+//     ],
+//   },
+// ]
+```
+
+### 读取 encounter 级 damage-context
+
+```ts
+import { buildTSDamageContext } from "zzz-data"
+
+const context = buildTSDamageContext(tsVersion, "火属性", {
+  node: 1,
+  side: 2,
+  enemyName: "Patrol Jaeger",
+})
+// {
+//   enemyName: "Patrol Jaeger",
+//   elementMultiplier: 1,
+//   sideElementMultiplier: 1.2,
+//   node: 1,
+//   side: 2,
+//   wave: 1,
+//   ...
+// }
 ```
 
 ### 读取 `elementMult`
@@ -92,6 +178,9 @@ const weaponAtk = calcWEngineBaseATK(713, 2200, 7800)
 
 - `data/en/*.json` 与 `data/zh-CN/*.json` 保留原始 display label
 - `src/terms.ts` 提供规范导出，不强行改写 raw JSON 字段
+- `src/cleaned/` 提供不改 raw shape 的 helper layer，统一解释倍率桶、版本展示文本、默认版本选择，以及 `DA` / `SD` / `TS` 的标准化消费视图
+- `selectEncounterByEnemyName()` 在模糊匹配命中多个敌人时不会猜测，会返回候选名列表供上层继续决策
+- `buildSDDamageContext()` / `buildTSDamageContext()` 会同时保留 enemy-level `elementMultiplier` 与 side-level `sideElementMultiplier`；如果两者不一致，不在 cleaned layer 擅自合并语义
 - `RichTextString` 字段保留源站富文本标记，不保证是纯文本
 - `versionTime` 是展示用时间区间字符串，不保证可机器解析
 - `EnemyBase.image` 是资源 slug/key，不是完整图片 URL

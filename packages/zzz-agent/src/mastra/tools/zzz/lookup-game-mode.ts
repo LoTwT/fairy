@@ -1,156 +1,68 @@
 import type {
+  AgentAttributeLabel,
   DeadlyAssaultJson,
+  EncounterDamageContext,
+  FlattenedEnemyView,
   ShiyuDefenseJson,
   ThresholdSimulationJson,
 } from "zzz-data"
 import { createTool } from "@mastra/core/tools"
 import { z } from "zod"
 import {
-  damageAttributeOrder,
-  loadJson,
-  normalizeDamageAttribute,
-} from "./utils"
+  buildDADamageContext,
+  buildSDDamageContext,
+  buildTSDamageContext,
+  findDAVersion,
+  findDAVersionsByEnemyName,
+  findSDVersion,
+  findSDVersionsByEnemyName,
+  findTSVersion,
+  findTSVersionsByEnemyName,
+  flattenSDEnemies,
+  flattenTSEnemies,
+  selectDAEnemy,
+  selectSDEnemy,
+  selectSDMode,
+  selectTSEnemy,
+  selectTSMode,
+} from "zzz-data"
+import { loadJson, normalizeDamageAttribute } from "./utils"
 
-const difficultyRanks = [
-  ["stable", "Stable Node"],
-  ["disputed", "Disputed Node"],
-  ["ambush", "Ambush Node"],
-  ["critical", "Critical Node"],
-  ["easy", "Easy Mode"],
-  ["hard", "Hard Mode"],
-] as const
-
-function normalizeText(value: string): string {
-  return value.toLowerCase().replace(/[\s\-_]/g, "")
-}
-
-function resolveDifficultyName(input: string | undefined, options: string[]) {
-  if (!input) return undefined
-
-  const normalizedInput = normalizeText(input)
-
-  for (const option of options) {
-    if (normalizeText(option) === normalizedInput) return option
-  }
-
-  for (const [key, canonical] of difficultyRanks) {
-    if (
-      normalizedInput === key ||
-      normalizedInput === normalizeText(canonical)
-    ) {
-      return options.find(
-        (option) => normalizeText(option) === normalizeText(canonical),
-      )
-    }
-  }
-
-  return options.find((option) =>
-    normalizeText(option).includes(normalizedInput),
-  )
-}
-
-function getDefaultDifficulty<T extends { name: string }>(options: T[]) {
-  const ranked = options
-    .map((option) => ({
-      option,
-      rank: difficultyRanks.findIndex(
-        ([, canonical]) =>
-          normalizeText(option.name) === normalizeText(canonical),
-      ),
-    }))
-    .filter((item) => item.rank >= 0)
-    .sort((a, b) => b.rank - a.rank)
-
-  return ranked[0]?.option ?? options[0]
-}
-
-function getLatestVersion<T>(items: T[]) {
-  return items[0]
-}
-
-interface EnemyContext {
-  enemy: {
-    name: string
-    def: number
-    elementMult: number[]
-    weaknesses?: string[]
-    resistances?: string[]
-  }
-  node?: number
-  side?: number
-  wave?: number
-}
-
-function pickEnemyContext(candidates: EnemyContext[], enemyName?: string) {
-  if (enemyName) {
-    return candidates.find((candidate) =>
-      candidate.enemy.name.toLowerCase().includes(enemyName.toLowerCase()),
-    )
-  }
-
-  return candidates.length === 1 ? candidates[0] : undefined
-}
-
-function buildDamageContext(
-  selected: EnemyContext | undefined,
+function toLookupDamageContext(
+  context: EncounterDamageContext | undefined,
   attributeInput: string | undefined,
 ) {
-  if (!selected || !attributeInput) return undefined
+  if (!context) return undefined
 
   const attribute = normalizeDamageAttribute(attributeInput)
   if (!attribute) return undefined
 
-  const attributeIndex = damageAttributeOrder.indexOf(attribute)
-  const elementMultiplier = selected.enemy.elementMult[attributeIndex] ?? 1
-
   return {
-    enemyName: selected.enemy.name,
+    enemyName: context.enemyName,
     attribute,
-    elementMultiplier,
-    defenderBaseDefense: selected.enemy.def,
-    recommendedDefenderResistance: Number((1 - elementMultiplier).toFixed(4)),
-    weaknesses: selected.enemy.weaknesses,
-    resistances: selected.enemy.resistances,
-    node: selected.node,
-    side: selected.side,
-    wave: selected.wave,
+    elementMultiplier: context.elementMultiplier,
+    defenderBaseDefense: context.baseDefense,
+    recommendedDefenderResistance: Number(
+      (1 - context.elementMultiplier).toFixed(4),
+    ),
+    weaknesses: context.weaknesses.length > 0 ? context.weaknesses : undefined,
+    resistances:
+      context.resistances.length > 0 ? context.resistances : undefined,
+    mechanics: context.mechanics,
+    node: context.node,
+    side: context.side,
+    wave: context.wave,
+    sideElementMultiplier: context.sideElementMultiplier,
   }
 }
 
-function flattenVersionEnemies(
-  version: {
-    nodes: Array<{
-      sides: Array<{
-        waves: Array<{ enemies: Array<EnemyContext["enemy"]> }>
-      } | null>
-    }>
-  },
-  node?: number,
-  side?: number,
-) {
-  const enemies: EnemyContext[] = []
-
-  for (const [nodeIndex, currentNode] of version.nodes.entries()) {
-    if (node && nodeIndex + 1 !== node) continue
-
-    for (const [sideIndex, currentSide] of currentNode.sides.entries()) {
-      if (!currentSide) continue
-      if (side && sideIndex + 1 !== side) continue
-
-      for (const [waveIndex, wave] of currentSide.waves.entries()) {
-        for (const enemy of wave.enemies) {
-          enemies.push({
-            enemy,
-            node: nodeIndex + 1,
-            side: sideIndex + 1,
-            wave: waveIndex + 1,
-          })
-        }
-      }
-    }
+function toEncounterCandidate(candidate: FlattenedEnemyView) {
+  return {
+    name: candidate.enemy.name,
+    node: candidate.node,
+    side: candidate.side,
+    wave: candidate.wave,
   }
-
-  return enemies
 }
 
 export const lookupGameMode = createTool({
@@ -193,9 +105,10 @@ export const lookupGameMode = createTool({
     side: z
       .number()
       .min(1)
-      .max(2)
       .optional()
-      .describe("指定上下半编号（仅 SD/TS，1=上半，2=下半）"),
+      .describe(
+        "指定 side 编号。SD 中 1/2 表示上下半；TS 中 1=boss side，2..n=regular side",
+      ),
     locale: z
       .enum(["en", "zh-CN"])
       .optional()
@@ -214,6 +127,7 @@ export const lookupGameMode = createTool({
       side,
       locale,
     } = input
+    const attributeLabel = attribute as AgentAttributeLabel | undefined
 
     if (mode === "DA") {
       const data = loadJson<DeadlyAssaultJson>(
@@ -222,11 +136,7 @@ export const lookupGameMode = createTool({
 
       // Boss search mode
       if (boss) {
-        const matches = data.filter((v) =>
-          v.versionEnemies.some((e) =>
-            e.name.toLowerCase().includes(boss.toLowerCase()),
-          ),
-        )
+        const matches = findDAVersionsByEnemyName(data, boss)
         return {
           found: matches.length > 0,
           mode: "DA",
@@ -241,9 +151,7 @@ export const lookupGameMode = createTool({
         }
       }
 
-      const item = version
-        ? data.find((v) => v.versionKey === version)
-        : getLatestVersion(data)
+      const item = findDAVersion(data, version)
 
       if (!item) {
         return {
@@ -253,23 +161,23 @@ export const lookupGameMode = createTool({
         }
       }
 
-      const selectedEnemy = pickEnemyContext(
-        item.versionEnemies.map((enemy) => ({ enemy })),
-        enemyName,
-      )
+      const selection = selectDAEnemy(item, enemyName)
 
       return {
         found: true,
         mode: "DA",
         data: item,
-        selectedEnemy: selectedEnemy
-          ? { name: selectedEnemy.enemy.name }
+        selectedEnemy: selection.selected
+          ? { name: selection.selected.enemy.name }
           : undefined,
         enemyCandidates:
-          !selectedEnemy && (enemyName || attribute)
-            ? item.versionEnemies.map((enemy) => enemy.name)
+          !selection.selected && (enemyName || attribute)
+            ? selection.candidates
             : undefined,
-        damageContext: buildDamageContext(selectedEnemy, attribute),
+        damageContext: toLookupDamageContext(
+          buildDADamageContext(item, attributeLabel, enemyName),
+          attribute,
+        ),
       }
     }
 
@@ -279,16 +187,7 @@ export const lookupGameMode = createTool({
       )
 
       // Resolve difficulty
-      const modeItem = difficulty
-        ? data.find(
-            (m) =>
-              m.name ===
-              resolveDifficultyName(
-                difficulty,
-                data.map((item) => item.name),
-              ),
-          )
-        : getDefaultDifficulty(data)
+      const modeItem = selectSDMode(data, difficulty)
       if (!modeItem) {
         return {
           found: false,
@@ -299,19 +198,7 @@ export const lookupGameMode = createTool({
 
       // Boss search mode
       if (boss) {
-        const matches = modeItem.versions.filter((v) =>
-          v.nodes.some((n) =>
-            n.sides.some(
-              (s) =>
-                s &&
-                s.waves.some((w) =>
-                  w.enemies.some((e) =>
-                    e.name.toLowerCase().includes(boss.toLowerCase()),
-                  ),
-                ),
-            ),
-          ),
-        )
+        const matches = findSDVersionsByEnemyName(modeItem, boss)
         return {
           found: matches.length > 0,
           mode: "SD",
@@ -326,9 +213,10 @@ export const lookupGameMode = createTool({
         }
       }
 
-      const vItem = version
-        ? modeItem.versions.find((v) => v.versionKey === version)
-        : getLatestVersion(modeItem.versions)
+      const vItem = findSDVersion(data, {
+        modeName: modeItem.name,
+        versionKey: version,
+      })
       if (!vItem) {
         return {
           found: false,
@@ -337,33 +225,36 @@ export const lookupGameMode = createTool({
         }
       }
 
-      const selectedEnemy = pickEnemyContext(
-        flattenVersionEnemies(vItem, node, side),
-        enemyName,
-      )
+      const selection = selectSDEnemy(vItem, { node, side, enemyName })
+      const candidateSource =
+        selection.matches.length > 0
+          ? selection.matches
+          : flattenSDEnemies(vItem, { node, side })
       return {
         found: true,
         mode: "SD",
         difficulty: modeItem.name,
         data: vItem,
-        selectedEnemy: selectedEnemy
+        selectedEnemy: selection.selected
           ? {
-              name: selectedEnemy.enemy.name,
-              node: selectedEnemy.node,
-              side: selectedEnemy.side,
-              wave: selectedEnemy.wave,
+              name: selection.selected.enemy.name,
+              node: selection.selected.node,
+              side: selection.selected.side,
+              wave: selection.selected.wave,
             }
           : undefined,
         enemyCandidates:
-          !selectedEnemy && (enemyName || attribute || node || side)
-            ? flattenVersionEnemies(vItem, node, side).map((candidate) => ({
-                name: candidate.enemy.name,
-                node: candidate.node,
-                side: candidate.side,
-                wave: candidate.wave,
-              }))
+          !selection.selected && (enemyName || attribute || node || side)
+            ? candidateSource.map(toEncounterCandidate)
             : undefined,
-        damageContext: buildDamageContext(selectedEnemy, attribute),
+        damageContext: toLookupDamageContext(
+          buildSDDamageContext(vItem, attributeLabel, {
+            node,
+            side,
+            enemyName,
+          }),
+          attribute,
+        ),
       }
     }
 
@@ -373,16 +264,7 @@ export const lookupGameMode = createTool({
     )
 
     // Resolve difficulty
-    const modeItem = difficulty
-      ? data.find(
-          (m) =>
-            m.name ===
-            resolveDifficultyName(
-              difficulty,
-              data.map((item) => item.name),
-            ),
-        )
-      : getDefaultDifficulty(data)
+    const modeItem = selectTSMode(data, difficulty)
     if (!modeItem) {
       return {
         found: false,
@@ -393,19 +275,7 @@ export const lookupGameMode = createTool({
 
     // Boss search mode
     if (boss) {
-      const matches = modeItem.versions.filter((v) =>
-        v.nodes.some((n) =>
-          n.sides.some(
-            (s) =>
-              s &&
-              s.waves.some((w) =>
-                w.enemies.some((e) =>
-                  e.name.toLowerCase().includes(boss.toLowerCase()),
-                ),
-              ),
-          ),
-        ),
-      )
+      const matches = findTSVersionsByEnemyName(modeItem, boss)
       return {
         found: matches.length > 0,
         mode: "TS",
@@ -420,9 +290,10 @@ export const lookupGameMode = createTool({
       }
     }
 
-    const vItem = version
-      ? modeItem.versions.find((v) => v.versionKey === version)
-      : getLatestVersion(modeItem.versions)
+    const vItem = findTSVersion(data, {
+      modeName: modeItem.name,
+      versionKey: version,
+    })
     if (!vItem) {
       return {
         found: false,
@@ -431,33 +302,32 @@ export const lookupGameMode = createTool({
       }
     }
 
-    const selectedEnemy = pickEnemyContext(
-      flattenVersionEnemies(vItem, node, side),
-      enemyName,
-    )
+    const selection = selectTSEnemy(vItem, { node, side, enemyName })
+    const candidateSource =
+      selection.matches.length > 0
+        ? selection.matches
+        : flattenTSEnemies(vItem, { node, side })
     return {
       found: true,
       mode: "TS",
       difficulty: modeItem.name,
       data: vItem,
-      selectedEnemy: selectedEnemy
+      selectedEnemy: selection.selected
         ? {
-            name: selectedEnemy.enemy.name,
-            node: selectedEnemy.node,
-            side: selectedEnemy.side,
-            wave: selectedEnemy.wave,
+            name: selection.selected.enemy.name,
+            node: selection.selected.node,
+            side: selection.selected.side,
+            wave: selection.selected.wave,
           }
         : undefined,
       enemyCandidates:
-        !selectedEnemy && (enemyName || attribute || node || side)
-          ? flattenVersionEnemies(vItem, node, side).map((candidate) => ({
-              name: candidate.enemy.name,
-              node: candidate.node,
-              side: candidate.side,
-              wave: candidate.wave,
-            }))
+        !selection.selected && (enemyName || attribute || node || side)
+          ? candidateSource.map(toEncounterCandidate)
           : undefined,
-      damageContext: buildDamageContext(selectedEnemy, attribute),
+      damageContext: toLookupDamageContext(
+        buildTSDamageContext(vItem, attributeLabel, { node, side, enemyName }),
+        attribute,
+      ),
     }
   },
 })
