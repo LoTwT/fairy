@@ -3,6 +3,7 @@
     "target": "esnext",
     "module": "esnext",
     "moduleResolution": "bundler",
+    "types": ["node", "vitest/globals"],
     "strict": true,
     "noEmit": true,
     "outDir": "dist",
@@ -10,5 +11,5 @@
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "tests/**/*"]
 }

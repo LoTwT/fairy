@@ -7,10 +7,9 @@ Zenless Zone Zero 游戏数据包，从 `source.xlsx` 生成 JSON 数据，公�
 1. [docs/index.md](./docs/index.md)
 2. [docs/ai-guide.md](./docs/ai-guide.md)
 
-## Claude Code 入口说明
+## Codex App 入口说明
 
-- `CLAUDE.md` 只保留 Claude Code 入口约定，项目知识以 `docs/` 为准
-- `AGENTS.md` 是 Codex App 入口文件，与本文件共享同一套 `docs/` 内容
+- `AGENTS.md` 只保留 Codex 入口约定，项目知识以 `docs/` 为准
+- `CLAUDE.md` 是 Claude Code 入口文件，与本文件共享同一套 `docs/` 内容
 - 修改 `packages/zzz-agent` 前，先阅读共享的 Mastra skill：`./.agents/skills/mastra/SKILL.md`
-- Claude Code 的本地权限与运行设置位于 `./.claude/settings.local.json`
 - `.agents/` 用于存放仓库共享 skills，`.claude/` 用于 Claude Code 本地设置；不要在两边重复维护项目知识

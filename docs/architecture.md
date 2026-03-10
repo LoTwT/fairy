@@ -1,5 +1,25 @@
 # 架构说明
 
+## 仓库级 AI 协作文件
+
+```
+.
+├── docs/
+│   ├── index.md           # 文档索引
+│   └── ai-guide.md        # Codex App 与 Claude Code 共享说明
+├── AGENTS.md              # Codex App 入口文件（薄入口，指向 docs/）
+├── CLAUDE.md              # Claude Code 入口文件（薄入口，指向 docs/）
+├── .agents/skills/        # 仓库共享 skills
+└── .claude/               # Claude Code 本地设置
+```
+
+约定：
+
+- 项目知识、命令、工作流统一维护在 `docs/`
+- `AGENTS.md` 与 `CLAUDE.md` 只保留工具专属入口约定，避免双份维护
+- 共享技能优先放在 `.agents/skills/`，由两个工具共同引用
+- Claude Code 的权限或本地运行设置放在 `.claude/`
+
 ## 项目结构
 
 ```
@@ -12,7 +32,8 @@ packages/zzz-data/
 ├── scripts/merge/            # 合并脚本
 │   ├── index.ts             # 合并主入口（聚合所有 merge 任务）
 │   ├── shared.ts            # 工具函数（readRaw/writeOut，RAW_DIR/OUT_DIR 常量）
-│   └── gachabase.ts         # gachabase 合并任务（裁剪纯展示字段，输出 data/{locale}/*.json）
+│   ├── gachabase.ts         # gachabase 合并任务（裁剪纯展示字段，输出 data/{locale}/*.json）
+│   └── buhflipexplode.ts    # buhflipexplode 合并任务（内联敌人属性，输出 DA/SD/TS + buffs）
 ├── scripts/crawl/            # 爬虫脚本
 │   ├── index.ts             # 爬虫主入口（聚合 tasks，统一执行）
 │   ├── shared.ts            # 工具函数（fetchStatic/fetchJson/fetchDynamic/batchProcess/decodeSvelteKitData）
@@ -40,30 +61,40 @@ packages/zzz-data/
 │       └── mihoyo-wiki/
 │           └── deadly-assault.json  # 危局强袭战历史期数（增益/Boss 弱点·抗性·机制·星级目标）
 ├── data/                    # merge 脚本生成的整合数据（对外发布）
-│   ├── en/                      # 英文数据（来源：raw/en/gachabase/）
+│   ├── en/                      # 英文数据
 │   │   ├── agents.json
 │   │   ├── agent-details.json
 │   │   ├── w-engines.json
 │   │   ├── w-engine-details.json
 │   │   ├── bangboo.json
-│   │   └── drive-discs.json
-│   └── zh-CN/                   # 中文数据（来源：raw/zh-CN/gachabase/）
+│   │   ├── drive-discs.json
+│   │   ├── buffs.json               # 增益效果（来源：raw/en/buhflipexplode/）
+│   │   ├── deadly-assault.json      # 危局强袭战（双源合并，内联 boss 属性）
+│   │   ├── shiyu-defense.json       # 式舆防线（内联敌人属性 + side hp）
+│   │   └── threshold-simulation.json # 零号业绩（内联 boss + 普通敌人属性）
+│   └── zh-CN/                   # 中文数据（同 en/ 结构，增量含 DA wiki 弱点/抗性/机制）
 │       ├── agents.json
 │       ├── agent-details.json
 │       ├── w-engines.json
 │       ├── w-engine-details.json
 │       ├── bangboo.json
-│       └── drive-discs.json
-└── i18n/                    # 静态映射文件（merge 脚本引用，不发布）
-    ├── enemy-names.zh-CN.json   # enemy ID → 中文名
-    └── da-version-period.json   # buhflipexplode versionKey ↔ mihoyo-wiki period 编号
+│       ├── drive-discs.json
+│       ├── buffs.json
+│       ├── deadly-assault.json
+│       ├── shiyu-defense.json
+│       └── threshold-simulation.json
+├── i18n/                    # 静态映射文件（merge 脚本引用，不发布）
+    ├── da-version-period.json   # buhflipexplode versionKey ↔ mihoyo-wiki period 编号
+    └── buff-names.zh-CN.json    # EN camelCase key → ZH buff 名称（描述文本匹配生成）
 ├── src/gachabase/           # gachabase 数据工具
 │   ├── agent.ts             # Agent 基础属性计算公式（calcAgentStat）
 │   ├── bangboo.ts           # Bangboo 基础属性计算公式（calcBangbooStat）
 │   ├── w-engine.ts          # 音擎属性计算公式（calcWEngineBaseATK / calcWEngineSecondaryStat）
+│   ├── types.ts             # gachabase 原始/详情数据公开类型
 │   └── index.ts             # re-export
 ├── src/buhflipexplode/      # buhflipexplode 数据工具
 │   └── index.ts             # 节点倍率表常量、原始 JSON 类型、纯计算函数
+├── src/game-modes.ts        # 对外发布的游戏模式 JSON 类型（buffs / DA / SD / TS）
 ├── src/calculator/          # 伤害计算模块（纯函数，可导出）
 │   ├── types.ts             # 所有参数/返回类型
 │   ├── factors.ts           # 各乘区独立函数（可自由组合）
@@ -75,9 +106,23 @@ packages/zzz-data/
 └── src/index.ts             # 公开类型入口（手动维护，与数据源无关）
 ```
 
+packages/zzz-agent/
+├── src/mastra/
+│ ├── index.ts # Mastra 实例入口
+│ ├── agents/zzz-agent.ts # ZZZ Agent prompt / tools / scorers wiring
+│ ├── tools/zzz/ # lookup / calcDamage 工具（含 compact 查询与 damageContext）
+│ └── scorers/zzz-scorer.ts # 评分器实现
+├── tests/
+│ ├── lookup-game-mode.test.ts # lookupGameMode 默认版本与 damageContext 测试
+│ ├── lookup-filters.test.ts # lookupAgent / lookupWEngine 双语筛选与 compact 测试
+│ ├── zzz-agent-prompt.test.ts # prompt 工作流、术语与截图摘要测试
+│ ├── zzz-scorer.test.ts # outputFormat / judge model scorer 测试
+│ └── shared.ts # 测试共享 JSON 读取辅助
+└── .npmrc # Mastra build 阶段继承的 pnpm trust 白名单
+
 ## 属性计算模块（src/gachabase/）
 
-基于 gachabase.net 数据验证的纯函数属性计算库，数据来自 `data/en/gachabase/`。
+基于 gachabase.net 数据验证的纯函数属性计算库。爬虫原始数据位于 `data/raw/en/gachabase/`，对外发布数据位于 `data/en/*.json`。
 
 | 函数                       | 文件                        | 公式                                                                      |
 | -------------------------- | --------------------------- | ------------------------------------------------------------------------- |
@@ -119,6 +164,8 @@ const total = base * bonus * crit * resistance * custom
 - Agent 属性：`calcAgentStat(value, growthPerLevel, level, promotionBoost, coreSkillBoost)`
 - Bangboo 属性：`calcBangbooStat(value, growthPerLevel | null, level, optimizationBoost)`
 - 音擎属性：`calcWEngineBaseATK(baseVal, lvBaseStatGrowth, starBaseStatGrowth)`、`calcWEngineSecondaryStat(baseValue, starAdvancedStatGrowth)`
+- gachabase 类型：`AgentListItem`、`AgentDetails`、`WEngineListItem`、`WEngineDetails`、`BangbooItem`、`DriveDiscItem` 等
+- 游戏模式类型：`BuffsJson`、`DeadlyAssaultJson`、`ShiyuDefenseJson`、`ThresholdSimulationJson`
 - 伤害计算类型：`AnomalyType`、`DefenseParams`、`ResistanceParams`、`VulnerabilityParams`、`DazeVulnerabilityParams`、`CritParams`、`NormalDamageParams`、`SheerDamageParams`、`AnomalyDamageParams`、`DisorderDamageParams`、`DamageResult`
 - 乘区函数：`calcDefenseMultiplier`、`calcResistanceMultiplier`、`calcVulnerabilityMultiplier`、`calcDazeVulnerabilityMultiplier`、`calcExpectedCritMultiplier`、`calcSheerBonusMultiplier`、`calcAnomalyProficiencyMultiplier`、`calcDamageLevelMultiplier`、`calcDisorderDamageMultiplier` 等
 - Pipeline 函数：`calcNormalDamage`、`calcSheerDamage`、`calcAnomalyDamage`、`calcDisorderDamage`（各含 `Crit`/`NoCrit` 变体）
