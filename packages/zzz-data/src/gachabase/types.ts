@@ -1,3 +1,10 @@
+import type {
+  AgentAttributeLabel,
+  AgentSpecialtyLabel,
+  AttackTypeLabel,
+} from "../terms.js"
+import type { RichTextString } from "../text.js"
+
 // ─── Shared ───────────────────────────────────────────────────────────────────
 
 export interface StatBoost {
@@ -18,9 +25,12 @@ export interface AgentListItem {
   slug: string
   name: string
   rarity: number
-  specialty: string
-  attributes: string[]
-  attackTypes: string[]
+  /** Localized display label. Normalize with `toAgentSpecialty()` for logic. */
+  specialty: AgentSpecialtyLabel
+  /** Localized display labels. Normalize with `toAgentAttribute()` for logic. */
+  attributes: AgentAttributeLabel[]
+  /** Localized display labels. Normalize with `toAttackType()` for logic. */
+  attackTypes: AttackTypeLabel[]
   url: string
 }
 
@@ -42,7 +52,8 @@ export interface AgentPromotion {
 export interface AgentSkillDescription {
   id: string
   name: string
-  description: string
+  /** Source-compatible rich text string with inline HTML-like markup. */
+  description: RichTextString
 }
 
 export interface AgentSkillStat {
@@ -79,20 +90,26 @@ export interface AgentSkin {
 export interface AgentMindscape {
   level: number
   name: string
-  description: string
+  /** Source-compatible rich text string with inline HTML-like markup. */
+  description: RichTextString
 }
 
 export interface AgentPotentialVision {
   id: string
   name: string
   abilityName: string
-  abilityDesc: string
+  /** Source-compatible rich text string with inline HTML-like markup. */
+  abilityDesc: RichTextString
 }
 
 export interface AgentDetails {
   id: string
   fullName: string
   faction: { id: string; name: string; icon: string } | null
+  /**
+   * Raw source-compatible field name from gachabase.
+   * In ZZZ terminology this means the agent's signature W-Engine.
+   */
   exclusiveWeapon: { id: string; slug: string; name: string } | null
   assets: {
     mindscapeImages: SplashArt[]
@@ -116,7 +133,8 @@ export interface AgentDetails {
 export interface WEngineEffect {
   level: number
   name: string
-  effect: string
+  /** Source-compatible rich text string with inline HTML-like markup. */
+  effect: RichTextString
 }
 
 export interface WEngineListItem {
@@ -125,7 +143,8 @@ export interface WEngineListItem {
   name: string
   icon: string
   rarity: number
-  specialty: { id: string; name: string }
+  /** `specialty.name` is localized; normalize with `toAgentSpecialty()` */
+  specialty: { id: string; name: AgentSpecialtyLabel }
   exclusiveAgentName: string | null
   baseStat: { id: string; name: string; value: number }
   advancedStat: { id: string; name: string; value: number }
@@ -181,7 +200,8 @@ export interface BangbooSkillStat {
 export interface BangbooSkill {
   typeId: string
   name: string
-  description: string
+  /** Source-compatible rich text string with inline HTML-like markup. */
+  description: RichTextString
   stats: BangbooSkillStat[]
 }
 
@@ -204,7 +224,8 @@ export interface BangbooItem {
 
 export interface DriveDiscSetEffect {
   pieces: number
-  bonus: string
+  /** Source-compatible rich text string with inline HTML-like markup. */
+  bonus: RichTextString
 }
 
 export interface DriveDiscItem {

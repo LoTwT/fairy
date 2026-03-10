@@ -41,6 +41,9 @@ packages/zzz-data/
 │   ├── buhflipexplode.ts    # buhflipexplode.com 爬取任务
 │   └── mihoyo-wiki.ts       # baike.mihoyo.com 爬取任务（危局强袭战）
 ├── tests/generate.test.ts   # 结构一致性测试（xlsx ↔ config ↔ JSON）
+├── tests/terms.test.ts      # canonical 术语映射与属性桶测试
+├── tests/text.test.ts       # rich text 清洗 helper 测试
+├── tests/game-modes.test.ts # game-modes raw category code contract 测试
 ├── tests/gachabase/         # gachabase 属性公式测试
 │   ├── agent.test.ts        # Agent 属性公式测试
 │   ├── bangboo.test.ts      # Bangboo 属性公式测试
@@ -94,7 +97,9 @@ packages/zzz-data/
 │   └── index.ts             # re-export
 ├── src/buhflipexplode/      # buhflipexplode 数据工具
 │   └── index.ts             # 节点倍率表常量、原始 JSON 类型、纯计算函数
-├── src/game-modes.ts        # 对外发布的游戏模式 JSON 类型（buffs / DA / SD / TS）
+├── src/game-modes.ts        # 对外发布的游戏模式 JSON 类型（buffs / DA / SD / TS）+ raw category code contract
+├── src/terms.ts             # canonical 术语层（raw label → 规范导出映射）
+├── src/text.ts              # rich text 字段类型与纯文本清洗 helper
 ├── src/calculator/          # 伤害计算模块（纯函数，可导出）
 │   ├── types.ts             # 所有参数/返回类型
 │   ├── factors.ts           # 各乘区独立函数（可自由组合）
@@ -166,6 +171,9 @@ const total = base * bonus * crit * resistance * custom
 - 音擎属性：`calcWEngineBaseATK(baseVal, lvBaseStatGrowth, starBaseStatGrowth)`、`calcWEngineSecondaryStat(baseValue, starAdvancedStatGrowth)`
 - gachabase 类型：`AgentListItem`、`AgentDetails`、`WEngineListItem`、`WEngineDetails`、`BangbooItem`、`DriveDiscItem` 等
 - 游戏模式类型：`BuffsJson`、`DeadlyAssaultJson`、`ShiyuDefenseJson`、`ThresholdSimulationJson`
+- 文本工具：`RichTextString`、`stripRichText()`
+- 游戏模式辅助：`EnemyCategoryCode`、`enemyCategoryCodes`、`isEnemyCategoryCode()`
+- 术语导出：`AgentSpecialty`、`AgentAttribute`、`AttackType`、`BaseResistanceAttribute`、`toAgentSpecialty()`、`toAgentAttribute()`、`toBaseResistanceAttribute()`、`getElementMultIndex()`
 - 伤害计算类型：`AnomalyType`、`DefenseParams`、`ResistanceParams`、`VulnerabilityParams`、`DazeVulnerabilityParams`、`CritParams`、`NormalDamageParams`、`SheerDamageParams`、`AnomalyDamageParams`、`DisorderDamageParams`、`DamageResult`
 - 乘区函数：`calcDefenseMultiplier`、`calcResistanceMultiplier`、`calcVulnerabilityMultiplier`、`calcDazeVulnerabilityMultiplier`、`calcExpectedCritMultiplier`、`calcSheerBonusMultiplier`、`calcAnomalyProficiencyMultiplier`、`calcDamageLevelMultiplier`、`calcDisorderDamageMultiplier` 等
 - Pipeline 函数：`calcNormalDamage`、`calcSheerDamage`、`calcAnomalyDamage`、`calcDisorderDamage`（各含 `Crit`/`NoCrit` 变体）
