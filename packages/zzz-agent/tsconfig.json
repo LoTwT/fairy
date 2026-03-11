@@ -1,8 +1,12 @@
 {
   "compilerOptions": {
     "target": "esnext",
+    "baseUrl": ".",
     "module": "esnext",
     "moduleResolution": "bundler",
+    "paths": {
+      "zzz-data": ["../zzz-data/src/index.ts"]
+    },
     "types": ["node", "vitest/globals"],
     "strict": true,
     "noEmit": true,

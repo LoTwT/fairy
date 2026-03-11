@@ -41,8 +41,14 @@ packages/zzz-data/
 │   ├── buhflipexplode.ts    # buhflipexplode.com 爬取任务
 │   └── mihoyo-wiki.ts       # baike.mihoyo.com 爬取任务（危局强袭战）
 ├── tests/generate.test.ts   # 结构一致性测试（xlsx ↔ config ↔ JSON）
+├── tests/build/
+│   └── resolver.test.ts     # Static Build Resolver V1 测试（normal / sheer / profile）
 ├── tests/cleaned/          # cleaned/helper layer 测试
+│   ├── deadly-assault.test.ts # DA buff / enemy helper 测试
+│   ├── encounter.test.ts   # encounter 选择与 damage-context 测试
 │   ├── enemy.test.ts       # elementMult map / damageContext helper 测试
+│   ├── shiyu-defense.test.ts # SD 标准化视图 helper 测试
+│   ├── threshold-simulation.test.ts # TS 标准化视图 helper 测试
 │   └── versions.test.ts    # versionTime / latest version helper 测试
 ├── tests/terms.test.ts      # canonical 术语映射与属性桶测试
 ├── tests/text.test.ts       # rich text 清洗 helper 测试
@@ -109,6 +115,13 @@ packages/zzz-data/
 │   ├── threshold-simulation.ts # TS boss / regular side 标准化视图 helper
 │   ├── types.ts            # cleaned helper 返回类型
 │   └── index.ts            # re-export
+├── src/build/              # static build resolver（V1 静态构筑解析层）
+│   ├── catalog.ts          # V1 支持的代理人 / 音擎 / 驱动盘目录与 alias
+│   ├── definitions.ts      # curated effect definitions（按 V1 范围手动维护）
+│   ├── profiles.ts         # 标准 normal profile 与仪玄 sheer profile
+│   ├── resolver.ts         # finalPanel + scenario → damageParams / trace
+│   ├── types.ts            # build layer 输入输出 contract
+│   └── index.ts            # re-export
 ├── src/game-modes.ts        # 对外发布的游戏模式 JSON 类型（buffs / DA / SD / TS）+ raw category code contract
 ├── src/terms.ts             # canonical 术语层（raw label → 规范导出映射）
 ├── src/text.ts              # rich text 字段类型与纯文本清洗 helper
@@ -127,15 +140,22 @@ packages/zzz-agent/
 ├── src/mastra/
 │ ├── index.ts # Mastra 实例入口
 │ ├── agents/zzz-agent.ts # ZZZ Agent prompt / tools / scorers wiring
-│ ├── tools/zzz/ # lookup / calcDamage 工具（含 compact 查询与 damageContext；lookupGameMode 复用 zzz-data cleaned helper）
+│ ├── tools/zzz/ # lookup / calcDamage 工具（含 compact 查询与 damageContext；resolveBuildDamage 通过 zzz-data 包导出的 build layer 复用静态构筑解析）
 │ └── scorers/zzz-scorer.ts # 评分器实现
 ├── tests/
 │ ├── lookup-game-mode.test.ts # lookupGameMode 默认版本与 damageContext 测试
 │ ├── lookup-filters.test.ts # lookupAgent / lookupWEngine 双语筛选与 compact 测试
+│ ├── resolve-build-damage.test.ts # 静态构筑高层 resolver tool 测试
 │ ├── zzz-agent-prompt.test.ts # prompt 工作流、术语与截图摘要测试
 │ ├── zzz-scorer.test.ts # outputFormat / judge model scorer 测试
 │ └── shared.ts # 测试共享 JSON 读取辅助
 └── .npmrc # Mastra build 阶段继承的 pnpm trust 白名单
+
+约定：
+
+- `zzz-agent` 通过 workspace 依赖导入 `zzz-data` 的正式包导出，不直接使用 `packages/zzz-data/src/*` 相对路径
+- `packages/zzz-agent/package.json` 通过单独的 `prepare:zzz-data` 脚本先构建 `zzz-data`，并在 `dev` / `test` / `build` 前显式调用，确保开发态、测试态与 Mastra build 读取的是最新 `zzz-data/dist`
+- `packages/zzz-agent/package.json` 的 `start` 仅启动已有 `.mastra/output`，不承担重新构建依赖的职责
 
 ## 属性计算模块（src/gachabase/）
 
@@ -156,6 +176,8 @@ packages/zzz-agent/
 ## 规格文档（docs/specs/）
 
 - [`damage-calculation.md`](../docs/specs/damage-calculation.md) — 四种伤害类型（常规/贯穿/异常/紊乱）的乘区公式、TypeScript 类型签名与参考数值
+- [`static-build-resolver.md`](../docs/specs/static-build-resolver.md) — 静态构筑解析系统设计：effect schema、输入输出 contract、热插拔乘区管线与模块划分
+- [`static-build-resolver-v1.md`](../docs/specs/static-build-resolver-v1.md) — 第一版实现范围冻结：支持对象、bucket、profile、输入输出 contract 与验收标准
 
 ## 计算器模块（src/calculator/）
 
@@ -183,6 +205,8 @@ const total = base * bonus * crit * resistance * custom
 - 音擎属性：`calcWEngineBaseATK(baseVal, lvBaseStatGrowth, starBaseStatGrowth)`、`calcWEngineSecondaryStat(baseValue, starAdvancedStatGrowth)`
 - gachabase 类型：`AgentListItem`、`AgentDetails`、`WEngineListItem`、`WEngineDetails`、`BangbooItem`、`DriveDiscItem` 等
 - 游戏模式类型：`BuffsJson`、`DeadlyAssaultJson`、`ShiyuDefenseJson`、`ThresholdSimulationJson`
+- static build resolver：`resolveStaticBuildDamage()`、`supportedStaticBuildAgents`、`supportedStaticBuildWEngines`、`supportedStaticBuildDriveDiscs`、`getStaticBuildAgent()`、`getStaticBuildWEngine()`、`getStaticBuildDriveDisc()`、`getStaticBuildEffectsForLoadout()`、`getStaticBuildProfile()`、`staticBuildProfiles`
+- static build 类型：`ResolveStaticBuildInput`、`ResolveStaticBuildResult`、`StaticBuildMode`、`StaticBuildScenarioInput`、`StaticBuildResolvedBuckets`、`StaticBuildTraceItem`
 - cleaned helper：`toElementMultiplierMap()`、`getEnemyElementMultiplier()`、`buildEnemyDamageContext()`、`selectEncounterByEnemyName()`、`buildEncounterDamageContext()`、`analyzeVersionPeriod()`、`findDAVersion()`、`findSDMode()`、`resolveSDModeName()`、`getDefaultSDMode()`、`selectSDMode()`、`findSDVersion()`、`findTSMode()`、`resolveTSModeName()`、`getDefaultTSMode()`、`selectTSMode()`、`findTSVersion()`、`getLatestDAVersion()`、`getLatestSDVersion()`、`getLatestTSVersion()`、`toDABuffView()`、`getDABuffViews()`、`flattenDAEnemies()`、`selectDAEnemy()`、`buildDADamageContext()`、`findDAVersionsByEnemyName()`、`toSDNodeViews()`、`flattenSDEnemies()`、`selectSDEnemy()`、`buildSDDamageContext()`、`findSDVersionsByEnemyName()`、`toTSNodeViews()`、`flattenTSEnemies()`、`selectTSEnemy()`、`buildTSDamageContext()`、`findTSVersionsByEnemyName()`
 - cleaned 类型：`ElementMultiplierMap`、`EnemyDamageContext`、`EncounterSelectionResult`、`EncounterDamageContext`、`VersionPeriodInfo`、`DABuffView`、`DAEnemyView`、`SDNodeView`、`SDSideView`、`TSNodeView`、`TSSideView`、`TSFlattenedEnemyView`
 - 文本工具：`RichTextString`、`stripRichText()`

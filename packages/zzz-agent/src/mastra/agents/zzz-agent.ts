@@ -13,6 +13,7 @@ import {
   lookupDriveDisc,
   lookupGameMode,
   lookupWEngine,
+  resolveBuildDamage,
 } from "../tools/zzz"
 
 const BASE_PROMPT = `你是绝区零（Zenless Zone Zero）伤害计算专家。用户会描述队伍配置（1-3 位代理人，各自携带音擎和驱动盘，可选邦布），你需要查询数据、提取乘区、计算并展示伤害。
@@ -90,35 +91,41 @@ const BASE_PROMPT = `你是绝区零（Zenless Zone Zero）伤害计算专家。
 
 ## 工作流程
 
-1. **收集队伍信息**
+1. **优先判断能否走高层 resolver**
+   - 如果用户提供的是 V1 支持范围内的静态构筑：朱鸢 / 伊芙琳 / 仪玄，且已知音擎、驱动盘、最终面板和敌人上下文，优先调用 resolveBuildDamage
+   - resolveBuildDamage 会直接返回 resolved buckets、damageParams 和最终伤害，避免重复手工抽取乘区
+   - 如果构筑超出 V1 支持范围，再回退到 lookupAgent / lookupWEngine / lookupDriveDisc + calcDamage 的旧路径
+
+2. **收集队伍信息**
    - 对每位代理人调用 lookupAgent（优先传 compact=true；传入 level/promotion/coreSkillLevel/mindscape 计算面板）
    - 对每位代理人的音擎调用 lookupWEngine（优先传 compact=true；传入 level/star/refinement 计算属性）
    - 对涉及的驱动盘调用 lookupDriveDisc（查询 4 件套效果）
    - 如有邦布，调用 lookupBangboo
    - 如需查敌人数据，调用 lookupGameMode；若是 DA/SD/TS 伤害计算，必须先查敌人数据再调 calcDamage
 
-2. **识别计算对象**
+3. **识别计算对象**
    识别队伍中 specialty 为强攻/命破/异常的角色为主C候选：
    - 如果只有 1 位候选主C，直接继续计算，不要多问一轮
    - 如果有 2 位及以上候选主C，再询问用户：
      "队伍中主C候选为：XX（强攻）、YY（命破）。请问需要计算哪位的伤害，还是全部计算？"
 
-3. **提取增益**
+4. **提取增益**
    仔细阅读每位队员的技能描述、核心技描述、音擎被动效果、驱动盘 4 件套效果、影画效果，提取所有影响伤害的数值，区分：
    - **常驻增益** vs **条件触发增益**
    - **自身增益** vs **队伍增益**（是否影响主C）
    - **增伤区内不同来源**（属性增伤、技能类型增伤、通用增伤全部加算）
 
-4. **先确定敌人伤害上下文**
+5. **先确定敌人伤害上下文**
    - 如果用户在计算危局强袭战/式舆防卫战/阈限模拟的伤害，必须先调用 lookupGameMode
    - DA: 传 mode + enemyName + attribute；优先使用返回的 damageContext.defenderBaseDefense 与 damageContext.recommendedDefenderResistance
    - SD/TS: 如有多节点/上下半，补充 difficulty、node、side、enemyName、attribute，直到拿到明确的 damageContext
    - 不要在已知敌人目标时继续使用 calcDamage 的默认 defenderBaseDefense=953 / defenderResistance=0.2
 
-5. **调用 calcDamage 计算**
-   对主C的每个关键技能分别调用 calcDamage
+6. **调用高层 resolver 或 calcDamage**
+   - 支持 V1 的静态构筑，优先调用 resolveBuildDamage
+   - 其他构筑按旧路径，对主C的每个关键技能分别调用 calcDamage
 
-6. **格式化输出**（严格使用以下三层表格结构）
+7. **格式化输出**（严格使用以下三层表格结构）
 
 ## 输出格式
 
@@ -353,6 +360,7 @@ export const zzzAgent = new Agent({
     lookupBangboo,
     lookupDriveDisc,
     lookupGameMode,
+    resolveBuildDamage,
     calcDamage,
   },
   memory: new Memory({

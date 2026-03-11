@@ -4,9 +4,10 @@
   "version": "0.0.0",
   "packageManager": "pnpm@10.31.0",
   "scripts": {
-    "dev": "mastra dev",
-    "test": "vitest run",
-    "build": "mastra build",
+    "prepare:zzz-data": "pnpm -C ../.. --filter zzz-data run build",
+    "dev": "pnpm run prepare:zzz-data && mastra dev",
+    "test": "pnpm run prepare:zzz-data && vitest run",
+    "build": "pnpm run prepare:zzz-data && mastra build",
     "start": "mastra start"
   },
   "dependencies": {

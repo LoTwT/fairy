@@ -18,10 +18,11 @@ pnpm run build      # tsdown 编译，输出 dist/
 pnpm run release    # build + merge + pnpm publish
 
 # zzz-agent 子包命令（在 packages/zzz-agent 下）
-pnpm run dev        # 启动 Mastra Studio（localhost:4111）
-pnpm run test       # vitest 校验 lookup 工具、scorer 与 prompt 行为
-pnpm run build      # 构建生产服务器
-pnpm run start      # 启动生产服务器
+pnpm run prepare:zzz-data # 先构建 workspace 中的 zzz-data，供 zzz-agent 使用正式包导出
+pnpm run dev        # 先构建 zzz-data，再启动 Mastra Studio（localhost:4111）
+pnpm run test       # 先构建 zzz-data，再用 vitest 校验 lookup 工具、scorer 与 prompt 行为
+pnpm run build      # 先构建 zzz-data，再构建生产服务器
+pnpm run start      # 启动已构建的生产服务器
 
 # 根目录命令
 pnpm run test       # 运行所有子包测试
@@ -38,7 +39,7 @@ pnpm run prettier   # prettier 格式化（hook 自动执行，通常无需手�
 src/mastra/
 ├── index.ts              # Mastra 实例入口
 ├── agents/
-│   └── zzz-agent.ts      # ZZZ 伤害计算 Agent（默认 glm-4.6v，6 个工具）
+│   └── zzz-agent.ts      # ZZZ 伤害计算 Agent（默认 glm-4.6v，7 个工具）
 ├── tools/zzz/
 │   ├── index.ts           # 统一导出
 │   ├── utils.ts           # loadJson / stripHtml / findBestMatch / findTopMatches
@@ -47,12 +48,15 @@ src/mastra/
 │   ├── lookup-bangboo.ts  # 邦布查询 + 属性计算
 │   ├── lookup-drive-disc.ts # 驱动盘套装效果查询
 │   ├── lookup-game-mode.ts  # DA/SD/TS 游戏模式数据查询 + damageContext
+│   ├── resolve-build-damage.ts # 静态构筑高层 resolver（V1：朱鸢 / 伊芙琳 / 仪玄）
 │   └── calc-damage.ts    # 伤害计算（normal/sheer/anomaly/disorder）
 └── scorers/
     └── zzz-scorer.ts      # 评分器（completeness/outputFormat/multiplierAccuracy）
 ```
 
 环境变量参考 `packages/zzz-agent/.env.example`。
+
+`zzz-agent` 通过 workspace 依赖消费 `zzz-data` 的正式包导出，不直接引用 `zzz-data/src`。为避免开发态或测试态读到过期 `dist/`，其 `dev` / `test` / `build` 都会先执行 `pnpm run prepare:zzz-data`；`start` 仅负责启动已有构建产物。
 
 ## 工作流
 

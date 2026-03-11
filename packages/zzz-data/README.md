@@ -4,9 +4,10 @@ Zenless Zone Zero 数据与伤害计算库。
 
 ## 导出内容
 
-包入口 `src/index.ts` 当前导出六类内容：
+包入口 `src/index.ts` 当前导出七类内容：
 
 - `calculator`：伤害计算函数与类型
+- `build`：静态构筑解析器、curated effect definitions 与 hot-pluggable profile
 - `cleaned`：不改 raw shape 的稳定 helper / 消费视图
 - `gachabase`：代理人 / 音擎 / 邦布属性计算函数与发布数据类型
 - `game-modes`：危局强袭战 / 式舆防卫战 / 阈限模拟发布数据类型
@@ -53,6 +54,40 @@ import {
   selectEncounterByEnemyName,
   toSDNodeViews,
 } from "zzz-data"
+```
+
+如果你已经有主 C 构筑、最终面板和敌人上下文，优先使用 static build resolver：
+
+```ts
+import { resolveStaticBuildDamage } from "zzz-data"
+
+const result = resolveStaticBuildDamage({
+  mode: "full-buff",
+  loadout: {
+    agentId: "1371",
+    wEngineId: "14137",
+    driveDiscSets: [{ id: "33100", pieces: 4 }],
+    coreSkillLevel: 7,
+    wEngineRefinement: 1,
+  },
+  panel: {
+    attack: 2500,
+    critRate: 0.4,
+    critDamage: 1.2,
+    hp: 18000,
+  },
+  scenario: {
+    damageType: "sheer",
+    skillTag: "enhancedSpecial",
+    skillMultiplier: "500%",
+    attribute: "玄墨",
+    enemy: {
+      defenderBaseDefense: 953,
+      defenderResistance: 0.2,
+      isStunned: true,
+    },
+  },
+})
 ```
 
 ## 常用示例
@@ -178,6 +213,7 @@ const weaponAtk = calcWEngineBaseATK(713, 2200, 7800)
 
 - `data/en/*.json` 与 `data/zh-CN/*.json` 保留原始 display label
 - `src/terms.ts` 提供规范导出，不强行改写 raw JSON 字段
+- `src/build/` 提供第一版静态构筑解析层；当前只覆盖 `docs/specs/static-build-resolver-v1.md` 中冻结的支持范围
 - `src/cleaned/` 提供不改 raw shape 的 helper layer，统一解释倍率桶、版本展示文本、默认版本选择，以及 `DA` / `SD` / `TS` 的标准化消费视图
 - `selectEncounterByEnemyName()` 在模糊匹配命中多个敌人时不会猜测，会返回候选名列表供上层继续决策
 - `buildSDDamageContext()` / `buildTSDamageContext()` 会同时保留 enemy-level `elementMultiplier` 与 side-level `sideElementMultiplier`；如果两者不一致，不在 cleaned layer 擅自合并语义
