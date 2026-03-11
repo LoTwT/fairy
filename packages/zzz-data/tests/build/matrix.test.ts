@@ -283,6 +283,117 @@ describe("static build skill matrix", () => {
     ).toBe(true)
   })
 
+  it("applies Mato curated effects on generic rupture matrix rows", () => {
+    const result = resolveStaticBuildSkillMatrix({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1441",
+        wEngineId: "13144",
+      },
+      panel: {
+        attack: 2500,
+        critRate: 0.35,
+        critDamage: 1.1,
+        sheerForce: 1800,
+      },
+      context: {
+        combatTags: ["moltenEdge", "hpLoss", "hpConsumedSlash"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    const basicRow = result.rows.find((row) => row.skillTag === "basic")
+    expect(basicRow?.build.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.35, 4)
+    expect(basicRow?.build.resolvedPanel.critRate).toBeCloseTo(0.6, 4)
+    expect(basicRow?.build.resolvedPanel.critDamage).toBeCloseTo(1.6, 4)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("真斗 当前未收录 curated"),
+      ),
+    ).toBe(false)
+    expect(
+      result.assumptions.some((item) => item.includes("通用技能矩阵模板生成")),
+    ).toBe(true)
+  })
+
+  it("applies Idhari curated effects on generic rupture matrix rows", () => {
+    const result = resolveStaticBuildSkillMatrix({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1051",
+        wEngineId: "14105",
+      },
+      panel: {
+        attack: 2600,
+        critRate: 0.4,
+        critDamage: 1.2,
+        sheerForce: 1750,
+      },
+      context: {
+        extraAbilityActive: true,
+        combatTags: ["lowHp", "hpLoss"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    const enhancedSpecialRow = result.rows.find(
+      (row) => row.skillTag === "enhancedSpecial",
+    )
+    expect(
+      enhancedSpecialRow?.build.resolvedBuckets.bonusDamageSum,
+    ).toBeCloseTo(1, 4)
+    expect(enhancedSpecialRow?.build.resolvedBuckets.sheerBonusSum).toBeCloseTo(
+      0.18,
+      4,
+    )
+    expect(enhancedSpecialRow?.build.resolvedPanel.critRate).toBeCloseTo(0.6, 4)
+    expect(enhancedSpecialRow?.build.resolvedPanel.critDamage).toBeCloseTo(
+      1.5,
+      4,
+    )
+  })
+
+  it("applies Ye Shunguang curated effects on generic attack matrix rows", () => {
+    const result = resolveStaticBuildSkillMatrix({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1431",
+        wEngineId: "14143",
+      },
+      panel: {
+        attack: 3400,
+        baseAttack: 1300,
+        critRate: 0.45,
+        critDamage: 1.2,
+      },
+      context: {
+        combatTags: ["hedao", "etherCurtain"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    const ultimateRow = result.rows.find((row) => row.skillTag === "ultimate")
+    expect(ultimateRow?.build.resolvedBuckets.bonusDamageSum).toBeCloseTo(
+      0.5,
+      4,
+    )
+    expect(ultimateRow?.build.resolvedBuckets.ignoreResistance).toBeCloseTo(
+      0.2,
+      4,
+    )
+    expect(ultimateRow?.build.resolvedPanel.critRate).toBeCloseTo(0.75, 4)
+    expect(ultimateRow?.build.resolvedPanel.critDamage).toBeCloseTo(1.45, 4)
+  })
+
   it("builds generic rupture matrix rows through the standard sheer profile", () => {
     const result = resolveStaticBuildSkillMatrix({
       mode: "full-buff",

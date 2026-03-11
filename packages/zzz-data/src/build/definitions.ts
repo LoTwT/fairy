@@ -117,6 +117,13 @@ const hugoCoreCritDamage = [
   0.23,
   0.25,
 ] as const
+const matoMoltenEdgeCritRate = () => 0.1
+const matoMoltenEdgeFireBonus = () => 0.2
+const matoHpConsumedCritDamage = () => 0.5
+const idhariLowHpBonus = () => 1
+const idhariLowHpCritDamage = () => 0.3
+const yeshunguangHedaoCritRate = () => 0.3
+const yeshunguangHedaoBonus = () => 0.25
 // prettier-ignore
 const yixuanCoreBonus = [
   0.3,
@@ -146,7 +153,12 @@ const sacrificeElectricBonus = [0.2, 0.23, 0.26, 0.29, 0.32] as const
 const qingmingCritRate = [0.2, 0.23, 0.26, 0.29, 0.32] as const
 const qingmingAttributeBonus = [0.08, 0.092, 0.104, 0.116, 0.128] as const
 const qingmingSheerBonus = [0.1, 0.115, 0.13, 0.145, 0.16] as const
+const grillOwispBonus = [0.15, 0.1725, 0.195, 0.2175, 0.24] as const
+const krakenSheerBonus = [0.06, 0.07, 0.08, 0.09, 0.1] as const
+const krakenCritRate = [0.2, 0.23, 0.26, 0.29, 0.32] as const
 const chaosfireCritRate = [0.2, 0.23, 0.26, 0.29, 0.32] as const
+const cloudcleaveIgnoreResistance = [0.2, 0.22, 0.24, 0.26, 0.28] as const
+const cloudcleaveBonus = [0.25, 0.287, 0.325, 0.362, 0.4] as const
 const wrathfulVajraCritRate = [0.2, 0.23, 0.26, 0.29, 0.32] as const
 const wrathfulVajraSheerBonus = [0.09, 0.1035, 0.117, 0.1305, 0.144] as const
 
@@ -364,6 +376,80 @@ export const staticBuildEffectDefinitions = [
     ],
   },
   {
+    id: "idhari-core-low-hp-bonus",
+    sourceType: "agent",
+    sourceId: "1051",
+    sourceName: "伊德海莉",
+    label: "核心被动：低生命值伤害提升",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      damageTypes: ["sheer"],
+      combatTags: ["lowHp"],
+    },
+    modifiers: [
+      {
+        bucket: "bonusDamageSum",
+        value: idhariLowHpBonus,
+      },
+    ],
+  },
+  {
+    id: "idhari-extra-low-hp-crit-damage",
+    sourceType: "agent",
+    sourceId: "1051",
+    sourceName: "伊德海莉",
+    label: "额外能力：低生命值暴击伤害",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      requireExtraAbility: true,
+      combatTags: ["lowHp"],
+    },
+    modifiers: [
+      {
+        bucket: "critDamage",
+        value: idhariLowHpCritDamage,
+      },
+    ],
+  },
+  {
+    id: "yeshunguang-core-hedao-crit-rate",
+    sourceType: "agent",
+    sourceId: "1431",
+    sourceName: "叶瞬光",
+    label: "核心被动：合道暴击率",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      combatTags: ["hedao"],
+    },
+    modifiers: [
+      {
+        bucket: "critRate",
+        value: yeshunguangHedaoCritRate,
+      },
+    ],
+  },
+  {
+    id: "yeshunguang-core-hedao-bonus",
+    sourceType: "agent",
+    sourceId: "1431",
+    sourceName: "叶瞬光",
+    label: "核心被动：合道增伤",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      combatTags: ["hedao"],
+    },
+    modifiers: [
+      {
+        bucket: "bonusDamageSum",
+        value: yeshunguangHedaoBonus,
+      },
+    ],
+  },
+  {
     id: "zero-anby-core-silver-star-bonus",
     sourceType: "agent",
     sourceId: "1381",
@@ -502,6 +588,65 @@ export const staticBuildEffectDefinitions = [
       combatTags: ["followUp"],
     },
     modifiers: [],
+  },
+  {
+    id: "mato-core-molten-edge-crit-rate",
+    sourceType: "agent",
+    sourceId: "1441",
+    sourceName: "真斗",
+    label: "核心被动：熔锋状态暴击率",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      damageTypes: ["sheer"],
+      combatTags: ["moltenEdge"],
+    },
+    modifiers: [
+      {
+        bucket: "critRate",
+        value: matoMoltenEdgeCritRate,
+      },
+    ],
+  },
+  {
+    id: "mato-core-molten-edge-fire-bonus",
+    sourceType: "agent",
+    sourceId: "1441",
+    sourceName: "真斗",
+    label: "核心被动：熔锋状态火属性增伤",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      damageTypes: ["sheer"],
+      attributes: ["Fire"],
+      combatTags: ["moltenEdge"],
+    },
+    modifiers: [
+      {
+        bucket: "bonusDamageSum",
+        value: matoMoltenEdgeFireBonus,
+      },
+    ],
+  },
+  {
+    id: "mato-core-hp-consumed-crit-damage",
+    sourceType: "agent",
+    sourceId: "1441",
+    sourceName: "真斗",
+    label: "核心被动：耗血连续斩击暴击伤害",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      damageTypes: ["sheer"],
+      skillTags: ["basic", "assist"],
+      combatTags: ["hpConsumedSlash"],
+    },
+    modifiers: [
+      {
+        bucket: "critDamage",
+        value: matoHpConsumedCritDamage,
+      },
+    ],
   },
   {
     id: "zhu-yuan-core-suppression",
@@ -904,6 +1049,83 @@ export const staticBuildEffectDefinitions = [
     ],
   },
   {
+    id: "grill-owisp-fire-bonus",
+    sourceType: "w-engine",
+    sourceId: "13144",
+    sourceName: "燔火胧夜",
+    label: "音擎被动：火属性增伤",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      attributes: ["Fire"],
+    },
+    modifiers: [
+      {
+        bucket: "bonusDamageSum",
+        value: byRefinement(grillOwispBonus),
+      },
+    ],
+  },
+  {
+    id: "grill-owisp-hp-loss-crit-rate",
+    sourceType: "w-engine",
+    sourceId: "13144",
+    sourceName: "燔火胧夜",
+    label: "音擎被动：生命值降低后暴击率",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      combatTags: ["hpLoss"],
+    },
+    modifiers: [
+      {
+        bucket: "critRate",
+        value: byRefinement(grillOwispBonus),
+      },
+    ],
+  },
+  {
+    id: "kraken-cradle-low-hp-ice-sheer-bonus",
+    sourceType: "w-engine",
+    sourceId: "14105",
+    sourceName: "海妖摇篮",
+    label: "音擎被动：低生命值冰属性贯穿增伤",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    baselineStacks: 1,
+    fullBuffStacks: 3,
+    maxStacks: 3,
+    condition: {
+      damageTypes: ["sheer"],
+      attributes: ["Ice"],
+      combatTags: ["hpLoss"],
+    },
+    modifiers: [
+      {
+        bucket: "sheerBonusSum",
+        value: byRefinement(krakenSheerBonus),
+      },
+    ],
+  },
+  {
+    id: "kraken-cradle-low-hp-crit-rate",
+    sourceType: "w-engine",
+    sourceId: "14105",
+    sourceName: "海妖摇篮",
+    label: "音擎被动：低生命值暴击率",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      combatTags: ["lowHp"],
+    },
+    modifiers: [
+      {
+        bucket: "critRate",
+        value: byRefinement(krakenCritRate),
+      },
+    ],
+  },
+  {
     id: "chaosfire-crit-rate",
     sourceType: "w-engine",
     sourceId: "14130",
@@ -934,6 +1156,46 @@ export const staticBuildEffectDefinitions = [
       combatTags: ["followUp"],
     },
     modifiers: [],
+  },
+  {
+    id: "cloudcleave-honed-edge-ignore-resistance",
+    sourceType: "w-engine",
+    sourceId: "14143",
+    sourceName: "云霓孤光",
+    label: "音擎被动：无视物理抗性",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      attributes: ["Physical", "Honed Edge"],
+    },
+    modifiers: [
+      {
+        bucket: "ignoreResistance",
+        value: byRefinement(cloudcleaveIgnoreResistance),
+      },
+    ],
+  },
+  {
+    id: "cloudcleave-ether-curtain-bonus",
+    sourceType: "w-engine",
+    sourceId: "14143",
+    sourceName: "云霓孤光",
+    label: "音擎被动：以太帷幕期间增伤与暴击伤害",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      combatTags: ["etherCurtain"],
+    },
+    modifiers: [
+      {
+        bucket: "bonusDamageSum",
+        value: byRefinement(cloudcleaveBonus),
+      },
+      {
+        bucket: "critDamage",
+        value: byRefinement(cloudcleaveBonus),
+      },
+    ],
   },
   {
     id: "riot-suppressor-crit-rate",

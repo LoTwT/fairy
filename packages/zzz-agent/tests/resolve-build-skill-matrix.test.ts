@@ -224,6 +224,94 @@ describe("resolveBuildSkillMatrix tool", () => {
     )
   })
 
+  it("returns Mato generic rupture matrix rows with curated buckets applied", async () => {
+    const result = await runTool(resolveBuildSkillMatrix, {
+      agent: "真斗",
+      wEngine: "燔火胧夜",
+      mode: "full-buff",
+      finalPanel: {
+        attack: 2500,
+        critRate: 0.35,
+        critDamage: 1.1,
+        sheerForce: 1800,
+      },
+      context: {
+        combatTags: ["moltenEdge", "hpLoss", "hpConsumedSlash"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    const basicRow = (result as any).matrix.rows.find(
+      (row: any) => row.skillTag === "basic",
+    )
+    expect(basicRow?.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.35, 4)
+    expect((result as any).matrix.summary.critRate).toBeCloseTo(0.6, 4)
+  })
+
+  it("returns Idhari generic rupture matrix rows with curated buckets applied", async () => {
+    const result = await runTool(resolveBuildSkillMatrix, {
+      agent: "伊德海莉",
+      wEngine: "海妖摇篮",
+      mode: "full-buff",
+      finalPanel: {
+        attack: 2600,
+        critRate: 0.4,
+        critDamage: 1.2,
+        sheerForce: 1750,
+      },
+      context: {
+        extraAbilityActive: true,
+        combatTags: ["lowHp", "hpLoss"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    const enhancedSpecialRow = (result as any).matrix.rows.find(
+      (row: any) => row.skillTag === "enhancedSpecial",
+    )
+    expect(enhancedSpecialRow?.resolvedBuckets.sheerBonusSum).toBeCloseTo(
+      0.18,
+      4,
+    )
+    expect((result as any).matrix.summary.critDamage).toBeCloseTo(1.5, 4)
+  })
+
+  it("returns Ye Shunguang generic attack matrix rows with curated buckets applied", async () => {
+    const result = await runTool(resolveBuildSkillMatrix, {
+      agent: "叶瞬光",
+      wEngine: "云霓孤光",
+      mode: "full-buff",
+      finalPanel: {
+        attack: 3400,
+        baseAttack: 1300,
+        critRate: 0.45,
+        critDamage: 1.2,
+      },
+      context: {
+        combatTags: ["hedao", "etherCurtain"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    const ultimateRow = (result as any).matrix.rows.find(
+      (row: any) => row.skillTag === "ultimate",
+    )
+    expect(ultimateRow?.resolvedBuckets.ignoreResistance).toBeCloseTo(0.2, 4)
+    expect((result as any).matrix.summary.critRate).toBeCloseTo(0.75, 4)
+  })
+
   it("returns supported scope when agent is outside the supported specialties", async () => {
     const result = await runTool(resolveBuildSkillMatrix, {
       agent: "安比",

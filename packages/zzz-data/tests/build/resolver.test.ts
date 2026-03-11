@@ -365,6 +365,141 @@ describe("static build resolver", () => {
     ).toBe(false)
   })
 
+  it("applies curated effects for Mato and Grill Owisp", () => {
+    const result = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1441",
+        wEngineId: "13144",
+      },
+      panel: {
+        attack: 2500,
+        critRate: 0.35,
+        critDamage: 1.1,
+        sheerForce: 1800,
+      },
+      scenario: {
+        damageType: "sheer",
+        skillTag: "basic",
+        skillMultiplier: "450%",
+        attribute: "火属性",
+        combatTags: ["moltenEdge", "hpLoss", "hpConsumedSlash"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.loadout.agent.name).toBe("真斗")
+    expect(result.loadout.wEngine?.name).toBe("燔火胧夜")
+    expect(result.profile.id).toBe("standard-sheer")
+    expect(result.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.35, 4)
+    expect(result.resolvedPanel.critRate).toBeCloseTo(0.6, 4)
+    expect(result.resolvedPanel.critDamage).toBeCloseTo(1.6, 4)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("真斗 当前未收录 curated"),
+      ),
+    ).toBe(false)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("燔火胧夜 当前未收录 curated"),
+      ),
+    ).toBe(false)
+  })
+
+  it("applies curated effects for Idhari and Kraken's Cradle", () => {
+    const result = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1051",
+        wEngineId: "14105",
+      },
+      panel: {
+        attack: 2600,
+        critRate: 0.4,
+        critDamage: 1.2,
+        sheerForce: 1750,
+      },
+      scenario: {
+        damageType: "sheer",
+        skillTag: "enhancedSpecial",
+        skillMultiplier: "500%",
+        attribute: "冰属性",
+        extraAbilityActive: true,
+        combatTags: ["lowHp", "hpLoss"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.loadout.agent.name).toBe("伊德海莉")
+    expect(result.loadout.wEngine?.name).toBe("海妖摇篮")
+    expect(result.profile.id).toBe("standard-sheer")
+    expect(result.resolvedBuckets.bonusDamageSum).toBeCloseTo(1, 4)
+    expect(result.resolvedBuckets.sheerBonusSum).toBeCloseTo(0.18, 4)
+    expect(result.resolvedPanel.critRate).toBeCloseTo(0.6, 4)
+    expect(result.resolvedPanel.critDamage).toBeCloseTo(1.5, 4)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("伊德海莉 当前未收录 curated"),
+      ),
+    ).toBe(false)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("海妖摇篮 当前未收录 curated"),
+      ),
+    ).toBe(false)
+  })
+
+  it("applies curated effects for Ye Shunguang and Cloudcleave Radiance", () => {
+    const result = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1431",
+        wEngineId: "14143",
+      },
+      panel: {
+        attack: 3400,
+        baseAttack: 1300,
+        critRate: 0.45,
+        critDamage: 1.2,
+      },
+      scenario: {
+        damageType: "normal",
+        skillTag: "ultimate",
+        skillMultiplier: "700%",
+        attribute: "凛刃",
+        combatTags: ["hedao", "etherCurtain"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.loadout.agent.name).toBe("叶瞬光")
+    expect(result.loadout.wEngine?.name).toBe("云霓孤光")
+    expect(result.profile.id).toBe("standard-normal")
+    expect(result.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.5, 4)
+    expect(result.resolvedBuckets.ignoreResistance).toBeCloseTo(0.2, 4)
+    expect(result.resolvedPanel.critRate).toBeCloseTo(0.75, 4)
+    expect(result.resolvedPanel.critDamage).toBeCloseTo(1.45, 4)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("叶瞬光 当前未收录 curated"),
+      ),
+    ).toBe(false)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("云霓孤光 当前未收录 curated"),
+      ),
+    ).toBe(false)
+  })
+
   it("supports non-signature w-engines when specialties are compatible", () => {
     const result = resolveStaticBuildDamage({
       loadout: {

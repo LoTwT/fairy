@@ -227,6 +227,104 @@ describe("resolveBuildDamage tool", () => {
     )
   })
 
+  it("supports Mato rupture curated effects through the high-level tool", async () => {
+    const result = await runTool(resolveBuildDamage, {
+      agent: "真斗",
+      wEngine: "燔火胧夜",
+      mode: "full-buff",
+      finalPanel: {
+        attack: 2500,
+        critRate: 0.35,
+        critDamage: 1.1,
+        sheerForce: 1800,
+      },
+      scenario: {
+        damageType: "sheer",
+        skillTag: "basic",
+        skillMultiplier: "450%",
+        attribute: "火属性",
+        combatTags: ["moltenEdge", "hpLoss", "hpConsumedSlash"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    expect((result as any).build.loadout.agent.name).toBe("真斗")
+    expect((result as any).build.loadout.wEngine.name).toBe("燔火胧夜")
+    expect((result as any).build.resolvedBuckets.bonusDamageSum).toBeCloseTo(
+      0.35,
+      4,
+    )
+  })
+
+  it("supports Idhari rupture curated effects through the high-level tool", async () => {
+    const result = await runTool(resolveBuildDamage, {
+      agent: "伊德海莉",
+      wEngine: "海妖摇篮",
+      mode: "full-buff",
+      finalPanel: {
+        attack: 2600,
+        critRate: 0.4,
+        critDamage: 1.2,
+        sheerForce: 1750,
+      },
+      scenario: {
+        damageType: "sheer",
+        skillTag: "enhancedSpecial",
+        skillMultiplier: "500%",
+        attribute: "冰属性",
+        extraAbilityActive: true,
+        combatTags: ["lowHp", "hpLoss"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    expect((result as any).build.loadout.agent.name).toBe("伊德海莉")
+    expect((result as any).build.resolvedBuckets.sheerBonusSum).toBeCloseTo(
+      0.18,
+      4,
+    )
+  })
+
+  it("supports Ye Shunguang attack curated effects through the high-level tool", async () => {
+    const result = await runTool(resolveBuildDamage, {
+      agent: "叶瞬光",
+      wEngine: "云霓孤光",
+      mode: "full-buff",
+      finalPanel: {
+        attack: 3400,
+        baseAttack: 1300,
+        critRate: 0.45,
+        critDamage: 1.2,
+      },
+      scenario: {
+        damageType: "normal",
+        skillTag: "ultimate",
+        skillMultiplier: "700%",
+        attribute: "凛刃",
+        combatTags: ["hedao", "etherCurtain"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    expect((result as any).build.loadout.agent.name).toBe("叶瞬光")
+    expect((result as any).build.resolvedBuckets.ignoreResistance).toBeCloseTo(
+      0.2,
+      4,
+    )
+  })
+
   it("returns supported scope when agent is outside the supported specialties", async () => {
     const result = await runTool(resolveBuildDamage, {
       agent: "安比",
