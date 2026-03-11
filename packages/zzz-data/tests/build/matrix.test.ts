@@ -227,7 +227,7 @@ describe("static build skill matrix", () => {
 
     expect(result.profile.id).toBe("standard-normal")
     expect(result.rows.length).toBeGreaterThan(0)
-    const chainRow = result.rows.find((row) => row.label === "连携技")
+    const chainRow = result.rows.find((row) => row.skillTag === "chain")
     const ultimateRow = result.rows.find((row) => row.label === "终结技")
     expect(chainRow?.build.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.7, 4)
     expect(ultimateRow?.build.resolvedBuckets.bonusDamageSum).toBeCloseTo(
@@ -244,11 +244,53 @@ describe("static build skill matrix", () => {
     ).toBe(true)
   })
 
+  it("applies Hugo curated effects on generic chain matrix rows", () => {
+    const result = resolveStaticBuildSkillMatrix({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1291",
+        wEngineId: "14129",
+        coreSkillLevel: 7,
+        wEngineRefinement: 1,
+      },
+      panel: {
+        attack: 3200,
+        baseAttack: 1200,
+        critRate: 0.5,
+        critDamage: 1.2,
+      },
+      context: {
+        extraAbilityActive: true,
+        combatTags: ["darkAbyssEcho", "commonEnemy"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    const chainRow = result.rows.find((row) => row.skillTag === "chain")
+    expect(chainRow?.build.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.5, 4)
+    expect(chainRow?.build.resolvedPanel.critRate).toBeCloseTo(0.62, 4)
+    expect(chainRow?.build.resolvedPanel.critDamage).toBeCloseTo(1.9, 4)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("雨果 当前未收录 curated"),
+      ),
+    ).toBe(false)
+    expect(
+      result.assumptions.some((item) => item.includes("通用技能矩阵模板生成")),
+    ).toBe(true)
+  })
+
   it("builds generic rupture matrix rows through the standard sheer profile", () => {
     const result = resolveStaticBuildSkillMatrix({
+      mode: "full-buff",
       loadout: {
         agentId: "1471",
         wEngineId: "14147",
+        coreSkillLevel: 7,
+        wEngineRefinement: 1,
       },
       panel: {
         attack: 2400,
@@ -257,6 +299,8 @@ describe("static build skill matrix", () => {
         sheerForce: 1650,
       },
       context: {
+        extraAbilityActive: true,
+        combatTags: ["banyueCoreBuff", "mingwang", "vajraFlame"],
         enemy: {
           defenderBaseDefense: 953,
           defenderResistance: 0.2,
@@ -270,5 +314,20 @@ describe("static build skill matrix", () => {
     expect(result.rows[0]?.build.resolvedPanel.baseDamageStat).toBe(
       "sheerForce",
     )
+    const enhancedSpecialRow = result.rows.find(
+      (row) => row.label === "强化特殊技",
+    )
+    expect(
+      enhancedSpecialRow?.build.resolvedBuckets.bonusDamageSum,
+    ).toBeCloseTo(0.51, 4)
+    expect(enhancedSpecialRow?.build.resolvedBuckets.sheerBonusSum).toBeCloseTo(
+      0.18,
+      4,
+    )
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("般岳 当前未收录 curated"),
+      ),
+    ).toBe(false)
   })
 })

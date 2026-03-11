@@ -159,6 +159,71 @@ describe("resolveBuildSkillMatrix tool", () => {
     expect(ultimateRow?.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.7, 4)
   })
 
+  it("returns Hugo generic matrix rows with curated chain bonuses applied", async () => {
+    const result = await runTool(resolveBuildSkillMatrix, {
+      agent: "雨果",
+      wEngine: "千面日陨",
+      mode: "full-buff",
+      finalPanel: {
+        attack: 3200,
+        baseAttack: 1200,
+        critRate: 0.5,
+        critDamage: 1.2,
+      },
+      context: {
+        extraAbilityActive: true,
+        combatTags: ["darkAbyssEcho", "commonEnemy"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    const chainRow = (result as any).matrix.rows.find(
+      (row: any) => row.skillTag === "chain",
+    )
+    expect(chainRow?.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.5, 4)
+    expect((result as any).matrix.summary.critRate).toBeCloseTo(0.62, 4)
+    expect((result as any).matrix.summary.critDamage).toBeCloseTo(1.9, 4)
+  })
+
+  it("returns generic rupture matrix rows with Banyue curated buckets applied", async () => {
+    const result = await runTool(resolveBuildSkillMatrix, {
+      agent: "般岳",
+      wEngine: "怒目金刚",
+      mode: "full-buff",
+      finalPanel: {
+        attack: 2400,
+        critRate: 0.35,
+        critDamage: 1.1,
+        sheerForce: 1650,
+      },
+      context: {
+        extraAbilityActive: true,
+        combatTags: ["banyueCoreBuff", "mingwang", "vajraFlame"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    const enhancedSpecialRow = (result as any).matrix.rows.find(
+      (row: any) => row.label === "强化特殊技",
+    )
+    expect(enhancedSpecialRow?.resolvedBuckets.bonusDamageSum).toBeCloseTo(
+      0.51,
+      4,
+    )
+    expect(enhancedSpecialRow?.resolvedBuckets.sheerBonusSum).toBeCloseTo(
+      0.18,
+      4,
+    )
+  })
+
   it("returns supported scope when agent is outside the supported specialties", async () => {
     const result = await runTool(resolveBuildSkillMatrix, {
       agent: "安比",

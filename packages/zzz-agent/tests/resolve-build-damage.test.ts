@@ -159,6 +159,74 @@ describe("resolveBuildDamage tool", () => {
     )
   })
 
+  it("supports Hugo curated effects through the high-level tool", async () => {
+    const result = await runTool(resolveBuildDamage, {
+      agent: "雨果",
+      wEngine: "千面日陨",
+      mode: "full-buff",
+      finalPanel: {
+        attack: 3200,
+        baseAttack: 1200,
+        critRate: 0.5,
+        critDamage: 1.2,
+      },
+      scenario: {
+        damageType: "normal",
+        skillTag: "chain",
+        skillMultiplier: "500%",
+        attribute: "冰属性",
+        extraAbilityActive: true,
+        combatTags: ["darkAbyssEcho", "commonEnemy"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    expect((result as any).build.loadout.agent.name).toBe("雨果")
+    expect((result as any).build.loadout.wEngine.name).toBe("千面日陨")
+    expect((result as any).build.resolvedBuckets.bonusDamageSum).toBeCloseTo(
+      0.5,
+      4,
+    )
+  })
+
+  it("supports Banyue rupture curated effects through the high-level tool", async () => {
+    const result = await runTool(resolveBuildDamage, {
+      agent: "般岳",
+      wEngine: "怒目金刚",
+      mode: "full-buff",
+      finalPanel: {
+        attack: 2400,
+        critRate: 0.35,
+        critDamage: 1.1,
+        sheerForce: 1650,
+      },
+      scenario: {
+        damageType: "sheer",
+        skillTag: "enhancedSpecial",
+        skillMultiplier: "500%",
+        attribute: "火属性",
+        extraAbilityActive: true,
+        combatTags: ["banyueCoreBuff", "mingwang", "vajraFlame"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    expect((result as any).build.loadout.agent.name).toBe("般岳")
+    expect((result as any).build.profile.id).toBe("standard-sheer")
+    expect((result as any).build.resolvedBuckets.sheerBonusSum).toBeCloseTo(
+      0.18,
+      4,
+    )
+  })
+
   it("returns supported scope when agent is outside the supported specialties", async () => {
     const result = await runTool(resolveBuildDamage, {
       agent: "安比",

@@ -282,6 +282,89 @@ describe("static build resolver", () => {
     ).toBe(false)
   })
 
+  it("applies curated effects for Hugo and Myriad Eclipse", () => {
+    const result = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1291",
+        wEngineId: "14129",
+        coreSkillLevel: 7,
+        wEngineRefinement: 1,
+      },
+      panel: {
+        attack: 3200,
+        baseAttack: 1200,
+        critRate: 0.5,
+        critDamage: 1.2,
+      },
+      scenario: {
+        damageType: "normal",
+        skillTag: "chain",
+        skillMultiplier: "500%",
+        attribute: "冰属性",
+        extraAbilityActive: true,
+        combatTags: ["darkAbyssEcho", "commonEnemy"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.loadout.agent.name).toBe("雨果")
+    expect(result.loadout.wEngine?.name).toBe("千面日陨")
+    expect(result.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.5, 4)
+    expect(result.resolvedPanel.critRate).toBeCloseTo(0.62, 4)
+    expect(result.resolvedPanel.critDamage).toBeCloseTo(1.9, 4)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("雨果 当前未收录 curated"),
+      ),
+    ).toBe(false)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("千面日陨 当前未收录 curated"),
+      ),
+    ).toBe(false)
+  })
+
+  it("applies curated effects for Orphie and Bellicose Blaze", () => {
+    const result = resolveStaticBuildDamage({
+      loadout: {
+        agentId: "1301",
+        wEngineId: "14130",
+      },
+      panel: {
+        attack: 3400,
+        baseAttack: 1250,
+        critRate: 0.45,
+        critDamage: 1.2,
+      },
+      scenario: {
+        damageType: "normal",
+        skillTag: "basic",
+        skillMultiplier: "420%",
+        attribute: "火属性",
+        combatTags: ["followUp", "crosshairFocus"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.loadout.agent.name).toBe("奥菲丝&「鬼火」")
+    expect(result.loadout.wEngine?.name).toBe("嚣枪喧焰")
+    expect(result.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.85, 4)
+    expect(result.resolvedPanel.critRate).toBeCloseTo(0.9, 4)
+    expect(result.resolvedPanel.attack).toBeCloseTo(3680, 4)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("奥菲丝&「鬼火」 当前未收录 curated"),
+      ),
+    ).toBe(false)
+  })
+
   it("supports non-signature w-engines when specialties are compatible", () => {
     const result = resolveStaticBuildDamage({
       loadout: {
@@ -344,9 +427,12 @@ describe("static build resolver", () => {
 
   it("supports generic rupture agents through the standard sheer profile", () => {
     const result = resolveStaticBuildDamage({
+      mode: "full-buff",
       loadout: {
         agentId: "1471",
         wEngineId: "14147",
+        coreSkillLevel: 7,
+        wEngineRefinement: 1,
       },
       panel: {
         attack: 2400,
@@ -359,6 +445,8 @@ describe("static build resolver", () => {
         skillTag: "enhancedSpecial",
         skillMultiplier: "500%",
         attribute: "火属性",
+        extraAbilityActive: true,
+        combatTags: ["banyueCoreBuff", "mingwang", "vajraFlame"],
         enemy: {
           defenderBaseDefense: 953,
           defenderResistance: 0.2,
@@ -370,10 +458,14 @@ describe("static build resolver", () => {
     expect(result.loadout.agent.name).toBe("般岳")
     expect(result.resolvedPanel.baseDamageStat).toBe("sheerForce")
     expect(result.resolvedPanel.baseDamageValue).toBe(1650)
+    expect(result.resolvedPanel.critRate).toBeCloseTo(0.55, 4)
+    expect(result.resolvedPanel.critDamage).toBeCloseTo(1.46, 4)
+    expect(result.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.51, 4)
+    expect(result.resolvedBuckets.sheerBonusSum).toBeCloseTo(0.18, 4)
     expect(
       result.assumptions.some((item) =>
         item.includes("般岳 当前未收录 curated"),
       ),
-    ).toBe(true)
+    ).toBe(false)
   })
 })

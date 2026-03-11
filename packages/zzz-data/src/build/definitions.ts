@@ -98,6 +98,26 @@ const harumasaCoreCritDamagePerStack = [
   0.12,
 ] as const
 // prettier-ignore
+const hugoCoreCritRate = [
+  0.06,
+  0.07,
+  0.08,
+  0.09,
+  0.1,
+  0.11,
+  0.12,
+] as const
+// prettier-ignore
+const hugoCoreCritDamage = [
+  0.125,
+  0.145,
+  0.165,
+  0.188,
+  0.208,
+  0.23,
+  0.25,
+] as const
+// prettier-ignore
 const yixuanCoreBonus = [
   0.3,
   0.35,
@@ -115,6 +135,7 @@ const deepSeaIceBonus = [0.25, 0.315, 0.38, 0.445, 0.5] as const
 const deepSeaCritRate = [0.1, 0.125, 0.15, 0.175, 0.2] as const
 const zanshinCritRate = [0.1, 0.115, 0.13, 0.145, 0.16] as const
 const zanshinDashBonus = [0.4, 0.46, 0.52, 0.58, 0.64] as const
+const myriadEclipseCritDamage = [0.45, 0.5175, 0.585, 0.6525, 0.72] as const
 const riotCritRate = [0.15, 0.188, 0.226, 0.264, 0.3] as const
 const riotChargeBonus = [0.35, 0.435, 0.52, 0.605, 0.7] as const
 const heartstringCritDamage = [0.5, 0.575, 0.65, 0.725, 0.8] as const
@@ -125,6 +146,9 @@ const sacrificeElectricBonus = [0.2, 0.23, 0.26, 0.29, 0.32] as const
 const qingmingCritRate = [0.2, 0.23, 0.26, 0.29, 0.32] as const
 const qingmingAttributeBonus = [0.08, 0.092, 0.104, 0.116, 0.128] as const
 const qingmingSheerBonus = [0.1, 0.115, 0.13, 0.145, 0.16] as const
+const chaosfireCritRate = [0.2, 0.23, 0.26, 0.29, 0.32] as const
+const wrathfulVajraCritRate = [0.2, 0.23, 0.26, 0.29, 0.32] as const
+const wrathfulVajraSheerBonus = [0.09, 0.1035, 0.117, 0.1305, 0.144] as const
 
 export const staticBuildEffectDefinitions = [
   {
@@ -246,6 +270,100 @@ export const staticBuildEffectDefinitions = [
     ],
   },
   {
+    id: "hugo-core-dark-abyss-echo-crit-rate",
+    sourceType: "agent",
+    sourceId: "1291",
+    sourceName: "雨果",
+    label: "核心被动：暗渊回响暴击率",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      combatTags: ["darkAbyssEcho"],
+    },
+    modifiers: [
+      {
+        bucket: "critRate",
+        value: byCoreSkill(hugoCoreCritRate),
+      },
+    ],
+  },
+  {
+    id: "hugo-core-dark-abyss-echo-crit-damage",
+    sourceType: "agent",
+    sourceId: "1291",
+    sourceName: "雨果",
+    label: "核心被动：暗渊回响暴击伤害",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      combatTags: ["darkAbyssEcho"],
+    },
+    modifiers: [
+      {
+        bucket: "critDamage",
+        value: byCoreSkill(hugoCoreCritDamage),
+      },
+    ],
+  },
+  {
+    id: "hugo-extra-chain-bonus",
+    sourceType: "agent",
+    sourceId: "1291",
+    sourceName: "雨果",
+    label: "额外能力：连携技增伤",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      requireExtraAbility: true,
+      skillTags: ["chain"],
+    },
+    modifiers: [
+      {
+        bucket: "bonusDamageSum",
+        value: () => 0.15,
+      },
+    ],
+  },
+  {
+    id: "hugo-extra-chain-common-enemy-bonus",
+    sourceType: "agent",
+    sourceId: "1291",
+    sourceName: "雨果",
+    label: "额外能力：普通敌人连携技额外增伤",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      requireExtraAbility: true,
+      skillTags: ["chain"],
+      combatTags: ["commonEnemy"],
+    },
+    modifiers: [
+      {
+        bucket: "bonusDamageSum",
+        value: () => 0.35,
+      },
+    ],
+  },
+  {
+    id: "hugo-extra-execution-bonus",
+    sourceType: "agent",
+    sourceId: "1291",
+    sourceName: "雨果",
+    label: "额外能力：决算增伤",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      requireExtraAbility: true,
+      combatTags: ["execution"],
+    },
+    modifiers: [
+      {
+        bucket: "bonusDamageSum",
+        value: () => 0.4,
+      },
+    ],
+  },
+  {
     id: "zero-anby-core-silver-star-bonus",
     sourceType: "agent",
     sourceId: "1381",
@@ -319,6 +437,71 @@ export const staticBuildEffectDefinitions = [
         value: () => 0.25,
       },
     ],
+  },
+  {
+    id: "orphie-core-crit-rate",
+    sourceType: "agent",
+    sourceId: "1301",
+    sourceName: "奥菲丝&「鬼火」",
+    label: "核心被动：暴击率提升",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    modifiers: [
+      {
+        bucket: "critRate",
+        value: () => 0.25,
+      },
+    ],
+  },
+  {
+    id: "orphie-core-follow-up-bonus",
+    sourceType: "agent",
+    sourceId: "1301",
+    sourceName: "奥菲丝&「鬼火」",
+    label: "核心被动：追加攻击增伤",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      combatTags: ["followUp"],
+    },
+    modifiers: [
+      {
+        bucket: "bonusDamageSum",
+        value: () => 0.85,
+      },
+    ],
+  },
+  {
+    id: "orphie-core-crosshair-focus-flat-attack",
+    sourceType: "agent",
+    sourceId: "1301",
+    sourceName: "奥菲丝&「鬼火」",
+    label: "核心被动：准星聚焦攻击力",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      combatTags: ["crosshairFocus"],
+    },
+    modifiers: [
+      {
+        bucket: "flatAttack",
+        value: () => 280,
+      },
+    ],
+  },
+  {
+    id: "orphie-extra-follow-up-ignore-defense",
+    sourceType: "agent",
+    sourceId: "1301",
+    sourceName: "奥菲丝&「鬼火」",
+    label: "额外能力：追加攻击无视防御",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      requireExtraAbility: true,
+      combatTags: ["followUp"],
+    },
+    modifiers: [],
   },
   {
     id: "zhu-yuan-core-suppression",
@@ -493,6 +676,64 @@ export const staticBuildEffectDefinitions = [
     ],
   },
   {
+    id: "banyue-core-buff-bonus",
+    sourceType: "agent",
+    sourceId: "1471",
+    sourceName: "般岳",
+    label: "核心被动：核心招式增伤与暴击伤害",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      damageTypes: ["sheer"],
+      attributes: ["Fire"],
+      combatTags: ["banyueCoreBuff"],
+    },
+    modifiers: [
+      {
+        bucket: "bonusDamageSum",
+        value: () => 0.36,
+      },
+      {
+        bucket: "critDamage",
+        value: () => 0.36,
+      },
+    ],
+  },
+  {
+    id: "banyue-extra-mingwang-fire-bonus",
+    sourceType: "agent",
+    sourceId: "1471",
+    sourceName: "般岳",
+    label: "额外能力：明王层数火属性增伤",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    baselineStacks: 1,
+    fullBuffStacks: 3,
+    maxStacks: 3,
+    condition: {
+      requireExtraAbility: true,
+      damageTypes: ["sheer"],
+      attributes: ["Fire"],
+      combatTags: ["mingwang"],
+    },
+    modifiers: [
+      {
+        bucket: "bonusDamageSum",
+        value: () => 0.05,
+      },
+    ],
+  },
+  {
+    id: "banyue-core-sheer-force-scaling",
+    sourceType: "agent",
+    sourceId: "1471",
+    sourceName: "般岳",
+    label: "核心被动：生命值转贯穿力",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    modifiers: [],
+  },
+  {
     id: "brimstone-attack-percent",
     sourceType: "w-engine",
     sourceId: "14104",
@@ -646,6 +887,53 @@ export const staticBuildEffectDefinitions = [
         value: byRefinement(zanshinCritRate),
       },
     ],
+  },
+  {
+    id: "myriad-eclipse-crit-damage",
+    sourceType: "w-engine",
+    sourceId: "14129",
+    sourceName: "千面日陨",
+    label: "音擎被动：暴击伤害提升",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    modifiers: [
+      {
+        bucket: "critDamage",
+        value: byRefinement(myriadEclipseCritDamage),
+      },
+    ],
+  },
+  {
+    id: "chaosfire-crit-rate",
+    sourceType: "w-engine",
+    sourceId: "14130",
+    sourceName: "嚣枪喧焰",
+    label: "音擎被动：暴击率提升",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    modifiers: [
+      {
+        bucket: "critRate",
+        value: byRefinement(chaosfireCritRate),
+      },
+    ],
+  },
+  {
+    id: "chaosfire-follow-up-ignore-defense",
+    sourceType: "w-engine",
+    sourceId: "14130",
+    sourceName: "嚣枪喧焰",
+    label: "音擎被动：追加攻击无视防御",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    baselineStacks: 1,
+    fullBuffStacks: 2,
+    maxStacks: 2,
+    condition: {
+      attributes: ["Fire"],
+      combatTags: ["followUp"],
+    },
+    modifiers: [],
   },
   {
     id: "riot-suppressor-crit-rate",
@@ -829,6 +1117,45 @@ export const staticBuildEffectDefinitions = [
       {
         bucket: "sheerBonusSum",
         value: byRefinement(qingmingSheerBonus),
+      },
+    ],
+  },
+  {
+    id: "wrathful-vajra-crit-rate",
+    sourceType: "w-engine",
+    sourceId: "14147",
+    sourceName: "怒目金刚",
+    label: "音擎被动：暴击率提升",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    modifiers: [
+      {
+        bucket: "critRate",
+        value: byRefinement(wrathfulVajraCritRate),
+      },
+    ],
+  },
+  {
+    id: "wrathful-vajra-sheer-bonus",
+    sourceType: "w-engine",
+    sourceId: "14147",
+    sourceName: "怒目金刚",
+    label: "音擎被动：强化特殊技火属性贯穿增伤",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    baselineStacks: 1,
+    fullBuffStacks: 2,
+    maxStacks: 2,
+    condition: {
+      damageTypes: ["sheer"],
+      attributes: ["Fire"],
+      skillTags: ["enhancedSpecial"],
+      combatTags: ["vajraFlame"],
+    },
+    modifiers: [
+      {
+        bucket: "sheerBonusSum",
+        value: byRefinement(wrathfulVajraSheerBonus),
       },
     ],
   },
