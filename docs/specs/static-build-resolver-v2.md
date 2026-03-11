@@ -91,9 +91,19 @@ V2 当前支持以下 6 套驱动盘：
 V2 已支持一层批量技能矩阵 builder：
 
 - 接口：`resolveStaticBuildSkillMatrix`
-- 输出：`rows[]`，每行包含 `group`、`label`、`skillTag`、`skillMultiplier` 与单次 `build` 结果
+- 输出：`rows[]`，每行包含 `group`、`label`、`metadata`、`skillTag`、`skillMultiplier` 与单次 `build` 结果
 - 覆盖范围：当前 6 名支持代理人的手工模板
 - 当前技能标签与倍率提取来源：`data/zh-CN/agent-details.json`，因此矩阵行名默认返回中文标签
+
+`metadata` 用于给 UI、Agent 和上层消费方提供更稳定的结构化维度，当前包含：
+
+- `order`：矩阵内稳定顺序
+- `actionName`：原始动作前缀，如 `普通攻击`、`强化特殊技`、`终结技`
+- `skillName`：主技能名，如 `请勿抵抗`、`月辉丝`、`霜锋`
+- `qualifiers`：剩余限定词，如 `以太`、`I型`、`缠绕`
+- `entryType`：`hit` / `total` / `extra` / `variant` / `size-variant`
+- `segmentLabel` / `segmentIndex`：段数信息，如 `三段` / `3`
+- `targetSize`：仅对 `霜锋` 这类体型分支返回 `small` / `medium` / `large`
 
 约定：
 
@@ -449,9 +459,9 @@ V2 继续只实现两个 profile：
 
 V2 完成后必须满足：
 
-1. `zzz-data` 能独立解析 3 名支持代理人的静态构筑并输出 `damageParams`
+1. `zzz-data` 能独立解析当前 6 名支持代理人的静态构筑并输出 `damageParams`
 2. `仪玄` 能通过 profile 走 `sheer` 管线，不复用标准 `normal` 公式
-3. `zzz-data` 能为 3 名支持代理人批量输出全技能 / 全段矩阵，并逐行复用单场景 resolver
+3. `zzz-data` 能为当前 6 名支持代理人批量输出全技能 / 全段矩阵，并逐行复用单场景 resolver
 4. `zzz-agent` 能通过高层 tool 调用单场景 resolver 与技能矩阵 builder，而不必重新人工抽取乘区
 5. 每次计算都能给出 effect trace 与 assumptions
 6. 缺少关键输入时，系统优先显式标记 `unsupportedEffects`，而不是静默猜测

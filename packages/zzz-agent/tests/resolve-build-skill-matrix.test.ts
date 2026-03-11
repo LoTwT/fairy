@@ -27,6 +27,15 @@ describe("resolveBuildSkillMatrix tool", () => {
     expect((result as any).found).toBe(true)
     expect((result as any).matrix.rows).toHaveLength(21)
     expect((result as any).matrix.rows[0].label).toBe("普通攻击·一段")
+    expect((result as any).matrix.rows[0].metadata).toEqual({
+      order: 1,
+      actionName: "普通攻击",
+      skillName: "普通攻击",
+      qualifiers: [],
+      entryType: "hit",
+      segmentLabel: "一段",
+      segmentIndex: 1,
+    })
     expect((result as any).matrix.rows[0].build).toBeUndefined()
     expect((result as any).matrix.effectSummary[0].value).toBeTruthy()
     expect((result as any).matrix.summary.baseDamageStat).toBe("attack")
@@ -89,6 +98,10 @@ describe("resolveBuildSkillMatrix tool", () => {
     expect((result as any).matrix.rows[0].label).toBe(
       "普通攻击·利齿修剪法·一段",
     )
+    const frost = (result as any).matrix.rows.find(
+      (row: any) => row.id === "1191-basic-frost-small",
+    )
+    expect(frost?.metadata.targetSize).toBe("small")
   })
 
   it("returns supported scope when agent is outside the V1 matrix", async () => {

@@ -35,7 +35,10 @@ export type {
   StaticBuildResolvedPanel,
   StaticBuildScenarioInput,
   StaticBuildSkillMatrixContextInput,
+  StaticBuildSkillMatrixEntryType,
   StaticBuildSkillMatrixRow,
+  StaticBuildSkillMatrixRowMeta,
   StaticBuildSkillTag,
+  StaticBuildTargetSize,
   StaticBuildTraceItem,
 } from "./types.js"

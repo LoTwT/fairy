@@ -252,6 +252,7 @@ function compactMatrix(
       id: row.id,
       group: row.group,
       label: row.label,
+      metadata: row.metadata,
       skillTag: row.skillTag,
       damageType: row.damageType,
       attribute: row.attribute,

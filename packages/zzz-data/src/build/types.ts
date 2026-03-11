@@ -18,6 +18,15 @@ export type StaticBuildSkillTag =
   | "ultimate"
   | "assist"
 
+export type StaticBuildSkillMatrixEntryType =
+  | "hit"
+  | "total"
+  | "extra"
+  | "variant"
+  | "size-variant"
+
+export type StaticBuildTargetSize = "small" | "medium" | "large"
+
 export type StaticBuildBucket =
   | "attackPercent"
   | "flatAttack"
@@ -250,10 +259,22 @@ export interface ResolveStaticBuildResult {
   unsupportedEffects: string[]
 }
 
+export interface StaticBuildSkillMatrixRowMeta {
+  order: number
+  actionName: string
+  skillName: string
+  qualifiers: string[]
+  entryType: StaticBuildSkillMatrixEntryType
+  segmentLabel?: string
+  segmentIndex?: number
+  targetSize?: StaticBuildTargetSize
+}
+
 export interface StaticBuildSkillMatrixRow {
   id: string
   group: string
   label: string
+  metadata: StaticBuildSkillMatrixRowMeta
   skillTag: StaticBuildSkillTag
   damageType: StaticBuildDamageType
   attribute: AgentAttribute

@@ -4,6 +4,7 @@ import type {
   ResolveStaticBuildSkillMatrixResult,
   StaticBuildDamageType,
   StaticBuildSkillMatrixRow,
+  StaticBuildSkillMatrixRowMeta,
   StaticBuildSkillTag,
 } from "./types.js"
 import agentDetailsZh from "../../data/zh-CN/agent-details.json"
@@ -23,6 +24,130 @@ interface SkillMatrixTemplate {
   damageType?: StaticBuildDamageType
   attribute?: string
   combatTags?: string[]
+}
+
+const segmentIndexByLabel = {
+  一段: 1,
+  二段: 2,
+  三段: 3,
+  四段: 4,
+  五段: 5,
+  六段: 6,
+  七段: 7,
+  八段: 8,
+  九段: 9,
+  十段: 10,
+} as const
+
+const targetSizeByLabel = {
+  小体型: "small",
+  中体型: "medium",
+  大体型: "large",
+} as const
+
+function parseSegmentToken(token: string) {
+  if (token in segmentIndexByLabel) {
+    return {
+      baseQualifier: undefined,
+      segmentLabel: token as keyof typeof segmentIndexByLabel,
+      segmentIndex:
+        segmentIndexByLabel[token as keyof typeof segmentIndexByLabel],
+    }
+  }
+
+  for (const segmentLabel of Object.keys(segmentIndexByLabel) as Array<
+    keyof typeof segmentIndexByLabel
+  >) {
+    if (!token.endsWith(segmentLabel)) continue
+    const baseQualifier = token.slice(0, -segmentLabel.length) || undefined
+    return {
+      baseQualifier,
+      segmentLabel,
+      segmentIndex: segmentIndexByLabel[segmentLabel],
+    }
+  }
+
+  return {
+    baseQualifier: undefined,
+    segmentLabel: undefined,
+    segmentIndex: undefined,
+  }
+}
+
+function inferSkillMatrixRowMeta(
+  template: SkillMatrixTemplate,
+  order: number,
+): StaticBuildSkillMatrixRowMeta {
+  const tokens = template.label.split("·").filter(Boolean)
+  const actionName = tokens[0] ?? template.group
+
+  let skillName = actionName
+  let qualifiers = [] as string[]
+
+  if (tokens.length === 2) {
+    const second = tokens[1]!
+    const segment = parseSegmentToken(second)
+    if (segment.segmentLabel || second in targetSizeByLabel) {
+      skillName = actionName
+      qualifiers = [second]
+    } else {
+      skillName = second
+    }
+  } else if (tokens.length >= 3) {
+    skillName = tokens[1]!
+    qualifiers = tokens.slice(2)
+  }
+
+  let targetSize: StaticBuildSkillMatrixRowMeta["targetSize"]
+  let segmentLabel: string | undefined
+  let segmentIndex: number | undefined
+
+  if (qualifiers.length > 0) {
+    const last = qualifiers.at(-1)!
+    const mappedTargetSize =
+      targetSizeByLabel[last as keyof typeof targetSizeByLabel]
+    if (mappedTargetSize) {
+      targetSize = mappedTargetSize
+      qualifiers = qualifiers.slice(0, -1)
+    } else {
+      const segment = parseSegmentToken(last)
+      if (segment.segmentLabel) {
+        segmentLabel = segment.segmentLabel
+        segmentIndex = segment.segmentIndex
+        qualifiers = qualifiers.slice(0, -1)
+        if (segment.baseQualifier) {
+          qualifiers.push(segment.baseQualifier)
+        }
+      }
+    }
+  }
+
+  const entryText = `${template.label} ${template.statName}`
+  let entryType: StaticBuildSkillMatrixRowMeta["entryType"]
+  if (targetSize) {
+    entryType = "size-variant"
+  } else if (entryText.includes("额外") || entryText.includes("追加")) {
+    entryType = "extra"
+  } else if (segmentLabel) {
+    entryType = "hit"
+  } else if (template.statName.includes("总伤害")) {
+    entryType = "total"
+  } else if (qualifiers.length > 0) {
+    entryType = "variant"
+  } else {
+    entryType = "total"
+  }
+
+  return {
+    order,
+    actionName,
+    skillName,
+    qualifiers,
+    entryType,
+    ...(segmentLabel ? { segmentLabel } : {}),
+    ...(segmentIndex ? { segmentIndex } : {}),
+    ...(targetSize ? { targetSize } : {}),
+  }
 }
 
 function getAgentDetails(agentId: string): AgentDetails {
@@ -1384,7 +1509,7 @@ export function resolveStaticBuildSkillMatrix(
   const globalCombatTags = input.context.combatTags ?? []
   const globalExtraAbilityActive = input.context.extraAbilityActive
 
-  const rows = templates.map((template) => {
+  const rows = templates.map((template, index) => {
     const skillMultiplier = getSkillMultiplier(
       template.agentId,
       template.skillTypeId,
@@ -1419,6 +1544,7 @@ export function resolveStaticBuildSkillMatrix(
       id: template.id,
       group: template.group,
       label: template.label,
+      metadata: inferSkillMatrixRowMeta(template, index + 1),
       skillTag: template.skillTag,
       damageType: template.damageType ?? agent.defaultDamageType,
       attribute,

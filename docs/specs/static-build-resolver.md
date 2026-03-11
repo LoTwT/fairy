@@ -711,5 +711,5 @@
 下一阶段仍有三块工作未完成：
 
 1. 继续把技能矩阵从当前手工支持名单扩展到更多代理人，而不是停在 11号 / 艾莲 / 悠真 / 朱鸢 / 伊芙琳 / 仪玄
-2. 给技能矩阵补更丰富的结构化元数据，例如更稳定的技能类型、段数序号、命中次数语义
-3. 在 agent 层补更明确的输出 contract 与示例，减少上层把单场景结果误写成完整技能表的风险
+2. 继续把技能矩阵元数据从当前的 `actionName/skillName/qualifiers/entryType/segmentIndex` 扩到更细的命中次数语义与稳定技能分类，而不是让 UI 继续依赖 label 文本解析
+3. 把 `anomaly / disorder` 接入同一套 static build resolver，而不是长期停在 `normal / sheer`

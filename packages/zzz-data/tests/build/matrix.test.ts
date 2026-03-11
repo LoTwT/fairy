@@ -30,11 +30,26 @@ describe("static build skill matrix", () => {
     expect(result.profile.id).toBe("standard-normal")
     expect(result.rows).toHaveLength(21)
     expect(result.rows[0]?.label).toBe("普通攻击·一段")
+    expect(result.rows[0]?.metadata).toEqual({
+      order: 1,
+      actionName: "普通攻击",
+      skillName: "普通攻击",
+      qualifiers: [],
+      entryType: "hit",
+      segmentLabel: "一段",
+      segmentIndex: 1,
+    })
 
     const etherBurst = result.rows.find(
       (row) => row.id === "1241-suppression-ether-3",
     )
     expect(etherBurst?.skillMultiplier).toBe("964.2%")
+    expect(etherBurst?.metadata).toMatchObject({
+      skillName: "请勿抵抗",
+      qualifiers: ["以太"],
+      entryType: "hit",
+      segmentIndex: 3,
+    })
     expect(etherBurst?.build.damage.expected.total).toBeGreaterThan(0)
   })
 
@@ -101,6 +116,14 @@ describe("static build skill matrix", () => {
     expect(result.profile.id).toBe("standard-normal")
     expect(result.rows).toHaveLength(24)
     expect(result.rows[0]?.label).toBe("普通攻击·利齿修剪法·一段")
+    const frostSmall = result.rows.find(
+      (row) => row.id === "1191-basic-frost-small",
+    )
+    expect(frostSmall?.metadata).toMatchObject({
+      skillName: "霜锋",
+      entryType: "size-variant",
+      targetSize: "small",
+    })
 
     const ultimate = result.rows.find((row) => row.label === "终结技·永冬狂宴")
     expect(ultimate?.skillMultiplier).toBe("4469.3%")
@@ -136,6 +159,12 @@ describe("static build skill matrix", () => {
     const slash = result.rows.find((row) => row.id === "1201-dash-slash-1")
     expect(slash?.skillMultiplier).toBe("384.3%")
     expect(slash?.combatTags).toContain("harumasaSharpness")
+    const extra = result.rows.find((row) => row.id === "1201-dash-slash-extra")
+    expect(extra?.metadata).toMatchObject({
+      skillName: "飞弦",
+      qualifiers: ["斩", "额外伤害"],
+      entryType: "extra",
+    })
     const ultimate = result.rows.find((row) => row.label === "终结技·残心")
     expect(ultimate?.skillMultiplier).toBe("4619.4%")
   })
