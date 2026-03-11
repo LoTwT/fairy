@@ -224,6 +224,134 @@ V1 输出至少包含：
   - `skillMultiplier`
   - `build`
 
+## 4.1 实际调用示例
+
+### 示例 1：单技能 / 单场景 resolver
+
+适用：
+
+- 用户已经给出主 C 构筑、最终面板、单个技能倍率和敌人参数
+- 目标是一次只算一个技能 / 一段命中
+
+`zzz-agent` tool 层输入示例：
+
+```json
+{
+  "agent": "朱鸢",
+  "wEngine": "防暴者Ⅵ型",
+  "driveDiscs": [{ "name": "啄木鸟电音", "pieces": 4 }],
+  "coreSkillLevel": 7,
+  "wEngineRefinement": 1,
+  "mode": "baseline",
+  "finalPanel": {
+    "attack": 3200,
+    "baseAttack": 1200,
+    "critRate": 0.55,
+    "critDamage": 1.4
+  },
+  "scenario": {
+    "damageType": "normal",
+    "skillTag": "basic",
+    "skillMultiplier": "350%",
+    "attribute": "以太",
+    "combatTags": ["suppressionMode"],
+    "enemy": {
+      "defenderBaseDefense": 953,
+      "defenderResistance": 0.2
+    }
+  }
+}
+```
+
+预期：
+
+- 返回 `found=true`
+- 结果位于 `build`
+- 由上层自行决定如何展示单次 `damage`、`resolvedBuckets` 与 `trace`
+
+### 示例 2：全技能 / 全段矩阵
+
+适用：
+
+- 用户明确要求“完整伤害表”“全技能”“所有段数”
+- 目标是批量输出支持代理人的技能矩阵
+
+`zzz-agent` tool 层输入示例：
+
+```json
+{
+  "agent": "仪玄",
+  "wEngine": "青溟笼舍",
+  "driveDiscs": [{ "name": "云岿如我", "pieces": 4 }],
+  "coreSkillLevel": 7,
+  "wEngineRefinement": 1,
+  "mode": "full-buff",
+  "finalPanel": {
+    "attack": 2500,
+    "critRate": 0.4,
+    "critDamage": 1.2,
+    "hp": 18000
+  },
+  "context": {
+    "extraAbilityActive": true,
+    "enemy": {
+      "defenderBaseDefense": 953,
+      "defenderResistance": 0.2,
+      "isStunned": true
+    }
+  }
+}
+```
+
+预期：
+
+- 返回 `found=true`
+- 结果位于 `matrix`
+- 顶层优先消费：
+  - `matrix.summary`
+  - `matrix.effectSummary`
+  - `matrix.rows[*].damage`
+- 如需完整逐行调试信息，才显式传 `includeDetails=true`
+
+### 示例 3：unsupported probe
+
+适用：
+
+- 用户只是想知道当前 V1 是否支持某个代理人
+- 或者用户点名要求矩阵，但该代理人不在 V1 支持范围内
+
+`zzz-agent` tool 层输入示例：
+
+```json
+{
+  "agent": "安比",
+  "finalPanel": {
+    "attack": 2000,
+    "critRate": 0.5,
+    "critDamage": 1
+  },
+  "context": {
+    "enemy": {
+      "defenderBaseDefense": 953,
+      "defenderResistance": 0.2
+    }
+  }
+}
+```
+
+预期：
+
+- 返回 `found=false`
+- 返回 `message`
+- 返回 `supportedAgents`
+- 可选返回 `candidates`
+
+上层约定：
+
+- 先原样提示 V1 不支持范围
+- 不要自动回退到旧路径
+- 只有用户明确接受“按旧路径继续估算”时，才再走 `lookup + calcDamage`
+
 ## 5. V1 Effect 范围
 
 ### 5.1 已支持的 bucket

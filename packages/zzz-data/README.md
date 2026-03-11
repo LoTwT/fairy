@@ -90,6 +90,22 @@ const result = resolveStaticBuildDamage({
 })
 ```
 
+拿到结果后，通常直接消费这些字段：
+
+```ts
+result.profile.id
+// "yixuan-sheer"
+
+result.resolvedPanel.baseDamageStat
+// "sheerForce"
+
+result.resolvedBuckets.bonusDamageSum
+// 0.76
+
+result.damage.expected.total
+// number
+```
+
 如果你要一次性生成代理人的全技能 / 全段伤害矩阵，使用矩阵 builder：
 
 ```ts
@@ -126,6 +142,38 @@ matrix.rows[0]
 //   build: { damage, resolvedBuckets, trace, ... }
 // }
 ```
+
+常见消费方式是把矩阵映射成展示表：
+
+```ts
+const table = matrix.rows.map((row) => ({
+  skill: row.label,
+  multiplier: row.skillMultiplier,
+  expected: row.build.damage.expected.total,
+  crit: row.build.damage.crit.total,
+}))
+```
+
+如果你在应用层需要先判断 V1 是否支持某个构筑，不要直接 `try/catch` 所有 resolver 错误，先用 catalog helper 探测：
+
+```ts
+import {
+  getStaticBuildAgent,
+  supportedStaticBuildAgents,
+  supportedStaticBuildWEngines,
+} from "zzz-data"
+
+const agent = getStaticBuildAgent("1241")
+// supported entry or undefined
+
+const supportedAgentNames = supportedStaticBuildAgents.map((item) => item.name)
+const supportedWEngines = supportedStaticBuildWEngines.map((item) => item.name)
+```
+
+推荐约定：
+
+- 支持范围内：直接调用 `resolveStaticBuildDamage` 或 `resolveStaticBuildSkillMatrix`
+- 支持范围外：先向用户说明当前 V1 不支持，再决定是否回退到旧路径估算
 
 ## 常用示例
 
