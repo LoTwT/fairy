@@ -151,6 +151,11 @@ matrix.rows[0]
 //     actionName: "普通攻击",
 //     skillName: "普通攻击",
 //     qualifiers: [],
+//     templateSource: "curated",
+//     sourceSkillTypeId: 0,
+//     sourceStatName: "一段伤害倍率",
+//     sourceOccurrence: 1,
+//     attributeSource: "agent-default",
 //     entryType: "hit",
 //     segmentLabel: "一段",
 //     segmentIndex: 1,
@@ -171,6 +176,16 @@ const table = matrix.rows.map((row) => ({
   crit: row.build.damage.crit.total,
 }))
 ```
+
+如果你需要把矩阵行稳定回链到公开 `agent-details.json` 的原始技能条目，优先使用：
+
+- `row.metadata.sourceSkillTypeId`
+- `row.metadata.sourceStatName`
+- `row.metadata.sourceOccurrence`
+- `row.metadata.templateSource`
+- `row.metadata.attributeSource`
+
+这样可以避免继续从 `label` 反向猜技能来源、模板来源或属性覆盖来源。
 
 如果你在应用层需要先判断当前 resolver 是否支持某个构筑，不要直接 `try/catch` 所有 resolver 错误，先用 catalog helper 探测：
 

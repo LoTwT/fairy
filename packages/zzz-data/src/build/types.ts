@@ -31,6 +31,13 @@ export type StaticBuildSkillMatrixEntryType =
 
 export type StaticBuildTargetSize = "small" | "medium" | "large"
 
+export type StaticBuildSkillMatrixTemplateSource = "curated" | "generated"
+
+export type StaticBuildSkillMatrixAttributeSource =
+  | "agent-default"
+  | "context"
+  | "template"
+
 export type StaticBuildBucket =
   | "attackPercent"
   | "flatAttack"
@@ -276,6 +283,11 @@ export interface StaticBuildSkillMatrixRowMeta {
   actionName: string
   skillName: string
   qualifiers: string[]
+  templateSource: StaticBuildSkillMatrixTemplateSource
+  sourceSkillTypeId: number
+  sourceStatName: string
+  sourceOccurrence: number
+  attributeSource: StaticBuildSkillMatrixAttributeSource
   entryType: StaticBuildSkillMatrixEntryType
   segmentLabel?: string
   segmentIndex?: number

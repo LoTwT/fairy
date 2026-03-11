@@ -179,6 +179,12 @@
 - 是否总伤 / 单段 / 追加段
 - 更清晰的属性覆盖标识
 
+当前第一批已完成：
+
+- `templateSource`：区分 `curated` 与 `generated`
+- `sourceSkillTypeId` / `sourceStatName` / `sourceOccurrence`：把矩阵行稳定回链到公开 `agent-details.json`
+- `attributeSource`：显式区分 `agent-default` / `context` / `template`
+
 ### 4.3 验收标准
 
 进入 `V3` 前，至少满足：

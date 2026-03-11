@@ -35,6 +35,11 @@ describe("static build skill matrix", () => {
       actionName: "普通攻击",
       skillName: "普通攻击",
       qualifiers: [],
+      templateSource: "curated",
+      sourceSkillTypeId: 0,
+      sourceStatName: "一段伤害倍率",
+      sourceOccurrence: 1,
+      attributeSource: "agent-default",
       entryType: "hit",
       segmentLabel: "一段",
       segmentIndex: 1,
@@ -47,6 +52,11 @@ describe("static build skill matrix", () => {
     expect(etherBurst?.metadata).toMatchObject({
       skillName: "请勿抵抗",
       qualifiers: ["以太"],
+      templateSource: "curated",
+      sourceSkillTypeId: 0,
+      sourceStatName: "三段伤害倍率（以太）",
+      sourceOccurrence: 1,
+      attributeSource: "template",
       entryType: "hit",
       segmentIndex: 3,
     })
@@ -193,6 +203,11 @@ describe("static build skill matrix", () => {
     expect(result.rows.length).toBeGreaterThan(0)
     expect(result.rows[0]?.label).toBe("普通攻击·一段")
     expect(result.rows[0]?.skillMultiplier).toBe("131.7%")
+    expect(result.rows[0]?.metadata).toMatchObject({
+      templateSource: "generated",
+      attributeSource: "agent-default",
+      sourceOccurrence: 1,
+    })
     expect(
       result.assumptions.some((item) =>
         item.includes("猫又 当前未收录 curated"),

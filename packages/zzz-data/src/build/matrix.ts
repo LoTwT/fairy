@@ -3,8 +3,10 @@ import type {
   ResolveStaticBuildSkillMatrixInput,
   ResolveStaticBuildSkillMatrixResult,
   StaticBuildDamageType,
+  StaticBuildSkillMatrixAttributeSource,
   StaticBuildSkillMatrixRow,
   StaticBuildSkillMatrixRowMeta,
+  StaticBuildSkillMatrixTemplateSource,
   StaticBuildSkillTag,
 } from "./types.js"
 import agentDetailsZh from "../../data/zh-CN/agent-details.json"
@@ -82,6 +84,8 @@ function parseSegmentToken(token: string) {
 function inferSkillMatrixRowMeta(
   template: SkillMatrixTemplate,
   order: number,
+  templateSource: StaticBuildSkillMatrixTemplateSource,
+  attributeSource: StaticBuildSkillMatrixAttributeSource,
 ): StaticBuildSkillMatrixRowMeta {
   const tokens = template.label.split("·").filter(Boolean)
   const actionName = tokens[0] ?? template.group
@@ -148,6 +152,11 @@ function inferSkillMatrixRowMeta(
     actionName,
     skillName,
     qualifiers,
+    templateSource,
+    sourceSkillTypeId: template.skillTypeId,
+    sourceStatName: template.statName,
+    sourceOccurrence: template.occurrence ?? 1,
+    attributeSource,
     entryType,
     ...(segmentLabel ? { segmentLabel } : {}),
     ...(segmentIndex ? { segmentIndex } : {}),
@@ -1607,6 +1616,7 @@ export function resolveStaticBuildSkillMatrix(
     templates.length > 0
       ? templates
       : buildGeneratedSkillMatrixTemplates(agent.id)
+  const templateSource = templates.length > 0 ? "curated" : "generated"
   if (!resolvedTemplates.length) {
     throw new RangeError(`No skill matrix templates for agentId=${agent.id}`)
   }
@@ -1622,9 +1632,16 @@ export function resolveStaticBuildSkillMatrix(
       template.statName,
       template.occurrence,
     )
+    const resolvedContextAttribute = toAgentAttribute(input.context.attribute)
     const attribute =
-      toAgentAttribute(template.attribute ?? input.context.attribute) ??
+      toAgentAttribute(template.attribute) ??
+      resolvedContextAttribute ??
       agent.defaultAttribute
+    const attributeSource = template.attribute
+      ? "template"
+      : resolvedContextAttribute
+        ? "context"
+        : "agent-default"
     const combatTags = [
       ...new Set([...(template.combatTags ?? []), ...globalCombatTags]),
     ]
@@ -1650,7 +1667,12 @@ export function resolveStaticBuildSkillMatrix(
       id: template.id,
       group: template.group,
       label: template.label,
-      metadata: inferSkillMatrixRowMeta(template, index + 1),
+      metadata: inferSkillMatrixRowMeta(
+        template,
+        index + 1,
+        templateSource,
+        attributeSource,
+      ),
       skillTag: template.skillTag,
       damageType: template.damageType ?? agent.defaultDamageType,
       attribute,

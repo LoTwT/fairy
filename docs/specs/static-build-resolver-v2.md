@@ -119,6 +119,10 @@ V2 已支持一层批量技能矩阵 builder：
 - `actionName`：原始动作前缀，如 `普通攻击`、`强化特殊技`、`终结技`
 - `skillName`：主技能名，如 `请勿抵抗`、`月辉丝`、`霜锋`
 - `qualifiers`：剩余限定词，如 `以太`、`I型`、`缠绕`
+- `templateSource`：当前行来自 `curated` 手工模板还是 `generated` 通用模板
+- `sourceSkillTypeId`：回链公开 `agent-details.json` 时使用的 `skills[].typeId`
+- `sourceStatName` / `sourceOccurrence`：回链原始 `stats[]` 时使用的字段名与同名出现序号
+- `attributeSource`：当前行属性来自 `agent-default`、全局 `context` 还是模板局部覆盖
 - `entryType`：`hit` / `total` / `extra` / `variant` / `size-variant`
 - `segmentLabel` / `segmentIndex`：段数信息，如 `三段` / `3`
 - `targetSize`：仅对 `霜锋` 这类体型分支返回 `small` / `medium` / `large`
@@ -129,6 +133,7 @@ V2 已支持一层批量技能矩阵 builder：
 - 全技能 / 全段 / 完整伤害表使用 `resolveStaticBuildSkillMatrix`
 - 技能矩阵内部仍逐行复用单场景 resolver，不维护第二套公式
 - 若当前代理人尚未收录 curated effects 或 curated matrix 模板，resolver 会在 `assumptions` 中显式说明，而不是静默补算
+- 上层需要追踪技能行来源时，优先消费 `metadata` 中的 source 字段，而不是继续解析 `label`
 
 ## 3. V2 输入 Contract
 
