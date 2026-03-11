@@ -4,9 +4,10 @@
 
 ## 1. V1 目标
 
-V1 只做一件事：
+V1 做两件事：
 
 - 把「代理人 + 音擎 + 驱动盘 + 最终面板 + 静态场景」解析成可直接输入伤害计算器的结构化参数
+- 在同一套构筑与上下文下，按预定义模板批量生成支持代理人的全技能 / 全段伤害矩阵
 
 V1 不是：
 
@@ -76,6 +77,21 @@ V1 只支持以下 3 套驱动盘：
 | 河豚电音   | `31100` | 2 / 4    |
 | 云岿如我   | `33100` | 2 / 4    |
 
+### 2.7 技能矩阵支持
+
+V1 已支持一层批量技能矩阵 builder：
+
+- 接口：`resolveStaticBuildSkillMatrix`
+- 输出：`rows[]`，每行包含 `group`、`label`、`skillTag`、`skillMultiplier` 与单次 `build` 结果
+- 覆盖范围：仅限 V1 三名支持代理人的手工模板
+- 当前技能标签与倍率提取来源：`data/zh-CN/agent-details.json`，因此矩阵行名默认返回中文标签
+
+约定：
+
+- 单场景精确计算继续使用 `resolveStaticBuildDamage`
+- 全技能 / 全段 / 完整伤害表使用 `resolveStaticBuildSkillMatrix`
+- 技能矩阵内部仍逐行复用单场景 resolver，不维护第二套公式
+
 ## 3. V1 输入 Contract
 
 ### 3.1 `loadout`
@@ -115,7 +131,7 @@ V1 的最终面板支持以下字段：
 - 若缺少 `baseAttack`，V1 不会强行估算这类效果，而是标记为未支持
 - `sheerForce` 优先用于命破 profile；若缺失，仪玄可退化为用 `hp × 0.1` 推导
 
-### 3.3 `scenario`
+### 3.3 `scenario`（单场景 resolver）
 
 最小字段：
 
@@ -140,15 +156,39 @@ V1 的最终面板支持以下字段：
   - `nonStunVulnerability`
   - `specialMultiplier`
 
-V1 采用 `skillTag` 而不是完整技能 ID，支持：
+V1 的单场景 resolver 采用 `skillTag` 而不是完整技能 ID，支持：
 
 - `basic`
 - `dash`
+- `special`
 - `enhancedSpecial`
 - `chain`
 - `ultimate`
+- `assist`
 
-### 3.4 `effectOverrides`
+约定：
+
+- V1 的一次计算只对应一个显式给定的静态场景
+- `skillMultiplier` 只表示当前这一次结算要计算的那一段/那一次命中
+
+### 3.4 `context`（技能矩阵 builder）
+
+`resolveStaticBuildSkillMatrix` 不直接接收单条 `scenario`，而是接收共享上下文：
+
+- `attribute`
+- `extraAbilityActive`
+- `combatTags`
+- `enemy`
+
+矩阵中的每一行技能模板会补上自己的：
+
+- `damageType`
+- `skillTag`
+- `skillMultiplier`
+- 可选属性覆盖
+- 可选战斗标签
+
+### 3.5 `effectOverrides`
 
 V1 支持按 `effectId` 覆盖：
 
@@ -171,6 +211,18 @@ V1 输出至少包含：
 - `trace`
 - `assumptions`
 - `unsupportedEffects`
+
+技能矩阵 builder 额外输出：
+
+- `rows`
+  - `id`
+  - `group`
+  - `label`
+  - `skillTag`
+  - `damageType`
+  - `attribute`
+  - `skillMultiplier`
+  - `build`
 
 ## 5. V1 Effect 范围
 
@@ -200,6 +252,7 @@ V1 明确不做：
 
 - 自动解析所有角色文本
 - 面板自动推导
+- 为任意代理人自动生成全技能 / 全段矩阵
 - 动态覆盖率推演
 - 时间轴触发
 - 能量、控制、回复等非伤害机制
@@ -258,6 +311,7 @@ V1 完成后必须满足：
 
 1. `zzz-data` 能独立解析 3 名支持代理人的静态构筑并输出 `damageParams`
 2. `仪玄` 能通过 profile 走 `sheer` 管线，不复用标准 `normal` 公式
-3. `zzz-agent` 能通过高层 tool 调用 resolver，而不必重新人工抽取乘区
-4. 每次计算都能给出 effect trace 与 assumptions
-5. 缺少关键输入时，系统优先显式标记 `unsupportedEffects`，而不是静默猜测
+3. `zzz-data` 能为 3 名支持代理人批量输出全技能 / 全段矩阵，并逐行复用单场景 resolver
+4. `zzz-agent` 能通过高层 tool 调用单场景 resolver 与技能矩阵 builder，而不必重新人工抽取乘区
+5. 每次计算都能给出 effect trace 与 assumptions
+6. 缺少关键输入时，系统优先显式标记 `unsupportedEffects`，而不是静默猜测

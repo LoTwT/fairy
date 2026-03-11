@@ -38,6 +38,18 @@ it("keeps screenshot summary by default", async () => {
   expect(base.includes("只有 skillMultiplier 可以直接传")).toBe(true)
   expect(base.includes("如果只有 1 位候选主C，直接继续计算")).toBe(true)
   expect(base.includes("优先调用 resolveBuildDamage")).toBe(true)
+  expect(base.includes("resolveBuildSkillMatrix")).toBe(true)
+  expect(base.includes("matrix.effectSummary")).toBe(true)
+  expect(base.includes("commonFormulaMultipliers")).toBe(true)
+  expect(base.includes("如果只是判断 V1 是否支持")).toBe(true)
+  expect(base.includes("如果高层 resolver 返回 found=false")).toBe(true)
+  expect(base.includes("基础贯穿力")).toBe(true)
+  expect(
+    base.includes(
+      "不要把一次 resolveBuildDamage 的单场景结果擅自扩写成整套技能表",
+    ),
+  ).toBe(true)
+  expect(base.includes("不要编造“影6”“核心F”之类的默认值")).toBe(true)
   expect(base.includes("禁止把驱动盘写成“圣遗物”")).toBe(true)
   expect(full.includes("图片识别指南")).toBe(true)
   expect(off.includes("截图处理摘要")).toBe(false)

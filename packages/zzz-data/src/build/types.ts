@@ -12,9 +12,11 @@ export type StaticBuildDamageType = "normal" | "sheer"
 export type StaticBuildSkillTag =
   | "basic"
   | "dash"
+  | "special"
   | "enhancedSpecial"
   | "chain"
   | "ultimate"
+  | "assist"
 
 export type StaticBuildBucket =
   | "attackPercent"
@@ -95,6 +97,22 @@ export interface ResolveStaticBuildInput {
   loadout: StaticBuildLoadoutInput
   panel: StaticBuildFinalPanelInput
   scenario: StaticBuildScenarioInput
+  effectOverrides?: StaticBuildEffectOverride[]
+}
+
+export interface StaticBuildSkillMatrixContextInput {
+  attribute?: AgentAttributeLabel
+  extraAbilityActive?: boolean
+  combatTags?: string[]
+  enemy: StaticBuildEnemyInput
+}
+
+export interface ResolveStaticBuildSkillMatrixInput {
+  mode?: StaticBuildMode
+  manualBaseMode?: StaticBuildBaseMode
+  loadout: StaticBuildLoadoutInput
+  panel: StaticBuildFinalPanelInput
+  context: StaticBuildSkillMatrixContextInput
   effectOverrides?: StaticBuildEffectOverride[]
 }
 
@@ -230,4 +248,25 @@ export interface ResolveStaticBuildResult {
   trace: StaticBuildTraceItem[]
   assumptions: string[]
   unsupportedEffects: string[]
+}
+
+export interface StaticBuildSkillMatrixRow {
+  id: string
+  group: string
+  label: string
+  skillTag: StaticBuildSkillTag
+  damageType: StaticBuildDamageType
+  attribute: AgentAttribute
+  combatTags: string[]
+  skillMultiplier: string
+  build: ResolveStaticBuildResult
+}
+
+export interface ResolveStaticBuildSkillMatrixResult {
+  profile: StaticBuildProfileResult
+  mode: StaticBuildMode
+  manualBaseMode?: StaticBuildBaseMode
+  loadout: StaticBuildResolvedLoadout
+  rows: StaticBuildSkillMatrixRow[]
+  assumptions: string[]
 }

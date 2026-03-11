@@ -670,13 +670,46 @@
 
 ---
 
-## 16. 后续讨论顺序
+## 16. 后续扩展顺序
 
-若继续推进，建议严格按以下顺序讨论：
+在 V1 已落地后，后续扩展建议仍按以下顺序推进：
 
-1. 输入 / 输出 contract
-2. effect schema
-3. pipeline profile 的热插拔规则
-4. 第一批支持范围
+1. 输入 / 输出 contract 扩展
+2. effect schema 扩展
+3. pipeline profile 的热插拔规则扩展
+4. 支持范围扩展
 
-在这些内容明确前，不建议直接进入具体实现。
+---
+
+## 17. 已落地能力与后续 TODO
+
+### 17.1 全技能 / 全段批量计算（已落地）
+
+V1 已在单场景 resolver 之上增加一层 `skill matrix builder`：
+
+1. 接口：`resolveStaticBuildSkillMatrix`
+2. 输入：`loadout + finalPanel + context + effectOverrides`
+3. 输出：`rows[]`，每行包含技能分组、标签、倍率和单次 `build` 结果
+4. 模式：与单场景 resolver 一致，支持 `baseline` / `full-buff` / `manual`
+5. 实现方式：矩阵 builder 负责按预定义模板展开技能段数，逐行复用 `resolveStaticBuildDamage`
+
+这样系统已经能区分：
+
+- 用户显式指定的单技能计算
+- 系统批量生成的全技能 / 全段概览
+
+并且批量输出仍保留：
+
+- `trace`
+- `assumptions`
+- `unsupportedEffects`
+
+因此没有退化成黑盒表格。
+
+### 17.2 后续 TODO
+
+下一阶段仍有三块工作未完成：
+
+1. 把技能矩阵从 V1 的手工支持名单扩展到更多代理人，而不是只覆盖朱鸢 / 伊芙琳 / 仪玄
+2. 给技能矩阵补更丰富的结构化元数据，例如更稳定的技能类型、段数序号、命中次数语义
+3. 在 agent 层补更明确的输出 contract 与示例，减少上层把单场景结果误写成完整技能表的风险

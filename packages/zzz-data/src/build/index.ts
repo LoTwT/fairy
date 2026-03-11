@@ -7,12 +7,15 @@ export {
   supportedStaticBuildWEngines,
 } from "./catalog.js"
 export { getStaticBuildEffectsForLoadout } from "./definitions.js"
+export { resolveStaticBuildSkillMatrix } from "./matrix.js"
 export { getStaticBuildProfile, staticBuildProfiles } from "./profiles.js"
 export { resolveStaticBuildDamage } from "./resolver.js"
 
 export type {
   ResolveStaticBuildInput,
   ResolveStaticBuildResult,
+  ResolveStaticBuildSkillMatrixInput,
+  ResolveStaticBuildSkillMatrixResult,
   StaticBuildAgentCatalogEntry,
   StaticBuildBaseMode,
   StaticBuildBucket,
@@ -31,6 +34,8 @@ export type {
   StaticBuildResolvedLoadout,
   StaticBuildResolvedPanel,
   StaticBuildScenarioInput,
+  StaticBuildSkillMatrixContextInput,
+  StaticBuildSkillMatrixRow,
   StaticBuildSkillTag,
   StaticBuildTraceItem,
 } from "./types.js"

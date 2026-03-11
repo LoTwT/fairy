@@ -39,7 +39,7 @@ pnpm run prettier   # prettier 格式化（hook 自动执行，通常无需手�
 src/mastra/
 ├── index.ts              # Mastra 实例入口
 ├── agents/
-│   └── zzz-agent.ts      # ZZZ 伤害计算 Agent（默认 glm-4.6v，7 个工具）
+│   └── zzz-agent.ts      # ZZZ 伤害计算 Agent（默认 glm-4.6v，8 个工具）
 ├── tools/zzz/
 │   ├── index.ts           # 统一导出
 │   ├── utils.ts           # loadJson / stripHtml / findBestMatch / findTopMatches
@@ -49,6 +49,7 @@ src/mastra/
 │   ├── lookup-drive-disc.ts # 驱动盘套装效果查询
 │   ├── lookup-game-mode.ts  # DA/SD/TS 游戏模式数据查询 + damageContext
 │   ├── resolve-build-damage.ts # 静态构筑高层 resolver（V1：朱鸢 / 伊芙琳 / 仪玄）
+│   ├── resolve-build-skill-matrix.ts # 静态构筑技能矩阵 resolver（全技能 / 全段 / 完整伤害表）
 │   └── calc-damage.ts    # 伤害计算（normal/sheer/anomaly/disorder）
 └── scorers/
     └── zzz-scorer.ts      # 评分器（completeness/outputFormat/multiplierAccuracy）

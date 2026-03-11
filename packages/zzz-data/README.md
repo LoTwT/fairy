@@ -90,6 +90,43 @@ const result = resolveStaticBuildDamage({
 })
 ```
 
+如果你要一次性生成代理人的全技能 / 全段伤害矩阵，使用矩阵 builder：
+
+```ts
+import { resolveStaticBuildSkillMatrix } from "zzz-data"
+
+const matrix = resolveStaticBuildSkillMatrix({
+  mode: "baseline",
+  loadout: {
+    agentId: "1241",
+    wEngineId: "14124",
+    driveDiscSets: [{ id: "31000", pieces: 4 }],
+    coreSkillLevel: 7,
+    wEngineRefinement: 1,
+  },
+  panel: {
+    attack: 3200,
+    baseAttack: 1200,
+    critRate: 0.55,
+    critDamage: 1.4,
+  },
+  context: {
+    combatTags: ["suppressionMode"],
+    enemy: {
+      defenderBaseDefense: 953,
+      defenderResistance: 0.2,
+    },
+  },
+})
+
+matrix.rows[0]
+// {
+//   label: "普通攻击·一段",
+//   skillMultiplier: "74.1%",
+//   build: { damage, resolvedBuckets, trace, ... }
+// }
+```
+
 ## 常用示例
 
 ### 术语标准化
@@ -213,7 +250,7 @@ const weaponAtk = calcWEngineBaseATK(713, 2200, 7800)
 
 - `data/en/*.json` 与 `data/zh-CN/*.json` 保留原始 display label
 - `src/terms.ts` 提供规范导出，不强行改写 raw JSON 字段
-- `src/build/` 提供第一版静态构筑解析层；当前只覆盖 `docs/specs/static-build-resolver-v1.md` 中冻结的支持范围
+- `src/build/` 提供第一版静态构筑解析层；当前同时覆盖单场景 resolver 与技能矩阵 builder，但支持对象仍冻结在 `docs/specs/static-build-resolver-v1.md`
 - `src/cleaned/` 提供不改 raw shape 的 helper layer，统一解释倍率桶、版本展示文本、默认版本选择，以及 `DA` / `SD` / `TS` 的标准化消费视图
 - `selectEncounterByEnemyName()` 在模糊匹配命中多个敌人时不会猜测，会返回候选名列表供上层继续决策
 - `buildSDDamageContext()` / `buildTSDamageContext()` 会同时保留 enemy-level `elementMultiplier` 与 side-level `sideElementMultiplier`；如果两者不一致，不在 cleaned layer 擅自合并语义
