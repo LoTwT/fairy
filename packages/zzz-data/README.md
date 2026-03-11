@@ -7,7 +7,7 @@ Zenless Zone Zero 数据与伤害计算库。
 包入口 `src/index.ts` 当前导出七类内容：
 
 - `calculator`：伤害计算函数与类型
-- `build`：静态构筑解析器、curated effect definitions 与 hot-pluggable profile
+- `build`：静态构筑解析器、动态 catalog、curated effect definitions 与 hot-pluggable profile
 - `cleaned`：不改 raw shape 的稳定 helper / 消费视图
 - `gachabase`：代理人 / 音擎 / 邦布属性计算函数与发布数据类型
 - `game-modes`：危局强袭战 / 式舆防卫战 / 阈限模拟发布数据类型
@@ -58,11 +58,13 @@ import {
 
 如果你已经有主 C 构筑、最终面板和敌人上下文，优先使用 static build resolver：
 
-当前手工支持范围：
+当前实现范围：
 
-- 代理人：`「11号」`、`艾莲`、`悠真`、`朱鸢`、`伊芙琳`、`仪玄`
-- 音擎：`硫磺石`、`深海访客`、`残心青囊`、`防暴者Ⅵ型`、`心弦夜响`、`青溟笼舍`
+- 代理人：发布数据中的全部强攻 / 命破代理人（当前 `19` 名）
+- 音擎：上述代理人的全部专属音擎（当前 `19` 把，动态生成）
 - 驱动盘：`炎狱重金属`、`雷暴重金属`、`极地重金属`、`啄木鸟电音`、`河豚电音`、`云岿如我`
+- effect definitions：仍以 curated 数据为主；未覆盖的代理人 / 音擎 / 驱动盘会在 `assumptions` 中显式提示
+- 技能矩阵：高频代理人使用 curated 模板，其余强攻 / 命破代理人回退到通用矩阵生成
 
 ```ts
 import { resolveStaticBuildDamage } from "zzz-data"

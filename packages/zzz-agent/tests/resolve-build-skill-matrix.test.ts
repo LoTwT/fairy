@@ -104,7 +104,30 @@ describe("resolveBuildSkillMatrix tool", () => {
     expect(frost?.metadata.targetSize).toBe("small")
   })
 
-  it("returns supported scope when agent is outside the V1 matrix", async () => {
+  it("returns generic matrix rows for newly supported attack agents", async () => {
+    const result = await runTool(resolveBuildSkillMatrix, {
+      agent: "猫又",
+      wEngine: "钢铁肉垫",
+      finalPanel: {
+        attack: 2800,
+        baseAttack: 1100,
+        critRate: 0.5,
+        critDamage: 1.1,
+      },
+      context: {
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    expect((result as any).matrix.rows.length).toBeGreaterThan(0)
+    expect((result as any).matrix.rows[0].label).toBe("普通攻击·一段")
+  })
+
+  it("returns supported scope when agent is outside the supported specialties", async () => {
     const result = await runTool(resolveBuildSkillMatrix, {
       agent: "安比",
       finalPanel: {

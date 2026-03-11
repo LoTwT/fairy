@@ -23,7 +23,10 @@ import {
   getStaticBuildDriveDisc,
   getStaticBuildWEngine,
 } from "./catalog.js"
-import { getStaticBuildEffectsForLoadout } from "./definitions.js"
+import {
+  getStaticBuildEffectsForLoadout,
+  hasStaticBuildEffectsForSource,
+} from "./definitions.js"
 import { getStaticBuildProfile } from "./profiles.js"
 
 function parseSkillMultiplier(value: number | string): number {
@@ -351,6 +354,23 @@ export function resolveStaticBuildDamage(
     wEngineId: wEngine?.id,
     driveDiscSets,
   })
+  if (!hasStaticBuildEffectsForSource("agent", agent.id)) {
+    assumptions.push(
+      `${agent.name} 当前未收录 curated 代理人效果，结果主要基于 finalPanel、敌人参数和已支持的公共增益`,
+    )
+  }
+  if (wEngine && !hasStaticBuildEffectsForSource("w-engine", wEngine.id)) {
+    assumptions.push(
+      `${wEngine.name} 当前未收录 curated 音擎效果，已仅按 finalPanel 面板处理`,
+    )
+  }
+  for (const set of driveDiscSets) {
+    if (!hasStaticBuildEffectsForSource("drive-disc", set.id)) {
+      assumptions.push(
+        `${set.name} ${set.pieces}件 当前未收录 curated 驱动盘效果，已仅按 finalPanel 面板处理`,
+      )
+    }
+  }
   const overrides = new Map(
     (input.effectOverrides ?? []).map((item) => [
       item.effectId,

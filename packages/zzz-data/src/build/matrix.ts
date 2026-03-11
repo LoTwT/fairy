@@ -26,6 +26,11 @@ interface SkillMatrixTemplate {
   combatTags?: string[]
 }
 
+interface GenericSkillStatItem {
+  id: string
+  name: string
+}
+
 const segmentIndexByLabel = {
   一段: 1,
   二段: 2,
@@ -186,7 +191,104 @@ function getSkillMultiplier(
   return value
 }
 
-const skillMatrixTemplates: SkillMatrixTemplate[] = [
+function isDamageStatName(name: string) {
+  return name.includes("伤害倍率")
+}
+
+function normalizeGenericStatLabel(name: string) {
+  return name
+    .replace(/伤害倍率/g, "")
+    .replace(/\[|\]/g, "")
+    .replace(/^[:：·\-]+|[:：·\-]+$/g, "")
+    .trim()
+}
+
+function inferGenericActionName(skillTypeId: string, damageIndex: number) {
+  switch (skillTypeId) {
+    case "0":
+      return "普通攻击"
+    case "1":
+      return damageIndex === 1 ? "特殊技" : "强化特殊技"
+    case "2":
+      return damageIndex === 1 ? "冲刺攻击" : "闪避"
+    case "3":
+      return damageIndex === 1 ? "连携技" : "终结技"
+    case "6":
+      return damageIndex === 1 ? "快速支援" : "支援突击"
+    default:
+      return "技能"
+  }
+}
+
+function inferGenericGroup(skillTypeId: string) {
+  switch (skillTypeId) {
+    case "0":
+      return "普通攻击"
+    case "1":
+      return "特殊技"
+    case "2":
+      return "闪避"
+    case "3":
+      return "连携技"
+    case "6":
+      return "支援技"
+    default:
+      return "技能"
+  }
+}
+
+function inferGenericSkillTag(skillTypeId: string, damageIndex: number) {
+  switch (skillTypeId) {
+    case "0":
+      return "basic" as const
+    case "1":
+      return (damageIndex === 1 ? "special" : "enhancedSpecial") as const
+    case "2":
+      return "dash" as const
+    case "3":
+      return (damageIndex === 1 ? "chain" : "ultimate") as const
+    case "6":
+      return "assist" as const
+    default:
+      return "basic" as const
+  }
+}
+
+function buildGeneratedSkillMatrixTemplates(agentId: string) {
+  const agent = getAgentDetails(agentId)
+  const templates: SkillMatrixTemplate[] = []
+
+  for (const skill of agent.skills) {
+    const occurrenceByName = new Map<string, number>()
+    let damageIndex = 0
+
+    for (const stat of skill.stats as GenericSkillStatItem[]) {
+      const currentOccurrence = (occurrenceByName.get(stat.name) ?? 0) + 1
+      occurrenceByName.set(stat.name, currentOccurrence)
+      if (!isDamageStatName(stat.name)) continue
+
+      damageIndex += 1
+      const actionName = inferGenericActionName(skill.typeId, damageIndex)
+      const normalized = normalizeGenericStatLabel(stat.name)
+      const label = normalized ? `${actionName}·${normalized}` : actionName
+
+      templates.push({
+        id: `${agentId}-${skill.typeId}-${stat.id}`,
+        agentId,
+        group: inferGenericGroup(skill.typeId),
+        label,
+        skillTypeId: Number(skill.typeId),
+        statName: stat.name,
+        occurrence: currentOccurrence,
+        skillTag: inferGenericSkillTag(skill.typeId, damageIndex),
+      })
+    }
+  }
+
+  return templates
+}
+
+const curatedSkillMatrixTemplates: SkillMatrixTemplate[] = [
   {
     id: "1041-basic-warmup-1",
     agentId: "1041",
@@ -1498,10 +1600,14 @@ export function resolveStaticBuildSkillMatrix(
     throw new RangeError(`Unsupported agentId: ${input.loadout.agentId}`)
   }
 
-  const templates = skillMatrixTemplates.filter(
+  const templates = curatedSkillMatrixTemplates.filter(
     (item) => item.agentId === agent.id,
   )
-  if (!templates.length) {
+  const resolvedTemplates =
+    templates.length > 0
+      ? templates
+      : buildGeneratedSkillMatrixTemplates(agent.id)
+  if (!resolvedTemplates.length) {
     throw new RangeError(`No skill matrix templates for agentId=${agent.id}`)
   }
 
@@ -1509,7 +1615,7 @@ export function resolveStaticBuildSkillMatrix(
   const globalCombatTags = input.context.combatTags ?? []
   const globalExtraAbilityActive = input.context.extraAbilityActive
 
-  const rows = templates.map((template, index) => {
+  const rows = resolvedTemplates.map((template, index) => {
     const skillMultiplier = getSkillMultiplier(
       template.agentId,
       template.skillTypeId,
@@ -1562,6 +1668,11 @@ export function resolveStaticBuildSkillMatrix(
   assumptions.push(
     "技能矩阵按预定义技能模板逐项调用单次 resolver 生成；若用户未额外指定状态，只使用模板自带条件与全局 context",
   )
+  if (templates.length === 0) {
+    assumptions.push(
+      `${agent.name} 当前使用通用技能矩阵模板生成，技能标签来自 stat name 归一化，未达到 curated 手工模板的展示精度`,
+    )
+  }
 
   return {
     profile: first.profile,

@@ -137,7 +137,10 @@ export interface StaticBuildAgentCatalogEntry extends StaticBuildCatalogEntry {
   profileId: StaticBuildProfileId
 }
 
-export type StaticBuildProfileId = "standard-normal" | "yixuan-sheer"
+export type StaticBuildProfileId =
+  | "standard-normal"
+  | "standard-sheer"
+  | "yixuan-sheer"
 
 export interface StaticBuildEffectCondition {
   damageTypes?: StaticBuildDamageType[]

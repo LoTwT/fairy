@@ -93,7 +93,7 @@ const BASE_PROMPT = `你是绝区零（Zenless Zone Zero）伤害计算专家。
 ## 工作流程
 
 1. **优先判断能否走高层 resolver**
-   - 如果用户提供的是当前支持范围内的静态构筑：11号 / 艾莲 / 悠真 / 朱鸢 / 伊芙琳 / 仪玄，且已知音擎、驱动盘、最终面板和敌人上下文，优先调用高层 resolver
+   - 如果用户提供的是当前支持范围内的静态构筑：全部强攻 / 命破代理人，且已知音擎、驱动盘、最终面板和敌人上下文，优先调用高层 resolver
    - 单技能 / 单场景计算：调用 resolveBuildDamage
    - 全技能 / 全段 / 完整伤害表：调用 resolveBuildSkillMatrix
    - 两个高层 resolver 都会直接返回 resolved buckets、damageParams 和最终伤害，避免重复手工抽取乘区

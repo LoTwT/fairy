@@ -117,10 +117,10 @@ packages/zzz-data/
 │   ├── types.ts            # cleaned helper 返回类型
 │   └── index.ts            # re-export
 ├── src/build/              # static build resolver（当前静态构筑解析层）
-│   ├── catalog.ts          # 当前支持的代理人 / 音擎 / 驱动盘目录与 alias
-│   ├── definitions.ts      # curated effect definitions（按当前支持范围手动维护）
-│   ├── matrix.ts           # 技能矩阵 builder（按模板批量展开全技能 / 全段并复用单场景 resolver）
-│   ├── profiles.ts         # 标准 normal profile 与仪玄 sheer profile
+│   ├── catalog.ts          # 动态 build catalog：全部强攻 / 命破代理人、专属音擎、curated 驱动盘与 alias
+│   ├── definitions.ts      # curated effect definitions（未覆盖项由 resolver 在 assumptions 中显式提示）
+│   ├── matrix.ts           # 技能矩阵 builder（curated 模板 + 通用矩阵生成，并逐行复用单场景 resolver）
+│   ├── profiles.ts         # 标准 normal profile、标准 sheer profile 与仪玄专用 sheer profile
 │   ├── resolver.ts         # finalPanel + scenario → damageParams / trace
 │   ├── types.ts            # build layer 输入输出 contract
 │   └── index.ts            # re-export
@@ -180,6 +180,7 @@ packages/zzz-agent/
 
 - [`damage-calculation.md`](../docs/specs/damage-calculation.md) — 四种伤害类型（常规/贯穿/异常/紊乱）的乘区公式、TypeScript 类型签名与参考数值
 - [`static-build-resolver.md`](../docs/specs/static-build-resolver.md) — 静态构筑解析系统设计：effect schema、输入输出 contract、热插拔乘区管线与模块划分
+- [`static-build-resolver-roadmap.md`](../docs/specs/static-build-resolver-roadmap.md) — 执行路线：当前状态、V2.1 curated coverage、V2.2 matrix metadata、V3 anomaly/disorder
 - [`static-build-resolver-v1.md`](../docs/specs/static-build-resolver-v1.md) — 第一版实现范围冻结：支持对象、bucket、profile、输入输出 contract 与验收标准
 - [`static-build-resolver-v2.md`](../docs/specs/static-build-resolver-v2.md) — 第二版实现范围：扩展支持名单与技能矩阵模板约定
 

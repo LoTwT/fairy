@@ -49,33 +49,50 @@ V2 支持：
 
 ### 2.4 支持的代理人
 
-V2 当前支持以下 6 名代理人：
+V2 当前通过动态 catalog 支持 `data/zh-CN/agents.json` 中**全部强攻 / 命破代理人**。当前共 `19` 名：
 
-| 代理人   | id     | 定位 | 默认属性    | 默认伤害类型 | 设计目的                    |
-| -------- | ------ | ---- | ----------- | ------------ | --------------------------- |
-| 「11号」 | `1041` | 强攻 | `Fire`      | `normal`     | 火力镇压 + 攻击叠层样本     |
-| 艾莲     | `1191` | 强攻 | `Ice`       | `normal`     | 冰伤 / 冲刺 / 急冻标签样本  |
-| 悠真     | `1201` | 强攻 | `Electric`  | `normal`     | dash crit / 栈层暴伤样本    |
-| 朱鸢     | `1241` | 强攻 | `Ether`     | `normal`     | 标准公式角色                |
-| 伊芙琳   | `1321` | 强攻 | `Fire`      | `normal`     | 条件效果与阈值触发角色      |
-| 仪玄     | `1371` | 命破 | `Auric Ink` | `sheer`      | 热插拔 profile / sheer 角色 |
+| 代理人          | id     | 定位 | 默认属性     | 默认伤害类型 |
+| --------------- | ------ | ---- | ------------ | ------------ |
+| 猫又            | `1021` | 强攻 | `Physical`   | `normal`     |
+| 「11号」        | `1041` | 强攻 | `Fire`       | `normal`     |
+| 伊德海莉        | `1051` | 命破 | `Ice`        | `sheer`      |
+| 可琳            | `1061` | 强攻 | `Physical`   | `normal`     |
+| 比利            | `1081` | 强攻 | `Physical`   | `normal`     |
+| 安东            | `1111` | 强攻 | `Electric`   | `normal`     |
+| 艾莲            | `1191` | 强攻 | `Ice`        | `normal`     |
+| 悠真            | `1201` | 强攻 | `Electric`   | `normal`     |
+| 朱鸢            | `1241` | 强攻 | `Ether`      | `normal`     |
+| 雨果            | `1291` | 强攻 | `Ice`        | `normal`     |
+| 奥菲丝&「鬼火」 | `1301` | 强攻 | `Fire`       | `normal`     |
+| 伊芙琳          | `1321` | 强攻 | `Fire`       | `normal`     |
+| 仪玄            | `1371` | 命破 | `Auric Ink`  | `sheer`      |
+| 零号·安比       | `1381` | 强攻 | `Electric`   | `normal`     |
+| 叶瞬光          | `1431` | 强攻 | `Honed Edge` | `normal`     |
+| 真斗            | `1441` | 命破 | `Fire`       | `sheer`      |
+| 「席德」        | `1461` | 强攻 | `Electric`   | `normal`     |
+| 般岳            | `1471` | 命破 | `Fire`       | `sheer`      |
+| 希希芙          | `1521` | 强攻 | `Electric`   | `normal`     |
+
+约定：
+
+- catalog 由发布数据动态生成，而不是手写白名单
+- 命破代理人默认走 `sheer` 管线
+- 仪玄继续使用专用 `yixuan-sheer` profile；其余命破代理人走 `standard-sheer`
 
 ### 2.5 支持的音擎
 
-V2 当前支持以下 6 把音擎：
+V2 当前通过 `data/zh-CN/agent-details.json` 中的 `exclusiveWeapon` 动态支持上述代理人的**全部专属音擎**。当前共 `19` 把：
 
-| 音擎      | id      | 对应代理人 |
-| --------- | ------- | ---------- |
-| 硫磺石    | `14104` | 「11号」   |
-| 深海访客  | `14119` | 艾莲       |
-| 残心青囊  | `14120` | 悠真       |
-| 防暴者Ⅵ型 | `14124` | 朱鸢       |
-| 心弦夜响  | `14132` | 伊芙琳     |
-| 青溟笼舍  | `14137` | 仪玄       |
+`钢铁肉垫`、`硫磺石`、`家政员`、`仿制星徽引擎`、`旋钻机-赤轴`、`深海访客`、`残心青囊`、`防暴者Ⅵ型`、`千面日陨`、`嚣枪喧焰`、`心弦夜响`、`青溟笼舍`、`牺牲洁纯`、`机巧心种`、`海妖摇篮`、`燔火胧夜`、`怒目金刚`、`云霓孤光`、`鳞齿寻踪`。
+
+约定：
+
+- 音擎支持范围跟随当前强攻 / 命破代理人的专属音擎动态变化
+- alias 仍由 `catalog.ts` 手动补强，解决全名、英文名与 slug 匹配问题
 
 ### 2.6 支持的驱动盘
 
-V2 当前支持以下 6 套驱动盘：
+V2 当前仍只支持以下 `6` 套 curated 驱动盘：
 
 | 驱动盘     | id      | 支持件数 |
 | ---------- | ------- | -------- |
@@ -92,7 +109,9 @@ V2 已支持一层批量技能矩阵 builder：
 
 - 接口：`resolveStaticBuildSkillMatrix`
 - 输出：`rows[]`，每行包含 `group`、`label`、`metadata`、`skillTag`、`skillMultiplier` 与单次 `build` 结果
-- 覆盖范围：当前 6 名支持代理人的手工模板
+- 覆盖范围：
+  - 6 名高频代理人使用 curated 手工模板
+  - 其余强攻 / 命破代理人使用基于 `agent-details.stats` 的通用矩阵生成
 - 当前技能标签与倍率提取来源：`data/zh-CN/agent-details.json`，因此矩阵行名默认返回中文标签
 
 `metadata` 用于给 UI、Agent 和上层消费方提供更稳定的结构化维度，当前包含：
@@ -110,6 +129,7 @@ V2 已支持一层批量技能矩阵 builder：
 - 单场景精确计算继续使用 `resolveStaticBuildDamage`
 - 全技能 / 全段 / 完整伤害表使用 `resolveStaticBuildSkillMatrix`
 - 技能矩阵内部仍逐行复用单场景 resolver，不维护第二套公式
+- 若当前代理人尚未收录 curated effects 或 curated matrix 模板，resolver 会在 `assumptions` 中显式说明，而不是静默补算
 
 ## 3. V2 输入 Contract
 
@@ -459,9 +479,9 @@ V2 继续只实现两个 profile：
 
 V2 完成后必须满足：
 
-1. `zzz-data` 能独立解析当前 6 名支持代理人的静态构筑并输出 `damageParams`
+1. `zzz-data` 能独立解析当前全部强攻 / 命破代理人的静态构筑并输出 `damageParams`
 2. `仪玄` 能通过 profile 走 `sheer` 管线，不复用标准 `normal` 公式
-3. `zzz-data` 能为当前 6 名支持代理人批量输出全技能 / 全段矩阵，并逐行复用单场景 resolver
+3. `zzz-data` 能为当前全部强攻 / 命破代理人批量输出全技能 / 全段矩阵，并逐行复用单场景 resolver
 4. `zzz-agent` 能通过高层 tool 调用单场景 resolver 与技能矩阵 builder，而不必重新人工抽取乘区
 5. 每次计算都能给出 effect trace 与 assumptions
 6. 缺少关键输入时，系统优先显式标记 `unsupportedEffects`，而不是静默猜测

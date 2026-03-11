@@ -98,7 +98,34 @@ describe("resolveBuildDamage tool", () => {
     )
   })
 
-  it("returns supported scope when agent is outside the V1 resolver", async () => {
+  it("supports generic attack agents in the high-level resolver", async () => {
+    const result = await runTool(resolveBuildDamage, {
+      agent: "猫又",
+      wEngine: "钢铁肉垫",
+      finalPanel: {
+        attack: 2800,
+        baseAttack: 1100,
+        critRate: 0.5,
+        critDamage: 1.1,
+      },
+      scenario: {
+        damageType: "normal",
+        skillTag: "basic",
+        skillMultiplier: "300%",
+        attribute: "物理",
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    expect((result as any).build.loadout.agent.name).toBe("猫又")
+    expect((result as any).build.loadout.wEngine.name).toBe("钢铁肉垫")
+  })
+
+  it("returns supported scope when agent is outside the supported specialties", async () => {
     const result = await runTool(resolveBuildDamage, {
       agent: "安比",
       finalPanel: {

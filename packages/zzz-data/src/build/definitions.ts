@@ -901,3 +901,14 @@ export function getStaticBuildEffectsForLoadout(loadout: {
 
   return effects
 }
+
+export function hasStaticBuildEffectsForSource(
+  sourceType: StaticBuildEffectDefinition["sourceType"],
+  sourceId: string | undefined,
+) {
+  if (!sourceId) return false
+  return staticBuildEffectDefinitions.some(
+    (effect) =>
+      effect.sourceType === sourceType && effect.sourceId === sourceId,
+  )
+}

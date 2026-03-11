@@ -7,7 +7,6 @@ import {
   supportedStaticBuildDriveDiscs,
   supportedStaticBuildWEngines,
 } from "zzz-data"
-import { findBestMatch, findTopMatches } from "./utils"
 
 interface CatalogItem {
   id: string
@@ -15,41 +14,80 @@ interface CatalogItem {
   aliases: readonly string[]
 }
 
+function normalizeCatalogValue(value: string) {
+  return value.toLowerCase().replace(/[\s\-_·・.()（）【】[\]「」]/g, "")
+}
+
+function getCatalogFields(item: CatalogItem) {
+  return [item.name, item.id, ...item.aliases].filter(Boolean)
+}
+
 function findCatalogItem<T extends CatalogItem>(
   items: readonly T[],
   query: string,
 ): T | undefined {
-  return findBestMatch([...items], query, [
-    (item) => item.name,
-    (item) => item.id,
-    (item) => item.aliases[0],
-    (item) => item.aliases[1],
-    (item) => item.aliases[2],
-  ])
+  const qLow = query.toLowerCase()
+  const qNorm = normalizeCatalogValue(query)
+
+  let bestItem: T | undefined
+  let bestScore = 0
+
+  for (const item of items) {
+    for (const field of getCatalogFields(item)) {
+      if (field.toLowerCase() === qLow) return item
+      const normalized = normalizeCatalogValue(field)
+      if (normalized === qNorm) return item
+      if (!normalized.includes(qNorm)) continue
+
+      let score = qNorm.length / normalized.length
+      if (normalized.startsWith(qNorm)) score += 1
+      if (score > bestScore) {
+        bestScore = score
+        bestItem = item
+      }
+    }
+  }
+
+  return bestScore >= 0.6 ? bestItem : undefined
 }
 
 function findCatalogCandidates<T extends CatalogItem>(
   items: readonly T[],
   query: string,
 ) {
-  return findTopMatches(
-    [...items],
-    query,
-    [
-      (item) => item.name,
-      (item) => item.id,
-      (item) => item.aliases[0],
-      (item) => item.aliases[1],
-      (item) => item.aliases[2],
-    ],
-    3,
-  )
+  const qNorm = normalizeCatalogValue(query)
+  if (!qNorm) return []
+
+  const scored: Array<{ item: T; score: number }> = []
+  for (const item of items) {
+    let bestScore = 0
+    for (const field of getCatalogFields(item)) {
+      const normalized = normalizeCatalogValue(field)
+      if (!normalized.includes(qNorm) && !qNorm.includes(normalized)) continue
+
+      let score = 0
+      if (normalized.includes(qNorm)) {
+        score = qNorm.length / normalized.length
+        if (normalized.startsWith(qNorm)) score += 1
+      } else {
+        score = normalized.length / qNorm.length
+        if (qNorm.startsWith(normalized)) score += 1
+      }
+      bestScore = Math.max(bestScore, score)
+    }
+    if (bestScore > 0) scored.push({ item, score: bestScore })
+  }
+
+  return scored
+    .sort((left, right) => right.score - left.score)
+    .slice(0, 3)
+    .map((item) => item.item)
 }
 
 export const resolveBuildDamage = createTool({
   id: "resolve-build-damage",
   description:
-    "基于 zzz-data 的静态构筑解析器直接计算伤害。当前支持：11号 / 艾莲 / 悠真 / 朱鸢 / 伊芙琳 / 仪玄，硫磺石 / 深海访客 / 残心青囊 / 防暴者Ⅵ型 / 心弦夜响 / 青溟笼舍，炎狱重金属 / 极地重金属 / 雷暴重金属 / 啄木鸟电音 / 河豚电音 / 云岿如我。",
+    "基于 zzz-data 的静态构筑解析器直接计算伤害。当前支持全部强攻/命破代理人及其专属音擎；驱动盘仍支持炎狱重金属 / 极地重金属 / 雷暴重金属 / 啄木鸟电音 / 河豚电音 / 云岿如我。",
   inputSchema: z.object({
     agent: z.string().describe("代理人名称或 ID"),
     wEngine: z.string().optional().describe("音擎名称或 ID"),
@@ -83,9 +121,11 @@ export const resolveBuildDamage = createTool({
       skillTag: z.enum([
         "basic",
         "dash",
+        "special",
         "enhancedSpecial",
         "chain",
         "ultimate",
+        "assist",
       ]),
       skillMultiplier: z.union([z.number(), z.string()]),
       attribute: z.string().optional(),

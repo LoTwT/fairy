@@ -24,6 +24,16 @@ export const staticBuildProfiles = {
     resolveBaseDamageValue: ({ panel }) => panel.attack,
     baseDamageStat: "attack",
   },
+  "standard-sheer": {
+    id: "standard-sheer",
+    name: "Standard Sheer Profile",
+    supportsDamageType: (damageType: string) => damageType === "sheer",
+    resolveBaseDamageValue: ({ panel }) => {
+      if (panel.sheerForce !== undefined) return panel.sheerForce
+      throw new RangeError("命破 profile 需要 finalPanel.sheerForce")
+    },
+    baseDamageStat: "sheerForce",
+  },
   "yixuan-sheer": {
     id: "yixuan-sheer",
     name: "Yixuan Sheer Profile",

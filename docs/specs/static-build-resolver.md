@@ -710,6 +710,6 @@
 
 下一阶段仍有三块工作未完成：
 
-1. 继续把技能矩阵从当前手工支持名单扩展到更多代理人，而不是停在 11号 / 艾莲 / 悠真 / 朱鸢 / 伊芙琳 / 仪玄
+1. 继续把 curated effect definitions 从当前高频名单扩展到更多强攻 / 命破代理人，减少 `assumptions` 中的“缺少 curated 效果定义”提示
 2. 继续把技能矩阵元数据从当前的 `actionName/skillName/qualifiers/entryType/segmentIndex` 扩到更细的命中次数语义与稳定技能分类，而不是让 UI 继续依赖 label 文本解析
 3. 把 `anomaly / disorder` 接入同一套 static build resolver，而不是长期停在 `normal / sheer`

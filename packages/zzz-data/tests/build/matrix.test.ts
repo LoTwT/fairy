@@ -168,4 +168,61 @@ describe("static build skill matrix", () => {
     const ultimate = result.rows.find((row) => row.label === "终结技·残心")
     expect(ultimate?.skillMultiplier).toBe("4619.4%")
   })
+
+  it("builds generic attack agent matrix rows when no curated template exists", () => {
+    const result = resolveStaticBuildSkillMatrix({
+      loadout: {
+        agentId: "1021",
+        wEngineId: "14102",
+      },
+      panel: {
+        attack: 2800,
+        baseAttack: 1100,
+        critRate: 0.5,
+        critDamage: 1.1,
+      },
+      context: {
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.profile.id).toBe("standard-normal")
+    expect(result.rows.length).toBeGreaterThan(0)
+    expect(result.rows[0]?.label).toBe("普通攻击·一段")
+    expect(result.rows[0]?.skillMultiplier).toBe("131.7%")
+    expect(
+      result.assumptions.some((item) => item.includes("通用技能矩阵模板生成")),
+    ).toBe(true)
+  })
+
+  it("builds generic rupture matrix rows through the standard sheer profile", () => {
+    const result = resolveStaticBuildSkillMatrix({
+      loadout: {
+        agentId: "1471",
+        wEngineId: "14147",
+      },
+      panel: {
+        attack: 2400,
+        critRate: 0.35,
+        critDamage: 1.1,
+        sheerForce: 1650,
+      },
+      context: {
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.profile.id).toBe("standard-sheer")
+    expect(result.rows.length).toBeGreaterThan(0)
+    expect(result.rows.every((row) => row.damageType === "sheer")).toBe(true)
+    expect(result.rows[0]?.build.resolvedPanel.baseDamageStat).toBe(
+      "sheerForce",
+    )
+  })
 })

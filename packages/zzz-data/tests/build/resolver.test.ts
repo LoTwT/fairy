@@ -197,4 +197,79 @@ describe("static build resolver", () => {
     expect(result.resolvedBuckets.attackPercent).toBeCloseTo(0.28, 4)
     expect(result.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.5, 4)
   })
+
+  it("supports generic attack agents with curated coverage assumptions", () => {
+    const result = resolveStaticBuildDamage({
+      loadout: {
+        agentId: "1021",
+        wEngineId: "14102",
+        driveDiscSets: [{ id: "31000", pieces: 2 }],
+      },
+      panel: {
+        attack: 2800,
+        baseAttack: 1100,
+        critRate: 0.5,
+        critDamage: 1.1,
+      },
+      scenario: {
+        damageType: "normal",
+        skillTag: "basic",
+        skillMultiplier: "300%",
+        attribute: "物理",
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.profile.id).toBe("standard-normal")
+    expect(result.loadout.agent.name).toBe("猫又")
+    expect(result.loadout.wEngine?.name).toBe("钢铁肉垫")
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("猫又 当前未收录 curated"),
+      ),
+    ).toBe(true)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("钢铁肉垫 当前未收录 curated"),
+      ),
+    ).toBe(true)
+  })
+
+  it("supports generic rupture agents through the standard sheer profile", () => {
+    const result = resolveStaticBuildDamage({
+      loadout: {
+        agentId: "1471",
+        wEngineId: "14147",
+      },
+      panel: {
+        attack: 2400,
+        critRate: 0.35,
+        critDamage: 1.1,
+        sheerForce: 1650,
+      },
+      scenario: {
+        damageType: "sheer",
+        skillTag: "enhancedSpecial",
+        skillMultiplier: "500%",
+        attribute: "火属性",
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.profile.id).toBe("standard-sheer")
+    expect(result.loadout.agent.name).toBe("般岳")
+    expect(result.resolvedPanel.baseDamageStat).toBe("sheerForce")
+    expect(result.resolvedPanel.baseDamageValue).toBe(1650)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("般岳 当前未收录 curated"),
+      ),
+    ).toBe(true)
+  })
 })
