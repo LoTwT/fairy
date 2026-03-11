@@ -122,6 +122,12 @@ const matoMoltenEdgeFireBonus = () => 0.2
 const matoHpConsumedCritDamage = () => 0.5
 const idhariLowHpBonus = () => 1
 const idhariLowHpCritDamage = () => 0.3
+const xisifuToxinCritDamage = () => 0.5
+const sidRaidFlatAttack = () => 1000
+const sidRaidCritDamage = () => 0.3
+const sidEncirclementBonus = () => 0.25
+const sidExtraBonus = () => 0.3
+const sidExtraIgnoreResistance = () => 0.25
 const yeshunguangHedaoCritRate = () => 0.3
 const yeshunguangHedaoBonus = () => 0.25
 // prettier-ignore
@@ -156,9 +162,12 @@ const qingmingSheerBonus = [0.1, 0.115, 0.13, 0.145, 0.16] as const
 const grillOwispBonus = [0.15, 0.1725, 0.195, 0.2175, 0.24] as const
 const krakenSheerBonus = [0.06, 0.07, 0.08, 0.09, 0.1] as const
 const krakenCritRate = [0.2, 0.23, 0.26, 0.29, 0.32] as const
+const fangedTraceCritRate = [0.25, 0.288, 0.325, 0.363, 0.4] as const
 const chaosfireCritRate = [0.2, 0.23, 0.26, 0.29, 0.32] as const
 const cloudcleaveIgnoreResistance = [0.2, 0.22, 0.24, 0.26, 0.28] as const
 const cloudcleaveBonus = [0.25, 0.287, 0.325, 0.362, 0.4] as const
+const machinaseedCritRate = [0.15, 0.17, 0.19, 0.21, 0.23] as const
+const machinaseedElectricBonus = [0.125, 0.145, 0.165, 0.185, 0.2] as const
 const wrathfulVajraCritRate = [0.2, 0.23, 0.26, 0.29, 0.32] as const
 const wrathfulVajraSheerBonus = [0.09, 0.1035, 0.117, 0.1305, 0.144] as const
 
@@ -414,6 +423,25 @@ export const staticBuildEffectDefinitions = [
     ],
   },
   {
+    id: "xisifu-extra-toxin-crit-damage",
+    sourceType: "agent",
+    sourceId: "1521",
+    sourceName: "希希芙",
+    label: "额外能力：毒素状态暴击伤害",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      requireExtraAbility: true,
+      combatTags: ["toxin"],
+    },
+    modifiers: [
+      {
+        bucket: "critDamage",
+        value: xisifuToxinCritDamage,
+      },
+    ],
+  },
+  {
     id: "yeshunguang-core-hedao-crit-rate",
     sourceType: "agent",
     sourceId: "1431",
@@ -521,6 +549,70 @@ export const staticBuildEffectDefinitions = [
       {
         bucket: "bonusDamageSum",
         value: () => 0.25,
+      },
+    ],
+  },
+  {
+    id: "sid-core-raid-state-flat-attack",
+    sourceType: "agent",
+    sourceId: "1461",
+    sourceName: "「席德」",
+    label: "核心被动：强袭状态攻击力与暴击伤害",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      combatTags: ["raidState"],
+    },
+    modifiers: [
+      {
+        bucket: "flatAttack",
+        value: sidRaidFlatAttack,
+      },
+      {
+        bucket: "critDamage",
+        value: sidRaidCritDamage,
+      },
+    ],
+  },
+  {
+    id: "sid-core-encirclement-bonus",
+    sourceType: "agent",
+    sourceId: "1461",
+    sourceName: "「席德」",
+    label: "核心被动：围杀状态增伤",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      combatTags: ["encirclement"],
+    },
+    modifiers: [
+      {
+        bucket: "bonusDamageSum",
+        value: sidEncirclementBonus,
+      },
+    ],
+  },
+  {
+    id: "sid-extra-basic-ultimate-bonus",
+    sourceType: "agent",
+    sourceId: "1461",
+    sourceName: "「席德」",
+    label: "额外能力：普攻/终结技增伤与无视电抗",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      requireExtraAbility: true,
+      skillTags: ["basic", "ultimate"],
+      attributes: ["Electric"],
+    },
+    modifiers: [
+      {
+        bucket: "bonusDamageSum",
+        value: sidExtraBonus,
+      },
+      {
+        bucket: "ignoreResistance",
+        value: sidExtraIgnoreResistance,
       },
     ],
   },
@@ -1383,6 +1475,43 @@ export const staticBuildEffectDefinitions = [
     ],
   },
   {
+    id: "machinaseed-crit-rate",
+    sourceType: "w-engine",
+    sourceId: "14146",
+    sourceName: "机巧心种",
+    label: "音擎被动：暴击率提升",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    modifiers: [
+      {
+        bucket: "critRate",
+        value: byRefinement(machinaseedCritRate),
+      },
+    ],
+  },
+  {
+    id: "machinaseed-basic-enhanced-electric-bonus",
+    sourceType: "w-engine",
+    sourceId: "14146",
+    sourceName: "机巧心种",
+    label: "音擎被动：普攻/强化特殊技电属性增伤层数",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    baselineStacks: 1,
+    fullBuffStacks: 2,
+    maxStacks: 2,
+    condition: {
+      attributes: ["Electric"],
+      skillTags: ["basic", "enhancedSpecial"],
+    },
+    modifiers: [
+      {
+        bucket: "bonusDamageSum",
+        value: byRefinement(machinaseedElectricBonus),
+      },
+    ],
+  },
+  {
     id: "wrathful-vajra-crit-rate",
     sourceType: "w-engine",
     sourceId: "14147",
@@ -1418,6 +1547,21 @@ export const staticBuildEffectDefinitions = [
       {
         bucket: "sheerBonusSum",
         value: byRefinement(wrathfulVajraSheerBonus),
+      },
+    ],
+  },
+  {
+    id: "fanged-trace-crit-rate",
+    sourceType: "w-engine",
+    sourceId: "14152",
+    sourceName: "鳞齿寻踪",
+    label: "音擎被动：暴击率提升",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    modifiers: [
+      {
+        bucket: "critRate",
+        value: byRefinement(fangedTraceCritRate),
       },
     ],
   },

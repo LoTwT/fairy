@@ -325,6 +325,73 @@ describe("resolveBuildDamage tool", () => {
     )
   })
 
+  it("supports Xisifu curated effects through the high-level tool", async () => {
+    const result = await runTool(resolveBuildDamage, {
+      agent: "希希芙",
+      wEngine: "鳞齿寻踪",
+      mode: "full-buff",
+      finalPanel: {
+        attack: 3200,
+        baseAttack: 1200,
+        critRate: 0.45,
+        critDamage: 1.2,
+      },
+      scenario: {
+        damageType: "normal",
+        skillTag: "basic",
+        skillMultiplier: "400%",
+        attribute: "电属性",
+        extraAbilityActive: true,
+        combatTags: ["toxin"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    expect((result as any).build.loadout.agent.name).toBe("希希芙")
+    expect((result as any).build.loadout.wEngine.name).toBe("鳞齿寻踪")
+    expect((result as any).build.resolvedPanel.critRate).toBeCloseTo(0.7, 4)
+    expect((result as any).build.resolvedPanel.critDamage).toBeCloseTo(1.7, 4)
+  })
+
+  it("supports Sid curated effects through the high-level tool", async () => {
+    const result = await runTool(resolveBuildDamage, {
+      agent: "席德",
+      wEngine: "机巧心种",
+      mode: "full-buff",
+      finalPanel: {
+        attack: 3300,
+        baseAttack: 1250,
+        critRate: 0.45,
+        critDamage: 1.2,
+      },
+      scenario: {
+        damageType: "normal",
+        skillTag: "basic",
+        skillMultiplier: "400%",
+        attribute: "电属性",
+        extraAbilityActive: true,
+        combatTags: ["raidState", "encirclement"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    expect((result as any).build.loadout.agent.name).toBe("「席德」")
+    expect((result as any).build.loadout.wEngine.name).toBe("机巧心种")
+    expect((result as any).build.resolvedPanel.attack).toBeCloseTo(4300, 4)
+    expect((result as any).build.resolvedBuckets.bonusDamageSum).toBeCloseTo(
+      0.8,
+      4,
+    )
+  })
+
   it("returns supported scope when agent is outside the supported specialties", async () => {
     const result = await runTool(resolveBuildDamage, {
       agent: "安比",

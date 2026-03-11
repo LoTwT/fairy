@@ -394,6 +394,86 @@ describe("static build skill matrix", () => {
     expect(ultimateRow?.build.resolvedPanel.critDamage).toBeCloseTo(1.45, 4)
   })
 
+  it("applies Xisifu curated effects on generic attack matrix rows", () => {
+    const result = resolveStaticBuildSkillMatrix({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1521",
+        wEngineId: "14152",
+      },
+      panel: {
+        attack: 3200,
+        baseAttack: 1200,
+        critRate: 0.45,
+        critDamage: 1.2,
+      },
+      context: {
+        extraAbilityActive: true,
+        combatTags: ["toxin"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    const basicRow = result.rows.find((row) => row.skillTag === "basic")
+    expect(basicRow?.build.resolvedBuckets.critRate).toBeCloseTo(0.25, 4)
+    expect(basicRow?.build.resolvedBuckets.critDamage).toBeCloseTo(0.5, 4)
+    expect(basicRow?.build.resolvedPanel.critRate).toBeCloseTo(0.7, 4)
+    expect(basicRow?.build.resolvedPanel.critDamage).toBeCloseTo(1.7, 4)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("希希芙 当前未收录 curated"),
+      ),
+    ).toBe(false)
+    expect(
+      result.assumptions.some((item) => item.includes("通用技能矩阵模板生成")),
+    ).toBe(true)
+  })
+
+  it("applies Sid curated effects on generic attack matrix rows", () => {
+    const result = resolveStaticBuildSkillMatrix({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1461",
+        wEngineId: "14146",
+      },
+      panel: {
+        attack: 3300,
+        baseAttack: 1250,
+        critRate: 0.45,
+        critDamage: 1.2,
+      },
+      context: {
+        extraAbilityActive: true,
+        combatTags: ["raidState", "encirclement"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    const basicRow = result.rows.find((row) => row.skillTag === "basic")
+    expect(basicRow?.build.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.8, 4)
+    expect(basicRow?.build.resolvedBuckets.ignoreResistance).toBeCloseTo(
+      0.25,
+      4,
+    )
+    expect(basicRow?.build.resolvedPanel.attack).toBeCloseTo(4300, 4)
+    expect(basicRow?.build.resolvedPanel.critRate).toBeCloseTo(0.6, 4)
+    expect(basicRow?.build.resolvedPanel.critDamage).toBeCloseTo(1.5, 4)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("「席德」 当前未收录 curated"),
+      ),
+    ).toBe(false)
+    expect(
+      result.assumptions.some((item) => item.includes("通用技能矩阵模板生成")),
+    ).toBe(true)
+  })
+
   it("builds generic rupture matrix rows through the standard sheer profile", () => {
     const result = resolveStaticBuildSkillMatrix({
       mode: "full-buff",

@@ -312,6 +312,66 @@ describe("resolveBuildSkillMatrix tool", () => {
     expect((result as any).matrix.summary.critRate).toBeCloseTo(0.75, 4)
   })
 
+  it("returns Xisifu generic attack matrix rows with curated buckets applied", async () => {
+    const result = await runTool(resolveBuildSkillMatrix, {
+      agent: "希希芙",
+      wEngine: "鳞齿寻踪",
+      mode: "full-buff",
+      finalPanel: {
+        attack: 3200,
+        baseAttack: 1200,
+        critRate: 0.45,
+        critDamage: 1.2,
+      },
+      context: {
+        extraAbilityActive: true,
+        combatTags: ["toxin"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    const basicRow = (result as any).matrix.rows.find(
+      (row: any) => row.skillTag === "basic",
+    )
+    expect(basicRow?.resolvedBuckets.critRate).toBeCloseTo(0.25, 4)
+    expect(basicRow?.resolvedBuckets.critDamage).toBeCloseTo(0.5, 4)
+    expect((result as any).matrix.summary.critRate).toBeCloseTo(0.7, 4)
+  })
+
+  it("returns Sid generic attack matrix rows with curated buckets applied", async () => {
+    const result = await runTool(resolveBuildSkillMatrix, {
+      agent: "席德",
+      wEngine: "机巧心种",
+      mode: "full-buff",
+      finalPanel: {
+        attack: 3300,
+        baseAttack: 1250,
+        critRate: 0.45,
+        critDamage: 1.2,
+      },
+      context: {
+        extraAbilityActive: true,
+        combatTags: ["raidState", "encirclement"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    const basicRow = (result as any).matrix.rows.find(
+      (row: any) => row.skillTag === "basic",
+    )
+    expect(basicRow?.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.8, 4)
+    expect(basicRow?.resolvedBuckets.ignoreResistance).toBeCloseTo(0.25, 4)
+    expect((result as any).matrix.summary.attack).toBeCloseTo(4300, 4)
+  })
+
   it("returns supported scope when agent is outside the supported specialties", async () => {
     const result = await runTool(resolveBuildSkillMatrix, {
       agent: "安比",

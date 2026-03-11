@@ -500,6 +500,95 @@ describe("static build resolver", () => {
     ).toBe(false)
   })
 
+  it("applies curated effects for Xisifu and Fanged Trace", () => {
+    const result = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1521",
+        wEngineId: "14152",
+      },
+      panel: {
+        attack: 3200,
+        baseAttack: 1200,
+        critRate: 0.45,
+        critDamage: 1.2,
+      },
+      scenario: {
+        damageType: "normal",
+        skillTag: "basic",
+        skillMultiplier: "400%",
+        attribute: "电属性",
+        extraAbilityActive: true,
+        combatTags: ["toxin"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.loadout.agent.name).toBe("希希芙")
+    expect(result.loadout.wEngine?.name).toBe("鳞齿寻踪")
+    expect(result.resolvedPanel.critRate).toBeCloseTo(0.7, 4)
+    expect(result.resolvedPanel.critDamage).toBeCloseTo(1.7, 4)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("希希芙 当前未收录 curated"),
+      ),
+    ).toBe(false)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("鳞齿寻踪 当前未收录 curated"),
+      ),
+    ).toBe(false)
+  })
+
+  it("applies curated effects for Sid and Machinaseed", () => {
+    const result = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1461",
+        wEngineId: "14146",
+      },
+      panel: {
+        attack: 3300,
+        baseAttack: 1250,
+        critRate: 0.45,
+        critDamage: 1.2,
+      },
+      scenario: {
+        damageType: "normal",
+        skillTag: "basic",
+        skillMultiplier: "400%",
+        attribute: "电属性",
+        extraAbilityActive: true,
+        combatTags: ["raidState", "encirclement"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.loadout.agent.name).toBe("「席德」")
+    expect(result.loadout.wEngine?.name).toBe("机巧心种")
+    expect(result.resolvedPanel.attack).toBeCloseTo(4300, 4)
+    expect(result.resolvedPanel.critRate).toBeCloseTo(0.6, 4)
+    expect(result.resolvedPanel.critDamage).toBeCloseTo(1.5, 4)
+    expect(result.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.8, 4)
+    expect(result.resolvedBuckets.ignoreResistance).toBeCloseTo(0.25, 4)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("「席德」 当前未收录 curated"),
+      ),
+    ).toBe(false)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("机巧心种 当前未收录 curated"),
+      ),
+    ).toBe(false)
+  })
+
   it("supports non-signature w-engines when specialties are compatible", () => {
     const result = resolveStaticBuildDamage({
       loadout: {
