@@ -314,6 +314,11 @@ export function resolveStaticBuildDamage(
   if (input.loadout.wEngineId && !wEngine) {
     throw new RangeError(`Unsupported wEngineId: ${input.loadout.wEngineId}`)
   }
+  if (wEngine && wEngine.specialty !== agent.specialty) {
+    throw new RangeError(
+      `${wEngine.name} specialty=${wEngine.specialty} is incompatible with ${agent.name} specialty=${agent.specialty}`,
+    )
+  }
 
   const driveDiscSets = (input.loadout.driveDiscSets ?? []).map((set) => {
     const disc = getStaticBuildDriveDisc(set.id)

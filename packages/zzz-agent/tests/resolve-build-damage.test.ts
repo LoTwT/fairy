@@ -101,7 +101,7 @@ describe("resolveBuildDamage tool", () => {
   it("supports generic attack agents in the high-level resolver", async () => {
     const result = await runTool(resolveBuildDamage, {
       agent: "猫又",
-      wEngine: "钢铁肉垫",
+      wEngine: "加农转子",
       finalPanel: {
         attack: 2800,
         baseAttack: 1100,
@@ -122,7 +122,7 @@ describe("resolveBuildDamage tool", () => {
 
     expect((result as any).found).toBe(true)
     expect((result as any).build.loadout.agent.name).toBe("猫又")
-    expect((result as any).build.loadout.wEngine.name).toBe("钢铁肉垫")
+    expect((result as any).build.loadout.wEngine.name).toBe("加农转子")
   })
 
   it("supports Zero Anby curated effects through aliases", async () => {
@@ -180,5 +180,33 @@ describe("resolveBuildDamage tool", () => {
 
     expect((result as any).found).toBe(false)
     expect((result as any).supportedAgents).toContain("朱鸢")
+  })
+
+  it("rejects w-engines whose specialty is incompatible with the agent", async () => {
+    const result = await runTool(resolveBuildDamage, {
+      agent: "猫又",
+      wEngine: "青溟笼舍",
+      finalPanel: {
+        attack: 2800,
+        baseAttack: 1100,
+        critRate: 0.5,
+        critDamage: 1.1,
+      },
+      scenario: {
+        damageType: "normal",
+        skillTag: "basic",
+        skillMultiplier: "300%",
+        attribute: "物理",
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(false)
+    expect((result as any).message).toContain("无法使用")
+    expect((result as any).supportedWEngines).toContain("加农转子")
+    expect((result as any).supportedWEngines).not.toContain("青溟笼舍")
   })
 })

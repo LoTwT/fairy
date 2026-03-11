@@ -22,7 +22,7 @@
 当前工作树对应的 resolver 状态如下：
 
 - 已支持全部强攻 / 命破代理人
-- 音擎支持范围当前仍按这些代理人的专属音擎集合构建
+- 已支持全部强攻 / 命破音擎，并按 specialty 做兼容校验
 - 驱动盘仍限定为当前 `6` 套 curated 列表
 - 已支持：
   - 单场景静态构筑解析 `resolveStaticBuildDamage`
@@ -48,7 +48,8 @@
 
 - 已开始 `V2.1`
 - 第一批 curated coverage：`猫又 / 钢铁肉垫`、`零号·安比 / 牺牲洁纯`
-- 下一步先做 support catalog 解耦，再继续后续 curated coverage 批次
+- support catalog 解耦已完成
+- 下一步继续后续 curated coverage 批次
 
 ## 2. 阶段划分
 
@@ -93,12 +94,12 @@
 
 优先顺序固定如下：
 
-1. support catalog 解耦
+1. support catalog 解耦（已完成）
 2. 再按“已支持但当前 assumptions 价值最高”的代理人推进 curated coverage
 
 #### 3.3.1 support catalog 解耦
 
-先完成以下改造：
+本轮已完成以下改造：
 
 1. `supportedStaticBuildWEngines` 不再从代理人 `exclusiveWeapon` 派生
 2. 改为从公开 `w-engines.json` 独立构建，并按特性筛选
@@ -106,7 +107,7 @@
 4. 高层 tool 文案、supported scope 返回值、README 示例同步更新
 5. 不在这一轮顺带扩更多 effect definition
 
-完成这一轮后，再继续下面的 curated coverage 队列。
+后续继续下面的 curated coverage 队列。
 
 #### 3.3.2 curated coverage 队列
 

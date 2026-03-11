@@ -178,4 +178,28 @@ describe("resolveBuildSkillMatrix tool", () => {
     expect((result as any).found).toBe(false)
     expect((result as any).supportedAgents).toContain("朱鸢")
   })
+
+  it("rejects incompatible specialty w-engines before building the matrix", async () => {
+    const result = await runTool(resolveBuildSkillMatrix, {
+      agent: "猫又",
+      wEngine: "青溟笼舍",
+      finalPanel: {
+        attack: 2800,
+        baseAttack: 1100,
+        critRate: 0.5,
+        critDamage: 1.1,
+      },
+      context: {
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(false)
+    expect((result as any).message).toContain("无法使用")
+    expect((result as any).supportedWEngines).toContain("加农转子")
+    expect((result as any).supportedWEngines).not.toContain("青溟笼舍")
+  })
 })

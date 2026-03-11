@@ -2,6 +2,7 @@ import type { AgentAttributeLabel } from "zzz-data"
 import { createTool } from "@mastra/core/tools"
 import { z } from "zod"
 import {
+  getCompatibleStaticBuildWEngines,
   resolveStaticBuildSkillMatrix,
   supportedStaticBuildAgents,
   supportedStaticBuildDriveDiscs,
@@ -13,6 +14,15 @@ interface CatalogItem {
   name: string
   aliases: readonly string[]
 }
+
+const specialtyLabels = {
+  Attack: "强攻",
+  Stun: "击破",
+  Anomaly: "异常",
+  Support: "支援",
+  Defense: "防护",
+  Rupture: "命破",
+} as const
 
 function normalizeCatalogValue(value: string) {
   return value.toLowerCase().replace(/[\s\-_·・.()（）【】[\]「」]/g, "")
@@ -312,7 +322,7 @@ function compactMatrix(
 export const resolveBuildSkillMatrix = createTool({
   id: "resolve-build-skill-matrix",
   description:
-    "基于 zzz-data 的静态构筑解析器批量计算全技能/全段伤害矩阵。当前支持全部强攻/命破代理人及其专属音擎；驱动盘仍支持炎狱重金属 / 极地重金属 / 雷暴重金属 / 啄木鸟电音 / 河豚电音 / 云岿如我。",
+    "基于 zzz-data 的静态构筑解析器批量计算全技能/全段伤害矩阵。当前支持全部强攻/命破代理人，以及对应特性的强攻/命破音擎；驱动盘仍支持炎狱重金属 / 极地重金属 / 雷暴重金属 / 啄木鸟电音 / 河豚电音 / 云岿如我。",
   inputSchema: z.object({
     agent: z.string().describe("代理人名称或 ID"),
     wEngine: z.string().optional().describe("音擎名称或 ID"),
@@ -396,14 +406,29 @@ export const resolveBuildSkillMatrix = createTool({
       ? findCatalogItem(supportedStaticBuildWEngines, input.wEngine)
       : undefined
     if (input.wEngine && !wEngine) {
+      const compatibleWEngines = getCompatibleStaticBuildWEngines(
+        agent.specialty,
+      )
       return {
         found: false,
         message: `当前 skill matrix 暂不支持音擎「${input.wEngine}」`,
-        supportedWEngines: supportedStaticBuildWEngines.map(
-          (item) => item.name,
-        ),
+        supportedWEngines: compatibleWEngines.map((item) => item.name),
         candidates: findCatalogCandidates(
-          supportedStaticBuildWEngines,
+          compatibleWEngines,
+          input.wEngine,
+        ).map((item) => item.name),
+      }
+    }
+    if (wEngine && wEngine.specialty !== agent.specialty) {
+      const compatibleWEngines = getCompatibleStaticBuildWEngines(
+        agent.specialty,
+      )
+      return {
+        found: false,
+        message: `${agent.name} 为 ${specialtyLabels[agent.specialty]}代理人，无法使用 ${wEngine.name}（${specialtyLabels[wEngine.specialty]}音擎）`,
+        supportedWEngines: compatibleWEngines.map((item) => item.name),
+        candidates: findCatalogCandidates(
+          compatibleWEngines,
           input.wEngine,
         ).map((item) => item.name),
       }

@@ -117,7 +117,7 @@ packages/zzz-data/
 │   ├── types.ts            # cleaned helper 返回类型
 │   └── index.ts            # re-export
 ├── src/build/              # static build resolver（当前静态构筑解析层）
-│   ├── catalog.ts          # 动态 build catalog：全部强攻 / 命破代理人、专属音擎、curated 驱动盘与 alias
+│   ├── catalog.ts          # 动态 build catalog：全部强攻 / 命破代理人、全部强攻/命破音擎、curated 驱动盘与 alias
 │   ├── definitions.ts      # curated effect definitions（未覆盖项由 resolver 在 assumptions 中显式提示）
 │   ├── matrix.ts           # 技能矩阵 builder（curated 模板 + 通用矩阵生成，并逐行复用单场景 resolver）
 │   ├── profiles.ts         # 标准 normal profile、标准 sheer profile 与仪玄专用 sheer profile
@@ -210,7 +210,7 @@ const total = base * bonus * crit * resistance * custom
 - 音擎属性：`calcWEngineBaseATK(baseVal, lvBaseStatGrowth, starBaseStatGrowth)`、`calcWEngineSecondaryStat(baseValue, starAdvancedStatGrowth)`
 - gachabase 类型：`AgentListItem`、`AgentDetails`、`WEngineListItem`、`WEngineDetails`、`BangbooItem`、`DriveDiscItem` 等
 - 游戏模式类型：`BuffsJson`、`DeadlyAssaultJson`、`ShiyuDefenseJson`、`ThresholdSimulationJson`
-- static build resolver：`resolveStaticBuildDamage()`、`resolveStaticBuildSkillMatrix()`、`supportedStaticBuildAgents`、`supportedStaticBuildWEngines`、`supportedStaticBuildDriveDiscs`、`getStaticBuildAgent()`、`getStaticBuildWEngine()`、`getStaticBuildDriveDisc()`、`getStaticBuildEffectsForLoadout()`、`getStaticBuildProfile()`、`staticBuildProfiles`
+- static build resolver：`resolveStaticBuildDamage()`、`resolveStaticBuildSkillMatrix()`、`supportedStaticBuildAgents`、`supportedStaticBuildWEngines`、`supportedStaticBuildDriveDiscs`、`getStaticBuildAgent()`、`getStaticBuildWEngine()`、`getCompatibleStaticBuildWEngines()`、`getStaticBuildDriveDisc()`、`getStaticBuildEffectsForLoadout()`、`getStaticBuildProfile()`、`staticBuildProfiles`
 - static build 类型：`ResolveStaticBuildInput`、`ResolveStaticBuildResult`、`ResolveStaticBuildSkillMatrixInput`、`ResolveStaticBuildSkillMatrixResult`、`StaticBuildMode`、`StaticBuildScenarioInput`、`StaticBuildSkillMatrixContextInput`、`StaticBuildSkillMatrixRow`、`StaticBuildSkillMatrixRowMeta`、`StaticBuildSkillMatrixEntryType`、`StaticBuildTargetSize`、`StaticBuildResolvedBuckets`、`StaticBuildTraceItem`
 - cleaned helper：`toElementMultiplierMap()`、`getEnemyElementMultiplier()`、`buildEnemyDamageContext()`、`selectEncounterByEnemyName()`、`buildEncounterDamageContext()`、`analyzeVersionPeriod()`、`findDAVersion()`、`findSDMode()`、`resolveSDModeName()`、`getDefaultSDMode()`、`selectSDMode()`、`findSDVersion()`、`findTSMode()`、`resolveTSModeName()`、`getDefaultTSMode()`、`selectTSMode()`、`findTSVersion()`、`getLatestDAVersion()`、`getLatestSDVersion()`、`getLatestTSVersion()`、`toDABuffView()`、`getDABuffViews()`、`flattenDAEnemies()`、`selectDAEnemy()`、`buildDADamageContext()`、`findDAVersionsByEnemyName()`、`toSDNodeViews()`、`flattenSDEnemies()`、`selectSDEnemy()`、`buildSDDamageContext()`、`findSDVersionsByEnemyName()`、`toTSNodeViews()`、`flattenTSEnemies()`、`selectTSEnemy()`、`buildTSDamageContext()`、`findTSVersionsByEnemyName()`
 - cleaned 类型：`ElementMultiplierMap`、`EnemyDamageContext`、`EncounterSelectionResult`、`EncounterDamageContext`、`VersionPeriodInfo`、`DABuffView`、`DAEnemyView`、`SDNodeView`、`SDSideView`、`TSNodeView`、`TSSideView`、`TSFlattenedEnemyView`

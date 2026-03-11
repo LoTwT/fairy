@@ -282,6 +282,66 @@ describe("static build resolver", () => {
     ).toBe(false)
   })
 
+  it("supports non-signature w-engines when specialties are compatible", () => {
+    const result = resolveStaticBuildDamage({
+      loadout: {
+        agentId: "1021",
+        wEngineId: "14001",
+      },
+      panel: {
+        attack: 2800,
+        baseAttack: 1100,
+        critRate: 0.5,
+        critDamage: 1.1,
+      },
+      scenario: {
+        damageType: "normal",
+        skillTag: "basic",
+        skillMultiplier: "300%",
+        attribute: "物理",
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.loadout.agent.name).toBe("猫又")
+    expect(result.loadout.wEngine?.name).toBe("加农转子")
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("加农转子 当前未收录 curated 音擎效果"),
+      ),
+    ).toBe(true)
+  })
+
+  it("rejects incompatible w-engine specialties", () => {
+    expect(() =>
+      resolveStaticBuildDamage({
+        loadout: {
+          agentId: "1021",
+          wEngineId: "14137",
+        },
+        panel: {
+          attack: 2800,
+          baseAttack: 1100,
+          critRate: 0.5,
+          critDamage: 1.1,
+        },
+        scenario: {
+          damageType: "normal",
+          skillTag: "basic",
+          skillMultiplier: "300%",
+          attribute: "物理",
+          enemy: {
+            defenderBaseDefense: 953,
+            defenderResistance: 0.2,
+          },
+        },
+      }),
+    ).toThrow(/incompatible/)
+  })
+
   it("supports generic rupture agents through the standard sheer profile", () => {
     const result = resolveStaticBuildDamage({
       loadout: {

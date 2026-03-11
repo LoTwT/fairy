@@ -3,7 +3,11 @@ import type {
   NormalDamageParams,
   SheerDamageParams,
 } from "../calculator/types.js"
-import type { AgentAttribute, AgentAttributeLabel } from "../terms.js"
+import type {
+  AgentAttribute,
+  AgentAttributeLabel,
+  AgentSpecialty,
+} from "../terms.js"
 
 export type StaticBuildMode = "baseline" | "full-buff" | "manual"
 export type StaticBuildBaseMode = Exclude<StaticBuildMode, "manual">
@@ -132,9 +136,14 @@ export interface StaticBuildCatalogEntry {
 }
 
 export interface StaticBuildAgentCatalogEntry extends StaticBuildCatalogEntry {
+  specialty: AgentSpecialty
   defaultAttribute: AgentAttribute
   defaultDamageType: StaticBuildDamageType
   profileId: StaticBuildProfileId
+}
+
+export interface StaticBuildWEngineCatalogEntry extends StaticBuildCatalogEntry {
+  specialty: AgentSpecialty
 }
 
 export type StaticBuildProfileId =
@@ -234,7 +243,7 @@ export interface StaticBuildProfileResult {
 
 export interface StaticBuildResolvedLoadout {
   agent: StaticBuildAgentCatalogEntry
-  wEngine?: StaticBuildCatalogEntry
+  wEngine?: StaticBuildWEngineCatalogEntry
   driveDiscSets: Array<
     StaticBuildCatalogEntry & {
       pieces: 2 | 4

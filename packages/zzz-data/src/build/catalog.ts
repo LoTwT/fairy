@@ -1,10 +1,11 @@
 import type {
   StaticBuildAgentCatalogEntry,
   StaticBuildCatalogEntry,
+  StaticBuildWEngineCatalogEntry,
 } from "./types.js"
-import agentDetailsZh from "../../data/zh-CN/agent-details.json"
 import agentsZh from "../../data/zh-CN/agents.json"
-import { toAgentAttribute } from "../terms.js"
+import wEnginesZh from "../../data/zh-CN/w-engines.json"
+import { toAgentAttribute, toAgentSpecialty } from "../terms.js"
 
 interface AgentListSourceItem {
   id: string
@@ -14,16 +15,14 @@ interface AgentListSourceItem {
   attributes: string[]
 }
 
-interface AgentDetailSourceItem {
+interface WEngineListSourceItem {
   id: string
-  exclusiveWeapon?: {
-    id: string
-    slug: string
-    name: string
-  } | null
+  slug: string
+  name: string
+  specialty: { id: string; name: string }
 }
 
-const supportedSpecialties = new Set(["强攻", "命破"])
+const supportedSpecialties = new Set(["Attack", "Rupture"])
 
 const agentAliasOverrides: Record<string, string[]> = {
   "1041": ["11号", "soldier11", "soldier 11"],
@@ -56,12 +55,10 @@ function slugAliases(slug: string) {
 }
 
 const supportedAgentSources = (agentsZh as AgentListSourceItem[])
-  .filter((item) => supportedSpecialties.has(item.specialty))
+  .filter((item) =>
+    supportedSpecialties.has(toAgentSpecialty(item.specialty) ?? ""),
+  )
   .sort((left, right) => Number(left.id) - Number(right.id))
-
-const detailByAgentId = new Map(
-  (agentDetailsZh as AgentDetailSourceItem[]).map((item) => [item.id, item]),
-)
 
 export const supportedStaticBuildAgents = supportedAgentSources.map((item) => {
   const defaultAttribute = toAgentAttribute(item.attributes[0])
@@ -71,7 +68,14 @@ export const supportedStaticBuildAgents = supportedAgentSources.map((item) => {
     )
   }
 
-  const isRupture = item.specialty === "命破"
+  const specialty = toAgentSpecialty(item.specialty)
+  if (!specialty) {
+    throw new RangeError(
+      `Unsupported specialty ${item.specialty} for agentId=${item.id}`,
+    )
+  }
+
+  const isRupture = specialty === "Rupture"
   const profileId =
     item.id === "1371"
       ? "yixuan-sheer"
@@ -82,6 +86,7 @@ export const supportedStaticBuildAgents = supportedAgentSources.map((item) => {
   return {
     id: item.id,
     name: item.name,
+    specialty,
     aliases: unique([
       compactNameAlias(item.name),
       ...slugAliases(item.slug),
@@ -93,22 +98,35 @@ export const supportedStaticBuildAgents = supportedAgentSources.map((item) => {
   }
 }) satisfies StaticBuildAgentCatalogEntry[]
 
-export const supportedStaticBuildWEngines = supportedAgentSources
-  .map((agent) => detailByAgentId.get(agent.id)?.exclusiveWeapon)
+export const supportedStaticBuildWEngines = (
+  wEnginesZh as WEngineListSourceItem[]
+)
+  .map((item) => {
+    const specialty = toAgentSpecialty(item.specialty.name)
+    if (!specialty) return undefined
+    return {
+      ...item,
+      specialty,
+    }
+  })
   .filter(
-    (item): item is NonNullable<AgentDetailSourceItem["exclusiveWeapon"]> =>
-      Boolean(item?.id && item.name && item.slug),
+    (
+      item,
+    ): item is WEngineListSourceItem & {
+      specialty: StaticBuildWEngineCatalogEntry["specialty"]
+    } => Boolean(item && supportedSpecialties.has(item.specialty)),
   )
   .sort((left, right) => Number(left.id) - Number(right.id))
   .map((item) => ({
     id: item.id,
     name: item.name,
+    specialty: item.specialty,
     aliases: unique([
       compactNameAlias(item.name),
       ...slugAliases(item.slug),
       ...(wEngineAliasOverrides[item.id] ?? []),
     ]),
-  })) satisfies StaticBuildCatalogEntry[]
+  })) satisfies StaticBuildWEngineCatalogEntry[]
 
 export const supportedStaticBuildDriveDiscs = [
   {
@@ -151,9 +169,17 @@ export function getStaticBuildAgent(
 
 export function getStaticBuildWEngine(
   id: string | undefined,
-): StaticBuildCatalogEntry | undefined {
+): StaticBuildWEngineCatalogEntry | undefined {
   if (!id) return undefined
   return supportedStaticBuildWEngines.find((item) => item.id === id)
+}
+
+export function getCompatibleStaticBuildWEngines(
+  specialty: StaticBuildAgentCatalogEntry["specialty"],
+) {
+  return supportedStaticBuildWEngines.filter(
+    (item) => item.specialty === specialty,
+  )
 }
 
 export function getStaticBuildDriveDisc(

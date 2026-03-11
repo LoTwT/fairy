@@ -1,4 +1,5 @@
 export {
+  getCompatibleStaticBuildWEngines,
   getStaticBuildAgent,
   getStaticBuildDriveDisc,
   getStaticBuildWEngine,
@@ -41,4 +42,5 @@ export type {
   StaticBuildSkillTag,
   StaticBuildTargetSize,
   StaticBuildTraceItem,
+  StaticBuildWEngineCatalogEntry,
 } from "./types.js"
