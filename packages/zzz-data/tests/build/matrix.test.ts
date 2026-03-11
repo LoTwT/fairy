@@ -72,4 +72,71 @@ describe("static build skill matrix", () => {
     expect(ultimate?.skillMultiplier).toBe("4380.9%")
     expect(ultimate?.build.resolvedPanel.baseDamageStat).toBe("sheerForce")
   })
+
+  it("builds Ellen full skill matrix rows", () => {
+    const result = resolveStaticBuildSkillMatrix({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1191",
+        wEngineId: "14119",
+        driveDiscSets: [{ id: "32500", pieces: 4 }],
+        coreSkillLevel: 7,
+        wEngineRefinement: 1,
+      },
+      panel: {
+        attack: 3200,
+        baseAttack: 1200,
+        critRate: 0.55,
+        critDamage: 1.4,
+      },
+      context: {
+        combatTags: ["frozenTarget"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.profile.id).toBe("standard-normal")
+    expect(result.rows).toHaveLength(24)
+    expect(result.rows[0]?.label).toBe("普通攻击·利齿修剪法·一段")
+
+    const ultimate = result.rows.find((row) => row.label === "终结技·永冬狂宴")
+    expect(ultimate?.skillMultiplier).toBe("4469.3%")
+    expect(ultimate?.build.damage.expected.total).toBeGreaterThan(0)
+  })
+
+  it("builds Harumasa matrix rows with dash slash tags", () => {
+    const result = resolveStaticBuildSkillMatrix({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1201",
+        wEngineId: "14120",
+        driveDiscSets: [{ id: "32400", pieces: 4 }],
+        coreSkillLevel: 7,
+        wEngineRefinement: 1,
+      },
+      panel: {
+        attack: 3000,
+        baseAttack: 1200,
+        critRate: 0.4,
+        critDamage: 1.2,
+      },
+      context: {
+        combatTags: ["shockedTarget"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.rows).toHaveLength(22)
+    const slash = result.rows.find((row) => row.id === "1201-dash-slash-1")
+    expect(slash?.skillMultiplier).toBe("384.3%")
+    expect(slash?.combatTags).toContain("harumasaSharpness")
+    const ultimate = result.rows.find((row) => row.label === "终结技·残心")
+    expect(ultimate?.skillMultiplier).toBe("4619.4%")
+  })
 })

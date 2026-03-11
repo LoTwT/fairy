@@ -65,6 +65,39 @@ describe("resolveBuildDamage tool", () => {
     expect((result as any).build.damage.expected.total).toBeGreaterThan(0)
   })
 
+  it("supports Soldier 11 aliases through the high-level tool", async () => {
+    const result = await runTool(resolveBuildDamage, {
+      agent: "soldier 11",
+      wEngine: "硫磺石",
+      driveDiscs: [{ name: "炎狱重金属", pieces: 4 }],
+      mode: "full-buff",
+      finalPanel: {
+        attack: 3100,
+        baseAttack: 1100,
+        critRate: 0.5,
+        critDamage: 1.2,
+      },
+      scenario: {
+        damageType: "normal",
+        skillTag: "basic",
+        skillMultiplier: "500%",
+        attribute: "火属性",
+        combatTags: ["fireSuppression", "burningTarget"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    expect((result as any).build.loadout.agent.name).toBe("「11号」")
+    expect((result as any).build.resolvedBuckets.attackPercent).toBeCloseTo(
+      0.28,
+      4,
+    )
+  })
+
   it("returns supported scope when agent is outside the V1 resolver", async () => {
     const result = await runTool(resolveBuildDamage, {
       agent: "安比",

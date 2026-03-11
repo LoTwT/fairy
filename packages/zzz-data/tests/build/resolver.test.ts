@@ -124,4 +124,77 @@ describe("static build resolver", () => {
       result.assumptions.some((item) => item.includes("生命值 × 0.1")),
     ).toBe(true)
   })
+
+  it("resolves Soldier 11 fire-suppression build", () => {
+    const result = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1041",
+        wEngineId: "14104",
+        driveDiscSets: [{ id: "32200", pieces: 4 }],
+        coreSkillLevel: 7,
+        wEngineRefinement: 1,
+      },
+      panel: {
+        attack: 3100,
+        baseAttack: 1100,
+        critRate: 0.5,
+        critDamage: 1.2,
+      },
+      scenario: {
+        damageType: "normal",
+        skillTag: "basic",
+        skillMultiplier: "500%",
+        attribute: "火属性",
+        combatTags: ["fireSuppression", "burningTarget"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.profile.id).toBe("standard-normal")
+    expect(result.loadout.agent.name).toBe("「11号」")
+    expect(result.resolvedBuckets.attackPercent).toBeCloseTo(0.28, 4)
+    expect(result.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.8, 4)
+    expect(result.resolvedBuckets.critRate).toBeCloseTo(0.28, 4)
+    expect(result.resolvedPanel.attack).toBeCloseTo(3408, 4)
+  })
+
+  it("resolves Harumasa dash crit profile", () => {
+    const result = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1201",
+        wEngineId: "14120",
+        driveDiscSets: [{ id: "32400", pieces: 4 }],
+        coreSkillLevel: 7,
+        wEngineRefinement: 1,
+      },
+      panel: {
+        attack: 3000,
+        baseAttack: 1200,
+        critRate: 0.4,
+        critDamage: 1.2,
+      },
+      scenario: {
+        damageType: "normal",
+        skillTag: "dash",
+        skillMultiplier: "400%",
+        attribute: "电属性",
+        combatTags: ["harumasaSharpness", "shockedTarget"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.loadout.agent.name).toBe("悠真")
+    expect(result.resolvedPanel.critRate).toBeCloseTo(0.85, 4)
+    expect(result.resolvedPanel.critDamage).toBeCloseTo(1.92, 4)
+    expect(result.resolvedBuckets.attackPercent).toBeCloseTo(0.28, 4)
+    expect(result.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.5, 4)
+  })
 })

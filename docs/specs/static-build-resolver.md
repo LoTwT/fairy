@@ -672,7 +672,7 @@
 
 ## 16. 后续扩展顺序
 
-在 V1 已落地后，后续扩展建议仍按以下顺序推进：
+在 V2 已落地后，后续扩展建议仍按以下顺序推进：
 
 1. 输入 / 输出 contract 扩展
 2. effect schema 扩展
@@ -685,7 +685,7 @@
 
 ### 17.1 全技能 / 全段批量计算（已落地）
 
-V1 已在单场景 resolver 之上增加一层 `skill matrix builder`：
+当前实现已在单场景 resolver 之上增加一层 `skill matrix builder`：
 
 1. 接口：`resolveStaticBuildSkillMatrix`
 2. 输入：`loadout + finalPanel + context + effectOverrides`
@@ -710,6 +710,6 @@ V1 已在单场景 resolver 之上增加一层 `skill matrix builder`：
 
 下一阶段仍有三块工作未完成：
 
-1. 把技能矩阵从 V1 的手工支持名单扩展到更多代理人，而不是只覆盖朱鸢 / 伊芙琳 / 仪玄
+1. 继续把技能矩阵从当前手工支持名单扩展到更多代理人，而不是停在 11号 / 艾莲 / 悠真 / 朱鸢 / 伊芙琳 / 仪玄
 2. 给技能矩阵补更丰富的结构化元数据，例如更稳定的技能类型、段数序号、命中次数语义
 3. 在 agent 层补更明确的输出 contract 与示例，减少上层把单场景结果误写成完整技能表的风险

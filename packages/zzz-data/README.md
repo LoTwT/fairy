@@ -58,6 +58,12 @@ import {
 
 如果你已经有主 C 构筑、最终面板和敌人上下文，优先使用 static build resolver：
 
+当前手工支持范围：
+
+- 代理人：`「11号」`、`艾莲`、`悠真`、`朱鸢`、`伊芙琳`、`仪玄`
+- 音擎：`硫磺石`、`深海访客`、`残心青囊`、`防暴者Ⅵ型`、`心弦夜响`、`青溟笼舍`
+- 驱动盘：`炎狱重金属`、`雷暴重金属`、`极地重金属`、`啄木鸟电音`、`河豚电音`、`云岿如我`
+
 ```ts
 import { resolveStaticBuildDamage } from "zzz-data"
 
@@ -154,7 +160,7 @@ const table = matrix.rows.map((row) => ({
 }))
 ```
 
-如果你在应用层需要先判断 V1 是否支持某个构筑，不要直接 `try/catch` 所有 resolver 错误，先用 catalog helper 探测：
+如果你在应用层需要先判断当前 resolver 是否支持某个构筑，不要直接 `try/catch` 所有 resolver 错误，先用 catalog helper 探测：
 
 ```ts
 import {
@@ -173,7 +179,7 @@ const supportedWEngines = supportedStaticBuildWEngines.map((item) => item.name)
 推荐约定：
 
 - 支持范围内：直接调用 `resolveStaticBuildDamage` 或 `resolveStaticBuildSkillMatrix`
-- 支持范围外：先向用户说明当前 V1 不支持，再决定是否回退到旧路径估算
+- 支持范围外：先向用户说明当前不支持，再决定是否回退到旧路径估算
 
 ## 常用示例
 

@@ -5,6 +5,30 @@ import type {
 
 export const supportedStaticBuildAgents = [
   {
+    id: "1041",
+    name: "「11号」",
+    aliases: ["11号", "soldier 11", "soldier-11", "soldier11"],
+    defaultAttribute: "Fire",
+    defaultDamageType: "normal",
+    profileId: "standard-normal",
+  },
+  {
+    id: "1191",
+    name: "艾莲",
+    aliases: ["艾莲·乔", "ellen", "ellen joe"],
+    defaultAttribute: "Ice",
+    defaultDamageType: "normal",
+    profileId: "standard-normal",
+  },
+  {
+    id: "1201",
+    name: "悠真",
+    aliases: ["浅羽悠真", "浅羽 悠真", "harumasa", "asaba harumasa"],
+    defaultAttribute: "Electric",
+    defaultDamageType: "normal",
+    profileId: "standard-normal",
+  },
+  {
     id: "1241",
     name: "朱鸢",
     aliases: ["zhuyuan", "zhu-yuan"],
@@ -32,6 +56,21 @@ export const supportedStaticBuildAgents = [
 
 export const supportedStaticBuildWEngines = [
   {
+    id: "14104",
+    name: "硫磺石",
+    aliases: ["the brimstone", "brimstone"],
+  },
+  {
+    id: "14119",
+    name: "深海访客",
+    aliases: ["deep sea visitor", "deep-sea visitor"],
+  },
+  {
+    id: "14120",
+    name: "残心青囊",
+    aliases: ["zanshin herb case", "zanshin"],
+  },
+  {
     id: "14124",
     name: "防暴者Ⅵ型",
     aliases: ["riot suppressor mark vi", "riot suppressor", "防暴者6型"],
@@ -49,6 +88,21 @@ export const supportedStaticBuildWEngines = [
 ] as const satisfies StaticBuildCatalogEntry[]
 
 export const supportedStaticBuildDriveDiscs = [
+  {
+    id: "32200",
+    name: "炎狱重金属",
+    aliases: ["inferno metal", "inferno"],
+  },
+  {
+    id: "32400",
+    name: "雷暴重金属",
+    aliases: ["thunder metal", "thunder"],
+  },
+  {
+    id: "32500",
+    name: "极地重金属",
+    aliases: ["polar metal", "polar"],
+  },
   {
     id: "31000",
     name: "啄木鸟电音",

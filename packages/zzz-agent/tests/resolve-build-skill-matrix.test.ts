@@ -63,6 +63,34 @@ describe("resolveBuildSkillMatrix tool", () => {
     expect((result as any).matrix.rows[0].build).toBeTruthy()
   })
 
+  it("returns Ellen matrix rows through the high-level tool", async () => {
+    const result = await runTool(resolveBuildSkillMatrix, {
+      agent: "艾莲·乔",
+      wEngine: "深海访客",
+      driveDiscs: [{ name: "极地重金属", pieces: 4 }],
+      mode: "full-buff",
+      finalPanel: {
+        attack: 3200,
+        baseAttack: 1200,
+        critRate: 0.55,
+        critDamage: 1.4,
+      },
+      context: {
+        combatTags: ["frozenTarget"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    expect((result as any).matrix.rows).toHaveLength(24)
+    expect((result as any).matrix.rows[0].label).toBe(
+      "普通攻击·利齿修剪法·一段",
+    )
+  })
+
   it("returns supported scope when agent is outside the V1 matrix", async () => {
     const result = await runTool(resolveBuildSkillMatrix, {
       agent: "安比",

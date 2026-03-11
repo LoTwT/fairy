@@ -41,7 +41,7 @@ it("keeps screenshot summary by default", async () => {
   expect(base.includes("resolveBuildSkillMatrix")).toBe(true)
   expect(base.includes("matrix.effectSummary")).toBe(true)
   expect(base.includes("commonFormulaMultipliers")).toBe(true)
-  expect(base.includes("如果只是判断 V1 是否支持")).toBe(true)
+  expect(base.includes("如果只是判断当前 resolver 是否支持")).toBe(true)
   expect(base.includes("如果高层 resolver 返回 found=false")).toBe(true)
   expect(base.includes("基础贯穿力")).toBe(true)
   expect(

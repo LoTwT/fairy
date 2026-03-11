@@ -273,7 +273,7 @@ function compactMatrix(
 export const resolveBuildSkillMatrix = createTool({
   id: "resolve-build-skill-matrix",
   description:
-    "基于 zzz-data 的静态构筑解析器批量计算全技能/全段伤害矩阵。V1 仅支持：朱鸢 / 伊芙琳 / 仪玄，防暴者Ⅵ型 / 心弦夜响 / 青溟笼舍，啄木鸟电音 / 河豚电音 / 云岿如我。",
+    "基于 zzz-data 的静态构筑解析器批量计算全技能/全段伤害矩阵。当前支持：11号 / 艾莲 / 悠真 / 朱鸢 / 伊芙琳 / 仪玄，硫磺石 / 深海访客 / 残心青囊 / 防暴者Ⅵ型 / 心弦夜响 / 青溟笼舍，炎狱重金属 / 极地重金属 / 雷暴重金属 / 啄木鸟电音 / 河豚电音 / 云岿如我。",
   inputSchema: z.object({
     agent: z.string().describe("代理人名称或 ID"),
     wEngine: z.string().optional().describe("音擎名称或 ID"),
@@ -344,7 +344,7 @@ export const resolveBuildSkillMatrix = createTool({
     if (!agent) {
       return {
         found: false,
-        message: `V1 skill matrix 暂不支持代理人「${input.agent}」`,
+        message: `当前 skill matrix 暂不支持代理人「${input.agent}」`,
         supportedAgents: supportedStaticBuildAgents.map((item) => item.name),
         candidates: findCatalogCandidates(
           supportedStaticBuildAgents,
@@ -359,7 +359,7 @@ export const resolveBuildSkillMatrix = createTool({
     if (input.wEngine && !wEngine) {
       return {
         found: false,
-        message: `V1 skill matrix 暂不支持音擎「${input.wEngine}」`,
+        message: `当前 skill matrix 暂不支持音擎「${input.wEngine}」`,
         supportedWEngines: supportedStaticBuildWEngines.map(
           (item) => item.name,
         ),
@@ -379,7 +379,7 @@ export const resolveBuildSkillMatrix = createTool({
       if (!disc) {
         return {
           found: false,
-          message: `V1 skill matrix 暂不支持驱动盘「${discInput.name}」`,
+          message: `当前 skill matrix 暂不支持驱动盘「${discInput.name}」`,
           supportedDriveDiscs: supportedStaticBuildDriveDiscs.map(
             (item) => item.name,
           ),

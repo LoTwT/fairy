@@ -42,8 +42,8 @@ packages/zzz-data/
 │   └── mihoyo-wiki.ts       # baike.mihoyo.com 爬取任务（危局强袭战）
 ├── tests/generate.test.ts   # 结构一致性测试（xlsx ↔ config ↔ JSON）
 ├── tests/build/
-│   ├── resolver.test.ts     # Static Build Resolver V1 单场景测试（normal / sheer / profile）
-│   └── matrix.test.ts       # Static Build Resolver V1 技能矩阵测试（全技能 / 全段）
+│   ├── resolver.test.ts     # Static Build Resolver 当前单场景测试（normal / sheer / profile / 扩展支持名单）
+│   └── matrix.test.ts       # Static Build Resolver 当前技能矩阵测试（全技能 / 全段 / 新代理人模板）
 ├── tests/cleaned/          # cleaned/helper layer 测试
 │   ├── deadly-assault.test.ts # DA buff / enemy helper 测试
 │   ├── encounter.test.ts   # encounter 选择与 damage-context 测试
@@ -116,9 +116,9 @@ packages/zzz-data/
 │   ├── threshold-simulation.ts # TS boss / regular side 标准化视图 helper
 │   ├── types.ts            # cleaned helper 返回类型
 │   └── index.ts            # re-export
-├── src/build/              # static build resolver（V1 静态构筑解析层）
-│   ├── catalog.ts          # V1 支持的代理人 / 音擎 / 驱动盘目录与 alias
-│   ├── definitions.ts      # curated effect definitions（按 V1 范围手动维护）
+├── src/build/              # static build resolver（当前静态构筑解析层）
+│   ├── catalog.ts          # 当前支持的代理人 / 音擎 / 驱动盘目录与 alias
+│   ├── definitions.ts      # curated effect definitions（按当前支持范围手动维护）
 │   ├── matrix.ts           # 技能矩阵 builder（按模板批量展开全技能 / 全段并复用单场景 resolver）
 │   ├── profiles.ts         # 标准 normal profile 与仪玄 sheer profile
 │   ├── resolver.ts         # finalPanel + scenario → damageParams / trace
@@ -181,6 +181,7 @@ packages/zzz-agent/
 - [`damage-calculation.md`](../docs/specs/damage-calculation.md) — 四种伤害类型（常规/贯穿/异常/紊乱）的乘区公式、TypeScript 类型签名与参考数值
 - [`static-build-resolver.md`](../docs/specs/static-build-resolver.md) — 静态构筑解析系统设计：effect schema、输入输出 contract、热插拔乘区管线与模块划分
 - [`static-build-resolver-v1.md`](../docs/specs/static-build-resolver-v1.md) — 第一版实现范围冻结：支持对象、bucket、profile、输入输出 contract 与验收标准
+- [`static-build-resolver-v2.md`](../docs/specs/static-build-resolver-v2.md) — 第二版实现范围：扩展支持名单与技能矩阵模板约定
 
 ## 计算器模块（src/calculator/）
 
