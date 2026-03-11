@@ -283,6 +283,8 @@ export interface StaticBuildSkillMatrixRowMeta {
   actionName: string
   skillName: string
   qualifiers: string[]
+  canonicalLabel: string
+  stableKey: string
   templateSource: StaticBuildSkillMatrixTemplateSource
   sourceSkillTypeId: number
   sourceStatName: string

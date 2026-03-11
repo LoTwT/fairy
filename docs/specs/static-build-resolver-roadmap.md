@@ -185,6 +185,12 @@
 - `sourceSkillTypeId` / `sourceStatName` / `sourceOccurrence`：把矩阵行稳定回链到公开 `agent-details.json`
 - `attributeSource`：显式区分 `agent-default` / `context` / `template`
 
+当前第二批已完成：
+
+- `canonicalLabel`：基于 metadata 结构化重建规范显示名，减少上层直接消费 `label`
+- `stableKey`：提供不依赖展示字符串的稳定行键
+- Agent prompt 已明确要求优先消费 `row.metadata.canonicalLabel` / `row.metadata.stableKey`
+
 ### 4.3 验收标准
 
 进入 `V3` 前，至少满足：

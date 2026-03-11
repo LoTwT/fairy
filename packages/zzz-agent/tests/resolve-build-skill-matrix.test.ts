@@ -32,6 +32,9 @@ describe("resolveBuildSkillMatrix tool", () => {
       actionName: "普通攻击",
       skillName: "普通攻击",
       qualifiers: [],
+      canonicalLabel: "普通攻击·一段",
+      stableKey:
+        "1241::curated::0::一段伤害倍率::1::basic::default::Ether::agent-default",
       templateSource: "curated",
       sourceSkillTypeId: 0,
       sourceStatName: "一段伤害倍率",

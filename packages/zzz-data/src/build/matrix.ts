@@ -52,6 +52,12 @@ const targetSizeByLabel = {
   大体型: "large",
 } as const
 
+const targetSizeLabelByValue = {
+  small: "小体型",
+  medium: "中体型",
+  large: "大体型",
+} as const
+
 function parseSegmentToken(token: string) {
   if (token in segmentIndexByLabel) {
     return {
@@ -86,6 +92,7 @@ function inferSkillMatrixRowMeta(
   order: number,
   templateSource: StaticBuildSkillMatrixTemplateSource,
   attributeSource: StaticBuildSkillMatrixAttributeSource,
+  resolvedAttribute: string,
 ): StaticBuildSkillMatrixRowMeta {
   const tokens = template.label.split("·").filter(Boolean)
   const actionName = tokens[0] ?? template.group
@@ -147,11 +154,38 @@ function inferSkillMatrixRowMeta(
     entryType = "total"
   }
 
+  const canonicalTokens = [actionName]
+  if (skillName !== actionName) {
+    canonicalTokens.push(skillName)
+  }
+  canonicalTokens.push(...qualifiers)
+  if (targetSize) {
+    canonicalTokens.push(targetSizeLabelByValue[targetSize])
+  }
+  if (segmentLabel) {
+    canonicalTokens.push(segmentLabel)
+  }
+  const canonicalLabel = canonicalTokens.join("·")
+  const stableKey = [
+    template.agentId,
+    templateSource,
+    template.skillTypeId,
+    template.statName,
+    template.occurrence ?? 1,
+    template.skillTag,
+    template.damageType ?? "default",
+    resolvedAttribute,
+    attributeSource,
+    ...(template.combatTags ?? []),
+  ].join("::")
+
   return {
     order,
     actionName,
     skillName,
     qualifiers,
+    canonicalLabel,
+    stableKey,
     templateSource,
     sourceSkillTypeId: template.skillTypeId,
     sourceStatName: template.statName,
@@ -1672,6 +1706,7 @@ export function resolveStaticBuildSkillMatrix(
         index + 1,
         templateSource,
         attributeSource,
+        attribute,
       ),
       skillTag: template.skillTag,
       damageType: template.damageType ?? agent.defaultDamageType,

@@ -119,7 +119,7 @@ packages/zzz-data/
 ├── src/build/              # static build resolver（当前静态构筑解析层）
 │   ├── catalog.ts          # 动态 build catalog：全部强攻 / 命破代理人、全部强攻/命破音擎、curated 驱动盘与 alias
 │   ├── definitions.ts      # curated effect definitions（未覆盖项由 resolver 在 assumptions 中显式提示）
-│   ├── matrix.ts           # 技能矩阵 builder（curated 模板 + 通用矩阵生成，并逐行复用单场景 resolver）
+│   ├── matrix.ts           # 技能矩阵 builder（curated 模板 + 通用矩阵生成；metadata 当前已包含 source/template/attribute/canonical label/stable key）
 │   ├── profiles.ts         # 标准 normal profile、标准 sheer profile 与仪玄专用 sheer profile
 │   ├── resolver.ts         # finalPanel + scenario → damageParams / trace
 │   ├── types.ts            # build layer 输入输出 contract

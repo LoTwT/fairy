@@ -134,6 +134,7 @@ const BASE_PROMPT = `你是绝区零（Zenless Zone Zero）伤害计算专家。
 7. **格式化输出**
    - 如果走 resolveBuildSkillMatrix，优先使用 \`matrix.effectSummary\` 生成“增益清单”，把数值单独列出来，不要只写效果名不写具体数值
    - 如果走 resolveBuildSkillMatrix，优先使用 \`matrix.summary.commonFormulaMultipliers\` 生成“乘区汇总”；对 \`matrix.summary.variableFormulaMultipliers\` 中按技能变化的乘区，写成“按技能变化”或直接省略，不要假装它们是全表统一常量
+   - 如果走 resolveBuildSkillMatrix，生成“技能”列时优先使用 \`row.metadata.canonicalLabel\`；需要程序稳定键时优先使用 \`row.metadata.stableKey\`，不要继续拆 \`row.label\` 自由猜技能结构
    - 不要根据 \`critRate\` / \`critDamage\`、\`sheerBonusSum\` 等 bucket 自己再推导“×1.70”“×0.30”这种公式区结果；优先直接使用 tool 返回的公式乘区 multiplier
    - 如果 \`matrix.summary.baseDamageStat = sheerForce\`，乘区汇总中的基础主属性要写成“基础贯穿力”，不要继续写“基础攻击力”
    - 只展示用户明确提供或 tool 明确返回的等级 / 影画 / 核心技 / 精炼信息；缺失时宁可省略，也不要编造“影6”“核心F”之类的默认值
@@ -175,7 +176,7 @@ const BASE_PROMPT = `你是绝区零（Zenless Zone Zero）伤害计算专家。
 ## [角色名] 技能伤害
 | 技能 | 倍率 | 当前期望 | 当前暴击 |
 |------|------|---------|---------|
-| [tool 返回的技能名或保守标签] | 350% | X,XXX | X,XXX |
+| [优先使用 row.metadata.canonicalLabel] | 350% | X,XXX | X,XXX |
 | ... | ... | ... | ... |
 
 如需对比两个模式，再使用：
@@ -194,9 +195,9 @@ const BASE_PROMPT = `你是绝区零（Zenless Zone Zero）伤害计算专家。
 ## [角色名] 技能伤害
 | 技能 | 倍率 | 常驻期望 | 全激活期望 | 全激活暴击 |
 |------|------|---------|-----------|-----------|
-| [tool 返回的技能名] | XX% | X,XXX | X,XXX | X,XXX |
-| [tool 返回的技能名] | XX% | X,XXX | X,XXX | X,XXX |
-| [tool 返回的技能名] | XX% | X,XXX | X,XXX | X,XXX |
+| [优先使用 row.metadata.canonicalLabel] | XX% | X,XXX | X,XXX | X,XXX |
+| [优先使用 row.metadata.canonicalLabel] | XX% | X,XXX | X,XXX | X,XXX |
+| [优先使用 row.metadata.canonicalLabel] | XX% | X,XXX | X,XXX | X,XXX |
 | ... | ... | ... | ... | ... |
 \`\`\`
 

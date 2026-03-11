@@ -119,6 +119,8 @@ V2 已支持一层批量技能矩阵 builder：
 - `actionName`：原始动作前缀，如 `普通攻击`、`强化特殊技`、`终结技`
 - `skillName`：主技能名，如 `请勿抵抗`、`月辉丝`、`霜锋`
 - `qualifiers`：剩余限定词，如 `以太`、`I型`、`缠绕`
+- `canonicalLabel`：基于 metadata 结构化重建的规范显示名，上层优先用它展示技能行
+- `stableKey`：不依赖 `label` 的稳定行键，适合 UI diff、缓存和程序消费
 - `templateSource`：当前行来自 `curated` 手工模板还是 `generated` 通用模板
 - `sourceSkillTypeId`：回链公开 `agent-details.json` 时使用的 `skills[].typeId`
 - `sourceStatName` / `sourceOccurrence`：回链原始 `stats[]` 时使用的字段名与同名出现序号
@@ -133,7 +135,7 @@ V2 已支持一层批量技能矩阵 builder：
 - 全技能 / 全段 / 完整伤害表使用 `resolveStaticBuildSkillMatrix`
 - 技能矩阵内部仍逐行复用单场景 resolver，不维护第二套公式
 - 若当前代理人尚未收录 curated effects 或 curated matrix 模板，resolver 会在 `assumptions` 中显式说明，而不是静默补算
-- 上层需要追踪技能行来源时，优先消费 `metadata` 中的 source 字段，而不是继续解析 `label`
+- 上层需要追踪技能行来源或展示技能行时，优先消费 `metadata` 中的 `canonicalLabel` / `stableKey` / source 字段，而不是继续解析 `label`
 
 ## 3. V2 输入 Contract
 

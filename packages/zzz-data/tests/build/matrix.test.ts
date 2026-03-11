@@ -35,6 +35,9 @@ describe("static build skill matrix", () => {
       actionName: "普通攻击",
       skillName: "普通攻击",
       qualifiers: [],
+      canonicalLabel: "普通攻击·一段",
+      stableKey:
+        "1241::curated::0::一段伤害倍率::1::basic::default::Ether::agent-default",
       templateSource: "curated",
       sourceSkillTypeId: 0,
       sourceStatName: "一段伤害倍率",
@@ -51,6 +54,7 @@ describe("static build skill matrix", () => {
     expect(etherBurst?.skillMultiplier).toBe("964.2%")
     expect(etherBurst?.metadata).toMatchObject({
       skillName: "请勿抵抗",
+      canonicalLabel: "普通攻击·请勿抵抗·以太·三段",
       qualifiers: ["以太"],
       templateSource: "curated",
       sourceSkillTypeId: 0,
@@ -204,6 +208,7 @@ describe("static build skill matrix", () => {
     expect(result.rows[0]?.label).toBe("普通攻击·一段")
     expect(result.rows[0]?.skillMultiplier).toBe("131.7%")
     expect(result.rows[0]?.metadata).toMatchObject({
+      canonicalLabel: "普通攻击·一段",
       templateSource: "generated",
       attributeSource: "agent-default",
       sourceOccurrence: 1,
