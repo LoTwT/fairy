@@ -198,7 +198,7 @@ describe("static build resolver", () => {
     expect(result.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.5, 4)
   })
 
-  it("supports generic attack agents with curated coverage assumptions", () => {
+  it("applies curated effects for Nekomata and Steel Cushion", () => {
     const result = resolveStaticBuildDamage({
       loadout: {
         agentId: "1021",
@@ -226,16 +226,60 @@ describe("static build resolver", () => {
     expect(result.profile.id).toBe("standard-normal")
     expect(result.loadout.agent.name).toBe("猫又")
     expect(result.loadout.wEngine?.name).toBe("钢铁肉垫")
+    expect(result.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.2, 4)
     expect(
       result.assumptions.some((item) =>
         item.includes("猫又 当前未收录 curated"),
       ),
-    ).toBe(true)
+    ).toBe(false)
     expect(
       result.assumptions.some((item) =>
         item.includes("钢铁肉垫 当前未收录 curated"),
       ),
-    ).toBe(true)
+    ).toBe(false)
+  })
+
+  it("applies curated effects for Zero Anby and Sacrifice Purity", () => {
+    const result = resolveStaticBuildDamage({
+      loadout: {
+        agentId: "1381",
+        wEngineId: "14138",
+      },
+      panel: {
+        attack: 3000,
+        baseAttack: 1200,
+        critRate: 0.5,
+        critDamage: 1.2,
+      },
+      scenario: {
+        damageType: "normal",
+        skillTag: "chain",
+        skillMultiplier: "450%",
+        attribute: "电属性",
+        extraAbilityActive: true,
+        combatTags: ["silverStarTarget", "purityBloom", "purityBloomMax"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.loadout.agent.name).toBe("零号·安比")
+    expect(result.loadout.wEngine?.name).toBe("牺牲洁纯")
+    expect(result.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.7, 4)
+    expect(result.resolvedPanel.critRate).toBeCloseTo(0.6, 4)
+    expect(result.resolvedPanel.critDamage).toBeCloseTo(1.6, 4)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("零号·安比 当前未收录 curated"),
+      ),
+    ).toBe(false)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("牺牲洁纯 当前未收录 curated"),
+      ),
+    ).toBe(false)
   })
 
   it("supports generic rupture agents through the standard sheer profile", () => {

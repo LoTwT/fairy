@@ -18,6 +18,26 @@ function byRefinement(values: readonly number[]) {
 }
 
 // prettier-ignore
+const nekomataCoreBonus = [
+  0.3,
+  0.35,
+  0.4,
+  0.45,
+  0.5,
+  0.55,
+  0.6,
+] as const
+// prettier-ignore
+const zeroAnbySilverStarBonus = [
+  0.125,
+  0.145,
+  0.165,
+  0.188,
+  0.208,
+  0.23,
+  0.25,
+] as const
+// prettier-ignore
 const zhuYuanCoreBonus = [
   0.2,
   0.233,
@@ -89,6 +109,8 @@ const yixuanCoreBonus = [
 ] as const
 
 const brimstoneAttackPercent = [0.035, 0.044, 0.052, 0.06, 0.07] as const
+const steelCushionPhysicalBonus = [0.2, 0.25, 0.3, 0.35, 0.4] as const
+const steelCushionBackBonus = [0.25, 0.315, 0.38, 0.44, 0.5] as const
 const deepSeaIceBonus = [0.25, 0.315, 0.38, 0.445, 0.5] as const
 const deepSeaCritRate = [0.1, 0.125, 0.15, 0.175, 0.2] as const
 const zanshinCritRate = [0.1, 0.115, 0.13, 0.145, 0.16] as const
@@ -97,11 +119,55 @@ const riotCritRate = [0.15, 0.188, 0.226, 0.264, 0.3] as const
 const riotChargeBonus = [0.35, 0.435, 0.52, 0.605, 0.7] as const
 const heartstringCritDamage = [0.5, 0.575, 0.65, 0.725, 0.8] as const
 const heartstringIgnoreResistance = [0.125, 0.145, 0.165, 0.185, 0.2] as const
+const sacrificeCritDamage = [0.3, 0.345, 0.39, 0.435, 0.48] as const
+const sacrificeStackCritDamage = [0.1, 0.115, 0.13, 0.145, 0.16] as const
+const sacrificeElectricBonus = [0.2, 0.23, 0.26, 0.29, 0.32] as const
 const qingmingCritRate = [0.2, 0.23, 0.26, 0.29, 0.32] as const
 const qingmingAttributeBonus = [0.08, 0.092, 0.104, 0.116, 0.128] as const
 const qingmingSheerBonus = [0.1, 0.115, 0.13, 0.145, 0.16] as const
 
 export const staticBuildEffectDefinitions = [
+  {
+    id: "nekomata-core-dash-assist-bonus",
+    sourceType: "agent",
+    sourceId: "1021",
+    sourceName: "猫又",
+    label: "核心被动：闪避反击/快速支援增伤",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      skillTags: ["dash", "assist"],
+    },
+    modifiers: [
+      {
+        bucket: "bonusDamageSum",
+        value: byCoreSkill(nekomataCoreBonus),
+      },
+    ],
+  },
+  {
+    id: "nekomata-extra-assault-enhanced-special",
+    sourceType: "agent",
+    sourceId: "1021",
+    sourceName: "猫又",
+    label: "额外能力：强击后强化特殊技增伤",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    baselineStacks: 1,
+    fullBuffStacks: 2,
+    maxStacks: 2,
+    condition: {
+      requireExtraAbility: true,
+      skillTags: ["enhancedSpecial"],
+      combatTags: ["assaultTriggered"],
+    },
+    modifiers: [
+      {
+        bucket: "bonusDamageSum",
+        value: () => 0.35,
+      },
+    ],
+  },
   {
     id: "soldier-11-core-fire-suppression",
     sourceType: "agent",
@@ -176,6 +242,81 @@ export const staticBuildEffectDefinitions = [
       {
         bucket: "critDamage",
         value: byCoreSkill(harumasaCoreCritDamagePerStack),
+      },
+    ],
+  },
+  {
+    id: "zero-anby-core-silver-star-bonus",
+    sourceType: "agent",
+    sourceId: "1381",
+    sourceName: "零号·安比",
+    label: "核心被动：银星标记目标增伤",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      combatTags: ["silverStarTarget"],
+    },
+    modifiers: [
+      {
+        bucket: "bonusDamageSum",
+        value: byCoreSkill(zeroAnbySilverStarBonus),
+      },
+    ],
+  },
+  {
+    id: "zero-anby-extra-crit-rate",
+    sourceType: "agent",
+    sourceId: "1381",
+    sourceName: "零号·安比",
+    label: "额外能力：暴击率提升",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      requireExtraAbility: true,
+    },
+    modifiers: [
+      {
+        bucket: "critRate",
+        value: () => 0.1,
+      },
+    ],
+  },
+  {
+    id: "zero-anby-extra-follow-up-bonus",
+    sourceType: "agent",
+    sourceId: "1381",
+    sourceName: "零号·安比",
+    label: "额外能力：追加攻击对银星标记目标增伤",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      requireExtraAbility: true,
+      combatTags: ["silverStarTarget", "followUp"],
+    },
+    modifiers: [
+      {
+        bucket: "bonusDamageSum",
+        value: () => 0.25,
+      },
+    ],
+  },
+  {
+    id: "zero-anby-extra-chain-ultimate-follow-up-bonus",
+    sourceType: "agent",
+    sourceId: "1381",
+    sourceName: "零号·安比",
+    label: "额外能力：连携技/终结技视为追加攻击增伤",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      requireExtraAbility: true,
+      skillTags: ["chain", "ultimate"],
+      combatTags: ["silverStarTarget"],
+    },
+    modifiers: [
+      {
+        bucket: "bonusDamageSum",
+        value: () => 0.25,
       },
     ],
   },
@@ -370,6 +511,42 @@ export const staticBuildEffectDefinitions = [
     ],
   },
   {
+    id: "steel-cushion-physical-bonus",
+    sourceType: "w-engine",
+    sourceId: "14102",
+    sourceName: "钢铁肉垫",
+    label: "音擎被动：物理伤害提升",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      attributes: ["Physical"],
+    },
+    modifiers: [
+      {
+        bucket: "bonusDamageSum",
+        value: byRefinement(steelCushionPhysicalBonus),
+      },
+    ],
+  },
+  {
+    id: "steel-cushion-back-bonus",
+    sourceType: "w-engine",
+    sourceId: "14102",
+    sourceName: "钢铁肉垫",
+    label: "音擎被动：背后攻击增伤",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      combatTags: ["backAttack"],
+    },
+    modifiers: [
+      {
+        bucket: "bonusDamageSum",
+        value: byRefinement(steelCushionBackBonus),
+      },
+    ],
+  },
+  {
     id: "deep-sea-ice-bonus",
     sourceType: "w-engine",
     sourceId: "14119",
@@ -516,6 +693,61 @@ export const staticBuildEffectDefinitions = [
       {
         bucket: "critDamage",
         value: byRefinement(heartstringCritDamage),
+      },
+    ],
+  },
+  {
+    id: "sacrifice-purity-crit-damage",
+    sourceType: "w-engine",
+    sourceId: "14138",
+    sourceName: "牺牲洁纯",
+    label: "音擎被动：暴击伤害提升",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    modifiers: [
+      {
+        bucket: "critDamage",
+        value: byRefinement(sacrificeCritDamage),
+      },
+    ],
+  },
+  {
+    id: "sacrifice-purity-stack-crit-damage",
+    sourceType: "w-engine",
+    sourceId: "14138",
+    sourceName: "牺牲洁纯",
+    label: "音擎被动：增益层数暴击伤害提升",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    baselineStacks: 1,
+    fullBuffStacks: 3,
+    maxStacks: 3,
+    condition: {
+      combatTags: ["purityBloom"],
+    },
+    modifiers: [
+      {
+        bucket: "critDamage",
+        value: byRefinement(sacrificeStackCritDamage),
+      },
+    ],
+  },
+  {
+    id: "sacrifice-purity-electric-bonus",
+    sourceType: "w-engine",
+    sourceId: "14138",
+    sourceName: "牺牲洁纯",
+    label: "音擎被动：满层电属性增伤",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      attributes: ["Electric"],
+      combatTags: ["purityBloomMax"],
+    },
+    modifiers: [
+      {
+        bucket: "bonusDamageSum",
+        value: byRefinement(sacrificeElectricBonus),
       },
     ],
   },

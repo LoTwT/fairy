@@ -125,6 +125,40 @@ describe("resolveBuildDamage tool", () => {
     expect((result as any).build.loadout.wEngine.name).toBe("钢铁肉垫")
   })
 
+  it("supports Zero Anby curated effects through aliases", async () => {
+    const result = await runTool(resolveBuildDamage, {
+      agent: "零号安比",
+      wEngine: "牺牲洁纯",
+      mode: "baseline",
+      finalPanel: {
+        attack: 3000,
+        baseAttack: 1200,
+        critRate: 0.5,
+        critDamage: 1.2,
+      },
+      scenario: {
+        damageType: "normal",
+        skillTag: "chain",
+        skillMultiplier: "450%",
+        attribute: "电属性",
+        extraAbilityActive: true,
+        combatTags: ["silverStarTarget", "purityBloom", "purityBloomMax"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    expect((result as any).build.loadout.agent.name).toBe("零号·安比")
+    expect((result as any).build.loadout.wEngine.name).toBe("牺牲洁纯")
+    expect((result as any).build.resolvedBuckets.bonusDamageSum).toBeCloseTo(
+      0.7,
+      4,
+    )
+  })
+
   it("returns supported scope when agent is outside the supported specialties", async () => {
     const result = await runTool(resolveBuildDamage, {
       agent: "安比",

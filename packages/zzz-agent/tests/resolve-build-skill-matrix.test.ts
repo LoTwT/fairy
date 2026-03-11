@@ -127,6 +127,38 @@ describe("resolveBuildSkillMatrix tool", () => {
     expect((result as any).matrix.rows[0].label).toBe("普通攻击·一段")
   })
 
+  it("returns Zero Anby generic matrix rows with curated buckets applied", async () => {
+    const result = await runTool(resolveBuildSkillMatrix, {
+      agent: "零号安比",
+      wEngine: "牺牲洁纯",
+      finalPanel: {
+        attack: 3000,
+        baseAttack: 1200,
+        critRate: 0.5,
+        critDamage: 1.2,
+      },
+      context: {
+        extraAbilityActive: true,
+        combatTags: ["silverStarTarget", "purityBloom", "purityBloomMax"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    expect((result as any).matrix.rows.length).toBeGreaterThan(0)
+    const chainRow = (result as any).matrix.rows.find(
+      (row: any) => row.label === "连携技",
+    )
+    const ultimateRow = (result as any).matrix.rows.find(
+      (row: any) => row.label === "终结技",
+    )
+    expect(chainRow?.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.7, 4)
+    expect(ultimateRow?.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.7, 4)
+  })
+
   it("returns supported scope when agent is outside the supported specialties", async () => {
     const result = await runTool(resolveBuildSkillMatrix, {
       agent: "安比",

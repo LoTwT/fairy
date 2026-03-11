@@ -22,7 +22,7 @@
 当前工作树对应的 resolver 状态如下：
 
 - 已支持全部强攻 / 命破代理人
-- 已支持这些代理人的全部专属音擎
+- 音擎支持范围当前仍按这些代理人的专属音擎集合构建
 - 驱动盘仍限定为当前 `6` 套 curated 列表
 - 已支持：
   - 单场景静态构筑解析 `resolveStaticBuildDamage`
@@ -43,6 +43,12 @@
 - 结果会通过 `assumptions` 明示缺失项
 
 因此下一阶段重点不是继续扩 catalog，而是补齐 curated coverage。
+
+当前进度：
+
+- 已开始 `V2.1`
+- 第一批 curated coverage：`猫又 / 钢铁肉垫`、`零号·安比 / 牺牲洁纯`
+- 下一步先做 support catalog 解耦，再继续后续 curated coverage 批次
 
 ## 2. 阶段划分
 
@@ -70,6 +76,7 @@
 
 这一阶段只做：
 
+- 把音擎支持范围从“专属音擎集合”解耦为“按特性兼容的音擎集合”
 - 补 curated `agent effects`
 - 补 curated `w-engine effects`
 - 视需要补 curated `drive-disc effects`
@@ -84,6 +91,25 @@
 
 ### 3.3 优先级
 
+优先顺序固定如下：
+
+1. support catalog 解耦
+2. 再按“已支持但当前 assumptions 价值最高”的代理人推进 curated coverage
+
+#### 3.3.1 support catalog 解耦
+
+先完成以下改造：
+
+1. `supportedStaticBuildWEngines` 不再从代理人 `exclusiveWeapon` 派生
+2. 改为从公开 `w-engines.json` 独立构建，并按特性筛选
+3. `agent` 与 `w-engine` 的兼容关系改为“specialty 兼容”，而不是“是否为专属音擎”
+4. 高层 tool 文案、supported scope 返回值、README 示例同步更新
+5. 不在这一轮顺带扩更多 effect definition
+
+完成这一轮后，再继续下面的 curated coverage 队列。
+
+#### 3.3.2 curated coverage 队列
+
 优先顺序按“已支持但当前 assumptions 价值最高”的代理人推进：
 
 1. 零号·安比
@@ -96,6 +122,11 @@
 8. 叶瞬光
 9. 希希芙
 10. 「席德」
+
+当前批次完成情况：
+
+- 已完成：`零号·安比`、`猫又`
+- 待继续：`雨果`、`奥菲丝&「鬼火」`、`般岳`、`真斗`、`伊德海莉`、`叶瞬光`、`希希芙`、`「席德」`
 
 对应音擎同步补：
 
@@ -114,10 +145,11 @@
 
 进入下一阶段前，至少满足：
 
-1. 上述优先名单中的代理人都有 curated agent effects
-2. 对应专属音擎都有 curated effect definitions
-3. 高频使用场景下，`assumptions` 不再主要由“缺少 curated effect definitions”占据
-4. 新增定义均有测试覆盖
+1. 音擎支持范围已完成 specialty 级解耦，不再以“专属音擎集合”为支持边界
+2. 上述优先名单中的代理人都有 curated agent effects
+3. 对应专属音擎都有 curated effect definitions
+4. 高频使用场景下，`assumptions` 不再主要由“缺少 curated effect definitions”占据
+5. 新增定义均有测试覆盖
 
 ## 4. V2.2：Matrix Metadata Refinement
 

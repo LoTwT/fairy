@@ -194,6 +194,52 @@ describe("static build skill matrix", () => {
     expect(result.rows[0]?.label).toBe("普通攻击·一段")
     expect(result.rows[0]?.skillMultiplier).toBe("131.7%")
     expect(
+      result.assumptions.some((item) =>
+        item.includes("猫又 当前未收录 curated"),
+      ),
+    ).toBe(false)
+    expect(
+      result.assumptions.some((item) => item.includes("通用技能矩阵模板生成")),
+    ).toBe(true)
+  })
+
+  it("applies Zero Anby curated effects while keeping generic matrix generation", () => {
+    const result = resolveStaticBuildSkillMatrix({
+      loadout: {
+        agentId: "1381",
+        wEngineId: "14138",
+      },
+      panel: {
+        attack: 3000,
+        baseAttack: 1200,
+        critRate: 0.5,
+        critDamage: 1.2,
+      },
+      context: {
+        extraAbilityActive: true,
+        combatTags: ["silverStarTarget", "purityBloom", "purityBloomMax"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.profile.id).toBe("standard-normal")
+    expect(result.rows.length).toBeGreaterThan(0)
+    const chainRow = result.rows.find((row) => row.label === "连携技")
+    const ultimateRow = result.rows.find((row) => row.label === "终结技")
+    expect(chainRow?.build.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.7, 4)
+    expect(ultimateRow?.build.resolvedBuckets.bonusDamageSum).toBeCloseTo(
+      0.7,
+      4,
+    )
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("零号·安比 当前未收录 curated"),
+      ),
+    ).toBe(false)
+    expect(
       result.assumptions.some((item) => item.includes("通用技能矩阵模板生成")),
     ).toBe(true)
   })
