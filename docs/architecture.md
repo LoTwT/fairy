@@ -200,7 +200,7 @@ packages/zzz-agent/
 - [`static-build-resolver-v14.md`](../docs/specs/static-build-resolver-v14.md) — 当前阶段范围：已收口；`霰落星殿`、`混沌重金属 4件` 继续保持 `research-only`，`轰鸣座驾`、`自由蓝调 4件` 继续保持 source note
 - [`static-build-resolver-v15.md`](../docs/specs/static-build-resolver-v15.md) — 当前阶段范围：已在当前 contract 下收口；`sourceNotes.guidance` 已进入公开 contract
 - [`static-build-resolver-v16.md`](../docs/specs/static-build-resolver-v16.md) — 当前阶段范围：已收口；通用音擎批次已全部落地
-- [`static-build-resolver-v17.md`](../docs/specs/static-build-resolver-v17.md) — 当前阶段范围：已完成 Batch B；下一步进入 closeout
+- [`static-build-resolver-v17.md`](../docs/specs/static-build-resolver-v17.md) — 当前阶段范围：已收口；通用驱动盘的高价值可静态表达来源已补齐
 
 ## 计算器模块（src/calculator/）
 

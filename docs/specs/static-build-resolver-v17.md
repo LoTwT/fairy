@@ -73,7 +73,7 @@
 - `V17.1` 已完成：冻结到通用驱动盘 curated coverage，不继续扩大 contract
 - `V17.2` 已完成：通用驱动盘 inventory 与批次已冻结
 - `V17.3` 已完成
-- `V17.4` 未开始
+- `V17.4` 已完成：当前 contract 下已收口
 
 ## 8. Inventory
 
@@ -160,3 +160,29 @@
 ### Batch C
 
 - 只在 `Batch A / Batch B` 做完后，再进入 `V17.4` closeout
+
+## 10. 当前结论
+
+`V17.3 Batch B` 完成后，当前已新增或收口：
+
+- `拂晓生花`
+- `流光咏叹`
+- `獠牙重金属`
+- `如影相随`
+- `折枝剑歌`
+- `沧浪行歌`
+- `囚徒手记`
+
+其中，当前保留的 partial / process-only 边界是：
+
+1. `拂晓生花 4件` 的额外普通攻击增伤仍保留为 source note
+2. `流光咏叹 4件` 的[普通攻击]命中后异常精通提升仍保留为 source note
+3. `如影相随 4件` 的叠层获取时机继续由 mode / effectOverrides 近似控制
+4. `沧浪行歌 4件` 的强攻角色额外暴击率 / 攻击力仍保留为 source note
+5. `囚徒手记 4件` 的[异放]后异常精通提升仍保留为 source note
+
+`V17` 当前结论：
+
+1. 当前 contract 下能稳定表达的通用驱动盘高价值来源，已经补到 `16` 套 curated / partial coverage
+2. teamwide / off-carrier / 非 damage 主 contract 的通用驱动盘继续保持显式 out-of-scope
+3. `V17` 到此收口，后续不再继续往本阶段增加新的通用驱动盘批次
