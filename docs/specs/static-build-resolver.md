@@ -733,4 +733,4 @@
 6. `V6` source-state snapshot context 已完成首批 `爱丽丝` / `雅` 的来源覆盖与 state-aware assumptions refinement，见 [静态构筑解析系统 V6](./static-build-resolver-v6.md)
 7. `V7` resolved snapshot overrides 已完成 `V7.3` 前四批来源迁移，并在当前 contract 下收口；当前已把 `柏妮思 M6` 的 `25% 火抗无视` 接到 `scenario.resolvedSnapshot.bucketDeltas.ignoreResistance`，并把 `格莉丝 M2`、`简`、`派派`、`时流贤者`、`柳 M2`、`薇薇安 M2` 的异常倍率折算收口到 `scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor`，见 [静态构筑解析系统 V7](./static-build-resolver-v7.md)
 8. `V8` assumption ownership 已完成 inventory 与 `V8.4` 前四批 source-note 收口，并在当前 contract 下收口；当前已确认 anomaly / disorder 剩余 assumptions 应优先归到 `finalPanel` / `dynamicSnapshot` / `stateSnapshot` / `resolvedSnapshot` / 真动态过程，而不是继续无边界扩 snapshot contract；当前没有新增 public key 的必要性，见 [静态构筑解析系统 V8](./static-build-resolver-v8.md)
-9. `V9` source-specific damage view：为已能通过现有 snapshot contract 显式表达、但不应继续并入主 anomaly / disorder 公式的来源提供独立静态 view，见 [静态构筑解析系统 V9](./static-build-resolver-v9.md)
+9. `V9` source-specific damage view：已完成 `V9.2` view contract，为已能通过现有 snapshot contract 显式表达、但不应继续并入主 anomaly / disorder 公式的来源提供独立静态 view 入口，见 [静态构筑解析系统 V9](./static-build-resolver-v9.md)

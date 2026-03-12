@@ -420,6 +420,42 @@ export interface ResolveStaticBuildResult {
   unsupportedEffects: string[]
 }
 
+export type StaticBuildSourceDamageViewRequirementKind =
+  | "combat-tag"
+  | "dynamic-flag"
+  | "dynamic-count"
+  | "dynamic-value"
+  | "state-flag"
+  | "state-value"
+  | "resolved-bucket"
+  | "resolved-multiplier"
+
+export interface StaticBuildSourceDamageViewRequirement {
+  kind: StaticBuildSourceDamageViewRequirementKind
+  key: string
+  satisfied: boolean
+}
+
+export interface StaticBuildSourceDamageViewEntry {
+  id: string
+  label: string
+  sourceType: StaticBuildEffectDefinition["sourceType"]
+  sourceId: string
+  damageType: StaticBuildDamageType
+  supported: boolean
+  requirements: StaticBuildSourceDamageViewRequirement[]
+  assumptions: string[]
+  build?: ResolveStaticBuildResult
+}
+
+export interface ResolveStaticBuildSourceDamageViewsResult {
+  mode: StaticBuildMode
+  manualBaseMode?: StaticBuildBaseMode
+  loadout: StaticBuildResolvedLoadout
+  entries: StaticBuildSourceDamageViewEntry[]
+  assumptions: string[]
+}
+
 export interface StaticBuildSkillMatrixRowMeta {
   order: number
   actionName: string
