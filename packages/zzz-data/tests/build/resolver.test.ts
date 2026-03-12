@@ -1807,6 +1807,18 @@ describe("static build resolver", () => {
     expect(
       result.assumptions.some((item) => item.includes("后场能量自动回复")),
     ).toBe(true)
+    expect(
+      result.sourceNotes.some(
+        (note) =>
+          note.sourceType === "agent" &&
+          note.sourceId === "1171" &&
+          note.owner === "dynamicSnapshot" &&
+          note.status === "missing-input" &&
+          note.keys.includes(
+            "scenario.dynamicSnapshot.flags.burniceEmberState",
+          ),
+      ),
+    ).toBe(true)
   })
 
   it("expands Burnice progression-aware anomaly mastery and damage bonus", () => {
@@ -2238,6 +2250,43 @@ describe("static build resolver", () => {
     ).toBe(true)
   })
 
+  it("marks Hailstorm Shrine as a research-only source note", () => {
+    const result = resolveStaticBuildDamage({
+      mode: "baseline",
+      loadout: {
+        agentId: "1091",
+        wEngineId: "14109",
+        agentLevel: 60,
+      },
+      panel: {
+        attack: 2800,
+        critRate: 0.4,
+        critDamage: 1.1,
+        anomalyProficiency: 180,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "special",
+        damageMultiplier: "600%",
+        attribute: "烈霜",
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(
+      result.sourceNotes.some(
+        (note) =>
+          note.sourceType === "w-engine" &&
+          note.sourceId === "14109" &&
+          note.owner === "sourceView" &&
+          note.status === "research-only",
+      ),
+    ).toBe(true)
+  })
+
   it("refines Burnice progression assumptions when mindscape is present but energyGenerationRate is missing", () => {
     const result = resolveStaticBuildDamage({
       mode: "full-buff",
@@ -2421,6 +2470,16 @@ describe("static build resolver", () => {
         item.includes(
           "十方锻星的[强击]触发/接战即满层逻辑未在 static resolver 中展开",
         ),
+      ),
+    ).toBe(true)
+    expect(
+      result.sourceNotes.some(
+        (note) =>
+          note.sourceType === "agent" &&
+          note.sourceId === "1401" &&
+          note.owner === "finalPanel" &&
+          note.status === "resolved" &&
+          note.keys.includes("finalPanel.anomalyMastery"),
       ),
     ).toBe(true)
   })

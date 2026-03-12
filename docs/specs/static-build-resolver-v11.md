@@ -97,5 +97,5 @@
 ## 7. 当前状态
 
 - `V11.1` 已完成：scope freeze
-- `V11.2` 未开始
+- `V11.2` 已完成：`ResolveStaticBuildResult` 已新增结构化 `sourceNotes`
 - `V11.3` 未开始

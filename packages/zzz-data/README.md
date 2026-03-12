@@ -182,6 +182,9 @@ result.resolvedPanel.baseDamageStat
 result.resolvedBuckets.bonusDamageSum
 // 0.76
 
+result.sourceNotes[0]
+// { owner: "dynamicSnapshot", status: "missing-input", keys: [...], message: "..." }
+
 result.damage.expected.total
 // number
 ```

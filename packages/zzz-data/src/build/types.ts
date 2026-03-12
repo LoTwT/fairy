@@ -398,6 +398,30 @@ export interface StaticBuildResolvedLoadout {
   wEngineRefinement: number
 }
 
+export type StaticBuildSourceNoteOwner =
+  | "finalPanel"
+  | "dynamicSnapshot"
+  | "stateSnapshot"
+  | "resolvedSnapshot"
+  | "sourceView"
+  | "process"
+
+export type StaticBuildSourceNoteStatus =
+  | "missing-input"
+  | "resolved"
+  | "process-only"
+  | "research-only"
+
+export interface StaticBuildSourceNoteEntry {
+  id: string
+  sourceType: StaticBuildEffectDefinition["sourceType"]
+  sourceId: string
+  owner: StaticBuildSourceNoteOwner
+  status: StaticBuildSourceNoteStatus
+  keys: string[]
+  message: string
+}
+
 export interface ResolveStaticBuildResult {
   profile: StaticBuildProfileResult
   mode: StaticBuildMode
@@ -416,6 +440,7 @@ export interface ResolveStaticBuildResult {
     noCrit: DamageResult
   }
   trace: StaticBuildTraceItem[]
+  sourceNotes: StaticBuildSourceNoteEntry[]
   assumptions: string[]
   unsupportedEffects: string[]
 }

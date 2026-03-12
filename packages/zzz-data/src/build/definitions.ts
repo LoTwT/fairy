@@ -3,6 +3,9 @@ import type {
   StaticBuildResolvedSnapshotBucketKey,
   StaticBuildResolvedSnapshotInput,
   StaticBuildResolvedSnapshotMultiplierKey,
+  StaticBuildSourceNoteEntry,
+  StaticBuildSourceNoteOwner,
+  StaticBuildSourceNoteStatus,
   StaticBuildValueContext,
 } from "./types.js"
 import { calcDisorderDamageMultiplier } from "../calculator/factors.js"
@@ -3339,7 +3342,173 @@ interface StaticBuildSourceNote {
     | "auricInk"
     | "frost"
   )[]
+  ownerOverride?: StaticBuildSourceNoteOwner
+  statusOverride?: StaticBuildSourceNoteStatus
+  keysOverride?: readonly string[]
   note: string
+}
+
+function hasNoteCondition(
+  note: StaticBuildSourceNote,
+  input: {
+    missingKey: keyof StaticBuildSourceNote
+    presentKey: keyof StaticBuildSourceNote
+  },
+) {
+  return (
+    (Array.isArray(note[input.missingKey]) &&
+      note[input.missingKey].length > 0) ||
+    (Array.isArray(note[input.presentKey]) && note[input.presentKey].length > 0)
+  )
+}
+
+function inferStaticBuildSourceNoteOwner(
+  note: StaticBuildSourceNote,
+): StaticBuildSourceNoteOwner {
+  if (note.ownerOverride) return note.ownerOverride
+  if (
+    note.requiresAnomalyMastery ||
+    note.requiresMissingAnomalyMastery ||
+    note.requiresEnergyGenerationRate ||
+    note.requiresMissingEnergyGenerationRate
+  ) {
+    return "finalPanel"
+  }
+  if (
+    hasNoteCondition(note, {
+      missingKey: "requiresMissingDynamicFlags",
+      presentKey: "requiredDynamicFlags",
+    }) ||
+    hasNoteCondition(note, {
+      missingKey: "requiresMissingDynamicCounts",
+      presentKey: "requiredDynamicCounts",
+    }) ||
+    hasNoteCondition(note, {
+      missingKey: "requiresMissingDynamicValues",
+      presentKey: "requiredDynamicValues",
+    })
+  ) {
+    return "dynamicSnapshot"
+  }
+  if (
+    hasNoteCondition(note, {
+      missingKey: "requiresMissingStateFlags",
+      presentKey: "requiredStateFlags",
+    }) ||
+    hasNoteCondition(note, {
+      missingKey: "requiresMissingStateValues",
+      presentKey: "requiredStateValues",
+    })
+  ) {
+    return "stateSnapshot"
+  }
+  if (
+    hasNoteCondition(note, {
+      missingKey: "requiresMissingResolvedSnapshotBuckets",
+      presentKey: "requiredResolvedSnapshotBuckets",
+    }) ||
+    hasNoteCondition(note, {
+      missingKey: "requiresMissingResolvedSnapshotMultipliers",
+      presentKey: "requiredResolvedSnapshotMultipliers",
+    })
+  ) {
+    return "resolvedSnapshot"
+  }
+  return "process"
+}
+
+function inferStaticBuildSourceNoteStatus(
+  note: StaticBuildSourceNote,
+): StaticBuildSourceNoteStatus {
+  if (note.statusOverride) return note.statusOverride
+  if (
+    note.requiresMissingAnomalyMastery ||
+    note.requiresMissingEnergyGenerationRate ||
+    (note.requiresMissingDynamicFlags?.length ?? 0) > 0 ||
+    (note.requiresMissingDynamicCounts?.length ?? 0) > 0 ||
+    (note.requiresMissingDynamicValues?.length ?? 0) > 0 ||
+    (note.requiresMissingStateFlags?.length ?? 0) > 0 ||
+    (note.requiresMissingStateValues?.length ?? 0) > 0 ||
+    (note.requiresMissingResolvedSnapshotBuckets?.length ?? 0) > 0 ||
+    (note.requiresMissingResolvedSnapshotMultipliers?.length ?? 0) > 0
+  ) {
+    return "missing-input"
+  }
+  if (
+    note.requiresAnomalyMastery ||
+    note.requiresEnergyGenerationRate ||
+    (note.requiredDynamicFlags?.length ?? 0) > 0 ||
+    (note.requiredDynamicCounts?.length ?? 0) > 0 ||
+    (note.requiredDynamicValues?.length ?? 0) > 0 ||
+    (note.requiredStateFlags?.length ?? 0) > 0 ||
+    (note.requiredStateValues?.length ?? 0) > 0 ||
+    (note.requiredResolvedSnapshotBuckets?.length ?? 0) > 0 ||
+    (note.requiredResolvedSnapshotMultipliers?.length ?? 0) > 0
+  ) {
+    return "resolved"
+  }
+  return "process-only"
+}
+
+function collectStaticBuildSourceNoteKeys(
+  note: StaticBuildSourceNote,
+): string[] {
+  if (note.keysOverride) {
+    return [...note.keysOverride]
+  }
+  const keys = new Set<string>()
+  if (note.requiresAnomalyMastery || note.requiresMissingAnomalyMastery) {
+    keys.add("finalPanel.anomalyMastery")
+  }
+  if (
+    note.requiresEnergyGenerationRate ||
+    note.requiresMissingEnergyGenerationRate
+  ) {
+    keys.add("finalPanel.energyGenerationRate")
+  }
+  for (const key of note.requiredDynamicFlags ?? []) {
+    keys.add(`scenario.dynamicSnapshot.flags.${key}`)
+  }
+  for (const key of note.requiresMissingDynamicFlags ?? []) {
+    keys.add(`scenario.dynamicSnapshot.flags.${key}`)
+  }
+  for (const key of note.requiredDynamicCounts ?? []) {
+    keys.add(`scenario.dynamicSnapshot.counts.${key}`)
+  }
+  for (const key of note.requiresMissingDynamicCounts ?? []) {
+    keys.add(`scenario.dynamicSnapshot.counts.${key}`)
+  }
+  for (const key of note.requiredDynamicValues ?? []) {
+    keys.add(`scenario.dynamicSnapshot.values.${key}`)
+  }
+  for (const key of note.requiresMissingDynamicValues ?? []) {
+    keys.add(`scenario.dynamicSnapshot.values.${key}`)
+  }
+  for (const key of note.requiredStateFlags ?? []) {
+    keys.add(`scenario.stateSnapshot.flags.${key}`)
+  }
+  for (const key of note.requiresMissingStateFlags ?? []) {
+    keys.add(`scenario.stateSnapshot.flags.${key}`)
+  }
+  for (const key of note.requiredStateValues ?? []) {
+    keys.add(`scenario.stateSnapshot.values.${key}`)
+  }
+  for (const key of note.requiresMissingStateValues ?? []) {
+    keys.add(`scenario.stateSnapshot.values.${key}`)
+  }
+  for (const key of note.requiredResolvedSnapshotBuckets ?? []) {
+    keys.add(`scenario.resolvedSnapshot.bucketDeltas.${key}`)
+  }
+  for (const key of note.requiresMissingResolvedSnapshotBuckets ?? []) {
+    keys.add(`scenario.resolvedSnapshot.bucketDeltas.${key}`)
+  }
+  for (const key of note.requiredResolvedSnapshotMultipliers ?? []) {
+    keys.add(`scenario.resolvedSnapshot.multiplierFactors.${key}`)
+  }
+  for (const key of note.requiresMissingResolvedSnapshotMultipliers ?? []) {
+    keys.add(`scenario.resolvedSnapshot.multiplierFactors.${key}`)
+  }
+  return [...keys]
 }
 
 const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
@@ -3704,6 +3873,8 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
     sourceType: "w-engine",
     sourceId: "14109",
     damageTypes: ["anomaly", "disorder"],
+    ownerOverride: "sourceView",
+    statusOverride: "research-only",
     note: "霰落星殿的暴击伤害被动不进入 anomaly/disorder 当前公式；若后续需要表达对应的额外伤害，优先走 source-specific damage view，而不是继续扩现有 snapshot contract。当前只展开烈霜伤害层数。",
   },
   {
@@ -3738,6 +3909,8 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
     sourceId: "32300",
     minimumPieces: 4,
     damageTypes: ["anomaly", "disorder"],
+    ownerOverride: "sourceView",
+    statusOverride: "research-only",
     note: "混沌重金属 4件 的暴击伤害层数主要面向侵蚀额外伤害，不直接映射到 anomaly/disorder 当前公式；这一类来源若后续需要表达，应优先走 source-specific damage view，而不是继续扩现有 snapshot contract。当前只展开 2件 以太异常增伤。",
   },
 ]
@@ -3793,7 +3966,200 @@ export function hasStaticBuildEffectsForSource(
   )
 }
 
-export function getStaticBuildSourceNotes(input: {
+function matchesStaticBuildSourceNote(
+  note: StaticBuildSourceNote,
+  input: {
+    sourceType: StaticBuildEffectDefinition["sourceType"]
+    sourceId?: string
+    damageType: "normal" | "sheer" | "anomaly" | "disorder"
+    agentMindscape?: number
+    energyGenerationRate?: number
+    anomalyMastery?: number
+    dynamicSnapshot?: StaticBuildValueContext["dynamicSnapshot"]
+    stateSnapshot?: StaticBuildValueContext["stateSnapshot"]
+    resolvedSnapshot?: StaticBuildResolvedSnapshotInput
+    isStunned?: boolean
+    disorderSourceType?:
+      | "fire"
+      | "electric"
+      | "ether"
+      | "ice"
+      | "physical"
+      | "auricInk"
+      | "frost"
+    pieces?: 2 | 4
+  },
+) {
+  if (!input.sourceId) return false
+  if (
+    note.sourceType !== input.sourceType ||
+    note.sourceId !== input.sourceId
+  ) {
+    return false
+  }
+  if (note.minimumPieces && (input.pieces ?? 0) < note.minimumPieces) {
+    return false
+  }
+  if (
+    note.minimumMindscape !== undefined &&
+    (input.agentMindscape ?? 0) < note.minimumMindscape
+  ) {
+    return false
+  }
+  if (note.requiresAnomalyMastery && input.anomalyMastery === undefined) {
+    return false
+  }
+  if (
+    note.requiresMissingAnomalyMastery &&
+    input.anomalyMastery !== undefined
+  ) {
+    return false
+  }
+  if (
+    note.requiresEnergyGenerationRate &&
+    input.energyGenerationRate === undefined
+  ) {
+    return false
+  }
+  if (
+    note.requiresMissingEnergyGenerationRate &&
+    input.energyGenerationRate !== undefined
+  ) {
+    return false
+  }
+  if (note.requireStunned && input.isStunned !== true) {
+    return false
+  }
+  if (
+    note.requiredDynamicFlags &&
+    note.requiredDynamicFlags.some(
+      (key) => input.dynamicSnapshot?.flags?.[key] !== true,
+    )
+  ) {
+    return false
+  }
+  if (
+    note.requiresMissingDynamicFlags &&
+    note.requiresMissingDynamicFlags.every(
+      (key) => input.dynamicSnapshot?.flags?.[key] === true,
+    )
+  ) {
+    return false
+  }
+  if (
+    note.requiredDynamicCounts &&
+    note.requiredDynamicCounts.some(
+      (key) => input.dynamicSnapshot?.counts?.[key] === undefined,
+    )
+  ) {
+    return false
+  }
+  if (
+    note.requiresMissingDynamicCounts &&
+    note.requiresMissingDynamicCounts.every(
+      (key) => input.dynamicSnapshot?.counts?.[key] !== undefined,
+    )
+  ) {
+    return false
+  }
+  if (
+    note.requiredDynamicValues &&
+    note.requiredDynamicValues.some(
+      (key) => input.dynamicSnapshot?.values?.[key] === undefined,
+    )
+  ) {
+    return false
+  }
+  if (
+    note.requiresMissingDynamicValues &&
+    note.requiresMissingDynamicValues.every(
+      (key) => input.dynamicSnapshot?.values?.[key] !== undefined,
+    )
+  ) {
+    return false
+  }
+  if (
+    note.requiredStateFlags &&
+    note.requiredStateFlags.some(
+      (key) => input.stateSnapshot?.flags?.[key] !== true,
+    )
+  ) {
+    return false
+  }
+  if (
+    note.requiresMissingStateFlags &&
+    note.requiresMissingStateFlags.every(
+      (key) => input.stateSnapshot?.flags?.[key] === true,
+    )
+  ) {
+    return false
+  }
+  if (
+    note.requiredStateValues &&
+    note.requiredStateValues.some(
+      (key) => input.stateSnapshot?.values?.[key] === undefined,
+    )
+  ) {
+    return false
+  }
+  if (
+    note.requiresMissingStateValues &&
+    note.requiresMissingStateValues.every(
+      (key) => input.stateSnapshot?.values?.[key] !== undefined,
+    )
+  ) {
+    return false
+  }
+  if (
+    note.requiredResolvedSnapshotBuckets &&
+    note.requiredResolvedSnapshotBuckets.some(
+      (key) => input.resolvedSnapshot?.bucketDeltas?.[key] === undefined,
+    )
+  ) {
+    return false
+  }
+  if (
+    note.requiresMissingResolvedSnapshotBuckets &&
+    note.requiresMissingResolvedSnapshotBuckets.every(
+      (key) => input.resolvedSnapshot?.bucketDeltas?.[key] !== undefined,
+    )
+  ) {
+    return false
+  }
+  if (
+    note.requiredResolvedSnapshotMultipliers &&
+    note.requiredResolvedSnapshotMultipliers.some(
+      (key) => input.resolvedSnapshot?.multiplierFactors?.[key] === undefined,
+    )
+  ) {
+    return false
+  }
+  if (
+    note.requiresMissingResolvedSnapshotMultipliers &&
+    note.requiresMissingResolvedSnapshotMultipliers.every(
+      (key) => input.resolvedSnapshot?.multiplierFactors?.[key] !== undefined,
+    )
+  ) {
+    return false
+  }
+  if (
+    note.damageTypes &&
+    !note.damageTypes.includes(input.damageType as "anomaly" | "disorder")
+  ) {
+    return false
+  }
+  if (
+    note.disorderSourceTypes &&
+    input.damageType === "disorder" &&
+    (!input.disorderSourceType ||
+      !note.disorderSourceTypes.includes(input.disorderSourceType))
+  ) {
+    return false
+  }
+  return true
+}
+
+export function getStaticBuildSourceNoteEntries(input: {
   sourceType: StaticBuildEffectDefinition["sourceType"]
   sourceId?: string
   damageType: "normal" | "sheer" | "anomaly" | "disorder"
@@ -3816,177 +4182,42 @@ export function getStaticBuildSourceNotes(input: {
 }) {
   if (!input.sourceId) return []
   return staticBuildSourceNotes
-    .filter((note) => {
-      if (
-        note.sourceType !== input.sourceType ||
-        note.sourceId !== input.sourceId
-      ) {
-        return false
-      }
-      if (note.minimumPieces && (input.pieces ?? 0) < note.minimumPieces) {
-        return false
-      }
-      if (
-        note.minimumMindscape !== undefined &&
-        (input.agentMindscape ?? 0) < note.minimumMindscape
-      ) {
-        return false
-      }
-      if (note.requiresAnomalyMastery && input.anomalyMastery === undefined) {
-        return false
-      }
-      if (
-        note.requiresMissingAnomalyMastery &&
-        input.anomalyMastery !== undefined
-      ) {
-        return false
-      }
-      if (
-        note.requiresEnergyGenerationRate &&
-        input.energyGenerationRate === undefined
-      ) {
-        return false
-      }
-      if (
-        note.requiresMissingEnergyGenerationRate &&
-        input.energyGenerationRate !== undefined
-      ) {
-        return false
-      }
-      if (note.requireStunned && input.isStunned !== true) {
-        return false
-      }
-      if (
-        note.requiredDynamicFlags &&
-        note.requiredDynamicFlags.some(
-          (key) => input.dynamicSnapshot?.flags?.[key] !== true,
-        )
-      ) {
-        return false
-      }
-      if (
-        note.requiresMissingDynamicFlags &&
-        note.requiresMissingDynamicFlags.every(
-          (key) => input.dynamicSnapshot?.flags?.[key] === true,
-        )
-      ) {
-        return false
-      }
-      if (
-        note.requiredDynamicCounts &&
-        note.requiredDynamicCounts.some(
-          (key) => input.dynamicSnapshot?.counts?.[key] === undefined,
-        )
-      ) {
-        return false
-      }
-      if (
-        note.requiresMissingDynamicCounts &&
-        note.requiresMissingDynamicCounts.every(
-          (key) => input.dynamicSnapshot?.counts?.[key] !== undefined,
-        )
-      ) {
-        return false
-      }
-      if (
-        note.requiredDynamicValues &&
-        note.requiredDynamicValues.some(
-          (key) => input.dynamicSnapshot?.values?.[key] === undefined,
-        )
-      ) {
-        return false
-      }
-      if (
-        note.requiresMissingDynamicValues &&
-        note.requiresMissingDynamicValues.every(
-          (key) => input.dynamicSnapshot?.values?.[key] !== undefined,
-        )
-      ) {
-        return false
-      }
-      if (
-        note.requiredStateFlags &&
-        note.requiredStateFlags.some(
-          (key) => input.stateSnapshot?.flags?.[key] !== true,
-        )
-      ) {
-        return false
-      }
-      if (
-        note.requiresMissingStateFlags &&
-        note.requiresMissingStateFlags.every(
-          (key) => input.stateSnapshot?.flags?.[key] === true,
-        )
-      ) {
-        return false
-      }
-      if (
-        note.requiredStateValues &&
-        note.requiredStateValues.some(
-          (key) => input.stateSnapshot?.values?.[key] === undefined,
-        )
-      ) {
-        return false
-      }
-      if (
-        note.requiresMissingStateValues &&
-        note.requiresMissingStateValues.every(
-          (key) => input.stateSnapshot?.values?.[key] !== undefined,
-        )
-      ) {
-        return false
-      }
-      if (
-        note.requiredResolvedSnapshotBuckets &&
-        note.requiredResolvedSnapshotBuckets.some(
-          (key) => input.resolvedSnapshot?.bucketDeltas?.[key] === undefined,
-        )
-      ) {
-        return false
-      }
-      if (
-        note.requiresMissingResolvedSnapshotBuckets &&
-        note.requiresMissingResolvedSnapshotBuckets.every(
-          (key) => input.resolvedSnapshot?.bucketDeltas?.[key] !== undefined,
-        )
-      ) {
-        return false
-      }
-      if (
-        note.requiredResolvedSnapshotMultipliers &&
-        note.requiredResolvedSnapshotMultipliers.some(
-          (key) =>
-            input.resolvedSnapshot?.multiplierFactors?.[key] === undefined,
-        )
-      ) {
-        return false
-      }
-      if (
-        note.requiresMissingResolvedSnapshotMultipliers &&
-        note.requiresMissingResolvedSnapshotMultipliers.every(
-          (key) =>
-            input.resolvedSnapshot?.multiplierFactors?.[key] !== undefined,
-        )
-      ) {
-        return false
-      }
-      if (
-        note.damageTypes &&
-        !note.damageTypes.includes(input.damageType as "anomaly" | "disorder")
-      ) {
-        return false
-      }
-      if (
-        note.disorderSourceTypes &&
-        input.damageType === "disorder" &&
-        (!input.disorderSourceType ||
-          !note.disorderSourceTypes.includes(input.disorderSourceType))
-      ) {
-        return false
-      }
-      return true
-    })
-    .map((note) => note.note)
+    .filter((note) => matchesStaticBuildSourceNote(note, input))
+    .map(
+      (note, index): StaticBuildSourceNoteEntry => ({
+        id: `${note.sourceType}:${note.sourceId}:${index}`,
+        sourceType: note.sourceType,
+        sourceId: note.sourceId,
+        owner: inferStaticBuildSourceNoteOwner(note),
+        status: inferStaticBuildSourceNoteStatus(note),
+        keys: collectStaticBuildSourceNoteKeys(note),
+        message: note.note,
+      }),
+    )
+}
+
+export function getStaticBuildSourceNotes(input: {
+  sourceType: StaticBuildEffectDefinition["sourceType"]
+  sourceId?: string
+  damageType: "normal" | "sheer" | "anomaly" | "disorder"
+  agentMindscape?: number
+  energyGenerationRate?: number
+  anomalyMastery?: number
+  dynamicSnapshot?: StaticBuildValueContext["dynamicSnapshot"]
+  stateSnapshot?: StaticBuildValueContext["stateSnapshot"]
+  resolvedSnapshot?: StaticBuildResolvedSnapshotInput
+  isStunned?: boolean
+  disorderSourceType?:
+    | "fire"
+    | "electric"
+    | "ether"
+    | "ice"
+    | "physical"
+    | "auricInk"
+    | "frost"
+  pieces?: 2 | 4
+}) {
+  return getStaticBuildSourceNoteEntries(input).map((note) => note.message)
 }
 
 export function hasStaticBuildCoverageForSource(

@@ -31,7 +31,7 @@ import {
 } from "./catalog.js"
 import {
   getStaticBuildEffectsForLoadout,
-  getStaticBuildSourceNotes,
+  getStaticBuildSourceNoteEntries,
   hasStaticBuildCoverageForSource,
 } from "./definitions.js"
 import { getStaticBuildProfile } from "./profiles.js"
@@ -542,8 +542,8 @@ export function resolveStaticBuildDamage(
     }
   }
 
-  assumptions.push(
-    ...getStaticBuildSourceNotes({
+  const sourceNotes = [
+    ...getStaticBuildSourceNoteEntries({
       sourceType: "agent",
       sourceId: agent.id,
       damageType: input.scenario.damageType,
@@ -559,10 +559,10 @@ export function resolveStaticBuildDamage(
           ? input.scenario.anomalyType
           : undefined,
     }),
-  )
+  ]
   if (wEngine) {
-    assumptions.push(
-      ...getStaticBuildSourceNotes({
+    sourceNotes.push(
+      ...getStaticBuildSourceNoteEntries({
         sourceType: "w-engine",
         sourceId: wEngine.id,
         damageType: input.scenario.damageType,
@@ -581,8 +581,8 @@ export function resolveStaticBuildDamage(
     )
   }
   for (const set of driveDiscSets) {
-    assumptions.push(
-      ...getStaticBuildSourceNotes({
+    sourceNotes.push(
+      ...getStaticBuildSourceNoteEntries({
         sourceType: "drive-disc",
         sourceId: set.id,
         damageType: input.scenario.damageType,
@@ -599,6 +599,34 @@ export function resolveStaticBuildDamage(
             : undefined,
         pieces: set.pieces,
       }),
+    )
+  }
+
+  assumptions.push(
+    ...sourceNotes
+      .filter(
+        (note) => note.sourceType === "agent" && note.sourceId === agent.id,
+      )
+      .map((note) => note.message),
+  )
+  if (wEngine) {
+    assumptions.push(
+      ...sourceNotes
+        .filter(
+          (note) =>
+            note.sourceType === "w-engine" && note.sourceId === wEngine.id,
+        )
+        .map((note) => note.message),
+    )
+  }
+  for (const set of driveDiscSets) {
+    assumptions.push(
+      ...sourceNotes
+        .filter(
+          (note) =>
+            note.sourceType === "drive-disc" && note.sourceId === set.id,
+        )
+        .map((note) => note.message),
     )
   }
   const overrides = new Map(
@@ -862,6 +890,7 @@ export function resolveStaticBuildDamage(
         noCrit: calcNormalDamageNoCrit(damageParams),
       },
       trace,
+      sourceNotes,
       assumptions,
       unsupportedEffects,
     }
@@ -936,6 +965,7 @@ export function resolveStaticBuildDamage(
         noCrit: calcAnomalyDamageNoCrit(damageParams),
       },
       trace,
+      sourceNotes,
       assumptions,
       unsupportedEffects,
     }
@@ -1010,6 +1040,7 @@ export function resolveStaticBuildDamage(
         noCrit: calcDisorderDamageNoCrit(damageParams),
       },
       trace,
+      sourceNotes,
       assumptions,
       unsupportedEffects,
     }
@@ -1072,6 +1103,7 @@ export function resolveStaticBuildDamage(
       noCrit: calcSheerDamageNoCrit(damageParams),
     },
     trace,
+    sourceNotes,
     assumptions,
     unsupportedEffects,
   }
