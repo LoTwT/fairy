@@ -310,6 +310,16 @@ const janeCoreAnomalyCritRate = [
   0.4,
 ] as const
 // prettier-ignore
+const janeCoreAnomalyCritRatePerProficiency = [
+  0.001,
+  0.0011,
+  0.0012,
+  0.0013,
+  0.0014,
+  0.0015,
+  0.0016,
+] as const
+// prettier-ignore
 const ariaCoreAnomalyProficiency = [
   45,
   52,
@@ -1316,18 +1326,22 @@ export const staticBuildEffectDefinitions = [
     sourceType: "agent",
     sourceId: "1261",
     sourceName: "简",
-    label: "核心被动：强击异常暴击率",
+    label: "核心被动：强击异常暴击率（含异常精通追加）",
     baselineEnabled: true,
     fullBuffEnabled: true,
     condition: {
       damageTypes: ["anomaly"],
       attributes: ["Physical"],
       combatTags: ["gnawedTarget"],
+      minimumResolvedAnomalyProficiency: 0,
     },
     modifiers: [
       {
         bucket: "anomalyCritRate",
-        value: byCoreSkill(janeCoreAnomalyCritRate),
+        value: (context) =>
+          byCoreSkill(janeCoreAnomalyCritRate)(context) +
+          (context.resolvedAnomalyProficiency ?? 0) *
+            byCoreSkill(janeCoreAnomalyCritRatePerProficiency)(context),
       },
     ],
   },
@@ -3062,7 +3076,7 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
     sourceType: "agent",
     sourceId: "1261",
     damageTypes: ["anomaly", "disorder"],
-    note: "简的每点异常精通追加异常暴击率、以及物理异常积蓄效率提升未自动折算；若需精细计算，请显式补充 anomalyCritRate 或自行调整 damageMultiplier。",
+    note: "简的每点异常精通追加异常暴击率当前已自动折算；物理异常积蓄效率提升仍未在 static resolver 中展开，若需精细计算，请自行调整 damageMultiplier。",
   },
   {
     sourceType: "agent",

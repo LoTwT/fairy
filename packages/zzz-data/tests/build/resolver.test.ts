@@ -918,7 +918,7 @@ describe("static build resolver", () => {
     expect(result.loadout.agent.name).toBe("简")
     expect(result.loadout.wEngine?.name).toBe("淬锋钳刺")
     expect(result.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.36, 4)
-    expect(result.resolvedBuckets.anomalyCritRate).toBeCloseTo(0.4, 4)
+    expect(result.resolvedBuckets.anomalyCritRate).toBeCloseTo(0.688, 4)
     expect(result.resolvedBuckets.anomalyCritDamage).toBeCloseTo(0.5, 4)
     expect(
       result.assumptions.some((item) => item.includes("简 当前未收录 curated")),
@@ -963,6 +963,7 @@ describe("static build resolver", () => {
     })
 
     expect(result.loadout.agentMindscape).toBe(4)
+    expect(result.resolvedBuckets.anomalyCritRate).toBeCloseTo(0.688, 4)
     expect(result.resolvedBuckets.defenseReduction).toBeCloseTo(0.15, 4)
     expect(result.resolvedBuckets.anomalyCritDamage).toBeCloseTo(1, 4)
     expect(result.resolvedBuckets.anomalyBonusDamageSum).toBeCloseTo(0.18, 4)

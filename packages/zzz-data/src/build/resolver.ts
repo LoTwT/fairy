@@ -563,7 +563,10 @@ export function resolveStaticBuildDamage(
     resolvedCritRate: interimCritRate,
     resolvedAnomalyProficiency: interimAnomalyProficiency,
     baseMode,
-    valueContext,
+    valueContext: {
+      ...valueContext,
+      resolvedAnomalyProficiency: interimAnomalyProficiency,
+    },
     overrides,
     assumptions,
     unsupportedEffects,

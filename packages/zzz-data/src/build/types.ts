@@ -231,6 +231,7 @@ export interface StaticBuildValueContext {
   wEngineRefinement: number
   energyGenerationRate?: number
   anomalyMastery?: number
+  resolvedAnomalyProficiency?: number
   remainingTime?: number
 }
 

@@ -470,7 +470,7 @@ resolver 主线完成后，文档维护需要单独列为持续事项，避免�
 
 ### 9.5 当前状态
 
-当前 `V4` 第五批已完成：
+当前 `V4` 第六批已完成：
 
 - `V4.1` 已完成：`loadout.agentMindscape`、`finalPanel.energyGenerationRate`、`minimumMindscape` 已进入公开 contract
 - `V4.2` 已完成：resolver / tool schema / trace 已能消费 progression-aware value context
@@ -487,10 +487,12 @@ resolver 主线完成后，文档维护需要单独列为持续事项，避免�
   - `柳`：影画 1 的 `[洞悉]` 异常精通提升、影画 4 的 `[识破]` 目标穿透率提升
 - `V4.3` 已完成第五批：
   - `爱丽丝`：影画 1 的 `[强击]` 后 20% 减防，已通过 `combatTags: [\"aliceAfterAssault\"]` 显式展开
-- `V4.4` 已完成第五轮 assumptions refinement：
+- `V4.3` 已完成第六批：
+  - `简`：核心被动中“每点异常精通 -> 强击异常暴击率”已通过第二遍 effect 求值自动折算
+- `V4.4` 已完成第六轮 assumptions refinement：
   - 可区分缺少 `agentMindscape`
   - 可区分缺少 `energyGenerationRate`
-  - 仍未展开的动态机制继续单独提示
+  - `简` 的 source-specific assumptions 已从“未自动折算 AP->暴击率”收紧到“仅剩物理异常积蓄效率未展开”
 
 ### 9.6 后续继续项
 

@@ -707,6 +707,10 @@ describe("resolveBuildDamage tool", () => {
 
     expect((result as any).found).toBe(true)
     expect((result as any).build.loadout.agentMindscape).toBe(4)
+    expect((result as any).build.resolvedBuckets.anomalyCritRate).toBeCloseTo(
+      0.688,
+      4,
+    )
     expect((result as any).build.resolvedBuckets.defenseReduction).toBeCloseTo(
       0.15,
       4,
