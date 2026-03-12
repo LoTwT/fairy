@@ -886,4 +886,4 @@ research-only，暂不进入实现：
 - `V12.1` 已完成
 - `V12.2` 已完成：默认 attribute / extraAbilityActive / agentMindscape / anomaly agentLevel 已有结构化 `defaulted-input diagnostics`
 - `V12.3` 已完成：未收录 curated source 与缺少 `finalPanel.baseAttack` 等 unsupported effects 已有结构化镜像
-- `V12.4` 未开始
+- `V12.4` 已完成：高层 resolver、source view 条目与 agent prompt 已优先消费 `diagnostics`

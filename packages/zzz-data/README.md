@@ -170,8 +170,10 @@ views.entries[0]
 
 同一份 source-specific view contract 也已在 `zzz-agent` 中通过 `resolve-build-source-damage-views` 高层 tool 暴露，适合直接给 Agent 查询独立额外结算条目。
 
-source view 条目现在也会返回结构化 `sourceNotes`，适合直接区分：
+source view 条目现在也会返回结构化 `diagnostics` 与 `sourceNotes`，适合直接区分：
 
+- 哪些默认值被自动补齐
+- 哪些 source 仍是 coverage gap / unsupported-effect
 - 缺少哪个 snapshot / panel key
 - 当前来源是已展开、真动态过程还是 `research-only`
 

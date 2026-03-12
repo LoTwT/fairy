@@ -493,6 +493,7 @@ export interface StaticBuildSourceDamageViewEntry {
   supported: boolean
   resolutionMode: "standalone" | "delta"
   requirements: StaticBuildSourceDamageViewRequirement[]
+  diagnostics: StaticBuildDiagnosticEntry[]
   sourceNotes: StaticBuildSourceNoteEntry[]
   assumptions: string[]
   damage?: {

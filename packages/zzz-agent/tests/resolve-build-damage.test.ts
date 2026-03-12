@@ -699,8 +699,55 @@ describe("resolveBuildDamage tool", () => {
       4,
     )
     expect(
+      (result as any).build.diagnostics.some(
+        (item: any) =>
+          item.kind === "defaulted-input" &&
+          item.owner === "scenario" &&
+          item.keys.includes("scenario.extraAbilityActive"),
+      ),
+    ).toBe(false)
+    expect(
       (result as any).build.assumptions.some((item: string) =>
         item.includes("finalPanel.anomalyMastery 快照展开异常掌控转异常精通"),
+      ),
+    ).toBe(true)
+  })
+
+  it("returns structured defaulted-input diagnostics through the high-level resolver", async () => {
+    const result = await runTool(resolveBuildDamage, {
+      agent: "柏妮思",
+      mode: "full-buff",
+      finalPanel: {
+        attack: 3100,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 160,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "enhancedSpecial",
+        damageMultiplier: "520%",
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    expect(
+      (result as any).build.diagnostics.some(
+        (item: any) =>
+          item.kind === "defaulted-input" &&
+          item.keys.includes("scenario.attribute"),
+      ),
+    ).toBe(true)
+    expect(
+      (result as any).build.diagnostics.some(
+        (item: any) =>
+          item.kind === "defaulted-input" &&
+          item.keys.includes("loadout.agentLevel"),
       ),
     ).toBe(true)
   })

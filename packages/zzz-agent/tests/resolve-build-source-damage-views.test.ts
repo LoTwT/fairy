@@ -51,6 +51,14 @@ describe("resolveBuildSourceDamageViews tool", () => {
           ),
       ),
     ).toBe(true)
+    expect(
+      (result as any).views.entries[0].diagnostics.some(
+        (item: any) =>
+          item.kind === "defaulted-input" &&
+          item.owner === "scenario" &&
+          item.keys.includes("scenario.extraAbilityActive"),
+      ),
+    ).toBe(true)
     expect((result as any).views.entries[0].damage.expected).toBeGreaterThan(0)
   })
 

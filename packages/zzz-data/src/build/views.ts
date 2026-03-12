@@ -148,6 +148,7 @@ function createEntryBase(
     damageType: input.scenario.damageType,
     supported: requirements.every((item) => item.satisfied),
     requirements,
+    diagnostics: [],
     sourceNotes,
     assumptions: [],
   }
@@ -247,6 +248,7 @@ function resolveAlicePolarityAssaultView(
   const build = resolveStaticBuildDamage(input)
   entry.build = build
   entry.damage = toEntryDamage(build)
+  entry.diagnostics = build.diagnostics
   entry.assumptions.push(
     "当前 view 直接复用主 resolver，并按 scenario.stateSnapshot 记录的 [极性强击] 倍率结算。",
   )
@@ -294,6 +296,7 @@ function resolveMiyabiFrostburnBreakView(
   )
   entry.build = build
   entry.damage = toEntryDamage(build)
+  entry.diagnostics = build.diagnostics
   entry.assumptions.push(
     "当前 view 以 scenario.stateSnapshot 的 [霜灼·破] 倍率快照驱动独立条目结算，不回写主公式。",
   )
@@ -345,6 +348,7 @@ function resolveBurniceEmberView(
   const withoutSnapshot = resolveStaticBuildDamage(
     withoutBurniceEmberSnapshot(input),
   )
+  entry.diagnostics = withSnapshot.diagnostics
   entry.damage = {
     expected:
       withSnapshot.damage.expected.total -
@@ -423,6 +427,7 @@ function resolveAriaExflowView(
   const withoutSnapshot = resolveStaticBuildDamage(
     withoutAriaExflowSnapshot(input),
   )
+  entry.diagnostics = withSnapshot.diagnostics
   entry.damage = {
     expected:
       withSnapshot.damage.expected.total -
