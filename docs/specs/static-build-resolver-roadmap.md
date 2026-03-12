@@ -884,6 +884,6 @@ research-only，暂不进入实现：
 ### 17.3 当前状态
 
 - `V12.1` 已完成
-- `V12.2` 未开始
+- `V12.2` 已完成：默认 attribute / extraAbilityActive / agentMindscape / anomaly agentLevel 已有结构化 `defaulted-input diagnostics`
 - `V12.3` 未开始
 - `V12.4` 未开始

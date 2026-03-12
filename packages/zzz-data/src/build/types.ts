@@ -422,6 +422,28 @@ export interface StaticBuildSourceNoteEntry {
   message: string
 }
 
+export type StaticBuildDiagnosticKind =
+  | "defaulted-input"
+  | "coverage-gap"
+  | "unsupported-effect"
+  | "fallback"
+
+export type StaticBuildDiagnosticOwner =
+  | "loadout"
+  | "finalPanel"
+  | "scenario"
+  | "source"
+  | "process"
+
+export interface StaticBuildDiagnosticEntry {
+  kind: StaticBuildDiagnosticKind
+  owner: StaticBuildDiagnosticOwner
+  sourceType?: StaticBuildEffectDefinition["sourceType"]
+  sourceId?: string
+  keys: string[]
+  message: string
+}
+
 export interface ResolveStaticBuildResult {
   profile: StaticBuildProfileResult
   mode: StaticBuildMode
@@ -440,6 +462,7 @@ export interface ResolveStaticBuildResult {
     noCrit: DamageResult
   }
   trace: StaticBuildTraceItem[]
+  diagnostics: StaticBuildDiagnosticEntry[]
   sourceNotes: StaticBuildSourceNoteEntry[]
   assumptions: string[]
   unsupportedEffects: string[]

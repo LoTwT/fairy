@@ -3,6 +3,7 @@ import type {
   ResolveStaticBuildResult,
   StaticBuildBaseMode,
   StaticBuildBucket,
+  StaticBuildDiagnosticEntry,
   StaticBuildEffectDefinition,
   StaticBuildResolvedBuckets,
   StaticBuildTraceItem,
@@ -494,20 +495,33 @@ export function resolveStaticBuildDamage(
   }
 
   const assumptions: string[] = []
+  const diagnostics: StaticBuildDiagnosticEntry[] = []
   const unsupportedEffects: string[] = []
   const agentMindscape = input.loadout.agentMindscape ?? 0
 
   const attribute =
     toAgentAttribute(input.scenario.attribute) ?? agent.defaultAttribute
   if (!input.scenario.attribute) {
-    assumptions.push(
-      `未提供 attribute，按 ${agent.name} 默认属性 ${agent.defaultAttribute} 处理`,
-    )
+    const message = `未提供 attribute，按 ${agent.name} 默认属性 ${agent.defaultAttribute} 处理`
+    assumptions.push(message)
+    diagnostics.push({
+      kind: "defaulted-input",
+      owner: "scenario",
+      keys: ["scenario.attribute"],
+      message,
+    })
   }
 
   const extraAbilityActive = input.scenario.extraAbilityActive ?? true
   if (input.scenario.extraAbilityActive === undefined) {
-    assumptions.push("未显式提供 extraAbilityActive，按已满足额外能力条件处理")
+    const message = "未显式提供 extraAbilityActive，按已满足额外能力条件处理"
+    assumptions.push(message)
+    diagnostics.push({
+      kind: "defaulted-input",
+      owner: "scenario",
+      keys: ["scenario.extraAbilityActive"],
+      message,
+    })
   }
   const isStunned = input.scenario.enemy.isStunned ?? false
 
@@ -520,9 +534,15 @@ export function resolveStaticBuildDamage(
     input.loadout.agentMindscape === undefined &&
     effects.some((effect) => effect.condition?.minimumMindscape !== undefined)
   ) {
-    assumptions.push(
-      "未提供 agentMindscape，按 0 处理；未展开更高影画/潜能觉醒档位效果",
-    )
+    const message =
+      "未提供 agentMindscape，按 0 处理；未展开更高影画/潜能觉醒档位效果"
+    assumptions.push(message)
+    diagnostics.push({
+      kind: "defaulted-input",
+      owner: "loadout",
+      keys: ["loadout.agentMindscape"],
+      message,
+    })
   }
   if (!hasStaticBuildCoverageForSource("agent", agent.id)) {
     assumptions.push(
@@ -764,7 +784,14 @@ export function resolveStaticBuildDamage(
     input.loadout.agentLevel === undefined &&
     input.scenario.damageType === "anomaly"
   ) {
-    assumptions.push("未提供 agentLevel，异常伤害按 60 级代理人处理")
+    const message = "未提供 agentLevel，异常伤害按 60 级代理人处理"
+    assumptions.push(message)
+    diagnostics.push({
+      kind: "defaulted-input",
+      owner: "loadout",
+      keys: ["loadout.agentLevel"],
+      message,
+    })
   }
 
   const baseDamageValue = profile.resolveBaseDamageValue({
@@ -890,6 +917,7 @@ export function resolveStaticBuildDamage(
         noCrit: calcNormalDamageNoCrit(damageParams),
       },
       trace,
+      diagnostics,
       sourceNotes,
       assumptions,
       unsupportedEffects,
@@ -965,6 +993,7 @@ export function resolveStaticBuildDamage(
         noCrit: calcAnomalyDamageNoCrit(damageParams),
       },
       trace,
+      diagnostics,
       sourceNotes,
       assumptions,
       unsupportedEffects,
@@ -1040,6 +1069,7 @@ export function resolveStaticBuildDamage(
         noCrit: calcDisorderDamageNoCrit(damageParams),
       },
       trace,
+      diagnostics,
       sourceNotes,
       assumptions,
       unsupportedEffects,
@@ -1103,6 +1133,7 @@ export function resolveStaticBuildDamage(
       noCrit: calcSheerDamageNoCrit(damageParams),
     },
     trace,
+    diagnostics,
     sourceNotes,
     assumptions,
     unsupportedEffects,

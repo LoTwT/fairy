@@ -84,6 +84,6 @@
 ## 7. 当前状态
 
 - `V12.1` 已完成：scope freeze
-- `V12.2` 未开始
+- `V12.2` 已完成：defaulted-input diagnostics
 - `V12.3` 未开始
 - `V12.4` 未开始

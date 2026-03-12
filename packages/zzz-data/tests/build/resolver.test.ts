@@ -1821,6 +1821,64 @@ describe("static build resolver", () => {
     ).toBe(true)
   })
 
+  it("records generic defaulted-input diagnostics for anomaly resolver defaults", () => {
+    const result = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1171",
+      },
+      panel: {
+        attack: 3100,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 160,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "enhancedSpecial",
+        damageMultiplier: "520%",
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(
+      result.diagnostics.some(
+        (item) =>
+          item.kind === "defaulted-input" &&
+          item.owner === "scenario" &&
+          item.keys.includes("scenario.attribute"),
+      ),
+    ).toBe(true)
+    expect(
+      result.diagnostics.some(
+        (item) =>
+          item.kind === "defaulted-input" &&
+          item.owner === "scenario" &&
+          item.keys.includes("scenario.extraAbilityActive"),
+      ),
+    ).toBe(true)
+    expect(
+      result.diagnostics.some(
+        (item) =>
+          item.kind === "defaulted-input" &&
+          item.owner === "loadout" &&
+          item.keys.includes("loadout.agentMindscape"),
+      ),
+    ).toBe(true)
+    expect(
+      result.diagnostics.some(
+        (item) =>
+          item.kind === "defaulted-input" &&
+          item.owner === "loadout" &&
+          item.keys.includes("loadout.agentLevel"),
+      ),
+    ).toBe(true)
+  })
+
   it("expands Burnice progression-aware anomaly mastery and damage bonus", () => {
     const result = resolveStaticBuildDamage({
       mode: "full-buff",

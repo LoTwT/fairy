@@ -190,6 +190,9 @@ result.resolvedBuckets.bonusDamageSum
 result.sourceNotes[0]
 // { owner: "dynamicSnapshot", status: "missing-input", keys: [...], message: "..." }
 
+result.diagnostics[0]
+// { kind: "defaulted-input", owner: "scenario", keys: [...], message: "..." }
+
 result.damage.expected.total
 // number
 ```
