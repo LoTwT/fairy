@@ -3299,4 +3299,233 @@ describe("static build resolver", () => {
       }),
     ).toThrow(/does not support damageType=anomaly/)
   })
+
+  it("applies generic drive-disc batch a basic and stunned coverage", () => {
+    const dawnsBloom = resolveStaticBuildDamage({
+      mode: "baseline",
+      loadout: {
+        agentId: "1241",
+        driveDiscSets: [{ id: "33300", pieces: 4 }],
+      },
+      panel: {
+        attack: 3000,
+        baseAttack: 1200,
+        critRate: 0.4,
+        critDamage: 1.2,
+      },
+      scenario: {
+        damageType: "normal",
+        skillTag: "basic",
+        skillMultiplier: "300%",
+        attribute: "以太",
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(dawnsBloom.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.35, 4)
+    expect(
+      dawnsBloom.sourceNotes.some(
+        (note) =>
+          note.sourceType === "drive-disc" &&
+          note.sourceId === "33300" &&
+          note.owner === "process" &&
+          note.status === "process-only" &&
+          note.guidance.kind === "keep-process-only",
+      ),
+    ).toBe(true)
+
+    const shiningAria = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1241",
+        driveDiscSets: [{ id: "33600", pieces: 4 }],
+      },
+      panel: {
+        attack: 3000,
+        baseAttack: 1200,
+        critRate: 0.4,
+        critDamage: 1.2,
+      },
+      scenario: {
+        damageType: "normal",
+        skillTag: "basic",
+        skillMultiplier: "300%",
+        attribute: "以太",
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+          isStunned: true,
+        },
+      },
+    })
+
+    expect(shiningAria.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.35, 4)
+    expect(
+      shiningAria.sourceNotes.some(
+        (note) =>
+          note.sourceType === "drive-disc" &&
+          note.sourceId === "33600" &&
+          note.owner === "process" &&
+          note.status === "process-only" &&
+          note.guidance.kind === "keep-process-only",
+      ),
+    ).toBe(true)
+  })
+
+  it("applies generic drive-disc batch a assault and stack coverage", () => {
+    const fangMetal = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1021",
+        driveDiscSets: [{ id: "32600", pieces: 4 }],
+      },
+      panel: {
+        attack: 2800,
+        baseAttack: 1100,
+        critRate: 0.5,
+        critDamage: 1.1,
+      },
+      scenario: {
+        damageType: "normal",
+        skillTag: "basic",
+        skillMultiplier: "300%",
+        attribute: "物理",
+        combatTags: ["assaultTriggered"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(fangMetal.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.45, 4)
+
+    const shadowHarmony = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1021",
+        driveDiscSets: [{ id: "32900", pieces: 4 }],
+      },
+      panel: {
+        attack: 2800,
+        baseAttack: 1100,
+        critRate: 0.5,
+        critDamage: 1.1,
+      },
+      scenario: {
+        damageType: "normal",
+        skillTag: "basic",
+        skillMultiplier: "300%",
+        attribute: "物理",
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(shadowHarmony.resolvedBuckets.attackPercent).toBeCloseTo(0.12, 4)
+    expect(shadowHarmony.resolvedBuckets.critRate).toBeCloseTo(0.12, 4)
+    expect(
+      shadowHarmony.sourceNotes.some(
+        (note) =>
+          note.sourceType === "drive-disc" &&
+          note.sourceId === "32900" &&
+          note.owner === "process" &&
+          note.status === "process-only" &&
+          note.guidance.kind === "keep-process-only",
+      ),
+    ).toBe(true)
+  })
+
+  it("applies generic drive-disc batch a anomaly mastery and frozen conditions", () => {
+    const missingMastery = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1191",
+        driveDiscSets: [{ id: "32700", pieces: 4 }],
+      },
+      panel: {
+        attack: 3000,
+        baseAttack: 1200,
+        critRate: 0.4,
+        critDamage: 1.2,
+      },
+      scenario: {
+        damageType: "normal",
+        skillTag: "basic",
+        skillMultiplier: "300%",
+        attribute: "冰属性",
+        combatTags: ["frozenTarget"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(missingMastery.resolvedPanel.critRate).toBeCloseTo(0.52, 4)
+    expect(
+      missingMastery.trace.find(
+        (item) =>
+          item.effectId === "branch-blade-song-4pc-anomaly-mastery-crit-damage",
+      )?.status,
+    ).toBe("applied")
+    expect(
+      missingMastery.sourceNotes.some(
+        (note) =>
+          note.sourceType === "drive-disc" &&
+          note.sourceId === "32700" &&
+          note.owner === "finalPanel" &&
+          note.status === "missing-input" &&
+          note.keys.includes("finalPanel.anomalyMastery"),
+      ),
+    ).toBe(true)
+
+    const resolvedMastery = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1191",
+        driveDiscSets: [{ id: "32700", pieces: 4 }],
+      },
+      panel: {
+        attack: 3000,
+        baseAttack: 1200,
+        critRate: 0.4,
+        critDamage: 1.2,
+        anomalyMastery: 120,
+      },
+      scenario: {
+        damageType: "normal",
+        skillTag: "basic",
+        skillMultiplier: "300%",
+        attribute: "冰属性",
+        combatTags: ["frozenTarget"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(
+      resolvedMastery.trace.find(
+        (item) =>
+          item.effectId === "branch-blade-song-4pc-anomaly-mastery-crit-damage",
+      )?.status,
+    ).toBe("applied")
+    expect(
+      resolvedMastery.sourceNotes.some(
+        (note) =>
+          note.sourceType === "drive-disc" &&
+          note.sourceId === "32700" &&
+          note.owner === "finalPanel" &&
+          note.status === "resolved" &&
+          note.keys.includes("finalPanel.anomalyMastery"),
+      ),
+    ).toBe(true)
+  })
 })

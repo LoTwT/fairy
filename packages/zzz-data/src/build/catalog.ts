@@ -153,6 +153,21 @@ export const supportedStaticBuildDriveDiscs = [
     aliases: ["inferno metal", "inferno"],
   },
   {
+    id: "32600",
+    name: "獠牙重金属",
+    aliases: ["fanged metal", "fanged"],
+  },
+  {
+    id: "32700",
+    name: "折枝剑歌",
+    aliases: ["branch blade song", "branch blade"],
+  },
+  {
+    id: "32900",
+    name: "如影相随",
+    aliases: ["shadow harmony", "shadow"],
+  },
+  {
     id: "32400",
     name: "雷暴重金属",
     aliases: ["thunder metal", "thunder"],
@@ -176,6 +191,16 @@ export const supportedStaticBuildDriveDiscs = [
     id: "33100",
     name: "云岿如我",
     aliases: ["yunkui tales", "yunkui"],
+  },
+  {
+    id: "33300",
+    name: "拂晓生花",
+    aliases: ["dawns bloom", "dawn"],
+  },
+  {
+    id: "33600",
+    name: "流光咏叹",
+    aliases: ["shining aria", "aria"],
   },
   {
     id: "31300",

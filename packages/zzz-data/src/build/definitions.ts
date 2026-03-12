@@ -40,6 +40,12 @@ function aliceExtraAnomalyProficiencyFromMastery({
   return Math.max(0, ((anomalyMastery ?? 0) - 140) * 1.6)
 }
 
+function branchBladeSongCritDamageFromAnomalyMastery({
+  anomalyMastery,
+}: StaticBuildValueContext): number {
+  return (anomalyMastery ?? 0) >= 115 ? 0.3 : 0
+}
+
 function ariaM1AnomalyCritRate({
   anomalyMastery,
 }: StaticBuildValueContext): number {
@@ -3579,6 +3585,169 @@ export const staticBuildEffectDefinitions = [
     ],
   },
   {
+    id: "fang-metal-2pc-physical-bonus",
+    sourceType: "drive-disc",
+    sourceId: "32600",
+    sourceName: "獠牙重金属",
+    label: "2件套：物理属性增伤",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      attributes: ["Physical"],
+    },
+    modifiers: [
+      {
+        bucket: "bonusDamageSum",
+        value: () => 0.1,
+      },
+    ],
+  },
+  {
+    id: "fang-metal-4pc-assault-bonus",
+    sourceType: "drive-disc",
+    sourceId: "32600",
+    sourceName: "獠牙重金属",
+    label: "4件套：强击目标增伤",
+    baselineEnabled: false,
+    fullBuffEnabled: true,
+    condition: {
+      combatTags: ["assaultTriggered"],
+    },
+    modifiers: [
+      {
+        bucket: "bonusDamageSum",
+        value: () => 0.35,
+      },
+    ],
+  },
+  {
+    id: "branch-blade-song-2pc-crit-damage",
+    sourceType: "drive-disc",
+    sourceId: "32700",
+    sourceName: "折枝剑歌",
+    label: "2件套：暴击伤害",
+    alreadyInPanel: true,
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    modifiers: [
+      {
+        bucket: "critDamage",
+        value: () => 0.16,
+      },
+    ],
+  },
+  {
+    id: "branch-blade-song-4pc-anomaly-mastery-crit-damage",
+    sourceType: "drive-disc",
+    sourceId: "32700",
+    sourceName: "折枝剑歌",
+    label: "4件套：异常掌控达标暴击伤害",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    modifiers: [
+      {
+        bucket: "critDamage",
+        value: branchBladeSongCritDamageFromAnomalyMastery,
+      },
+    ],
+  },
+  {
+    id: "branch-blade-song-4pc-frozen-crit-rate",
+    sourceType: "drive-disc",
+    sourceId: "32700",
+    sourceName: "折枝剑歌",
+    label: "4件套：冻结/碎冰后暴击率",
+    baselineEnabled: false,
+    fullBuffEnabled: true,
+    condition: {
+      combatTags: ["frozenTarget"],
+    },
+    modifiers: [
+      {
+        bucket: "critRate",
+        value: () => 0.12,
+      },
+    ],
+  },
+  {
+    id: "shadow-harmony-2pc-follow-up-bonus",
+    sourceType: "drive-disc",
+    sourceId: "32900",
+    sourceName: "如影相随",
+    label: "2件套：追加攻击增伤",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      combatTags: ["followUp"],
+    },
+    modifiers: [
+      {
+        bucket: "bonusDamageSum",
+        value: () => 0.15,
+      },
+    ],
+  },
+  {
+    id: "shadow-harmony-2pc-dash-bonus",
+    sourceType: "drive-disc",
+    sourceId: "32900",
+    sourceName: "如影相随",
+    label: "2件套：冲刺攻击增伤",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      skillTags: ["dash"],
+    },
+    modifiers: [
+      {
+        bucket: "bonusDamageSum",
+        value: () => 0.15,
+      },
+    ],
+  },
+  {
+    id: "shadow-harmony-4pc-attack",
+    sourceType: "drive-disc",
+    sourceId: "32900",
+    sourceName: "如影相随",
+    label: "4件套：叠层攻击力",
+    baselineEnabled: false,
+    fullBuffEnabled: true,
+    baselineStacks: 0,
+    fullBuffStacks: 3,
+    maxStacks: 3,
+    condition: {
+      attributes: ["Physical", "Fire", "Ice", "Electric", "Ether"],
+    },
+    modifiers: [
+      {
+        bucket: "attackPercent",
+        value: () => 0.04,
+      },
+    ],
+  },
+  {
+    id: "shadow-harmony-4pc-crit-rate",
+    sourceType: "drive-disc",
+    sourceId: "32900",
+    sourceName: "如影相随",
+    label: "4件套：叠层暴击率",
+    baselineEnabled: false,
+    fullBuffEnabled: true,
+    baselineStacks: 0,
+    fullBuffStacks: 3,
+    maxStacks: 3,
+    condition: {
+      attributes: ["Physical", "Fire", "Ice", "Electric", "Ether"],
+    },
+    modifiers: [
+      {
+        bucket: "critRate",
+        value: () => 0.04,
+      },
+    ],
+  },
+  {
     id: "yunkui-2pc-hp",
     sourceType: "drive-disc",
     sourceId: "33100",
@@ -3588,6 +3757,78 @@ export const staticBuildEffectDefinitions = [
     baselineEnabled: true,
     fullBuffEnabled: true,
     modifiers: [],
+  },
+  {
+    id: "dawns-bloom-2pc-basic-bonus",
+    sourceType: "drive-disc",
+    sourceId: "33300",
+    sourceName: "拂晓生花",
+    label: "2件套：普通攻击增伤",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      skillTags: ["basic"],
+    },
+    modifiers: [
+      {
+        bucket: "bonusDamageSum",
+        value: () => 0.15,
+      },
+    ],
+  },
+  {
+    id: "dawns-bloom-4pc-basic-bonus",
+    sourceType: "drive-disc",
+    sourceId: "33300",
+    sourceName: "拂晓生花",
+    label: "4件套：普通攻击增伤",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      skillTags: ["basic"],
+    },
+    modifiers: [
+      {
+        bucket: "bonusDamageSum",
+        value: () => 0.2,
+      },
+    ],
+  },
+  {
+    id: "shining-aria-2pc-ether-bonus",
+    sourceType: "drive-disc",
+    sourceId: "33600",
+    sourceName: "流光咏叹",
+    label: "2件套：以太属性增伤",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      attributes: ["Ether"],
+    },
+    modifiers: [
+      {
+        bucket: "bonusDamageSum",
+        value: () => 0.1,
+      },
+    ],
+  },
+  {
+    id: "shining-aria-4pc-stunned-bonus",
+    sourceType: "drive-disc",
+    sourceId: "33600",
+    sourceName: "流光咏叹",
+    label: "4件套：失衡目标增伤",
+    baselineEnabled: false,
+    fullBuffEnabled: true,
+    condition: {
+      requireStunned: true,
+    },
+    modifiers: [
+      {
+        bucket: "bonusDamageSum",
+        value: () => 0.25,
+      },
+    ],
   },
   {
     id: "yunkui-4pc-crit-rate",
@@ -3888,6 +4129,38 @@ function collectStaticBuildSourceNoteKeys(
 }
 
 const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
+  {
+    sourceType: "drive-disc",
+    sourceId: "32700",
+    minimumPieces: 4,
+    requiresMissingAnomalyMastery: true,
+    note: "折枝剑歌 4件 的异常掌控达标暴击伤害需要依赖 finalPanel.anomalyMastery 判断；未提供时只展开 2件 暴击伤害与冻结/碎冰后的暴击率。",
+  },
+  {
+    sourceType: "drive-disc",
+    sourceId: "32700",
+    minimumPieces: 4,
+    requiresAnomalyMastery: true,
+    note: '折枝剑歌 4件 当前已按 finalPanel.anomalyMastery 静态判断是否展开额外暴击伤害；冻结/碎冰后的暴击率仍继续通过 combatTags: ["frozenTarget"] 显式表达。',
+  },
+  {
+    sourceType: "drive-disc",
+    sourceId: "33300",
+    minimumPieces: 4,
+    note: "拂晓生花 4件 当前已展开稳定的普通攻击增伤；由[强化特殊技]/[终结技]触发的额外普通攻击增伤仍属于状态 / 过程问题，暂保留为 source note，不新增新的 combatTag。",
+  },
+  {
+    sourceType: "drive-disc",
+    sourceId: "33600",
+    minimumPieces: 4,
+    note: "流光咏叹 4件 当前已展开失衡目标增伤；[普通攻击]命中后的异常精通提升仍属于状态 / 过程问题，暂保留为 source note，不新增新的 combatTag。",
+  },
+  {
+    sourceType: "drive-disc",
+    sourceId: "32900",
+    minimumPieces: 4,
+    note: "如影相随 4件 当前按静态快照展开叠层后的攻击力 / 暴击率增益；叠层获取时机与是否已由同属性[追加攻击]/[冲刺攻击]命中敌人，继续通过 mode / effectOverrides 近似控制，不继续迁到新的 snapshot key。",
+  },
   {
     sourceType: "agent",
     sourceId: "1171",
