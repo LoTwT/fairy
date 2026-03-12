@@ -1345,6 +1345,49 @@ export const staticBuildEffectDefinitions = [
     ],
   },
   {
+    id: "yanagi-m2-polar-disorder-base-bonus",
+    sourceType: "agent",
+    sourceId: "1221",
+    sourceName: "柳",
+    label: "影画2：极性紊乱基础倍率提升",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      minimumMindscape: 2,
+      damageTypes: ["disorder"],
+      combatTags: ["yanagiMoonEclipse", "yanagiExtraThrustDisorder"],
+    },
+    modifiers: [
+      {
+        bucket: "anomalyBonusDamageSum",
+        value: () => 20 / 15 - 1,
+      },
+    ],
+  },
+  {
+    id: "yanagi-m2-polar-disorder-extra-thrust-bonus",
+    sourceType: "agent",
+    sourceId: "1221",
+    sourceName: "柳",
+    label: "影画2：极性紊乱额外突刺倍率提升",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    baselineStacks: 1,
+    fullBuffStacks: 2,
+    maxStacks: 2,
+    condition: {
+      minimumMindscape: 2,
+      damageTypes: ["disorder"],
+      combatTags: ["yanagiMoonEclipse", "yanagiExtraThrustDisorder"],
+    },
+    modifiers: [
+      {
+        bucket: "anomalyBonusDamageSum",
+        value: () => 1,
+      },
+    ],
+  },
+  {
     id: "yanagi-m4-recognized-penetration-rate",
     sourceType: "agent",
     sourceId: "1221",
@@ -1361,6 +1404,28 @@ export const staticBuildEffectDefinitions = [
       {
         bucket: "penetrationRate",
         value: () => 0.16,
+      },
+    ],
+  },
+  {
+    id: "jane-m1-frenzy-ap-bonus",
+    sourceType: "agent",
+    sourceId: "1261",
+    sourceName: "简",
+    label: "影画1：狂热状态按异常精通追加增伤",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      minimumMindscape: 1,
+      damageTypes: ["anomaly", "disorder"],
+      combatTags: ["janeFrenzy"],
+      minimumResolvedAnomalyProficiency: 0,
+    },
+    modifiers: [
+      {
+        bucket: "bonusDamageSum",
+        value: (context) =>
+          Math.min((context.resolvedAnomalyProficiency ?? 0) * 0.001, 0.3),
       },
     ],
   },
@@ -3112,6 +3177,12 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
   {
     sourceType: "agent",
     sourceId: "1221",
+    minimumMindscape: 2,
+    note: '柳的影画2当前可通过 combatTags: ["yanagiExtraThrustDisorder"] 显式展开[极性紊乱]倍率提升，full-buff 默认按 2 次额外突刺处理，manual 可通过 effectOverrides 调整层数；电异常积蓄效率与能量消耗仍未在 static resolver 中展开。',
+  },
+  {
+    sourceType: "agent",
+    sourceId: "1221",
     minimumMindscape: 4,
     note: "柳的影画4当前已支持[识破]目标的穿透率提升；[识破]施加时机与持续时间仍需通过 combatTags 显式表达。",
   },
@@ -3119,7 +3190,7 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
     sourceType: "agent",
     sourceId: "1261",
     damageTypes: ["anomaly", "disorder"],
-    note: "简的每点异常精通追加异常暴击率当前已自动折算；物理异常积蓄效率提升仍未在 static resolver 中展开，若需精细计算，请自行调整 damageMultiplier。",
+    note: '简的每点异常精通追加异常暴击率当前已自动折算；影画1的[狂热]状态异常精通转增伤当前可通过 combatTags: ["janeFrenzy"] 静态展开；物理异常积蓄效率提升仍未在 static resolver 中展开，若需精细计算，请自行调整 damageMultiplier。',
   },
   {
     sourceType: "agent",

@@ -759,6 +759,42 @@ describe("resolveBuildDamage tool", () => {
     ).toBeCloseTo(0.18, 4)
   })
 
+  it("supports Jane m1 frenzy scaling through the high-level resolver", async () => {
+    const result = await runTool(resolveBuildDamage, {
+      agent: "简",
+      wEngine: "淬锋钳刺",
+      mode: "full-buff",
+      agentLevel: 60,
+      agentMindscape: 1,
+      finalPanel: {
+        attack: 3000,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 180,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "dash",
+        damageMultiplier: "500%",
+        attribute: "物理",
+        extraAbilityActive: true,
+        combatTags: ["gnawedTarget", "janeFrenzy"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    expect((result as any).build.loadout.agentMindscape).toBe(1)
+    expect((result as any).build.resolvedBuckets.bonusDamageSum).toBeCloseTo(
+      0.54,
+      4,
+    )
+  })
+
   it("supports Yanagi mindscape-aware disorder refinements through the high-level resolver", async () => {
     const result = await runTool(resolveBuildDamage, {
       agent: "柳",
@@ -802,6 +838,42 @@ describe("resolveBuildDamage tool", () => {
       0.16,
       4,
     )
+  })
+
+  it("supports Yanagi m2 extra-thrust disorder scaling through the high-level resolver", async () => {
+    const result = await runTool(resolveBuildDamage, {
+      agent: "柳",
+      wEngine: "时流贤者",
+      mode: "full-buff",
+      agentLevel: 60,
+      agentMindscape: 2,
+      finalPanel: {
+        attack: 3100,
+        baseAttack: 1250,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 320,
+      },
+      scenario: {
+        damageType: "disorder",
+        skillTag: "enhancedSpecial",
+        anomalyType: "感电",
+        remainingTime: 5,
+        attribute: "电属性",
+        extraAbilityActive: true,
+        combatTags: ["yanagiMoonEclipse", "yanagiExtraThrustDisorder"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    expect((result as any).build.loadout.agentMindscape).toBe(2)
+    expect(
+      (result as any).build.resolvedBuckets.anomalyBonusDamageSum,
+    ).toBeCloseTo(2.5 + (20 / 15 - 1) + 2, 4)
   })
 
   it("supports Burnice fire disorder duration refinement through the high-level resolver", async () => {

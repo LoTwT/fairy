@@ -1014,6 +1014,47 @@ describe("static build resolver", () => {
     ).toBe(true)
   })
 
+  it("expands Jane m1 frenzy anomaly proficiency scaling into bonus damage", () => {
+    const result = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1261",
+        wEngineId: "14126",
+        agentLevel: 60,
+        agentMindscape: 1,
+        coreSkillLevel: 7,
+        wEngineRefinement: 1,
+      },
+      panel: {
+        attack: 3000,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 180,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "dash",
+        damageMultiplier: "500%",
+        attribute: "物理",
+        extraAbilityActive: true,
+        combatTags: ["gnawedTarget", "janeFrenzy"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.loadout.agentMindscape).toBe(1)
+    expect(result.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.54, 4)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes('combatTags: ["janeFrenzy"]'),
+      ),
+    ).toBe(true)
+  })
+
   it("applies curated disorder effects for Yanagi and Timeweaver", () => {
     const result = resolveStaticBuildDamage({
       mode: "full-buff",
@@ -1106,6 +1147,51 @@ describe("static build resolver", () => {
     expect(
       result.assumptions.some((item) =>
         item.includes("影画4当前已支持[识破]目标的穿透率提升"),
+      ),
+    ).toBe(true)
+  })
+
+  it("expands Yanagi m2 extra-thrust disorder scaling", () => {
+    const result = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1221",
+        wEngineId: "14122",
+        agentLevel: 60,
+        agentMindscape: 2,
+        coreSkillLevel: 7,
+        wEngineRefinement: 1,
+      },
+      panel: {
+        attack: 3100,
+        baseAttack: 1250,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 320,
+      },
+      scenario: {
+        damageType: "disorder",
+        skillTag: "enhancedSpecial",
+        anomalyType: "electric",
+        remainingTime: 5,
+        attribute: "电属性",
+        extraAbilityActive: true,
+        combatTags: ["yanagiMoonEclipse", "yanagiExtraThrustDisorder"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.loadout.agentMindscape).toBe(2)
+    expect(result.resolvedBuckets.anomalyBonusDamageSum).toBeCloseTo(
+      2.5 + (20 / 15 - 1) + 2,
+      4,
+    )
+    expect(
+      result.assumptions.some((item) =>
+        item.includes('combatTags: ["yanagiExtraThrustDisorder"]'),
       ),
     ).toBe(true)
   })
