@@ -77,7 +77,7 @@
 
 - `V16.1` 已完成：冻结到通用音擎 curated coverage，不继续扩大 contract
 - `V16.2` 已完成：通用音擎 inventory 与 batch 划分已冻结
-- `V16.3` 已完成 Batch A：首批可稳定表达的通用音擎已落地
+- `V16.3` 已完成 Batch B：第二批 partial coverage 已落地
 - `V16.4` 未开始
 
 ## 8. Inventory
@@ -106,10 +106,9 @@
 
 - `「灰烬」-钴蓝` 已在 Batch A 中完成 source-aware unsupported 收口：当前命破主公式不使用攻击力主乘区，因此它不再落入 generic coverage-gap，但仍会通过 `unsupported-effect diagnostics` 明示“攻击力 buff 不进入当前 sheer 公式”
 
-### 8.2 第二优先级（允许 partial coverage）
+### 8.2 第二优先级（允许 partial coverage，已完成）
 
 - `加农转子`
-- `电波漫步`
 - `幻变魔方`
 
 这批的共同点是：
@@ -149,10 +148,9 @@
 - `「电磁暴」-壹式`
 - `「电磁暴」-贰式`
 
-### Batch B
+### Batch B（已完成）
 
 - `加农转子`
-- `电波漫步`
 - `幻变魔方`
 
 ### Batch C（后续评估）
@@ -162,19 +160,21 @@
 
 ## 10. 当前结论
 
-`V16.3 Batch A` 完成后，当前已新增或收口：
+`V16.3 Batch B` 完成后，当前已新增或收口：
 
 - `鎏金花信`
 - `星徽引擎`
 - `「月相」-晦`
 - `「月相」-望`
 - `青漪灵鼎`
+- `电波漫步`
 - `「电磁暴」-壹式`
 - `「电磁暴」-贰式`
 - `「灰烬」-钴蓝`（source-aware unsupported）
+- `加农转子`（稳定攻击力加成已纳入；额外 200% 攻击伤害保持 process-only）
+- `幻变魔方`（强化特殊技暴伤与 lowHp 条件增伤已纳入）
 
-下一步继续进入 `Batch B`：
+下一步只剩 `Batch C` 评估：
 
-- `加农转子`
-- `电波漫步`
-- `幻变魔方`
+- `强音热望`
+- `街头巨星`

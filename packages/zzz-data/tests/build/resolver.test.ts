@@ -682,6 +682,7 @@ describe("static build resolver", () => {
       loadout: {
         agentId: "1021",
         wEngineId: "14001",
+        wEngineRefinement: 1,
       },
       panel: {
         attack: 2800,
@@ -703,19 +704,20 @@ describe("static build resolver", () => {
 
     expect(result.loadout.agent.name).toBe("猫又")
     expect(result.loadout.wEngine?.name).toBe("加农转子")
+    expect(result.resolvedBuckets.attackPercent).toBeCloseTo(0.075, 4)
+    expect(result.resolvedPanel.attack).toBeCloseTo(2882.5, 4)
     expect(
       result.assumptions.some((item) =>
         item.includes("加农转子 当前未收录 curated 音擎效果"),
       ),
-    ).toBe(true)
+    ).toBe(false)
     expect(
-      result.diagnostics.some(
+      result.sourceNotes.some(
         (item) =>
-          item.kind === "coverage-gap" &&
-          item.owner === "source" &&
           item.sourceType === "w-engine" &&
           item.sourceId === "14001" &&
-          item.keys.includes("loadout.wEngineId"),
+          item.status === "process-only" &&
+          item.guidance.kind === "keep-process-only",
       ),
     ).toBe(true)
   })
@@ -843,6 +845,71 @@ describe("static build resolver", () => {
     expect(obscure.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.15, 4)
     expect(full.loadout.wEngine?.name).toBe("「月相」-望")
     expect(full.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.12, 4)
+  })
+
+  it("applies partial curated rupture generic w-engine effects for Puzzle Sphere", () => {
+    const regular = resolveStaticBuildDamage({
+      loadout: {
+        agentId: "1471",
+        wEngineId: "13012",
+        wEngineRefinement: 1,
+      },
+      panel: {
+        attack: 2400,
+        baseAttack: 1000,
+        critRate: 0.35,
+        critDamage: 1.1,
+        sheerForce: 1650,
+      },
+      scenario: {
+        damageType: "sheer",
+        skillTag: "enhancedSpecial",
+        skillMultiplier: "500%",
+        attribute: "火属性",
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+    const lowHp = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1471",
+        wEngineId: "13012",
+        wEngineRefinement: 1,
+      },
+      panel: {
+        attack: 2400,
+        baseAttack: 1000,
+        critRate: 0.35,
+        critDamage: 1.1,
+        sheerForce: 1650,
+      },
+      scenario: {
+        damageType: "sheer",
+        skillTag: "enhancedSpecial",
+        skillMultiplier: "500%",
+        attribute: "火属性",
+        combatTags: ["lowHp"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(regular.loadout.wEngine?.name).toBe("幻变魔方")
+    expect(regular.resolvedBuckets.critDamage).toBeCloseTo(0.16, 4)
+    expect(regular.resolvedBuckets.bonusDamageSum).toBe(0)
+    expect(
+      regular.assumptions.some((item) =>
+        item.includes("幻变魔方 当前未收录 curated"),
+      ),
+    ).toBe(false)
+
+    expect(lowHp.resolvedBuckets.critDamage).toBeCloseTo(0.16, 4)
+    expect(lowHp.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.2, 4)
   })
 
   it("applies curated rupture generic w-engine effects for Qingyi Cauldron", () => {

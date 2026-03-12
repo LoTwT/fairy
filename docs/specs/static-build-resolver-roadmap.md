@@ -1003,7 +1003,7 @@ Batch B：
 
 - `V16.1` 已完成：冻结到通用音擎 curated coverage，不继续扩大 contract
 - `V16.2` 已完成：inventory 与 batch 划分已冻结
-- `V16.3` 已完成 Batch A：首批可稳定表达的通用音擎已落地
+- `V16.3` 已完成 Batch B：第二批 partial coverage 已落地
 - `V16.4` 未开始
 
 ### 21.4 当前批次规划
@@ -1022,10 +1022,9 @@ Batch A（已完成）：
 
 - `「灰烬」-钴蓝` 已在 Batch A 中完成 source-aware unsupported 收口：它不再落入 generic coverage-gap，但攻击力 buff 不进入当前命破 sheer 公式
 
-Batch B：
+Batch B（已完成）：
 
 - `加农转子`
-- `电波漫步`
 - `幻变魔方`
 
 Batch C（后续评估）：

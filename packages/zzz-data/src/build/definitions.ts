@@ -302,6 +302,9 @@ const electroWalkPenetrationValue = [80, 92, 104, 116, 128] as const
 const electromagMk2AnomalyProficiency = [25, 28, 32, 36, 40] as const
 const electromagMk1AnomalyMastery = [25, 28, 32, 36, 40] as const
 const ashCobaltAttackPercent = [0.072, 0.082, 0.093, 0.104, 0.115] as const
+const cannonRotorAttackPercent = [0.075, 0.086, 0.097, 0.108, 0.12] as const
+const puzzleSphereCritDamage = [0.16, 0.184, 0.208, 0.232, 0.256] as const
+const puzzleSphereLowHpBonus = [0.2, 0.23, 0.26, 0.29, 0.32] as const
 const starlightEngineAttackPercent = [0.12, 0.138, 0.156, 0.174, 0.192] as const
 const moonPhaseObscureBonus = [0.15, 0.175, 0.2, 0.225, 0.25] as const
 const moonPhaseFullBonus = [0.12, 0.14, 0.16, 0.18, 0.2] as const
@@ -2171,6 +2174,58 @@ export const staticBuildEffectDefinitions = [
       {
         bucket: "attackPercent",
         value: byRefinement(ashCobaltAttackPercent),
+      },
+    ],
+  },
+  {
+    id: "cannon-rotor-attack-percent",
+    sourceType: "w-engine",
+    sourceId: "14001",
+    sourceName: "加农转子",
+    label: "音擎被动：攻击力提升",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    modifiers: [
+      {
+        bucket: "attackPercent",
+        value: byRefinement(cannonRotorAttackPercent),
+      },
+    ],
+  },
+  {
+    id: "puzzle-sphere-crit-damage",
+    sourceType: "w-engine",
+    sourceId: "13012",
+    sourceName: "幻变魔方",
+    label: "音擎被动：强化特殊技暴击伤害",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      skillTags: ["enhancedSpecial"],
+    },
+    modifiers: [
+      {
+        bucket: "critDamage",
+        value: byRefinement(puzzleSphereCritDamage),
+      },
+    ],
+  },
+  {
+    id: "puzzle-sphere-low-hp-bonus",
+    sourceType: "w-engine",
+    sourceId: "13012",
+    sourceName: "幻变魔方",
+    label: "音擎被动：低生命目标强化特殊技增伤",
+    baselineEnabled: false,
+    fullBuffEnabled: true,
+    condition: {
+      skillTags: ["enhancedSpecial"],
+      combatTags: ["lowHp"],
+    },
+    modifiers: [
+      {
+        bucket: "bonusDamageSum",
+        value: byRefinement(puzzleSphereLowHpBonus),
       },
     ],
   },
@@ -4109,6 +4164,11 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
     requiredStateFlags: ["miyabiFrostburnBreakState"],
     requiredStateValues: ["miyabiFrostburnBreakDamageRatio"],
     note: "雅当前已记录 scenario.stateSnapshot 的[霜灼·破]状态与倍率快照；这一部分继续归 stateSnapshot，不迁到 resolvedSnapshot。独立烈霜异常槽与额外烈霜伤害仍未并入现有 anomaly/disorder 公式。",
+  },
+  {
+    sourceType: "w-engine",
+    sourceId: "14001",
+    note: "加农转子的攻击力加成当前已静态展开；暴击命中后触发的额外 200% 攻击力伤害与触发间隔仍属于真动态过程，不继续迁到 static resolver。",
   },
   {
     sourceType: "w-engine",
