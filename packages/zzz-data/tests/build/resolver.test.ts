@@ -843,6 +843,46 @@ describe("static build resolver", () => {
     ).toBe(false)
   })
 
+  it("expands Grace m2 electric resistance reduction on grenade-hit targets", () => {
+    const result = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1181",
+        wEngineId: "14118",
+        agentLevel: 60,
+        agentMindscape: 2,
+        wEngineRefinement: 1,
+      },
+      panel: {
+        attack: 3000,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 120,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "enhancedSpecial",
+        damageMultiplier: "500%",
+        attribute: "电属性",
+        extraAbilityActive: true,
+        combatTags: ["graceShockPrepared", "graceGrenadeHitTarget"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.loadout.agentMindscape).toBe(2)
+    expect(result.resolvedBuckets.resistanceReduction).toBeCloseTo(0.085, 4)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes('combatTags: ["graceGrenadeHitTarget"]'),
+      ),
+    ).toBe(true)
+  })
+
   it("resolves disorder damage for anomaly agents", () => {
     const result = resolveStaticBuildDamage({
       mode: "full-buff",
@@ -1347,6 +1387,44 @@ describe("static build resolver", () => {
     expect(
       result.assumptions.some((item) =>
         item.includes("finalPanel.energyGenerationRate 展开潜能觉醒：沸点派对"),
+      ),
+    ).toBe(true)
+  })
+
+  it("expands Burnice m2 heat penetration with stack-aware penetration rate", () => {
+    const result = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1171",
+        agentLevel: 60,
+        agentMindscape: 2,
+      },
+      panel: {
+        attack: 3100,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 160,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "enhancedSpecial",
+        damageMultiplier: "520%",
+        attribute: "火属性",
+        extraAbilityActive: true,
+        combatTags: ["burniceHeatPenetration"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.loadout.agentMindscape).toBe(2)
+    expect(result.resolvedBuckets.penetrationRate).toBeCloseTo(0.2, 4)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes('combatTags: ["burniceHeatPenetration"]'),
       ),
     ).toBe(true)
   })

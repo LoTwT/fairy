@@ -1219,6 +1219,28 @@ export const staticBuildEffectDefinitions = [
     ],
   },
   {
+    id: "burnice-m2-heat-penetration",
+    sourceType: "agent",
+    sourceId: "1171",
+    sourceName: "柏妮思",
+    label: "影画2：热意洞穿层数穿透率",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    baselineStacks: 1,
+    fullBuffStacks: 5,
+    maxStacks: 5,
+    condition: {
+      minimumMindscape: 2,
+      combatTags: ["burniceHeatPenetration"],
+    },
+    modifiers: [
+      {
+        bucket: "penetrationRate",
+        value: () => 0.04,
+      },
+    ],
+  },
+  {
     id: "grace-extra-shock-anomaly-bonus",
     sourceType: "agent",
     sourceId: "1181",
@@ -1239,6 +1261,27 @@ export const staticBuildEffectDefinitions = [
       {
         bucket: "anomalyBonusDamageSum",
         value: () => 0.18,
+      },
+    ],
+  },
+  {
+    id: "grace-m2-electric-resistance-reduction",
+    sourceType: "agent",
+    sourceId: "1181",
+    sourceName: "格莉丝",
+    label: "影画2：手雷命中后的电抗降低",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      minimumMindscape: 2,
+      damageTypes: ["anomaly", "disorder"],
+      attributes: ["Electric"],
+      combatTags: ["graceGrenadeHitTarget"],
+    },
+    modifiers: [
+      {
+        bucket: "resistanceReduction",
+        value: () => 0.085,
       },
     ],
   },
@@ -3014,7 +3057,7 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
     sourceType: "agent",
     sourceId: "1171",
     minimumMindscape: 2,
-    note: "柏妮思的影画2[热意洞穿]层数与穿透率收益仍需显式堆层；当前未在 static resolver 中自动展开。",
+    note: '柏妮思的影画2[热意洞穿]当前可通过 combatTags: ["burniceHeatPenetration"] 显式启用，full-buff 默认按 5 层处理，manual 可通过 effectOverrides 调整层数；施加时机与持续时间仍未自动展开。',
   },
   {
     sourceType: "agent",
@@ -3052,7 +3095,7 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
     sourceType: "agent",
     sourceId: "1181",
     damageTypes: ["anomaly", "disorder"],
-    note: "格莉丝的[电能]层数与电属性异常积蓄效率未在 static resolver 中展开；若需要把该部分折算进异常倍率，请显式调整 scenario.damageMultiplier。",
+    note: '格莉丝的影画2当前可通过 combatTags: ["graceGrenadeHitTarget"] 显式展开电抗降低；[电能]层数与电属性异常积蓄效率仍未在 static resolver 中展开，若需要把该部分折算进异常倍率，请显式调整 scenario.damageMultiplier。',
   },
   {
     sourceType: "agent",

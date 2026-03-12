@@ -479,6 +479,41 @@ describe("resolveBuildDamage tool", () => {
     )
   })
 
+  it("supports Grace m2 electric resistance reduction through the high-level resolver", async () => {
+    const result = await runTool(resolveBuildDamage, {
+      agent: "格莉丝",
+      wEngine: "嵌合编译器",
+      mode: "full-buff",
+      agentLevel: 60,
+      agentMindscape: 2,
+      finalPanel: {
+        attack: 3000,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 120,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "enhancedSpecial",
+        damageMultiplier: "500%",
+        attribute: "电属性",
+        extraAbilityActive: true,
+        combatTags: ["graceShockPrepared", "graceGrenadeHitTarget"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    expect((result as any).build.loadout.agentMindscape).toBe(2)
+    expect(
+      (result as any).build.resolvedBuckets.resistanceReduction,
+    ).toBeCloseTo(0.085, 4)
+  })
+
   it("supports disorder damage through the high-level resolver", async () => {
     const result = await runTool(resolveBuildDamage, {
       agent: "格莉丝",
@@ -841,6 +876,41 @@ describe("resolveBuildDamage tool", () => {
       4,
     )
     expect((result as any).build.resolvedBuckets.bonusDamageSum).toBeCloseTo(
+      0.2,
+      4,
+    )
+  })
+
+  it("supports Burnice m2 heat penetration through the high-level resolver", async () => {
+    const result = await runTool(resolveBuildDamage, {
+      agent: "柏妮思",
+      mode: "full-buff",
+      agentLevel: 60,
+      agentMindscape: 2,
+      finalPanel: {
+        attack: 3100,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 160,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "enhancedSpecial",
+        damageMultiplier: "520%",
+        attribute: "火属性",
+        extraAbilityActive: true,
+        combatTags: ["burniceHeatPenetration"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    expect((result as any).build.loadout.agentMindscape).toBe(2)
+    expect((result as any).build.resolvedBuckets.penetrationRate).toBeCloseTo(
       0.2,
       4,
     )
