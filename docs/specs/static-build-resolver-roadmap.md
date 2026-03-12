@@ -887,3 +887,45 @@ research-only，暂不进入实现：
 - `V12.2` 已完成：默认 attribute / extraAbilityActive / agentMindscape / anomaly agentLevel 已有结构化 `defaulted-input diagnostics`
 - `V12.3` 已完成：未收录 curated source 与缺少 `finalPanel.baseAttack` 等 unsupported effects 已有结构化镜像
 - `V12.4` 已完成：高层 resolver、source view 条目与 agent prompt 已优先消费 `diagnostics`
+
+## 18. V13 anomaly/disorder curated coverage
+
+### 18.1 目标
+
+在不新增 contract 的前提下，继续减少 anomaly / disorder 路径中的 `coverage-gap diagnostics`。
+
+### 18.2 范围
+
+1. `V13.1` scope freeze
+2. `V13.2` anomaly/disorder coverage inventory
+3. `V13.3` batch A coverage
+4. `V13.4` batch B coverage
+5. `V13.5` closeout
+
+### 18.3 当前状态
+
+- `V13.1` 已完成
+- `V13.2` 未开始
+- `V13.3` 未开始
+- `V13.4` 未开始
+- `V13.5` 未开始
+
+### 18.4 当前批次规划
+
+Batch A：
+
+- `格莉丝`
+- `简`
+- `柳`
+- `派派`
+- `淬锋钳刺`
+- `时流贤者`
+- `触电唇彩`
+
+Batch B：
+
+- `柏妮思`
+- `爱丽丝`
+- `爱芮`
+- `灼心摇壶`
+- `壳中之灵`
