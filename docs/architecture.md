@@ -189,7 +189,7 @@ packages/zzz-agent/
 - [`static-build-resolver-v5.md`](../docs/specs/static-build-resolver-v5.md) — 当前阶段范围：`V5` 已在当前 contract 下收口；`柏妮思` / `爱芮` 的 `dynamicSnapshot` 已进入 anomaly/disorder resolver，并已细化 source-specific assumptions
 - [`static-build-resolver-v6.md`](../docs/specs/static-build-resolver-v6.md) — 当前阶段范围：已完成 `V6.3` 首批 `爱丽丝` / `雅` source-state snapshot coverage，并同步细化首批 state-aware assumptions
 - [`static-build-resolver-v7.md`](../docs/specs/static-build-resolver-v7.md) — 当前阶段范围：`V7.3` 前四批已完成，并在当前 contract 下收口；`柏妮思 M6` 的 `25% 火抗无视` 已接到 `scenario.resolvedSnapshot.bucketDeltas.ignoreResistance`，`格莉丝 M2`、`简`、`派派`、`时流贤者`、`柳 M2`、`薇薇安 M2` 的异常倍率折算已收口到 `scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor`
-- [`static-build-resolver-v8.md`](../docs/specs/static-build-resolver-v8.md) — 当前阶段范围：`V8.1` contract freeze 已完成；下一步盘点 anomaly / disorder 剩余 assumptions 的 contract 归属，并只在存在明确共性时新增最小 contract
+- [`static-build-resolver-v8.md`](../docs/specs/static-build-resolver-v8.md) — 当前阶段范围：已完成 `V8.1` contract freeze、`V8.2` 第一批 inventory 与 `V8.4` 第一批 source-note 收口；当前结论是不新增 public key，先继续按 contract 归属收紧 assumptions
 
 ## 计算器模块（src/calculator/）
 

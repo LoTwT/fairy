@@ -26,7 +26,7 @@
 - `V8.1` contract freeze：已完成
 - `V8.2` assumption inventory：已完成第一批
 - `V8.3` minimal contract additions：当前结论为暂不进入
-- `V8.4` source migration / closeout：未开始
+- `V8.4` source migration / closeout：已完成第一批 note refinement
 
 ## 1. 为什么需要 V8
 
@@ -266,7 +266,29 @@
   - 或真动态过程
 - 在没有出现新的“共享静态快照值”之前，不新增 public key
 
-## 10. 验收标准
+## 10. `V8.4` 第一批收口
+
+第一批收口没有新增 contract，而是先把 source-specific assumptions 改写为更明确的 contract 归属说明。
+
+当前已收口的高风险来源：
+
+- `奥菲丝&「鬼火」`：后台自动释放、`[蓄炎]` 循环、喧响值回复、M6 追加激光
+- `柳`：`[月相]` 架势切换、`[洞悉]` 层数获取 / 消耗
+- `简 M6`
+- `薇薇安`：`[异放]` 比例 / 追击伤害、`[护羽]/[飞羽]` 消耗与回复
+- `雅`：独立烈霜异常槽
+- `灼心摇壶`
+- `轰鸣座驾`
+- `十方锻星`
+
+这批收口后的目标是：
+
+- 人和上层 Agent 不再把这些来源误判成“应该继续加一个新的 snapshot key”
+- 先明确它们属于：
+  - 现有 contract
+  - 或真动态过程
+
+## 11. 验收标准
 
 `V8` 完成后，至少满足：
 

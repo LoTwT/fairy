@@ -3429,19 +3429,19 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
     sourceId: "1301",
     requiresEnergyGenerationRate: true,
     damageTypes: ["normal"],
-    note: "奥菲丝&「鬼火」当前已按 finalPanel.energyGenerationRate 展开[准星聚焦]的额外攻击力；影画1的火抗无视、影画2的终结技后攻击力与影画4的强化特殊技/终结技增伤已可静态展开，后台自动释放与[蓄炎]循环仍未在 static resolver 中展开。",
+    note: "奥菲丝&「鬼火」当前已按 finalPanel.energyGenerationRate 展开[准星聚焦]的额外攻击力；影画1的火抗无视、影画2的终结技后攻击力与影画4的强化特殊技/终结技增伤已可静态展开。后台自动释放与[蓄炎]循环属于真动态过程，不继续迁到 snapshot contract。",
   },
   {
     sourceType: "agent",
     sourceId: "1301",
     minimumMindscape: 2,
-    note: "奥菲丝&「鬼火」的影画2喧响值回复仍未在 static resolver 中展开；当前只展开终结技后的攻击力提升。",
+    note: "奥菲丝&「鬼火」的影画2喧响值回复仍未在 static resolver 中展开；当前只展开终结技后的攻击力提升。喧响值回复属于资源过程，不继续迁到 static snapshot contract。",
   },
   {
     sourceType: "agent",
     sourceId: "1301",
     minimumMindscape: 6,
-    note: "奥菲丝&「鬼火」的影画6追加激光伤害与[蓄炎]回复仍未在 static resolver 中展开。",
+    note: "奥菲丝&「鬼火」的影画6追加激光伤害与[蓄炎]回复仍未在 static resolver 中展开；两者都属于真动态过程，不继续迁到 static snapshot contract。",
   },
   {
     sourceType: "agent",
@@ -3463,13 +3463,13 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
     sourceType: "agent",
     sourceId: "1221",
     damageTypes: ["anomaly", "disorder"],
-    note: "柳的[月相]架势切换后电异常积蓄效率未在 static resolver 中展开；若 disorder 触发前未满足[月蚀]条件，请关闭对应 combatTags。",
+    note: "柳的[月相]架势切换后电异常积蓄效率未在 static resolver 中展开；若 disorder 触发前未满足[月蚀]条件，请关闭对应 combatTags。月相切换与[月蚀]满足属于状态 / 战斗节奏问题，当前不新增新的 snapshot key。",
   },
   {
     sourceType: "agent",
     sourceId: "1221",
     minimumMindscape: 1,
-    note: "柳的影画1当前已支持[洞悉]状态下的异常精通提升；洞悉层数获取与消耗仍未在 static resolver 中展开。",
+    note: "柳的影画1当前已支持[洞悉]状态下的异常精通提升；洞悉层数获取与消耗仍未在 static resolver 中展开，属于资源 / 状态过程，不继续迁到新的 snapshot key。",
   },
   {
     sourceType: "agent",
@@ -3521,7 +3521,7 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
     sourceType: "agent",
     sourceId: "1261",
     minimumMindscape: 6,
-    note: "简的影画6[狂热]直入、暴击属性提升与额外攻击仍未在 static resolver 中展开。",
+    note: "简的影画6[狂热]直入、暴击属性提升与额外攻击仍未在 static resolver 中展开；这些项都依赖真动态过程，不继续迁到静态 snapshot contract。",
   },
   {
     sourceType: "agent",
@@ -3541,13 +3541,13 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
     sourceType: "agent",
     sourceId: "1331",
     damageTypes: ["anomaly", "disorder"],
-    note: "薇薇安的[异放]比例与[薇薇安的预言]追击伤害未在 static resolver 中展开；当前已支持额外能力的侵蚀/紊乱增伤。",
+    note: "薇薇安的[异放]比例与[薇薇安的预言]追击伤害未在 static resolver 中展开；当前已支持额外能力的侵蚀/紊乱增伤。若后续要静态快照化，优先评估是否应归到 dynamicSnapshot，而不是继续扩 resolvedSnapshot。",
   },
   {
     sourceType: "agent",
     sourceId: "1331",
     minimumMindscape: 1,
-    note: "薇薇安的影画1已支持[薇薇安的预言]目标的异常/紊乱增伤；[护羽]/[飞羽]消耗与回复仍未在 static resolver 中展开。",
+    note: "薇薇安的影画1已支持[薇薇安的预言]目标的异常/紊乱增伤；[护羽]/[飞羽]消耗与回复仍未在 static resolver 中展开，属于真动态过程。",
   },
   {
     sourceType: "agent",
@@ -3662,7 +3662,7 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
     sourceType: "agent",
     sourceId: "1091",
     damageTypes: ["anomaly", "disorder"],
-    note: "雅的独立烈霜异常槽、[霜灼·破]与[霜灼]累积加成未在 static resolver 中展开；若当前轮次已知[霜灼·破]状态，可通过 scenario.stateSnapshot 显式提供。",
+    note: "雅的独立烈霜异常槽、[霜灼·破]与[霜灼]累积加成未在 static resolver 中展开；若当前轮次已知[霜灼·破]状态，可通过 scenario.stateSnapshot 显式提供。独立烈霜异常槽属于独立资源 / 积蓄过程，不继续迁到 resolvedSnapshot。",
   },
   {
     sourceType: "agent",
@@ -3684,7 +3684,7 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
     sourceType: "w-engine",
     sourceId: "14117",
     damageTypes: ["anomaly", "disorder"],
-    note: "灼心摇壶的后场能量自动回复未在 static resolver 中展开；当前已展开伤害层数与≥5层额外异常精通。",
+    note: "灼心摇壶的后场能量自动回复未在 static resolver 中展开；当前已展开伤害层数与≥5层额外异常精通。后场能量自动回复属于真动态过程，不迁到 finalPanel 或 resolvedSnapshot。",
   },
   {
     sourceType: "w-engine",
@@ -3710,7 +3710,7 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
     sourceType: "w-engine",
     sourceId: "13128",
     damageTypes: ["anomaly", "disorder"],
-    note: "轰鸣座驾的随机三选一增益未在 static resolver 中确定展开；请通过 finalPanel 或 manual override 手动折算。",
+    note: "轰鸣座驾的随机三选一增益未在 static resolver 中确定展开；攻击力 / 异常精通分支若已确定，可分别折算到 finalPanel，异常积蓄效率分支若已折算为最终异常倍率，可通过 scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor 提供。随机分支选择本身仍属于真动态过程。",
   },
   {
     sourceType: "w-engine",
@@ -3724,7 +3724,7 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
     sourceId: "14140",
     requiresAnomalyMastery: true,
     damageTypes: ["anomaly", "disorder"],
-    note: "十方锻星的[强击]触发/接战即满层逻辑未在 static resolver 中展开；异常掌控部分可通过 finalPanel.anomalyMastery 快照体现，当前只展开稳定的物理伤害层数。",
+    note: "十方锻星的[强击]触发/接战即满层逻辑未在 static resolver 中展开；异常掌控部分可通过 finalPanel.anomalyMastery 快照体现，当前只展开稳定的物理伤害层数。满层触发时机属于状态 / 过程问题，不继续迁到新的 snapshot key。",
   },
   {
     sourceType: "drive-disc",
