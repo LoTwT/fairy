@@ -1090,6 +1090,49 @@ describe("static build resolver", () => {
     ).toBe(true)
   })
 
+  it("applies Burnice extra ability to fire disorder remaining-time scaling", () => {
+    const result = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1171",
+        agentLevel: 60,
+        coreSkillLevel: 7,
+      },
+      panel: {
+        attack: 3100,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 160,
+      },
+      scenario: {
+        damageType: "disorder",
+        skillTag: "assist",
+        anomalyType: "fire",
+        remainingTime: 5,
+        attribute: "火属性",
+        extraAbilityActive: true,
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.resolvedBuckets.anomalyBonusDamageSum).toBeCloseTo(
+      12.5 / 9.5 - 1,
+      4,
+    )
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("已展开额外能力带来的灼烧持续时间延长"),
+      ),
+    ).toBe(true)
+    expect(
+      result.assumptions.some((item) => item.includes("[燃点]/[余烬]")),
+    ).toBe(true)
+  })
+
   it("replaces generic anomaly assumptions with source-specific Alice notes", () => {
     const result = resolveStaticBuildDamage({
       mode: "full-buff",

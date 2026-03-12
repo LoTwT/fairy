@@ -2,6 +2,7 @@ import type {
   StaticBuildEffectDefinition,
   StaticBuildValueContext,
 } from "./types.js"
+import { calcDisorderDamageMultiplier } from "../calculator/factors.js"
 
 function byCoreSkill(values: readonly number[]) {
   return ({ coreSkillLevel }: StaticBuildValueContext): number => {
@@ -15,6 +16,15 @@ function byRefinement(values: readonly number[]) {
     const index = Math.max(1, Math.min(wEngineRefinement, values.length)) - 1
     return values[index] ?? values[values.length - 1] ?? 0
   }
+}
+
+function burniceFireDisorderDurationBonus({
+  remainingTime,
+}: StaticBuildValueContext): number {
+  const time = remainingTime ?? 0
+  const base = calcDisorderDamageMultiplier("fire", time)
+  const extended = calcDisorderDamageMultiplier("fire", time + 3)
+  return extended / base - 1
 }
 
 // prettier-ignore
@@ -966,6 +976,26 @@ export const staticBuildEffectDefinitions = [
       {
         bucket: "critDamage",
         value: () => 0.4,
+      },
+    ],
+  },
+  {
+    id: "burnice-extra-fire-disorder-duration-bonus",
+    sourceType: "agent",
+    sourceId: "1171",
+    sourceName: "柏妮思",
+    label: "额外能力：灼烧持续时间延长转火源紊乱倍率",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      requireExtraAbility: true,
+      damageTypes: ["disorder"],
+      disorderSourceTypes: ["fire"],
+    },
+    modifiers: [
+      {
+        bucket: "anomalyBonusDamageSum",
+        value: burniceFireDisorderDurationBonus,
       },
     ],
   },
@@ -2510,7 +2540,7 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
     sourceType: "agent",
     sourceId: "1171",
     damageTypes: ["anomaly", "disorder"],
-    note: "柏妮思的[燃点]/[余烬]触发链、灼烧持续时间与异常积蓄效率未在 static resolver 中展开；当前只消费显式 damageMultiplier、finalPanel 与已支持的公共增益。",
+    note: "柏妮思的[燃点]/[余烬]触发链与异常积蓄效率未在 static resolver 中展开；当前已展开额外能力带来的灼烧持续时间延长。",
   },
   {
     sourceType: "agent",

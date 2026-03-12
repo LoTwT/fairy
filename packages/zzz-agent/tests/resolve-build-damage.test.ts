@@ -550,6 +550,41 @@ describe("resolveBuildDamage tool", () => {
     )
   })
 
+  it("supports Burnice fire disorder duration refinement through the high-level resolver", async () => {
+    const result = await runTool(resolveBuildDamage, {
+      agent: "柏妮思",
+      wEngine: "灼心摇壶",
+      mode: "full-buff",
+      agentLevel: 60,
+      finalPanel: {
+        attack: 3100,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 160,
+      },
+      scenario: {
+        damageType: "disorder",
+        skillTag: "assist",
+        anomalyType: "灼烧",
+        remainingTime: 5,
+        attribute: "火属性",
+        extraAbilityActive: true,
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    expect((result as any).build.loadout.agent.name).toBe("柏妮思")
+    expect((result as any).build.loadout.wEngine.name).toBe("灼心摇壶")
+    expect(
+      (result as any).build.resolvedBuckets.anomalyBonusDamageSum,
+    ).toBeCloseTo(12.5 / 9.5 - 1, 4)
+  })
+
   it("rejects anomaly formulas for non-anomaly agents", async () => {
     await expect(
       runTool(resolveBuildDamage, {
