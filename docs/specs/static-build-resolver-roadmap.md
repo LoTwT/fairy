@@ -768,7 +768,7 @@ resolver 主线完成后，文档维护需要单独列为持续事项，避免�
   - 真动态过程
 - 当前没有发现足够共性的新增 public contract 候选
 - 因此 `V8.3 minimal contract additions` 先不进入实现
-- `V8.4` 第一批已完成，已把高风险 source-specific assumptions 改写成更明确的 contract 归属说明
+- `V8.4` 前三批已完成，已把高风险 source-specific assumptions 改写成更明确的 contract 归属说明
 
 下一步：
 

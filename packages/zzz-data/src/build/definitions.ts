@@ -3348,7 +3348,7 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
     sourceId: "1171",
     damageTypes: ["anomaly", "disorder"],
     requiresMissingDynamicFlags: ["burniceEmberState"],
-    note: "柏妮思当前已展开额外能力带来的灼烧持续时间延长；[燃点]/[余烬]额外结算仍需要通过 scenario.dynamicSnapshot.flags.burniceEmberState 显式标记是否生效，未提供时不自动猜测。",
+    note: "柏妮思当前已展开额外能力带来的灼烧持续时间延长；[燃点]/[余烬]额外结算仍需要通过 scenario.dynamicSnapshot.flags.burniceEmberState 显式标记是否生效，未提供时不自动猜测。这一部分继续归 dynamicSnapshot，不迁到 resolvedSnapshot。",
   },
   {
     sourceType: "agent",
@@ -3356,7 +3356,7 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
     damageTypes: ["anomaly", "disorder"],
     requiredDynamicFlags: ["burniceEmberState"],
     requiresMissingDynamicCounts: ["burniceEmberExtraTriggers"],
-    note: "柏妮思的[燃点]/[余烬]额外结算次数当前需要通过 scenario.dynamicSnapshot.counts.burniceEmberExtraTriggers 显式提供；未提供时不自动猜测。",
+    note: "柏妮思的[燃点]/[余烬]额外结算次数当前需要通过 scenario.dynamicSnapshot.counts.burniceEmberExtraTriggers 显式提供；未提供时不自动猜测。这一部分继续归 dynamicSnapshot，不迁到 resolvedSnapshot。",
   },
   {
     sourceType: "agent",
@@ -3364,7 +3364,7 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
     damageTypes: ["anomaly", "disorder"],
     requiredDynamicFlags: ["burniceEmberState"],
     requiresMissingDynamicValues: ["burniceEmberDamageRatio"],
-    note: "柏妮思的[燃点]/[余烬]额外结算倍率当前需要通过 scenario.dynamicSnapshot.values.burniceEmberDamageRatio 显式提供；未提供时不自动猜测。",
+    note: "柏妮思的[燃点]/[余烬]额外结算倍率当前需要通过 scenario.dynamicSnapshot.values.burniceEmberDamageRatio 显式提供；未提供时不自动猜测。这一部分继续归 dynamicSnapshot，不迁到 resolvedSnapshot。",
   },
   {
     sourceType: "agent",
@@ -3373,7 +3373,7 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
     requiredDynamicFlags: ["burniceEmberState"],
     requiredDynamicCounts: ["burniceEmberExtraTriggers"],
     requiredDynamicValues: ["burniceEmberDamageRatio"],
-    note: "柏妮思当前已展开额外能力带来的灼烧持续时间延长，并按 scenario.dynamicSnapshot 的[燃点]/[余烬]快照展开额外结算倍率；触发链、异常积蓄效率与间隔降低仍未在 static resolver 中展开。",
+    note: "柏妮思当前已展开额外能力带来的灼烧持续时间延长，并按 scenario.dynamicSnapshot 的[燃点]/[余烬]快照展开额外结算倍率；触发链、异常积蓄效率与间隔降低仍未在 static resolver 中展开，属于真动态过程。",
   },
   {
     sourceType: "agent",
@@ -3387,13 +3387,13 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
     sourceId: "1171",
     minimumMindscape: 1,
     requiresEnergyGenerationRate: true,
-    note: "柏妮思当前已按 finalPanel.energyGenerationRate 展开潜能觉醒：沸点派对 的异常掌控与伤害提升；[余烬]间隔降低仍未在 static resolver 中展开。",
+    note: "柏妮思当前已按 finalPanel.energyGenerationRate 展开潜能觉醒：沸点派对 的异常掌控与伤害提升；[余烬]间隔降低仍未在 static resolver 中展开，属于真动态过程，不继续扩 finalPanel。",
   },
   {
     sourceType: "agent",
     sourceId: "1171",
     minimumMindscape: 1,
-    note: "柏妮思的影画1[热络同心]中，[余烬]倍率提升与异常积蓄值提升仍未在 static resolver 中展开。",
+    note: "柏妮思的影画1[热络同心]中，[余烬]倍率提升与异常积蓄值提升仍未在 static resolver 中展开；若后续要静态快照化，优先继续归 dynamicSnapshot，而不是扩 resolvedSnapshot。",
   },
   {
     sourceType: "agent",
@@ -3449,7 +3449,7 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
     minimumMindscape: 2,
     damageTypes: ["anomaly", "disorder"],
     requiresMissingResolvedSnapshotMultipliers: ["skillMultiplierFactor"],
-    note: '格莉丝的影画2当前可通过 combatTags: ["graceGrenadeHitTarget"] 显式展开电抗降低；[电能]层数与电属性异常积蓄效率仍未在 static resolver 中展开，若需要把该部分折算进最终异常倍率，请通过 scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor 显式提供。',
+    note: '格莉丝的影画2当前可通过 combatTags: ["graceGrenadeHitTarget"] 显式展开电抗降低；[电能]层数获取与消耗仍属于状态 / 过程问题，不新增新的 snapshot key。若只关心电属性异常积蓄效率折算后的最终异常倍率，请通过 scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor 显式提供。',
   },
   {
     sourceType: "agent",
@@ -3457,7 +3457,7 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
     minimumMindscape: 2,
     damageTypes: ["anomaly", "disorder"],
     requiredResolvedSnapshotMultipliers: ["skillMultiplierFactor"],
-    note: '格莉丝的影画2当前可通过 combatTags: ["graceGrenadeHitTarget"] 显式展开电抗降低；[电能]层数与电属性异常积蓄效率折算后的最终异常倍率已按 scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor 记录。',
+    note: '格莉丝的影画2当前可通过 combatTags: ["graceGrenadeHitTarget"] 显式展开电抗降低；[电能]层数获取与消耗仍属于状态 / 过程问题，电属性异常积蓄效率折算后的最终异常倍率已按 scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor 记录。',
   },
   {
     sourceType: "agent",
@@ -3496,14 +3496,14 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
     sourceId: "1261",
     damageTypes: ["anomaly", "disorder"],
     requiresMissingResolvedSnapshotMultipliers: ["skillMultiplierFactor"],
-    note: '简的每点异常精通追加异常暴击率当前已自动折算；影画1的[狂热]状态异常精通转增伤当前可通过 combatTags: ["janeFrenzy"] 静态展开；物理异常积蓄效率提升仍未在 static resolver 中展开，若需精细计算，请通过 scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor 显式提供。',
+    note: '简的每点异常精通追加异常暴击率当前已自动折算；影画1的[狂热]状态异常精通转增伤当前可通过 combatTags: ["janeFrenzy"] 静态展开；[狂热]进入 / 退出属于状态问题，不新增新的 snapshot key。物理异常积蓄效率提升若已折算为最终异常倍率，请通过 scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor 显式提供。',
   },
   {
     sourceType: "agent",
     sourceId: "1261",
     damageTypes: ["anomaly", "disorder"],
     requiredResolvedSnapshotMultipliers: ["skillMultiplierFactor"],
-    note: '简的每点异常精通追加异常暴击率当前已自动折算；影画1的[狂热]状态异常精通转增伤当前可通过 combatTags: ["janeFrenzy"] 静态展开；物理异常积蓄效率折算后的最终异常倍率已按 scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor 记录。',
+    note: '简的每点异常精通追加异常暴击率当前已自动折算；影画1的[狂热]状态异常精通转增伤当前可通过 combatTags: ["janeFrenzy"] 静态展开；[狂热]进入 / 退出属于状态问题，物理异常积蓄效率折算后的最终异常倍率已按 scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor 记录。',
   },
   {
     sourceType: "agent",
@@ -3528,14 +3528,14 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
     sourceId: "1281",
     damageTypes: ["anomaly", "disorder"],
     requiresMissingResolvedSnapshotMultipliers: ["skillMultiplierFactor"],
-    note: "派派的[动力]层数对应的物理异常积蓄效率未在 static resolver 中展开；当前只支持额外能力的全队增伤快照。若已知该部分折算后的最终异常倍率，请通过 scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor 显式提供。",
+    note: "派派的[动力]层数获取与消耗属于状态 / 过程问题，不新增新的 snapshot key；当前只支持额外能力的全队增伤快照。若已知[动力]层数对应的物理异常积蓄效率折算后的最终异常倍率，请通过 scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor 显式提供。",
   },
   {
     sourceType: "agent",
     sourceId: "1281",
     damageTypes: ["anomaly", "disorder"],
     requiredResolvedSnapshotMultipliers: ["skillMultiplierFactor"],
-    note: "派派的[动力]层数对应的物理异常积蓄效率折算后的最终异常倍率已按 scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor 记录；当前仍只支持额外能力的全队增伤快照。",
+    note: "派派的[动力]层数获取与消耗属于状态 / 过程问题；其对应的物理异常积蓄效率折算后的最终异常倍率已按 scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor 记录。当前仍只支持额外能力的全队增伤快照。",
   },
   {
     sourceType: "agent",
@@ -3554,14 +3554,14 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
     sourceId: "1331",
     minimumMindscape: 2,
     requiresMissingResolvedSnapshotMultipliers: ["skillMultiplierFactor"],
-    note: "薇薇安的影画2当前只展开以太异常/紊乱的 15% 无视抗性；[异放]精通收益提升与异常积蓄效率仍未在 static resolver 中展开。若已知该部分折算后的最终倍率，请通过 scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor 显式提供。",
+    note: "薇薇安的影画2当前只展开以太异常/紊乱的 15% 无视抗性；[异放]精通收益提升若后续要静态快照化，优先仍归 dynamicSnapshot，不继续扩 resolvedSnapshot；异常积蓄效率若已折算为最终倍率，请通过 scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor 显式提供。",
   },
   {
     sourceType: "agent",
     sourceId: "1331",
     minimumMindscape: 2,
     requiredResolvedSnapshotMultipliers: ["skillMultiplierFactor"],
-    note: "薇薇安的影画2当前只展开以太异常/紊乱的 15% 无视抗性；[异放]精通收益提升与异常积蓄效率折算后的最终倍率已按 scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor 记录。",
+    note: "薇薇安的影画2当前只展开以太异常/紊乱的 15% 无视抗性；[异放]精通收益提升若后续要静态快照化，优先仍归 dynamicSnapshot；异常积蓄效率折算后的最终倍率已按 scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor 记录。",
   },
   {
     sourceType: "agent",
@@ -3583,7 +3583,7 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
     damageTypes: ["anomaly"],
     requiredStateFlags: ["alicePolarityAssaultState"],
     requiresMissingStateValues: ["alicePolarityAssaultDamageRatio"],
-    note: "爱丽丝的[极性强击]当前需要通过 scenario.stateSnapshot.values.alicePolarityAssaultDamageRatio 显式提供 source-specific 结算倍率；未提供时不自动猜测。",
+    note: "爱丽丝的[极性强击]当前需要通过 scenario.stateSnapshot.values.alicePolarityAssaultDamageRatio 显式提供 source-specific 结算倍率；未提供时不自动猜测。这一部分继续归 stateSnapshot，不迁到 resolvedSnapshot。",
   },
   {
     sourceType: "agent",
@@ -3591,7 +3591,7 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
     damageTypes: ["anomaly"],
     requiredStateFlags: ["alicePolarityAssaultState"],
     requiredStateValues: ["alicePolarityAssaultDamageRatio"],
-    note: "爱丽丝当前已按 scenario.stateSnapshot 展开[极性强击]的 source-specific 结算倍率。",
+    note: "爱丽丝当前已按 scenario.stateSnapshot 展开[极性强击]的 source-specific 结算倍率；这一部分继续归 stateSnapshot，不迁到 resolvedSnapshot。",
   },
   {
     sourceType: "agent",
@@ -3603,14 +3603,14 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
     sourceType: "agent",
     sourceId: "1401",
     minimumMindscape: 6,
-    note: "爱丽丝的影画6[决胜状态]追加攻击与次数上限仍未在 static resolver 中展开。",
+    note: "爱丽丝的影画6[决胜状态]追加攻击与次数上限仍未在 static resolver 中展开，属于真动态过程，不继续迁到新的 snapshot key。",
   },
   {
     sourceType: "agent",
     sourceId: "1501",
     damageTypes: ["anomaly", "disorder"],
     requiresMissingDynamicValues: ["ariaExflowDamageRatio"],
-    note: "爱芮的[异放]额外倍率当前需要通过 scenario.dynamicSnapshot.values.ariaExflowDamageRatio 显式提供；未提供时不自动猜测。",
+    note: "爱芮的[异放]额外倍率当前需要通过 scenario.dynamicSnapshot.values.ariaExflowDamageRatio 显式提供；未提供时不自动猜测。这一部分继续归 dynamicSnapshot，不迁到 resolvedSnapshot。",
   },
   {
     sourceType: "agent",
@@ -3625,7 +3625,7 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
     damageTypes: ["anomaly", "disorder"],
     requireStunned: true,
     requiresMissingDynamicValues: ["ariaStunnedDamageRatio"],
-    note: "目标处于失衡时，爱芮的[异放]额外倍率当前需要通过 scenario.dynamicSnapshot.values.ariaStunnedDamageRatio 显式提供；未提供时不自动猜测。",
+    note: "目标处于失衡时，爱芮的[异放]额外倍率当前需要通过 scenario.dynamicSnapshot.values.ariaStunnedDamageRatio 显式提供；未提供时不自动猜测。这一部分继续归 dynamicSnapshot，不迁到 resolvedSnapshot。",
   },
   {
     sourceType: "agent",
@@ -3670,7 +3670,7 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
     damageTypes: ["anomaly", "disorder"],
     requiredStateFlags: ["miyabiFrostburnBreakState"],
     requiresMissingStateValues: ["miyabiFrostburnBreakDamageRatio"],
-    note: "雅的[霜灼·破]当前需要通过 scenario.stateSnapshot.values.miyabiFrostburnBreakDamageRatio 显式提供 source-specific 结算倍率；未提供时不自动猜测。",
+    note: "雅的[霜灼·破]当前需要通过 scenario.stateSnapshot.values.miyabiFrostburnBreakDamageRatio 显式提供 source-specific 结算倍率；未提供时不自动猜测。这一部分继续归 stateSnapshot，不迁到 resolvedSnapshot。",
   },
   {
     sourceType: "agent",
@@ -3678,7 +3678,7 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
     damageTypes: ["anomaly", "disorder"],
     requiredStateFlags: ["miyabiFrostburnBreakState"],
     requiredStateValues: ["miyabiFrostburnBreakDamageRatio"],
-    note: "雅当前已记录 scenario.stateSnapshot 的[霜灼·破]状态与倍率快照；但独立烈霜异常槽与额外烈霜伤害仍未并入现有 anomaly/disorder 公式。",
+    note: "雅当前已记录 scenario.stateSnapshot 的[霜灼·破]状态与倍率快照；这一部分继续归 stateSnapshot，不迁到 resolvedSnapshot。独立烈霜异常槽与额外烈霜伤害仍未并入现有 anomaly/disorder 公式。",
   },
   {
     sourceType: "w-engine",
@@ -3731,14 +3731,14 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
     sourceId: "31300",
     minimumPieces: 4,
     damageTypes: ["anomaly", "disorder"],
-    note: "自由蓝调 4件 的属性异常积蓄抗性降低属于积蓄过程效果，未在 static resolver 中展开。",
+    note: "自由蓝调 4件 的属性异常积蓄抗性降低属于积蓄过程效果，未在 static resolver 中展开；这一类来源保留为真动态过程，不继续迁到 resolvedSnapshot。",
   },
   {
     sourceType: "drive-disc",
     sourceId: "32300",
     minimumPieces: 4,
     damageTypes: ["anomaly", "disorder"],
-    note: "混沌重金属 4件 的暴击伤害层数主要面向侵蚀额外伤害，不直接映射到 anomaly/disorder 当前公式；当前只展开 2件 以太异常增伤。",
+    note: "混沌重金属 4件 的暴击伤害层数主要面向侵蚀额外伤害，不直接映射到 anomaly/disorder 当前公式；这一类来源若后续需要表达，应优先走 source-specific damage view，而不是继续扩现有 snapshot contract。当前只展开 2件 以太异常增伤。",
   },
 ]
 

@@ -921,7 +921,7 @@ describe("static build resolver", () => {
     expect(
       result.assumptions.some((item) =>
         item.includes(
-          '格莉丝的影画2当前可通过 combatTags: ["graceGrenadeHitTarget"] 显式展开电抗降低；[电能]层数与电属性异常积蓄效率折算后的最终异常倍率已按 scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor 记录。',
+          '格莉丝的影画2当前可通过 combatTags: ["graceGrenadeHitTarget"] 显式展开电抗降低；[电能]层数获取与消耗仍属于状态 / 过程问题，电属性异常积蓄效率折算后的最终异常倍率已按 scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor 记录。',
         ),
       ),
     ).toBe(true)
@@ -1137,7 +1137,7 @@ describe("static build resolver", () => {
     expect(
       result.assumptions.some((item) =>
         item.includes(
-          '简的每点异常精通追加异常暴击率当前已自动折算；影画1的[狂热]状态异常精通转增伤当前可通过 combatTags: ["janeFrenzy"] 静态展开；物理异常积蓄效率折算后的最终异常倍率已按 scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor 记录。',
+          '简的每点异常精通追加异常暴击率当前已自动折算；影画1的[狂热]状态异常精通转增伤当前可通过 combatTags: ["janeFrenzy"] 静态展开；[狂热]进入 / 退出属于状态问题，物理异常积蓄效率折算后的最终异常倍率已按 scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor 记录。',
         ),
       ),
     ).toBe(true)
@@ -1612,7 +1612,7 @@ describe("static build resolver", () => {
     expect(
       result.assumptions.some((item) =>
         item.includes(
-          "派派的[动力]层数对应的物理异常积蓄效率折算后的最终异常倍率已按 scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor 记录",
+          "派派的[动力]层数获取与消耗属于状态 / 过程问题；其对应的物理异常积蓄效率折算后的最终异常倍率已按 scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor 记录。",
         ),
       ),
     ).toBe(true)
@@ -1753,7 +1753,7 @@ describe("static build resolver", () => {
     expect(
       result.assumptions.some((item) =>
         item.includes(
-          "薇薇安的影画2当前只展开以太异常/紊乱的 15% 无视抗性；[异放]精通收益提升与异常积蓄效率折算后的最终倍率已按 scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor 记录。",
+          "薇薇安的影画2当前只展开以太异常/紊乱的 15% 无视抗性；[异放]精通收益提升若后续要静态快照化，优先仍归 dynamicSnapshot；异常积蓄效率折算后的最终倍率已按 scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor 记录。",
         ),
       ),
     ).toBe(true)
