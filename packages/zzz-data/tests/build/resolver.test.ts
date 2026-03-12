@@ -1695,6 +1695,129 @@ describe("static build resolver", () => {
     expect(result.damage.expected.total).toBeGreaterThan(0)
   })
 
+  it("applies Alice polarity assault ratios from state snapshots to anomaly damage", () => {
+    const result = resolveStaticBuildDamage({
+      mode: "baseline",
+      loadout: {
+        agentId: "1401",
+        agentLevel: 60,
+      },
+      panel: {
+        attack: 2800,
+        critRate: 0.4,
+        critDamage: 1.1,
+        anomalyProficiency: 180,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "special",
+        damageMultiplier: "500%",
+        attribute: "物理",
+        stateSnapshot: {
+          flags: {
+            alicePolarityAssaultState: true,
+          },
+          values: {
+            alicePolarityAssaultDamageRatio: 2.5,
+          },
+        },
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.resolvedBuckets.skillMultiplierFactor).toBeCloseTo(2.5, 4)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("已按 scenario.stateSnapshot 展开[极性强击]"),
+      ),
+    ).toBe(true)
+  })
+
+  it("refines Miyabi assumptions when frostburn break state is present but ratio is missing", () => {
+    const result = resolveStaticBuildDamage({
+      mode: "baseline",
+      loadout: {
+        agentId: "1091",
+        wEngineId: "14109",
+        agentLevel: 60,
+      },
+      panel: {
+        attack: 2800,
+        critRate: 0.4,
+        critDamage: 1.1,
+        anomalyProficiency: 180,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "special",
+        damageMultiplier: "600%",
+        attribute: "烈霜",
+        stateSnapshot: {
+          flags: {
+            miyabiFrostburnBreakState: true,
+          },
+        },
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("miyabiFrostburnBreakDamageRatio"),
+      ),
+    ).toBe(true)
+  })
+
+  it("records Miyabi frostburn break snapshots without forcing them into the current anomaly formula", () => {
+    const result = resolveStaticBuildDamage({
+      mode: "baseline",
+      loadout: {
+        agentId: "1091",
+        wEngineId: "14109",
+        agentLevel: 60,
+      },
+      panel: {
+        attack: 2800,
+        critRate: 0.4,
+        critDamage: 1.1,
+        anomalyProficiency: 180,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "special",
+        damageMultiplier: "600%",
+        attribute: "烈霜",
+        stateSnapshot: {
+          flags: {
+            miyabiFrostburnBreakState: true,
+          },
+          values: {
+            miyabiFrostburnBreakDamageRatio: 7.5,
+          },
+        },
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.resolvedBuckets.skillMultiplierFactor).toBe(1)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes(
+          "已记录 scenario.stateSnapshot 的[霜灼·破]状态与倍率快照",
+        ),
+      ),
+    ).toBe(true)
+  })
+
   it("refines Burnice progression assumptions when mindscape is present but energyGenerationRate is missing", () => {
     const result = resolveStaticBuildDamage({
       mode: "full-buff",

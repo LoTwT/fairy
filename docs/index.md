@@ -21,4 +21,4 @@
 - [静态构筑解析系统 V3](./specs/static-build-resolver-v3.md) — 当前实现：已完成 anomaly / disorder 单次 resolver、curated effect coverage 与 source-specific assumptions；skill matrix 仍限定在 normal / sheer
 - [静态构筑解析系统 V4](./specs/static-build-resolver-v4.md) — 当前阶段：progression-aware resolver 第九批已完成，当前 contract 下已收口；已接入 `agentMindscape` / `energyGenerationRate` 与柏妮思、奥菲丝&「鬼火」、爱丽丝、薇薇安、简、柳、格莉丝、爱芮的高价值 progression-aware 规则
 - [静态构筑解析系统 V5](./specs/static-build-resolver-v5.md) — 当前阶段：`V5` 已在当前 contract 下收口；`柏妮思` / `爱芮` 的 `dynamicSnapshot` 已进入 anomaly/disorder resolver，并已细化 source-specific assumptions
-- [静态构筑解析系统 V6](./specs/static-build-resolver-v6.md) — 当前阶段：`V6.2` state snapshot resolver 已完成基础接线；下一步开始 `爱丽丝` / `雅` 的 source-state snapshot coverage
+- [静态构筑解析系统 V6](./specs/static-build-resolver-v6.md) — 当前阶段：已完成 `V6.3` 首批 `爱丽丝` / `雅` source-state snapshot coverage，并同步细化首批 state-aware assumptions

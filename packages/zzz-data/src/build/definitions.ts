@@ -46,6 +46,13 @@ function dynamicValue(
     dynamicSnapshot?.values?.[key] ?? 0
 }
 
+function stateMultiplierDelta(
+  key: keyof NonNullable<StaticBuildValueContext["stateSnapshot"]>["values"],
+) {
+  return ({ stateSnapshot }: StaticBuildValueContext): number =>
+    (stateSnapshot?.values?.[key] ?? 0) - 1
+}
+
 function multipliedDynamicCountAndValue(input: {
   countKey: keyof NonNullable<
     StaticBuildValueContext["dynamicSnapshot"]
@@ -1729,6 +1736,30 @@ export const staticBuildEffectDefinitions = [
     ],
   },
   {
+    id: "alice-state-polarity-assault-ratio",
+    sourceType: "agent",
+    sourceId: "1401",
+    sourceName: "爱丽丝",
+    label: "状态快照：[极性强击] 结算倍率",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      damageTypes: ["anomaly"],
+      attributes: ["Physical"],
+      stateSnapshotFlags: ["alicePolarityAssaultState"],
+      requiredStateValues: ["alicePolarityAssaultDamageRatio"],
+      minimumStateValues: {
+        alicePolarityAssaultDamageRatio: Number.EPSILON,
+      },
+    },
+    modifiers: [
+      {
+        bucket: "skillMultiplierFactor",
+        value: stateMultiplierDelta("alicePolarityAssaultDamageRatio"),
+      },
+    ],
+  },
+  {
     id: "alice-m1-after-assault-defense-reduction",
     sourceType: "agent",
     sourceId: "1401",
@@ -3270,6 +3301,22 @@ interface StaticBuildSourceNote {
     | "ariaStunnedDamageRatio"
     | "burniceEmberDamageRatio"
   )[]
+  requiredStateFlags?: readonly (
+    | "alicePolarityAssaultState"
+    | "miyabiFrostburnBreakState"
+  )[]
+  requiresMissingStateFlags?: readonly (
+    | "alicePolarityAssaultState"
+    | "miyabiFrostburnBreakState"
+  )[]
+  requiredStateValues?: readonly (
+    | "alicePolarityAssaultDamageRatio"
+    | "miyabiFrostburnBreakDamageRatio"
+  )[]
+  requiresMissingStateValues?: readonly (
+    | "alicePolarityAssaultDamageRatio"
+    | "miyabiFrostburnBreakDamageRatio"
+  )[]
   requiresMissingDynamicValues?: readonly (
     | "ariaExflowDamageRatio"
     | "ariaStunnedDamageRatio"
@@ -3462,20 +3509,36 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
     sourceId: "1401",
     requiresMissingAnomalyMastery: true,
     damageTypes: ["anomaly", "disorder"],
-    note: "爱丽丝的异常掌控转异常精通未在 static resolver 中自动展开；如已知该快照，请通过 finalPanel.anomalyMastery 显式提供。当前已展开物理异常剩余时间对[紊乱]倍率的提升。",
+    note: "爱丽丝的异常掌控转异常精通未在 static resolver 中自动展开；如已知该快照，请通过 finalPanel.anomalyMastery 显式提供。当前已展开物理异常剩余时间对[紊乱]倍率的提升；若需计算[极性强击]，可通过 scenario.stateSnapshot 显式提供状态与倍率快照。",
   },
   {
     sourceType: "agent",
     sourceId: "1401",
     requiresAnomalyMastery: true,
     damageTypes: ["anomaly", "disorder"],
-    note: "爱丽丝当前已按 finalPanel.anomalyMastery 快照展开异常掌控转异常精通；影画2的物理来源紊乱增伤与影画4的物理无视抗性可静态展开，[极性强击]特例仍未在 static resolver 中展开。",
+    note: "爱丽丝当前已按 finalPanel.anomalyMastery 快照展开异常掌控转异常精通；影画2的物理来源紊乱增伤与影画4的物理无视抗性可静态展开；若需计算[极性强击]，可通过 scenario.stateSnapshot 显式提供状态与倍率快照。",
+  },
+  {
+    sourceType: "agent",
+    sourceId: "1401",
+    damageTypes: ["anomaly"],
+    requiredStateFlags: ["alicePolarityAssaultState"],
+    requiresMissingStateValues: ["alicePolarityAssaultDamageRatio"],
+    note: "爱丽丝的[极性强击]当前需要通过 scenario.stateSnapshot.values.alicePolarityAssaultDamageRatio 显式提供 source-specific 结算倍率；未提供时不自动猜测。",
+  },
+  {
+    sourceType: "agent",
+    sourceId: "1401",
+    damageTypes: ["anomaly"],
+    requiredStateFlags: ["alicePolarityAssaultState"],
+    requiredStateValues: ["alicePolarityAssaultDamageRatio"],
+    note: "爱丽丝当前已按 scenario.stateSnapshot 展开[极性强击]的 source-specific 结算倍率。",
   },
   {
     sourceType: "agent",
     sourceId: "1401",
     minimumMindscape: 1,
-    note: '爱丽丝的影画1当前可通过 combatTags: ["aliceAfterAssault"] 显式展开[强击]后的 20% 减防；[极性强击]特例仍未在 static resolver 中自动展开。',
+    note: '爱丽丝的影画1当前可通过 combatTags: ["aliceAfterAssault"] 显式展开[强击]后的 20% 减防；[极性强击]可通过 scenario.stateSnapshot 显式提供倍率快照。',
   },
   {
     sourceType: "agent",
@@ -3540,7 +3603,23 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
     sourceType: "agent",
     sourceId: "1091",
     damageTypes: ["anomaly", "disorder"],
-    note: "雅的独立烈霜异常槽、[霜灼·破]与[霜灼]累积加成未在 static resolver 中展开。",
+    note: "雅的独立烈霜异常槽、[霜灼·破]与[霜灼]累积加成未在 static resolver 中展开；若当前轮次已知[霜灼·破]状态，可通过 scenario.stateSnapshot 显式提供。",
+  },
+  {
+    sourceType: "agent",
+    sourceId: "1091",
+    damageTypes: ["anomaly", "disorder"],
+    requiredStateFlags: ["miyabiFrostburnBreakState"],
+    requiresMissingStateValues: ["miyabiFrostburnBreakDamageRatio"],
+    note: "雅的[霜灼·破]当前需要通过 scenario.stateSnapshot.values.miyabiFrostburnBreakDamageRatio 显式提供 source-specific 结算倍率；未提供时不自动猜测。",
+  },
+  {
+    sourceType: "agent",
+    sourceId: "1091",
+    damageTypes: ["anomaly", "disorder"],
+    requiredStateFlags: ["miyabiFrostburnBreakState"],
+    requiredStateValues: ["miyabiFrostburnBreakDamageRatio"],
+    note: "雅当前已记录 scenario.stateSnapshot 的[霜灼·破]状态与倍率快照；但独立烈霜异常槽与额外烈霜伤害仍未并入现有 anomaly/disorder 公式。",
   },
   {
     sourceType: "w-engine",
@@ -3655,6 +3734,7 @@ export function getStaticBuildSourceNotes(input: {
   energyGenerationRate?: number
   anomalyMastery?: number
   dynamicSnapshot?: StaticBuildValueContext["dynamicSnapshot"]
+  stateSnapshot?: StaticBuildValueContext["stateSnapshot"]
   isStunned?: boolean
   disorderSourceType?:
     | "fire"
@@ -3752,6 +3832,38 @@ export function getStaticBuildSourceNotes(input: {
         note.requiresMissingDynamicValues &&
         note.requiresMissingDynamicValues.every(
           (key) => input.dynamicSnapshot?.values?.[key] !== undefined,
+        )
+      ) {
+        return false
+      }
+      if (
+        note.requiredStateFlags &&
+        note.requiredStateFlags.some(
+          (key) => input.stateSnapshot?.flags?.[key] !== true,
+        )
+      ) {
+        return false
+      }
+      if (
+        note.requiresMissingStateFlags &&
+        note.requiresMissingStateFlags.every(
+          (key) => input.stateSnapshot?.flags?.[key] === true,
+        )
+      ) {
+        return false
+      }
+      if (
+        note.requiredStateValues &&
+        note.requiredStateValues.some(
+          (key) => input.stateSnapshot?.values?.[key] === undefined,
+        )
+      ) {
+        return false
+      }
+      if (
+        note.requiresMissingStateValues &&
+        note.requiresMissingStateValues.every(
+          (key) => input.stateSnapshot?.values?.[key] !== undefined,
         )
       ) {
         return false

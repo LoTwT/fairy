@@ -74,7 +74,9 @@ import {
   - `爱丽丝`：影画 1 的 `[强击]` 后减防，影画 2 的物理来源紊乱增伤，影画 4 的物理异常 / 紊乱无视抗性
   - `爱芮`：影画 1 的 `[异放]` 基础异常暴击、按 `finalPanel.anomalyMastery` 追加异常暴击率，影画 2 的固定无视防御与 `combatTags: ["ariaDreamtime"]` 控制的额外无视防御
   - `V5 dynamicSnapshot`：`柏妮思` 的 `[余烬]` 额外触发次数 / 倍率、`爱芮` 的 `[异放]` 额外倍率 / 失衡额外倍率
-  - `V6 stateSnapshot`：`scenario.stateSnapshot` 已进入公开 contract，并已完成 resolver 基础接线；当前第一批目标为 `爱丽丝` / `雅`
+  - `V6 stateSnapshot`：`scenario.stateSnapshot` 已进入公开 contract；当前首批已完成：
+    - `爱丽丝`：`[极性强击]` 可通过 `scenario.stateSnapshot` 显式提供 source-specific 结算倍率，并接入 anomaly 路径
+    - `雅`：`[霜灼·破]` 已支持 state-aware assumptions 与倍率快照记录，但独立烈霜异常槽仍未并入现有 anomaly / disorder 公式
   - `薇薇安`：影画 1 的预言目标异常 / 紊乱增伤，影画 2 的以太异常 / 紊乱无视抗性
   - `简`：影画 1 的 `[狂热]` 状态异常精通转增伤、核心被动中“每点异常精通 -> 强击异常暴击率”的自动折算，影画 2 的 `[啮咬]` 目标减防与强击异常暴击伤害，影画 4 的 `[强击] / [紊乱]` 后异常伤害提升
   - `格莉丝`：影画 2 的手雷命中后电抗降低

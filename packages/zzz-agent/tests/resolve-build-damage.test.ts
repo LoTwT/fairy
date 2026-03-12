@@ -1197,6 +1197,48 @@ describe("resolveBuildDamage tool", () => {
     expect((result as any).build.damage.expected.total).toBeGreaterThan(0)
   })
 
+  it("supports Alice polarity assault state snapshots through the high-level resolver", async () => {
+    const result = await runTool(resolveBuildDamage, {
+      agent: "爱丽丝",
+      mode: "baseline",
+      agentLevel: 60,
+      finalPanel: {
+        attack: 2800,
+        critRate: 0.4,
+        critDamage: 1.1,
+        anomalyProficiency: 180,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "special",
+        damageMultiplier: "500%",
+        attribute: "物理",
+        stateSnapshot: {
+          flags: {
+            alicePolarityAssaultState: true,
+          },
+          values: {
+            alicePolarityAssaultDamageRatio: 2.5,
+          },
+        },
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    expect(
+      (result as any).build.resolvedBuckets.skillMultiplierFactor,
+    ).toBeCloseTo(2.5, 4)
+    expect(
+      (result as any).build.assumptions.some((item: string) =>
+        item.includes("已按 scenario.stateSnapshot 展开[极性强击]"),
+      ),
+    ).toBe(true)
+  })
+
   it("supports progression-aware Orphie snapshots through the high-level resolver", async () => {
     const result = await runTool(resolveBuildDamage, {
       agent: "奥菲丝&「鬼火」",

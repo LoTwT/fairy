@@ -730,4 +730,4 @@
 3. 若需要进一步提高异常 / 紊乱精度，优先补显式 dynamic value context，而不是默认扩大 contract
 4. progression-aware resolver 已完成 `V4` 第九批并在当前 contract 下收口，见 [静态构筑解析系统 V4](./static-build-resolver-v4.md)
 5. `V5` source-aware dynamic snapshot context 已在当前 contract 下完成，见 [静态构筑解析系统 V5](./static-build-resolver-v5.md)
-6. `V6` source-state snapshot context 已完成 `V6.2` 基础接线，下一步进入 `爱丽丝` / `雅` 的来源覆盖，见 [静态构筑解析系统 V6](./static-build-resolver-v6.md)
+6. `V6` source-state snapshot context 已完成首批 `爱丽丝` / `雅` 的来源覆盖与 state-aware assumptions refinement，见 [静态构筑解析系统 V6](./static-build-resolver-v6.md)

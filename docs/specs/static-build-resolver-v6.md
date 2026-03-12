@@ -18,12 +18,12 @@
 
 ## 当前进度
 
-当前 `V6` 处于 runtime 改造前的冻结阶段，状态如下：
+当前 `V6` 状态如下：
 
 - `V6.1` contract freeze：已完成
 - `V6.2` state snapshot resolver：已完成基础接线
-- `V6.3` 第一批来源覆盖：未开始
-- `V6.4` assumptions refinement：未开始
+- `V6.3` 第一批来源覆盖：已完成首批 `爱丽丝` / `雅`
+- `V6.4` assumptions refinement：已完成首批 state-aware note 拆分
 
 ## 1. 为什么需要 V6
 
@@ -175,6 +175,17 @@ interface StaticBuildStateSnapshot {
 - 只补当前公式已有稳定落点的部分
 - 不把独立异常槽积蓄过程伪装成静态能力
 
+当前首批已完成：
+
+1. `爱丽丝`
+   - `scenario.stateSnapshot.flags.alicePolarityAssaultState`
+   - `scenario.stateSnapshot.values.alicePolarityAssaultDamageRatio`
+   - 已可作为 `anomaly` 路径中的 source-specific 结算倍率快照展开到 `skillMultiplierFactor`
+2. `雅`
+   - `scenario.stateSnapshot.flags.miyabiFrostburnBreakState`
+   - `scenario.stateSnapshot.values.miyabiFrostburnBreakDamageRatio`
+   - 当前仍不强行并入现有 anomaly / disorder 公式，只用于 state-aware assumptions 与来源记录
+
 ### 6.4 `V6.4` assumptions refinement
 
 把 assumptions 继续细化成：
@@ -183,6 +194,15 @@ interface StaticBuildStateSnapshot {
 - 缺少某个具体 `flag`
 - 缺少某个具体 `value`
 - 当前仍未展开的动态机制
+
+当前首批已完成：
+
+- `爱丽丝`
+  - 当 `[极性强击]` 状态存在但缺倍率值时，显式提示缺少 `alicePolarityAssaultDamageRatio`
+  - 当状态与倍率值都提供时，显式提示已按 `scenario.stateSnapshot` 展开
+- `雅`
+  - 当 `[霜灼·破]` 状态存在但缺倍率值时，显式提示缺少 `miyabiFrostburnBreakDamageRatio`
+  - 当状态与倍率值都提供时，显式提示当前仅记录状态与倍率快照，未把独立烈霜异常槽并入现有公式
 
 ## 7. 验收标准
 

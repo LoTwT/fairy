@@ -634,7 +634,7 @@ resolver 主线完成后，文档维护需要单独列为持续事项，避免�
 
 ### 11.5 当前状态
 
-当前 `V6.1 contract freeze` 已完成：
+当前 `V6.1` / `V6.2` / `V6.3` / `V6.4` 首批状态如下：
 
 - `scenario.stateSnapshot` 已进入公开 build contract
 - `StaticBuildStateFlagKey` / `StaticBuildStateValueKey` 已冻结第一批 key
@@ -642,5 +642,10 @@ resolver 主线完成后，文档维护需要单独列为持续事项，避免�
 - `V6.2 state snapshot resolver` 已完成基础接线：
   - `StaticBuildEffectCondition` 已可表达 `stateSnapshot` 条件
   - `StaticBuildValueContext` / `resolver` 已可消费 `stateSnapshot`
+- `V6.3` 第一批来源 coverage 已完成：
+  - `爱丽丝`：`[极性强击]` 可通过 `scenario.stateSnapshot` 显式提供 source-specific 结算倍率，并已并入当前 anomaly 路径
+  - `雅`：`[霜灼·破]` 已支持 state-aware assumptions 与倍率快照记录，但仍不强行并入现有 anomaly / disorder 公式
+- `V6.4` assumptions refinement 已完成首批细化：
+  - 可区分缺少 state flag、缺少 state value、已记录快照但当前公式仍未展开的动态机制
 
-下一步进入 `V6.3`，开始 `爱丽丝` / `雅` 的第一批来源 coverage。
+下一步如果继续 `V6`，重点不再是首批 Alice / 雅 覆盖，而是决定是否扩更多 source-state key，或直接切到新阶段。
