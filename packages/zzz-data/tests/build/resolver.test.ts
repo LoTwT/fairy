@@ -35,7 +35,9 @@ describe("static build resolver", () => {
     expect(result.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.4, 4)
     expect(result.resolvedBuckets.critRate).toBeCloseTo(0.15, 4)
     expect(result.resolvedPanel.attack).toBe(3200)
-    expect(result.damageParams.baseDamage).toBeCloseTo(11200, 4)
+    expect(
+      (result.damageParams as { baseDamage: number }).baseDamage,
+    ).toBeCloseTo(11200, 4)
     expect(
       result.trace.find((item) => item.effectId === "woodpecker-2pc-crit-rate")
         ?.status,
@@ -715,6 +717,8 @@ describe("static build resolver", () => {
         skillTag: "enhancedSpecial",
         damageMultiplier: "500%",
         attribute: "电属性",
+        extraAbilityActive: true,
+        combatTags: ["graceShockPrepared"],
         enemy: {
           defenderBaseDefense: 953,
           defenderResistance: 0.2,
@@ -729,19 +733,28 @@ describe("static build resolver", () => {
     expect(result.resolvedPanel.attack).toBeCloseTo(3144, 4)
     expect(result.resolvedPanel.anomalyProficiency).toBeCloseTo(225, 4)
     expect(result.resolvedBuckets.attackPercent).toBeCloseTo(0.12, 4)
+    expect(result.resolvedBuckets.anomalyBonusDamageSum).toBeCloseTo(0.36, 4)
     expect(result.resolvedBuckets.anomalyProficiency).toBeCloseTo(105, 4)
-    expect(result.damageParams.virtualAgentLevel).toBe(60)
-    expect(result.damageParams.virtualAgentAttack).toBeCloseTo(3144, 4)
-    expect(result.damageParams.virtualAgentAnomalyProficiency).toBeCloseTo(
-      225,
-      4,
-    )
+    expect(
+      (result.damageParams as { virtualAgentLevel: number }).virtualAgentLevel,
+    ).toBe(60)
+    expect(
+      (result.damageParams as { virtualAgentAttack: number })
+        .virtualAgentAttack,
+    ).toBeCloseTo(3144, 4)
+    expect(
+      (
+        result.damageParams as {
+          virtualAgentAnomalyProficiency: number
+        }
+      ).virtualAgentAnomalyProficiency,
+    ).toBeCloseTo(225, 4)
     expect(result.damage.expected.total).toBeGreaterThan(0)
     expect(
       result.assumptions.some((item) =>
         item.includes("格莉丝 当前未收录 curated"),
       ),
-    ).toBe(true)
+    ).toBe(false)
   })
 
   it("resolves disorder damage for anomaly agents", () => {
@@ -775,10 +788,202 @@ describe("static build resolver", () => {
     })
 
     expect(result.profile.id).toBe("standard-disorder")
-    expect(result.damageParams.anomalyType).toBe("electric")
-    expect(result.damageParams.remainingTime).toBe(5)
+    expect((result.damageParams as { anomalyType: string }).anomalyType).toBe(
+      "electric",
+    )
+    expect(
+      (result.damageParams as { remainingTime: number }).remainingTime,
+    ).toBe(5)
     expect(result.resolvedPanel.anomalyProficiency).toBeCloseTo(225, 4)
     expect(result.damage.expected.total).toBeGreaterThan(0)
+  })
+
+  it("applies curated anomaly crit effects for Jane and Sharpened Stinger", () => {
+    const result = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1261",
+        wEngineId: "14126",
+        agentLevel: 60,
+        coreSkillLevel: 7,
+        wEngineRefinement: 1,
+      },
+      panel: {
+        attack: 3000,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 180,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "dash",
+        damageMultiplier: "500%",
+        attribute: "物理",
+        extraAbilityActive: true,
+        combatTags: ["gnawedTarget"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.loadout.agent.name).toBe("简")
+    expect(result.loadout.wEngine?.name).toBe("淬锋钳刺")
+    expect(result.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.36, 4)
+    expect(result.resolvedBuckets.anomalyCritRate).toBeCloseTo(0.4, 4)
+    expect(result.resolvedBuckets.anomalyCritDamage).toBeCloseTo(0.5, 4)
+    expect(
+      result.assumptions.some((item) => item.includes("简 当前未收录 curated")),
+    ).toBe(false)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("淬锋钳刺 当前未收录 curated"),
+      ),
+    ).toBe(false)
+  })
+
+  it("applies curated disorder effects for Yanagi and Timeweaver", () => {
+    const result = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1221",
+        wEngineId: "14122",
+        agentLevel: 60,
+        coreSkillLevel: 7,
+        wEngineRefinement: 1,
+      },
+      panel: {
+        attack: 3100,
+        baseAttack: 1250,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 320,
+      },
+      scenario: {
+        damageType: "disorder",
+        skillTag: "enhancedSpecial",
+        anomalyType: "electric",
+        remainingTime: 5,
+        attribute: "电属性",
+        extraAbilityActive: true,
+        combatTags: ["yanagiMoonEclipse", "targetAnomalous"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.loadout.agent.name).toBe("柳")
+    expect(result.loadout.wEngine?.name).toBe("时流贤者")
+    expect(result.profile.id).toBe("standard-disorder")
+    expect(result.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.2, 4)
+    expect(result.resolvedBuckets.anomalyBonusDamageSum).toBeCloseTo(2.5, 4)
+    expect(result.resolvedBuckets.anomalyProficiency).toBeCloseTo(75, 4)
+    expect(
+      result.assumptions.some((item) => item.includes("柳 当前未收录 curated")),
+    ).toBe(false)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("时流贤者 当前未收录 curated"),
+      ),
+    ).toBe(false)
+  })
+
+  it("applies curated anomaly proficiency effects for Aria and Soul Shell", () => {
+    const result = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1501",
+        wEngineId: "14150",
+        agentLevel: 60,
+        coreSkillLevel: 7,
+        wEngineRefinement: 1,
+      },
+      panel: {
+        attack: 2950,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 150,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "enhancedSpecial",
+        damageMultiplier: "520%",
+        attribute: "以太",
+        combatTags: ["targetAnomalous"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.loadout.agent.name).toBe("爱芮")
+    expect(result.loadout.wEngine?.name).toBe("壳中之灵")
+    expect(result.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.2, 4)
+    expect(result.resolvedBuckets.anomalyBonusDamageSum).toBeCloseTo(0.1, 4)
+    expect(result.resolvedBuckets.anomalyProficiency).toBeCloseTo(180, 4)
+    expect(result.resolvedPanel.anomalyProficiency).toBeCloseTo(330, 4)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("爱芮 当前未收录 curated"),
+      ),
+    ).toBe(false)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("壳中之灵 当前未收录 curated"),
+      ),
+    ).toBe(false)
+  })
+
+  it("applies curated anomaly bonus for Piper with anomaly-compatible engines", () => {
+    const result = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1281",
+        wEngineId: "13009",
+        agentLevel: 60,
+        wEngineRefinement: 1,
+      },
+      panel: {
+        attack: 2800,
+        baseAttack: 1100,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 120,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "enhancedSpecial",
+        damageMultiplier: "480%",
+        attribute: "物理",
+        extraAbilityActive: true,
+        combatTags: ["piperOverdrive", "targetAnomalous"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.loadout.agent.name).toBe("派派")
+    expect(result.loadout.wEngine?.name).toBe("触电唇彩")
+    expect(result.resolvedBuckets.attackPercent).toBeCloseTo(0.1, 4)
+    expect(result.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.33, 4)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("派派 当前未收录 curated"),
+      ),
+    ).toBe(false)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("触电唇彩 当前未收录 curated"),
+      ),
+    ).toBe(false)
   })
 
   it("rejects anomaly damage types for non-anomaly specialties", () => {

@@ -248,6 +248,10 @@
 
 - `V3.1 anomaly`：已完成单次 resolver
 - `V3.2 disorder`：已完成单次 resolver
+- `V3.3 curated effect coverage`：当前已完成第一批 anomaly / disorder 直接可表达效果
+  - 代理人：`格莉丝`、`柳`、`简`、`派派`、`薇薇安`、`爱芮`
+  - 音擎：`壳中之灵`、`十方锻星`、`飞鸟星梦`、`淬锋钳刺`、`时流贤者`、`灼心摇壶`、`霰落星殿`、`触电唇彩`、`雨林饕客`
+  - 驱动盘：`混沌爵士 4 件`
 
 ### 5.4 进入条件
 
@@ -265,14 +269,19 @@
 - `resolveStaticBuildDamage` 已支持 `normal / sheer / anomaly / disorder`
 - `resolveStaticBuildSkillMatrix` 仍只支持 `normal / sheer`
 - 异常 / 紊乱仍使用单代理人静态快照，不做动态积蓄模拟
+- anomaly / disorder 已开始补 curated 直接效果，优先覆盖：
+  - 异常精通
+  - 异常暴击
+  - 异常 / 紊乱增伤
+  - 与异常目标相关的稳定增伤
 
 若继续往下做，优先级应为：
 
-1. anomaly / disorder 的 curated effect coverage
-2. 更精细的 anomalyType / disorder source assumptions
+1. 更精细的 anomalyType / disorder source assumptions
+2. 把仍无法直接表达的异常机制从泛化 assumptions 收敛为 source-specific assumptions
 3. 仅在明确需要时再讨论异常 / 紊乱矩阵
 
-当前状态：已满足，V3 contract freeze 已开始。
+当前状态：V3 主线已完成，当前处于 `V3.3 curated effect coverage`。
 
 ## 6. 明确不做
 

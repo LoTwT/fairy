@@ -17,4 +17,4 @@
 - [静态构筑解析系统路线图](./specs/static-build-resolver-roadmap.md) — 后续执行顺序：V2.1 curated coverage、V2.2 matrix metadata refinement、V3 anomaly/disorder
 - [静态构筑解析系统 V1](./specs/static-build-resolver-v1.md) — 第一版冻结范围：支持对象、输入输出 contract、profile 与验收标准
 - [静态构筑解析系统 V2](./specs/static-build-resolver-v2.md) — 第二阶段实现：全部强攻 / 命破代理人、动态强攻/命破音擎、curated + 通用技能矩阵约定
-- [静态构筑解析系统 V3](./specs/static-build-resolver-v3.md) — 当前实现：已完成 anomaly / disorder 单次 resolver，skill matrix 仍限定在 normal / sheer
+- [静态构筑解析系统 V3](./specs/static-build-resolver-v3.md) — 当前实现：已完成 anomaly / disorder 单次 resolver，并已开始补 anomaly / disorder 的 curated effect coverage；skill matrix 仍限定在 normal / sheer

@@ -11,6 +11,7 @@
 
 - `V3.1 anomaly` 已实现到单次 `resolveStaticBuildDamage`
 - `V3.2 disorder` 已实现到单次 `resolveStaticBuildDamage`
+- `V3.3 curated effect coverage` 已开始补 anomaly / disorder 的直接效果定义
 - `resolveStaticBuildSkillMatrix` 仍只支持 `normal / sheer`
 
 ## 1. V3 目标
@@ -79,6 +80,14 @@ V3 主线只扩到**异常代理人**及其兼容音擎，不扩到支援 / 防�
 - `雅` `1091`
 
 当前发布数据中的异常音擎共 `15` 把，继续按 `specialty` 做兼容校验。
+
+当前 anomaly / disorder 的直接 curated coverage 已覆盖一批高价值来源：
+
+- 代理人：`格莉丝`、`柳`、`简`、`派派`、`薇薇安`、`爱芮`
+- 音擎：`壳中之灵`、`十方锻星`、`飞鸟星梦`、`淬锋钳刺`、`时流贤者`、`灼心摇壶`、`霰落星殿`、`触电唇彩`、`雨林饕客`
+- 驱动盘：`自由蓝调 2 件`、`混沌爵士 2/4 件`、`混沌重金属 2 件`
+
+尚未能直接表达的异常掌控换算、剩余持续时间换算、随机增益与独立异常槽机制，继续通过更细的 `assumptions` 处理。
 
 ### 2.5 支持的驱动盘
 

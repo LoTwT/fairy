@@ -173,6 +173,58 @@ const wrathfulVajraSheerBonus = [0.09, 0.1035, 0.117, 0.1305, 0.144] as const
 const fusionCompilerAttackPercent = [0.12, 0.15, 0.18, 0.21, 0.24] as const
 const fusionCompilerAnomalyProficiency = [25, 31, 37, 43, 50] as const
 const weepingGeminiAnomalyProficiency = [30, 34, 38, 42, 48] as const
+// prettier-ignore
+const yanagiCoreDisorderBonus = [
+  1.25,
+  1.45,
+  1.66,
+  1.88,
+  2.08,
+  2.3,
+  2.5,
+] as const
+// prettier-ignore
+const yanagiCoreElectricBonus = [
+  0.1,
+  0.116,
+  0.133,
+  0.15,
+  0.166,
+  0.183,
+  0.2,
+] as const
+// prettier-ignore
+const janeCoreAnomalyCritRate = [
+  0.2,
+  0.25,
+  0.28,
+  0.31,
+  0.34,
+  0.37,
+  0.4,
+] as const
+// prettier-ignore
+const ariaCoreAnomalyProficiency = [
+  45,
+  52,
+  60,
+  67,
+  75,
+  82,
+  90,
+] as const
+const soulShellAnomalyProficiency = [90, 103, 117, 130, 144] as const
+const soulShellBonus = [0.2, 0.23, 0.26, 0.29, 0.32] as const
+const soulShellAnomalyBonus = [0.1, 0.115, 0.13, 0.145, 0.16] as const
+const practicedPerfectionPhysicalBonus = [0.2, 0.23, 0.26, 0.29, 0.32] as const
+const flightOfFancyAnomalyProficiency = [20, 23, 26, 29, 32] as const
+const sharpenedStingerPhysicalBonus = [0.12, 0.15, 0.18, 0.21, 0.24] as const
+const timeweaverAnomalyProficiency = [75, 85, 95, 105, 115] as const
+const flamemakerBonus = [0.035, 0.044, 0.052, 0.061, 0.07] as const
+const hailstormFrostBonus = [0.2, 0.23, 0.26, 0.29, 0.32] as const
+const electroLipGlossAttackPercent = [0.1, 0.115, 0.13, 0.145, 0.16] as const
+const electroLipGlossBonus = [0.15, 0.175, 0.2, 0.225, 0.25] as const
+const rainforestAttackPercent = [0.025, 0.028, 0.032, 0.036, 0.04] as const
 
 export const staticBuildEffectDefinitions = [
   {
@@ -916,6 +968,163 @@ export const staticBuildEffectDefinitions = [
     ],
   },
   {
+    id: "grace-extra-shock-anomaly-bonus",
+    sourceType: "agent",
+    sourceId: "1181",
+    sourceName: "格莉丝",
+    label: "额外能力：下次感电伤害提升",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    baselineStacks: 1,
+    fullBuffStacks: 2,
+    maxStacks: 2,
+    condition: {
+      requireExtraAbility: true,
+      damageTypes: ["anomaly"],
+      attributes: ["Electric"],
+      combatTags: ["graceShockPrepared"],
+    },
+    modifiers: [
+      {
+        bucket: "anomalyBonusDamageSum",
+        value: () => 0.18,
+      },
+    ],
+  },
+  {
+    id: "yanagi-core-disorder-bonus",
+    sourceType: "agent",
+    sourceId: "1221",
+    sourceName: "柳",
+    label: "核心被动：紊乱伤害倍率提升",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      damageTypes: ["disorder"],
+      combatTags: ["yanagiMoonEclipse"],
+    },
+    modifiers: [
+      {
+        bucket: "anomalyBonusDamageSum",
+        value: byCoreSkill(yanagiCoreDisorderBonus),
+      },
+    ],
+  },
+  {
+    id: "yanagi-core-electric-bonus",
+    sourceType: "agent",
+    sourceId: "1221",
+    sourceName: "柳",
+    label: "核心被动：电属性伤害提升",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      damageTypes: ["anomaly", "disorder"],
+      attributes: ["Electric"],
+      combatTags: ["yanagiMoonEclipse"],
+    },
+    modifiers: [
+      {
+        bucket: "bonusDamageSum",
+        value: byCoreSkill(yanagiCoreElectricBonus),
+      },
+    ],
+  },
+  {
+    id: "jane-core-assault-anomaly-crit-rate",
+    sourceType: "agent",
+    sourceId: "1261",
+    sourceName: "简",
+    label: "核心被动：强击异常暴击率",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      damageTypes: ["anomaly"],
+      attributes: ["Physical"],
+      combatTags: ["gnawedTarget"],
+    },
+    modifiers: [
+      {
+        bucket: "anomalyCritRate",
+        value: byCoreSkill(janeCoreAnomalyCritRate),
+      },
+    ],
+  },
+  {
+    id: "jane-core-assault-anomaly-crit-damage",
+    sourceType: "agent",
+    sourceId: "1261",
+    sourceName: "简",
+    label: "核心被动：强击异常暴击伤害",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      damageTypes: ["anomaly"],
+      attributes: ["Physical"],
+      combatTags: ["gnawedTarget"],
+    },
+    modifiers: [
+      {
+        bucket: "anomalyCritDamage",
+        value: () => 0.5,
+      },
+    ],
+  },
+  {
+    id: "piper-extra-team-bonus",
+    sourceType: "agent",
+    sourceId: "1281",
+    sourceName: "派派",
+    label: "额外能力：满层动力全队增伤",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      requireExtraAbility: true,
+      combatTags: ["piperOverdrive"],
+    },
+    modifiers: [
+      {
+        bucket: "bonusDamageSum",
+        value: () => 0.18,
+      },
+    ],
+  },
+  {
+    id: "vivian-extra-corruption-anomaly-bonus",
+    sourceType: "agent",
+    sourceId: "1331",
+    sourceName: "薇薇安",
+    label: "额外能力：侵蚀异常伤害提升",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      requireExtraAbility: true,
+      damageTypes: ["anomaly"],
+      attributes: ["Ether"],
+    },
+    modifiers: [
+      {
+        bucket: "anomalyBonusDamageSum",
+        value: () => 0.12,
+      },
+    ],
+  },
+  {
+    id: "aria-core-anomaly-proficiency",
+    sourceType: "agent",
+    sourceId: "1501",
+    sourceName: "爱芮",
+    label: "核心被动：异常精通提升",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    modifiers: [
+      {
+        bucket: "anomalyProficiency",
+        value: byCoreSkill(ariaCoreAnomalyProficiency),
+      },
+    ],
+  },
+  {
     id: "banyue-core-buff-bonus",
     sourceType: "agent",
     sourceId: "1471",
@@ -1605,6 +1814,234 @@ export const staticBuildEffectDefinitions = [
     ],
   },
   {
+    id: "soul-shell-anomaly-proficiency",
+    sourceType: "w-engine",
+    sourceId: "14150",
+    sourceName: "壳中之灵",
+    label: "音擎被动：异常精通提升",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    modifiers: [
+      {
+        bucket: "anomalyProficiency",
+        value: byRefinement(soulShellAnomalyProficiency),
+      },
+    ],
+  },
+  {
+    id: "soul-shell-target-anomalous-bonus",
+    sourceType: "w-engine",
+    sourceId: "14150",
+    sourceName: "壳中之灵",
+    label: "音擎被动：异常目标增伤",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      attributes: ["Ether"],
+      combatTags: ["targetAnomalous"],
+    },
+    modifiers: [
+      {
+        bucket: "bonusDamageSum",
+        value: byRefinement(soulShellBonus),
+      },
+    ],
+  },
+  {
+    id: "soul-shell-anomaly-bonus",
+    sourceType: "w-engine",
+    sourceId: "14150",
+    sourceName: "壳中之灵",
+    label: "音擎被动：异常伤害提升",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      damageTypes: ["anomaly"],
+      attributes: ["Ether"],
+    },
+    modifiers: [
+      {
+        bucket: "anomalyBonusDamageSum",
+        value: byRefinement(soulShellAnomalyBonus),
+      },
+    ],
+  },
+  {
+    id: "practiced-perfection-physical-bonus",
+    sourceType: "w-engine",
+    sourceId: "14140",
+    sourceName: "十方锻星",
+    label: "音擎被动：强击后物理伤害提升层数",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    baselineStacks: 2,
+    fullBuffStacks: 2,
+    maxStacks: 2,
+    condition: {
+      attributes: ["Physical"],
+    },
+    modifiers: [
+      {
+        bucket: "bonusDamageSum",
+        value: byRefinement(practicedPerfectionPhysicalBonus),
+      },
+    ],
+  },
+  {
+    id: "flight-of-fancy-anomaly-proficiency",
+    sourceType: "w-engine",
+    sourceId: "14133",
+    sourceName: "飞鸟星梦",
+    label: "音擎被动：以太伤害异常精通层数",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    baselineStacks: 1,
+    fullBuffStacks: 6,
+    maxStacks: 6,
+    condition: {
+      attributes: ["Ether"],
+    },
+    modifiers: [
+      {
+        bucket: "anomalyProficiency",
+        value: byRefinement(flightOfFancyAnomalyProficiency),
+      },
+    ],
+  },
+  {
+    id: "sharpened-stinger-physical-bonus",
+    sourceType: "w-engine",
+    sourceId: "14126",
+    sourceName: "淬锋钳刺",
+    label: "音擎被动：猎意层数物理伤害提升",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    baselineStacks: 1,
+    fullBuffStacks: 3,
+    maxStacks: 3,
+    condition: {
+      attributes: ["Physical"],
+    },
+    modifiers: [
+      {
+        bucket: "bonusDamageSum",
+        value: byRefinement(sharpenedStingerPhysicalBonus),
+      },
+    ],
+  },
+  {
+    id: "timeweaver-anomaly-proficiency",
+    sourceType: "w-engine",
+    sourceId: "14122",
+    sourceName: "时流贤者",
+    label: "音擎被动：异常目标异常精通提升",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      skillTags: ["special", "enhancedSpecial"],
+      combatTags: ["targetAnomalous"],
+    },
+    modifiers: [
+      {
+        bucket: "anomalyProficiency",
+        value: byRefinement(timeweaverAnomalyProficiency),
+      },
+    ],
+  },
+  {
+    id: "flamemaker-shaker-bonus",
+    sourceType: "w-engine",
+    sourceId: "14117",
+    sourceName: "灼心摇壶",
+    label: "音擎被动：伤害提升层数",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    baselineStacks: 1,
+    fullBuffStacks: 10,
+    maxStacks: 10,
+    modifiers: [
+      {
+        bucket: "bonusDamageSum",
+        value: byRefinement(flamemakerBonus),
+      },
+    ],
+  },
+  {
+    id: "hailstorm-shrine-frost-bonus",
+    sourceType: "w-engine",
+    sourceId: "14109",
+    sourceName: "霰落星殿",
+    label: "音擎被动：烈霜伤害提升层数",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    baselineStacks: 1,
+    fullBuffStacks: 2,
+    maxStacks: 2,
+    condition: {
+      attributes: ["Frost"],
+    },
+    modifiers: [
+      {
+        bucket: "bonusDamageSum",
+        value: byRefinement(hailstormFrostBonus),
+      },
+    ],
+  },
+  {
+    id: "electro-lip-gloss-attack-percent",
+    sourceType: "w-engine",
+    sourceId: "13009",
+    sourceName: "触电唇彩",
+    label: "音擎被动：异常目标攻击力提升",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      combatTags: ["targetAnomalous"],
+    },
+    modifiers: [
+      {
+        bucket: "attackPercent",
+        value: byRefinement(electroLipGlossAttackPercent),
+      },
+    ],
+  },
+  {
+    id: "electro-lip-gloss-damage-bonus",
+    sourceType: "w-engine",
+    sourceId: "13009",
+    sourceName: "触电唇彩",
+    label: "音擎被动：异常目标增伤",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      combatTags: ["targetAnomalous"],
+    },
+    modifiers: [
+      {
+        bucket: "bonusDamageSum",
+        value: byRefinement(electroLipGlossBonus),
+      },
+    ],
+  },
+  {
+    id: "rainforest-gourmet-attack-percent",
+    sourceType: "w-engine",
+    sourceId: "13003",
+    sourceName: "雨林饕客",
+    label: "音擎被动：攻击力层数",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    baselineStacks: 1,
+    fullBuffStacks: 10,
+    maxStacks: 10,
+    modifiers: [
+      {
+        bucket: "attackPercent",
+        value: byRefinement(rainforestAttackPercent),
+      },
+    ],
+  },
+  {
     id: "weeping-gemini-anomaly-proficiency",
     sourceType: "w-engine",
     sourceId: "13008",
@@ -1865,6 +2302,43 @@ export const staticBuildEffectDefinitions = [
       {
         bucket: "anomalyProficiency",
         value: () => 30,
+      },
+    ],
+  },
+  {
+    id: "chaos-jazz-4pc-fire-electric-bonus",
+    sourceType: "drive-disc",
+    sourceId: "31800",
+    sourceName: "混沌爵士",
+    label: "4件套：火/电属性增伤",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      attributes: ["Fire", "Electric"],
+    },
+    modifiers: [
+      {
+        bucket: "bonusDamageSum",
+        value: () => 0.15,
+      },
+    ],
+  },
+  {
+    id: "chaos-jazz-4pc-off-field-bonus",
+    sourceType: "drive-disc",
+    sourceId: "31800",
+    sourceName: "混沌爵士",
+    label: "4件套：后场强化特殊技/支援攻击增伤",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      skillTags: ["enhancedSpecial", "assist"],
+      combatTags: ["offField"],
+    },
+    modifiers: [
+      {
+        bucket: "bonusDamageSum",
+        value: () => 0.2,
       },
     ],
   },

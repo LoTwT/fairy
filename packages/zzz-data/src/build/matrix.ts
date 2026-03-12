@@ -302,20 +302,23 @@ function inferGenericGroup(skillTypeId: string) {
   }
 }
 
-function inferGenericSkillTag(skillTypeId: string, damageIndex: number) {
+function inferGenericSkillTag(
+  skillTypeId: string,
+  damageIndex: number,
+): StaticBuildSkillTag {
   switch (skillTypeId) {
     case "0":
-      return "basic" as const
+      return "basic"
     case "1":
-      return (damageIndex === 1 ? "special" : "enhancedSpecial") as const
+      return damageIndex === 1 ? "special" : "enhancedSpecial"
     case "2":
-      return "dash" as const
+      return "dash"
     case "3":
-      return (damageIndex === 1 ? "chain" : "ultimate") as const
+      return damageIndex === 1 ? "chain" : "ultimate"
     case "6":
-      return "assist" as const
+      return "assist"
     default:
-      return "basic" as const
+      return "basic"
   }
 }
 
@@ -1707,13 +1710,22 @@ export function resolveStaticBuildSkillMatrix(
       ...new Set([...(template.combatTags ?? []), ...globalCombatTags]),
     ]
 
+    const damageType: "normal" | "sheer" =
+      template.damageType === "sheer"
+        ? "sheer"
+        : template.damageType === "normal"
+          ? "normal"
+          : agent.defaultDamageType === "sheer"
+            ? "sheer"
+            : "normal"
+
     const build = resolveStaticBuildDamage({
       mode: input.mode,
       manualBaseMode: input.manualBaseMode,
       loadout: input.loadout,
       panel: input.panel,
       scenario: {
-        damageType: template.damageType ?? agent.defaultDamageType,
+        damageType,
         skillTag: template.skillTag,
         skillMultiplier: skillStat.value,
         attribute,
