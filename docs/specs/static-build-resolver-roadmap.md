@@ -352,6 +352,12 @@
   - `爱丽丝` 的异常掌控转异常精通与 `[极性强击]`
   - `雅` 的独立烈霜异常槽与 `[霜灼·破]`
 
+当前判断：
+
+- `8.1 P0` 剩余高优先项中，已经没有适合在当前 contract 下继续硬编码的部分
+- 这些剩余项都更适合放到 `8.3 dynamic value context` 处理
+- 因此下一步转入 `8.2` 立项评估，再决定后续实现顺序
+
 这一阶段不做：
 
 - 不改 `resolveStaticBuildDamage` 的输入输出 contract
@@ -379,6 +385,11 @@
 1. anomaly / disorder matrix 的输入 contract
 2. 行级 metadata 语义
 3. 与当前 `normal / sheer` matrix 的共用边界
+
+当前状态：
+
+- 立项评估已完成，见 [anomaly-disorder-skill-matrix-evaluation.md](./anomaly-disorder-skill-matrix-evaluation.md)
+- 结论：在 `8.3 dynamic value context` 落地前，不进入 anomaly / disorder matrix 实现
 
 ### 8.3 P1：更强的动态 value context
 

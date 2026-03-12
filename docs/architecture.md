@@ -181,6 +181,7 @@ packages/zzz-agent/
 - [`damage-calculation.md`](../docs/specs/damage-calculation.md) — 四种伤害类型（常规/贯穿/异常/紊乱）的乘区公式、TypeScript 类型签名与参考数值
 - [`static-build-resolver.md`](../docs/specs/static-build-resolver.md) — 静态构筑解析系统设计：effect schema、输入输出 contract、热插拔乘区管线与模块划分
 - [`static-build-resolver-roadmap.md`](../docs/specs/static-build-resolver-roadmap.md) — 执行路线与 post-roadmap backlog：V2.1、V2.2、V3 已完成，后续按 backlog 继续推进
+- [`anomaly-disorder-skill-matrix-evaluation.md`](../docs/specs/anomaly-disorder-skill-matrix-evaluation.md) — `8.2` 立项评估：当前结论是不在 `8.3 dynamic value context` 之前实现异常 / 紊乱 matrix
 - [`static-build-resolver-v1.md`](../docs/specs/static-build-resolver-v1.md) — 第一版实现范围冻结：支持对象、bucket、profile、输入输出 contract 与验收标准
 - [`static-build-resolver-v2.md`](../docs/specs/static-build-resolver-v2.md) — 第二版实现范围：扩展支持名单与技能矩阵模板约定
 - [`static-build-resolver-v3.md`](../docs/specs/static-build-resolver-v3.md) — 第三版冻结范围：anomaly / disorder contract、单代理人静态快照约束，以及 V3.3/V3.4 refinement 收口

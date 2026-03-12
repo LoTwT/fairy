@@ -719,6 +719,10 @@
 
 - anomaly / disorder 的 skill matrix
 
+对应立项评估见：
+
+- [异常 / 紊乱 Skill Matrix 立项评估](./anomaly-disorder-skill-matrix-evaluation.md)
+
 后续方向不再属于原始主线，而是进入 post-roadmap backlog：
 
 1. 继续补 anomaly / disorder 剩余 curated coverage
