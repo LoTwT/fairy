@@ -982,6 +982,6 @@ Batch B：
 ### 20.3 当前状态
 
 - `V15.1` 已完成：冻结到 `sourceNotes` guidance，不再继续扩大公式和 snapshot contract
-- `V15.2` 未开始
+- `V15.2` 已完成：`sourceNotes.guidance` taxonomy 已冻结
 - `V15.3` 未开始
 - `V15.4` 未开始

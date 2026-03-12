@@ -412,12 +412,29 @@ export type StaticBuildSourceNoteStatus =
   | "process-only"
   | "research-only"
 
+export type StaticBuildSourceNoteGuidanceKind =
+  | "provide-input"
+  | "input-applied"
+  | "keep-process-only"
+  | "keep-research-only"
+
+export type StaticBuildSourceNoteGuidanceTarget = Exclude<
+  StaticBuildSourceNoteOwner,
+  "sourceView" | "process"
+>
+
+export interface StaticBuildSourceNoteGuidance {
+  kind: StaticBuildSourceNoteGuidanceKind
+  target?: StaticBuildSourceNoteGuidanceTarget
+}
+
 export interface StaticBuildSourceNoteEntry {
   id: string
   sourceType: StaticBuildEffectDefinition["sourceType"]
   sourceId: string
   owner: StaticBuildSourceNoteOwner
   status: StaticBuildSourceNoteStatus
+  guidance: StaticBuildSourceNoteGuidance
   keys: string[]
   message: string
 }

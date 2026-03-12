@@ -4,6 +4,7 @@ import type {
   StaticBuildResolvedSnapshotInput,
   StaticBuildResolvedSnapshotMultiplierKey,
   StaticBuildSourceNoteEntry,
+  StaticBuildSourceNoteGuidance,
   StaticBuildSourceNoteOwner,
   StaticBuildSourceNoteStatus,
   StaticBuildValueContext,
@@ -3450,6 +3451,40 @@ function inferStaticBuildSourceNoteStatus(
   return "process-only"
 }
 
+function inferStaticBuildSourceNoteGuidance(
+  owner: StaticBuildSourceNoteOwner,
+  status: StaticBuildSourceNoteStatus,
+): StaticBuildSourceNoteGuidance {
+  if (status === "research-only") {
+    return { kind: "keep-research-only" }
+  }
+  if (status === "process-only") {
+    return { kind: "keep-process-only" }
+  }
+  if (status === "resolved") {
+    return {
+      kind: "input-applied",
+      target:
+        owner === "finalPanel" ||
+        owner === "dynamicSnapshot" ||
+        owner === "stateSnapshot" ||
+        owner === "resolvedSnapshot"
+          ? owner
+          : undefined,
+    }
+  }
+  return {
+    kind: "provide-input",
+    target:
+      owner === "finalPanel" ||
+      owner === "dynamicSnapshot" ||
+      owner === "stateSnapshot" ||
+      owner === "resolvedSnapshot"
+        ? owner
+        : undefined,
+  }
+}
+
 function collectStaticBuildSourceNoteKeys(
   note: StaticBuildSourceNote,
 ): string[] {
@@ -4183,17 +4218,21 @@ export function getStaticBuildSourceNoteEntries(input: {
   if (!input.sourceId) return []
   return staticBuildSourceNotes
     .filter((note) => matchesStaticBuildSourceNote(note, input))
-    .map(
-      (note, index): StaticBuildSourceNoteEntry => ({
+    .map((note, index): StaticBuildSourceNoteEntry => {
+      const owner = inferStaticBuildSourceNoteOwner(note)
+      const status = inferStaticBuildSourceNoteStatus(note)
+
+      return {
         id: `${note.sourceType}:${note.sourceId}:${index}`,
         sourceType: note.sourceType,
         sourceId: note.sourceId,
-        owner: inferStaticBuildSourceNoteOwner(note),
-        status: inferStaticBuildSourceNoteStatus(note),
+        owner,
+        status,
+        guidance: inferStaticBuildSourceNoteGuidance(owner, status),
         keys: collectStaticBuildSourceNoteKeys(note),
         message: note.note,
-      }),
-    )
+      }
+    })
 }
 
 export function getStaticBuildSourceNotes(input: {

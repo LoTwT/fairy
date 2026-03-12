@@ -1866,6 +1866,8 @@ describe("static build resolver", () => {
           note.sourceId === "1171" &&
           note.owner === "dynamicSnapshot" &&
           note.status === "missing-input" &&
+          note.guidance.kind === "provide-input" &&
+          note.guidance.target === "dynamicSnapshot" &&
           note.keys.includes(
             "scenario.dynamicSnapshot.flags.burniceEmberState",
           ),
@@ -2145,6 +2147,20 @@ describe("static build resolver", () => {
       ),
     ).toBe(true)
     expect(
+      result.sourceNotes.some(
+        (note) =>
+          note.sourceType === "agent" &&
+          note.sourceId === "1171" &&
+          note.owner === "dynamicSnapshot" &&
+          note.status === "resolved" &&
+          note.guidance.kind === "input-applied" &&
+          note.guidance.target === "dynamicSnapshot" &&
+          note.keys.includes(
+            "scenario.dynamicSnapshot.values.burniceEmberDamageRatio",
+          ),
+      ),
+    ).toBe(true)
+    expect(
       result.assumptions.some((item) =>
         item.includes("burniceEmberDamageRatio"),
       ),
@@ -2392,7 +2408,8 @@ describe("static build resolver", () => {
           note.sourceType === "w-engine" &&
           note.sourceId === "14109" &&
           note.owner === "sourceView" &&
-          note.status === "research-only",
+          note.status === "research-only" &&
+          note.guidance.kind === "keep-research-only",
       ),
     ).toBe(true)
   })
@@ -2434,7 +2451,8 @@ describe("static build resolver", () => {
           note.sourceType === "drive-disc" &&
           note.sourceId === "32300" &&
           note.owner === "sourceView" &&
-          note.status === "research-only",
+          note.status === "research-only" &&
+          note.guidance.kind === "keep-research-only",
       ),
     ).toBe(true)
   })
@@ -2472,7 +2490,8 @@ describe("static build resolver", () => {
           note.sourceType === "w-engine" &&
           note.sourceId === "13128" &&
           note.owner === "process" &&
-          note.status === "process-only",
+          note.status === "process-only" &&
+          note.guidance.kind === "keep-process-only",
       ),
     ).toBe(true)
     expect(
@@ -2518,7 +2537,8 @@ describe("static build resolver", () => {
           note.sourceType === "drive-disc" &&
           note.sourceId === "31300" &&
           note.owner === "process" &&
-          note.status === "process-only",
+          note.status === "process-only" &&
+          note.guidance.kind === "keep-process-only",
       ),
     ).toBe(true)
     expect(
