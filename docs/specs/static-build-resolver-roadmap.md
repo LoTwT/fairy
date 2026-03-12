@@ -48,7 +48,8 @@
 
 - `V2.1 curated coverage` 已完成
 - `V2.2 matrix metadata refinement` 已完成
-- 下一步进入 `V3 anomaly / disorder` 的 contract 设计与范围冻结
+- `V3 anomaly / disorder` 已开始
+- 当前子阶段：`V3.1 anomaly / V3.2 disorder` 的 contract 设计与范围冻结
 
 ## 2. 阶段划分
 
@@ -234,7 +235,16 @@
 
 因此它必须晚于 `V2.1` 和 `V2.2`。
 
-### 5.3 进入条件
+### 5.3 子阶段
+
+`V3` 固定拆成两个实现阶段：
+
+1. `V3.1 anomaly`
+2. `V3.2 disorder`
+
+共享同一份 V3 contract，但实现顺序必须先 `anomaly` 再 `disorder`。
+
+### 5.4 进入条件
 
 只有满足以下条件才进入 `V3`：
 
@@ -242,6 +252,8 @@
 2. curated coverage 已达到可用水平
 3. matrix metadata 足够稳定
 4. 已冻结 anomaly / disorder 的输入输出 contract
+
+当前状态：已满足，V3 contract freeze 已开始。
 
 ## 6. 明确不做
 
