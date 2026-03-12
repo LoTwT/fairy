@@ -27,6 +27,12 @@ function burniceFireDisorderDurationBonus({
   return extended / base - 1
 }
 
+function aliceExtraAnomalyProficiencyFromMastery({
+  anomalyMastery,
+}: StaticBuildValueContext): number {
+  return Math.max(0, ((anomalyMastery ?? 0) - 140) * 1.6)
+}
+
 // prettier-ignore
 const nekomataCoreBonus = [
   0.3,
@@ -1177,6 +1183,25 @@ export const staticBuildEffectDefinitions = [
       {
         bucket: "anomalyBonusDamageSum",
         value: (context) => Math.min((context.remainingTime ?? 0) * 0.18, 1.8),
+      },
+    ],
+  },
+  {
+    id: "alice-extra-anomaly-mastery-to-proficiency",
+    sourceType: "agent",
+    sourceId: "1401",
+    sourceName: "爱丽丝",
+    label: "额外能力：异常掌控转异常精通",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      requireExtraAbility: true,
+      damageTypes: ["anomaly", "disorder"],
+    },
+    modifiers: [
+      {
+        bucket: "anomalyProficiency",
+        value: aliceExtraAnomalyProficiencyFromMastery,
       },
     ],
   },
@@ -2522,6 +2547,8 @@ interface StaticBuildSourceNote {
   sourceType: StaticBuildEffectDefinition["sourceType"]
   sourceId: string
   minimumPieces?: 2 | 4
+  requiresAnomalyMastery?: boolean
+  requiresMissingAnomalyMastery?: boolean
   damageTypes?: readonly ("normal" | "sheer" | "anomaly" | "disorder")[]
   disorderSourceTypes?: readonly (
     | "fire"
@@ -2575,8 +2602,16 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
   {
     sourceType: "agent",
     sourceId: "1401",
+    requiresMissingAnomalyMastery: true,
     damageTypes: ["anomaly", "disorder"],
-    note: "爱丽丝的异常掌控转异常精通与[极性强击]特例未在 static resolver 中展开；当前已展开物理异常剩余时间对[紊乱]倍率的提升。",
+    note: "爱丽丝的异常掌控转异常精通未在 static resolver 中自动展开；如已知该快照，请通过 finalPanel.anomalyMastery 显式提供。当前已展开物理异常剩余时间对[紊乱]倍率的提升。",
+  },
+  {
+    sourceType: "agent",
+    sourceId: "1401",
+    requiresAnomalyMastery: true,
+    damageTypes: ["anomaly", "disorder"],
+    note: "爱丽丝当前已按 finalPanel.anomalyMastery 快照展开异常掌控转异常精通；[极性强击]特例仍未在 static resolver 中展开。",
   },
   {
     sourceType: "agent",
@@ -2617,8 +2652,16 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
   {
     sourceType: "w-engine",
     sourceId: "14140",
+    requiresMissingAnomalyMastery: true,
     damageTypes: ["anomaly", "disorder"],
-    note: "十方锻星的异常掌控提升与[强击]触发/接战即满层逻辑未在 static resolver 中展开；当前只展开稳定的物理伤害层数。",
+    note: "十方锻星的异常掌控提升未在 static resolver 中自动推导；如已知该快照，请通过 finalPanel.anomalyMastery 显式提供。当前只展开稳定的物理伤害层数。",
+  },
+  {
+    sourceType: "w-engine",
+    sourceId: "14140",
+    requiresAnomalyMastery: true,
+    damageTypes: ["anomaly", "disorder"],
+    note: "十方锻星的[强击]触发/接战即满层逻辑未在 static resolver 中展开；异常掌控部分可通过 finalPanel.anomalyMastery 快照体现，当前只展开稳定的物理伤害层数。",
   },
   {
     sourceType: "drive-disc",
@@ -2691,6 +2734,7 @@ export function getStaticBuildSourceNotes(input: {
   sourceType: StaticBuildEffectDefinition["sourceType"]
   sourceId?: string
   damageType: "normal" | "sheer" | "anomaly" | "disorder"
+  anomalyMastery?: number
   disorderSourceType?:
     | "fire"
     | "electric"
@@ -2711,6 +2755,15 @@ export function getStaticBuildSourceNotes(input: {
         return false
       }
       if (note.minimumPieces && (input.pieces ?? 0) < note.minimumPieces) {
+        return false
+      }
+      if (note.requiresAnomalyMastery && input.anomalyMastery === undefined) {
+        return false
+      }
+      if (
+        note.requiresMissingAnomalyMastery &&
+        input.anomalyMastery !== undefined
+      ) {
         return false
       }
       if (

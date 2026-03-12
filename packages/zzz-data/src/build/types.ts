@@ -91,6 +91,7 @@ export interface StaticBuildFinalPanelInput {
   hp?: number
   sheerForce?: number
   anomalyProficiency?: number
+  anomalyMastery?: number
   anomalyCritRate?: number
   anomalyCritDamage?: number
   penetrationRate?: number
@@ -222,6 +223,7 @@ export interface StaticBuildEffectCondition {
 export interface StaticBuildValueContext {
   coreSkillLevel: number
   wEngineRefinement: number
+  anomalyMastery?: number
   remainingTime?: number
 }
 
@@ -278,6 +280,7 @@ export interface StaticBuildResolvedPanel {
   hp?: number
   sheerForce?: number
   anomalyProficiency: number
+  anomalyMastery?: number
   anomalyCritRate: number
   anomalyCritDamage: number
   penetrationRate: number

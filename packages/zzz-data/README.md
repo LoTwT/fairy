@@ -67,7 +67,8 @@ import {
 - anomaly / disorder 的直接 curated coverage 已覆盖：
   - 代理人：`格莉丝`、`柳`、`简`、`派派`、`柏妮思`、`薇薇安`、`爱丽丝`、`爱芮`
   - 音擎：`壳中之灵`、`十方锻星`、`飞鸟星梦`、`淬锋钳刺`、`时流贤者`、`灼心摇壶`、`霰落星殿`、`触电唇彩`、`雨林饕客`
-  - 仍无法直接表达的异常掌控换算、剩余时间换算与随机增益，继续通过更细的 source-specific `assumptions` 明示
+- `finalPanel.anomalyMastery` 当前可作为显式快照输入，已用于 `爱丽丝` 的“异常掌控 -> 异常精通”换算
+- 仍无法直接表达的剩余时间换算与随机增益，继续通过更细的 source-specific `assumptions` 明示
   - disorder 已支持按 `anomalyType` 区分原异常来源，并支持异常精通阈值类条件
 - 技能矩阵：当前仅支持 `normal / sheer`，即强攻 / 命破；高频代理人使用 curated 模板，其余强攻 / 命破代理人回退到通用矩阵生成
 

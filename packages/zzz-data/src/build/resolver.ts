@@ -434,6 +434,7 @@ export function resolveStaticBuildDamage(
       sourceType: "agent",
       sourceId: agent.id,
       damageType: input.scenario.damageType,
+      anomalyMastery: input.panel.anomalyMastery,
       disorderSourceType:
         input.scenario.damageType === "disorder"
           ? input.scenario.anomalyType
@@ -446,6 +447,7 @@ export function resolveStaticBuildDamage(
         sourceType: "w-engine",
         sourceId: wEngine.id,
         damageType: input.scenario.damageType,
+        anomalyMastery: input.panel.anomalyMastery,
         disorderSourceType:
           input.scenario.damageType === "disorder"
             ? input.scenario.anomalyType
@@ -459,6 +461,7 @@ export function resolveStaticBuildDamage(
         sourceType: "drive-disc",
         sourceId: set.id,
         damageType: input.scenario.damageType,
+        anomalyMastery: input.panel.anomalyMastery,
         disorderSourceType:
           input.scenario.damageType === "disorder"
             ? input.scenario.anomalyType
@@ -476,6 +479,7 @@ export function resolveStaticBuildDamage(
   const valueContext: StaticBuildValueContext = {
     coreSkillLevel: input.loadout.coreSkillLevel ?? 7,
     wEngineRefinement: input.loadout.wEngineRefinement ?? 1,
+    anomalyMastery: input.panel.anomalyMastery,
     remainingTime:
       input.scenario.damageType === "disorder"
         ? input.scenario.remainingTime
@@ -597,6 +601,7 @@ export function resolveStaticBuildDamage(
     anomalyProficiency:
       (input.panel.anomalyProficiency ?? 0) +
       resolvedBuckets.anomalyProficiency,
+    anomalyMastery: input.panel.anomalyMastery,
     anomalyCritRate:
       (input.panel.anomalyCritRate ?? 0) + resolvedBuckets.anomalyCritRate,
     anomalyCritDamage:

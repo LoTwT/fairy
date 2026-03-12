@@ -170,6 +170,7 @@ export const resolveBuildDamage = createTool({
       hp: z.number().optional(),
       sheerForce: z.number().optional(),
       anomalyProficiency: z.number().optional(),
+      anomalyMastery: z.number().optional(),
       anomalyCritRate: z.number().optional(),
       anomalyCritDamage: z.number().optional(),
       penetrationRate: z.number().optional(),

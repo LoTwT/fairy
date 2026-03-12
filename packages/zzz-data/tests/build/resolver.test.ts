@@ -1178,6 +1178,68 @@ describe("static build resolver", () => {
     ).toBe(false)
   })
 
+  it("uses anomalyMastery snapshot to expand Alice extra ability", () => {
+    const result = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1401",
+        wEngineId: "14140",
+        agentLevel: 60,
+        wEngineRefinement: 1,
+      },
+      panel: {
+        attack: 3000,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 180,
+        anomalyMastery: 200,
+      },
+      scenario: {
+        damageType: "disorder",
+        skillTag: "basic",
+        anomalyType: "physical",
+        remainingTime: 5,
+        attribute: "物理",
+        extraAbilityActive: true,
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.resolvedBuckets.anomalyBonusDamageSum).toBeCloseTo(0.9, 4)
+    expect(result.resolvedBuckets.anomalyProficiency).toBeCloseTo(96, 4)
+    expect(result.resolvedPanel.anomalyProficiency).toBeCloseTo(276, 4)
+    expect(result.resolvedPanel.anomalyMastery).toBe(200)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("finalPanel.anomalyMastery 快照展开异常掌控转异常精通"),
+      ),
+    ).toBe(true)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("异常掌控转异常精通未在 static resolver 中自动展开"),
+      ),
+    ).toBe(false)
+    expect(result.assumptions.some((item) => item.includes("[极性强击]"))).toBe(
+      true,
+    )
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("十方锻星的异常掌控提升未在 static resolver 中自动推导"),
+      ),
+    ).toBe(false)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes(
+          "十方锻星的[强击]触发/接战即满层逻辑未在 static resolver 中展开",
+        ),
+      ),
+    ).toBe(true)
+  })
+
   it("rejects anomaly damage types for non-anomaly specialties", () => {
     expect(() =>
       resolveStaticBuildDamage({

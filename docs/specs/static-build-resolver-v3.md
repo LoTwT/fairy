@@ -88,7 +88,7 @@ V3 主线只扩到**异常代理人**及其兼容音擎，不扩到支援 / 防�
 - 音擎：`壳中之灵`、`十方锻星`、`飞鸟星梦`、`淬锋钳刺`、`时流贤者`、`灼心摇壶`、`霰落星殿`、`触电唇彩`、`雨林饕客`
 - 驱动盘：`自由蓝调 2 件`、`混沌爵士 2/4 件`、`混沌重金属 2 件`
 
-尚未能直接表达的异常掌控换算、剩余持续时间换算、随机增益与独立异常槽机制，继续通过更细的 `assumptions` 处理。
+尚未能直接表达的剩余持续时间换算、随机增益与独立异常槽机制，继续通过更细的 `assumptions` 处理。异常掌控相关逻辑当前已支持通过 `finalPanel.anomalyMastery` 显式输入快照，并已用于 `爱丽丝` 的额外能力换算。
 
 当前已落地的 V3 refinement 包括：
 
@@ -131,6 +131,7 @@ V3 需要新增：
 V3 需要新增：
 
 - `anomalyProficiency`
+- `anomalyMastery`
 - `anomalyCritRate`
 - `anomalyCritDamage`
 
@@ -138,6 +139,7 @@ V3 需要新增：
 
 - `attack` 继续作为异常 / 紊乱的基础攻击快照
 - `anomalyProficiency` 对应计算器中的 `virtualAgentAnomalyProficiency`
+- `anomalyMastery` 作为显式 value context 快照使用，当前已用于 `爱丽丝` 的“异常掌控 -> 异常精通”换算
 - `anomalyCritRate` / `anomalyCritDamage` 只作用于异常 / 紊乱，不影响常规暴击区
 
 ### 3.3 `scenario`

@@ -397,10 +397,22 @@
 
 优先考虑的上下文字段：
 
+- `finalPanel.anomalyMastery`
 - 指定层数 / 充能段位
 - 指定异常剩余时间快照
 - 指定异常目标状态
 - 指定特定来源是否命中阈值
+
+当前进展：
+
+- 已完成第一批：
+  - `finalPanel.anomalyMastery` 已进入 `resolveStaticBuildDamage` contract
+  - `爱丽丝` 已支持按 `finalPanel.anomalyMastery` 快照展开“异常掌控 -> 异常精通”换算
+  - `十方锻星` 与 `爱丽丝` 的 source-specific assumptions 已按是否提供 `anomalyMastery` 拆分
+- 当前仍未直接展开的部分：
+  - `爱丽丝` 的 `[极性强击]`
+  - `柏妮思` 的 `[燃点]/[余烬]` 触发链与异常积蓄效率
+  - `雅` 的独立烈霜异常槽与 `[霜灼·破]`
 
 原则：
 
