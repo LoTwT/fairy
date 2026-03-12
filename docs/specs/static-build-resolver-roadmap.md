@@ -576,11 +576,14 @@ resolver 主线完成后，文档维护需要单独列为持续事项，避免�
 
 ### 10.5 当前状态
 
-当前 `V5` 处于 `V5.1`：
+当前 `V5` 处于 `V5.3`：
 
-- `static-build-resolver-v5.md` 已创建
-- roadmap 已补 `V5` 主线
-- `build/types.ts` 已冻结 `dynamicSnapshot` contract
-- `resolve-build-damage` tool schema 已接受 `dynamicSnapshot`
-- `resolver.ts` 已完成 `dynamicSnapshot` 的基础接线
-- 具体来源规则仍未开始
+- `build/types.ts` / `resolve-build-damage` schema / `resolver.ts` 已完成 `dynamicSnapshot` 基础接线
+- `柏妮思` 已支持 `[余烬]` 动态快照：
+  - `flags.burniceEmberState`
+  - `counts.burniceEmberExtraTriggers`
+  - `values.burniceEmberDamageRatio`
+- `爱芮` 已支持 `[异放]` 动态快照：
+  - `values.ariaExflowDamageRatio`
+  - `values.ariaStunnedDamageRatio`
+- 下一步进入 `V5.4 assumptions refinement`，把 source-specific notes 细化到缺失的具体动态快照 key

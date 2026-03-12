@@ -758,6 +758,44 @@ describe("resolveBuildDamage tool", () => {
     )
   })
 
+  it("supports Aria dynamic snapshot exflow ratios through the high-level resolver", async () => {
+    const result = await runTool(resolveBuildDamage, {
+      agent: "爱芮",
+      mode: "full-buff",
+      agentLevel: 60,
+      finalPanel: {
+        attack: 2950,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 150,
+      },
+      scenario: {
+        damageType: "disorder",
+        skillTag: "enhancedSpecial",
+        anomalyType: "侵蚀",
+        remainingTime: 5,
+        attribute: "以太",
+        dynamicSnapshot: {
+          values: {
+            ariaExflowDamageRatio: 0.45,
+            ariaStunnedDamageRatio: 0.2,
+          },
+        },
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+          isStunned: true,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    expect(
+      (result as any).build.resolvedBuckets.anomalyBonusDamageSum,
+    ).toBeCloseTo(0.65, 4)
+  })
+
   it("supports Vivian mindscape-aware disorder refinements through the high-level resolver", async () => {
     const result = await runTool(resolveBuildDamage, {
       agent: "薇薇安",
@@ -1072,6 +1110,47 @@ describe("resolveBuildDamage tool", () => {
       0.2,
       4,
     )
+  })
+
+  it("supports Burnice dynamic ember snapshots through the high-level resolver", async () => {
+    const result = await runTool(resolveBuildDamage, {
+      agent: "柏妮思",
+      mode: "full-buff",
+      agentLevel: 60,
+      finalPanel: {
+        attack: 3100,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 160,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "enhancedSpecial",
+        damageMultiplier: "520%",
+        attribute: "火属性",
+        dynamicSnapshot: {
+          flags: {
+            burniceEmberState: true,
+          },
+          counts: {
+            burniceEmberExtraTriggers: 2,
+          },
+          values: {
+            burniceEmberDamageRatio: 1.25,
+          },
+        },
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    expect(
+      (result as any).build.resolvedBuckets.anomalyBonusDamageSum,
+    ).toBeCloseTo(2.5, 4)
   })
 
   it("supports progression-aware Orphie snapshots through the high-level resolver", async () => {

@@ -199,6 +199,24 @@ function effectMatches(
   }
 
   if (
+    condition.requiredDynamicCounts &&
+    condition.requiredDynamicCounts.some(
+      (key) => context.dynamicSnapshot?.counts?.[key] === undefined,
+    )
+  ) {
+    return false
+  }
+
+  if (
+    condition.requiredDynamicValues &&
+    condition.requiredDynamicValues.some(
+      (key) => context.dynamicSnapshot?.values?.[key] === undefined,
+    )
+  ) {
+    return false
+  }
+
+  if (
     condition.minimumDynamicCounts &&
     Object.entries(condition.minimumDynamicCounts).some(
       ([key, value]) =>

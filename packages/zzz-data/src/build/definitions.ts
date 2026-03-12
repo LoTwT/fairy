@@ -39,6 +39,26 @@ function ariaM1AnomalyCritRate({
   return Math.max(0.25, 0.25 + Math.max(0, (anomalyMastery ?? 0) - 100) * 0.005)
 }
 
+function dynamicValue(
+  key: keyof NonNullable<StaticBuildValueContext["dynamicSnapshot"]>["values"],
+) {
+  return ({ dynamicSnapshot }: StaticBuildValueContext): number =>
+    dynamicSnapshot?.values?.[key] ?? 0
+}
+
+function multipliedDynamicCountAndValue(input: {
+  countKey: keyof NonNullable<
+    StaticBuildValueContext["dynamicSnapshot"]
+  >["counts"]
+  valueKey: keyof NonNullable<
+    StaticBuildValueContext["dynamicSnapshot"]
+  >["values"]
+}) {
+  return ({ dynamicSnapshot }: StaticBuildValueContext): number =>
+    (dynamicSnapshot?.counts?.[input.countKey] ?? 0) *
+    (dynamicSnapshot?.values?.[input.valueKey] ?? 0)
+}
+
 function steppedEnergyGenerationValue(input: {
   energyGenerationRate?: number
   threshold: number
@@ -1247,6 +1267,37 @@ export const staticBuildEffectDefinitions = [
     ],
   },
   {
+    id: "burnice-dynamic-ember-bonus",
+    sourceType: "agent",
+    sourceId: "1171",
+    sourceName: "柏妮思",
+    label: "动态快照：[余烬]额外结算倍率",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      damageTypes: ["anomaly", "disorder"],
+      attributes: ["Fire"],
+      dynamicSnapshotFlags: ["burniceEmberState"],
+      requiredDynamicCounts: ["burniceEmberExtraTriggers"],
+      requiredDynamicValues: ["burniceEmberDamageRatio"],
+      minimumDynamicCounts: {
+        burniceEmberExtraTriggers: 1,
+      },
+      minimumDynamicValues: {
+        burniceEmberDamageRatio: Number.EPSILON,
+      },
+    },
+    modifiers: [
+      {
+        bucket: "anomalyBonusDamageSum",
+        value: multipliedDynamicCountAndValue({
+          countKey: "burniceEmberExtraTriggers",
+          valueKey: "burniceEmberDamageRatio",
+        }),
+      },
+    ],
+  },
+  {
     id: "grace-extra-shock-anomaly-bonus",
     sourceType: "agent",
     sourceId: "1181",
@@ -1826,6 +1877,51 @@ export const staticBuildEffectDefinitions = [
       {
         bucket: "defenseReduction",
         value: () => 0.08,
+      },
+    ],
+  },
+  {
+    id: "aria-dynamic-exflow-bonus",
+    sourceType: "agent",
+    sourceId: "1501",
+    sourceName: "爱芮",
+    label: "动态快照：[异放]额外倍率",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      damageTypes: ["anomaly", "disorder"],
+      requiredDynamicValues: ["ariaExflowDamageRatio"],
+      minimumDynamicValues: {
+        ariaExflowDamageRatio: Number.EPSILON,
+      },
+    },
+    modifiers: [
+      {
+        bucket: "anomalyBonusDamageSum",
+        value: dynamicValue("ariaExflowDamageRatio"),
+      },
+    ],
+  },
+  {
+    id: "aria-dynamic-stunned-bonus",
+    sourceType: "agent",
+    sourceId: "1501",
+    sourceName: "爱芮",
+    label: "动态快照：失衡目标[异放]额外倍率",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      damageTypes: ["anomaly", "disorder"],
+      requireStunned: true,
+      requiredDynamicValues: ["ariaStunnedDamageRatio"],
+      minimumDynamicValues: {
+        ariaStunnedDamageRatio: Number.EPSILON,
+      },
+    },
+    modifiers: [
+      {
+        bucket: "anomalyBonusDamageSum",
+        value: dynamicValue("ariaStunnedDamageRatio"),
       },
     ],
   },

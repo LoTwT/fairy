@@ -12,11 +12,11 @@
 
 ## 当前进度
 
-当前 `V5` 处于 contract freeze 阶段，状态如下：
+当前 `V5` 处于动态快照第一批来源覆盖阶段，状态如下：
 
 - `V5.1` contract freeze：已完成
 - `V5.2` dynamic snapshot resolver：已完成基础接线
-- `V5.3` 第一批来源覆盖：未开始
+- `V5.3` 第一批来源覆盖：已完成
 - `V5.4` assumptions refinement：未开始
 
 ## 1. 为什么需要 V5
@@ -175,6 +175,17 @@ interface StaticBuildDynamicSnapshot {
 
 - 只补当前公式已有稳定落点的部分
 - 不把“次数自动推导”伪装成静态能力
+
+当前状态：
+
+- 已完成 `柏妮思` 的 `[余烬]` 动态快照：
+  - `flags.burniceEmberState`
+  - `counts.burniceEmberExtraTriggers`
+  - `values.burniceEmberDamageRatio`
+- 已完成 `爱芮` 的 `[异放]` 动态快照：
+  - `values.ariaExflowDamageRatio`
+  - `values.ariaStunnedDamageRatio`
+- 当前这些值都会直接进入 `anomalyBonusDamageSum`，trace 中可见对应来源 effect
 
 ### 6.4 `V5.4` assumptions refinement
 

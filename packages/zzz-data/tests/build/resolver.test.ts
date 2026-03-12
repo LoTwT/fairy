@@ -1288,6 +1288,43 @@ describe("static build resolver", () => {
     ).toBe(true)
   })
 
+  it("applies Aria dynamic snapshot exflow ratios to anomaly/disorder damage", () => {
+    const result = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1501",
+        agentLevel: 60,
+      },
+      panel: {
+        attack: 2950,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 150,
+      },
+      scenario: {
+        damageType: "disorder",
+        skillTag: "enhancedSpecial",
+        anomalyType: "ether",
+        remainingTime: 5,
+        attribute: "以太",
+        dynamicSnapshot: {
+          values: {
+            ariaExflowDamageRatio: 0.45,
+            ariaStunnedDamageRatio: 0.2,
+          },
+        },
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+          isStunned: true,
+        },
+      },
+    })
+
+    expect(result.resolvedBuckets.anomalyBonusDamageSum).toBeCloseTo(0.65, 4)
+  })
+
   it("applies curated anomaly bonus for Piper with anomaly-compatible engines", () => {
     const result = resolveStaticBuildDamage({
       mode: "full-buff",
@@ -1557,6 +1594,46 @@ describe("static build resolver", () => {
         item.includes('combatTags: ["burniceHeatPenetration"]'),
       ),
     ).toBe(true)
+  })
+
+  it("applies Burnice dynamic ember snapshot ratios to anomaly and disorder damage", () => {
+    const result = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1171",
+        agentLevel: 60,
+      },
+      panel: {
+        attack: 3100,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 160,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "enhancedSpecial",
+        damageMultiplier: "520%",
+        attribute: "火属性",
+        dynamicSnapshot: {
+          flags: {
+            burniceEmberState: true,
+          },
+          counts: {
+            burniceEmberExtraTriggers: 2,
+          },
+          values: {
+            burniceEmberDamageRatio: 1.25,
+          },
+        },
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.resolvedBuckets.anomalyBonusDamageSum).toBeCloseTo(2.5, 4)
   })
 
   it("refines Burnice progression assumptions when mindscape is present but energyGenerationRate is missing", () => {

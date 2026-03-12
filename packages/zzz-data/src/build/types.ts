@@ -238,6 +238,8 @@ export interface StaticBuildEffectCondition {
   requireStunned?: boolean
   combatTags?: string[]
   dynamicSnapshotFlags?: StaticBuildDynamicFlagKey[]
+  requiredDynamicCounts?: StaticBuildDynamicCountKey[]
+  requiredDynamicValues?: StaticBuildDynamicValueKey[]
   minimumDynamicCounts?: Partial<Record<StaticBuildDynamicCountKey, number>>
   minimumDynamicValues?: Partial<Record<StaticBuildDynamicValueKey, number>>
   minimumResolvedCritRate?: number
