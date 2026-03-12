@@ -23,7 +23,7 @@
 
 - `V7.1` contract freeze：已完成
 - `V7.2` resolver wiring：已完成
-- `V7.3` source adoption：第一批已完成（`柏妮思 M6` 的 `25% 火抗无视 -> resolvedSnapshot.bucketDeltas.ignoreResistance`）
+- `V7.3` source adoption：前两批已完成（`柏妮思 M6` 的 `25% 火抗无视 -> resolvedSnapshot.bucketDeltas.ignoreResistance`；`格莉丝 M2`、`简` 的异常积蓄效率 / 异常倍率折算 -> `resolvedSnapshot.multiplierFactors.skillMultiplierFactor`）
 
 ## 1. 为什么需要 V7
 
@@ -162,6 +162,10 @@ type StaticBuildResolvedSnapshotMultiplierKey = "skillMultiplierFactor"
 - 已完成第一批来源迁移：
   - `柏妮思` 影画 6 的 `25% 火抗无视`
   - 当前可通过 `scenario.resolvedSnapshot.bucketDeltas.ignoreResistance` 显式提供
+- 已完成第二批来源迁移：
+  - `格莉丝` 影画 2 的电能层数 / 电属性异常积蓄效率折算
+  - `简` 的物理异常积蓄效率折算
+  - 当前可通过 `scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor` 显式提供
 - 仍保留在 assumptions 的部分：
   - `柏妮思` 特殊 `[余烬]`
   - 额外 `[灼烧]` 结算

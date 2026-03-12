@@ -883,6 +883,50 @@ describe("static build resolver", () => {
     ).toBe(true)
   })
 
+  it("records Grace m2 anomaly multiplier snapshots through resolvedSnapshot", () => {
+    const result = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1181",
+        wEngineId: "14118",
+        agentLevel: 60,
+        agentMindscape: 2,
+        wEngineRefinement: 1,
+      },
+      panel: {
+        attack: 3000,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 120,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "enhancedSpecial",
+        damageMultiplier: "500%",
+        attribute: "电属性",
+        resolvedSnapshot: {
+          multiplierFactors: {
+            skillMultiplierFactor: 1.25,
+          },
+        },
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.resolvedBuckets.skillMultiplierFactor).toBeCloseTo(1.25, 4)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes(
+          '格莉丝的影画2当前可通过 combatTags: ["graceGrenadeHitTarget"] 显式展开电抗降低；[电能]层数与电属性异常积蓄效率折算后的最终异常倍率已按 scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor 记录。',
+        ),
+      ),
+    ).toBe(true)
+  })
+
   it("resolves disorder damage for anomaly agents", () => {
     const result = resolveStaticBuildDamage({
       mode: "full-buff",
@@ -1051,6 +1095,50 @@ describe("static build resolver", () => {
     expect(
       result.assumptions.some((item) =>
         item.includes('combatTags: ["janeFrenzy"]'),
+      ),
+    ).toBe(true)
+  })
+
+  it("records Jane anomaly buildup multipliers through resolvedSnapshot", () => {
+    const result = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1261",
+        wEngineId: "14126",
+        agentLevel: 60,
+        coreSkillLevel: 7,
+        wEngineRefinement: 1,
+      },
+      panel: {
+        attack: 3000,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 180,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "dash",
+        damageMultiplier: "500%",
+        attribute: "物理",
+        resolvedSnapshot: {
+          multiplierFactors: {
+            skillMultiplierFactor: 1.4,
+          },
+        },
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.resolvedBuckets.skillMultiplierFactor).toBeCloseTo(1.4, 4)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes(
+          '简的每点异常精通追加异常暴击率当前已自动折算；影画1的[狂热]状态异常精通转增伤当前可通过 combatTags: ["janeFrenzy"] 静态展开；物理异常积蓄效率折算后的最终异常倍率已按 scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor 记录。',
+        ),
       ),
     ).toBe(true)
   })

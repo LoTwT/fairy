@@ -514,6 +514,43 @@ describe("resolveBuildDamage tool", () => {
     ).toBeCloseTo(0.085, 4)
   })
 
+  it("supports Grace m2 anomaly multiplier snapshots through the high-level resolver", async () => {
+    const result = await runTool(resolveBuildDamage, {
+      agent: "格莉丝",
+      wEngine: "嵌合编译器",
+      mode: "full-buff",
+      agentLevel: 60,
+      agentMindscape: 2,
+      finalPanel: {
+        attack: 3000,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 120,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "enhancedSpecial",
+        damageMultiplier: "500%",
+        attribute: "电属性",
+        resolvedSnapshot: {
+          multiplierFactors: {
+            skillMultiplierFactor: 1.25,
+          },
+        },
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    expect(
+      (result as any).build.resolvedBuckets.skillMultiplierFactor,
+    ).toBeCloseTo(1.25, 4)
+  })
+
   it("supports disorder damage through the high-level resolver", async () => {
     const result = await runTool(resolveBuildDamage, {
       agent: "格莉丝",
@@ -922,6 +959,42 @@ describe("resolveBuildDamage tool", () => {
       0.54,
       4,
     )
+  })
+
+  it("supports Jane anomaly multiplier snapshots through the high-level resolver", async () => {
+    const result = await runTool(resolveBuildDamage, {
+      agent: "简",
+      wEngine: "淬锋钳刺",
+      mode: "full-buff",
+      agentLevel: 60,
+      finalPanel: {
+        attack: 3000,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 180,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "dash",
+        damageMultiplier: "500%",
+        attribute: "物理",
+        resolvedSnapshot: {
+          multiplierFactors: {
+            skillMultiplierFactor: 1.4,
+          },
+        },
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    expect(
+      (result as any).build.resolvedBuckets.skillMultiplierFactor,
+    ).toBeCloseTo(1.4, 4)
   })
 
   it("supports Yanagi mindscape-aware disorder refinements through the high-level resolver", async () => {

@@ -3446,8 +3446,18 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
   {
     sourceType: "agent",
     sourceId: "1181",
+    minimumMindscape: 2,
     damageTypes: ["anomaly", "disorder"],
-    note: '格莉丝的影画2当前可通过 combatTags: ["graceGrenadeHitTarget"] 显式展开电抗降低；[电能]层数与电属性异常积蓄效率仍未在 static resolver 中展开，若需要把该部分折算进异常倍率，请显式调整 scenario.damageMultiplier。',
+    requiresMissingResolvedSnapshotMultipliers: ["skillMultiplierFactor"],
+    note: '格莉丝的影画2当前可通过 combatTags: ["graceGrenadeHitTarget"] 显式展开电抗降低；[电能]层数与电属性异常积蓄效率仍未在 static resolver 中展开，若需要把该部分折算进最终异常倍率，请通过 scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor 显式提供。',
+  },
+  {
+    sourceType: "agent",
+    sourceId: "1181",
+    minimumMindscape: 2,
+    damageTypes: ["anomaly", "disorder"],
+    requiredResolvedSnapshotMultipliers: ["skillMultiplierFactor"],
+    note: '格莉丝的影画2当前可通过 combatTags: ["graceGrenadeHitTarget"] 显式展开电抗降低；[电能]层数与电属性异常积蓄效率折算后的最终异常倍率已按 scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor 记录。',
   },
   {
     sourceType: "agent",
@@ -3477,7 +3487,15 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
     sourceType: "agent",
     sourceId: "1261",
     damageTypes: ["anomaly", "disorder"],
-    note: '简的每点异常精通追加异常暴击率当前已自动折算；影画1的[狂热]状态异常精通转增伤当前可通过 combatTags: ["janeFrenzy"] 静态展开；物理异常积蓄效率提升仍未在 static resolver 中展开，若需精细计算，请自行调整 damageMultiplier。',
+    requiresMissingResolvedSnapshotMultipliers: ["skillMultiplierFactor"],
+    note: '简的每点异常精通追加异常暴击率当前已自动折算；影画1的[狂热]状态异常精通转增伤当前可通过 combatTags: ["janeFrenzy"] 静态展开；物理异常积蓄效率提升仍未在 static resolver 中展开，若需精细计算，请通过 scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor 显式提供。',
+  },
+  {
+    sourceType: "agent",
+    sourceId: "1261",
+    damageTypes: ["anomaly", "disorder"],
+    requiredResolvedSnapshotMultipliers: ["skillMultiplierFactor"],
+    note: '简的每点异常精通追加异常暴击率当前已自动折算；影画1的[狂热]状态异常精通转增伤当前可通过 combatTags: ["janeFrenzy"] 静态展开；物理异常积蓄效率折算后的最终异常倍率已按 scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor 记录。',
   },
   {
     sourceType: "agent",
