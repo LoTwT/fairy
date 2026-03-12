@@ -773,3 +773,42 @@ resolver 主线完成后，文档维护需要单独列为持续事项，避免�
 下一步：
 
 - `V8` 已在当前 contract 下收口；后续进入新的 scope 时，再基于新的 assumptions/backlog 立项
+
+## 14. V9 source-specific damage views
+
+`V8` 结束后，剩余高价值 anomaly / disorder 来源里，有一类已经能通过现有 snapshot contract 显式表达，但它们不适合继续并入主公式：
+
+- 它们是 source-specific 的独立额外结算条目
+- 它们不等于主 anomaly / disorder 结果
+- 继续塞进主公式会让 resolver contract 变脏
+
+因此下一条新 scope 是：
+
+- 新增 `source-specific damage view`
+
+### 14.1 目标
+
+1. 为不应并入主公式的额外结算提供独立静态 view
+2. 只复用现有 contract，不新增新的顶层 snapshot key
+3. 明确与主 resolver / skill matrix 的边界
+
+### 14.2 第一批范围
+
+优先来源：
+
+- `爱丽丝` `[极性强击]`
+- `雅` `[霜灼·破]`
+- `柏妮思` `[燃点]/[余烬]`
+
+### 14.3 不做
+
+- anomaly / disorder skill matrix
+- 时间轴 / 资源过程模拟
+- 把 source-specific view 强行并入主 anomaly / disorder 公式
+
+### 14.4 执行顺序
+
+1. `V9.1` scope freeze
+2. `V9.2` view contract
+3. `V9.3` first-batch source coverage
+4. `V9.4` docs / integration
