@@ -71,6 +71,85 @@
 ## 7. 当前状态
 
 - `V17.1` 已完成：冻结到通用驱动盘 curated coverage，不继续扩大 contract
-- `V17.2` 未开始
+- `V17.2` 已完成：通用驱动盘 inventory 与批次已冻结
 - `V17.3` 未开始
 - `V17.4` 未开始
+
+## 8. Inventory
+
+当前公开驱动盘共 `26` 套，build resolver 里已做 curated coverage 的有 `9` 套：
+
+- `啄木鸟电音`
+- `河豚电音`
+- `自由蓝调`
+- `混沌爵士`
+- `混沌重金属`
+- `炎狱重金属`
+- `雷暴重金属`
+- `极地重金属`
+- `云岿如我`
+
+剩余 `17` 套中，按当前 contract 的可表达性分成三类。
+
+### 8.1 第一优先级（当前 contract 可直接表达）
+
+- `拂晓生花`
+- `流光咏叹`
+- `獠牙重金属`
+- `如影相随`
+- `折枝剑歌`
+
+这些来源满足：
+
+1. 作用于装备者自身
+2. 可以直接映射到现有 `bonusDamageSum / critRate / critDamage / attackPercent / anomalyProficiency`
+3. 触发条件可由现有 `skillTag` / `combatTags` / `enemy.isStunned` / `finalPanel.anomalyMastery` 表达
+
+### 8.2 第二优先级（允许 partial coverage）
+
+- `沧浪行歌`
+- `囚徒手记`
+
+这批的共同点是：
+
+1. 至少有一部分稳定效果可先并入当前公式
+2. 仍可能保留 source-specific 条件或 process-only 说明
+3. 实现时允许“先展开稳定部分 + 保留 assumptions / sourceNotes”
+
+### 8.3 显式不纳入当前单代理人 damage contract
+
+- `雪兔梦游仙境`
+- `月光骑士颂`
+- `法厄同之歌`
+- `山大王`
+- `震星迪斯科`
+- `原始朋克`
+- `灵魂摇滚`
+- `摇摆爵士`
+- `激素朋克`
+- `静听嘉音`
+
+原因：
+
+1. 主要是全队增益、非装备者触发、后台来源
+2. 或主要影响护盾值、失衡值、减伤、回能
+3. 若强行纳入，会引入隐式队友或隐式战斗过程默认值
+
+## 9. 批次规划
+
+### Batch A
+
+- `拂晓生花`
+- `流光咏叹`
+- `獠牙重金属`
+- `如影相随`
+- `折枝剑歌`
+
+### Batch B
+
+- `沧浪行歌`
+- `囚徒手记`
+
+### Batch C
+
+- 只在 `Batch A / Batch B` 做完后，再评估是否需要补 source-note 收口
