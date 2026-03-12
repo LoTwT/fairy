@@ -706,14 +706,21 @@
 
 因此没有退化成黑盒表格。
 
-### 17.2 后续 TODO
+### 17.2 当前状态与后续方向
 
-当前主线只剩一块大工作：
+当前 roadmap 主线已完成：
 
-1. 在已完成 `V2.1 curated coverage` 与 `V2.2 matrix metadata refinement` 的基础上，继续推进 `V3 anomaly / disorder`
-
-当前状态：
-
-- `V3.1 anomaly` 已打通到单次 `resolveStaticBuildDamage`
+- `V2.1 curated coverage` 已完成
+- `V2.2 matrix metadata refinement` 已完成
+- `V3 anomaly / disorder` 已完成到单次 `resolveStaticBuildDamage`
 - `resolveStaticBuildSkillMatrix` 仍只支持 `normal / sheer`
-- 下一步是 `V3.2 disorder`
+
+当前唯一保留的显式 out-of-scope 是：
+
+- anomaly / disorder 的 skill matrix
+
+后续方向不再属于原始主线，而是进入 post-roadmap backlog：
+
+1. 继续补 anomaly / disorder 剩余 curated coverage
+2. 仅在明确需要时再评估 anomaly / disorder skill matrix
+3. 若需要进一步提高异常 / 紊乱精度，优先补显式 dynamic value context，而不是默认扩大 contract

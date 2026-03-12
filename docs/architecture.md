@@ -119,7 +119,7 @@ packages/zzz-data/
 ├── src/build/              # static build resolver（当前静态构筑解析层）
 │   ├── catalog.ts          # 动态 build catalog：全部强攻 / 命破 / 异常代理人、全部强攻/命破/异常音擎、curated 驱动盘与 alias
 │   ├── definitions.ts      # curated effect definitions + source-specific assumptions（未覆盖项由 resolver 明示）
-│   ├── matrix.ts           # 技能矩阵 builder（curated 模板 + 通用矩阵生成；metadata 当前已包含 source/template/attribute/canonical label/stable key/template tags）
+│   ├── matrix.ts           # 技能矩阵 builder（curated 模板 + 通用矩阵生成；metadata 当前已包含 source/template/attribute/canonical label/stable key/source stat/aggregation/template tags）
 │   ├── profiles.ts         # 标准 normal / sheer / anomaly / disorder profile 与仪玄专用 sheer profile
 │   ├── resolver.ts         # finalPanel + scenario → damageParams / trace（含 disorder source / anomaly proficiency gating）
 │   ├── types.ts            # build layer 输入输出 contract（含 disorderSourceTypes / minimumResolvedAnomalyProficiency）
@@ -180,10 +180,10 @@ packages/zzz-agent/
 
 - [`damage-calculation.md`](../docs/specs/damage-calculation.md) — 四种伤害类型（常规/贯穿/异常/紊乱）的乘区公式、TypeScript 类型签名与参考数值
 - [`static-build-resolver.md`](../docs/specs/static-build-resolver.md) — 静态构筑解析系统设计：effect schema、输入输出 contract、热插拔乘区管线与模块划分
-- [`static-build-resolver-roadmap.md`](../docs/specs/static-build-resolver-roadmap.md) — 执行路线：当前状态、V2.1 curated coverage、V2.2 matrix metadata、V3 anomaly/disorder
+- [`static-build-resolver-roadmap.md`](../docs/specs/static-build-resolver-roadmap.md) — 执行路线与 post-roadmap backlog：V2.1、V2.2、V3 已完成，后续按 backlog 继续推进
 - [`static-build-resolver-v1.md`](../docs/specs/static-build-resolver-v1.md) — 第一版实现范围冻结：支持对象、bucket、profile、输入输出 contract 与验收标准
 - [`static-build-resolver-v2.md`](../docs/specs/static-build-resolver-v2.md) — 第二版实现范围：扩展支持名单与技能矩阵模板约定
-- [`static-build-resolver-v3.md`](../docs/specs/static-build-resolver-v3.md) — 第三版冻结范围：anomaly / disorder contract、单代理人静态快照约束、V3.1/V3.2 分阶段实现
+- [`static-build-resolver-v3.md`](../docs/specs/static-build-resolver-v3.md) — 第三版冻结范围：anomaly / disorder contract、单代理人静态快照约束，以及 V3.3/V3.4 refinement 收口
 
 ## 计算器模块（src/calculator/）
 

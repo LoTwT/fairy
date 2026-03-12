@@ -3,7 +3,7 @@
 - [AI 协作指南](./ai-guide.md) — Codex App 与 Claude Code 共享的项目说明、命令、工作流与文档维护规则
 - [架构说明](./architecture.md) — 项目结构、生成脚本设计
 - [命名规范](./naming.md) — 游戏术语的英文字段命名约定
-- [依赖说明](./dependencies.md) — 各 devDependency 用途
+- [依赖说明](./dependencies.md) — monorepo 级开发依赖与关键运行时依赖说明
 - [数据 Contract Review](./reviews/data-contract-review.md) — `zzz-data` 公开数据 contract 与 cleaned/helper layer 执行基线
 
 ## zzz-agent

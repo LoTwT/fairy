@@ -312,3 +312,87 @@
 - `docs/index.md`
 
 如果某轮改动跨了多个阶段，先拆阶段再实现，不要直接混做。
+
+## 8. Roadmap 完成后的后续计划
+
+当前 `V2.1`、`V2.2`、`V3` 的既定阶段已经完成。后续工作不再属于原 roadmap 主线，而是进入明确排优先级的 backlog。
+
+### 8.1 P0：补齐 anomaly / disorder 的剩余 curated coverage
+
+优先级最高的后续工作，不扩大 contract，只减少当前 source-specific assumptions 的覆盖缺口。
+
+目标：
+
+- 继续把 anomaly / disorder 中仍未直接结构化的高价值来源，从 `assumptions` 推进到 curated effect definitions
+- 优先减少“结果能算但仍大量依赖来源说明”的场景
+
+优先补齐对象：
+
+- 代理人：
+  - `柏妮思`
+  - `爱丽丝`
+  - `雅`
+- 音擎：
+  - `轰鸣座驾`
+  - 其余 anomaly specialty 音擎中仍未收录 curated effects 的来源
+- 驱动盘：
+  - `自由蓝调 4 件`
+  - `混沌重金属 4 件`
+  - 其余异常相关驱动盘中仍仅通过 assumptions 提示的来源
+
+这一阶段不做：
+
+- 不改 `resolveStaticBuildDamage` 的输入输出 contract
+- 不做 anomaly / disorder matrix
+- 不做动态积蓄模拟
+
+验收标准：
+
+1. anomaly / disorder 高频代理人不再主要依赖 source-specific assumptions 解释核心伤害来源
+2. 新增 anomaly / disorder curated effects 都有 resolver 测试覆盖
+3. `README` / V3 文档同步列出新增覆盖范围
+
+### 8.2 P1：异常 / 紊乱 skill matrix 立项评估
+
+当前唯一保留的显式 out-of-scope 是 anomaly / disorder 的 skill matrix。若后续明确需要，应先做立项评估，再决定是否进入实现。
+
+评估目标：
+
+- 判断 anomaly / disorder 是否真的需要矩阵化展示
+- 明确矩阵行语义是“触发条目”还是“技能入口”
+- 明确是否允许一个技能行依赖显式传入的异常状态快照
+
+进入实现前必须先冻结：
+
+1. anomaly / disorder matrix 的输入 contract
+2. 行级 metadata 语义
+3. 与当前 `normal / sheer` matrix 的共用边界
+
+### 8.3 P1：更强的动态 value context
+
+如果异常 / 紊乱需要进一步提高精度，下一步应优先补显式 value context，而不是直接扩大公式层。
+
+优先考虑的上下文字段：
+
+- 指定层数 / 充能段位
+- 指定异常剩余时间快照
+- 指定异常目标状态
+- 指定特定来源是否命中阈值
+
+原则：
+
+- 继续保持“静态快照”模型
+- 不做时间轴模拟
+- 不做团队循环模拟
+
+### 8.4 P2：文档与工程治理
+
+resolver 主线完成后，文档维护需要单独列为持续事项，避免再次出现“实现已变，文档还停留在旧阶段”的漂移。
+
+持续维护项：
+
+1. [dependencies.md](./../dependencies.md) 保持 monorepo 级依赖说明，不再退回到仅覆盖 `packages/zzz-data`
+2. `docs/index.md` / `README.md` / 各阶段规格文档在每轮功能收口后同步更新
+3. 若后续新增 build layer 目录、脚本或 profile，必须同步更新 [architecture.md](./../architecture.md)
+
+这部分不单独形成新公式阶段，但必须作为每轮迭代的收尾检查项。
