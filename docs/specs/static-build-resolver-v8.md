@@ -23,9 +23,9 @@
 
 ## 当前进度
 
-- `V8.1` contract freeze：当前阶段
-- `V8.2` assumption inventory：未开始
-- `V8.3` minimal contract additions：未开始
+- `V8.1` contract freeze：已完成
+- `V8.2` assumption inventory：已完成第一批
+- `V8.3` minimal contract additions：当前结论为暂不进入
 - `V8.4` source migration / closeout：未开始
 
 ## 1. 为什么需要 V8
@@ -148,6 +148,12 @@
 - 每个来源的 contract 归属
 - 是否需要新增 key 的判断
 
+当前结论：
+
+- 第一批 inventory 已完成
+- 当前没有发现“至少两个独立来源共享、且无法落到现有 contract”的新静态快照值
+- 因此 `V8.3` 先不进入实现，后续只在 inventory 结论变化时重新开启
+
 ### 6.3 `V8.3` minimal contract additions
 
 仅在 `V8.2` 证明确有共性时才做：
@@ -179,7 +185,88 @@
 
 这意味着 `V8` 的第一目标是把“该进哪里”说清楚，而不是默认新增 key。
 
-## 8. 验收标准
+## 8. `V8.2` 第一批 inventory 结果
+
+第一批 inventory 覆盖了当前 anomaly / disorder 剩余 assumptions 中最容易继续漂移的来源。
+
+### 8.1 `finalPanel`
+
+适合继续落到 `finalPanel` 的来源：
+
+- `爱丽丝` 的异常掌控 -> 异常精通换算
+- `爱芮` 的异常掌控 -> 异常暴击率换算
+- `十方锻星` 的异常掌控快照
+
+这类来源的共同特征是：
+
+- 最终会表现为稳定面板值
+- 不依赖本轮额外触发次数
+- 已有 `finalPanel` contract 能表达
+
+### 8.2 `dynamicSnapshot`
+
+适合继续落到 `dynamicSnapshot` 的来源：
+
+- `柏妮思` 的 `[燃点]/[余烬]` 额外结算状态 / 次数 / 倍率
+- `爱芮` 的 `[异放]` 额外倍率、失衡额外倍率
+- `薇薇安` 的 `[异放]` 比例与追击伤害，若后续要静态快照化，应优先评估是否能复用现有 `dynamicSnapshot`
+
+这类来源的共同特征是：
+
+- 本轮已经确定
+- 但不是最终 bucket，而是过程中的次数或倍率
+
+### 8.3 `stateSnapshot`
+
+适合继续落到 `stateSnapshot` 的来源：
+
+- `爱丽丝` 的 `[极性强击]`
+- `雅` 的 `[霜灼·破]`
+
+这类来源的共同特征是：
+
+- 需要先判断来源特定状态是否成立
+- 状态成立后，还需要一个 source-specific 结算倍率
+
+### 8.4 `resolvedSnapshot`
+
+第一批 inventory 的结论是：
+
+- `resolvedSnapshot` 继续新增来源的必要性已经很低
+- 当前高价值 clean migration 已基本完成：
+  - `柏妮思 M6`
+  - `格莉丝 M2`
+  - `简`
+  - `派派`
+  - `时流贤者`
+  - `柳 M2`
+  - `薇薇安 M2`
+- 目前没有发现新的高共性来源，需要再为 `resolvedSnapshot` 增加 public key
+
+### 8.5 真动态过程
+
+当前明确不应继续塞进静态 snapshot contract 的来源：
+
+- `奥菲丝&「鬼火」` 的后台自动释放与 `[蓄炎]` 循环
+- `奥菲丝&「鬼火」M6` 的追加激光伤害
+- `灼心摇壶` 的后场能量自动回复
+- `轰鸣座驾` 的随机三选一增益
+- `雅` 的独立烈霜异常槽
+- `简 M6` 的额外攻击
+
+这些项要么依赖时间轴，要么依赖随机分支，要么依赖独立槽位过程，不属于当前静态 resolver 的 contract 范围。
+
+## 9. `V8.3` 当前判断
+
+当前结论：
+
+- `V8.3 minimal contract additions` 暂不进入
+- 原因不是没有剩余 assumptions，而是这些 assumptions 目前都能明确归到：
+  - 现有 contract
+  - 或真动态过程
+- 在没有出现新的“共享静态快照值”之前，不新增 public key
+
+## 10. 验收标准
 
 `V8` 完成后，至少满足：
 
