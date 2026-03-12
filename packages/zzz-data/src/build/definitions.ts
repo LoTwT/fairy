@@ -1550,6 +1550,26 @@ export const staticBuildEffectDefinitions = [
     ],
   },
   {
+    id: "alice-m1-after-assault-defense-reduction",
+    sourceType: "agent",
+    sourceId: "1401",
+    sourceName: "爱丽丝",
+    label: "影画1：强击后减防",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      minimumMindscape: 1,
+      damageTypes: ["anomaly", "disorder"],
+      combatTags: ["aliceAfterAssault"],
+    },
+    modifiers: [
+      {
+        bucket: "defenseReduction",
+        value: () => 0.2,
+      },
+    ],
+  },
+  {
     id: "alice-m2-physical-disorder-bonus",
     sourceType: "agent",
     sourceId: "1401",
@@ -3104,7 +3124,7 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
     sourceType: "agent",
     sourceId: "1401",
     minimumMindscape: 1,
-    note: "爱丽丝的影画1[强击]后的 20% 减防仍需显式状态控制；当前未在 static resolver 中自动展开。",
+    note: '爱丽丝的影画1当前可通过 combatTags: ["aliceAfterAssault"] 显式展开[强击]后的 20% 减防；[极性强击]特例仍未在 static resolver 中自动展开。',
   },
   {
     sourceType: "agent",

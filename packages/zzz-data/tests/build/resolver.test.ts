@@ -1562,6 +1562,7 @@ describe("static build resolver", () => {
         remainingTime: 5,
         attribute: "物理",
         extraAbilityActive: true,
+        combatTags: ["aliceAfterAssault"],
         enemy: {
           defenderBaseDefense: 953,
           defenderResistance: 0.2,
@@ -1570,11 +1571,12 @@ describe("static build resolver", () => {
     })
 
     expect(result.loadout.agentMindscape).toBe(4)
+    expect(result.resolvedBuckets.defenseReduction).toBeCloseTo(0.2, 4)
     expect(result.resolvedBuckets.anomalyBonusDamageSum).toBeCloseTo(1.05, 4)
     expect(result.resolvedBuckets.ignoreResistance).toBeCloseTo(0.1, 4)
     expect(
       result.assumptions.some((item) =>
-        item.includes("影画1[强击]后的 20% 减防仍需显式状态控制"),
+        item.includes('combatTags: ["aliceAfterAssault"] 显式展开'),
       ),
     ).toBe(true)
   })

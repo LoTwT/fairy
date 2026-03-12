@@ -614,6 +614,7 @@ describe("resolveBuildDamage tool", () => {
         remainingTime: 5,
         attribute: "物理",
         extraAbilityActive: true,
+        combatTags: ["aliceAfterAssault"],
         enemy: {
           defenderBaseDefense: 953,
           defenderResistance: 0.2,
@@ -623,6 +624,10 @@ describe("resolveBuildDamage tool", () => {
 
     expect((result as any).found).toBe(true)
     expect((result as any).build.loadout.agentMindscape).toBe(4)
+    expect((result as any).build.resolvedBuckets.defenseReduction).toBeCloseTo(
+      0.2,
+      4,
+    )
     expect(
       (result as any).build.resolvedBuckets.anomalyBonusDamageSum,
     ).toBeCloseTo(1.05, 4)
