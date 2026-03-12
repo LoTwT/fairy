@@ -720,6 +720,299 @@ describe("static build resolver", () => {
     ).toBe(true)
   })
 
+  it("applies curated attack generic w-engine effects for Gilded Blossom", () => {
+    const result = resolveStaticBuildDamage({
+      loadout: {
+        agentId: "1021",
+        wEngineId: "13013",
+        wEngineRefinement: 1,
+      },
+      panel: {
+        attack: 2800,
+        baseAttack: 1100,
+        critRate: 0.5,
+        critDamage: 1.1,
+      },
+      scenario: {
+        damageType: "normal",
+        skillTag: "enhancedSpecial",
+        skillMultiplier: "300%",
+        attribute: "物理",
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.loadout.wEngine?.name).toBe("鎏金花信")
+    expect(result.resolvedBuckets.attackPercent).toBeCloseTo(0.06, 4)
+    expect(result.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.15, 4)
+    expect(result.resolvedPanel.attack).toBeCloseTo(2866, 4)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("鎏金花信 当前未收录 curated"),
+      ),
+    ).toBe(false)
+  })
+
+  it("applies curated attack generic w-engine effects for Starlight Engine", () => {
+    const result = resolveStaticBuildDamage({
+      loadout: {
+        agentId: "1021",
+        wEngineId: "13004",
+        wEngineRefinement: 1,
+      },
+      panel: {
+        attack: 2800,
+        baseAttack: 1100,
+        critRate: 0.5,
+        critDamage: 1.1,
+      },
+      scenario: {
+        damageType: "normal",
+        skillTag: "assist",
+        skillMultiplier: "300%",
+        attribute: "物理",
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.loadout.wEngine?.name).toBe("星徽引擎")
+    expect(result.resolvedBuckets.attackPercent).toBeCloseTo(0.12, 4)
+    expect(result.resolvedPanel.attack).toBeCloseTo(2932, 4)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("星徽引擎 当前未收录 curated"),
+      ),
+    ).toBe(false)
+  })
+
+  it("applies curated attack generic w-engine effects for Moon Phase variants", () => {
+    const obscure = resolveStaticBuildDamage({
+      loadout: {
+        agentId: "1021",
+        wEngineId: "12002",
+        wEngineRefinement: 1,
+      },
+      panel: {
+        attack: 2800,
+        baseAttack: 1100,
+        critRate: 0.5,
+        critDamage: 1.1,
+      },
+      scenario: {
+        damageType: "normal",
+        skillTag: "chain",
+        skillMultiplier: "300%",
+        attribute: "物理",
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+    const full = resolveStaticBuildDamage({
+      loadout: {
+        agentId: "1021",
+        wEngineId: "12001",
+        wEngineRefinement: 1,
+      },
+      panel: {
+        attack: 2800,
+        baseAttack: 1100,
+        critRate: 0.5,
+        critDamage: 1.1,
+      },
+      scenario: {
+        damageType: "normal",
+        skillTag: "basic",
+        skillMultiplier: "300%",
+        attribute: "物理",
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(obscure.loadout.wEngine?.name).toBe("「月相」-晦")
+    expect(obscure.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.15, 4)
+    expect(full.loadout.wEngine?.name).toBe("「月相」-望")
+    expect(full.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.12, 4)
+  })
+
+  it("applies curated rupture generic w-engine effects for Qingyi Cauldron", () => {
+    const result = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1471",
+        wEngineId: "13019",
+        wEngineRefinement: 1,
+      },
+      panel: {
+        attack: 2400,
+        baseAttack: 1000,
+        critRate: 0.35,
+        critDamage: 1.1,
+        sheerForce: 1650,
+      },
+      scenario: {
+        damageType: "sheer",
+        skillTag: "enhancedSpecial",
+        skillMultiplier: "500%",
+        attribute: "火属性",
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.loadout.wEngine?.name).toBe("青漪灵鼎")
+    expect(result.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.12, 4)
+    expect(result.resolvedPanel.critRate).toBeCloseTo(0.415, 4)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("青漪灵鼎 当前未收录 curated"),
+      ),
+    ).toBe(false)
+  })
+
+  it("applies curated rupture generic w-engine effects for Electro Walk and refines Ash Cobalt into source-aware unsupported notes", () => {
+    const electroWalk = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1471",
+        wEngineId: "13014",
+        wEngineRefinement: 1,
+      },
+      panel: {
+        attack: 2400,
+        baseAttack: 1000,
+        critRate: 0.35,
+        critDamage: 1.1,
+        sheerForce: 1650,
+      },
+      scenario: {
+        damageType: "sheer",
+        skillTag: "basic",
+        skillMultiplier: "500%",
+        attribute: "火属性",
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+    const ashCobalt = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1471",
+        wEngineId: "12015",
+        wEngineRefinement: 1,
+      },
+      panel: {
+        attack: 2400,
+        baseAttack: 1000,
+        critRate: 0.35,
+        critDamage: 1.1,
+        sheerForce: 1650,
+      },
+      scenario: {
+        damageType: "sheer",
+        skillTag: "basic",
+        skillMultiplier: "500%",
+        attribute: "火属性",
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(electroWalk.loadout.wEngine?.name).toBe("电波漫步")
+    expect(electroWalk.resolvedBuckets.penetrationValue).toBe(240)
+    expect(ashCobalt.loadout.wEngine?.name).toBe("「灰烬」-钴蓝")
+    expect(ashCobalt.resolvedBuckets.attackPercent).toBe(0)
+    expect(
+      ashCobalt.unsupportedEffects.some((item) =>
+        item.includes("当前 profile 不使用攻击力作为基础乘区"),
+      ),
+    ).toBe(true)
+    expect(
+      ashCobalt.assumptions.some(
+        (item) => item.includes("灰烬") && item.includes("未收录 curated"),
+      ),
+    ).toBe(false)
+  })
+
+  it("applies curated anomaly generic w-engine effects for Electromag variants", () => {
+    const mastery = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1181",
+        wEngineId: "12010",
+        agentLevel: 60,
+        wEngineRefinement: 1,
+      },
+      panel: {
+        attack: 3000,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 120,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "enhancedSpecial",
+        damageMultiplier: "500%",
+        attribute: "电属性",
+        combatTags: ["anomalyApplied"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+    const proficiency = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1181",
+        wEngineId: "12011",
+        agentLevel: 60,
+        wEngineRefinement: 1,
+      },
+      panel: {
+        attack: 3000,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 120,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "enhancedSpecial",
+        damageMultiplier: "500%",
+        attribute: "电属性",
+        combatTags: ["anomalyApplied"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(mastery.loadout.wEngine?.name).toBe("「电磁暴」-壹式")
+    expect(mastery.resolvedPanel.anomalyMastery).toBe(25)
+    expect(proficiency.loadout.wEngine?.name).toBe("「电磁暴」-贰式")
+    expect(proficiency.resolvedBuckets.anomalyProficiency).toBe(25)
+    expect(proficiency.resolvedPanel.anomalyProficiency).toBeCloseTo(145, 4)
+  })
+
   it("records unsupported-effect diagnostics when attack percent buffs need baseAttack", () => {
     const result = resolveStaticBuildDamage({
       mode: "baseline",

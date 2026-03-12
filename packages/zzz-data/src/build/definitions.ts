@@ -287,6 +287,24 @@ const yixuanCoreBonus = [
   0.6,
 ] as const
 
+const qingyiCauldronBonusPerStack = [0.04, 0.046, 0.052, 0.058, 0.064] as const
+const qingyiCauldronCritRate = [0.065, 0.075, 0.085, 0.094, 0.104] as const
+const gildedBlossomAttackPercent = [0.06, 0.069, 0.078, 0.087, 0.096] as const
+// prettier-ignore
+const gildedBlossomEnhancedSpecialBonus = [
+  0.15,
+  0.172,
+  0.195,
+  0.218,
+  0.24,
+] as const
+const electroWalkPenetrationValue = [80, 92, 104, 116, 128] as const
+const electromagMk2AnomalyProficiency = [25, 28, 32, 36, 40] as const
+const electromagMk1AnomalyMastery = [25, 28, 32, 36, 40] as const
+const ashCobaltAttackPercent = [0.072, 0.082, 0.093, 0.104, 0.115] as const
+const starlightEngineAttackPercent = [0.12, 0.138, 0.156, 0.174, 0.192] as const
+const moonPhaseObscureBonus = [0.15, 0.175, 0.2, 0.225, 0.25] as const
+const moonPhaseFullBonus = [0.12, 0.14, 0.16, 0.18, 0.2] as const
 const brimstoneAttackPercent = [0.035, 0.044, 0.052, 0.06, 0.07] as const
 const steelCushionPhysicalBonus = [0.2, 0.25, 0.3, 0.35, 0.4] as const
 const steelCushionBackBonus = [0.25, 0.315, 0.38, 0.44, 0.5] as const
@@ -2020,6 +2038,214 @@ export const staticBuildEffectDefinitions = [
     baselineEnabled: true,
     fullBuffEnabled: true,
     modifiers: [],
+  },
+  {
+    id: "qingyi-cauldron-damage-bonus",
+    sourceType: "w-engine",
+    sourceId: "13019",
+    sourceName: "青漪灵鼎",
+    label: "音擎被动：增伤层数",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    baselineStacks: 1,
+    fullBuffStacks: 3,
+    maxStacks: 3,
+    modifiers: [
+      {
+        bucket: "bonusDamageSum",
+        value: byRefinement(qingyiCauldronBonusPerStack),
+      },
+    ],
+  },
+  {
+    id: "qingyi-cauldron-max-stack-crit-rate",
+    sourceType: "w-engine",
+    sourceId: "13019",
+    sourceName: "青漪灵鼎",
+    label: "音擎被动：满层暴击率",
+    baselineEnabled: false,
+    fullBuffEnabled: true,
+    modifiers: [
+      {
+        bucket: "critRate",
+        value: byRefinement(qingyiCauldronCritRate),
+      },
+    ],
+  },
+  {
+    id: "gilded-blossom-attack-percent",
+    sourceType: "w-engine",
+    sourceId: "13013",
+    sourceName: "鎏金花信",
+    label: "音擎被动：攻击力提升",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    modifiers: [
+      {
+        bucket: "attackPercent",
+        value: byRefinement(gildedBlossomAttackPercent),
+      },
+    ],
+  },
+  {
+    id: "gilded-blossom-enhanced-special-bonus",
+    sourceType: "w-engine",
+    sourceId: "13013",
+    sourceName: "鎏金花信",
+    label: "音擎被动：强化特殊技增伤",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      skillTags: ["enhancedSpecial"],
+    },
+    modifiers: [
+      {
+        bucket: "bonusDamageSum",
+        value: byRefinement(gildedBlossomEnhancedSpecialBonus),
+      },
+    ],
+  },
+  {
+    id: "electro-walk-penetration-value",
+    sourceType: "w-engine",
+    sourceId: "13014",
+    sourceName: "电波漫步",
+    label: "音擎被动：贯穿值层数",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    baselineStacks: 1,
+    fullBuffStacks: 3,
+    maxStacks: 3,
+    modifiers: [
+      {
+        bucket: "penetrationValue",
+        value: byRefinement(electroWalkPenetrationValue),
+      },
+    ],
+  },
+  {
+    id: "electromag-mk2-anomaly-proficiency",
+    sourceType: "w-engine",
+    sourceId: "12011",
+    sourceName: "「电磁暴」-贰式",
+    label: "音擎被动：异常精通提升",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      combatTags: ["anomalyApplied"],
+    },
+    modifiers: [
+      {
+        bucket: "anomalyProficiency",
+        value: byRefinement(electromagMk2AnomalyProficiency),
+      },
+    ],
+  },
+  {
+    id: "electromag-mk1-anomaly-mastery",
+    sourceType: "w-engine",
+    sourceId: "12010",
+    sourceName: "「电磁暴」-壹式",
+    label: "音擎被动：异常掌控提升",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      combatTags: ["anomalyApplied"],
+    },
+    modifiers: [
+      {
+        bucket: "anomalyMastery",
+        value: byRefinement(electromagMk1AnomalyMastery),
+      },
+    ],
+  },
+  {
+    id: "ash-cobalt-attack-percent",
+    sourceType: "w-engine",
+    sourceId: "12015",
+    sourceName: "「灰烬」-钴蓝",
+    label: "音擎被动：接战攻击力提升",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    modifiers: [
+      {
+        bucket: "attackPercent",
+        value: byRefinement(ashCobaltAttackPercent),
+      },
+    ],
+  },
+  {
+    id: "starlight-engine-dodge-counter-attack-percent",
+    sourceType: "w-engine",
+    sourceId: "13004",
+    sourceName: "星徽引擎",
+    label: "音擎被动：闪避反击后攻击力",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      skillTags: ["dash"],
+      combatTags: ["dodgeCounter"],
+    },
+    modifiers: [
+      {
+        bucket: "attackPercent",
+        value: byRefinement(starlightEngineAttackPercent),
+      },
+    ],
+  },
+  {
+    id: "starlight-engine-assist-attack-percent",
+    sourceType: "w-engine",
+    sourceId: "13004",
+    sourceName: "星徽引擎",
+    label: "音擎被动：快速支援后攻击力",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      skillTags: ["assist"],
+    },
+    modifiers: [
+      {
+        bucket: "attackPercent",
+        value: byRefinement(starlightEngineAttackPercent),
+      },
+    ],
+  },
+  {
+    id: "moon-phase-obscure-bonus",
+    sourceType: "w-engine",
+    sourceId: "12002",
+    sourceName: "「月相」-晦",
+    label: "音擎被动：连携技/终结技增伤",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      skillTags: ["chain", "ultimate"],
+    },
+    modifiers: [
+      {
+        bucket: "bonusDamageSum",
+        value: byRefinement(moonPhaseObscureBonus),
+      },
+    ],
+  },
+  {
+    id: "moon-phase-full-bonus",
+    sourceType: "w-engine",
+    sourceId: "12001",
+    sourceName: "「月相」-望",
+    label: "音擎被动：普通/冲刺/闪避反击增伤",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      skillTags: ["basic", "dash"],
+    },
+    modifiers: [
+      {
+        bucket: "bonusDamageSum",
+        value: byRefinement(moonPhaseFullBonus),
+      },
+    ],
   },
   {
     id: "brimstone-attack-percent",

@@ -199,7 +199,7 @@ packages/zzz-agent/
 - [`static-build-resolver-v13.md`](../docs/specs/static-build-resolver-v13.md) — 当前阶段范围：已收口；anomaly / disorder 的 Batch A / Batch B curated coverage 已落地，且未为消除 coverage-gap 新增 public key
 - [`static-build-resolver-v14.md`](../docs/specs/static-build-resolver-v14.md) — 当前阶段范围：已收口；`霰落星殿`、`混沌重金属 4件` 继续保持 `research-only`，`轰鸣座驾`、`自由蓝调 4件` 继续保持 source note
 - [`static-build-resolver-v15.md`](../docs/specs/static-build-resolver-v15.md) — 当前阶段范围：已在当前 contract 下收口；`sourceNotes.guidance` 已进入公开 contract
-- [`static-build-resolver-v16.md`](../docs/specs/static-build-resolver-v16.md) — 当前阶段范围：已完成 inventory；下一步按 Batch A / Batch B 补通用音擎 curated coverage
+- [`static-build-resolver-v16.md`](../docs/specs/static-build-resolver-v16.md) — 当前阶段范围：已完成 Batch A；下一步进入 Batch B，补 `加农转子` / `电波漫步` / `幻变魔方`
 
 ## 计算器模块（src/calculator/）
 
