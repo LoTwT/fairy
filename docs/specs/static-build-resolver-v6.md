@@ -21,7 +21,7 @@
 当前 `V6` 处于 runtime 改造前的冻结阶段，状态如下：
 
 - `V6.1` contract freeze：已完成
-- `V6.2` state snapshot resolver：未开始
+- `V6.2` state snapshot resolver：已完成基础接线
 - `V6.3` 第一批来源覆盖：未开始
 - `V6.4` assumptions refinement：未开始
 
@@ -156,6 +156,12 @@ interface StaticBuildStateSnapshot {
   - 缺少状态 flag
   - 缺少 state snapshot value
   - 当前仍未展开的动态机制
+
+当前状态：
+
+- 已完成 `types.ts` / `resolver.ts` / `resolve-build-damage` schema 的基础接线
+- effect condition 已可消费 `stateSnapshot`
+- 具体来源规则留在 `V6.3`
 
 ### 6.3 `V6.3` 第一批来源覆盖
 

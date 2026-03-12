@@ -126,6 +126,7 @@ function effectMatches(
     extraAbilityActive: boolean
     combatTags: Set<string>
     dynamicSnapshot?: StaticBuildValueContext["dynamicSnapshot"]
+    stateSnapshot?: StaticBuildValueContext["stateSnapshot"]
     isStunned: boolean
     resolvedCritRate?: number
     resolvedAnomalyProficiency?: number
@@ -199,6 +200,15 @@ function effectMatches(
   }
 
   if (
+    condition.stateSnapshotFlags &&
+    condition.stateSnapshotFlags.some(
+      (key) => context.stateSnapshot?.flags?.[key] !== true,
+    )
+  ) {
+    return false
+  }
+
+  if (
     condition.requiredDynamicCounts &&
     condition.requiredDynamicCounts.some(
       (key) => context.dynamicSnapshot?.counts?.[key] === undefined,
@@ -211,6 +221,15 @@ function effectMatches(
     condition.requiredDynamicValues &&
     condition.requiredDynamicValues.some(
       (key) => context.dynamicSnapshot?.values?.[key] === undefined,
+    )
+  ) {
+    return false
+  }
+
+  if (
+    condition.requiredStateValues &&
+    condition.requiredStateValues.some(
+      (key) => context.stateSnapshot?.values?.[key] === undefined,
     )
   ) {
     return false
@@ -237,6 +256,20 @@ function effectMatches(
         (context.dynamicSnapshot?.values?.[
           key as keyof NonNullable<
             NonNullable<typeof context.dynamicSnapshot>["values"]
+          >
+        ] ?? 0) < (value ?? 0),
+    )
+  ) {
+    return false
+  }
+
+  if (
+    condition.minimumStateValues &&
+    Object.entries(condition.minimumStateValues).some(
+      ([key, value]) =>
+        (context.stateSnapshot?.values?.[
+          key as keyof NonNullable<
+            NonNullable<typeof context.stateSnapshot>["values"]
           >
         ] ?? 0) < (value ?? 0),
     )
@@ -329,6 +362,7 @@ function applyEffects(
         extraAbilityActive: context.extraAbilityActive,
         combatTags: context.combatTags,
         dynamicSnapshot: context.valueContext.dynamicSnapshot,
+        stateSnapshot: context.valueContext.stateSnapshot,
         isStunned: context.isStunned,
         resolvedCritRate: context.resolvedCritRate,
         resolvedAnomalyProficiency: context.resolvedAnomalyProficiency,
@@ -574,6 +608,7 @@ export function resolveStaticBuildDamage(
     energyGenerationRate: input.panel.energyGenerationRate,
     anomalyMastery: input.panel.anomalyMastery,
     dynamicSnapshot: input.scenario.dynamicSnapshot,
+    stateSnapshot: input.scenario.stateSnapshot,
     remainingTime:
       input.scenario.damageType === "disorder"
         ? input.scenario.remainingTime

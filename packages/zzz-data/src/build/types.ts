@@ -252,10 +252,13 @@ export interface StaticBuildEffectCondition {
   requireStunned?: boolean
   combatTags?: string[]
   dynamicSnapshotFlags?: StaticBuildDynamicFlagKey[]
+  stateSnapshotFlags?: StaticBuildStateFlagKey[]
   requiredDynamicCounts?: StaticBuildDynamicCountKey[]
   requiredDynamicValues?: StaticBuildDynamicValueKey[]
+  requiredStateValues?: StaticBuildStateValueKey[]
   minimumDynamicCounts?: Partial<Record<StaticBuildDynamicCountKey, number>>
   minimumDynamicValues?: Partial<Record<StaticBuildDynamicValueKey, number>>
+  minimumStateValues?: Partial<Record<StaticBuildStateValueKey, number>>
   minimumResolvedCritRate?: number
   minimumResolvedAnomalyProficiency?: number
 }
@@ -269,6 +272,7 @@ export interface StaticBuildValueContext {
   resolvedAnomalyProficiency?: number
   remainingTime?: number
   dynamicSnapshot?: StaticBuildDynamicSnapshotInput
+  stateSnapshot?: StaticBuildStateSnapshotInput
 }
 
 export interface StaticBuildModifierDefinition {

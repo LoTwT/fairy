@@ -639,5 +639,8 @@ resolver 主线完成后，文档维护需要单独列为持续事项，避免�
 - `scenario.stateSnapshot` 已进入公开 build contract
 - `StaticBuildStateFlagKey` / `StaticBuildStateValueKey` 已冻结第一批 key
 - `resolve-build-damage` tool schema 已接受 `stateSnapshot`
+- `V6.2 state snapshot resolver` 已完成基础接线：
+  - `StaticBuildEffectCondition` 已可表达 `stateSnapshot` 条件
+  - `StaticBuildValueContext` / `resolver` 已可消费 `stateSnapshot`
 
-下一步进入 `V6.2 state snapshot resolver`。
+下一步进入 `V6.3`，开始 `爱丽丝` / `雅` 的第一批来源 coverage。
