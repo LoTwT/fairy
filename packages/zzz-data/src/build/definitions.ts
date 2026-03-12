@@ -3519,7 +3519,15 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
     sourceType: "agent",
     sourceId: "1281",
     damageTypes: ["anomaly", "disorder"],
-    note: "派派的[动力]层数对应的物理异常积蓄效率未在 static resolver 中展开；当前只支持额外能力的全队增伤快照。",
+    requiresMissingResolvedSnapshotMultipliers: ["skillMultiplierFactor"],
+    note: "派派的[动力]层数对应的物理异常积蓄效率未在 static resolver 中展开；当前只支持额外能力的全队增伤快照。若已知该部分折算后的最终异常倍率，请通过 scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor 显式提供。",
+  },
+  {
+    sourceType: "agent",
+    sourceId: "1281",
+    damageTypes: ["anomaly", "disorder"],
+    requiredResolvedSnapshotMultipliers: ["skillMultiplierFactor"],
+    note: "派派的[动力]层数对应的物理异常积蓄效率折算后的最终异常倍率已按 scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor 记录；当前仍只支持额外能力的全队增伤快照。",
   },
   {
     sourceType: "agent",
@@ -3666,7 +3674,15 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
     sourceType: "w-engine",
     sourceId: "14122",
     damageTypes: ["anomaly", "disorder"],
-    note: "时流贤者的电属性异常积蓄效率未在 static resolver 中展开；当前只展开异常目标异常精通与异常精通达标后的紊乱增伤。",
+    requiresMissingResolvedSnapshotMultipliers: ["skillMultiplierFactor"],
+    note: "时流贤者的电属性异常积蓄效率未在 static resolver 中展开；当前只展开异常目标异常精通与异常精通达标后的紊乱增伤。若已知该部分折算后的最终倍率，请通过 scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor 显式提供。",
+  },
+  {
+    sourceType: "w-engine",
+    sourceId: "14122",
+    damageTypes: ["anomaly", "disorder"],
+    requiredResolvedSnapshotMultipliers: ["skillMultiplierFactor"],
+    note: "时流贤者的电属性异常积蓄效率折算后的最终倍率已按 scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor 记录；当前只展开异常目标异常精通与异常精通达标后的紊乱增伤。",
   },
   {
     sourceType: "w-engine",

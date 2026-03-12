@@ -1078,6 +1078,79 @@ describe("resolveBuildDamage tool", () => {
     ).toBeCloseTo(2.5 + (20 / 15 - 1) + 2, 4)
   })
 
+  it("supports Timeweaver anomaly multiplier snapshots through the high-level resolver", async () => {
+    const result = await runTool(resolveBuildDamage, {
+      agent: "柳",
+      wEngine: "时流贤者",
+      mode: "full-buff",
+      agentLevel: 60,
+      finalPanel: {
+        attack: 3100,
+        baseAttack: 1250,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 320,
+      },
+      scenario: {
+        damageType: "disorder",
+        skillTag: "enhancedSpecial",
+        anomalyType: "感电",
+        remainingTime: 5,
+        attribute: "电属性",
+        resolvedSnapshot: {
+          multiplierFactors: {
+            skillMultiplierFactor: 1.3,
+          },
+        },
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    expect(
+      (result as any).build.resolvedBuckets.skillMultiplierFactor,
+    ).toBeCloseTo(1.3, 4)
+  })
+
+  it("supports Piper anomaly multiplier snapshots through the high-level resolver", async () => {
+    const result = await runTool(resolveBuildDamage, {
+      agent: "派派",
+      wEngine: "触电唇彩",
+      mode: "full-buff",
+      agentLevel: 60,
+      finalPanel: {
+        attack: 2800,
+        baseAttack: 1100,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 120,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "enhancedSpecial",
+        damageMultiplier: "480%",
+        attribute: "物理",
+        resolvedSnapshot: {
+          multiplierFactors: {
+            skillMultiplierFactor: 1.2,
+          },
+        },
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    expect(
+      (result as any).build.resolvedBuckets.skillMultiplierFactor,
+    ).toBeCloseTo(1.2, 4)
+  })
+
   it("supports Burnice fire disorder duration refinement through the high-level resolver", async () => {
     const result = await runTool(resolveBuildDamage, {
       agent: "柏妮思",

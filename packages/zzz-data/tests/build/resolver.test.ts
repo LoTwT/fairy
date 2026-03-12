@@ -1239,6 +1239,51 @@ describe("static build resolver", () => {
     ).toBe(true)
   })
 
+  it("records Timeweaver anomaly multiplier snapshots through resolvedSnapshot", () => {
+    const result = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1221",
+        wEngineId: "14122",
+        agentLevel: 60,
+        coreSkillLevel: 7,
+        wEngineRefinement: 1,
+      },
+      panel: {
+        attack: 3100,
+        baseAttack: 1250,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 320,
+      },
+      scenario: {
+        damageType: "disorder",
+        skillTag: "enhancedSpecial",
+        anomalyType: "electric",
+        remainingTime: 5,
+        attribute: "电属性",
+        resolvedSnapshot: {
+          multiplierFactors: {
+            skillMultiplierFactor: 1.3,
+          },
+        },
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.resolvedBuckets.skillMultiplierFactor).toBeCloseTo(1.3, 4)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes(
+          "时流贤者的电属性异常积蓄效率折算后的最终倍率已按 scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor 记录",
+        ),
+      ),
+    ).toBe(true)
+  })
+
   it("expands Yanagi m2 extra-thrust disorder scaling", () => {
     const result = resolveStaticBuildDamage({
       mode: "full-buff",
@@ -1470,6 +1515,49 @@ describe("static build resolver", () => {
         item.includes("触电唇彩 当前未收录 curated"),
       ),
     ).toBe(false)
+  })
+
+  it("records Piper anomaly multiplier snapshots through resolvedSnapshot", () => {
+    const result = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1281",
+        wEngineId: "13009",
+        agentLevel: 60,
+        wEngineRefinement: 1,
+      },
+      panel: {
+        attack: 2800,
+        baseAttack: 1100,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 120,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "enhancedSpecial",
+        damageMultiplier: "480%",
+        attribute: "物理",
+        resolvedSnapshot: {
+          multiplierFactors: {
+            skillMultiplierFactor: 1.2,
+          },
+        },
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.resolvedBuckets.skillMultiplierFactor).toBeCloseTo(1.2, 4)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes(
+          "派派的[动力]层数对应的物理异常积蓄效率折算后的最终异常倍率已按 scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor 记录",
+        ),
+      ),
+    ).toBe(true)
   })
 
   it("refines Vivian disorder bonus by disorder source type", () => {
