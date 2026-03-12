@@ -27,3 +27,4 @@
 - [静态构筑解析系统 V9](./specs/static-build-resolver-v9.md) — 当前阶段：`V9.4` docs / tool integration 已完成；`zzz-agent` 已暴露 `resolve-build-source-damage-views`，用于独立额外结算条目
 - [静态构筑解析系统 V10](./specs/static-build-resolver-v10.md) — 当前阶段：已收口；`爱芮 [异放]` 已进入 source-specific delta view，`霰落星殿` 与 `混沌重金属 4件` 固定为 research-only
 - [静态构筑解析系统 V11](./specs/static-build-resolver-v11.md) — 当前阶段：已收口；主 resolver 与 source view 都已新增结构化 `sourceNotes`
+- [静态构筑解析系统 V12](./specs/static-build-resolver-v12.md) — 当前阶段：已完成 scope freeze；下一步把剩余 generic assumptions / coverage gaps / unsupported effects 提升成结构化 diagnostics

@@ -746,3 +746,4 @@ anomaly / disorder 的高价值来源说明。
 9. `V9` source-specific damage view：已完成 `V9.4` docs / tool integration；`爱丽丝 [极性强击]`、`雅 [霜灼·破]`、`柏妮思 [余烬]` 已通过独立静态 view 暴露，而不继续并入主 anomaly / disorder 公式，`zzz-agent` 也已提供高层 `resolve-build-source-damage-views` 入口，见 [静态构筑解析系统 V9](./static-build-resolver-v9.md)
 10. `V10` source-specific delta view：已在当前 contract 下收口；`爱芮 [异放]` 已通过“含快照结果 - 去除快照结果”的独立 view 暴露，`霰落星殿` 与 `混沌重金属 4件` 固定为 research-only，见 [静态构筑解析系统 V10](./static-build-resolver-v10.md)
 11. `V11` structured source notes：已在当前 contract 下收口；`ResolveStaticBuildResult` 与 source-specific damage view 都已新增结构化 `sourceNotes`，`zzz-agent` 也已优先消费该 contract，同时保持旧 assumptions 兼容，见 [静态构筑解析系统 V11](./static-build-resolver-v11.md)
+12. `V12` structured diagnostics：已完成 `V12.1` scope freeze，下一步把剩余 generic assumptions、coverage gaps 与 unsupported effects 提升成结构化 diagnostics，同时保持旧字符串兼容，见 [静态构筑解析系统 V12](./static-build-resolver-v12.md)

@@ -867,3 +867,23 @@ research-only，暂不进入实现：
 - `V11.1` 已完成
 - `V11.2` 已完成：resolver 已输出结构化 `sourceNotes`
 - `V11.3` 已完成：source view 与 `zzz-agent` 已优先消费结构化 `sourceNotes`
+
+## 17. V12 structured diagnostics
+
+### 17.1 目标
+
+把剩余 generic assumptions、coverage gaps 与 unsupported effects 提升成结构化 diagnostics。
+
+### 17.2 范围
+
+1. `V12.1` scope freeze
+2. `V12.2` generic assumption diagnostics
+3. `V12.3` coverage / unsupported diagnostics
+4. `V12.4` consumer adoption
+
+### 17.3 当前状态
+
+- `V12.1` 已完成
+- `V12.2` 未开始
+- `V12.3` 未开始
+- `V12.4` 未开始
