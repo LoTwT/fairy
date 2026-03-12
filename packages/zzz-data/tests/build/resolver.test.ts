@@ -1081,11 +1081,12 @@ describe("static build resolver", () => {
         item.includes("灼心摇壶 当前未收录 curated"),
       ),
     ).toBe(false)
+    expect(result.resolvedBuckets.anomalyProficiency).toBeCloseTo(80, 4)
     expect(
       result.assumptions.some((item) => item.includes("[燃点]/[余烬]")),
     ).toBe(true)
     expect(
-      result.assumptions.some((item) => item.includes("≥5层额外异常精通阈值")),
+      result.assumptions.some((item) => item.includes("后场能量自动回复")),
     ).toBe(true)
   })
 
@@ -1123,11 +1124,15 @@ describe("static build resolver", () => {
         item.includes("爱丽丝 当前未收录 curated"),
       ),
     ).toBe(false)
+    expect(result.resolvedBuckets.anomalyBonusDamageSum).toBeCloseTo(0.9, 4)
+    expect(
+      result.assumptions.some((item) => item.includes("异常掌控转异常精通")),
+    ).toBe(true)
     expect(
       result.assumptions.some((item) =>
         item.includes("物理异常剩余时间换算紊乱倍率"),
       ),
-    ).toBe(true)
+    ).toBe(false)
   })
 
   it("rejects anomaly damage types for non-anomaly specialties", () => {

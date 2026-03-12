@@ -512,6 +512,44 @@ describe("resolveBuildDamage tool", () => {
     expect((result as any).build.damageParams.remainingTime).toBe(5)
   })
 
+  it("supports Alice disorder curated effects through the high-level resolver", async () => {
+    const result = await runTool(resolveBuildDamage, {
+      agent: "爱丽丝",
+      wEngine: "十方锻星",
+      mode: "full-buff",
+      agentLevel: 60,
+      finalPanel: {
+        attack: 3000,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 180,
+      },
+      scenario: {
+        damageType: "disorder",
+        skillTag: "basic",
+        anomalyType: "强击",
+        remainingTime: 5,
+        attribute: "物理",
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    expect((result as any).build.loadout.agent.name).toBe("爱丽丝")
+    expect((result as any).build.loadout.wEngine.name).toBe("十方锻星")
+    expect(
+      (result as any).build.resolvedBuckets.anomalyBonusDamageSum,
+    ).toBeCloseTo(0.9, 4)
+    expect((result as any).build.resolvedBuckets.bonusDamageSum).toBeCloseTo(
+      0.4,
+      4,
+    )
+  })
+
   it("rejects anomaly formulas for non-anomaly agents", async () => {
     await expect(
       runTool(resolveBuildDamage, {

@@ -222,6 +222,7 @@ export interface StaticBuildEffectCondition {
 export interface StaticBuildValueContext {
   coreSkillLevel: number
   wEngineRefinement: number
+  remainingTime?: number
 }
 
 export interface StaticBuildModifierDefinition {

@@ -476,6 +476,10 @@ export function resolveStaticBuildDamage(
   const valueContext: StaticBuildValueContext = {
     coreSkillLevel: input.loadout.coreSkillLevel ?? 7,
     wEngineRefinement: input.loadout.wEngineRefinement ?? 1,
+    remainingTime:
+      input.scenario.damageType === "disorder"
+        ? input.scenario.remainingTime
+        : undefined,
   }
   const combatTags = new Set(input.scenario.combatTags ?? [])
   const isStunned = input.scenario.enemy.isStunned ?? false

@@ -222,6 +222,7 @@ const sharpenedStingerPhysicalBonus = [0.12, 0.15, 0.18, 0.21, 0.24] as const
 const timeweaverAnomalyProficiency = [75, 85, 95, 105, 115] as const
 const timeweaverDisorderBonus = [0.25, 0.275, 0.3, 0.325, 0.35] as const
 const flamemakerBonus = [0.035, 0.044, 0.052, 0.061, 0.07] as const
+const flamemakerAnomalyProficiency = [50, 62, 75, 87, 100] as const
 const hailstormFrostBonus = [0.2, 0.23, 0.26, 0.29, 0.32] as const
 const electroLipGlossAttackPercent = [0.1, 0.115, 0.13, 0.145, 0.16] as const
 const electroLipGlossBonus = [0.15, 0.175, 0.2, 0.225, 0.25] as const
@@ -1131,6 +1132,25 @@ export const staticBuildEffectDefinitions = [
     ],
   },
   {
+    id: "alice-core-physical-disorder-bonus",
+    sourceType: "agent",
+    sourceId: "1401",
+    sourceName: "爱丽丝",
+    label: "核心被动：物理异常剩余时间提升紊乱倍率",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      damageTypes: ["disorder"],
+      disorderSourceTypes: ["physical"],
+    },
+    modifiers: [
+      {
+        bucket: "anomalyBonusDamageSum",
+        value: (context) => Math.min((context.remainingTime ?? 0) * 0.18, 1.8),
+      },
+    ],
+  },
+  {
     id: "aria-core-anomaly-proficiency",
     sourceType: "agent",
     sourceId: "1501",
@@ -2007,6 +2027,24 @@ export const staticBuildEffectDefinitions = [
     ],
   },
   {
+    id: "flamemaker-shaker-threshold-anomaly-proficiency",
+    sourceType: "w-engine",
+    sourceId: "14117",
+    sourceName: "灼心摇壶",
+    label: "音擎被动：≥5层额外异常精通",
+    baselineEnabled: false,
+    fullBuffEnabled: true,
+    condition: {
+      damageTypes: ["anomaly", "disorder"],
+    },
+    modifiers: [
+      {
+        bucket: "anomalyProficiency",
+        value: byRefinement(flamemakerAnomalyProficiency),
+      },
+    ],
+  },
+  {
     id: "hailstorm-shrine-frost-bonus",
     sourceType: "w-engine",
     sourceId: "14109",
@@ -2508,7 +2546,7 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
     sourceType: "agent",
     sourceId: "1401",
     damageTypes: ["anomaly", "disorder"],
-    note: "爱丽丝的物理异常剩余时间换算紊乱倍率、异常掌控转异常精通与[极性强击]特例未在 static resolver 中展开。",
+    note: "爱丽丝的异常掌控转异常精通与[极性强击]特例未在 static resolver 中展开；当前已展开物理异常剩余时间对[紊乱]倍率的提升。",
   },
   {
     sourceType: "agent",
@@ -2526,7 +2564,7 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
     sourceType: "w-engine",
     sourceId: "14117",
     damageTypes: ["anomaly", "disorder"],
-    note: "灼心摇壶的≥5层额外异常精通阈值未自动展开；如需该部分，请在 finalPanel.anomalyProficiency 中手动加入。",
+    note: "灼心摇壶的后场能量自动回复未在 static resolver 中展开；当前已展开伤害层数与≥5层额外异常精通。",
   },
   {
     sourceType: "w-engine",
