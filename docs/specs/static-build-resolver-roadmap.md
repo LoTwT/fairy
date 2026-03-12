@@ -700,6 +700,6 @@ resolver 主线完成后，文档维护需要单独列为持续事项，避免�
 - `柏妮思` 影画 6 的 `25% 火抗无视` 已改为可通过 `scenario.resolvedSnapshot.bucketDeltas.ignoreResistance` 显式提供
 - 特殊 `[余烬]` 与额外 `[灼烧]` 结算仍保留在 assumptions
 - `格莉丝 M2` 与 `简` 当前不再建议手动改 `damageMultiplier`；若已知异常积蓄效率折算后的最终倍率，应通过 `scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor` 显式提供
-- `派派` 与 `时流贤者` 当前也不再建议手动改 `damageMultiplier`；若已知异常积蓄效率折算后的最终倍率，应通过 `scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor` 显式提供
+- `派派`、`时流贤者`、`柳 M2`、`薇薇安 M2` 当前也不再建议手动改 `damageMultiplier`；若已知异常积蓄效率折算后的最终倍率，应通过 `scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor` 显式提供
 
 下一步继续 `V7.3` 后续批次，挑选更多高价值来源把剩余 assumptions 迁移到 `resolvedSnapshot`。

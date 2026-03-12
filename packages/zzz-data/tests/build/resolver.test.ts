@@ -1329,6 +1329,64 @@ describe("static build resolver", () => {
     ).toBe(true)
   })
 
+  it("records Yanagi m2 anomaly multiplier snapshots through resolvedSnapshot", () => {
+    const result = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1221",
+        wEngineId: "14122",
+        agentLevel: 60,
+        agentMindscape: 2,
+        coreSkillLevel: 7,
+        wEngineRefinement: 1,
+      },
+      panel: {
+        attack: 3100,
+        baseAttack: 1250,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 320,
+      },
+      scenario: {
+        damageType: "disorder",
+        skillTag: "enhancedSpecial",
+        anomalyType: "electric",
+        remainingTime: 5,
+        attribute: "电属性",
+        resolvedSnapshot: {
+          multiplierFactors: {
+            skillMultiplierFactor: 1.35,
+          },
+        },
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.resolvedBuckets.skillMultiplierFactor).toBeCloseTo(1.35, 4)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes(
+          '柳的影画2当前可通过 combatTags: ["yanagiExtraThrustDisorder"] 显式展开[极性紊乱]倍率提升',
+        ),
+      ),
+    ).toBe(true)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes(
+          "scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor 记录",
+        ),
+      ),
+    ).toBe(true)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("能量消耗仍未在 static resolver 中展开"),
+      ),
+    ).toBe(true)
+  })
+
   it("applies curated anomaly proficiency effects for Aria and Soul Shell", () => {
     const result = resolveStaticBuildDamage({
       mode: "full-buff",
@@ -1652,6 +1710,51 @@ describe("static build resolver", () => {
     expect(
       result.assumptions.some((item) =>
         item.includes("影画2当前只展开以太异常/紊乱的 15% 无视抗性"),
+      ),
+    ).toBe(true)
+  })
+
+  it("records Vivian m2 anomaly multiplier snapshots through resolvedSnapshot", () => {
+    const result = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1331",
+        wEngineId: "14133",
+        agentLevel: 60,
+        agentMindscape: 2,
+        wEngineRefinement: 1,
+      },
+      panel: {
+        attack: 3000,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 180,
+      },
+      scenario: {
+        damageType: "disorder",
+        skillTag: "basic",
+        anomalyType: "ether",
+        remainingTime: 5,
+        attribute: "以太",
+        resolvedSnapshot: {
+          multiplierFactors: {
+            skillMultiplierFactor: 1.25,
+          },
+        },
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.resolvedBuckets.skillMultiplierFactor).toBeCloseTo(1.25, 4)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes(
+          "薇薇安的影画2当前只展开以太异常/紊乱的 15% 无视抗性；[异放]精通收益提升与异常积蓄效率折算后的最终倍率已按 scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor 记录。",
+        ),
       ),
     ).toBe(true)
   })

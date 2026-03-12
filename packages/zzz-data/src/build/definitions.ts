@@ -3475,7 +3475,15 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
     sourceType: "agent",
     sourceId: "1221",
     minimumMindscape: 2,
-    note: '柳的影画2当前可通过 combatTags: ["yanagiExtraThrustDisorder"] 显式展开[极性紊乱]倍率提升，full-buff 默认按 2 次额外突刺处理，manual 可通过 effectOverrides 调整层数；电异常积蓄效率与能量消耗仍未在 static resolver 中展开。',
+    requiresMissingResolvedSnapshotMultipliers: ["skillMultiplierFactor"],
+    note: '柳的影画2当前可通过 combatTags: ["yanagiExtraThrustDisorder"] 显式展开[极性紊乱]倍率提升，full-buff 默认按 2 次额外突刺处理，manual 可通过 effectOverrides 调整层数；电异常积蓄效率与能量消耗仍未在 static resolver 中展开。若已知该部分折算后的最终倍率，请通过 scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor 显式提供。',
+  },
+  {
+    sourceType: "agent",
+    sourceId: "1221",
+    minimumMindscape: 2,
+    requiredResolvedSnapshotMultipliers: ["skillMultiplierFactor"],
+    note: '柳的影画2当前可通过 combatTags: ["yanagiExtraThrustDisorder"] 显式展开[极性紊乱]倍率提升，full-buff 默认按 2 次额外突刺处理，manual 可通过 effectOverrides 调整层数；电异常积蓄效率折算后的最终倍率已按 scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor 记录，能量消耗仍未在 static resolver 中展开。',
   },
   {
     sourceType: "agent",
@@ -3545,7 +3553,15 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
     sourceType: "agent",
     sourceId: "1331",
     minimumMindscape: 2,
-    note: "薇薇安的影画2当前只展开以太异常/紊乱的 15% 无视抗性；[异放]精通收益提升与异常积蓄效率仍未在 static resolver 中展开。",
+    requiresMissingResolvedSnapshotMultipliers: ["skillMultiplierFactor"],
+    note: "薇薇安的影画2当前只展开以太异常/紊乱的 15% 无视抗性；[异放]精通收益提升与异常积蓄效率仍未在 static resolver 中展开。若已知该部分折算后的最终倍率，请通过 scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor 显式提供。",
+  },
+  {
+    sourceType: "agent",
+    sourceId: "1331",
+    minimumMindscape: 2,
+    requiredResolvedSnapshotMultipliers: ["skillMultiplierFactor"],
+    note: "薇薇安的影画2当前只展开以太异常/紊乱的 15% 无视抗性；[异放]精通收益提升与异常积蓄效率折算后的最终倍率已按 scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor 记录。",
   },
   {
     sourceType: "agent",
