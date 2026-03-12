@@ -93,6 +93,7 @@ function inferSkillMatrixRowMeta(
   templateSource: StaticBuildSkillMatrixTemplateSource,
   attributeSource: StaticBuildSkillMatrixAttributeSource,
   resolvedAttribute: string,
+  sourceStatId: string,
 ): StaticBuildSkillMatrixRowMeta {
   const tokens = template.label.split("·").filter(Boolean)
   const actionName = tokens[0] ?? template.group
@@ -140,18 +141,31 @@ function inferSkillMatrixRowMeta(
 
   const entryText = `${template.label} ${template.statName}`
   let entryType: StaticBuildSkillMatrixRowMeta["entryType"]
+  let aggregationType: StaticBuildSkillMatrixRowMeta["aggregationType"]
+  let isAdditionalDamage = false
+  let variantAxis: StaticBuildSkillMatrixRowMeta["variantAxis"]
   if (targetSize) {
     entryType = "size-variant"
+    aggregationType = "whole-entry"
+    variantAxis = "target-size"
   } else if (entryText.includes("额外") || entryText.includes("追加")) {
     entryType = "extra"
+    aggregationType = "whole-entry"
+    isAdditionalDamage = true
   } else if (segmentLabel) {
     entryType = "hit"
+    aggregationType = "per-hit"
+    variantAxis = "segment"
   } else if (template.statName.includes("总伤害")) {
     entryType = "total"
+    aggregationType = "whole-entry"
   } else if (qualifiers.length > 0) {
     entryType = "variant"
+    aggregationType = "whole-entry"
+    variantAxis = "condition"
   } else {
     entryType = "total"
+    aggregationType = "whole-entry"
   }
 
   const canonicalTokens = [actionName]
@@ -188,10 +202,15 @@ function inferSkillMatrixRowMeta(
     stableKey,
     templateSource,
     sourceSkillTypeId: template.skillTypeId,
+    sourceStatId,
     sourceStatName: template.statName,
     sourceOccurrence: template.occurrence ?? 1,
     attributeSource,
+    templateCombatTags: template.combatTags ?? [],
     entryType,
+    aggregationType,
+    isAdditionalDamage,
+    ...(variantAxis ? { variantAxis } : {}),
     ...(segmentLabel ? { segmentLabel } : {}),
     ...(segmentIndex ? { segmentIndex } : {}),
     ...(targetSize ? { targetSize } : {}),
@@ -231,7 +250,10 @@ function getSkillMultiplier(
     )
   }
 
-  return value
+  return {
+    value,
+    statId: stat.id,
+  }
 }
 
 function isDamageStatName(name: string) {
@@ -1660,7 +1682,7 @@ export function resolveStaticBuildSkillMatrix(
   const globalExtraAbilityActive = input.context.extraAbilityActive
 
   const rows = resolvedTemplates.map((template, index) => {
-    const skillMultiplier = getSkillMultiplier(
+    const skillStat = getSkillMultiplier(
       template.agentId,
       template.skillTypeId,
       template.statName,
@@ -1688,7 +1710,7 @@ export function resolveStaticBuildSkillMatrix(
       scenario: {
         damageType: template.damageType ?? agent.defaultDamageType,
         skillTag: template.skillTag,
-        skillMultiplier,
+        skillMultiplier: skillStat.value,
         attribute,
         extraAbilityActive: globalExtraAbilityActive,
         combatTags,
@@ -1707,12 +1729,13 @@ export function resolveStaticBuildSkillMatrix(
         templateSource,
         attributeSource,
         attribute,
+        skillStat.statId,
       ),
       skillTag: template.skillTag,
       damageType: template.damageType ?? agent.defaultDamageType,
       attribute,
       combatTags,
-      skillMultiplier,
+      skillMultiplier: skillStat.value,
       build,
     } satisfies StaticBuildSkillMatrixRow
   })

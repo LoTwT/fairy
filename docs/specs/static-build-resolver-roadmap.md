@@ -46,10 +46,9 @@
 
 当前进度：
 
-- 已开始 `V2.1`
-- 第一批 curated coverage：`猫又 / 钢铁肉垫`、`零号·安比 / 牺牲洁纯`
-- support catalog 解耦已完成
-- 下一步继续后续 curated coverage 批次
+- `V2.1 curated coverage` 已完成
+- `V2.2 matrix metadata refinement` 已完成
+- 下一步进入 `V3 anomaly / disorder` 的 contract 设计与范围冻结
 
 ## 2. 阶段划分
 
@@ -59,7 +58,7 @@
 2. `V2.2 matrix metadata refinement`
 3. `V3 anomaly / disorder`
 
-除非用户显式改变优先级，否则不要跳过 `V2.1` 直接做 `V3`。
+当前前两阶段已完成。除非用户显式改变优先级，否则下一步直接进入 `V3`，不要再回到 catalog 扩展或 metadata 微调。
 
 ## 3. V2.1：Curated Coverage
 
@@ -191,6 +190,17 @@
 - `stableKey`：提供不依赖展示字符串的稳定行键
 - Agent prompt 已明确要求优先消费 `row.metadata.canonicalLabel` / `row.metadata.stableKey`
 
+当前第三批已完成：
+
+- `sourceStatId`：把矩阵行精确回链到 raw `stats[].id`
+- `templateCombatTags`：把行内局部条件标签与全局 context 标签拆开
+
+当前第四批已完成：
+
+- `aggregationType`：显式区分 `per-hit` 与 `whole-entry`
+- `isAdditionalDamage`：显式标记额外 / 追加伤害条目
+- `variantAxis`：显式标记当前分支是 `segment` / `target-size` / `condition`
+
 ### 4.3 验收标准
 
 进入 `V3` 前，至少满足：
@@ -198,6 +208,9 @@
 1. UI 展示不需要再从 `label` 反向猜技能结构
 2. Agent 生成表格时优先消费 metadata，而不是自由解释中文技能名
 3. 新元数据不破坏现有 matrix row contract
+4. 上层不需要再从 `entryType` 二次推断“单段命中 / 总伤 / 条件分支”这类聚合语义
+
+当前状态：已满足，可进入 `V3`。
 
 ## 5. V3：Anomaly / Disorder
 

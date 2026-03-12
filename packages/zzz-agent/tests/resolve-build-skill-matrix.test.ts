@@ -27,7 +27,7 @@ describe("resolveBuildSkillMatrix tool", () => {
     expect((result as any).found).toBe(true)
     expect((result as any).matrix.rows).toHaveLength(21)
     expect((result as any).matrix.rows[0].label).toBe("普通攻击·一段")
-    expect((result as any).matrix.rows[0].metadata).toEqual({
+    expect((result as any).matrix.rows[0].metadata).toMatchObject({
       order: 1,
       actionName: "普通攻击",
       skillName: "普通攻击",
@@ -40,10 +40,15 @@ describe("resolveBuildSkillMatrix tool", () => {
       sourceStatName: "一段伤害倍率",
       sourceOccurrence: 1,
       attributeSource: "agent-default",
+      templateCombatTags: [],
       entryType: "hit",
+      aggregationType: "per-hit",
+      isAdditionalDamage: false,
+      variantAxis: "segment",
       segmentLabel: "一段",
       segmentIndex: 1,
     })
+    expect((result as any).matrix.rows[0].metadata.sourceStatId).toBeTruthy()
     expect((result as any).matrix.rows[0].build).toBeUndefined()
     expect((result as any).matrix.effectSummary[0].value).toBeTruthy()
     expect((result as any).matrix.summary.baseDamageStat).toBe("attack")

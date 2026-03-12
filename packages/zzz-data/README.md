@@ -155,10 +155,15 @@ matrix.rows[0]
 //     stableKey: "1241::curated::0::一段伤害倍率::1::basic::default::Ether::agent-default",
 //     templateSource: "curated",
 //     sourceSkillTypeId: 0,
+//     sourceStatId: "124110002",
 //     sourceStatName: "一段伤害倍率",
 //     sourceOccurrence: 1,
 //     attributeSource: "agent-default",
+//     templateCombatTags: [],
 //     entryType: "hit",
+//     aggregationType: "per-hit",
+//     isAdditionalDamage: false,
+//     variantAxis: "segment",
 //     segmentLabel: "一段",
 //     segmentIndex: 1,
 //   },
@@ -182,14 +187,19 @@ const table = matrix.rows.map((row) => ({
 如果你需要把矩阵行稳定回链到公开 `agent-details.json` 的原始技能条目，优先使用：
 
 - `row.metadata.sourceSkillTypeId`
+- `row.metadata.sourceStatId`
 - `row.metadata.sourceStatName`
 - `row.metadata.sourceOccurrence`
 - `row.metadata.canonicalLabel`
 - `row.metadata.stableKey`
 - `row.metadata.templateSource`
 - `row.metadata.attributeSource`
+- `row.metadata.templateCombatTags`
+- `row.metadata.aggregationType`
+- `row.metadata.isAdditionalDamage`
+- `row.metadata.variantAxis`
 
-这样可以避免继续从 `label` 反向猜技能来源、模板来源、属性覆盖来源，或自己拼 display key。
+这样可以避免继续从 `label` 反向猜技能来源、模板来源、属性覆盖来源、行内条件，以及“这是单段命中还是整段总伤”这类聚合语义。
 
 如果你在应用层需要先判断当前 resolver 是否支持某个构筑，不要直接 `try/catch` 所有 resolver 错误，先用 catalog helper 探测：
 

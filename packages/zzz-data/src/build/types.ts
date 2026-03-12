@@ -31,6 +31,13 @@ export type StaticBuildSkillMatrixEntryType =
 
 export type StaticBuildTargetSize = "small" | "medium" | "large"
 
+export type StaticBuildSkillMatrixAggregationType = "per-hit" | "whole-entry"
+
+export type StaticBuildSkillMatrixVariantAxis =
+  | "segment"
+  | "target-size"
+  | "condition"
+
 export type StaticBuildSkillMatrixTemplateSource = "curated" | "generated"
 
 export type StaticBuildSkillMatrixAttributeSource =
@@ -287,10 +294,15 @@ export interface StaticBuildSkillMatrixRowMeta {
   stableKey: string
   templateSource: StaticBuildSkillMatrixTemplateSource
   sourceSkillTypeId: number
+  sourceStatId: string
   sourceStatName: string
   sourceOccurrence: number
   attributeSource: StaticBuildSkillMatrixAttributeSource
+  templateCombatTags: string[]
   entryType: StaticBuildSkillMatrixEntryType
+  aggregationType: StaticBuildSkillMatrixAggregationType
+  isAdditionalDamage: boolean
+  variantAxis?: StaticBuildSkillMatrixVariantAxis
   segmentLabel?: string
   segmentIndex?: number
   targetSize?: StaticBuildTargetSize

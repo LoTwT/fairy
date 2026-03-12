@@ -123,9 +123,14 @@ V2 已支持一层批量技能矩阵 builder：
 - `stableKey`：不依赖 `label` 的稳定行键，适合 UI diff、缓存和程序消费
 - `templateSource`：当前行来自 `curated` 手工模板还是 `generated` 通用模板
 - `sourceSkillTypeId`：回链公开 `agent-details.json` 时使用的 `skills[].typeId`
+- `sourceStatId`：回链公开 `agent-details.json` 时使用的精确 `stats[].id`
 - `sourceStatName` / `sourceOccurrence`：回链原始 `stats[]` 时使用的字段名与同名出现序号
 - `attributeSource`：当前行属性来自 `agent-default`、全局 `context` 还是模板局部覆盖
+- `templateCombatTags`：当前行模板自带的局部战斗标签，不包含全局 `context.combatTags`
 - `entryType`：`hit` / `total` / `extra` / `variant` / `size-variant`
+- `aggregationType`：`per-hit` / `whole-entry`，显式区分单段命中与整段聚合
+- `isAdditionalDamage`：当前行是否属于额外 / 追加伤害条目
+- `variantAxis`：若当前行为分支条目，说明分支维度是 `segment` / `target-size` / `condition`
 - `segmentLabel` / `segmentIndex`：段数信息，如 `三段` / `3`
 - `targetSize`：仅对 `霜锋` 这类体型分支返回 `small` / `medium` / `large`
 
@@ -135,7 +140,7 @@ V2 已支持一层批量技能矩阵 builder：
 - 全技能 / 全段 / 完整伤害表使用 `resolveStaticBuildSkillMatrix`
 - 技能矩阵内部仍逐行复用单场景 resolver，不维护第二套公式
 - 若当前代理人尚未收录 curated effects 或 curated matrix 模板，resolver 会在 `assumptions` 中显式说明，而不是静默补算
-- 上层需要追踪技能行来源或展示技能行时，优先消费 `metadata` 中的 `canonicalLabel` / `stableKey` / source 字段，而不是继续解析 `label`
+- 上层需要追踪技能行来源、模板局部条件、聚合语义或展示技能行时，优先消费 `metadata` 中的 `canonicalLabel` / `stableKey` / source 字段，而不是继续解析 `label`
 
 ## 3. V2 输入 Contract
 

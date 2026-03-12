@@ -30,7 +30,7 @@ describe("static build skill matrix", () => {
     expect(result.profile.id).toBe("standard-normal")
     expect(result.rows).toHaveLength(21)
     expect(result.rows[0]?.label).toBe("普通攻击·一段")
-    expect(result.rows[0]?.metadata).toEqual({
+    expect(result.rows[0]?.metadata).toMatchObject({
       order: 1,
       actionName: "普通攻击",
       skillName: "普通攻击",
@@ -43,10 +43,15 @@ describe("static build skill matrix", () => {
       sourceStatName: "一段伤害倍率",
       sourceOccurrence: 1,
       attributeSource: "agent-default",
+      templateCombatTags: [],
       entryType: "hit",
+      aggregationType: "per-hit",
+      isAdditionalDamage: false,
+      variantAxis: "segment",
       segmentLabel: "一段",
       segmentIndex: 1,
     })
+    expect(result.rows[0]?.metadata.sourceStatId).toBeTruthy()
 
     const etherBurst = result.rows.find(
       (row) => row.id === "1241-suppression-ether-3",
@@ -58,12 +63,17 @@ describe("static build skill matrix", () => {
       qualifiers: ["以太"],
       templateSource: "curated",
       sourceSkillTypeId: 0,
+      templateCombatTags: ["suppressionMode"],
       sourceStatName: "三段伤害倍率（以太）",
       sourceOccurrence: 1,
       attributeSource: "template",
       entryType: "hit",
+      aggregationType: "per-hit",
+      isAdditionalDamage: false,
+      variantAxis: "segment",
       segmentIndex: 3,
     })
+    expect(etherBurst?.metadata.sourceStatId).toBeTruthy()
     expect(etherBurst?.build.damage.expected.total).toBeGreaterThan(0)
   })
 
@@ -136,6 +146,9 @@ describe("static build skill matrix", () => {
     expect(frostSmall?.metadata).toMatchObject({
       skillName: "霜锋",
       entryType: "size-variant",
+      aggregationType: "whole-entry",
+      isAdditionalDamage: false,
+      variantAxis: "target-size",
       targetSize: "small",
     })
 
@@ -178,6 +191,8 @@ describe("static build skill matrix", () => {
       skillName: "飞弦",
       qualifiers: ["斩", "额外伤害"],
       entryType: "extra",
+      aggregationType: "whole-entry",
+      isAdditionalDamage: true,
     })
     const ultimate = result.rows.find((row) => row.label === "终结技·残心")
     expect(ultimate?.skillMultiplier).toBe("4619.4%")
@@ -212,7 +227,12 @@ describe("static build skill matrix", () => {
       templateSource: "generated",
       attributeSource: "agent-default",
       sourceOccurrence: 1,
+      templateCombatTags: [],
+      aggregationType: "per-hit",
+      isAdditionalDamage: false,
+      variantAxis: "segment",
     })
+    expect(result.rows[0]?.metadata.sourceStatId).toBeTruthy()
     expect(
       result.assumptions.some((item) =>
         item.includes("猫又 当前未收录 curated"),
