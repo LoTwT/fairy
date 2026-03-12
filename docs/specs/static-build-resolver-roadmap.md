@@ -931,3 +931,35 @@ Batch B：
 - `壳中之灵`
 
 当前状态：已满足。`V13` 在当前 contract 下已收口，下一步进入 `V14`。
+
+## 19. V14 non-agent source-specific damage views
+
+### 19.1 目标
+
+在不改主 resolver 和不新增 public key 的前提下，评估并补齐适合独立表达的非代理人 `source-specific damage view`。
+
+### 19.2 范围
+
+1. `V14.1` scope freeze
+2. `V14.2` non-agent source inventory
+3. `V14.3` source view coverage
+4. `V14.4` closeout
+
+### 19.3 当前状态
+
+- `V14.1` 已完成：冻结到非代理人来源的 source view，不再继续扩大主公式
+- `V14.2` 未开始
+- `V14.3` 未开始
+- `V14.4` 未开始
+
+### 19.4 当前候选
+
+优先候选：
+
+- `霰落星殿`
+- `混沌重金属 4件`
+
+显式不纳入：
+
+- `轰鸣座驾`
+- `自由蓝调 4件`
