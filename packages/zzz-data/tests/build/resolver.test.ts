@@ -912,6 +912,128 @@ describe("static build resolver", () => {
     expect(lowHp.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.2, 4)
   })
 
+  it("applies curated attack generic w-engine effects for Marcato Desire", () => {
+    const regular = resolveStaticBuildDamage({
+      loadout: {
+        agentId: "1021",
+        wEngineId: "13015",
+        wEngineRefinement: 1,
+      },
+      panel: {
+        attack: 2800,
+        baseAttack: 1100,
+        critRate: 0.5,
+        critDamage: 1.1,
+      },
+      scenario: {
+        damageType: "normal",
+        skillTag: "enhancedSpecial",
+        skillMultiplier: "300%",
+        attribute: "物理",
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+    const anomalousTarget = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1021",
+        wEngineId: "13015",
+        wEngineRefinement: 1,
+      },
+      panel: {
+        attack: 2800,
+        baseAttack: 1100,
+        critRate: 0.5,
+        critDamage: 1.1,
+      },
+      scenario: {
+        damageType: "normal",
+        skillTag: "chain",
+        skillMultiplier: "300%",
+        attribute: "物理",
+        combatTags: ["targetAnomalous"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(regular.loadout.wEngine?.name).toBe("强音热望")
+    expect(regular.resolvedBuckets.attackPercent).toBeCloseTo(0.06, 4)
+    expect(regular.resolvedPanel.attack).toBeCloseTo(2866, 4)
+    expect(
+      regular.assumptions.some((item) =>
+        item.includes("强音热望 当前未收录 curated"),
+      ),
+    ).toBe(false)
+
+    expect(anomalousTarget.resolvedBuckets.attackPercent).toBeCloseTo(0.12, 4)
+    expect(anomalousTarget.resolvedPanel.attack).toBeCloseTo(2932, 4)
+  })
+
+  it("applies curated attack generic w-engine effects for Street Superstar", () => {
+    const baseline = resolveStaticBuildDamage({
+      loadout: {
+        agentId: "1021",
+        wEngineId: "13001",
+        wEngineRefinement: 1,
+      },
+      panel: {
+        attack: 2800,
+        baseAttack: 1100,
+        critRate: 0.5,
+        critDamage: 1.1,
+      },
+      scenario: {
+        damageType: "normal",
+        skillTag: "ultimate",
+        skillMultiplier: "300%",
+        attribute: "物理",
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+    const fullBuff = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1021",
+        wEngineId: "13001",
+        wEngineRefinement: 1,
+      },
+      panel: {
+        attack: 2800,
+        baseAttack: 1100,
+        critRate: 0.5,
+        critDamage: 1.1,
+      },
+      scenario: {
+        damageType: "normal",
+        skillTag: "ultimate",
+        skillMultiplier: "300%",
+        attribute: "物理",
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(baseline.loadout.wEngine?.name).toBe("街头巨星")
+    expect(baseline.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.15, 4)
+    expect(fullBuff.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.45, 4)
+    expect(
+      fullBuff.assumptions.some((item) =>
+        item.includes("街头巨星 当前未收录 curated"),
+      ),
+    ).toBe(false)
+  })
+
   it("applies curated rupture generic w-engine effects for Qingyi Cauldron", () => {
     const result = resolveStaticBuildDamage({
       mode: "full-buff",

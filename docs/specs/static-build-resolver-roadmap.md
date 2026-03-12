@@ -1003,7 +1003,7 @@ Batch B：
 
 - `V16.1` 已完成：冻结到通用音擎 curated coverage，不继续扩大 contract
 - `V16.2` 已完成：inventory 与 batch 划分已冻结
-- `V16.3` 已完成 Batch B：第二批 partial coverage 已落地
+- `V16.3` 已完成 Batch C：通用音擎批次已全部落地
 - `V16.4` 未开始
 
 ### 21.4 当前批次规划
@@ -1027,7 +1027,7 @@ Batch B（已完成）：
 - `加农转子`
 - `幻变魔方`
 
-Batch C（后续评估）：
+Batch C（已完成）：
 
 - `强音热望`
 - `街头巨星`

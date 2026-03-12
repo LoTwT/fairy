@@ -305,6 +305,8 @@ const ashCobaltAttackPercent = [0.072, 0.082, 0.093, 0.104, 0.115] as const
 const cannonRotorAttackPercent = [0.075, 0.086, 0.097, 0.108, 0.12] as const
 const puzzleSphereCritDamage = [0.16, 0.184, 0.208, 0.232, 0.256] as const
 const puzzleSphereLowHpBonus = [0.2, 0.23, 0.26, 0.29, 0.32] as const
+const marcatoDesireAttackPercent = [0.06, 0.069, 0.078, 0.087, 0.096] as const
+const streetSuperstarBonusPerStack = [0.15, 0.172, 0.195, 0.217, 0.24] as const
 const starlightEngineAttackPercent = [0.12, 0.138, 0.156, 0.174, 0.192] as const
 const moonPhaseObscureBonus = [0.15, 0.175, 0.2, 0.225, 0.25] as const
 const moonPhaseFullBonus = [0.12, 0.14, 0.16, 0.18, 0.2] as const
@@ -2226,6 +2228,64 @@ export const staticBuildEffectDefinitions = [
       {
         bucket: "bonusDamageSum",
         value: byRefinement(puzzleSphereLowHpBonus),
+      },
+    ],
+  },
+  {
+    id: "marcato-desire-attack-percent",
+    sourceType: "w-engine",
+    sourceId: "13015",
+    sourceName: "强音热望",
+    label: "音擎被动：强化特殊技/连携技攻击力提升",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      skillTags: ["enhancedSpecial", "chain"],
+    },
+    modifiers: [
+      {
+        bucket: "attackPercent",
+        value: byRefinement(marcatoDesireAttackPercent),
+      },
+    ],
+  },
+  {
+    id: "marcato-desire-target-anomalous-attack-percent",
+    sourceType: "w-engine",
+    sourceId: "13015",
+    sourceName: "强音热望",
+    label: "音擎被动：异常目标额外攻击力提升",
+    baselineEnabled: false,
+    fullBuffEnabled: true,
+    condition: {
+      skillTags: ["enhancedSpecial", "chain"],
+      combatTags: ["targetAnomalous"],
+    },
+    modifiers: [
+      {
+        bucket: "attackPercent",
+        value: byRefinement(marcatoDesireAttackPercent),
+      },
+    ],
+  },
+  {
+    id: "street-superstar-ultimate-bonus",
+    sourceType: "w-engine",
+    sourceId: "13001",
+    sourceName: "街头巨星",
+    label: "音擎被动：终结技充能增伤",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    baselineStacks: 1,
+    fullBuffStacks: 3,
+    maxStacks: 3,
+    condition: {
+      skillTags: ["ultimate"],
+    },
+    modifiers: [
+      {
+        bucket: "bonusDamageSum",
+        value: byRefinement(streetSuperstarBonusPerStack),
       },
     ],
   },
