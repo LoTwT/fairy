@@ -23,4 +23,4 @@
 - [静态构筑解析系统 V5](./specs/static-build-resolver-v5.md) — 当前阶段：`V5` 已在当前 contract 下收口；`柏妮思` / `爱芮` 的 `dynamicSnapshot` 已进入 anomaly/disorder resolver，并已细化 source-specific assumptions
 - [静态构筑解析系统 V6](./specs/static-build-resolver-v6.md) — 当前阶段：已完成 `V6.3` 首批 `爱丽丝` / `雅` source-state snapshot coverage，并同步细化首批 state-aware assumptions
 - [静态构筑解析系统 V7](./specs/static-build-resolver-v7.md) — 当前阶段：`V7.3` 前四批已完成，并在当前 contract 下收口；`柏妮思 M6` 的 `25% 火抗无视` 已接到 `bucketDeltas.ignoreResistance`，`格莉丝 M2`、`简`、`派派`、`时流贤者`、`柳 M2`、`薇薇安 M2` 的异常倍率折算已收口到 `multiplierFactors.skillMultiplierFactor`
-- [静态构筑解析系统 V8](./specs/static-build-resolver-v8.md) — 当前阶段：已完成 `V8.1` contract freeze、`V8.2` 第一批 inventory 与 `V8.4` 第一批 source-note 收口；当前结论是不新增 public key，先继续按 contract 归属收紧 assumptions
+- [静态构筑解析系统 V8](./specs/static-build-resolver-v8.md) — 当前阶段：已完成 `V8.2` inventory 与 `V8.4` 前四批 source-note 收口，并在当前 contract 下收口；当前结论是不新增 public key

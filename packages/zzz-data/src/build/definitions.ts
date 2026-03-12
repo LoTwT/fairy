@@ -3399,7 +3399,7 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
     sourceType: "agent",
     sourceId: "1171",
     minimumMindscape: 2,
-    note: '柏妮思的影画2[热意洞穿]当前可通过 combatTags: ["burniceHeatPenetration"] 显式启用，full-buff 默认按 5 层处理，manual 可通过 effectOverrides 调整层数；施加时机与持续时间仍未自动展开。',
+    note: '柏妮思的影画2[热意洞穿]当前可通过 combatTags: ["burniceHeatPenetration"] 显式启用，full-buff 默认按 5 层处理，manual 可通过 effectOverrides 调整层数；施加时机与持续时间仍需通过 combatTags / effectOverrides 显式表达，不新增新的 snapshot key。',
   },
   {
     sourceType: "agent",
@@ -3509,13 +3509,13 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
     sourceType: "agent",
     sourceId: "1261",
     minimumMindscape: 2,
-    note: "简的影画2当前已支持[啮咬]目标减防与强击异常暴击伤害；队友触发[强击]时的同等判定仍需通过 combatTags 显式表达。",
+    note: "简的影画2当前已支持[啮咬]目标减防与强击异常暴击伤害；队友触发[强击]时的同等判定仍需通过 combatTags 显式表达，不新增新的 snapshot key。",
   },
   {
     sourceType: "agent",
     sourceId: "1261",
     minimumMindscape: 4,
-    note: "简的影画4当前已支持[强击]/[紊乱]后异常伤害提升；触发时机与持续时间仍需通过 combatTags 显式表达。",
+    note: "简的影画4当前已支持[强击]/[紊乱]后异常伤害提升；触发时机与持续时间仍需通过 combatTags 显式表达，不新增新的 snapshot key。",
   },
   {
     sourceType: "agent",
@@ -3656,7 +3656,7 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
     sourceId: "1501",
     minimumMindscape: 2,
     damageTypes: ["anomaly", "disorder"],
-    note: '爱芮的影画2当前已静态展开[异放]的 16% 无视防御；若处于[妄想时刻]，可通过 combatTags: ["ariaDreamtime"] 额外展开 8% 无视防御。',
+    note: '爱芮的影画2当前已静态展开[异放]的 16% 无视防御；若处于[妄想时刻]，可通过 combatTags: ["ariaDreamtime"] 额外展开 8% 无视防御。[妄想时刻]本身继续通过 combatTags 显式表达，不新增新的 snapshot key。',
   },
   {
     sourceType: "agent",
@@ -3704,7 +3704,7 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
     sourceType: "w-engine",
     sourceId: "14109",
     damageTypes: ["anomaly", "disorder"],
-    note: "霰落星殿的暴击伤害被动不进入 anomaly/disorder 公式；当前只展开烈霜伤害层数。",
+    note: "霰落星殿的暴击伤害被动不进入 anomaly/disorder 当前公式；若后续需要表达对应的额外伤害，优先走 source-specific damage view，而不是继续扩现有 snapshot contract。当前只展开烈霜伤害层数。",
   },
   {
     sourceType: "w-engine",

@@ -24,9 +24,9 @@
 ## 当前进度
 
 - `V8.1` contract freeze：已完成
-- `V8.2` assumption inventory：已完成第一批
+- `V8.2` assumption inventory：已完成
 - `V8.3` minimal contract additions：当前结论为暂不进入
-- `V8.4` source migration / closeout：已完成第一批 note refinement
+- `V8.4` source migration / closeout：前四批 note refinement 已完成，并在当前 contract 下收口
 
 ## 1. 为什么需要 V8
 
@@ -318,6 +318,26 @@
   - 现有 `stateSnapshot`
   - 现有 `resolvedSnapshot`
   - 或 source-specific damage view
+
+第四批收口继续覆盖：
+
+- `柏妮思 M2`
+- `简 M2 / M4`
+- `爱芮 M2`
+- `霰落星殿`
+
+这批收口后的目标是：
+
+- 把剩余主要依赖 `combatTags` 或当前公式不承接的来源，重新明确为：
+  - 现有 `combatTags` / `effectOverrides`
+  - 或 source-specific damage view
+  - 不再把它们误判成新的 snapshot key 候选
+
+当前结论：
+
+- `V8.2` inventory 范围内的高风险 anomaly/disorder assumptions 已完成归属收口
+- 当前没有新增 public key 的必要性
+- `V8` 在当前 contract 下可以视为完成
 
 ## 11. 验收标准
 

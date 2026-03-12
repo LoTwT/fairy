@@ -756,7 +756,7 @@ resolver 主线完成后，文档维护需要单独列为持续事项，避免�
 当前已完成：
 
 - `V8.1` contract freeze
-- `V8.2` 第一批 assumption inventory
+- `V8.2` assumption inventory
 
 当前结论：
 
@@ -768,8 +768,8 @@ resolver 主线完成后，文档维护需要单独列为持续事项，避免�
   - 真动态过程
 - 当前没有发现足够共性的新增 public contract 候选
 - 因此 `V8.3 minimal contract additions` 先不进入实现
-- `V8.4` 前三批已完成，已把高风险 source-specific assumptions 改写成更明确的 contract 归属说明
+- `V8.4` 前四批已完成，已把高风险 source-specific assumptions 改写成更明确的 contract 归属说明
 
 下一步：
 
-- 继续 `V8.4`，按 inventory 结论逐批收口剩余 source-specific assumptions
+- `V8` 已在当前 contract 下收口；后续进入新的 scope 时，再基于新的 assumptions/backlog 立项
