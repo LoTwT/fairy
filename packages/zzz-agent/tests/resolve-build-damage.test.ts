@@ -547,6 +547,47 @@ describe("resolveBuildDamage tool", () => {
     expect((result as any).build.damageParams.remainingTime).toBe(5)
   })
 
+  it("accepts v5 dynamicSnapshot contract through the high-level resolver", async () => {
+    const result = await runTool(resolveBuildDamage, {
+      agent: "柏妮思",
+      wEngine: "灼心摇壶",
+      mode: "full-buff",
+      agentLevel: 60,
+      finalPanel: {
+        attack: 3000,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 180,
+      },
+      scenario: {
+        damageType: "disorder",
+        skillTag: "enhancedSpecial",
+        anomalyType: "灼烧",
+        remainingTime: 8,
+        attribute: "火属性",
+        dynamicSnapshot: {
+          flags: {
+            burniceEmberState: true,
+          },
+          counts: {
+            burniceEmberExtraTriggers: 2,
+          },
+          values: {
+            burniceEmberDamageRatio: 1.25,
+          },
+        },
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    expect((result as any).build.profile.id).toBe("standard-disorder")
+  })
+
   it("supports Alice disorder curated effects through the high-level resolver", async () => {
     const result = await runTool(resolveBuildDamage, {
       agent: "爱丽丝",

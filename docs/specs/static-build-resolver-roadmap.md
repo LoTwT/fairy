@@ -580,4 +580,6 @@ resolver 主线完成后，文档维护需要单独列为持续事项，避免�
 
 - `static-build-resolver-v5.md` 已创建
 - roadmap 已补 `V5` 主线
-- 运行时代码尚未开始
+- `build/types.ts` 已冻结 `dynamicSnapshot` contract
+- `resolve-build-damage` tool schema 已接受 `dynamicSnapshot`
+- 运行时结算逻辑尚未开始

@@ -24,6 +24,55 @@ const specialtyLabels = {
   Rupture: "命破",
 } as const
 
+const skillTagSchema = z.enum([
+  "basic",
+  "dash",
+  "special",
+  "enhancedSpecial",
+  "chain",
+  "ultimate",
+  "assist",
+])
+
+const enemySchema = z.object({
+  attackerLevel: z.number().optional().default(60),
+  defenderBaseDefense: z.number(),
+  defenderResistance: z.number(),
+  defenseBonus: z.number().optional().default(0),
+  defenseReduction: z.number().optional().default(0),
+  resistanceReduction: z.number().optional().default(0),
+  ignoreResistance: z.number().optional().default(0),
+  vulnerabilityBonus: z.number().optional().default(0),
+  damageReduction: z.number().optional().default(0),
+  isStunned: z.boolean().optional().default(false),
+  stunVulnerability: z.number().optional().default(0),
+  nonStunVulnerability: z.number().optional().default(0),
+  specialMultiplier: z.number().optional().default(1),
+})
+
+const dynamicSnapshotSchema = z
+  .object({
+    flags: z
+      .object({
+        ariaDreamtime: z.boolean().optional(),
+        burniceEmberState: z.boolean().optional(),
+      })
+      .optional(),
+    counts: z
+      .object({
+        burniceEmberExtraTriggers: z.number().int().min(0).optional(),
+      })
+      .optional(),
+    values: z
+      .object({
+        ariaExflowDamageRatio: z.number().min(0).optional(),
+        ariaStunnedDamageRatio: z.number().min(0).optional(),
+        burniceEmberDamageRatio: z.number().min(0).optional(),
+      })
+      .optional(),
+  })
+  .optional()
+
 function normalizeCatalogValue(value: string) {
   return value.toLowerCase().replace(/[\s\-_·・.()（）【】[\]「」]/g, "")
 }
@@ -181,128 +230,44 @@ export const resolveBuildDamage = createTool({
     scenario: z.discriminatedUnion("damageType", [
       z.object({
         damageType: z.literal("normal"),
-        skillTag: z.enum([
-          "basic",
-          "dash",
-          "special",
-          "enhancedSpecial",
-          "chain",
-          "ultimate",
-          "assist",
-        ]),
+        skillTag: skillTagSchema,
         skillMultiplier: z.union([z.number(), z.string()]),
         attribute: z.string().optional(),
         extraAbilityActive: z.boolean().optional(),
         combatTags: z.array(z.string()).optional(),
-        enemy: z.object({
-          attackerLevel: z.number().optional().default(60),
-          defenderBaseDefense: z.number(),
-          defenderResistance: z.number(),
-          defenseBonus: z.number().optional().default(0),
-          defenseReduction: z.number().optional().default(0),
-          resistanceReduction: z.number().optional().default(0),
-          ignoreResistance: z.number().optional().default(0),
-          vulnerabilityBonus: z.number().optional().default(0),
-          damageReduction: z.number().optional().default(0),
-          isStunned: z.boolean().optional().default(false),
-          stunVulnerability: z.number().optional().default(0),
-          nonStunVulnerability: z.number().optional().default(0),
-          specialMultiplier: z.number().optional().default(1),
-        }),
+        dynamicSnapshot: dynamicSnapshotSchema,
+        enemy: enemySchema,
       }),
       z.object({
         damageType: z.literal("sheer"),
-        skillTag: z.enum([
-          "basic",
-          "dash",
-          "special",
-          "enhancedSpecial",
-          "chain",
-          "ultimate",
-          "assist",
-        ]),
+        skillTag: skillTagSchema,
         skillMultiplier: z.union([z.number(), z.string()]),
         attribute: z.string().optional(),
         extraAbilityActive: z.boolean().optional(),
         combatTags: z.array(z.string()).optional(),
-        enemy: z.object({
-          attackerLevel: z.number().optional().default(60),
-          defenderBaseDefense: z.number(),
-          defenderResistance: z.number(),
-          defenseBonus: z.number().optional().default(0),
-          defenseReduction: z.number().optional().default(0),
-          resistanceReduction: z.number().optional().default(0),
-          ignoreResistance: z.number().optional().default(0),
-          vulnerabilityBonus: z.number().optional().default(0),
-          damageReduction: z.number().optional().default(0),
-          isStunned: z.boolean().optional().default(false),
-          stunVulnerability: z.number().optional().default(0),
-          nonStunVulnerability: z.number().optional().default(0),
-          specialMultiplier: z.number().optional().default(1),
-        }),
+        dynamicSnapshot: dynamicSnapshotSchema,
+        enemy: enemySchema,
       }),
       z.object({
         damageType: z.literal("anomaly"),
-        skillTag: z.enum([
-          "basic",
-          "dash",
-          "special",
-          "enhancedSpecial",
-          "chain",
-          "ultimate",
-          "assist",
-        ]),
+        skillTag: skillTagSchema,
         damageMultiplier: z.union([z.number(), z.string()]),
         attribute: z.string().optional(),
         extraAbilityActive: z.boolean().optional(),
         combatTags: z.array(z.string()).optional(),
-        enemy: z.object({
-          attackerLevel: z.number().optional().default(60),
-          defenderBaseDefense: z.number(),
-          defenderResistance: z.number(),
-          defenseBonus: z.number().optional().default(0),
-          defenseReduction: z.number().optional().default(0),
-          resistanceReduction: z.number().optional().default(0),
-          ignoreResistance: z.number().optional().default(0),
-          vulnerabilityBonus: z.number().optional().default(0),
-          damageReduction: z.number().optional().default(0),
-          isStunned: z.boolean().optional().default(false),
-          stunVulnerability: z.number().optional().default(0),
-          nonStunVulnerability: z.number().optional().default(0),
-          specialMultiplier: z.number().optional().default(1),
-        }),
+        dynamicSnapshot: dynamicSnapshotSchema,
+        enemy: enemySchema,
       }),
       z.object({
         damageType: z.literal("disorder"),
-        skillTag: z.enum([
-          "basic",
-          "dash",
-          "special",
-          "enhancedSpecial",
-          "chain",
-          "ultimate",
-          "assist",
-        ]),
+        skillTag: skillTagSchema,
         anomalyType: z.string(),
         remainingTime: z.number().min(0),
         attribute: z.string().optional(),
         extraAbilityActive: z.boolean().optional(),
         combatTags: z.array(z.string()).optional(),
-        enemy: z.object({
-          attackerLevel: z.number().optional().default(60),
-          defenderBaseDefense: z.number(),
-          defenderResistance: z.number(),
-          defenseBonus: z.number().optional().default(0),
-          defenseReduction: z.number().optional().default(0),
-          resistanceReduction: z.number().optional().default(0),
-          ignoreResistance: z.number().optional().default(0),
-          vulnerabilityBonus: z.number().optional().default(0),
-          damageReduction: z.number().optional().default(0),
-          isStunned: z.boolean().optional().default(false),
-          stunVulnerability: z.number().optional().default(0),
-          nonStunVulnerability: z.number().optional().default(0),
-          specialMultiplier: z.number().optional().default(1),
-        }),
+        dynamicSnapshot: dynamicSnapshotSchema,
+        enemy: enemySchema,
       }),
     ]),
     effectOverrides: z

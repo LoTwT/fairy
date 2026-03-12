@@ -14,7 +14,7 @@
 
 当前 `V5` 处于 contract freeze 阶段，状态如下：
 
-- `V5.1` contract freeze：进行中
+- `V5.1` contract freeze：已完成
 - `V5.2` dynamic snapshot resolver：未开始
 - `V5.3` 第一批来源覆盖：未开始
 - `V5.4` assumptions refinement：未开始
@@ -141,7 +141,7 @@ interface StaticBuildDynamicSnapshot {
 - `StaticBuildDynamicCountKey`
 - `StaticBuildDynamicValueKey`
 
-这一阶段只改文档和类型，不改运行时行为。
+这一阶段只改文档、类型与 tool schema，不改结算行为。
 
 ### 6.2 `V5.2` dynamic snapshot resolver
 

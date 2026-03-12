@@ -71,6 +71,21 @@ export type StaticBuildBucket =
   | "anomalyCritDamage"
   | "skillMultiplierFactor"
 
+export type StaticBuildDynamicFlagKey = "ariaDreamtime" | "burniceEmberState"
+
+export type StaticBuildDynamicCountKey = "burniceEmberExtraTriggers"
+
+export type StaticBuildDynamicValueKey =
+  | "ariaExflowDamageRatio"
+  | "ariaStunnedDamageRatio"
+  | "burniceEmberDamageRatio"
+
+export interface StaticBuildDynamicSnapshotInput {
+  flags?: Partial<Record<StaticBuildDynamicFlagKey, boolean>>
+  counts?: Partial<Record<StaticBuildDynamicCountKey, number>>
+  values?: Partial<Record<StaticBuildDynamicValueKey, number>>
+}
+
 export interface StaticBuildDriveDiscSetInput {
   id: string
   pieces: 2 | 4
@@ -122,6 +137,7 @@ interface StaticBuildScenarioBaseInput {
   attribute?: AgentAttributeLabel
   extraAbilityActive?: boolean
   combatTags?: string[]
+  dynamicSnapshot?: StaticBuildDynamicSnapshotInput
   enemy: StaticBuildEnemyInput
 }
 
@@ -233,6 +249,7 @@ export interface StaticBuildValueContext {
   anomalyMastery?: number
   resolvedAnomalyProficiency?: number
   remainingTime?: number
+  dynamicSnapshot?: StaticBuildDynamicSnapshotInput
 }
 
 export interface StaticBuildModifierDefinition {
