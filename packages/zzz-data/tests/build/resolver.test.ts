@@ -692,4 +692,55 @@ describe("static build resolver", () => {
       ),
     ).toBe(false)
   })
+
+  it("resolves anomaly damage with anomaly buckets and agent level", () => {
+    const result = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1181",
+        wEngineId: "14118",
+        driveDiscSets: [{ id: "31300", pieces: 2 }],
+        agentLevel: 60,
+        wEngineRefinement: 1,
+      },
+      panel: {
+        attack: 3000,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 120,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "enhancedSpecial",
+        damageMultiplier: "500%",
+        attribute: "电属性",
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.profile.id).toBe("standard-anomaly")
+    expect(result.loadout.agent.name).toBe("格莉丝")
+    expect(result.loadout.wEngine?.name).toBe("嵌合编译器")
+    expect(result.resolvedPanel.agentLevel).toBe(60)
+    expect(result.resolvedPanel.attack).toBeCloseTo(3144, 4)
+    expect(result.resolvedPanel.anomalyProficiency).toBeCloseTo(225, 4)
+    expect(result.resolvedBuckets.attackPercent).toBeCloseTo(0.12, 4)
+    expect(result.resolvedBuckets.anomalyProficiency).toBeCloseTo(105, 4)
+    expect(result.damageParams.virtualAgentLevel).toBe(60)
+    expect(result.damageParams.virtualAgentAttack).toBeCloseTo(3144, 4)
+    expect(result.damageParams.virtualAgentAnomalyProficiency).toBeCloseTo(
+      225,
+      4,
+    )
+    expect(result.damage.expected.total).toBeGreaterThan(0)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("格莉丝 当前未收录 curated"),
+      ),
+    ).toBe(true)
+  })
 })

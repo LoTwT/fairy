@@ -442,4 +442,40 @@ describe("resolveBuildDamage tool", () => {
     expect((result as any).supportedWEngines).toContain("加农转子")
     expect((result as any).supportedWEngines).not.toContain("青溟笼舍")
   })
+
+  it("supports anomaly agents through the high-level resolver", async () => {
+    const result = await runTool(resolveBuildDamage, {
+      agent: "格莉丝",
+      wEngine: "嵌合编译器",
+      driveDiscs: [{ name: "自由蓝调", pieces: 2 }],
+      mode: "full-buff",
+      agentLevel: 60,
+      finalPanel: {
+        attack: 3000,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 120,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "enhancedSpecial",
+        damageMultiplier: "500%",
+        attribute: "电属性",
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    expect((result as any).build.profile.id).toBe("standard-anomaly")
+    expect((result as any).build.loadout.agent.name).toBe("格莉丝")
+    expect((result as any).build.loadout.wEngine.name).toBe("嵌合编译器")
+    expect((result as any).build.resolvedPanel.anomalyProficiency).toBeCloseTo(
+      225,
+      4,
+    )
+  })
 })

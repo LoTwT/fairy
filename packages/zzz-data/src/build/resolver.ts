@@ -9,6 +9,9 @@ import type {
   StaticBuildValueContext,
 } from "./types.js"
 import {
+  calcAnomalyDamage,
+  calcAnomalyDamageCrit,
+  calcAnomalyDamageNoCrit,
   calcNormalDamage,
   calcNormalDamageCrit,
   calcNormalDamageNoCrit,
@@ -54,6 +57,10 @@ function createEmptyBuckets(): StaticBuildResolvedBuckets {
     stunVulnerability: 0,
     nonStunVulnerability: 0,
     sheerBonusSum: 0,
+    anomalyProficiency: 0,
+    anomalyBonusDamageSum: 0,
+    anomalyCritRate: 0,
+    anomalyCritDamage: 0,
     skillMultiplierFactor: 1,
   }
 }
@@ -455,6 +462,14 @@ export function resolveStaticBuildDamage(
     (input.panel.baseAttack ?? 0) * resolvedBuckets.attackPercent +
     resolvedBuckets.flatAttack
 
+  const resolvedAgentLevel = input.loadout.agentLevel ?? 60
+  if (
+    input.loadout.agentLevel === undefined &&
+    input.scenario.damageType === "anomaly"
+  ) {
+    assumptions.push("未提供 agentLevel，异常伤害按 60 级代理人处理")
+  }
+
   const baseDamageValue = profile.resolveBaseDamageValue({
     agent,
     panel: {
@@ -473,10 +488,18 @@ export function resolveStaticBuildDamage(
   const resolvedPanel = {
     attack: resolvedAttack,
     baseAttack: input.panel.baseAttack,
+    agentLevel: resolvedAgentLevel,
     critRate: input.panel.critRate + resolvedBuckets.critRate,
     critDamage: input.panel.critDamage + resolvedBuckets.critDamage,
     hp: input.panel.hp,
     sheerForce: input.panel.sheerForce,
+    anomalyProficiency:
+      (input.panel.anomalyProficiency ?? 0) +
+      resolvedBuckets.anomalyProficiency,
+    anomalyCritRate:
+      (input.panel.anomalyCritRate ?? 0) + resolvedBuckets.anomalyCritRate,
+    anomalyCritDamage:
+      (input.panel.anomalyCritDamage ?? 0) + resolvedBuckets.anomalyCritDamage,
     penetrationRate:
       (input.panel.penetrationRate ?? 0) + resolvedBuckets.penetrationRate,
     penetrationValue:
@@ -485,13 +508,14 @@ export function resolveStaticBuildDamage(
     baseDamageValue,
   } as const
 
-  const parsedSkillMultiplier = parseSkillMultiplier(
-    input.scenario.skillMultiplier,
-  )
+  const parsedDamageMultiplier =
+    input.scenario.damageType === "anomaly"
+      ? parseSkillMultiplier(input.scenario.damageMultiplier)
+      : parseSkillMultiplier(input.scenario.skillMultiplier)
   const enemy = input.scenario.enemy
   const baseDamage =
     baseDamageValue *
-    parsedSkillMultiplier *
+    parsedDamageMultiplier *
     resolvedBuckets.skillMultiplierFactor
 
   if (input.scenario.damageType === "normal") {
@@ -546,6 +570,7 @@ export function resolveStaticBuildDamage(
         agent,
         wEngine,
         driveDiscSets,
+        agentLevel: resolvedAgentLevel,
         coreSkillLevel: valueContext.coreSkillLevel,
         wEngineRefinement: valueContext.wEngineRefinement,
       },
@@ -556,6 +581,78 @@ export function resolveStaticBuildDamage(
         expected: calcNormalDamage(damageParams),
         crit: calcNormalDamageCrit(damageParams),
         noCrit: calcNormalDamageNoCrit(damageParams),
+      },
+      trace,
+      assumptions,
+      unsupportedEffects,
+    }
+  }
+
+  if (input.scenario.damageType === "anomaly") {
+    const damageParams = {
+      virtualAgentLevel: resolvedPanel.agentLevel,
+      virtualAgentAttack: resolvedPanel.attack,
+      virtualAgentAnomalyProficiency: resolvedPanel.anomalyProficiency,
+      damageMultiplier:
+        parsedDamageMultiplier * resolvedBuckets.skillMultiplierFactor,
+      bonusDamageSum: resolvedBuckets.bonusDamageSum,
+      defense: {
+        attackerLevelBase: getAttackerLevelBase(enemy.attackerLevel ?? 60),
+        defenderBaseDefense: enemy.defenderBaseDefense,
+        defenseBonus: enemy.defenseBonus ?? 0,
+        defenseReduction: enemy.defenseReduction ?? 0,
+        penetrationRate: resolvedPanel.penetrationRate,
+        penetrationValue: resolvedPanel.penetrationValue,
+      },
+      resistance: {
+        defenderResistance: enemy.defenderResistance,
+        resistanceReduction:
+          (enemy.resistanceReduction ?? 0) +
+          resolvedBuckets.resistanceReduction,
+        ignoreResistance:
+          (enemy.ignoreResistance ?? 0) + resolvedBuckets.ignoreResistance,
+      },
+      vulnerability: {
+        vulnerabilityBonus:
+          (enemy.vulnerabilityBonus ?? 0) + resolvedBuckets.vulnerabilityBonus,
+        damageReduction:
+          (enemy.damageReduction ?? 0) + resolvedBuckets.damageReduction,
+      },
+      dazeVulnerability: {
+        isStunned,
+        stunVulnerability:
+          (enemy.stunVulnerability ?? 0) + resolvedBuckets.stunVulnerability,
+        nonStunVulnerability:
+          (enemy.nonStunVulnerability ?? 0) +
+          resolvedBuckets.nonStunVulnerability,
+      },
+      anomalyBonusDamageSum: resolvedBuckets.anomalyBonusDamageSum,
+      anomalyCritRate: resolvedPanel.anomalyCritRate,
+      anomalyCritDamage: resolvedPanel.anomalyCritDamage,
+    }
+
+    return {
+      profile: {
+        id: profile.id,
+        name: profile.name,
+      },
+      mode,
+      manualBaseMode: input.mode === "manual" ? baseMode : undefined,
+      loadout: {
+        agent,
+        wEngine,
+        driveDiscSets,
+        agentLevel: resolvedAgentLevel,
+        coreSkillLevel: valueContext.coreSkillLevel,
+        wEngineRefinement: valueContext.wEngineRefinement,
+      },
+      resolvedPanel,
+      resolvedBuckets,
+      damageParams,
+      damage: {
+        expected: calcAnomalyDamage(damageParams),
+        crit: calcAnomalyDamageCrit(damageParams),
+        noCrit: calcAnomalyDamageNoCrit(damageParams),
       },
       trace,
       assumptions,
@@ -606,6 +703,7 @@ export function resolveStaticBuildDamage(
       agent,
       wEngine,
       driveDiscSets,
+      agentLevel: resolvedAgentLevel,
       coreSkillLevel: valueContext.coreSkillLevel,
       wEngineRefinement: valueContext.wEngineRefinement,
     },

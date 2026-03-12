@@ -21,19 +21,21 @@
 
 当前工作树对应的 resolver 状态如下：
 
-- 已支持全部强攻 / 命破代理人
-- 已支持全部强攻 / 命破音擎，并按 specialty 做兼容校验
-- 驱动盘仍限定为当前 `6` 套 curated 列表
+- 已支持全部强攻 / 命破 / 异常代理人（单次 resolver）
+- 已支持全部强攻 / 命破 / 异常音擎，并按 specialty 做兼容校验
+- 驱动盘当前为 `9` 套 curated 列表
 - 已支持：
   - 单场景静态构筑解析 `resolveStaticBuildDamage`
   - 全技能 / 全段矩阵 `resolveStaticBuildSkillMatrix`
 - 已支持 profile：
   - `standard-normal`
   - `standard-sheer`
+  - `standard-anomaly`
   - `yixuan-sheer`
 - 技能矩阵当前为双轨：
   - 高频代理人：curated 模板
   - 其余强攻 / 命破代理人：通用矩阵生成
+  - 异常代理人：暂不支持 skill matrix
 
 当前最大短板不是“能不能算”，而是“算得是否足够完整”：
 
@@ -49,7 +51,7 @@
 - `V2.1 curated coverage` 已完成
 - `V2.2 matrix metadata refinement` 已完成
 - `V3 anomaly / disorder` 已开始
-- 当前子阶段：`V3.1 anomaly / V3.2 disorder` 的 contract 设计与范围冻结
+- 当前子阶段：`V3.1 anomaly` 已实现单次 resolver，`V3.2 disorder` 尚未开始
 
 ## 2. 阶段划分
 

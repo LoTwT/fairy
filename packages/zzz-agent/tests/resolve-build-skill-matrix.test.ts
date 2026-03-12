@@ -428,4 +428,27 @@ describe("resolveBuildSkillMatrix tool", () => {
     expect((result as any).supportedWEngines).toContain("加农转子")
     expect((result as any).supportedWEngines).not.toContain("青溟笼舍")
   })
+
+  it("keeps anomaly agents outside the current matrix support scope", async () => {
+    const result = await runTool(resolveBuildSkillMatrix, {
+      agent: "格莉丝",
+      finalPanel: {
+        attack: 3000,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 120,
+      },
+      context: {
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(false)
+    expect((result as any).supportedAgents).toContain("朱鸢")
+    expect((result as any).supportedAgents).not.toContain("格莉丝")
+  })
 })

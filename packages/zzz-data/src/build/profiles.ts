@@ -34,6 +34,13 @@ export const staticBuildProfiles = {
     },
     baseDamageStat: "sheerForce",
   },
+  "standard-anomaly": {
+    id: "standard-anomaly",
+    name: "Standard Anomaly Profile",
+    supportsDamageType: (damageType: string) => damageType === "anomaly",
+    resolveBaseDamageValue: ({ panel }) => panel.attack,
+    baseDamageStat: "attack",
+  },
   "yixuan-sheer": {
     id: "yixuan-sheer",
     name: "Yixuan Sheer Profile",

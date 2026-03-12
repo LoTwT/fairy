@@ -1664,6 +1664,11 @@ export function resolveStaticBuildSkillMatrix(
   if (!agent) {
     throw new RangeError(`Unsupported agentId: ${input.loadout.agentId}`)
   }
+  if (agent.defaultDamageType === "anomaly") {
+    throw new RangeError(
+      `${agent.name} 当前仅支持单次 anomaly resolver，尚不支持 skill matrix`,
+    )
+  }
 
   const templates = curatedSkillMatrixTemplates.filter(
     (item) => item.agentId === agent.id,

@@ -16,5 +16,5 @@
 - [静态构筑解析系统](./specs/static-build-resolver.md) — 静态效果系统、输入输出 contract、热插拔乘区管线与模块设计
 - [静态构筑解析系统路线图](./specs/static-build-resolver-roadmap.md) — 后续执行顺序：V2.1 curated coverage、V2.2 matrix metadata refinement、V3 anomaly/disorder
 - [静态构筑解析系统 V1](./specs/static-build-resolver-v1.md) — 第一版冻结范围：支持对象、输入输出 contract、profile 与验收标准
-- [静态构筑解析系统 V2](./specs/static-build-resolver-v2.md) — 当前实现范围：全部强攻 / 命破代理人、动态强攻/命破音擎、6 套 curated 驱动盘，以及 curated + 通用技能矩阵约定
-- [静态构筑解析系统 V3](./specs/static-build-resolver-v3.md) — 下一阶段冻结范围：异常 / 紊乱 contract、单代理人静态快照约束、V3.1/V3.2 实现顺序
+- [静态构筑解析系统 V2](./specs/static-build-resolver-v2.md) — 第二阶段实现：全部强攻 / 命破代理人、动态强攻/命破音擎、curated + 通用技能矩阵约定
+- [静态构筑解析系统 V3](./specs/static-build-resolver-v3.md) — 当前进行中：已冻结 anomaly / disorder contract，并已实现 V3.1 anomaly 单次 resolver

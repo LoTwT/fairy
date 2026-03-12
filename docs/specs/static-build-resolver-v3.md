@@ -7,6 +7,12 @@
 
 接入同一套静态构筑解析系统，但不把范围一次性扩成“全 specialty 全矩阵 全团队模拟”。
 
+## 当前状态
+
+- `V3.1 anomaly` 已实现到单次 `resolveStaticBuildDamage`
+- `resolveStaticBuildSkillMatrix` 仍只支持 `normal / sheer`
+- `V3.2 disorder` 尚未开始
+
 ## 1. V3 目标
 
 V3 只做一条主线：

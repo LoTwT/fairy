@@ -4,8 +4,8 @@ import { z } from "zod"
 import {
   getCompatibleStaticBuildWEngines,
   resolveStaticBuildSkillMatrix,
-  supportedStaticBuildAgents,
   supportedStaticBuildDriveDiscs,
+  supportedStaticBuildMatrixAgents,
   supportedStaticBuildWEngines,
 } from "zzz-data"
 
@@ -322,7 +322,7 @@ function compactMatrix(
 export const resolveBuildSkillMatrix = createTool({
   id: "resolve-build-skill-matrix",
   description:
-    "基于 zzz-data 的静态构筑解析器批量计算全技能/全段伤害矩阵。当前支持全部强攻/命破代理人，以及对应特性的强攻/命破音擎；驱动盘仍支持炎狱重金属 / 极地重金属 / 雷暴重金属 / 啄木鸟电音 / 河豚电音 / 云岿如我。",
+    "基于 zzz-data 的静态构筑解析器批量计算全技能/全段伤害矩阵。当前仅支持强攻/命破代理人，以及对应特性的强攻/命破音擎；异常代理人暂只支持单次 resolver。",
   inputSchema: z.object({
     agent: z.string().describe("代理人名称或 ID"),
     wEngine: z.string().optional().describe("音擎名称或 ID"),
@@ -389,14 +389,16 @@ export const resolveBuildSkillMatrix = createTool({
       ),
   }),
   execute: async (input) => {
-    const agent = findCatalogItem(supportedStaticBuildAgents, input.agent)
+    const agent = findCatalogItem(supportedStaticBuildMatrixAgents, input.agent)
     if (!agent) {
       return {
         found: false,
         message: `当前 skill matrix 暂不支持代理人「${input.agent}」`,
-        supportedAgents: supportedStaticBuildAgents.map((item) => item.name),
+        supportedAgents: supportedStaticBuildMatrixAgents.map(
+          (item) => item.name,
+        ),
         candidates: findCatalogCandidates(
-          supportedStaticBuildAgents,
+          supportedStaticBuildMatrixAgents,
           input.agent,
         ).map((item) => item.name),
       }

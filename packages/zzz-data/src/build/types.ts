@@ -1,4 +1,5 @@
 import type {
+  AnomalyDamageParams,
   DamageResult,
   NormalDamageParams,
   SheerDamageParams,
@@ -11,7 +12,7 @@ import type {
 
 export type StaticBuildMode = "baseline" | "full-buff" | "manual"
 export type StaticBuildBaseMode = Exclude<StaticBuildMode, "manual">
-export type StaticBuildDamageType = "normal" | "sheer"
+export type StaticBuildDamageType = "normal" | "sheer" | "anomaly"
 
 export type StaticBuildSkillTag =
   | "basic"
@@ -60,6 +61,10 @@ export type StaticBuildBucket =
   | "stunVulnerability"
   | "nonStunVulnerability"
   | "sheerBonusSum"
+  | "anomalyProficiency"
+  | "anomalyBonusDamageSum"
+  | "anomalyCritRate"
+  | "anomalyCritDamage"
   | "skillMultiplierFactor"
 
 export interface StaticBuildDriveDiscSetInput {
@@ -71,6 +76,7 @@ export interface StaticBuildLoadoutInput {
   agentId: string
   wEngineId?: string
   driveDiscSets?: StaticBuildDriveDiscSetInput[]
+  agentLevel?: number
   coreSkillLevel?: number
   wEngineRefinement?: number
 }
@@ -82,6 +88,9 @@ export interface StaticBuildFinalPanelInput {
   critDamage: number
   hp?: number
   sheerForce?: number
+  anomalyProficiency?: number
+  anomalyCritRate?: number
+  anomalyCritDamage?: number
   penetrationRate?: number
   penetrationValue?: number
 }
@@ -102,15 +111,36 @@ export interface StaticBuildEnemyInput {
   specialMultiplier?: number
 }
 
-export interface StaticBuildScenarioInput {
-  damageType: StaticBuildDamageType
-  skillTag: StaticBuildSkillTag
-  skillMultiplier: number | string
+interface StaticBuildScenarioBaseInput {
   attribute?: AgentAttributeLabel
   extraAbilityActive?: boolean
   combatTags?: string[]
   enemy: StaticBuildEnemyInput
 }
+
+interface StaticBuildSkillMultiplierScenarioInput extends StaticBuildScenarioBaseInput {
+  skillTag: StaticBuildSkillTag
+  skillMultiplier: number | string
+}
+
+export interface StaticBuildNormalScenarioInput extends StaticBuildSkillMultiplierScenarioInput {
+  damageType: "normal"
+}
+
+export interface StaticBuildSheerScenarioInput extends StaticBuildSkillMultiplierScenarioInput {
+  damageType: "sheer"
+}
+
+export interface StaticBuildAnomalyScenarioInput extends StaticBuildScenarioBaseInput {
+  damageType: "anomaly"
+  skillTag: StaticBuildSkillTag
+  damageMultiplier: number | string
+}
+
+export type StaticBuildScenarioInput =
+  | StaticBuildNormalScenarioInput
+  | StaticBuildSheerScenarioInput
+  | StaticBuildAnomalyScenarioInput
 
 export interface StaticBuildEffectOverride {
   effectId: string
@@ -163,6 +193,7 @@ export interface StaticBuildWEngineCatalogEntry extends StaticBuildCatalogEntry 
 export type StaticBuildProfileId =
   | "standard-normal"
   | "standard-sheer"
+  | "standard-anomaly"
   | "yixuan-sheer"
 
 export interface StaticBuildEffectCondition {
@@ -217,16 +248,24 @@ export interface StaticBuildResolvedBuckets {
   stunVulnerability: number
   nonStunVulnerability: number
   sheerBonusSum: number
+  anomalyProficiency: number
+  anomalyBonusDamageSum: number
+  anomalyCritRate: number
+  anomalyCritDamage: number
   skillMultiplierFactor: number
 }
 
 export interface StaticBuildResolvedPanel {
   attack: number
   baseAttack?: number
+  agentLevel: number
   critRate: number
   critDamage: number
   hp?: number
   sheerForce?: number
+  anomalyProficiency: number
+  anomalyCritRate: number
+  anomalyCritDamage: number
   penetrationRate: number
   penetrationValue: number
   baseDamageStat: "attack" | "sheerForce"
@@ -263,6 +302,7 @@ export interface StaticBuildResolvedLoadout {
       pieces: 2 | 4
     }
   >
+  agentLevel: number
   coreSkillLevel: number
   wEngineRefinement: number
 }
@@ -274,7 +314,7 @@ export interface ResolveStaticBuildResult {
   loadout: StaticBuildResolvedLoadout
   resolvedPanel: StaticBuildResolvedPanel
   resolvedBuckets: StaticBuildResolvedBuckets
-  damageParams: NormalDamageParams | SheerDamageParams
+  damageParams: NormalDamageParams | SheerDamageParams | AnomalyDamageParams
   damage: {
     expected: DamageResult
     crit: DamageResult

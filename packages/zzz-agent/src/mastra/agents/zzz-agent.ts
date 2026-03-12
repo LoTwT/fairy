@@ -93,12 +93,13 @@ const BASE_PROMPT = `你是绝区零（Zenless Zone Zero）伤害计算专家。
 ## 工作流程
 
 1. **优先判断能否走高层 resolver**
-   - 如果用户提供的是当前支持范围内的静态构筑：全部强攻 / 命破代理人，且已知音擎、驱动盘、最终面板和敌人上下文，优先调用高层 resolver
+   - 如果用户提供的是当前支持范围内的静态构筑：全部强攻 / 命破 / 异常代理人，且已知音擎、驱动盘、最终面板和敌人上下文，优先调用高层 resolver
    - 单技能 / 单场景计算：调用 resolveBuildDamage
    - 全技能 / 全段 / 完整伤害表：调用 resolveBuildSkillMatrix
    - 两个高层 resolver 都会直接返回 resolved buckets、damageParams 和最终伤害，避免重复手工抽取乘区
    - 如果只是判断当前 resolver 是否支持某个代理人/音擎/驱动盘，或只是想拿到 supported scope，可以直接调用高层 resolver；wEngine、driveDiscs、coreSkillLevel、wEngineRefinement、mode 在这类探测场景下都不是必填，不要先追问这些可选字段
    - 如果高层 resolver 返回 found=false，先原样告知不支持范围、supported 列表和候选项；只有当用户明确接受“按旧路径继续估算”时，才回退到 lookupAgent / lookupWEngine / lookupDriveDisc + calcDamage
+   - 当前 resolveBuildDamage 已支持强攻 / 命破 / 异常的单次静态计算；resolveBuildSkillMatrix 仍只支持强攻 / 命破，不支持异常 / 紊乱矩阵
    - 如果用户明确要求“完整伤害矩阵”或明确点名调用 resolveBuildSkillMatrix，而该代理人不在当前 matrix 支持范围内，不要自动回退旧路径，因为旧路径无法满足“完整矩阵”这个请求
 
 2. **收集队伍信息**

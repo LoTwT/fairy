@@ -22,12 +22,17 @@ interface WEngineListSourceItem {
   specialty: { id: string; name: string }
 }
 
-const supportedSpecialties = new Set(["Attack", "Rupture"])
+const supportedSpecialties = new Set(["Attack", "Rupture", "Anomaly"])
 
 const agentAliasOverrides: Record<string, string[]> = {
   "1041": ["11号", "soldier11", "soldier 11"],
+  "1091": ["hoshimi miyabi", "miyabi"],
   "1191": ["艾莲·乔", "ellen", "ellen joe"],
   "1201": ["浅羽悠真", "浅羽 悠真", "harumasa", "asaba harumasa"],
+  "1181": ["grace", "grace howard"],
+  "1171": ["burnice", "burnice white"],
+  "1261": ["jane", "jane doe"],
+  "1331": ["vivian"],
   "1321": ["伊芙琳·舒瓦利耶", "evelyn", "evelyn chevalier"],
   "1371": ["yixuan", "yi-xuan"],
   "1381": ["零号安比", "soldier 0 anby", "soldier0anby"],
@@ -35,7 +40,11 @@ const agentAliasOverrides: Record<string, string[]> = {
 
 const wEngineAliasOverrides: Record<string, string[]> = {
   "14119": ["deep sea visitor", "deep-sea visitor"],
+  "14118": ["fusion compiler", "fusion-compiler"],
+  "14117": ["flamemaker shaker", "flamemaker-shaker"],
   "14120": ["zanshin herb case", "zanshin"],
+  "14109": ["weeping gemini", "weeping-gemini"],
+  "14150": ["soul shell", "soul-shell"],
   "14124": ["riot suppressor mark vi", "riot suppressor", "防暴者6型"],
   "14132": ["heartstring nocturne", "heartstring"],
   "14137": ["qingming birdcage", "qingming cage"],
@@ -76,12 +85,15 @@ export const supportedStaticBuildAgents = supportedAgentSources.map((item) => {
   }
 
   const isRupture = specialty === "Rupture"
+  const isAnomaly = specialty === "Anomaly"
   const profileId =
     item.id === "1371"
       ? "yixuan-sheer"
       : isRupture
         ? "standard-sheer"
-        : "standard-normal"
+        : isAnomaly
+          ? "standard-anomaly"
+          : "standard-normal"
 
   return {
     id: item.id,
@@ -93,10 +105,16 @@ export const supportedStaticBuildAgents = supportedAgentSources.map((item) => {
       ...(agentAliasOverrides[item.id] ?? []),
     ]),
     defaultAttribute,
-    defaultDamageType: isRupture ? "sheer" : "normal",
+    defaultDamageType: isRupture ? "sheer" : isAnomaly ? "anomaly" : "normal",
     profileId,
   }
 }) satisfies StaticBuildAgentCatalogEntry[]
+
+export const supportedStaticBuildMatrixAgents =
+  supportedStaticBuildAgents.filter(
+    (item) =>
+      item.defaultDamageType === "normal" || item.defaultDamageType === "sheer",
+  )
 
 export const supportedStaticBuildWEngines = (
   wEnginesZh as WEngineListSourceItem[]
@@ -158,6 +176,21 @@ export const supportedStaticBuildDriveDiscs = [
     id: "33100",
     name: "云岿如我",
     aliases: ["yunkui tales", "yunkui"],
+  },
+  {
+    id: "31300",
+    name: "自由蓝调",
+    aliases: ["freedom blues", "freedom"],
+  },
+  {
+    id: "32300",
+    name: "混沌重金属",
+    aliases: ["chaos metal", "chaos"],
+  },
+  {
+    id: "31800",
+    name: "混沌爵士",
+    aliases: ["chaos jazz", "jazz"],
   },
 ] satisfies StaticBuildCatalogEntry[]
 

@@ -170,6 +170,9 @@ const machinaseedCritRate = [0.15, 0.17, 0.19, 0.21, 0.23] as const
 const machinaseedElectricBonus = [0.125, 0.145, 0.165, 0.185, 0.2] as const
 const wrathfulVajraCritRate = [0.2, 0.23, 0.26, 0.29, 0.32] as const
 const wrathfulVajraSheerBonus = [0.09, 0.1035, 0.117, 0.1305, 0.144] as const
+const fusionCompilerAttackPercent = [0.12, 0.15, 0.18, 0.21, 0.24] as const
+const fusionCompilerAnomalyProficiency = [25, 31, 37, 43, 50] as const
+const weepingGeminiAnomalyProficiency = [30, 34, 38, 42, 48] as const
 
 export const staticBuildEffectDefinitions = [
   {
@@ -1566,6 +1569,63 @@ export const staticBuildEffectDefinitions = [
     ],
   },
   {
+    id: "fusion-compiler-attack-percent",
+    sourceType: "w-engine",
+    sourceId: "14118",
+    sourceName: "嵌合编译器",
+    label: "音擎被动：攻击力提升",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    modifiers: [
+      {
+        bucket: "attackPercent",
+        value: byRefinement(fusionCompilerAttackPercent),
+      },
+    ],
+  },
+  {
+    id: "fusion-compiler-special-anomaly-proficiency",
+    sourceType: "w-engine",
+    sourceId: "14118",
+    sourceName: "嵌合编译器",
+    label: "音擎被动：特殊技/强化特殊技异常精通层数",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    baselineStacks: 1,
+    fullBuffStacks: 3,
+    maxStacks: 3,
+    condition: {
+      skillTags: ["special", "enhancedSpecial"],
+    },
+    modifiers: [
+      {
+        bucket: "anomalyProficiency",
+        value: byRefinement(fusionCompilerAnomalyProficiency),
+      },
+    ],
+  },
+  {
+    id: "weeping-gemini-anomaly-proficiency",
+    sourceType: "w-engine",
+    sourceId: "13008",
+    sourceName: "双生泣星",
+    label: "音擎被动：属性异常触发后异常精通层数",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    baselineStacks: 1,
+    fullBuffStacks: 4,
+    maxStacks: 4,
+    condition: {
+      combatTags: ["anomalyApplied"],
+    },
+    modifiers: [
+      {
+        bucket: "anomalyProficiency",
+        value: byRefinement(weepingGeminiAnomalyProficiency),
+      },
+    ],
+  },
+  {
     id: "inferno-2pc-fire-bonus",
     sourceType: "drive-disc",
     sourceId: "32200",
@@ -1775,6 +1835,55 @@ export const staticBuildEffectDefinitions = [
       {
         bucket: "attackPercent",
         value: () => 0.15,
+      },
+    ],
+  },
+  {
+    id: "freedom-2pc-anomaly-proficiency",
+    sourceType: "drive-disc",
+    sourceId: "31300",
+    sourceName: "自由蓝调",
+    label: "2件套：异常精通",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    modifiers: [
+      {
+        bucket: "anomalyProficiency",
+        value: () => 30,
+      },
+    ],
+  },
+  {
+    id: "chaos-jazz-2pc-anomaly-proficiency",
+    sourceType: "drive-disc",
+    sourceId: "31800",
+    sourceName: "混沌爵士",
+    label: "2件套：异常精通",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    modifiers: [
+      {
+        bucket: "anomalyProficiency",
+        value: () => 30,
+      },
+    ],
+  },
+  {
+    id: "chaos-metal-2pc-ether-anomaly-bonus",
+    sourceType: "drive-disc",
+    sourceId: "32300",
+    sourceName: "混沌重金属",
+    label: "2件套：以太异常增伤",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      damageTypes: ["anomaly"],
+      attributes: ["Ether"],
+    },
+    modifiers: [
+      {
+        bucket: "anomalyBonusDamageSum",
+        value: () => 0.1,
       },
     ],
   },

@@ -5,6 +5,7 @@ export {
   getStaticBuildWEngine,
   supportedStaticBuildAgents,
   supportedStaticBuildDriveDiscs,
+  supportedStaticBuildMatrixAgents,
   supportedStaticBuildWEngines,
 } from "./catalog.js"
 export { getStaticBuildEffectsForLoadout } from "./definitions.js"

@@ -708,8 +708,12 @@
 
 ### 17.2 后续 TODO
 
-下一阶段仍有三块工作未完成：
+当前主线只剩一块大工作：
 
-1. 继续把 curated effect definitions 从当前高频名单扩展到更多强攻 / 命破代理人，减少 `assumptions` 中的“缺少 curated 效果定义”提示
-2. 继续把技能矩阵元数据从当前的 `actionName/skillName/qualifiers/entryType/segmentIndex` 扩到更细的命中次数语义与稳定技能分类，而不是让 UI 继续依赖 label 文本解析
-3. 把 `anomaly / disorder` 接入同一套 static build resolver，而不是长期停在 `normal / sheer`
+1. 在已完成 `V2.1 curated coverage` 与 `V2.2 matrix metadata refinement` 的基础上，继续推进 `V3 anomaly / disorder`
+
+当前状态：
+
+- `V3.1 anomaly` 已打通到单次 `resolveStaticBuildDamage`
+- `resolveStaticBuildSkillMatrix` 仍只支持 `normal / sheer`
+- 下一步是 `V3.2 disorder`
