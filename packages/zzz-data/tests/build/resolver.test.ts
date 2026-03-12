@@ -2397,6 +2397,140 @@ describe("static build resolver", () => {
     ).toBe(true)
   })
 
+  it("marks Chaos Metal 4pc as a research-only source note", () => {
+    const result = resolveStaticBuildDamage({
+      mode: "baseline",
+      loadout: {
+        agentId: "1331",
+        wEngineId: "14133",
+        driveDiscSets: [{ id: "32300", pieces: 4 }],
+        agentLevel: 60,
+        wEngineRefinement: 1,
+      },
+      panel: {
+        attack: 3000,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 180,
+      },
+      scenario: {
+        damageType: "disorder",
+        skillTag: "basic",
+        anomalyType: "ether",
+        remainingTime: 5,
+        attribute: "以太",
+        extraAbilityActive: true,
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(
+      result.sourceNotes.some(
+        (note) =>
+          note.sourceType === "drive-disc" &&
+          note.sourceId === "32300" &&
+          note.owner === "sourceView" &&
+          note.status === "research-only",
+      ),
+    ).toBe(true)
+  })
+
+  it("keeps Roaring Ride on source-note assumptions instead of source views", () => {
+    const result = resolveStaticBuildDamage({
+      mode: "baseline",
+      loadout: {
+        agentId: "1171",
+        wEngineId: "13128",
+        agentLevel: 60,
+      },
+      panel: {
+        attack: 3100,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 160,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "enhancedSpecial",
+        damageMultiplier: "520%",
+        attribute: "火属性",
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(
+      result.sourceNotes.some(
+        (note) =>
+          note.sourceType === "w-engine" &&
+          note.sourceId === "13128" &&
+          note.owner === "process" &&
+          note.status === "process-only",
+      ),
+    ).toBe(true)
+    expect(
+      result.sourceNotes.some(
+        (note) =>
+          note.sourceType === "w-engine" &&
+          note.sourceId === "13128" &&
+          note.owner === "sourceView",
+      ),
+    ).toBe(false)
+  })
+
+  it("keeps Freedom Blues 4pc as a process note instead of source views", () => {
+    const result = resolveStaticBuildDamage({
+      mode: "baseline",
+      loadout: {
+        agentId: "1171",
+        driveDiscSets: [{ id: "31300", pieces: 4 }],
+        agentLevel: 60,
+      },
+      panel: {
+        attack: 3100,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 160,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "enhancedSpecial",
+        damageMultiplier: "520%",
+        attribute: "火属性",
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(
+      result.sourceNotes.some(
+        (note) =>
+          note.sourceType === "drive-disc" &&
+          note.sourceId === "31300" &&
+          note.owner === "process" &&
+          note.status === "process-only",
+      ),
+    ).toBe(true)
+    expect(
+      result.sourceNotes.some(
+        (note) =>
+          note.sourceType === "drive-disc" &&
+          note.sourceId === "31300" &&
+          note.owner === "sourceView",
+      ),
+    ).toBe(false)
+  })
+
   it("refines Burnice progression assumptions when mindscape is present but energyGenerationRate is missing", () => {
     const result = resolveStaticBuildDamage({
       mode: "full-buff",

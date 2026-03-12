@@ -99,6 +99,24 @@
 ## 8. 当前状态
 
 - `V14.1` 已完成：scope freeze
-- `V14.2` 未开始
-- `V14.3` 未开始
-- `V14.4` 未开始
+- `V14.2` 已完成：候选 inventory 已确认
+- `V14.3` 已完成：当前 contract 下未新增新的非代理人 source view，候选继续按 `research-only / source note` 收口
+- `V14.4` 已完成：在当前 contract 下收口
+
+## 9. Inventory 结论
+
+| Source           | 当前结论             | 原因                                                                                                  |
+| ---------------- | -------------------- | ----------------------------------------------------------------------------------------------------- |
+| `霰落星殿`       | 保持 `research-only` | 暴击伤害被动不直接映射到当前 anomaly / disorder 主公式，也没有稳定的独立 source-specific 额外结算快照 |
+| `混沌重金属 4件` | 保持 `research-only` | 叠层依赖侵蚀额外伤害触发链与层数过程，当前没有稳定的静态 source view 输入                             |
+| `轰鸣座驾`       | 保持 `source note`   | 随机三选一分支仍属于真动态过程；确定分支后应优先折算到 `finalPanel` / `resolvedSnapshot`              |
+| `自由蓝调 4件`   | 保持 `source note`   | 属性异常积蓄抗性降低属于积蓄过程效果，不适合独立结算 view                                             |
+
+## 10. 结论
+
+`V14` 的结论不是“新增更多 view”，而是：
+
+1. 当前 contract 下，还没有足够稳定的非代理人 source-specific damage view 候选
+2. `霰落星殿`、`混沌重金属 4件` 继续保留为 `research-only`
+3. `轰鸣座驾`、`自由蓝调 4件` 继续保留为 source note，不进入 source view
+4. 若未来要推进这些来源，前提不是继续扩 view，而是先获得更稳定的显式快照输入
