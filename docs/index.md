@@ -32,3 +32,4 @@
 - [静态构筑解析系统 V14](./specs/static-build-resolver-v14.md) — 当前阶段：已收口；非代理人 source-specific damage view 候选已完成 inventory，并保持当前边界
 - [静态构筑解析系统 V15](./specs/static-build-resolver-v15.md) — 当前阶段：已在当前 contract 下收口；`sourceNotes.guidance` 已进入公开 contract
 - [静态构筑解析系统 V16](./specs/static-build-resolver-v16.md) — 当前阶段：已收口；通用音擎批次已全部落地
+- [静态构筑解析系统 V17](./specs/static-build-resolver-v17.md) — 当前阶段：已完成 scope freeze；下一步进入通用驱动盘 inventory

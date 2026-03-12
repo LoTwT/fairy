@@ -1041,3 +1041,37 @@ Batch C（已完成）：
 
 - `「月相」-朔`
 - `「电磁暴」-叁式`
+
+当前状态：已满足。`V16` 在当前 contract 下已收口，下一步进入 `V17`。
+
+## 22. V17 generic drive-disc curated coverage
+
+### 22.1 目标
+
+在不改主公式和不新增计算输入 key 的前提下，把当前仍靠 generic fallback 的通用驱动盘逐步补成 curated coverage。
+
+### 22.2 范围
+
+1. `V17.1` scope freeze
+2. `V17.2` generic drive-disc inventory
+3. `V17.3` curated coverage batches
+4. `V17.4` closeout
+
+### 22.3 当前状态
+
+- `V17.1` 已完成：冻结到通用驱动盘 curated coverage，不继续扩大 contract
+- `V17.2` 未开始
+- `V17.3` 未开始
+- `V17.4` 未开始
+
+### 22.4 当前边界
+
+优先纳入：
+
+1. 装备者自身生效的 damage / crit / attack / anomaly 类驱动盘
+2. 能由现有 `skillTag` / `combatTags` / `enemy.isStunned` / `full-buff` 表达的条件
+
+显式不纳入：
+
+1. “队伍中任意角色”触发的 teamwide 驱动盘
+2. 后台来源、护盾值、失衡值、回能、层数衰减等过程型来源
