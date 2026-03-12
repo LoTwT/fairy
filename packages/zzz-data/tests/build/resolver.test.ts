@@ -1695,7 +1695,7 @@ describe("static build resolver", () => {
     expect(result.damage.expected.total).toBeGreaterThan(0)
   })
 
-  it("accepts V7 resolved snapshot contract without changing current resolver behavior", () => {
+  it("applies V7 resolved snapshot bucket and multiplier overrides", () => {
     const result = resolveStaticBuildDamage({
       mode: "baseline",
       loadout: {
@@ -1729,6 +1729,20 @@ describe("static build resolver", () => {
     })
 
     expect(result.damage.expected.total).toBeGreaterThan(0)
+    expect(result.resolvedBuckets.anomalyBonusDamageSum).toBeCloseTo(0.3, 4)
+    expect(result.resolvedBuckets.skillMultiplierFactor).toBeCloseTo(1.8, 4)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("scenario.resolvedSnapshot.bucketDeltas"),
+      ),
+    ).toBe(true)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes(
+          "scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor",
+        ),
+      ),
+    ).toBe(true)
   })
 
   it("applies Alice polarity assault ratios from state snapshots to anomaly damage", () => {

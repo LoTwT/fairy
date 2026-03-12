@@ -22,7 +22,7 @@
 ## 当前进度
 
 - `V7.1` contract freeze：已完成
-- `V7.2` resolver wiring：未开始
+- `V7.2` resolver wiring：已完成
 - `V7.3` source adoption：未开始
 
 ## 1. 为什么需要 V7
@@ -139,6 +139,14 @@ type StaticBuildResolvedSnapshotMultiplierKey = "skillMultiplierFactor"
 - `bucketDeltas` 叠加到现有 bucket
 - `multiplierFactors.skillMultiplierFactor` 转成当前内部 bucket 语义
 - assumptions 明确标记“当前已使用 scenario.resolvedSnapshot”
+
+当前状态：
+
+- `bucketDeltas` 已接入 resolver，并在结算前叠加到当前 bucket
+- `multiplierFactors.skillMultiplierFactor` 已作为最终 factor 接入，并转到现有内部语义
+- assumptions 已能显式标记：
+  - `scenario.resolvedSnapshot.bucketDeltas`
+  - `scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor`
 
 ### 5.3 `V7.3` source adoption
 

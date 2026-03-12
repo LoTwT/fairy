@@ -1197,7 +1197,7 @@ describe("resolveBuildDamage tool", () => {
     expect((result as any).build.damage.expected.total).toBeGreaterThan(0)
   })
 
-  it("accepts V7 resolved snapshot fields through the high-level resolver", async () => {
+  it("applies V7 resolved snapshot fields through the high-level resolver", async () => {
     const result = await runTool(resolveBuildDamage, {
       agent: "爱丽丝",
       mode: "baseline",
@@ -1230,6 +1230,12 @@ describe("resolveBuildDamage tool", () => {
 
     expect((result as any).found).toBe(true)
     expect((result as any).build.damage.expected.total).toBeGreaterThan(0)
+    expect(
+      (result as any).build.resolvedBuckets.anomalyBonusDamageSum,
+    ).toBeCloseTo(0.3, 4)
+    expect(
+      (result as any).build.resolvedBuckets.skillMultiplierFactor,
+    ).toBeCloseTo(1.8, 4)
   })
 
   it("supports Alice polarity assault state snapshots through the high-level resolver", async () => {

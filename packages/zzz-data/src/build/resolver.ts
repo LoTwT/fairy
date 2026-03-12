@@ -698,6 +698,31 @@ export function resolveStaticBuildDamage(
     }
   }
 
+  const resolvedSnapshotBucketKeys = Object.entries(
+    input.scenario.resolvedSnapshot?.bucketDeltas ?? {},
+  ).filter(([, value]) => value !== undefined)
+  for (const [key, value] of resolvedSnapshotBucketKeys) {
+    resolvedBuckets[
+      key as keyof Omit<StaticBuildResolvedBuckets, "skillMultiplierFactor">
+    ] += value as number
+  }
+  if (resolvedSnapshotBucketKeys.length > 0) {
+    assumptions.push(
+      `已按 scenario.resolvedSnapshot.bucketDeltas 展开：${resolvedSnapshotBucketKeys
+        .map(([key]) => key)
+        .join("、")}`,
+    )
+  }
+
+  const resolvedSkillMultiplierFactor =
+    input.scenario.resolvedSnapshot?.multiplierFactors?.skillMultiplierFactor
+  if (resolvedSkillMultiplierFactor !== undefined) {
+    resolvedBuckets.skillMultiplierFactor *= resolvedSkillMultiplierFactor
+    assumptions.push(
+      "已按 scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor 展开当前结算倍率快照",
+    )
+  }
+
   const resolvedAttack =
     input.panel.attack +
     (input.panel.baseAttack ?? 0) * resolvedBuckets.attackPercent +

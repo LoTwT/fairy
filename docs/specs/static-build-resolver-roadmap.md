@@ -684,11 +684,15 @@ resolver 主线完成后，文档维护需要单独列为持续事项，避免�
 
 ### 12.4 当前状态
 
-当前 `V7.1 contract freeze` 已完成：
+当前 `V7.1` / `V7.2` 状态如下：
 
 - `scenario.resolvedSnapshot` 已进入 build public contract
 - `StaticBuildResolvedSnapshotBucketKey` 已冻结第一批受控 bucket key
 - `StaticBuildResolvedSnapshotMultiplierKey` 已冻结 `skillMultiplierFactor`
 - `resolve-build-damage` tool schema 已接受 `resolvedSnapshot`
+- `V7.2 resolver wiring` 已完成：
+  - `bucketDeltas` 已并入当前 resolver bucket
+  - `multiplierFactors.skillMultiplierFactor` 已作为最终 factor 接入当前结算路径
+  - assumptions 已能显式标记当前使用了 `resolvedSnapshot`
 
-下一步进入 `V7.2`，把 `resolvedSnapshot` 接进 resolver。
+下一步进入 `V7.3`，挑选高价值来源把剩余 assumptions 迁移到 `resolvedSnapshot`。
