@@ -185,6 +185,7 @@ packages/zzz-agent/
 - [`static-build-resolver-v1.md`](../docs/specs/static-build-resolver-v1.md) — 第一版实现范围冻结：支持对象、bucket、profile、输入输出 contract 与验收标准
 - [`static-build-resolver-v2.md`](../docs/specs/static-build-resolver-v2.md) — 第二版实现范围：扩展支持名单与技能矩阵模板约定
 - [`static-build-resolver-v3.md`](../docs/specs/static-build-resolver-v3.md) — 第三版冻结范围：anomaly / disorder contract、单代理人静态快照约束，以及 V3.3/V3.4 refinement 收口
+- [`static-build-resolver-v4.md`](../docs/specs/static-build-resolver-v4.md) — 下一主线范围：progression-aware resolver、`agentMindscape` / `energyGenerationRate` contract 与高价值影画快照支持
 
 ## 计算器模块（src/calculator/）
 

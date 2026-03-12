@@ -304,6 +304,7 @@
 - `V2.1`
 - `V2.2`
 - `V3`
+- `V4`
 
 并同步更新：
 
@@ -432,3 +433,37 @@ resolver 主线完成后，文档维护需要单独列为持续事项，避免�
 4. 动态 catalog 覆盖范围优先写成“全部兼容对象”而不是硬编码数量；若文档必须列举数量，必须在同一轮实现收口时同步校准
 
 这部分不单独形成新公式阶段，但必须作为每轮迭代的收尾检查项。
+
+## 9. 下一主线：V4 Progression Context
+
+`V2.1`、`V2.2`、`V3` 完成后，下一条真正值得单独立项的主线不再是新 damage type，而是 progression-aware resolver。
+
+对应规格文档：
+
+- [static-build-resolver-v4.md](./static-build-resolver-v4.md)
+
+### 9.1 目标
+
+把 resolver 从“只理解核心技/精炼 + finalPanel 快照”推进到“能理解高价值影画 / 潜能觉醒 / progression 快照”。
+
+### 9.2 范围
+
+第一批固定为：
+
+1. `loadout.agentMindscape`
+2. `finalPanel.energyGenerationRate`
+3. `minimumMindscape`
+4. `柏妮思`、`奥菲丝&「鬼火」` 的高价值 progression-aware coverage
+
+### 9.3 不做什么
+
+- 不做 anomaly / disorder matrix
+- 不做团队循环或后台触发链模拟
+- 不做全量影画文本自动抽取
+
+### 9.4 执行顺序
+
+1. `V4.1` contract freeze
+2. `V4.2` resolver contract / value context 改造
+3. `V4.3` 高价值来源 coverage
+4. `V4.4` progression-specific assumptions refinement
