@@ -713,3 +713,50 @@ resolver 主线完成后，文档维护需要单独列为持续事项，避免�
   - 或保持为真动态过程 assumptions
 
 因此 `V7` 在当前 contract 下已收口，不再继续扩第五批来源。
+
+## 13. V8 assumption ownership
+
+对应规格文档：
+
+- [static-build-resolver-v8.md](./static-build-resolver-v8.md)
+
+### 13.1 目标
+
+把 anomaly / disorder 剩余 assumptions 统一归到正确 contract：
+
+1. `finalPanel`
+2. `dynamicSnapshot`
+3. `stateSnapshot`
+4. `resolvedSnapshot`
+5. 真动态过程
+
+### 13.2 范围
+
+第一批只做：
+
+1. 剩余 assumptions inventory
+2. contract 归属判断
+3. 仅在确有共性时新增最小 contract
+
+不做：
+
+- anomaly / disorder matrix
+- 时间轴 / 资源过程模拟
+- 为单一来源新增一次性专用 key
+
+### 13.3 执行顺序
+
+1. `V8.1` contract freeze
+2. `V8.2` assumption inventory
+3. `V8.3` minimal contract additions
+4. `V8.4` source migration / closeout
+
+### 13.4 当前状态
+
+当前已完成：
+
+- `V8.1` contract freeze
+
+下一步：
+
+- 进入 `V8.2`，盘点 anomaly / disorder 剩余 assumptions 的 contract 归属
