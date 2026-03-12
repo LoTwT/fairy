@@ -334,6 +334,7 @@ export const resolveBuildSkillMatrix = createTool({
         }),
       )
       .optional(),
+    agentMindscape: z.number().int().min(0).max(6).optional(),
     coreSkillLevel: z.number().min(1).max(7).optional().default(7),
     wEngineRefinement: z.number().min(1).max(5).optional().default(1),
     mode: z
@@ -348,6 +349,7 @@ export const resolveBuildSkillMatrix = createTool({
       critDamage: z.number(),
       hp: z.number().optional(),
       sheerForce: z.number().optional(),
+      energyGenerationRate: z.number().optional(),
       penetrationRate: z.number().optional(),
       penetrationValue: z.number().optional(),
     }),
@@ -465,6 +467,7 @@ export const resolveBuildSkillMatrix = createTool({
         agentId: agent.id,
         wEngineId: wEngine?.id,
         driveDiscSets,
+        agentMindscape: input.agentMindscape,
         coreSkillLevel: input.coreSkillLevel,
         wEngineRefinement: input.wEngineRefinement,
       },

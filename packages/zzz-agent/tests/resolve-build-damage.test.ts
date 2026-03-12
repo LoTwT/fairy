@@ -627,6 +627,120 @@ describe("resolveBuildDamage tool", () => {
     ).toBeCloseTo(12.5 / 9.5 - 1, 4)
   })
 
+  it("supports progression-aware Burnice snapshots through the high-level resolver", async () => {
+    const result = await runTool(resolveBuildDamage, {
+      agent: "柏妮思",
+      mode: "full-buff",
+      agentLevel: 60,
+      agentMindscape: 5,
+      finalPanel: {
+        attack: 3100,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 160,
+        energyGenerationRate: 2.8,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "enhancedSpecial",
+        damageMultiplier: "520%",
+        attribute: "火属性",
+        extraAbilityActive: true,
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    expect((result as any).build.loadout.agentMindscape).toBe(5)
+    expect(
+      (result as any).build.resolvedPanel.energyGenerationRate,
+    ).toBeCloseTo(2.8, 4)
+    expect((result as any).build.resolvedBuckets.anomalyMastery).toBeCloseTo(
+      25,
+      4,
+    )
+    expect((result as any).build.resolvedBuckets.bonusDamageSum).toBeCloseTo(
+      0.2,
+      4,
+    )
+  })
+
+  it("supports progression-aware Orphie snapshots through the high-level resolver", async () => {
+    const result = await runTool(resolveBuildDamage, {
+      agent: "奥菲丝&「鬼火」",
+      wEngine: "嚣枪喧焰",
+      agentMindscape: 1,
+      finalPanel: {
+        attack: 3400,
+        baseAttack: 1250,
+        critRate: 0.45,
+        critDamage: 1.2,
+        energyGenerationRate: 1.9,
+      },
+      scenario: {
+        damageType: "normal",
+        skillTag: "basic",
+        skillMultiplier: "420%",
+        attribute: "火属性",
+        combatTags: ["followUp", "crosshairFocus"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    expect((result as any).build.loadout.agentMindscape).toBe(1)
+    expect((result as any).build.resolvedPanel.attack).toBeCloseTo(3740, 4)
+    expect((result as any).build.resolvedBuckets.bonusDamageSum).toBeCloseTo(
+      1.05,
+      4,
+    )
+  })
+
+  it("supports Orphie mindscape-aware static bonuses through the high-level resolver", async () => {
+    const result = await runTool(resolveBuildDamage, {
+      agent: "奥菲丝&「鬼火」",
+      agentMindscape: 4,
+      mode: "full-buff",
+      finalPanel: {
+        attack: 3400,
+        baseAttack: 1250,
+        critRate: 0.45,
+        critDamage: 1.2,
+        energyGenerationRate: 1.9,
+      },
+      scenario: {
+        damageType: "normal",
+        skillTag: "enhancedSpecial",
+        skillMultiplier: "420%",
+        attribute: "火属性",
+        combatTags: ["crosshairFocus", "afterUltimate"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    expect((result as any).build.loadout.agentMindscape).toBe(4)
+    expect((result as any).build.resolvedPanel.attack).toBeCloseTo(3990, 4)
+    expect((result as any).build.resolvedBuckets.bonusDamageSum).toBeCloseTo(
+      0.6,
+      4,
+    )
+    expect((result as any).build.resolvedBuckets.ignoreResistance).toBeCloseTo(
+      0.15,
+      4,
+    )
+  })
+
   it("rejects anomaly formulas for non-anomaly agents", async () => {
     await expect(
       runTool(resolveBuildDamage, {

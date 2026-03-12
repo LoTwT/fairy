@@ -63,6 +63,7 @@ export type StaticBuildBucket =
   | "stunVulnerability"
   | "nonStunVulnerability"
   | "sheerBonusSum"
+  | "anomalyMastery"
   | "anomalyProficiency"
   | "anomalyBonusDamageSum"
   | "anomalyCritRate"
@@ -79,6 +80,7 @@ export interface StaticBuildLoadoutInput {
   wEngineId?: string
   driveDiscSets?: StaticBuildDriveDiscSetInput[]
   agentLevel?: number
+  agentMindscape?: number
   coreSkillLevel?: number
   wEngineRefinement?: number
 }
@@ -90,6 +92,7 @@ export interface StaticBuildFinalPanelInput {
   critDamage: number
   hp?: number
   sheerForce?: number
+  energyGenerationRate?: number
   anomalyProficiency?: number
   anomalyMastery?: number
   anomalyCritRate?: number
@@ -213,6 +216,7 @@ export interface StaticBuildEffectCondition {
   skillTags?: StaticBuildSkillTag[]
   attributes?: AgentAttribute[]
   disorderSourceTypes?: AnomalyType[]
+  minimumMindscape?: number
   requireExtraAbility?: boolean
   requireStunned?: boolean
   combatTags?: string[]
@@ -221,8 +225,10 @@ export interface StaticBuildEffectCondition {
 }
 
 export interface StaticBuildValueContext {
+  agentMindscape: number
   coreSkillLevel: number
   wEngineRefinement: number
+  energyGenerationRate?: number
   anomalyMastery?: number
   remainingTime?: number
 }
@@ -264,6 +270,7 @@ export interface StaticBuildResolvedBuckets {
   stunVulnerability: number
   nonStunVulnerability: number
   sheerBonusSum: number
+  anomalyMastery: number
   anomalyProficiency: number
   anomalyBonusDamageSum: number
   anomalyCritRate: number
@@ -279,6 +286,7 @@ export interface StaticBuildResolvedPanel {
   critDamage: number
   hp?: number
   sheerForce?: number
+  energyGenerationRate?: number
   anomalyProficiency: number
   anomalyMastery?: number
   anomalyCritRate: number
@@ -320,6 +328,7 @@ export interface StaticBuildResolvedLoadout {
     }
   >
   agentLevel: number
+  agentMindscape: number
   coreSkillLevel: number
   wEngineRefinement: number
 }

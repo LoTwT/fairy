@@ -9,6 +9,39 @@
 
 V4 的核心不是再扩 damage type，而是让 resolver 能表达更多“构筑阶段就已经确定”的效果。
 
+## 当前进度
+
+当前 V4 已进入第二批覆盖，状态如下：
+
+- `V4.1` contract freeze：已完成
+- `V4.2` progression-aware resolver：已完成首轮 runtime 接入
+- `V4.3` 高价值来源覆盖：已完成 `柏妮思`、`奥菲丝&「鬼火」` 第二批
+- `V4.4` assumptions refinement：已完成第二轮细化
+
+当前已实现的 contract：
+
+- `loadout.agentMindscape`
+- `finalPanel.energyGenerationRate`
+- `condition.minimumMindscape`
+
+当前已接入的高价值 progression-aware 规则：
+
+- `柏妮思`
+  - 潜能觉醒「沸点派对」：基于 `energyGenerationRate` 的异常掌控提升
+  - 潜能觉醒「沸点派对」：基于 `energyGenerationRate` 的伤害提升
+- `奥菲丝&「鬼火」`
+  - 核心技「准星聚焦」：基于 `energyGenerationRate` 的额外攻击力
+  - 影画 1：`[准星聚焦]` 状态下的额外伤害提升
+  - 影画 1：`特殊技 / 强化特殊技` 无视火抗
+  - 影画 2：`终结技` 后攻击力提升
+  - 影画 4：`强化特殊技 / 终结技` 伤害提升
+
+当前仍明确 out-of-scope 的相关机制：
+
+- `柏妮思` 的 `[燃点]/[余烬]` 触发链、堆层与节奏缩短
+- `奥菲丝&「鬼火」` 的后台自动释放与 `[蓄炎]` 循环
+- anomaly / disorder skill matrix
+
 ## 当前状态
 
 - `V2.1`、`V2.2`、`V3` 已完成
@@ -19,11 +52,13 @@ V4 的核心不是再扩 damage type，而是让 resolver 能表达更多“构�
   - `wEngineRefinement`
   - `agentLevel`
   - `finalPanel.anomalyMastery`
+  - `loadout.agentMindscape`
+  - `finalPanel.energyGenerationRate`
 
 当前仍无法直接表达、但已经明确属于“静态快照而非动态模拟”的高价值来源主要有：
 
-- `柏妮思`：基于初始能量自动回复的异常掌控 / 伤害提升
-- `奥菲丝&「鬼火」`：基于初始能量自动回复的攻击力额外提升
+- `柏妮思`：`[余烬]` 额外倍率、堆层穿透率、影画 6 的额外结算
+- `奥菲丝&「鬼火」`：后台自动释放、`[蓄炎]` 循环、影画 6 的额外激光伤害
 - 其余由影画 / 潜能觉醒解锁、且无需团队时间轴就能静态判断的效果
 
 ## 1. V4 目标

@@ -180,12 +180,12 @@ packages/zzz-agent/
 
 - [`damage-calculation.md`](../docs/specs/damage-calculation.md) — 四种伤害类型（常规/贯穿/异常/紊乱）的乘区公式、TypeScript 类型签名与参考数值
 - [`static-build-resolver.md`](../docs/specs/static-build-resolver.md) — 静态构筑解析系统设计：effect schema、输入输出 contract、热插拔乘区管线与模块划分
-- [`static-build-resolver-roadmap.md`](../docs/specs/static-build-resolver-roadmap.md) — 执行路线与 post-roadmap backlog：V2.1、V2.2、V3 已完成，后续按 backlog 继续推进
+- [`static-build-resolver-roadmap.md`](../docs/specs/static-build-resolver-roadmap.md) — 执行路线与阶段状态：V2.1、V2.2、V3 已完成，当前进入 V4 progression-aware resolver
 - [`anomaly-disorder-skill-matrix-evaluation.md`](../docs/specs/anomaly-disorder-skill-matrix-evaluation.md) — `8.2` 立项评估：当前结论是不在 `8.3 dynamic value context` 之前实现异常 / 紊乱 matrix
 - [`static-build-resolver-v1.md`](../docs/specs/static-build-resolver-v1.md) — 第一版实现范围冻结：支持对象、bucket、profile、输入输出 contract 与验收标准
 - [`static-build-resolver-v2.md`](../docs/specs/static-build-resolver-v2.md) — 第二版实现范围：扩展支持名单与技能矩阵模板约定
 - [`static-build-resolver-v3.md`](../docs/specs/static-build-resolver-v3.md) — 第三版冻结范围：anomaly / disorder contract、单代理人静态快照约束，以及 V3.3/V3.4 refinement 收口
-- [`static-build-resolver-v4.md`](../docs/specs/static-build-resolver-v4.md) — 下一主线范围：progression-aware resolver、`agentMindscape` / `energyGenerationRate` contract 与高价值影画快照支持
+- [`static-build-resolver-v4.md`](../docs/specs/static-build-resolver-v4.md) — 当前阶段范围：progression-aware resolver 第二批已完成，已接入 `agentMindscape` / `energyGenerationRate` contract 与柏妮思、奥菲丝&「鬼火」的第二轮高价值 progression-aware 支持
 
 ## 计算器模块（src/calculator/）
 
@@ -215,6 +215,17 @@ const total = base * bonus * crit * resistance * custom
 - 游戏模式类型：`BuffsJson`、`DeadlyAssaultJson`、`ShiyuDefenseJson`、`ThresholdSimulationJson`
 - static build resolver：`resolveStaticBuildDamage()`、`resolveStaticBuildSkillMatrix()`、`supportedStaticBuildAgents`、`supportedStaticBuildMatrixAgents`、`supportedStaticBuildWEngines`、`supportedStaticBuildDriveDiscs`、`getStaticBuildAgent()`、`getStaticBuildWEngine()`、`getCompatibleStaticBuildWEngines()`、`getStaticBuildDriveDisc()`、`getStaticBuildEffectsForLoadout()`、`getStaticBuildProfile()`、`staticBuildProfiles`
 - static build 类型：`ResolveStaticBuildInput`、`ResolveStaticBuildResult`、`ResolveStaticBuildSkillMatrixInput`、`ResolveStaticBuildSkillMatrixResult`、`StaticBuildMode`、`StaticBuildScenarioInput`、`StaticBuildSkillMatrixContextInput`、`StaticBuildSkillMatrixRow`、`StaticBuildSkillMatrixRowMeta`、`StaticBuildSkillMatrixEntryType`、`StaticBuildSkillMatrixAggregationType`、`StaticBuildSkillMatrixVariantAxis`、`StaticBuildSkillMatrixTemplateSource`、`StaticBuildSkillMatrixAttributeSource`、`StaticBuildTargetSize`、`StaticBuildResolvedBuckets`、`StaticBuildTraceItem`
+
+`V4` 首批新增的高价值 progression context：
+
+- `loadout.agentMindscape`
+- `finalPanel.energyGenerationRate`
+- effect condition `minimumMindscape`
+
+当前已落地的 progression-aware 来源：
+
+- `柏妮思`：潜能觉醒「沸点派对」的异常掌控 / 伤害提升
+- `奥菲丝&「鬼火」`：核心技「准星聚焦」的额外攻击力、影画 1 的伤害提升 / 火抗无视、影画 2 的终结技后攻击力、影画 4 的强化特殊技 / 终结技增伤
 - cleaned helper：`toElementMultiplierMap()`、`getEnemyElementMultiplier()`、`buildEnemyDamageContext()`、`selectEncounterByEnemyName()`、`buildEncounterDamageContext()`、`analyzeVersionPeriod()`、`findDAVersion()`、`findSDMode()`、`resolveSDModeName()`、`getDefaultSDMode()`、`selectSDMode()`、`findSDVersion()`、`findTSMode()`、`resolveTSModeName()`、`getDefaultTSMode()`、`selectTSMode()`、`findTSVersion()`、`getLatestDAVersion()`、`getLatestSDVersion()`、`getLatestTSVersion()`、`toDABuffView()`、`getDABuffViews()`、`flattenDAEnemies()`、`selectDAEnemy()`、`buildDADamageContext()`、`findDAVersionsByEnemyName()`、`toSDNodeViews()`、`flattenSDEnemies()`、`selectSDEnemy()`、`buildSDDamageContext()`、`findSDVersionsByEnemyName()`、`toTSNodeViews()`、`flattenTSEnemies()`、`selectTSEnemy()`、`buildTSDamageContext()`、`findTSVersionsByEnemyName()`
 - cleaned 类型：`ElementMultiplierMap`、`EnemyDamageContext`、`EncounterSelectionResult`、`EncounterDamageContext`、`VersionPeriodInfo`、`DABuffView`、`DAEnemyView`、`SDNodeView`、`SDSideView`、`TSNodeView`、`TSSideView`、`TSFlattenedEnemyView`
 - 文本工具：`RichTextString`、`stripRichText()`

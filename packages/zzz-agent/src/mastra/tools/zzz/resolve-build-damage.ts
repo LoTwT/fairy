@@ -157,6 +157,7 @@ export const resolveBuildDamage = createTool({
     coreSkillLevel: z.number().min(1).max(7).optional().default(7),
     wEngineRefinement: z.number().min(1).max(5).optional().default(1),
     agentLevel: z.number().min(1).max(60).optional(),
+    agentMindscape: z.number().int().min(0).max(6).optional(),
     mode: z
       .enum(["baseline", "full-buff", "manual"])
       .optional()
@@ -169,6 +170,7 @@ export const resolveBuildDamage = createTool({
       critDamage: z.number(),
       hp: z.number().optional(),
       sheerForce: z.number().optional(),
+      energyGenerationRate: z.number().optional(),
       anomalyProficiency: z.number().optional(),
       anomalyMastery: z.number().optional(),
       anomalyCritRate: z.number().optional(),
@@ -409,6 +411,7 @@ export const resolveBuildDamage = createTool({
             wEngineId: wEngine?.id,
             driveDiscSets,
             agentLevel: input.agentLevel,
+            agentMindscape: input.agentMindscape,
             coreSkillLevel: input.coreSkillLevel,
             wEngineRefinement: input.wEngineRefinement,
           },
@@ -435,6 +438,7 @@ export const resolveBuildDamage = createTool({
           wEngineId: wEngine?.id,
           driveDiscSets,
           agentLevel: input.agentLevel,
+          agentMindscape: input.agentMindscape,
           coreSkillLevel: input.coreSkillLevel,
           wEngineRefinement: input.wEngineRefinement,
         },

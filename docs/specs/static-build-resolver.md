@@ -728,4 +728,4 @@
 1. 继续补 anomaly / disorder 剩余 curated coverage
 2. 仅在明确需要时再评估 anomaly / disorder skill matrix
 3. 若需要进一步提高异常 / 紊乱精度，优先补显式 dynamic value context，而不是默认扩大 contract
-4. 下一条独立主线是 progression-aware resolver，见 [静态构筑解析系统 V4](./static-build-resolver-v4.md)
+4. progression-aware resolver 已进入 `V4` 第二批实现阶段，见 [静态构筑解析系统 V4](./static-build-resolver-v4.md)

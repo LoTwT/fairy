@@ -48,8 +48,8 @@ src/mastra/
 │   ├── lookup-bangboo.ts  # 邦布查询 + 属性计算
 │   ├── lookup-drive-disc.ts # 驱动盘套装效果查询
 │   ├── lookup-game-mode.ts  # DA/SD/TS 游戏模式数据查询 + damageContext
-│   ├── resolve-build-damage.ts # 静态构筑高层 resolver（当前支持：全部强攻 / 命破 / 异常代理人 + 对应特性的音擎；single-shot 支持 normal/sheer/anomaly/disorder）
-│   ├── resolve-build-skill-matrix.ts # 静态构筑技能矩阵 resolver（全技能 / 全段 / 完整伤害表；当前仅强攻 / 命破）
+│   ├── resolve-build-damage.ts # 静态构筑高层 resolver（当前支持：全部强攻 / 命破 / 异常代理人 + 对应特性的音擎；single-shot 支持 normal/sheer/anomaly/disorder，并已接入 agentMindscape / energyGenerationRate）
+│   ├── resolve-build-skill-matrix.ts # 静态构筑技能矩阵 resolver（全技能 / 全段 / 完整伤害表；当前仅强攻 / 命破，但共享相同的 progression-aware loadout/panel contract）
 │   └── calc-damage.ts    # 伤害计算（normal/sheer/anomaly/disorder）
 └── scorers/
     └── zzz-scorer.ts      # 评分器（completeness/outputFormat/multiplierAccuracy）

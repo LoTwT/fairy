@@ -68,6 +68,9 @@ import {
   - 代理人：`格莉丝`、`柳`、`简`、`派派`、`柏妮思`、`薇薇安`、`爱丽丝`、`爱芮`
   - 音擎：`壳中之灵`、`十方锻星`、`飞鸟星梦`、`淬锋钳刺`、`时流贤者`、`灼心摇壶`、`霰落星殿`、`触电唇彩`、`雨林饕客`
 - `finalPanel.anomalyMastery` 当前可作为显式快照输入，已用于 `爱丽丝` 的“异常掌控 -> 异常精通”换算
+- `loadout.agentMindscape` 与 `finalPanel.energyGenerationRate` 当前已作为 progression-aware 快照输入接入首批高价值来源：
+  - `柏妮思`：潜能觉醒「沸点派对」的异常掌控 / 伤害提升
+  - `奥菲丝&「鬼火」`：核心技「准星聚焦」的额外攻击力，影画 1 的额外伤害提升 / 火抗无视，影画 2 的终结技后攻击力，影画 4 的强化特殊技 / 终结技增伤
 - 仍无法直接表达的剩余时间换算与随机增益，继续通过更细的 source-specific `assumptions` 明示
   - disorder 已支持按 `anomalyType` 区分原异常来源，并支持异常精通阈值类条件
 - 技能矩阵：当前仅支持 `normal / sheer`，即强攻 / 命破；高频代理人使用 curated 模板，其余强攻 / 命破代理人回退到通用矩阵生成
@@ -81,6 +84,7 @@ const result = resolveStaticBuildDamage({
     agentId: "1371",
     wEngineId: "14137",
     driveDiscSets: [{ id: "33100", pieces: 4 }],
+    agentMindscape: 0,
     coreSkillLevel: 7,
     wEngineRefinement: 1,
   },
@@ -89,6 +93,7 @@ const result = resolveStaticBuildDamage({
     critRate: 0.4,
     critDamage: 1.2,
     hp: 18000,
+    energyGenerationRate: 1.2,
   },
   scenario: {
     damageType: "sheer",

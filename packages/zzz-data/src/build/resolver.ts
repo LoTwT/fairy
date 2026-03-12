@@ -61,6 +61,7 @@ function createEmptyBuckets(): StaticBuildResolvedBuckets {
     stunVulnerability: 0,
     nonStunVulnerability: 0,
     sheerBonusSum: 0,
+    anomalyMastery: 0,
     anomalyProficiency: 0,
     anomalyBonusDamageSum: 0,
     anomalyCritRate: 0,
@@ -119,6 +120,7 @@ function effectMatches(
     attribute: string | undefined
     damageType: string
     disorderSourceType?: string
+    agentMindscape: number
     skillTag: string
     extraAbilityActive: boolean
     combatTags: Set<string>
@@ -148,6 +150,13 @@ function effectMatches(
     condition.attributes &&
     (!context.attribute ||
       !condition.attributes.includes(context.attribute as never))
+  ) {
+    return false
+  }
+
+  if (
+    condition.minimumMindscape !== undefined &&
+    context.agentMindscape < condition.minimumMindscape
   ) {
     return false
   }
@@ -204,6 +213,7 @@ function applyEffects(
     attribute: string | undefined
     damageType: string
     disorderSourceType?: string
+    agentMindscape: number
     skillTag: string
     extraAbilityActive: boolean
     combatTags: Set<string>
@@ -257,6 +267,7 @@ function applyEffects(
         attribute: context.attribute,
         damageType: context.damageType,
         disorderSourceType: context.disorderSourceType,
+        agentMindscape: context.agentMindscape,
         skillTag: context.skillTag,
         extraAbilityActive: context.extraAbilityActive,
         combatTags: context.combatTags,
@@ -392,6 +403,7 @@ export function resolveStaticBuildDamage(
 
   const assumptions: string[] = []
   const unsupportedEffects: string[] = []
+  const agentMindscape = input.loadout.agentMindscape ?? 0
 
   const attribute =
     toAgentAttribute(input.scenario.attribute) ?? agent.defaultAttribute
@@ -411,6 +423,14 @@ export function resolveStaticBuildDamage(
     wEngineId: wEngine?.id,
     driveDiscSets,
   })
+  if (
+    input.loadout.agentMindscape === undefined &&
+    effects.some((effect) => effect.condition?.minimumMindscape !== undefined)
+  ) {
+    assumptions.push(
+      "未提供 agentMindscape，按 0 处理；未展开更高影画/潜能觉醒档位效果",
+    )
+  }
   if (!hasStaticBuildCoverageForSource("agent", agent.id)) {
     assumptions.push(
       `${agent.name} 当前未收录 curated 代理人效果，结果主要基于 finalPanel、敌人参数和已支持的公共增益`,
@@ -434,6 +454,8 @@ export function resolveStaticBuildDamage(
       sourceType: "agent",
       sourceId: agent.id,
       damageType: input.scenario.damageType,
+      agentMindscape,
+      energyGenerationRate: input.panel.energyGenerationRate,
       anomalyMastery: input.panel.anomalyMastery,
       disorderSourceType:
         input.scenario.damageType === "disorder"
@@ -447,6 +469,8 @@ export function resolveStaticBuildDamage(
         sourceType: "w-engine",
         sourceId: wEngine.id,
         damageType: input.scenario.damageType,
+        agentMindscape,
+        energyGenerationRate: input.panel.energyGenerationRate,
         anomalyMastery: input.panel.anomalyMastery,
         disorderSourceType:
           input.scenario.damageType === "disorder"
@@ -461,6 +485,8 @@ export function resolveStaticBuildDamage(
         sourceType: "drive-disc",
         sourceId: set.id,
         damageType: input.scenario.damageType,
+        agentMindscape,
+        energyGenerationRate: input.panel.energyGenerationRate,
         anomalyMastery: input.panel.anomalyMastery,
         disorderSourceType:
           input.scenario.damageType === "disorder"
@@ -477,8 +503,10 @@ export function resolveStaticBuildDamage(
     ]),
   )
   const valueContext: StaticBuildValueContext = {
+    agentMindscape,
     coreSkillLevel: input.loadout.coreSkillLevel ?? 7,
     wEngineRefinement: input.loadout.wEngineRefinement ?? 1,
+    energyGenerationRate: input.panel.energyGenerationRate,
     anomalyMastery: input.panel.anomalyMastery,
     remainingTime:
       input.scenario.damageType === "disorder"
@@ -496,6 +524,7 @@ export function resolveStaticBuildDamage(
       input.scenario.damageType === "disorder"
         ? input.scenario.anomalyType
         : undefined,
+    agentMindscape,
     skillTag: input.scenario.skillTag,
     extraAbilityActive,
     combatTags,
@@ -525,6 +554,7 @@ export function resolveStaticBuildDamage(
       input.scenario.damageType === "disorder"
         ? input.scenario.anomalyType
         : undefined,
+    agentMindscape,
     skillTag: input.scenario.skillTag,
     extraAbilityActive,
     combatTags,
@@ -598,10 +628,15 @@ export function resolveStaticBuildDamage(
     critDamage: input.panel.critDamage + resolvedBuckets.critDamage,
     hp: input.panel.hp,
     sheerForce: input.panel.sheerForce,
+    energyGenerationRate: input.panel.energyGenerationRate,
     anomalyProficiency:
       (input.panel.anomalyProficiency ?? 0) +
       resolvedBuckets.anomalyProficiency,
-    anomalyMastery: input.panel.anomalyMastery,
+    anomalyMastery:
+      input.panel.anomalyMastery === undefined &&
+      resolvedBuckets.anomalyMastery === 0
+        ? undefined
+        : (input.panel.anomalyMastery ?? 0) + resolvedBuckets.anomalyMastery,
     anomalyCritRate:
       (input.panel.anomalyCritRate ?? 0) + resolvedBuckets.anomalyCritRate,
     anomalyCritDamage:
@@ -679,6 +714,7 @@ export function resolveStaticBuildDamage(
         wEngine,
         driveDiscSets,
         agentLevel: resolvedAgentLevel,
+        agentMindscape,
         coreSkillLevel: valueContext.coreSkillLevel,
         wEngineRefinement: valueContext.wEngineRefinement,
       },
@@ -751,6 +787,7 @@ export function resolveStaticBuildDamage(
         wEngine,
         driveDiscSets,
         agentLevel: resolvedAgentLevel,
+        agentMindscape,
         coreSkillLevel: valueContext.coreSkillLevel,
         wEngineRefinement: valueContext.wEngineRefinement,
       },
@@ -823,6 +860,7 @@ export function resolveStaticBuildDamage(
         wEngine,
         driveDiscSets,
         agentLevel: resolvedAgentLevel,
+        agentMindscape,
         coreSkillLevel: valueContext.coreSkillLevel,
         wEngineRefinement: valueContext.wEngineRefinement,
       },
@@ -884,6 +922,7 @@ export function resolveStaticBuildDamage(
       wEngine,
       driveDiscSets,
       agentLevel: resolvedAgentLevel,
+      agentMindscape,
       coreSkillLevel: valueContext.coreSkillLevel,
       wEngineRefinement: valueContext.wEngineRefinement,
     },

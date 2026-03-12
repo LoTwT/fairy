@@ -365,6 +365,92 @@ describe("static build resolver", () => {
         item.includes("奥菲丝&「鬼火」 当前未收录 curated"),
       ),
     ).toBe(false)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("未提供时仅展开核心技中的基础攻击力提升"),
+      ),
+    ).toBe(true)
+  })
+
+  it("expands Orphie progression-aware attack bonus from energyGenerationRate", () => {
+    const result = resolveStaticBuildDamage({
+      loadout: {
+        agentId: "1301",
+        wEngineId: "14130",
+        agentMindscape: 1,
+        coreSkillLevel: 7,
+      },
+      panel: {
+        attack: 3400,
+        baseAttack: 1250,
+        critRate: 0.45,
+        critDamage: 1.2,
+        energyGenerationRate: 1.9,
+      },
+      scenario: {
+        damageType: "normal",
+        skillTag: "basic",
+        skillMultiplier: "420%",
+        attribute: "火属性",
+        combatTags: ["followUp", "crosshairFocus"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.loadout.agentMindscape).toBe(1)
+    expect(result.resolvedPanel.energyGenerationRate).toBeCloseTo(1.9, 4)
+    expect(result.resolvedPanel.attack).toBeCloseTo(3740, 4)
+    expect(result.resolvedBuckets.bonusDamageSum).toBeCloseTo(1.05, 4)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes(
+          "finalPanel.energyGenerationRate 展开[准星聚焦]的额外攻击力",
+        ),
+      ),
+    ).toBe(true)
+  })
+
+  it("expands Orphie mindscape-aware static bonuses without changing contract", () => {
+    const result = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1301",
+        agentMindscape: 4,
+        coreSkillLevel: 7,
+      },
+      panel: {
+        attack: 3400,
+        baseAttack: 1250,
+        critRate: 0.45,
+        critDamage: 1.2,
+        energyGenerationRate: 1.9,
+      },
+      scenario: {
+        damageType: "normal",
+        skillTag: "enhancedSpecial",
+        skillMultiplier: "420%",
+        attribute: "火属性",
+        combatTags: ["crosshairFocus", "afterUltimate"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.loadout.agentMindscape).toBe(4)
+    expect(result.resolvedPanel.attack).toBeCloseTo(3990, 4)
+    expect(result.resolvedPanel.critRate).toBeCloseTo(0.7, 4)
+    expect(result.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.6, 4)
+    expect(result.resolvedBuckets.ignoreResistance).toBeCloseTo(0.15, 4)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("影画2喧响值回复仍未在 static resolver 中展开"),
+      ),
+    ).toBe(true)
   })
 
   it("applies curated effects for Mato and Grill Owisp", () => {
@@ -1087,6 +1173,84 @@ describe("static build resolver", () => {
     ).toBe(true)
     expect(
       result.assumptions.some((item) => item.includes("后场能量自动回复")),
+    ).toBe(true)
+  })
+
+  it("expands Burnice progression-aware anomaly mastery and damage bonus", () => {
+    const result = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1171",
+        agentLevel: 60,
+        agentMindscape: 5,
+      },
+      panel: {
+        attack: 3100,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 160,
+        energyGenerationRate: 2.8,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "enhancedSpecial",
+        damageMultiplier: "520%",
+        attribute: "火属性",
+        extraAbilityActive: true,
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.loadout.agentMindscape).toBe(5)
+    expect(result.resolvedPanel.energyGenerationRate).toBeCloseTo(2.8, 4)
+    expect(result.resolvedBuckets.anomalyMastery).toBeCloseTo(25, 4)
+    expect(result.resolvedPanel.anomalyMastery).toBeCloseTo(25, 4)
+    expect(result.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.2, 4)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("finalPanel.energyGenerationRate 展开潜能觉醒：沸点派对"),
+      ),
+    ).toBe(true)
+  })
+
+  it("refines Burnice progression assumptions when mindscape is present but energyGenerationRate is missing", () => {
+    const result = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1171",
+        agentLevel: 60,
+        agentMindscape: 1,
+      },
+      panel: {
+        attack: 3100,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 160,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "enhancedSpecial",
+        damageMultiplier: "520%",
+        attribute: "火属性",
+        extraAbilityActive: true,
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.resolvedBuckets.anomalyMastery).toBe(0)
+    expect(result.resolvedBuckets.bonusDamageSum).toBe(0)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("未提供时，初始能量自动回复转异常掌控与伤害提升未展开"),
+      ),
     ).toBe(true)
   })
 

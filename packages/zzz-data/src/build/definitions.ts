@@ -33,6 +33,76 @@ function aliceExtraAnomalyProficiencyFromMastery({
   return Math.max(0, ((anomalyMastery ?? 0) - 140) * 1.6)
 }
 
+function steppedEnergyGenerationValue(input: {
+  energyGenerationRate?: number
+  threshold: number
+  step: number
+  perStep: number
+  cap: number
+}) {
+  const { energyGenerationRate, threshold, step, perStep, cap } = input
+  if (energyGenerationRate === undefined || energyGenerationRate < threshold) {
+    return 0
+  }
+  const steps = Math.floor((energyGenerationRate - threshold + 1e-9) / step)
+  return Math.min(cap, Math.max(0, steps) * perStep)
+}
+
+function burniceAwakeningAnomalyMastery({
+  agentMindscape,
+  energyGenerationRate,
+}: StaticBuildValueContext): number {
+  const perStepValues = [1, 1.3, 1.6, 2, 2.5] as const
+  if (agentMindscape <= 0) return 0
+  const perStep =
+    perStepValues[Math.min(agentMindscape, perStepValues.length) - 1] ??
+    perStepValues[perStepValues.length - 1]
+  return steppedEnergyGenerationValue({
+    energyGenerationRate,
+    threshold: 1.8,
+    step: 0.1,
+    perStep,
+    cap: 25,
+  })
+}
+
+function burniceAwakeningBonus({
+  agentMindscape,
+  energyGenerationRate,
+}: StaticBuildValueContext): number {
+  const perStepValues = [0.01, 0.0125, 0.015, 0.0175, 0.02] as const
+  if (agentMindscape <= 0) return 0
+  const perStep =
+    perStepValues[Math.min(agentMindscape, perStepValues.length) - 1] ??
+    perStepValues[perStepValues.length - 1]
+  return steppedEnergyGenerationValue({
+    energyGenerationRate,
+    threshold: 1.8,
+    step: 0.1,
+    perStep,
+    cap: 0.2,
+  })
+}
+
+function orphieCrosshairFocusFlatAttack({
+  coreSkillLevel,
+  energyGenerationRate,
+}: StaticBuildValueContext): number {
+  const baseValues = [130, 155, 180, 205, 230, 255, 280] as const
+  const capValues = [340, 400, 460, 520, 580, 640, 700] as const
+  const index = Math.max(1, Math.min(coreSkillLevel, baseValues.length)) - 1
+  const base = baseValues[index] ?? baseValues[baseValues.length - 1]
+  const cap = capValues[index] ?? capValues[capValues.length - 1]
+  const extra = steppedEnergyGenerationValue({
+    energyGenerationRate,
+    threshold: 1.6,
+    step: 0.1,
+    perStep: 20,
+    cap: Math.max(0, cap - base),
+  })
+  return base + extra
+}
+
 // prettier-ignore
 const nekomataCoreBonus = [
   0.3,
@@ -132,6 +202,26 @@ const hugoCoreCritDamage = [
   0.208,
   0.23,
   0.25,
+] as const
+// prettier-ignore
+const orphieCoreCritRate = [
+  0.125,
+  0.146,
+  0.167,
+  0.188,
+  0.208,
+  0.229,
+  0.25,
+] as const
+// prettier-ignore
+const orphieCoreFollowUpBonus = [
+  0.425,
+  0.496,
+  0.567,
+  0.637,
+  0.708,
+  0.779,
+  0.85,
 ] as const
 const matoMoltenEdgeCritRate = () => 0.1
 const matoMoltenEdgeFireBonus = () => 0.2
@@ -700,7 +790,7 @@ export const staticBuildEffectDefinitions = [
     modifiers: [
       {
         bucket: "critRate",
-        value: () => 0.25,
+        value: byCoreSkill(orphieCoreCritRate),
       },
     ],
   },
@@ -718,7 +808,7 @@ export const staticBuildEffectDefinitions = [
     modifiers: [
       {
         bucket: "bonusDamageSum",
-        value: () => 0.85,
+        value: byCoreSkill(orphieCoreFollowUpBonus),
       },
     ],
   },
@@ -736,7 +826,46 @@ export const staticBuildEffectDefinitions = [
     modifiers: [
       {
         bucket: "flatAttack",
-        value: () => 280,
+        value: orphieCrosshairFocusFlatAttack,
+      },
+    ],
+  },
+  {
+    id: "orphie-m1-crosshair-focus-bonus",
+    sourceType: "agent",
+    sourceId: "1301",
+    sourceName: "奥菲丝&「鬼火」",
+    label: "影画1：准星聚焦伤害提升",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      minimumMindscape: 1,
+      combatTags: ["crosshairFocus"],
+    },
+    modifiers: [
+      {
+        bucket: "bonusDamageSum",
+        value: () => 0.2,
+      },
+    ],
+  },
+  {
+    id: "orphie-m1-fire-ignore-resistance",
+    sourceType: "agent",
+    sourceId: "1301",
+    sourceName: "奥菲丝&「鬼火」",
+    label: "影画1：特殊技/强化特殊技无视火抗",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      minimumMindscape: 1,
+      skillTags: ["special", "enhancedSpecial"],
+      attributes: ["Fire"],
+    },
+    modifiers: [
+      {
+        bucket: "ignoreResistance",
+        value: () => 0.15,
       },
     ],
   },
@@ -753,6 +882,44 @@ export const staticBuildEffectDefinitions = [
       combatTags: ["followUp"],
     },
     modifiers: [],
+  },
+  {
+    id: "orphie-m2-after-ultimate-attack",
+    sourceType: "agent",
+    sourceId: "1301",
+    sourceName: "奥菲丝&「鬼火」",
+    label: "影画2：终结技后攻击力提升",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      minimumMindscape: 2,
+      combatTags: ["afterUltimate"],
+    },
+    modifiers: [
+      {
+        bucket: "attackPercent",
+        value: () => 0.2,
+      },
+    ],
+  },
+  {
+    id: "orphie-m4-ex-ultimate-bonus",
+    sourceType: "agent",
+    sourceId: "1301",
+    sourceName: "奥菲丝&「鬼火」",
+    label: "影画4：强化特殊技/终结技增伤",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      minimumMindscape: 4,
+      skillTags: ["enhancedSpecial", "ultimate"],
+    },
+    modifiers: [
+      {
+        bucket: "bonusDamageSum",
+        value: () => 0.4,
+      },
+    ],
   },
   {
     id: "mato-core-molten-edge-crit-rate",
@@ -1002,6 +1169,42 @@ export const staticBuildEffectDefinitions = [
       {
         bucket: "anomalyBonusDamageSum",
         value: burniceFireDisorderDurationBonus,
+      },
+    ],
+  },
+  {
+    id: "burnice-awakening-energy-anomaly-mastery",
+    sourceType: "agent",
+    sourceId: "1171",
+    sourceName: "柏妮思",
+    label: "潜能觉醒：初始能量自动回复转异常掌控",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      minimumMindscape: 1,
+    },
+    modifiers: [
+      {
+        bucket: "anomalyMastery",
+        value: burniceAwakeningAnomalyMastery,
+      },
+    ],
+  },
+  {
+    id: "burnice-awakening-energy-bonus",
+    sourceType: "agent",
+    sourceId: "1171",
+    sourceName: "柏妮思",
+    label: "潜能觉醒：初始能量自动回复转伤害提升",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      minimumMindscape: 1,
+    },
+    modifiers: [
+      {
+        bucket: "bonusDamageSum",
+        value: burniceAwakeningBonus,
       },
     ],
   },
@@ -2547,8 +2750,11 @@ interface StaticBuildSourceNote {
   sourceType: StaticBuildEffectDefinition["sourceType"]
   sourceId: string
   minimumPieces?: 2 | 4
+  minimumMindscape?: number
   requiresAnomalyMastery?: boolean
   requiresMissingAnomalyMastery?: boolean
+  requiresEnergyGenerationRate?: boolean
+  requiresMissingEnergyGenerationRate?: boolean
   damageTypes?: readonly ("normal" | "sheer" | "anomaly" | "disorder")[]
   disorderSourceTypes?: readonly (
     | "fire"
@@ -2568,6 +2774,64 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
     sourceId: "1171",
     damageTypes: ["anomaly", "disorder"],
     note: "柏妮思的[燃点]/[余烬]触发链与异常积蓄效率未在 static resolver 中展开；当前已展开额外能力带来的灼烧持续时间延长。",
+  },
+  {
+    sourceType: "agent",
+    sourceId: "1171",
+    minimumMindscape: 1,
+    requiresMissingEnergyGenerationRate: true,
+    note: "柏妮思的潜能觉醒：沸点派对 依赖 finalPanel.energyGenerationRate；未提供时，初始能量自动回复转异常掌控与伤害提升未展开。",
+  },
+  {
+    sourceType: "agent",
+    sourceId: "1171",
+    minimumMindscape: 1,
+    requiresEnergyGenerationRate: true,
+    note: "柏妮思当前已按 finalPanel.energyGenerationRate 展开潜能觉醒：沸点派对 的异常掌控与伤害提升；[余烬]间隔降低仍未在 static resolver 中展开。",
+  },
+  {
+    sourceType: "agent",
+    sourceId: "1171",
+    minimumMindscape: 1,
+    note: "柏妮思的影画1[热络同心]中，[余烬]倍率提升与异常积蓄值提升仍未在 static resolver 中展开。",
+  },
+  {
+    sourceType: "agent",
+    sourceId: "1171",
+    minimumMindscape: 2,
+    note: "柏妮思的影画2[热意洞穿]层数与穿透率收益仍需显式堆层；当前未在 static resolver 中自动展开。",
+  },
+  {
+    sourceType: "agent",
+    sourceId: "1171",
+    minimumMindscape: 6,
+    note: "柏妮思的影画6特殊[余烬]、额外[灼烧]结算与 25% 火抗无视仍未在 static resolver 中展开。",
+  },
+  {
+    sourceType: "agent",
+    sourceId: "1301",
+    requiresMissingEnergyGenerationRate: true,
+    damageTypes: ["normal"],
+    note: "奥菲丝&「鬼火」的[准星聚焦]额外攻击力依赖 finalPanel.energyGenerationRate；未提供时仅展开核心技中的基础攻击力提升。",
+  },
+  {
+    sourceType: "agent",
+    sourceId: "1301",
+    requiresEnergyGenerationRate: true,
+    damageTypes: ["normal"],
+    note: "奥菲丝&「鬼火」当前已按 finalPanel.energyGenerationRate 展开[准星聚焦]的额外攻击力；影画1的火抗无视、影画2的终结技后攻击力与影画4的强化特殊技/终结技增伤已可静态展开，后台自动释放与[蓄炎]循环仍未在 static resolver 中展开。",
+  },
+  {
+    sourceType: "agent",
+    sourceId: "1301",
+    minimumMindscape: 2,
+    note: "奥菲丝&「鬼火」的影画2喧响值回复仍未在 static resolver 中展开；当前只展开终结技后的攻击力提升。",
+  },
+  {
+    sourceType: "agent",
+    sourceId: "1301",
+    minimumMindscape: 6,
+    note: "奥菲丝&「鬼火」的影画6追加激光伤害与[蓄炎]回复仍未在 static resolver 中展开。",
   },
   {
     sourceType: "agent",
@@ -2734,6 +2998,8 @@ export function getStaticBuildSourceNotes(input: {
   sourceType: StaticBuildEffectDefinition["sourceType"]
   sourceId?: string
   damageType: "normal" | "sheer" | "anomaly" | "disorder"
+  agentMindscape?: number
+  energyGenerationRate?: number
   anomalyMastery?: number
   disorderSourceType?:
     | "fire"
@@ -2757,12 +3023,30 @@ export function getStaticBuildSourceNotes(input: {
       if (note.minimumPieces && (input.pieces ?? 0) < note.minimumPieces) {
         return false
       }
+      if (
+        note.minimumMindscape !== undefined &&
+        (input.agentMindscape ?? 0) < note.minimumMindscape
+      ) {
+        return false
+      }
       if (note.requiresAnomalyMastery && input.anomalyMastery === undefined) {
         return false
       }
       if (
         note.requiresMissingAnomalyMastery &&
         input.anomalyMastery !== undefined
+      ) {
+        return false
+      }
+      if (
+        note.requiresEnergyGenerationRate &&
+        input.energyGenerationRate === undefined
+      ) {
+        return false
+      }
+      if (
+        note.requiresMissingEnergyGenerationRate &&
+        input.energyGenerationRate !== undefined
       ) {
         return false
       }

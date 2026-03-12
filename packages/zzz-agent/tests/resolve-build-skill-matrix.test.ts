@@ -202,6 +202,68 @@ describe("resolveBuildSkillMatrix tool", () => {
     expect((result as any).matrix.summary.critDamage).toBeCloseTo(1.9, 4)
   })
 
+  it("accepts progression-aware Orphie snapshots in skill matrix requests", async () => {
+    const result = await runTool(resolveBuildSkillMatrix, {
+      agent: "奥菲丝&「鬼火」",
+      wEngine: "嚣枪喧焰",
+      agentMindscape: 1,
+      finalPanel: {
+        attack: 3400,
+        baseAttack: 1250,
+        critRate: 0.45,
+        critDamage: 1.2,
+        energyGenerationRate: 1.9,
+      },
+      context: {
+        combatTags: ["followUp", "crosshairFocus"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    expect((result as any).matrix.loadout.agentMindscape).toBe(1)
+    expect((result as any).matrix.summary.attack).toBeCloseTo(3740, 4)
+  })
+
+  it("applies Orphie mindscape-aware static bonuses in skill matrix requests", async () => {
+    const result = await runTool(resolveBuildSkillMatrix, {
+      agent: "奥菲丝&「鬼火」",
+      agentMindscape: 4,
+      finalPanel: {
+        attack: 3400,
+        baseAttack: 1250,
+        critRate: 0.45,
+        critDamage: 1.2,
+        energyGenerationRate: 1.9,
+      },
+      context: {
+        combatTags: ["crosshairFocus", "afterUltimate"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    expect((result as any).matrix.loadout.agentMindscape).toBe(4)
+    expect((result as any).matrix.summary.attack).toBeCloseTo(3990, 4)
+    const enhancedSpecialRow = (result as any).matrix.rows.find(
+      (row: any) => row.skillTag === "enhancedSpecial",
+    )
+    expect(enhancedSpecialRow?.resolvedBuckets.bonusDamageSum).toBeCloseTo(
+      0.6,
+      4,
+    )
+    expect(enhancedSpecialRow?.resolvedBuckets.ignoreResistance).toBeCloseTo(
+      0.15,
+      4,
+    )
+  })
+
   it("returns generic rupture matrix rows with Banyue curated buckets applied", async () => {
     const result = await runTool(resolveBuildSkillMatrix, {
       agent: "般岳",
