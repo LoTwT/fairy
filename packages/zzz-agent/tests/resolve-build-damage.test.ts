@@ -478,4 +478,61 @@ describe("resolveBuildDamage tool", () => {
       4,
     )
   })
+
+  it("supports disorder damage through the high-level resolver", async () => {
+    const result = await runTool(resolveBuildDamage, {
+      agent: "格莉丝",
+      wEngine: "嵌合编译器",
+      driveDiscs: [{ name: "自由蓝调", pieces: 2 }],
+      mode: "full-buff",
+      agentLevel: 60,
+      finalPanel: {
+        attack: 3000,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 120,
+      },
+      scenario: {
+        damageType: "disorder",
+        skillTag: "enhancedSpecial",
+        anomalyType: "感电",
+        remainingTime: 5,
+        attribute: "电属性",
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    expect((result as any).build.profile.id).toBe("standard-disorder")
+    expect((result as any).build.damageParams.anomalyType).toBe("electric")
+    expect((result as any).build.damageParams.remainingTime).toBe(5)
+  })
+
+  it("rejects anomaly formulas for non-anomaly agents", async () => {
+    await expect(
+      runTool(resolveBuildDamage, {
+        agent: "朱鸢",
+        finalPanel: {
+          attack: 3200,
+          critRate: 0.55,
+          critDamage: 1.4,
+          anomalyProficiency: 120,
+        },
+        scenario: {
+          damageType: "anomaly",
+          skillTag: "basic",
+          damageMultiplier: "500%",
+          attribute: "以太",
+          enemy: {
+            defenderBaseDefense: 953,
+            defenderResistance: 0.2,
+          },
+        },
+      }),
+    ).rejects.toThrow(/does not support damageType=anomaly/)
+  })
 })

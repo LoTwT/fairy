@@ -41,6 +41,13 @@ export const staticBuildProfiles = {
     resolveBaseDamageValue: ({ panel }) => panel.attack,
     baseDamageStat: "attack",
   },
+  "standard-disorder": {
+    id: "standard-disorder",
+    name: "Standard Disorder Profile",
+    supportsDamageType: (damageType: string) => damageType === "disorder",
+    resolveBaseDamageValue: ({ panel }) => panel.attack,
+    baseDamageStat: "attack",
+  },
   "yixuan-sheer": {
     id: "yixuan-sheer",
     name: "Yixuan Sheer Profile",

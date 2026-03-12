@@ -1,6 +1,8 @@
 import type {
   AnomalyDamageParams,
+  AnomalyType,
   DamageResult,
+  DisorderDamageParams,
   NormalDamageParams,
   SheerDamageParams,
 } from "../calculator/types.js"
@@ -12,7 +14,7 @@ import type {
 
 export type StaticBuildMode = "baseline" | "full-buff" | "manual"
 export type StaticBuildBaseMode = Exclude<StaticBuildMode, "manual">
-export type StaticBuildDamageType = "normal" | "sheer" | "anomaly"
+export type StaticBuildDamageType = "normal" | "sheer" | "anomaly" | "disorder"
 
 export type StaticBuildSkillTag =
   | "basic"
@@ -137,10 +139,18 @@ export interface StaticBuildAnomalyScenarioInput extends StaticBuildScenarioBase
   damageMultiplier: number | string
 }
 
+export interface StaticBuildDisorderScenarioInput extends StaticBuildScenarioBaseInput {
+  damageType: "disorder"
+  skillTag: StaticBuildSkillTag
+  anomalyType: AnomalyType
+  remainingTime: number
+}
+
 export type StaticBuildScenarioInput =
   | StaticBuildNormalScenarioInput
   | StaticBuildSheerScenarioInput
   | StaticBuildAnomalyScenarioInput
+  | StaticBuildDisorderScenarioInput
 
 export interface StaticBuildEffectOverride {
   effectId: string
@@ -194,6 +204,7 @@ export type StaticBuildProfileId =
   | "standard-normal"
   | "standard-sheer"
   | "standard-anomaly"
+  | "standard-disorder"
   | "yixuan-sheer"
 
 export interface StaticBuildEffectCondition {
@@ -314,7 +325,11 @@ export interface ResolveStaticBuildResult {
   loadout: StaticBuildResolvedLoadout
   resolvedPanel: StaticBuildResolvedPanel
   resolvedBuckets: StaticBuildResolvedBuckets
-  damageParams: NormalDamageParams | SheerDamageParams | AnomalyDamageParams
+  damageParams:
+    | NormalDamageParams
+    | SheerDamageParams
+    | AnomalyDamageParams
+    | DisorderDamageParams
   damage: {
     expected: DamageResult
     crit: DamageResult

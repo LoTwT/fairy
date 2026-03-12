@@ -10,8 +10,8 @@
 ## 当前状态
 
 - `V3.1 anomaly` 已实现到单次 `resolveStaticBuildDamage`
+- `V3.2 disorder` 已实现到单次 `resolveStaticBuildDamage`
 - `resolveStaticBuildSkillMatrix` 仍只支持 `normal / sheer`
-- `V3.2 disorder` 尚未开始
 
 ## 1. V3 目标
 

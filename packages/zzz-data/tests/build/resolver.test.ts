@@ -743,4 +743,67 @@ describe("static build resolver", () => {
       ),
     ).toBe(true)
   })
+
+  it("resolves disorder damage for anomaly agents", () => {
+    const result = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1181",
+        wEngineId: "14118",
+        driveDiscSets: [{ id: "31300", pieces: 2 }],
+        agentLevel: 60,
+        wEngineRefinement: 1,
+      },
+      panel: {
+        attack: 3000,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 120,
+      },
+      scenario: {
+        damageType: "disorder",
+        skillTag: "enhancedSpecial",
+        anomalyType: "electric",
+        remainingTime: 5,
+        attribute: "电属性",
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.profile.id).toBe("standard-disorder")
+    expect(result.damageParams.anomalyType).toBe("electric")
+    expect(result.damageParams.remainingTime).toBe(5)
+    expect(result.resolvedPanel.anomalyProficiency).toBeCloseTo(225, 4)
+    expect(result.damage.expected.total).toBeGreaterThan(0)
+  })
+
+  it("rejects anomaly damage types for non-anomaly specialties", () => {
+    expect(() =>
+      resolveStaticBuildDamage({
+        loadout: {
+          agentId: "1241",
+        },
+        panel: {
+          attack: 3200,
+          critRate: 0.55,
+          critDamage: 1.4,
+          anomalyProficiency: 120,
+        },
+        scenario: {
+          damageType: "anomaly",
+          skillTag: "basic",
+          damageMultiplier: "500%",
+          attribute: "以太",
+          enemy: {
+            defenderBaseDefense: 953,
+            defenderResistance: 0.2,
+          },
+        },
+      }),
+    ).toThrow(/does not support damageType=anomaly/)
+  })
 })

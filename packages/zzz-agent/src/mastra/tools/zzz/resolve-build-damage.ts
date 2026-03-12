@@ -1,4 +1,4 @@
-import type { AgentAttributeLabel } from "zzz-data"
+import type { AgentAttributeLabel, AnomalyType } from "zzz-data"
 import { createTool } from "@mastra/core/tools"
 import { z } from "zod"
 import {
@@ -94,10 +94,55 @@ function findCatalogCandidates<T extends CatalogItem>(
     .map((item) => item.item)
 }
 
+function normalizeAnomalyType(value: string): AnomalyType | undefined {
+  const normalized = normalizeCatalogValue(value)
+  switch (normalized) {
+    case "fire":
+    case "火":
+    case "火属性":
+    case "burn":
+    case "灼烧":
+      return "fire"
+    case "electric":
+    case "电":
+    case "电属性":
+    case "shock":
+    case "感电":
+      return "electric"
+    case "ether":
+    case "以太":
+    case "以太属性":
+    case "corruption":
+    case "侵蚀":
+      return "ether"
+    case "ice":
+    case "冰":
+    case "冰属性":
+    case "freeze":
+    case "冻结":
+      return "ice"
+    case "physical":
+    case "物理":
+    case "物理属性":
+    case "assault":
+    case "强击":
+      return "physical"
+    case "auricink":
+    case "auric":
+    case "玄墨":
+      return "auricInk"
+    case "frost":
+    case "烈霜":
+      return "frost"
+    default:
+      return undefined
+  }
+}
+
 export const resolveBuildDamage = createTool({
   id: "resolve-build-damage",
   description:
-    "基于 zzz-data 的静态构筑解析器直接计算伤害。当前支持全部强攻/命破/异常代理人，以及对应特性的强攻/命破/异常音擎；异常代理人当前仅支持单次 resolver，不支持 skill matrix。",
+    "基于 zzz-data 的静态构筑解析器直接计算伤害。当前支持全部强攻/命破/异常代理人，以及对应特性的强攻/命破/异常音擎；异常代理人当前支持 anomaly / disorder 单次 resolver，不支持 skill matrix。",
   inputSchema: z.object({
     agent: z.string().describe("代理人名称或 ID"),
     wEngine: z.string().optional().describe("音擎名称或 ID"),
@@ -224,6 +269,38 @@ export const resolveBuildDamage = createTool({
           specialMultiplier: z.number().optional().default(1),
         }),
       }),
+      z.object({
+        damageType: z.literal("disorder"),
+        skillTag: z.enum([
+          "basic",
+          "dash",
+          "special",
+          "enhancedSpecial",
+          "chain",
+          "ultimate",
+          "assist",
+        ]),
+        anomalyType: z.string(),
+        remainingTime: z.number().min(0),
+        attribute: z.string().optional(),
+        extraAbilityActive: z.boolean().optional(),
+        combatTags: z.array(z.string()).optional(),
+        enemy: z.object({
+          attackerLevel: z.number().optional().default(60),
+          defenderBaseDefense: z.number(),
+          defenderResistance: z.number(),
+          defenseBonus: z.number().optional().default(0),
+          defenseReduction: z.number().optional().default(0),
+          resistanceReduction: z.number().optional().default(0),
+          ignoreResistance: z.number().optional().default(0),
+          vulnerabilityBonus: z.number().optional().default(0),
+          damageReduction: z.number().optional().default(0),
+          isStunned: z.boolean().optional().default(false),
+          stunVulnerability: z.number().optional().default(0),
+          nonStunVulnerability: z.number().optional().default(0),
+          specialMultiplier: z.number().optional().default(1),
+        }),
+      }),
     ]),
     effectOverrides: z
       .array(
@@ -301,6 +378,50 @@ export const resolveBuildDamage = createTool({
         }
       }
       driveDiscSets.push({ id: disc.id, pieces: discInput.pieces })
+    }
+
+    if (input.scenario.damageType === "disorder") {
+      const anomalyType = normalizeAnomalyType(input.scenario.anomalyType)
+      if (!anomalyType) {
+        return {
+          found: false,
+          message: `当前 resolver 无法识别异常类型「${input.scenario.anomalyType}」`,
+          supportedAnomalyTypes: [
+            "fire",
+            "electric",
+            "ether",
+            "ice",
+            "physical",
+            "auricInk",
+            "frost",
+          ],
+        }
+      }
+
+      return {
+        found: true,
+        build: resolveStaticBuildDamage({
+          mode: input.mode,
+          manualBaseMode: input.manualBaseMode,
+          loadout: {
+            agentId: agent.id,
+            wEngineId: wEngine?.id,
+            driveDiscSets,
+            agentLevel: input.agentLevel,
+            coreSkillLevel: input.coreSkillLevel,
+            wEngineRefinement: input.wEngineRefinement,
+          },
+          panel: input.finalPanel,
+          scenario: {
+            ...input.scenario,
+            anomalyType,
+            attribute: input.scenario.attribute as
+              | AgentAttributeLabel
+              | undefined,
+          },
+          effectOverrides: input.effectOverrides,
+        }),
+      }
     }
 
     return {

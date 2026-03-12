@@ -50,8 +50,8 @@
 
 - `V2.1 curated coverage` 已完成
 - `V2.2 matrix metadata refinement` 已完成
-- `V3 anomaly / disorder` 已开始
-- 当前子阶段：`V3.1 anomaly` 已实现单次 resolver，`V3.2 disorder` 尚未开始
+- `V3 anomaly / disorder` 已完成单次 resolver 主线
+- 当前边界：`resolveStaticBuildSkillMatrix` 仍只支持 `normal / sheer`
 
 ## 2. 阶段划分
 
@@ -61,7 +61,7 @@
 2. `V2.2 matrix metadata refinement`
 3. `V3 anomaly / disorder`
 
-当前前两阶段已完成。除非用户显式改变优先级，否则下一步直接进入 `V3`，不要再回到 catalog 扩展或 metadata 微调。
+当前前三阶段的主线都已完成。除非用户显式改变优先级，否则下一步不再扩大 contract，而是优先补 anomaly / disorder 的 curated coverage。
 
 ## 3. V2.1：Curated Coverage
 
@@ -244,7 +244,10 @@
 1. `V3.1 anomaly`
 2. `V3.2 disorder`
 
-共享同一份 V3 contract，但实现顺序必须先 `anomaly` 再 `disorder`。
+共享同一份 V3 contract，并已按顺序完成：
+
+- `V3.1 anomaly`：已完成单次 resolver
+- `V3.2 disorder`：已完成单次 resolver
 
 ### 5.4 进入条件
 
@@ -254,6 +257,20 @@
 2. curated coverage 已达到可用水平
 3. matrix metadata 足够稳定
 4. 已冻结 anomaly / disorder 的输入输出 contract
+
+### 5.5 当前收口状态
+
+当前 V3 主线已完成：
+
+- `resolveStaticBuildDamage` 已支持 `normal / sheer / anomaly / disorder`
+- `resolveStaticBuildSkillMatrix` 仍只支持 `normal / sheer`
+- 异常 / 紊乱仍使用单代理人静态快照，不做动态积蓄模拟
+
+若继续往下做，优先级应为：
+
+1. anomaly / disorder 的 curated effect coverage
+2. 更精细的 anomalyType / disorder source assumptions
+3. 仅在明确需要时再讨论异常 / 紊乱矩阵
 
 当前状态：已满足，V3 contract freeze 已开始。
 

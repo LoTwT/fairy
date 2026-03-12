@@ -12,6 +12,9 @@ import {
   calcAnomalyDamage,
   calcAnomalyDamageCrit,
   calcAnomalyDamageNoCrit,
+  calcDisorderDamage,
+  calcDisorderDamageCrit,
+  calcDisorderDamageNoCrit,
   calcNormalDamage,
   calcNormalDamageCrit,
   calcNormalDamageNoCrit,
@@ -338,7 +341,22 @@ export function resolveStaticBuildDamage(
     }
   })
 
-  const profile = getStaticBuildProfile(agent.profileId)
+  if (
+    (input.scenario.damageType === "anomaly" ||
+      input.scenario.damageType === "disorder") &&
+    agent.specialty !== "Anomaly"
+  ) {
+    throw new RangeError(
+      `${agent.name} specialty=${agent.specialty} does not support damageType=${input.scenario.damageType}`,
+    )
+  }
+
+  const profileId =
+    input.scenario.damageType === "disorder" && agent.specialty === "Anomaly"
+      ? "standard-disorder"
+      : agent.profileId
+
+  const profile = getStaticBuildProfile(profileId)
   if (!profile.supportsDamageType(input.scenario.damageType)) {
     throw new RangeError(
       `${agent.name} profile does not support damageType=${input.scenario.damageType}`,
@@ -511,7 +529,9 @@ export function resolveStaticBuildDamage(
   const parsedDamageMultiplier =
     input.scenario.damageType === "anomaly"
       ? parseSkillMultiplier(input.scenario.damageMultiplier)
-      : parseSkillMultiplier(input.scenario.skillMultiplier)
+      : input.scenario.damageType === "disorder"
+        ? 1
+        : parseSkillMultiplier(input.scenario.skillMultiplier)
   const enemy = input.scenario.enemy
   const baseDamage =
     baseDamageValue *
@@ -653,6 +673,78 @@ export function resolveStaticBuildDamage(
         expected: calcAnomalyDamage(damageParams),
         crit: calcAnomalyDamageCrit(damageParams),
         noCrit: calcAnomalyDamageNoCrit(damageParams),
+      },
+      trace,
+      assumptions,
+      unsupportedEffects,
+    }
+  }
+
+  if (input.scenario.damageType === "disorder") {
+    const damageParams = {
+      virtualAgentLevel: resolvedPanel.agentLevel,
+      virtualAgentAttack: resolvedPanel.attack,
+      virtualAgentAnomalyProficiency: resolvedPanel.anomalyProficiency,
+      bonusDamageSum: resolvedBuckets.bonusDamageSum,
+      defense: {
+        attackerLevelBase: getAttackerLevelBase(enemy.attackerLevel ?? 60),
+        defenderBaseDefense: enemy.defenderBaseDefense,
+        defenseBonus: enemy.defenseBonus ?? 0,
+        defenseReduction: enemy.defenseReduction ?? 0,
+        penetrationRate: resolvedPanel.penetrationRate,
+        penetrationValue: resolvedPanel.penetrationValue,
+      },
+      resistance: {
+        defenderResistance: enemy.defenderResistance,
+        resistanceReduction:
+          (enemy.resistanceReduction ?? 0) +
+          resolvedBuckets.resistanceReduction,
+        ignoreResistance:
+          (enemy.ignoreResistance ?? 0) + resolvedBuckets.ignoreResistance,
+      },
+      vulnerability: {
+        vulnerabilityBonus:
+          (enemy.vulnerabilityBonus ?? 0) + resolvedBuckets.vulnerabilityBonus,
+        damageReduction:
+          (enemy.damageReduction ?? 0) + resolvedBuckets.damageReduction,
+      },
+      dazeVulnerability: {
+        isStunned,
+        stunVulnerability:
+          (enemy.stunVulnerability ?? 0) + resolvedBuckets.stunVulnerability,
+        nonStunVulnerability:
+          (enemy.nonStunVulnerability ?? 0) +
+          resolvedBuckets.nonStunVulnerability,
+      },
+      anomalyBonusDamageSum: resolvedBuckets.anomalyBonusDamageSum,
+      anomalyCritRate: resolvedPanel.anomalyCritRate,
+      anomalyCritDamage: resolvedPanel.anomalyCritDamage,
+      anomalyType: input.scenario.anomalyType,
+      remainingTime: input.scenario.remainingTime,
+    }
+
+    return {
+      profile: {
+        id: profile.id,
+        name: profile.name,
+      },
+      mode,
+      manualBaseMode: input.mode === "manual" ? baseMode : undefined,
+      loadout: {
+        agent,
+        wEngine,
+        driveDiscSets,
+        agentLevel: resolvedAgentLevel,
+        coreSkillLevel: valueContext.coreSkillLevel,
+        wEngineRefinement: valueContext.wEngineRefinement,
+      },
+      resolvedPanel,
+      resolvedBuckets,
+      damageParams,
+      damage: {
+        expected: calcDisorderDamage(damageParams),
+        crit: calcDisorderDamageCrit(damageParams),
+        noCrit: calcDisorderDamageNoCrit(damageParams),
       },
       trace,
       assumptions,
