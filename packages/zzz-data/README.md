@@ -60,8 +60,8 @@ import {
 
 当前实现范围：
 
-- 单次 resolver：发布数据中的全部强攻 / 命破 / 异常代理人（当前 `28` 名），支持 `normal / sheer / anomaly / disorder`
-- 音擎：全部强攻 / 命破 / 异常音擎（当前 `46` 把，按 `w-engines.json` 动态生成，并要求与代理人 specialty 兼容）
+- 单次 resolver：发布数据中的全部强攻 / 命破 / 异常代理人，支持 `normal / sheer / anomaly / disorder`
+- 音擎：全部强攻 / 命破 / 异常音擎，按 `w-engines.json` 动态生成，并要求与代理人 specialty 兼容
 - 驱动盘：`炎狱重金属`、`雷暴重金属`、`极地重金属`、`啄木鸟电音`、`河豚电音`、`云岿如我`、`自由蓝调`、`混沌重金属`、`混沌爵士`
 - effect definitions：仍以 curated 数据为主；未覆盖的代理人 / 音擎 / 驱动盘会在 `assumptions` 中显式提示
 - anomaly / disorder 的直接 curated coverage 已覆盖：

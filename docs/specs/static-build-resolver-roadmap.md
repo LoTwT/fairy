@@ -429,5 +429,6 @@ resolver 主线完成后，文档维护需要单独列为持续事项，避免�
 1. [dependencies.md](./../dependencies.md) 保持 monorepo 级依赖说明，不再退回到仅覆盖 `packages/zzz-data`
 2. `docs/index.md` / `README.md` / 各阶段规格文档在每轮功能收口后同步更新
 3. 若后续新增 build layer 目录、脚本或 profile，必须同步更新 [architecture.md](./../architecture.md)
+4. 动态 catalog 覆盖范围优先写成“全部兼容对象”而不是硬编码数量；若文档必须列举数量，必须在同一轮实现收口时同步校准
 
 这部分不单独形成新公式阶段，但必须作为每轮迭代的收尾检查项。
