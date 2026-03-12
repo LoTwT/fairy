@@ -42,6 +42,15 @@ describe("resolveBuildSourceDamageViews tool", () => {
       supported: true,
       resolutionMode: "standalone",
     })
+    expect(
+      (result as any).views.entries[0].sourceNotes.some(
+        (note: any) =>
+          note.owner === "stateSnapshot" &&
+          note.keys.includes(
+            "scenario.stateSnapshot.values.alicePolarityAssaultDamageRatio",
+          ),
+      ),
+    ).toBe(true)
     expect((result as any).views.entries[0].damage.expected).toBeGreaterThan(0)
   })
 
@@ -134,5 +143,14 @@ describe("resolveBuildSourceDamageViews tool", () => {
       supported: true,
       resolutionMode: "delta",
     })
+    expect(
+      (result as any).views.entries[0].sourceNotes.some(
+        (note: any) =>
+          note.owner === "dynamicSnapshot" &&
+          note.keys.includes(
+            "scenario.dynamicSnapshot.values.ariaExflowDamageRatio",
+          ),
+      ),
+    ).toBe(true)
   })
 })

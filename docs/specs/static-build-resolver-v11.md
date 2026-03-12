@@ -98,4 +98,13 @@
 
 - `V11.1` 已完成：scope freeze
 - `V11.2` 已完成：`ResolveStaticBuildResult` 已新增结构化 `sourceNotes`
-- `V11.3` 未开始
+- `V11.3` 已完成：source view 与 `zzz-agent` 已优先消费结构化 `sourceNotes`
+
+## 8. 当前结论
+
+`V11` 已在当前 contract 下收口：
+
+1. `resolveStaticBuildDamage` 已输出结构化 `sourceNotes`
+2. `resolveStaticBuildSourceDamageViews` 的条目也已携带 `sourceNotes`
+3. `zzz-agent` prompt 已明确要求优先消费 `sourceNotes`，只在缺失时回退 `assumptions`
+4. 旧的 `assumptions: string[]` 仍保留，现有调用方不需要立即迁移

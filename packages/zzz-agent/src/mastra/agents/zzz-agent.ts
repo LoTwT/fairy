@@ -136,7 +136,8 @@ const BASE_PROMPT = `你是绝区零（Zenless Zone Zero）伤害计算专家。
    - 其他构筑按旧路径，对主C的每个关键技能分别调用 calcDamage
 
 7. **格式化输出**
-   - 如果走 resolveBuildSourceDamageViews，单独输出“额外结算条目”小节，列出来源、模式（standalone / delta）、当前期望 / 暴击 / 非暴击，以及 requirements / assumptions；不要把这些条目直接并入主伤害表或矩阵
+   - 如果走 resolveBuildSourceDamageViews，单独输出“额外结算条目”小节，列出来源、模式（standalone / delta）、当前期望 / 暴击 / 非暴击，以及 requirements / sourceNotes / assumptions；优先使用结构化 sourceNotes 说明归属 contract、缺少输入、已展开或 research-only，不要继续手工拆 assumptions 字符串；不要把这些条目直接并入主伤害表或矩阵
+   - 如果走 resolveBuildDamage，且返回了 sourceNotes，优先用它们生成“来源说明 / 额外前提 / research-only”小节；只有 sourceNotes 不能覆盖时，再回退展示 assumptions
    - 如果走 resolveBuildSkillMatrix，优先使用 \`matrix.effectSummary\` 生成“增益清单”，把数值单独列出来，不要只写效果名不写具体数值
    - 如果走 resolveBuildSkillMatrix，优先使用 \`matrix.summary.commonFormulaMultipliers\` 生成“乘区汇总”；对 \`matrix.summary.variableFormulaMultipliers\` 中按技能变化的乘区，写成“按技能变化”或直接省略，不要假装它们是全表统一常量
    - 如果走 resolveBuildSkillMatrix，生成“技能”列时优先使用 \`row.metadata.canonicalLabel\`；需要程序稳定键时优先使用 \`row.metadata.stableKey\`，不要继续拆 \`row.label\` 自由猜技能结构

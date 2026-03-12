@@ -43,6 +43,7 @@ it("keeps screenshot summary by default", async () => {
   expect(base.includes("matrix.effectSummary")).toBe(true)
   expect(base.includes("commonFormulaMultipliers")).toBe(true)
   expect(base.includes("额外结算条目")).toBe(true)
+  expect(base.includes("sourceNotes")).toBe(true)
   expect(base.includes("row.metadata.canonicalLabel")).toBe(true)
   expect(base.includes("row.metadata.stableKey")).toBe(true)
   expect(base.includes("如果只是判断当前 resolver 是否支持")).toBe(true)

@@ -194,7 +194,7 @@ packages/zzz-agent/
 - [`static-build-resolver-v8.md`](../docs/specs/static-build-resolver-v8.md) — 当前阶段范围：已完成 `V8.2` inventory 与 `V8.4` 前四批 source-note 收口，并在当前 contract 下收口；当前结论是不新增 public key
 - [`static-build-resolver-v9.md`](../docs/specs/static-build-resolver-v9.md) — 当前阶段范围：`V9.4` docs / tool integration 已完成；`zzz-agent` 已暴露 `resolve-build-source-damage-views` 高层 tool，并与主伤害 / matrix 路径分流
 - [`static-build-resolver-v10.md`](../docs/specs/static-build-resolver-v10.md) — 当前阶段范围：已收口；`爱芮 [异放]` 已通过独立 delta view 暴露，`霰落星殿` 与 `混沌重金属 4件` 固定为 research-only
-- [`static-build-resolver-v11.md`](../docs/specs/static-build-resolver-v11.md) — 当前阶段范围：已完成 `V11.2`，`ResolveStaticBuildResult` 已新增结构化 `sourceNotes`
+- [`static-build-resolver-v11.md`](../docs/specs/static-build-resolver-v11.md) — 当前阶段范围：已收口；主 resolver 与 source-specific damage view 都已新增结构化 `sourceNotes`
 
 ## 计算器模块（src/calculator/）
 

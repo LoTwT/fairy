@@ -14,6 +14,7 @@ import {
   getStaticBuildWEngine,
   supportedStaticBuildAgents,
 } from "./catalog.js"
+import { getStaticBuildSourceNoteEntries } from "./definitions.js"
 import { resolveStaticBuildDamage } from "./resolver.js"
 
 const sourceViewAgentIds = ["1091", "1171", "1401", "1501"] as const
@@ -126,11 +127,28 @@ function createEntryBase(
   >,
   requirements: StaticBuildSourceDamageViewRequirement[],
 ): StaticBuildSourceDamageViewEntry {
+  const sourceNotes = getStaticBuildSourceNoteEntries({
+    sourceType: entry.sourceType,
+    sourceId: entry.sourceId,
+    damageType: input.scenario.damageType,
+    agentMindscape: input.loadout.agentMindscape ?? 0,
+    energyGenerationRate: input.panel.energyGenerationRate,
+    anomalyMastery: input.panel.anomalyMastery,
+    dynamicSnapshot: input.scenario.dynamicSnapshot,
+    stateSnapshot: input.scenario.stateSnapshot,
+    resolvedSnapshot: input.scenario.resolvedSnapshot,
+    isStunned: input.scenario.enemy.isStunned,
+    disorderSourceType:
+      input.scenario.damageType === "disorder"
+        ? input.scenario.anomalyType
+        : undefined,
+  })
   return {
     ...entry,
     damageType: input.scenario.damageType,
     supported: requirements.every((item) => item.satisfied),
     requirements,
+    sourceNotes,
     assumptions: [],
   }
 }

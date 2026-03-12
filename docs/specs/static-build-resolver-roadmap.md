@@ -866,4 +866,4 @@ research-only，暂不进入实现：
 
 - `V11.1` 已完成
 - `V11.2` 已完成：resolver 已输出结构化 `sourceNotes`
-- `V11.3` 未开始
+- `V11.3` 已完成：source view 与 `zzz-agent` 已优先消费结构化 `sourceNotes`

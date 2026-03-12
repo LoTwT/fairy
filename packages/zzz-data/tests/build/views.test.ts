@@ -175,6 +175,16 @@ describe("static build source damage views", () => {
     expect(result.entries[0]?.id).toBe("burnice-ember")
     expect(result.entries[0]?.supported).toBe(true)
     expect(result.entries[0]?.resolutionMode).toBe("delta")
+    expect(
+      result.entries[0]?.sourceNotes.some(
+        (note) =>
+          note.owner === "dynamicSnapshot" &&
+          note.status === "resolved" &&
+          note.keys.includes(
+            "scenario.dynamicSnapshot.values.burniceEmberDamageRatio",
+          ),
+      ),
+    ).toBe(true)
     expect(result.entries[0]?.build).toBeUndefined()
     expect(result.entries[0]?.damage?.expected).toBeGreaterThan(0)
   })
@@ -217,6 +227,15 @@ describe("static build source damage views", () => {
     expect(result.entries[0]?.id).toBe("aria-exflow")
     expect(result.entries[0]?.supported).toBe(true)
     expect(result.entries[0]?.resolutionMode).toBe("delta")
+    expect(
+      result.entries[0]?.sourceNotes.some(
+        (note) =>
+          note.owner === "dynamicSnapshot" &&
+          note.keys.includes(
+            "scenario.dynamicSnapshot.values.ariaExflowDamageRatio",
+          ),
+      ),
+    ).toBe(true)
     expect(result.entries[0]?.damage?.expected).toBeGreaterThan(0)
   })
 

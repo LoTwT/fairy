@@ -26,4 +26,4 @@
 - [静态构筑解析系统 V8](./specs/static-build-resolver-v8.md) — 当前阶段：已完成 `V8.2` inventory 与 `V8.4` 前四批 source-note 收口，并在当前 contract 下收口；当前结论是不新增 public key
 - [静态构筑解析系统 V9](./specs/static-build-resolver-v9.md) — 当前阶段：`V9.4` docs / tool integration 已完成；`zzz-agent` 已暴露 `resolve-build-source-damage-views`，用于独立额外结算条目
 - [静态构筑解析系统 V10](./specs/static-build-resolver-v10.md) — 当前阶段：已收口；`爱芮 [异放]` 已进入 source-specific delta view，`霰落星殿` 与 `混沌重金属 4件` 固定为 research-only
-- [静态构筑解析系统 V11](./specs/static-build-resolver-v11.md) — 当前阶段：已完成 `V11.2`；`ResolveStaticBuildResult` 已新增结构化 `sourceNotes`
+- [静态构筑解析系统 V11](./specs/static-build-resolver-v11.md) — 当前阶段：已收口；主 resolver 与 source view 都已新增结构化 `sourceNotes`
