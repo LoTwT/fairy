@@ -76,7 +76,26 @@
 - anomaly / disorder skill matrix
   - 继续保持 out-of-scope
 
-## 6. 批次策略
+## 6. Inventory
+
+`V13.2` 的 inventory 固定如下：
+
+| Source   | 类型     | 当前暴露位置                               | 批次    | 备注                                                           |
+| -------- | -------- | ------------------------------------------ | ------- | -------------------------------------------------------------- |
+| 格莉丝   | agent    | `coverage-gap diagnostics` / `assumptions` | Batch A | 优先补稳定可表达的异常增伤、感电相关条件                       |
+| 简       | agent    | `coverage-gap diagnostics` / `assumptions` | Batch A | 与 `淬锋钳刺` 一起推进                                         |
+| 淬锋钳刺 | w-engine | `coverage-gap diagnostics` / `assumptions` | Batch A | 先补当前 contract 能直接表达的异常 / 紊乱增益                  |
+| 柳       | agent    | `coverage-gap diagnostics` / `assumptions` | Batch A | 与 `时流贤者` 一起推进                                         |
+| 时流贤者 | w-engine | `coverage-gap diagnostics` / `assumptions` | Batch A | 保持不能静态展开的部分继续走 `sourceNotes`                     |
+| 派派     | agent    | `coverage-gap diagnostics` / `assumptions` | Batch A | 与 `触电唇彩` 一起推进                                         |
+| 触电唇彩 | w-engine | `coverage-gap diagnostics` / `assumptions` | Batch A | 只补稳定条件，不扩大 contract                                  |
+| 柏妮思   | agent    | `coverage-gap diagnostics` / `assumptions` | Batch B | 继续与现有 `dynamicSnapshot` / `resolvedSnapshot` 边界保持一致 |
+| 灼心摇壶 | w-engine | `coverage-gap diagnostics` / `assumptions` | Batch B | 与柏妮思一起推进                                               |
+| 爱丽丝   | agent    | `coverage-gap diagnostics` / `assumptions` | Batch B | 与现有 `stateSnapshot` / `finalPanel.anomalyMastery` 规则配套  |
+| 爱芮     | agent    | `coverage-gap diagnostics` / `assumptions` | Batch B | 与 `壳中之灵` 一起推进                                         |
+| 壳中之灵 | w-engine | `coverage-gap diagnostics` / `assumptions` | Batch B | 继续与 `dynamicSnapshot` 规则配套                              |
+
+## 7. 批次策略
 
 ### 6.1 Batch A
 
@@ -100,7 +119,7 @@
 - `灼心摇壶`
 - `壳中之灵`
 
-## 7. 验收标准
+## 8. 验收标准
 
 `V13` 完成后，至少满足：
 
@@ -109,10 +128,10 @@
 3. 仍无法稳定静态表达的部分，继续通过 `sourceNotes / diagnostics` 明确暴露
 4. 不为了消灭 `coverage-gap` 而引入新的隐式默认值
 
-## 8. 当前状态
+## 9. 当前状态
 
 - `V13.1` 已完成：scope freeze
-- `V13.2` 未开始
+- `V13.2` 已完成：coverage inventory
 - `V13.3` 未开始
 - `V13.4` 未开始
 - `V13.5` 未开始

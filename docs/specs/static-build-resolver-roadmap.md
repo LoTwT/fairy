@@ -905,7 +905,7 @@ research-only，暂不进入实现：
 ### 18.3 当前状态
 
 - `V13.1` 已完成
-- `V13.2` 未开始
+- `V13.2` 已完成：剩余 anomaly/disorder coverage-gap 已按 source 和批次冻结
 - `V13.3` 未开始
 - `V13.4` 未开始
 - `V13.5` 未开始
