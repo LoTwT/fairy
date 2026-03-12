@@ -30,3 +30,4 @@
 - [静态构筑解析系统 V12](./specs/static-build-resolver-v12.md) — 当前阶段：已收口；主 resolver、source view 条目与 `zzz-agent` 已优先消费结构化 `diagnostics`
 - [静态构筑解析系统 V13](./specs/static-build-resolver-v13.md) — 当前阶段：已收口；anomaly / disorder 的高价值 curated coverage 已分 Batch A / Batch B 落地
 - [静态构筑解析系统 V14](./specs/static-build-resolver-v14.md) — 当前阶段：已收口；非代理人 source-specific damage view 候选已完成 inventory，并保持当前边界
+- [静态构筑解析系统 V15](./specs/static-build-resolver-v15.md) — 当前阶段：已完成 scope freeze；下一步把 `sourceNotes` 的解决路径提升成结构化 guidance

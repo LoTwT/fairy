@@ -965,3 +965,23 @@ Batch B：
 - `自由蓝调 4件`
 
 当前状态：已满足。`V14` 在当前 contract 下已收口，下一步进入 `V15`。
+
+## 20. V15 structured source-note guidance
+
+### 20.1 目标
+
+在不改主公式和不新增计算输入 key 的前提下，把 `sourceNotes` 的“下一步该怎么做”提升成结构化 guidance。
+
+### 20.2 范围
+
+1. `V15.1` scope freeze
+2. `V15.2` guidance taxonomy
+3. `V15.3` source note adoption
+4. `V15.4` closeout
+
+### 20.3 当前状态
+
+- `V15.1` 已完成：冻结到 `sourceNotes` guidance，不再继续扩大公式和 snapshot contract
+- `V15.2` 未开始
+- `V15.3` 未开始
+- `V15.4` 未开始
