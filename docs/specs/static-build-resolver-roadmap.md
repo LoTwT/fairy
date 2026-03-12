@@ -1108,3 +1108,63 @@ Batch B（已完成）：
 
 1. `V17` 目标已经完成，不再继续向这一阶段追加新的通用驱动盘批次
 2. `拂晓生花 / 流光咏叹 / 如影相随 / 沧浪行歌 / 囚徒手记` 中仍需过程表达的部分，已经固定为 source note，不再作为 generic coverage-gap
+
+## 23. V18 legacy attack signature closeout
+
+### 23.1 目标
+
+在不改主公式和不新增计算输入 key 的前提下，把最后一批 legacy 强攻代理人 / 专属音擎按当前 contract 能力做收口。
+
+### 23.2 范围
+
+1. `V18.1` scope freeze
+2. `V18.2` legacy attack signature inventory
+3. `V18.3` partial coverage + source-note batches
+4. `V18.4` closeout
+
+### 23.3 当前状态
+
+- `V18.1` 已完成：冻结到 legacy attack signature closeout，不继续扩大 contract
+- `V18.2` 已完成：inventory 与批次已冻结
+- `V18.3` 未开始
+- `V18.4` 未开始
+
+### 23.4 当前边界
+
+优先纳入：
+
+1. 作用于装备者自身、可直接映射到现有 bucket 的 legacy 强攻来源
+2. 可由现有 `skillTag` / `combatTags` / `enemy.isStunned` / `mode` 表达的条件
+
+显式保留为 source note：
+
+1. 姿态切换
+2. 距离判断
+3. 持续斩击 / 连续命中窗口
+4. 真动态的额外结算或追击次数
+5. 强依赖流程触发链的状态窗口
+
+### 23.5 当前批次规划
+
+Batch A：
+
+- `可琳`
+- `家政员`
+
+Batch B：
+
+- `比利`
+- `仿制星徽引擎`
+- `安东`
+- `旋钻机-赤轴`
+
+显式不纳入：
+
+- `「月相」-朔`
+- `「电磁暴」-叁式`
+
+结论：
+
+1. `V18` 目标是收口最后一批 legacy attack signatures，而不是继续扩大 attack 主线公式
+2. 可静态表达的部分做 curated / partial coverage
+3. 不适合静态表达的部分固定为 source note，不新增新的 public key
