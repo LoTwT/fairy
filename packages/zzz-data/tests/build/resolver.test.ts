@@ -1695,6 +1695,42 @@ describe("static build resolver", () => {
     expect(result.damage.expected.total).toBeGreaterThan(0)
   })
 
+  it("accepts V7 resolved snapshot contract without changing current resolver behavior", () => {
+    const result = resolveStaticBuildDamage({
+      mode: "baseline",
+      loadout: {
+        agentId: "1401",
+        agentLevel: 60,
+      },
+      panel: {
+        attack: 2800,
+        critRate: 0.4,
+        critDamage: 1.1,
+        anomalyProficiency: 180,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "special",
+        damageMultiplier: "500%",
+        attribute: "物理",
+        resolvedSnapshot: {
+          bucketDeltas: {
+            anomalyBonusDamageSum: 0.3,
+          },
+          multiplierFactors: {
+            skillMultiplierFactor: 1.8,
+          },
+        },
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.damage.expected.total).toBeGreaterThan(0)
+  })
+
   it("applies Alice polarity assault ratios from state snapshots to anomaly damage", () => {
     const result = resolveStaticBuildDamage({
       mode: "baseline",

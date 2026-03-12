@@ -90,6 +90,30 @@ const stateSnapshotSchema = z
   })
   .optional()
 
+const resolvedSnapshotSchema = z
+  .object({
+    bucketDeltas: z
+      .object({
+        bonusDamageSum: z.number().optional(),
+        defenseReduction: z.number().optional(),
+        penetrationRate: z.number().optional(),
+        resistanceReduction: z.number().optional(),
+        ignoreResistance: z.number().optional(),
+        sheerBonusSum: z.number().optional(),
+        anomalyProficiency: z.number().optional(),
+        anomalyBonusDamageSum: z.number().optional(),
+        anomalyCritRate: z.number().optional(),
+        anomalyCritDamage: z.number().optional(),
+      })
+      .optional(),
+    multiplierFactors: z
+      .object({
+        skillMultiplierFactor: z.number().min(0).optional(),
+      })
+      .optional(),
+  })
+  .optional()
+
 function normalizeCatalogValue(value: string) {
   return value.toLowerCase().replace(/[\s\-_·・.()（）【】[\]「」]/g, "")
 }
@@ -254,6 +278,7 @@ export const resolveBuildDamage = createTool({
         combatTags: z.array(z.string()).optional(),
         dynamicSnapshot: dynamicSnapshotSchema,
         stateSnapshot: stateSnapshotSchema,
+        resolvedSnapshot: resolvedSnapshotSchema,
         enemy: enemySchema,
       }),
       z.object({
@@ -265,6 +290,7 @@ export const resolveBuildDamage = createTool({
         combatTags: z.array(z.string()).optional(),
         dynamicSnapshot: dynamicSnapshotSchema,
         stateSnapshot: stateSnapshotSchema,
+        resolvedSnapshot: resolvedSnapshotSchema,
         enemy: enemySchema,
       }),
       z.object({
@@ -276,6 +302,7 @@ export const resolveBuildDamage = createTool({
         combatTags: z.array(z.string()).optional(),
         dynamicSnapshot: dynamicSnapshotSchema,
         stateSnapshot: stateSnapshotSchema,
+        resolvedSnapshot: resolvedSnapshotSchema,
         enemy: enemySchema,
       }),
       z.object({
@@ -288,6 +315,7 @@ export const resolveBuildDamage = createTool({
         combatTags: z.array(z.string()).optional(),
         dynamicSnapshot: dynamicSnapshotSchema,
         stateSnapshot: stateSnapshotSchema,
+        resolvedSnapshot: resolvedSnapshotSchema,
         enemy: enemySchema,
       }),
     ]),

@@ -1197,6 +1197,41 @@ describe("resolveBuildDamage tool", () => {
     expect((result as any).build.damage.expected.total).toBeGreaterThan(0)
   })
 
+  it("accepts V7 resolved snapshot fields through the high-level resolver", async () => {
+    const result = await runTool(resolveBuildDamage, {
+      agent: "爱丽丝",
+      mode: "baseline",
+      agentLevel: 60,
+      finalPanel: {
+        attack: 2800,
+        critRate: 0.4,
+        critDamage: 1.1,
+        anomalyProficiency: 180,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "special",
+        damageMultiplier: "500%",
+        attribute: "物理",
+        resolvedSnapshot: {
+          bucketDeltas: {
+            anomalyBonusDamageSum: 0.3,
+          },
+          multiplierFactors: {
+            skillMultiplierFactor: 1.8,
+          },
+        },
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    expect((result as any).build.damage.expected.total).toBeGreaterThan(0)
+  })
+
   it("supports Alice polarity assault state snapshots through the high-level resolver", async () => {
     const result = await runTool(resolveBuildDamage, {
       agent: "爱丽丝",

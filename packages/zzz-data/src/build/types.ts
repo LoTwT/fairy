@@ -88,6 +88,20 @@ export type StaticBuildStateValueKey =
   | "alicePolarityAssaultDamageRatio"
   | "miyabiFrostburnBreakDamageRatio"
 
+export type StaticBuildResolvedSnapshotBucketKey =
+  | "bonusDamageSum"
+  | "defenseReduction"
+  | "penetrationRate"
+  | "resistanceReduction"
+  | "ignoreResistance"
+  | "sheerBonusSum"
+  | "anomalyProficiency"
+  | "anomalyBonusDamageSum"
+  | "anomalyCritRate"
+  | "anomalyCritDamage"
+
+export type StaticBuildResolvedSnapshotMultiplierKey = "skillMultiplierFactor"
+
 export interface StaticBuildDynamicSnapshotInput {
   flags?: Partial<Record<StaticBuildDynamicFlagKey, boolean>>
   counts?: Partial<Record<StaticBuildDynamicCountKey, number>>
@@ -97,6 +111,13 @@ export interface StaticBuildDynamicSnapshotInput {
 export interface StaticBuildStateSnapshotInput {
   flags?: Partial<Record<StaticBuildStateFlagKey, boolean>>
   values?: Partial<Record<StaticBuildStateValueKey, number>>
+}
+
+export interface StaticBuildResolvedSnapshotInput {
+  bucketDeltas?: Partial<Record<StaticBuildResolvedSnapshotBucketKey, number>>
+  multiplierFactors?: Partial<
+    Record<StaticBuildResolvedSnapshotMultiplierKey, number>
+  >
 }
 
 export interface StaticBuildDriveDiscSetInput {
@@ -152,6 +173,7 @@ interface StaticBuildScenarioBaseInput {
   combatTags?: string[]
   dynamicSnapshot?: StaticBuildDynamicSnapshotInput
   stateSnapshot?: StaticBuildStateSnapshotInput
+  resolvedSnapshot?: StaticBuildResolvedSnapshotInput
   enemy: StaticBuildEnemyInput
 }
 

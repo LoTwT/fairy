@@ -65,7 +65,7 @@
 4. `V4 progression-aware resolver`
 5. `V5 source-aware dynamic snapshot context`
 
-当前下一主线切换为 `V6 source-state snapshot context`。
+当前下一主线切换为 `V7 resolved snapshot overrides`。
 
 ## 3. V2.1：Curated Coverage
 
@@ -649,3 +649,46 @@ resolver 主线完成后，文档维护需要单独列为持续事项，避免�
   - 可区分缺少 state flag、缺少 state value、已记录快照但当前公式仍未展开的动态机制
 
 下一步如果继续 `V6`，重点不再是首批 Alice / 雅 覆盖，而是决定是否扩更多 source-state key，或直接切到新阶段。
+
+## 12. V7 resolved snapshot overrides
+
+### 12.1 目标
+
+把 resolver 从“只理解 panel / effect definitions / dynamicSnapshot / stateSnapshot”推进到“还能消费上层已显式算好的最终 bucket 贡献”。
+
+这一阶段解决的问题是：
+
+- 某些来源的最终贡献已经明确
+- 但当前 contract 没有稳定入口
+- 用户只能继续改 `finalPanel`、`damageMultiplier` 或接受 assumptions
+
+### 12.2 范围
+
+`V7` 只做：
+
+1. `scenario.resolvedSnapshot`
+2. 受控的 `bucketDeltas`
+3. 受控的 `multiplierFactors`
+
+`V7` 不做：
+
+- 自由字符串 bucket 注入
+- skill matrix override
+- 时间轴 / 团队循环 / 资源过程模拟
+
+### 12.3 阶段顺序
+
+1. `V7.1` contract freeze
+2. `V7.2` resolver wiring
+3. `V7.3` source adoption
+
+### 12.4 当前状态
+
+当前 `V7.1 contract freeze` 已完成：
+
+- `scenario.resolvedSnapshot` 已进入 build public contract
+- `StaticBuildResolvedSnapshotBucketKey` 已冻结第一批受控 bucket key
+- `StaticBuildResolvedSnapshotMultiplierKey` 已冻结 `skillMultiplierFactor`
+- `resolve-build-damage` tool schema 已接受 `resolvedSnapshot`
+
+下一步进入 `V7.2`，把 `resolvedSnapshot` 接进 resolver。
