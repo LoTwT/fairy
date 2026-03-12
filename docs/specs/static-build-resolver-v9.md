@@ -27,7 +27,7 @@
 
 - `V9.1` scope freeze：已完成
 - `V9.2` view contract：已完成
-- `V9.3` first-batch source coverage：未开始
+- `V9.3` first-batch source coverage：已完成
 - `V9.4` docs / tool integration：未开始
 
 ## 1. 为什么需要 V9

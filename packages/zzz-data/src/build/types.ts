@@ -443,8 +443,14 @@ export interface StaticBuildSourceDamageViewEntry {
   sourceId: string
   damageType: StaticBuildDamageType
   supported: boolean
+  resolutionMode: "standalone" | "delta"
   requirements: StaticBuildSourceDamageViewRequirement[]
   assumptions: string[]
+  damage?: {
+    expected: number
+    crit: number
+    noCrit: number
+  }
   build?: ResolveStaticBuildResult
 }
 

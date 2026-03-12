@@ -123,6 +123,7 @@ packages/zzz-data/
 │   ├── profiles.ts         # 标准 normal / sheer / anomaly / disorder profile 与仪玄专用 sheer profile
 │   ├── resolver.ts         # finalPanel + scenario → damageParams / trace（含 disorder source / anomaly proficiency gating）
 │   ├── types.ts            # build layer 输入输出 contract（含 disorderSourceTypes / minimumResolvedAnomalyProficiency）
+│   ├── views.ts            # source-specific damage view（独立额外结算条目，不并入主 anomaly/disorder 公式）
 │   └── index.ts            # re-export
 ├── src/game-modes.ts        # 对外发布的游戏模式 JSON 类型（buffs / DA / SD / TS）+ raw category code contract
 ├── src/terms.ts             # canonical 术语层（raw label → 规范导出映射）
@@ -190,7 +191,7 @@ packages/zzz-agent/
 - [`static-build-resolver-v6.md`](../docs/specs/static-build-resolver-v6.md) — 当前阶段范围：已完成 `V6.3` 首批 `爱丽丝` / `雅` source-state snapshot coverage，并同步细化首批 state-aware assumptions
 - [`static-build-resolver-v7.md`](../docs/specs/static-build-resolver-v7.md) — 当前阶段范围：`V7.3` 前四批已完成，并在当前 contract 下收口；`柏妮思 M6` 的 `25% 火抗无视` 已接到 `scenario.resolvedSnapshot.bucketDeltas.ignoreResistance`，`格莉丝 M2`、`简`、`派派`、`时流贤者`、`柳 M2`、`薇薇安 M2` 的异常倍率折算已收口到 `scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor`
 - [`static-build-resolver-v8.md`](../docs/specs/static-build-resolver-v8.md) — 当前阶段范围：已完成 `V8.2` inventory 与 `V8.4` 前四批 source-note 收口，并在当前 contract 下收口；当前结论是不新增 public key
-- [`static-build-resolver-v9.md`](../docs/specs/static-build-resolver-v9.md) — 当前阶段范围：`V9.2` view contract 已完成；已新增 source-specific damage view 的 build-layer 类型与入口函数，下一步进入第一批来源覆盖
+- [`static-build-resolver-v9.md`](../docs/specs/static-build-resolver-v9.md) — 当前阶段范围：`V9.3` first-batch source coverage 已完成；`爱丽丝 [极性强击]`、`雅 [霜灼·破]`、`柏妮思 [余烬]` 已进入 source-specific damage view
 
 ## 计算器模块（src/calculator/）
 

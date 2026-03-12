@@ -1,15 +1,19 @@
 import type {
   ResolveStaticBuildInput,
+  ResolveStaticBuildResult,
   ResolveStaticBuildSourceDamageViewsResult,
   StaticBuildBaseMode,
   StaticBuildCatalogEntry,
   StaticBuildResolvedLoadout,
+  StaticBuildSourceDamageViewEntry,
+  StaticBuildSourceDamageViewRequirement,
 } from "./types.js"
 import {
   getStaticBuildAgent,
   getStaticBuildDriveDisc,
   getStaticBuildWEngine,
 } from "./catalog.js"
+import { resolveStaticBuildDamage } from "./resolver.js"
 
 function resolveBaseMode(input: ResolveStaticBuildInput): StaticBuildBaseMode {
   if (input.mode === "full-buff") return "full-buff"
@@ -66,13 +70,257 @@ export function resolveStaticBuildSourceDamageViews(
 ): ResolveStaticBuildSourceDamageViewsResult {
   const mode = input.mode ?? "baseline"
   const loadout = resolveLoadout(input)
+  const entries: StaticBuildSourceDamageViewEntry[] = []
+
+  if (input.loadout.agentId === "1401") {
+    entries.push(resolveAlicePolarityAssaultView(input))
+  }
+
+  if (input.loadout.agentId === "1091") {
+    entries.push(resolveMiyabiFrostburnBreakView(input))
+  }
+
+  if (input.loadout.agentId === "1171") {
+    entries.push(resolveBurniceEmberView(input))
+  }
 
   return {
     mode,
     manualBaseMode:
       input.mode === "manual" ? resolveBaseMode(input) : undefined,
     loadout,
-    entries: [],
+    entries,
     assumptions: [],
   }
+}
+
+function createRequirement(
+  kind: StaticBuildSourceDamageViewRequirement["kind"],
+  key: string,
+  satisfied: boolean,
+): StaticBuildSourceDamageViewRequirement {
+  return { kind, key, satisfied }
+}
+
+function createEntryBase(
+  input: ResolveStaticBuildInput,
+  entry: Pick<
+    StaticBuildSourceDamageViewEntry,
+    "id" | "label" | "sourceType" | "sourceId" | "resolutionMode"
+  >,
+  requirements: StaticBuildSourceDamageViewRequirement[],
+): StaticBuildSourceDamageViewEntry {
+  return {
+    ...entry,
+    damageType: input.scenario.damageType,
+    supported: requirements.every((item) => item.satisfied),
+    requirements,
+    assumptions: [],
+  }
+}
+
+function toEntryDamage(result: ResolveStaticBuildResult) {
+  return {
+    expected: result.damage.expected.total,
+    crit: result.damage.crit.total,
+    noCrit: result.damage.noCrit.total,
+  }
+}
+
+function withResolvedSkillMultiplierFactor(
+  input: ResolveStaticBuildInput,
+  factor: number,
+): ResolveStaticBuildInput {
+  const previous =
+    input.scenario.resolvedSnapshot?.multiplierFactors?.skillMultiplierFactor ??
+    1
+
+  return {
+    ...input,
+    scenario: {
+      ...input.scenario,
+      resolvedSnapshot: {
+        ...input.scenario.resolvedSnapshot,
+        multiplierFactors: {
+          ...input.scenario.resolvedSnapshot?.multiplierFactors,
+          skillMultiplierFactor: previous * factor,
+        },
+      },
+    },
+  }
+}
+
+function withoutBurniceEmberSnapshot(
+  input: ResolveStaticBuildInput,
+): ResolveStaticBuildInput {
+  const flags = { ...input.scenario.dynamicSnapshot?.flags }
+  const counts = { ...input.scenario.dynamicSnapshot?.counts }
+  const values = { ...input.scenario.dynamicSnapshot?.values }
+
+  delete flags.burniceEmberState
+  delete counts.burniceEmberExtraTriggers
+  delete values.burniceEmberDamageRatio
+
+  return {
+    ...input,
+    scenario: {
+      ...input.scenario,
+      dynamicSnapshot: {
+        ...input.scenario.dynamicSnapshot,
+        flags,
+        counts,
+        values,
+      },
+    },
+  }
+}
+
+function resolveAlicePolarityAssaultView(
+  input: ResolveStaticBuildInput,
+): StaticBuildSourceDamageViewEntry {
+  const requirements = [
+    createRequirement(
+      "state-flag",
+      "alicePolarityAssaultState",
+      input.scenario.stateSnapshot?.flags?.alicePolarityAssaultState === true,
+    ),
+    createRequirement(
+      "state-value",
+      "alicePolarityAssaultDamageRatio",
+      input.scenario.stateSnapshot?.values?.alicePolarityAssaultDamageRatio !==
+        undefined,
+    ),
+  ]
+  const entry = createEntryBase(
+    input,
+    {
+      id: "alice-polarity-assault",
+      label: "爱丽丝：[极性强击]",
+      sourceType: "agent",
+      sourceId: "1401",
+      resolutionMode: "standalone",
+    },
+    requirements,
+  )
+
+  if (!entry.supported) {
+    entry.assumptions.push(
+      "需要通过 scenario.stateSnapshot 显式提供 [极性强击] 的状态与倍率快照。",
+    )
+    return entry
+  }
+
+  const build = resolveStaticBuildDamage(input)
+  entry.build = build
+  entry.damage = toEntryDamage(build)
+  entry.assumptions.push(
+    "当前 view 直接复用主 resolver，并按 scenario.stateSnapshot 记录的 [极性强击] 倍率结算。",
+  )
+  return entry
+}
+
+function resolveMiyabiFrostburnBreakView(
+  input: ResolveStaticBuildInput,
+): StaticBuildSourceDamageViewEntry {
+  const ratio =
+    input.scenario.stateSnapshot?.values?.miyabiFrostburnBreakDamageRatio
+  const requirements = [
+    createRequirement(
+      "state-flag",
+      "miyabiFrostburnBreakState",
+      input.scenario.stateSnapshot?.flags?.miyabiFrostburnBreakState === true,
+    ),
+    createRequirement(
+      "state-value",
+      "miyabiFrostburnBreakDamageRatio",
+      ratio !== undefined,
+    ),
+  ]
+  const entry = createEntryBase(
+    input,
+    {
+      id: "miyabi-frostburn-break",
+      label: "雅：[霜灼·破]",
+      sourceType: "agent",
+      sourceId: "1091",
+      resolutionMode: "standalone",
+    },
+    requirements,
+  )
+
+  if (!entry.supported || ratio === undefined) {
+    entry.assumptions.push(
+      "需要通过 scenario.stateSnapshot 显式提供 [霜灼·破] 的状态与倍率快照。",
+    )
+    return entry
+  }
+
+  const build = resolveStaticBuildDamage(
+    withResolvedSkillMultiplierFactor(input, ratio),
+  )
+  entry.build = build
+  entry.damage = toEntryDamage(build)
+  entry.assumptions.push(
+    "当前 view 以 scenario.stateSnapshot 的 [霜灼·破] 倍率快照驱动独立条目结算，不回写主公式。",
+  )
+  return entry
+}
+
+function resolveBurniceEmberView(
+  input: ResolveStaticBuildInput,
+): StaticBuildSourceDamageViewEntry {
+  const requirements = [
+    createRequirement(
+      "dynamic-flag",
+      "burniceEmberState",
+      input.scenario.dynamicSnapshot?.flags?.burniceEmberState === true,
+    ),
+    createRequirement(
+      "dynamic-count",
+      "burniceEmberExtraTriggers",
+      input.scenario.dynamicSnapshot?.counts?.burniceEmberExtraTriggers !==
+        undefined,
+    ),
+    createRequirement(
+      "dynamic-value",
+      "burniceEmberDamageRatio",
+      input.scenario.dynamicSnapshot?.values?.burniceEmberDamageRatio !==
+        undefined,
+    ),
+  ]
+  const entry = createEntryBase(
+    input,
+    {
+      id: "burnice-ember",
+      label: "柏妮思：[燃点]/[余烬]",
+      sourceType: "agent",
+      sourceId: "1171",
+      resolutionMode: "delta",
+    },
+    requirements,
+  )
+
+  if (!entry.supported) {
+    entry.assumptions.push(
+      "需要通过 scenario.dynamicSnapshot 显式提供 [燃点]/[余烬] 的状态、次数和倍率快照。",
+    )
+    return entry
+  }
+
+  const withSnapshot = resolveStaticBuildDamage(input)
+  const withoutSnapshot = resolveStaticBuildDamage(
+    withoutBurniceEmberSnapshot(input),
+  )
+  entry.damage = {
+    expected:
+      withSnapshot.damage.expected.total -
+      withoutSnapshot.damage.expected.total,
+    crit: withSnapshot.damage.crit.total - withoutSnapshot.damage.crit.total,
+    noCrit:
+      withSnapshot.damage.noCrit.total - withoutSnapshot.damage.noCrit.total,
+  }
+  entry.assumptions.push(
+    "当前 view 使用“含 [余烬] 快照结果 - 去除 [余烬] 快照结果”的差值，表达额外结算的静态贡献。",
+  )
+  return entry
 }

@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest"
 import { resolveStaticBuildSourceDamageViews } from "../../src"
 
 describe("static build source damage views", () => {
-  it("returns an empty view list for unsupported sources within the current stage", () => {
+  it("returns an empty view list when the current loadout has no source-specific view coverage", () => {
     const result = resolveStaticBuildSourceDamageViews({
       loadout: {
         agentId: "1241",
@@ -32,6 +32,141 @@ describe("static build source damage views", () => {
     expect(result.loadout.agent.name).toBe("朱鸢")
     expect(result.entries).toEqual([])
     expect(result.assumptions).toEqual([])
+  })
+
+  it("resolves Alice polarity assault as a standalone source-specific view", () => {
+    const result = resolveStaticBuildSourceDamageViews({
+      mode: "baseline",
+      loadout: {
+        agentId: "1401",
+        agentLevel: 60,
+      },
+      panel: {
+        attack: 2800,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 200,
+        anomalyMastery: 180,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "enhancedSpecial",
+        damageMultiplier: "500%",
+        attribute: "物理",
+        stateSnapshot: {
+          flags: {
+            alicePolarityAssaultState: true,
+          },
+          values: {
+            alicePolarityAssaultDamageRatio: 2.5,
+          },
+        },
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.entries).toHaveLength(1)
+    expect(result.entries[0]?.id).toBe("alice-polarity-assault")
+    expect(result.entries[0]?.supported).toBe(true)
+    expect(result.entries[0]?.resolutionMode).toBe("standalone")
+    expect(
+      result.entries[0]?.build?.resolvedBuckets.skillMultiplierFactor,
+    ).toBeCloseTo(2.5, 4)
+    expect(result.entries[0]?.damage?.expected).toBeGreaterThan(0)
+  })
+
+  it("resolves Miyabi frostburn break as a standalone source-specific view", () => {
+    const result = resolveStaticBuildSourceDamageViews({
+      mode: "baseline",
+      loadout: {
+        agentId: "1091",
+        wEngineId: "14109",
+        agentLevel: 60,
+      },
+      panel: {
+        attack: 2800,
+        critRate: 0.4,
+        critDamage: 1.1,
+        anomalyProficiency: 180,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "special",
+        damageMultiplier: "600%",
+        attribute: "烈霜",
+        stateSnapshot: {
+          flags: {
+            miyabiFrostburnBreakState: true,
+          },
+          values: {
+            miyabiFrostburnBreakDamageRatio: 7.5,
+          },
+        },
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.entries).toHaveLength(1)
+    expect(result.entries[0]?.id).toBe("miyabi-frostburn-break")
+    expect(result.entries[0]?.supported).toBe(true)
+    expect(result.entries[0]?.resolutionMode).toBe("standalone")
+    expect(result.entries[0]?.damage?.expected).toBeGreaterThan(0)
+    expect(
+      result.entries[0]?.assumptions.some((item) =>
+        item.includes("不回写主公式"),
+      ),
+    ).toBe(true)
+  })
+
+  it("resolves Burnice ember as a delta source-specific view", () => {
+    const result = resolveStaticBuildSourceDamageViews({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1171",
+        agentLevel: 60,
+      },
+      panel: {
+        attack: 3100,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 160,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "enhancedSpecial",
+        damageMultiplier: "520%",
+        attribute: "火属性",
+        dynamicSnapshot: {
+          flags: {
+            burniceEmberState: true,
+          },
+          counts: {
+            burniceEmberExtraTriggers: 2,
+          },
+          values: {
+            burniceEmberDamageRatio: 1.25,
+          },
+        },
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.entries).toHaveLength(1)
+    expect(result.entries[0]?.id).toBe("burnice-ember")
+    expect(result.entries[0]?.supported).toBe(true)
+    expect(result.entries[0]?.resolutionMode).toBe("delta")
+    expect(result.entries[0]?.build).toBeUndefined()
+    expect(result.entries[0]?.damage?.expected).toBeGreaterThan(0)
   })
 
   it("keeps specialty compatibility checks aligned with the main resolver", () => {

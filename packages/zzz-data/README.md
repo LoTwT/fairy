@@ -87,6 +87,11 @@ import {
 - 仍无法直接表达的剩余时间换算与随机增益，继续通过更细的 source-specific `assumptions` 明示
   - disorder 已支持按 `anomalyType` 区分原异常来源，并支持异常精通阈值类条件
 - 技能矩阵：当前仅支持 `normal / sheer`，即强攻 / 命破；高频代理人使用 curated 模板，其余强攻 / 命破代理人回退到通用矩阵生成
+- source-specific damage view：当前已支持：
+  - `爱丽丝 [极性强击]`
+  - `雅 [霜灼·破]`
+  - `柏妮思 [燃点]/[余烬]`
+  - 这类条目不会再继续并入主 anomaly / disorder 公式，而是通过独立 view 展示
 
 ```ts
 import { resolveStaticBuildDamage } from "zzz-data"
@@ -120,6 +125,46 @@ const result = resolveStaticBuildDamage({
     },
   },
 })
+```
+
+如果你需要拿到不应并入主 anomaly / disorder 公式的独立额外结算条目，可使用：
+
+```ts
+import { resolveStaticBuildSourceDamageViews } from "zzz-data"
+
+const views = resolveStaticBuildSourceDamageViews({
+  loadout: {
+    agentId: "1401",
+    agentLevel: 60,
+  },
+  panel: {
+    attack: 2800,
+    critRate: 0.2,
+    critDamage: 0.5,
+    anomalyProficiency: 200,
+    anomalyMastery: 180,
+  },
+  scenario: {
+    damageType: "anomaly",
+    skillTag: "enhancedSpecial",
+    damageMultiplier: "500%",
+    attribute: "物理",
+    stateSnapshot: {
+      flags: {
+        alicePolarityAssaultState: true,
+      },
+      values: {
+        alicePolarityAssaultDamageRatio: 2.5,
+      },
+    },
+    enemy: {
+      defenderBaseDefense: 953,
+      defenderResistance: 0.2,
+    },
+  },
+})
+
+views.entries[0]
 ```
 
 拿到结果后，通常直接消费这些字段：
