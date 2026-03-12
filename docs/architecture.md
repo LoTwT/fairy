@@ -196,7 +196,7 @@ packages/zzz-agent/
 - [`static-build-resolver-v10.md`](../docs/specs/static-build-resolver-v10.md) — 当前阶段范围：已收口；`爱芮 [异放]` 已通过独立 delta view 暴露，`霰落星殿` 与 `混沌重金属 4件` 固定为 research-only
 - [`static-build-resolver-v11.md`](../docs/specs/static-build-resolver-v11.md) — 当前阶段范围：已收口；主 resolver 与 source-specific damage view 都已新增结构化 `sourceNotes`
 - [`static-build-resolver-v12.md`](../docs/specs/static-build-resolver-v12.md) — 当前阶段范围：已收口；当前 `ResolveStaticBuildResult.diagnostics` 已覆盖 `defaulted-input` / `coverage-gap` / `unsupported-effect`，高层 resolver、source view 条目和 `zzz-agent` prompt 已优先消费该 contract
-- [`static-build-resolver-v13.md`](../docs/specs/static-build-resolver-v13.md) — 当前阶段范围：已完成 scope freeze 与 inventory；下一步进入 Batch A，补 anomaly / disorder 的高频 curated coverage
+- [`static-build-resolver-v13.md`](../docs/specs/static-build-resolver-v13.md) — 当前阶段范围：已收口；anomaly / disorder 的 Batch A / Batch B curated coverage 已落地，且未为消除 coverage-gap 新增 public key
 
 ## 计算器模块（src/calculator/）
 

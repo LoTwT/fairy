@@ -906,9 +906,9 @@ research-only，暂不进入实现：
 
 - `V13.1` 已完成
 - `V13.2` 已完成：剩余 anomaly/disorder coverage-gap 已按 source 和批次冻结
-- `V13.3` 未开始
-- `V13.4` 未开始
-- `V13.5` 未开始
+- `V13.3` 已完成：Batch A anomaly/disorder curated coverage 已落地
+- `V13.4` 已完成：Batch B anomaly/disorder curated coverage 已落地
+- `V13.5` 已完成：在当前 contract 下收口，不再新增 public key
 
 ### 18.4 当前批次规划
 
@@ -929,3 +929,5 @@ Batch B：
 - `爱芮`
 - `灼心摇壶`
 - `壳中之灵`
+
+当前状态：已满足。`V13` 在当前 contract 下已收口，下一步进入 `V14`。

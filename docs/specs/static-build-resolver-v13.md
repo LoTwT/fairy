@@ -132,6 +132,6 @@
 
 - `V13.1` 已完成：scope freeze
 - `V13.2` 已完成：coverage inventory
-- `V13.3` 未开始
-- `V13.4` 未开始
-- `V13.5` 未开始
+- `V13.3` 已完成：`格莉丝`、`简`、`柳`、`派派` 与 `淬锋钳刺`、`时流贤者`、`触电唇彩` 已补齐 anomaly / disorder curated coverage
+- `V13.4` 已完成：`柏妮思`、`爱丽丝`、`爱芮` 与 `灼心摇壶`、`壳中之灵` 已补齐 anomaly / disorder curated coverage
+- `V13.5` 已完成：在当前 contract 下收口，未再为消除 coverage-gap 新增 public key
