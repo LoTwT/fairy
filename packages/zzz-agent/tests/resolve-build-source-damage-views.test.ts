@@ -92,6 +92,47 @@ describe("resolveBuildSourceDamageViews tool", () => {
     })
 
     expect((result as any).found).toBe(false)
-    expect((result as any).supportedAgents).toEqual(["爱丽丝", "柏妮思", "雅"])
+    expect((result as any).supportedAgents).toEqual(
+      expect.arrayContaining(["爱丽丝", "柏妮思", "雅", "爱芮"]),
+    )
+  })
+
+  it("returns Aria exflow as a covered delta source view", async () => {
+    const result = await runTool(resolveBuildSourceDamageViews, {
+      agent: "爱芮",
+      mode: "full-buff",
+      finalPanel: {
+        attack: 2950,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 150,
+      },
+      scenario: {
+        damageType: "disorder",
+        skillTag: "enhancedSpecial",
+        anomalyType: "ether",
+        remainingTime: 5,
+        attribute: "以太",
+        dynamicSnapshot: {
+          values: {
+            ariaExflowDamageRatio: 0.45,
+            ariaStunnedDamageRatio: 0.2,
+          },
+        },
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+          isStunned: true,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    expect((result as any).views.entries[0]).toMatchObject({
+      id: "aria-exflow",
+      supported: true,
+      resolutionMode: "delta",
+    })
   })
 })

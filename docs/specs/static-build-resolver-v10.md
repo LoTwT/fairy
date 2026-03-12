@@ -42,6 +42,12 @@ research-only，暂不进入实现：
 2. `V10.2` Aria source view coverage
 3. `V10.3` closeout / note routing
 
+当前状态：
+
+- `V10.1` 已完成
+- `V10.2` 已完成：`爱芮 [异放]` 已进入 `source-specific damage view`
+- `V10.3` 未开始
+
 ## 6. 设计要点
 
 ### 6.1 Aria `[异放]`

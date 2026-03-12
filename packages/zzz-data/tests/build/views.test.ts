@@ -9,7 +9,8 @@ describe("static build source damage views", () => {
   it("exports the current source-view support scope", () => {
     expect(
       supportedStaticBuildSourceViewAgents.map((item) => item.name),
-    ).toEqual(["爱丽丝", "柏妮思", "雅"])
+    ).toEqual(expect.arrayContaining(["爱丽丝", "柏妮思", "雅", "爱芮"]))
+    expect(supportedStaticBuildSourceViewAgents).toHaveLength(4)
   })
 
   it("returns an empty view list when the current loadout has no source-specific view coverage", () => {
@@ -175,6 +176,47 @@ describe("static build source damage views", () => {
     expect(result.entries[0]?.supported).toBe(true)
     expect(result.entries[0]?.resolutionMode).toBe("delta")
     expect(result.entries[0]?.build).toBeUndefined()
+    expect(result.entries[0]?.damage?.expected).toBeGreaterThan(0)
+  })
+
+  it("resolves Aria exflow as a delta source-specific view", () => {
+    const result = resolveStaticBuildSourceDamageViews({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1501",
+        agentLevel: 60,
+      },
+      panel: {
+        attack: 2950,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 150,
+      },
+      scenario: {
+        damageType: "disorder",
+        skillTag: "enhancedSpecial",
+        anomalyType: "ether",
+        remainingTime: 5,
+        attribute: "以太",
+        dynamicSnapshot: {
+          values: {
+            ariaExflowDamageRatio: 0.45,
+            ariaStunnedDamageRatio: 0.2,
+          },
+        },
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+          isStunned: true,
+        },
+      },
+    })
+
+    expect(result.entries).toHaveLength(1)
+    expect(result.entries[0]?.id).toBe("aria-exflow")
+    expect(result.entries[0]?.supported).toBe(true)
+    expect(result.entries[0]?.resolutionMode).toBe("delta")
     expect(result.entries[0]?.damage?.expected).toBeGreaterThan(0)
   })
 

@@ -843,3 +843,9 @@ research-only，暂不进入实现：
 1. `V10.1` scope freeze
 2. `V10.2` Aria source view coverage
 3. `V10.3` closeout / note routing
+
+### 15.5 当前状态
+
+- `V10.1` 已完成
+- `V10.2` 已完成：`爱芮 [异放]` 已通过独立 delta view 暴露
+- `V10.3` 未开始

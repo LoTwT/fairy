@@ -16,7 +16,7 @@ import {
 } from "./catalog.js"
 import { resolveStaticBuildDamage } from "./resolver.js"
 
-const sourceViewAgentIds = ["1401", "1091", "1171"] as const
+const sourceViewAgentIds = ["1091", "1171", "1401", "1501"] as const
 const sourceViewAgentIdSet = new Set<string>(sourceViewAgentIds)
 
 export const supportedStaticBuildSourceViewAgents = supportedStaticBuildAgents
@@ -94,6 +94,10 @@ export function resolveStaticBuildSourceDamageViews(
 
   if (input.loadout.agentId === "1171") {
     entries.push(resolveBurniceEmberView(input))
+  }
+
+  if (input.loadout.agentId === "1501") {
+    entries.push(resolveAriaExflowView(input))
   }
 
   return {
@@ -333,6 +337,84 @@ function resolveBurniceEmberView(
   }
   entry.assumptions.push(
     "当前 view 使用“含 [余烬] 快照结果 - 去除 [余烬] 快照结果”的差值，表达额外结算的静态贡献。",
+  )
+  return entry
+}
+
+function withoutAriaExflowSnapshot(
+  input: ResolveStaticBuildInput,
+): ResolveStaticBuildInput {
+  const values = { ...input.scenario.dynamicSnapshot?.values }
+
+  delete values.ariaExflowDamageRatio
+  delete values.ariaStunnedDamageRatio
+
+  return {
+    ...input,
+    scenario: {
+      ...input.scenario,
+      dynamicSnapshot: {
+        ...input.scenario.dynamicSnapshot,
+        values,
+      },
+    },
+  }
+}
+
+function resolveAriaExflowView(
+  input: ResolveStaticBuildInput,
+): StaticBuildSourceDamageViewEntry {
+  const isStunned = input.scenario.enemy.isStunned === true
+  const requirements = [
+    createRequirement(
+      "dynamic-value",
+      "ariaExflowDamageRatio",
+      input.scenario.dynamicSnapshot?.values?.ariaExflowDamageRatio !==
+        undefined,
+    ),
+    createRequirement(
+      "dynamic-value",
+      "ariaStunnedDamageRatio",
+      !isStunned ||
+        input.scenario.dynamicSnapshot?.values?.ariaStunnedDamageRatio !==
+          undefined,
+    ),
+  ]
+  const entry = createEntryBase(
+    input,
+    {
+      id: "aria-exflow",
+      label: "爱芮：[异放]",
+      sourceType: "agent",
+      sourceId: "1501",
+      resolutionMode: "delta",
+    },
+    requirements,
+  )
+
+  if (!entry.supported) {
+    entry.assumptions.push(
+      isStunned
+        ? "目标处于失衡时，需要通过 scenario.dynamicSnapshot 显式提供 [异放] 基础倍率和失衡追加倍率快照。"
+        : "需要通过 scenario.dynamicSnapshot 显式提供 [异放] 基础倍率快照。",
+    )
+    return entry
+  }
+
+  const withSnapshot = resolveStaticBuildDamage(input)
+  const withoutSnapshot = resolveStaticBuildDamage(
+    withoutAriaExflowSnapshot(input),
+  )
+  entry.damage = {
+    expected:
+      withSnapshot.damage.expected.total -
+      withoutSnapshot.damage.expected.total,
+    crit: withSnapshot.damage.crit.total - withoutSnapshot.damage.crit.total,
+    noCrit:
+      withSnapshot.damage.noCrit.total - withoutSnapshot.damage.noCrit.total,
+  }
+  entry.assumptions.push(
+    "当前 view 使用“含 [异放] 快照结果 - 去除 [异放] 快照结果”的差值，表达额外结算的静态贡献。",
   )
   return entry
 }
