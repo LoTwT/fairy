@@ -211,10 +211,12 @@ export interface StaticBuildEffectCondition {
   damageTypes?: StaticBuildDamageType[]
   skillTags?: StaticBuildSkillTag[]
   attributes?: AgentAttribute[]
+  disorderSourceTypes?: AnomalyType[]
   requireExtraAbility?: boolean
   requireStunned?: boolean
   combatTags?: string[]
   minimumResolvedCritRate?: number
+  minimumResolvedAnomalyProficiency?: number
 }
 
 export interface StaticBuildValueContext {

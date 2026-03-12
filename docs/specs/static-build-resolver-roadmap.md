@@ -248,10 +248,14 @@
 
 - `V3.1 anomaly`：已完成单次 resolver
 - `V3.2 disorder`：已完成单次 resolver
-- `V3.3 curated effect coverage`：当前已完成第一批 anomaly / disorder 直接可表达效果
+- `V3.3 curated effect coverage`：已完成 anomaly / disorder 直接可表达效果首轮覆盖
   - 代理人：`格莉丝`、`柳`、`简`、`派派`、`薇薇安`、`爱芮`
   - 音擎：`壳中之灵`、`十方锻星`、`飞鸟星梦`、`淬锋钳刺`、`时流贤者`、`灼心摇壶`、`霰落星殿`、`触电唇彩`、`雨林饕客`
   - 驱动盘：`混沌爵士 4 件`
+- `V3.4 source-specific assumptions`：已完成 anomaly / disorder 的来源级限制说明与 disorder source 细化
+  - `disorderSourceTypes` 已用于区分如薇薇安的侵蚀来源紊乱增伤
+  - `minimumResolvedAnomalyProficiency` 已用于区分如时流贤者的异常精通阈值
+  - anomaly 代理人 / 音擎不再停留在泛化的“未收录 curated”，而是按来源输出更具体的 assumptions
 
 ### 5.4 进入条件
 
@@ -269,19 +273,19 @@
 - `resolveStaticBuildDamage` 已支持 `normal / sheer / anomaly / disorder`
 - `resolveStaticBuildSkillMatrix` 仍只支持 `normal / sheer`
 - 异常 / 紊乱仍使用单代理人静态快照，不做动态积蓄模拟
-- anomaly / disorder 已开始补 curated 直接效果，优先覆盖：
+- anomaly / disorder 已补齐当前 schema 下可直接表达的高价值效果，优先覆盖：
   - 异常精通
   - 异常暴击
   - 异常 / 紊乱增伤
   - 与异常目标相关的稳定增伤
+- 无法直接映射到当前公式的异常掌控换算、剩余时间换算、随机增益和独立异常槽机制，已从泛化 assumptions 收敛为 source-specific assumptions
 
 若继续往下做，优先级应为：
 
-1. 更精细的 anomalyType / disorder source assumptions
-2. 把仍无法直接表达的异常机制从泛化 assumptions 收敛为 source-specific assumptions
-3. 仅在明确需要时再讨论异常 / 紊乱矩阵
+1. 仅在明确需要时再讨论异常 / 紊乱矩阵
+2. 若用户明确提出，再为 anomaly / disorder 引入更强的动态 value context，而不是默认扩大 contract
 
-当前状态：V3 主线已完成，当前处于 `V3.3 curated effect coverage`。
+当前状态：roadmap 内的既定阶段已完成。当前唯一保留的显式 out-of-scope 是异常 / 紊乱 skill matrix。
 
 ## 6. 明确不做
 

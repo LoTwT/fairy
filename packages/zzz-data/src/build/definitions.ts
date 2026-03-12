@@ -220,6 +220,7 @@ const practicedPerfectionPhysicalBonus = [0.2, 0.23, 0.26, 0.29, 0.32] as const
 const flightOfFancyAnomalyProficiency = [20, 23, 26, 29, 32] as const
 const sharpenedStingerPhysicalBonus = [0.12, 0.15, 0.18, 0.21, 0.24] as const
 const timeweaverAnomalyProficiency = [75, 85, 95, 105, 115] as const
+const timeweaverDisorderBonus = [0.25, 0.275, 0.3, 0.325, 0.35] as const
 const flamemakerBonus = [0.035, 0.044, 0.052, 0.061, 0.07] as const
 const hailstormFrostBonus = [0.2, 0.23, 0.26, 0.29, 0.32] as const
 const electroLipGlossAttackPercent = [0.1, 0.115, 0.13, 0.145, 0.16] as const
@@ -1110,6 +1111,26 @@ export const staticBuildEffectDefinitions = [
     ],
   },
   {
+    id: "vivian-extra-corruption-disorder-bonus",
+    sourceType: "agent",
+    sourceId: "1331",
+    sourceName: "薇薇安",
+    label: "额外能力：侵蚀来源紊乱伤害提升",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      requireExtraAbility: true,
+      damageTypes: ["disorder"],
+      disorderSourceTypes: ["ether"],
+    },
+    modifiers: [
+      {
+        bucket: "anomalyBonusDamageSum",
+        value: () => 0.12,
+      },
+    ],
+  },
+  {
     id: "aria-core-anomaly-proficiency",
     sourceType: "agent",
     sourceId: "1501",
@@ -1949,6 +1970,25 @@ export const staticBuildEffectDefinitions = [
     ],
   },
   {
+    id: "timeweaver-disorder-bonus",
+    sourceType: "w-engine",
+    sourceId: "14122",
+    sourceName: "时流贤者",
+    label: "音擎被动：异常精通达标后紊乱伤害提升",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      damageTypes: ["disorder"],
+      minimumResolvedAnomalyProficiency: 375,
+    },
+    modifiers: [
+      {
+        bucket: "anomalyBonusDamageSum",
+        value: byRefinement(timeweaverDisorderBonus),
+      },
+    ],
+  },
+  {
     id: "flamemaker-shaker-bonus",
     sourceType: "w-engine",
     sourceId: "14117",
@@ -2410,6 +2450,124 @@ export const staticBuildEffectDefinitions = [
   },
 ] as const satisfies StaticBuildEffectDefinition[]
 
+interface StaticBuildSourceNote {
+  sourceType: StaticBuildEffectDefinition["sourceType"]
+  sourceId: string
+  minimumPieces?: 2 | 4
+  damageTypes?: readonly ("normal" | "sheer" | "anomaly" | "disorder")[]
+  disorderSourceTypes?: readonly (
+    | "fire"
+    | "electric"
+    | "ether"
+    | "ice"
+    | "physical"
+    | "auricInk"
+    | "frost"
+  )[]
+  note: string
+}
+
+const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
+  {
+    sourceType: "agent",
+    sourceId: "1171",
+    damageTypes: ["anomaly", "disorder"],
+    note: "柏妮思的[燃点]/[余烬]触发链、灼烧持续时间与异常积蓄效率未在 static resolver 中展开；当前只消费显式 damageMultiplier、finalPanel 与已支持的公共增益。",
+  },
+  {
+    sourceType: "agent",
+    sourceId: "1181",
+    damageTypes: ["anomaly", "disorder"],
+    note: "格莉丝的[电能]层数与电属性异常积蓄效率未在 static resolver 中展开；若需要把该部分折算进异常倍率，请显式调整 scenario.damageMultiplier。",
+  },
+  {
+    sourceType: "agent",
+    sourceId: "1221",
+    damageTypes: ["anomaly", "disorder"],
+    note: "柳的[月相]架势切换后电异常积蓄效率未在 static resolver 中展开；若 disorder 触发前未满足[月蚀]条件，请关闭对应 combatTags。",
+  },
+  {
+    sourceType: "agent",
+    sourceId: "1261",
+    damageTypes: ["anomaly", "disorder"],
+    note: "简的每点异常精通追加异常暴击率、以及物理异常积蓄效率提升未自动折算；若需精细计算，请显式补充 anomalyCritRate 或自行调整 damageMultiplier。",
+  },
+  {
+    sourceType: "agent",
+    sourceId: "1281",
+    damageTypes: ["anomaly", "disorder"],
+    note: "派派的[动力]层数对应的物理异常积蓄效率未在 static resolver 中展开；当前只支持额外能力的全队增伤快照。",
+  },
+  {
+    sourceType: "agent",
+    sourceId: "1331",
+    damageTypes: ["anomaly", "disorder"],
+    note: "薇薇安的[异放]比例与[薇薇安的预言]追击伤害未在 static resolver 中展开；当前只支持额外能力的侵蚀/紊乱增伤。",
+  },
+  {
+    sourceType: "agent",
+    sourceId: "1401",
+    damageTypes: ["anomaly", "disorder"],
+    note: "爱丽丝的物理异常剩余时间换算紊乱倍率、异常掌控转异常精通与[极性强击]特例未在 static resolver 中展开。",
+  },
+  {
+    sourceType: "agent",
+    sourceId: "1501",
+    damageTypes: ["anomaly", "disorder"],
+    note: "爱芮的[异放]比例与失衡额外倍率未在 static resolver 中展开；当前只支持核心技的异常精通加成。",
+  },
+  {
+    sourceType: "agent",
+    sourceId: "1091",
+    damageTypes: ["anomaly", "disorder"],
+    note: "雅的独立烈霜异常槽、[霜灼·破]与[霜灼]累积加成未在 static resolver 中展开。",
+  },
+  {
+    sourceType: "w-engine",
+    sourceId: "14117",
+    damageTypes: ["anomaly", "disorder"],
+    note: "灼心摇壶的≥5层额外异常精通阈值未自动展开；如需该部分，请在 finalPanel.anomalyProficiency 中手动加入。",
+  },
+  {
+    sourceType: "w-engine",
+    sourceId: "14122",
+    damageTypes: ["anomaly", "disorder"],
+    note: "时流贤者的电属性异常积蓄效率未在 static resolver 中展开；当前只展开异常目标异常精通与异常精通达标后的紊乱增伤。",
+  },
+  {
+    sourceType: "w-engine",
+    sourceId: "14109",
+    damageTypes: ["anomaly", "disorder"],
+    note: "霰落星殿的暴击伤害被动不进入 anomaly/disorder 公式；当前只展开烈霜伤害层数。",
+  },
+  {
+    sourceType: "w-engine",
+    sourceId: "13128",
+    damageTypes: ["anomaly", "disorder"],
+    note: "轰鸣座驾的随机三选一增益未在 static resolver 中确定展开；请通过 finalPanel 或 manual override 手动折算。",
+  },
+  {
+    sourceType: "w-engine",
+    sourceId: "14140",
+    damageTypes: ["anomaly", "disorder"],
+    note: "十方锻星的异常掌控提升与[强击]触发/接战即满层逻辑未在 static resolver 中展开；当前只展开稳定的物理伤害层数。",
+  },
+  {
+    sourceType: "drive-disc",
+    sourceId: "31300",
+    minimumPieces: 4,
+    damageTypes: ["anomaly", "disorder"],
+    note: "自由蓝调 4件 的属性异常积蓄抗性降低属于积蓄过程效果，未在 static resolver 中展开。",
+  },
+  {
+    sourceType: "drive-disc",
+    sourceId: "32300",
+    minimumPieces: 4,
+    damageTypes: ["anomaly", "disorder"],
+    note: "混沌重金属 4件 的暴击伤害层数主要面向侵蚀额外伤害，不直接映射到 anomaly/disorder 当前公式；当前只展开 2件 以太异常增伤。",
+  },
+]
+
 export function getStaticBuildEffectsForLoadout(loadout: {
   agentId: string
   wEngineId?: string
@@ -2458,5 +2616,63 @@ export function hasStaticBuildEffectsForSource(
   return staticBuildEffectDefinitions.some(
     (effect) =>
       effect.sourceType === sourceType && effect.sourceId === sourceId,
+  )
+}
+
+export function getStaticBuildSourceNotes(input: {
+  sourceType: StaticBuildEffectDefinition["sourceType"]
+  sourceId?: string
+  damageType: "normal" | "sheer" | "anomaly" | "disorder"
+  disorderSourceType?:
+    | "fire"
+    | "electric"
+    | "ether"
+    | "ice"
+    | "physical"
+    | "auricInk"
+    | "frost"
+  pieces?: 2 | 4
+}) {
+  if (!input.sourceId) return []
+  return staticBuildSourceNotes
+    .filter((note) => {
+      if (
+        note.sourceType !== input.sourceType ||
+        note.sourceId !== input.sourceId
+      ) {
+        return false
+      }
+      if (note.minimumPieces && (input.pieces ?? 0) < note.minimumPieces) {
+        return false
+      }
+      if (
+        note.damageTypes &&
+        !note.damageTypes.includes(input.damageType as "anomaly" | "disorder")
+      ) {
+        return false
+      }
+      if (
+        note.disorderSourceTypes &&
+        input.damageType === "disorder" &&
+        (!input.disorderSourceType ||
+          !note.disorderSourceTypes.includes(input.disorderSourceType))
+      ) {
+        return false
+      }
+      return true
+    })
+    .map((note) => note.note)
+}
+
+export function hasStaticBuildCoverageForSource(
+  sourceType: StaticBuildEffectDefinition["sourceType"],
+  sourceId: string | undefined,
+) {
+  if (!sourceId) return false
+  return (
+    hasStaticBuildEffectsForSource(sourceType, sourceId) ||
+    staticBuildSourceNotes.some(
+      (note) => note.sourceType === sourceType && note.sourceId === sourceId,
+    )
   )
 }

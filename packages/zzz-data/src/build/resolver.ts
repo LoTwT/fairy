@@ -31,7 +31,8 @@ import {
 } from "./catalog.js"
 import {
   getStaticBuildEffectsForLoadout,
-  hasStaticBuildEffectsForSource,
+  getStaticBuildSourceNotes,
+  hasStaticBuildCoverageForSource,
 } from "./definitions.js"
 import { getStaticBuildProfile } from "./profiles.js"
 
@@ -117,11 +118,13 @@ function effectMatches(
   context: {
     attribute: string | undefined
     damageType: string
+    disorderSourceType?: string
     skillTag: string
     extraAbilityActive: boolean
     combatTags: Set<string>
     isStunned: boolean
     resolvedCritRate?: number
+    resolvedAnomalyProficiency?: number
   },
 ) {
   const condition = effect.condition
@@ -158,6 +161,17 @@ function effectMatches(
   }
 
   if (
+    condition.disorderSourceTypes &&
+    (context.damageType !== "disorder" ||
+      !context.disorderSourceType ||
+      !condition.disorderSourceTypes.includes(
+        context.disorderSourceType as never,
+      ))
+  ) {
+    return false
+  }
+
+  if (
     condition.combatTags &&
     condition.combatTags.some((tag) => !context.combatTags.has(tag))
   ) {
@@ -172,6 +186,15 @@ function effectMatches(
     return false
   }
 
+  if (
+    condition.minimumResolvedAnomalyProficiency !== undefined &&
+    (context.resolvedAnomalyProficiency === undefined ||
+      context.resolvedAnomalyProficiency <
+        condition.minimumResolvedAnomalyProficiency)
+  ) {
+    return false
+  }
+
   return true
 }
 
@@ -180,11 +203,13 @@ function applyEffects(
   context: {
     attribute: string | undefined
     damageType: string
+    disorderSourceType?: string
     skillTag: string
     extraAbilityActive: boolean
     combatTags: Set<string>
     isStunned: boolean
     resolvedCritRate?: number
+    resolvedAnomalyProficiency?: number
     baseMode: StaticBuildBaseMode
     valueContext: StaticBuildValueContext
     overrides: Map<string, { enabled?: boolean; stacks?: number }>
@@ -231,11 +256,13 @@ function applyEffects(
       !effectMatches(effect, {
         attribute: context.attribute,
         damageType: context.damageType,
+        disorderSourceType: context.disorderSourceType,
         skillTag: context.skillTag,
         extraAbilityActive: context.extraAbilityActive,
         combatTags: context.combatTags,
         isStunned: context.isStunned,
         resolvedCritRate: context.resolvedCritRate,
+        resolvedAnomalyProficiency: context.resolvedAnomalyProficiency,
       })
     ) {
       trace.push({
@@ -384,22 +411,61 @@ export function resolveStaticBuildDamage(
     wEngineId: wEngine?.id,
     driveDiscSets,
   })
-  if (!hasStaticBuildEffectsForSource("agent", agent.id)) {
+  if (!hasStaticBuildCoverageForSource("agent", agent.id)) {
     assumptions.push(
       `${agent.name} 当前未收录 curated 代理人效果，结果主要基于 finalPanel、敌人参数和已支持的公共增益`,
     )
   }
-  if (wEngine && !hasStaticBuildEffectsForSource("w-engine", wEngine.id)) {
+  if (wEngine && !hasStaticBuildCoverageForSource("w-engine", wEngine.id)) {
     assumptions.push(
       `${wEngine.name} 当前未收录 curated 音擎效果，已仅按 finalPanel 面板处理`,
     )
   }
   for (const set of driveDiscSets) {
-    if (!hasStaticBuildEffectsForSource("drive-disc", set.id)) {
+    if (!hasStaticBuildCoverageForSource("drive-disc", set.id)) {
       assumptions.push(
         `${set.name} ${set.pieces}件 当前未收录 curated 驱动盘效果，已仅按 finalPanel 面板处理`,
       )
     }
+  }
+
+  assumptions.push(
+    ...getStaticBuildSourceNotes({
+      sourceType: "agent",
+      sourceId: agent.id,
+      damageType: input.scenario.damageType,
+      disorderSourceType:
+        input.scenario.damageType === "disorder"
+          ? input.scenario.anomalyType
+          : undefined,
+    }),
+  )
+  if (wEngine) {
+    assumptions.push(
+      ...getStaticBuildSourceNotes({
+        sourceType: "w-engine",
+        sourceId: wEngine.id,
+        damageType: input.scenario.damageType,
+        disorderSourceType:
+          input.scenario.damageType === "disorder"
+            ? input.scenario.anomalyType
+            : undefined,
+      }),
+    )
+  }
+  for (const set of driveDiscSets) {
+    assumptions.push(
+      ...getStaticBuildSourceNotes({
+        sourceType: "drive-disc",
+        sourceId: set.id,
+        damageType: input.scenario.damageType,
+        disorderSourceType:
+          input.scenario.damageType === "disorder"
+            ? input.scenario.anomalyType
+            : undefined,
+        pieces: set.pieces,
+      }),
+    )
   }
   const overrides = new Map(
     (input.effectOverrides ?? []).map((item) => [
@@ -418,6 +484,10 @@ export function resolveStaticBuildDamage(
   const firstPass = applyEffects(effects, {
     attribute,
     damageType: input.scenario.damageType,
+    disorderSourceType:
+      input.scenario.damageType === "disorder"
+        ? input.scenario.anomalyType
+        : undefined,
     skillTag: input.scenario.skillTag,
     extraAbilityActive,
     combatTags,
@@ -432,18 +502,27 @@ export function resolveStaticBuildDamage(
   })
 
   const interimCritRate = input.panel.critRate + firstPass.buckets.critRate
+  const interimAnomalyProficiency =
+    (input.panel.anomalyProficiency ?? 0) + firstPass.buckets.anomalyProficiency
 
   const secondPassCandidates = effects.filter(
-    (effect) => effect.condition?.minimumResolvedCritRate !== undefined,
+    (effect) =>
+      effect.condition?.minimumResolvedCritRate !== undefined ||
+      effect.condition?.minimumResolvedAnomalyProficiency !== undefined,
   )
   const secondPass = applyEffects(secondPassCandidates, {
     attribute,
     damageType: input.scenario.damageType,
+    disorderSourceType:
+      input.scenario.damageType === "disorder"
+        ? input.scenario.anomalyType
+        : undefined,
     skillTag: input.scenario.skillTag,
     extraAbilityActive,
     combatTags,
     isStunned,
     resolvedCritRate: interimCritRate,
+    resolvedAnomalyProficiency: interimAnomalyProficiency,
     baseMode,
     valueContext,
     overrides,

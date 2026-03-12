@@ -880,7 +880,7 @@ describe("static build resolver", () => {
     expect(result.loadout.wEngine?.name).toBe("时流贤者")
     expect(result.profile.id).toBe("standard-disorder")
     expect(result.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.2, 4)
-    expect(result.resolvedBuckets.anomalyBonusDamageSum).toBeCloseTo(2.5, 4)
+    expect(result.resolvedBuckets.anomalyBonusDamageSum).toBeCloseTo(2.75, 4)
     expect(result.resolvedBuckets.anomalyProficiency).toBeCloseTo(75, 4)
     expect(
       result.assumptions.some((item) => item.includes("柳 当前未收录 curated")),
@@ -984,6 +984,150 @@ describe("static build resolver", () => {
         item.includes("触电唇彩 当前未收录 curated"),
       ),
     ).toBe(false)
+  })
+
+  it("refines Vivian disorder bonus by disorder source type", () => {
+    const baseInput = {
+      mode: "full-buff" as const,
+      loadout: {
+        agentId: "1331",
+        wEngineId: "14133",
+        agentLevel: 60,
+        wEngineRefinement: 1,
+      },
+      panel: {
+        attack: 3000,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 180,
+      },
+      scenario: {
+        damageType: "disorder" as const,
+        skillTag: "basic" as const,
+        remainingTime: 5,
+        attribute: "以太" as const,
+        extraAbilityActive: true,
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    }
+
+    const etherResult = resolveStaticBuildDamage({
+      ...baseInput,
+      scenario: {
+        ...baseInput.scenario,
+        anomalyType: "ether",
+      },
+    })
+    const electricResult = resolveStaticBuildDamage({
+      ...baseInput,
+      scenario: {
+        ...baseInput.scenario,
+        anomalyType: "electric",
+      },
+    })
+
+    expect(etherResult.resolvedBuckets.anomalyBonusDamageSum).toBeCloseTo(
+      0.12,
+      4,
+    )
+    expect(electricResult.resolvedBuckets.anomalyBonusDamageSum).toBeCloseTo(
+      0,
+      4,
+    )
+  })
+
+  it("replaces generic anomaly assumptions with source-specific Burnice notes", () => {
+    const result = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1171",
+        wEngineId: "14117",
+        driveDiscSets: [{ id: "31800", pieces: 4 }],
+        agentLevel: 60,
+        wEngineRefinement: 1,
+      },
+      panel: {
+        attack: 3100,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 160,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "enhancedSpecial",
+        damageMultiplier: "520%",
+        attribute: "火属性",
+        extraAbilityActive: true,
+        combatTags: ["offField"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("柏妮思 当前未收录 curated"),
+      ),
+    ).toBe(false)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("灼心摇壶 当前未收录 curated"),
+      ),
+    ).toBe(false)
+    expect(
+      result.assumptions.some((item) => item.includes("[燃点]/[余烬]")),
+    ).toBe(true)
+    expect(
+      result.assumptions.some((item) => item.includes("≥5层额外异常精通阈值")),
+    ).toBe(true)
+  })
+
+  it("replaces generic anomaly assumptions with source-specific Alice notes", () => {
+    const result = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1401",
+        wEngineId: "14140",
+        agentLevel: 60,
+        wEngineRefinement: 1,
+      },
+      panel: {
+        attack: 3000,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 180,
+      },
+      scenario: {
+        damageType: "disorder",
+        skillTag: "basic",
+        anomalyType: "physical",
+        remainingTime: 5,
+        attribute: "物理",
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("爱丽丝 当前未收录 curated"),
+      ),
+    ).toBe(false)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("物理异常剩余时间换算紊乱倍率"),
+      ),
+    ).toBe(true)
   })
 
   it("rejects anomaly damage types for non-anomaly specialties", () => {

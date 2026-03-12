@@ -118,11 +118,11 @@ packages/zzz-data/
 │   └── index.ts            # re-export
 ├── src/build/              # static build resolver（当前静态构筑解析层）
 │   ├── catalog.ts          # 动态 build catalog：全部强攻 / 命破 / 异常代理人、全部强攻/命破/异常音擎、curated 驱动盘与 alias
-│   ├── definitions.ts      # curated effect definitions（未覆盖项由 resolver 在 assumptions 中显式提示）
+│   ├── definitions.ts      # curated effect definitions + source-specific assumptions（未覆盖项由 resolver 明示）
 │   ├── matrix.ts           # 技能矩阵 builder（curated 模板 + 通用矩阵生成；metadata 当前已包含 source/template/attribute/canonical label/stable key/template tags）
 │   ├── profiles.ts         # 标准 normal / sheer / anomaly / disorder profile 与仪玄专用 sheer profile
-│   ├── resolver.ts         # finalPanel + scenario → damageParams / trace
-│   ├── types.ts            # build layer 输入输出 contract
+│   ├── resolver.ts         # finalPanel + scenario → damageParams / trace（含 disorder source / anomaly proficiency gating）
+│   ├── types.ts            # build layer 输入输出 contract（含 disorderSourceTypes / minimumResolvedAnomalyProficiency）
 │   └── index.ts            # re-export
 ├── src/game-modes.ts        # 对外发布的游戏模式 JSON 类型（buffs / DA / SD / TS）+ raw category code contract
 ├── src/terms.ts             # canonical 术语层（raw label → 规范导出映射）

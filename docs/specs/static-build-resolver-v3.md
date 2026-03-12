@@ -11,7 +11,8 @@
 
 - `V3.1 anomaly` 已实现到单次 `resolveStaticBuildDamage`
 - `V3.2 disorder` 已实现到单次 `resolveStaticBuildDamage`
-- `V3.3 curated effect coverage` 已开始补 anomaly / disorder 的直接效果定义
+- `V3.3 curated effect coverage` 已补 anomaly / disorder 的直接效果定义
+- `V3.4 source-specific assumptions` 已补 disorder source 细化与来源级限制说明
 - `resolveStaticBuildSkillMatrix` 仍只支持 `normal / sheer`
 
 ## 1. V3 目标
@@ -88,6 +89,12 @@ V3 主线只扩到**异常代理人**及其兼容音擎，不扩到支援 / 防�
 - 驱动盘：`自由蓝调 2 件`、`混沌爵士 2/4 件`、`混沌重金属 2 件`
 
 尚未能直接表达的异常掌控换算、剩余持续时间换算、随机增益与独立异常槽机制，继续通过更细的 `assumptions` 处理。
+
+当前已落地的 V3 refinement 包括：
+
+- `disorderSourceTypes`：用于把只适用于特定原异常来源的紊乱增伤显式限定到对应 `anomalyType`
+- `minimumResolvedAnomalyProficiency`：用于表达异常精通达标后才生效的紊乱增伤
+- source-specific assumptions：用于替代泛化的“未收录 curated”提示，直接说明某个代理人 / 音擎当前还未展开的异常机制
 
 ### 2.5 支持的驱动盘
 
