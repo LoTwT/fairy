@@ -193,6 +193,7 @@ packages/zzz-agent/
 - [`static-build-resolver-v7.md`](../docs/specs/static-build-resolver-v7.md) — 当前阶段范围：`V7.3` 前四批已完成，并在当前 contract 下收口；`柏妮思 M6` 的 `25% 火抗无视` 已接到 `scenario.resolvedSnapshot.bucketDeltas.ignoreResistance`，`格莉丝 M2`、`简`、`派派`、`时流贤者`、`柳 M2`、`薇薇安 M2` 的异常倍率折算已收口到 `scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor`
 - [`static-build-resolver-v8.md`](../docs/specs/static-build-resolver-v8.md) — 当前阶段范围：已完成 `V8.2` inventory 与 `V8.4` 前四批 source-note 收口，并在当前 contract 下收口；当前结论是不新增 public key
 - [`static-build-resolver-v9.md`](../docs/specs/static-build-resolver-v9.md) — 当前阶段范围：`V9.4` docs / tool integration 已完成；`zzz-agent` 已暴露 `resolve-build-source-damage-views` 高层 tool，并与主伤害 / matrix 路径分流
+- [`static-build-resolver-v10.md`](../docs/specs/static-build-resolver-v10.md) — 当前阶段范围：`V10.1` scope freeze；下一批 source-specific delta view 目标为 `爱芮 [异放]`，`霰落星殿` 与 `混沌重金属 4件` 先保留为 research-only
 
 ## 计算器模块（src/calculator/）
 

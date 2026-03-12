@@ -812,3 +812,34 @@ resolver 主线完成后，文档维护需要单独列为持续事项，避免�
 2. `V9.2` view contract
 3. `V9.3` first-batch source coverage
 4. `V9.4` docs / integration（已完成：`zzz-agent` 已暴露 `resolve-build-source-damage-views`）
+
+## 15. V10 source-specific delta views
+
+对应规格文档：
+
+- [static-build-resolver-v10.md](./static-build-resolver-v10.md)
+
+### 15.1 目标
+
+继续扩 `source-specific damage view`，但只处理当前 contract 下能通过“含快照结果 - 去除快照结果”稳定表达的 delta source。
+
+### 15.2 第一批范围
+
+1. `爱芮` `[异放]`
+
+research-only，暂不进入实现：
+
+1. `霰落星殿`
+2. `混沌重金属 4件`
+
+### 15.3 不做
+
+- 不扩 anomaly / disorder 主公式
+- 不做 anomaly / disorder matrix
+- 不为 research-only 来源新增新的 snapshot key
+
+### 15.4 执行顺序
+
+1. `V10.1` scope freeze
+2. `V10.2` Aria source view coverage
+3. `V10.3` closeout / note routing
