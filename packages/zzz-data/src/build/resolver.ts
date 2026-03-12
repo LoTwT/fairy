@@ -315,6 +315,7 @@ function applyEffects(
     valueContext: StaticBuildValueContext
     overrides: Map<string, { enabled?: boolean; stacks?: number }>
     assumptions: string[]
+    diagnostics: StaticBuildDiagnosticEntry[]
     unsupportedEffects: string[]
     usesAttackAsBase: boolean
     hasBaseAttack: boolean
@@ -399,7 +400,18 @@ function applyEffects(
       const reason = !context.usesAttackAsBase
         ? "当前 profile 不使用攻击力作为基础乘区，相关攻击力 buff 已跳过"
         : "缺少 finalPanel.baseAttack，无法精确结算战斗中的攻击力% buff"
-      context.unsupportedEffects.push(`${effect.label}: ${reason}`)
+      const message = `${effect.label}: ${reason}`
+      context.unsupportedEffects.push(message)
+      context.diagnostics.push({
+        kind: "unsupported-effect",
+        owner: context.usesAttackAsBase ? "finalPanel" : "process",
+        sourceType: effect.sourceType,
+        sourceId: effect.sourceId,
+        keys: context.usesAttackAsBase
+          ? ["finalPanel.baseAttack"]
+          : ["profile.baseDamageStat"],
+        message,
+      })
       trace.push({
         effectId: effect.id,
         sourceType: effect.sourceType,
@@ -545,20 +557,41 @@ export function resolveStaticBuildDamage(
     })
   }
   if (!hasStaticBuildCoverageForSource("agent", agent.id)) {
-    assumptions.push(
-      `${agent.name} 当前未收录 curated 代理人效果，结果主要基于 finalPanel、敌人参数和已支持的公共增益`,
-    )
+    const message = `${agent.name} 当前未收录 curated 代理人效果，结果主要基于 finalPanel、敌人参数和已支持的公共增益`
+    assumptions.push(message)
+    diagnostics.push({
+      kind: "coverage-gap",
+      owner: "source",
+      sourceType: "agent",
+      sourceId: agent.id,
+      keys: ["loadout.agentId"],
+      message,
+    })
   }
   if (wEngine && !hasStaticBuildCoverageForSource("w-engine", wEngine.id)) {
-    assumptions.push(
-      `${wEngine.name} 当前未收录 curated 音擎效果，已仅按 finalPanel 面板处理`,
-    )
+    const message = `${wEngine.name} 当前未收录 curated 音擎效果，已仅按 finalPanel 面板处理`
+    assumptions.push(message)
+    diagnostics.push({
+      kind: "coverage-gap",
+      owner: "source",
+      sourceType: "w-engine",
+      sourceId: wEngine.id,
+      keys: ["loadout.wEngineId"],
+      message,
+    })
   }
   for (const set of driveDiscSets) {
     if (!hasStaticBuildCoverageForSource("drive-disc", set.id)) {
-      assumptions.push(
-        `${set.name} ${set.pieces}件 当前未收录 curated 驱动盘效果，已仅按 finalPanel 面板处理`,
-      )
+      const message = `${set.name} ${set.pieces}件 当前未收录 curated 驱动盘效果，已仅按 finalPanel 面板处理`
+      assumptions.push(message)
+      diagnostics.push({
+        kind: "coverage-gap",
+        owner: "source",
+        sourceType: "drive-disc",
+        sourceId: set.id,
+        keys: ["loadout.driveDiscSets"],
+        message,
+      })
     }
   }
 
@@ -687,6 +720,7 @@ export function resolveStaticBuildDamage(
     valueContext,
     overrides,
     assumptions,
+    diagnostics,
     unsupportedEffects,
     usesAttackAsBase,
     hasBaseAttack: input.panel.baseAttack !== undefined,
@@ -722,6 +756,7 @@ export function resolveStaticBuildDamage(
     },
     overrides,
     assumptions,
+    diagnostics,
     unsupportedEffects,
     usesAttackAsBase,
     hasBaseAttack: input.panel.baseAttack !== undefined,

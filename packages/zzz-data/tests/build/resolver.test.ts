@@ -708,6 +708,58 @@ describe("static build resolver", () => {
         item.includes("加农转子 当前未收录 curated 音擎效果"),
       ),
     ).toBe(true)
+    expect(
+      result.diagnostics.some(
+        (item) =>
+          item.kind === "coverage-gap" &&
+          item.owner === "source" &&
+          item.sourceType === "w-engine" &&
+          item.sourceId === "14001" &&
+          item.keys.includes("loadout.wEngineId"),
+      ),
+    ).toBe(true)
+  })
+
+  it("records unsupported-effect diagnostics when attack percent buffs need baseAttack", () => {
+    const result = resolveStaticBuildDamage({
+      mode: "baseline",
+      loadout: {
+        agentId: "1041",
+        wEngineId: "14104",
+      },
+      panel: {
+        attack: 3100,
+        critRate: 0.5,
+        critDamage: 1.2,
+      },
+      scenario: {
+        damageType: "normal",
+        skillTag: "basic",
+        skillMultiplier: "500%",
+        attribute: "火属性",
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(
+      result.unsupportedEffects.some((item) =>
+        item.includes("缺少 finalPanel.baseAttack"),
+      ),
+    ).toBe(true)
+    expect(
+      result.diagnostics.some(
+        (item) =>
+          item.kind === "unsupported-effect" &&
+          item.owner === "finalPanel" &&
+          item.sourceType === "w-engine" &&
+          item.sourceId === "14104" &&
+          item.keys.includes("finalPanel.baseAttack") &&
+          item.message.includes("缺少 finalPanel.baseAttack"),
+      ),
+    ).toBe(true)
   })
 
   it("rejects incompatible w-engine specialties", () => {

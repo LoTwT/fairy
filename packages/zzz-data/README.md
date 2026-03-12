@@ -197,6 +197,12 @@ result.damage.expected.total
 // number
 ```
 
+`result.diagnostics` 当前已可直接区分：
+
+- `defaulted-input`
+- `coverage-gap`
+- `unsupported-effect`
+
 如果你要一次性生成代理人的全技能 / 全段伤害矩阵，使用矩阵 builder：
 
 ```ts
