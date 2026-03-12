@@ -198,7 +198,7 @@ packages/zzz-agent/
 - [`static-build-resolver-v12.md`](../docs/specs/static-build-resolver-v12.md) — 当前阶段范围：已收口；当前 `ResolveStaticBuildResult.diagnostics` 已覆盖 `defaulted-input` / `coverage-gap` / `unsupported-effect`，高层 resolver、source view 条目和 `zzz-agent` prompt 已优先消费该 contract
 - [`static-build-resolver-v13.md`](../docs/specs/static-build-resolver-v13.md) — 当前阶段范围：已收口；anomaly / disorder 的 Batch A / Batch B curated coverage 已落地，且未为消除 coverage-gap 新增 public key
 - [`static-build-resolver-v14.md`](../docs/specs/static-build-resolver-v14.md) — 当前阶段范围：已收口；`霰落星殿`、`混沌重金属 4件` 继续保持 `research-only`，`轰鸣座驾`、`自由蓝调 4件` 继续保持 source note
-- [`static-build-resolver-v15.md`](../docs/specs/static-build-resolver-v15.md) — 当前阶段范围：已完成 scope freeze；下一步把 `sourceNotes` 的解决路径提升成结构化 guidance
+- [`static-build-resolver-v15.md`](../docs/specs/static-build-resolver-v15.md) — 当前阶段范围：已在当前 contract 下收口；`sourceNotes.guidance` 已进入公开 contract
 
 ## 计算器模块（src/calculator/）
 
