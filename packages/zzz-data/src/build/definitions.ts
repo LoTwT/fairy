@@ -3866,6 +3866,79 @@ export const staticBuildEffectDefinitions = [
       },
     ],
   },
+  {
+    id: "white-water-ballad-2pc-physical-bonus",
+    sourceType: "drive-disc",
+    sourceId: "33500",
+    sourceName: "沧浪行歌",
+    label: "2件套：物理属性增伤",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      attributes: ["Physical"],
+    },
+    modifiers: [
+      {
+        bucket: "bonusDamageSum",
+        value: () => 0.1,
+      },
+    ],
+  },
+  {
+    id: "white-water-ballad-4pc-ether-curtain-crit-rate",
+    sourceType: "drive-disc",
+    sourceId: "33500",
+    sourceName: "沧浪行歌",
+    label: "4件套：以太帷幕内暴击率",
+    baselineEnabled: false,
+    fullBuffEnabled: true,
+    condition: {
+      combatTags: ["etherCurtain"],
+    },
+    modifiers: [
+      {
+        bucket: "critRate",
+        value: () => 0.1,
+      },
+    ],
+  },
+  {
+    id: "notes-from-the-chained-2pc-ice-bonus",
+    sourceType: "drive-disc",
+    sourceId: "33800",
+    sourceName: "囚徒手记",
+    label: "2件套：冰属性增伤",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      attributes: ["Ice"],
+    },
+    modifiers: [
+      {
+        bucket: "bonusDamageSum",
+        value: () => 0.1,
+      },
+    ],
+  },
+  {
+    id: "notes-from-the-chained-4pc-frozen-anomaly-bonus",
+    sourceType: "drive-disc",
+    sourceId: "33800",
+    sourceName: "囚徒手记",
+    label: "4件套：冻结后的属性异常/紊乱增伤",
+    baselineEnabled: false,
+    fullBuffEnabled: true,
+    condition: {
+      damageTypes: ["anomaly", "disorder"],
+      combatTags: ["frozenTarget"],
+    },
+    modifiers: [
+      {
+        bucket: "anomalyBonusDamageSum",
+        value: () => 0.16,
+      },
+    ],
+  },
 ] as const satisfies StaticBuildEffectDefinition[]
 
 interface StaticBuildSourceNote {
@@ -4157,9 +4230,22 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
   },
   {
     sourceType: "drive-disc",
+    sourceId: "33500",
+    minimumPieces: 4,
+    note: "沧浪行歌 4件 当前已展开[以太帷幕]中的暴击率；强攻角色在开启或延长[以太帷幕]时获得的额外暴击率 / 攻击力仍属于状态 / 过程问题，暂保留为 source note。",
+  },
+  {
+    sourceType: "drive-disc",
     sourceId: "32900",
     minimumPieces: 4,
     note: "如影相随 4件 当前按静态快照展开叠层后的攻击力 / 暴击率增益；叠层获取时机与是否已由同属性[追加攻击]/[冲刺攻击]命中敌人，继续通过 mode / effectOverrides 近似控制，不继续迁到新的 snapshot key。",
+  },
+  {
+    sourceType: "drive-disc",
+    sourceId: "33800",
+    minimumPieces: 4,
+    damageTypes: ["anomaly", "disorder"],
+    note: "囚徒手记 4件 当前已展开冻结后的属性异常 / 紊乱增伤；触发[异放]后的 48 点异常精通仍属于状态 / 过程问题，暂保留为 source note，不新增新的 combatTag。",
   },
   {
     sourceType: "agent",

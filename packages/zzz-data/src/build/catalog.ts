@@ -198,9 +198,19 @@ export const supportedStaticBuildDriveDiscs = [
     aliases: ["dawns bloom", "dawn"],
   },
   {
+    id: "33500",
+    name: "沧浪行歌",
+    aliases: ["white water ballad", "white water"],
+  },
+  {
     id: "33600",
     name: "流光咏叹",
     aliases: ["shining aria", "aria"],
+  },
+  {
+    id: "33800",
+    name: "囚徒手记",
+    aliases: ["notes from the chained", "chained notes"],
   },
   {
     id: "31300",

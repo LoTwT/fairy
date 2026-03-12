@@ -3528,4 +3528,86 @@ describe("static build resolver", () => {
       ),
     ).toBe(true)
   })
+
+  it("applies generic drive-disc batch b ether-curtain and frozen coverage", () => {
+    const whiteWaterBallad = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1021",
+        driveDiscSets: [{ id: "33500", pieces: 4 }],
+      },
+      panel: {
+        attack: 2800,
+        baseAttack: 1100,
+        critRate: 0.5,
+        critDamage: 1.1,
+      },
+      scenario: {
+        damageType: "normal",
+        skillTag: "basic",
+        skillMultiplier: "300%",
+        attribute: "物理",
+        combatTags: ["etherCurtain"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(whiteWaterBallad.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.1, 4)
+    expect(whiteWaterBallad.resolvedBuckets.critRate).toBeCloseTo(0.1, 4)
+    expect(
+      whiteWaterBallad.sourceNotes.some(
+        (note) =>
+          note.sourceType === "drive-disc" &&
+          note.sourceId === "33500" &&
+          note.owner === "process" &&
+          note.status === "process-only" &&
+          note.guidance.kind === "keep-process-only",
+      ),
+    ).toBe(true)
+
+    const notesFromTheChained = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1091",
+        driveDiscSets: [{ id: "33800", pieces: 4 }],
+        agentLevel: 60,
+      },
+      panel: {
+        attack: 2800,
+        baseAttack: 1100,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 180,
+      },
+      scenario: {
+        damageType: "disorder",
+        skillTag: "basic",
+        anomalyType: "ice",
+        remainingTime: 5,
+        attribute: "烈霜",
+        combatTags: ["frozenTarget"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(
+      notesFromTheChained.resolvedBuckets.anomalyBonusDamageSum,
+    ).toBeCloseTo(0.16, 4)
+    expect(
+      notesFromTheChained.sourceNotes.some(
+        (note) =>
+          note.sourceType === "drive-disc" &&
+          note.sourceId === "33800" &&
+          note.owner === "process" &&
+          note.status === "process-only" &&
+          note.guidance.kind === "keep-process-only",
+      ),
+    ).toBe(true)
+  })
 })

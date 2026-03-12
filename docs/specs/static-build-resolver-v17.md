@@ -72,12 +72,12 @@
 
 - `V17.1` 已完成：冻结到通用驱动盘 curated coverage，不继续扩大 contract
 - `V17.2` 已完成：通用驱动盘 inventory 与批次已冻结
-- `V17.3` 已完成 `Batch A`
+- `V17.3` 已完成
 - `V17.4` 未开始
 
 ## 8. Inventory
 
-当前公开驱动盘共 `26` 套，build resolver 里已做 curated coverage 的有 `14` 套：
+当前公开驱动盘共 `26` 套，build resolver 里已做 curated coverage 的有 `16` 套：
 
 - `啄木鸟电音`
 - `河豚电音`
@@ -93,6 +93,8 @@
 - `如影相随`
 - `拂晓生花`
 - `流光咏叹`
+- `沧浪行歌`
+- `囚徒手记`
 
 剩余 `17` 套中，按当前 contract 的可表达性分成三类。
 
@@ -150,11 +152,11 @@
 - `如影相随`
 - `折枝剑歌`
 
-### Batch B
+### Batch B（已完成）
 
 - `沧浪行歌`
 - `囚徒手记`
 
 ### Batch C
 
-- 只在 `Batch B` 做完后，再评估是否需要补 source-note 收口
+- 只在 `Batch A / Batch B` 做完后，再进入 `V17.4` closeout
