@@ -470,7 +470,7 @@ resolver 主线完成后，文档维护需要单独列为持续事项，避免�
 
 ### 9.5 当前状态
 
-当前 `V4` 第二批已完成：
+当前 `V4` 第三批已完成：
 
 - `V4.1` 已完成：`loadout.agentMindscape`、`finalPanel.energyGenerationRate`、`minimumMindscape` 已进入公开 contract
 - `V4.2` 已完成：resolver / tool schema / trace 已能消费 progression-aware value context
@@ -479,7 +479,10 @@ resolver 主线完成后，文档维护需要单独列为持续事项，避免�
   - `奥菲丝&「鬼火」`：核心技「准星聚焦」的额外攻击力、影画 1 伤害提升
 - `V4.3` 已完成第二批：
   - `奥菲丝&「鬼火」`：影画 1 的火抗无视、影画 2 的终结技后攻击力、影画 4 的强化特殊技 / 终结技增伤
-- `V4.4` 已完成第二轮 assumptions refinement：
+- `V4.3` 已完成第三批：
+  - `爱丽丝`：影画 2 的物理来源紊乱增伤、影画 4 的物理异常 / 紊乱无视抗性
+  - `薇薇安`：影画 1 的预言目标异常 / 紊乱增伤、影画 2 的以太异常 / 紊乱无视抗性
+- `V4.4` 已完成第三轮 assumptions refinement：
   - 可区分缺少 `agentMindscape`
   - 可区分缺少 `energyGenerationRate`
   - 仍未展开的动态机制继续单独提示
@@ -488,6 +491,6 @@ resolver 主线完成后，文档维护需要单独列为持续事项，避免�
 
 `V4` 后续不再是改基础 contract，而是继续补高价值 progression-aware coverage，优先级如下：
 
-1. 其余仍高度依赖 progression assumptions 的已支持代理人
+1. 其余仍高度依赖 progression assumptions 的已支持异常代理人
 2. 仅在当前 contract 不够用时，再考虑新增下一批 progression value context
 3. 继续避免把堆层、后台自动触发、额外结算次数这类机制伪装成静态快照

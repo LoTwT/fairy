@@ -1126,6 +1126,48 @@ describe("static build resolver", () => {
     )
   })
 
+  it("expands Vivian mindscape-aware ether anomaly and disorder bonuses", () => {
+    const result = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1331",
+        wEngineId: "14133",
+        agentLevel: 60,
+        agentMindscape: 2,
+        wEngineRefinement: 1,
+      },
+      panel: {
+        attack: 3000,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 180,
+      },
+      scenario: {
+        damageType: "disorder",
+        skillTag: "basic",
+        anomalyType: "ether",
+        remainingTime: 5,
+        attribute: "以太",
+        extraAbilityActive: true,
+        combatTags: ["prophecyTarget"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.loadout.agentMindscape).toBe(2)
+    expect(result.resolvedBuckets.anomalyBonusDamageSum).toBeCloseTo(0.28, 4)
+    expect(result.resolvedBuckets.ignoreResistance).toBeCloseTo(0.15, 4)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("影画2当前只展开以太异常/紊乱的 15% 无视抗性"),
+      ),
+    ).toBe(true)
+  })
+
   it("replaces generic anomaly assumptions with source-specific Burnice notes", () => {
     const result = resolveStaticBuildDamage({
       mode: "full-buff",
@@ -1400,6 +1442,48 @@ describe("static build resolver", () => {
         item.includes(
           "十方锻星的[强击]触发/接战即满层逻辑未在 static resolver 中展开",
         ),
+      ),
+    ).toBe(true)
+  })
+
+  it("expands Alice mindscape-aware physical disorder bonus and ignore resistance", () => {
+    const result = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1401",
+        wEngineId: "14140",
+        agentLevel: 60,
+        agentMindscape: 4,
+        wEngineRefinement: 1,
+      },
+      panel: {
+        attack: 3000,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 180,
+        anomalyMastery: 200,
+      },
+      scenario: {
+        damageType: "disorder",
+        skillTag: "basic",
+        anomalyType: "physical",
+        remainingTime: 5,
+        attribute: "物理",
+        extraAbilityActive: true,
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.loadout.agentMindscape).toBe(4)
+    expect(result.resolvedBuckets.anomalyBonusDamageSum).toBeCloseTo(1.05, 4)
+    expect(result.resolvedBuckets.ignoreResistance).toBeCloseTo(0.1, 4)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("影画1[强击]后的 20% 减防仍需显式状态控制"),
       ),
     ).toBe(true)
   })

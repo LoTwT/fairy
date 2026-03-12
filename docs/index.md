@@ -14,9 +14,9 @@
 
 - [伤害计算算法](./specs/damage-calculation.md) — 四种伤害类型（常规/贯穿/异常/紊乱）的完整乘区公式、TypeScript 类型签名与参考数值
 - [静态构筑解析系统](./specs/static-build-resolver.md) — 静态效果系统、输入输出 contract、热插拔乘区管线与模块设计
-- [静态构筑解析系统路线图](./specs/static-build-resolver-roadmap.md) — 当前执行状态：V2.1、V2.2、V3 已完成；V4 progression-aware resolver 第二批已落地；异常/紊乱 matrix 仍为显式 out-of-scope
+- [静态构筑解析系统路线图](./specs/static-build-resolver-roadmap.md) — 当前执行状态：V2.1、V2.2、V3 已完成；V4 progression-aware resolver 第三批已落地；异常/紊乱 matrix 仍为显式 out-of-scope
 - [异常 / 紊乱 Skill Matrix 立项评估](./specs/anomaly-disorder-skill-matrix-evaluation.md) — 结论：在更强的 dynamic value context 落地前，不进入 anomaly / disorder matrix 实现
 - [静态构筑解析系统 V1](./specs/static-build-resolver-v1.md) — 第一版冻结范围：支持对象、输入输出 contract、profile 与验收标准
 - [静态构筑解析系统 V2](./specs/static-build-resolver-v2.md) — 第二阶段实现：全部强攻 / 命破代理人、动态强攻/命破音擎、curated + 通用技能矩阵约定
 - [静态构筑解析系统 V3](./specs/static-build-resolver-v3.md) — 当前实现：已完成 anomaly / disorder 单次 resolver、curated effect coverage 与 source-specific assumptions；skill matrix 仍限定在 normal / sheer
-- [静态构筑解析系统 V4](./specs/static-build-resolver-v4.md) — 当前阶段：progression-aware resolver 第二批已完成，已接入 `agentMindscape` / `energyGenerationRate` 与柏妮思、奥菲丝&「鬼火」的更多高价值 progression-aware 规则
+- [静态构筑解析系统 V4](./specs/static-build-resolver-v4.md) — 当前阶段：progression-aware resolver 第三批已完成，已接入 `agentMindscape` / `energyGenerationRate` 与柏妮思、奥菲丝&「鬼火」、爱丽丝、薇薇安的更多高价值 progression-aware 规则

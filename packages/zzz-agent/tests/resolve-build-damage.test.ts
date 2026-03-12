@@ -592,6 +592,86 @@ describe("resolveBuildDamage tool", () => {
     ).toBe(true)
   })
 
+  it("supports Alice mindscape-aware disorder refinements through the high-level resolver", async () => {
+    const result = await runTool(resolveBuildDamage, {
+      agent: "爱丽丝",
+      wEngine: "十方锻星",
+      mode: "full-buff",
+      agentLevel: 60,
+      agentMindscape: 4,
+      finalPanel: {
+        attack: 3000,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 180,
+        anomalyMastery: 200,
+      },
+      scenario: {
+        damageType: "disorder",
+        skillTag: "basic",
+        anomalyType: "强击",
+        remainingTime: 5,
+        attribute: "物理",
+        extraAbilityActive: true,
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    expect((result as any).build.loadout.agentMindscape).toBe(4)
+    expect(
+      (result as any).build.resolvedBuckets.anomalyBonusDamageSum,
+    ).toBeCloseTo(1.05, 4)
+    expect((result as any).build.resolvedBuckets.ignoreResistance).toBeCloseTo(
+      0.1,
+      4,
+    )
+  })
+
+  it("supports Vivian mindscape-aware disorder refinements through the high-level resolver", async () => {
+    const result = await runTool(resolveBuildDamage, {
+      agent: "薇薇安",
+      wEngine: "霰落星殿",
+      mode: "full-buff",
+      agentLevel: 60,
+      agentMindscape: 2,
+      finalPanel: {
+        attack: 3000,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 180,
+      },
+      scenario: {
+        damageType: "disorder",
+        skillTag: "basic",
+        anomalyType: "侵蚀",
+        remainingTime: 5,
+        attribute: "以太",
+        extraAbilityActive: true,
+        combatTags: ["prophecyTarget"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    expect((result as any).build.loadout.agentMindscape).toBe(2)
+    expect(
+      (result as any).build.resolvedBuckets.anomalyBonusDamageSum,
+    ).toBeCloseTo(0.28, 4)
+    expect((result as any).build.resolvedBuckets.ignoreResistance).toBeCloseTo(
+      0.15,
+      4,
+    )
+  })
+
   it("supports Burnice fire disorder duration refinement through the high-level resolver", async () => {
     const result = await runTool(resolveBuildDamage, {
       agent: "柏妮思",

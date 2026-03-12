@@ -1371,6 +1371,46 @@ export const staticBuildEffectDefinitions = [
     ],
   },
   {
+    id: "vivian-m1-prophecy-anomaly-bonus",
+    sourceType: "agent",
+    sourceId: "1331",
+    sourceName: "薇薇安",
+    label: "影画1：预言目标异常/紊乱伤害提升",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      minimumMindscape: 1,
+      damageTypes: ["anomaly", "disorder"],
+      combatTags: ["prophecyTarget"],
+    },
+    modifiers: [
+      {
+        bucket: "anomalyBonusDamageSum",
+        value: () => 0.16,
+      },
+    ],
+  },
+  {
+    id: "vivian-m2-ether-ignore-resistance",
+    sourceType: "agent",
+    sourceId: "1331",
+    sourceName: "薇薇安",
+    label: "影画2：以太异常/紊乱无视抗性",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      minimumMindscape: 2,
+      damageTypes: ["anomaly", "disorder"],
+      attributes: ["Ether"],
+    },
+    modifiers: [
+      {
+        bucket: "ignoreResistance",
+        value: () => 0.15,
+      },
+    ],
+  },
+  {
     id: "alice-core-physical-disorder-bonus",
     sourceType: "agent",
     sourceId: "1401",
@@ -1405,6 +1445,46 @@ export const staticBuildEffectDefinitions = [
       {
         bucket: "anomalyProficiency",
         value: aliceExtraAnomalyProficiencyFromMastery,
+      },
+    ],
+  },
+  {
+    id: "alice-m2-physical-disorder-bonus",
+    sourceType: "agent",
+    sourceId: "1401",
+    sourceName: "爱丽丝",
+    label: "影画2：物理来源紊乱伤害提升",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      minimumMindscape: 2,
+      damageTypes: ["disorder"],
+      disorderSourceTypes: ["physical"],
+    },
+    modifiers: [
+      {
+        bucket: "anomalyBonusDamageSum",
+        value: () => 0.15,
+      },
+    ],
+  },
+  {
+    id: "alice-m4-physical-ignore-resistance",
+    sourceType: "agent",
+    sourceId: "1401",
+    sourceName: "爱丽丝",
+    label: "影画4：物理异常/紊乱无视抗性",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      minimumMindscape: 4,
+      damageTypes: ["anomaly", "disorder"],
+      attributes: ["Physical"],
+    },
+    modifiers: [
+      {
+        bucket: "ignoreResistance",
+        value: () => 0.1,
       },
     ],
   },
@@ -2861,7 +2941,19 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
     sourceType: "agent",
     sourceId: "1331",
     damageTypes: ["anomaly", "disorder"],
-    note: "薇薇安的[异放]比例与[薇薇安的预言]追击伤害未在 static resolver 中展开；当前只支持额外能力的侵蚀/紊乱增伤。",
+    note: "薇薇安的[异放]比例与[薇薇安的预言]追击伤害未在 static resolver 中展开；当前已支持额外能力的侵蚀/紊乱增伤。",
+  },
+  {
+    sourceType: "agent",
+    sourceId: "1331",
+    minimumMindscape: 1,
+    note: "薇薇安的影画1已支持[薇薇安的预言]目标的异常/紊乱增伤；[护羽]/[飞羽]消耗与回复仍未在 static resolver 中展开。",
+  },
+  {
+    sourceType: "agent",
+    sourceId: "1331",
+    minimumMindscape: 2,
+    note: "薇薇安的影画2当前只展开以太异常/紊乱的 15% 无视抗性；[异放]精通收益提升与异常积蓄效率仍未在 static resolver 中展开。",
   },
   {
     sourceType: "agent",
@@ -2875,7 +2967,19 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
     sourceId: "1401",
     requiresAnomalyMastery: true,
     damageTypes: ["anomaly", "disorder"],
-    note: "爱丽丝当前已按 finalPanel.anomalyMastery 快照展开异常掌控转异常精通；[极性强击]特例仍未在 static resolver 中展开。",
+    note: "爱丽丝当前已按 finalPanel.anomalyMastery 快照展开异常掌控转异常精通；影画2的物理来源紊乱增伤与影画4的物理无视抗性可静态展开，[极性强击]特例仍未在 static resolver 中展开。",
+  },
+  {
+    sourceType: "agent",
+    sourceId: "1401",
+    minimumMindscape: 1,
+    note: "爱丽丝的影画1[强击]后的 20% 减防仍需显式状态控制；当前未在 static resolver 中自动展开。",
+  },
+  {
+    sourceType: "agent",
+    sourceId: "1401",
+    minimumMindscape: 6,
+    note: "爱丽丝的影画6[决胜状态]追加攻击与次数上限仍未在 static resolver 中展开。",
   },
   {
     sourceType: "agent",
