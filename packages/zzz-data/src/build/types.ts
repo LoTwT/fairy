@@ -54,6 +54,7 @@ export type StaticBuildBucket =
   | "bonusDamageSum"
   | "critRate"
   | "critDamage"
+  | "defenseReduction"
   | "penetrationRate"
   | "penetrationValue"
   | "resistanceReduction"
@@ -261,6 +262,7 @@ export interface StaticBuildResolvedBuckets {
   bonusDamageSum: number
   critRate: number
   critDamage: number
+  defenseReduction: number
   penetrationRate: number
   penetrationValue: number
   resistanceReduction: number

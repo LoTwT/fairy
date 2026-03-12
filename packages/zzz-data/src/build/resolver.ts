@@ -52,6 +52,7 @@ function createEmptyBuckets(): StaticBuildResolvedBuckets {
     bonusDamageSum: 0,
     critRate: 0,
     critDamage: 0,
+    defenseReduction: 0,
     penetrationRate: 0,
     penetrationValue: 0,
     resistanceReduction: 0,
@@ -673,7 +674,8 @@ export function resolveStaticBuildDamage(
         attackerLevelBase: getAttackerLevelBase(enemy.attackerLevel ?? 60),
         defenderBaseDefense: enemy.defenderBaseDefense,
         defenseBonus: enemy.defenseBonus ?? 0,
-        defenseReduction: enemy.defenseReduction ?? 0,
+        defenseReduction:
+          (enemy.defenseReduction ?? 0) + resolvedBuckets.defenseReduction,
         penetrationRate: resolvedPanel.penetrationRate,
         penetrationValue: resolvedPanel.penetrationValue,
       },
@@ -744,7 +746,8 @@ export function resolveStaticBuildDamage(
         attackerLevelBase: getAttackerLevelBase(enemy.attackerLevel ?? 60),
         defenderBaseDefense: enemy.defenderBaseDefense,
         defenseBonus: enemy.defenseBonus ?? 0,
-        defenseReduction: enemy.defenseReduction ?? 0,
+        defenseReduction:
+          (enemy.defenseReduction ?? 0) + resolvedBuckets.defenseReduction,
         penetrationRate: resolvedPanel.penetrationRate,
         penetrationValue: resolvedPanel.penetrationValue,
       },
@@ -815,7 +818,8 @@ export function resolveStaticBuildDamage(
         attackerLevelBase: getAttackerLevelBase(enemy.attackerLevel ?? 60),
         defenderBaseDefense: enemy.defenderBaseDefense,
         defenseBonus: enemy.defenseBonus ?? 0,
-        defenseReduction: enemy.defenseReduction ?? 0,
+        defenseReduction:
+          (enemy.defenseReduction ?? 0) + resolvedBuckets.defenseReduction,
         penetrationRate: resolvedPanel.penetrationRate,
         penetrationValue: resolvedPanel.penetrationValue,
       },

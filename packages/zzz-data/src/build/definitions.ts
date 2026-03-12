@@ -1272,6 +1272,46 @@ export const staticBuildEffectDefinitions = [
     ],
   },
   {
+    id: "yanagi-m1-insight-anomaly-proficiency",
+    sourceType: "agent",
+    sourceId: "1221",
+    sourceName: "柳",
+    label: "影画1：洞悉异常精通提升",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      minimumMindscape: 1,
+      damageTypes: ["anomaly", "disorder"],
+      combatTags: ["yanagiInsight"],
+    },
+    modifiers: [
+      {
+        bucket: "anomalyProficiency",
+        value: () => 80,
+      },
+    ],
+  },
+  {
+    id: "yanagi-m4-recognized-penetration-rate",
+    sourceType: "agent",
+    sourceId: "1221",
+    sourceName: "柳",
+    label: "影画4：识破目标穿透率提升",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      minimumMindscape: 4,
+      damageTypes: ["anomaly", "disorder"],
+      combatTags: ["yanagiRecognizedTarget"],
+    },
+    modifiers: [
+      {
+        bucket: "penetrationRate",
+        value: () => 0.16,
+      },
+    ],
+  },
+  {
     id: "jane-core-assault-anomaly-crit-rate",
     sourceType: "agent",
     sourceId: "1261",
@@ -1308,6 +1348,67 @@ export const staticBuildEffectDefinitions = [
       {
         bucket: "anomalyCritDamage",
         value: () => 0.5,
+      },
+    ],
+  },
+  {
+    id: "jane-m2-gnawed-defense-reduction",
+    sourceType: "agent",
+    sourceId: "1261",
+    sourceName: "简",
+    label: "影画2：啮咬目标减防",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      minimumMindscape: 2,
+      damageTypes: ["anomaly", "disorder"],
+      combatTags: ["gnawedTarget"],
+    },
+    modifiers: [
+      {
+        bucket: "defenseReduction",
+        value: () => 0.15,
+      },
+    ],
+  },
+  {
+    id: "jane-m2-assault-anomaly-crit-damage",
+    sourceType: "agent",
+    sourceId: "1261",
+    sourceName: "简",
+    label: "影画2：强击异常暴击伤害",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      minimumMindscape: 2,
+      damageTypes: ["anomaly"],
+      attributes: ["Physical"],
+      combatTags: ["gnawedTarget"],
+    },
+    modifiers: [
+      {
+        bucket: "anomalyCritDamage",
+        value: () => 0.5,
+      },
+    ],
+  },
+  {
+    id: "jane-m4-anomaly-bonus",
+    sourceType: "agent",
+    sourceId: "1261",
+    sourceName: "简",
+    label: "影画4：强击/紊乱后异常伤害提升",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      minimumMindscape: 4,
+      damageTypes: ["anomaly", "disorder"],
+      combatTags: ["assaultOrDisorderTriggered"],
+    },
+    modifiers: [
+      {
+        bucket: "anomalyBonusDamageSum",
+        value: () => 0.18,
       },
     ],
   },
@@ -2927,9 +3028,39 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
   },
   {
     sourceType: "agent",
+    sourceId: "1221",
+    minimumMindscape: 1,
+    note: "柳的影画1当前已支持[洞悉]状态下的异常精通提升；洞悉层数获取与消耗仍未在 static resolver 中展开。",
+  },
+  {
+    sourceType: "agent",
+    sourceId: "1221",
+    minimumMindscape: 4,
+    note: "柳的影画4当前已支持[识破]目标的穿透率提升；[识破]施加时机与持续时间仍需通过 combatTags 显式表达。",
+  },
+  {
+    sourceType: "agent",
     sourceId: "1261",
     damageTypes: ["anomaly", "disorder"],
     note: "简的每点异常精通追加异常暴击率、以及物理异常积蓄效率提升未自动折算；若需精细计算，请显式补充 anomalyCritRate 或自行调整 damageMultiplier。",
+  },
+  {
+    sourceType: "agent",
+    sourceId: "1261",
+    minimumMindscape: 2,
+    note: "简的影画2当前已支持[啮咬]目标减防与强击异常暴击伤害；队友触发[强击]时的同等判定仍需通过 combatTags 显式表达。",
+  },
+  {
+    sourceType: "agent",
+    sourceId: "1261",
+    minimumMindscape: 4,
+    note: "简的影画4当前已支持[强击]/[紊乱]后异常伤害提升；触发时机与持续时间仍需通过 combatTags 显式表达。",
+  },
+  {
+    sourceType: "agent",
+    sourceId: "1261",
+    minimumMindscape: 6,
+    note: "简的影画6[狂热]直入、暴击属性提升与额外攻击仍未在 static resolver 中展开。",
   },
   {
     sourceType: "agent",

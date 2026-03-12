@@ -930,6 +930,49 @@ describe("static build resolver", () => {
     ).toBe(false)
   })
 
+  it("expands Jane mindscape-aware anomaly bonuses on gnawed targets", () => {
+    const result = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1261",
+        wEngineId: "14126",
+        agentLevel: 60,
+        agentMindscape: 4,
+        coreSkillLevel: 7,
+        wEngineRefinement: 1,
+      },
+      panel: {
+        attack: 3000,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 180,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "dash",
+        damageMultiplier: "500%",
+        attribute: "物理",
+        extraAbilityActive: true,
+        combatTags: ["gnawedTarget", "assaultOrDisorderTriggered"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.loadout.agentMindscape).toBe(4)
+    expect(result.resolvedBuckets.defenseReduction).toBeCloseTo(0.15, 4)
+    expect(result.resolvedBuckets.anomalyCritDamage).toBeCloseTo(1, 4)
+    expect(result.resolvedBuckets.anomalyBonusDamageSum).toBeCloseTo(0.18, 4)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("影画4当前已支持[强击]/[紊乱]后异常伤害提升"),
+      ),
+    ).toBe(true)
+  })
+
   it("applies curated disorder effects for Yanagi and Timeweaver", () => {
     const result = resolveStaticBuildDamage({
       mode: "full-buff",
@@ -976,6 +1019,54 @@ describe("static build resolver", () => {
         item.includes("时流贤者 当前未收录 curated"),
       ),
     ).toBe(false)
+  })
+
+  it("expands Yanagi mindscape-aware anomaly proficiency and penetration", () => {
+    const result = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1221",
+        wEngineId: "14122",
+        agentLevel: 60,
+        agentMindscape: 4,
+        coreSkillLevel: 7,
+        wEngineRefinement: 1,
+      },
+      panel: {
+        attack: 3100,
+        baseAttack: 1250,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 320,
+      },
+      scenario: {
+        damageType: "disorder",
+        skillTag: "enhancedSpecial",
+        anomalyType: "electric",
+        remainingTime: 5,
+        attribute: "电属性",
+        extraAbilityActive: true,
+        combatTags: [
+          "yanagiMoonEclipse",
+          "targetAnomalous",
+          "yanagiInsight",
+          "yanagiRecognizedTarget",
+        ],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.loadout.agentMindscape).toBe(4)
+    expect(result.resolvedBuckets.anomalyProficiency).toBeCloseTo(155, 4)
+    expect(result.resolvedBuckets.penetrationRate).toBeCloseTo(0.16, 4)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("影画4当前已支持[识破]目标的穿透率提升"),
+      ),
+    ).toBe(true)
   })
 
   it("applies curated anomaly proficiency effects for Aria and Soul Shell", () => {

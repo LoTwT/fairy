@@ -470,7 +470,7 @@ resolver 主线完成后，文档维护需要单独列为持续事项，避免�
 
 ### 9.5 当前状态
 
-当前 `V4` 第三批已完成：
+当前 `V4` 第四批已完成：
 
 - `V4.1` 已完成：`loadout.agentMindscape`、`finalPanel.energyGenerationRate`、`minimumMindscape` 已进入公开 contract
 - `V4.2` 已完成：resolver / tool schema / trace 已能消费 progression-aware value context
@@ -482,7 +482,10 @@ resolver 主线完成后，文档维护需要单独列为持续事项，避免�
 - `V4.3` 已完成第三批：
   - `爱丽丝`：影画 2 的物理来源紊乱增伤、影画 4 的物理异常 / 紊乱无视抗性
   - `薇薇安`：影画 1 的预言目标异常 / 紊乱增伤、影画 2 的以太异常 / 紊乱无视抗性
-- `V4.4` 已完成第三轮 assumptions refinement：
+- `V4.3` 已完成第四批：
+  - `简`：影画 2 的 `[啮咬]` 目标减防、强击异常暴击伤害，影画 4 的 `[强击] / [紊乱]` 后异常伤害提升
+  - `柳`：影画 1 的 `[洞悉]` 异常精通提升、影画 4 的 `[识破]` 目标穿透率提升
+- `V4.4` 已完成第四轮 assumptions refinement：
   - 可区分缺少 `agentMindscape`
   - 可区分缺少 `energyGenerationRate`
   - 仍未展开的动态机制继续单独提示
