@@ -186,6 +186,7 @@ packages/zzz-agent/
 - [`static-build-resolver-v2.md`](../docs/specs/static-build-resolver-v2.md) — 第二版实现范围：扩展支持名单与技能矩阵模板约定
 - [`static-build-resolver-v3.md`](../docs/specs/static-build-resolver-v3.md) — 第三版冻结范围：anomaly / disorder contract、单代理人静态快照约束，以及 V3.3/V3.4 refinement 收口
 - [`static-build-resolver-v4.md`](../docs/specs/static-build-resolver-v4.md) — 当前阶段范围：progression-aware resolver 第九批已完成，并在当前 contract 下收口；已接入 `agentMindscape` / `energyGenerationRate` contract 与柏妮思、奥菲丝&「鬼火」、爱丽丝、薇薇安、简、柳、格莉丝、爱芮的高价值 progression-aware 支持
+- [`static-build-resolver-v5.md`](../docs/specs/static-build-resolver-v5.md) — 下一阶段范围：source-aware dynamic snapshot context，计划为 anomaly / disorder 提供显式的次数 / 倍率快照输入，而不引入时间轴模拟
 
 ## 计算器模块（src/calculator/）
 

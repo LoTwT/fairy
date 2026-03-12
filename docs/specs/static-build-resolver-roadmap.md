@@ -530,3 +530,54 @@ resolver 主线完成后，文档维护需要单独列为持续事项，避免�
 
 1. 新的 progression / dynamic value context
 2. 或新的 anomaly / disorder damage view
+
+## 10. V5 source-aware dynamic snapshot context
+
+### 10.1 为什么进入 V5
+
+`V4` 收口后，异常 / 紊乱剩余未展开项已经不再适合继续补固定 bucket 或固定快照字段。
+
+真正缺失的是：
+
+- 当前这一轮已经确定的额外结算次数
+- 当前这一轮已经确定的额外倍率
+- 当前这一轮已经确定的 source-specific 动态状态
+
+这些值不应由 resolver 猜测，但可以由用户显式提供。
+
+### 10.2 V5 目标
+
+`V5` 的目标是：
+
+- 为 `resolveStaticBuildDamage` 增加 `scenario.dynamicSnapshot`
+- 保持静态快照模型
+- 不进入时间轴 / 循环模拟
+
+### 10.3 V5 范围
+
+第一批只做 anomaly / disorder：
+
+1. `柏妮思`
+2. `爱芮`
+
+不做：
+
+- anomaly / disorder skill matrix
+- 背景自动触发循环
+- 独立异常槽
+- 时间轴与资源过程模拟
+
+### 10.4 V5 执行顺序
+
+1. `V5.1` contract freeze
+2. `V5.2` dynamic snapshot resolver
+3. `V5.3` 第一批来源 coverage
+4. `V5.4` assumptions refinement
+
+### 10.5 当前状态
+
+当前 `V5` 处于 `V5.1`：
+
+- `static-build-resolver-v5.md` 已创建
+- roadmap 已补 `V5` 主线
+- 运行时代码尚未开始
