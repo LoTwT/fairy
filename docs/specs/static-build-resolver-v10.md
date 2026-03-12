@@ -46,7 +46,7 @@ research-only，暂不进入实现：
 
 - `V10.1` 已完成
 - `V10.2` 已完成：`爱芮 [异放]` 已进入 `source-specific damage view`
-- `V10.3` 未开始
+- `V10.3` 已完成：`霰落星殿` / `混沌重金属 4件` 已固定为 research-only，不再继续扩当前 contract
 
 ## 6. 设计要点
 
@@ -84,3 +84,11 @@ research-only，暂不进入实现：
 3. `README` / roadmap / 总设计文档明确记录：
    - `爱芮 [异放]` 已支持
    - `霰落星殿` / `混沌重金属 4件` 仍是 research-only
+
+## 8. 当前结论
+
+`V10` 已在当前 contract 下收口：
+
+- `爱芮 [异放]` 已通过独立 delta view 暴露
+- `霰落星殿` / `混沌重金属 4件` 继续保留为 research-only
+- 若未来要继续推进这两类来源，应先定义稳定的 source-value / source-state 快照，再开新 scope
