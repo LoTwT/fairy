@@ -23,7 +23,7 @@
 
 - `V7.1` contract freeze：已完成
 - `V7.2` resolver wiring：已完成
-- `V7.3` source adoption：前四批已完成（`柏妮思 M6` 的 `25% 火抗无视 -> resolvedSnapshot.bucketDeltas.ignoreResistance`；`格莉丝 M2`、`简`、`派派`、`时流贤者`、`柳 M2`、`薇薇安 M2` 的异常积蓄效率 / 异常倍率折算 -> `resolvedSnapshot.multiplierFactors.skillMultiplierFactor`）
+- `V7.3` source adoption：前四批已完成，并在当前 contract 下收口（`柏妮思 M6` 的 `25% 火抗无视 -> resolvedSnapshot.bucketDeltas.ignoreResistance`；`格莉丝 M2`、`简`、`派派`、`时流贤者`、`柳 M2`、`薇薇安 M2` 的异常积蓄效率 / 异常倍率折算 -> `resolvedSnapshot.multiplierFactors.skillMultiplierFactor`）
 
 ## 1. 为什么需要 V7
 
@@ -177,6 +177,16 @@ type StaticBuildResolvedSnapshotMultiplierKey = "skillMultiplierFactor"
 - 仍保留在 assumptions 的部分：
   - `柏妮思` 特殊 `[余烬]`
   - 额外 `[灼烧]` 结算
+
+当前结论：
+
+- 在现有 `resolvedSnapshot` contract 下，高价值且可稳定表达的 clean migration 已基本完成
+- 剩余项主要属于：
+  - `dynamicSnapshot`：额外结算次数、额外倍率、命中链与触发次数
+  - `stateSnapshot`：来源特定状态成立与 source-specific 结算倍率
+  - `finalPanel`：能量回复、异常掌控等面板快照
+  - 真动态过程：资源消耗、积蓄效率变化、后台自动释放、随机三选一增益
+- 因此 `V7.3` 在当前 contract 下不再继续扩批，后续按来源归属分别进入对应主线
 
 ## 6. 验收标准
 
