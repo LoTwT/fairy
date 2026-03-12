@@ -764,3 +764,4 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 13. `V13` anomaly/disorder curated coverage：已在当前 contract 下收口；`格莉丝`、`简`、`柳`、`派派`、`柏妮思`、`爱丽丝`、`爱芮` 及 `淬锋钳刺`、`时流贤者`、`触电唇彩`、`灼心摇壶`、`壳中之灵` 的高价值 anomaly / disorder curated coverage 已落地，且未为消除 coverage-gap 额外引入 public key，见 [静态构筑解析系统 V13](./static-build-resolver-v13.md)
 14. `V14` non-agent source-specific damage views：已在当前 contract 下收口；`霰落星殿`、`混沌重金属 4件` 继续保持 `research-only`，`轰鸣座驾`、`自由蓝调 4件` 继续保持 source note，不新增新的非代理人 source view，见 [静态构筑解析系统 V14](./static-build-resolver-v14.md)
 15. `V15` structured source-note guidance：已在当前 contract 下收口；当前 `sourceNotes.guidance` 已进入公开 contract，`zzz-agent` prompt 与 README 已优先消费该结构化 guidance，且未新增新的计算输入 key，见 [静态构筑解析系统 V15](./static-build-resolver-v15.md)
+16. `V16` generic w-engine curated coverage：已完成 scope freeze；下一步盘点并按批次补齐通用音擎 curated coverage，减少 specialty-compatible 构筑下的 generic assumptions，见 [静态构筑解析系统 V16](./static-build-resolver-v16.md)

@@ -985,3 +985,23 @@ Batch B：
 - `V15.2` 已完成：`sourceNotes.guidance` taxonomy 已冻结
 - `V15.3` 已完成：`zzz-agent` prompt 与 README 已优先消费 `sourceNotes.guidance`
 - `V15.4` 已完成：当前 contract 下已收口，下一步进入新的 post-V15 scope
+
+## 21. V16 generic w-engine curated coverage
+
+### 21.1 目标
+
+在不改主公式和不新增计算输入 key 的前提下，把当前仍靠 generic fallback 的通用音擎逐步补成 curated coverage。
+
+### 21.2 范围
+
+1. `V16.1` scope freeze
+2. `V16.2` generic w-engine inventory
+3. `V16.3` curated coverage batches
+4. `V16.4` closeout
+
+### 21.3 当前状态
+
+- `V16.1` 已完成：冻结到通用音擎 curated coverage，不继续扩大 contract
+- `V16.2` 未开始
+- `V16.3` 未开始
+- `V16.4` 未开始
