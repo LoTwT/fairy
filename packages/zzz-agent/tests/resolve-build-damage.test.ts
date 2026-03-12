@@ -1117,6 +1117,50 @@ describe("resolveBuildDamage tool", () => {
     )
   })
 
+  it("supports Burnice m6 fire resistance ignore through resolved snapshots", async () => {
+    const result = await runTool(resolveBuildDamage, {
+      agent: "柏妮思",
+      mode: "full-buff",
+      agentLevel: 60,
+      agentMindscape: 6,
+      finalPanel: {
+        attack: 3100,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 160,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "enhancedSpecial",
+        damageMultiplier: "520%",
+        attribute: "火属性",
+        resolvedSnapshot: {
+          bucketDeltas: {
+            ignoreResistance: 0.25,
+          },
+        },
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    expect((result as any).build.resolvedBuckets.ignoreResistance).toBeCloseTo(
+      0.25,
+      4,
+    )
+    expect(
+      (result as any).build.assumptions.some((item: string) =>
+        item.includes(
+          "柏妮思的影画6 25% 火抗无视当前已按 scenario.resolvedSnapshot.bucketDeltas.ignoreResistance 记录",
+        ),
+      ),
+    ).toBe(true)
+  })
+
   it("supports Burnice dynamic ember snapshots through the high-level resolver", async () => {
     const result = await runTool(resolveBuildDamage, {
       agent: "柏妮思",

@@ -552,6 +552,7 @@ export function resolveStaticBuildDamage(
       anomalyMastery: input.panel.anomalyMastery,
       dynamicSnapshot: input.scenario.dynamicSnapshot,
       stateSnapshot: input.scenario.stateSnapshot,
+      resolvedSnapshot: input.scenario.resolvedSnapshot,
       isStunned,
       disorderSourceType:
         input.scenario.damageType === "disorder"
@@ -570,6 +571,7 @@ export function resolveStaticBuildDamage(
         anomalyMastery: input.panel.anomalyMastery,
         dynamicSnapshot: input.scenario.dynamicSnapshot,
         stateSnapshot: input.scenario.stateSnapshot,
+        resolvedSnapshot: input.scenario.resolvedSnapshot,
         isStunned,
         disorderSourceType:
           input.scenario.damageType === "disorder"
@@ -589,6 +591,7 @@ export function resolveStaticBuildDamage(
         anomalyMastery: input.panel.anomalyMastery,
         dynamicSnapshot: input.scenario.dynamicSnapshot,
         stateSnapshot: input.scenario.stateSnapshot,
+        resolvedSnapshot: input.scenario.resolvedSnapshot,
         isStunned,
         disorderSourceType:
           input.scenario.damageType === "disorder"

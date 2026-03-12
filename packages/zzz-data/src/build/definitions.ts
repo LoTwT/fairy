@@ -1,5 +1,8 @@
 import type {
   StaticBuildEffectDefinition,
+  StaticBuildResolvedSnapshotBucketKey,
+  StaticBuildResolvedSnapshotInput,
+  StaticBuildResolvedSnapshotMultiplierKey,
   StaticBuildValueContext,
 } from "./types.js"
 import { calcDisorderDamageMultiplier } from "../calculator/factors.js"
@@ -3317,6 +3320,10 @@ interface StaticBuildSourceNote {
     | "alicePolarityAssaultDamageRatio"
     | "miyabiFrostburnBreakDamageRatio"
   )[]
+  requiredResolvedSnapshotBuckets?: readonly StaticBuildResolvedSnapshotBucketKey[]
+  requiresMissingResolvedSnapshotBuckets?: readonly StaticBuildResolvedSnapshotBucketKey[]
+  requiredResolvedSnapshotMultipliers?: readonly StaticBuildResolvedSnapshotMultiplierKey[]
+  requiresMissingResolvedSnapshotMultipliers?: readonly StaticBuildResolvedSnapshotMultiplierKey[]
   requiresMissingDynamicValues?: readonly (
     | "ariaExflowDamageRatio"
     | "ariaStunnedDamageRatio"
@@ -3398,7 +3405,17 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
     sourceType: "agent",
     sourceId: "1171",
     minimumMindscape: 6,
-    note: "柏妮思的影画6特殊[余烬]、额外[灼烧]结算与 25% 火抗无视仍未在 static resolver 中展开。",
+    damageTypes: ["anomaly", "disorder"],
+    requiresMissingResolvedSnapshotBuckets: ["ignoreResistance"],
+    note: "柏妮思的影画6中，25% 火抗无视当前可通过 scenario.resolvedSnapshot.bucketDeltas.ignoreResistance 显式提供；特殊[余烬]与额外[灼烧]结算仍未在 static resolver 中展开。",
+  },
+  {
+    sourceType: "agent",
+    sourceId: "1171",
+    minimumMindscape: 6,
+    damageTypes: ["anomaly", "disorder"],
+    requiredResolvedSnapshotBuckets: ["ignoreResistance"],
+    note: "柏妮思的影画6 25% 火抗无视当前已按 scenario.resolvedSnapshot.bucketDeltas.ignoreResistance 记录；特殊[余烬]与额外[灼烧]结算仍未在 static resolver 中展开。",
   },
   {
     sourceType: "agent",
@@ -3735,6 +3752,7 @@ export function getStaticBuildSourceNotes(input: {
   anomalyMastery?: number
   dynamicSnapshot?: StaticBuildValueContext["dynamicSnapshot"]
   stateSnapshot?: StaticBuildValueContext["stateSnapshot"]
+  resolvedSnapshot?: StaticBuildResolvedSnapshotInput
   isStunned?: boolean
   disorderSourceType?:
     | "fire"
@@ -3864,6 +3882,40 @@ export function getStaticBuildSourceNotes(input: {
         note.requiresMissingStateValues &&
         note.requiresMissingStateValues.every(
           (key) => input.stateSnapshot?.values?.[key] !== undefined,
+        )
+      ) {
+        return false
+      }
+      if (
+        note.requiredResolvedSnapshotBuckets &&
+        note.requiredResolvedSnapshotBuckets.some(
+          (key) => input.resolvedSnapshot?.bucketDeltas?.[key] === undefined,
+        )
+      ) {
+        return false
+      }
+      if (
+        note.requiresMissingResolvedSnapshotBuckets &&
+        note.requiresMissingResolvedSnapshotBuckets.every(
+          (key) => input.resolvedSnapshot?.bucketDeltas?.[key] !== undefined,
+        )
+      ) {
+        return false
+      }
+      if (
+        note.requiredResolvedSnapshotMultipliers &&
+        note.requiredResolvedSnapshotMultipliers.some(
+          (key) =>
+            input.resolvedSnapshot?.multiplierFactors?.[key] === undefined,
+        )
+      ) {
+        return false
+      }
+      if (
+        note.requiresMissingResolvedSnapshotMultipliers &&
+        note.requiresMissingResolvedSnapshotMultipliers.every(
+          (key) =>
+            input.resolvedSnapshot?.multiplierFactors?.[key] !== undefined,
         )
       ) {
         return false

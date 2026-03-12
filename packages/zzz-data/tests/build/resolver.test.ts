@@ -1609,6 +1609,97 @@ describe("static build resolver", () => {
     ).toBe(true)
   })
 
+  it("keeps Burnice m6 fire resistance ignore as an explicit resolved snapshot assumption when missing", () => {
+    const result = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1171",
+        agentLevel: 60,
+        agentMindscape: 6,
+      },
+      panel: {
+        attack: 3100,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 160,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "enhancedSpecial",
+        damageMultiplier: "520%",
+        attribute: "火属性",
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.resolvedBuckets.ignoreResistance).toBeCloseTo(0, 4)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes(
+          "25% 火抗无视当前可通过 scenario.resolvedSnapshot.bucketDeltas.ignoreResistance 显式提供",
+        ),
+      ),
+    ).toBe(true)
+  })
+
+  it("adopts Burnice m6 fire resistance ignore through resolved snapshots", () => {
+    const result = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1171",
+        agentLevel: 60,
+        agentMindscape: 6,
+      },
+      panel: {
+        attack: 3100,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 160,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "enhancedSpecial",
+        damageMultiplier: "520%",
+        attribute: "火属性",
+        resolvedSnapshot: {
+          bucketDeltas: {
+            ignoreResistance: 0.25,
+          },
+        },
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.resolvedBuckets.ignoreResistance).toBeCloseTo(0.25, 4)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("scenario.resolvedSnapshot.bucketDeltas"),
+      ),
+    ).toBe(true)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes(
+          "柏妮思的影画6 25% 火抗无视当前已按 scenario.resolvedSnapshot.bucketDeltas.ignoreResistance 记录",
+        ),
+      ),
+    ).toBe(true)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes(
+          "特殊[余烬]与额外[灼烧]结算仍未在 static resolver 中展开",
+        ),
+      ),
+    ).toBe(true)
+  })
+
   it("applies Burnice dynamic ember snapshot ratios to anomaly and disorder damage", () => {
     const result = resolveStaticBuildDamage({
       mode: "full-buff",

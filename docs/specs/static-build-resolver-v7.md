@@ -23,7 +23,7 @@
 
 - `V7.1` contract freeze：已完成
 - `V7.2` resolver wiring：已完成
-- `V7.3` source adoption：未开始
+- `V7.3` source adoption：第一批已完成（`柏妮思 M6` 的 `25% 火抗无视 -> resolvedSnapshot.bucketDeltas.ignoreResistance`）
 
 ## 1. 为什么需要 V7
 
@@ -156,6 +156,15 @@ type StaticBuildResolvedSnapshotMultiplierKey = "skillMultiplierFactor"
 - `resolvedSnapshot.multiplierFactors`
 
 这一阶段只迁移高价值来源，不追求一次性清空全部 assumptions。
+
+当前状态：
+
+- 已完成第一批来源迁移：
+  - `柏妮思` 影画 6 的 `25% 火抗无视`
+  - 当前可通过 `scenario.resolvedSnapshot.bucketDeltas.ignoreResistance` 显式提供
+- 仍保留在 assumptions 的部分：
+  - `柏妮思` 特殊 `[余烬]`
+  - 额外 `[灼烧]` 结算
 
 ## 6. 验收标准
 

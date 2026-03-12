@@ -695,4 +695,9 @@ resolver 主线完成后，文档维护需要单独列为持续事项，避免�
   - `multiplierFactors.skillMultiplierFactor` 已作为最终 factor 接入当前结算路径
   - assumptions 已能显式标记当前使用了 `resolvedSnapshot`
 
-下一步进入 `V7.3`，挑选高价值来源把剩余 assumptions 迁移到 `resolvedSnapshot`。
+`V7.3` 已完成第一批来源迁移：
+
+- `柏妮思` 影画 6 的 `25% 火抗无视` 已改为可通过 `scenario.resolvedSnapshot.bucketDeltas.ignoreResistance` 显式提供
+- 特殊 `[余烬]` 与额外 `[灼烧]` 结算仍保留在 assumptions
+
+下一步继续 `V7.3` 后续批次，挑选更多高价值来源把剩余 assumptions 迁移到 `resolvedSnapshot`。

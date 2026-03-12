@@ -731,4 +731,4 @@
 4. progression-aware resolver 已完成 `V4` 第九批并在当前 contract 下收口，见 [静态构筑解析系统 V4](./static-build-resolver-v4.md)
 5. `V5` source-aware dynamic snapshot context 已在当前 contract 下完成，见 [静态构筑解析系统 V5](./static-build-resolver-v5.md)
 6. `V6` source-state snapshot context 已完成首批 `爱丽丝` / `雅` 的来源覆盖与 state-aware assumptions refinement，见 [静态构筑解析系统 V6](./static-build-resolver-v6.md)
-7. `V7` resolved snapshot overrides 已完成 `V7.2` resolver wiring，可显式接入“上层已知最终 bucket 贡献”，见 [静态构筑解析系统 V7](./static-build-resolver-v7.md)
+7. `V7` resolved snapshot overrides 已完成 `V7.3` 第一批来源迁移，当前已把 `柏妮思 M6` 的 `25% 火抗无视` 接到 `scenario.resolvedSnapshot.bucketDeltas.ignoreResistance`，见 [静态构筑解析系统 V7](./static-build-resolver-v7.md)
