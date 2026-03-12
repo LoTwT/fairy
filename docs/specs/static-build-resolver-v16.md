@@ -78,7 +78,7 @@
 - `V16.1` 已完成：冻结到通用音擎 curated coverage，不继续扩大 contract
 - `V16.2` 已完成：通用音擎 inventory 与 batch 划分已冻结
 - `V16.3` 已完成 Batch C：通用音擎批次已全部落地
-- `V16.4` 未开始
+- `V16.4` 已完成：当前 contract 下已收口
 
 ## 8. Inventory
 
@@ -171,4 +171,12 @@
 - `强音热望`
 - `街头巨星`
 
-下一步进入 `V16.4 closeout`。
+`V16` 当前结论：
+
+1. 通用强攻 / 命破 / 异常音擎的高价值可静态表达来源已经补到当前 contract
+2. `「灰烬」-钴蓝` 保持 source-aware unsupported，不再误报 generic coverage-gap
+3. `加农转子` 额外 200% 攻击伤害继续保持 process-only
+4. 仍明确不纳入当前 damage contract 的项：
+   - `「月相」-朔`
+   - `「电磁暴」-叁式`
+5. `V16` 到此收口，后续不再继续往本阶段增加新的通用音擎批次

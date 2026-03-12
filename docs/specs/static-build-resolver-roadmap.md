@@ -1004,7 +1004,12 @@ Batch B：
 - `V16.1` 已完成：冻结到通用音擎 curated coverage，不继续扩大 contract
 - `V16.2` 已完成：inventory 与 batch 划分已冻结
 - `V16.3` 已完成 Batch C：通用音擎批次已全部落地
-- `V16.4` 未开始
+- `V16.4` 已完成：当前 contract 下已收口
+
+结论：
+
+1. `V16` 目标已经完成，不再继续向这一阶段追加新的通用音擎批次
+2. 仍不适合静态 damage contract 的来源继续保持显式 out-of-scope
 
 ### 21.4 当前批次规划
 
