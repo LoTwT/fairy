@@ -185,7 +185,7 @@ packages/zzz-agent/
 - [`static-build-resolver-v1.md`](../docs/specs/static-build-resolver-v1.md) — 第一版实现范围冻结：支持对象、bucket、profile、输入输出 contract 与验收标准
 - [`static-build-resolver-v2.md`](../docs/specs/static-build-resolver-v2.md) — 第二版实现范围：扩展支持名单与技能矩阵模板约定
 - [`static-build-resolver-v3.md`](../docs/specs/static-build-resolver-v3.md) — 第三版冻结范围：anomaly / disorder contract、单代理人静态快照约束，以及 V3.3/V3.4 refinement 收口
-- [`static-build-resolver-v4.md`](../docs/specs/static-build-resolver-v4.md) — 当前阶段范围：progression-aware resolver 第八批已完成，已接入 `agentMindscape` / `energyGenerationRate` contract 与柏妮思、奥菲丝&「鬼火」、爱丽丝、薇薇安、简、柳、格莉丝的高价值 progression-aware 支持
+- [`static-build-resolver-v4.md`](../docs/specs/static-build-resolver-v4.md) — 当前阶段范围：progression-aware resolver 第九批已完成，已接入 `agentMindscape` / `energyGenerationRate` contract 与柏妮思、奥菲丝&「鬼火」、爱丽丝、薇薇安、简、柳、格莉丝、爱芮的高价值 progression-aware 支持
 
 ## 计算器模块（src/calculator/）
 
@@ -227,6 +227,7 @@ const total = base * bonus * crit * resistance * custom
 - `柏妮思`：潜能觉醒「沸点派对」的异常掌控 / 伤害提升、影画 2 的 `[热意洞穿]` 层数穿透率收益
 - `奥菲丝&「鬼火」`：核心技「准星聚焦」的额外攻击力、影画 1 的伤害提升 / 火抗无视、影画 2 的终结技后攻击力、影画 4 的强化特殊技 / 终结技增伤
 - `爱丽丝`：影画 1 的 `[强击]` 后减防、影画 2 的物理来源紊乱增伤、影画 4 的物理异常 / 紊乱无视抗性
+- `爱芮`：影画 1 的 `[异放]` 基础异常暴击、按 `finalPanel.anomalyMastery` 追加异常暴击率，影画 2 的固定无视防御与 `[妄想时刻]` 额外无视防御
 - `薇薇安`：影画 1 的预言目标异常 / 紊乱增伤、影画 2 的以太异常 / 紊乱无视抗性
 - `简`：影画 1 的 `[狂热]` 状态异常精通转增伤、核心被动中“每点异常精通 -> 强击异常暴击率”的自动折算，影画 2 的 `[啮咬]` 目标减防、强击异常暴击伤害，影画 4 的 `[强击] / [紊乱]` 后异常伤害提升
 - `格莉丝`：影画 2 的手雷命中后电抗降低

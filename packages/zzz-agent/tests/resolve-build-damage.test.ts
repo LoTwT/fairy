@@ -672,6 +672,51 @@ describe("resolveBuildDamage tool", () => {
     )
   })
 
+  it("supports Aria mindscape-aware anomaly crit and defense penetration through the high-level resolver", async () => {
+    const result = await runTool(resolveBuildDamage, {
+      agent: "爱芮",
+      wEngine: "壳中之灵",
+      mode: "full-buff",
+      agentLevel: 60,
+      agentMindscape: 2,
+      finalPanel: {
+        attack: 2950,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 150,
+        anomalyMastery: 130,
+      },
+      scenario: {
+        damageType: "disorder",
+        skillTag: "enhancedSpecial",
+        anomalyType: "侵蚀",
+        remainingTime: 5,
+        attribute: "以太",
+        combatTags: ["targetAnomalous", "ariaDreamtime"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    expect((result as any).build.loadout.agentMindscape).toBe(2)
+    expect((result as any).build.resolvedBuckets.anomalyCritRate).toBeCloseTo(
+      0.4,
+      4,
+    )
+    expect((result as any).build.resolvedBuckets.anomalyCritDamage).toBeCloseTo(
+      0.25,
+      4,
+    )
+    expect((result as any).build.resolvedBuckets.defenseReduction).toBeCloseTo(
+      0.24,
+      4,
+    )
+  })
+
   it("supports Vivian mindscape-aware disorder refinements through the high-level resolver", async () => {
     const result = await runTool(resolveBuildDamage, {
       agent: "薇薇安",

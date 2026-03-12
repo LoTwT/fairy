@@ -1244,6 +1244,50 @@ describe("static build resolver", () => {
     ).toBe(false)
   })
 
+  it("expands Aria mindscape-aware anomaly crit and defense penetration", () => {
+    const result = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1501",
+        wEngineId: "14150",
+        agentLevel: 60,
+        agentMindscape: 2,
+        coreSkillLevel: 7,
+        wEngineRefinement: 1,
+      },
+      panel: {
+        attack: 2950,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 150,
+        anomalyMastery: 130,
+      },
+      scenario: {
+        damageType: "disorder",
+        skillTag: "enhancedSpecial",
+        anomalyType: "侵蚀",
+        remainingTime: 5,
+        attribute: "以太",
+        combatTags: ["targetAnomalous", "ariaDreamtime"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.loadout.agentMindscape).toBe(2)
+    expect(result.resolvedBuckets.anomalyCritRate).toBeCloseTo(0.4, 4)
+    expect(result.resolvedBuckets.anomalyCritDamage).toBeCloseTo(0.25, 4)
+    expect(result.resolvedBuckets.defenseReduction).toBeCloseTo(0.24, 4)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes('combatTags: ["ariaDreamtime"]'),
+      ),
+    ).toBe(true)
+  })
+
   it("applies curated anomaly bonus for Piper with anomaly-compatible engines", () => {
     const result = resolveStaticBuildDamage({
       mode: "full-buff",

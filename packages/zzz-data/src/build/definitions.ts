@@ -33,6 +33,12 @@ function aliceExtraAnomalyProficiencyFromMastery({
   return Math.max(0, ((anomalyMastery ?? 0) - 140) * 1.6)
 }
 
+function ariaM1AnomalyCritRate({
+  anomalyMastery,
+}: StaticBuildValueContext): number {
+  return Math.max(0.25, 0.25 + Math.max(0, (anomalyMastery ?? 0) - 100) * 0.005)
+}
+
 function steppedEnergyGenerationValue(input: {
   energyGenerationRate?: number
   threshold: number
@@ -1747,6 +1753,83 @@ export const staticBuildEffectDefinitions = [
     ],
   },
   {
+    id: "aria-m1-anomaly-crit-rate",
+    sourceType: "agent",
+    sourceId: "1501",
+    sourceName: "爱芮",
+    label: "影画1：异放异常暴击率",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      minimumMindscape: 1,
+      damageTypes: ["anomaly", "disorder"],
+    },
+    modifiers: [
+      {
+        bucket: "anomalyCritRate",
+        value: ariaM1AnomalyCritRate,
+      },
+    ],
+  },
+  {
+    id: "aria-m1-anomaly-crit-damage",
+    sourceType: "agent",
+    sourceId: "1501",
+    sourceName: "爱芮",
+    label: "影画1：异放异常暴击伤害",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      minimumMindscape: 1,
+      damageTypes: ["anomaly", "disorder"],
+    },
+    modifiers: [
+      {
+        bucket: "anomalyCritDamage",
+        value: () => 0.25,
+      },
+    ],
+  },
+  {
+    id: "aria-m2-defense-penetration",
+    sourceType: "agent",
+    sourceId: "1501",
+    sourceName: "爱芮",
+    label: "影画2：异放无视防御",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      minimumMindscape: 2,
+      damageTypes: ["anomaly", "disorder"],
+    },
+    modifiers: [
+      {
+        bucket: "defenseReduction",
+        value: () => 0.16,
+      },
+    ],
+  },
+  {
+    id: "aria-m2-dreamtime-defense-penetration",
+    sourceType: "agent",
+    sourceId: "1501",
+    sourceName: "爱芮",
+    label: "影画2：妄想时刻额外无视防御",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      minimumMindscape: 2,
+      damageTypes: ["anomaly", "disorder"],
+      combatTags: ["ariaDreamtime"],
+    },
+    modifiers: [
+      {
+        bucket: "defenseReduction",
+        value: () => 0.08,
+      },
+    ],
+  },
+  {
     id: "banyue-core-buff-bonus",
     sourceType: "agent",
     sourceId: "1471",
@@ -3264,7 +3347,30 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
     sourceType: "agent",
     sourceId: "1501",
     damageTypes: ["anomaly", "disorder"],
-    note: "爱芮的[异放]比例与失衡额外倍率未在 static resolver 中展开；当前只支持核心技的异常精通加成。",
+    note: "爱芮当前默认将 anomaly/disorder 结算视为[异放]伤害；[异放]比例与失衡额外倍率仍未在 static resolver 中展开。",
+  },
+  {
+    sourceType: "agent",
+    sourceId: "1501",
+    minimumMindscape: 1,
+    requiresMissingAnomalyMastery: true,
+    damageTypes: ["anomaly", "disorder"],
+    note: "爱芮的影画1当前已静态展开[异放]基础异常暴击率/暴击伤害；若已知初始异常掌控快照，请通过 finalPanel.anomalyMastery 显式提供，以展开超过100点后的额外暴击率。",
+  },
+  {
+    sourceType: "agent",
+    sourceId: "1501",
+    minimumMindscape: 1,
+    requiresAnomalyMastery: true,
+    damageTypes: ["anomaly", "disorder"],
+    note: "爱芮的影画1当前已按 finalPanel.anomalyMastery 静态展开[异放]异常暴击率追加；基础异常暴击率/暴击伤害已默认纳入。",
+  },
+  {
+    sourceType: "agent",
+    sourceId: "1501",
+    minimumMindscape: 2,
+    damageTypes: ["anomaly", "disorder"],
+    note: '爱芮的影画2当前已静态展开[异放]的 16% 无视防御；若处于[妄想时刻]，可通过 combatTags: ["ariaDreamtime"] 额外展开 8% 无视防御。',
   },
   {
     sourceType: "agent",

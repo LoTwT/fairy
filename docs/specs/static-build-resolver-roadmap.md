@@ -470,7 +470,7 @@ resolver 主线完成后，文档维护需要单独列为持续事项，避免�
 
 ### 9.5 当前状态
 
-当前 `V4` 第八批已完成：
+当前 `V4` 第九批已完成：
 
 - `V4.1` 已完成：`loadout.agentMindscape`、`finalPanel.energyGenerationRate`、`minimumMindscape` 已进入公开 contract
 - `V4.2` 已完成：resolver / tool schema / trace 已能消费 progression-aware value context
@@ -495,12 +495,16 @@ resolver 主线完成后，文档维护需要单独列为持续事项，避免�
 - `V4.3` 已完成第八批：
   - `简`：影画 1 的 `[狂热]` 状态异常精通转增伤已通过第二遍 effect 求值静态展开
   - `柳`：影画 2 的 `[极性紊乱]` 额外突刺倍率已通过 `combatTags + stacks` 静态展开
-- `V4.4` 已完成第八轮 assumptions refinement：
+- `V4.3` 已完成第九批：
+  - `爱芮`：影画 1 的 `[异放]` 基础异常暴击与基于 `finalPanel.anomalyMastery` 的额外异常暴击率已静态展开
+  - `爱芮`：影画 2 的固定无视防御与 `combatTags: ["ariaDreamtime"]` 控制的额外无视防御已静态展开
+- `V4.4` 已完成第九轮 assumptions refinement：
   - 可区分缺少 `agentMindscape`
   - 可区分缺少 `energyGenerationRate`
   - `简` 的 source-specific assumptions 已从“未自动折算 AP->暴击率”收紧到“仅剩物理异常积蓄效率未展开”
   - `柏妮思` / `格莉丝` 的 source-specific assumptions 已收紧到“仅剩施加时机、层数节奏与积蓄效率未展开”
   - `柳` / `简` 的 source-specific assumptions 已进一步收紧到“仅剩能量消耗、积蓄效率与 M6 类动态机制未展开”
+  - `爱芮` 的 source-specific assumptions 已收紧到“仅剩 [异放] 比例、失衡额外倍率与 M6 类动态机制未展开”
 
 ### 9.6 后续继续项
 
