@@ -28,7 +28,7 @@
 - `V9.1` scope freeze：已完成
 - `V9.2` view contract：已完成
 - `V9.3` first-batch source coverage：已完成
-- `V9.4` docs / tool integration：未开始
+- `V9.4` docs / tool integration：已完成
 
 ## 1. 为什么需要 V9
 
@@ -190,7 +190,7 @@
 - README
 - roadmap
 - architecture
-- 如有必要，再评估是否为 `zzz-agent` 暴露高层 tool
+- 已为 `zzz-agent` 暴露 `resolve-build-source-damage-views` 高层 tool
 
 ## 8. 验收标准
 

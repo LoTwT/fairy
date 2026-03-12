@@ -12,8 +12,20 @@ import {
   getStaticBuildAgent,
   getStaticBuildDriveDisc,
   getStaticBuildWEngine,
+  supportedStaticBuildAgents,
 } from "./catalog.js"
 import { resolveStaticBuildDamage } from "./resolver.js"
+
+const sourceViewAgentIds = ["1401", "1091", "1171"] as const
+const sourceViewAgentIdSet = new Set<string>(sourceViewAgentIds)
+
+export const supportedStaticBuildSourceViewAgents = supportedStaticBuildAgents
+  .filter((item) => sourceViewAgentIdSet.has(item.id))
+  .sort((left, right) => left.name.localeCompare(right.name, "zh-Hans-CN"))
+
+export function hasStaticBuildSourceViewCoverage(agentId: string) {
+  return sourceViewAgentIdSet.has(agentId)
+}
 
 function resolveBaseMode(input: ResolveStaticBuildInput): StaticBuildBaseMode {
   if (input.mode === "full-buff") return "full-buff"

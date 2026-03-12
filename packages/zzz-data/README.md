@@ -167,6 +167,8 @@ const views = resolveStaticBuildSourceDamageViews({
 views.entries[0]
 ```
 
+同一份 source-specific view contract 也已在 `zzz-agent` 中通过 `resolve-build-source-damage-views` 高层 tool 暴露，适合直接给 Agent 查询独立额外结算条目。
+
 拿到结果后，通常直接消费这些字段：
 
 ```ts

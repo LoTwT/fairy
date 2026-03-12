@@ -143,12 +143,13 @@ packages/zzz-agent/
 ├── src/mastra/
 │ ├── index.ts # Mastra 实例入口
 │ ├── agents/zzz-agent.ts # ZZZ Agent prompt / tools / scorers wiring
-│ ├── tools/zzz/ # lookup / calcDamage 工具（含 compact 查询与 damageContext；resolveBuildDamage / resolveBuildSkillMatrix 通过 zzz-data build layer 复用静态构筑解析）
+│ ├── tools/zzz/ # lookup / calcDamage 工具（含 compact 查询与 damageContext；resolveBuildDamage / resolveBuildSourceDamageViews / resolveBuildSkillMatrix 通过 zzz-data build layer 复用静态构筑解析）
 │ └── scorers/zzz-scorer.ts # 评分器实现
 ├── tests/
 │ ├── lookup-game-mode.test.ts # lookupGameMode 默认版本与 damageContext 测试
 │ ├── lookup-filters.test.ts # lookupAgent / lookupWEngine 双语筛选与 compact 测试
 │ ├── resolve-build-damage.test.ts # 静态构筑高层 resolver tool 测试
+│ ├── resolve-build-source-damage-views.test.ts # source-specific damage view tool 测试
 │ ├── resolve-build-skill-matrix.test.ts # 静态构筑技能矩阵 tool 测试
 │ ├── zzz-agent-prompt.test.ts # prompt 工作流、术语与截图摘要测试
 │ ├── zzz-scorer.test.ts # outputFormat / judge model scorer 测试
@@ -191,7 +192,7 @@ packages/zzz-agent/
 - [`static-build-resolver-v6.md`](../docs/specs/static-build-resolver-v6.md) — 当前阶段范围：已完成 `V6.3` 首批 `爱丽丝` / `雅` source-state snapshot coverage，并同步细化首批 state-aware assumptions
 - [`static-build-resolver-v7.md`](../docs/specs/static-build-resolver-v7.md) — 当前阶段范围：`V7.3` 前四批已完成，并在当前 contract 下收口；`柏妮思 M6` 的 `25% 火抗无视` 已接到 `scenario.resolvedSnapshot.bucketDeltas.ignoreResistance`，`格莉丝 M2`、`简`、`派派`、`时流贤者`、`柳 M2`、`薇薇安 M2` 的异常倍率折算已收口到 `scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor`
 - [`static-build-resolver-v8.md`](../docs/specs/static-build-resolver-v8.md) — 当前阶段范围：已完成 `V8.2` inventory 与 `V8.4` 前四批 source-note 收口，并在当前 contract 下收口；当前结论是不新增 public key
-- [`static-build-resolver-v9.md`](../docs/specs/static-build-resolver-v9.md) — 当前阶段范围：`V9.3` first-batch source coverage 已完成；`爱丽丝 [极性强击]`、`雅 [霜灼·破]`、`柏妮思 [余烬]` 已进入 source-specific damage view
+- [`static-build-resolver-v9.md`](../docs/specs/static-build-resolver-v9.md) — 当前阶段范围：`V9.4` docs / tool integration 已完成；`zzz-agent` 已暴露 `resolve-build-source-damage-views` 高层 tool，并与主伤害 / matrix 路径分流
 
 ## 计算器模块（src/calculator/）
 

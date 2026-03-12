@@ -58,4 +58,8 @@ export type {
   StaticBuildWEngineCatalogEntry,
 } from "./types.js"
 
-export { resolveStaticBuildSourceDamageViews } from "./views.js"
+export {
+  hasStaticBuildSourceViewCoverage,
+  resolveStaticBuildSourceDamageViews,
+  supportedStaticBuildSourceViewAgents,
+} from "./views.js"

@@ -2,9 +2,10 @@ import type { AgentAttributeLabel } from "zzz-data"
 import { createTool } from "@mastra/core/tools"
 import {
   getCompatibleStaticBuildWEngines,
-  resolveStaticBuildDamage,
+  resolveStaticBuildSourceDamageViews,
   supportedStaticBuildAgents,
   supportedStaticBuildDriveDiscs,
+  supportedStaticBuildSourceViewAgents,
   supportedStaticBuildWEngines,
 } from "zzz-data"
 import {
@@ -15,20 +16,34 @@ import {
   specialtyLabels,
 } from "./resolve-build-shared"
 
-export const resolveBuildDamage = createTool({
-  id: "resolve-build-damage",
+export const resolveBuildSourceDamageViews = createTool({
+  id: "resolve-build-source-damage-views",
   description:
-    "基于 zzz-data 的静态构筑解析器直接计算伤害。当前支持全部强攻/命破/异常代理人，以及对应特性的强攻/命破/异常音擎；异常代理人当前支持 anomaly / disorder 单次 resolver，不支持 skill matrix。",
+    "查询 anomaly / disorder 的 source-specific 额外结算条目。当前仅覆盖爱丽丝 [极性强击]、雅 [霜灼·破]、柏妮思 [燃点]/[余烬]，不会把这些条目并回主公式。",
   inputSchema: resolveBuildInputSchema,
   execute: async (input) => {
+    if (
+      input.scenario.damageType !== "anomaly" &&
+      input.scenario.damageType !== "disorder"
+    ) {
+      return {
+        found: false,
+        message:
+          "source-specific damage view 只用于 anomaly / disorder 的额外结算，不适用于 normal / sheer。",
+        supportedDamageTypes: ["anomaly", "disorder"],
+      }
+    }
+
     const agent = findCatalogItem(supportedStaticBuildAgents, input.agent)
     if (!agent) {
       return {
         found: false,
-        message: `当前 resolver 暂不支持代理人「${input.agent}」`,
-        supportedAgents: supportedStaticBuildAgents.map((item) => item.name),
+        message: `当前 source-specific damage view 暂不支持代理人「${input.agent}」`,
+        supportedAgents: supportedStaticBuildSourceViewAgents.map(
+          (item) => item.name,
+        ),
         candidates: findCatalogCandidates(
-          supportedStaticBuildAgents,
+          supportedStaticBuildSourceViewAgents,
           input.agent,
         ).map((item) => item.name),
       }
@@ -106,36 +121,7 @@ export const resolveBuildDamage = createTool({
         }
       }
 
-      return {
-        found: true,
-        build: resolveStaticBuildDamage({
-          mode: input.mode,
-          manualBaseMode: input.manualBaseMode,
-          loadout: {
-            agentId: agent.id,
-            wEngineId: wEngine?.id,
-            driveDiscSets,
-            agentLevel: input.agentLevel,
-            agentMindscape: input.agentMindscape,
-            coreSkillLevel: input.coreSkillLevel,
-            wEngineRefinement: input.wEngineRefinement,
-          },
-          panel: input.finalPanel,
-          scenario: {
-            ...input.scenario,
-            anomalyType,
-            attribute: input.scenario.attribute as
-              | AgentAttributeLabel
-              | undefined,
-          },
-          effectOverrides: input.effectOverrides,
-        }),
-      }
-    }
-
-    return {
-      found: true,
-      build: resolveStaticBuildDamage({
+      const views = resolveStaticBuildSourceDamageViews({
         mode: input.mode,
         manualBaseMode: input.manualBaseMode,
         loadout: {
@@ -150,12 +136,71 @@ export const resolveBuildDamage = createTool({
         panel: input.finalPanel,
         scenario: {
           ...input.scenario,
+          anomalyType,
           attribute: input.scenario.attribute as
             | AgentAttributeLabel
             | undefined,
         },
         effectOverrides: input.effectOverrides,
-      }),
+      })
+
+      if (views.entries.length === 0) {
+        return {
+          found: false,
+          message: `当前 source-specific damage view 暂未覆盖代理人「${agent.name}」`,
+          supportedAgents: supportedStaticBuildSourceViewAgents.map(
+            (item) => item.name,
+          ),
+          candidates: findCatalogCandidates(
+            supportedStaticBuildSourceViewAgents,
+            input.agent,
+          ).map((item) => item.name),
+        }
+      }
+
+      return {
+        found: true,
+        views,
+      }
+    }
+
+    const views = resolveStaticBuildSourceDamageViews({
+      mode: input.mode,
+      manualBaseMode: input.manualBaseMode,
+      loadout: {
+        agentId: agent.id,
+        wEngineId: wEngine?.id,
+        driveDiscSets,
+        agentLevel: input.agentLevel,
+        agentMindscape: input.agentMindscape,
+        coreSkillLevel: input.coreSkillLevel,
+        wEngineRefinement: input.wEngineRefinement,
+      },
+      panel: input.finalPanel,
+      scenario: {
+        ...input.scenario,
+        attribute: input.scenario.attribute as AgentAttributeLabel | undefined,
+      },
+      effectOverrides: input.effectOverrides,
+    })
+
+    if (views.entries.length === 0) {
+      return {
+        found: false,
+        message: `当前 source-specific damage view 暂未覆盖代理人「${agent.name}」`,
+        supportedAgents: supportedStaticBuildSourceViewAgents.map(
+          (item) => item.name,
+        ),
+        candidates: findCatalogCandidates(
+          supportedStaticBuildSourceViewAgents,
+          input.agent,
+        ).map((item) => item.name),
+      }
+    }
+
+    return {
+      found: true,
+      views,
     }
   },
 })

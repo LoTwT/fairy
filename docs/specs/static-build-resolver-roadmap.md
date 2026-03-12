@@ -811,4 +811,4 @@ resolver 主线完成后，文档维护需要单独列为持续事项，避免�
 1. `V9.1` scope freeze
 2. `V9.2` view contract
 3. `V9.3` first-batch source coverage
-4. `V9.4` docs / integration
+4. `V9.4` docs / integration（已完成：`zzz-agent` 已暴露 `resolve-build-source-damage-views`）

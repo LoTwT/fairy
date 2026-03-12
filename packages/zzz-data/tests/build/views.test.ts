@@ -1,8 +1,17 @@
 import { describe, expect, it } from "vitest"
 
-import { resolveStaticBuildSourceDamageViews } from "../../src"
+import {
+  resolveStaticBuildSourceDamageViews,
+  supportedStaticBuildSourceViewAgents,
+} from "../../src"
 
 describe("static build source damage views", () => {
+  it("exports the current source-view support scope", () => {
+    expect(
+      supportedStaticBuildSourceViewAgents.map((item) => item.name),
+    ).toEqual(["爱丽丝", "柏妮思", "雅"])
+  })
+
   it("returns an empty view list when the current loadout has no source-specific view coverage", () => {
     const result = resolveStaticBuildSourceDamageViews({
       loadout: {

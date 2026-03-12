@@ -15,6 +15,7 @@ import {
   lookupWEngine,
   resolveBuildDamage,
   resolveBuildSkillMatrix,
+  resolveBuildSourceDamageViews,
 } from "../tools/zzz"
 
 const BASE_PROMPT = `你是绝区零（Zenless Zone Zero）伤害计算专家。用户会描述队伍配置（1-3 位代理人，各自携带音擎和驱动盘，可选邦布），你需要查询数据、提取乘区、计算并展示伤害。
@@ -96,10 +97,12 @@ const BASE_PROMPT = `你是绝区零（Zenless Zone Zero）伤害计算专家。
    - 如果用户提供的是当前支持范围内的静态构筑：全部强攻 / 命破 / 异常代理人，且已知音擎、驱动盘、最终面板和敌人上下文，优先调用高层 resolver
    - 单技能 / 单场景计算：调用 resolveBuildDamage
    - 全技能 / 全段 / 完整伤害表：调用 resolveBuildSkillMatrix
-   - 两个高层 resolver 都会直接返回 resolved buckets、damageParams 和最终伤害，避免重复手工抽取乘区
+   - 如果用户问的是 anomaly / disorder 里的独立额外结算条目，例如 \`爱丽丝 [极性强击]\`、\`雅 [霜灼·破]\`、\`柏妮思 [燃点]/[余烬]\`，调用 resolveBuildSourceDamageViews
+   - 高层 resolver 会直接返回 resolved buckets、damageParams、技能矩阵或 source-specific view，避免重复手工抽取乘区
    - 如果只是判断当前 resolver 是否支持某个代理人/音擎/驱动盘，或只是想拿到 supported scope，可以直接调用高层 resolver；wEngine、driveDiscs、coreSkillLevel、wEngineRefinement、mode 在这类探测场景下都不是必填，不要先追问这些可选字段
    - 如果高层 resolver 返回 found=false，先原样告知不支持范围、supported 列表和候选项；只有当用户明确接受“按旧路径继续估算”时，才回退到 lookupAgent / lookupWEngine / lookupDriveDisc + calcDamage
    - 当前 resolveBuildDamage 已支持强攻 / 命破 / 异常的单次静态计算，以及 anomaly / disorder；resolveBuildSkillMatrix 仍只支持强攻 / 命破，不支持异常 / 紊乱矩阵
+   - resolveBuildSourceDamageViews 只暴露独立额外结算条目，不要把它的结果并回主 anomaly / disorder 公式，也不要把它伪装成完整技能矩阵
    - 如果用户明确要求“完整伤害矩阵”或明确点名调用 resolveBuildSkillMatrix，而该代理人不在当前 matrix 支持范围内，不要自动回退旧路径，因为旧路径无法满足“完整矩阵”这个请求
 
 2. **收集队伍信息**
@@ -133,6 +136,7 @@ const BASE_PROMPT = `你是绝区零（Zenless Zone Zero）伤害计算专家。
    - 其他构筑按旧路径，对主C的每个关键技能分别调用 calcDamage
 
 7. **格式化输出**
+   - 如果走 resolveBuildSourceDamageViews，单独输出“额外结算条目”小节，列出来源、模式（standalone / delta）、当前期望 / 暴击 / 非暴击，以及 requirements / assumptions；不要把这些条目直接并入主伤害表或矩阵
    - 如果走 resolveBuildSkillMatrix，优先使用 \`matrix.effectSummary\` 生成“增益清单”，把数值单独列出来，不要只写效果名不写具体数值
    - 如果走 resolveBuildSkillMatrix，优先使用 \`matrix.summary.commonFormulaMultipliers\` 生成“乘区汇总”；对 \`matrix.summary.variableFormulaMultipliers\` 中按技能变化的乘区，写成“按技能变化”或直接省略，不要假装它们是全表统一常量
    - 如果走 resolveBuildSkillMatrix，生成“技能”列时优先使用 \`row.metadata.canonicalLabel\`；需要程序稳定键时优先使用 \`row.metadata.stableKey\`，不要继续拆 \`row.label\` 自由猜技能结构
@@ -395,6 +399,7 @@ export const zzzAgent = new Agent({
     lookupDriveDisc,
     lookupGameMode,
     resolveBuildDamage,
+    resolveBuildSourceDamageViews,
     resolveBuildSkillMatrix,
     calcDamage,
   },

@@ -1,0 +1,324 @@
+import type { AnomalyType } from "zzz-data"
+import { z } from "zod"
+
+export interface CatalogItem {
+  id: string
+  name: string
+  aliases: readonly string[]
+  specialty?: string
+}
+
+export const specialtyLabels = {
+  Attack: "强攻",
+  Stun: "击破",
+  Anomaly: "异常",
+  Support: "支援",
+  Defense: "防护",
+  Rupture: "命破",
+} as const
+
+export const skillTagSchema = z.enum([
+  "basic",
+  "dash",
+  "special",
+  "enhancedSpecial",
+  "chain",
+  "ultimate",
+  "assist",
+])
+
+export const enemySchema = z.object({
+  attackerLevel: z.number().optional().default(60),
+  defenderBaseDefense: z.number(),
+  defenderResistance: z.number(),
+  defenseBonus: z.number().optional().default(0),
+  defenseReduction: z.number().optional().default(0),
+  resistanceReduction: z.number().optional().default(0),
+  ignoreResistance: z.number().optional().default(0),
+  vulnerabilityBonus: z.number().optional().default(0),
+  damageReduction: z.number().optional().default(0),
+  isStunned: z.boolean().optional().default(false),
+  stunVulnerability: z.number().optional().default(0),
+  nonStunVulnerability: z.number().optional().default(0),
+  specialMultiplier: z.number().optional().default(1),
+})
+
+export const dynamicSnapshotSchema = z
+  .object({
+    flags: z
+      .object({
+        ariaDreamtime: z.boolean().optional(),
+        burniceEmberState: z.boolean().optional(),
+      })
+      .optional(),
+    counts: z
+      .object({
+        burniceEmberExtraTriggers: z.number().int().min(0).optional(),
+      })
+      .optional(),
+    values: z
+      .object({
+        ariaExflowDamageRatio: z.number().min(0).optional(),
+        ariaStunnedDamageRatio: z.number().min(0).optional(),
+        burniceEmberDamageRatio: z.number().min(0).optional(),
+      })
+      .optional(),
+  })
+  .optional()
+
+export const stateSnapshotSchema = z
+  .object({
+    flags: z
+      .object({
+        alicePolarityAssaultState: z.boolean().optional(),
+        miyabiFrostburnBreakState: z.boolean().optional(),
+      })
+      .optional(),
+    values: z
+      .object({
+        alicePolarityAssaultDamageRatio: z.number().min(0).optional(),
+        miyabiFrostburnBreakDamageRatio: z.number().min(0).optional(),
+      })
+      .optional(),
+  })
+  .optional()
+
+export const resolvedSnapshotSchema = z
+  .object({
+    bucketDeltas: z
+      .object({
+        bonusDamageSum: z.number().optional(),
+        defenseReduction: z.number().optional(),
+        penetrationRate: z.number().optional(),
+        resistanceReduction: z.number().optional(),
+        ignoreResistance: z.number().optional(),
+        sheerBonusSum: z.number().optional(),
+        anomalyProficiency: z.number().optional(),
+        anomalyBonusDamageSum: z.number().optional(),
+        anomalyCritRate: z.number().optional(),
+        anomalyCritDamage: z.number().optional(),
+      })
+      .optional(),
+    multiplierFactors: z
+      .object({
+        skillMultiplierFactor: z.number().min(0).optional(),
+      })
+      .optional(),
+  })
+  .optional()
+
+export const finalPanelSchema = z.object({
+  attack: z.number(),
+  baseAttack: z.number().optional(),
+  critRate: z.number(),
+  critDamage: z.number(),
+  hp: z.number().optional(),
+  sheerForce: z.number().optional(),
+  energyGenerationRate: z.number().optional(),
+  anomalyProficiency: z.number().optional(),
+  anomalyMastery: z.number().optional(),
+  anomalyCritRate: z.number().optional(),
+  anomalyCritDamage: z.number().optional(),
+  penetrationRate: z.number().optional(),
+  penetrationValue: z.number().optional(),
+})
+
+export const resolveBuildScenarioSchema = z.discriminatedUnion("damageType", [
+  z.object({
+    damageType: z.literal("normal"),
+    skillTag: skillTagSchema,
+    skillMultiplier: z.union([z.number(), z.string()]),
+    attribute: z.string().optional(),
+    extraAbilityActive: z.boolean().optional(),
+    combatTags: z.array(z.string()).optional(),
+    dynamicSnapshot: dynamicSnapshotSchema,
+    stateSnapshot: stateSnapshotSchema,
+    resolvedSnapshot: resolvedSnapshotSchema,
+    enemy: enemySchema,
+  }),
+  z.object({
+    damageType: z.literal("sheer"),
+    skillTag: skillTagSchema,
+    skillMultiplier: z.union([z.number(), z.string()]),
+    attribute: z.string().optional(),
+    extraAbilityActive: z.boolean().optional(),
+    combatTags: z.array(z.string()).optional(),
+    dynamicSnapshot: dynamicSnapshotSchema,
+    stateSnapshot: stateSnapshotSchema,
+    resolvedSnapshot: resolvedSnapshotSchema,
+    enemy: enemySchema,
+  }),
+  z.object({
+    damageType: z.literal("anomaly"),
+    skillTag: skillTagSchema,
+    damageMultiplier: z.union([z.number(), z.string()]),
+    attribute: z.string().optional(),
+    extraAbilityActive: z.boolean().optional(),
+    combatTags: z.array(z.string()).optional(),
+    dynamicSnapshot: dynamicSnapshotSchema,
+    stateSnapshot: stateSnapshotSchema,
+    resolvedSnapshot: resolvedSnapshotSchema,
+    enemy: enemySchema,
+  }),
+  z.object({
+    damageType: z.literal("disorder"),
+    skillTag: skillTagSchema,
+    anomalyType: z.string(),
+    remainingTime: z.number().min(0),
+    attribute: z.string().optional(),
+    extraAbilityActive: z.boolean().optional(),
+    combatTags: z.array(z.string()).optional(),
+    dynamicSnapshot: dynamicSnapshotSchema,
+    stateSnapshot: stateSnapshotSchema,
+    resolvedSnapshot: resolvedSnapshotSchema,
+    enemy: enemySchema,
+  }),
+])
+
+export const resolveBuildInputSchema = z.object({
+  agent: z.string().describe("代理人名称或 ID"),
+  wEngine: z.string().optional().describe("音擎名称或 ID"),
+  driveDiscs: z
+    .array(
+      z.object({
+        name: z.string().describe("驱动盘名称或 ID"),
+        pieces: z.union([z.literal(2), z.literal(4)]),
+      }),
+    )
+    .optional(),
+  coreSkillLevel: z.number().min(1).max(7).optional().default(7),
+  wEngineRefinement: z.number().min(1).max(5).optional().default(1),
+  agentLevel: z.number().min(1).max(60).optional(),
+  agentMindscape: z.number().int().min(0).max(6).optional(),
+  mode: z
+    .enum(["baseline", "full-buff", "manual"])
+    .optional()
+    .default("baseline"),
+  manualBaseMode: z.enum(["baseline", "full-buff"]).optional(),
+  finalPanel: finalPanelSchema,
+  scenario: resolveBuildScenarioSchema,
+  effectOverrides: z
+    .array(
+      z.object({
+        effectId: z.string(),
+        enabled: z.boolean().optional(),
+        stacks: z.number().int().min(0).optional(),
+      }),
+    )
+    .optional(),
+})
+
+export function normalizeCatalogValue(value: string) {
+  return value.toLowerCase().replace(/[\s\-_·・.()（）【】[\]「」]/g, "")
+}
+
+function getCatalogFields(item: CatalogItem) {
+  return [item.name, item.id, ...item.aliases].filter(Boolean)
+}
+
+export function findCatalogItem<T extends CatalogItem>(
+  items: readonly T[],
+  query: string,
+): T | undefined {
+  const qLow = query.toLowerCase()
+  const qNorm = normalizeCatalogValue(query)
+
+  let bestItem: T | undefined
+  let bestScore = 0
+
+  for (const item of items) {
+    for (const field of getCatalogFields(item)) {
+      if (field.toLowerCase() === qLow) return item
+      const normalized = normalizeCatalogValue(field)
+      if (normalized === qNorm) return item
+      if (!normalized.includes(qNorm)) continue
+
+      let score = qNorm.length / normalized.length
+      if (normalized.startsWith(qNorm)) score += 1
+      if (score > bestScore) {
+        bestScore = score
+        bestItem = item
+      }
+    }
+  }
+
+  return bestScore >= 0.6 ? bestItem : undefined
+}
+
+export function findCatalogCandidates<T extends CatalogItem>(
+  items: readonly T[],
+  query: string,
+) {
+  const qNorm = normalizeCatalogValue(query)
+  if (!qNorm) return []
+
+  const scored: Array<{ item: T; score: number }> = []
+  for (const item of items) {
+    let bestScore = 0
+    for (const field of getCatalogFields(item)) {
+      const normalized = normalizeCatalogValue(field)
+      if (!normalized.includes(qNorm) && !qNorm.includes(normalized)) continue
+
+      let score = 0
+      if (normalized.includes(qNorm)) {
+        score = qNorm.length / normalized.length
+        if (normalized.startsWith(qNorm)) score += 1
+      } else {
+        score = normalized.length / qNorm.length
+        if (qNorm.startsWith(normalized)) score += 1
+      }
+      bestScore = Math.max(bestScore, score)
+    }
+    if (bestScore > 0) scored.push({ item, score: bestScore })
+  }
+
+  return scored
+    .sort((left, right) => right.score - left.score)
+    .slice(0, 3)
+    .map((item) => item.item)
+}
+
+export function normalizeAnomalyType(value: string): AnomalyType | undefined {
+  const normalized = normalizeCatalogValue(value)
+  switch (normalized) {
+    case "fire":
+    case "火":
+    case "火属性":
+    case "burn":
+    case "灼烧":
+      return "fire"
+    case "electric":
+    case "电":
+    case "电属性":
+    case "shock":
+    case "感电":
+      return "electric"
+    case "ether":
+    case "以太":
+    case "以太属性":
+    case "corruption":
+    case "侵蚀":
+      return "ether"
+    case "ice":
+    case "冰":
+    case "冰属性":
+    case "freeze":
+    case "冻结":
+      return "ice"
+    case "physical":
+    case "物理":
+    case "物理属性":
+    case "assault":
+    case "强击":
+      return "physical"
+    case "auricink":
+    case "auric":
+    case "玄墨":
+      return "auricInk"
+    case "frost":
+    case "烈霜":
+      return "frost"
+    default:
+      return undefined
+  }
+}
