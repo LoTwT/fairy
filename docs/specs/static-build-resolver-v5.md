@@ -15,7 +15,7 @@
 当前 `V5` 处于 contract freeze 阶段，状态如下：
 
 - `V5.1` contract freeze：已完成
-- `V5.2` dynamic snapshot resolver：未开始
+- `V5.2` dynamic snapshot resolver：已完成基础接线
 - `V5.3` 第一批来源覆盖：未开始
 - `V5.4` assumptions refinement：未开始
 
@@ -158,6 +158,11 @@ interface StaticBuildDynamicSnapshot {
   - 缺状态 tag
   - 缺 dynamic snapshot key
   - 当前仍未展开的动态机制
+
+当前状态：
+
+- 已完成 `types.ts` / `resolver.ts` / `resolve-build-damage` schema 的基础接线
+- 具体来源规则仍留在 `V5.3`
 
 ### 6.3 `V5.3` 第一批来源覆盖
 

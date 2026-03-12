@@ -237,6 +237,9 @@ export interface StaticBuildEffectCondition {
   requireExtraAbility?: boolean
   requireStunned?: boolean
   combatTags?: string[]
+  dynamicSnapshotFlags?: StaticBuildDynamicFlagKey[]
+  minimumDynamicCounts?: Partial<Record<StaticBuildDynamicCountKey, number>>
+  minimumDynamicValues?: Partial<Record<StaticBuildDynamicValueKey, number>>
   minimumResolvedCritRate?: number
   minimumResolvedAnomalyProficiency?: number
 }

@@ -20,4 +20,4 @@
 - [静态构筑解析系统 V2](./specs/static-build-resolver-v2.md) — 第二阶段实现：全部强攻 / 命破代理人、动态强攻/命破音擎、curated + 通用技能矩阵约定
 - [静态构筑解析系统 V3](./specs/static-build-resolver-v3.md) — 当前实现：已完成 anomaly / disorder 单次 resolver、curated effect coverage 与 source-specific assumptions；skill matrix 仍限定在 normal / sheer
 - [静态构筑解析系统 V4](./specs/static-build-resolver-v4.md) — 当前阶段：progression-aware resolver 第九批已完成，当前 contract 下已收口；已接入 `agentMindscape` / `energyGenerationRate` 与柏妮思、奥菲丝&「鬼火」、爱丽丝、薇薇安、简、柳、格莉丝、爱芮的高价值 progression-aware 规则
-- [静态构筑解析系统 V5](./specs/static-build-resolver-v5.md) — 当前阶段：`V5.1` contract freeze 已完成，已冻结 `dynamicSnapshot` 输入与 tool schema，下一步进入 resolver runtime
+- [静态构筑解析系统 V5](./specs/static-build-resolver-v5.md) — 当前阶段：`V5.2` 基础接线已完成，`dynamicSnapshot` 已进入 types/schema/resolver，下一步补第一批来源规则

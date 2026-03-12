@@ -582,4 +582,5 @@ resolver 主线完成后，文档维护需要单独列为持续事项，避免�
 - roadmap 已补 `V5` 主线
 - `build/types.ts` 已冻结 `dynamicSnapshot` contract
 - `resolve-build-damage` tool schema 已接受 `dynamicSnapshot`
-- 运行时结算逻辑尚未开始
+- `resolver.ts` 已完成 `dynamicSnapshot` 的基础接线
+- 具体来源规则仍未开始

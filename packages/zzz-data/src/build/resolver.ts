@@ -125,6 +125,7 @@ function effectMatches(
     skillTag: string
     extraAbilityActive: boolean
     combatTags: Set<string>
+    dynamicSnapshot?: StaticBuildValueContext["dynamicSnapshot"]
     isStunned: boolean
     resolvedCritRate?: number
     resolvedAnomalyProficiency?: number
@@ -184,6 +185,43 @@ function effectMatches(
   if (
     condition.combatTags &&
     condition.combatTags.some((tag) => !context.combatTags.has(tag))
+  ) {
+    return false
+  }
+
+  if (
+    condition.dynamicSnapshotFlags &&
+    condition.dynamicSnapshotFlags.some(
+      (key) => context.dynamicSnapshot?.flags?.[key] !== true,
+    )
+  ) {
+    return false
+  }
+
+  if (
+    condition.minimumDynamicCounts &&
+    Object.entries(condition.minimumDynamicCounts).some(
+      ([key, value]) =>
+        (context.dynamicSnapshot?.counts?.[
+          key as keyof NonNullable<
+            NonNullable<typeof context.dynamicSnapshot>["counts"]
+          >
+        ] ?? 0) < (value ?? 0),
+    )
+  ) {
+    return false
+  }
+
+  if (
+    condition.minimumDynamicValues &&
+    Object.entries(condition.minimumDynamicValues).some(
+      ([key, value]) =>
+        (context.dynamicSnapshot?.values?.[
+          key as keyof NonNullable<
+            NonNullable<typeof context.dynamicSnapshot>["values"]
+          >
+        ] ?? 0) < (value ?? 0),
+    )
   ) {
     return false
   }
@@ -272,6 +310,7 @@ function applyEffects(
         skillTag: context.skillTag,
         extraAbilityActive: context.extraAbilityActive,
         combatTags: context.combatTags,
+        dynamicSnapshot: context.valueContext.dynamicSnapshot,
         isStunned: context.isStunned,
         resolvedCritRate: context.resolvedCritRate,
         resolvedAnomalyProficiency: context.resolvedAnomalyProficiency,
@@ -509,6 +548,7 @@ export function resolveStaticBuildDamage(
     wEngineRefinement: input.loadout.wEngineRefinement ?? 1,
     energyGenerationRate: input.panel.energyGenerationRate,
     anomalyMastery: input.panel.anomalyMastery,
+    dynamicSnapshot: input.scenario.dynamicSnapshot,
     remainingTime:
       input.scenario.damageType === "disorder"
         ? input.scenario.remainingTime
