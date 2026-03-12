@@ -190,7 +190,13 @@ result.resolvedBuckets.bonusDamageSum
 // 0.76
 
 result.sourceNotes[0]
-// { owner: "dynamicSnapshot", status: "missing-input", keys: [...], message: "..." }
+// {
+//   owner: "dynamicSnapshot",
+//   status: "missing-input",
+//   guidance: { kind: "provide-input", target: "dynamicSnapshot" },
+//   keys: [...],
+//   message: "..."
+// }
 
 result.diagnostics[0]
 // { kind: "defaulted-input", owner: "scenario", keys: [...], message: "..." }
@@ -204,6 +210,13 @@ result.damage.expected.total
 - `defaulted-input`
 - `coverage-gap`
 - `unsupported-effect`
+
+`result.sourceNotes[].guidance` 当前已可直接区分：
+
+- `provide-input`
+- `input-applied`
+- `keep-process-only`
+- `keep-research-only`
 
 如果你要一次性生成代理人的全技能 / 全段伤害矩阵，使用矩阵 builder：
 

@@ -70,5 +70,5 @@
 
 - `V15.1` 已完成：scope freeze
 - `V15.2` 已完成：guidance taxonomy 已冻结
-- `V15.3` 未开始
+- `V15.3` 已完成：Agent / README 已优先消费 `sourceNotes.guidance`
 - `V15.4` 未开始

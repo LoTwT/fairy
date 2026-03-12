@@ -983,5 +983,5 @@ Batch B：
 
 - `V15.1` 已完成：冻结到 `sourceNotes` guidance，不再继续扩大公式和 snapshot contract
 - `V15.2` 已完成：`sourceNotes.guidance` taxonomy 已冻结
-- `V15.3` 未开始
+- `V15.3` 已完成：`zzz-agent` prompt 与 README 已优先消费 `sourceNotes.guidance`
 - `V15.4` 未开始
