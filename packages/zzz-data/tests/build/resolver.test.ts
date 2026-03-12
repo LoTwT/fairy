@@ -1659,6 +1659,42 @@ describe("static build resolver", () => {
     ).toBe(false)
   })
 
+  it("accepts V6 state snapshot contract without changing current resolver behavior", () => {
+    const result = resolveStaticBuildDamage({
+      mode: "baseline",
+      loadout: {
+        agentId: "1401",
+        agentLevel: 60,
+      },
+      panel: {
+        attack: 2800,
+        critRate: 0.4,
+        critDamage: 1.1,
+        anomalyProficiency: 180,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "special",
+        damageMultiplier: "500%",
+        attribute: "物理",
+        stateSnapshot: {
+          flags: {
+            alicePolarityAssaultState: true,
+          },
+          values: {
+            alicePolarityAssaultDamageRatio: 2.5,
+          },
+        },
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.damage.expected.total).toBeGreaterThan(0)
+  })
+
   it("refines Burnice progression assumptions when mindscape is present but energyGenerationRate is missing", () => {
     const result = resolveStaticBuildDamage({
       mode: "full-buff",

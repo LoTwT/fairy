@@ -51,17 +51,21 @@
 - `V2.1 curated coverage` 已完成
 - `V2.2 matrix metadata refinement` 已完成
 - `V3 anomaly / disorder` 已完成单次 resolver 主线
+- `V4 progression-aware resolver` 已在当前 contract 下收口
+- `V5 source-aware dynamic snapshot context` 已在当前 contract 下收口
 - 当前边界：`resolveStaticBuildSkillMatrix` 仍只支持 `normal / sheer`
 
 ## 2. 阶段划分
 
-后续固定按以下顺序推进：
+已完成主线：
 
 1. `V2.1 curated coverage`
 2. `V2.2 matrix metadata refinement`
 3. `V3 anomaly / disorder`
+4. `V4 progression-aware resolver`
+5. `V5 source-aware dynamic snapshot context`
 
-当前前三阶段的主线都已完成。除非用户显式改变优先级，否则下一步不再扩大 contract，而是优先补 anomaly / disorder 的 curated coverage。
+当前下一主线切换为 `V6 source-state snapshot context`。
 
 ## 3. V2.1：Curated Coverage
 
@@ -592,3 +596,48 @@ resolver 主线完成后，文档维护需要单独列为持续事项，避免�
   - 保持静态快照模型，不引入时间轴模拟
 
 因此，`V5` 在当前 contract 下已收口。后续若继续提高异常 / 紊乱精度，应进入新的 post-roadmap scope，而不是继续扩大 `V5`。
+
+## 11. V6 source-state snapshot context
+
+`V5` 收口后，剩余高价值异常 / 紊乱精度问题不再主要是“缺少次数 / 倍率”，而是“缺少 source-specific 状态快照”。
+
+对应规格文档：
+
+- [static-build-resolver-v6.md](./static-build-resolver-v6.md)
+
+### 11.1 目标
+
+把 resolver 从“只理解 dynamicSnapshot 的次数 / 倍率快照”推进到“能理解 source-specific state snapshot”。
+
+### 11.2 范围
+
+第一批固定为：
+
+1. `scenario.stateSnapshot`
+2. `StaticBuildStateFlagKey`
+3. `StaticBuildStateValueKey`
+4. `爱丽丝`
+5. `雅`
+
+### 11.3 不做什么
+
+- 不做 anomaly / disorder matrix
+- 不做独立异常槽积蓄过程模拟
+- 不做时间轴 / 循环 / 资源过程模拟
+
+### 11.4 执行顺序
+
+1. `V6.1` contract freeze
+2. `V6.2` state snapshot resolver
+3. `V6.3` 第一批来源 coverage
+4. `V6.4` assumptions refinement
+
+### 11.5 当前状态
+
+当前 `V6.1 contract freeze` 已完成：
+
+- `scenario.stateSnapshot` 已进入公开 build contract
+- `StaticBuildStateFlagKey` / `StaticBuildStateValueKey` 已冻结第一批 key
+- `resolve-build-damage` tool schema 已接受 `stateSnapshot`
+
+下一步进入 `V6.2 state snapshot resolver`。

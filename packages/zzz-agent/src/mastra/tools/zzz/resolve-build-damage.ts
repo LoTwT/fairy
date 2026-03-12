@@ -73,6 +73,23 @@ const dynamicSnapshotSchema = z
   })
   .optional()
 
+const stateSnapshotSchema = z
+  .object({
+    flags: z
+      .object({
+        alicePolarityAssaultState: z.boolean().optional(),
+        miyabiFrostburnBreakState: z.boolean().optional(),
+      })
+      .optional(),
+    values: z
+      .object({
+        alicePolarityAssaultDamageRatio: z.number().min(0).optional(),
+        miyabiFrostburnBreakDamageRatio: z.number().min(0).optional(),
+      })
+      .optional(),
+  })
+  .optional()
+
 function normalizeCatalogValue(value: string) {
   return value.toLowerCase().replace(/[\s\-_·・.()（）【】[\]「」]/g, "")
 }
@@ -236,6 +253,7 @@ export const resolveBuildDamage = createTool({
         extraAbilityActive: z.boolean().optional(),
         combatTags: z.array(z.string()).optional(),
         dynamicSnapshot: dynamicSnapshotSchema,
+        stateSnapshot: stateSnapshotSchema,
         enemy: enemySchema,
       }),
       z.object({
@@ -246,6 +264,7 @@ export const resolveBuildDamage = createTool({
         extraAbilityActive: z.boolean().optional(),
         combatTags: z.array(z.string()).optional(),
         dynamicSnapshot: dynamicSnapshotSchema,
+        stateSnapshot: stateSnapshotSchema,
         enemy: enemySchema,
       }),
       z.object({
@@ -256,6 +275,7 @@ export const resolveBuildDamage = createTool({
         extraAbilityActive: z.boolean().optional(),
         combatTags: z.array(z.string()).optional(),
         dynamicSnapshot: dynamicSnapshotSchema,
+        stateSnapshot: stateSnapshotSchema,
         enemy: enemySchema,
       }),
       z.object({
@@ -267,6 +287,7 @@ export const resolveBuildDamage = createTool({
         extraAbilityActive: z.boolean().optional(),
         combatTags: z.array(z.string()).optional(),
         dynamicSnapshot: dynamicSnapshotSchema,
+        stateSnapshot: stateSnapshotSchema,
         enemy: enemySchema,
       }),
     ]),

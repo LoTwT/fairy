@@ -80,10 +80,23 @@ export type StaticBuildDynamicValueKey =
   | "ariaStunnedDamageRatio"
   | "burniceEmberDamageRatio"
 
+export type StaticBuildStateFlagKey =
+  | "alicePolarityAssaultState"
+  | "miyabiFrostburnBreakState"
+
+export type StaticBuildStateValueKey =
+  | "alicePolarityAssaultDamageRatio"
+  | "miyabiFrostburnBreakDamageRatio"
+
 export interface StaticBuildDynamicSnapshotInput {
   flags?: Partial<Record<StaticBuildDynamicFlagKey, boolean>>
   counts?: Partial<Record<StaticBuildDynamicCountKey, number>>
   values?: Partial<Record<StaticBuildDynamicValueKey, number>>
+}
+
+export interface StaticBuildStateSnapshotInput {
+  flags?: Partial<Record<StaticBuildStateFlagKey, boolean>>
+  values?: Partial<Record<StaticBuildStateValueKey, number>>
 }
 
 export interface StaticBuildDriveDiscSetInput {
@@ -138,6 +151,7 @@ interface StaticBuildScenarioBaseInput {
   extraAbilityActive?: boolean
   combatTags?: string[]
   dynamicSnapshot?: StaticBuildDynamicSnapshotInput
+  stateSnapshot?: StaticBuildStateSnapshotInput
   enemy: StaticBuildEnemyInput
 }
 
