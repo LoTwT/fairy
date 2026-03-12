@@ -794,6 +794,11 @@ describe("resolveBuildDamage tool", () => {
     expect(
       (result as any).build.resolvedBuckets.anomalyBonusDamageSum,
     ).toBeCloseTo(0.65, 4)
+    expect(
+      (result as any).build.assumptions.some((item: string) =>
+        item.includes("scenario.dynamicSnapshot.values.ariaExflowDamageRatio"),
+      ),
+    ).toBe(true)
   })
 
   it("supports Vivian mindscape-aware disorder refinements through the high-level resolver", async () => {
@@ -1151,6 +1156,11 @@ describe("resolveBuildDamage tool", () => {
     expect(
       (result as any).build.resolvedBuckets.anomalyBonusDamageSum,
     ).toBeCloseTo(2.5, 4)
+    expect(
+      (result as any).build.assumptions.some((item: string) =>
+        item.includes("scenario.dynamicSnapshot 的[燃点]/[余烬]快照"),
+      ),
+    ).toBe(true)
   })
 
   it("supports progression-aware Orphie snapshots through the high-level resolver", async () => {

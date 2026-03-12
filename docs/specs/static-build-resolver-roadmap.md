@@ -576,7 +576,7 @@ resolver 主线完成后，文档维护需要单独列为持续事项，避免�
 
 ### 10.5 当前状态
 
-当前 `V5` 处于 `V5.3`：
+当前 `V5` 已完成：
 
 - `build/types.ts` / `resolve-build-damage` schema / `resolver.ts` 已完成 `dynamicSnapshot` 基础接线
 - `柏妮思` 已支持 `[余烬]` 动态快照：
@@ -586,4 +586,9 @@ resolver 主线完成后，文档维护需要单独列为持续事项，避免�
 - `爱芮` 已支持 `[异放]` 动态快照：
   - `values.ariaExflowDamageRatio`
   - `values.ariaStunnedDamageRatio`
-- 下一步进入 `V5.4 assumptions refinement`，把 source-specific notes 细化到缺失的具体动态快照 key
+- `V5.4 assumptions refinement` 已完成：
+  - source-specific notes 已细化到缺失的具体动态快照 key
+  - 已区分“缺少 flag / count / value”和“已按快照展开”
+  - 保持静态快照模型，不引入时间轴模拟
+
+因此，`V5` 在当前 contract 下已收口。后续若继续提高异常 / 紊乱精度，应进入新的 post-roadmap scope，而不是继续扩大 `V5`。

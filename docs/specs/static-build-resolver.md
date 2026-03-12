@@ -729,4 +729,4 @@
 2. 仅在明确需要时再评估 anomaly / disorder skill matrix
 3. 若需要进一步提高异常 / 紊乱精度，优先补显式 dynamic value context，而不是默认扩大 contract
 4. progression-aware resolver 已完成 `V4` 第九批并在当前 contract 下收口，见 [静态构筑解析系统 V4](./static-build-resolver-v4.md)
-5. 下一主线为 `V5` source-aware dynamic snapshot context，当前已完成 `V5.2` 基础接线，见 [静态构筑解析系统 V5](./static-build-resolver-v5.md)
+5. `V5` source-aware dynamic snapshot context 已在当前 contract 下完成，见 [静态构筑解析系统 V5](./static-build-resolver-v5.md)

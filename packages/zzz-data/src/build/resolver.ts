@@ -475,6 +475,7 @@ export function resolveStaticBuildDamage(
   if (input.scenario.extraAbilityActive === undefined) {
     assumptions.push("未显式提供 extraAbilityActive，按已满足额外能力条件处理")
   }
+  const isStunned = input.scenario.enemy.isStunned ?? false
 
   const effects = getStaticBuildEffectsForLoadout({
     agentId: agent.id,
@@ -515,6 +516,8 @@ export function resolveStaticBuildDamage(
       agentMindscape,
       energyGenerationRate: input.panel.energyGenerationRate,
       anomalyMastery: input.panel.anomalyMastery,
+      dynamicSnapshot: input.scenario.dynamicSnapshot,
+      isStunned,
       disorderSourceType:
         input.scenario.damageType === "disorder"
           ? input.scenario.anomalyType
@@ -530,6 +533,8 @@ export function resolveStaticBuildDamage(
         agentMindscape,
         energyGenerationRate: input.panel.energyGenerationRate,
         anomalyMastery: input.panel.anomalyMastery,
+        dynamicSnapshot: input.scenario.dynamicSnapshot,
+        isStunned,
         disorderSourceType:
           input.scenario.damageType === "disorder"
             ? input.scenario.anomalyType
@@ -546,6 +551,8 @@ export function resolveStaticBuildDamage(
         agentMindscape,
         energyGenerationRate: input.panel.energyGenerationRate,
         anomalyMastery: input.panel.anomalyMastery,
+        dynamicSnapshot: input.scenario.dynamicSnapshot,
+        isStunned,
         disorderSourceType:
           input.scenario.damageType === "disorder"
             ? input.scenario.anomalyType
@@ -573,7 +580,6 @@ export function resolveStaticBuildDamage(
         : undefined,
   }
   const combatTags = new Set(input.scenario.combatTags ?? [])
-  const isStunned = input.scenario.enemy.isStunned ?? false
   const usesAttackAsBase = profile.baseDamageStat === "attack"
 
   const firstPass = applyEffects(effects, {

@@ -1242,6 +1242,9 @@ describe("static build resolver", () => {
         item.includes("壳中之灵 当前未收录 curated"),
       ),
     ).toBe(false)
+    expect(
+      result.assumptions.some((item) => item.includes("ariaExflowDamageRatio")),
+    ).toBe(true)
   })
 
   it("expands Aria mindscape-aware anomaly crit and defense penetration", () => {
@@ -1323,6 +1326,16 @@ describe("static build resolver", () => {
     })
 
     expect(result.resolvedBuckets.anomalyBonusDamageSum).toBeCloseTo(0.65, 4)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("scenario.dynamicSnapshot.values.ariaExflowDamageRatio"),
+      ),
+    ).toBe(true)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("scenario.dynamicSnapshot.values.ariaStunnedDamageRatio"),
+      ),
+    ).toBe(true)
   })
 
   it("applies curated anomaly bonus for Piper with anomaly-compatible engines", () => {
@@ -1510,7 +1523,7 @@ describe("static build resolver", () => {
     ).toBe(false)
     expect(result.resolvedBuckets.anomalyProficiency).toBeCloseTo(80, 4)
     expect(
-      result.assumptions.some((item) => item.includes("[燃点]/[余烬]")),
+      result.assumptions.some((item) => item.includes("burniceEmberState")),
     ).toBe(true)
     expect(
       result.assumptions.some((item) => item.includes("后场能量自动回复")),
@@ -1634,6 +1647,16 @@ describe("static build resolver", () => {
     })
 
     expect(result.resolvedBuckets.anomalyBonusDamageSum).toBeCloseTo(2.5, 4)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("scenario.dynamicSnapshot 的[燃点]/[余烬]快照"),
+      ),
+    ).toBe(true)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("burniceEmberDamageRatio"),
+      ),
+    ).toBe(false)
   })
 
   it("refines Burnice progression assumptions when mindscape is present but energyGenerationRate is missing", () => {

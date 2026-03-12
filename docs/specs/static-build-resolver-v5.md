@@ -12,12 +12,12 @@
 
 ## 当前进度
 
-当前 `V5` 处于动态快照第一批来源覆盖阶段，状态如下：
+当前 `V5` 已在当前 contract 下收口，状态如下：
 
 - `V5.1` contract freeze：已完成
 - `V5.2` dynamic snapshot resolver：已完成基础接线
 - `V5.3` 第一批来源覆盖：已完成
-- `V5.4` assumptions refinement：未开始
+- `V5.4` assumptions refinement：已完成
 
 ## 1. 为什么需要 V5
 
@@ -189,11 +189,23 @@ interface StaticBuildDynamicSnapshot {
 
 ### 6.4 `V5.4` assumptions refinement
 
-把 assumptions 继续细化成：
+已完成以下细化：
 
 - 缺少 `dynamicSnapshot`
 - 缺少某个具体 key
 - 当前仍未展开的动态机制
+
+当前已能对首批来源输出更具体的 source-specific assumptions：
+
+- `柏妮思`
+  - 缺少 `flags.burniceEmberState`
+  - 缺少 `counts.burniceEmberExtraTriggers`
+  - 缺少 `values.burniceEmberDamageRatio`
+  - 已按 `[燃点]/[余烬]` 动态快照展开额外结算倍率
+- `爱芮`
+  - 缺少 `values.ariaExflowDamageRatio`
+  - 缺少失衡目标下的 `values.ariaStunnedDamageRatio`
+  - 已按 `[异放]` 动态快照展开额外倍率
 
 ## 7. 验收标准
 
@@ -204,3 +216,5 @@ interface StaticBuildDynamicSnapshot {
 3. `trace` 能说明用了哪个 key
 4. `assumptions` 能说明缺的是哪个 key
 5. 仍不引入时间轴模拟
+
+当前状态：以上条件已满足，`V5` 在当前 contract 下已完成。

@@ -3253,10 +3253,28 @@ interface StaticBuildSourceNote {
   sourceId: string
   minimumPieces?: 2 | 4
   minimumMindscape?: number
+  requireStunned?: boolean
   requiresAnomalyMastery?: boolean
   requiresMissingAnomalyMastery?: boolean
   requiresEnergyGenerationRate?: boolean
   requiresMissingEnergyGenerationRate?: boolean
+  requiredDynamicFlags?: readonly ("ariaDreamtime" | "burniceEmberState")[]
+  requiresMissingDynamicFlags?: readonly (
+    | "ariaDreamtime"
+    | "burniceEmberState"
+  )[]
+  requiredDynamicCounts?: readonly "burniceEmberExtraTriggers"[]
+  requiresMissingDynamicCounts?: readonly "burniceEmberExtraTriggers"[]
+  requiredDynamicValues?: readonly (
+    | "ariaExflowDamageRatio"
+    | "ariaStunnedDamageRatio"
+    | "burniceEmberDamageRatio"
+  )[]
+  requiresMissingDynamicValues?: readonly (
+    | "ariaExflowDamageRatio"
+    | "ariaStunnedDamageRatio"
+    | "burniceEmberDamageRatio"
+  )[]
   damageTypes?: readonly ("normal" | "sheer" | "anomaly" | "disorder")[]
   disorderSourceTypes?: readonly (
     | "fire"
@@ -3275,7 +3293,33 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
     sourceType: "agent",
     sourceId: "1171",
     damageTypes: ["anomaly", "disorder"],
-    note: "柏妮思的[燃点]/[余烬]触发链与异常积蓄效率未在 static resolver 中展开；当前已展开额外能力带来的灼烧持续时间延长。",
+    requiresMissingDynamicFlags: ["burniceEmberState"],
+    note: "柏妮思当前已展开额外能力带来的灼烧持续时间延长；[燃点]/[余烬]额外结算仍需要通过 scenario.dynamicSnapshot.flags.burniceEmberState 显式标记是否生效，未提供时不自动猜测。",
+  },
+  {
+    sourceType: "agent",
+    sourceId: "1171",
+    damageTypes: ["anomaly", "disorder"],
+    requiredDynamicFlags: ["burniceEmberState"],
+    requiresMissingDynamicCounts: ["burniceEmberExtraTriggers"],
+    note: "柏妮思的[燃点]/[余烬]额外结算次数当前需要通过 scenario.dynamicSnapshot.counts.burniceEmberExtraTriggers 显式提供；未提供时不自动猜测。",
+  },
+  {
+    sourceType: "agent",
+    sourceId: "1171",
+    damageTypes: ["anomaly", "disorder"],
+    requiredDynamicFlags: ["burniceEmberState"],
+    requiresMissingDynamicValues: ["burniceEmberDamageRatio"],
+    note: "柏妮思的[燃点]/[余烬]额外结算倍率当前需要通过 scenario.dynamicSnapshot.values.burniceEmberDamageRatio 显式提供；未提供时不自动猜测。",
+  },
+  {
+    sourceType: "agent",
+    sourceId: "1171",
+    damageTypes: ["anomaly", "disorder"],
+    requiredDynamicFlags: ["burniceEmberState"],
+    requiredDynamicCounts: ["burniceEmberExtraTriggers"],
+    requiredDynamicValues: ["burniceEmberDamageRatio"],
+    note: "柏妮思当前已展开额外能力带来的灼烧持续时间延长，并按 scenario.dynamicSnapshot 的[燃点]/[余烬]快照展开额外结算倍率；触发链、异常积蓄效率与间隔降低仍未在 static resolver 中展开。",
   },
   {
     sourceType: "agent",
@@ -3443,7 +3487,31 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
     sourceType: "agent",
     sourceId: "1501",
     damageTypes: ["anomaly", "disorder"],
-    note: "爱芮当前默认将 anomaly/disorder 结算视为[异放]伤害；[异放]比例与失衡额外倍率仍未在 static resolver 中展开。",
+    requiresMissingDynamicValues: ["ariaExflowDamageRatio"],
+    note: "爱芮的[异放]额外倍率当前需要通过 scenario.dynamicSnapshot.values.ariaExflowDamageRatio 显式提供；未提供时不自动猜测。",
+  },
+  {
+    sourceType: "agent",
+    sourceId: "1501",
+    damageTypes: ["anomaly", "disorder"],
+    requiredDynamicValues: ["ariaExflowDamageRatio"],
+    note: "爱芮当前已按 scenario.dynamicSnapshot.values.ariaExflowDamageRatio 展开[异放]额外倍率。",
+  },
+  {
+    sourceType: "agent",
+    sourceId: "1501",
+    damageTypes: ["anomaly", "disorder"],
+    requireStunned: true,
+    requiresMissingDynamicValues: ["ariaStunnedDamageRatio"],
+    note: "目标处于失衡时，爱芮的[异放]额外倍率当前需要通过 scenario.dynamicSnapshot.values.ariaStunnedDamageRatio 显式提供；未提供时不自动猜测。",
+  },
+  {
+    sourceType: "agent",
+    sourceId: "1501",
+    damageTypes: ["anomaly", "disorder"],
+    requireStunned: true,
+    requiredDynamicValues: ["ariaStunnedDamageRatio"],
+    note: "爱芮当前已按 scenario.dynamicSnapshot.values.ariaStunnedDamageRatio 展开失衡目标的[异放]额外倍率。",
   },
   {
     sourceType: "agent",
@@ -3586,6 +3654,8 @@ export function getStaticBuildSourceNotes(input: {
   agentMindscape?: number
   energyGenerationRate?: number
   anomalyMastery?: number
+  dynamicSnapshot?: StaticBuildValueContext["dynamicSnapshot"]
+  isStunned?: boolean
   disorderSourceType?:
     | "fire"
     | "electric"
@@ -3632,6 +3702,57 @@ export function getStaticBuildSourceNotes(input: {
       if (
         note.requiresMissingEnergyGenerationRate &&
         input.energyGenerationRate !== undefined
+      ) {
+        return false
+      }
+      if (note.requireStunned && input.isStunned !== true) {
+        return false
+      }
+      if (
+        note.requiredDynamicFlags &&
+        note.requiredDynamicFlags.some(
+          (key) => input.dynamicSnapshot?.flags?.[key] !== true,
+        )
+      ) {
+        return false
+      }
+      if (
+        note.requiresMissingDynamicFlags &&
+        note.requiresMissingDynamicFlags.every(
+          (key) => input.dynamicSnapshot?.flags?.[key] === true,
+        )
+      ) {
+        return false
+      }
+      if (
+        note.requiredDynamicCounts &&
+        note.requiredDynamicCounts.some(
+          (key) => input.dynamicSnapshot?.counts?.[key] === undefined,
+        )
+      ) {
+        return false
+      }
+      if (
+        note.requiresMissingDynamicCounts &&
+        note.requiresMissingDynamicCounts.every(
+          (key) => input.dynamicSnapshot?.counts?.[key] !== undefined,
+        )
+      ) {
+        return false
+      }
+      if (
+        note.requiredDynamicValues &&
+        note.requiredDynamicValues.some(
+          (key) => input.dynamicSnapshot?.values?.[key] === undefined,
+        )
+      ) {
+        return false
+      }
+      if (
+        note.requiresMissingDynamicValues &&
+        note.requiresMissingDynamicValues.every(
+          (key) => input.dynamicSnapshot?.values?.[key] !== undefined,
+        )
       ) {
         return false
       }
