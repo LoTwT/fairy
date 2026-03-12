@@ -735,3 +735,4 @@
 8. `V8` assumption ownership 已完成 inventory 与 `V8.4` 前四批 source-note 收口，并在当前 contract 下收口；当前已确认 anomaly / disorder 剩余 assumptions 应优先归到 `finalPanel` / `dynamicSnapshot` / `stateSnapshot` / `resolvedSnapshot` / 真动态过程，而不是继续无边界扩 snapshot contract；当前没有新增 public key 的必要性，见 [静态构筑解析系统 V8](./static-build-resolver-v8.md)
 9. `V9` source-specific damage view：已完成 `V9.4` docs / tool integration；`爱丽丝 [极性强击]`、`雅 [霜灼·破]`、`柏妮思 [余烬]` 已通过独立静态 view 暴露，而不继续并入主 anomaly / disorder 公式，`zzz-agent` 也已提供高层 `resolve-build-source-damage-views` 入口，见 [静态构筑解析系统 V9](./static-build-resolver-v9.md)
 10. `V10` source-specific delta view：已在当前 contract 下收口；`爱芮 [异放]` 已通过“含快照结果 - 去除快照结果”的独立 view 暴露，`霰落星殿` 与 `混沌重金属 4件` 固定为 research-only，见 [静态构筑解析系统 V10](./static-build-resolver-v10.md)
+11. `V11` structured source notes：已完成 `V11.1` scope freeze，下一步把 anomaly / disorder 的 source-note 从纯字符串 assumptions 提升成结构化输出，同时保持旧 assumptions 兼容，见 [静态构筑解析系统 V11](./static-build-resolver-v11.md)

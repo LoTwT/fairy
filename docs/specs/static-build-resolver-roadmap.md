@@ -849,3 +849,21 @@ research-only，暂不进入实现：
 - `V10.1` 已完成
 - `V10.2` 已完成：`爱芮 [异放]` 已通过独立 delta view 暴露
 - `V10.3` 已完成：`霰落星殿` / `混沌重金属 4件` 已固定为 research-only
+
+## 16. V11 structured source notes
+
+### 16.1 目标
+
+在不改公式和现有 assumptions 字符串兼容层的前提下，把 anomaly / disorder 的高价值来源说明提升成结构化输出。
+
+### 16.2 范围
+
+1. `V11.1` scope freeze
+2. `V11.2` resolver note contract
+3. `V11.3` consumer adoption
+
+### 16.3 当前状态
+
+- `V11.1` 已完成
+- `V11.2` 未开始
+- `V11.3` 未开始
