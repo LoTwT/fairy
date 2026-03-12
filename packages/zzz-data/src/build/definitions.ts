@@ -409,6 +409,7 @@ const timeweaverDisorderBonus = [0.25, 0.275, 0.3, 0.325, 0.35] as const
 const flamemakerBonus = [0.035, 0.044, 0.052, 0.061, 0.07] as const
 const flamemakerAnomalyProficiency = [50, 62, 75, 87, 100] as const
 const hailstormFrostBonus = [0.2, 0.23, 0.26, 0.29, 0.32] as const
+const housekeeperPhysicalBonus = [0.03, 0.035, 0.04, 0.044, 0.048] as const
 const electroLipGlossAttackPercent = [0.1, 0.115, 0.13, 0.145, 0.16] as const
 const electroLipGlossBonus = [0.15, 0.175, 0.2, 0.225, 0.25] as const
 const rainforestAttackPercent = [0.025, 0.028, 0.032, 0.036, 0.04] as const
@@ -471,6 +472,25 @@ export const staticBuildEffectDefinitions = [
       {
         bucket: "bonusDamageSum",
         value: byCoreSkill(soldier11CoreBonus),
+      },
+    ],
+  },
+  {
+    id: "corin-extra-stunned-bonus",
+    sourceType: "agent",
+    sourceId: "1061",
+    sourceName: "可琳",
+    label: "额外能力：失衡目标增伤",
+    baselineEnabled: true,
+    fullBuffEnabled: true,
+    condition: {
+      requireExtraAbility: true,
+      requireStunned: true,
+    },
+    modifiers: [
+      {
+        bucket: "bonusDamageSum",
+        value: () => 0.35,
       },
     ],
   },
@@ -2329,6 +2349,26 @@ export const staticBuildEffectDefinitions = [
       {
         bucket: "attackPercent",
         value: byRefinement(starlightEngineAttackPercent),
+      },
+    ],
+  },
+  {
+    id: "housekeeper-enhanced-special-physical-bonus",
+    sourceType: "w-engine",
+    sourceId: "13106",
+    sourceName: "家政员",
+    label: "音擎被动：强化特殊技后物理伤害层数",
+    baselineEnabled: false,
+    fullBuffEnabled: true,
+    fullBuffStacks: 15,
+    maxStacks: 15,
+    condition: {
+      attributes: ["Physical"],
+    },
+    modifiers: [
+      {
+        bucket: "bonusDamageSum",
+        value: byRefinement(housekeeperPhysicalBonus),
       },
     ],
   },
@@ -4202,6 +4242,16 @@ function collectStaticBuildSourceNoteKeys(
 }
 
 const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
+  {
+    sourceType: "agent",
+    sourceId: "1061",
+    note: "可琳的核心被动[专注]只在电锯持续斩击命中窗口内生效；当前 static resolver 不新增新的 stance / sustain snapshot key，因此这部分继续保留为 source note。",
+  },
+  {
+    sourceType: "w-engine",
+    sourceId: "13106",
+    note: "家政员当前只按 full-buff 近似展开[强化特殊技]命中后的满层物理伤害提升；叠层获取时机、1 秒持续时间刷新与后场能量自动回复都属于过程问题，继续保留为 source note。",
+  },
   {
     sourceType: "drive-disc",
     sourceId: "32700",

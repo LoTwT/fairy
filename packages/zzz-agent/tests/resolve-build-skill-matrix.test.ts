@@ -140,6 +140,34 @@ describe("resolveBuildSkillMatrix tool", () => {
     expect((result as any).matrix.rows[0].label).toBe("普通攻击·一段")
   })
 
+  it("returns Corin generic matrix rows with partial Housekeeper coverage", async () => {
+    const result = await runTool(resolveBuildSkillMatrix, {
+      agent: "可琳",
+      wEngine: "家政员",
+      mode: "full-buff",
+      finalPanel: {
+        attack: 2600,
+        baseAttack: 1050,
+        critRate: 0.35,
+        critDamage: 0.8,
+      },
+      context: {
+        extraAbilityActive: true,
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+          isStunned: true,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    expect((result as any).matrix.rows.length).toBeGreaterThan(0)
+    expect(
+      (result as any).matrix.summary.commonBuckets.bonusDamageSum,
+    ).toBeCloseTo(0.8, 4)
+  })
+
   it("returns Zero Anby generic matrix rows with curated buckets applied", async () => {
     const result = await runTool(resolveBuildSkillMatrix, {
       agent: "零号安比",

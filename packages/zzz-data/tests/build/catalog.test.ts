@@ -11,6 +11,7 @@ import {
 describe("static build catalog", () => {
   it("includes non-signature attack and rupture w-engines", () => {
     expect(getStaticBuildWEngine("14001")?.name).toBe("加农转子")
+    expect(getStaticBuildWEngine("13106")?.name).toBe("家政员")
     expect(getStaticBuildWEngine("13014")?.name).toBe("电波漫步")
     expect(supportedStaticBuildWEngines.length).toBeGreaterThan(19)
   })

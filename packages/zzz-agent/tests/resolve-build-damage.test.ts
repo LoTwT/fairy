@@ -125,6 +125,40 @@ describe("resolveBuildDamage tool", () => {
     expect((result as any).build.loadout.wEngine.name).toBe("加农转子")
   })
 
+  it("supports Corin partial coverage through the high-level resolver", async () => {
+    const result = await runTool(resolveBuildDamage, {
+      agent: "可琳",
+      wEngine: "家政员",
+      mode: "full-buff",
+      finalPanel: {
+        attack: 2600,
+        baseAttack: 1050,
+        critRate: 0.35,
+        critDamage: 0.8,
+      },
+      scenario: {
+        damageType: "normal",
+        skillTag: "basic",
+        skillMultiplier: "320%",
+        attribute: "物理",
+        extraAbilityActive: true,
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+          isStunned: true,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    expect((result as any).build.loadout.agent.name).toBe("可琳")
+    expect((result as any).build.loadout.wEngine.name).toBe("家政员")
+    expect((result as any).build.resolvedBuckets.bonusDamageSum).toBeCloseTo(
+      0.8,
+      4,
+    )
+  })
+
   it("supports Zero Anby curated effects through aliases", async () => {
     const result = await runTool(resolveBuildDamage, {
       agent: "零号安比",

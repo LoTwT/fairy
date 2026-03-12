@@ -241,6 +241,103 @@ describe("static build resolver", () => {
     ).toBe(false)
   })
 
+  it("applies partial coverage for Corin and Housekeeper", () => {
+    const baseline = resolveStaticBuildDamage({
+      loadout: {
+        agentId: "1061",
+        wEngineId: "13106",
+        coreSkillLevel: 7,
+        wEngineRefinement: 1,
+      },
+      panel: {
+        attack: 2600,
+        baseAttack: 1050,
+        critRate: 0.35,
+        critDamage: 0.8,
+      },
+      scenario: {
+        damageType: "normal",
+        skillTag: "basic",
+        skillMultiplier: "320%",
+        attribute: "物理",
+        extraAbilityActive: true,
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+          isStunned: true,
+        },
+      },
+    })
+
+    expect(baseline.loadout.agent.name).toBe("可琳")
+    expect(baseline.loadout.wEngine?.name).toBe("家政员")
+    expect(baseline.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.35, 4)
+    expect(
+      baseline.assumptions.some((item) =>
+        item.includes("可琳 当前未收录 curated"),
+      ),
+    ).toBe(false)
+    expect(
+      baseline.assumptions.some((item) =>
+        item.includes("家政员 当前未收录 curated"),
+      ),
+    ).toBe(false)
+    expect(
+      baseline.sourceNotes.some(
+        (note) =>
+          note.sourceType === "agent" &&
+          note.sourceId === "1061" &&
+          note.owner === "process" &&
+          note.status === "process-only",
+      ),
+    ).toBe(true)
+    expect(
+      baseline.sourceNotes.some(
+        (note) =>
+          note.sourceType === "w-engine" &&
+          note.sourceId === "13106" &&
+          note.owner === "process" &&
+          note.status === "process-only",
+      ),
+    ).toBe(true)
+
+    const fullBuff = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1061",
+        wEngineId: "13106",
+        coreSkillLevel: 7,
+        wEngineRefinement: 1,
+      },
+      panel: {
+        attack: 2600,
+        baseAttack: 1050,
+        critRate: 0.35,
+        critDamage: 0.8,
+      },
+      scenario: {
+        damageType: "normal",
+        skillTag: "basic",
+        skillMultiplier: "320%",
+        attribute: "物理",
+        extraAbilityActive: true,
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+          isStunned: true,
+        },
+      },
+    })
+
+    expect(fullBuff.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.8, 4)
+    expect(
+      fullBuff.trace.find(
+        (item) =>
+          item.effectId === "housekeeper-enhanced-special-physical-bonus",
+      )?.status,
+    ).toBe("applied")
+  })
+
   it("applies curated effects for Zero Anby and Sacrifice Purity", () => {
     const result = resolveStaticBuildDamage({
       loadout: {
