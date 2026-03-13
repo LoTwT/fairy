@@ -108,6 +108,11 @@ describe("static build skill matrix", () => {
     expect(etherBurst?.damageSummary.crit).toBeGreaterThan(
       etherBurst?.damageSummary.expected ?? 0,
     )
+    expect(etherBurst?.summary.expectedTotal).toBeCloseTo(
+      etherBurst?.damageSummary.expected ?? 0,
+      6,
+    )
+    expect(etherBurst?.summary.formulaMultipliers).toBeTruthy()
     expect(etherBurst?.diagnostics).toBeInstanceOf(Array)
     expect(etherBurst?.diagnosticSummary.count).toBe(
       etherBurst?.diagnostics.length ?? 0,
@@ -160,6 +165,10 @@ describe("static build skill matrix", () => {
     const ultimate = result.rows.find((row) => row.label === "终结技·青溟云影")
     expect(ultimate?.skillMultiplier).toBe("4380.9%")
     expect(ultimate?.damageSummary.expected).toBeGreaterThan(0)
+    expect(ultimate?.summary.expectedTotal).toBeCloseTo(
+      ultimate?.damageSummary.expected ?? 0,
+      6,
+    )
     expect(ultimate?.diagnosticSummary.count).toBe(
       ultimate?.diagnostics.length ?? 0,
     )

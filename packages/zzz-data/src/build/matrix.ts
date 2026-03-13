@@ -1974,6 +1974,7 @@ export function resolveStaticBuildSkillMatrix(
         crit: build.damage.crit.total,
         noCrit: build.damage.noCrit.total,
       },
+      summary: build.summary,
       resolvedBuckets: build.resolvedBuckets,
       diagnostics: build.diagnostics,
       diagnosticSummary: summarizeDiagnosticEntries(build.diagnostics),

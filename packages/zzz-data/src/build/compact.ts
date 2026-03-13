@@ -31,6 +31,7 @@ export interface StaticBuildCompactSkillMatrixRow {
   combatTags: string[]
   skillMultiplier: string
   damage: StaticBuildSkillMatrixRowDamageSummary
+  summary: StaticBuildSkillMatrixRow["summary"]
   resolvedBuckets: StaticBuildResolvedBuckets
   diagnostics: StaticBuildDiagnosticEntry[]
   diagnosticSummary: StaticBuildSkillMatrixRow["diagnosticSummary"]
@@ -184,6 +185,7 @@ export function compactStaticBuildSkillMatrixRow(
     combatTags: row.combatTags,
     skillMultiplier: row.skillMultiplier,
     damage: row.damageSummary,
+    summary: row.summary,
     resolvedBuckets: row.resolvedBuckets,
     diagnostics: row.diagnostics,
     diagnosticSummary: row.diagnosticSummary,

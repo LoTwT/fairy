@@ -51,6 +51,10 @@ describe("resolveBuildSkillMatrix tool", () => {
     expect((result as any).matrix.rows[0].metadata.sourceStatId).toBeTruthy()
     expect((result as any).matrix.rows[0].build).toBeUndefined()
     expect((result as any).matrix.rows[0].damage.expected).toBeGreaterThan(0)
+    expect((result as any).matrix.rows[0].summary.expectedTotal).toBeCloseTo(
+      (result as any).matrix.rows[0].damage.expected,
+      6,
+    )
     expect((result as any).matrix.rows[0].diagnostics).toBeInstanceOf(Array)
     expect((result as any).matrix.rows[0].diagnosticSummary.count).toBe(
       (result as any).matrix.rows[0].diagnostics.length,
@@ -123,6 +127,9 @@ describe("resolveBuildSkillMatrix tool", () => {
       (result as any).matrix.rows[0].sourceNotes.length,
     )
     expect((result as any).matrix.rows[0].build).toBeTruthy()
+    expect((result as any).matrix.rows[0].summary).toEqual(
+      (result as any).matrix.rows[0].build.summary,
+    )
   })
 
   it("returns Ellen matrix rows through the high-level tool", async () => {
