@@ -6,7 +6,10 @@ import type {
   StaticBuildTriggerMatrixRow,
   StaticBuildTriggerMatrixSummary,
 } from "./types.js"
-import { resolveStaticBuildDamage } from "./resolver.js"
+import {
+  resolveStaticBuildDamage,
+  summarizeDiagnosticEntries,
+} from "./resolver.js"
 import {
   hasStaticBuildSourceViewCoverage,
   resolveStaticBuildSourceDamageViews,
@@ -61,6 +64,7 @@ export function resolveStaticBuildTriggerMatrix(
       requirements: [],
       requirementSummary: summarizeSourceDamageViewRequirements([]),
       diagnostics: build.diagnostics,
+      diagnosticSummary: summarizeDiagnosticEntries(build.diagnostics),
       sourceNotes: build.sourceNotes,
       assumptions: build.assumptions,
       damage: {
@@ -106,6 +110,7 @@ function toTriggerMatrixRow(
     requirements: entry.requirements,
     requirementSummary: entry.requirementSummary,
     diagnostics: entry.diagnostics,
+    diagnosticSummary: entry.diagnosticSummary,
     sourceNotes: entry.sourceNotes,
     assumptions: entry.assumptions,
     damage: entry.damage,

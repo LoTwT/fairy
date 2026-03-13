@@ -82,6 +82,31 @@ describe("resolveBuildSourceDamageViews tool", () => {
           },
         ],
       },
+      diagnosticSummary: {
+        count: 3,
+        hasDiagnostics: true,
+        hasDefaultedInput: true,
+        hasCoverageGap: false,
+        hasUnsupportedEffect: false,
+        hasFallback: false,
+        kindGroups: [
+          {
+            key: "defaulted-input",
+            label: "默认输入",
+            count: 3,
+          },
+        ],
+        ownerGroups: [
+          {
+            key: "loadout",
+            count: 2,
+          },
+          {
+            key: "scenario",
+            count: 1,
+          },
+        ],
+      },
     })
     expect(
       (result as any).views.entries[0].sourceNotes.some(
@@ -225,6 +250,16 @@ describe("resolveBuildSourceDamageViews tool", () => {
             unsatisfiedCount: 0,
           },
         ],
+      },
+      diagnosticSummary: {
+        count: 0,
+        hasDiagnostics: false,
+        hasDefaultedInput: false,
+        hasCoverageGap: false,
+        hasUnsupportedEffect: false,
+        hasFallback: false,
+        kindGroups: [],
+        ownerGroups: [],
       },
     })
     expect(

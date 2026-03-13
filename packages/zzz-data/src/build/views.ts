@@ -21,7 +21,10 @@ import {
   supportedStaticBuildAgents,
 } from "./catalog.js"
 import { getStaticBuildSourceNoteEntries } from "./definitions.js"
-import { resolveStaticBuildDamage } from "./resolver.js"
+import {
+  resolveStaticBuildDamage,
+  summarizeDiagnosticEntries,
+} from "./resolver.js"
 
 const sourceViewAgentIds = ["1091", "1171", "1331", "1401", "1501"] as const
 const sourceViewAgentIdSet = new Set<string>(sourceViewAgentIds)
@@ -291,6 +294,7 @@ function createEntryBase(
     requirements,
     requirementSummary: summarizeSourceDamageViewRequirements(requirements),
     diagnostics: [],
+    diagnosticSummary: summarizeDiagnosticEntries([]),
     sourceNotes,
     assumptions: [],
   }
@@ -438,6 +442,7 @@ function resolveAlicePolarityAssaultView(
   entry.build = build
   entry.damage = toEntryDamage(build)
   entry.diagnostics = build.diagnostics
+  entry.diagnosticSummary = summarizeDiagnosticEntries(build.diagnostics)
   entry.assumptions.push(
     "当前 view 直接复用主 resolver，并按 scenario.stateSnapshot 记录的 [极性强击] 倍率结算。",
   )
@@ -486,6 +491,7 @@ function resolveMiyabiFrostburnBreakView(
   entry.build = build
   entry.damage = toEntryDamage(build)
   entry.diagnostics = build.diagnostics
+  entry.diagnosticSummary = summarizeDiagnosticEntries(build.diagnostics)
   entry.assumptions.push(
     "当前 view 以 scenario.stateSnapshot 的 [霜灼·破] 倍率快照驱动独立条目结算，不回写主公式。",
   )

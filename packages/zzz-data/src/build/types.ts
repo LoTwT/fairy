@@ -473,6 +473,22 @@ export interface StaticBuildDiagnosticGroupSummary {
   count: number
 }
 
+export interface StaticBuildDiagnosticOwnerGroupSummary {
+  key: StaticBuildDiagnosticOwner
+  count: number
+}
+
+export interface StaticBuildDiagnosticSummary {
+  count: number
+  hasDiagnostics: boolean
+  hasDefaultedInput: boolean
+  hasCoverageGap: boolean
+  hasUnsupportedEffect: boolean
+  hasFallback: boolean
+  kindGroups: StaticBuildDiagnosticGroupSummary[]
+  ownerGroups: StaticBuildDiagnosticOwnerGroupSummary[]
+}
+
 export interface StaticBuildSourceNoteGroupSummary {
   key: StaticBuildSourceNoteStatus
   label: string
@@ -587,6 +603,7 @@ export interface StaticBuildSourceDamageViewEntry {
   requirements: StaticBuildSourceDamageViewRequirement[]
   requirementSummary: StaticBuildSourceDamageViewRequirementSummary
   diagnostics: StaticBuildDiagnosticEntry[]
+  diagnosticSummary: StaticBuildDiagnosticSummary
   sourceNotes: StaticBuildSourceNoteEntry[]
   assumptions: string[]
   damage?: {
@@ -783,6 +800,7 @@ export interface StaticBuildTriggerMatrixRow {
   requirements: StaticBuildSourceDamageViewRequirement[]
   requirementSummary: StaticBuildSourceDamageViewRequirementSummary
   diagnostics: StaticBuildDiagnosticEntry[]
+  diagnosticSummary: StaticBuildDiagnosticSummary
   sourceNotes: StaticBuildSourceNoteEntry[]
   assumptions: string[]
   damage?: {

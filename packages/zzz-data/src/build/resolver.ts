@@ -5,6 +5,7 @@ import type {
   StaticBuildBucket,
   StaticBuildDiagnosticEntry,
   StaticBuildDiagnosticKind,
+  StaticBuildDiagnosticOwner,
   StaticBuildEffectDefinition,
   StaticBuildResolvedBuckets,
   StaticBuildSourceNoteEntry,
@@ -99,6 +100,41 @@ function summarizeDiagnostics(diagnostics: StaticBuildDiagnosticEntry[]) {
     .filter((group) => group.count > 0)
 }
 
+export function summarizeDiagnosticEntries(
+  diagnostics: StaticBuildDiagnosticEntry[],
+) {
+  const kindGroups = summarizeDiagnostics(diagnostics)
+  const ownerGroups = (
+    [
+      "loadout",
+      "finalPanel",
+      "scenario",
+      "source",
+      "process",
+    ] as const satisfies StaticBuildDiagnosticOwner[]
+  )
+    .map((key) => ({
+      key,
+      count: diagnostics.filter((entry) => entry.owner === key).length,
+    }))
+    .filter((group) => group.count > 0)
+
+  return {
+    count: diagnostics.length,
+    hasDiagnostics: diagnostics.length > 0,
+    hasDefaultedInput: diagnostics.some(
+      (entry) => entry.kind === "defaulted-input",
+    ),
+    hasCoverageGap: diagnostics.some((entry) => entry.kind === "coverage-gap"),
+    hasUnsupportedEffect: diagnostics.some(
+      (entry) => entry.kind === "unsupported-effect",
+    ),
+    hasFallback: diagnostics.some((entry) => entry.kind === "fallback"),
+    kindGroups,
+    ownerGroups,
+  }
+}
+
 function summarizeSourceNotes(sourceNotes: StaticBuildSourceNoteEntry[]) {
   return (Object.keys(sourceNoteLabels) as StaticBuildSourceNoteStatus[])
     .map((key) => ({
@@ -127,6 +163,7 @@ function buildResolveSummary(
   )
   const diagnosticGroups = summarizeDiagnostics(result.diagnostics)
   const sourceNoteGroups = summarizeSourceNotes(result.sourceNotes)
+  const diagnosticSummary = summarizeDiagnosticEntries(result.diagnostics)
 
   return {
     baseDamageStat: result.resolvedPanel.baseDamageStat,
@@ -136,22 +173,16 @@ function buildResolveSummary(
     noCritTotal: result.damage.noCrit.total,
     formulaMultipliers,
     assumptionCount: result.assumptions.length,
-    diagnosticCount: result.diagnostics.length,
+    diagnosticCount: diagnosticSummary.count,
     sourceNoteCount: result.sourceNotes.length,
     unsupportedEffectCount: result.unsupportedEffects.length,
-    hasDiagnostics: result.diagnostics.length > 0,
+    hasDiagnostics: diagnosticSummary.hasDiagnostics,
     hasSourceNotes: result.sourceNotes.length > 0,
     hasUnsupportedEffects: result.unsupportedEffects.length > 0,
-    hasDefaultedInput: result.diagnostics.some(
-      (entry) => entry.kind === "defaulted-input",
-    ),
-    hasCoverageGap: result.diagnostics.some(
-      (entry) => entry.kind === "coverage-gap",
-    ),
-    hasUnsupportedEffect: result.diagnostics.some(
-      (entry) => entry.kind === "unsupported-effect",
-    ),
-    hasFallback: result.diagnostics.some((entry) => entry.kind === "fallback"),
+    hasDefaultedInput: diagnosticSummary.hasDefaultedInput,
+    hasCoverageGap: diagnosticSummary.hasCoverageGap,
+    hasUnsupportedEffect: diagnosticSummary.hasUnsupportedEffect,
+    hasFallback: diagnosticSummary.hasFallback,
     hasMissingInputSourceNote: result.sourceNotes.some(
       (entry) => entry.status === "missing-input",
     ),

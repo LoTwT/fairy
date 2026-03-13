@@ -90,6 +90,31 @@ describe("static build trigger matrix", () => {
         hasUnsatisfied: false,
         groups: [],
       },
+      diagnosticSummary: {
+        count: 2,
+        hasDiagnostics: true,
+        hasDefaultedInput: true,
+        hasCoverageGap: false,
+        hasUnsupportedEffect: false,
+        hasFallback: false,
+        kindGroups: [
+          {
+            key: "defaulted-input",
+            label: "默认输入",
+            count: 2,
+          },
+        ],
+        ownerGroups: [
+          {
+            key: "loadout",
+            count: 1,
+          },
+          {
+            key: "scenario",
+            count: 1,
+          },
+        ],
+      },
     })
     expect(result.rows[1]).toMatchObject({
       id: "source-view:alice-polarity-assault",
@@ -122,6 +147,31 @@ describe("static build trigger matrix", () => {
             count: 1,
             satisfiedCount: 1,
             unsatisfiedCount: 0,
+          },
+        ],
+      },
+      diagnosticSummary: {
+        count: 2,
+        hasDiagnostics: true,
+        hasDefaultedInput: true,
+        hasCoverageGap: false,
+        hasUnsupportedEffect: false,
+        hasFallback: false,
+        kindGroups: [
+          {
+            key: "defaulted-input",
+            label: "默认输入",
+            count: 2,
+          },
+        ],
+        ownerGroups: [
+          {
+            key: "loadout",
+            count: 1,
+          },
+          {
+            key: "scenario",
+            count: 1,
           },
         ],
       },
@@ -264,6 +314,16 @@ describe("static build trigger matrix", () => {
             unsatisfiedCount: 0,
           },
         ],
+      },
+      diagnosticSummary: {
+        count: 0,
+        hasDiagnostics: false,
+        hasDefaultedInput: false,
+        hasCoverageGap: false,
+        hasUnsupportedEffect: false,
+        hasFallback: false,
+        kindGroups: [],
+        ownerGroups: [],
       },
     })
     expect(result.rows[1]?.requirements.map((item) => item.kind)).toEqual(

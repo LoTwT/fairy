@@ -84,6 +84,31 @@ describe("static build compact helpers", () => {
     expect(compact.rows).toHaveLength(2)
     expect(compact.rows[0]?.build).toBeTruthy()
     expect(compact.rows[1]?.metadata.entryKind).toBe("source-view")
+    expect(compact.rows[0]?.diagnosticSummary).toEqual({
+      count: 2,
+      hasDiagnostics: true,
+      hasDefaultedInput: true,
+      hasCoverageGap: false,
+      hasUnsupportedEffect: false,
+      hasFallback: false,
+      kindGroups: [
+        {
+          key: "defaulted-input",
+          label: "默认输入",
+          count: 2,
+        },
+      ],
+      ownerGroups: [
+        {
+          key: "loadout",
+          count: 1,
+        },
+        {
+          key: "scenario",
+          count: 1,
+        },
+      ],
+    })
     expect(compact.rows[1]?.requirementSummary).toEqual({
       count: 2,
       satisfiedCount: 2,
@@ -101,6 +126,31 @@ describe("static build compact helpers", () => {
           count: 1,
           satisfiedCount: 1,
           unsatisfiedCount: 0,
+        },
+      ],
+    })
+    expect(compact.rows[1]?.diagnosticSummary).toEqual({
+      count: 2,
+      hasDiagnostics: true,
+      hasDefaultedInput: true,
+      hasCoverageGap: false,
+      hasUnsupportedEffect: false,
+      hasFallback: false,
+      kindGroups: [
+        {
+          key: "defaulted-input",
+          label: "默认输入",
+          count: 2,
+        },
+      ],
+      ownerGroups: [
+        {
+          key: "loadout",
+          count: 1,
+        },
+        {
+          key: "scenario",
+          count: 1,
         },
       ],
     })
@@ -169,6 +219,19 @@ describe("static build compact helpers", () => {
         },
       ],
     })
+    expect(
+      (damageEntry as { diagnosticSummary?: unknown } | undefined)
+        ?.diagnosticSummary,
+    ).toEqual({
+      count: 0,
+      hasDiagnostics: false,
+      hasDefaultedInput: false,
+      hasCoverageGap: false,
+      hasUnsupportedEffect: false,
+      hasFallback: false,
+      kindGroups: [],
+      ownerGroups: [],
+    })
     expect("build" in (damageEntry ?? {})).toBe(false)
   })
 
@@ -227,6 +290,31 @@ describe("static build compact helpers", () => {
           count: 1,
           satisfiedCount: 1,
           unsatisfiedCount: 0,
+        },
+      ],
+    })
+    expect(compact.entries[0]?.diagnosticSummary).toEqual({
+      count: 2,
+      hasDiagnostics: true,
+      hasDefaultedInput: true,
+      hasCoverageGap: false,
+      hasUnsupportedEffect: false,
+      hasFallback: false,
+      kindGroups: [
+        {
+          key: "defaulted-input",
+          label: "默认输入",
+          count: 2,
+        },
+      ],
+      ownerGroups: [
+        {
+          key: "loadout",
+          count: 1,
+        },
+        {
+          key: "scenario",
+          count: 1,
         },
       ],
     })

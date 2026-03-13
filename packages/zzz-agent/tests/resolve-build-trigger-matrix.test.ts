@@ -74,6 +74,31 @@ describe("resolveBuildTriggerMatrix tool", () => {
       hasUnsatisfied: false,
       groups: [],
     })
+    expect((result as any).matrix.rows[0].diagnosticSummary).toEqual({
+      count: 3,
+      hasDiagnostics: true,
+      hasDefaultedInput: true,
+      hasCoverageGap: false,
+      hasUnsupportedEffect: false,
+      hasFallback: false,
+      kindGroups: [
+        {
+          key: "defaulted-input",
+          label: "默认输入",
+          count: 3,
+        },
+      ],
+      ownerGroups: [
+        {
+          key: "loadout",
+          count: 2,
+        },
+        {
+          key: "scenario",
+          count: 1,
+        },
+      ],
+    })
     expect((result as any).matrix.rows[1]).toMatchObject({
       supported: true,
       metadata: {
@@ -101,6 +126,31 @@ describe("resolveBuildTriggerMatrix tool", () => {
             count: 1,
             satisfiedCount: 1,
             unsatisfiedCount: 0,
+          },
+        ],
+      },
+      diagnosticSummary: {
+        count: 3,
+        hasDiagnostics: true,
+        hasDefaultedInput: true,
+        hasCoverageGap: false,
+        hasUnsupportedEffect: false,
+        hasFallback: false,
+        kindGroups: [
+          {
+            key: "defaulted-input",
+            label: "默认输入",
+            count: 3,
+          },
+        ],
+        ownerGroups: [
+          {
+            key: "loadout",
+            count: 2,
+          },
+          {
+            key: "scenario",
+            count: 1,
           },
         ],
       },
@@ -229,6 +279,16 @@ describe("resolveBuildTriggerMatrix tool", () => {
             unsatisfiedCount: 0,
           },
         ],
+      },
+      diagnosticSummary: {
+        count: 0,
+        hasDiagnostics: false,
+        hasDefaultedInput: false,
+        hasCoverageGap: false,
+        hasUnsupportedEffect: false,
+        hasFallback: false,
+        kindGroups: [],
+        ownerGroups: [],
       },
     })
     expect(

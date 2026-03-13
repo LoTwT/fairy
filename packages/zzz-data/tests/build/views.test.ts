@@ -136,6 +136,31 @@ describe("static build source damage views", () => {
           },
         ],
       },
+      diagnosticSummary: {
+        count: 2,
+        hasDiagnostics: true,
+        hasDefaultedInput: true,
+        hasCoverageGap: false,
+        hasUnsupportedEffect: false,
+        hasFallback: false,
+        kindGroups: [
+          {
+            key: "defaulted-input",
+            label: "默认输入",
+            count: 2,
+          },
+        ],
+        ownerGroups: [
+          {
+            key: "loadout",
+            count: 1,
+          },
+          {
+            key: "scenario",
+            count: 1,
+          },
+        ],
+      },
     })
     expect(
       result.entries[0]?.build?.resolvedBuckets.skillMultiplierFactor,
@@ -266,6 +291,16 @@ describe("static build source damage views", () => {
         entryKind: "source-damage-view",
         damageType: "anomaly",
         resolutionMode: "delta",
+      },
+      diagnosticSummary: {
+        count: 0,
+        hasDiagnostics: false,
+        hasDefaultedInput: false,
+        hasCoverageGap: false,
+        hasUnsupportedEffect: false,
+        hasFallback: false,
+        kindGroups: [],
+        ownerGroups: [],
       },
       requirementSummary: {
         count: 3,
