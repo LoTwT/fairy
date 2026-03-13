@@ -2049,3 +2049,45 @@ Batch B（已完成）：
 2. 不新增新的 trigger coverage
 3. 不新增 anomaly / disorder skill matrix
 4. 不实现独立 trigger-template catalog public export
+
+## 45. V40 requirement summaries
+
+### 45.1 目标
+
+`V39` 收口后，`source-damage-view` 与 `trigger-entry matrix` 仍只有逐条 `requirements[]`：
+
+1. 上层若只想知道是否有未满足条件，仍需手工遍历
+2. 若要按 requirement kind 分组，也只能自行统计
+
+`V40` 只解决一件事：
+
+1. 为 source-view / trigger row 增加稳定 requirement summary
+
+### 45.2 范围
+
+1. `V40.1` scope freeze
+2. `V40.2` source-view requirement-summary contract
+3. `V40.3` trigger-row alignment
+4. `V40.4` docs closeout
+
+### 45.3 当前状态
+
+- `V40.1` 已完成：冻结到 requirement-summary contract
+- `V40.2` 未开始
+- `V40.3` 未开始
+- `V40.4` 未开始
+
+### 45.4 当前边界
+
+本阶段只做：
+
+1. 为 source-damage-view entry 增加 `requirementSummary`
+2. 为 trigger row 增加 `requirementSummary`
+3. 保持现有 `requirements[]` 与 compact helper 兼容
+
+显式不做：
+
+1. 不改变 `requirements[]` 原始数组
+2. 不新增新的 coverage
+3. 不新增新的顶层 summary key
+4. 不实现独立 trigger-template catalog
