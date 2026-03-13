@@ -1746,3 +1746,48 @@ Batch B（已完成）：
 2. 不调整 `zzz-data` source-entry collection contract
 3. 不调整 source-entry row / metadata contract
 4. 不新增新的 source-entry coverage
+
+## 38. V33 support-scope normalization
+
+### 38.1 目标
+
+`V32` 收口后，`zzz-data` 与高层 tool 的主结果 contract 已基本对齐。
+
+当前剩余 drift 主要落在 `zzz-agent` 的 `resolve-build-*` 高层 tool：
+
+1. unsupported / support-scope 响应仍由各个 tool 各自拼装
+2. `supportedAgents / supportedWEngines / supportedDriveDiscs / candidates` 的组装逻辑重复
+3. `resolve-build-skill-matrix` 仍本地复制 catalog matching helper
+
+`V33` 只解决一件事：
+
+1. 统一 `resolve-build-*` 高层 tool 的 support-scope 组装与 catalog helper
+
+### 38.2 范围
+
+1. `V33.1` scope freeze
+2. `V33.2` shared support-scope helpers
+3. `V33.3` tool migration
+4. `V33.4` docs closeout
+
+### 38.3 当前状态
+
+- `V33.1` 已完成：冻结到 support-scope normalization
+- `V33.2` 待实现：提取共享 support-scope helper
+- `V33.3` 待实现：迁移 `resolve-build-*` 高层 tool
+- `V33.4` 待实现：README / 总规格 / 索引 / 架构入口同步收口
+
+### 38.4 当前边界
+
+本阶段只做：
+
+1. 提取并复用高层 tool 的 support-scope helper
+2. 统一 unsupported / candidates 返回结构
+3. 去掉 `resolve-build-skill-matrix` 中重复的 catalog matching helper
+
+显式不做：
+
+1. 不新增 `zzz-data` public key
+2. 不调整底层 build/source-view/trigger-matrix/source-entry contract
+3. 不新增新的 coverage
+4. 不调整 Agent prompt 输出模板
