@@ -1971,6 +1971,8 @@ export function resolveStaticBuildSkillMatrix(
         noCrit: build.damage.noCrit.total,
       },
       resolvedBuckets: build.resolvedBuckets,
+      diagnostics: build.diagnostics,
+      sourceNotes: build.sourceNotes,
       assumptions: build.assumptions,
       unsupportedEffects: build.unsupportedEffects,
       build,

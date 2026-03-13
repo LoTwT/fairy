@@ -96,6 +96,8 @@ describe("static build skill matrix", () => {
     expect(etherBurst?.damageSummary.crit).toBeGreaterThan(
       etherBurst?.damageSummary.expected ?? 0,
     )
+    expect(etherBurst?.diagnostics).toBeInstanceOf(Array)
+    expect(etherBurst?.sourceNotes).toBeInstanceOf(Array)
     expect(etherBurst?.build.damage.expected.total).toBeGreaterThan(0)
   })
 

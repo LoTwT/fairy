@@ -40,6 +40,8 @@ function compactMatrix(
       skillMultiplier: row.skillMultiplier,
       damage: row.damageSummary,
       resolvedBuckets: row.resolvedBuckets,
+      diagnostics: row.diagnostics,
+      sourceNotes: row.sourceNotes,
       assumptions: row.assumptions,
       unsupportedEffects: row.unsupportedEffects,
       ...(includeDetails ? { build: row.build } : {}),
