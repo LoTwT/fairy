@@ -4283,6 +4283,16 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
     note: "旋钻机-赤轴的电属性伤害提升依赖发动[强化特殊技]/[连携技]后的 10 秒触发窗口；当前 static resolver 不新增新的 trigger-window snapshot key，因此这部分继续保留为 source note。",
   },
   {
+    sourceType: "w-engine",
+    sourceId: "12003",
+    note: "「月相」-朔只提供发动[强化特殊技]后的能量回复；这类能量恢复不直接进入当前 static damage 主公式，且触发冷却属于过程问题，因此继续保留为 source note。",
+  },
+  {
+    sourceType: "w-engine",
+    sourceId: "12012",
+    note: "「电磁暴」-叁式只提供队友施加属性异常后的能量回复；这类队伍触发型能量恢复不直接进入当前 static damage 主公式，且 12 秒触发窗口属于过程问题，因此继续保留为 source note。",
+  },
+  {
     sourceType: "drive-disc",
     sourceId: "32700",
     minimumPieces: 4,

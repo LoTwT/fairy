@@ -140,6 +140,30 @@ describe("resolveBuildSkillMatrix tool", () => {
     expect((result as any).matrix.rows[0].label).toBe("普通攻击·一段")
   })
 
+  it("keeps Moon Phase Charlie out of generic matrix coverage gaps", async () => {
+    const result = await runTool(resolveBuildSkillMatrix, {
+      agent: "猫又",
+      wEngine: "「月相」-朔",
+      finalPanel: {
+        attack: 2800,
+        baseAttack: 1100,
+        critRate: 0.5,
+        critDamage: 1.1,
+      },
+      context: {
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    expect((result as any).matrix.assumptions.join(" ")).not.toContain(
+      "「月相」-朔 当前未收录 curated",
+    )
+  })
+
   it("returns Corin generic matrix rows with partial Housekeeper coverage", async () => {
     const result = await runTool(resolveBuildSkillMatrix, {
       agent: "可琳",

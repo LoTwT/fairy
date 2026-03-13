@@ -257,6 +257,82 @@ describe("resolveBuildDamage tool", () => {
     )
   })
 
+  it("keeps Moon Phase Charlie as utility-only source notes in the high-level tool", async () => {
+    const result = await runTool(resolveBuildDamage, {
+      agent: "猫又",
+      wEngine: "「月相」-朔",
+      finalPanel: {
+        attack: 2800,
+        baseAttack: 1100,
+        critRate: 0.5,
+        critDamage: 1.1,
+      },
+      scenario: {
+        damageType: "normal",
+        skillTag: "enhancedSpecial",
+        skillMultiplier: "300%",
+        attribute: "物理",
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    expect((result as any).build.loadout.wEngine.name).toBe("「月相」-朔")
+    expect((result as any).build.assumptions.join(" ")).not.toContain(
+      "「月相」-朔 当前未收录 curated",
+    )
+    expect(
+      (result as any).build.sourceNotes.some(
+        (item: any) =>
+          item.sourceType === "w-engine" &&
+          item.sourceId === "12003" &&
+          item.message.includes("能量回复"),
+      ),
+    ).toBe(true)
+  })
+
+  it("keeps Electromag Charlie as utility-only source notes in the high-level tool", async () => {
+    const result = await runTool(resolveBuildDamage, {
+      agent: "格莉丝",
+      wEngine: "「电磁暴」-叁式",
+      finalPanel: {
+        attack: 3000,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 120,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "enhancedSpecial",
+        damageMultiplier: "500%",
+        attribute: "电属性",
+        combatTags: ["anomalyApplied"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    expect((result as any).build.loadout.wEngine.name).toBe("「电磁暴」-叁式")
+    expect((result as any).build.assumptions.join(" ")).not.toContain(
+      "「电磁暴」-叁式 当前未收录 curated",
+    )
+    expect(
+      (result as any).build.sourceNotes.some(
+        (item: any) =>
+          item.sourceType === "w-engine" &&
+          item.sourceId === "12012" &&
+          item.message.includes("能量回复"),
+      ),
+    ).toBe(true)
+  })
+
   it("supports Banyue rupture curated effects through the high-level tool", async () => {
     const result = await runTool(resolveBuildDamage, {
       agent: "般岳",

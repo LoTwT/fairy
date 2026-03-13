@@ -1052,6 +1052,48 @@ describe("static build resolver", () => {
     expect(full.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.12, 4)
   })
 
+  it("replaces generic coverage gaps with source notes for utility-only Moon Phase Charlie", () => {
+    const result = resolveStaticBuildDamage({
+      loadout: {
+        agentId: "1021",
+        wEngineId: "12003",
+        wEngineRefinement: 1,
+      },
+      panel: {
+        attack: 2800,
+        baseAttack: 1100,
+        critRate: 0.5,
+        critDamage: 1.1,
+      },
+      scenario: {
+        damageType: "normal",
+        skillTag: "enhancedSpecial",
+        skillMultiplier: "300%",
+        attribute: "物理",
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.loadout.wEngine?.name).toBe("「月相」-朔")
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("「月相」-朔 当前未收录 curated"),
+      ),
+    ).toBe(false)
+    expect(
+      result.sourceNotes.some(
+        (item) =>
+          item.sourceType === "w-engine" &&
+          item.sourceId === "12003" &&
+          item.status === "process-only" &&
+          item.message.includes("能量回复"),
+      ),
+    ).toBe(true)
+  })
+
   it("applies partial curated rupture generic w-engine effects for Puzzle Sphere", () => {
     const regular = resolveStaticBuildDamage({
       loadout: {
@@ -1405,6 +1447,51 @@ describe("static build resolver", () => {
     expect(proficiency.loadout.wEngine?.name).toBe("「电磁暴」-贰式")
     expect(proficiency.resolvedBuckets.anomalyProficiency).toBe(25)
     expect(proficiency.resolvedPanel.anomalyProficiency).toBeCloseTo(145, 4)
+  })
+
+  it("replaces generic coverage gaps with source notes for utility-only Electromag Charlie", () => {
+    const result = resolveStaticBuildDamage({
+      loadout: {
+        agentId: "1181",
+        wEngineId: "12012",
+        agentLevel: 60,
+        wEngineRefinement: 1,
+      },
+      panel: {
+        attack: 3000,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 120,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "enhancedSpecial",
+        damageMultiplier: "500%",
+        attribute: "电属性",
+        combatTags: ["anomalyApplied"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.loadout.wEngine?.name).toBe("「电磁暴」-叁式")
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("「电磁暴」-叁式 当前未收录 curated"),
+      ),
+    ).toBe(false)
+    expect(
+      result.sourceNotes.some(
+        (item) =>
+          item.sourceType === "w-engine" &&
+          item.sourceId === "12012" &&
+          item.status === "process-only" &&
+          item.message.includes("能量回复"),
+      ),
+    ).toBe(true)
   })
 
   it("records unsupported-effect diagnostics when attack percent buffs need baseAttack", () => {
