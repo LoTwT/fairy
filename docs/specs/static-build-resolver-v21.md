@@ -109,3 +109,19 @@
 2. 主公式结算与 source-specific 额外结算在同一份结果中并列展示
 3. 现有 `resolveStaticBuildDamage` 和 `resolveStaticBuildSourceDamageViews` contract 不受破坏
 4. `zzz-agent` 有独立高层 tool 可消费 trigger-entry matrix
+
+## 7. 当前实现状态
+
+当前已完成：
+
+1. `resolveStaticBuildTriggerMatrix()`
+2. `supportedStaticBuildTriggerMatrixAgents`
+3. `zzz-agent` 高层 tool：`resolveBuildTriggerMatrix`
+4. 第一批代理人：`爱丽丝 / 雅 / 柏妮思 / 爱芮`
+
+当前结果刻意保持为“触发条目矩阵”：
+
+- `main-formula` 行：主 anomaly / disorder 结算
+- `source-view` 行：独立额外结算条目
+
+不继续伪装成技能矩阵，也不把 utility / energy 条目并入这里。

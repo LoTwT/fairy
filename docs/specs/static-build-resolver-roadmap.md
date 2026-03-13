@@ -1263,10 +1263,10 @@ Batch B（已完成）：
 ### 26.3 当前状态
 
 - `V21.1` 已完成：冻结到 trigger-entry matrix
-- `V21.2` 未开始
-- `V21.3` 未开始
-- `V21.4` 未开始
-- `V21.5` 未开始
+- `V21.2` 已完成：新增独立 trigger-entry matrix contract
+- `V21.3` 已完成：第一批已覆盖 `爱丽丝 / 雅 / 柏妮思 / 爱芮`
+- `V21.4` 已完成：`zzz-agent` 已新增 `resolveBuildTriggerMatrix`
+- `V21.5` 已完成：文档、测试与构建已收口
 
 ### 26.4 第一批范围
 

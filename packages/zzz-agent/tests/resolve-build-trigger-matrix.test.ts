@@ -1,0 +1,104 @@
+import { describe, expect, it } from "vitest"
+
+import { resolveBuildTriggerMatrix } from "../src/mastra/tools/zzz/resolve-build-trigger-matrix"
+import { runTool } from "./shared"
+
+describe("resolveBuildTriggerMatrix tool", () => {
+  it("returns anomaly trigger-entry rows for covered agents", async () => {
+    const result = await runTool(resolveBuildTriggerMatrix, {
+      agent: "爱丽丝",
+      mode: "baseline",
+      finalPanel: {
+        attack: 2800,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 200,
+        anomalyMastery: 180,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "enhancedSpecial",
+        damageMultiplier: "500%",
+        attribute: "物理",
+        stateSnapshot: {
+          flags: {
+            alicePolarityAssaultState: true,
+          },
+          values: {
+            alicePolarityAssaultDamageRatio: 2.5,
+          },
+        },
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    expect((result as any).matrix.rows).toHaveLength(2)
+    expect((result as any).matrix.rows[0].metadata.entryKind).toBe(
+      "main-formula",
+    )
+    expect((result as any).matrix.rows[1]).toMatchObject({
+      supported: true,
+      metadata: {
+        entryKind: "source-view",
+        sourceViewId: "alice-polarity-assault",
+      },
+    })
+  })
+
+  it("rejects normal trigger-matrix requests", async () => {
+    const result = await runTool(resolveBuildTriggerMatrix, {
+      agent: "爱丽丝",
+      finalPanel: {
+        attack: 2800,
+        critRate: 0.2,
+        critDamage: 0.5,
+      },
+      scenario: {
+        damageType: "normal",
+        skillTag: "basic",
+        skillMultiplier: "300%",
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(false)
+    expect((result as any).supportedDamageTypes).toEqual([
+      "anomaly",
+      "disorder",
+    ])
+  })
+
+  it("returns trigger-matrix support scope when the agent has no trigger coverage", async () => {
+    const result = await runTool(resolveBuildTriggerMatrix, {
+      agent: "朱鸢",
+      finalPanel: {
+        attack: 3200,
+        critRate: 0.55,
+        critDamage: 1.4,
+        anomalyProficiency: 160,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "special",
+        damageMultiplier: "300%",
+        attribute: "以太",
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(false)
+    expect((result as any).supportedAgents).toEqual(
+      expect.arrayContaining(["爱丽丝", "柏妮思", "雅", "爱芮"]),
+    )
+  })
+})

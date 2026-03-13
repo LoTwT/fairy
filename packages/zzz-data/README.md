@@ -176,6 +176,47 @@ views.entries[0]
 
 同一份 source-specific view contract 也已在 `zzz-agent` 中通过 `resolve-build-source-damage-views` 高层 tool 暴露，适合直接给 Agent 查询独立额外结算条目。
 
+如果你需要把主 anomaly / disorder 结算和独立额外结算并列查看，可使用：
+
+```ts
+import { resolveStaticBuildTriggerMatrix } from "zzz-data"
+
+const matrix = resolveStaticBuildTriggerMatrix({
+  loadout: {
+    agentId: "1401",
+    agentLevel: 60,
+  },
+  panel: {
+    attack: 2800,
+    critRate: 0.2,
+    critDamage: 0.5,
+    anomalyProficiency: 200,
+    anomalyMastery: 180,
+  },
+  scenario: {
+    damageType: "anomaly",
+    skillTag: "enhancedSpecial",
+    damageMultiplier: "500%",
+    attribute: "物理",
+    stateSnapshot: {
+      flags: {
+        alicePolarityAssaultState: true,
+      },
+      values: {
+        alicePolarityAssaultDamageRatio: 2.5,
+      },
+    },
+    enemy: {
+      defenderBaseDefense: 953,
+      defenderResistance: 0.2,
+    },
+  },
+})
+
+matrix.rows.map((row) => row.metadata.stableKey)
+// ["main-formula:anomaly", "source-view:alice-polarity-assault"]
+```
+
 如果你需要拿到不进入主伤害公式的独立回能 / 回能速率条目，可使用：
 
 ```ts

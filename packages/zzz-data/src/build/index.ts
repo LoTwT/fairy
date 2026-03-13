@@ -12,6 +12,11 @@ export { getStaticBuildEffectsForLoadout } from "./definitions.js"
 export { resolveStaticBuildSkillMatrix } from "./matrix.js"
 export { getStaticBuildProfile, staticBuildProfiles } from "./profiles.js"
 export { resolveStaticBuildDamage } from "./resolver.js"
+export {
+  hasStaticBuildTriggerMatrixCoverage,
+  resolveStaticBuildTriggerMatrix,
+  supportedStaticBuildTriggerMatrixAgents,
+} from "./trigger-matrix.js"
 export type {
   ResolveStaticBuildInput,
   ResolveStaticBuildResult,
@@ -20,6 +25,8 @@ export type {
   ResolveStaticBuildSourceDamageViewsResult,
   ResolveStaticBuildSourceUtilityViewsInput,
   ResolveStaticBuildSourceUtilityViewsResult,
+  ResolveStaticBuildTriggerMatrixInput,
+  ResolveStaticBuildTriggerMatrixResult,
   StaticBuildAgentCatalogEntry,
   StaticBuildBaseMode,
   StaticBuildBucket,
@@ -70,6 +77,9 @@ export type {
   StaticBuildStateValueKey,
   StaticBuildTargetSize,
   StaticBuildTraceItem,
+  StaticBuildTriggerMatrixEntryKind,
+  StaticBuildTriggerMatrixRow,
+  StaticBuildTriggerMatrixRowMeta,
   StaticBuildWEngineCatalogEntry,
 } from "./types.js"
 

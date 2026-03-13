@@ -570,6 +570,45 @@ export interface ResolveStaticBuildSourceUtilityViewsResult {
   assumptions: string[]
 }
 
+export type StaticBuildTriggerMatrixEntryKind = "main-formula" | "source-view"
+
+export interface StaticBuildTriggerMatrixRowMeta {
+  canonicalLabel: string
+  stableKey: string
+  entryKind: StaticBuildTriggerMatrixEntryKind
+  damageType: Extract<StaticBuildDamageType, "anomaly" | "disorder">
+  sourceViewId?: string
+  sourceViewResolutionMode?: StaticBuildSourceDamageViewEntry["resolutionMode"]
+}
+
+export interface StaticBuildTriggerMatrixRow {
+  id: string
+  label: string
+  supported: boolean
+  metadata: StaticBuildTriggerMatrixRowMeta
+  requirements: StaticBuildSourceDamageViewRequirement[]
+  diagnostics: StaticBuildDiagnosticEntry[]
+  sourceNotes: StaticBuildSourceNoteEntry[]
+  assumptions: string[]
+  damage?: {
+    expected: number
+    crit: number
+    noCrit: number
+  }
+  build?: ResolveStaticBuildResult
+}
+
+export type ResolveStaticBuildTriggerMatrixInput = ResolveStaticBuildInput
+
+export interface ResolveStaticBuildTriggerMatrixResult {
+  profile: StaticBuildProfileResult
+  mode: StaticBuildMode
+  manualBaseMode?: StaticBuildBaseMode
+  loadout: StaticBuildResolvedLoadout
+  rows: StaticBuildTriggerMatrixRow[]
+  assumptions: string[]
+}
+
 export interface StaticBuildSkillMatrixRowMeta {
   order: number
   actionName: string
