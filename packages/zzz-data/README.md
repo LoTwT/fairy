@@ -200,6 +200,7 @@ const views = resolveStaticBuildSourceDamageViews({
 
 views.entries[0]
 views.entries[0].metadata.stableKey
+views.entries[0].summary
 
 views.summary
 // {
@@ -234,6 +235,13 @@ views.summary
 ```
 
 如果你需要判断当前 source-specific damage views 是 standalone 还是 delta、是否存在 unsupported 条目、如何分组展示，或者当前整组 views 是否带有 diagnostics / source notes，也不要再自己统计 `entries`，直接使用 `views.summary`。
+
+如果你只做单条 source-specific damage view 的结果展示，不需要再通过 `includeDetails` 读取 `entry.build.summary`，优先直接使用：
+
+- `views.entries[0].summary`
+- `views.entries[0].requirementSummary`
+- `views.entries[0].diagnosticSummary`
+- `views.entries[0].sourceNoteSummary`
 
 如果你只想知道当前 source-specific view 有多少前置条件、哪些 requirement kind 已满足 / 未满足，也不要再手工遍历 `requirements[]`，直接使用：
 

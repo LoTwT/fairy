@@ -64,7 +64,7 @@
 - `V47 skill-matrix summary aggregates` 已收口
 - `V48 skill-matrix row summaries` 已收口
 - `V49 skill-matrix row resolve summaries` 已收口
-- 当前活跃阶段：`V50 source-damage-view entry resolve summaries`
+- `V50 source-damage-view entry resolve summaries` 已收口
 - 当前边界：`resolveStaticBuildSkillMatrix` 仍只支持 `normal / sheer`
 
 ## 2. 阶段划分
@@ -2501,9 +2501,9 @@ Batch B（已完成）：
 ### 55.3 当前状态
 
 - `V50.1` 已完成：冻结到 source-damage-view entry resolve summary contract
-- `V50.2` 未开始
-- `V50.3` 未开始
-- `V50.4` 未开始
+- `V50.2` 已完成：`StaticBuildSourceDamageViewEntry` 已新增稳定 `summary`
+- `V50.3` 已完成：compact helper 与高层 source-damage-view tool 已透传 `entry.summary`
+- `V50.4` 已完成：相关 specs、roadmap、索引、架构文档与 README 已同步
 
 ### 55.4 当前边界
 
