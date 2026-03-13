@@ -578,6 +578,10 @@ function summarizeSkillMatrix(rows: StaticBuildSkillMatrixRow[]) {
     sourceNoteSummary: summarizeSourceNoteEntries(
       groupRows.flatMap((row) => row.sourceNotes),
     ),
+    assumptions: [...new Set(groupRows.flatMap((row) => row.assumptions))],
+    unsupportedEffects: [
+      ...new Set(groupRows.flatMap((row) => row.unsupportedEffects)),
+    ],
   }))
 
   if (!first) {

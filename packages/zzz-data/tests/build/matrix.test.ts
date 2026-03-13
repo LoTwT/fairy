@@ -85,6 +85,20 @@ describe("static build skill matrix", () => {
         .filter((row) => row.group === "普通攻击")
         .flatMap((row) => row.sourceNotes).length,
     )
+    expect(normalGroup?.assumptions).toEqual([
+      ...new Set(
+        result.rows
+          .filter((row) => row.group === "普通攻击")
+          .flatMap((row) => row.assumptions),
+      ),
+    ])
+    expect(normalGroup?.unsupportedEffects).toEqual([
+      ...new Set(
+        result.rows
+          .filter((row) => row.group === "普通攻击")
+          .flatMap((row) => row.unsupportedEffects),
+      ),
+    ])
     expect(result.rows).toHaveLength(21)
     expect(result.rows[0]?.label).toBe("普通攻击·一段")
     expect(result.rows[0]?.metadata).toMatchObject({

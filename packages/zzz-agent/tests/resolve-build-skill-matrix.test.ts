@@ -86,10 +86,10 @@ describe("resolveBuildSkillMatrix tool", () => {
     const normalGroup = (result as any).matrix.summary.groups.find(
       (group: any) => group.key === "普通攻击",
     )
-    expect(normalGroup?.count).toBe(
-      (result as any).matrix.rows.filter((row: any) => row.group === "普通攻击")
-        .length,
+    const normalRows = (result as any).matrix.rows.filter(
+      (row: any) => row.group === "普通攻击",
     )
+    expect(normalGroup?.count).toBe(normalRows.length)
     expect(normalGroup?.commonBuckets.critRate).toBeCloseTo(0.15, 4)
     expect(
       normalGroup?.commonFormulaMultipliers.critMultiplier,
@@ -102,15 +102,17 @@ describe("resolveBuildSkillMatrix tool", () => {
     expect(normalGroupEffect?.appliedRowCount).toBe(normalGroup?.count)
     expect(normalGroupEffect?.totalRowCount).toBe(normalGroup?.count)
     expect(normalGroup?.diagnosticSummary.count).toBe(
-      (result as any).matrix.rows
-        .filter((row: any) => row.group === "普通攻击")
-        .flatMap((row: any) => row.diagnostics).length,
+      normalRows.flatMap((row: any) => row.diagnostics).length,
     )
     expect(normalGroup?.sourceNoteSummary.count).toBe(
-      (result as any).matrix.rows
-        .filter((row: any) => row.group === "普通攻击")
-        .flatMap((row: any) => row.sourceNotes).length,
+      normalRows.flatMap((row: any) => row.sourceNotes).length,
     )
+    expect(normalGroup?.assumptions).toEqual([
+      ...new Set(normalRows.flatMap((row: any) => row.assumptions)),
+    ])
+    expect(normalGroup?.unsupportedEffects).toEqual([
+      ...new Set(normalRows.flatMap((row: any) => row.unsupportedEffects)),
+    ])
     expect(
       (result as any).matrix.summary.commonFormulaMultipliers.critMultiplier,
     ).toBeGreaterThan(1)

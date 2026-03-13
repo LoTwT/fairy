@@ -967,6 +967,8 @@ export interface StaticBuildSkillMatrixGroupSummary {
   effectSummary: StaticBuildSkillMatrixEffectSummaryItem[]
   diagnosticSummary: StaticBuildDiagnosticSummary
   sourceNoteSummary: StaticBuildSourceNoteSummary
+  assumptions: string[]
+  unsupportedEffects: string[]
 }
 
 export interface StaticBuildSkillMatrixEffectSummaryItem {

@@ -71,6 +71,7 @@
 - `V54 source-damage-view summary requirement aggregates` 已收口
 - `V55 trigger-matrix summary requirement aggregates` 已收口
 - `V56 source-entry collection requirement aggregates` 已收口
+- `V65 skill-matrix group caveat summaries` 已收口
 - 当前边界：`resolveStaticBuildSkillMatrix` 仍只支持 `normal / sheer`
 
 ## 2. 阶段划分
@@ -3090,4 +3091,44 @@ Batch B（已完成）：
 
 1. 不改变全矩阵 `commonBuckets / variableBuckets`
 2. 不新增 group-level resolve summary
+3. 不改变 `row.group` 的分组逻辑
+
+## 68. V65 skill-matrix group caveat summaries
+
+### 68.1 目标
+
+`V64` 收口后，`skill-matrix summary groups` 已能稳定给出局部 `commonBuckets / commonFormulaMultipliers / effectSummary / diagnosticSummary / sourceNoteSummary`。
+
+但按 `row.group` 拆 section 时，组级 caveat 仍只有 row 级版本。上层如果想在“普通攻击 / 特殊技 / 连携技”分组下分别解释组内 assumptions / unsupportedEffects，仍要重新遍历 rows 再自行去重聚合。
+
+`V65` 只解决一件事：
+
+1. 为 `skill-matrix summary groups` 增加局部 `assumptions / unsupportedEffects`
+
+### 68.2 范围
+
+1. `V65.1` scope freeze
+2. `V65.2` group-level caveat summaries
+3. `V65.3` high-level / prompt alignment
+4. `V65.4` docs closeout
+
+### 68.3 当前状态
+
+- `V65.1` 已完成：冻结到 skill-matrix group caveat summaries
+- `V65.2` 已完成：`StaticBuildSkillMatrixGroupSummary` 已新增局部 `assumptions / unsupportedEffects`
+- `V65.3` 已完成：高层 tool 断言与 agent prompt 已对齐 `matrix.summary.groups[*].assumptions / unsupportedEffects`
+- `V65.4` 已完成：相关 specs、roadmap、索引、架构文档与 README 已同步
+
+### 68.4 当前边界
+
+本阶段只做：
+
+1. 为 `skill-matrix summary groups` 增加局部 caveat summaries
+2. 保持全矩阵 `assumptions / unsupportedEffects` 兼容
+3. 保持现有 group-level formula / effect / diagnostic / source-note summaries 兼容
+
+显式不做：
+
+1. 不改变 row-level `assumptions / unsupportedEffects`
+2. 不新增新的 group 分组维度
 3. 不改变 `row.group` 的分组逻辑
