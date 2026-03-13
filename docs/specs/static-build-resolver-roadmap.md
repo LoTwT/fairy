@@ -71,7 +71,7 @@
 4. `V4 progression-aware resolver`
 5. `V5 source-aware dynamic snapshot context`
 
-当前 `V44 source-entry collection aggregates` 已完成，现有 source damage / utility / trigger / unified collection 的 summary contract 已对齐。
+当前 `V44 source-entry collection aggregates` 已完成，下一主线切换为 `V45 source-view summary aggregates`。
 
 ## 3. V2.1：Curated Coverage
 
@@ -2258,3 +2258,46 @@ Batch B（已完成）：
 1. 不改变 source-entry groups
 2. 不新增新的 source-entry coverage
 3. 不改 source damage / utility 单条 entry 既有 summary contract
+
+## 50. V45 source-view summary aggregates
+
+### 50.1 目标
+
+`V44` 收口后，unified source-entry collection 顶层已具备聚合 `diagnosticSummary / sourceNoteSummary`。
+
+但 standalone source damage / utility views 的顶层 `summary` 仍只统计 entry / group 数量。
+
+`V45` 只解决一件事：
+
+1. 为 source-damage-view 顶层 summary 增加聚合 `diagnosticSummary`
+2. 为 source-damage-view 顶层 summary 增加聚合 `sourceNoteSummary`
+3. 为 source-utility-view 顶层 summary 增加聚合 `diagnosticSummary`
+4. 为 source-utility-view 顶层 summary 增加聚合 `sourceNoteSummary`
+
+### 50.2 范围
+
+1. `V45.1` scope freeze
+2. `V45.2` source-view summary contract
+3. `V45.3` compact / high-level alignment
+4. `V45.4` docs closeout
+
+### 50.3 当前状态
+
+- `V45.1` 已完成：冻结到 standalone source-view summary aggregate contract
+- `V45.2` 未开始
+- `V45.3` 未开始
+- `V45.4` 未开始
+
+### 50.4 当前边界
+
+本阶段只做：
+
+1. 为 source-damage-view summary 增加 `diagnosticSummary / sourceNoteSummary`
+2. 为 source-utility-view summary 增加 `diagnosticSummary / sourceNoteSummary`
+3. 保持现有 `entries[]` 与单条 entry summary 兼容
+
+显式不做：
+
+1. 不改变 source-view groups
+2. 不新增新的 source-view coverage
+3. 不改 unified source-entry collection 既有 summary contract
