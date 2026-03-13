@@ -75,6 +75,6 @@
 ## 6. 当前状态
 
 - `V37.1` 已完成：冻结到 compact helper exports
-- `V37.2` 待实现：`zzz-data` 已新增 compact helper exports
-- `V37.3` 待实现：`zzz-agent` 已改为直接消费底层 helper
-- `V37.4` 待实现：README / 总规格 / 索引 / 架构入口同步收口
+- `V37.2` 已完成：`zzz-data` 已新增 compact helper exports
+- `V37.3` 已完成：`zzz-agent` 已改为直接消费底层 helper
+- `V37.4` 已完成：README / 总规格 / 索引 / 架构入口已同步收口

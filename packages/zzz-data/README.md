@@ -399,6 +399,31 @@ collection.summary
 - `normal / sheer` 场景下，保持 utility-only，不把它们伪装成 source damage collection
 - `collection.summary` 已直接给出 source damage / source utility 计数、supported/unsupported 计数、utility-only 判定与分组摘要；上层不需要再自行统计和分组
 
+如果你在应用层或 Agent 层默认不需要完整 `build`、只需要紧凑投影结果，可直接使用 `V37` 下沉到 `zzz-data` 的 compact helper：
+
+```ts
+import {
+  compactStaticBuildSkillMatrixResult,
+  compactStaticBuildSourceEntryCollection,
+  compactStaticBuildTriggerMatrixResult,
+} from "zzz-data"
+
+const compactMatrix = compactStaticBuildSkillMatrixResult(matrix)
+const compactTriggerMatrix =
+  compactStaticBuildTriggerMatrixResult(triggerMatrix)
+const compactEntries = compactStaticBuildSourceEntryCollection(collection)
+```
+
+这三个 helper 会保留：
+
+- 顶层 `summary`
+- 行级 / 条目级 `diagnostics`
+- `sourceNotes`
+- `assumptions`
+- 轻量 `damage`
+
+同时默认不展开完整 `build`；只有显式传 `includeDetails = true` 时才会带上底层完整结果。
+
 source view 条目现在也会返回结构化 `diagnostics` 与 `sourceNotes`，适合直接区分：
 
 - 哪些默认值被自动补齐

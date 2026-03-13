@@ -14,7 +14,7 @@
 
 - [伤害计算算法](./specs/damage-calculation.md) — 四种伤害类型（常规/贯穿/异常/紊乱）的完整乘区公式、TypeScript 类型签名与参考数值
 - [静态构筑解析系统](./specs/static-build-resolver.md) — 静态效果系统、输入输出 contract、热插拔乘区管线与模块设计
-- [静态构筑解析系统路线图](./specs/static-build-resolver-roadmap.md) — 当前执行状态：已推进到 V37；当前 contract 已覆盖 source views、trigger matrix、utility views、unified source-entry collection、main resolver summary、core skill matrix summary、core skill matrix effect summary、matrix row damage summary、matrix row compact fields 与 matrix row explanation fields；`V37` 正在冻结 compact helper exports
+- [静态构筑解析系统路线图](./specs/static-build-resolver-roadmap.md) — 当前执行状态：已推进到 V37；当前 contract 已覆盖 source views、trigger matrix、utility views、unified source-entry collection、main resolver summary、core skill matrix summary、core skill matrix effect summary、matrix row damage summary、matrix row compact fields、matrix row explanation fields，以及可复用 compact helper exports
 - [异常 / 紊乱 Skill Matrix 立项评估](./specs/anomaly-disorder-skill-matrix-evaluation.md) — 结论：在更强的 dynamic value context 落地前，不进入 anomaly / disorder matrix 实现
 - [静态构筑解析系统 V1](./specs/static-build-resolver-v1.md) — 第一版冻结范围：支持对象、输入输出 contract、profile 与验收标准
 - [静态构筑解析系统 V2](./specs/static-build-resolver-v2.md) — 第二阶段实现：全部强攻 / 命破代理人、动态强攻/命破音擎、curated + 通用技能矩阵约定
@@ -52,4 +52,4 @@
 - [静态构筑解析系统 V34](./specs/static-build-resolver-v34.md) — 当前阶段：已收口；`ResolveStaticBuildSkillMatrixRow` 已新增稳定 `damageSummary`
 - [静态构筑解析系统 V35](./specs/static-build-resolver-v35.md) — 当前阶段：已收口；`ResolveStaticBuildSkillMatrixRow` 已新增稳定的 row-level compact fields
 - [静态构筑解析系统 V36](./specs/static-build-resolver-v36.md) — 当前阶段：已收口；`ResolveStaticBuildSkillMatrixRow` 已新增稳定的 `diagnostics / sourceNotes`
-- [静态构筑解析系统 V37](./specs/static-build-resolver-v37.md) — 当前阶段：已冻结 compact helper exports；目标是把高层 `compact` 逻辑下沉为 `zzz-data` 可复用导出
+- [静态构筑解析系统 V37](./specs/static-build-resolver-v37.md) — 当前阶段：已把高层 `compact` 逻辑下沉为 `zzz-data` 可复用导出，并由高层 tool 直接复用
