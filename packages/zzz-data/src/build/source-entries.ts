@@ -139,6 +139,12 @@ function summarizeSourceEntries(
       count: groupEntries.length,
       supportedCount: groupSupportedCount,
       unsupportedCount: groupEntries.length - groupSupportedCount,
+      diagnosticSummary: summarizeDiagnosticEntries(
+        groupEntries.flatMap((entry) => entry.diagnostics),
+      ),
+      sourceNoteSummary: summarizeSourceNoteEntries(
+        groupEntries.flatMap((entry) => entry.sourceNotes),
+      ),
     })
   }
 

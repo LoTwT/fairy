@@ -709,6 +709,13 @@ collection.summary.sourceDamageRequirementSummary
 collection.summary.sourceUtilityRequirementSummary
 ```
 
+如果你是按组拆“额外结算条目 / 回能条目”两个 section，也不要再先过滤 entries 再自己统计组内 diagnostics / source notes，直接读取：
+
+```ts
+collection.summary.groups[0].diagnosticSummary
+collection.summary.groups[0].sourceNoteSummary
+```
+
 如果你在应用层或 Agent 层默认不需要完整 `build`、只需要紧凑投影结果，可直接使用 `V37` 下沉到 `zzz-data` 的 compact helper：
 
 ```ts

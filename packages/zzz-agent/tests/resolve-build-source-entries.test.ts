@@ -70,6 +70,25 @@ describe("resolveBuildSourceEntries tool", () => {
           key: "source-utility-view",
           label: "回能 / utility 条目",
           count: 1,
+          diagnosticSummary: {
+            count: 0,
+            hasDiagnostics: false,
+            hasDefaultedInput: false,
+            hasCoverageGap: false,
+            hasUnsupportedEffect: false,
+            hasFallback: false,
+            kindGroups: [],
+            ownerGroups: [],
+          },
+          sourceNoteSummary: {
+            count: 0,
+            hasSourceNotes: false,
+            hasMissingInput: false,
+            hasProcessOnly: false,
+            hasResearchOnly: false,
+            statusGroups: [],
+            ownerGroups: [],
+          },
         },
       ],
     })
@@ -179,11 +198,54 @@ describe("resolveBuildSourceEntries tool", () => {
           key: "source-damage-view",
           label: "额外结算条目",
           count: 1,
+          diagnosticSummary: {
+            count: 2,
+            hasDiagnostics: true,
+            hasDefaultedInput: true,
+            hasCoverageGap: false,
+            hasUnsupportedEffect: false,
+            hasFallback: false,
+            kindGroups: [
+              { key: "defaulted-input", label: "默认输入", count: 2 },
+            ],
+            ownerGroups: [
+              { key: "loadout", count: 1 },
+              { key: "scenario", count: 1 },
+            ],
+          },
+          sourceNoteSummary: {
+            count: 2,
+            hasSourceNotes: true,
+            hasMissingInput: false,
+            hasProcessOnly: false,
+            hasResearchOnly: false,
+            statusGroups: [{ key: "resolved", label: "已展开", count: 2 }],
+            ownerGroups: [{ key: "dynamicSnapshot", count: 2 }],
+          },
         },
         {
           key: "source-utility-view",
           label: "回能 / utility 条目",
           count: 1,
+          diagnosticSummary: {
+            count: 0,
+            hasDiagnostics: false,
+            hasDefaultedInput: false,
+            hasCoverageGap: false,
+            hasUnsupportedEffect: false,
+            hasFallback: false,
+            kindGroups: [],
+            ownerGroups: [],
+          },
+          sourceNoteSummary: {
+            count: 0,
+            hasSourceNotes: false,
+            hasMissingInput: false,
+            hasProcessOnly: false,
+            hasResearchOnly: false,
+            statusGroups: [],
+            ownerGroups: [],
+          },
         },
       ],
     })
@@ -303,6 +365,32 @@ describe("resolveBuildSourceEntries tool", () => {
         ],
       },
     })
+    expect((result as any).collection.summary.groups).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          key: "source-damage-view",
+          diagnosticSummary: expect.objectContaining({
+            count: 1,
+            hasDiagnostics: true,
+          }),
+          sourceNoteSummary: expect.objectContaining({
+            count: 3,
+            hasSourceNotes: true,
+          }),
+        }),
+        expect.objectContaining({
+          key: "source-utility-view",
+          diagnosticSummary: expect.objectContaining({
+            count: 0,
+            hasDiagnostics: false,
+          }),
+          sourceNoteSummary: expect.objectContaining({
+            count: 0,
+            hasSourceNotes: false,
+          }),
+        }),
+      ]),
+    )
     expect(
       (result as any).collection.entries.map((entry: any) => entry.id),
     ).toEqual(
