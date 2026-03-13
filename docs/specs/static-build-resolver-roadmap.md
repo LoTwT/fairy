@@ -1509,7 +1509,7 @@ Batch B（已完成）：
 ### 32.3 当前状态
 
 - `V27.1` 已完成：冻结到 trigger-entry matrix summary
-- `V27.2` 未开始
+- `V27.2` 已完成：`resolveStaticBuildTriggerMatrix()` 已返回稳定 `summary`
 - `V27.3` 未开始
 - `V27.4` 未开始
 

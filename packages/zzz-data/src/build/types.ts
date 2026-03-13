@@ -641,6 +641,24 @@ export interface ResolveStaticBuildSourceEntriesResult {
 
 export type StaticBuildTriggerMatrixEntryKind = "main-formula" | "source-view"
 
+export interface StaticBuildTriggerMatrixGroupSummary {
+  key: StaticBuildTriggerMatrixEntryKind
+  label: string
+  count: number
+  supportedCount: number
+  unsupportedCount: number
+}
+
+export interface StaticBuildTriggerMatrixSummary {
+  rowCount: number
+  mainFormulaCount: number
+  sourceViewCount: number
+  supportedCount: number
+  unsupportedCount: number
+  hasSourceViews: boolean
+  groups: StaticBuildTriggerMatrixGroupSummary[]
+}
+
 export interface StaticBuildTriggerMatrixRowMeta {
   canonicalLabel: string
   stableKey: string
@@ -674,6 +692,7 @@ export interface ResolveStaticBuildTriggerMatrixResult {
   mode: StaticBuildMode
   manualBaseMode?: StaticBuildBaseMode
   loadout: StaticBuildResolvedLoadout
+  summary: StaticBuildTriggerMatrixSummary
   rows: StaticBuildTriggerMatrixRow[]
   assumptions: string[]
 }

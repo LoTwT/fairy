@@ -50,6 +50,30 @@ describe("static build trigger matrix", () => {
     })
 
     expect(result.rows).toHaveLength(2)
+    expect(result.summary).toMatchObject({
+      rowCount: 2,
+      mainFormulaCount: 1,
+      sourceViewCount: 1,
+      supportedCount: 2,
+      unsupportedCount: 0,
+      hasSourceViews: true,
+      groups: [
+        {
+          key: "main-formula",
+          label: "主公式结算",
+          count: 1,
+          supportedCount: 1,
+          unsupportedCount: 0,
+        },
+        {
+          key: "source-view",
+          label: "额外来源结算",
+          count: 1,
+          supportedCount: 1,
+          unsupportedCount: 0,
+        },
+      ],
+    })
     expect(result.rows[0]).toMatchObject({
       id: "main-formula:anomaly",
       supported: true,
@@ -108,6 +132,14 @@ describe("static build trigger matrix", () => {
     })
 
     expect(result.rows).toHaveLength(2)
+    expect(result.summary).toMatchObject({
+      rowCount: 2,
+      mainFormulaCount: 1,
+      sourceViewCount: 1,
+      supportedCount: 2,
+      unsupportedCount: 0,
+      hasSourceViews: true,
+    })
     expect(result.rows[0]?.metadata.damageType).toBe("disorder")
     expect(result.rows[1]).toMatchObject({
       id: "source-view:aria-exflow",
@@ -156,6 +188,14 @@ describe("static build trigger matrix", () => {
     })
 
     expect(result.rows).toHaveLength(2)
+    expect(result.summary).toMatchObject({
+      rowCount: 2,
+      mainFormulaCount: 1,
+      sourceViewCount: 1,
+      supportedCount: 2,
+      unsupportedCount: 0,
+      hasSourceViews: true,
+    })
     expect(result.rows[0]?.metadata.damageType).toBe("disorder")
     expect(result.rows[1]).toMatchObject({
       id: "source-view:vivian-exflow",
@@ -170,5 +210,45 @@ describe("static build trigger matrix", () => {
       expect.arrayContaining(["panel-value", "scenario-value"]),
     )
     expect(result.rows[1]?.damage?.expected).toBeGreaterThan(0)
+  })
+
+  it("sorts trigger-entry rows by group and stable key", () => {
+    const result = resolveStaticBuildTriggerMatrix({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1501",
+        agentLevel: 60,
+      },
+      panel: {
+        attack: 2950,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 150,
+      },
+      scenario: {
+        damageType: "disorder",
+        skillTag: "enhancedSpecial",
+        anomalyType: "ether",
+        remainingTime: 5,
+        attribute: "以太",
+        dynamicSnapshot: {
+          values: {
+            ariaExflowDamageRatio: 0.45,
+            ariaStunnedDamageRatio: 0.2,
+          },
+        },
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+          isStunned: true,
+        },
+      },
+    })
+
+    expect(result.rows.map((row) => row.metadata.stableKey)).toEqual([
+      "main-formula:disorder",
+      "source-view:aria-exflow",
+    ])
   })
 })
