@@ -2771,3 +2771,83 @@ Batch B（已完成）：
 1. 不改变 source-damage-view entry 的 `requirements / requirementSummary`
 2. 不新增新的 source-view metadata
 3. 不改变 `damage / summary / diagnosticSummary / sourceNoteSummary`
+
+## 60. V57 source-entry group summaries
+
+### 60.1 目标
+
+`V56` 收口后，source-entry collection 顶层 summary 已能分别给出 mixed collection 中 source-damage-view / source-utility-view 的 requirement aggregate。
+
+但按组拆分 section 时，group 仍缺少局部 diagnostics / source notes 摘要。
+
+`V57` 只解决一件事：
+
+1. 为 `source-entry collection groups` 增加局部 `diagnosticSummary / sourceNoteSummary`
+
+### 60.2 范围
+
+1. `V57.1` scope freeze
+2. `V57.2` group-level summaries
+3. `V57.3` high-level / prompt alignment
+4. `V57.4` docs closeout
+
+### 60.3 当前状态
+
+- `V57.1` 已完成：冻结到 source-entry group summaries
+- `V57.2` 已完成：`StaticBuildSourceEntryGroupSummary` 已新增局部 `diagnosticSummary / sourceNoteSummary`
+- `V57.3` 已完成：高层 tool 断言与 agent prompt 已对齐 `collection.summary.groups[*].diagnosticSummary / sourceNoteSummary`
+- `V57.4` 已完成：相关 specs、roadmap、索引、架构文档与 README 已同步
+
+### 60.4 当前边界
+
+本阶段只做：
+
+1. 为 `source-entry group` 增加局部 `diagnosticSummary / sourceNoteSummary`
+2. 保持顶层 collection summary 兼容
+3. 不改变 grouping key / ordering
+
+显式不做：
+
+1. 不为 group 增加局部 requirement aggregate
+2. 不新增新的 source-entry metadata
+3. 不改变 `entries` shape
+
+## 61. V58 source-entry group requirement aggregates
+
+### 61.1 目标
+
+`V57` 收口后，source-entry collection group 已能稳定给出局部 `diagnosticSummary / sourceNoteSummary`。
+
+但当上层按组拆分“额外结算条目 / 回能条目”两个 section 时，组内 requirement 分布仍只能回退到顶层 aggregate 或重新遍历 `entries[*].requirements`。
+
+`V58` 只解决一件事：
+
+1. 为 `source-entry collection groups` 增加局部 requirement aggregates
+
+### 61.2 范围
+
+1. `V58.1` scope freeze
+2. `V58.2` group-level requirement aggregates
+3. `V58.3` high-level / prompt alignment
+4. `V58.4` docs closeout
+
+### 61.3 当前状态
+
+- `V58.1` 已完成：冻结到 source-entry group requirement aggregates
+- `V58.2` 已完成：`StaticBuildSourceEntryGroupSummary` 已新增局部 `sourceDamageRequirementSummary / sourceUtilityRequirementSummary`
+- `V58.3` 已完成：高层 tool 断言与 agent prompt 已对齐 `collection.summary.groups[*].sourceDamageRequirementSummary / sourceUtilityRequirementSummary`
+- `V58.4` 已完成：相关 specs、roadmap、索引、架构文档与 README 已同步
+
+### 61.4 当前边界
+
+本阶段只做：
+
+1. 为 `source-entry group` 增加局部 requirement aggregates
+2. 保持现有 group-level `diagnosticSummary / sourceNoteSummary` 兼容
+3. 保持 grouping key / ordering 兼容
+
+显式不做：
+
+1. 不改变顶层 collection requirement aggregate
+2. 不新增新的 source-entry metadata
+3. 不改变 `entries` shape

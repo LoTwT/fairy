@@ -70,6 +70,33 @@ describe("resolveBuildSourceEntries tool", () => {
           key: "source-utility-view",
           label: "回能 / utility 条目",
           count: 1,
+          sourceDamageRequirementSummary: {
+            count: 0,
+            satisfiedCount: 0,
+            unsatisfiedCount: 0,
+            hasUnsatisfied: false,
+            groups: [],
+          },
+          sourceUtilityRequirementSummary: {
+            count: 2,
+            satisfiedCount: 2,
+            unsatisfiedCount: 0,
+            hasUnsatisfied: false,
+            groups: [
+              {
+                key: "trigger",
+                count: 1,
+                satisfiedCount: 1,
+                unsatisfiedCount: 0,
+              },
+              {
+                key: "cooldown",
+                count: 1,
+                satisfiedCount: 1,
+                unsatisfiedCount: 0,
+              },
+            ],
+          },
           diagnosticSummary: {
             count: 0,
             hasDiagnostics: false,
@@ -198,6 +225,27 @@ describe("resolveBuildSourceEntries tool", () => {
           key: "source-damage-view",
           label: "额外结算条目",
           count: 1,
+          sourceDamageRequirementSummary: {
+            count: 2,
+            satisfiedCount: 2,
+            unsatisfiedCount: 0,
+            hasUnsatisfied: false,
+            groups: [
+              {
+                key: "dynamic-value",
+                count: 2,
+                satisfiedCount: 2,
+                unsatisfiedCount: 0,
+              },
+            ],
+          },
+          sourceUtilityRequirementSummary: {
+            count: 0,
+            satisfiedCount: 0,
+            unsatisfiedCount: 0,
+            hasUnsatisfied: false,
+            groups: [],
+          },
           diagnosticSummary: {
             count: 2,
             hasDiagnostics: true,
@@ -227,6 +275,27 @@ describe("resolveBuildSourceEntries tool", () => {
           key: "source-utility-view",
           label: "回能 / utility 条目",
           count: 1,
+          sourceDamageRequirementSummary: {
+            count: 0,
+            satisfiedCount: 0,
+            unsatisfiedCount: 0,
+            hasUnsatisfied: false,
+            groups: [],
+          },
+          sourceUtilityRequirementSummary: {
+            count: 1,
+            satisfiedCount: 1,
+            unsatisfiedCount: 0,
+            hasUnsatisfied: false,
+            groups: [
+              {
+                key: "condition",
+                count: 1,
+                satisfiedCount: 1,
+                unsatisfiedCount: 0,
+              },
+            ],
+          },
           diagnosticSummary: {
             count: 0,
             hasDiagnostics: false,
@@ -369,6 +438,14 @@ describe("resolveBuildSourceEntries tool", () => {
       expect.arrayContaining([
         expect.objectContaining({
           key: "source-damage-view",
+          sourceDamageRequirementSummary: expect.objectContaining({
+            count: 2,
+            hasUnsatisfied: false,
+          }),
+          sourceUtilityRequirementSummary: expect.objectContaining({
+            count: 0,
+            hasUnsatisfied: false,
+          }),
           diagnosticSummary: expect.objectContaining({
             count: 1,
             hasDiagnostics: true,
@@ -380,6 +457,14 @@ describe("resolveBuildSourceEntries tool", () => {
         }),
         expect.objectContaining({
           key: "source-utility-view",
+          sourceDamageRequirementSummary: expect.objectContaining({
+            count: 0,
+            hasUnsatisfied: false,
+          }),
+          sourceUtilityRequirementSummary: expect.objectContaining({
+            count: 2,
+            hasUnsatisfied: false,
+          }),
           diagnosticSummary: expect.objectContaining({
             count: 0,
             hasDiagnostics: false,

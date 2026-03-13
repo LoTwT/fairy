@@ -714,6 +714,8 @@ collection.summary.sourceUtilityRequirementSummary
 ```ts
 collection.summary.groups[0].diagnosticSummary
 collection.summary.groups[0].sourceNoteSummary
+collection.summary.groups[0].sourceDamageRequirementSummary
+collection.summary.groups[0].sourceUtilityRequirementSummary
 ```
 
 如果你在应用层或 Agent 层默认不需要完整 `build`、只需要紧凑投影结果，可直接使用 `V37` 下沉到 `zzz-data` 的 compact helper：

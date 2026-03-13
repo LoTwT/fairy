@@ -778,6 +778,8 @@ export interface StaticBuildSourceEntryGroupSummary {
   count: number
   supportedCount: number
   unsupportedCount: number
+  sourceDamageRequirementSummary: StaticBuildSourceDamageViewRequirementSummary
+  sourceUtilityRequirementSummary: StaticBuildSourceUtilityViewRequirementSummary
   diagnosticSummary: StaticBuildDiagnosticSummary
   sourceNoteSummary: StaticBuildSourceNoteSummary
 }

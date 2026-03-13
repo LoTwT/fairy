@@ -139,6 +139,20 @@ function summarizeSourceEntries(
       count: groupEntries.length,
       supportedCount: groupSupportedCount,
       unsupportedCount: groupEntries.length - groupSupportedCount,
+      sourceDamageRequirementSummary: summarizeSourceDamageViewRequirements(
+        groupEntries.flatMap((entry) =>
+          entry.metadata.entryKind === "source-damage-view"
+            ? entry.requirements
+            : [],
+        ),
+      ),
+      sourceUtilityRequirementSummary: summarizeSourceUtilityViewRequirements(
+        groupEntries.flatMap((entry) =>
+          entry.metadata.entryKind === "source-utility-view"
+            ? entry.requirements
+            : [],
+        ),
+      ),
       diagnosticSummary: summarizeDiagnosticEntries(
         groupEntries.flatMap((entry) => entry.diagnostics),
       ),
