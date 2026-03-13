@@ -58,6 +58,25 @@ describe("static build source utility views", () => {
       value: 3,
       unit: "energy",
       cooldownSeconds: 12,
+      diagnosticSummary: {
+        count: 0,
+        hasDiagnostics: false,
+        hasDefaultedInput: false,
+        hasCoverageGap: false,
+        hasUnsupportedEffect: false,
+        hasFallback: false,
+        kindGroups: [],
+        ownerGroups: [],
+      },
+      sourceNoteSummary: {
+        count: 0,
+        hasSourceNotes: false,
+        hasMissingInput: false,
+        hasProcessOnly: false,
+        hasResearchOnly: false,
+        statusGroups: [],
+        ownerGroups: [],
+      },
     })
   })
 
@@ -83,6 +102,25 @@ describe("static build source utility views", () => {
       value: 3.5,
       unit: "energy",
       cooldownSeconds: 12,
+      diagnosticSummary: {
+        count: 0,
+        hasDiagnostics: false,
+        hasDefaultedInput: false,
+        hasCoverageGap: false,
+        hasUnsupportedEffect: false,
+        hasFallback: false,
+        kindGroups: [],
+        ownerGroups: [],
+      },
+      sourceNoteSummary: {
+        count: 0,
+        hasSourceNotes: false,
+        hasMissingInput: false,
+        hasProcessOnly: false,
+        hasResearchOnly: false,
+        statusGroups: [],
+        ownerGroups: [],
+      },
     })
   })
 
@@ -125,6 +163,25 @@ describe("static build source utility views", () => {
       value: 0.6,
       unit: "energy-per-second",
       conditionLabel: "位于后场时",
+      diagnosticSummary: {
+        count: 0,
+        hasDiagnostics: false,
+        hasDefaultedInput: false,
+        hasCoverageGap: false,
+        hasUnsupportedEffect: false,
+        hasFallback: false,
+        kindGroups: [],
+        ownerGroups: [],
+      },
+      sourceNoteSummary: {
+        count: 0,
+        hasSourceNotes: false,
+        hasMissingInput: false,
+        hasProcessOnly: false,
+        hasResearchOnly: false,
+        statusGroups: [],
+        ownerGroups: [],
+      },
     })
   })
 

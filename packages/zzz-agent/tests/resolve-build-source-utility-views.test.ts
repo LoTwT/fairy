@@ -38,6 +38,25 @@ describe("resolveBuildSourceUtilityViews tool", () => {
       utilityType: "energy-refund",
       value: 3,
       unit: "energy",
+      diagnosticSummary: {
+        count: 0,
+        hasDiagnostics: false,
+        hasDefaultedInput: false,
+        hasCoverageGap: false,
+        hasUnsupportedEffect: false,
+        hasFallback: false,
+        kindGroups: [],
+        ownerGroups: [],
+      },
+      sourceNoteSummary: {
+        count: 0,
+        hasSourceNotes: false,
+        hasMissingInput: false,
+        hasProcessOnly: false,
+        hasResearchOnly: false,
+        statusGroups: [],
+        ownerGroups: [],
+      },
     })
   })
 
@@ -83,11 +102,27 @@ describe("resolveBuildSourceUtilityViews tool", () => {
           id: "time-slice-dodgeCounter-decibel-gain",
           utilityType: "decibel-gain",
           unit: "decibel",
+          diagnosticSummary: expect.objectContaining({
+            count: 0,
+            hasDiagnostics: false,
+          }),
+          sourceNoteSummary: expect.objectContaining({
+            count: 0,
+            hasSourceNotes: false,
+          }),
         }),
         expect.objectContaining({
           id: "time-slice-assistAttack-energy-refund",
           utilityType: "energy-refund",
           unit: "energy",
+          diagnosticSummary: expect.objectContaining({
+            count: 0,
+            hasDiagnostics: false,
+          }),
+          sourceNoteSummary: expect.objectContaining({
+            count: 0,
+            hasSourceNotes: false,
+          }),
         }),
       ]),
     )

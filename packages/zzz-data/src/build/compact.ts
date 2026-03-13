@@ -112,7 +112,9 @@ export interface StaticBuildCompactSourceUtilityViewEntry {
   conditionLabel?: string
   cooldownSeconds?: number
   diagnostics: StaticBuildDiagnosticEntry[]
+  diagnosticSummary: StaticBuildSourceUtilityViewEntry["diagnosticSummary"]
   sourceNotes: StaticBuildSourceNoteEntry[]
+  sourceNoteSummary: StaticBuildSourceUtilityViewEntry["sourceNoteSummary"]
   assumptions: string[]
 }
 
@@ -315,7 +317,9 @@ export function compactStaticBuildSourceEntry(
     conditionLabel: entry.conditionLabel,
     cooldownSeconds: entry.cooldownSeconds,
     diagnostics: entry.diagnostics,
+    diagnosticSummary: entry.diagnosticSummary,
     sourceNotes: entry.sourceNotes,
+    sourceNoteSummary: entry.sourceNoteSummary,
     assumptions: entry.assumptions,
   }
 }

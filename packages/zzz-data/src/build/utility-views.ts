@@ -15,6 +15,10 @@ import {
   getStaticBuildUtilityWEngine,
   supportedStaticBuildUtilityWEngines,
 } from "./catalog.js"
+import {
+  summarizeDiagnosticEntries,
+  summarizeSourceNoteEntries,
+} from "./resolver.js"
 
 const utilityViewWEngineIds = [
   "12003",
@@ -144,7 +148,9 @@ function createEntry(
     },
     supported: true,
     diagnostics: [],
+    diagnosticSummary: summarizeDiagnosticEntries([]),
     sourceNotes: [],
+    sourceNoteSummary: summarizeSourceNoteEntries([]),
   }
 }
 

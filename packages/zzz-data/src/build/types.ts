@@ -701,7 +701,9 @@ export interface StaticBuildSourceUtilityViewEntry {
   conditionLabel?: string
   cooldownSeconds?: number
   diagnostics: StaticBuildDiagnosticEntry[]
+  diagnosticSummary: StaticBuildDiagnosticSummary
   sourceNotes: StaticBuildSourceNoteEntry[]
+  sourceNoteSummary: StaticBuildSourceNoteSummary
   assumptions: string[]
 }
 
