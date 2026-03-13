@@ -1,12 +1,8 @@
-import type {
-  AgentAttributeLabel,
-  StaticBuildSourceDamageViewEntry,
-  StaticBuildSourceEntry,
-  StaticBuildSourceUtilityViewEntry,
-} from "zzz-data"
+import type { AgentAttributeLabel } from "zzz-data"
 import { createTool } from "@mastra/core/tools"
 import { z } from "zod"
 import {
+  compactStaticBuildSourceEntryCollection,
   getCompatibleStaticBuildUtilityWEngines,
   getCompatibleStaticBuildWEngines,
   resolveStaticBuildSourceEntries,
@@ -31,68 +27,6 @@ import {
   normalizeAnomalyType,
   resolveBuildSourceEntriesInputSchema,
 } from "./resolve-build-shared"
-
-function compactSourceEntries(
-  collection: ReturnType<typeof resolveStaticBuildSourceEntries>,
-  includeDetails: boolean,
-) {
-  return {
-    loadout: collection.loadout,
-    summary: collection.summary,
-    assumptions: collection.assumptions,
-    entries: collection.entries.map((entry) =>
-      compactSourceEntry(entry, includeDetails),
-    ),
-  }
-}
-
-function compactSourceEntry(
-  entry: StaticBuildSourceEntry,
-  includeDetails: boolean,
-) {
-  if (entry.metadata.entryKind === "source-damage-view") {
-    const damageEntry = entry as StaticBuildSourceDamageViewEntry
-    return {
-      id: damageEntry.id,
-      label: damageEntry.label,
-      metadata: damageEntry.metadata,
-      supported: damageEntry.supported,
-      sourceType: damageEntry.sourceType,
-      sourceId: damageEntry.sourceId,
-      damageType: damageEntry.damageType,
-      resolutionMode: damageEntry.resolutionMode,
-      requirements: damageEntry.requirements,
-      diagnostics: damageEntry.diagnostics,
-      sourceNotes: damageEntry.sourceNotes,
-      assumptions: damageEntry.assumptions,
-      damage: damageEntry.damage,
-      ...(includeDetails && damageEntry.build
-        ? { build: damageEntry.build }
-        : {}),
-    }
-  }
-
-  const utilityEntry = entry as StaticBuildSourceUtilityViewEntry
-  return {
-    id: utilityEntry.id,
-    label: utilityEntry.label,
-    metadata: utilityEntry.metadata,
-    supported: utilityEntry.supported,
-    sourceType: utilityEntry.sourceType,
-    sourceId: utilityEntry.sourceId,
-    utilityType: utilityEntry.utilityType,
-    resolutionMode: utilityEntry.resolutionMode,
-    targetScope: utilityEntry.targetScope,
-    value: utilityEntry.value,
-    unit: utilityEntry.unit,
-    triggerLabel: utilityEntry.triggerLabel,
-    conditionLabel: utilityEntry.conditionLabel,
-    cooldownSeconds: utilityEntry.cooldownSeconds,
-    diagnostics: utilityEntry.diagnostics,
-    sourceNotes: utilityEntry.sourceNotes,
-    assumptions: utilityEntry.assumptions,
-  }
-}
 
 export const resolveBuildSourceEntries = createTool({
   id: "resolve-build-source-entries",
@@ -242,7 +176,10 @@ export const resolveBuildSourceEntries = createTool({
 
     return {
       found: true,
-      collection: compactSourceEntries(collection, input.includeDetails),
+      collection: compactStaticBuildSourceEntryCollection(
+        collection,
+        input.includeDetails,
+      ),
     }
   },
 })

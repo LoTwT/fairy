@@ -13,6 +13,24 @@ export {
   supportedStaticBuildUtilityWEngines,
   supportedStaticBuildWEngines,
 } from "./catalog.js"
+export {
+  compactStaticBuildSkillMatrixResult,
+  compactStaticBuildSkillMatrixRow,
+  compactStaticBuildSourceEntry,
+  compactStaticBuildSourceEntryCollection,
+  compactStaticBuildTriggerMatrixResult,
+  compactStaticBuildTriggerMatrixRow,
+} from "./compact.js"
+export type {
+  CompactStaticBuildSkillMatrixResult,
+  CompactStaticBuildSourceEntryCollection,
+  CompactStaticBuildTriggerMatrixResult,
+  StaticBuildCompactSkillMatrixRow,
+  StaticBuildCompactSourceDamageViewEntry,
+  StaticBuildCompactSourceEntry,
+  StaticBuildCompactSourceUtilityViewEntry,
+  StaticBuildCompactTriggerMatrixRow,
+} from "./compact.js"
 export { getStaticBuildEffectsForLoadout } from "./definitions.js"
 export { resolveStaticBuildSkillMatrix } from "./matrix.js"
 export { getStaticBuildProfile, staticBuildProfiles } from "./profiles.js"

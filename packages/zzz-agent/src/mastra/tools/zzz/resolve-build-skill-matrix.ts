@@ -2,6 +2,7 @@ import type { AgentAttributeLabel } from "zzz-data"
 import { createTool } from "@mastra/core/tools"
 import { z } from "zod"
 import {
+  compactStaticBuildSkillMatrixResult,
   getCompatibleStaticBuildWEngines,
   resolveStaticBuildSkillMatrix,
   supportedStaticBuildDriveDiscs,
@@ -15,39 +16,6 @@ import {
   buildUnsupportedWEngineResponse,
   findCatalogItem,
 } from "./resolve-build-shared"
-
-function compactMatrix(
-  matrix: ReturnType<typeof resolveStaticBuildSkillMatrix>,
-  includeDetails: boolean,
-) {
-  return {
-    profile: matrix.profile,
-    mode: matrix.mode,
-    manualBaseMode: matrix.manualBaseMode,
-    loadout: matrix.loadout,
-    summary: matrix.summary,
-    effectSummary: matrix.effectSummary,
-    assumptions: matrix.assumptions,
-    rows: matrix.rows.map((row) => ({
-      id: row.id,
-      group: row.group,
-      label: row.label,
-      metadata: row.metadata,
-      skillTag: row.skillTag,
-      damageType: row.damageType,
-      attribute: row.attribute,
-      combatTags: row.combatTags,
-      skillMultiplier: row.skillMultiplier,
-      damage: row.damageSummary,
-      resolvedBuckets: row.resolvedBuckets,
-      diagnostics: row.diagnostics,
-      sourceNotes: row.sourceNotes,
-      assumptions: row.assumptions,
-      unsupportedEffects: row.unsupportedEffects,
-      ...(includeDetails ? { build: row.build } : {}),
-    })),
-  }
-}
 
 export const resolveBuildSkillMatrix = createTool({
   id: "resolve-build-skill-matrix",
@@ -192,7 +160,7 @@ export const resolveBuildSkillMatrix = createTool({
 
     return {
       found: true,
-      matrix: compactMatrix(matrix, input.includeDetails),
+      matrix: compactStaticBuildSkillMatrixResult(matrix, input.includeDetails),
     }
   },
 })

@@ -2,6 +2,7 @@ import type { AgentAttributeLabel } from "zzz-data"
 import { createTool } from "@mastra/core/tools"
 import { z } from "zod"
 import {
+  compactStaticBuildTriggerMatrixResult,
   getCompatibleStaticBuildWEngines,
   resolveStaticBuildTriggerMatrix,
   supportedStaticBuildDriveDiscs,
@@ -18,32 +19,6 @@ import {
   normalizeAnomalyType,
   resolveBuildInputSchema,
 } from "./resolve-build-shared"
-
-function compactTriggerMatrix(
-  matrix: ReturnType<typeof resolveStaticBuildTriggerMatrix>,
-  includeDetails: boolean,
-) {
-  return {
-    profile: matrix.profile,
-    mode: matrix.mode,
-    manualBaseMode: matrix.manualBaseMode,
-    loadout: matrix.loadout,
-    summary: matrix.summary,
-    assumptions: matrix.assumptions,
-    rows: matrix.rows.map((row) => ({
-      id: row.id,
-      label: row.label,
-      supported: row.supported,
-      metadata: row.metadata,
-      requirements: row.requirements,
-      diagnostics: row.diagnostics,
-      sourceNotes: row.sourceNotes,
-      assumptions: row.assumptions,
-      damage: row.damage,
-      ...(includeDetails && row.build ? { build: row.build } : {}),
-    })),
-  }
-}
 
 export const resolveBuildTriggerMatrix = createTool({
   id: "resolve-build-trigger-matrix",
@@ -166,7 +141,10 @@ export const resolveBuildTriggerMatrix = createTool({
 
     return {
       found: true,
-      matrix: compactTriggerMatrix(matrix, input.includeDetails),
+      matrix: compactStaticBuildTriggerMatrixResult(
+        matrix,
+        input.includeDetails,
+      ),
     }
   },
 })
