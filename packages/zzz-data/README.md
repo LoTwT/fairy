@@ -208,6 +208,19 @@ views.summary
 //   deltaCount: 0,
 //   supportedCount: 1,
 //   unsupportedCount: 0,
+//   diagnosticSummary: {
+//     count: 2,
+//     hasDiagnostics: true,
+//     hasDefaultedInput: true,
+//     kindGroups: [{ key: "defaulted-input", label: "默认输入", count: 2 }],
+//     ownerGroups: [{ key: "loadout", count: 1 }, { key: "scenario", count: 1 }],
+//   },
+//   sourceNoteSummary: {
+//     count: 2,
+//     hasSourceNotes: true,
+//     statusGroups: [{ key: "resolved", label: "已展开", count: 2 }],
+//     ownerGroups: [{ key: "finalPanel", count: 1 }, { key: "stateSnapshot", count: 1 }],
+//   },
 //   groups: [
 //     {
 //       key: "standalone",
@@ -220,7 +233,7 @@ views.summary
 // }
 ```
 
-如果你需要判断当前 source-specific damage views 是 standalone 还是 delta、是否存在 unsupported 条目、或者如何分组展示，不要再自己统计 `entries`，直接使用 `views.summary`。
+如果你需要判断当前 source-specific damage views 是 standalone 还是 delta、是否存在 unsupported 条目、如何分组展示，或者当前整组 views 是否带有 diagnostics / source notes，也不要再自己统计 `entries`，直接使用 `views.summary`。
 
 如果你只想知道当前 source-specific view 有多少前置条件、哪些 requirement kind 已满足 / 未满足，也不要再手工遍历 `requirements[]`，直接使用：
 
@@ -447,6 +460,18 @@ utilityViews.summary
 //   rateCount: 0,
 //   supportedCount: 1,
 //   unsupportedCount: 0,
+//   diagnosticSummary: {
+//     count: 0,
+//     hasDiagnostics: false,
+//     kindGroups: [],
+//     ownerGroups: [],
+//   },
+//   sourceNoteSummary: {
+//     count: 0,
+//     hasSourceNotes: false,
+//     statusGroups: [],
+//     ownerGroups: [],
+//   },
 //   groups: [
 //     {
 //       key: "trigger",
@@ -459,7 +484,7 @@ utilityViews.summary
 // }
 ```
 
-如果你需要判断当前 source-specific utility views 是 trigger 还是 rate、是否存在 unsupported 条目、或者如何分组展示，不要再自己统计 `entries`，直接使用 `utilityViews.summary`。
+如果你需要判断当前 source-specific utility views 是 trigger 还是 rate、是否存在 unsupported 条目、如何分组展示，或者当前整组 utility views 是否带有 diagnostics / source notes，不要再自己统计 `entries`，直接使用 `utilityViews.summary`。
 
 如果你只想知道某一条 utility entry 的 diagnostics 概况，也直接读取：
 

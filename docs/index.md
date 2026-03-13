@@ -14,7 +14,7 @@
 
 - [伤害计算算法](./specs/damage-calculation.md) — 四种伤害类型（常规/贯穿/异常/紊乱）的完整乘区公式、TypeScript 类型签名与参考数值
 - [静态构筑解析系统](./specs/static-build-resolver.md) — 静态效果系统、输入输出 contract、热插拔乘区管线与模块设计
-- [静态构筑解析系统路线图](./specs/static-build-resolver-roadmap.md) — 当前执行状态：已推进到 V45；当前 contract 已覆盖 source views、trigger matrix、utility views、unified source-entry collection、main resolver summary、core skill matrix summary、core skill matrix effect summary、matrix row damage summary、matrix row compact fields、matrix row explanation fields，以及 matrix / trigger / source-entry / source-view compact helper exports；`V40 requirementSummary`、`V41 diagnosticSummary`、`V42 sourceNoteSummary`、`V43 utility-entry summaries` 与 `V44 source-entry collection aggregates` 已收口，当前下一步是 standalone source-view 顶层 summary 的聚合 `diagnosticSummary / sourceNoteSummary`
+- [静态构筑解析系统路线图](./specs/static-build-resolver-roadmap.md) — 当前执行状态：已推进到 V45；当前 contract 已覆盖 source views、trigger matrix、utility views、unified source-entry collection、main resolver summary、core skill matrix summary、core skill matrix effect summary、matrix row damage summary、matrix row compact fields、matrix row explanation fields，以及 matrix / trigger / source-entry / source-view compact helper exports；`V40 requirementSummary`、`V41 diagnosticSummary`、`V42 sourceNoteSummary`、`V43 utility-entry summaries`、`V44 source-entry collection aggregates` 与 `V45 source-view summary aggregates` 已收口
 - [异常 / 紊乱 Skill Matrix 立项评估](./specs/anomaly-disorder-skill-matrix-evaluation.md) — 结论：在更强的 dynamic value context 落地前，不进入 anomaly / disorder matrix 实现
 - [静态构筑解析系统 V1](./specs/static-build-resolver-v1.md) — 第一版冻结范围：支持对象、输入输出 contract、profile 与验收标准
 - [静态构筑解析系统 V2](./specs/static-build-resolver-v2.md) — 第二阶段实现：全部强攻 / 命破代理人、动态强攻/命破音擎、curated + 通用技能矩阵约定
@@ -60,4 +60,4 @@
 - [静态构筑解析系统 V42](./specs/static-build-resolver-v42.md) — 当前阶段：已收口；source-view / trigger-row 已新增结构化 `sourceNoteSummary`，不改 `sourceNotes[]`
 - [静态构筑解析系统 V43](./specs/static-build-resolver-v43.md) — 当前阶段：已收口；`source-utility-view entry` 已新增稳定 `diagnosticSummary / sourceNoteSummary`
 - [静态构筑解析系统 V44](./specs/static-build-resolver-v44.md) — 当前阶段：已收口；unified source-entry collection 的 `summary` 已新增聚合 `diagnosticSummary / sourceNoteSummary`
-- [静态构筑解析系统 V45](./specs/static-build-resolver-v45.md) — 当前阶段：已冻结范围；下一步只为 standalone source-damage-view / source-utility-view 的顶层 `summary` 补聚合 `diagnosticSummary / sourceNoteSummary`
+- [静态构筑解析系统 V45](./specs/static-build-resolver-v45.md) — 当前阶段：已收口；standalone source-damage-view / source-utility-view 的顶层 `summary` 已新增聚合 `diagnosticSummary / sourceNoteSummary`

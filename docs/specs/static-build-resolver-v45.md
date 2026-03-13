@@ -83,6 +83,6 @@
 ## 6. 当前状态
 
 - `V45.1` 已完成：冻结到 standalone source-view summary aggregate contract
-- `V45.2` 未开始
-- `V45.3` 未开始
-- `V45.4` 未开始
+- `V45.2` 已完成：source-damage-view / source-utility-view 顶层 summary 已新增稳定 `diagnosticSummary / sourceNoteSummary`
+- `V45.3` 已完成：高层 tool 与 compact consumer 已直接透传新的 source-view summary contract
+- `V45.4` 已完成：README / 总规格 / roadmap / index / architecture 已同步到 `V45` 收口状态

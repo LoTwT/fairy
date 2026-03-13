@@ -71,7 +71,7 @@
 4. `V4 progression-aware resolver`
 5. `V5 source-aware dynamic snapshot context`
 
-当前 `V44 source-entry collection aggregates` 已完成，下一主线切换为 `V45 source-view summary aggregates`。
+当前 `V44 source-entry collection aggregates` 已完成，`V45 source-view summary aggregates` 也已在当前 contract 下收口。
 
 ## 3. V2.1：Curated Coverage
 
@@ -2284,9 +2284,9 @@ Batch B（已完成）：
 ### 50.3 当前状态
 
 - `V45.1` 已完成：冻结到 standalone source-view summary aggregate contract
-- `V45.2` 未开始
-- `V45.3` 未开始
-- `V45.4` 未开始
+- `V45.2` 已完成：source-view 顶层 summary 已新增聚合 `diagnosticSummary / sourceNoteSummary`
+- `V45.3` 已完成：高层 tool 与 compact consumer 已对齐新的 source-view summary contract
+- `V45.4` 已完成：README / 总规格 / roadmap / index / architecture 已同步到 `V45` 收口状态
 
 ### 50.4 当前边界
 
