@@ -101,7 +101,7 @@ function compactSourceEntry(
 export const resolveBuildSourceEntries = createTool({
   id: "resolve-build-source-entries",
   description:
-    "统一查询当前构筑的 source-specific 条目集合：可一次性返回 anomaly / disorder 的独立额外结算条目，以及音擎提供的 utility / energy 条目。不会把这些条目并回主公式。",
+    "统一查询当前构筑的 source-specific 条目集合：可一次性返回 anomaly / disorder 的独立额外结算条目，以及音擎提供的 utility / resource 条目。不会把这些条目并回主公式。",
   inputSchema: resolveBuildSourceEntriesInputSchema.extend({
     includeDetails: z
       .boolean()

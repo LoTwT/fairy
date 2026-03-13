@@ -14,13 +14,45 @@ import {
   supportedStaticBuildUtilityWEngines,
 } from "./catalog.js"
 
-const utilityViewWEngineIds = ["12003", "12012", "13106", "14117"] as const
+const utilityViewWEngineIds = [
+  "12003",
+  "12012",
+  "13002",
+  "13106",
+  "14117",
+] as const
 const utilityViewWEngineIdSet = new Set<string>(utilityViewWEngineIds)
 
 const lunarNovilunaEnergyRefund = [3, 3.5, 4, 4.5, 5] as const
 const magneticStormCharlieEnergyRefund = [3.5, 4, 4.5, 5, 5.5] as const
+const timeSliceEnergyRefund = [0.7, 0.8, 0.9, 1.0, 1.1] as const
+const timeSliceDecibelGainByTrigger = {
+  dodgeCounter: [20, 23, 26, 29, 32] as const,
+  enhancedSpecial: [25, 28.5, 32, 35.5, 40] as const,
+  assistAttack: [30, 34.5, 39, 43.5, 48] as const,
+  chainAttack: [35, 40, 45, 50, 55] as const,
+}
 const housekeeperOfffieldEnergyRegen = [0.45, 0.52, 0.58, 0.65, 0.72] as const
 const flamemakerShakerOfffieldEnergyRegen = [0.6, 0.75, 0.9, 1.05, 1.2] as const
+
+const timeSliceTriggers = [
+  {
+    key: "dodgeCounter",
+    label: "队伍中任意角色发动[闪避反击]",
+  },
+  {
+    key: "enhancedSpecial",
+    label: "队伍中任意角色发动[强化特殊技]",
+  },
+  {
+    key: "assistAttack",
+    label: "队伍中任意角色发动[支援攻击]",
+  },
+  {
+    key: "chainAttack",
+    label: "队伍中任意角色发动[连携技]",
+  },
+] as const
 
 function byRefinement(
   values: readonly number[],
@@ -158,6 +190,47 @@ function resolveWEngineUtilityViews(
           ],
         }),
       ]
+
+    case "13002":
+      return timeSliceTriggers.flatMap((trigger) => [
+        createEntry({
+          id: `time-slice-${trigger.key}-decibel-gain`,
+          label: `时光切片：[说「茄子」·${trigger.label}]`,
+          sourceType: "w-engine",
+          sourceId: "13002",
+          utilityType: "decibel-gain",
+          resolutionMode: "trigger",
+          targetScope: "team",
+          value: byRefinement(
+            timeSliceDecibelGainByTrigger[trigger.key],
+            loadout.wEngineRefinement,
+          ),
+          unit: "decibel",
+          triggerLabel: trigger.label,
+          cooldownSeconds: 12,
+          assumptions: [
+            "当前 utility view 只输出单次触发的喧响值收益，不推导战斗内总触发次数。",
+            "时光切片的不同招式触发共享同一被动描述，但分别结算冷却时间，因此按触发类型拆成多条 utility entry。",
+          ],
+        }),
+        createEntry({
+          id: `time-slice-${trigger.key}-energy-refund`,
+          label: `时光切片：[说「茄子」·${trigger.label}·能量]`,
+          sourceType: "w-engine",
+          sourceId: "13002",
+          utilityType: "energy-refund",
+          resolutionMode: "trigger",
+          targetScope: "self",
+          value: byRefinement(timeSliceEnergyRefund, loadout.wEngineRefinement),
+          unit: "energy",
+          triggerLabel: trigger.label,
+          cooldownSeconds: 12,
+          assumptions: [
+            "当前 utility view 只输出单次触发的能量回复值，不推导战斗内总回复次数。",
+            "时光切片的不同招式触发共享同一被动描述，但分别结算冷却时间，因此按触发类型拆成多条 utility entry。",
+          ],
+        }),
+      ])
 
     case "13106":
       return [

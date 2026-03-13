@@ -53,7 +53,20 @@ describe("resolveBuildSourceUtilityViews tool", () => {
       wEngine: "时光切片",
     })
 
-    expect((result as any).found).toBe(false)
-    expect((result as any).message).toContain("暂未覆盖音擎")
+    expect((result as any).found).toBe(true)
+    expect((result as any).views.entries).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          id: "time-slice-dodgeCounter-decibel-gain",
+          utilityType: "decibel-gain",
+          unit: "decibel",
+        }),
+        expect.objectContaining({
+          id: "time-slice-assistAttack-energy-refund",
+          utilityType: "energy-refund",
+          unit: "energy",
+        }),
+      ]),
+    )
   })
 })

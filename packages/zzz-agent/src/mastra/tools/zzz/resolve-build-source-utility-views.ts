@@ -17,7 +17,7 @@ import {
 export const resolveBuildSourceUtilityViews = createTool({
   id: "resolve-build-source-utility-views",
   description:
-    "查询 source-specific utility / energy 条目。当前覆盖稳定可表达的音擎回能与后场回能速率，不并回主伤害公式。",
+    "查询 source-specific utility / resource 条目。当前覆盖稳定可表达的音擎回能、后场回能速率与喧响值条目，不并回主伤害公式。",
   inputSchema: resolveBuildSourceUtilityInputSchema,
   execute: async (input) => {
     const agent = findCatalogItem(

@@ -144,6 +144,35 @@ describe("static build source entries", () => {
     )
   })
 
+  it("collects time-slice utility entries for support agents without requiring a damage scenario", () => {
+    const result = resolveStaticBuildSourceEntries({
+      loadout: {
+        agentId: "1031",
+        wEngineId: "13002",
+        wEngineRefinement: 1,
+      },
+    })
+
+    expect(result.loadout.agent.name).toBe("妮可")
+    expect(result.entries).toHaveLength(8)
+    expect(result.entries.map((entry) => entry.metadata.entryKind)).toEqual([
+      "source-utility-view",
+      "source-utility-view",
+      "source-utility-view",
+      "source-utility-view",
+      "source-utility-view",
+      "source-utility-view",
+      "source-utility-view",
+      "source-utility-view",
+    ])
+    expect(result.entries.map((entry) => entry.id)).toEqual(
+      expect.arrayContaining([
+        "time-slice-dodgeCounter-decibel-gain",
+        "time-slice-chainAttack-energy-refund",
+      ]),
+    )
+  })
+
   it("requires a full panel when collecting anomaly source entries", () => {
     expect(() =>
       resolveStaticBuildSourceEntries({

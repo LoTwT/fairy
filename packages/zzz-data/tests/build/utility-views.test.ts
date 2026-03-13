@@ -107,7 +107,39 @@ describe("static build source utility views", () => {
 
     expect(result.loadout.agent.name).toBe("妮可")
     expect(result.loadout.wEngine?.name).toBe("时光切片")
-    expect(result.entries).toEqual([])
+    expect(result.entries).toHaveLength(8)
     expect(result.assumptions).toEqual([])
+  })
+
+  it("resolves time slice into per-trigger decibel and energy entries", () => {
+    const result = resolveStaticBuildSourceUtilityViews({
+      loadout: {
+        agentId: "1031",
+        wEngineId: "13002",
+        wEngineRefinement: 1,
+      },
+    })
+
+    expect(result.entries).toHaveLength(8)
+    expect(result.entries).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          id: "time-slice-dodgeCounter-decibel-gain",
+          utilityType: "decibel-gain",
+          targetScope: "team",
+          value: 20,
+          unit: "decibel",
+          cooldownSeconds: 12,
+        }),
+        expect.objectContaining({
+          id: "time-slice-chainAttack-energy-refund",
+          utilityType: "energy-refund",
+          targetScope: "self",
+          value: 0.7,
+          unit: "energy",
+          cooldownSeconds: 12,
+        }),
+      ]),
+    )
   })
 })
