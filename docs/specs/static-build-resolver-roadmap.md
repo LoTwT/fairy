@@ -71,7 +71,7 @@
 4. `V4 progression-aware resolver`
 5. `V5 source-aware dynamic snapshot context`
 
-当前 `V44 source-entry collection aggregates` 已完成，`V45 source-view summary aggregates` 也已在当前 contract 下收口。
+当前 `V44 source-entry collection aggregates` 已完成，`V45 source-view summary aggregates` 也已在当前 contract 下收口；当前主线进入 `V46 trigger-matrix summary aggregates`。
 
 ## 3. V2.1：Curated Coverage
 
@@ -2301,3 +2301,44 @@ Batch B（已完成）：
 1. 不改变 source-view groups
 2. 不新增新的 source-view coverage
 3. 不改 unified source-entry collection 既有 summary contract
+
+## 51. V46 trigger-matrix summary aggregates
+
+### 51.1 目标
+
+`V45` 收口后，standalone source views 与 unified source-entry collection 顶层都已具备聚合 `diagnosticSummary / sourceNoteSummary`。
+
+但 trigger-entry matrix 的顶层 `summary` 仍只统计 row / group 数量。
+
+`V46` 只解决一件事：
+
+1. 为 trigger-matrix 顶层 summary 增加聚合 `diagnosticSummary`
+2. 为 trigger-matrix 顶层 summary 增加聚合 `sourceNoteSummary`
+
+### 51.2 范围
+
+1. `V46.1` scope freeze
+2. `V46.2` trigger-matrix summary contract
+3. `V46.3` compact / high-level alignment
+4. `V46.4` docs closeout
+
+### 51.3 当前状态
+
+- `V46.1` 已完成：冻结到 trigger-matrix summary aggregate contract
+- `V46.2` 未开始
+- `V46.3` 未开始
+- `V46.4` 未开始
+
+### 51.4 当前边界
+
+本阶段只做：
+
+1. 为 `StaticBuildTriggerMatrixSummary` 增加 `diagnosticSummary / sourceNoteSummary`
+2. 保持现有 `rows[]` 与 row-level summary 兼容
+3. 对齐 compact helper 与高层 trigger-matrix tool
+
+显式不做：
+
+1. 不改变 trigger-matrix rows
+2. 不新增新的 trigger-matrix groups
+3. 不改 source-view / source-entry collection 既有 summary contract
