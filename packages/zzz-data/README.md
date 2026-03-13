@@ -295,6 +295,20 @@ collection.entries.map((entry) => entry.metadata.stableKey)
 //   "source-utility:flamemaker-shaker-offfield-energy-regen",
 //   "source-view:aria-exflow",
 // ]
+
+collection.summary
+// {
+//   entryCount: 2,
+//   sourceDamageViewCount: 1,
+//   sourceUtilityViewCount: 1,
+//   supportedCount: 2,
+//   unsupportedCount: 0,
+//   isUtilityOnly: false,
+//   groups: [
+//     { key: "source-damage-view", label: "额外结算条目", count: 1, ... },
+//     { key: "source-utility-view", label: "回能 / utility 条目", count: 1, ... },
+//   ],
+// }
 ```
 
 `resolveStaticBuildSourceEntries()` 的规则是：
@@ -302,6 +316,7 @@ collection.entries.map((entry) => entry.metadata.stableKey)
 - 不传 `scenario` 时，只返回 utility entries
 - `anomaly / disorder` 场景下，可同时返回 source damage view + utility view
 - `normal / sheer` 场景下，保持 utility-only，不把它们伪装成 source damage collection
+- `collection.summary` 已直接给出 source damage / source utility 计数、supported/unsupported 计数、utility-only 判定与分组摘要；上层不需要再自行统计和分组
 
 source view 条目现在也会返回结构化 `diagnostics` 与 `sourceNotes`，适合直接区分：
 

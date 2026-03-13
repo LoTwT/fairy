@@ -117,4 +117,4 @@
 - `V26.1` 已完成：冻结到 unified source-entry collection summary
 - `V26.2` 已完成：`ResolveStaticBuildSourceEntriesResult` 已新增 `summary`，并固定 utility-only / mixed collection 的排序语义
 - `V26.3` 已完成：高层 tool 与 Agent prompt 已改为优先消费 `collection.summary`
-- `V26.4` 未开始
+- `V26.4` 已完成：README / 总规格 / 索引 / 架构入口已同步到“`V26` 已收口”，并补充 `collection.summary` 的推荐消费方式
