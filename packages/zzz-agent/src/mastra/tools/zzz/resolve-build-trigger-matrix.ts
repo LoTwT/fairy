@@ -9,11 +9,14 @@ import {
   supportedStaticBuildWEngines,
 } from "zzz-data"
 import {
-  findCatalogCandidates,
+  buildIncompatibleWEngineResponse,
+  buildUnsupportedAgentResponse,
+  buildUnsupportedAnomalyTypeResponse,
+  buildUnsupportedDriveDiscResponse,
+  buildUnsupportedWEngineResponse,
   findCatalogItem,
   normalizeAnomalyType,
   resolveBuildInputSchema,
-  specialtyLabels,
 } from "./resolve-build-shared"
 
 function compactTriggerMatrix(
@@ -73,17 +76,11 @@ export const resolveBuildTriggerMatrix = createTool({
       input.agent,
     )
     if (!agent) {
-      return {
-        found: false,
-        message: `当前 trigger-entry matrix 暂不支持代理人「${input.agent}」`,
-        supportedAgents: supportedStaticBuildTriggerMatrixAgents.map(
-          (item) => item.name,
-        ),
-        candidates: findCatalogCandidates(
-          supportedStaticBuildTriggerMatrixAgents,
-          input.agent,
-        ).map((item) => item.name),
-      }
+      return buildUnsupportedAgentResponse(
+        "trigger-entry matrix",
+        supportedStaticBuildTriggerMatrixAgents,
+        input.agent,
+      )
     }
 
     const wEngine = input.wEngine
@@ -93,29 +90,22 @@ export const resolveBuildTriggerMatrix = createTool({
       const compatibleWEngines = getCompatibleStaticBuildWEngines(
         agent.specialty,
       )
-      return {
-        found: false,
-        message: `当前 trigger-entry matrix 暂不支持音擎「${input.wEngine}」`,
-        supportedWEngines: compatibleWEngines.map((item) => item.name),
-        candidates: findCatalogCandidates(
-          compatibleWEngines,
-          input.wEngine,
-        ).map((item) => item.name),
-      }
+      return buildUnsupportedWEngineResponse(
+        "trigger-entry matrix",
+        compatibleWEngines,
+        input.wEngine,
+      )
     }
     if (wEngine && wEngine.specialty !== agent.specialty) {
       const compatibleWEngines = getCompatibleStaticBuildWEngines(
         agent.specialty,
       )
-      return {
-        found: false,
-        message: `${agent.name} 为 ${specialtyLabels[agent.specialty]}代理人，无法使用 ${wEngine.name}（${specialtyLabels[wEngine.specialty]}音擎）`,
-        supportedWEngines: compatibleWEngines.map((item) => item.name),
-        candidates: findCatalogCandidates(
-          compatibleWEngines,
-          input.wEngine,
-        ).map((item) => item.name),
-      }
+      return buildIncompatibleWEngineResponse(
+        agent,
+        wEngine,
+        compatibleWEngines,
+        input.wEngine,
+      )
     }
 
     const driveDiscSets = []
@@ -125,17 +115,11 @@ export const resolveBuildTriggerMatrix = createTool({
         discInput.name,
       )
       if (!disc) {
-        return {
-          found: false,
-          message: `当前 trigger-entry matrix 暂不支持驱动盘「${discInput.name}」`,
-          supportedDriveDiscs: supportedStaticBuildDriveDiscs.map(
-            (item) => item.name,
-          ),
-          candidates: findCatalogCandidates(
-            supportedStaticBuildDriveDiscs,
-            discInput.name,
-          ).map((item) => item.name),
-        }
+        return buildUnsupportedDriveDiscResponse(
+          "trigger-entry matrix",
+          supportedStaticBuildDriveDiscs,
+          discInput.name,
+        )
       }
       driveDiscSets.push({ id: disc.id, pieces: discInput.pieces })
     }
@@ -160,19 +144,7 @@ export const resolveBuildTriggerMatrix = createTool({
       input.scenario.damageType === "disorder" &&
       scenario.anomalyType === undefined
     ) {
-      return {
-        found: false,
-        message: `当前 resolver 无法识别异常类型「${input.scenario.anomalyType}」`,
-        supportedAnomalyTypes: [
-          "fire",
-          "electric",
-          "ether",
-          "ice",
-          "physical",
-          "auricInk",
-          "frost",
-        ],
-      }
+      return buildUnsupportedAnomalyTypeResponse(input.scenario.anomalyType)
     }
 
     const matrix = resolveStaticBuildTriggerMatrix({

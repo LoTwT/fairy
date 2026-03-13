@@ -8,91 +8,13 @@ import {
   supportedStaticBuildMatrixAgents,
   supportedStaticBuildWEngines,
 } from "zzz-data"
-
-interface CatalogItem {
-  id: string
-  name: string
-  aliases: readonly string[]
-}
-
-const specialtyLabels = {
-  Attack: "强攻",
-  Stun: "击破",
-  Anomaly: "异常",
-  Support: "支援",
-  Defense: "防护",
-  Rupture: "命破",
-} as const
-
-function normalizeCatalogValue(value: string) {
-  return value.toLowerCase().replace(/[\s\-_·・.()（）【】[\]「」]/g, "")
-}
-
-function getCatalogFields(item: CatalogItem) {
-  return [item.name, item.id, ...item.aliases].filter(Boolean)
-}
-
-function findCatalogItem<T extends CatalogItem>(
-  items: readonly T[],
-  query: string,
-): T | undefined {
-  const qLow = query.toLowerCase()
-  const qNorm = normalizeCatalogValue(query)
-
-  let bestItem: T | undefined
-  let bestScore = 0
-
-  for (const item of items) {
-    for (const field of getCatalogFields(item)) {
-      if (field.toLowerCase() === qLow) return item
-      const normalized = normalizeCatalogValue(field)
-      if (normalized === qNorm) return item
-      if (!normalized.includes(qNorm)) continue
-
-      let score = qNorm.length / normalized.length
-      if (normalized.startsWith(qNorm)) score += 1
-      if (score > bestScore) {
-        bestScore = score
-        bestItem = item
-      }
-    }
-  }
-
-  return bestScore >= 0.6 ? bestItem : undefined
-}
-
-function findCatalogCandidates<T extends CatalogItem>(
-  items: readonly T[],
-  query: string,
-) {
-  const qNorm = normalizeCatalogValue(query)
-  if (!qNorm) return []
-
-  const scored: Array<{ item: T; score: number }> = []
-  for (const item of items) {
-    let bestScore = 0
-    for (const field of getCatalogFields(item)) {
-      const normalized = normalizeCatalogValue(field)
-      if (!normalized.includes(qNorm) && !qNorm.includes(normalized)) continue
-
-      let score = 0
-      if (normalized.includes(qNorm)) {
-        score = qNorm.length / normalized.length
-        if (normalized.startsWith(qNorm)) score += 1
-      } else {
-        score = normalized.length / qNorm.length
-        if (qNorm.startsWith(normalized)) score += 1
-      }
-      bestScore = Math.max(bestScore, score)
-    }
-    if (bestScore > 0) scored.push({ item, score: bestScore })
-  }
-
-  return scored
-    .sort((left, right) => right.score - left.score)
-    .slice(0, 3)
-    .map((item) => item.item)
-}
+import {
+  buildIncompatibleWEngineResponse,
+  buildUnsupportedAgentResponse,
+  buildUnsupportedDriveDiscResponse,
+  buildUnsupportedWEngineResponse,
+  findCatalogItem,
+} from "./resolve-build-shared"
 
 function compactMatrix(
   matrix: ReturnType<typeof resolveStaticBuildSkillMatrix>,
@@ -203,17 +125,11 @@ export const resolveBuildSkillMatrix = createTool({
   execute: async (input) => {
     const agent = findCatalogItem(supportedStaticBuildMatrixAgents, input.agent)
     if (!agent) {
-      return {
-        found: false,
-        message: `当前 skill matrix 暂不支持代理人「${input.agent}」`,
-        supportedAgents: supportedStaticBuildMatrixAgents.map(
-          (item) => item.name,
-        ),
-        candidates: findCatalogCandidates(
-          supportedStaticBuildMatrixAgents,
-          input.agent,
-        ).map((item) => item.name),
-      }
+      return buildUnsupportedAgentResponse(
+        "skill matrix",
+        supportedStaticBuildMatrixAgents,
+        input.agent,
+      )
     }
 
     const wEngine = input.wEngine
@@ -223,29 +139,22 @@ export const resolveBuildSkillMatrix = createTool({
       const compatibleWEngines = getCompatibleStaticBuildWEngines(
         agent.specialty,
       )
-      return {
-        found: false,
-        message: `当前 skill matrix 暂不支持音擎「${input.wEngine}」`,
-        supportedWEngines: compatibleWEngines.map((item) => item.name),
-        candidates: findCatalogCandidates(
-          compatibleWEngines,
-          input.wEngine,
-        ).map((item) => item.name),
-      }
+      return buildUnsupportedWEngineResponse(
+        "skill matrix",
+        compatibleWEngines,
+        input.wEngine,
+      )
     }
     if (wEngine && wEngine.specialty !== agent.specialty) {
       const compatibleWEngines = getCompatibleStaticBuildWEngines(
         agent.specialty,
       )
-      return {
-        found: false,
-        message: `${agent.name} 为 ${specialtyLabels[agent.specialty]}代理人，无法使用 ${wEngine.name}（${specialtyLabels[wEngine.specialty]}音擎）`,
-        supportedWEngines: compatibleWEngines.map((item) => item.name),
-        candidates: findCatalogCandidates(
-          compatibleWEngines,
-          input.wEngine,
-        ).map((item) => item.name),
-      }
+      return buildIncompatibleWEngineResponse(
+        agent,
+        wEngine,
+        compatibleWEngines,
+        input.wEngine,
+      )
     }
 
     const driveDiscSets = []
@@ -255,17 +164,11 @@ export const resolveBuildSkillMatrix = createTool({
         discInput.name,
       )
       if (!disc) {
-        return {
-          found: false,
-          message: `当前 skill matrix 暂不支持驱动盘「${discInput.name}」`,
-          supportedDriveDiscs: supportedStaticBuildDriveDiscs.map(
-            (item) => item.name,
-          ),
-          candidates: findCatalogCandidates(
-            supportedStaticBuildDriveDiscs,
-            discInput.name,
-          ).map((item) => item.name),
-        }
+        return buildUnsupportedDriveDiscResponse(
+          "skill matrix",
+          supportedStaticBuildDriveDiscs,
+          discInput.name,
+        )
       }
       driveDiscSets.push({ id: disc.id, pieces: discInput.pieces })
     }

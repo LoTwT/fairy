@@ -19,12 +19,17 @@ import {
   supportedStaticBuildWEngines,
 } from "zzz-data"
 import {
+  buildIncompatibleWEngineResponse,
+  buildUnsupportedAgentResponse,
+  buildUnsupportedAnomalyTypeResponse,
+  buildUnsupportedDriveDiscResponse,
+  buildUnsupportedWEngineResponse,
+  candidateNames,
+  catalogNames,
   finalPanelSchema,
-  findCatalogCandidates,
   findCatalogItem,
   normalizeAnomalyType,
   resolveBuildSourceEntriesInputSchema,
-  specialtyLabels,
 } from "./resolve-build-shared"
 
 function compactSourceEntries(
@@ -114,23 +119,21 @@ export const resolveBuildSourceEntries = createTool({
 
     const agent = findCatalogItem(agentCatalog, input.agent)
     if (!agent) {
-      return {
-        found: false,
-        message: `当前 source-entry collection 暂不支持代理人「${input.agent}」`,
-        supportedAgents: agentCatalog.map((item) => item.name),
-        candidates: findCatalogCandidates(agentCatalog, input.agent).map(
-          (item) => item.name,
-        ),
-      }
+      return buildUnsupportedAgentResponse(
+        "source-entry collection",
+        agentCatalog,
+        input.agent,
+      )
     }
 
     const compatibleWEngines = utilityOnly
       ? getCompatibleStaticBuildUtilityWEngines(agent.specialty)
       : getCompatibleStaticBuildWEngines(agent.specialty)
-    const supportedUtilityWEngines =
-      supportedStaticBuildSourceUtilityViewWEngines
-        .filter((item) => item.specialty === agent.specialty)
-        .map((item) => item.name)
+    const supportedUtilityWEngines = catalogNames(
+      supportedStaticBuildSourceUtilityViewWEngines.filter(
+        (item) => item.specialty === agent.specialty,
+      ),
+    )
 
     const wEngine = input.wEngine
       ? findCatalogItem(
@@ -141,26 +144,19 @@ export const resolveBuildSourceEntries = createTool({
         )
       : undefined
     if (input.wEngine && !wEngine) {
-      return {
-        found: false,
-        message: `当前 resolver 暂不支持音擎「${input.wEngine}」`,
-        supportedWEngines: compatibleWEngines.map((item) => item.name),
-        candidates: findCatalogCandidates(
-          compatibleWEngines,
-          input.wEngine,
-        ).map((item) => item.name),
-      }
+      return buildUnsupportedWEngineResponse(
+        "resolver",
+        compatibleWEngines,
+        input.wEngine,
+      )
     }
     if (wEngine && wEngine.specialty !== agent.specialty) {
-      return {
-        found: false,
-        message: `${agent.name} 为 ${specialtyLabels[agent.specialty]}代理人，无法使用 ${wEngine.name}（${specialtyLabels[wEngine.specialty]}音擎）`,
-        supportedWEngines: compatibleWEngines.map((item) => item.name),
-        candidates: findCatalogCandidates(
-          compatibleWEngines,
-          input.wEngine,
-        ).map((item) => item.name),
-      }
+      return buildIncompatibleWEngineResponse(
+        agent,
+        wEngine,
+        compatibleWEngines,
+        input.wEngine,
+      )
     }
 
     const driveDiscSets = []
@@ -170,17 +166,11 @@ export const resolveBuildSourceEntries = createTool({
         discInput.name,
       )
       if (!disc) {
-        return {
-          found: false,
-          message: `当前 resolver 暂不支持驱动盘「${discInput.name}」`,
-          supportedDriveDiscs: supportedStaticBuildDriveDiscs.map(
-            (item) => item.name,
-          ),
-          candidates: findCatalogCandidates(
-            supportedStaticBuildDriveDiscs,
-            discInput.name,
-          ).map((item) => item.name),
-        }
+        return buildUnsupportedDriveDiscResponse(
+          "resolver",
+          supportedStaticBuildDriveDiscs,
+          discInput.name,
+        )
       }
       driveDiscSets.push({ id: disc.id, pieces: discInput.pieces })
     }
@@ -189,19 +179,7 @@ export const resolveBuildSourceEntries = createTool({
     if (scenario?.damageType === "disorder") {
       const anomalyType = normalizeAnomalyType(scenario.anomalyType)
       if (!anomalyType) {
-        return {
-          found: false,
-          message: `当前 resolver 无法识别异常类型「${scenario.anomalyType}」`,
-          supportedAnomalyTypes: [
-            "fire",
-            "electric",
-            "ether",
-            "ice",
-            "physical",
-            "auricInk",
-            "frost",
-          ],
-        }
+        return buildUnsupportedAnomalyTypeResponse(scenario.anomalyType)
       }
       scenario = {
         ...scenario,
@@ -252,14 +230,12 @@ export const resolveBuildSourceEntries = createTool({
         message: utilityOnly
           ? `当前 source-entry collection 暂未覆盖 ${agent.name} 的可返回条目；utility entries 目前只覆盖音擎来源。`
           : `当前 source-entry collection 暂未覆盖 ${agent.name} 这套构筑的额外来源条目。`,
-        supportedSourceViewAgents: supportedStaticBuildSourceViewAgents.map(
-          (item) => item.name,
+        supportedSourceViewAgents: catalogNames(
+          supportedStaticBuildSourceViewAgents,
         ),
         supportedUtilityWEngines,
         candidates: input.wEngine
-          ? findCatalogCandidates(compatibleWEngines, input.wEngine).map(
-              (item) => item.name,
-            )
+          ? candidateNames(compatibleWEngines, input.wEngine)
           : [],
       }
     }
