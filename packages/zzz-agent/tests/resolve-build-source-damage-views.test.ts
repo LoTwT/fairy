@@ -37,6 +37,10 @@ describe("resolveBuildSourceDamageViews tool", () => {
 
     expect((result as any).found).toBe(true)
     expect((result as any).views.entries).toHaveLength(1)
+    expect((result as any).views.assumptionSummary).toEqual({
+      count: (result as any).views.assumptions.length,
+      hasAssumptions: (result as any).views.assumptions.length > 0,
+    })
     expect((result as any).views.summary).toMatchObject({
       entryCount: 1,
       standaloneCount: 1,

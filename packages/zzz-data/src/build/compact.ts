@@ -148,6 +148,7 @@ export interface CompactStaticBuildSourceDamageViewsResult {
   manualBaseMode?: ResolveStaticBuildSourceDamageViewsResult["manualBaseMode"]
   loadout: ResolveStaticBuildSourceDamageViewsResult["loadout"]
   summary: ResolveStaticBuildSourceDamageViewsResult["summary"]
+  assumptionSummary: ResolveStaticBuildSourceDamageViewsResult["assumptionSummary"]
   assumptions: string[]
   entries: StaticBuildCompactSourceDamageViewEntry[]
 }
@@ -273,6 +274,7 @@ export function compactStaticBuildSourceDamageViewsResult(
     manualBaseMode: views.manualBaseMode,
     loadout: views.loadout,
     summary: views.summary,
+    assumptionSummary: views.assumptionSummary,
     assumptions: views.assumptions,
     entries: views.entries.map(
       (entry) =>

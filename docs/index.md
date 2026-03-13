@@ -87,3 +87,4 @@
 - [静态构筑解析系统 V69](./specs/static-build-resolver-v69.md) — 当前阶段：已收口；`skill-matrix rows` 已新增局部 `caveatSummary`
 - [静态构筑解析系统 V70](./specs/static-build-resolver-v70.md) — 当前阶段：已收口；`trigger-entry matrix` 顶层已新增 `assumptionSummary`
 - [静态构筑解析系统 V71](./specs/static-build-resolver-v71.md) — 当前阶段：已收口；`trigger-entry rows` 已新增局部 `assumptionSummary`
+- [静态构筑解析系统 V72](./specs/static-build-resolver-v72.md) — 当前阶段：已收口；`source-damage views` 顶层已新增 `assumptionSummary`

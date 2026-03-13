@@ -3375,3 +3375,43 @@ Batch B（已完成）：
 1. 不改变 row-level `assumptions` 的现有数组语义
 2. 不新增新的 row 分组维度
 3. 不改变 `requirementSummary`、`diagnosticSummary` 或 `sourceNoteSummary` 结构
+
+## 75. V72 source-damage-view top-level assumption summary
+
+### 75.1 目标
+
+`source-damage views` 当前顶层已经有稳定的 `summary`，也保留了原始 `assumptions` 数组。
+
+但如果上层只想先判断“当前整组 source-damage views 是否带 assumptions、共有多少条”，仍要自己统计数组长度。
+
+`V72` 只解决一件事：
+
+1. 为 `ResolveStaticBuildSourceDamageViewsResult` 与 compact result 增加顶层 `assumptionSummary`
+
+### 75.2 范围
+
+1. `V72.1` scope freeze
+2. `V72.2` top-level assumption summary
+3. `V72.3` high-level / prompt alignment
+4. `V72.4` docs closeout
+
+### 75.3 当前状态
+
+- `V72.1` 已完成：冻结到 top-level source-damage-view assumption summary
+- `V72.2` 已完成：`ResolveStaticBuildSourceDamageViewsResult` 与 compact result 已新增 `assumptionSummary`
+- `V72.3` 已完成：高层 tool 断言与 agent prompt 已对齐 `views.assumptionSummary`
+- `V72.4` 已完成：相关 specs、roadmap、索引、架构文档与 README 已同步
+
+### 75.4 当前边界
+
+本阶段只做：
+
+1. 为 `ResolveStaticBuildSourceDamageViewsResult` 与 compact result 增加顶层 `assumptionSummary`
+2. 从现有顶层 `assumptions` 衍生计数与布尔位
+3. 保持现有 `summary / entries / assumptions` 兼容
+
+显式不做：
+
+1. 不改变顶层 `assumptions` 的现有数组语义
+2. 不新增 entry-level `assumptionSummary`
+3. 不改变 `summary` 结构

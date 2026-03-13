@@ -23,6 +23,7 @@ import {
 import { getStaticBuildSourceNoteEntries } from "./definitions.js"
 import {
   resolveStaticBuildDamage,
+  summarizeAssumptions,
   summarizeDiagnosticEntries,
   summarizeSourceNoteEntries,
 } from "./resolver.js"
@@ -152,6 +153,7 @@ export function resolveStaticBuildSourceDamageViews(
       input.mode === "manual" ? resolveBaseMode(input) : undefined,
     loadout,
     summary: summarizeSourceDamageViews(sortedEntries),
+    assumptionSummary: summarizeAssumptions([]),
     entries: sortedEntries,
     assumptions: [],
   }

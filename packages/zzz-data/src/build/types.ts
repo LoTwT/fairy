@@ -673,6 +673,7 @@ export interface ResolveStaticBuildSourceDamageViewsResult {
   manualBaseMode?: StaticBuildBaseMode
   loadout: StaticBuildResolvedLoadout
   summary: StaticBuildSourceDamageViewSummary
+  assumptionSummary: StaticBuildAssumptionSummary
   entries: StaticBuildSourceDamageViewEntry[]
   assumptions: string[]
 }
