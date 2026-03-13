@@ -50,7 +50,14 @@ describe("resolveBuildSkillMatrix tool", () => {
     })
     expect((result as any).matrix.rows[0].metadata.sourceStatId).toBeTruthy()
     expect((result as any).matrix.rows[0].build).toBeUndefined()
-    expect((result as any).matrix.effectSummary[0].value).toBeTruthy()
+    const globalEffect = (result as any).matrix.effectSummary.find(
+      (item: any) =>
+        item.sourceName === "防暴者Ⅵ型" &&
+        item.label === "音擎被动：暴击率提升",
+    )
+    expect(globalEffect?.value).toBeTruthy()
+    expect(globalEffect?.appliedRowCount).toBe(21)
+    expect(globalEffect?.totalRowCount).toBe(21)
     expect((result as any).matrix.summary.rowCount).toBe(21)
     expect((result as any).matrix.summary.baseDamageStat).toBe("attack")
     expect(

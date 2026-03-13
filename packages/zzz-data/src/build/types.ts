@@ -828,12 +828,25 @@ export interface StaticBuildSkillMatrixSummary {
   variableFormulaMultipliers: string[]
 }
 
+export interface StaticBuildSkillMatrixEffectSummaryItem {
+  effectId: string
+  sourceName: string
+  label: string
+  bucket: string
+  value: string
+  appliedRowCount: number
+  totalRowCount: number
+  appliesToAllRows: boolean
+  condition: string
+}
+
 export interface ResolveStaticBuildSkillMatrixResult {
   profile: StaticBuildProfileResult
   mode: StaticBuildMode
   manualBaseMode?: StaticBuildBaseMode
   loadout: StaticBuildResolvedLoadout
   summary: StaticBuildSkillMatrixSummary
+  effectSummary: StaticBuildSkillMatrixEffectSummaryItem[]
   rows: StaticBuildSkillMatrixRow[]
   assumptions: string[]
 }

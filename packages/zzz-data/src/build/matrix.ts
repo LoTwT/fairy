@@ -4,6 +4,7 @@ import type {
   ResolveStaticBuildSkillMatrixResult,
   StaticBuildDamageType,
   StaticBuildSkillMatrixAttributeSource,
+  StaticBuildSkillMatrixEffectSummaryItem,
   StaticBuildSkillMatrixRow,
   StaticBuildSkillMatrixRowMeta,
   StaticBuildSkillMatrixTemplateSource,
@@ -410,6 +411,133 @@ function summarizeFormulaMultipliers(rows: StaticBuildSkillMatrixRow[]) {
   }
 
   return { commonFormulaMultipliers, variableFormulaMultipliers }
+}
+
+const bucketLabels = {
+  attackPercent: "攻击%",
+  flatAttack: "固定攻击",
+  bonusDamageSum: "增伤",
+  critRate: "暴击率",
+  critDamage: "暴击伤害",
+  penetrationRate: "穿透率",
+  penetrationValue: "穿透值",
+  resistanceReduction: "减抗",
+  ignoreResistance: "无视抗性",
+  vulnerabilityBonus: "易伤",
+  damageReduction: "减伤",
+  stunVulnerability: "失衡易伤",
+  nonStunVulnerability: "非失衡易伤",
+  sheerBonusSum: "贯穿增伤",
+  skillMultiplierFactor: "技能倍率",
+  anomalyMastery: "异常精通",
+  anomalyProficiency: "异常掌控",
+  anomalyBonusDamageSum: "异常增伤",
+  anomalyCritRate: "异常暴击率",
+  anomalyCritDamage: "异常暴击伤害",
+} as const
+
+function formatValue(value: number) {
+  const normalized = Number.parseFloat(value.toFixed(3))
+  return Number.isInteger(normalized)
+    ? String(normalized)
+    : normalized.toString()
+}
+
+function formatModifier(
+  bucket: string,
+  value: number,
+  combine: "sum" | "multiply",
+) {
+  if (combine === "multiply") {
+    const percent = (value - 1) * 100
+    return `×${formatValue(value)}（${percent >= 0 ? "+" : ""}${formatValue(percent)}%）`
+  }
+
+  if (
+    bucket === "critRate" ||
+    bucket === "critDamage" ||
+    bucket === "bonusDamageSum" ||
+    bucket === "penetrationRate" ||
+    bucket === "resistanceReduction" ||
+    bucket === "ignoreResistance" ||
+    bucket === "vulnerabilityBonus" ||
+    bucket === "damageReduction" ||
+    bucket === "stunVulnerability" ||
+    bucket === "nonStunVulnerability" ||
+    bucket === "sheerBonusSum" ||
+    bucket === "anomalyBonusDamageSum" ||
+    bucket === "anomalyCritRate" ||
+    bucket === "anomalyCritDamage"
+  ) {
+    return `${value >= 0 ? "+" : ""}${formatValue(value * 100)}%`
+  }
+
+  return `${value >= 0 ? "+" : ""}${formatValue(value)}`
+}
+
+function summarizeSkillMatrixEffects(
+  rows: StaticBuildSkillMatrixRow[],
+): StaticBuildSkillMatrixEffectSummaryItem[] {
+  const summary = new Map<
+    string,
+    {
+      effectId: string
+      sourceName: string
+      label: string
+      bucketTexts: Set<string>
+      valueTexts: Set<string>
+      rows: Set<string>
+    }
+  >()
+
+  for (const row of rows) {
+    for (const trace of row.build.trace) {
+      if (trace.status !== "applied" || !trace.modifiers?.length) continue
+
+      let item = summary.get(trace.effectId)
+      if (!item) {
+        item = {
+          effectId: trace.effectId,
+          sourceName: trace.sourceName,
+          label: trace.label,
+          bucketTexts: new Set<string>(),
+          valueTexts: new Set<string>(),
+          rows: new Set<string>(),
+        }
+        summary.set(trace.effectId, item)
+      }
+
+      item.rows.add(row.id)
+      for (const modifier of trace.modifiers) {
+        item.bucketTexts.add(
+          bucketLabels[modifier.bucket as keyof typeof bucketLabels] ??
+            modifier.bucket,
+        )
+        item.valueTexts.add(
+          formatModifier(modifier.bucket, modifier.value, modifier.combine),
+        )
+      }
+    }
+  }
+
+  return [...summary.values()].map((item) => {
+    const appliedRowCount = item.rows.size
+    const totalRowCount = rows.length
+    const appliesToAllRows = appliedRowCount === totalRowCount
+    return {
+      effectId: item.effectId,
+      sourceName: item.sourceName,
+      label: item.label,
+      bucket: [...item.bucketTexts].join(" + "),
+      value: [...item.valueTexts].join("；"),
+      appliedRowCount,
+      totalRowCount,
+      appliesToAllRows,
+      condition: appliesToAllRows
+        ? "当前矩阵全部生效"
+        : `部分技能生效（${appliedRowCount}/${totalRowCount}）`,
+    }
+  })
 }
 
 function summarizeSkillMatrix(rows: StaticBuildSkillMatrixRow[]) {
@@ -1861,6 +1989,7 @@ export function resolveStaticBuildSkillMatrix(
     manualBaseMode: first.manualBaseMode,
     loadout: first.loadout,
     summary: summarizeSkillMatrix(rows),
+    effectSummary: summarizeSkillMatrixEffects(rows),
     rows,
     assumptions,
   }

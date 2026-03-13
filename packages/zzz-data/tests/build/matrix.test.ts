@@ -34,6 +34,18 @@ describe("static build skill matrix", () => {
     expect(
       result.summary.commonFormulaMultipliers.critMultiplier,
     ).toBeGreaterThan(1)
+    const globalEffect = result.effectSummary.find(
+      (item) =>
+        item.sourceName === "防暴者Ⅵ型" &&
+        item.label === "音擎被动：暴击率提升",
+    )
+    expect(globalEffect).toMatchObject({
+      appliedRowCount: 21,
+      totalRowCount: 21,
+      appliesToAllRows: true,
+      condition: "当前矩阵全部生效",
+    })
+    expect(globalEffect?.value).toBeTruthy()
     expect(result.rows).toHaveLength(21)
     expect(result.rows[0]?.label).toBe("普通攻击·一段")
     expect(result.rows[0]?.metadata).toMatchObject({
@@ -230,6 +242,9 @@ describe("static build skill matrix", () => {
     expect(result.rows.length).toBeGreaterThan(0)
     expect(result.rows[0]?.label).toBe("普通攻击·一段")
     expect(result.rows[0]?.skillMultiplier).toBe("131.7%")
+    expect(result.effectSummary.some((item) => item.appliedRowCount > 0)).toBe(
+      true,
+    )
     expect(result.rows[0]?.metadata).toMatchObject({
       canonicalLabel: "普通攻击·一段",
       templateSource: "generated",

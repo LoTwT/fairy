@@ -63,6 +63,7 @@ export type {
   StaticBuildScenarioInput,
   StaticBuildSkillMatrixAttributeSource,
   StaticBuildSkillMatrixContextInput,
+  StaticBuildSkillMatrixEffectSummaryItem,
   StaticBuildSkillMatrixEntryType,
   StaticBuildSkillMatrixRow,
   StaticBuildSkillMatrixRowMeta,
