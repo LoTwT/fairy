@@ -84,3 +84,4 @@
 - [静态构筑解析系统 V66](./specs/static-build-resolver-v66.md) — 当前阶段：已收口；`skill matrix` 顶层已新增 `unsupportedEffects`
 - [静态构筑解析系统 V67](./specs/static-build-resolver-v67.md) — 当前阶段：已收口；`skill matrix` 顶层已新增 `caveatSummary`
 - [静态构筑解析系统 V68](./specs/static-build-resolver-v68.md) — 当前阶段：已收口；`skill-matrix summary groups` 已新增局部 `caveatSummary`
+- [静态构筑解析系统 V69](./specs/static-build-resolver-v69.md) — 当前阶段：已收口；`skill-matrix rows` 已新增局部 `caveatSummary`

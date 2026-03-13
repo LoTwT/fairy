@@ -48,25 +48,26 @@ describe("resolveBuildSkillMatrix tool", () => {
       segmentLabel: "一段",
       segmentIndex: 1,
     })
-    expect((result as any).matrix.rows[0].metadata.sourceStatId).toBeTruthy()
-    expect((result as any).matrix.rows[0].build).toBeUndefined()
-    expect((result as any).matrix.rows[0].damage.expected).toBeGreaterThan(0)
-    expect((result as any).matrix.rows[0].summary.expectedTotal).toBeCloseTo(
-      (result as any).matrix.rows[0].damage.expected,
+    const firstRow = (result as any).matrix.rows[0]
+    expect(firstRow.metadata.sourceStatId).toBeTruthy()
+    expect(firstRow.build).toBeUndefined()
+    expect(firstRow.damage.expected).toBeGreaterThan(0)
+    expect(firstRow.summary.expectedTotal).toBeCloseTo(
+      firstRow.damage.expected,
       6,
     )
-    expect((result as any).matrix.rows[0].diagnostics).toBeInstanceOf(Array)
-    expect((result as any).matrix.rows[0].diagnosticSummary.count).toBe(
-      (result as any).matrix.rows[0].diagnostics.length,
-    )
-    expect((result as any).matrix.rows[0].sourceNotes).toBeInstanceOf(Array)
-    expect((result as any).matrix.rows[0].sourceNoteSummary.count).toBe(
-      (result as any).matrix.rows[0].sourceNotes.length,
-    )
-    expect((result as any).matrix.rows[0].assumptions).toBeInstanceOf(Array)
-    expect((result as any).matrix.rows[0].unsupportedEffects).toBeInstanceOf(
-      Array,
-    )
+    expect(firstRow.diagnostics).toBeInstanceOf(Array)
+    expect(firstRow.diagnosticSummary.count).toBe(firstRow.diagnostics.length)
+    expect(firstRow.sourceNotes).toBeInstanceOf(Array)
+    expect(firstRow.sourceNoteSummary.count).toBe(firstRow.sourceNotes.length)
+    expect(firstRow.caveatSummary).toEqual({
+      assumptionCount: firstRow.assumptions.length,
+      unsupportedEffectCount: firstRow.unsupportedEffects.length,
+      hasAssumptions: firstRow.assumptions.length > 0,
+      hasUnsupportedEffects: firstRow.unsupportedEffects.length > 0,
+    })
+    expect(firstRow.assumptions).toBeInstanceOf(Array)
+    expect(firstRow.unsupportedEffects).toBeInstanceOf(Array)
     const globalEffect = (result as any).matrix.effectSummary.find(
       (item: any) =>
         item.sourceName === "防暴者Ⅵ型" &&
@@ -170,16 +171,17 @@ describe("resolveBuildSkillMatrix tool", () => {
     expect((result as any).matrix.sourceNoteSummary.count).toBe(
       (result as any).matrix.rows.flatMap((row: any) => row.sourceNotes).length,
     )
-    expect((result as any).matrix.rows[0].diagnosticSummary.count).toBe(
-      (result as any).matrix.rows[0].diagnostics.length,
-    )
-    expect((result as any).matrix.rows[0].sourceNoteSummary.count).toBe(
-      (result as any).matrix.rows[0].sourceNotes.length,
-    )
-    expect((result as any).matrix.rows[0].build).toBeTruthy()
-    expect((result as any).matrix.rows[0].summary).toEqual(
-      (result as any).matrix.rows[0].build.summary,
-    )
+    const firstRow = (result as any).matrix.rows[0]
+    expect(firstRow.diagnosticSummary.count).toBe(firstRow.diagnostics.length)
+    expect(firstRow.sourceNoteSummary.count).toBe(firstRow.sourceNotes.length)
+    expect(firstRow.caveatSummary).toEqual({
+      assumptionCount: firstRow.assumptions.length,
+      unsupportedEffectCount: firstRow.unsupportedEffects.length,
+      hasAssumptions: firstRow.assumptions.length > 0,
+      hasUnsupportedEffects: firstRow.unsupportedEffects.length > 0,
+    })
+    expect(firstRow.build).toBeTruthy()
+    expect(firstRow.summary).toEqual(firstRow.build.summary)
   })
 
   it("returns Ellen matrix rows through the high-level tool", async () => {
