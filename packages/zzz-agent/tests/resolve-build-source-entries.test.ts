@@ -19,6 +19,25 @@ describe("resolveBuildSourceEntries tool", () => {
       supportedCount: 1,
       unsupportedCount: 0,
       isUtilityOnly: true,
+      diagnosticSummary: {
+        count: 0,
+        hasDiagnostics: false,
+        hasDefaultedInput: false,
+        hasCoverageGap: false,
+        hasUnsupportedEffect: false,
+        hasFallback: false,
+        kindGroups: [],
+        ownerGroups: [],
+      },
+      sourceNoteSummary: {
+        count: 0,
+        hasSourceNotes: false,
+        hasMissingInput: false,
+        hasProcessOnly: false,
+        hasResearchOnly: false,
+        statusGroups: [],
+        ownerGroups: [],
+      },
       groups: [
         {
           key: "source-utility-view",
@@ -78,6 +97,28 @@ describe("resolveBuildSourceEntries tool", () => {
       supportedCount: 2,
       unsupportedCount: 0,
       isUtilityOnly: false,
+      diagnosticSummary: {
+        count: 2,
+        hasDiagnostics: true,
+        hasDefaultedInput: true,
+        hasCoverageGap: false,
+        hasUnsupportedEffect: false,
+        hasFallback: false,
+        kindGroups: [{ key: "defaulted-input", label: "默认输入", count: 2 }],
+        ownerGroups: [
+          { key: "loadout", count: 1 },
+          { key: "scenario", count: 1 },
+        ],
+      },
+      sourceNoteSummary: {
+        count: 2,
+        hasSourceNotes: true,
+        hasMissingInput: false,
+        hasProcessOnly: false,
+        hasResearchOnly: false,
+        statusGroups: [{ key: "resolved", label: "已展开", count: 2 }],
+        ownerGroups: [{ key: "dynamicSnapshot", count: 2 }],
+      },
       groups: [
         {
           key: "source-damage-view",
@@ -141,6 +182,31 @@ describe("resolveBuildSourceEntries tool", () => {
       sourceDamageViewCount: 1,
       sourceUtilityViewCount: 1,
       isUtilityOnly: false,
+      diagnosticSummary: {
+        count: 1,
+        hasDiagnostics: true,
+        hasDefaultedInput: true,
+        hasCoverageGap: false,
+        hasUnsupportedEffect: false,
+        hasFallback: false,
+        kindGroups: [{ key: "defaulted-input", label: "默认输入", count: 1 }],
+        ownerGroups: [{ key: "scenario", count: 1 }],
+      },
+      sourceNoteSummary: {
+        count: 3,
+        hasSourceNotes: true,
+        hasMissingInput: true,
+        hasProcessOnly: true,
+        hasResearchOnly: false,
+        statusGroups: [
+          { key: "missing-input", label: "缺少输入", count: 1 },
+          { key: "process-only", label: "仅流程说明", count: 2 },
+        ],
+        ownerGroups: [
+          { key: "resolvedSnapshot", count: 1 },
+          { key: "process", count: 2 },
+        ],
+      },
     })
     expect(
       (result as any).collection.entries.map((entry: any) => entry.id),
@@ -203,6 +269,18 @@ describe("resolveBuildSourceEntries tool", () => {
       sourceDamageViewCount: 0,
       sourceUtilityViewCount: 8,
       isUtilityOnly: true,
+      diagnosticSummary: {
+        count: 0,
+        hasDiagnostics: false,
+        kindGroups: [],
+        ownerGroups: [],
+      },
+      sourceNoteSummary: {
+        count: 0,
+        hasSourceNotes: false,
+        statusGroups: [],
+        ownerGroups: [],
+      },
       groups: [
         {
           key: "source-utility-view",

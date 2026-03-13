@@ -6,6 +6,10 @@ import type {
   StaticBuildSourceEntryCollectionSummary,
   StaticBuildSourceEntryGroupKey,
 } from "./types.js"
+import {
+  summarizeDiagnosticEntries,
+  summarizeSourceNoteEntries,
+} from "./resolver.js"
 import { resolveStaticBuildSourceUtilityViews } from "./utility-views.js"
 import { resolveStaticBuildSourceDamageViews } from "./views.js"
 
@@ -108,6 +112,8 @@ function summarizeSourceEntries(
   )
   const supportedCount = entries.filter((entry) => entry.supported).length
   const unsupportedCount = entries.length - supportedCount
+  const diagnostics = entries.flatMap((entry) => entry.diagnostics)
+  const sourceNotes = entries.flatMap((entry) => entry.sourceNotes)
 
   const groups: StaticBuildSourceEntryCollectionSummary["groups"] = []
   for (const key of [
@@ -138,6 +144,8 @@ function summarizeSourceEntries(
     unsupportedCount,
     isUtilityOnly:
       sourceUtilityEntries.length > 0 && sourceDamageEntries.length === 0,
+    diagnosticSummary: summarizeDiagnosticEntries(diagnostics),
+    sourceNoteSummary: summarizeSourceNoteEntries(sourceNotes),
     groups,
   }
 }

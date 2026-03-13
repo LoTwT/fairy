@@ -763,6 +763,8 @@ export interface StaticBuildSourceEntryCollectionSummary {
   supportedCount: number
   unsupportedCount: number
   isUtilityOnly: boolean
+  diagnosticSummary: StaticBuildDiagnosticSummary
+  sourceNoteSummary: StaticBuildSourceNoteSummary
   groups: StaticBuildSourceEntryGroupSummary[]
 }
 
