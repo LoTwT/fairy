@@ -267,6 +267,24 @@ views.entries[0].diagnosticSummary
 // }
 ```
 
+如果你只想知道当前 source-specific view 有多少 source notes、是否存在 `missing-input / process-only / research-only`，以及主要来自哪些 owner，也不要再手工遍历 `sourceNotes[]`，直接使用：
+
+```ts
+views.entries[0].sourceNoteSummary
+// {
+//   count: 2,
+//   hasSourceNotes: true,
+//   hasMissingInput: false,
+//   hasProcessOnly: false,
+//   hasResearchOnly: false,
+//   statusGroups: [{ key: "resolved", label: "已展开", count: 2 }],
+//   ownerGroups: [
+//     { key: "finalPanel", count: 1 },
+//     { key: "stateSnapshot", count: 1 },
+//   ],
+// }
+```
+
 同一份 source-specific view contract 也已在 `zzz-agent` 中通过 `resolve-build-source-damage-views` 高层 tool 暴露，适合直接给 Agent 查询独立额外结算条目。
 
 如果你需要把主 anomaly / disorder 结算和独立额外结算并列查看，可使用：
@@ -385,6 +403,24 @@ matrix.rows[1].diagnosticSummary
 //   ownerGroups: [
 //     { key: "loadout", count: 1 },
 //     { key: "scenario", count: 1 },
+//   ],
+// }
+```
+
+如果你只想知道某一行 trigger row 的 source-note 概况，也直接读取：
+
+```ts
+matrix.rows[1].sourceNoteSummary
+// {
+//   count: 2,
+//   hasSourceNotes: true,
+//   hasMissingInput: false,
+//   hasProcessOnly: false,
+//   hasResearchOnly: false,
+//   statusGroups: [{ key: "resolved", label: "已展开", count: 2 }],
+//   ownerGroups: [
+//     { key: "finalPanel", count: 1 },
+//     { key: "stateSnapshot", count: 1 },
 //   ],
 // }
 ```

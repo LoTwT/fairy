@@ -2156,9 +2156,9 @@ Batch B（已完成）：
 ### 47.3 当前状态
 
 - `V42.1` 已完成：冻结到 source-note-summary contract
-- `V42.2` 未开始
-- `V42.3` 未开始
-- `V42.4` 未开始
+- `V42.2` 已完成：source-damage-view entry 已新增稳定 `sourceNoteSummary`
+- `V42.3` 已完成：trigger row 与 compact helper 已对齐 `sourceNoteSummary`
+- `V42.4` 已完成：README / architecture / roadmap 已同步收口
 
 ### 47.4 当前边界
 
