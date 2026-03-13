@@ -500,6 +500,19 @@ matrix.summary
 //   variableFormulaMultipliers: ["baseDamage"],
 // }
 
+matrix.effectSummary[0]
+// {
+//   effectId: "zhu-yuan-core-suppression",
+//   sourceName: "朱鸢",
+//   label: "核心被动：压制模式强化霰弹增伤",
+//   bucket: "增伤",
+//   value: "+40%",
+//   appliedRowCount: 21,
+//   totalRowCount: 21,
+//   appliesToAllRows: true,
+//   condition: "当前矩阵全部生效",
+// }
+
 matrix.rows[0]
 // {
 //   label: "普通攻击·一段",
@@ -529,7 +542,7 @@ matrix.rows[0]
 // }
 ```
 
-如果你要生成矩阵顶部“乘区汇总”，不要再自己遍历 `rows` 统计 `commonBuckets / commonFormulaMultipliers`，直接使用 `matrix.summary`。
+如果你要生成矩阵顶部“乘区汇总”，不要再自己遍历 `rows` 统计 `commonBuckets / commonFormulaMultipliers`，直接使用 `matrix.summary`。如果你要生成“增益清单”，也不要再自己遍历 `row.build.trace`，直接使用 `matrix.effectSummary`。
 
 常见消费方式是把矩阵映射成展示表：
 

@@ -1687,9 +1687,9 @@ Batch B（已完成）：
 ### 36.3 当前状态
 
 - `V31.1` 已完成：冻结到 core skill matrix effect-summary contract
-- `V31.2` 待实现：`ResolveStaticBuildSkillMatrixResult` 新增稳定 `effectSummary`
-- `V31.3` 待实现：高层 tool 对齐底层 `matrix.effectSummary`
-- `V31.4` 待实现：README / 总规格 / 索引 / 架构入口同步收口
+- `V31.2` 已完成：`ResolveStaticBuildSkillMatrixResult` 已新增稳定 `effectSummary`
+- `V31.3` 已完成：高层 tool 已对齐底层 `matrix.effectSummary`
+- `V31.4` 已完成：README / 总规格 / 索引 / 架构入口已同步收口
 
 ### 36.4 当前边界
 
