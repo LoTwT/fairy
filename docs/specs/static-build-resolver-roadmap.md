@@ -1622,3 +1622,45 @@ Batch B（已完成）：
 2. 不调整主伤害公式
 3. 不新增新的 snapshot key
 4. 不处理 skill matrix summary，下沉到下一阶段处理
+
+## 35. V30 core skill matrix summary
+
+### 35.1 目标
+
+`V29` 完成后，当前还停留在高层 tool 临时 summary 逻辑里的主结果只剩：
+
+- `resolveStaticBuildSkillMatrix()`
+
+`V30` 只解决一件事：
+
+1. 为 `ResolveStaticBuildSkillMatrixResult` 增加稳定 `summary`
+
+### 35.2 范围
+
+1. `V30.1` scope freeze
+2. `V30.2` matrix summary contract
+3. `V30.3` high-level tool alignment
+4. `V30.4` docs closeout
+
+### 35.3 当前状态
+
+- `V30.1` 已完成：冻结到 core skill matrix summary contract
+- `V30.2` 待实现：`ResolveStaticBuildSkillMatrixResult.summary`
+- `V30.3` 待实现：高层 tool 对齐底层 `matrix.summary`
+- `V30.4` 待实现：README / 总规格 / 索引 / 架构入口同步收口
+
+### 35.4 当前边界
+
+本阶段只做：
+
+1. 为 `ResolveStaticBuildSkillMatrixResult` 增加稳定 `summary`
+2. 固定矩阵 summary 中的共通 bucket / 可变 bucket 语义
+3. 固定矩阵 summary 中的共通公式乘区 / 可变公式乘区语义
+4. 让高层 tool 直接透传底层 `matrix.summary`
+
+显式不做：
+
+1. 不新增 skill matrix coverage
+2. 不新增 effect summary contract
+3. 不调整 row metadata
+4. 不新增新的 snapshot key

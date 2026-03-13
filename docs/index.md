@@ -14,7 +14,7 @@
 
 - [伤害计算算法](./specs/damage-calculation.md) — 四种伤害类型（常规/贯穿/异常/紊乱）的完整乘区公式、TypeScript 类型签名与参考数值
 - [静态构筑解析系统](./specs/static-build-resolver.md) — 静态效果系统、输入输出 contract、热插拔乘区管线与模块设计
-- [静态构筑解析系统路线图](./specs/static-build-resolver-roadmap.md) — 当前执行状态：已推进到 V29；当前 contract 已覆盖 source views、trigger matrix、utility views、unified source-entry collection 与 main resolver summary，`V29` 已完成单场景 summary 收口
+- [静态构筑解析系统路线图](./specs/static-build-resolver-roadmap.md) — 当前执行状态：已推进到 V30；当前 contract 已覆盖 source views、trigger matrix、utility views、unified source-entry collection 与 main resolver summary，`V30` 正在收口 core skill matrix summary
 - [异常 / 紊乱 Skill Matrix 立项评估](./specs/anomaly-disorder-skill-matrix-evaluation.md) — 结论：在更强的 dynamic value context 落地前，不进入 anomaly / disorder matrix 实现
 - [静态构筑解析系统 V1](./specs/static-build-resolver-v1.md) — 第一版冻结范围：支持对象、输入输出 contract、profile 与验收标准
 - [静态构筑解析系统 V2](./specs/static-build-resolver-v2.md) — 第二阶段实现：全部强攻 / 命破代理人、动态强攻/命破音擎、curated + 通用技能矩阵约定
@@ -45,3 +45,4 @@
 - [静态构筑解析系统 V27](./specs/static-build-resolver-v27.md) — 当前阶段：已收口；trigger-entry matrix 已新增稳定 `summary`，并固定 `main-formula / source-view` 的分组与排序语义
 - [静态构筑解析系统 V28](./specs/static-build-resolver-v28.md) — 当前阶段：已收口；source damage / utility views 已新增稳定 `summary`，并固定 standalone / delta / trigger / rate 的分组与排序语义
 - [静态构筑解析系统 V29](./specs/static-build-resolver-v29.md) — 当前阶段：已收口；`ResolveStaticBuildResult` 已新增稳定 `summary`，收口单场景结果的公式乘区摘要与 diagnostics / sourceNotes / unsupportedEffects 的统计语义
+- [静态构筑解析系统 V30](./specs/static-build-resolver-v30.md) — 当前阶段：已冻结 core skill matrix summary contract；目标是为 `ResolveStaticBuildSkillMatrixResult` 增加稳定 `summary`，把当前只存在于高层 tool 的矩阵摘要下沉到 `zzz-data`
