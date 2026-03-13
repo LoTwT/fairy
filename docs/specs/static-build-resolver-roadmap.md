@@ -15,6 +15,7 @@
 - [静态构筑解析系统 V1](./static-build-resolver-v1.md)
 - [静态构筑解析系统 V2](./static-build-resolver-v2.md)
 - [静态构筑解析系统 V25](./static-build-resolver-v25.md)
+- [静态构筑解析系统 V26](./static-build-resolver-v26.md)
 
 为准。
 
@@ -1445,3 +1446,43 @@ Batch B（已完成）：
 2. 不做 utility trigger matrix
 3. 不做 `支援` 代理人的主伤害 resolver
 4. 不做时间轴累计、覆盖率、循环收益模拟
+
+## 31. V26 unified source-entry collection summary
+
+### 31.1 目标
+
+在 `V23` 完成 unified source-entry collection、`V25` 完成第二批 utility / resource view 之后，当前真正缺的不是新的 entry，而是更稳定的 collection-level 消费 contract。
+
+`V26` 只解决一件事：
+
+1. 为 `resolveStaticBuildSourceEntries()` 增加稳定 summary
+2. 固定 utility-only / mixed collection 的排序与分组语义
+
+### 31.2 范围
+
+1. `V26.1` scope freeze
+2. `V26.2` collection summary contract
+3. `V26.3` high-level tool alignment
+4. `V26.4` docs closeout
+
+### 31.3 当前状态
+
+- `V26.1` 已完成：冻结到 unified source-entry collection summary
+- `V26.2` 未开始
+- `V26.3` 未开始
+- `V26.4` 未开始
+
+### 31.4 当前边界
+
+本阶段只做：
+
+1. 为 `ResolveStaticBuildSourceEntriesResult` 增加 collection-level summary
+2. 固定 `entries[]` 排序语义
+3. 为上层提供稳定 group summary
+
+显式不做：
+
+1. 不新增新的 source damage view
+2. 不新增新的 source utility view
+3. 不把 trigger-entry matrix 并进 source-entry collection
+4. 不新增新的 snapshot key
