@@ -39,3 +39,4 @@
 - [静态构筑解析系统 V21](./specs/static-build-resolver-v21.md) — 当前实现：已完成 anomaly / disorder trigger-entry matrix，第一批覆盖爱丽丝 / 雅 / 柏妮思 / 爱芮
 - [静态构筑解析系统 V22](./specs/static-build-resolver-v22.md) — 当前实现：已为 source damage view / utility view 增加稳定 metadata
 - [静态构筑解析系统 V23](./specs/static-build-resolver-v23.md) — 当前实现：已完成统一 source-entry collection，支持 utility-only 与 anomaly / disorder mixed collection
+- [静态构筑解析系统 V24](./specs/static-build-resolver-v24.md) — 当前阶段：第二批可推导 source view 覆盖，第一批目标为薇薇安 `[异放]`

@@ -1360,3 +1360,41 @@ Batch B（已完成）：
 1. 不把主公式结算并进 source-entry collection
 2. 不把 trigger-entry matrix 并进 source-entry collection
 3. 不新增新的 damage / utility 公式
+
+## 29. V24 formula-derived second-batch source views
+
+### 29.1 目标
+
+扩第二批 anomaly / disorder source view coverage，但只处理“可由现有 contract 直接推导”的来源。
+
+第一批锁定：
+
+1. `薇薇安 [异放]`
+
+### 29.2 范围
+
+1. `V24.1` scope freeze
+2. `V24.2` vivian exflow contract
+3. `V24.3` trigger/source-entry integration
+4. `V24.4` docs closeout
+
+### 29.3 当前状态
+
+- `V24.1` 已完成：冻结到公式可推导的第二批 source view
+- `V24.2` 未开始
+- `V24.3` 未开始
+- `V24.4` 未开始
+
+### 29.4 当前边界
+
+本阶段只做：
+
+1. 仅扩 `薇薇安 [异放]`
+2. 只使用现有 `loadout / finalPanel / scenario` 输入
+3. 如果 `M2` 对 `[异放]` 的收益提升可稳定折算，则并入同一 source view
+
+显式不做：
+
+1. 不展开 `薇薇安的预言`
+2. 不新增新的 snapshot key
+3. 不把第二批 source view 并回主公式

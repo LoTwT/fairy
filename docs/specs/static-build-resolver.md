@@ -772,3 +772,4 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 21. `V21` anomaly / disorder trigger-entry matrix：已落地独立触发条目矩阵，不继续伪装成技能矩阵；当前通过 `resolveStaticBuildTriggerMatrix()` 为 `爱丽丝 / 雅 / 柏妮思 / 爱芮` 暴露并列的主结算 + 额外结算条目，见 [静态构筑解析系统 V21](./static-build-resolver-v21.md)
 22. `V22` structured source-entry metadata：已为 source damage view / utility view 补齐稳定 metadata，对齐 `canonicalLabel / stableKey / entryKind` 风格；`zzz-agent` 已优先消费 `entry.metadata`，见 [静态构筑解析系统 V22](./static-build-resolver-v22.md)
 23. `V23` unified source-entry collection：已完成统一 source-entry collection，当前已通过 `resolveStaticBuildSourceEntries()` 一次性聚合 source damage views 与 source utility views，`zzz-agent` 也已暴露 `resolve-build-source-entries` 高层入口，见 [静态构筑解析系统 V23](./static-build-resolver-v23.md)
+24. `V24` formula-derived second-batch source views：当前冻结到“第二批可由现有 contract 直接推导的 source view 覆盖”，第一批目标是 `薇薇安 [异放]`，见 [静态构筑解析系统 V24](./static-build-resolver-v24.md)

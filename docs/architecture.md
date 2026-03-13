@@ -209,6 +209,7 @@ packages/zzz-agent/
 - [`static-build-resolver-v21.md`](../docs/specs/static-build-resolver-v21.md) — 当前实现：已完成 anomaly / disorder trigger-entry matrix；第一批覆盖爱丽丝 / 雅 / 柏妮思 / 爱芮
 - [`static-build-resolver-v22.md`](../docs/specs/static-build-resolver-v22.md) — 当前实现：source damage view / source utility view 已增加稳定 metadata；对齐 `canonicalLabel / stableKey / entryKind`
 - [`static-build-resolver-v23.md`](../docs/specs/static-build-resolver-v23.md) — 当前实现：统一 source-entry collection 已完成；支持 utility-only 与 anomaly / disorder mixed collection
+- [`static-build-resolver-v24.md`](../docs/specs/static-build-resolver-v24.md) — 当前阶段：第二批可推导 source view 覆盖；第一批目标为 `薇薇安 [异放]`
 
 ## 计算器模块（src/calculator/）
 
