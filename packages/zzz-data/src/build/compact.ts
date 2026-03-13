@@ -98,6 +98,7 @@ export interface StaticBuildCompactSourceDamageViewEntry {
   sourceNoteSummary: StaticBuildSourceDamageViewEntry["sourceNoteSummary"]
   assumptions: string[]
   damage?: NonNullable<StaticBuildSourceDamageViewEntry["damage"]>
+  summary?: StaticBuildSourceDamageViewEntry["summary"]
   build?: ResolveStaticBuildResult
 }
 
@@ -307,6 +308,7 @@ export function compactStaticBuildSourceEntry(
       sourceNoteSummary: entry.sourceNoteSummary,
       assumptions: entry.assumptions,
       damage: entry.damage,
+      summary: entry.summary,
       ...(includeDetails && entry.build ? { build: entry.build } : {}),
     }
   }

@@ -627,6 +627,7 @@ export interface StaticBuildSourceDamageViewEntry {
     crit: number
     noCrit: number
   }
+  summary?: StaticBuildResolveSummary
   build?: ResolveStaticBuildResult
 }
 

@@ -447,6 +447,7 @@ function resolveAlicePolarityAssaultView(
   const build = resolveStaticBuildDamage(input)
   entry.build = build
   entry.damage = toEntryDamage(build)
+  entry.summary = build.summary
   entry.diagnostics = build.diagnostics
   entry.diagnosticSummary = summarizeDiagnosticEntries(build.diagnostics)
   entry.assumptions.push(
@@ -496,6 +497,7 @@ function resolveMiyabiFrostburnBreakView(
   )
   entry.build = build
   entry.damage = toEntryDamage(build)
+  entry.summary = build.summary
   entry.diagnostics = build.diagnostics
   entry.diagnosticSummary = summarizeDiagnosticEntries(build.diagnostics)
   entry.assumptions.push(
@@ -558,6 +560,7 @@ function resolveBurniceEmberView(
     noCrit:
       withSnapshot.damage.noCrit.total - withoutSnapshot.damage.noCrit.total,
   }
+  entry.summary = withSnapshot.summary
   entry.assumptions.push(
     "当前 view 使用“含 [余烬] 快照结果 - 去除 [余烬] 快照结果”的差值，表达额外结算的静态贡献。",
   )
@@ -637,6 +640,7 @@ function resolveAriaExflowView(
     noCrit:
       withSnapshot.damage.noCrit.total - withoutSnapshot.damage.noCrit.total,
   }
+  entry.summary = withSnapshot.summary
   entry.assumptions.push(
     "当前 view 使用“含 [异放] 快照结果 - 去除 [异放] 快照结果”的差值，表达额外结算的静态贡献。",
   )
@@ -694,6 +698,7 @@ function resolveVivianExflowView(
     noCrit:
       withSnapshot.damage.noCrit.total - withoutSnapshot.damage.noCrit.total,
   }
+  entry.summary = withSnapshot.summary
   entry.assumptions.push(
     "当前 view 使用“按 coreSkillLevel 与异常精通推导 [异放] 比例后的结果 - 原主结算结果”的差值，表达额外结算的静态贡献。",
   )

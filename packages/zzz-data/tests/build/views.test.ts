@@ -222,6 +222,10 @@ describe("static build source damage views", () => {
       result.entries[0]?.build?.resolvedBuckets.skillMultiplierFactor,
     ).toBeCloseTo(2.5, 4)
     expect(result.entries[0]?.damage?.expected).toBeGreaterThan(0)
+    expect(result.entries[0]?.summary?.expectedTotal).toBeCloseTo(
+      result.entries[0]?.damage?.expected ?? 0,
+      6,
+    )
   })
 
   it("resolves Miyabi frostburn break as a standalone source-specific view", () => {

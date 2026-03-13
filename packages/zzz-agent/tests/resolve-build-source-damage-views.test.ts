@@ -163,6 +163,10 @@ describe("resolveBuildSourceDamageViews tool", () => {
       ),
     ).toBe(true)
     expect((result as any).views.entries[0].damage.expected).toBeGreaterThan(0)
+    expect((result as any).views.entries[0].summary.expectedTotal).toBeCloseTo(
+      (result as any).views.entries[0].damage.expected,
+      6,
+    )
     expect((result as any).views.entries[0].build).toBeUndefined()
   })
 
