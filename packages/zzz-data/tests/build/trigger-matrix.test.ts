@@ -83,6 +83,13 @@ describe("static build trigger matrix", () => {
         templateSource: "main-formula",
         damageType: "anomaly",
       },
+      requirementSummary: {
+        count: 0,
+        satisfiedCount: 0,
+        unsatisfiedCount: 0,
+        hasUnsatisfied: false,
+        groups: [],
+      },
     })
     expect(result.rows[1]).toMatchObject({
       id: "source-view:alice-polarity-assault",
@@ -97,6 +104,26 @@ describe("static build trigger matrix", () => {
         sourceStableKey: "source-view:alice-polarity-assault",
         sourceViewId: "alice-polarity-assault",
         sourceViewResolutionMode: "standalone",
+      },
+      requirementSummary: {
+        count: 2,
+        satisfiedCount: 2,
+        unsatisfiedCount: 0,
+        hasUnsatisfied: false,
+        groups: [
+          {
+            key: "state-flag",
+            count: 1,
+            satisfiedCount: 1,
+            unsatisfiedCount: 0,
+          },
+          {
+            key: "state-value",
+            count: 1,
+            satisfiedCount: 1,
+            unsatisfiedCount: 0,
+          },
+        ],
       },
     })
     expect(result.rows[1]?.damage?.expected).toBeGreaterThan(0)
@@ -217,6 +244,26 @@ describe("static build trigger matrix", () => {
         sourceStableKey: "source-view:vivian-exflow",
         sourceViewId: "vivian-exflow",
         sourceViewResolutionMode: "delta",
+      },
+      requirementSummary: {
+        count: 2,
+        satisfiedCount: 2,
+        unsatisfiedCount: 0,
+        hasUnsatisfied: false,
+        groups: [
+          {
+            key: "panel-value",
+            count: 1,
+            satisfiedCount: 1,
+            unsatisfiedCount: 0,
+          },
+          {
+            key: "scenario-value",
+            count: 1,
+            satisfiedCount: 1,
+            unsatisfiedCount: 0,
+          },
+        ],
       },
     })
     expect(result.rows[1]?.requirements.map((item) => item.kind)).toEqual(

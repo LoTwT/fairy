@@ -547,6 +547,26 @@ export interface StaticBuildSourceDamageViewRequirement {
   satisfied: boolean
 }
 
+export interface StaticBuildRequirementSummaryGroup<
+  TKey extends string = string,
+> {
+  key: TKey
+  count: number
+  satisfiedCount: number
+  unsatisfiedCount: number
+}
+
+export interface StaticBuildRequirementSummary<TKey extends string = string> {
+  count: number
+  satisfiedCount: number
+  unsatisfiedCount: number
+  hasUnsatisfied: boolean
+  groups: StaticBuildRequirementSummaryGroup<TKey>[]
+}
+
+export type StaticBuildSourceDamageViewRequirementSummary =
+  StaticBuildRequirementSummary<StaticBuildSourceDamageViewRequirementKind>
+
 export interface StaticBuildSourceDamageViewMeta {
   canonicalLabel: string
   stableKey: string
@@ -565,6 +585,7 @@ export interface StaticBuildSourceDamageViewEntry {
   supported: boolean
   resolutionMode: "standalone" | "delta"
   requirements: StaticBuildSourceDamageViewRequirement[]
+  requirementSummary: StaticBuildSourceDamageViewRequirementSummary
   diagnostics: StaticBuildDiagnosticEntry[]
   sourceNotes: StaticBuildSourceNoteEntry[]
   assumptions: string[]
@@ -760,6 +781,7 @@ export interface StaticBuildTriggerMatrixRow {
   supported: boolean
   metadata: StaticBuildTriggerMatrixRowMeta
   requirements: StaticBuildSourceDamageViewRequirement[]
+  requirementSummary: StaticBuildSourceDamageViewRequirementSummary
   diagnostics: StaticBuildDiagnosticEntry[]
   sourceNotes: StaticBuildSourceNoteEntry[]
   assumptions: string[]

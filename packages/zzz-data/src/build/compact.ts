@@ -56,6 +56,7 @@ export interface StaticBuildCompactTriggerMatrixRow {
   supported: boolean
   metadata: StaticBuildTriggerMatrixRowMeta
   requirements: StaticBuildTriggerMatrixRow["requirements"]
+  requirementSummary: StaticBuildTriggerMatrixRow["requirementSummary"]
   diagnostics: StaticBuildDiagnosticEntry[]
   sourceNotes: StaticBuildSourceNoteEntry[]
   assumptions: string[]
@@ -83,6 +84,7 @@ export interface StaticBuildCompactSourceDamageViewEntry {
   damageType: StaticBuildSourceDamageViewEntry["damageType"]
   resolutionMode: StaticBuildSourceDamageViewEntry["resolutionMode"]
   requirements: StaticBuildSourceDamageViewEntry["requirements"]
+  requirementSummary: StaticBuildSourceDamageViewEntry["requirementSummary"]
   diagnostics: StaticBuildDiagnosticEntry[]
   sourceNotes: StaticBuildSourceNoteEntry[]
   assumptions: string[]
@@ -206,6 +208,7 @@ export function compactStaticBuildTriggerMatrixRow(
     supported: row.supported,
     metadata: row.metadata,
     requirements: row.requirements,
+    requirementSummary: row.requirementSummary,
     diagnostics: row.diagnostics,
     sourceNotes: row.sourceNotes,
     assumptions: row.assumptions,
@@ -279,6 +282,7 @@ export function compactStaticBuildSourceEntry(
       damageType: entry.damageType,
       resolutionMode: entry.resolutionMode,
       requirements: entry.requirements,
+      requirementSummary: entry.requirementSummary,
       diagnostics: entry.diagnostics,
       sourceNotes: entry.sourceNotes,
       assumptions: entry.assumptions,

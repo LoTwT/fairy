@@ -116,6 +116,26 @@ describe("static build source damage views", () => {
         damageType: "anomaly",
         resolutionMode: "standalone",
       },
+      requirementSummary: {
+        count: 2,
+        satisfiedCount: 2,
+        unsatisfiedCount: 0,
+        hasUnsatisfied: false,
+        groups: [
+          {
+            key: "state-flag",
+            count: 1,
+            satisfiedCount: 1,
+            unsatisfiedCount: 0,
+          },
+          {
+            key: "state-value",
+            count: 1,
+            satisfiedCount: 1,
+            unsatisfiedCount: 0,
+          },
+        ],
+      },
     })
     expect(
       result.entries[0]?.build?.resolvedBuckets.skillMultiplierFactor,
@@ -246,6 +266,32 @@ describe("static build source damage views", () => {
         entryKind: "source-damage-view",
         damageType: "anomaly",
         resolutionMode: "delta",
+      },
+      requirementSummary: {
+        count: 3,
+        satisfiedCount: 3,
+        unsatisfiedCount: 0,
+        hasUnsatisfied: false,
+        groups: [
+          {
+            key: "dynamic-flag",
+            count: 1,
+            satisfiedCount: 1,
+            unsatisfiedCount: 0,
+          },
+          {
+            key: "dynamic-count",
+            count: 1,
+            satisfiedCount: 1,
+            unsatisfiedCount: 0,
+          },
+          {
+            key: "dynamic-value",
+            count: 1,
+            satisfiedCount: 1,
+            unsatisfiedCount: 0,
+          },
+        ],
       },
     })
     expect(

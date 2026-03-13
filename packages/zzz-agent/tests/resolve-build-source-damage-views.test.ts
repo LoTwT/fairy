@@ -62,6 +62,26 @@ describe("resolveBuildSourceDamageViews tool", () => {
         stableKey: "source-view:alice-polarity-assault",
         entryKind: "source-damage-view",
       },
+      requirementSummary: {
+        count: 2,
+        satisfiedCount: 2,
+        unsatisfiedCount: 0,
+        hasUnsatisfied: false,
+        groups: [
+          {
+            key: "state-flag",
+            count: 1,
+            satisfiedCount: 1,
+            unsatisfiedCount: 0,
+          },
+          {
+            key: "state-value",
+            count: 1,
+            satisfiedCount: 1,
+            unsatisfiedCount: 0,
+          },
+        ],
+      },
     })
     expect(
       (result as any).views.entries[0].sourceNotes.some(
@@ -191,6 +211,20 @@ describe("resolveBuildSourceDamageViews tool", () => {
       metadata: {
         stableKey: "source-view:aria-exflow",
         entryKind: "source-damage-view",
+      },
+      requirementSummary: {
+        count: 2,
+        satisfiedCount: 2,
+        unsatisfiedCount: 0,
+        hasUnsatisfied: false,
+        groups: [
+          {
+            key: "dynamic-value",
+            count: 2,
+            satisfiedCount: 2,
+            unsatisfiedCount: 0,
+          },
+        ],
       },
     })
     expect(

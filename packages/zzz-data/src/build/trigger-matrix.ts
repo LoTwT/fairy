@@ -10,6 +10,7 @@ import { resolveStaticBuildDamage } from "./resolver.js"
 import {
   hasStaticBuildSourceViewCoverage,
   resolveStaticBuildSourceDamageViews,
+  summarizeSourceDamageViewRequirements,
   supportedStaticBuildSourceViewAgents,
 } from "./views.js"
 
@@ -58,6 +59,7 @@ export function resolveStaticBuildTriggerMatrix(
         damageType: input.scenario.damageType,
       },
       requirements: [],
+      requirementSummary: summarizeSourceDamageViewRequirements([]),
       diagnostics: build.diagnostics,
       sourceNotes: build.sourceNotes,
       assumptions: build.assumptions,
@@ -102,6 +104,7 @@ function toTriggerMatrixRow(
       sourceViewResolutionMode: entry.resolutionMode,
     },
     requirements: entry.requirements,
+    requirementSummary: entry.requirementSummary,
     diagnostics: entry.diagnostics,
     sourceNotes: entry.sourceNotes,
     assumptions: entry.assumptions,

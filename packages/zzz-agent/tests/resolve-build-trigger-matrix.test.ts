@@ -67,6 +67,13 @@ describe("resolveBuildTriggerMatrix tool", () => {
     expect((result as any).matrix.rows[0].metadata.templateSource).toBe(
       "main-formula",
     )
+    expect((result as any).matrix.rows[0].requirementSummary).toEqual({
+      count: 0,
+      satisfiedCount: 0,
+      unsatisfiedCount: 0,
+      hasUnsatisfied: false,
+      groups: [],
+    })
     expect((result as any).matrix.rows[1]).toMatchObject({
       supported: true,
       metadata: {
@@ -76,6 +83,26 @@ describe("resolveBuildTriggerMatrix tool", () => {
         sourceId: "1401",
         sourceStableKey: "source-view:alice-polarity-assault",
         sourceViewId: "alice-polarity-assault",
+      },
+      requirementSummary: {
+        count: 2,
+        satisfiedCount: 2,
+        unsatisfiedCount: 0,
+        hasUnsatisfied: false,
+        groups: [
+          {
+            key: "state-flag",
+            count: 1,
+            satisfiedCount: 1,
+            unsatisfiedCount: 0,
+          },
+          {
+            key: "state-value",
+            count: 1,
+            satisfiedCount: 1,
+            unsatisfiedCount: 0,
+          },
+        ],
       },
     })
   })
@@ -182,6 +209,26 @@ describe("resolveBuildTriggerMatrix tool", () => {
         sourceId: "1331",
         sourceStableKey: "source-view:vivian-exflow",
         sourceViewId: "vivian-exflow",
+      },
+      requirementSummary: {
+        count: 2,
+        satisfiedCount: 2,
+        unsatisfiedCount: 0,
+        hasUnsatisfied: false,
+        groups: [
+          {
+            key: "panel-value",
+            count: 1,
+            satisfiedCount: 1,
+            unsatisfiedCount: 0,
+          },
+          {
+            key: "scenario-value",
+            count: 1,
+            satisfiedCount: 1,
+            unsatisfiedCount: 0,
+          },
+        ],
       },
     })
     expect(

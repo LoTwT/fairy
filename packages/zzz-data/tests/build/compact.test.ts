@@ -84,6 +84,26 @@ describe("static build compact helpers", () => {
     expect(compact.rows).toHaveLength(2)
     expect(compact.rows[0]?.build).toBeTruthy()
     expect(compact.rows[1]?.metadata.entryKind).toBe("source-view")
+    expect(compact.rows[1]?.requirementSummary).toEqual({
+      count: 2,
+      satisfiedCount: 2,
+      unsatisfiedCount: 0,
+      hasUnsatisfied: false,
+      groups: [
+        {
+          key: "state-flag",
+          count: 1,
+          satisfiedCount: 1,
+          unsatisfiedCount: 0,
+        },
+        {
+          key: "state-value",
+          count: 1,
+          satisfiedCount: 1,
+          unsatisfiedCount: 0,
+        },
+      ],
+    })
   })
 
   it("compacts source-entry collections for mixed damage and utility entries", () => {
@@ -132,6 +152,23 @@ describe("static build compact helpers", () => {
       (entry) => entry.metadata.entryKind === "source-damage-view",
     )
     expect(damageEntry?.damage).toBeTruthy()
+    expect(
+      (damageEntry as { requirementSummary?: unknown } | undefined)
+        ?.requirementSummary,
+    ).toEqual({
+      count: 2,
+      satisfiedCount: 2,
+      unsatisfiedCount: 0,
+      hasUnsatisfied: false,
+      groups: [
+        {
+          key: "dynamic-value",
+          count: 2,
+          satisfiedCount: 2,
+          unsatisfiedCount: 0,
+        },
+      ],
+    })
     expect("build" in (damageEntry ?? {})).toBe(false)
   })
 
@@ -173,6 +210,26 @@ describe("static build compact helpers", () => {
 
     expect(compact.entries).toHaveLength(1)
     expect(compact.entries[0]?.damage?.expected).toBeGreaterThan(0)
+    expect(compact.entries[0]?.requirementSummary).toEqual({
+      count: 2,
+      satisfiedCount: 2,
+      unsatisfiedCount: 0,
+      hasUnsatisfied: false,
+      groups: [
+        {
+          key: "state-flag",
+          count: 1,
+          satisfiedCount: 1,
+          unsatisfiedCount: 0,
+        },
+        {
+          key: "state-value",
+          count: 1,
+          satisfiedCount: 1,
+          unsatisfiedCount: 0,
+        },
+      ],
+    })
     expect("build" in (compact.entries[0] ?? {})).toBe(false)
   })
 

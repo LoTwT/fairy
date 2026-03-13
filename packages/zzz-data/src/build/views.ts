@@ -9,6 +9,8 @@ import type {
   StaticBuildSourceDamageViewEntry,
   StaticBuildSourceDamageViewGroupKey,
   StaticBuildSourceDamageViewRequirement,
+  StaticBuildSourceDamageViewRequirementKind,
+  StaticBuildSourceDamageViewRequirementSummary,
   StaticBuildSourceDamageViewSummary,
 } from "./types.js"
 import { toBaseResistanceAttribute } from "../terms.js"
@@ -43,6 +45,19 @@ const sourceDamageViewGroupLabels: Record<
   standalone: "独立结算条目",
   delta: "增量结算条目",
 }
+
+const sourceDamageViewRequirementKinds = [
+  "combat-tag",
+  "panel-value",
+  "scenario-value",
+  "dynamic-flag",
+  "dynamic-count",
+  "dynamic-value",
+  "state-flag",
+  "state-value",
+  "resolved-bucket",
+  "resolved-multiplier",
+] as const satisfies StaticBuildSourceDamageViewRequirementKind[]
 
 export function hasStaticBuildSourceViewCoverage(agentId: string) {
   return sourceViewAgentIdSet.has(agentId)
@@ -146,6 +161,37 @@ function createRequirement(
   return { kind, key, satisfied }
 }
 
+export function summarizeSourceDamageViewRequirements(
+  requirements: StaticBuildSourceDamageViewRequirement[],
+): StaticBuildSourceDamageViewRequirementSummary {
+  const satisfiedCount = requirements.filter((item) => item.satisfied).length
+  const unsatisfiedCount = requirements.length - satisfiedCount
+
+  return {
+    count: requirements.length,
+    satisfiedCount,
+    unsatisfiedCount,
+    hasUnsatisfied: unsatisfiedCount > 0,
+    groups: sourceDamageViewRequirementKinds
+      .map((key) => {
+        const groupItems = requirements.filter((item) => item.kind === key)
+        if (groupItems.length === 0) return undefined
+        const groupSatisfiedCount = groupItems.filter(
+          (item) => item.satisfied,
+        ).length
+        return {
+          key,
+          count: groupItems.length,
+          satisfiedCount: groupSatisfiedCount,
+          unsatisfiedCount: groupItems.length - groupSatisfiedCount,
+        }
+      })
+      .filter(
+        (group): group is NonNullable<typeof group> => group !== undefined,
+      ),
+  }
+}
+
 function compareSourceDamageViews(
   left: StaticBuildSourceDamageViewEntry,
   right: StaticBuildSourceDamageViewEntry,
@@ -243,6 +289,7 @@ function createEntryBase(
     damageType: input.scenario.damageType,
     supported: requirements.every((item) => item.satisfied),
     requirements,
+    requirementSummary: summarizeSourceDamageViewRequirements(requirements),
     diagnostics: [],
     sourceNotes,
     assumptions: [],
