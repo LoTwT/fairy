@@ -65,7 +65,7 @@
 - `V48 skill-matrix row summaries` 已收口
 - `V49 skill-matrix row resolve summaries` 已收口
 - `V50 source-damage-view entry resolve summaries` 已收口
-- 当前活跃阶段：`V51 trigger-matrix row resolve summaries`
+- `V51 trigger-matrix row resolve summaries` 已收口
 - 当前边界：`resolveStaticBuildSkillMatrix` 仍只支持 `normal / sheer`
 
 ## 2. 阶段划分
@@ -2542,9 +2542,9 @@ Batch B（已完成）：
 ### 56.3 当前状态
 
 - `V51.1` 已完成：冻结到 trigger-matrix row resolve summary contract
-- `V51.2` 未开始
-- `V51.3` 未开始
-- `V51.4` 未开始
+- `V51.2` 已完成：`StaticBuildTriggerMatrixRow` 已新增稳定 `summary`
+- `V51.3` 已完成：compact helper 与高层 trigger-matrix tool 已透传 `row.summary`
+- `V51.4` 已完成：相关 specs、roadmap、索引、架构文档与 README 已同步
 
 ### 56.4 当前边界
 

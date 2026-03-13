@@ -72,6 +72,6 @@
 ## 6. 当前状态
 
 - `V51.1` 已完成：冻结到 trigger-matrix row resolve summary contract
-- `V51.2` 未开始
-- `V51.3` 未开始
-- `V51.4` 未开始
+- `V51.2` 已完成：`StaticBuildTriggerMatrixRow` 现在稳定暴露 `summary`
+- `V51.3` 已完成：compact helper 与高层 `resolve-build-trigger-matrix` 已透传 `row.summary`
+- `V51.4` 已完成：相关 specs、roadmap、索引、架构文档与 README 已同步
