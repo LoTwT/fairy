@@ -486,6 +486,7 @@ const utilityViews = resolveStaticBuildSourceUtilityViews({
 
 utilityViews.entries[0]
 utilityViews.entries[0].metadata.stableKey
+utilityViews.entries[0].requirementSummary
 utilityViews.summary
 // {
 //   entryCount: 1,
@@ -508,7 +509,7 @@ utilityViews.summary
 //   groups: [
 //     {
 //       key: "trigger",
-//       label: "触发型 utility 条目",
+//       label: "按次触发条目",
 //       count: 1,
 //       supportedCount: 1,
 //       unsupportedCount: 0,
@@ -518,6 +519,15 @@ utilityViews.summary
 ```
 
 如果你需要判断当前 source-specific utility views 是 trigger 还是 rate、是否存在 unsupported 条目、如何分组展示，或者当前整组 utility views 是否带有 diagnostics / source notes，不要再自己统计 `entries`，直接使用 `utilityViews.summary`。
+
+如果你需要稳定读取某条 utility entry 的触发条件 / 适用条件 / 冷却摘要，优先使用：
+
+```ts
+utilityViews.entries[0].requirements
+utilityViews.entries[0].requirementSummary
+```
+
+不要只靠 `triggerLabel / conditionLabel / cooldownSeconds` 再自行拼 requirement 逻辑。
 
 如果你只想知道某一条 utility entry 的 diagnostics 概况，也直接读取：
 

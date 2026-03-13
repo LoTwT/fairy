@@ -71,6 +71,30 @@ describe("static build source utility views", () => {
         stableKey: "source-utility:lunar-noviluna-energy-refund",
         entryKind: "source-utility-view",
       },
+      requirements: [
+        { kind: "trigger", key: "发动[强化特殊技]", satisfied: true },
+        { kind: "cooldown", key: "12s", satisfied: true },
+      ],
+      requirementSummary: {
+        count: 2,
+        satisfiedCount: 2,
+        unsatisfiedCount: 0,
+        hasUnsatisfied: false,
+        groups: [
+          {
+            key: "trigger",
+            count: 1,
+            satisfiedCount: 1,
+            unsatisfiedCount: 0,
+          },
+          {
+            key: "cooldown",
+            count: 1,
+            satisfiedCount: 1,
+            unsatisfiedCount: 0,
+          },
+        ],
+      },
       utilityType: "energy-refund",
       resolutionMode: "trigger",
       targetScope: "self",
@@ -114,6 +138,26 @@ describe("static build source utility views", () => {
       metadata: {
         stableKey: "source-utility:magnetic-storm-charlie-energy-refund",
         entryKind: "source-utility-view",
+      },
+      requirementSummary: {
+        count: 2,
+        satisfiedCount: 2,
+        unsatisfiedCount: 0,
+        hasUnsatisfied: false,
+        groups: [
+          {
+            key: "trigger",
+            count: 1,
+            satisfiedCount: 1,
+            unsatisfiedCount: 0,
+          },
+          {
+            key: "cooldown",
+            count: 1,
+            satisfiedCount: 1,
+            unsatisfiedCount: 0,
+          },
+        ],
       },
       utilityType: "energy-refund",
       resolutionMode: "trigger",
@@ -188,6 +232,21 @@ describe("static build source utility views", () => {
         entryKind: "source-utility-view",
         utilityType: "energy-regen-rate",
       },
+      requirements: [{ kind: "condition", key: "位于后场时", satisfied: true }],
+      requirementSummary: {
+        count: 1,
+        satisfiedCount: 1,
+        unsatisfiedCount: 0,
+        hasUnsatisfied: false,
+        groups: [
+          {
+            key: "condition",
+            count: 1,
+            satisfiedCount: 1,
+            unsatisfiedCount: 0,
+          },
+        ],
+      },
       utilityType: "energy-regen-rate",
       resolutionMode: "rate",
       targetScope: "self",
@@ -260,6 +319,12 @@ describe("static build source utility views", () => {
     })
 
     expect(result.entries).toHaveLength(8)
+    expect(result.entries[0]?.requirementSummary).toMatchObject({
+      count: 2,
+      satisfiedCount: 2,
+      unsatisfiedCount: 0,
+      hasUnsatisfied: false,
+    })
     expect(result.entries).toEqual(
       expect.arrayContaining([
         expect.objectContaining({

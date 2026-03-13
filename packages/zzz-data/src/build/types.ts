@@ -670,6 +670,21 @@ export type StaticBuildSourceUtilityViewResolutionMode = "trigger" | "rate"
 
 export type StaticBuildSourceUtilityViewTargetScope = "self" | "ally" | "team"
 
+export type StaticBuildSourceUtilityViewRequirementKind =
+  | "trigger"
+  | "condition"
+  | "cooldown"
+  | "panel-value"
+
+export interface StaticBuildSourceUtilityViewRequirement {
+  kind: StaticBuildSourceUtilityViewRequirementKind
+  key: string
+  satisfied: boolean
+}
+
+export type StaticBuildSourceUtilityViewRequirementSummary =
+  StaticBuildRequirementSummary<StaticBuildSourceUtilityViewRequirementKind>
+
 export interface ResolveStaticBuildSourceUtilityViewsInput {
   loadout: StaticBuildLoadoutInput
   panel?: Pick<
@@ -698,6 +713,8 @@ export interface StaticBuildSourceUtilityViewEntry {
   utilityType: StaticBuildSourceUtilityViewType
   resolutionMode: StaticBuildSourceUtilityViewResolutionMode
   targetScope: StaticBuildSourceUtilityViewTargetScope
+  requirements: StaticBuildSourceUtilityViewRequirement[]
+  requirementSummary: StaticBuildSourceUtilityViewRequirementSummary
   value: number
   unit: "energy" | "energy-per-second" | "decibel"
   triggerLabel?: string

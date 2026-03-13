@@ -386,6 +386,30 @@ describe("static build compact helpers", () => {
       metadata: {
         entryKind: "source-utility-view",
       },
+      requirements: [
+        { kind: "trigger", key: "发动[强化特殊技]", satisfied: true },
+        { kind: "cooldown", key: "12s", satisfied: true },
+      ],
+      requirementSummary: {
+        count: 2,
+        satisfiedCount: 2,
+        unsatisfiedCount: 0,
+        hasUnsatisfied: false,
+        groups: [
+          {
+            key: "trigger",
+            count: 1,
+            satisfiedCount: 1,
+            unsatisfiedCount: 0,
+          },
+          {
+            key: "cooldown",
+            count: 1,
+            satisfiedCount: 1,
+            unsatisfiedCount: 0,
+          },
+        ],
+      },
       value: 3,
       unit: "energy",
       diagnosticSummary: {

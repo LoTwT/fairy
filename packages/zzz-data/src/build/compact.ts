@@ -113,6 +113,8 @@ export interface StaticBuildCompactSourceUtilityViewEntry {
   utilityType: StaticBuildSourceUtilityViewEntry["utilityType"]
   resolutionMode: StaticBuildSourceUtilityViewEntry["resolutionMode"]
   targetScope: StaticBuildSourceUtilityViewEntry["targetScope"]
+  requirements: StaticBuildSourceUtilityViewEntry["requirements"]
+  requirementSummary: StaticBuildSourceUtilityViewEntry["requirementSummary"]
   value: number
   unit: StaticBuildSourceUtilityViewEntry["unit"]
   triggerLabel?: string
@@ -325,6 +327,8 @@ export function compactStaticBuildSourceEntry(
     utilityType: entry.utilityType,
     resolutionMode: entry.resolutionMode,
     targetScope: entry.targetScope,
+    requirements: entry.requirements,
+    requirementSummary: entry.requirementSummary,
     value: entry.value,
     unit: entry.unit,
     triggerLabel: entry.triggerLabel,

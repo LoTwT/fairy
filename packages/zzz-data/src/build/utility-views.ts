@@ -5,6 +5,9 @@ import type {
   StaticBuildResolvedLoadout,
   StaticBuildSourceUtilityViewEntry,
   StaticBuildSourceUtilityViewGroupKey,
+  StaticBuildSourceUtilityViewRequirement,
+  StaticBuildSourceUtilityViewRequirementKind,
+  StaticBuildSourceUtilityViewRequirementSummary,
   StaticBuildSourceUtilityViewSummary,
   StaticBuildValueContext,
 } from "./types.js"
@@ -81,6 +84,13 @@ const sourceUtilityViewGroupLabels: Record<
   rate: "按速率条目",
 }
 
+const sourceUtilityViewRequirementKinds = [
+  "trigger",
+  "condition",
+  "cooldown",
+  "panel-value",
+] as const satisfies StaticBuildSourceUtilityViewRequirementKind[]
+
 export function hasStaticBuildSourceUtilityViewCoverage(wEngineId?: string) {
   return !!wEngineId && utilityViewWEngineIdSet.has(wEngineId)
 }
@@ -132,9 +142,29 @@ function resolveLoadout(
 function createEntry(
   entry: Omit<
     StaticBuildSourceUtilityViewEntry,
-    "metadata" | "supported" | "diagnostics" | "sourceNotes"
-  >,
+    | "metadata"
+    | "supported"
+    | "requirements"
+    | "requirementSummary"
+    | "diagnostics"
+    | "sourceNotes"
+  > & {
+    requirements?: StaticBuildSourceUtilityViewRequirement[]
+  },
 ): StaticBuildSourceUtilityViewEntry {
+  const requirements = [
+    ...(entry.requirements ?? []),
+    ...(entry.triggerLabel
+      ? [createRequirement("trigger", entry.triggerLabel, true)]
+      : []),
+    ...(entry.conditionLabel
+      ? [createRequirement("condition", entry.conditionLabel, true)]
+      : []),
+    ...(typeof entry.cooldownSeconds === "number"
+      ? [createRequirement("cooldown", `${entry.cooldownSeconds}s`, true)]
+      : []),
+  ]
+
   return {
     ...entry,
     metadata: {
@@ -147,10 +177,51 @@ function createEntry(
       unit: entry.unit,
     },
     supported: true,
+    requirements,
+    requirementSummary: summarizeSourceUtilityViewRequirements(requirements),
     diagnostics: [],
     diagnosticSummary: summarizeDiagnosticEntries([]),
     sourceNotes: [],
     sourceNoteSummary: summarizeSourceNoteEntries([]),
+  }
+}
+
+function createRequirement(
+  kind: StaticBuildSourceUtilityViewRequirement["kind"],
+  key: string,
+  satisfied: boolean,
+): StaticBuildSourceUtilityViewRequirement {
+  return { kind, key, satisfied }
+}
+
+export function summarizeSourceUtilityViewRequirements(
+  requirements: StaticBuildSourceUtilityViewRequirement[],
+): StaticBuildSourceUtilityViewRequirementSummary {
+  const satisfiedCount = requirements.filter((item) => item.satisfied).length
+  const unsatisfiedCount = requirements.length - satisfiedCount
+
+  return {
+    count: requirements.length,
+    satisfiedCount,
+    unsatisfiedCount,
+    hasUnsatisfied: unsatisfiedCount > 0,
+    groups: sourceUtilityViewRequirementKinds
+      .map((key) => {
+        const groupItems = requirements.filter((item) => item.kind === key)
+        if (groupItems.length === 0) return undefined
+        const groupSatisfiedCount = groupItems.filter(
+          (item) => item.satisfied,
+        ).length
+        return {
+          key,
+          count: groupItems.length,
+          satisfiedCount: groupSatisfiedCount,
+          unsatisfiedCount: groupItems.length - groupSatisfiedCount,
+        }
+      })
+      .filter(
+        (group): group is NonNullable<typeof group> => group !== undefined,
+      ),
   }
 }
 

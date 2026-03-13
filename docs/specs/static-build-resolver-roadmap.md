@@ -66,6 +66,7 @@
 - `V49 skill-matrix row resolve summaries` 已收口
 - `V50 source-damage-view entry resolve summaries` 已收口
 - `V51 trigger-matrix row resolve summaries` 已收口
+- `V52 source-utility-view entry requirement summaries` 已收口
 - 当前边界：`resolveStaticBuildSkillMatrix` 仍只支持 `normal / sheer`
 
 ## 2. 阶段划分
@@ -2559,3 +2560,50 @@ Batch B（已完成）：
 1. 不改变 `ResolveStaticBuildResult.summary`
 2. 不修改 `includeDetails` 语义
 3. 不新增新的 trigger-row metadata
+
+## 57. V52 source-utility-view entry requirement summaries
+
+### 57.1 目标
+
+`V51` 收口后，trigger-matrix row 已具备稳定 `summary`。
+
+但 `StaticBuildSourceUtilityViewEntry` 当前仍主要依赖：
+
+1. `triggerLabel`
+2. `conditionLabel`
+3. `cooldownSeconds`
+
+表达触发条件 / 适用条件 / 冷却。
+
+`V52` 只解决一件事：
+
+1. 为 source-utility-view entry 增加稳定 `requirements / requirementSummary`
+
+### 57.2 范围
+
+1. `V52.1` scope freeze
+2. `V52.2` utility requirement contract
+3. `V52.3` compact / high-level alignment
+4. `V52.4` docs closeout
+
+### 57.3 当前状态
+
+- `V52.1` 已完成：冻结到 source-utility-view entry requirement contract
+- `V52.2` 已完成：`StaticBuildSourceUtilityViewEntry` 已新增稳定 `requirements / requirementSummary`
+- `V52.3` 已完成：compact helper 与高层 `resolve-build-source-utility-views` 已透传该字段
+- `V52.4` 已完成：相关 specs、roadmap、索引、架构文档与 README 已同步
+
+### 57.4 当前边界
+
+本阶段只做：
+
+1. 为 `StaticBuildSourceUtilityViewEntry` 增加 `requirements`
+2. 为 `StaticBuildSourceUtilityViewEntry` 增加 `requirementSummary`
+3. 保持现有 `triggerLabel / conditionLabel / cooldownSeconds` 兼容
+4. 对齐 compact helper 与高层 `resolve-build-source-utility-views`
+
+显式不做：
+
+1. 不改变 utility view 的 `value / unit / resolutionMode / targetScope`
+2. 不新增新的 utility-only panel contract
+3. 不修改 `diagnosticSummary / sourceNoteSummary`
