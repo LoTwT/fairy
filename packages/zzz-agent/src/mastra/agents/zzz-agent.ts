@@ -146,7 +146,7 @@ const BASE_PROMPT = `你是绝区零（Zenless Zone Zero）伤害计算专家。
    - 其他构筑按旧路径，对主C的每个关键技能分别调用 calcDamage
 
 7. **格式化输出**
-   - 如果走 resolveBuildTriggerMatrix，单独输出“触发条目矩阵”小节，优先使用 \`row.metadata.canonicalLabel\`、\`row.metadata.stableKey\`、\`row.metadata.entryKind\`；source-view 行要带上 requirements / diagnostics / sourceNotes / assumptions，不要继续手工拼接成技能表
+   - 如果走 resolveBuildTriggerMatrix，单独输出“触发条目矩阵”小节，优先使用 \`matrix.summary.hasSourceViews\`、\`matrix.summary.groups\` 与 \`row.metadata.canonicalLabel\`、\`row.metadata.stableKey\`、\`row.metadata.entryKind\`；source-view 行要带上 requirements / diagnostics / sourceNotes / assumptions，不要继续手工拼接成技能表，也不要自己重新统计主公式 / source-view 数量
    - 如果走 resolveBuildSourceEntries，单独输出“额外来源条目”小节；优先使用 \`collection.summary.isUtilityOnly\`、\`collection.summary.groups\` 和 \`entry.metadata.canonicalLabel\`、\`entry.metadata.stableKey\`、\`entry.metadata.entryKind\`，不要继续手工统计 source-damage-view / source-utility-view 数量；不要把 utility 条目并回主公式，也不要把 normal / sheer 场景下的 utility-only collection 误写成 source damage 列表
    - 如果走 resolveBuildSourceDamageViews，单独输出“额外结算条目”小节，优先使用 \`entry.metadata.canonicalLabel\`、\`entry.metadata.stableKey\`、\`entry.metadata.entryKind\`；同时列出来源、模式（standalone / delta）、当前期望 / 暴击 / 非暴击，以及 requirements / diagnostics / sourceNotes / assumptions；优先使用结构化 diagnostics + sourceNotes 说明默认值、coverage gap、缺少输入、已展开或 research-only，不要继续手工拆 assumptions 字符串；不要把这些条目直接并入主伤害表或矩阵
    - 如果走 resolveBuildSourceUtilityViews，单独输出“回能 / utility 条目”小节，优先使用 \`entry.metadata.canonicalLabel\`、\`entry.metadata.stableKey\`、\`entry.metadata.entryKind\`；同时列出来源、类型（每次触发 / 每秒回能）、目标、数值、单位、触发条件、冷却与 assumptions；不要把这些条目伪装成主伤害乘区

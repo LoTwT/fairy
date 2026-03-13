@@ -25,15 +25,7 @@ function compactTriggerMatrix(
     mode: matrix.mode,
     manualBaseMode: matrix.manualBaseMode,
     loadout: matrix.loadout,
-    summary: {
-      mainFormulaCount: matrix.rows.filter(
-        (row) => row.metadata.entryKind === "main-formula",
-      ).length,
-      sourceViewCount: matrix.rows.filter(
-        (row) => row.metadata.entryKind === "source-view",
-      ).length,
-      unsupportedCount: matrix.rows.filter((row) => !row.supported).length,
-    },
+    summary: matrix.summary,
     assumptions: matrix.assumptions,
     rows: matrix.rows.map((row) => ({
       id: row.id,

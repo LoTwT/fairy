@@ -37,6 +37,30 @@ describe("resolveBuildTriggerMatrix tool", () => {
 
     expect((result as any).found).toBe(true)
     expect((result as any).matrix.rows).toHaveLength(2)
+    expect((result as any).matrix.summary).toMatchObject({
+      rowCount: 2,
+      mainFormulaCount: 1,
+      sourceViewCount: 1,
+      supportedCount: 2,
+      unsupportedCount: 0,
+      hasSourceViews: true,
+      groups: [
+        {
+          key: "main-formula",
+          label: "主公式结算",
+          count: 1,
+          supportedCount: 1,
+          unsupportedCount: 0,
+        },
+        {
+          key: "source-view",
+          label: "额外来源结算",
+          count: 1,
+          supportedCount: 1,
+          unsupportedCount: 0,
+        },
+      ],
+    })
     expect((result as any).matrix.rows[0].metadata.entryKind).toBe(
       "main-formula",
     )
@@ -133,6 +157,14 @@ describe("resolveBuildTriggerMatrix tool", () => {
 
     expect((result as any).found).toBe(true)
     expect((result as any).matrix.rows).toHaveLength(2)
+    expect((result as any).matrix.summary).toMatchObject({
+      rowCount: 2,
+      mainFormulaCount: 1,
+      sourceViewCount: 1,
+      supportedCount: 2,
+      unsupportedCount: 0,
+      hasSourceViews: true,
+    })
     expect((result as any).matrix.rows[1]).toMatchObject({
       supported: true,
       metadata: {
