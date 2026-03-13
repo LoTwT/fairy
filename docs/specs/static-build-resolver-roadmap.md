@@ -1647,7 +1647,7 @@ Batch B（已完成）：
 - `V30.1` 已完成：冻结到 core skill matrix summary contract
 - `V30.2` 已完成：`ResolveStaticBuildSkillMatrixResult` 已返回稳定 `summary`
 - `V30.3` 已完成：高层 tool 已对齐底层 `matrix.summary`
-- `V30.4` 待实现：README / 总规格 / 索引 / 架构入口同步收口
+- `V30.4` 已完成：README / 总规格 / 索引 / 架构入口已同步收口
 
 ### 35.4 当前边界
 

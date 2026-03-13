@@ -476,6 +476,30 @@ const matrix = resolveStaticBuildSkillMatrix({
   },
 })
 
+matrix.summary
+// {
+//   rowCount: 21,
+//   baseDamageStat: "attack",
+//   baseDamageValue: 3200,
+//   attack: 3200,
+//   critRate: 0.7,
+//   critDamage: 1.4,
+//   penetrationRate: 0,
+//   penetrationValue: 0,
+//   commonBuckets: {
+//     bonusDamageSum: 0.4,
+//     critRate: 0.15,
+//   },
+//   variableBuckets: ["attackPercent", "flatAttack"],
+//   commonFormulaMultipliers: {
+//     bonusMultiplier: 1.4,
+//     critMultiplier: 1.98,
+//     defenseMultiplier: 0.4545,
+//     resistanceMultiplier: 0.8,
+//   },
+//   variableFormulaMultipliers: ["baseDamage"],
+// }
+
 matrix.rows[0]
 // {
 //   label: "普通攻击·一段",
@@ -504,6 +528,8 @@ matrix.rows[0]
 //   build: { damage, resolvedBuckets, trace, ... }
 // }
 ```
+
+如果你要生成矩阵顶部“乘区汇总”，不要再自己遍历 `rows` 统计 `commonBuckets / commonFormulaMultipliers`，直接使用 `matrix.summary`。
 
 常见消费方式是把矩阵映射成展示表：
 
