@@ -124,6 +124,7 @@ packages/zzz-data/
 │   ├── resolver.ts         # finalPanel + scenario → damageParams / trace（含 disorder source / anomaly proficiency gating）
 │   ├── types.ts            # build layer 输入输出 contract（含 disorderSourceTypes / minimumResolvedAnomalyProficiency）
 │   ├── views.ts            # source-specific damage view（独立额外结算条目，不并入主 anomaly/disorder 公式）
+│   ├── utility-views.ts    # source-specific utility / energy view（独立回能 / 回能速率条目，不并入主伤害公式）
 │   └── index.ts            # re-export
 ├── src/game-modes.ts        # 对外发布的游戏模式 JSON 类型（buffs / DA / SD / TS）+ raw category code contract
 ├── src/terms.ts             # canonical 术语层（raw label → 规范导出映射）
@@ -143,13 +144,14 @@ packages/zzz-agent/
 ├── src/mastra/
 │ ├── index.ts # Mastra 实例入口
 │ ├── agents/zzz-agent.ts # ZZZ Agent prompt / tools / scorers wiring
-│ ├── tools/zzz/ # lookup / calcDamage 工具（含 compact 查询与 damageContext；resolveBuildDamage / resolveBuildSourceDamageViews / resolveBuildSkillMatrix 通过 zzz-data build layer 复用静态构筑解析）
+│ ├── tools/zzz/ # lookup / calcDamage 工具（含 compact 查询与 damageContext；resolveBuildDamage / resolveBuildSourceDamageViews / resolveBuildSourceUtilityViews / resolveBuildSkillMatrix 通过 zzz-data build layer 复用静态构筑解析）
 │ └── scorers/zzz-scorer.ts # 评分器实现
 ├── tests/
 │ ├── lookup-game-mode.test.ts # lookupGameMode 默认版本与 damageContext 测试
 │ ├── lookup-filters.test.ts # lookupAgent / lookupWEngine 双语筛选与 compact 测试
 │ ├── resolve-build-damage.test.ts # 静态构筑高层 resolver tool 测试
 │ ├── resolve-build-source-damage-views.test.ts # source-specific damage view tool 测试
+│ ├── resolve-build-source-utility-views.test.ts # source-specific utility / energy view tool 测试
 │ ├── resolve-build-skill-matrix.test.ts # 静态构筑技能矩阵 tool 测试
 │ ├── zzz-agent-prompt.test.ts # prompt 工作流、术语与截图摘要测试
 │ ├── zzz-scorer.test.ts # outputFormat / judge model scorer 测试
@@ -203,7 +205,7 @@ packages/zzz-agent/
 - [`static-build-resolver-v17.md`](../docs/specs/static-build-resolver-v17.md) — 当前阶段范围：已收口；通用驱动盘的高价值可静态表达来源已补齐
 - [`static-build-resolver-v18.md`](../docs/specs/static-build-resolver-v18.md) — 当前阶段范围：已收口；最后一批 legacy 强攻签名已按 partial coverage / source note 分层固定
 - [`static-build-resolver-v19.md`](../docs/specs/static-build-resolver-v19.md) — 当前阶段范围：已收口；最后两个 utility-only 旧通用音擎已固定为 process-only source note，不新增 public key
-- [`static-build-resolver-v20.md`](../docs/specs/static-build-resolver-v20.md) — 当前阶段范围：定义 source-specific utility / energy view；第一批只覆盖稳定可表达的音擎回能 / 回能速率条目
+- [`static-build-resolver-v20.md`](../docs/specs/static-build-resolver-v20.md) — 当前阶段范围：已完成第一批 source-specific utility / energy view；`zzz-agent` 已暴露独立 utility view tool，不并回主伤害公式
 
 ## 计算器模块（src/calculator/）
 
@@ -231,8 +233,8 @@ const total = base * bonus * crit * resistance * custom
 - 音擎属性：`calcWEngineBaseATK(baseVal, lvBaseStatGrowth, starBaseStatGrowth)`、`calcWEngineSecondaryStat(baseValue, starAdvancedStatGrowth)`
 - gachabase 类型：`AgentListItem`、`AgentDetails`、`WEngineListItem`、`WEngineDetails`、`BangbooItem`、`DriveDiscItem` 等
 - 游戏模式类型：`BuffsJson`、`DeadlyAssaultJson`、`ShiyuDefenseJson`、`ThresholdSimulationJson`
-- static build resolver：`resolveStaticBuildDamage()`、`resolveStaticBuildSkillMatrix()`、`supportedStaticBuildAgents`、`supportedStaticBuildMatrixAgents`、`supportedStaticBuildWEngines`、`supportedStaticBuildDriveDiscs`、`getStaticBuildAgent()`、`getStaticBuildWEngine()`、`getCompatibleStaticBuildWEngines()`、`getStaticBuildDriveDisc()`、`getStaticBuildEffectsForLoadout()`、`getStaticBuildProfile()`、`staticBuildProfiles`
-- static build 类型：`ResolveStaticBuildInput`、`ResolveStaticBuildResult`、`ResolveStaticBuildSkillMatrixInput`、`ResolveStaticBuildSkillMatrixResult`、`StaticBuildMode`、`StaticBuildScenarioInput`、`StaticBuildSkillMatrixContextInput`、`StaticBuildSkillMatrixRow`、`StaticBuildSkillMatrixRowMeta`、`StaticBuildSkillMatrixEntryType`、`StaticBuildSkillMatrixAggregationType`、`StaticBuildSkillMatrixVariantAxis`、`StaticBuildSkillMatrixTemplateSource`、`StaticBuildSkillMatrixAttributeSource`、`StaticBuildTargetSize`、`StaticBuildResolvedBuckets`、`StaticBuildTraceItem`、`StaticBuildSourceNoteEntry`、`StaticBuildSourceNoteOwner`、`StaticBuildSourceNoteStatus`、`StaticBuildDiagnosticEntry`、`StaticBuildDiagnosticKind`、`StaticBuildDiagnosticOwner`
+- static build resolver：`resolveStaticBuildDamage()`、`resolveStaticBuildSkillMatrix()`、`resolveStaticBuildSourceDamageViews()`、`resolveStaticBuildSourceUtilityViews()`、`supportedStaticBuildAgents`、`supportedStaticBuildMatrixAgents`、`supportedStaticBuildWEngines`、`supportedStaticBuildDriveDiscs`、`supportedStaticBuildSourceViewAgents`、`supportedStaticBuildSourceUtilityViewWEngines`、`getStaticBuildAgent()`、`getStaticBuildWEngine()`、`getCompatibleStaticBuildWEngines()`、`getStaticBuildDriveDisc()`、`getStaticBuildEffectsForLoadout()`、`getStaticBuildProfile()`、`staticBuildProfiles`
+- static build 类型：`ResolveStaticBuildInput`、`ResolveStaticBuildResult`、`ResolveStaticBuildSkillMatrixInput`、`ResolveStaticBuildSkillMatrixResult`、`ResolveStaticBuildSourceDamageViewsResult`、`ResolveStaticBuildSourceUtilityViewsInput`、`ResolveStaticBuildSourceUtilityViewsResult`、`StaticBuildMode`、`StaticBuildScenarioInput`、`StaticBuildSkillMatrixContextInput`、`StaticBuildSkillMatrixRow`、`StaticBuildSkillMatrixRowMeta`、`StaticBuildSkillMatrixEntryType`、`StaticBuildSkillMatrixAggregationType`、`StaticBuildSkillMatrixVariantAxis`、`StaticBuildSkillMatrixTemplateSource`、`StaticBuildSkillMatrixAttributeSource`、`StaticBuildTargetSize`、`StaticBuildResolvedBuckets`、`StaticBuildTraceItem`、`StaticBuildSourceNoteEntry`、`StaticBuildSourceNoteOwner`、`StaticBuildSourceNoteStatus`、`StaticBuildDiagnosticEntry`、`StaticBuildDiagnosticKind`、`StaticBuildDiagnosticOwner`、`StaticBuildSourceUtilityViewEntry`、`StaticBuildSourceUtilityViewType`
 
 `V4` 首批新增的高价值 progression context：
 

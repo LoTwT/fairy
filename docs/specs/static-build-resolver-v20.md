@@ -136,7 +136,7 @@ utility / energy 条目和当前主伤害公式不是同一层语义。
    - 队友施加属性异常后的能量回复
 3. `家政员`
    - 后场能量自动回复速率
-4. `燃狱齿轮`
+4. `灼心摇壶`
    - 后场能量自动回复速率
 
 ## 7. 显式不做
@@ -161,3 +161,10 @@ utility / energy 条目和当前主伤害公式不是同一层语义。
    - 冷却
 3. 主 resolver 与 source damage view contract 不受影响
 4. `zzz-agent` 有独立高层 tool 可消费这些条目
+
+## 9. 当前状态
+
+- `V20.1` 已完成：scope 已冻结
+- `V20.2` 已完成：第一批 `w-engine` utility / energy view 已落地
+- `V20.3` 已完成：`zzz-agent` 已暴露 `resolve-build-source-utility-views`
+- `V20.4` 已完成：当前 contract 下已收口

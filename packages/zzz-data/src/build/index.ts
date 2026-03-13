@@ -18,6 +18,8 @@ export type {
   ResolveStaticBuildSkillMatrixInput,
   ResolveStaticBuildSkillMatrixResult,
   ResolveStaticBuildSourceDamageViewsResult,
+  ResolveStaticBuildSourceUtilityViewsInput,
+  ResolveStaticBuildSourceUtilityViewsResult,
   StaticBuildAgentCatalogEntry,
   StaticBuildBaseMode,
   StaticBuildBucket,
@@ -59,6 +61,10 @@ export type {
   StaticBuildSourceNoteGuidanceTarget,
   StaticBuildSourceNoteOwner,
   StaticBuildSourceNoteStatus,
+  StaticBuildSourceUtilityViewEntry,
+  StaticBuildSourceUtilityViewResolutionMode,
+  StaticBuildSourceUtilityViewTargetScope,
+  StaticBuildSourceUtilityViewType,
   StaticBuildStateFlagKey,
   StaticBuildStateSnapshotInput,
   StaticBuildStateValueKey,
@@ -67,6 +73,11 @@ export type {
   StaticBuildWEngineCatalogEntry,
 } from "./types.js"
 
+export {
+  hasStaticBuildSourceUtilityViewCoverage,
+  resolveStaticBuildSourceUtilityViews,
+  supportedStaticBuildSourceUtilityViewWEngines,
+} from "./utility-views.js"
 export {
   hasStaticBuildSourceViewCoverage,
   resolveStaticBuildSourceDamageViews,

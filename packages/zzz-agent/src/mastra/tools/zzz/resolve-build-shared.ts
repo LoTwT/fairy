@@ -208,6 +208,24 @@ export const resolveBuildInputSchema = z.object({
     .optional(),
 })
 
+export const resolveBuildSourceUtilityInputSchema = z.object({
+  agent: z.string().describe("代理人名称或 ID"),
+  wEngine: z.string().optional().describe("音擎名称或 ID"),
+  driveDiscs: z
+    .array(
+      z.object({
+        name: z.string().describe("驱动盘名称或 ID"),
+        pieces: z.union([z.literal(2), z.literal(4)]),
+      }),
+    )
+    .optional(),
+  coreSkillLevel: z.number().min(1).max(7).optional().default(7),
+  wEngineRefinement: z.number().min(1).max(5).optional().default(1),
+  agentLevel: z.number().min(1).max(60).optional(),
+  agentMindscape: z.number().int().min(0).max(6).optional(),
+  finalPanel: finalPanelSchema.partial().optional(),
+})
+
 export function normalizeCatalogValue(value: string) {
   return value.toLowerCase().replace(/[\s\-_·・.()（）【】[\]「」]/g, "")
 }

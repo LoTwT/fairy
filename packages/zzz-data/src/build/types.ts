@@ -529,6 +529,47 @@ export interface ResolveStaticBuildSourceDamageViewsResult {
   assumptions: string[]
 }
 
+export type StaticBuildSourceUtilityViewType =
+  | "energy-refund"
+  | "energy-regen-rate"
+
+export type StaticBuildSourceUtilityViewResolutionMode = "trigger" | "rate"
+
+export type StaticBuildSourceUtilityViewTargetScope = "self" | "ally" | "team"
+
+export interface ResolveStaticBuildSourceUtilityViewsInput {
+  loadout: StaticBuildLoadoutInput
+  panel?: Pick<
+    StaticBuildFinalPanelInput,
+    "energyGenerationRate" | "anomalyMastery" | "anomalyProficiency"
+  >
+}
+
+export interface StaticBuildSourceUtilityViewEntry {
+  id: string
+  label: string
+  sourceType: StaticBuildEffectDefinition["sourceType"]
+  sourceId: string
+  supported: boolean
+  utilityType: StaticBuildSourceUtilityViewType
+  resolutionMode: StaticBuildSourceUtilityViewResolutionMode
+  targetScope: StaticBuildSourceUtilityViewTargetScope
+  value: number
+  unit: "energy" | "energy-per-second"
+  triggerLabel?: string
+  conditionLabel?: string
+  cooldownSeconds?: number
+  diagnostics: StaticBuildDiagnosticEntry[]
+  sourceNotes: StaticBuildSourceNoteEntry[]
+  assumptions: string[]
+}
+
+export interface ResolveStaticBuildSourceUtilityViewsResult {
+  loadout: StaticBuildResolvedLoadout
+  entries: StaticBuildSourceUtilityViewEntry[]
+  assumptions: string[]
+}
+
 export interface StaticBuildSkillMatrixRowMeta {
   order: number
   actionName: string

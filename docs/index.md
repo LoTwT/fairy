@@ -35,4 +35,4 @@
 - [静态构筑解析系统 V17](./specs/static-build-resolver-v17.md) — 当前阶段：已收口；通用驱动盘的高价值可静态表达来源已补齐
 - [静态构筑解析系统 V18](./specs/static-build-resolver-v18.md) — 当前阶段：已收口；最后一批 legacy 强攻签名已按 partial coverage / source note 分层固定，不新增 public key
 - [静态构筑解析系统 V19](./specs/static-build-resolver-v19.md) — 当前阶段：已收口；最后两个 utility-only 旧通用音擎已固定为 process-only source note，不新增 public key
-- [静态构筑解析系统 V20](./specs/static-build-resolver-v20.md) — 当前阶段：定义 source-specific utility / energy view，第一批只覆盖稳定可表达的音擎回能条目
+- [静态构筑解析系统 V20](./specs/static-build-resolver-v20.md) — 当前阶段：已完成第一批 source-specific utility / energy view，`zzz-agent` 已暴露独立 utility view tool

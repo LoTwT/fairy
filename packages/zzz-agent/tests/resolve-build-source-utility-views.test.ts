@@ -1,0 +1,44 @@
+import { describe, expect, it } from "vitest"
+
+import { resolveBuildSourceUtilityViews } from "../src/mastra/tools/zzz/resolve-build-source-utility-views"
+import { runTool } from "./shared"
+
+describe("resolveBuildSourceUtilityViews tool", () => {
+  it("returns utility views for covered utility w-engines", async () => {
+    const result = await runTool(resolveBuildSourceUtilityViews, {
+      agent: "猫又",
+      wEngine: "「月相」-朔",
+      wEngineRefinement: 1,
+    })
+
+    expect((result as any).found).toBe(true)
+    expect((result as any).views.entries[0]).toMatchObject({
+      id: "lunar-noviluna-energy-refund",
+      utilityType: "energy-refund",
+      value: 3,
+      unit: "energy",
+    })
+  })
+
+  it("rejects specialty-incompatible utility w-engines", async () => {
+    const result = await runTool(resolveBuildSourceUtilityViews, {
+      agent: "猫又",
+      wEngine: "「电磁暴」-叁式",
+    })
+
+    expect((result as any).found).toBe(false)
+    expect((result as any).message).toContain("无法使用")
+    expect((result as any).supportedWEngines).toContain("「月相」-朔")
+  })
+
+  it("returns utility-view support scope when the current w-engine has no utility coverage", async () => {
+    const result = await runTool(resolveBuildSourceUtilityViews, {
+      agent: "猫又",
+      wEngine: "钢铁肉垫",
+    })
+
+    expect((result as any).found).toBe(false)
+    expect((result as any).message).toContain("暂未覆盖音擎")
+    expect((result as any).supportedWEngines).toContain("「月相」-朔")
+  })
+})

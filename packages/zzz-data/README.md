@@ -93,6 +93,12 @@ import {
   - `柏妮思 [燃点]/[余烬]`
   - `爱芮 [异放]`
   - 这类条目不会再继续并入主 anomaly / disorder 公式，而是通过独立 view 展示
+- source-specific utility / energy view：当前已支持：
+  - `「月相」-朔`
+  - `「电磁暴」-叁式`
+  - `家政员`
+  - `灼心摇壶`
+  - 这类条目不会并入主 damage resolver，而是作为独立 utility 条目暴露
 
 ```ts
 import { resolveStaticBuildDamage } from "zzz-data"
@@ -169,6 +175,35 @@ views.entries[0]
 ```
 
 同一份 source-specific view contract 也已在 `zzz-agent` 中通过 `resolve-build-source-damage-views` 高层 tool 暴露，适合直接给 Agent 查询独立额外结算条目。
+
+如果你需要拿到不进入主伤害公式的独立回能 / 回能速率条目，可使用：
+
+```ts
+import { resolveStaticBuildSourceUtilityViews } from "zzz-data"
+
+const utilityViews = resolveStaticBuildSourceUtilityViews({
+  loadout: {
+    agentId: "1021",
+    wEngineId: "12003",
+    wEngineRefinement: 1,
+  },
+})
+
+utilityViews.entries[0]
+// {
+//   id: "lunar-noviluna-energy-refund",
+//   utilityType: "energy-refund",
+//   resolutionMode: "trigger",
+//   targetScope: "self",
+//   value: 3,
+//   unit: "energy",
+//   triggerLabel: "发动[强化特殊技]",
+//   cooldownSeconds: 12,
+//   ...
+// }
+```
+
+同一份 source-specific utility / energy view contract 也已在 `zzz-agent` 中通过 `resolve-build-source-utility-views` 高层 tool 暴露，适合直接给 Agent 查询独立回能条目。
 
 source view 条目现在也会返回结构化 `diagnostics` 与 `sourceNotes`，适合直接区分：
 

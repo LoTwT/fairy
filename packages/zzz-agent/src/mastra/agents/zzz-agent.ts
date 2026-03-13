@@ -16,6 +16,7 @@ import {
   resolveBuildDamage,
   resolveBuildSkillMatrix,
   resolveBuildSourceDamageViews,
+  resolveBuildSourceUtilityViews,
 } from "../tools/zzz"
 
 const BASE_PROMPT = `你是绝区零（Zenless Zone Zero）伤害计算专家。用户会描述队伍配置（1-3 位代理人，各自携带音擎和驱动盘，可选邦布），你需要查询数据、提取乘区、计算并展示伤害。
@@ -98,11 +99,13 @@ const BASE_PROMPT = `你是绝区零（Zenless Zone Zero）伤害计算专家。
    - 单技能 / 单场景计算：调用 resolveBuildDamage
    - 全技能 / 全段 / 完整伤害表：调用 resolveBuildSkillMatrix
    - 如果用户问的是 anomaly / disorder 里的独立额外结算条目，例如 \`爱丽丝 [极性强击]\`、\`雅 [霜灼·破]\`、\`柏妮思 [燃点]/[余烬]\`、\`爱芮 [异放]\`，调用 resolveBuildSourceDamageViews
+   - 如果用户问的是独立回能 / 后场回能 / 音擎 utility 条目，例如 \`「月相」-朔\`、\`「电磁暴」-叁式\`、\`家政员\`、\`灼心摇壶\` 的回能效果，调用 resolveBuildSourceUtilityViews
    - 高层 resolver 会直接返回 resolved buckets、damageParams、技能矩阵或 source-specific view，避免重复手工抽取乘区
    - 如果只是判断当前 resolver 是否支持某个代理人/音擎/驱动盘，或只是想拿到 supported scope，可以直接调用高层 resolver；wEngine、driveDiscs、coreSkillLevel、wEngineRefinement、mode 在这类探测场景下都不是必填，不要先追问这些可选字段
    - 如果高层 resolver 返回 found=false，先原样告知不支持范围、supported 列表和候选项；只有当用户明确接受“按旧路径继续估算”时，才回退到 lookupAgent / lookupWEngine / lookupDriveDisc + calcDamage
    - 当前 resolveBuildDamage 已支持强攻 / 命破 / 异常的单次静态计算，以及 anomaly / disorder；resolveBuildSkillMatrix 仍只支持强攻 / 命破，不支持异常 / 紊乱矩阵
    - resolveBuildSourceDamageViews 只暴露独立额外结算条目，不要把它的结果并回主 anomaly / disorder 公式，也不要把它伪装成完整技能矩阵
+   - resolveBuildSourceUtilityViews 只暴露独立 utility / energy 条目，不要把它们并回主 damage resolver，也不要把“每次触发值”擅自扩写成战斗总收益
    - 如果用户明确要求“完整伤害矩阵”或明确点名调用 resolveBuildSkillMatrix，而该代理人不在当前 matrix 支持范围内，不要自动回退旧路径，因为旧路径无法满足“完整矩阵”这个请求
 
 2. **收集队伍信息**
@@ -137,6 +140,7 @@ const BASE_PROMPT = `你是绝区零（Zenless Zone Zero）伤害计算专家。
 
 7. **格式化输出**
    - 如果走 resolveBuildSourceDamageViews，单独输出“额外结算条目”小节，列出来源、模式（standalone / delta）、当前期望 / 暴击 / 非暴击，以及 requirements / diagnostics / sourceNotes / assumptions；优先使用结构化 diagnostics + sourceNotes 说明默认值、coverage gap、缺少输入、已展开或 research-only，不要继续手工拆 assumptions 字符串；不要把这些条目直接并入主伤害表或矩阵
+   - 如果走 resolveBuildSourceUtilityViews，单独输出“回能 / utility 条目”小节，列出来源、类型（每次触发 / 每秒回能）、目标、数值、单位、触发条件、冷却与 assumptions；不要把这些条目伪装成主伤害乘区
    - 如果 sourceNotes 带 guidance，优先按 guidance 解释下一步：provide-input 表示应补对应 target 的显式输入，input-applied 表示该来源已按对应 target 展开，keep-process-only / keep-research-only 表示不要再追问更多静态输入
    - 如果走 resolveBuildDamage，且返回了 diagnostics 或 sourceNotes，优先用它们生成“来源说明 / 额外前提 / coverage gap / unsupported”小节；只有 diagnostics / sourceNotes 不能覆盖时，再回退展示 assumptions
    - 如果走 resolveBuildSkillMatrix，优先使用 \`matrix.effectSummary\` 生成“增益清单”，把数值单独列出来，不要只写效果名不写具体数值
@@ -402,6 +406,7 @@ export const zzzAgent = new Agent({
     lookupGameMode,
     resolveBuildDamage,
     resolveBuildSourceDamageViews,
+    resolveBuildSourceUtilityViews,
     resolveBuildSkillMatrix,
     calcDamage,
   },
