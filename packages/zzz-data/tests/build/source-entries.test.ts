@@ -19,6 +19,33 @@ describe("static build source entries", () => {
       supportedCount: 1,
       unsupportedCount: 0,
       isUtilityOnly: true,
+      sourceDamageRequirementSummary: {
+        count: 0,
+        satisfiedCount: 0,
+        unsatisfiedCount: 0,
+        hasUnsatisfied: false,
+        groups: [],
+      },
+      sourceUtilityRequirementSummary: {
+        count: 2,
+        satisfiedCount: 2,
+        unsatisfiedCount: 0,
+        hasUnsatisfied: false,
+        groups: [
+          {
+            key: "trigger",
+            count: 1,
+            satisfiedCount: 1,
+            unsatisfiedCount: 0,
+          },
+          {
+            key: "cooldown",
+            count: 1,
+            satisfiedCount: 1,
+            unsatisfiedCount: 0,
+          },
+        ],
+      },
       diagnosticSummary: {
         count: 0,
         hasDiagnostics: false,
@@ -100,6 +127,34 @@ describe("static build source entries", () => {
       supportedCount: 2,
       unsupportedCount: 0,
       isUtilityOnly: false,
+      sourceDamageRequirementSummary: {
+        count: 2,
+        satisfiedCount: 2,
+        unsatisfiedCount: 0,
+        hasUnsatisfied: false,
+        groups: [
+          {
+            key: "dynamic-value",
+            count: 2,
+            satisfiedCount: 2,
+            unsatisfiedCount: 0,
+          },
+        ],
+      },
+      sourceUtilityRequirementSummary: {
+        count: 1,
+        satisfiedCount: 1,
+        unsatisfiedCount: 0,
+        hasUnsatisfied: false,
+        groups: [
+          {
+            key: "condition",
+            count: 1,
+            satisfiedCount: 1,
+            unsatisfiedCount: 0,
+          },
+        ],
+      },
       diagnosticSummary: {
         count: 2,
         hasDiagnostics: true,
@@ -185,6 +240,46 @@ describe("static build source entries", () => {
       sourceDamageViewCount: 1,
       sourceUtilityViewCount: 1,
       isUtilityOnly: false,
+      sourceDamageRequirementSummary: {
+        count: 2,
+        satisfiedCount: 2,
+        unsatisfiedCount: 0,
+        hasUnsatisfied: false,
+        groups: [
+          {
+            key: "panel-value",
+            count: 1,
+            satisfiedCount: 1,
+            unsatisfiedCount: 0,
+          },
+          {
+            key: "scenario-value",
+            count: 1,
+            satisfiedCount: 1,
+            unsatisfiedCount: 0,
+          },
+        ],
+      },
+      sourceUtilityRequirementSummary: {
+        count: 2,
+        satisfiedCount: 2,
+        unsatisfiedCount: 0,
+        hasUnsatisfied: false,
+        groups: [
+          {
+            key: "trigger",
+            count: 1,
+            satisfiedCount: 1,
+            unsatisfiedCount: 0,
+          },
+          {
+            key: "cooldown",
+            count: 1,
+            satisfiedCount: 1,
+            unsatisfiedCount: 0,
+          },
+        ],
+      },
       diagnosticSummary: {
         count: 1,
         hasDiagnostics: true,

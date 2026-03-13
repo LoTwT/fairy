@@ -787,6 +787,8 @@ export interface StaticBuildSourceEntryCollectionSummary {
   supportedCount: number
   unsupportedCount: number
   isUtilityOnly: boolean
+  sourceDamageRequirementSummary: StaticBuildSourceDamageViewRequirementSummary
+  sourceUtilityRequirementSummary: StaticBuildSourceUtilityViewRequirementSummary
   diagnosticSummary: StaticBuildDiagnosticSummary
   sourceNoteSummary: StaticBuildSourceNoteSummary
   groups: StaticBuildSourceEntryGroupSummary[]

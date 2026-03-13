@@ -10,8 +10,14 @@ import {
   summarizeDiagnosticEntries,
   summarizeSourceNoteEntries,
 } from "./resolver.js"
-import { resolveStaticBuildSourceUtilityViews } from "./utility-views.js"
-import { resolveStaticBuildSourceDamageViews } from "./views.js"
+import {
+  resolveStaticBuildSourceUtilityViews,
+  summarizeSourceUtilityViewRequirements,
+} from "./utility-views.js"
+import {
+  resolveStaticBuildSourceDamageViews,
+  summarizeSourceDamageViewRequirements,
+} from "./views.js"
 
 const sourceEntryGroupLabels: Record<StaticBuildSourceEntryGroupKey, string> = {
   "source-damage-view": "额外结算条目",
@@ -144,6 +150,12 @@ function summarizeSourceEntries(
     unsupportedCount,
     isUtilityOnly:
       sourceUtilityEntries.length > 0 && sourceDamageEntries.length === 0,
+    sourceDamageRequirementSummary: summarizeSourceDamageViewRequirements(
+      sourceDamageEntries.flatMap((entry) => entry.requirements),
+    ),
+    sourceUtilityRequirementSummary: summarizeSourceUtilityViewRequirements(
+      sourceUtilityEntries.flatMap((entry) => entry.requirements),
+    ),
     diagnosticSummary: summarizeDiagnosticEntries(diagnostics),
     sourceNoteSummary: summarizeSourceNoteEntries(sourceNotes),
     groups,

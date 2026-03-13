@@ -70,6 +70,7 @@
 - `V53 source-utility-view summary requirement aggregates` 已收口
 - `V54 source-damage-view summary requirement aggregates` 已收口
 - `V55 trigger-matrix summary requirement aggregates` 已收口
+- `V56 source-entry collection requirement aggregates` 已收口
 - 当前边界：`resolveStaticBuildSkillMatrix` 仍只支持 `normal / sheer`
 
 ## 2. 阶段划分
@@ -123,6 +124,46 @@
 1. 不改变 trigger row 的 `requirements / requirementSummary`
 2. 不新增新的 trigger-matrix metadata
 3. 不改变 `damage / summary / diagnosticSummary / sourceNoteSummary`
+
+## 61. V56 source-entry collection requirement aggregates
+
+### 61.1 目标
+
+`V55` 收口后，source-damage-view summary、source-utility-view summary 与 trigger-matrix summary 都已具备稳定的 requirement aggregate。
+
+但 `ResolveStaticBuildSourceEntriesResult.summary` 仍只聚合 diagnostics / source notes，没有 mixed collection 级别的 requirement 摘要。
+
+`V56` 只解决一件事：
+
+1. 为 source-entry collection summary 增加稳定 requirement aggregates
+
+### 61.2 范围
+
+1. `V56.1` scope freeze
+2. `V56.2` collection-level requirement aggregate
+3. `V56.3` high-level / prompt alignment
+4. `V56.4` docs closeout
+
+### 61.3 当前状态
+
+- `V56.1` 已完成：冻结到 source-entry collection requirement aggregate
+- `V56.2` 已完成：`StaticBuildSourceEntryCollectionSummary` 已新增稳定 `sourceDamageRequirementSummary / sourceUtilityRequirementSummary`
+- `V56.3` 已完成：高层 tool 断言与 agent prompt 已对齐 `collection.summary.sourceDamageRequirementSummary / sourceUtilityRequirementSummary`
+- `V56.4` 已完成：相关 specs、roadmap、索引、架构文档与 README 已同步
+
+### 61.4 当前边界
+
+本阶段只做：
+
+1. 为 `StaticBuildSourceEntryCollectionSummary` 增加两组 requirement aggregate
+2. 分别聚合当前 `source-damage-view` 与 `source-utility-view` entries 的 requirements
+3. 保持现有 `groups / sourceDamageViewCount / sourceUtilityViewCount / diagnosticSummary / sourceNoteSummary` 兼容
+
+显式不做：
+
+1. 不新增“混合 requirement union”类型
+2. 不改变单条 source entry 的 requirement contract
+3. 不改变 `entry` 排序或 `groups` 语义
 
 ## 3. V2.1：Curated Coverage
 
