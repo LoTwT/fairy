@@ -446,6 +446,7 @@ matrix.summary.groups[0].diagnosticSummary
 matrix.summary.groups[0].sourceNoteSummary
 matrix.summary.groups[0].assumptions
 matrix.summary.groups[0].unsupportedEffects
+matrix.unsupportedEffects
 ```
 
 如果你只想知道某一行 trigger row 的前置条件概况，也直接读取：

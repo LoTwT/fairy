@@ -994,4 +994,5 @@ export interface ResolveStaticBuildSkillMatrixResult {
   sourceNoteSummary: StaticBuildSourceNoteSummary
   rows: StaticBuildSkillMatrixRow[]
   assumptions: string[]
+  unsupportedEffects: string[]
 }

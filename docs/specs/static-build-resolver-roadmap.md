@@ -72,6 +72,7 @@
 - `V55 trigger-matrix summary requirement aggregates` 已收口
 - `V56 source-entry collection requirement aggregates` 已收口
 - `V65 skill-matrix group caveat summaries` 已收口
+- `V66 skill-matrix top-level unsupported effects` 已收口
 - 当前边界：`resolveStaticBuildSkillMatrix` 仍只支持 `normal / sheer`
 
 ## 2. 阶段划分
@@ -3132,3 +3133,43 @@ Batch B（已完成）：
 1. 不改变 row-level `assumptions / unsupportedEffects`
 2. 不新增新的 group 分组维度
 3. 不改变 `row.group` 的分组逻辑
+
+## 69. V66 skill-matrix top-level unsupported effects
+
+### 69.1 目标
+
+`V65` 收口后，`skill-matrix summary groups` 已能稳定给出局部 `assumptions / unsupportedEffects`。
+
+但整张 skill matrix 顶层仍只有 `assumptions`，没有对称的 `unsupportedEffects`。上层如果想先判断整张矩阵是否存在 unsupported coverage gap，仍要重新遍历 rows 再自行去重聚合。
+
+`V66` 只解决一件事：
+
+1. 为 `ResolveStaticBuildSkillMatrixResult` 增加顶层 `unsupportedEffects`
+
+### 69.2 范围
+
+1. `V66.1` scope freeze
+2. `V66.2` top-level unsupported-effects aggregate
+3. `V66.3` high-level / prompt alignment
+4. `V66.4` docs closeout
+
+### 69.3 当前状态
+
+- `V66.1` 已完成：冻结到 top-level skill-matrix unsupportedEffects
+- `V66.2` 已完成：`ResolveStaticBuildSkillMatrixResult` 与 compact result 已新增顶层 `unsupportedEffects`
+- `V66.3` 已完成：高层 tool 断言与 agent prompt 已对齐 `matrix.unsupportedEffects`
+- `V66.4` 已完成：相关 specs、roadmap、索引、架构文档与 README 已同步
+
+### 69.4 当前边界
+
+本阶段只做：
+
+1. 为 `ResolveStaticBuildSkillMatrixResult` 增加顶层 `unsupportedEffects`
+2. 由当前 rows 去重聚合 unsupported coverage gap
+3. 保持现有 group-level / row-level `unsupportedEffects` 兼容
+
+显式不做：
+
+1. 不改变 `summary` 结构
+2. 不改变 `assumptions` 的现有语义
+3. 不改变 `row.group` 或 `groups[*]` 的聚合逻辑

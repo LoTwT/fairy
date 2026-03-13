@@ -2050,5 +2050,8 @@ export function resolveStaticBuildSkillMatrix(
     ),
     rows,
     assumptions,
+    unsupportedEffects: [
+      ...new Set(rows.flatMap((row) => row.unsupportedEffects)),
+    ],
   }
 }

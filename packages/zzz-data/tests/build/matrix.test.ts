@@ -30,6 +30,9 @@ describe("static build skill matrix", () => {
     expect(result.profile.id).toBe("standard-normal")
     expect(result.summary.rowCount).toBe(21)
     expect(result.summary.baseDamageStat).toBe("attack")
+    expect(result.unsupportedEffects).toEqual([
+      ...new Set(result.rows.flatMap((row) => row.unsupportedEffects)),
+    ])
     expect(result.diagnosticSummary.count).toBe(
       result.rows.flatMap((row) => row.diagnostics).length,
     )
