@@ -184,7 +184,7 @@ packages/zzz-agent/
 
 - [`damage-calculation.md`](../docs/specs/damage-calculation.md) — 四种伤害类型（常规/贯穿/异常/紊乱）的乘区公式、TypeScript 类型签名与参考数值
 - [`static-build-resolver.md`](../docs/specs/static-build-resolver.md) — 静态构筑解析系统设计：effect schema、输入输出 contract、热插拔乘区管线与模块划分
-- [`static-build-resolver-roadmap.md`](../docs/specs/static-build-resolver-roadmap.md) — 执行路线与阶段状态：当前主线已推进并收口到 `V24`；已覆盖 source views、trigger matrix、utility views 与 unified source-entry collection
+- [`static-build-resolver-roadmap.md`](../docs/specs/static-build-resolver-roadmap.md) — 执行路线与阶段状态：当前主线已推进到 `V25`；已覆盖 source views、trigger matrix、utility views 与 unified source-entry collection
 - [`anomaly-disorder-skill-matrix-evaluation.md`](../docs/specs/anomaly-disorder-skill-matrix-evaluation.md) — `8.2` 立项评估：当前结论是不在 `8.3 dynamic value context` 之前实现异常 / 紊乱 matrix
 - [`static-build-resolver-v1.md`](../docs/specs/static-build-resolver-v1.md) — 第一版实现范围冻结：支持对象、bucket、profile、输入输出 contract 与验收标准
 - [`static-build-resolver-v2.md`](../docs/specs/static-build-resolver-v2.md) — 第二版实现范围：扩展支持名单与技能矩阵模板约定
@@ -210,6 +210,7 @@ packages/zzz-agent/
 - [`static-build-resolver-v22.md`](../docs/specs/static-build-resolver-v22.md) — 当前实现：source damage view / source utility view 已增加稳定 metadata；对齐 `canonicalLabel / stableKey / entryKind`
 - [`static-build-resolver-v23.md`](../docs/specs/static-build-resolver-v23.md) — 当前实现：统一 source-entry collection 已完成；支持 utility-only 与 anomaly / disorder mixed collection
 - [`static-build-resolver-v24.md`](../docs/specs/static-build-resolver-v24.md) — 当前阶段：已收口；`薇薇安 [异放]` 已进入公式推导型 delta view，并同步接入 trigger matrix 与 source-entry collection
+- [`static-build-resolver-v25.md`](../docs/specs/static-build-resolver-v25.md) — 当前阶段：已完成 scope freeze；准备扩第二批 utility / resource view，收录 `时光切片` 的 `喧响值 + 能量` 结构化条目，并把 utility-only 查询从 damage-agent catalog 解耦
 
 ## 计算器模块（src/calculator/）
 

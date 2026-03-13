@@ -14,6 +14,7 @@
 - [静态构筑解析系统](./static-build-resolver.md)
 - [静态构筑解析系统 V1](./static-build-resolver-v1.md)
 - [静态构筑解析系统 V2](./static-build-resolver-v2.md)
+- [静态构筑解析系统 V25](./static-build-resolver-v25.md)
 
 为准。
 
@@ -1398,3 +1399,49 @@ Batch B（已完成）：
 1. 不展开 `薇薇安的预言`
 2. 不新增新的 snapshot key
 3. 不把第二批 source view 并回主公式
+
+## 30. V25 second-batch utility / resource views
+
+### 30.1 目标
+
+扩第二批 utility / resource view，但只处理：
+
+1. 当前 contract 下仍可静态结构化表达的资源来源
+2. 目前 `energy-only` utility contract 无法覆盖的 `decibel` 类条目
+3. 当前 utility-only 查询因 damage-agent catalog 约束而进不去的 `支援` 特性音擎
+
+第一批锁定：
+
+1. `时光切片`
+
+### 30.2 范围
+
+1. `V25.1` scope freeze
+2. `V25.2` decibel utility contract
+3. `V25.3` utility-only catalog decoupling
+4. `V25.4` time-slice coverage + source-entry integration
+5. `V25.5` docs closeout
+
+### 30.3 当前状态
+
+- `V25.1` 已完成：冻结到第二批 utility / resource view
+- `V25.2` 未开始
+- `V25.3` 未开始
+- `V25.4` 未开始
+- `V25.5` 未开始
+
+### 30.4 当前边界
+
+本阶段只做：
+
+1. 扩 `source-specific utility view`
+2. 新增 `decibel-gain`
+3. 新增 utility-only agent catalog，用于支援特性音擎兼容校验
+4. 第一批只落 `时光切片`
+
+显式不做：
+
+1. 不把资源条目并回主 damage resolver
+2. 不做 utility trigger matrix
+3. 不做 `支援` 代理人的主伤害 resolver
+4. 不做时间轴累计、覆盖率、循环收益模拟
