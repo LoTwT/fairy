@@ -222,6 +222,32 @@ views.summary
 
 如果你需要判断当前 source-specific damage views 是 standalone 还是 delta、是否存在 unsupported 条目、或者如何分组展示，不要再自己统计 `entries`，直接使用 `views.summary`。
 
+如果你只想知道当前 source-specific view 有多少前置条件、哪些 requirement kind 已满足 / 未满足，也不要再手工遍历 `requirements[]`，直接使用：
+
+```ts
+views.entries[0].requirementSummary
+// {
+//   count: 2,
+//   satisfiedCount: 2,
+//   unsatisfiedCount: 0,
+//   hasUnsatisfied: false,
+//   groups: [
+//     {
+//       key: "state-flag",
+//       count: 1,
+//       satisfiedCount: 1,
+//       unsatisfiedCount: 0,
+//     },
+//     {
+//       key: "state-value",
+//       count: 1,
+//       satisfiedCount: 1,
+//       unsatisfiedCount: 0,
+//     },
+//   ],
+// }
+```
+
 同一份 source-specific view contract 也已在 `zzz-agent` 中通过 `resolve-build-source-damage-views` 高层 tool 暴露，适合直接给 Agent 查询独立额外结算条目。
 
 如果你需要把主 anomaly / disorder 结算和独立额外结算并列查看，可使用：
@@ -298,6 +324,32 @@ matrix.summary
 ```
 
 如果你需要判断当前 trigger-entry matrix 是否存在 source-view 行、如何分组展示、或者是否只剩主公式，不要再自己统计 `rows`，直接使用 `matrix.summary`。
+
+如果你只想知道某一行 trigger row 的前置条件概况，也直接读取：
+
+```ts
+matrix.rows[1].requirementSummary
+// {
+//   count: 2,
+//   satisfiedCount: 2,
+//   unsatisfiedCount: 0,
+//   hasUnsatisfied: false,
+//   groups: [
+//     {
+//       key: "state-flag",
+//       count: 1,
+//       satisfiedCount: 1,
+//       unsatisfiedCount: 0,
+//     },
+//     {
+//       key: "state-value",
+//       count: 1,
+//       satisfiedCount: 1,
+//       unsatisfiedCount: 0,
+//     },
+//   ],
+// }
+```
 
 如果你需要拿到不进入主伤害公式的独立回能 / 回能速率条目，可使用：
 

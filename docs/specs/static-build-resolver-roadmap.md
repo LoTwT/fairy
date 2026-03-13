@@ -2073,9 +2073,9 @@ Batch B（已完成）：
 ### 45.3 当前状态
 
 - `V40.1` 已完成：冻结到 requirement-summary contract
-- `V40.2` 未开始
-- `V40.3` 未开始
-- `V40.4` 未开始
+- `V40.2` 已完成：source-view entry 已新增稳定 `requirementSummary`
+- `V40.3` 已完成：trigger row 与 compact helper 已对齐 `requirementSummary`
+- `V40.4` 已完成：README / 总规格 / 路线图 / 索引 / 架构入口已同步收口
 
 ### 45.4 当前边界
 
