@@ -94,9 +94,10 @@ import {
   - `爱芮 [异放]`
   - `薇薇安 [异放]`
   - 这类条目不会再继续并入主 anomaly / disorder 公式，而是通过独立 view 展示
-- source-specific utility / energy view：当前已支持：
+- source-specific utility / resource view：当前已支持：
   - `「月相」-朔`
   - `「电磁暴」-叁式`
+  - `时光切片`
   - `家政员`
   - `灼心摇壶`
   - 这类条目不会并入主 damage resolver，而是作为独立 utility 条目暴露
@@ -247,7 +248,7 @@ utilityViews.entries[0].metadata.stableKey
 // }
 ```
 
-同一份 source-specific utility / energy view contract 也已在 `zzz-agent` 中通过 `resolve-build-source-utility-views` 高层 tool 暴露，适合直接给 Agent 查询独立回能条目。
+同一份 source-specific utility / resource view contract 也已在 `zzz-agent` 中通过 `resolve-build-source-utility-views` 高层 tool 暴露，适合直接给 Agent 查询独立回能 / 喧响值条目。
 
 如果你需要一次性拿到当前构筑的全部 source-specific 条目，可使用：
 

@@ -1428,7 +1428,7 @@ Batch B（已完成）：
 - `V25.2` 已完成：utility contract 已新增 `decibel-gain / decibel`
 - `V25.3` 已完成：utility-only agent / w-engine catalog 已与 damage-agent catalog 解耦
 - `V25.4` 已完成：`时光切片` 已按每种触发拆成 `decibel + energy` utility entries，并接入 source-entry collection
-- `V25.5` 未开始
+- `V25.5` 已完成：README / 索引 / 架构入口已同步到“`V25` 已收口”，并统一更新 utility / resource 覆盖说明
 
 ### 30.4 当前边界
 

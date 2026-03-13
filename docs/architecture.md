@@ -124,7 +124,7 @@ packages/zzz-data/
 │   ├── resolver.ts         # finalPanel + scenario → damageParams / trace（含 disorder source / anomaly proficiency gating）
 │   ├── types.ts            # build layer 输入输出 contract（含 disorderSourceTypes / minimumResolvedAnomalyProficiency）
 │   ├── views.ts            # source-specific damage view（独立额外结算条目，不并入主 anomaly/disorder 公式）
-│   ├── utility-views.ts    # source-specific utility / energy view（独立回能 / 回能速率条目，不并入主伤害公式）
+│   ├── utility-views.ts    # source-specific utility / resource view（独立回能 / 回能速率 / 喧响值条目，不并入主伤害公式）
 │   └── index.ts            # re-export
 ├── src/game-modes.ts        # 对外发布的游戏模式 JSON 类型（buffs / DA / SD / TS）+ raw category code contract
 ├── src/terms.ts             # canonical 术语层（raw label → 规范导出映射）
@@ -151,7 +151,7 @@ packages/zzz-agent/
 │ ├── lookup-filters.test.ts # lookupAgent / lookupWEngine 双语筛选与 compact 测试
 │ ├── resolve-build-damage.test.ts # 静态构筑高层 resolver tool 测试
 │ ├── resolve-build-source-damage-views.test.ts # source-specific damage view tool 测试
-│ ├── resolve-build-source-utility-views.test.ts # source-specific utility / energy view tool 测试
+│ ├── resolve-build-source-utility-views.test.ts # source-specific utility / resource view tool 测试
 │ ├── resolve-build-skill-matrix.test.ts # 静态构筑技能矩阵 tool 测试
 │ ├── zzz-agent-prompt.test.ts # prompt 工作流、术语与截图摘要测试
 │ ├── zzz-scorer.test.ts # outputFormat / judge model scorer 测试
@@ -184,7 +184,7 @@ packages/zzz-agent/
 
 - [`damage-calculation.md`](../docs/specs/damage-calculation.md) — 四种伤害类型（常规/贯穿/异常/紊乱）的乘区公式、TypeScript 类型签名与参考数值
 - [`static-build-resolver.md`](../docs/specs/static-build-resolver.md) — 静态构筑解析系统设计：effect schema、输入输出 contract、热插拔乘区管线与模块划分
-- [`static-build-resolver-roadmap.md`](../docs/specs/static-build-resolver-roadmap.md) — 执行路线与阶段状态：当前主线已推进到 `V25`；已覆盖 source views、trigger matrix、utility views 与 unified source-entry collection
+- [`static-build-resolver-roadmap.md`](../docs/specs/static-build-resolver-roadmap.md) — 执行路线与阶段状态：当前主线已推进到 `V25` 并完成第二批 utility / resource view；已覆盖 source views、trigger matrix、utility views 与 unified source-entry collection
 - [`anomaly-disorder-skill-matrix-evaluation.md`](../docs/specs/anomaly-disorder-skill-matrix-evaluation.md) — `8.2` 立项评估：当前结论是不在 `8.3 dynamic value context` 之前实现异常 / 紊乱 matrix
 - [`static-build-resolver-v1.md`](../docs/specs/static-build-resolver-v1.md) — 第一版实现范围冻结：支持对象、bucket、profile、输入输出 contract 与验收标准
 - [`static-build-resolver-v2.md`](../docs/specs/static-build-resolver-v2.md) — 第二版实现范围：扩展支持名单与技能矩阵模板约定
@@ -205,12 +205,12 @@ packages/zzz-agent/
 - [`static-build-resolver-v17.md`](../docs/specs/static-build-resolver-v17.md) — 当前阶段范围：已收口；通用驱动盘的高价值可静态表达来源已补齐
 - [`static-build-resolver-v18.md`](../docs/specs/static-build-resolver-v18.md) — 当前阶段范围：已收口；最后一批 legacy 强攻签名已按 partial coverage / source note 分层固定
 - [`static-build-resolver-v19.md`](../docs/specs/static-build-resolver-v19.md) — 当前阶段范围：已收口；最后两个 utility-only 旧通用音擎已固定为 process-only source note，不新增 public key
-- [`static-build-resolver-v20.md`](../docs/specs/static-build-resolver-v20.md) — 当前阶段范围：已完成第一批 source-specific utility / energy view；`zzz-agent` 已暴露独立 utility view tool，不并回主伤害公式
+- [`static-build-resolver-v20.md`](../docs/specs/static-build-resolver-v20.md) — 当前阶段范围：已完成第一批 source-specific utility / resource view；`zzz-agent` 已暴露独立 utility view tool，不并回主伤害公式
 - [`static-build-resolver-v21.md`](../docs/specs/static-build-resolver-v21.md) — 当前实现：已完成 anomaly / disorder trigger-entry matrix；当前覆盖爱丽丝 / 雅 / 柏妮思 / 爱芮 / 薇薇安
 - [`static-build-resolver-v22.md`](../docs/specs/static-build-resolver-v22.md) — 当前实现：source damage view / source utility view 已增加稳定 metadata；对齐 `canonicalLabel / stableKey / entryKind`
 - [`static-build-resolver-v23.md`](../docs/specs/static-build-resolver-v23.md) — 当前实现：统一 source-entry collection 已完成；支持 utility-only 与 anomaly / disorder mixed collection
 - [`static-build-resolver-v24.md`](../docs/specs/static-build-resolver-v24.md) — 当前阶段：已收口；`薇薇安 [异放]` 已进入公式推导型 delta view，并同步接入 trigger matrix 与 source-entry collection
-- [`static-build-resolver-v25.md`](../docs/specs/static-build-resolver-v25.md) — 当前阶段：已完成 scope freeze；准备扩第二批 utility / resource view，收录 `时光切片` 的 `喧响值 + 能量` 结构化条目，并把 utility-only 查询从 damage-agent catalog 解耦
+- [`static-build-resolver-v25.md`](../docs/specs/static-build-resolver-v25.md) — 当前阶段：已收口；`时光切片` 已按触发类型拆成 `喧响值 + 能量` 的结构化 utility entries，并把 utility-only 查询与 damage-agent catalog 解耦
 
 ## 计算器模块（src/calculator/）
 

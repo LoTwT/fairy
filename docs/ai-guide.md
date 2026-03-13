@@ -50,7 +50,7 @@ src/mastra/
 │   ├── lookup-game-mode.ts  # DA/SD/TS 游戏模式数据查询 + damageContext
 │   ├── resolve-build-damage.ts # 静态构筑高层 resolver（当前支持：全部强攻 / 命破 / 异常代理人 + 对应特性的音擎；single-shot 支持 normal/sheer/anomaly/disorder，并已接入 agentMindscape / energyGenerationRate）
 │   ├── resolve-build-source-damage-views.ts # source-specific 额外结算条目 resolver（爱丽丝 [极性强击] / 雅 [霜灼·破] / 柏妮思 [余烬] / 爱芮 [异放]）
-│   ├── resolve-build-source-utility-views.ts # source-specific utility / energy 条目 resolver（当前覆盖「月相」-朔 / 「电磁暴」-叁式 / 家政员 / 灼心摇壶）
+│   ├── resolve-build-source-utility-views.ts # source-specific utility / resource 条目 resolver（当前覆盖「月相」-朔 / 「电磁暴」-叁式 / 时光切片 / 家政员 / 灼心摇壶）
 │   ├── resolve-build-skill-matrix.ts # 静态构筑技能矩阵 resolver（全技能 / 全段 / 完整伤害表；当前仅强攻 / 命破，但共享相同的 progression-aware loadout/panel contract）
 │   └── calc-damage.ts    # 伤害计算（normal/sheer/anomaly/disorder）
 └── scorers/
