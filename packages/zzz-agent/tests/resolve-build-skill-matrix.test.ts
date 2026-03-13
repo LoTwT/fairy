@@ -90,6 +90,13 @@ describe("resolveBuildSkillMatrix tool", () => {
       (result as any).matrix.rows.filter((row: any) => row.group === "普通攻击")
         .length,
     )
+    const normalGroupEffect = normalGroup?.effectSummary.find(
+      (item: any) =>
+        item.sourceName === "防暴者Ⅵ型" &&
+        item.label === "音擎被动：暴击率提升",
+    )
+    expect(normalGroupEffect?.appliedRowCount).toBe(normalGroup?.count)
+    expect(normalGroupEffect?.totalRowCount).toBe(normalGroup?.count)
     expect(normalGroup?.diagnosticSummary.count).toBe(
       (result as any).matrix.rows
         .filter((row: any) => row.group === "普通攻击")

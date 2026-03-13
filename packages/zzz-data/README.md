@@ -899,6 +899,19 @@ matrix.summary.groups[0]
 //   key: "普通攻击",
 //   label: "普通攻击",
 //   count: 12,
+//   effectSummary: [
+//     {
+//       effectId: "zhu-yuan-w-engine-crit-rate",
+//       sourceName: "防暴者Ⅵ型",
+//       label: "音擎被动：暴击率提升",
+//       bucket: "暴击率",
+//       value: "+15%",
+//       appliedRowCount: 12,
+//       totalRowCount: 12,
+//       appliesToAllRows: true,
+//       condition: "当前矩阵全部生效",
+//     },
+//   ],
 //   diagnosticSummary: {
 //     count: 24,
 //     hasDiagnostics: true,

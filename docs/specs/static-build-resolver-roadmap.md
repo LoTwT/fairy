@@ -3011,3 +3011,43 @@ Batch B（已完成）：
 1. 不改变 `row.summary / row.resolvedBuckets`
 2. 不新增 group-level effect summaries
 3. 不改变 `effectSummary` 的聚合逻辑
+
+## 66. V63 skill-matrix group effect summaries
+
+### 66.1 目标
+
+`V62` 收口后，`skill-matrix summary` 已能稳定给出局部 `groups[*].diagnosticSummary / sourceNoteSummary`。
+
+但按 `row.group` 拆 section 时，`effectSummary` 仍只有整张矩阵版本。上层如果想在“普通攻击 / 特殊技 / 连携技”分组下分别解释哪些效果生效，仍要重新遍历 rows 再自行聚合。
+
+`V63` 只解决一件事：
+
+1. 为 `skill-matrix summary groups` 增加局部 `effectSummary`
+
+### 66.2 范围
+
+1. `V63.1` scope freeze
+2. `V63.2` group-level effect summaries
+3. `V63.3` high-level / prompt alignment
+4. `V63.4` docs closeout
+
+### 66.3 当前状态
+
+- `V63.1` 已完成：冻结到 skill-matrix group effect summaries
+- `V63.2` 已完成：`StaticBuildSkillMatrixGroupSummary` 已新增局部 `effectSummary`
+- `V63.3` 已完成：高层 tool 断言与 agent prompt 已对齐 `matrix.summary.groups[*].effectSummary`
+- `V63.4` 已完成：相关 specs、roadmap、索引、架构文档与 README 已同步
+
+### 66.4 当前边界
+
+本阶段只做：
+
+1. 为 `skill-matrix summary groups` 增加局部 effect summaries
+2. 保持现有全矩阵 `effectSummary` 兼容
+3. 保持现有 row-level `unsupportedEffects` / `summary` 契约不变
+
+显式不做：
+
+1. 不改变 `effectSummary` 的聚合维度
+2. 不新增 group-level formula summaries
+3. 不改变 `row.group` 的分组逻辑

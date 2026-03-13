@@ -560,6 +560,7 @@ function summarizeSkillMatrix(rows: StaticBuildSkillMatrixRow[]) {
     key: group,
     label: group,
     count: groupRows.length,
+    effectSummary: summarizeSkillMatrixEffects(groupRows),
     diagnosticSummary: summarizeDiagnosticEntries(
       groupRows.flatMap((row) => row.diagnostics),
     ),

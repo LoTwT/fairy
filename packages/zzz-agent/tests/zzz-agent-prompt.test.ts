@@ -44,6 +44,7 @@ it("keeps screenshot summary by default", async () => {
   expect(base.includes("resolveBuildSourceDamageViews")).toBe(true)
   expect(base.includes("resolveBuildSourceUtilityViews")).toBe(true)
   expect(base.includes("matrix.effectSummary")).toBe(true)
+  expect(base.includes("matrix.summary.groups[*].effectSummary")).toBe(true)
   expect(base.includes("commonFormulaMultipliers")).toBe(true)
   expect(base.includes("matrix.summary.groups[*].diagnosticSummary")).toBe(true)
   expect(base.includes("matrix.summary.groups[*].sourceNoteSummary")).toBe(true)

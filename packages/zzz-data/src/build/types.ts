@@ -960,6 +960,7 @@ export interface StaticBuildSkillMatrixGroupSummary {
   key: string
   label: string
   count: number
+  effectSummary: StaticBuildSkillMatrixEffectSummaryItem[]
   diagnosticSummary: StaticBuildDiagnosticSummary
   sourceNoteSummary: StaticBuildSourceNoteSummary
 }
