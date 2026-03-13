@@ -71,7 +71,7 @@
 4. `V4 progression-aware resolver`
 5. `V5 source-aware dynamic snapshot context`
 
-当前 `V44 source-entry collection aggregates`、`V45 source-view summary aggregates` 与 `V46 trigger-matrix summary aggregates` 已在当前 contract 下收口。
+当前 `V44 source-entry collection aggregates`、`V45 source-view summary aggregates` 与 `V46 trigger-matrix summary aggregates` 已在当前 contract 下收口；当前主线进入 `V47 skill-matrix summary aggregates`。
 
 ## 3. V2.1：Curated Coverage
 
@@ -2342,3 +2342,44 @@ Batch B（已完成）：
 1. 不改变 trigger-matrix rows
 2. 不新增新的 trigger-matrix groups
 3. 不改 source-view / source-entry collection 既有 summary contract
+
+## 52. V47 skill-matrix summary aggregates
+
+### 52.1 目标
+
+`V46` 收口后，source-entry collection、standalone source views 与 trigger matrix 顶层都已具备聚合 `diagnosticSummary / sourceNoteSummary`。
+
+但 skill matrix 顶层仍只暴露 `summary` / `effectSummary` / `rows` / `assumptions`。
+
+`V47` 只解决一件事：
+
+1. 为 skill-matrix 顶层增加聚合 `diagnosticSummary`
+2. 为 skill-matrix 顶层增加聚合 `sourceNoteSummary`
+
+### 52.2 范围
+
+1. `V47.1` scope freeze
+2. `V47.2` matrix-level aggregate contract
+3. `V47.3` compact / high-level alignment
+4. `V47.4` docs closeout
+
+### 52.3 当前状态
+
+- `V47.1` 已完成：冻结到 skill-matrix aggregate contract
+- `V47.2` 未开始
+- `V47.3` 未开始
+- `V47.4` 未开始
+
+### 52.4 当前边界
+
+本阶段只做：
+
+1. 为 `ResolveStaticBuildSkillMatrixResult` 增加 `diagnosticSummary / sourceNoteSummary`
+2. 保持现有 `summary` / `effectSummary` 与 row-level contract 兼容
+3. 对齐 compact helper 与高层 `resolve-build-skill-matrix`
+
+显式不做：
+
+1. 不改变现有 `summary` 字段
+2. 不改变现有 `effectSummary` 语义
+3. 不新增新的 matrix group 或 row metadata
