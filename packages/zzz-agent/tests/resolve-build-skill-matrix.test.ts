@@ -83,6 +83,23 @@ describe("resolveBuildSkillMatrix tool", () => {
     expect((result as any).matrix.sourceNoteSummary.count).toBe(
       (result as any).matrix.rows.flatMap((row: any) => row.sourceNotes).length,
     )
+    const normalGroup = (result as any).matrix.summary.groups.find(
+      (group: any) => group.key === "普通攻击",
+    )
+    expect(normalGroup?.count).toBe(
+      (result as any).matrix.rows.filter((row: any) => row.group === "普通攻击")
+        .length,
+    )
+    expect(normalGroup?.diagnosticSummary.count).toBe(
+      (result as any).matrix.rows
+        .filter((row: any) => row.group === "普通攻击")
+        .flatMap((row: any) => row.diagnostics).length,
+    )
+    expect(normalGroup?.sourceNoteSummary.count).toBe(
+      (result as any).matrix.rows
+        .filter((row: any) => row.group === "普通攻击")
+        .flatMap((row: any) => row.sourceNotes).length,
+    )
     expect(
       (result as any).matrix.summary.commonFormulaMultipliers.critMultiplier,
     ).toBeGreaterThan(1)

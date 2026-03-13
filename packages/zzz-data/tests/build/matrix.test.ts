@@ -58,6 +58,22 @@ describe("static build skill matrix", () => {
       condition: "当前矩阵全部生效",
     })
     expect(globalEffect?.value).toBeTruthy()
+    const normalGroup = result.summary.groups.find(
+      (group) => group.key === "普通攻击",
+    )
+    expect(normalGroup?.count).toBe(
+      result.rows.filter((row) => row.group === "普通攻击").length,
+    )
+    expect(normalGroup?.diagnosticSummary.count).toBe(
+      result.rows
+        .filter((row) => row.group === "普通攻击")
+        .flatMap((row) => row.diagnostics).length,
+    )
+    expect(normalGroup?.sourceNoteSummary.count).toBe(
+      result.rows
+        .filter((row) => row.group === "普通攻击")
+        .flatMap((row) => row.sourceNotes).length,
+    )
     expect(result.rows).toHaveLength(21)
     expect(result.rows[0]?.label).toBe("普通攻击·一段")
     expect(result.rows[0]?.metadata).toMatchObject({

@@ -549,6 +549,24 @@ function summarizeSkillMatrix(rows: StaticBuildSkillMatrixRow[]) {
   const { commonBuckets, variableBuckets } = summarizeBuckets(rows)
   const { commonFormulaMultipliers, variableFormulaMultipliers } =
     summarizeFormulaMultipliers(rows)
+  const groups = Array.from(
+    rows.reduce((map, row) => {
+      const groupRows = map.get(row.group) ?? []
+      groupRows.push(row)
+      map.set(row.group, groupRows)
+      return map
+    }, new Map<string, StaticBuildSkillMatrixRow[]>()),
+  ).map(([group, groupRows]) => ({
+    key: group,
+    label: group,
+    count: groupRows.length,
+    diagnosticSummary: summarizeDiagnosticEntries(
+      groupRows.flatMap((row) => row.diagnostics),
+    ),
+    sourceNoteSummary: summarizeSourceNoteEntries(
+      groupRows.flatMap((row) => row.sourceNotes),
+    ),
+  }))
 
   if (!first) {
     throw new RangeError("Cannot summarize empty skill matrix")
@@ -569,6 +587,7 @@ function summarizeSkillMatrix(rows: StaticBuildSkillMatrixRow[]) {
     variableBuckets,
     commonFormulaMultipliers,
     variableFormulaMultipliers,
+    groups,
   }
 }
 

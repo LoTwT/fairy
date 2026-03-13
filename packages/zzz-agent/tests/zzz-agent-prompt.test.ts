@@ -45,6 +45,8 @@ it("keeps screenshot summary by default", async () => {
   expect(base.includes("resolveBuildSourceUtilityViews")).toBe(true)
   expect(base.includes("matrix.effectSummary")).toBe(true)
   expect(base.includes("commonFormulaMultipliers")).toBe(true)
+  expect(base.includes("matrix.summary.groups[*].diagnosticSummary")).toBe(true)
+  expect(base.includes("matrix.summary.groups[*].sourceNoteSummary")).toBe(true)
   expect(base.includes("额外结算条目")).toBe(true)
   expect(base.includes("额外来源条目")).toBe(true)
   expect(base.includes("触发条目矩阵")).toBe(true)

@@ -894,6 +894,35 @@ matrix.sourceNoteSummary
 //   ownerGroups: [],
 // }
 
+matrix.summary.groups[0]
+// {
+//   key: "普通攻击",
+//   label: "普通攻击",
+//   count: 12,
+//   diagnosticSummary: {
+//     count: 24,
+//     hasDiagnostics: true,
+//     hasDefaultedInput: true,
+//     hasCoverageGap: false,
+//     hasUnsupportedEffect: false,
+//     hasFallback: false,
+//     kindGroups: [{ key: "defaulted-input", label: "默认输入", count: 24 }],
+//     ownerGroups: [
+//       { key: "loadout", count: 12 },
+//       { key: "scenario", count: 12 },
+//     ],
+//   },
+//   sourceNoteSummary: {
+//     count: 0,
+//     hasSourceNotes: false,
+//     hasMissingInput: false,
+//     hasProcessOnly: false,
+//     hasResearchOnly: false,
+//     statusGroups: [],
+//     ownerGroups: [],
+//   },
+// }
+
 matrix.effectSummary[0]
 // {
 //   effectId: "zhu-yuan-core-suppression",

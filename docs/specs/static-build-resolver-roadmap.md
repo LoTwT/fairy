@@ -2971,3 +2971,43 @@ Batch B（已完成）：
 1. 不改变 `row.requirements / requirementSummary`
 2. 不新增新的 trigger-row metadata
 3. 不改变 `damage / summary / assumptions`
+
+## 65. V62 skill-matrix group summaries
+
+### 65.1 目标
+
+`V61` 收口后，`trigger-matrix groups` 已能稳定给出局部 `requirementSummary / diagnosticSummary / sourceNoteSummary`。
+
+但 `skill matrix` 顶层仍只有 `rowCount / commonBuckets / commonFormulaMultipliers / effectSummary / diagnosticSummary / sourceNoteSummary`。上层如果按 `row.group` 拆 section，仍要重新遍历 rows 统计组内 diagnostics / source notes。
+
+`V62` 只解决一件事：
+
+1. 为 `skill-matrix summary` 增加局部 `groups[*].diagnosticSummary / sourceNoteSummary`
+
+### 65.2 范围
+
+1. `V62.1` scope freeze
+2. `V62.2` group-level summaries
+3. `V62.3` high-level / prompt alignment
+4. `V62.4` docs closeout
+
+### 65.3 当前状态
+
+- `V62.1` 已完成：冻结到 skill-matrix group summaries
+- `V62.2` 已完成：`StaticBuildSkillMatrixSummary` 已新增局部 `groups[*]`
+- `V62.3` 已完成：高层 tool 断言与 agent prompt 已对齐 `matrix.summary.groups[*]`
+- `V62.4` 已完成：相关 specs、roadmap、索引、架构文档与 README 已同步
+
+### 65.4 当前边界
+
+本阶段只做：
+
+1. 为 `skill-matrix summary` 增加局部 group summaries
+2. 保持现有 `effectSummary / commonFormulaMultipliers` 兼容
+3. 保持 `row.group` 和现有 row-level contract 兼容
+
+显式不做：
+
+1. 不改变 `row.summary / row.resolvedBuckets`
+2. 不新增 group-level effect summaries
+3. 不改变 `effectSummary` 的聚合逻辑
