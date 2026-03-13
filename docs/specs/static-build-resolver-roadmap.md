@@ -63,6 +63,7 @@
 - `V46 trigger-matrix summary aggregates` 已收口
 - `V47 skill-matrix summary aggregates` 已收口
 - `V48 skill-matrix row summaries` 已收口
+- 当前活跃阶段：`V49 skill-matrix row resolve summaries`
 - 当前边界：`resolveStaticBuildSkillMatrix` 仍只支持 `normal / sheer`
 
 ## 2. 阶段划分
@@ -2430,4 +2431,49 @@ Batch B（已完成）：
 
 1. 不新增 `requirementSummary`
 2. 不改变 row-level `diagnostics / sourceNotes` 原始数组
+3. 不新增新的 matrix row metadata
+
+## 54. V49 skill-matrix row resolve summaries
+
+### 54.1 目标
+
+`V48` 收口后，skill matrix row 已具备稳定的：
+
+1. `damageSummary`
+2. `resolvedBuckets`
+3. `diagnosticSummary`
+4. `sourceNoteSummary`
+
+但 `ResolveStaticBuildResult.summary` 仍只存在于 `row.build.summary`。
+
+`V49` 只解决一件事：
+
+1. 为 `skill matrix row` 增加稳定 `summary`
+
+### 54.2 范围
+
+1. `V49.1` scope freeze
+2. `V49.2` row-level resolve summary contract
+3. `V49.3` compact / high-level alignment
+4. `V49.4` docs closeout
+
+### 54.3 当前状态
+
+- `V49.1` 已完成：冻结到 skill-matrix row resolve summary contract
+- `V49.2` 未开始
+- `V49.3` 未开始
+- `V49.4` 未开始
+
+### 54.4 当前边界
+
+本阶段只做：
+
+1. 为 `StaticBuildSkillMatrixRow` 增加 `summary`
+2. 保持现有 `damageSummary / resolvedBuckets / diagnosticSummary / sourceNoteSummary` 兼容
+3. 对齐 compact helper 与高层 `resolve-build-skill-matrix`
+
+显式不做：
+
+1. 不改变 `ResolveStaticBuildResult.summary`
+2. 不改变 `includeDetails` 语义
 3. 不新增新的 matrix row metadata
