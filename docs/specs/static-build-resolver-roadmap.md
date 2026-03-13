@@ -65,6 +65,7 @@
 - `V48 skill-matrix row summaries` 已收口
 - `V49 skill-matrix row resolve summaries` 已收口
 - `V50 source-damage-view entry resolve summaries` 已收口
+- 当前活跃阶段：`V51 trigger-matrix row resolve summaries`
 - 当前边界：`resolveStaticBuildSkillMatrix` 仍只支持 `normal / sheer`
 
 ## 2. 阶段划分
@@ -2518,3 +2519,43 @@ Batch B（已完成）：
 1. 不改变 `ResolveStaticBuildResult.summary`
 2. 不修改 `includeDetails` 语义
 3. 不新增新的 source-view metadata
+
+## 56. V51 trigger-matrix row resolve summaries
+
+### 56.1 目标
+
+`V50` 收口后，source-damage-view entry 已具备稳定 `summary`。
+
+但 `StaticBuildTriggerMatrixRow` 仍需要在 `includeDetails` 下才可读取 `build.summary`。
+
+`V51` 只解决一件事：
+
+1. 为 trigger-matrix row 增加稳定 `summary`
+
+### 56.2 范围
+
+1. `V51.1` scope freeze
+2. `V51.2` row-level resolve summary contract
+3. `V51.3` compact / high-level alignment
+4. `V51.4` docs closeout
+
+### 56.3 当前状态
+
+- `V51.1` 已完成：冻结到 trigger-matrix row resolve summary contract
+- `V51.2` 未开始
+- `V51.3` 未开始
+- `V51.4` 未开始
+
+### 56.4 当前边界
+
+本阶段只做：
+
+1. 为 `StaticBuildTriggerMatrixRow` 增加 `summary`
+2. 保持现有 `damage / requirementSummary / diagnosticSummary / sourceNoteSummary` 兼容
+3. 对齐 compact helper 与高层 `resolve-build-trigger-matrix`
+
+显式不做：
+
+1. 不改变 `ResolveStaticBuildResult.summary`
+2. 不修改 `includeDetails` 语义
+3. 不新增新的 trigger-row metadata
