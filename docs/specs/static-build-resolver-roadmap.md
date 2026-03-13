@@ -56,6 +56,7 @@
 - `V3 anomaly / disorder` 已完成单次 resolver 主线
 - `V4 progression-aware resolver` 已在当前 contract 下收口
 - `V5 source-aware dynamic snapshot context` 已在当前 contract 下收口
+- `V42 source-note summaries` 已收口
 - 当前边界：`resolveStaticBuildSkillMatrix` 仍只支持 `normal / sheer`
 
 ## 2. 阶段划分
@@ -68,7 +69,7 @@
 4. `V4 progression-aware resolver`
 5. `V5 source-aware dynamic snapshot context`
 
-当前下一主线切换为 `V7 resolved snapshot overrides`。
+当前下一主线切换为 `V43 utility-entry summaries`。
 
 ## 3. V2.1：Curated Coverage
 
@@ -2174,3 +2175,45 @@ Batch B（已完成）：
 2. 不新增新的 source-note status
 3. 不新增新的 coverage
 4. 不改 `ResolveStaticBuildResult.summary` 的既有结构
+
+## 48. V43 utility-entry summaries
+
+### 48.1 目标
+
+`V42` 收口后，`source-damage-view entry` 与 `trigger-entry matrix row` 已完成 summary 化，但 `source-utility-view entry` 仍只有逐条数组：
+
+1. `diagnostics[]`
+2. `sourceNotes[]`
+
+`V43` 只解决一件事：
+
+1. 为 utility entry 增加稳定 `diagnosticSummary`
+2. 为 utility entry 增加稳定 `sourceNoteSummary`
+
+### 48.2 范围
+
+1. `V43.1` scope freeze
+2. `V43.2` utility-entry summary contract
+3. `V43.3` compact / high-level alignment
+4. `V43.4` docs closeout
+
+### 48.3 当前状态
+
+- `V43.1` 已完成：冻结到 utility-entry summary contract
+- `V43.2` 未开始
+- `V43.3` 未开始
+- `V43.4` 未开始
+
+### 48.4 当前边界
+
+本阶段只做：
+
+1. 为 utility entry 增加 `diagnosticSummary`
+2. 为 utility entry 增加 `sourceNoteSummary`
+3. 保持现有 `diagnostics[]` / `sourceNotes[]` 与 compact helper 兼容
+
+显式不做：
+
+1. 不新增 `requirements[]`
+2. 不新增新的 utility coverage
+3. 不改 source utility view 顶层 `summary`
