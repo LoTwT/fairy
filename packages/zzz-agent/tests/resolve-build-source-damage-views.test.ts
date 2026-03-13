@@ -115,7 +115,7 @@ describe("resolveBuildSourceDamageViews tool", () => {
 
     expect((result as any).found).toBe(false)
     expect((result as any).supportedAgents).toEqual(
-      expect.arrayContaining(["爱丽丝", "柏妮思", "雅", "爱芮"]),
+      expect.arrayContaining(["爱丽丝", "柏妮思", "雅", "爱芮", "薇薇安"]),
     )
   })
 
@@ -167,6 +167,58 @@ describe("resolveBuildSourceDamageViews tool", () => {
           note.keys.includes(
             "scenario.dynamicSnapshot.values.ariaExflowDamageRatio",
           ),
+      ),
+    ).toBe(true)
+  })
+
+  it("returns Vivian exflow as a covered formula-derived delta source view", async () => {
+    const result = await runTool(resolveBuildSourceDamageViews, {
+      agent: "薇薇安",
+      wEngine: "飞鸟星梦",
+      mode: "full-buff",
+      agentLevel: 60,
+      agentMindscape: 2,
+      coreSkillLevel: 7,
+      wEngineRefinement: 1,
+      finalPanel: {
+        attack: 3000,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 180,
+      },
+      scenario: {
+        damageType: "disorder",
+        skillTag: "basic",
+        anomalyType: "ether",
+        remainingTime: 5,
+        attribute: "以太",
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    expect((result as any).views.entries[0]).toMatchObject({
+      id: "vivian-exflow",
+      supported: true,
+      resolutionMode: "delta",
+      metadata: {
+        canonicalLabel: "薇薇安：[异放]",
+        stableKey: "source-view:vivian-exflow",
+        entryKind: "source-damage-view",
+      },
+    })
+    expect(
+      (result as any).views.entries[0].requirements.map(
+        (item: any) => item.kind,
+      ),
+    ).toEqual(expect.arrayContaining(["panel-value", "scenario-value"]))
+    expect(
+      (result as any).views.entries[0].assumptions.some((item: string) =>
+        item.includes("按 coreSkillLevel 与异常精通推导 [异放] 比例"),
       ),
     ).toBe(true)
   })

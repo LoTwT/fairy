@@ -487,6 +487,8 @@ export interface ResolveStaticBuildResult {
 
 export type StaticBuildSourceDamageViewRequirementKind =
   | "combat-tag"
+  | "panel-value"
+  | "scenario-value"
   | "dynamic-flag"
   | "dynamic-count"
   | "dynamic-value"

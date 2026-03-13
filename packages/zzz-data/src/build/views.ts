@@ -1,3 +1,4 @@
+import type { AnomalyType } from "../calculator/types.js"
 import type {
   ResolveStaticBuildInput,
   ResolveStaticBuildResult,
@@ -8,6 +9,7 @@ import type {
   StaticBuildSourceDamageViewEntry,
   StaticBuildSourceDamageViewRequirement,
 } from "./types.js"
+import { toBaseResistanceAttribute } from "../terms.js"
 import {
   getStaticBuildAgent,
   getStaticBuildDriveDisc,
@@ -17,8 +19,16 @@ import {
 import { getStaticBuildSourceNoteEntries } from "./definitions.js"
 import { resolveStaticBuildDamage } from "./resolver.js"
 
-const sourceViewAgentIds = ["1091", "1171", "1401", "1501"] as const
+const sourceViewAgentIds = ["1091", "1171", "1331", "1401", "1501"] as const
 const sourceViewAgentIdSet = new Set<string>(sourceViewAgentIds)
+
+const vivianExflowRatios = {
+  ether: [0.0307, 0.0359, 0.0411, 0.0463, 0.0515, 0.0565, 0.0615],
+  electric: [0.016, 0.0186, 0.0212, 0.0238, 0.0264, 0.029, 0.032],
+  fire: [0.04, 0.0466, 0.0532, 0.0598, 0.0664, 0.073, 0.08],
+  physical: [0.0037, 0.0044, 0.0051, 0.0058, 0.0065, 0.007, 0.0075],
+  ice: [0.0054, 0.0063, 0.0072, 0.0081, 0.009, 0.0099, 0.0108],
+} as const
 
 export const supportedStaticBuildSourceViewAgents = supportedStaticBuildAgents
   .filter((item) => sourceViewAgentIdSet.has(item.id))
@@ -95,6 +105,10 @@ export function resolveStaticBuildSourceDamageViews(
 
   if (input.loadout.agentId === "1171") {
     entries.push(resolveBurniceEmberView(input))
+  }
+
+  if (input.loadout.agentId === "1331") {
+    entries.push(resolveVivianExflowView(input))
   }
 
   if (input.loadout.agentId === "1501") {
@@ -191,6 +205,53 @@ function withResolvedSkillMultiplierFactor(
       },
     },
   }
+}
+
+function resolveVivianSourceAnomalyType(
+  input: ResolveStaticBuildInput,
+):
+  | Extract<AnomalyType, "electric" | "ether" | "fire" | "ice" | "physical">
+  | undefined {
+  if (input.scenario.damageType === "disorder") {
+    switch (input.scenario.anomalyType) {
+      case "auricInk":
+        return "ether"
+      case "frost":
+        return "ice"
+      default:
+        return input.scenario.anomalyType
+    }
+  }
+
+  if (!input.scenario.attribute) return undefined
+  const baseAttribute = toBaseResistanceAttribute(input.scenario.attribute)
+  if (
+    baseAttribute === "electric" ||
+    baseAttribute === "ether" ||
+    baseAttribute === "fire" ||
+    baseAttribute === "ice" ||
+    baseAttribute === "physical"
+  ) {
+    return baseAttribute
+  }
+
+  return undefined
+}
+
+function resolveVivianExflowRatio(input: ResolveStaticBuildInput) {
+  const sourceAnomalyType = resolveVivianSourceAnomalyType(input)
+  if (!sourceAnomalyType) return undefined
+  if (input.panel.anomalyProficiency === undefined) return undefined
+
+  const coreSkillLevel = Math.max(
+    1,
+    Math.min(input.loadout.coreSkillLevel ?? 7, 7),
+  )
+  const ratioPerTen =
+    vivianExflowRatios[sourceAnomalyType][coreSkillLevel - 1] ?? 0
+  const baseRatio = ratioPerTen * (input.panel.anomalyProficiency / 10)
+  const mindscapeMultiplier = (input.loadout.agentMindscape ?? 0) >= 2 ? 1.3 : 1
+  return baseRatio * mindscapeMultiplier
 }
 
 function withoutBurniceEmberSnapshot(
@@ -447,5 +508,67 @@ function resolveAriaExflowView(
   entry.assumptions.push(
     "当前 view 使用“含 [异放] 快照结果 - 去除 [异放] 快照结果”的差值，表达额外结算的静态贡献。",
   )
+  return entry
+}
+
+function resolveVivianExflowView(
+  input: ResolveStaticBuildInput,
+): StaticBuildSourceDamageViewEntry {
+  const sourceAnomalyType = resolveVivianSourceAnomalyType(input)
+  const derivedRatio = resolveVivianExflowRatio(input)
+  const requirements = [
+    createRequirement(
+      "panel-value",
+      "anomalyProficiency",
+      input.panel.anomalyProficiency !== undefined,
+    ),
+    createRequirement(
+      "scenario-value",
+      "sourceAnomalyType",
+      sourceAnomalyType !== undefined,
+    ),
+  ]
+  const entry = createEntryBase(
+    input,
+    {
+      id: "vivian-exflow",
+      label: "薇薇安：[异放]",
+      sourceType: "agent",
+      sourceId: "1331",
+      resolutionMode: "delta",
+    },
+    requirements,
+  )
+
+  if (!entry.supported || derivedRatio === undefined) {
+    entry.assumptions.push(
+      sourceAnomalyType === undefined
+        ? "需要通过 scenario.attribute（anomaly）或 scenario.anomalyType（disorder）显式提供原异常属性，以推导 [异放] 比例。"
+        : "需要提供 finalPanel.anomalyProficiency，以推导薇薇安 [异放] 的额外结算比例。",
+    )
+    return entry
+  }
+
+  const withSnapshot = resolveStaticBuildDamage(
+    withResolvedSkillMultiplierFactor(input, 1 + derivedRatio),
+  )
+  const withoutSnapshot = resolveStaticBuildDamage(input)
+  entry.diagnostics = withSnapshot.diagnostics
+  entry.damage = {
+    expected:
+      withSnapshot.damage.expected.total -
+      withoutSnapshot.damage.expected.total,
+    crit: withSnapshot.damage.crit.total - withoutSnapshot.damage.crit.total,
+    noCrit:
+      withSnapshot.damage.noCrit.total - withoutSnapshot.damage.noCrit.total,
+  }
+  entry.assumptions.push(
+    "当前 view 使用“按 coreSkillLevel 与异常精通推导 [异放] 比例后的结果 - 原主结算结果”的差值，表达额外结算的静态贡献。",
+  )
+  if ((input.loadout.agentMindscape ?? 0) >= 2) {
+    entry.assumptions.push(
+      "已按影画2将 [异放] 从异常精通中获得的收益提升至原本的 130%。",
+    )
+  }
   return entry
 }

@@ -30,10 +30,9 @@ function buildResult(
   params: DisorderDamageParams,
   anomalyCritMultiplier: number,
 ): DamageResult {
-  const damageMultiplier = calcDisorderDamageMultiplier(
-    params.anomalyType,
-    params.remainingTime,
-  )
+  const damageMultiplier =
+    calcDisorderDamageMultiplier(params.anomalyType, params.remainingTime) *
+    (params.damageMultiplierFactor ?? 1)
   const baseDamage = params.virtualAgentAttack * damageMultiplier
   const bonusMultiplier = calcBonusMultiplier(params.bonusDamageSum)
   const anomalyProficiencyMultiplier = calcAnomalyProficiencyMultiplier(

@@ -14,7 +14,7 @@
 
 - [伤害计算算法](./specs/damage-calculation.md) — 四种伤害类型（常规/贯穿/异常/紊乱）的完整乘区公式、TypeScript 类型签名与参考数值
 - [静态构筑解析系统](./specs/static-build-resolver.md) — 静态效果系统、输入输出 contract、热插拔乘区管线与模块设计
-- [静态构筑解析系统路线图](./specs/static-build-resolver-roadmap.md) — 当前执行状态：V2.1、V2.2、V3 已完成；V4 progression-aware resolver 第九批已落地并在当前 contract 下收口；异常/紊乱 matrix 仍为显式 out-of-scope
+- [静态构筑解析系统路线图](./specs/static-build-resolver-roadmap.md) — 当前执行状态：已推进并收口到 V24；当前 contract 已覆盖 source views、trigger matrix、utility views 与 unified source-entry collection，异常/紊乱 skill matrix 仍为显式 out-of-scope
 - [异常 / 紊乱 Skill Matrix 立项评估](./specs/anomaly-disorder-skill-matrix-evaluation.md) — 结论：在更强的 dynamic value context 落地前，不进入 anomaly / disorder matrix 实现
 - [静态构筑解析系统 V1](./specs/static-build-resolver-v1.md) — 第一版冻结范围：支持对象、输入输出 contract、profile 与验收标准
 - [静态构筑解析系统 V2](./specs/static-build-resolver-v2.md) — 第二阶段实现：全部强攻 / 命破代理人、动态强攻/命破音擎、curated + 通用技能矩阵约定
@@ -36,7 +36,7 @@
 - [静态构筑解析系统 V18](./specs/static-build-resolver-v18.md) — 当前阶段：已收口；最后一批 legacy 强攻签名已按 partial coverage / source note 分层固定，不新增 public key
 - [静态构筑解析系统 V19](./specs/static-build-resolver-v19.md) — 当前阶段：已收口；最后两个 utility-only 旧通用音擎已固定为 process-only source note，不新增 public key
 - [静态构筑解析系统 V20](./specs/static-build-resolver-v20.md) — 当前阶段：已完成第一批 source-specific utility / energy view，`zzz-agent` 已暴露独立 utility view tool
-- [静态构筑解析系统 V21](./specs/static-build-resolver-v21.md) — 当前实现：已完成 anomaly / disorder trigger-entry matrix，第一批覆盖爱丽丝 / 雅 / 柏妮思 / 爱芮
+- [静态构筑解析系统 V21](./specs/static-build-resolver-v21.md) — 当前实现：已完成 anomaly / disorder trigger-entry matrix；当前覆盖爱丽丝 / 雅 / 柏妮思 / 爱芮 / 薇薇安
 - [静态构筑解析系统 V22](./specs/static-build-resolver-v22.md) — 当前实现：已为 source damage view / utility view 增加稳定 metadata
 - [静态构筑解析系统 V23](./specs/static-build-resolver-v23.md) — 当前实现：已完成统一 source-entry collection，支持 utility-only 与 anomaly / disorder mixed collection
-- [静态构筑解析系统 V24](./specs/static-build-resolver-v24.md) — 当前阶段：第二批可推导 source view 覆盖，第一批目标为薇薇安 `[异放]`
+- [静态构筑解析系统 V24](./specs/static-build-resolver-v24.md) — 当前阶段：已收口；`薇薇安 [异放]` 已进入公式推导型 delta view，并同步接入 trigger matrix 与 source-entry collection

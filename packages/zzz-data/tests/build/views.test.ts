@@ -9,8 +9,10 @@ describe("static build source damage views", () => {
   it("exports the current source-view support scope", () => {
     expect(
       supportedStaticBuildSourceViewAgents.map((item) => item.name),
-    ).toEqual(expect.arrayContaining(["爱丽丝", "柏妮思", "雅", "爱芮"]))
-    expect(supportedStaticBuildSourceViewAgents).toHaveLength(4)
+    ).toEqual(
+      expect.arrayContaining(["爱丽丝", "柏妮思", "雅", "爱芮", "薇薇安"]),
+    )
+    expect(supportedStaticBuildSourceViewAgents).toHaveLength(5)
   })
 
   it("returns an empty view list when the current loadout has no source-specific view coverage", () => {
@@ -267,6 +269,73 @@ describe("static build source damage views", () => {
           note.keys.includes(
             "scenario.dynamicSnapshot.values.ariaExflowDamageRatio",
           ),
+      ),
+    ).toBe(true)
+    expect(result.entries[0]?.damage?.expected).toBeGreaterThan(0)
+  })
+
+  it("resolves Vivian exflow as a formula-derived delta source-specific view", () => {
+    const result = resolveStaticBuildSourceDamageViews({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1331",
+        wEngineId: "14133",
+        agentLevel: 60,
+        agentMindscape: 2,
+        coreSkillLevel: 7,
+        wEngineRefinement: 1,
+      },
+      panel: {
+        attack: 3000,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 180,
+      },
+      scenario: {
+        damageType: "disorder",
+        skillTag: "basic",
+        anomalyType: "ether",
+        remainingTime: 5,
+        attribute: "以太",
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.entries).toHaveLength(1)
+    expect(result.entries[0]).toMatchObject({
+      id: "vivian-exflow",
+      supported: true,
+      resolutionMode: "delta",
+      metadata: {
+        canonicalLabel: "薇薇安：[异放]",
+        stableKey: "source-view:vivian-exflow",
+        entryKind: "source-damage-view",
+        damageType: "disorder",
+        resolutionMode: "delta",
+      },
+      requirements: [
+        {
+          kind: "panel-value",
+          key: "anomalyProficiency",
+        },
+        {
+          kind: "scenario-value",
+          key: "sourceAnomalyType",
+        },
+      ],
+    })
+    expect(
+      result.entries[0]?.assumptions.some((item) =>
+        item.includes("按 coreSkillLevel 与异常精通推导 [异放] 比例"),
+      ),
+    ).toBe(true)
+    expect(
+      result.entries[0]?.assumptions.some((item) =>
+        item.includes("影画2将 [异放] 从异常精通中获得的收益提升至原本的 130%"),
       ),
     ).toBe(true)
     expect(result.entries[0]?.damage?.expected).toBeGreaterThan(0)

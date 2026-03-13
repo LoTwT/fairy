@@ -6,14 +6,14 @@
 - `resolve-build-source-entries`
 - utility-only / mixed collection
 
-当前 anomaly / disorder 的 source view 仍只覆盖：
+`V24` 落地前，anomaly / disorder 的 source view 只覆盖：
 
 1. `爱丽丝 [极性强击]`
 2. `雅 [霜灼·破]`
 3. `柏妮思 [燃点]/[余烬]`
 4. `爱芮 [异放]`
 
-而 `薇薇安` 仍保留一条高价值 source note：
+而 `薇薇安` 当时仍保留一条高价值 source note：
 
 - `[异放]` 额外结算比例未展开
 
@@ -67,3 +67,10 @@
 2. `resolveStaticBuildTriggerMatrix()` 会把 `薇薇安 [异放]` 作为 `source-view` 行并列返回
 3. `resolveStaticBuildSourceEntries()` 可在 disorder 场景下聚合 `薇薇安 [异放]`
 4. 若当前输入不足以稳定推导，只保留 source note / diagnostics，不引入新的隐式默认值
+
+## 5. 当前状态
+
+- `V24.1` 已完成：冻结到“第二批可由现有 contract 直接推导”的 source view
+- `V24.2` 已完成：`薇薇安 [异放]` 已按 `coreSkillLevel + finalPanel.anomalyProficiency (+ M2 130%)` 落成公式推导型 delta view
+- `V24.3` 已完成：`resolveStaticBuildTriggerMatrix()` 与 `resolveStaticBuildSourceEntries()` 已同步覆盖 `薇薇安 [异放]`
+- `V24.4` 已完成：高层 tool、测试与文档已全部收口

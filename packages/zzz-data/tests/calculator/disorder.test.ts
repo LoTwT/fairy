@@ -130,6 +130,20 @@ describe("calcDisorderDamage — anomaly crit", () => {
   })
 })
 
+describe("calcDisorderDamage — damage multiplier factor", () => {
+  it("applies optional damageMultiplierFactor on top of the derived disorder multiplier", () => {
+    const params: DisorderDamageParams = {
+      ...sharedParams,
+      anomalyType: "ether",
+      remainingTime: 10,
+      damageMultiplierFactor: 1.3,
+    }
+
+    const result = calcDisorderDamage(params)
+    expect(result.breakdown.baseDamage).toBeCloseTo(1000 * 17.0 * 1.3, 2)
+  })
+})
+
 describe("calcDisorderDamage — all anomaly types T=10s baseDamage", () => {
   const attack = 1000
 

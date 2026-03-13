@@ -71,6 +71,54 @@ describe("static build source entries", () => {
     )
   })
 
+  it("collects Vivian exflow together with utility-only anomaly engines", () => {
+    const result = resolveStaticBuildSourceEntries({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1331",
+        wEngineId: "12012",
+        agentLevel: 60,
+        agentMindscape: 2,
+        coreSkillLevel: 7,
+        wEngineRefinement: 1,
+      },
+      panel: {
+        attack: 3000,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 180,
+      },
+      scenario: {
+        damageType: "disorder",
+        skillTag: "basic",
+        anomalyType: "ether",
+        remainingTime: 5,
+        attribute: "以太",
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.entries).toHaveLength(2)
+    expect(result.entries.map((entry) => entry.id)).toEqual(
+      expect.arrayContaining([
+        "vivian-exflow",
+        "magnetic-storm-charlie-energy-refund",
+      ]),
+    )
+    const vivianEntry = result.entries.find(
+      (entry) => entry.id === "vivian-exflow",
+    )
+    const utilityEntry = result.entries.find(
+      (entry) => entry.id === "magnetic-storm-charlie-energy-refund",
+    )
+    expect(vivianEntry?.metadata.entryKind).toBe("source-damage-view")
+    expect(utilityEntry?.metadata.entryKind).toBe("source-utility-view")
+  })
+
   it("keeps utility-only behavior for normal scenarios", () => {
     const result = resolveStaticBuildSourceEntries({
       loadout: {

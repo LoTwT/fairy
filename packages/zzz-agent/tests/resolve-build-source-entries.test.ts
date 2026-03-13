@@ -79,6 +79,50 @@ describe("resolveBuildSourceEntries tool", () => {
     ).toBeUndefined()
   })
 
+  it("returns Vivian exflow together with utility-only anomaly engines", async () => {
+    const result = await runTool(resolveBuildSourceEntries, {
+      agent: "薇薇安",
+      wEngine: "「电磁暴」-叁式",
+      mode: "full-buff",
+      agentLevel: 60,
+      agentMindscape: 2,
+      coreSkillLevel: 7,
+      wEngineRefinement: 1,
+      finalPanel: {
+        attack: 3000,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 180,
+      },
+      scenario: {
+        damageType: "disorder",
+        skillTag: "basic",
+        anomalyType: "ether",
+        remainingTime: 5,
+        attribute: "以太",
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    expect((result as any).collection.summary).toMatchObject({
+      sourceDamageCount: 1,
+      sourceUtilityCount: 1,
+    })
+    expect(
+      (result as any).collection.entries.map((entry: any) => entry.id),
+    ).toEqual(
+      expect.arrayContaining([
+        "vivian-exflow",
+        "magnetic-storm-charlie-energy-refund",
+      ]),
+    )
+  })
+
   it("returns full build details only when includeDetails is true", async () => {
     const result = await runTool(resolveBuildSourceEntries, {
       agent: "爱丽丝",

@@ -1381,9 +1381,9 @@ Batch B（已完成）：
 ### 29.3 当前状态
 
 - `V24.1` 已完成：冻结到公式可推导的第二批 source view
-- `V24.2` 未开始
-- `V24.3` 未开始
-- `V24.4` 未开始
+- `V24.2` 已完成：`薇薇安 [异放]` 已按 `coreSkillLevel + finalPanel.anomalyProficiency (+ M2 130%)` 落成公式推导型 delta view
+- `V24.3` 已完成：`resolveStaticBuildTriggerMatrix()` 与 `resolveStaticBuildSourceEntries()` 已同步覆盖 `薇薇安 [异放]`
+- `V24.4` 已完成：高层 tool、测试与文档已全部收口
 
 ### 29.4 当前边界
 

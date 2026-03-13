@@ -4535,7 +4535,7 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
     sourceType: "agent",
     sourceId: "1331",
     damageTypes: ["anomaly", "disorder"],
-    note: "薇薇安的[异放]比例与[薇薇安的预言]追击伤害未在 static resolver 中展开；当前已支持额外能力的侵蚀/紊乱增伤。若后续要静态快照化，优先评估是否应归到 dynamicSnapshot，而不是继续扩 resolvedSnapshot。",
+    note: "薇薇安的[异放]当前已通过 source-specific damage view 按 coreSkillLevel 与 finalPanel.anomalyProficiency 静态展开；[薇薇安的预言]追击伤害仍未在 static resolver 中展开。当前已支持额外能力的侵蚀/紊乱增伤。",
   },
   {
     sourceType: "agent",
@@ -4548,14 +4548,14 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
     sourceId: "1331",
     minimumMindscape: 2,
     requiresMissingResolvedSnapshotMultipliers: ["skillMultiplierFactor"],
-    note: "薇薇安的影画2当前只展开以太异常/紊乱的 15% 无视抗性；[异放]精通收益提升若后续要静态快照化，优先仍归 dynamicSnapshot，不继续扩 resolvedSnapshot；异常积蓄效率若已折算为最终倍率，请通过 scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor 显式提供。",
+    note: "薇薇安的影画2当前在主公式中只展开以太异常/紊乱的 15% 无视抗性；[异放]从异常精通中获得的收益提升已由 source-specific damage view 静态展开。异常积蓄效率若已折算为最终倍率，请通过 scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor 显式提供。",
   },
   {
     sourceType: "agent",
     sourceId: "1331",
     minimumMindscape: 2,
     requiredResolvedSnapshotMultipliers: ["skillMultiplierFactor"],
-    note: "薇薇安的影画2当前只展开以太异常/紊乱的 15% 无视抗性；[异放]精通收益提升若后续要静态快照化，优先仍归 dynamicSnapshot；异常积蓄效率折算后的最终倍率已按 scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor 记录。",
+    note: "薇薇安的影画2当前在主公式中只展开以太异常/紊乱的 15% 无视抗性；[异放]从异常精通中获得的收益提升已由 source-specific damage view 静态展开。异常积蓄效率折算后的最终倍率已按 scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor 记录。",
   },
   {
     sourceType: "agent",

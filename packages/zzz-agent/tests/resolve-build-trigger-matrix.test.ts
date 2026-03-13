@@ -98,7 +98,51 @@ describe("resolveBuildTriggerMatrix tool", () => {
 
     expect((result as any).found).toBe(false)
     expect((result as any).supportedAgents).toEqual(
-      expect.arrayContaining(["爱丽丝", "柏妮思", "雅", "爱芮"]),
+      expect.arrayContaining(["爱丽丝", "柏妮思", "雅", "爱芮", "薇薇安"]),
     )
+  })
+
+  it("returns disorder trigger-entry rows for Vivian", async () => {
+    const result = await runTool(resolveBuildTriggerMatrix, {
+      agent: "薇薇安",
+      wEngine: "飞鸟星梦",
+      mode: "full-buff",
+      agentLevel: 60,
+      agentMindscape: 2,
+      coreSkillLevel: 7,
+      wEngineRefinement: 1,
+      finalPanel: {
+        attack: 3000,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 180,
+      },
+      scenario: {
+        damageType: "disorder",
+        skillTag: "basic",
+        anomalyType: "ether",
+        remainingTime: 5,
+        attribute: "以太",
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    expect((result as any).matrix.rows).toHaveLength(2)
+    expect((result as any).matrix.rows[1]).toMatchObject({
+      supported: true,
+      metadata: {
+        canonicalLabel: "薇薇安：[异放]",
+        entryKind: "source-view",
+        sourceViewId: "vivian-exflow",
+      },
+    })
+    expect(
+      (result as any).matrix.rows[1].requirements.map((item: any) => item.kind),
+    ).toEqual(expect.arrayContaining(["panel-value", "scenario-value"]))
   })
 })

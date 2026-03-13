@@ -19,7 +19,7 @@ import {
 export const resolveBuildSourceDamageViews = createTool({
   id: "resolve-build-source-damage-views",
   description:
-    "查询 anomaly / disorder 的 source-specific 额外结算条目。当前覆盖爱丽丝 [极性强击]、雅 [霜灼·破]、柏妮思 [燃点]/[余烬]、爱芮 [异放]，不会把这些条目并回主公式。",
+    "查询 anomaly / disorder 的 source-specific 额外结算条目。当前覆盖爱丽丝 [极性强击]、雅 [霜灼·破]、柏妮思 [燃点]/[余烬]、爱芮 [异放]、薇薇安 [异放]，不会把这些条目并回主公式。",
   inputSchema: resolveBuildInputSchema,
   execute: async (input) => {
     if (

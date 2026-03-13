@@ -92,6 +92,7 @@ import {
   - `雅 [霜灼·破]`
   - `柏妮思 [燃点]/[余烬]`
   - `爱芮 [异放]`
+  - `薇薇安 [异放]`
   - 这类条目不会再继续并入主 anomaly / disorder 公式，而是通过独立 view 展示
 - source-specific utility / energy view：当前已支持：
   - `「月相」-朔`

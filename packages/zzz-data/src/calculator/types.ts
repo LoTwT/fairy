@@ -127,6 +127,8 @@ export interface DisorderDamageParams extends Omit<
   AnomalyDamageParams,
   "damageMultiplier"
 > {
+  /** Optional extra multiplier factor applied on top of disorder base multiplier */
+  damageMultiplierFactor?: number
   /** Anomaly type of the original status being consumed */
   anomalyType: AnomalyType
   /** Remaining duration of the original anomaly status in seconds (must be ≥ 0) */

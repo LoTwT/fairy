@@ -53,7 +53,7 @@ function compactTriggerMatrix(
 export const resolveBuildTriggerMatrix = createTool({
   id: "resolve-build-trigger-matrix",
   description:
-    "查询 anomaly / disorder 的 trigger-entry matrix。当前只覆盖已有 source view 的异常代理人：爱丽丝、雅、柏妮思、爱芮；结果会并列返回主公式结算与 source-specific 额外结算条目。",
+    "查询 anomaly / disorder 的 trigger-entry matrix。当前只覆盖已有 source view 的异常代理人：爱丽丝、雅、柏妮思、爱芮、薇薇安；结果会并列返回主公式结算与 source-specific 额外结算条目。",
   inputSchema: resolveBuildInputSchema.extend({
     includeDetails: z
       .boolean()

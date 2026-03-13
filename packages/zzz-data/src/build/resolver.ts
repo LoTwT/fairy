@@ -1075,6 +1075,7 @@ export function resolveStaticBuildDamage(
       anomalyBonusDamageSum: resolvedBuckets.anomalyBonusDamageSum,
       anomalyCritRate: resolvedPanel.anomalyCritRate,
       anomalyCritDamage: resolvedPanel.anomalyCritDamage,
+      damageMultiplierFactor: resolvedBuckets.skillMultiplierFactor,
       anomalyType: input.scenario.anomalyType,
       remainingTime: input.scenario.remainingTime,
     }

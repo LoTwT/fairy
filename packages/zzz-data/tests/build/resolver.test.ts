@@ -2535,7 +2535,7 @@ describe("static build resolver", () => {
     expect(result.resolvedBuckets.ignoreResistance).toBeCloseTo(0.15, 4)
     expect(
       result.assumptions.some((item) =>
-        item.includes("影画2当前只展开以太异常/紊乱的 15% 无视抗性"),
+        item.includes("影画2当前在主公式中只展开以太异常/紊乱的 15% 无视抗性"),
       ),
     ).toBe(true)
   })
@@ -2579,7 +2579,7 @@ describe("static build resolver", () => {
     expect(
       result.assumptions.some((item) =>
         item.includes(
-          "薇薇安的影画2当前只展开以太异常/紊乱的 15% 无视抗性；[异放]精通收益提升若后续要静态快照化，优先仍归 dynamicSnapshot；异常积蓄效率折算后的最终倍率已按 scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor 记录。",
+          "薇薇安的影画2当前在主公式中只展开以太异常/紊乱的 15% 无视抗性；[异放]从异常精通中获得的收益提升已由 source-specific damage view 静态展开。异常积蓄效率折算后的最终倍率已按 scenario.resolvedSnapshot.multiplierFactors.skillMultiplierFactor 记录。",
         ),
       ),
     ).toBe(true)

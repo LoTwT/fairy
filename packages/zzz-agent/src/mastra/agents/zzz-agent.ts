@@ -102,7 +102,7 @@ const BASE_PROMPT = `你是绝区零（Zenless Zone Zero）伤害计算专家。
    - 全技能 / 全段 / 完整伤害表：调用 resolveBuildSkillMatrix
    - 如果用户问的是 anomaly / disorder 的主结算 + 额外结算并列条目，需要一份 trigger-entry matrix，调用 resolveBuildTriggerMatrix
    - 如果用户问的是“当前构筑下有哪些 source-specific 条目 / 额外来源条目 / 独立额外结算 + utility 条目”，优先调用 resolveBuildSourceEntries
-   - 如果用户问的是 anomaly / disorder 里的独立额外结算条目，例如 \`爱丽丝 [极性强击]\`、\`雅 [霜灼·破]\`、\`柏妮思 [燃点]/[余烬]\`、\`爱芮 [异放]\`，调用 resolveBuildSourceDamageViews
+   - 如果用户问的是 anomaly / disorder 里的独立额外结算条目，例如 \`爱丽丝 [极性强击]\`、\`雅 [霜灼·破]\`、\`柏妮思 [燃点]/[余烬]\`、\`爱芮 [异放]\`、\`薇薇安 [异放]\`，调用 resolveBuildSourceDamageViews
    - 如果用户问的是独立回能 / 后场回能 / 音擎 utility 条目，例如 \`「月相」-朔\`、\`「电磁暴」-叁式\`、\`家政员\`、\`灼心摇壶\` 的回能效果，调用 resolveBuildSourceUtilityViews
    - 高层 resolver 会直接返回 resolved buckets、damageParams、技能矩阵或 source-specific view，避免重复手工抽取乘区
    - 如果只是判断当前 resolver 是否支持某个代理人/音擎/驱动盘，或只是想拿到 supported scope，可以直接调用高层 resolver；wEngine、driveDiscs、coreSkillLevel、wEngineRefinement、mode 在这类探测场景下都不是必填，不要先追问这些可选字段
