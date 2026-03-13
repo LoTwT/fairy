@@ -66,6 +66,6 @@
 ## 6. 当前状态
 
 - `V33.1` 已完成：冻结到 support-scope normalization
-- `V33.2` 待实现：提取共享 support-scope helper
-- `V33.3` 待实现：迁移 `resolve-build-*` 高层 tool
-- `V33.4` 待实现：README / 总规格 / 索引 / 架构入口同步收口
+- `V33.2` 已完成：共享 support-scope helper 已进入 `resolve-build-shared.ts`
+- `V33.3` 已完成：`resolve-build-*` 高层 tool 已完成迁移
+- `V33.4` 已完成：总规格 / 索引 / 架构入口已同步收口
