@@ -1919,3 +1919,47 @@ Batch B（已完成）：
 2. 不调整 `ResolveStaticBuildResult` 顶层 contract
 3. 不新增新的 matrix coverage
 4. 不调整 trigger/source-entry/source-view 的 row contract
+
+## 42. V37 compact helper exports
+
+### 42.1 目标
+
+`V36` 收口后，`zzz-agent` 仍保留 3 处薄层 compact 逻辑：
+
+1. `compactMatrix()`
+2. `compactTriggerMatrix()`
+3. `compactSourceEntries()`
+
+`V37` 只解决一件事：
+
+1. 把高层 compact 逻辑下沉为 `zzz-data` 的可复用 helper exports
+
+### 42.2 范围
+
+1. `V37.1` scope freeze
+2. `V37.2` compact helper exports
+3. `V37.3` high-level tool alignment
+4. `V37.4` docs closeout
+
+### 42.3 当前状态
+
+- `V37.1` 已完成：冻结到 compact helper exports
+- `V37.2` 待实现：`zzz-data` 已新增 compact helper exports
+- `V37.3` 待实现：`zzz-agent` 已改为直接消费底层 helper
+- `V37.4` 待实现：README / 总规格 / 索引 / 架构入口同步收口
+
+### 42.4 当前边界
+
+本阶段只做：
+
+1. 为 skill matrix 提供 compact helper
+2. 为 trigger matrix 提供 compact helper
+3. 为 source-entry collection 提供 compact helper
+4. 让 `zzz-agent` 直接调用底层 helper
+
+显式不做：
+
+1. 不新增新的 build/source/trigger contract key
+2. 不调整 damage formula / matrix coverage
+3. 不改变 `includeDetails` 语义
+4. 不把 compact helper 做成 Agent 私有实现
