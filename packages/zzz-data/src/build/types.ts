@@ -543,6 +543,7 @@ export interface ResolveStaticBuildSourceDamageViewsResult {
 export type StaticBuildSourceUtilityViewType =
   | "energy-refund"
   | "energy-regen-rate"
+  | "decibel-gain"
 
 export type StaticBuildSourceUtilityViewResolutionMode = "trigger" | "rate"
 
@@ -563,7 +564,7 @@ export interface StaticBuildSourceUtilityViewMeta {
   utilityType: StaticBuildSourceUtilityViewType
   resolutionMode: StaticBuildSourceUtilityViewResolutionMode
   targetScope: StaticBuildSourceUtilityViewTargetScope
-  unit: "energy" | "energy-per-second"
+  unit: "energy" | "energy-per-second" | "decibel"
 }
 
 export interface StaticBuildSourceUtilityViewEntry {
@@ -577,7 +578,7 @@ export interface StaticBuildSourceUtilityViewEntry {
   resolutionMode: StaticBuildSourceUtilityViewResolutionMode
   targetScope: StaticBuildSourceUtilityViewTargetScope
   value: number
-  unit: "energy" | "energy-per-second"
+  unit: "energy" | "energy-per-second" | "decibel"
   triggerLabel?: string
   conditionLabel?: string
   cooldownSeconds?: number

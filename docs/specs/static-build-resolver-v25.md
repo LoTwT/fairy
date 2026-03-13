@@ -111,7 +111,7 @@
 ## 7. 当前状态
 
 - `V25.1` 已完成：冻结到第二批 utility / resource view
-- `V25.2` 未开始
+- `V25.2` 已完成：utility contract 已新增 `decibel-gain / decibel`
 - `V25.3` 未开始
 - `V25.4` 未开始
 - `V25.5` 未开始
