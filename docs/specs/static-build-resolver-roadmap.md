@@ -3335,3 +3335,43 @@ Batch B（已完成）：
 1. 不改变顶层 `assumptions` 的现有数组语义
 2. 不新增 row-level `assumptionSummary`
 3. 不改变 `summary` 结构
+
+## 74. V71 trigger-matrix row assumption summary
+
+### 74.1 目标
+
+`V70` 收口后，整张 `trigger-entry matrix` 顶层已经有稳定的 `assumptionSummary`。
+
+但单行 `row` 仍只有 `assumptions` 裸数组。上层如果只想判断某一行是否带 assumptions、共有多少条，仍要自己统计数组长度。
+
+`V71` 只解决一件事：
+
+1. 为 `StaticBuildTriggerMatrixRow` 与 compact row 增加局部 `assumptionSummary`
+
+### 74.2 范围
+
+1. `V71.1` scope freeze
+2. `V71.2` row-level assumption summary
+3. `V71.3` high-level / prompt alignment
+4. `V71.4` docs closeout
+
+### 74.3 当前状态
+
+- `V71.1` 已完成：冻结到 row-level trigger-matrix assumption summary
+- `V71.2` 已完成：`StaticBuildTriggerMatrixRow` 与 compact row 已新增局部 `assumptionSummary`
+- `V71.3` 已完成：高层 tool 断言与 agent prompt 已对齐 `row.assumptionSummary`
+- `V71.4` 已完成：相关 specs、roadmap、索引、架构文档与 README 已同步
+
+### 74.4 当前边界
+
+本阶段只做：
+
+1. 为 `StaticBuildTriggerMatrixRow` 与 compact row 增加局部 `assumptionSummary`
+2. 从现有 row-level `assumptions` 衍生计数与布尔位
+3. 保持现有 `requirements / diagnostics / sourceNotes / assumptions` 兼容
+
+显式不做：
+
+1. 不改变 row-level `assumptions` 的现有数组语义
+2. 不新增新的 row 分组维度
+3. 不改变 `requirementSummary`、`diagnosticSummary` 或 `sourceNoteSummary` 结构

@@ -69,6 +69,7 @@ export interface StaticBuildCompactTriggerMatrixRow {
   diagnosticSummary: StaticBuildTriggerMatrixRow["diagnosticSummary"]
   sourceNotes: StaticBuildSourceNoteEntry[]
   sourceNoteSummary: StaticBuildTriggerMatrixRow["sourceNoteSummary"]
+  assumptionSummary: StaticBuildTriggerMatrixRow["assumptionSummary"]
   assumptions: string[]
   damage?: NonNullable<StaticBuildTriggerMatrixRow["damage"]>
   summary?: StaticBuildTriggerMatrixRow["summary"]
@@ -241,6 +242,7 @@ export function compactStaticBuildTriggerMatrixRow(
     diagnosticSummary: row.diagnosticSummary,
     sourceNotes: row.sourceNotes,
     sourceNoteSummary: row.sourceNoteSummary,
+    assumptionSummary: row.assumptionSummary,
     assumptions: row.assumptions,
     damage: row.damage,
     summary: row.summary,

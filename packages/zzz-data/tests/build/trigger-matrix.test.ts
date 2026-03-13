@@ -261,6 +261,10 @@ describe("static build trigger matrix", () => {
           { key: "stateSnapshot", count: 1 },
         ],
       },
+      assumptionSummary: {
+        count: result.rows[0]?.assumptions.length,
+        hasAssumptions: (result.rows[0]?.assumptions.length ?? 0) > 0,
+      },
     })
     expect(result.rows[1]).toMatchObject({
       id: "source-view:alice-polarity-assault",
@@ -332,6 +336,10 @@ describe("static build trigger matrix", () => {
           { key: "finalPanel", count: 1 },
           { key: "stateSnapshot", count: 1 },
         ],
+      },
+      assumptionSummary: {
+        count: result.rows[1]?.assumptions.length,
+        hasAssumptions: (result.rows[1]?.assumptions.length ?? 0) > 0,
       },
     })
     expect(result.rows[1]?.damage?.expected).toBeGreaterThan(0)

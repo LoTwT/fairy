@@ -245,6 +245,10 @@ describe("resolveBuildTriggerMatrix tool", () => {
         { key: "stateSnapshot", count: 1 },
       ],
     })
+    expect((result as any).matrix.rows[0].assumptionSummary).toEqual({
+      count: (result as any).matrix.rows[0].assumptions.length,
+      hasAssumptions: (result as any).matrix.rows[0].assumptions.length > 0,
+    })
     expect((result as any).matrix.rows[1]).toMatchObject({
       supported: true,
       metadata: {
@@ -311,6 +315,10 @@ describe("resolveBuildTriggerMatrix tool", () => {
           { key: "finalPanel", count: 1 },
           { key: "stateSnapshot", count: 1 },
         ],
+      },
+      assumptionSummary: {
+        count: (result as any).matrix.rows[1].assumptions.length,
+        hasAssumptions: (result as any).matrix.rows[1].assumptions.length > 0,
       },
     })
     expect((result as any).matrix.rows[1].summary.expectedTotal).toBeCloseTo(

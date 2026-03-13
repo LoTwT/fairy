@@ -510,6 +510,12 @@ matrix.rows[1].sourceNoteSummary
 // }
 ```
 
+如果你只想知道某一行 trigger row 是否带 assumptions、共有多少条，也直接读取：
+
+```ts
+matrix.rows[1].assumptionSummary
+```
+
 如果你需要拿到不进入主伤害公式的独立回能 / 回能速率条目，可使用：
 
 ```ts

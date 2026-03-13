@@ -877,6 +877,7 @@ export interface StaticBuildTriggerMatrixRow {
   diagnosticSummary: StaticBuildDiagnosticSummary
   sourceNotes: StaticBuildSourceNoteEntry[]
   sourceNoteSummary: StaticBuildSourceNoteSummary
+  assumptionSummary: StaticBuildAssumptionSummary
   assumptions: string[]
   damage?: {
     expected: number

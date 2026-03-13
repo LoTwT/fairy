@@ -69,6 +69,7 @@ export function resolveStaticBuildTriggerMatrix(
       diagnosticSummary: summarizeDiagnosticEntries(build.diagnostics),
       sourceNotes: build.sourceNotes,
       sourceNoteSummary: summarizeSourceNoteEntries(build.sourceNotes),
+      assumptionSummary: summarizeAssumptions(build.assumptions),
       assumptions: build.assumptions,
       damage: {
         expected: build.damage.expected.total,
@@ -120,6 +121,7 @@ function toTriggerMatrixRow(
     diagnosticSummary: entry.diagnosticSummary,
     sourceNotes: entry.sourceNotes,
     sourceNoteSummary: entry.sourceNoteSummary,
+    assumptionSummary: summarizeAssumptions(entry.assumptions),
     assumptions: entry.assumptions,
     damage: entry.damage,
     summary: entry.summary,
