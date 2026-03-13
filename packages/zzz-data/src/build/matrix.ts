@@ -1965,6 +1965,11 @@ export function resolveStaticBuildSkillMatrix(
       attribute,
       combatTags,
       skillMultiplier: skillStat.value,
+      damageSummary: {
+        expected: build.damage.expected.total,
+        crit: build.damage.crit.total,
+        noCrit: build.damage.noCrit.total,
+      },
       build,
     } satisfies StaticBuildSkillMatrixRow
   })

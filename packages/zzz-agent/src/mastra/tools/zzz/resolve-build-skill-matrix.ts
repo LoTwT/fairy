@@ -38,11 +38,7 @@ function compactMatrix(
       attribute: row.attribute,
       combatTags: row.combatTags,
       skillMultiplier: row.skillMultiplier,
-      damage: {
-        expected: row.build.damage.expected.total,
-        crit: row.build.damage.crit.total,
-        noCrit: row.build.damage.noCrit.total,
-      },
+      damage: row.damageSummary,
       resolvedBuckets: row.build.resolvedBuckets,
       assumptions: row.build.assumptions,
       unsupportedEffects: row.build.unsupportedEffects,

@@ -798,6 +798,12 @@ export interface StaticBuildSkillMatrixRowMeta {
   targetSize?: StaticBuildTargetSize
 }
 
+export interface StaticBuildSkillMatrixRowDamageSummary {
+  expected: number
+  crit: number
+  noCrit: number
+}
+
 export interface StaticBuildSkillMatrixRow {
   id: string
   group: string
@@ -808,6 +814,7 @@ export interface StaticBuildSkillMatrixRow {
   attribute: AgentAttribute
   combatTags: string[]
   skillMultiplier: string
+  damageSummary: StaticBuildSkillMatrixRowDamageSummary
   build: ResolveStaticBuildResult
 }
 

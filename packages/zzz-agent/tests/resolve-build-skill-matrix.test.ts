@@ -50,6 +50,7 @@ describe("resolveBuildSkillMatrix tool", () => {
     })
     expect((result as any).matrix.rows[0].metadata.sourceStatId).toBeTruthy()
     expect((result as any).matrix.rows[0].build).toBeUndefined()
+    expect((result as any).matrix.rows[0].damage.expected).toBeGreaterThan(0)
     const globalEffect = (result as any).matrix.effectSummary.find(
       (item: any) =>
         item.sourceName === "防暴者Ⅵ型" &&
