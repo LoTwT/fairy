@@ -2091,3 +2091,44 @@ Batch B（已完成）：
 2. 不新增新的 coverage
 3. 不新增新的顶层 summary key
 4. 不实现独立 trigger-template catalog
+
+## 46. V41 diagnostic summaries
+
+### 46.1 目标
+
+`V40` 收口后，`source-damage-view` 与 `trigger-entry matrix row` 仍只有逐条 `diagnostics[]`：
+
+1. 上层若只想知道是否存在 `defaulted-input / coverage-gap / fallback`，仍需手工遍历
+2. 若要判断 diagnostics 主要来自 `finalPanel / scenario / source / process`，也只能自行统计
+
+`V41` 只解决一件事：
+
+1. 为 source-view / trigger row 增加稳定 diagnostic summary
+
+### 46.2 范围
+
+1. `V41.1` scope freeze
+2. `V41.2` source-view diagnostic-summary contract
+3. `V41.3` trigger-row alignment
+4. `V41.4` docs closeout
+
+### 46.3 当前状态
+
+- `V41.1` 已完成：冻结到 diagnostic-summary contract
+- `V41.2` 未开始
+- `V41.3` 未开始
+- `V41.4` 未开始
+
+### 46.4 当前边界
+
+本阶段只做：
+
+1. 为 source-damage-view entry 增加 `diagnosticSummary`
+2. 为 trigger row 增加 `diagnosticSummary`
+3. 保持现有 `diagnostics[]` 与 compact helper 兼容
+
+显式不做：
+
+1. 不改变 `diagnostics[]` 原始数组
+2. 不新增新的 coverage
+3. 不改 `ResolveStaticBuildResult.summary` 的既有结构
