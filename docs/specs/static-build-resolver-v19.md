@@ -88,7 +88,7 @@
 - `V19.1` 已完成：冻结到最后两个 utility-only 旧通用音擎，不继续扩大 contract
 - `V19.2` 已完成：inventory 已冻结
 - `V19.3` 已完成：`「月相」-朔 / 「电磁暴」-叁式` 已固定为 process-only source note
-- `V19.4` 未开始
+- `V19.4` 已完成：当前 contract 下已收口
 
 ## 9. 当前结论
 
@@ -96,4 +96,5 @@
 
 1. 这不是新的 damage coverage 批次，而是最后两个 utility-only generic engine 的收口
 2. 最合理的表达仍是 source note，而不是新增能量相关 public contract
-3. `V19.3` 完成后，这两把音擎已不再落入 generic coverage-gap
+3. `V19` 已在当前 contract 下收口；这两把音擎已不再落入 generic coverage-gap
+4. 下一步若继续处理 utility-only 来源，应开新的 scope，而不是继续扩大当前 damage contract

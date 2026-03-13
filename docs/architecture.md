@@ -202,7 +202,7 @@ packages/zzz-agent/
 - [`static-build-resolver-v16.md`](../docs/specs/static-build-resolver-v16.md) — 当前阶段范围：已收口；通用音擎批次已全部落地
 - [`static-build-resolver-v17.md`](../docs/specs/static-build-resolver-v17.md) — 当前阶段范围：已收口；通用驱动盘的高价值可静态表达来源已补齐
 - [`static-build-resolver-v18.md`](../docs/specs/static-build-resolver-v18.md) — 当前阶段范围：已收口；最后一批 legacy 强攻签名已按 partial coverage / source note 分层固定
-- [`static-build-resolver-v19.md`](../docs/specs/static-build-resolver-v19.md) — 当前阶段范围：已完成 scope freeze 与 inventory；目标是收口最后两个 utility-only 旧通用音擎，不新增 public key
+- [`static-build-resolver-v19.md`](../docs/specs/static-build-resolver-v19.md) — 当前阶段范围：已收口；最后两个 utility-only 旧通用音擎已固定为 process-only source note，不新增 public key
 
 ## 计算器模块（src/calculator/）
 

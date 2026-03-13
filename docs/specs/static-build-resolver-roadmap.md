@@ -1187,7 +1187,7 @@ Batch B（已完成）：
 - `V19.1` 已完成：冻结到最后两个 utility-only 旧通用音擎
 - `V19.2` 已完成：inventory 已冻结
 - `V19.3` 已完成：`「月相」-朔 / 「电磁暴」-叁式` 已固定为 process-only source note
-- `V19.4` 未开始
+- `V19.4` 已完成：当前 contract 下已收口
 
 ### 24.4 当前范围
 
@@ -1199,4 +1199,5 @@ Batch B（已完成）：
 结论：
 
 1. 这两把音擎只提供能量回复，不进入当前 static damage 主公式
-2. `V19` 只做 source note / source-aware unsupported 收口，不新开能量 contract
+2. `V19` 已在当前 contract 下收口；它们不再作为 generic coverage-gap 保留
+3. 当前不新开能量 contract
