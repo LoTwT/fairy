@@ -1877,3 +1877,45 @@ Batch B（已完成）：
 2. 不新增新的 matrix summary / effect summary
 3. 不调整 trigger/source-entry/source-view 的 row contract
 4. 不新增新的 matrix coverage
+
+## 41. V36 matrix row explanation contract
+
+### 41.1 目标
+
+`V35` 收口后，`resolve-build-skill-matrix` 的 row contract 仍缺：
+
+1. `diagnostics`
+2. `sourceNotes`
+
+`V36` 只解决一件事：
+
+1. 为 `ResolveStaticBuildSkillMatrixRow` 增加稳定的 row-level explanation fields
+
+### 41.2 范围
+
+1. `V36.1` scope freeze
+2. `V36.2` matrix row explanation contract
+3. `V36.3` high-level tool alignment
+4. `V36.4` docs closeout
+
+### 41.3 当前状态
+
+- `V36.1` 已完成：冻结到 matrix row explanation contract
+- `V36.2` 待实现：skill matrix row 已新增 `diagnostics / sourceNotes`
+- `V36.3` 待实现：高层 tool 已对齐底层 row-level explanation fields
+- `V36.4` 待实现：README / 总规格 / 索引 / 架构入口同步收口
+
+### 41.4 当前边界
+
+本阶段只做：
+
+1. 为 skill matrix row 增加稳定的 `diagnostics`
+2. 为 skill matrix row 增加稳定的 `sourceNotes`
+3. 让高层 tool 直接透传这些 row-level explanation fields
+
+显式不做：
+
+1. 不新增新的 summary / effect summary
+2. 不调整 `ResolveStaticBuildResult` 顶层 contract
+3. 不新增新的 matrix coverage
+4. 不调整 trigger/source-entry/source-view 的 row contract
