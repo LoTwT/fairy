@@ -59,6 +59,10 @@
 - `V42 source-note summaries` 已收口
 - `V43 utility-entry summaries` 已收口
 - `V44 source-entry collection aggregates` 已收口
+- `V45 source-view summary aggregates` 已收口
+- `V46 trigger-matrix summary aggregates` 已收口
+- `V47 skill-matrix summary aggregates` 已收口
+- 当前活跃阶段：`V48 skill-matrix row summaries`
 - 当前边界：`resolveStaticBuildSkillMatrix` 仍只支持 `normal / sheer`
 
 ## 2. 阶段划分
@@ -2383,3 +2387,47 @@ Batch B（已完成）：
 1. 不改变现有 `summary` 字段
 2. 不改变现有 `effectSummary` 语义
 3. 不新增新的 matrix group 或 row metadata
+
+## 53. V48 skill-matrix row summaries
+
+### 53.1 目标
+
+`V47` 收口后，skill matrix 顶层已经具备聚合 `diagnosticSummary / sourceNoteSummary`。
+
+但 `StaticBuildSkillMatrixRow` 本身仍只暴露：
+
+1. `diagnostics`
+2. `sourceNotes`
+
+`V48` 只解决一件事：
+
+1. 为 skill-matrix row 增加 `diagnosticSummary`
+2. 为 skill-matrix row 增加 `sourceNoteSummary`
+
+### 53.2 范围
+
+1. `V48.1` scope freeze
+2. `V48.2` row-level summary contract
+3. `V48.3` compact / high-level alignment
+4. `V48.4` docs closeout
+
+### 53.3 当前状态
+
+- `V48.1` 已完成：冻结到 skill-matrix row-level summary contract
+- `V48.2` 未开始
+- `V48.3` 未开始
+- `V48.4` 未开始
+
+### 53.4 当前边界
+
+本阶段只做：
+
+1. 为 `StaticBuildSkillMatrixRow` 增加 `diagnosticSummary / sourceNoteSummary`
+2. 保持现有 `summary` / `effectSummary` / 顶层 aggregate contract 兼容
+3. 对齐 compact helper 与高层 `resolve-build-skill-matrix`
+
+显式不做：
+
+1. 不新增 `requirementSummary`
+2. 不改变 row-level `diagnostics / sourceNotes` 原始数组
+3. 不新增新的 matrix row metadata
