@@ -82,6 +82,6 @@
 ## 6. 当前状态
 
 - `V49.1` 已完成：冻结到 skill-matrix row resolve summary contract
-- `V49.2` 未开始
-- `V49.3` 未开始
-- `V49.4` 未开始
+- `V49.2` 已完成：`StaticBuildSkillMatrixRow` 已新增稳定 `summary`
+- `V49.3` 已完成：compact helper 与高层 `resolve-build-skill-matrix` 已对齐新的 row-level resolve summary contract
+- `V49.4` 已完成：README / 总规格 / roadmap / index / architecture 已同步到 `V49` 收口状态

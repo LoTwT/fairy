@@ -837,6 +837,35 @@ matrix.rows[0]
 //   build: { damage, resolvedBuckets, trace, ... }
 // }
 
+matrix.rows[0].summary
+// {
+//   baseDamageStat: "attack",
+//   baseDamageValue: 3200,
+//   expectedTotal: 2689.288,
+//   critTotal: 3259.488,
+//   noCritTotal: 1643.2,
+//   formulaMultipliers: {
+//     bonusMultiplier: 1.4,
+//     critMultiplier: 1.98,
+//     defenseMultiplier: 0.4545,
+//     resistanceMultiplier: 0.8,
+//   },
+//   assumptionCount: 2,
+//   diagnosticCount: 2,
+//   sourceNoteCount: 0,
+//   unsupportedEffectCount: 0,
+//   hasDiagnostics: true,
+//   hasSourceNotes: false,
+//   hasUnsupportedEffects: false,
+//   hasDefaultedInput: true,
+//   hasCoverageGap: false,
+//   hasUnsupportedEffect: false,
+//   hasFallback: false,
+//   hasMissingInputSourceNote: false,
+//   hasProcessOnlySourceNote: false,
+//   hasResearchOnlySourceNote: false,
+// }
+
 matrix.rows[0].diagnosticSummary
 // {
 //   count: 2,
@@ -864,7 +893,7 @@ matrix.rows[0].sourceNoteSummary
 // }
 ```
 
-如果你要生成矩阵顶部“乘区汇总”，不要再自己遍历 `rows` 统计 `commonBuckets / commonFormulaMultipliers`，直接使用 `matrix.summary`。如果你要生成“增益清单”，也不要再自己遍历 `row.build.trace`，直接使用 `matrix.effectSummary`。如果你只想知道整张矩阵是否存在 diagnostics / source notes，也不要自己遍历 `rows`，直接读取 `matrix.diagnosticSummary / matrix.sourceNoteSummary`。如果你只关心某一行的 diagnostics / source notes 概况，也不要自己遍历 `row.diagnostics / row.sourceNotes`，直接读取 `row.diagnosticSummary / row.sourceNoteSummary`。
+如果你要生成矩阵顶部“乘区汇总”，不要再自己遍历 `rows` 统计 `commonBuckets / commonFormulaMultipliers`，直接使用 `matrix.summary`。如果你要生成“增益清单”，也不要再自己遍历 `row.build.trace`，直接使用 `matrix.effectSummary`。如果你只想知道整张矩阵是否存在 diagnostics / source notes，也不要自己遍历 `rows`，直接读取 `matrix.diagnosticSummary / matrix.sourceNoteSummary`。如果你只关心某一行的公式乘区摘要和 flag/count，也不要再请求 `includeDetails` 去读 `row.build.summary`，直接读取 `row.summary`。如果你只关心某一行的 diagnostics / source notes 概况，也不要自己遍历 `row.diagnostics / row.sourceNotes`，直接读取 `row.diagnosticSummary / row.sourceNoteSummary`。
 
 常见消费方式是把矩阵映射成展示表：
 
