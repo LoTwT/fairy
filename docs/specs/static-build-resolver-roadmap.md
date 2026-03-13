@@ -1715,7 +1715,7 @@ Batch B（已完成）：
 当前高层 tool 里还保留着最后一处 summary aliasing：
 
 1. `zzz-data` 底层返回 `sourceDamageViewCount / sourceUtilityViewCount`
-2. `zzz-agent` 的 `resolve-build-source-entries` 仍会改写成 `sourceDamageCount / sourceUtilityCount`
+2. `zzz-agent` 的 `resolve-build-source-entries` 已直接透传 `sourceDamageViewCount / sourceUtilityViewCount`
 
 `V32` 只解决一件事：
 
@@ -1730,8 +1730,8 @@ Batch B（已完成）：
 ### 37.3 当前状态
 
 - `V32.1` 已完成：冻结到 source-entry summary alignment
-- `V32.2` 待实现：高层 tool 直接透传 `collection.summary`
-- `V32.3` 待实现：README / 总规格 / 索引 / 架构入口同步收口
+- `V32.2` 已完成：高层 tool 已直接透传 `collection.summary`
+- `V32.3` 已完成：README / 总规格 / 索引 / 架构入口已同步收口
 
 ### 37.4 当前边界
 
