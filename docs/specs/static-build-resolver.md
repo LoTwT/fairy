@@ -768,3 +768,4 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 17. `V17` generic drive-disc curated coverage：当前已完成 `V17.4` closeout；`拂晓生花`、`流光咏叹`、`獠牙重金属`、`如影相随`、`折枝剑歌`、`沧浪行歌`、`囚徒手记` 已补为 curated / partial coverage，其中仍需过程表达的部分固定为 source note，不再作为 generic coverage-gap，见 [静态构筑解析系统 V17](./static-build-resolver-v17.md)
 18. `V18` legacy attack signature closeout：已在当前 contract 下收口；最后一批 legacy 强攻签名 `可琳 / 比利 / 安东 / 家政员 / 仿制星徽引擎 / 旋钻机-赤轴` 已按 partial coverage / source note 分层固定，其中姿态、距离、持续命中与真动态额外结算继续保持 source note，不新增新的 public key，见 [静态构筑解析系统 V18](./static-build-resolver-v18.md)
 19. `V19` legacy utility engine closeout：已在当前 contract 下收口；最后两个 utility-only 旧通用音擎 `「月相」-朔 / 「电磁暴」-叁式` 已固定为 process-only source note，不新增能量相关 public key，见 [静态构筑解析系统 V19](./static-build-resolver-v19.md)
+20. `V20` source-specific utility / energy views：当前已冻结 scope；后续会以独立 utility view 方式暴露稳定的回能 / 回能速率条目，而不是继续保留在 source note 中，也不会把它们并回主 damage resolver，见 [静态构筑解析系统 V20](./static-build-resolver-v20.md)

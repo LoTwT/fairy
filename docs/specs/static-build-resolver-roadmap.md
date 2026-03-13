@@ -1201,3 +1201,47 @@ Batch B（已完成）：
 1. 这两把音擎只提供能量回复，不进入当前 static damage 主公式
 2. `V19` 已在当前 contract 下收口；它们不再作为 generic coverage-gap 保留
 3. 当前不新开能量 contract
+
+## 25. V20 source-specific utility / energy views
+
+### 25.1 目标
+
+在不扩大主伤害公式的前提下，为可稳定静态表达的 utility / energy 来源新增独立 view contract。
+
+### 25.2 范围
+
+1. `V20.1` scope freeze
+2. `V20.2` first-batch utility view coverage
+3. `V20.3` agent / docs integration
+4. `V20.4` closeout
+
+### 25.3 当前状态
+
+- `V20.1` 已完成：contract 已冻结
+- `V20.2` 未开始
+- `V20.3` 未开始
+- `V20.4` 未开始
+
+### 25.4 第一批范围
+
+第一批仅处理稳定、单来源、可直接结构化表达的 `w-engine` utility 条目：
+
+1. `「月相」-朔`
+2. `「电磁暴」-叁式`
+3. `家政员`
+4. `燃狱齿轮`
+
+### 25.5 当前边界
+
+本阶段只做：
+
+1. `source-specific utility / energy view`
+2. `energy-refund`
+3. `energy-regen-rate`
+
+显式不做：
+
+1. 不把 utility 条目并回主 resolver
+2. 不做 utility matrix
+3. 不做时间轴 / 覆盖率 / 循环模拟
+4. 不在第一批纳入需要复杂层数或后台过程的 anomaly utility 来源
