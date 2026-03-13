@@ -81,6 +81,7 @@ describe("resolveBuildSourceDamageViews tool", () => {
       ),
     ).toBe(true)
     expect((result as any).views.entries[0].damage.expected).toBeGreaterThan(0)
+    expect((result as any).views.entries[0].build).toBeUndefined()
   })
 
   it("rejects non-anomaly source view requests", async () => {
@@ -260,5 +261,41 @@ describe("resolveBuildSourceDamageViews tool", () => {
         item.includes("按 coreSkillLevel 与异常精通推导 [异放] 比例"),
       ),
     ).toBe(true)
+  })
+
+  it("returns full source-damage build details only when explicitly requested", async () => {
+    const result = await runTool(resolveBuildSourceDamageViews, {
+      agent: "爱丽丝",
+      includeDetails: true,
+      mode: "baseline",
+      finalPanel: {
+        attack: 2800,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 200,
+        anomalyMastery: 180,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "enhancedSpecial",
+        damageMultiplier: "500%",
+        attribute: "物理",
+        stateSnapshot: {
+          flags: {
+            alicePolarityAssaultState: true,
+          },
+          values: {
+            alicePolarityAssaultDamageRatio: 2.5,
+          },
+        },
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    expect((result as any).views.entries[0].build).toBeTruthy()
   })
 })

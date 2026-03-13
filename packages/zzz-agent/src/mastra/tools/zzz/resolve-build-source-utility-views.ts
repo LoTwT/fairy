@@ -1,5 +1,6 @@
 import { createTool } from "@mastra/core/tools"
 import {
+  compactStaticBuildSourceUtilityViewsResult,
   getCompatibleStaticBuildUtilityWEngines,
   resolveStaticBuildSourceUtilityViews,
   supportedStaticBuildDriveDiscs,
@@ -120,7 +121,7 @@ export const resolveBuildSourceUtilityViews = createTool({
 
     return {
       found: true,
-      views,
+      views: compactStaticBuildSourceUtilityViewsResult(views),
     }
   },
 })

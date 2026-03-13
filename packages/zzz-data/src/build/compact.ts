@@ -1,7 +1,9 @@
 import type {
   ResolveStaticBuildResult,
   ResolveStaticBuildSkillMatrixResult,
+  ResolveStaticBuildSourceDamageViewsResult,
   ResolveStaticBuildSourceEntriesResult,
+  ResolveStaticBuildSourceUtilityViewsResult,
   ResolveStaticBuildTriggerMatrixResult,
   StaticBuildDiagnosticEntry,
   StaticBuildResolvedBuckets,
@@ -119,6 +121,22 @@ export interface CompactStaticBuildSourceEntryCollection {
   entries: StaticBuildCompactSourceEntry[]
 }
 
+export interface CompactStaticBuildSourceDamageViewsResult {
+  mode: ResolveStaticBuildSourceDamageViewsResult["mode"]
+  manualBaseMode?: ResolveStaticBuildSourceDamageViewsResult["manualBaseMode"]
+  loadout: ResolveStaticBuildSourceDamageViewsResult["loadout"]
+  summary: ResolveStaticBuildSourceDamageViewsResult["summary"]
+  assumptions: string[]
+  entries: StaticBuildCompactSourceDamageViewEntry[]
+}
+
+export interface CompactStaticBuildSourceUtilityViewsResult {
+  loadout: ResolveStaticBuildSourceUtilityViewsResult["loadout"]
+  summary: ResolveStaticBuildSourceUtilityViewsResult["summary"]
+  assumptions: string[]
+  entries: StaticBuildCompactSourceUtilityViewEntry[]
+}
+
 export function compactStaticBuildSkillMatrixResult(
   matrix: ResolveStaticBuildSkillMatrixResult,
   includeDetails = false,
@@ -206,6 +224,42 @@ export function compactStaticBuildSourceEntryCollection(
     assumptions: collection.assumptions,
     entries: collection.entries.map((entry) =>
       compactStaticBuildSourceEntry(entry, includeDetails),
+    ),
+  }
+}
+
+export function compactStaticBuildSourceDamageViewsResult(
+  views: ResolveStaticBuildSourceDamageViewsResult,
+  includeDetails = false,
+): CompactStaticBuildSourceDamageViewsResult {
+  return {
+    mode: views.mode,
+    manualBaseMode: views.manualBaseMode,
+    loadout: views.loadout,
+    summary: views.summary,
+    assumptions: views.assumptions,
+    entries: views.entries.map(
+      (entry) =>
+        compactStaticBuildSourceEntry(
+          entry,
+          includeDetails,
+        ) as StaticBuildCompactSourceDamageViewEntry,
+    ),
+  }
+}
+
+export function compactStaticBuildSourceUtilityViewsResult(
+  views: ResolveStaticBuildSourceUtilityViewsResult,
+): CompactStaticBuildSourceUtilityViewsResult {
+  return {
+    loadout: views.loadout,
+    summary: views.summary,
+    assumptions: views.assumptions,
+    entries: views.entries.map(
+      (entry) =>
+        compactStaticBuildSourceEntry(
+          entry,
+        ) as StaticBuildCompactSourceUtilityViewEntry,
     ),
   }
 }

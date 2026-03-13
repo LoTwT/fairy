@@ -16,14 +16,18 @@ export {
 export {
   compactStaticBuildSkillMatrixResult,
   compactStaticBuildSkillMatrixRow,
+  compactStaticBuildSourceDamageViewsResult,
   compactStaticBuildSourceEntry,
   compactStaticBuildSourceEntryCollection,
+  compactStaticBuildSourceUtilityViewsResult,
   compactStaticBuildTriggerMatrixResult,
   compactStaticBuildTriggerMatrixRow,
 } from "./compact.js"
 export type {
   CompactStaticBuildSkillMatrixResult,
+  CompactStaticBuildSourceDamageViewsResult,
   CompactStaticBuildSourceEntryCollection,
+  CompactStaticBuildSourceUtilityViewsResult,
   CompactStaticBuildTriggerMatrixResult,
   StaticBuildCompactSkillMatrixRow,
   StaticBuildCompactSourceDamageViewEntry,

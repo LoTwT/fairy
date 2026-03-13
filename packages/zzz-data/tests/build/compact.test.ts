@@ -2,10 +2,14 @@ import { describe, expect, it } from "vitest"
 
 import {
   compactStaticBuildSkillMatrixResult,
+  compactStaticBuildSourceDamageViewsResult,
   compactStaticBuildSourceEntryCollection,
+  compactStaticBuildSourceUtilityViewsResult,
   compactStaticBuildTriggerMatrixResult,
   resolveStaticBuildSkillMatrix,
+  resolveStaticBuildSourceDamageViews,
   resolveStaticBuildSourceEntries,
+  resolveStaticBuildSourceUtilityViews,
   resolveStaticBuildTriggerMatrix,
 } from "../../src"
 
@@ -129,5 +133,68 @@ describe("static build compact helpers", () => {
     )
     expect(damageEntry?.damage).toBeTruthy()
     expect("build" in (damageEntry ?? {})).toBe(false)
+  })
+
+  it("compacts source-damage views without build details by default", () => {
+    const views = resolveStaticBuildSourceDamageViews({
+      mode: "baseline",
+      loadout: {
+        agentId: "1401",
+        agentLevel: 60,
+      },
+      panel: {
+        attack: 2800,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 200,
+        anomalyMastery: 180,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "enhancedSpecial",
+        damageMultiplier: "500%",
+        attribute: "物理",
+        stateSnapshot: {
+          flags: {
+            alicePolarityAssaultState: true,
+          },
+          values: {
+            alicePolarityAssaultDamageRatio: 2.5,
+          },
+        },
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    const compact = compactStaticBuildSourceDamageViewsResult(views)
+
+    expect(compact.entries).toHaveLength(1)
+    expect(compact.entries[0]?.damage?.expected).toBeGreaterThan(0)
+    expect("build" in (compact.entries[0] ?? {})).toBe(false)
+  })
+
+  it("compacts source-utility views into the same public shape used by high-level tools", () => {
+    const views = resolveStaticBuildSourceUtilityViews({
+      loadout: {
+        agentId: "1021",
+        wEngineId: "12003",
+        wEngineRefinement: 1,
+      },
+    })
+
+    const compact = compactStaticBuildSourceUtilityViewsResult(views)
+
+    expect(compact.entries).toHaveLength(1)
+    expect(compact.entries[0]).toMatchObject({
+      id: "lunar-noviluna-energy-refund",
+      metadata: {
+        entryKind: "source-utility-view",
+      },
+      value: 3,
+      unit: "energy",
+    })
   })
 })
