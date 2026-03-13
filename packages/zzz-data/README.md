@@ -770,6 +770,32 @@ matrix.summary
 //   variableFormulaMultipliers: ["baseDamage"],
 // }
 
+matrix.diagnosticSummary
+// {
+//   count: 42,
+//   hasDiagnostics: true,
+//   hasDefaultedInput: true,
+//   hasCoverageGap: false,
+//   hasUnsupportedEffect: false,
+//   hasFallback: false,
+//   kindGroups: [{ key: "defaulted-input", label: "默认输入", count: 42 }],
+//   ownerGroups: [
+//     { key: "loadout", count: 21 },
+//     { key: "scenario", count: 21 },
+//   ],
+// }
+
+matrix.sourceNoteSummary
+// {
+//   count: 0,
+//   hasSourceNotes: false,
+//   hasMissingInput: false,
+//   hasProcessOnly: false,
+//   hasResearchOnly: false,
+//   statusGroups: [],
+//   ownerGroups: [],
+// }
+
 matrix.effectSummary[0]
 // {
 //   effectId: "zhu-yuan-core-suppression",
@@ -812,7 +838,7 @@ matrix.rows[0]
 // }
 ```
 
-如果你要生成矩阵顶部“乘区汇总”，不要再自己遍历 `rows` 统计 `commonBuckets / commonFormulaMultipliers`，直接使用 `matrix.summary`。如果你要生成“增益清单”，也不要再自己遍历 `row.build.trace`，直接使用 `matrix.effectSummary`。
+如果你要生成矩阵顶部“乘区汇总”，不要再自己遍历 `rows` 统计 `commonBuckets / commonFormulaMultipliers`，直接使用 `matrix.summary`。如果你要生成“增益清单”，也不要再自己遍历 `row.build.trace`，直接使用 `matrix.effectSummary`。如果你只想知道整张矩阵是否存在 diagnostics / source notes，也不要自己遍历 `rows`，直接读取 `matrix.diagnosticSummary / matrix.sourceNoteSummary`。
 
 常见消费方式是把矩阵映射成展示表：
 

@@ -77,6 +77,6 @@
 ## 6. 当前状态
 
 - `V47.1` 已完成：冻结到 skill-matrix aggregate contract
-- `V47.2` 未开始
-- `V47.3` 未开始
-- `V47.4` 未开始
+- `V47.2` 已完成：`ResolveStaticBuildSkillMatrixResult` 已新增稳定 `diagnosticSummary / sourceNoteSummary`
+- `V47.3` 已完成：compact helper 与高层 `resolve-build-skill-matrix` 已对齐新的 matrix aggregate contract
+- `V47.4` 已完成：README / 总规格 / roadmap / index / architecture 已同步到 `V47` 收口状态

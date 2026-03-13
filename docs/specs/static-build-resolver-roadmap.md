@@ -71,7 +71,7 @@
 4. `V4 progression-aware resolver`
 5. `V5 source-aware dynamic snapshot context`
 
-当前 `V44 source-entry collection aggregates`、`V45 source-view summary aggregates` 与 `V46 trigger-matrix summary aggregates` 已在当前 contract 下收口；当前主线进入 `V47 skill-matrix summary aggregates`。
+当前 `V44 source-entry collection aggregates`、`V45 source-view summary aggregates`、`V46 trigger-matrix summary aggregates` 与 `V47 skill-matrix summary aggregates` 已在当前 contract 下收口。
 
 ## 3. V2.1：Curated Coverage
 
@@ -2366,9 +2366,9 @@ Batch B（已完成）：
 ### 52.3 当前状态
 
 - `V47.1` 已完成：冻结到 skill-matrix aggregate contract
-- `V47.2` 未开始
-- `V47.3` 未开始
-- `V47.4` 未开始
+- `V47.2` 已完成：`ResolveStaticBuildSkillMatrixResult` 已新增稳定 `diagnosticSummary / sourceNoteSummary`
+- `V47.3` 已完成：compact helper 与高层 `resolve-build-skill-matrix` 已对齐新的 matrix aggregate contract
+- `V47.4` 已完成：README / 总规格 / roadmap / index / architecture 已同步到 `V47` 收口状态
 
 ### 52.4 当前边界
 
