@@ -7,7 +7,9 @@ import type {
   StaticBuildCatalogEntry,
   StaticBuildResolvedLoadout,
   StaticBuildSourceDamageViewEntry,
+  StaticBuildSourceDamageViewGroupKey,
   StaticBuildSourceDamageViewRequirement,
+  StaticBuildSourceDamageViewSummary,
 } from "./types.js"
 import { toBaseResistanceAttribute } from "../terms.js"
 import {
@@ -33,6 +35,14 @@ const vivianExflowRatios = {
 export const supportedStaticBuildSourceViewAgents = supportedStaticBuildAgents
   .filter((item) => sourceViewAgentIdSet.has(item.id))
   .sort((left, right) => left.name.localeCompare(right.name, "zh-Hans-CN"))
+
+const sourceDamageViewGroupLabels: Record<
+  StaticBuildSourceDamageViewGroupKey,
+  string
+> = {
+  standalone: "独立结算条目",
+  delta: "增量结算条目",
+}
 
 export function hasStaticBuildSourceViewCoverage(agentId: string) {
   return sourceViewAgentIdSet.has(agentId)
@@ -115,12 +125,15 @@ export function resolveStaticBuildSourceDamageViews(
     entries.push(resolveAriaExflowView(input))
   }
 
+  const sortedEntries = entries.toSorted(compareSourceDamageViews)
+
   return {
     mode,
     manualBaseMode:
       input.mode === "manual" ? resolveBaseMode(input) : undefined,
     loadout,
-    entries,
+    summary: summarizeSourceDamageViews(sortedEntries),
+    entries: sortedEntries,
     assumptions: [],
   }
 }
@@ -131,6 +144,66 @@ function createRequirement(
   satisfied: boolean,
 ): StaticBuildSourceDamageViewRequirement {
   return { kind, key, satisfied }
+}
+
+function compareSourceDamageViews(
+  left: StaticBuildSourceDamageViewEntry,
+  right: StaticBuildSourceDamageViewEntry,
+) {
+  const leftGroupOrder = getSourceDamageViewGroupOrder(left.resolutionMode)
+  const rightGroupOrder = getSourceDamageViewGroupOrder(right.resolutionMode)
+  if (leftGroupOrder !== rightGroupOrder) {
+    return leftGroupOrder - rightGroupOrder
+  }
+
+  return left.metadata.stableKey.localeCompare(right.metadata.stableKey)
+}
+
+function getSourceDamageViewGroupOrder(
+  key: StaticBuildSourceDamageViewGroupKey,
+) {
+  return key === "standalone" ? 0 : 1
+}
+
+function summarizeSourceDamageViews(
+  entries: StaticBuildSourceDamageViewEntry[],
+): StaticBuildSourceDamageViewSummary {
+  const standaloneEntries = entries.filter(
+    (entry) => entry.resolutionMode === "standalone",
+  )
+  const deltaEntries = entries.filter(
+    (entry) => entry.resolutionMode === "delta",
+  )
+  const supportedCount = entries.filter((entry) => entry.supported).length
+  const unsupportedCount = entries.length - supportedCount
+
+  const groups: StaticBuildSourceDamageViewSummary["groups"] = []
+  for (const key of [
+    "standalone",
+    "delta",
+  ] as const satisfies StaticBuildSourceDamageViewGroupKey[]) {
+    const groupEntries = entries.filter((entry) => entry.resolutionMode === key)
+    if (groupEntries.length === 0) continue
+    const groupSupportedCount = groupEntries.filter(
+      (entry) => entry.supported,
+    ).length
+    groups.push({
+      key,
+      label: sourceDamageViewGroupLabels[key],
+      count: groupEntries.length,
+      supportedCount: groupSupportedCount,
+      unsupportedCount: groupEntries.length - groupSupportedCount,
+    })
+  }
+
+  return {
+    entryCount: entries.length,
+    standaloneCount: standaloneEntries.length,
+    deltaCount: deltaEntries.length,
+    supportedCount,
+    unsupportedCount,
+    groups,
+  }
 }
 
 function createEntryBase(

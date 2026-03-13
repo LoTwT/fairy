@@ -538,10 +538,30 @@ export interface StaticBuildSourceDamageViewEntry {
   build?: ResolveStaticBuildResult
 }
 
+export type StaticBuildSourceDamageViewGroupKey = "standalone" | "delta"
+
+export interface StaticBuildSourceDamageViewGroupSummary {
+  key: StaticBuildSourceDamageViewGroupKey
+  label: string
+  count: number
+  supportedCount: number
+  unsupportedCount: number
+}
+
+export interface StaticBuildSourceDamageViewSummary {
+  entryCount: number
+  standaloneCount: number
+  deltaCount: number
+  supportedCount: number
+  unsupportedCount: number
+  groups: StaticBuildSourceDamageViewGroupSummary[]
+}
+
 export interface ResolveStaticBuildSourceDamageViewsResult {
   mode: StaticBuildMode
   manualBaseMode?: StaticBuildBaseMode
   loadout: StaticBuildResolvedLoadout
+  summary: StaticBuildSourceDamageViewSummary
   entries: StaticBuildSourceDamageViewEntry[]
   assumptions: string[]
 }

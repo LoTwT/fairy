@@ -42,6 +42,14 @@ describe("static build source damage views", () => {
 
     expect(result.mode).toBe("baseline")
     expect(result.loadout.agent.name).toBe("朱鸢")
+    expect(result.summary).toEqual({
+      entryCount: 0,
+      standaloneCount: 0,
+      deltaCount: 0,
+      supportedCount: 0,
+      unsupportedCount: 0,
+      groups: [],
+    })
     expect(result.entries).toEqual([])
     expect(result.assumptions).toEqual([])
   })
@@ -81,6 +89,22 @@ describe("static build source damage views", () => {
     })
 
     expect(result.entries).toHaveLength(1)
+    expect(result.summary).toMatchObject({
+      entryCount: 1,
+      standaloneCount: 1,
+      deltaCount: 0,
+      supportedCount: 1,
+      unsupportedCount: 0,
+      groups: [
+        {
+          key: "standalone",
+          label: "独立结算条目",
+          count: 1,
+          supportedCount: 1,
+          unsupportedCount: 0,
+        },
+      ],
+    })
     expect(result.entries[0]).toMatchObject({
       id: "alice-polarity-assault",
       supported: true,
@@ -134,6 +158,13 @@ describe("static build source damage views", () => {
     })
 
     expect(result.entries).toHaveLength(1)
+    expect(result.summary).toMatchObject({
+      entryCount: 1,
+      standaloneCount: 1,
+      deltaCount: 0,
+      supportedCount: 1,
+      unsupportedCount: 0,
+    })
     expect(result.entries[0]).toMatchObject({
       id: "miyabi-frostburn-break",
       supported: true,
@@ -190,6 +221,22 @@ describe("static build source damage views", () => {
     })
 
     expect(result.entries).toHaveLength(1)
+    expect(result.summary).toMatchObject({
+      entryCount: 1,
+      standaloneCount: 0,
+      deltaCount: 1,
+      supportedCount: 1,
+      unsupportedCount: 0,
+      groups: [
+        {
+          key: "delta",
+          label: "增量结算条目",
+          count: 1,
+          supportedCount: 1,
+          unsupportedCount: 0,
+        },
+      ],
+    })
     expect(result.entries[0]).toMatchObject({
       id: "burnice-ember",
       supported: true,
@@ -250,6 +297,13 @@ describe("static build source damage views", () => {
     })
 
     expect(result.entries).toHaveLength(1)
+    expect(result.summary).toMatchObject({
+      entryCount: 1,
+      standaloneCount: 0,
+      deltaCount: 1,
+      supportedCount: 1,
+      unsupportedCount: 0,
+    })
     expect(result.entries[0]).toMatchObject({
       id: "aria-exflow",
       supported: true,
