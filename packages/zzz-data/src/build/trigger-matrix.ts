@@ -178,6 +178,9 @@ function summarizeTriggerMatrixRows(
     supportedCount,
     unsupportedCount,
     hasSourceViews: sourceViewRows.length > 0,
+    requirementSummary: summarizeSourceDamageViewRequirements(
+      rows.flatMap((row) => row.requirements),
+    ),
     diagnosticSummary: summarizeDiagnosticEntries(diagnostics),
     sourceNoteSummary: summarizeSourceNoteEntries(sourceNotes),
     groups,

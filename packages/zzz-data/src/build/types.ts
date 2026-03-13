@@ -816,6 +816,7 @@ export interface StaticBuildTriggerMatrixSummary {
   supportedCount: number
   unsupportedCount: number
   hasSourceViews: boolean
+  requirementSummary: StaticBuildSourceDamageViewRequirementSummary
   diagnosticSummary: StaticBuildDiagnosticSummary
   sourceNoteSummary: StaticBuildSourceNoteSummary
   groups: StaticBuildTriggerMatrixGroupSummary[]

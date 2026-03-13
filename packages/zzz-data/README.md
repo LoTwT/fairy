@@ -372,6 +372,26 @@ matrix.summary
 //   supportedCount: 2,
 //   unsupportedCount: 0,
 //   hasSourceViews: true,
+//   requirementSummary: {
+//     count: 2,
+//     satisfiedCount: 2,
+//     unsatisfiedCount: 0,
+//     hasUnsatisfied: false,
+//     groups: [
+//       {
+//         key: "state-flag",
+//         count: 1,
+//         satisfiedCount: 1,
+//         unsatisfiedCount: 0,
+//       },
+//       {
+//         key: "state-value",
+//         count: 1,
+//         satisfiedCount: 1,
+//         unsatisfiedCount: 0,
+//       },
+//     ],
+//   },
 //   diagnosticSummary: {
 //     count: 4,
 //     hasDiagnostics: true,
@@ -416,7 +436,7 @@ matrix.summary
 // }
 ```
 
-如果你需要判断当前 trigger-entry matrix 是否存在 source-view 行、如何分组展示、是否只剩主公式，或者当前整组 rows 是否带有 diagnostics / source notes，不要再自己统计 `rows`，直接使用 `matrix.summary`。
+如果你需要判断当前 trigger-entry matrix 是否存在 source-view 行、如何分组展示、是否只剩主公式，或者当前整组 rows 是否带有 requirements / diagnostics / source notes，不要再自己统计 `rows`，直接使用 `matrix.summary`，尤其是 `matrix.summary.requirementSummary`。
 
 如果你只想知道某一行 trigger row 的前置条件概况，也直接读取：
 

@@ -44,6 +44,26 @@ describe("resolveBuildTriggerMatrix tool", () => {
       supportedCount: 2,
       unsupportedCount: 0,
       hasSourceViews: true,
+      requirementSummary: {
+        count: 2,
+        satisfiedCount: 2,
+        unsatisfiedCount: 0,
+        hasUnsatisfied: false,
+        groups: [
+          {
+            key: "state-flag",
+            count: 1,
+            satisfiedCount: 1,
+            unsatisfiedCount: 0,
+          },
+          {
+            key: "state-value",
+            count: 1,
+            satisfiedCount: 1,
+            unsatisfiedCount: 0,
+          },
+        ],
+      },
       diagnosticSummary: {
         count: 6,
         hasDiagnostics: true,
@@ -305,6 +325,26 @@ describe("resolveBuildTriggerMatrix tool", () => {
       supportedCount: 2,
       unsupportedCount: 0,
       hasSourceViews: true,
+      requirementSummary: {
+        count: 2,
+        satisfiedCount: 2,
+        unsatisfiedCount: 0,
+        hasUnsatisfied: false,
+        groups: [
+          {
+            key: "panel-value",
+            count: 1,
+            satisfiedCount: 1,
+            unsatisfiedCount: 0,
+          },
+          {
+            key: "scenario-value",
+            count: 1,
+            satisfiedCount: 1,
+            unsatisfiedCount: 0,
+          },
+        ],
+      },
       diagnosticSummary: {
         count: 2,
         hasDiagnostics: true,

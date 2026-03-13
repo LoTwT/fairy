@@ -69,6 +69,7 @@
 - `V52 source-utility-view entry requirement summaries` 已收口
 - `V53 source-utility-view summary requirement aggregates` 已收口
 - `V54 source-damage-view summary requirement aggregates` 已收口
+- `V55 trigger-matrix summary requirement aggregates` 已收口
 - 当前边界：`resolveStaticBuildSkillMatrix` 仍只支持 `normal / sheer`
 
 ## 2. 阶段划分
@@ -82,6 +83,46 @@
 5. `V5 source-aware dynamic snapshot context`
 
 当前 `V44 source-entry collection aggregates`、`V45 source-view summary aggregates`、`V46 trigger-matrix summary aggregates` 与 `V47 skill-matrix summary aggregates` 已在当前 contract 下收口。
+
+## 60. V55 trigger-matrix summary requirement aggregates
+
+### 60.1 目标
+
+`V54` 收口后，source-damage-view summary 已具备稳定 `requirementSummary`。
+
+但 `ResolveStaticBuildTriggerMatrixResult.summary` 仍缺少聚合 requirement 摘要。
+
+`V55` 只解决一件事：
+
+1. 为 trigger-matrix summary 增加稳定 `requirementSummary`
+
+### 60.2 范围
+
+1. `V55.1` scope freeze
+2. `V55.2` summary-level requirement aggregate
+3. `V55.3` high-level / prompt alignment
+4. `V55.4` docs closeout
+
+### 60.3 当前状态
+
+- `V55.1` 已完成：冻结到 trigger-matrix summary requirement aggregate
+- `V55.2` 已完成：`StaticBuildTriggerMatrixSummary` 已新增稳定 `requirementSummary`
+- `V55.3` 已完成：高层 tool 断言与 agent prompt 已对齐 `matrix.summary.requirementSummary`
+- `V55.4` 已完成：相关 specs、roadmap、索引、架构文档与 README 已同步
+
+### 60.4 当前边界
+
+本阶段只做：
+
+1. 为 `StaticBuildTriggerMatrixSummary` 增加 `requirementSummary`
+2. 聚合当前 trigger rows 的 `requirements`
+3. 保持现有 `groups / mainFormulaCount / sourceViewCount / diagnosticSummary / sourceNoteSummary` 兼容
+
+显式不做：
+
+1. 不改变 trigger row 的 `requirements / requirementSummary`
+2. 不新增新的 trigger-matrix metadata
+3. 不改变 `damage / summary / diagnosticSummary / sourceNoteSummary`
 
 ## 3. V2.1：Curated Coverage
 
