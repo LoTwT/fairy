@@ -73,6 +73,6 @@
 ## 6. 当前状态
 
 - `V39.1` 已完成：冻结到 trigger row source-metadata contract
-- `V39.2` 未开始
-- `V39.3` 未开始
-- `V39.4` 未开始
+- `V39.2` 已完成：trigger row 已新增 `templateSource / sourceType / sourceId / sourceStableKey`
+- `V39.3` 已完成：高层 tool 无需新增组装逻辑，测试已对齐新 metadata
+- `V39.4` 已完成：README / 总规格 / 索引 / 架构入口已同步收口

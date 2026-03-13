@@ -264,6 +264,12 @@ const matrix = resolveStaticBuildTriggerMatrix({
 matrix.rows.map((row) => row.metadata.stableKey)
 // ["main-formula:anomaly", "source-view:alice-polarity-assault"]
 
+matrix.rows[0].metadata.templateSource
+// "main-formula"
+
+matrix.rows[1].metadata.sourceStableKey
+// "source-view:alice-polarity-assault"
+
 matrix.summary
 // {
 //   rowCount: 2,
