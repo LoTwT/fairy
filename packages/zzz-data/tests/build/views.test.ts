@@ -48,6 +48,25 @@ describe("static build source damage views", () => {
       deltaCount: 0,
       supportedCount: 0,
       unsupportedCount: 0,
+      diagnosticSummary: {
+        count: 0,
+        hasDiagnostics: false,
+        hasDefaultedInput: false,
+        hasCoverageGap: false,
+        hasUnsupportedEffect: false,
+        hasFallback: false,
+        kindGroups: [],
+        ownerGroups: [],
+      },
+      sourceNoteSummary: {
+        count: 0,
+        hasSourceNotes: false,
+        hasMissingInput: false,
+        hasProcessOnly: false,
+        hasResearchOnly: false,
+        statusGroups: [],
+        ownerGroups: [],
+      },
       groups: [],
     })
     expect(result.entries).toEqual([])
@@ -95,6 +114,31 @@ describe("static build source damage views", () => {
       deltaCount: 0,
       supportedCount: 1,
       unsupportedCount: 0,
+      diagnosticSummary: {
+        count: 2,
+        hasDiagnostics: true,
+        hasDefaultedInput: true,
+        hasCoverageGap: false,
+        hasUnsupportedEffect: false,
+        hasFallback: false,
+        kindGroups: [{ key: "defaulted-input", label: "默认输入", count: 2 }],
+        ownerGroups: [
+          { key: "loadout", count: 1 },
+          { key: "scenario", count: 1 },
+        ],
+      },
+      sourceNoteSummary: {
+        count: 2,
+        hasSourceNotes: true,
+        hasMissingInput: false,
+        hasProcessOnly: false,
+        hasResearchOnly: false,
+        statusGroups: [{ key: "resolved", label: "已展开", count: 2 }],
+        ownerGroups: [
+          { key: "finalPanel", count: 1 },
+          { key: "stateSnapshot", count: 1 },
+        ],
+      },
       groups: [
         {
           key: "standalone",
@@ -221,6 +265,14 @@ describe("static build source damage views", () => {
       deltaCount: 0,
       supportedCount: 1,
       unsupportedCount: 0,
+      diagnosticSummary: {
+        count: 1,
+        hasDiagnostics: true,
+      },
+      sourceNoteSummary: {
+        count: 2,
+        hasSourceNotes: true,
+      },
     })
     expect(result.entries[0]).toMatchObject({
       id: "miyabi-frostburn-break",

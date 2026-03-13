@@ -35,6 +35,25 @@ describe("static build source utility views", () => {
       rateCount: 0,
       supportedCount: 1,
       unsupportedCount: 0,
+      diagnosticSummary: {
+        count: 0,
+        hasDiagnostics: false,
+        hasDefaultedInput: false,
+        hasCoverageGap: false,
+        hasUnsupportedEffect: false,
+        hasFallback: false,
+        kindGroups: [],
+        ownerGroups: [],
+      },
+      sourceNoteSummary: {
+        count: 0,
+        hasSourceNotes: false,
+        hasMissingInput: false,
+        hasProcessOnly: false,
+        hasResearchOnly: false,
+        statusGroups: [],
+        ownerGroups: [],
+      },
       groups: [
         {
           key: "trigger",
@@ -140,6 +159,18 @@ describe("static build source utility views", () => {
       rateCount: 1,
       supportedCount: 1,
       unsupportedCount: 0,
+      diagnosticSummary: {
+        count: 0,
+        hasDiagnostics: false,
+        kindGroups: [],
+        ownerGroups: [],
+      },
+      sourceNoteSummary: {
+        count: 0,
+        hasSourceNotes: false,
+        statusGroups: [],
+        ownerGroups: [],
+      },
       groups: [
         {
           key: "rate",
@@ -203,6 +234,18 @@ describe("static build source utility views", () => {
       rateCount: 0,
       supportedCount: 8,
       unsupportedCount: 0,
+      diagnosticSummary: {
+        count: 0,
+        hasDiagnostics: false,
+        kindGroups: [],
+        ownerGroups: [],
+      },
+      sourceNoteSummary: {
+        count: 0,
+        hasSourceNotes: false,
+        statusGroups: [],
+        ownerGroups: [],
+      },
     })
     expect(result.assumptions).toEqual([])
   })

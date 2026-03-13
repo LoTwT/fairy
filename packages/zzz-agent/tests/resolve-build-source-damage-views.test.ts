@@ -43,6 +43,31 @@ describe("resolveBuildSourceDamageViews tool", () => {
       deltaCount: 0,
       supportedCount: 1,
       unsupportedCount: 0,
+      diagnosticSummary: {
+        count: 3,
+        hasDiagnostics: true,
+        hasDefaultedInput: true,
+        hasCoverageGap: false,
+        hasUnsupportedEffect: false,
+        hasFallback: false,
+        kindGroups: [{ key: "defaulted-input", label: "默认输入", count: 3 }],
+        ownerGroups: [
+          { key: "loadout", count: 2 },
+          { key: "scenario", count: 1 },
+        ],
+      },
+      sourceNoteSummary: {
+        count: 2,
+        hasSourceNotes: true,
+        hasMissingInput: false,
+        hasProcessOnly: false,
+        hasResearchOnly: false,
+        statusGroups: [{ key: "resolved", label: "已展开", count: 2 }],
+        ownerGroups: [
+          { key: "finalPanel", count: 1 },
+          { key: "stateSnapshot", count: 1 },
+        ],
+      },
       groups: [
         {
           key: "standalone",
@@ -231,6 +256,14 @@ describe("resolveBuildSourceDamageViews tool", () => {
       deltaCount: 1,
       supportedCount: 1,
       unsupportedCount: 0,
+      diagnosticSummary: {
+        count: 2,
+        hasDiagnostics: true,
+      },
+      sourceNoteSummary: {
+        count: 2,
+        hasSourceNotes: true,
+      },
       groups: [
         {
           key: "delta",

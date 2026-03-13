@@ -226,6 +226,8 @@ function summarizeSourceDamageViews(
   )
   const supportedCount = entries.filter((entry) => entry.supported).length
   const unsupportedCount = entries.length - supportedCount
+  const diagnostics = entries.flatMap((entry) => entry.diagnostics)
+  const sourceNotes = entries.flatMap((entry) => entry.sourceNotes)
 
   const groups: StaticBuildSourceDamageViewSummary["groups"] = []
   for (const key of [
@@ -252,6 +254,8 @@ function summarizeSourceDamageViews(
     deltaCount: deltaEntries.length,
     supportedCount,
     unsupportedCount,
+    diagnosticSummary: summarizeDiagnosticEntries(diagnostics),
+    sourceNoteSummary: summarizeSourceNoteEntries(sourceNotes),
     groups,
   }
 }

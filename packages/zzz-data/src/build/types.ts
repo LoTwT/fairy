@@ -646,6 +646,8 @@ export interface StaticBuildSourceDamageViewSummary {
   deltaCount: number
   supportedCount: number
   unsupportedCount: number
+  diagnosticSummary: StaticBuildDiagnosticSummary
+  sourceNoteSummary: StaticBuildSourceNoteSummary
   groups: StaticBuildSourceDamageViewGroupSummary[]
 }
 
@@ -723,6 +725,8 @@ export interface StaticBuildSourceUtilityViewSummary {
   rateCount: number
   supportedCount: number
   unsupportedCount: number
+  diagnosticSummary: StaticBuildDiagnosticSummary
+  sourceNoteSummary: StaticBuildSourceNoteSummary
   groups: StaticBuildSourceUtilityViewGroupSummary[]
 }
 

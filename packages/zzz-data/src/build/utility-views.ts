@@ -349,6 +349,8 @@ function summarizeSourceUtilityViews(
   const rateEntries = entries.filter((entry) => entry.resolutionMode === "rate")
   const supportedCount = entries.filter((entry) => entry.supported).length
   const unsupportedCount = entries.length - supportedCount
+  const diagnostics = entries.flatMap((entry) => entry.diagnostics)
+  const sourceNotes = entries.flatMap((entry) => entry.sourceNotes)
 
   const groups: StaticBuildSourceUtilityViewSummary["groups"] = []
   for (const key of [
@@ -375,6 +377,8 @@ function summarizeSourceUtilityViews(
     rateCount: rateEntries.length,
     supportedCount,
     unsupportedCount,
+    diagnosticSummary: summarizeDiagnosticEntries(diagnostics),
+    sourceNoteSummary: summarizeSourceNoteEntries(sourceNotes),
     groups,
   }
 }
