@@ -73,6 +73,7 @@
 - `V56 source-entry collection requirement aggregates` 已收口
 - `V65 skill-matrix group caveat summaries` 已收口
 - `V66 skill-matrix top-level unsupported effects` 已收口
+- `V67 skill-matrix top-level caveat summary` 已收口
 - 当前边界：`resolveStaticBuildSkillMatrix` 仍只支持 `normal / sheer`
 
 ## 2. 阶段划分
@@ -3173,3 +3174,43 @@ Batch B（已完成）：
 1. 不改变 `summary` 结构
 2. 不改变 `assumptions` 的现有语义
 3. 不改变 `row.group` 或 `groups[*]` 的聚合逻辑
+
+## 70. V67 skill-matrix top-level caveat summary
+
+### 70.1 目标
+
+`V66` 收口后，整张 skill matrix 顶层已经有 `unsupportedEffects`，组级也已有 `assumptions / unsupportedEffects`。
+
+但顶层仍只有裸数组，没有稳定的 caveat 计数语义。上层如果想先判断“当前矩阵是否有 assumptions / unsupportedEffects、各有多少条”，仍要自己统计数组长度。
+
+`V67` 只解决一件事：
+
+1. 为 `ResolveStaticBuildSkillMatrixResult` 增加顶层 `caveatSummary`
+
+### 70.2 范围
+
+1. `V67.1` scope freeze
+2. `V67.2` top-level caveat summary
+3. `V67.3` high-level / prompt alignment
+4. `V67.4` docs closeout
+
+### 70.3 当前状态
+
+- `V67.1` 已完成：冻结到 top-level skill-matrix caveat summary
+- `V67.2` 已完成：`ResolveStaticBuildSkillMatrixResult` 与 compact result 已新增顶层 `caveatSummary`
+- `V67.3` 已完成：高层 tool 断言与 agent prompt 已对齐 `matrix.caveatSummary`
+- `V67.4` 已完成：相关 specs、roadmap、索引、架构文档与 README 已同步
+
+### 70.4 当前边界
+
+本阶段只做：
+
+1. 为 `ResolveStaticBuildSkillMatrixResult` 增加顶层 `caveatSummary`
+2. 从现有顶层 `assumptions / unsupportedEffects` 衍生计数与布尔位
+3. 保持现有 `summary / diagnosticSummary / sourceNoteSummary / rows` 兼容
+
+显式不做：
+
+1. 不新增 group-level `caveatSummary`
+2. 不改变 `assumptions / unsupportedEffects` 的现有数组语义
+3. 不改变 `summary` 结构

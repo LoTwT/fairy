@@ -544,6 +544,18 @@ function summarizeSkillMatrixEffects(
   })
 }
 
+function summarizeSkillMatrixCaveats(
+  assumptions: string[],
+  unsupportedEffects: string[],
+) {
+  return {
+    assumptionCount: assumptions.length,
+    unsupportedEffectCount: unsupportedEffects.length,
+    hasAssumptions: assumptions.length > 0,
+    hasUnsupportedEffects: unsupportedEffects.length > 0,
+  }
+}
+
 function summarizeSkillMatrix(rows: StaticBuildSkillMatrixRow[]) {
   const first = rows[0]?.build
   const { commonBuckets, variableBuckets } = summarizeBuckets(rows)
@@ -2034,6 +2046,9 @@ export function resolveStaticBuildSkillMatrix(
       `${agent.name} 当前使用通用技能矩阵模板生成，技能标签来自 stat name 归一化，未达到 curated 手工模板的展示精度`,
     )
   }
+  const unsupportedEffects = [
+    ...new Set(rows.flatMap((row) => row.unsupportedEffects)),
+  ]
 
   return {
     profile: first.profile,
@@ -2042,6 +2057,7 @@ export function resolveStaticBuildSkillMatrix(
     loadout: first.loadout,
     summary: summarizeSkillMatrix(rows),
     effectSummary: summarizeSkillMatrixEffects(rows),
+    caveatSummary: summarizeSkillMatrixCaveats(assumptions, unsupportedEffects),
     diagnosticSummary: summarizeDiagnosticEntries(
       rows.flatMap((row) => row.diagnostics),
     ),
@@ -2050,8 +2066,6 @@ export function resolveStaticBuildSkillMatrix(
     ),
     rows,
     assumptions,
-    unsupportedEffects: [
-      ...new Set(rows.flatMap((row) => row.unsupportedEffects)),
-    ],
+    unsupportedEffects,
   }
 }

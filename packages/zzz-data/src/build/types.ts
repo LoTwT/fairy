@@ -510,6 +510,13 @@ export interface StaticBuildSourceNoteSummary {
   ownerGroups: StaticBuildSourceNoteOwnerGroupSummary[]
 }
 
+export interface StaticBuildCaveatSummary {
+  assumptionCount: number
+  unsupportedEffectCount: number
+  hasAssumptions: boolean
+  hasUnsupportedEffects: boolean
+}
+
 export interface StaticBuildResolveSummary {
   baseDamageStat: StaticBuildResolvedPanel["baseDamageStat"]
   baseDamageValue: number
@@ -990,6 +997,7 @@ export interface ResolveStaticBuildSkillMatrixResult {
   loadout: StaticBuildResolvedLoadout
   summary: StaticBuildSkillMatrixSummary
   effectSummary: StaticBuildSkillMatrixEffectSummaryItem[]
+  caveatSummary: StaticBuildCaveatSummary
   diagnosticSummary: StaticBuildDiagnosticSummary
   sourceNoteSummary: StaticBuildSourceNoteSummary
   rows: StaticBuildSkillMatrixRow[]

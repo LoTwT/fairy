@@ -33,6 +33,12 @@ describe("static build skill matrix", () => {
     expect(result.unsupportedEffects).toEqual([
       ...new Set(result.rows.flatMap((row) => row.unsupportedEffects)),
     ])
+    expect(result.caveatSummary).toEqual({
+      assumptionCount: result.assumptions.length,
+      unsupportedEffectCount: result.unsupportedEffects.length,
+      hasAssumptions: result.assumptions.length > 0,
+      hasUnsupportedEffects: result.unsupportedEffects.length > 0,
+    })
     expect(result.diagnosticSummary.count).toBe(
       result.rows.flatMap((row) => row.diagnostics).length,
     )
