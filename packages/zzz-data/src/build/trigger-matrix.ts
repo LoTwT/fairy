@@ -168,6 +168,15 @@ function summarizeTriggerMatrixRows(
       count: groupRows.length,
       supportedCount: groupSupportedCount,
       unsupportedCount: groupRows.length - groupSupportedCount,
+      requirementSummary: summarizeSourceDamageViewRequirements(
+        groupRows.flatMap((row) => row.requirements),
+      ),
+      diagnosticSummary: summarizeDiagnosticEntries(
+        groupRows.flatMap((row) => row.diagnostics),
+      ),
+      sourceNoteSummary: summarizeSourceNoteEntries(
+        groupRows.flatMap((row) => row.sourceNotes),
+      ),
     })
   }
 

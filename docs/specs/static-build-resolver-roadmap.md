@@ -2931,3 +2931,43 @@ Batch B（已完成）：
 1. 不改变 `entry.requirements / requirementSummary`
 2. 不新增新的 source-view metadata
 3. 不改变 `damage / summary / assumptions`
+
+## 64. V61 trigger-matrix group summaries
+
+### 64.1 目标
+
+`V60` 收口后，`source-damage-view groups` 已能稳定给出局部 `requirementSummary / diagnosticSummary / sourceNoteSummary`。
+
+但 `trigger-entry matrix` 的 `groups[*]` 仍只有 count 级别信息。上层如果按 `main-formula / source-view` 拆 section，仍要重新遍历 rows 统计 requirement / diagnostics / source notes。
+
+`V61` 只解决一件事：
+
+1. 为 `trigger-matrix groups` 增加局部 `requirementSummary / diagnosticSummary / sourceNoteSummary`
+
+### 64.2 范围
+
+1. `V61.1` scope freeze
+2. `V61.2` group-level summaries
+3. `V61.3` high-level / prompt alignment
+4. `V61.4` docs closeout
+
+### 64.3 当前状态
+
+- `V61.1` 已完成：冻结到 trigger-matrix group summaries
+- `V61.2` 已完成：`StaticBuildTriggerMatrixGroupSummary` 已新增局部 `requirementSummary / diagnosticSummary / sourceNoteSummary`
+- `V61.3` 已完成：高层 tool 断言与 agent prompt 已对齐 `matrix.summary.groups[*]`
+- `V61.4` 已完成：相关 specs、roadmap、索引、架构文档与 README 已同步
+
+### 64.4 当前边界
+
+本阶段只做：
+
+1. 为 `trigger-matrix group` 增加局部 summaries
+2. 保持顶层 trigger-matrix summary 兼容
+3. 保持 grouping key / ordering 兼容
+
+显式不做：
+
+1. 不改变 `row.requirements / requirementSummary`
+2. 不新增新的 trigger-row metadata
+3. 不改变 `damage / summary / assumptions`
