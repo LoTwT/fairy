@@ -31,6 +31,11 @@ describe("static build source utility views", () => {
     expect(result.entries).toHaveLength(1)
     expect(result.entries[0]).toMatchObject({
       id: "lunar-noviluna-energy-refund",
+      metadata: {
+        canonicalLabel: "「月相」-朔：[新月]",
+        stableKey: "source-utility:lunar-noviluna-energy-refund",
+        entryKind: "source-utility-view",
+      },
       utilityType: "energy-refund",
       resolutionMode: "trigger",
       targetScope: "self",
@@ -52,6 +57,10 @@ describe("static build source utility views", () => {
     expect(result.entries).toHaveLength(1)
     expect(result.entries[0]).toMatchObject({
       id: "magnetic-storm-charlie-energy-refund",
+      metadata: {
+        stableKey: "source-utility:magnetic-storm-charlie-energy-refund",
+        entryKind: "source-utility-view",
+      },
       utilityType: "energy-refund",
       resolutionMode: "trigger",
       targetScope: "self",
@@ -73,6 +82,11 @@ describe("static build source utility views", () => {
     expect(result.entries).toHaveLength(1)
     expect(result.entries[0]).toMatchObject({
       id: "flamemaker-shaker-offfield-energy-regen",
+      metadata: {
+        stableKey: "source-utility:flamemaker-shaker-offfield-energy-regen",
+        entryKind: "source-utility-view",
+        utilityType: "energy-regen-rate",
+      },
       utilityType: "energy-regen-rate",
       resolutionMode: "rate",
       targetScope: "self",

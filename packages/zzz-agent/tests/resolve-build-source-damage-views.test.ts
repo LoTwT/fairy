@@ -41,6 +41,11 @@ describe("resolveBuildSourceDamageViews tool", () => {
       id: "alice-polarity-assault",
       supported: true,
       resolutionMode: "standalone",
+      metadata: {
+        canonicalLabel: "爱丽丝：[极性强击]",
+        stableKey: "source-view:alice-polarity-assault",
+        entryKind: "source-damage-view",
+      },
     })
     expect(
       (result as any).views.entries[0].sourceNotes.some(
@@ -150,6 +155,10 @@ describe("resolveBuildSourceDamageViews tool", () => {
       id: "aria-exflow",
       supported: true,
       resolutionMode: "delta",
+      metadata: {
+        stableKey: "source-view:aria-exflow",
+        entryKind: "source-damage-view",
+      },
     })
     expect(
       (result as any).views.entries[0].sourceNotes.some(

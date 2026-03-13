@@ -1308,10 +1308,10 @@ Batch B（已完成）：
 ### 27.3 当前状态
 
 - `V22.1` 已完成：冻结到 source-entry metadata
-- `V22.2` 未开始
-- `V22.3` 未开始
-- `V22.4` 未开始
-- `V22.5` 未开始
+- `V22.2` 已完成：source damage view 已补 metadata
+- `V22.3` 已完成：source utility view 已补 metadata
+- `V22.4` 已完成：agent / docs integration 已完成
+- `V22.5` 已完成：当前 contract 下已收口
 
 ### 27.4 当前边界
 

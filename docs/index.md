@@ -37,4 +37,4 @@
 - [静态构筑解析系统 V19](./specs/static-build-resolver-v19.md) — 当前阶段：已收口；最后两个 utility-only 旧通用音擎已固定为 process-only source note，不新增 public key
 - [静态构筑解析系统 V20](./specs/static-build-resolver-v20.md) — 当前阶段：已完成第一批 source-specific utility / energy view，`zzz-agent` 已暴露独立 utility view tool
 - [静态构筑解析系统 V21](./specs/static-build-resolver-v21.md) — 当前实现：已完成 anomaly / disorder trigger-entry matrix，第一批覆盖爱丽丝 / 雅 / 柏妮思 / 爱芮
-- [静态构筑解析系统 V22](./specs/static-build-resolver-v22.md) — 当前阶段：为 source damage view / utility view 增加稳定 metadata
+- [静态构筑解析系统 V22](./specs/static-build-resolver-v22.md) — 当前实现：已为 source damage view / utility view 增加稳定 metadata

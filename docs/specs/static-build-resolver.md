@@ -770,4 +770,4 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 19. `V19` legacy utility engine closeout：已在当前 contract 下收口；最后两个 utility-only 旧通用音擎 `「月相」-朔 / 「电磁暴」-叁式` 已固定为 process-only source note，不新增能量相关 public key，见 [静态构筑解析系统 V19](./static-build-resolver-v19.md)
 20. `V20` source-specific utility / energy views：已在当前 contract 下完成第一批收口；当前已通过独立 utility view 暴露稳定的回能 / 回能速率条目，不再只保留在 source note 中，也不会把它们并回主 damage resolver，见 [静态构筑解析系统 V20](./static-build-resolver-v20.md)
 21. `V21` anomaly / disorder trigger-entry matrix：已落地独立触发条目矩阵，不继续伪装成技能矩阵；当前通过 `resolveStaticBuildTriggerMatrix()` 为 `爱丽丝 / 雅 / 柏妮思 / 爱芮` 暴露并列的主结算 + 额外结算条目，见 [静态构筑解析系统 V21](./static-build-resolver-v21.md)
-22. `V22` structured source-entry metadata：当前已冻结到 source damage view / utility view 的稳定 metadata，对齐 `canonicalLabel / stableKey / entryKind` 风格，见 [静态构筑解析系统 V22](./static-build-resolver-v22.md)
+22. `V22` structured source-entry metadata：已为 source damage view / utility view 补齐稳定 metadata，对齐 `canonicalLabel / stableKey / entryKind` 风格；`zzz-agent` 已优先消费 `entry.metadata`，见 [静态构筑解析系统 V22](./static-build-resolver-v22.md)

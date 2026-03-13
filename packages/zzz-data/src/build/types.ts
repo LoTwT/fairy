@@ -501,9 +501,18 @@ export interface StaticBuildSourceDamageViewRequirement {
   satisfied: boolean
 }
 
+export interface StaticBuildSourceDamageViewMeta {
+  canonicalLabel: string
+  stableKey: string
+  entryKind: "source-damage-view"
+  damageType: Extract<StaticBuildDamageType, "anomaly" | "disorder">
+  resolutionMode: "standalone" | "delta"
+}
+
 export interface StaticBuildSourceDamageViewEntry {
   id: string
   label: string
+  metadata: StaticBuildSourceDamageViewMeta
   sourceType: StaticBuildEffectDefinition["sourceType"]
   sourceId: string
   damageType: StaticBuildDamageType
@@ -545,9 +554,20 @@ export interface ResolveStaticBuildSourceUtilityViewsInput {
   >
 }
 
+export interface StaticBuildSourceUtilityViewMeta {
+  canonicalLabel: string
+  stableKey: string
+  entryKind: "source-utility-view"
+  utilityType: StaticBuildSourceUtilityViewType
+  resolutionMode: StaticBuildSourceUtilityViewResolutionMode
+  targetScope: StaticBuildSourceUtilityViewTargetScope
+  unit: "energy" | "energy-per-second"
+}
+
 export interface StaticBuildSourceUtilityViewEntry {
   id: string
   label: string
+  metadata: StaticBuildSourceUtilityViewMeta
   sourceType: StaticBuildEffectDefinition["sourceType"]
   sourceId: string
   supported: boolean

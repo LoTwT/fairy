@@ -145,6 +145,14 @@ function createEntryBase(
   })
   return {
     ...entry,
+    metadata: {
+      canonicalLabel: entry.label,
+      stableKey: `source-view:${entry.id}`,
+      entryKind: "source-damage-view",
+      damageType:
+        input.scenario.damageType === "disorder" ? "disorder" : "anomaly",
+      resolutionMode: entry.resolutionMode,
+    },
     damageType: input.scenario.damageType,
     supported: requirements.every((item) => item.satisfied),
     requirements,

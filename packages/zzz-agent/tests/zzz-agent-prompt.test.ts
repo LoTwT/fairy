@@ -46,6 +46,8 @@ it("keeps screenshot summary by default", async () => {
   expect(base.includes("commonFormulaMultipliers")).toBe(true)
   expect(base.includes("额外结算条目")).toBe(true)
   expect(base.includes("触发条目矩阵")).toBe(true)
+  expect(base.includes("entry.metadata.canonicalLabel")).toBe(true)
+  expect(base.includes("entry.metadata.stableKey")).toBe(true)
   expect(base.includes("diagnostics")).toBe(true)
   expect(base.includes("sourceNotes")).toBe(true)
   expect(base.includes("sourceNotes 带 guidance")).toBe(true)

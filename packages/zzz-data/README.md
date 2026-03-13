@@ -172,6 +172,7 @@ const views = resolveStaticBuildSourceDamageViews({
 })
 
 views.entries[0]
+views.entries[0].metadata.stableKey
 ```
 
 同一份 source-specific view contract 也已在 `zzz-agent` 中通过 `resolve-build-source-damage-views` 高层 tool 暴露，适合直接给 Agent 查询独立额外结算条目。
@@ -231,6 +232,7 @@ const utilityViews = resolveStaticBuildSourceUtilityViews({
 })
 
 utilityViews.entries[0]
+utilityViews.entries[0].metadata.stableKey
 // {
 //   id: "lunar-noviluna-energy-refund",
 //   utilityType: "energy-refund",

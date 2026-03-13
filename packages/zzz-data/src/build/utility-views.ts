@@ -85,11 +85,20 @@ function resolveLoadout(
 function createEntry(
   entry: Omit<
     StaticBuildSourceUtilityViewEntry,
-    "supported" | "diagnostics" | "sourceNotes"
+    "metadata" | "supported" | "diagnostics" | "sourceNotes"
   >,
 ): StaticBuildSourceUtilityViewEntry {
   return {
     ...entry,
+    metadata: {
+      canonicalLabel: entry.label,
+      stableKey: `source-utility:${entry.id}`,
+      entryKind: "source-utility-view",
+      utilityType: entry.utilityType,
+      resolutionMode: entry.resolutionMode,
+      targetScope: entry.targetScope,
+      unit: entry.unit,
+    },
     supported: true,
     diagnostics: [],
     sourceNotes: [],

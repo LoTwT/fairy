@@ -79,9 +79,18 @@ describe("static build source damage views", () => {
     })
 
     expect(result.entries).toHaveLength(1)
-    expect(result.entries[0]?.id).toBe("alice-polarity-assault")
-    expect(result.entries[0]?.supported).toBe(true)
-    expect(result.entries[0]?.resolutionMode).toBe("standalone")
+    expect(result.entries[0]).toMatchObject({
+      id: "alice-polarity-assault",
+      supported: true,
+      resolutionMode: "standalone",
+      metadata: {
+        canonicalLabel: "爱丽丝：[极性强击]",
+        stableKey: "source-view:alice-polarity-assault",
+        entryKind: "source-damage-view",
+        damageType: "anomaly",
+        resolutionMode: "standalone",
+      },
+    })
     expect(
       result.entries[0]?.build?.resolvedBuckets.skillMultiplierFactor,
     ).toBeCloseTo(2.5, 4)
@@ -123,9 +132,16 @@ describe("static build source damage views", () => {
     })
 
     expect(result.entries).toHaveLength(1)
-    expect(result.entries[0]?.id).toBe("miyabi-frostburn-break")
-    expect(result.entries[0]?.supported).toBe(true)
-    expect(result.entries[0]?.resolutionMode).toBe("standalone")
+    expect(result.entries[0]).toMatchObject({
+      id: "miyabi-frostburn-break",
+      supported: true,
+      resolutionMode: "standalone",
+      metadata: {
+        stableKey: "source-view:miyabi-frostburn-break",
+        entryKind: "source-damage-view",
+        damageType: "anomaly",
+      },
+    })
     expect(result.entries[0]?.damage?.expected).toBeGreaterThan(0)
     expect(
       result.entries[0]?.assumptions.some((item) =>
@@ -172,9 +188,17 @@ describe("static build source damage views", () => {
     })
 
     expect(result.entries).toHaveLength(1)
-    expect(result.entries[0]?.id).toBe("burnice-ember")
-    expect(result.entries[0]?.supported).toBe(true)
-    expect(result.entries[0]?.resolutionMode).toBe("delta")
+    expect(result.entries[0]).toMatchObject({
+      id: "burnice-ember",
+      supported: true,
+      resolutionMode: "delta",
+      metadata: {
+        stableKey: "source-view:burnice-ember",
+        entryKind: "source-damage-view",
+        damageType: "anomaly",
+        resolutionMode: "delta",
+      },
+    })
     expect(
       result.entries[0]?.sourceNotes.some(
         (note) =>
@@ -224,9 +248,18 @@ describe("static build source damage views", () => {
     })
 
     expect(result.entries).toHaveLength(1)
-    expect(result.entries[0]?.id).toBe("aria-exflow")
-    expect(result.entries[0]?.supported).toBe(true)
-    expect(result.entries[0]?.resolutionMode).toBe("delta")
+    expect(result.entries[0]).toMatchObject({
+      id: "aria-exflow",
+      supported: true,
+      resolutionMode: "delta",
+      metadata: {
+        canonicalLabel: "爱芮：[异放]",
+        stableKey: "source-view:aria-exflow",
+        entryKind: "source-damage-view",
+        damageType: "disorder",
+        resolutionMode: "delta",
+      },
+    })
     expect(
       result.entries[0]?.sourceNotes.some(
         (note) =>

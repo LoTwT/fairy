@@ -14,6 +14,11 @@ describe("resolveBuildSourceUtilityViews tool", () => {
     expect((result as any).found).toBe(true)
     expect((result as any).views.entries[0]).toMatchObject({
       id: "lunar-noviluna-energy-refund",
+      metadata: {
+        canonicalLabel: "「月相」-朔：[新月]",
+        stableKey: "source-utility:lunar-noviluna-energy-refund",
+        entryKind: "source-utility-view",
+      },
       utilityType: "energy-refund",
       value: 3,
       unit: "energy",

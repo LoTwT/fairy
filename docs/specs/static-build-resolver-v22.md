@@ -104,3 +104,12 @@
 2. source utility view 不再只有 `id + label`
 3. `zzz-agent` prompt 明确优先使用 metadata
 4. README / architecture / roadmap 已同步
+
+## 6. 当前实现状态
+
+当前已完成：
+
+1. `StaticBuildSourceDamageViewMeta`
+2. `StaticBuildSourceUtilityViewMeta`
+3. `source-view:${id}` / `source-utility:${id}` 稳定键
+4. `zzz-agent` prompt 已优先消费 `entry.metadata`
