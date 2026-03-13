@@ -1245,3 +1245,48 @@ Batch B（已完成）：
 2. 不做 utility matrix
 3. 不做时间轴 / 覆盖率 / 循环模拟
 4. 不在第一批纳入需要复杂层数或后台过程的 anomaly utility 来源
+
+## 26. V21 anomaly / disorder trigger-entry matrix
+
+### 26.1 目标
+
+把 anomaly / disorder 从“没有 matrix”推进到“有独立 trigger-entry matrix”，但不继续伪装成技能矩阵。
+
+### 26.2 范围
+
+1. `V21.1` scope freeze
+2. `V21.2` trigger-entry matrix contract
+3. `V21.3` first-batch coverage
+4. `V21.4` agent / docs integration
+5. `V21.5` closeout
+
+### 26.3 当前状态
+
+- `V21.1` 已完成：冻结到 trigger-entry matrix
+- `V21.2` 未开始
+- `V21.3` 未开始
+- `V21.4` 未开始
+- `V21.5` 未开始
+
+### 26.4 第一批范围
+
+第一批只覆盖当前已有 source-specific damage view 的 anomaly / disorder 代理人：
+
+1. `爱丽丝`
+2. `雅`
+3. `柏妮思`
+4. `爱芮`
+
+### 26.5 当前边界
+
+本阶段只做：
+
+1. `main-formula` 主条目
+2. `source-view` 附加条目
+3. 单次 snapshot 的触发条目矩阵
+
+显式不做：
+
+1. 不做 anomaly / disorder skill matrix
+2. 不做 utility / energy matrix
+3. 不新增时间轴、覆盖率、积蓄过程 contract

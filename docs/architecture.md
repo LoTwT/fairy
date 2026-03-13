@@ -206,6 +206,7 @@ packages/zzz-agent/
 - [`static-build-resolver-v18.md`](../docs/specs/static-build-resolver-v18.md) — 当前阶段范围：已收口；最后一批 legacy 强攻签名已按 partial coverage / source note 分层固定
 - [`static-build-resolver-v19.md`](../docs/specs/static-build-resolver-v19.md) — 当前阶段范围：已收口；最后两个 utility-only 旧通用音擎已固定为 process-only source note，不新增 public key
 - [`static-build-resolver-v20.md`](../docs/specs/static-build-resolver-v20.md) — 当前阶段范围：已完成第一批 source-specific utility / energy view；`zzz-agent` 已暴露独立 utility view tool，不并回主伤害公式
+- [`static-build-resolver-v21.md`](../docs/specs/static-build-resolver-v21.md) — 当前阶段范围：定义 anomaly / disorder trigger-entry matrix；第一批只覆盖已有 source view 的异常代理人
 
 ## 计算器模块（src/calculator/）
 

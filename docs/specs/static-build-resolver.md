@@ -769,3 +769,4 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 18. `V18` legacy attack signature closeout：已在当前 contract 下收口；最后一批 legacy 强攻签名 `可琳 / 比利 / 安东 / 家政员 / 仿制星徽引擎 / 旋钻机-赤轴` 已按 partial coverage / source note 分层固定，其中姿态、距离、持续命中与真动态额外结算继续保持 source note，不新增新的 public key，见 [静态构筑解析系统 V18](./static-build-resolver-v18.md)
 19. `V19` legacy utility engine closeout：已在当前 contract 下收口；最后两个 utility-only 旧通用音擎 `「月相」-朔 / 「电磁暴」-叁式` 已固定为 process-only source note，不新增能量相关 public key，见 [静态构筑解析系统 V19](./static-build-resolver-v19.md)
 20. `V20` source-specific utility / energy views：已在当前 contract 下完成第一批收口；当前已通过独立 utility view 暴露稳定的回能 / 回能速率条目，不再只保留在 source note 中，也不会把它们并回主 damage resolver，见 [静态构筑解析系统 V20](./static-build-resolver-v20.md)
+21. `V21` anomaly / disorder trigger-entry matrix：当前已冻结到“触发条目矩阵”，不继续伪装成技能矩阵；第一批将复用主 resolver 与 source-specific damage view，为 `爱丽丝 / 雅 / 柏妮思 / 爱芮` 暴露并列的主结算 + 额外结算条目，见 [静态构筑解析系统 V21](./static-build-resolver-v21.md)
