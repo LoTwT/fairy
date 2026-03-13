@@ -76,6 +76,6 @@
 ## 6. 当前状态
 
 - `V46.1` 已完成：冻结到 trigger-matrix summary aggregate contract
-- `V46.2` 未开始
-- `V46.3` 未开始
-- `V46.4` 未开始
+- `V46.2` 已完成：trigger-matrix 顶层 `summary` 已新增稳定 `diagnosticSummary / sourceNoteSummary`
+- `V46.3` 已完成：compact helper 与高层 `resolve-build-trigger-matrix` 已对齐新的 trigger-matrix summary contract
+- `V46.4` 已完成：README / 总规格 / roadmap / index / architecture 已同步到 `V46` 收口状态

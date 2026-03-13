@@ -354,6 +354,31 @@ matrix.summary
 //   supportedCount: 2,
 //   unsupportedCount: 0,
 //   hasSourceViews: true,
+//   diagnosticSummary: {
+//     count: 4,
+//     hasDiagnostics: true,
+//     hasDefaultedInput: true,
+//     hasCoverageGap: false,
+//     hasUnsupportedEffect: false,
+//     hasFallback: false,
+//     kindGroups: [{ key: "defaulted-input", label: "默认输入", count: 4 }],
+//     ownerGroups: [
+//       { key: "loadout", count: 2 },
+//       { key: "scenario", count: 2 },
+//     ],
+//   },
+//   sourceNoteSummary: {
+//     count: 4,
+//     hasSourceNotes: true,
+//     hasMissingInput: false,
+//     hasProcessOnly: false,
+//     hasResearchOnly: false,
+//     statusGroups: [{ key: "resolved", label: "已展开", count: 4 }],
+//     ownerGroups: [
+//       { key: "finalPanel", count: 2 },
+//       { key: "stateSnapshot", count: 2 },
+//     ],
+//   },
 //   groups: [
 //     {
 //       key: "main-formula",
@@ -373,7 +398,7 @@ matrix.summary
 // }
 ```
 
-如果你需要判断当前 trigger-entry matrix 是否存在 source-view 行、如何分组展示、或者是否只剩主公式，不要再自己统计 `rows`，直接使用 `matrix.summary`。
+如果你需要判断当前 trigger-entry matrix 是否存在 source-view 行、如何分组展示、是否只剩主公式，或者当前整组 rows 是否带有 diagnostics / source notes，不要再自己统计 `rows`，直接使用 `matrix.summary`。
 
 如果你只想知道某一行 trigger row 的前置条件概况，也直接读取：
 
