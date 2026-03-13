@@ -64,6 +64,45 @@ describe("resolveBuildSourceUtilityViews tool", () => {
           count: 1,
           supportedCount: 1,
           unsupportedCount: 0,
+          requirementSummary: {
+            count: 2,
+            satisfiedCount: 2,
+            unsatisfiedCount: 0,
+            hasUnsatisfied: false,
+            groups: [
+              {
+                key: "trigger",
+                count: 1,
+                satisfiedCount: 1,
+                unsatisfiedCount: 0,
+              },
+              {
+                key: "cooldown",
+                count: 1,
+                satisfiedCount: 1,
+                unsatisfiedCount: 0,
+              },
+            ],
+          },
+          diagnosticSummary: {
+            count: 0,
+            hasDiagnostics: false,
+            hasDefaultedInput: false,
+            hasCoverageGap: false,
+            hasUnsupportedEffect: false,
+            hasFallback: false,
+            kindGroups: [],
+            ownerGroups: [],
+          },
+          sourceNoteSummary: {
+            count: 0,
+            hasSourceNotes: false,
+            hasMissingInput: false,
+            hasProcessOnly: false,
+            hasResearchOnly: false,
+            statusGroups: [],
+            ownerGroups: [],
+          },
         },
       ],
     })
@@ -190,6 +229,47 @@ describe("resolveBuildSourceUtilityViews tool", () => {
         statusGroups: [],
         ownerGroups: [],
       },
+      groups: [
+        {
+          key: "trigger",
+          label: "按次触发条目",
+          count: 8,
+          supportedCount: 8,
+          unsupportedCount: 0,
+          requirementSummary: {
+            count: 16,
+            satisfiedCount: 16,
+            unsatisfiedCount: 0,
+            hasUnsatisfied: false,
+            groups: [
+              {
+                key: "trigger",
+                count: 8,
+                satisfiedCount: 8,
+                unsatisfiedCount: 0,
+              },
+              {
+                key: "cooldown",
+                count: 8,
+                satisfiedCount: 8,
+                unsatisfiedCount: 0,
+              },
+            ],
+          },
+          diagnosticSummary: {
+            count: 0,
+            hasDiagnostics: false,
+            kindGroups: [],
+            ownerGroups: [],
+          },
+          sourceNoteSummary: {
+            count: 0,
+            hasSourceNotes: false,
+            statusGroups: [],
+            ownerGroups: [],
+          },
+        },
+      ],
     })
     expect((result as any).views.entries).toEqual(
       expect.arrayContaining([

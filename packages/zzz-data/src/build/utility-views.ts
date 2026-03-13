@@ -439,6 +439,15 @@ function summarizeSourceUtilityViews(
       count: groupEntries.length,
       supportedCount: groupSupportedCount,
       unsupportedCount: groupEntries.length - groupSupportedCount,
+      requirementSummary: summarizeSourceUtilityViewRequirements(
+        groupEntries.flatMap((entry) => entry.requirements),
+      ),
+      diagnosticSummary: summarizeDiagnosticEntries(
+        groupEntries.flatMap((entry) => entry.diagnostics),
+      ),
+      sourceNoteSummary: summarizeSourceNoteEntries(
+        groupEntries.flatMap((entry) => entry.sourceNotes),
+      ),
     })
   }
 

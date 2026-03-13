@@ -736,6 +736,9 @@ export interface StaticBuildSourceUtilityViewGroupSummary {
   count: number
   supportedCount: number
   unsupportedCount: number
+  requirementSummary: StaticBuildSourceUtilityViewRequirementSummary
+  diagnosticSummary: StaticBuildDiagnosticSummary
+  sourceNoteSummary: StaticBuildSourceNoteSummary
 }
 
 export interface StaticBuildSourceUtilityViewSummary {
