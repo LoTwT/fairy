@@ -184,7 +184,7 @@ packages/zzz-agent/
 
 - [`damage-calculation.md`](../docs/specs/damage-calculation.md) — 四种伤害类型（常规/贯穿/异常/紊乱）的乘区公式、TypeScript 类型签名与参考数值
 - [`static-build-resolver.md`](../docs/specs/static-build-resolver.md) — 静态构筑解析系统设计：effect schema、输入输出 contract、热插拔乘区管线与模块划分
-- [`static-build-resolver-roadmap.md`](../docs/specs/static-build-resolver-roadmap.md) — 执行路线与阶段状态：当前主线已推进到 `V43`；已覆盖 source views、trigger matrix、utility views、unified source-entry collection、main resolver summary、core skill matrix summary、core skill matrix effect summary、matrix row damage summary、matrix row compact fields、matrix row explanation fields，以及 matrix / trigger / source-entry / source-view compact helper exports；`V40 requirementSummary`、`V41 diagnosticSummary`、`V42 sourceNoteSummary` 与 `V43 utility-entry summaries` 已收口
+- [`static-build-resolver-roadmap.md`](../docs/specs/static-build-resolver-roadmap.md) — 执行路线与阶段状态：当前主线已推进到 `V44`；已覆盖 source views、trigger matrix、utility views、unified source-entry collection、main resolver summary、core skill matrix summary、core skill matrix effect summary、matrix row damage summary、matrix row compact fields、matrix row explanation fields，以及 matrix / trigger / source-entry / source-view compact helper exports；`V40 requirementSummary`、`V41 diagnosticSummary`、`V42 sourceNoteSummary` 与 `V43 utility-entry summaries` 已收口，当前下一步是 source-entry collection 的聚合 `diagnosticSummary / sourceNoteSummary`
 - [`anomaly-disorder-skill-matrix-evaluation.md`](../docs/specs/anomaly-disorder-skill-matrix-evaluation.md) — `8.2` 立项评估：当前结论是不在 `8.3 dynamic value context` 之前实现异常 / 紊乱 matrix
 - [`static-build-resolver-v1.md`](../docs/specs/static-build-resolver-v1.md) — 第一版实现范围冻结：支持对象、bucket、profile、输入输出 contract 与验收标准
 - [`static-build-resolver-v2.md`](../docs/specs/static-build-resolver-v2.md) — 第二版实现范围：扩展支持名单与技能矩阵模板约定
@@ -229,6 +229,7 @@ packages/zzz-agent/
 - [`static-build-resolver-v41.md`](../docs/specs/static-build-resolver-v41.md) — 当前阶段：已收口；`source-damage-view entry` 与 `trigger-entry matrix row` 已新增稳定 `diagnosticSummary`
 - [`static-build-resolver-v42.md`](../docs/specs/static-build-resolver-v42.md) — 当前阶段：已收口；`source-damage-view entry` 与 `trigger-entry matrix row` 已新增稳定 `sourceNoteSummary`
 - [`static-build-resolver-v43.md`](../docs/specs/static-build-resolver-v43.md) — 当前阶段：已收口；`source-utility-view entry` 已新增稳定 `diagnosticSummary / sourceNoteSummary`
+- [`static-build-resolver-v44.md`](../docs/specs/static-build-resolver-v44.md) — 当前阶段：已冻结范围；下一步只为 unified source-entry collection 的 `summary` 补聚合 `diagnosticSummary / sourceNoteSummary`
 
 ## 计算器模块（src/calculator/）
 

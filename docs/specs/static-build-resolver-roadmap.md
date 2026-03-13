@@ -69,7 +69,7 @@
 4. `V4 progression-aware resolver`
 5. `V5 source-aware dynamic snapshot context`
 
-当前下一主线切换为 `V43 utility-entry summaries`。
+当前下一主线切换为 `V44 source-entry collection aggregates`。
 
 ## 3. V2.1：Curated Coverage
 
@@ -2217,3 +2217,42 @@ Batch B（已完成）：
 1. 不新增 `requirements[]`
 2. 不新增新的 utility coverage
 3. 不改 source utility view 顶层 `summary`
+
+## 49. V44 source-entry collection aggregates
+
+### 49.1 目标
+
+`V43` 收口后，source damage / utility entries 都已具备 summary，但 unified source-entry collection 顶层仍只统计 entry / group 数量。
+
+`V44` 只解决一件事：
+
+1. 为 collection summary 增加聚合 `diagnosticSummary`
+2. 为 collection summary 增加聚合 `sourceNoteSummary`
+
+### 49.2 范围
+
+1. `V44.1` scope freeze
+2. `V44.2` collection-summary contract
+3. `V44.3` compact / high-level alignment
+4. `V44.4` docs closeout
+
+### 49.3 当前状态
+
+- `V44.1` 已完成：冻结到 collection-summary aggregate contract
+- `V44.2` 未开始
+- `V44.3` 未开始
+- `V44.4` 未开始
+
+### 49.4 当前边界
+
+本阶段只做：
+
+1. 为 source-entry collection summary 增加 `diagnosticSummary`
+2. 为 source-entry collection summary 增加 `sourceNoteSummary`
+3. 保持现有 `entries[]` 与单条 entry summary 兼容
+
+显式不做：
+
+1. 不改变 source-entry groups
+2. 不新增新的 source-entry coverage
+3. 不改 source damage / utility 单条 entry 既有 summary contract
