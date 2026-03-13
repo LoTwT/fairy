@@ -51,6 +51,7 @@ describe("resolveBuildSkillMatrix tool", () => {
     expect((result as any).matrix.rows[0].metadata.sourceStatId).toBeTruthy()
     expect((result as any).matrix.rows[0].build).toBeUndefined()
     expect((result as any).matrix.effectSummary[0].value).toBeTruthy()
+    expect((result as any).matrix.summary.rowCount).toBe(21)
     expect((result as any).matrix.summary.baseDamageStat).toBe("attack")
     expect(
       (result as any).matrix.summary.commonFormulaMultipliers.critMultiplier,
@@ -81,6 +82,7 @@ describe("resolveBuildSkillMatrix tool", () => {
     })
 
     expect((result as any).found).toBe(true)
+    expect((result as any).matrix.summary.rowCount).toBe(22)
     expect((result as any).matrix.summary.baseDamageStat).toBe("sheerForce")
     expect((result as any).matrix.rows[0].build).toBeTruthy()
   })

@@ -356,6 +356,90 @@ function buildGeneratedSkillMatrixTemplates(agentId: string) {
   return templates
 }
 
+function summarizeBuckets(rows: StaticBuildSkillMatrixRow[]) {
+  const first = rows[0]?.build.resolvedBuckets
+  if (!first) {
+    return {
+      commonBuckets: {} as Record<string, number>,
+      variableBuckets: [] as string[],
+    }
+  }
+
+  const commonBuckets: Record<string, number> = {}
+  const variableBuckets: string[] = []
+
+  for (const [bucket, value] of Object.entries(first)) {
+    const same = rows.every(
+      (row) =>
+        row.build.resolvedBuckets[bucket as keyof typeof first] === value,
+    )
+    if (same) {
+      commonBuckets[bucket] = value
+    } else {
+      variableBuckets.push(bucket)
+    }
+  }
+
+  return { commonBuckets, variableBuckets }
+}
+
+function summarizeFormulaMultipliers(rows: StaticBuildSkillMatrixRow[]) {
+  const first = rows[0]?.build.damage.expected.breakdown
+  if (!first) {
+    return {
+      commonFormulaMultipliers: {} as Record<string, number>,
+      variableFormulaMultipliers: [] as string[],
+    }
+  }
+
+  const commonFormulaMultipliers: Record<string, number> = {}
+  const variableFormulaMultipliers: string[] = []
+
+  for (const [bucket, value] of Object.entries(first)) {
+    if (bucket === "baseDamage") continue
+    const same = rows.every(
+      (row) =>
+        row.build.damage.expected.breakdown[bucket as keyof typeof first] ===
+        value,
+    )
+    if (same) {
+      commonFormulaMultipliers[bucket] = value
+    } else {
+      variableFormulaMultipliers.push(bucket)
+    }
+  }
+
+  return { commonFormulaMultipliers, variableFormulaMultipliers }
+}
+
+function summarizeSkillMatrix(rows: StaticBuildSkillMatrixRow[]) {
+  const first = rows[0]?.build
+  const { commonBuckets, variableBuckets } = summarizeBuckets(rows)
+  const { commonFormulaMultipliers, variableFormulaMultipliers } =
+    summarizeFormulaMultipliers(rows)
+
+  if (!first) {
+    throw new RangeError("Cannot summarize empty skill matrix")
+  }
+
+  return {
+    rowCount: rows.length,
+    baseDamageStat: first.resolvedPanel.baseDamageStat,
+    baseDamageValue: first.resolvedPanel.baseDamageValue,
+    attack: first.resolvedPanel.attack,
+    hp: first.resolvedPanel.hp,
+    sheerForce: first.resolvedPanel.sheerForce,
+    critRate: first.resolvedPanel.critRate,
+    critDamage: first.resolvedPanel.critDamage,
+    penetrationRate: first.resolvedPanel.penetrationRate,
+    penetrationValue: first.resolvedPanel.penetrationValue,
+    commonBuckets,
+    variableBuckets,
+    commonFormulaMultipliers,
+    variableFormulaMultipliers,
+  }
+}
+
 const curatedSkillMatrixTemplates: SkillMatrixTemplate[] = [
   {
     id: "1041-basic-warmup-1",
@@ -1776,6 +1860,7 @@ export function resolveStaticBuildSkillMatrix(
     mode: first.mode,
     manualBaseMode: first.manualBaseMode,
     loadout: first.loadout,
+    summary: summarizeSkillMatrix(rows),
     rows,
     assumptions,
   }

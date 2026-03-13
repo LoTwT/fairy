@@ -811,11 +811,29 @@ export interface StaticBuildSkillMatrixRow {
   build: ResolveStaticBuildResult
 }
 
+export interface StaticBuildSkillMatrixSummary {
+  rowCount: number
+  baseDamageStat: StaticBuildResolvedPanel["baseDamageStat"]
+  baseDamageValue: number
+  attack?: number
+  hp?: number
+  sheerForce?: number
+  critRate: number
+  critDamage: number
+  penetrationRate: number
+  penetrationValue: number
+  commonBuckets: Record<string, number>
+  variableBuckets: string[]
+  commonFormulaMultipliers: Record<string, number>
+  variableFormulaMultipliers: string[]
+}
+
 export interface ResolveStaticBuildSkillMatrixResult {
   profile: StaticBuildProfileResult
   mode: StaticBuildMode
   manualBaseMode?: StaticBuildBaseMode
   loadout: StaticBuildResolvedLoadout
+  summary: StaticBuildSkillMatrixSummary
   rows: StaticBuildSkillMatrixRow[]
   assumptions: string[]
 }

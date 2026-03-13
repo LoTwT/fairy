@@ -203,97 +203,16 @@ function summarizeEffects(
   }))
 }
 
-function summarizeBuckets(
-  matrix: ReturnType<typeof resolveStaticBuildSkillMatrix>,
-) {
-  const first = matrix.rows[0]?.build.resolvedBuckets
-  if (!first) {
-    return {
-      commonBuckets: {} as Record<string, number>,
-      variableBuckets: [] as string[],
-    }
-  }
-
-  const commonBuckets: Record<string, number> = {}
-  const variableBuckets: string[] = []
-
-  for (const [bucket, value] of Object.entries(first)) {
-    const same = matrix.rows.every(
-      (row) =>
-        row.build.resolvedBuckets[bucket as keyof typeof first] === value,
-    )
-    if (same) {
-      commonBuckets[bucket] = value
-    } else {
-      variableBuckets.push(bucket)
-    }
-  }
-
-  return { commonBuckets, variableBuckets }
-}
-
-function summarizeFormulaMultipliers(
-  matrix: ReturnType<typeof resolveStaticBuildSkillMatrix>,
-) {
-  const first = matrix.rows[0]?.build.damage.expected.breakdown
-  if (!first) {
-    return {
-      commonFormulaMultipliers: {} as Record<string, number>,
-      variableFormulaMultipliers: [] as string[],
-    }
-  }
-
-  const commonFormulaMultipliers: Record<string, number> = {}
-  const variableFormulaMultipliers: string[] = []
-
-  for (const [bucket, value] of Object.entries(first)) {
-    if (bucket === "baseDamage") continue
-    const same = matrix.rows.every(
-      (row) =>
-        row.build.damage.expected.breakdown[bucket as keyof typeof first] ===
-        value,
-    )
-    if (same) {
-      commonFormulaMultipliers[bucket] = value
-    } else {
-      variableFormulaMultipliers.push(bucket)
-    }
-  }
-
-  return { commonFormulaMultipliers, variableFormulaMultipliers }
-}
-
 function compactMatrix(
   matrix: ReturnType<typeof resolveStaticBuildSkillMatrix>,
   includeDetails: boolean,
 ) {
-  const first = matrix.rows[0]?.build
-  const { commonBuckets, variableBuckets } = summarizeBuckets(matrix)
-  const { commonFormulaMultipliers, variableFormulaMultipliers } =
-    summarizeFormulaMultipliers(matrix)
-
   return {
     profile: matrix.profile,
     mode: matrix.mode,
     manualBaseMode: matrix.manualBaseMode,
     loadout: matrix.loadout,
-    summary: first
-      ? {
-          baseDamageStat: first.resolvedPanel.baseDamageStat,
-          baseDamageValue: first.resolvedPanel.baseDamageValue,
-          attack: first.resolvedPanel.attack,
-          hp: first.resolvedPanel.hp,
-          sheerForce: first.resolvedPanel.sheerForce,
-          critRate: first.resolvedPanel.critRate,
-          critDamage: first.resolvedPanel.critDamage,
-          penetrationRate: first.resolvedPanel.penetrationRate,
-          penetrationValue: first.resolvedPanel.penetrationValue,
-          commonBuckets,
-          variableBuckets,
-          commonFormulaMultipliers,
-          variableFormulaMultipliers,
-        }
-      : undefined,
+    summary: matrix.summary,
     effectSummary: summarizeEffects(matrix),
     assumptions: matrix.assumptions,
     rows: matrix.rows.map((row) => ({

@@ -28,6 +28,12 @@ describe("static build skill matrix", () => {
     })
 
     expect(result.profile.id).toBe("standard-normal")
+    expect(result.summary.rowCount).toBe(21)
+    expect(result.summary.baseDamageStat).toBe("attack")
+    expect(result.summary.commonBuckets.critRate).toBeCloseTo(0.15, 4)
+    expect(
+      result.summary.commonFormulaMultipliers.critMultiplier,
+    ).toBeGreaterThan(1)
     expect(result.rows).toHaveLength(21)
     expect(result.rows[0]?.label).toBe("普通攻击·一段")
     expect(result.rows[0]?.metadata).toMatchObject({
@@ -104,6 +110,8 @@ describe("static build skill matrix", () => {
     })
 
     expect(result.profile.id).toBe("yixuan-sheer")
+    expect(result.summary.rowCount).toBe(22)
+    expect(result.summary.baseDamageStat).toBe("sheerForce")
     expect(result.rows).toHaveLength(22)
     expect(result.rows.every((row) => row.damageType === "sheer")).toBe(true)
 
