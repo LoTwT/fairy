@@ -67,6 +67,7 @@
 - `V50 source-damage-view entry resolve summaries` 已收口
 - `V51 trigger-matrix row resolve summaries` 已收口
 - `V52 source-utility-view entry requirement summaries` 已收口
+- `V53 source-utility-view summary requirement aggregates` 已收口
 - 当前边界：`resolveStaticBuildSkillMatrix` 仍只支持 `normal / sheer`
 
 ## 2. 阶段划分
@@ -2607,3 +2608,43 @@ Batch B（已完成）：
 1. 不改变 utility view 的 `value / unit / resolutionMode / targetScope`
 2. 不新增新的 utility-only panel contract
 3. 不修改 `diagnosticSummary / sourceNoteSummary`
+
+## 58. V53 source-utility-view summary requirement aggregates
+
+### 58.1 目标
+
+`V52` 收口后，source-utility-view entry 已具备稳定 `requirements / requirementSummary`。
+
+但 `ResolveStaticBuildSourceUtilityViewsResult.summary` 仍缺少聚合 requirement 摘要。
+
+`V53` 只解决一件事：
+
+1. 为 source-utility-view summary 增加稳定 `requirementSummary`
+
+### 58.2 范围
+
+1. `V53.1` scope freeze
+2. `V53.2` summary-level requirement aggregate
+3. `V53.3` high-level / prompt alignment
+4. `V53.4` docs closeout
+
+### 58.3 当前状态
+
+- `V53.1` 已完成：冻结到 source-utility-view summary requirement aggregate
+- `V53.2` 已完成：`StaticBuildSourceUtilityViewSummary` 已新增稳定 `requirementSummary`
+- `V53.3` 已完成：高层 tool 断言与 agent prompt 已对齐 `views.summary.requirementSummary`
+- `V53.4` 已完成：相关 specs、roadmap、索引、架构文档与 README 已同步
+
+### 58.4 当前边界
+
+本阶段只做：
+
+1. 为 `StaticBuildSourceUtilityViewSummary` 增加 `requirementSummary`
+2. 聚合当前 utility entries 的 `requirements`
+3. 保持现有 `groups / triggerCount / rateCount / diagnosticSummary / sourceNoteSummary` 兼容
+
+显式不做：
+
+1. 不改变 utility entry 的 `requirements / requirementSummary`
+2. 不新增新的 utility-only panel contract
+3. 不引入新的 utility entry metadata

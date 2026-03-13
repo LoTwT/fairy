@@ -743,6 +743,7 @@ export interface StaticBuildSourceUtilityViewSummary {
   rateCount: number
   supportedCount: number
   unsupportedCount: number
+  requirementSummary: StaticBuildSourceUtilityViewRequirementSummary
   diagnosticSummary: StaticBuildDiagnosticSummary
   sourceNoteSummary: StaticBuildSourceNoteSummary
   groups: StaticBuildSourceUtilityViewGroupSummary[]

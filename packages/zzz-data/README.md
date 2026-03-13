@@ -494,6 +494,16 @@ utilityViews.summary
 //   rateCount: 0,
 //   supportedCount: 1,
 //   unsupportedCount: 0,
+//   requirementSummary: {
+//     count: 2,
+//     satisfiedCount: 2,
+//     unsatisfiedCount: 0,
+//     hasUnsatisfied: false,
+//     groups: [
+//       { key: "trigger", count: 1, satisfiedCount: 1, unsatisfiedCount: 0 },
+//       { key: "cooldown", count: 1, satisfiedCount: 1, unsatisfiedCount: 0 },
+//     ],
+//   },
 //   diagnosticSummary: {
 //     count: 0,
 //     hasDiagnostics: false,
@@ -518,7 +528,7 @@ utilityViews.summary
 // }
 ```
 
-如果你需要判断当前 source-specific utility views 是 trigger 还是 rate、是否存在 unsupported 条目、如何分组展示，或者当前整组 utility views 是否带有 diagnostics / source notes，不要再自己统计 `entries`，直接使用 `utilityViews.summary`。
+如果你需要判断当前 source-specific utility views 是 trigger 还是 rate、是否存在 unsupported 条目、如何分组展示，或者当前整组 utility views 是否带有 requirement / diagnostics / source notes，不要再自己统计 `entries`，直接使用 `utilityViews.summary`。
 
 如果你需要稳定读取某条 utility entry 的触发条件 / 适用条件 / 冷却摘要，优先使用：
 

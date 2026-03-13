@@ -35,6 +35,26 @@ describe("static build source utility views", () => {
       rateCount: 0,
       supportedCount: 1,
       unsupportedCount: 0,
+      requirementSummary: {
+        count: 2,
+        satisfiedCount: 2,
+        unsatisfiedCount: 0,
+        hasUnsatisfied: false,
+        groups: [
+          {
+            key: "trigger",
+            count: 1,
+            satisfiedCount: 1,
+            unsatisfiedCount: 0,
+          },
+          {
+            key: "cooldown",
+            count: 1,
+            satisfiedCount: 1,
+            unsatisfiedCount: 0,
+          },
+        ],
+      },
       diagnosticSummary: {
         count: 0,
         hasDiagnostics: false,
@@ -203,6 +223,20 @@ describe("static build source utility views", () => {
       rateCount: 1,
       supportedCount: 1,
       unsupportedCount: 0,
+      requirementSummary: {
+        count: 1,
+        satisfiedCount: 1,
+        unsatisfiedCount: 0,
+        hasUnsatisfied: false,
+        groups: [
+          {
+            key: "condition",
+            count: 1,
+            satisfiedCount: 1,
+            unsatisfiedCount: 0,
+          },
+        ],
+      },
       diagnosticSummary: {
         count: 0,
         hasDiagnostics: false,
@@ -293,6 +327,26 @@ describe("static build source utility views", () => {
       rateCount: 0,
       supportedCount: 8,
       unsupportedCount: 0,
+      requirementSummary: {
+        count: 16,
+        satisfiedCount: 16,
+        unsatisfiedCount: 0,
+        hasUnsatisfied: false,
+        groups: [
+          {
+            key: "trigger",
+            count: 8,
+            satisfiedCount: 8,
+            unsatisfiedCount: 0,
+          },
+          {
+            key: "cooldown",
+            count: 8,
+            satisfiedCount: 8,
+            unsatisfiedCount: 0,
+          },
+        ],
+      },
       diagnosticSummary: {
         count: 0,
         hasDiagnostics: false,

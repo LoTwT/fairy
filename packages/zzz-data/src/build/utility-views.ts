@@ -448,6 +448,9 @@ function summarizeSourceUtilityViews(
     rateCount: rateEntries.length,
     supportedCount,
     unsupportedCount,
+    requirementSummary: summarizeSourceUtilityViewRequirements(
+      entries.flatMap((entry) => entry.requirements),
+    ),
     diagnosticSummary: summarizeDiagnosticEntries(diagnostics),
     sourceNoteSummary: summarizeSourceNoteEntries(sourceNotes),
     groups,
