@@ -2200,9 +2200,9 @@ Batch B（已完成）：
 ### 48.3 当前状态
 
 - `V43.1` 已完成：冻结到 utility-entry summary contract
-- `V43.2` 未开始
-- `V43.3` 未开始
-- `V43.4` 未开始
+- `V43.2` 已完成：utility entry 已新增稳定 `diagnosticSummary / sourceNoteSummary`
+- `V43.3` 已完成：compact helper 与高层 tool 已对齐 utility-entry summaries
+- `V43.4` 已完成：README / architecture / roadmap 已同步收口
 
 ### 48.4 当前边界
 

@@ -461,6 +461,37 @@ utilityViews.summary
 
 如果你需要判断当前 source-specific utility views 是 trigger 还是 rate、是否存在 unsupported 条目、或者如何分组展示，不要再自己统计 `entries`，直接使用 `utilityViews.summary`。
 
+如果你只想知道某一条 utility entry 的 diagnostics 概况，也直接读取：
+
+```ts
+utilityViews.entries[0].diagnosticSummary
+// {
+//   count: 0,
+//   hasDiagnostics: false,
+//   hasDefaultedInput: false,
+//   hasCoverageGap: false,
+//   hasUnsupportedEffect: false,
+//   hasFallback: false,
+//   kindGroups: [],
+//   ownerGroups: [],
+// }
+```
+
+如果你只想知道某一条 utility entry 的 source-note 概况，也直接读取：
+
+```ts
+utilityViews.entries[0].sourceNoteSummary
+// {
+//   count: 0,
+//   hasSourceNotes: false,
+//   hasMissingInput: false,
+//   hasProcessOnly: false,
+//   hasResearchOnly: false,
+//   statusGroups: [],
+//   ownerGroups: [],
+// }
+```
+
 如果你默认不需要 source-view 的完整 `build`、只需要可直接展示的轻量结果，可直接使用：
 
 ```ts
