@@ -161,6 +161,18 @@ describe("static build source damage views", () => {
           },
         ],
       },
+      sourceNoteSummary: {
+        count: 2,
+        hasSourceNotes: true,
+        hasMissingInput: false,
+        hasProcessOnly: false,
+        hasResearchOnly: false,
+        statusGroups: [{ key: "resolved", label: "已展开", count: 2 }],
+        ownerGroups: [
+          { key: "finalPanel", count: 1 },
+          { key: "stateSnapshot", count: 1 },
+        ],
+      },
     })
     expect(
       result.entries[0]?.build?.resolvedBuckets.skillMultiplierFactor,
@@ -301,6 +313,15 @@ describe("static build source damage views", () => {
         hasFallback: false,
         kindGroups: [],
         ownerGroups: [],
+      },
+      sourceNoteSummary: {
+        count: 1,
+        hasSourceNotes: true,
+        hasMissingInput: false,
+        hasProcessOnly: false,
+        hasResearchOnly: false,
+        statusGroups: [{ key: "resolved", label: "已展开", count: 1 }],
+        ownerGroups: [{ key: "dynamicSnapshot", count: 1 }],
       },
       requirementSummary: {
         count: 3,

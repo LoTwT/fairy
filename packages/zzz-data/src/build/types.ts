@@ -495,6 +495,21 @@ export interface StaticBuildSourceNoteGroupSummary {
   count: number
 }
 
+export interface StaticBuildSourceNoteOwnerGroupSummary {
+  key: StaticBuildSourceNoteOwner
+  count: number
+}
+
+export interface StaticBuildSourceNoteSummary {
+  count: number
+  hasSourceNotes: boolean
+  hasMissingInput: boolean
+  hasProcessOnly: boolean
+  hasResearchOnly: boolean
+  statusGroups: StaticBuildSourceNoteGroupSummary[]
+  ownerGroups: StaticBuildSourceNoteOwnerGroupSummary[]
+}
+
 export interface StaticBuildResolveSummary {
   baseDamageStat: StaticBuildResolvedPanel["baseDamageStat"]
   baseDamageValue: number
@@ -605,6 +620,7 @@ export interface StaticBuildSourceDamageViewEntry {
   diagnostics: StaticBuildDiagnosticEntry[]
   diagnosticSummary: StaticBuildDiagnosticSummary
   sourceNotes: StaticBuildSourceNoteEntry[]
+  sourceNoteSummary: StaticBuildSourceNoteSummary
   assumptions: string[]
   damage?: {
     expected: number
@@ -802,6 +818,7 @@ export interface StaticBuildTriggerMatrixRow {
   diagnostics: StaticBuildDiagnosticEntry[]
   diagnosticSummary: StaticBuildDiagnosticSummary
   sourceNotes: StaticBuildSourceNoteEntry[]
+  sourceNoteSummary: StaticBuildSourceNoteSummary
   assumptions: string[]
   damage?: {
     expected: number

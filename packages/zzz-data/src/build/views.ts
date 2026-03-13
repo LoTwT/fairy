@@ -24,6 +24,7 @@ import { getStaticBuildSourceNoteEntries } from "./definitions.js"
 import {
   resolveStaticBuildDamage,
   summarizeDiagnosticEntries,
+  summarizeSourceNoteEntries,
 } from "./resolver.js"
 
 const sourceViewAgentIds = ["1091", "1171", "1331", "1401", "1501"] as const
@@ -296,6 +297,7 @@ function createEntryBase(
     diagnostics: [],
     diagnosticSummary: summarizeDiagnosticEntries([]),
     sourceNotes,
+    sourceNoteSummary: summarizeSourceNoteEntries(sourceNotes),
     assumptions: [],
   }
 }

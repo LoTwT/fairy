@@ -115,6 +115,18 @@ describe("static build trigger matrix", () => {
           },
         ],
       },
+      sourceNoteSummary: {
+        count: 2,
+        hasSourceNotes: true,
+        hasMissingInput: false,
+        hasProcessOnly: false,
+        hasResearchOnly: false,
+        statusGroups: [{ key: "resolved", label: "已展开", count: 2 }],
+        ownerGroups: [
+          { key: "finalPanel", count: 1 },
+          { key: "stateSnapshot", count: 1 },
+        ],
+      },
     })
     expect(result.rows[1]).toMatchObject({
       id: "source-view:alice-polarity-assault",
@@ -173,6 +185,18 @@ describe("static build trigger matrix", () => {
             key: "scenario",
             count: 1,
           },
+        ],
+      },
+      sourceNoteSummary: {
+        count: 2,
+        hasSourceNotes: true,
+        hasMissingInput: false,
+        hasProcessOnly: false,
+        hasResearchOnly: false,
+        statusGroups: [{ key: "resolved", label: "已展开", count: 2 }],
+        ownerGroups: [
+          { key: "finalPanel", count: 1 },
+          { key: "stateSnapshot", count: 1 },
         ],
       },
     })
@@ -324,6 +348,21 @@ describe("static build trigger matrix", () => {
         hasFallback: false,
         kindGroups: [],
         ownerGroups: [],
+      },
+      sourceNoteSummary: {
+        count: 3,
+        hasSourceNotes: true,
+        hasMissingInput: true,
+        hasProcessOnly: true,
+        hasResearchOnly: false,
+        statusGroups: [
+          { key: "missing-input", label: "缺少输入", count: 1 },
+          { key: "process-only", label: "仅流程说明", count: 2 },
+        ],
+        ownerGroups: [
+          { key: "resolvedSnapshot", count: 1 },
+          { key: "process", count: 2 },
+        ],
       },
     })
     expect(result.rows[1]?.requirements.map((item) => item.kind)).toEqual(

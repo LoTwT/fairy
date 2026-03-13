@@ -109,6 +109,18 @@ describe("static build compact helpers", () => {
         },
       ],
     })
+    expect(compact.rows[0]?.sourceNoteSummary).toEqual({
+      count: 2,
+      hasSourceNotes: true,
+      hasMissingInput: false,
+      hasProcessOnly: false,
+      hasResearchOnly: false,
+      statusGroups: [{ key: "resolved", label: "已展开", count: 2 }],
+      ownerGroups: [
+        { key: "finalPanel", count: 1 },
+        { key: "stateSnapshot", count: 1 },
+      ],
+    })
     expect(compact.rows[1]?.requirementSummary).toEqual({
       count: 2,
       satisfiedCount: 2,
@@ -152,6 +164,18 @@ describe("static build compact helpers", () => {
           key: "scenario",
           count: 1,
         },
+      ],
+    })
+    expect(compact.rows[1]?.sourceNoteSummary).toEqual({
+      count: 2,
+      hasSourceNotes: true,
+      hasMissingInput: false,
+      hasProcessOnly: false,
+      hasResearchOnly: false,
+      statusGroups: [{ key: "resolved", label: "已展开", count: 2 }],
+      ownerGroups: [
+        { key: "finalPanel", count: 1 },
+        { key: "stateSnapshot", count: 1 },
       ],
     })
   })
@@ -231,6 +255,18 @@ describe("static build compact helpers", () => {
       hasFallback: false,
       kindGroups: [],
       ownerGroups: [],
+    })
+    expect(
+      (damageEntry as { sourceNoteSummary?: unknown } | undefined)
+        ?.sourceNoteSummary,
+    ).toEqual({
+      count: 2,
+      hasSourceNotes: true,
+      hasMissingInput: false,
+      hasProcessOnly: false,
+      hasResearchOnly: false,
+      statusGroups: [{ key: "resolved", label: "已展开", count: 2 }],
+      ownerGroups: [{ key: "dynamicSnapshot", count: 2 }],
     })
     expect("build" in (damageEntry ?? {})).toBe(false)
   })
@@ -316,6 +352,18 @@ describe("static build compact helpers", () => {
           key: "scenario",
           count: 1,
         },
+      ],
+    })
+    expect(compact.entries[0]?.sourceNoteSummary).toEqual({
+      count: 2,
+      hasSourceNotes: true,
+      hasMissingInput: false,
+      hasProcessOnly: false,
+      hasResearchOnly: false,
+      statusGroups: [{ key: "resolved", label: "已展开", count: 2 }],
+      ownerGroups: [
+        { key: "finalPanel", count: 1 },
+        { key: "stateSnapshot", count: 1 },
       ],
     })
     expect("build" in (compact.entries[0] ?? {})).toBe(false)

@@ -9,6 +9,7 @@ import type {
 import {
   resolveStaticBuildDamage,
   summarizeDiagnosticEntries,
+  summarizeSourceNoteEntries,
 } from "./resolver.js"
 import {
   hasStaticBuildSourceViewCoverage,
@@ -66,6 +67,7 @@ export function resolveStaticBuildTriggerMatrix(
       diagnostics: build.diagnostics,
       diagnosticSummary: summarizeDiagnosticEntries(build.diagnostics),
       sourceNotes: build.sourceNotes,
+      sourceNoteSummary: summarizeSourceNoteEntries(build.sourceNotes),
       assumptions: build.assumptions,
       damage: {
         expected: build.damage.expected.total,
@@ -112,6 +114,7 @@ function toTriggerMatrixRow(
     diagnostics: entry.diagnostics,
     diagnosticSummary: entry.diagnosticSummary,
     sourceNotes: entry.sourceNotes,
+    sourceNoteSummary: entry.sourceNoteSummary,
     assumptions: entry.assumptions,
     damage: entry.damage,
     build: entry.build,

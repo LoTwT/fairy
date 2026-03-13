@@ -9,6 +9,7 @@ import type {
   StaticBuildEffectDefinition,
   StaticBuildResolvedBuckets,
   StaticBuildSourceNoteEntry,
+  StaticBuildSourceNoteOwner,
   StaticBuildSourceNoteStatus,
   StaticBuildTraceItem,
   StaticBuildValueContext,
@@ -145,6 +146,43 @@ function summarizeSourceNotes(sourceNotes: StaticBuildSourceNoteEntry[]) {
     .filter((group) => group.count > 0)
 }
 
+export function summarizeSourceNoteEntries(
+  sourceNotes: StaticBuildSourceNoteEntry[],
+) {
+  const statusGroups = summarizeSourceNotes(sourceNotes)
+  const ownerGroups = (
+    [
+      "finalPanel",
+      "dynamicSnapshot",
+      "stateSnapshot",
+      "resolvedSnapshot",
+      "sourceView",
+      "process",
+    ] as const satisfies StaticBuildSourceNoteOwner[]
+  )
+    .map((key) => ({
+      key,
+      count: sourceNotes.filter((entry) => entry.owner === key).length,
+    }))
+    .filter((group) => group.count > 0)
+
+  return {
+    count: sourceNotes.length,
+    hasSourceNotes: sourceNotes.length > 0,
+    hasMissingInput: sourceNotes.some(
+      (entry) => entry.status === "missing-input",
+    ),
+    hasProcessOnly: sourceNotes.some(
+      (entry) => entry.status === "process-only",
+    ),
+    hasResearchOnly: sourceNotes.some(
+      (entry) => entry.status === "research-only",
+    ),
+    statusGroups,
+    ownerGroups,
+  }
+}
+
 function buildResolveSummary(
   result: Pick<
     ResolveStaticBuildResult,
@@ -162,7 +200,7 @@ function buildResolveSummary(
     ),
   )
   const diagnosticGroups = summarizeDiagnostics(result.diagnostics)
-  const sourceNoteGroups = summarizeSourceNotes(result.sourceNotes)
+  const sourceNoteSummary = summarizeSourceNoteEntries(result.sourceNotes)
   const diagnosticSummary = summarizeDiagnosticEntries(result.diagnostics)
 
   return {
@@ -174,26 +212,20 @@ function buildResolveSummary(
     formulaMultipliers,
     assumptionCount: result.assumptions.length,
     diagnosticCount: diagnosticSummary.count,
-    sourceNoteCount: result.sourceNotes.length,
+    sourceNoteCount: sourceNoteSummary.count,
     unsupportedEffectCount: result.unsupportedEffects.length,
     hasDiagnostics: diagnosticSummary.hasDiagnostics,
-    hasSourceNotes: result.sourceNotes.length > 0,
+    hasSourceNotes: sourceNoteSummary.hasSourceNotes,
     hasUnsupportedEffects: result.unsupportedEffects.length > 0,
     hasDefaultedInput: diagnosticSummary.hasDefaultedInput,
     hasCoverageGap: diagnosticSummary.hasCoverageGap,
     hasUnsupportedEffect: diagnosticSummary.hasUnsupportedEffect,
     hasFallback: diagnosticSummary.hasFallback,
-    hasMissingInputSourceNote: result.sourceNotes.some(
-      (entry) => entry.status === "missing-input",
-    ),
-    hasProcessOnlySourceNote: result.sourceNotes.some(
-      (entry) => entry.status === "process-only",
-    ),
-    hasResearchOnlySourceNote: result.sourceNotes.some(
-      (entry) => entry.status === "research-only",
-    ),
+    hasMissingInputSourceNote: sourceNoteSummary.hasMissingInput,
+    hasProcessOnlySourceNote: sourceNoteSummary.hasProcessOnly,
+    hasResearchOnlySourceNote: sourceNoteSummary.hasResearchOnly,
     diagnosticGroups,
-    sourceNoteGroups,
+    sourceNoteGroups: sourceNoteSummary.statusGroups,
   }
 }
 

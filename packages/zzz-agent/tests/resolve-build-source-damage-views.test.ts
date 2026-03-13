@@ -107,6 +107,18 @@ describe("resolveBuildSourceDamageViews tool", () => {
           },
         ],
       },
+      sourceNoteSummary: {
+        count: 2,
+        hasSourceNotes: true,
+        hasMissingInput: false,
+        hasProcessOnly: false,
+        hasResearchOnly: false,
+        statusGroups: [{ key: "resolved", label: "已展开", count: 2 }],
+        ownerGroups: [
+          { key: "finalPanel", count: 1 },
+          { key: "stateSnapshot", count: 1 },
+        ],
+      },
     })
     expect(
       (result as any).views.entries[0].sourceNotes.some(
@@ -260,6 +272,15 @@ describe("resolveBuildSourceDamageViews tool", () => {
         hasFallback: false,
         kindGroups: [],
         ownerGroups: [],
+      },
+      sourceNoteSummary: {
+        count: 2,
+        hasSourceNotes: true,
+        hasMissingInput: false,
+        hasProcessOnly: false,
+        hasResearchOnly: false,
+        statusGroups: [{ key: "resolved", label: "已展开", count: 2 }],
+        ownerGroups: [{ key: "dynamicSnapshot", count: 2 }],
       },
     })
     expect(
