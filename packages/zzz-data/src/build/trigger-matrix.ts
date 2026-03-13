@@ -74,6 +74,7 @@ export function resolveStaticBuildTriggerMatrix(
         crit: build.damage.crit.total,
         noCrit: build.damage.noCrit.total,
       },
+      summary: build.summary,
       build,
     },
     ...views.entries.map((entry) => toTriggerMatrixRow(entry)),
@@ -117,6 +118,7 @@ function toTriggerMatrixRow(
     sourceNoteSummary: entry.sourceNoteSummary,
     assumptions: entry.assumptions,
     damage: entry.damage,
+    summary: entry.summary,
     build: entry.build,
   }
 }

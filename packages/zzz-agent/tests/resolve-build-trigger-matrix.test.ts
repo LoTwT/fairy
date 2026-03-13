@@ -89,6 +89,10 @@ describe("resolveBuildTriggerMatrix tool", () => {
     expect((result as any).matrix.rows[0].metadata.entryKind).toBe(
       "main-formula",
     )
+    expect((result as any).matrix.rows[0].summary.expectedTotal).toBeCloseTo(
+      (result as any).matrix.rows[0].damage.expected,
+      6,
+    )
     expect((result as any).matrix.rows[0].metadata.templateSource).toBe(
       "main-formula",
     )
@@ -204,6 +208,10 @@ describe("resolveBuildTriggerMatrix tool", () => {
         ],
       },
     })
+    expect((result as any).matrix.rows[1].summary.expectedTotal).toBeCloseTo(
+      (result as any).matrix.rows[1].damage.expected,
+      6,
+    )
   })
 
   it("rejects normal trigger-matrix requests", async () => {

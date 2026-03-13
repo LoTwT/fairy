@@ -836,6 +836,7 @@ export interface StaticBuildTriggerMatrixRow {
     crit: number
     noCrit: number
   }
+  summary?: StaticBuildResolveSummary
   build?: ResolveStaticBuildResult
 }
 

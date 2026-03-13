@@ -48,6 +48,10 @@ describe("static build trigger matrix", () => {
         },
       },
     })
+    expect(result.rows[0]?.summary?.expectedTotal).toBeCloseTo(
+      result.rows[0]?.damage?.expected ?? 0,
+      6,
+    )
 
     expect(result.rows).toHaveLength(2)
     expect(result.summary).toMatchObject({
@@ -226,6 +230,10 @@ describe("static build trigger matrix", () => {
       },
     })
     expect(result.rows[1]?.damage?.expected).toBeGreaterThan(0)
+    expect(result.rows[1]?.summary?.expectedTotal).toBeCloseTo(
+      result.rows[1]?.damage?.expected ?? 0,
+      6,
+    )
   })
 
   it("resolves a disorder trigger-entry matrix for Aria", () => {
