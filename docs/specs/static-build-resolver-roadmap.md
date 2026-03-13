@@ -1468,7 +1468,7 @@ Batch B（已完成）：
 ### 31.3 当前状态
 
 - `V26.1` 已完成：冻结到 unified source-entry collection summary
-- `V26.2` 未开始
+- `V26.2` 已完成：`ResolveStaticBuildSourceEntriesResult` 已新增 `summary`，并固定 utility-only / mixed collection 的排序语义
 - `V26.3` 未开始
 - `V26.4` 未开始
 

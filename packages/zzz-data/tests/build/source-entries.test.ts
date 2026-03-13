@@ -12,6 +12,21 @@ describe("static build source entries", () => {
       },
     })
 
+    expect(result.summary).toMatchObject({
+      entryCount: 1,
+      sourceDamageViewCount: 0,
+      sourceUtilityViewCount: 1,
+      supportedCount: 1,
+      unsupportedCount: 0,
+      isUtilityOnly: true,
+      groups: [
+        {
+          key: "source-utility-view",
+          label: "回能 / utility 条目",
+          count: 1,
+        },
+      ],
+    })
     expect(result.entries).toHaveLength(1)
     expect(result.entries[0]).toMatchObject({
       id: "lunar-noviluna-energy-refund",
@@ -59,7 +74,27 @@ describe("static build source entries", () => {
       },
     })
 
+    expect(result.summary).toMatchObject({
+      entryCount: 2,
+      sourceDamageViewCount: 1,
+      sourceUtilityViewCount: 1,
+      isUtilityOnly: false,
+      groups: [
+        {
+          key: "source-damage-view",
+          label: "额外结算条目",
+          count: 1,
+        },
+        {
+          key: "source-utility-view",
+          label: "回能 / utility 条目",
+          count: 1,
+        },
+      ],
+    })
     expect(result.entries).toHaveLength(2)
+    expect(result.entries[0]?.metadata.entryKind).toBe("source-damage-view")
+    expect(result.entries[1]?.metadata.entryKind).toBe("source-utility-view")
     expect(result.entries.map((entry) => entry.metadata.entryKind)).toEqual(
       expect.arrayContaining(["source-damage-view", "source-utility-view"]),
     )
@@ -102,7 +137,14 @@ describe("static build source entries", () => {
       },
     })
 
+    expect(result.summary).toMatchObject({
+      sourceDamageViewCount: 1,
+      sourceUtilityViewCount: 1,
+      isUtilityOnly: false,
+    })
     expect(result.entries).toHaveLength(2)
+    expect(result.entries[0]?.metadata.entryKind).toBe("source-damage-view")
+    expect(result.entries[1]?.metadata.entryKind).toBe("source-utility-view")
     expect(result.entries.map((entry) => entry.id)).toEqual(
       expect.arrayContaining([
         "vivian-exflow",
@@ -137,6 +179,11 @@ describe("static build source entries", () => {
       },
     })
 
+    expect(result.summary).toMatchObject({
+      sourceDamageViewCount: 0,
+      sourceUtilityViewCount: 1,
+      isUtilityOnly: true,
+    })
     expect(result.entries).toHaveLength(1)
     expect(result.entries[0]?.metadata.entryKind).toBe("source-utility-view")
     expect(result.assumptions).toContain(
@@ -153,6 +200,19 @@ describe("static build source entries", () => {
       },
     })
 
+    expect(result.summary).toMatchObject({
+      entryCount: 8,
+      sourceDamageViewCount: 0,
+      sourceUtilityViewCount: 8,
+      isUtilityOnly: true,
+      groups: [
+        {
+          key: "source-utility-view",
+          label: "回能 / utility 条目",
+          count: 8,
+        },
+      ],
+    })
     expect(result.loadout.agent.name).toBe("妮可")
     expect(result.entries).toHaveLength(8)
     expect(result.entries.map((entry) => entry.metadata.entryKind)).toEqual([

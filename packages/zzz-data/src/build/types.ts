@@ -610,8 +610,31 @@ export type StaticBuildSourceEntry =
   | StaticBuildSourceDamageViewEntry
   | StaticBuildSourceUtilityViewEntry
 
+export type StaticBuildSourceEntryGroupKey =
+  | "source-damage-view"
+  | "source-utility-view"
+
+export interface StaticBuildSourceEntryGroupSummary {
+  key: StaticBuildSourceEntryGroupKey
+  label: string
+  count: number
+  supportedCount: number
+  unsupportedCount: number
+}
+
+export interface StaticBuildSourceEntryCollectionSummary {
+  entryCount: number
+  sourceDamageViewCount: number
+  sourceUtilityViewCount: number
+  supportedCount: number
+  unsupportedCount: number
+  isUtilityOnly: boolean
+  groups: StaticBuildSourceEntryGroupSummary[]
+}
+
 export interface ResolveStaticBuildSourceEntriesResult {
   loadout: StaticBuildResolvedLoadout
+  summary: StaticBuildSourceEntryCollectionSummary
   entries: StaticBuildSourceEntry[]
   assumptions: string[]
 }
