@@ -37,6 +37,22 @@ describe("resolveBuildSourceDamageViews tool", () => {
 
     expect((result as any).found).toBe(true)
     expect((result as any).views.entries).toHaveLength(1)
+    expect((result as any).views.summary).toMatchObject({
+      entryCount: 1,
+      standaloneCount: 1,
+      deltaCount: 0,
+      supportedCount: 1,
+      unsupportedCount: 0,
+      groups: [
+        {
+          key: "standalone",
+          label: "独立结算条目",
+          count: 1,
+          supportedCount: 1,
+          unsupportedCount: 0,
+        },
+      ],
+    })
     expect((result as any).views.entries[0]).toMatchObject({
       id: "alice-polarity-assault",
       supported: true,
@@ -151,6 +167,22 @@ describe("resolveBuildSourceDamageViews tool", () => {
     })
 
     expect((result as any).found).toBe(true)
+    expect((result as any).views.summary).toMatchObject({
+      entryCount: 1,
+      standaloneCount: 0,
+      deltaCount: 1,
+      supportedCount: 1,
+      unsupportedCount: 0,
+      groups: [
+        {
+          key: "delta",
+          label: "增量结算条目",
+          count: 1,
+          supportedCount: 1,
+          unsupportedCount: 0,
+        },
+      ],
+    })
     expect((result as any).views.entries[0]).toMatchObject({
       id: "aria-exflow",
       supported: true,
@@ -201,6 +233,13 @@ describe("resolveBuildSourceDamageViews tool", () => {
     })
 
     expect((result as any).found).toBe(true)
+    expect((result as any).views.summary).toMatchObject({
+      entryCount: 1,
+      standaloneCount: 0,
+      deltaCount: 1,
+      supportedCount: 1,
+      unsupportedCount: 0,
+    })
     expect((result as any).views.entries[0]).toMatchObject({
       id: "vivian-exflow",
       supported: true,

@@ -12,6 +12,22 @@ describe("resolveBuildSourceUtilityViews tool", () => {
     })
 
     expect((result as any).found).toBe(true)
+    expect((result as any).views.summary).toMatchObject({
+      entryCount: 1,
+      triggerCount: 1,
+      rateCount: 0,
+      supportedCount: 1,
+      unsupportedCount: 0,
+      groups: [
+        {
+          key: "trigger",
+          label: "按次触发条目",
+          count: 1,
+          supportedCount: 1,
+          unsupportedCount: 0,
+        },
+      ],
+    })
     expect((result as any).views.entries[0]).toMatchObject({
       id: "lunar-noviluna-energy-refund",
       metadata: {
@@ -54,6 +70,13 @@ describe("resolveBuildSourceUtilityViews tool", () => {
     })
 
     expect((result as any).found).toBe(true)
+    expect((result as any).views.summary).toMatchObject({
+      entryCount: 8,
+      triggerCount: 8,
+      rateCount: 0,
+      supportedCount: 8,
+      unsupportedCount: 0,
+    })
     expect((result as any).views.entries).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
