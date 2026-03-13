@@ -1963,3 +1963,47 @@ Batch B（已完成）：
 2. 不调整 damage formula / matrix coverage
 3. 不改变 `includeDetails` 语义
 4. 不把 compact helper 做成 Agent 私有实现
+
+## 43. V38 source-view compact helpers
+
+### 43.1 目标
+
+`V37` 已把 matrix / trigger / source-entry 的 compact 逻辑下沉，但 source-view 仍是例外：
+
+1. `source-damage-view` 还没有对应的 compact helper exports
+2. `resolve-build-source-damage-views` 仍默认返回完整 `build`
+3. `source-utility-view` 也还没有与 `V37` 对称的 compact helper
+
+`V38` 只解决一件事：
+
+1. 把 source-damage-view / source-utility-view 收口为与 `V37` 对称的 compact helper exports
+
+### 43.2 范围
+
+1. `V38.1` scope freeze
+2. `V38.2` source-view compact helper exports
+3. `V38.3` high-level source-view tool alignment
+4. `V38.4` docs closeout
+
+### 43.3 当前状态
+
+- `V38.1` 已完成：冻结到 source-view compact helper exports
+- `V38.2` 待实现：`zzz-data` 已新增 source-view compact helper exports
+- `V38.3` 待实现：高层 source-view tool 已对齐 compact helper
+- `V38.4` 待实现：README / 总规格 / 索引 / 架构入口同步收口
+
+### 43.4 当前边界
+
+本阶段只做：
+
+1. 为 source-damage-view 提供 compact helper
+2. 为 source-utility-view 提供 compact helper
+3. 让 `resolve-build-source-damage-views` 支持 `includeDetails`
+4. 让两个高层 source-view tool 直接复用底层 helper
+
+显式不做：
+
+1. 不新增 source-view summary key
+2. 不新增新的 source-view coverage
+3. 不改变 source-view 的排序 / 分组 contract
+4. 不把 source-view compact helper 做成 Agent 私有实现
