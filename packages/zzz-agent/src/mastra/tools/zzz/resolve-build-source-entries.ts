@@ -33,11 +33,7 @@ function compactSourceEntries(
 ) {
   return {
     loadout: collection.loadout,
-    summary: {
-      ...collection.summary,
-      sourceDamageCount: collection.summary.sourceDamageViewCount,
-      sourceUtilityCount: collection.summary.sourceUtilityViewCount,
-    },
+    summary: collection.summary,
     assumptions: collection.assumptions,
     entries: collection.entries.map((entry) =>
       compactSourceEntry(entry, includeDetails),

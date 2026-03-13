@@ -14,8 +14,8 @@ describe("resolveBuildSourceEntries tool", () => {
     expect((result as any).found).toBe(true)
     expect((result as any).collection.summary).toMatchObject({
       entryCount: 1,
-      sourceDamageCount: 0,
-      sourceUtilityCount: 1,
+      sourceDamageViewCount: 0,
+      sourceUtilityViewCount: 1,
       supportedCount: 1,
       unsupportedCount: 0,
       isUtilityOnly: true,
@@ -73,8 +73,8 @@ describe("resolveBuildSourceEntries tool", () => {
     expect((result as any).found).toBe(true)
     expect((result as any).collection.summary).toMatchObject({
       entryCount: 2,
-      sourceDamageCount: 1,
-      sourceUtilityCount: 1,
+      sourceDamageViewCount: 1,
+      sourceUtilityViewCount: 1,
       supportedCount: 2,
       unsupportedCount: 0,
       isUtilityOnly: false,
@@ -138,8 +138,8 @@ describe("resolveBuildSourceEntries tool", () => {
     expect((result as any).found).toBe(true)
     expect((result as any).collection.summary).toMatchObject({
       entryCount: 2,
-      sourceDamageCount: 1,
-      sourceUtilityCount: 1,
+      sourceDamageViewCount: 1,
+      sourceUtilityViewCount: 1,
       isUtilityOnly: false,
     })
     expect(
@@ -200,8 +200,8 @@ describe("resolveBuildSourceEntries tool", () => {
     expect((result as any).found).toBe(true)
     expect((result as any).collection.summary).toMatchObject({
       entryCount: 8,
-      sourceDamageCount: 0,
-      sourceUtilityCount: 8,
+      sourceDamageViewCount: 0,
+      sourceUtilityViewCount: 8,
       isUtilityOnly: true,
       groups: [
         {
