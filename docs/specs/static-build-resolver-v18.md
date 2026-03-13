@@ -90,7 +90,7 @@
 
 - `V18.1` 已完成：冻结到最后一批 legacy 强攻签名收口，不继续扩大 contract
 - `V18.2` 已完成：legacy attack signature inventory 与批次已冻结
-- `V18.3` 已完成 `Batch A`：`可琳 / 家政员`
+- `V18.3` 已完成：`Batch A` + `Batch B`
 - `V18.4` 未开始
 
 ## 8. Inventory
@@ -123,7 +123,7 @@
 - `可琳`
 - `家政员`
 
-### Batch B
+### Batch B（已完成）
 
 - `比利`
 - `仿制星徽引擎`
@@ -136,5 +136,5 @@
 
 1. 不为 legacy attack signatures 新增新的 snapshot key
 2. `可琳` 的失衡目标增伤、`家政员` 的满层物理增伤这类当前 contract 可表达项已经做成 partial coverage
-3. `比利` 蹲姿、`仿制星徽引擎` 距离判断、`安东` 额外感电结算、`旋钻机-赤轴` 触发窗口等来源继续保留为 source note
+3. `比利` 蹲姿、`仿制星徽引擎` 距离判断、`安东` 额外感电结算、`旋钻机-赤轴` 触发窗口等来源已固定为 source note
 4. `V18` 的目标是收口最后一批 legacy attack signature，而不是继续扩大 attack 主线公式

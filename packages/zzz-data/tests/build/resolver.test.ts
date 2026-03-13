@@ -338,6 +338,114 @@ describe("static build resolver", () => {
     ).toBe("applied")
   })
 
+  it("replaces generic coverage gaps with source notes for Billy and Starlight Replica", () => {
+    const result = resolveStaticBuildDamage({
+      loadout: {
+        agentId: "1081",
+        wEngineId: "13108",
+      },
+      panel: {
+        attack: 2500,
+        baseAttack: 1000,
+        critRate: 0.4,
+        critDamage: 0.9,
+      },
+      scenario: {
+        damageType: "normal",
+        skillTag: "basic",
+        skillMultiplier: "280%",
+        attribute: "物理",
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.loadout.agent.name).toBe("比利")
+    expect(result.loadout.wEngine?.name).toBe("仿制星徽引擎")
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("比利 当前未收录 curated"),
+      ),
+    ).toBe(false)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("仿制星徽引擎 当前未收录 curated"),
+      ),
+    ).toBe(false)
+    expect(
+      result.sourceNotes.some(
+        (note) =>
+          note.sourceType === "agent" &&
+          note.sourceId === "1081" &&
+          note.status === "process-only",
+      ),
+    ).toBe(true)
+    expect(
+      result.sourceNotes.some(
+        (note) =>
+          note.sourceType === "w-engine" &&
+          note.sourceId === "13108" &&
+          note.status === "process-only",
+      ),
+    ).toBe(true)
+  })
+
+  it("replaces generic coverage gaps with source notes for Anton and Drill Rig", () => {
+    const result = resolveStaticBuildDamage({
+      loadout: {
+        agentId: "1111",
+        wEngineId: "13111",
+      },
+      panel: {
+        attack: 2550,
+        baseAttack: 1020,
+        critRate: 0.35,
+        critDamage: 0.85,
+      },
+      scenario: {
+        damageType: "normal",
+        skillTag: "basic",
+        skillMultiplier: "300%",
+        attribute: "电属性",
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.loadout.agent.name).toBe("安东")
+    expect(result.loadout.wEngine?.name).toBe("旋钻机-赤轴")
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("安东 当前未收录 curated"),
+      ),
+    ).toBe(false)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("旋钻机-赤轴 当前未收录 curated"),
+      ),
+    ).toBe(false)
+    expect(
+      result.sourceNotes.some(
+        (note) =>
+          note.sourceType === "agent" &&
+          note.sourceId === "1111" &&
+          note.status === "process-only",
+      ),
+    ).toBe(true)
+    expect(
+      result.sourceNotes.some(
+        (note) =>
+          note.sourceType === "w-engine" &&
+          note.sourceId === "13111" &&
+          note.status === "process-only",
+      ),
+    ).toBe(true)
+  })
+
   it("applies curated effects for Zero Anby and Sacrifice Purity", () => {
     const result = resolveStaticBuildDamage({
       loadout: {

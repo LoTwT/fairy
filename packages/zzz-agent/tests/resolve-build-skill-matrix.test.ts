@@ -168,6 +168,31 @@ describe("resolveBuildSkillMatrix tool", () => {
     ).toBeCloseTo(0.8, 4)
   })
 
+  it("keeps Billy generic matrix support while moving legacy gaps to source notes", async () => {
+    const result = await runTool(resolveBuildSkillMatrix, {
+      agent: "比利",
+      wEngine: "仿制星徽引擎",
+      finalPanel: {
+        attack: 2500,
+        baseAttack: 1000,
+        critRate: 0.4,
+        critDamage: 0.9,
+      },
+      context: {
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    expect((result as any).matrix.rows.length).toBeGreaterThan(0)
+    expect((result as any).matrix.assumptions.join(" ")).not.toContain(
+      "比利 当前未收录 curated",
+    )
+  })
+
   it("returns Zero Anby generic matrix rows with curated buckets applied", async () => {
     const result = await runTool(resolveBuildSkillMatrix, {
       agent: "零号安比",

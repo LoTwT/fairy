@@ -159,6 +159,36 @@ describe("resolveBuildDamage tool", () => {
     )
   })
 
+  it("keeps Billy legacy signatures on source notes instead of generic coverage gaps", async () => {
+    const result = await runTool(resolveBuildDamage, {
+      agent: "比利",
+      wEngine: "仿制星徽引擎",
+      finalPanel: {
+        attack: 2500,
+        baseAttack: 1000,
+        critRate: 0.4,
+        critDamage: 0.9,
+      },
+      scenario: {
+        damageType: "normal",
+        skillTag: "basic",
+        skillMultiplier: "280%",
+        attribute: "物理",
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    expect((result as any).build.loadout.agent.name).toBe("比利")
+    expect((result as any).build.assumptions.join(" ")).not.toContain(
+      "比利 当前未收录 curated",
+    )
+    expect((result as any).build.sourceNotes.length).toBeGreaterThan(0)
+  })
+
   it("supports Zero Anby curated effects through aliases", async () => {
     const result = await runTool(resolveBuildDamage, {
       agent: "零号安比",

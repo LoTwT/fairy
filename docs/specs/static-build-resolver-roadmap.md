@@ -1126,7 +1126,7 @@ Batch B（已完成）：
 
 - `V18.1` 已完成：冻结到 legacy attack signature closeout，不继续扩大 contract
 - `V18.2` 已完成：inventory 与批次已冻结
-- `V18.3` 已完成 `Batch A`：`可琳 / 家政员`
+- `V18.3` 已完成：`Batch A` + `Batch B`
 - `V18.4` 未开始
 
 ### 23.4 当前边界
@@ -1151,7 +1151,7 @@ Batch A（已完成）：
 - `可琳`
 - `家政员`
 
-Batch B：
+Batch B（已完成）：
 
 - `比利`
 - `仿制星徽引擎`

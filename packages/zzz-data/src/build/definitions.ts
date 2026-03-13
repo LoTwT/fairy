@@ -4253,6 +4253,36 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
     note: "家政员当前只按 full-buff 近似展开[强化特殊技]命中后的满层物理伤害提升；叠层获取时机、1 秒持续时间刷新与后场能量自动回复都属于过程问题，继续保留为 source note。",
   },
   {
+    sourceType: "agent",
+    sourceId: "1081",
+    note: "比利的核心被动[稳定据枪]依赖[普通攻击]中的蹲姿射击窗口；这一姿态切换当前不新增新的 stance snapshot key，继续保留为 source note。",
+  },
+  {
+    sourceType: "agent",
+    sourceId: "1081",
+    note: "比利的额外能力[骑士战队]依赖[连携技]后的下次[终结技]触发窗口与层数重置；这一流程当前继续保留为 source note，不新增新的 process snapshot key。",
+  },
+  {
+    sourceType: "w-engine",
+    sourceId: "13108",
+    note: "仿制星徽引擎的物理伤害提升依赖命中 6 米外敌人的距离判断；当前 static resolver 不新增新的 distance snapshot key，因此这部分继续保留为 source note。",
+  },
+  {
+    sourceType: "agent",
+    sourceId: "1111",
+    note: "安东的核心被动[兄弟齐心！]区分[打桩攻击]与[电钻攻击]两类命名招式；当前 generic matrix 未为这类 legacy 命名动作新增专用 tag，因此这部分继续保留为 source note。",
+  },
+  {
+    sourceType: "agent",
+    sourceId: "1111",
+    note: "安东的额外能力[通力合作]依赖[爆发状态]、暴击计数与对[感电]目标的额外感电结算；这一额外结算属于真动态过程，继续保留为 source note。",
+  },
+  {
+    sourceType: "w-engine",
+    sourceId: "13111",
+    note: "旋钻机-赤轴的电属性伤害提升依赖发动[强化特殊技]/[连携技]后的 10 秒触发窗口；当前 static resolver 不新增新的 trigger-window snapshot key，因此这部分继续保留为 source note。",
+  },
+  {
     sourceType: "drive-disc",
     sourceId: "32700",
     minimumPieces: 4,
