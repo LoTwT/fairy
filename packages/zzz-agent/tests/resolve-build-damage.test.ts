@@ -30,6 +30,13 @@ describe("resolveBuildDamage tool", () => {
 
     expect((result as any).found).toBe(true)
     expect((result as any).build.loadout.agent.name).toBe("伊芙琳")
+    expect((result as any).build.summary.baseDamageStat).toBe("attack")
+    expect(
+      (result as any).build.summary.formulaMultipliers.critMultiplier,
+    ).toBeGreaterThan(1)
+    expect(
+      (result as any).build.summary.diagnosticGroups.length,
+    ).toBeGreaterThan(0)
     expect(
       (result as any).build.resolvedBuckets.skillMultiplierFactor,
     ).toBeCloseTo(1.25, 4)

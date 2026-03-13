@@ -1603,8 +1603,8 @@ Batch B（已完成）：
 ### 34.3 当前状态
 
 - `V29.1` 已完成：冻结到单次 resolver summary contract
-- `V29.2` 待实现：`ResolveStaticBuildResult.summary`
-- `V29.3` 待实现：高层 tool / Agent 对齐 `build.summary`
+- `V29.2` 已完成：`ResolveStaticBuildResult` 已返回稳定 `summary`
+- `V29.3` 已完成：高层 tool / Agent 已对齐 `build.summary`
 - `V29.4` 待实现：README / 总规格 / 索引 / 架构入口同步收口
 
 ### 34.4 当前边界

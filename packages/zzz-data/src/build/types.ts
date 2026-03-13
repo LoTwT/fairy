@@ -467,11 +467,49 @@ export interface StaticBuildDiagnosticEntry {
   message: string
 }
 
+export interface StaticBuildDiagnosticGroupSummary {
+  key: StaticBuildDiagnosticKind
+  label: string
+  count: number
+}
+
+export interface StaticBuildSourceNoteGroupSummary {
+  key: StaticBuildSourceNoteStatus
+  label: string
+  count: number
+}
+
+export interface StaticBuildResolveSummary {
+  baseDamageStat: StaticBuildResolvedPanel["baseDamageStat"]
+  baseDamageValue: number
+  expectedTotal: number
+  critTotal: number
+  noCritTotal: number
+  formulaMultipliers: Record<string, number>
+  assumptionCount: number
+  diagnosticCount: number
+  sourceNoteCount: number
+  unsupportedEffectCount: number
+  hasDiagnostics: boolean
+  hasSourceNotes: boolean
+  hasUnsupportedEffects: boolean
+  hasDefaultedInput: boolean
+  hasCoverageGap: boolean
+  hasUnsupportedEffect: boolean
+  hasFallback: boolean
+  hasMissingInputSourceNote: boolean
+  hasProcessOnlySourceNote: boolean
+  hasResearchOnlySourceNote: boolean
+  diagnosticGroups: StaticBuildDiagnosticGroupSummary[]
+  sourceNoteGroups: StaticBuildSourceNoteGroupSummary[]
+}
+
 export interface ResolveStaticBuildResult {
   profile: StaticBuildProfileResult
   mode: StaticBuildMode
   manualBaseMode?: StaticBuildBaseMode
   loadout: StaticBuildResolvedLoadout
+  summary: StaticBuildResolveSummary
   resolvedPanel: StaticBuildResolvedPanel
   resolvedBuckets: StaticBuildResolvedBuckets
   damageParams:

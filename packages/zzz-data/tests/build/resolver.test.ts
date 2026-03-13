@@ -42,6 +42,23 @@ describe("static build resolver", () => {
       result.trace.find((item) => item.effectId === "woodpecker-2pc-crit-rate")
         ?.status,
     ).toBe("skipped")
+    expect(result.summary.baseDamageStat).toBe("attack")
+    expect(result.summary.baseDamageValue).toBeCloseTo(3200, 4)
+    expect(result.summary.expectedTotal).toBeCloseTo(
+      result.damage.expected.total,
+      4,
+    )
+    expect(result.summary.formulaMultipliers.bonusMultiplier).toBeCloseTo(
+      1.4,
+      4,
+    )
+    expect(result.summary.hasDiagnostics).toBe(true)
+    expect(result.summary.hasDefaultedInput).toBe(true)
+    expect(
+      result.summary.diagnosticGroups.some(
+        (group) => group.key === "defaulted-input",
+      ),
+    ).toBe(true)
   })
 
   it("resolves Evelyn full-buff threshold effects", () => {

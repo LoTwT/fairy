@@ -4,8 +4,11 @@ import type {
   StaticBuildBaseMode,
   StaticBuildBucket,
   StaticBuildDiagnosticEntry,
+  StaticBuildDiagnosticKind,
   StaticBuildEffectDefinition,
   StaticBuildResolvedBuckets,
+  StaticBuildSourceNoteEntry,
+  StaticBuildSourceNoteStatus,
   StaticBuildTraceItem,
   StaticBuildValueContext,
 } from "./types.js"
@@ -36,6 +39,20 @@ import {
   hasStaticBuildCoverageForSource,
 } from "./definitions.js"
 import { getStaticBuildProfile } from "./profiles.js"
+
+const diagnosticLabels: Record<StaticBuildDiagnosticKind, string> = {
+  "defaulted-input": "默认输入",
+  "coverage-gap": "覆盖缺口",
+  "unsupported-effect": "未支持效果",
+  "fallback": "回退处理",
+}
+
+const sourceNoteLabels: Record<StaticBuildSourceNoteStatus, string> = {
+  "missing-input": "缺少输入",
+  "resolved": "已展开",
+  "process-only": "仅流程说明",
+  "research-only": "仅研究说明",
+}
 
 function parseSkillMultiplier(value: number | string): number {
   if (typeof value === "number") return value
@@ -69,6 +86,92 @@ function createEmptyBuckets(): StaticBuildResolvedBuckets {
     anomalyCritRate: 0,
     anomalyCritDamage: 0,
     skillMultiplierFactor: 1,
+  }
+}
+
+function summarizeDiagnostics(diagnostics: StaticBuildDiagnosticEntry[]) {
+  return (Object.keys(diagnosticLabels) as StaticBuildDiagnosticKind[])
+    .map((key) => ({
+      key,
+      label: diagnosticLabels[key],
+      count: diagnostics.filter((entry) => entry.kind === key).length,
+    }))
+    .filter((group) => group.count > 0)
+}
+
+function summarizeSourceNotes(sourceNotes: StaticBuildSourceNoteEntry[]) {
+  return (Object.keys(sourceNoteLabels) as StaticBuildSourceNoteStatus[])
+    .map((key) => ({
+      key,
+      label: sourceNoteLabels[key],
+      count: sourceNotes.filter((entry) => entry.status === key).length,
+    }))
+    .filter((group) => group.count > 0)
+}
+
+function buildResolveSummary(
+  result: Pick<
+    ResolveStaticBuildResult,
+    | "resolvedPanel"
+    | "damage"
+    | "diagnostics"
+    | "sourceNotes"
+    | "assumptions"
+    | "unsupportedEffects"
+  >,
+) {
+  const formulaMultipliers = Object.fromEntries(
+    Object.entries(result.damage.expected.breakdown).filter(
+      ([key]) => key !== "baseDamage",
+    ),
+  )
+  const diagnosticGroups = summarizeDiagnostics(result.diagnostics)
+  const sourceNoteGroups = summarizeSourceNotes(result.sourceNotes)
+
+  return {
+    baseDamageStat: result.resolvedPanel.baseDamageStat,
+    baseDamageValue: result.resolvedPanel.baseDamageValue,
+    expectedTotal: result.damage.expected.total,
+    critTotal: result.damage.crit.total,
+    noCritTotal: result.damage.noCrit.total,
+    formulaMultipliers,
+    assumptionCount: result.assumptions.length,
+    diagnosticCount: result.diagnostics.length,
+    sourceNoteCount: result.sourceNotes.length,
+    unsupportedEffectCount: result.unsupportedEffects.length,
+    hasDiagnostics: result.diagnostics.length > 0,
+    hasSourceNotes: result.sourceNotes.length > 0,
+    hasUnsupportedEffects: result.unsupportedEffects.length > 0,
+    hasDefaultedInput: result.diagnostics.some(
+      (entry) => entry.kind === "defaulted-input",
+    ),
+    hasCoverageGap: result.diagnostics.some(
+      (entry) => entry.kind === "coverage-gap",
+    ),
+    hasUnsupportedEffect: result.diagnostics.some(
+      (entry) => entry.kind === "unsupported-effect",
+    ),
+    hasFallback: result.diagnostics.some((entry) => entry.kind === "fallback"),
+    hasMissingInputSourceNote: result.sourceNotes.some(
+      (entry) => entry.status === "missing-input",
+    ),
+    hasProcessOnlySourceNote: result.sourceNotes.some(
+      (entry) => entry.status === "process-only",
+    ),
+    hasResearchOnlySourceNote: result.sourceNotes.some(
+      (entry) => entry.status === "research-only",
+    ),
+    diagnosticGroups,
+    sourceNoteGroups,
+  }
+}
+
+function createResolveResult(
+  result: Omit<ResolveStaticBuildResult, "summary">,
+): ResolveStaticBuildResult {
+  return {
+    ...result,
+    summary: buildResolveSummary(result),
   }
 }
 
@@ -927,7 +1030,7 @@ export function resolveStaticBuildDamage(
       specialMultiplier: enemy.specialMultiplier ?? 1,
     }
 
-    return {
+    return createResolveResult({
       profile: {
         id: profile.id,
         name: profile.name,
@@ -956,7 +1059,7 @@ export function resolveStaticBuildDamage(
       sourceNotes,
       assumptions,
       unsupportedEffects,
-    }
+    })
   }
 
   if (input.scenario.damageType === "anomaly") {
@@ -1003,7 +1106,7 @@ export function resolveStaticBuildDamage(
       anomalyCritDamage: resolvedPanel.anomalyCritDamage,
     }
 
-    return {
+    return createResolveResult({
       profile: {
         id: profile.id,
         name: profile.name,
@@ -1032,7 +1135,7 @@ export function resolveStaticBuildDamage(
       sourceNotes,
       assumptions,
       unsupportedEffects,
-    }
+    })
   }
 
   if (input.scenario.damageType === "disorder") {
@@ -1080,7 +1183,7 @@ export function resolveStaticBuildDamage(
       remainingTime: input.scenario.remainingTime,
     }
 
-    return {
+    return createResolveResult({
       profile: {
         id: profile.id,
         name: profile.name,
@@ -1109,7 +1212,7 @@ export function resolveStaticBuildDamage(
       sourceNotes,
       assumptions,
       unsupportedEffects,
-    }
+    })
   }
 
   const damageParams = {
@@ -1144,7 +1247,7 @@ export function resolveStaticBuildDamage(
     specialMultiplier: enemy.specialMultiplier ?? 1,
   }
 
-  return {
+  return createResolveResult({
     profile: {
       id: profile.id,
       name: profile.name,
@@ -1173,5 +1276,5 @@ export function resolveStaticBuildDamage(
     sourceNotes,
     assumptions,
     unsupportedEffects,
-  }
+  })
 }
