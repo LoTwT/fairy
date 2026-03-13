@@ -121,6 +121,12 @@ describe("resolveBuildSkillMatrix tool", () => {
     expect(normalGroup?.sourceNoteSummary.count).toBe(
       normalRows.flatMap((row: any) => row.sourceNotes).length,
     )
+    expect(normalGroup?.caveatSummary).toEqual({
+      assumptionCount: normalGroup?.assumptions.length,
+      unsupportedEffectCount: normalGroup?.unsupportedEffects.length,
+      hasAssumptions: (normalGroup?.assumptions.length ?? 0) > 0,
+      hasUnsupportedEffects: (normalGroup?.unsupportedEffects.length ?? 0) > 0,
+    })
     expect(normalGroup?.assumptions).toEqual([
       ...new Set(normalRows.flatMap((row: any) => row.assumptions)),
     ])

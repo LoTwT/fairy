@@ -972,6 +972,7 @@ export interface StaticBuildSkillMatrixGroupSummary {
   commonFormulaMultipliers: Record<string, number>
   variableFormulaMultipliers: string[]
   effectSummary: StaticBuildSkillMatrixEffectSummaryItem[]
+  caveatSummary: StaticBuildCaveatSummary
   diagnosticSummary: StaticBuildDiagnosticSummary
   sourceNoteSummary: StaticBuildSourceNoteSummary
   assumptions: string[]

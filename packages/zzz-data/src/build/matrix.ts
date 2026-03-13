@@ -584,6 +584,10 @@ function summarizeSkillMatrix(rows: StaticBuildSkillMatrixRow[]) {
     label: group,
     count: groupRows.length,
     effectSummary: summarizeSkillMatrixEffects(groupRows),
+    caveatSummary: summarizeSkillMatrixCaveats(
+      [...new Set(groupRows.flatMap((row) => row.assumptions))],
+      [...new Set(groupRows.flatMap((row) => row.unsupportedEffects))],
+    ),
     diagnosticSummary: summarizeDiagnosticEntries(
       groupRows.flatMap((row) => row.diagnostics),
     ),

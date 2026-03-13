@@ -444,6 +444,7 @@ matrix.summary
 matrix.summary.groups[0].requirementSummary
 matrix.summary.groups[0].diagnosticSummary
 matrix.summary.groups[0].sourceNoteSummary
+matrix.summary.groups[0].caveatSummary
 matrix.summary.groups[0].assumptions
 matrix.summary.groups[0].unsupportedEffects
 matrix.caveatSummary
