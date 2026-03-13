@@ -134,7 +134,32 @@ const result = resolveStaticBuildDamage({
     },
   },
 })
+
+result.summary
+// {
+//   baseDamageStat: "sheerForce",
+//   baseDamageValue: 1800,
+//   expectedTotal: 64534.12,
+//   critTotal: 76000.32,
+//   noCritTotal: 42018.91,
+//   formulaMultipliers: {
+//     bonusMultiplier: 1.46,
+//     critMultiplier: 1.48,
+//     resistanceMultiplier: 0.8,
+//     vulnerabilityMultiplier: 1,
+//     dazeVulnerabilityMultiplier: 1,
+//     sheerBonusMultiplier: 1.3,
+//     specialMultiplier: 1,
+//   },
+//   hasDiagnostics: true,
+//   hasSourceNotes: false,
+//   hasUnsupportedEffects: false,
+//   diagnosticGroups: [{ key: "defaulted-input", label: "默认输入", count: 1 }],
+//   sourceNoteGroups: [],
+// }
 ```
+
+如果你要做单场景结果展示，不要再自己同时从 `resolvedPanel`、`damage.expected.breakdown`、`diagnostics`、`sourceNotes`、`unsupportedEffects` 拼摘要，优先直接使用 `result.summary`。
 
 如果你需要拿到不应并入主 anomaly / disorder 公式的独立额外结算条目，可使用：
 
