@@ -218,7 +218,35 @@ const matrix = resolveStaticBuildTriggerMatrix({
 
 matrix.rows.map((row) => row.metadata.stableKey)
 // ["main-formula:anomaly", "source-view:alice-polarity-assault"]
+
+matrix.summary
+// {
+//   rowCount: 2,
+//   mainFormulaCount: 1,
+//   sourceViewCount: 1,
+//   supportedCount: 2,
+//   unsupportedCount: 0,
+//   hasSourceViews: true,
+//   groups: [
+//     {
+//       key: "main-formula",
+//       label: "主公式结算",
+//       count: 1,
+//       supportedCount: 1,
+//       unsupportedCount: 0,
+//     },
+//     {
+//       key: "source-view",
+//       label: "额外来源结算",
+//       count: 1,
+//       supportedCount: 1,
+//       unsupportedCount: 0,
+//     },
+//   ],
+// }
 ```
+
+如果你需要判断当前 trigger-entry matrix 是否存在 source-view 行、如何分组展示、或者是否只剩主公式，不要再自己统计 `rows`，直接使用 `matrix.summary`。
 
 如果你需要拿到不进入主伤害公式的独立回能 / 回能速率条目，可使用：
 

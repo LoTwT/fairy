@@ -109,4 +109,4 @@
 - `V27.1` 已完成：冻结到 trigger-entry matrix summary
 - `V27.2` 已完成：`resolveStaticBuildTriggerMatrix()` 已返回稳定 `summary`
 - `V27.3` 已完成：高层 tool / Agent 已直接消费 `matrix.summary`
-- `V27.4` 未开始
+- `V27.4` 已完成：文档入口与 README 已同步收口
