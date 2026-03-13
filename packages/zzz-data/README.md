@@ -575,6 +575,14 @@ utilityViews.summary.groups[0].diagnosticSummary
 utilityViews.summary.groups[0].sourceNoteSummary
 ```
 
+如果你是按组拆“独立结算 / 增量结算”两个 section，也不要再先过滤 entries 再自己统计组内 requirement / diagnostics / source notes，直接读取：
+
+```ts
+views.summary.groups[0].requirementSummary
+views.summary.groups[0].diagnosticSummary
+views.summary.groups[0].sourceNoteSummary
+```
+
 不要只靠 `triggerLabel / conditionLabel / cooldownSeconds` 再自行拼 requirement 逻辑。
 
 如果你只想知道某一条 utility entry 的 diagnostics 概况，也直接读取：

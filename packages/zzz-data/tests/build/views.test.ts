@@ -173,6 +173,53 @@ describe("static build source damage views", () => {
           count: 1,
           supportedCount: 1,
           unsupportedCount: 0,
+          requirementSummary: {
+            count: 2,
+            satisfiedCount: 2,
+            unsatisfiedCount: 0,
+            hasUnsatisfied: false,
+            groups: [
+              {
+                key: "state-flag",
+                count: 1,
+                satisfiedCount: 1,
+                unsatisfiedCount: 0,
+              },
+              {
+                key: "state-value",
+                count: 1,
+                satisfiedCount: 1,
+                unsatisfiedCount: 0,
+              },
+            ],
+          },
+          diagnosticSummary: {
+            count: 2,
+            hasDiagnostics: true,
+            hasDefaultedInput: true,
+            hasCoverageGap: false,
+            hasUnsupportedEffect: false,
+            hasFallback: false,
+            kindGroups: [
+              { key: "defaulted-input", label: "默认输入", count: 2 },
+            ],
+            ownerGroups: [
+              { key: "loadout", count: 1 },
+              { key: "scenario", count: 1 },
+            ],
+          },
+          sourceNoteSummary: {
+            count: 2,
+            hasSourceNotes: true,
+            hasMissingInput: false,
+            hasProcessOnly: false,
+            hasResearchOnly: false,
+            statusGroups: [{ key: "resolved", label: "已展开", count: 2 }],
+            ownerGroups: [
+              { key: "finalPanel", count: 1 },
+              { key: "stateSnapshot", count: 1 },
+            ],
+          },
         },
       ],
     })
@@ -420,6 +467,56 @@ describe("static build source damage views", () => {
           count: 1,
           supportedCount: 1,
           unsupportedCount: 0,
+          requirementSummary: {
+            count: 3,
+            satisfiedCount: 3,
+            unsatisfiedCount: 0,
+            hasUnsatisfied: false,
+            groups: [
+              {
+                key: "dynamic-flag",
+                count: 1,
+                satisfiedCount: 1,
+                unsatisfiedCount: 0,
+              },
+              {
+                key: "dynamic-count",
+                count: 1,
+                satisfiedCount: 1,
+                unsatisfiedCount: 0,
+              },
+              {
+                key: "dynamic-value",
+                count: 1,
+                satisfiedCount: 1,
+                unsatisfiedCount: 0,
+              },
+            ],
+          },
+          diagnosticSummary: {
+            count: 2,
+            hasDiagnostics: true,
+            hasDefaultedInput: true,
+            hasCoverageGap: false,
+            hasUnsupportedEffect: false,
+            hasFallback: false,
+            kindGroups: [
+              { key: "defaulted-input", label: "默认输入", count: 2 },
+            ],
+            ownerGroups: [
+              { key: "loadout", count: 1 },
+              { key: "scenario", count: 1 },
+            ],
+          },
+          sourceNoteSummary: {
+            count: 1,
+            hasSourceNotes: true,
+            hasMissingInput: false,
+            hasProcessOnly: false,
+            hasResearchOnly: false,
+            statusGroups: [{ key: "resolved", label: "已展开", count: 1 }],
+            ownerGroups: [{ key: "dynamicSnapshot", count: 1 }],
+          },
         },
       ],
     })

@@ -639,6 +639,9 @@ export interface StaticBuildSourceDamageViewGroupSummary {
   count: number
   supportedCount: number
   unsupportedCount: number
+  requirementSummary: StaticBuildSourceDamageViewRequirementSummary
+  diagnosticSummary: StaticBuildDiagnosticSummary
+  sourceNoteSummary: StaticBuildSourceNoteSummary
 }
 
 export interface StaticBuildSourceDamageViewSummary {

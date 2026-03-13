@@ -2891,3 +2891,43 @@ Batch B（已完成）：
 1. 不改变 `entry.requirements / requirementSummary`
 2. 不新增新的 utility metadata
 3. 不改变 `value / unit / resolutionMode / targetScope`
+
+## 63. V60 source-damage-view group summaries
+
+### 63.1 目标
+
+`V59` 收口后，source-utility-view groups 已能稳定给出局部 `requirementSummary / diagnosticSummary / sourceNoteSummary`。
+
+但独立 `source-damage-view` 结果的 `groups[*]` 仍只有 count 级别信息。上层如果按“独立结算 / 增量结算”拆 section，仍要重新遍历 entries 统计 requirement / diagnostics / source notes。
+
+`V60` 只解决一件事：
+
+1. 为 `source-damage-view groups` 增加局部 `requirementSummary / diagnosticSummary / sourceNoteSummary`
+
+### 63.2 范围
+
+1. `V60.1` scope freeze
+2. `V60.2` group-level summaries
+3. `V60.3` high-level / prompt alignment
+4. `V60.4` docs closeout
+
+### 63.3 当前状态
+
+- `V60.1` 已完成：冻结到 source-damage-view group summaries
+- `V60.2` 已完成：`StaticBuildSourceDamageViewGroupSummary` 已新增局部 `requirementSummary / diagnosticSummary / sourceNoteSummary`
+- `V60.3` 已完成：高层 tool 断言与 agent prompt 已对齐 `views.summary.groups[*]`
+- `V60.4` 已完成：相关 specs、roadmap、索引、架构文档与 README 已同步
+
+### 63.4 当前边界
+
+本阶段只做：
+
+1. 为 `source-damage-view group` 增加局部 summaries
+2. 保持顶层 source-damage-view summary 兼容
+3. 保持 grouping key / ordering 兼容
+
+显式不做：
+
+1. 不改变 `entry.requirements / requirementSummary`
+2. 不新增新的 source-view metadata
+3. 不改变 `damage / summary / assumptions`
