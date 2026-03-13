@@ -567,6 +567,19 @@ collection.summary
 //   supportedCount: 2,
 //   unsupportedCount: 0,
 //   isUtilityOnly: false,
+//   diagnosticSummary: {
+//     count: 2,
+//     hasDiagnostics: true,
+//     hasDefaultedInput: true,
+//     kindGroups: [{ key: "defaulted-input", label: "默认输入", count: 2 }],
+//     ownerGroups: [{ key: "loadout", count: 1 }, { key: "scenario", count: 1 }],
+//   },
+//   sourceNoteSummary: {
+//     count: 2,
+//     hasSourceNotes: true,
+//     statusGroups: [{ key: "resolved", label: "已展开", count: 2 }],
+//     ownerGroups: [{ key: "dynamicSnapshot", count: 2 }],
+//   },
 //   groups: [
 //     { key: "source-damage-view", label: "额外结算条目", count: 1, ... },
 //     { key: "source-utility-view", label: "回能 / utility 条目", count: 1, ... },
@@ -579,7 +592,7 @@ collection.summary
 - 不传 `scenario` 时，只返回 utility entries
 - `anomaly / disorder` 场景下，可同时返回 source damage view + utility view
 - `normal / sheer` 场景下，保持 utility-only，不把它们伪装成 source damage collection
-- `collection.summary` 已直接给出 source damage / source utility 计数、supported/unsupported 计数、utility-only 判定与分组摘要；上层不需要再自行统计和分组
+- `collection.summary` 已直接给出 source damage / source utility 计数、supported/unsupported 计数、utility-only 判定、分组摘要，以及聚合后的 `diagnosticSummary / sourceNoteSummary`；上层不需要再自行遍历 mixed entries 统计 diagnostics / source notes
 
 如果你在应用层或 Agent 层默认不需要完整 `build`、只需要紧凑投影结果，可直接使用 `V37` 下沉到 `zzz-data` 的 compact helper：
 

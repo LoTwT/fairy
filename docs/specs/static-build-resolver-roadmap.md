@@ -57,6 +57,8 @@
 - `V4 progression-aware resolver` 已在当前 contract 下收口
 - `V5 source-aware dynamic snapshot context` 已在当前 contract 下收口
 - `V42 source-note summaries` 已收口
+- `V43 utility-entry summaries` 已收口
+- `V44 source-entry collection aggregates` 已收口
 - 当前边界：`resolveStaticBuildSkillMatrix` 仍只支持 `normal / sheer`
 
 ## 2. 阶段划分
@@ -69,7 +71,7 @@
 4. `V4 progression-aware resolver`
 5. `V5 source-aware dynamic snapshot context`
 
-当前下一主线切换为 `V44 source-entry collection aggregates`。
+当前 `V44 source-entry collection aggregates` 已完成，现有 source damage / utility / trigger / unified collection 的 summary contract 已对齐。
 
 ## 3. V2.1：Curated Coverage
 
@@ -2239,9 +2241,9 @@ Batch B（已完成）：
 ### 49.3 当前状态
 
 - `V44.1` 已完成：冻结到 collection-summary aggregate contract
-- `V44.2` 未开始
-- `V44.3` 未开始
-- `V44.4` 未开始
+- `V44.2` 已完成：collection summary 已新增聚合 `diagnosticSummary / sourceNoteSummary`
+- `V44.3` 已完成：compact helper 与高层 tool 已对齐新的 collection summary contract
+- `V44.4` 已完成：README / 总规格 / index / architecture 已同步到 `V44` 收口状态
 
 ### 49.4 当前边界
 

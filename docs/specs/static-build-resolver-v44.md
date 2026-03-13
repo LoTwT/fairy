@@ -75,6 +75,6 @@
 ## 6. 当前状态
 
 - `V44.1` 已完成：冻结到 collection-summary aggregate contract
-- `V44.2` 未开始
-- `V44.3` 未开始
-- `V44.4` 未开始
+- `V44.2` 已完成：collection summary 已新增聚合 `diagnosticSummary / sourceNoteSummary`
+- `V44.3` 已完成：compact helper 与高层 `resolve-build-source-entries` 已对齐新的 collection summary contract
+- `V44.4` 已完成：README / 总规格 / roadmap / index / architecture 已同步到 `V44` 收口状态
