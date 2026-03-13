@@ -1290,3 +1290,39 @@ Batch B（已完成）：
 1. 不做 anomaly / disorder skill matrix
 2. 不做 utility / energy matrix
 3. 不新增时间轴、覆盖率、积蓄过程 contract
+
+## 27. V22 structured source-entry metadata
+
+### 27.1 目标
+
+为 source damage view / source utility view 补齐稳定 metadata，减少上层对自由文本 `label` 的依赖。
+
+### 27.2 范围
+
+1. `V22.1` scope freeze
+2. `V22.2` source damage view metadata
+3. `V22.3` source utility view metadata
+4. `V22.4` agent / docs integration
+5. `V22.5` closeout
+
+### 27.3 当前状态
+
+- `V22.1` 已完成：冻结到 source-entry metadata
+- `V22.2` 未开始
+- `V22.3` 未开始
+- `V22.4` 未开始
+- `V22.5` 未开始
+
+### 27.4 当前边界
+
+本阶段只做：
+
+1. `source damage view metadata`
+2. `source utility view metadata`
+3. 上层优先消费 metadata
+
+显式不做：
+
+1. 不新增 utility matrix
+2. 不新增 trigger matrix 类型
+3. 不新增新的 snapshot key
