@@ -2007,3 +2007,45 @@ Batch B（已完成）：
 2. 不新增新的 source-view coverage
 3. 不改变 source-view 的排序 / 分组 contract
 4. 不把 source-view compact helper 做成 Agent 私有实现
+
+## 44. V39 trigger row source metadata
+
+### 44.1 目标
+
+`V38` 收口后，`trigger-entry matrix` 仍比 `source-view / source-entry / skill matrix` 少一层稳定来源追溯：
+
+1. `trigger row` 目前只有 `sourceViewId`
+2. 上层仍需要借助 `label` 或额外查 `source-view` 才能还原来源
+
+`V39` 只解决一件事：
+
+1. 为 `trigger-entry matrix row` 增加稳定来源元数据
+
+### 44.2 范围
+
+1. `V39.1` scope freeze
+2. `V39.2` trigger row source-metadata contract
+3. `V39.3` high-level tool / test alignment
+4. `V39.4` docs closeout
+
+### 44.3 当前状态
+
+- `V39.1` 已完成：冻结到 trigger row source-metadata contract
+- `V39.2` 未开始
+- `V39.3` 未开始
+- `V39.4` 未开始
+
+### 44.4 当前边界
+
+本阶段只做：
+
+1. 为 trigger row 增加 `templateSource`
+2. 为 source-view 行增加稳定来源字段
+3. 保持现有 compact helper 与高层 tool 兼容
+
+显式不做：
+
+1. 不新增 trigger matrix summary key
+2. 不新增新的 trigger coverage
+3. 不新增 anomaly / disorder skill matrix
+4. 不实现独立 trigger-template catalog public export
