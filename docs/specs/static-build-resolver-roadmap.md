@@ -1527,3 +1527,46 @@ Batch B（已完成）：
 2. 不把 utility entries 并进 trigger-entry matrix
 3. 不把 trigger-entry matrix 伪装成 skill matrix
 4. 不新增新的 snapshot key
+
+## 33. V28 source-view summary contracts
+
+### 33.1 目标
+
+在 `V26` 完成 unified source-entry collection summary、`V27` 完成 trigger-entry matrix summary 之后，剩余还停留在裸 `entries[]` 的 contract 只剩 source-specific damage / utility views。
+
+`V28` 只解决一件事：
+
+1. 为 `resolveStaticBuildSourceDamageViews()` 增加稳定 `summary`
+2. 为 `resolveStaticBuildSourceUtilityViews()` 增加稳定 `summary`
+
+### 33.2 范围
+
+1. `V28.1` scope freeze
+2. `V28.2` source-damage-view summary contract
+3. `V28.3` source-utility-view summary contract
+4. `V28.4` high-level tool alignment
+5. `V28.5` docs closeout
+
+### 33.3 当前状态
+
+- `V28.1` 已完成：冻结到 source-view summary contract
+- `V28.2` 未开始
+- `V28.3` 未开始
+- `V28.4` 未开始
+- `V28.5` 未开始
+
+### 33.4 当前边界
+
+本阶段只做：
+
+1. 为 `ResolveStaticBuildSourceDamageViewsResult` 增加稳定 `summary`
+2. 为 `ResolveStaticBuildSourceUtilityViewsResult` 增加稳定 `summary`
+3. 固定 `entries[]` 排序语义
+4. 为上层提供稳定 group summary
+
+显式不做：
+
+1. 不新增 anomaly / disorder source damage views
+2. 不新增 utility / resource view coverage
+3. 不把 source views 重新并回 `source-entry collection`
+4. 不新增新的 snapshot key
