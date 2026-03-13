@@ -39,9 +39,9 @@ function compactMatrix(
       combatTags: row.combatTags,
       skillMultiplier: row.skillMultiplier,
       damage: row.damageSummary,
-      resolvedBuckets: row.build.resolvedBuckets,
-      assumptions: row.build.assumptions,
-      unsupportedEffects: row.build.unsupportedEffects,
+      resolvedBuckets: row.resolvedBuckets,
+      assumptions: row.assumptions,
+      unsupportedEffects: row.unsupportedEffects,
       ...(includeDetails ? { build: row.build } : {}),
     })),
   }

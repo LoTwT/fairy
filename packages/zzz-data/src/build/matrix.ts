@@ -1970,6 +1970,9 @@ export function resolveStaticBuildSkillMatrix(
         crit: build.damage.crit.total,
         noCrit: build.damage.noCrit.total,
       },
+      resolvedBuckets: build.resolvedBuckets,
+      assumptions: build.assumptions,
+      unsupportedEffects: build.unsupportedEffects,
       build,
     } satisfies StaticBuildSkillMatrixRow
   })

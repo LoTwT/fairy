@@ -815,6 +815,9 @@ export interface StaticBuildSkillMatrixRow {
   combatTags: string[]
   skillMultiplier: string
   damageSummary: StaticBuildSkillMatrixRowDamageSummary
+  resolvedBuckets: StaticBuildResolvedBuckets
+  assumptions: string[]
+  unsupportedEffects: string[]
   build: ResolveStaticBuildResult
 }
 

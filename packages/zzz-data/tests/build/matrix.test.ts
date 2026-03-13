@@ -298,11 +298,8 @@ describe("static build skill matrix", () => {
     expect(result.rows.length).toBeGreaterThan(0)
     const chainRow = result.rows.find((row) => row.skillTag === "chain")
     const ultimateRow = result.rows.find((row) => row.label === "终结技")
-    expect(chainRow?.build.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.7, 4)
-    expect(ultimateRow?.build.resolvedBuckets.bonusDamageSum).toBeCloseTo(
-      0.7,
-      4,
-    )
+    expect(chainRow?.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.7, 4)
+    expect(ultimateRow?.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.7, 4)
     expect(
       result.assumptions.some((item) =>
         item.includes("零号·安比 当前未收录 curated"),
@@ -339,7 +336,7 @@ describe("static build skill matrix", () => {
     })
 
     const chainRow = result.rows.find((row) => row.skillTag === "chain")
-    expect(chainRow?.build.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.5, 4)
+    expect(chainRow?.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.5, 4)
     expect(chainRow?.build.resolvedPanel.critRate).toBeCloseTo(0.62, 4)
     expect(chainRow?.build.resolvedPanel.critDamage).toBeCloseTo(1.9, 4)
     expect(
@@ -375,7 +372,7 @@ describe("static build skill matrix", () => {
     })
 
     const basicRow = result.rows.find((row) => row.skillTag === "basic")
-    expect(basicRow?.build.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.35, 4)
+    expect(basicRow?.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.35, 4)
     expect(basicRow?.build.resolvedPanel.critRate).toBeCloseTo(0.6, 4)
     expect(basicRow?.build.resolvedPanel.critDamage).toBeCloseTo(1.6, 4)
     expect(
@@ -414,10 +411,8 @@ describe("static build skill matrix", () => {
     const enhancedSpecialRow = result.rows.find(
       (row) => row.skillTag === "enhancedSpecial",
     )
-    expect(
-      enhancedSpecialRow?.build.resolvedBuckets.bonusDamageSum,
-    ).toBeCloseTo(1, 4)
-    expect(enhancedSpecialRow?.build.resolvedBuckets.sheerBonusSum).toBeCloseTo(
+    expect(enhancedSpecialRow?.resolvedBuckets.bonusDamageSum).toBeCloseTo(1, 4)
+    expect(enhancedSpecialRow?.resolvedBuckets.sheerBonusSum).toBeCloseTo(
       0.18,
       4,
     )
@@ -451,14 +446,8 @@ describe("static build skill matrix", () => {
     })
 
     const ultimateRow = result.rows.find((row) => row.skillTag === "ultimate")
-    expect(ultimateRow?.build.resolvedBuckets.bonusDamageSum).toBeCloseTo(
-      0.5,
-      4,
-    )
-    expect(ultimateRow?.build.resolvedBuckets.ignoreResistance).toBeCloseTo(
-      0.2,
-      4,
-    )
+    expect(ultimateRow?.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.5, 4)
+    expect(ultimateRow?.resolvedBuckets.ignoreResistance).toBeCloseTo(0.2, 4)
     expect(ultimateRow?.build.resolvedPanel.critRate).toBeCloseTo(0.75, 4)
     expect(ultimateRow?.build.resolvedPanel.critDamage).toBeCloseTo(1.45, 4)
   })
@@ -487,8 +476,8 @@ describe("static build skill matrix", () => {
     })
 
     const basicRow = result.rows.find((row) => row.skillTag === "basic")
-    expect(basicRow?.build.resolvedBuckets.critRate).toBeCloseTo(0.25, 4)
-    expect(basicRow?.build.resolvedBuckets.critDamage).toBeCloseTo(0.5, 4)
+    expect(basicRow?.resolvedBuckets.critRate).toBeCloseTo(0.25, 4)
+    expect(basicRow?.resolvedBuckets.critDamage).toBeCloseTo(0.5, 4)
     expect(basicRow?.build.resolvedPanel.critRate).toBeCloseTo(0.7, 4)
     expect(basicRow?.build.resolvedPanel.critDamage).toBeCloseTo(1.7, 4)
     expect(
@@ -525,11 +514,8 @@ describe("static build skill matrix", () => {
     })
 
     const basicRow = result.rows.find((row) => row.skillTag === "basic")
-    expect(basicRow?.build.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.8, 4)
-    expect(basicRow?.build.resolvedBuckets.ignoreResistance).toBeCloseTo(
-      0.25,
-      4,
-    )
+    expect(basicRow?.resolvedBuckets.bonusDamageSum).toBeCloseTo(0.8, 4)
+    expect(basicRow?.resolvedBuckets.ignoreResistance).toBeCloseTo(0.25, 4)
     expect(basicRow?.build.resolvedPanel.attack).toBeCloseTo(4300, 4)
     expect(basicRow?.build.resolvedPanel.critRate).toBeCloseTo(0.6, 4)
     expect(basicRow?.build.resolvedPanel.critDamage).toBeCloseTo(1.5, 4)
@@ -577,10 +563,11 @@ describe("static build skill matrix", () => {
     const enhancedSpecialRow = result.rows.find(
       (row) => row.label === "强化特殊技",
     )
-    expect(
-      enhancedSpecialRow?.build.resolvedBuckets.bonusDamageSum,
-    ).toBeCloseTo(0.51, 4)
-    expect(enhancedSpecialRow?.build.resolvedBuckets.sheerBonusSum).toBeCloseTo(
+    expect(enhancedSpecialRow?.resolvedBuckets.bonusDamageSum).toBeCloseTo(
+      0.51,
+      4,
+    )
+    expect(enhancedSpecialRow?.resolvedBuckets.sheerBonusSum).toBeCloseTo(
       0.18,
       4,
     )
