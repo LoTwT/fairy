@@ -12,6 +12,7 @@ export { getStaticBuildEffectsForLoadout } from "./definitions.js"
 export { resolveStaticBuildSkillMatrix } from "./matrix.js"
 export { getStaticBuildProfile, staticBuildProfiles } from "./profiles.js"
 export { resolveStaticBuildDamage } from "./resolver.js"
+export { resolveStaticBuildSourceEntries } from "./source-entries.js"
 export {
   hasStaticBuildTriggerMatrixCoverage,
   resolveStaticBuildTriggerMatrix,
@@ -23,6 +24,8 @@ export type {
   ResolveStaticBuildSkillMatrixInput,
   ResolveStaticBuildSkillMatrixResult,
   ResolveStaticBuildSourceDamageViewsResult,
+  ResolveStaticBuildSourceEntriesInput,
+  ResolveStaticBuildSourceEntriesResult,
   ResolveStaticBuildSourceUtilityViewsInput,
   ResolveStaticBuildSourceUtilityViewsResult,
   ResolveStaticBuildTriggerMatrixInput,
@@ -63,6 +66,7 @@ export type {
   StaticBuildSourceDamageViewMeta,
   StaticBuildSourceDamageViewRequirement,
   StaticBuildSourceDamageViewRequirementKind,
+  StaticBuildSourceEntry,
   StaticBuildSourceNoteEntry,
   StaticBuildSourceNoteGuidance,
   StaticBuildSourceNoteGuidanceKind,

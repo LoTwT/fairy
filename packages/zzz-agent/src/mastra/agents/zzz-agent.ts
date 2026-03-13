@@ -16,6 +16,7 @@ import {
   resolveBuildDamage,
   resolveBuildSkillMatrix,
   resolveBuildSourceDamageViews,
+  resolveBuildSourceEntries,
   resolveBuildSourceUtilityViews,
   resolveBuildTriggerMatrix,
 } from "../tools/zzz"
@@ -100,6 +101,7 @@ const BASE_PROMPT = `你是绝区零（Zenless Zone Zero）伤害计算专家。
    - 单技能 / 单场景计算：调用 resolveBuildDamage
    - 全技能 / 全段 / 完整伤害表：调用 resolveBuildSkillMatrix
    - 如果用户问的是 anomaly / disorder 的主结算 + 额外结算并列条目，需要一份 trigger-entry matrix，调用 resolveBuildTriggerMatrix
+   - 如果用户问的是“当前构筑下有哪些 source-specific 条目 / 额外来源条目 / 独立额外结算 + utility 条目”，优先调用 resolveBuildSourceEntries
    - 如果用户问的是 anomaly / disorder 里的独立额外结算条目，例如 \`爱丽丝 [极性强击]\`、\`雅 [霜灼·破]\`、\`柏妮思 [燃点]/[余烬]\`、\`爱芮 [异放]\`，调用 resolveBuildSourceDamageViews
    - 如果用户问的是独立回能 / 后场回能 / 音擎 utility 条目，例如 \`「月相」-朔\`、\`「电磁暴」-叁式\`、\`家政员\`、\`灼心摇壶\` 的回能效果，调用 resolveBuildSourceUtilityViews
    - 高层 resolver 会直接返回 resolved buckets、damageParams、技能矩阵或 source-specific view，避免重复手工抽取乘区
@@ -107,6 +109,7 @@ const BASE_PROMPT = `你是绝区零（Zenless Zone Zero）伤害计算专家。
    - 如果高层 resolver 返回 found=false，先原样告知不支持范围、supported 列表和候选项；只有当用户明确接受“按旧路径继续估算”时，才回退到 lookupAgent / lookupWEngine / lookupDriveDisc + calcDamage
    - 当前 resolveBuildDamage 已支持强攻 / 命破 / 异常的单次静态计算，以及 anomaly / disorder；resolveBuildSkillMatrix 仍只支持强攻 / 命破，不支持异常 / 紊乱矩阵
    - resolveBuildTriggerMatrix 只暴露 anomaly / disorder 的 trigger-entry matrix，行语义是主公式结算和 source-specific 额外结算条目，不要把它伪装成技能矩阵
+   - resolveBuildSourceEntries 是 source damage views + source utility views 的统一集合；utility-only 场景不需要伪造 scenario，normal / sheer 场景也不要伪装成 source damage collection
    - resolveBuildSourceDamageViews 只暴露独立额外结算条目，不要把它的结果并回主 anomaly / disorder 公式，也不要把它伪装成完整技能矩阵
    - resolveBuildSourceUtilityViews 只暴露独立 utility / energy 条目，不要把它们并回主 damage resolver，也不要把“每次触发值”擅自扩写成战斗总收益
    - 如果用户明确要求“完整伤害矩阵”或明确点名调用 resolveBuildSkillMatrix，而该代理人不在当前 matrix 支持范围内，不要自动回退旧路径，因为旧路径无法满足“完整矩阵”这个请求
@@ -144,6 +147,7 @@ const BASE_PROMPT = `你是绝区零（Zenless Zone Zero）伤害计算专家。
 
 7. **格式化输出**
    - 如果走 resolveBuildTriggerMatrix，单独输出“触发条目矩阵”小节，优先使用 \`row.metadata.canonicalLabel\`、\`row.metadata.stableKey\`、\`row.metadata.entryKind\`；source-view 行要带上 requirements / diagnostics / sourceNotes / assumptions，不要继续手工拼接成技能表
+   - 如果走 resolveBuildSourceEntries，单独输出“额外来源条目”小节；优先使用 \`entry.metadata.canonicalLabel\`、\`entry.metadata.stableKey\`、\`entry.metadata.entryKind\`，同时按 \`source-damage-view\` / \`source-utility-view\` 分组；不要把 utility 条目并回主公式，也不要把 normal / sheer 场景下的 utility-only collection 误写成 source damage 列表
    - 如果走 resolveBuildSourceDamageViews，单独输出“额外结算条目”小节，优先使用 \`entry.metadata.canonicalLabel\`、\`entry.metadata.stableKey\`、\`entry.metadata.entryKind\`；同时列出来源、模式（standalone / delta）、当前期望 / 暴击 / 非暴击，以及 requirements / diagnostics / sourceNotes / assumptions；优先使用结构化 diagnostics + sourceNotes 说明默认值、coverage gap、缺少输入、已展开或 research-only，不要继续手工拆 assumptions 字符串；不要把这些条目直接并入主伤害表或矩阵
    - 如果走 resolveBuildSourceUtilityViews，单独输出“回能 / utility 条目”小节，优先使用 \`entry.metadata.canonicalLabel\`、\`entry.metadata.stableKey\`、\`entry.metadata.entryKind\`；同时列出来源、类型（每次触发 / 每秒回能）、目标、数值、单位、触发条件、冷却与 assumptions；不要把这些条目伪装成主伤害乘区
    - 如果 sourceNotes 带 guidance，优先按 guidance 解释下一步：provide-input 表示应补对应 target 的显式输入，input-applied 表示该来源已按对应 target 展开，keep-process-only / keep-research-only 表示不要再追问更多静态输入
@@ -411,6 +415,7 @@ export const zzzAgent = new Agent({
     lookupGameMode,
     resolveBuildDamage,
     resolveBuildSourceDamageViews,
+    resolveBuildSourceEntries,
     resolveBuildTriggerMatrix,
     resolveBuildSourceUtilityViews,
     resolveBuildSkillMatrix,

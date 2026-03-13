@@ -1343,9 +1343,9 @@ Batch B（已完成）：
 ### 28.3 当前状态
 
 - `V23.1` 已完成：冻结到 unified source-entry collection
-- `V23.2` 未开始
-- `V23.3` 未开始
-- `V23.4` 未开始
+- `V23.2` 已完成：新增 `resolveStaticBuildSourceEntries()` 统一聚合 source damage views 与 source utility views
+- `V23.3` 已完成：`zzz-agent` 已新增 `resolve-build-source-entries` 高层 tool
+- `V23.4` 已完成：README / specs / architecture / index 已同步到统一 source-entry collection
 
 ### 28.4 当前边界
 

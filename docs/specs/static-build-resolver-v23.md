@@ -81,7 +81,22 @@
 3. `V23.3` high-level tool integration
 4. `V23.4` docs closeout
 
-## 5. 验收标准
+## 5. 当前实现
+
+当前已完成：
+
+1. `resolveStaticBuildSourceEntries()`
+2. `zzz-agent` 高层 `resolve-build-source-entries`
+3. utility-only / anomaly-disorder mixed collection 的测试与文档
+
+当前 contract 规则：
+
+1. 不传 `scenario` 时，只返回 utility entries
+2. `anomaly / disorder` 场景下，可同时返回 source damage views + source utility views
+3. `normal / sheer` 场景下，只返回 utility entries，并在顶层 assumptions 明确说明未展开 source damage views
+4. 不把主公式结算或 trigger-entry matrix 并进 source-entry collection
+
+## 6. 验收标准
 
 1. 上层可通过单一 API 拿到当前构筑的 source entries
 2. utility-only 场景不需要伪造 `scenario`

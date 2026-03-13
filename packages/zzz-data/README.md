@@ -248,6 +248,59 @@ utilityViews.entries[0].metadata.stableKey
 
 同一份 source-specific utility / energy view contract 也已在 `zzz-agent` 中通过 `resolve-build-source-utility-views` 高层 tool 暴露，适合直接给 Agent 查询独立回能条目。
 
+如果你需要一次性拿到当前构筑的全部 source-specific 条目，可使用：
+
+```ts
+import { resolveStaticBuildSourceEntries } from "zzz-data"
+
+const collection = resolveStaticBuildSourceEntries({
+  mode: "full-buff",
+  loadout: {
+    agentId: "1501",
+    wEngineId: "14117",
+    agentLevel: 60,
+    wEngineRefinement: 1,
+  },
+  panel: {
+    attack: 2950,
+    baseAttack: 1200,
+    critRate: 0.2,
+    critDamage: 0.5,
+    anomalyProficiency: 150,
+  },
+  scenario: {
+    damageType: "disorder",
+    skillTag: "enhancedSpecial",
+    anomalyType: "ether",
+    remainingTime: 5,
+    attribute: "以太",
+    dynamicSnapshot: {
+      values: {
+        ariaExflowDamageRatio: 0.45,
+        ariaStunnedDamageRatio: 0.2,
+      },
+    },
+    enemy: {
+      defenderBaseDefense: 953,
+      defenderResistance: 0.2,
+      isStunned: true,
+    },
+  },
+})
+
+collection.entries.map((entry) => entry.metadata.stableKey)
+// [
+//   "source-utility:flamemaker-shaker-offfield-energy-regen",
+//   "source-view:aria-exflow",
+// ]
+```
+
+`resolveStaticBuildSourceEntries()` 的规则是：
+
+- 不传 `scenario` 时，只返回 utility entries
+- `anomaly / disorder` 场景下，可同时返回 source damage view + utility view
+- `normal / sheer` 场景下，保持 utility-only，不把它们伪装成 source damage collection
+
 source view 条目现在也会返回结构化 `diagnostics` 与 `sourceNotes`，适合直接区分：
 
 - 哪些默认值被自动补齐

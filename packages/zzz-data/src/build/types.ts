@@ -590,6 +590,23 @@ export interface ResolveStaticBuildSourceUtilityViewsResult {
   assumptions: string[]
 }
 
+export interface ResolveStaticBuildSourceEntriesInput {
+  loadout: StaticBuildLoadoutInput
+  panel?: StaticBuildFinalPanelInput
+  scenario?: StaticBuildScenarioInput
+  effectOverrides?: StaticBuildEffectOverride[]
+}
+
+export type StaticBuildSourceEntry =
+  | StaticBuildSourceDamageViewEntry
+  | StaticBuildSourceUtilityViewEntry
+
+export interface ResolveStaticBuildSourceEntriesResult {
+  loadout: StaticBuildResolvedLoadout
+  entries: StaticBuildSourceEntry[]
+  assumptions: string[]
+}
+
 export type StaticBuildTriggerMatrixEntryKind = "main-formula" | "source-view"
 
 export interface StaticBuildTriggerMatrixRowMeta {

@@ -226,6 +226,25 @@ export const resolveBuildSourceUtilityInputSchema = z.object({
   finalPanel: finalPanelSchema.partial().optional(),
 })
 
+export const resolveBuildSourceEntriesInputSchema =
+  resolveBuildSourceUtilityInputSchema.extend({
+    mode: z
+      .enum(["baseline", "full-buff", "manual"])
+      .optional()
+      .default("baseline"),
+    manualBaseMode: z.enum(["baseline", "full-buff"]).optional(),
+    scenario: resolveBuildScenarioSchema.optional(),
+    effectOverrides: z
+      .array(
+        z.object({
+          effectId: z.string(),
+          enabled: z.boolean().optional(),
+          stacks: z.number().int().min(0).optional(),
+        }),
+      )
+      .optional(),
+  })
+
 export function normalizeCatalogValue(value: string) {
   return value.toLowerCase().replace(/[\s\-_·・.()（）【】[\]「」]/g, "")
 }
