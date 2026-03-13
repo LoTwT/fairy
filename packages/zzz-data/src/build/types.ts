@@ -892,7 +892,9 @@ export interface StaticBuildSkillMatrixRow {
   damageSummary: StaticBuildSkillMatrixRowDamageSummary
   resolvedBuckets: StaticBuildResolvedBuckets
   diagnostics: StaticBuildDiagnosticEntry[]
+  diagnosticSummary: StaticBuildDiagnosticSummary
   sourceNotes: StaticBuildSourceNoteEntry[]
+  sourceNoteSummary: StaticBuildSourceNoteSummary
   assumptions: string[]
   unsupportedEffects: string[]
   build: ResolveStaticBuildResult

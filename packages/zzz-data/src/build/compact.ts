@@ -33,7 +33,9 @@ export interface StaticBuildCompactSkillMatrixRow {
   damage: StaticBuildSkillMatrixRowDamageSummary
   resolvedBuckets: StaticBuildResolvedBuckets
   diagnostics: StaticBuildDiagnosticEntry[]
+  diagnosticSummary: StaticBuildSkillMatrixRow["diagnosticSummary"]
   sourceNotes: StaticBuildSourceNoteEntry[]
+  sourceNoteSummary: StaticBuildSkillMatrixRow["sourceNoteSummary"]
   assumptions: string[]
   unsupportedEffects: string[]
   build?: ResolveStaticBuildResult
@@ -184,7 +186,9 @@ export function compactStaticBuildSkillMatrixRow(
     damage: row.damageSummary,
     resolvedBuckets: row.resolvedBuckets,
     diagnostics: row.diagnostics,
+    diagnosticSummary: row.diagnosticSummary,
     sourceNotes: row.sourceNotes,
+    sourceNoteSummary: row.sourceNoteSummary,
     assumptions: row.assumptions,
     unsupportedEffects: row.unsupportedEffects,
     ...(includeDetails ? { build: row.build } : {}),

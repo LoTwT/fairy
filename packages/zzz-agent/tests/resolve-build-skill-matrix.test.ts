@@ -52,7 +52,13 @@ describe("resolveBuildSkillMatrix tool", () => {
     expect((result as any).matrix.rows[0].build).toBeUndefined()
     expect((result as any).matrix.rows[0].damage.expected).toBeGreaterThan(0)
     expect((result as any).matrix.rows[0].diagnostics).toBeInstanceOf(Array)
+    expect((result as any).matrix.rows[0].diagnosticSummary.count).toBe(
+      (result as any).matrix.rows[0].diagnostics.length,
+    )
     expect((result as any).matrix.rows[0].sourceNotes).toBeInstanceOf(Array)
+    expect((result as any).matrix.rows[0].sourceNoteSummary.count).toBe(
+      (result as any).matrix.rows[0].sourceNotes.length,
+    )
     expect((result as any).matrix.rows[0].assumptions).toBeInstanceOf(Array)
     expect((result as any).matrix.rows[0].unsupportedEffects).toBeInstanceOf(
       Array,
@@ -109,6 +115,12 @@ describe("resolveBuildSkillMatrix tool", () => {
     )
     expect((result as any).matrix.sourceNoteSummary.count).toBe(
       (result as any).matrix.rows.flatMap((row: any) => row.sourceNotes).length,
+    )
+    expect((result as any).matrix.rows[0].diagnosticSummary.count).toBe(
+      (result as any).matrix.rows[0].diagnostics.length,
+    )
+    expect((result as any).matrix.rows[0].sourceNoteSummary.count).toBe(
+      (result as any).matrix.rows[0].sourceNotes.length,
     )
     expect((result as any).matrix.rows[0].build).toBeTruthy()
   })
