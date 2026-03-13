@@ -208,6 +208,7 @@ packages/zzz-agent/
 - [`static-build-resolver-v20.md`](../docs/specs/static-build-resolver-v20.md) — 当前阶段范围：已完成第一批 source-specific utility / energy view；`zzz-agent` 已暴露独立 utility view tool，不并回主伤害公式
 - [`static-build-resolver-v21.md`](../docs/specs/static-build-resolver-v21.md) — 当前实现：已完成 anomaly / disorder trigger-entry matrix；第一批覆盖爱丽丝 / 雅 / 柏妮思 / 爱芮
 - [`static-build-resolver-v22.md`](../docs/specs/static-build-resolver-v22.md) — 当前实现：source damage view / source utility view 已增加稳定 metadata；对齐 `canonicalLabel / stableKey / entryKind`
+- [`static-build-resolver-v23.md`](../docs/specs/static-build-resolver-v23.md) — 当前阶段范围：统一 source damage view / source utility view 的 collection contract；允许 utility-only 输入
 
 ## 计算器模块（src/calculator/）
 

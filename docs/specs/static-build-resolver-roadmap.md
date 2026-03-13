@@ -1326,3 +1326,37 @@ Batch B（已完成）：
 1. 不新增 utility matrix
 2. 不新增 trigger matrix 类型
 3. 不新增新的 snapshot key
+
+## 28. V23 unified source-entry collection
+
+### 28.1 目标
+
+为上层新增单一 source-entry collection contract，一次性聚合 source damage views 与 source utility views。
+
+### 28.2 范围
+
+1. `V23.1` scope freeze
+2. `V23.2` unified source-entry contract
+3. `V23.3` high-level tool integration
+4. `V23.4` docs closeout
+
+### 28.3 当前状态
+
+- `V23.1` 已完成：冻结到 unified source-entry collection
+- `V23.2` 未开始
+- `V23.3` 未开始
+- `V23.4` 未开始
+
+### 28.4 当前边界
+
+本阶段只做：
+
+1. 聚合现有 source damage views
+2. 聚合现有 source utility views
+3. 允许 utility-only 输入
+
+显式不做：
+
+1. 不把主公式结算并进 source-entry collection
+2. 不把 trigger-entry matrix 并进 source-entry collection
+3. 不新增新的 damage / utility 公式

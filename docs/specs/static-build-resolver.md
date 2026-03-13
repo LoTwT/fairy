@@ -771,3 +771,4 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 20. `V20` source-specific utility / energy views：已在当前 contract 下完成第一批收口；当前已通过独立 utility view 暴露稳定的回能 / 回能速率条目，不再只保留在 source note 中，也不会把它们并回主 damage resolver，见 [静态构筑解析系统 V20](./static-build-resolver-v20.md)
 21. `V21` anomaly / disorder trigger-entry matrix：已落地独立触发条目矩阵，不继续伪装成技能矩阵；当前通过 `resolveStaticBuildTriggerMatrix()` 为 `爱丽丝 / 雅 / 柏妮思 / 爱芮` 暴露并列的主结算 + 额外结算条目，见 [静态构筑解析系统 V21](./static-build-resolver-v21.md)
 22. `V22` structured source-entry metadata：已为 source damage view / utility view 补齐稳定 metadata，对齐 `canonicalLabel / stableKey / entryKind` 风格；`zzz-agent` 已优先消费 `entry.metadata`，见 [静态构筑解析系统 V22](./static-build-resolver-v22.md)
+23. `V23` unified source-entry collection：当前已冻结到统一 source-entry collection，目标是在不并入主公式的前提下，一次性聚合 source damage views 与 source utility views，见 [静态构筑解析系统 V23](./static-build-resolver-v23.md)
