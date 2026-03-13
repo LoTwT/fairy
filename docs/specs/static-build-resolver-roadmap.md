@@ -2115,9 +2115,9 @@ Batch B（已完成）：
 ### 46.3 当前状态
 
 - `V41.1` 已完成：冻结到 diagnostic-summary contract
-- `V41.2` 未开始
-- `V41.3` 未开始
-- `V41.4` 未开始
+- `V41.2` 已完成：source-view entry 已新增稳定 `diagnosticSummary`
+- `V41.3` 已完成：trigger row 与 compact helper 已对齐 `diagnosticSummary`
+- `V41.4` 已完成：README / architecture / roadmap 已同步收口
 
 ### 46.4 当前边界
 

@@ -248,6 +248,25 @@ views.entries[0].requirementSummary
 // }
 ```
 
+如果你只想知道当前 source-specific view 有多少 diagnostics、是否存在默认输入或 coverage-gap，也不要再手工遍历 `diagnostics[]`，直接使用：
+
+```ts
+views.entries[0].diagnosticSummary
+// {
+//   count: 2,
+//   hasDiagnostics: true,
+//   hasDefaultedInput: true,
+//   hasCoverageGap: false,
+//   hasUnsupportedEffect: false,
+//   hasFallback: false,
+//   kindGroups: [{ key: "defaulted-input", label: "默认输入", count: 2 }],
+//   ownerGroups: [
+//     { key: "loadout", count: 1 },
+//     { key: "scenario", count: 1 },
+//   ],
+// }
+```
+
 同一份 source-specific view contract 也已在 `zzz-agent` 中通过 `resolve-build-source-damage-views` 高层 tool 暴露，适合直接给 Agent 查询独立额外结算条目。
 
 如果你需要把主 anomaly / disorder 结算和独立额外结算并列查看，可使用：
@@ -347,6 +366,25 @@ matrix.rows[1].requirementSummary
 //       satisfiedCount: 1,
 //       unsatisfiedCount: 0,
 //     },
+//   ],
+// }
+```
+
+如果你只想知道某一行 trigger row 的 diagnostics 概况，也直接读取：
+
+```ts
+matrix.rows[1].diagnosticSummary
+// {
+//   count: 2,
+//   hasDiagnostics: true,
+//   hasDefaultedInput: true,
+//   hasCoverageGap: false,
+//   hasUnsupportedEffect: false,
+//   hasFallback: false,
+//   kindGroups: [{ key: "defaulted-input", label: "默认输入", count: 2 }],
+//   ownerGroups: [
+//     { key: "loadout", count: 1 },
+//     { key: "scenario", count: 1 },
 //   ],
 // }
 ```

@@ -14,8 +14,7 @@
 
 - [伤害计算算法](./specs/damage-calculation.md) — 四种伤害类型（常规/贯穿/异常/紊乱）的完整乘区公式、TypeScript 类型签名与参考数值
 - [静态构筑解析系统](./specs/static-build-resolver.md) — 静态效果系统、输入输出 contract、热插拔乘区管线与模块设计
-- [静态构筑解析系统路线图](./specs/static-build-resolver-roadmap.md) — 当前执行状态：已推进到 V40；当前 contract 已覆盖 source views、trigger matrix、utility views、unified source-entry collection、main resolver summary、core skill matrix summary、core skill matrix effect summary、matrix row damage summary、matrix row compact fields、matrix row explanation fields，以及 matrix / trigger / source-entry / source-view compact helper exports；source-view / trigger-row 的 `requirementSummary` 已收口
-- [静态构筑解析系统路线图](./specs/static-build-resolver-roadmap.md) — 当前执行状态：已推进到 V41；`V40 requirementSummary` 已收口；当前下一步是 source-view / trigger-row 的 `diagnosticSummary`
+- [静态构筑解析系统路线图](./specs/static-build-resolver-roadmap.md) — 当前执行状态：已推进到 V41；当前 contract 已覆盖 source views、trigger matrix、utility views、unified source-entry collection、main resolver summary、core skill matrix summary、core skill matrix effect summary、matrix row damage summary、matrix row compact fields、matrix row explanation fields，以及 matrix / trigger / source-entry / source-view compact helper exports；`V40 requirementSummary` 与 `V41 diagnosticSummary` 已收口
 - [异常 / 紊乱 Skill Matrix 立项评估](./specs/anomaly-disorder-skill-matrix-evaluation.md) — 结论：在更强的 dynamic value context 落地前，不进入 anomaly / disorder matrix 实现
 - [静态构筑解析系统 V1](./specs/static-build-resolver-v1.md) — 第一版冻结范围：支持对象、输入输出 contract、profile 与验收标准
 - [静态构筑解析系统 V2](./specs/static-build-resolver-v2.md) — 第二阶段实现：全部强攻 / 命破代理人、动态强攻/命破音擎、curated + 通用技能矩阵约定
@@ -57,4 +56,4 @@
 - [静态构筑解析系统 V38](./specs/static-build-resolver-v38.md) — 当前阶段：已把 source-damage-view / source-utility-view 收口为与 `V37` 对称的 compact helper exports，并让高层 tool 对齐 `includeDetails` 语义
 - [静态构筑解析系统 V39](./specs/static-build-resolver-v39.md) — 当前阶段：已收口；`trigger-entry matrix row` 已新增稳定来源元数据，不再依赖 `label` 或额外反查 `sourceViewId`
 - [静态构筑解析系统 V40](./specs/static-build-resolver-v40.md) — 当前阶段：已收口；source-view / trigger-row 已新增结构化 `requirementSummary`，不改 `requirements[]`
-- [静态构筑解析系统 V41](./specs/static-build-resolver-v41.md) — 当前阶段：已冻结范围；下一步只为 source-view / trigger-row 补结构化 `diagnosticSummary`，不改 `diagnostics[]`
+- [静态构筑解析系统 V41](./specs/static-build-resolver-v41.md) — 当前阶段：已收口；source-view / trigger-row 已新增结构化 `diagnosticSummary`，不改 `diagnostics[]`
