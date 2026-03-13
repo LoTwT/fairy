@@ -34,14 +34,9 @@ function compactSourceEntries(
   return {
     loadout: collection.loadout,
     summary: {
-      sourceDamageCount: collection.entries.filter(
-        (entry) => entry.metadata.entryKind === "source-damage-view",
-      ).length,
-      sourceUtilityCount: collection.entries.filter(
-        (entry) => entry.metadata.entryKind === "source-utility-view",
-      ).length,
-      unsupportedCount: collection.entries.filter((entry) => !entry.supported)
-        .length,
+      ...collection.summary,
+      sourceDamageCount: collection.summary.sourceDamageViewCount,
+      sourceUtilityCount: collection.summary.sourceUtilityViewCount,
     },
     assumptions: collection.assumptions,
     entries: collection.entries.map((entry) =>

@@ -13,8 +13,19 @@ describe("resolveBuildSourceEntries tool", () => {
 
     expect((result as any).found).toBe(true)
     expect((result as any).collection.summary).toMatchObject({
+      entryCount: 1,
       sourceDamageCount: 0,
       sourceUtilityCount: 1,
+      supportedCount: 1,
+      unsupportedCount: 0,
+      isUtilityOnly: true,
+      groups: [
+        {
+          key: "source-utility-view",
+          label: "回能 / utility 条目",
+          count: 1,
+        },
+      ],
     })
     expect((result as any).collection.entries[0]).toMatchObject({
       id: "lunar-noviluna-energy-refund",
@@ -61,8 +72,24 @@ describe("resolveBuildSourceEntries tool", () => {
 
     expect((result as any).found).toBe(true)
     expect((result as any).collection.summary).toMatchObject({
+      entryCount: 2,
       sourceDamageCount: 1,
       sourceUtilityCount: 1,
+      supportedCount: 2,
+      unsupportedCount: 0,
+      isUtilityOnly: false,
+      groups: [
+        {
+          key: "source-damage-view",
+          label: "额外结算条目",
+          count: 1,
+        },
+        {
+          key: "source-utility-view",
+          label: "回能 / utility 条目",
+          count: 1,
+        },
+      ],
     })
     expect(
       (result as any).collection.entries.map((entry: any) => entry.id),
@@ -110,8 +137,10 @@ describe("resolveBuildSourceEntries tool", () => {
 
     expect((result as any).found).toBe(true)
     expect((result as any).collection.summary).toMatchObject({
+      entryCount: 2,
       sourceDamageCount: 1,
       sourceUtilityCount: 1,
+      isUtilityOnly: false,
     })
     expect(
       (result as any).collection.entries.map((entry: any) => entry.id),
@@ -159,6 +188,28 @@ describe("resolveBuildSourceEntries tool", () => {
       (entry: any) => entry.metadata.entryKind === "source-damage-view",
     )
     expect(sourceDamageEntry.build).toBeTruthy()
+  })
+
+  it("surfaces collection summary for utility-only support entries", async () => {
+    const result = await runTool(resolveBuildSourceEntries, {
+      agent: "妮可",
+      wEngine: "时光切片",
+      wEngineRefinement: 1,
+    })
+
+    expect((result as any).found).toBe(true)
+    expect((result as any).collection.summary).toMatchObject({
+      entryCount: 8,
+      sourceDamageCount: 0,
+      sourceUtilityCount: 8,
+      isUtilityOnly: true,
+      groups: [
+        {
+          key: "source-utility-view",
+          count: 8,
+        },
+      ],
+    })
   })
 
   it("returns support scope when the current request has no available source entries", async () => {
