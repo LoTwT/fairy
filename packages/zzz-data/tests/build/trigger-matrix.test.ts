@@ -80,6 +80,7 @@ describe("static build trigger matrix", () => {
       metadata: {
         stableKey: "main-formula:anomaly",
         entryKind: "main-formula",
+        templateSource: "main-formula",
         damageType: "anomaly",
       },
     })
@@ -89,7 +90,11 @@ describe("static build trigger matrix", () => {
       metadata: {
         stableKey: "source-view:alice-polarity-assault",
         entryKind: "source-view",
+        templateSource: "source-view",
         damageType: "anomaly",
+        sourceType: "agent",
+        sourceId: "1401",
+        sourceStableKey: "source-view:alice-polarity-assault",
         sourceViewId: "alice-polarity-assault",
         sourceViewResolutionMode: "standalone",
       },
@@ -145,6 +150,10 @@ describe("static build trigger matrix", () => {
       id: "source-view:aria-exflow",
       metadata: {
         entryKind: "source-view",
+        templateSource: "source-view",
+        sourceType: "agent",
+        sourceId: "1501",
+        sourceStableKey: "source-view:aria-exflow",
         sourceViewId: "aria-exflow",
         sourceViewResolutionMode: "delta",
       },
@@ -202,6 +211,10 @@ describe("static build trigger matrix", () => {
       metadata: {
         canonicalLabel: "薇薇安：[异放]",
         entryKind: "source-view",
+        templateSource: "source-view",
+        sourceType: "agent",
+        sourceId: "1331",
+        sourceStableKey: "source-view:vivian-exflow",
         sourceViewId: "vivian-exflow",
         sourceViewResolutionMode: "delta",
       },

@@ -64,10 +64,17 @@ describe("resolveBuildTriggerMatrix tool", () => {
     expect((result as any).matrix.rows[0].metadata.entryKind).toBe(
       "main-formula",
     )
+    expect((result as any).matrix.rows[0].metadata.templateSource).toBe(
+      "main-formula",
+    )
     expect((result as any).matrix.rows[1]).toMatchObject({
       supported: true,
       metadata: {
         entryKind: "source-view",
+        templateSource: "source-view",
+        sourceType: "agent",
+        sourceId: "1401",
+        sourceStableKey: "source-view:alice-polarity-assault",
         sourceViewId: "alice-polarity-assault",
       },
     })
@@ -170,6 +177,10 @@ describe("resolveBuildTriggerMatrix tool", () => {
       metadata: {
         canonicalLabel: "薇薇安：[异放]",
         entryKind: "source-view",
+        templateSource: "source-view",
+        sourceType: "agent",
+        sourceId: "1331",
+        sourceStableKey: "source-view:vivian-exflow",
         sourceViewId: "vivian-exflow",
       },
     })

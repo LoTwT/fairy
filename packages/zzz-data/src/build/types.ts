@@ -737,11 +737,19 @@ export interface StaticBuildTriggerMatrixSummary {
   groups: StaticBuildTriggerMatrixGroupSummary[]
 }
 
+export type StaticBuildTriggerMatrixTemplateSource =
+  | "main-formula"
+  | "source-view"
+
 export interface StaticBuildTriggerMatrixRowMeta {
   canonicalLabel: string
   stableKey: string
   entryKind: StaticBuildTriggerMatrixEntryKind
+  templateSource: StaticBuildTriggerMatrixTemplateSource
   damageType: Extract<StaticBuildDamageType, "anomaly" | "disorder">
+  sourceType?: StaticBuildEffectDefinition["sourceType"]
+  sourceId?: string
+  sourceStableKey?: string
   sourceViewId?: string
   sourceViewResolutionMode?: StaticBuildSourceDamageViewEntry["resolutionMode"]
 }
