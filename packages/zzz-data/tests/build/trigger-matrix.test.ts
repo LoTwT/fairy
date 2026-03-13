@@ -57,6 +57,31 @@ describe("static build trigger matrix", () => {
       supportedCount: 2,
       unsupportedCount: 0,
       hasSourceViews: true,
+      diagnosticSummary: {
+        count: 4,
+        hasDiagnostics: true,
+        hasDefaultedInput: true,
+        hasCoverageGap: false,
+        hasUnsupportedEffect: false,
+        hasFallback: false,
+        kindGroups: [{ key: "defaulted-input", label: "默认输入", count: 4 }],
+        ownerGroups: [
+          { key: "loadout", count: 2 },
+          { key: "scenario", count: 2 },
+        ],
+      },
+      sourceNoteSummary: {
+        count: 4,
+        hasSourceNotes: true,
+        hasMissingInput: false,
+        hasProcessOnly: false,
+        hasResearchOnly: false,
+        statusGroups: [{ key: "resolved", label: "已展开", count: 4 }],
+        ownerGroups: [
+          { key: "finalPanel", count: 2 },
+          { key: "stateSnapshot", count: 2 },
+        ],
+      },
       groups: [
         {
           key: "main-formula",
@@ -245,6 +270,17 @@ describe("static build trigger matrix", () => {
       supportedCount: 2,
       unsupportedCount: 0,
       hasSourceViews: true,
+      diagnosticSummary: {
+        count: 4,
+        hasDiagnostics: true,
+        hasDefaultedInput: true,
+        hasCoverageGap: false,
+      },
+      sourceNoteSummary: {
+        count: 4,
+        hasSourceNotes: true,
+        hasMissingInput: false,
+      },
     })
     expect(result.rows[0]?.metadata.damageType).toBe("disorder")
     expect(result.rows[1]).toMatchObject({
@@ -305,6 +341,14 @@ describe("static build trigger matrix", () => {
       supportedCount: 2,
       unsupportedCount: 0,
       hasSourceViews: true,
+      diagnosticSummary: {
+        count: 2,
+        hasDiagnostics: true,
+      },
+      sourceNoteSummary: {
+        count: 6,
+        hasSourceNotes: true,
+      },
     })
     expect(result.rows[0]?.metadata.damageType).toBe("disorder")
     expect(result.rows[1]).toMatchObject({

@@ -149,6 +149,8 @@ function summarizeTriggerMatrixRows(
   )
   const supportedCount = rows.filter((row) => row.supported).length
   const unsupportedCount = rows.length - supportedCount
+  const diagnostics = rows.flatMap((row) => row.diagnostics)
+  const sourceNotes = rows.flatMap((row) => row.sourceNotes)
 
   const groups: StaticBuildTriggerMatrixSummary["groups"] = []
   for (const key of [
@@ -174,6 +176,8 @@ function summarizeTriggerMatrixRows(
     supportedCount,
     unsupportedCount,
     hasSourceViews: sourceViewRows.length > 0,
+    diagnosticSummary: summarizeDiagnosticEntries(diagnostics),
+    sourceNoteSummary: summarizeSourceNoteEntries(sourceNotes),
     groups,
   }
 }

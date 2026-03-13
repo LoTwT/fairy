@@ -44,6 +44,31 @@ describe("resolveBuildTriggerMatrix tool", () => {
       supportedCount: 2,
       unsupportedCount: 0,
       hasSourceViews: true,
+      diagnosticSummary: {
+        count: 6,
+        hasDiagnostics: true,
+        hasDefaultedInput: true,
+        hasCoverageGap: false,
+        hasUnsupportedEffect: false,
+        hasFallback: false,
+        kindGroups: [{ key: "defaulted-input", label: "默认输入", count: 6 }],
+        ownerGroups: [
+          { key: "loadout", count: 4 },
+          { key: "scenario", count: 2 },
+        ],
+      },
+      sourceNoteSummary: {
+        count: 4,
+        hasSourceNotes: true,
+        hasMissingInput: false,
+        hasProcessOnly: false,
+        hasResearchOnly: false,
+        statusGroups: [{ key: "resolved", label: "已展开", count: 4 }],
+        ownerGroups: [
+          { key: "finalPanel", count: 2 },
+          { key: "stateSnapshot", count: 2 },
+        ],
+      },
       groups: [
         {
           key: "main-formula",
@@ -272,6 +297,14 @@ describe("resolveBuildTriggerMatrix tool", () => {
       supportedCount: 2,
       unsupportedCount: 0,
       hasSourceViews: true,
+      diagnosticSummary: {
+        count: 2,
+        hasDiagnostics: true,
+      },
+      sourceNoteSummary: {
+        count: 6,
+        hasSourceNotes: true,
+      },
     })
     expect((result as any).matrix.rows[1]).toMatchObject({
       supported: true,
