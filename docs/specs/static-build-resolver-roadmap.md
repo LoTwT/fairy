@@ -3051,3 +3051,43 @@ Batch B（已完成）：
 1. 不改变 `effectSummary` 的聚合维度
 2. 不新增 group-level formula summaries
 3. 不改变 `row.group` 的分组逻辑
+
+## 67. V64 skill-matrix group formula summaries
+
+### 67.1 目标
+
+`V63` 收口后，`skill-matrix summary groups` 已能稳定给出局部 `effectSummary / diagnosticSummary / sourceNoteSummary`。
+
+但按 `row.group` 拆 section 时，各组仍没有自己的 `commonBuckets / commonFormulaMultipliers`。上层如果要在“普通攻击 / 特殊技 / 连携技”分组下分别展示局部乘区摘要，仍要重新遍历 rows 再自行聚合。
+
+`V64` 只解决一件事：
+
+1. 为 `skill-matrix summary groups` 增加局部 `commonBuckets / variableBuckets / commonFormulaMultipliers / variableFormulaMultipliers`
+
+### 67.2 范围
+
+1. `V64.1` scope freeze
+2. `V64.2` group-level formula summaries
+3. `V64.3` high-level / prompt alignment
+4. `V64.4` docs closeout
+
+### 67.3 当前状态
+
+- `V64.1` 已完成：冻结到 skill-matrix group formula summaries
+- `V64.2` 已完成：`StaticBuildSkillMatrixGroupSummary` 已新增局部 multiplier summaries
+- `V64.3` 已完成：高层 tool 断言与 agent prompt 已对齐 `matrix.summary.groups[*].commonFormulaMultipliers`
+- `V64.4` 已完成：相关 specs、roadmap、索引、架构文档与 README 已同步
+
+### 67.4 当前边界
+
+本阶段只做：
+
+1. 为 `skill-matrix summary groups` 增加局部 bucket / formula summaries
+2. 保持全矩阵 `summary.commonFormulaMultipliers` 兼容
+3. 保持现有 group-level effect / diagnostic / source-note summaries 兼容
+
+显式不做：
+
+1. 不改变全矩阵 `commonBuckets / variableBuckets`
+2. 不新增 group-level resolve summary
+3. 不改变 `row.group` 的分组逻辑

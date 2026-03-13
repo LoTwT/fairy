@@ -90,6 +90,10 @@ describe("resolveBuildSkillMatrix tool", () => {
       (result as any).matrix.rows.filter((row: any) => row.group === "普通攻击")
         .length,
     )
+    expect(normalGroup?.commonBuckets.critRate).toBeCloseTo(0.15, 4)
+    expect(
+      normalGroup?.commonFormulaMultipliers.critMultiplier,
+    ).toBeGreaterThan(1)
     const normalGroupEffect = normalGroup?.effectSummary.find(
       (item: any) =>
         item.sourceName === "防暴者Ⅵ型" &&

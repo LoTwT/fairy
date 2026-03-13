@@ -960,6 +960,10 @@ export interface StaticBuildSkillMatrixGroupSummary {
   key: string
   label: string
   count: number
+  commonBuckets: Record<string, number>
+  variableBuckets: string[]
+  commonFormulaMultipliers: Record<string, number>
+  variableFormulaMultipliers: string[]
   effectSummary: StaticBuildSkillMatrixEffectSummaryItem[]
   diagnosticSummary: StaticBuildDiagnosticSummary
   sourceNoteSummary: StaticBuildSourceNoteSummary

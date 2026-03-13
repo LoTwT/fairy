@@ -64,6 +64,10 @@ describe("static build skill matrix", () => {
     expect(normalGroup?.count).toBe(
       result.rows.filter((row) => row.group === "普通攻击").length,
     )
+    expect(normalGroup?.commonBuckets.critRate).toBeCloseTo(0.15, 4)
+    expect(
+      normalGroup?.commonFormulaMultipliers.critMultiplier,
+    ).toBeGreaterThan(1)
     const normalGroupEffect = normalGroup?.effectSummary.find(
       (item) =>
         item.sourceName === "防暴者Ⅵ型" &&

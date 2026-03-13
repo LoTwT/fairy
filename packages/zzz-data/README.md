@@ -899,6 +899,17 @@ matrix.summary.groups[0]
 //   key: "普通攻击",
 //   label: "普通攻击",
 //   count: 12,
+//   commonBuckets: {
+//     critRate: 0.15,
+//   },
+//   variableBuckets: ["attackPercent", "flatAttack"],
+//   commonFormulaMultipliers: {
+//     bonusMultiplier: 1.4,
+//     critMultiplier: 1.98,
+//     defenseMultiplier: 0.4545,
+//     resistanceMultiplier: 0.8,
+//   },
+//   variableFormulaMultipliers: ["baseDamage"],
 //   effectSummary: [
 //     {
 //       effectId: "zhu-yuan-w-engine-crit-rate",

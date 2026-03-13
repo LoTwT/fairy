@@ -557,6 +557,17 @@ function summarizeSkillMatrix(rows: StaticBuildSkillMatrixRow[]) {
       return map
     }, new Map<string, StaticBuildSkillMatrixRow[]>()),
   ).map(([group, groupRows]) => ({
+    ...(() => {
+      const { commonBuckets, variableBuckets } = summarizeBuckets(groupRows)
+      const { commonFormulaMultipliers, variableFormulaMultipliers } =
+        summarizeFormulaMultipliers(groupRows)
+      return {
+        commonBuckets,
+        variableBuckets,
+        commonFormulaMultipliers,
+        variableFormulaMultipliers,
+      }
+    })(),
     key: group,
     label: group,
     count: groupRows.length,
