@@ -62,7 +62,7 @@
 - `V45 source-view summary aggregates` 已收口
 - `V46 trigger-matrix summary aggregates` 已收口
 - `V47 skill-matrix summary aggregates` 已收口
-- 当前活跃阶段：`V48 skill-matrix row summaries`
+- `V48 skill-matrix row summaries` 已收口
 - 当前边界：`resolveStaticBuildSkillMatrix` 仍只支持 `normal / sheer`
 
 ## 2. 阶段划分
@@ -2414,9 +2414,9 @@ Batch B（已完成）：
 ### 53.3 当前状态
 
 - `V48.1` 已完成：冻结到 skill-matrix row-level summary contract
-- `V48.2` 未开始
-- `V48.3` 未开始
-- `V48.4` 未开始
+- `V48.2` 已完成：`StaticBuildSkillMatrixRow` 已新增稳定 `diagnosticSummary / sourceNoteSummary`
+- `V48.3` 已完成：compact helper 与高层 `resolve-build-skill-matrix` 已对齐新的 row-level summary contract
+- `V48.4` 已完成：README / 总规格 / roadmap / index / architecture 已同步到 `V48` 收口状态
 
 ### 53.4 当前边界
 

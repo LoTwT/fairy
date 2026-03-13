@@ -836,9 +836,35 @@ matrix.rows[0]
 //   skillMultiplier: "74.1%",
 //   build: { damage, resolvedBuckets, trace, ... }
 // }
+
+matrix.rows[0].diagnosticSummary
+// {
+//   count: 2,
+//   hasDiagnostics: true,
+//   hasDefaultedInput: true,
+//   hasCoverageGap: false,
+//   hasUnsupportedEffect: false,
+//   hasFallback: false,
+//   kindGroups: [{ key: "defaulted-input", label: "默认输入", count: 2 }],
+//   ownerGroups: [
+//     { key: "loadout", count: 1 },
+//     { key: "scenario", count: 1 },
+//   ],
+// }
+
+matrix.rows[0].sourceNoteSummary
+// {
+//   count: 0,
+//   hasSourceNotes: false,
+//   hasMissingInput: false,
+//   hasProcessOnly: false,
+//   hasResearchOnly: false,
+//   statusGroups: [],
+//   ownerGroups: [],
+// }
 ```
 
-如果你要生成矩阵顶部“乘区汇总”，不要再自己遍历 `rows` 统计 `commonBuckets / commonFormulaMultipliers`，直接使用 `matrix.summary`。如果你要生成“增益清单”，也不要再自己遍历 `row.build.trace`，直接使用 `matrix.effectSummary`。如果你只想知道整张矩阵是否存在 diagnostics / source notes，也不要自己遍历 `rows`，直接读取 `matrix.diagnosticSummary / matrix.sourceNoteSummary`。
+如果你要生成矩阵顶部“乘区汇总”，不要再自己遍历 `rows` 统计 `commonBuckets / commonFormulaMultipliers`，直接使用 `matrix.summary`。如果你要生成“增益清单”，也不要再自己遍历 `row.build.trace`，直接使用 `matrix.effectSummary`。如果你只想知道整张矩阵是否存在 diagnostics / source notes，也不要自己遍历 `rows`，直接读取 `matrix.diagnosticSummary / matrix.sourceNoteSummary`。如果你只关心某一行的 diagnostics / source notes 概况，也不要自己遍历 `row.diagnostics / row.sourceNotes`，直接读取 `row.diagnosticSummary / row.sourceNoteSummary`。
 
 常见消费方式是把矩阵映射成展示表：
 
