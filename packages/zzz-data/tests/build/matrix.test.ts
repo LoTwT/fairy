@@ -30,6 +30,18 @@ describe("static build skill matrix", () => {
     expect(result.profile.id).toBe("standard-normal")
     expect(result.summary.rowCount).toBe(21)
     expect(result.summary.baseDamageStat).toBe("attack")
+    expect(result.diagnosticSummary.count).toBe(
+      result.rows.flatMap((row) => row.diagnostics).length,
+    )
+    expect(result.diagnosticSummary.hasDiagnostics).toBe(
+      result.diagnosticSummary.count > 0,
+    )
+    expect(result.sourceNoteSummary.count).toBe(
+      result.rows.flatMap((row) => row.sourceNotes).length,
+    )
+    expect(result.sourceNoteSummary.hasSourceNotes).toBe(
+      result.sourceNoteSummary.count > 0,
+    )
     expect(result.summary.commonBuckets.critRate).toBeCloseTo(0.15, 4)
     expect(
       result.summary.commonFormulaMultipliers.critMultiplier,
@@ -130,6 +142,12 @@ describe("static build skill matrix", () => {
     expect(result.profile.id).toBe("yixuan-sheer")
     expect(result.summary.rowCount).toBe(22)
     expect(result.summary.baseDamageStat).toBe("sheerForce")
+    expect(result.diagnosticSummary.count).toBe(
+      result.rows.flatMap((row) => row.diagnostics).length,
+    )
+    expect(result.sourceNoteSummary.count).toBe(
+      result.rows.flatMap((row) => row.sourceNotes).length,
+    )
     expect(result.rows).toHaveLength(22)
     expect(result.rows.every((row) => row.damageType === "sheer")).toBe(true)
 

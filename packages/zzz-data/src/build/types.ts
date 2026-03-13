@@ -934,6 +934,8 @@ export interface ResolveStaticBuildSkillMatrixResult {
   loadout: StaticBuildResolvedLoadout
   summary: StaticBuildSkillMatrixSummary
   effectSummary: StaticBuildSkillMatrixEffectSummaryItem[]
+  diagnosticSummary: StaticBuildDiagnosticSummary
+  sourceNoteSummary: StaticBuildSourceNoteSummary
   rows: StaticBuildSkillMatrixRow[]
   assumptions: string[]
 }

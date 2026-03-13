@@ -67,6 +67,12 @@ describe("resolveBuildSkillMatrix tool", () => {
     expect(globalEffect?.totalRowCount).toBe(21)
     expect((result as any).matrix.summary.rowCount).toBe(21)
     expect((result as any).matrix.summary.baseDamageStat).toBe("attack")
+    expect((result as any).matrix.diagnosticSummary.count).toBe(
+      (result as any).matrix.rows.flatMap((row: any) => row.diagnostics).length,
+    )
+    expect((result as any).matrix.sourceNoteSummary.count).toBe(
+      (result as any).matrix.rows.flatMap((row: any) => row.sourceNotes).length,
+    )
     expect(
       (result as any).matrix.summary.commonFormulaMultipliers.critMultiplier,
     ).toBeGreaterThan(1)
@@ -98,6 +104,12 @@ describe("resolveBuildSkillMatrix tool", () => {
     expect((result as any).found).toBe(true)
     expect((result as any).matrix.summary.rowCount).toBe(22)
     expect((result as any).matrix.summary.baseDamageStat).toBe("sheerForce")
+    expect((result as any).matrix.diagnosticSummary.count).toBe(
+      (result as any).matrix.rows.flatMap((row: any) => row.diagnostics).length,
+    )
+    expect((result as any).matrix.sourceNoteSummary.count).toBe(
+      (result as any).matrix.rows.flatMap((row: any) => row.sourceNotes).length,
+    )
     expect((result as any).matrix.rows[0].build).toBeTruthy()
   })
 

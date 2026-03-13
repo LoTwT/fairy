@@ -13,7 +13,11 @@ import type {
 import agentDetailsZh from "../../data/zh-CN/agent-details.json"
 import { toAgentAttribute } from "../terms.js"
 import { getStaticBuildAgent } from "./catalog.js"
-import { resolveStaticBuildDamage } from "./resolver.js"
+import {
+  resolveStaticBuildDamage,
+  summarizeDiagnosticEntries,
+  summarizeSourceNoteEntries,
+} from "./resolver.js"
 
 interface SkillMatrixTemplate {
   id: string
@@ -2000,6 +2004,12 @@ export function resolveStaticBuildSkillMatrix(
     loadout: first.loadout,
     summary: summarizeSkillMatrix(rows),
     effectSummary: summarizeSkillMatrixEffects(rows),
+    diagnosticSummary: summarizeDiagnosticEntries(
+      rows.flatMap((row) => row.diagnostics),
+    ),
+    sourceNoteSummary: summarizeSourceNoteEntries(
+      rows.flatMap((row) => row.sourceNotes),
+    ),
     rows,
     assumptions,
   }

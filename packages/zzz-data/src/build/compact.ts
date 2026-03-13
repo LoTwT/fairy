@@ -46,6 +46,8 @@ export interface CompactStaticBuildSkillMatrixResult {
   loadout: ResolveStaticBuildSkillMatrixResult["loadout"]
   summary: ResolveStaticBuildSkillMatrixResult["summary"]
   effectSummary: StaticBuildSkillMatrixEffectSummaryItem[]
+  diagnosticSummary: ResolveStaticBuildSkillMatrixResult["diagnosticSummary"]
+  sourceNoteSummary: ResolveStaticBuildSkillMatrixResult["sourceNoteSummary"]
   assumptions: string[]
   rows: StaticBuildCompactSkillMatrixRow[]
 }
@@ -156,6 +158,8 @@ export function compactStaticBuildSkillMatrixResult(
     loadout: matrix.loadout,
     summary: matrix.summary,
     effectSummary: matrix.effectSummary,
+    diagnosticSummary: matrix.diagnosticSummary,
+    sourceNoteSummary: matrix.sourceNoteSummary,
     assumptions: matrix.assumptions,
     rows: matrix.rows.map((row) =>
       compactStaticBuildSkillMatrixRow(row, includeDetails),
