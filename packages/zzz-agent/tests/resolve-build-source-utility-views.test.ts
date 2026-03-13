@@ -46,4 +46,14 @@ describe("resolveBuildSourceUtilityViews tool", () => {
     expect((result as any).message).toContain("暂未覆盖音擎")
     expect((result as any).supportedWEngines).toContain("「月相」-朔")
   })
+
+  it("accepts support agents on the utility-only path before concrete coverage is added", async () => {
+    const result = await runTool(resolveBuildSourceUtilityViews, {
+      agent: "妮可",
+      wEngine: "时光切片",
+    })
+
+    expect((result as any).found).toBe(false)
+    expect((result as any).message).toContain("暂未覆盖音擎")
+  })
 })

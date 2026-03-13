@@ -95,4 +95,19 @@ describe("static build source utility views", () => {
       conditionLabel: "位于后场时",
     })
   })
+
+  it("accepts support agents in the utility-only resolver path", () => {
+    const result = resolveStaticBuildSourceUtilityViews({
+      loadout: {
+        agentId: "1031",
+        wEngineId: "13002",
+        wEngineRefinement: 1,
+      },
+    })
+
+    expect(result.loadout.agent.name).toBe("妮可")
+    expect(result.loadout.wEngine?.name).toBe("时光切片")
+    expect(result.entries).toEqual([])
+    expect(result.assumptions).toEqual([])
+  })
 })

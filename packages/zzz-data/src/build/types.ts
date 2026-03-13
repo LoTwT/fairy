@@ -246,12 +246,18 @@ export interface StaticBuildCatalogEntry {
   aliases: string[]
 }
 
-export interface StaticBuildAgentCatalogEntry extends StaticBuildCatalogEntry {
+export interface StaticBuildBaseAgentCatalogEntry extends StaticBuildCatalogEntry {
   specialty: AgentSpecialty
   defaultAttribute: AgentAttribute
+}
+
+export interface StaticBuildAgentCatalogEntry extends StaticBuildBaseAgentCatalogEntry {
   defaultDamageType: StaticBuildDamageType
   profileId: StaticBuildProfileId
 }
+
+export type StaticBuildUtilityAgentCatalogEntry =
+  StaticBuildBaseAgentCatalogEntry
 
 export interface StaticBuildWEngineCatalogEntry extends StaticBuildCatalogEntry {
   specialty: AgentSpecialty
@@ -385,7 +391,7 @@ export interface StaticBuildProfileResult {
 }
 
 export interface StaticBuildResolvedLoadout {
-  agent: StaticBuildAgentCatalogEntry
+  agent: StaticBuildAgentCatalogEntry | StaticBuildUtilityAgentCatalogEntry
   wEngine?: StaticBuildWEngineCatalogEntry
   driveDiscSets: Array<
     StaticBuildCatalogEntry & {

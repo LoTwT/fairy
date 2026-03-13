@@ -1,11 +1,11 @@
 import { createTool } from "@mastra/core/tools"
 import {
-  getCompatibleStaticBuildWEngines,
+  getCompatibleStaticBuildUtilityWEngines,
   resolveStaticBuildSourceUtilityViews,
-  supportedStaticBuildAgents,
   supportedStaticBuildDriveDiscs,
   supportedStaticBuildSourceUtilityViewWEngines,
-  supportedStaticBuildWEngines,
+  supportedStaticBuildUtilityAgents,
+  supportedStaticBuildUtilityWEngines,
 } from "zzz-data"
 import {
   findCatalogCandidates,
@@ -20,23 +20,30 @@ export const resolveBuildSourceUtilityViews = createTool({
     "查询 source-specific utility / energy 条目。当前覆盖稳定可表达的音擎回能与后场回能速率，不并回主伤害公式。",
   inputSchema: resolveBuildSourceUtilityInputSchema,
   execute: async (input) => {
-    const agent = findCatalogItem(supportedStaticBuildAgents, input.agent)
+    const agent = findCatalogItem(
+      supportedStaticBuildUtilityAgents,
+      input.agent,
+    )
     if (!agent) {
       return {
         found: false,
         message: `当前 source-specific utility view 暂不支持代理人「${input.agent}」`,
-        supportedAgents: supportedStaticBuildAgents.map((item) => item.name),
+        supportedAgents: supportedStaticBuildUtilityAgents.map(
+          (item) => item.name,
+        ),
         candidates: findCatalogCandidates(
-          supportedStaticBuildAgents,
+          supportedStaticBuildUtilityAgents,
           input.agent,
         ).map((item) => item.name),
       }
     }
 
-    const compatibleWEngines = getCompatibleStaticBuildWEngines(agent.specialty)
+    const compatibleWEngines = getCompatibleStaticBuildUtilityWEngines(
+      agent.specialty,
+    )
 
     const wEngine = input.wEngine
-      ? findCatalogItem(supportedStaticBuildWEngines, input.wEngine)
+      ? findCatalogItem(supportedStaticBuildUtilityWEngines, input.wEngine)
       : undefined
     if (input.wEngine && !wEngine) {
       return {

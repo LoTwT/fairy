@@ -1,10 +1,15 @@
 import { describe, expect, it } from "vitest"
 import {
+  getCompatibleStaticBuildUtilityWEngines,
   getCompatibleStaticBuildWEngines,
   getStaticBuildAgent,
   getStaticBuildDriveDisc,
+  getStaticBuildUtilityAgent,
+  getStaticBuildUtilityWEngine,
   getStaticBuildWEngine,
   supportedStaticBuildDriveDiscs,
+  supportedStaticBuildUtilityAgents,
+  supportedStaticBuildUtilityWEngines,
   supportedStaticBuildWEngines,
 } from "../../src/build/index"
 
@@ -45,5 +50,25 @@ describe("static build catalog", () => {
     expect(getStaticBuildDriveDisc("33600")?.name).toBe("流光咏叹")
     expect(getStaticBuildDriveDisc("33800")?.name).toBe("囚徒手记")
     expect(supportedStaticBuildDriveDiscs.length).toBeGreaterThan(14)
+  })
+
+  it("exports a separate utility-only catalog that includes support specialty", () => {
+    expect(getStaticBuildUtilityAgent("1031")?.name).toBe("妮可")
+    expect(getStaticBuildUtilityWEngine("13002")?.name).toBe("时光切片")
+    expect(
+      supportedStaticBuildUtilityAgents.some(
+        (item) => item.name === "妮可" && item.specialty === "Support",
+      ),
+    ).toBe(true)
+    expect(
+      supportedStaticBuildUtilityWEngines.some(
+        (item) => item.name === "时光切片" && item.specialty === "Support",
+      ),
+    ).toBe(true)
+    expect(
+      getCompatibleStaticBuildUtilityWEngines("Support").map(
+        (item) => item.name,
+      ),
+    ).toContain("时光切片")
   })
 })

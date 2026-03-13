@@ -7,10 +7,11 @@ import type {
   StaticBuildValueContext,
 } from "./types.js"
 import {
-  getStaticBuildAgent,
+  getCompatibleStaticBuildUtilityWEngines,
   getStaticBuildDriveDisc,
-  getStaticBuildWEngine,
-  supportedStaticBuildWEngines,
+  getStaticBuildUtilityAgent,
+  getStaticBuildUtilityWEngine,
+  supportedStaticBuildUtilityWEngines,
 } from "./catalog.js"
 
 const utilityViewWEngineIds = ["12003", "12012", "13106", "14117"] as const
@@ -30,7 +31,7 @@ function byRefinement(
 }
 
 export const supportedStaticBuildSourceUtilityViewWEngines =
-  supportedStaticBuildWEngines
+  supportedStaticBuildUtilityWEngines
     .filter((item) => utilityViewWEngineIdSet.has(item.id))
     .sort((left, right) => left.name.localeCompare(right.name, "zh-Hans-CN"))
 
@@ -56,12 +57,12 @@ function resolveDriveDiscSets(
 function resolveLoadout(
   input: ResolveStaticBuildSourceUtilityViewsInput,
 ): StaticBuildResolvedLoadout {
-  const agent = getStaticBuildAgent(input.loadout.agentId)
+  const agent = getStaticBuildUtilityAgent(input.loadout.agentId)
   if (!agent) {
     throw new RangeError(`Unsupported agentId: ${input.loadout.agentId}`)
   }
 
-  const wEngine = getStaticBuildWEngine(input.loadout.wEngineId)
+  const wEngine = getStaticBuildUtilityWEngine(input.loadout.wEngineId)
   if (input.loadout.wEngineId && !wEngine) {
     throw new RangeError(`Unsupported wEngineId: ${input.loadout.wEngineId}`)
   }
@@ -212,10 +213,18 @@ export function resolveStaticBuildSourceUtilityViews(
 ): ResolveStaticBuildSourceUtilityViewsResult {
   const loadout = resolveLoadout(input)
   const entries = resolveWEngineUtilityViews(loadout)
+  const compatibleWEngines = getCompatibleStaticBuildUtilityWEngines(
+    loadout.agent.specialty,
+  )
 
   return {
     loadout,
     entries,
-    assumptions: [],
+    assumptions:
+      entries.length > 0 || compatibleWEngines.length > 0
+        ? []
+        : [
+            `${loadout.agent.name} 当前特性下暂无已收录的 utility-only 音擎条目。`,
+          ],
   }
 }

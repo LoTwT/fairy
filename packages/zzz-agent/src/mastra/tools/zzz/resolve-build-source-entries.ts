@@ -7,12 +7,15 @@ import type {
 import { createTool } from "@mastra/core/tools"
 import { z } from "zod"
 import {
+  getCompatibleStaticBuildUtilityWEngines,
   getCompatibleStaticBuildWEngines,
   resolveStaticBuildSourceEntries,
   supportedStaticBuildAgents,
   supportedStaticBuildDriveDiscs,
   supportedStaticBuildSourceUtilityViewWEngines,
   supportedStaticBuildSourceViewAgents,
+  supportedStaticBuildUtilityAgents,
+  supportedStaticBuildUtilityWEngines,
   supportedStaticBuildWEngines,
 } from "zzz-data"
 import {
@@ -109,27 +112,42 @@ export const resolveBuildSourceEntries = createTool({
       ),
   }),
   execute: async (input) => {
-    const agent = findCatalogItem(supportedStaticBuildAgents, input.agent)
+    const utilityOnly =
+      !input.scenario ||
+      input.scenario.damageType === "normal" ||
+      input.scenario.damageType === "sheer"
+
+    const agentCatalog = utilityOnly
+      ? supportedStaticBuildUtilityAgents
+      : supportedStaticBuildAgents
+
+    const agent = findCatalogItem(agentCatalog, input.agent)
     if (!agent) {
       return {
         found: false,
         message: `当前 source-entry collection 暂不支持代理人「${input.agent}」`,
-        supportedAgents: supportedStaticBuildAgents.map((item) => item.name),
-        candidates: findCatalogCandidates(
-          supportedStaticBuildAgents,
-          input.agent,
-        ).map((item) => item.name),
+        supportedAgents: agentCatalog.map((item) => item.name),
+        candidates: findCatalogCandidates(agentCatalog, input.agent).map(
+          (item) => item.name,
+        ),
       }
     }
 
-    const compatibleWEngines = getCompatibleStaticBuildWEngines(agent.specialty)
+    const compatibleWEngines = utilityOnly
+      ? getCompatibleStaticBuildUtilityWEngines(agent.specialty)
+      : getCompatibleStaticBuildWEngines(agent.specialty)
     const supportedUtilityWEngines =
       supportedStaticBuildSourceUtilityViewWEngines
         .filter((item) => item.specialty === agent.specialty)
         .map((item) => item.name)
 
     const wEngine = input.wEngine
-      ? findCatalogItem(supportedStaticBuildWEngines, input.wEngine)
+      ? findCatalogItem(
+          utilityOnly
+            ? supportedStaticBuildUtilityWEngines
+            : supportedStaticBuildWEngines,
+          input.wEngine,
+        )
       : undefined
     if (input.wEngine && !wEngine) {
       return {
@@ -238,10 +256,6 @@ export const resolveBuildSourceEntries = createTool({
     })
 
     if (collection.entries.length === 0) {
-      const utilityOnly =
-        !scenario ||
-        scenario.damageType === "normal" ||
-        scenario.damageType === "sheer"
       return {
         found: false,
         message: utilityOnly

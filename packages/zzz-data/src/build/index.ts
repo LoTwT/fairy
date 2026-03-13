@@ -1,11 +1,16 @@
 export {
+  getCompatibleStaticBuildUtilityWEngines,
   getCompatibleStaticBuildWEngines,
   getStaticBuildAgent,
   getStaticBuildDriveDisc,
+  getStaticBuildUtilityAgent,
+  getStaticBuildUtilityWEngine,
   getStaticBuildWEngine,
   supportedStaticBuildAgents,
   supportedStaticBuildDriveDiscs,
   supportedStaticBuildMatrixAgents,
+  supportedStaticBuildUtilityAgents,
+  supportedStaticBuildUtilityWEngines,
   supportedStaticBuildWEngines,
 } from "./catalog.js"
 export { getStaticBuildEffectsForLoadout } from "./definitions.js"
@@ -31,6 +36,7 @@ export type {
   ResolveStaticBuildTriggerMatrixInput,
   ResolveStaticBuildTriggerMatrixResult,
   StaticBuildAgentCatalogEntry,
+  StaticBuildBaseAgentCatalogEntry,
   StaticBuildBaseMode,
   StaticBuildBucket,
   StaticBuildCatalogEntry,
@@ -86,6 +92,7 @@ export type {
   StaticBuildTriggerMatrixEntryKind,
   StaticBuildTriggerMatrixRow,
   StaticBuildTriggerMatrixRowMeta,
+  StaticBuildUtilityAgentCatalogEntry,
   StaticBuildWEngineCatalogEntry,
 } from "./types.js"
 

@@ -1426,7 +1426,7 @@ Batch B（已完成）：
 
 - `V25.1` 已完成：冻结到第二批 utility / resource view
 - `V25.2` 已完成：utility contract 已新增 `decibel-gain / decibel`
-- `V25.3` 未开始
+- `V25.3` 已完成：utility-only agent / w-engine catalog 已与 damage-agent catalog 解耦
 - `V25.4` 未开始
 - `V25.5` 未开始
 

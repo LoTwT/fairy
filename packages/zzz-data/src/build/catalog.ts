@@ -1,6 +1,7 @@
 import type {
   StaticBuildAgentCatalogEntry,
   StaticBuildCatalogEntry,
+  StaticBuildUtilityAgentCatalogEntry,
   StaticBuildWEngineCatalogEntry,
 } from "./types.js"
 import agentsZh from "../../data/zh-CN/agents.json"
@@ -23,6 +24,12 @@ interface WEngineListSourceItem {
 }
 
 const supportedSpecialties = new Set(["Attack", "Rupture", "Anomaly"])
+const supportedUtilitySpecialties = new Set([
+  "Attack",
+  "Rupture",
+  "Anomaly",
+  "Support",
+])
 
 const agentAliasOverrides: Record<string, string[]> = {
   "1041": ["11号", "soldier11", "soldier 11"],
@@ -69,6 +76,12 @@ const supportedAgentSources = (agentsZh as AgentListSourceItem[])
   )
   .sort((left, right) => Number(left.id) - Number(right.id))
 
+const supportedUtilityAgentSources = (agentsZh as AgentListSourceItem[])
+  .filter((item) =>
+    supportedUtilitySpecialties.has(toAgentSpecialty(item.specialty) ?? ""),
+  )
+  .sort((left, right) => Number(left.id) - Number(right.id))
+
 export const supportedStaticBuildAgents = supportedAgentSources.map((item) => {
   const defaultAttribute = toAgentAttribute(item.attributes[0])
   if (!defaultAttribute) {
@@ -110,6 +123,35 @@ export const supportedStaticBuildAgents = supportedAgentSources.map((item) => {
   }
 }) satisfies StaticBuildAgentCatalogEntry[]
 
+export const supportedStaticBuildUtilityAgents =
+  supportedUtilityAgentSources.map((item) => {
+    const defaultAttribute = toAgentAttribute(item.attributes[0])
+    if (!defaultAttribute) {
+      throw new RangeError(
+        `Unsupported default attribute ${item.attributes[0]} for utility agentId=${item.id}`,
+      )
+    }
+
+    const specialty = toAgentSpecialty(item.specialty)
+    if (!specialty) {
+      throw new RangeError(
+        `Unsupported specialty ${item.specialty} for utility agentId=${item.id}`,
+      )
+    }
+
+    return {
+      id: item.id,
+      name: item.name,
+      specialty,
+      aliases: unique([
+        compactNameAlias(item.name),
+        ...slugAliases(item.slug),
+        ...(agentAliasOverrides[item.id] ?? []),
+      ]),
+      defaultAttribute,
+    }
+  }) satisfies StaticBuildUtilityAgentCatalogEntry[]
+
 export const supportedStaticBuildMatrixAgents =
   supportedStaticBuildAgents.filter(
     (item) =>
@@ -133,6 +175,36 @@ export const supportedStaticBuildWEngines = (
     ): item is WEngineListSourceItem & {
       specialty: StaticBuildWEngineCatalogEntry["specialty"]
     } => Boolean(item && supportedSpecialties.has(item.specialty)),
+  )
+  .sort((left, right) => Number(left.id) - Number(right.id))
+  .map((item) => ({
+    id: item.id,
+    name: item.name,
+    specialty: item.specialty,
+    aliases: unique([
+      compactNameAlias(item.name),
+      ...slugAliases(item.slug),
+      ...(wEngineAliasOverrides[item.id] ?? []),
+    ]),
+  })) satisfies StaticBuildWEngineCatalogEntry[]
+
+export const supportedStaticBuildUtilityWEngines = (
+  wEnginesZh as WEngineListSourceItem[]
+)
+  .map((item) => {
+    const specialty = toAgentSpecialty(item.specialty.name)
+    if (!specialty) return undefined
+    return {
+      ...item,
+      specialty,
+    }
+  })
+  .filter(
+    (
+      item,
+    ): item is WEngineListSourceItem & {
+      specialty: StaticBuildWEngineCatalogEntry["specialty"]
+    } => Boolean(item && supportedUtilitySpecialties.has(item.specialty)),
   )
   .sort((left, right) => Number(left.id) - Number(right.id))
   .map((item) => ({
@@ -235,6 +307,12 @@ export function getStaticBuildAgent(
   return supportedStaticBuildAgents.find((item) => item.id === id)
 }
 
+export function getStaticBuildUtilityAgent(
+  id: string,
+): StaticBuildUtilityAgentCatalogEntry | undefined {
+  return supportedStaticBuildUtilityAgents.find((item) => item.id === id)
+}
+
 export function getStaticBuildWEngine(
   id: string | undefined,
 ): StaticBuildWEngineCatalogEntry | undefined {
@@ -242,10 +320,25 @@ export function getStaticBuildWEngine(
   return supportedStaticBuildWEngines.find((item) => item.id === id)
 }
 
+export function getStaticBuildUtilityWEngine(
+  id: string | undefined,
+): StaticBuildWEngineCatalogEntry | undefined {
+  if (!id) return undefined
+  return supportedStaticBuildUtilityWEngines.find((item) => item.id === id)
+}
+
 export function getCompatibleStaticBuildWEngines(
   specialty: StaticBuildAgentCatalogEntry["specialty"],
 ) {
   return supportedStaticBuildWEngines.filter(
+    (item) => item.specialty === specialty,
+  )
+}
+
+export function getCompatibleStaticBuildUtilityWEngines(
+  specialty: StaticBuildUtilityAgentCatalogEntry["specialty"],
+) {
+  return supportedStaticBuildUtilityWEngines.filter(
     (item) => item.specialty === specialty,
   )
 }
