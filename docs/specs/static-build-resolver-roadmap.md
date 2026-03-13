@@ -1988,9 +1988,9 @@ Batch B（已完成）：
 ### 43.3 当前状态
 
 - `V38.1` 已完成：冻结到 source-view compact helper exports
-- `V38.2` 待实现：`zzz-data` 已新增 source-view compact helper exports
-- `V38.3` 待实现：高层 source-view tool 已对齐 compact helper
-- `V38.4` 待实现：README / 总规格 / 索引 / 架构入口同步收口
+- `V38.2` 已完成：`zzz-data` 已新增 source-view compact helper exports
+- `V38.3` 已完成：高层 source-view tool 已对齐 compact helper
+- `V38.4` 已完成：README / 总规格 / 索引 / 架构入口同步收口
 
 ### 43.4 当前边界
 

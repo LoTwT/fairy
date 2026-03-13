@@ -329,6 +329,25 @@ utilityViews.summary
 
 如果你需要判断当前 source-specific utility views 是 trigger 还是 rate、是否存在 unsupported 条目、或者如何分组展示，不要再自己统计 `entries`，直接使用 `utilityViews.summary`。
 
+如果你默认不需要 source-view 的完整 `build`、只需要可直接展示的轻量结果，可直接使用：
+
+```ts
+import {
+  compactStaticBuildSourceDamageViewsResult,
+  compactStaticBuildSourceUtilityViewsResult,
+} from "zzz-data"
+
+const compactDamageViews = compactStaticBuildSourceDamageViewsResult(views)
+const compactUtilityViews =
+  compactStaticBuildSourceUtilityViewsResult(utilityViews)
+```
+
+其中：
+
+- `compactStaticBuildSourceDamageViewsResult()` 默认不展开 entry-level `build`
+- 只有显式传 `includeDetails = true` 时，才会保留完整 `build`
+- `compactStaticBuildSourceUtilityViewsResult()` 会统一返回与高层 tool 一致的轻量 utility entry shape
+
 同一份 source-specific utility / resource view contract 也已在 `zzz-agent` 中通过 `resolve-build-source-utility-views` 高层 tool 暴露，适合直接给 Agent 查询独立回能 / 喧响值条目。
 
 如果你需要一次性拿到当前构筑的全部 source-specific 条目，可使用：
