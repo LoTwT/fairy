@@ -184,7 +184,7 @@ packages/zzz-agent/
 
 - [`damage-calculation.md`](../docs/specs/damage-calculation.md) — 四种伤害类型（常规/贯穿/异常/紊乱）的乘区公式、TypeScript 类型签名与参考数值
 - [`static-build-resolver.md`](../docs/specs/static-build-resolver.md) — 静态构筑解析系统设计：effect schema、输入输出 contract、热插拔乘区管线与模块划分
-- [`static-build-resolver-roadmap.md`](../docs/specs/static-build-resolver-roadmap.md) — 执行路线与阶段状态：当前主线已推进到 `V34`；已覆盖 source views、trigger matrix、utility views、unified source-entry collection、main resolver summary、core skill matrix summary 与 core skill matrix effect summary，当前正在冻结 matrix row damage summary
+- [`static-build-resolver-roadmap.md`](../docs/specs/static-build-resolver-roadmap.md) — 执行路线与阶段状态：当前主线已推进到 `V34`；已覆盖 source views、trigger matrix、utility views、unified source-entry collection、main resolver summary、core skill matrix summary、core skill matrix effect summary 与 matrix row damage summary，`V34` 已收口
 - [`anomaly-disorder-skill-matrix-evaluation.md`](../docs/specs/anomaly-disorder-skill-matrix-evaluation.md) — `8.2` 立项评估：当前结论是不在 `8.3 dynamic value context` 之前实现异常 / 紊乱 matrix
 - [`static-build-resolver-v1.md`](../docs/specs/static-build-resolver-v1.md) — 第一版实现范围冻结：支持对象、bucket、profile、输入输出 contract 与验收标准
 - [`static-build-resolver-v2.md`](../docs/specs/static-build-resolver-v2.md) — 第二版实现范围：扩展支持名单与技能矩阵模板约定
@@ -219,7 +219,7 @@ packages/zzz-agent/
 - [`static-build-resolver-v31.md`](../docs/specs/static-build-resolver-v31.md) — 当前阶段：已收口；`ResolveStaticBuildSkillMatrixResult` 已新增稳定 `effectSummary`，把当前只存在于高层 tool 的增益清单聚合逻辑下沉到 `zzz-data`
 - [`static-build-resolver-v32.md`](../docs/specs/static-build-resolver-v32.md) — 当前阶段：已收口；`resolve-build-source-entries` 已直接透传底层 `collection.summary`
 - [`static-build-resolver-v33.md`](../docs/specs/static-build-resolver-v33.md) — 当前阶段：已收口；`resolve-build-*` 高层 tool 的 unsupported / support-scope 组装与 catalog helper 已统一到 `resolve-build-shared.ts`
-- [`static-build-resolver-v34.md`](../docs/specs/static-build-resolver-v34.md) — 当前阶段：已冻结 matrix row damage-summary contract；目标是为 `ResolveStaticBuildSkillMatrixRow` 增加稳定 `damageSummary`
+- [`static-build-resolver-v34.md`](../docs/specs/static-build-resolver-v34.md) — 当前阶段：已收口；`ResolveStaticBuildSkillMatrixRow` 已新增稳定 `damageSummary`
 
 ## 计算器模块（src/calculator/）
 

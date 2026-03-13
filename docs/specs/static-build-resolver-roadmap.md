@@ -1815,9 +1815,9 @@ Batch B（已完成）：
 ### 39.3 当前状态
 
 - `V34.1` 已完成：冻结到 matrix row damage-summary contract
-- `V34.2` 待实现：skill matrix row 已新增 `damageSummary`
-- `V34.3` 待实现：高层 tool 已对齐底层 `row.damageSummary`
-- `V34.4` 待实现：README / 总规格 / 索引 / 架构入口同步收口
+- `V34.2` 已完成：skill matrix row 已新增 `damageSummary`
+- `V34.3` 已完成：高层 tool 已对齐底层 `row.damageSummary`
+- `V34.4` 已完成：README / 总规格 / 索引 / 架构入口同步收口
 
 ### 39.4 当前边界
 
