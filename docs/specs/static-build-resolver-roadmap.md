@@ -1705,3 +1705,44 @@ Batch B（已完成）：
 2. 不新增新的 formula summary 字段
 3. 不调整 row metadata
 4. 不新增新的 snapshot key
+
+## 37. V32 source-entry summary alignment
+
+### 37.1 目标
+
+`V26` 已经把 `ResolveStaticBuildSourceEntriesResult.summary` 固定为稳定 public contract。
+
+当前高层 tool 里还保留着最后一处 summary aliasing：
+
+1. `zzz-data` 底层返回 `sourceDamageViewCount / sourceUtilityViewCount`
+2. `zzz-agent` 的 `resolve-build-source-entries` 仍会改写成 `sourceDamageCount / sourceUtilityCount`
+
+`V32` 只解决一件事：
+
+1. 让 `resolve-build-source-entries` 直接透传底层 `collection.summary`
+
+### 37.2 范围
+
+1. `V32.1` scope freeze
+2. `V32.2` source-entry summary alignment
+3. `V32.3` docs closeout
+
+### 37.3 当前状态
+
+- `V32.1` 已完成：冻结到 source-entry summary alignment
+- `V32.2` 待实现：高层 tool 直接透传 `collection.summary`
+- `V32.3` 待实现：README / 总规格 / 索引 / 架构入口同步收口
+
+### 37.4 当前边界
+
+本阶段只做：
+
+1. 去掉 `resolve-build-source-entries` 对 `collection.summary` 的高层别名改写
+2. 更新测试与文档中的 summary key
+
+显式不做：
+
+1. 不新增新的 summary key
+2. 不调整 `zzz-data` source-entry collection contract
+3. 不调整 source-entry row / metadata contract
+4. 不新增新的 source-entry coverage
