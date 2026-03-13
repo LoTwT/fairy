@@ -1127,7 +1127,7 @@ Batch B（已完成）：
 - `V18.1` 已完成：冻结到 legacy attack signature closeout，不继续扩大 contract
 - `V18.2` 已完成：inventory 与批次已冻结
 - `V18.3` 已完成：`Batch A` + `Batch B`
-- `V18.4` 未开始
+- `V18.4` 已完成：当前 contract 下已收口
 
 ### 23.4 当前边界
 
@@ -1165,6 +1165,6 @@ Batch B（已完成）：
 
 结论：
 
-1. `V18` 目标是收口最后一批 legacy attack signatures，而不是继续扩大 attack 主线公式
-2. 可静态表达的部分做 curated / partial coverage
-3. 不适合静态表达的部分固定为 source note，不新增新的 public key
+1. `V18` 已在当前 contract 下收口；最后一批 legacy attack signatures 不再作为 generic coverage gap 保留
+2. 可静态表达的部分已做 curated / partial coverage
+3. 不适合静态表达的部分已固定为 source note，且未新增新的 public key
