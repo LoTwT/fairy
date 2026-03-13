@@ -1570,3 +1570,55 @@ Batch B（已完成）：
 2. 不新增 utility / resource view coverage
 3. 不把 source views 重新并回 `source-entry collection`
 4. 不新增新的 snapshot key
+
+## 34. V29 main resolver summary contract
+
+### 34.1 目标
+
+在 `V26` 到 `V28` 依次为 collection / matrix / source views 增加稳定 `summary` 之后，当前仍停留在“裸结果对象”的主入口只剩：
+
+1. `resolveStaticBuildDamage()`
+2. `resolveStaticBuildSkillMatrix()`
+
+其中优先级更高的是 `resolveStaticBuildDamage()`，因为它仍要求上层同时读取：
+
+- `resolvedPanel`
+- `resolvedBuckets`
+- `damage.expected.breakdown`
+- `diagnostics`
+- `sourceNotes`
+- `unsupportedEffects`
+
+`V29` 只解决一件事：
+
+1. 为 `ResolveStaticBuildResult` 增加稳定 `summary`
+
+### 34.2 范围
+
+1. `V29.1` scope freeze
+2. `V29.2` resolver summary contract
+3. `V29.3` high-level tool alignment
+4. `V29.4` docs closeout
+
+### 34.3 当前状态
+
+- `V29.1` 已完成：冻结到单次 resolver summary contract
+- `V29.2` 待实现：`ResolveStaticBuildResult.summary`
+- `V29.3` 待实现：高层 tool / Agent 对齐 `build.summary`
+- `V29.4` 待实现：README / 总规格 / 索引 / 架构入口同步收口
+
+### 34.4 当前边界
+
+本阶段只做：
+
+1. 为 `ResolveStaticBuildResult` 增加稳定 `summary`
+2. 固定单次结果的公式乘区摘要语义
+3. 固定 diagnostics / sourceNotes / unsupportedEffects 的 summary 统计语义
+4. 让高层 tool / Agent 优先消费 `build.summary`
+
+显式不做：
+
+1. 不新增新的计算 bucket
+2. 不调整主伤害公式
+3. 不新增新的 snapshot key
+4. 不处理 skill matrix summary，下沉到下一阶段处理
