@@ -183,6 +183,13 @@ export function summarizeSourceNoteEntries(
   }
 }
 
+export function summarizeAssumptions(assumptions: string[]) {
+  return {
+    count: assumptions.length,
+    hasAssumptions: assumptions.length > 0,
+  }
+}
+
 function buildResolveSummary(
   result: Pick<
     ResolveStaticBuildResult,

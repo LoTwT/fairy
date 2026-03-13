@@ -8,6 +8,7 @@ import type {
 } from "./types.js"
 import {
   resolveStaticBuildDamage,
+  summarizeAssumptions,
   summarizeDiagnosticEntries,
   summarizeSourceNoteEntries,
 } from "./resolver.js"
@@ -80,14 +81,17 @@ export function resolveStaticBuildTriggerMatrix(
     ...views.entries.map((entry) => toTriggerMatrixRow(entry)),
   ].toSorted(compareTriggerMatrixRows)
 
+  const assumptions = [...new Set([...build.assumptions, ...views.assumptions])]
+
   return {
     profile: build.profile,
     mode: build.mode,
     manualBaseMode: build.manualBaseMode,
     loadout: build.loadout,
     summary: summarizeTriggerMatrixRows(rows),
+    assumptionSummary: summarizeAssumptions(assumptions),
     rows,
-    assumptions: [...new Set([...build.assumptions, ...views.assumptions])],
+    assumptions,
   }
 }
 

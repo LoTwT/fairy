@@ -54,6 +54,10 @@ describe("static build trigger matrix", () => {
     )
 
     expect(result.rows).toHaveLength(2)
+    expect(result.assumptionSummary).toEqual({
+      count: result.assumptions.length,
+      hasAssumptions: result.assumptions.length > 0,
+    })
     expect(result.summary).toMatchObject({
       rowCount: 2,
       mainFormulaCount: 1,

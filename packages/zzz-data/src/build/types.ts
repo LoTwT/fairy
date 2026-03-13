@@ -602,6 +602,11 @@ export interface StaticBuildRequirementSummary<TKey extends string = string> {
   groups: StaticBuildRequirementSummaryGroup<TKey>[]
 }
 
+export interface StaticBuildAssumptionSummary {
+  count: number
+  hasAssumptions: boolean
+}
+
 export type StaticBuildSourceDamageViewRequirementSummary =
   StaticBuildRequirementSummary<StaticBuildSourceDamageViewRequirementKind>
 
@@ -890,6 +895,7 @@ export interface ResolveStaticBuildTriggerMatrixResult {
   manualBaseMode?: StaticBuildBaseMode
   loadout: StaticBuildResolvedLoadout
   summary: StaticBuildTriggerMatrixSummary
+  assumptionSummary: StaticBuildAssumptionSummary
   rows: StaticBuildTriggerMatrixRow[]
   assumptions: string[]
 }

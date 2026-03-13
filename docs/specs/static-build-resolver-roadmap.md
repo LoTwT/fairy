@@ -3295,3 +3295,43 @@ Batch B（已完成）：
 1. 不改变 row-level `assumptions / unsupportedEffects` 的现有数组语义
 2. 不新增新的 row 分组维度
 3. 不改变 `summary`、`diagnosticSummary` 或 `sourceNoteSummary` 结构
+
+## 73. V70 trigger-matrix top-level assumption summary
+
+### 73.1 目标
+
+`trigger-entry matrix` 当前顶层已经有稳定的 `summary`，也保留了原始 `assumptions` 数组。
+
+但如果上层只想先判断“当前整张 trigger matrix 是否带 assumptions、共有多少条”，仍要自己统计数组长度。
+
+`V70` 只解决一件事：
+
+1. 为 `ResolveStaticBuildTriggerMatrixResult` 与 compact result 增加顶层 `assumptionSummary`
+
+### 73.2 范围
+
+1. `V70.1` scope freeze
+2. `V70.2` top-level assumption summary
+3. `V70.3` high-level / prompt alignment
+4. `V70.4` docs closeout
+
+### 73.3 当前状态
+
+- `V70.1` 已完成：冻结到 top-level trigger-matrix assumption summary
+- `V70.2` 已完成：`ResolveStaticBuildTriggerMatrixResult` 与 compact result 已新增 `assumptionSummary`
+- `V70.3` 已完成：高层 tool 断言与 agent prompt 已对齐 `matrix.assumptionSummary`
+- `V70.4` 已完成：相关 specs、roadmap、索引、架构文档与 README 已同步
+
+### 73.4 当前边界
+
+本阶段只做：
+
+1. 为 `ResolveStaticBuildTriggerMatrixResult` 与 compact result 增加顶层 `assumptionSummary`
+2. 从现有顶层 `assumptions` 衍生计数与布尔位
+3. 保持现有 `summary / rows / assumptions` 兼容
+
+显式不做：
+
+1. 不改变顶层 `assumptions` 的现有数组语义
+2. 不新增 row-level `assumptionSummary`
+3. 不改变 `summary` 结构

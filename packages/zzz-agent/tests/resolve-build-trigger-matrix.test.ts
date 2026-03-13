@@ -37,6 +37,10 @@ describe("resolveBuildTriggerMatrix tool", () => {
 
     expect((result as any).found).toBe(true)
     expect((result as any).matrix.rows).toHaveLength(2)
+    expect((result as any).matrix.assumptionSummary).toEqual({
+      count: (result as any).matrix.assumptions.length,
+      hasAssumptions: (result as any).matrix.assumptions.length > 0,
+    })
     expect((result as any).matrix.summary).toMatchObject({
       rowCount: 2,
       mainFormulaCount: 1,
