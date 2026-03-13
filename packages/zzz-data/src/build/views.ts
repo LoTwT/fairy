@@ -254,6 +254,9 @@ function summarizeSourceDamageViews(
     deltaCount: deltaEntries.length,
     supportedCount,
     unsupportedCount,
+    requirementSummary: summarizeSourceDamageViewRequirements(
+      entries.flatMap((entry) => entry.requirements),
+    ),
     diagnosticSummary: summarizeDiagnosticEntries(diagnostics),
     sourceNoteSummary: summarizeSourceNoteEntries(sourceNotes),
     groups,

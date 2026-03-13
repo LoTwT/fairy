@@ -209,6 +209,16 @@ views.summary
 //   deltaCount: 0,
 //   supportedCount: 1,
 //   unsupportedCount: 0,
+//   requirementSummary: {
+//     count: 2,
+//     satisfiedCount: 2,
+//     unsatisfiedCount: 0,
+//     hasUnsatisfied: false,
+//     groups: [
+//       { key: "state-flag", count: 1, satisfiedCount: 1, unsatisfiedCount: 0 },
+//       { key: "state-value", count: 1, satisfiedCount: 1, unsatisfiedCount: 0 },
+//     ],
+//   },
 //   diagnosticSummary: {
 //     count: 2,
 //     hasDiagnostics: true,
@@ -234,7 +244,7 @@ views.summary
 // }
 ```
 
-如果你需要判断当前 source-specific damage views 是 standalone 还是 delta、是否存在 unsupported 条目、如何分组展示，或者当前整组 views 是否带有 diagnostics / source notes，也不要再自己统计 `entries`，直接使用 `views.summary`。
+如果你需要判断当前 source-specific damage views 是 standalone 还是 delta、是否存在 unsupported 条目、如何分组展示，或者当前整组 views 是否带有 requirement / diagnostics / source notes，也不要再自己统计 `entries`，直接使用 `views.summary`。
 
 如果你只做单条 source-specific damage view 的结果展示，不需要再通过 `includeDetails` 读取 `entry.build.summary`，优先直接使用：
 

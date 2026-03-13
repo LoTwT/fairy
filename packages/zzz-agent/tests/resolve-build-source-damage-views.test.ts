@@ -43,6 +43,26 @@ describe("resolveBuildSourceDamageViews tool", () => {
       deltaCount: 0,
       supportedCount: 1,
       unsupportedCount: 0,
+      requirementSummary: {
+        count: 2,
+        satisfiedCount: 2,
+        unsatisfiedCount: 0,
+        hasUnsatisfied: false,
+        groups: [
+          {
+            key: "state-flag",
+            count: 1,
+            satisfiedCount: 1,
+            unsatisfiedCount: 0,
+          },
+          {
+            key: "state-value",
+            count: 1,
+            satisfiedCount: 1,
+            unsatisfiedCount: 0,
+          },
+        ],
+      },
       diagnosticSummary: {
         count: 3,
         hasDiagnostics: true,
@@ -260,6 +280,20 @@ describe("resolveBuildSourceDamageViews tool", () => {
       deltaCount: 1,
       supportedCount: 1,
       unsupportedCount: 0,
+      requirementSummary: {
+        count: 2,
+        satisfiedCount: 2,
+        unsatisfiedCount: 0,
+        hasUnsatisfied: false,
+        groups: [
+          {
+            key: "dynamic-value",
+            count: 2,
+            satisfiedCount: 2,
+            unsatisfiedCount: 0,
+          },
+        ],
+      },
       diagnosticSummary: {
         count: 2,
         hasDiagnostics: true,
@@ -367,6 +401,26 @@ describe("resolveBuildSourceDamageViews tool", () => {
       deltaCount: 1,
       supportedCount: 1,
       unsupportedCount: 0,
+      requirementSummary: {
+        count: 2,
+        satisfiedCount: 2,
+        unsatisfiedCount: 0,
+        hasUnsatisfied: false,
+        groups: [
+          {
+            key: "panel-value",
+            count: 1,
+            satisfiedCount: 1,
+            unsatisfiedCount: 0,
+          },
+          {
+            key: "scenario-value",
+            count: 1,
+            satisfiedCount: 1,
+            unsatisfiedCount: 0,
+          },
+        ],
+      },
     })
     expect((result as any).views.entries[0]).toMatchObject({
       id: "vivian-exflow",

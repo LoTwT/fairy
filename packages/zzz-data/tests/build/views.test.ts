@@ -48,6 +48,13 @@ describe("static build source damage views", () => {
       deltaCount: 0,
       supportedCount: 0,
       unsupportedCount: 0,
+      requirementSummary: {
+        count: 0,
+        satisfiedCount: 0,
+        unsatisfiedCount: 0,
+        hasUnsatisfied: false,
+        groups: [],
+      },
       diagnosticSummary: {
         count: 0,
         hasDiagnostics: false,
@@ -114,6 +121,26 @@ describe("static build source damage views", () => {
       deltaCount: 0,
       supportedCount: 1,
       unsupportedCount: 0,
+      requirementSummary: {
+        count: 2,
+        satisfiedCount: 2,
+        unsatisfiedCount: 0,
+        hasUnsatisfied: false,
+        groups: [
+          {
+            key: "state-flag",
+            count: 1,
+            satisfiedCount: 1,
+            unsatisfiedCount: 0,
+          },
+          {
+            key: "state-value",
+            count: 1,
+            satisfiedCount: 1,
+            unsatisfiedCount: 0,
+          },
+        ],
+      },
       diagnosticSummary: {
         count: 2,
         hasDiagnostics: true,
@@ -269,6 +296,26 @@ describe("static build source damage views", () => {
       deltaCount: 0,
       supportedCount: 1,
       unsupportedCount: 0,
+      requirementSummary: {
+        count: 2,
+        satisfiedCount: 2,
+        unsatisfiedCount: 0,
+        hasUnsatisfied: false,
+        groups: [
+          {
+            key: "state-flag",
+            count: 1,
+            satisfiedCount: 1,
+            unsatisfiedCount: 0,
+          },
+          {
+            key: "state-value",
+            count: 1,
+            satisfiedCount: 1,
+            unsatisfiedCount: 0,
+          },
+        ],
+      },
       diagnosticSummary: {
         count: 1,
         hasDiagnostics: true,
@@ -340,6 +387,32 @@ describe("static build source damage views", () => {
       deltaCount: 1,
       supportedCount: 1,
       unsupportedCount: 0,
+      requirementSummary: {
+        count: 3,
+        satisfiedCount: 3,
+        unsatisfiedCount: 0,
+        hasUnsatisfied: false,
+        groups: [
+          {
+            key: "dynamic-flag",
+            count: 1,
+            satisfiedCount: 1,
+            unsatisfiedCount: 0,
+          },
+          {
+            key: "dynamic-count",
+            count: 1,
+            satisfiedCount: 1,
+            unsatisfiedCount: 0,
+          },
+          {
+            key: "dynamic-value",
+            count: 1,
+            satisfiedCount: 1,
+            unsatisfiedCount: 0,
+          },
+        ],
+      },
       groups: [
         {
           key: "delta",
@@ -461,6 +534,20 @@ describe("static build source damage views", () => {
       deltaCount: 1,
       supportedCount: 1,
       unsupportedCount: 0,
+      requirementSummary: {
+        count: 2,
+        satisfiedCount: 2,
+        unsatisfiedCount: 0,
+        hasUnsatisfied: false,
+        groups: [
+          {
+            key: "dynamic-value",
+            count: 2,
+            satisfiedCount: 2,
+            unsatisfiedCount: 0,
+          },
+        ],
+      },
     })
     expect(result.entries[0]).toMatchObject({
       id: "aria-exflow",
@@ -518,6 +605,28 @@ describe("static build source damage views", () => {
     })
 
     expect(result.entries).toHaveLength(1)
+    expect(result.summary).toMatchObject({
+      requirementSummary: {
+        count: 2,
+        satisfiedCount: 2,
+        unsatisfiedCount: 0,
+        hasUnsatisfied: false,
+        groups: [
+          {
+            key: "panel-value",
+            count: 1,
+            satisfiedCount: 1,
+            unsatisfiedCount: 0,
+          },
+          {
+            key: "scenario-value",
+            count: 1,
+            satisfiedCount: 1,
+            unsatisfiedCount: 0,
+          },
+        ],
+      },
+    })
     expect(result.entries[0]).toMatchObject({
       id: "vivian-exflow",
       supported: true,
