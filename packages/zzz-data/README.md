@@ -175,7 +175,27 @@ const views = resolveStaticBuildSourceDamageViews({
 
 views.entries[0]
 views.entries[0].metadata.stableKey
+
+views.summary
+// {
+//   entryCount: 1,
+//   standaloneCount: 1,
+//   deltaCount: 0,
+//   supportedCount: 1,
+//   unsupportedCount: 0,
+//   groups: [
+//     {
+//       key: "standalone",
+//       label: "独立结算条目",
+//       count: 1,
+//       supportedCount: 1,
+//       unsupportedCount: 0,
+//     },
+//   ],
+// }
 ```
+
+如果你需要判断当前 source-specific damage views 是 standalone 还是 delta、是否存在 unsupported 条目、或者如何分组展示，不要再自己统计 `entries`，直接使用 `views.summary`。
 
 同一份 source-specific view contract 也已在 `zzz-agent` 中通过 `resolve-build-source-damage-views` 高层 tool 暴露，适合直接给 Agent 查询独立额外结算条目。
 
@@ -263,18 +283,26 @@ const utilityViews = resolveStaticBuildSourceUtilityViews({
 
 utilityViews.entries[0]
 utilityViews.entries[0].metadata.stableKey
+utilityViews.summary
 // {
-//   id: "lunar-noviluna-energy-refund",
-//   utilityType: "energy-refund",
-//   resolutionMode: "trigger",
-//   targetScope: "self",
-//   value: 3,
-//   unit: "energy",
-//   triggerLabel: "发动[强化特殊技]",
-//   cooldownSeconds: 12,
-//   ...
+//   entryCount: 1,
+//   triggerCount: 1,
+//   rateCount: 0,
+//   supportedCount: 1,
+//   unsupportedCount: 0,
+//   groups: [
+//     {
+//       key: "trigger",
+//       label: "触发型 utility 条目",
+//       count: 1,
+//       supportedCount: 1,
+//       unsupportedCount: 0,
+//     },
+//   ],
 // }
 ```
+
+如果你需要判断当前 source-specific utility views 是 trigger 还是 rate、是否存在 unsupported 条目、或者如何分组展示，不要再自己统计 `entries`，直接使用 `utilityViews.summary`。
 
 同一份 source-specific utility / resource view contract 也已在 `zzz-agent` 中通过 `resolve-build-source-utility-views` 高层 tool 暴露，适合直接给 Agent 查询独立回能 / 喧响值条目。
 

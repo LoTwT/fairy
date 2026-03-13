@@ -184,7 +184,7 @@ packages/zzz-agent/
 
 - [`damage-calculation.md`](../docs/specs/damage-calculation.md) — 四种伤害类型（常规/贯穿/异常/紊乱）的乘区公式、TypeScript 类型签名与参考数值
 - [`static-build-resolver.md`](../docs/specs/static-build-resolver.md) — 静态构筑解析系统设计：effect schema、输入输出 contract、热插拔乘区管线与模块划分
-- [`static-build-resolver-roadmap.md`](../docs/specs/static-build-resolver-roadmap.md) — 执行路线与阶段状态：当前主线已推进到 `V28`；已覆盖 source views、trigger matrix、utility views 与 unified source-entry collection，下一阶段聚焦 source-view summary contracts
+- [`static-build-resolver-roadmap.md`](../docs/specs/static-build-resolver-roadmap.md) — 执行路线与阶段状态：当前主线已推进到 `V28`；已覆盖 source views、trigger matrix、utility views 与 unified source-entry collection，`V28` 已完成 source-view summary 收口
 - [`anomaly-disorder-skill-matrix-evaluation.md`](../docs/specs/anomaly-disorder-skill-matrix-evaluation.md) — `8.2` 立项评估：当前结论是不在 `8.3 dynamic value context` 之前实现异常 / 紊乱 matrix
 - [`static-build-resolver-v1.md`](../docs/specs/static-build-resolver-v1.md) — 第一版实现范围冻结：支持对象、bucket、profile、输入输出 contract 与验收标准
 - [`static-build-resolver-v2.md`](../docs/specs/static-build-resolver-v2.md) — 第二版实现范围：扩展支持名单与技能矩阵模板约定
@@ -213,7 +213,7 @@ packages/zzz-agent/
 - [`static-build-resolver-v25.md`](../docs/specs/static-build-resolver-v25.md) — 当前阶段：已收口；`时光切片` 已按触发类型拆成 `喧响值 + 能量` 的结构化 utility entries，并把 utility-only 查询与 damage-agent catalog 解耦
 - [`static-build-resolver-v26.md`](../docs/specs/static-build-resolver-v26.md) — 当前阶段：已收口；unified source-entry collection 已新增稳定 `summary`，并固定 utility-only / mixed collection 的分组与排序语义
 - [`static-build-resolver-v27.md`](../docs/specs/static-build-resolver-v27.md) — 当前阶段：已收口；trigger-entry matrix 已新增稳定 `summary`，并固定 `main-formula / source-view` 的分组与排序语义
-- [`static-build-resolver-v28.md`](../docs/specs/static-build-resolver-v28.md) — 当前阶段：已完成 scope freeze；目标是为 source damage / utility views 增加稳定 `summary`，并固定 standalone / delta / trigger / rate 的分组与排序语义
+- [`static-build-resolver-v28.md`](../docs/specs/static-build-resolver-v28.md) — 当前阶段：已收口；source damage / utility views 已新增稳定 `summary`，并固定 standalone / delta / trigger / rate 的分组与排序语义
 
 ## 计算器模块（src/calculator/）
 

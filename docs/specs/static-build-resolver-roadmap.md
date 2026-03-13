@@ -1553,7 +1553,7 @@ Batch B（已完成）：
 - `V28.2` 已完成：`resolveStaticBuildSourceDamageViews()` 已返回稳定 `summary`
 - `V28.3` 已完成：`resolveStaticBuildSourceUtilityViews()` 已返回稳定 `summary`
 - `V28.4` 已完成：高层 tool / Agent 已直接消费 `views.summary`
-- `V28.5` 未开始
+- `V28.5` 已完成：README / 总规格 / 索引 / 架构入口已同步收口
 
 ### 33.4 当前边界
 
