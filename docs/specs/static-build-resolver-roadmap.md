@@ -1168,3 +1168,35 @@ Batch B（已完成）：
 1. `V18` 已在当前 contract 下收口；最后一批 legacy attack signatures 不再作为 generic coverage gap 保留
 2. 可静态表达的部分已做 curated / partial coverage
 3. 不适合静态表达的部分已固定为 source note，且未新增新的 public key
+
+## 24. V19 legacy utility engine closeout
+
+### 24.1 目标
+
+在不新增 public key 的前提下，把最后两个只提供能量回复的旧通用音擎从 generic coverage-gap 收口成 source-aware coverage。
+
+### 24.2 范围
+
+1. `V19.1` scope freeze
+2. `V19.2` utility engine inventory
+3. `V19.3` source-note closeout
+4. `V19.4` closeout
+
+### 24.3 当前状态
+
+- `V19.1` 已完成：冻结到最后两个 utility-only 旧通用音擎
+- `V19.2` 已完成：inventory 已冻结
+- `V19.3` 未开始
+- `V19.4` 未开始
+
+### 24.4 当前范围
+
+本阶段唯一目标：
+
+- `「月相」-朔`
+- `「电磁暴」-叁式`
+
+结论：
+
+1. 这两把音擎只提供能量回复，不进入当前 static damage 主公式
+2. `V19` 只做 source note / source-aware unsupported 收口，不新开能量 contract
