@@ -790,3 +790,4 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 39. `V39` trigger row source metadata：当前阶段已收口；`trigger-entry matrix row` 已新增稳定来源追溯字段 `templateSource / sourceType / sourceId / sourceStableKey`，上层不再需要依赖 `label` 或额外反查 `sourceViewId`，见 [静态构筑解析系统 V39](./static-build-resolver-v39.md)
 40. `V40` requirement summaries：当前阶段已收口；`source-damage-view entry` 与 `trigger-entry matrix row` 已新增稳定 `requirementSummary`，compact helper 与高层 tool 也已对齐，不再需要上层手工统计 `requirements[]`，见 [静态构筑解析系统 V40](./static-build-resolver-v40.md)
 41. `V41` diagnostic summaries：当前阶段已收口；`source-damage-view entry` 与 `trigger-entry matrix row` 已新增稳定 `diagnosticSummary`，compact helper 与高层 tool 也已对齐，不再需要上层手工统计 `diagnostics[]` 的 kind / owner 分布，见 [静态构筑解析系统 V41](./static-build-resolver-v41.md)
+42. `V42` source-note summaries：当前阶段已冻结范围；下一步只为 `source-damage-view entry` 与 `trigger-entry matrix row` 补稳定的 `sourceNoteSummary`，不改现有 `sourceNotes[]`，见 [静态构筑解析系统 V42](./static-build-resolver-v42.md)

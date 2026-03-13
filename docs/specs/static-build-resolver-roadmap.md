@@ -2132,3 +2132,45 @@ Batch B（已完成）：
 1. 不改变 `diagnostics[]` 原始数组
 2. 不新增新的 coverage
 3. 不改 `ResolveStaticBuildResult.summary` 的既有结构
+
+## 47. V42 source-note summaries
+
+### 47.1 目标
+
+`V41` 收口后，`source-damage-view` 与 `trigger-entry matrix row` 仍只有逐条 `sourceNotes[]`：
+
+1. 上层若只想知道是否存在 `missing-input / process-only / research-only`，仍需手工遍历
+2. 若要判断 source notes 主要来自 `loadout / finalPanel / scenario / source / process`，也只能自行统计
+
+`V42` 只解决一件事：
+
+1. 为 source-view / trigger row 增加稳定 source-note summary
+
+### 47.2 范围
+
+1. `V42.1` scope freeze
+2. `V42.2` source-view source-note-summary contract
+3. `V42.3` trigger-row alignment
+4. `V42.4` docs closeout
+
+### 47.3 当前状态
+
+- `V42.1` 已完成：冻结到 source-note-summary contract
+- `V42.2` 未开始
+- `V42.3` 未开始
+- `V42.4` 未开始
+
+### 47.4 当前边界
+
+本阶段只做：
+
+1. 为 source-damage-view entry 增加 `sourceNoteSummary`
+2. 为 trigger row 增加 `sourceNoteSummary`
+3. 保持现有 `sourceNotes[]` 与 compact helper 兼容
+
+显式不做：
+
+1. 不改变 `sourceNotes[]` 原始数组
+2. 不新增新的 source-note status
+3. 不新增新的 coverage
+4. 不改 `ResolveStaticBuildResult.summary` 的既有结构
