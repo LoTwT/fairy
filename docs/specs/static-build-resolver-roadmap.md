@@ -1664,3 +1664,44 @@ Batch B（已完成）：
 2. 不新增 effect summary contract
 3. 不调整 row metadata
 4. 不新增新的 snapshot key
+
+## 36. V31 core skill matrix effect summary
+
+### 36.1 目标
+
+`V30` 完成后，当前还停留在高层 tool 临时聚合逻辑里的 skill matrix 主结果只剩：
+
+- `effectSummary`
+
+`V31` 只解决一件事：
+
+1. 为 `ResolveStaticBuildSkillMatrixResult` 增加稳定 `effectSummary`
+
+### 36.2 范围
+
+1. `V31.1` scope freeze
+2. `V31.2` matrix effect-summary contract
+3. `V31.3` high-level tool alignment
+4. `V31.4` docs closeout
+
+### 36.3 当前状态
+
+- `V31.1` 已完成：冻结到 core skill matrix effect-summary contract
+- `V31.2` 待实现：`ResolveStaticBuildSkillMatrixResult` 新增稳定 `effectSummary`
+- `V31.3` 待实现：高层 tool 对齐底层 `matrix.effectSummary`
+- `V31.4` 待实现：README / 总规格 / 索引 / 架构入口同步收口
+
+### 36.4 当前边界
+
+本阶段只做：
+
+1. 为 `ResolveStaticBuildSkillMatrixResult` 增加稳定 `effectSummary`
+2. 固定 skill matrix applied effect summary 的分组与聚合语义
+3. 让高层 tool 直接透传底层 `matrix.effectSummary`
+
+显式不做：
+
+1. 不新增 skill matrix coverage
+2. 不新增新的 formula summary 字段
+3. 不调整 row metadata
+4. 不新增新的 snapshot key

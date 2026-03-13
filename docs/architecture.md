@@ -184,7 +184,7 @@ packages/zzz-agent/
 
 - [`damage-calculation.md`](../docs/specs/damage-calculation.md) — 四种伤害类型（常规/贯穿/异常/紊乱）的乘区公式、TypeScript 类型签名与参考数值
 - [`static-build-resolver.md`](../docs/specs/static-build-resolver.md) — 静态构筑解析系统设计：effect schema、输入输出 contract、热插拔乘区管线与模块划分
-- [`static-build-resolver-roadmap.md`](../docs/specs/static-build-resolver-roadmap.md) — 执行路线与阶段状态：当前主线已推进到 `V30`；已覆盖 source views、trigger matrix、utility views、unified source-entry collection、main resolver summary 与 core skill matrix summary
+- [`static-build-resolver-roadmap.md`](../docs/specs/static-build-resolver-roadmap.md) — 执行路线与阶段状态：当前主线已推进到 `V31`；已覆盖 source views、trigger matrix、utility views、unified source-entry collection、main resolver summary 与 core skill matrix summary，当前正在冻结 core skill matrix effect summary
 - [`anomaly-disorder-skill-matrix-evaluation.md`](../docs/specs/anomaly-disorder-skill-matrix-evaluation.md) — `8.2` 立项评估：当前结论是不在 `8.3 dynamic value context` 之前实现异常 / 紊乱 matrix
 - [`static-build-resolver-v1.md`](../docs/specs/static-build-resolver-v1.md) — 第一版实现范围冻结：支持对象、bucket、profile、输入输出 contract 与验收标准
 - [`static-build-resolver-v2.md`](../docs/specs/static-build-resolver-v2.md) — 第二版实现范围：扩展支持名单与技能矩阵模板约定
@@ -216,6 +216,7 @@ packages/zzz-agent/
 - [`static-build-resolver-v28.md`](../docs/specs/static-build-resolver-v28.md) — 当前阶段：已收口；source damage / utility views 已新增稳定 `summary`，并固定 standalone / delta / trigger / rate 的分组与排序语义
 - [`static-build-resolver-v29.md`](../docs/specs/static-build-resolver-v29.md) — 当前阶段：已收口；`ResolveStaticBuildResult` 已新增稳定 `summary`，收口单场景结果的公式乘区摘要与 diagnostics / sourceNotes / unsupportedEffects 的统计语义
 - [`static-build-resolver-v30.md`](../docs/specs/static-build-resolver-v30.md) — 当前阶段：已收口；`ResolveStaticBuildSkillMatrixResult` 已新增稳定 `summary`，把当前只存在于高层 tool 的矩阵摘要下沉到 `zzz-data`
+- [`static-build-resolver-v31.md`](../docs/specs/static-build-resolver-v31.md) — 当前阶段：已冻结 core skill matrix effect-summary contract；目标是为 `ResolveStaticBuildSkillMatrixResult` 增加稳定 `effectSummary`，把当前只存在于高层 tool 的增益清单聚合逻辑下沉到 `zzz-data`
 
 ## 计算器模块（src/calculator/）
 
