@@ -29,6 +29,22 @@ describe("static build source utility views", () => {
     })
 
     expect(result.entries).toHaveLength(1)
+    expect(result.summary).toMatchObject({
+      entryCount: 1,
+      triggerCount: 1,
+      rateCount: 0,
+      supportedCount: 1,
+      unsupportedCount: 0,
+      groups: [
+        {
+          key: "trigger",
+          label: "按次触发条目",
+          count: 1,
+          supportedCount: 1,
+          unsupportedCount: 0,
+        },
+      ],
+    })
     expect(result.entries[0]).toMatchObject({
       id: "lunar-noviluna-energy-refund",
       metadata: {
@@ -80,6 +96,22 @@ describe("static build source utility views", () => {
     })
 
     expect(result.entries).toHaveLength(1)
+    expect(result.summary).toMatchObject({
+      entryCount: 1,
+      triggerCount: 0,
+      rateCount: 1,
+      supportedCount: 1,
+      unsupportedCount: 0,
+      groups: [
+        {
+          key: "rate",
+          label: "按速率条目",
+          count: 1,
+          supportedCount: 1,
+          unsupportedCount: 0,
+        },
+      ],
+    })
     expect(result.entries[0]).toMatchObject({
       id: "flamemaker-shaker-offfield-energy-regen",
       metadata: {
@@ -108,6 +140,13 @@ describe("static build source utility views", () => {
     expect(result.loadout.agent.name).toBe("妮可")
     expect(result.loadout.wEngine?.name).toBe("时光切片")
     expect(result.entries).toHaveLength(8)
+    expect(result.summary).toMatchObject({
+      entryCount: 8,
+      triggerCount: 8,
+      rateCount: 0,
+      supportedCount: 8,
+      unsupportedCount: 0,
+    })
     expect(result.assumptions).toEqual([])
   })
 

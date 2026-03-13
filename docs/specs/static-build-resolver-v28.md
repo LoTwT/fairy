@@ -130,6 +130,6 @@
 
 - `V28.1` 已完成：冻结到 source-view summary contract
 - `V28.2` 已完成：`resolveStaticBuildSourceDamageViews()` 已返回稳定 `summary`
-- `V28.3` 未开始
+- `V28.3` 已完成：`resolveStaticBuildSourceUtilityViews()` 已返回稳定 `summary`
 - `V28.4` 未开始
 - `V28.5` 未开始

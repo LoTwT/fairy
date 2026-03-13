@@ -613,8 +613,28 @@ export interface StaticBuildSourceUtilityViewEntry {
   assumptions: string[]
 }
 
+export type StaticBuildSourceUtilityViewGroupKey = "trigger" | "rate"
+
+export interface StaticBuildSourceUtilityViewGroupSummary {
+  key: StaticBuildSourceUtilityViewGroupKey
+  label: string
+  count: number
+  supportedCount: number
+  unsupportedCount: number
+}
+
+export interface StaticBuildSourceUtilityViewSummary {
+  entryCount: number
+  triggerCount: number
+  rateCount: number
+  supportedCount: number
+  unsupportedCount: number
+  groups: StaticBuildSourceUtilityViewGroupSummary[]
+}
+
 export interface ResolveStaticBuildSourceUtilityViewsResult {
   loadout: StaticBuildResolvedLoadout
+  summary: StaticBuildSourceUtilityViewSummary
   entries: StaticBuildSourceUtilityViewEntry[]
   assumptions: string[]
 }

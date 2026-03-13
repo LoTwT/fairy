@@ -4,6 +4,8 @@ import type {
   StaticBuildCatalogEntry,
   StaticBuildResolvedLoadout,
   StaticBuildSourceUtilityViewEntry,
+  StaticBuildSourceUtilityViewGroupKey,
+  StaticBuildSourceUtilityViewSummary,
   StaticBuildValueContext,
 } from "./types.js"
 import {
@@ -66,6 +68,14 @@ export const supportedStaticBuildSourceUtilityViewWEngines =
   supportedStaticBuildUtilityWEngines
     .filter((item) => utilityViewWEngineIdSet.has(item.id))
     .sort((left, right) => left.name.localeCompare(right.name, "zh-Hans-CN"))
+
+const sourceUtilityViewGroupLabels: Record<
+  StaticBuildSourceUtilityViewGroupKey,
+  string
+> = {
+  trigger: "按次触发条目",
+  rate: "按速率条目",
+}
 
 export function hasStaticBuildSourceUtilityViewCoverage(wEngineId?: string) {
   return !!wEngineId && utilityViewWEngineIdSet.has(wEngineId)
@@ -285,13 +295,16 @@ export function resolveStaticBuildSourceUtilityViews(
   input: ResolveStaticBuildSourceUtilityViewsInput,
 ): ResolveStaticBuildSourceUtilityViewsResult {
   const loadout = resolveLoadout(input)
-  const entries = resolveWEngineUtilityViews(loadout)
+  const entries = resolveWEngineUtilityViews(loadout).toSorted(
+    compareSourceUtilityViews,
+  )
   const compatibleWEngines = getCompatibleStaticBuildUtilityWEngines(
     loadout.agent.specialty,
   )
 
   return {
     loadout,
+    summary: summarizeSourceUtilityViews(entries),
     entries,
     assumptions:
       entries.length > 0 || compatibleWEngines.length > 0
@@ -299,5 +312,63 @@ export function resolveStaticBuildSourceUtilityViews(
         : [
             `${loadout.agent.name} 当前特性下暂无已收录的 utility-only 音擎条目。`,
           ],
+  }
+}
+
+function compareSourceUtilityViews(
+  left: StaticBuildSourceUtilityViewEntry,
+  right: StaticBuildSourceUtilityViewEntry,
+) {
+  const leftGroupOrder = getSourceUtilityViewGroupOrder(left.resolutionMode)
+  const rightGroupOrder = getSourceUtilityViewGroupOrder(right.resolutionMode)
+  if (leftGroupOrder !== rightGroupOrder) {
+    return leftGroupOrder - rightGroupOrder
+  }
+
+  return left.metadata.stableKey.localeCompare(right.metadata.stableKey)
+}
+
+function getSourceUtilityViewGroupOrder(
+  key: StaticBuildSourceUtilityViewGroupKey,
+) {
+  return key === "trigger" ? 0 : 1
+}
+
+function summarizeSourceUtilityViews(
+  entries: StaticBuildSourceUtilityViewEntry[],
+): StaticBuildSourceUtilityViewSummary {
+  const triggerEntries = entries.filter(
+    (entry) => entry.resolutionMode === "trigger",
+  )
+  const rateEntries = entries.filter((entry) => entry.resolutionMode === "rate")
+  const supportedCount = entries.filter((entry) => entry.supported).length
+  const unsupportedCount = entries.length - supportedCount
+
+  const groups: StaticBuildSourceUtilityViewSummary["groups"] = []
+  for (const key of [
+    "trigger",
+    "rate",
+  ] as const satisfies StaticBuildSourceUtilityViewGroupKey[]) {
+    const groupEntries = entries.filter((entry) => entry.resolutionMode === key)
+    if (groupEntries.length === 0) continue
+    const groupSupportedCount = groupEntries.filter(
+      (entry) => entry.supported,
+    ).length
+    groups.push({
+      key,
+      label: sourceUtilityViewGroupLabels[key],
+      count: groupEntries.length,
+      supportedCount: groupSupportedCount,
+      unsupportedCount: groupEntries.length - groupSupportedCount,
+    })
+  }
+
+  return {
+    entryCount: entries.length,
+    triggerCount: triggerEntries.length,
+    rateCount: rateEntries.length,
+    supportedCount,
+    unsupportedCount,
+    groups,
   }
 }
