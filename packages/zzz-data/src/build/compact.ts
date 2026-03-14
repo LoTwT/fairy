@@ -516,10 +516,10 @@ export interface StaticBuildCompactSkillMatrixRow {
 }
 
 export interface CompactStaticBuildSkillMatrixResult {
-  profile: ResolveStaticBuildSkillMatrixResult["profile"]
-  mode: ResolveStaticBuildSkillMatrixResult["mode"]
-  manualBaseMode?: ResolveStaticBuildSkillMatrixResult["manualBaseMode"]
-  loadout: ResolveStaticBuildSkillMatrixResult["loadout"]
+  profile: CompactStaticBuildProfile
+  mode: CompactStaticBuildMode
+  manualBaseMode?: CompactStaticBuildBaseMode
+  loadout: CompactStaticBuildLoadout
   summary: CompactStaticBuildSkillMatrixSummary
   effectSummary: CompactStaticBuildSkillMatrixEffectSummaryItem[]
   requirementSummary: CompactStaticBuildSourceDamageViewRequirementSummary
@@ -1252,10 +1252,10 @@ export interface CompactStaticBuildTriggerMatrixSummary {
 }
 
 export interface CompactStaticBuildTriggerMatrixResult {
-  profile: ResolveStaticBuildTriggerMatrixResult["profile"]
-  mode: ResolveStaticBuildTriggerMatrixResult["mode"]
-  manualBaseMode?: ResolveStaticBuildTriggerMatrixResult["manualBaseMode"]
-  loadout: ResolveStaticBuildTriggerMatrixResult["loadout"]
+  profile: CompactStaticBuildProfile
+  mode: CompactStaticBuildMode
+  manualBaseMode?: CompactStaticBuildBaseMode
+  loadout: CompactStaticBuildLoadout
   summary: CompactStaticBuildTriggerMatrixSummary
   effectSummary: CompactStaticBuildTriggerMatrixEffectSummaryItem[]
   requirementSummary: CompactStaticBuildSourceDamageViewRequirementSummary
@@ -1474,10 +1474,10 @@ export function compactStaticBuildSkillMatrixResult(
   includeDetails = false,
 ): CompactStaticBuildSkillMatrixResult {
   return {
-    profile: matrix.profile,
+    profile: compactStaticBuildProfile(matrix.profile),
     mode: matrix.mode,
     manualBaseMode: matrix.manualBaseMode,
-    loadout: matrix.loadout,
+    loadout: compactStaticBuildLoadout(matrix.loadout),
     summary: compactStaticBuildSkillMatrixSummary(
       matrix.summary,
       includeDetails,
@@ -1617,10 +1617,10 @@ export function compactStaticBuildTriggerMatrixResult(
   includeDetails = false,
 ): CompactStaticBuildTriggerMatrixResult {
   return {
-    profile: matrix.profile,
+    profile: compactStaticBuildProfile(matrix.profile),
     mode: matrix.mode,
     manualBaseMode: matrix.manualBaseMode,
-    loadout: matrix.loadout,
+    loadout: compactStaticBuildLoadout(matrix.loadout),
     summary: compactStaticBuildTriggerMatrixSummary(matrix.summary),
     effectSummary: matrix.effectSummary.map((item) =>
       compactStaticBuildAppliedRowEffectSummaryItem(item),

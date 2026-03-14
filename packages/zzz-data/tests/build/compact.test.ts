@@ -91,6 +91,10 @@ describe("static build compact helpers", () => {
 
     const compact = compactStaticBuildSkillMatrixResult(matrix)
 
+    expect(compact.profile).toEqual(matrix.profile)
+    expect(compact.mode).toBe(matrix.mode)
+    expect(compact.manualBaseMode).toBe(matrix.manualBaseMode)
+    expect(compact.loadout).toEqual(matrix.loadout)
     expect(compact.rows).toHaveLength(21)
     expect(compact.requirementSummary).toEqual({
       count: 0,
@@ -200,6 +204,10 @@ describe("static build compact helpers", () => {
 
     const compact = compactStaticBuildTriggerMatrixResult(matrix)
 
+    expect(compact.profile).toEqual(matrix.profile)
+    expect(compact.mode).toBe(matrix.mode)
+    expect(compact.manualBaseMode).toBe(matrix.manualBaseMode)
+    expect(compact.loadout).toEqual(matrix.loadout)
     expect(compact.assumptions).toBeUndefined()
     expect(compact.rows[0]?.assumptions).toBeUndefined()
     expect(compact.rows[0]?.requirements).toBeUndefined()
