@@ -71,6 +71,7 @@ it("keeps screenshot summary by default", async () => {
   expect(base.includes("触发条目矩阵")).toBe(true)
   expect(base.includes("matrix.summary.hasSourceViews")).toBe(true)
   expect(base.includes("matrix.summary.groups")).toBe(true)
+  expect(base.includes("matrix.requirementSummary")).toBe(true)
   expect(base.includes("matrix.summary.requirementSummary")).toBe(true)
   expect(base.includes("matrix.summary.caveatSummary")).toBe(true)
   expect(base.includes("matrix.diagnosticSummary")).toBe(true)

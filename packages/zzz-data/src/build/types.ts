@@ -951,6 +951,7 @@ export interface ResolveStaticBuildTriggerMatrixResult {
   manualBaseMode?: StaticBuildBaseMode
   loadout: StaticBuildResolvedLoadout
   summary: StaticBuildTriggerMatrixSummary
+  requirementSummary: StaticBuildSourceDamageViewRequirementSummary
   caveatSummary: StaticBuildEntryCaveatSummary
   diagnosticSummary: StaticBuildDiagnosticSummary
   sourceNoteSummary: StaticBuildSourceNoteSummary

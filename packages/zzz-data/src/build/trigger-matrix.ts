@@ -93,6 +93,7 @@ export function resolveStaticBuildTriggerMatrix(
     manualBaseMode: build.manualBaseMode,
     loadout: build.loadout,
     summary,
+    requirementSummary: summary.requirementSummary,
     caveatSummary: summarizeTriggerMatrixCaveats(rows, assumptions),
     diagnosticSummary: summary.diagnosticSummary,
     sourceNoteSummary: summary.sourceNoteSummary,

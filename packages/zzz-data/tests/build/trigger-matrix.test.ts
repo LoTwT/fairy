@@ -72,6 +72,7 @@ describe("static build trigger matrix", () => {
       hasAssumptions: result.assumptions.length > 0,
       hasUnsupported: false,
     })
+    expect(result.requirementSummary).toEqual(result.summary.requirementSummary)
     expect(result.diagnosticSummary).toEqual(result.summary.diagnosticSummary)
     expect(result.sourceNoteSummary).toEqual(result.summary.sourceNoteSummary)
     expect(result.assumptionSummary).toEqual({

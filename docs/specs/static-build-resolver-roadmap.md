@@ -4904,6 +4904,50 @@ trigger matrix / skill matrix 一致的顶层兼容字段。
 1. 不改变 `summary.diagnosticSummary / summary.sourceNoteSummary` 的语义
 2. 不改变 `rows[*].diagnosticSummary / rows[*].sourceNoteSummary` 的语义
 3. 不改变 `groups[*].diagnosticSummary / groups[*].sourceNoteSummary` 的语义
+
+## 117. V114 trigger-matrix top-level requirement summary alignment
+
+`V113` 收口后，`trigger-entry matrix` 顶层已经把
+`diagnosticSummary / sourceNoteSummary` 固定为稳定兼容字段。
+
+但同一路径顶层仍缺最后一组与 `summary` 对齐的 requirement 聚合：
+
+1. `matrix.summary.requirementSummary` 已稳定存在
+2. `matrix.requirementSummary` 仍不存在
+
+### 117.1 目标
+
+1. 给 `trigger-entry matrix` 顶层补齐稳定 `requirementSummary`
+2. 保持 `matrix.summary.requirementSummary` 原语义不变
+3. 不引入新的 requirement aggregate 类型
+
+### 117.2 范围
+
+1. `V114.1` scope freeze
+2. `V114.2` runtime contract alignment
+3. `V114.3` compact / tool assertion alignment
+4. `V114.4` prompt / README / docs closeout
+
+### 117.3 当前状态
+
+- `V114.1` 已完成：冻结到 trigger-matrix top-level requirement summary alignment
+- `V114.2` 已完成：底层 result 与 compact trigger matrix 已补齐 `requirementSummary`
+- `V114.3` 已完成：高层 trigger-matrix tool 断言已对齐顶层 `matrix.requirementSummary`
+- `V114.4` 已完成：相关 specs、roadmap、索引、架构文档与 README 已同步
+
+### 117.4 当前边界
+
+本阶段只做：
+
+1. 在 `ResolveStaticBuildTriggerMatrixResult` 顶层新增 `requirementSummary`
+2. 让 compact trigger matrix 透传该字段
+3. 明确上层优先读取 `matrix.summary.requirementSummary`，兼容读取 `matrix.requirementSummary`
+
+显式不做：
+
+1. 不改变 `summary.requirementSummary` 的语义
+2. 不改变 `rows[*].requirementSummary` 的语义
+3. 不改变 `groups[*].requirementSummary` 的语义
 4. 不新增新的 aggregate 类型
 
 ### 103.2 目标
