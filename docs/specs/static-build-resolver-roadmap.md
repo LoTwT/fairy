@@ -4706,6 +4706,59 @@ Batch B（已完成）：
 2. 不改变 standalone source-damage-view / source-utility-view contract
 3. 不新增 source-entry collection 的新类型
 
+## 113. V110 source-entry top-level diagnostic/source-note summary alignment
+
+`V109` 收口后，unified `source-entry collection` 已把 mixed entry 的
+`requirementSummary` 视为正式公共 contract。
+
+但 `ResolveStaticBuildSourceEntriesResult` 顶层仍只暴露：
+
+- `summary`
+- `caveatSummary`
+- `assumptionSummary`
+
+而没有和其他 result 类型对齐的：
+
+- `diagnosticSummary`
+- `sourceNoteSummary`
+
+这导致上层如果只想判断整组 mixed collection 是否存在 diagnostics /
+source notes，仍要退回 `collection.summary.*`，缺少与 source views /
+trigger matrix / skill matrix 一致的顶层兼容字段。
+
+### 113.1 目标
+
+1. 给 unified `source-entry collection` 顶层补齐稳定的 `diagnosticSummary / sourceNoteSummary`
+2. 保持 `collection.summary.diagnosticSummary / collection.summary.sourceNoteSummary` 原语义不变
+
+### 113.2 范围
+
+1. `V110.1` scope freeze
+2. `V110.2` runtime contract alignment
+3. `V110.3` compact / tool assertion alignment
+4. `V110.4` prompt / README / docs closeout
+
+### 113.3 当前状态
+
+- `V110.1` 已完成：冻结到 source-entry top-level diagnostic/source-note summary alignment
+- `V110.2` 已完成：底层 result 与 compact collection 已补齐 `diagnosticSummary / sourceNoteSummary`
+- `V110.3` 已完成：高层 source-entry tool 断言已对齐顶层 `collection.diagnosticSummary / collection.sourceNoteSummary`
+- `V110.4` 已完成：相关 specs、roadmap、索引、架构文档与 README 已同步
+
+### 113.4 当前边界
+
+本阶段只做：
+
+1. 在 `ResolveStaticBuildSourceEntriesResult` 顶层新增 `diagnosticSummary / sourceNoteSummary`
+2. 让 compact source-entry collection 透传这两个字段
+3. 明确上层优先读取 `collection.summary.*`，兼容读取 `collection.*`
+
+显式不做：
+
+1. 不改变 `summary.diagnosticSummary / summary.sourceNoteSummary` 的语义
+2. 不改变 `entry.diagnosticSummary / entry.sourceNoteSummary` 的语义
+3. 不新增新的 aggregate 类型
+
 ### 103.2 目标
 
 1. 为 `rows[*]` 增加稳定 `caveatSummary`

@@ -779,6 +779,7 @@ collection.summary
 - 如果只想先判断某一条 mixed entry 是否带 source notes，也优先读取 `entry.sourceNoteSummary`，不要再手工遍历 `entry.sourceNotes`
 - 如果只想先判断某一条 mixed entry 是否带 assumptions，也优先读取 `entry.assumptionSummary`，不要再手工统计 `entry.assumptions.length`
 - 如果只想先判断某一条 mixed entry 是否带 caveat，也优先读取 `entry.caveatSummary`，不要再手工组合 `entry.assumptions.length` 与 `entry.supported`
+- 如果只想先判断整组 mixed collection 是否存在 diagnostics / source notes，也优先读取 `collection.summary.diagnosticSummary / collection.summary.sourceNoteSummary`；如需兼容旧调用方，也可以继续读取 `collection.diagnosticSummary / collection.sourceNoteSummary`
 
 如果你需要分别读取 mixed collection 里 source-damage-view / source-utility-view 两类条目的 requirement 分布，也不要自己遍历 `entries[*].requirements`，直接读取：
 

@@ -75,14 +75,17 @@ export function resolveStaticBuildSourceEntries(
 
   const sortedEntries = entries.toSorted(compareSourceEntries)
   const uniqueAssumptions = [...new Set(assumptions)]
+  const summary = summarizeSourceEntries(sortedEntries, uniqueAssumptions)
 
   return {
     loadout,
-    summary: summarizeSourceEntries(sortedEntries, uniqueAssumptions),
+    summary,
     caveatSummary: summarizeSourceEntryCaveats(
       sortedEntries,
       uniqueAssumptions,
     ),
+    diagnosticSummary: summary.diagnosticSummary,
+    sourceNoteSummary: summary.sourceNoteSummary,
     assumptionSummary: summarizeSourceEntryAssumptions(uniqueAssumptions),
     entries: sortedEntries,
     assumptions: uniqueAssumptions,

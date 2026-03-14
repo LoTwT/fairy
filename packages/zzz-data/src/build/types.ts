@@ -861,6 +861,8 @@ export interface ResolveStaticBuildSourceEntriesResult {
   loadout: StaticBuildResolvedLoadout
   summary: StaticBuildSourceEntryCollectionSummary
   caveatSummary: StaticBuildEntryCaveatSummary
+  diagnosticSummary: StaticBuildDiagnosticSummary
+  sourceNoteSummary: StaticBuildSourceNoteSummary
   assumptionSummary: StaticBuildAssumptionSummary
   entries: StaticBuildSourceEntry[]
   assumptions: string[]

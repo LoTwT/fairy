@@ -154,6 +154,15 @@ it("keeps screenshot summary by default", async () => {
   )
   expect(
     base.includes(
+      "如果只想先判断整组 mixed collection 是否存在 diagnostics / source notes",
+    ),
+  ).toBe(true)
+  expect(base.includes("collection.summary.diagnosticSummary")).toBe(true)
+  expect(base.includes("collection.summary.sourceNoteSummary")).toBe(true)
+  expect(base.includes("collection.diagnosticSummary")).toBe(true)
+  expect(base.includes("collection.sourceNoteSummary")).toBe(true)
+  expect(
+    base.includes(
       "collection.summary.groups[*].sourceDamageRequirementSummary",
     ),
   ).toBe(true)
