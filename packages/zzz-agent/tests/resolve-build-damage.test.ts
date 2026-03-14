@@ -37,13 +37,11 @@ describe("resolveBuildDamage tool", () => {
     expect(
       (result as any).build.summary.diagnosticGroups.length,
     ).toBeGreaterThan(0)
-    expect((result as any).build.diagnosticSummary.count).toBe(
-      (result as any).build.diagnostics.length,
-    )
+    expect((result as any).build.diagnosticSummary.count).toBeGreaterThan(0)
     expect((result as any).build.diagnosticSummary.hasDefaultedInput).toBe(true)
-    expect((result as any).build.sourceNoteSummary.count).toBe(
-      (result as any).build.sourceNotes.length,
-    )
+    expect(
+      (result as any).build.sourceNoteSummary.count,
+    ).toBeGreaterThanOrEqual(0)
     expect((result as any).build.effectSummary.length).toBeGreaterThan(0)
     expect(
       (result as any).build.effectSummary[0].bucket.length,
@@ -57,6 +55,8 @@ describe("resolveBuildDamage tool", () => {
     expect(
       (result as any).build.resolvedBuckets.skillMultiplierFactor,
     ).toBeCloseTo(1.25, 4)
+    expect((result as any).build.diagnostics).toBeUndefined()
+    expect((result as any).build.sourceNotes).toBeUndefined()
     expect((result as any).build.damageParams).toBeUndefined()
     expect((result as any).build.trace).toBeUndefined()
   })
@@ -212,7 +212,7 @@ describe("resolveBuildDamage tool", () => {
     expect((result as any).build.assumptions.join(" ")).not.toContain(
       "比利 当前未收录 curated",
     )
-    expect((result as any).build.sourceNotes.length).toBeGreaterThan(0)
+    expect((result as any).build.sourceNoteSummary.count).toBeGreaterThan(0)
   })
 
   it("supports Zero Anby curated effects through aliases", async () => {
@@ -287,6 +287,7 @@ describe("resolveBuildDamage tool", () => {
     const result = await runTool(resolveBuildDamage, {
       agent: "猫又",
       wEngine: "「月相」-朔",
+      includeDetails: true,
       finalPanel: {
         attack: 2800,
         baseAttack: 1100,
@@ -324,6 +325,7 @@ describe("resolveBuildDamage tool", () => {
     const result = await runTool(resolveBuildDamage, {
       agent: "格莉丝",
       wEngine: "「电磁暴」-叁式",
+      includeDetails: true,
       finalPanel: {
         attack: 3000,
         baseAttack: 1200,
@@ -834,6 +836,7 @@ describe("resolveBuildDamage tool", () => {
     const result = await runTool(resolveBuildDamage, {
       agent: "爱丽丝",
       wEngine: "十方锻星",
+      includeDetails: true,
       mode: "full-buff",
       agentLevel: 60,
       finalPanel: {
@@ -883,6 +886,7 @@ describe("resolveBuildDamage tool", () => {
   it("returns structured defaulted-input diagnostics through the high-level resolver", async () => {
     const result = await runTool(resolveBuildDamage, {
       agent: "柏妮思",
+      includeDetails: true,
       mode: "full-buff",
       finalPanel: {
         attack: 3100,

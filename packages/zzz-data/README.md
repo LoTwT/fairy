@@ -225,7 +225,7 @@ compact.trace
 // undefined
 ```
 
-当前 `compactStaticBuildResult(result, true)` 才会暴露 `trace / damageParams`。
+当前 `compactStaticBuildResult(result, true)` 才会暴露 `trace / damageParams / diagnostics / sourceNotes`。
 
 如果你需要拿到不应并入主 anomaly / disorder 公式的独立额外结算条目，可使用：
 

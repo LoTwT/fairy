@@ -5651,6 +5651,37 @@ caveatSummary` 这些兼容字段补齐。
 3. 保留 `diagnostics / sourceNotes / assumptions / unsupportedEffects`
 4. 高层 tool、prompt 与 README 对齐 compact 语义
 
+## 134. V131 single-build compact detail gating
+
+`V130` 收口后，单次 `resolveBuildDamage` 已默认返回 compact build，但仍默认携带 `diagnostics / sourceNotes` 两类明细数组。
+
+当前状态仍不够对称：
+
+- `skill-matrix`
+- `trigger-matrix`
+- `source-damage-view`
+- `source-utility-view`
+
+这些路径默认都优先暴露 `*Summary`，只有在需要时才展开更多 detail。
+
+`V131` 只解决一件事：
+
+1. 把 compact single-build 的 `diagnostics / sourceNotes` 也移到 `includeDetails=true`
+
+### 134.1 阶段范围
+
+1. `V131.1` scope freeze
+2. `V131.2` runtime/type contract alignment
+3. `V131.3` tool assertion / prompt alignment
+4. `V131.4` docs closeout
+
+### 134.2 当前状态
+
+- `V131.1` 已完成：冻结到 single-build compact detail gating
+- `V131.2` 已完成：`CompactStaticBuildResult` 默认已不再携带 `diagnostics / sourceNotes`
+- `V131.3` 已完成：高层 `resolveBuildDamage` 测试与 prompt 已对齐 `includeDetails=true`
+- `V131.4` 已完成：README、roadmap、索引与架构文档已同步
+
 显式不做：
 
 1. 不改变 `ResolveStaticBuildResult.summary` 的既有结构
