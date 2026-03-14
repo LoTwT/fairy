@@ -32,6 +32,7 @@ import type {
   StaticBuildSkillMatrixRowMeta,
   StaticBuildSourceDamageViewEffectSummaryItem,
   StaticBuildSourceDamageViewEntry,
+  StaticBuildSourceDamageViewRequirement,
   StaticBuildSourceDamageViewRequirementKind,
   StaticBuildSourceEntry,
   StaticBuildSourceNoteEntry,
@@ -42,6 +43,7 @@ import type {
   StaticBuildSourceNoteStatus,
   StaticBuildSourceNoteSummary,
   StaticBuildSourceUtilityViewEntry,
+  StaticBuildSourceUtilityViewRequirement,
   StaticBuildSourceUtilityViewRequirementKind,
   StaticBuildTriggerMatrixEffectSummaryItem,
   StaticBuildTriggerMatrixRow,
@@ -214,6 +216,18 @@ export type CompactStaticBuildSourceDamageViewRequirementSummary =
 
 export type CompactStaticBuildSourceUtilityViewRequirementSummary =
   CompactStaticBuildRequirementSummary<StaticBuildSourceUtilityViewRequirementKind>
+
+export interface CompactStaticBuildSourceDamageViewRequirement {
+  kind: StaticBuildSourceDamageViewRequirementKind
+  key: string
+  satisfied: boolean
+}
+
+export interface CompactStaticBuildSourceUtilityViewRequirement {
+  kind: StaticBuildSourceUtilityViewRequirementKind
+  key: string
+  satisfied: boolean
+}
 
 export interface CompactStaticBuildResolveEffectSummaryItem {
   effectId: string
@@ -594,6 +608,26 @@ export function compactStaticBuildRequirementSummary<
   }
 }
 
+export function compactStaticBuildSourceDamageViewRequirement(
+  requirement: StaticBuildSourceDamageViewRequirement,
+): CompactStaticBuildSourceDamageViewRequirement {
+  return {
+    kind: requirement.kind,
+    key: requirement.key,
+    satisfied: requirement.satisfied,
+  }
+}
+
+export function compactStaticBuildSourceUtilityViewRequirement(
+  requirement: StaticBuildSourceUtilityViewRequirement,
+): CompactStaticBuildSourceUtilityViewRequirement {
+  return {
+    kind: requirement.kind,
+    key: requirement.key,
+    satisfied: requirement.satisfied,
+  }
+}
+
 export function compactStaticBuildResolveEffectSummaryItem(
   item: StaticBuildResolveEffectSummaryItem,
 ): CompactStaticBuildResolveEffectSummaryItem {
@@ -646,7 +680,7 @@ export interface StaticBuildCompactTriggerMatrixRow {
   supported: boolean
   metadata: StaticBuildTriggerMatrixRowMeta
   effectSummary: CompactStaticBuildTriggerMatrixEffectSummaryItem[]
-  requirements?: StaticBuildTriggerMatrixRow["requirements"]
+  requirements?: CompactStaticBuildSourceDamageViewRequirement[]
   requirementSummary: CompactStaticBuildSourceDamageViewRequirementSummary
   diagnostics?: CompactStaticBuildDiagnosticEntry[]
   diagnosticSummary: CompactStaticBuildDiagnosticSummary
@@ -715,7 +749,7 @@ export interface StaticBuildCompactSourceDamageViewEntry {
   sourceId: string
   damageType: StaticBuildSourceDamageViewEntry["damageType"]
   resolutionMode: StaticBuildSourceDamageViewEntry["resolutionMode"]
-  requirements?: StaticBuildSourceDamageViewEntry["requirements"]
+  requirements?: CompactStaticBuildSourceDamageViewRequirement[]
   requirementSummary: CompactStaticBuildSourceDamageViewRequirementSummary
   diagnostics?: CompactStaticBuildDiagnosticEntry[]
   diagnosticSummary: CompactStaticBuildDiagnosticSummary
@@ -770,7 +804,7 @@ export interface StaticBuildCompactSourceUtilityViewEntry {
   utilityType: StaticBuildSourceUtilityViewEntry["utilityType"]
   resolutionMode: StaticBuildSourceUtilityViewEntry["resolutionMode"]
   targetScope: StaticBuildSourceUtilityViewEntry["targetScope"]
-  requirements?: StaticBuildSourceUtilityViewEntry["requirements"]
+  requirements?: CompactStaticBuildSourceUtilityViewRequirement[]
   requirementSummary: CompactStaticBuildSourceUtilityViewRequirementSummary
   value: number
   unit: StaticBuildSourceUtilityViewEntry["unit"]
@@ -1174,7 +1208,9 @@ export function compactStaticBuildTriggerMatrixRow(
     ...(includeDetails
       ? {
           assumptions: row.assumptions,
-          requirements: row.requirements,
+          requirements: row.requirements?.map((item) =>
+            compactStaticBuildSourceDamageViewRequirement(item),
+          ),
           diagnostics: row.diagnostics?.map((entry) =>
             compactStaticBuildDiagnosticEntry(entry),
           ),
@@ -1409,7 +1445,9 @@ export function compactStaticBuildSourceDamageViewEntry(
     ...(includeDetails
       ? {
           assumptions: entry.assumptions,
-          requirements: entry.requirements,
+          requirements: entry.requirements?.map((item) =>
+            compactStaticBuildSourceDamageViewRequirement(item),
+          ),
           diagnostics: entry.diagnostics?.map((item) =>
             compactStaticBuildDiagnosticEntry(item),
           ),
@@ -1563,7 +1601,9 @@ export function compactStaticBuildSourceUtilityViewEntry(
     ...(includeDetails
       ? {
           assumptions: entry.assumptions,
-          requirements: entry.requirements,
+          requirements: entry.requirements?.map((item) =>
+            compactStaticBuildSourceUtilityViewRequirement(item),
+          ),
           diagnostics: entry.diagnostics?.map((item) =>
             compactStaticBuildDiagnosticEntry(item),
           ),
@@ -1614,7 +1654,9 @@ export function compactStaticBuildSourceEntry(
       ...(includeDetails
         ? {
             assumptions: entry.assumptions,
-            requirements: entry.requirements,
+            requirements: entry.requirements?.map((item) =>
+              compactStaticBuildSourceDamageViewRequirement(item),
+            ),
             diagnostics: entry.diagnostics?.map((item) =>
               compactStaticBuildDiagnosticEntry(item),
             ),
@@ -1662,7 +1704,9 @@ export function compactStaticBuildSourceEntry(
     ...(includeDetails
       ? {
           assumptions: entry.assumptions,
-          requirements: entry.requirements,
+          requirements: entry.requirements?.map((item) =>
+            compactStaticBuildSourceUtilityViewRequirement(item),
+          ),
           diagnostics: entry.diagnostics?.map((item) =>
             compactStaticBuildDiagnosticEntry(item),
           ),

@@ -7004,6 +7004,39 @@ caveatSummary` 这些兼容字段补齐。
 - `V175.3` 已完成：现有测试与 runtime 校验已覆盖
 - `V175.4` 已完成：roadmap、索引与架构文档已同步
 
+## 179. V176 explicit compact requirement detail entries
+
+`V175` 收口后，compact contract 中仍直接复用 raw detail entry type 的显式缺口主要集中在 `requirements[]`：
+
+- `trigger-matrix row.requirements`
+- `source-damage-view entry.requirements`
+- `source-utility-view entry.requirements`
+- mixed `source-entry entry.requirements`
+
+`V176` 只解决一件事：
+
+1. 把上述 detail requirement entry 改成显式 compact item types
+
+### 179.1 分阶段
+
+1. `V176.1` scope freeze
+2. `V176.2` runtime/type contract alignment
+3. `V176.3` tests / prompt alignment
+4. `V176.4` docs closeout
+
+### 179.2 非目标
+
+1. 不改变这些 requirement item 的字段值
+2. 不改变 `includeDetails` gating 语义
+3. 不改变现有 `requirementSummary` 聚合统计语义
+
+### 179.3 当前状态
+
+- `V176.1` 已完成：冻结到 explicit compact requirement detail entries
+- `V176.2` 已完成：compact `requirements[]` 已改为显式 compact item types
+- `V176.3` 已完成：现有测试与 runtime 校验已覆盖
+- `V176.4` 已完成：roadmap、索引与架构文档已同步
+
 ## 174. V171 explicit compact top-level summary effect summaries
 
 `V170` 收口后，compact contract 中下一批仍直接复用 raw effect summary item type 的显式缺口主要集中在 top-level `summary`：
