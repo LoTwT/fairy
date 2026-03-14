@@ -258,6 +258,25 @@ describe("resolveBuildSourceUtilityViews tool", () => {
         hasAssumptions: true,
       },
     })
+    expect((result as any).views.entries[0].diagnostics).toBeUndefined()
+    expect((result as any).views.entries[0].sourceNotes).toBeUndefined()
+  })
+
+  it("returns utility entry detail arrays only when includeDetails is true", async () => {
+    const result = await runTool(resolveBuildSourceUtilityViews, {
+      agent: "猫又",
+      wEngine: "「月相」-朔",
+      wEngineRefinement: 1,
+      includeDetails: true,
+    })
+
+    expect((result as any).found).toBe(true)
+    expect(Array.isArray((result as any).views.entries[0].diagnostics)).toBe(
+      true,
+    )
+    expect(Array.isArray((result as any).views.entries[0].sourceNotes)).toBe(
+      true,
+    )
   })
 
   it("rejects specialty-incompatible utility w-engines", async () => {

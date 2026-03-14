@@ -128,6 +128,11 @@ it("keeps screenshot summary by default", async () => {
   expect(base.includes("views.summary.triggerCount")).toBe(true)
   expect(base.includes("views.summary.rateCount")).toBe(true)
   expect(base.includes("views.summary.requirementSummary")).toBe(true)
+  expect(
+    base.includes(
+      "resolveBuildSourceUtilityViews 默认返回 compact entries，不会默认附带 `entry.diagnostics / entry.sourceNotes`",
+    ),
+  ).toBe(true)
   expect(base.includes("整组 utility views 是否带 effect summary")).toBe(true)
   expect(base.includes("整组 utility views 是否带 caveat")).toBe(true)
   expect(

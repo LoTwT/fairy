@@ -670,5 +670,26 @@ describe("static build compact helpers", () => {
         ownerGroups: [],
       },
     })
+    expect(compact.entries[0]?.diagnostics).toBeUndefined()
+    expect(compact.entries[0]?.sourceNotes).toBeUndefined()
+  })
+
+  it("keeps source-utility entry details only when requested", () => {
+    const views = resolveStaticBuildSourceUtilityViews({
+      loadout: {
+        agentId: "1021",
+        wEngineId: "12003",
+        wEngineRefinement: 1,
+      },
+    })
+
+    const compact = compactStaticBuildSourceUtilityViewsResult(views, true)
+
+    expect(compact.entries[0]?.diagnostics).toEqual(
+      views.entries[0]?.diagnostics,
+    )
+    expect(compact.entries[0]?.sourceNotes).toEqual(
+      views.entries[0]?.sourceNotes,
+    )
   })
 })

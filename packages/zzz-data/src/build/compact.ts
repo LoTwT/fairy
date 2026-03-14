@@ -213,9 +213,9 @@ export interface StaticBuildCompactSourceUtilityViewEntry {
   conditionLabel?: string
   cooldownSeconds?: number
   summary: StaticBuildSourceUtilityViewEntry["summary"]
-  diagnostics: StaticBuildDiagnosticEntry[]
+  diagnostics?: StaticBuildDiagnosticEntry[]
   diagnosticSummary: StaticBuildSourceUtilityViewEntry["diagnosticSummary"]
-  sourceNotes: StaticBuildSourceNoteEntry[]
+  sourceNotes?: StaticBuildSourceNoteEntry[]
   sourceNoteSummary: StaticBuildSourceUtilityViewEntry["sourceNoteSummary"]
   effectSummary: StaticBuildSourceUtilityViewEntry["effectSummary"]
   caveatSummary: StaticBuildSourceUtilityViewEntry["caveatSummary"]
@@ -428,6 +428,7 @@ export function compactStaticBuildSourceDamageViewsResult(
 
 export function compactStaticBuildSourceUtilityViewsResult(
   views: ResolveStaticBuildSourceUtilityViewsResult,
+  includeDetails = false,
 ): CompactStaticBuildSourceUtilityViewsResult {
   return {
     loadout: views.loadout,
@@ -443,6 +444,7 @@ export function compactStaticBuildSourceUtilityViewsResult(
       (entry) =>
         compactStaticBuildSourceEntry(
           entry,
+          includeDetails,
         ) as StaticBuildCompactSourceUtilityViewEntry,
     ),
   }
@@ -500,13 +502,17 @@ export function compactStaticBuildSourceEntry(
     conditionLabel: entry.conditionLabel,
     cooldownSeconds: entry.cooldownSeconds,
     summary: entry.summary,
-    diagnostics: entry.diagnostics,
     diagnosticSummary: entry.diagnosticSummary,
-    sourceNotes: entry.sourceNotes,
     sourceNoteSummary: entry.sourceNoteSummary,
     effectSummary: entry.effectSummary,
     caveatSummary: entry.caveatSummary,
     assumptionSummary: entry.assumptionSummary,
     assumptions: entry.assumptions,
+    ...(includeDetails
+      ? {
+          diagnostics: entry.diagnostics,
+          sourceNotes: entry.sourceNotes,
+        }
+      : {}),
   }
 }

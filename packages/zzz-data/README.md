@@ -828,6 +828,28 @@ utilityViews.entries[0].sourceNoteSummary
 // }
 ```
 
+如果你在应用层或 Agent 层默认不需要 entry-level 明细数组，也可以直接使用 utility-view compact helper：
+
+```ts
+import {
+  compactStaticBuildSourceUtilityViewsResult,
+  resolveStaticBuildSourceUtilityViews,
+} from "zzz-data"
+
+const utilityViews = resolveStaticBuildSourceUtilityViews(/* ... */)
+const compactUtilityViews =
+  compactStaticBuildSourceUtilityViewsResult(utilityViews)
+
+compactUtilityViews.entries[0].diagnosticSummary
+compactUtilityViews.entries[0].sourceNoteSummary
+compactUtilityViews.entries[0].diagnostics
+// undefined
+compactUtilityViews.entries[0].sourceNotes
+// undefined
+```
+
+当前 `compactStaticBuildSourceUtilityViewsResult(utilityViews, true)` 才会暴露 `entry.diagnostics / entry.sourceNotes`。
+
 如果你默认不需要 source-view 的完整 `build`、只需要可直接展示的轻量结果，可直接使用：
 
 ```ts

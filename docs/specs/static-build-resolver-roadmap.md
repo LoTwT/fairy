@@ -5763,3 +5763,27 @@ caveatSummary` 这些兼容字段补齐。
 - `V134.2` 已完成：`StaticBuildCompactSourceDamageViewEntry` 默认已不再携带 `diagnostics / sourceNotes`
 - `V134.3` 已完成：高层 `resolveBuildSourceDamageViews` 测试与 prompt 已对齐 `includeDetails=true`
 - `V134.4` 已完成：README、roadmap、索引与架构文档已同步
+
+## 138. V135 source-utility-view compact entry detail gating
+
+`V134` 收口后，compact `source-damage-view entries` 已默认不再携带 `diagnostics / sourceNotes`。
+
+但 `resolveBuildSourceUtilityViews` 默认返回的 compact utility entries 仍默认携带这两类明细数组，而 entry 级 `diagnosticSummary / sourceNoteSummary / requirementSummary / assumptionSummary / caveatSummary / effectSummary / summary` 已经齐全。
+
+`V135` 只解决一件事：
+
+1. 把 compact source-utility-view entries 的 `diagnostics / sourceNotes` 也移到 `includeDetails=true`
+
+### 138.1 范围
+
+1. `V135.1` scope freeze
+2. `V135.2` runtime/type contract alignment
+3. `V135.3` tool assertion / prompt alignment
+4. `V135.4` docs closeout
+
+### 138.2 当前状态
+
+- `V135.1` 已完成：冻结到 source-utility-view compact entry detail gating
+- `V135.2` 已完成：`StaticBuildCompactSourceUtilityViewEntry` 默认已不再携带 `diagnostics / sourceNotes`
+- `V135.3` 已完成：高层 `resolveBuildSourceUtilityViews` 测试与 prompt 已对齐 `includeDetails=true`
+- `V135.4` 已完成：README、roadmap、索引与架构文档已同步

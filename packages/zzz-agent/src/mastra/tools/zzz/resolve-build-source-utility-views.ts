@@ -1,4 +1,5 @@
 import { createTool } from "@mastra/core/tools"
+import { z } from "zod"
 import {
   compactStaticBuildSourceUtilityViewsResult,
   getCompatibleStaticBuildUtilityWEngines,
@@ -23,7 +24,15 @@ export const resolveBuildSourceUtilityViews = createTool({
   id: "resolve-build-source-utility-views",
   description:
     "查询 source-specific utility / resource 条目。当前覆盖稳定可表达的音擎回能、后场回能速率与喧响值条目，不并回主伤害公式。",
-  inputSchema: resolveBuildSourceUtilityInputSchema,
+  inputSchema: resolveBuildSourceUtilityInputSchema.extend({
+    includeDetails: z
+      .boolean()
+      .optional()
+      .default(false)
+      .describe(
+        "是否返回 utility entry 的 entry.diagnostics / entry.sourceNotes 等明细数组。默认 false，以避免上下文过大。",
+      ),
+  }),
   execute: async (input) => {
     const agent = findCatalogItem(
       supportedStaticBuildUtilityAgents,
@@ -121,7 +130,10 @@ export const resolveBuildSourceUtilityViews = createTool({
 
     return {
       found: true,
-      views: compactStaticBuildSourceUtilityViewsResult(views),
+      views: compactStaticBuildSourceUtilityViewsResult(
+        views,
+        input.includeDetails,
+      ),
     }
   },
 })
