@@ -7354,6 +7354,37 @@ caveatSummary` 这些兼容字段补齐。
 - `V186.3` 已完成：现有测试与 runtime 校验已覆盖
 - `V186.4` 已完成：roadmap、索引与架构文档已同步
 
+## 190. V187 explicit compact skill-matrix row metadata
+
+`V186` 收口后，compact `skill-matrix` row 里仍直接复用 raw metadata type 的稳定缺口是：
+
+1. `StaticBuildCompactSkillMatrixRow.metadata`
+
+`V187` 只解决这一件事：
+
+1. 把 compact `skill-matrix row.metadata` 改为显式 compact type
+
+### 190.1 分阶段
+
+1. `V187.1` scope freeze
+2. `V187.2` runtime/type contract alignment
+3. `V187.3` tests / prompt alignment
+4. `V187.4` docs closeout
+
+### 190.2 非目标
+
+1. 不改变 row 的字段值
+2. 不改变 `row.summary`
+3. 不改变 `row.resolvedBuckets`
+4. 不改变 `includeDetails` 语义
+
+### 190.3 当前状态
+
+- `V187.1` 已完成：冻结到 explicit compact skill-matrix row metadata
+- `V187.2` 已完成：compact `skill-matrix row.metadata` 已改为显式 compact type
+- `V187.3` 已完成：现有测试与 runtime 校验已覆盖
+- `V187.4` 已完成：roadmap、索引与架构文档已同步
+
 ## 174. V171 explicit compact top-level summary effect summaries
 
 `V170` 收口后，compact contract 中下一批仍直接复用 raw effect summary item type 的显式缺口主要集中在 top-level `summary`：

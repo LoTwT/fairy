@@ -494,7 +494,7 @@ export interface StaticBuildCompactSkillMatrixRow {
   id: string
   group: string
   label: string
-  metadata: StaticBuildSkillMatrixRowMeta
+  metadata: CompactStaticBuildSkillMatrixRowMeta
   skillTag: StaticBuildSkillMatrixRow["skillTag"]
   damageType: StaticBuildSkillMatrixRow["damageType"]
   attribute: StaticBuildSkillMatrixRow["attribute"]
@@ -530,6 +530,29 @@ export interface CompactStaticBuildSkillMatrixResult {
   assumptions?: string[]
   unsupportedEffects?: string[]
   rows: StaticBuildCompactSkillMatrixRow[]
+}
+
+export interface CompactStaticBuildSkillMatrixRowMeta {
+  order: number
+  actionName: string
+  skillName: string
+  qualifiers: string[]
+  canonicalLabel: string
+  stableKey: string
+  templateSource: StaticBuildSkillMatrixRowMeta["templateSource"]
+  sourceSkillTypeId: number
+  sourceStatId: string
+  sourceStatName: string
+  sourceOccurrence: number
+  attributeSource: StaticBuildSkillMatrixRowMeta["attributeSource"]
+  templateCombatTags: string[]
+  entryType: StaticBuildSkillMatrixRowMeta["entryType"]
+  aggregationType: StaticBuildSkillMatrixRowMeta["aggregationType"]
+  isAdditionalDamage: boolean
+  variantAxis?: StaticBuildSkillMatrixRowMeta["variantAxis"]
+  segmentLabel?: string
+  segmentIndex?: number
+  targetSize?: StaticBuildSkillMatrixRowMeta["targetSize"]
 }
 
 export interface CompactStaticBuildSkillMatrixGroupSummary {
@@ -1595,7 +1618,7 @@ export function compactStaticBuildSkillMatrixRow(
     id: row.id,
     group: row.group,
     label: row.label,
-    metadata: row.metadata,
+    metadata: compactStaticBuildSkillMatrixRowMeta(row.metadata),
     skillTag: row.skillTag,
     damageType: row.damageType,
     attribute: row.attribute,
@@ -1630,6 +1653,33 @@ export function compactStaticBuildSkillMatrixRow(
           build: row.build,
         }
       : {}),
+  }
+}
+
+export function compactStaticBuildSkillMatrixRowMeta(
+  metadata: StaticBuildSkillMatrixRowMeta,
+): CompactStaticBuildSkillMatrixRowMeta {
+  return {
+    order: metadata.order,
+    actionName: metadata.actionName,
+    skillName: metadata.skillName,
+    qualifiers: [...metadata.qualifiers],
+    canonicalLabel: metadata.canonicalLabel,
+    stableKey: metadata.stableKey,
+    templateSource: metadata.templateSource,
+    sourceSkillTypeId: metadata.sourceSkillTypeId,
+    sourceStatId: metadata.sourceStatId,
+    sourceStatName: metadata.sourceStatName,
+    sourceOccurrence: metadata.sourceOccurrence,
+    attributeSource: metadata.attributeSource,
+    templateCombatTags: [...metadata.templateCombatTags],
+    entryType: metadata.entryType,
+    aggregationType: metadata.aggregationType,
+    isAdditionalDamage: metadata.isAdditionalDamage,
+    variantAxis: metadata.variantAxis,
+    segmentLabel: metadata.segmentLabel,
+    segmentIndex: metadata.segmentIndex,
+    targetSize: metadata.targetSize,
   }
 }
 

@@ -108,6 +108,7 @@ describe("static build compact helpers", () => {
     )
     expect(compact.assumptions).toBeUndefined()
     expect(compact.unsupportedEffects).toBeUndefined()
+    expect(compact.rows[0]?.metadata).toEqual(matrix.rows[0]?.metadata)
     expect(compact.rows[0]?.build).toBeUndefined()
     expect(compact.rows[0]?.assumptions).toBeUndefined()
     expect(compact.rows[0]?.unsupportedEffects).toBeUndefined()
