@@ -130,6 +130,7 @@ export interface StaticBuildCompactSourceUtilityViewEntry {
   triggerLabel?: string
   conditionLabel?: string
   cooldownSeconds?: number
+  summary: StaticBuildSourceUtilityViewEntry["summary"]
   diagnostics: StaticBuildDiagnosticEntry[]
   diagnosticSummary: StaticBuildSourceUtilityViewEntry["diagnosticSummary"]
   sourceNotes: StaticBuildSourceNoteEntry[]
@@ -368,6 +369,7 @@ export function compactStaticBuildSourceEntry(
     triggerLabel: entry.triggerLabel,
     conditionLabel: entry.conditionLabel,
     cooldownSeconds: entry.cooldownSeconds,
+    summary: entry.summary,
     diagnostics: entry.diagnostics,
     diagnosticSummary: entry.diagnosticSummary,
     sourceNotes: entry.sourceNotes,

@@ -170,6 +170,18 @@ describe("resolveBuildSourceUtilityViews tool", () => {
       utilityType: "energy-refund",
       value: 3,
       unit: "energy",
+      summary: {
+        value: 3,
+        unit: "energy",
+        resolutionMode: "trigger",
+        targetScope: "self",
+        requirementCount: 2,
+        hasUnsatisfiedRequirements: false,
+        diagnosticCount: 0,
+        sourceNoteCount: 0,
+        assumptionCount: 1,
+        hasUnsupported: false,
+      },
       diagnosticSummary: {
         count: 0,
         hasDiagnostics: false,

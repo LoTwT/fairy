@@ -538,6 +538,18 @@ describe("static build source utility views", () => {
       unsatisfiedCount: 0,
       hasUnsatisfied: false,
     })
+    expect(dodgeCounterEntry?.summary).toEqual({
+      value: 20,
+      unit: "decibel",
+      resolutionMode: "trigger",
+      targetScope: "team",
+      requirementCount: 2,
+      hasUnsatisfiedRequirements: false,
+      diagnosticCount: 0,
+      sourceNoteCount: 0,
+      assumptionCount: dodgeCounterEntry?.assumptions.length,
+      hasUnsupported: false,
+    })
     expect(dodgeCounterEntry?.caveatSummary).toEqual({
       assumptionCount: dodgeCounterEntry?.assumptions.length,
       unsupportedCount: 0,

@@ -744,6 +744,7 @@ export interface StaticBuildSourceUtilityViewEntry {
   triggerLabel?: string
   conditionLabel?: string
   cooldownSeconds?: number
+  summary: StaticBuildSourceUtilityViewEntrySummary
   diagnostics: StaticBuildDiagnosticEntry[]
   diagnosticSummary: StaticBuildDiagnosticSummary
   sourceNotes: StaticBuildSourceNoteEntry[]
@@ -751,6 +752,19 @@ export interface StaticBuildSourceUtilityViewEntry {
   caveatSummary: StaticBuildEntryCaveatSummary
   assumptionSummary: StaticBuildAssumptionSummary
   assumptions: string[]
+}
+
+export interface StaticBuildSourceUtilityViewEntrySummary {
+  value: number
+  unit: "energy" | "energy-per-second" | "decibel"
+  resolutionMode: StaticBuildSourceUtilityViewResolutionMode
+  targetScope: StaticBuildSourceUtilityViewTargetScope
+  requirementCount: number
+  hasUnsatisfiedRequirements: boolean
+  diagnosticCount: number
+  sourceNoteCount: number
+  assumptionCount: number
+  hasUnsupported: boolean
 }
 
 export type StaticBuildSourceUtilityViewGroupKey = "trigger" | "rate"

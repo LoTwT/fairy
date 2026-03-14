@@ -101,6 +101,7 @@ it("keeps screenshot summary by default", async () => {
   expect(base.includes("views.summary.requirementSummary")).toBe(true)
   expect(base.includes("整组 utility views 是否带 caveat")).toBe(true)
   expect(base.includes("views.summary.groups[*].caveatSummary")).toBe(true)
+  expect(base.includes("entry.summary")).toBe(true)
   expect(base.includes("entry.requirementSummary")).toBe(true)
   expect(base.includes("entry.caveatSummary")).toBe(true)
   expect(base.includes("entry.assumptionSummary")).toBe(true)

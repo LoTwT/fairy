@@ -607,6 +607,12 @@ utilityViews.caveatSummary
 utilityViews.entries[0].caveatSummary
 ```
 
+如果你需要稳定读取某条 utility entry 的数值 / 单位 / 目标 / 触发模式摘要，优先使用：
+
+```ts
+utilityViews.entries[0].summary
+```
+
 如果你需要稳定读取某条 utility entry 的触发条件 / 适用条件 / 冷却摘要，优先使用：
 
 ```ts

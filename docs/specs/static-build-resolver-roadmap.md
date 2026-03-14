@@ -4350,6 +4350,59 @@ Batch B（已完成）：
 2. 不改变 `views.summary.groups[*].caveatSummary`
 3. 不把 utility entry caveat 进一步并回 `source-entry collection`
 
+## 105. V102 source-utility-view entry summary
+
+`V101` 收口后，`source-utility-view entry` 已具备：
+
+- `requirements / requirementSummary`
+- `diagnostics / diagnosticSummary`
+- `sourceNotes / sourceNoteSummary`
+- `assumptionSummary`
+- `caveatSummary`
+
+但仍没有一个稳定的 entry-level `summary`。
+
+如果上层只想快速读取某条 utility entry 的：
+
+- 数值与单位
+- 目标范围与触发模式
+- requirement / assumptions / diagnostics / sourceNotes 的计数
+
+仍需要散读多组字段。
+
+### 105.1 目标
+
+1. 为 `source-utility-view entry` 增加稳定 `summary`
+2. 让 utility entry 与 `source-damage-view entry` / `trigger row` 在“逐条摘要层”上更对称
+
+### 105.2 范围
+
+1. `V102.1` scope freeze
+2. `V102.2` utility-entry summary contract
+3. `V102.3` high-level / prompt alignment
+4. `V102.4` docs closeout
+
+### 105.3 当前状态
+
+- `V102.1` 已完成：冻结到 source-utility-view entry summary
+- `V102.2` 已完成：`StaticBuildSourceUtilityViewEntry` 与 compact entry 已新增稳定 `summary`
+- `V102.3` 已完成：高层 tool 断言与 agent prompt 已对齐 `entry.summary`
+- `V102.4` 已完成：相关 specs、roadmap、索引、架构文档与 README 已同步
+
+### 105.4 当前边界
+
+本阶段只做：
+
+1. 为 `StaticBuildSourceUtilityViewEntry` 增加稳定 `summary`
+2. 覆盖 entry-level 最常消费的 value/unit/target/resolution/count/flag 摘要
+3. 保持原始 entry 字段全部兼容
+
+显式不做：
+
+1. 不改变 `views.summary`
+2. 不改变 `views.summary.groups[*]`
+3. 不新增 utility entry 的 build-like nested result
+
 ### 103.2 目标
 
 1. 为 `rows[*]` 增加稳定 `caveatSummary`
