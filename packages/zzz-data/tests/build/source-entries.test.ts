@@ -70,6 +70,10 @@ describe("static build source entries", () => {
           key: "source-utility-view",
           label: "回能 / utility 条目",
           count: 1,
+          assumptionSummary: {
+            count: 1,
+            hasAssumptions: true,
+          },
           sourceDamageRequirementSummary: {
             count: 0,
             satisfiedCount: 0,
@@ -236,6 +240,10 @@ describe("static build source entries", () => {
           key: "source-damage-view",
           label: "额外结算条目",
           count: 1,
+          assumptionSummary: {
+            count: 1,
+            hasAssumptions: true,
+          },
           sourceDamageRequirementSummary: {
             count: 2,
             satisfiedCount: 2,
@@ -286,6 +294,10 @@ describe("static build source entries", () => {
           key: "source-utility-view",
           label: "回能 / utility 条目",
           count: 1,
+          assumptionSummary: {
+            count: 1,
+            hasAssumptions: true,
+          },
           sourceDamageRequirementSummary: {
             count: 0,
             satisfiedCount: 0,

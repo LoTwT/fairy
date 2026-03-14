@@ -804,6 +804,7 @@ export interface StaticBuildSourceEntryGroupSummary {
   sourceUtilityRequirementSummary: StaticBuildSourceUtilityViewRequirementSummary
   diagnosticSummary: StaticBuildDiagnosticSummary
   sourceNoteSummary: StaticBuildSourceNoteSummary
+  assumptionSummary: StaticBuildAssumptionSummary
 }
 
 export interface StaticBuildSourceEntryCollectionSummary {

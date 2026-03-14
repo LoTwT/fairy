@@ -3531,3 +3531,32 @@ Batch B（已完成）：
 1. 不改变 collection 级 `assumptions` 的原始数组语义
 2. 不改变 `summary` 或 `entries[*]` contract
 3. 不提前引入 group 级 `assumptionSummary`
+
+## 80. V77 source-entry group assumption summary
+
+`V76` 收口后，mixed `source-entry collection` 顶层已经有稳定的 `assumptionSummary`。
+
+但如果上层是按组拆“额外结算条目 / 回能条目”两个 section，仍要回退到组内 entries 的 `assumptions` 手工统计，才能判断某一组是否带 assumptions。
+
+`V77` 只解决一件事：
+
+- 为 `StaticBuildSourceEntryGroupSummary` 增加局部 `assumptionSummary`
+
+### 80.1 当前状态
+
+- `V77.1` 已完成：冻结到 source-entry group assumption summary
+- `V77.2` 已完成：`StaticBuildSourceEntryGroupSummary` 已新增局部 `assumptionSummary`
+- `V77.3` 已完成：高层 tool 断言与 agent prompt 已对齐 `collection.summary.groups[*].assumptionSummary`
+- `V77.4` 已完成：相关 specs、roadmap、索引、架构文档与 README 已同步
+
+### 80.2 目标
+
+1. 为 source-entry collection groups 增加稳定 `assumptionSummary`
+2. 直接从当前 group entries 的 `assumptions` 派生计数与布尔位
+3. 对齐 mixed collection 的组级解释 contract
+
+### 80.3 Out of Scope
+
+1. 不改变 group 内 entries 的原始 `assumptions` 数组语义
+2. 不改变顶层 `collection.assumptionSummary`
+3. 不为 source-damage-view / source-utility-view standalone groups 引入额外同名字段
