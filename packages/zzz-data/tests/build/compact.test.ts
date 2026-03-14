@@ -401,6 +401,7 @@ describe("static build compact helpers", () => {
       metadata: {
         entryKind: "source-utility-view",
       },
+      effectSummary: [],
       requirements: [
         { kind: "trigger", key: "发动[强化特殊技]", satisfied: true },
         { kind: "cooldown", key: "12s", satisfied: true },

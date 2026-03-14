@@ -143,6 +143,7 @@ export interface StaticBuildCompactSourceUtilityViewEntry {
   diagnosticSummary: StaticBuildSourceUtilityViewEntry["diagnosticSummary"]
   sourceNotes: StaticBuildSourceNoteEntry[]
   sourceNoteSummary: StaticBuildSourceUtilityViewEntry["sourceNoteSummary"]
+  effectSummary: StaticBuildSourceUtilityViewEntry["effectSummary"]
   caveatSummary: StaticBuildSourceUtilityViewEntry["caveatSummary"]
   assumptionSummary: StaticBuildSourceUtilityViewEntry["assumptionSummary"]
   assumptions: string[]

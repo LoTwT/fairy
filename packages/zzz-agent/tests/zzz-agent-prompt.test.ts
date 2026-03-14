@@ -123,6 +123,7 @@ it("keeps screenshot summary by default", async () => {
   expect(base.includes("entry.requirementSummary")).toBe(true)
   expect(base.includes("entry.caveatSummary")).toBe(true)
   expect(base.includes("entry.assumptionSummary")).toBe(true)
+  expect(base.includes("单条 utility entry 是否带 effect summary")).toBe(true)
   expect(base.includes("collection.summary.isUtilityOnly")).toBe(true)
   expect(base.includes("collection.summary.groups")).toBe(true)
   expect(base.includes("collection.summary.effectSummary")).toBe(true)

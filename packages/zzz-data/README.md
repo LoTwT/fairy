@@ -744,6 +744,7 @@ const compactUtilityViews =
 - `compactStaticBuildSourceDamageViewsResult()` 默认不展开 entry-level `build`
 - 只有显式传 `includeDetails = true` 时，才会保留完整 `build`
 - `compactStaticBuildSourceUtilityViewsResult()` 会统一返回与高层 tool 一致的轻量 utility entry shape
+- compact utility entry 也会稳定保留 `entry.effectSummary`；当前固定返回空数组，不要在调用方再手工补默认值
 
 同一份 source-specific utility / resource view contract 也已在 `zzz-agent` 中通过 `resolve-build-source-utility-views` 高层 tool 暴露，适合直接给 Agent 查询独立回能 / 喧响值条目。
 
