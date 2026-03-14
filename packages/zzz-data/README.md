@@ -277,6 +277,7 @@ views.summary
 如果你是按组拆“独立结算 / 主结算差值”两个 section，也不要再先过滤 entries 再自己统计组内 assumptions，直接读取：
 
 ```ts
+views.summary.groups[0].effectSummary
 views.summary.groups[0].assumptionSummary
 views.summary.assumptionSummary
 views.assumptionSummary

@@ -282,6 +282,7 @@ function summarizeSourceDamageViews(
       count: groupEntries.length,
       supportedCount: groupSupportedCount,
       unsupportedCount: groupEntries.length - groupSupportedCount,
+      effectSummary: summarizeSourceDamageViewEffects(groupEntries),
       requirementSummary: summarizeSourceDamageViewRequirements(
         groupEntries.flatMap((entry) => entry.requirements),
       ),

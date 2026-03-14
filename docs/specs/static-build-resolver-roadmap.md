@@ -5170,3 +5170,41 @@ caveatSummary` 这些兼容字段补齐。
 1. 不改变既有 `summary.groups[*]` 结构
 2. 不提前扩到 `groups[*].effectSummary`
 3. 不提前扩到 `entries[*].effectSummary`
+
+## 123. V120 source-damage-view group effect summary alignment
+
+`V119` 收口后，`source-specific damage views` 顶层已经有稳定 `effectSummary`。
+
+但如果调用方按 `standalone / delta` 分组输出额外结算条目，仍然只能先过滤 `entries` 再自行聚合组内 effect 变化，不能像 `trigger-matrix groups` 或 `skill-matrix groups` 那样直接读取结构化结果。
+
+`V120` 只解决一件事：
+
+1. 给 `source-damage-view summary.groups[*]` 补齐稳定 `effectSummary`
+
+### 123.1 阶段范围
+
+1. `V120.1` scope freeze
+2. `V120.2` runtime contract alignment
+3. `V120.3` tool assertion / prompt alignment
+4. `V120.4` docs closeout
+
+### 123.2 当前状态
+
+- `V120.1` 已完成：冻结到 source-damage-view group effect summary alignment
+- `V120.2` 已完成：`views.summary.groups[*].effectSummary` 已补齐
+- `V120.3` 已完成：高层 source-damage-view tool 断言与 Agent prompt 已对齐 `views.summary.groups[*].effectSummary`
+- `V120.4` 已完成：README、roadmap、索引与架构文档已同步
+
+### 123.3 当前边界
+
+本阶段只做：
+
+1. 为 `StaticBuildSourceDamageViewGroupSummary` 新增稳定 `effectSummary`
+2. 让组级 `effectSummary` 复用现有 source-damage-view effect 聚合语义
+3. 明确按组解释 source-specific damage views 时优先读取 `views.summary.groups[*].effectSummary`
+
+显式不做：
+
+1. 不改变顶层 `views.summary.effectSummary / views.effectSummary` 的语义
+2. 不提前扩到 `entries[*].effectSummary`
+3. 不改变现有 `standalone / delta` 分组方式

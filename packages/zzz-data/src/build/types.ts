@@ -665,6 +665,7 @@ export interface StaticBuildSourceDamageViewGroupSummary {
   count: number
   supportedCount: number
   unsupportedCount: number
+  effectSummary: StaticBuildSourceDamageViewEffectSummaryItem[]
   requirementSummary: StaticBuildSourceDamageViewRequirementSummary
   caveatSummary: StaticBuildEntryCaveatSummary
   diagnosticSummary: StaticBuildDiagnosticSummary
