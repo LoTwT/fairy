@@ -89,7 +89,7 @@ export function resolveStaticBuildTriggerMatrix(
     mode: build.mode,
     manualBaseMode: build.manualBaseMode,
     loadout: build.loadout,
-    summary: summarizeTriggerMatrixRows(rows),
+    summary: summarizeTriggerMatrixRows(rows, assumptions),
     assumptionSummary: summarizeAssumptions(assumptions),
     rows,
     assumptions,
@@ -148,6 +148,7 @@ function getTriggerMatrixGroupOrder(key: StaticBuildTriggerMatrixEntryKind) {
 
 function summarizeTriggerMatrixRows(
   rows: StaticBuildTriggerMatrixRow[],
+  assumptions: string[],
 ): StaticBuildTriggerMatrixSummary {
   const mainFormulaRows = rows.filter(
     (row) => row.metadata.entryKind === "main-formula",
@@ -201,6 +202,7 @@ function summarizeTriggerMatrixRows(
     ),
     diagnosticSummary: summarizeDiagnosticEntries(diagnostics),
     sourceNoteSummary: summarizeSourceNoteEntries(sourceNotes),
+    assumptionSummary: summarizeAssumptions(assumptions),
     groups,
   }
 }

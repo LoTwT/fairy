@@ -3647,3 +3647,36 @@ Batch B（已完成）：
 1. 不改变 row 级 `assumptions` 的原始数组语义
 2. 不改变顶层 `matrix.assumptionSummary`
 3. 不提前引入 skill-matrix group 的同名字段
+
+## 84. V81 trigger-matrix summary assumption summary
+
+`V80` 收口后，`trigger-entry matrix` 已具备：
+
+- 顶层 `matrix.assumptionSummary`
+- 组级 `matrix.summary.groups[*].assumptionSummary`
+- 行级 `row.assumptionSummary`
+
+但 `matrix.summary` 仍缺少同名聚合字段。上层若只消费 `summary`，仍要额外跳回 result 顶层拿 assumptions 摘要。
+
+`V81` 只解决一件事：
+
+- 为 `StaticBuildTriggerMatrixSummary` 增加稳定 `assumptionSummary`
+
+### 84.1 当前状态
+
+- `V81.1` 已完成：冻结到 trigger-matrix summary assumption summary
+- `V81.2` 已完成：`StaticBuildTriggerMatrixSummary` 已新增稳定 `assumptionSummary`
+- `V81.3` 已完成：高层 tool 断言与 agent prompt 已对齐 `matrix.summary.assumptionSummary`
+- `V81.4` 已完成：相关 specs、roadmap、索引、架构文档与 README 已同步
+
+### 84.2 目标
+
+1. 为 `matrix.summary` 增加稳定 assumption aggregate
+2. 保持与既有顶层 `matrix.assumptionSummary` 一致
+3. 让 trigger-matrix 顶层 `summary` 在四类聚合上对齐 requirement / diagnostics / source notes
+
+### 84.3 Out of Scope
+
+1. 不改变既有顶层 `matrix.assumptionSummary`
+2. 不改变 row / group 级 assumption contract
+3. 不提前扩到 source-view / source-entry / skill-matrix summary 的同名字段

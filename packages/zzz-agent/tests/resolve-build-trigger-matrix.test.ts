@@ -34,12 +34,18 @@ describe("resolveBuildTriggerMatrix tool", () => {
         },
       },
     })
-    const mainFormulaAssumptionCount = (result as any).matrix.rows
-      .filter((row: any) => row.metadata.entryKind === "main-formula")
-      .flatMap((row: any) => row.assumptions).length
-    const sourceViewAssumptionCount = (result as any).matrix.rows
-      .filter((row: any) => row.metadata.entryKind === "source-view")
-      .flatMap((row: any) => row.assumptions).length
+    const mainFormulaRows = (result as any).matrix.rows.filter(
+      (row: any) => row.metadata.entryKind === "main-formula",
+    )
+    const sourceViewRows = (result as any).matrix.rows.filter(
+      (row: any) => row.metadata.entryKind === "source-view",
+    )
+    const mainFormulaAssumptionCount = mainFormulaRows.flatMap(
+      (row: any) => row.assumptions,
+    ).length
+    const sourceViewAssumptionCount = sourceViewRows.flatMap(
+      (row: any) => row.assumptions,
+    ).length
 
     expect((result as any).found).toBe(true)
     expect((result as any).matrix.rows).toHaveLength(2)
@@ -73,6 +79,10 @@ describe("resolveBuildTriggerMatrix tool", () => {
             unsatisfiedCount: 0,
           },
         ],
+      },
+      assumptionSummary: {
+        count: (result as any).matrix.assumptions.length,
+        hasAssumptions: (result as any).matrix.assumptions.length > 0,
       },
       diagnosticSummary: {
         count: 6,

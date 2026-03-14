@@ -48,12 +48,18 @@ describe("static build trigger matrix", () => {
         },
       },
     })
-    const mainFormulaAssumptionCount = result.rows
-      .filter((row) => row.metadata.entryKind === "main-formula")
-      .flatMap((row) => row.assumptions).length
-    const sourceViewAssumptionCount = result.rows
-      .filter((row) => row.metadata.entryKind === "source-view")
-      .flatMap((row) => row.assumptions).length
+    const mainFormulaRows = result.rows.filter(
+      (row) => row.metadata.entryKind === "main-formula",
+    )
+    const sourceViewRows = result.rows.filter(
+      (row) => row.metadata.entryKind === "source-view",
+    )
+    const mainFormulaAssumptionCount = mainFormulaRows.flatMap(
+      (row) => row.assumptions,
+    ).length
+    const sourceViewAssumptionCount = sourceViewRows.flatMap(
+      (row) => row.assumptions,
+    ).length
     expect(result.rows[0]?.summary?.expectedTotal).toBeCloseTo(
       result.rows[0]?.damage?.expected ?? 0,
       6,
@@ -90,6 +96,10 @@ describe("static build trigger matrix", () => {
             unsatisfiedCount: 0,
           },
         ],
+      },
+      assumptionSummary: {
+        count: result.assumptions.length,
+        hasAssumptions: result.assumptions.length > 0,
       },
       diagnosticSummary: {
         count: 4,
