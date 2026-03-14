@@ -94,7 +94,7 @@ import {
   - `爱芮 [异放]`
   - `薇薇安 [异放]`
   - 这类条目不会再继续并入主 anomaly / disorder 公式，而是通过独立 view 展示
-  - 顶层 `views` 与 `views.summary` 当前已新增稳定 `caveatSummary`，用于汇总 assumptions 与 unsupported entries
+  - 顶层 `views`、`views.summary` 与 `views.summary.groups[*]` 当前已新增稳定 `caveatSummary`，用于汇总 assumptions 与 unsupported entries
 - source-specific utility / resource view：当前已支持：
   - `「月相」-朔`
   - `「电磁暴」-叁式`

@@ -213,6 +213,12 @@ describe("static build source damage views", () => {
           count: 1,
           supportedCount: 1,
           unsupportedCount: 0,
+          caveatSummary: {
+            assumptionCount: 1,
+            unsupportedCount: 0,
+            hasAssumptions: true,
+            hasUnsupported: false,
+          },
           assumptionSummary: {
             count: 1,
             hasAssumptions: true,

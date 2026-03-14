@@ -253,6 +253,10 @@ function summarizeSourceDamageViews(
       requirementSummary: summarizeSourceDamageViewRequirements(
         groupEntries.flatMap((entry) => entry.requirements),
       ),
+      caveatSummary: summarizeSourceDamageViewCaveats(
+        groupEntries,
+        groupEntries.flatMap((entry) => entry.assumptions),
+      ),
       diagnosticSummary: summarizeDiagnosticEntries(
         groupEntries.flatMap((entry) => entry.diagnostics),
       ),
