@@ -624,6 +624,12 @@ function summarizeSkillMatrix(rows: StaticBuildSkillMatrixRow[]) {
     commonFormulaMultipliers,
     variableFormulaMultipliers,
     caveatSummary: summarizeSkillMatrixCaveats(assumptions, unsupportedEffects),
+    diagnosticSummary: summarizeDiagnosticEntries(
+      rows.flatMap((row) => row.diagnostics),
+    ),
+    sourceNoteSummary: summarizeSourceNoteEntries(
+      rows.flatMap((row) => row.sourceNotes),
+    ),
     groups,
   }
 }

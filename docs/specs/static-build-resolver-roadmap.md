@@ -3819,3 +3819,39 @@ Batch B（已完成）：
 1. 不改变既有顶层 `matrix.caveatSummary`
 2. 不改变 row / group 级 `caveatSummary`
 3. 不提前把 `diagnosticSummary / sourceNoteSummary / effectSummary` 下沉到 `summary`
+
+## 89. V86 skill-matrix summary diagnostic/source-note summaries
+
+`V85` 收口后，`matrix.summary` 已具备：
+
+- 数值汇总
+- group-level diagnostics / source notes
+- 顶层 `caveatSummary`
+
+但如果上层想只消费 `matrix.summary` 这一个聚合对象，仍然需要额外跳回：
+
+- `matrix.diagnosticSummary`
+- `matrix.sourceNoteSummary`
+
+`V86` 只解决一件事：
+
+- 为 `StaticBuildSkillMatrixSummary` 增加稳定 `diagnosticSummary / sourceNoteSummary`
+
+### 89.1 当前状态
+
+- `V86.1` 已完成：冻结到 skill-matrix summary diagnostic/source-note summaries
+- `V86.2` 已完成：`StaticBuildSkillMatrixSummary` 已新增稳定 `diagnosticSummary / sourceNoteSummary`
+- `V86.3` 已完成：高层 tool 断言与 agent prompt 已对齐 `matrix.summary.diagnosticSummary / matrix.summary.sourceNoteSummary`
+- `V86.4` 已完成：相关 specs、roadmap、索引、架构文档与 README 已同步
+
+### 89.2 目标
+
+1. 为 `matrix.summary` 增加稳定 diagnostics / source notes aggregate
+2. 保持与既有顶层 `matrix.diagnosticSummary / matrix.sourceNoteSummary` 一致
+3. 不改变既有 row / group 级 diagnostics / source notes 语义
+
+### 89.3 Out of Scope
+
+1. 不改变既有顶层 `matrix.diagnosticSummary / matrix.sourceNoteSummary`
+2. 不改变 row / group 级 `diagnosticSummary / sourceNoteSummary`
+3. 不提前把 `effectSummary` 下沉到 `summary`

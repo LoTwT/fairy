@@ -101,6 +101,12 @@ describe("resolveBuildSkillMatrix tool", () => {
     expect((result as any).matrix.sourceNoteSummary.count).toBe(
       (result as any).matrix.rows.flatMap((row: any) => row.sourceNotes).length,
     )
+    expect((result as any).matrix.summary.diagnosticSummary).toEqual(
+      (result as any).matrix.diagnosticSummary,
+    )
+    expect((result as any).matrix.summary.sourceNoteSummary).toEqual(
+      (result as any).matrix.sourceNoteSummary,
+    )
     const normalGroup = (result as any).matrix.summary.groups.find(
       (group: any) => group.key === "普通攻击",
     )
