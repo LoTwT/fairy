@@ -6410,3 +6410,31 @@ caveatSummary` 这些兼容字段补齐。
 - `V157.2` 已完成：compact row / entry summary 已改为显式 compact types
 - `V157.3` 已完成：现有测试与 runtime 校验已覆盖
 - `V157.4` 已完成：roadmap、索引与架构文档已同步
+
+## 161. V158 explicit compact skill-matrix summaries
+
+`V157` 收口后，compact `skill-matrix` 的 `summary / summary.groups[*]` 仍在类型层半复用 raw summary type。
+
+`V158` 只解决一件事：
+
+1. 把 compact `skill-matrix summary / group summary` 改为显式 compact type
+
+### 161.1 分阶段
+
+1. `V158.1` scope freeze
+2. `V158.2` runtime/type contract alignment
+3. `V158.3` tests / prompt alignment
+4. `V158.4` docs closeout
+
+### 161.2 非目标
+
+1. 不改变任何 runtime summary 值
+2. 不改变 `includeDetails` 语义
+3. 不新增业务字段
+
+### 161.3 当前状态
+
+- `V158.1` 已完成：冻结到 explicit compact skill-matrix summaries
+- `V158.2` 已完成：compact skill-matrix `summary / group summary` 已改为显式 compact types
+- `V158.3` 已完成：现有测试与 runtime 校验已覆盖
+- `V158.4` 已完成：roadmap、索引与架构文档已同步

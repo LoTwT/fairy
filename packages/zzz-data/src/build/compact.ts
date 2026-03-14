@@ -128,18 +128,45 @@ export interface CompactStaticBuildSkillMatrixResult {
   rows: StaticBuildCompactSkillMatrixRow[]
 }
 
-export interface CompactStaticBuildSkillMatrixGroupSummary extends Omit<
-  ResolveStaticBuildSkillMatrixResult["summary"]["groups"][number],
-  "assumptions" | "unsupportedEffects"
-> {
+export interface CompactStaticBuildSkillMatrixGroupSummary {
+  key: string
+  label: string
+  count: number
+  commonBuckets: Record<string, number>
+  variableBuckets: string[]
+  commonFormulaMultipliers: Record<string, number>
+  variableFormulaMultipliers: string[]
+  effectSummary: StaticBuildSkillMatrixEffectSummaryItem[]
+  requirementSummary: StaticBuildSourceDamageViewRequirementSummary
+  assumptionSummary: StaticBuildAssumptionSummary
+  caveatSummary: StaticBuildCaveatSummary
+  diagnosticSummary: StaticBuildDiagnosticSummary
+  sourceNoteSummary: StaticBuildSourceNoteSummary
   assumptions?: string[]
   unsupportedEffects?: string[]
 }
 
-export interface CompactStaticBuildSkillMatrixSummary extends Omit<
-  ResolveStaticBuildSkillMatrixResult["summary"],
-  "groups"
-> {
+export interface CompactStaticBuildSkillMatrixSummary {
+  rowCount: number
+  baseDamageStat: StaticBuildResolvedPanel["baseDamageStat"]
+  baseDamageValue: number
+  attack?: number
+  hp?: number
+  sheerForce?: number
+  critRate: number
+  critDamage: number
+  penetrationRate: number
+  penetrationValue: number
+  commonBuckets: Record<string, number>
+  variableBuckets: string[]
+  commonFormulaMultipliers: Record<string, number>
+  variableFormulaMultipliers: string[]
+  effectSummary: StaticBuildSkillMatrixEffectSummaryItem[]
+  requirementSummary: StaticBuildSourceDamageViewRequirementSummary
+  assumptionSummary: StaticBuildAssumptionSummary
+  caveatSummary: StaticBuildCaveatSummary
+  diagnosticSummary: StaticBuildDiagnosticSummary
+  sourceNoteSummary: StaticBuildSourceNoteSummary
   groups: CompactStaticBuildSkillMatrixGroupSummary[]
 }
 

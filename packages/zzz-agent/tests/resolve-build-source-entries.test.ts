@@ -17,6 +17,8 @@ describe("resolveBuildSourceEntries tool", () => {
       count: expect.any(Number),
       hasAssumptions: expect.any(Boolean),
     })
+    const utilityOnlyCollection = (result as any).collection
+    const utilityOnlyAssumptionSummary = utilityOnlyCollection.assumptionSummary
     expect((result as any).collection.summary).toMatchObject({
       entryCount: 1,
       sourceDamageViewCount: 0,
@@ -25,16 +27,14 @@ describe("resolveBuildSourceEntries tool", () => {
       unsupportedCount: 0,
       isUtilityOnly: true,
       caveatSummary: {
-        assumptionCount: (result as any).collection.assumptionSummary.count,
+        assumptionCount: utilityOnlyAssumptionSummary.count,
         unsupportedCount: 0,
-        hasAssumptions: (result as any).collection.assumptionSummary
-          .hasAssumptions,
+        hasAssumptions: utilityOnlyAssumptionSummary.hasAssumptions,
         hasUnsupported: false,
       },
       assumptionSummary: {
-        count: (result as any).collection.assumptionSummary.count,
-        hasAssumptions: (result as any).collection.assumptionSummary
-          .hasAssumptions,
+        count: utilityOnlyAssumptionSummary.count,
+        hasAssumptions: utilityOnlyAssumptionSummary.hasAssumptions,
       },
       sourceDamageRequirementSummary: {
         count: 0,
@@ -148,10 +148,9 @@ describe("resolveBuildSourceEntries tool", () => {
       ],
     })
     expect((result as any).collection.caveatSummary).toEqual({
-      assumptionCount: (result as any).collection.assumptionSummary.count,
+      assumptionCount: utilityOnlyAssumptionSummary.count,
       unsupportedCount: 0,
-      hasAssumptions: (result as any).collection.assumptionSummary
-        .hasAssumptions,
+      hasAssumptions: utilityOnlyAssumptionSummary.hasAssumptions,
       hasUnsupported: false,
     })
     expect((result as any).collection.effectSummary).toEqual(
@@ -330,6 +329,7 @@ describe("resolveBuildSourceEntries tool", () => {
       count: expect.any(Number),
       hasAssumptions: expect.any(Boolean),
     })
+    const mixedAssumptionSummary = (result as any).collection.assumptionSummary
     expect((result as any).collection.summary).toMatchObject({
       entryCount: 2,
       sourceDamageViewCount: 1,
@@ -338,16 +338,14 @@ describe("resolveBuildSourceEntries tool", () => {
       unsupportedCount: 0,
       isUtilityOnly: false,
       caveatSummary: {
-        assumptionCount: (result as any).collection.assumptionSummary.count,
+        assumptionCount: mixedAssumptionSummary.count,
         unsupportedCount: 0,
-        hasAssumptions: (result as any).collection.assumptionSummary
-          .hasAssumptions,
+        hasAssumptions: mixedAssumptionSummary.hasAssumptions,
         hasUnsupported: false,
       },
       assumptionSummary: {
-        count: (result as any).collection.assumptionSummary.count,
-        hasAssumptions: (result as any).collection.assumptionSummary
-          .hasAssumptions,
+        count: mixedAssumptionSummary.count,
+        hasAssumptions: mixedAssumptionSummary.hasAssumptions,
       },
       sourceDamageRequirementSummary: {
         count: 2,
@@ -518,10 +516,9 @@ describe("resolveBuildSourceEntries tool", () => {
       ],
     })
     expect((result as any).collection.caveatSummary).toEqual({
-      assumptionCount: (result as any).collection.assumptionSummary.count,
+      assumptionCount: mixedAssumptionSummary.count,
       unsupportedCount: 0,
-      hasAssumptions: (result as any).collection.assumptionSummary
-        .hasAssumptions,
+      hasAssumptions: mixedAssumptionSummary.hasAssumptions,
       hasUnsupported: false,
     })
     expect((result as any).collection.sourceDamageRequirementSummary).toEqual(
@@ -631,16 +628,17 @@ describe("resolveBuildSourceEntries tool", () => {
     })
 
     expect((result as any).found).toBe(true)
+    const disorderCollection = (result as any).collection
+    const disorderAssumptionSummary = disorderCollection.assumptionSummary
     expect((result as any).collection.summary).toMatchObject({
       entryCount: 2,
       sourceDamageViewCount: 1,
       sourceUtilityViewCount: 1,
       isUtilityOnly: false,
       caveatSummary: {
-        assumptionCount: (result as any).collection.assumptionSummary.count,
+        assumptionCount: disorderAssumptionSummary.count,
         unsupportedCount: 0,
-        hasAssumptions: (result as any).collection.assumptionSummary
-          .hasAssumptions,
+        hasAssumptions: disorderAssumptionSummary.hasAssumptions,
         hasUnsupported: false,
       },
       sourceDamageRequirementSummary: {
