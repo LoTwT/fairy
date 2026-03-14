@@ -3991,3 +3991,34 @@ Batch B（已完成）：
 1. 不改变既有 `matrix.summary.groups[*].assumptions`
 2. 不提前把 `assumptionSummary` 下沉到 `rows[*]`
 3. 不改变 diagnostics / source notes / effect summaries 的既有 contract
+
+## 94. V91 skill-matrix row assumption summary
+
+`V90` 收口后，`skill-matrix` 已具备：
+
+- 顶层 `matrix.summary.assumptionSummary`
+- 组级 `matrix.summary.groups[*].assumptionSummary`
+- 行级 `row.assumptions`
+
+但如果上层逐行消费矩阵，仍然要额外自己统计：
+
+- `row.assumptions.length`
+
+### 94.1 当前状态
+
+- `V91.1` 已完成：冻结到 skill-matrix row assumption summary
+- `V91.2` 已完成：`StaticBuildSkillMatrixRow` 与 compact row 已新增稳定 `assumptionSummary`
+- `V91.3` 已完成：高层 tool 断言与 agent prompt 已对齐 `row.assumptionSummary`
+- `V91.4` 已完成：相关 specs、roadmap、索引、架构文档与 README 已同步
+
+### 94.2 目标
+
+1. 为 `rows[*]` 增加稳定 `assumptionSummary`
+2. 保持与既有 `row.assumptions` 一致
+3. 不改变既有 `row.caveatSummary`
+
+### 94.3 Out of Scope
+
+1. 不改变既有 `row.assumptions`
+2. 不改变顶层 `matrix.summary` 与 group 级 `summary.groups[*]`
+3. 不改变 diagnostics / source notes / effect summaries 的既有 contract

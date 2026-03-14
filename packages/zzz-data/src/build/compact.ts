@@ -37,6 +37,7 @@ export interface StaticBuildCompactSkillMatrixRow {
   diagnosticSummary: StaticBuildSkillMatrixRow["diagnosticSummary"]
   sourceNotes: StaticBuildSourceNoteEntry[]
   sourceNoteSummary: StaticBuildSkillMatrixRow["sourceNoteSummary"]
+  assumptionSummary: StaticBuildSkillMatrixRow["assumptionSummary"]
   caveatSummary: StaticBuildSkillMatrixRow["caveatSummary"]
   assumptions: string[]
   unsupportedEffects: string[]
@@ -209,6 +210,7 @@ export function compactStaticBuildSkillMatrixRow(
     diagnosticSummary: row.diagnosticSummary,
     sourceNotes: row.sourceNotes,
     sourceNoteSummary: row.sourceNoteSummary,
+    assumptionSummary: row.assumptionSummary,
     caveatSummary: row.caveatSummary,
     assumptions: row.assumptions,
     unsupportedEffects: row.unsupportedEffects,

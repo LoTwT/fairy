@@ -960,6 +960,7 @@ export interface StaticBuildSkillMatrixRow {
   diagnosticSummary: StaticBuildDiagnosticSummary
   sourceNotes: StaticBuildSourceNoteEntry[]
   sourceNoteSummary: StaticBuildSourceNoteSummary
+  assumptionSummary: StaticBuildAssumptionSummary
   caveatSummary: StaticBuildCaveatSummary
   assumptions: string[]
   unsupportedEffects: string[]

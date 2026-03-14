@@ -66,6 +66,10 @@ describe("resolveBuildSkillMatrix tool", () => {
       hasAssumptions: firstRow.assumptions.length > 0,
       hasUnsupportedEffects: firstRow.unsupportedEffects.length > 0,
     })
+    expect(firstRow.assumptionSummary).toEqual({
+      count: firstRow.assumptions.length,
+      hasAssumptions: firstRow.assumptions.length > 0,
+    })
     expect(firstRow.assumptions).toBeInstanceOf(Array)
     expect(firstRow.unsupportedEffects).toBeInstanceOf(Array)
     const globalEffect = (result as any).matrix.effectSummary.find(
@@ -202,6 +206,10 @@ describe("resolveBuildSkillMatrix tool", () => {
       unsupportedEffectCount: firstRow.unsupportedEffects.length,
       hasAssumptions: firstRow.assumptions.length > 0,
       hasUnsupportedEffects: firstRow.unsupportedEffects.length > 0,
+    })
+    expect(firstRow.assumptionSummary).toEqual({
+      count: firstRow.assumptions.length,
+      hasAssumptions: firstRow.assumptions.length > 0,
     })
     expect(firstRow.build).toBeTruthy()
     expect(firstRow.summary).toEqual(firstRow.build.summary)

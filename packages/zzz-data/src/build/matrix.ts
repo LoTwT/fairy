@@ -2054,6 +2054,7 @@ export function resolveStaticBuildSkillMatrix(
       diagnosticSummary: summarizeDiagnosticEntries(build.diagnostics),
       sourceNotes: build.sourceNotes,
       sourceNoteSummary: summarizeSourceNoteEntries(build.sourceNotes),
+      assumptionSummary: summarizeAssumptions(build.assumptions),
       caveatSummary: summarizeSkillMatrixCaveats(
         build.assumptions,
         build.unsupportedEffects,
