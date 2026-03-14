@@ -52,6 +52,7 @@ describe("static build source damage views", () => {
       hasAssumptions: result.assumptions.length > 0,
       hasUnsupported: false,
     })
+    expect(result.effectSummary).toEqual([])
     expect(result.requirementSummary).toEqual({
       count: 0,
       satisfiedCount: 0,
@@ -84,6 +85,7 @@ describe("static build source damage views", () => {
       deltaCount: 0,
       supportedCount: 0,
       unsupportedCount: 0,
+      effectSummary: [],
       caveatSummary: {
         assumptionCount: result.assumptions.length,
         unsupportedCount: 0,
@@ -216,6 +218,22 @@ describe("static build source damage views", () => {
         { key: "stateSnapshot", count: 1 },
       ],
     })
+    expect(result.effectSummary).toEqual(result.summary.effectSummary)
+    expect(result.summary.effectSummary).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          effectId: "alice-state-polarity-assault-ratio",
+          sourceName: "爱丽丝",
+          label: "状态快照：[极性强击] 结算倍率",
+          bucket: "技能倍率",
+          value: "+150%",
+          appliedEntryCount: 1,
+          totalEntryCount: 1,
+          appliesToAllEntries: true,
+          condition: "当前条目全部生效",
+        }),
+      ]),
+    )
     expect(result.summary).toMatchObject({
       entryCount: 1,
       standaloneCount: 1,

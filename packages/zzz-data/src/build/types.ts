@@ -645,6 +645,18 @@ export interface StaticBuildSourceDamageViewEntry {
   build?: ResolveStaticBuildResult
 }
 
+export interface StaticBuildSourceDamageViewEffectSummaryItem {
+  effectId: string
+  sourceName: string
+  label: string
+  bucket: string
+  value: string
+  appliedEntryCount: number
+  totalEntryCount: number
+  appliesToAllEntries: boolean
+  condition: string
+}
+
 export type StaticBuildSourceDamageViewGroupKey = "standalone" | "delta"
 
 export interface StaticBuildSourceDamageViewGroupSummary {
@@ -666,6 +678,7 @@ export interface StaticBuildSourceDamageViewSummary {
   deltaCount: number
   supportedCount: number
   unsupportedCount: number
+  effectSummary: StaticBuildSourceDamageViewEffectSummaryItem[]
   requirementSummary: StaticBuildSourceDamageViewRequirementSummary
   caveatSummary: StaticBuildEntryCaveatSummary
   diagnosticSummary: StaticBuildDiagnosticSummary
@@ -679,6 +692,7 @@ export interface ResolveStaticBuildSourceDamageViewsResult {
   manualBaseMode?: StaticBuildBaseMode
   loadout: StaticBuildResolvedLoadout
   summary: StaticBuildSourceDamageViewSummary
+  effectSummary: StaticBuildSourceDamageViewEffectSummaryItem[]
   requirementSummary: StaticBuildSourceDamageViewRequirementSummary
   caveatSummary: StaticBuildEntryCaveatSummary
   diagnosticSummary: StaticBuildDiagnosticSummary

@@ -7,6 +7,7 @@ import type {
   StaticBuildCatalogEntry,
   StaticBuildEntryCaveatSummary,
   StaticBuildResolvedLoadout,
+  StaticBuildSourceDamageViewEffectSummaryItem,
   StaticBuildSourceDamageViewEntry,
   StaticBuildSourceDamageViewGroupKey,
   StaticBuildSourceDamageViewRequirement,
@@ -51,6 +52,32 @@ const sourceDamageViewGroupLabels: Record<
   standalone: "独立结算条目",
   delta: "增量结算条目",
 }
+
+const sourceDamageViewBucketLabels = {
+  attack: "攻击力",
+  hp: "生命值",
+  sheerForce: "贯穿力",
+  anomalyProficiency: "异常精通",
+  anomalyMastery: "异常掌控",
+  critRate: "暴击率",
+  critDamage: "暴击伤害",
+  bonusDamageSum: "增伤区",
+  skillMultiplierFactor: "技能倍率",
+  penetrationRate: "穿透率",
+  penetrationValue: "穿透值",
+  resistanceReduction: "减抗",
+  ignoreResistance: "无视抗性",
+  defenseReduction: "减防",
+  vulnerabilityBonus: "易伤",
+  damageReduction: "减伤",
+  stunVulnerability: "失衡易伤",
+  nonStunVulnerability: "非失衡易伤",
+  sheerBonusSum: "贯穿增伤",
+  anomalyBonusDamageSum: "异常增伤",
+  anomalyCritRate: "异常暴击率",
+  anomalyCritDamage: "异常暴击伤害",
+  energyGenerationRate: "能量自动回复",
+} as const
 
 const sourceDamageViewRequirementKinds = [
   "combat-tag",
@@ -155,6 +182,7 @@ export function resolveStaticBuildSourceDamageViews(
       input.mode === "manual" ? resolveBaseMode(input) : undefined,
     loadout,
     summary,
+    effectSummary: summary.effectSummary,
     requirementSummary: summary.requirementSummary,
     caveatSummary: summarizeSourceDamageViewCaveats(sortedEntries, []),
     diagnosticSummary: summary.diagnosticSummary,
@@ -279,6 +307,7 @@ function summarizeSourceDamageViews(
     deltaCount: deltaEntries.length,
     supportedCount,
     unsupportedCount,
+    effectSummary: summarizeSourceDamageViewEffects(entries),
     requirementSummary: summarizeSourceDamageViewRequirements(
       entries.flatMap((entry) => entry.requirements),
     ),
@@ -288,6 +317,118 @@ function summarizeSourceDamageViews(
     assumptionSummary: summarizeAssumptions(assumptions),
     groups,
   }
+}
+
+function summarizeSourceDamageViewEffects(
+  entries: StaticBuildSourceDamageViewEntry[],
+): StaticBuildSourceDamageViewEffectSummaryItem[] {
+  const summary = new Map<
+    string,
+    {
+      effectId: string
+      sourceName: string
+      label: string
+      bucketTexts: Set<string>
+      valueTexts: Set<string>
+      entries: Set<string>
+    }
+  >()
+
+  for (const entry of entries) {
+    if (!entry.build) continue
+    for (const trace of entry.build.trace) {
+      if (trace.status !== "applied" || !trace.modifiers?.length) continue
+
+      let item = summary.get(trace.effectId)
+      if (!item) {
+        item = {
+          effectId: trace.effectId,
+          sourceName: trace.sourceName,
+          label: trace.label,
+          bucketTexts: new Set<string>(),
+          valueTexts: new Set<string>(),
+          entries: new Set<string>(),
+        }
+        summary.set(trace.effectId, item)
+      }
+
+      item.entries.add(entry.id)
+      for (const modifier of trace.modifiers) {
+        item.bucketTexts.add(
+          sourceDamageViewBucketLabels[
+            modifier.bucket as keyof typeof sourceDamageViewBucketLabels
+          ] ?? modifier.bucket,
+        )
+        item.valueTexts.add(
+          formatSourceDamageViewModifier(
+            modifier.bucket,
+            modifier.value,
+            modifier.combine,
+          ),
+        )
+      }
+    }
+  }
+
+  return [...summary.values()].map((item) => {
+    const appliedEntryCount = item.entries.size
+    const totalEntryCount = entries.length
+    const appliesToAllEntries = appliedEntryCount === totalEntryCount
+    return {
+      effectId: item.effectId,
+      sourceName: item.sourceName,
+      label: item.label,
+      bucket: [...item.bucketTexts].join(" + "),
+      value: [...item.valueTexts].join("；"),
+      appliedEntryCount,
+      totalEntryCount,
+      appliesToAllEntries,
+      condition: appliesToAllEntries
+        ? "当前条目全部生效"
+        : `部分条目生效（${appliedEntryCount}/${totalEntryCount}）`,
+    }
+  })
+}
+
+function formatSourceDamageViewModifier(
+  bucket: string,
+  value: number,
+  combine: string,
+) {
+  if (combine === "replace") {
+    return `设为 ${formatSourceDamageViewValue(bucket, value)}`
+  }
+
+  return `${value >= 0 ? "+" : ""}${formatSourceDamageViewValue(bucket, value)}`
+}
+
+function formatSourceDamageViewValue(bucket: string, value: number) {
+  if (
+    bucket === "critRate" ||
+    bucket === "critDamage" ||
+    bucket === "bonusDamageSum" ||
+    bucket === "skillMultiplierFactor" ||
+    bucket === "penetrationRate" ||
+    bucket === "resistanceReduction" ||
+    bucket === "ignoreResistance" ||
+    bucket === "vulnerabilityBonus" ||
+    bucket === "damageReduction" ||
+    bucket === "stunVulnerability" ||
+    bucket === "nonStunVulnerability" ||
+    bucket === "sheerBonusSum" ||
+    bucket === "anomalyBonusDamageSum" ||
+    bucket === "anomalyCritRate" ||
+    bucket === "anomalyCritDamage" ||
+    bucket === "energyGenerationRate"
+  ) {
+    return `${formatSourceDamageViewNumber(value * 100)}%`
+  }
+
+  return formatSourceDamageViewNumber(value)
+}
+
+function formatSourceDamageViewNumber(value: number) {
+  return Number.isInteger(value) ? value.toString() : value.toFixed(2)
 }
 
 function summarizeSourceDamageViewCaveats(

@@ -47,6 +47,24 @@ describe("resolveBuildSourceDamageViews tool", () => {
       hasAssumptions: (result as any).views.assumptions.length > 0,
       hasUnsupported: false,
     })
+    expect((result as any).views.effectSummary).toEqual(
+      (result as any).views.summary.effectSummary,
+    )
+    expect((result as any).views.summary.effectSummary).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          effectId: "alice-state-polarity-assault-ratio",
+          sourceName: "爱丽丝",
+          label: "状态快照：[极性强击] 结算倍率",
+          bucket: "技能倍率",
+          value: "+150%",
+          appliedEntryCount: 1,
+          totalEntryCount: 1,
+          appliesToAllEntries: true,
+          condition: "当前条目全部生效",
+        }),
+      ]),
+    )
     expect((result as any).views.requirementSummary).toEqual({
       count: 2,
       satisfiedCount: 2,

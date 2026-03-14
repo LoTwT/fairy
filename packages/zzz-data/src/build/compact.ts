@@ -11,6 +11,7 @@ import type {
   StaticBuildSkillMatrixRow,
   StaticBuildSkillMatrixRowDamageSummary,
   StaticBuildSkillMatrixRowMeta,
+  StaticBuildSourceDamageViewEffectSummaryItem,
   StaticBuildSourceDamageViewEntry,
   StaticBuildSourceEntry,
   StaticBuildSourceEntryCollectionSummary,
@@ -168,6 +169,7 @@ export interface CompactStaticBuildSourceDamageViewsResult {
   manualBaseMode?: ResolveStaticBuildSourceDamageViewsResult["manualBaseMode"]
   loadout: ResolveStaticBuildSourceDamageViewsResult["loadout"]
   summary: ResolveStaticBuildSourceDamageViewsResult["summary"]
+  effectSummary: StaticBuildSourceDamageViewEffectSummaryItem[]
   requirementSummary: ResolveStaticBuildSourceDamageViewsResult["requirementSummary"]
   caveatSummary: ResolveStaticBuildSourceDamageViewsResult["caveatSummary"]
   diagnosticSummary: ResolveStaticBuildSourceDamageViewsResult["diagnosticSummary"]
@@ -318,6 +320,7 @@ export function compactStaticBuildSourceDamageViewsResult(
     manualBaseMode: views.manualBaseMode,
     loadout: views.loadout,
     summary: views.summary,
+    effectSummary: views.effectSummary,
     requirementSummary: views.requirementSummary,
     caveatSummary: views.caveatSummary,
     diagnosticSummary: views.diagnosticSummary,

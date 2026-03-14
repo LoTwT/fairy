@@ -5134,3 +5134,39 @@ caveatSummary` 这些兼容字段补齐。
 
 1. 不改变顶层 `matrix.summary.effectSummary / matrix.effectSummary` 的语义
 2. 不改变组级 `matrix.summary.groups[*].effectSummary` 的语义
+
+## 122. V119 source-damage-view top-level effect summary alignment
+
+`source-specific damage views` 目前已经补齐了 requirement / diagnostic / source-note / assumption / caveat summary，但如果调用方想直接知道“本次额外结算条目涉及了哪些乘区变化”，仍然只能遍历 `entries[*].build.trace` 自己聚合。
+
+`V119` 只解决一件事：
+
+1. 给 `source-specific damage views` 的顶层与 `summary` 补齐稳定 `effectSummary`
+
+### 122.1 阶段范围
+
+1. `V119.1` scope freeze
+2. `V119.2` runtime contract alignment
+3. `V119.3` tool assertion / prompt alignment
+4. `V119.4` README / roadmap / docs closeout
+
+### 122.2 当前状态
+
+- `V119.1` 已完成：冻结到 source-damage-view top-level effect summary alignment
+- `V119.2` 已完成：`views.summary.effectSummary` 与顶层兼容字段 `views.effectSummary` 已补齐
+- `V119.3` 已完成：高层 source-damage-view tool 断言与 Agent prompt 已对齐 `views.summary.effectSummary`
+- `V119.4` 已完成：README、roadmap、索引与架构文档已同步
+
+### 122.3 当前边界
+
+本阶段只做：
+
+1. 为 `StaticBuildSourceDamageViewSummary` 新增稳定 `effectSummary`
+2. 为 `ResolveStaticBuildSourceDamageViewsResult` 新增兼容字段 `effectSummary`
+3. 明确解释 source-specific damage views 的乘区变化时优先读取 `views.summary.effectSummary`
+
+显式不做：
+
+1. 不改变既有 `summary.groups[*]` 结构
+2. 不提前扩到 `groups[*].effectSummary`
+3. 不提前扩到 `entries[*].effectSummary`
