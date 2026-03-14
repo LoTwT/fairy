@@ -67,16 +67,16 @@ describe("resolveBuildSkillMatrix tool", () => {
     })
     expect(firstRow.caveatSummary).toEqual({
       assumptionCount: firstRow.assumptionSummary.count,
-      unsupportedEffectCount: firstRow.unsupportedEffects.length,
+      unsupportedEffectCount: firstRow.caveatSummary.unsupportedEffectCount,
       hasAssumptions: firstRow.assumptionSummary.hasAssumptions,
-      hasUnsupportedEffects: firstRow.unsupportedEffects.length > 0,
+      hasUnsupportedEffects: firstRow.caveatSummary.hasUnsupportedEffects,
     })
     expect(firstRow.assumptionSummary).toEqual({
       count: firstRow.caveatSummary.assumptionCount,
       hasAssumptions: firstRow.caveatSummary.hasAssumptions,
     })
     expect(firstRow.assumptions).toBeUndefined()
-    expect(firstRow.unsupportedEffects).toBeInstanceOf(Array)
+    expect(firstRow.unsupportedEffects).toBeUndefined()
     const globalEffect = (result as any).matrix.effectSummary.find(
       (item: any) =>
         item.sourceName === "防暴者Ⅵ型" &&
@@ -110,7 +110,7 @@ describe("resolveBuildSkillMatrix tool", () => {
     expect((result as any).matrix.unsupportedEffects).toEqual([
       ...new Set(
         (result as any).matrix.rows.flatMap(
-          (row: any) => row.unsupportedEffects,
+          (row: any) => row.unsupportedEffects ?? [],
         ),
       ),
     ])
@@ -174,7 +174,9 @@ describe("resolveBuildSkillMatrix tool", () => {
       hasAssumptions: (normalGroup?.assumptions.length ?? 0) > 0,
     })
     expect(normalGroup?.unsupportedEffects).toEqual([
-      ...new Set(normalRows.flatMap((row: any) => row.unsupportedEffects)),
+      ...new Set(
+        normalRows.flatMap((row: any) => row.unsupportedEffects ?? []),
+      ),
     ])
     expect(
       (result as any).matrix.summary.commonFormulaMultipliers.critMultiplier,
@@ -228,6 +230,7 @@ describe("resolveBuildSkillMatrix tool", () => {
       count: firstRow.assumptions.length,
       hasAssumptions: firstRow.assumptions.length > 0,
     })
+    expect(firstRow.unsupportedEffects).toBeInstanceOf(Array)
     expect(firstRow.build).toBeTruthy()
     expect(firstRow.summary).toEqual(firstRow.build.summary)
   })

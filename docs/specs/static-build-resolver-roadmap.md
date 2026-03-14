@@ -6050,3 +6050,33 @@ caveatSummary` 这些兼容字段补齐。
 - `V145.2` 已完成：compact `skill-matrix rows` 默认已不再携带 `row.assumptions`
 - `V145.3` 已完成：高层 `resolveBuildSkillMatrix` 测试与 prompt 已对齐 `includeDetails=true`
 - `V145.4` 已完成：README、roadmap、索引与架构文档已同步
+
+## 149. V146 skill-matrix compact row unsupported gating
+
+`V145` 收口后，compact `skill-matrix rows` 的 raw `row.assumptions` 已收紧到 `includeDetails=true`。
+
+但 compact `skill-matrix rows` 仍默认携带原始 `row.unsupportedEffects`，而 row / group / top-level `caveatSummary` 已经齐全。
+
+`V146` 只解决一件事：
+
+1. 把 compact `skill-matrix rows` 的 `row.unsupportedEffects` 也移动到 `includeDetails=true`
+
+### 149.1 分阶段
+
+1. `V146.1` scope freeze
+2. `V146.2` runtime/type contract alignment
+3. `V146.3` tool assertion / prompt alignment
+4. `V146.4` docs closeout
+
+### 149.2 非目标
+
+1. 不改变顶层 `matrix.unsupportedEffects`
+2. 不改变既有 `row.caveatSummary`
+3. 不改变 `row.assumptions / row.diagnostics / row.sourceNotes / row.build`
+
+### 149.3 当前状态
+
+- `V146.1` 已完成：冻结到 skill-matrix compact row unsupported gating
+- `V146.2` 已完成：compact `skill-matrix rows` 默认已不再携带 `row.unsupportedEffects`
+- `V146.3` 已完成：高层 `resolveBuildSkillMatrix` 测试与 prompt 已对齐 `includeDetails=true`
+- `V146.4` 已完成：README、roadmap、索引与架构文档已同步
