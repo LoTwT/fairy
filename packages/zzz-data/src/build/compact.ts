@@ -65,7 +65,7 @@ export interface CompactStaticBuildResult {
   assumptionSummary: CompactStaticBuildAssumptionSummary
   caveatSummary: CompactStaticBuildCaveatSummary
   resolvedPanel: StaticBuildResolvedPanel
-  resolvedBuckets: StaticBuildResolvedBuckets
+  resolvedBuckets: CompactStaticBuildResolvedBuckets
   damage: {
     expected: DamageResult
     crit: DamageResult
@@ -106,6 +106,30 @@ export interface CompactStaticBuildResolveSummary {
   hasResearchOnlySourceNote: boolean
   diagnosticGroups: CompactStaticBuildDiagnosticGroupSummary[]
   sourceNoteGroups: CompactStaticBuildSourceNoteGroupSummary[]
+}
+
+export interface CompactStaticBuildResolvedBuckets {
+  attackPercent: number
+  flatAttack: number
+  bonusDamageSum: number
+  critRate: number
+  critDamage: number
+  defenseReduction: number
+  penetrationRate: number
+  penetrationValue: number
+  resistanceReduction: number
+  ignoreResistance: number
+  vulnerabilityBonus: number
+  damageReduction: number
+  stunVulnerability: number
+  nonStunVulnerability: number
+  sheerBonusSum: number
+  anomalyMastery: number
+  anomalyProficiency: number
+  anomalyBonusDamageSum: number
+  anomalyCritRate: number
+  anomalyCritDamage: number
+  skillMultiplierFactor: number
 }
 
 export interface CompactStaticBuildDiagnosticGroupSummary {
@@ -308,7 +332,7 @@ export interface StaticBuildCompactSkillMatrixRow {
   skillMultiplier: string
   damage: StaticBuildSkillMatrixRowDamageSummary
   summary: CompactStaticBuildResolveSummary
-  resolvedBuckets: StaticBuildResolvedBuckets
+  resolvedBuckets: CompactStaticBuildResolvedBuckets
   diagnostics?: CompactStaticBuildDiagnosticEntry[]
   diagnosticSummary: CompactStaticBuildDiagnosticSummary
   sourceNotes?: CompactStaticBuildSourceNoteEntry[]
@@ -404,7 +428,7 @@ export function compactStaticBuildResult(
     ),
     caveatSummary: compactStaticBuildCaveatSummary(build.caveatSummary),
     resolvedPanel: build.resolvedPanel,
-    resolvedBuckets: build.resolvedBuckets,
+    resolvedBuckets: compactStaticBuildResolvedBuckets(build.resolvedBuckets),
     damage: build.damage,
     ...(includeDetails
       ? {
@@ -453,6 +477,34 @@ export function compactStaticBuildResolveSummary(
     sourceNoteGroups: summary.sourceNoteGroups.map((group) =>
       compactStaticBuildSourceNoteGroupSummary(group),
     ),
+  }
+}
+
+export function compactStaticBuildResolvedBuckets(
+  buckets: StaticBuildResolvedBuckets,
+): CompactStaticBuildResolvedBuckets {
+  return {
+    attackPercent: buckets.attackPercent,
+    flatAttack: buckets.flatAttack,
+    bonusDamageSum: buckets.bonusDamageSum,
+    critRate: buckets.critRate,
+    critDamage: buckets.critDamage,
+    defenseReduction: buckets.defenseReduction,
+    penetrationRate: buckets.penetrationRate,
+    penetrationValue: buckets.penetrationValue,
+    resistanceReduction: buckets.resistanceReduction,
+    ignoreResistance: buckets.ignoreResistance,
+    vulnerabilityBonus: buckets.vulnerabilityBonus,
+    damageReduction: buckets.damageReduction,
+    stunVulnerability: buckets.stunVulnerability,
+    nonStunVulnerability: buckets.nonStunVulnerability,
+    sheerBonusSum: buckets.sheerBonusSum,
+    anomalyMastery: buckets.anomalyMastery,
+    anomalyProficiency: buckets.anomalyProficiency,
+    anomalyBonusDamageSum: buckets.anomalyBonusDamageSum,
+    anomalyCritRate: buckets.anomalyCritRate,
+    anomalyCritDamage: buckets.anomalyCritDamage,
+    skillMultiplierFactor: buckets.skillMultiplierFactor,
   }
 }
 
@@ -1102,7 +1154,7 @@ export function compactStaticBuildSkillMatrixRow(
     skillMultiplier: row.skillMultiplier,
     damage: row.damageSummary,
     summary: compactStaticBuildResolveSummary(row.summary),
-    resolvedBuckets: row.resolvedBuckets,
+    resolvedBuckets: compactStaticBuildResolvedBuckets(row.resolvedBuckets),
     diagnosticSummary: compactStaticBuildDiagnosticSummary(
       row.diagnosticSummary,
     ),

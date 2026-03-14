@@ -47,6 +47,7 @@ describe("static build compact helpers", () => {
     expect(compact.summary).toEqual(build.summary)
     expect(compact.effectSummary).toEqual(build.effectSummary)
     expect(compact.damage.expected.total).toBeGreaterThan(0)
+    expect(compact.resolvedBuckets).toEqual(build.resolvedBuckets)
     expect(compact.assumptions).toBeUndefined()
     expect(compact.unsupportedEffects).toBeUndefined()
     expect(compact.diagnostics).toBeUndefined()

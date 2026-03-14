@@ -7068,6 +7068,38 @@ caveatSummary` 这些兼容字段补齐。
 - `V177.3` 已完成：现有测试与 runtime 校验已覆盖
 - `V177.4` 已完成：roadmap、索引与架构文档已同步
 
+## 181. V178 explicit compact resolved buckets
+
+`V177` 收口后，compact contract 中下一处仍直接复用 raw build type 的稳定缺口是：
+
+1. `CompactStaticBuildResult.resolvedBuckets`
+2. `StaticBuildCompactSkillMatrixRow.resolvedBuckets`
+
+`V178` 只解决一件事：
+
+1. 把 compact single-build 与 compact skill-matrix row 上的 `resolvedBuckets` 改为显式 compact type
+
+### 181.1 分阶段
+
+1. `V178.1` scope freeze
+2. `V178.2` runtime/type contract alignment
+3. `V178.3` tests / prompt alignment
+4. `V178.4` docs closeout
+
+### 181.2 非目标
+
+1. 不改变 `resolvedBuckets` 的字段值
+2. 不改变 `resolvedPanel`
+3. 不改变 `damageParams`
+4. 不改变 `includeDetails` 语义
+
+### 181.3 当前状态
+
+- `V178.1` 已完成：冻结到 explicit compact resolved buckets
+- `V178.2` 已完成：compact single-build 与 compact skill-matrix row 的 `resolvedBuckets` 已改为显式 compact type
+- `V178.3` 已完成：现有测试与 runtime 校验已覆盖
+- `V178.4` 已完成：roadmap、索引与架构文档已同步
+
 ## 174. V171 explicit compact top-level summary effect summaries
 
 `V170` 收口后，compact contract 中下一批仍直接复用 raw effect summary item type 的显式缺口主要集中在 top-level `summary`：
