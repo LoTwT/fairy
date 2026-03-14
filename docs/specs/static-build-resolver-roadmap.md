@@ -5890,3 +5890,29 @@ caveatSummary` 这些兼容字段补齐。
 - `V139.2` 已完成：`StaticBuildCompactSourceUtilityViewEntry` 默认已不再携带 `requirements`
 - `V139.3` 已完成：高层 `resolveBuildSourceUtilityViews` 测试与 prompt 已对齐 `includeDetails=true`
 - `V139.4` 已完成：README、roadmap、索引与架构文档已同步
+
+## 143. V140 source-entry compact entry requirement gating
+
+### 143.1 背景
+
+`V136` 收口后，mixed `source-entry entries` 的 raw details 已收紧到 `includeDetails=true`。
+
+但 compact mixed `source-entry entries` 仍默认携带原始 `entry.requirements`，而 mixed entry / group / top-level requirement aggregates 已经齐全。
+
+`V140` 只解决一件事：
+
+1. 把 compact mixed `source-entry entries` 的 `entry.requirements` 也移动到 `includeDetails=true`
+
+### 143.2 范围
+
+1. `V140.1` scope freeze
+2. `V140.2` runtime/type contract alignment
+3. `V140.3` tool assertion / prompt alignment
+4. `V140.4` docs closeout
+
+### 143.3 当前状态
+
+- `V140.1` 已完成：冻结到 mixed source-entry compact entry requirement gating
+- `V140.2` 已完成：compact mixed entries 默认已不再携带 `requirements`
+- `V140.3` 已完成：高层 `resolveBuildSourceEntries` 测试与 prompt 已对齐 `includeDetails=true`
+- `V140.4` 已完成：README、roadmap、索引与架构文档已同步

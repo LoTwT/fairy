@@ -791,15 +791,17 @@ describe("resolveBuildSourceEntries tool", () => {
     const sourceUtilityEntry = (result as any).collection.entries.find(
       (entry: any) => entry.metadata.entryKind === "source-utility-view",
     )
+    expect(sourceDamageEntry.requirements).toBeUndefined()
     expect(sourceDamageEntry.diagnostics).toBeUndefined()
     expect(sourceDamageEntry.sourceNotes).toBeUndefined()
     expect(sourceDamageEntry.build).toBeUndefined()
+    expect(sourceUtilityEntry.requirements).toBeUndefined()
     expect(sourceUtilityEntry.diagnostics).toBeUndefined()
     expect(sourceUtilityEntry.sourceNotes).toBeUndefined()
     expect(sourceUtilityEntry.build).toBeUndefined()
   })
 
-  it("returns full build details only when includeDetails is true", async () => {
+  it("returns full raw requirements and build details only when includeDetails is true", async () => {
     const result = await runTool(resolveBuildSourceEntries, {
       agent: "爱丽丝",
       wEngine: "「电磁暴」-叁式",
@@ -837,9 +839,11 @@ describe("resolveBuildSourceEntries tool", () => {
     const sourceUtilityEntry = (result as any).collection.entries.find(
       (entry: any) => entry.metadata.entryKind === "source-utility-view",
     )
+    expect(sourceDamageEntry.requirements).toEqual(expect.any(Array))
     expect(sourceDamageEntry.diagnostics).toEqual(expect.any(Array))
     expect(sourceDamageEntry.sourceNotes).toEqual(expect.any(Array))
     expect(sourceDamageEntry.build).toBeTruthy()
+    expect(sourceUtilityEntry.requirements).toEqual(expect.any(Array))
     expect(sourceUtilityEntry.diagnostics).toEqual(expect.any(Array))
     expect(sourceUtilityEntry.sourceNotes).toEqual(expect.any(Array))
     expect(sourceUtilityEntry.build).toBeUndefined()

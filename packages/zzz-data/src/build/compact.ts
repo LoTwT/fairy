@@ -526,7 +526,6 @@ export function compactStaticBuildSourceEntry(
       sourceId: entry.sourceId,
       damageType: entry.damageType,
       resolutionMode: entry.resolutionMode,
-      requirements: entry.requirements,
       requirementSummary: entry.requirementSummary,
       diagnosticSummary: entry.diagnosticSummary,
       sourceNoteSummary: entry.sourceNoteSummary,
@@ -538,6 +537,7 @@ export function compactStaticBuildSourceEntry(
       summary: entry.summary,
       ...(includeDetails
         ? {
+            requirements: entry.requirements,
             diagnostics: entry.diagnostics,
             sourceNotes: entry.sourceNotes,
             ...(entry.build ? { build: entry.build } : {}),
@@ -556,7 +556,6 @@ export function compactStaticBuildSourceEntry(
     utilityType: entry.utilityType,
     resolutionMode: entry.resolutionMode,
     targetScope: entry.targetScope,
-    requirements: entry.requirements,
     requirementSummary: entry.requirementSummary,
     value: entry.value,
     unit: entry.unit,
@@ -572,6 +571,7 @@ export function compactStaticBuildSourceEntry(
     assumptions: entry.assumptions,
     ...(includeDetails
       ? {
+          requirements: entry.requirements,
           diagnostics: entry.diagnostics,
           sourceNotes: entry.sourceNotes,
         }
