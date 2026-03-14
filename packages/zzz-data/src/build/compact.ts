@@ -73,9 +73,9 @@ export interface CompactStaticBuildResult {
   resolvedPanel: CompactStaticBuildResolvedPanel
   resolvedBuckets: CompactStaticBuildResolvedBuckets
   damage: {
-    expected: DamageResult
-    crit: DamageResult
-    noCrit: DamageResult
+    expected: CompactStaticBuildDamageResult
+    crit: CompactStaticBuildDamageResult
+    noCrit: CompactStaticBuildDamageResult
   }
   diagnostics?: CompactStaticBuildDiagnosticEntry[]
   sourceNotes?: CompactStaticBuildSourceNoteEntry[]
@@ -232,6 +232,27 @@ export interface CompactStaticBuildDisorderDamageParams extends Omit<
   damageMultiplierFactor?: number
   anomalyType: AnomalyType
   remainingTime: number
+}
+
+export interface CompactStaticBuildDamageBreakdown {
+  baseDamage: number
+  bonusMultiplier: number
+  critMultiplier: number
+  defenseMultiplier: number
+  resistanceMultiplier: number
+  vulnerabilityMultiplier: number
+  dazeVulnerabilityMultiplier: number
+  sheerBonusMultiplier: number
+  anomalyProficiencyMultiplier: number
+  damageLevelMultiplier: number
+  anomalyBonusMultiplier: number
+  anomalyCritMultiplier: number
+  specialMultiplier: number
+}
+
+export interface CompactStaticBuildDamageResult {
+  total: number
+  breakdown: CompactStaticBuildDamageBreakdown
 }
 
 export interface CompactStaticBuildDiagnosticGroupSummary {
@@ -531,7 +552,11 @@ export function compactStaticBuildResult(
     caveatSummary: compactStaticBuildCaveatSummary(build.caveatSummary),
     resolvedPanel: compactStaticBuildResolvedPanel(build.resolvedPanel),
     resolvedBuckets: compactStaticBuildResolvedBuckets(build.resolvedBuckets),
-    damage: build.damage,
+    damage: {
+      expected: compactStaticBuildDamageResult(build.damage.expected),
+      crit: compactStaticBuildDamageResult(build.damage.crit),
+      noCrit: compactStaticBuildDamageResult(build.damage.noCrit),
+    },
     ...(includeDetails
       ? {
           assumptions: build.assumptions,
@@ -786,6 +811,35 @@ export function compactStaticBuildDamageParams(
   }
 
   return compactStaticBuildNormalDamageParams(params)
+}
+
+export function compactStaticBuildDamageBreakdown(
+  breakdown: DamageResult["breakdown"],
+): CompactStaticBuildDamageBreakdown {
+  return {
+    baseDamage: breakdown.baseDamage,
+    bonusMultiplier: breakdown.bonusMultiplier,
+    critMultiplier: breakdown.critMultiplier,
+    defenseMultiplier: breakdown.defenseMultiplier,
+    resistanceMultiplier: breakdown.resistanceMultiplier,
+    vulnerabilityMultiplier: breakdown.vulnerabilityMultiplier,
+    dazeVulnerabilityMultiplier: breakdown.dazeVulnerabilityMultiplier,
+    sheerBonusMultiplier: breakdown.sheerBonusMultiplier,
+    anomalyProficiencyMultiplier: breakdown.anomalyProficiencyMultiplier,
+    damageLevelMultiplier: breakdown.damageLevelMultiplier,
+    anomalyBonusMultiplier: breakdown.anomalyBonusMultiplier,
+    anomalyCritMultiplier: breakdown.anomalyCritMultiplier,
+    specialMultiplier: breakdown.specialMultiplier,
+  }
+}
+
+export function compactStaticBuildDamageResult(
+  result: DamageResult,
+): CompactStaticBuildDamageResult {
+  return {
+    total: result.total,
+    breakdown: compactStaticBuildDamageBreakdown(result.breakdown),
+  }
 }
 
 export function compactStaticBuildDiagnosticEntry(
