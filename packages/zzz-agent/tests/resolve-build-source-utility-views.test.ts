@@ -189,10 +189,6 @@ describe("resolveBuildSourceUtilityViews tool", () => {
         entryKind: "source-utility-view",
       },
       effectSummary: [],
-      requirements: [
-        { kind: "trigger", key: "发动[强化特殊技]", satisfied: true },
-        { kind: "cooldown", key: "12s", satisfied: true },
-      ],
       requirementSummary: {
         count: 2,
         satisfiedCount: 2,
@@ -258,11 +254,12 @@ describe("resolveBuildSourceUtilityViews tool", () => {
         hasAssumptions: true,
       },
     })
+    expect((result as any).views.entries[0].requirements).toBeUndefined()
     expect((result as any).views.entries[0].diagnostics).toBeUndefined()
     expect((result as any).views.entries[0].sourceNotes).toBeUndefined()
   })
 
-  it("returns utility entry detail arrays only when includeDetails is true", async () => {
+  it("returns utility entry raw requirements and detail arrays only when includeDetails is true", async () => {
     const result = await runTool(resolveBuildSourceUtilityViews, {
       agent: "猫又",
       wEngine: "「月相」-朔",
@@ -271,6 +268,9 @@ describe("resolveBuildSourceUtilityViews tool", () => {
     })
 
     expect((result as any).found).toBe(true)
+    expect(Array.isArray((result as any).views.entries[0].requirements)).toBe(
+      true,
+    )
     expect(Array.isArray((result as any).views.entries[0].diagnostics)).toBe(
       true,
     )

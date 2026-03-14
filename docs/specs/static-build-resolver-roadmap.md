@@ -5864,3 +5864,29 @@ caveatSummary` 这些兼容字段补齐。
 - `V138.2` 已完成：`StaticBuildCompactSourceDamageViewEntry` 默认已不再携带 `requirements`
 - `V138.3` 已完成：高层 `resolveBuildSourceDamageViews` 测试与 prompt 已对齐 `includeDetails=true`
 - `V138.4` 已完成：README、roadmap、索引与架构文档已同步
+
+## 142. V139 source-utility-view compact entry requirement gating
+
+### 142.1 背景
+
+`V135` 收口后，standalone `source-utility-view entries` 的 raw details 已收紧到 `includeDetails=true`。
+
+但 compact standalone `source-utility-view entries` 仍默认携带原始 `entry.requirements`，而 entry / group / top-level `requirementSummary` 已经齐全。
+
+`V139` 只解决一件事：
+
+1. 把 compact standalone `source-utility-view entries` 的 `entry.requirements` 也移动到 `includeDetails=true`
+
+### 142.2 范围
+
+1. `V139.1` scope freeze
+2. `V139.2` runtime/type contract alignment
+3. `V139.3` tool assertion / prompt alignment
+4. `V139.4` docs closeout
+
+### 142.3 当前状态
+
+- `V139.1` 已完成：冻结到 standalone source-utility-view compact entry requirement gating
+- `V139.2` 已完成：`StaticBuildCompactSourceUtilityViewEntry` 默认已不再携带 `requirements`
+- `V139.3` 已完成：高层 `resolveBuildSourceUtilityViews` 测试与 prompt 已对齐 `includeDetails=true`
+- `V139.4` 已完成：README、roadmap、索引与架构文档已同步

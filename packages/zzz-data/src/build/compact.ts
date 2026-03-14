@@ -205,7 +205,7 @@ export interface StaticBuildCompactSourceUtilityViewEntry {
   utilityType: StaticBuildSourceUtilityViewEntry["utilityType"]
   resolutionMode: StaticBuildSourceUtilityViewEntry["resolutionMode"]
   targetScope: StaticBuildSourceUtilityViewEntry["targetScope"]
-  requirements: StaticBuildSourceUtilityViewEntry["requirements"]
+  requirements?: StaticBuildSourceUtilityViewEntry["requirements"]
   requirementSummary: StaticBuildSourceUtilityViewEntry["requirementSummary"]
   value: number
   unit: StaticBuildSourceUtilityViewEntry["unit"]
@@ -469,13 +469,46 @@ export function compactStaticBuildSourceUtilityViewsResult(
     sourceNoteSummary: views.sourceNoteSummary,
     assumptionSummary: views.assumptionSummary,
     assumptions: views.assumptions,
-    entries: views.entries.map(
-      (entry) =>
-        compactStaticBuildSourceEntry(
-          entry,
-          includeDetails,
-        ) as StaticBuildCompactSourceUtilityViewEntry,
+    entries: views.entries.map((entry) =>
+      compactStaticBuildSourceUtilityViewEntry(entry, includeDetails),
     ),
+  }
+}
+
+export function compactStaticBuildSourceUtilityViewEntry(
+  entry: StaticBuildSourceUtilityViewEntry,
+  includeDetails = false,
+): StaticBuildCompactSourceUtilityViewEntry {
+  return {
+    id: entry.id,
+    label: entry.label,
+    metadata: entry.metadata,
+    supported: entry.supported,
+    sourceType: entry.sourceType,
+    sourceId: entry.sourceId,
+    utilityType: entry.utilityType,
+    resolutionMode: entry.resolutionMode,
+    targetScope: entry.targetScope,
+    requirementSummary: entry.requirementSummary,
+    value: entry.value,
+    unit: entry.unit,
+    triggerLabel: entry.triggerLabel,
+    conditionLabel: entry.conditionLabel,
+    cooldownSeconds: entry.cooldownSeconds,
+    summary: entry.summary,
+    diagnosticSummary: entry.diagnosticSummary,
+    sourceNoteSummary: entry.sourceNoteSummary,
+    effectSummary: entry.effectSummary,
+    caveatSummary: entry.caveatSummary,
+    assumptionSummary: entry.assumptionSummary,
+    assumptions: entry.assumptions,
+    ...(includeDetails
+      ? {
+          requirements: entry.requirements,
+          diagnostics: entry.diagnostics,
+          sourceNotes: entry.sourceNotes,
+        }
+      : {}),
   }
 }
 

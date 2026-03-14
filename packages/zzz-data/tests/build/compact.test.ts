@@ -698,10 +698,6 @@ describe("static build compact helpers", () => {
         entryKind: "source-utility-view",
       },
       effectSummary: [],
-      requirements: [
-        { kind: "trigger", key: "发动[强化特殊技]", satisfied: true },
-        { kind: "cooldown", key: "12s", satisfied: true },
-      ],
       requirementSummary: {
         count: 2,
         satisfiedCount: 2,
@@ -746,9 +742,10 @@ describe("static build compact helpers", () => {
     })
     expect(compact.entries[0]?.diagnostics).toBeUndefined()
     expect(compact.entries[0]?.sourceNotes).toBeUndefined()
+    expect(compact.entries[0]?.requirements).toBeUndefined()
   })
 
-  it("keeps source-utility entry details only when requested", () => {
+  it("keeps source-utility entry raw requirements and details only when requested", () => {
     const views = resolveStaticBuildSourceUtilityViews({
       loadout: {
         agentId: "1021",
@@ -759,6 +756,9 @@ describe("static build compact helpers", () => {
 
     const compact = compactStaticBuildSourceUtilityViewsResult(views, true)
 
+    expect(compact.entries[0]?.requirements).toEqual(
+      views.entries[0]?.requirements,
+    )
     expect(compact.entries[0]?.diagnostics).toEqual(
       views.entries[0]?.diagnostics,
     )
