@@ -6290,3 +6290,33 @@ caveatSummary` 这些兼容字段补齐。
 - `V153.2` 已完成：默认 compact source-utility-view 已不再携带顶层 `views.assumptions`
 - `V153.3` 已完成：高层 `resolveBuildSourceUtilityViews` 测试与 prompt 已对齐 `includeDetails=true`
 - `V153.4` 已完成：README、roadmap、索引与架构文档已同步
+
+## 157. V154 source-entry compact top-level assumption gating
+
+`V153` 收口后，standalone source-damage-view 与 source-utility-view 顶层的 raw `views.assumptions` 已都收紧到 `includeDetails=true`。
+
+但 compact mixed `source-entry collection` 顶层结果仍默认携带原始 `collection.assumptions`，而 `collection.summary.assumptionSummary / collection.assumptionSummary / collection.caveatSummary` 已经齐全。
+
+`V154` 只解决一件事：
+
+1. 把 compact mixed `source-entry collection` 的顶层 `collection.assumptions` 也移动到 `includeDetails=true`
+
+### 157.1 分阶段
+
+1. `V154.1` scope freeze
+2. `V154.2` runtime/type contract alignment
+3. `V154.3` tool assertion / prompt alignment
+4. `V154.4` docs closeout
+
+### 157.2 非目标
+
+1. 不改变 `collection.caveatSummary`
+2. 不改变 `collection.assumptionSummary`
+3. 不改变 `entry.assumptions / entry.requirements / entry.diagnostics / entry.sourceNotes / entry.build`
+
+### 157.3 当前状态
+
+- `V154.1` 已完成：冻结到 mixed source-entry collection compact top-level assumption gating
+- `V154.2` 已完成：默认 compact mixed source-entry collection 已不再携带顶层 `collection.assumptions`
+- `V154.3` 已完成：高层 `resolveBuildSourceEntries` 测试与 prompt 已对齐 `includeDetails=true`
+- `V154.4` 已完成：README、roadmap、索引与架构文档已同步

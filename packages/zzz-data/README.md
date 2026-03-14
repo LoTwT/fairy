@@ -1045,7 +1045,7 @@ const compactEntries = compactStaticBuildSourceEntryCollection(collection)
 - `compactStaticBuildResult(result)` 默认不带 `assumptions / unsupportedEffects / diagnostics / sourceNotes / trace / damageParams`
 - `compactStaticBuildSkillMatrixResult(matrix)` 默认不带 `row.assumptions / row.unsupportedEffects / row.diagnostics / row.sourceNotes / row.build`
 - `compactStaticBuildTriggerMatrixResult(matrix)` 默认不带 `row.assumptions / row.requirements / row.diagnostics / row.sourceNotes / row.build`
-- `compactStaticBuildSourceEntryCollection(collection)` 默认不带 mixed `entry.assumptions / entry.requirements / entry.diagnostics / entry.sourceNotes / entry.build`；只有 `compactStaticBuildSourceEntryCollection(collection, true)` 才会展开这些明细，其中 `entry.build` 仅在对应 `source-damage-view` 原始结果本来带 `build` 时透传
+- `compactStaticBuildSourceEntryCollection(collection)` 默认不带顶层 `collection.assumptions`，也不带 mixed `entry.assumptions / entry.requirements / entry.diagnostics / entry.sourceNotes / entry.build`；只有 `compactStaticBuildSourceEntryCollection(collection, true)` 才会展开这些明细，其中 `entry.build` 仅在对应 `source-damage-view` 原始结果本来带 `build` 时透传
 
 只有显式传 `includeDetails = true` 时，才会带上对应底层明细结果。
 

@@ -237,7 +237,7 @@ export interface CompactStaticBuildSourceEntryCollection {
   diagnosticSummary: ResolveStaticBuildSourceEntriesResult["diagnosticSummary"]
   sourceNoteSummary: ResolveStaticBuildSourceEntriesResult["sourceNoteSummary"]
   assumptionSummary: ResolveStaticBuildSourceEntriesResult["assumptionSummary"]
-  assumptions: string[]
+  assumptions?: string[]
   entries: StaticBuildCompactSourceEntry[]
 }
 
@@ -401,7 +401,11 @@ export function compactStaticBuildSourceEntryCollection(
     diagnosticSummary: collection.diagnosticSummary,
     sourceNoteSummary: collection.sourceNoteSummary,
     assumptionSummary: collection.assumptionSummary,
-    assumptions: collection.assumptions,
+    ...(includeDetails
+      ? {
+          assumptions: collection.assumptions,
+        }
+      : {}),
     entries: collection.entries.map((entry) =>
       compactStaticBuildSourceEntry(entry, includeDetails),
     ),

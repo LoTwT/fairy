@@ -467,6 +467,7 @@ describe("static build compact helpers", () => {
 
     const compact = compactStaticBuildSourceEntryCollection(collection)
 
+    expect(compact.assumptions).toBeUndefined()
     expect(compact.summary.entryCount).toBe(2)
     expect(compact.entries.map((entry) => entry.metadata.entryKind)).toEqual(
       expect.arrayContaining(["source-damage-view", "source-utility-view"]),
@@ -600,6 +601,7 @@ describe("static build compact helpers", () => {
     })
 
     const compact = compactStaticBuildSourceEntryCollection(collection, true)
+    expect(compact.assumptions).toEqual(collection.assumptions)
     const damageEntry = compact.entries.find(
       (entry) => entry.metadata.entryKind === "source-damage-view",
     )

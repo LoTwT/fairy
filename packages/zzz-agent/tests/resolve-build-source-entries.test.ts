@@ -12,9 +12,10 @@ describe("resolveBuildSourceEntries tool", () => {
     })
 
     expect((result as any).found).toBe(true)
+    expect((result as any).collection.assumptions).toBeUndefined()
     expect((result as any).collection.assumptionSummary).toEqual({
-      count: (result as any).collection.assumptions.length,
-      hasAssumptions: (result as any).collection.assumptions.length > 0,
+      count: expect.any(Number),
+      hasAssumptions: expect.any(Boolean),
     })
     expect((result as any).collection.summary).toMatchObject({
       entryCount: 1,
@@ -24,14 +25,16 @@ describe("resolveBuildSourceEntries tool", () => {
       unsupportedCount: 0,
       isUtilityOnly: true,
       caveatSummary: {
-        assumptionCount: (result as any).collection.assumptions.length,
+        assumptionCount: (result as any).collection.assumptionSummary.count,
         unsupportedCount: 0,
-        hasAssumptions: (result as any).collection.assumptions.length > 0,
+        hasAssumptions: (result as any).collection.assumptionSummary
+          .hasAssumptions,
         hasUnsupported: false,
       },
       assumptionSummary: {
-        count: (result as any).collection.assumptions.length,
-        hasAssumptions: (result as any).collection.assumptions.length > 0,
+        count: (result as any).collection.assumptionSummary.count,
+        hasAssumptions: (result as any).collection.assumptionSummary
+          .hasAssumptions,
       },
       sourceDamageRequirementSummary: {
         count: 0,
@@ -145,9 +148,10 @@ describe("resolveBuildSourceEntries tool", () => {
       ],
     })
     expect((result as any).collection.caveatSummary).toEqual({
-      assumptionCount: (result as any).collection.assumptions.length,
+      assumptionCount: (result as any).collection.assumptionSummary.count,
       unsupportedCount: 0,
-      hasAssumptions: (result as any).collection.assumptions.length > 0,
+      hasAssumptions: (result as any).collection.assumptionSummary
+        .hasAssumptions,
       hasUnsupported: false,
     })
     expect((result as any).collection.effectSummary).toEqual(
@@ -321,9 +325,10 @@ describe("resolveBuildSourceEntries tool", () => {
     })
 
     expect((result as any).found).toBe(true)
+    expect((result as any).collection.assumptions).toBeUndefined()
     expect((result as any).collection.assumptionSummary).toEqual({
-      count: (result as any).collection.assumptions.length,
-      hasAssumptions: (result as any).collection.assumptions.length > 0,
+      count: expect.any(Number),
+      hasAssumptions: expect.any(Boolean),
     })
     expect((result as any).collection.summary).toMatchObject({
       entryCount: 2,
@@ -333,14 +338,16 @@ describe("resolveBuildSourceEntries tool", () => {
       unsupportedCount: 0,
       isUtilityOnly: false,
       caveatSummary: {
-        assumptionCount: (result as any).collection.assumptions.length,
+        assumptionCount: (result as any).collection.assumptionSummary.count,
         unsupportedCount: 0,
-        hasAssumptions: (result as any).collection.assumptions.length > 0,
+        hasAssumptions: (result as any).collection.assumptionSummary
+          .hasAssumptions,
         hasUnsupported: false,
       },
       assumptionSummary: {
-        count: (result as any).collection.assumptions.length,
-        hasAssumptions: (result as any).collection.assumptions.length > 0,
+        count: (result as any).collection.assumptionSummary.count,
+        hasAssumptions: (result as any).collection.assumptionSummary
+          .hasAssumptions,
       },
       sourceDamageRequirementSummary: {
         count: 2,
@@ -511,9 +518,10 @@ describe("resolveBuildSourceEntries tool", () => {
       ],
     })
     expect((result as any).collection.caveatSummary).toEqual({
-      assumptionCount: (result as any).collection.assumptions.length,
+      assumptionCount: (result as any).collection.assumptionSummary.count,
       unsupportedCount: 0,
-      hasAssumptions: (result as any).collection.assumptions.length > 0,
+      hasAssumptions: (result as any).collection.assumptionSummary
+        .hasAssumptions,
       hasUnsupported: false,
     })
     expect((result as any).collection.sourceDamageRequirementSummary).toEqual(
@@ -629,9 +637,10 @@ describe("resolveBuildSourceEntries tool", () => {
       sourceUtilityViewCount: 1,
       isUtilityOnly: false,
       caveatSummary: {
-        assumptionCount: (result as any).collection.assumptions.length,
+        assumptionCount: (result as any).collection.assumptionSummary.count,
         unsupportedCount: 0,
-        hasAssumptions: (result as any).collection.assumptions.length > 0,
+        hasAssumptions: (result as any).collection.assumptionSummary
+          .hasAssumptions,
         hasUnsupported: false,
       },
       sourceDamageRequirementSummary: {
@@ -835,6 +844,7 @@ describe("resolveBuildSourceEntries tool", () => {
       },
     })
 
+    expect(Array.isArray((result as any).collection.assumptions)).toBe(true)
     const sourceDamageEntry = (result as any).collection.entries.find(
       (entry: any) => entry.metadata.entryKind === "source-damage-view",
     )
