@@ -3720,3 +3720,36 @@ Batch B（已完成）：
 1. 不改变既有顶层 `views.assumptionSummary`
 2. 不改变 entry / group 级 assumption contract
 3. 不提前扩到 source-utility-view / source-entry summary 的同名字段
+
+## 86. V83 source-utility-view summary assumption summary
+
+`V82` 收口后，standalone `source-utility-view` 仍只有：
+
+- 顶层 `views.assumptionSummary`
+- 组级 `views.summary.groups[*].assumptionSummary`
+- entry 级 `entry.assumptionSummary`
+
+`views.summary` 本身还缺少同名聚合字段。
+
+`V83` 只解决一件事：
+
+- 为 `StaticBuildSourceUtilityViewSummary` 增加稳定 `assumptionSummary`
+
+### 86.1 当前状态
+
+- `V83.1` 已完成：冻结到 source-utility-view summary assumption summary
+- `V83.2` 已完成：`StaticBuildSourceUtilityViewSummary` 已新增稳定 `assumptionSummary`
+- `V83.3` 已完成：高层 tool 断言与 agent prompt 已对齐 `views.summary.assumptionSummary`
+- `V83.4` 已完成：相关 specs、roadmap、索引、架构文档与 README 已同步
+
+### 86.2 目标
+
+1. 为 `views.summary` 增加稳定 assumption aggregate
+2. 保持与既有顶层 `views.assumptionSummary` 一致
+3. 让 source-utility-view 顶层 `summary` 在四类聚合上对齐 requirement / diagnostics / source notes
+
+### 86.3 Out of Scope
+
+1. 不改变既有顶层 `views.assumptionSummary`
+2. 不改变 entry / group 级 assumption contract
+3. 不提前扩到 unified source-entry summary 的同名字段

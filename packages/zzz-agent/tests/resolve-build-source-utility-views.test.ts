@@ -22,6 +22,10 @@ describe("resolveBuildSourceUtilityViews tool", () => {
       rateCount: 0,
       supportedCount: 1,
       unsupportedCount: 0,
+      assumptionSummary: {
+        count: (result as any).views.assumptions.length,
+        hasAssumptions: (result as any).views.assumptions.length > 0,
+      },
       requirementSummary: {
         count: 2,
         satisfiedCount: 2,
@@ -213,6 +217,10 @@ describe("resolveBuildSourceUtilityViews tool", () => {
       rateCount: 0,
       supportedCount: 8,
       unsupportedCount: 0,
+      assumptionSummary: {
+        count: (result as any).views.assumptions.length,
+        hasAssumptions: (result as any).views.assumptions.length > 0,
+      },
       requirementSummary: {
         count: 16,
         satisfiedCount: 16,

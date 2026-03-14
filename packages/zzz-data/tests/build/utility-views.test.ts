@@ -39,6 +39,10 @@ describe("static build source utility views", () => {
       rateCount: 0,
       supportedCount: 1,
       unsupportedCount: 0,
+      assumptionSummary: {
+        count: result.assumptions.length,
+        hasAssumptions: result.assumptions.length > 0,
+      },
       requirementSummary: {
         count: 2,
         satisfiedCount: 2,
@@ -286,6 +290,10 @@ describe("static build source utility views", () => {
       rateCount: 1,
       supportedCount: 1,
       unsupportedCount: 0,
+      assumptionSummary: {
+        count: result.assumptions.length,
+        hasAssumptions: result.assumptions.length > 0,
+      },
       requirementSummary: {
         count: 1,
         satisfiedCount: 1,
@@ -427,6 +435,10 @@ describe("static build source utility views", () => {
       rateCount: 0,
       supportedCount: 8,
       unsupportedCount: 0,
+      assumptionSummary: {
+        count: result.assumptions.length,
+        hasAssumptions: result.assumptions.length > 0,
+      },
       requirementSummary: {
         count: 16,
         satisfiedCount: 16,

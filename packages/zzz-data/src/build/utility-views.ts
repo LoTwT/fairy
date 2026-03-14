@@ -387,7 +387,7 @@ export function resolveStaticBuildSourceUtilityViews(
 
   return {
     loadout,
-    summary: summarizeSourceUtilityViews(entries),
+    summary: summarizeSourceUtilityViews(entries, assumptions),
     assumptionSummary: summarizeAssumptions(assumptions),
     entries,
     assumptions,
@@ -415,6 +415,7 @@ function getSourceUtilityViewGroupOrder(
 
 function summarizeSourceUtilityViews(
   entries: StaticBuildSourceUtilityViewEntry[],
+  assumptions: string[],
 ): StaticBuildSourceUtilityViewSummary {
   const triggerEntries = entries.filter(
     (entry) => entry.resolutionMode === "trigger",
@@ -467,6 +468,7 @@ function summarizeSourceUtilityViews(
     ),
     diagnosticSummary: summarizeDiagnosticEntries(diagnostics),
     sourceNoteSummary: summarizeSourceNoteEntries(sourceNotes),
+    assumptionSummary: summarizeAssumptions(assumptions),
     groups,
   }
 }
