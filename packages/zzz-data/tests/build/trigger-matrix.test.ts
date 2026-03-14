@@ -54,6 +54,12 @@ describe("static build trigger matrix", () => {
     const sourceViewRows = result.rows.filter(
       (row) => row.metadata.entryKind === "source-view",
     )
+    const mainFormulaGroup = result.summary.groups.find(
+      (group) => group.key === "main-formula",
+    )
+    const sourceViewGroup = result.summary.groups.find(
+      (group) => group.key === "source-view",
+    )
     const mainFormulaAssumptionCount = mainFormulaRows.flatMap(
       (row) => row.assumptions,
     ).length
@@ -92,6 +98,26 @@ describe("static build trigger matrix", () => {
           totalRowCount: 2,
           appliesToAllRows: true,
           condition: "当前矩阵全部生效",
+        }),
+      ]),
+    )
+    expect(mainFormulaGroup?.effectSummary).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          effectId: "alice-state-polarity-assault-ratio",
+          appliedRowCount: 1,
+          totalRowCount: 1,
+          appliesToAllRows: true,
+        }),
+      ]),
+    )
+    expect(sourceViewGroup?.effectSummary).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          effectId: "alice-state-polarity-assault-ratio",
+          appliedRowCount: 1,
+          totalRowCount: 1,
+          appliesToAllRows: true,
         }),
       ]),
     )

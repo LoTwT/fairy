@@ -214,6 +214,7 @@ function summarizeTriggerMatrixRows(
       count: groupRows.length,
       supportedCount: groupSupportedCount,
       unsupportedCount: groupRows.length - groupSupportedCount,
+      effectSummary: summarizeTriggerMatrixEffects(groupRows),
       requirementSummary: summarizeSourceDamageViewRequirements(
         groupRows.flatMap((row) => row.requirements),
       ),

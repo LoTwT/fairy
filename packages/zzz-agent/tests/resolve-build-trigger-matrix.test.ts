@@ -40,6 +40,12 @@ describe("resolveBuildTriggerMatrix tool", () => {
     const sourceViewRows = (result as any).matrix.rows.filter(
       (row: any) => row.metadata.entryKind === "source-view",
     )
+    const mainFormulaGroup = (result as any).matrix.summary.groups.find(
+      (group: any) => group.key === "main-formula",
+    )
+    const sourceViewGroup = (result as any).matrix.summary.groups.find(
+      (group: any) => group.key === "source-view",
+    )
     const mainFormulaAssumptionCount = mainFormulaRows.flatMap(
       (row: any) => row.assumptions,
     ).length
@@ -83,6 +89,26 @@ describe("resolveBuildTriggerMatrix tool", () => {
           totalRowCount: 2,
           appliesToAllRows: true,
           condition: "当前矩阵全部生效",
+        }),
+      ]),
+    )
+    expect(mainFormulaGroup?.effectSummary).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          effectId: "alice-state-polarity-assault-ratio",
+          appliedRowCount: 1,
+          totalRowCount: 1,
+          appliesToAllRows: true,
+        }),
+      ]),
+    )
+    expect(sourceViewGroup?.effectSummary).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          effectId: "alice-state-polarity-assault-ratio",
+          appliedRowCount: 1,
+          totalRowCount: 1,
+          appliesToAllRows: true,
         }),
       ]),
     )

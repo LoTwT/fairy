@@ -473,9 +473,10 @@ matrix.summary.effectSummary
 matrix.effectSummary
 ```
 
-如果你是按 `main-formula / source-view` 拆 section，也不要再自己遍历组内 rows 统计 requirement / diagnostics / source notes / caveat，直接读取：
+如果你是按 `main-formula / source-view` 拆 section，也不要再自己遍历组内 rows 统计 effect / requirement / diagnostics / source notes / caveat，直接读取：
 
 ```ts
+matrix.summary.groups[0].effectSummary
 matrix.summary.groups[0].requirementSummary
 matrix.summary.groups[0].caveatSummary
 matrix.summary.groups[0].diagnosticSummary
