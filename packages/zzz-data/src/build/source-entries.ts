@@ -77,7 +77,7 @@ export function resolveStaticBuildSourceEntries(
 
   return {
     loadout,
-    summary: summarizeSourceEntries(sortedEntries),
+    summary: summarizeSourceEntries(sortedEntries, uniqueAssumptions),
     assumptionSummary: summarizeSourceEntryAssumptions(uniqueAssumptions),
     entries: sortedEntries,
     assumptions: uniqueAssumptions,
@@ -113,6 +113,7 @@ function getSourceEntryGroupOrder(entry: StaticBuildSourceEntry) {
 
 function summarizeSourceEntries(
   entries: StaticBuildSourceEntry[],
+  assumptions: string[],
 ): StaticBuildSourceEntryCollectionSummary {
   const sourceDamageEntries = entries.filter(
     (entry) => entry.metadata.entryKind === "source-damage-view",
@@ -185,6 +186,7 @@ function summarizeSourceEntries(
     ),
     diagnosticSummary: summarizeDiagnosticEntries(diagnostics),
     sourceNoteSummary: summarizeSourceNoteEntries(sourceNotes),
+    assumptionSummary: summarizeAssumptions(assumptions),
     groups,
   }
 }

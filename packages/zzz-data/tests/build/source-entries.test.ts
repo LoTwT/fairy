@@ -19,6 +19,10 @@ describe("static build source entries", () => {
       supportedCount: 1,
       unsupportedCount: 0,
       isUtilityOnly: true,
+      assumptionSummary: {
+        count: result.assumptions.length,
+        hasAssumptions: result.assumptions.length > 0,
+      },
       sourceDamageRequirementSummary: {
         count: 0,
         satisfiedCount: 0,
@@ -185,6 +189,10 @@ describe("static build source entries", () => {
       supportedCount: 2,
       unsupportedCount: 0,
       isUtilityOnly: false,
+      assumptionSummary: {
+        count: result.assumptions.length,
+        hasAssumptions: result.assumptions.length > 0,
+      },
       sourceDamageRequirementSummary: {
         count: 2,
         satisfiedCount: 2,

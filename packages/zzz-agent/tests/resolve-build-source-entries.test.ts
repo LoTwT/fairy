@@ -23,6 +23,10 @@ describe("resolveBuildSourceEntries tool", () => {
       supportedCount: 1,
       unsupportedCount: 0,
       isUtilityOnly: true,
+      assumptionSummary: {
+        count: (result as any).collection.assumptions.length,
+        hasAssumptions: (result as any).collection.assumptions.length > 0,
+      },
       sourceDamageRequirementSummary: {
         count: 0,
         satisfiedCount: 0,
@@ -182,6 +186,10 @@ describe("resolveBuildSourceEntries tool", () => {
       supportedCount: 2,
       unsupportedCount: 0,
       isUtilityOnly: false,
+      assumptionSummary: {
+        count: (result as any).collection.assumptions.length,
+        hasAssumptions: (result as any).collection.assumptions.length > 0,
+      },
       sourceDamageRequirementSummary: {
         count: 2,
         satisfiedCount: 2,

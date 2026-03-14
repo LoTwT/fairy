@@ -3753,3 +3753,36 @@ Batch B（已完成）：
 1. 不改变既有顶层 `views.assumptionSummary`
 2. 不改变 entry / group 级 assumption contract
 3. 不提前扩到 unified source-entry summary 的同名字段
+
+## 87. V84 source-entry collection summary assumption summary
+
+`V83` 收口后，unified `source-entry collection` 仍只有：
+
+- 顶层 `collection.assumptionSummary`
+- 组级 `collection.summary.groups[*].assumptionSummary`
+- entry 级 `entry.assumptionSummary`
+
+`collection.summary` 本身还缺少同名聚合字段。
+
+`V84` 只解决一件事：
+
+- 为 `StaticBuildSourceEntryCollectionSummary` 增加稳定 `assumptionSummary`
+
+### 87.1 当前状态
+
+- `V84.1` 已完成：冻结到 source-entry collection summary assumption summary
+- `V84.2` 已完成：`StaticBuildSourceEntryCollectionSummary` 已新增稳定 `assumptionSummary`
+- `V84.3` 已完成：高层 tool 断言与 agent prompt 已对齐 `collection.summary.assumptionSummary`
+- `V84.4` 已完成：相关 specs、roadmap、索引、架构文档与 README 已同步
+
+### 87.2 目标
+
+1. 为 `collection.summary` 增加稳定 assumption aggregate
+2. 保持与既有顶层 `collection.assumptionSummary` 一致
+3. 让 source-entry collection 顶层 `summary` 在四类聚合上对齐 requirement / diagnostics / source notes
+
+### 87.3 Out of Scope
+
+1. 不改变既有顶层 `collection.assumptionSummary`
+2. 不改变 entry / group 级 assumption contract
+3. 不提前扩到其他未对齐的 summary 字段
