@@ -64,7 +64,7 @@ export interface CompactStaticBuildResult {
   sourceNoteSummary: CompactStaticBuildSourceNoteSummary
   assumptionSummary: CompactStaticBuildAssumptionSummary
   caveatSummary: CompactStaticBuildCaveatSummary
-  resolvedPanel: StaticBuildResolvedPanel
+  resolvedPanel: CompactStaticBuildResolvedPanel
   resolvedBuckets: CompactStaticBuildResolvedBuckets
   damage: {
     expected: DamageResult
@@ -130,6 +130,25 @@ export interface CompactStaticBuildResolvedBuckets {
   anomalyCritRate: number
   anomalyCritDamage: number
   skillMultiplierFactor: number
+}
+
+export interface CompactStaticBuildResolvedPanel {
+  attack: number
+  baseAttack?: number
+  agentLevel: number
+  critRate: number
+  critDamage: number
+  hp?: number
+  sheerForce?: number
+  energyGenerationRate?: number
+  anomalyProficiency: number
+  anomalyMastery?: number
+  anomalyCritRate: number
+  anomalyCritDamage: number
+  penetrationRate: number
+  penetrationValue: number
+  baseDamageStat: "attack" | "sheerForce"
+  baseDamageValue: number
 }
 
 export interface CompactStaticBuildDiagnosticGroupSummary {
@@ -427,7 +446,7 @@ export function compactStaticBuildResult(
       build.assumptionSummary,
     ),
     caveatSummary: compactStaticBuildCaveatSummary(build.caveatSummary),
-    resolvedPanel: build.resolvedPanel,
+    resolvedPanel: compactStaticBuildResolvedPanel(build.resolvedPanel),
     resolvedBuckets: compactStaticBuildResolvedBuckets(build.resolvedBuckets),
     damage: build.damage,
     ...(includeDetails
@@ -505,6 +524,29 @@ export function compactStaticBuildResolvedBuckets(
     anomalyCritRate: buckets.anomalyCritRate,
     anomalyCritDamage: buckets.anomalyCritDamage,
     skillMultiplierFactor: buckets.skillMultiplierFactor,
+  }
+}
+
+export function compactStaticBuildResolvedPanel(
+  panel: StaticBuildResolvedPanel,
+): CompactStaticBuildResolvedPanel {
+  return {
+    attack: panel.attack,
+    baseAttack: panel.baseAttack,
+    agentLevel: panel.agentLevel,
+    critRate: panel.critRate,
+    critDamage: panel.critDamage,
+    hp: panel.hp,
+    sheerForce: panel.sheerForce,
+    energyGenerationRate: panel.energyGenerationRate,
+    anomalyProficiency: panel.anomalyProficiency,
+    anomalyMastery: panel.anomalyMastery,
+    anomalyCritRate: panel.anomalyCritRate,
+    anomalyCritDamage: panel.anomalyCritDamage,
+    penetrationRate: panel.penetrationRate,
+    penetrationValue: panel.penetrationValue,
+    baseDamageStat: panel.baseDamageStat,
+    baseDamageValue: panel.baseDamageValue,
   }
 }
 

@@ -7100,6 +7100,37 @@ caveatSummary` 这些兼容字段补齐。
 - `V178.3` 已完成：现有测试与 runtime 校验已覆盖
 - `V178.4` 已完成：roadmap、索引与架构文档已同步
 
+## 182. V179 explicit compact resolved panel
+
+`V178` 收口后，compact single-build 结果里仍直接复用 raw build type 的稳定缺口是：
+
+1. `CompactStaticBuildResult.resolvedPanel`
+
+`V179` 只解决这一件事：
+
+1. 把 compact single-build 顶层的 `resolvedPanel` 改为显式 compact type
+
+### 182.1 分阶段
+
+1. `V179.1` scope freeze
+2. `V179.2` runtime/type contract alignment
+3. `V179.3` tests / prompt alignment
+4. `V179.4` docs closeout
+
+### 182.2 非目标
+
+1. 不改变 `resolvedPanel` 的字段值
+2. 不改变 `resolvedBuckets`
+3. 不改变 `damageParams`
+4. 不改变 `includeDetails` 语义
+
+### 182.3 当前状态
+
+- `V179.1` 已完成：冻结到 explicit compact resolved panel
+- `V179.2` 已完成：compact single-build 的 `resolvedPanel` 已改为显式 compact type
+- `V179.3` 已完成：现有测试与 runtime 校验已覆盖
+- `V179.4` 已完成：roadmap、索引与架构文档已同步
+
 ## 174. V171 explicit compact top-level summary effect summaries
 
 `V170` 收口后，compact contract 中下一批仍直接复用 raw effect summary item type 的显式缺口主要集中在 top-level `summary`：
