@@ -6350,3 +6350,33 @@ caveatSummary` 这些兼容字段补齐。
 - `V155.2` 已完成：默认 compact `matrix.summary.groups[*]` 已不再携带 raw `assumptions / unsupportedEffects`
 - `V155.3` 已完成：高层 `resolveBuildSkillMatrix` 测试与 prompt 已对齐 `includeDetails=true`
 - `V155.4` 已完成：README、roadmap、索引与架构文档已同步
+
+## 159. V156 explicit compact summary contracts
+
+`V155` 收口后，compact contract 在 runtime 上已经比较干净。
+
+但 `trigger-matrix`、`source-damage-view`、`source-utility-view` 与 mixed `source-entry collection` 的 compact `summary` 仍直接复用 raw summary type。当前虽然没有继续泄漏 raw 明细，但后续 raw summary 新增字段时，compact contract 仍可能被动扩张。
+
+`V156` 只解决一件事：
+
+1. 为这些 compact result 引入显式 summary / group compact types，并在 helper 中显式构造
+
+### 159.1 分阶段
+
+1. `V156.1` scope freeze
+2. `V156.2` runtime/type contract alignment
+3. `V156.3` tests / prompt alignment
+4. `V156.4` docs closeout
+
+### 159.2 非目标
+
+1. 不改变任何 runtime 字段值
+2. 不新增或删除现有 summary 字段
+3. 不改变 `includeDetails` 语义
+
+### 159.3 当前状态
+
+- `V156.1` 已完成：冻结到 explicit compact summary contracts
+- `V156.2` 已完成：trigger/source/source-entry compact summary 已改为显式 compact types
+- `V156.3` 已完成：现有测试无需新增行为断言，类型与 runtime 校验已覆盖
+- `V156.4` 已完成：README、roadmap、索引与架构文档已同步

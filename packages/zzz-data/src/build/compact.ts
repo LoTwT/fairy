@@ -25,7 +25,6 @@ import type {
   StaticBuildSourceDamageViewEffectSummaryItem,
   StaticBuildSourceDamageViewEntry,
   StaticBuildSourceEntry,
-  StaticBuildSourceEntryCollectionSummary,
   StaticBuildSourceNoteEntry,
   StaticBuildSourceUtilityViewEntry,
   StaticBuildTriggerMatrixRow,
@@ -170,12 +169,22 @@ export interface StaticBuildCompactTriggerMatrixRow {
   build?: ResolveStaticBuildResult
 }
 
+export type CompactStaticBuildTriggerMatrixGroupSummary =
+  ResolveStaticBuildTriggerMatrixResult["summary"]["groups"][number]
+
+export interface CompactStaticBuildTriggerMatrixSummary extends Omit<
+  ResolveStaticBuildTriggerMatrixResult["summary"],
+  "groups"
+> {
+  groups: CompactStaticBuildTriggerMatrixGroupSummary[]
+}
+
 export interface CompactStaticBuildTriggerMatrixResult {
   profile: ResolveStaticBuildTriggerMatrixResult["profile"]
   mode: ResolveStaticBuildTriggerMatrixResult["mode"]
   manualBaseMode?: ResolveStaticBuildTriggerMatrixResult["manualBaseMode"]
   loadout: ResolveStaticBuildTriggerMatrixResult["loadout"]
-  summary: ResolveStaticBuildTriggerMatrixResult["summary"]
+  summary: CompactStaticBuildTriggerMatrixSummary
   effectSummary: ResolveStaticBuildTriggerMatrixResult["effectSummary"]
   requirementSummary: ResolveStaticBuildTriggerMatrixResult["requirementSummary"]
   caveatSummary: ResolveStaticBuildTriggerMatrixResult["caveatSummary"]
@@ -210,6 +219,16 @@ export interface StaticBuildCompactSourceDamageViewEntry {
   build?: ResolveStaticBuildResult
 }
 
+export type CompactStaticBuildSourceDamageViewGroupSummary =
+  ResolveStaticBuildSourceDamageViewsResult["summary"]["groups"][number]
+
+export interface CompactStaticBuildSourceDamageViewsSummary extends Omit<
+  ResolveStaticBuildSourceDamageViewsResult["summary"],
+  "groups"
+> {
+  groups: CompactStaticBuildSourceDamageViewGroupSummary[]
+}
+
 export interface StaticBuildCompactSourceUtilityViewEntry {
   id: string
   label: string
@@ -242,9 +261,19 @@ export type StaticBuildCompactSourceEntry =
   | StaticBuildCompactSourceDamageViewEntry
   | StaticBuildCompactSourceUtilityViewEntry
 
+export type CompactStaticBuildSourceEntryGroupSummary =
+  ResolveStaticBuildSourceEntriesResult["summary"]["groups"][number]
+
+export interface CompactStaticBuildSourceEntryCollectionSummary extends Omit<
+  ResolveStaticBuildSourceEntriesResult["summary"],
+  "groups"
+> {
+  groups: CompactStaticBuildSourceEntryGroupSummary[]
+}
+
 export interface CompactStaticBuildSourceEntryCollection {
   loadout: ResolveStaticBuildSourceEntriesResult["loadout"]
-  summary: StaticBuildSourceEntryCollectionSummary
+  summary: CompactStaticBuildSourceEntryCollectionSummary
   effectSummary: ResolveStaticBuildSourceEntriesResult["effectSummary"]
   sourceDamageRequirementSummary: ResolveStaticBuildSourceEntriesResult["sourceDamageRequirementSummary"]
   sourceUtilityRequirementSummary: ResolveStaticBuildSourceEntriesResult["sourceUtilityRequirementSummary"]
@@ -256,11 +285,21 @@ export interface CompactStaticBuildSourceEntryCollection {
   entries: StaticBuildCompactSourceEntry[]
 }
 
+export type CompactStaticBuildSourceUtilityViewGroupSummary =
+  ResolveStaticBuildSourceUtilityViewsResult["summary"]["groups"][number]
+
+export interface CompactStaticBuildSourceUtilityViewsSummary extends Omit<
+  ResolveStaticBuildSourceUtilityViewsResult["summary"],
+  "groups"
+> {
+  groups: CompactStaticBuildSourceUtilityViewGroupSummary[]
+}
+
 export interface CompactStaticBuildSourceDamageViewsResult {
   mode: ResolveStaticBuildSourceDamageViewsResult["mode"]
   manualBaseMode?: ResolveStaticBuildSourceDamageViewsResult["manualBaseMode"]
   loadout: ResolveStaticBuildSourceDamageViewsResult["loadout"]
-  summary: ResolveStaticBuildSourceDamageViewsResult["summary"]
+  summary: CompactStaticBuildSourceDamageViewsSummary
   effectSummary: StaticBuildSourceDamageViewEffectSummaryItem[]
   requirementSummary: ResolveStaticBuildSourceDamageViewsResult["requirementSummary"]
   caveatSummary: ResolveStaticBuildSourceDamageViewsResult["caveatSummary"]
@@ -273,7 +312,7 @@ export interface CompactStaticBuildSourceDamageViewsResult {
 
 export interface CompactStaticBuildSourceUtilityViewsResult {
   loadout: ResolveStaticBuildSourceUtilityViewsResult["loadout"]
-  summary: ResolveStaticBuildSourceUtilityViewsResult["summary"]
+  summary: CompactStaticBuildSourceUtilityViewsSummary
   effectSummary: ResolveStaticBuildSourceUtilityViewsResult["effectSummary"]
   requirementSummary: ResolveStaticBuildSourceUtilityViewsResult["requirementSummary"]
   caveatSummary: ResolveStaticBuildSourceUtilityViewsResult["caveatSummary"]
@@ -388,7 +427,7 @@ export function compactStaticBuildTriggerMatrixResult(
     mode: matrix.mode,
     manualBaseMode: matrix.manualBaseMode,
     loadout: matrix.loadout,
-    summary: matrix.summary,
+    summary: compactStaticBuildTriggerMatrixSummary(matrix.summary),
     effectSummary: matrix.effectSummary,
     requirementSummary: matrix.requirementSummary,
     caveatSummary: matrix.caveatSummary,
@@ -403,6 +442,38 @@ export function compactStaticBuildTriggerMatrixResult(
     rows: matrix.rows.map((row) =>
       compactStaticBuildTriggerMatrixRow(row, includeDetails),
     ),
+  }
+}
+
+export function compactStaticBuildTriggerMatrixSummary(
+  summary: ResolveStaticBuildTriggerMatrixResult["summary"],
+): CompactStaticBuildTriggerMatrixSummary {
+  return {
+    rowCount: summary.rowCount,
+    mainFormulaCount: summary.mainFormulaCount,
+    sourceViewCount: summary.sourceViewCount,
+    supportedCount: summary.supportedCount,
+    unsupportedCount: summary.unsupportedCount,
+    hasSourceViews: summary.hasSourceViews,
+    effectSummary: summary.effectSummary,
+    requirementSummary: summary.requirementSummary,
+    caveatSummary: summary.caveatSummary,
+    diagnosticSummary: summary.diagnosticSummary,
+    sourceNoteSummary: summary.sourceNoteSummary,
+    assumptionSummary: summary.assumptionSummary,
+    groups: summary.groups.map((group) => ({
+      key: group.key,
+      label: group.label,
+      count: group.count,
+      supportedCount: group.supportedCount,
+      unsupportedCount: group.unsupportedCount,
+      effectSummary: group.effectSummary,
+      requirementSummary: group.requirementSummary,
+      caveatSummary: group.caveatSummary,
+      diagnosticSummary: group.diagnosticSummary,
+      sourceNoteSummary: group.sourceNoteSummary,
+      assumptionSummary: group.assumptionSummary,
+    })),
   }
 }
 
@@ -441,7 +512,7 @@ export function compactStaticBuildSourceEntryCollection(
 ): CompactStaticBuildSourceEntryCollection {
   return {
     loadout: collection.loadout,
-    summary: collection.summary,
+    summary: compactStaticBuildSourceEntryCollectionSummary(collection.summary),
     effectSummary: collection.effectSummary,
     sourceDamageRequirementSummary: collection.sourceDamageRequirementSummary,
     sourceUtilityRequirementSummary: collection.sourceUtilityRequirementSummary,
@@ -460,6 +531,40 @@ export function compactStaticBuildSourceEntryCollection(
   }
 }
 
+export function compactStaticBuildSourceEntryCollectionSummary(
+  summary: ResolveStaticBuildSourceEntriesResult["summary"],
+): CompactStaticBuildSourceEntryCollectionSummary {
+  return {
+    entryCount: summary.entryCount,
+    sourceDamageViewCount: summary.sourceDamageViewCount,
+    sourceUtilityViewCount: summary.sourceUtilityViewCount,
+    supportedCount: summary.supportedCount,
+    unsupportedCount: summary.unsupportedCount,
+    isUtilityOnly: summary.isUtilityOnly,
+    effectSummary: summary.effectSummary,
+    sourceDamageRequirementSummary: summary.sourceDamageRequirementSummary,
+    sourceUtilityRequirementSummary: summary.sourceUtilityRequirementSummary,
+    caveatSummary: summary.caveatSummary,
+    diagnosticSummary: summary.diagnosticSummary,
+    sourceNoteSummary: summary.sourceNoteSummary,
+    assumptionSummary: summary.assumptionSummary,
+    groups: summary.groups.map((group) => ({
+      key: group.key,
+      label: group.label,
+      count: group.count,
+      supportedCount: group.supportedCount,
+      unsupportedCount: group.unsupportedCount,
+      effectSummary: group.effectSummary,
+      sourceDamageRequirementSummary: group.sourceDamageRequirementSummary,
+      sourceUtilityRequirementSummary: group.sourceUtilityRequirementSummary,
+      caveatSummary: group.caveatSummary,
+      diagnosticSummary: group.diagnosticSummary,
+      sourceNoteSummary: group.sourceNoteSummary,
+      assumptionSummary: group.assumptionSummary,
+    })),
+  }
+}
+
 export function compactStaticBuildSourceDamageViewsResult(
   views: ResolveStaticBuildSourceDamageViewsResult,
   includeDetails = false,
@@ -468,7 +573,7 @@ export function compactStaticBuildSourceDamageViewsResult(
     mode: views.mode,
     manualBaseMode: views.manualBaseMode,
     loadout: views.loadout,
-    summary: views.summary,
+    summary: compactStaticBuildSourceDamageViewsSummary(views.summary),
     effectSummary: views.effectSummary,
     requirementSummary: views.requirementSummary,
     caveatSummary: views.caveatSummary,
@@ -483,6 +588,37 @@ export function compactStaticBuildSourceDamageViewsResult(
     entries: views.entries.map((entry) =>
       compactStaticBuildSourceDamageViewEntry(entry, includeDetails),
     ),
+  }
+}
+
+export function compactStaticBuildSourceDamageViewsSummary(
+  summary: ResolveStaticBuildSourceDamageViewsResult["summary"],
+): CompactStaticBuildSourceDamageViewsSummary {
+  return {
+    entryCount: summary.entryCount,
+    standaloneCount: summary.standaloneCount,
+    deltaCount: summary.deltaCount,
+    supportedCount: summary.supportedCount,
+    unsupportedCount: summary.unsupportedCount,
+    effectSummary: summary.effectSummary,
+    requirementSummary: summary.requirementSummary,
+    caveatSummary: summary.caveatSummary,
+    diagnosticSummary: summary.diagnosticSummary,
+    sourceNoteSummary: summary.sourceNoteSummary,
+    assumptionSummary: summary.assumptionSummary,
+    groups: summary.groups.map((group) => ({
+      key: group.key,
+      label: group.label,
+      count: group.count,
+      supportedCount: group.supportedCount,
+      unsupportedCount: group.unsupportedCount,
+      effectSummary: group.effectSummary,
+      requirementSummary: group.requirementSummary,
+      caveatSummary: group.caveatSummary,
+      diagnosticSummary: group.diagnosticSummary,
+      sourceNoteSummary: group.sourceNoteSummary,
+      assumptionSummary: group.assumptionSummary,
+    })),
   }
 }
 
@@ -525,7 +661,7 @@ export function compactStaticBuildSourceUtilityViewsResult(
 ): CompactStaticBuildSourceUtilityViewsResult {
   return {
     loadout: views.loadout,
-    summary: views.summary,
+    summary: compactStaticBuildSourceUtilityViewsSummary(views.summary),
     effectSummary: views.effectSummary,
     requirementSummary: views.requirementSummary,
     caveatSummary: views.caveatSummary,
@@ -540,6 +676,37 @@ export function compactStaticBuildSourceUtilityViewsResult(
     entries: views.entries.map((entry) =>
       compactStaticBuildSourceUtilityViewEntry(entry, includeDetails),
     ),
+  }
+}
+
+export function compactStaticBuildSourceUtilityViewsSummary(
+  summary: ResolveStaticBuildSourceUtilityViewsResult["summary"],
+): CompactStaticBuildSourceUtilityViewsSummary {
+  return {
+    entryCount: summary.entryCount,
+    triggerCount: summary.triggerCount,
+    rateCount: summary.rateCount,
+    supportedCount: summary.supportedCount,
+    unsupportedCount: summary.unsupportedCount,
+    effectSummary: summary.effectSummary,
+    requirementSummary: summary.requirementSummary,
+    caveatSummary: summary.caveatSummary,
+    diagnosticSummary: summary.diagnosticSummary,
+    sourceNoteSummary: summary.sourceNoteSummary,
+    assumptionSummary: summary.assumptionSummary,
+    groups: summary.groups.map((group) => ({
+      key: group.key,
+      label: group.label,
+      count: group.count,
+      supportedCount: group.supportedCount,
+      unsupportedCount: group.unsupportedCount,
+      effectSummary: group.effectSummary,
+      requirementSummary: group.requirementSummary,
+      caveatSummary: group.caveatSummary,
+      diagnosticSummary: group.diagnosticSummary,
+      sourceNoteSummary: group.sourceNoteSummary,
+      assumptionSummary: group.assumptionSummary,
+    })),
   }
 }
 
