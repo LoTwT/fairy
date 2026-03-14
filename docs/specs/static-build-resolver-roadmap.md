@@ -6110,3 +6110,33 @@ caveatSummary` 这些兼容字段补齐。
 - `V147.2` 已完成：默认 compact single-build 已不再携带顶层 `build.assumptions`
 - `V147.3` 已完成：高层 `resolveBuildDamage` 测试与 prompt 已对齐 `includeDetails=true`
 - `V147.4` 已完成：README、roadmap、索引与架构文档已同步
+
+## 151. V148 single-build compact top-level unsupported gating
+
+`V147` 收口后，compact single-build 顶层的 raw `build.assumptions` 已收紧到 `includeDetails=true`。
+
+但 compact single-build 顶层结果仍默认携带原始 `build.unsupportedEffects`，而 `build.caveatSummary / build.summary` 已经齐全。
+
+`V148` 只解决一件事：
+
+1. 把 compact single-build 的顶层 `build.unsupportedEffects` 也移动到 `includeDetails=true`
+
+### 151.1 分阶段
+
+1. `V148.1` scope freeze
+2. `V148.2` runtime/type contract alignment
+3. `V148.3` tool assertion / prompt alignment
+4. `V148.4` docs closeout
+
+### 151.2 非目标
+
+1. 不改变 `build.caveatSummary`
+2. 不改变 `build.assumptionSummary`
+3. 不改变 `build.assumptions / build.diagnostics / build.sourceNotes / build.trace / build.damageParams`
+
+### 151.3 当前状态
+
+- `V148.1` 已完成：冻结到 single-build compact top-level unsupported gating
+- `V148.2` 已完成：默认 compact single-build 已不再携带顶层 `build.unsupportedEffects`
+- `V148.3` 已完成：高层 `resolveBuildDamage` 测试与 prompt 已对齐 `includeDetails=true`
+- `V148.4` 已完成：README、roadmap、索引与架构文档已同步

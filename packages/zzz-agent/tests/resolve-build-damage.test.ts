@@ -47,6 +47,7 @@ describe("resolveBuildDamage tool", () => {
       (result as any).build.effectSummary[0].bucket.length,
     ).toBeGreaterThan(0)
     expect((result as any).build.assumptions).toBeUndefined()
+    expect((result as any).build.unsupportedEffects).toBeUndefined()
     expect(
       (result as any).build.assumptionSummary.count,
     ).toBeGreaterThanOrEqual(0)
