@@ -622,6 +622,21 @@ describe("resolveBuildSourceEntries tool", () => {
         "magnetic-storm-charlie-energy-refund",
       ]),
     )
+    expect((result as any).collection.entries[0].sourceNoteSummary).toEqual({
+      count: 3,
+      hasSourceNotes: true,
+      hasMissingInput: true,
+      hasProcessOnly: true,
+      hasResearchOnly: false,
+      statusGroups: [
+        { key: "missing-input", label: "缺少输入", count: 1 },
+        { key: "process-only", label: "仅流程说明", count: 2 },
+      ],
+      ownerGroups: [
+        { key: "resolvedSnapshot", count: 1 },
+        { key: "process", count: 2 },
+      ],
+    })
   })
 
   it("returns full build details only when includeDetails is true", async () => {
