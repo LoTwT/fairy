@@ -309,6 +309,12 @@ describe("static build trigger matrix", () => {
           { key: "stateSnapshot", count: 1 },
         ],
       },
+      caveatSummary: {
+        assumptionCount: result.rows[0]?.assumptions.length ?? 0,
+        unsupportedCount: 0,
+        hasAssumptions: (result.rows[0]?.assumptions.length ?? 0) > 0,
+        hasUnsupported: false,
+      },
       assumptionSummary: {
         count: result.rows[0]?.assumptions.length,
         hasAssumptions: (result.rows[0]?.assumptions.length ?? 0) > 0,
@@ -384,6 +390,12 @@ describe("static build trigger matrix", () => {
           { key: "finalPanel", count: 1 },
           { key: "stateSnapshot", count: 1 },
         ],
+      },
+      caveatSummary: {
+        assumptionCount: result.rows[1]?.assumptions.length ?? 0,
+        unsupportedCount: 0,
+        hasAssumptions: (result.rows[1]?.assumptions.length ?? 0) > 0,
+        hasUnsupported: false,
       },
       assumptionSummary: {
         count: result.rows[1]?.assumptions.length,
@@ -508,6 +520,12 @@ describe("static build trigger matrix", () => {
         sourceStableKey: "source-view:aria-exflow",
         sourceViewId: "aria-exflow",
         sourceViewResolutionMode: "delta",
+      },
+      caveatSummary: {
+        assumptionCount: result.rows[1]?.assumptions.length ?? 0,
+        unsupportedCount: 0,
+        hasAssumptions: (result.rows[1]?.assumptions.length ?? 0) > 0,
+        hasUnsupported: false,
       },
     })
     expect(
@@ -674,6 +692,12 @@ describe("static build trigger matrix", () => {
           { key: "resolvedSnapshot", count: 1 },
           { key: "process", count: 2 },
         ],
+      },
+      caveatSummary: {
+        assumptionCount: result.rows[1]?.assumptions.length ?? 0,
+        unsupportedCount: 0,
+        hasAssumptions: (result.rows[1]?.assumptions.length ?? 0) > 0,
+        hasUnsupported: false,
       },
     })
     expect(result.rows[1]?.requirements.map((item) => item.kind)).toEqual(

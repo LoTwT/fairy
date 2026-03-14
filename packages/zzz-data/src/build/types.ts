@@ -633,6 +633,7 @@ export interface StaticBuildSourceDamageViewEntry {
   diagnosticSummary: StaticBuildDiagnosticSummary
   sourceNotes: StaticBuildSourceNoteEntry[]
   sourceNoteSummary: StaticBuildSourceNoteSummary
+  caveatSummary: StaticBuildEntryCaveatSummary
   assumptionSummary: StaticBuildAssumptionSummary
   assumptions: string[]
   damage?: {

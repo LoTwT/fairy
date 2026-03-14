@@ -293,6 +293,12 @@ describe("resolveBuildTriggerMatrix tool", () => {
         { key: "stateSnapshot", count: 1 },
       ],
     })
+    expect((result as any).matrix.rows[0].caveatSummary).toEqual({
+      assumptionCount: (result as any).matrix.rows[0].assumptions.length,
+      unsupportedCount: 0,
+      hasAssumptions: (result as any).matrix.rows[0].assumptions.length > 0,
+      hasUnsupported: false,
+    })
     expect((result as any).matrix.rows[0].assumptionSummary).toEqual({
       count: (result as any).matrix.rows[0].assumptions.length,
       hasAssumptions: (result as any).matrix.rows[0].assumptions.length > 0,
@@ -363,6 +369,12 @@ describe("resolveBuildTriggerMatrix tool", () => {
           { key: "finalPanel", count: 1 },
           { key: "stateSnapshot", count: 1 },
         ],
+      },
+      caveatSummary: {
+        assumptionCount: (result as any).matrix.rows[1].assumptions.length,
+        unsupportedCount: 0,
+        hasAssumptions: (result as any).matrix.rows[1].assumptions.length > 0,
+        hasUnsupported: false,
       },
       assumptionSummary: {
         count: (result as any).matrix.rows[1].assumptions.length,
@@ -584,6 +596,12 @@ describe("resolveBuildTriggerMatrix tool", () => {
           { key: "resolvedSnapshot", count: 1 },
           { key: "process", count: 2 },
         ],
+      },
+      caveatSummary: {
+        assumptionCount: (result as any).matrix.rows[1].assumptions.length,
+        unsupportedCount: 0,
+        hasAssumptions: (result as any).matrix.rows[1].assumptions.length > 0,
+        hasUnsupported: false,
       },
     })
     expect(

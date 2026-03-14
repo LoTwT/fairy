@@ -507,6 +507,13 @@ matrix.rows[1].diagnosticSummary
 // }
 ```
 
+如果你只想知道某一行 trigger row 是否带 assumptions / unsupported caveat，也直接读取：
+
+```ts
+matrix.rows[1].caveatSummary
+matrix.rows[1].assumptionSummary
+```
+
 如果你只想知道某一行 trigger row 的 source-note 概况，也直接读取：
 
 ```ts

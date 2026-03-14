@@ -4274,3 +4274,35 @@ Batch B（已完成）：
 1. 不为单条 `row` 增加 `caveatSummary`
 2. 不改变既有 `matrix.summary.caveatSummary` / `matrix.caveatSummary`
 3. 不同时扩到 `source-entry collection`
+
+## 103. V100 trigger-matrix row caveat summary
+
+`V99` 收口后，`trigger-matrix` 已具备：
+
+- 顶层 `matrix.caveatSummary`
+- `matrix.summary.caveatSummary`
+- `matrix.summary.groups[*].caveatSummary`
+
+但如果上层逐行消费 `trigger rows`，仍然需要自己组合：
+
+- `row.assumptions`
+- `row.supported`
+
+### 103.1 当前状态
+
+- `V100.1` 已完成：冻结到 trigger-matrix row caveat summary
+- `V100.2` 已完成：`StaticBuildTriggerMatrixRow` 与 compact row 已新增稳定 `caveatSummary`
+- `V100.3` 已完成：高层 tool 断言与 agent prompt 已对齐 `row.caveatSummary`
+- `V100.4` 已完成：相关 specs、roadmap、索引、架构文档与 README 已同步
+
+### 103.2 目标
+
+1. 为 `rows[*]` 增加稳定 `caveatSummary`
+2. 保持与 row-level assumptions、supported 状态一致
+3. 让上层逐行消费 trigger rows 时不再手工组合 caveat
+
+### 103.3 Out of Scope
+
+1. 不改变既有 `matrix.summary.caveatSummary`
+2. 不改变既有 `matrix.summary.groups[*].caveatSummary`
+3. 不同时扩到 `source-view entry`

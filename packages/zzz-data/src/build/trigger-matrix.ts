@@ -70,6 +70,7 @@ export function resolveStaticBuildTriggerMatrix(
       diagnosticSummary: summarizeDiagnosticEntries(build.diagnostics),
       sourceNotes: build.sourceNotes,
       sourceNoteSummary: summarizeSourceNoteEntries(build.sourceNotes),
+      caveatSummary: summarizeTriggerMatrixRowCaveat(true, build.assumptions),
       assumptionSummary: summarizeAssumptions(build.assumptions),
       assumptions: build.assumptions,
       damage: {
@@ -123,6 +124,10 @@ function toTriggerMatrixRow(
     diagnosticSummary: entry.diagnosticSummary,
     sourceNotes: entry.sourceNotes,
     sourceNoteSummary: entry.sourceNoteSummary,
+    caveatSummary: summarizeTriggerMatrixRowCaveat(
+      entry.supported,
+      entry.assumptions,
+    ),
     assumptionSummary: summarizeAssumptions(entry.assumptions),
     assumptions: entry.assumptions,
     damage: entry.damage,
@@ -225,5 +230,17 @@ function summarizeTriggerMatrixCaveats(
     unsupportedCount,
     hasAssumptions: assumptions.length > 0,
     hasUnsupported: unsupportedCount > 0,
+  }
+}
+
+function summarizeTriggerMatrixRowCaveat(
+  supported: boolean,
+  assumptions: string[],
+): StaticBuildEntryCaveatSummary {
+  return {
+    assumptionCount: assumptions.length,
+    unsupportedCount: supported ? 0 : 1,
+    hasAssumptions: assumptions.length > 0,
+    hasUnsupported: !supported,
   }
 }
