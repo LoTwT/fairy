@@ -145,6 +145,7 @@ it("keeps screenshot summary by default", async () => {
   expect(
     base.includes("如果只想先判断某一条 mixed entry 是否带 assumptions"),
   ).toBe(true)
+  expect(base.includes("utility entry 当前固定返回空数组")).toBe(true)
   expect(base.includes("entry.assumptionSummary")).toBe(true)
   expect(base.includes("如果只想先判断某一条 mixed entry 是否带 caveat")).toBe(
     true,

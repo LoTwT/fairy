@@ -836,6 +836,7 @@ collection.summary
 - 如果只想先判断某一条 mixed entry 是否带 source notes，也优先读取 `entry.sourceNoteSummary`，不要再手工遍历 `entry.sourceNotes`
 - 如果只想先判断某一条 mixed entry 是否带 assumptions，也优先读取 `entry.assumptionSummary`，不要再手工统计 `entry.assumptions.length`
 - 如果只想先判断某一条 mixed entry 是否带 caveat，也优先读取 `entry.caveatSummary`，不要再手工组合 `entry.assumptions.length` 与 `entry.supported`
+- 如果只想先判断某一条 mixed entry 是否带 effect summary，也优先读取 `entry.effectSummary`；当前 utility entry 固定返回空数组，不要再按 `entryKind` 手工补默认值
 - 如果只想先判断整组 mixed collection 是否存在 diagnostics / source notes，也优先读取 `collection.summary.diagnosticSummary / collection.summary.sourceNoteSummary`；如需兼容旧调用方，也可以继续读取 `collection.diagnosticSummary / collection.sourceNoteSummary`
 
 如果你只想先判断当前额外来源条目整体涉及了哪些乘区变化，也优先读取：
@@ -866,6 +867,7 @@ collection.summary.groups[0].sourceNoteSummary
 collection.summary.groups[0].sourceDamageRequirementSummary
 collection.summary.groups[0].sourceUtilityRequirementSummary
 collection.entries[0].summary
+collection.entries[0].effectSummary
 collection.entries[0].requirementSummary
 collection.entries[0].diagnosticSummary
 collection.entries[0].sourceNoteSummary

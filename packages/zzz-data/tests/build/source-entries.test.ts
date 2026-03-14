@@ -184,6 +184,7 @@ describe("static build source entries", () => {
         entryKind: "source-utility-view",
         stableKey: "source-utility:lunar-noviluna-energy-refund",
       },
+      effectSummary: [],
     })
     expect(result.assumptions).toEqual([])
   })

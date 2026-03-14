@@ -201,6 +201,7 @@ function createEntry(
     diagnosticSummary: summarizeDiagnosticEntries([]),
     sourceNotes: [],
     sourceNoteSummary: summarizeSourceNoteEntries([]),
+    effectSummary: [],
     caveatSummary: summarizeSourceUtilityViewCaveats(
       [supportedEntry],
       entry.assumptions,
