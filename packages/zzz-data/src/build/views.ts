@@ -320,7 +320,7 @@ function summarizeSourceDamageViews(
   }
 }
 
-function summarizeSourceDamageViewEffects(
+export function summarizeSourceDamageViewEffects(
   entries: StaticBuildSourceDamageViewEntry[],
 ): StaticBuildSourceDamageViewEffectSummaryItem[] {
   const summary = new Map<

@@ -155,6 +155,7 @@ export type StaticBuildCompactSourceEntry =
 export interface CompactStaticBuildSourceEntryCollection {
   loadout: ResolveStaticBuildSourceEntriesResult["loadout"]
   summary: StaticBuildSourceEntryCollectionSummary
+  effectSummary: ResolveStaticBuildSourceEntriesResult["effectSummary"]
   sourceDamageRequirementSummary: ResolveStaticBuildSourceEntriesResult["sourceDamageRequirementSummary"]
   sourceUtilityRequirementSummary: ResolveStaticBuildSourceEntriesResult["sourceUtilityRequirementSummary"]
   caveatSummary: ResolveStaticBuildSourceEntriesResult["caveatSummary"]
@@ -299,6 +300,7 @@ export function compactStaticBuildSourceEntryCollection(
   return {
     loadout: collection.loadout,
     summary: collection.summary,
+    effectSummary: collection.effectSummary,
     sourceDamageRequirementSummary: collection.sourceDamageRequirementSummary,
     sourceUtilityRequirementSummary: collection.sourceUtilityRequirementSummary,
     caveatSummary: collection.caveatSummary,

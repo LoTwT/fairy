@@ -145,6 +145,8 @@ describe("static build source entries", () => {
       hasAssumptions: result.assumptions.length > 0,
       hasUnsupported: false,
     })
+    expect(result.effectSummary).toEqual(result.summary.effectSummary)
+    expect(result.summary.effectSummary).toEqual([])
     expect(result.sourceDamageRequirementSummary).toEqual(
       result.summary.sourceDamageRequirementSummary,
     )
@@ -422,6 +424,8 @@ describe("static build source entries", () => {
     expect(result.sourceUtilityRequirementSummary).toEqual(
       result.summary.sourceUtilityRequirementSummary,
     )
+    expect(result.effectSummary).toEqual(result.summary.effectSummary)
+    expect(result.summary.effectSummary).toEqual([])
     expect(result.diagnosticSummary).toEqual({
       count: 2,
       hasDiagnostics: true,

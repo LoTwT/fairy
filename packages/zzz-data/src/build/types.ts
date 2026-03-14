@@ -870,6 +870,7 @@ export interface StaticBuildSourceEntryCollectionSummary {
   supportedCount: number
   unsupportedCount: number
   isUtilityOnly: boolean
+  effectSummary: StaticBuildSourceDamageViewEffectSummaryItem[]
   sourceDamageRequirementSummary: StaticBuildSourceDamageViewRequirementSummary
   sourceUtilityRequirementSummary: StaticBuildSourceUtilityViewRequirementSummary
   caveatSummary: StaticBuildEntryCaveatSummary
@@ -882,6 +883,7 @@ export interface StaticBuildSourceEntryCollectionSummary {
 export interface ResolveStaticBuildSourceEntriesResult {
   loadout: StaticBuildResolvedLoadout
   summary: StaticBuildSourceEntryCollectionSummary
+  effectSummary: StaticBuildSourceDamageViewEffectSummaryItem[]
   sourceDamageRequirementSummary: StaticBuildSourceDamageViewRequirementSummary
   sourceUtilityRequirementSummary: StaticBuildSourceUtilityViewRequirementSummary
   caveatSummary: StaticBuildEntryCaveatSummary

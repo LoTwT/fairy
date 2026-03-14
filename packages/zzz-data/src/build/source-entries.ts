@@ -19,6 +19,7 @@ import {
 } from "./utility-views.js"
 import {
   resolveStaticBuildSourceDamageViews,
+  summarizeSourceDamageViewEffects,
   summarizeSourceDamageViewRequirements,
 } from "./views.js"
 
@@ -80,6 +81,7 @@ export function resolveStaticBuildSourceEntries(
   return {
     loadout,
     summary,
+    effectSummary: summary.effectSummary,
     sourceDamageRequirementSummary: summary.sourceDamageRequirementSummary,
     sourceUtilityRequirementSummary: summary.sourceUtilityRequirementSummary,
     caveatSummary: summarizeSourceEntryCaveats(
@@ -192,6 +194,7 @@ function summarizeSourceEntries(
     unsupportedCount,
     isUtilityOnly:
       sourceUtilityEntries.length > 0 && sourceDamageEntries.length === 0,
+    effectSummary: summarizeSourceDamageViewEffects(sourceDamageEntries),
     sourceDamageRequirementSummary: summarizeSourceDamageViewRequirements(
       sourceDamageEntries.flatMap((entry) => entry.requirements),
     ),

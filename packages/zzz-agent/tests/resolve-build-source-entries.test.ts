@@ -149,6 +149,10 @@ describe("resolveBuildSourceEntries tool", () => {
       hasAssumptions: (result as any).collection.assumptions.length > 0,
       hasUnsupported: false,
     })
+    expect((result as any).collection.effectSummary).toEqual(
+      (result as any).collection.summary.effectSummary,
+    )
+    expect((result as any).collection.summary.effectSummary).toEqual([])
     expect((result as any).collection.sourceDamageRequirementSummary).toEqual(
       (result as any).collection.summary.sourceDamageRequirementSummary,
     )
@@ -451,6 +455,10 @@ describe("resolveBuildSourceEntries tool", () => {
     expect((result as any).collection.sourceUtilityRequirementSummary).toEqual(
       (result as any).collection.summary.sourceUtilityRequirementSummary,
     )
+    expect((result as any).collection.effectSummary).toEqual(
+      (result as any).collection.summary.effectSummary,
+    )
+    expect((result as any).collection.summary.effectSummary).toEqual([])
     expect((result as any).collection.diagnosticSummary).toEqual({
       count: 2,
       hasDiagnostics: true,
