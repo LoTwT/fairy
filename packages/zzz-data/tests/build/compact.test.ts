@@ -526,7 +526,13 @@ describe("static build compact helpers", () => {
     expect(
       (damageEntry as { requirements?: unknown } | undefined)?.requirements,
     ).toBeUndefined()
+    expect(
+      (damageEntry as { assumptions?: unknown } | undefined)?.assumptions,
+    ).toBeUndefined()
     expect("build" in (damageEntry ?? {})).toBe(false)
+    expect(
+      (utilityEntry as { assumptions?: unknown } | undefined)?.assumptions,
+    ).toBeUndefined()
     expect(
       (utilityEntry as { requirements?: unknown } | undefined)?.requirements,
     ).toBeUndefined()
@@ -583,10 +589,12 @@ describe("static build compact helpers", () => {
       (entry) => entry.metadata.entryKind === "source-utility-view",
     )
 
+    expect(damageEntry?.assumptions).toEqual(expect.any(Array))
     expect(damageEntry?.requirements).toEqual(expect.any(Array))
     expect(damageEntry?.diagnostics).toEqual(expect.any(Array))
     expect(damageEntry?.sourceNotes).toEqual(expect.any(Array))
     expect(damageEntry?.build).toBeUndefined()
+    expect(utilityEntry?.assumptions).toEqual(expect.any(Array))
     expect(utilityEntry?.requirements).toEqual(expect.any(Array))
     expect(utilityEntry?.diagnostics).toEqual(expect.any(Array))
     expect(utilityEntry?.sourceNotes).toEqual(expect.any(Array))

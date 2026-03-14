@@ -532,11 +532,11 @@ export function compactStaticBuildSourceEntry(
       effectSummary: entry.effectSummary,
       caveatSummary: entry.caveatSummary,
       assumptionSummary: entry.assumptionSummary,
-      assumptions: entry.assumptions,
       damage: entry.damage,
       summary: entry.summary,
       ...(includeDetails
         ? {
+            assumptions: entry.assumptions,
             requirements: entry.requirements,
             diagnostics: entry.diagnostics,
             sourceNotes: entry.sourceNotes,
@@ -568,9 +568,9 @@ export function compactStaticBuildSourceEntry(
     effectSummary: entry.effectSummary,
     caveatSummary: entry.caveatSummary,
     assumptionSummary: entry.assumptionSummary,
-    assumptions: entry.assumptions,
     ...(includeDetails
       ? {
+          assumptions: entry.assumptions,
           requirements: entry.requirements,
           diagnostics: entry.diagnostics,
           sourceNotes: entry.sourceNotes,

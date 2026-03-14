@@ -791,10 +791,12 @@ describe("resolveBuildSourceEntries tool", () => {
     const sourceUtilityEntry = (result as any).collection.entries.find(
       (entry: any) => entry.metadata.entryKind === "source-utility-view",
     )
+    expect(sourceDamageEntry.assumptions).toBeUndefined()
     expect(sourceDamageEntry.requirements).toBeUndefined()
     expect(sourceDamageEntry.diagnostics).toBeUndefined()
     expect(sourceDamageEntry.sourceNotes).toBeUndefined()
     expect(sourceDamageEntry.build).toBeUndefined()
+    expect(sourceUtilityEntry.assumptions).toBeUndefined()
     expect(sourceUtilityEntry.requirements).toBeUndefined()
     expect(sourceUtilityEntry.diagnostics).toBeUndefined()
     expect(sourceUtilityEntry.sourceNotes).toBeUndefined()
@@ -839,10 +841,12 @@ describe("resolveBuildSourceEntries tool", () => {
     const sourceUtilityEntry = (result as any).collection.entries.find(
       (entry: any) => entry.metadata.entryKind === "source-utility-view",
     )
+    expect(sourceDamageEntry.assumptions).toEqual(expect.any(Array))
     expect(sourceDamageEntry.requirements).toEqual(expect.any(Array))
     expect(sourceDamageEntry.diagnostics).toEqual(expect.any(Array))
     expect(sourceDamageEntry.sourceNotes).toEqual(expect.any(Array))
     expect(sourceDamageEntry.build).toBeTruthy()
+    expect(sourceUtilityEntry.assumptions).toEqual(expect.any(Array))
     expect(sourceUtilityEntry.requirements).toEqual(expect.any(Array))
     expect(sourceUtilityEntry.diagnostics).toEqual(expect.any(Array))
     expect(sourceUtilityEntry.sourceNotes).toEqual(expect.any(Array))
