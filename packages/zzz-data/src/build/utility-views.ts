@@ -410,6 +410,7 @@ export function resolveStaticBuildSourceUtilityViews(
   return {
     loadout,
     summary,
+    requirementSummary: summary.requirementSummary,
     caveatSummary: summarizeSourceUtilityViewCaveats(entries, assumptions),
     diagnosticSummary: summary.diagnosticSummary,
     sourceNoteSummary: summary.sourceNoteSummary,

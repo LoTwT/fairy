@@ -39,6 +39,26 @@ describe("static build source utility views", () => {
       hasAssumptions: result.assumptions.length > 0,
       hasUnsupported: false,
     })
+    expect(result.requirementSummary).toEqual({
+      count: 2,
+      satisfiedCount: 2,
+      unsatisfiedCount: 0,
+      hasUnsatisfied: false,
+      groups: [
+        {
+          key: "trigger",
+          count: 1,
+          satisfiedCount: 1,
+          unsatisfiedCount: 0,
+        },
+        {
+          key: "cooldown",
+          count: 1,
+          satisfiedCount: 1,
+          unsatisfiedCount: 0,
+        },
+      ],
+    })
     expect(result.diagnosticSummary).toEqual({
       count: 0,
       hasDiagnostics: false,

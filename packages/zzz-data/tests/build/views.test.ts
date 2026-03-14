@@ -52,6 +52,13 @@ describe("static build source damage views", () => {
       hasAssumptions: result.assumptions.length > 0,
       hasUnsupported: false,
     })
+    expect(result.requirementSummary).toEqual({
+      count: 0,
+      satisfiedCount: 0,
+      unsatisfiedCount: 0,
+      hasUnsatisfied: false,
+      groups: [],
+    })
     expect(result.diagnosticSummary).toEqual({
       count: 0,
       hasDiagnostics: false,
@@ -163,6 +170,26 @@ describe("static build source damage views", () => {
       unsupportedCount: 0,
       hasAssumptions: result.assumptions.length > 0,
       hasUnsupported: false,
+    })
+    expect(result.requirementSummary).toEqual({
+      count: 2,
+      satisfiedCount: 2,
+      unsatisfiedCount: 0,
+      hasUnsatisfied: false,
+      groups: [
+        {
+          key: "state-flag",
+          count: 1,
+          satisfiedCount: 1,
+          unsatisfiedCount: 0,
+        },
+        {
+          key: "state-value",
+          count: 1,
+          satisfiedCount: 1,
+          unsatisfiedCount: 0,
+        },
+      ],
     })
     expect(result.diagnosticSummary).toEqual({
       count: 2,

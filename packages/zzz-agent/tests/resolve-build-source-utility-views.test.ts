@@ -22,6 +22,26 @@ describe("resolveBuildSourceUtilityViews tool", () => {
       hasAssumptions: (result as any).views.assumptions.length > 0,
       hasUnsupported: false,
     })
+    expect((result as any).views.requirementSummary).toEqual({
+      count: 2,
+      satisfiedCount: 2,
+      unsatisfiedCount: 0,
+      hasUnsatisfied: false,
+      groups: [
+        {
+          key: "trigger",
+          count: 1,
+          satisfiedCount: 1,
+          unsatisfiedCount: 0,
+        },
+        {
+          key: "cooldown",
+          count: 1,
+          satisfiedCount: 1,
+          unsatisfiedCount: 0,
+        },
+      ],
+    })
     expect((result as any).views.diagnosticSummary).toEqual({
       count: 0,
       hasDiagnostics: false,

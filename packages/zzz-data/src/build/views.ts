@@ -155,6 +155,7 @@ export function resolveStaticBuildSourceDamageViews(
       input.mode === "manual" ? resolveBaseMode(input) : undefined,
     loadout,
     summary,
+    requirementSummary: summary.requirementSummary,
     caveatSummary: summarizeSourceDamageViewCaveats(sortedEntries, []),
     diagnosticSummary: summary.diagnosticSummary,
     sourceNoteSummary: summary.sourceNoteSummary,

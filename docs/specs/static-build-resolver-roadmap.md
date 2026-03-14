@@ -4814,6 +4814,52 @@ trigger matrix / skill matrix 一致的顶层兼容字段。
 2. 不改变 `entry.diagnosticSummary / entry.sourceNoteSummary` 的语义
 3. 不新增新的 aggregate 类型
 
+## 115. V112 standalone source-view top-level requirement summary alignment
+
+`V111` 收口后，standalone `source-damage-view` / `source-utility-view` 已把顶层
+`diagnosticSummary / sourceNoteSummary` 固定为稳定兼容字段。
+
+但这两条 result 顶层仍只缺最后一组与 `summary` 对齐的 requirement 聚合：
+
+1. `views.summary.requirementSummary` 已稳定存在
+2. `views.requirementSummary` 仍不存在
+
+### 115.1 目标
+
+1. 给 standalone `source-damage-view` 顶层补齐稳定 `requirementSummary`
+2. 给 standalone `source-utility-view` 顶层补齐稳定 `requirementSummary`
+3. 保持 `views.summary.requirementSummary` 原语义不变
+
+### 115.2 范围
+
+1. `V112.1` scope freeze
+2. `V112.2` runtime contract alignment
+3. `V112.3` compact / tool assertion alignment
+4. `V112.4` prompt / README / docs closeout
+
+### 115.3 当前状态
+
+- `V112.1` 已完成：冻结到 standalone source-view top-level requirement summary alignment
+- `V112.2` 已完成：底层 result 与 compact source views 已补齐 `requirementSummary`
+- `V112.3` 已完成：高层 source-view tool 断言已对齐顶层 `views.requirementSummary`
+- `V112.4` 已完成：相关 specs、roadmap、索引、架构文档与 README 已同步
+
+### 115.4 当前边界
+
+本阶段只做：
+
+1. 在 `ResolveStaticBuildSourceDamageViewsResult` 顶层新增 `requirementSummary`
+2. 在 `ResolveStaticBuildSourceUtilityViewsResult` 顶层新增 `requirementSummary`
+3. 让 compact source views 透传该字段
+4. 明确上层优先读取 `views.summary.requirementSummary`，兼容读取 `views.requirementSummary`
+
+显式不做：
+
+1. 不改变 `summary.requirementSummary` 的语义
+2. 不改变 `entry.requirementSummary` 的语义
+3. 不改变 `groups[*].requirementSummary` 的语义
+4. 不新增新的 aggregate 类型
+
 ### 103.2 目标
 
 1. 为 `rows[*]` 增加稳定 `caveatSummary`

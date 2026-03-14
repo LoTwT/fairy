@@ -161,6 +161,7 @@ export interface CompactStaticBuildSourceDamageViewsResult {
   manualBaseMode?: ResolveStaticBuildSourceDamageViewsResult["manualBaseMode"]
   loadout: ResolveStaticBuildSourceDamageViewsResult["loadout"]
   summary: ResolveStaticBuildSourceDamageViewsResult["summary"]
+  requirementSummary: ResolveStaticBuildSourceDamageViewsResult["requirementSummary"]
   caveatSummary: ResolveStaticBuildSourceDamageViewsResult["caveatSummary"]
   diagnosticSummary: ResolveStaticBuildSourceDamageViewsResult["diagnosticSummary"]
   sourceNoteSummary: ResolveStaticBuildSourceDamageViewsResult["sourceNoteSummary"]
@@ -172,6 +173,7 @@ export interface CompactStaticBuildSourceDamageViewsResult {
 export interface CompactStaticBuildSourceUtilityViewsResult {
   loadout: ResolveStaticBuildSourceUtilityViewsResult["loadout"]
   summary: ResolveStaticBuildSourceUtilityViewsResult["summary"]
+  requirementSummary: ResolveStaticBuildSourceUtilityViewsResult["requirementSummary"]
   caveatSummary: ResolveStaticBuildSourceUtilityViewsResult["caveatSummary"]
   diagnosticSummary: ResolveStaticBuildSourceUtilityViewsResult["diagnosticSummary"]
   sourceNoteSummary: ResolveStaticBuildSourceUtilityViewsResult["sourceNoteSummary"]
@@ -302,6 +304,7 @@ export function compactStaticBuildSourceDamageViewsResult(
     manualBaseMode: views.manualBaseMode,
     loadout: views.loadout,
     summary: views.summary,
+    requirementSummary: views.requirementSummary,
     caveatSummary: views.caveatSummary,
     diagnosticSummary: views.diagnosticSummary,
     sourceNoteSummary: views.sourceNoteSummary,
@@ -323,6 +326,7 @@ export function compactStaticBuildSourceUtilityViewsResult(
   return {
     loadout: views.loadout,
     summary: views.summary,
+    requirementSummary: views.requirementSummary,
     caveatSummary: views.caveatSummary,
     diagnosticSummary: views.diagnosticSummary,
     sourceNoteSummary: views.sourceNoteSummary,

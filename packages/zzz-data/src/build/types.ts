@@ -679,6 +679,7 @@ export interface ResolveStaticBuildSourceDamageViewsResult {
   manualBaseMode?: StaticBuildBaseMode
   loadout: StaticBuildResolvedLoadout
   summary: StaticBuildSourceDamageViewSummary
+  requirementSummary: StaticBuildSourceDamageViewRequirementSummary
   caveatSummary: StaticBuildEntryCaveatSummary
   diagnosticSummary: StaticBuildDiagnosticSummary
   sourceNoteSummary: StaticBuildSourceNoteSummary
@@ -808,6 +809,7 @@ export interface StaticBuildEntryCaveatSummary {
 export interface ResolveStaticBuildSourceUtilityViewsResult {
   loadout: StaticBuildResolvedLoadout
   summary: StaticBuildSourceUtilityViewSummary
+  requirementSummary: StaticBuildSourceUtilityViewRequirementSummary
   caveatSummary: StaticBuildEntryCaveatSummary
   diagnosticSummary: StaticBuildDiagnosticSummary
   sourceNoteSummary: StaticBuildSourceNoteSummary
