@@ -6020,3 +6020,33 @@ caveatSummary` 这些兼容字段补齐。
 - `V144.2` 已完成：compact mixed source-entry entries 默认已不再携带 `assumptions`
 - `V144.3` 已完成：高层 `resolveBuildSourceEntries` 测试与 prompt 已对齐 `includeDetails=true`
 - `V144.4` 已完成：README、roadmap、索引与架构文档已同步
+
+## 148. V145 skill-matrix compact row assumption gating
+
+`V132` 收口后，compact `skill-matrix rows` 的 raw `row.diagnostics / row.sourceNotes` 已收紧到 `includeDetails=true`。
+
+但 compact `skill-matrix rows` 仍默认携带原始 `row.assumptions`，而 row / group / top-level `assumptionSummary` 已经齐全。
+
+`V145` 只解决一件事：
+
+1. 把 compact `skill-matrix rows` 的 `row.assumptions` 也移动到 `includeDetails=true`
+
+### 148.1 分阶段
+
+1. `V145.1` scope freeze
+2. `V145.2` runtime/type contract alignment
+3. `V145.3` tool assertion / prompt alignment
+4. `V145.4` docs closeout
+
+### 148.2 非目标
+
+1. 不改变顶层 `matrix.assumptions`
+2. 不改变既有 `row.assumptionSummary`
+3. 不改变 `row.diagnostics / row.sourceNotes / row.build`
+
+### 148.3 当前状态
+
+- `V145.1` 已完成：冻结到 skill-matrix compact row assumption gating
+- `V145.2` 已完成：compact `skill-matrix rows` 默认已不再携带 `row.assumptions`
+- `V145.3` 已完成：高层 `resolveBuildSkillMatrix` 测试与 prompt 已对齐 `includeDetails=true`
+- `V145.4` 已完成：README、roadmap、索引与架构文档已同步

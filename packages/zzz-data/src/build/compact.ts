@@ -82,7 +82,7 @@ export interface StaticBuildCompactSkillMatrixRow {
   requirementSummary: StaticBuildSkillMatrixRow["requirementSummary"]
   assumptionSummary: StaticBuildSkillMatrixRow["assumptionSummary"]
   caveatSummary: StaticBuildSkillMatrixRow["caveatSummary"]
-  assumptions: string[]
+  assumptions?: string[]
   unsupportedEffects: string[]
   build?: ResolveStaticBuildResult
 }
@@ -315,10 +315,10 @@ export function compactStaticBuildSkillMatrixRow(
     requirementSummary: row.requirementSummary,
     assumptionSummary: row.assumptionSummary,
     caveatSummary: row.caveatSummary,
-    assumptions: row.assumptions,
     unsupportedEffects: row.unsupportedEffects,
     ...(includeDetails
       ? {
+          assumptions: row.assumptions,
           diagnostics: row.diagnostics,
           sourceNotes: row.sourceNotes,
           build: row.build,

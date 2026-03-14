@@ -92,6 +92,7 @@ describe("static build compact helpers", () => {
       compact.requirementSummary,
     )
     expect(compact.rows[0]?.build).toBeUndefined()
+    expect(compact.rows[0]?.assumptions).toBeUndefined()
     expect(compact.rows[0]?.diagnostics).toBeUndefined()
     expect(compact.rows[0]?.sourceNotes).toBeUndefined()
     expect(compact.rows[0]?.requirementSummary).toEqual({
@@ -107,7 +108,7 @@ describe("static build compact helpers", () => {
     )
   })
 
-  it("keeps skill matrix row diagnostics and source notes only when requested", () => {
+  it("keeps skill matrix row assumptions, diagnostics and source notes only when requested", () => {
     const matrix = resolveStaticBuildSkillMatrix({
       loadout: {
         agentId: "1241",
@@ -130,6 +131,7 @@ describe("static build compact helpers", () => {
 
     const compact = compactStaticBuildSkillMatrixResult(matrix, true)
 
+    expect(compact.rows[0]?.assumptions).toEqual(matrix.rows[0]?.assumptions)
     expect(compact.rows[0]?.diagnostics).toEqual(matrix.rows[0]?.diagnostics)
     expect(compact.rows[0]?.sourceNotes).toEqual(matrix.rows[0]?.sourceNotes)
     expect(compact.rows[0]?.build).toEqual(matrix.rows[0]?.build)

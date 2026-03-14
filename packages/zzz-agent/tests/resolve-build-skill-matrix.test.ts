@@ -66,16 +66,16 @@ describe("resolveBuildSkillMatrix tool", () => {
       groups: [],
     })
     expect(firstRow.caveatSummary).toEqual({
-      assumptionCount: firstRow.assumptions.length,
+      assumptionCount: firstRow.assumptionSummary.count,
       unsupportedEffectCount: firstRow.unsupportedEffects.length,
-      hasAssumptions: firstRow.assumptions.length > 0,
+      hasAssumptions: firstRow.assumptionSummary.hasAssumptions,
       hasUnsupportedEffects: firstRow.unsupportedEffects.length > 0,
     })
     expect(firstRow.assumptionSummary).toEqual({
-      count: firstRow.assumptions.length,
-      hasAssumptions: firstRow.assumptions.length > 0,
+      count: firstRow.caveatSummary.assumptionCount,
+      hasAssumptions: firstRow.caveatSummary.hasAssumptions,
     })
-    expect(firstRow.assumptions).toBeInstanceOf(Array)
+    expect(firstRow.assumptions).toBeUndefined()
     expect(firstRow.unsupportedEffects).toBeInstanceOf(Array)
     const globalEffect = (result as any).matrix.effectSummary.find(
       (item: any) =>
@@ -173,9 +173,6 @@ describe("resolveBuildSkillMatrix tool", () => {
       count: normalGroup?.assumptions.length,
       hasAssumptions: (normalGroup?.assumptions.length ?? 0) > 0,
     })
-    expect(normalGroup?.assumptions).toEqual([
-      ...new Set(normalRows.flatMap((row: any) => row.assumptions)),
-    ])
     expect(normalGroup?.unsupportedEffects).toEqual([
       ...new Set(normalRows.flatMap((row: any) => row.unsupportedEffects)),
     ])
