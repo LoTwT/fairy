@@ -75,6 +75,16 @@ describe("resolveBuildSourceDamageViews tool", () => {
         }),
       ]),
     )
+    expect((result as any).views.entries[0]?.effectSummary).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          effectId: "alice-state-polarity-assault-ratio",
+          appliedEntryCount: 1,
+          totalEntryCount: 1,
+          appliesToAllEntries: true,
+        }),
+      ]),
+    )
     expect((result as any).views.requirementSummary).toEqual({
       count: 2,
       satisfiedCount: 2,

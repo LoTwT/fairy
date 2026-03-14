@@ -283,6 +283,10 @@ views.summary.assumptionSummary
 views.assumptionSummary
 ```
 
+如果你只想先判断单条 source-specific damage view 涉及了哪些乘区变化，也优先读取：
+
+- `views.entries[0].effectSummary`
+
 如果你只做单条 source-specific damage view 的结果展示，不需要再通过 `includeDetails` 读取 `entry.build.summary`，优先直接使用：
 
 - `views.entries[0].summary`

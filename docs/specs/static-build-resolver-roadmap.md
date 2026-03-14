@@ -5208,3 +5208,41 @@ caveatSummary` 这些兼容字段补齐。
 1. 不改变顶层 `views.summary.effectSummary / views.effectSummary` 的语义
 2. 不提前扩到 `entries[*].effectSummary`
 3. 不改变现有 `standalone / delta` 分组方式
+
+## 124. V121 source-damage-view entry effect summary alignment
+
+`V120` 收口后，`source-specific damage views` 已在顶层与 group 层补齐稳定 `effectSummary`。
+
+但逐条展示 `entries[*]` 时，调用方仍然只能回退到 `entry.build.trace` 自己聚合当前条目涉及的 effect 变化，和 `trigger-matrix row`、`skill-matrix row` 的 entry-level contract 还不对称。
+
+`V121` 只解决一件事：
+
+1. 给 `source-damage-view entries[*]` 补齐稳定 `effectSummary`
+
+### 124.1 阶段范围
+
+1. `V121.1` scope freeze
+2. `V121.2` runtime contract alignment
+3. `V121.3` tool assertion / prompt alignment
+4. `V121.4` docs closeout
+
+### 124.2 当前状态
+
+- `V121.1` 已完成：冻结到 source-damage-view entry effect summary alignment
+- `V121.2` 已完成：`entries[*].effectSummary` 与 compact entry 已补齐
+- `V121.3` 已完成：高层 source-damage-view tool 断言与 Agent prompt 已对齐 `entry.effectSummary`
+- `V121.4` 已完成：README、roadmap、索引与架构文档已同步
+
+### 124.3 当前边界
+
+本阶段只做：
+
+1. 为 `StaticBuildSourceDamageViewEntry` 新增稳定 `effectSummary`
+2. 让 entry-level `effectSummary` 复用当前条目的 `build.trace` 聚合语义
+3. 明确逐条解释 source-specific damage views 时优先读取 `entry.effectSummary`
+
+显式不做：
+
+1. 不改变顶层 `views.summary.effectSummary / views.effectSummary` 的语义
+2. 不改变组级 `views.summary.groups[*].effectSummary` 的语义
+3. 不为没有 `build.trace` 的 delta 条目伪造 effect 明细

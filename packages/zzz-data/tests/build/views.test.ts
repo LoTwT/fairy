@@ -445,6 +445,16 @@ describe("static build source damage views", () => {
         hasAssumptions: true,
       },
     })
+    expect(result.entries[0]?.effectSummary).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          effectId: "alice-state-polarity-assault-ratio",
+          appliedEntryCount: 1,
+          totalEntryCount: 1,
+          appliesToAllEntries: true,
+        }),
+      ]),
+    )
     expect(
       result.entries[0]?.build?.resolvedBuckets.skillMultiplierFactor,
     ).toBeCloseTo(2.5, 4)
@@ -744,6 +754,7 @@ describe("static build source damage views", () => {
         ],
       },
     })
+    expect(result.entries[0]?.effectSummary).toEqual([])
     expect(
       result.entries[0]?.sourceNotes.some(
         (note) =>
