@@ -236,7 +236,7 @@ export interface CompactStaticBuildSkillMatrixSummary {
   commonFormulaMultipliers: Record<string, number>
   variableFormulaMultipliers: string[]
   effectSummary: StaticBuildSkillMatrixEffectSummaryItem[]
-  requirementSummary: StaticBuildSourceDamageViewRequirementSummary
+  requirementSummary: CompactStaticBuildSourceDamageViewRequirementSummary
   assumptionSummary: CompactStaticBuildAssumptionSummary
   caveatSummary: CompactStaticBuildCaveatSummary
   diagnosticSummary: CompactStaticBuildDiagnosticSummary
@@ -441,7 +441,7 @@ export interface CompactStaticBuildTriggerMatrixSummary {
   unsupportedCount: number
   hasSourceViews: boolean
   effectSummary: StaticBuildTriggerMatrixEffectSummaryItem[]
-  requirementSummary: StaticBuildSourceDamageViewRequirementSummary
+  requirementSummary: CompactStaticBuildSourceDamageViewRequirementSummary
   caveatSummary: CompactStaticBuildEntryCaveatSummary
   diagnosticSummary: CompactStaticBuildDiagnosticSummary
   sourceNoteSummary: CompactStaticBuildSourceNoteSummary
@@ -511,7 +511,7 @@ export interface CompactStaticBuildSourceDamageViewsSummary {
   supportedCount: number
   unsupportedCount: number
   effectSummary: StaticBuildSourceDamageViewEffectSummaryItem[]
-  requirementSummary: StaticBuildSourceDamageViewRequirementSummary
+  requirementSummary: CompactStaticBuildSourceDamageViewRequirementSummary
   caveatSummary: CompactStaticBuildEntryCaveatSummary
   diagnosticSummary: CompactStaticBuildDiagnosticSummary
   sourceNoteSummary: CompactStaticBuildSourceNoteSummary
@@ -587,8 +587,8 @@ export interface CompactStaticBuildSourceEntryCollectionSummary {
   unsupportedCount: number
   isUtilityOnly: boolean
   effectSummary: StaticBuildSourceDamageViewEffectSummaryItem[]
-  sourceDamageRequirementSummary: StaticBuildSourceDamageViewRequirementSummary
-  sourceUtilityRequirementSummary: StaticBuildSourceUtilityViewRequirementSummary
+  sourceDamageRequirementSummary: CompactStaticBuildSourceDamageViewRequirementSummary
+  sourceUtilityRequirementSummary: CompactStaticBuildSourceUtilityViewRequirementSummary
   caveatSummary: CompactStaticBuildEntryCaveatSummary
   diagnosticSummary: CompactStaticBuildDiagnosticSummary
   sourceNoteSummary: CompactStaticBuildSourceNoteSummary
@@ -631,7 +631,7 @@ export interface CompactStaticBuildSourceUtilityViewsSummary {
   supportedCount: number
   unsupportedCount: number
   effectSummary: StaticBuildSourceDamageViewEffectSummaryItem[]
-  requirementSummary: StaticBuildSourceUtilityViewRequirementSummary
+  requirementSummary: CompactStaticBuildSourceUtilityViewRequirementSummary
   caveatSummary: CompactStaticBuildEntryCaveatSummary
   diagnosticSummary: CompactStaticBuildDiagnosticSummary
   sourceNoteSummary: CompactStaticBuildSourceNoteSummary
@@ -712,6 +712,9 @@ export function compactStaticBuildSkillMatrixSummary(
 ): CompactStaticBuildSkillMatrixSummary {
   return {
     ...summary,
+    requirementSummary: compactStaticBuildRequirementSummary(
+      summary.requirementSummary,
+    ),
     assumptionSummary: compactStaticBuildAssumptionSummary(
       summary.assumptionSummary,
     ),
@@ -838,7 +841,9 @@ export function compactStaticBuildTriggerMatrixSummary(
     unsupportedCount: summary.unsupportedCount,
     hasSourceViews: summary.hasSourceViews,
     effectSummary: summary.effectSummary,
-    requirementSummary: summary.requirementSummary,
+    requirementSummary: compactStaticBuildRequirementSummary(
+      summary.requirementSummary,
+    ),
     caveatSummary: compactStaticBuildEntryCaveatSummary(summary.caveatSummary),
     diagnosticSummary: compactStaticBuildDiagnosticSummary(
       summary.diagnosticSummary,
@@ -958,8 +963,12 @@ export function compactStaticBuildSourceEntryCollectionSummary(
     unsupportedCount: summary.unsupportedCount,
     isUtilityOnly: summary.isUtilityOnly,
     effectSummary: summary.effectSummary,
-    sourceDamageRequirementSummary: summary.sourceDamageRequirementSummary,
-    sourceUtilityRequirementSummary: summary.sourceUtilityRequirementSummary,
+    sourceDamageRequirementSummary: compactStaticBuildRequirementSummary(
+      summary.sourceDamageRequirementSummary,
+    ),
+    sourceUtilityRequirementSummary: compactStaticBuildRequirementSummary(
+      summary.sourceUtilityRequirementSummary,
+    ),
     caveatSummary: compactStaticBuildEntryCaveatSummary(summary.caveatSummary),
     diagnosticSummary: compactStaticBuildDiagnosticSummary(
       summary.diagnosticSummary,
@@ -1037,7 +1046,9 @@ export function compactStaticBuildSourceDamageViewsSummary(
     supportedCount: summary.supportedCount,
     unsupportedCount: summary.unsupportedCount,
     effectSummary: summary.effectSummary,
-    requirementSummary: summary.requirementSummary,
+    requirementSummary: compactStaticBuildRequirementSummary(
+      summary.requirementSummary,
+    ),
     caveatSummary: compactStaticBuildEntryCaveatSummary(summary.caveatSummary),
     diagnosticSummary: compactStaticBuildDiagnosticSummary(
       summary.diagnosticSummary,
@@ -1155,7 +1166,9 @@ export function compactStaticBuildSourceUtilityViewsSummary(
     supportedCount: summary.supportedCount,
     unsupportedCount: summary.unsupportedCount,
     effectSummary: summary.effectSummary,
-    requirementSummary: summary.requirementSummary,
+    requirementSummary: compactStaticBuildRequirementSummary(
+      summary.requirementSummary,
+    ),
     caveatSummary: compactStaticBuildEntryCaveatSummary(summary.caveatSummary),
     diagnosticSummary: compactStaticBuildDiagnosticSummary(
       summary.diagnosticSummary,

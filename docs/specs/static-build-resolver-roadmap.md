@@ -6665,3 +6665,38 @@ caveatSummary` 这些兼容字段补齐。
 - `V165.2` 已完成：compact 结果对象顶层的 requirement summary 已改为显式 compact types
 - `V165.3` 已完成：现有测试与 runtime 校验已覆盖
 - `V165.4` 已完成：roadmap、索引与架构文档已同步
+
+## 169. V166 explicit compact top-level summary requirement summaries
+
+`V165` 收口后，compact contract 中下一批仍直接复用 raw requirement summary type 的显式缺口主要集中在 top-level `summary`：
+
+- `skill-matrix summary.requirementSummary`
+- `trigger-matrix summary.requirementSummary`
+- `source-damage-views summary.requirementSummary`
+- `source-utility-views summary.requirementSummary`
+- `source-entry collection summary.sourceDamageRequirementSummary`
+- `source-entry collection summary.sourceUtilityRequirementSummary`
+
+`V166` 只解决一件事：
+
+1. 把上述 top-level `summary` requirement summary 改成显式 compact type
+
+### 169.1 分阶段
+
+1. `V166.1` scope freeze
+2. `V166.2` runtime/type contract alignment
+3. `V166.3` tests / prompt alignment
+4. `V166.4` docs closeout
+
+### 169.2 非目标
+
+1. 不改变 `group / row / entry` 上的 requirement summary type
+2. 不改变 requirement summary 的字段值
+3. 不改变 `includeDetails` 语义
+
+### 169.3 当前状态
+
+- `V166.1` 已完成：冻结到 explicit compact top-level summary requirement summaries
+- `V166.2` 已完成：compact top-level `summary` 的 requirement summary 已改为显式 compact types
+- `V166.3` 已完成：现有测试与 runtime 校验已覆盖
+- `V166.4` 已完成：roadmap、索引与架构文档已同步
