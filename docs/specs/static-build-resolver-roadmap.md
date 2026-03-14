@@ -4759,6 +4759,61 @@ trigger matrix / skill matrix 一致的顶层兼容字段。
 2. 不改变 `entry.diagnosticSummary / entry.sourceNoteSummary` 的语义
 3. 不新增新的 aggregate 类型
 
+## 114. V111 standalone source-view top-level diagnostic/source-note summary alignment
+
+`V110` 收口后，unified `source-entry collection` 已把顶层
+`diagnosticSummary / sourceNoteSummary` 固定为稳定兼容字段。
+
+但 standalone `source-damage-view` / `source-utility-view` 顶层仍只暴露：
+
+1. `summary`
+2. `caveatSummary`
+3. `assumptionSummary`
+
+虽然 `views.summary` 已经稳定包含：
+
+1. `diagnosticSummary`
+2. `sourceNoteSummary`
+
+但 result 顶层还缺与 mixed collection / skill-matrix / trigger-matrix 一致的兼容字段。
+
+### 114.1 目标
+
+1. 给 standalone `source-damage-view` 顶层补齐稳定的
+   `diagnosticSummary / sourceNoteSummary`
+2. 给 standalone `source-utility-view` 顶层补齐稳定的
+   `diagnosticSummary / sourceNoteSummary`
+3. 保持 `views.summary.diagnosticSummary / views.summary.sourceNoteSummary` 原语义不变
+
+### 114.2 范围
+
+1. `V111.1` scope freeze
+2. `V111.2` runtime contract alignment
+3. `V111.3` compact / tool assertion alignment
+4. `V111.4` prompt / README / docs closeout
+
+### 114.3 当前状态
+
+- `V111.1` 已完成：冻结到 standalone source-view top-level diagnostic/source-note summary alignment
+- `V111.2` 已完成：底层 result 与 compact source views 已补齐 `diagnosticSummary / sourceNoteSummary`
+- `V111.3` 已完成：高层 source-view tool 断言已对齐顶层 `views.diagnosticSummary / views.sourceNoteSummary`
+- `V111.4` 已完成：相关 specs、roadmap、索引、架构文档与 README 已同步
+
+### 114.4 当前边界
+
+本阶段只做：
+
+1. 在 `ResolveStaticBuildSourceDamageViewsResult` 顶层新增 `diagnosticSummary / sourceNoteSummary`
+2. 在 `ResolveStaticBuildSourceUtilityViewsResult` 顶层新增 `diagnosticSummary / sourceNoteSummary`
+3. 让 compact source views 透传这两个字段
+4. 明确上层优先读取 `views.summary.*`，兼容读取 `views.*`
+
+显式不做：
+
+1. 不改变 `summary.diagnosticSummary / summary.sourceNoteSummary` 的语义
+2. 不改变 `entry.diagnosticSummary / entry.sourceNoteSummary` 的语义
+3. 不新增新的 aggregate 类型
+
 ### 103.2 目标
 
 1. 为 `rows[*]` 增加稳定 `caveatSummary`

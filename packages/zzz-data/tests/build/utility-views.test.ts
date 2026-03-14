@@ -39,6 +39,25 @@ describe("static build source utility views", () => {
       hasAssumptions: result.assumptions.length > 0,
       hasUnsupported: false,
     })
+    expect(result.diagnosticSummary).toEqual({
+      count: 0,
+      hasDiagnostics: false,
+      hasDefaultedInput: false,
+      hasCoverageGap: false,
+      hasUnsupportedEffect: false,
+      hasFallback: false,
+      kindGroups: [],
+      ownerGroups: [],
+    })
+    expect(result.sourceNoteSummary).toEqual({
+      count: 0,
+      hasSourceNotes: false,
+      hasMissingInput: false,
+      hasProcessOnly: false,
+      hasResearchOnly: false,
+      statusGroups: [],
+      ownerGroups: [],
+    })
     expect(result.summary).toMatchObject({
       entryCount: 1,
       triggerCount: 1,

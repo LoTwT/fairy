@@ -248,6 +248,16 @@ views.summary
 
 如果你需要判断当前 source-specific damage views 是 standalone 还是 delta、是否存在 unsupported 条目、如何分组展示，或者当前整组 views / 某一组 views / 某一条 entry 是否带有 requirement / diagnostics / source notes / assumptions，也不要再自己统计 `entries`，直接使用 `views.summary`、`views.summary.assumptionSummary`、`views.assumptionSummary` 与 `entry.assumptionSummary`。
 
+如果你只想先判断整组 source-specific damage views 是否存在 diagnostics / source notes，也优先读取：
+
+- `views.summary.diagnosticSummary`
+- `views.summary.sourceNoteSummary`
+
+如需兼容旧调用方，也可以继续读取：
+
+- `views.diagnosticSummary`
+- `views.sourceNoteSummary`
+
 如果你是按组拆“独立结算 / 主结算差值”两个 section，也不要再先过滤 entries 再自己统计组内 assumptions，直接读取：
 
 ```ts
@@ -596,6 +606,16 @@ utilityViews.summary
 ```
 
 如果你需要判断当前 source-specific utility views 是 trigger 还是 rate、是否存在 unsupported 条目、如何分组展示，或者当前整组 utility views / 某一条 entry 是否带有 requirement / diagnostics / source notes / assumptions / caveat，不要再自己统计 `entries`，直接使用 `utilityViews.summary`、`utilityViews.summary.assumptionSummary`、`utilityViews.summary.caveatSummary`、`utilityViews.assumptionSummary`、`utilityViews.caveatSummary`、`entry.assumptionSummary` 与 `entry.caveatSummary`。
+
+如果你只想先判断整组 utility views 是否存在 diagnostics / source notes，也优先读取：
+
+- `utilityViews.summary.diagnosticSummary`
+- `utilityViews.summary.sourceNoteSummary`
+
+如需兼容旧调用方，也可以继续读取：
+
+- `utilityViews.diagnosticSummary`
+- `utilityViews.sourceNoteSummary`
 
 如果你是按组拆“按次触发 / 按速率”两个 section，也不要再先过滤 entries 再自己统计组内 assumptions，直接读取：
 

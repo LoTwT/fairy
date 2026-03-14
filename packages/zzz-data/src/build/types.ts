@@ -680,6 +680,8 @@ export interface ResolveStaticBuildSourceDamageViewsResult {
   loadout: StaticBuildResolvedLoadout
   summary: StaticBuildSourceDamageViewSummary
   caveatSummary: StaticBuildEntryCaveatSummary
+  diagnosticSummary: StaticBuildDiagnosticSummary
+  sourceNoteSummary: StaticBuildSourceNoteSummary
   assumptionSummary: StaticBuildAssumptionSummary
   entries: StaticBuildSourceDamageViewEntry[]
   assumptions: string[]
@@ -807,6 +809,8 @@ export interface ResolveStaticBuildSourceUtilityViewsResult {
   loadout: StaticBuildResolvedLoadout
   summary: StaticBuildSourceUtilityViewSummary
   caveatSummary: StaticBuildEntryCaveatSummary
+  diagnosticSummary: StaticBuildDiagnosticSummary
+  sourceNoteSummary: StaticBuildSourceNoteSummary
   assumptionSummary: StaticBuildAssumptionSummary
   entries: StaticBuildSourceUtilityViewEntry[]
   assumptions: string[]

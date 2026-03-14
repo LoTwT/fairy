@@ -92,6 +92,10 @@ it("keeps screenshot summary by default", async () => {
   expect(base.includes("views.assumptionSummary")).toBe(true)
   expect(base.includes("views.summary.assumptionSummary")).toBe(true)
   expect(base.includes("views.summary.caveatSummary")).toBe(true)
+  expect(base.includes("views.summary.diagnosticSummary")).toBe(true)
+  expect(base.includes("views.summary.sourceNoteSummary")).toBe(true)
+  expect(base.includes("views.diagnosticSummary")).toBe(true)
+  expect(base.includes("views.sourceNoteSummary")).toBe(true)
   expect(base.includes("views.caveatSummary")).toBe(true)
   expect(base.includes("views.summary.groups[*].assumptionSummary")).toBe(true)
   expect(base.includes("entry.assumptionSummary")).toBe(true)
@@ -100,6 +104,9 @@ it("keeps screenshot summary by default", async () => {
   expect(base.includes("views.summary.rateCount")).toBe(true)
   expect(base.includes("views.summary.requirementSummary")).toBe(true)
   expect(base.includes("整组 utility views 是否带 caveat")).toBe(true)
+  expect(
+    base.includes("整组 utility views 是否存在 diagnostics / source notes"),
+  ).toBe(true)
   expect(base.includes("views.summary.groups[*].caveatSummary")).toBe(true)
   expect(base.includes("entry.summary")).toBe(true)
   expect(base.includes("entry.requirementSummary")).toBe(true)

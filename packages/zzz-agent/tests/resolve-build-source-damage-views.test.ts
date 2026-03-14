@@ -47,6 +47,31 @@ describe("resolveBuildSourceDamageViews tool", () => {
       hasAssumptions: (result as any).views.assumptions.length > 0,
       hasUnsupported: false,
     })
+    expect((result as any).views.diagnosticSummary).toEqual({
+      count: 3,
+      hasDiagnostics: true,
+      hasDefaultedInput: true,
+      hasCoverageGap: false,
+      hasUnsupportedEffect: false,
+      hasFallback: false,
+      kindGroups: [{ key: "defaulted-input", label: "默认输入", count: 3 }],
+      ownerGroups: [
+        { key: "loadout", count: 2 },
+        { key: "scenario", count: 1 },
+      ],
+    })
+    expect((result as any).views.sourceNoteSummary).toEqual({
+      count: 2,
+      hasSourceNotes: true,
+      hasMissingInput: false,
+      hasProcessOnly: false,
+      hasResearchOnly: false,
+      statusGroups: [{ key: "resolved", label: "已展开", count: 2 }],
+      ownerGroups: [
+        { key: "finalPanel", count: 1 },
+        { key: "stateSnapshot", count: 1 },
+      ],
+    })
     expect((result as any).views.summary).toMatchObject({
       entryCount: 1,
       standaloneCount: 1,

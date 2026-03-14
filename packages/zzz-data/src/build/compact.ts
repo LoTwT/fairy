@@ -162,6 +162,8 @@ export interface CompactStaticBuildSourceDamageViewsResult {
   loadout: ResolveStaticBuildSourceDamageViewsResult["loadout"]
   summary: ResolveStaticBuildSourceDamageViewsResult["summary"]
   caveatSummary: ResolveStaticBuildSourceDamageViewsResult["caveatSummary"]
+  diagnosticSummary: ResolveStaticBuildSourceDamageViewsResult["diagnosticSummary"]
+  sourceNoteSummary: ResolveStaticBuildSourceDamageViewsResult["sourceNoteSummary"]
   assumptionSummary: ResolveStaticBuildSourceDamageViewsResult["assumptionSummary"]
   assumptions: string[]
   entries: StaticBuildCompactSourceDamageViewEntry[]
@@ -171,6 +173,8 @@ export interface CompactStaticBuildSourceUtilityViewsResult {
   loadout: ResolveStaticBuildSourceUtilityViewsResult["loadout"]
   summary: ResolveStaticBuildSourceUtilityViewsResult["summary"]
   caveatSummary: ResolveStaticBuildSourceUtilityViewsResult["caveatSummary"]
+  diagnosticSummary: ResolveStaticBuildSourceUtilityViewsResult["diagnosticSummary"]
+  sourceNoteSummary: ResolveStaticBuildSourceUtilityViewsResult["sourceNoteSummary"]
   assumptionSummary: ResolveStaticBuildSourceUtilityViewsResult["assumptionSummary"]
   assumptions: string[]
   entries: StaticBuildCompactSourceUtilityViewEntry[]
@@ -299,6 +303,8 @@ export function compactStaticBuildSourceDamageViewsResult(
     loadout: views.loadout,
     summary: views.summary,
     caveatSummary: views.caveatSummary,
+    diagnosticSummary: views.diagnosticSummary,
+    sourceNoteSummary: views.sourceNoteSummary,
     assumptionSummary: views.assumptionSummary,
     assumptions: views.assumptions,
     entries: views.entries.map(
@@ -318,6 +324,8 @@ export function compactStaticBuildSourceUtilityViewsResult(
     loadout: views.loadout,
     summary: views.summary,
     caveatSummary: views.caveatSummary,
+    diagnosticSummary: views.diagnosticSummary,
+    sourceNoteSummary: views.sourceNoteSummary,
     assumptionSummary: views.assumptionSummary,
     assumptions: views.assumptions,
     entries: views.entries.map(

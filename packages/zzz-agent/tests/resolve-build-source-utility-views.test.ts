@@ -22,6 +22,25 @@ describe("resolveBuildSourceUtilityViews tool", () => {
       hasAssumptions: (result as any).views.assumptions.length > 0,
       hasUnsupported: false,
     })
+    expect((result as any).views.diagnosticSummary).toEqual({
+      count: 0,
+      hasDiagnostics: false,
+      hasDefaultedInput: false,
+      hasCoverageGap: false,
+      hasUnsupportedEffect: false,
+      hasFallback: false,
+      kindGroups: [],
+      ownerGroups: [],
+    })
+    expect((result as any).views.sourceNoteSummary).toEqual({
+      count: 0,
+      hasSourceNotes: false,
+      hasMissingInput: false,
+      hasProcessOnly: false,
+      hasResearchOnly: false,
+      statusGroups: [],
+      ownerGroups: [],
+    })
     expect((result as any).views.summary).toMatchObject({
       entryCount: 1,
       triggerCount: 1,

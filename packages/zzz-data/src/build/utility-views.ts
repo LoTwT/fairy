@@ -405,11 +405,14 @@ export function resolveStaticBuildSourceUtilityViews(
     entries.length > 0 || compatibleWEngines.length > 0
       ? []
       : [`${loadout.agent.name} 当前特性下暂无已收录的 utility-only 音擎条目。`]
+  const summary = summarizeSourceUtilityViews(entries, assumptions)
 
   return {
     loadout,
-    summary: summarizeSourceUtilityViews(entries, assumptions),
+    summary,
     caveatSummary: summarizeSourceUtilityViewCaveats(entries, assumptions),
+    diagnosticSummary: summary.diagnosticSummary,
+    sourceNoteSummary: summary.sourceNoteSummary,
     assumptionSummary: summarizeAssumptions(assumptions),
     entries,
     assumptions,

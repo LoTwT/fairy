@@ -147,14 +147,17 @@ export function resolveStaticBuildSourceDamageViews(
   }
 
   const sortedEntries = entries.toSorted(compareSourceDamageViews)
+  const summary = summarizeSourceDamageViews(sortedEntries, [])
 
   return {
     mode,
     manualBaseMode:
       input.mode === "manual" ? resolveBaseMode(input) : undefined,
     loadout,
-    summary: summarizeSourceDamageViews(sortedEntries, []),
+    summary,
     caveatSummary: summarizeSourceDamageViewCaveats(sortedEntries, []),
+    diagnosticSummary: summary.diagnosticSummary,
+    sourceNoteSummary: summary.sourceNoteSummary,
     assumptionSummary: summarizeAssumptions([]),
     entries: sortedEntries,
     assumptions: [],

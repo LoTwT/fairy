@@ -52,6 +52,25 @@ describe("static build source damage views", () => {
       hasAssumptions: result.assumptions.length > 0,
       hasUnsupported: false,
     })
+    expect(result.diagnosticSummary).toEqual({
+      count: 0,
+      hasDiagnostics: false,
+      hasDefaultedInput: false,
+      hasCoverageGap: false,
+      hasUnsupportedEffect: false,
+      hasFallback: false,
+      kindGroups: [],
+      ownerGroups: [],
+    })
+    expect(result.sourceNoteSummary).toEqual({
+      count: 0,
+      hasSourceNotes: false,
+      hasMissingInput: false,
+      hasProcessOnly: false,
+      hasResearchOnly: false,
+      statusGroups: [],
+      ownerGroups: [],
+    })
     expect(result.summary).toEqual({
       entryCount: 0,
       standaloneCount: 0,
@@ -144,6 +163,31 @@ describe("static build source damage views", () => {
       unsupportedCount: 0,
       hasAssumptions: result.assumptions.length > 0,
       hasUnsupported: false,
+    })
+    expect(result.diagnosticSummary).toEqual({
+      count: 2,
+      hasDiagnostics: true,
+      hasDefaultedInput: true,
+      hasCoverageGap: false,
+      hasUnsupportedEffect: false,
+      hasFallback: false,
+      kindGroups: [{ key: "defaulted-input", label: "默认输入", count: 2 }],
+      ownerGroups: [
+        { key: "loadout", count: 1 },
+        { key: "scenario", count: 1 },
+      ],
+    })
+    expect(result.sourceNoteSummary).toEqual({
+      count: 2,
+      hasSourceNotes: true,
+      hasMissingInput: false,
+      hasProcessOnly: false,
+      hasResearchOnly: false,
+      statusGroups: [{ key: "resolved", label: "已展开", count: 2 }],
+      ownerGroups: [
+        { key: "finalPanel", count: 1 },
+        { key: "stateSnapshot", count: 1 },
+      ],
     })
     expect(result.summary).toMatchObject({
       entryCount: 1,
