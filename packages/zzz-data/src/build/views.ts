@@ -152,7 +152,7 @@ export function resolveStaticBuildSourceDamageViews(
     manualBaseMode:
       input.mode === "manual" ? resolveBaseMode(input) : undefined,
     loadout,
-    summary: summarizeSourceDamageViews(sortedEntries),
+    summary: summarizeSourceDamageViews(sortedEntries, []),
     assumptionSummary: summarizeAssumptions([]),
     entries: sortedEntries,
     assumptions: [],
@@ -219,6 +219,7 @@ function getSourceDamageViewGroupOrder(
 
 function summarizeSourceDamageViews(
   entries: StaticBuildSourceDamageViewEntry[],
+  assumptions: string[],
 ): StaticBuildSourceDamageViewSummary {
   const standaloneEntries = entries.filter(
     (entry) => entry.resolutionMode === "standalone",
@@ -273,6 +274,7 @@ function summarizeSourceDamageViews(
     ),
     diagnosticSummary: summarizeDiagnosticEntries(diagnostics),
     sourceNoteSummary: summarizeSourceNoteEntries(sourceNotes),
+    assumptionSummary: summarizeAssumptions(assumptions),
     groups,
   }
 }

@@ -52,6 +52,10 @@ describe("static build source damage views", () => {
       deltaCount: 0,
       supportedCount: 0,
       unsupportedCount: 0,
+      assumptionSummary: {
+        count: result.assumptions.length,
+        hasAssumptions: result.assumptions.length > 0,
+      },
       requirementSummary: {
         count: 0,
         satisfiedCount: 0,
@@ -129,6 +133,10 @@ describe("static build source damage views", () => {
       deltaCount: 0,
       supportedCount: 1,
       unsupportedCount: 0,
+      assumptionSummary: {
+        count: result.assumptions.length,
+        hasAssumptions: result.assumptions.length > 0,
+      },
       requirementSummary: {
         count: 2,
         satisfiedCount: 2,

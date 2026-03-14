@@ -3680,3 +3680,43 @@ Batch B（已完成）：
 1. 不改变既有顶层 `matrix.assumptionSummary`
 2. 不改变 row / group 级 assumption contract
 3. 不提前扩到 source-view / source-entry / skill-matrix summary 的同名字段
+
+## 85. V82 source-damage-view summary assumption summary
+
+`V81` 收口后，trigger-entry matrix 已具备：
+
+- 顶层 `matrix.assumptionSummary`
+- 顶层 `matrix.summary.assumptionSummary`
+- 组级 `matrix.summary.groups[*].assumptionSummary`
+- 行级 `row.assumptionSummary`
+
+但 standalone `source-damage-view` 仍只有：
+
+- 顶层 `views.assumptionSummary`
+- 组级 `views.summary.groups[*].assumptionSummary`
+- entry 级 `entry.assumptionSummary`
+
+`views.summary` 本身还缺少同名聚合字段。
+
+`V82` 只解决一件事：
+
+- 为 `StaticBuildSourceDamageViewSummary` 增加稳定 `assumptionSummary`
+
+### 85.1 当前状态
+
+- `V82.1` 已完成：冻结到 source-damage-view summary assumption summary
+- `V82.2` 已完成：`StaticBuildSourceDamageViewSummary` 已新增稳定 `assumptionSummary`
+- `V82.3` 已完成：高层 tool 断言与 agent prompt 已对齐 `views.summary.assumptionSummary`
+- `V82.4` 已完成：相关 specs、roadmap、索引、架构文档与 README 已同步
+
+### 85.2 目标
+
+1. 为 `views.summary` 增加稳定 assumption aggregate
+2. 保持与既有顶层 `views.assumptionSummary` 一致
+3. 让 source-damage-view 顶层 `summary` 在四类聚合上对齐 requirement / diagnostics / source notes
+
+### 85.3 Out of Scope
+
+1. 不改变既有顶层 `views.assumptionSummary`
+2. 不改变 entry / group 级 assumption contract
+3. 不提前扩到 source-utility-view / source-entry summary 的同名字段

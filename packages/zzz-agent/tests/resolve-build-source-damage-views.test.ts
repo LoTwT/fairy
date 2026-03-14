@@ -47,6 +47,10 @@ describe("resolveBuildSourceDamageViews tool", () => {
       deltaCount: 0,
       supportedCount: 1,
       unsupportedCount: 0,
+      assumptionSummary: {
+        count: (result as any).views.assumptions.length,
+        hasAssumptions: (result as any).views.assumptions.length > 0,
+      },
       requirementSummary: {
         count: 2,
         satisfiedCount: 2,
