@@ -341,6 +341,12 @@ function createEntryBase(
     diagnosticSummary: summarizeDiagnosticEntries([]),
     sourceNotes,
     sourceNoteSummary: summarizeSourceNoteEntries(sourceNotes),
+    caveatSummary: {
+      assumptionCount: 0,
+      unsupportedCount: requirements.every((item) => item.satisfied) ? 0 : 1,
+      hasAssumptions: false,
+      hasUnsupported: !requirements.every((item) => item.satisfied),
+    },
     assumptionSummary: summarizeAssumptions([]),
     assumptions: [],
   }
@@ -348,6 +354,10 @@ function createEntryBase(
 
 function syncEntryAssumptionSummary(entry: StaticBuildSourceDamageViewEntry) {
   entry.assumptionSummary = summarizeAssumptions(entry.assumptions)
+  entry.caveatSummary = summarizeSourceDamageViewCaveats(
+    [entry],
+    entry.assumptions,
+  )
   return entry
 }
 

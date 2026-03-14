@@ -775,6 +775,7 @@ collection.summary
 - 如果 `collection.entries[*]` 中当前条目是 source-damage-view entry，也优先读取 `entry.summary` 获取 `expectedTotal / critTotal / nonCritTotal / isAnomalyLike / isDisorderLike`，不要只盯着 `entry.damage`
 - 如果 `collection.entries[*]` 中当前条目是 utility entry，也优先读取 `entry.summary` 获取数值 / 单位 / 目标 / 触发模式摘要，不要再散读 `value / unit / targetScope / resolutionMode`
 - 如果只想先判断某一条 mixed entry 是否带 assumptions，也优先读取 `entry.assumptionSummary`，不要再手工统计 `entry.assumptions.length`
+- 如果只想先判断某一条 mixed entry 是否带 caveat，也优先读取 `entry.caveatSummary`，不要再手工组合 `entry.assumptions.length` 与 `entry.supported`
 
 如果你需要分别读取 mixed collection 里 source-damage-view / source-utility-view 两类条目的 requirement 分布，也不要自己遍历 `entries[*].requirements`，直接读取：
 
@@ -795,6 +796,7 @@ collection.summary.groups[0].sourceDamageRequirementSummary
 collection.summary.groups[0].sourceUtilityRequirementSummary
 collection.entries[0].summary
 collection.entries[0].assumptionSummary
+collection.entries[0].caveatSummary
 ```
 
 如果你在应用层或 Agent 层默认不需要完整 `build`、只需要紧凑投影结果，可直接使用 `V37` 下沉到 `zzz-data` 的 compact helper：

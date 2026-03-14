@@ -171,6 +171,12 @@ describe("resolveBuildSourceEntries tool", () => {
         count: 1,
         hasAssumptions: true,
       },
+      caveatSummary: {
+        assumptionCount: 1,
+        unsupportedCount: 0,
+        hasAssumptions: true,
+        hasUnsupported: false,
+      },
       value: 3,
       unit: "energy",
     })
@@ -424,6 +430,12 @@ describe("resolveBuildSourceEntries tool", () => {
       assumptionSummary: {
         count: 1,
         hasAssumptions: true,
+      },
+      caveatSummary: {
+        assumptionCount: 1,
+        unsupportedCount: 0,
+        hasAssumptions: true,
+        hasUnsupported: false,
       },
     })
     expect(ariaEntry.summary.expectedTotal).toBeGreaterThan(0)
