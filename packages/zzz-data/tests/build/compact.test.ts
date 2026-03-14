@@ -44,6 +44,9 @@ describe("static build compact helpers", () => {
     const compact = compactStaticBuildResult(build)
     const full = compactStaticBuildResult(build, true)
 
+    expect(compact.profile).toEqual(build.profile)
+    expect(compact.mode).toBe(build.mode)
+    expect(compact.manualBaseMode).toBe(build.manualBaseMode)
     expect(compact.summary).toEqual(build.summary)
     expect(compact.effectSummary).toEqual(build.effectSummary)
     expect(compact.loadout).toEqual(build.loadout)

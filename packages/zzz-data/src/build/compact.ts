@@ -20,6 +20,7 @@ import type {
   ResolveStaticBuildTriggerMatrixResult,
   StaticBuildAgentCatalogEntry,
   StaticBuildAssumptionSummary,
+  StaticBuildBaseMode,
   StaticBuildBucket,
   StaticBuildCaveatSummary,
   StaticBuildDiagnosticEntry,
@@ -27,6 +28,8 @@ import type {
   StaticBuildDiagnosticOwner,
   StaticBuildDiagnosticSummary,
   StaticBuildEntryCaveatSummary,
+  StaticBuildMode,
+  StaticBuildProfileResult,
   StaticBuildRequirementSummary,
   StaticBuildRequirementSummaryGroup,
   StaticBuildResolvedBuckets,
@@ -61,9 +64,9 @@ import type {
 } from "./types.js"
 
 export interface CompactStaticBuildResult {
-  profile: ResolveStaticBuildResult["profile"]
-  mode: ResolveStaticBuildResult["mode"]
-  manualBaseMode?: ResolveStaticBuildResult["manualBaseMode"]
+  profile: CompactStaticBuildProfile
+  mode: CompactStaticBuildMode
+  manualBaseMode?: CompactStaticBuildBaseMode
   loadout: CompactStaticBuildLoadout
   summary: CompactStaticBuildResolveSummary
   effectSummary: CompactStaticBuildResolveEffectSummaryItem[]
@@ -113,6 +116,15 @@ export interface CompactStaticBuildResolveSummary {
   hasResearchOnlySourceNote: boolean
   diagnosticGroups: CompactStaticBuildDiagnosticGroupSummary[]
   sourceNoteGroups: CompactStaticBuildSourceNoteGroupSummary[]
+}
+
+export type CompactStaticBuildMode = StaticBuildMode
+
+export type CompactStaticBuildBaseMode = StaticBuildBaseMode
+
+export interface CompactStaticBuildProfile {
+  id: StaticBuildProfileResult["id"]
+  name: string
 }
 
 export interface CompactStaticBuildCatalogEntry {
@@ -567,7 +579,7 @@ export function compactStaticBuildResult(
   includeDetails = false,
 ): CompactStaticBuildResult {
   return {
-    profile: build.profile,
+    profile: compactStaticBuildProfile(build.profile),
     mode: build.mode,
     manualBaseMode: build.manualBaseMode,
     loadout: compactStaticBuildLoadout(build.loadout),
@@ -606,6 +618,15 @@ export function compactStaticBuildResult(
           trace: build.trace?.map((item) => compactStaticBuildTraceItem(item)),
         }
       : {}),
+  }
+}
+
+export function compactStaticBuildProfile(
+  profile: StaticBuildProfileResult,
+): CompactStaticBuildProfile {
+  return {
+    id: profile.id,
+    name: profile.name,
   }
 }
 
