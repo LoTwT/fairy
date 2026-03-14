@@ -52,7 +52,7 @@ export interface CompactStaticBuildResult {
   }
   diagnostics?: StaticBuildDiagnosticEntry[]
   sourceNotes?: StaticBuildSourceNoteEntry[]
-  assumptions: string[]
+  assumptions?: string[]
   unsupportedEffects: string[]
   damageParams?:
     | NormalDamageParams
@@ -122,10 +122,10 @@ export function compactStaticBuildResult(
     resolvedPanel: build.resolvedPanel,
     resolvedBuckets: build.resolvedBuckets,
     damage: build.damage,
-    assumptions: build.assumptions,
     unsupportedEffects: build.unsupportedEffects,
     ...(includeDetails
       ? {
+          assumptions: build.assumptions,
           diagnostics: build.diagnostics,
           sourceNotes: build.sourceNotes,
           damageParams: build.damageParams,

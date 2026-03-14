@@ -221,11 +221,13 @@ const compact = compactStaticBuildResult(result)
 
 compact.summary
 compact.effectSummary
+compact.assumptions
+// undefined
 compact.trace
 // undefined
 ```
 
-当前 `compactStaticBuildResult(result, true)` 才会暴露 `trace / damageParams / diagnostics / sourceNotes`。
+当前 `compactStaticBuildResult(result, true)` 才会暴露 `assumptions / trace / damageParams / diagnostics / sourceNotes`。
 
 如果你在应用层或 Agent 层默认不需要完整 `build`、只需要紧凑投影结果，也可以继续使用 source-view compact helper：
 
@@ -1034,11 +1036,11 @@ const compactEntries = compactStaticBuildSourceEntryCollection(collection)
 
 - 顶层 `summary`
 - 行级 / 条目级各类 `*Summary`
-- `assumptions`
 - 轻量 `damage`
 
 其中：
 
+- `compactStaticBuildResult(result)` 默认不带 `assumptions / diagnostics / sourceNotes / trace / damageParams`
 - `compactStaticBuildSkillMatrixResult(matrix)` 默认不带 `row.assumptions / row.unsupportedEffects / row.diagnostics / row.sourceNotes / row.build`
 - `compactStaticBuildTriggerMatrixResult(matrix)` 默认不带 `row.assumptions / row.requirements / row.diagnostics / row.sourceNotes / row.build`
 - `compactStaticBuildSourceEntryCollection(collection)` 默认不带 mixed `entry.assumptions / entry.requirements / entry.diagnostics / entry.sourceNotes / entry.build`；只有 `compactStaticBuildSourceEntryCollection(collection, true)` 才会展开这些明细，其中 `entry.build` 仅在对应 `source-damage-view` 原始结果本来带 `build` 时透传

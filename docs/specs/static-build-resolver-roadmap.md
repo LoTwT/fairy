@@ -6080,3 +6080,33 @@ caveatSummary` 这些兼容字段补齐。
 - `V146.2` 已完成：compact `skill-matrix rows` 默认已不再携带 `row.unsupportedEffects`
 - `V146.3` 已完成：高层 `resolveBuildSkillMatrix` 测试与 prompt 已对齐 `includeDetails=true`
 - `V146.4` 已完成：README、roadmap、索引与架构文档已同步
+
+## 150. V147 single-build compact top-level assumption gating
+
+`V146` 收口后，compact `skill-matrix rows` 的 raw `row.unsupportedEffects` 已收紧到 `includeDetails=true`。
+
+但 compact single-build 顶层结果仍默认携带原始 `build.assumptions`，而 `build.assumptionSummary / build.caveatSummary / build.summary` 已经齐全。
+
+`V147` 只解决一件事：
+
+1. 把 compact single-build 的顶层 `build.assumptions` 也移动到 `includeDetails=true`
+
+### 150.1 分阶段
+
+1. `V147.1` scope freeze
+2. `V147.2` runtime/type contract alignment
+3. `V147.3` tool assertion / prompt alignment
+4. `V147.4` docs closeout
+
+### 150.2 非目标
+
+1. 不改变顶层 `build.unsupportedEffects`
+2. 不改变 `build.assumptionSummary / build.caveatSummary`
+3. 不改变 `build.diagnostics / build.sourceNotes / build.trace / build.damageParams`
+
+### 150.3 当前状态
+
+- `V147.1` 已完成：冻结到 single-build compact top-level assumption gating
+- `V147.2` 已完成：默认 compact single-build 已不再携带顶层 `build.assumptions`
+- `V147.3` 已完成：高层 `resolveBuildDamage` 测试与 prompt 已对齐 `includeDetails=true`
+- `V147.4` 已完成：README、roadmap、索引与架构文档已同步

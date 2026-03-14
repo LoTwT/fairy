@@ -30,7 +30,7 @@ export const resolveBuildDamage = createTool({
       .optional()
       .default(false)
       .describe(
-        "是否返回完整单场景 build 细节（trace、damageParams）。默认 false，以避免上下文过大。",
+        "是否返回完整单场景 build 细节（assumptions、diagnostics/sourceNotes、trace、damageParams）。默认 false，以避免上下文过大。",
       ),
   }),
   execute: async (input) => {

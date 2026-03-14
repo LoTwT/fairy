@@ -46,11 +46,12 @@ describe("resolveBuildDamage tool", () => {
     expect(
       (result as any).build.effectSummary[0].bucket.length,
     ).toBeGreaterThan(0)
-    expect((result as any).build.assumptionSummary.count).toBe(
-      (result as any).build.assumptions.length,
-    )
+    expect((result as any).build.assumptions).toBeUndefined()
+    expect(
+      (result as any).build.assumptionSummary.count,
+    ).toBeGreaterThanOrEqual(0)
     expect((result as any).build.caveatSummary.assumptionCount).toBe(
-      (result as any).build.assumptions.length,
+      (result as any).build.assumptionSummary.count,
     )
     expect(
       (result as any).build.resolvedBuckets.skillMultiplierFactor,
@@ -189,6 +190,7 @@ describe("resolveBuildDamage tool", () => {
     const result = await runTool(resolveBuildDamage, {
       agent: "比利",
       wEngine: "仿制星徽引擎",
+      includeDetails: true,
       finalPanel: {
         attack: 2500,
         baseAttack: 1000,
@@ -798,6 +800,7 @@ describe("resolveBuildDamage tool", () => {
     const result = await runTool(resolveBuildDamage, {
       agent: "爱丽丝",
       wEngine: "十方锻星",
+      includeDetails: true,
       mode: "full-buff",
       agentLevel: 60,
       finalPanel: {
@@ -1016,6 +1019,7 @@ describe("resolveBuildDamage tool", () => {
   it("supports Aria dynamic snapshot exflow ratios through the high-level resolver", async () => {
     const result = await runTool(resolveBuildDamage, {
       agent: "爱芮",
+      includeDetails: true,
       mode: "full-buff",
       agentLevel: 60,
       finalPanel: {
@@ -1407,6 +1411,7 @@ describe("resolveBuildDamage tool", () => {
   it("supports progression-aware Burnice snapshots through the high-level resolver", async () => {
     const result = await runTool(resolveBuildDamage, {
       agent: "柏妮思",
+      includeDetails: true,
       mode: "full-buff",
       agentLevel: 60,
       agentMindscape: 5,
@@ -1449,6 +1454,7 @@ describe("resolveBuildDamage tool", () => {
   it("supports Burnice m2 heat penetration through the high-level resolver", async () => {
     const result = await runTool(resolveBuildDamage, {
       agent: "柏妮思",
+      includeDetails: true,
       mode: "full-buff",
       agentLevel: 60,
       agentMindscape: 2,
@@ -1484,6 +1490,7 @@ describe("resolveBuildDamage tool", () => {
   it("supports Burnice m6 fire resistance ignore through resolved snapshots", async () => {
     const result = await runTool(resolveBuildDamage, {
       agent: "柏妮思",
+      includeDetails: true,
       mode: "full-buff",
       agentLevel: 60,
       agentMindscape: 6,
@@ -1528,6 +1535,7 @@ describe("resolveBuildDamage tool", () => {
   it("supports Burnice dynamic ember snapshots through the high-level resolver", async () => {
     const result = await runTool(resolveBuildDamage, {
       agent: "柏妮思",
+      includeDetails: true,
       mode: "full-buff",
       agentLevel: 60,
       finalPanel: {
@@ -1574,6 +1582,7 @@ describe("resolveBuildDamage tool", () => {
   it("accepts V6 state snapshot fields through the high-level resolver", async () => {
     const result = await runTool(resolveBuildDamage, {
       agent: "爱丽丝",
+      includeDetails: true,
       mode: "baseline",
       finalPanel: {
         attack: 2800,
@@ -1608,6 +1617,7 @@ describe("resolveBuildDamage tool", () => {
   it("applies V7 resolved snapshot fields through the high-level resolver", async () => {
     const result = await runTool(resolveBuildDamage, {
       agent: "爱丽丝",
+      includeDetails: true,
       mode: "baseline",
       agentLevel: 60,
       finalPanel: {
@@ -1649,6 +1659,7 @@ describe("resolveBuildDamage tool", () => {
   it("supports Alice polarity assault state snapshots through the high-level resolver", async () => {
     const result = await runTool(resolveBuildDamage, {
       agent: "爱丽丝",
+      includeDetails: true,
       mode: "baseline",
       agentLevel: 60,
       finalPanel: {
