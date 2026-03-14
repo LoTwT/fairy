@@ -7037,6 +7037,37 @@ caveatSummary` 这些兼容字段补齐。
 - `V176.3` 已完成：现有测试与 runtime 校验已覆盖
 - `V176.4` 已完成：roadmap、索引与架构文档已同步
 
+## 180. V177 explicit compact single-build trace items
+
+`V176` 收口后，compact contract 中仍直接复用 raw detail item type 的显式缺口优先级最高的是 single-build `trace`：
+
+- compact single-build `trace[]`
+- `trace[].modifiers[]`
+
+`V177` 只解决一件事：
+
+1. 把上述 trace item 改成显式 compact item types
+
+### 180.1 分阶段
+
+1. `V177.1` scope freeze
+2. `V177.2` runtime/type contract alignment
+3. `V177.3` tests / prompt alignment
+4. `V177.4` docs closeout
+
+### 180.2 非目标
+
+1. 不改变 `trace` 的字段值
+2. 不改变 `includeDetails` gating 语义
+3. 不改变 row / entry 内 `build` 嵌套结果里仍保持 raw shape 的 contract
+
+### 180.3 当前状态
+
+- `V177.1` 已完成：冻结到 explicit compact single-build trace items
+- `V177.2` 已完成：compact single-build `trace[]` 已改为显式 compact item types
+- `V177.3` 已完成：现有测试与 runtime 校验已覆盖
+- `V177.4` 已完成：roadmap、索引与架构文档已同步
+
 ## 174. V171 explicit compact top-level summary effect summaries
 
 `V170` 收口后，compact contract 中下一批仍直接复用 raw effect summary item type 的显式缺口主要集中在 top-level `summary`：

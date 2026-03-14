@@ -13,6 +13,7 @@ import type {
   ResolveStaticBuildSourceUtilityViewsResult,
   ResolveStaticBuildTriggerMatrixResult,
   StaticBuildAssumptionSummary,
+  StaticBuildBucket,
   StaticBuildCaveatSummary,
   StaticBuildDiagnosticEntry,
   StaticBuildDiagnosticKind,
@@ -45,6 +46,8 @@ import type {
   StaticBuildSourceUtilityViewEntry,
   StaticBuildSourceUtilityViewRequirement,
   StaticBuildSourceUtilityViewRequirementKind,
+  StaticBuildTraceItem,
+  StaticBuildTraceModifier,
   StaticBuildTriggerMatrixEffectSummaryItem,
   StaticBuildTriggerMatrixRow,
   StaticBuildTriggerMatrixRowMeta,
@@ -77,7 +80,7 @@ export interface CompactStaticBuildResult {
     | SheerDamageParams
     | AnomalyDamageParams
     | DisorderDamageParams
-  trace?: ResolveStaticBuildResult["trace"]
+  trace?: CompactStaticBuildTraceItem[]
 }
 
 export interface CompactStaticBuildResolveSummary {
@@ -183,6 +186,23 @@ export interface CompactStaticBuildCaveatSummary {
   unsupportedEffectCount: number
   hasAssumptions: boolean
   hasUnsupportedEffects: boolean
+}
+
+export interface CompactStaticBuildTraceModifier {
+  bucket: StaticBuildBucket
+  value: number
+  combine: "sum" | "multiply"
+}
+
+export interface CompactStaticBuildTraceItem {
+  effectId: string
+  sourceType: StaticBuildTraceItem["sourceType"]
+  sourceName: string
+  label: string
+  status: StaticBuildTraceItem["status"]
+  reason?: string
+  stacks?: number
+  modifiers?: CompactStaticBuildTraceModifier[]
 }
 
 export interface CompactStaticBuildEntryCaveatSummary {
@@ -397,7 +417,7 @@ export function compactStaticBuildResult(
             compactStaticBuildSourceNoteEntry(entry),
           ),
           damageParams: build.damageParams,
-          trace: build.trace,
+          trace: build.trace?.map((item) => compactStaticBuildTraceItem(item)),
         }
       : {}),
   }
@@ -625,6 +645,33 @@ export function compactStaticBuildSourceUtilityViewRequirement(
     kind: requirement.kind,
     key: requirement.key,
     satisfied: requirement.satisfied,
+  }
+}
+
+export function compactStaticBuildTraceModifier(
+  modifier: StaticBuildTraceModifier,
+): CompactStaticBuildTraceModifier {
+  return {
+    bucket: modifier.bucket,
+    value: modifier.value,
+    combine: modifier.combine,
+  }
+}
+
+export function compactStaticBuildTraceItem(
+  item: StaticBuildTraceItem,
+): CompactStaticBuildTraceItem {
+  return {
+    effectId: item.effectId,
+    sourceType: item.sourceType,
+    sourceName: item.sourceName,
+    label: item.label,
+    status: item.status,
+    reason: item.reason,
+    stacks: item.stacks,
+    modifiers: item.modifiers?.map((modifier) =>
+      compactStaticBuildTraceModifier(modifier),
+    ),
   }
 }
 
