@@ -82,6 +82,16 @@ export type CompactStaticBuildSourceUtilityUnit =
   | "energy-per-second"
   | "decibel"
 
+export type CompactStaticBuildSourceDamageType =
+  | "normal"
+  | "sheer"
+  | "anomaly"
+  | "disorder"
+
+export type CompactStaticBuildSourceDamageViewResolutionMode =
+  | "standalone"
+  | "delta"
+
 export interface CompactStaticBuildResult {
   profile: CompactStaticBuildProfile
   mode: CompactStaticBuildMode
@@ -1327,10 +1337,10 @@ export interface StaticBuildCompactSourceDamageViewEntry {
   label: string
   metadata: CompactStaticBuildSourceDamageViewMeta
   supported: boolean
-  sourceType: StaticBuildSourceDamageViewEntry["sourceType"]
+  sourceType: CompactStaticBuildSourceType
   sourceId: string
-  damageType: StaticBuildSourceDamageViewEntry["damageType"]
-  resolutionMode: StaticBuildSourceDamageViewEntry["resolutionMode"]
+  damageType: CompactStaticBuildSourceDamageType
+  resolutionMode: CompactStaticBuildSourceDamageViewResolutionMode
   requirements?: CompactStaticBuildSourceDamageViewRequirement[]
   requirementSummary: CompactStaticBuildSourceDamageViewRequirementSummary
   diagnostics?: CompactStaticBuildDiagnosticEntry[]
@@ -1432,10 +1442,10 @@ export interface CompactStaticBuildSourceDamageViewMeta {
   stableKey: string
   entryKind: "source-damage-view"
   damageType: Extract<
-    StaticBuildSourceDamageViewEntry["damageType"],
+    CompactStaticBuildSourceDamageType,
     "anomaly" | "disorder"
   >
-  resolutionMode: StaticBuildSourceDamageViewEntry["resolutionMode"]
+  resolutionMode: CompactStaticBuildSourceDamageViewResolutionMode
 }
 
 export interface CompactStaticBuildSourceUtilityViewMeta {

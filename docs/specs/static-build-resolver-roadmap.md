@@ -7518,6 +7518,40 @@ caveatSummary` 这些兼容字段补齐。
 - `V191.3` 已完成：现有测试与 runtime 校验已覆盖
 - `V191.4` 已完成：roadmap、索引与架构文档已同步
 
+## 195. V192 explicit compact source damage view contracts
+
+`V191` 收口后，compact `source-damage-view` contract 中仍直接复用 raw entry enum shape 的稳定缺口集中在：
+
+1. `StaticBuildCompactSourceDamageViewEntry.sourceType`
+2. `StaticBuildCompactSourceDamageViewEntry.damageType`
+3. `StaticBuildCompactSourceDamageViewEntry.resolutionMode`
+4. `CompactStaticBuildSourceDamageViewMeta`
+
+`V192` 只解决这一件事：
+
+1. 把 compact `source-damage-view` 的 entry/meta 改为显式 compact types
+
+### 195.1 分阶段
+
+1. `V192.1` scope freeze
+2. `V192.2` runtime/type contract alignment
+3. `V192.3` tests / prompt alignment
+4. `V192.4` docs closeout
+
+### 195.2 非目标
+
+1. 不改变 damage entry 的字段值
+2. 不改变 `damage / summary / build`
+3. 不改变 `includeDetails` 语义
+4. 不改变 trigger-matrix metadata contract
+
+### 195.3 当前状态
+
+- `V192.1` 已完成：冻结到 explicit compact source damage view contracts
+- `V192.2` 已完成：compact `source-damage-view` 的 entry/meta 已改为显式 compact types
+- `V192.3` 已完成：现有测试与 runtime 校验已覆盖
+- `V192.4` 已完成：roadmap、索引与架构文档已同步
+
 ## 174. V171 explicit compact top-level summary effect summaries
 
 `V170` 收口后，compact contract 中下一批仍直接复用 raw effect summary item type 的显式缺口主要集中在 top-level `summary`：
