@@ -380,7 +380,7 @@ export interface CompactStaticBuildDiagnosticOwnerGroupSummary {
 export interface CompactStaticBuildDiagnosticEntry {
   kind: StaticBuildDiagnosticKind
   owner: StaticBuildDiagnosticOwner
-  sourceType?: StaticBuildDiagnosticEntry["sourceType"]
+  sourceType?: CompactStaticBuildSourceType
   sourceId?: string
   keys: string[]
   message: string
@@ -415,7 +415,7 @@ export interface CompactStaticBuildSourceNoteGuidance {
 
 export interface CompactStaticBuildSourceNoteEntry {
   id: string
-  sourceType: StaticBuildSourceNoteEntry["sourceType"]
+  sourceType: CompactStaticBuildSourceType
   sourceId: string
   owner: StaticBuildSourceNoteOwner
   status: StaticBuildSourceNoteStatus
@@ -454,7 +454,7 @@ export interface CompactStaticBuildTraceModifier {
 
 export interface CompactStaticBuildTraceItem {
   effectId: string
-  sourceType: StaticBuildTraceItem["sourceType"]
+  sourceType: CompactStaticBuildSourceType
   sourceName: string
   label: string
   status: StaticBuildTraceItem["status"]

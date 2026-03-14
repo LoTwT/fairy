@@ -7624,6 +7624,39 @@ caveatSummary` 这些兼容字段补齐。
 - `V194.3` 已完成：现有测试与 runtime 校验已覆盖
 - `V194.4` 已完成：roadmap、索引与架构文档已同步
 
+## 198. V195 explicit compact detail source types
+
+`V194` 收口后，compact detail entry 中仍直接复用 raw `sourceType` 的稳定缺口集中在：
+
+1. `CompactStaticBuildDiagnosticEntry.sourceType`
+2. `CompactStaticBuildSourceNoteEntry.sourceType`
+3. `CompactStaticBuildTraceItem.sourceType`
+
+`V195` 只解决这一件事：
+
+1. 把 compact `diagnostic / source-note / trace` 三类 detail entry 的 `sourceType` 统一改为显式 compact source type
+
+### 198.1 分阶段
+
+1. `V195.1` scope freeze
+2. `V195.2` runtime/type contract alignment
+3. `V195.3` tests / prompt alignment
+4. `V195.4` docs closeout
+
+### 198.2 非目标
+
+1. 不改变 `kind / owner / status / guidance / trace status`
+2. 不改变 entry 值
+3. 不改变 summary 结构
+4. 不改变 runtime 生成逻辑
+
+### 198.3 当前状态
+
+- `V195.1` 已完成：冻结到 explicit compact detail source types
+- `V195.2` 已完成：compact detail entry 的 `sourceType` 已统一为显式 compact source type
+- `V195.3` 已完成：现有测试与 runtime 校验已覆盖
+- `V195.4` 已完成：roadmap、索引与架构文档已同步
+
 ## 174. V171 explicit compact top-level summary effect summaries
 
 `V170` 收口后，compact contract 中下一批仍直接复用 raw effect summary item type 的显式缺口主要集中在 top-level `summary`：
