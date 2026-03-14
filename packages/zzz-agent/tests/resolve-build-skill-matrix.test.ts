@@ -92,6 +92,9 @@ describe("resolveBuildSkillMatrix tool", () => {
       hasUnsupportedEffects:
         (result as any).matrix.unsupportedEffects.length > 0,
     })
+    expect((result as any).matrix.summary.caveatSummary).toEqual(
+      (result as any).matrix.caveatSummary,
+    )
     expect((result as any).matrix.diagnosticSummary.count).toBe(
       (result as any).matrix.rows.flatMap((row: any) => row.diagnostics).length,
     )

@@ -3786,3 +3786,36 @@ Batch B（已完成）：
 1. 不改变既有顶层 `collection.assumptionSummary`
 2. 不改变 entry / group 级 assumption contract
 3. 不提前扩到其他未对齐的 summary 字段
+
+## 88. V85 skill-matrix summary caveat summary
+
+`V84` 收口后，skill matrix 仍只有：
+
+- 顶层 `matrix.caveatSummary`
+- 组级 `matrix.summary.groups[*].caveatSummary`
+- 行级 `row.caveatSummary`
+
+`matrix.summary` 本身还缺少同名聚合字段。
+
+`V85` 只解决一件事：
+
+- 为 `StaticBuildSkillMatrixSummary` 增加稳定 `caveatSummary`
+
+### 88.1 当前状态
+
+- `V85.1` 已完成：冻结到 skill-matrix summary caveat summary
+- `V85.2` 已完成：`StaticBuildSkillMatrixSummary` 已新增稳定 `caveatSummary`
+- `V85.3` 已完成：高层 tool 断言与 agent prompt 已对齐 `matrix.summary.caveatSummary`
+- `V85.4` 已完成：相关 specs、roadmap、索引、架构文档与 README 已同步
+
+### 88.2 目标
+
+1. 为 `matrix.summary` 增加稳定 caveat aggregate
+2. 保持与既有顶层 `matrix.caveatSummary` 一致
+3. 不改变既有 row / group 级 caveat 语义
+
+### 88.3 Out of Scope
+
+1. 不改变既有顶层 `matrix.caveatSummary`
+2. 不改变 row / group 级 `caveatSummary`
+3. 不提前把 `diagnosticSummary / sourceNoteSummary / effectSummary` 下沉到 `summary`

@@ -1079,7 +1079,7 @@ matrix.rows[0].caveatSummary
 // }
 ```
 
-如果你要生成矩阵顶部“乘区汇总”，不要再自己遍历 `rows` 统计 `commonBuckets / commonFormulaMultipliers`，直接使用 `matrix.summary`。如果你要生成“增益清单”，也不要再自己遍历 `row.build.trace`，直接使用 `matrix.effectSummary`。如果你只想知道整张矩阵是否存在 diagnostics / source notes，也不要自己遍历 `rows`，直接读取 `matrix.diagnosticSummary / matrix.sourceNoteSummary`。如果你只关心某一行的公式乘区摘要和 flag/count，也不要再请求 `includeDetails` 去读 `row.build.summary`，直接读取 `row.summary`。如果你只关心某一行的 diagnostics / source notes / caveats 概况，也不要自己遍历 `row.diagnostics / row.sourceNotes / row.assumptions / row.unsupportedEffects`，直接读取 `row.diagnosticSummary / row.sourceNoteSummary / row.caveatSummary`。
+如果你要生成矩阵顶部“乘区汇总”，不要再自己遍历 `rows` 统计 `commonBuckets / commonFormulaMultipliers`，直接使用 `matrix.summary`。如果你要先判断整张矩阵是否带 assumptions / unsupported coverage gap，也优先读取 `matrix.summary.caveatSummary`；如需兼容旧调用方，也可以继续读取 `matrix.caveatSummary`。如果你要生成“增益清单”，也不要再自己遍历 `row.build.trace`，直接使用 `matrix.effectSummary`。如果你只想知道整张矩阵是否存在 diagnostics / source notes，也不要自己遍历 `rows`，直接读取 `matrix.diagnosticSummary / matrix.sourceNoteSummary`。如果你只关心某一行的公式乘区摘要和 flag/count，也不要再请求 `includeDetails` 去读 `row.build.summary`，直接读取 `row.summary`。如果你只关心某一行的 diagnostics / source notes / caveats 概况，也不要自己遍历 `row.diagnostics / row.sourceNotes / row.assumptions / row.unsupportedEffects`，直接读取 `row.diagnosticSummary / row.sourceNoteSummary / row.caveatSummary`。
 
 常见消费方式是把矩阵映射成展示表：
 

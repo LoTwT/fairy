@@ -561,6 +561,10 @@ function summarizeSkillMatrix(rows: StaticBuildSkillMatrixRow[]) {
   const { commonBuckets, variableBuckets } = summarizeBuckets(rows)
   const { commonFormulaMultipliers, variableFormulaMultipliers } =
     summarizeFormulaMultipliers(rows)
+  const assumptions = [...new Set(rows.flatMap((row) => row.assumptions))]
+  const unsupportedEffects = [
+    ...new Set(rows.flatMap((row) => row.unsupportedEffects)),
+  ]
   const groups = Array.from(
     rows.reduce((map, row) => {
       const groupRows = map.get(row.group) ?? []
@@ -619,6 +623,7 @@ function summarizeSkillMatrix(rows: StaticBuildSkillMatrixRow[]) {
     variableBuckets,
     commonFormulaMultipliers,
     variableFormulaMultipliers,
+    caveatSummary: summarizeSkillMatrixCaveats(assumptions, unsupportedEffects),
     groups,
   }
 }
