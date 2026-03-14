@@ -130,6 +130,10 @@ describe("resolveBuildTriggerMatrix tool", () => {
     const sourceViewRow = (result as any).matrix.rows.find(
       (row: any) => row.metadata.entryKind === "source-view",
     )
+    expect(mainFormulaRow?.diagnostics).toBeUndefined()
+    expect(mainFormulaRow?.sourceNotes).toBeUndefined()
+    expect(sourceViewRow?.diagnostics).toBeUndefined()
+    expect(sourceViewRow?.sourceNotes).toBeUndefined()
     expect(sourceViewRow?.effectSummary).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
@@ -701,5 +705,43 @@ describe("resolveBuildTriggerMatrix tool", () => {
     expect(
       (result as any).matrix.rows[1].requirements.map((item: any) => item.kind),
     ).toEqual(expect.arrayContaining(["panel-value", "scenario-value"]))
+  })
+
+  it("returns trigger row diagnostics and source notes only when explicitly requested", async () => {
+    const result = await runTool(resolveBuildTriggerMatrix, {
+      agent: "爱丽丝",
+      mode: "baseline",
+      includeDetails: true,
+      finalPanel: {
+        attack: 2800,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 200,
+        anomalyMastery: 180,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "enhancedSpecial",
+        damageMultiplier: "500%",
+        attribute: "物理",
+        stateSnapshot: {
+          flags: {
+            alicePolarityAssaultState: true,
+          },
+          values: {
+            alicePolarityAssaultDamageRatio: 2.5,
+          },
+        },
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    expect((result as any).matrix.rows[0].diagnostics).toBeInstanceOf(Array)
+    expect((result as any).matrix.rows[0].sourceNotes).toBeInstanceOf(Array)
+    expect((result as any).matrix.rows[0].build).toBeTruthy()
   })
 })

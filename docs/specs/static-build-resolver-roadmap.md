@@ -5710,6 +5710,30 @@ caveatSummary` 这些兼容字段补齐。
 - `V132.3` 已完成：高层 `resolveBuildSkillMatrix` 测试与 prompt 已对齐 `includeDetails=true`
 - `V132.4` 已完成：README、roadmap、索引与架构文档已同步
 
+## 136. V133 trigger-matrix compact row detail gating
+
+`V132` 收口后，compact `skill-matrix rows` 已默认不再携带 `diagnostics / sourceNotes`。
+
+但 `resolveBuildTriggerMatrix` 默认返回的 compact rows 仍默认携带这两类明细数组，而行级 `diagnosticSummary / sourceNoteSummary / requirementSummary / assumptionSummary / caveatSummary` 已经齐全。
+
+`V133` 只解决一件事：
+
+1. 把 compact trigger-matrix rows 的 `diagnostics / sourceNotes` 也移到 `includeDetails=true`
+
+### 136.1 范围
+
+1. `V133.1` scope freeze
+2. `V133.2` runtime/type contract alignment
+3. `V133.3` tool assertion / prompt alignment
+4. `V133.4` docs closeout
+
+### 136.2 当前状态
+
+- `V133.1` 已完成：冻结到 trigger-matrix compact row detail gating
+- `V133.2` 已完成：`StaticBuildCompactTriggerMatrixRow` 默认已不再携带 `diagnostics / sourceNotes`
+- `V133.3` 已完成：高层 `resolveBuildTriggerMatrix` 测试与 prompt 已对齐 `includeDetails=true`
+- `V133.4` 已完成：README、roadmap、索引与架构文档已同步
+
 显式不做：
 
 1. 不改变 `ResolveStaticBuildResult.summary` 的既有结构

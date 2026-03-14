@@ -135,6 +135,47 @@ describe("static build compact helpers", () => {
     expect(compact.rows[0]?.build).toEqual(matrix.rows[0]?.build)
   })
 
+  it("compacts trigger matrix rows without row details by default", () => {
+    const matrix = resolveStaticBuildTriggerMatrix({
+      mode: "baseline",
+      loadout: {
+        agentId: "1401",
+        agentLevel: 60,
+      },
+      panel: {
+        attack: 2800,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 200,
+        anomalyMastery: 180,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "enhancedSpecial",
+        damageMultiplier: "500%",
+        attribute: "物理",
+        stateSnapshot: {
+          flags: {
+            alicePolarityAssaultState: true,
+          },
+          values: {
+            alicePolarityAssaultDamageRatio: 2.5,
+          },
+        },
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    const compact = compactStaticBuildTriggerMatrixResult(matrix)
+
+    expect(compact.rows[0]?.diagnostics).toBeUndefined()
+    expect(compact.rows[0]?.sourceNotes).toBeUndefined()
+    expect(compact.rows[0]?.build).toBeUndefined()
+  })
+
   it("compacts trigger matrix rows and keeps full build only when requested", () => {
     const matrix = resolveStaticBuildTriggerMatrix({
       mode: "baseline",
@@ -172,6 +213,8 @@ describe("static build compact helpers", () => {
     const compact = compactStaticBuildTriggerMatrixResult(matrix, true)
 
     expect(compact.rows).toHaveLength(2)
+    expect(compact.rows[0]?.diagnostics).toEqual(matrix.rows[0]?.diagnostics)
+    expect(compact.rows[0]?.sourceNotes).toEqual(matrix.rows[0]?.sourceNotes)
     expect(compact.rows[0]?.build).toBeTruthy()
     expect(compact.rows[1]?.metadata.entryKind).toBe("source-view")
     expect(compact.rows[0]?.diagnosticSummary).toEqual({

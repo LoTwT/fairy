@@ -986,7 +986,7 @@ const compactEntries = compactStaticBuildSourceEntryCollection(collection)
 其中：
 
 - `compactStaticBuildSkillMatrixResult(matrix)` 默认不带 `row.diagnostics / row.sourceNotes / row.build`
-- `compactStaticBuildTriggerMatrixResult(matrix)` 默认不带 `row.build`
+- `compactStaticBuildTriggerMatrixResult(matrix)` 默认不带 `row.diagnostics / row.sourceNotes / row.build`
 
 只有显式传 `includeDetails = true` 时，才会带上对应底层明细结果。
 

@@ -143,9 +143,9 @@ export interface StaticBuildCompactTriggerMatrixRow {
   effectSummary: StaticBuildTriggerMatrixRow["effectSummary"]
   requirements: StaticBuildTriggerMatrixRow["requirements"]
   requirementSummary: StaticBuildTriggerMatrixRow["requirementSummary"]
-  diagnostics: StaticBuildDiagnosticEntry[]
+  diagnostics?: StaticBuildDiagnosticEntry[]
   diagnosticSummary: StaticBuildTriggerMatrixRow["diagnosticSummary"]
-  sourceNotes: StaticBuildSourceNoteEntry[]
+  sourceNotes?: StaticBuildSourceNoteEntry[]
   sourceNoteSummary: StaticBuildTriggerMatrixRow["sourceNoteSummary"]
   caveatSummary: StaticBuildTriggerMatrixRow["caveatSummary"]
   assumptionSummary: StaticBuildTriggerMatrixRow["assumptionSummary"]
@@ -362,16 +362,20 @@ export function compactStaticBuildTriggerMatrixRow(
     effectSummary: row.effectSummary,
     requirements: row.requirements,
     requirementSummary: row.requirementSummary,
-    diagnostics: row.diagnostics,
     diagnosticSummary: row.diagnosticSummary,
-    sourceNotes: row.sourceNotes,
     sourceNoteSummary: row.sourceNoteSummary,
     caveatSummary: row.caveatSummary,
     assumptionSummary: row.assumptionSummary,
     assumptions: row.assumptions,
     damage: row.damage,
     summary: row.summary,
-    ...(includeDetails && row.build ? { build: row.build } : {}),
+    ...(includeDetails
+      ? {
+          diagnostics: row.diagnostics,
+          sourceNotes: row.sourceNotes,
+          ...(row.build ? { build: row.build } : {}),
+        }
+      : {}),
   }
 }
 
