@@ -17,6 +17,8 @@ import type {
   StaticBuildDiagnosticEntry,
   StaticBuildDiagnosticSummary,
   StaticBuildEntryCaveatSummary,
+  StaticBuildRequirementSummary,
+  StaticBuildRequirementSummaryGroup,
   StaticBuildResolvedBuckets,
   StaticBuildResolvedLoadout,
   StaticBuildResolvedPanel,
@@ -28,10 +30,12 @@ import type {
   StaticBuildSkillMatrixRowMeta,
   StaticBuildSourceDamageViewEffectSummaryItem,
   StaticBuildSourceDamageViewEntry,
+  StaticBuildSourceDamageViewRequirementKind,
   StaticBuildSourceEntry,
   StaticBuildSourceNoteEntry,
   StaticBuildSourceNoteSummary,
   StaticBuildSourceUtilityViewEntry,
+  StaticBuildSourceUtilityViewRequirementKind,
   StaticBuildTriggerMatrixRow,
   StaticBuildTriggerMatrixRowMeta,
 } from "./types.js"
@@ -131,6 +135,31 @@ export interface CompactStaticBuildEntryCaveatSummary {
   hasUnsupported: boolean
 }
 
+export interface CompactStaticBuildRequirementSummaryGroup<
+  TKey extends string = string,
+> {
+  key: TKey
+  count: number
+  satisfiedCount: number
+  unsatisfiedCount: number
+}
+
+export interface CompactStaticBuildRequirementSummary<
+  TKey extends string = string,
+> {
+  count: number
+  satisfiedCount: number
+  unsatisfiedCount: number
+  hasUnsatisfied: boolean
+  groups: CompactStaticBuildRequirementSummaryGroup<TKey>[]
+}
+
+export type CompactStaticBuildSourceDamageViewRequirementSummary =
+  CompactStaticBuildRequirementSummary<StaticBuildSourceDamageViewRequirementKind>
+
+export type CompactStaticBuildSourceUtilityViewRequirementSummary =
+  CompactStaticBuildRequirementSummary<StaticBuildSourceUtilityViewRequirementKind>
+
 export interface StaticBuildCompactSkillMatrixRow {
   id: string
   group: string
@@ -163,7 +192,7 @@ export interface CompactStaticBuildSkillMatrixResult {
   loadout: ResolveStaticBuildSkillMatrixResult["loadout"]
   summary: CompactStaticBuildSkillMatrixSummary
   effectSummary: StaticBuildSkillMatrixEffectSummaryItem[]
-  requirementSummary: ResolveStaticBuildSkillMatrixResult["requirementSummary"]
+  requirementSummary: CompactStaticBuildSourceDamageViewRequirementSummary
   assumptionSummary: CompactStaticBuildAssumptionSummary
   caveatSummary: CompactStaticBuildCaveatSummary
   diagnosticSummary: CompactStaticBuildDiagnosticSummary
@@ -341,6 +370,35 @@ export function compactStaticBuildEntryCaveatSummary(
   }
 }
 
+export function compactStaticBuildRequirementSummaryGroup<
+  TKey extends string = string,
+>(
+  group: StaticBuildRequirementSummaryGroup<TKey>,
+): CompactStaticBuildRequirementSummaryGroup<TKey> {
+  return {
+    key: group.key,
+    count: group.count,
+    satisfiedCount: group.satisfiedCount,
+    unsatisfiedCount: group.unsatisfiedCount,
+  }
+}
+
+export function compactStaticBuildRequirementSummary<
+  TKey extends string = string,
+>(
+  summary: StaticBuildRequirementSummary<TKey>,
+): CompactStaticBuildRequirementSummary<TKey> {
+  return {
+    count: summary.count,
+    satisfiedCount: summary.satisfiedCount,
+    unsatisfiedCount: summary.unsatisfiedCount,
+    hasUnsatisfied: summary.hasUnsatisfied,
+    groups: summary.groups.map((group) =>
+      compactStaticBuildRequirementSummaryGroup(group),
+    ),
+  }
+}
+
 export interface StaticBuildCompactTriggerMatrixRow {
   id: string
   label: string
@@ -398,7 +456,7 @@ export interface CompactStaticBuildTriggerMatrixResult {
   loadout: ResolveStaticBuildTriggerMatrixResult["loadout"]
   summary: CompactStaticBuildTriggerMatrixSummary
   effectSummary: ResolveStaticBuildTriggerMatrixResult["effectSummary"]
-  requirementSummary: ResolveStaticBuildTriggerMatrixResult["requirementSummary"]
+  requirementSummary: CompactStaticBuildSourceDamageViewRequirementSummary
   caveatSummary: CompactStaticBuildEntryCaveatSummary
   diagnosticSummary: CompactStaticBuildDiagnosticSummary
   sourceNoteSummary: CompactStaticBuildSourceNoteSummary
@@ -542,8 +600,8 @@ export interface CompactStaticBuildSourceEntryCollection {
   loadout: ResolveStaticBuildSourceEntriesResult["loadout"]
   summary: CompactStaticBuildSourceEntryCollectionSummary
   effectSummary: ResolveStaticBuildSourceEntriesResult["effectSummary"]
-  sourceDamageRequirementSummary: ResolveStaticBuildSourceEntriesResult["sourceDamageRequirementSummary"]
-  sourceUtilityRequirementSummary: ResolveStaticBuildSourceEntriesResult["sourceUtilityRequirementSummary"]
+  sourceDamageRequirementSummary: CompactStaticBuildSourceDamageViewRequirementSummary
+  sourceUtilityRequirementSummary: CompactStaticBuildSourceUtilityViewRequirementSummary
   caveatSummary: CompactStaticBuildEntryCaveatSummary
   diagnosticSummary: CompactStaticBuildDiagnosticSummary
   sourceNoteSummary: CompactStaticBuildSourceNoteSummary
@@ -587,7 +645,7 @@ export interface CompactStaticBuildSourceDamageViewsResult {
   loadout: ResolveStaticBuildSourceDamageViewsResult["loadout"]
   summary: CompactStaticBuildSourceDamageViewsSummary
   effectSummary: StaticBuildSourceDamageViewEffectSummaryItem[]
-  requirementSummary: ResolveStaticBuildSourceDamageViewsResult["requirementSummary"]
+  requirementSummary: CompactStaticBuildSourceDamageViewRequirementSummary
   caveatSummary: CompactStaticBuildEntryCaveatSummary
   diagnosticSummary: CompactStaticBuildDiagnosticSummary
   sourceNoteSummary: CompactStaticBuildSourceNoteSummary
@@ -600,7 +658,7 @@ export interface CompactStaticBuildSourceUtilityViewsResult {
   loadout: ResolveStaticBuildSourceUtilityViewsResult["loadout"]
   summary: CompactStaticBuildSourceUtilityViewsSummary
   effectSummary: ResolveStaticBuildSourceUtilityViewsResult["effectSummary"]
-  requirementSummary: ResolveStaticBuildSourceUtilityViewsResult["requirementSummary"]
+  requirementSummary: CompactStaticBuildSourceUtilityViewRequirementSummary
   caveatSummary: CompactStaticBuildEntryCaveatSummary
   diagnosticSummary: CompactStaticBuildDiagnosticSummary
   sourceNoteSummary: CompactStaticBuildSourceNoteSummary
@@ -623,7 +681,9 @@ export function compactStaticBuildSkillMatrixResult(
       includeDetails,
     ),
     effectSummary: matrix.effectSummary,
-    requirementSummary: matrix.requirementSummary,
+    requirementSummary: compactStaticBuildRequirementSummary(
+      matrix.requirementSummary,
+    ),
     assumptionSummary: compactStaticBuildAssumptionSummary(
       matrix.assumptionSummary,
     ),
@@ -743,7 +803,9 @@ export function compactStaticBuildTriggerMatrixResult(
     loadout: matrix.loadout,
     summary: compactStaticBuildTriggerMatrixSummary(matrix.summary),
     effectSummary: matrix.effectSummary,
-    requirementSummary: matrix.requirementSummary,
+    requirementSummary: compactStaticBuildRequirementSummary(
+      matrix.requirementSummary,
+    ),
     caveatSummary: compactStaticBuildEntryCaveatSummary(matrix.caveatSummary),
     diagnosticSummary: compactStaticBuildDiagnosticSummary(
       matrix.diagnosticSummary,
@@ -856,8 +918,12 @@ export function compactStaticBuildSourceEntryCollection(
     loadout: collection.loadout,
     summary: compactStaticBuildSourceEntryCollectionSummary(collection.summary),
     effectSummary: collection.effectSummary,
-    sourceDamageRequirementSummary: collection.sourceDamageRequirementSummary,
-    sourceUtilityRequirementSummary: collection.sourceUtilityRequirementSummary,
+    sourceDamageRequirementSummary: compactStaticBuildRequirementSummary(
+      collection.sourceDamageRequirementSummary,
+    ),
+    sourceUtilityRequirementSummary: compactStaticBuildRequirementSummary(
+      collection.sourceUtilityRequirementSummary,
+    ),
     caveatSummary: compactStaticBuildEntryCaveatSummary(
       collection.caveatSummary,
     ),
@@ -937,7 +1003,9 @@ export function compactStaticBuildSourceDamageViewsResult(
     loadout: views.loadout,
     summary: compactStaticBuildSourceDamageViewsSummary(views.summary),
     effectSummary: views.effectSummary,
-    requirementSummary: views.requirementSummary,
+    requirementSummary: compactStaticBuildRequirementSummary(
+      views.requirementSummary,
+    ),
     caveatSummary: compactStaticBuildEntryCaveatSummary(views.caveatSummary),
     diagnosticSummary: compactStaticBuildDiagnosticSummary(
       views.diagnosticSummary,
@@ -1053,7 +1121,9 @@ export function compactStaticBuildSourceUtilityViewsResult(
     loadout: views.loadout,
     summary: compactStaticBuildSourceUtilityViewsSummary(views.summary),
     effectSummary: views.effectSummary,
-    requirementSummary: views.requirementSummary,
+    requirementSummary: compactStaticBuildRequirementSummary(
+      views.requirementSummary,
+    ),
     caveatSummary: compactStaticBuildEntryCaveatSummary(views.caveatSummary),
     diagnosticSummary: compactStaticBuildDiagnosticSummary(
       views.diagnosticSummary,
