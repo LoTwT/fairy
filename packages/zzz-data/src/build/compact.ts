@@ -180,7 +180,7 @@ export interface StaticBuildCompactSourceDamageViewEntry {
   sourceId: string
   damageType: StaticBuildSourceDamageViewEntry["damageType"]
   resolutionMode: StaticBuildSourceDamageViewEntry["resolutionMode"]
-  requirements: StaticBuildSourceDamageViewEntry["requirements"]
+  requirements?: StaticBuildSourceDamageViewEntry["requirements"]
   requirementSummary: StaticBuildSourceDamageViewEntry["requirementSummary"]
   diagnostics?: StaticBuildDiagnosticEntry[]
   diagnosticSummary: StaticBuildSourceDamageViewEntry["diagnosticSummary"]
@@ -416,13 +416,42 @@ export function compactStaticBuildSourceDamageViewsResult(
     sourceNoteSummary: views.sourceNoteSummary,
     assumptionSummary: views.assumptionSummary,
     assumptions: views.assumptions,
-    entries: views.entries.map(
-      (entry) =>
-        compactStaticBuildSourceEntry(
-          entry,
-          includeDetails,
-        ) as StaticBuildCompactSourceDamageViewEntry,
+    entries: views.entries.map((entry) =>
+      compactStaticBuildSourceDamageViewEntry(entry, includeDetails),
     ),
+  }
+}
+
+export function compactStaticBuildSourceDamageViewEntry(
+  entry: StaticBuildSourceDamageViewEntry,
+  includeDetails = false,
+): StaticBuildCompactSourceDamageViewEntry {
+  return {
+    id: entry.id,
+    label: entry.label,
+    metadata: entry.metadata,
+    supported: entry.supported,
+    sourceType: entry.sourceType,
+    sourceId: entry.sourceId,
+    damageType: entry.damageType,
+    resolutionMode: entry.resolutionMode,
+    requirementSummary: entry.requirementSummary,
+    diagnosticSummary: entry.diagnosticSummary,
+    sourceNoteSummary: entry.sourceNoteSummary,
+    effectSummary: entry.effectSummary,
+    caveatSummary: entry.caveatSummary,
+    assumptionSummary: entry.assumptionSummary,
+    assumptions: entry.assumptions,
+    damage: entry.damage,
+    summary: entry.summary,
+    ...(includeDetails
+      ? {
+          requirements: entry.requirements,
+          diagnostics: entry.diagnostics,
+          sourceNotes: entry.sourceNotes,
+          ...(entry.build ? { build: entry.build } : {}),
+        }
+      : {}),
   }
 }
 

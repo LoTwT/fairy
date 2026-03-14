@@ -240,13 +240,15 @@ const compactViews = compactStaticBuildSourceDamageViewsResult(views)
 
 compactViews.entries[0].diagnosticSummary
 compactViews.entries[0].sourceNoteSummary
+compactViews.entries[0].requirements
+// undefined
 compactViews.entries[0].diagnostics
 // undefined
 compactViews.entries[0].sourceNotes
 // undefined
 ```
 
-当前 `compactStaticBuildSourceDamageViewsResult(views, true)` 才会暴露 `entry.diagnostics / entry.sourceNotes / entry.build`。
+当前 `compactStaticBuildSourceDamageViewsResult(views, true)` 才会暴露 `entry.requirements / entry.diagnostics / entry.sourceNotes / entry.build`。
 
 如果你需要拿到不应并入主 anomaly / disorder 公式的独立额外结算条目，可使用：
 
@@ -865,8 +867,8 @@ const compactUtilityViews =
 
 其中：
 
-- `compactStaticBuildSourceDamageViewsResult()` 默认不展开 entry-level `build`
-- 只有显式传 `includeDetails = true` 时，才会保留完整 `build`
+- `compactStaticBuildSourceDamageViewsResult()` 默认不展开 entry-level `requirements / diagnostics / sourceNotes / build`
+- 只有显式传 `includeDetails = true` 时，才会保留这些 raw entry 明细
 - `compactStaticBuildSourceUtilityViewsResult()` 会统一返回与高层 tool 一致的轻量 utility entry shape
 - compact utility entry 也会稳定保留 `entry.effectSummary`；当前固定返回空数组，不要在调用方再手工补默认值
 

@@ -5838,3 +5838,29 @@ caveatSummary` 这些兼容字段补齐。
 - `V137.2` 已完成：`StaticBuildCompactTriggerMatrixRow` 默认已不再携带 `requirements`
 - `V137.3` 已完成：高层 `resolveBuildTriggerMatrix` 测试与 prompt 已对齐 `includeDetails=true`
 - `V137.4` 已完成：README、roadmap、索引与架构文档已同步
+
+## 141. V138 source-damage-view compact entry requirement gating
+
+### 141.1 背景
+
+`V134` 收口后，standalone `source-damage-view entries` 的 raw details 已收紧到 `includeDetails=true`。
+
+但 compact standalone `source-damage-view entries` 仍默认携带原始 `entry.requirements`，而 entry / group / top-level `requirementSummary` 已经齐全。
+
+`V138` 只解决一件事：
+
+1. 把 compact standalone `source-damage-view entries` 的 `entry.requirements` 也移动到 `includeDetails=true`
+
+### 141.2 范围
+
+1. `V138.1` scope freeze
+2. `V138.2` runtime/type contract alignment
+3. `V138.3` tool assertion / prompt alignment
+4. `V138.4` docs closeout
+
+### 141.3 当前状态
+
+- `V138.1` 已完成：冻结到 standalone source-damage-view compact entry requirement gating
+- `V138.2` 已完成：`StaticBuildCompactSourceDamageViewEntry` 默认已不再携带 `requirements`
+- `V138.3` 已完成：高层 `resolveBuildSourceDamageViews` 测试与 prompt 已对齐 `includeDetails=true`
+- `V138.4` 已完成：README、roadmap、索引与架构文档已同步

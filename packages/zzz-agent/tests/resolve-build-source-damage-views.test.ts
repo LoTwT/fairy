@@ -105,6 +105,7 @@ describe("resolveBuildSourceDamageViews tool", () => {
         },
       ],
     })
+    expect((result as any).views.entries[0]?.requirements).toBeUndefined()
     expect((result as any).views.diagnosticSummary).toEqual({
       count: 3,
       hasDiagnostics: true,
@@ -626,11 +627,7 @@ describe("resolveBuildSourceDamageViews tool", () => {
         entryKind: "source-damage-view",
       },
     })
-    expect(
-      (result as any).views.entries[0].requirements.map(
-        (item: any) => item.kind,
-      ),
-    ).toEqual(expect.arrayContaining(["panel-value", "scenario-value"]))
+    expect((result as any).views.entries[0].requirements).toBeUndefined()
     expect(
       (result as any).views.entries[0].assumptions.some((item: string) =>
         item.includes("按 coreSkillLevel 与异常精通推导 [异放] 比例"),
@@ -638,7 +635,7 @@ describe("resolveBuildSourceDamageViews tool", () => {
     ).toBe(true)
   })
 
-  it("returns full source-damage build details only when explicitly requested", async () => {
+  it("returns full source-damage requirements and build details only when explicitly requested", async () => {
     const result = await runTool(resolveBuildSourceDamageViews, {
       agent: "爱丽丝",
       includeDetails: true,
@@ -671,6 +668,9 @@ describe("resolveBuildSourceDamageViews tool", () => {
     })
 
     expect((result as any).found).toBe(true)
+    expect(Array.isArray((result as any).views.entries[0].requirements)).toBe(
+      true,
+    )
     expect(Array.isArray((result as any).views.entries[0].diagnostics)).toBe(
       true,
     )
