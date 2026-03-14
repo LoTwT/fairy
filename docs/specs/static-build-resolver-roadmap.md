@@ -6140,3 +6140,33 @@ caveatSummary` 这些兼容字段补齐。
 - `V148.2` 已完成：默认 compact single-build 已不再携带顶层 `build.unsupportedEffects`
 - `V148.3` 已完成：高层 `resolveBuildDamage` 测试与 prompt 已对齐 `includeDetails=true`
 - `V148.4` 已完成：README、roadmap、索引与架构文档已同步
+
+## 152. V149 skill-matrix compact top-level assumption gating
+
+`V148` 收口后，compact single-build 顶层的 raw `build.unsupportedEffects` 已收紧到 `includeDetails=true`。
+
+但 compact skill-matrix 顶层结果仍默认携带原始 `matrix.assumptions`，而 `matrix.summary.assumptionSummary / matrix.assumptionSummary / matrix.caveatSummary` 已经齐全。
+
+`V149` 只解决一件事：
+
+1. 把 compact skill-matrix 的顶层 `matrix.assumptions` 也移动到 `includeDetails=true`
+
+### 152.1 分阶段
+
+1. `V149.1` scope freeze
+2. `V149.2` runtime/type contract alignment
+3. `V149.3` tool assertion / prompt alignment
+4. `V149.4` docs closeout
+
+### 152.2 非目标
+
+1. 不改变顶层 `matrix.unsupportedEffects`
+2. 不改变 `matrix.assumptionSummary / matrix.caveatSummary`
+3. 不改变行级 `row.assumptions / row.unsupportedEffects / row.diagnostics / row.sourceNotes / row.build`
+
+### 152.3 当前状态
+
+- `V149.1` 已完成：冻结到 skill-matrix compact top-level assumption gating
+- `V149.2` 已完成：默认 compact skill-matrix 已不再携带顶层 `matrix.assumptions`
+- `V149.3` 已完成：高层 `resolveBuildSkillMatrix` 测试与 prompt 已对齐 `includeDetails=true`
+- `V149.4` 已完成：README、roadmap、索引与架构文档已同步

@@ -100,9 +100,10 @@ describe("resolveBuildSkillMatrix tool", () => {
     expect((result as any).matrix.summary.requirementSummary).toEqual(
       (result as any).matrix.requirementSummary,
     )
+    expect((result as any).matrix.assumptions).toBeUndefined()
     expect((result as any).matrix.assumptionSummary).toEqual({
-      count: (result as any).matrix.assumptions.length,
-      hasAssumptions: (result as any).matrix.assumptions.length > 0,
+      count: expect.any(Number),
+      hasAssumptions: expect.any(Boolean),
     })
     expect((result as any).matrix.summary.assumptionSummary).toEqual(
       (result as any).matrix.assumptionSummary,
@@ -115,9 +116,9 @@ describe("resolveBuildSkillMatrix tool", () => {
       ),
     ])
     expect((result as any).matrix.caveatSummary).toEqual({
-      assumptionCount: (result as any).matrix.assumptions.length,
+      assumptionCount: (result as any).matrix.assumptionSummary.count,
       unsupportedEffectCount: (result as any).matrix.unsupportedEffects.length,
-      hasAssumptions: (result as any).matrix.assumptions.length > 0,
+      hasAssumptions: (result as any).matrix.assumptionSummary.hasAssumptions,
       hasUnsupportedEffects:
         (result as any).matrix.unsupportedEffects.length > 0,
     })
@@ -209,6 +210,7 @@ describe("resolveBuildSkillMatrix tool", () => {
     expect((result as any).found).toBe(true)
     expect((result as any).matrix.summary.rowCount).toBe(22)
     expect((result as any).matrix.summary.baseDamageStat).toBe("sheerForce")
+    expect((result as any).matrix.assumptions).toBeInstanceOf(Array)
     expect((result as any).matrix.diagnosticSummary.count).toBe(
       (result as any).matrix.rows.flatMap((row: any) => row.diagnostics).length,
     )
@@ -306,6 +308,7 @@ describe("resolveBuildSkillMatrix tool", () => {
           defenderResistance: 0.2,
         },
       },
+      includeDetails: true,
     })
 
     expect((result as any).found).toBe(true)
@@ -358,6 +361,7 @@ describe("resolveBuildSkillMatrix tool", () => {
           defenderResistance: 0.2,
         },
       },
+      includeDetails: true,
     })
 
     expect((result as any).found).toBe(true)

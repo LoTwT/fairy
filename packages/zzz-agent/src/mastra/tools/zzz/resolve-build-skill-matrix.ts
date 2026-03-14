@@ -85,7 +85,7 @@ export const resolveBuildSkillMatrix = createTool({
       .optional()
       .default(false)
       .describe(
-        "是否返回每行完整 build 结果，以及 row.assumptions / row.unsupportedEffects / row.diagnostics / row.sourceNotes 等明细数组。默认 false，以避免上下文过大。",
+        "是否返回 skill matrix 完整明细，包括顶层 matrix.assumptions，以及每行的 row.assumptions / row.unsupportedEffects / row.diagnostics / row.sourceNotes / build。默认 false，以避免上下文过大。",
       ),
   }),
   execute: async (input) => {
