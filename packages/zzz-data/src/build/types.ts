@@ -833,6 +833,7 @@ export interface StaticBuildSourceEntryCollectionSummary {
   isUtilityOnly: boolean
   sourceDamageRequirementSummary: StaticBuildSourceDamageViewRequirementSummary
   sourceUtilityRequirementSummary: StaticBuildSourceUtilityViewRequirementSummary
+  caveatSummary: StaticBuildEntryCaveatSummary
   diagnosticSummary: StaticBuildDiagnosticSummary
   sourceNoteSummary: StaticBuildSourceNoteSummary
   assumptionSummary: StaticBuildAssumptionSummary
@@ -842,6 +843,7 @@ export interface StaticBuildSourceEntryCollectionSummary {
 export interface ResolveStaticBuildSourceEntriesResult {
   loadout: StaticBuildResolvedLoadout
   summary: StaticBuildSourceEntryCollectionSummary
+  caveatSummary: StaticBuildEntryCaveatSummary
   assumptionSummary: StaticBuildAssumptionSummary
   entries: StaticBuildSourceEntry[]
   assumptions: string[]

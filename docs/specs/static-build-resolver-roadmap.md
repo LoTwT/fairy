@@ -4148,3 +4148,35 @@ Batch B（已完成）：
 1. 不为单条 `entry` 增加 `caveatSummary`
 2. 不把同一套 group-level caveat contract 扩到 `source-entry collection`、`trigger-matrix`
 3. 不改变既有 `views.summary.caveatSummary` / `views.caveatSummary`
+
+## 99. V96 source-entry collection caveat summary
+
+`V95` 收口后，unified `source-entry collection` 已具备：
+
+- 顶层 `collection.assumptionSummary`
+- `collection.summary.assumptionSummary`
+- `collection.summary.supportedCount / unsupportedCount`
+
+但如果上层只想先判断整组 mixed collection 是否存在 caveat，仍然要自己组合：
+
+- `collection.assumptionSummary`
+- `collection.summary.unsupportedCount`
+
+### 99.1 当前状态
+
+- `V96.1` 已完成：冻结到 source-entry collection caveat summary
+- `V96.2` 已完成：`ResolveStaticBuildSourceEntriesResult` 与 `StaticBuildSourceEntryCollectionSummary` 已新增稳定 `caveatSummary`
+- `V96.3` 已完成：高层 tool 断言与 agent prompt 已对齐 `collection.summary.caveatSummary` / `collection.caveatSummary`
+- `V96.4` 已完成：相关 specs、roadmap、索引、架构文档与 README 已同步
+
+### 99.2 目标
+
+1. 为 `collection` 顶层结果增加稳定 `caveatSummary`
+2. 为 `collection.summary` 增加稳定 `caveatSummary`
+3. 保持与现有 assumptions、supportedCount、unsupportedCount 一致
+
+### 99.3 Out of Scope
+
+1. 不为 `groups[*]` 增加 `caveatSummary`
+2. 不为单条 `entry` 增加 `caveatSummary`
+3. 不同时扩到 `trigger-matrix`

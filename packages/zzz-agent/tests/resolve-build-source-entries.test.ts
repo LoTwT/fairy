@@ -23,6 +23,12 @@ describe("resolveBuildSourceEntries tool", () => {
       supportedCount: 1,
       unsupportedCount: 0,
       isUtilityOnly: true,
+      caveatSummary: {
+        assumptionCount: (result as any).collection.assumptions.length,
+        unsupportedCount: 0,
+        hasAssumptions: (result as any).collection.assumptions.length > 0,
+        hasUnsupported: false,
+      },
       assumptionSummary: {
         count: (result as any).collection.assumptions.length,
         hasAssumptions: (result as any).collection.assumptions.length > 0,
@@ -131,6 +137,12 @@ describe("resolveBuildSourceEntries tool", () => {
         },
       ],
     })
+    expect((result as any).collection.caveatSummary).toEqual({
+      assumptionCount: (result as any).collection.assumptions.length,
+      unsupportedCount: 0,
+      hasAssumptions: (result as any).collection.assumptions.length > 0,
+      hasUnsupported: false,
+    })
     expect((result as any).collection.entries[0]).toMatchObject({
       id: "lunar-noviluna-energy-refund",
       metadata: {
@@ -186,6 +198,12 @@ describe("resolveBuildSourceEntries tool", () => {
       supportedCount: 2,
       unsupportedCount: 0,
       isUtilityOnly: false,
+      caveatSummary: {
+        assumptionCount: (result as any).collection.assumptions.length,
+        unsupportedCount: 0,
+        hasAssumptions: (result as any).collection.assumptions.length > 0,
+        hasUnsupported: false,
+      },
       assumptionSummary: {
         count: (result as any).collection.assumptions.length,
         hasAssumptions: (result as any).collection.assumptions.length > 0,
@@ -346,6 +364,12 @@ describe("resolveBuildSourceEntries tool", () => {
         },
       ],
     })
+    expect((result as any).collection.caveatSummary).toEqual({
+      assumptionCount: (result as any).collection.assumptions.length,
+      unsupportedCount: 0,
+      hasAssumptions: (result as any).collection.assumptions.length > 0,
+      hasUnsupported: false,
+    })
     expect(
       (result as any).collection.entries.map((entry: any) => entry.id),
     ).toEqual(
@@ -396,6 +420,12 @@ describe("resolveBuildSourceEntries tool", () => {
       sourceDamageViewCount: 1,
       sourceUtilityViewCount: 1,
       isUtilityOnly: false,
+      caveatSummary: {
+        assumptionCount: (result as any).collection.assumptions.length,
+        unsupportedCount: 0,
+        hasAssumptions: (result as any).collection.assumptions.length > 0,
+        hasUnsupported: false,
+      },
       sourceDamageRequirementSummary: {
         count: 2,
         satisfiedCount: 2,

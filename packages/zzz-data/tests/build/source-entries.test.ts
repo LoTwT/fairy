@@ -19,6 +19,12 @@ describe("static build source entries", () => {
       supportedCount: 1,
       unsupportedCount: 0,
       isUtilityOnly: true,
+      caveatSummary: {
+        assumptionCount: result.assumptions.length,
+        unsupportedCount: 0,
+        hasAssumptions: result.assumptions.length > 0,
+        hasUnsupported: false,
+      },
       assumptionSummary: {
         count: result.assumptions.length,
         hasAssumptions: result.assumptions.length > 0,
@@ -127,6 +133,12 @@ describe("static build source entries", () => {
         },
       ],
     })
+    expect(result.caveatSummary).toEqual({
+      assumptionCount: result.assumptions.length,
+      unsupportedCount: 0,
+      hasAssumptions: result.assumptions.length > 0,
+      hasUnsupported: false,
+    })
     expect(result.assumptionSummary).toEqual({
       count: result.assumptions.length,
       hasAssumptions: result.assumptions.length > 0,
@@ -189,6 +201,12 @@ describe("static build source entries", () => {
       supportedCount: 2,
       unsupportedCount: 0,
       isUtilityOnly: false,
+      caveatSummary: {
+        assumptionCount: result.assumptions.length,
+        unsupportedCount: 0,
+        hasAssumptions: result.assumptions.length > 0,
+        hasUnsupported: false,
+      },
       assumptionSummary: {
         count: result.assumptions.length,
         hasAssumptions: result.assumptions.length > 0,
@@ -348,6 +366,12 @@ describe("static build source entries", () => {
           },
         },
       ],
+    })
+    expect(result.caveatSummary).toEqual({
+      assumptionCount: result.assumptions.length,
+      unsupportedCount: 0,
+      hasAssumptions: result.assumptions.length > 0,
+      hasUnsupported: false,
     })
     expect(result.entries).toHaveLength(2)
     expect(result.entries[0]?.metadata.entryKind).toBe("source-damage-view")
@@ -548,6 +572,12 @@ describe("static build source entries", () => {
       sourceDamageViewCount: 0,
       sourceUtilityViewCount: 1,
       isUtilityOnly: true,
+      caveatSummary: {
+        assumptionCount: result.assumptions.length,
+        unsupportedCount: 0,
+        hasAssumptions: result.assumptions.length > 0,
+        hasUnsupported: false,
+      },
       diagnosticSummary: {
         count: 0,
         hasDiagnostics: false,
@@ -582,6 +612,12 @@ describe("static build source entries", () => {
       sourceDamageViewCount: 0,
       sourceUtilityViewCount: 8,
       isUtilityOnly: true,
+      caveatSummary: {
+        assumptionCount: result.assumptions.length,
+        unsupportedCount: 0,
+        hasAssumptions: result.assumptions.length > 0,
+        hasUnsupported: false,
+      },
       diagnosticSummary: {
         count: 0,
         hasDiagnostics: false,

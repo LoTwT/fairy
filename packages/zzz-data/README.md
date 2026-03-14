@@ -750,7 +750,8 @@ collection.summary
 - 不传 `scenario` 时，只返回 utility entries
 - `anomaly / disorder` 场景下，可同时返回 source damage view + utility view
 - `normal / sheer` 场景下，保持 utility-only，不把它们伪装成 source damage collection
-- `collection.summary` 已直接给出 source damage / source utility 计数、supported/unsupported 计数、utility-only 判定、分组摘要，以及聚合后的 `sourceDamageRequirementSummary / sourceUtilityRequirementSummary / diagnosticSummary / sourceNoteSummary`；上层不需要再自行遍历 mixed entries 统计 requirement / diagnostics / source notes
+- `collection.summary` 已直接给出 source damage / source utility 计数、supported/unsupported 计数、utility-only 判定、分组摘要，以及聚合后的 `sourceDamageRequirementSummary / sourceUtilityRequirementSummary / caveatSummary / diagnosticSummary / sourceNoteSummary`；上层不需要再自行遍历 mixed entries 统计 requirement / caveat / diagnostics / source notes
+- `collection.summary.caveatSummary` 与 `collection.caveatSummary` 已直接给出整组 mixed collection 的 assumptions / unsupported 聚合；如果只想先判断当前 collection 是否带 caveat，不要再手工组合 `collection.assumptions.length` 与 `collection.summary.unsupportedCount`
 - `collection.summary.assumptionSummary` 与 `collection.assumptionSummary` 已直接给出整组 mixed collection 的 assumptions 计数；如果只想先判断当前 collection 是否带 assumptions，不要再手工统计 `collection.assumptions.length`
 
 如果你需要分别读取 mixed collection 里 source-damage-view / source-utility-view 两类条目的 requirement 分布，也不要自己遍历 `entries[*].requirements`，直接读取：
