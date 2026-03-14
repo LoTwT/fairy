@@ -57,10 +57,11 @@ describe("resolveBuildTriggerMatrix tool", () => {
 
     expect((result as any).found).toBe(true)
     expect((result as any).matrix.rows).toHaveLength(2)
+    expect((result as any).matrix.assumptions).toBeUndefined()
     expect((result as any).matrix.caveatSummary).toEqual({
-      assumptionCount: (result as any).matrix.assumptions.length,
+      assumptionCount: (result as any).matrix.assumptionSummary.count,
       unsupportedCount: 0,
-      hasAssumptions: (result as any).matrix.assumptions.length > 0,
+      hasAssumptions: (result as any).matrix.assumptionSummary.hasAssumptions,
       hasUnsupported: false,
     })
     expect((result as any).matrix.effectSummary).toEqual(
@@ -76,8 +77,8 @@ describe("resolveBuildTriggerMatrix tool", () => {
       (result as any).matrix.summary.sourceNoteSummary,
     )
     expect((result as any).matrix.assumptionSummary).toEqual({
-      count: (result as any).matrix.assumptions.length,
-      hasAssumptions: (result as any).matrix.assumptions.length > 0,
+      count: expect.any(Number),
+      hasAssumptions: expect.any(Boolean),
     })
     expect((result as any).matrix.summary.effectSummary).toEqual(
       expect.arrayContaining([
@@ -178,14 +179,14 @@ describe("resolveBuildTriggerMatrix tool", () => {
         ],
       },
       caveatSummary: {
-        assumptionCount: (result as any).matrix.assumptions.length,
+        assumptionCount: (result as any).matrix.assumptionSummary.count,
         unsupportedCount: 0,
-        hasAssumptions: (result as any).matrix.assumptions.length > 0,
+        hasAssumptions: (result as any).matrix.assumptionSummary.hasAssumptions,
         hasUnsupported: false,
       },
       assumptionSummary: {
-        count: (result as any).matrix.assumptions.length,
-        hasAssumptions: (result as any).matrix.assumptions.length > 0,
+        count: (result as any).matrix.assumptionSummary.count,
+        hasAssumptions: (result as any).matrix.assumptionSummary.hasAssumptions,
       },
       diagnosticSummary: {
         count: 6,
@@ -568,10 +569,11 @@ describe("resolveBuildTriggerMatrix tool", () => {
 
     expect((result as any).found).toBe(true)
     expect((result as any).matrix.rows).toHaveLength(2)
+    expect((result as any).matrix.assumptions).toBeUndefined()
     expect((result as any).matrix.caveatSummary).toEqual({
-      assumptionCount: (result as any).matrix.assumptions.length,
+      assumptionCount: (result as any).matrix.assumptionSummary.count,
       unsupportedCount: 0,
-      hasAssumptions: (result as any).matrix.assumptions.length > 0,
+      hasAssumptions: (result as any).matrix.assumptionSummary.hasAssumptions,
       hasUnsupported: false,
     })
     expect((result as any).matrix.summary).toMatchObject({
@@ -602,9 +604,9 @@ describe("resolveBuildTriggerMatrix tool", () => {
         ],
       },
       caveatSummary: {
-        assumptionCount: (result as any).matrix.assumptions.length,
+        assumptionCount: (result as any).matrix.assumptionSummary.count,
         unsupportedCount: 0,
-        hasAssumptions: (result as any).matrix.assumptions.length > 0,
+        hasAssumptions: (result as any).matrix.assumptionSummary.hasAssumptions,
         hasUnsupported: false,
       },
       diagnosticSummary: {
@@ -754,6 +756,7 @@ describe("resolveBuildTriggerMatrix tool", () => {
     })
 
     expect((result as any).found).toBe(true)
+    expect((result as any).matrix.assumptions).toBeInstanceOf(Array)
     expect((result as any).matrix.rows[0].assumptions).toBeInstanceOf(Array)
     expect((result as any).matrix.rows[0].requirements).toBeInstanceOf(Array)
     expect((result as any).matrix.rows[0].diagnostics).toBeInstanceOf(Array)

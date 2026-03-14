@@ -167,7 +167,7 @@ export interface CompactStaticBuildTriggerMatrixResult {
   diagnosticSummary: ResolveStaticBuildTriggerMatrixResult["diagnosticSummary"]
   sourceNoteSummary: ResolveStaticBuildTriggerMatrixResult["sourceNoteSummary"]
   assumptionSummary: ResolveStaticBuildTriggerMatrixResult["assumptionSummary"]
-  assumptions: string[]
+  assumptions?: string[]
   rows: StaticBuildCompactTriggerMatrixRow[]
 }
 
@@ -347,7 +347,11 @@ export function compactStaticBuildTriggerMatrixResult(
     diagnosticSummary: matrix.diagnosticSummary,
     sourceNoteSummary: matrix.sourceNoteSummary,
     assumptionSummary: matrix.assumptionSummary,
-    assumptions: matrix.assumptions,
+    ...(includeDetails
+      ? {
+          assumptions: matrix.assumptions,
+        }
+      : {}),
     rows: matrix.rows.map((row) =>
       compactStaticBuildTriggerMatrixRow(row, includeDetails),
     ),
