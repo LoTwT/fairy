@@ -36,7 +36,7 @@ export interface CompactStaticBuildResult {
   mode: ResolveStaticBuildResult["mode"]
   manualBaseMode?: ResolveStaticBuildResult["manualBaseMode"]
   loadout: StaticBuildResolvedLoadout
-  summary: StaticBuildResolveSummary
+  summary: CompactStaticBuildResolveSummary
   effectSummary: StaticBuildResolveEffectSummaryItem[]
   diagnosticSummary: ResolveStaticBuildResult["diagnosticSummary"]
   sourceNoteSummary: ResolveStaticBuildResult["sourceNoteSummary"]
@@ -61,6 +61,31 @@ export interface CompactStaticBuildResult {
   trace?: ResolveStaticBuildResult["trace"]
 }
 
+export interface CompactStaticBuildResolveSummary {
+  baseDamageStat: StaticBuildResolveSummary["baseDamageStat"]
+  baseDamageValue: number
+  expectedTotal: number
+  critTotal: number
+  noCritTotal: number
+  formulaMultipliers: Record<string, number>
+  assumptionCount: number
+  diagnosticCount: number
+  sourceNoteCount: number
+  unsupportedEffectCount: number
+  hasDiagnostics: boolean
+  hasSourceNotes: boolean
+  hasUnsupportedEffects: boolean
+  hasDefaultedInput: boolean
+  hasCoverageGap: boolean
+  hasUnsupportedEffect: boolean
+  hasFallback: boolean
+  hasMissingInputSourceNote: boolean
+  hasProcessOnlySourceNote: boolean
+  hasResearchOnlySourceNote: boolean
+  diagnosticGroups: StaticBuildResolveSummary["diagnosticGroups"]
+  sourceNoteGroups: StaticBuildResolveSummary["sourceNoteGroups"]
+}
+
 export interface StaticBuildCompactSkillMatrixRow {
   id: string
   group: string
@@ -72,7 +97,7 @@ export interface StaticBuildCompactSkillMatrixRow {
   combatTags: string[]
   skillMultiplier: string
   damage: StaticBuildSkillMatrixRowDamageSummary
-  summary: StaticBuildSkillMatrixRow["summary"]
+  summary: CompactStaticBuildResolveSummary
   resolvedBuckets: StaticBuildResolvedBuckets
   diagnostics?: StaticBuildDiagnosticEntry[]
   diagnosticSummary: StaticBuildSkillMatrixRow["diagnosticSummary"]
@@ -127,7 +152,7 @@ export function compactStaticBuildResult(
     mode: build.mode,
     manualBaseMode: build.manualBaseMode,
     loadout: build.loadout,
-    summary: build.summary,
+    summary: compactStaticBuildResolveSummary(build.summary),
     effectSummary: build.effectSummary,
     diagnosticSummary: build.diagnosticSummary,
     sourceNoteSummary: build.sourceNoteSummary,
@@ -149,6 +174,35 @@ export function compactStaticBuildResult(
   }
 }
 
+export function compactStaticBuildResolveSummary(
+  summary: StaticBuildResolveSummary,
+): CompactStaticBuildResolveSummary {
+  return {
+    baseDamageStat: summary.baseDamageStat,
+    baseDamageValue: summary.baseDamageValue,
+    expectedTotal: summary.expectedTotal,
+    critTotal: summary.critTotal,
+    noCritTotal: summary.noCritTotal,
+    formulaMultipliers: summary.formulaMultipliers,
+    assumptionCount: summary.assumptionCount,
+    diagnosticCount: summary.diagnosticCount,
+    sourceNoteCount: summary.sourceNoteCount,
+    unsupportedEffectCount: summary.unsupportedEffectCount,
+    hasDiagnostics: summary.hasDiagnostics,
+    hasSourceNotes: summary.hasSourceNotes,
+    hasUnsupportedEffects: summary.hasUnsupportedEffects,
+    hasDefaultedInput: summary.hasDefaultedInput,
+    hasCoverageGap: summary.hasCoverageGap,
+    hasUnsupportedEffect: summary.hasUnsupportedEffect,
+    hasFallback: summary.hasFallback,
+    hasMissingInputSourceNote: summary.hasMissingInputSourceNote,
+    hasProcessOnlySourceNote: summary.hasProcessOnlySourceNote,
+    hasResearchOnlySourceNote: summary.hasResearchOnlySourceNote,
+    diagnosticGroups: summary.diagnosticGroups,
+    sourceNoteGroups: summary.sourceNoteGroups,
+  }
+}
+
 export interface StaticBuildCompactTriggerMatrixRow {
   id: string
   label: string
@@ -165,7 +219,7 @@ export interface StaticBuildCompactTriggerMatrixRow {
   assumptionSummary: StaticBuildTriggerMatrixRow["assumptionSummary"]
   assumptions?: string[]
   damage?: NonNullable<StaticBuildTriggerMatrixRow["damage"]>
-  summary?: StaticBuildTriggerMatrixRow["summary"]
+  summary?: CompactStaticBuildResolveSummary
   build?: ResolveStaticBuildResult
 }
 
@@ -215,7 +269,7 @@ export interface StaticBuildCompactSourceDamageViewEntry {
   assumptionSummary: StaticBuildSourceDamageViewEntry["assumptionSummary"]
   assumptions?: string[]
   damage?: NonNullable<StaticBuildSourceDamageViewEntry["damage"]>
-  summary?: StaticBuildSourceDamageViewEntry["summary"]
+  summary?: CompactStaticBuildResolveSummary
   build?: ResolveStaticBuildResult
 }
 
@@ -246,7 +300,7 @@ export interface StaticBuildCompactSourceUtilityViewEntry {
   triggerLabel?: string
   conditionLabel?: string
   cooldownSeconds?: number
-  summary: StaticBuildSourceUtilityViewEntry["summary"]
+  summary: CompactStaticBuildSourceUtilityViewEntrySummary
   diagnostics?: StaticBuildDiagnosticEntry[]
   diagnosticSummary: StaticBuildSourceUtilityViewEntry["diagnosticSummary"]
   sourceNotes?: StaticBuildSourceNoteEntry[]
@@ -260,6 +314,19 @@ export interface StaticBuildCompactSourceUtilityViewEntry {
 export type StaticBuildCompactSourceEntry =
   | StaticBuildCompactSourceDamageViewEntry
   | StaticBuildCompactSourceUtilityViewEntry
+
+export interface CompactStaticBuildSourceUtilityViewEntrySummary {
+  value: number
+  unit: StaticBuildSourceUtilityViewEntry["unit"]
+  resolutionMode: StaticBuildSourceUtilityViewEntry["resolutionMode"]
+  targetScope: StaticBuildSourceUtilityViewEntry["targetScope"]
+  requirementCount: number
+  hasUnsatisfiedRequirements: boolean
+  diagnosticCount: number
+  sourceNoteCount: number
+  assumptionCount: number
+  hasUnsupported: boolean
+}
 
 export type CompactStaticBuildSourceEntryGroupSummary =
   ResolveStaticBuildSourceEntriesResult["summary"]["groups"][number]
@@ -399,7 +466,7 @@ export function compactStaticBuildSkillMatrixRow(
     combatTags: row.combatTags,
     skillMultiplier: row.skillMultiplier,
     damage: row.damageSummary,
-    summary: row.summary,
+    summary: compactStaticBuildResolveSummary(row.summary),
     resolvedBuckets: row.resolvedBuckets,
     diagnosticSummary: row.diagnosticSummary,
     sourceNoteSummary: row.sourceNoteSummary,
@@ -493,7 +560,11 @@ export function compactStaticBuildTriggerMatrixRow(
     caveatSummary: row.caveatSummary,
     assumptionSummary: row.assumptionSummary,
     damage: row.damage,
-    summary: row.summary,
+    ...(row.summary
+      ? {
+          summary: compactStaticBuildResolveSummary(row.summary),
+        }
+      : {}),
     ...(includeDetails
       ? {
           assumptions: row.assumptions,
@@ -642,7 +713,11 @@ export function compactStaticBuildSourceDamageViewEntry(
     caveatSummary: entry.caveatSummary,
     assumptionSummary: entry.assumptionSummary,
     damage: entry.damage,
-    summary: entry.summary,
+    ...(entry.summary
+      ? {
+          summary: compactStaticBuildResolveSummary(entry.summary),
+        }
+      : {}),
     ...(includeDetails
       ? {
           assumptions: entry.assumptions,
@@ -710,6 +785,23 @@ export function compactStaticBuildSourceUtilityViewsSummary(
   }
 }
 
+export function compactStaticBuildSourceUtilityViewEntrySummary(
+  summary: StaticBuildSourceUtilityViewEntry["summary"],
+): CompactStaticBuildSourceUtilityViewEntrySummary {
+  return {
+    value: summary.value,
+    unit: summary.unit,
+    resolutionMode: summary.resolutionMode,
+    targetScope: summary.targetScope,
+    requirementCount: summary.requirementCount,
+    hasUnsatisfiedRequirements: summary.hasUnsatisfiedRequirements,
+    diagnosticCount: summary.diagnosticCount,
+    sourceNoteCount: summary.sourceNoteCount,
+    assumptionCount: summary.assumptionCount,
+    hasUnsupported: summary.hasUnsupported,
+  }
+}
+
 export function compactStaticBuildSourceUtilityViewEntry(
   entry: StaticBuildSourceUtilityViewEntry,
   includeDetails = false,
@@ -730,7 +822,7 @@ export function compactStaticBuildSourceUtilityViewEntry(
     triggerLabel: entry.triggerLabel,
     conditionLabel: entry.conditionLabel,
     cooldownSeconds: entry.cooldownSeconds,
-    summary: entry.summary,
+    summary: compactStaticBuildSourceUtilityViewEntrySummary(entry.summary),
     diagnosticSummary: entry.diagnosticSummary,
     sourceNoteSummary: entry.sourceNoteSummary,
     effectSummary: entry.effectSummary,
@@ -768,7 +860,11 @@ export function compactStaticBuildSourceEntry(
       caveatSummary: entry.caveatSummary,
       assumptionSummary: entry.assumptionSummary,
       damage: entry.damage,
-      summary: entry.summary,
+      ...(entry.summary
+        ? {
+            summary: compactStaticBuildResolveSummary(entry.summary),
+          }
+        : {}),
       ...(includeDetails
         ? {
             assumptions: entry.assumptions,
@@ -797,7 +893,7 @@ export function compactStaticBuildSourceEntry(
     triggerLabel: entry.triggerLabel,
     conditionLabel: entry.conditionLabel,
     cooldownSeconds: entry.cooldownSeconds,
-    summary: entry.summary,
+    summary: compactStaticBuildSourceUtilityViewEntrySummary(entry.summary),
     diagnosticSummary: entry.diagnosticSummary,
     sourceNoteSummary: entry.sourceNoteSummary,
     effectSummary: entry.effectSummary,

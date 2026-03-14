@@ -6380,3 +6380,33 @@ caveatSummary` 这些兼容字段补齐。
 - `V156.2` 已完成：trigger/source/source-entry compact summary 已改为显式 compact types
 - `V156.3` 已完成：现有测试无需新增行为断言，类型与 runtime 校验已覆盖
 - `V156.4` 已完成：README、roadmap、索引与架构文档已同步
+
+## 160. V157 explicit compact row/entry summaries
+
+`V156` 收口后，result-level compact `summary` 已不再直接复用 raw summary type。
+
+但 compact row / entry 上的 `summary` 仍直接指向 raw summary type：单次 build、skill-matrix row、trigger-matrix row、source-damage-view entry 与 source-utility-view entry 都还存在同类风险。
+
+`V157` 只解决一件事：
+
+1. 把 compact row / entry 的 `summary` 也改成显式 compact type
+
+### 160.1 分阶段
+
+1. `V157.1` scope freeze
+2. `V157.2` runtime/type contract alignment
+3. `V157.3` tests / prompt alignment
+4. `V157.4` docs closeout
+
+### 160.2 非目标
+
+1. 不改变任何 runtime summary 值
+2. 不改变 `includeDetails` 语义
+3. 不新增业务字段
+
+### 160.3 当前状态
+
+- `V157.1` 已完成：冻结到 explicit compact row/entry summaries
+- `V157.2` 已完成：compact row / entry summary 已改为显式 compact types
+- `V157.3` 已完成：现有测试与 runtime 校验已覆盖
+- `V157.4` 已完成：roadmap、索引与架构文档已同步
