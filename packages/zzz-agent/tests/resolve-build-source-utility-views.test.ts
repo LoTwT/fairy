@@ -66,6 +66,10 @@ describe("resolveBuildSourceUtilityViews tool", () => {
           key: "trigger",
           label: "按次触发条目",
           count: 1,
+          assumptionSummary: {
+            count: 1,
+            hasAssumptions: true,
+          },
           supportedCount: 1,
           unsupportedCount: 0,
           requirementSummary: {
@@ -246,6 +250,10 @@ describe("resolveBuildSourceUtilityViews tool", () => {
           key: "trigger",
           label: "按次触发条目",
           count: 8,
+          assumptionSummary: {
+            count: 16,
+            hasAssumptions: true,
+          },
           supportedCount: 8,
           unsupportedCount: 0,
           requirementSummary: {

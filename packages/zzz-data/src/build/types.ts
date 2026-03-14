@@ -758,6 +758,7 @@ export interface StaticBuildSourceUtilityViewGroupSummary {
   requirementSummary: StaticBuildSourceUtilityViewRequirementSummary
   diagnosticSummary: StaticBuildDiagnosticSummary
   sourceNoteSummary: StaticBuildSourceNoteSummary
+  assumptionSummary: StaticBuildAssumptionSummary
 }
 
 export interface StaticBuildSourceUtilityViewSummary {

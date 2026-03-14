@@ -3589,3 +3589,32 @@ Batch B（已完成）：
 1. 不改变 entry 级 `assumptions` 的原始数组语义
 2. 不改变顶层 `views.assumptionSummary`
 3. 不提前引入 source-utility-view group 的同名字段
+
+## 82. V79 source-utility-view group assumption summary
+
+`V78` 收口后，standalone `source-damage-view groups` 已经具备局部 `assumptionSummary`。
+
+但 standalone `source-utility-view` 的 `summary.groups[*]` 仍没有同类摘要。上层按“按次触发 / 按速率”拆 section 时，仍要回退到组内 entries 的 `assumptions` 手工统计。
+
+`V79` 只解决一件事：
+
+- 为 `StaticBuildSourceUtilityViewGroupSummary` 增加局部 `assumptionSummary`
+
+### 82.1 当前状态
+
+- `V79.1` 已完成：冻结到 source-utility-view group assumption summary
+- `V79.2` 已完成：`StaticBuildSourceUtilityViewGroupSummary` 已新增局部 `assumptionSummary`
+- `V79.3` 已完成：高层 tool 断言与 agent prompt 已对齐 `views.summary.groups[*].assumptionSummary`
+- `V79.4` 已完成：相关 specs、roadmap、索引、架构文档与 README 已同步
+
+### 82.2 目标
+
+1. 为 source-utility-view groups 增加稳定 `assumptionSummary`
+2. 直接从当前 group entries 的 `assumptions` 派生计数与布尔位
+3. 对齐 trigger / rate 组级解释 contract
+
+### 82.3 Out of Scope
+
+1. 不改变 entry 级 `assumptions` 的原始数组语义
+2. 不改变顶层 `views.assumptionSummary`
+3. 不提前引入 trigger-matrix group 的同名字段

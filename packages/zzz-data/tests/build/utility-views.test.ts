@@ -83,6 +83,10 @@ describe("static build source utility views", () => {
           key: "trigger",
           label: "按次触发条目",
           count: 1,
+          assumptionSummary: {
+            count: 1,
+            hasAssumptions: true,
+          },
           supportedCount: 1,
           unsupportedCount: 0,
           requirementSummary: {
@@ -313,6 +317,10 @@ describe("static build source utility views", () => {
           key: "rate",
           label: "按速率条目",
           count: 1,
+          assumptionSummary: {
+            count: 1,
+            hasAssumptions: true,
+          },
           supportedCount: 1,
           unsupportedCount: 0,
           requirementSummary: {

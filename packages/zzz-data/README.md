@@ -581,6 +581,12 @@ utilityViews.summary
 
 如果你需要判断当前 source-specific utility views 是 trigger 还是 rate、是否存在 unsupported 条目、如何分组展示，或者当前整组 utility views / 某一条 entry 是否带有 requirement / diagnostics / source notes / assumptions，不要再自己统计 `entries`，直接使用 `utilityViews.summary`、`utilityViews.assumptionSummary` 与 `entry.assumptionSummary`。
 
+如果你是按组拆“按次触发 / 按速率”两个 section，也不要再先过滤 entries 再自己统计组内 assumptions，直接读取：
+
+```ts
+utilityViews.summary.groups[0].assumptionSummary
+```
+
 如果你需要稳定读取某条 utility entry 的触发条件 / 适用条件 / 冷却摘要，优先使用：
 
 ```ts
