@@ -4243,3 +4243,34 @@ Batch B（已完成）：
 1. 不为 `groups[*]` 增加 `caveatSummary`
 2. 不为单条 `row` 增加 `caveatSummary`
 3. 不改变既有 `groups[*].assumptionSummary`
+
+## 102. V99 trigger-matrix group caveat summary
+
+`V98` 收口后，`trigger-matrix` 已具备：
+
+- 顶层 `matrix.caveatSummary`
+- `matrix.summary.caveatSummary`
+
+但如果上层按 `main-formula / source-view` 拆 section，仍然需要自己组合：
+
+- `matrix.summary.groups[*].assumptionSummary`
+- `matrix.summary.groups[*].unsupportedCount`
+
+### 102.1 当前状态
+
+- `V99.1` 已完成：冻结到 trigger-matrix group caveat summary
+- `V99.2` 已完成：`StaticBuildTriggerMatrixGroupSummary` 已新增稳定 `caveatSummary`
+- `V99.3` 已完成：高层 tool 断言与 agent prompt 已对齐 `matrix.summary.groups[*].caveatSummary`
+- `V99.4` 已完成：相关 specs、roadmap、索引、架构文档与 README 已同步
+
+### 102.2 目标
+
+1. 为 `matrix.summary.groups[*]` 增加稳定 `caveatSummary`
+2. 保持与组级 assumptions、supportedCount、unsupportedCount 一致
+3. 让上层按组消费 trigger matrix 时不再手工组合 caveat
+
+### 102.3 Out of Scope
+
+1. 不为单条 `row` 增加 `caveatSummary`
+2. 不改变既有 `matrix.summary.caveatSummary` / `matrix.caveatSummary`
+3. 不同时扩到 `source-entry collection`

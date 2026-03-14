@@ -145,6 +145,12 @@ describe("static build trigger matrix", () => {
           count: 1,
           supportedCount: 1,
           unsupportedCount: 0,
+          caveatSummary: {
+            assumptionCount: mainFormulaAssumptionCount,
+            unsupportedCount: 0,
+            hasAssumptions: mainFormulaAssumptionCount > 0,
+            hasUnsupported: false,
+          },
           assumptionSummary: {
             count: mainFormulaAssumptionCount,
             hasAssumptions: mainFormulaAssumptionCount > 0,
@@ -190,6 +196,12 @@ describe("static build trigger matrix", () => {
           count: 1,
           supportedCount: 1,
           unsupportedCount: 0,
+          caveatSummary: {
+            assumptionCount: sourceViewAssumptionCount,
+            unsupportedCount: 0,
+            hasAssumptions: sourceViewAssumptionCount > 0,
+            hasUnsupported: false,
+          },
           assumptionSummary: {
             count: sourceViewAssumptionCount,
             hasAssumptions: sourceViewAssumptionCount > 0,
@@ -464,6 +476,26 @@ describe("static build trigger matrix", () => {
         hasSourceNotes: true,
         hasMissingInput: false,
       },
+      groups: [
+        {
+          key: "main-formula",
+          caveatSummary: {
+            assumptionCount: result.rows[0]?.assumptions.length ?? 0,
+            unsupportedCount: 0,
+            hasAssumptions: (result.rows[0]?.assumptions.length ?? 0) > 0,
+            hasUnsupported: false,
+          },
+        },
+        {
+          key: "source-view",
+          caveatSummary: {
+            assumptionCount: result.rows[1]?.assumptions.length ?? 0,
+            unsupportedCount: 0,
+            hasAssumptions: (result.rows[1]?.assumptions.length ?? 0) > 0,
+            hasUnsupported: false,
+          },
+        },
+      ],
     })
     expect(result.rows[0]?.metadata.damageType).toBe("disorder")
     expect(result.rows[1]).toMatchObject({
@@ -564,6 +596,26 @@ describe("static build trigger matrix", () => {
         count: 6,
         hasSourceNotes: true,
       },
+      groups: [
+        {
+          key: "main-formula",
+          caveatSummary: {
+            assumptionCount: result.rows[0]?.assumptions.length ?? 0,
+            unsupportedCount: 0,
+            hasAssumptions: (result.rows[0]?.assumptions.length ?? 0) > 0,
+            hasUnsupported: false,
+          },
+        },
+        {
+          key: "source-view",
+          caveatSummary: {
+            assumptionCount: result.rows[1]?.assumptions.length ?? 0,
+            unsupportedCount: 0,
+            hasAssumptions: (result.rows[1]?.assumptions.length ?? 0) > 0,
+            hasUnsupported: false,
+          },
+        },
+      ],
     })
     expect(result.rows[0]?.metadata.damageType).toBe("disorder")
     expect(result.rows[1]).toMatchObject({

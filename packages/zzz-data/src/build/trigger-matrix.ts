@@ -180,6 +180,10 @@ function summarizeTriggerMatrixRows(
       requirementSummary: summarizeSourceDamageViewRequirements(
         groupRows.flatMap((row) => row.requirements),
       ),
+      caveatSummary: summarizeTriggerMatrixCaveats(
+        groupRows,
+        groupRows.flatMap((row) => row.assumptions),
+      ),
       diagnosticSummary: summarizeDiagnosticEntries(
         groupRows.flatMap((row) => row.diagnostics),
       ),

@@ -128,6 +128,12 @@ describe("resolveBuildTriggerMatrix tool", () => {
           count: 1,
           supportedCount: 1,
           unsupportedCount: 0,
+          caveatSummary: {
+            assumptionCount: mainFormulaAssumptionCount,
+            unsupportedCount: 0,
+            hasAssumptions: mainFormulaAssumptionCount > 0,
+            hasUnsupported: false,
+          },
           assumptionSummary: {
             count: mainFormulaAssumptionCount,
             hasAssumptions: mainFormulaAssumptionCount > 0,
@@ -173,6 +179,12 @@ describe("resolveBuildTriggerMatrix tool", () => {
           count: 1,
           supportedCount: 1,
           unsupportedCount: 0,
+          caveatSummary: {
+            assumptionCount: sourceViewAssumptionCount,
+            unsupportedCount: 0,
+            hasAssumptions: sourceViewAssumptionCount > 0,
+            hasUnsupported: false,
+          },
           assumptionSummary: {
             count: sourceViewAssumptionCount,
             hasAssumptions: sourceViewAssumptionCount > 0,
@@ -494,6 +506,28 @@ describe("resolveBuildTriggerMatrix tool", () => {
         count: 6,
         hasSourceNotes: true,
       },
+      groups: [
+        {
+          key: "main-formula",
+          caveatSummary: {
+            assumptionCount: (result as any).matrix.rows[0].assumptions.length,
+            unsupportedCount: 0,
+            hasAssumptions:
+              (result as any).matrix.rows[0].assumptions.length > 0,
+            hasUnsupported: false,
+          },
+        },
+        {
+          key: "source-view",
+          caveatSummary: {
+            assumptionCount: (result as any).matrix.rows[1].assumptions.length,
+            unsupportedCount: 0,
+            hasAssumptions:
+              (result as any).matrix.rows[1].assumptions.length > 0,
+            hasUnsupported: false,
+          },
+        },
+      ],
     })
     expect((result as any).matrix.rows[1]).toMatchObject({
       supported: true,
