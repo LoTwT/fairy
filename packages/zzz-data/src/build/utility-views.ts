@@ -19,6 +19,7 @@ import {
   supportedStaticBuildUtilityWEngines,
 } from "./catalog.js"
 import {
+  summarizeAssumptions,
   summarizeDiagnosticEntries,
   summarizeSourceNoteEntries,
 } from "./resolver.js"
@@ -378,17 +379,17 @@ export function resolveStaticBuildSourceUtilityViews(
   const compatibleWEngines = getCompatibleStaticBuildUtilityWEngines(
     loadout.agent.specialty,
   )
+  const assumptions =
+    entries.length > 0 || compatibleWEngines.length > 0
+      ? []
+      : [`${loadout.agent.name} 当前特性下暂无已收录的 utility-only 音擎条目。`]
 
   return {
     loadout,
     summary: summarizeSourceUtilityViews(entries),
+    assumptionSummary: summarizeAssumptions(assumptions),
     entries,
-    assumptions:
-      entries.length > 0 || compatibleWEngines.length > 0
-        ? []
-        : [
-            `${loadout.agent.name} 当前特性下暂无已收录的 utility-only 音擎条目。`,
-          ],
+    assumptions,
   }
 }
 

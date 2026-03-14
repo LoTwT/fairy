@@ -157,6 +157,7 @@ export interface CompactStaticBuildSourceDamageViewsResult {
 export interface CompactStaticBuildSourceUtilityViewsResult {
   loadout: ResolveStaticBuildSourceUtilityViewsResult["loadout"]
   summary: ResolveStaticBuildSourceUtilityViewsResult["summary"]
+  assumptionSummary: ResolveStaticBuildSourceUtilityViewsResult["assumptionSummary"]
   assumptions: string[]
   entries: StaticBuildCompactSourceUtilityViewEntry[]
 }
@@ -293,6 +294,7 @@ export function compactStaticBuildSourceUtilityViewsResult(
   return {
     loadout: views.loadout,
     summary: views.summary,
+    assumptionSummary: views.assumptionSummary,
     assumptions: views.assumptions,
     entries: views.entries.map(
       (entry) =>

@@ -573,7 +573,7 @@ utilityViews.summary
 // }
 ```
 
-如果你需要判断当前 source-specific utility views 是 trigger 还是 rate、是否存在 unsupported 条目、如何分组展示，或者当前整组 utility views 是否带有 requirement / diagnostics / source notes，不要再自己统计 `entries`，直接使用 `utilityViews.summary`。
+如果你需要判断当前 source-specific utility views 是 trigger 还是 rate、是否存在 unsupported 条目、如何分组展示，或者当前整组 utility views 是否带有 requirement / diagnostics / source notes / assumptions，不要再自己统计 `entries`，直接使用 `utilityViews.summary` 与 `utilityViews.assumptionSummary`。
 
 如果你需要稳定读取某条 utility entry 的触发条件 / 适用条件 / 冷却摘要，优先使用：
 

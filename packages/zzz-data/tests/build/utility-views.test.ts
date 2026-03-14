@@ -29,6 +29,10 @@ describe("static build source utility views", () => {
     })
 
     expect(result.entries).toHaveLength(1)
+    expect(result.assumptionSummary).toEqual({
+      count: result.assumptions.length,
+      hasAssumptions: result.assumptions.length > 0,
+    })
     expect(result.summary).toMatchObject({
       entryCount: 1,
       triggerCount: 1,
@@ -192,6 +196,10 @@ describe("static build source utility views", () => {
     })
 
     expect(result.entries).toHaveLength(1)
+    expect(result.assumptionSummary).toEqual({
+      count: result.assumptions.length,
+      hasAssumptions: result.assumptions.length > 0,
+    })
     expect(result.entries[0]).toMatchObject({
       id: "magnetic-storm-charlie-energy-refund",
       metadata: {
@@ -256,6 +264,10 @@ describe("static build source utility views", () => {
     })
 
     expect(result.entries).toHaveLength(1)
+    expect(result.assumptionSummary).toEqual({
+      count: result.assumptions.length,
+      hasAssumptions: result.assumptions.length > 0,
+    })
     expect(result.summary).toMatchObject({
       entryCount: 1,
       triggerCount: 0,

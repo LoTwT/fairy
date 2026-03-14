@@ -773,6 +773,7 @@ export interface StaticBuildSourceUtilityViewSummary {
 export interface ResolveStaticBuildSourceUtilityViewsResult {
   loadout: StaticBuildResolvedLoadout
   summary: StaticBuildSourceUtilityViewSummary
+  assumptionSummary: StaticBuildAssumptionSummary
   entries: StaticBuildSourceUtilityViewEntry[]
   assumptions: string[]
 }
