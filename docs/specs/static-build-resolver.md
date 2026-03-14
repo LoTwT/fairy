@@ -944,3 +944,4 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 193. `V193` explicit compact trigger row metadata sources：当前阶段已收口；compact `trigger-matrix row.metadata` 已改为显式 compact metadata contract，不再通过 indexed access 复用 raw trigger metadata type，见 [静态构筑解析系统 V193](./static-build-resolver-v193.md)
 194. `V194` explicit compact skill row metadata sources：当前阶段已收口；compact `skill-matrix row` 的结构语义字段已改为显式 compact types，不再通过 indexed access 复用 raw skill-matrix row contract，见 [静态构筑解析系统 V194](./static-build-resolver-v194.md)
 195. `V195` explicit compact detail source types：当前阶段已收口；compact `diagnostic / source-note / trace` 三类 detail entry 的 `sourceType` 已统一为显式 compact source type，见 [静态构筑解析系统 V195](./static-build-resolver-v195.md)
+196. `V196` explicit compact base damage stat summaries：当前阶段已收口；compact summary 层的 `baseDamageStat` 已统一为显式 compact type，见 [静态构筑解析系统 V196](./static-build-resolver-v196.md)

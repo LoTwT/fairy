@@ -127,6 +127,8 @@ export type CompactStaticBuildSkillMatrixVariantAxis =
 
 export type CompactStaticBuildTargetSize = "small" | "medium" | "large"
 
+export type CompactStaticBuildBaseDamageStat = "attack" | "sheerForce"
+
 export interface CompactStaticBuildResult {
   profile: CompactStaticBuildProfile
   mode: CompactStaticBuildMode
@@ -158,7 +160,7 @@ export interface CompactStaticBuildResult {
 }
 
 export interface CompactStaticBuildResolveSummary {
-  baseDamageStat: StaticBuildResolveSummary["baseDamageStat"]
+  baseDamageStat: CompactStaticBuildBaseDamageStat
   baseDamageValue: number
   expectedTotal: number
   critTotal: number
@@ -639,7 +641,7 @@ export interface CompactStaticBuildSkillMatrixGroupSummary {
 
 export interface CompactStaticBuildSkillMatrixSummary {
   rowCount: number
-  baseDamageStat: StaticBuildResolvedPanel["baseDamageStat"]
+  baseDamageStat: CompactStaticBuildBaseDamageStat
   baseDamageValue: number
   attack?: number
   hp?: number

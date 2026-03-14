@@ -7657,6 +7657,38 @@ caveatSummary` 这些兼容字段补齐。
 - `V195.3` 已完成：现有测试与 runtime 校验已覆盖
 - `V195.4` 已完成：roadmap、索引与架构文档已同步
 
+## 199. V196 explicit compact base damage stat summaries
+
+`V195` 收口后，compact header/summary 里仍直接复用 raw `baseDamageStat` 的稳定缺口剩下两处：
+
+1. `CompactStaticBuildResolveSummary.baseDamageStat`
+2. `CompactStaticBuildSkillMatrixSummary.baseDamageStat`
+
+`V196` 只解决这一件事：
+
+1. 把 compact summary 层的 `baseDamageStat` 统一改为显式 compact type
+
+### 199.1 分阶段
+
+1. `V196.1` scope freeze
+2. `V196.2` runtime/type contract alignment
+3. `V196.3` tests / prompt alignment
+4. `V196.4` docs closeout
+
+### 199.2 非目标
+
+1. 不改变 `baseDamageStat` 的值域
+2. 不改变 `resolvedPanel.baseDamageStat`
+3. 不改变其他 summary 字段
+4. 不改变 runtime 生成逻辑
+
+### 199.3 当前状态
+
+- `V196.1` 已完成：冻结到 explicit compact base damage stat summaries
+- `V196.2` 已完成：compact summary 层的 `baseDamageStat` 已统一为显式 compact type
+- `V196.3` 已完成：现有测试与 runtime 校验已覆盖
+- `V196.4` 已完成：roadmap、索引与架构文档已同步
+
 ## 174. V171 explicit compact top-level summary effect summaries
 
 `V170` 收口后，compact contract 中下一批仍直接复用 raw effect summary item type 的显式缺口主要集中在 top-level `summary`：
