@@ -6936,6 +6936,39 @@ caveatSummary` 这些兼容字段补齐。
 - `V173.3` 已完成：现有测试与 runtime 校验已覆盖
 - `V173.4` 已完成：roadmap、索引与架构文档已同步
 
+## 177. V174 explicit compact summary group items
+
+`V173` 收口后，compact contract 中仍直接复用 raw summary group item type 的显式缺口主要集中在 summary 内部的 group 数组：
+
+- `build.summary.diagnosticGroups`
+- `build.summary.sourceNoteGroups`
+- `diagnosticSummary.kindGroups / ownerGroups`
+- `sourceNoteSummary.statusGroups / ownerGroups`
+
+`V174` 只解决一件事：
+
+1. 把上述内部 group item 改成显式 compact group item types
+
+### 177.1 分阶段
+
+1. `V174.1` scope freeze
+2. `V174.2` runtime/type contract alignment
+3. `V174.3` tests / prompt alignment
+4. `V174.4` docs closeout
+
+### 177.2 非目标
+
+1. 不改变这些 group item 的字段值
+2. 不改变外层 `summary / diagnosticSummary / sourceNoteSummary` 的统计语义
+3. 不改变 `includeDetails` 语义
+
+### 177.3 当前状态
+
+- `V174.1` 已完成：冻结到 explicit compact summary group items
+- `V174.2` 已完成：compact summary 内部 group item 已改为显式 compact types
+- `V174.3` 已完成：现有测试与 runtime 校验已覆盖
+- `V174.4` 已完成：roadmap、索引与架构文档已同步
+
 ## 174. V171 explicit compact top-level summary effect summaries
 
 `V170` 收口后，compact contract 中下一批仍直接复用 raw effect summary item type 的显式缺口主要集中在 top-level `summary`：

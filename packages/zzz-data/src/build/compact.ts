@@ -92,8 +92,19 @@ export interface CompactStaticBuildResolveSummary {
   hasMissingInputSourceNote: boolean
   hasProcessOnlySourceNote: boolean
   hasResearchOnlySourceNote: boolean
-  diagnosticGroups: StaticBuildResolveSummary["diagnosticGroups"]
-  sourceNoteGroups: StaticBuildResolveSummary["sourceNoteGroups"]
+  diagnosticGroups: CompactStaticBuildDiagnosticGroupSummary[]
+  sourceNoteGroups: CompactStaticBuildSourceNoteGroupSummary[]
+}
+
+export interface CompactStaticBuildDiagnosticGroupSummary {
+  key: StaticBuildDiagnosticKind
+  label: string
+  count: number
+}
+
+export interface CompactStaticBuildDiagnosticOwnerGroupSummary {
+  key: StaticBuildDiagnosticOwner
+  count: number
 }
 
 export interface CompactStaticBuildDiagnosticSummary {
@@ -103,8 +114,19 @@ export interface CompactStaticBuildDiagnosticSummary {
   hasCoverageGap: boolean
   hasUnsupportedEffect: boolean
   hasFallback: boolean
-  kindGroups: StaticBuildDiagnosticSummary["kindGroups"]
-  ownerGroups: StaticBuildDiagnosticSummary["ownerGroups"]
+  kindGroups: CompactStaticBuildDiagnosticGroupSummary[]
+  ownerGroups: CompactStaticBuildDiagnosticOwnerGroupSummary[]
+}
+
+export interface CompactStaticBuildSourceNoteGroupSummary {
+  key: StaticBuildSourceNoteStatus
+  label: string
+  count: number
+}
+
+export interface CompactStaticBuildSourceNoteOwnerGroupSummary {
+  key: StaticBuildSourceNoteOwner
+  count: number
 }
 
 export interface CompactStaticBuildSourceNoteSummary {
@@ -113,8 +135,8 @@ export interface CompactStaticBuildSourceNoteSummary {
   hasMissingInput: boolean
   hasProcessOnly: boolean
   hasResearchOnly: boolean
-  statusGroups: StaticBuildSourceNoteSummary["statusGroups"]
-  ownerGroups: StaticBuildSourceNoteSummary["ownerGroups"]
+  statusGroups: CompactStaticBuildSourceNoteGroupSummary[]
+  ownerGroups: CompactStaticBuildSourceNoteOwnerGroupSummary[]
 }
 
 export interface CompactStaticBuildAssumptionSummary {
@@ -355,8 +377,31 @@ export function compactStaticBuildResolveSummary(
     hasMissingInputSourceNote: summary.hasMissingInputSourceNote,
     hasProcessOnlySourceNote: summary.hasProcessOnlySourceNote,
     hasResearchOnlySourceNote: summary.hasResearchOnlySourceNote,
-    diagnosticGroups: summary.diagnosticGroups,
-    sourceNoteGroups: summary.sourceNoteGroups,
+    diagnosticGroups: summary.diagnosticGroups.map((group) =>
+      compactStaticBuildDiagnosticGroupSummary(group),
+    ),
+    sourceNoteGroups: summary.sourceNoteGroups.map((group) =>
+      compactStaticBuildSourceNoteGroupSummary(group),
+    ),
+  }
+}
+
+export function compactStaticBuildDiagnosticGroupSummary(
+  group: StaticBuildDiagnosticGroupSummary,
+): CompactStaticBuildDiagnosticGroupSummary {
+  return {
+    key: group.key,
+    label: group.label,
+    count: group.count,
+  }
+}
+
+export function compactStaticBuildDiagnosticOwnerGroupSummary(
+  group: StaticBuildDiagnosticOwnerGroupSummary,
+): CompactStaticBuildDiagnosticOwnerGroupSummary {
+  return {
+    key: group.key,
+    count: group.count,
   }
 }
 
@@ -370,8 +415,31 @@ export function compactStaticBuildDiagnosticSummary(
     hasCoverageGap: summary.hasCoverageGap,
     hasUnsupportedEffect: summary.hasUnsupportedEffect,
     hasFallback: summary.hasFallback,
-    kindGroups: summary.kindGroups,
-    ownerGroups: summary.ownerGroups,
+    kindGroups: summary.kindGroups.map((group) =>
+      compactStaticBuildDiagnosticGroupSummary(group),
+    ),
+    ownerGroups: summary.ownerGroups.map((group) =>
+      compactStaticBuildDiagnosticOwnerGroupSummary(group),
+    ),
+  }
+}
+
+export function compactStaticBuildSourceNoteGroupSummary(
+  group: StaticBuildSourceNoteGroupSummary,
+): CompactStaticBuildSourceNoteGroupSummary {
+  return {
+    key: group.key,
+    label: group.label,
+    count: group.count,
+  }
+}
+
+export function compactStaticBuildSourceNoteOwnerGroupSummary(
+  group: StaticBuildSourceNoteOwnerGroupSummary,
+): CompactStaticBuildSourceNoteOwnerGroupSummary {
+  return {
+    key: group.key,
+    count: group.count,
   }
 }
 
@@ -384,8 +452,12 @@ export function compactStaticBuildSourceNoteSummary(
     hasMissingInput: summary.hasMissingInput,
     hasProcessOnly: summary.hasProcessOnly,
     hasResearchOnly: summary.hasResearchOnly,
-    statusGroups: summary.statusGroups,
-    ownerGroups: summary.ownerGroups,
+    statusGroups: summary.statusGroups.map((group) =>
+      compactStaticBuildSourceNoteGroupSummary(group),
+    ),
+    ownerGroups: summary.ownerGroups.map((group) =>
+      compactStaticBuildSourceNoteOwnerGroupSummary(group),
+    ),
   }
 }
 
