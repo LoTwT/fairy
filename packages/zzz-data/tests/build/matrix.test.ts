@@ -116,6 +116,10 @@ describe("static build skill matrix", () => {
       hasAssumptions: (normalGroup?.assumptions.length ?? 0) > 0,
       hasUnsupportedEffects: (normalGroup?.unsupportedEffects.length ?? 0) > 0,
     })
+    expect(normalGroup?.assumptionSummary).toEqual({
+      count: normalGroup?.assumptions.length,
+      hasAssumptions: (normalGroup?.assumptions.length ?? 0) > 0,
+    })
     expect(normalGroup?.assumptions).toEqual([
       ...new Set(
         result.rows

@@ -575,6 +575,23 @@ function summarizeSkillMatrix(rows: StaticBuildSkillMatrixRow[]) {
     }, new Map<string, StaticBuildSkillMatrixRow[]>()),
   ).map(([group, groupRows]) => ({
     ...(() => {
+      const assumptions = [
+        ...new Set(groupRows.flatMap((row) => row.assumptions)),
+      ]
+      const unsupportedEffects = [
+        ...new Set(groupRows.flatMap((row) => row.unsupportedEffects)),
+      ]
+      return {
+        assumptionSummary: summarizeAssumptions(assumptions),
+        caveatSummary: summarizeSkillMatrixCaveats(
+          assumptions,
+          unsupportedEffects,
+        ),
+        assumptions,
+        unsupportedEffects,
+      }
+    })(),
+    ...(() => {
       const { commonBuckets, variableBuckets } = summarizeBuckets(groupRows)
       const { commonFormulaMultipliers, variableFormulaMultipliers } =
         summarizeFormulaMultipliers(groupRows)
@@ -589,20 +606,12 @@ function summarizeSkillMatrix(rows: StaticBuildSkillMatrixRow[]) {
     label: group,
     count: groupRows.length,
     effectSummary: summarizeSkillMatrixEffects(groupRows),
-    caveatSummary: summarizeSkillMatrixCaveats(
-      [...new Set(groupRows.flatMap((row) => row.assumptions))],
-      [...new Set(groupRows.flatMap((row) => row.unsupportedEffects))],
-    ),
     diagnosticSummary: summarizeDiagnosticEntries(
       groupRows.flatMap((row) => row.diagnostics),
     ),
     sourceNoteSummary: summarizeSourceNoteEntries(
       groupRows.flatMap((row) => row.sourceNotes),
     ),
-    assumptions: [...new Set(groupRows.flatMap((row) => row.assumptions))],
-    unsupportedEffects: [
-      ...new Set(groupRows.flatMap((row) => row.unsupportedEffects)),
-    ],
   }))
 
   if (!first) {

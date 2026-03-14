@@ -3959,3 +3959,35 @@ Batch B（已完成）：
 1. 不改变既有顶层 `matrix.assumptionSummary`
 2. 不提前把 `assumptionSummary` 下沉到 `matrix.summary.groups[*] / row`
 3. 不改变 diagnostics / source notes / effect summaries 的既有 contract
+
+## 93. V90 skill-matrix group assumption summary
+
+`V89` 收口后，`skill-matrix summary` 已具备：
+
+- 顶层 `matrix.summary.assumptionSummary`
+- 顶层 `matrix.summary.effectSummary`
+- 顶层 `matrix.summary.caveatSummary`
+- 组级 `matrix.summary.groups[*].assumptions`
+
+但如果上层按 `group` 拆 section，仍然要额外自己统计：
+
+- `matrix.summary.groups[*].assumptions.length`
+
+### 93.1 当前状态
+
+- `V90.1` 已完成：冻结到 skill-matrix group assumption summary
+- `V90.2` 已完成：`StaticBuildSkillMatrixGroupSummary` 已新增稳定 `assumptionSummary`
+- `V90.3` 已完成：高层 tool 断言与 agent prompt 已对齐 `matrix.summary.groups[*].assumptionSummary`
+- `V90.4` 已完成：相关 specs、roadmap、索引、架构文档与 README 已同步
+
+### 93.2 目标
+
+1. 为 `matrix.summary.groups[*]` 增加稳定 `assumptionSummary`
+2. 保持与既有 `matrix.summary.groups[*].assumptions` 一致
+3. 不改变既有 `matrix.summary.groups[*].caveatSummary`
+
+### 93.3 Out of Scope
+
+1. 不改变既有 `matrix.summary.groups[*].assumptions`
+2. 不提前把 `assumptionSummary` 下沉到 `rows[*]`
+3. 不改变 diagnostics / source notes / effect summaries 的既有 contract
