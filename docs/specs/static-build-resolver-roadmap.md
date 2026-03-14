@@ -7552,6 +7552,41 @@ caveatSummary` 这些兼容字段补齐。
 - `V192.3` 已完成：现有测试与 runtime 校验已覆盖
 - `V192.4` 已完成：roadmap、索引与架构文档已同步
 
+## 196. V193 explicit compact trigger row metadata sources
+
+`V192` 收口后，compact `trigger-matrix row.metadata` 中仍直接复用 raw metadata enum/source shape 的稳定缺口是：
+
+1. `entryKind`
+2. `templateSource`
+3. `damageType`
+4. `sourceType`
+5. `sourceViewResolutionMode`
+
+`V193` 只解决这一件事：
+
+1. 把 compact `trigger-matrix row.metadata` 改为显式 compact metadata contract
+
+### 196.1 分阶段
+
+1. `V193.1` scope freeze
+2. `V193.2` runtime/type contract alignment
+3. `V193.3` tests / prompt alignment
+4. `V193.4` docs closeout
+
+### 196.2 非目标
+
+1. 不改变 row 值
+2. 不改变 `summary / damage / build`
+3. 不改变 `includeDetails` 语义
+4. 不改变 skill-matrix row metadata contract
+
+### 196.3 当前状态
+
+- `V193.1` 已完成：冻结到 explicit compact trigger row metadata sources
+- `V193.2` 已完成：compact `trigger-matrix row.metadata` 已改为显式 compact metadata contract
+- `V193.3` 已完成：现有测试与 runtime 校验已覆盖
+- `V193.4` 已完成：roadmap、索引与架构文档已同步
+
 ## 174. V171 explicit compact top-level summary effect summaries
 
 `V170` 收口后，compact contract 中下一批仍直接复用 raw effect summary item type 的显式缺口主要集中在 top-level `summary`：

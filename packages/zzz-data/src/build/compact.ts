@@ -92,6 +92,14 @@ export type CompactStaticBuildSourceDamageViewResolutionMode =
   | "standalone"
   | "delta"
 
+export type CompactStaticBuildTriggerMatrixEntryKind =
+  | "main-formula"
+  | "source-view"
+
+export type CompactStaticBuildTriggerMatrixTemplateSource =
+  | "main-formula"
+  | "source-view"
+
 export interface CompactStaticBuildResult {
   profile: CompactStaticBuildProfile
   mode: CompactStaticBuildMode
@@ -1290,14 +1298,17 @@ export interface CompactStaticBuildTriggerMatrixGroupSummary {
 export interface CompactStaticBuildTriggerMatrixRowMeta {
   canonicalLabel: string
   stableKey: string
-  entryKind: StaticBuildTriggerMatrixRowMeta["entryKind"]
-  templateSource: StaticBuildTriggerMatrixRowMeta["templateSource"]
-  damageType: StaticBuildTriggerMatrixRowMeta["damageType"]
-  sourceType?: StaticBuildTriggerMatrixRowMeta["sourceType"]
+  entryKind: CompactStaticBuildTriggerMatrixEntryKind
+  templateSource: CompactStaticBuildTriggerMatrixTemplateSource
+  damageType: Extract<
+    CompactStaticBuildSourceDamageType,
+    "anomaly" | "disorder"
+  >
+  sourceType?: CompactStaticBuildSourceType
   sourceId?: string
   sourceStableKey?: string
   sourceViewId?: string
-  sourceViewResolutionMode?: StaticBuildTriggerMatrixRowMeta["sourceViewResolutionMode"]
+  sourceViewResolutionMode?: CompactStaticBuildSourceDamageViewResolutionMode
 }
 
 export interface CompactStaticBuildTriggerMatrixSummary {
