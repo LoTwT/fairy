@@ -100,7 +100,7 @@ export interface CompactStaticBuildSkillMatrixResult {
   diagnosticSummary: ResolveStaticBuildSkillMatrixResult["diagnosticSummary"]
   sourceNoteSummary: ResolveStaticBuildSkillMatrixResult["sourceNoteSummary"]
   assumptions?: string[]
-  unsupportedEffects: string[]
+  unsupportedEffects?: string[]
   rows: StaticBuildCompactSkillMatrixRow[]
 }
 
@@ -285,10 +285,10 @@ export function compactStaticBuildSkillMatrixResult(
     caveatSummary: matrix.caveatSummary,
     diagnosticSummary: matrix.diagnosticSummary,
     sourceNoteSummary: matrix.sourceNoteSummary,
-    unsupportedEffects: matrix.unsupportedEffects,
     ...(includeDetails
       ? {
           assumptions: matrix.assumptions,
+          unsupportedEffects: matrix.unsupportedEffects,
         }
       : {}),
     rows: matrix.rows.map((row) =>

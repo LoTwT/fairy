@@ -108,19 +108,12 @@ describe("resolveBuildSkillMatrix tool", () => {
     expect((result as any).matrix.summary.assumptionSummary).toEqual(
       (result as any).matrix.assumptionSummary,
     )
-    expect((result as any).matrix.unsupportedEffects).toEqual([
-      ...new Set(
-        (result as any).matrix.rows.flatMap(
-          (row: any) => row.unsupportedEffects ?? [],
-        ),
-      ),
-    ])
+    expect((result as any).matrix.unsupportedEffects).toBeUndefined()
     expect((result as any).matrix.caveatSummary).toEqual({
       assumptionCount: (result as any).matrix.assumptionSummary.count,
-      unsupportedEffectCount: (result as any).matrix.unsupportedEffects.length,
+      unsupportedEffectCount: expect.any(Number),
       hasAssumptions: (result as any).matrix.assumptionSummary.hasAssumptions,
-      hasUnsupportedEffects:
-        (result as any).matrix.unsupportedEffects.length > 0,
+      hasUnsupportedEffects: expect.any(Boolean),
     })
     expect((result as any).matrix.summary.caveatSummary).toEqual(
       (result as any).matrix.caveatSummary,
@@ -211,6 +204,7 @@ describe("resolveBuildSkillMatrix tool", () => {
     expect((result as any).matrix.summary.rowCount).toBe(22)
     expect((result as any).matrix.summary.baseDamageStat).toBe("sheerForce")
     expect((result as any).matrix.assumptions).toBeInstanceOf(Array)
+    expect((result as any).matrix.unsupportedEffects).toBeInstanceOf(Array)
     expect((result as any).matrix.diagnosticSummary.count).toBe(
       (result as any).matrix.rows.flatMap((row: any) => row.diagnostics).length,
     )

@@ -96,6 +96,7 @@ describe("static build compact helpers", () => {
       compact.requirementSummary,
     )
     expect(compact.assumptions).toBeUndefined()
+    expect(compact.unsupportedEffects).toBeUndefined()
     expect(compact.rows[0]?.build).toBeUndefined()
     expect(compact.rows[0]?.assumptions).toBeUndefined()
     expect(compact.rows[0]?.unsupportedEffects).toBeUndefined()
@@ -138,6 +139,7 @@ describe("static build compact helpers", () => {
     const compact = compactStaticBuildSkillMatrixResult(matrix, true)
 
     expect(compact.assumptions).toEqual(matrix.assumptions)
+    expect(compact.unsupportedEffects).toEqual(matrix.unsupportedEffects)
     expect(compact.rows[0]?.assumptions).toEqual(matrix.rows[0]?.assumptions)
     expect(compact.rows[0]?.unsupportedEffects).toEqual(
       matrix.rows[0]?.unsupportedEffects,
