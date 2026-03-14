@@ -78,6 +78,9 @@ describe("resolveBuildSkillMatrix tool", () => {
     expect(globalEffect?.totalRowCount).toBe(21)
     expect((result as any).matrix.summary.rowCount).toBe(21)
     expect((result as any).matrix.summary.baseDamageStat).toBe("attack")
+    expect((result as any).matrix.summary.effectSummary).toEqual(
+      (result as any).matrix.effectSummary,
+    )
     expect((result as any).matrix.unsupportedEffects).toEqual([
       ...new Set(
         (result as any).matrix.rows.flatMap(

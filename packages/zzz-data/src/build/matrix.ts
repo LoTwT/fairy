@@ -623,6 +623,7 @@ function summarizeSkillMatrix(rows: StaticBuildSkillMatrixRow[]) {
     variableBuckets,
     commonFormulaMultipliers,
     variableFormulaMultipliers,
+    effectSummary: summarizeSkillMatrixEffects(rows),
     caveatSummary: summarizeSkillMatrixCaveats(assumptions, unsupportedEffects),
     diagnosticSummary: summarizeDiagnosticEntries(
       rows.flatMap((row) => row.diagnostics),
