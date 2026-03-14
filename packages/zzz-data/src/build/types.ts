@@ -842,6 +842,7 @@ export interface StaticBuildTriggerMatrixGroupSummary {
   requirementSummary: StaticBuildSourceDamageViewRequirementSummary
   diagnosticSummary: StaticBuildDiagnosticSummary
   sourceNoteSummary: StaticBuildSourceNoteSummary
+  assumptionSummary: StaticBuildAssumptionSummary
 }
 
 export interface StaticBuildTriggerMatrixSummary {

@@ -48,6 +48,12 @@ describe("static build trigger matrix", () => {
         },
       },
     })
+    const mainFormulaAssumptionCount = result.rows
+      .filter((row) => row.metadata.entryKind === "main-formula")
+      .flatMap((row) => row.assumptions).length
+    const sourceViewAssumptionCount = result.rows
+      .filter((row) => row.metadata.entryKind === "source-view")
+      .flatMap((row) => row.assumptions).length
     expect(result.rows[0]?.summary?.expectedTotal).toBeCloseTo(
       result.rows[0]?.damage?.expected ?? 0,
       6,
@@ -117,6 +123,10 @@ describe("static build trigger matrix", () => {
           count: 1,
           supportedCount: 1,
           unsupportedCount: 0,
+          assumptionSummary: {
+            count: mainFormulaAssumptionCount,
+            hasAssumptions: mainFormulaAssumptionCount > 0,
+          },
           requirementSummary: {
             count: 0,
             satisfiedCount: 0,
@@ -158,6 +168,10 @@ describe("static build trigger matrix", () => {
           count: 1,
           supportedCount: 1,
           unsupportedCount: 0,
+          assumptionSummary: {
+            count: sourceViewAssumptionCount,
+            hasAssumptions: sourceViewAssumptionCount > 0,
+          },
           requirementSummary: {
             count: 2,
             satisfiedCount: 2,

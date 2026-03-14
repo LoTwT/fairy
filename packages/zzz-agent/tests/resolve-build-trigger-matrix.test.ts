@@ -34,6 +34,12 @@ describe("resolveBuildTriggerMatrix tool", () => {
         },
       },
     })
+    const mainFormulaAssumptionCount = (result as any).matrix.rows
+      .filter((row: any) => row.metadata.entryKind === "main-formula")
+      .flatMap((row: any) => row.assumptions).length
+    const sourceViewAssumptionCount = (result as any).matrix.rows
+      .filter((row: any) => row.metadata.entryKind === "source-view")
+      .flatMap((row: any) => row.assumptions).length
 
     expect((result as any).found).toBe(true)
     expect((result as any).matrix.rows).toHaveLength(2)
@@ -100,6 +106,10 @@ describe("resolveBuildTriggerMatrix tool", () => {
           count: 1,
           supportedCount: 1,
           unsupportedCount: 0,
+          assumptionSummary: {
+            count: mainFormulaAssumptionCount,
+            hasAssumptions: mainFormulaAssumptionCount > 0,
+          },
           requirementSummary: {
             count: 0,
             satisfiedCount: 0,
@@ -141,6 +151,10 @@ describe("resolveBuildTriggerMatrix tool", () => {
           count: 1,
           supportedCount: 1,
           unsupportedCount: 0,
+          assumptionSummary: {
+            count: sourceViewAssumptionCount,
+            hasAssumptions: sourceViewAssumptionCount > 0,
+          },
           requirementSummary: {
             count: 2,
             satisfiedCount: 2,

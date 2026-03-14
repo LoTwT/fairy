@@ -3618,3 +3618,32 @@ Batch B（已完成）：
 1. 不改变 entry 级 `assumptions` 的原始数组语义
 2. 不改变顶层 `views.assumptionSummary`
 3. 不提前引入 trigger-matrix group 的同名字段
+
+## 83. V80 trigger-matrix group assumption summary
+
+`V79` 收口后，standalone `source-utility-view groups` 已经具备局部 `assumptionSummary`。
+
+但 `trigger-entry matrix` 的 `summary.groups[*]` 仍缺少对应字段；上层按 `main-formula / source-view` 拆 section 时，还需要自己遍历组内 rows 统计 assumptions。
+
+`V80` 只解决一件事：
+
+- 为 `StaticBuildTriggerMatrixGroupSummary` 增加局部 `assumptionSummary`
+
+### 83.1 当前状态
+
+- `V80.1` 已完成：冻结到 trigger-matrix group assumption summary
+- `V80.2` 已完成：`StaticBuildTriggerMatrixGroupSummary` 已新增局部 `assumptionSummary`
+- `V80.3` 已完成：高层 tool 断言与 agent prompt 已对齐 `matrix.summary.groups[*].assumptionSummary`
+- `V80.4` 已完成：相关 specs、roadmap、索引、架构文档与 README 已同步
+
+### 83.2 目标
+
+1. 为 trigger-matrix groups 增加稳定 `assumptionSummary`
+2. 直接从当前 group rows 的 `assumptions` 派生计数与布尔位
+3. 对齐 `main-formula / source-view` 组级解释 contract
+
+### 83.3 Out of Scope
+
+1. 不改变 row 级 `assumptions` 的原始数组语义
+2. 不改变顶层 `matrix.assumptionSummary`
+3. 不提前引入 skill-matrix group 的同名字段

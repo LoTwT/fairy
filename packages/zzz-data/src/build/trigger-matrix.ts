@@ -183,6 +183,9 @@ function summarizeTriggerMatrixRows(
       sourceNoteSummary: summarizeSourceNoteEntries(
         groupRows.flatMap((row) => row.sourceNotes),
       ),
+      assumptionSummary: summarizeAssumptions(
+        groupRows.flatMap((row) => row.assumptions),
+      ),
     })
   }
 
