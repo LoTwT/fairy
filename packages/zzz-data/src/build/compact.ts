@@ -220,7 +220,7 @@ export interface StaticBuildCompactSourceUtilityViewEntry {
   effectSummary: StaticBuildSourceUtilityViewEntry["effectSummary"]
   caveatSummary: StaticBuildSourceUtilityViewEntry["caveatSummary"]
   assumptionSummary: StaticBuildSourceUtilityViewEntry["assumptionSummary"]
-  assumptions: string[]
+  assumptions?: string[]
 }
 
 export type StaticBuildCompactSourceEntry =
@@ -501,9 +501,9 @@ export function compactStaticBuildSourceUtilityViewEntry(
     effectSummary: entry.effectSummary,
     caveatSummary: entry.caveatSummary,
     assumptionSummary: entry.assumptionSummary,
-    assumptions: entry.assumptions,
     ...(includeDetails
       ? {
+          assumptions: entry.assumptions,
           requirements: entry.requirements,
           diagnostics: entry.diagnostics,
           sourceNotes: entry.sourceNotes,

@@ -5968,3 +5968,29 @@ caveatSummary` 这些兼容字段补齐。
 - `V142.2` 已完成：compact standalone source-damage-view entries 默认已不再携带 `assumptions`
 - `V142.3` 已完成：高层 `resolveBuildSourceDamageViews` 测试与 prompt 已对齐 `includeDetails=true`
 - `V142.4` 已完成：README、roadmap、索引与架构文档已同步
+
+## 146. V143 source-utility-view compact entry assumption gating
+
+### 146.1 背景
+
+`V139` 收口后，compact standalone `source-utility-view entries` 的 raw `entry.requirements` 已收紧到 `includeDetails=true`。
+
+但 compact standalone source-utility-view entries 仍默认携带原始 `entry.assumptions`，而 entry / group / top-level `assumptionSummary` 已经齐全。
+
+`V143` 只解决一件事：
+
+1. 把 compact standalone `source-utility-view entries` 的 `entry.assumptions` 也移动到 `includeDetails=true`
+
+### 146.2 范围
+
+1. `V143.1` scope freeze
+2. `V143.2` runtime/type contract alignment
+3. `V143.3` tool assertion / prompt alignment
+4. `V143.4` docs closeout
+
+### 146.3 当前状态
+
+- `V143.1` 已完成：冻结到 standalone source-utility-view compact entry assumption gating
+- `V143.2` 已完成：compact standalone source-utility-view entries 默认已不再携带 `assumptions`
+- `V143.3` 已完成：高层 `resolveBuildSourceUtilityViews` 测试与 prompt 已对齐 `includeDetails=true`
+- `V143.4` 已完成：README、roadmap、索引与架构文档已同步

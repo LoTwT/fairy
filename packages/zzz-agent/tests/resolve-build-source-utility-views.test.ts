@@ -255,11 +255,12 @@ describe("resolveBuildSourceUtilityViews tool", () => {
       },
     })
     expect((result as any).views.entries[0].requirements).toBeUndefined()
+    expect((result as any).views.entries[0].assumptions).toBeUndefined()
     expect((result as any).views.entries[0].diagnostics).toBeUndefined()
     expect((result as any).views.entries[0].sourceNotes).toBeUndefined()
   })
 
-  it("returns utility entry raw requirements and detail arrays only when includeDetails is true", async () => {
+  it("returns utility entry raw assumptions, requirements and detail arrays only when includeDetails is true", async () => {
     const result = await runTool(resolveBuildSourceUtilityViews, {
       agent: "猫又",
       wEngine: "「月相」-朔",
@@ -268,6 +269,9 @@ describe("resolveBuildSourceUtilityViews tool", () => {
     })
 
     expect((result as any).found).toBe(true)
+    expect(Array.isArray((result as any).views.entries[0].assumptions)).toBe(
+      true,
+    )
     expect(Array.isArray((result as any).views.entries[0].requirements)).toBe(
       true,
     )

@@ -786,6 +786,8 @@ utilityViews.entries[0].requirements
 utilityViews.entries[0].requirementSummary
 ```
 
+默认 compact source-utility-view entries 不再附带 `entry.assumptions / entry.requirements / entry.diagnostics / entry.sourceNotes`。只有确实需要逐条展开 raw assumptions、requirements、diagnostics / source notes 时，才使用 `includeDetails = true`。
+
 如果你是按组拆“按次触发 / 按速率”两个 section，也不要再先过滤 entries 再自己统计组内 requirement / diagnostics / source notes，直接读取：
 
 ```ts

@@ -30,7 +30,7 @@ export const resolveBuildSourceUtilityViews = createTool({
       .optional()
       .default(false)
       .describe(
-        "是否返回 utility entry 的原始明细。默认 false，只保留 entry.requirementSummary / entry.*Summary 等紧凑字段；true 时会额外返回 entry.requirements / entry.diagnostics / entry.sourceNotes。",
+        "是否返回 utility entry 的原始明细。默认 false，只保留 entry.requirementSummary / entry.assumptionSummary / entry.*Summary 等紧凑字段；true 时会额外返回 entry.assumptions / entry.requirements / entry.diagnostics / entry.sourceNotes。",
       ),
   }),
   execute: async (input) => {
