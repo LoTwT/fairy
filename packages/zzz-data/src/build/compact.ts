@@ -512,7 +512,7 @@ export interface StaticBuildCompactSkillMatrixRow {
   caveatSummary: CompactStaticBuildCaveatSummary
   assumptions?: string[]
   unsupportedEffects?: string[]
-  build?: ResolveStaticBuildResult
+  build?: CompactStaticBuildResult
 }
 
 export interface CompactStaticBuildSkillMatrixResult {
@@ -1241,7 +1241,7 @@ export interface StaticBuildCompactTriggerMatrixRow {
   assumptions?: string[]
   damage?: CompactStaticBuildEntryDamageSummary
   summary?: CompactStaticBuildResolveSummary
-  build?: ResolveStaticBuildResult
+  build?: CompactStaticBuildResult
 }
 
 export interface CompactStaticBuildTriggerMatrixGroupSummary {
@@ -1324,7 +1324,7 @@ export interface StaticBuildCompactSourceDamageViewEntry {
   assumptions?: string[]
   damage?: CompactStaticBuildEntryDamageSummary
   summary?: CompactStaticBuildResolveSummary
-  build?: ResolveStaticBuildResult
+  build?: CompactStaticBuildResult
 }
 
 export interface CompactStaticBuildSourceDamageViewGroupSummary {
@@ -1669,7 +1669,9 @@ export function compactStaticBuildSkillMatrixRow(
           sourceNotes: row.sourceNotes?.map((entry) =>
             compactStaticBuildSourceNoteEntry(entry),
           ),
-          build: row.build,
+          ...(row.build
+            ? { build: compactStaticBuildResult(row.build, true) }
+            : {}),
         }
       : {}),
   }
@@ -1836,7 +1838,9 @@ export function compactStaticBuildTriggerMatrixRow(
           sourceNotes: row.sourceNotes?.map((entry) =>
             compactStaticBuildSourceNoteEntry(entry),
           ),
-          ...(row.build ? { build: row.build } : {}),
+          ...(row.build
+            ? { build: compactStaticBuildResult(row.build, true) }
+            : {}),
         }
       : {}),
   }
@@ -2104,7 +2108,9 @@ export function compactStaticBuildSourceDamageViewEntry(
           sourceNotes: entry.sourceNotes?.map((item) =>
             compactStaticBuildSourceNoteEntry(item),
           ),
-          ...(entry.build ? { build: entry.build } : {}),
+          ...(entry.build
+            ? { build: compactStaticBuildResult(entry.build, true) }
+            : {}),
         }
       : {}),
   }

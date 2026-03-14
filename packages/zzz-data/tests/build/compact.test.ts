@@ -166,7 +166,11 @@ describe("static build compact helpers", () => {
     )
     expect(compact.rows[0]?.diagnostics).toEqual(matrix.rows[0]?.diagnostics)
     expect(compact.rows[0]?.sourceNotes).toEqual(matrix.rows[0]?.sourceNotes)
-    expect(compact.rows[0]?.build).toEqual(matrix.rows[0]?.build)
+    expect(compact.rows[0]?.build).toEqual(
+      matrix.rows[0]?.build
+        ? compactStaticBuildResult(matrix.rows[0].build, true)
+        : undefined,
+    )
   })
 
   it("compacts trigger matrix rows without row details by default", () => {
@@ -261,7 +265,11 @@ describe("static build compact helpers", () => {
     expect(compact.rows[0]?.requirements).toEqual(matrix.rows[0]?.requirements)
     expect(compact.rows[0]?.diagnostics).toEqual(matrix.rows[0]?.diagnostics)
     expect(compact.rows[0]?.sourceNotes).toEqual(matrix.rows[0]?.sourceNotes)
-    expect(compact.rows[0]?.build).toBeTruthy()
+    expect(compact.rows[0]?.build).toEqual(
+      matrix.rows[0]?.build
+        ? compactStaticBuildResult(matrix.rows[0].build, true)
+        : undefined,
+    )
     expect(compact.rows[1]?.metadata.entryKind).toBe("source-view")
     expect(compact.rows[0]?.diagnosticSummary).toEqual({
       count: 2,
@@ -457,7 +465,11 @@ describe("static build compact helpers", () => {
     expect(compact.entries[0]?.sourceNotes).toEqual(
       views.entries[0]?.sourceNotes,
     )
-    expect(compact.entries[0]?.build).toEqual(views.entries[0]?.build)
+    expect(compact.entries[0]?.build).toEqual(
+      views.entries[0]?.build
+        ? compactStaticBuildResult(views.entries[0].build, true)
+        : undefined,
+    )
   })
 
   it("compacts source-entry collections for mixed damage and utility entries", () => {
