@@ -1228,7 +1228,7 @@ export interface StaticBuildCompactTriggerMatrixRow {
   id: string
   label: string
   supported: boolean
-  metadata: StaticBuildTriggerMatrixRowMeta
+  metadata: CompactStaticBuildTriggerMatrixRowMeta
   effectSummary: CompactStaticBuildTriggerMatrixEffectSummaryItem[]
   requirements?: CompactStaticBuildSourceDamageViewRequirement[]
   requirementSummary: CompactStaticBuildSourceDamageViewRequirementSummary
@@ -1256,6 +1256,19 @@ export interface CompactStaticBuildTriggerMatrixGroupSummary {
   diagnosticSummary: CompactStaticBuildDiagnosticSummary
   sourceNoteSummary: CompactStaticBuildSourceNoteSummary
   assumptionSummary: CompactStaticBuildAssumptionSummary
+}
+
+export interface CompactStaticBuildTriggerMatrixRowMeta {
+  canonicalLabel: string
+  stableKey: string
+  entryKind: StaticBuildTriggerMatrixRowMeta["entryKind"]
+  templateSource: StaticBuildTriggerMatrixRowMeta["templateSource"]
+  damageType: StaticBuildTriggerMatrixRowMeta["damageType"]
+  sourceType?: StaticBuildTriggerMatrixRowMeta["sourceType"]
+  sourceId?: string
+  sourceStableKey?: string
+  sourceViewId?: string
+  sourceViewResolutionMode?: StaticBuildTriggerMatrixRowMeta["sourceViewResolutionMode"]
 }
 
 export interface CompactStaticBuildTriggerMatrixSummary {
@@ -1780,7 +1793,7 @@ export function compactStaticBuildTriggerMatrixRow(
     id: row.id,
     label: row.label,
     supported: row.supported,
-    metadata: row.metadata,
+    metadata: compactStaticBuildTriggerMatrixRowMeta(row.metadata),
     effectSummary: row.effectSummary.map((item) =>
       compactStaticBuildAppliedRowEffectSummaryItem(item),
     ),
@@ -1818,6 +1831,23 @@ export function compactStaticBuildTriggerMatrixRow(
           ...(row.build ? { build: row.build } : {}),
         }
       : {}),
+  }
+}
+
+export function compactStaticBuildTriggerMatrixRowMeta(
+  metadata: StaticBuildTriggerMatrixRowMeta,
+): CompactStaticBuildTriggerMatrixRowMeta {
+  return {
+    canonicalLabel: metadata.canonicalLabel,
+    stableKey: metadata.stableKey,
+    entryKind: metadata.entryKind,
+    templateSource: metadata.templateSource,
+    damageType: metadata.damageType,
+    sourceType: metadata.sourceType,
+    sourceId: metadata.sourceId,
+    sourceStableKey: metadata.sourceStableKey,
+    sourceViewId: metadata.sourceViewId,
+    sourceViewResolutionMode: metadata.sourceViewResolutionMode,
   }
 }
 
