@@ -4996,6 +4996,54 @@ source-note 兼容字段补齐。
 3. 不改变 `entry.requirementSummary` 的语义
 4. 不新增新的 aggregate 类型
 
+## 119. V116 trigger-matrix top-level effect summary alignment
+
+`V115` 收口后，standalone source views、mixed source-entry collection 与
+trigger-entry matrix 顶层已经把
+`requirementSummary / diagnosticSummary / sourceNoteSummary / assumptionSummary /
+caveatSummary` 这些兼容字段补齐。
+
+但 `trigger-entry matrix` 仍缺少与 `skill-matrix` 对称的结构化效果聚合：
+
+1. `matrix.summary.effectSummary` 不存在
+2. `matrix.effectSummary` 不存在
+
+### 119.1 目标
+
+1. 给 `trigger-entry matrix` 的 `summary` 补齐稳定 `effectSummary`
+2. 给 `trigger-entry matrix` 顶层补齐稳定 `effectSummary`
+3. 保持现有 `rows[*].build.trace` 与 `rows[*].summary` 原语义不变
+
+### 119.2 范围
+
+1. `V116.1` scope freeze
+2. `V116.2` runtime contract alignment
+3. `V116.3` compact / tool assertion alignment
+4. `V116.4` prompt / README / docs closeout
+
+### 119.3 当前状态
+
+- `V116.1` 已完成：冻结到 trigger-matrix top-level effect summary alignment
+- `V116.2` 已完成：底层 result 与 `summary` 已补齐 `effectSummary`
+- `V116.3` 已完成：compact trigger matrix 与高层 tool 断言已对齐顶层 `matrix.effectSummary`
+- `V116.4` 已完成：相关 specs、roadmap、索引、架构文档与 README 已同步
+
+### 119.4 当前边界
+
+本阶段只做：
+
+1. 在 `StaticBuildTriggerMatrixSummary` 新增稳定 `effectSummary`
+2. 在 `ResolveStaticBuildTriggerMatrixResult` 顶层新增稳定 `effectSummary`
+3. 让 compact trigger matrix 透传该字段
+4. 明确上层优先读取 `matrix.summary.effectSummary`，兼容读取 `matrix.effectSummary`
+
+显式不做：
+
+1. 不改变 `rows[*].build.trace` 的语义
+2. 不改变 `rows[*].summary` 的语义
+3. 不提前扩到 `summary.groups[*].effectSummary`
+4. 不提前扩到 `rows[*].effectSummary`
+
 ### 103.2 目标
 
 1. 为 `rows[*]` 增加稳定 `caveatSummary`

@@ -55,6 +55,9 @@ describe("resolveBuildTriggerMatrix tool", () => {
       hasAssumptions: (result as any).matrix.assumptions.length > 0,
       hasUnsupported: false,
     })
+    expect((result as any).matrix.effectSummary).toEqual(
+      (result as any).matrix.summary.effectSummary,
+    )
     expect((result as any).matrix.requirementSummary).toEqual(
       (result as any).matrix.summary.requirementSummary,
     )
@@ -68,6 +71,21 @@ describe("resolveBuildTriggerMatrix tool", () => {
       count: (result as any).matrix.assumptions.length,
       hasAssumptions: (result as any).matrix.assumptions.length > 0,
     })
+    expect((result as any).matrix.summary.effectSummary).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          effectId: "alice-state-polarity-assault-ratio",
+          sourceName: "爱丽丝",
+          label: "状态快照：[极性强击] 结算倍率",
+          bucket: "技能倍率",
+          value: "+150%",
+          appliedRowCount: 2,
+          totalRowCount: 2,
+          appliesToAllRows: true,
+          condition: "当前矩阵全部生效",
+        }),
+      ]),
+    )
     expect((result as any).matrix.summary).toMatchObject({
       rowCount: 2,
       mainFormulaCount: 1,

@@ -898,12 +898,25 @@ export interface StaticBuildTriggerMatrixSummary {
   supportedCount: number
   unsupportedCount: number
   hasSourceViews: boolean
+  effectSummary: StaticBuildTriggerMatrixEffectSummaryItem[]
   requirementSummary: StaticBuildSourceDamageViewRequirementSummary
   caveatSummary: StaticBuildEntryCaveatSummary
   diagnosticSummary: StaticBuildDiagnosticSummary
   sourceNoteSummary: StaticBuildSourceNoteSummary
   assumptionSummary: StaticBuildAssumptionSummary
   groups: StaticBuildTriggerMatrixGroupSummary[]
+}
+
+export interface StaticBuildTriggerMatrixEffectSummaryItem {
+  effectId: string
+  sourceName: string
+  label: string
+  bucket: string
+  value: string
+  appliedRowCount: number
+  totalRowCount: number
+  appliesToAllRows: boolean
+  condition: string
 }
 
 export type StaticBuildTriggerMatrixTemplateSource =
@@ -953,6 +966,7 @@ export interface ResolveStaticBuildTriggerMatrixResult {
   manualBaseMode?: StaticBuildBaseMode
   loadout: StaticBuildResolvedLoadout
   summary: StaticBuildTriggerMatrixSummary
+  effectSummary: StaticBuildTriggerMatrixEffectSummaryItem[]
   requirementSummary: StaticBuildSourceDamageViewRequirementSummary
   caveatSummary: StaticBuildEntryCaveatSummary
   diagnosticSummary: StaticBuildDiagnosticSummary

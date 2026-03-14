@@ -72,6 +72,7 @@ describe("static build trigger matrix", () => {
       hasAssumptions: result.assumptions.length > 0,
       hasUnsupported: false,
     })
+    expect(result.effectSummary).toEqual(result.summary.effectSummary)
     expect(result.requirementSummary).toEqual(result.summary.requirementSummary)
     expect(result.diagnosticSummary).toEqual(result.summary.diagnosticSummary)
     expect(result.sourceNoteSummary).toEqual(result.summary.sourceNoteSummary)
@@ -79,6 +80,21 @@ describe("static build trigger matrix", () => {
       count: result.assumptions.length,
       hasAssumptions: result.assumptions.length > 0,
     })
+    expect(result.summary.effectSummary).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          effectId: "alice-state-polarity-assault-ratio",
+          sourceName: "爱丽丝",
+          label: "状态快照：[极性强击] 结算倍率",
+          bucket: "技能倍率",
+          value: "+150%",
+          appliedRowCount: 2,
+          totalRowCount: 2,
+          appliesToAllRows: true,
+          condition: "当前矩阵全部生效",
+        }),
+      ]),
+    )
     expect(result.summary).toMatchObject({
       rowCount: 2,
       mainFormulaCount: 1,

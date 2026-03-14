@@ -3,6 +3,7 @@ import type {
   ResolveStaticBuildTriggerMatrixResult,
   StaticBuildEntryCaveatSummary,
   StaticBuildSourceDamageViewEntry,
+  StaticBuildTriggerMatrixEffectSummaryItem,
   StaticBuildTriggerMatrixEntryKind,
   StaticBuildTriggerMatrixRow,
   StaticBuildTriggerMatrixSummary,
@@ -19,6 +20,32 @@ import {
   summarizeSourceDamageViewRequirements,
   supportedStaticBuildSourceViewAgents,
 } from "./views.js"
+
+const triggerMatrixBucketLabels = {
+  attack: "攻击力",
+  hp: "生命值",
+  sheerForce: "贯穿力",
+  anomalyProficiency: "异常精通",
+  anomalyMastery: "异常掌控",
+  critRate: "暴击率",
+  critDamage: "暴击伤害",
+  bonusDamageSum: "增伤区",
+  skillMultiplierFactor: "技能倍率",
+  penetrationRate: "穿透率",
+  penetrationValue: "穿透值",
+  resistanceReduction: "减抗",
+  ignoreResistance: "无视抗性",
+  defenseReduction: "减防",
+  vulnerabilityBonus: "易伤",
+  damageReduction: "减伤",
+  stunVulnerability: "失衡易伤",
+  nonStunVulnerability: "非失衡易伤",
+  sheerBonusSum: "贯穿增伤",
+  anomalyBonusDamageSum: "异常增伤",
+  anomalyCritRate: "异常暴击率",
+  anomalyCritDamage: "异常暴击伤害",
+  energyGenerationRate: "能量自动回复",
+} as const
 
 export const supportedStaticBuildTriggerMatrixAgents =
   supportedStaticBuildSourceViewAgents
@@ -93,6 +120,7 @@ export function resolveStaticBuildTriggerMatrix(
     manualBaseMode: build.manualBaseMode,
     loadout: build.loadout,
     summary,
+    effectSummary: summary.effectSummary,
     requirementSummary: summary.requirementSummary,
     caveatSummary: summarizeTriggerMatrixCaveats(rows, assumptions),
     diagnosticSummary: summary.diagnosticSummary,
@@ -212,6 +240,7 @@ function summarizeTriggerMatrixRows(
     supportedCount,
     unsupportedCount,
     hasSourceViews: sourceViewRows.length > 0,
+    effectSummary: summarizeTriggerMatrixEffects(rows),
     requirementSummary: summarizeSourceDamageViewRequirements(
       rows.flatMap((row) => row.requirements),
     ),
@@ -221,6 +250,118 @@ function summarizeTriggerMatrixRows(
     assumptionSummary: summarizeAssumptions(assumptions),
     groups,
   }
+}
+
+function summarizeTriggerMatrixEffects(
+  rows: StaticBuildTriggerMatrixRow[],
+): StaticBuildTriggerMatrixEffectSummaryItem[] {
+  const summary = new Map<
+    string,
+    {
+      effectId: string
+      sourceName: string
+      label: string
+      bucketTexts: Set<string>
+      valueTexts: Set<string>
+      rows: Set<string>
+    }
+  >()
+
+  for (const row of rows) {
+    if (!row.build) continue
+    for (const trace of row.build.trace) {
+      if (trace.status !== "applied" || !trace.modifiers?.length) continue
+
+      let item = summary.get(trace.effectId)
+      if (!item) {
+        item = {
+          effectId: trace.effectId,
+          sourceName: trace.sourceName,
+          label: trace.label,
+          bucketTexts: new Set<string>(),
+          valueTexts: new Set<string>(),
+          rows: new Set<string>(),
+        }
+        summary.set(trace.effectId, item)
+      }
+
+      item.rows.add(row.id)
+      for (const modifier of trace.modifiers) {
+        item.bucketTexts.add(
+          triggerMatrixBucketLabels[
+            modifier.bucket as keyof typeof triggerMatrixBucketLabels
+          ] ?? modifier.bucket,
+        )
+        item.valueTexts.add(
+          formatTriggerMatrixModifier(
+            modifier.bucket,
+            modifier.value,
+            modifier.combine,
+          ),
+        )
+      }
+    }
+  }
+
+  return [...summary.values()].map((item) => {
+    const appliedRowCount = item.rows.size
+    const totalRowCount = rows.length
+    const appliesToAllRows = appliedRowCount === totalRowCount
+    return {
+      effectId: item.effectId,
+      sourceName: item.sourceName,
+      label: item.label,
+      bucket: [...item.bucketTexts].join(" + "),
+      value: [...item.valueTexts].join("；"),
+      appliedRowCount,
+      totalRowCount,
+      appliesToAllRows,
+      condition: appliesToAllRows
+        ? "当前矩阵全部生效"
+        : `部分条目生效（${appliedRowCount}/${totalRowCount}）`,
+    }
+  })
+}
+
+function formatTriggerMatrixModifier(
+  bucket: string,
+  value: number,
+  combine: string,
+) {
+  if (combine === "replace") {
+    return `设为 ${formatTriggerMatrixValue(bucket, value)}`
+  }
+
+  return `${value >= 0 ? "+" : ""}${formatTriggerMatrixValue(bucket, value)}`
+}
+
+function formatTriggerMatrixValue(bucket: string, value: number) {
+  if (
+    bucket === "critRate" ||
+    bucket === "critDamage" ||
+    bucket === "bonusDamageSum" ||
+    bucket === "skillMultiplierFactor" ||
+    bucket === "penetrationRate" ||
+    bucket === "resistanceReduction" ||
+    bucket === "ignoreResistance" ||
+    bucket === "vulnerabilityBonus" ||
+    bucket === "damageReduction" ||
+    bucket === "stunVulnerability" ||
+    bucket === "nonStunVulnerability" ||
+    bucket === "sheerBonusSum" ||
+    bucket === "anomalyBonusDamageSum" ||
+    bucket === "anomalyCritRate" ||
+    bucket === "anomalyCritDamage" ||
+    bucket === "energyGenerationRate"
+  ) {
+    return `${formatNumber(value * 100)}%`
+  }
+
+  return formatNumber(value)
+}
+
+function formatNumber(value: number) {
+  return Number.isInteger(value) ? value.toString() : value.toFixed(2)
 }
 
 function summarizeTriggerMatrixCaveats(
