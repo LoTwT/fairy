@@ -115,6 +115,7 @@ it("keeps screenshot summary by default", async () => {
     true,
   )
   expect(base.includes("collection.summary.groups[*].caveatSummary")).toBe(true)
+  expect(base.includes("entry.summary")).toBe(true)
   expect(
     base.includes("collection.summary.sourceDamageRequirementSummary"),
   ).toBe(true)

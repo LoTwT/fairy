@@ -155,6 +155,18 @@ describe("resolveBuildSourceEntries tool", () => {
         entryKind: "source-utility-view",
         stableKey: "source-utility:lunar-noviluna-energy-refund",
       },
+      summary: {
+        value: 3,
+        unit: "energy",
+        resolutionMode: "trigger",
+        targetScope: "self",
+        requirementCount: 2,
+        hasUnsatisfiedRequirements: false,
+        diagnosticCount: 0,
+        sourceNoteCount: 0,
+        assumptionCount: 1,
+        hasUnsupported: false,
+      },
       value: 3,
       unit: "energy",
     })
