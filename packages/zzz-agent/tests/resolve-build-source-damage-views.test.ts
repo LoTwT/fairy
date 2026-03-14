@@ -37,14 +37,15 @@ describe("resolveBuildSourceDamageViews tool", () => {
 
     expect((result as any).found).toBe(true)
     expect((result as any).views.entries).toHaveLength(1)
+    expect((result as any).views.assumptions).toBeUndefined()
     expect((result as any).views.assumptionSummary).toEqual({
-      count: (result as any).views.assumptions.length,
-      hasAssumptions: (result as any).views.assumptions.length > 0,
+      count: expect.any(Number),
+      hasAssumptions: expect.any(Boolean),
     })
     expect((result as any).views.caveatSummary).toEqual({
-      assumptionCount: (result as any).views.assumptions.length,
+      assumptionCount: (result as any).views.assumptionSummary.count,
       unsupportedCount: 0,
-      hasAssumptions: (result as any).views.assumptions.length > 0,
+      hasAssumptions: (result as any).views.assumptionSummary.hasAssumptions,
       hasUnsupported: false,
     })
     expect((result as any).views.effectSummary).toEqual(
@@ -139,14 +140,14 @@ describe("resolveBuildSourceDamageViews tool", () => {
       supportedCount: 1,
       unsupportedCount: 0,
       caveatSummary: {
-        assumptionCount: (result as any).views.assumptions.length,
+        assumptionCount: (result as any).views.assumptionSummary.count,
         unsupportedCount: 0,
-        hasAssumptions: (result as any).views.assumptions.length > 0,
+        hasAssumptions: (result as any).views.assumptionSummary.hasAssumptions,
         hasUnsupported: false,
       },
       assumptionSummary: {
-        count: (result as any).views.assumptions.length,
-        hasAssumptions: (result as any).views.assumptions.length > 0,
+        count: (result as any).views.assumptionSummary.count,
+        hasAssumptions: (result as any).views.assumptionSummary.hasAssumptions,
       },
       requirementSummary: {
         count: 2,
@@ -667,6 +668,7 @@ describe("resolveBuildSourceDamageViews tool", () => {
     })
 
     expect((result as any).found).toBe(true)
+    expect(Array.isArray((result as any).views.assumptions)).toBe(true)
     expect(Array.isArray((result as any).views.entries[0].assumptions)).toBe(
       true,
     )

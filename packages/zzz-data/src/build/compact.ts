@@ -252,7 +252,7 @@ export interface CompactStaticBuildSourceDamageViewsResult {
   diagnosticSummary: ResolveStaticBuildSourceDamageViewsResult["diagnosticSummary"]
   sourceNoteSummary: ResolveStaticBuildSourceDamageViewsResult["sourceNoteSummary"]
   assumptionSummary: ResolveStaticBuildSourceDamageViewsResult["assumptionSummary"]
-  assumptions: string[]
+  assumptions?: string[]
   entries: StaticBuildCompactSourceDamageViewEntry[]
 }
 
@@ -423,7 +423,11 @@ export function compactStaticBuildSourceDamageViewsResult(
     diagnosticSummary: views.diagnosticSummary,
     sourceNoteSummary: views.sourceNoteSummary,
     assumptionSummary: views.assumptionSummary,
-    assumptions: views.assumptions,
+    ...(includeDetails
+      ? {
+          assumptions: views.assumptions,
+        }
+      : {}),
     entries: views.entries.map((entry) =>
       compactStaticBuildSourceDamageViewEntry(entry, includeDetails),
     ),

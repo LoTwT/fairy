@@ -6230,3 +6230,33 @@ caveatSummary` 这些兼容字段补齐。
 - `V151.2` 已完成：默认 compact trigger-matrix 已不再携带顶层 `matrix.assumptions`
 - `V151.3` 已完成：高层 `resolveBuildTriggerMatrix` 测试与 prompt 已对齐 `includeDetails=true`
 - `V151.4` 已完成：README、roadmap、索引与架构文档已同步
+
+## 155. V152 source-damage-view compact top-level assumption gating
+
+`V151` 收口后，compact trigger-matrix 顶层的 raw `matrix.assumptions` 已收紧到 `includeDetails=true`。
+
+但 compact source-damage-view 顶层结果仍默认携带原始 `views.assumptions`，而 `views.summary.assumptionSummary / views.assumptionSummary / views.caveatSummary` 已经齐全。
+
+`V152` 只解决一件事：
+
+1. 把 compact source-damage-view 的顶层 `views.assumptions` 也移动到 `includeDetails=true`
+
+### 155.1 分阶段
+
+1. `V152.1` scope freeze
+2. `V152.2` runtime/type contract alignment
+3. `V152.3` tool assertion / prompt alignment
+4. `V152.4` docs closeout
+
+### 155.2 非目标
+
+1. 不改变 `views.caveatSummary`
+2. 不改变 `views.assumptionSummary`
+3. 不改变 `entry.assumptions / entry.requirements / entry.diagnostics / entry.sourceNotes / entry.build`
+
+### 155.3 当前状态
+
+- `V152.1` 已完成：冻结到 source-damage-view compact top-level assumption gating
+- `V152.2` 已完成：默认 compact source-damage-view 已不再携带顶层 `views.assumptions`
+- `V152.3` 已完成：高层 `resolveBuildSourceDamageViews` 测试与 prompt 已对齐 `includeDetails=true`
+- `V152.4` 已完成：README、roadmap、索引与架构文档已同步

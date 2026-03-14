@@ -369,6 +369,7 @@ describe("static build compact helpers", () => {
 
     const compact = compactStaticBuildSourceDamageViewsResult(views)
 
+    expect(compact.assumptions).toBeUndefined()
     expect(compact.entries[0]?.assumptions).toBeUndefined()
     expect(compact.entries[0]?.diagnostics).toBeUndefined()
     expect(compact.entries[0]?.sourceNotes).toBeUndefined()
@@ -412,6 +413,7 @@ describe("static build compact helpers", () => {
 
     const compact = compactStaticBuildSourceDamageViewsResult(views, true)
 
+    expect(compact.assumptions).toEqual(views.assumptions)
     expect(compact.entries[0]?.assumptions).toEqual(
       views.entries[0]?.assumptions,
     )
