@@ -55,6 +55,12 @@ describe("resolveBuildTriggerMatrix tool", () => {
       hasAssumptions: (result as any).matrix.assumptions.length > 0,
       hasUnsupported: false,
     })
+    expect((result as any).matrix.diagnosticSummary).toEqual(
+      (result as any).matrix.summary.diagnosticSummary,
+    )
+    expect((result as any).matrix.sourceNoteSummary).toEqual(
+      (result as any).matrix.summary.sourceNoteSummary,
+    )
     expect((result as any).matrix.assumptionSummary).toEqual({
       count: (result as any).matrix.assumptions.length,
       hasAssumptions: (result as any).matrix.assumptions.length > 0,

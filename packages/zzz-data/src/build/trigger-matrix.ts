@@ -85,14 +85,17 @@ export function resolveStaticBuildTriggerMatrix(
   ].toSorted(compareTriggerMatrixRows)
 
   const assumptions = [...new Set([...build.assumptions, ...views.assumptions])]
+  const summary = summarizeTriggerMatrixRows(rows, assumptions)
 
   return {
     profile: build.profile,
     mode: build.mode,
     manualBaseMode: build.manualBaseMode,
     loadout: build.loadout,
-    summary: summarizeTriggerMatrixRows(rows, assumptions),
+    summary,
     caveatSummary: summarizeTriggerMatrixCaveats(rows, assumptions),
+    diagnosticSummary: summary.diagnosticSummary,
+    sourceNoteSummary: summary.sourceNoteSummary,
     assumptionSummary: summarizeAssumptions(assumptions),
     rows,
     assumptions,

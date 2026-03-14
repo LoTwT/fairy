@@ -73,6 +73,8 @@ it("keeps screenshot summary by default", async () => {
   expect(base.includes("matrix.summary.groups")).toBe(true)
   expect(base.includes("matrix.summary.requirementSummary")).toBe(true)
   expect(base.includes("matrix.summary.caveatSummary")).toBe(true)
+  expect(base.includes("matrix.diagnosticSummary")).toBe(true)
+  expect(base.includes("matrix.sourceNoteSummary")).toBe(true)
   expect(base.includes("matrix.caveatSummary")).toBe(true)
   expect(base.includes("matrix.assumptionSummary")).toBe(true)
   expect(base.includes("matrix.summary.assumptionSummary")).toBe(true)

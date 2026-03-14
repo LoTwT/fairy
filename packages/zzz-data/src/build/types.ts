@@ -952,6 +952,8 @@ export interface ResolveStaticBuildTriggerMatrixResult {
   loadout: StaticBuildResolvedLoadout
   summary: StaticBuildTriggerMatrixSummary
   caveatSummary: StaticBuildEntryCaveatSummary
+  diagnosticSummary: StaticBuildDiagnosticSummary
+  sourceNoteSummary: StaticBuildSourceNoteSummary
   assumptionSummary: StaticBuildAssumptionSummary
   rows: StaticBuildTriggerMatrixRow[]
   assumptions: string[]
