@@ -774,6 +774,7 @@ collection.summary
 - `collection.summary.assumptionSummary` 与 `collection.assumptionSummary` 已直接给出整组 mixed collection 的 assumptions 计数；如果只想先判断当前 collection 是否带 assumptions，不要再手工统计 `collection.assumptions.length`
 - 如果 `collection.entries[*]` 中当前条目是 source-damage-view entry，也优先读取 `entry.summary` 获取 `expectedTotal / critTotal / nonCritTotal / isAnomalyLike / isDisorderLike`，不要只盯着 `entry.damage`
 - 如果 `collection.entries[*]` 中当前条目是 utility entry，也优先读取 `entry.summary` 获取数值 / 单位 / 目标 / 触发模式摘要，不要再散读 `value / unit / targetScope / resolutionMode`
+- 如果只想先判断某一条 mixed entry 是否带 unsatisfied requirements，也优先读取 `entry.requirementSummary`，不要再手工遍历 `entry.requirements`
 - 如果只想先判断某一条 mixed entry 是否带 diagnostics，也优先读取 `entry.diagnosticSummary`，不要再手工遍历 `entry.diagnostics`
 - 如果只想先判断某一条 mixed entry 是否带 source notes，也优先读取 `entry.sourceNoteSummary`，不要再手工遍历 `entry.sourceNotes`
 - 如果只想先判断某一条 mixed entry 是否带 assumptions，也优先读取 `entry.assumptionSummary`，不要再手工统计 `entry.assumptions.length`
@@ -797,6 +798,7 @@ collection.summary.groups[0].sourceNoteSummary
 collection.summary.groups[0].sourceDamageRequirementSummary
 collection.summary.groups[0].sourceUtilityRequirementSummary
 collection.entries[0].summary
+collection.entries[0].requirementSummary
 collection.entries[0].diagnosticSummary
 collection.entries[0].sourceNoteSummary
 collection.entries[0].assumptionSummary

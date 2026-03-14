@@ -4664,6 +4664,48 @@ Batch B（已完成）：
 2. 不改变 standalone source-damage-view / source-utility-view contract
 3. 不新增 source-entry collection 的新类型
 
+## 112. V109 source-entry mixed-entry requirement summary alignment
+
+`V108` 收口后，unified `source-entry collection` 已把 mixed entry 的 `sourceNoteSummary` 视为正式公共 contract。
+
+但同一条 mixed collection 路径里，`entry.requirementSummary` 虽然已经存在，当前仍缺：
+
+- source-entry collection 断言没有把 `entry.requirementSummary` 当成 mixed entry 的正式消费层
+- Agent prompt 还没明确要求在 mixed collection 路径优先读取 `entry.requirementSummary`
+- README 也还没把这层写成 source-entry collection 的公共 contract
+
+### 112.1 目标
+
+1. 把 mixed collection 中 entry-level `requirementSummary` 视为正式 contract
+2. 让 `resolveBuildSourceEntries` 与 standalone source views 在“逐条 requirement 摘要消费”上保持一致
+
+### 112.2 范围
+
+1. `V109.1` scope freeze
+2. `V109.2` source-entry tool assertion alignment
+3. `V109.3` prompt / README alignment
+4. `V109.4` docs closeout
+
+### 112.3 当前状态
+
+- `V109.1` 已完成：冻结到 source-entry mixed-entry requirementSummary alignment
+- `V109.2` 已完成：高层 source-entry tool 断言已对齐 mixed entry 的 `entry.requirementSummary`
+- `V109.3` 已完成：Agent prompt 与 README 已把 mixed collection 中 entry 的 `requirementSummary` 视为正式 contract
+- `V109.4` 已完成：相关 specs、roadmap、索引与架构文档已同步
+
+### 112.4 当前边界
+
+本阶段只做：
+
+1. 明确 mixed collection 中 entry-level `requirementSummary` 的消费方式
+2. 保持底层 `ResolveStaticBuildSourceEntriesResult` 不变
+
+显式不做：
+
+1. 不新增 collection-level aggregate
+2. 不改变 standalone source-damage-view / source-utility-view contract
+3. 不新增 source-entry collection 的新类型
+
 ### 103.2 目标
 
 1. 为 `rows[*]` 增加稳定 `caveatSummary`

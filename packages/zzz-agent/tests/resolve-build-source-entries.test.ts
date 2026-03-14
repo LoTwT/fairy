@@ -622,6 +622,26 @@ describe("resolveBuildSourceEntries tool", () => {
         "magnetic-storm-charlie-energy-refund",
       ]),
     )
+    expect((result as any).collection.entries[0].requirementSummary).toEqual({
+      count: 2,
+      satisfiedCount: 2,
+      unsatisfiedCount: 0,
+      hasUnsatisfied: false,
+      groups: [
+        {
+          key: "panel-value",
+          count: 1,
+          satisfiedCount: 1,
+          unsatisfiedCount: 0,
+        },
+        {
+          key: "scenario-value",
+          count: 1,
+          satisfiedCount: 1,
+          unsatisfiedCount: 0,
+        },
+      ],
+    })
     expect((result as any).collection.entries[0].sourceNoteSummary).toEqual({
       count: 3,
       hasSourceNotes: true,
