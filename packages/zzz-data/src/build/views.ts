@@ -353,6 +353,8 @@ function createEntryBase(
 }
 
 function syncEntryAssumptionSummary(entry: StaticBuildSourceDamageViewEntry) {
+  entry.diagnosticSummary = summarizeDiagnosticEntries(entry.diagnostics)
+  entry.sourceNoteSummary = summarizeSourceNoteEntries(entry.sourceNotes)
   entry.assumptionSummary = summarizeAssumptions(entry.assumptions)
   entry.caveatSummary = summarizeSourceDamageViewCaveats(
     [entry],

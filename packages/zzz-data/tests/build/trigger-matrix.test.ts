@@ -669,14 +669,25 @@ describe("static build trigger matrix", () => {
         ],
       },
       diagnosticSummary: {
-        count: 0,
-        hasDiagnostics: false,
-        hasDefaultedInput: false,
+        count: 1,
+        hasDiagnostics: true,
+        hasDefaultedInput: true,
         hasCoverageGap: false,
         hasUnsupportedEffect: false,
         hasFallback: false,
-        kindGroups: [],
-        ownerGroups: [],
+        kindGroups: [
+          {
+            key: "defaulted-input",
+            label: "默认输入",
+            count: 1,
+          },
+        ],
+        ownerGroups: [
+          {
+            key: "scenario",
+            count: 1,
+          },
+        ],
       },
       sourceNoteSummary: {
         count: 3,

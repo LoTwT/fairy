@@ -130,6 +130,10 @@ it("keeps screenshot summary by default", async () => {
   )
   expect(base.includes("entry.caveatSummary")).toBe(true)
   expect(
+    base.includes("如果只想先判断某一条 mixed entry 是否带 diagnostics"),
+  ).toBe(true)
+  expect(base.includes("entry.diagnosticSummary")).toBe(true)
+  expect(
     base.includes("collection.summary.sourceDamageRequirementSummary"),
   ).toBe(true)
   expect(

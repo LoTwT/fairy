@@ -585,14 +585,29 @@ describe("static build source damage views", () => {
         resolutionMode: "delta",
       },
       diagnosticSummary: {
-        count: 0,
-        hasDiagnostics: false,
-        hasDefaultedInput: false,
+        count: 2,
+        hasDiagnostics: true,
+        hasDefaultedInput: true,
         hasCoverageGap: false,
         hasUnsupportedEffect: false,
         hasFallback: false,
-        kindGroups: [],
-        ownerGroups: [],
+        kindGroups: [
+          {
+            key: "defaulted-input",
+            label: "默认输入",
+            count: 2,
+          },
+        ],
+        ownerGroups: [
+          {
+            key: "loadout",
+            count: 1,
+          },
+          {
+            key: "scenario",
+            count: 1,
+          },
+        ],
       },
       sourceNoteSummary: {
         count: 1,
