@@ -764,6 +764,7 @@ collection.summary.sourceUtilityRequirementSummary
 如果你是按组拆“额外结算条目 / 回能条目”两个 section，也不要再先过滤 entries 再自己统计组内 diagnostics / source notes，直接读取：
 
 ```ts
+collection.summary.groups[0].caveatSummary
 collection.summary.groups[0].assumptionSummary
 collection.summary.assumptionSummary
 collection.summary.groups[0].diagnosticSummary

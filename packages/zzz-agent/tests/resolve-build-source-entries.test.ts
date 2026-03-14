@@ -84,6 +84,12 @@ describe("resolveBuildSourceEntries tool", () => {
           key: "source-utility-view",
           label: "回能 / utility 条目",
           count: 1,
+          caveatSummary: {
+            assumptionCount: 1,
+            unsupportedCount: 0,
+            hasAssumptions: true,
+            hasUnsupported: false,
+          },
           assumptionSummary: {
             count: 1,
             hasAssumptions: true,
@@ -263,6 +269,12 @@ describe("resolveBuildSourceEntries tool", () => {
           key: "source-damage-view",
           label: "额外结算条目",
           count: 1,
+          caveatSummary: {
+            assumptionCount: 1,
+            unsupportedCount: 0,
+            hasAssumptions: true,
+            hasUnsupported: false,
+          },
           assumptionSummary: {
             count: 1,
             hasAssumptions: true,
@@ -317,6 +329,12 @@ describe("resolveBuildSourceEntries tool", () => {
           key: "source-utility-view",
           label: "回能 / utility 条目",
           count: 1,
+          caveatSummary: {
+            assumptionCount: 1,
+            unsupportedCount: 0,
+            hasAssumptions: true,
+            hasUnsupported: false,
+          },
           assumptionSummary: {
             count: 1,
             hasAssumptions: true,

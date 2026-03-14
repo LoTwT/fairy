@@ -80,6 +80,12 @@ describe("static build source entries", () => {
           key: "source-utility-view",
           label: "回能 / utility 条目",
           count: 1,
+          caveatSummary: {
+            assumptionCount: 1,
+            unsupportedCount: 0,
+            hasAssumptions: true,
+            hasUnsupported: false,
+          },
           assumptionSummary: {
             count: 1,
             hasAssumptions: true,
@@ -266,6 +272,12 @@ describe("static build source entries", () => {
           key: "source-damage-view",
           label: "额外结算条目",
           count: 1,
+          caveatSummary: {
+            assumptionCount: 1,
+            unsupportedCount: 0,
+            hasAssumptions: true,
+            hasUnsupported: false,
+          },
           assumptionSummary: {
             count: 1,
             hasAssumptions: true,
@@ -320,6 +332,12 @@ describe("static build source entries", () => {
           key: "source-utility-view",
           label: "回能 / utility 条目",
           count: 1,
+          caveatSummary: {
+            assumptionCount: 1,
+            unsupportedCount: 0,
+            hasAssumptions: true,
+            hasUnsupported: false,
+          },
           assumptionSummary: {
             count: 1,
             hasAssumptions: true,
@@ -493,6 +511,12 @@ describe("static build source entries", () => {
       expect.arrayContaining([
         expect.objectContaining({
           key: "source-damage-view",
+          caveatSummary: expect.objectContaining({
+            assumptionCount: 2,
+            unsupportedCount: 0,
+            hasAssumptions: true,
+            hasUnsupported: false,
+          }),
           sourceDamageRequirementSummary: expect.objectContaining({
             count: 2,
             hasUnsatisfied: false,
@@ -512,6 +536,12 @@ describe("static build source entries", () => {
         }),
         expect.objectContaining({
           key: "source-utility-view",
+          caveatSummary: expect.objectContaining({
+            assumptionCount: 1,
+            unsupportedCount: 0,
+            hasAssumptions: true,
+            hasUnsupported: false,
+          }),
           sourceDamageRequirementSummary: expect.objectContaining({
             count: 0,
             hasUnsatisfied: false,

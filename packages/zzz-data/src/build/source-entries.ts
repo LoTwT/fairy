@@ -163,6 +163,10 @@ function summarizeSourceEntries(
             : [],
         ),
       ),
+      caveatSummary: summarizeSourceEntryCaveats(
+        groupEntries,
+        groupEntries.flatMap((entry) => entry.assumptions),
+      ),
       diagnosticSummary: summarizeDiagnosticEntries(
         groupEntries.flatMap((entry) => entry.diagnostics),
       ),
