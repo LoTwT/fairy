@@ -18,6 +18,7 @@ import type {
   ResolveStaticBuildSourceEntriesResult,
   ResolveStaticBuildSourceUtilityViewsResult,
   ResolveStaticBuildTriggerMatrixResult,
+  StaticBuildAgentCatalogEntry,
   StaticBuildAssumptionSummary,
   StaticBuildBucket,
   StaticBuildCaveatSummary,
@@ -63,7 +64,7 @@ export interface CompactStaticBuildResult {
   profile: ResolveStaticBuildResult["profile"]
   mode: ResolveStaticBuildResult["mode"]
   manualBaseMode?: ResolveStaticBuildResult["manualBaseMode"]
-  loadout: StaticBuildResolvedLoadout
+  loadout: CompactStaticBuildLoadout
   summary: CompactStaticBuildResolveSummary
   effectSummary: CompactStaticBuildResolveEffectSummaryItem[]
   diagnosticSummary: CompactStaticBuildDiagnosticSummary
@@ -112,6 +113,40 @@ export interface CompactStaticBuildResolveSummary {
   hasResearchOnlySourceNote: boolean
   diagnosticGroups: CompactStaticBuildDiagnosticGroupSummary[]
   sourceNoteGroups: CompactStaticBuildSourceNoteGroupSummary[]
+}
+
+export interface CompactStaticBuildCatalogEntry {
+  id: string
+  name: string
+  aliases: string[]
+}
+
+export interface CompactStaticBuildAgentCatalogEntry extends CompactStaticBuildCatalogEntry {
+  specialty: StaticBuildResolvedLoadout["agent"]["specialty"]
+  defaultAttribute: StaticBuildResolvedLoadout["agent"]["defaultAttribute"]
+  defaultDamageType?: StaticBuildAgentCatalogEntry["defaultDamageType"]
+  profileId?: StaticBuildAgentCatalogEntry["profileId"]
+}
+
+export interface CompactStaticBuildWEngineCatalogEntry extends CompactStaticBuildCatalogEntry {
+  specialty: NonNullable<StaticBuildResolvedLoadout["wEngine"]>["specialty"]
+}
+
+export interface CompactStaticBuildDriveDiscSet {
+  id: string
+  name: string
+  aliases: string[]
+  pieces: 2 | 4
+}
+
+export interface CompactStaticBuildLoadout {
+  agent: CompactStaticBuildAgentCatalogEntry
+  wEngine?: CompactStaticBuildWEngineCatalogEntry
+  driveDiscSets: CompactStaticBuildDriveDiscSet[]
+  agentLevel: number
+  agentMindscape: number
+  coreSkillLevel: number
+  wEngineRefinement: number
 }
 
 export interface CompactStaticBuildResolvedBuckets {
@@ -535,7 +570,7 @@ export function compactStaticBuildResult(
     profile: build.profile,
     mode: build.mode,
     manualBaseMode: build.manualBaseMode,
-    loadout: build.loadout,
+    loadout: compactStaticBuildLoadout(build.loadout),
     summary: compactStaticBuildResolveSummary(build.summary),
     effectSummary: build.effectSummary.map((item) =>
       compactStaticBuildResolveEffectSummaryItem(item),
@@ -571,6 +606,44 @@ export function compactStaticBuildResult(
           trace: build.trace?.map((item) => compactStaticBuildTraceItem(item)),
         }
       : {}),
+  }
+}
+
+export function compactStaticBuildLoadout(
+  loadout: StaticBuildResolvedLoadout,
+): CompactStaticBuildLoadout {
+  return {
+    agent: {
+      id: loadout.agent.id,
+      name: loadout.agent.name,
+      aliases: [...loadout.agent.aliases],
+      specialty: loadout.agent.specialty,
+      defaultAttribute: loadout.agent.defaultAttribute,
+      defaultDamageType:
+        "defaultDamageType" in loadout.agent
+          ? loadout.agent.defaultDamageType
+          : undefined,
+      profileId:
+        "profileId" in loadout.agent ? loadout.agent.profileId : undefined,
+    },
+    wEngine: loadout.wEngine
+      ? {
+          id: loadout.wEngine.id,
+          name: loadout.wEngine.name,
+          aliases: [...loadout.wEngine.aliases],
+          specialty: loadout.wEngine.specialty,
+        }
+      : undefined,
+    driveDiscSets: loadout.driveDiscSets.map((set) => ({
+      id: set.id,
+      name: set.name,
+      aliases: [...set.aliases],
+      pieces: set.pieces,
+    })),
+    agentLevel: loadout.agentLevel,
+    agentMindscape: loadout.agentMindscape,
+    coreSkillLevel: loadout.coreSkillLevel,
+    wEngineRefinement: loadout.wEngineRefinement,
   }
 }
 

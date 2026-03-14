@@ -7193,6 +7193,37 @@ caveatSummary` 这些兼容字段补齐。
 - `V181.3` 已完成：现有测试与 runtime 校验已覆盖
 - `V181.4` 已完成：roadmap、索引与架构文档已同步
 
+## 185. V182 explicit compact loadout
+
+`V181` 收口后，compact single-build 结果里仍直接复用 raw build loadout type 的稳定缺口是：
+
+1. `CompactStaticBuildResult.loadout`
+
+`V182` 只解决这一件事：
+
+1. 把 compact single-build 顶层的 `loadout` 改为显式 compact type
+
+### 185.1 分阶段
+
+1. `V182.1` scope freeze
+2. `V182.2` runtime/type contract alignment
+3. `V182.3` tests / prompt alignment
+4. `V182.4` docs closeout
+
+### 185.2 非目标
+
+1. 不改变 `loadout` 的字段值
+2. 不改变 `profile`
+3. 不改变 `damage`
+4. 不改变 `includeDetails` 语义
+
+### 185.3 当前状态
+
+- `V182.1` 已完成：冻结到 explicit compact loadout
+- `V182.2` 已完成：compact single-build 的 `loadout` 已改为显式 compact type
+- `V182.3` 已完成：现有测试与 runtime 校验已覆盖
+- `V182.4` 已完成：roadmap、索引与架构文档已同步
+
 ## 174. V171 explicit compact top-level summary effect summaries
 
 `V170` 收口后，compact contract 中下一批仍直接复用 raw effect summary item type 的显式缺口主要集中在 top-level `summary`：

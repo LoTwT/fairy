@@ -46,6 +46,7 @@ describe("static build compact helpers", () => {
 
     expect(compact.summary).toEqual(build.summary)
     expect(compact.effectSummary).toEqual(build.effectSummary)
+    expect(compact.loadout).toEqual(build.loadout)
     expect(compact.damage.expected.total).toBeGreaterThan(0)
     expect(compact.resolvedPanel).toEqual(build.resolvedPanel)
     expect(compact.resolvedBuckets).toEqual(build.resolvedBuckets)
