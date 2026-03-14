@@ -208,10 +208,10 @@ export interface CompactStaticBuildSkillMatrixSummary {
   variableFormulaMultipliers: string[]
   effectSummary: StaticBuildSkillMatrixEffectSummaryItem[]
   requirementSummary: StaticBuildSourceDamageViewRequirementSummary
-  assumptionSummary: StaticBuildAssumptionSummary
-  caveatSummary: StaticBuildCaveatSummary
-  diagnosticSummary: StaticBuildDiagnosticSummary
-  sourceNoteSummary: StaticBuildSourceNoteSummary
+  assumptionSummary: CompactStaticBuildAssumptionSummary
+  caveatSummary: CompactStaticBuildCaveatSummary
+  diagnosticSummary: CompactStaticBuildDiagnosticSummary
+  sourceNoteSummary: CompactStaticBuildSourceNoteSummary
   groups: CompactStaticBuildSkillMatrixGroupSummary[]
 }
 
@@ -384,10 +384,10 @@ export interface CompactStaticBuildTriggerMatrixSummary {
   hasSourceViews: boolean
   effectSummary: StaticBuildTriggerMatrixEffectSummaryItem[]
   requirementSummary: StaticBuildSourceDamageViewRequirementSummary
-  caveatSummary: StaticBuildEntryCaveatSummary
-  diagnosticSummary: StaticBuildDiagnosticSummary
-  sourceNoteSummary: StaticBuildSourceNoteSummary
-  assumptionSummary: StaticBuildAssumptionSummary
+  caveatSummary: CompactStaticBuildEntryCaveatSummary
+  diagnosticSummary: CompactStaticBuildDiagnosticSummary
+  sourceNoteSummary: CompactStaticBuildSourceNoteSummary
+  assumptionSummary: CompactStaticBuildAssumptionSummary
   groups: CompactStaticBuildTriggerMatrixGroupSummary[]
 }
 
@@ -454,10 +454,10 @@ export interface CompactStaticBuildSourceDamageViewsSummary {
   unsupportedCount: number
   effectSummary: StaticBuildSourceDamageViewEffectSummaryItem[]
   requirementSummary: StaticBuildSourceDamageViewRequirementSummary
-  caveatSummary: StaticBuildEntryCaveatSummary
-  diagnosticSummary: StaticBuildDiagnosticSummary
-  sourceNoteSummary: StaticBuildSourceNoteSummary
-  assumptionSummary: StaticBuildAssumptionSummary
+  caveatSummary: CompactStaticBuildEntryCaveatSummary
+  diagnosticSummary: CompactStaticBuildDiagnosticSummary
+  sourceNoteSummary: CompactStaticBuildSourceNoteSummary
+  assumptionSummary: CompactStaticBuildAssumptionSummary
   groups: CompactStaticBuildSourceDamageViewGroupSummary[]
 }
 
@@ -531,10 +531,10 @@ export interface CompactStaticBuildSourceEntryCollectionSummary {
   effectSummary: StaticBuildSourceDamageViewEffectSummaryItem[]
   sourceDamageRequirementSummary: StaticBuildSourceDamageViewRequirementSummary
   sourceUtilityRequirementSummary: StaticBuildSourceUtilityViewRequirementSummary
-  caveatSummary: StaticBuildEntryCaveatSummary
-  diagnosticSummary: StaticBuildDiagnosticSummary
-  sourceNoteSummary: StaticBuildSourceNoteSummary
-  assumptionSummary: StaticBuildAssumptionSummary
+  caveatSummary: CompactStaticBuildEntryCaveatSummary
+  diagnosticSummary: CompactStaticBuildDiagnosticSummary
+  sourceNoteSummary: CompactStaticBuildSourceNoteSummary
+  assumptionSummary: CompactStaticBuildAssumptionSummary
   groups: CompactStaticBuildSourceEntryGroupSummary[]
 }
 
@@ -574,10 +574,10 @@ export interface CompactStaticBuildSourceUtilityViewsSummary {
   unsupportedCount: number
   effectSummary: StaticBuildSourceDamageViewEffectSummaryItem[]
   requirementSummary: StaticBuildSourceUtilityViewRequirementSummary
-  caveatSummary: StaticBuildEntryCaveatSummary
-  diagnosticSummary: StaticBuildDiagnosticSummary
-  sourceNoteSummary: StaticBuildSourceNoteSummary
-  assumptionSummary: StaticBuildAssumptionSummary
+  caveatSummary: CompactStaticBuildEntryCaveatSummary
+  diagnosticSummary: CompactStaticBuildDiagnosticSummary
+  sourceNoteSummary: CompactStaticBuildSourceNoteSummary
+  assumptionSummary: CompactStaticBuildAssumptionSummary
   groups: CompactStaticBuildSourceUtilityViewGroupSummary[]
 }
 
@@ -652,6 +652,16 @@ export function compactStaticBuildSkillMatrixSummary(
 ): CompactStaticBuildSkillMatrixSummary {
   return {
     ...summary,
+    assumptionSummary: compactStaticBuildAssumptionSummary(
+      summary.assumptionSummary,
+    ),
+    caveatSummary: compactStaticBuildCaveatSummary(summary.caveatSummary),
+    diagnosticSummary: compactStaticBuildDiagnosticSummary(
+      summary.diagnosticSummary,
+    ),
+    sourceNoteSummary: compactStaticBuildSourceNoteSummary(
+      summary.sourceNoteSummary,
+    ),
     groups: summary.groups.map((group) => ({
       key: group.key,
       label: group.label,
@@ -761,10 +771,16 @@ export function compactStaticBuildTriggerMatrixSummary(
     hasSourceViews: summary.hasSourceViews,
     effectSummary: summary.effectSummary,
     requirementSummary: summary.requirementSummary,
-    caveatSummary: summary.caveatSummary,
-    diagnosticSummary: summary.diagnosticSummary,
-    sourceNoteSummary: summary.sourceNoteSummary,
-    assumptionSummary: summary.assumptionSummary,
+    caveatSummary: compactStaticBuildEntryCaveatSummary(summary.caveatSummary),
+    diagnosticSummary: compactStaticBuildDiagnosticSummary(
+      summary.diagnosticSummary,
+    ),
+    sourceNoteSummary: compactStaticBuildSourceNoteSummary(
+      summary.sourceNoteSummary,
+    ),
+    assumptionSummary: compactStaticBuildAssumptionSummary(
+      summary.assumptionSummary,
+    ),
     groups: summary.groups.map((group) => ({
       key: group.key,
       label: group.label,
@@ -866,10 +882,16 @@ export function compactStaticBuildSourceEntryCollectionSummary(
     effectSummary: summary.effectSummary,
     sourceDamageRequirementSummary: summary.sourceDamageRequirementSummary,
     sourceUtilityRequirementSummary: summary.sourceUtilityRequirementSummary,
-    caveatSummary: summary.caveatSummary,
-    diagnosticSummary: summary.diagnosticSummary,
-    sourceNoteSummary: summary.sourceNoteSummary,
-    assumptionSummary: summary.assumptionSummary,
+    caveatSummary: compactStaticBuildEntryCaveatSummary(summary.caveatSummary),
+    diagnosticSummary: compactStaticBuildDiagnosticSummary(
+      summary.diagnosticSummary,
+    ),
+    sourceNoteSummary: compactStaticBuildSourceNoteSummary(
+      summary.sourceNoteSummary,
+    ),
+    assumptionSummary: compactStaticBuildAssumptionSummary(
+      summary.assumptionSummary,
+    ),
     groups: summary.groups.map((group) => ({
       key: group.key,
       label: group.label,
@@ -930,10 +952,16 @@ export function compactStaticBuildSourceDamageViewsSummary(
     unsupportedCount: summary.unsupportedCount,
     effectSummary: summary.effectSummary,
     requirementSummary: summary.requirementSummary,
-    caveatSummary: summary.caveatSummary,
-    diagnosticSummary: summary.diagnosticSummary,
-    sourceNoteSummary: summary.sourceNoteSummary,
-    assumptionSummary: summary.assumptionSummary,
+    caveatSummary: compactStaticBuildEntryCaveatSummary(summary.caveatSummary),
+    diagnosticSummary: compactStaticBuildDiagnosticSummary(
+      summary.diagnosticSummary,
+    ),
+    sourceNoteSummary: compactStaticBuildSourceNoteSummary(
+      summary.sourceNoteSummary,
+    ),
+    assumptionSummary: compactStaticBuildAssumptionSummary(
+      summary.assumptionSummary,
+    ),
     groups: summary.groups.map((group) => ({
       key: group.key,
       label: group.label,
@@ -1034,10 +1062,16 @@ export function compactStaticBuildSourceUtilityViewsSummary(
     unsupportedCount: summary.unsupportedCount,
     effectSummary: summary.effectSummary,
     requirementSummary: summary.requirementSummary,
-    caveatSummary: summary.caveatSummary,
-    diagnosticSummary: summary.diagnosticSummary,
-    sourceNoteSummary: summary.sourceNoteSummary,
-    assumptionSummary: summary.assumptionSummary,
+    caveatSummary: compactStaticBuildEntryCaveatSummary(summary.caveatSummary),
+    diagnosticSummary: compactStaticBuildDiagnosticSummary(
+      summary.diagnosticSummary,
+    ),
+    sourceNoteSummary: compactStaticBuildSourceNoteSummary(
+      summary.sourceNoteSummary,
+    ),
+    assumptionSummary: compactStaticBuildAssumptionSummary(
+      summary.assumptionSummary,
+    ),
     groups: summary.groups.map((group) => ({
       key: group.key,
       label: group.label,
