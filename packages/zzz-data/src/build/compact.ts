@@ -63,6 +63,25 @@ import type {
   StaticBuildTriggerMatrixRowMeta,
 } from "./types.js"
 
+export type CompactStaticBuildSourceType = "agent" | "w-engine" | "drive-disc"
+
+export type CompactStaticBuildSourceUtilityType =
+  | "energy-refund"
+  | "energy-regen-rate"
+  | "decibel-gain"
+
+export type CompactStaticBuildSourceUtilityResolutionMode = "trigger" | "rate"
+
+export type CompactStaticBuildSourceUtilityTargetScope =
+  | "self"
+  | "ally"
+  | "team"
+
+export type CompactStaticBuildSourceUtilityUnit =
+  | "energy"
+  | "energy-per-second"
+  | "decibel"
+
 export interface CompactStaticBuildResult {
   profile: CompactStaticBuildProfile
   mode: CompactStaticBuildMode
@@ -1362,15 +1381,15 @@ export interface StaticBuildCompactSourceUtilityViewEntry {
   label: string
   metadata: CompactStaticBuildSourceUtilityViewMeta
   supported: boolean
-  sourceType: StaticBuildSourceUtilityViewEntry["sourceType"]
+  sourceType: CompactStaticBuildSourceType
   sourceId: string
-  utilityType: StaticBuildSourceUtilityViewEntry["utilityType"]
-  resolutionMode: StaticBuildSourceUtilityViewEntry["resolutionMode"]
-  targetScope: StaticBuildSourceUtilityViewEntry["targetScope"]
+  utilityType: CompactStaticBuildSourceUtilityType
+  resolutionMode: CompactStaticBuildSourceUtilityResolutionMode
+  targetScope: CompactStaticBuildSourceUtilityTargetScope
   requirements?: CompactStaticBuildSourceUtilityViewRequirement[]
   requirementSummary: CompactStaticBuildSourceUtilityViewRequirementSummary
   value: number
-  unit: StaticBuildSourceUtilityViewEntry["unit"]
+  unit: CompactStaticBuildSourceUtilityUnit
   triggerLabel?: string
   conditionLabel?: string
   cooldownSeconds?: number
@@ -1391,9 +1410,9 @@ export type StaticBuildCompactSourceEntry =
 
 export interface CompactStaticBuildSourceUtilityViewEntrySummary {
   value: number
-  unit: StaticBuildSourceUtilityViewEntry["unit"]
-  resolutionMode: StaticBuildSourceUtilityViewEntry["resolutionMode"]
-  targetScope: StaticBuildSourceUtilityViewEntry["targetScope"]
+  unit: CompactStaticBuildSourceUtilityUnit
+  resolutionMode: CompactStaticBuildSourceUtilityResolutionMode
+  targetScope: CompactStaticBuildSourceUtilityTargetScope
   requirementCount: number
   hasUnsatisfiedRequirements: boolean
   diagnosticCount: number
@@ -1423,10 +1442,10 @@ export interface CompactStaticBuildSourceUtilityViewMeta {
   canonicalLabel: string
   stableKey: string
   entryKind: "source-utility-view"
-  utilityType: StaticBuildSourceUtilityViewEntry["utilityType"]
-  resolutionMode: StaticBuildSourceUtilityViewEntry["resolutionMode"]
-  targetScope: StaticBuildSourceUtilityViewEntry["targetScope"]
-  unit: StaticBuildSourceUtilityViewEntry["unit"]
+  utilityType: CompactStaticBuildSourceUtilityType
+  resolutionMode: CompactStaticBuildSourceUtilityResolutionMode
+  targetScope: CompactStaticBuildSourceUtilityTargetScope
+  unit: CompactStaticBuildSourceUtilityUnit
 }
 
 export interface CompactStaticBuildSourceEntryGroupSummary {

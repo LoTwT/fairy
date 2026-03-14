@@ -7481,6 +7481,43 @@ caveatSummary` 这些兼容字段补齐。
 - `V190.3` 已完成：现有测试与 runtime 校验已覆盖
 - `V190.4` 已完成：roadmap、索引与架构文档已同步
 
+## 194. V191 explicit compact source utility view contracts
+
+`V190` 收口后，compact `source-utility-view` contract 中仍直接复用 raw entry enum/summary shape 的稳定缺口集中在：
+
+1. `StaticBuildCompactSourceUtilityViewEntry.sourceType`
+2. `StaticBuildCompactSourceUtilityViewEntry.utilityType`
+3. `StaticBuildCompactSourceUtilityViewEntry.resolutionMode`
+4. `StaticBuildCompactSourceUtilityViewEntry.targetScope`
+5. `StaticBuildCompactSourceUtilityViewEntry.unit`
+6. `CompactStaticBuildSourceUtilityViewEntrySummary`
+7. `CompactStaticBuildSourceUtilityViewMeta`
+
+`V191` 只解决这一件事：
+
+1. 把 compact `source-utility-view` 的 entry/meta/summary 改为显式 compact types
+
+### 194.1 分阶段
+
+1. `V191.1` scope freeze
+2. `V191.2` runtime/type contract alignment
+3. `V191.3` tests / prompt alignment
+4. `V191.4` docs closeout
+
+### 194.2 非目标
+
+1. 不改变 utility entry 的字段值
+2. 不改变 `includeDetails` 语义
+3. 不改变 source-damage-view / skill-matrix / trigger-matrix 的 metadata contract
+4. 不改变 runtime 生成逻辑
+
+### 194.3 当前状态
+
+- `V191.1` 已完成：冻结到 explicit compact source utility view contracts
+- `V191.2` 已完成：compact `source-utility-view` 的 entry/meta/summary 已改为显式 compact types
+- `V191.3` 已完成：现有测试与 runtime 校验已覆盖
+- `V191.4` 已完成：roadmap、索引与架构文档已同步
+
 ## 174. V171 explicit compact top-level summary effect summaries
 
 `V170` 收口后，compact contract 中下一批仍直接复用 raw effect summary item type 的显式缺口主要集中在 top-level `summary`：
