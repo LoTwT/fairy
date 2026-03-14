@@ -548,6 +548,10 @@ export interface ResolveStaticBuildResult {
   manualBaseMode?: StaticBuildBaseMode
   loadout: StaticBuildResolvedLoadout
   summary: StaticBuildResolveSummary
+  diagnosticSummary: StaticBuildDiagnosticSummary
+  sourceNoteSummary: StaticBuildSourceNoteSummary
+  assumptionSummary: StaticBuildAssumptionSummary
+  caveatSummary: StaticBuildCaveatSummary
   resolvedPanel: StaticBuildResolvedPanel
   resolvedBuckets: StaticBuildResolvedBuckets
   damageParams:

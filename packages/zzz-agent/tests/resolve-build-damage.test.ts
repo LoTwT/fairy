@@ -37,6 +37,19 @@ describe("resolveBuildDamage tool", () => {
     expect(
       (result as any).build.summary.diagnosticGroups.length,
     ).toBeGreaterThan(0)
+    expect((result as any).build.diagnosticSummary.count).toBe(
+      (result as any).build.diagnostics.length,
+    )
+    expect((result as any).build.diagnosticSummary.hasDefaultedInput).toBe(true)
+    expect((result as any).build.sourceNoteSummary.count).toBe(
+      (result as any).build.sourceNotes.length,
+    )
+    expect((result as any).build.assumptionSummary.count).toBe(
+      (result as any).build.assumptions.length,
+    )
+    expect((result as any).build.caveatSummary.assumptionCount).toBe(
+      (result as any).build.assumptions.length,
+    )
     expect(
       (result as any).build.resolvedBuckets.skillMultiplierFactor,
     ).toBeCloseTo(1.25, 4)

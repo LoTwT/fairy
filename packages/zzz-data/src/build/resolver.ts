@@ -190,6 +190,18 @@ export function summarizeAssumptions(assumptions: string[]) {
   }
 }
 
+export function summarizeResolveCaveats(
+  assumptions: string[],
+  unsupportedEffects: string[],
+) {
+  return {
+    assumptionCount: assumptions.length,
+    unsupportedEffectCount: unsupportedEffects.length,
+    hasAssumptions: assumptions.length > 0,
+    hasUnsupportedEffects: unsupportedEffects.length > 0,
+  }
+}
+
 function buildResolveSummary(
   result: Pick<
     ResolveStaticBuildResult,
@@ -237,10 +249,29 @@ function buildResolveSummary(
 }
 
 function createResolveResult(
-  result: Omit<ResolveStaticBuildResult, "summary">,
+  result: Omit<
+    ResolveStaticBuildResult,
+    | "summary"
+    | "diagnosticSummary"
+    | "sourceNoteSummary"
+    | "assumptionSummary"
+    | "caveatSummary"
+  >,
 ): ResolveStaticBuildResult {
+  const diagnosticSummary = summarizeDiagnosticEntries(result.diagnostics)
+  const sourceNoteSummary = summarizeSourceNoteEntries(result.sourceNotes)
+  const assumptionSummary = summarizeAssumptions(result.assumptions)
+  const caveatSummary = summarizeResolveCaveats(
+    result.assumptions,
+    result.unsupportedEffects,
+  )
+
   return {
     ...result,
+    diagnosticSummary,
+    sourceNoteSummary,
+    assumptionSummary,
+    caveatSummary,
     summary: buildResolveSummary(result),
   }
 }

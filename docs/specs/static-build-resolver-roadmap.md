@@ -5505,3 +5505,63 @@ caveatSummary` 这些兼容字段补齐。
 1. 不为 skill matrix 伪造真实技能 requirements
 2. 不改变 assumptions / diagnostics / source notes / caveats / effects 的既有 contract
 3. 不改变 `trigger-matrix`、`source views`、`source-entry collection` 的既有 requirement-summary 语义
+
+## 131. V128 single-build top-level aggregate summary alignment
+
+`V127` 收口后，单次 `resolveStaticBuildDamage()` 仍然是唯一一条没有顶层结构化 aggregate summary 的主路径。
+
+当前状态不对称：
+
+- `skill-matrix`
+- `trigger-matrix`
+- `source-damage-view`
+- `source-utility-view`
+- `source-entry collection`
+
+这些路径都已经有稳定的：
+
+- `diagnosticSummary`
+- `sourceNoteSummary`
+- `assumptionSummary`
+- `caveatSummary`
+
+但单次 resolver 仍然只有：
+
+- `summary.diagnosticGroups`
+- `summary.sourceNoteGroups`
+- `summary.hasUnsupportedEffects`
+
+还没有顶层结构化聚合。
+
+`V128` 只解决一件事：
+
+1. 为 `ResolveStaticBuildResult` 补齐稳定的 top-level aggregate summaries
+
+### 131.1 阶段范围
+
+1. `V128.1` scope freeze
+2. `V128.2` runtime/type contract alignment
+3. `V128.3` tool assertion / prompt alignment
+4. `V128.4` docs closeout
+
+### 131.2 当前状态
+
+- `V128.1` 已完成：冻结到 single-build top-level aggregate summary alignment
+- `V128.2` 已完成：`ResolveStaticBuildResult` 已补齐稳定 `diagnosticSummary / sourceNoteSummary / assumptionSummary / caveatSummary`
+- `V128.3` 已完成：高层 `resolveBuildDamage` prompt / 断言已对齐这些顶层 summary，同时保留 `build.summary.*` 兼容读取路径
+- `V128.4` 已完成：README、roadmap、索引与架构文档已同步
+
+### 131.3 当前边界
+
+本阶段只做：
+
+1. 为 `ResolveStaticBuildResult` 新增稳定 `diagnosticSummary`
+2. 为 `ResolveStaticBuildResult` 新增稳定 `sourceNoteSummary`
+3. 为 `ResolveStaticBuildResult` 新增稳定 `assumptionSummary`
+4. 为 `ResolveStaticBuildResult` 新增稳定 `caveatSummary`
+
+显式不做：
+
+1. 不改变 `ResolveStaticBuildResult.summary` 的既有结构
+2. 不为单次 resolver 新增 `effectSummary` 或 `requirementSummary`
+3. 不改变 matrix / views / source-entry collection 的既有 aggregate summary 语义

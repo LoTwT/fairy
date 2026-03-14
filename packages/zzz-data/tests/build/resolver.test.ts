@@ -54,6 +54,14 @@ describe("static build resolver", () => {
     )
     expect(result.summary.hasDiagnostics).toBe(true)
     expect(result.summary.hasDefaultedInput).toBe(true)
+    expect(result.diagnosticSummary.count).toBe(result.diagnostics.length)
+    expect(result.diagnosticSummary.hasDefaultedInput).toBe(true)
+    expect(result.sourceNoteSummary.count).toBe(result.sourceNotes.length)
+    expect(result.assumptionSummary.count).toBe(result.assumptions.length)
+    expect(result.caveatSummary.assumptionCount).toBe(result.assumptions.length)
+    expect(result.caveatSummary.hasAssumptions).toBe(
+      result.assumptions.length > 0,
+    )
     expect(
       result.summary.diagnosticGroups.some(
         (group) => group.key === "defaulted-input",

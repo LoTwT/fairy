@@ -159,9 +159,46 @@ result.summary
 //   diagnosticGroups: [{ key: "defaulted-input", label: "默认输入", count: 1 }],
 //   sourceNoteGroups: [],
 // }
+
+result.diagnosticSummary
+// {
+//   count: 1,
+//   hasDiagnostics: true,
+//   hasDefaultedInput: true,
+//   hasCoverageGap: false,
+//   hasUnsupportedEffect: false,
+//   hasFallback: false,
+//   kindGroups: [{ key: "defaulted-input", label: "默认输入", count: 1 }],
+//   ownerGroups: [{ key: "scenario", count: 1 }],
+// }
+
+result.sourceNoteSummary
+// {
+//   count: 0,
+//   hasSourceNotes: false,
+//   hasMissingInput: false,
+//   hasProcessOnly: false,
+//   hasResearchOnly: false,
+//   statusGroups: [],
+//   ownerGroups: [],
+// }
+
+result.assumptionSummary
+// {
+//   count: 1,
+//   hasAssumptions: true,
+// }
+
+result.caveatSummary
+// {
+//   assumptionCount: 1,
+//   unsupportedEffectCount: 0,
+//   hasAssumptions: true,
+//   hasUnsupportedEffects: false,
+// }
 ```
 
-如果你要做单场景结果展示，不要再自己同时从 `resolvedPanel`、`damage.expected.breakdown`、`diagnostics`、`sourceNotes`、`unsupportedEffects` 拼摘要，优先直接使用 `result.summary`。
+如果你要做单场景结果展示，不要再自己同时从 `resolvedPanel`、`damage.expected.breakdown`、`diagnostics`、`sourceNotes`、`unsupportedEffects` 拼摘要，优先直接使用 `result.summary`。如果你要先判断当前单场景结果是否带 diagnostics / source notes / assumptions / unsupported caveat，也优先读取 `result.diagnosticSummary`、`result.sourceNoteSummary`、`result.assumptionSummary`、`result.caveatSummary`；如需兼容旧调用方，也可以继续读取 `result.summary.diagnosticGroups`、`result.summary.sourceNoteGroups` 与 `result.summary.hasUnsupportedEffects`。
 
 如果你需要拿到不应并入主 anomaly / disorder 公式的独立额外结算条目，可使用：
 
