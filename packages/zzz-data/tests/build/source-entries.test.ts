@@ -394,6 +394,7 @@ describe("static build source entries", () => {
     expect(result.entries).toHaveLength(2)
     expect(result.entries[0]?.metadata.entryKind).toBe("source-damage-view")
     expect(result.entries[1]?.metadata.entryKind).toBe("source-utility-view")
+    expect(result.entries[0]?.summary?.expectedTotal).toBeGreaterThan(0)
     expect(result.entries.map((entry) => entry.metadata.entryKind)).toEqual(
       expect.arrayContaining(["source-damage-view", "source-utility-view"]),
     )

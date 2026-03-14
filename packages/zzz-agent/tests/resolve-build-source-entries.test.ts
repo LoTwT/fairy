@@ -408,11 +408,18 @@ describe("resolveBuildSourceEntries tool", () => {
         "flamemaker-shaker-offfield-energy-regen",
       ]),
     )
-    expect(
-      (result as any).collection.entries.find(
-        (entry: any) => entry.id === "aria-exflow",
-      ).build,
-    ).toBeUndefined()
+    const ariaEntry = (result as any).collection.entries.find(
+      (entry: any) => entry.id === "aria-exflow",
+    )
+    expect(ariaEntry).toMatchObject({
+      id: "aria-exflow",
+      metadata: {
+        entryKind: "source-damage-view",
+        stableKey: "source-view:aria-exflow",
+      },
+    })
+    expect(ariaEntry.summary.expectedTotal).toBeGreaterThan(0)
+    expect(ariaEntry.build).toBeUndefined()
   })
 
   it("returns Vivian exflow together with utility-only anomaly engines", async () => {

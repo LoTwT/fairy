@@ -117,6 +117,11 @@ it("keeps screenshot summary by default", async () => {
   expect(base.includes("collection.summary.groups[*].caveatSummary")).toBe(true)
   expect(base.includes("entry.summary")).toBe(true)
   expect(
+    base.includes(
+      "如果当前 entry 是 source-damage-view 条目，优先使用 `entry.summary`",
+    ),
+  ).toBe(true)
+  expect(
     base.includes("collection.summary.sourceDamageRequirementSummary"),
   ).toBe(true)
   expect(
