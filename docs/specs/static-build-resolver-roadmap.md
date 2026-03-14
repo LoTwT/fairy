@@ -7322,6 +7322,38 @@ caveatSummary` 这些兼容字段补齐。
 - `V185.3` 已完成：现有测试与 runtime 校验已覆盖
 - `V185.4` 已完成：roadmap、索引与架构文档已同步
 
+## 189. V186 explicit compact source-view entry metadata
+
+`V185` 收口后，compact source-view entry 里仍直接复用 raw metadata type 的稳定缺口是：
+
+1. `StaticBuildCompactSourceDamageViewEntry.metadata`
+2. `StaticBuildCompactSourceUtilityViewEntry.metadata`
+
+`V186` 只解决这一件事：
+
+1. 把 compact `source-damage-view / source-utility-view` entry 的 `metadata` 改为显式 compact type
+
+### 189.1 分阶段
+
+1. `V186.1` scope freeze
+2. `V186.2` runtime/type contract alignment
+3. `V186.3` tests / prompt alignment
+4. `V186.4` docs closeout
+
+### 189.2 非目标
+
+1. 不改变 entry 的字段值
+2. 不改变 entry `summary`
+3. 不改变 entry `damage`
+4. 不改变 `includeDetails` 语义
+
+### 189.3 当前状态
+
+- `V186.1` 已完成：冻结到 explicit compact source-view entry metadata
+- `V186.2` 已完成：compact source-view entry metadata 已改为显式 compact type
+- `V186.3` 已完成：现有测试与 runtime 校验已覆盖
+- `V186.4` 已完成：roadmap、索引与架构文档已同步
+
 ## 174. V171 explicit compact top-level summary effect summaries
 
 `V170` 收口后，compact contract 中下一批仍直接复用 raw effect summary item type 的显式缺口主要集中在 top-level `summary`：

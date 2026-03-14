@@ -396,6 +396,7 @@ describe("static build compact helpers", () => {
     expect(compact.manualBaseMode).toBe(views.manualBaseMode)
     expect(compact.loadout).toEqual(views.loadout)
     expect(compact.assumptions).toBeUndefined()
+    expect(compact.entries[0]?.metadata).toEqual(views.entries[0]?.metadata)
     expect(compact.entries[0]?.assumptions).toBeUndefined()
     expect(compact.entries[0]?.diagnostics).toBeUndefined()
     expect(compact.entries[0]?.sourceNotes).toBeUndefined()
@@ -495,6 +496,9 @@ describe("static build compact helpers", () => {
 
     expect(compact.loadout).toEqual(collection.loadout)
     expect(compact.assumptions).toBeUndefined()
+    expect(compact.entries[0]?.metadata).toEqual(
+      collection.entries[0]?.metadata,
+    )
     expect(compact.summary.entryCount).toBe(2)
     expect(compact.entries.map((entry) => entry.metadata.entryKind)).toEqual(
       expect.arrayContaining(["source-damage-view", "source-utility-view"]),
@@ -759,6 +763,7 @@ describe("static build compact helpers", () => {
 
     expect(compact.loadout).toEqual(views.loadout)
     expect(compact.assumptions).toBeUndefined()
+    expect(compact.entries[0]?.metadata).toEqual(views.entries[0]?.metadata)
     expect(compact.entries).toHaveLength(1)
     expect(compact.effectSummary).toEqual([])
     expect(compact.summary.effectSummary).toEqual([])

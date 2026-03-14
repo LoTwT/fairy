@@ -1270,7 +1270,7 @@ export interface CompactStaticBuildTriggerMatrixResult {
 export interface StaticBuildCompactSourceDamageViewEntry {
   id: string
   label: string
-  metadata: StaticBuildSourceDamageViewEntry["metadata"]
+  metadata: CompactStaticBuildSourceDamageViewMeta
   supported: boolean
   sourceType: StaticBuildSourceDamageViewEntry["sourceType"]
   sourceId: string
@@ -1324,7 +1324,7 @@ export interface CompactStaticBuildSourceDamageViewsSummary {
 export interface StaticBuildCompactSourceUtilityViewEntry {
   id: string
   label: string
-  metadata: StaticBuildSourceUtilityViewEntry["metadata"]
+  metadata: CompactStaticBuildSourceUtilityViewMeta
   supported: boolean
   sourceType: StaticBuildSourceUtilityViewEntry["sourceType"]
   sourceId: string
@@ -1364,6 +1364,27 @@ export interface CompactStaticBuildSourceUtilityViewEntrySummary {
   sourceNoteCount: number
   assumptionCount: number
   hasUnsupported: boolean
+}
+
+export interface CompactStaticBuildSourceDamageViewMeta {
+  canonicalLabel: string
+  stableKey: string
+  entryKind: "source-damage-view"
+  damageType: Extract<
+    StaticBuildSourceDamageViewEntry["damageType"],
+    "anomaly" | "disorder"
+  >
+  resolutionMode: StaticBuildSourceDamageViewEntry["resolutionMode"]
+}
+
+export interface CompactStaticBuildSourceUtilityViewMeta {
+  canonicalLabel: string
+  stableKey: string
+  entryKind: "source-utility-view"
+  utilityType: StaticBuildSourceUtilityViewEntry["utilityType"]
+  resolutionMode: StaticBuildSourceUtilityViewEntry["resolutionMode"]
+  targetScope: StaticBuildSourceUtilityViewEntry["targetScope"]
+  unit: StaticBuildSourceUtilityViewEntry["unit"]
 }
 
 export interface CompactStaticBuildSourceEntryGroupSummary {
@@ -1941,7 +1962,7 @@ export function compactStaticBuildSourceDamageViewEntry(
   return {
     id: entry.id,
     label: entry.label,
-    metadata: entry.metadata,
+    metadata: compactStaticBuildSourceDamageViewMeta(entry.metadata),
     supported: entry.supported,
     sourceType: entry.sourceType,
     sourceId: entry.sourceId,
@@ -1984,6 +2005,18 @@ export function compactStaticBuildSourceDamageViewEntry(
           ...(entry.build ? { build: entry.build } : {}),
         }
       : {}),
+  }
+}
+
+export function compactStaticBuildSourceDamageViewMeta(
+  metadata: StaticBuildSourceDamageViewEntry["metadata"],
+): CompactStaticBuildSourceDamageViewMeta {
+  return {
+    canonicalLabel: metadata.canonicalLabel,
+    stableKey: metadata.stableKey,
+    entryKind: metadata.entryKind,
+    damageType: metadata.damageType,
+    resolutionMode: metadata.resolutionMode,
   }
 }
 
@@ -2096,7 +2129,7 @@ export function compactStaticBuildSourceUtilityViewEntry(
   return {
     id: entry.id,
     label: entry.label,
-    metadata: entry.metadata,
+    metadata: compactStaticBuildSourceUtilityViewMeta(entry.metadata),
     supported: entry.supported,
     sourceType: entry.sourceType,
     sourceId: entry.sourceId,
@@ -2139,6 +2172,20 @@ export function compactStaticBuildSourceUtilityViewEntry(
           ),
         }
       : {}),
+  }
+}
+
+export function compactStaticBuildSourceUtilityViewMeta(
+  metadata: StaticBuildSourceUtilityViewEntry["metadata"],
+): CompactStaticBuildSourceUtilityViewMeta {
+  return {
+    canonicalLabel: metadata.canonicalLabel,
+    stableKey: metadata.stableKey,
+    entryKind: metadata.entryKind,
+    utilityType: metadata.utilityType,
+    resolutionMode: metadata.resolutionMode,
+    targetScope: metadata.targetScope,
+    unit: metadata.unit,
   }
 }
 
