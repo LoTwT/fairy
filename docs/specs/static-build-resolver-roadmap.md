@@ -6736,3 +6736,34 @@ caveatSummary` 这些兼容字段补齐。
 - `V167.2` 已完成：compact `group` 的 requirement summary 已改为显式 compact types
 - `V167.3` 已完成：现有测试与 runtime 校验已覆盖
 - `V167.4` 已完成：roadmap、索引与架构文档已同步
+
+## 171. V168 explicit compact row requirement summaries
+
+`V167` 收口后，compact contract 中下一批仍直接复用 raw requirement summary type 的显式缺口主要集中在 `row`：
+
+- `skill-matrix row.requirementSummary`
+- `trigger-matrix row.requirementSummary`
+
+`V168` 只解决一件事：
+
+1. 把上述 `row` requirement summary 改成显式 compact type
+
+### 171.1 分阶段
+
+1. `V168.1` scope freeze
+2. `V168.2` runtime/type contract alignment
+3. `V168.3` tests / prompt alignment
+4. `V168.4` docs closeout
+
+### 171.2 非目标
+
+1. 不改变 `entry` 上的 requirement summary type
+2. 不改变 requirement summary 的字段值
+3. 不改变 `includeDetails` 语义
+
+### 171.3 当前状态
+
+- `V168.1` 已完成：冻结到 explicit compact row requirement summaries
+- `V168.2` 已完成：compact `row` 的 requirement summary 已改为显式 compact types
+- `V168.3` 已完成：现有测试与 runtime 校验已覆盖
+- `V168.4` 已完成：roadmap、索引与架构文档已同步

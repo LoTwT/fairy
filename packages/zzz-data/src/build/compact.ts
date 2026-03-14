@@ -177,7 +177,7 @@ export interface StaticBuildCompactSkillMatrixRow {
   diagnosticSummary: CompactStaticBuildDiagnosticSummary
   sourceNotes?: StaticBuildSourceNoteEntry[]
   sourceNoteSummary: CompactStaticBuildSourceNoteSummary
-  requirementSummary: StaticBuildSkillMatrixRow["requirementSummary"]
+  requirementSummary: CompactStaticBuildSourceDamageViewRequirementSummary
   assumptionSummary: CompactStaticBuildAssumptionSummary
   caveatSummary: CompactStaticBuildCaveatSummary
   assumptions?: string[]
@@ -406,7 +406,7 @@ export interface StaticBuildCompactTriggerMatrixRow {
   metadata: StaticBuildTriggerMatrixRowMeta
   effectSummary: StaticBuildTriggerMatrixRow["effectSummary"]
   requirements?: StaticBuildTriggerMatrixRow["requirements"]
-  requirementSummary: StaticBuildTriggerMatrixRow["requirementSummary"]
+  requirementSummary: CompactStaticBuildSourceDamageViewRequirementSummary
   diagnostics?: StaticBuildDiagnosticEntry[]
   diagnosticSummary: CompactStaticBuildDiagnosticSummary
   sourceNotes?: StaticBuildSourceNoteEntry[]
@@ -780,7 +780,9 @@ export function compactStaticBuildSkillMatrixRow(
     sourceNoteSummary: compactStaticBuildSourceNoteSummary(
       row.sourceNoteSummary,
     ),
-    requirementSummary: row.requirementSummary,
+    requirementSummary: compactStaticBuildRequirementSummary(
+      row.requirementSummary,
+    ),
     assumptionSummary: compactStaticBuildAssumptionSummary(
       row.assumptionSummary,
     ),
@@ -890,7 +892,9 @@ export function compactStaticBuildTriggerMatrixRow(
     supported: row.supported,
     metadata: row.metadata,
     effectSummary: row.effectSummary,
-    requirementSummary: row.requirementSummary,
+    requirementSummary: compactStaticBuildRequirementSummary(
+      row.requirementSummary,
+    ),
     diagnosticSummary: compactStaticBuildDiagnosticSummary(
       row.diagnosticSummary,
     ),
