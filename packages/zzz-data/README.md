@@ -102,7 +102,7 @@ import {
   - `家政员`
   - `灼心摇壶`
   - 这类条目不会并入主 damage resolver，而是作为独立 utility 条目暴露
-  - 顶层 `views` 与 `views.summary` 当前已新增稳定 `caveatSummary`，用于汇总 assumptions 与 unsupported entries
+  - 顶层 `views`、`views.summary` 与 `views.summary.groups[*]` 当前已新增稳定 `caveatSummary`，用于汇总 assumptions 与 unsupported entries
 
 ```ts
 import { resolveStaticBuildDamage } from "zzz-data"

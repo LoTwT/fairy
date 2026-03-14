@@ -760,6 +760,7 @@ export interface StaticBuildSourceUtilityViewGroupSummary {
   supportedCount: number
   unsupportedCount: number
   requirementSummary: StaticBuildSourceUtilityViewRequirementSummary
+  caveatSummary: StaticBuildEntryCaveatSummary
   diagnosticSummary: StaticBuildDiagnosticSummary
   sourceNoteSummary: StaticBuildSourceNoteSummary
   assumptionSummary: StaticBuildAssumptionSummary

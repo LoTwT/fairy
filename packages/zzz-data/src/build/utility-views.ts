@@ -447,6 +447,10 @@ function summarizeSourceUtilityViews(
       requirementSummary: summarizeSourceUtilityViewRequirements(
         groupEntries.flatMap((entry) => entry.requirements),
       ),
+      caveatSummary: summarizeSourceUtilityViewCaveats(
+        groupEntries,
+        groupEntries.flatMap((entry) => entry.assumptions),
+      ),
       diagnosticSummary: summarizeDiagnosticEntries(
         groupEntries.flatMap((entry) => entry.diagnostics),
       ),

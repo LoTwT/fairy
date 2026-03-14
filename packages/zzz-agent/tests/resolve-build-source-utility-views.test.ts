@@ -82,6 +82,12 @@ describe("resolveBuildSourceUtilityViews tool", () => {
           key: "trigger",
           label: "按次触发条目",
           count: 1,
+          caveatSummary: {
+            assumptionCount: 1,
+            unsupportedCount: 0,
+            hasAssumptions: true,
+            hasUnsupported: false,
+          },
           assumptionSummary: {
             count: 1,
             hasAssumptions: true,
@@ -282,6 +288,12 @@ describe("resolveBuildSourceUtilityViews tool", () => {
           key: "trigger",
           label: "按次触发条目",
           count: 8,
+          caveatSummary: {
+            assumptionCount: 16,
+            unsupportedCount: 0,
+            hasAssumptions: true,
+            hasUnsupported: false,
+          },
           assumptionSummary: {
             count: 16,
             hasAssumptions: true,
