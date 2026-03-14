@@ -7587,6 +7587,43 @@ caveatSummary` 这些兼容字段补齐。
 - `V193.3` 已完成：现有测试与 runtime 校验已覆盖
 - `V193.4` 已完成：roadmap、索引与架构文档已同步
 
+## 197. V194 explicit compact skill row metadata sources
+
+`V193` 收口后，compact `skill-matrix row` 中仍直接复用 raw row / metadata enum shape 的稳定缺口集中在：
+
+1. `StaticBuildCompactSkillMatrixRow.damageType`
+2. `CompactStaticBuildSkillMatrixRowMeta.templateSource`
+3. `CompactStaticBuildSkillMatrixRowMeta.attributeSource`
+4. `CompactStaticBuildSkillMatrixRowMeta.entryType`
+5. `CompactStaticBuildSkillMatrixRowMeta.aggregationType`
+6. `CompactStaticBuildSkillMatrixRowMeta.variantAxis`
+7. `CompactStaticBuildSkillMatrixRowMeta.targetSize`
+
+`V194` 只解决这一件事：
+
+1. 把 compact `skill-matrix row` 的结构语义字段改为显式 compact types
+
+### 197.1 分阶段
+
+1. `V194.1` scope freeze
+2. `V194.2` runtime/type contract alignment
+3. `V194.3` tests / prompt alignment
+4. `V194.4` docs closeout
+
+### 197.2 非目标
+
+1. 不改变 row 值
+2. 不改变 `attribute / skillTag / skillMultiplier`
+3. 不改变 `summary / damage / build`
+4. 不改变 `includeDetails` 语义
+
+### 197.3 当前状态
+
+- `V194.1` 已完成：冻结到 explicit compact skill row metadata sources
+- `V194.2` 已完成：compact `skill-matrix row` 的结构语义字段已改为显式 compact types
+- `V194.3` 已完成：现有测试与 runtime 校验已覆盖
+- `V194.4` 已完成：roadmap、索引与架构文档已同步
+
 ## 174. V171 explicit compact top-level summary effect summaries
 
 `V170` 收口后，compact contract 中下一批仍直接复用 raw effect summary item type 的显式缺口主要集中在 top-level `summary`：

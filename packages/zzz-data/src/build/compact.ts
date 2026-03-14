@@ -100,6 +100,33 @@ export type CompactStaticBuildTriggerMatrixTemplateSource =
   | "main-formula"
   | "source-view"
 
+export type CompactStaticBuildSkillMatrixTemplateSource =
+  | "curated"
+  | "generated"
+
+export type CompactStaticBuildSkillMatrixAttributeSource =
+  | "agent-default"
+  | "context"
+  | "template"
+
+export type CompactStaticBuildSkillMatrixEntryType =
+  | "hit"
+  | "total"
+  | "extra"
+  | "variant"
+  | "size-variant"
+
+export type CompactStaticBuildSkillMatrixAggregationType =
+  | "per-hit"
+  | "whole-entry"
+
+export type CompactStaticBuildSkillMatrixVariantAxis =
+  | "segment"
+  | "target-size"
+  | "condition"
+
+export type CompactStaticBuildTargetSize = "small" | "medium" | "large"
+
 export interface CompactStaticBuildResult {
   profile: CompactStaticBuildProfile
   mode: CompactStaticBuildMode
@@ -533,7 +560,7 @@ export interface StaticBuildCompactSkillMatrixRow {
   label: string
   metadata: CompactStaticBuildSkillMatrixRowMeta
   skillTag: StaticBuildSkillMatrixRow["skillTag"]
-  damageType: StaticBuildSkillMatrixRow["damageType"]
+  damageType: CompactStaticBuildSourceDamageType
   attribute: StaticBuildSkillMatrixRow["attribute"]
   combatTags: string[]
   skillMultiplier: string
@@ -576,20 +603,20 @@ export interface CompactStaticBuildSkillMatrixRowMeta {
   qualifiers: string[]
   canonicalLabel: string
   stableKey: string
-  templateSource: StaticBuildSkillMatrixRowMeta["templateSource"]
+  templateSource: CompactStaticBuildSkillMatrixTemplateSource
   sourceSkillTypeId: number
   sourceStatId: string
   sourceStatName: string
   sourceOccurrence: number
-  attributeSource: StaticBuildSkillMatrixRowMeta["attributeSource"]
+  attributeSource: CompactStaticBuildSkillMatrixAttributeSource
   templateCombatTags: string[]
-  entryType: StaticBuildSkillMatrixRowMeta["entryType"]
-  aggregationType: StaticBuildSkillMatrixRowMeta["aggregationType"]
+  entryType: CompactStaticBuildSkillMatrixEntryType
+  aggregationType: CompactStaticBuildSkillMatrixAggregationType
   isAdditionalDamage: boolean
-  variantAxis?: StaticBuildSkillMatrixRowMeta["variantAxis"]
+  variantAxis?: CompactStaticBuildSkillMatrixVariantAxis
   segmentLabel?: string
   segmentIndex?: number
-  targetSize?: StaticBuildSkillMatrixRowMeta["targetSize"]
+  targetSize?: CompactStaticBuildTargetSize
 }
 
 export interface CompactStaticBuildSkillMatrixGroupSummary {
