@@ -105,6 +105,7 @@ describe("resolveBuildSourceDamageViews tool", () => {
         },
       ],
     })
+    expect((result as any).views.entries[0]?.assumptions).toBeUndefined()
     expect((result as any).views.entries[0]?.requirements).toBeUndefined()
     expect((result as any).views.diagnosticSummary).toEqual({
       count: 3,
@@ -628,11 +629,9 @@ describe("resolveBuildSourceDamageViews tool", () => {
       },
     })
     expect((result as any).views.entries[0].requirements).toBeUndefined()
-    expect(
-      (result as any).views.entries[0].assumptions.some((item: string) =>
-        item.includes("按 coreSkillLevel 与异常精通推导 [异放] 比例"),
-      ),
-    ).toBe(true)
+    expect((result as any).views.entries[0].assumptionSummary).toMatchObject({
+      hasAssumptions: true,
+    })
   })
 
   it("returns full source-damage requirements and build details only when explicitly requested", async () => {
@@ -668,6 +667,9 @@ describe("resolveBuildSourceDamageViews tool", () => {
     })
 
     expect((result as any).found).toBe(true)
+    expect(Array.isArray((result as any).views.entries[0].assumptions)).toBe(
+      true,
+    )
     expect(Array.isArray((result as any).views.entries[0].requirements)).toBe(
       true,
     )

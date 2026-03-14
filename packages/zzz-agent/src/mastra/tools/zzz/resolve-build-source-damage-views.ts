@@ -33,7 +33,7 @@ export const resolveBuildSourceDamageViews = createTool({
       .optional()
       .default(false)
       .describe(
-        "是否返回 source-damage-view entry 的原始明细。默认 false，只保留 entry.requirementSummary / entry.*Summary 等紧凑字段；true 时会额外返回 entry.requirements / entry.diagnostics / entry.sourceNotes，且在原始结果带 build 时透传 entry.build。",
+        "是否返回 source-damage-view entry 的原始明细。默认 false，只保留 entry.requirementSummary / entry.assumptionSummary / entry.*Summary 等紧凑字段；true 时会额外返回 entry.assumptions / entry.requirements / entry.diagnostics / entry.sourceNotes，且在原始结果带 build 时透传 entry.build。",
       ),
   }),
   execute: async (input) => {

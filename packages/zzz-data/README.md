@@ -378,8 +378,11 @@ views.assumptionSummary
 
 - `views.entries[0].summary`
 - `views.entries[0].requirementSummary`
+- `views.entries[0].assumptionSummary`
 - `views.entries[0].diagnosticSummary`
 - `views.entries[0].sourceNoteSummary`
+
+默认 compact source-damage-view entries 不再附带 `entry.assumptions / entry.requirements / entry.diagnostics / entry.sourceNotes / entry.build`。只有确实需要逐条展开 raw assumptions、requirements、diagnostics / source notes 或完整 build 时，才使用 `includeDetails = true`。
 
 如果你只想知道当前 source-specific view 有多少前置条件、哪些 requirement kind 已满足 / 未满足，也不要再手工遍历 `requirements[]`，直接使用：
 

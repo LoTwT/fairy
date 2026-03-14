@@ -353,13 +353,14 @@ describe("static build compact helpers", () => {
 
     const compact = compactStaticBuildSourceDamageViewsResult(views)
 
+    expect(compact.entries[0]?.assumptions).toBeUndefined()
     expect(compact.entries[0]?.diagnostics).toBeUndefined()
     expect(compact.entries[0]?.sourceNotes).toBeUndefined()
     expect(compact.entries[0]?.build).toBeUndefined()
     expect(compact.entries[0]?.requirements).toBeUndefined()
   })
 
-  it("keeps source-damage-view entry raw requirements and details only when requested", () => {
+  it("keeps source-damage-view entry raw assumptions, requirements and details only when requested", () => {
     const views = resolveStaticBuildSourceDamageViews({
       mode: "baseline",
       loadout: {
@@ -395,6 +396,9 @@ describe("static build compact helpers", () => {
 
     const compact = compactStaticBuildSourceDamageViewsResult(views, true)
 
+    expect(compact.entries[0]?.assumptions).toEqual(
+      views.entries[0]?.assumptions,
+    )
     expect(compact.entries[0]?.requirements).toEqual(
       views.entries[0]?.requirements,
     )
