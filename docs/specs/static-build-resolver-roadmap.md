@@ -6438,3 +6438,31 @@ caveatSummary` 这些兼容字段补齐。
 - `V158.2` 已完成：compact skill-matrix `summary / group summary` 已改为显式 compact types
 - `V158.3` 已完成：现有测试与 runtime 校验已覆盖
 - `V158.4` 已完成：roadmap、索引与架构文档已同步
+
+## 162. V159 explicit compact group summaries
+
+`V158` 收口后，compact `trigger-matrix`、`source-damage-view`、`source-utility-view`、`source-entry collection` 的 `summary.groups[*]` 仍直接复用 raw group summary type。
+
+`V159` 只解决一件事：
+
+1. 把这些 compact `group summary` 改成显式 compact type
+
+### 162.1 分阶段
+
+1. `V159.1` scope freeze
+2. `V159.2` runtime/type contract alignment
+3. `V159.3` tests / prompt alignment
+4. `V159.4` docs closeout
+
+### 162.2 非目标
+
+1. 不改变任何 runtime group summary 值
+2. 不改变 `includeDetails` 语义
+3. 不新增业务字段
+
+### 162.3 当前状态
+
+- `V159.1` 已完成：冻结到 explicit compact group summaries
+- `V159.2` 已完成：上述 compact `group summary` 已改为显式 compact types
+- `V159.3` 已完成：现有测试与 runtime 校验已覆盖
+- `V159.4` 已完成：roadmap、索引与架构文档已同步
