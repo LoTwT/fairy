@@ -1,9 +1,15 @@
 import type {
   AnomalyDamageParams,
+  AnomalyType,
+  CritParams,
   DamageResult,
+  DazeVulnerabilityParams,
+  DefenseParams,
   DisorderDamageParams,
   NormalDamageParams,
+  ResistanceParams,
   SheerDamageParams,
+  VulnerabilityParams,
 } from "../calculator/types.js"
 import type {
   ResolveStaticBuildResult,
@@ -76,10 +82,10 @@ export interface CompactStaticBuildResult {
   assumptions?: string[]
   unsupportedEffects?: string[]
   damageParams?:
-    | NormalDamageParams
-    | SheerDamageParams
-    | AnomalyDamageParams
-    | DisorderDamageParams
+    | CompactStaticBuildNormalDamageParams
+    | CompactStaticBuildSheerDamageParams
+    | CompactStaticBuildAnomalyDamageParams
+    | CompactStaticBuildDisorderDamageParams
   trace?: CompactStaticBuildTraceItem[]
 }
 
@@ -149,6 +155,83 @@ export interface CompactStaticBuildResolvedPanel {
   penetrationValue: number
   baseDamageStat: "attack" | "sheerForce"
   baseDamageValue: number
+}
+
+export interface CompactStaticBuildDefenseParams {
+  attackerLevelBase: number
+  defenderBaseDefense: number
+  defenseBonus: number
+  defenseReduction: number
+  penetrationRate: number
+  penetrationValue: number
+}
+
+export interface CompactStaticBuildResistanceParams {
+  defenderResistance: number
+  resistanceReduction: number
+  ignoreResistance: number
+}
+
+export interface CompactStaticBuildVulnerabilityParams {
+  vulnerabilityBonus: number
+  damageReduction: number
+}
+
+export interface CompactStaticBuildDazeVulnerabilityParams {
+  isStunned: boolean
+  stunVulnerability: number
+  nonStunVulnerability: number
+}
+
+export interface CompactStaticBuildCritParams {
+  critRate: number
+  critDamage: number
+}
+
+export interface CompactStaticBuildNormalDamageParams {
+  baseDamage: number
+  bonusDamageSum: number
+  crit: CompactStaticBuildCritParams
+  defense: CompactStaticBuildDefenseParams
+  resistance: CompactStaticBuildResistanceParams
+  vulnerability: CompactStaticBuildVulnerabilityParams
+  dazeVulnerability: CompactStaticBuildDazeVulnerabilityParams
+  specialMultiplier?: number
+}
+
+export interface CompactStaticBuildSheerDamageParams {
+  baseDamage: number
+  bonusDamageSum: number
+  crit: CompactStaticBuildCritParams
+  sheerBonusSum: number
+  resistance: CompactStaticBuildResistanceParams
+  vulnerability: CompactStaticBuildVulnerabilityParams
+  dazeVulnerability: CompactStaticBuildDazeVulnerabilityParams
+  specialMultiplier?: number
+}
+
+export interface CompactStaticBuildAnomalyDamageParams {
+  virtualAgentLevel: number
+  virtualAgentAttack: number
+  virtualAgentAnomalyProficiency: number
+  damageMultiplier: number
+  bonusDamageSum: number
+  defense: CompactStaticBuildDefenseParams
+  resistance: CompactStaticBuildResistanceParams
+  vulnerability: CompactStaticBuildVulnerabilityParams
+  dazeVulnerability: CompactStaticBuildDazeVulnerabilityParams
+  anomalyBonusDamageSum: number
+  anomalyCritRate: number
+  anomalyCritDamage: number
+}
+
+export interface CompactStaticBuildDisorderDamageParams extends Omit<
+  CompactStaticBuildAnomalyDamageParams,
+  "damageMultiplier"
+> {
+  damageMultiplierFactor?: number
+  anomalyType: AnomalyType
+  remainingTime: number
 }
 
 export interface CompactStaticBuildDiagnosticGroupSummary {
@@ -459,7 +542,7 @@ export function compactStaticBuildResult(
           sourceNotes: build.sourceNotes?.map((entry) =>
             compactStaticBuildSourceNoteEntry(entry),
           ),
-          damageParams: build.damageParams,
+          damageParams: compactStaticBuildDamageParams(build.damageParams),
           trace: build.trace?.map((item) => compactStaticBuildTraceItem(item)),
         }
       : {}),
@@ -548,6 +631,161 @@ export function compactStaticBuildResolvedPanel(
     baseDamageStat: panel.baseDamageStat,
     baseDamageValue: panel.baseDamageValue,
   }
+}
+
+export function compactStaticBuildDefenseParams(
+  params: DefenseParams,
+): CompactStaticBuildDefenseParams {
+  return {
+    attackerLevelBase: params.attackerLevelBase,
+    defenderBaseDefense: params.defenderBaseDefense,
+    defenseBonus: params.defenseBonus,
+    defenseReduction: params.defenseReduction,
+    penetrationRate: params.penetrationRate,
+    penetrationValue: params.penetrationValue,
+  }
+}
+
+export function compactStaticBuildResistanceParams(
+  params: ResistanceParams,
+): CompactStaticBuildResistanceParams {
+  return {
+    defenderResistance: params.defenderResistance,
+    resistanceReduction: params.resistanceReduction,
+    ignoreResistance: params.ignoreResistance,
+  }
+}
+
+export function compactStaticBuildVulnerabilityParams(
+  params: VulnerabilityParams,
+): CompactStaticBuildVulnerabilityParams {
+  return {
+    vulnerabilityBonus: params.vulnerabilityBonus,
+    damageReduction: params.damageReduction,
+  }
+}
+
+export function compactStaticBuildDazeVulnerabilityParams(
+  params: DazeVulnerabilityParams,
+): CompactStaticBuildDazeVulnerabilityParams {
+  return {
+    isStunned: params.isStunned,
+    stunVulnerability: params.stunVulnerability,
+    nonStunVulnerability: params.nonStunVulnerability,
+  }
+}
+
+export function compactStaticBuildCritParams(
+  params: CritParams,
+): CompactStaticBuildCritParams {
+  return {
+    critRate: params.critRate,
+    critDamage: params.critDamage,
+  }
+}
+
+export function compactStaticBuildNormalDamageParams(
+  params: NormalDamageParams,
+): CompactStaticBuildNormalDamageParams {
+  return {
+    baseDamage: params.baseDamage,
+    bonusDamageSum: params.bonusDamageSum,
+    crit: compactStaticBuildCritParams(params.crit),
+    defense: compactStaticBuildDefenseParams(params.defense),
+    resistance: compactStaticBuildResistanceParams(params.resistance),
+    vulnerability: compactStaticBuildVulnerabilityParams(params.vulnerability),
+    dazeVulnerability: compactStaticBuildDazeVulnerabilityParams(
+      params.dazeVulnerability,
+    ),
+    specialMultiplier: params.specialMultiplier,
+  }
+}
+
+export function compactStaticBuildSheerDamageParams(
+  params: SheerDamageParams,
+): CompactStaticBuildSheerDamageParams {
+  return {
+    baseDamage: params.baseDamage,
+    bonusDamageSum: params.bonusDamageSum,
+    crit: compactStaticBuildCritParams(params.crit),
+    sheerBonusSum: params.sheerBonusSum,
+    resistance: compactStaticBuildResistanceParams(params.resistance),
+    vulnerability: compactStaticBuildVulnerabilityParams(params.vulnerability),
+    dazeVulnerability: compactStaticBuildDazeVulnerabilityParams(
+      params.dazeVulnerability,
+    ),
+    specialMultiplier: params.specialMultiplier,
+  }
+}
+
+export function compactStaticBuildAnomalyDamageParams(
+  params: AnomalyDamageParams,
+): CompactStaticBuildAnomalyDamageParams {
+  return {
+    virtualAgentLevel: params.virtualAgentLevel,
+    virtualAgentAttack: params.virtualAgentAttack,
+    virtualAgentAnomalyProficiency: params.virtualAgentAnomalyProficiency,
+    damageMultiplier: params.damageMultiplier,
+    bonusDamageSum: params.bonusDamageSum,
+    defense: compactStaticBuildDefenseParams(params.defense),
+    resistance: compactStaticBuildResistanceParams(params.resistance),
+    vulnerability: compactStaticBuildVulnerabilityParams(params.vulnerability),
+    dazeVulnerability: compactStaticBuildDazeVulnerabilityParams(
+      params.dazeVulnerability,
+    ),
+    anomalyBonusDamageSum: params.anomalyBonusDamageSum,
+    anomalyCritRate: params.anomalyCritRate,
+    anomalyCritDamage: params.anomalyCritDamage,
+  }
+}
+
+export function compactStaticBuildDisorderDamageParams(
+  params: DisorderDamageParams,
+): CompactStaticBuildDisorderDamageParams {
+  return {
+    virtualAgentLevel: params.virtualAgentLevel,
+    virtualAgentAttack: params.virtualAgentAttack,
+    virtualAgentAnomalyProficiency: params.virtualAgentAnomalyProficiency,
+    bonusDamageSum: params.bonusDamageSum,
+    defense: compactStaticBuildDefenseParams(params.defense),
+    resistance: compactStaticBuildResistanceParams(params.resistance),
+    vulnerability: compactStaticBuildVulnerabilityParams(params.vulnerability),
+    dazeVulnerability: compactStaticBuildDazeVulnerabilityParams(
+      params.dazeVulnerability,
+    ),
+    anomalyBonusDamageSum: params.anomalyBonusDamageSum,
+    anomalyCritRate: params.anomalyCritRate,
+    anomalyCritDamage: params.anomalyCritDamage,
+    damageMultiplierFactor: params.damageMultiplierFactor,
+    anomalyType: params.anomalyType,
+    remainingTime: params.remainingTime,
+  }
+}
+
+export function compactStaticBuildDamageParams(
+  params:
+    | NormalDamageParams
+    | SheerDamageParams
+    | AnomalyDamageParams
+    | DisorderDamageParams,
+):
+  | CompactStaticBuildNormalDamageParams
+  | CompactStaticBuildSheerDamageParams
+  | CompactStaticBuildAnomalyDamageParams
+  | CompactStaticBuildDisorderDamageParams {
+  if ("anomalyType" in params || "remainingTime" in params) {
+    return compactStaticBuildDisorderDamageParams(params)
+  }
+
+  if ("damageMultiplier" in params) {
+    return compactStaticBuildAnomalyDamageParams(params)
+  }
+
+  if ("sheerBonusSum" in params) {
+    return compactStaticBuildSheerDamageParams(params)
+  }
+
+  return compactStaticBuildNormalDamageParams(params)
 }
 
 export function compactStaticBuildDiagnosticEntry(
