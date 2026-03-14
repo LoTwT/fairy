@@ -1029,7 +1029,7 @@ const compactEntries = compactStaticBuildSourceEntryCollection(collection)
 其中：
 
 - `compactStaticBuildSkillMatrixResult(matrix)` 默认不带 `row.diagnostics / row.sourceNotes / row.build`
-- `compactStaticBuildTriggerMatrixResult(matrix)` 默认不带 `row.diagnostics / row.sourceNotes / row.build`
+- `compactStaticBuildTriggerMatrixResult(matrix)` 默认不带 `row.requirements / row.diagnostics / row.sourceNotes / row.build`
 - `compactStaticBuildSourceEntryCollection(collection)` 默认不带 mixed `entry.diagnostics / entry.sourceNotes / entry.build`；只有 `compactStaticBuildSourceEntryCollection(collection, true)` 才会展开这些明细，其中 `entry.build` 仅在对应 `source-damage-view` 原始结果本来带 `build` 时透传
 
 只有显式传 `includeDetails = true` 时，才会带上对应底层明细结果。

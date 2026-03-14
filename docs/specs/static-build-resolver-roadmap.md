@@ -5814,3 +5814,27 @@ caveatSummary` 这些兼容字段补齐。
 - `V136.2` 已完成：默认 compact mixed entries 已不再携带 `entry.diagnostics / entry.sourceNotes / entry.build`
 - `V136.3` 已完成：高层 `resolveBuildSourceEntries` 测试、prompt 与 README 已对齐 `includeDetails=true`
 - `V136.4` 已完成：README、roadmap、索引与架构文档已同步
+
+## 140. V137 trigger-matrix compact row requirement gating
+
+`V136` 收口后，mixed `source-entry entries` 的 raw details 已收紧到 `includeDetails=true`。
+
+但 compact `trigger-matrix rows` 仍默认携带原始 `row.requirements`，而行级 / 组级 / 顶层 `requirementSummary` 已经齐全。
+
+`V137` 只解决一件事：
+
+1. 把 compact `trigger-matrix rows` 的 `row.requirements` 也移动到 `includeDetails=true`
+
+### 140.1 范围
+
+1. `V137.1` scope freeze
+2. `V137.2` runtime/type contract alignment
+3. `V137.3` tool assertion / prompt alignment
+4. `V137.4` docs closeout
+
+### 140.2 当前状态
+
+- `V137.1` 已完成：冻结到 trigger-matrix compact row requirement gating
+- `V137.2` 已完成：`StaticBuildCompactTriggerMatrixRow` 默认已不再携带 `requirements`
+- `V137.3` 已完成：高层 `resolveBuildTriggerMatrix` 测试与 prompt 已对齐 `includeDetails=true`
+- `V137.4` 已完成：README、roadmap、索引与架构文档已同步

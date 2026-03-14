@@ -30,7 +30,7 @@ export const resolveBuildTriggerMatrix = createTool({
       .optional()
       .default(false)
       .describe(
-        "是否返回每行完整 build 结果，以及 row.diagnostics / row.sourceNotes 等明细数组。默认 false，以避免上下文过大。",
+        "是否返回每行原始明细。默认 false，只保留 row.requirementSummary / row.*Summary 等紧凑字段；true 时会额外返回 row.requirements / row.diagnostics / row.sourceNotes，且在原始结果带 build 时透传 row.build。",
       ),
   }),
   execute: async (input) => {

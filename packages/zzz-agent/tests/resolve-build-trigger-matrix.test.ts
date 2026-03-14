@@ -702,12 +702,10 @@ describe("resolveBuildTriggerMatrix tool", () => {
         hasUnsupported: false,
       },
     })
-    expect(
-      (result as any).matrix.rows[1].requirements.map((item: any) => item.kind),
-    ).toEqual(expect.arrayContaining(["panel-value", "scenario-value"]))
+    expect((result as any).matrix.rows[1].requirements).toBeUndefined()
   })
 
-  it("returns trigger row diagnostics and source notes only when explicitly requested", async () => {
+  it("returns trigger row raw requirements and diagnostics only when explicitly requested", async () => {
     const result = await runTool(resolveBuildTriggerMatrix, {
       agent: "爱丽丝",
       mode: "baseline",
@@ -740,6 +738,7 @@ describe("resolveBuildTriggerMatrix tool", () => {
     })
 
     expect((result as any).found).toBe(true)
+    expect((result as any).matrix.rows[0].requirements).toBeInstanceOf(Array)
     expect((result as any).matrix.rows[0].diagnostics).toBeInstanceOf(Array)
     expect((result as any).matrix.rows[0].sourceNotes).toBeInstanceOf(Array)
     expect((result as any).matrix.rows[0].build).toBeTruthy()
