@@ -625,6 +625,7 @@ function summarizeSkillMatrix(rows: StaticBuildSkillMatrixRow[]) {
     commonFormulaMultipliers,
     variableFormulaMultipliers,
     effectSummary: summarizeSkillMatrixEffects(rows),
+    assumptionSummary: summarizeAssumptions(assumptions),
     caveatSummary: summarizeSkillMatrixCaveats(assumptions, unsupportedEffects),
     diagnosticSummary: summarizeDiagnosticEntries(
       rows.flatMap((row) => row.diagnostics),

@@ -85,6 +85,9 @@ describe("resolveBuildSkillMatrix tool", () => {
       count: (result as any).matrix.assumptions.length,
       hasAssumptions: (result as any).matrix.assumptions.length > 0,
     })
+    expect((result as any).matrix.summary.assumptionSummary).toEqual(
+      (result as any).matrix.assumptionSummary,
+    )
     expect((result as any).matrix.unsupportedEffects).toEqual([
       ...new Set(
         (result as any).matrix.rows.flatMap(

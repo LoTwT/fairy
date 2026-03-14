@@ -47,6 +47,7 @@ describe("static build skill matrix", () => {
       count: result.assumptions.length,
       hasAssumptions: result.assumptions.length > 0,
     })
+    expect(result.summary.assumptionSummary).toEqual(result.assumptionSummary)
     expect(result.rows[0]?.caveatSummary).toEqual({
       assumptionCount: result.rows[0]?.assumptions.length,
       unsupportedEffectCount: result.rows[0]?.unsupportedEffects.length,
