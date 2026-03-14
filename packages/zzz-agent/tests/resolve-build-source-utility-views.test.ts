@@ -16,12 +16,24 @@ describe("resolveBuildSourceUtilityViews tool", () => {
       count: (result as any).views.assumptions.length,
       hasAssumptions: (result as any).views.assumptions.length > 0,
     })
+    expect((result as any).views.caveatSummary).toEqual({
+      assumptionCount: (result as any).views.assumptions.length,
+      unsupportedCount: 0,
+      hasAssumptions: (result as any).views.assumptions.length > 0,
+      hasUnsupported: false,
+    })
     expect((result as any).views.summary).toMatchObject({
       entryCount: 1,
       triggerCount: 1,
       rateCount: 0,
       supportedCount: 1,
       unsupportedCount: 0,
+      caveatSummary: {
+        assumptionCount: (result as any).views.assumptions.length,
+        unsupportedCount: 0,
+        hasAssumptions: (result as any).views.assumptions.length > 0,
+        hasUnsupported: false,
+      },
       assumptionSummary: {
         count: (result as any).views.assumptions.length,
         hasAssumptions: (result as any).views.assumptions.length > 0,
@@ -211,12 +223,24 @@ describe("resolveBuildSourceUtilityViews tool", () => {
       count: (result as any).views.assumptions.length,
       hasAssumptions: (result as any).views.assumptions.length > 0,
     })
+    expect((result as any).views.caveatSummary).toEqual({
+      assumptionCount: (result as any).views.assumptions.length,
+      unsupportedCount: 0,
+      hasAssumptions: (result as any).views.assumptions.length > 0,
+      hasUnsupported: false,
+    })
     expect((result as any).views.summary).toMatchObject({
       entryCount: 8,
       triggerCount: 8,
       rateCount: 0,
       supportedCount: 8,
       unsupportedCount: 0,
+      caveatSummary: {
+        assumptionCount: (result as any).views.assumptions.length,
+        unsupportedCount: 0,
+        hasAssumptions: (result as any).views.assumptions.length > 0,
+        hasUnsupported: false,
+      },
       assumptionSummary: {
         count: (result as any).views.assumptions.length,
         hasAssumptions: (result as any).views.assumptions.length > 0,

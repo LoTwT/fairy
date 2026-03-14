@@ -33,12 +33,24 @@ describe("static build source utility views", () => {
       count: result.assumptions.length,
       hasAssumptions: result.assumptions.length > 0,
     })
+    expect(result.caveatSummary).toEqual({
+      assumptionCount: result.assumptions.length,
+      unsupportedCount: 0,
+      hasAssumptions: result.assumptions.length > 0,
+      hasUnsupported: false,
+    })
     expect(result.summary).toMatchObject({
       entryCount: 1,
       triggerCount: 1,
       rateCount: 0,
       supportedCount: 1,
       unsupportedCount: 0,
+      caveatSummary: {
+        assumptionCount: result.assumptions.length,
+        unsupportedCount: 0,
+        hasAssumptions: result.assumptions.length > 0,
+        hasUnsupported: false,
+      },
       assumptionSummary: {
         count: result.assumptions.length,
         hasAssumptions: result.assumptions.length > 0,
@@ -211,6 +223,12 @@ describe("static build source utility views", () => {
     expect(result.assumptionSummary).toEqual({
       count: result.assumptions.length,
       hasAssumptions: result.assumptions.length > 0,
+    })
+    expect(result.caveatSummary).toEqual({
+      assumptionCount: result.assumptions.length,
+      unsupportedCount: 0,
+      hasAssumptions: result.assumptions.length > 0,
+      hasUnsupported: false,
     })
     expect(result.entries[0]).toMatchObject({
       id: "magnetic-storm-charlie-energy-refund",
@@ -435,6 +453,12 @@ describe("static build source utility views", () => {
       rateCount: 0,
       supportedCount: 8,
       unsupportedCount: 0,
+      caveatSummary: {
+        assumptionCount: result.assumptions.length,
+        unsupportedCount: 0,
+        hasAssumptions: result.assumptions.length > 0,
+        hasUnsupported: false,
+      },
       assumptionSummary: {
         count: result.assumptions.length,
         hasAssumptions: result.assumptions.length > 0,

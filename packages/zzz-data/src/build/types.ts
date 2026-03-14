@@ -772,6 +772,7 @@ export interface StaticBuildSourceUtilityViewSummary {
   supportedCount: number
   unsupportedCount: number
   requirementSummary: StaticBuildSourceUtilityViewRequirementSummary
+  caveatSummary: StaticBuildEntryCaveatSummary
   diagnosticSummary: StaticBuildDiagnosticSummary
   sourceNoteSummary: StaticBuildSourceNoteSummary
   assumptionSummary: StaticBuildAssumptionSummary
@@ -788,6 +789,7 @@ export interface StaticBuildEntryCaveatSummary {
 export interface ResolveStaticBuildSourceUtilityViewsResult {
   loadout: StaticBuildResolvedLoadout
   summary: StaticBuildSourceUtilityViewSummary
+  caveatSummary: StaticBuildEntryCaveatSummary
   assumptionSummary: StaticBuildAssumptionSummary
   entries: StaticBuildSourceUtilityViewEntry[]
   assumptions: string[]

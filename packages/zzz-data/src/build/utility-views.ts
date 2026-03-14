@@ -2,6 +2,7 @@ import type {
   ResolveStaticBuildSourceUtilityViewsInput,
   ResolveStaticBuildSourceUtilityViewsResult,
   StaticBuildCatalogEntry,
+  StaticBuildEntryCaveatSummary,
   StaticBuildResolvedLoadout,
   StaticBuildSourceUtilityViewEntry,
   StaticBuildSourceUtilityViewGroupKey,
@@ -388,6 +389,7 @@ export function resolveStaticBuildSourceUtilityViews(
   return {
     loadout,
     summary: summarizeSourceUtilityViews(entries, assumptions),
+    caveatSummary: summarizeSourceUtilityViewCaveats(entries, assumptions),
     assumptionSummary: summarizeAssumptions(assumptions),
     entries,
     assumptions,
@@ -466,9 +468,23 @@ function summarizeSourceUtilityViews(
     requirementSummary: summarizeSourceUtilityViewRequirements(
       entries.flatMap((entry) => entry.requirements),
     ),
+    caveatSummary: summarizeSourceUtilityViewCaveats(entries, assumptions),
     diagnosticSummary: summarizeDiagnosticEntries(diagnostics),
     sourceNoteSummary: summarizeSourceNoteEntries(sourceNotes),
     assumptionSummary: summarizeAssumptions(assumptions),
     groups,
+  }
+}
+
+function summarizeSourceUtilityViewCaveats(
+  entries: StaticBuildSourceUtilityViewEntry[],
+  assumptions: string[],
+): StaticBuildEntryCaveatSummary {
+  const unsupportedCount = entries.filter((entry) => !entry.supported).length
+  return {
+    assumptionCount: assumptions.length,
+    unsupportedCount,
+    hasAssumptions: assumptions.length > 0,
+    hasUnsupported: unsupportedCount > 0,
   }
 }

@@ -4085,3 +4085,35 @@ Batch B（已完成）：
 1. 不为单条 `entry` 增加 `caveatSummary`
 2. 不把同一套 group-level caveat contract 扩到 `source-utility-view`、`source-entry collection`、`trigger-matrix`
 3. 不改变既有 `views.summary.caveatSummary` / `views.caveatSummary`
+
+## 97. V94 source-utility-view caveat summary
+
+当前 `source-utility-view` 已具备：
+
+- 顶层 `views.assumptionSummary`
+- `views.summary.assumptionSummary`
+- `views.summary.supportedCount / unsupportedCount`
+
+但如果上层只想先判断整组 utility views 是否存在 caveat，仍然要自己组合：
+
+- `views.assumptionSummary`
+- `views.summary.unsupportedCount`
+
+### 97.1 当前状态
+
+- `V94.1` 已完成：冻结到 source-utility-view caveat summary
+- `V94.2` 已完成：`ResolveStaticBuildSourceUtilityViewsResult` 与 `StaticBuildSourceUtilityViewSummary` 已新增稳定 `caveatSummary`
+- `V94.3` 已完成：高层 tool 断言与 agent prompt 已对齐 `views.summary.caveatSummary` / `views.caveatSummary`
+- `V94.4` 已完成：相关 specs、roadmap、索引、架构文档与 README 已同步
+
+### 97.2 目标
+
+1. 为 `views` 顶层结果增加稳定 `caveatSummary`
+2. 为 `views.summary` 增加稳定 `caveatSummary`
+3. 保持与现有 assumptions、supportedCount、unsupportedCount 一致
+
+### 97.3 Out of Scope
+
+1. 不为 `groups[*]` 增加 `caveatSummary`
+2. 不为单条 `entry` 增加 `caveatSummary`
+3. 不同时扩到 `source-entry collection`、`trigger-matrix`
