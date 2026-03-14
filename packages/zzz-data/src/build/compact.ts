@@ -475,7 +475,7 @@ export interface StaticBuildCompactSourceDamageViewEntry {
   damageType: StaticBuildSourceDamageViewEntry["damageType"]
   resolutionMode: StaticBuildSourceDamageViewEntry["resolutionMode"]
   requirements?: StaticBuildSourceDamageViewEntry["requirements"]
-  requirementSummary: StaticBuildSourceDamageViewEntry["requirementSummary"]
+  requirementSummary: CompactStaticBuildSourceDamageViewRequirementSummary
   diagnostics?: StaticBuildDiagnosticEntry[]
   diagnosticSummary: CompactStaticBuildDiagnosticSummary
   sourceNotes?: StaticBuildSourceNoteEntry[]
@@ -530,7 +530,7 @@ export interface StaticBuildCompactSourceUtilityViewEntry {
   resolutionMode: StaticBuildSourceUtilityViewEntry["resolutionMode"]
   targetScope: StaticBuildSourceUtilityViewEntry["targetScope"]
   requirements?: StaticBuildSourceUtilityViewEntry["requirements"]
-  requirementSummary: StaticBuildSourceUtilityViewEntry["requirementSummary"]
+  requirementSummary: CompactStaticBuildSourceUtilityViewRequirementSummary
   value: number
   unit: StaticBuildSourceUtilityViewEntry["unit"]
   triggerLabel?: string
@@ -1108,7 +1108,9 @@ export function compactStaticBuildSourceDamageViewEntry(
     sourceId: entry.sourceId,
     damageType: entry.damageType,
     resolutionMode: entry.resolutionMode,
-    requirementSummary: entry.requirementSummary,
+    requirementSummary: compactStaticBuildRequirementSummary(
+      entry.requirementSummary,
+    ),
     diagnosticSummary: compactStaticBuildDiagnosticSummary(
       entry.diagnosticSummary,
     ),
@@ -1248,7 +1250,9 @@ export function compactStaticBuildSourceUtilityViewEntry(
     utilityType: entry.utilityType,
     resolutionMode: entry.resolutionMode,
     targetScope: entry.targetScope,
-    requirementSummary: entry.requirementSummary,
+    requirementSummary: compactStaticBuildRequirementSummary(
+      entry.requirementSummary,
+    ),
     value: entry.value,
     unit: entry.unit,
     triggerLabel: entry.triggerLabel,
@@ -1291,7 +1295,9 @@ export function compactStaticBuildSourceEntry(
       sourceId: entry.sourceId,
       damageType: entry.damageType,
       resolutionMode: entry.resolutionMode,
-      requirementSummary: entry.requirementSummary,
+      requirementSummary: compactStaticBuildRequirementSummary(
+        entry.requirementSummary,
+      ),
       diagnosticSummary: compactStaticBuildDiagnosticSummary(
         entry.diagnosticSummary,
       ),
@@ -1331,7 +1337,9 @@ export function compactStaticBuildSourceEntry(
     utilityType: entry.utilityType,
     resolutionMode: entry.resolutionMode,
     targetScope: entry.targetScope,
-    requirementSummary: entry.requirementSummary,
+    requirementSummary: compactStaticBuildRequirementSummary(
+      entry.requirementSummary,
+    ),
     value: entry.value,
     unit: entry.unit,
     triggerLabel: entry.triggerLabel,

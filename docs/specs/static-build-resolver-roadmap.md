@@ -6767,3 +6767,35 @@ caveatSummary` 这些兼容字段补齐。
 - `V168.2` 已完成：compact `row` 的 requirement summary 已改为显式 compact types
 - `V168.3` 已完成：现有测试与 runtime 校验已覆盖
 - `V168.4` 已完成：roadmap、索引与架构文档已同步
+
+## 172. V169 explicit compact entry requirement summaries
+
+`V168` 收口后，compact contract 中最后一批仍直接复用 raw requirement summary type 的显式缺口集中在 `entry`：
+
+- `source-damage-view entry.requirementSummary`
+- `source-utility-view entry.requirementSummary`
+- mixed `source-entry entry.requirementSummary`
+
+`V169` 只解决一件事：
+
+1. 把上述 `entry` requirement summary 改成显式 compact type
+
+### 172.1 分阶段
+
+1. `V169.1` scope freeze
+2. `V169.2` runtime/type contract alignment
+3. `V169.3` tests / prompt alignment
+4. `V169.4` docs closeout
+
+### 172.2 非目标
+
+1. 不改变 requirement summary 的字段值
+2. 不改变 `includeDetails` 语义
+3. 不改变 compact payload 的业务含义
+
+### 172.3 当前状态
+
+- `V169.1` 已完成：冻结到 explicit compact entry requirement summaries
+- `V169.2` 已完成：compact `entry` 的 requirement summary 已改为显式 compact types
+- `V169.3` 已完成：现有测试与 runtime 校验已覆盖
+- `V169.4` 已完成：roadmap、索引与架构文档已同步
