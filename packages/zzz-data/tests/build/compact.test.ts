@@ -92,6 +92,8 @@ describe("static build compact helpers", () => {
       compact.requirementSummary,
     )
     expect(compact.rows[0]?.build).toBeUndefined()
+    expect(compact.rows[0]?.diagnostics).toBeUndefined()
+    expect(compact.rows[0]?.sourceNotes).toBeUndefined()
     expect(compact.rows[0]?.requirementSummary).toEqual({
       count: 0,
       satisfiedCount: 0,
@@ -103,6 +105,34 @@ describe("static build compact helpers", () => {
     expect(compact.rows[0]?.resolvedBuckets).toEqual(
       matrix.rows[0]?.resolvedBuckets,
     )
+  })
+
+  it("keeps skill matrix row diagnostics and source notes only when requested", () => {
+    const matrix = resolveStaticBuildSkillMatrix({
+      loadout: {
+        agentId: "1241",
+        wEngineId: "14124",
+      },
+      panel: {
+        attack: 3200,
+        baseAttack: 1200,
+        critRate: 0.55,
+        critDamage: 1.4,
+      },
+      context: {
+        combatTags: ["suppressionMode"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    const compact = compactStaticBuildSkillMatrixResult(matrix, true)
+
+    expect(compact.rows[0]?.diagnostics).toEqual(matrix.rows[0]?.diagnostics)
+    expect(compact.rows[0]?.sourceNotes).toEqual(matrix.rows[0]?.sourceNotes)
+    expect(compact.rows[0]?.build).toEqual(matrix.rows[0]?.build)
   })
 
   it("compacts trigger matrix rows and keeps full build only when requested", () => {

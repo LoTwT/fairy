@@ -76,6 +76,10 @@
 - `V67 skill-matrix top-level caveat summary` 已收口
 - `V68 skill-matrix group caveat summary` 已收口
 - 当前边界：`resolveStaticBuildSkillMatrix` 仍只支持 `normal / sheer`
+- `V128 single-build top-level aggregate summary alignment` 已收口
+- `V129 single-build effect summary alignment` 已收口
+- `V130 single-build compact result alignment` 已收口
+- `V131 single-build compact detail gating` 已收口
 
 ## 2. 阶段划分
 
@@ -5681,6 +5685,30 @@ caveatSummary` 这些兼容字段补齐。
 - `V131.2` 已完成：`CompactStaticBuildResult` 默认已不再携带 `diagnostics / sourceNotes`
 - `V131.3` 已完成：高层 `resolveBuildDamage` 测试与 prompt 已对齐 `includeDetails=true`
 - `V131.4` 已完成：README、roadmap、索引与架构文档已同步
+
+## 135. V132 skill-matrix compact row detail gating
+
+`V131` 收口后，single-build compact 已默认不再携带 `diagnostics / sourceNotes`。
+
+但 `resolveBuildSkillMatrix` 默认返回的 compact rows 仍默认携带这两类明细数组，而行级 `diagnosticSummary / sourceNoteSummary / assumptionSummary / caveatSummary` 已经齐全。
+
+`V132` 只解决一件事：
+
+1. 把 compact skill-matrix rows 的 `diagnostics / sourceNotes` 也移到 `includeDetails=true`
+
+### 135.1 范围
+
+1. `V132.1` scope freeze
+2. `V132.2` runtime/type contract alignment
+3. `V132.3` tool assertion / prompt alignment
+4. `V132.4` docs closeout
+
+### 135.2 当前状态
+
+- `V132.1` 已完成：冻结到 skill-matrix compact row detail gating
+- `V132.2` 已完成：`StaticBuildCompactSkillMatrixRow` 默认已不再携带 `diagnostics / sourceNotes`
+- `V132.3` 已完成：高层 `resolveBuildSkillMatrix` 测试与 prompt 已对齐 `includeDetails=true`
+- `V132.4` 已完成：README、roadmap、索引与架构文档已同步
 
 显式不做：
 

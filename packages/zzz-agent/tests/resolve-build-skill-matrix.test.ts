@@ -51,15 +51,13 @@ describe("resolveBuildSkillMatrix tool", () => {
     const firstRow = (result as any).matrix.rows[0]
     expect(firstRow.metadata.sourceStatId).toBeTruthy()
     expect(firstRow.build).toBeUndefined()
+    expect(firstRow.diagnostics).toBeUndefined()
+    expect(firstRow.sourceNotes).toBeUndefined()
     expect(firstRow.damage.expected).toBeGreaterThan(0)
     expect(firstRow.summary.expectedTotal).toBeCloseTo(
       firstRow.damage.expected,
       6,
     )
-    expect(firstRow.diagnostics).toBeInstanceOf(Array)
-    expect(firstRow.diagnosticSummary.count).toBe(firstRow.diagnostics.length)
-    expect(firstRow.sourceNotes).toBeInstanceOf(Array)
-    expect(firstRow.sourceNoteSummary.count).toBe(firstRow.sourceNotes.length)
     expect(firstRow.requirementSummary).toEqual({
       count: 0,
       satisfiedCount: 0,
@@ -126,12 +124,12 @@ describe("resolveBuildSkillMatrix tool", () => {
     expect((result as any).matrix.summary.caveatSummary).toEqual(
       (result as any).matrix.caveatSummary,
     )
-    expect((result as any).matrix.diagnosticSummary.count).toBe(
-      (result as any).matrix.rows.flatMap((row: any) => row.diagnostics).length,
-    )
-    expect((result as any).matrix.sourceNoteSummary.count).toBe(
-      (result as any).matrix.rows.flatMap((row: any) => row.sourceNotes).length,
-    )
+    expect(
+      (result as any).matrix.diagnosticSummary.count,
+    ).toBeGreaterThanOrEqual(0)
+    expect(
+      (result as any).matrix.sourceNoteSummary.count,
+    ).toBeGreaterThanOrEqual(0)
     expect((result as any).matrix.summary.diagnosticSummary).toEqual(
       (result as any).matrix.diagnosticSummary,
     )
@@ -163,12 +161,8 @@ describe("resolveBuildSkillMatrix tool", () => {
     )
     expect(normalGroupEffect?.appliedRowCount).toBe(normalGroup?.count)
     expect(normalGroupEffect?.totalRowCount).toBe(normalGroup?.count)
-    expect(normalGroup?.diagnosticSummary.count).toBe(
-      normalRows.flatMap((row: any) => row.diagnostics).length,
-    )
-    expect(normalGroup?.sourceNoteSummary.count).toBe(
-      normalRows.flatMap((row: any) => row.sourceNotes).length,
-    )
+    expect(normalGroup?.diagnosticSummary.count).toBeGreaterThanOrEqual(0)
+    expect(normalGroup?.sourceNoteSummary.count).toBeGreaterThanOrEqual(0)
     expect(normalGroup?.caveatSummary).toEqual({
       assumptionCount: normalGroup?.assumptions.length,
       unsupportedEffectCount: normalGroup?.unsupportedEffects.length,
@@ -223,6 +217,8 @@ describe("resolveBuildSkillMatrix tool", () => {
       (result as any).matrix.rows.flatMap((row: any) => row.sourceNotes).length,
     )
     const firstRow = (result as any).matrix.rows[0]
+    expect(firstRow.diagnostics).toBeInstanceOf(Array)
+    expect(firstRow.sourceNotes).toBeInstanceOf(Array)
     expect(firstRow.diagnosticSummary.count).toBe(firstRow.diagnostics.length)
     expect(firstRow.sourceNoteSummary.count).toBe(firstRow.sourceNotes.length)
     expect(firstRow.caveatSummary).toEqual({

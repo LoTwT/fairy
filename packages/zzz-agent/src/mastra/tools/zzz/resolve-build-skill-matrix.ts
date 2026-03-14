@@ -85,7 +85,7 @@ export const resolveBuildSkillMatrix = createTool({
       .optional()
       .default(false)
       .describe(
-        "是否返回每行完整 build 结果（trace、damageParams 等）。默认 false，以避免上下文过大。",
+        "是否返回每行完整 build 结果，以及 row.diagnostics / row.sourceNotes 等明细数组。默认 false，以避免上下文过大。",
       ),
   }),
   execute: async (input) => {

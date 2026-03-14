@@ -101,6 +101,9 @@ it("keeps screenshot summary by default", async () => {
   expect(base.includes("build.caveatSummary")).toBe(true)
   expect(base.includes("includeDetails=true")).toBe(true)
   expect(base.includes("build.diagnostics / build.sourceNotes")).toBe(true)
+  expect(base.includes("row.diagnostics / row.sourceNotes / row.build")).toBe(
+    true,
+  )
   expect(base.includes("entry.metadata.canonicalLabel")).toBe(true)
   expect(base.includes("entry.metadata.stableKey")).toBe(true)
   expect(base.includes("views.summary.groups")).toBe(true)
