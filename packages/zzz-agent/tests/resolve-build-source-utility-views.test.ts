@@ -163,6 +163,10 @@ describe("resolveBuildSourceUtilityViews tool", () => {
         statusGroups: [],
         ownerGroups: [],
       },
+      assumptionSummary: {
+        count: 1,
+        hasAssumptions: true,
+      },
     })
   })
 

@@ -183,6 +183,10 @@ describe("static build source utility views", () => {
         statusGroups: [],
         ownerGroups: [],
       },
+      assumptionSummary: {
+        count: 1,
+        hasAssumptions: true,
+      },
     })
   })
 
@@ -250,6 +254,10 @@ describe("static build source utility views", () => {
         hasResearchOnly: false,
         statusGroups: [],
         ownerGroups: [],
+      },
+      assumptionSummary: {
+        count: 1,
+        hasAssumptions: true,
       },
     })
   })

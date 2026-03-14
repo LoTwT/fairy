@@ -742,6 +742,7 @@ export interface StaticBuildSourceUtilityViewEntry {
   diagnosticSummary: StaticBuildDiagnosticSummary
   sourceNotes: StaticBuildSourceNoteEntry[]
   sourceNoteSummary: StaticBuildSourceNoteSummary
+  assumptionSummary: StaticBuildAssumptionSummary
   assumptions: string[]
 }
 
@@ -822,6 +823,7 @@ export interface StaticBuildSourceEntryCollectionSummary {
 export interface ResolveStaticBuildSourceEntriesResult {
   loadout: StaticBuildResolvedLoadout
   summary: StaticBuildSourceEntryCollectionSummary
+  assumptionSummary: StaticBuildAssumptionSummary
   entries: StaticBuildSourceEntry[]
   assumptions: string[]
 }

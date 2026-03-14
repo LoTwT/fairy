@@ -3473,3 +3473,61 @@ Batch B（已完成）：
 1. 不改变顶层 `assumptions` 的原始数组语义
 2. 不新增 source-utility-view entry 的 `assumptionSummary`
 3. 不改变顶层 `summary`
+
+## 78. V75 source-utility-view entry assumption summary
+
+`V74` 收口后，source-utility-view 顶层已经有稳定的 `assumptionSummary`。
+
+但当上层只想先判断“某一条 utility entry 是否带 assumptions、共有多少条”时，仍要回退到 `entry.assumptions.length` 手工统计。
+
+`V75` 只解决一件事：
+
+- 为 `StaticBuildSourceUtilityViewEntry` 与 compact entry 增加局部 `assumptionSummary`
+
+### 78.1 当前状态
+
+- `V75.1` 已完成：冻结到 source-utility-view entry assumption summary
+- `V75.2` 已完成：`StaticBuildSourceUtilityViewEntry` 与 compact entry 已新增局部 `assumptionSummary`
+- `V75.3` 已完成：高层 tool 断言与 agent prompt 已对齐 `entry.assumptionSummary`
+- `V75.4` 已完成：相关 specs、roadmap、索引、架构文档与 README 已同步
+
+### 78.2 目标
+
+1. 为 source-utility-view entry 增加稳定 `assumptionSummary`
+2. 直接从当前 entry 的 `assumptions` 派生计数与布尔位
+3. 对齐 compact helper 与高层 `resolve-build-source-utility-views`
+
+### 78.3 Out of Scope
+
+1. 不改变 entry 级 `assumptions` 的原始数组语义
+2. 不改变顶层 `summary` 或顶层 `assumptionSummary`
+3. 不为其他 source-entry 类型追加新 key
+
+## 79. V76 source-entry collection assumption summary
+
+`V75` 收口后，standalone source-damage-view、source-utility-view 与 trigger-matrix 都已经具备顶层 `assumptionSummary`。
+
+但 unified `source-entry collection` 仍只有原始 `assumptions` 数组。上层如果只想先判断“当前 mixed collection 是否带 assumptions、共有多少条”，仍要回退到 `collection.assumptions.length` 手工统计。
+
+`V76` 只解决一件事：
+
+- 为 `ResolveStaticBuildSourceEntriesResult` 与 compact collection 增加顶层 `assumptionSummary`
+
+### 79.1 当前状态
+
+- `V76.1` 已完成：冻结到 source-entry collection assumption summary
+- `V76.2` 已完成：`ResolveStaticBuildSourceEntriesResult` 与 compact collection 已新增顶层 `assumptionSummary`
+- `V76.3` 已完成：高层 tool 断言与 agent prompt 已对齐 `collection.assumptionSummary`
+- `V76.4` 已完成：相关 specs、roadmap、索引、架构文档与 README 已同步
+
+### 79.2 目标
+
+1. 为 unified source-entry collection 增加稳定 `assumptionSummary`
+2. 直接从当前 collection 的 `assumptions` 派生计数与布尔位
+3. 对齐 compact helper 与高层 `resolve-build-source-entries`
+
+### 79.3 Out of Scope
+
+1. 不改变 collection 级 `assumptions` 的原始数组语义
+2. 不改变 `summary` 或 `entries[*]` contract
+3. 不提前引入 group 级 `assumptionSummary`

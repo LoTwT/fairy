@@ -184,6 +184,7 @@ function createEntry(
     diagnosticSummary: summarizeDiagnosticEntries([]),
     sourceNotes: [],
     sourceNoteSummary: summarizeSourceNoteEntries([]),
+    assumptionSummary: summarizeAssumptions(entry.assumptions),
   }
 }
 

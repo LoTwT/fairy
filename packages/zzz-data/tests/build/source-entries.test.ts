@@ -119,6 +119,10 @@ describe("static build source entries", () => {
         },
       ],
     })
+    expect(result.assumptionSummary).toEqual({
+      count: result.assumptions.length,
+      hasAssumptions: result.assumptions.length > 0,
+    })
     expect(result.entries).toHaveLength(1)
     expect(result.entries[0]).toMatchObject({
       id: "lunar-noviluna-energy-refund",
@@ -164,6 +168,10 @@ describe("static build source entries", () => {
           isStunned: true,
         },
       },
+    })
+    expect(result.assumptionSummary).toEqual({
+      count: result.assumptions.length,
+      hasAssumptions: result.assumptions.length > 0,
     })
 
     expect(result.summary).toMatchObject({

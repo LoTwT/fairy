@@ -12,6 +12,10 @@ describe("resolveBuildSourceEntries tool", () => {
     })
 
     expect((result as any).found).toBe(true)
+    expect((result as any).collection.assumptionSummary).toEqual({
+      count: (result as any).collection.assumptions.length,
+      hasAssumptions: (result as any).collection.assumptions.length > 0,
+    })
     expect((result as any).collection.summary).toMatchObject({
       entryCount: 1,
       sourceDamageViewCount: 0,
@@ -163,6 +167,10 @@ describe("resolveBuildSourceEntries tool", () => {
     })
 
     expect((result as any).found).toBe(true)
+    expect((result as any).collection.assumptionSummary).toEqual({
+      count: (result as any).collection.assumptions.length,
+      hasAssumptions: (result as any).collection.assumptions.length > 0,
+    })
     expect((result as any).collection.summary).toMatchObject({
       entryCount: 2,
       sourceDamageViewCount: 1,

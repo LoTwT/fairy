@@ -83,8 +83,10 @@ it("keeps screenshot summary by default", async () => {
   expect(base.includes("views.summary.rateCount")).toBe(true)
   expect(base.includes("views.summary.requirementSummary")).toBe(true)
   expect(base.includes("entry.requirementSummary")).toBe(true)
+  expect(base.includes("entry.assumptionSummary")).toBe(true)
   expect(base.includes("collection.summary.isUtilityOnly")).toBe(true)
   expect(base.includes("collection.summary.groups")).toBe(true)
+  expect(base.includes("collection.assumptionSummary")).toBe(true)
   expect(
     base.includes("collection.summary.sourceDamageRequirementSummary"),
   ).toBe(true)

@@ -1,12 +1,14 @@
 import type {
   ResolveStaticBuildSourceEntriesInput,
   ResolveStaticBuildSourceEntriesResult,
+  StaticBuildAssumptionSummary,
   StaticBuildResolvedLoadout,
   StaticBuildSourceEntry,
   StaticBuildSourceEntryCollectionSummary,
   StaticBuildSourceEntryGroupKey,
 } from "./types.js"
 import {
+  summarizeAssumptions,
   summarizeDiagnosticEntries,
   summarizeSourceNoteEntries,
 } from "./resolver.js"
@@ -71,12 +73,14 @@ export function resolveStaticBuildSourceEntries(
   }
 
   const sortedEntries = entries.toSorted(compareSourceEntries)
+  const uniqueAssumptions = [...new Set(assumptions)]
 
   return {
     loadout,
     summary: summarizeSourceEntries(sortedEntries),
+    assumptionSummary: summarizeSourceEntryAssumptions(uniqueAssumptions),
     entries: sortedEntries,
-    assumptions: [...new Set(assumptions)],
+    assumptions: uniqueAssumptions,
   }
 }
 
@@ -180,4 +184,10 @@ function summarizeSourceEntries(
     sourceNoteSummary: summarizeSourceNoteEntries(sourceNotes),
     groups,
   }
+}
+
+function summarizeSourceEntryAssumptions(
+  assumptions: string[],
+): StaticBuildAssumptionSummary {
+  return summarizeAssumptions(assumptions)
 }

@@ -130,6 +130,7 @@ export interface StaticBuildCompactSourceUtilityViewEntry {
   diagnosticSummary: StaticBuildSourceUtilityViewEntry["diagnosticSummary"]
   sourceNotes: StaticBuildSourceNoteEntry[]
   sourceNoteSummary: StaticBuildSourceUtilityViewEntry["sourceNoteSummary"]
+  assumptionSummary: StaticBuildSourceUtilityViewEntry["assumptionSummary"]
   assumptions: string[]
 }
 
@@ -140,6 +141,7 @@ export type StaticBuildCompactSourceEntry =
 export interface CompactStaticBuildSourceEntryCollection {
   loadout: ResolveStaticBuildSourceEntriesResult["loadout"]
   summary: StaticBuildSourceEntryCollectionSummary
+  assumptionSummary: ResolveStaticBuildSourceEntriesResult["assumptionSummary"]
   assumptions: string[]
   entries: StaticBuildCompactSourceEntry[]
 }
@@ -260,6 +262,7 @@ export function compactStaticBuildSourceEntryCollection(
   return {
     loadout: collection.loadout,
     summary: collection.summary,
+    assumptionSummary: collection.assumptionSummary,
     assumptions: collection.assumptions,
     entries: collection.entries.map((entry) =>
       compactStaticBuildSourceEntry(entry, includeDetails),
@@ -354,6 +357,7 @@ export function compactStaticBuildSourceEntry(
     diagnosticSummary: entry.diagnosticSummary,
     sourceNotes: entry.sourceNotes,
     sourceNoteSummary: entry.sourceNoteSummary,
+    assumptionSummary: entry.assumptionSummary,
     assumptions: entry.assumptions,
   }
 }
