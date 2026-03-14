@@ -102,10 +102,40 @@ describe("resolveBuildTriggerMatrix tool", () => {
         }),
       ]),
     )
+    const mainFormulaRow = (result as any).matrix.rows.find(
+      (row: any) => row.metadata.entryKind === "main-formula",
+    )
+    expect(mainFormulaRow?.effectSummary).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          effectId: "alice-state-polarity-assault-ratio",
+          bucket: "技能倍率",
+          value: "+150%",
+          appliedRowCount: 1,
+          totalRowCount: 1,
+          appliesToAllRows: true,
+        }),
+      ]),
+    )
     expect(sourceViewGroup?.effectSummary).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
           effectId: "alice-state-polarity-assault-ratio",
+          appliedRowCount: 1,
+          totalRowCount: 1,
+          appliesToAllRows: true,
+        }),
+      ]),
+    )
+    const sourceViewRow = (result as any).matrix.rows.find(
+      (row: any) => row.metadata.entryKind === "source-view",
+    )
+    expect(sourceViewRow?.effectSummary).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          effectId: "alice-state-polarity-assault-ratio",
+          bucket: "技能倍率",
+          value: "+150%",
           appliedRowCount: 1,
           totalRowCount: 1,
           appliesToAllRows: true,

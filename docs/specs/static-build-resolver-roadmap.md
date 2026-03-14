@@ -5097,3 +5097,40 @@ caveatSummary` 这些兼容字段补齐。
 1. 不改变既有 `matrix.summary.caveatSummary`
 2. 不改变既有 `matrix.summary.groups[*].caveatSummary`
 3. 不同时扩到 `source-view entry`
+
+## 121. V118 trigger-matrix row effect summary alignment
+
+`V117` 收口后，`trigger-entry matrix` 已在顶层与 group 层补齐稳定 `effectSummary`。
+
+但逐行消费时，调用方仍只能继续读 `row.build.trace`，或自己把单行 trace 重新聚合成 effect 概况。
+
+`V118` 只解决一件事：
+
+1. 给 `trigger-entry matrix rows[*]` 补齐稳定 `effectSummary`
+
+### 121.1 阶段范围
+
+1. `V118.1` scope freeze
+2. `V118.2` runtime contract alignment
+3. `V118.3` tool assertion / prompt alignment
+4. `V118.4` README / roadmap / docs closeout
+
+### 121.2 当前状态
+
+- `V118.1` 已完成：冻结到 trigger-matrix row effect summary alignment
+- `V118.2` 已完成：`StaticBuildTriggerMatrixRow` 与 compact row 已补齐稳定 `effectSummary`
+- `V118.3` 已完成：高层 trigger-matrix tool 断言与 Agent prompt 已对齐 `row.effectSummary`
+- `V118.4` 已完成：README、roadmap、索引与架构文档已同步
+
+### 121.3 当前边界
+
+本阶段只做：
+
+1. 在 `StaticBuildTriggerMatrixRow` 新增稳定 `effectSummary`
+2. 让 row-level `effectSummary` 复用现有 trigger-matrix effect 聚合语义
+3. 明确逐行解释 trigger matrix 时优先读取 `row.effectSummary`
+
+显式不做：
+
+1. 不改变顶层 `matrix.summary.effectSummary / matrix.effectSummary` 的语义
+2. 不改变组级 `matrix.summary.groups[*].effectSummary` 的语义

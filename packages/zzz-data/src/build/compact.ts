@@ -65,6 +65,7 @@ export interface StaticBuildCompactTriggerMatrixRow {
   label: string
   supported: boolean
   metadata: StaticBuildTriggerMatrixRowMeta
+  effectSummary: StaticBuildTriggerMatrixRow["effectSummary"]
   requirements: StaticBuildTriggerMatrixRow["requirements"]
   requirementSummary: StaticBuildTriggerMatrixRow["requirementSummary"]
   diagnostics: StaticBuildDiagnosticEntry[]
@@ -272,6 +273,7 @@ export function compactStaticBuildTriggerMatrixRow(
     label: row.label,
     supported: row.supported,
     metadata: row.metadata,
+    effectSummary: row.effectSummary,
     requirements: row.requirements,
     requirementSummary: row.requirementSummary,
     diagnostics: row.diagnostics,

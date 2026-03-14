@@ -77,37 +77,41 @@ export function resolveStaticBuildTriggerMatrix(
   const build = resolveStaticBuildDamage(input)
   const views = resolveStaticBuildSourceDamageViews(input)
 
-  const rows: StaticBuildTriggerMatrixRow[] = [
-    {
-      id: `main-formula:${input.scenario.damageType}`,
-      label:
+  const mainFormulaRow: StaticBuildTriggerMatrixRow = {
+    id: `main-formula:${input.scenario.damageType}`,
+    label:
+      input.scenario.damageType === "anomaly" ? "主异常结算" : "主紊乱结算",
+    supported: true,
+    metadata: {
+      canonicalLabel:
         input.scenario.damageType === "anomaly" ? "主异常结算" : "主紊乱结算",
-      supported: true,
-      metadata: {
-        canonicalLabel:
-          input.scenario.damageType === "anomaly" ? "主异常结算" : "主紊乱结算",
-        stableKey: `main-formula:${input.scenario.damageType}`,
-        entryKind: "main-formula",
-        templateSource: "main-formula",
-        damageType: input.scenario.damageType,
-      },
-      requirements: [],
-      requirementSummary: summarizeSourceDamageViewRequirements([]),
-      diagnostics: build.diagnostics,
-      diagnosticSummary: summarizeDiagnosticEntries(build.diagnostics),
-      sourceNotes: build.sourceNotes,
-      sourceNoteSummary: summarizeSourceNoteEntries(build.sourceNotes),
-      caveatSummary: summarizeTriggerMatrixRowCaveat(true, build.assumptions),
-      assumptionSummary: summarizeAssumptions(build.assumptions),
-      assumptions: build.assumptions,
-      damage: {
-        expected: build.damage.expected.total,
-        crit: build.damage.crit.total,
-        noCrit: build.damage.noCrit.total,
-      },
-      summary: build.summary,
-      build,
+      stableKey: `main-formula:${input.scenario.damageType}`,
+      entryKind: "main-formula",
+      templateSource: "main-formula",
+      damageType: input.scenario.damageType,
     },
+    effectSummary: [],
+    requirements: [],
+    requirementSummary: summarizeSourceDamageViewRequirements([]),
+    diagnostics: build.diagnostics,
+    diagnosticSummary: summarizeDiagnosticEntries(build.diagnostics),
+    sourceNotes: build.sourceNotes,
+    sourceNoteSummary: summarizeSourceNoteEntries(build.sourceNotes),
+    caveatSummary: summarizeTriggerMatrixRowCaveat(true, build.assumptions),
+    assumptionSummary: summarizeAssumptions(build.assumptions),
+    assumptions: build.assumptions,
+    damage: {
+      expected: build.damage.expected.total,
+      crit: build.damage.crit.total,
+      noCrit: build.damage.noCrit.total,
+    },
+    summary: build.summary,
+    build,
+  }
+  mainFormulaRow.effectSummary = summarizeTriggerMatrixEffects([mainFormulaRow])
+
+  const rows: StaticBuildTriggerMatrixRow[] = [
+    mainFormulaRow,
     ...views.entries.map((entry) => toTriggerMatrixRow(entry)),
   ].toSorted(compareTriggerMatrixRows)
 
@@ -134,7 +138,7 @@ export function resolveStaticBuildTriggerMatrix(
 function toTriggerMatrixRow(
   entry: StaticBuildSourceDamageViewEntry,
 ): StaticBuildTriggerMatrixRow {
-  return {
+  const row: StaticBuildTriggerMatrixRow = {
     id: `source-view:${entry.id}`,
     label: entry.label,
     supported: entry.supported,
@@ -150,6 +154,7 @@ function toTriggerMatrixRow(
       sourceViewId: entry.id,
       sourceViewResolutionMode: entry.resolutionMode,
     },
+    effectSummary: [],
     requirements: entry.requirements,
     requirementSummary: entry.requirementSummary,
     diagnostics: entry.diagnostics,
@@ -166,6 +171,8 @@ function toTriggerMatrixRow(
     summary: entry.summary,
     build: entry.build,
   }
+  row.effectSummary = summarizeTriggerMatrixEffects([row])
+  return row
 }
 
 function compareTriggerMatrixRows(

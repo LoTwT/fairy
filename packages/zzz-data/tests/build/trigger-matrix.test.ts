@@ -111,10 +111,40 @@ describe("static build trigger matrix", () => {
         }),
       ]),
     )
+    const mainFormulaRow = result.rows.find(
+      (row) => row.metadata.entryKind === "main-formula",
+    )
+    expect(mainFormulaRow?.effectSummary).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          effectId: "alice-state-polarity-assault-ratio",
+          bucket: "技能倍率",
+          value: "+150%",
+          appliedRowCount: 1,
+          totalRowCount: 1,
+          appliesToAllRows: true,
+        }),
+      ]),
+    )
     expect(sourceViewGroup?.effectSummary).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
           effectId: "alice-state-polarity-assault-ratio",
+          appliedRowCount: 1,
+          totalRowCount: 1,
+          appliesToAllRows: true,
+        }),
+      ]),
+    )
+    const sourceViewRow = result.rows.find(
+      (row) => row.metadata.entryKind === "source-view",
+    )
+    expect(sourceViewRow?.effectSummary).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          effectId: "alice-state-polarity-assault-ratio",
+          bucket: "技能倍率",
+          value: "+150%",
           appliedRowCount: 1,
           totalRowCount: 1,
           appliesToAllRows: true,

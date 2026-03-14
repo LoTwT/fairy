@@ -942,6 +942,7 @@ export interface StaticBuildTriggerMatrixRow {
   label: string
   supported: boolean
   metadata: StaticBuildTriggerMatrixRowMeta
+  effectSummary: StaticBuildTriggerMatrixEffectSummaryItem[]
   requirements: StaticBuildSourceDamageViewRequirement[]
   requirementSummary: StaticBuildSourceDamageViewRequirementSummary
   diagnostics: StaticBuildDiagnosticEntry[]
