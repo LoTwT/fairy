@@ -6528,3 +6528,37 @@ caveatSummary` 这些兼容字段补齐。
 - `V161.2` 已完成：compact 结果对象顶层的 aggregate summary 已改为显式 compact types
 - `V161.3` 已完成：现有测试与 runtime 校验已覆盖
 - `V161.4` 已完成：roadmap、索引与架构文档已同步
+
+## 165. V162 explicit compact row and entry aggregate summaries
+
+`V161` 收口后，compact contract 中仍直接复用 raw aggregate summary type 的剩余显式缺口主要集中在：
+
+- `skill-matrix row`
+- `trigger-matrix row`
+- `source-damage-view entry`
+- `source-utility-view entry`
+- mixed `source-entry entry`
+
+`V162` 只解决一件事：
+
+1. 把上述 row / entry 级 aggregate summary 改成显式 compact type
+
+### 165.1 分阶段
+
+1. `V162.1` scope freeze
+2. `V162.2` runtime/type contract alignment
+3. `V162.3` tests / prompt alignment
+4. `V162.4` docs closeout
+
+### 165.2 非目标
+
+1. 不改变 `summary / group` 上的 aggregate summary type
+2. 不改变任何 aggregate summary 的字段值
+3. 不改变 `includeDetails` 语义
+
+### 165.3 当前状态
+
+- `V162.1` 已完成：冻结到 explicit compact row / entry aggregate summaries
+- `V162.2` 已完成：compact row / entry 的 aggregate summary 已改为显式 compact types
+- `V162.3` 已完成：现有测试与 runtime 校验已覆盖
+- `V162.4` 已完成：roadmap、索引与架构文档已同步
