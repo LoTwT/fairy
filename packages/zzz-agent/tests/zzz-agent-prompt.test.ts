@@ -96,6 +96,7 @@ it("keeps screenshot summary by default", async () => {
   expect(base.includes("matrix.summary.groups[*].sourceNoteSummary")).toBe(true)
   expect(base.includes("build.diagnosticSummary")).toBe(true)
   expect(base.includes("build.sourceNoteSummary")).toBe(true)
+  expect(base.includes("build.effectSummary")).toBe(true)
   expect(base.includes("build.assumptionSummary")).toBe(true)
   expect(base.includes("build.caveatSummary")).toBe(true)
   expect(base.includes("entry.metadata.canonicalLabel")).toBe(true)

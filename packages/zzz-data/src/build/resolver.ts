@@ -56,6 +56,30 @@ const sourceNoteLabels: Record<StaticBuildSourceNoteStatus, string> = {
   "research-only": "仅研究说明",
 }
 
+const effectBucketLabels = {
+  attackPercent: "攻击力",
+  flatAttack: "攻击力",
+  bonusDamageSum: "增伤",
+  critRate: "暴击率",
+  critDamage: "暴击伤害",
+  defenseReduction: "减防",
+  penetrationRate: "穿透率",
+  penetrationValue: "穿透值",
+  resistanceReduction: "减抗",
+  ignoreResistance: "无视抗性",
+  vulnerabilityBonus: "易伤",
+  damageReduction: "减伤",
+  stunVulnerability: "失衡易伤",
+  nonStunVulnerability: "非失衡易伤",
+  sheerBonusSum: "贯穿增伤",
+  anomalyMastery: "异常精通",
+  anomalyProficiency: "异常掌控",
+  anomalyBonusDamageSum: "异常增伤",
+  anomalyCritRate: "异常暴击率",
+  anomalyCritDamage: "异常暴击伤害",
+  skillMultiplierFactor: "技能倍率",
+} as const
+
 function parseSkillMultiplier(value: number | string): number {
   if (typeof value === "number") return value
   const trimmed = value.trim()
@@ -63,6 +87,45 @@ function parseSkillMultiplier(value: number | string): number {
     return Number.parseFloat(trimmed) / 100
   }
   return Number.parseFloat(trimmed)
+}
+
+function formatEffectValue(value: number) {
+  const normalized = Number.parseFloat(value.toFixed(3))
+  return Number.isInteger(normalized)
+    ? String(normalized)
+    : normalized.toString()
+}
+
+function formatEffectModifier(
+  bucket: string,
+  value: number,
+  combine: "sum" | "multiply",
+) {
+  if (combine === "multiply") {
+    const percent = (value - 1) * 100
+    return `×${formatEffectValue(value)}（${percent >= 0 ? "+" : ""}${formatEffectValue(percent)}%）`
+  }
+
+  if (
+    bucket === "critRate" ||
+    bucket === "critDamage" ||
+    bucket === "bonusDamageSum" ||
+    bucket === "penetrationRate" ||
+    bucket === "resistanceReduction" ||
+    bucket === "ignoreResistance" ||
+    bucket === "vulnerabilityBonus" ||
+    bucket === "damageReduction" ||
+    bucket === "stunVulnerability" ||
+    bucket === "nonStunVulnerability" ||
+    bucket === "sheerBonusSum" ||
+    bucket === "anomalyBonusDamageSum" ||
+    bucket === "anomalyCritRate" ||
+    bucket === "anomalyCritDamage"
+  ) {
+    return `${value >= 0 ? "+" : ""}${formatEffectValue(value * 100)}%`
+  }
+
+  return `${value >= 0 ? "+" : ""}${formatEffectValue(value)}`
 }
 
 function createEmptyBuckets(): StaticBuildResolvedBuckets {
@@ -190,6 +253,54 @@ export function summarizeAssumptions(assumptions: string[]) {
   }
 }
 
+export function summarizeResolveEffects(trace: StaticBuildTraceItem[]) {
+  const summary = new Map<
+    string,
+    {
+      effectId: string
+      sourceName: string
+      label: string
+      bucketTexts: Set<string>
+      valueTexts: Set<string>
+    }
+  >()
+
+  for (const item of trace) {
+    if (item.status !== "applied" || !item.modifiers?.length) continue
+
+    let effect = summary.get(item.effectId)
+    if (!effect) {
+      effect = {
+        effectId: item.effectId,
+        sourceName: item.sourceName,
+        label: item.label,
+        bucketTexts: new Set<string>(),
+        valueTexts: new Set<string>(),
+      }
+      summary.set(item.effectId, effect)
+    }
+
+    for (const modifier of item.modifiers) {
+      effect.bucketTexts.add(
+        effectBucketLabels[
+          modifier.bucket as keyof typeof effectBucketLabels
+        ] ?? modifier.bucket,
+      )
+      effect.valueTexts.add(
+        formatEffectModifier(modifier.bucket, modifier.value, modifier.combine),
+      )
+    }
+  }
+
+  return [...summary.values()].map((item) => ({
+    effectId: item.effectId,
+    sourceName: item.sourceName,
+    label: item.label,
+    bucket: [...item.bucketTexts].join(" + "),
+    value: [...item.valueTexts].join("；"),
+  }))
+}
+
 export function summarizeResolveCaveats(
   assumptions: string[],
   unsupportedEffects: string[],
@@ -251,6 +362,7 @@ function buildResolveSummary(
 function createResolveResult(
   result: Omit<
     ResolveStaticBuildResult,
+    | "effectSummary"
     | "summary"
     | "diagnosticSummary"
     | "sourceNoteSummary"
@@ -265,9 +377,11 @@ function createResolveResult(
     result.assumptions,
     result.unsupportedEffects,
   )
+  const effectSummary = summarizeResolveEffects(result.trace)
 
   return {
     ...result,
+    effectSummary,
     diagnosticSummary,
     sourceNoteSummary,
     assumptionSummary,

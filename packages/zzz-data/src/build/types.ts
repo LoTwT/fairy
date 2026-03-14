@@ -542,12 +542,21 @@ export interface StaticBuildResolveSummary {
   sourceNoteGroups: StaticBuildSourceNoteGroupSummary[]
 }
 
+export interface StaticBuildResolveEffectSummaryItem {
+  effectId: string
+  sourceName: string
+  label: string
+  bucket: string
+  value: string
+}
+
 export interface ResolveStaticBuildResult {
   profile: StaticBuildProfileResult
   mode: StaticBuildMode
   manualBaseMode?: StaticBuildBaseMode
   loadout: StaticBuildResolvedLoadout
   summary: StaticBuildResolveSummary
+  effectSummary: StaticBuildResolveEffectSummaryItem[]
   diagnosticSummary: StaticBuildDiagnosticSummary
   sourceNoteSummary: StaticBuildSourceNoteSummary
   assumptionSummary: StaticBuildAssumptionSummary

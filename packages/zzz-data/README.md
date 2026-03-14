@@ -183,6 +183,17 @@ result.sourceNoteSummary
 //   ownerGroups: [],
 // }
 
+result.effectSummary
+// [
+//   {
+//     effectId: "yixuan-core-selected-skill-bonus",
+//     sourceName: "仪玄",
+//     label: "指定招式伤害提升",
+//     bucket: "增伤",
+//     value: "+60%",
+//   },
+// ]
+
 result.assumptionSummary
 // {
 //   count: 1,
@@ -198,7 +209,7 @@ result.caveatSummary
 // }
 ```
 
-如果你要做单场景结果展示，不要再自己同时从 `resolvedPanel`、`damage.expected.breakdown`、`diagnostics`、`sourceNotes`、`unsupportedEffects` 拼摘要，优先直接使用 `result.summary`。如果你要先判断当前单场景结果是否带 diagnostics / source notes / assumptions / unsupported caveat，也优先读取 `result.diagnosticSummary`、`result.sourceNoteSummary`、`result.assumptionSummary`、`result.caveatSummary`；如需兼容旧调用方，也可以继续读取 `result.summary.diagnosticGroups`、`result.summary.sourceNoteGroups` 与 `result.summary.hasUnsupportedEffects`。
+如果你要做单场景结果展示，不要再自己同时从 `resolvedPanel`、`damage.expected.breakdown`、`diagnostics`、`sourceNotes`、`unsupportedEffects` 拼摘要，优先直接使用 `result.summary`。如果你要生成单场景“增益清单”，也优先读取 `result.effectSummary`，不要继续手工遍历 `trace` 重新聚合 bucket 与数值。如果你要先判断当前单场景结果是否带 diagnostics / source notes / assumptions / unsupported caveat，也优先读取 `result.diagnosticSummary`、`result.sourceNoteSummary`、`result.assumptionSummary`、`result.caveatSummary`；如需兼容旧调用方，也可以继续读取 `result.summary.diagnosticGroups`、`result.summary.sourceNoteGroups` 与 `result.summary.hasUnsupportedEffects`。
 
 如果你需要拿到不应并入主 anomaly / disorder 公式的独立额外结算条目，可使用：
 

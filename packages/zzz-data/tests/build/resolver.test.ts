@@ -57,6 +57,8 @@ describe("static build resolver", () => {
     expect(result.diagnosticSummary.count).toBe(result.diagnostics.length)
     expect(result.diagnosticSummary.hasDefaultedInput).toBe(true)
     expect(result.sourceNoteSummary.count).toBe(result.sourceNotes.length)
+    expect(result.effectSummary.length).toBeGreaterThan(0)
+    expect(result.effectSummary[0]?.bucket.length).toBeGreaterThan(0)
     expect(result.assumptionSummary.count).toBe(result.assumptions.length)
     expect(result.caveatSummary.assumptionCount).toBe(result.assumptions.length)
     expect(result.caveatSummary.hasAssumptions).toBe(

@@ -5565,3 +5565,51 @@ caveatSummary` 这些兼容字段补齐。
 1. 不改变 `ResolveStaticBuildResult.summary` 的既有结构
 2. 不为单次 resolver 新增 `effectSummary` 或 `requirementSummary`
 3. 不改变 matrix / views / source-entry collection 的既有 aggregate summary 语义
+
+## 132. V129 single-build effect summary alignment
+
+`V128` 收口后，单次 `resolveStaticBuildDamage()` 的 diagnostics / source notes / assumptions / caveats 已经有了顶层 aggregate summary，但“增益清单”仍然是最后一个未对齐的缺口。
+
+当前状态不对称：
+
+- `skill-matrix`
+- `trigger-matrix`
+- `source-damage-view`
+- `source-utility-view`
+- `source-entry collection`
+
+这些路径都已经有稳定的 `effectSummary`。
+
+但单次 resolver 仍然只有原始 `trace`，上层如果要生成“增益清单”，还得自己遍历 applied modifiers。
+
+`V129` 只解决一件事：
+
+1. 为 `ResolveStaticBuildResult` 补齐稳定的 top-level `effectSummary`
+
+### 132.1 阶段范围
+
+1. `V129.1` scope freeze
+2. `V129.2` runtime/type contract alignment
+3. `V129.3` tool assertion / prompt alignment
+4. `V129.4` docs closeout
+
+### 132.2 当前状态
+
+- `V129.1` 已完成：冻结到 single-build effect summary alignment
+- `V129.2` 已完成：`ResolveStaticBuildResult` 已补齐稳定 `effectSummary`
+- `V129.3` 已完成：高层 `resolveBuildDamage` prompt / 断言已对齐 `build.effectSummary`
+- `V129.4` 已完成：README、roadmap、索引与架构文档已同步
+
+### 132.3 当前边界
+
+本阶段只做：
+
+1. 为 `ResolveStaticBuildResult` 新增稳定 `effectSummary`
+2. 用 applied trace modifiers 生成单场景 effect summary
+3. 高层 `resolveBuildDamage` 优先消费 `build.effectSummary`
+
+显式不做：
+
+1. 不改变 `ResolveStaticBuildResult.summary` 的既有结构
+2. 不改变 `trace` 的既有明细语义
+3. 不重构 matrix / views / source-entry collection 的既有 effect-summary 类型

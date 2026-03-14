@@ -44,6 +44,10 @@ describe("resolveBuildDamage tool", () => {
     expect((result as any).build.sourceNoteSummary.count).toBe(
       (result as any).build.sourceNotes.length,
     )
+    expect((result as any).build.effectSummary.length).toBeGreaterThan(0)
+    expect(
+      (result as any).build.effectSummary[0].bucket.length,
+    ).toBeGreaterThan(0)
     expect((result as any).build.assumptionSummary.count).toBe(
       (result as any).build.assumptions.length,
     )
