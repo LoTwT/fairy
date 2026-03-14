@@ -102,6 +102,8 @@ describe("static build compact helpers", () => {
     expect(compact.rows[0]?.unsupportedEffects).toBeUndefined()
     expect(compact.rows[0]?.diagnostics).toBeUndefined()
     expect(compact.rows[0]?.sourceNotes).toBeUndefined()
+    expect(compact.summary.groups[0]?.assumptions).toBeUndefined()
+    expect(compact.summary.groups[0]?.unsupportedEffects).toBeUndefined()
     expect(compact.rows[0]?.requirementSummary).toEqual({
       count: 0,
       satisfiedCount: 0,
@@ -140,6 +142,12 @@ describe("static build compact helpers", () => {
 
     expect(compact.assumptions).toEqual(matrix.assumptions)
     expect(compact.unsupportedEffects).toEqual(matrix.unsupportedEffects)
+    expect(compact.summary.groups[0]?.assumptions).toEqual(
+      matrix.summary.groups[0]?.assumptions,
+    )
+    expect(compact.summary.groups[0]?.unsupportedEffects).toEqual(
+      matrix.summary.groups[0]?.unsupportedEffects,
+    )
     expect(compact.rows[0]?.assumptions).toEqual(matrix.rows[0]?.assumptions)
     expect(compact.rows[0]?.unsupportedEffects).toEqual(
       matrix.rows[0]?.unsupportedEffects,

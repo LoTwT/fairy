@@ -157,21 +157,18 @@ describe("resolveBuildSkillMatrix tool", () => {
     expect(normalGroupEffect?.totalRowCount).toBe(normalGroup?.count)
     expect(normalGroup?.diagnosticSummary.count).toBeGreaterThanOrEqual(0)
     expect(normalGroup?.sourceNoteSummary.count).toBeGreaterThanOrEqual(0)
+    expect(normalGroup?.assumptions).toBeUndefined()
+    expect(normalGroup?.unsupportedEffects).toBeUndefined()
     expect(normalGroup?.caveatSummary).toEqual({
-      assumptionCount: normalGroup?.assumptions.length,
-      unsupportedEffectCount: normalGroup?.unsupportedEffects.length,
-      hasAssumptions: (normalGroup?.assumptions.length ?? 0) > 0,
-      hasUnsupportedEffects: (normalGroup?.unsupportedEffects.length ?? 0) > 0,
+      assumptionCount: normalGroup?.assumptionSummary.count,
+      unsupportedEffectCount: expect.any(Number),
+      hasAssumptions: normalGroup?.assumptionSummary.hasAssumptions,
+      hasUnsupportedEffects: expect.any(Boolean),
     })
     expect(normalGroup?.assumptionSummary).toEqual({
-      count: normalGroup?.assumptions.length,
-      hasAssumptions: (normalGroup?.assumptions.length ?? 0) > 0,
+      count: expect.any(Number),
+      hasAssumptions: expect.any(Boolean),
     })
-    expect(normalGroup?.unsupportedEffects).toEqual([
-      ...new Set(
-        normalRows.flatMap((row: any) => row.unsupportedEffects ?? []),
-      ),
-    ])
     expect(
       (result as any).matrix.summary.commonFormulaMultipliers.critMultiplier,
     ).toBeGreaterThan(1)
@@ -205,6 +202,12 @@ describe("resolveBuildSkillMatrix tool", () => {
     expect((result as any).matrix.summary.baseDamageStat).toBe("sheerForce")
     expect((result as any).matrix.assumptions).toBeInstanceOf(Array)
     expect((result as any).matrix.unsupportedEffects).toBeInstanceOf(Array)
+    expect(
+      (result as any).matrix.summary.groups[0]?.assumptions,
+    ).toBeInstanceOf(Array)
+    expect(
+      (result as any).matrix.summary.groups[0]?.unsupportedEffects,
+    ).toBeInstanceOf(Array)
     expect((result as any).matrix.diagnosticSummary.count).toBe(
       (result as any).matrix.rows.flatMap((row: any) => row.diagnostics).length,
     )

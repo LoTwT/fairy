@@ -6320,3 +6320,33 @@ caveatSummary` 这些兼容字段补齐。
 - `V154.2` 已完成：默认 compact mixed source-entry collection 已不再携带顶层 `collection.assumptions`
 - `V154.3` 已完成：高层 `resolveBuildSourceEntries` 测试与 prompt 已对齐 `includeDetails=true`
 - `V154.4` 已完成：README、roadmap、索引与架构文档已同步
+
+## 158. V155 skill-matrix compact group assumption/unsupported gating
+
+`V154` 收口后，compact `skill-matrix` 的顶层 `matrix.assumptions / matrix.unsupportedEffects` 与行级 `row.assumptions / row.unsupportedEffects` 已都按 `includeDetails=true` 收紧。
+
+但 `compact matrix.summary.groups[*]` 仍原样透传组级 raw `assumptions / unsupportedEffects`，而组级 `assumptionSummary / caveatSummary` 已经齐全。
+
+`V155` 只解决一件事：
+
+1. 把 compact `skill-matrix summary.groups[*]` 的 raw `assumptions / unsupportedEffects` 也移动到 `includeDetails=true`
+
+### 158.1 分阶段
+
+1. `V155.1` scope freeze
+2. `V155.2` runtime/type contract alignment
+3. `V155.3` tool assertion / prompt alignment
+4. `V155.4` docs closeout
+
+### 158.2 非目标
+
+1. 不改变顶层 `matrix.assumptionSummary / matrix.caveatSummary`
+2. 不改变行级 `row.assumptions / row.unsupportedEffects`
+3. 不改变非 compact 的原始 `matrix.summary.groups[*].assumptions / unsupportedEffects`
+
+### 158.3 当前状态
+
+- `V155.1` 已完成：冻结到 compact skill-matrix group raw assumption/unsupported gating
+- `V155.2` 已完成：默认 compact `matrix.summary.groups[*]` 已不再携带 raw `assumptions / unsupportedEffects`
+- `V155.3` 已完成：高层 `resolveBuildSkillMatrix` 测试与 prompt 已对齐 `includeDetails=true`
+- `V155.4` 已完成：README、roadmap、索引与架构文档已同步

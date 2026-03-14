@@ -92,7 +92,7 @@ export interface CompactStaticBuildSkillMatrixResult {
   mode: ResolveStaticBuildSkillMatrixResult["mode"]
   manualBaseMode?: ResolveStaticBuildSkillMatrixResult["manualBaseMode"]
   loadout: ResolveStaticBuildSkillMatrixResult["loadout"]
-  summary: ResolveStaticBuildSkillMatrixResult["summary"]
+  summary: CompactStaticBuildSkillMatrixSummary
   effectSummary: StaticBuildSkillMatrixEffectSummaryItem[]
   requirementSummary: ResolveStaticBuildSkillMatrixResult["requirementSummary"]
   assumptionSummary: ResolveStaticBuildSkillMatrixResult["assumptionSummary"]
@@ -102,6 +102,21 @@ export interface CompactStaticBuildSkillMatrixResult {
   assumptions?: string[]
   unsupportedEffects?: string[]
   rows: StaticBuildCompactSkillMatrixRow[]
+}
+
+export interface CompactStaticBuildSkillMatrixGroupSummary extends Omit<
+  ResolveStaticBuildSkillMatrixResult["summary"]["groups"][number],
+  "assumptions" | "unsupportedEffects"
+> {
+  assumptions?: string[]
+  unsupportedEffects?: string[]
+}
+
+export interface CompactStaticBuildSkillMatrixSummary extends Omit<
+  ResolveStaticBuildSkillMatrixResult["summary"],
+  "groups"
+> {
+  groups: CompactStaticBuildSkillMatrixGroupSummary[]
 }
 
 export function compactStaticBuildResult(
@@ -278,7 +293,10 @@ export function compactStaticBuildSkillMatrixResult(
     mode: matrix.mode,
     manualBaseMode: matrix.manualBaseMode,
     loadout: matrix.loadout,
-    summary: matrix.summary,
+    summary: compactStaticBuildSkillMatrixSummary(
+      matrix.summary,
+      includeDetails,
+    ),
     effectSummary: matrix.effectSummary,
     requirementSummary: matrix.requirementSummary,
     assumptionSummary: matrix.assumptionSummary,
@@ -294,6 +312,36 @@ export function compactStaticBuildSkillMatrixResult(
     rows: matrix.rows.map((row) =>
       compactStaticBuildSkillMatrixRow(row, includeDetails),
     ),
+  }
+}
+
+export function compactStaticBuildSkillMatrixSummary(
+  summary: ResolveStaticBuildSkillMatrixResult["summary"],
+  includeDetails = false,
+): CompactStaticBuildSkillMatrixSummary {
+  return {
+    ...summary,
+    groups: summary.groups.map((group) => ({
+      key: group.key,
+      label: group.label,
+      count: group.count,
+      commonBuckets: group.commonBuckets,
+      variableBuckets: group.variableBuckets,
+      commonFormulaMultipliers: group.commonFormulaMultipliers,
+      variableFormulaMultipliers: group.variableFormulaMultipliers,
+      effectSummary: group.effectSummary,
+      requirementSummary: group.requirementSummary,
+      assumptionSummary: group.assumptionSummary,
+      caveatSummary: group.caveatSummary,
+      diagnosticSummary: group.diagnosticSummary,
+      sourceNoteSummary: group.sourceNoteSummary,
+      ...(includeDetails
+        ? {
+            assumptions: group.assumptions,
+            unsupportedEffects: group.unsupportedEffects,
+          }
+        : {}),
+    })),
   }
 }
 
