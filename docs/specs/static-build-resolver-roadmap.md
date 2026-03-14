@@ -5787,3 +5787,30 @@ caveatSummary` 这些兼容字段补齐。
 - `V135.2` 已完成：`StaticBuildCompactSourceUtilityViewEntry` 默认已不再携带 `diagnostics / sourceNotes`
 - `V135.3` 已完成：高层 `resolveBuildSourceUtilityViews` 测试与 prompt 已对齐 `includeDetails=true`
 - `V135.4` 已完成：README、roadmap、索引与架构文档已同步
+
+## 139. V136 source-entry compact entry detail gating
+
+`V135` 收口后，standalone `source-damage-view` 与 `source-utility-view` 的 compact entry detail gating 已经分别完成。
+
+但 mixed `resolveBuildSourceEntries` 仍缺少显式 contract：
+
+1. runtime 已默认通过 compact helper 收紧 `entry.diagnostics / entry.sourceNotes / entry.build`
+2. 高层 tool、prompt、测试与文档还没有把这个行为稳定写死
+
+`V136` 只解决一件事：
+
+1. 把 compact mixed `source-entry entries` 的 detail gating 明确收口到 `includeDetails=true`
+
+### 139.1 范围
+
+1. `V136.1` scope freeze
+2. `V136.2` tool assertion / runtime contract alignment
+3. `V136.3` prompt / README alignment
+4. `V136.4` docs closeout
+
+### 139.2 当前状态
+
+- `V136.1` 已完成：冻结到 mixed source-entry compact detail gating
+- `V136.2` 已完成：默认 compact mixed entries 已不再携带 `entry.diagnostics / entry.sourceNotes / entry.build`
+- `V136.3` 已完成：高层 `resolveBuildSourceEntries` 测试、prompt 与 README 已对齐 `includeDetails=true`
+- `V136.4` 已完成：README、roadmap、索引与架构文档已同步

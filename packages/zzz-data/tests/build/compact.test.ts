@@ -444,6 +444,9 @@ describe("static build compact helpers", () => {
     const damageEntry = compact.entries.find(
       (entry) => entry.metadata.entryKind === "source-damage-view",
     )
+    const utilityEntry = compact.entries.find(
+      (entry) => entry.metadata.entryKind === "source-utility-view",
+    )
     expect(damageEntry?.damage).toBeTruthy()
     expect(
       (damageEntry as { requirementSummary?: unknown } | undefined)
@@ -502,7 +505,72 @@ describe("static build compact helpers", () => {
       statusGroups: [{ key: "resolved", label: "已展开", count: 2 }],
       ownerGroups: [{ key: "dynamicSnapshot", count: 2 }],
     })
+    expect(
+      (damageEntry as { diagnostics?: unknown } | undefined)?.diagnostics,
+    ).toBeUndefined()
+    expect(
+      (damageEntry as { sourceNotes?: unknown } | undefined)?.sourceNotes,
+    ).toBeUndefined()
     expect("build" in (damageEntry ?? {})).toBe(false)
+    expect(
+      (utilityEntry as { diagnostics?: unknown } | undefined)?.diagnostics,
+    ).toBeUndefined()
+    expect(
+      (utilityEntry as { sourceNotes?: unknown } | undefined)?.sourceNotes,
+    ).toBeUndefined()
+    expect("build" in (utilityEntry ?? {})).toBe(false)
+  })
+
+  it("keeps mixed source-entry details only when requested", () => {
+    const collection = resolveStaticBuildSourceEntries({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1501",
+        wEngineId: "14117",
+        agentLevel: 60,
+        wEngineRefinement: 1,
+      },
+      panel: {
+        attack: 2950,
+        baseAttack: 1200,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 150,
+      },
+      scenario: {
+        damageType: "disorder",
+        skillTag: "enhancedSpecial",
+        anomalyType: "ether",
+        remainingTime: 5,
+        attribute: "以太",
+        dynamicSnapshot: {
+          values: {
+            ariaExflowDamageRatio: 0.45,
+            ariaStunnedDamageRatio: 0.2,
+          },
+        },
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+          isStunned: true,
+        },
+      },
+    })
+
+    const compact = compactStaticBuildSourceEntryCollection(collection, true)
+    const damageEntry = compact.entries.find(
+      (entry) => entry.metadata.entryKind === "source-damage-view",
+    )
+    const utilityEntry = compact.entries.find(
+      (entry) => entry.metadata.entryKind === "source-utility-view",
+    )
+
+    expect(damageEntry?.diagnostics).toEqual(expect.any(Array))
+    expect(damageEntry?.sourceNotes).toEqual(expect.any(Array))
+    expect(damageEntry?.build).toBeUndefined()
+    expect(utilityEntry?.diagnostics).toEqual(expect.any(Array))
+    expect(utilityEntry?.sourceNotes).toEqual(expect.any(Array))
+    expect(utilityEntry?.build).toBeUndefined()
   })
 
   it("compacts source-damage views without build details by default", () => {

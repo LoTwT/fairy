@@ -785,6 +785,18 @@ describe("resolveBuildSourceEntries tool", () => {
         { key: "process", count: 2 },
       ],
     })
+    const sourceDamageEntry = (result as any).collection.entries.find(
+      (entry: any) => entry.metadata.entryKind === "source-damage-view",
+    )
+    const sourceUtilityEntry = (result as any).collection.entries.find(
+      (entry: any) => entry.metadata.entryKind === "source-utility-view",
+    )
+    expect(sourceDamageEntry.diagnostics).toBeUndefined()
+    expect(sourceDamageEntry.sourceNotes).toBeUndefined()
+    expect(sourceDamageEntry.build).toBeUndefined()
+    expect(sourceUtilityEntry.diagnostics).toBeUndefined()
+    expect(sourceUtilityEntry.sourceNotes).toBeUndefined()
+    expect(sourceUtilityEntry.build).toBeUndefined()
   })
 
   it("returns full build details only when includeDetails is true", async () => {
@@ -822,7 +834,15 @@ describe("resolveBuildSourceEntries tool", () => {
     const sourceDamageEntry = (result as any).collection.entries.find(
       (entry: any) => entry.metadata.entryKind === "source-damage-view",
     )
+    const sourceUtilityEntry = (result as any).collection.entries.find(
+      (entry: any) => entry.metadata.entryKind === "source-utility-view",
+    )
+    expect(sourceDamageEntry.diagnostics).toEqual(expect.any(Array))
+    expect(sourceDamageEntry.sourceNotes).toEqual(expect.any(Array))
     expect(sourceDamageEntry.build).toBeTruthy()
+    expect(sourceUtilityEntry.diagnostics).toEqual(expect.any(Array))
+    expect(sourceUtilityEntry.sourceNotes).toEqual(expect.any(Array))
+    expect(sourceUtilityEntry.build).toBeUndefined()
   })
 
   it("surfaces collection summary for utility-only support entries", async () => {

@@ -38,7 +38,7 @@ export const resolveBuildSourceEntries = createTool({
       .optional()
       .default(false)
       .describe(
-        "是否返回 source-damage entries 的完整 build 结果（trace、damageParams 等）。默认 false，以避免上下文过大。",
+        "是否返回 mixed entries 的逐条明细。默认 false，只保留 entry.summary / entry.*Summary 等紧凑字段；true 时会额外返回 entry.diagnostics / entry.sourceNotes；若某条 source-damage-view entry 原始结果带有 build，也会一并返回完整 build 结果（trace、damageParams 等）。",
       ),
   }),
   execute: async (input) => {
