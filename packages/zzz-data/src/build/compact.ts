@@ -36,6 +36,7 @@ import type {
   StaticBuildSourceNoteSummary,
   StaticBuildSourceUtilityViewEntry,
   StaticBuildSourceUtilityViewRequirementKind,
+  StaticBuildTriggerMatrixEffectSummaryItem,
   StaticBuildTriggerMatrixRow,
   StaticBuildTriggerMatrixRowMeta,
 } from "./types.js"
@@ -46,7 +47,7 @@ export interface CompactStaticBuildResult {
   manualBaseMode?: ResolveStaticBuildResult["manualBaseMode"]
   loadout: StaticBuildResolvedLoadout
   summary: CompactStaticBuildResolveSummary
-  effectSummary: StaticBuildResolveEffectSummaryItem[]
+  effectSummary: CompactStaticBuildResolveEffectSummaryItem[]
   diagnosticSummary: CompactStaticBuildDiagnosticSummary
   sourceNoteSummary: CompactStaticBuildSourceNoteSummary
   assumptionSummary: CompactStaticBuildAssumptionSummary
@@ -160,6 +161,53 @@ export type CompactStaticBuildSourceDamageViewRequirementSummary =
 export type CompactStaticBuildSourceUtilityViewRequirementSummary =
   CompactStaticBuildRequirementSummary<StaticBuildSourceUtilityViewRequirementKind>
 
+export interface CompactStaticBuildResolveEffectSummaryItem {
+  effectId: string
+  sourceName: string
+  label: string
+  bucket: string
+  value: string
+}
+
+export interface CompactStaticBuildAppliedRowEffectSummaryItem {
+  effectId: string
+  sourceName: string
+  label: string
+  bucket: string
+  value: string
+  appliedRowCount: number
+  totalRowCount: number
+  appliesToAllRows: boolean
+  condition: string
+}
+
+export interface CompactStaticBuildAppliedEntryEffectSummaryItem {
+  effectId: string
+  sourceName: string
+  label: string
+  bucket: string
+  value: string
+  appliedEntryCount: number
+  totalEntryCount: number
+  appliesToAllEntries: boolean
+  condition: string
+}
+
+export type CompactStaticBuildSkillMatrixEffectSummaryItem =
+  CompactStaticBuildAppliedRowEffectSummaryItem
+
+export type CompactStaticBuildTriggerMatrixEffectSummaryItem =
+  CompactStaticBuildAppliedRowEffectSummaryItem
+
+export type CompactStaticBuildSourceDamageViewEffectSummaryItem =
+  CompactStaticBuildAppliedEntryEffectSummaryItem
+
+export type CompactStaticBuildSourceUtilityViewEffectSummaryItem =
+  CompactStaticBuildAppliedEntryEffectSummaryItem
+
+export type CompactStaticBuildSourceEntryEffectSummaryItem =
+  CompactStaticBuildAppliedEntryEffectSummaryItem
+
 export interface StaticBuildCompactSkillMatrixRow {
   id: string
   group: string
@@ -191,7 +239,7 @@ export interface CompactStaticBuildSkillMatrixResult {
   manualBaseMode?: ResolveStaticBuildSkillMatrixResult["manualBaseMode"]
   loadout: ResolveStaticBuildSkillMatrixResult["loadout"]
   summary: CompactStaticBuildSkillMatrixSummary
-  effectSummary: StaticBuildSkillMatrixEffectSummaryItem[]
+  effectSummary: CompactStaticBuildSkillMatrixEffectSummaryItem[]
   requirementSummary: CompactStaticBuildSourceDamageViewRequirementSummary
   assumptionSummary: CompactStaticBuildAssumptionSummary
   caveatSummary: CompactStaticBuildCaveatSummary
@@ -254,7 +302,9 @@ export function compactStaticBuildResult(
     manualBaseMode: build.manualBaseMode,
     loadout: build.loadout,
     summary: compactStaticBuildResolveSummary(build.summary),
-    effectSummary: build.effectSummary,
+    effectSummary: build.effectSummary.map((item) =>
+      compactStaticBuildResolveEffectSummaryItem(item),
+    ),
     diagnosticSummary: compactStaticBuildDiagnosticSummary(
       build.diagnosticSummary,
     ),
@@ -399,6 +449,52 @@ export function compactStaticBuildRequirementSummary<
   }
 }
 
+export function compactStaticBuildResolveEffectSummaryItem(
+  item: StaticBuildResolveEffectSummaryItem,
+): CompactStaticBuildResolveEffectSummaryItem {
+  return {
+    effectId: item.effectId,
+    sourceName: item.sourceName,
+    label: item.label,
+    bucket: item.bucket,
+    value: item.value,
+  }
+}
+
+export function compactStaticBuildAppliedRowEffectSummaryItem(
+  item:
+    | StaticBuildSkillMatrixEffectSummaryItem
+    | StaticBuildTriggerMatrixEffectSummaryItem,
+): CompactStaticBuildAppliedRowEffectSummaryItem {
+  return {
+    effectId: item.effectId,
+    sourceName: item.sourceName,
+    label: item.label,
+    bucket: item.bucket,
+    value: item.value,
+    appliedRowCount: item.appliedRowCount,
+    totalRowCount: item.totalRowCount,
+    appliesToAllRows: item.appliesToAllRows,
+    condition: item.condition,
+  }
+}
+
+export function compactStaticBuildAppliedEntryEffectSummaryItem(
+  item: StaticBuildSourceDamageViewEffectSummaryItem,
+): CompactStaticBuildAppliedEntryEffectSummaryItem {
+  return {
+    effectId: item.effectId,
+    sourceName: item.sourceName,
+    label: item.label,
+    bucket: item.bucket,
+    value: item.value,
+    appliedEntryCount: item.appliedEntryCount,
+    totalEntryCount: item.totalEntryCount,
+    appliesToAllEntries: item.appliesToAllEntries,
+    condition: item.condition,
+  }
+}
+
 export interface StaticBuildCompactTriggerMatrixRow {
   id: string
   label: string
@@ -455,7 +551,7 @@ export interface CompactStaticBuildTriggerMatrixResult {
   manualBaseMode?: ResolveStaticBuildTriggerMatrixResult["manualBaseMode"]
   loadout: ResolveStaticBuildTriggerMatrixResult["loadout"]
   summary: CompactStaticBuildTriggerMatrixSummary
-  effectSummary: ResolveStaticBuildTriggerMatrixResult["effectSummary"]
+  effectSummary: CompactStaticBuildTriggerMatrixEffectSummaryItem[]
   requirementSummary: CompactStaticBuildSourceDamageViewRequirementSummary
   caveatSummary: CompactStaticBuildEntryCaveatSummary
   diagnosticSummary: CompactStaticBuildDiagnosticSummary
@@ -599,7 +695,7 @@ export interface CompactStaticBuildSourceEntryCollectionSummary {
 export interface CompactStaticBuildSourceEntryCollection {
   loadout: ResolveStaticBuildSourceEntriesResult["loadout"]
   summary: CompactStaticBuildSourceEntryCollectionSummary
-  effectSummary: ResolveStaticBuildSourceEntriesResult["effectSummary"]
+  effectSummary: CompactStaticBuildSourceEntryEffectSummaryItem[]
   sourceDamageRequirementSummary: CompactStaticBuildSourceDamageViewRequirementSummary
   sourceUtilityRequirementSummary: CompactStaticBuildSourceUtilityViewRequirementSummary
   caveatSummary: CompactStaticBuildEntryCaveatSummary
@@ -644,7 +740,7 @@ export interface CompactStaticBuildSourceDamageViewsResult {
   manualBaseMode?: ResolveStaticBuildSourceDamageViewsResult["manualBaseMode"]
   loadout: ResolveStaticBuildSourceDamageViewsResult["loadout"]
   summary: CompactStaticBuildSourceDamageViewsSummary
-  effectSummary: StaticBuildSourceDamageViewEffectSummaryItem[]
+  effectSummary: CompactStaticBuildSourceDamageViewEffectSummaryItem[]
   requirementSummary: CompactStaticBuildSourceDamageViewRequirementSummary
   caveatSummary: CompactStaticBuildEntryCaveatSummary
   diagnosticSummary: CompactStaticBuildDiagnosticSummary
@@ -657,7 +753,7 @@ export interface CompactStaticBuildSourceDamageViewsResult {
 export interface CompactStaticBuildSourceUtilityViewsResult {
   loadout: ResolveStaticBuildSourceUtilityViewsResult["loadout"]
   summary: CompactStaticBuildSourceUtilityViewsSummary
-  effectSummary: ResolveStaticBuildSourceUtilityViewsResult["effectSummary"]
+  effectSummary: CompactStaticBuildSourceUtilityViewEffectSummaryItem[]
   requirementSummary: CompactStaticBuildSourceUtilityViewRequirementSummary
   caveatSummary: CompactStaticBuildEntryCaveatSummary
   diagnosticSummary: CompactStaticBuildDiagnosticSummary
@@ -680,7 +776,9 @@ export function compactStaticBuildSkillMatrixResult(
       matrix.summary,
       includeDetails,
     ),
-    effectSummary: matrix.effectSummary,
+    effectSummary: matrix.effectSummary.map((item) =>
+      compactStaticBuildAppliedRowEffectSummaryItem(item),
+    ),
     requirementSummary: compactStaticBuildRequirementSummary(
       matrix.requirementSummary,
     ),
@@ -809,7 +907,9 @@ export function compactStaticBuildTriggerMatrixResult(
     manualBaseMode: matrix.manualBaseMode,
     loadout: matrix.loadout,
     summary: compactStaticBuildTriggerMatrixSummary(matrix.summary),
-    effectSummary: matrix.effectSummary,
+    effectSummary: matrix.effectSummary.map((item) =>
+      compactStaticBuildAppliedRowEffectSummaryItem(item),
+    ),
     requirementSummary: compactStaticBuildRequirementSummary(
       matrix.requirementSummary,
     ),
@@ -930,7 +1030,9 @@ export function compactStaticBuildSourceEntryCollection(
   return {
     loadout: collection.loadout,
     summary: compactStaticBuildSourceEntryCollectionSummary(collection.summary),
-    effectSummary: collection.effectSummary,
+    effectSummary: collection.effectSummary.map((item) =>
+      compactStaticBuildAppliedEntryEffectSummaryItem(item),
+    ),
     sourceDamageRequirementSummary: compactStaticBuildRequirementSummary(
       collection.sourceDamageRequirementSummary,
     ),
@@ -1023,7 +1125,9 @@ export function compactStaticBuildSourceDamageViewsResult(
     manualBaseMode: views.manualBaseMode,
     loadout: views.loadout,
     summary: compactStaticBuildSourceDamageViewsSummary(views.summary),
-    effectSummary: views.effectSummary,
+    effectSummary: views.effectSummary.map((item) =>
+      compactStaticBuildAppliedEntryEffectSummaryItem(item),
+    ),
     requirementSummary: compactStaticBuildRequirementSummary(
       views.requirementSummary,
     ),
@@ -1147,7 +1251,9 @@ export function compactStaticBuildSourceUtilityViewsResult(
   return {
     loadout: views.loadout,
     summary: compactStaticBuildSourceUtilityViewsSummary(views.summary),
-    effectSummary: views.effectSummary,
+    effectSummary: views.effectSummary.map((item) =>
+      compactStaticBuildAppliedEntryEffectSummaryItem(item),
+    ),
     requirementSummary: compactStaticBuildRequirementSummary(
       views.requirementSummary,
     ),

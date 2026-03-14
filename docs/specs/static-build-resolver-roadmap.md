@@ -6799,3 +6799,38 @@ caveatSummary` 这些兼容字段补齐。
 - `V169.2` 已完成：compact `entry` 的 requirement summary 已改为显式 compact types
 - `V169.3` 已完成：现有测试与 runtime 校验已覆盖
 - `V169.4` 已完成：roadmap、索引与架构文档已同步
+
+## 173. V170 explicit compact result-level effect summaries
+
+`V169` 收口后，compact contract 中下一批仍直接复用 raw item type 的显式缺口主要集中在结果对象顶层的 `effectSummary`：
+
+- single-build `effectSummary`
+- `skill-matrix result.effectSummary`
+- `trigger-matrix result.effectSummary`
+- `source-damage-views result.effectSummary`
+- `source-utility-views result.effectSummary`
+- `source-entry collection.effectSummary`
+
+`V170` 只解决一件事：
+
+1. 把上述 result-level `effectSummary` 改成显式 compact effect summary item types
+
+### 173.1 分阶段
+
+1. `V170.1` scope freeze
+2. `V170.2` runtime/type contract alignment
+3. `V170.3` tests / prompt alignment
+4. `V170.4` docs closeout
+
+### 173.2 非目标
+
+1. 不改变 `summary / group / row / entry` 上的 effect summary type
+2. 不改变 effect summary 的字段值
+3. 不改变 `includeDetails` 语义
+
+### 173.3 当前状态
+
+- `V170.1` 已完成：冻结到 explicit compact result-level effect summaries
+- `V170.2` 已完成：compact 结果对象顶层的 effect summary 已改为显式 compact item types
+- `V170.3` 已完成：现有测试与 runtime 校验已覆盖
+- `V170.4` 已完成：roadmap、索引与架构文档已同步
