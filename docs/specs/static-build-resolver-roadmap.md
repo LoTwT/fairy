@@ -3890,3 +3890,39 @@ Batch B（已完成）：
 1. 不改变既有顶层 `matrix.effectSummary`
 2. 不改变 group 级 `effectSummary`
 3. 不改变 diagnostics / source notes / caveats 的既有 contract
+
+## 91. V88 skill-matrix top-level assumption summary
+
+`V87` 收口后，`skill-matrix` 顶层已具备：
+
+- `effectSummary`
+- `caveatSummary`
+- `diagnosticSummary`
+- `sourceNoteSummary`
+
+但如果上层只想先判断整张矩阵是否存在 assumptions，仍然只能回退到：
+
+- `matrix.assumptions`
+
+`V88` 只解决一件事：
+
+- 为 `ResolveStaticBuildSkillMatrixResult` 增加稳定 `assumptionSummary`
+
+### 91.1 当前状态
+
+- `V88.1` 已完成：冻结到 skill-matrix top-level assumption summary
+- `V88.2` 已完成：`ResolveStaticBuildSkillMatrixResult` 与 compact result 已新增 `assumptionSummary`
+- `V88.3` 已完成：高层 tool 断言与 agent prompt 已对齐 `matrix.assumptionSummary`
+- `V88.4` 已完成：相关 specs、roadmap、索引、架构文档与 README 已同步
+
+### 91.2 目标
+
+1. 为 skill-matrix 顶层结果增加稳定 `assumptionSummary`
+2. 保持与既有顶层 `matrix.assumptions` 一致
+3. 不改变既有 `matrix.caveatSummary`
+
+### 91.3 Out of Scope
+
+1. 不改变既有顶层 `matrix.assumptions`
+2. 不提前把 `assumptionSummary` 下沉到 `matrix.summary / summary.groups[*] / row`
+3. 不改变 diagnostics / source notes / effect summaries 的既有 contract

@@ -50,6 +50,7 @@ export interface CompactStaticBuildSkillMatrixResult {
   loadout: ResolveStaticBuildSkillMatrixResult["loadout"]
   summary: ResolveStaticBuildSkillMatrixResult["summary"]
   effectSummary: StaticBuildSkillMatrixEffectSummaryItem[]
+  assumptionSummary: ResolveStaticBuildSkillMatrixResult["assumptionSummary"]
   caveatSummary: ResolveStaticBuildSkillMatrixResult["caveatSummary"]
   diagnosticSummary: ResolveStaticBuildSkillMatrixResult["diagnosticSummary"]
   sourceNoteSummary: ResolveStaticBuildSkillMatrixResult["sourceNoteSummary"]
@@ -175,6 +176,7 @@ export function compactStaticBuildSkillMatrixResult(
     loadout: matrix.loadout,
     summary: matrix.summary,
     effectSummary: matrix.effectSummary,
+    assumptionSummary: matrix.assumptionSummary,
     caveatSummary: matrix.caveatSummary,
     diagnosticSummary: matrix.diagnosticSummary,
     sourceNoteSummary: matrix.sourceNoteSummary,

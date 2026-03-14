@@ -1023,6 +1023,7 @@ export interface ResolveStaticBuildSkillMatrixResult {
   loadout: StaticBuildResolvedLoadout
   summary: StaticBuildSkillMatrixSummary
   effectSummary: StaticBuildSkillMatrixEffectSummaryItem[]
+  assumptionSummary: StaticBuildAssumptionSummary
   caveatSummary: StaticBuildCaveatSummary
   diagnosticSummary: StaticBuildDiagnosticSummary
   sourceNoteSummary: StaticBuildSourceNoteSummary

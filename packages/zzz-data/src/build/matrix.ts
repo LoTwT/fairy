@@ -15,6 +15,7 @@ import { toAgentAttribute } from "../terms.js"
 import { getStaticBuildAgent } from "./catalog.js"
 import {
   resolveStaticBuildDamage,
+  summarizeAssumptions,
   summarizeDiagnosticEntries,
   summarizeSourceNoteEntries,
 } from "./resolver.js"
@@ -2077,6 +2078,7 @@ export function resolveStaticBuildSkillMatrix(
     loadout: first.loadout,
     summary: summarizeSkillMatrix(rows),
     effectSummary: summarizeSkillMatrixEffects(rows),
+    assumptionSummary: summarizeAssumptions(assumptions),
     caveatSummary: summarizeSkillMatrixCaveats(assumptions, unsupportedEffects),
     diagnosticSummary: summarizeDiagnosticEntries(
       rows.flatMap((row) => row.diagnostics),
