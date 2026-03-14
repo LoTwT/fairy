@@ -5608,6 +5608,49 @@ caveatSummary` 这些兼容字段补齐。
 2. 用 applied trace modifiers 生成单场景 effect summary
 3. 高层 `resolveBuildDamage` 优先消费 `build.effectSummary`
 
+## 133. V130 single-build compact result alignment
+
+`V129` 收口后，单次 `resolveStaticBuildDamage()` 的 summary / effectSummary 已经完整，但高层 `resolveBuildDamage` 仍然是唯一没有 compact result 的主路径。
+
+当前状态不对称：
+
+- `skill-matrix`
+- `trigger-matrix`
+- `source-damage-view`
+- `source-utility-view`
+- `source-entry collection`
+
+这些路径都已经有稳定的 compact helper，并通过 `includeDetails` 控制是否附带完整 `build` 明细。
+
+但单次 resolver 仍默认返回完整 `ResolveStaticBuildResult`，会直接暴露 `trace / damageParams`。
+
+`V130` 只解决一件事：
+
+1. 为单次 `resolveStaticBuildDamage()` 补齐 compact helper，并让高层 `resolveBuildDamage` 默认返回 compact build
+
+### 133.1 阶段范围
+
+1. `V130.1` scope freeze
+2. `V130.2` runtime/type contract alignment
+3. `V130.3` tool assertion / prompt alignment
+4. `V130.4` docs closeout
+
+### 133.2 当前状态
+
+- `V130.1` 已完成：冻结到 single-build compact result alignment
+- `V130.2` 已完成：`zzz-data` 已新增 `CompactStaticBuildResult / compactStaticBuildResult()`
+- `V130.3` 已完成：高层 `resolveBuildDamage` 已默认返回 compact build，并通过 `includeDetails=true` 暴露 `build.trace / build.damageParams`
+- `V130.4` 已完成：README、roadmap、索引与架构文档已同步
+
+### 133.3 当前边界
+
+本阶段只做：
+
+1. 为单次 resolver 新增 compact helper export
+2. 默认省略 `trace / damageParams`
+3. 保留 `diagnostics / sourceNotes / assumptions / unsupportedEffects`
+4. 高层 tool、prompt 与 README 对齐 compact 语义
+
 显式不做：
 
 1. 不改变 `ResolveStaticBuildResult.summary` 的既有结构

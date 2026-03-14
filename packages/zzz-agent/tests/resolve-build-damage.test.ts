@@ -57,6 +57,8 @@ describe("resolveBuildDamage tool", () => {
     expect(
       (result as any).build.resolvedBuckets.skillMultiplierFactor,
     ).toBeCloseTo(1.25, 4)
+    expect((result as any).build.damageParams).toBeUndefined()
+    expect((result as any).build.trace).toBeUndefined()
   })
 
   it("supports Yixuan sheer profile through the high-level tool", async () => {
@@ -720,6 +722,7 @@ describe("resolveBuildDamage tool", () => {
       agent: "格莉丝",
       wEngine: "嵌合编译器",
       driveDiscs: [{ name: "自由蓝调", pieces: 2 }],
+      includeDetails: true,
       mode: "full-buff",
       agentLevel: 60,
       finalPanel: {

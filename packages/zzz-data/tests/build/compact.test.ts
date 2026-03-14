@@ -1,11 +1,13 @@
 import { describe, expect, it } from "vitest"
 
 import {
+  compactStaticBuildResult,
   compactStaticBuildSkillMatrixResult,
   compactStaticBuildSourceDamageViewsResult,
   compactStaticBuildSourceEntryCollection,
   compactStaticBuildSourceUtilityViewsResult,
   compactStaticBuildTriggerMatrixResult,
+  resolveStaticBuildDamage,
   resolveStaticBuildSkillMatrix,
   resolveStaticBuildSourceDamageViews,
   resolveStaticBuildSourceEntries,
@@ -14,6 +16,43 @@ import {
 } from "../../src"
 
 describe("static build compact helpers", () => {
+  it("compacts single-build results and keeps trace only when requested", () => {
+    const build = resolveStaticBuildDamage({
+      loadout: {
+        agentId: "1241",
+        wEngineId: "14124",
+      },
+      panel: {
+        attack: 3200,
+        baseAttack: 1200,
+        critRate: 0.55,
+        critDamage: 1.4,
+      },
+      scenario: {
+        damageType: "normal",
+        skillTag: "basic",
+        skillMultiplier: "350%",
+        attribute: "以太",
+        combatTags: ["suppressionMode"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    const compact = compactStaticBuildResult(build)
+    const full = compactStaticBuildResult(build, true)
+
+    expect(compact.summary).toEqual(build.summary)
+    expect(compact.effectSummary).toEqual(build.effectSummary)
+    expect(compact.damage.expected.total).toBeGreaterThan(0)
+    expect(compact.damageParams).toBeUndefined()
+    expect(compact.trace).toBeUndefined()
+    expect(full.damageParams).toEqual(build.damageParams)
+    expect(full.trace).toEqual(build.trace)
+  })
+
   it("compacts skill matrix rows without build details by default", () => {
     const matrix = resolveStaticBuildSkillMatrix({
       loadout: {

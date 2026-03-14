@@ -14,6 +14,7 @@ export {
   supportedStaticBuildWEngines,
 } from "./catalog.js"
 export {
+  compactStaticBuildResult,
   compactStaticBuildSkillMatrixResult,
   compactStaticBuildSkillMatrixRow,
   compactStaticBuildSourceDamageViewsResult,
@@ -24,6 +25,7 @@ export {
   compactStaticBuildTriggerMatrixRow,
 } from "./compact.js"
 export type {
+  CompactStaticBuildResult,
   CompactStaticBuildSkillMatrixResult,
   CompactStaticBuildSourceDamageViewsResult,
   CompactStaticBuildSourceEntryCollection,

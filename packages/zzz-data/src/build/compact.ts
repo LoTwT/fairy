@@ -1,4 +1,11 @@
 import type {
+  AnomalyDamageParams,
+  DamageResult,
+  DisorderDamageParams,
+  NormalDamageParams,
+  SheerDamageParams,
+} from "../calculator/types.js"
+import type {
   ResolveStaticBuildResult,
   ResolveStaticBuildSkillMatrixResult,
   ResolveStaticBuildSourceDamageViewsResult,
@@ -7,6 +14,10 @@ import type {
   ResolveStaticBuildTriggerMatrixResult,
   StaticBuildDiagnosticEntry,
   StaticBuildResolvedBuckets,
+  StaticBuildResolvedLoadout,
+  StaticBuildResolvedPanel,
+  StaticBuildResolveEffectSummaryItem,
+  StaticBuildResolveSummary,
   StaticBuildSkillMatrixEffectSummaryItem,
   StaticBuildSkillMatrixRow,
   StaticBuildSkillMatrixRowDamageSummary,
@@ -20,6 +31,36 @@ import type {
   StaticBuildTriggerMatrixRow,
   StaticBuildTriggerMatrixRowMeta,
 } from "./types.js"
+
+export interface CompactStaticBuildResult {
+  profile: ResolveStaticBuildResult["profile"]
+  mode: ResolveStaticBuildResult["mode"]
+  manualBaseMode?: ResolveStaticBuildResult["manualBaseMode"]
+  loadout: StaticBuildResolvedLoadout
+  summary: StaticBuildResolveSummary
+  effectSummary: StaticBuildResolveEffectSummaryItem[]
+  diagnosticSummary: ResolveStaticBuildResult["diagnosticSummary"]
+  sourceNoteSummary: ResolveStaticBuildResult["sourceNoteSummary"]
+  assumptionSummary: ResolveStaticBuildResult["assumptionSummary"]
+  caveatSummary: ResolveStaticBuildResult["caveatSummary"]
+  resolvedPanel: StaticBuildResolvedPanel
+  resolvedBuckets: StaticBuildResolvedBuckets
+  damage: {
+    expected: DamageResult
+    crit: DamageResult
+    noCrit: DamageResult
+  }
+  diagnostics: StaticBuildDiagnosticEntry[]
+  sourceNotes: StaticBuildSourceNoteEntry[]
+  assumptions: string[]
+  unsupportedEffects: string[]
+  damageParams?:
+    | NormalDamageParams
+    | SheerDamageParams
+    | AnomalyDamageParams
+    | DisorderDamageParams
+  trace?: ResolveStaticBuildResult["trace"]
+}
 
 export interface StaticBuildCompactSkillMatrixRow {
   id: string
@@ -61,6 +102,37 @@ export interface CompactStaticBuildSkillMatrixResult {
   assumptions: string[]
   unsupportedEffects: string[]
   rows: StaticBuildCompactSkillMatrixRow[]
+}
+
+export function compactStaticBuildResult(
+  build: ResolveStaticBuildResult,
+  includeDetails = false,
+): CompactStaticBuildResult {
+  return {
+    profile: build.profile,
+    mode: build.mode,
+    manualBaseMode: build.manualBaseMode,
+    loadout: build.loadout,
+    summary: build.summary,
+    effectSummary: build.effectSummary,
+    diagnosticSummary: build.diagnosticSummary,
+    sourceNoteSummary: build.sourceNoteSummary,
+    assumptionSummary: build.assumptionSummary,
+    caveatSummary: build.caveatSummary,
+    resolvedPanel: build.resolvedPanel,
+    resolvedBuckets: build.resolvedBuckets,
+    damage: build.damage,
+    diagnostics: build.diagnostics,
+    sourceNotes: build.sourceNotes,
+    assumptions: build.assumptions,
+    unsupportedEffects: build.unsupportedEffects,
+    ...(includeDetails
+      ? {
+          damageParams: build.damageParams,
+          trace: build.trace,
+        }
+      : {}),
+  }
 }
 
 export interface StaticBuildCompactTriggerMatrixRow {
