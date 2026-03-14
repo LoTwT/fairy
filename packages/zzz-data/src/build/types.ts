@@ -872,6 +872,7 @@ export interface StaticBuildTriggerMatrixSummary {
   unsupportedCount: number
   hasSourceViews: boolean
   requirementSummary: StaticBuildSourceDamageViewRequirementSummary
+  caveatSummary: StaticBuildEntryCaveatSummary
   diagnosticSummary: StaticBuildDiagnosticSummary
   sourceNoteSummary: StaticBuildSourceNoteSummary
   assumptionSummary: StaticBuildAssumptionSummary
@@ -925,6 +926,7 @@ export interface ResolveStaticBuildTriggerMatrixResult {
   manualBaseMode?: StaticBuildBaseMode
   loadout: StaticBuildResolvedLoadout
   summary: StaticBuildTriggerMatrixSummary
+  caveatSummary: StaticBuildEntryCaveatSummary
   assumptionSummary: StaticBuildAssumptionSummary
   rows: StaticBuildTriggerMatrixRow[]
   assumptions: string[]

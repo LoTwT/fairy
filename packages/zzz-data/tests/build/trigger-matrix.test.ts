@@ -66,6 +66,12 @@ describe("static build trigger matrix", () => {
     )
 
     expect(result.rows).toHaveLength(2)
+    expect(result.caveatSummary).toEqual({
+      assumptionCount: result.assumptions.length,
+      unsupportedCount: 0,
+      hasAssumptions: result.assumptions.length > 0,
+      hasUnsupported: false,
+    })
     expect(result.assumptionSummary).toEqual({
       count: result.assumptions.length,
       hasAssumptions: result.assumptions.length > 0,
@@ -96,6 +102,12 @@ describe("static build trigger matrix", () => {
             unsatisfiedCount: 0,
           },
         ],
+      },
+      caveatSummary: {
+        assumptionCount: result.assumptions.length,
+        unsupportedCount: 0,
+        hasAssumptions: result.assumptions.length > 0,
+        hasUnsupported: false,
       },
       assumptionSummary: {
         count: result.assumptions.length,
@@ -408,6 +420,12 @@ describe("static build trigger matrix", () => {
     })
 
     expect(result.rows).toHaveLength(2)
+    expect(result.caveatSummary).toEqual({
+      assumptionCount: result.assumptions.length,
+      unsupportedCount: 0,
+      hasAssumptions: result.assumptions.length > 0,
+      hasUnsupported: false,
+    })
     expect(result.summary).toMatchObject({
       rowCount: 2,
       mainFormulaCount: 1,
@@ -428,6 +446,12 @@ describe("static build trigger matrix", () => {
             unsatisfiedCount: 0,
           },
         ],
+      },
+      caveatSummary: {
+        assumptionCount: result.assumptions.length,
+        unsupportedCount: 0,
+        hasAssumptions: result.assumptions.length > 0,
+        hasUnsupported: false,
       },
       diagnosticSummary: {
         count: 4,
@@ -493,6 +517,12 @@ describe("static build trigger matrix", () => {
     })
 
     expect(result.rows).toHaveLength(2)
+    expect(result.caveatSummary).toEqual({
+      assumptionCount: result.assumptions.length,
+      unsupportedCount: 0,
+      hasAssumptions: result.assumptions.length > 0,
+      hasUnsupported: false,
+    })
     expect(result.summary).toMatchObject({
       rowCount: 2,
       mainFormulaCount: 1,
@@ -519,6 +549,12 @@ describe("static build trigger matrix", () => {
             unsatisfiedCount: 0,
           },
         ],
+      },
+      caveatSummary: {
+        assumptionCount: result.assumptions.length,
+        unsupportedCount: 0,
+        hasAssumptions: result.assumptions.length > 0,
+        hasUnsupported: false,
       },
       diagnosticSummary: {
         count: 2,

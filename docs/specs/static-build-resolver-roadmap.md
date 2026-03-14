@@ -4211,3 +4211,35 @@ Batch B（已完成）：
 1. 不为单条 `entry` 增加 `caveatSummary`
 2. 不改变既有 `collection.summary.caveatSummary` / `collection.caveatSummary`
 3. 不同时扩到 `trigger-matrix`
+
+## 101. V98 trigger-matrix caveat summary
+
+`V97` 收口后，`trigger-matrix` 已具备：
+
+- 顶层 `matrix.assumptionSummary`
+- `matrix.summary.assumptionSummary`
+- `matrix.summary.supportedCount / unsupportedCount`
+
+但如果上层只想先判断整张 `trigger-entry matrix` 是否带 caveat，仍然要自己组合：
+
+- `matrix.assumptionSummary`
+- `matrix.summary.unsupportedCount`
+
+### 101.1 当前状态
+
+- `V98.1` 已完成：冻结到 trigger-matrix caveat summary
+- `V98.2` 已完成：`ResolveStaticBuildTriggerMatrixResult` 与 `StaticBuildTriggerMatrixSummary` 已新增稳定 `caveatSummary`
+- `V98.3` 已完成：compact helper、高层 tool 断言与 agent prompt 已对齐 `matrix.summary.caveatSummary` / `matrix.caveatSummary`
+- `V98.4` 已完成：相关 specs、roadmap、索引、架构文档与 README 已同步
+
+### 101.2 目标
+
+1. 为 `matrix` 顶层结果增加稳定 `caveatSummary`
+2. 为 `matrix.summary` 增加稳定 `caveatSummary`
+3. 让上层判断整张 trigger matrix 是否带 caveat 时，不再手工组合 assumptions 与 unsupported 计数
+
+### 101.3 Out of Scope
+
+1. 不为 `groups[*]` 增加 `caveatSummary`
+2. 不为单条 `row` 增加 `caveatSummary`
+3. 不改变既有 `groups[*].assumptionSummary`

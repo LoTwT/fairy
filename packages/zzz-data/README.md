@@ -446,7 +446,7 @@ matrix.summary
 // }
 ```
 
-如果你需要判断当前 trigger-entry matrix 是否存在 source-view 行、如何分组展示、是否只剩主公式，或者当前整组 rows / 某一组 rows 是否带有 requirements / diagnostics / source notes / assumptions，不要再自己统计 `rows`，直接使用 `matrix.summary`、`matrix.summary.assumptionSummary`、`matrix.assumptionSummary` 与 `matrix.summary.groups[*].assumptionSummary`，尤其是 `matrix.summary.requirementSummary`。
+如果你需要判断当前 trigger-entry matrix 是否存在 source-view 行、如何分组展示、是否只剩主公式，或者当前整组 rows / 某一组 rows 是否带有 requirements / diagnostics / source notes / assumptions / unsupported caveat，不要再自己统计 `rows`，直接使用 `matrix.summary`、`matrix.summary.caveatSummary`、`matrix.caveatSummary`、`matrix.summary.assumptionSummary`、`matrix.assumptionSummary` 与 `matrix.summary.groups[*].assumptionSummary`，尤其是 `matrix.summary.requirementSummary`。
 
 如果你是按 `main-formula / source-view` 拆 section，也不要再自己遍历组内 rows 统计 requirement / diagnostics / source notes，直接读取：
 
@@ -454,6 +454,8 @@ matrix.summary
 matrix.summary.groups[0].requirementSummary
 matrix.summary.groups[0].diagnosticSummary
 matrix.summary.groups[0].sourceNoteSummary
+matrix.summary.caveatSummary
+matrix.caveatSummary
 matrix.summary.assumptionSummary
 matrix.summary.groups[0].assumptionSummary
 matrix.assumptionSummary

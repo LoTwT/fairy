@@ -84,6 +84,7 @@ export interface CompactStaticBuildTriggerMatrixResult {
   manualBaseMode?: ResolveStaticBuildTriggerMatrixResult["manualBaseMode"]
   loadout: ResolveStaticBuildTriggerMatrixResult["loadout"]
   summary: ResolveStaticBuildTriggerMatrixResult["summary"]
+  caveatSummary: ResolveStaticBuildTriggerMatrixResult["caveatSummary"]
   assumptionSummary: ResolveStaticBuildTriggerMatrixResult["assumptionSummary"]
   assumptions: string[]
   rows: StaticBuildCompactTriggerMatrixRow[]
@@ -231,6 +232,7 @@ export function compactStaticBuildTriggerMatrixResult(
     manualBaseMode: matrix.manualBaseMode,
     loadout: matrix.loadout,
     summary: matrix.summary,
+    caveatSummary: matrix.caveatSummary,
     assumptionSummary: matrix.assumptionSummary,
     assumptions: matrix.assumptions,
     rows: matrix.rows.map((row) =>

@@ -49,6 +49,12 @@ describe("resolveBuildTriggerMatrix tool", () => {
 
     expect((result as any).found).toBe(true)
     expect((result as any).matrix.rows).toHaveLength(2)
+    expect((result as any).matrix.caveatSummary).toEqual({
+      assumptionCount: (result as any).matrix.assumptions.length,
+      unsupportedCount: 0,
+      hasAssumptions: (result as any).matrix.assumptions.length > 0,
+      hasUnsupported: false,
+    })
     expect((result as any).matrix.assumptionSummary).toEqual({
       count: (result as any).matrix.assumptions.length,
       hasAssumptions: (result as any).matrix.assumptions.length > 0,
@@ -79,6 +85,12 @@ describe("resolveBuildTriggerMatrix tool", () => {
             unsatisfiedCount: 0,
           },
         ],
+      },
+      caveatSummary: {
+        assumptionCount: (result as any).matrix.assumptions.length,
+        unsupportedCount: 0,
+        hasAssumptions: (result as any).matrix.assumptions.length > 0,
+        hasUnsupported: false,
       },
       assumptionSummary: {
         count: (result as any).matrix.assumptions.length,
@@ -435,6 +447,12 @@ describe("resolveBuildTriggerMatrix tool", () => {
 
     expect((result as any).found).toBe(true)
     expect((result as any).matrix.rows).toHaveLength(2)
+    expect((result as any).matrix.caveatSummary).toEqual({
+      assumptionCount: (result as any).matrix.assumptions.length,
+      unsupportedCount: 0,
+      hasAssumptions: (result as any).matrix.assumptions.length > 0,
+      hasUnsupported: false,
+    })
     expect((result as any).matrix.summary).toMatchObject({
       rowCount: 2,
       mainFormulaCount: 1,
@@ -461,6 +479,12 @@ describe("resolveBuildTriggerMatrix tool", () => {
             unsatisfiedCount: 0,
           },
         ],
+      },
+      caveatSummary: {
+        assumptionCount: (result as any).matrix.assumptions.length,
+        unsupportedCount: 0,
+        hasAssumptions: (result as any).matrix.assumptions.length > 0,
+        hasUnsupported: false,
       },
       diagnosticSummary: {
         count: 2,

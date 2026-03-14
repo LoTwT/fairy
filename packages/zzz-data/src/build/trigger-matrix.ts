@@ -1,6 +1,7 @@
 import type {
   ResolveStaticBuildTriggerMatrixInput,
   ResolveStaticBuildTriggerMatrixResult,
+  StaticBuildEntryCaveatSummary,
   StaticBuildSourceDamageViewEntry,
   StaticBuildTriggerMatrixEntryKind,
   StaticBuildTriggerMatrixRow,
@@ -90,6 +91,7 @@ export function resolveStaticBuildTriggerMatrix(
     manualBaseMode: build.manualBaseMode,
     loadout: build.loadout,
     summary: summarizeTriggerMatrixRows(rows, assumptions),
+    caveatSummary: summarizeTriggerMatrixCaveats(rows, assumptions),
     assumptionSummary: summarizeAssumptions(assumptions),
     rows,
     assumptions,
@@ -200,9 +202,24 @@ function summarizeTriggerMatrixRows(
     requirementSummary: summarizeSourceDamageViewRequirements(
       rows.flatMap((row) => row.requirements),
     ),
+    caveatSummary: summarizeTriggerMatrixCaveats(rows, assumptions),
     diagnosticSummary: summarizeDiagnosticEntries(diagnostics),
     sourceNoteSummary: summarizeSourceNoteEntries(sourceNotes),
     assumptionSummary: summarizeAssumptions(assumptions),
     groups,
+  }
+}
+
+function summarizeTriggerMatrixCaveats(
+  rows: StaticBuildTriggerMatrixRow[],
+  assumptions: string[],
+): StaticBuildEntryCaveatSummary {
+  const unsupportedCount = rows.filter((row) => !row.supported).length
+
+  return {
+    assumptionCount: assumptions.length,
+    unsupportedCount,
+    hasAssumptions: assumptions.length > 0,
+    hasUnsupported: unsupportedCount > 0,
   }
 }
