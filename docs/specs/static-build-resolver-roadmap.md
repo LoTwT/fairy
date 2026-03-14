@@ -6969,6 +6969,41 @@ caveatSummary` 这些兼容字段补齐。
 - `V174.3` 已完成：现有测试与 runtime 校验已覆盖
 - `V174.4` 已完成：roadmap、索引与架构文档已同步
 
+## 178. V175 explicit compact diagnostic/source-note detail entries
+
+`V174` 收口后，compact contract 中仍直接复用 raw detail entry type 的显式缺口主要集中在 `diagnostics / sourceNotes`：
+
+- single-build `diagnostics / sourceNotes`
+- `skill-matrix row.diagnostics / sourceNotes`
+- `trigger-matrix row.diagnostics / sourceNotes`
+- `source-damage-view entry.diagnostics / sourceNotes`
+- `source-utility-view entry.diagnostics / sourceNotes`
+- mixed `source-entry entry.diagnostics / sourceNotes`
+
+`V175` 只解决一件事：
+
+1. 把上述 detail entry 改成显式 compact item types
+
+### 178.1 分阶段
+
+1. `V175.1` scope freeze
+2. `V175.2` runtime/type contract alignment
+3. `V175.3` tests / prompt alignment
+4. `V175.4` docs closeout
+
+### 178.2 非目标
+
+1. 不改变这些 detail entry 的字段值
+2. 不改变 `includeDetails` gating 语义
+3. 不改变各类 `diagnosticSummary / sourceNoteSummary` 的聚合统计语义
+
+### 178.3 当前状态
+
+- `V175.1` 已完成：冻结到 explicit compact diagnostic/source-note detail entries
+- `V175.2` 已完成：compact `diagnostics / sourceNotes` 已改为显式 compact item types
+- `V175.3` 已完成：现有测试与 runtime 校验已覆盖
+- `V175.4` 已完成：roadmap、索引与架构文档已同步
+
 ## 174. V171 explicit compact top-level summary effect summaries
 
 `V170` 收口后，compact contract 中下一批仍直接复用 raw effect summary item type 的显式缺口主要集中在 top-level `summary`：

@@ -15,6 +15,8 @@ import type {
   StaticBuildAssumptionSummary,
   StaticBuildCaveatSummary,
   StaticBuildDiagnosticEntry,
+  StaticBuildDiagnosticKind,
+  StaticBuildDiagnosticOwner,
   StaticBuildDiagnosticSummary,
   StaticBuildEntryCaveatSummary,
   StaticBuildRequirementSummary,
@@ -33,6 +35,11 @@ import type {
   StaticBuildSourceDamageViewRequirementKind,
   StaticBuildSourceEntry,
   StaticBuildSourceNoteEntry,
+  StaticBuildSourceNoteGuidance,
+  StaticBuildSourceNoteGuidanceKind,
+  StaticBuildSourceNoteGuidanceTarget,
+  StaticBuildSourceNoteOwner,
+  StaticBuildSourceNoteStatus,
   StaticBuildSourceNoteSummary,
   StaticBuildSourceUtilityViewEntry,
   StaticBuildSourceUtilityViewRequirementKind,
@@ -59,8 +66,8 @@ export interface CompactStaticBuildResult {
     crit: DamageResult
     noCrit: DamageResult
   }
-  diagnostics?: StaticBuildDiagnosticEntry[]
-  sourceNotes?: StaticBuildSourceNoteEntry[]
+  diagnostics?: CompactStaticBuildDiagnosticEntry[]
+  sourceNotes?: CompactStaticBuildSourceNoteEntry[]
   assumptions?: string[]
   unsupportedEffects?: string[]
   damageParams?:
@@ -107,6 +114,15 @@ export interface CompactStaticBuildDiagnosticOwnerGroupSummary {
   count: number
 }
 
+export interface CompactStaticBuildDiagnosticEntry {
+  kind: StaticBuildDiagnosticKind
+  owner: StaticBuildDiagnosticOwner
+  sourceType?: StaticBuildDiagnosticEntry["sourceType"]
+  sourceId?: string
+  keys: string[]
+  message: string
+}
+
 export interface CompactStaticBuildDiagnosticSummary {
   count: number
   hasDiagnostics: boolean
@@ -127,6 +143,22 @@ export interface CompactStaticBuildSourceNoteGroupSummary {
 export interface CompactStaticBuildSourceNoteOwnerGroupSummary {
   key: StaticBuildSourceNoteOwner
   count: number
+}
+
+export interface CompactStaticBuildSourceNoteGuidance {
+  kind: StaticBuildSourceNoteGuidanceKind
+  target?: StaticBuildSourceNoteGuidanceTarget
+}
+
+export interface CompactStaticBuildSourceNoteEntry {
+  id: string
+  sourceType: StaticBuildSourceNoteEntry["sourceType"]
+  sourceId: string
+  owner: StaticBuildSourceNoteOwner
+  status: StaticBuildSourceNoteStatus
+  guidance: CompactStaticBuildSourceNoteGuidance
+  keys: string[]
+  message: string
 }
 
 export interface CompactStaticBuildSourceNoteSummary {
@@ -243,9 +275,9 @@ export interface StaticBuildCompactSkillMatrixRow {
   damage: StaticBuildSkillMatrixRowDamageSummary
   summary: CompactStaticBuildResolveSummary
   resolvedBuckets: StaticBuildResolvedBuckets
-  diagnostics?: StaticBuildDiagnosticEntry[]
+  diagnostics?: CompactStaticBuildDiagnosticEntry[]
   diagnosticSummary: CompactStaticBuildDiagnosticSummary
-  sourceNotes?: StaticBuildSourceNoteEntry[]
+  sourceNotes?: CompactStaticBuildSourceNoteEntry[]
   sourceNoteSummary: CompactStaticBuildSourceNoteSummary
   requirementSummary: CompactStaticBuildSourceDamageViewRequirementSummary
   assumptionSummary: CompactStaticBuildAssumptionSummary
@@ -344,8 +376,12 @@ export function compactStaticBuildResult(
       ? {
           assumptions: build.assumptions,
           unsupportedEffects: build.unsupportedEffects,
-          diagnostics: build.diagnostics,
-          sourceNotes: build.sourceNotes,
+          diagnostics: build.diagnostics?.map((entry) =>
+            compactStaticBuildDiagnosticEntry(entry),
+          ),
+          sourceNotes: build.sourceNotes?.map((entry) =>
+            compactStaticBuildSourceNoteEntry(entry),
+          ),
           damageParams: build.damageParams,
           trace: build.trace,
         }
@@ -383,6 +419,19 @@ export function compactStaticBuildResolveSummary(
     sourceNoteGroups: summary.sourceNoteGroups.map((group) =>
       compactStaticBuildSourceNoteGroupSummary(group),
     ),
+  }
+}
+
+export function compactStaticBuildDiagnosticEntry(
+  entry: StaticBuildDiagnosticEntry,
+): CompactStaticBuildDiagnosticEntry {
+  return {
+    kind: entry.kind,
+    owner: entry.owner,
+    sourceType: entry.sourceType,
+    sourceId: entry.sourceId,
+    keys: entry.keys,
+    message: entry.message,
   }
 }
 
@@ -424,6 +473,15 @@ export function compactStaticBuildDiagnosticSummary(
   }
 }
 
+export function compactStaticBuildSourceNoteGuidance(
+  guidance: StaticBuildSourceNoteGuidance,
+): CompactStaticBuildSourceNoteGuidance {
+  return {
+    kind: guidance.kind,
+    target: guidance.target,
+  }
+}
+
 export function compactStaticBuildSourceNoteGroupSummary(
   group: StaticBuildSourceNoteGroupSummary,
 ): CompactStaticBuildSourceNoteGroupSummary {
@@ -440,6 +498,21 @@ export function compactStaticBuildSourceNoteOwnerGroupSummary(
   return {
     key: group.key,
     count: group.count,
+  }
+}
+
+export function compactStaticBuildSourceNoteEntry(
+  entry: StaticBuildSourceNoteEntry,
+): CompactStaticBuildSourceNoteEntry {
+  return {
+    id: entry.id,
+    sourceType: entry.sourceType,
+    sourceId: entry.sourceId,
+    owner: entry.owner,
+    status: entry.status,
+    guidance: compactStaticBuildSourceNoteGuidance(entry.guidance),
+    keys: entry.keys,
+    message: entry.message,
   }
 }
 
@@ -575,9 +648,9 @@ export interface StaticBuildCompactTriggerMatrixRow {
   effectSummary: CompactStaticBuildTriggerMatrixEffectSummaryItem[]
   requirements?: StaticBuildTriggerMatrixRow["requirements"]
   requirementSummary: CompactStaticBuildSourceDamageViewRequirementSummary
-  diagnostics?: StaticBuildDiagnosticEntry[]
+  diagnostics?: CompactStaticBuildDiagnosticEntry[]
   diagnosticSummary: CompactStaticBuildDiagnosticSummary
-  sourceNotes?: StaticBuildSourceNoteEntry[]
+  sourceNotes?: CompactStaticBuildSourceNoteEntry[]
   sourceNoteSummary: CompactStaticBuildSourceNoteSummary
   caveatSummary: CompactStaticBuildEntryCaveatSummary
   assumptionSummary: CompactStaticBuildAssumptionSummary
@@ -644,9 +717,9 @@ export interface StaticBuildCompactSourceDamageViewEntry {
   resolutionMode: StaticBuildSourceDamageViewEntry["resolutionMode"]
   requirements?: StaticBuildSourceDamageViewEntry["requirements"]
   requirementSummary: CompactStaticBuildSourceDamageViewRequirementSummary
-  diagnostics?: StaticBuildDiagnosticEntry[]
+  diagnostics?: CompactStaticBuildDiagnosticEntry[]
   diagnosticSummary: CompactStaticBuildDiagnosticSummary
-  sourceNotes?: StaticBuildSourceNoteEntry[]
+  sourceNotes?: CompactStaticBuildSourceNoteEntry[]
   sourceNoteSummary: CompactStaticBuildSourceNoteSummary
   effectSummary: CompactStaticBuildSourceDamageViewEffectSummaryItem[]
   caveatSummary: CompactStaticBuildEntryCaveatSummary
@@ -705,9 +778,9 @@ export interface StaticBuildCompactSourceUtilityViewEntry {
   conditionLabel?: string
   cooldownSeconds?: number
   summary: CompactStaticBuildSourceUtilityViewEntrySummary
-  diagnostics?: StaticBuildDiagnosticEntry[]
+  diagnostics?: CompactStaticBuildDiagnosticEntry[]
   diagnosticSummary: CompactStaticBuildDiagnosticSummary
-  sourceNotes?: StaticBuildSourceNoteEntry[]
+  sourceNotes?: CompactStaticBuildSourceNoteEntry[]
   sourceNoteSummary: CompactStaticBuildSourceNoteSummary
   effectSummary: CompactStaticBuildSourceUtilityViewEffectSummaryItem[]
   caveatSummary: CompactStaticBuildEntryCaveatSummary
@@ -966,8 +1039,12 @@ export function compactStaticBuildSkillMatrixRow(
       ? {
           assumptions: row.assumptions,
           unsupportedEffects: row.unsupportedEffects,
-          diagnostics: row.diagnostics,
-          sourceNotes: row.sourceNotes,
+          diagnostics: row.diagnostics?.map((entry) =>
+            compactStaticBuildDiagnosticEntry(entry),
+          ),
+          sourceNotes: row.sourceNotes?.map((entry) =>
+            compactStaticBuildSourceNoteEntry(entry),
+          ),
           build: row.build,
         }
       : {}),
@@ -1098,8 +1175,12 @@ export function compactStaticBuildTriggerMatrixRow(
       ? {
           assumptions: row.assumptions,
           requirements: row.requirements,
-          diagnostics: row.diagnostics,
-          sourceNotes: row.sourceNotes,
+          diagnostics: row.diagnostics?.map((entry) =>
+            compactStaticBuildDiagnosticEntry(entry),
+          ),
+          sourceNotes: row.sourceNotes?.map((entry) =>
+            compactStaticBuildSourceNoteEntry(entry),
+          ),
           ...(row.build ? { build: row.build } : {}),
         }
       : {}),
@@ -1329,8 +1410,12 @@ export function compactStaticBuildSourceDamageViewEntry(
       ? {
           assumptions: entry.assumptions,
           requirements: entry.requirements,
-          diagnostics: entry.diagnostics,
-          sourceNotes: entry.sourceNotes,
+          diagnostics: entry.diagnostics?.map((item) =>
+            compactStaticBuildDiagnosticEntry(item),
+          ),
+          sourceNotes: entry.sourceNotes?.map((item) =>
+            compactStaticBuildSourceNoteEntry(item),
+          ),
           ...(entry.build ? { build: entry.build } : {}),
         }
       : {}),
@@ -1479,8 +1564,12 @@ export function compactStaticBuildSourceUtilityViewEntry(
       ? {
           assumptions: entry.assumptions,
           requirements: entry.requirements,
-          diagnostics: entry.diagnostics,
-          sourceNotes: entry.sourceNotes,
+          diagnostics: entry.diagnostics?.map((item) =>
+            compactStaticBuildDiagnosticEntry(item),
+          ),
+          sourceNotes: entry.sourceNotes?.map((item) =>
+            compactStaticBuildSourceNoteEntry(item),
+          ),
         }
       : {}),
   }
@@ -1526,8 +1615,12 @@ export function compactStaticBuildSourceEntry(
         ? {
             assumptions: entry.assumptions,
             requirements: entry.requirements,
-            diagnostics: entry.diagnostics,
-            sourceNotes: entry.sourceNotes,
+            diagnostics: entry.diagnostics?.map((item) =>
+              compactStaticBuildDiagnosticEntry(item),
+            ),
+            sourceNotes: entry.sourceNotes?.map((item) =>
+              compactStaticBuildSourceNoteEntry(item),
+            ),
             ...(entry.build ? { build: entry.build } : {}),
           }
         : {}),
@@ -1570,8 +1663,12 @@ export function compactStaticBuildSourceEntry(
       ? {
           assumptions: entry.assumptions,
           requirements: entry.requirements,
-          diagnostics: entry.diagnostics,
-          sourceNotes: entry.sourceNotes,
+          diagnostics: entry.diagnostics?.map((item) =>
+            compactStaticBuildDiagnosticEntry(item),
+          ),
+          sourceNotes: entry.sourceNotes?.map((item) =>
+            compactStaticBuildSourceNoteEntry(item),
+          ),
         }
       : {}),
   }
