@@ -313,6 +313,92 @@ describe("static build compact helpers", () => {
     })
   })
 
+  it("compacts source-damage-view entries without entry details by default", () => {
+    const views = resolveStaticBuildSourceDamageViews({
+      mode: "baseline",
+      loadout: {
+        agentId: "1401",
+        agentLevel: 60,
+      },
+      panel: {
+        attack: 2800,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 200,
+        anomalyMastery: 180,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "enhancedSpecial",
+        damageMultiplier: "500%",
+        attribute: "物理",
+        stateSnapshot: {
+          flags: {
+            alicePolarityAssaultState: true,
+          },
+          values: {
+            alicePolarityAssaultDamageRatio: 2.5,
+          },
+        },
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    const compact = compactStaticBuildSourceDamageViewsResult(views)
+
+    expect(compact.entries[0]?.diagnostics).toBeUndefined()
+    expect(compact.entries[0]?.sourceNotes).toBeUndefined()
+    expect(compact.entries[0]?.build).toBeUndefined()
+  })
+
+  it("keeps source-damage-view entry details only when requested", () => {
+    const views = resolveStaticBuildSourceDamageViews({
+      mode: "baseline",
+      loadout: {
+        agentId: "1401",
+        agentLevel: 60,
+      },
+      panel: {
+        attack: 2800,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 200,
+        anomalyMastery: 180,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "enhancedSpecial",
+        damageMultiplier: "500%",
+        attribute: "物理",
+        stateSnapshot: {
+          flags: {
+            alicePolarityAssaultState: true,
+          },
+          values: {
+            alicePolarityAssaultDamageRatio: 2.5,
+          },
+        },
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    const compact = compactStaticBuildSourceDamageViewsResult(views, true)
+
+    expect(compact.entries[0]?.diagnostics).toEqual(
+      views.entries[0]?.diagnostics,
+    )
+    expect(compact.entries[0]?.sourceNotes).toEqual(
+      views.entries[0]?.sourceNotes,
+    )
+    expect(compact.entries[0]?.build).toEqual(views.entries[0]?.build)
+  })
+
   it("compacts source-entry collections for mixed damage and utility entries", () => {
     const collection = resolveStaticBuildSourceEntries({
       mode: "full-buff",

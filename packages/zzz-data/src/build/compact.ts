@@ -182,9 +182,9 @@ export interface StaticBuildCompactSourceDamageViewEntry {
   resolutionMode: StaticBuildSourceDamageViewEntry["resolutionMode"]
   requirements: StaticBuildSourceDamageViewEntry["requirements"]
   requirementSummary: StaticBuildSourceDamageViewEntry["requirementSummary"]
-  diagnostics: StaticBuildDiagnosticEntry[]
+  diagnostics?: StaticBuildDiagnosticEntry[]
   diagnosticSummary: StaticBuildSourceDamageViewEntry["diagnosticSummary"]
-  sourceNotes: StaticBuildSourceNoteEntry[]
+  sourceNotes?: StaticBuildSourceNoteEntry[]
   sourceNoteSummary: StaticBuildSourceDamageViewEntry["sourceNoteSummary"]
   effectSummary: StaticBuildSourceDamageViewEntry["effectSummary"]
   caveatSummary: StaticBuildSourceDamageViewEntry["caveatSummary"]
@@ -464,9 +464,7 @@ export function compactStaticBuildSourceEntry(
       resolutionMode: entry.resolutionMode,
       requirements: entry.requirements,
       requirementSummary: entry.requirementSummary,
-      diagnostics: entry.diagnostics,
       diagnosticSummary: entry.diagnosticSummary,
-      sourceNotes: entry.sourceNotes,
       sourceNoteSummary: entry.sourceNoteSummary,
       effectSummary: entry.effectSummary,
       caveatSummary: entry.caveatSummary,
@@ -474,7 +472,13 @@ export function compactStaticBuildSourceEntry(
       assumptions: entry.assumptions,
       damage: entry.damage,
       summary: entry.summary,
-      ...(includeDetails && entry.build ? { build: entry.build } : {}),
+      ...(includeDetails
+        ? {
+            diagnostics: entry.diagnostics,
+            sourceNotes: entry.sourceNotes,
+            ...(entry.build ? { build: entry.build } : {}),
+          }
+        : {}),
     }
   }
 

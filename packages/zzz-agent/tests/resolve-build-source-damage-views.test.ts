@@ -329,23 +329,8 @@ describe("resolveBuildSourceDamageViews tool", () => {
         hasAssumptions: true,
       },
     })
-    expect(
-      (result as any).views.entries[0].sourceNotes.some(
-        (note: any) =>
-          note.owner === "stateSnapshot" &&
-          note.keys.includes(
-            "scenario.stateSnapshot.values.alicePolarityAssaultDamageRatio",
-          ),
-      ),
-    ).toBe(true)
-    expect(
-      (result as any).views.entries[0].diagnostics.some(
-        (item: any) =>
-          item.kind === "defaulted-input" &&
-          item.owner === "scenario" &&
-          item.keys.includes("scenario.extraAbilityActive"),
-      ),
-    ).toBe(true)
+    expect((result as any).views.entries[0].sourceNotes).toBeUndefined()
+    expect((result as any).views.entries[0].diagnostics).toBeUndefined()
     expect((result as any).views.entries[0].damage.expected).toBeGreaterThan(0)
     expect((result as any).views.entries[0].summary.expectedTotal).toBeCloseTo(
       (result as any).views.entries[0].damage.expected,
@@ -571,15 +556,7 @@ describe("resolveBuildSourceDamageViews tool", () => {
         ownerGroups: [{ key: "dynamicSnapshot", count: 2 }],
       },
     })
-    expect(
-      (result as any).views.entries[0].sourceNotes.some(
-        (note: any) =>
-          note.owner === "dynamicSnapshot" &&
-          note.keys.includes(
-            "scenario.dynamicSnapshot.values.ariaExflowDamageRatio",
-          ),
-      ),
-    ).toBe(true)
+    expect((result as any).views.entries[0].sourceNotes).toBeUndefined()
   })
 
   it("returns Vivian exflow as a covered formula-derived delta source view", async () => {
@@ -694,6 +671,29 @@ describe("resolveBuildSourceDamageViews tool", () => {
     })
 
     expect((result as any).found).toBe(true)
+    expect(Array.isArray((result as any).views.entries[0].diagnostics)).toBe(
+      true,
+    )
+    expect(Array.isArray((result as any).views.entries[0].sourceNotes)).toBe(
+      true,
+    )
+    expect(
+      (result as any).views.entries[0].sourceNotes.some(
+        (note: any) =>
+          note.owner === "stateSnapshot" &&
+          note.keys.includes(
+            "scenario.stateSnapshot.values.alicePolarityAssaultDamageRatio",
+          ),
+      ),
+    ).toBe(true)
+    expect(
+      (result as any).views.entries[0].diagnostics.some(
+        (item: any) =>
+          item.kind === "defaulted-input" &&
+          item.owner === "scenario" &&
+          item.keys.includes("scenario.extraAbilityActive"),
+      ),
+    ).toBe(true)
     expect((result as any).views.entries[0].build).toBeTruthy()
   })
 })

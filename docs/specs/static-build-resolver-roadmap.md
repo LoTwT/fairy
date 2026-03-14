@@ -5739,3 +5739,27 @@ caveatSummary` 这些兼容字段补齐。
 1. 不改变 `ResolveStaticBuildResult.summary` 的既有结构
 2. 不改变 `trace` 的既有明细语义
 3. 不重构 matrix / views / source-entry collection 的既有 effect-summary 类型
+
+## 137. V134 source-damage-view compact entry detail gating
+
+`V133` 收口后，compact `trigger-matrix rows` 已默认不再携带 `diagnostics / sourceNotes`。
+
+但 `resolveBuildSourceDamageViews` 默认返回的 compact entries 仍默认携带这两类明细数组，而 entry 级 `diagnosticSummary / sourceNoteSummary / requirementSummary / assumptionSummary / caveatSummary / effectSummary / summary` 已经齐全。
+
+`V134` 只解决一件事：
+
+1. 把 compact source-damage-view entries 的 `diagnostics / sourceNotes` 也移到 `includeDetails=true`
+
+### 137.1 范围
+
+1. `V134.1` scope freeze
+2. `V134.2` runtime/type contract alignment
+3. `V134.3` tool assertion / prompt alignment
+4. `V134.4` docs closeout
+
+### 137.2 当前状态
+
+- `V134.1` 已完成：冻结到 source-damage-view compact entry detail gating
+- `V134.2` 已完成：`StaticBuildCompactSourceDamageViewEntry` 默认已不再携带 `diagnostics / sourceNotes`
+- `V134.3` 已完成：高层 `resolveBuildSourceDamageViews` 测试与 prompt 已对齐 `includeDetails=true`
+- `V134.4` 已完成：README、roadmap、索引与架构文档已同步

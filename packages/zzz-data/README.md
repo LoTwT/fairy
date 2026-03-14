@@ -227,6 +227,27 @@ compact.trace
 
 当前 `compactStaticBuildResult(result, true)` 才会暴露 `trace / damageParams / diagnostics / sourceNotes`。
 
+如果你在应用层或 Agent 层默认不需要完整 `build`、只需要紧凑投影结果，也可以继续使用 source-view compact helper：
+
+```ts
+import {
+  compactStaticBuildSourceDamageViewsResult,
+  resolveStaticBuildSourceDamageViews,
+} from "zzz-data"
+
+const views = resolveStaticBuildSourceDamageViews(/* ... */)
+const compactViews = compactStaticBuildSourceDamageViewsResult(views)
+
+compactViews.entries[0].diagnosticSummary
+compactViews.entries[0].sourceNoteSummary
+compactViews.entries[0].diagnostics
+// undefined
+compactViews.entries[0].sourceNotes
+// undefined
+```
+
+当前 `compactStaticBuildSourceDamageViewsResult(views, true)` 才会暴露 `entry.diagnostics / entry.sourceNotes / entry.build`。
+
 如果你需要拿到不应并入主 anomaly / disorder 公式的独立额外结算条目，可使用：
 
 ```ts

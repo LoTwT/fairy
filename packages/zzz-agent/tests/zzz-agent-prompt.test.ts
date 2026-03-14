@@ -176,6 +176,9 @@ it("keeps screenshot summary by default", async () => {
   ).toBe(true)
   expect(base.includes("entry.sourceNoteSummary")).toBe(true)
   expect(
+    base.includes("entry.diagnostics / entry.sourceNotes / entry.build"),
+  ).toBe(true)
+  expect(
     base.includes(
       "如果只想先判断某一条 mixed entry 是否带 unsatisfied requirements",
     ),
