@@ -12,7 +12,11 @@ import type {
   ResolveStaticBuildSourceEntriesResult,
   ResolveStaticBuildSourceUtilityViewsResult,
   ResolveStaticBuildTriggerMatrixResult,
+  StaticBuildAssumptionSummary,
+  StaticBuildCaveatSummary,
   StaticBuildDiagnosticEntry,
+  StaticBuildDiagnosticSummary,
+  StaticBuildEntryCaveatSummary,
   StaticBuildResolvedBuckets,
   StaticBuildResolvedLoadout,
   StaticBuildResolvedPanel,
@@ -26,6 +30,7 @@ import type {
   StaticBuildSourceDamageViewEntry,
   StaticBuildSourceEntry,
   StaticBuildSourceNoteEntry,
+  StaticBuildSourceNoteSummary,
   StaticBuildSourceUtilityViewEntry,
   StaticBuildTriggerMatrixRow,
   StaticBuildTriggerMatrixRowMeta,
@@ -38,10 +43,10 @@ export interface CompactStaticBuildResult {
   loadout: StaticBuildResolvedLoadout
   summary: CompactStaticBuildResolveSummary
   effectSummary: StaticBuildResolveEffectSummaryItem[]
-  diagnosticSummary: ResolveStaticBuildResult["diagnosticSummary"]
-  sourceNoteSummary: ResolveStaticBuildResult["sourceNoteSummary"]
-  assumptionSummary: ResolveStaticBuildResult["assumptionSummary"]
-  caveatSummary: ResolveStaticBuildResult["caveatSummary"]
+  diagnosticSummary: CompactStaticBuildDiagnosticSummary
+  sourceNoteSummary: CompactStaticBuildSourceNoteSummary
+  assumptionSummary: CompactStaticBuildAssumptionSummary
+  caveatSummary: CompactStaticBuildCaveatSummary
   resolvedPanel: StaticBuildResolvedPanel
   resolvedBuckets: StaticBuildResolvedBuckets
   damage: {
@@ -86,6 +91,46 @@ export interface CompactStaticBuildResolveSummary {
   sourceNoteGroups: StaticBuildResolveSummary["sourceNoteGroups"]
 }
 
+export interface CompactStaticBuildDiagnosticSummary {
+  count: number
+  hasDiagnostics: boolean
+  hasDefaultedInput: boolean
+  hasCoverageGap: boolean
+  hasUnsupportedEffect: boolean
+  hasFallback: boolean
+  kindGroups: StaticBuildDiagnosticSummary["kindGroups"]
+  ownerGroups: StaticBuildDiagnosticSummary["ownerGroups"]
+}
+
+export interface CompactStaticBuildSourceNoteSummary {
+  count: number
+  hasSourceNotes: boolean
+  hasMissingInput: boolean
+  hasProcessOnly: boolean
+  hasResearchOnly: boolean
+  statusGroups: StaticBuildSourceNoteSummary["statusGroups"]
+  ownerGroups: StaticBuildSourceNoteSummary["ownerGroups"]
+}
+
+export interface CompactStaticBuildAssumptionSummary {
+  count: number
+  hasAssumptions: boolean
+}
+
+export interface CompactStaticBuildCaveatSummary {
+  assumptionCount: number
+  unsupportedEffectCount: number
+  hasAssumptions: boolean
+  hasUnsupportedEffects: boolean
+}
+
+export interface CompactStaticBuildEntryCaveatSummary {
+  assumptionCount: number
+  unsupportedCount: number
+  hasAssumptions: boolean
+  hasUnsupported: boolean
+}
+
 export interface StaticBuildCompactSkillMatrixRow {
   id: string
   group: string
@@ -119,10 +164,10 @@ export interface CompactStaticBuildSkillMatrixResult {
   summary: CompactStaticBuildSkillMatrixSummary
   effectSummary: StaticBuildSkillMatrixEffectSummaryItem[]
   requirementSummary: ResolveStaticBuildSkillMatrixResult["requirementSummary"]
-  assumptionSummary: ResolveStaticBuildSkillMatrixResult["assumptionSummary"]
-  caveatSummary: ResolveStaticBuildSkillMatrixResult["caveatSummary"]
-  diagnosticSummary: ResolveStaticBuildSkillMatrixResult["diagnosticSummary"]
-  sourceNoteSummary: ResolveStaticBuildSkillMatrixResult["sourceNoteSummary"]
+  assumptionSummary: CompactStaticBuildAssumptionSummary
+  caveatSummary: CompactStaticBuildCaveatSummary
+  diagnosticSummary: CompactStaticBuildDiagnosticSummary
+  sourceNoteSummary: CompactStaticBuildSourceNoteSummary
   assumptions?: string[]
   unsupportedEffects?: string[]
   rows: StaticBuildCompactSkillMatrixRow[]
@@ -181,10 +226,16 @@ export function compactStaticBuildResult(
     loadout: build.loadout,
     summary: compactStaticBuildResolveSummary(build.summary),
     effectSummary: build.effectSummary,
-    diagnosticSummary: build.diagnosticSummary,
-    sourceNoteSummary: build.sourceNoteSummary,
-    assumptionSummary: build.assumptionSummary,
-    caveatSummary: build.caveatSummary,
+    diagnosticSummary: compactStaticBuildDiagnosticSummary(
+      build.diagnosticSummary,
+    ),
+    sourceNoteSummary: compactStaticBuildSourceNoteSummary(
+      build.sourceNoteSummary,
+    ),
+    assumptionSummary: compactStaticBuildAssumptionSummary(
+      build.assumptionSummary,
+    ),
+    caveatSummary: compactStaticBuildCaveatSummary(build.caveatSummary),
     resolvedPanel: build.resolvedPanel,
     resolvedBuckets: build.resolvedBuckets,
     damage: build.damage,
@@ -227,6 +278,66 @@ export function compactStaticBuildResolveSummary(
     hasResearchOnlySourceNote: summary.hasResearchOnlySourceNote,
     diagnosticGroups: summary.diagnosticGroups,
     sourceNoteGroups: summary.sourceNoteGroups,
+  }
+}
+
+export function compactStaticBuildDiagnosticSummary(
+  summary: StaticBuildDiagnosticSummary,
+): CompactStaticBuildDiagnosticSummary {
+  return {
+    count: summary.count,
+    hasDiagnostics: summary.hasDiagnostics,
+    hasDefaultedInput: summary.hasDefaultedInput,
+    hasCoverageGap: summary.hasCoverageGap,
+    hasUnsupportedEffect: summary.hasUnsupportedEffect,
+    hasFallback: summary.hasFallback,
+    kindGroups: summary.kindGroups,
+    ownerGroups: summary.ownerGroups,
+  }
+}
+
+export function compactStaticBuildSourceNoteSummary(
+  summary: StaticBuildSourceNoteSummary,
+): CompactStaticBuildSourceNoteSummary {
+  return {
+    count: summary.count,
+    hasSourceNotes: summary.hasSourceNotes,
+    hasMissingInput: summary.hasMissingInput,
+    hasProcessOnly: summary.hasProcessOnly,
+    hasResearchOnly: summary.hasResearchOnly,
+    statusGroups: summary.statusGroups,
+    ownerGroups: summary.ownerGroups,
+  }
+}
+
+export function compactStaticBuildAssumptionSummary(
+  summary: StaticBuildAssumptionSummary,
+): CompactStaticBuildAssumptionSummary {
+  return {
+    count: summary.count,
+    hasAssumptions: summary.hasAssumptions,
+  }
+}
+
+export function compactStaticBuildCaveatSummary(
+  summary: StaticBuildCaveatSummary,
+): CompactStaticBuildCaveatSummary {
+  return {
+    assumptionCount: summary.assumptionCount,
+    unsupportedEffectCount: summary.unsupportedEffectCount,
+    hasAssumptions: summary.hasAssumptions,
+    hasUnsupportedEffects: summary.hasUnsupportedEffects,
+  }
+}
+
+export function compactStaticBuildEntryCaveatSummary(
+  summary: StaticBuildEntryCaveatSummary,
+): CompactStaticBuildEntryCaveatSummary {
+  return {
+    assumptionCount: summary.assumptionCount,
+    unsupportedCount: summary.unsupportedCount,
+    hasAssumptions: summary.hasAssumptions,
+    hasUnsupported: summary.hasUnsupported,
   }
 }
 
@@ -288,10 +399,10 @@ export interface CompactStaticBuildTriggerMatrixResult {
   summary: CompactStaticBuildTriggerMatrixSummary
   effectSummary: ResolveStaticBuildTriggerMatrixResult["effectSummary"]
   requirementSummary: ResolveStaticBuildTriggerMatrixResult["requirementSummary"]
-  caveatSummary: ResolveStaticBuildTriggerMatrixResult["caveatSummary"]
-  diagnosticSummary: ResolveStaticBuildTriggerMatrixResult["diagnosticSummary"]
-  sourceNoteSummary: ResolveStaticBuildTriggerMatrixResult["sourceNoteSummary"]
-  assumptionSummary: ResolveStaticBuildTriggerMatrixResult["assumptionSummary"]
+  caveatSummary: CompactStaticBuildEntryCaveatSummary
+  diagnosticSummary: CompactStaticBuildDiagnosticSummary
+  sourceNoteSummary: CompactStaticBuildSourceNoteSummary
+  assumptionSummary: CompactStaticBuildAssumptionSummary
   assumptions?: string[]
   rows: StaticBuildCompactTriggerMatrixRow[]
 }
@@ -433,10 +544,10 @@ export interface CompactStaticBuildSourceEntryCollection {
   effectSummary: ResolveStaticBuildSourceEntriesResult["effectSummary"]
   sourceDamageRequirementSummary: ResolveStaticBuildSourceEntriesResult["sourceDamageRequirementSummary"]
   sourceUtilityRequirementSummary: ResolveStaticBuildSourceEntriesResult["sourceUtilityRequirementSummary"]
-  caveatSummary: ResolveStaticBuildSourceEntriesResult["caveatSummary"]
-  diagnosticSummary: ResolveStaticBuildSourceEntriesResult["diagnosticSummary"]
-  sourceNoteSummary: ResolveStaticBuildSourceEntriesResult["sourceNoteSummary"]
-  assumptionSummary: ResolveStaticBuildSourceEntriesResult["assumptionSummary"]
+  caveatSummary: CompactStaticBuildEntryCaveatSummary
+  diagnosticSummary: CompactStaticBuildDiagnosticSummary
+  sourceNoteSummary: CompactStaticBuildSourceNoteSummary
+  assumptionSummary: CompactStaticBuildAssumptionSummary
   assumptions?: string[]
   entries: StaticBuildCompactSourceEntry[]
 }
@@ -477,10 +588,10 @@ export interface CompactStaticBuildSourceDamageViewsResult {
   summary: CompactStaticBuildSourceDamageViewsSummary
   effectSummary: StaticBuildSourceDamageViewEffectSummaryItem[]
   requirementSummary: ResolveStaticBuildSourceDamageViewsResult["requirementSummary"]
-  caveatSummary: ResolveStaticBuildSourceDamageViewsResult["caveatSummary"]
-  diagnosticSummary: ResolveStaticBuildSourceDamageViewsResult["diagnosticSummary"]
-  sourceNoteSummary: ResolveStaticBuildSourceDamageViewsResult["sourceNoteSummary"]
-  assumptionSummary: ResolveStaticBuildSourceDamageViewsResult["assumptionSummary"]
+  caveatSummary: CompactStaticBuildEntryCaveatSummary
+  diagnosticSummary: CompactStaticBuildDiagnosticSummary
+  sourceNoteSummary: CompactStaticBuildSourceNoteSummary
+  assumptionSummary: CompactStaticBuildAssumptionSummary
   assumptions?: string[]
   entries: StaticBuildCompactSourceDamageViewEntry[]
 }
@@ -490,10 +601,10 @@ export interface CompactStaticBuildSourceUtilityViewsResult {
   summary: CompactStaticBuildSourceUtilityViewsSummary
   effectSummary: ResolveStaticBuildSourceUtilityViewsResult["effectSummary"]
   requirementSummary: ResolveStaticBuildSourceUtilityViewsResult["requirementSummary"]
-  caveatSummary: ResolveStaticBuildSourceUtilityViewsResult["caveatSummary"]
-  diagnosticSummary: ResolveStaticBuildSourceUtilityViewsResult["diagnosticSummary"]
-  sourceNoteSummary: ResolveStaticBuildSourceUtilityViewsResult["sourceNoteSummary"]
-  assumptionSummary: ResolveStaticBuildSourceUtilityViewsResult["assumptionSummary"]
+  caveatSummary: CompactStaticBuildEntryCaveatSummary
+  diagnosticSummary: CompactStaticBuildDiagnosticSummary
+  sourceNoteSummary: CompactStaticBuildSourceNoteSummary
+  assumptionSummary: CompactStaticBuildAssumptionSummary
   assumptions?: string[]
   entries: StaticBuildCompactSourceUtilityViewEntry[]
 }
@@ -513,10 +624,16 @@ export function compactStaticBuildSkillMatrixResult(
     ),
     effectSummary: matrix.effectSummary,
     requirementSummary: matrix.requirementSummary,
-    assumptionSummary: matrix.assumptionSummary,
-    caveatSummary: matrix.caveatSummary,
-    diagnosticSummary: matrix.diagnosticSummary,
-    sourceNoteSummary: matrix.sourceNoteSummary,
+    assumptionSummary: compactStaticBuildAssumptionSummary(
+      matrix.assumptionSummary,
+    ),
+    caveatSummary: compactStaticBuildCaveatSummary(matrix.caveatSummary),
+    diagnosticSummary: compactStaticBuildDiagnosticSummary(
+      matrix.diagnosticSummary,
+    ),
+    sourceNoteSummary: compactStaticBuildSourceNoteSummary(
+      matrix.sourceNoteSummary,
+    ),
     ...(includeDetails
       ? {
           assumptions: matrix.assumptions,
@@ -605,10 +722,16 @@ export function compactStaticBuildTriggerMatrixResult(
     summary: compactStaticBuildTriggerMatrixSummary(matrix.summary),
     effectSummary: matrix.effectSummary,
     requirementSummary: matrix.requirementSummary,
-    caveatSummary: matrix.caveatSummary,
-    diagnosticSummary: matrix.diagnosticSummary,
-    sourceNoteSummary: matrix.sourceNoteSummary,
-    assumptionSummary: matrix.assumptionSummary,
+    caveatSummary: compactStaticBuildEntryCaveatSummary(matrix.caveatSummary),
+    diagnosticSummary: compactStaticBuildDiagnosticSummary(
+      matrix.diagnosticSummary,
+    ),
+    sourceNoteSummary: compactStaticBuildSourceNoteSummary(
+      matrix.sourceNoteSummary,
+    ),
+    assumptionSummary: compactStaticBuildAssumptionSummary(
+      matrix.assumptionSummary,
+    ),
     ...(includeDetails
       ? {
           assumptions: matrix.assumptions,
@@ -695,10 +818,18 @@ export function compactStaticBuildSourceEntryCollection(
     effectSummary: collection.effectSummary,
     sourceDamageRequirementSummary: collection.sourceDamageRequirementSummary,
     sourceUtilityRequirementSummary: collection.sourceUtilityRequirementSummary,
-    caveatSummary: collection.caveatSummary,
-    diagnosticSummary: collection.diagnosticSummary,
-    sourceNoteSummary: collection.sourceNoteSummary,
-    assumptionSummary: collection.assumptionSummary,
+    caveatSummary: compactStaticBuildEntryCaveatSummary(
+      collection.caveatSummary,
+    ),
+    diagnosticSummary: compactStaticBuildDiagnosticSummary(
+      collection.diagnosticSummary,
+    ),
+    sourceNoteSummary: compactStaticBuildSourceNoteSummary(
+      collection.sourceNoteSummary,
+    ),
+    assumptionSummary: compactStaticBuildAssumptionSummary(
+      collection.assumptionSummary,
+    ),
     ...(includeDetails
       ? {
           assumptions: collection.assumptions,
@@ -755,10 +886,16 @@ export function compactStaticBuildSourceDamageViewsResult(
     summary: compactStaticBuildSourceDamageViewsSummary(views.summary),
     effectSummary: views.effectSummary,
     requirementSummary: views.requirementSummary,
-    caveatSummary: views.caveatSummary,
-    diagnosticSummary: views.diagnosticSummary,
-    sourceNoteSummary: views.sourceNoteSummary,
-    assumptionSummary: views.assumptionSummary,
+    caveatSummary: compactStaticBuildEntryCaveatSummary(views.caveatSummary),
+    diagnosticSummary: compactStaticBuildDiagnosticSummary(
+      views.diagnosticSummary,
+    ),
+    sourceNoteSummary: compactStaticBuildSourceNoteSummary(
+      views.sourceNoteSummary,
+    ),
+    assumptionSummary: compactStaticBuildAssumptionSummary(
+      views.assumptionSummary,
+    ),
     ...(includeDetails
       ? {
           assumptions: views.assumptions,
@@ -847,10 +984,16 @@ export function compactStaticBuildSourceUtilityViewsResult(
     summary: compactStaticBuildSourceUtilityViewsSummary(views.summary),
     effectSummary: views.effectSummary,
     requirementSummary: views.requirementSummary,
-    caveatSummary: views.caveatSummary,
-    diagnosticSummary: views.diagnosticSummary,
-    sourceNoteSummary: views.sourceNoteSummary,
-    assumptionSummary: views.assumptionSummary,
+    caveatSummary: compactStaticBuildEntryCaveatSummary(views.caveatSummary),
+    diagnosticSummary: compactStaticBuildDiagnosticSummary(
+      views.diagnosticSummary,
+    ),
+    sourceNoteSummary: compactStaticBuildSourceNoteSummary(
+      views.sourceNoteSummary,
+    ),
+    assumptionSummary: compactStaticBuildAssumptionSummary(
+      views.assumptionSummary,
+    ),
     ...(includeDetails
       ? {
           assumptions: views.assumptions,

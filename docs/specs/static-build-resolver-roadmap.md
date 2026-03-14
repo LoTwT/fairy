@@ -6494,3 +6494,37 @@ caveatSummary` 这些兼容字段补齐。
 - `V160.2` 已完成：上述 compact top-level `summary` 已改为显式 compact types
 - `V160.3` 已完成：现有测试与 runtime 校验已覆盖
 - `V160.4` 已完成：roadmap、索引与架构文档已同步
+
+## 164. V161 explicit compact aggregate summaries
+
+`V160` 收口后，compact result-level contract 里仍直接复用 raw aggregate summary type 的部分主要集中在：
+
+- `diagnosticSummary`
+- `sourceNoteSummary`
+- `assumptionSummary`
+- `caveatSummary`
+- `entry caveatSummary`
+
+`V161` 只解决一件事：
+
+1. 把 compact 结果对象顶层的这些 aggregate summary 改成显式 compact type
+
+### 164.1 分阶段
+
+1. `V161.1` scope freeze
+2. `V161.2` runtime/type contract alignment
+3. `V161.3` tests / prompt alignment
+4. `V161.4` docs closeout
+
+### 164.2 非目标
+
+1. 不改变 row / entry / group 上的 aggregate summary type
+2. 不改变任何 aggregate summary 的字段值
+3. 不改变 `includeDetails` 语义
+
+### 164.3 当前状态
+
+- `V161.1` 已完成：冻结到 explicit compact result-level aggregate summaries
+- `V161.2` 已完成：compact 结果对象顶层的 aggregate summary 已改为显式 compact types
+- `V161.3` 已完成：现有测试与 runtime 校验已覆盖
+- `V161.4` 已完成：roadmap、索引与架构文档已同步
