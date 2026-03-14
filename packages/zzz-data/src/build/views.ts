@@ -316,8 +316,14 @@ function createEntryBase(
     diagnosticSummary: summarizeDiagnosticEntries([]),
     sourceNotes,
     sourceNoteSummary: summarizeSourceNoteEntries(sourceNotes),
+    assumptionSummary: summarizeAssumptions([]),
     assumptions: [],
   }
+}
+
+function syncEntryAssumptionSummary(entry: StaticBuildSourceDamageViewEntry) {
+  entry.assumptionSummary = summarizeAssumptions(entry.assumptions)
+  return entry
 }
 
 function toEntryDamage(result: ResolveStaticBuildResult) {
@@ -455,7 +461,7 @@ function resolveAlicePolarityAssaultView(
     entry.assumptions.push(
       "需要通过 scenario.stateSnapshot 显式提供 [极性强击] 的状态与倍率快照。",
     )
-    return entry
+    return syncEntryAssumptionSummary(entry)
   }
 
   const build = resolveStaticBuildDamage(input)
@@ -467,7 +473,7 @@ function resolveAlicePolarityAssaultView(
   entry.assumptions.push(
     "当前 view 直接复用主 resolver，并按 scenario.stateSnapshot 记录的 [极性强击] 倍率结算。",
   )
-  return entry
+  return syncEntryAssumptionSummary(entry)
 }
 
 function resolveMiyabiFrostburnBreakView(
@@ -503,7 +509,7 @@ function resolveMiyabiFrostburnBreakView(
     entry.assumptions.push(
       "需要通过 scenario.stateSnapshot 显式提供 [霜灼·破] 的状态与倍率快照。",
     )
-    return entry
+    return syncEntryAssumptionSummary(entry)
   }
 
   const build = resolveStaticBuildDamage(
@@ -517,7 +523,7 @@ function resolveMiyabiFrostburnBreakView(
   entry.assumptions.push(
     "当前 view 以 scenario.stateSnapshot 的 [霜灼·破] 倍率快照驱动独立条目结算，不回写主公式。",
   )
-  return entry
+  return syncEntryAssumptionSummary(entry)
 }
 
 function resolveBurniceEmberView(
@@ -558,7 +564,7 @@ function resolveBurniceEmberView(
     entry.assumptions.push(
       "需要通过 scenario.dynamicSnapshot 显式提供 [燃点]/[余烬] 的状态、次数和倍率快照。",
     )
-    return entry
+    return syncEntryAssumptionSummary(entry)
   }
 
   const withSnapshot = resolveStaticBuildDamage(input)
@@ -578,7 +584,7 @@ function resolveBurniceEmberView(
   entry.assumptions.push(
     "当前 view 使用“含 [余烬] 快照结果 - 去除 [余烬] 快照结果”的差值，表达额外结算的静态贡献。",
   )
-  return entry
+  return syncEntryAssumptionSummary(entry)
 }
 
 function withoutAriaExflowSnapshot(
@@ -638,7 +644,7 @@ function resolveAriaExflowView(
         ? "目标处于失衡时，需要通过 scenario.dynamicSnapshot 显式提供 [异放] 基础倍率和失衡追加倍率快照。"
         : "需要通过 scenario.dynamicSnapshot 显式提供 [异放] 基础倍率快照。",
     )
-    return entry
+    return syncEntryAssumptionSummary(entry)
   }
 
   const withSnapshot = resolveStaticBuildDamage(input)
@@ -658,7 +664,7 @@ function resolveAriaExflowView(
   entry.assumptions.push(
     "当前 view 使用“含 [异放] 快照结果 - 去除 [异放] 快照结果”的差值，表达额外结算的静态贡献。",
   )
-  return entry
+  return syncEntryAssumptionSummary(entry)
 }
 
 function resolveVivianExflowView(
@@ -696,7 +702,7 @@ function resolveVivianExflowView(
         ? "需要通过 scenario.attribute（anomaly）或 scenario.anomalyType（disorder）显式提供原异常属性，以推导 [异放] 比例。"
         : "需要提供 finalPanel.anomalyProficiency，以推导薇薇安 [异放] 的额外结算比例。",
     )
-    return entry
+    return syncEntryAssumptionSummary(entry)
   }
 
   const withSnapshot = resolveStaticBuildDamage(
@@ -721,5 +727,5 @@ function resolveVivianExflowView(
       "已按影画2将 [异放] 从异常精通中获得的收益提升至原本的 130%。",
     )
   }
-  return entry
+  return syncEntryAssumptionSummary(entry)
 }

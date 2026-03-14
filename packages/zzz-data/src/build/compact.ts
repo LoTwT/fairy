@@ -102,6 +102,7 @@ export interface StaticBuildCompactSourceDamageViewEntry {
   diagnosticSummary: StaticBuildSourceDamageViewEntry["diagnosticSummary"]
   sourceNotes: StaticBuildSourceNoteEntry[]
   sourceNoteSummary: StaticBuildSourceDamageViewEntry["sourceNoteSummary"]
+  assumptionSummary: StaticBuildSourceDamageViewEntry["assumptionSummary"]
   assumptions: string[]
   damage?: NonNullable<StaticBuildSourceDamageViewEntry["damage"]>
   summary?: StaticBuildSourceDamageViewEntry["summary"]
@@ -322,6 +323,7 @@ export function compactStaticBuildSourceEntry(
       diagnosticSummary: entry.diagnosticSummary,
       sourceNotes: entry.sourceNotes,
       sourceNoteSummary: entry.sourceNoteSummary,
+      assumptionSummary: entry.assumptionSummary,
       assumptions: entry.assumptions,
       damage: entry.damage,
       summary: entry.summary,

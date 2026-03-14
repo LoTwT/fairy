@@ -299,6 +299,10 @@ describe("static build source damage views", () => {
           { key: "stateSnapshot", count: 1 },
         ],
       },
+      assumptionSummary: {
+        count: 1,
+        hasAssumptions: true,
+      },
     })
     expect(
       result.entries[0]?.build?.resolvedBuckets.skillMultiplierFactor,

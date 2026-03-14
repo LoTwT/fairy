@@ -215,6 +215,10 @@ describe("resolveBuildSourceDamageViews tool", () => {
           { key: "stateSnapshot", count: 1 },
         ],
       },
+      assumptionSummary: {
+        count: 1,
+        hasAssumptions: true,
+      },
     })
     expect(
       (result as any).views.entries[0].sourceNotes.some(
