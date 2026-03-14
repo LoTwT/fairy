@@ -1239,7 +1239,7 @@ export interface StaticBuildCompactTriggerMatrixRow {
   caveatSummary: CompactStaticBuildEntryCaveatSummary
   assumptionSummary: CompactStaticBuildAssumptionSummary
   assumptions?: string[]
-  damage?: NonNullable<StaticBuildTriggerMatrixRow["damage"]>
+  damage?: CompactStaticBuildEntryDamageSummary
   summary?: CompactStaticBuildResolveSummary
   build?: ResolveStaticBuildResult
 }
@@ -1322,7 +1322,7 @@ export interface StaticBuildCompactSourceDamageViewEntry {
   caveatSummary: CompactStaticBuildEntryCaveatSummary
   assumptionSummary: CompactStaticBuildAssumptionSummary
   assumptions?: string[]
-  damage?: NonNullable<StaticBuildSourceDamageViewEntry["damage"]>
+  damage?: CompactStaticBuildEntryDamageSummary
   summary?: CompactStaticBuildResolveSummary
   build?: ResolveStaticBuildResult
 }
@@ -1400,6 +1400,12 @@ export interface CompactStaticBuildSourceUtilityViewEntrySummary {
   sourceNoteCount: number
   assumptionCount: number
   hasUnsupported: boolean
+}
+
+export interface CompactStaticBuildEntryDamageSummary {
+  expected: number
+  crit: number
+  noCrit: number
 }
 
 export interface CompactStaticBuildSourceDamageViewMeta {
@@ -1810,7 +1816,9 @@ export function compactStaticBuildTriggerMatrixRow(
     assumptionSummary: compactStaticBuildAssumptionSummary(
       row.assumptionSummary,
     ),
-    damage: row.damage,
+    ...(row.damage
+      ? { damage: compactStaticBuildEntryDamageSummary(row.damage) }
+      : {}),
     ...(row.summary
       ? {
           summary: compactStaticBuildResolveSummary(row.summary),
@@ -1831,6 +1839,18 @@ export function compactStaticBuildTriggerMatrixRow(
           ...(row.build ? { build: row.build } : {}),
         }
       : {}),
+  }
+}
+
+export function compactStaticBuildEntryDamageSummary(
+  damage:
+    | NonNullable<StaticBuildTriggerMatrixRow["damage"]>
+    | NonNullable<StaticBuildSourceDamageViewEntry["damage"]>,
+): CompactStaticBuildEntryDamageSummary {
+  return {
+    expected: damage.expected,
+    crit: damage.crit,
+    noCrit: damage.noCrit,
   }
 }
 
@@ -2064,7 +2084,9 @@ export function compactStaticBuildSourceDamageViewEntry(
     assumptionSummary: compactStaticBuildAssumptionSummary(
       entry.assumptionSummary,
     ),
-    damage: entry.damage,
+    ...(entry.damage
+      ? { damage: compactStaticBuildEntryDamageSummary(entry.damage) }
+      : {}),
     ...(entry.summary
       ? {
           summary: compactStaticBuildResolveSummary(entry.summary),
