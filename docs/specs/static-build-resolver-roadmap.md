@@ -5916,3 +5916,29 @@ caveatSummary` 这些兼容字段补齐。
 - `V140.2` 已完成：compact mixed entries 默认已不再携带 `requirements`
 - `V140.3` 已完成：高层 `resolveBuildSourceEntries` 测试与 prompt 已对齐 `includeDetails=true`
 - `V140.4` 已完成：README、roadmap、索引与架构文档已同步
+
+## 144. V141 trigger-matrix compact row assumption gating
+
+### 144.1 背景
+
+`V137` 收口后，compact `trigger-matrix rows` 的 raw `row.requirements` 已收紧到 `includeDetails=true`。
+
+但 compact trigger rows 仍默认携带原始 `row.assumptions`，而 row / group / top-level `assumptionSummary` 已经齐全。
+
+`V141` 只解决一件事：
+
+1. 把 compact `trigger-matrix rows` 的 `row.assumptions` 也移动到 `includeDetails=true`
+
+### 144.2 范围
+
+1. `V141.1` scope freeze
+2. `V141.2` runtime/type contract alignment
+3. `V141.3` tool assertion / prompt alignment
+4. `V141.4` docs closeout
+
+### 144.3 当前状态
+
+- `V141.1` 已完成：冻结到 trigger-matrix compact row assumption gating
+- `V141.2` 已完成：compact trigger rows 默认已不再携带 `assumptions`
+- `V141.3` 已完成：高层 `resolveBuildTriggerMatrix` 测试与 prompt 已对齐 `includeDetails=true`
+- `V141.4` 已完成：README、roadmap、索引与架构文档已同步

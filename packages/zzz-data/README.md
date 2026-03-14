@@ -664,6 +664,8 @@ matrix.rows[1].sourceNoteSummary
 matrix.rows[1].assumptionSummary
 ```
 
+默认 compact trigger rows 不再附带 `row.assumptions / row.requirements / row.diagnostics / row.sourceNotes / row.build`。只有确实需要逐条展开 raw assumptions、requirements、diagnostics / source notes 或完整 build 时，才使用 `includeDetails = true`。
+
 如果你需要拿到不进入主伤害公式的独立回能 / 回能速率条目，可使用：
 
 ```ts

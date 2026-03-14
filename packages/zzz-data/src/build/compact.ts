@@ -149,7 +149,7 @@ export interface StaticBuildCompactTriggerMatrixRow {
   sourceNoteSummary: StaticBuildTriggerMatrixRow["sourceNoteSummary"]
   caveatSummary: StaticBuildTriggerMatrixRow["caveatSummary"]
   assumptionSummary: StaticBuildTriggerMatrixRow["assumptionSummary"]
-  assumptions: string[]
+  assumptions?: string[]
   damage?: NonNullable<StaticBuildTriggerMatrixRow["damage"]>
   summary?: StaticBuildTriggerMatrixRow["summary"]
   build?: ResolveStaticBuildResult
@@ -365,11 +365,11 @@ export function compactStaticBuildTriggerMatrixRow(
     sourceNoteSummary: row.sourceNoteSummary,
     caveatSummary: row.caveatSummary,
     assumptionSummary: row.assumptionSummary,
-    assumptions: row.assumptions,
     damage: row.damage,
     summary: row.summary,
     ...(includeDetails
       ? {
+          assumptions: row.assumptions,
           requirements: row.requirements,
           diagnostics: row.diagnostics,
           sourceNotes: row.sourceNotes,

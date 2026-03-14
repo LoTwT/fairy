@@ -30,7 +30,7 @@ export const resolveBuildTriggerMatrix = createTool({
       .optional()
       .default(false)
       .describe(
-        "是否返回每行原始明细。默认 false，只保留 row.requirementSummary / row.*Summary 等紧凑字段；true 时会额外返回 row.requirements / row.diagnostics / row.sourceNotes，且在原始结果带 build 时透传 row.build。",
+        "是否返回每行原始明细。默认 false，只保留 row.requirementSummary / row.assumptionSummary / row.*Summary 等紧凑字段；true 时会额外返回 row.assumptions / row.requirements / row.diagnostics / row.sourceNotes，且在原始结果带 build 时透传 row.build。",
       ),
   }),
   execute: async (input) => {

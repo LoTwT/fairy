@@ -171,13 +171,14 @@ describe("static build compact helpers", () => {
 
     const compact = compactStaticBuildTriggerMatrixResult(matrix)
 
+    expect(compact.rows[0]?.assumptions).toBeUndefined()
     expect(compact.rows[0]?.requirements).toBeUndefined()
     expect(compact.rows[0]?.diagnostics).toBeUndefined()
     expect(compact.rows[0]?.sourceNotes).toBeUndefined()
     expect(compact.rows[0]?.build).toBeUndefined()
   })
 
-  it("compacts trigger matrix rows and keeps raw requirements only when requested", () => {
+  it("compacts trigger matrix rows and keeps raw assumptions and requirements only when requested", () => {
     const matrix = resolveStaticBuildTriggerMatrix({
       mode: "baseline",
       loadout: {
@@ -214,6 +215,7 @@ describe("static build compact helpers", () => {
     const compact = compactStaticBuildTriggerMatrixResult(matrix, true)
 
     expect(compact.rows).toHaveLength(2)
+    expect(compact.rows[0]?.assumptions).toEqual(matrix.rows[0]?.assumptions)
     expect(compact.rows[0]?.requirements).toEqual(matrix.rows[0]?.requirements)
     expect(compact.rows[0]?.diagnostics).toEqual(matrix.rows[0]?.diagnostics)
     expect(compact.rows[0]?.sourceNotes).toEqual(matrix.rows[0]?.sourceNotes)
