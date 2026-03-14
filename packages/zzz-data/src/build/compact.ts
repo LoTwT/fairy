@@ -500,7 +500,7 @@ export interface StaticBuildCompactTriggerMatrixRow {
   label: string
   supported: boolean
   metadata: StaticBuildTriggerMatrixRowMeta
-  effectSummary: StaticBuildTriggerMatrixRow["effectSummary"]
+  effectSummary: CompactStaticBuildTriggerMatrixEffectSummaryItem[]
   requirements?: StaticBuildTriggerMatrixRow["requirements"]
   requirementSummary: CompactStaticBuildSourceDamageViewRequirementSummary
   diagnostics?: StaticBuildDiagnosticEntry[]
@@ -576,7 +576,7 @@ export interface StaticBuildCompactSourceDamageViewEntry {
   diagnosticSummary: CompactStaticBuildDiagnosticSummary
   sourceNotes?: StaticBuildSourceNoteEntry[]
   sourceNoteSummary: CompactStaticBuildSourceNoteSummary
-  effectSummary: StaticBuildSourceDamageViewEntry["effectSummary"]
+  effectSummary: CompactStaticBuildSourceDamageViewEffectSummaryItem[]
   caveatSummary: CompactStaticBuildEntryCaveatSummary
   assumptionSummary: CompactStaticBuildAssumptionSummary
   assumptions?: string[]
@@ -637,7 +637,7 @@ export interface StaticBuildCompactSourceUtilityViewEntry {
   diagnosticSummary: CompactStaticBuildDiagnosticSummary
   sourceNotes?: StaticBuildSourceNoteEntry[]
   sourceNoteSummary: CompactStaticBuildSourceNoteSummary
-  effectSummary: StaticBuildSourceUtilityViewEntry["effectSummary"]
+  effectSummary: CompactStaticBuildSourceUtilityViewEffectSummaryItem[]
   caveatSummary: CompactStaticBuildEntryCaveatSummary
   assumptionSummary: CompactStaticBuildAssumptionSummary
   assumptions?: string[]
@@ -1000,7 +1000,9 @@ export function compactStaticBuildTriggerMatrixRow(
     label: row.label,
     supported: row.supported,
     metadata: row.metadata,
-    effectSummary: row.effectSummary,
+    effectSummary: row.effectSummary.map((item) =>
+      compactStaticBuildAppliedRowEffectSummaryItem(item),
+    ),
     requirementSummary: compactStaticBuildRequirementSummary(
       row.requirementSummary,
     ),
@@ -1238,7 +1240,9 @@ export function compactStaticBuildSourceDamageViewEntry(
     sourceNoteSummary: compactStaticBuildSourceNoteSummary(
       entry.sourceNoteSummary,
     ),
-    effectSummary: entry.effectSummary,
+    effectSummary: entry.effectSummary.map((item) =>
+      compactStaticBuildAppliedEntryEffectSummaryItem(item),
+    ),
     caveatSummary: compactStaticBuildEntryCaveatSummary(entry.caveatSummary),
     assumptionSummary: compactStaticBuildAssumptionSummary(
       entry.assumptionSummary,
@@ -1392,7 +1396,9 @@ export function compactStaticBuildSourceUtilityViewEntry(
     sourceNoteSummary: compactStaticBuildSourceNoteSummary(
       entry.sourceNoteSummary,
     ),
-    effectSummary: entry.effectSummary,
+    effectSummary: entry.effectSummary.map((item) =>
+      compactStaticBuildAppliedEntryEffectSummaryItem(item),
+    ),
     caveatSummary: compactStaticBuildEntryCaveatSummary(entry.caveatSummary),
     assumptionSummary: compactStaticBuildAssumptionSummary(
       entry.assumptionSummary,
@@ -1431,7 +1437,9 @@ export function compactStaticBuildSourceEntry(
       sourceNoteSummary: compactStaticBuildSourceNoteSummary(
         entry.sourceNoteSummary,
       ),
-      effectSummary: entry.effectSummary,
+      effectSummary: entry.effectSummary.map((item) =>
+        compactStaticBuildAppliedEntryEffectSummaryItem(item),
+      ),
       caveatSummary: compactStaticBuildEntryCaveatSummary(entry.caveatSummary),
       assumptionSummary: compactStaticBuildAssumptionSummary(
         entry.assumptionSummary,
@@ -1479,7 +1487,9 @@ export function compactStaticBuildSourceEntry(
     sourceNoteSummary: compactStaticBuildSourceNoteSummary(
       entry.sourceNoteSummary,
     ),
-    effectSummary: entry.effectSummary,
+    effectSummary: entry.effectSummary.map((item) =>
+      compactStaticBuildAppliedEntryEffectSummaryItem(item),
+    ),
     caveatSummary: compactStaticBuildEntryCaveatSummary(entry.caveatSummary),
     assumptionSummary: compactStaticBuildAssumptionSummary(
       entry.assumptionSummary,
