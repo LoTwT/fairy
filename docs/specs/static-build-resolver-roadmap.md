@@ -7289,6 +7289,39 @@ caveatSummary` 这些兼容字段补齐。
 - `V184.3` 已完成：现有测试与 runtime 校验已覆盖
 - `V184.4` 已完成：roadmap、索引与架构文档已同步
 
+## 188. V185 explicit compact source-view result headers
+
+`V184` 收口后，compact source-view result 顶层仍直接复用 raw header type 的稳定缺口是：
+
+1. `CompactStaticBuildSourceDamageViewsResult.mode / manualBaseMode / loadout`
+2. `CompactStaticBuildSourceUtilityViewsResult.loadout`
+3. `CompactStaticBuildSourceEntryCollection.loadout`
+
+`V185` 只解决这一件事：
+
+1. 把 compact `source-damage-views / source-utility-views / source-entry collection` 顶层的 `mode / manualBaseMode / loadout` 改为显式 compact type
+
+### 188.1 分阶段
+
+1. `V185.1` scope freeze
+2. `V185.2` runtime/type contract alignment
+3. `V185.3` tests / prompt alignment
+4. `V185.4` docs closeout
+
+### 188.2 非目标
+
+1. 不改变 `entries` 的字段值
+2. 不改变 `summary`
+3. 不改变 entry-level metadata
+4. 不改变 `includeDetails` 语义
+
+### 188.3 当前状态
+
+- `V185.1` 已完成：冻结到 explicit compact source-view result headers
+- `V185.2` 已完成：compact source-view 顶层 header 已改为显式 compact type
+- `V185.3` 已完成：现有测试与 runtime 校验已覆盖
+- `V185.4` 已完成：roadmap、索引与架构文档已同步
+
 ## 174. V171 explicit compact top-level summary effect summaries
 
 `V170` 收口后，compact contract 中下一批仍直接复用 raw effect summary item type 的显式缺口主要集中在 top-level `summary`：

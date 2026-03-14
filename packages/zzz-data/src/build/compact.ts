@@ -1399,7 +1399,7 @@ export interface CompactStaticBuildSourceEntryCollectionSummary {
 }
 
 export interface CompactStaticBuildSourceEntryCollection {
-  loadout: ResolveStaticBuildSourceEntriesResult["loadout"]
+  loadout: CompactStaticBuildLoadout
   summary: CompactStaticBuildSourceEntryCollectionSummary
   effectSummary: CompactStaticBuildSourceEntryEffectSummaryItem[]
   sourceDamageRequirementSummary: CompactStaticBuildSourceDamageViewRequirementSummary
@@ -1442,9 +1442,9 @@ export interface CompactStaticBuildSourceUtilityViewsSummary {
 }
 
 export interface CompactStaticBuildSourceDamageViewsResult {
-  mode: ResolveStaticBuildSourceDamageViewsResult["mode"]
-  manualBaseMode?: ResolveStaticBuildSourceDamageViewsResult["manualBaseMode"]
-  loadout: ResolveStaticBuildSourceDamageViewsResult["loadout"]
+  mode: CompactStaticBuildMode
+  manualBaseMode?: CompactStaticBuildBaseMode
+  loadout: CompactStaticBuildLoadout
   summary: CompactStaticBuildSourceDamageViewsSummary
   effectSummary: CompactStaticBuildSourceDamageViewEffectSummaryItem[]
   requirementSummary: CompactStaticBuildSourceDamageViewRequirementSummary
@@ -1457,7 +1457,7 @@ export interface CompactStaticBuildSourceDamageViewsResult {
 }
 
 export interface CompactStaticBuildSourceUtilityViewsResult {
-  loadout: ResolveStaticBuildSourceUtilityViewsResult["loadout"]
+  loadout: CompactStaticBuildLoadout
   summary: CompactStaticBuildSourceUtilityViewsSummary
   effectSummary: CompactStaticBuildSourceUtilityViewEffectSummaryItem[]
   requirementSummary: CompactStaticBuildSourceUtilityViewRequirementSummary
@@ -1755,7 +1755,7 @@ export function compactStaticBuildSourceEntryCollection(
   includeDetails = false,
 ): CompactStaticBuildSourceEntryCollection {
   return {
-    loadout: collection.loadout,
+    loadout: compactStaticBuildLoadout(collection.loadout),
     summary: compactStaticBuildSourceEntryCollectionSummary(collection.summary),
     effectSummary: collection.effectSummary.map((item) =>
       compactStaticBuildAppliedEntryEffectSummaryItem(item),
@@ -1854,7 +1854,7 @@ export function compactStaticBuildSourceDamageViewsResult(
   return {
     mode: views.mode,
     manualBaseMode: views.manualBaseMode,
-    loadout: views.loadout,
+    loadout: compactStaticBuildLoadout(views.loadout),
     summary: compactStaticBuildSourceDamageViewsSummary(views.summary),
     effectSummary: views.effectSummary.map((item) =>
       compactStaticBuildAppliedEntryEffectSummaryItem(item),
@@ -1992,7 +1992,7 @@ export function compactStaticBuildSourceUtilityViewsResult(
   includeDetails = false,
 ): CompactStaticBuildSourceUtilityViewsResult {
   return {
-    loadout: views.loadout,
+    loadout: compactStaticBuildLoadout(views.loadout),
     summary: compactStaticBuildSourceUtilityViewsSummary(views.summary),
     effectSummary: views.effectSummary.map((item) =>
       compactStaticBuildAppliedEntryEffectSummaryItem(item),
