@@ -6868,3 +6868,71 @@ caveatSummary` 这些兼容字段补齐。
 - `V171.2` 已完成：compact top-level `summary.effectSummary` 已改为显式 compact item types
 - `V171.3` 已完成：现有测试与 runtime 校验已覆盖
 - `V171.4` 已完成：roadmap、索引与架构文档已同步
+
+## 175. V172 explicit compact group effect summaries
+
+`V171` 收口后，compact contract 中下一批仍直接复用 raw effect summary item type 的显式缺口主要集中在 `group`：
+
+- `skill-matrix summary.groups[*].effectSummary`
+- `trigger-matrix summary.groups[*].effectSummary`
+- `source-damage-views summary.groups[*].effectSummary`
+- `source-utility-views summary.groups[*].effectSummary`
+- `source-entry collection summary.groups[*].effectSummary`
+
+`V172` 只解决一件事：
+
+1. 把上述 `group.effectSummary` 改成显式 compact effect summary item types
+
+### 175.1 分阶段
+
+1. `V172.1` scope freeze
+2. `V172.2` runtime/type contract alignment
+3. `V172.3` tests / prompt alignment
+4. `V172.4` docs closeout
+
+### 175.2 非目标
+
+1. 不改变 `row / entry` 上的 effect summary type
+2. 不改变 effect summary 的字段值
+3. 不改变 `includeDetails` 语义
+
+### 175.3 当前状态
+
+- `V172.1` 已完成：冻结到 explicit compact group effect summaries
+- `V172.2` 已完成：compact `group.effectSummary` 已改为显式 compact item types
+- `V172.3` 已完成：现有测试与 runtime 校验已覆盖
+- `V172.4` 已完成：roadmap、索引与架构文档已同步
+
+## 174. V171 explicit compact top-level summary effect summaries
+
+`V170` 收口后，compact contract 中下一批仍直接复用 raw effect summary item type 的显式缺口主要集中在 top-level `summary`：
+
+- `skill-matrix summary.effectSummary`
+- `trigger-matrix summary.effectSummary`
+- `source-damage-views summary.effectSummary`
+- `source-utility-views summary.effectSummary`
+- `source-entry collection summary.effectSummary`
+
+`V171` 只解决一件事：
+
+1. 把上述 top-level `summary.effectSummary` 改成显式 compact effect summary item types
+
+### 174.1 分阶段
+
+1. `V171.1` scope freeze
+2. `V171.2` runtime/type contract alignment
+3. `V171.3` tests / prompt alignment
+4. `V171.4` docs closeout
+
+### 174.2 非目标
+
+1. 不改变 `group / row / entry` 上的 effect summary type
+2. 不改变 effect summary 的字段值
+3. 不改变 `includeDetails` 语义
+
+### 174.3 当前状态
+
+- `V171.1` 已完成：冻结到 explicit compact top-level summary effect summaries
+- `V171.2` 已完成：compact top-level `summary.effectSummary` 已改为显式 compact item types
+- `V171.3` 已完成：现有测试与 runtime 校验已覆盖
+- `V171.4` 已完成：roadmap、索引与架构文档已同步
