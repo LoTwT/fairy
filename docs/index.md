@@ -49,6 +49,7 @@
 - [静态构筑解析系统 V123](./specs/static-build-resolver-v123.md) — 当前阶段：已收口；`collection.summary.groups[*].effectSummary` 已补齐
 - [静态构筑解析系统 V124](./specs/static-build-resolver-v124.md) — 当前阶段：已收口；mixed `collection.entries[*]` 已统一暴露 `entry.effectSummary`，utility entry 当前固定返回空数组
 - [静态构筑解析系统 V125](./specs/static-build-resolver-v125.md) — 当前阶段：已收口；compact utility entry 已统一暴露 `entry.effectSummary`，当前固定返回空数组
+- [静态构筑解析系统 V126](./specs/static-build-resolver-v126.md) — 当前阶段：已收口；standalone utility views 顶层 / summary / group 已统一暴露 `effectSummary`，当前固定返回空数组
 - [静态构筑解析系统 V73](./specs/static-build-resolver-v73.md) — 当前阶段：已收口；`source-damage-view entry` 已新增局部 `assumptionSummary`
 - [静态构筑解析系统 V74](./specs/static-build-resolver-v74.md) — 当前阶段：已收口；`source-utility-view` 顶层已新增 `assumptionSummary`
 - [静态构筑解析系统 V75](./specs/static-build-resolver-v75.md) — 当前阶段：已收口；`source-utility-view entry` 已新增局部 `assumptionSummary`

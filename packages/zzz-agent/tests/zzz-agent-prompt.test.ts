@@ -107,6 +107,8 @@ it("keeps screenshot summary by default", async () => {
   expect(base.includes("views.sourceNoteSummary")).toBe(true)
   expect(base.includes("views.caveatSummary")).toBe(true)
   expect(base.includes("views.summary.groups[*].assumptionSummary")).toBe(true)
+  expect(base.includes("views.summary.effectSummary")).toBe(true)
+  expect(base.includes("views.effectSummary")).toBe(true)
   expect(base.includes("views.summary.groups[*].effectSummary")).toBe(true)
   expect(base.includes("entry.effectSummary")).toBe(true)
   expect(base.includes("entry.assumptionSummary")).toBe(true)
@@ -114,6 +116,7 @@ it("keeps screenshot summary by default", async () => {
   expect(base.includes("views.summary.triggerCount")).toBe(true)
   expect(base.includes("views.summary.rateCount")).toBe(true)
   expect(base.includes("views.summary.requirementSummary")).toBe(true)
+  expect(base.includes("整组 utility views 是否带 effect summary")).toBe(true)
   expect(base.includes("整组 utility views 是否带 caveat")).toBe(true)
   expect(
     base.includes("整组 utility views 是否存在 diagnostics / source notes"),

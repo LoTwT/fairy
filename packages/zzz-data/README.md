@@ -636,6 +636,16 @@ utilityViews.summary
 
 如果你需要判断当前 source-specific utility views 是 trigger 还是 rate、是否存在 unsupported 条目、如何分组展示，或者当前整组 utility views / 某一条 entry 是否带有 requirement / diagnostics / source notes / assumptions / caveat，不要再自己统计 `entries`，直接使用 `utilityViews.summary`、`utilityViews.summary.assumptionSummary`、`utilityViews.summary.caveatSummary`、`utilityViews.assumptionSummary`、`utilityViews.caveatSummary`、`entry.assumptionSummary` 与 `entry.caveatSummary`。
 
+如果你只想先判断整组 utility views 是否带 effect summary，也优先读取：
+
+- `utilityViews.summary.effectSummary`
+
+如需兼容旧调用方，也可以继续读取：
+
+- `utilityViews.effectSummary`
+
+当前 top-level effect summary 固定返回空数组，不要自己伪造非空 utility 乘区清单。
+
 如果你只想先判断整组 utility views 是否存在 requirements，也优先读取：
 
 - `utilityViews.summary.requirementSummary`
@@ -657,12 +667,19 @@ utilityViews.summary
 如果你是按组拆“按次触发 / 按速率”两个 section，也不要再先过滤 entries 再自己统计组内 assumptions，直接读取：
 
 ```ts
+utilityViews.summary.groups[0].effectSummary
 utilityViews.summary.groups[0].assumptionSummary
 utilityViews.summary.assumptionSummary
 utilityViews.summary.caveatSummary
 utilityViews.caveatSummary
 utilityViews.entries[0].caveatSummary
 ```
+
+当前 group-level effect summary 同样固定返回空数组；如果你只判断单条 utility entry，仍优先读取：
+
+- `utilityViews.entries[0].effectSummary`
+
+当前 entry-level effect summary 也固定返回空数组，不要在调用方再手工补默认值。
 
 如果你需要稳定读取某条 utility entry 的数值 / 单位 / 目标 / 触发模式摘要，优先使用：
 

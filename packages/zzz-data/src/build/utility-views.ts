@@ -411,6 +411,7 @@ export function resolveStaticBuildSourceUtilityViews(
   return {
     loadout,
     summary,
+    effectSummary: summary.effectSummary,
     requirementSummary: summary.requirementSummary,
     caveatSummary: summarizeSourceUtilityViewCaveats(entries, assumptions),
     diagnosticSummary: summary.diagnosticSummary,
@@ -469,6 +470,7 @@ function summarizeSourceUtilityViews(
       count: groupEntries.length,
       supportedCount: groupSupportedCount,
       unsupportedCount: groupEntries.length - groupSupportedCount,
+      effectSummary: [],
       requirementSummary: summarizeSourceUtilityViewRequirements(
         groupEntries.flatMap((entry) => entry.requirements),
       ),
@@ -494,6 +496,7 @@ function summarizeSourceUtilityViews(
     rateCount: rateEntries.length,
     supportedCount,
     unsupportedCount,
+    effectSummary: [],
     requirementSummary: summarizeSourceUtilityViewRequirements(
       entries.flatMap((entry) => entry.requirements),
     ),

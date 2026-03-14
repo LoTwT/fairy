@@ -396,6 +396,9 @@ describe("static build compact helpers", () => {
     const compact = compactStaticBuildSourceUtilityViewsResult(views)
 
     expect(compact.entries).toHaveLength(1)
+    expect(compact.effectSummary).toEqual([])
+    expect(compact.summary.effectSummary).toEqual([])
+    expect(compact.summary.groups[0]?.effectSummary).toEqual([])
     expect(compact.entries[0]).toMatchObject({
       id: "lunar-noviluna-energy-refund",
       metadata: {

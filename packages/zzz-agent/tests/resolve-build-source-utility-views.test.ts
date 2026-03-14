@@ -121,6 +121,7 @@ describe("resolveBuildSourceUtilityViews tool", () => {
           key: "trigger",
           label: "按次触发条目",
           count: 1,
+          effectSummary: [],
           caveatSummary: {
             assumptionCount: 1,
             unsupportedCount: 0,
@@ -175,6 +176,11 @@ describe("resolveBuildSourceUtilityViews tool", () => {
         },
       ],
     })
+    expect((result as any).views.effectSummary).toEqual(
+      (result as any).views.summary.effectSummary,
+    )
+    expect((result as any).views.summary.effectSummary).toEqual([])
+    expect((result as any).views.summary.groups[0].effectSummary).toEqual([])
     expect((result as any).views.entries[0]).toMatchObject({
       id: "lunar-noviluna-energy-refund",
       metadata: {

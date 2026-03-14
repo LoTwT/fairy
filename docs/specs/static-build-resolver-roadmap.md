@@ -5408,3 +5408,47 @@ caveatSummary` 这些兼容字段补齐。
 1. 不为 standalone utility views 顶层新增 `effectSummary`
 2. 不为 utility entry 伪造非空 effect 明细
 3. 不改变 source-entry mixed-entry 的既有 `entry.effectSummary` 语义
+
+## 129. V126 source-utility-view top-level effect summary alignment
+
+`V125` 收口后，standalone utility views 还存在最后一个 effect-summary 对称缺口：
+
+- `entry.effectSummary` 已存在，固定返回空数组
+- compact utility entry 也已存在 `entry.effectSummary`
+- 但 `views.summary.effectSummary`
+- `views.effectSummary`
+- `views.summary.groups[*].effectSummary`
+
+还没有被正式声明和透传。
+
+`V126` 只解决一件事：
+
+1. 为 standalone source-utility-view 的顶层 / summary / group 补齐稳定 `effectSummary`
+
+### 129.1 阶段范围
+
+1. `V126.1` scope freeze
+2. `V126.2` runtime/type contract alignment
+3. `V126.3` tool assertion / prompt alignment
+4. `V126.4` docs closeout
+
+### 129.2 当前状态
+
+- `V126.1` 已完成：冻结到 source-utility-view top-level effect summary alignment
+- `V126.2` 已完成：`ResolveStaticBuildSourceUtilityViewsResult / summary / groups` 已补齐稳定 `effectSummary`
+- `V126.3` 已完成：高层 source-utility-view prompt / 断言已对齐 `views.summary.effectSummary / views.effectSummary / views.summary.groups[*].effectSummary`
+- `V126.4` 已完成：README、roadmap、索引与架构文档已同步
+
+### 129.3 当前边界
+
+本阶段只做：
+
+1. 为 `ResolveStaticBuildSourceUtilityViewsResult` 新增稳定 `effectSummary`
+2. 为 `StaticBuildSourceUtilityViewSummary` 与 `summary.groups[*]` 新增稳定 `effectSummary`
+3. 明确 standalone utility views 的 top-level / group / entry effect summary 当前都固定返回空数组
+
+显式不做：
+
+1. 不为 utility-only source views 伪造非空 effect 明细
+2. 不改变 requirement / diagnostics / source notes / assumptions 的既有 contract
+3. 不改变 mixed source-entry collection 的既有 `effectSummary` 语义

@@ -185,6 +185,7 @@ export interface CompactStaticBuildSourceDamageViewsResult {
 export interface CompactStaticBuildSourceUtilityViewsResult {
   loadout: ResolveStaticBuildSourceUtilityViewsResult["loadout"]
   summary: ResolveStaticBuildSourceUtilityViewsResult["summary"]
+  effectSummary: ResolveStaticBuildSourceUtilityViewsResult["effectSummary"]
   requirementSummary: ResolveStaticBuildSourceUtilityViewsResult["requirementSummary"]
   caveatSummary: ResolveStaticBuildSourceUtilityViewsResult["caveatSummary"]
   diagnosticSummary: ResolveStaticBuildSourceUtilityViewsResult["diagnosticSummary"]
@@ -347,6 +348,7 @@ export function compactStaticBuildSourceUtilityViewsResult(
   return {
     loadout: views.loadout,
     summary: views.summary,
+    effectSummary: views.effectSummary,
     requirementSummary: views.requirementSummary,
     caveatSummary: views.caveatSummary,
     diagnosticSummary: views.diagnosticSummary,

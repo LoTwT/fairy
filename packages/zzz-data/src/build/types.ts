@@ -795,6 +795,7 @@ export interface StaticBuildSourceUtilityViewGroupSummary {
   count: number
   supportedCount: number
   unsupportedCount: number
+  effectSummary: StaticBuildSourceDamageViewEffectSummaryItem[]
   requirementSummary: StaticBuildSourceUtilityViewRequirementSummary
   caveatSummary: StaticBuildEntryCaveatSummary
   diagnosticSummary: StaticBuildDiagnosticSummary
@@ -808,6 +809,7 @@ export interface StaticBuildSourceUtilityViewSummary {
   rateCount: number
   supportedCount: number
   unsupportedCount: number
+  effectSummary: StaticBuildSourceDamageViewEffectSummaryItem[]
   requirementSummary: StaticBuildSourceUtilityViewRequirementSummary
   caveatSummary: StaticBuildEntryCaveatSummary
   diagnosticSummary: StaticBuildDiagnosticSummary
@@ -826,6 +828,7 @@ export interface StaticBuildEntryCaveatSummary {
 export interface ResolveStaticBuildSourceUtilityViewsResult {
   loadout: StaticBuildResolvedLoadout
   summary: StaticBuildSourceUtilityViewSummary
+  effectSummary: StaticBuildSourceDamageViewEffectSummaryItem[]
   requirementSummary: StaticBuildSourceUtilityViewRequirementSummary
   caveatSummary: StaticBuildEntryCaveatSummary
   diagnosticSummary: StaticBuildDiagnosticSummary

@@ -94,6 +94,7 @@ describe("static build source utility views", () => {
         count: result.assumptions.length,
         hasAssumptions: result.assumptions.length > 0,
       },
+      effectSummary: [],
       requirementSummary: {
         count: 2,
         satisfiedCount: 2,
@@ -138,6 +139,7 @@ describe("static build source utility views", () => {
           key: "trigger",
           label: "按次触发条目",
           count: 1,
+          effectSummary: [],
           caveatSummary: {
             assumptionCount: 1,
             unsupportedCount: 0,
@@ -192,6 +194,8 @@ describe("static build source utility views", () => {
         },
       ],
     })
+    expect(result.effectSummary).toEqual(result.summary.effectSummary)
+    expect(result.summary.effectSummary).toEqual([])
     expect(result.entries[0]).toMatchObject({
       id: "lunar-noviluna-energy-refund",
       metadata: {
