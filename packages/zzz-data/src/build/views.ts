@@ -256,6 +256,9 @@ function summarizeSourceDamageViews(
       sourceNoteSummary: summarizeSourceNoteEntries(
         groupEntries.flatMap((entry) => entry.sourceNotes),
       ),
+      assumptionSummary: summarizeAssumptions(
+        groupEntries.flatMap((entry) => entry.assumptions),
+      ),
     })
   }
 

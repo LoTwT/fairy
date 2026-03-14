@@ -655,6 +655,7 @@ export interface StaticBuildSourceDamageViewGroupSummary {
   requirementSummary: StaticBuildSourceDamageViewRequirementSummary
   diagnosticSummary: StaticBuildDiagnosticSummary
   sourceNoteSummary: StaticBuildSourceNoteSummary
+  assumptionSummary: StaticBuildAssumptionSummary
 }
 
 export interface StaticBuildSourceDamageViewSummary {

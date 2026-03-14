@@ -3560,3 +3560,32 @@ Batch B（已完成）：
 1. 不改变 group 内 entries 的原始 `assumptions` 数组语义
 2. 不改变顶层 `collection.assumptionSummary`
 3. 不为 source-damage-view / source-utility-view standalone groups 引入额外同名字段
+
+## 81. V78 source-damage-view group assumption summary
+
+`V77` 收口后，mixed `source-entry collection groups` 已经具备局部 `assumptionSummary`。
+
+但 standalone `source-damage-view` 的 `summary.groups[*]` 仍没有同类摘要。上层按“独立结算 / 主结算差值”拆 section 时，仍要回退到组内 entries 的 `assumptions` 手工统计。
+
+`V78` 只解决一件事：
+
+- 为 `StaticBuildSourceDamageViewGroupSummary` 增加局部 `assumptionSummary`
+
+### 81.1 当前状态
+
+- `V78.1` 已完成：冻结到 source-damage-view group assumption summary
+- `V78.2` 已完成：`StaticBuildSourceDamageViewGroupSummary` 已新增局部 `assumptionSummary`
+- `V78.3` 已完成：高层 tool 断言与 agent prompt 已对齐 `views.summary.groups[*].assumptionSummary`
+- `V78.4` 已完成：相关 specs、roadmap、索引、架构文档与 README 已同步
+
+### 81.2 目标
+
+1. 为 source-damage-view groups 增加稳定 `assumptionSummary`
+2. 直接从当前 group entries 的 `assumptions` 派生计数与布尔位
+3. 对齐 standalone / delta 组级解释 contract
+
+### 81.3 Out of Scope
+
+1. 不改变 entry 级 `assumptions` 的原始数组语义
+2. 不改变顶层 `views.assumptionSummary`
+3. 不提前引入 source-utility-view group 的同名字段

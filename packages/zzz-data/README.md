@@ -246,6 +246,12 @@ views.summary
 
 如果你需要判断当前 source-specific damage views 是 standalone 还是 delta、是否存在 unsupported 条目、如何分组展示，或者当前整组 views / 某一条 entry 是否带有 requirement / diagnostics / source notes / assumptions，也不要再自己统计 `entries`，直接使用 `views.summary`、`views.assumptionSummary` 与 `entry.assumptionSummary`。
 
+如果你是按组拆“独立结算 / 主结算差值”两个 section，也不要再先过滤 entries 再自己统计组内 assumptions，直接读取：
+
+```ts
+views.summary.groups[0].assumptionSummary
+```
+
 如果你只做单条 source-specific damage view 的结果展示，不需要再通过 `includeDetails` 读取 `entry.build.summary`，优先直接使用：
 
 - `views.entries[0].summary`

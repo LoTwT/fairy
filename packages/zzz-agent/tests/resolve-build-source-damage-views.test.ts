@@ -99,6 +99,10 @@ describe("resolveBuildSourceDamageViews tool", () => {
           count: 1,
           supportedCount: 1,
           unsupportedCount: 0,
+          assumptionSummary: {
+            count: 1,
+            hasAssumptions: true,
+          },
           requirementSummary: {
             count: 2,
             satisfiedCount: 2,
