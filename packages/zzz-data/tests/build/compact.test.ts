@@ -728,6 +728,7 @@ describe("static build compact helpers", () => {
 
     const compact = compactStaticBuildSourceUtilityViewsResult(views)
 
+    expect(compact.assumptions).toBeUndefined()
     expect(compact.entries).toHaveLength(1)
     expect(compact.effectSummary).toEqual([])
     expect(compact.summary.effectSummary).toEqual([])
@@ -797,6 +798,7 @@ describe("static build compact helpers", () => {
 
     const compact = compactStaticBuildSourceUtilityViewsResult(views, true)
 
+    expect(compact.assumptions).toEqual(views.assumptions)
     expect(compact.entries[0]?.assumptions).toEqual(
       views.entries[0]?.assumptions,
     )
