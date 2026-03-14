@@ -866,6 +866,8 @@ export interface StaticBuildSourceEntryCollectionSummary {
 export interface ResolveStaticBuildSourceEntriesResult {
   loadout: StaticBuildResolvedLoadout
   summary: StaticBuildSourceEntryCollectionSummary
+  sourceDamageRequirementSummary: StaticBuildSourceDamageViewRequirementSummary
+  sourceUtilityRequirementSummary: StaticBuildSourceUtilityViewRequirementSummary
   caveatSummary: StaticBuildEntryCaveatSummary
   diagnosticSummary: StaticBuildDiagnosticSummary
   sourceNoteSummary: StaticBuildSourceNoteSummary

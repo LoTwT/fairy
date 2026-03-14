@@ -80,6 +80,8 @@ export function resolveStaticBuildSourceEntries(
   return {
     loadout,
     summary,
+    sourceDamageRequirementSummary: summary.sourceDamageRequirementSummary,
+    sourceUtilityRequirementSummary: summary.sourceUtilityRequirementSummary,
     caveatSummary: summarizeSourceEntryCaveats(
       sortedEntries,
       uniqueAssumptions,
