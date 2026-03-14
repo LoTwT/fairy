@@ -167,7 +167,7 @@ function createEntry(
       : []),
   ]
 
-  return {
+  const supportedEntry = {
     ...entry,
     metadata: {
       canonicalLabel: entry.label,
@@ -179,12 +179,20 @@ function createEntry(
       unit: entry.unit,
     },
     supported: true,
+  }
+
+  return {
+    ...supportedEntry,
     requirements,
     requirementSummary: summarizeSourceUtilityViewRequirements(requirements),
     diagnostics: [],
     diagnosticSummary: summarizeDiagnosticEntries([]),
     sourceNotes: [],
     sourceNoteSummary: summarizeSourceNoteEntries([]),
+    caveatSummary: summarizeSourceUtilityViewCaveats(
+      [supportedEntry],
+      entry.assumptions,
+    ),
     assumptionSummary: summarizeAssumptions(entry.assumptions),
   }
 }

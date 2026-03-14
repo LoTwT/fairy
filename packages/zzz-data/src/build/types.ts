@@ -748,6 +748,7 @@ export interface StaticBuildSourceUtilityViewEntry {
   diagnosticSummary: StaticBuildDiagnosticSummary
   sourceNotes: StaticBuildSourceNoteEntry[]
   sourceNoteSummary: StaticBuildSourceNoteSummary
+  caveatSummary: StaticBuildEntryCaveatSummary
   assumptionSummary: StaticBuildAssumptionSummary
   assumptions: string[]
 }

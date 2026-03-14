@@ -528,11 +528,21 @@ describe("static build source utility views", () => {
     })
 
     expect(result.entries).toHaveLength(8)
-    expect(result.entries[0]?.requirementSummary).toMatchObject({
+    const dodgeCounterEntry = result.entries.find(
+      (entry) => entry.id === "time-slice-dodgeCounter-decibel-gain",
+    )
+
+    expect(dodgeCounterEntry?.requirementSummary).toMatchObject({
       count: 2,
       satisfiedCount: 2,
       unsatisfiedCount: 0,
       hasUnsatisfied: false,
+    })
+    expect(dodgeCounterEntry?.caveatSummary).toEqual({
+      assumptionCount: dodgeCounterEntry?.assumptions.length,
+      unsupportedCount: 0,
+      hasAssumptions: true,
+      hasUnsupported: false,
     })
     expect(result.entries).toEqual(
       expect.arrayContaining([

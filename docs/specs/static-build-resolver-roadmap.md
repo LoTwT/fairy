@@ -4295,6 +4295,61 @@ Batch B（已完成）：
 - `V100.3` 已完成：高层 tool 断言与 agent prompt 已对齐 `row.caveatSummary`
 - `V100.4` 已完成：相关 specs、roadmap、索引、架构文档与 README 已同步
 
+## 104. V101 source-utility-view entry caveat summary
+
+`V100` 收口后，`source-utility-view` 已具备：
+
+- 顶层 `views.caveatSummary`
+- `views.summary.caveatSummary`
+- `views.summary.groups[*].caveatSummary`
+
+但单条 `entry` 仍只有：
+
+- `requirements / requirementSummary`
+- `diagnostics / diagnosticSummary`
+- `sourceNotes / sourceNoteSummary`
+- `assumptionSummary`
+
+如果上层只想先判断某条 utility entry 是否带 caveat，仍需要手工组合：
+
+- `entry.assumptions.length`
+- `entry.supported`
+
+这一层还不对称。
+
+### 104.1 目标
+
+1. 为 `source-utility-view entry` 增加稳定 `caveatSummary`
+2. 让 utility entry 的 caveat contract 与 source-damage-view / trigger-row 对齐
+
+### 104.2 范围
+
+1. `V101.1` scope freeze
+2. `V101.2` utility-entry caveat contract
+3. `V101.3` high-level / prompt alignment
+4. `V101.4` docs closeout
+
+### 104.3 当前状态
+
+- `V101.1` 已完成：冻结到 source-utility-view entry caveat summary
+- `V101.2` 已完成：`StaticBuildSourceUtilityViewEntry` 与 compact entry 已新增稳定 `caveatSummary`
+- `V101.3` 已完成：高层 tool 断言与 agent prompt 已对齐 `entry.caveatSummary`
+- `V101.4` 已完成：相关 specs、roadmap、索引、架构文档与 README 已同步
+
+### 104.4 当前边界
+
+本阶段只做：
+
+1. 为 `StaticBuildSourceUtilityViewEntry` 增加稳定 `caveatSummary`
+2. 复用现有 `StaticBuildEntryCaveatSummary`
+3. 保持 entry-level caveat 只反映 assumptions 规模与 unsupported 状态
+
+显式不做：
+
+1. 不改变 `views.summary.caveatSummary`
+2. 不改变 `views.summary.groups[*].caveatSummary`
+3. 不把 utility entry caveat 进一步并回 `source-entry collection`
+
 ### 103.2 目标
 
 1. 为 `rows[*]` 增加稳定 `caveatSummary`

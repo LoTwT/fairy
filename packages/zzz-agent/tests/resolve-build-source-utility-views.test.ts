@@ -189,6 +189,12 @@ describe("resolveBuildSourceUtilityViews tool", () => {
         statusGroups: [],
         ownerGroups: [],
       },
+      caveatSummary: {
+        assumptionCount: 1,
+        unsupportedCount: 0,
+        hasAssumptions: true,
+        hasUnsupported: false,
+      },
       assumptionSummary: {
         count: 1,
         hasAssumptions: true,
