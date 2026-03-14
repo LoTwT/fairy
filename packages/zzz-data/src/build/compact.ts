@@ -264,10 +264,19 @@ export interface CompactStaticBuildTriggerMatrixGroupSummary {
   assumptionSummary: StaticBuildAssumptionSummary
 }
 
-export interface CompactStaticBuildTriggerMatrixSummary extends Omit<
-  ResolveStaticBuildTriggerMatrixResult["summary"],
-  "groups"
-> {
+export interface CompactStaticBuildTriggerMatrixSummary {
+  rowCount: number
+  mainFormulaCount: number
+  sourceViewCount: number
+  supportedCount: number
+  unsupportedCount: number
+  hasSourceViews: boolean
+  effectSummary: StaticBuildTriggerMatrixEffectSummaryItem[]
+  requirementSummary: StaticBuildSourceDamageViewRequirementSummary
+  caveatSummary: StaticBuildEntryCaveatSummary
+  diagnosticSummary: StaticBuildDiagnosticSummary
+  sourceNoteSummary: StaticBuildSourceNoteSummary
+  assumptionSummary: StaticBuildAssumptionSummary
   groups: CompactStaticBuildTriggerMatrixGroupSummary[]
 }
 
@@ -325,10 +334,19 @@ export interface CompactStaticBuildSourceDamageViewGroupSummary {
   assumptionSummary: StaticBuildAssumptionSummary
 }
 
-export interface CompactStaticBuildSourceDamageViewsSummary extends Omit<
-  ResolveStaticBuildSourceDamageViewsResult["summary"],
-  "groups"
-> {
+export interface CompactStaticBuildSourceDamageViewsSummary {
+  entryCount: number
+  standaloneCount: number
+  deltaCount: number
+  triggerCount: number
+  supportedCount: number
+  unsupportedCount: number
+  effectSummary: StaticBuildSourceDamageViewEffectSummaryItem[]
+  requirementSummary: StaticBuildSourceDamageViewRequirementSummary
+  caveatSummary: StaticBuildEntryCaveatSummary
+  diagnosticSummary: StaticBuildDiagnosticSummary
+  sourceNoteSummary: StaticBuildSourceNoteSummary
+  assumptionSummary: StaticBuildAssumptionSummary
   groups: CompactStaticBuildSourceDamageViewGroupSummary[]
 }
 
@@ -392,10 +410,20 @@ export interface CompactStaticBuildSourceEntryGroupSummary {
   assumptionSummary: StaticBuildAssumptionSummary
 }
 
-export interface CompactStaticBuildSourceEntryCollectionSummary extends Omit<
-  ResolveStaticBuildSourceEntriesResult["summary"],
-  "groups"
-> {
+export interface CompactStaticBuildSourceEntryCollectionSummary {
+  entryCount: number
+  sourceDamageViewCount: number
+  sourceUtilityViewCount: number
+  supportedCount: number
+  unsupportedCount: number
+  isUtilityOnly: boolean
+  effectSummary: StaticBuildSourceDamageViewEffectSummaryItem[]
+  sourceDamageRequirementSummary: StaticBuildSourceDamageViewRequirementSummary
+  sourceUtilityRequirementSummary: StaticBuildSourceUtilityViewRequirementSummary
+  caveatSummary: StaticBuildEntryCaveatSummary
+  diagnosticSummary: StaticBuildDiagnosticSummary
+  sourceNoteSummary: StaticBuildSourceNoteSummary
+  assumptionSummary: StaticBuildAssumptionSummary
   groups: CompactStaticBuildSourceEntryGroupSummary[]
 }
 
@@ -427,10 +455,18 @@ export interface CompactStaticBuildSourceUtilityViewGroupSummary {
   assumptionSummary: StaticBuildAssumptionSummary
 }
 
-export interface CompactStaticBuildSourceUtilityViewsSummary extends Omit<
-  ResolveStaticBuildSourceUtilityViewsResult["summary"],
-  "groups"
-> {
+export interface CompactStaticBuildSourceUtilityViewsSummary {
+  entryCount: number
+  triggerCount: number
+  rateCount: number
+  supportedCount: number
+  unsupportedCount: number
+  effectSummary: StaticBuildSourceDamageViewEffectSummaryItem[]
+  requirementSummary: StaticBuildSourceUtilityViewRequirementSummary
+  caveatSummary: StaticBuildEntryCaveatSummary
+  diagnosticSummary: StaticBuildDiagnosticSummary
+  sourceNoteSummary: StaticBuildSourceNoteSummary
+  assumptionSummary: StaticBuildAssumptionSummary
   groups: CompactStaticBuildSourceUtilityViewGroupSummary[]
 }
 

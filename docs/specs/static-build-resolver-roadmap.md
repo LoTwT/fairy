@@ -6466,3 +6466,31 @@ caveatSummary` 这些兼容字段补齐。
 - `V159.2` 已完成：上述 compact `group summary` 已改为显式 compact types
 - `V159.3` 已完成：现有测试与 runtime 校验已覆盖
 - `V159.4` 已完成：roadmap、索引与架构文档已同步
+
+## 163. V160 explicit compact top-level summaries
+
+`V159` 收口后，compact `trigger-matrix`、`source-damage-view`、`source-utility-view`、`source-entry collection` 的 top-level `summary` 仍在通过 `Omit<raw, "groups">` 复用 raw type。
+
+`V160` 只解决一件事：
+
+1. 把这些 compact top-level `summary` 改成显式 compact type
+
+### 163.1 分阶段
+
+1. `V160.1` scope freeze
+2. `V160.2` runtime/type contract alignment
+3. `V160.3` tests / prompt alignment
+4. `V160.4` docs closeout
+
+### 163.2 非目标
+
+1. 不改变任何 runtime top-level summary 值
+2. 不改变 `includeDetails` 语义
+3. 不新增业务字段
+
+### 163.3 当前状态
+
+- `V160.1` 已完成：冻结到 explicit compact top-level summaries
+- `V160.2` 已完成：上述 compact top-level `summary` 已改为显式 compact types
+- `V160.3` 已完成：现有测试与 runtime 校验已覆盖
+- `V160.4` 已完成：roadmap、索引与架构文档已同步
