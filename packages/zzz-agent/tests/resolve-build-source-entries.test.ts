@@ -84,6 +84,7 @@ describe("resolveBuildSourceEntries tool", () => {
           key: "source-utility-view",
           label: "回能 / utility 条目",
           count: 1,
+          effectSummary: [],
           caveatSummary: {
             assumptionCount: 1,
             unsupportedCount: 0,
@@ -219,6 +220,71 @@ describe("resolveBuildSourceEntries tool", () => {
       value: 3,
       unit: "energy",
     })
+  })
+
+  it("aggregates top-level and group effect summary for mixed Alice source entries", async () => {
+    const result = await runTool(resolveBuildSourceEntries, {
+      agent: "爱丽丝",
+      wEngine: "灼心摇壶",
+      mode: "baseline",
+      finalPanel: {
+        attack: 2800,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 200,
+        anomalyMastery: 180,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "enhancedSpecial",
+        damageMultiplier: "500%",
+        attribute: "物理",
+        stateSnapshot: {
+          flags: { alicePolarityAssaultState: true },
+          values: { alicePolarityAssaultDamageRatio: 2.5 },
+        },
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    expect((result as any).collection.effectSummary).toEqual(
+      (result as any).collection.summary.effectSummary,
+    )
+    expect((result as any).collection.summary.effectSummary).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          effectId: "alice-state-polarity-assault-ratio",
+          sourceName: "爱丽丝",
+          appliedEntryCount: 1,
+          totalEntryCount: 1,
+          appliesToAllEntries: true,
+        }),
+      ]),
+    )
+    expect(
+      (result as any).collection.summary.groups.find(
+        (group: any) => group.key === "source-damage-view",
+      )?.effectSummary,
+    ).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          effectId: "alice-state-polarity-assault-ratio",
+          sourceName: "爱丽丝",
+          appliedEntryCount: 1,
+          totalEntryCount: 1,
+          appliesToAllEntries: true,
+        }),
+      ]),
+    )
+    expect(
+      (result as any).collection.summary.groups.find(
+        (group: any) => group.key === "source-utility-view",
+      )?.effectSummary,
+    ).toEqual([])
   })
 
   it("returns damage and utility entries together for covered disorder loadouts", async () => {

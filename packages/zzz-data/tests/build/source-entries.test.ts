@@ -80,6 +80,7 @@ describe("static build source entries", () => {
           key: "source-utility-view",
           label: "回能 / utility 条目",
           count: 1,
+          effectSummary: [],
           caveatSummary: {
             assumptionCount: 1,
             unsupportedCount: 0,
@@ -185,6 +186,75 @@ describe("static build source entries", () => {
       },
     })
     expect(result.assumptions).toEqual([])
+  })
+
+  it("aggregates top-level and group effect summary for mixed Alice source entries", () => {
+    const result = resolveStaticBuildSourceEntries({
+      mode: "baseline",
+      loadout: {
+        agentId: "1401",
+        wEngineId: "14117",
+        agentLevel: 60,
+        wEngineRefinement: 1,
+      },
+      panel: {
+        attack: 2800,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 200,
+        anomalyMastery: 180,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "enhancedSpecial",
+        damageMultiplier: "500%",
+        attribute: "物理",
+        stateSnapshot: {
+          flags: {
+            alicePolarityAssaultState: true,
+          },
+          values: {
+            alicePolarityAssaultDamageRatio: 2.5,
+          },
+        },
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect(result.summary.entryCount).toBe(2)
+    expect(result.effectSummary).toEqual(result.summary.effectSummary)
+    expect(result.summary.effectSummary).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          effectId: "alice-state-polarity-assault-ratio",
+          sourceName: "爱丽丝",
+          appliedEntryCount: 1,
+          totalEntryCount: 1,
+          appliesToAllEntries: true,
+        }),
+      ]),
+    )
+    expect(
+      result.summary.groups.find((group) => group.key === "source-damage-view")
+        ?.effectSummary,
+    ).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          effectId: "alice-state-polarity-assault-ratio",
+          sourceName: "爱丽丝",
+          appliedEntryCount: 1,
+          totalEntryCount: 1,
+          appliesToAllEntries: true,
+        }),
+      ]),
+    )
+    expect(
+      result.summary.groups.find((group) => group.key === "source-utility-view")
+        ?.effectSummary,
+    ).toEqual([])
   })
 
   it("returns utility and source-damage entries together for covered disorder loadouts", () => {

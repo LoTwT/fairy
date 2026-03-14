@@ -156,6 +156,12 @@ function summarizeSourceEntries(
       count: groupEntries.length,
       supportedCount: groupSupportedCount,
       unsupportedCount: groupEntries.length - groupSupportedCount,
+      effectSummary: summarizeSourceDamageViewEffects(
+        groupEntries.filter(
+          (entry): entry is (typeof sourceDamageEntries)[number] =>
+            entry.metadata.entryKind === "source-damage-view",
+        ),
+      ),
       sourceDamageRequirementSummary: summarizeSourceDamageViewRequirements(
         groupEntries.flatMap((entry) =>
           entry.metadata.entryKind === "source-damage-view"

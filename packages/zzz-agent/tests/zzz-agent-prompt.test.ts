@@ -131,6 +131,7 @@ it("keeps screenshot summary by default", async () => {
   expect(base.includes("collection.effectSummary")).toBe(true)
   expect(base.includes("collection.summary.assumptionSummary")).toBe(true)
   expect(base.includes("collection.assumptionSummary")).toBe(true)
+  expect(base.includes("collection.summary.groups[*].effectSummary")).toBe(true)
   expect(base.includes("collection.summary.groups[*].assumptionSummary")).toBe(
     true,
   )
