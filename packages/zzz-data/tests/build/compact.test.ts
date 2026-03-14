@@ -38,7 +38,24 @@ describe("static build compact helpers", () => {
     const compact = compactStaticBuildSkillMatrixResult(matrix)
 
     expect(compact.rows).toHaveLength(21)
+    expect(compact.requirementSummary).toEqual({
+      count: 0,
+      satisfiedCount: 0,
+      unsatisfiedCount: 0,
+      hasUnsatisfied: false,
+      groups: [],
+    })
+    expect(compact.summary.requirementSummary).toEqual(
+      compact.requirementSummary,
+    )
     expect(compact.rows[0]?.build).toBeUndefined()
+    expect(compact.rows[0]?.requirementSummary).toEqual({
+      count: 0,
+      satisfiedCount: 0,
+      unsatisfiedCount: 0,
+      hasUnsatisfied: false,
+      groups: [],
+    })
     expect(compact.rows[0]?.damage.expected).toBeGreaterThan(0)
     expect(compact.rows[0]?.resolvedBuckets).toEqual(
       matrix.rows[0]?.resolvedBuckets,

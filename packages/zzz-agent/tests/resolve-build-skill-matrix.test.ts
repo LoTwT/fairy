@@ -60,6 +60,13 @@ describe("resolveBuildSkillMatrix tool", () => {
     expect(firstRow.diagnosticSummary.count).toBe(firstRow.diagnostics.length)
     expect(firstRow.sourceNotes).toBeInstanceOf(Array)
     expect(firstRow.sourceNoteSummary.count).toBe(firstRow.sourceNotes.length)
+    expect(firstRow.requirementSummary).toEqual({
+      count: 0,
+      satisfiedCount: 0,
+      unsatisfiedCount: 0,
+      hasUnsatisfied: false,
+      groups: [],
+    })
     expect(firstRow.caveatSummary).toEqual({
       assumptionCount: firstRow.assumptions.length,
       unsupportedEffectCount: firstRow.unsupportedEffects.length,
@@ -84,6 +91,16 @@ describe("resolveBuildSkillMatrix tool", () => {
     expect((result as any).matrix.summary.baseDamageStat).toBe("attack")
     expect((result as any).matrix.summary.effectSummary).toEqual(
       (result as any).matrix.effectSummary,
+    )
+    expect((result as any).matrix.requirementSummary).toEqual({
+      count: 0,
+      satisfiedCount: 0,
+      unsatisfiedCount: 0,
+      hasUnsatisfied: false,
+      groups: [],
+    })
+    expect((result as any).matrix.summary.requirementSummary).toEqual(
+      (result as any).matrix.requirementSummary,
     )
     expect((result as any).matrix.assumptionSummary).toEqual({
       count: (result as any).matrix.assumptions.length,
@@ -129,6 +146,13 @@ describe("resolveBuildSkillMatrix tool", () => {
     )
     expect(normalGroup?.count).toBe(normalRows.length)
     expect(normalGroup?.commonBuckets.critRate).toBeCloseTo(0.15, 4)
+    expect(normalGroup?.requirementSummary).toEqual({
+      count: 0,
+      satisfiedCount: 0,
+      unsatisfiedCount: 0,
+      hasUnsatisfied: false,
+      groups: [],
+    })
     expect(
       normalGroup?.commonFormulaMultipliers.critMultiplier,
     ).toBeGreaterThan(1)

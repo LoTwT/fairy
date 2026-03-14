@@ -38,6 +38,7 @@ export interface StaticBuildCompactSkillMatrixRow {
   diagnosticSummary: StaticBuildSkillMatrixRow["diagnosticSummary"]
   sourceNotes: StaticBuildSourceNoteEntry[]
   sourceNoteSummary: StaticBuildSkillMatrixRow["sourceNoteSummary"]
+  requirementSummary: StaticBuildSkillMatrixRow["requirementSummary"]
   assumptionSummary: StaticBuildSkillMatrixRow["assumptionSummary"]
   caveatSummary: StaticBuildSkillMatrixRow["caveatSummary"]
   assumptions: string[]
@@ -52,6 +53,7 @@ export interface CompactStaticBuildSkillMatrixResult {
   loadout: ResolveStaticBuildSkillMatrixResult["loadout"]
   summary: ResolveStaticBuildSkillMatrixResult["summary"]
   effectSummary: StaticBuildSkillMatrixEffectSummaryItem[]
+  requirementSummary: ResolveStaticBuildSkillMatrixResult["requirementSummary"]
   assumptionSummary: ResolveStaticBuildSkillMatrixResult["assumptionSummary"]
   caveatSummary: ResolveStaticBuildSkillMatrixResult["caveatSummary"]
   diagnosticSummary: ResolveStaticBuildSkillMatrixResult["diagnosticSummary"]
@@ -206,6 +208,7 @@ export function compactStaticBuildSkillMatrixResult(
     loadout: matrix.loadout,
     summary: matrix.summary,
     effectSummary: matrix.effectSummary,
+    requirementSummary: matrix.requirementSummary,
     assumptionSummary: matrix.assumptionSummary,
     caveatSummary: matrix.caveatSummary,
     diagnosticSummary: matrix.diagnosticSummary,
@@ -239,6 +242,7 @@ export function compactStaticBuildSkillMatrixRow(
     diagnosticSummary: row.diagnosticSummary,
     sourceNotes: row.sourceNotes,
     sourceNoteSummary: row.sourceNoteSummary,
+    requirementSummary: row.requirementSummary,
     assumptionSummary: row.assumptionSummary,
     caveatSummary: row.caveatSummary,
     assumptions: row.assumptions,

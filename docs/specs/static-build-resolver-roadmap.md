@@ -5452,3 +5452,56 @@ caveatSummary` 这些兼容字段补齐。
 1. 不为 utility-only source views 伪造非空 effect 明细
 2. 不改变 requirement / diagnostics / source notes / assumptions 的既有 contract
 3. 不改变 mixed source-entry collection 的既有 `effectSummary` 语义
+
+## 130. V127 skill-matrix requirement summary alignment
+
+`V126` 收口后，skill matrix 仍有最后一个 requirement-summary 对称缺口：
+
+- `trigger-matrix`
+- `source-damage-view`
+- `source-utility-view`
+- `source-entry collection`
+
+这些路径都已经有稳定的 top-level / group / entry requirement summary。
+
+但 `skill-matrix` 仍然只有 assumptions / diagnostics / source notes / caveats / effects：
+
+- `matrix.summary.requirementSummary`
+- `matrix.requirementSummary`
+- `matrix.summary.groups[*].requirementSummary`
+- `row.requirementSummary`
+
+还没有被正式声明和透传。
+
+`V127` 只解决一件事：
+
+1. 为 skill matrix 的 result / summary / group / row / compact 补齐稳定 `requirementSummary`
+
+### 130.1 阶段范围
+
+1. `V127.1` scope freeze
+2. `V127.2` runtime/type contract alignment
+3. `V127.3` tool assertion / prompt alignment
+4. `V127.4` docs closeout
+
+### 130.2 当前状态
+
+- `V127.1` 已完成：冻结到 skill-matrix requirement summary alignment
+- `V127.2` 已完成：`ResolveStaticBuildSkillMatrixResult / summary / groups / rows` 与 compact result 已补齐稳定 `requirementSummary`
+- `V127.3` 已完成：高层 skill-matrix prompt / 断言已对齐 `matrix.summary.requirementSummary / matrix.requirementSummary / matrix.summary.groups[*].requirementSummary / row.requirementSummary`
+- `V127.4` 已完成：README、roadmap、索引与架构文档已同步
+
+### 130.3 当前边界
+
+本阶段只做：
+
+1. 为 `ResolveStaticBuildSkillMatrixResult` 新增稳定 `requirementSummary`
+2. 为 `StaticBuildSkillMatrixSummary` 与 `summary.groups[*]` 新增稳定 `requirementSummary`
+3. 为 `StaticBuildSkillMatrixRow` 与 compact row 新增稳定 `requirementSummary`
+4. 明确当前 skill matrix 的 top-level / group / row requirement summary 都固定返回空聚合
+
+显式不做：
+
+1. 不为 skill matrix 伪造真实技能 requirements
+2. 不改变 assumptions / diagnostics / source notes / caveats / effects 的既有 contract
+3. 不改变 `trigger-matrix`、`source views`、`source-entry collection` 的既有 requirement-summary 语义

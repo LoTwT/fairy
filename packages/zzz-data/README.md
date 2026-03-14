@@ -1212,6 +1212,15 @@ matrix.rows[0].assumptionSummary
 //   hasAssumptions: true,
 // }
 
+matrix.rows[0].requirementSummary
+// {
+//   count: 0,
+//   satisfiedCount: 0,
+//   unsatisfiedCount: 0,
+//   hasUnsatisfied: false,
+//   groups: [],
+// }
+
 matrix.rows[0].caveatSummary
 // {
 //   assumptionCount: 2,
@@ -1221,7 +1230,7 @@ matrix.rows[0].caveatSummary
 // }
 ```
 
-如果你要生成矩阵顶部“乘区汇总”，不要再自己遍历 `rows` 统计 `commonBuckets / commonFormulaMultipliers`，直接使用 `matrix.summary`。如果你要先判断整张矩阵是否带 assumptions，也优先读取 `matrix.summary.assumptionSummary`；如需兼容旧调用方，也可以继续读取 `matrix.assumptionSummary`。如果你要先判断整张矩阵是否带 assumptions / unsupported coverage gap，也优先读取 `matrix.summary.caveatSummary`；如需兼容旧调用方，也可以继续读取 `matrix.caveatSummary`。如果你要先判断整张矩阵是否存在 diagnostics / source notes，也优先读取 `matrix.summary.diagnosticSummary / matrix.summary.sourceNoteSummary`；如需兼容旧调用方，也可以继续读取 `matrix.diagnosticSummary / matrix.sourceNoteSummary`。如果你要按 group 拆 section，也优先读取 `matrix.summary.groups[*].assumptionSummary`；如需兼容旧调用方，也可以继续读取 `matrix.summary.groups[*].assumptions`。如果你要生成“增益清单”，也优先读取 `matrix.summary.effectSummary`；如需兼容旧调用方，也可以继续读取 `matrix.effectSummary`。如果你只关心某一行的 effect 概况，也优先读取 `row.effectSummary`。如果你只关心某一行的 assumptions 概况，也优先读取 `row.assumptionSummary`；如需兼容旧调用方，也可以继续读取 `row.assumptions`。如果你只关心某一行的公式乘区摘要和 flag/count，也不要再请求 `includeDetails` 去读 `row.build.summary`，直接读取 `row.summary`。如果你只关心某一行的 diagnostics / source notes / caveats 概况，也不要自己遍历 `row.diagnostics / row.sourceNotes / row.assumptions / row.unsupportedEffects`，直接读取 `row.diagnosticSummary / row.sourceNoteSummary / row.caveatSummary`。
+如果你要生成矩阵顶部“乘区汇总”，不要再自己遍历 `rows` 统计 `commonBuckets / commonFormulaMultipliers`，直接使用 `matrix.summary`。如果你要先判断整张矩阵是否带 requirements，也优先读取 `matrix.summary.requirementSummary`；如需兼容旧调用方，也可以继续读取 `matrix.requirementSummary`；当前 skill matrix 的 top-level requirement summary 固定是空聚合，不要自己伪造技能 requirement。 如果你要先判断整张矩阵是否带 assumptions，也优先读取 `matrix.summary.assumptionSummary`；如需兼容旧调用方，也可以继续读取 `matrix.assumptionSummary`。如果你要先判断整张矩阵是否带 assumptions / unsupported coverage gap，也优先读取 `matrix.summary.caveatSummary`；如需兼容旧调用方，也可以继续读取 `matrix.caveatSummary`。如果你要先判断整张矩阵是否存在 diagnostics / source notes，也优先读取 `matrix.summary.diagnosticSummary / matrix.summary.sourceNoteSummary`；如需兼容旧调用方，也可以继续读取 `matrix.diagnosticSummary / matrix.sourceNoteSummary`。如果你要按 group 拆 section，也优先读取 `matrix.summary.groups[*].requirementSummary / matrix.summary.groups[*].assumptionSummary`；如需兼容旧调用方，也可以继续读取 `matrix.summary.groups[*].assumptions`；group-level requirement summary 当前同样固定是空聚合。如果你要生成“增益清单”，也优先读取 `matrix.summary.effectSummary`；如需兼容旧调用方，也可以继续读取 `matrix.effectSummary`。如果你只关心某一行的 effect 概况，也优先读取 `row.effectSummary`。如果你只关心某一行的 requirements 概况，也优先读取 `row.requirementSummary`；当前 row-level requirement summary 也固定是空聚合，不要继续手工补默认值。如果你只关心某一行的 assumptions 概况，也优先读取 `row.assumptionSummary`；如需兼容旧调用方，也可以继续读取 `row.assumptions`。如果你只关心某一行的公式乘区摘要和 flag/count，也不要再请求 `includeDetails` 去读 `row.build.summary`，直接读取 `row.summary`。如果你只关心某一行的 diagnostics / source notes / caveats 概况，也不要自己遍历 `row.diagnostics / row.sourceNotes / row.assumptions / row.unsupportedEffects`，直接读取 `row.diagnosticSummary / row.sourceNoteSummary / row.caveatSummary`。
 
 常见消费方式是把矩阵映射成展示表：
 

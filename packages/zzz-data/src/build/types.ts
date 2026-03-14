@@ -1047,6 +1047,7 @@ export interface StaticBuildSkillMatrixRow {
   diagnosticSummary: StaticBuildDiagnosticSummary
   sourceNotes: StaticBuildSourceNoteEntry[]
   sourceNoteSummary: StaticBuildSourceNoteSummary
+  requirementSummary: StaticBuildSourceDamageViewRequirementSummary
   assumptionSummary: StaticBuildAssumptionSummary
   caveatSummary: StaticBuildCaveatSummary
   assumptions: string[]
@@ -1070,6 +1071,7 @@ export interface StaticBuildSkillMatrixSummary {
   commonFormulaMultipliers: Record<string, number>
   variableFormulaMultipliers: string[]
   effectSummary: StaticBuildSkillMatrixEffectSummaryItem[]
+  requirementSummary: StaticBuildSourceDamageViewRequirementSummary
   assumptionSummary: StaticBuildAssumptionSummary
   caveatSummary: StaticBuildCaveatSummary
   diagnosticSummary: StaticBuildDiagnosticSummary
@@ -1086,6 +1088,7 @@ export interface StaticBuildSkillMatrixGroupSummary {
   commonFormulaMultipliers: Record<string, number>
   variableFormulaMultipliers: string[]
   effectSummary: StaticBuildSkillMatrixEffectSummaryItem[]
+  requirementSummary: StaticBuildSourceDamageViewRequirementSummary
   assumptionSummary: StaticBuildAssumptionSummary
   caveatSummary: StaticBuildCaveatSummary
   diagnosticSummary: StaticBuildDiagnosticSummary
@@ -1113,6 +1116,7 @@ export interface ResolveStaticBuildSkillMatrixResult {
   loadout: StaticBuildResolvedLoadout
   summary: StaticBuildSkillMatrixSummary
   effectSummary: StaticBuildSkillMatrixEffectSummaryItem[]
+  requirementSummary: StaticBuildSourceDamageViewRequirementSummary
   assumptionSummary: StaticBuildAssumptionSummary
   caveatSummary: StaticBuildCaveatSummary
   diagnosticSummary: StaticBuildDiagnosticSummary

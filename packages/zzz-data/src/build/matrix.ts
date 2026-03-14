@@ -9,6 +9,7 @@ import type {
   StaticBuildSkillMatrixRowMeta,
   StaticBuildSkillMatrixTemplateSource,
   StaticBuildSkillTag,
+  StaticBuildSourceDamageViewRequirementSummary,
 } from "./types.js"
 import agentDetailsZh from "../../data/zh-CN/agent-details.json"
 import { toAgentAttribute } from "../terms.js"
@@ -545,6 +546,16 @@ function summarizeSkillMatrixEffects(
   })
 }
 
+function summarizeSkillMatrixRequirements(): StaticBuildSourceDamageViewRequirementSummary {
+  return {
+    count: 0,
+    satisfiedCount: 0,
+    unsatisfiedCount: 0,
+    hasUnsatisfied: false,
+    groups: [],
+  }
+}
+
 function summarizeSkillMatrixCaveats(
   assumptions: string[],
   unsupportedEffects: string[],
@@ -583,6 +594,7 @@ function summarizeSkillMatrix(rows: StaticBuildSkillMatrixRow[]) {
       ]
       return {
         assumptionSummary: summarizeAssumptions(assumptions),
+        requirementSummary: summarizeSkillMatrixRequirements(),
         caveatSummary: summarizeSkillMatrixCaveats(
           assumptions,
           unsupportedEffects,
@@ -634,6 +646,7 @@ function summarizeSkillMatrix(rows: StaticBuildSkillMatrixRow[]) {
     commonFormulaMultipliers,
     variableFormulaMultipliers,
     effectSummary: summarizeSkillMatrixEffects(rows),
+    requirementSummary: summarizeSkillMatrixRequirements(),
     assumptionSummary: summarizeAssumptions(assumptions),
     caveatSummary: summarizeSkillMatrixCaveats(assumptions, unsupportedEffects),
     diagnosticSummary: summarizeDiagnosticEntries(
@@ -2054,6 +2067,7 @@ export function resolveStaticBuildSkillMatrix(
       diagnosticSummary: summarizeDiagnosticEntries(build.diagnostics),
       sourceNotes: build.sourceNotes,
       sourceNoteSummary: summarizeSourceNoteEntries(build.sourceNotes),
+      requirementSummary: summarizeSkillMatrixRequirements(),
       assumptionSummary: summarizeAssumptions(build.assumptions),
       caveatSummary: summarizeSkillMatrixCaveats(
         build.assumptions,
@@ -2089,6 +2103,7 @@ export function resolveStaticBuildSkillMatrix(
     loadout: first.loadout,
     summary: summarizeSkillMatrix(rows),
     effectSummary: summarizeSkillMatrixEffects(rows),
+    requirementSummary: summarizeSkillMatrixRequirements(),
     assumptionSummary: summarizeAssumptions(assumptions),
     caveatSummary: summarizeSkillMatrixCaveats(assumptions, unsupportedEffects),
     diagnosticSummary: summarizeDiagnosticEntries(

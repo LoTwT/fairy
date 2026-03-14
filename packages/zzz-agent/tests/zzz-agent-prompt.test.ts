@@ -78,6 +78,7 @@ it("keeps screenshot summary by default", async () => {
   expect(base.includes("本次额外结算涉及的乘区变化")).toBe(true)
   expect(base.includes("matrix.requirementSummary")).toBe(true)
   expect(base.includes("matrix.summary.requirementSummary")).toBe(true)
+  expect(base.includes("row.requirementSummary")).toBe(true)
   expect(base.includes("matrix.summary.caveatSummary")).toBe(true)
   expect(base.includes("matrix.diagnosticSummary")).toBe(true)
   expect(base.includes("matrix.sourceNoteSummary")).toBe(true)
@@ -90,6 +91,7 @@ it("keeps screenshot summary by default", async () => {
   expect(base.includes("matrix.summary.groups[*].requirementSummary")).toBe(
     true,
   )
+  expect(base.includes("某一行是否带 requirements")).toBe(true)
   expect(base.includes("matrix.summary.groups[*].diagnosticSummary")).toBe(true)
   expect(base.includes("matrix.summary.groups[*].sourceNoteSummary")).toBe(true)
   expect(base.includes("entry.metadata.canonicalLabel")).toBe(true)

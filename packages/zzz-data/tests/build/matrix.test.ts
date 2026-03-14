@@ -43,6 +43,14 @@ describe("static build skill matrix", () => {
     expect(result.summary.diagnosticSummary).toEqual(result.diagnosticSummary)
     expect(result.summary.sourceNoteSummary).toEqual(result.sourceNoteSummary)
     expect(result.summary.effectSummary).toEqual(result.effectSummary)
+    expect(result.requirementSummary).toEqual({
+      count: 0,
+      satisfiedCount: 0,
+      unsatisfiedCount: 0,
+      hasUnsatisfied: false,
+      groups: [],
+    })
+    expect(result.summary.requirementSummary).toEqual(result.requirementSummary)
     expect(result.assumptionSummary).toEqual({
       count: result.assumptions.length,
       hasAssumptions: result.assumptions.length > 0,
@@ -58,6 +66,13 @@ describe("static build skill matrix", () => {
     expect(result.rows[0]?.assumptionSummary).toEqual({
       count: result.rows[0]?.assumptions.length,
       hasAssumptions: (result.rows[0]?.assumptions.length ?? 0) > 0,
+    })
+    expect(result.rows[0]?.requirementSummary).toEqual({
+      count: 0,
+      satisfiedCount: 0,
+      unsatisfiedCount: 0,
+      hasUnsatisfied: false,
+      groups: [],
     })
     expect(result.diagnosticSummary.count).toBe(
       result.rows.flatMap((row) => row.diagnostics).length,
@@ -94,6 +109,13 @@ describe("static build skill matrix", () => {
       result.rows.filter((row) => row.group === "普通攻击").length,
     )
     expect(normalGroup?.commonBuckets.critRate).toBeCloseTo(0.15, 4)
+    expect(normalGroup?.requirementSummary).toEqual({
+      count: 0,
+      satisfiedCount: 0,
+      unsatisfiedCount: 0,
+      hasUnsatisfied: false,
+      groups: [],
+    })
     expect(
       normalGroup?.commonFormulaMultipliers.critMultiplier,
     ).toBeGreaterThan(1)
