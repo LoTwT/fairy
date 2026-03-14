@@ -4496,6 +4496,48 @@ Batch B（已完成）：
 2. 不改变 standalone source-damage-view contract
 3. 不新增 source-entry collection 的新类型
 
+## 108. V105 source-entry mixed-entry assumption summary alignment
+
+`V104` 收口后，unified `source-entry collection` 已把 mixed entry 的 `summary` 视为正式公共 contract。
+
+但同一条 mixed collection 路径里，`entry.assumptionSummary` 虽然已经存在，当前仍缺：
+
+- source-entry collection 断言没有把 `entry.assumptionSummary` 当成 mixed entry 的正式消费层
+- Agent prompt 还没明确要求在 mixed collection 路径优先读取 `entry.assumptionSummary`
+- README 也还没把这层写成 source-entry collection 的公共 contract
+
+### 108.1 目标
+
+1. 把 mixed collection 中 entry-level `assumptionSummary` 视为正式 contract
+2. 让 `resolveBuildSourceEntries` 与 standalone source views 在“逐条 assumptions 摘要消费”上保持一致
+
+### 108.2 范围
+
+1. `V105.1` scope freeze
+2. `V105.2` source-entry tool assertion alignment
+3. `V105.3` prompt / README alignment
+4. `V105.4` docs closeout
+
+### 108.3 当前状态
+
+- `V105.1` 已完成：冻结到 source-entry mixed-entry assumptionSummary alignment
+- `V105.2` 已完成：高层 source-entry tool 断言已对齐 mixed entry 的 `entry.assumptionSummary`
+- `V105.3` 已完成：Agent prompt 与 README 已把 mixed collection 中 entry 的 `assumptionSummary` 视为正式 contract
+- `V105.4` 已完成：相关 specs、roadmap、索引与架构文档已同步
+
+### 108.4 当前边界
+
+本阶段只做：
+
+1. 明确 mixed collection 中 entry-level `assumptionSummary` 的消费方式
+2. 保持底层 `ResolveStaticBuildSourceEntriesResult` 不变
+
+显式不做：
+
+1. 不新增 collection-level aggregate
+2. 不改变 standalone source-damage-view / source-utility-view contract
+3. 不新增 source-entry collection 的新类型
+
 ### 103.2 目标
 
 1. 为 `rows[*]` 增加稳定 `caveatSummary`

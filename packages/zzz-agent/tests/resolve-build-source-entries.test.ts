@@ -167,6 +167,10 @@ describe("resolveBuildSourceEntries tool", () => {
         assumptionCount: 1,
         hasUnsupported: false,
       },
+      assumptionSummary: {
+        count: 1,
+        hasAssumptions: true,
+      },
       value: 3,
       unit: "energy",
     })
@@ -416,6 +420,10 @@ describe("resolveBuildSourceEntries tool", () => {
       metadata: {
         entryKind: "source-damage-view",
         stableKey: "source-view:aria-exflow",
+      },
+      assumptionSummary: {
+        count: 1,
+        hasAssumptions: true,
       },
     })
     expect(ariaEntry.summary.expectedTotal).toBeGreaterThan(0)
