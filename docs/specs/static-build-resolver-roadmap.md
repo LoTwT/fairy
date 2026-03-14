@@ -6596,3 +6596,37 @@ caveatSummary` 这些兼容字段补齐。
 - `V163.2` 已完成：compact top-level `summary` 的 aggregate summary 已改为显式 compact types
 - `V163.3` 已完成：现有测试与 runtime 校验已覆盖
 - `V163.4` 已完成：roadmap、索引与架构文档已同步
+
+## 167. V164 explicit compact group aggregate summaries
+
+`V163` 收口后，compact contract 中仍直接复用 raw aggregate summary type 的最后一批显式缺口集中在：
+
+- `skill-matrix group`
+- `trigger-matrix group`
+- `source-damage-view group`
+- `source-utility-view group`
+- `source-entry collection group`
+
+`V164` 只解决一件事：
+
+1. 把上述 `group` 上的 aggregate summary 改成显式 compact type
+
+### 167.1 分阶段
+
+1. `V164.1` scope freeze
+2. `V164.2` runtime/type contract alignment
+3. `V164.3` tests / prompt alignment
+4. `V164.4` docs closeout
+
+### 167.2 非目标
+
+1. 不改变 aggregate summary 的字段值
+2. 不改变 `includeDetails` 语义
+3. 不改变 compact payload 的业务含义
+
+### 167.3 当前状态
+
+- `V164.1` 已完成：冻结到 explicit compact group aggregate summaries
+- `V164.2` 已完成：compact `group` 的 aggregate summary 已改为显式 compact types
+- `V164.3` 已完成：现有测试与 runtime 校验已覆盖
+- `V164.4` 已完成：roadmap、索引与架构文档已同步
