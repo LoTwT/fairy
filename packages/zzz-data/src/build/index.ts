@@ -75,6 +75,7 @@ export type {
   StaticBuildEffectDefinition,
   StaticBuildEffectOverride,
   StaticBuildEnemyInput,
+  StaticBuildEntryCaveatSummary,
   StaticBuildFinalPanelInput,
   StaticBuildLoadoutInput,
   StaticBuildMode,

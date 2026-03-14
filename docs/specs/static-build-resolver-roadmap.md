@@ -4022,3 +4022,35 @@ Batch B（已完成）：
 1. 不改变既有 `row.assumptions`
 2. 不改变顶层 `matrix.summary` 与 group 级 `summary.groups[*]`
 3. 不改变 diagnostics / source notes / effect summaries 的既有 contract
+
+## 95. V92 source-damage-view caveat summary
+
+`V91` 收口后，`source-damage-view` 已具备：
+
+- 顶层 `views.assumptionSummary`
+- 顶层 `views.summary.assumptionSummary`
+- 顶层 `views.summary.supportedCount / unsupportedCount`
+
+但如果上层只想先判断整组 source-damage-view 是否存在 caveat，仍然要自己组合：
+
+- `views.assumptionSummary`
+- `views.summary.unsupportedCount`
+
+### 95.1 当前状态
+
+- `V92.1` 已完成：冻结到 source-damage-view caveat summary
+- `V92.2` 已完成：`ResolveStaticBuildSourceDamageViewsResult` 与 `StaticBuildSourceDamageViewSummary` 已新增稳定 `caveatSummary`
+- `V92.3` 已完成：高层 tool 断言与 agent prompt 已对齐 `views.summary.caveatSummary` / `views.caveatSummary`
+- `V92.4` 已完成：相关 specs、roadmap、索引、架构文档与 README 已同步
+
+### 95.2 目标
+
+1. 为 `views` 顶层结果增加稳定 `caveatSummary`
+2. 为 `views.summary` 增加稳定 `caveatSummary`
+3. 保持与既有 assumptions、supportedCount、unsupportedCount 一致
+
+### 95.3 Out of Scope
+
+1. 不为 `groups[*]` 增加 `caveatSummary`
+2. 不为单条 `entry` 增加 `caveatSummary`
+3. 不同时扩到 `source-utility-view`、`source-entry collection`、`trigger-matrix`

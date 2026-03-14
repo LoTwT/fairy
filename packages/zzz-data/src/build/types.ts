@@ -665,6 +665,7 @@ export interface StaticBuildSourceDamageViewSummary {
   supportedCount: number
   unsupportedCount: number
   requirementSummary: StaticBuildSourceDamageViewRequirementSummary
+  caveatSummary: StaticBuildEntryCaveatSummary
   diagnosticSummary: StaticBuildDiagnosticSummary
   sourceNoteSummary: StaticBuildSourceNoteSummary
   assumptionSummary: StaticBuildAssumptionSummary
@@ -676,6 +677,7 @@ export interface ResolveStaticBuildSourceDamageViewsResult {
   manualBaseMode?: StaticBuildBaseMode
   loadout: StaticBuildResolvedLoadout
   summary: StaticBuildSourceDamageViewSummary
+  caveatSummary: StaticBuildEntryCaveatSummary
   assumptionSummary: StaticBuildAssumptionSummary
   entries: StaticBuildSourceDamageViewEntry[]
   assumptions: string[]
@@ -773,6 +775,13 @@ export interface StaticBuildSourceUtilityViewSummary {
   sourceNoteSummary: StaticBuildSourceNoteSummary
   assumptionSummary: StaticBuildAssumptionSummary
   groups: StaticBuildSourceUtilityViewGroupSummary[]
+}
+
+export interface StaticBuildEntryCaveatSummary {
+  assumptionCount: number
+  unsupportedCount: number
+  hasAssumptions: boolean
+  hasUnsupported: boolean
 }
 
 export interface ResolveStaticBuildSourceUtilityViewsResult {

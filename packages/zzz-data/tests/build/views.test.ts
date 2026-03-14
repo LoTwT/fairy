@@ -46,12 +46,24 @@ describe("static build source damage views", () => {
       count: result.assumptions.length,
       hasAssumptions: result.assumptions.length > 0,
     })
+    expect(result.caveatSummary).toEqual({
+      assumptionCount: result.assumptions.length,
+      unsupportedCount: 0,
+      hasAssumptions: result.assumptions.length > 0,
+      hasUnsupported: false,
+    })
     expect(result.summary).toEqual({
       entryCount: 0,
       standaloneCount: 0,
       deltaCount: 0,
       supportedCount: 0,
       unsupportedCount: 0,
+      caveatSummary: {
+        assumptionCount: result.assumptions.length,
+        unsupportedCount: 0,
+        hasAssumptions: result.assumptions.length > 0,
+        hasUnsupported: false,
+      },
       assumptionSummary: {
         count: result.assumptions.length,
         hasAssumptions: result.assumptions.length > 0,
@@ -127,12 +139,24 @@ describe("static build source damage views", () => {
       count: result.assumptions.length,
       hasAssumptions: result.assumptions.length > 0,
     })
+    expect(result.caveatSummary).toEqual({
+      assumptionCount: result.assumptions.length,
+      unsupportedCount: 0,
+      hasAssumptions: result.assumptions.length > 0,
+      hasUnsupported: false,
+    })
     expect(result.summary).toMatchObject({
       entryCount: 1,
       standaloneCount: 1,
       deltaCount: 0,
       supportedCount: 1,
       unsupportedCount: 0,
+      caveatSummary: {
+        assumptionCount: result.assumptions.length,
+        unsupportedCount: 0,
+        hasAssumptions: result.assumptions.length > 0,
+        hasUnsupported: false,
+      },
       assumptionSummary: {
         count: result.assumptions.length,
         hasAssumptions: result.assumptions.length > 0,

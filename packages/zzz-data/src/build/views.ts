@@ -5,6 +5,7 @@ import type {
   ResolveStaticBuildSourceDamageViewsResult,
   StaticBuildBaseMode,
   StaticBuildCatalogEntry,
+  StaticBuildEntryCaveatSummary,
   StaticBuildResolvedLoadout,
   StaticBuildSourceDamageViewEntry,
   StaticBuildSourceDamageViewGroupKey,
@@ -153,6 +154,7 @@ export function resolveStaticBuildSourceDamageViews(
       input.mode === "manual" ? resolveBaseMode(input) : undefined,
     loadout,
     summary: summarizeSourceDamageViews(sortedEntries, []),
+    caveatSummary: summarizeSourceDamageViewCaveats(sortedEntries, []),
     assumptionSummary: summarizeAssumptions([]),
     entries: sortedEntries,
     assumptions: [],
@@ -272,10 +274,24 @@ function summarizeSourceDamageViews(
     requirementSummary: summarizeSourceDamageViewRequirements(
       entries.flatMap((entry) => entry.requirements),
     ),
+    caveatSummary: summarizeSourceDamageViewCaveats(entries, assumptions),
     diagnosticSummary: summarizeDiagnosticEntries(diagnostics),
     sourceNoteSummary: summarizeSourceNoteEntries(sourceNotes),
     assumptionSummary: summarizeAssumptions(assumptions),
     groups,
+  }
+}
+
+function summarizeSourceDamageViewCaveats(
+  entries: StaticBuildSourceDamageViewEntry[],
+  assumptions: string[],
+): StaticBuildEntryCaveatSummary {
+  const unsupportedCount = entries.filter((entry) => !entry.supported).length
+  return {
+    assumptionCount: assumptions.length,
+    unsupportedCount,
+    hasAssumptions: assumptions.length > 0,
+    hasUnsupported: unsupportedCount > 0,
   }
 }
 

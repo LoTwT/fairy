@@ -87,6 +87,8 @@ it("keeps screenshot summary by default", async () => {
   expect(base.includes("views.summary.deltaCount")).toBe(true)
   expect(base.includes("views.assumptionSummary")).toBe(true)
   expect(base.includes("views.summary.assumptionSummary")).toBe(true)
+  expect(base.includes("views.summary.caveatSummary")).toBe(true)
+  expect(base.includes("views.caveatSummary")).toBe(true)
   expect(base.includes("views.summary.groups[*].assumptionSummary")).toBe(true)
   expect(base.includes("entry.assumptionSummary")).toBe(true)
   expect(base.includes("views.summary.requirementSummary")).toBe(true)

@@ -72,6 +72,8 @@ src/mastra/
    - 修改 `packages/zzz-agent`：在子包下依次运行 `pnpm run test` 与 `pnpm run build`
    - 若不确定影响范围：运行根目录 `pnpm run test`，并在涉及 `packages/zzz-agent` 时补充 `pnpm --filter zzz-agent run build`
 
+抓取 / 合并新数据后，不要直接补 resolver 逻辑；先按 [`docs/data-refresh-checklist.md`](./data-refresh-checklist.md) 完成 contract、catalog、curated coverage 与文档检查，再进入实现阶段。
+
 ## 文档维护规则
 
 以下内容是 `Codex App` 与 `Claude Code` 的共享维护规则。
