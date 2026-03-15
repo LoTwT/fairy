@@ -157,6 +157,8 @@ export type StaticBuildAppliedEntryCount = number
 export type StaticBuildTotalEntryCount = number
 export type StaticBuildAppliedRowCount = number
 export type StaticBuildTotalRowCount = number
+export type StaticBuildUtilityValue = number
+export type StaticBuildCooldownSeconds = number
 export type StaticBuildDefenderBaseDefense = number
 export type StaticBuildDefenderResistance = number
 export type StaticBuildDefenseBonus = number
@@ -851,11 +853,11 @@ export interface StaticBuildSourceUtilityViewEntry {
   targetScope: StaticBuildSourceUtilityViewTargetScope
   requirements: StaticBuildSourceUtilityViewRequirement[]
   requirementSummary: StaticBuildSourceUtilityViewRequirementSummary
-  value: number
+  value: StaticBuildUtilityValue
   unit: "energy" | "energy-per-second" | "decibel"
   triggerLabel?: string
   conditionLabel?: string
-  cooldownSeconds?: number
+  cooldownSeconds?: StaticBuildCooldownSeconds
   summary: StaticBuildSourceUtilityViewEntrySummary
   diagnostics: StaticBuildDiagnosticEntry[]
   diagnosticSummary: StaticBuildDiagnosticSummary
@@ -868,7 +870,7 @@ export interface StaticBuildSourceUtilityViewEntry {
 }
 
 export interface StaticBuildSourceUtilityViewEntrySummary {
-  value: number
+  value: StaticBuildUtilityValue
   unit: "energy" | "energy-per-second" | "decibel"
   resolutionMode: StaticBuildSourceUtilityViewResolutionMode
   targetScope: StaticBuildSourceUtilityViewTargetScope

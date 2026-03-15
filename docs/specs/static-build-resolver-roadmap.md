@@ -10081,3 +10081,33 @@ caveatSummary` 这些兼容字段补齐。
 - `V273.3` 已完成：`build/index.ts` 已统一导出这些新 type
 - `V273.4` 已完成：现有 build / agent 测试与 runtime 校验已覆盖
 - `V273.5` 已完成：roadmap、索引与架构文档已同步
+
+## 277. V274 build source-utility value contracts
+
+`V273` 收口后，`source-utility-view` 的 `value / cooldownSeconds` 仍在 `types.ts` 中以裸 `number` 暴露，和前面的 scalar contract 仍不对称。
+
+`V274` 只解决一件事：
+
+1. 为这组 source-utility-view 数值补显式 type，并让 utility entry / entry summary 统一复用，不改变任何运行时行为
+
+### 277.1 分阶段
+
+1. `V274.1` scope freeze
+2. `V274.2` type alignment
+3. `V274.3` export alignment
+4. `V274.4` tests / runtime alignment
+5. `V274.5` docs closeout
+
+### 277.2 非目标
+
+1. 不改变 source-utility-view 的字段集合
+2. 不改变 utility value 或 cooldown 的结算逻辑
+3. 不扩展 compact layer 的 utility entry contract
+
+### 277.3 当前状态
+
+- `V274.1` 已完成：冻结到 build source-utility value contract
+- `V274.2` 已完成：`types.ts` 已新增显式 utility-value / cooldown scalar alias，并让 utility entry / entry summary 统一复用
+- `V274.3` 已完成：`build/index.ts` 已统一导出这些新 type
+- `V274.4` 已完成：现有 build / agent 测试与 runtime 校验已覆盖
+- `V274.5` 已完成：roadmap、索引与架构文档已同步
