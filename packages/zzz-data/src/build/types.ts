@@ -532,9 +532,11 @@ export interface StaticBuildSourceNoteGuidance {
 }
 
 export type StaticBuildSourceNoteMessage = string
+export type StaticBuildEntryId = string
+export type StaticBuildRowId = string
 
 export interface StaticBuildSourceNoteEntry {
-  id: string
+  id: StaticBuildEntryId
   sourceType: StaticBuildSourceType
   sourceId: StaticBuildSourceId
   owner: StaticBuildSourceNoteOwner
@@ -747,7 +749,7 @@ export interface StaticBuildSourceDamageViewMeta {
 }
 
 export interface StaticBuildSourceDamageViewEntry {
-  id: string
+  id: StaticBuildEntryId
   label: StaticBuildEntryLabel
   metadata: StaticBuildSourceDamageViewMeta
   sourceType: StaticBuildSourceType
@@ -871,7 +873,7 @@ export interface StaticBuildSourceUtilityViewMeta {
 }
 
 export interface StaticBuildSourceUtilityViewEntry {
-  id: string
+  id: StaticBuildEntryId
   label: StaticBuildEntryLabel
   metadata: StaticBuildSourceUtilityViewMeta
   sourceType: StaticBuildSourceType
@@ -1085,7 +1087,7 @@ export interface StaticBuildTriggerMatrixRowMeta {
 }
 
 export interface StaticBuildTriggerMatrixRow {
-  id: string
+  id: StaticBuildRowId
   label: StaticBuildRowLabel
   supported: boolean
   metadata: StaticBuildTriggerMatrixRowMeta
@@ -1153,7 +1155,7 @@ export interface StaticBuildSkillMatrixRowDamageSummary {
 export type StaticBuildSkillMatrixGroupKey = string
 
 export interface StaticBuildSkillMatrixRow {
-  id: string
+  id: StaticBuildRowId
   group: StaticBuildSkillMatrixGroupKey
   label: StaticBuildRowLabel
   metadata: StaticBuildSkillMatrixRowMeta
