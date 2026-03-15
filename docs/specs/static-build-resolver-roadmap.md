@@ -10257,5 +10257,35 @@ caveatSummary` 这些兼容字段补齐。
 - `V279.1` 已完成：冻结到 unsupported-effect 列表 contract
 - `V279.2` 已完成：`types.ts` 已让各层公开 `unsupportedEffects` 字段统一复用显式 type
 - `V279.3` 已完成：`build/index.ts` 已正式导出这个 type
-- `V279.4` 进行中：等待现有 build / agent 测试与 runtime 校验完成
-- `V279.5` 进行中：等待 roadmap、索引与架构文档同步
+- `V279.4` 已完成：现有 build / agent 测试与 runtime 校验已覆盖
+- `V279.5` 已完成：roadmap、索引与架构文档已同步
+
+## 283. V280 build combat-tag list contracts
+
+`V279` 收口后，build-layer 公开 contract 中的 `combatTags` 仍以匿名 `string[]` 暴露，和前面的显式公开 contract 仍不对称。
+
+`V280` 只解决一件事：
+
+1. 为这组公开 combat-tag 列表补显式 type，并让输入 contract、effect 条件和 skill-matrix 行统一复用，不改变任何运行时行为
+
+### 283.1 分阶段
+
+1. `V280.1` scope freeze
+2. `V280.2` type alignment
+3. `V280.3` export alignment
+4. `V280.4` tests / runtime alignment
+5. `V280.5` docs closeout
+
+### 283.2 非目标
+
+1. 不改变 combatTags 的字符串内容、顺序或判定逻辑
+2. 不处理 `aliases / qualifiers / keys`
+3. 不处理 `assumptions / unsupportedEffects`
+
+### 283.3 当前状态
+
+- `V280.1` 已完成：冻结到 combat-tag 列表 contract
+- `V280.2` 已完成：`types.ts` 已让各层公开 `combatTags` 字段统一复用显式 type
+- `V280.3` 已完成：`build/index.ts` 已正式导出这个 type
+- `V280.4` 进行中：等待现有 build / agent 测试与 runtime 校验完成
+- `V280.5` 进行中：等待 roadmap、索引与架构文档同步

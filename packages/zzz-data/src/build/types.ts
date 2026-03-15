@@ -165,6 +165,7 @@ export type StaticBuildVariableBucketList = string[]
 export type StaticBuildVariableFormulaMultiplierList = string[]
 export type StaticBuildAssumptionList = string[]
 export type StaticBuildUnsupportedEffectList = string[]
+export type StaticBuildCombatTagList = string[]
 export type StaticBuildDefenderBaseDefense = number
 export type StaticBuildDefenderResistance = number
 export type StaticBuildDefenseBonus = number
@@ -254,7 +255,7 @@ export interface StaticBuildEnemyInput {
 interface StaticBuildScenarioBaseInput {
   attribute?: AgentAttributeLabel
   extraAbilityActive?: boolean
-  combatTags?: string[]
+  combatTags?: StaticBuildCombatTagList
   dynamicSnapshot?: StaticBuildDynamicSnapshotInput
   stateSnapshot?: StaticBuildStateSnapshotInput
   resolvedSnapshot?: StaticBuildResolvedSnapshotInput
@@ -311,7 +312,7 @@ export interface ResolveStaticBuildInput {
 export interface StaticBuildSkillMatrixContextInput {
   attribute?: AgentAttributeLabel
   extraAbilityActive?: boolean
-  combatTags?: string[]
+  combatTags?: StaticBuildCombatTagList
   enemy: StaticBuildEnemyInput
 }
 
@@ -362,7 +363,7 @@ export interface StaticBuildEffectCondition {
   minimumMindscape?: StaticBuildAgentMindscape
   requireExtraAbility?: boolean
   requireStunned?: boolean
-  combatTags?: string[]
+  combatTags?: StaticBuildCombatTagList
   dynamicSnapshotFlags?: StaticBuildDynamicFlagKey[]
   stateSnapshotFlags?: StaticBuildStateFlagKey[]
   requiredDynamicCounts?: StaticBuildDynamicCountKey[]
@@ -1111,7 +1112,7 @@ export interface StaticBuildSkillMatrixRowMeta {
   sourceStatName: string
   sourceOccurrence: number
   attributeSource: StaticBuildSkillMatrixAttributeSource
-  templateCombatTags: string[]
+  templateCombatTags: StaticBuildCombatTagList
   entryType: StaticBuildSkillMatrixEntryType
   aggregationType: StaticBuildSkillMatrixAggregationType
   isAdditionalDamage: boolean
@@ -1135,7 +1136,7 @@ export interface StaticBuildSkillMatrixRow {
   skillTag: StaticBuildSkillTag
   damageType: StaticBuildDamageType
   attribute: AgentAttribute
-  combatTags: string[]
+  combatTags: StaticBuildCombatTagList
   skillMultiplier: string
   damageSummary: StaticBuildSkillMatrixRowDamageSummary
   summary: StaticBuildResolveSummary

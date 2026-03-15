@@ -81,6 +81,7 @@ export type {
   StaticBuildBucket,
   StaticBuildBucketValueMap,
   StaticBuildCatalogEntry,
+  StaticBuildCombatTagList,
   StaticBuildCooldownSeconds,
   StaticBuildCoreSkillLevel,
   StaticBuildCritDamage,
