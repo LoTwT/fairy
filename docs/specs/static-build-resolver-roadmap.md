@@ -12529,3 +12529,32 @@ caveatSummary` 这些兼容字段补齐。
 - `V352.2` 已完成：scorer helper 文本 contract 已统一复用显式 alias
 - `V352.3` 已完成：校验与提交
 - `V352.4` 已完成：roadmap、索引与架构文档同步
+
+## 356. V353 agent source-entry context contracts
+
+### 356.1 目标
+
+`V353` 只解决一件事：
+
+- 给 `source-entry context` helper 的导出输入与结果 shape 补显式公开 contract，不改变任何 scenario 或 panel 归一化逻辑。
+
+### 356.2 范围
+
+1. `BuildToolSourceEntriesContextInput`
+2. `BuildToolResolvedSourceEntriesContextSuccess`
+3. `BuildToolResolvedSourceEntriesContextFailure`
+4. `BuildToolResolvedSourceEntriesContextResult`
+5. `resolveBuildToolSourceEntriesContext()`
+
+### 356.3 非目标
+
+1. 不改 `source-entry` 结果 schema
+2. 不改 `finalPanelSchema` 校验规则
+3. 不调整 anomaly/disorder 的 panel 必填要求
+
+### 356.4 当前状态
+
+- `V353.1` 已完成：范围冻结到 source-entry context helper contract
+- `V353.2` 已完成：导出输入与结果 shape 已统一复用显式公开 contract
+- `V353.3` 已完成：校验与提交
+- `V353.4` 已完成：roadmap、索引与架构文档同步

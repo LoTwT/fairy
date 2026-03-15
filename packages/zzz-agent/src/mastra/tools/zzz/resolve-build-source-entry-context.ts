@@ -20,20 +20,30 @@ export interface BuildToolResolvedSourceEntriesContext {
   panel: StaticBuildFinalPanelInput | undefined
 }
 
-export function resolveBuildToolSourceEntriesContext(input: {
+export interface BuildToolSourceEntriesContextInput {
   scenario: BuildToolScenarioInput | undefined
   finalPanel: BuildToolFinalPanelInput | undefined
-}):
-  | {
-      ok: true
-      context: BuildToolResolvedSourceEntriesContext
-    }
-  | {
-      ok: false
-      response:
-        | BuildToolMissingFinalPanelResponse
-        | BuildToolUnsupportedAnomalyTypeResponse
-    } {
+}
+
+export interface BuildToolResolvedSourceEntriesContextSuccess {
+  ok: true
+  context: BuildToolResolvedSourceEntriesContext
+}
+
+export interface BuildToolResolvedSourceEntriesContextFailure {
+  ok: false
+  response:
+    | BuildToolMissingFinalPanelResponse
+    | BuildToolUnsupportedAnomalyTypeResponse
+}
+
+export type BuildToolResolvedSourceEntriesContextResult =
+  | BuildToolResolvedSourceEntriesContextSuccess
+  | BuildToolResolvedSourceEntriesContextFailure
+
+export function resolveBuildToolSourceEntriesContext(
+  input: BuildToolSourceEntriesContextInput,
+): BuildToolResolvedSourceEntriesContextResult {
   const utilityOnly =
     !input.scenario ||
     input.scenario.damageType === "normal" ||

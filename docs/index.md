@@ -250,3 +250,4 @@
 - [静态构筑解析系统 V350](./specs/static-build-resolver-v350.md) — 当前阶段：已收口；`zzz-agent` scenario helper 文本 contract 已统一复用显式公开 alias
 - [静态构筑解析系统 V351](./specs/static-build-resolver-v351.md) — 当前阶段：已收口；`zzz-agent` utility helper 文本 contract 已统一复用显式公开 alias
 - [静态构筑解析系统 V352](./specs/static-build-resolver-v352.md) — 当前阶段：已收口；`zzz-agent` scorer helper 文本与 tool-name contract 已统一复用显式公开 alias
+- [静态构筑解析系统 V353](./specs/static-build-resolver-v353.md) — 当前阶段：已收口；`zzz-agent` source-entry context helper 的导出输入与结果 shape 已统一复用显式公开 contract
