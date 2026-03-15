@@ -12428,3 +12428,35 @@ caveatSummary` 这些兼容字段补齐。
 - `V349.2` 已完成：catalog helper 文本 contract 已统一复用显式 alias
 - `V349.3` 待完成：校验与提交
 - `V349.4` 待完成：roadmap、索引与架构文档同步
+
+## 353. V350 agent scenario helper text contracts
+
+### 353.1 目标
+
+`V350` 只解决一件事：
+
+- 给 `zzz-agent` 的 scenario helper 文本 contract 补显式公开 alias，不改变任何归一化逻辑。
+
+### 353.2 范围
+
+1. `BuildToolAttributeValue`
+2. `BuildToolAnomalyTypeValue`
+3. `BuildToolDamageTypeValue`
+4. `normalizeBuildToolAttribute()`
+5. `resolveBuildToolScenario()`
+6. `resolveBuildToolDisorderScenario()`
+7. `resolveBuildToolDamageType()`
+8. `normalizeAnomalyType()`
+
+### 353.3 非目标
+
+1. 不改变 anomaly type alias 列表
+2. 不调整 scenario schema
+3. 不修改高层 tool 响应结构
+
+### 353.4 当前状态
+
+- `V350.1` 已完成：范围冻结到 agent scenario helper text contract
+- `V350.2` 已完成：scenario helper 文本 contract 已统一复用显式 alias
+- `V350.3` 待完成：校验与提交
+- `V350.4` 待完成：roadmap、索引与架构文档同步

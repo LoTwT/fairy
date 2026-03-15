@@ -16,6 +16,12 @@ export type BuildToolCatalogName = string
 
 export type BuildToolCatalogNameList = readonly BuildToolCatalogName[]
 
+export type BuildToolAttributeValue = string
+
+export type BuildToolAnomalyTypeValue = BuildToolCatalogValue
+
+export type BuildToolDamageTypeValue = string
+
 export interface CatalogItem<TSpecialty extends string = string> {
   id: string
   name: BuildToolCatalogName

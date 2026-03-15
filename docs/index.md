@@ -247,3 +247,4 @@
 - [静态构筑解析系统 V347](./specs/static-build-resolver-v347.md) — 当前阶段：已收口；`calculator/factors.ts` 公开 factor helper 的输入与输出已统一复用显式公开 scalar contract
 - [静态构筑解析系统 V348](./specs/static-build-resolver-v348.md) — 当前阶段：已收口；`stripRichText()` 的返回值已统一复用显式公开 contract
 - [静态构筑解析系统 V349](./specs/static-build-resolver-v349.md) — 当前阶段：已收口；`zzz-agent` catalog helper 文本 contract 已统一复用显式公开 alias
+- [静态构筑解析系统 V350](./specs/static-build-resolver-v350.md) — 当前阶段：已收口；`zzz-agent` scenario helper 文本 contract 已统一复用显式公开 alias

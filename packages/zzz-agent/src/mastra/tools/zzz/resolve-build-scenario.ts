@@ -1,5 +1,9 @@
 import type { AgentAttributeLabel, AnomalyType } from "zzz-data"
 import type {
+  BuildToolAnomalyTypeValue,
+  BuildToolAttributeValue,
+  BuildToolCatalogValue,
+  BuildToolDamageTypeValue,
   BuildToolScopeLabel,
   BuildToolUnsupportedAnomalyTypeResponse,
   BuildToolUnsupportedDamageTypeResponse,
@@ -37,14 +41,14 @@ export type BuildToolResolvedSkillMatrixContext = Omit<
 }
 
 export function normalizeBuildToolAttribute(
-  value: string | undefined,
+  value: BuildToolAttributeValue | undefined,
 ): AgentAttributeLabel | undefined {
   return value as AgentAttributeLabel | undefined
 }
 
-export function resolveBuildToolScenario<T extends { attribute?: string }>(
-  scenario: T,
-): Omit<T, "attribute"> & { attribute?: AgentAttributeLabel } {
+export function resolveBuildToolScenario<
+  T extends { attribute?: BuildToolAttributeValue },
+>(scenario: T): Omit<T, "attribute"> & { attribute?: AgentAttributeLabel } {
   return {
     ...scenario,
     attribute: normalizeBuildToolAttribute(scenario.attribute),
@@ -53,8 +57,8 @@ export function resolveBuildToolScenario<T extends { attribute?: string }>(
 
 export function resolveBuildToolDisorderScenario<
   T extends {
-    anomalyType: string
-    attribute?: string
+    anomalyType: BuildToolAnomalyTypeValue
+    attribute?: BuildToolAttributeValue
   },
 >(
   scenario: T,
@@ -138,7 +142,7 @@ export function resolveBuildToolOptionalScenario(
 
 export function resolveBuildToolDamageType<TDamageType extends string>(
   scopeLabel: BuildToolScopeLabel,
-  damageType: string,
+  damageType: BuildToolDamageTypeValue,
   supportedDamageTypes: readonly TDamageType[],
 ):
   | {
@@ -165,7 +169,9 @@ export function resolveBuildToolDamageType<TDamageType extends string>(
   }
 }
 
-export function normalizeAnomalyType(value: string): AnomalyType | undefined {
+export function normalizeAnomalyType(
+  value: BuildToolCatalogValue,
+): AnomalyType | undefined {
   const normalized = normalizeCatalogValue(value)
   switch (normalized) {
     case "fire":

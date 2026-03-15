@@ -1098,3 +1098,4 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 347. `V347` calculator multiplier scalar contracts：当前阶段已收口；`calculator/factors.ts` 公开 factor helper 的输入与输出已统一复用显式公开 scalar contract，不改变任何公式逻辑，见 [静态构筑解析系统 V347](./static-build-resolver-v347.md)
 348. `V348` text helper output contracts：当前阶段已收口；`stripRichText()` 的返回值已统一复用显式公开 contract，不改变任何文本清洗逻辑，见 [静态构筑解析系统 V348](./static-build-resolver-v348.md)
 349. `V349` agent catalog helper text contracts：当前阶段已收口；`zzz-agent` catalog helper 文本 contract 已统一复用显式公开 alias，不改变任何匹配逻辑，见 [静态构筑解析系统 V349](./static-build-resolver-v349.md)
+350. `V350` agent scenario helper text contracts：当前阶段已收口；`zzz-agent` scenario helper 文本 contract 已统一复用显式公开 alias，不改变任何归一化逻辑，见 [静态构筑解析系统 V350](./static-build-resolver-v350.md)

@@ -337,3 +337,4 @@ const total = base * bonus * crit * resistance * custom
 - `V347` calculator multiplier scalar contracts：当前阶段已收口；`calculator/factors.ts` 公开 factor helper 的输入与输出已统一复用显式公开 scalar contract
 - `V348` text helper output contracts：当前阶段已收口；`stripRichText()` 的返回值已统一复用显式公开 contract
 - `V349` agent catalog helper text contracts：当前阶段已收口；`zzz-agent` catalog helper 文本 contract 已统一复用显式公开 alias
+- `V350` agent scenario helper text contracts：当前阶段已收口；`zzz-agent` scenario helper 文本 contract 已统一复用显式公开 alias
