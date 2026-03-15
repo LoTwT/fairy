@@ -18,6 +18,7 @@ import {
   resolveBuildSourceUtilityInputSchema,
   resolveBuildToolAgent,
   resolveBuildToolDriveDiscSets,
+  resolveBuildToolSourceUtilitySupport,
   resolveBuildToolWEngine,
 } from "./resolve-build-shared"
 
@@ -48,6 +49,10 @@ export const resolveBuildSourceUtilityViews = createTool({
     const compatibleWEngines = getCompatibleStaticBuildUtilityWEngines(
       agent.specialty,
     )
+    const sourceUtilitySupport = resolveBuildToolSourceUtilitySupport(
+      supportedStaticBuildSourceUtilityViewWEngines,
+      agent.specialty,
+    )
 
     const wEngineResolution = resolveBuildToolWEngine(
       buildToolScopeLabels.sourceUtilityView,
@@ -64,9 +69,7 @@ export const resolveBuildSourceUtilityViews = createTool({
     if (!wEngine) {
       return buildMissingSourceUtilityWEngineResponse(
         agent.name,
-        supportedStaticBuildSourceUtilityViewWEngines.filter(
-          (item) => item.specialty === agent.specialty,
-        ),
+        sourceUtilitySupport.items,
       )
     }
 
@@ -95,9 +98,7 @@ export const resolveBuildSourceUtilityViews = createTool({
 
     if (views.entries.length === 0) {
       return buildUncoveredSourceUtilityWEngineResponse(
-        supportedStaticBuildSourceUtilityViewWEngines.filter(
-          (item) => item.specialty === agent.specialty,
-        ),
+        sourceUtilitySupport.items,
         wEngine.name,
       )
     }

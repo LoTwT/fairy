@@ -22,13 +22,13 @@ import {
   buildUncoveredSourceEntryCoverageResponse,
   buildUncoveredSourceEntryUtilityOnlyResponse,
   candidateNames,
-  catalogNames,
   finalPanelSchema,
   resolveBuildSourceEntriesInputSchema,
   resolveBuildToolAgent,
   resolveBuildToolDisorderScenario,
   resolveBuildToolDriveDiscSets,
   resolveBuildToolScenario,
+  resolveBuildToolSourceUtilitySupport,
   resolveBuildToolWEngine,
 } from "./resolve-build-shared"
 
@@ -68,11 +68,11 @@ export const resolveBuildSourceEntries = createTool({
     const compatibleWEngines = utilityOnly
       ? getCompatibleStaticBuildUtilityWEngines(agent.specialty)
       : getCompatibleStaticBuildWEngines(agent.specialty)
-    const supportedUtilityWEngines = catalogNames(
-      supportedStaticBuildSourceUtilityViewWEngines.filter(
-        (item) => item.specialty === agent.specialty,
-      ),
+    const sourceUtilitySupport = resolveBuildToolSourceUtilitySupport(
+      supportedStaticBuildSourceUtilityViewWEngines,
+      agent.specialty,
     )
+    const supportedUtilityWEngines = sourceUtilitySupport.names
 
     const wEngineResolution = resolveBuildToolWEngine(
       buildToolScopeLabels.sourceEntryCollection,

@@ -182,6 +182,11 @@ export interface BuildToolLoadoutInputOptions {
   wEngineRefinement?: number
 }
 
+export interface BuildToolSourceUtilitySupport<T extends CatalogItem> {
+  items: T[]
+  names: string[]
+}
+
 export const specialtyLabels = {
   Attack: "强攻",
   Stun: "击破",
@@ -680,6 +685,20 @@ export function buildToolLoadoutInput({
     agentMindscape,
     coreSkillLevel,
     wEngineRefinement,
+  }
+}
+
+export function resolveBuildToolSourceUtilitySupport<
+  T extends CatalogItem & { specialty?: string },
+>(
+  supportedWEngines: readonly T[],
+  specialty: string | undefined,
+): BuildToolSourceUtilitySupport<T> {
+  const items = supportedWEngines.filter((item) => item.specialty === specialty)
+
+  return {
+    items,
+    names: catalogNames(items),
   }
 }
 
