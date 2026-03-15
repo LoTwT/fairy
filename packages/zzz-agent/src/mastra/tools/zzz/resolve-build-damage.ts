@@ -10,6 +10,7 @@ import {
   supportedStaticBuildWEngines,
 } from "zzz-data"
 import {
+  buildDamageSuccessResponse,
   buildIncompatibleWEngineResponse,
   buildToolScopeLabels,
   buildUnsupportedAgentResponse,
@@ -114,10 +115,9 @@ export const resolveBuildDamage = createTool({
         effectOverrides: input.effectOverrides,
       })
 
-      return {
-        found: true,
-        build: compactStaticBuildResult(build, input.includeDetails),
-      }
+      return buildDamageSuccessResponse(
+        compactStaticBuildResult(build, input.includeDetails),
+      )
     }
 
     const build = resolveStaticBuildDamage({
@@ -140,9 +140,8 @@ export const resolveBuildDamage = createTool({
       effectOverrides: input.effectOverrides,
     })
 
-    return {
-      found: true,
-      build: compactStaticBuildResult(build, input.includeDetails),
-    }
+    return buildDamageSuccessResponse(
+      compactStaticBuildResult(build, input.includeDetails),
+    )
   },
 })

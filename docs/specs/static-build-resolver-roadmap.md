@@ -8030,6 +8030,42 @@ caveatSummary` 这些兼容字段补齐。
 - `V206.3` 已完成：现有高层回归测试与 runtime 校验已覆盖
 - `V206.4` 已完成：roadmap、索引与架构文档已同步
 
+## 210. V207 build-tool success response contracts
+
+`V206` 收口后，`zzz-agent` 高层 build tools 里仍保留最后一批匿名成功返回：
+
+1. `resolve-build-damage`
+2. `resolve-build-skill-matrix`
+3. `resolve-build-trigger-matrix`
+4. `resolve-build-source-damage-views`
+5. `resolve-build-source-utility-views`
+6. `resolve-build-source-entries`
+
+`V207` 只解决这一件事：
+
+1. 把这批 `found: true` 成功返回固定成 shared helper contract，不改变字段名
+
+### 210.1 分阶段
+
+1. `V207.1` scope freeze
+2. `V207.2` shared helper / runtime alignment
+3. `V207.3` tests / prompt alignment
+4. `V207.4` docs closeout
+
+### 210.2 非目标
+
+1. 不改变 `build / matrix / views / collection` 的字段名
+2. 不改变底层 `zzz-data` runtime
+3. 不改变 `includeDetails` 语义
+4. 不新增新的 build 计算能力
+
+### 210.3 当前状态
+
+- `V207.1` 已完成：冻结到 build-tool success response contracts
+- `V207.2` 已完成：6 个高层 build tool 的成功返回已收进 shared helper
+- `V207.3` 已完成：现有高层回归测试与 runtime 校验已覆盖
+- `V207.4` 已完成：roadmap、索引与架构文档已同步
+
 ## 174. V171 explicit compact top-level summary effect summaries
 
 `V170` 收口后，compact contract 中下一批仍直接复用 raw effect summary item type 的显式缺口主要集中在 top-level `summary`：

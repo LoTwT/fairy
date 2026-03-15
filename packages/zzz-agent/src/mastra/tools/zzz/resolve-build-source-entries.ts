@@ -17,6 +17,7 @@ import {
 import {
   buildIncompatibleWEngineResponse,
   buildMissingSourceEntryFinalPanelResponse,
+  buildSourceEntryCollectionSuccessResponse,
   buildToolScopeLabels,
   buildUncoveredSourceEntryCoverageResponse,
   buildUncoveredSourceEntryUtilityOnlyResponse,
@@ -189,12 +190,8 @@ export const resolveBuildSourceEntries = createTool({
           )
     }
 
-    return {
-      found: true,
-      collection: compactStaticBuildSourceEntryCollection(
-        collection,
-        input.includeDetails,
-      ),
-    }
+    return buildSourceEntryCollectionSuccessResponse(
+      compactStaticBuildSourceEntryCollection(collection, input.includeDetails),
+    )
   },
 })

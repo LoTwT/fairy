@@ -12,6 +12,7 @@ import {
 import {
   buildIncompatibleWEngineResponse,
   buildMissingSourceUtilityWEngineResponse,
+  buildSourceUtilityViewsSuccessResponse,
   buildToolScopeLabels,
   buildUncoveredSourceUtilityWEngineResponse,
   buildUnsupportedAgentResponse,
@@ -117,12 +118,8 @@ export const resolveBuildSourceUtilityViews = createTool({
       )
     }
 
-    return {
-      found: true,
-      views: compactStaticBuildSourceUtilityViewsResult(
-        views,
-        input.includeDetails,
-      ),
-    }
+    return buildSourceUtilityViewsSuccessResponse(
+      compactStaticBuildSourceUtilityViewsResult(views, input.includeDetails),
+    )
   },
 })

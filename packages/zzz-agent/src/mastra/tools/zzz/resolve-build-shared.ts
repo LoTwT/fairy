@@ -1,4 +1,12 @@
-import type { AnomalyType } from "zzz-data"
+import type {
+  AnomalyType,
+  CompactStaticBuildResult,
+  CompactStaticBuildSkillMatrixResult,
+  CompactStaticBuildSourceDamageViewsResult,
+  CompactStaticBuildSourceEntryCollection,
+  CompactStaticBuildSourceUtilityViewsResult,
+  CompactStaticBuildTriggerMatrixResult,
+} from "zzz-data"
 import { z } from "zod"
 
 export interface CatalogItem {
@@ -97,6 +105,36 @@ export interface BuildToolUncoveredSourceEntryCoverageResponse {
   supportedSourceViewAgents: string[]
   supportedUtilityWEngines: string[]
   candidates?: string[]
+}
+
+export interface BuildToolDamageSuccessResponse {
+  found: true
+  build: CompactStaticBuildResult
+}
+
+export interface BuildToolSkillMatrixSuccessResponse {
+  found: true
+  matrix: CompactStaticBuildSkillMatrixResult
+}
+
+export interface BuildToolTriggerMatrixSuccessResponse {
+  found: true
+  matrix: CompactStaticBuildTriggerMatrixResult
+}
+
+export interface BuildToolSourceDamageViewsSuccessResponse {
+  found: true
+  views: CompactStaticBuildSourceDamageViewsResult
+}
+
+export interface BuildToolSourceUtilityViewsSuccessResponse {
+  found: true
+  views: CompactStaticBuildSourceUtilityViewsResult
+}
+
+export interface BuildToolSourceEntryCollectionSuccessResponse {
+  found: true
+  collection: CompactStaticBuildSourceEntryCollection
 }
 
 export const specialtyLabels = {
@@ -571,6 +609,60 @@ export function buildUncoveredSourceEntryCoverageResponse<
     supportedSourceViewAgents: catalogNames(sourceViewAgents),
     supportedUtilityWEngines,
     ...(candidates && candidates.length > 0 ? { candidates } : {}),
+  }
+}
+
+export function buildDamageSuccessResponse(
+  build: CompactStaticBuildResult,
+): BuildToolDamageSuccessResponse {
+  return {
+    found: true,
+    build,
+  }
+}
+
+export function buildSkillMatrixSuccessResponse(
+  matrix: CompactStaticBuildSkillMatrixResult,
+): BuildToolSkillMatrixSuccessResponse {
+  return {
+    found: true,
+    matrix,
+  }
+}
+
+export function buildTriggerMatrixSuccessResponse(
+  matrix: CompactStaticBuildTriggerMatrixResult,
+): BuildToolTriggerMatrixSuccessResponse {
+  return {
+    found: true,
+    matrix,
+  }
+}
+
+export function buildSourceDamageViewsSuccessResponse(
+  views: CompactStaticBuildSourceDamageViewsResult,
+): BuildToolSourceDamageViewsSuccessResponse {
+  return {
+    found: true,
+    views,
+  }
+}
+
+export function buildSourceUtilityViewsSuccessResponse(
+  views: CompactStaticBuildSourceUtilityViewsResult,
+): BuildToolSourceUtilityViewsSuccessResponse {
+  return {
+    found: true,
+    views,
+  }
+}
+
+export function buildSourceEntryCollectionSuccessResponse(
+  collection: CompactStaticBuildSourceEntryCollection,
+): BuildToolSourceEntryCollectionSuccessResponse {
+  return {
+    found: true,
+    collection,
   }
 }
 

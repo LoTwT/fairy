@@ -12,6 +12,7 @@ import {
 } from "zzz-data"
 import {
   buildIncompatibleWEngineResponse,
+  buildSourceDamageViewsSuccessResponse,
   buildToolScopeLabels,
   buildUncoveredSourceDamageViewResponse,
   buildUnsupportedAgentResponse,
@@ -134,13 +135,9 @@ export const resolveBuildSourceDamageViews = createTool({
         )
       }
 
-      return {
-        found: true,
-        views: compactStaticBuildSourceDamageViewsResult(
-          views,
-          input.includeDetails,
-        ),
-      }
+      return buildSourceDamageViewsSuccessResponse(
+        compactStaticBuildSourceDamageViewsResult(views, input.includeDetails),
+      )
     }
 
     const views = resolveStaticBuildSourceDamageViews({
@@ -170,12 +167,8 @@ export const resolveBuildSourceDamageViews = createTool({
       )
     }
 
-    return {
-      found: true,
-      views: compactStaticBuildSourceDamageViewsResult(
-        views,
-        input.includeDetails,
-      ),
-    }
+    return buildSourceDamageViewsSuccessResponse(
+      compactStaticBuildSourceDamageViewsResult(views, input.includeDetails),
+    )
   },
 })

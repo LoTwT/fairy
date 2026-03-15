@@ -11,6 +11,7 @@ import {
 } from "zzz-data"
 import {
   buildIncompatibleWEngineResponse,
+  buildSkillMatrixSuccessResponse,
   buildToolScopeLabels,
   buildUnsupportedAgentResponse,
   buildUnsupportedDriveDiscResponse,
@@ -159,9 +160,8 @@ export const resolveBuildSkillMatrix = createTool({
       effectOverrides: input.effectOverrides,
     })
 
-    return {
-      found: true,
-      matrix: compactStaticBuildSkillMatrixResult(matrix, input.includeDetails),
-    }
+    return buildSkillMatrixSuccessResponse(
+      compactStaticBuildSkillMatrixResult(matrix, input.includeDetails),
+    )
   },
 })

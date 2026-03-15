@@ -12,6 +12,7 @@ import {
 import {
   buildIncompatibleWEngineResponse,
   buildToolScopeLabels,
+  buildTriggerMatrixSuccessResponse,
   buildUnsupportedAgentResponse,
   buildUnsupportedAnomalyTypeResponse,
   buildUnsupportedDamageTypeResponse,
@@ -139,12 +140,8 @@ export const resolveBuildTriggerMatrix = createTool({
       effectOverrides: input.effectOverrides,
     })
 
-    return {
-      found: true,
-      matrix: compactStaticBuildTriggerMatrixResult(
-        matrix,
-        input.includeDetails,
-      ),
-    }
+    return buildTriggerMatrixSuccessResponse(
+      compactStaticBuildTriggerMatrixResult(matrix, input.includeDetails),
+    )
   },
 })
