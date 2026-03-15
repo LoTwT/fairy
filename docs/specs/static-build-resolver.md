@@ -945,3 +945,6 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 194. `V194` explicit compact skill row metadata sources：当前阶段已收口；compact `skill-matrix row` 的结构语义字段已改为显式 compact types，不再通过 indexed access 复用 raw skill-matrix row contract，见 [静态构筑解析系统 V194](./static-build-resolver-v194.md)
 195. `V195` explicit compact detail source types：当前阶段已收口；compact `diagnostic / source-note / trace` 三类 detail entry 的 `sourceType` 已统一为显式 compact source type，见 [静态构筑解析系统 V195](./static-build-resolver-v195.md)
 196. `V196` explicit compact base damage stat summaries：当前阶段已收口；compact summary 层的 `baseDamageStat` 已统一为显式 compact type，见 [静态构筑解析系统 V196](./static-build-resolver-v196.md)
+197. `V197` explicit compact profile and loadout traits：当前阶段已收口；compact `profile / loadout` 的 trait 字段已统一为显式 compact types，不再通过 indexed access 复用 raw trait shape，见 [静态构筑解析系统 V197](./static-build-resolver-v197.md)
+198. `V198` explicit compact trace status：当前阶段已收口；compact `trace.status` 已改为显式 compact type，不再通过 indexed access 复用 raw trace contract，见 [静态构筑解析系统 V198](./static-build-resolver-v198.md)
+199. `V199` explicit compact skill row tag and attribute：当前阶段已收口；compact `skill-matrix row` 的 `skillTag / attribute` 已改为显式 compact types，不再通过 indexed access 复用 raw row trait shape，见 [静态构筑解析系统 V199](./static-build-resolver-v199.md)

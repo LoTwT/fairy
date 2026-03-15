@@ -11,6 +11,7 @@ import type {
   SheerDamageParams,
   VulnerabilityParams,
 } from "../calculator/types.js"
+import type { AgentAttribute, AgentSpecialty } from "../terms.js"
 import type {
   ResolveStaticBuildResult,
   ResolveStaticBuildSkillMatrixResult,
@@ -18,7 +19,6 @@ import type {
   ResolveStaticBuildSourceEntriesResult,
   ResolveStaticBuildSourceUtilityViewsResult,
   ResolveStaticBuildTriggerMatrixResult,
-  StaticBuildAgentCatalogEntry,
   StaticBuildAssumptionSummary,
   StaticBuildBaseMode,
   StaticBuildBucket,
@@ -41,6 +41,7 @@ import type {
   StaticBuildSkillMatrixRow,
   StaticBuildSkillMatrixRowDamageSummary,
   StaticBuildSkillMatrixRowMeta,
+  StaticBuildSkillTag,
   StaticBuildSourceDamageViewEffectSummaryItem,
   StaticBuildSourceDamageViewEntry,
   StaticBuildSourceDamageViewRequirement,
@@ -129,6 +130,24 @@ export type CompactStaticBuildTargetSize = "small" | "medium" | "large"
 
 export type CompactStaticBuildBaseDamageStat = "attack" | "sheerForce"
 
+export type CompactStaticBuildProfileId =
+  | "standard-normal"
+  | "standard-sheer"
+  | "standard-anomaly"
+  | "standard-disorder"
+  | "yixuan-sheer"
+
+export type CompactStaticBuildAgentSpecialty = AgentSpecialty
+
+export type CompactStaticBuildAgentAttribute = AgentAttribute
+
+export type CompactStaticBuildTraceStatus =
+  | "applied"
+  | "skipped"
+  | "unsupported"
+
+export type CompactStaticBuildSkillTag = StaticBuildSkillTag
+
 export interface CompactStaticBuildResult {
   profile: CompactStaticBuildProfile
   mode: CompactStaticBuildMode
@@ -189,7 +208,7 @@ export type CompactStaticBuildMode = StaticBuildMode
 export type CompactStaticBuildBaseMode = StaticBuildBaseMode
 
 export interface CompactStaticBuildProfile {
-  id: StaticBuildProfileResult["id"]
+  id: CompactStaticBuildProfileId
   name: string
 }
 
@@ -200,14 +219,14 @@ export interface CompactStaticBuildCatalogEntry {
 }
 
 export interface CompactStaticBuildAgentCatalogEntry extends CompactStaticBuildCatalogEntry {
-  specialty: StaticBuildResolvedLoadout["agent"]["specialty"]
-  defaultAttribute: StaticBuildResolvedLoadout["agent"]["defaultAttribute"]
-  defaultDamageType?: StaticBuildAgentCatalogEntry["defaultDamageType"]
-  profileId?: StaticBuildAgentCatalogEntry["profileId"]
+  specialty: CompactStaticBuildAgentSpecialty
+  defaultAttribute: CompactStaticBuildAgentAttribute
+  defaultDamageType?: CompactStaticBuildSourceDamageType
+  profileId?: CompactStaticBuildProfileId
 }
 
 export interface CompactStaticBuildWEngineCatalogEntry extends CompactStaticBuildCatalogEntry {
-  specialty: NonNullable<StaticBuildResolvedLoadout["wEngine"]>["specialty"]
+  specialty: CompactStaticBuildAgentSpecialty
 }
 
 export interface CompactStaticBuildDriveDiscSet {
@@ -459,7 +478,7 @@ export interface CompactStaticBuildTraceItem {
   sourceType: CompactStaticBuildSourceType
   sourceName: string
   label: string
-  status: StaticBuildTraceItem["status"]
+  status: CompactStaticBuildTraceStatus
   reason?: string
   stacks?: number
   modifiers?: CompactStaticBuildTraceModifier[]
@@ -561,9 +580,9 @@ export interface StaticBuildCompactSkillMatrixRow {
   group: string
   label: string
   metadata: CompactStaticBuildSkillMatrixRowMeta
-  skillTag: StaticBuildSkillMatrixRow["skillTag"]
+  skillTag: CompactStaticBuildSkillTag
   damageType: CompactStaticBuildSourceDamageType
-  attribute: StaticBuildSkillMatrixRow["attribute"]
+  attribute: CompactStaticBuildAgentAttribute
   combatTags: string[]
   skillMultiplier: string
   damage: StaticBuildSkillMatrixRowDamageSummary

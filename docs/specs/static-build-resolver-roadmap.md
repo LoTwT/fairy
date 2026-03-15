@@ -7689,6 +7689,105 @@ caveatSummary` 这些兼容字段补齐。
 - `V196.3` 已完成：现有测试与 runtime 校验已覆盖
 - `V196.4` 已完成：roadmap、索引与架构文档已同步
 
+## 200. V197 explicit compact profile and loadout traits
+
+`V196` 收口后，compact header / loadout contract 中仍直接复用 raw trait shape 的稳定缺口集中在：
+
+1. `CompactStaticBuildProfile.id`
+2. `CompactStaticBuildAgentCatalogEntry.specialty`
+3. `CompactStaticBuildAgentCatalogEntry.defaultAttribute`
+4. `CompactStaticBuildAgentCatalogEntry.defaultDamageType`
+5. `CompactStaticBuildAgentCatalogEntry.profileId`
+6. `CompactStaticBuildWEngineCatalogEntry.specialty`
+
+`V197` 只解决这一件事：
+
+1. 把 compact `profile / loadout` 的 trait 字段统一改为显式 compact types
+
+### 200.1 分阶段
+
+1. `V197.1` scope freeze
+2. `V197.2` runtime/type contract alignment
+3. `V197.3` tests / prompt alignment
+4. `V197.4` docs closeout
+
+### 200.2 非目标
+
+1. 不改变 `profile / loadout` 的运行时值
+2. 不改变 catalog 解析逻辑
+3. 不改变 compact header 结构
+4. 不改变 matrix / source-view / trigger-view 的 runtime 生成逻辑
+
+### 200.3 当前状态
+
+- `V197.1` 已完成：冻结到 explicit compact profile and loadout traits
+- `V197.2` 已完成：compact `profile / loadout` 的 trait 字段已统一为显式 compact types
+- `V197.3` 已完成：现有测试与 runtime 校验已覆盖
+- `V197.4` 已完成：roadmap、索引与架构文档已同步
+
+## 201. V198 explicit compact trace status
+
+`V197` 收口后，compact detail entry 中仍有一处直接复用 raw trace enum shape 的稳定缺口：
+
+1. `CompactStaticBuildTraceItem.status`
+
+`V198` 只解决这一件事：
+
+1. 把 compact `trace.status` 改为显式 compact type
+
+### 201.1 分阶段
+
+1. `V198.1` scope freeze
+2. `V198.2` runtime/type contract alignment
+3. `V198.3` tests / prompt alignment
+4. `V198.4` docs closeout
+
+### 201.2 非目标
+
+1. 不改变 trace item 的运行时值
+2. 不改变 `sourceType / bucket / combine`
+3. 不改变 trace 生成逻辑
+4. 不改变任何 summary 结构
+
+### 201.3 当前状态
+
+- `V198.1` 已完成：冻结到 explicit compact trace status
+- `V198.2` 已完成：compact `trace.status` 已改为显式 compact type
+- `V198.3` 已完成：现有测试与 runtime 校验已覆盖
+- `V198.4` 已完成：roadmap、索引与架构文档已同步
+
+## 202. V199 explicit compact skill row tag and attribute
+
+`V198` 收口后，compact `skill-matrix row` 中仍直接复用 raw row trait shape 的稳定缺口剩下两处：
+
+1. `StaticBuildCompactSkillMatrixRow.skillTag`
+2. `StaticBuildCompactSkillMatrixRow.attribute`
+
+`V199` 只解决这一件事：
+
+1. 把 compact `skill-matrix row` 的 `skillTag / attribute` 统一改为显式 compact types
+
+### 202.1 分阶段
+
+1. `V199.1` scope freeze
+2. `V199.2` runtime/type contract alignment
+3. `V199.3` tests / prompt alignment
+4. `V199.4` docs closeout
+
+### 202.2 非目标
+
+1. 不改变 row 的运行时值
+2. 不改变 `metadata / damageType / summary / damage / build`
+3. 不改变 matrix 生成逻辑
+4. 不改变 `includeDetails` 语义
+
+### 202.3 当前状态
+
+- `V199.1` 已完成：冻结到 explicit compact skill row tag and attribute
+- `V199.2` 已完成：compact `skill-matrix row` 的 `skillTag / attribute` 已改为显式 compact types
+- `V199.3` 已完成：现有测试与 runtime 校验已覆盖
+- `V199.4` 已完成：roadmap、索引与架构文档已同步
+
 ## 174. V171 explicit compact top-level summary effect summaries
 
 `V170` 收口后，compact contract 中下一批仍直接复用 raw effect summary item type 的显式缺口主要集中在 top-level `summary`：
