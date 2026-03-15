@@ -287,7 +287,7 @@ export interface StaticBuildEffectCondition {
   skillTags?: StaticBuildSkillTag[]
   attributes?: AgentAttribute[]
   disorderSourceTypes?: AnomalyType[]
-  minimumMindscape?: number
+  minimumMindscape?: StaticBuildAgentMindscape
   requireExtraAbility?: boolean
   requireStunned?: boolean
   combatTags?: string[]
@@ -323,7 +323,7 @@ export interface StaticBuildModifierDefinition {
 
 export interface StaticBuildEffectDefinition {
   id: string
-  sourceType: "agent" | "w-engine" | "drive-disc"
+  sourceType: StaticBuildSourceType
   sourceId: string
   sourceName: string
   label: string
