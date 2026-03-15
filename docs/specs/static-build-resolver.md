@@ -976,3 +976,4 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 225. `V225` single-build execution context helper contracts：当前阶段已收口；`resolve-build-damage.ts` 的 `loadout + resolved scenario` 已收进 shared helper，不改变任何 tool 的输入输出 shape，见 [静态构筑解析系统 V225](./static-build-resolver-v225.md)
 226. `V226` skill-matrix execution context helper contracts：当前阶段已收口；`resolve-build-skill-matrix.ts` 的 `loadout + resolved context` 已收进 shared helper，不改变任何 tool 的输入输出 shape，见 [静态构筑解析系统 V226](./static-build-resolver-v226.md)
 227. `V227` source-utility execution context helper contracts：当前阶段已收口；`resolve-build-source-utility-views.ts` 的 `loadout + sourceUtilitySupport` 已收进 shared helper，不改变任何 tool 的输入输出 shape，见 [静态构筑解析系统 V227](./static-build-resolver-v227.md)
+228. `V228` source-damage response helper contracts：当前阶段已收口；`resolve-build-source-damage-views.ts` 的空结果 coverage / 非空 success 后处理已收进 shared helper，不改变任何 tool 的输入输出 shape，见 [静态构筑解析系统 V228](./static-build-resolver-v228.md)

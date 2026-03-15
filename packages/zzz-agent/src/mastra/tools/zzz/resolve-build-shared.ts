@@ -362,6 +362,12 @@ export interface BuildToolResolveSourceDamageCoverageResponseOptions<
   supportedAgents: readonly TAgent[]
 }
 
+export interface BuildToolResolveSourceDamageViewsResponseOptions<
+  TAgent extends CatalogItem,
+> extends BuildToolResolveSourceDamageCoverageResponseOptions<TAgent> {
+  views: CompactStaticBuildSourceDamageViewsResult
+}
+
 export interface BuildToolResolveSourceEntryCoverageResponseOptions<
   TSourceViewAgent extends CatalogItem,
   TWEngine extends CatalogItem,
@@ -1348,6 +1354,23 @@ export function resolveBuildToolSourceDamageCoverageResponse<
     options.supportedAgents,
     options.agentName,
   )
+}
+
+export function resolveBuildToolSourceDamageViewsResponse<
+  TAgent extends CatalogItem,
+>(
+  options: BuildToolResolveSourceDamageViewsResponseOptions<TAgent>,
+):
+  | BuildToolUncoveredSourceDamageViewResponse
+  | BuildToolSourceDamageViewsSuccessResponse {
+  if (options.views.entries.length === 0) {
+    return resolveBuildToolSourceDamageCoverageResponse({
+      agentName: options.agentName,
+      supportedAgents: options.supportedAgents,
+    })
+  }
+
+  return buildSourceDamageViewsSuccessResponse(options.views)
 }
 
 export function buildMissingSourceUtilityWEngineResponse<T extends CatalogItem>(

@@ -9,10 +9,9 @@ import {
   supportedStaticBuildWEngines,
 } from "zzz-data"
 import {
-  buildSourceDamageViewsSuccessResponse,
   buildToolScopeLabels,
   resolveBuildInputSchema,
-  resolveBuildToolSourceDamageCoverageResponse,
+  resolveBuildToolSourceDamageViewsResponse,
   resolveBuildToolTriggeredDamageContext,
 } from "./resolve-build-shared"
 
@@ -60,15 +59,13 @@ export const resolveBuildSourceDamageViews = createTool({
       effectOverrides: input.effectOverrides,
     })
 
-    if (views.entries.length === 0) {
-      return resolveBuildToolSourceDamageCoverageResponse({
-        agentName: agent.name,
-        supportedAgents: supportedStaticBuildSourceViewAgents,
-      })
-    }
-
-    return buildSourceDamageViewsSuccessResponse(
-      compactStaticBuildSourceDamageViewsResult(views, input.includeDetails),
-    )
+    return resolveBuildToolSourceDamageViewsResponse({
+      agentName: agent.name,
+      supportedAgents: supportedStaticBuildSourceViewAgents,
+      views: compactStaticBuildSourceDamageViewsResult(
+        views,
+        input.includeDetails,
+      ),
+    })
   },
 })
