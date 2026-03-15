@@ -1,5 +1,4 @@
 import { createTool } from "@mastra/core/tools"
-import { z } from "zod"
 import {
   compactStaticBuildSkillMatrixResult,
   getCompatibleStaticBuildWEngines,
@@ -11,6 +10,7 @@ import {
 import {
   buildSkillMatrixSuccessResponse,
   buildToolScopeLabels,
+  resolveBuildSkillMatrixInputSchema,
   resolveBuildToolLoadoutContext,
   resolveBuildToolScenario,
 } from "./resolve-build-shared"
@@ -19,73 +19,7 @@ export const resolveBuildSkillMatrix = createTool({
   id: "resolve-build-skill-matrix",
   description:
     "基于 zzz-data 的静态构筑解析器批量计算全技能/全段伤害矩阵。当前仅支持强攻/命破代理人，以及对应特性的强攻/命破音擎；异常代理人暂只支持单次 resolver。",
-  inputSchema: z.object({
-    agent: z.string().describe("代理人名称或 ID"),
-    wEngine: z.string().optional().describe("音擎名称或 ID"),
-    driveDiscs: z
-      .array(
-        z.object({
-          name: z.string().describe("驱动盘名称或 ID"),
-          pieces: z.union([z.literal(2), z.literal(4)]),
-        }),
-      )
-      .optional(),
-    agentMindscape: z.number().int().min(0).max(6).optional(),
-    coreSkillLevel: z.number().min(1).max(7).optional().default(7),
-    wEngineRefinement: z.number().min(1).max(5).optional().default(1),
-    mode: z
-      .enum(["baseline", "full-buff", "manual"])
-      .optional()
-      .default("baseline"),
-    manualBaseMode: z.enum(["baseline", "full-buff"]).optional(),
-    finalPanel: z.object({
-      attack: z.number(),
-      baseAttack: z.number().optional(),
-      critRate: z.number(),
-      critDamage: z.number(),
-      hp: z.number().optional(),
-      sheerForce: z.number().optional(),
-      energyGenerationRate: z.number().optional(),
-      penetrationRate: z.number().optional(),
-      penetrationValue: z.number().optional(),
-    }),
-    context: z.object({
-      attribute: z.string().optional(),
-      extraAbilityActive: z.boolean().optional(),
-      combatTags: z.array(z.string()).optional(),
-      enemy: z.object({
-        attackerLevel: z.number().optional().default(60),
-        defenderBaseDefense: z.number(),
-        defenderResistance: z.number(),
-        defenseBonus: z.number().optional().default(0),
-        defenseReduction: z.number().optional().default(0),
-        resistanceReduction: z.number().optional().default(0),
-        ignoreResistance: z.number().optional().default(0),
-        vulnerabilityBonus: z.number().optional().default(0),
-        damageReduction: z.number().optional().default(0),
-        isStunned: z.boolean().optional().default(false),
-        stunVulnerability: z.number().optional().default(0),
-        nonStunVulnerability: z.number().optional().default(0),
-        specialMultiplier: z.number().optional().default(1),
-      }),
-    }),
-    effectOverrides: z
-      .array(
-        z.object({
-          effectId: z.string(),
-          enabled: z.boolean().optional(),
-          stacks: z.number().int().min(0).optional(),
-        }),
-      )
-      .optional(),
-    includeDetails: z
-      .boolean()
-      .optional()
-      .default(false)
-      .describe(
-        "是否返回 skill matrix 完整明细，包括顶层 matrix.assumptions / matrix.unsupportedEffects，以及每行的 row.assumptions / row.unsupportedEffects / row.diagnostics / row.sourceNotes / build。默认 false，以避免上下文过大。",
-      ),
-  }),
+  inputSchema: resolveBuildSkillMatrixInputSchema,
   execute: async (input) => {
     const loadoutResolution = resolveBuildToolLoadoutContext({
       scopeLabel: buildToolScopeLabels.skillMatrix,

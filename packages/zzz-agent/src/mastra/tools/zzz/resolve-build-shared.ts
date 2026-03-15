@@ -492,6 +492,64 @@ export const resolveBuildSourceEntriesInputSchema =
       .optional(),
   })
 
+export const skillMatrixFinalPanelSchema = finalPanelSchema.pick({
+  attack: true,
+  baseAttack: true,
+  critRate: true,
+  critDamage: true,
+  hp: true,
+  sheerForce: true,
+  energyGenerationRate: true,
+  penetrationRate: true,
+  penetrationValue: true,
+})
+
+export const resolveBuildSkillMatrixContextSchema = z.object({
+  attribute: z.string().optional(),
+  extraAbilityActive: z.boolean().optional(),
+  combatTags: z.array(z.string()).optional(),
+  enemy: enemySchema,
+})
+
+export const resolveBuildSkillMatrixInputSchema = z.object({
+  agent: z.string().describe("代理人名称或 ID"),
+  wEngine: z.string().optional().describe("音擎名称或 ID"),
+  driveDiscs: z
+    .array(
+      z.object({
+        name: z.string().describe("驱动盘名称或 ID"),
+        pieces: z.union([z.literal(2), z.literal(4)]),
+      }),
+    )
+    .optional(),
+  agentMindscape: z.number().int().min(0).max(6).optional(),
+  coreSkillLevel: z.number().min(1).max(7).optional().default(7),
+  wEngineRefinement: z.number().min(1).max(5).optional().default(1),
+  mode: z
+    .enum(["baseline", "full-buff", "manual"])
+    .optional()
+    .default("baseline"),
+  manualBaseMode: z.enum(["baseline", "full-buff"]).optional(),
+  finalPanel: skillMatrixFinalPanelSchema,
+  context: resolveBuildSkillMatrixContextSchema,
+  effectOverrides: z
+    .array(
+      z.object({
+        effectId: z.string(),
+        enabled: z.boolean().optional(),
+        stacks: z.number().int().min(0).optional(),
+      }),
+    )
+    .optional(),
+  includeDetails: z
+    .boolean()
+    .optional()
+    .default(false)
+    .describe(
+      "是否返回 skill matrix 完整明细，包括顶层 matrix.assumptions / matrix.unsupportedEffects，以及每行的 row.assumptions / row.unsupportedEffects / row.diagnostics / row.sourceNotes / build。默认 false，以避免上下文过大。",
+    ),
+})
+
 export function normalizeCatalogValue(value: string) {
   return value.toLowerCase().replace(/[\s\-_·・.()（）【】[\]「」]/g, "")
 }

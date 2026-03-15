@@ -967,3 +967,4 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 216. `V216` source-entry context helper contracts：当前阶段已收口；`resolve-build-source-entries.ts` 的 optional `scenario` / `finalPanel` gating 已收进 shared helper，不改变任何 tool 的输入输出 shape，见 [静态构筑解析系统 V216](./static-build-resolver-v216.md)
 217. `V217` build-tool loadout context helper contracts：当前阶段已收口；6 个高层 build tool 的标准 `agent / w-engine / drive-discs / loadout` setup 已收进 shared helper，不改变任何 tool 的输入输出 shape，见 [静态构筑解析系统 V217](./static-build-resolver-v217.md)
 218. `V218` skill-matrix context helper reuse：当前阶段已收口；`resolve-build-skill-matrix.ts` 已直接复用 shared attribute normalization，不再保留本地 `context.attribute` cast，见 [静态构筑解析系统 V218](./static-build-resolver-v218.md)
+219. `V219` skill-matrix input schema helper contracts：当前阶段已收口；`resolve-build-skill-matrix.ts` 的 `finalPanel / context / inputSchema` 已下沉到 shared helper，不改变任何 tool 的输入输出 shape，见 [静态构筑解析系统 V219](./static-build-resolver-v219.md)
