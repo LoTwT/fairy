@@ -111,6 +111,7 @@ export type {
   StaticBuildEffectCondition,
   StaticBuildEffectDefinition,
   StaticBuildEffectId,
+  StaticBuildEffectLabel,
   StaticBuildEffectOverride,
   StaticBuildEffectStacks,
   StaticBuildEnemyInput,
