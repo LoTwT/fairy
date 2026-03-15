@@ -9,6 +9,8 @@ export type AnomalyType =
   | "auricInk"
   | "frost"
 
+export type AttackerLevel = number
+
 // ---------- Per-multiplier parameter types ----------
 
 export interface DefenseParams {

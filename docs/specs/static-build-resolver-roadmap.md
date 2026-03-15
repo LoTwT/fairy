@@ -12224,3 +12224,36 @@ caveatSummary` 这些兼容字段补齐。
 - `V342.2` 已完成：segment token parser 已统一复用显式公开 contract
 - `V342.3` 已完成：校验与提交
 - `V342.4` 已完成：roadmap、索引与架构文档同步
+
+## 346. V343 calculator scalar input contracts
+
+### 346.1 目标
+
+`V343` 只解决一件事：
+
+- 把 `calculator/factors.ts` 中独立导出的裸 scalar helper 输入统一收成显式公开 contract，不改变任何公式逻辑。
+
+### 346.2 范围
+
+1. `AttackerLevel`
+2. `getAttackerLevelBase()`
+3. `calcBonusMultiplier()`
+4. `calcSheerBonusMultiplier()`
+5. `calcAnomalyProficiencyMultiplier()`
+6. `calcDamageLevelMultiplier()`
+7. `calcAnomalyBonusMultiplier()`
+8. `calcAnomalyCritMultiplier()`
+9. `calculator/index.ts` 对应 type export
+
+### 346.3 非目标
+
+1. 不改变任何 multiplier 公式
+2. 不调整 `DamageResult` 结构
+3. 不修改 normal / sheer / anomaly / disorder pipeline
+
+### 346.4 当前状态
+
+- `V343.1` 已完成：范围冻结到 calculator scalar helper contract
+- `V343.2` 已完成：独立 scalar helper 输入已统一复用显式公开 contract
+- `V343.3` 已完成：校验与提交
+- `V343.4` 已完成：roadmap、索引与架构文档同步

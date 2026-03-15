@@ -330,3 +330,4 @@ const total = base * bonus * crit * resistance * custom
 - `V340` modifier scalar tail contracts：当前阶段已收口；compact trace combine、`resolver.ts:formatEffectValue()` 与 `skill-matrix` 的 `segmentLabel / segmentIndex` 已统一复用显式 alias
 - `V341` resolver helper context contracts：当前阶段已收口；`resolver.ts` 中 effect match/apply helper 的上下文 shape 与 `parseSkillMultiplier()` 的输入输出已统一复用显式公开 contract
 - `V342` segment token parser contracts：当前阶段已收口；`matrix.ts` 中最后残留的 `parseSegmentToken(token: string)` helper 已统一复用显式公开 contract
+- `V343` calculator scalar input contracts：当前阶段已收口；`calculator/factors.ts` 中独立导出的 scalar helper 输入已统一复用显式公开 contract

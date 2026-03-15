@@ -2,11 +2,15 @@
 // Based on: https://ngabbs.com/read.php?tid=44468012
 
 import type {
+  AnomalyDamageParams,
   AnomalyType,
+  AttackerLevel,
   CritParams,
   DazeVulnerabilityParams,
   DefenseParams,
+  NormalDamageParams,
   ResistanceParams,
+  SheerDamageParams,
   VulnerabilityParams,
 } from "./types.js"
 
@@ -80,7 +84,9 @@ export const ATTACKER_LEVEL_BASE: Readonly<Record<number, number>> = {
  * Returns the attacker level base for the given level.
  * Levels above 60 return 794.
  */
-export function getAttackerLevelBase(level: number): number {
+export function getAttackerLevelBase(
+  level: AttackerLevel,
+): DefenseParams["attackerLevelBase"] {
   const clamped = Math.max(1, Math.min(level, 60))
   return ATTACKER_LEVEL_BASE[clamped] ?? 794
 }
@@ -190,7 +196,9 @@ export function calcExpectedCritMultiplier(params: CritParams): number {
  * Clamped to [0, 6] per spec, but we clamp at [0, ∞) in practice
  * (engine enforces the cap, not this function).
  */
-export function calcBonusMultiplier(bonusDamageSum: number): number {
+export function calcBonusMultiplier(
+  bonusDamageSum: NormalDamageParams["bonusDamageSum"],
+): number {
   return Math.max(0, 1 + bonusDamageSum)
 }
 
@@ -201,7 +209,9 @@ export function calcBonusMultiplier(bonusDamageSum: number): number {
  * = 1 + sheerBonusSum
  * Clamped to [0.2, 9].
  */
-export function calcSheerBonusMultiplier(sheerBonusSum: number): number {
+export function calcSheerBonusMultiplier(
+  sheerBonusSum: SheerDamageParams["sheerBonusSum"],
+): number {
   return Math.min(9, Math.max(0.2, 1 + sheerBonusSum))
 }
 
@@ -213,7 +223,7 @@ export function calcSheerBonusMultiplier(sheerBonusSum: number): number {
  * Clamped to [0, 10].
  */
 export function calcAnomalyProficiencyMultiplier(
-  anomalyProficiency: number,
+  anomalyProficiency: AnomalyDamageParams["virtualAgentAnomalyProficiency"],
 ): number {
   const floored = Math.floor(anomalyProficiency)
   return Math.min(10, Math.max(0, floored / 100))
@@ -226,7 +236,9 @@ export function calcAnomalyProficiencyMultiplier(
  * = trunc(1 + (level - 1) / 59, 4)
  * where trunc(x, 4) truncates to 4 decimal places.
  */
-export function calcDamageLevelMultiplier(level: number): number {
+export function calcDamageLevelMultiplier(
+  level: AnomalyDamageParams["virtualAgentLevel"],
+): number {
   const raw = 1 + (level - 1) / 59
   return Math.trunc(raw * 10000) / 10000
 }
@@ -239,7 +251,7 @@ export function calcDamageLevelMultiplier(level: number): number {
  * Clamped to [0, 3].
  */
 export function calcAnomalyBonusMultiplier(
-  anomalyBonusDamageSum: number,
+  anomalyBonusDamageSum: AnomalyDamageParams["anomalyBonusDamageSum"],
 ): number {
   return Math.min(3, Math.max(0, 1 + anomalyBonusDamageSum))
 }
@@ -252,7 +264,7 @@ export function calcAnomalyBonusMultiplier(
  * Clamped to [1, 3].
  */
 export function calcAnomalyCritMultiplier(
-  anomalyCritDamage: number,
+  anomalyCritDamage: AnomalyDamageParams["anomalyCritDamage"],
   isCrit: boolean,
 ): number {
   if (!isCrit) return 1

@@ -46,6 +46,7 @@ export {
 export type {
   AnomalyDamageParams,
   AnomalyType,
+  AttackerLevel,
   CritParams,
   DamageResult,
   DazeVulnerabilityParams,
