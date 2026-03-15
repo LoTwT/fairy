@@ -85,6 +85,20 @@ export interface BuildToolMissingFinalPanelResponse {
   message: string
 }
 
+export interface BuildToolUncoveredSourceEntryUtilityOnlyResponse {
+  found: false
+  message: string
+  supportedUtilityWEngines: string[]
+}
+
+export interface BuildToolUncoveredSourceEntryCoverageResponse {
+  found: false
+  message: string
+  supportedSourceViewAgents: string[]
+  supportedUtilityWEngines: string[]
+  candidates?: string[]
+}
+
 export const specialtyLabels = {
   Attack: "强攻",
   Stun: "击破",
@@ -529,6 +543,34 @@ export function buildMissingSourceEntryFinalPanelResponse(): BuildToolMissingFin
   return {
     found: false,
     message: `anomaly / disorder 的 ${buildToolScopeLabels.sourceEntryCollection} 需要完整 finalPanel（至少 attack、critRate、critDamage，以及异常相关面板）。`,
+  }
+}
+
+export function buildUncoveredSourceEntryUtilityOnlyResponse(
+  agentName: string,
+  supportedUtilityWEngines: string[],
+): BuildToolUncoveredSourceEntryUtilityOnlyResponse {
+  return {
+    found: false,
+    message: `当前 ${buildToolScopeLabels.sourceEntryCollection} 暂未覆盖 ${agentName} 的可返回条目；${buildToolScopeLabels.sourceUtilityView} 目前只覆盖音擎来源。`,
+    supportedUtilityWEngines,
+  }
+}
+
+export function buildUncoveredSourceEntryCoverageResponse<
+  T extends CatalogItem,
+>(
+  agentName: string,
+  sourceViewAgents: readonly T[],
+  supportedUtilityWEngines: string[],
+  candidates?: string[],
+): BuildToolUncoveredSourceEntryCoverageResponse {
+  return {
+    found: false,
+    message: `当前 ${buildToolScopeLabels.sourceEntryCollection} 暂未覆盖 ${agentName} 这套构筑的额外来源条目。`,
+    supportedSourceViewAgents: catalogNames(sourceViewAgents),
+    supportedUtilityWEngines,
+    ...(candidates && candidates.length > 0 ? { candidates } : {}),
   }
 }
 

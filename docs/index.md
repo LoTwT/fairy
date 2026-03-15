@@ -101,6 +101,7 @@
 - [静态构筑解析系统 V203](./specs/static-build-resolver-v203.md) — 当前阶段：已收口；`build` 层已补显式 `StaticBuildSpecialty`
 - [静态构筑解析系统 V204](./specs/static-build-resolver-v204.md) — 当前阶段：已收口；`compact.ts` 的导出 helper 参数签名已统一为显式公开类型
 - [静态构筑解析系统 V205](./specs/static-build-resolver-v205.md) — 当前阶段：已收口；`zzz-agent` 高层 source-view / source-entry tool 已统一 unsupported / coverage-gap 的 scope label，并保持 tool 自有 supported key 不漂移
+- [静态构筑解析系统 V206](./specs/static-build-resolver-v206.md) — 当前阶段：已收口；`source-entry collection` 的最后一批匿名 coverage-gap 返回已收进 shared helper，并继续保留 `supportedUtilityWEngines / supportedSourceViewAgents`
 - [静态构筑解析系统 V99](./specs/static-build-resolver-v99.md) — 当前阶段：已收口；`trigger-matrix summary.groups[*]` 已新增稳定 `caveatSummary`
 - [静态构筑解析系统 V100](./specs/static-build-resolver-v100.md) — 当前阶段：已收口；`trigger-matrix rows[*]` 与 compact row 已新增稳定 `caveatSummary`
 - [静态构筑解析系统 V101](./specs/static-build-resolver-v101.md) — 当前阶段：已收口；`source-utility-view entries[*]` 与 compact entry 已新增稳定 `caveatSummary`

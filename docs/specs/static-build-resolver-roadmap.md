@@ -7997,6 +7997,39 @@ caveatSummary` 这些兼容字段补齐。
 - `V205.3` 已完成：高层回归测试已覆盖 scope label 与 key 稳定性
 - `V205.4` 已完成：roadmap、索引与架构文档已同步
 
+## 209. V206 source-entry coverage-gap helper contracts
+
+`V205` 收口后，`source-entry collection` 仍保留最后一批匿名 coverage-gap 返回：
+
+1. utility-only 且未提供音擎
+2. anomaly / disorder 路径没有额外来源覆盖且未提供音擎
+3. 已提供音擎但当前构筑没有额外来源条目
+
+`V206` 只解决这一件事：
+
+1. 把这批 `source-entry collection` coverage-gap 返回固定成 shared helper contract，不改变字段名
+
+### 209.1 分阶段
+
+1. `V206.1` scope freeze
+2. `V206.2` shared helper / runtime alignment
+3. `V206.3` tests / prompt alignment
+4. `V206.4` docs closeout
+
+### 209.2 非目标
+
+1. 不改变 `source-entry collection` 的成功返回
+2. 不改变 `supportedSourceViewAgents / supportedUtilityWEngines` 的字段名
+3. 不改变 coverage-gap 判定逻辑
+4. 不新增新的 build 计算能力
+
+### 209.3 当前状态
+
+- `V206.1` 已完成：冻结到 source-entry coverage-gap helper contracts
+- `V206.2` 已完成：匿名 coverage-gap 返回已收进 shared helper
+- `V206.3` 已完成：现有高层回归测试与 runtime 校验已覆盖
+- `V206.4` 已完成：roadmap、索引与架构文档已同步
+
 ## 174. V171 explicit compact top-level summary effect summaries
 
 `V170` 收口后，compact contract 中下一批仍直接复用 raw effect summary item type 的显式缺口主要集中在 top-level `summary`：

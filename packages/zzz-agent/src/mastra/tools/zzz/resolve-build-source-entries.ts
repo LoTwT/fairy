@@ -18,6 +18,8 @@ import {
   buildIncompatibleWEngineResponse,
   buildMissingSourceEntryFinalPanelResponse,
   buildToolScopeLabels,
+  buildUncoveredSourceEntryCoverageResponse,
+  buildUncoveredSourceEntryUtilityOnlyResponse,
   buildUnsupportedAgentResponse,
   buildUnsupportedAnomalyTypeResponse,
   buildUnsupportedDriveDiscResponse,
@@ -158,37 +160,33 @@ export const resolveBuildSourceEntries = createTool({
 
     if (collection.entries.length === 0) {
       if (utilityOnly && !wEngine) {
-        return {
-          message: `当前 ${buildToolScopeLabels.sourceEntryCollection} 暂未覆盖 ${agent.name} 的可返回条目；${buildToolScopeLabels.sourceUtilityView} 目前只覆盖音擎来源。`,
-          found: false,
+        return buildUncoveredSourceEntryUtilityOnlyResponse(
+          agent.name,
           supportedUtilityWEngines,
-        }
+        )
       }
 
       if (!utilityOnly && !wEngine) {
-        return {
-          found: false,
-          message: `当前 ${buildToolScopeLabels.sourceEntryCollection} 暂未覆盖 ${agent.name} 这套构筑的额外来源条目。`,
-          supportedSourceViewAgents: catalogNames(
-            supportedStaticBuildSourceViewAgents,
-          ),
+        return buildUncoveredSourceEntryCoverageResponse(
+          agent.name,
+          supportedStaticBuildSourceViewAgents,
           supportedUtilityWEngines,
-        }
+        )
       }
 
-      return {
-        found: false,
-        message: utilityOnly
-          ? `当前 ${buildToolScopeLabels.sourceEntryCollection} 暂未覆盖 ${agent.name} 的可返回条目；${buildToolScopeLabels.sourceUtilityView} 目前只覆盖音擎来源。`
-          : `当前 ${buildToolScopeLabels.sourceEntryCollection} 暂未覆盖 ${agent.name} 这套构筑的额外来源条目。`,
-        supportedSourceViewAgents: catalogNames(
-          supportedStaticBuildSourceViewAgents,
-        ),
-        supportedUtilityWEngines,
-        candidates: input.wEngine
-          ? candidateNames(compatibleWEngines, input.wEngine)
-          : [],
-      }
+      return utilityOnly
+        ? buildUncoveredSourceEntryUtilityOnlyResponse(
+            agent.name,
+            supportedUtilityWEngines,
+          )
+        : buildUncoveredSourceEntryCoverageResponse(
+            agent.name,
+            supportedStaticBuildSourceViewAgents,
+            supportedUtilityWEngines,
+            input.wEngine
+              ? candidateNames(compatibleWEngines, input.wEngine)
+              : [],
+          )
     }
 
     return {
