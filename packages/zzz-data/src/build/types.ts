@@ -523,6 +523,8 @@ export interface StaticBuildSourceNoteGuidance {
   target?: StaticBuildSourceNoteGuidanceTarget
 }
 
+export type StaticBuildSourceNoteMessage = string
+
 export interface StaticBuildSourceNoteEntry {
   id: string
   sourceType: StaticBuildSourceType
@@ -531,7 +533,7 @@ export interface StaticBuildSourceNoteEntry {
   status: StaticBuildSourceNoteStatus
   guidance: StaticBuildSourceNoteGuidance
   keys: StaticBuildSourceNoteKeyList
-  message: string
+  message: StaticBuildSourceNoteMessage
 }
 
 export type StaticBuildDiagnosticKind =
@@ -549,13 +551,15 @@ export type StaticBuildDiagnosticOwner =
 
 export type StaticBuildDiagnosticKeyList = string[]
 
+export type StaticBuildDiagnosticMessage = string
+
 export interface StaticBuildDiagnosticEntry {
   kind: StaticBuildDiagnosticKind
   owner: StaticBuildDiagnosticOwner
   sourceType?: StaticBuildSourceType
   sourceId?: string
   keys: StaticBuildDiagnosticKeyList
-  message: string
+  message: StaticBuildDiagnosticMessage
 }
 
 export interface StaticBuildDiagnosticGroupSummary {

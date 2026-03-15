@@ -10407,5 +10407,35 @@ caveatSummary` 这些兼容字段补齐。
 - `V284.1` 已完成：冻结到 skill qualifier 列表 contract
 - `V284.2` 已完成：`types.ts` 已让 `StaticBuildSkillMatrixRowMeta.qualifiers` 统一复用显式 type
 - `V284.3` 已完成：`build/index.ts` 已正式导出这个 type
-- `V284.4` 进行中：等待现有 build / agent 测试与 runtime 校验完成
-- `V284.5` 进行中：等待 roadmap、索引与架构文档同步
+- `V284.4` 已完成：现有 build / agent 测试与 runtime 校验已覆盖
+- `V284.5` 已完成：roadmap、索引与架构文档已同步
+
+## 288. V285 build message text contracts
+
+`V284` 收口后，source-note / diagnostic 公开 contract 中的 `message` 仍以匿名 `string` 暴露，和前面的显式公开 contract 仍不对称。
+
+`V285` 只解决一件事：
+
+1. 为 source-note / diagnostic message 文本补显式 type，并让对应 entry 统一复用，不改变任何运行时行为
+
+### 288.1 分阶段
+
+1. `V285.1` scope freeze
+2. `V285.2` type alignment
+3. `V285.3` export alignment
+4. `V285.4` tests / runtime alignment
+5. `V285.5` docs closeout
+
+### 288.2 非目标
+
+1. 不改变 message 的字符串内容或生成逻辑
+2. 不处理 labels
+3. 不处理 bucket / value / condition 文本
+
+### 288.3 当前状态
+
+- `V285.1` 已完成：冻结到 source-note / diagnostic message 文本 contract
+- `V285.2` 已完成：`types.ts` 已让 `StaticBuildSourceNoteEntry.message` / `StaticBuildDiagnosticEntry.message` 统一复用显式 type
+- `V285.3` 已完成：`build/index.ts` 已正式导出这两个 type
+- `V285.4` 进行中：等待现有 build / agent 测试与 runtime 校验完成
+- `V285.5` 进行中：等待 roadmap、索引与架构文档同步
