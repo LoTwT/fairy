@@ -12312,3 +12312,30 @@ caveatSummary` 这些兼容字段补齐。
 - `V345.2` 已完成：版本周期文本输入与输出已统一复用显式 alias
 - `V345.3` 待完成：校验与提交
 - `V345.4` 待完成：roadmap、索引与架构文档同步
+
+## 349. V346 enemy category helper contracts
+
+### 349.1 目标
+
+`V346` 只解决一件事：
+
+- 给 enemy category helper 的输入补显式公开 contract，不改变任何分类语义和运行时判断。
+
+### 349.2 范围
+
+1. `EnemyCategoryCodeInput`
+2. `isEnemyCategoryCode(value: EnemyCategoryCodeInput)`
+3. 文档同步
+
+### 349.3 非目标
+
+1. 不扩展新的敌人分类代码
+2. 不改变 `enemyCategoryCodes`
+3. 不赋予这些 raw code 新的业务语义名称
+
+### 349.4 当前状态
+
+- `V346.1` 已完成：范围冻结到 enemy category helper 输入 contract
+- `V346.2` 已完成：`isEnemyCategoryCode()` 已统一复用显式输入 alias
+- `V346.3` 待完成：校验与提交
+- `V346.4` 待完成：roadmap、索引与架构文档同步

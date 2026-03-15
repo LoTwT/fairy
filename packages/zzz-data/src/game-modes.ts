@@ -24,7 +24,11 @@ export const enemyCategoryCodes = [0, 1] as const
 
 export type EnemyCategoryCode = (typeof enemyCategoryCodes)[number]
 
-export function isEnemyCategoryCode(value: number): value is EnemyCategoryCode {
+export type EnemyCategoryCodeInput = number
+
+export function isEnemyCategoryCode(
+  value: EnemyCategoryCodeInput,
+): value is EnemyCategoryCode {
   return enemyCategoryCodes.includes(value as EnemyCategoryCode)
 }
 

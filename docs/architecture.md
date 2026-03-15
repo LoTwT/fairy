@@ -333,3 +333,4 @@ const total = base * bonus * crit * resistance * custom
 - `V343` calculator scalar input contracts：当前阶段已收口；`calculator/factors.ts` 中独立导出的 scalar helper 输入已统一复用显式公开 contract
 - `V344` text helper input contracts：当前阶段已收口；`stripRichText()` 的输入已统一复用既有 `RichTextString` contract
 - `V345` version period text contracts：当前阶段已收口；cleaned 版本周期文本输入与输出已统一复用显式公开 contract
+- `V346` enemy category helper contracts：当前阶段已收口；`isEnemyCategoryCode()` 的输入已统一复用显式公开 contract

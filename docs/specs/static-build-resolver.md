@@ -1094,3 +1094,4 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 343. `V343` calculator scalar input contracts：当前阶段已收口；`calculator/factors.ts` 中独立导出的 scalar helper 输入已统一复用显式公开 contract，不改变任何公式逻辑，见 [静态构筑解析系统 V343](./static-build-resolver-v343.md)
 344. `V344` text helper input contracts：当前阶段已收口；`stripRichText()` 的输入已统一复用既有 `RichTextString` contract，不改变任何文本清洗逻辑，见 [静态构筑解析系统 V344](./static-build-resolver-v344.md)
 345. `V345` version period text contracts：当前阶段已收口；cleaned 版本周期文本输入与输出已统一复用显式公开 contract，不改变任何版本周期解析逻辑，见 [静态构筑解析系统 V345](./static-build-resolver-v345.md)
+346. `V346` enemy category helper contracts：当前阶段已收口；`isEnemyCategoryCode()` 的输入已统一复用显式公开 contract，不改变任何分类语义和运行时判断，见 [静态构筑解析系统 V346](./static-build-resolver-v346.md)
