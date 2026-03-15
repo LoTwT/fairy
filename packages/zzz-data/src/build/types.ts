@@ -19,6 +19,9 @@ export type StaticBuildSourceType = "agent" | "w-engine" | "drive-disc"
 export type StaticBuildEffectId = string
 export type StaticBuildSourceName = string
 export type StaticBuildEffectLabel = string
+export type StaticBuildEffectSummaryBucket = string
+export type StaticBuildEffectSummaryValue = string
+export type StaticBuildEffectSummaryCondition = string
 export type StaticBuildGroupLabel = string
 export type StaticBuildBaseDamageStat = "attack" | "sheerForce"
 export type StaticBuildSpecialty = AgentSpecialty
@@ -651,8 +654,8 @@ export interface StaticBuildResolveEffectSummaryItem {
   effectId: StaticBuildEffectId
   sourceName: StaticBuildSourceName
   label: StaticBuildEffectLabel
-  bucket: string
-  value: string
+  bucket: StaticBuildEffectSummaryBucket
+  value: StaticBuildEffectSummaryValue
 }
 
 export interface ResolveStaticBuildResult {
@@ -781,12 +784,12 @@ export interface StaticBuildSourceDamageViewEffectSummaryItem {
   effectId: StaticBuildEffectId
   sourceName: StaticBuildSourceName
   label: StaticBuildEffectLabel
-  bucket: string
-  value: string
+  bucket: StaticBuildEffectSummaryBucket
+  value: StaticBuildEffectSummaryValue
   appliedEntryCount: StaticBuildAppliedEntryCount
   totalEntryCount: StaticBuildTotalEntryCount
   appliesToAllEntries: boolean
-  condition: string
+  condition: StaticBuildEffectSummaryCondition
 }
 
 export type StaticBuildSourceDamageViewGroupKey = "standalone" | "delta"
@@ -1066,12 +1069,12 @@ export interface StaticBuildTriggerMatrixEffectSummaryItem {
   effectId: StaticBuildEffectId
   sourceName: StaticBuildSourceName
   label: StaticBuildEffectLabel
-  bucket: string
-  value: string
+  bucket: StaticBuildEffectSummaryBucket
+  value: StaticBuildEffectSummaryValue
   appliedRowCount: StaticBuildAppliedRowCount
   totalRowCount: StaticBuildTotalRowCount
   appliesToAllRows: boolean
-  condition: string
+  condition: StaticBuildEffectSummaryCondition
 }
 
 export type StaticBuildTriggerMatrixTemplateSource =
@@ -1230,12 +1233,12 @@ export interface StaticBuildSkillMatrixEffectSummaryItem {
   effectId: StaticBuildEffectId
   sourceName: StaticBuildSourceName
   label: StaticBuildEffectLabel
-  bucket: string
-  value: string
+  bucket: StaticBuildEffectSummaryBucket
+  value: StaticBuildEffectSummaryValue
   appliedRowCount: StaticBuildAppliedRowCount
   totalRowCount: StaticBuildTotalRowCount
   appliesToAllRows: boolean
-  condition: string
+  condition: StaticBuildEffectSummaryCondition
 }
 
 export interface ResolveStaticBuildSkillMatrixResult {
