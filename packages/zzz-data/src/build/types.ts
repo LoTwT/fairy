@@ -402,10 +402,12 @@ export interface StaticBuildModifierDefinition {
   value: (context: StaticBuildValueContext) => number
 }
 
+export type StaticBuildSourceId = string
+
 export interface StaticBuildEffectDefinition {
   id: StaticBuildEffectId
   sourceType: StaticBuildSourceType
-  sourceId: string
+  sourceId: StaticBuildSourceId
   sourceName: StaticBuildSourceName
   label: StaticBuildEffectLabel
   alreadyInPanel?: boolean
@@ -532,7 +534,7 @@ export type StaticBuildSourceNoteMessage = string
 export interface StaticBuildSourceNoteEntry {
   id: string
   sourceType: StaticBuildSourceType
-  sourceId: string
+  sourceId: StaticBuildSourceId
   owner: StaticBuildSourceNoteOwner
   status: StaticBuildSourceNoteStatus
   guidance: StaticBuildSourceNoteGuidance
@@ -561,7 +563,7 @@ export interface StaticBuildDiagnosticEntry {
   kind: StaticBuildDiagnosticKind
   owner: StaticBuildDiagnosticOwner
   sourceType?: StaticBuildSourceType
-  sourceId?: string
+  sourceId?: StaticBuildSourceId
   keys: StaticBuildDiagnosticKeyList
   message: StaticBuildDiagnosticMessage
 }
@@ -747,7 +749,7 @@ export interface StaticBuildSourceDamageViewEntry {
   label: StaticBuildEntryLabel
   metadata: StaticBuildSourceDamageViewMeta
   sourceType: StaticBuildSourceType
-  sourceId: string
+  sourceId: StaticBuildSourceId
   damageType: StaticBuildDamageType
   supported: boolean
   resolutionMode: StaticBuildSourceDamageViewResolutionMode
@@ -871,7 +873,7 @@ export interface StaticBuildSourceUtilityViewEntry {
   label: StaticBuildEntryLabel
   metadata: StaticBuildSourceUtilityViewMeta
   sourceType: StaticBuildSourceType
-  sourceId: string
+  sourceId: StaticBuildSourceId
   supported: boolean
   utilityType: StaticBuildSourceUtilityViewType
   resolutionMode: StaticBuildSourceUtilityViewResolutionMode
@@ -1074,7 +1076,7 @@ export interface StaticBuildTriggerMatrixRowMeta {
   templateSource: StaticBuildTriggerMatrixTemplateSource
   damageType: Extract<StaticBuildDamageType, "anomaly" | "disorder">
   sourceType?: StaticBuildSourceType
-  sourceId?: string
+  sourceId?: StaticBuildSourceId
   sourceStableKey?: string
   sourceViewId?: string
   sourceViewResolutionMode?: StaticBuildSourceDamageViewResolutionMode
