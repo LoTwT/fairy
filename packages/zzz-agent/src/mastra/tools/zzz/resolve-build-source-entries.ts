@@ -1,4 +1,3 @@
-import type { ResolveStaticBuildSourceEntriesInput } from "zzz-data"
 import { createTool } from "@mastra/core/tools"
 import { z } from "zod"
 import {
@@ -15,18 +14,16 @@ import {
   supportedStaticBuildWEngines,
 } from "zzz-data"
 import {
-  buildMissingSourceEntryFinalPanelResponse,
   buildSourceEntryCollectionSuccessResponse,
   buildToolResolvedLoadoutInput,
   buildToolScopeLabels,
   buildUncoveredSourceEntryCoverageResponse,
   buildUncoveredSourceEntryUtilityOnlyResponse,
   candidateNames,
-  finalPanelSchema,
   resolveBuildSourceEntriesInputSchema,
   resolveBuildToolAgent,
   resolveBuildToolDriveDiscSets,
-  resolveBuildToolOptionalScenario,
+  resolveBuildToolSourceEntriesContext,
   resolveBuildToolSourceUtilitySupport,
   resolveBuildToolWEngine,
 } from "./resolve-build-shared"
@@ -45,10 +42,14 @@ export const resolveBuildSourceEntries = createTool({
       ),
   }),
   execute: async (input) => {
-    const utilityOnly =
-      !input.scenario ||
-      input.scenario.damageType === "normal" ||
-      input.scenario.damageType === "sheer"
+    const contextResolution = resolveBuildToolSourceEntriesContext({
+      scenario: input.scenario,
+      finalPanel: input.finalPanel,
+    })
+    if (!contextResolution.ok) {
+      return contextResolution.response
+    }
+    const { utilityOnly, scenario, panel } = contextResolution.context
 
     const agentCatalog = utilityOnly
       ? supportedStaticBuildUtilityAgents
@@ -104,32 +105,6 @@ export const resolveBuildSourceEntries = createTool({
       coreSkillLevel: input.coreSkillLevel,
       wEngineRefinement: input.wEngineRefinement,
     })
-
-    const scenarioResolution = resolveBuildToolOptionalScenario(input.scenario)
-    if (!scenarioResolution.ok) {
-      return scenarioResolution.response
-    }
-    const scenario: ResolveStaticBuildSourceEntriesInput["scenario"] =
-      scenarioResolution.scenario
-
-    let panel: ResolveStaticBuildSourceEntriesInput["panel"]
-    if (
-      scenario &&
-      (scenario.damageType === "anomaly" || scenario.damageType === "disorder")
-    ) {
-      const fullPanel = finalPanelSchema.safeParse(input.finalPanel)
-      if (!fullPanel.success) {
-        return buildMissingSourceEntryFinalPanelResponse()
-      }
-      panel = fullPanel.data
-    } else if (input.finalPanel) {
-      panel = {
-        attack: input.finalPanel.attack ?? 0,
-        critRate: input.finalPanel.critRate ?? 0,
-        critDamage: input.finalPanel.critDamage ?? 0,
-        ...input.finalPanel,
-      }
-    }
 
     const collection = resolveStaticBuildSourceEntries({
       mode: input.mode,

@@ -7,6 +7,7 @@ import type {
   CompactStaticBuildSourceEntryCollection,
   CompactStaticBuildSourceUtilityViewsResult,
   CompactStaticBuildTriggerMatrixResult,
+  ResolveStaticBuildSourceEntriesInput,
   StaticBuildDriveDiscSetInput,
   StaticBuildLoadoutInput,
 } from "zzz-data"
@@ -215,6 +216,12 @@ export type BuildToolResolvedScenario =
 export interface BuildToolSourceUtilitySupport<T extends CatalogItem> {
   items: T[]
   names: string[]
+}
+
+export interface BuildToolResolvedSourceEntriesContext {
+  utilityOnly: boolean
+  scenario: ResolveStaticBuildSourceEntriesInput["scenario"]
+  panel: ResolveStaticBuildSourceEntriesInput["panel"]
 }
 
 export const specialtyLabels = {
@@ -945,6 +952,64 @@ export function buildMissingSourceEntryFinalPanelResponse(): BuildToolMissingFin
   return {
     found: false,
     message: `anomaly / disorder 的 ${buildToolScopeLabels.sourceEntryCollection} 需要完整 finalPanel（至少 attack、critRate、critDamage，以及异常相关面板）。`,
+  }
+}
+
+export function resolveBuildToolSourceEntriesContext(input: {
+  scenario: BuildToolScenarioInput | undefined
+  finalPanel: z.input<typeof finalPanelSchema> | undefined
+}):
+  | {
+      ok: true
+      context: BuildToolResolvedSourceEntriesContext
+    }
+  | {
+      ok: false
+      response:
+        | BuildToolMissingFinalPanelResponse
+        | BuildToolUnsupportedAnomalyTypeResponse
+    } {
+  const utilityOnly =
+    !input.scenario ||
+    input.scenario.damageType === "normal" ||
+    input.scenario.damageType === "sheer"
+
+  const scenarioResolution = resolveBuildToolOptionalScenario(input.scenario)
+  if (!scenarioResolution.ok) {
+    return scenarioResolution
+  }
+
+  const scenario = scenarioResolution.scenario
+  let panel: ResolveStaticBuildSourceEntriesInput["panel"]
+
+  if (
+    scenario &&
+    (scenario.damageType === "anomaly" || scenario.damageType === "disorder")
+  ) {
+    const fullPanel = finalPanelSchema.safeParse(input.finalPanel)
+    if (!fullPanel.success) {
+      return {
+        ok: false,
+        response: buildMissingSourceEntryFinalPanelResponse(),
+      }
+    }
+    panel = fullPanel.data
+  } else if (input.finalPanel) {
+    panel = {
+      attack: input.finalPanel.attack ?? 0,
+      critRate: input.finalPanel.critRate ?? 0,
+      critDamage: input.finalPanel.critDamage ?? 0,
+      ...input.finalPanel,
+    }
+  }
+
+  return {
+    ok: true,
+    context: {
+      utilityOnly,
+      scenario,
+      panel,
+    },
   }
 }
 
