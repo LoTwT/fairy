@@ -161,6 +161,8 @@ export type StaticBuildUtilityValue = number
 export type StaticBuildCooldownSeconds = number
 export type StaticBuildBucketValueMap = Record<string, number>
 export type StaticBuildFormulaMultiplierMap = Record<string, number>
+export type StaticBuildVariableBucketList = string[]
+export type StaticBuildVariableFormulaMultiplierList = string[]
 export type StaticBuildDefenderBaseDefense = number
 export type StaticBuildDefenderResistance = number
 export type StaticBuildDefenseBonus = number
@@ -1160,9 +1162,9 @@ export interface StaticBuildSkillMatrixSummary {
   penetrationRate: StaticBuildPenetrationRate
   penetrationValue: StaticBuildPenetrationValue
   commonBuckets: StaticBuildBucketValueMap
-  variableBuckets: string[]
+  variableBuckets: StaticBuildVariableBucketList
   commonFormulaMultipliers: StaticBuildFormulaMultiplierMap
-  variableFormulaMultipliers: string[]
+  variableFormulaMultipliers: StaticBuildVariableFormulaMultiplierList
   effectSummary: StaticBuildSkillMatrixEffectSummaryItem[]
   requirementSummary: StaticBuildSourceDamageViewRequirementSummary
   assumptionSummary: StaticBuildAssumptionSummary
@@ -1177,9 +1179,9 @@ export interface StaticBuildSkillMatrixGroupSummary {
   label: string
   count: StaticBuildGroupCount
   commonBuckets: StaticBuildBucketValueMap
-  variableBuckets: string[]
+  variableBuckets: StaticBuildVariableBucketList
   commonFormulaMultipliers: StaticBuildFormulaMultiplierMap
-  variableFormulaMultipliers: string[]
+  variableFormulaMultipliers: StaticBuildVariableFormulaMultiplierList
   effectSummary: StaticBuildSkillMatrixEffectSummaryItem[]
   requirementSummary: StaticBuildSourceDamageViewRequirementSummary
   assumptionSummary: StaticBuildAssumptionSummary

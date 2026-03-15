@@ -193,6 +193,8 @@ export type {
   StaticBuildUnsupportedEffectCount,
   StaticBuildUtilityAgentCatalogEntry,
   StaticBuildUtilityValue,
+  StaticBuildVariableBucketList,
+  StaticBuildVariableFormulaMultiplierList,
   StaticBuildVulnerabilityBonus,
   StaticBuildWEngineCatalogEntry,
   StaticBuildWEngineRefinement,
