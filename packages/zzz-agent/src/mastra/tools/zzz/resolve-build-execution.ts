@@ -21,6 +21,7 @@ import type {
   BuildToolResolvedSkillMatrixContext,
 } from "./resolve-build-scenario"
 import type {
+  BuildToolFinalPanelInput,
   BuildToolScenarioInput,
   BuildToolSkillMatrixContextInput,
 } from "./resolve-build-schemas"
@@ -103,7 +104,7 @@ export interface BuildToolResolveSourceEntriesExecutionContextOptions<
   TDriveDisc
 > {
   scenario: BuildToolScenarioInput | undefined
-  finalPanel: z.input<typeof finalPanelSchema> | undefined
+  finalPanel: BuildToolFinalPanelInput | undefined
   supportedSourceUtilityWEngines: readonly TWEngine[]
 }
 

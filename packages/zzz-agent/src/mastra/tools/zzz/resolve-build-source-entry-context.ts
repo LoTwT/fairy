@@ -1,10 +1,12 @@
-import type { z } from "zod"
 import type { ResolveStaticBuildSourceEntriesInput } from "zzz-data"
 import type {
   BuildToolMissingFinalPanelResponse,
   BuildToolUnsupportedAnomalyTypeResponse,
 } from "./resolve-build-contracts"
-import type { BuildToolScenarioInput } from "./resolve-build-schemas"
+import type {
+  BuildToolFinalPanelInput,
+  BuildToolScenarioInput,
+} from "./resolve-build-schemas"
 import { buildMissingSourceEntryFinalPanelResponse } from "./resolve-build-responses"
 import { resolveBuildToolOptionalScenario } from "./resolve-build-scenario"
 import { finalPanelSchema } from "./resolve-build-schemas"
@@ -17,7 +19,7 @@ export interface BuildToolResolvedSourceEntriesContext {
 
 export function resolveBuildToolSourceEntriesContext(input: {
   scenario: BuildToolScenarioInput | undefined
-  finalPanel: z.input<typeof finalPanelSchema> | undefined
+  finalPanel: BuildToolFinalPanelInput | undefined
 }):
   | {
       ok: true

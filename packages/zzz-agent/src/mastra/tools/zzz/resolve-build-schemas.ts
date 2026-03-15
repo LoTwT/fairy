@@ -107,6 +107,8 @@ export const finalPanelSchema = zod.object({
   penetrationValue: zod.number().optional(),
 })
 
+export type BuildToolFinalPanelInput = z.input<typeof finalPanelSchema>
+
 export const resolveBuildScenarioSchema = zod.discriminatedUnion("damageType", [
   zod.object({
     damageType: zod.literal("normal"),
