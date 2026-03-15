@@ -25,16 +25,27 @@ import type {
   StaticBuildAssumptionSummary,
   StaticBuildBaseMode,
   StaticBuildBucket,
+  StaticBuildCanonicalLabel,
   StaticBuildCaveatSummary,
   StaticBuildCombatTagList,
   StaticBuildDiagnosticEntry,
   StaticBuildDiagnosticKeyList,
   StaticBuildDiagnosticKind,
+  StaticBuildDiagnosticMessage,
   StaticBuildDiagnosticOwner,
   StaticBuildDiagnosticSummary,
+  StaticBuildDisplayName,
+  StaticBuildEffectId,
+  StaticBuildEffectLabel,
+  StaticBuildEffectSummaryBucket,
+  StaticBuildEffectSummaryCondition,
+  StaticBuildEffectSummaryValue,
   StaticBuildEntryCaveatSummary,
   StaticBuildEntryDamage,
+  StaticBuildEntryId,
+  StaticBuildEntryLabel,
   StaticBuildFormulaMultiplierMap,
+  StaticBuildGroupLabel,
   StaticBuildMode,
   StaticBuildProfileResult,
   StaticBuildRequirementKey,
@@ -45,7 +56,10 @@ import type {
   StaticBuildResolvedPanel,
   StaticBuildResolveEffectSummaryItem,
   StaticBuildResolveSummary,
+  StaticBuildRowId,
+  StaticBuildRowLabel,
   StaticBuildSkillMatrixEffectSummaryItem,
+  StaticBuildSkillMatrixGroupKey,
   StaticBuildSkillMatrixRow,
   StaticBuildSkillMatrixRowDamageSummary,
   StaticBuildSkillMatrixRowMeta,
@@ -60,11 +74,14 @@ import type {
   StaticBuildSourceDamageViewSummary,
   StaticBuildSourceEntry,
   StaticBuildSourceEntryCollectionSummary,
+  StaticBuildSourceId,
+  StaticBuildSourceName,
   StaticBuildSourceNoteEntry,
   StaticBuildSourceNoteGuidance,
   StaticBuildSourceNoteGuidanceKind,
   StaticBuildSourceNoteGuidanceTarget,
   StaticBuildSourceNoteKeyList,
+  StaticBuildSourceNoteMessage,
   StaticBuildSourceNoteOwner,
   StaticBuildSourceNoteStatus,
   StaticBuildSourceNoteSummary,
@@ -74,8 +91,10 @@ import type {
   StaticBuildSourceUtilityViewRequirement,
   StaticBuildSourceUtilityViewRequirementKind,
   StaticBuildSourceUtilityViewSummary,
+  StaticBuildStableKey,
   StaticBuildTraceItem,
   StaticBuildTraceModifier,
+  StaticBuildTraceReason,
   StaticBuildTriggerMatrixEffectSummaryItem,
   StaticBuildTriggerMatrixRow,
   StaticBuildTriggerMatrixRowMeta,
@@ -168,6 +187,26 @@ export type CompactStaticBuildTraceStatus =
 export type CompactStaticBuildSkillTag = StaticBuildSkillTag
 export type CompactStaticBuildFormulaMultiplierMap =
   StaticBuildFormulaMultiplierMap
+export type CompactStaticBuildDisplayName = StaticBuildDisplayName
+export type CompactStaticBuildEntryId = StaticBuildEntryId
+export type CompactStaticBuildEntryLabel = StaticBuildEntryLabel
+export type CompactStaticBuildRowId = StaticBuildRowId
+export type CompactStaticBuildRowLabel = StaticBuildRowLabel
+export type CompactStaticBuildCanonicalLabel = StaticBuildCanonicalLabel
+export type CompactStaticBuildStableKey = StaticBuildStableKey
+export type CompactStaticBuildSourceId = StaticBuildSourceId
+export type CompactStaticBuildSourceName = StaticBuildSourceName
+export type CompactStaticBuildEffectId = StaticBuildEffectId
+export type CompactStaticBuildEffectLabel = StaticBuildEffectLabel
+export type CompactStaticBuildEffectSummaryBucket =
+  StaticBuildEffectSummaryBucket
+export type CompactStaticBuildEffectSummaryValue = StaticBuildEffectSummaryValue
+export type CompactStaticBuildEffectSummaryCondition =
+  StaticBuildEffectSummaryCondition
+export type CompactStaticBuildTraceReason = StaticBuildTraceReason
+export type CompactStaticBuildGroupLabel = StaticBuildGroupLabel
+export type CompactStaticBuildSkillMatrixGroupKey =
+  StaticBuildSkillMatrixGroupKey
 export type CompactStaticBuildAliasList = StaticBuildAliasList
 export type CompactStaticBuildAssumptionList = StaticBuildAssumptionList
 export type CompactStaticBuildUnsupportedEffectList =
@@ -177,6 +216,8 @@ export type CompactStaticBuildSourceNoteKeyList = StaticBuildSourceNoteKeyList
 export type CompactStaticBuildCombatTagList = StaticBuildCombatTagList
 export type CompactStaticBuildSkillQualifierList = StaticBuildSkillQualifierList
 export type CompactStaticBuildRequirementKey = StaticBuildRequirementKey
+export type CompactStaticBuildDiagnosticMessage = StaticBuildDiagnosticMessage
+export type CompactStaticBuildSourceNoteMessage = StaticBuildSourceNoteMessage
 
 export interface CompactStaticBuildResult {
   profile: CompactStaticBuildProfile
@@ -239,12 +280,12 @@ export type CompactStaticBuildBaseMode = StaticBuildBaseMode
 
 export interface CompactStaticBuildProfile {
   id: CompactStaticBuildProfileId
-  name: string
+  name: CompactStaticBuildDisplayName
 }
 
 export interface CompactStaticBuildCatalogEntry {
-  id: string
-  name: string
+  id: CompactStaticBuildSourceId
+  name: CompactStaticBuildDisplayName
   aliases: CompactStaticBuildAliasList
 }
 
@@ -260,8 +301,8 @@ export interface CompactStaticBuildWEngineCatalogEntry extends CompactStaticBuil
 }
 
 export interface CompactStaticBuildDriveDiscSet {
-  id: string
-  name: string
+  id: CompactStaticBuildSourceId
+  name: CompactStaticBuildDisplayName
   aliases: CompactStaticBuildAliasList
   pieces: 2 | 4
 }
@@ -419,7 +460,7 @@ export interface CompactStaticBuildDamageResult {
 
 export interface CompactStaticBuildDiagnosticGroupSummary {
   key: StaticBuildDiagnosticKind
-  label: string
+  label: CompactStaticBuildGroupLabel
   count: number
 }
 
@@ -432,9 +473,9 @@ export interface CompactStaticBuildDiagnosticEntry {
   kind: StaticBuildDiagnosticKind
   owner: StaticBuildDiagnosticOwner
   sourceType?: CompactStaticBuildSourceType
-  sourceId?: string
+  sourceId?: CompactStaticBuildSourceId
   keys: CompactStaticBuildDiagnosticKeyList
-  message: string
+  message: CompactStaticBuildDiagnosticMessage
 }
 
 export interface CompactStaticBuildDiagnosticSummary {
@@ -450,7 +491,7 @@ export interface CompactStaticBuildDiagnosticSummary {
 
 export interface CompactStaticBuildSourceNoteGroupSummary {
   key: StaticBuildSourceNoteStatus
-  label: string
+  label: CompactStaticBuildGroupLabel
   count: number
 }
 
@@ -465,14 +506,14 @@ export interface CompactStaticBuildSourceNoteGuidance {
 }
 
 export interface CompactStaticBuildSourceNoteEntry {
-  id: string
+  id: CompactStaticBuildEntryId
   sourceType: CompactStaticBuildSourceType
-  sourceId: string
+  sourceId: CompactStaticBuildSourceId
   owner: StaticBuildSourceNoteOwner
   status: StaticBuildSourceNoteStatus
   guidance: CompactStaticBuildSourceNoteGuidance
   keys: CompactStaticBuildSourceNoteKeyList
-  message: string
+  message: CompactStaticBuildSourceNoteMessage
 }
 
 export interface CompactStaticBuildSourceNoteSummary {
@@ -504,12 +545,12 @@ export interface CompactStaticBuildTraceModifier {
 }
 
 export interface CompactStaticBuildTraceItem {
-  effectId: string
+  effectId: CompactStaticBuildEffectId
   sourceType: CompactStaticBuildSourceType
-  sourceName: string
-  label: string
+  sourceName: CompactStaticBuildSourceName
+  label: CompactStaticBuildEffectLabel
   status: CompactStaticBuildTraceStatus
-  reason?: string
+  reason?: CompactStaticBuildTraceReason
   stacks?: number
   modifiers?: CompactStaticBuildTraceModifier[]
 }
@@ -559,35 +600,35 @@ export interface CompactStaticBuildSourceUtilityViewRequirement {
 }
 
 export interface CompactStaticBuildResolveEffectSummaryItem {
-  effectId: string
-  sourceName: string
-  label: string
-  bucket: string
-  value: string
+  effectId: CompactStaticBuildEffectId
+  sourceName: CompactStaticBuildSourceName
+  label: CompactStaticBuildEffectLabel
+  bucket: CompactStaticBuildEffectSummaryBucket
+  value: CompactStaticBuildEffectSummaryValue
 }
 
 export interface CompactStaticBuildAppliedRowEffectSummaryItem {
-  effectId: string
-  sourceName: string
-  label: string
-  bucket: string
-  value: string
+  effectId: CompactStaticBuildEffectId
+  sourceName: CompactStaticBuildSourceName
+  label: CompactStaticBuildEffectLabel
+  bucket: CompactStaticBuildEffectSummaryBucket
+  value: CompactStaticBuildEffectSummaryValue
   appliedRowCount: number
   totalRowCount: number
   appliesToAllRows: boolean
-  condition: string
+  condition: CompactStaticBuildEffectSummaryCondition
 }
 
 export interface CompactStaticBuildAppliedEntryEffectSummaryItem {
-  effectId: string
-  sourceName: string
-  label: string
-  bucket: string
-  value: string
+  effectId: CompactStaticBuildEffectId
+  sourceName: CompactStaticBuildSourceName
+  label: CompactStaticBuildEffectLabel
+  bucket: CompactStaticBuildEffectSummaryBucket
+  value: CompactStaticBuildEffectSummaryValue
   appliedEntryCount: number
   totalEntryCount: number
   appliesToAllEntries: boolean
-  condition: string
+  condition: CompactStaticBuildEffectSummaryCondition
 }
 
 export type CompactStaticBuildSkillMatrixEffectSummaryItem =
@@ -606,9 +647,9 @@ export type CompactStaticBuildSourceEntryEffectSummaryItem =
   CompactStaticBuildAppliedEntryEffectSummaryItem
 
 export interface StaticBuildCompactSkillMatrixRow {
-  id: string
-  group: string
-  label: string
+  id: CompactStaticBuildRowId
+  group: CompactStaticBuildSkillMatrixGroupKey
+  label: CompactStaticBuildRowLabel
   metadata: CompactStaticBuildSkillMatrixRowMeta
   skillTag: CompactStaticBuildSkillTag
   damageType: CompactStaticBuildSourceDamageType
@@ -652,8 +693,8 @@ export interface CompactStaticBuildSkillMatrixRowMeta {
   actionName: string
   skillName: string
   qualifiers: CompactStaticBuildSkillQualifierList
-  canonicalLabel: string
-  stableKey: string
+  canonicalLabel: CompactStaticBuildCanonicalLabel
+  stableKey: CompactStaticBuildStableKey
   templateSource: CompactStaticBuildSkillMatrixTemplateSource
   sourceSkillTypeId: number
   sourceStatId: string
@@ -671,8 +712,8 @@ export interface CompactStaticBuildSkillMatrixRowMeta {
 }
 
 export interface CompactStaticBuildSkillMatrixGroupSummary {
-  key: string
-  label: string
+  key: CompactStaticBuildSkillMatrixGroupKey
+  label: CompactStaticBuildGroupLabel
   count: number
   commonBuckets: Record<string, number>
   variableBuckets: string[]

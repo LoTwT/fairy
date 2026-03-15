@@ -1058,4 +1058,5 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 307. `V307` build skill multiplier text contracts：当前阶段已收口；`skill-matrix row` 公开 contract 中的 `skillMultiplier` 已统一复用显式公开 type，不改变任何运行时行为，见 [静态构筑解析系统 V307](./static-build-resolver-v307.md)
 308. `V308` build summary key contracts：当前阶段已收口；`bucket / formula-multiplier` 相关公开 map/list 中的匿名 key 已统一复用显式公开 type，不改变任何运行时行为，见 [静态构筑解析系统 V308](./static-build-resolver-v308.md)
 309. `V309` build list element text contracts：当前阶段已收口；剩余公开 `string[]` alias 的元素已统一复用显式公开 type，不改变任何运行时行为，见 [静态构筑解析系统 V309](./static-build-resolver-v309.md)
-310. `V310` compact shared list/map contracts：当前阶段进行中；当前目标是为 `compact.ts` 顶层和 `skill-matrix` 里复用最频繁的匿名 list/map/key 补显式 compact contract，不改变任何运行时行为
+310. `V310` compact shared list/map contracts：当前阶段已收口；`compact.ts` 顶层和 `skill-matrix` 里复用最频繁的匿名 list/map/key 已统一复用显式 compact contract，不改变任何运行时行为，见 [静态构筑解析系统 V310](./static-build-resolver-v310.md)
+311. `V311` compact text contracts：当前阶段进行中；当前目标是为 `compact.ts` 中仍然直接暴露的 `id / label / name / sourceId / reason / effect-summary text` 补显式 compact contract，不改变任何运行时行为

@@ -11183,5 +11183,46 @@ caveatSummary` 这些兼容字段补齐。
 
 - `V310.1` 已完成：范围冻结到 compact shared list/map contract
 - `V310.2` 已完成：`compact.ts` 已统一复用显式 compact alias
-- `V310.3` 待开始：校验与提交
+- `V310.3` 已完成：全量校验与提交已通过
 - `V310.4` 已完成：roadmap、索引与架构文档已同步
+
+## 314. V311 compact text contracts
+
+### 314.1 目标
+
+`V311` 只解决一件事：
+
+- 为 `compact.ts` 中仍然直接暴露的 `id / label / name / sourceId / reason / effect-summary text` 补显式 compact contract
+
+### 314.2 范围
+
+1. `CompactStaticBuildDisplayName`
+2. `CompactStaticBuildEntryId`
+3. `CompactStaticBuildEntryLabel`
+4. `CompactStaticBuildRowId`
+5. `CompactStaticBuildRowLabel`
+6. `CompactStaticBuildCanonicalLabel`
+7. `CompactStaticBuildStableKey`
+8. `CompactStaticBuildSourceId`
+9. `CompactStaticBuildSourceName`
+10. `CompactStaticBuildEffectId`
+11. `CompactStaticBuildEffectLabel`
+12. `CompactStaticBuildEffectSummaryBucket`
+13. `CompactStaticBuildEffectSummaryValue`
+14. `CompactStaticBuildEffectSummaryCondition`
+15. `CompactStaticBuildTraceReason`
+16. `CompactStaticBuildGroupLabel`
+17. `CompactStaticBuildSkillMatrixGroupKey`
+
+### 314.3 非目标
+
+1. 不处理 `commonBuckets / variableBuckets`
+2. 不处理 `sourceStatId / sourceStatName / segmentLabel`
+3. 不处理 compact helper 的运行时逻辑
+
+### 314.4 当前状态
+
+- `V311.1` 已完成：范围冻结到 compact text contract
+- `V311.2` 已完成：`compact.ts` 已统一复用这批显式 compact text alias
+- `V311.3` 待开始：校验与提交
+- `V311.4` 已完成：roadmap、索引与架构文档已同步
