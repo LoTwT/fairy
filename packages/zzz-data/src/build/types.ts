@@ -1402,12 +1402,32 @@ export interface StaticBuildSkillMatrixRowDamageSummary {
 }
 
 export type StaticBuildSkillMatrixGroupKey = string
+export type StaticBuildAgentDetailsSkillTypeId = string
 export type StaticBuildActionName = string
 export type StaticBuildSkillName = string
 export type StaticBuildSourceStatId = string
 export type StaticBuildSourceStatName = string
 export type StaticBuildSegmentLabel = string
 export type StaticBuildSkillMultiplierText = string
+
+export interface StaticBuildSkillMatrixTemplate {
+  id: StaticBuildEntryId
+  agentId: StaticBuildAgentId
+  group: StaticBuildSkillMatrixGroupKey
+  label: StaticBuildRowLabel
+  skillTypeId: StaticBuildSourceSkillTypeId
+  statName: StaticBuildSourceStatName
+  occurrence?: StaticBuildSourceOccurrence
+  skillTag: StaticBuildSkillTag
+  damageType?: StaticBuildDamageType
+  attribute?: AgentAttribute
+  combatTags?: StaticBuildCombatTagList
+}
+
+export interface StaticBuildGenericSkillStatItem {
+  id: StaticBuildSourceStatId
+  name: StaticBuildSourceStatName
+}
 
 export interface StaticBuildSkillMatrixRow {
   id: StaticBuildRowId

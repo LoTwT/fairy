@@ -2,24 +2,28 @@ import type { AgentDetails } from "../gachabase/types.js"
 import type {
   ResolveStaticBuildSkillMatrixInput,
   ResolveStaticBuildSkillMatrixResult,
+  StaticBuildAgentDetailsSkillTypeId,
   StaticBuildAssumptionList,
   StaticBuildAssumptionSet,
   StaticBuildBucketValueMap,
   StaticBuildCombatTagList,
   StaticBuildCombatTagSet,
-  StaticBuildDamageType,
   StaticBuildEffectBucketLabelMap,
   StaticBuildEffectSummaryAccumulatorMap,
   StaticBuildFormulaMultiplierMap,
+  StaticBuildGenericSkillStatItem,
   StaticBuildRowEffectSummaryAccumulator,
   StaticBuildSkillMatrixAttributeSource,
   StaticBuildSkillMatrixEffectSummaryItem,
   StaticBuildSkillMatrixGroupRowMap,
   StaticBuildSkillMatrixRow,
   StaticBuildSkillMatrixRowMeta,
+  StaticBuildSkillMatrixTemplate,
   StaticBuildSkillMatrixTemplateSource,
   StaticBuildSkillTag,
   StaticBuildSourceDamageViewRequirementSummary,
+  StaticBuildSourceSkillTypeId,
+  StaticBuildSourceStatName,
   StaticBuildSourceStatOccurrenceMap,
   StaticBuildUnsupportedEffectList,
   StaticBuildUnsupportedEffectSet,
@@ -35,25 +39,6 @@ import {
   summarizeDiagnosticEntries,
   summarizeSourceNoteEntries,
 } from "./resolver.js"
-
-interface SkillMatrixTemplate {
-  id: string
-  agentId: string
-  group: string
-  label: string
-  skillTypeId: number
-  statName: string
-  occurrence?: number
-  skillTag: StaticBuildSkillTag
-  damageType?: StaticBuildDamageType
-  attribute?: string
-  combatTags?: StaticBuildCombatTagList
-}
-
-interface GenericSkillStatItem {
-  id: string
-  name: string
-}
 
 const segmentIndexByLabel = {
   一段: 1,
@@ -239,7 +224,7 @@ function inferSkillMatrixRowMeta(
   }
 }
 
-function getAgentDetails(agentId: string): AgentDetails {
+function getAgentDetails(agentId: StaticBuildAgentId): AgentDetails {
   const agent = (agentDetailsZh as AgentDetails[]).find(
     (item) => item.id === agentId,
   )
@@ -250,9 +235,9 @@ function getAgentDetails(agentId: string): AgentDetails {
 }
 
 function getSkillMultiplier(
-  agentId: string,
-  skillTypeId: number,
-  statName: string,
+  agentId: StaticBuildAgentId,
+  skillTypeId: StaticBuildSourceSkillTypeId,
+  statName: StaticBuildSourceStatName,
   occurrence = 1,
 ) {
   const agent = getAgentDetails(agentId)
@@ -278,11 +263,11 @@ function getSkillMultiplier(
   }
 }
 
-function isDamageStatName(name: string) {
+function isDamageStatName(name: StaticBuildSourceStatName) {
   return name.includes("伤害倍率")
 }
 
-function normalizeGenericStatLabel(name: string) {
+function normalizeGenericStatLabel(name: StaticBuildSourceStatName) {
   return name
     .replace(/伤害倍率/g, "")
     .replace(/\[|\]/g, "")
@@ -290,7 +275,10 @@ function normalizeGenericStatLabel(name: string) {
     .trim()
 }
 
-function inferGenericActionName(skillTypeId: string, damageIndex: number) {
+function inferGenericActionName(
+  skillTypeId: StaticBuildAgentDetailsSkillTypeId,
+  damageIndex: number,
+) {
   switch (skillTypeId) {
     case "0":
       return "普通攻击"
@@ -307,7 +295,7 @@ function inferGenericActionName(skillTypeId: string, damageIndex: number) {
   }
 }
 
-function inferGenericGroup(skillTypeId: string) {
+function inferGenericGroup(skillTypeId: StaticBuildAgentDetailsSkillTypeId) {
   switch (skillTypeId) {
     case "0":
       return "普通攻击"
@@ -325,7 +313,7 @@ function inferGenericGroup(skillTypeId: string) {
 }
 
 function inferGenericSkillTag(
-  skillTypeId: string,
+  skillTypeId: StaticBuildAgentDetailsSkillTypeId,
   damageIndex: number,
 ): StaticBuildSkillTag {
   switch (skillTypeId) {
@@ -344,15 +332,15 @@ function inferGenericSkillTag(
   }
 }
 
-function buildGeneratedSkillMatrixTemplates(agentId: string) {
+function buildGeneratedSkillMatrixTemplates(agentId: StaticBuildAgentId) {
   const agent = getAgentDetails(agentId)
-  const templates: SkillMatrixTemplate[] = []
+  const templates: StaticBuildSkillMatrixTemplate[] = []
 
   for (const skill of agent.skills) {
     const occurrenceByName: StaticBuildSourceStatOccurrenceMap = new Map()
     let damageIndex = 0
 
-    for (const stat of skill.stats as GenericSkillStatItem[]) {
+    for (const stat of skill.stats as StaticBuildGenericSkillStatItem[]) {
       const currentOccurrence = (occurrenceByName.get(stat.name) ?? 0) + 1
       occurrenceByName.set(stat.name, currentOccurrence)
       if (!isDamageStatName(stat.name)) continue

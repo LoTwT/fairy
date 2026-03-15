@@ -12041,3 +12041,37 @@ caveatSummary` 这些兼容字段补齐。
 - `V336.2` 已完成：catalog source item 与 helper 参数已统一复用显式公开 contract
 - `V336.3` 待完成：校验与提交
 - `V336.4` 待完成：roadmap、索引与架构文档同步
+
+## 340. V337 skill-matrix template contracts
+
+### 340.1 目标
+
+`V337` 只解决一件事：
+
+- 把 `matrix.ts` 中 skill-matrix template / source-stat helper 仍直接使用的本地 interface 与裸 `string/number` 参数统一收成显式公开 contract。
+
+### 340.2 范围
+
+1. `StaticBuildAgentDetailsSkillTypeId`
+2. `StaticBuildSkillMatrixTemplate`
+3. `StaticBuildGenericSkillStatItem`
+4. `getAgentDetails()`
+5. `getSkillMultiplier()`
+6. `inferGenericActionName()`
+7. `inferGenericGroup()`
+8. `inferGenericSkillTag()`
+9. `buildGeneratedSkillMatrixTemplates()`
+10. `build/index.ts` 对应 type export
+
+### 340.3 非目标
+
+1. 不改变 skill-matrix 生成逻辑
+2. 不调整 generic template 的标签推导规则
+3. 不修改最终矩阵输出字段
+
+### 340.4 当前状态
+
+- `V337.1` 已完成：范围冻结到 skill-matrix template/source-stat helper contract
+- `V337.2` 已完成：matrix template/source-stat helper 已统一复用显式公开 contract
+- `V337.3` 待完成：校验与提交
+- `V337.4` 待完成：roadmap、索引与架构文档同步
