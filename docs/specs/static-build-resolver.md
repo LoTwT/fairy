@@ -1045,4 +1045,5 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 294. `V294` build source id contracts：当前阶段已收口；effect/source-note/diagnostic/source-view/trigger-row metadata 中的 `sourceId` 已统一复用显式公开 type，不改变任何运行时行为，见 [静态构筑解析系统 V294](./static-build-resolver-v294.md)
 295. `V295` build catalog id contracts：当前阶段已收口；loadout / catalog 相关公开 contract 中的通用 catalog `id` 已统一复用显式公开 type，不改变任何运行时行为，见 [静态构筑解析系统 V295](./static-build-resolver-v295.md)
 296. `V296` build entry and row id contracts：当前阶段已收口；source-note / source-view / matrix row 相关公开 contract 中的通用 `id` 已统一复用显式公开 type，不改变任何运行时行为，见 [静态构筑解析系统 V296](./static-build-resolver-v296.md)
-297. `V297` build source-view link contracts：当前阶段进行中；当前目标是为 trigger-matrix row metadata 中对 source-view 的引用字段补显式公开 type，并统一复用，不改变任何运行时行为，见 [静态构筑解析系统 V297](./static-build-resolver-v297.md)
+297. `V297` build source-view link contracts：当前阶段已收口；trigger-matrix row metadata 中对 source-view 的引用字段已统一复用显式公开 type，不改变任何运行时行为，见 [静态构筑解析系统 V297](./static-build-resolver-v297.md)
+298. `V298` build requirement key contracts：当前阶段进行中；当前目标是为 requirement item 与通用 requirement summary group 中的 `key` 补显式公开 type，并统一复用，不改变任何运行时行为，见 [静态构筑解析系统 V298](./static-build-resolver-v298.md)

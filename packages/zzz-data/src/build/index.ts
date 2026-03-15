@@ -142,6 +142,7 @@ export type {
   StaticBuildRateCount,
   StaticBuildRemainingTime,
   StaticBuildRequirementCount,
+  StaticBuildRequirementKey,
   StaticBuildResistanceReduction,
   StaticBuildResolvedAnomalyProficiency,
   StaticBuildResolvedBuckets,

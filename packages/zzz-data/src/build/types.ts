@@ -699,7 +699,7 @@ export type StaticBuildSourceDamageViewRequirementKind =
 
 export interface StaticBuildSourceDamageViewRequirement {
   kind: StaticBuildSourceDamageViewRequirementKind
-  key: string
+  key: StaticBuildRequirementKey
   satisfied: boolean
 }
 
@@ -709,8 +709,10 @@ export interface StaticBuildEntryDamage {
   noCrit: StaticBuildNonCriticalTotal
 }
 
+export type StaticBuildRequirementKey = string
+
 export interface StaticBuildRequirementSummaryGroup<
-  TKey extends string = string,
+  TKey extends StaticBuildRequirementKey = StaticBuildRequirementKey,
 > {
   key: TKey
   count: StaticBuildRequirementCount
@@ -718,7 +720,9 @@ export interface StaticBuildRequirementSummaryGroup<
   unsatisfiedCount: StaticBuildUnsatisfiedRequirementCount
 }
 
-export interface StaticBuildRequirementSummary<TKey extends string = string> {
+export interface StaticBuildRequirementSummary<
+  TKey extends StaticBuildRequirementKey = StaticBuildRequirementKey,
+> {
   count: StaticBuildRequirementCount
   satisfiedCount: StaticBuildSatisfiedRequirementCount
   unsatisfiedCount: StaticBuildUnsatisfiedRequirementCount
@@ -848,7 +852,7 @@ export type StaticBuildSourceUtilityViewRequirementKind =
 
 export interface StaticBuildSourceUtilityViewRequirement {
   kind: StaticBuildSourceUtilityViewRequirementKind
-  key: string
+  key: StaticBuildRequirementKey
   satisfied: boolean
 }
 

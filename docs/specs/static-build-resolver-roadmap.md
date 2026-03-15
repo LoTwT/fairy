@@ -10797,5 +10797,35 @@ caveatSummary` 这些兼容字段补齐。
 - `V297.1` 已完成：冻结到 source-view link contract
 - `V297.2` 已完成：`types.ts` 已让 trigger-matrix row metadata 统一复用显式 type
 - `V297.3` 已完成：`build/index.ts` 已正式导出这个 type
-- `V297.4` 进行中：等待现有 build / agent 测试与 runtime 校验完成
-- `V297.5` 进行中：等待 roadmap、索引与架构文档同步
+- `V297.4` 已完成：现有 build / agent 测试与 runtime 校验已覆盖
+- `V297.5` 已完成：roadmap、索引与架构文档已同步
+
+## 301. V298 build requirement key contracts
+
+`V297` 收口后，requirement item 与通用 requirement summary group 中的 `key` 仍以匿名 `string` 暴露，和前面的显式公开 contract 仍不对称。
+
+`V298` 只解决一件事：
+
+1. 为 requirement `key` 补显式 type，并让 requirement item 与 summary group 默认统一复用，不改变任何运行时行为
+
+### 301.1 分阶段
+
+1. `V298.1` scope freeze
+2. `V298.2` type alignment
+3. `V298.3` export alignment
+4. `V298.4` tests / runtime alignment
+5. `V298.5` docs closeout
+
+### 301.2 非目标
+
+1. 不改变 requirement key 的字符串内容或分组逻辑
+2. 不处理 skill-matrix group `key`
+3. 不处理 source-note / diagnostic `keys`
+
+### 301.3 当前状态
+
+- `V298.1` 已完成：冻结到 requirement key contract
+- `V298.2` 已完成：`types.ts` 已让 requirement item 与 summary group 默认统一复用显式 type
+- `V298.3` 已完成：`build/index.ts` 已正式导出这个 type
+- `V298.4` 进行中：等待现有 build / agent 测试与 runtime 校验完成
+- `V298.5` 进行中：等待 roadmap、索引与架构文档同步
