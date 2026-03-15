@@ -3,13 +3,13 @@ import {
   compactStaticBuildSkillMatrixResult,
   resolveStaticBuildSkillMatrix,
 } from "zzz-data"
+import { buildToolScopeLabels } from "./resolve-build-contracts"
 import {
   buildToolDescriptions,
   buildToolSkillMatrixCatalogPreset,
 } from "./resolve-build-presets"
 import {
   buildSkillMatrixSuccessResponse,
-  buildToolScopeLabels,
   resolveBuildSkillMatrixInputSchema,
   resolveBuildToolSkillMatrixExecutionContext,
 } from "./resolve-build-shared"

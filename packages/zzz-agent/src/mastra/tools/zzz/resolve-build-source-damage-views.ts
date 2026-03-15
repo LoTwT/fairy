@@ -3,12 +3,12 @@ import {
   compactStaticBuildSourceDamageViewsResult,
   resolveStaticBuildSourceDamageViews,
 } from "zzz-data"
+import { buildToolScopeLabels } from "./resolve-build-contracts"
 import {
   buildToolDescriptions,
   buildToolSourceDamageViewCatalogPreset,
 } from "./resolve-build-presets"
 import {
-  buildToolScopeLabels,
   resolveBuildInputSchema,
   resolveBuildSourceDamageViewsIncludeDetailsSchema,
   resolveBuildToolSourceDamageViewsResponse,

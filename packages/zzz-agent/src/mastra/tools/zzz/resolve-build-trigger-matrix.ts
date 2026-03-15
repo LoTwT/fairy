@@ -3,12 +3,12 @@ import {
   compactStaticBuildTriggerMatrixResult,
   resolveStaticBuildTriggerMatrix,
 } from "zzz-data"
+import { buildToolScopeLabels } from "./resolve-build-contracts"
 import {
   buildToolDescriptions,
   buildToolTriggerMatrixCatalogPreset,
 } from "./resolve-build-presets"
 import {
-  buildToolScopeLabels,
   buildTriggerMatrixSuccessResponse,
   resolveBuildInputSchema,
   resolveBuildToolTriggeredDamageContext,

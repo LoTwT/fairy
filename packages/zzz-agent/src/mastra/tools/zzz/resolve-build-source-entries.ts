@@ -3,12 +3,12 @@ import {
   compactStaticBuildSourceEntryCollection,
   resolveStaticBuildSourceEntries,
 } from "zzz-data"
+import { buildToolScopeLabels } from "./resolve-build-contracts"
 import {
   buildToolDescriptions,
   buildToolSourceEntryCatalogPreset,
 } from "./resolve-build-presets"
 import {
-  buildToolScopeLabels,
   resolveBuildSourceEntriesIncludeDetailsSchema,
   resolveBuildSourceEntriesInputSchema,
   resolveBuildToolSourceEntriesExecutionContext,

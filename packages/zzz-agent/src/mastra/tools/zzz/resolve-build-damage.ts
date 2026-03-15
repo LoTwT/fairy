@@ -1,12 +1,12 @@
 import { createTool } from "@mastra/core/tools"
 import { compactStaticBuildResult, resolveStaticBuildDamage } from "zzz-data"
+import { buildToolScopeLabels } from "./resolve-build-contracts"
 import {
   buildToolDamageCatalogPreset,
   buildToolDescriptions,
 } from "./resolve-build-presets"
 import {
   buildDamageSuccessResponse,
-  buildToolScopeLabels,
   resolveBuildDamageIncludeDetailsSchema,
   resolveBuildInputSchema,
   resolveBuildToolDamageExecutionContext,
