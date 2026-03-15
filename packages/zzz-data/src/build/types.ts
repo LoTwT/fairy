@@ -51,6 +51,8 @@ export type StaticBuildSkillMatrixAttributeSource =
   | "context"
   | "template"
 
+export type StaticBuildSkillQualifierList = string[]
+
 export type StaticBuildBucket =
   | "attackPercent"
   | "flatAttack"
@@ -1107,7 +1109,7 @@ export interface StaticBuildSkillMatrixRowMeta {
   order: number
   actionName: string
   skillName: string
-  qualifiers: string[]
+  qualifiers: StaticBuildSkillQualifierList
   canonicalLabel: string
   stableKey: string
   templateSource: StaticBuildSkillMatrixTemplateSource

@@ -153,6 +153,7 @@ export type {
   StaticBuildSkillMatrixTemplateSource,
   StaticBuildSkillMultiplierFactor,
   StaticBuildSkillMultiplierInputValue,
+  StaticBuildSkillQualifierList,
   StaticBuildSkillTag,
   StaticBuildSourceDamageViewCount,
   StaticBuildSourceDamageViewEntry,

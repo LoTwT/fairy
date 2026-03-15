@@ -1031,4 +1031,5 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 280. `V280` build combat-tag list contracts：当前阶段已收口；build-layer 已新增显式 `StaticBuildCombatTagList`，并让 build-layer 公开 contract 中的 `combatTags` 统一复用这个 type，不改变任何运行时行为，见 [静态构筑解析系统 V280](./static-build-resolver-v280.md)
 281. `V281` build alias list contracts：当前阶段已收口；build-layer 已新增显式 `StaticBuildAliasList`，并让 build catalog 公开 contract 中的 `aliases` 统一复用这个 type，不改变任何运行时行为，见 [静态构筑解析系统 V281](./static-build-resolver-v281.md)
 282. `V282` build source-note key list contracts：当前阶段已收口；build-layer 已新增显式 `StaticBuildSourceNoteKeyList`，并让 source-note 公开 contract 中的 `keys` 统一复用这个 type，不改变任何运行时行为，见 [静态构筑解析系统 V282](./static-build-resolver-v282.md)
-283. `V283` build diagnostic key list contracts：当前阶段进行中；当前目标是为 diagnostic 公开 contract 中的 `keys` 补显式公开列表 type，并统一复用，不改变任何运行时行为，见 [静态构筑解析系统 V283](./static-build-resolver-v283.md)
+283. `V283` build diagnostic key list contracts：当前阶段已收口；build-layer 已新增显式 `StaticBuildDiagnosticKeyList`，并让 diagnostic 公开 contract 中的 `keys` 统一复用这个 type，不改变任何运行时行为，见 [静态构筑解析系统 V283](./static-build-resolver-v283.md)
+284. `V284` build skill qualifier list contracts：当前阶段进行中；当前目标是为 skill-matrix row metadata 中的 `qualifiers` 补显式公开列表 type，并统一复用，不改变任何运行时行为，见 [静态构筑解析系统 V284](./static-build-resolver-v284.md)
