@@ -1,5 +1,8 @@
+import type { AnomalyType } from "../calculator/types.js"
 import type {
+  StaticBuildDamageType,
   StaticBuildDynamicCountKey,
+  StaticBuildDynamicFlagKey,
   StaticBuildDynamicSnapshotInput,
   StaticBuildDynamicValueKey,
   StaticBuildEffectDefinition,
@@ -11,6 +14,7 @@ import type {
   StaticBuildSourceNoteOwner,
   StaticBuildSourceNoteStatus,
   StaticBuildSourceType,
+  StaticBuildStateFlagKey,
   StaticBuildStateSnapshotInput,
   StaticBuildStateValueKey,
   StaticBuildValueContext,
@@ -3989,53 +3993,22 @@ interface StaticBuildSourceNote {
   requiresMissingAnomalyMastery?: boolean
   requiresEnergyGenerationRate?: boolean
   requiresMissingEnergyGenerationRate?: boolean
-  requiredDynamicFlags?: readonly ("ariaDreamtime" | "burniceEmberState")[]
-  requiresMissingDynamicFlags?: readonly (
-    | "ariaDreamtime"
-    | "burniceEmberState"
-  )[]
-  requiredDynamicCounts?: readonly "burniceEmberExtraTriggers"[]
-  requiresMissingDynamicCounts?: readonly "burniceEmberExtraTriggers"[]
-  requiredDynamicValues?: readonly (
-    | "ariaExflowDamageRatio"
-    | "ariaStunnedDamageRatio"
-    | "burniceEmberDamageRatio"
-  )[]
-  requiredStateFlags?: readonly (
-    | "alicePolarityAssaultState"
-    | "miyabiFrostburnBreakState"
-  )[]
-  requiresMissingStateFlags?: readonly (
-    | "alicePolarityAssaultState"
-    | "miyabiFrostburnBreakState"
-  )[]
-  requiredStateValues?: readonly (
-    | "alicePolarityAssaultDamageRatio"
-    | "miyabiFrostburnBreakDamageRatio"
-  )[]
-  requiresMissingStateValues?: readonly (
-    | "alicePolarityAssaultDamageRatio"
-    | "miyabiFrostburnBreakDamageRatio"
-  )[]
+  requiredDynamicFlags?: readonly StaticBuildDynamicFlagKey[]
+  requiresMissingDynamicFlags?: readonly StaticBuildDynamicFlagKey[]
+  requiredDynamicCounts?: readonly StaticBuildDynamicCountKey[]
+  requiresMissingDynamicCounts?: readonly StaticBuildDynamicCountKey[]
+  requiredDynamicValues?: readonly StaticBuildDynamicValueKey[]
+  requiredStateFlags?: readonly StaticBuildStateFlagKey[]
+  requiresMissingStateFlags?: readonly StaticBuildStateFlagKey[]
+  requiredStateValues?: readonly StaticBuildStateValueKey[]
+  requiresMissingStateValues?: readonly StaticBuildStateValueKey[]
   requiredResolvedSnapshotBuckets?: readonly StaticBuildResolvedSnapshotBucketKey[]
   requiresMissingResolvedSnapshotBuckets?: readonly StaticBuildResolvedSnapshotBucketKey[]
   requiredResolvedSnapshotMultipliers?: readonly StaticBuildResolvedSnapshotMultiplierKey[]
   requiresMissingResolvedSnapshotMultipliers?: readonly StaticBuildResolvedSnapshotMultiplierKey[]
-  requiresMissingDynamicValues?: readonly (
-    | "ariaExflowDamageRatio"
-    | "ariaStunnedDamageRatio"
-    | "burniceEmberDamageRatio"
-  )[]
-  damageTypes?: readonly ("normal" | "sheer" | "anomaly" | "disorder")[]
-  disorderSourceTypes?: readonly (
-    | "fire"
-    | "electric"
-    | "ether"
-    | "ice"
-    | "physical"
-    | "auricInk"
-    | "frost"
-  )[]
+  requiresMissingDynamicValues?: readonly StaticBuildDynamicValueKey[]
+  damageTypes?: readonly StaticBuildDamageType[]
+  disorderSourceTypes?: readonly AnomalyType[]
   ownerOverride?: StaticBuildSourceNoteOwner
   statusOverride?: StaticBuildSourceNoteStatus
   keysOverride?: readonly string[]
