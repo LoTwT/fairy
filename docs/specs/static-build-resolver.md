@@ -958,3 +958,4 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 207. `V207` build-tool success response contracts：当前阶段已收口；6 个高层 build tool 的成功返回已收进 shared helper，并继续保留 `build / matrix / views / collection` 这些 tool 自有字段名，见 [静态构筑解析系统 V207](./static-build-resolver-v207.md)
 208. `V208` source-entry tool typed panel normalization：当前阶段已收口；`resolve-build-source-entries.ts` 已去掉 `panel / scenario` 两处 `as any`，并继续保留 utility-only partial `finalPanel` 输入能力，见 [静态构筑解析系统 V208](./static-build-resolver-v208.md)
 209. `V209` build-tool loadout helper contracts：当前阶段已收口；6 个高层 build tool 的 `driveDiscSets` 解析与 `loadout` 组装已收进 shared helper，不改变任何 tool 的输入输出 shape，见 [静态构筑解析系统 V209](./static-build-resolver-v209.md)
+210. `V210` build-tool catalog helper contracts：当前阶段已收口；6 个高层 build tool 的 `agent / wEngine` 解析与兼容校验已收进 shared helper，不改变任何 tool 的输入输出 shape，见 [静态构筑解析系统 V210](./static-build-resolver-v210.md)

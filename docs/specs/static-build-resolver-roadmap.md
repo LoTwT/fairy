@@ -8132,6 +8132,39 @@ caveatSummary` 这些兼容字段补齐。
 - `V209.3` 已完成：现有高层回归测试与 runtime 校验已覆盖
 - `V209.4` 已完成：roadmap、索引与架构文档已同步
 
+## 213. V210 build-tool catalog helper contracts
+
+`V209` 收口后，`zzz-agent` 高层 build tools 里剩余最明显的重复代码集中在：
+
+1. `agent` 解析
+2. `wEngine` 解析
+3. `wEngine` 与 `agent.specialty` 的兼容校验
+
+`V210` 只解决这一件事：
+
+1. 把这三块重复逻辑固定成 shared helper，不改变任何 tool 的输入输出 shape
+
+### 213.1 分阶段
+
+1. `V210.1` scope freeze
+2. `V210.2` shared helper / runtime alignment
+3. `V210.3` tests / prompt alignment
+4. `V210.4` docs closeout
+
+### 213.2 非目标
+
+1. 不改变任何 tool 的输入输出字段名
+2. 不改变 unsupported / incompatible message 的字段结构
+3. 不改变底层 `zzz-data` runtime
+4. 不新增新的 build 计算能力
+
+### 213.3 当前状态
+
+- `V210.1` 已完成：冻结到 build-tool agent / w-engine helper contracts
+- `V210.2` 已完成：6 个高层 build tool 的 agent / w-engine 解析已统一复用 shared helper
+- `V210.3` 已完成：现有高层回归测试与 runtime 校验已覆盖
+- `V210.4` 已完成：roadmap、索引与架构文档已同步
+
 ## 174. V171 explicit compact top-level summary effect summaries
 
 `V170` 收口后，compact contract 中下一批仍直接复用 raw effect summary item type 的显式缺口主要集中在 top-level `summary`：

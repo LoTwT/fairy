@@ -10,17 +10,15 @@ import {
   supportedStaticBuildUtilityWEngines,
 } from "zzz-data"
 import {
-  buildIncompatibleWEngineResponse,
   buildMissingSourceUtilityWEngineResponse,
   buildSourceUtilityViewsSuccessResponse,
   buildToolLoadoutInput,
   buildToolScopeLabels,
   buildUncoveredSourceUtilityWEngineResponse,
-  buildUnsupportedAgentResponse,
-  buildUnsupportedWEngineResponse,
-  findCatalogItem,
   resolveBuildSourceUtilityInputSchema,
+  resolveBuildToolAgent,
   resolveBuildToolDriveDiscSets,
+  resolveBuildToolWEngine,
 } from "./resolve-build-shared"
 
 export const resolveBuildSourceUtilityViews = createTool({
@@ -37,40 +35,31 @@ export const resolveBuildSourceUtilityViews = createTool({
       ),
   }),
   execute: async (input) => {
-    const agent = findCatalogItem(
+    const agentResolution = resolveBuildToolAgent(
+      buildToolScopeLabels.sourceUtilityView,
       supportedStaticBuildUtilityAgents,
       input.agent,
     )
-    if (!agent) {
-      return buildUnsupportedAgentResponse(
-        buildToolScopeLabels.sourceUtilityView,
-        supportedStaticBuildUtilityAgents,
-        input.agent,
-      )
+    if (!agentResolution.ok) {
+      return agentResolution.response
     }
+    const agent = agentResolution.agent
 
     const compatibleWEngines = getCompatibleStaticBuildUtilityWEngines(
       agent.specialty,
     )
 
-    const wEngine = input.wEngine
-      ? findCatalogItem(supportedStaticBuildUtilityWEngines, input.wEngine)
-      : undefined
-    if (input.wEngine && !wEngine) {
-      return buildUnsupportedWEngineResponse(
-        buildToolScopeLabels.sourceUtilityView,
-        compatibleWEngines,
-        input.wEngine,
-      )
+    const wEngineResolution = resolveBuildToolWEngine(
+      buildToolScopeLabels.sourceUtilityView,
+      supportedStaticBuildUtilityWEngines,
+      compatibleWEngines,
+      input.wEngine,
+      agent,
+    )
+    if (!wEngineResolution.ok) {
+      return wEngineResolution.response
     }
-    if (wEngine && wEngine.specialty !== agent.specialty) {
-      return buildIncompatibleWEngineResponse(
-        agent,
-        wEngine,
-        compatibleWEngines,
-        input.wEngine,
-      )
-    }
+    const wEngine = wEngineResolution.wEngine
 
     if (!wEngine) {
       return buildMissingSourceUtilityWEngineResponse(

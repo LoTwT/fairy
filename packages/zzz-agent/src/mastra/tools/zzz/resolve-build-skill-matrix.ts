@@ -10,14 +10,12 @@ import {
   supportedStaticBuildWEngines,
 } from "zzz-data"
 import {
-  buildIncompatibleWEngineResponse,
   buildSkillMatrixSuccessResponse,
   buildToolLoadoutInput,
   buildToolScopeLabels,
-  buildUnsupportedAgentResponse,
-  buildUnsupportedWEngineResponse,
-  findCatalogItem,
+  resolveBuildToolAgent,
   resolveBuildToolDriveDiscSets,
+  resolveBuildToolWEngine,
 } from "./resolve-build-shared"
 
 export const resolveBuildSkillMatrix = createTool({
@@ -92,39 +90,27 @@ export const resolveBuildSkillMatrix = createTool({
       ),
   }),
   execute: async (input) => {
-    const agent = findCatalogItem(supportedStaticBuildMatrixAgents, input.agent)
-    if (!agent) {
-      return buildUnsupportedAgentResponse(
-        buildToolScopeLabels.skillMatrix,
-        supportedStaticBuildMatrixAgents,
-        input.agent,
-      )
+    const agentResolution = resolveBuildToolAgent(
+      buildToolScopeLabels.skillMatrix,
+      supportedStaticBuildMatrixAgents,
+      input.agent,
+    )
+    if (!agentResolution.ok) {
+      return agentResolution.response
     }
+    const agent = agentResolution.agent
 
-    const wEngine = input.wEngine
-      ? findCatalogItem(supportedStaticBuildWEngines, input.wEngine)
-      : undefined
-    if (input.wEngine && !wEngine) {
-      const compatibleWEngines = getCompatibleStaticBuildWEngines(
-        agent.specialty,
-      )
-      return buildUnsupportedWEngineResponse(
-        buildToolScopeLabels.skillMatrix,
-        compatibleWEngines,
-        input.wEngine,
-      )
+    const wEngineResolution = resolveBuildToolWEngine(
+      buildToolScopeLabels.skillMatrix,
+      supportedStaticBuildWEngines,
+      getCompatibleStaticBuildWEngines(agent.specialty),
+      input.wEngine,
+      agent,
+    )
+    if (!wEngineResolution.ok) {
+      return wEngineResolution.response
     }
-    if (wEngine && wEngine.specialty !== agent.specialty) {
-      const compatibleWEngines = getCompatibleStaticBuildWEngines(
-        agent.specialty,
-      )
-      return buildIncompatibleWEngineResponse(
-        agent,
-        wEngine,
-        compatibleWEngines,
-        input.wEngine,
-      )
-    }
+    const wEngine = wEngineResolution.wEngine
 
     const driveDiscResolution = resolveBuildToolDriveDiscSets(
       buildToolScopeLabels.skillMatrix,

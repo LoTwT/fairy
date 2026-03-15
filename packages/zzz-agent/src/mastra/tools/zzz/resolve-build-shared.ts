@@ -144,6 +144,28 @@ export interface BuildToolResolvedDriveDiscSets {
   driveDiscSets: StaticBuildDriveDiscSetInput[]
 }
 
+export interface BuildToolResolvedAgent<T extends CatalogItem> {
+  ok: true
+  agent: T
+}
+
+export interface BuildToolRejectedAgent {
+  ok: false
+  response: BuildToolUnsupportedAgentResponse
+}
+
+export interface BuildToolResolvedWEngine<T extends CatalogItem> {
+  ok: true
+  wEngine: T | undefined
+}
+
+export interface BuildToolRejectedWEngine {
+  ok: false
+  response:
+    | BuildToolUnsupportedWEngineResponse
+    | BuildToolIncompatibleWEngineResponse
+}
+
 export interface BuildToolRejectedDriveDiscSets {
   ok: false
   response: BuildToolUnsupportedDriveDiscResponse
@@ -530,6 +552,76 @@ export function buildUnsupportedDriveDiscResponse<T extends CatalogItem>(
     message: `当前 ${scopeLabel} 暂不支持驱动盘「${query}」`,
     supportedDriveDiscs: catalogNames(items),
     candidates: candidateNames(items, query),
+  }
+}
+
+export function resolveBuildToolAgent<T extends CatalogItem>(
+  scopeLabel: BuildToolScopeLabel,
+  supportedAgents: readonly T[],
+  query: string,
+): BuildToolResolvedAgent<T> | BuildToolRejectedAgent {
+  const agent = findCatalogItem(supportedAgents, query)
+  if (!agent) {
+    return {
+      ok: false,
+      response: buildUnsupportedAgentResponse(
+        scopeLabel,
+        supportedAgents,
+        query,
+      ),
+    }
+  }
+
+  return {
+    ok: true,
+    agent,
+  }
+}
+
+export function resolveBuildToolWEngine<
+  TAgent extends CatalogItem & { specialty: keyof typeof specialtyLabels },
+  TWEngine extends CatalogItem & { specialty: keyof typeof specialtyLabels },
+>(
+  scopeLabel: BuildToolScopeLabel,
+  supportedWEngines: readonly TWEngine[],
+  compatibleWEngines: readonly TWEngine[],
+  query: string | undefined,
+  agent: TAgent,
+): BuildToolResolvedWEngine<TWEngine> | BuildToolRejectedWEngine {
+  if (!query) {
+    return {
+      ok: true,
+      wEngine: undefined,
+    }
+  }
+
+  const wEngine = findCatalogItem(supportedWEngines, query)
+  if (!wEngine) {
+    return {
+      ok: false,
+      response: buildUnsupportedWEngineResponse(
+        scopeLabel,
+        compatibleWEngines,
+        query,
+      ),
+    }
+  }
+
+  if (wEngine.specialty !== agent.specialty) {
+    return {
+      ok: false,
+      response: buildIncompatibleWEngineResponse(
+        agent,
+        wEngine,
+        compatibleWEngines,
+        query,
+      ),
+    }
+  }
+
+  return {
+    ok: true,
+    wEngine,
   }
 }
 
