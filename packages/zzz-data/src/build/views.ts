@@ -23,6 +23,7 @@ import type {
   StaticBuildSourceDamageViewRequirementKind,
   StaticBuildSourceDamageViewRequirementSummary,
   StaticBuildSourceDamageViewSummary,
+  StaticBuildTraceModifier,
 } from "./types.js"
 import { toBaseResistanceAttribute } from "../terms.js"
 import {
@@ -388,9 +389,9 @@ export function summarizeSourceDamageViewEffects(
 }
 
 function formatSourceDamageViewModifier(
-  bucket: string,
-  value: number,
-  combine: string,
+  bucket: StaticBuildTraceModifier["bucket"],
+  value: StaticBuildTraceModifier["value"],
+  combine: StaticBuildTraceModifier["combine"],
 ) {
   if (combine === "replace") {
     return `设为 ${formatSourceDamageViewValue(bucket, value)}`
@@ -399,7 +400,10 @@ function formatSourceDamageViewModifier(
   return `${value >= 0 ? "+" : ""}${formatSourceDamageViewValue(bucket, value)}`
 }
 
-function formatSourceDamageViewValue(bucket: string, value: number) {
+function formatSourceDamageViewValue(
+  bucket: StaticBuildTraceModifier["bucket"],
+  value: StaticBuildTraceModifier["value"],
+) {
   if (
     bucket === "critRate" ||
     bucket === "critDamage" ||
@@ -424,7 +428,9 @@ function formatSourceDamageViewValue(bucket: string, value: number) {
   return formatSourceDamageViewNumber(value)
 }
 
-function formatSourceDamageViewNumber(value: number) {
+function formatSourceDamageViewNumber(
+  value: StaticBuildTraceModifier["value"],
+) {
   return Number.isInteger(value) ? value.toString() : value.toFixed(2)
 }
 

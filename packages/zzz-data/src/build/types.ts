@@ -171,6 +171,10 @@ export type StaticBuildPenetrationRate = number
 export type StaticBuildPenetrationValue = number
 export type StaticBuildSkillMultiplierFactor = number
 export type StaticBuildModifierValue = number
+export type StaticBuildModifierCombine = "sum" | "multiply"
+export type StaticBuildViewModifierCombine =
+  | StaticBuildModifierCombine
+  | "replace"
 export type StaticBuildBaseDamageValue = number
 export type StaticBuildBaseDamage = number
 export type StaticBuildExpectedTotal = number
@@ -573,7 +577,7 @@ export interface StaticBuildValueContext {
 
 export interface StaticBuildModifierDefinition {
   bucket: StaticBuildBucket
-  combine?: "sum" | "multiply"
+  combine?: StaticBuildModifierCombine
   value: (context: StaticBuildValueContext) => number
 }
 
@@ -641,7 +645,7 @@ export interface StaticBuildResolvedPanel {
 export interface StaticBuildTraceModifier {
   bucket: StaticBuildBucket
   value: StaticBuildModifierValue
-  combine: "sum" | "multiply"
+  combine: StaticBuildModifierCombine
 }
 
 export interface StaticBuildTraceItem {

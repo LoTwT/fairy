@@ -25,6 +25,7 @@ import type {
   StaticBuildSourceSkillTypeId,
   StaticBuildSourceStatName,
   StaticBuildSourceStatOccurrenceMap,
+  StaticBuildTraceModifier,
   StaticBuildUnsupportedEffectList,
   StaticBuildUnsupportedEffectSet,
   StaticBuildVariableBucketList,
@@ -447,7 +448,7 @@ const bucketLabels: StaticBuildEffectBucketLabelMap = {
   anomalyCritDamage: "异常暴击伤害",
 } as const
 
-function formatValue(value: number) {
+function formatValue(value: StaticBuildTraceModifier["value"]) {
   const normalized = Number.parseFloat(value.toFixed(3))
   return Number.isInteger(normalized)
     ? String(normalized)
@@ -455,9 +456,9 @@ function formatValue(value: number) {
 }
 
 function formatModifier(
-  bucket: string,
-  value: number,
-  combine: "sum" | "multiply",
+  bucket: StaticBuildTraceModifier["bucket"],
+  value: StaticBuildTraceModifier["value"],
+  combine: StaticBuildTraceModifier["combine"],
 ) {
   if (combine === "multiply") {
     const percent = (value - 1) * 100

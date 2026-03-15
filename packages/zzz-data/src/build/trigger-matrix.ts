@@ -8,6 +8,7 @@ import type {
   StaticBuildEntryCaveatSummary,
   StaticBuildRowEffectSummaryAccumulator,
   StaticBuildSourceDamageViewEntry,
+  StaticBuildTraceModifier,
   StaticBuildTriggerMatrixBucketLabelMap,
   StaticBuildTriggerMatrixEffectSummaryItem,
   StaticBuildTriggerMatrixEntryKind,
@@ -331,9 +332,9 @@ function summarizeTriggerMatrixEffects(
 }
 
 function formatTriggerMatrixModifier(
-  bucket: string,
-  value: number,
-  combine: string,
+  bucket: StaticBuildTraceModifier["bucket"],
+  value: StaticBuildTraceModifier["value"],
+  combine: StaticBuildTraceModifier["combine"],
 ) {
   if (combine === "replace") {
     return `设为 ${formatTriggerMatrixValue(bucket, value)}`
@@ -342,7 +343,10 @@ function formatTriggerMatrixModifier(
   return `${value >= 0 ? "+" : ""}${formatTriggerMatrixValue(bucket, value)}`
 }
 
-function formatTriggerMatrixValue(bucket: string, value: number) {
+function formatTriggerMatrixValue(
+  bucket: StaticBuildTraceModifier["bucket"],
+  value: StaticBuildTraceModifier["value"],
+) {
   if (
     bucket === "critRate" ||
     bucket === "critDamage" ||
@@ -367,7 +371,7 @@ function formatTriggerMatrixValue(bucket: string, value: number) {
   return formatNumber(value)
 }
 
-function formatNumber(value: number) {
+function formatNumber(value: StaticBuildTraceModifier["value"]) {
   return Number.isInteger(value) ? value.toString() : value.toFixed(2)
 }
 

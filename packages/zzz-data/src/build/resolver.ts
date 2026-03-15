@@ -15,6 +15,8 @@ import type {
   StaticBuildEffectDefinition,
   StaticBuildEffectStacks,
   StaticBuildEffectSummaryAccumulatorMap,
+  StaticBuildModifierDefinition,
+  StaticBuildModifierValue,
   StaticBuildResolvedAnomalyProficiency,
   StaticBuildResolvedBuckets,
   StaticBuildResolveEffectSummaryAccumulator,
@@ -26,6 +28,7 @@ import type {
   StaticBuildStateSnapshotInput,
   StaticBuildTraceItem,
   StaticBuildTraceItemList,
+  StaticBuildTraceModifier,
   StaticBuildUnsupportedEffectList,
   StaticBuildValueContext,
 } from "./types.js"
@@ -118,9 +121,9 @@ function formatEffectValue(value: number) {
 }
 
 function formatEffectModifier(
-  bucket: string,
-  value: number,
-  combine: "sum" | "multiply",
+  bucket: StaticBuildTraceModifier["bucket"],
+  value: StaticBuildTraceModifier["value"],
+  combine: StaticBuildTraceModifier["combine"],
 ) {
   if (combine === "multiply") {
     const percent = (value - 1) * 100
@@ -404,8 +407,8 @@ function createResolveResult(
 function mergeBucket(
   buckets: StaticBuildResolvedBuckets,
   bucket: StaticBuildBucket,
-  value: number,
-  combine: "sum" | "multiply",
+  value: StaticBuildModifierValue,
+  combine: NonNullable<StaticBuildModifierDefinition["combine"]>,
 ) {
   if (combine === "multiply") {
     buckets[bucket] *= value

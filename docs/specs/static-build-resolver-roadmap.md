@@ -12100,5 +12100,39 @@ caveatSummary` 这些兼容字段补齐。
 
 - `V338.1` 已完成：范围冻结到 source-view requirement key helper contract
 - `V338.2` 已完成：两个 helper 已统一复用 `StaticBuildRequirementKey`
-- `V338.3` 待完成：校验与提交
-- `V338.4` 待完成：roadmap、索引与架构文档同步
+- `V338.3` 已完成：校验与提交
+- `V338.4` 已完成：roadmap、索引与架构文档同步
+
+## 342. V339 modifier formatter helper contracts
+
+### 342.1 目标
+
+`V339` 只解决一件事：
+
+- 把 `resolver.ts / views.ts / trigger-matrix.ts / matrix.ts` 中 modifier formatter helper 仍直接使用的裸 `bucket/value/combine` 参数统一收成既有显式公开 modifier contract。
+
+### 342.2 范围
+
+1. `StaticBuildModifierCombine`
+2. `StaticBuildViewModifierCombine`
+3. `StaticBuildModifierDefinition.combine`
+4. `StaticBuildTraceModifier.combine`
+5. `resolver.ts:formatEffectModifier()`
+6. `resolver.ts:mergeBucket()`
+7. `views.ts:formatSourceDamageViewModifier()`
+8. `trigger-matrix.ts:formatTriggerMatrixModifier()`
+9. `matrix.ts:formatModifier()`
+10. 对应的 type import / export
+
+### 342.3 非目标
+
+1. 不改变 modifier 文案
+2. 不调整 bucket label 映射
+3. 不修改任何运行时 merge 逻辑
+
+### 342.4 当前状态
+
+- `V339.1` 已完成：范围冻结到 modifier formatter helper contract
+- `V339.2` 已完成：formatter helper 与 combine trait 已统一复用显式公开 contract
+- `V339.3` 已完成：校验与提交
+- `V339.4` 已完成：roadmap、索引与架构文档同步
