@@ -154,6 +154,7 @@ export type {
   StaticBuildSkillMatrixContextInput,
   StaticBuildSkillMatrixEffectSummaryItem,
   StaticBuildSkillMatrixEntryType,
+  StaticBuildSkillMatrixGroupKey,
   StaticBuildSkillMatrixRow,
   StaticBuildSkillMatrixRowMeta,
   StaticBuildSkillMatrixTemplateSource,

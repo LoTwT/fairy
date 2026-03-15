@@ -1144,9 +1144,11 @@ export interface StaticBuildSkillMatrixRowDamageSummary {
   noCrit: StaticBuildNonCriticalTotal
 }
 
+export type StaticBuildSkillMatrixGroupKey = string
+
 export interface StaticBuildSkillMatrixRow {
   id: string
-  group: string
+  group: StaticBuildSkillMatrixGroupKey
   label: StaticBuildRowLabel
   metadata: StaticBuildSkillMatrixRowMeta
   skillTag: StaticBuildSkillTag

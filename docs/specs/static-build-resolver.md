@@ -1038,4 +1038,5 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 287. `V287` build source-name text contracts：当前阶段已收口；build-layer 已新增显式 `StaticBuildSourceName`，并让 effect definition / trace / effect summaries 中的 `sourceName` 统一复用这个 type，不改变任何运行时行为，见 [静态构筑解析系统 V287](./static-build-resolver-v287.md)
 288. `V288` build effect label text contracts：当前阶段已收口；build-layer 已新增显式 `StaticBuildEffectLabel`，并让 effect definition / trace / effect summaries 中的 `label` 统一复用这个 type，不改变任何运行时行为，见 [静态构筑解析系统 V288](./static-build-resolver-v288.md)
 289. `V289` build group label text contracts：当前阶段已收口；各类 group summary 公开 contract 中的 `label` 已统一复用显式公开 text type，不改变任何运行时行为，见 [静态构筑解析系统 V289](./static-build-resolver-v289.md)
-290. `V290` build entry and row label text contracts：当前阶段进行中；当前目标是为 source-view entry 与 matrix row 公开 contract 中的 `label` 补显式公开 text type，并统一复用，不改变任何运行时行为，见 [静态构筑解析系统 V290](./static-build-resolver-v290.md)
+290. `V290` build entry and row label text contracts：当前阶段已收口；source-view entry 与 matrix row 公开 contract 中的 `label` 已统一复用显式公开 text type，不改变任何运行时行为，见 [静态构筑解析系统 V290](./static-build-resolver-v290.md)
+291. `V291` build skill-matrix group key contracts：当前阶段进行中；当前目标是为 `StaticBuildSkillMatrixRow.group` 补显式公开 key type，并统一复用，不改变任何运行时行为，见 [静态构筑解析系统 V291](./static-build-resolver-v291.md)

@@ -10587,5 +10587,35 @@ caveatSummary` 这些兼容字段补齐。
 - `V290.1` 已完成：冻结到 entry / row label text contract
 - `V290.2` 已完成：`types.ts` 已让 source-view entry 与 matrix row 统一复用显式 type
 - `V290.3` 已完成：`build/index.ts` 已正式导出这些 type
-- `V290.4` 进行中：等待现有 build / agent 测试与 runtime 校验完成
-- `V290.5` 进行中：等待 roadmap、索引与架构文档同步
+- `V290.4` 已完成：现有 build / agent 测试与 runtime 校验已覆盖
+- `V290.5` 已完成：roadmap、索引与架构文档已同步
+
+## 294. V291 build skill-matrix group key contracts
+
+`V290` 收口后，`StaticBuildSkillMatrixRow.group` 仍以匿名 `string` 暴露，和前面的显式公开 contract 仍不对称。
+
+`V291` 只解决一件事：
+
+1. 为 skill-matrix row 的 group key 补显式 type，并统一复用，不改变任何运行时行为
+
+### 294.1 分阶段
+
+1. `V291.1` scope freeze
+2. `V291.2` type alignment
+3. `V291.3` export alignment
+4. `V291.4` tests / runtime alignment
+5. `V291.5` docs closeout
+
+### 294.2 非目标
+
+1. 不改变 group 字符串内容、分组逻辑或排序语义
+2. 不处理 `canonicalLabel / stableKey`
+3. 不处理 `id`
+
+### 294.3 当前状态
+
+- `V291.1` 已完成：冻结到 skill-matrix group key contract
+- `V291.2` 已完成：`types.ts` 已让 `StaticBuildSkillMatrixRow.group` 统一复用显式 type
+- `V291.3` 已完成：`build/index.ts` 已正式导出这个 type
+- `V291.4` 进行中：等待现有 build / agent 测试与 runtime 校验完成
+- `V291.5` 进行中：等待 roadmap、索引与架构文档同步
