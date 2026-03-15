@@ -12339,3 +12339,32 @@ caveatSummary` 这些兼容字段补齐。
 - `V346.2` 已完成：`isEnemyCategoryCode()` 已统一复用显式输入 alias
 - `V346.3` 待完成：校验与提交
 - `V346.4` 待完成：roadmap、索引与架构文档同步
+
+## 350. V347 calculator multiplier scalar contracts
+
+### 350.1 目标
+
+`V347` 只解决一件事：
+
+- 把 `calculator/factors.ts` 这一层公开 factor helper 的输入与输出统一收成显式公开 scalar contract，不改变任何公式逻辑。
+
+### 350.2 范围
+
+1. 公开 multiplier/output alias
+2. `DefenseParams.attackerLevelBase`
+3. `DamageBreakdown`
+4. `calculator/factors.ts` 的全部公开 factor helper
+5. `calculator/index.ts` 对应 type export
+
+### 350.3 非目标
+
+1. 不改变任何 factor 公式
+2. 不调整 `DamageResult` 结构
+3. 不修改 `normal / sheer / anomaly / disorder` pipeline
+
+### 350.4 当前状态
+
+- `V347.1` 已完成：范围冻结到 calculator multiplier scalar contract
+- `V347.2` 已完成：公开 factor helper 的输入与输出已统一复用显式 alias
+- `V347.3` 待完成：校验与提交
+- `V347.4` 待完成：roadmap、索引与架构文档同步

@@ -10,12 +10,28 @@ export type AnomalyType =
   | "frost"
 
 export type AttackerLevel = number
+export type AttackerLevelBase = number
+export type DefenseMultiplier = number
+export type ResistanceMultiplier = number
+export type VulnerabilityMultiplier = number
+export type DazeVulnerabilityMultiplier = number
+export type CritMultiplier = number
+export type ExpectedCritMultiplier = number
+export type BonusDamageMultiplier = number
+export type SheerBonusMultiplier = number
+export type AnomalyProficiencyMultiplier = number
+export type DamageLevelMultiplier = number
+export type AnomalyBonusMultiplier = number
+export type AnomalyCritMultiplier = number
+export type ExpectedAnomalyCritMultiplier = number
+export type DisorderRemainingTime = number
+export type DisorderDamageMultiplier = number
 
 // ---------- Per-multiplier parameter types ----------
 
 export interface DefenseParams {
   /** Attacker level base (lookup attackerLevelBase table) */
-  attackerLevelBase: number
+  attackerLevelBase: AttackerLevelBase
   /**
    * Defender effective base defense — should already include initial attribute
    * bonuses (初始属性加成). Only the defense bonus/reduction/penetration layer
@@ -134,24 +150,28 @@ export interface DisorderDamageParams extends Omit<
   /** Anomaly type of the original status being consumed */
   anomalyType: AnomalyType
   /** Remaining duration of the original anomaly status in seconds (must be ≥ 0) */
-  remainingTime: number
+  remainingTime: DisorderRemainingTime
 }
 
 // ---------- Return type ----------
 
 export interface DamageBreakdown {
   baseDamage: number
-  bonusMultiplier: number
-  critMultiplier: number
-  defenseMultiplier: number
-  resistanceMultiplier: number
-  vulnerabilityMultiplier: number
-  dazeVulnerabilityMultiplier: number
-  sheerBonusMultiplier: number
-  anomalyProficiencyMultiplier: number
-  damageLevelMultiplier: number
-  anomalyBonusMultiplier: number
-  anomalyCritMultiplier: number
+  bonusMultiplier: BonusDamageMultiplier
+  critMultiplier:
+    | CritMultiplier
+    | ExpectedCritMultiplier
+    | AnomalyCritMultiplier
+    | ExpectedAnomalyCritMultiplier
+  defenseMultiplier: DefenseMultiplier
+  resistanceMultiplier: ResistanceMultiplier
+  vulnerabilityMultiplier: VulnerabilityMultiplier
+  dazeVulnerabilityMultiplier: DazeVulnerabilityMultiplier
+  sheerBonusMultiplier: SheerBonusMultiplier
+  anomalyProficiencyMultiplier: AnomalyProficiencyMultiplier
+  damageLevelMultiplier: DamageLevelMultiplier
+  anomalyBonusMultiplier: AnomalyBonusMultiplier
+  anomalyCritMultiplier: AnomalyCritMultiplier | ExpectedAnomalyCritMultiplier
   specialMultiplier: number
 }
 

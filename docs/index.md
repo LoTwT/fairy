@@ -244,3 +244,4 @@
 - [静态构筑解析系统 V344](./specs/static-build-resolver-v344.md) — 当前阶段：已收口；`stripRichText()` 的输入已统一复用既有 `RichTextString` contract
 - [静态构筑解析系统 V345](./specs/static-build-resolver-v345.md) — 当前阶段：已收口；cleaned 版本周期文本输入与输出已统一复用显式公开 contract
 - [静态构筑解析系统 V346](./specs/static-build-resolver-v346.md) — 当前阶段：已收口；`isEnemyCategoryCode()` 的输入已统一复用显式公开 contract
+- [静态构筑解析系统 V347](./specs/static-build-resolver-v347.md) — 当前阶段：已收口；`calculator/factors.ts` 公开 factor helper 的输入与输出已统一复用显式公开 scalar contract

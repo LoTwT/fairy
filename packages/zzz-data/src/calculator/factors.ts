@@ -2,15 +2,31 @@
 // Based on: https://ngabbs.com/read.php?tid=44468012
 
 import type {
+  AnomalyBonusMultiplier,
+  AnomalyCritMultiplier,
   AnomalyDamageParams,
+  AnomalyProficiencyMultiplier,
   AnomalyType,
   AttackerLevel,
+  AttackerLevelBase,
+  BonusDamageMultiplier,
+  CritMultiplier,
   CritParams,
+  DamageLevelMultiplier,
+  DazeVulnerabilityMultiplier,
   DazeVulnerabilityParams,
+  DefenseMultiplier,
   DefenseParams,
+  DisorderDamageMultiplier,
+  DisorderDamageParams,
+  ExpectedAnomalyCritMultiplier,
+  ExpectedCritMultiplier,
   NormalDamageParams,
+  ResistanceMultiplier,
   ResistanceParams,
+  SheerBonusMultiplier,
   SheerDamageParams,
+  VulnerabilityMultiplier,
   VulnerabilityParams,
 } from "./types.js"
 
@@ -84,9 +100,7 @@ export const ATTACKER_LEVEL_BASE: Readonly<Record<number, number>> = {
  * Returns the attacker level base for the given level.
  * Levels above 60 return 794.
  */
-export function getAttackerLevelBase(
-  level: AttackerLevel,
-): DefenseParams["attackerLevelBase"] {
+export function getAttackerLevelBase(level: AttackerLevel): AttackerLevelBase {
   const clamped = Math.max(1, Math.min(level, 60))
   return ATTACKER_LEVEL_BASE[clamped] ?? 794
 }
@@ -100,7 +114,9 @@ export function getAttackerLevelBase(
  * effectiveDefense = defenderBaseDefense × (1 + defenseBonus - defenseReduction)
  *                     × (1 - penetrationRate) - penetrationValue  [clamped ≥ 0]
  */
-export function calcDefenseMultiplier(params: DefenseParams): number {
+export function calcDefenseMultiplier(
+  params: DefenseParams,
+): DefenseMultiplier {
   const {
     attackerLevelBase,
     defenderBaseDefense,
@@ -125,7 +141,9 @@ export function calcDefenseMultiplier(params: DefenseParams): number {
  * = 1 - defenderResistance + resistanceReduction + ignoreResistance
  * Clamped to [0, 2].
  */
-export function calcResistanceMultiplier(params: ResistanceParams): number {
+export function calcResistanceMultiplier(
+  params: ResistanceParams,
+): ResistanceMultiplier {
   const { defenderResistance, resistanceReduction, ignoreResistance } = params
   const value = 1 - defenderResistance + resistanceReduction + ignoreResistance
   return Math.min(2, Math.max(0, value))
@@ -140,7 +158,7 @@ export function calcResistanceMultiplier(params: ResistanceParams): number {
  */
 export function calcVulnerabilityMultiplier(
   params: VulnerabilityParams,
-): number {
+): VulnerabilityMultiplier {
   const { vulnerabilityBonus, damageReduction } = params
   const value = 1 + vulnerabilityBonus - damageReduction
   return Math.min(2, Math.max(0.2, value))
@@ -155,7 +173,7 @@ export function calcVulnerabilityMultiplier(
  */
 export function calcDazeVulnerabilityMultiplier(
   params: DazeVulnerabilityParams,
-): number {
+): DazeVulnerabilityMultiplier {
   const { isStunned, stunVulnerability, nonStunVulnerability } = params
   if (isStunned) {
     return Math.min(5, Math.max(0.2, 1 + stunVulnerability))
@@ -173,7 +191,7 @@ export function calcDazeVulnerabilityMultiplier(
 export function calcCritMultiplier(
   params: CritParams,
   isCrit: boolean,
-): number {
+): CritMultiplier {
   if (!isCrit) return 1
   const critDamage = Math.min(5, Math.max(0, params.critDamage))
   return 1 + critDamage
@@ -182,7 +200,9 @@ export function calcCritMultiplier(
 /**
  * Expected crit multiplier = 1 + critRate × critDamage
  */
-export function calcExpectedCritMultiplier(params: CritParams): number {
+export function calcExpectedCritMultiplier(
+  params: CritParams,
+): ExpectedCritMultiplier {
   const critRate = Math.min(1, Math.max(0, params.critRate))
   const critDamage = Math.min(5, Math.max(0, params.critDamage))
   return 1 + critRate * critDamage
@@ -198,7 +218,7 @@ export function calcExpectedCritMultiplier(params: CritParams): number {
  */
 export function calcBonusMultiplier(
   bonusDamageSum: NormalDamageParams["bonusDamageSum"],
-): number {
+): BonusDamageMultiplier {
   return Math.max(0, 1 + bonusDamageSum)
 }
 
@@ -211,7 +231,7 @@ export function calcBonusMultiplier(
  */
 export function calcSheerBonusMultiplier(
   sheerBonusSum: SheerDamageParams["sheerBonusSum"],
-): number {
+): SheerBonusMultiplier {
   return Math.min(9, Math.max(0.2, 1 + sheerBonusSum))
 }
 
@@ -224,7 +244,7 @@ export function calcSheerBonusMultiplier(
  */
 export function calcAnomalyProficiencyMultiplier(
   anomalyProficiency: AnomalyDamageParams["virtualAgentAnomalyProficiency"],
-): number {
+): AnomalyProficiencyMultiplier {
   const floored = Math.floor(anomalyProficiency)
   return Math.min(10, Math.max(0, floored / 100))
 }
@@ -238,7 +258,7 @@ export function calcAnomalyProficiencyMultiplier(
  */
 export function calcDamageLevelMultiplier(
   level: AnomalyDamageParams["virtualAgentLevel"],
-): number {
+): DamageLevelMultiplier {
   const raw = 1 + (level - 1) / 59
   return Math.trunc(raw * 10000) / 10000
 }
@@ -252,7 +272,7 @@ export function calcDamageLevelMultiplier(
  */
 export function calcAnomalyBonusMultiplier(
   anomalyBonusDamageSum: AnomalyDamageParams["anomalyBonusDamageSum"],
-): number {
+): AnomalyBonusMultiplier {
   return Math.min(3, Math.max(0, 1 + anomalyBonusDamageSum))
 }
 
@@ -266,7 +286,7 @@ export function calcAnomalyBonusMultiplier(
 export function calcAnomalyCritMultiplier(
   anomalyCritDamage: AnomalyDamageParams["anomalyCritDamage"],
   isCrit: boolean,
-): number {
+): AnomalyCritMultiplier {
   if (!isCrit) return 1
   return Math.min(3, Math.max(1, 1 + anomalyCritDamage))
 }
@@ -276,9 +296,9 @@ export function calcAnomalyCritMultiplier(
  * anomalyCritRate clamped to [0, 1]; anomalyCritDamage clamped to [0, 2] (matching [1, 3] crit range).
  */
 export function calcExpectedAnomalyCritMultiplier(
-  anomalyCritRate: number,
-  anomalyCritDamage: number,
-): number {
+  anomalyCritRate: AnomalyDamageParams["anomalyCritRate"],
+  anomalyCritDamage: AnomalyDamageParams["anomalyCritDamage"],
+): ExpectedAnomalyCritMultiplier {
   const rate = Math.min(1, Math.max(0, anomalyCritRate))
   const damage = Math.min(2, Math.max(0, anomalyCritDamage))
   return 1 + rate * damage
@@ -300,8 +320,8 @@ export function calcExpectedAnomalyCritMultiplier(
  */
 export function calcDisorderDamageMultiplier(
   anomalyType: AnomalyType,
-  remainingTime: number,
-): number {
+  remainingTime: DisorderDamageParams["remainingTime"],
+): DisorderDamageMultiplier {
   const t = Math.max(0, remainingTime)
   switch (anomalyType) {
     case "fire":
