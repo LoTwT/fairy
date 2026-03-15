@@ -64,6 +64,8 @@ export type StaticBuildSkillMatrixAttributeSource =
 
 export type StaticBuildSkillQualifier = string
 export type StaticBuildSkillQualifierList = StaticBuildSkillQualifier[]
+export type StaticBuildSegmentToken = string
+export type StaticBuildSegmentBaseQualifier = StaticBuildSkillQualifier
 export type StaticBuildSourceAttributeText = string
 export type StaticBuildSourceAttributeList = StaticBuildSourceAttributeText[]
 
@@ -1418,6 +1420,12 @@ export interface StaticBuildSkillMatrixRowMeta {
   segmentLabel?: StaticBuildSegmentLabel
   segmentIndex?: StaticBuildSegmentIndex
   targetSize?: StaticBuildTargetSize
+}
+
+export interface StaticBuildSegmentTokenParseResult {
+  baseQualifier?: StaticBuildSegmentBaseQualifier
+  segmentLabel?: StaticBuildSegmentLabel
+  segmentIndex?: StaticBuildSegmentIndex
 }
 
 export interface StaticBuildSkillMatrixRowDamageSummary {

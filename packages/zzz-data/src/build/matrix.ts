@@ -15,6 +15,8 @@ import type {
   StaticBuildRowEffectSummaryAccumulator,
   StaticBuildSegmentIndex,
   StaticBuildSegmentLabel,
+  StaticBuildSegmentToken,
+  StaticBuildSegmentTokenParseResult,
   StaticBuildSkillMatrixAttributeSource,
   StaticBuildSkillMatrixEffectSummaryItem,
   StaticBuildSkillMatrixGroupRowMap,
@@ -68,7 +70,9 @@ const targetSizeLabelByValue = {
   large: "大体型",
 } as const
 
-function parseSegmentToken(token: string) {
+function parseSegmentToken(
+  token: StaticBuildSegmentToken,
+): StaticBuildSegmentTokenParseResult {
   if (token in segmentIndexByLabel) {
     return {
       baseQualifier: undefined,

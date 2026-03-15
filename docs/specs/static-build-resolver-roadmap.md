@@ -12195,3 +12195,32 @@ caveatSummary` 这些兼容字段补齐。
 - `V341.2` 已完成：effect helper context 与 skill-multiplier parser 已统一复用显式公开 contract
 - `V341.3` 已完成：校验与提交
 - `V341.4` 已完成：roadmap、索引与架构文档同步
+
+## 345. V342 segment token parser contracts
+
+### 345.1 目标
+
+`V342` 只解决一件事：
+
+- 把 `matrix.ts` 中最后残留的 `parseSegmentToken(token: string)` helper 收成显式公开 contract，作为当前 build helper raw 参数清理主线的收口。
+
+### 345.2 范围
+
+1. `StaticBuildSegmentToken`
+2. `StaticBuildSegmentBaseQualifier`
+3. `StaticBuildSegmentTokenParseResult`
+4. `matrix.ts:parseSegmentToken()`
+5. `build/index.ts` 对应导出
+
+### 345.3 非目标
+
+1. 不改变 segment 解析逻辑
+2. 不修改 skill-matrix row metadata 语义
+3. 不新增新的运行时输出字段
+
+### 345.4 当前状态
+
+- `V342.1` 已完成：范围冻结到 segment token parser contract
+- `V342.2` 已完成：segment token parser 已统一复用显式公开 contract
+- `V342.3` 已完成：校验与提交
+- `V342.4` 已完成：roadmap、索引与架构文档同步
