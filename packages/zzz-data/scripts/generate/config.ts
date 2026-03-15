@@ -460,6 +460,12 @@ export function extractCellValue(
   return null
 }
 
-export function normalizeHeader(header: string): string {
+export type GenerateWorksheetHeaderText = string
+
+export type GenerateNormalizedWorksheetHeader = string
+
+export function normalizeHeader(
+  header: GenerateWorksheetHeaderText,
+): GenerateNormalizedWorksheetHeader {
   return header.replace(/\n/g, "").replace(/\r/g, "").trim()
 }

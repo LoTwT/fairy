@@ -12603,3 +12603,30 @@ caveatSummary` 这些兼容字段补齐。
 - `V354.2` 已完成：公开公式 helper 输入已统一复用显式公开 alias
 - `V354.3` 已完成：校验与提交
 - `V354.4` 已完成：roadmap、索引与架构文档同步
+
+## 358. V355 generate header helper text contracts
+
+### 358.1 目标
+
+`V355` 只解决一件事：
+
+- 给 `normalizeHeader()` 的输入输出补显式公开文本 contract，不改变任何列头归一化逻辑。
+
+### 358.2 范围
+
+1. `GenerateWorksheetHeaderText`
+2. `GenerateNormalizedWorksheetHeader`
+3. `normalizeHeader()`
+
+### 358.3 非目标
+
+1. 不改变换行清洗规则
+2. 不改 `worksheetConfigs`
+3. 不改 generate 流程
+
+### 358.4 当前状态
+
+- `V355.1` 已完成：范围冻结到 generate header helper text contract
+- `V355.2` 已完成：`normalizeHeader()` 已统一复用显式公开文本 alias
+- `V355.3` 已完成：校验与提交
+- `V355.4` 已完成：roadmap、索引与架构文档同步
