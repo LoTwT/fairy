@@ -988,3 +988,4 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 237. `V237` build-tool specialty labels：当前阶段已收口；高层 build tool 的 `specialtyLabels` 已固定到单独共享模块，不改变任何 tool 的输入输出 shape，见 [静态构筑解析系统 V237](./static-build-resolver-v237.md)
 238. `V238` build-tool reject response helpers：当前阶段已收口；高层 build tool 的 reject-path response helper 已固定到单独共享模块，不改变任何 tool 的输入输出 shape，见 [静态构筑解析系统 V238](./static-build-resolver-v238.md)
 239. `V239` build-tool schema module：当前阶段已收口；高层 build tool 的 zod schema 与输入 contract type 已固定到单独共享模块，不改变任何 tool 的输入输出 shape，见 [静态构筑解析系统 V239](./static-build-resolver-v239.md)
+240. `V240` build-tool loadout helpers：当前阶段已收口；高层 build tool 的 loadout helper、support helper 与 loadout-context resolver 已固定到单独共享模块，不改变任何 tool 的输入输出 shape，见 [静态构筑解析系统 V240](./static-build-resolver-v240.md)
