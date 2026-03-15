@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest"
 
+import { resolveBuildToolSourceDamageCoverageResponse } from "../src/mastra/tools/zzz/resolve-build-shared"
 import { resolveBuildSourceDamageViews } from "../src/mastra/tools/zzz/resolve-build-source-damage-views"
 import { runTool } from "./shared"
 
@@ -661,6 +662,24 @@ describe("resolveBuildSourceDamageViews tool", () => {
     expect((result as any).views.entries[0].assumptionSummary).toMatchObject({
       hasAssumptions: true,
     })
+  })
+
+  it("builds source-damage coverage gaps through the shared helper", () => {
+    const result = resolveBuildToolSourceDamageCoverageResponse({
+      agentName: "猫又",
+      supportedAgents: [
+        {
+          id: "1401",
+          name: "爱丽丝",
+          aliases: ["爱丽丝", "alice-thymefield"],
+        },
+      ],
+    })
+
+    expect(result.found).toBe(false)
+    expect(result.message).toContain("source-specific damage view")
+    expect(result.message).toContain("暂未覆盖代理人")
+    expect(result.supportedAgents).toEqual(["爱丽丝"])
   })
 
   it("returns full source-damage requirements and build details only when explicitly requested", async () => {

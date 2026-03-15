@@ -271,6 +271,13 @@ export interface BuildToolResolveSourceUtilityCoverageResponseOptions<
   wEngine?: TWEngine
 }
 
+export interface BuildToolResolveSourceDamageCoverageResponseOptions<
+  TAgent extends CatalogItem,
+> {
+  agentName: string
+  supportedAgents: readonly TAgent[]
+}
+
 export interface BuildToolResolveSourceEntryCoverageResponseOptions<
   TSourceViewAgent extends CatalogItem,
   TWEngine extends CatalogItem,
@@ -1165,6 +1172,17 @@ export function buildUncoveredSourceDamageViewResponse<T extends CatalogItem>(
     supportedAgents: catalogNames(items),
     candidates: candidateNames(items, query),
   }
+}
+
+export function resolveBuildToolSourceDamageCoverageResponse<
+  TAgent extends CatalogItem,
+>(
+  options: BuildToolResolveSourceDamageCoverageResponseOptions<TAgent>,
+): BuildToolUncoveredSourceDamageViewResponse {
+  return buildUncoveredSourceDamageViewResponse(
+    options.supportedAgents,
+    options.agentName,
+  )
 }
 
 export function buildMissingSourceUtilityWEngineResponse<T extends CatalogItem>(

@@ -11,8 +11,8 @@ import {
 import {
   buildSourceDamageViewsSuccessResponse,
   buildToolScopeLabels,
-  buildUncoveredSourceDamageViewResponse,
   resolveBuildInputSchema,
+  resolveBuildToolSourceDamageCoverageResponse,
   resolveBuildToolTriggeredDamageContext,
 } from "./resolve-build-shared"
 
@@ -61,10 +61,10 @@ export const resolveBuildSourceDamageViews = createTool({
     })
 
     if (views.entries.length === 0) {
-      return buildUncoveredSourceDamageViewResponse(
-        supportedStaticBuildSourceViewAgents,
-        agent.name,
-      )
+      return resolveBuildToolSourceDamageCoverageResponse({
+        agentName: agent.name,
+        supportedAgents: supportedStaticBuildSourceViewAgents,
+      })
     }
 
     return buildSourceDamageViewsSuccessResponse(
