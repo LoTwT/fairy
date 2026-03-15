@@ -10617,5 +10617,35 @@ caveatSummary` 这些兼容字段补齐。
 - `V291.1` 已完成：冻结到 skill-matrix group key contract
 - `V291.2` 已完成：`types.ts` 已让 `StaticBuildSkillMatrixRow.group` 统一复用显式 type
 - `V291.3` 已完成：`build/index.ts` 已正式导出这个 type
-- `V291.4` 进行中：等待现有 build / agent 测试与 runtime 校验完成
-- `V291.5` 进行中：等待 roadmap、索引与架构文档同步
+- `V291.4` 已完成：现有 build / agent 测试与 runtime 校验已覆盖
+- `V291.5` 已完成：roadmap、索引与架构文档已同步
+
+## 295. V292 build canonical label text contracts
+
+`V291` 收口后，source-view / skill-matrix metadata 中的 `canonicalLabel` 仍以匿名 `string` 暴露，和前面的显式公开 contract 仍不对称。
+
+`V292` 只解决一件事：
+
+1. 为 metadata `canonicalLabel` 文本补显式 type，并让 source-damage-view / source-utility-view / skill-matrix 统一复用，不改变任何运行时行为
+
+### 295.1 分阶段
+
+1. `V292.1` scope freeze
+2. `V292.2` type alignment
+3. `V292.3` export alignment
+4. `V292.4` tests / runtime alignment
+5. `V292.5` docs closeout
+
+### 295.2 非目标
+
+1. 不改变 canonicalLabel 的字符串内容或生成逻辑
+2. 不处理 `stableKey`
+3. 不处理 `actionName / skillName / sourceStatName`
+
+### 295.3 当前状态
+
+- `V292.1` 已完成：冻结到 canonicalLabel text contract
+- `V292.2` 已完成：`types.ts` 已让相关 metadata 统一复用显式 type
+- `V292.3` 已完成：`build/index.ts` 已正式导出这个 type
+- `V292.4` 进行中：等待现有 build / agent 测试与 runtime 校验完成
+- `V292.5` 进行中：等待 roadmap、索引与架构文档同步

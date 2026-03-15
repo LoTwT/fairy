@@ -731,9 +731,10 @@ export type StaticBuildSourceDamageViewRequirementSummary =
 export type StaticBuildSourceDamageViewResolutionMode = "standalone" | "delta"
 export type StaticBuildEntryLabel = string
 export type StaticBuildRowLabel = string
+export type StaticBuildCanonicalLabel = string
 
 export interface StaticBuildSourceDamageViewMeta {
-  canonicalLabel: string
+  canonicalLabel: StaticBuildCanonicalLabel
   stableKey: string
   entryKind: "source-damage-view"
   damageType: Extract<StaticBuildDamageType, "anomaly" | "disorder">
@@ -855,7 +856,7 @@ export interface ResolveStaticBuildSourceUtilityViewsInput {
 }
 
 export interface StaticBuildSourceUtilityViewMeta {
-  canonicalLabel: string
+  canonicalLabel: StaticBuildCanonicalLabel
   stableKey: string
   entryKind: "source-utility-view"
   utilityType: StaticBuildSourceUtilityViewType
@@ -1120,7 +1121,7 @@ export interface StaticBuildSkillMatrixRowMeta {
   actionName: string
   skillName: string
   qualifiers: StaticBuildSkillQualifierList
-  canonicalLabel: string
+  canonicalLabel: StaticBuildCanonicalLabel
   stableKey: string
   templateSource: StaticBuildSkillMatrixTemplateSource
   sourceSkillTypeId: number

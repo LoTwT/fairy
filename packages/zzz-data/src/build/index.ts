@@ -81,6 +81,7 @@ export type {
   StaticBuildBonusDamageSum,
   StaticBuildBucket,
   StaticBuildBucketValueMap,
+  StaticBuildCanonicalLabel,
   StaticBuildCatalogEntry,
   StaticBuildCombatTagList,
   StaticBuildCooldownSeconds,
