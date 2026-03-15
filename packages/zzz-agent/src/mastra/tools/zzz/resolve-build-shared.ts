@@ -182,6 +182,19 @@ export interface BuildToolLoadoutInputOptions {
   wEngineRefinement?: number
 }
 
+export interface BuildToolProgressionInput {
+  agentLevel?: number
+  agentMindscape?: number
+  coreSkillLevel?: number
+  wEngineRefinement?: number
+}
+
+export interface BuildToolResolvedLoadoutOptions extends BuildToolProgressionInput {
+  agent: Pick<CatalogItem, "id">
+  wEngine?: Pick<CatalogItem, "id">
+  driveDiscSets?: StaticBuildDriveDiscSetInput[]
+}
+
 export interface BuildToolSourceUtilitySupport<T extends CatalogItem> {
   items: T[]
   names: string[]
@@ -686,6 +699,26 @@ export function buildToolLoadoutInput({
     coreSkillLevel,
     wEngineRefinement,
   }
+}
+
+export function buildToolResolvedLoadoutInput({
+  agent,
+  wEngine,
+  driveDiscSets,
+  agentLevel,
+  agentMindscape,
+  coreSkillLevel,
+  wEngineRefinement,
+}: BuildToolResolvedLoadoutOptions): StaticBuildLoadoutInput {
+  return buildToolLoadoutInput({
+    agentId: agent.id,
+    wEngineId: wEngine?.id,
+    driveDiscSets,
+    agentLevel,
+    agentMindscape,
+    coreSkillLevel,
+    wEngineRefinement,
+  })
 }
 
 export function resolveBuildToolSourceUtilitySupport<

@@ -9,7 +9,7 @@ import {
   supportedStaticBuildWEngines,
 } from "zzz-data"
 import {
-  buildToolLoadoutInput,
+  buildToolResolvedLoadoutInput,
   buildToolScopeLabels,
   buildTriggerMatrixSuccessResponse,
   resolveBuildInputSchema,
@@ -74,9 +74,9 @@ export const resolveBuildTriggerMatrix = createTool({
     if (!driveDiscResolution.ok) {
       return driveDiscResolution.response
     }
-    const loadout = buildToolLoadoutInput({
-      agentId: agent.id,
-      wEngineId: wEngine?.id,
+    const loadout = buildToolResolvedLoadoutInput({
+      agent,
+      wEngine,
       driveDiscSets: driveDiscResolution.driveDiscSets,
       agentLevel: input.agentLevel,
       agentMindscape: input.agentMindscape,

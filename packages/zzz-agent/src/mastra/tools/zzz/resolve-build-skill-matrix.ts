@@ -11,7 +11,7 @@ import {
 } from "zzz-data"
 import {
   buildSkillMatrixSuccessResponse,
-  buildToolLoadoutInput,
+  buildToolResolvedLoadoutInput,
   buildToolScopeLabels,
   resolveBuildToolAgent,
   resolveBuildToolDriveDiscSets,
@@ -120,9 +120,9 @@ export const resolveBuildSkillMatrix = createTool({
     if (!driveDiscResolution.ok) {
       return driveDiscResolution.response
     }
-    const loadout = buildToolLoadoutInput({
-      agentId: agent.id,
-      wEngineId: wEngine?.id,
+    const loadout = buildToolResolvedLoadoutInput({
+      agent,
+      wEngine,
       driveDiscSets: driveDiscResolution.driveDiscSets,
       agentMindscape: input.agentMindscape,
       coreSkillLevel: input.coreSkillLevel,

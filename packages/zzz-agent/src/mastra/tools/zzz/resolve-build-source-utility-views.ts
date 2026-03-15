@@ -12,7 +12,7 @@ import {
 import {
   buildMissingSourceUtilityWEngineResponse,
   buildSourceUtilityViewsSuccessResponse,
-  buildToolLoadoutInput,
+  buildToolResolvedLoadoutInput,
   buildToolScopeLabels,
   buildUncoveredSourceUtilityWEngineResponse,
   resolveBuildSourceUtilityInputSchema,
@@ -81,9 +81,9 @@ export const resolveBuildSourceUtilityViews = createTool({
     if (!driveDiscResolution.ok) {
       return driveDiscResolution.response
     }
-    const loadout = buildToolLoadoutInput({
-      agentId: agent.id,
-      wEngineId: wEngine.id,
+    const loadout = buildToolResolvedLoadoutInput({
+      agent,
+      wEngine,
       driveDiscSets: driveDiscResolution.driveDiscSets,
       agentLevel: input.agentLevel,
       agentMindscape: input.agentMindscape,

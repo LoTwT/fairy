@@ -10,7 +10,7 @@ import {
 } from "zzz-data"
 import {
   buildSourceDamageViewsSuccessResponse,
-  buildToolLoadoutInput,
+  buildToolResolvedLoadoutInput,
   buildToolScopeLabels,
   buildUncoveredSourceDamageViewResponse,
   resolveBuildInputSchema,
@@ -75,9 +75,9 @@ export const resolveBuildSourceDamageViews = createTool({
     if (!driveDiscResolution.ok) {
       return driveDiscResolution.response
     }
-    const loadout = buildToolLoadoutInput({
-      agentId: agent.id,
-      wEngineId: wEngine?.id,
+    const loadout = buildToolResolvedLoadoutInput({
+      agent,
+      wEngine,
       driveDiscSets: driveDiscResolution.driveDiscSets,
       agentLevel: input.agentLevel,
       agentMindscape: input.agentMindscape,
