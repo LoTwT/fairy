@@ -11,7 +11,7 @@ import type {
   StaticBuildSourceUtilityViewRequirementKind,
   StaticBuildSourceUtilityViewRequirementSummary,
   StaticBuildSourceUtilityViewSummary,
-  StaticBuildValueContext,
+  StaticBuildWEngineRefinement,
 } from "./types.js"
 import {
   getCompatibleStaticBuildUtilityWEngines,
@@ -68,7 +68,7 @@ const timeSliceTriggers = [
 
 function byRefinement(
   values: readonly number[],
-  refinement: StaticBuildValueContext["wEngineRefinement"],
+  refinement: StaticBuildWEngineRefinement,
 ) {
   const index = Math.max(1, Math.min(refinement, values.length)) - 1
   return values[index] ?? values[values.length - 1] ?? 0

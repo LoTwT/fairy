@@ -1,6 +1,8 @@
 import type { AnomalyType } from "../calculator/types.js"
 import type {
+  StaticBuildAgentMindscape,
   StaticBuildDamageType,
+  StaticBuildDriveDiscPieces,
   StaticBuildDynamicCountKey,
   StaticBuildDynamicFlagKey,
   StaticBuildDynamicSnapshotInput,
@@ -3986,8 +3988,8 @@ export const staticBuildEffectDefinitions = [
 interface StaticBuildSourceNote {
   sourceType: StaticBuildSourceType
   sourceId: string
-  minimumPieces?: 2 | 4
-  minimumMindscape?: number
+  minimumPieces?: StaticBuildDriveDiscPieces
+  minimumMindscape?: StaticBuildAgentMindscape
   requireStunned?: boolean
   requiresAnomalyMastery?: boolean
   requiresMissingAnomalyMastery?: boolean
@@ -4772,23 +4774,16 @@ function matchesStaticBuildSourceNote(
   input: {
     sourceType: StaticBuildSourceType
     sourceId?: string
-    damageType: "normal" | "sheer" | "anomaly" | "disorder"
-    agentMindscape?: number
+    damageType: StaticBuildDamageType
+    agentMindscape?: StaticBuildAgentMindscape
     energyGenerationRate?: number
     anomalyMastery?: number
     dynamicSnapshot?: StaticBuildDynamicSnapshotInput
     stateSnapshot?: StaticBuildStateSnapshotInput
     resolvedSnapshot?: StaticBuildResolvedSnapshotInput
     isStunned?: boolean
-    disorderSourceType?:
-      | "fire"
-      | "electric"
-      | "ether"
-      | "ice"
-      | "physical"
-      | "auricInk"
-      | "frost"
-    pieces?: 2 | 4
+    disorderSourceType?: AnomalyType
+    pieces?: StaticBuildDriveDiscPieces
   },
 ) {
   if (!input.sourceId) return false
@@ -4963,23 +4958,16 @@ function matchesStaticBuildSourceNote(
 export function getStaticBuildSourceNoteEntries(input: {
   sourceType: StaticBuildSourceType
   sourceId?: string
-  damageType: "normal" | "sheer" | "anomaly" | "disorder"
-  agentMindscape?: number
+  damageType: StaticBuildDamageType
+  agentMindscape?: StaticBuildAgentMindscape
   energyGenerationRate?: number
   anomalyMastery?: number
   dynamicSnapshot?: StaticBuildDynamicSnapshotInput
   stateSnapshot?: StaticBuildStateSnapshotInput
   resolvedSnapshot?: StaticBuildResolvedSnapshotInput
   isStunned?: boolean
-  disorderSourceType?:
-    | "fire"
-    | "electric"
-    | "ether"
-    | "ice"
-    | "physical"
-    | "auricInk"
-    | "frost"
-  pieces?: 2 | 4
+  disorderSourceType?: AnomalyType
+  pieces?: StaticBuildDriveDiscPieces
 }) {
   if (!input.sourceId) return []
   return staticBuildSourceNotes
@@ -5004,23 +4992,16 @@ export function getStaticBuildSourceNoteEntries(input: {
 export function getStaticBuildSourceNotes(input: {
   sourceType: StaticBuildSourceType
   sourceId?: string
-  damageType: "normal" | "sheer" | "anomaly" | "disorder"
-  agentMindscape?: number
+  damageType: StaticBuildDamageType
+  agentMindscape?: StaticBuildAgentMindscape
   energyGenerationRate?: number
   anomalyMastery?: number
   dynamicSnapshot?: StaticBuildDynamicSnapshotInput
   stateSnapshot?: StaticBuildStateSnapshotInput
   resolvedSnapshot?: StaticBuildResolvedSnapshotInput
   isStunned?: boolean
-  disorderSourceType?:
-    | "fire"
-    | "electric"
-    | "ether"
-    | "ice"
-    | "physical"
-    | "auricInk"
-    | "frost"
-  pieces?: 2 | 4
+  disorderSourceType?: AnomalyType
+  pieces?: StaticBuildDriveDiscPieces
 }) {
   return getStaticBuildSourceNoteEntries(input).map((note) => note.message)
 }

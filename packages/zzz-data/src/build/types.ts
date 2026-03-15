@@ -104,6 +104,11 @@ export type StaticBuildResolvedSnapshotBucketKey =
   | "anomalyCritDamage"
 
 export type StaticBuildResolvedSnapshotMultiplierKey = "skillMultiplierFactor"
+export type StaticBuildDriveDiscPieces = 2 | 4
+export type StaticBuildAgentLevel = number
+export type StaticBuildAgentMindscape = number
+export type StaticBuildCoreSkillLevel = number
+export type StaticBuildWEngineRefinement = number
 
 export interface StaticBuildDynamicSnapshotInput {
   flags?: Partial<Record<StaticBuildDynamicFlagKey, boolean>>
@@ -125,7 +130,7 @@ export interface StaticBuildResolvedSnapshotInput {
 
 export interface StaticBuildDriveDiscSetInput {
   id: string
-  pieces: 2 | 4
+  pieces: StaticBuildDriveDiscPieces
 }
 
 export type StaticBuildDriveDiscSetsInput =
@@ -136,10 +141,10 @@ export interface StaticBuildLoadoutInput {
   agentId: string
   wEngineId?: string
   driveDiscSets?: StaticBuildDriveDiscSetsInput
-  agentLevel?: number
-  agentMindscape?: number
-  coreSkillLevel?: number
-  wEngineRefinement?: number
+  agentLevel?: StaticBuildAgentLevel
+  agentMindscape?: StaticBuildAgentMindscape
+  coreSkillLevel?: StaticBuildCoreSkillLevel
+  wEngineRefinement?: StaticBuildWEngineRefinement
 }
 
 export interface StaticBuildFinalPanelInput {
@@ -299,9 +304,9 @@ export interface StaticBuildEffectCondition {
 }
 
 export interface StaticBuildValueContext {
-  agentMindscape: number
-  coreSkillLevel: number
-  wEngineRefinement: number
+  agentMindscape: StaticBuildAgentMindscape
+  coreSkillLevel: StaticBuildCoreSkillLevel
+  wEngineRefinement: StaticBuildWEngineRefinement
   energyGenerationRate?: number
   anomalyMastery?: number
   resolvedAnomalyProficiency?: number
@@ -402,13 +407,13 @@ export interface StaticBuildResolvedLoadout {
   wEngine?: StaticBuildWEngineCatalogEntry
   driveDiscSets: Array<
     StaticBuildCatalogEntry & {
-      pieces: 2 | 4
+      pieces: StaticBuildDriveDiscPieces
     }
   >
-  agentLevel: number
-  agentMindscape: number
-  coreSkillLevel: number
-  wEngineRefinement: number
+  agentLevel: StaticBuildAgentLevel
+  agentMindscape: StaticBuildAgentMindscape
+  coreSkillLevel: StaticBuildCoreSkillLevel
+  wEngineRefinement: StaticBuildWEngineRefinement
 }
 
 export type StaticBuildSourceNoteOwner =
