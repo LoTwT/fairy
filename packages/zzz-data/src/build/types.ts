@@ -166,6 +166,7 @@ export type StaticBuildVariableFormulaMultiplierList = string[]
 export type StaticBuildAssumptionList = string[]
 export type StaticBuildUnsupportedEffectList = string[]
 export type StaticBuildCombatTagList = string[]
+export type StaticBuildAliasList = string[]
 export type StaticBuildDefenderBaseDefense = number
 export type StaticBuildDefenderResistance = number
 export type StaticBuildDefenseBonus = number
@@ -328,7 +329,7 @@ export interface ResolveStaticBuildSkillMatrixInput {
 export interface StaticBuildCatalogEntry {
   id: string
   name: string
-  aliases: string[]
+  aliases: StaticBuildAliasList
 }
 
 export interface StaticBuildBaseAgentCatalogEntry extends StaticBuildCatalogEntry {

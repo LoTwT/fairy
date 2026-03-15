@@ -62,6 +62,7 @@ export type {
   StaticBuildAgentCatalogEntry,
   StaticBuildAgentLevel,
   StaticBuildAgentMindscape,
+  StaticBuildAliasList,
   StaticBuildAnomalyBonusDamageSum,
   StaticBuildAnomalyCritDamage,
   StaticBuildAnomalyCritRate,
