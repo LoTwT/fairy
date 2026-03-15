@@ -11,11 +11,8 @@ import {
 } from "zzz-data"
 import {
   buildSkillMatrixSuccessResponse,
-  buildToolResolvedLoadoutInput,
   buildToolScopeLabels,
-  resolveBuildToolAgent,
-  resolveBuildToolDriveDiscSets,
-  resolveBuildToolWEngine,
+  resolveBuildToolLoadoutContext,
 } from "./resolve-build-shared"
 
 export const resolveBuildSkillMatrix = createTool({
@@ -90,44 +87,24 @@ export const resolveBuildSkillMatrix = createTool({
       ),
   }),
   execute: async (input) => {
-    const agentResolution = resolveBuildToolAgent(
-      buildToolScopeLabels.skillMatrix,
-      supportedStaticBuildMatrixAgents,
-      input.agent,
-    )
-    if (!agentResolution.ok) {
-      return agentResolution.response
-    }
-    const agent = agentResolution.agent
-
-    const wEngineResolution = resolveBuildToolWEngine(
-      buildToolScopeLabels.skillMatrix,
-      supportedStaticBuildWEngines,
-      getCompatibleStaticBuildWEngines(agent.specialty),
-      input.wEngine,
-      agent,
-    )
-    if (!wEngineResolution.ok) {
-      return wEngineResolution.response
-    }
-    const wEngine = wEngineResolution.wEngine
-
-    const driveDiscResolution = resolveBuildToolDriveDiscSets(
-      buildToolScopeLabels.skillMatrix,
-      input.driveDiscs,
-      supportedStaticBuildDriveDiscs,
-    )
-    if (!driveDiscResolution.ok) {
-      return driveDiscResolution.response
-    }
-    const loadout = buildToolResolvedLoadoutInput({
-      agent,
-      wEngine,
-      driveDiscSets: driveDiscResolution.driveDiscSets,
+    const loadoutResolution = resolveBuildToolLoadoutContext({
+      scopeLabel: buildToolScopeLabels.skillMatrix,
+      supportedAgents: supportedStaticBuildMatrixAgents,
+      supportedWEngines: supportedStaticBuildWEngines,
+      supportedDriveDiscs: supportedStaticBuildDriveDiscs,
+      agentQuery: input.agent,
+      wEngineQuery: input.wEngine,
+      driveDiscs: input.driveDiscs,
+      getCompatibleWEngines: (agent) =>
+        getCompatibleStaticBuildWEngines(agent.specialty),
       agentMindscape: input.agentMindscape,
       coreSkillLevel: input.coreSkillLevel,
       wEngineRefinement: input.wEngineRefinement,
     })
+    if (!loadoutResolution.ok) {
+      return loadoutResolution.response
+    }
+    const { loadout } = loadoutResolution
 
     const matrix = resolveStaticBuildSkillMatrix({
       mode: input.mode,

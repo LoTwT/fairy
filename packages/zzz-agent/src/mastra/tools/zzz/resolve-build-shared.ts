@@ -146,6 +146,17 @@ export interface BuildToolResolvedDriveDiscSets {
   driveDiscSets: StaticBuildDriveDiscSetInput[]
 }
 
+export interface BuildToolResolvedLoadoutContext<
+  TAgent extends CatalogItem,
+  TWEngine extends CatalogItem,
+> {
+  ok: true
+  agent: TAgent
+  compatibleWEngines: readonly TWEngine[]
+  wEngine: TWEngine | undefined
+  loadout: StaticBuildLoadoutInput
+}
+
 export interface BuildToolResolvedAgent<T extends CatalogItem> {
   ok: true
   agent: T
@@ -216,6 +227,26 @@ export type BuildToolResolvedScenario =
 export interface BuildToolSourceUtilitySupport<T extends CatalogItem> {
   items: T[]
   names: string[]
+}
+
+export interface BuildToolResolveLoadoutContextOptions<
+  TAgent extends CatalogItem & { specialty: keyof typeof specialtyLabels },
+  TWEngine extends CatalogItem & { specialty: keyof typeof specialtyLabels },
+  TDriveDisc extends CatalogItem,
+> extends BuildToolProgressionInput {
+  scopeLabel: BuildToolScopeLabel
+  supportedAgents: readonly TAgent[]
+  supportedWEngines: readonly TWEngine[]
+  supportedDriveDiscs: readonly TDriveDisc[]
+  agentQuery: string
+  wEngineQuery?: string
+  driveDiscs?:
+    | Array<{
+        name: string
+        pieces: 2 | 4
+      }>
+    | undefined
+  getCompatibleWEngines: (agent: TAgent) => readonly TWEngine[]
 }
 
 export interface BuildToolResolvedSourceEntriesContext {
@@ -756,6 +787,65 @@ export function resolveBuildToolSourceUtilitySupport<
   return {
     items,
     names: catalogNames(items),
+  }
+}
+
+export function resolveBuildToolLoadoutContext<
+  TAgent extends CatalogItem & { specialty: keyof typeof specialtyLabels },
+  TWEngine extends CatalogItem & { specialty: keyof typeof specialtyLabels },
+  TDriveDisc extends CatalogItem,
+>(
+  options: BuildToolResolveLoadoutContextOptions<TAgent, TWEngine, TDriveDisc>,
+):
+  | BuildToolResolvedLoadoutContext<TAgent, TWEngine>
+  | BuildToolRejectedAgent
+  | BuildToolRejectedWEngine
+  | BuildToolRejectedDriveDiscSets {
+  const agentResolution = resolveBuildToolAgent(
+    options.scopeLabel,
+    options.supportedAgents,
+    options.agentQuery,
+  )
+  if (!agentResolution.ok) {
+    return agentResolution
+  }
+
+  const agent = agentResolution.agent
+  const compatibleWEngines = options.getCompatibleWEngines(agent)
+  const wEngineResolution = resolveBuildToolWEngine(
+    options.scopeLabel,
+    options.supportedWEngines,
+    compatibleWEngines,
+    options.wEngineQuery,
+    agent,
+  )
+  if (!wEngineResolution.ok) {
+    return wEngineResolution
+  }
+
+  const driveDiscResolution = resolveBuildToolDriveDiscSets(
+    options.scopeLabel,
+    options.driveDiscs,
+    options.supportedDriveDiscs,
+  )
+  if (!driveDiscResolution.ok) {
+    return driveDiscResolution
+  }
+
+  return {
+    ok: true,
+    agent,
+    compatibleWEngines,
+    wEngine: wEngineResolution.wEngine,
+    loadout: buildToolResolvedLoadoutInput({
+      agent,
+      wEngine: wEngineResolution.wEngine,
+      driveDiscSets: driveDiscResolution.driveDiscSets,
+      agentLevel: options.agentLevel,
+      agentMindscape: options.agentMindscape,
+      coreSkillLevel: options.coreSkillLevel,
+      wEngineRefinement: options.wEngineRefinement,
+    }),
   }
 }
 

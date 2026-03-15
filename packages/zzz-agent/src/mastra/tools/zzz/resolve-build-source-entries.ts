@@ -15,17 +15,14 @@ import {
 } from "zzz-data"
 import {
   buildSourceEntryCollectionSuccessResponse,
-  buildToolResolvedLoadoutInput,
   buildToolScopeLabels,
   buildUncoveredSourceEntryCoverageResponse,
   buildUncoveredSourceEntryUtilityOnlyResponse,
   candidateNames,
   resolveBuildSourceEntriesInputSchema,
-  resolveBuildToolAgent,
-  resolveBuildToolDriveDiscSets,
+  resolveBuildToolLoadoutContext,
   resolveBuildToolSourceEntriesContext,
   resolveBuildToolSourceUtilitySupport,
-  resolveBuildToolWEngine,
 } from "./resolve-build-shared"
 
 export const resolveBuildSourceEntries = createTool({
@@ -55,56 +52,36 @@ export const resolveBuildSourceEntries = createTool({
       ? supportedStaticBuildUtilityAgents
       : supportedStaticBuildAgents
 
-    const agentResolution = resolveBuildToolAgent(
-      buildToolScopeLabels.sourceEntryCollection,
-      agentCatalog,
-      input.agent,
-    )
-    if (!agentResolution.ok) {
-      return agentResolution.response
-    }
-    const agent = agentResolution.agent
-
-    const compatibleWEngines = utilityOnly
-      ? getCompatibleStaticBuildUtilityWEngines(agent.specialty)
-      : getCompatibleStaticBuildWEngines(agent.specialty)
-    const sourceUtilitySupport = resolveBuildToolSourceUtilitySupport(
-      supportedStaticBuildSourceUtilityViewWEngines,
-      agent.specialty,
-    )
-    const supportedUtilityWEngines = sourceUtilitySupport.names
-
-    const wEngineResolution = resolveBuildToolWEngine(
-      buildToolScopeLabels.sourceEntryCollection,
-      utilityOnly
+    const loadoutResolution = resolveBuildToolLoadoutContext({
+      scopeLabel: buildToolScopeLabels.sourceEntryCollection,
+      supportedAgents: agentCatalog,
+      supportedWEngines: utilityOnly
         ? supportedStaticBuildUtilityWEngines
         : supportedStaticBuildWEngines,
-      compatibleWEngines,
-      input.wEngine,
-      agent,
-    )
-    if (!wEngineResolution.ok) {
-      return wEngineResolution.response
-    }
-    const wEngine = wEngineResolution.wEngine
-
-    const driveDiscResolution = resolveBuildToolDriveDiscSets(
-      buildToolScopeLabels.sourceEntryCollection,
-      input.driveDiscs,
-      supportedStaticBuildDriveDiscs,
-    )
-    if (!driveDiscResolution.ok) {
-      return driveDiscResolution.response
-    }
-    const loadout = buildToolResolvedLoadoutInput({
-      agent,
-      wEngine,
-      driveDiscSets: driveDiscResolution.driveDiscSets,
+      supportedDriveDiscs: supportedStaticBuildDriveDiscs,
+      agentQuery: input.agent,
+      wEngineQuery: input.wEngine,
+      driveDiscs: input.driveDiscs,
+      getCompatibleWEngines: (agent) =>
+        utilityOnly
+          ? getCompatibleStaticBuildUtilityWEngines(agent.specialty)
+          : getCompatibleStaticBuildWEngines(agent.specialty),
       agentLevel: input.agentLevel,
       agentMindscape: input.agentMindscape,
       coreSkillLevel: input.coreSkillLevel,
       wEngineRefinement: input.wEngineRefinement,
     })
+    if (!loadoutResolution.ok) {
+      return loadoutResolution.response
+    }
+    const { agent, compatibleWEngines, wEngine } = loadoutResolution
+
+    const sourceUtilitySupport = resolveBuildToolSourceUtilitySupport(
+      supportedStaticBuildSourceUtilityViewWEngines,
+      agent.specialty,
+    )
+    const supportedUtilityWEngines = sourceUtilitySupport.names
+    const { loadout } = loadoutResolution
 
     const collection = resolveStaticBuildSourceEntries({
       mode: input.mode,

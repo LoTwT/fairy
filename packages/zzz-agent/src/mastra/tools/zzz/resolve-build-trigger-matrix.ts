@@ -9,15 +9,12 @@ import {
   supportedStaticBuildWEngines,
 } from "zzz-data"
 import {
-  buildToolResolvedLoadoutInput,
   buildToolScopeLabels,
   buildTriggerMatrixSuccessResponse,
   resolveBuildInputSchema,
-  resolveBuildToolAgent,
   resolveBuildToolDamageType,
-  resolveBuildToolDriveDiscSets,
+  resolveBuildToolLoadoutContext,
   resolveBuildToolResolvedScenario,
-  resolveBuildToolWEngine,
 } from "./resolve-build-shared"
 
 export const resolveBuildTriggerMatrix = createTool({
@@ -43,45 +40,25 @@ export const resolveBuildTriggerMatrix = createTool({
       return damageTypeResolution.response
     }
 
-    const agentResolution = resolveBuildToolAgent(
-      buildToolScopeLabels.triggerMatrix,
-      supportedStaticBuildTriggerMatrixAgents,
-      input.agent,
-    )
-    if (!agentResolution.ok) {
-      return agentResolution.response
-    }
-    const agent = agentResolution.agent
-
-    const wEngineResolution = resolveBuildToolWEngine(
-      buildToolScopeLabels.triggerMatrix,
-      supportedStaticBuildWEngines,
-      getCompatibleStaticBuildWEngines(agent.specialty),
-      input.wEngine,
-      agent,
-    )
-    if (!wEngineResolution.ok) {
-      return wEngineResolution.response
-    }
-    const wEngine = wEngineResolution.wEngine
-
-    const driveDiscResolution = resolveBuildToolDriveDiscSets(
-      buildToolScopeLabels.triggerMatrix,
-      input.driveDiscs,
-      supportedStaticBuildDriveDiscs,
-    )
-    if (!driveDiscResolution.ok) {
-      return driveDiscResolution.response
-    }
-    const loadout = buildToolResolvedLoadoutInput({
-      agent,
-      wEngine,
-      driveDiscSets: driveDiscResolution.driveDiscSets,
+    const loadoutResolution = resolveBuildToolLoadoutContext({
+      scopeLabel: buildToolScopeLabels.triggerMatrix,
+      supportedAgents: supportedStaticBuildTriggerMatrixAgents,
+      supportedWEngines: supportedStaticBuildWEngines,
+      supportedDriveDiscs: supportedStaticBuildDriveDiscs,
+      agentQuery: input.agent,
+      wEngineQuery: input.wEngine,
+      driveDiscs: input.driveDiscs,
+      getCompatibleWEngines: (agent) =>
+        getCompatibleStaticBuildWEngines(agent.specialty),
       agentLevel: input.agentLevel,
       agentMindscape: input.agentMindscape,
       coreSkillLevel: input.coreSkillLevel,
       wEngineRefinement: input.wEngineRefinement,
     })
+    if (!loadoutResolution.ok) {
+      return loadoutResolution.response
+    }
+    const { loadout } = loadoutResolution
 
     const scenarioResolution = resolveBuildToolResolvedScenario(input.scenario)
     if (!scenarioResolution.ok) {
