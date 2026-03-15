@@ -25,9 +25,8 @@ import {
   finalPanelSchema,
   resolveBuildSourceEntriesInputSchema,
   resolveBuildToolAgent,
-  resolveBuildToolDisorderScenario,
   resolveBuildToolDriveDiscSets,
-  resolveBuildToolScenario,
+  resolveBuildToolOptionalScenario,
   resolveBuildToolSourceUtilitySupport,
   resolveBuildToolWEngine,
 } from "./resolve-build-shared"
@@ -106,18 +105,12 @@ export const resolveBuildSourceEntries = createTool({
       wEngineRefinement: input.wEngineRefinement,
     })
 
-    let scenario: ResolveStaticBuildSourceEntriesInput["scenario"]
-    if (input.scenario?.damageType === "disorder") {
-      const disorderScenarioResolution = resolveBuildToolDisorderScenario(
-        input.scenario,
-      )
-      if (!disorderScenarioResolution.ok) {
-        return disorderScenarioResolution.response
-      }
-      scenario = disorderScenarioResolution.scenario
-    } else if (input.scenario) {
-      scenario = resolveBuildToolScenario(input.scenario)
+    const scenarioResolution = resolveBuildToolOptionalScenario(input.scenario)
+    if (!scenarioResolution.ok) {
+      return scenarioResolution.response
     }
+    const scenario: ResolveStaticBuildSourceEntriesInput["scenario"] =
+      scenarioResolution.scenario
 
     let panel: ResolveStaticBuildSourceEntriesInput["panel"]
     if (

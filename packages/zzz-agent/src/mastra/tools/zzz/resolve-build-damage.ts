@@ -14,9 +14,8 @@ import {
   buildToolScopeLabels,
   resolveBuildInputSchema,
   resolveBuildToolAgent,
-  resolveBuildToolDisorderScenario,
   resolveBuildToolDriveDiscSets,
-  resolveBuildToolScenario,
+  resolveBuildToolResolvedScenario,
   resolveBuildToolWEngine,
 } from "./resolve-build-shared"
 
@@ -74,26 +73,9 @@ export const resolveBuildDamage = createTool({
       wEngineRefinement: input.wEngineRefinement,
     })
 
-    if (input.scenario.damageType === "disorder") {
-      const disorderScenarioResolution = resolveBuildToolDisorderScenario(
-        input.scenario,
-      )
-      if (!disorderScenarioResolution.ok) {
-        return disorderScenarioResolution.response
-      }
-
-      const build = resolveStaticBuildDamage({
-        mode: input.mode,
-        manualBaseMode: input.manualBaseMode,
-        loadout,
-        panel: input.finalPanel,
-        scenario: disorderScenarioResolution.scenario,
-        effectOverrides: input.effectOverrides,
-      })
-
-      return buildDamageSuccessResponse(
-        compactStaticBuildResult(build, input.includeDetails),
-      )
+    const scenarioResolution = resolveBuildToolResolvedScenario(input.scenario)
+    if (!scenarioResolution.ok) {
+      return scenarioResolution.response
     }
 
     const build = resolveStaticBuildDamage({
@@ -101,7 +83,7 @@ export const resolveBuildDamage = createTool({
       manualBaseMode: input.manualBaseMode,
       loadout,
       panel: input.finalPanel,
-      scenario: resolveBuildToolScenario(input.scenario),
+      scenario: scenarioResolution.scenario,
       effectOverrides: input.effectOverrides,
     })
 

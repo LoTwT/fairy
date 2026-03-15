@@ -963,3 +963,4 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 212. `V212` build-tool damage-type helper contracts：当前阶段已收口；`trigger-matrix / source-damage-view` 的 damage-type gating 已收进 shared helper，不改变任何 tool 的输入输出 shape，见 [静态构筑解析系统 V212](./static-build-resolver-v212.md)
 213. `V213` build-tool utility support helper contracts：当前阶段已收口；`source-utility-view / source-entry` 的 utility support 派生已收进 shared helper，不改变任何 tool 的输入输出 shape，见 [静态构筑解析系统 V213](./static-build-resolver-v213.md)
 214. `V214` build-tool resolved loadout helper contracts：当前阶段已收口；6 个高层 build tool 的 progression-aware `loadout` 组装已收进 shared helper，不改变任何 tool 的输入输出 shape，见 [静态构筑解析系统 V214](./static-build-resolver-v214.md)
+215. `V215` build-tool resolved scenario helper contracts：当前阶段已收口；`resolver / trigger-matrix / source-damage-view / source-entry collection` 的 disorder-aware `scenario` 组装已收进 shared helper，不改变任何 tool 的输入输出 shape，见 [静态构筑解析系统 V215](./static-build-resolver-v215.md)

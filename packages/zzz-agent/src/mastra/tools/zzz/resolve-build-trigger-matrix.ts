@@ -15,9 +15,8 @@ import {
   resolveBuildInputSchema,
   resolveBuildToolAgent,
   resolveBuildToolDamageType,
-  resolveBuildToolDisorderScenario,
   resolveBuildToolDriveDiscSets,
-  resolveBuildToolScenario,
+  resolveBuildToolResolvedScenario,
   resolveBuildToolWEngine,
 } from "./resolve-build-shared"
 
@@ -84,13 +83,7 @@ export const resolveBuildTriggerMatrix = createTool({
       wEngineRefinement: input.wEngineRefinement,
     })
 
-    const scenarioResolution =
-      damageTypeResolution.damageType === "disorder"
-        ? resolveBuildToolDisorderScenario(input.scenario)
-        : {
-            ok: true as const,
-            scenario: resolveBuildToolScenario(input.scenario),
-          }
+    const scenarioResolution = resolveBuildToolResolvedScenario(input.scenario)
     if (!scenarioResolution.ok) {
       return scenarioResolution.response
     }

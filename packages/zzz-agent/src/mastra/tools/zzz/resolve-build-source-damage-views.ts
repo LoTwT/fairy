@@ -16,9 +16,8 @@ import {
   resolveBuildInputSchema,
   resolveBuildToolAgent,
   resolveBuildToolDamageType,
-  resolveBuildToolDisorderScenario,
   resolveBuildToolDriveDiscSets,
-  resolveBuildToolScenario,
+  resolveBuildToolResolvedScenario,
   resolveBuildToolWEngine,
 } from "./resolve-build-shared"
 
@@ -85,33 +84,9 @@ export const resolveBuildSourceDamageViews = createTool({
       wEngineRefinement: input.wEngineRefinement,
     })
 
-    if (damageTypeResolution.damageType === "disorder") {
-      const disorderScenarioResolution = resolveBuildToolDisorderScenario(
-        input.scenario,
-      )
-      if (!disorderScenarioResolution.ok) {
-        return disorderScenarioResolution.response
-      }
-
-      const views = resolveStaticBuildSourceDamageViews({
-        mode: input.mode,
-        manualBaseMode: input.manualBaseMode,
-        loadout,
-        panel: input.finalPanel,
-        scenario: disorderScenarioResolution.scenario,
-        effectOverrides: input.effectOverrides,
-      })
-
-      if (views.entries.length === 0) {
-        return buildUncoveredSourceDamageViewResponse(
-          supportedStaticBuildSourceViewAgents,
-          agent.name,
-        )
-      }
-
-      return buildSourceDamageViewsSuccessResponse(
-        compactStaticBuildSourceDamageViewsResult(views, input.includeDetails),
-      )
+    const scenarioResolution = resolveBuildToolResolvedScenario(input.scenario)
+    if (!scenarioResolution.ok) {
+      return scenarioResolution.response
     }
 
     const views = resolveStaticBuildSourceDamageViews({
@@ -119,7 +94,7 @@ export const resolveBuildSourceDamageViews = createTool({
       manualBaseMode: input.manualBaseMode,
       loadout,
       panel: input.finalPanel,
-      scenario: resolveBuildToolScenario(input.scenario),
+      scenario: scenarioResolution.scenario,
       effectOverrides: input.effectOverrides,
     })
 

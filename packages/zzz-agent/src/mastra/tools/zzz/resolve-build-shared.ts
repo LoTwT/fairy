@@ -195,6 +195,23 @@ export interface BuildToolResolvedLoadoutOptions extends BuildToolProgressionInp
   driveDiscSets?: StaticBuildDriveDiscSetInput[]
 }
 
+export type BuildToolScenarioInput = z.infer<typeof resolveBuildScenarioSchema>
+
+export type BuildToolResolvedScenario =
+  | (Omit<
+      Exclude<BuildToolScenarioInput, { damageType: "disorder" }>,
+      "attribute"
+    > & {
+      attribute?: AgentAttributeLabel
+    })
+  | (Omit<
+      Extract<BuildToolScenarioInput, { damageType: "disorder" }>,
+      "anomalyType" | "attribute"
+    > & {
+      anomalyType: AnomalyType
+      attribute?: AgentAttributeLabel
+    })
+
 export interface BuildToolSourceUtilitySupport<T extends CatalogItem> {
   items: T[]
   names: string[]
@@ -803,6 +820,48 @@ export function resolveBuildToolDisorderScenario<
       attribute: normalizeBuildToolAttribute(scenario.attribute),
     },
   }
+}
+
+export function resolveBuildToolResolvedScenario(
+  scenario: BuildToolScenarioInput,
+):
+  | {
+      ok: true
+      scenario: BuildToolResolvedScenario
+    }
+  | {
+      ok: false
+      response: BuildToolUnsupportedAnomalyTypeResponse
+    } {
+  if (scenario.damageType === "disorder") {
+    return resolveBuildToolDisorderScenario(scenario)
+  }
+
+  return {
+    ok: true,
+    scenario: resolveBuildToolScenario(scenario),
+  }
+}
+
+export function resolveBuildToolOptionalScenario(
+  scenario: BuildToolScenarioInput | undefined,
+):
+  | {
+      ok: true
+      scenario: BuildToolResolvedScenario | undefined
+    }
+  | {
+      ok: false
+      response: BuildToolUnsupportedAnomalyTypeResponse
+    } {
+  if (!scenario) {
+    return {
+      ok: true,
+      scenario: undefined,
+    }
+  }
+
+  return resolveBuildToolResolvedScenario(scenario)
 }
 
 export function buildUnsupportedDamageTypeResponse(
