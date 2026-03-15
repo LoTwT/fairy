@@ -325,3 +325,4 @@ const total = base * bonus * crit * resistance * custom
 - `V335` assumption and combat-tag set reuse：当前阶段进行中；`source-entry` 的 assumptions 去重集合与 `resolver / skill-matrix` 的 combat-tag 去重集合已开始统一复用既有显式公开 set contract
 - `V336` catalog source item contracts：当前阶段进行中；`catalog.ts` 中读取上游 `agents.json / w-engines.json` 的 source item shape 与 helper 参数已开始统一复用显式公开 contract
 - `V337` skill-matrix template contracts：当前阶段进行中；`matrix.ts` 中 skill-matrix template / source-stat helper 的本地 interface 与裸参数已开始统一复用显式公开 contract
+- `V338` source-view requirement key helper contracts：当前阶段进行中；`views.ts / utility-views.ts` 中 requirement helper 的 `key` 参数已开始统一复用既有 `StaticBuildRequirementKey`

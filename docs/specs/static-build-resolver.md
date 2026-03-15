@@ -1086,3 +1086,4 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 335. `V335` assumption and combat-tag set reuse：当前阶段进行中；`source-entry` 的 assumptions 去重集合与 `resolver / skill-matrix` 的 combat-tag 去重集合已开始统一复用既有显式公开 set contract，不改变任何运行时行为，见 [静态构筑解析系统 V335](./static-build-resolver-v335.md)
 336. `V336` catalog source item contracts：当前阶段进行中；`catalog.ts` 中读取上游 `agents.json / w-engines.json` 的 source item shape 与 helper 参数已开始统一复用显式公开 contract，不改变任何运行时行为，见 [静态构筑解析系统 V336](./static-build-resolver-v336.md)
 337. `V337` skill-matrix template contracts：当前阶段进行中；`matrix.ts` 中 skill-matrix template / source-stat helper 的本地 interface 与裸参数已开始统一复用显式公开 contract，不改变任何运行时行为，见 [静态构筑解析系统 V337](./static-build-resolver-v337.md)
+338. `V338` source-view requirement key helper contracts：当前阶段进行中；`views.ts / utility-views.ts` 中 requirement helper 的 `key` 参数已开始统一复用既有 `StaticBuildRequirementKey`，不改变任何运行时行为，见 [静态构筑解析系统 V338](./static-build-resolver-v338.md)

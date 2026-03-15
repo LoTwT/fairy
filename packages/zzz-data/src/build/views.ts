@@ -12,6 +12,7 @@ import type {
   StaticBuildEffectSummaryAccumulatorMap,
   StaticBuildEntryCaveatSummary,
   StaticBuildEntryEffectSummaryAccumulator,
+  StaticBuildRequirementKey,
   StaticBuildResolvedLoadout,
   StaticBuildSourceDamageViewBucketLabelMap,
   StaticBuildSourceDamageViewEffectSummaryItem,
@@ -201,7 +202,7 @@ export function resolveStaticBuildSourceDamageViews(
 
 function createRequirement(
   kind: StaticBuildSourceDamageViewRequirement["kind"],
-  key: string,
+  key: StaticBuildRequirementKey,
   satisfied: boolean,
 ): StaticBuildSourceDamageViewRequirement {
   return { kind, key, satisfied }

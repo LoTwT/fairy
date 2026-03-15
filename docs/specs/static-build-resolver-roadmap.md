@@ -12075,3 +12075,30 @@ caveatSummary` 这些兼容字段补齐。
 - `V337.2` 已完成：matrix template/source-stat helper 已统一复用显式公开 contract
 - `V337.3` 待完成：校验与提交
 - `V337.4` 待完成：roadmap、索引与架构文档同步
+
+## 341. V338 source-view requirement key helper contracts
+
+### 341.1 目标
+
+`V338` 只解决一件事：
+
+- 把 `views.ts / utility-views.ts` 中 `createRequirement()` helper 仍直接使用的裸 `key: string` 统一收成既有显式公开 `StaticBuildRequirementKey`。
+
+### 341.2 范围
+
+1. `views.ts:createRequirement()`
+2. `utility-views.ts:createRequirement()`
+3. 对应的 type import
+
+### 341.3 非目标
+
+1. 不改变 requirement 生成逻辑
+2. 不修改 requirement 文案
+3. 不新增新的公开 alias
+
+### 341.4 当前状态
+
+- `V338.1` 已完成：范围冻结到 source-view requirement key helper contract
+- `V338.2` 已完成：两个 helper 已统一复用 `StaticBuildRequirementKey`
+- `V338.3` 待完成：校验与提交
+- `V338.4` 待完成：roadmap、索引与架构文档同步

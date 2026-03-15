@@ -5,6 +5,7 @@ import type {
   StaticBuildCatalogEntry,
   StaticBuildDriveDiscSetsInput,
   StaticBuildEntryCaveatSummary,
+  StaticBuildRequirementKey,
   StaticBuildResolvedLoadout,
   StaticBuildSourceUtilityViewEntry,
   StaticBuildSourceUtilityViewGroupKey,
@@ -219,7 +220,7 @@ function createEntry(
 
 function createRequirement(
   kind: StaticBuildSourceUtilityViewRequirement["kind"],
-  key: string,
+  key: StaticBuildRequirementKey,
   satisfied: boolean,
 ): StaticBuildSourceUtilityViewRequirement {
   return { kind, key, satisfied }
