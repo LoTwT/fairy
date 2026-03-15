@@ -10021,3 +10021,33 @@ caveatSummary` 这些兼容字段补齐。
 - `V271.3` 已完成：`build/index.ts` 已统一导出这些新 type
 - `V271.4` 已完成：现有 build / agent 测试与 runtime 校验已覆盖
 - `V271.5` 已完成：roadmap、索引与架构文档已同步
+
+## 275. V272 build view and matrix count contracts
+
+`V271` 收口后，`view / matrix / group` 相关的 `count / supportedCount / unsupportedCount / entryCount / rowCount / ...` 仍在 `types.ts` 中以裸 `number` 暴露，和前面的 scalar contract 仍不对称。
+
+`V272` 只解决一件事：
+
+1. 为这组 build-layer view / matrix 数量 contract 补显式 type，并让各类 summary / group summary / caveat summary 统一复用，不改变任何运行时行为
+
+### 275.1 分阶段
+
+1. `V272.1` scope freeze
+2. `V272.2` type alignment
+3. `V272.3` export alignment
+4. `V272.4` tests / runtime alignment
+5. `V272.5` docs closeout
+
+### 275.2 非目标
+
+1. 不改变各 summary 的字段集合
+2. 不处理 effect-summary 的 `applied... / total...` 计数字段
+3. 不扩展 compact layer 的 count contract
+
+### 275.3 当前状态
+
+- `V272.1` 已完成：冻结到 build view and matrix count contract
+- `V272.2` 已完成：`types.ts` 已新增显式 view / matrix count scalar alias，并让各类 summary / group summary / caveat summary 统一复用
+- `V272.3` 已完成：`build/index.ts` 已统一导出这些新 type
+- `V272.4` 已完成：现有 build / agent 测试与 runtime 校验已覆盖
+- `V272.5` 已完成：roadmap、索引与架构文档已同步

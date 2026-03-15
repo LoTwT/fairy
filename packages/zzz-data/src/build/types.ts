@@ -140,6 +140,19 @@ export type StaticBuildUnsupportedEffectCount = number
 export type StaticBuildRequirementCount = number
 export type StaticBuildSatisfiedRequirementCount = number
 export type StaticBuildUnsatisfiedRequirementCount = number
+export type StaticBuildGroupCount = number
+export type StaticBuildSupportedCount = number
+export type StaticBuildUnsupportedCount = number
+export type StaticBuildEntryCount = number
+export type StaticBuildStandaloneCount = number
+export type StaticBuildDeltaCount = number
+export type StaticBuildTriggerCount = number
+export type StaticBuildRateCount = number
+export type StaticBuildSourceDamageViewCount = number
+export type StaticBuildSourceUtilityViewCount = number
+export type StaticBuildRowCount = number
+export type StaticBuildMainFormulaCount = number
+export type StaticBuildSourceViewCount = number
 export type StaticBuildDefenderBaseDefense = number
 export type StaticBuildDefenderResistance = number
 export type StaticBuildDefenseBonus = number
@@ -739,9 +752,9 @@ export type StaticBuildSourceDamageViewGroupKey = "standalone" | "delta"
 export interface StaticBuildSourceDamageViewGroupSummary {
   key: StaticBuildSourceDamageViewGroupKey
   label: string
-  count: number
-  supportedCount: number
-  unsupportedCount: number
+  count: StaticBuildGroupCount
+  supportedCount: StaticBuildSupportedCount
+  unsupportedCount: StaticBuildUnsupportedCount
   effectSummary: StaticBuildSourceDamageViewEffectSummaryItem[]
   requirementSummary: StaticBuildSourceDamageViewRequirementSummary
   caveatSummary: StaticBuildEntryCaveatSummary
@@ -751,11 +764,11 @@ export interface StaticBuildSourceDamageViewGroupSummary {
 }
 
 export interface StaticBuildSourceDamageViewSummary {
-  entryCount: number
-  standaloneCount: number
-  deltaCount: number
-  supportedCount: number
-  unsupportedCount: number
+  entryCount: StaticBuildEntryCount
+  standaloneCount: StaticBuildStandaloneCount
+  deltaCount: StaticBuildDeltaCount
+  supportedCount: StaticBuildSupportedCount
+  unsupportedCount: StaticBuildUnsupportedCount
   effectSummary: StaticBuildSourceDamageViewEffectSummaryItem[]
   requirementSummary: StaticBuildSourceDamageViewRequirementSummary
   caveatSummary: StaticBuildEntryCaveatSummary
@@ -868,9 +881,9 @@ export type StaticBuildSourceUtilityViewGroupKey = "trigger" | "rate"
 export interface StaticBuildSourceUtilityViewGroupSummary {
   key: StaticBuildSourceUtilityViewGroupKey
   label: string
-  count: number
-  supportedCount: number
-  unsupportedCount: number
+  count: StaticBuildGroupCount
+  supportedCount: StaticBuildSupportedCount
+  unsupportedCount: StaticBuildUnsupportedCount
   effectSummary: StaticBuildSourceDamageViewEffectSummaryItem[]
   requirementSummary: StaticBuildSourceUtilityViewRequirementSummary
   caveatSummary: StaticBuildEntryCaveatSummary
@@ -880,11 +893,11 @@ export interface StaticBuildSourceUtilityViewGroupSummary {
 }
 
 export interface StaticBuildSourceUtilityViewSummary {
-  entryCount: number
-  triggerCount: number
-  rateCount: number
-  supportedCount: number
-  unsupportedCount: number
+  entryCount: StaticBuildEntryCount
+  triggerCount: StaticBuildTriggerCount
+  rateCount: StaticBuildRateCount
+  supportedCount: StaticBuildSupportedCount
+  unsupportedCount: StaticBuildUnsupportedCount
   effectSummary: StaticBuildSourceDamageViewEffectSummaryItem[]
   requirementSummary: StaticBuildSourceUtilityViewRequirementSummary
   caveatSummary: StaticBuildEntryCaveatSummary
@@ -896,7 +909,7 @@ export interface StaticBuildSourceUtilityViewSummary {
 
 export interface StaticBuildEntryCaveatSummary {
   assumptionCount: StaticBuildAssumptionCount
-  unsupportedCount: number
+  unsupportedCount: StaticBuildUnsupportedCount
   hasAssumptions: boolean
   hasUnsupported: boolean
 }
@@ -932,9 +945,9 @@ export type StaticBuildSourceEntryGroupKey =
 export interface StaticBuildSourceEntryGroupSummary {
   key: StaticBuildSourceEntryGroupKey
   label: string
-  count: number
-  supportedCount: number
-  unsupportedCount: number
+  count: StaticBuildGroupCount
+  supportedCount: StaticBuildSupportedCount
+  unsupportedCount: StaticBuildUnsupportedCount
   effectSummary: StaticBuildSourceDamageViewEffectSummaryItem[]
   sourceDamageRequirementSummary: StaticBuildSourceDamageViewRequirementSummary
   sourceUtilityRequirementSummary: StaticBuildSourceUtilityViewRequirementSummary
@@ -945,11 +958,11 @@ export interface StaticBuildSourceEntryGroupSummary {
 }
 
 export interface StaticBuildSourceEntryCollectionSummary {
-  entryCount: number
-  sourceDamageViewCount: number
-  sourceUtilityViewCount: number
-  supportedCount: number
-  unsupportedCount: number
+  entryCount: StaticBuildEntryCount
+  sourceDamageViewCount: StaticBuildSourceDamageViewCount
+  sourceUtilityViewCount: StaticBuildSourceUtilityViewCount
+  supportedCount: StaticBuildSupportedCount
+  unsupportedCount: StaticBuildUnsupportedCount
   isUtilityOnly: boolean
   effectSummary: StaticBuildSourceDamageViewEffectSummaryItem[]
   sourceDamageRequirementSummary: StaticBuildSourceDamageViewRequirementSummary
@@ -980,9 +993,9 @@ export type StaticBuildTriggerMatrixEntryKind = "main-formula" | "source-view"
 export interface StaticBuildTriggerMatrixGroupSummary {
   key: StaticBuildTriggerMatrixEntryKind
   label: string
-  count: number
-  supportedCount: number
-  unsupportedCount: number
+  count: StaticBuildGroupCount
+  supportedCount: StaticBuildSupportedCount
+  unsupportedCount: StaticBuildUnsupportedCount
   effectSummary: StaticBuildTriggerMatrixEffectSummaryItem[]
   requirementSummary: StaticBuildSourceDamageViewRequirementSummary
   caveatSummary: StaticBuildEntryCaveatSummary
@@ -992,11 +1005,11 @@ export interface StaticBuildTriggerMatrixGroupSummary {
 }
 
 export interface StaticBuildTriggerMatrixSummary {
-  rowCount: number
-  mainFormulaCount: number
-  sourceViewCount: number
-  supportedCount: number
-  unsupportedCount: number
+  rowCount: StaticBuildRowCount
+  mainFormulaCount: StaticBuildMainFormulaCount
+  sourceViewCount: StaticBuildSourceViewCount
+  supportedCount: StaticBuildSupportedCount
+  unsupportedCount: StaticBuildUnsupportedCount
   hasSourceViews: boolean
   effectSummary: StaticBuildTriggerMatrixEffectSummaryItem[]
   requirementSummary: StaticBuildSourceDamageViewRequirementSummary
@@ -1128,7 +1141,7 @@ export interface StaticBuildSkillMatrixRow {
 }
 
 export interface StaticBuildSkillMatrixSummary {
-  rowCount: number
+  rowCount: StaticBuildRowCount
   baseDamageStat: StaticBuildBaseDamageStat
   baseDamageValue: number
   attack?: number
@@ -1154,7 +1167,7 @@ export interface StaticBuildSkillMatrixSummary {
 export interface StaticBuildSkillMatrixGroupSummary {
   key: string
   label: string
-  count: number
+  count: StaticBuildGroupCount
   commonBuckets: Record<string, number>
   variableBuckets: string[]
   commonFormulaMultipliers: Record<string, number>
