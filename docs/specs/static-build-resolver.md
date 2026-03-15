@@ -1059,4 +1059,5 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 308. `V308` build summary key contracts：当前阶段已收口；`bucket / formula-multiplier` 相关公开 map/list 中的匿名 key 已统一复用显式公开 type，不改变任何运行时行为，见 [静态构筑解析系统 V308](./static-build-resolver-v308.md)
 309. `V309` build list element text contracts：当前阶段已收口；剩余公开 `string[]` alias 的元素已统一复用显式公开 type，不改变任何运行时行为，见 [静态构筑解析系统 V309](./static-build-resolver-v309.md)
 310. `V310` compact shared list/map contracts：当前阶段已收口；`compact.ts` 顶层和 `skill-matrix` 里复用最频繁的匿名 list/map/key 已统一复用显式 compact contract，不改变任何运行时行为，见 [静态构筑解析系统 V310](./static-build-resolver-v310.md)
-311. `V311` compact text contracts：当前阶段进行中；当前目标是为 `compact.ts` 中仍然直接暴露的 `id / label / name / sourceId / reason / effect-summary text` 补显式 compact contract，不改变任何运行时行为
+311. `V311` compact text contracts：当前阶段已收口；`compact.ts` 中仍然直接暴露的 `id / label / name / sourceId / reason / effect-summary text` 已统一复用显式 compact contract，不改变任何运行时行为，见 [静态构筑解析系统 V311](./static-build-resolver-v311.md)
+312. `V312` compact source and trigger text contracts：当前阶段进行中；当前目标是为 `trigger-matrix / source-damage-views / source-utility-views / source-entry collection` 的 compact entry/meta/result contract 补显式 `id / label / sourceId / canonicalLabel / stableKey / assumptions`，不改变任何运行时行为

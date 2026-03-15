@@ -68,12 +68,14 @@ import type {
   StaticBuildSkillTag,
   StaticBuildSourceDamageViewEffectSummaryItem,
   StaticBuildSourceDamageViewEntry,
+  StaticBuildSourceDamageViewGroupKey,
   StaticBuildSourceDamageViewMeta,
   StaticBuildSourceDamageViewRequirement,
   StaticBuildSourceDamageViewRequirementKind,
   StaticBuildSourceDamageViewSummary,
   StaticBuildSourceEntry,
   StaticBuildSourceEntryCollectionSummary,
+  StaticBuildSourceEntryGroupKey,
   StaticBuildSourceId,
   StaticBuildSourceName,
   StaticBuildSourceNoteEntry,
@@ -87,10 +89,12 @@ import type {
   StaticBuildSourceNoteSummary,
   StaticBuildSourceUtilityViewEntry,
   StaticBuildSourceUtilityViewEntrySummary,
+  StaticBuildSourceUtilityViewGroupKey,
   StaticBuildSourceUtilityViewMeta,
   StaticBuildSourceUtilityViewRequirement,
   StaticBuildSourceUtilityViewRequirementKind,
   StaticBuildSourceUtilityViewSummary,
+  StaticBuildSourceViewId,
   StaticBuildStableKey,
   StaticBuildTraceItem,
   StaticBuildTraceModifier,
@@ -195,6 +199,7 @@ export type CompactStaticBuildRowLabel = StaticBuildRowLabel
 export type CompactStaticBuildCanonicalLabel = StaticBuildCanonicalLabel
 export type CompactStaticBuildStableKey = StaticBuildStableKey
 export type CompactStaticBuildSourceId = StaticBuildSourceId
+export type CompactStaticBuildSourceViewId = StaticBuildSourceViewId
 export type CompactStaticBuildSourceName = StaticBuildSourceName
 export type CompactStaticBuildEffectId = StaticBuildEffectId
 export type CompactStaticBuildEffectLabel = StaticBuildEffectLabel
@@ -207,6 +212,12 @@ export type CompactStaticBuildTraceReason = StaticBuildTraceReason
 export type CompactStaticBuildGroupLabel = StaticBuildGroupLabel
 export type CompactStaticBuildSkillMatrixGroupKey =
   StaticBuildSkillMatrixGroupKey
+export type CompactStaticBuildSourceDamageViewGroupKey =
+  StaticBuildSourceDamageViewGroupKey
+export type CompactStaticBuildSourceUtilityViewGroupKey =
+  StaticBuildSourceUtilityViewGroupKey
+export type CompactStaticBuildSourceEntryGroupKey =
+  StaticBuildSourceEntryGroupKey
 export type CompactStaticBuildAliasList = StaticBuildAliasList
 export type CompactStaticBuildAssumptionList = StaticBuildAssumptionList
 export type CompactStaticBuildUnsupportedEffectList =
@@ -1381,8 +1392,8 @@ export function compactStaticBuildAppliedEntryEffectSummaryItem(
 }
 
 export interface StaticBuildCompactTriggerMatrixRow {
-  id: string
-  label: string
+  id: CompactStaticBuildRowId
+  label: CompactStaticBuildRowLabel
   supported: boolean
   metadata: CompactStaticBuildTriggerMatrixRowMeta
   effectSummary: CompactStaticBuildTriggerMatrixEffectSummaryItem[]
@@ -1394,7 +1405,7 @@ export interface StaticBuildCompactTriggerMatrixRow {
   sourceNoteSummary: CompactStaticBuildSourceNoteSummary
   caveatSummary: CompactStaticBuildEntryCaveatSummary
   assumptionSummary: CompactStaticBuildAssumptionSummary
-  assumptions?: string[]
+  assumptions?: CompactStaticBuildAssumptionList
   damage?: CompactStaticBuildEntryDamageSummary
   summary?: CompactStaticBuildResolveSummary
   build?: CompactStaticBuildResult
@@ -1402,7 +1413,7 @@ export interface StaticBuildCompactTriggerMatrixRow {
 
 export interface CompactStaticBuildTriggerMatrixGroupSummary {
   key: StaticBuildTriggerMatrixEntryKind
-  label: string
+  label: CompactStaticBuildGroupLabel
   count: number
   supportedCount: number
   unsupportedCount: number
@@ -1415,8 +1426,8 @@ export interface CompactStaticBuildTriggerMatrixGroupSummary {
 }
 
 export interface CompactStaticBuildTriggerMatrixRowMeta {
-  canonicalLabel: string
-  stableKey: string
+  canonicalLabel: CompactStaticBuildCanonicalLabel
+  stableKey: CompactStaticBuildStableKey
   entryKind: CompactStaticBuildTriggerMatrixEntryKind
   templateSource: CompactStaticBuildTriggerMatrixTemplateSource
   damageType: Extract<
@@ -1424,9 +1435,9 @@ export interface CompactStaticBuildTriggerMatrixRowMeta {
     "anomaly" | "disorder"
   >
   sourceType?: CompactStaticBuildSourceType
-  sourceId?: string
+  sourceId?: CompactStaticBuildSourceId
   sourceStableKey?: string
-  sourceViewId?: string
+  sourceViewId?: CompactStaticBuildSourceViewId
   sourceViewResolutionMode?: CompactStaticBuildSourceDamageViewResolutionMode
 }
 
@@ -1458,17 +1469,17 @@ export interface CompactStaticBuildTriggerMatrixResult {
   diagnosticSummary: CompactStaticBuildDiagnosticSummary
   sourceNoteSummary: CompactStaticBuildSourceNoteSummary
   assumptionSummary: CompactStaticBuildAssumptionSummary
-  assumptions?: string[]
+  assumptions?: CompactStaticBuildAssumptionList
   rows: StaticBuildCompactTriggerMatrixRow[]
 }
 
 export interface StaticBuildCompactSourceDamageViewEntry {
-  id: string
-  label: string
+  id: CompactStaticBuildEntryId
+  label: CompactStaticBuildEntryLabel
   metadata: CompactStaticBuildSourceDamageViewMeta
   supported: boolean
   sourceType: CompactStaticBuildSourceType
-  sourceId: string
+  sourceId: CompactStaticBuildSourceId
   damageType: CompactStaticBuildSourceDamageType
   resolutionMode: CompactStaticBuildSourceDamageViewResolutionMode
   requirements?: CompactStaticBuildSourceDamageViewRequirement[]
@@ -1480,15 +1491,15 @@ export interface StaticBuildCompactSourceDamageViewEntry {
   effectSummary: CompactStaticBuildSourceDamageViewEffectSummaryItem[]
   caveatSummary: CompactStaticBuildEntryCaveatSummary
   assumptionSummary: CompactStaticBuildAssumptionSummary
-  assumptions?: string[]
+  assumptions?: CompactStaticBuildAssumptionList
   damage?: CompactStaticBuildEntryDamageSummary
   summary?: CompactStaticBuildResolveSummary
   build?: CompactStaticBuildResult
 }
 
 export interface CompactStaticBuildSourceDamageViewGroupSummary {
-  key: StaticBuildSourceDamageViewGroupKey
-  label: string
+  key: CompactStaticBuildSourceDamageViewGroupKey
+  label: CompactStaticBuildGroupLabel
   count: number
   supportedCount: number
   unsupportedCount: number
@@ -1517,12 +1528,12 @@ export interface CompactStaticBuildSourceDamageViewsSummary {
 }
 
 export interface StaticBuildCompactSourceUtilityViewEntry {
-  id: string
-  label: string
+  id: CompactStaticBuildEntryId
+  label: CompactStaticBuildEntryLabel
   metadata: CompactStaticBuildSourceUtilityViewMeta
   supported: boolean
   sourceType: CompactStaticBuildSourceType
-  sourceId: string
+  sourceId: CompactStaticBuildSourceId
   utilityType: CompactStaticBuildSourceUtilityType
   resolutionMode: CompactStaticBuildSourceUtilityResolutionMode
   targetScope: CompactStaticBuildSourceUtilityTargetScope
@@ -1541,7 +1552,7 @@ export interface StaticBuildCompactSourceUtilityViewEntry {
   effectSummary: CompactStaticBuildSourceUtilityViewEffectSummaryItem[]
   caveatSummary: CompactStaticBuildEntryCaveatSummary
   assumptionSummary: CompactStaticBuildAssumptionSummary
-  assumptions?: string[]
+  assumptions?: CompactStaticBuildAssumptionList
 }
 
 export type StaticBuildCompactSourceEntry =
@@ -1568,8 +1579,8 @@ export interface CompactStaticBuildEntryDamageSummary {
 }
 
 export interface CompactStaticBuildSourceDamageViewMeta {
-  canonicalLabel: string
-  stableKey: string
+  canonicalLabel: CompactStaticBuildCanonicalLabel
+  stableKey: CompactStaticBuildStableKey
   entryKind: "source-damage-view"
   damageType: Extract<
     CompactStaticBuildSourceDamageType,
@@ -1579,8 +1590,8 @@ export interface CompactStaticBuildSourceDamageViewMeta {
 }
 
 export interface CompactStaticBuildSourceUtilityViewMeta {
-  canonicalLabel: string
-  stableKey: string
+  canonicalLabel: CompactStaticBuildCanonicalLabel
+  stableKey: CompactStaticBuildStableKey
   entryKind: "source-utility-view"
   utilityType: CompactStaticBuildSourceUtilityType
   resolutionMode: CompactStaticBuildSourceUtilityResolutionMode
@@ -1589,8 +1600,8 @@ export interface CompactStaticBuildSourceUtilityViewMeta {
 }
 
 export interface CompactStaticBuildSourceEntryGroupSummary {
-  key: StaticBuildSourceEntryGroupKey
-  label: string
+  key: CompactStaticBuildSourceEntryGroupKey
+  label: CompactStaticBuildGroupLabel
   count: number
   supportedCount: number
   unsupportedCount: number
@@ -1630,13 +1641,13 @@ export interface CompactStaticBuildSourceEntryCollection {
   diagnosticSummary: CompactStaticBuildDiagnosticSummary
   sourceNoteSummary: CompactStaticBuildSourceNoteSummary
   assumptionSummary: CompactStaticBuildAssumptionSummary
-  assumptions?: string[]
+  assumptions?: CompactStaticBuildAssumptionList
   entries: StaticBuildCompactSourceEntry[]
 }
 
 export interface CompactStaticBuildSourceUtilityViewGroupSummary {
-  key: StaticBuildSourceUtilityViewGroupKey
-  label: string
+  key: CompactStaticBuildSourceUtilityViewGroupKey
+  label: CompactStaticBuildGroupLabel
   count: number
   supportedCount: number
   unsupportedCount: number
@@ -1674,7 +1685,7 @@ export interface CompactStaticBuildSourceDamageViewsResult {
   diagnosticSummary: CompactStaticBuildDiagnosticSummary
   sourceNoteSummary: CompactStaticBuildSourceNoteSummary
   assumptionSummary: CompactStaticBuildAssumptionSummary
-  assumptions?: string[]
+  assumptions?: CompactStaticBuildAssumptionList
   entries: StaticBuildCompactSourceDamageViewEntry[]
 }
 
@@ -1687,7 +1698,7 @@ export interface CompactStaticBuildSourceUtilityViewsResult {
   diagnosticSummary: CompactStaticBuildDiagnosticSummary
   sourceNoteSummary: CompactStaticBuildSourceNoteSummary
   assumptionSummary: CompactStaticBuildAssumptionSummary
-  assumptions?: string[]
+  assumptions?: CompactStaticBuildAssumptionList
   entries: StaticBuildCompactSourceUtilityViewEntry[]
 }
 
