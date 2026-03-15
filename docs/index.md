@@ -248,3 +248,5 @@
 - [静态构筑解析系统 V348](./specs/static-build-resolver-v348.md) — 当前阶段：已收口；`stripRichText()` 的返回值已统一复用显式公开 contract
 - [静态构筑解析系统 V349](./specs/static-build-resolver-v349.md) — 当前阶段：已收口；`zzz-agent` catalog helper 文本 contract 已统一复用显式公开 alias
 - [静态构筑解析系统 V350](./specs/static-build-resolver-v350.md) — 当前阶段：已收口；`zzz-agent` scenario helper 文本 contract 已统一复用显式公开 alias
+- [静态构筑解析系统 V351](./specs/static-build-resolver-v351.md) — 当前阶段：已收口；`zzz-agent` utility helper 文本 contract 已统一复用显式公开 alias
+- [静态构筑解析系统 V352](./specs/static-build-resolver-v352.md) — 当前阶段：已收口；`zzz-agent` scorer helper 文本与 tool-name contract 已统一复用显式公开 alias

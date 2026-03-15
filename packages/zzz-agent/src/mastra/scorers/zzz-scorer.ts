@@ -7,6 +7,19 @@ import {
 } from "@mastra/evals/scorers/utils"
 import { z } from "zod"
 
+export type ZzzAgentScorerResponseText = string
+
+export type ZzzAgentScorerToolName = string
+
+export type ZzzAgentScorerToolNameList = readonly ZzzAgentScorerToolName[]
+
+export type ZzzAgentOutputFormatSectionName = string
+
+export interface ZzzAgentOutputFormatMatch {
+  name: ZzzAgentOutputFormatSectionName
+  matched: boolean
+}
+
 const outputFormatChecks = [
   { name: "队伍配置", pattern: /^## 队伍配置\s*\n\|/m },
   { name: "增益清单", pattern: /^## .+增益清单\s*\n\|/m },
@@ -14,14 +27,19 @@ const outputFormatChecks = [
   { name: "技能伤害", pattern: /^## .+技能伤害\s*\n\|/m },
 ] as const
 
-export function getOutputFormatMatches(response: string) {
+export function getOutputFormatMatches(
+  response: ZzzAgentScorerResponseText,
+): ZzzAgentOutputFormatMatch[] {
   return outputFormatChecks.map(({ name, pattern }) => ({
     name,
     matched: pattern.test(response),
   }))
 }
 
-export function scoreOutputFormat(response: string, tools: string[]) {
+export function scoreOutputFormat(
+  response: ZzzAgentScorerResponseText,
+  tools: ZzzAgentScorerToolNameList,
+) {
   if (!tools.includes("calcDamage") && !tools.includes("calc-damage")) return 1
 
   const matches = getOutputFormatMatches(response)
@@ -52,12 +70,14 @@ export const outputFormatScorer = createScorer({
   })
   .generateScore(({ results }) => {
     const response = results.preprocessStepResult?.response ?? ""
-    const tools: string[] = results.preprocessStepResult?.tools ?? []
+    const tools: ZzzAgentScorerToolNameList =
+      results.preprocessStepResult?.tools ?? []
     return scoreOutputFormat(response, tools)
   })
   .generateReason(({ results, score }) => {
     const response = results.preprocessStepResult?.response ?? ""
-    const tools: string[] = results.preprocessStepResult?.tools ?? []
+    const tools: ZzzAgentScorerToolNameList =
+      results.preprocessStepResult?.tools ?? []
     if (!tools.includes("calcDamage") && !tools.includes("calc-damage")) {
       return "未发生伤害计算，跳过输出格式评分"
     }

@@ -19,11 +19,25 @@ try {
 
 const jsonCache = new Map<string, unknown>()
 
+export type ZzzAgentJsonRelativePath = string
+
+export type ZzzAgentHtmlText = string
+
+export type ZzzAgentPlainText = string
+
+export type ZzzAgentLookupText = string
+
+export type ZzzAgentOptionalLookupText = string | undefined
+
+export type ZzzAgentMatchFieldValue = ZzzAgentOptionalLookupText
+
+export type ZzzAgentMatchField<T> = (item: T) => ZzzAgentMatchFieldValue
+
 /**
  * Load a JSON file relative to the zzz-data package root.
  * Results are cached in memory.
  */
-export function loadJson<T>(relativePath: string): T {
+export function loadJson<T>(relativePath: ZzzAgentJsonRelativePath): T {
   if (jsonCache.has(relativePath)) return jsonCache.get(relativePath) as T
   const fullPath = resolve(zzzDataRoot, relativePath)
   const data = JSON.parse(readFileSync(fullPath, "utf-8")) as T
@@ -32,7 +46,7 @@ export function loadJson<T>(relativePath: string): T {
 }
 
 /** Strip HTML tags and decode common entities */
-export function stripHtml(html: string): string {
+export function stripHtml(html: ZzzAgentHtmlText): ZzzAgentPlainText {
   return html
     .replace(/<[^>]+>/g, "")
     .replace(/&nbsp;/g, " ")
@@ -46,7 +60,7 @@ export function stripHtml(html: string): string {
  * Normalize a string for fuzzy matching:
  * lowercase, remove spaces/punctuation/special chars
  */
-function normalize(s: string): string {
+function normalize(s: ZzzAgentLookupText): ZzzAgentLookupText {
   return s.toLowerCase().replace(/[\s\-_·・.()（）【】[\]「」]/g, "")
 }
 
@@ -102,14 +116,14 @@ export type NormalizedAttributeKey =
   | "honedEdge"
 
 export function normalizeSpecialty(
-  value: string | undefined,
+  value: ZzzAgentOptionalLookupText,
 ): NormalizedSpecialtyKey | undefined {
   if (!value) return undefined
   return specialtyLookup[normalize(value)] as NormalizedSpecialtyKey | undefined
 }
 
 export function normalizeAttribute(
-  value: string | undefined,
+  value: ZzzAgentOptionalLookupText,
 ): NormalizedAttributeKey | undefined {
   if (!value) return undefined
   return attributeLookup[normalize(value)] as NormalizedAttributeKey | undefined
@@ -142,7 +156,7 @@ export const damageAttributeOrder = [
 ] as const satisfies BaseDamageAttribute[]
 
 export function normalizeDamageAttribute(
-  value: string | undefined,
+  value: ZzzAgentOptionalLookupText,
 ): BaseDamageAttribute | undefined {
   const attribute = normalizeAttribute(value)
   if (!attribute) return undefined
@@ -155,8 +169,8 @@ export function normalizeDamageAttribute(
  */
 export function findBestMatch<T>(
   items: T[],
-  query: string,
-  matchFields: ((item: T) => string | undefined)[],
+  query: ZzzAgentLookupText,
+  matchFields: ZzzAgentMatchField<T>[],
 ): T | undefined {
   const qLow = query.toLowerCase()
   const qNorm = normalize(query)
@@ -211,8 +225,8 @@ export function findBestMatch<T>(
  */
 export function findTopMatches<T>(
   items: T[],
-  query: string,
-  matchFields: ((item: T) => string | undefined)[],
+  query: ZzzAgentLookupText,
+  matchFields: ZzzAgentMatchField<T>[],
   limit = 3,
 ): T[] {
   const qNorm = normalize(query)

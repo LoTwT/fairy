@@ -12426,8 +12426,8 @@ caveatSummary` 这些兼容字段补齐。
 
 - `V349.1` 已完成：范围冻结到 agent catalog helper text contract
 - `V349.2` 已完成：catalog helper 文本 contract 已统一复用显式 alias
-- `V349.3` 待完成：校验与提交
-- `V349.4` 待完成：roadmap、索引与架构文档同步
+- `V349.3` 已完成：校验与提交
+- `V349.4` 已完成：roadmap、索引与架构文档同步
 
 ## 353. V350 agent scenario helper text contracts
 
@@ -12458,5 +12458,74 @@ caveatSummary` 这些兼容字段补齐。
 
 - `V350.1` 已完成：范围冻结到 agent scenario helper text contract
 - `V350.2` 已完成：scenario helper 文本 contract 已统一复用显式 alias
-- `V350.3` 待完成：校验与提交
-- `V350.4` 待完成：roadmap、索引与架构文档同步
+- `V350.3` 已完成：校验与提交
+- `V350.4` 已完成：roadmap、索引与架构文档同步
+
+## 354. V351 agent utility helper text contracts
+
+### 354.1 目标
+
+`V351` 只解决一件事：
+
+- 给 `zzz-agent` 的通用 utility helper 文本 contract 补显式公开 alias，不改变任何匹配、归一化或文本清洗逻辑。
+
+### 354.2 范围
+
+1. `ZzzAgentJsonRelativePath`
+2. `ZzzAgentHtmlText`
+3. `ZzzAgentPlainText`
+4. `ZzzAgentLookupText`
+5. `ZzzAgentOptionalLookupText`
+6. `ZzzAgentMatchFieldValue`
+7. `ZzzAgentMatchField<T>`
+8. `loadJson()`
+9. `stripHtml()`
+10. `normalizeSpecialty()`
+11. `normalizeAttribute()`
+12. `normalizeDamageAttribute()`
+13. `findBestMatch()`
+14. `findTopMatches()`
+
+### 354.3 非目标
+
+1. 不调整 fuzzy match 规则
+2. 不改变 HTML 清洗和 entity decode 规则
+3. 不改 lookup tool 的 schema 或响应结构
+
+### 354.4 当前状态
+
+- `V351.1` 已完成：范围冻结到 agent utility helper text contract
+- `V351.2` 已完成：utility helper 文本 contract 已统一复用显式 alias
+- `V351.3` 已完成：校验与提交
+- `V351.4` 已完成：roadmap、索引与架构文档同步
+
+## 355. V352 agent scorer helper text contracts
+
+### 355.1 目标
+
+`V352` 只解决一件事：
+
+- 给 `zzz-agent` scorer helper 的文本与 tool-name contract 补显式公开 alias，不改变任何评分逻辑。
+
+### 355.2 范围
+
+1. `ZzzAgentScorerResponseText`
+2. `ZzzAgentScorerToolName`
+3. `ZzzAgentScorerToolNameList`
+4. `ZzzAgentOutputFormatSectionName`
+5. `ZzzAgentOutputFormatMatch`
+6. `getOutputFormatMatches()`
+7. `scoreOutputFormat()`
+
+### 355.3 非目标
+
+1. 不改变 output-format pattern
+2. 不调整 scorer 分值逻辑
+3. 不改 judge model 或 scorer 注册结构
+
+### 355.4 当前状态
+
+- `V352.1` 已完成：范围冻结到 agent scorer helper text contract
+- `V352.2` 已完成：scorer helper 文本 contract 已统一复用显式 alias
+- `V352.3` 已完成：校验与提交
+- `V352.4` 已完成：roadmap、索引与架构文档同步
