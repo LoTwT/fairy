@@ -1137,8 +1137,8 @@ export interface ResolveStaticBuildTriggerMatrixResult {
 
 export interface StaticBuildSkillMatrixRowMeta {
   order: number
-  actionName: string
-  skillName: string
+  actionName: StaticBuildActionName
+  skillName: StaticBuildSkillName
   qualifiers: StaticBuildSkillQualifierList
   canonicalLabel: StaticBuildCanonicalLabel
   stableKey: StaticBuildStableKey
@@ -1165,6 +1165,8 @@ export interface StaticBuildSkillMatrixRowDamageSummary {
 }
 
 export type StaticBuildSkillMatrixGroupKey = string
+export type StaticBuildActionName = string
+export type StaticBuildSkillName = string
 
 export interface StaticBuildSkillMatrixRow {
   id: StaticBuildRowId

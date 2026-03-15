@@ -10975,5 +10975,34 @@ caveatSummary` 这些兼容字段补齐。
 - `V303.1` 已完成：冻结到 source-utility label contract
 - `V303.2` 已完成：`types.ts` 已让 utility entry 统一复用显式 type
 - `V303.3` 已完成：`build/index.ts` 已正式导出这些 type
-- `V303.4` 进行中：等待现有 build / agent 测试与 runtime 校验完成
-- `V303.5` 进行中：等待 roadmap、索引与架构文档同步
+- `V303.4` 已完成：现有 build / agent 测试与 runtime 校验已通过
+- `V303.5` 已完成：roadmap、索引与架构文档已同步
+
+## 307. V304 build skill matrix action-name contracts
+
+### 307.1 目标
+
+`V304` 只解决一件事：
+
+- 为 `StaticBuildSkillMatrixRowMeta` 中仍然直接暴露的 `actionName / skillName` 补显式公开 type
+
+### 307.2 范围
+
+1. 新增 `actionName` 文本 type
+2. 新增 `skillName` 文本 type
+3. `StaticBuildSkillMatrixRowMeta.actionName`
+4. `StaticBuildSkillMatrixRowMeta.skillName`
+5. `build/index.ts` 对外导出
+
+### 307.3 非目标
+
+1. 不处理 `sourceStatId / sourceStatName`
+2. 不处理 `segmentLabel`
+3. 不处理 `skillMultiplier`
+
+### 307.4 当前状态
+
+- `V304.1` 已完成：范围冻结到 skill-matrix action / skill name
+- `V304.2` 进行中：准备在 `types.ts` 中落显式文本 type
+- `V304.3` 待开始：导出与测试对齐
+- `V304.4` 待开始：文档收口

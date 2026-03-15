@@ -2,6 +2,8 @@
 
 ## 仓库级 AI 协作文件
 
+当前 `static-build-resolver` contract 收口阶段已推进到 `V304`。`V303` 已完成 `source-utility-view entry triggerLabel / conditionLabel` 的显式公开 type；当前正在收口 `skill-matrix row metadata actionName / skillName`。
+
 ```
 .
 ├── docs/
