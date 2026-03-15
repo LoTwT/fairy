@@ -16,6 +16,7 @@ export type StaticBuildMode = "baseline" | "full-buff" | "manual"
 export type StaticBuildBaseMode = Exclude<StaticBuildMode, "manual">
 export type StaticBuildDamageType = "normal" | "sheer" | "anomaly" | "disorder"
 export type StaticBuildSourceType = "agent" | "w-engine" | "drive-disc"
+export type StaticBuildEffectId = string
 export type StaticBuildBaseDamageStat = "attack" | "sheerForce"
 export type StaticBuildSpecialty = AgentSpecialty
 
@@ -299,7 +300,7 @@ export type StaticBuildScenarioInput =
   | StaticBuildDisorderScenarioInput
 
 export interface StaticBuildEffectOverride {
-  effectId: string
+  effectId: StaticBuildEffectId
   enabled?: boolean
   stacks?: StaticBuildEffectStacks
 }
@@ -399,7 +400,7 @@ export interface StaticBuildModifierDefinition {
 }
 
 export interface StaticBuildEffectDefinition {
-  id: string
+  id: StaticBuildEffectId
   sourceType: StaticBuildSourceType
   sourceId: string
   sourceName: string
@@ -464,7 +465,7 @@ export interface StaticBuildTraceModifier {
 }
 
 export interface StaticBuildTraceItem {
-  effectId: string
+  effectId: StaticBuildEffectId
   sourceType: StaticBuildSourceType
   sourceName: string
   label: string
@@ -638,7 +639,7 @@ export interface StaticBuildResolveSummary {
 }
 
 export interface StaticBuildResolveEffectSummaryItem {
-  effectId: string
+  effectId: StaticBuildEffectId
   sourceName: string
   label: string
   bucket: string
@@ -759,7 +760,7 @@ export interface StaticBuildSourceDamageViewEntry {
 }
 
 export interface StaticBuildSourceDamageViewEffectSummaryItem {
-  effectId: string
+  effectId: StaticBuildEffectId
   sourceName: string
   label: string
   bucket: string
@@ -1044,7 +1045,7 @@ export interface StaticBuildTriggerMatrixSummary {
 }
 
 export interface StaticBuildTriggerMatrixEffectSummaryItem {
-  effectId: string
+  effectId: StaticBuildEffectId
   sourceName: string
   label: string
   bucket: string
@@ -1206,7 +1207,7 @@ export interface StaticBuildSkillMatrixGroupSummary {
 }
 
 export interface StaticBuildSkillMatrixEffectSummaryItem {
-  effectId: string
+  effectId: StaticBuildEffectId
   sourceName: string
   label: string
   bucket: string

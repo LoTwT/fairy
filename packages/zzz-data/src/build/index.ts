@@ -110,6 +110,7 @@ export type {
   StaticBuildDynamicValueKey,
   StaticBuildEffectCondition,
   StaticBuildEffectDefinition,
+  StaticBuildEffectId,
   StaticBuildEffectOverride,
   StaticBuildEffectStacks,
   StaticBuildEnemyInput,
