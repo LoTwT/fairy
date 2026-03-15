@@ -1,4 +1,3 @@
-import type { AgentAttributeLabel } from "zzz-data"
 import { createTool } from "@mastra/core/tools"
 import { z } from "zod"
 import {
@@ -13,6 +12,7 @@ import {
   buildSkillMatrixSuccessResponse,
   buildToolScopeLabels,
   resolveBuildToolLoadoutContext,
+  resolveBuildToolScenario,
 } from "./resolve-build-shared"
 
 export const resolveBuildSkillMatrix = createTool({
@@ -111,10 +111,7 @@ export const resolveBuildSkillMatrix = createTool({
       manualBaseMode: input.manualBaseMode,
       loadout,
       panel: input.finalPanel,
-      context: {
-        ...input.context,
-        attribute: input.context.attribute as AgentAttributeLabel | undefined,
-      },
+      context: resolveBuildToolScenario(input.context),
       effectOverrides: input.effectOverrides,
     })
 
