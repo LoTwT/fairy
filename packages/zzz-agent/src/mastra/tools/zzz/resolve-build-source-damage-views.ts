@@ -13,9 +13,7 @@ import {
   buildToolScopeLabels,
   buildUncoveredSourceDamageViewResponse,
   resolveBuildInputSchema,
-  resolveBuildToolDamageType,
-  resolveBuildToolLoadoutContext,
-  resolveBuildToolResolvedScenario,
+  resolveBuildToolTriggeredDamageContext,
 } from "./resolve-build-shared"
 
 export const resolveBuildSourceDamageViews = createTool({
@@ -32,16 +30,7 @@ export const resolveBuildSourceDamageViews = createTool({
       ),
   }),
   execute: async (input) => {
-    const damageTypeResolution = resolveBuildToolDamageType(
-      buildToolScopeLabels.sourceDamageView,
-      input.scenario.damageType,
-      ["anomaly", "disorder"],
-    )
-    if (!damageTypeResolution.ok) {
-      return damageTypeResolution.response
-    }
-
-    const loadoutResolution = resolveBuildToolLoadoutContext({
+    const contextResolution = resolveBuildToolTriggeredDamageContext({
       scopeLabel: buildToolScopeLabels.sourceDamageView,
       supportedAgents: supportedStaticBuildSourceViewAgents,
       supportedWEngines: supportedStaticBuildWEngines,
@@ -55,23 +44,19 @@ export const resolveBuildSourceDamageViews = createTool({
       agentMindscape: input.agentMindscape,
       coreSkillLevel: input.coreSkillLevel,
       wEngineRefinement: input.wEngineRefinement,
+      scenario: input.scenario,
     })
-    if (!loadoutResolution.ok) {
-      return loadoutResolution.response
+    if (!contextResolution.ok) {
+      return contextResolution.response
     }
-    const { agent, loadout } = loadoutResolution
-
-    const scenarioResolution = resolveBuildToolResolvedScenario(input.scenario)
-    if (!scenarioResolution.ok) {
-      return scenarioResolution.response
-    }
+    const { agent, loadout, scenario } = contextResolution
 
     const views = resolveStaticBuildSourceDamageViews({
       mode: input.mode,
       manualBaseMode: input.manualBaseMode,
       loadout,
       panel: input.finalPanel,
-      scenario: scenarioResolution.scenario,
+      scenario,
       effectOverrides: input.effectOverrides,
     })
 

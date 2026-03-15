@@ -249,10 +249,32 @@ export interface BuildToolResolveLoadoutContextOptions<
   getCompatibleWEngines: (agent: TAgent) => readonly TWEngine[]
 }
 
+export interface BuildToolResolveTriggeredDamageContextOptions<
+  TAgent extends CatalogItem & { specialty: keyof typeof specialtyLabels },
+  TWEngine extends CatalogItem & { specialty: keyof typeof specialtyLabels },
+  TDriveDisc extends CatalogItem,
+> extends BuildToolResolveLoadoutContextOptions<TAgent, TWEngine, TDriveDisc> {
+  scenario: BuildToolScenarioInput
+}
+
 export interface BuildToolResolvedSourceEntriesContext {
   utilityOnly: boolean
   scenario: ResolveStaticBuildSourceEntriesInput["scenario"]
   panel: ResolveStaticBuildSourceEntriesInput["panel"]
+}
+
+export interface BuildToolResolvedTriggeredDamageContext<
+  TAgent extends CatalogItem,
+  TWEngine extends CatalogItem,
+> {
+  ok: true
+  agent: TAgent
+  loadout: StaticBuildLoadoutInput
+  scenario: Extract<
+    BuildToolResolvedScenario,
+    { damageType: "anomaly" | "disorder" }
+  >
+  wEngine: TWEngine | undefined
 }
 
 export const specialtyLabels = {
@@ -904,6 +926,59 @@ export function resolveBuildToolLoadoutContext<
       coreSkillLevel: options.coreSkillLevel,
       wEngineRefinement: options.wEngineRefinement,
     }),
+  }
+}
+
+export function resolveBuildToolTriggeredDamageContext<
+  TAgent extends CatalogItem & { specialty: keyof typeof specialtyLabels },
+  TWEngine extends CatalogItem & { specialty: keyof typeof specialtyLabels },
+  TDriveDisc extends CatalogItem,
+>(
+  options: BuildToolResolveTriggeredDamageContextOptions<
+    TAgent,
+    TWEngine,
+    TDriveDisc
+  >,
+):
+  | BuildToolResolvedTriggeredDamageContext<TAgent, TWEngine>
+  | {
+      ok: false
+      response:
+        | BuildToolUnsupportedDamageTypeResponse
+        | BuildToolUnsupportedAnomalyTypeResponse
+        | BuildToolUnsupportedAgentResponse
+        | BuildToolUnsupportedWEngineResponse
+        | BuildToolIncompatibleWEngineResponse
+        | BuildToolUnsupportedDriveDiscResponse
+    } {
+  const damageTypeResolution = resolveBuildToolDamageType(
+    options.scopeLabel,
+    options.scenario.damageType,
+    ["anomaly", "disorder"],
+  )
+  if (!damageTypeResolution.ok) {
+    return damageTypeResolution
+  }
+
+  const loadoutResolution = resolveBuildToolLoadoutContext(options)
+  if (!loadoutResolution.ok) {
+    return loadoutResolution
+  }
+
+  const scenarioResolution = resolveBuildToolResolvedScenario(options.scenario)
+  if (!scenarioResolution.ok) {
+    return scenarioResolution
+  }
+
+  return {
+    ok: true,
+    agent: loadoutResolution.agent,
+    loadout: loadoutResolution.loadout,
+    scenario: scenarioResolution.scenario as Extract<
+      BuildToolResolvedScenario,
+      { damageType: "anomaly" | "disorder" }
+    >,
+    wEngine: loadoutResolution.wEngine,
   }
 }
 

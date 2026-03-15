@@ -12,9 +12,7 @@ import {
   buildToolScopeLabels,
   buildTriggerMatrixSuccessResponse,
   resolveBuildInputSchema,
-  resolveBuildToolDamageType,
-  resolveBuildToolLoadoutContext,
-  resolveBuildToolResolvedScenario,
+  resolveBuildToolTriggeredDamageContext,
 } from "./resolve-build-shared"
 
 export const resolveBuildTriggerMatrix = createTool({
@@ -31,16 +29,7 @@ export const resolveBuildTriggerMatrix = createTool({
       ),
   }),
   execute: async (input) => {
-    const damageTypeResolution = resolveBuildToolDamageType(
-      buildToolScopeLabels.triggerMatrix,
-      input.scenario.damageType,
-      ["anomaly", "disorder"],
-    )
-    if (!damageTypeResolution.ok) {
-      return damageTypeResolution.response
-    }
-
-    const loadoutResolution = resolveBuildToolLoadoutContext({
+    const contextResolution = resolveBuildToolTriggeredDamageContext({
       scopeLabel: buildToolScopeLabels.triggerMatrix,
       supportedAgents: supportedStaticBuildTriggerMatrixAgents,
       supportedWEngines: supportedStaticBuildWEngines,
@@ -54,23 +43,19 @@ export const resolveBuildTriggerMatrix = createTool({
       agentMindscape: input.agentMindscape,
       coreSkillLevel: input.coreSkillLevel,
       wEngineRefinement: input.wEngineRefinement,
+      scenario: input.scenario,
     })
-    if (!loadoutResolution.ok) {
-      return loadoutResolution.response
+    if (!contextResolution.ok) {
+      return contextResolution.response
     }
-    const { loadout } = loadoutResolution
-
-    const scenarioResolution = resolveBuildToolResolvedScenario(input.scenario)
-    if (!scenarioResolution.ok) {
-      return scenarioResolution.response
-    }
+    const { loadout, scenario } = contextResolution
 
     const matrix = resolveStaticBuildTriggerMatrix({
       mode: input.mode,
       manualBaseMode: input.manualBaseMode,
       loadout,
       panel: input.finalPanel,
-      scenario: scenarioResolution.scenario,
+      scenario,
       effectOverrides: input.effectOverrides,
     })
 

@@ -8458,6 +8458,38 @@ caveatSummary` 这些兼容字段补齐。
 - `V219.3` 已完成：现有高层回归测试与 runtime 校验已覆盖
 - `V219.4` 已完成：roadmap、索引与架构文档已同步
 
+## 223. V220 triggered-damage context helper contracts
+
+`V219` 收口后，`resolve-build-trigger-matrix.ts` 与 `resolve-build-source-damage-views.ts` 仍重复 anomaly/disorder-only 的前置上下文：
+
+1. `damageType` gating
+2. loadout context 解析
+3. disorder-aware scenario 解析
+
+`V220` 只解决这一件事：
+
+1. 把 anomaly/disorder-only tool 的前置上下文固定成 shared helper，不改变任何 tool 的输入输出 shape
+
+### 223.1 分阶段
+
+1. `V220.1` scope freeze
+2. `V220.2` shared helper / runtime alignment
+3. `V220.3` tests / prompt alignment
+4. `V220.4` docs closeout
+
+### 223.2 非目标
+
+1. 不改变 `trigger-matrix` 与 `source-damage-view` 的返回字段
+2. 不改变 source-view uncovered response 语义
+3. 不改变底层 `zzz-data` runtime
+
+### 223.3 当前状态
+
+- `V220.1` 已完成：冻结到 triggered-damage context helper contracts
+- `V220.2` 已完成：`trigger-matrix / source-damage-view` 的 anomaly/disorder 前置上下文已统一复用 shared helper
+- `V220.3` 已完成：现有高层回归测试与 runtime 校验已覆盖
+- `V220.4` 已完成：roadmap、索引与架构文档已同步
+
 ## 174. V171 explicit compact top-level summary effect summaries
 
 `V170` 收口后，compact contract 中下一批仍直接复用 raw effect summary item type 的显式缺口主要集中在 top-level `summary`：
