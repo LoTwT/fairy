@@ -10111,3 +10111,31 @@ caveatSummary` 这些兼容字段补齐。
 - `V274.3` 已完成：`build/index.ts` 已统一导出这些新 type
 - `V274.4` 已完成：现有 build / agent 测试与 runtime 校验已覆盖
 - `V274.5` 已完成：roadmap、索引与架构文档已同步
+
+## 278. V275 build skill-matrix summary scalar contracts
+
+`V274` 收口后，`skill-matrix summary` 里的 `baseDamageValue / attack / hp / sheerForce / critRate / critDamage / penetrationRate / penetrationValue` 仍在 `types.ts` 中以裸 `number` 暴露，和既有 scalar contract 仍不对称。
+
+`V275` 只解决一件事：
+
+1. 让这组 `skill-matrix summary` 标量统一复用现有显式 scalar type，不改变任何运行时行为
+
+### 278.1 分阶段
+
+1. `V275.1` scope freeze
+2. `V275.2` type alignment
+3. `V275.3` tests / runtime alignment
+4. `V275.4` docs closeout
+
+### 278.2 非目标
+
+1. 不改变 skill-matrix summary 的字段集合
+2. 不改变 skill-matrix 的结算逻辑
+3. 不处理 `commonBuckets / commonFormulaMultipliers` 这类 map contract
+
+### 278.3 当前状态
+
+- `V275.1` 已完成：冻结到 build skill-matrix summary scalar contract
+- `V275.2` 已完成：`types.ts` 已让 skill-matrix summary 的 panel / result 标量统一复用现有显式 scalar type
+- `V275.3` 已完成：现有 build / agent 测试与 runtime 校验已覆盖
+- `V275.4` 已完成：roadmap、索引与架构文档已同步

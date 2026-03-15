@@ -1149,14 +1149,14 @@ export interface StaticBuildSkillMatrixRow {
 export interface StaticBuildSkillMatrixSummary {
   rowCount: StaticBuildRowCount
   baseDamageStat: StaticBuildBaseDamageStat
-  baseDamageValue: number
-  attack?: number
-  hp?: number
-  sheerForce?: number
-  critRate: number
-  critDamage: number
-  penetrationRate: number
-  penetrationValue: number
+  baseDamageValue: StaticBuildBaseDamageValue
+  attack?: StaticBuildAttack
+  hp?: StaticBuildHP
+  sheerForce?: StaticBuildSheerForce
+  critRate: StaticBuildCritRate
+  critDamage: StaticBuildCritDamage
+  penetrationRate: StaticBuildPenetrationRate
+  penetrationValue: StaticBuildPenetrationValue
   commonBuckets: Record<string, number>
   variableBuckets: string[]
   commonFormulaMultipliers: Record<string, number>
