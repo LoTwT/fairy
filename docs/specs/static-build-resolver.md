@@ -1054,4 +1054,5 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 303. `V303` build source-utility label contracts：当前阶段已收口；`source-utility-view entry` 公开 contract 中的 `triggerLabel / conditionLabel` 已统一复用显式公开 type，不改变任何运行时行为，见 [静态构筑解析系统 V303](./static-build-resolver-v303.md)
 304. `V304` build skill matrix action-name contracts：当前阶段已收口；`skill-matrix row metadata` 公开 contract 中的 `actionName / skillName` 已统一复用显式公开 type，不改变任何运行时行为，见 [静态构筑解析系统 V304](./static-build-resolver-v304.md)
 305. `V305` build skill matrix source-stat contracts：当前阶段已收口；`skill-matrix row metadata` 公开 contract 中的 `sourceStatId / sourceStatName` 已统一复用显式公开 type，不改变任何运行时行为，见 [静态构筑解析系统 V305](./static-build-resolver-v305.md)
-306. `V306` build skill matrix segment-label contracts：当前阶段进行中；当前目标是为 `skill-matrix row metadata` 公开 contract 中的 `segmentLabel` 补显式公开 type，并统一复用，不改变任何运行时行为
+306. `V306` build skill matrix segment-label contracts：当前阶段已收口；`skill-matrix row metadata` 公开 contract 中的 `segmentLabel` 已统一复用显式公开 type，不改变任何运行时行为，见 [静态构筑解析系统 V306](./static-build-resolver-v306.md)
+307. `V307` build skill multiplier text contracts：当前阶段进行中；当前目标是为 `skill-matrix row` 公开 contract 中的 `skillMultiplier` 补显式公开 type，并统一复用，不改变任何运行时行为

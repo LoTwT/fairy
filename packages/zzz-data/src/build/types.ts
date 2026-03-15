@@ -1170,6 +1170,7 @@ export type StaticBuildSkillName = string
 export type StaticBuildSourceStatId = string
 export type StaticBuildSourceStatName = string
 export type StaticBuildSegmentLabel = string
+export type StaticBuildSkillMultiplierText = string
 
 export interface StaticBuildSkillMatrixRow {
   id: StaticBuildRowId
@@ -1180,7 +1181,7 @@ export interface StaticBuildSkillMatrixRow {
   damageType: StaticBuildDamageType
   attribute: AgentAttribute
   combatTags: StaticBuildCombatTagList
-  skillMultiplier: string
+  skillMultiplier: StaticBuildSkillMultiplierText
   damageSummary: StaticBuildSkillMatrixRowDamageSummary
   summary: StaticBuildResolveSummary
   resolvedBuckets: StaticBuildResolvedBuckets

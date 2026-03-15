@@ -11059,6 +11059,33 @@ caveatSummary` 这些兼容字段补齐。
 ### 309.4 当前状态
 
 - `V306.1` 已完成：范围冻结到 skill-matrix segment-label contract
-- `V306.2` 进行中：准备在 `types.ts` 中落显式 segment-label type
-- `V306.3` 待开始：导出与测试对齐
-- `V306.4` 待开始：文档收口
+- `V306.2` 已完成：`types.ts` 已让 skill-matrix metadata 统一复用显式 segment-label type
+- `V306.3` 已完成：`build/index.ts` 已正式导出这些 type
+- `V306.4` 已完成：roadmap、索引与架构文档已同步
+
+## 310. V307 build skill multiplier text contracts
+
+### 310.1 目标
+
+`V307` 只解决一件事：
+
+- 为 `StaticBuildSkillMatrixRow` 中仍然直接暴露的 `skillMultiplier` 补显式公开 type
+
+### 310.2 范围
+
+1. 新增 `skillMultiplier` 文本 type
+2. `StaticBuildSkillMatrixRow.skillMultiplier`
+3. `build/index.ts` 对外导出
+
+### 310.3 非目标
+
+1. 不处理 skill multiplier 的格式或解析逻辑
+2. 不处理 `segmentLabel`
+3. 不处理 `sourceStatId / sourceStatName`
+
+### 310.4 当前状态
+
+- `V307.1` 已完成：范围冻结到 skill-matrix skillMultiplier contract
+- `V307.2` 进行中：准备在 `types.ts` 中落显式 skillMultiplier type
+- `V307.3` 待开始：导出与测试对齐
+- `V307.4` 待开始：文档收口

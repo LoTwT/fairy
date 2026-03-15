@@ -172,6 +172,7 @@ export type {
   StaticBuildSkillMatrixTemplateSource,
   StaticBuildSkillMultiplierFactor,
   StaticBuildSkillMultiplierInputValue,
+  StaticBuildSkillMultiplierText,
   StaticBuildSkillName,
   StaticBuildSkillQualifierList,
   StaticBuildSkillTag,
