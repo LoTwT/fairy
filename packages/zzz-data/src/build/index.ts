@@ -190,6 +190,7 @@ export type {
   StaticBuildSourceUtilityViewType,
   StaticBuildSourceViewCount,
   StaticBuildSpecialMultiplier,
+  StaticBuildStableKey,
   StaticBuildStandaloneCount,
   StaticBuildStateFlagKey,
   StaticBuildStateSnapshotInput,

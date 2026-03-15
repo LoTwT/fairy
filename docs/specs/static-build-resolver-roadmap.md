@@ -10647,5 +10647,35 @@ caveatSummary` 这些兼容字段补齐。
 - `V292.1` 已完成：冻结到 canonicalLabel text contract
 - `V292.2` 已完成：`types.ts` 已让相关 metadata 统一复用显式 type
 - `V292.3` 已完成：`build/index.ts` 已正式导出这个 type
-- `V292.4` 进行中：等待现有 build / agent 测试与 runtime 校验完成
-- `V292.5` 进行中：等待 roadmap、索引与架构文档同步
+- `V292.4` 已完成：现有 build / agent 测试与 runtime 校验已覆盖
+- `V292.5` 已完成：roadmap、索引与架构文档已同步
+
+## 296. V293 build stable key contracts
+
+`V292` 收口后，source-view / trigger-matrix / skill-matrix metadata 中的 `stableKey` 仍以匿名 `string` 暴露，和前面的显式公开 contract 仍不对称。
+
+`V293` 只解决一件事：
+
+1. 为 metadata `stableKey` 补显式 type，并让 source-damage-view / source-utility-view / trigger-matrix / skill-matrix 统一复用，不改变任何运行时行为
+
+### 296.1 分阶段
+
+1. `V293.1` scope freeze
+2. `V293.2` type alignment
+3. `V293.3` export alignment
+4. `V293.4` tests / runtime alignment
+5. `V293.5` docs closeout
+
+### 296.2 非目标
+
+1. 不改变 stableKey 的字符串内容或生成逻辑
+2. 不处理 `id`
+3. 不处理 `actionName / skillName / sourceStatId / sourceStatName`
+
+### 296.3 当前状态
+
+- `V293.1` 已完成：冻结到 stableKey contract
+- `V293.2` 已完成：`types.ts` 已让相关 metadata 统一复用显式 type
+- `V293.3` 已完成：`build/index.ts` 已正式导出这个 type
+- `V293.4` 进行中：等待现有 build / agent 测试与 runtime 校验完成
+- `V293.5` 进行中：等待 roadmap、索引与架构文档同步

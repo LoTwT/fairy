@@ -732,10 +732,11 @@ export type StaticBuildSourceDamageViewResolutionMode = "standalone" | "delta"
 export type StaticBuildEntryLabel = string
 export type StaticBuildRowLabel = string
 export type StaticBuildCanonicalLabel = string
+export type StaticBuildStableKey = string
 
 export interface StaticBuildSourceDamageViewMeta {
   canonicalLabel: StaticBuildCanonicalLabel
-  stableKey: string
+  stableKey: StaticBuildStableKey
   entryKind: "source-damage-view"
   damageType: Extract<StaticBuildDamageType, "anomaly" | "disorder">
   resolutionMode: StaticBuildSourceDamageViewResolutionMode
@@ -857,7 +858,7 @@ export interface ResolveStaticBuildSourceUtilityViewsInput {
 
 export interface StaticBuildSourceUtilityViewMeta {
   canonicalLabel: StaticBuildCanonicalLabel
-  stableKey: string
+  stableKey: StaticBuildStableKey
   entryKind: "source-utility-view"
   utilityType: StaticBuildSourceUtilityViewType
   resolutionMode: StaticBuildSourceUtilityViewResolutionMode
@@ -1067,8 +1068,8 @@ export type StaticBuildTriggerMatrixTemplateSource =
   | "source-view"
 
 export interface StaticBuildTriggerMatrixRowMeta {
-  canonicalLabel: string
-  stableKey: string
+  canonicalLabel: StaticBuildCanonicalLabel
+  stableKey: StaticBuildStableKey
   entryKind: StaticBuildTriggerMatrixEntryKind
   templateSource: StaticBuildTriggerMatrixTemplateSource
   damageType: Extract<StaticBuildDamageType, "anomaly" | "disorder">
@@ -1122,7 +1123,7 @@ export interface StaticBuildSkillMatrixRowMeta {
   skillName: string
   qualifiers: StaticBuildSkillQualifierList
   canonicalLabel: StaticBuildCanonicalLabel
-  stableKey: string
+  stableKey: StaticBuildStableKey
   templateSource: StaticBuildSkillMatrixTemplateSource
   sourceSkillTypeId: number
   sourceStatId: string
