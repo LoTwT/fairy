@@ -1075,3 +1075,4 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 324. `V324` resolver effect context list contracts：当前阶段已收口；`resolver.ts` 中 effect-application 与 diagnostics helper 仍直接使用的内联 list 输入已统一收成显式公开 list contract，不改变任何运行时行为，见 [静态构筑解析系统 V324](./static-build-resolver-v324.md)
 325. `V325` skill matrix map and list contracts：当前阶段已收口；`matrix.ts` 中 `commonBuckets / variableBuckets / commonFormulaMultipliers / variableFormulaMultipliers` 仍直接使用的 map/list shape 已统一收成显式公开 contract，不改变任何运行时行为，见 [静态构筑解析系统 V325](./static-build-resolver-v325.md)
 326. `V326` catalog source list contracts：当前阶段已收口；`catalog.ts` 中上游 source item 的 `attributes` 列表和 alias override map 已统一收成显式公开 contract，不改变任何运行时行为，见 [静态构筑解析系统 V326](./static-build-resolver-v326.md)
+327. `V327` label map contracts：当前阶段已收口；`build` 各模块中固定 `Record<..., string>` 的 label map 已统一收成显式公开 contract，不改变任何运行时行为，见 [静态构筑解析系统 V327](./static-build-resolver-v327.md)

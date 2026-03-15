@@ -7,6 +7,7 @@ import type {
   StaticBuildSourceDamageViewEntry,
   StaticBuildTriggerMatrixEffectSummaryItem,
   StaticBuildTriggerMatrixEntryKind,
+  StaticBuildTriggerMatrixGroupLabelMap,
   StaticBuildTriggerMatrixRow,
   StaticBuildTriggerMatrixSummary,
 } from "./types.js"
@@ -52,10 +53,7 @@ const triggerMatrixBucketLabels = {
 export const supportedStaticBuildTriggerMatrixAgents =
   supportedStaticBuildSourceViewAgents
 
-const triggerMatrixGroupLabels: Record<
-  StaticBuildTriggerMatrixEntryKind,
-  string
-> = {
+const triggerMatrixGroupLabels: StaticBuildTriggerMatrixGroupLabelMap = {
   "main-formula": "主公式结算",
   "source-view": "额外来源结算",
 }

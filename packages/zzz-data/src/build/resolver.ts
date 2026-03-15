@@ -7,6 +7,7 @@ import type {
   StaticBuildCritRate,
   StaticBuildDiagnosticEntryList,
   StaticBuildDiagnosticKind,
+  StaticBuildDiagnosticLabelMap,
   StaticBuildDiagnosticOwner,
   StaticBuildDynamicSnapshotInput,
   StaticBuildEffectDefinition,
@@ -17,6 +18,7 @@ import type {
   StaticBuildSourceNoteEntryList,
   StaticBuildSourceNoteOwner,
   StaticBuildSourceNoteStatus,
+  StaticBuildSourceNoteStatusLabelMap,
   StaticBuildStateSnapshotInput,
   StaticBuildTraceItem,
   StaticBuildTraceItemList,
@@ -51,14 +53,14 @@ import {
 } from "./definitions.js"
 import { getStaticBuildProfile } from "./profiles.js"
 
-const diagnosticLabels: Record<StaticBuildDiagnosticKind, string> = {
+const diagnosticLabels: StaticBuildDiagnosticLabelMap = {
   "defaulted-input": "默认输入",
   "coverage-gap": "覆盖缺口",
   "unsupported-effect": "未支持效果",
   "fallback": "回退处理",
 }
 
-const sourceNoteLabels: Record<StaticBuildSourceNoteStatus, string> = {
+const sourceNoteLabels: StaticBuildSourceNoteStatusLabelMap = {
   "missing-input": "缺少输入",
   "resolved": "已展开",
   "process-only": "仅流程说明",

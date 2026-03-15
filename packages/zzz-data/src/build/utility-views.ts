@@ -8,6 +8,7 @@ import type {
   StaticBuildResolvedLoadout,
   StaticBuildSourceUtilityViewEntry,
   StaticBuildSourceUtilityViewGroupKey,
+  StaticBuildSourceUtilityViewGroupLabelMap,
   StaticBuildSourceUtilityViewRequirement,
   StaticBuildSourceUtilityViewRequirementKind,
   StaticBuildSourceUtilityViewRequirementSummary,
@@ -81,13 +82,11 @@ export const supportedStaticBuildSourceUtilityViewWEngines =
     .filter((item) => utilityViewWEngineIdSet.has(item.id))
     .sort((left, right) => left.name.localeCompare(right.name, "zh-Hans-CN"))
 
-const sourceUtilityViewGroupLabels: Record<
-  StaticBuildSourceUtilityViewGroupKey,
-  string
-> = {
-  trigger: "按次触发条目",
-  rate: "按速率条目",
-}
+const sourceUtilityViewGroupLabels: StaticBuildSourceUtilityViewGroupLabelMap =
+  {
+    trigger: "按次触发条目",
+    rate: "按速率条目",
+  }
 
 const sourceUtilityViewRequirementKinds = [
   "trigger",

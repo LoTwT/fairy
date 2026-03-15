@@ -8,6 +8,7 @@ import type {
   StaticBuildSourceEntry,
   StaticBuildSourceEntryCollectionSummary,
   StaticBuildSourceEntryGroupKey,
+  StaticBuildSourceEntryGroupLabelMap,
 } from "./types.js"
 import {
   summarizeAssumptions,
@@ -24,7 +25,7 @@ import {
   summarizeSourceDamageViewRequirements,
 } from "./views.js"
 
-const sourceEntryGroupLabels: Record<StaticBuildSourceEntryGroupKey, string> = {
+const sourceEntryGroupLabels: StaticBuildSourceEntryGroupLabelMap = {
   "source-damage-view": "额外结算条目",
   "source-utility-view": "回能 / utility 条目",
 }

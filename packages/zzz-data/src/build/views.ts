@@ -13,6 +13,7 @@ import type {
   StaticBuildSourceDamageViewEffectSummaryItem,
   StaticBuildSourceDamageViewEntry,
   StaticBuildSourceDamageViewGroupKey,
+  StaticBuildSourceDamageViewGroupLabelMap,
   StaticBuildSourceDamageViewRequirement,
   StaticBuildSourceDamageViewRequirementKind,
   StaticBuildSourceDamageViewRequirementSummary,
@@ -48,10 +49,7 @@ export const supportedStaticBuildSourceViewAgents = supportedStaticBuildAgents
   .filter((item) => sourceViewAgentIdSet.has(item.id))
   .sort((left, right) => left.name.localeCompare(right.name, "zh-Hans-CN"))
 
-const sourceDamageViewGroupLabels: Record<
-  StaticBuildSourceDamageViewGroupKey,
-  string
-> = {
+const sourceDamageViewGroupLabels: StaticBuildSourceDamageViewGroupLabelMap = {
   standalone: "独立结算条目",
   delta: "增量结算条目",
 }

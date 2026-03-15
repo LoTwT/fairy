@@ -11742,3 +11742,34 @@ caveatSummary` 这些兼容字段补齐。
 - `V326.2` 已完成：catalog source list 与 alias override map 已统一复用显式公开 contract
 - `V326.3` 已完成：校验与提交已通过
 - `V326.4` 已完成：roadmap、索引与架构文档已同步
+
+## 330. V327 label map contracts
+
+### 330.1 目标
+
+`V327` 只解决一件事：
+
+- 把 `build` 各模块中固定 `Record<..., string>` 的 label map 统一收成显式公开 contract。
+
+### 330.2 范围
+
+1. `StaticBuildDiagnosticLabelMap`
+2. `StaticBuildSourceNoteStatusLabelMap`
+3. `StaticBuildSourceDamageViewGroupLabelMap`
+4. `StaticBuildSourceUtilityViewGroupLabelMap`
+5. `StaticBuildSourceEntryGroupLabelMap`
+6. `StaticBuildTriggerMatrixGroupLabelMap`
+7. 对应 label map 常量与 `build/index.ts` type export
+
+### 330.3 非目标
+
+1. 不修改任何 label 文案
+2. 不处理 bucket label map
+3. 不处理 `Set<string>` 形式的内部聚合容器
+
+### 330.4 当前状态
+
+- `V327.1` 已完成：范围冻结到 label map contract
+- `V327.2` 已完成：固定 label map 已统一复用显式公开 contract
+- `V327.3` 已完成：校验与提交已通过
+- `V327.4` 已完成：roadmap、索引与架构文档已同步

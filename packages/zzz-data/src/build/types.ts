@@ -629,6 +629,10 @@ export type StaticBuildSourceNoteStatus =
   | "resolved"
   | "process-only"
   | "research-only"
+export type StaticBuildSourceNoteStatusLabelMap = Record<
+  StaticBuildSourceNoteStatus,
+  StaticBuildGroupLabel
+>
 
 export type StaticBuildSourceNoteGuidanceKind =
   | "provide-input"
@@ -668,6 +672,10 @@ export type StaticBuildDiagnosticKind =
   | "coverage-gap"
   | "unsupported-effect"
   | "fallback"
+export type StaticBuildDiagnosticLabelMap = Record<
+  StaticBuildDiagnosticKind,
+  StaticBuildGroupLabel
+>
 
 export type StaticBuildDiagnosticOwner =
   | "loadout"
@@ -910,6 +918,10 @@ export interface StaticBuildSourceDamageViewEffectSummaryItem {
 }
 
 export type StaticBuildSourceDamageViewGroupKey = "standalone" | "delta"
+export type StaticBuildSourceDamageViewGroupLabelMap = Record<
+  StaticBuildSourceDamageViewGroupKey,
+  StaticBuildGroupLabel
+>
 
 export interface StaticBuildSourceDamageViewGroupSummary {
   key: StaticBuildSourceDamageViewGroupKey
@@ -1039,6 +1051,10 @@ export interface StaticBuildSourceUtilityViewEntrySummary {
 }
 
 export type StaticBuildSourceUtilityViewGroupKey = "trigger" | "rate"
+export type StaticBuildSourceUtilityViewGroupLabelMap = Record<
+  StaticBuildSourceUtilityViewGroupKey,
+  StaticBuildGroupLabel
+>
 
 export interface StaticBuildSourceUtilityViewGroupSummary {
   key: StaticBuildSourceUtilityViewGroupKey
@@ -1103,6 +1119,10 @@ export type StaticBuildSourceEntry =
 export type StaticBuildSourceEntryGroupKey =
   | "source-damage-view"
   | "source-utility-view"
+export type StaticBuildSourceEntryGroupLabelMap = Record<
+  StaticBuildSourceEntryGroupKey,
+  StaticBuildGroupLabel
+>
 
 export interface StaticBuildSourceEntryGroupSummary {
   key: StaticBuildSourceEntryGroupKey
@@ -1151,6 +1171,10 @@ export interface ResolveStaticBuildSourceEntriesResult {
 }
 
 export type StaticBuildTriggerMatrixEntryKind = "main-formula" | "source-view"
+export type StaticBuildTriggerMatrixGroupLabelMap = Record<
+  StaticBuildTriggerMatrixEntryKind,
+  StaticBuildGroupLabel
+>
 
 export interface StaticBuildTriggerMatrixGroupSummary {
   key: StaticBuildTriggerMatrixEntryKind
