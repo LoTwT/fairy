@@ -83,19 +83,44 @@ const attributeLookup = createAliasLookup({
   honedEdge: ["Honed Edge", "凛刃"],
 })
 
+export type NormalizedSpecialtyKey =
+  | "attack"
+  | "stun"
+  | "rupture"
+  | "anomaly"
+  | "support"
+  | "defense"
+
+export type NormalizedAttributeKey =
+  | "electric"
+  | "fire"
+  | "ice"
+  | "ether"
+  | "physical"
+  | "auricInk"
+  | "frost"
+  | "honedEdge"
+
 export function normalizeSpecialty(
   value: string | undefined,
-): string | undefined {
+): NormalizedSpecialtyKey | undefined {
   if (!value) return undefined
-  return specialtyLookup[normalize(value)]
+  return specialtyLookup[normalize(value)] as NormalizedSpecialtyKey | undefined
 }
 
 export function normalizeAttribute(
   value: string | undefined,
-): string | undefined {
+): NormalizedAttributeKey | undefined {
   if (!value) return undefined
-  return attributeLookup[normalize(value)]
+  return attributeLookup[normalize(value)] as NormalizedAttributeKey | undefined
 }
+
+export type BaseDamageAttribute =
+  | "electric"
+  | "fire"
+  | "ice"
+  | "ether"
+  | "physical"
 
 const baseDamageAttributeMap = {
   electric: "electric",
@@ -106,12 +131,7 @@ const baseDamageAttributeMap = {
   auricInk: "ether",
   frost: "ice",
   honedEdge: "physical",
-} as const
-
-export type BaseDamageAttribute = keyof Pick<
-  typeof baseDamageAttributeMap,
-  "electric" | "fire" | "ice" | "ether" | "physical"
->
+} as const satisfies Record<NormalizedAttributeKey, BaseDamageAttribute>
 
 export const damageAttributeOrder = [
   "ice",
@@ -126,9 +146,7 @@ export function normalizeDamageAttribute(
 ): BaseDamageAttribute | undefined {
   const attribute = normalizeAttribute(value)
   if (!attribute) return undefined
-  return baseDamageAttributeMap[
-    attribute as keyof typeof baseDamageAttributeMap
-  ]
+  return baseDamageAttributeMap[attribute]
 }
 
 /**
