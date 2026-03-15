@@ -153,6 +153,10 @@ export type StaticBuildSourceUtilityViewCount = number
 export type StaticBuildRowCount = number
 export type StaticBuildMainFormulaCount = number
 export type StaticBuildSourceViewCount = number
+export type StaticBuildAppliedEntryCount = number
+export type StaticBuildTotalEntryCount = number
+export type StaticBuildAppliedRowCount = number
+export type StaticBuildTotalRowCount = number
 export type StaticBuildDefenderBaseDefense = number
 export type StaticBuildDefenderResistance = number
 export type StaticBuildDefenseBonus = number
@@ -741,8 +745,8 @@ export interface StaticBuildSourceDamageViewEffectSummaryItem {
   label: string
   bucket: string
   value: string
-  appliedEntryCount: number
-  totalEntryCount: number
+  appliedEntryCount: StaticBuildAppliedEntryCount
+  totalEntryCount: StaticBuildTotalEntryCount
   appliesToAllEntries: boolean
   condition: string
 }
@@ -1026,8 +1030,8 @@ export interface StaticBuildTriggerMatrixEffectSummaryItem {
   label: string
   bucket: string
   value: string
-  appliedRowCount: number
-  totalRowCount: number
+  appliedRowCount: StaticBuildAppliedRowCount
+  totalRowCount: StaticBuildTotalRowCount
   appliesToAllRows: boolean
   condition: string
 }
@@ -1188,8 +1192,8 @@ export interface StaticBuildSkillMatrixEffectSummaryItem {
   label: string
   bucket: string
   value: string
-  appliedRowCount: number
-  totalRowCount: number
+  appliedRowCount: StaticBuildAppliedRowCount
+  totalRowCount: StaticBuildTotalRowCount
   appliesToAllRows: boolean
   condition: string
 }

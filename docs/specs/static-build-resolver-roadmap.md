@@ -10051,3 +10051,33 @@ caveatSummary` 这些兼容字段补齐。
 - `V272.3` 已完成：`build/index.ts` 已统一导出这些新 type
 - `V272.4` 已完成：现有 build / agent 测试与 runtime 校验已覆盖
 - `V272.5` 已完成：roadmap、索引与架构文档已同步
+
+## 276. V273 build effect-summary count contracts
+
+`V272` 收口后，effect-summary 相关的 `appliedEntryCount / totalEntryCount / appliedRowCount / totalRowCount` 仍在 `types.ts` 中以裸 `number` 暴露，和前面的 count contract 仍不对称。
+
+`V273` 只解决一件事：
+
+1. 为这组 build-layer effect-summary 计数补显式 type，并让 damage-view / trigger-matrix / skill-matrix 统一复用，不改变任何运行时行为
+
+### 276.1 分阶段
+
+1. `V273.1` scope freeze
+2. `V273.2` type alignment
+3. `V273.3` export alignment
+4. `V273.4` tests / runtime alignment
+5. `V273.5` docs closeout
+
+### 276.2 非目标
+
+1. 不改变 effect-summary 的字段集合
+2. 不改变 effect 计数逻辑
+3. 不扩展 compact layer 的 effect-summary contract
+
+### 276.3 当前状态
+
+- `V273.1` 已完成：冻结到 build effect-summary count contract
+- `V273.2` 已完成：`types.ts` 已新增显式 effect-summary count scalar alias，并让 damage-view / trigger-matrix / skill-matrix 统一复用
+- `V273.3` 已完成：`build/index.ts` 已统一导出这些新 type
+- `V273.4` 已完成：现有 build / agent 测试与 runtime 校验已覆盖
+- `V273.5` 已完成：roadmap、索引与架构文档已同步
