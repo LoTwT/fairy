@@ -11,16 +11,17 @@ import {
 } from "zzz-data"
 import {
   buildIncompatibleWEngineResponse,
+  buildToolLoadoutInput,
   buildToolScopeLabels,
   buildTriggerMatrixSuccessResponse,
   buildUnsupportedAgentResponse,
   buildUnsupportedAnomalyTypeResponse,
   buildUnsupportedDamageTypeResponse,
-  buildUnsupportedDriveDiscResponse,
   buildUnsupportedWEngineResponse,
   findCatalogItem,
   normalizeAnomalyType,
   resolveBuildInputSchema,
+  resolveBuildToolDriveDiscSets,
 } from "./resolve-build-shared"
 
 export const resolveBuildTriggerMatrix = createTool({
@@ -84,21 +85,23 @@ export const resolveBuildTriggerMatrix = createTool({
       )
     }
 
-    const driveDiscSets = []
-    for (const discInput of input.driveDiscs ?? []) {
-      const disc = findCatalogItem(
-        supportedStaticBuildDriveDiscs,
-        discInput.name,
-      )
-      if (!disc) {
-        return buildUnsupportedDriveDiscResponse(
-          buildToolScopeLabels.triggerMatrix,
-          supportedStaticBuildDriveDiscs,
-          discInput.name,
-        )
-      }
-      driveDiscSets.push({ id: disc.id, pieces: discInput.pieces })
+    const driveDiscResolution = resolveBuildToolDriveDiscSets(
+      buildToolScopeLabels.triggerMatrix,
+      input.driveDiscs,
+      supportedStaticBuildDriveDiscs,
+    )
+    if (!driveDiscResolution.ok) {
+      return driveDiscResolution.response
     }
+    const loadout = buildToolLoadoutInput({
+      agentId: agent.id,
+      wEngineId: wEngine?.id,
+      driveDiscSets: driveDiscResolution.driveDiscSets,
+      agentLevel: input.agentLevel,
+      agentMindscape: input.agentMindscape,
+      coreSkillLevel: input.coreSkillLevel,
+      wEngineRefinement: input.wEngineRefinement,
+    })
 
     const scenario =
       input.scenario.damageType === "disorder"
@@ -126,15 +129,7 @@ export const resolveBuildTriggerMatrix = createTool({
     const matrix = resolveStaticBuildTriggerMatrix({
       mode: input.mode,
       manualBaseMode: input.manualBaseMode,
-      loadout: {
-        agentId: agent.id,
-        wEngineId: wEngine?.id,
-        driveDiscSets,
-        agentLevel: input.agentLevel,
-        agentMindscape: input.agentMindscape,
-        coreSkillLevel: input.coreSkillLevel,
-        wEngineRefinement: input.wEngineRefinement,
-      },
+      loadout,
       panel: input.finalPanel,
       scenario,
       effectOverrides: input.effectOverrides,

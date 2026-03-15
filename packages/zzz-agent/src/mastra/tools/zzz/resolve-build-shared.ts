@@ -6,6 +6,8 @@ import type {
   CompactStaticBuildSourceEntryCollection,
   CompactStaticBuildSourceUtilityViewsResult,
   CompactStaticBuildTriggerMatrixResult,
+  StaticBuildDriveDiscSetInput,
+  StaticBuildLoadoutInput,
 } from "zzz-data"
 import { z } from "zod"
 
@@ -135,6 +137,26 @@ export interface BuildToolSourceUtilityViewsSuccessResponse {
 export interface BuildToolSourceEntryCollectionSuccessResponse {
   found: true
   collection: CompactStaticBuildSourceEntryCollection
+}
+
+export interface BuildToolResolvedDriveDiscSets {
+  ok: true
+  driveDiscSets: StaticBuildDriveDiscSetInput[]
+}
+
+export interface BuildToolRejectedDriveDiscSets {
+  ok: false
+  response: BuildToolUnsupportedDriveDiscResponse
+}
+
+export interface BuildToolLoadoutInputOptions {
+  agentId: string
+  wEngineId?: string
+  driveDiscSets?: StaticBuildDriveDiscSetInput[]
+  agentLevel?: number
+  agentMindscape?: number
+  coreSkillLevel?: number
+  wEngineRefinement?: number
 }
 
 export const specialtyLabels = {
@@ -508,6 +530,63 @@ export function buildUnsupportedDriveDiscResponse<T extends CatalogItem>(
     message: `当前 ${scopeLabel} 暂不支持驱动盘「${query}」`,
     supportedDriveDiscs: catalogNames(items),
     candidates: candidateNames(items, query),
+  }
+}
+
+export function resolveBuildToolDriveDiscSets<T extends CatalogItem>(
+  scopeLabel: BuildToolScopeLabel,
+  driveDiscs:
+    | Array<{
+        name: string
+        pieces: 2 | 4
+      }>
+    | undefined,
+  supportedDriveDiscs: readonly T[],
+): BuildToolResolvedDriveDiscSets | BuildToolRejectedDriveDiscSets {
+  const driveDiscSets: StaticBuildDriveDiscSetInput[] = []
+
+  for (const discInput of driveDiscs ?? []) {
+    const disc = findCatalogItem(supportedDriveDiscs, discInput.name)
+    if (!disc) {
+      return {
+        ok: false,
+        response: buildUnsupportedDriveDiscResponse(
+          scopeLabel,
+          supportedDriveDiscs,
+          discInput.name,
+        ),
+      }
+    }
+
+    driveDiscSets.push({
+      id: disc.id,
+      pieces: discInput.pieces,
+    })
+  }
+
+  return {
+    ok: true,
+    driveDiscSets,
+  }
+}
+
+export function buildToolLoadoutInput({
+  agentId,
+  wEngineId,
+  driveDiscSets,
+  agentLevel,
+  agentMindscape,
+  coreSkillLevel,
+  wEngineRefinement,
+}: BuildToolLoadoutInputOptions): StaticBuildLoadoutInput {
+  return {
+    agentId,
+    wEngineId,
+    driveDiscSets,
+    agentLevel,
+    agentMindscape,
+    coreSkillLevel,
+    wEngineRefinement,
   }
 }
 

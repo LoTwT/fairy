@@ -104,6 +104,7 @@
 - [静态构筑解析系统 V206](./specs/static-build-resolver-v206.md) — 当前阶段：已收口；`source-entry collection` 的最后一批匿名 coverage-gap 返回已收进 shared helper，并继续保留 `supportedUtilityWEngines / supportedSourceViewAgents`
 - [静态构筑解析系统 V207](./specs/static-build-resolver-v207.md) — 当前阶段：已收口；6 个高层 build tool 的成功返回已收进 shared helper，并继续保留 `build / matrix / views / collection`
 - [静态构筑解析系统 V208](./specs/static-build-resolver-v208.md) — 当前阶段：已收口；`resolve-build-source-entries.ts` 已去掉 `panel / scenario` 两处 `as any`，并继续保留 utility-only partial `finalPanel`
+- [静态构筑解析系统 V209](./specs/static-build-resolver-v209.md) — 当前阶段：已收口；6 个高层 build tool 的 `driveDiscSets` 解析与 `loadout` 组装已收进 shared helper
 - [静态构筑解析系统 V99](./specs/static-build-resolver-v99.md) — 当前阶段：已收口；`trigger-matrix summary.groups[*]` 已新增稳定 `caveatSummary`
 - [静态构筑解析系统 V100](./specs/static-build-resolver-v100.md) — 当前阶段：已收口；`trigger-matrix rows[*]` 与 compact row 已新增稳定 `caveatSummary`
 - [静态构筑解析系统 V101](./specs/static-build-resolver-v101.md) — 当前阶段：已收口；`source-utility-view entries[*]` 与 compact entry 已新增稳定 `caveatSummary`

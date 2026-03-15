@@ -21,12 +21,12 @@ import {
   buildIncompatibleWEngineResponse,
   buildMissingSourceEntryFinalPanelResponse,
   buildSourceEntryCollectionSuccessResponse,
+  buildToolLoadoutInput,
   buildToolScopeLabels,
   buildUncoveredSourceEntryCoverageResponse,
   buildUncoveredSourceEntryUtilityOnlyResponse,
   buildUnsupportedAgentResponse,
   buildUnsupportedAnomalyTypeResponse,
-  buildUnsupportedDriveDiscResponse,
   buildUnsupportedWEngineResponse,
   candidateNames,
   catalogNames,
@@ -34,6 +34,7 @@ import {
   findCatalogItem,
   normalizeAnomalyType,
   resolveBuildSourceEntriesInputSchema,
+  resolveBuildToolDriveDiscSets,
 } from "./resolve-build-shared"
 
 export const resolveBuildSourceEntries = createTool({
@@ -101,21 +102,23 @@ export const resolveBuildSourceEntries = createTool({
       )
     }
 
-    const driveDiscSets = []
-    for (const discInput of input.driveDiscs ?? []) {
-      const disc = findCatalogItem(
-        supportedStaticBuildDriveDiscs,
-        discInput.name,
-      )
-      if (!disc) {
-        return buildUnsupportedDriveDiscResponse(
-          buildToolScopeLabels.sourceEntryCollection,
-          supportedStaticBuildDriveDiscs,
-          discInput.name,
-        )
-      }
-      driveDiscSets.push({ id: disc.id, pieces: discInput.pieces })
+    const driveDiscResolution = resolveBuildToolDriveDiscSets(
+      buildToolScopeLabels.sourceEntryCollection,
+      input.driveDiscs,
+      supportedStaticBuildDriveDiscs,
+    )
+    if (!driveDiscResolution.ok) {
+      return driveDiscResolution.response
     }
+    const loadout = buildToolLoadoutInput({
+      agentId: agent.id,
+      wEngineId: wEngine?.id,
+      driveDiscSets: driveDiscResolution.driveDiscSets,
+      agentLevel: input.agentLevel,
+      agentMindscape: input.agentMindscape,
+      coreSkillLevel: input.coreSkillLevel,
+      wEngineRefinement: input.wEngineRefinement,
+    })
 
     let scenario: ResolveStaticBuildSourceEntriesInput["scenario"]
     if (input.scenario?.damageType === "disorder") {
@@ -157,15 +160,7 @@ export const resolveBuildSourceEntries = createTool({
     const collection = resolveStaticBuildSourceEntries({
       mode: input.mode,
       manualBaseMode: input.manualBaseMode,
-      loadout: {
-        agentId: agent.id,
-        wEngineId: wEngine?.id,
-        driveDiscSets,
-        agentLevel: input.agentLevel,
-        agentMindscape: input.agentMindscape,
-        coreSkillLevel: input.coreSkillLevel,
-        wEngineRefinement: input.wEngineRefinement,
-      },
+      loadout,
       panel,
       scenario,
       effectOverrides: input.effectOverrides,

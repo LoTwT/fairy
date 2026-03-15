@@ -12,11 +12,12 @@ import {
 import {
   buildIncompatibleWEngineResponse,
   buildSkillMatrixSuccessResponse,
+  buildToolLoadoutInput,
   buildToolScopeLabels,
   buildUnsupportedAgentResponse,
-  buildUnsupportedDriveDiscResponse,
   buildUnsupportedWEngineResponse,
   findCatalogItem,
+  resolveBuildToolDriveDiscSets,
 } from "./resolve-build-shared"
 
 export const resolveBuildSkillMatrix = createTool({
@@ -125,33 +126,27 @@ export const resolveBuildSkillMatrix = createTool({
       )
     }
 
-    const driveDiscSets = []
-    for (const discInput of input.driveDiscs ?? []) {
-      const disc = findCatalogItem(
-        supportedStaticBuildDriveDiscs,
-        discInput.name,
-      )
-      if (!disc) {
-        return buildUnsupportedDriveDiscResponse(
-          buildToolScopeLabels.skillMatrix,
-          supportedStaticBuildDriveDiscs,
-          discInput.name,
-        )
-      }
-      driveDiscSets.push({ id: disc.id, pieces: discInput.pieces })
+    const driveDiscResolution = resolveBuildToolDriveDiscSets(
+      buildToolScopeLabels.skillMatrix,
+      input.driveDiscs,
+      supportedStaticBuildDriveDiscs,
+    )
+    if (!driveDiscResolution.ok) {
+      return driveDiscResolution.response
     }
+    const loadout = buildToolLoadoutInput({
+      agentId: agent.id,
+      wEngineId: wEngine?.id,
+      driveDiscSets: driveDiscResolution.driveDiscSets,
+      agentMindscape: input.agentMindscape,
+      coreSkillLevel: input.coreSkillLevel,
+      wEngineRefinement: input.wEngineRefinement,
+    })
 
     const matrix = resolveStaticBuildSkillMatrix({
       mode: input.mode,
       manualBaseMode: input.manualBaseMode,
-      loadout: {
-        agentId: agent.id,
-        wEngineId: wEngine?.id,
-        driveDiscSets,
-        agentMindscape: input.agentMindscape,
-        coreSkillLevel: input.coreSkillLevel,
-        wEngineRefinement: input.wEngineRefinement,
-      },
+      loadout,
       panel: input.finalPanel,
       context: {
         ...input.context,

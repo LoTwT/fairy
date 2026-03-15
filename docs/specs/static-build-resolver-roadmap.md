@@ -8100,6 +8100,38 @@ caveatSummary` 这些兼容字段补齐。
 - `V208.3` 已完成：utility-only partial `finalPanel` 回归测试已覆盖
 - `V208.4` 已完成：roadmap、索引与架构文档已同步
 
+## 212. V209 build-tool loadout helper contracts
+
+`V208` 收口后，`zzz-agent` 高层 build tools 里剩余最明显的重复代码集中在两块：
+
+1. 手工解析 `driveDiscSets`
+2. 手工组装 `loadout`
+
+`V209` 只解决这一件事：
+
+1. 把这两块重复逻辑固定成 shared helper，不改变任何 tool 的输入输出 shape
+
+### 212.1 分阶段
+
+1. `V209.1` scope freeze
+2. `V209.2` shared helper / runtime alignment
+3. `V209.3` tests / prompt alignment
+4. `V209.4` docs closeout
+
+### 212.2 非目标
+
+1. 不改变任何 tool 的输入输出 shape
+2. 不改变 drive disc unsupported 的 message 或字段名
+3. 不改变底层 `zzz-data` runtime
+4. 不新增新的 build 计算能力
+
+### 212.3 当前状态
+
+- `V209.1` 已完成：冻结到 build-tool loadout helper contracts
+- `V209.2` 已完成：`driveDiscSets` 解析与 `loadout` 组装已统一复用 shared helper
+- `V209.3` 已完成：现有高层回归测试与 runtime 校验已覆盖
+- `V209.4` 已完成：roadmap、索引与架构文档已同步
+
 ## 174. V171 explicit compact top-level summary effect summaries
 
 `V170` 收口后，compact contract 中下一批仍直接复用 raw effect summary item type 的显式缺口主要集中在 top-level `summary`：

@@ -13,16 +13,17 @@ import {
 import {
   buildIncompatibleWEngineResponse,
   buildSourceDamageViewsSuccessResponse,
+  buildToolLoadoutInput,
   buildToolScopeLabels,
   buildUncoveredSourceDamageViewResponse,
   buildUnsupportedAgentResponse,
   buildUnsupportedAnomalyTypeResponse,
   buildUnsupportedDamageTypeResponse,
-  buildUnsupportedDriveDiscResponse,
   buildUnsupportedWEngineResponse,
   findCatalogItem,
   normalizeAnomalyType,
   resolveBuildInputSchema,
+  resolveBuildToolDriveDiscSets,
 } from "./resolve-build-shared"
 
 export const resolveBuildSourceDamageViews = createTool({
@@ -83,21 +84,23 @@ export const resolveBuildSourceDamageViews = createTool({
       )
     }
 
-    const driveDiscSets = []
-    for (const discInput of input.driveDiscs ?? []) {
-      const disc = findCatalogItem(
-        supportedStaticBuildDriveDiscs,
-        discInput.name,
-      )
-      if (!disc) {
-        return buildUnsupportedDriveDiscResponse(
-          buildToolScopeLabels.sourceDamageView,
-          supportedStaticBuildDriveDiscs,
-          discInput.name,
-        )
-      }
-      driveDiscSets.push({ id: disc.id, pieces: discInput.pieces })
+    const driveDiscResolution = resolveBuildToolDriveDiscSets(
+      buildToolScopeLabels.sourceDamageView,
+      input.driveDiscs,
+      supportedStaticBuildDriveDiscs,
+    )
+    if (!driveDiscResolution.ok) {
+      return driveDiscResolution.response
     }
+    const loadout = buildToolLoadoutInput({
+      agentId: agent.id,
+      wEngineId: wEngine?.id,
+      driveDiscSets: driveDiscResolution.driveDiscSets,
+      agentLevel: input.agentLevel,
+      agentMindscape: input.agentMindscape,
+      coreSkillLevel: input.coreSkillLevel,
+      wEngineRefinement: input.wEngineRefinement,
+    })
 
     if (input.scenario.damageType === "disorder") {
       const anomalyType = normalizeAnomalyType(input.scenario.anomalyType)
@@ -108,15 +111,7 @@ export const resolveBuildSourceDamageViews = createTool({
       const views = resolveStaticBuildSourceDamageViews({
         mode: input.mode,
         manualBaseMode: input.manualBaseMode,
-        loadout: {
-          agentId: agent.id,
-          wEngineId: wEngine?.id,
-          driveDiscSets,
-          agentLevel: input.agentLevel,
-          agentMindscape: input.agentMindscape,
-          coreSkillLevel: input.coreSkillLevel,
-          wEngineRefinement: input.wEngineRefinement,
-        },
+        loadout,
         panel: input.finalPanel,
         scenario: {
           ...input.scenario,
@@ -143,15 +138,7 @@ export const resolveBuildSourceDamageViews = createTool({
     const views = resolveStaticBuildSourceDamageViews({
       mode: input.mode,
       manualBaseMode: input.manualBaseMode,
-      loadout: {
-        agentId: agent.id,
-        wEngineId: wEngine?.id,
-        driveDiscSets,
-        agentLevel: input.agentLevel,
-        agentMindscape: input.agentMindscape,
-        coreSkillLevel: input.coreSkillLevel,
-        wEngineRefinement: input.wEngineRefinement,
-      },
+      loadout,
       panel: input.finalPanel,
       scenario: {
         ...input.scenario,

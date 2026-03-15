@@ -13,13 +13,14 @@ import {
   buildIncompatibleWEngineResponse,
   buildMissingSourceUtilityWEngineResponse,
   buildSourceUtilityViewsSuccessResponse,
+  buildToolLoadoutInput,
   buildToolScopeLabels,
   buildUncoveredSourceUtilityWEngineResponse,
   buildUnsupportedAgentResponse,
-  buildUnsupportedDriveDiscResponse,
   buildUnsupportedWEngineResponse,
   findCatalogItem,
   resolveBuildSourceUtilityInputSchema,
+  resolveBuildToolDriveDiscSets,
 } from "./resolve-build-shared"
 
 export const resolveBuildSourceUtilityViews = createTool({
@@ -80,32 +81,26 @@ export const resolveBuildSourceUtilityViews = createTool({
       )
     }
 
-    const driveDiscSets = []
-    for (const discInput of input.driveDiscs ?? []) {
-      const disc = findCatalogItem(
-        supportedStaticBuildDriveDiscs,
-        discInput.name,
-      )
-      if (!disc) {
-        return buildUnsupportedDriveDiscResponse(
-          buildToolScopeLabels.sourceUtilityView,
-          supportedStaticBuildDriveDiscs,
-          discInput.name,
-        )
-      }
-      driveDiscSets.push({ id: disc.id, pieces: discInput.pieces })
+    const driveDiscResolution = resolveBuildToolDriveDiscSets(
+      buildToolScopeLabels.sourceUtilityView,
+      input.driveDiscs,
+      supportedStaticBuildDriveDiscs,
+    )
+    if (!driveDiscResolution.ok) {
+      return driveDiscResolution.response
     }
+    const loadout = buildToolLoadoutInput({
+      agentId: agent.id,
+      wEngineId: wEngine.id,
+      driveDiscSets: driveDiscResolution.driveDiscSets,
+      agentLevel: input.agentLevel,
+      agentMindscape: input.agentMindscape,
+      coreSkillLevel: input.coreSkillLevel,
+      wEngineRefinement: input.wEngineRefinement,
+    })
 
     const views = resolveStaticBuildSourceUtilityViews({
-      loadout: {
-        agentId: agent.id,
-        wEngineId: wEngine.id,
-        driveDiscSets,
-        agentLevel: input.agentLevel,
-        agentMindscape: input.agentMindscape,
-        coreSkillLevel: input.coreSkillLevel,
-        wEngineRefinement: input.wEngineRefinement,
-      },
+      loadout,
       panel: input.finalPanel,
     })
 
