@@ -8,6 +8,9 @@
 /** Source-compatible rich text payload stored as a string in published JSON. */
 export type RichTextString = string
 
+/** Plain text string returned by text helpers after markup normalization. */
+export type PlainTextString = string
+
 const lineBreakPattern = /<br\s*\/?>/gi
 const tagPattern = /<[^>]+>/g
 const blankLinePattern = /\n{3,}/g
@@ -18,7 +21,7 @@ const blankLinePattern = /\n{3,}/g
  * This helper preserves line breaks from `<br/>` tags and removes all other
  * markup. It does not decode HTML entities.
  */
-export function stripRichText(value: RichTextString): string {
+export function stripRichText(value: RichTextString): PlainTextString {
   return value
     .replace(lineBreakPattern, "\n")
     .replace(tagPattern, "")

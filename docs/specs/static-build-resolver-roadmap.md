@@ -12368,3 +12368,30 @@ caveatSummary` 这些兼容字段补齐。
 - `V347.2` 已完成：公开 factor helper 的输入与输出已统一复用显式 alias
 - `V347.3` 待完成：校验与提交
 - `V347.4` 待完成：roadmap、索引与架构文档同步
+
+## 351. V348 text helper output contracts
+
+### 351.1 目标
+
+`V348` 只解决一件事：
+
+- 给 `stripRichText()` 的返回值补显式公开 contract，不改变任何文本清洗逻辑。
+
+### 351.2 范围
+
+1. `PlainTextString`
+2. `stripRichText(value: RichTextString): PlainTextString`
+3. 文档同步
+
+### 351.3 非目标
+
+1. 不新增新的文本 helper
+2. 不改变 rich text 清洗规则
+3. 不扩展 HTML entity decode 或其他格式化能力
+
+### 351.4 当前状态
+
+- `V348.1` 已完成：范围冻结到 text helper 输出 contract
+- `V348.2` 已完成：`stripRichText()` 输出已统一复用 `PlainTextString`
+- `V348.3` 待完成：校验与提交
+- `V348.4` 待完成：roadmap、索引与架构文档同步
