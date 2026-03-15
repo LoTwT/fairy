@@ -60,14 +60,18 @@ export type {
   ResolveStaticBuildTriggerMatrixInput,
   ResolveStaticBuildTriggerMatrixResult,
   StaticBuildAgentCatalogEntry,
+  StaticBuildAgentLevel,
+  StaticBuildAgentMindscape,
   StaticBuildBaseAgentCatalogEntry,
   StaticBuildBaseMode,
   StaticBuildBucket,
   StaticBuildCatalogEntry,
+  StaticBuildCoreSkillLevel,
   StaticBuildDamageType,
   StaticBuildDiagnosticEntry,
   StaticBuildDiagnosticKind,
   StaticBuildDiagnosticOwner,
+  StaticBuildDriveDiscPieces,
   StaticBuildDriveDiscSetInput,
   StaticBuildDynamicCountKey,
   StaticBuildDynamicFlagKey,
@@ -123,6 +127,7 @@ export type {
   StaticBuildTriggerMatrixRowMeta,
   StaticBuildUtilityAgentCatalogEntry,
   StaticBuildWEngineCatalogEntry,
+  StaticBuildWEngineRefinement,
 } from "./types.js"
 
 export {

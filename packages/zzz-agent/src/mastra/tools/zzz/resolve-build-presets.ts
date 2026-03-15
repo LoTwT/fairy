@@ -1,3 +1,7 @@
+import type {
+  StaticBuildAgentCatalogEntry,
+  StaticBuildUtilityAgentCatalogEntry,
+} from "zzz-data"
 import {
   getCompatibleStaticBuildUtilityWEngines,
   getCompatibleStaticBuildWEngines,
@@ -31,7 +35,7 @@ export const buildToolDamageCatalogPreset = {
   supportedAgents: supportedStaticBuildAgents,
   supportedWEngines: supportedStaticBuildWEngines,
   supportedDriveDiscs: supportedStaticBuildDriveDiscs,
-  getCompatibleWEngines: (agent: (typeof supportedStaticBuildAgents)[number]) =>
+  getCompatibleWEngines: (agent: StaticBuildAgentCatalogEntry) =>
     getCompatibleStaticBuildWEngines(agent.specialty),
 } as const
 
@@ -39,27 +43,24 @@ export const buildToolSkillMatrixCatalogPreset = {
   supportedAgents: supportedStaticBuildMatrixAgents,
   supportedWEngines: supportedStaticBuildWEngines,
   supportedDriveDiscs: supportedStaticBuildDriveDiscs,
-  getCompatibleWEngines: (
-    agent: (typeof supportedStaticBuildMatrixAgents)[number],
-  ) => getCompatibleStaticBuildWEngines(agent.specialty),
+  getCompatibleWEngines: (agent: StaticBuildAgentCatalogEntry) =>
+    getCompatibleStaticBuildWEngines(agent.specialty),
 } as const
 
 export const buildToolTriggerMatrixCatalogPreset = {
   supportedAgents: supportedStaticBuildTriggerMatrixAgents,
   supportedWEngines: supportedStaticBuildWEngines,
   supportedDriveDiscs: supportedStaticBuildDriveDiscs,
-  getCompatibleWEngines: (
-    agent: (typeof supportedStaticBuildTriggerMatrixAgents)[number],
-  ) => getCompatibleStaticBuildWEngines(agent.specialty),
+  getCompatibleWEngines: (agent: StaticBuildAgentCatalogEntry) =>
+    getCompatibleStaticBuildWEngines(agent.specialty),
 } as const
 
 export const buildToolSourceDamageViewCatalogPreset = {
   supportedAgents: supportedStaticBuildSourceViewAgents,
   supportedWEngines: supportedStaticBuildWEngines,
   supportedDriveDiscs: supportedStaticBuildDriveDiscs,
-  getCompatibleWEngines: (
-    agent: (typeof supportedStaticBuildSourceViewAgents)[number],
-  ) => getCompatibleStaticBuildWEngines(agent.specialty),
+  getCompatibleWEngines: (agent: StaticBuildAgentCatalogEntry) =>
+    getCompatibleStaticBuildWEngines(agent.specialty),
 } as const
 
 export const buildToolSourceUtilityViewCatalogPreset = {
@@ -67,9 +68,8 @@ export const buildToolSourceUtilityViewCatalogPreset = {
   supportedWEngines: supportedStaticBuildUtilityWEngines,
   supportedSourceUtilityWEngines: supportedStaticBuildSourceUtilityViewWEngines,
   supportedDriveDiscs: supportedStaticBuildDriveDiscs,
-  getCompatibleWEngines: (
-    agent: (typeof supportedStaticBuildUtilityAgents)[number],
-  ) => getCompatibleStaticBuildUtilityWEngines(agent.specialty),
+  getCompatibleWEngines: (agent: StaticBuildUtilityAgentCatalogEntry) =>
+    getCompatibleStaticBuildUtilityWEngines(agent.specialty),
 } as const
 
 export const buildToolSourceEntryCatalogPreset = {
@@ -80,9 +80,8 @@ export const buildToolSourceEntryCatalogPreset = {
   supportedUtilityWEngines: supportedStaticBuildUtilityWEngines,
   supportedSourceUtilityWEngines: supportedStaticBuildSourceUtilityViewWEngines,
   supportedDriveDiscs: supportedStaticBuildDriveDiscs,
-  getCompatibleWEngines: (agent: (typeof supportedStaticBuildAgents)[number]) =>
+  getCompatibleWEngines: (agent: StaticBuildAgentCatalogEntry) =>
     getCompatibleStaticBuildWEngines(agent.specialty),
-  getCompatibleUtilityWEngines: (
-    agent: (typeof supportedStaticBuildUtilityAgents)[number],
-  ) => getCompatibleStaticBuildUtilityWEngines(agent.specialty),
+  getCompatibleUtilityWEngines: (agent: StaticBuildUtilityAgentCatalogEntry) =>
+    getCompatibleStaticBuildUtilityWEngines(agent.specialty),
 } as const

@@ -1,6 +1,11 @@
 import type {
+  StaticBuildAgentLevel,
+  StaticBuildAgentMindscape,
+  StaticBuildCoreSkillLevel,
+  StaticBuildDriveDiscPieces,
   StaticBuildDriveDiscSetInput,
   StaticBuildLoadoutInput,
+  StaticBuildWEngineRefinement,
 } from "zzz-data"
 import type {
   BuildToolIncompatibleWEngineResponse,
@@ -66,17 +71,17 @@ export interface BuildToolLoadoutInputOptions {
   agentId: string
   wEngineId?: string
   driveDiscSets?: StaticBuildDriveDiscSetInput[]
-  agentLevel?: number
-  agentMindscape?: number
-  coreSkillLevel?: number
-  wEngineRefinement?: number
+  agentLevel?: StaticBuildAgentLevel
+  agentMindscape?: StaticBuildAgentMindscape
+  coreSkillLevel?: StaticBuildCoreSkillLevel
+  wEngineRefinement?: StaticBuildWEngineRefinement
 }
 
 export interface BuildToolProgressionInput {
-  agentLevel?: number
-  agentMindscape?: number
-  coreSkillLevel?: number
-  wEngineRefinement?: number
+  agentLevel?: StaticBuildAgentLevel
+  agentMindscape?: StaticBuildAgentMindscape
+  coreSkillLevel?: StaticBuildCoreSkillLevel
+  wEngineRefinement?: StaticBuildWEngineRefinement
 }
 
 export interface BuildToolResolvedLoadoutOptions extends BuildToolProgressionInput {
@@ -104,7 +109,7 @@ export interface BuildToolResolveLoadoutContextOptions<
   driveDiscs?:
     | Array<{
         name: string
-        pieces: 2 | 4
+        pieces: StaticBuildDriveDiscPieces
       }>
     | undefined
   getCompatibleWEngines: (agent: TAgent) => readonly TWEngine[]
@@ -127,7 +132,7 @@ export interface BuildToolResolveSourceEntriesLoadoutContextOptions<
   driveDiscs?:
     | Array<{
         name: string
-        pieces: 2 | 4
+        pieces: StaticBuildDriveDiscPieces
       }>
     | undefined
   getCompatibleWEngines: (agent: TAgent) => readonly TWEngine[]
@@ -209,7 +214,7 @@ export function resolveBuildToolDriveDiscSets<T extends CatalogItem>(
   driveDiscs:
     | Array<{
         name: string
-        pieces: 2 | 4
+        pieces: StaticBuildDriveDiscPieces
       }>
     | undefined,
   supportedDriveDiscs: readonly T[],
