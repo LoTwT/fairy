@@ -163,6 +163,7 @@ export type {
   StaticBuildSourceDamageViewRequirement,
   StaticBuildSourceDamageViewRequirementKind,
   StaticBuildSourceEntry,
+  StaticBuildSourceName,
   StaticBuildSourceNoteCount,
   StaticBuildSourceNoteEntry,
   StaticBuildSourceNoteGuidance,

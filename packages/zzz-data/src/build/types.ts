@@ -17,6 +17,7 @@ export type StaticBuildBaseMode = Exclude<StaticBuildMode, "manual">
 export type StaticBuildDamageType = "normal" | "sheer" | "anomaly" | "disorder"
 export type StaticBuildSourceType = "agent" | "w-engine" | "drive-disc"
 export type StaticBuildEffectId = string
+export type StaticBuildSourceName = string
 export type StaticBuildBaseDamageStat = "attack" | "sheerForce"
 export type StaticBuildSpecialty = AgentSpecialty
 
@@ -403,7 +404,7 @@ export interface StaticBuildEffectDefinition {
   id: StaticBuildEffectId
   sourceType: StaticBuildSourceType
   sourceId: string
-  sourceName: string
+  sourceName: StaticBuildSourceName
   label: string
   alreadyInPanel?: boolean
   maxStacks?: StaticBuildEffectStacks
@@ -467,7 +468,7 @@ export interface StaticBuildTraceModifier {
 export interface StaticBuildTraceItem {
   effectId: StaticBuildEffectId
   sourceType: StaticBuildSourceType
-  sourceName: string
+  sourceName: StaticBuildSourceName
   label: string
   status: "applied" | "skipped" | "unsupported"
   reason?: string
@@ -640,7 +641,7 @@ export interface StaticBuildResolveSummary {
 
 export interface StaticBuildResolveEffectSummaryItem {
   effectId: StaticBuildEffectId
-  sourceName: string
+  sourceName: StaticBuildSourceName
   label: string
   bucket: string
   value: string
@@ -761,7 +762,7 @@ export interface StaticBuildSourceDamageViewEntry {
 
 export interface StaticBuildSourceDamageViewEffectSummaryItem {
   effectId: StaticBuildEffectId
-  sourceName: string
+  sourceName: StaticBuildSourceName
   label: string
   bucket: string
   value: string
@@ -1046,7 +1047,7 @@ export interface StaticBuildTriggerMatrixSummary {
 
 export interface StaticBuildTriggerMatrixEffectSummaryItem {
   effectId: StaticBuildEffectId
-  sourceName: string
+  sourceName: StaticBuildSourceName
   label: string
   bucket: string
   value: string
@@ -1208,7 +1209,7 @@ export interface StaticBuildSkillMatrixGroupSummary {
 
 export interface StaticBuildSkillMatrixEffectSummaryItem {
   effectId: StaticBuildEffectId
-  sourceName: string
+  sourceName: StaticBuildSourceName
   label: string
   bucket: string
   value: string
