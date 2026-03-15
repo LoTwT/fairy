@@ -10,12 +10,11 @@ import {
   supportedStaticBuildUtilityWEngines,
 } from "zzz-data"
 import {
-  buildMissingSourceUtilityWEngineResponse,
   buildSourceUtilityViewsSuccessResponse,
   buildToolScopeLabels,
-  buildUncoveredSourceUtilityWEngineResponse,
   resolveBuildSourceUtilityInputSchema,
   resolveBuildToolLoadoutContext,
+  resolveBuildToolSourceUtilityCoverageResponse,
   resolveBuildToolSourceUtilitySupport,
 } from "./resolve-build-shared"
 
@@ -59,10 +58,10 @@ export const resolveBuildSourceUtilityViews = createTool({
     )
 
     if (!wEngine) {
-      return buildMissingSourceUtilityWEngineResponse(
-        agent.name,
-        sourceUtilitySupport.items,
-      )
+      return resolveBuildToolSourceUtilityCoverageResponse({
+        agentName: agent.name,
+        supportedWEngines: sourceUtilitySupport.items,
+      })
     }
 
     const views = resolveStaticBuildSourceUtilityViews({
@@ -71,10 +70,11 @@ export const resolveBuildSourceUtilityViews = createTool({
     })
 
     if (views.entries.length === 0) {
-      return buildUncoveredSourceUtilityWEngineResponse(
-        sourceUtilitySupport.items,
-        wEngine.name,
-      )
+      return resolveBuildToolSourceUtilityCoverageResponse({
+        agentName: agent.name,
+        supportedWEngines: sourceUtilitySupport.items,
+        wEngine,
+      })
     }
 
     return buildSourceUtilityViewsSuccessResponse(

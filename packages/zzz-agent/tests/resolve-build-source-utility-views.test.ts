@@ -296,6 +296,17 @@ describe("resolveBuildSourceUtilityViews tool", () => {
     expect((result as any).supportedWEngines).toContain("「月相」-朔")
   })
 
+  it("returns the utility support scope when no w-engine is provided", async () => {
+    const result = await runTool(resolveBuildSourceUtilityViews, {
+      agent: "猫又",
+    })
+
+    expect((result as any).found).toBe(false)
+    expect((result as any).message).toContain("请先提供")
+    expect((result as any).message).toContain("source-specific utility view")
+    expect((result as any).supportedWEngines).toContain("「月相」-朔")
+  })
+
   it("returns utility-view support scope when the current w-engine has no utility coverage", async () => {
     const result = await runTool(resolveBuildSourceUtilityViews, {
       agent: "猫又",

@@ -970,3 +970,4 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 219. `V219` skill-matrix input schema helper contracts：当前阶段已收口；`resolve-build-skill-matrix.ts` 的 `finalPanel / context / inputSchema` 已下沉到 shared helper，不改变任何 tool 的输入输出 shape，见 [静态构筑解析系统 V219](./static-build-resolver-v219.md)
 220. `V220` triggered-damage context helper contracts：当前阶段已收口；`trigger-matrix / source-damage-view` 的 anomaly/disorder 前置上下文已收进 shared helper，不改变任何 tool 的输入输出 shape，见 [静态构筑解析系统 V220](./static-build-resolver-v220.md)
 221. `V221` source-entry uncovered response helper contracts：当前阶段已收口；`resolve-build-source-entries.ts` 的 utility-only / coverage-gap 空结果分支已收进 shared helper，不改变任何 tool 的输入输出 shape，见 [静态构筑解析系统 V221](./static-build-resolver-v221.md)
+222. `V222` source-utility coverage response helper contracts：当前阶段已收口；`resolve-build-source-utility-views.ts` 的 missing / uncovered 分支已收进 shared helper，不改变任何 tool 的输入输出 shape，见 [静态构筑解析系统 V222](./static-build-resolver-v222.md)

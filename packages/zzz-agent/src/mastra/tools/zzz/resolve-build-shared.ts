@@ -263,6 +263,14 @@ export interface BuildToolResolvedSourceEntriesContext {
   panel: ResolveStaticBuildSourceEntriesInput["panel"]
 }
 
+export interface BuildToolResolveSourceUtilityCoverageResponseOptions<
+  TWEngine extends CatalogItem,
+> {
+  agentName: string
+  supportedWEngines: readonly TWEngine[]
+  wEngine?: TWEngine
+}
+
 export interface BuildToolResolveSourceEntryCoverageResponseOptions<
   TSourceViewAgent extends CatalogItem,
   TWEngine extends CatalogItem,
@@ -1182,6 +1190,26 @@ export function buildUncoveredSourceUtilityWEngineResponse<
     supportedWEngines: catalogNames(items),
     candidates: candidateNames(items, query),
   }
+}
+
+export function resolveBuildToolSourceUtilityCoverageResponse<
+  TWEngine extends CatalogItem,
+>(
+  options: BuildToolResolveSourceUtilityCoverageResponseOptions<TWEngine>,
+):
+  | BuildToolMissingSourceUtilityWEngineResponse
+  | BuildToolUncoveredSourceUtilityWEngineResponse {
+  if (!options.wEngine) {
+    return buildMissingSourceUtilityWEngineResponse(
+      options.agentName,
+      options.supportedWEngines,
+    )
+  }
+
+  return buildUncoveredSourceUtilityWEngineResponse(
+    options.supportedWEngines,
+    options.wEngine.name,
+  )
 }
 
 export function buildMissingSourceEntryFinalPanelResponse(): BuildToolMissingFinalPanelResponse {
