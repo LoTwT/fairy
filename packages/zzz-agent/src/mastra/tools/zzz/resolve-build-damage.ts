@@ -1,13 +1,7 @@
 import { createTool } from "@mastra/core/tools"
 import { z } from "zod"
-import {
-  compactStaticBuildResult,
-  getCompatibleStaticBuildWEngines,
-  resolveStaticBuildDamage,
-  supportedStaticBuildAgents,
-  supportedStaticBuildDriveDiscs,
-  supportedStaticBuildWEngines,
-} from "zzz-data"
+import { compactStaticBuildResult, resolveStaticBuildDamage } from "zzz-data"
+import { buildToolDamageCatalogPreset } from "./resolve-build-presets"
 import {
   buildDamageSuccessResponse,
   buildToolScopeLabels,
@@ -31,14 +25,10 @@ export const resolveBuildDamage = createTool({
   execute: async (input) => {
     const contextResolution = resolveBuildToolDamageExecutionContext({
       scopeLabel: buildToolScopeLabels.resolver,
-      supportedAgents: supportedStaticBuildAgents,
-      supportedWEngines: supportedStaticBuildWEngines,
-      supportedDriveDiscs: supportedStaticBuildDriveDiscs,
+      ...buildToolDamageCatalogPreset,
       agentQuery: input.agent,
       wEngineQuery: input.wEngine,
       driveDiscs: input.driveDiscs,
-      getCompatibleWEngines: (agent) =>
-        getCompatibleStaticBuildWEngines(agent.specialty),
       agentLevel: input.agentLevel,
       agentMindscape: input.agentMindscape,
       coreSkillLevel: input.coreSkillLevel,

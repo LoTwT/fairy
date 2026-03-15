@@ -2,13 +2,9 @@ import { createTool } from "@mastra/core/tools"
 import { z } from "zod"
 import {
   compactStaticBuildSourceUtilityViewsResult,
-  getCompatibleStaticBuildUtilityWEngines,
   resolveStaticBuildSourceUtilityViews,
-  supportedStaticBuildDriveDiscs,
-  supportedStaticBuildSourceUtilityViewWEngines,
-  supportedStaticBuildUtilityAgents,
-  supportedStaticBuildUtilityWEngines,
 } from "zzz-data"
+import { buildToolSourceUtilityViewCatalogPreset } from "./resolve-build-presets"
 import {
   buildToolScopeLabels,
   resolveBuildSourceUtilityInputSchema,
@@ -32,16 +28,10 @@ export const resolveBuildSourceUtilityViews = createTool({
   execute: async (input) => {
     const contextResolution = resolveBuildToolSourceUtilityExecutionContext({
       scopeLabel: buildToolScopeLabels.sourceUtilityView,
-      supportedAgents: supportedStaticBuildUtilityAgents,
-      supportedWEngines: supportedStaticBuildUtilityWEngines,
-      supportedSourceUtilityWEngines:
-        supportedStaticBuildSourceUtilityViewWEngines,
-      supportedDriveDiscs: supportedStaticBuildDriveDiscs,
+      ...buildToolSourceUtilityViewCatalogPreset,
       agentQuery: input.agent,
       wEngineQuery: input.wEngine,
       driveDiscs: input.driveDiscs,
-      getCompatibleWEngines: (agent) =>
-        getCompatibleStaticBuildUtilityWEngines(agent.specialty),
       agentLevel: input.agentLevel,
       agentMindscape: input.agentMindscape,
       coreSkillLevel: input.coreSkillLevel,

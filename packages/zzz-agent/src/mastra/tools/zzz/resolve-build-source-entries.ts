@@ -2,17 +2,9 @@ import { createTool } from "@mastra/core/tools"
 import { z } from "zod"
 import {
   compactStaticBuildSourceEntryCollection,
-  getCompatibleStaticBuildUtilityWEngines,
-  getCompatibleStaticBuildWEngines,
   resolveStaticBuildSourceEntries,
-  supportedStaticBuildAgents,
-  supportedStaticBuildDriveDiscs,
-  supportedStaticBuildSourceUtilityViewWEngines,
-  supportedStaticBuildSourceViewAgents,
-  supportedStaticBuildUtilityAgents,
-  supportedStaticBuildUtilityWEngines,
-  supportedStaticBuildWEngines,
 } from "zzz-data"
+import { buildToolSourceEntryCatalogPreset } from "./resolve-build-presets"
 import {
   buildToolScopeLabels,
   resolveBuildSourceEntriesInputSchema,
@@ -37,20 +29,10 @@ export const resolveBuildSourceEntries = createTool({
     const contextResolution = resolveBuildToolSourceEntriesExecutionContext({
       utilityOnly: false,
       scopeLabel: buildToolScopeLabels.sourceEntryCollection,
-      supportedAgents: supportedStaticBuildAgents,
-      supportedUtilityAgents: supportedStaticBuildUtilityAgents,
-      supportedWEngines: supportedStaticBuildWEngines,
-      supportedUtilityWEngines: supportedStaticBuildUtilityWEngines,
-      supportedSourceUtilityWEngines:
-        supportedStaticBuildSourceUtilityViewWEngines,
-      supportedDriveDiscs: supportedStaticBuildDriveDiscs,
+      ...buildToolSourceEntryCatalogPreset,
       agentQuery: input.agent,
       wEngineQuery: input.wEngine,
       driveDiscs: input.driveDiscs,
-      getCompatibleWEngines: (agent) =>
-        getCompatibleStaticBuildWEngines(agent.specialty),
-      getCompatibleUtilityWEngines: (agent) =>
-        getCompatibleStaticBuildUtilityWEngines(agent.specialty),
       agentLevel: input.agentLevel,
       agentMindscape: input.agentMindscape,
       coreSkillLevel: input.coreSkillLevel,
@@ -87,7 +69,8 @@ export const resolveBuildSourceEntries = createTool({
       wEngine,
       wEngineQuery: input.wEngine,
       compatibleWEngines,
-      supportedSourceViewAgents: supportedStaticBuildSourceViewAgents,
+      supportedSourceViewAgents:
+        buildToolSourceEntryCatalogPreset.supportedSourceViewAgents,
       supportedUtilityWEngines,
       collection: compactStaticBuildSourceEntryCollection(
         collection,

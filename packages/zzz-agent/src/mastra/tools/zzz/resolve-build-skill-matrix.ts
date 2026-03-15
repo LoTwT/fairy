@@ -1,12 +1,9 @@
 import { createTool } from "@mastra/core/tools"
 import {
   compactStaticBuildSkillMatrixResult,
-  getCompatibleStaticBuildWEngines,
   resolveStaticBuildSkillMatrix,
-  supportedStaticBuildDriveDiscs,
-  supportedStaticBuildMatrixAgents,
-  supportedStaticBuildWEngines,
 } from "zzz-data"
+import { buildToolSkillMatrixCatalogPreset } from "./resolve-build-presets"
 import {
   buildSkillMatrixSuccessResponse,
   buildToolScopeLabels,
@@ -22,14 +19,10 @@ export const resolveBuildSkillMatrix = createTool({
   execute: async (input) => {
     const contextResolution = resolveBuildToolSkillMatrixExecutionContext({
       scopeLabel: buildToolScopeLabels.skillMatrix,
-      supportedAgents: supportedStaticBuildMatrixAgents,
-      supportedWEngines: supportedStaticBuildWEngines,
-      supportedDriveDiscs: supportedStaticBuildDriveDiscs,
+      ...buildToolSkillMatrixCatalogPreset,
       agentQuery: input.agent,
       wEngineQuery: input.wEngine,
       driveDiscs: input.driveDiscs,
-      getCompatibleWEngines: (agent) =>
-        getCompatibleStaticBuildWEngines(agent.specialty),
       agentMindscape: input.agentMindscape,
       coreSkillLevel: input.coreSkillLevel,
       wEngineRefinement: input.wEngineRefinement,
