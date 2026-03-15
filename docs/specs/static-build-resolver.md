@@ -992,3 +992,4 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 241. `V241` build-tool scenario helpers：当前阶段已收口；高层 build tool 的 `attribute / disorder.anomalyType / damageType` 归一化 helper 已固定到单独共享模块，不改变任何 tool 的输入输出 shape，见 [静态构筑解析系统 V241](./static-build-resolver-v241.md)
 242. `V242` build-tool execution helpers：当前阶段已收口；高层 build tool 的 execution-context helper 已固定到单独共享模块，并移除旧的 `resolve-build-shared.ts`，不改变任何 tool 的输入输出 shape，见 [静态构筑解析系统 V242](./static-build-resolver-v242.md)
 243. `V243` build-tool specialty key contracts：当前阶段已收口；高层 build tool 已固定显式 `BuildToolSpecialtyKey` type，并在 loadout / execution / response helper 中统一复用，不改变任何 tool 的输入输出 shape，见 [静态构筑解析系统 V243](./static-build-resolver-v243.md)
+244. `V244` build-tool source-entry context helpers：当前阶段已收口；高层 build tool 的 source-entry `panel / scenario / utilityOnly` gating helper 已固定到单独共享模块，不改变任何 tool 的输入输出 shape，见 [静态构筑解析系统 V244](./static-build-resolver-v244.md)

@@ -1,8 +1,6 @@
-import type { z } from "zod"
 import type { ResolveStaticBuildSourceEntriesInput } from "zzz-data"
 import type {
   BuildToolIncompatibleWEngineResponse,
-  BuildToolMissingFinalPanelResponse,
   BuildToolUnsupportedAgentResponse,
   BuildToolUnsupportedAnomalyTypeResponse,
   BuildToolUnsupportedDamageTypeResponse,
@@ -31,14 +29,12 @@ import {
   resolveBuildToolSourceEntriesLoadoutContext,
   resolveBuildToolSourceUtilitySupport,
 } from "./resolve-build-loadout"
-import { buildMissingSourceEntryFinalPanelResponse } from "./resolve-build-responses"
 import {
   resolveBuildToolDamageType,
-  resolveBuildToolOptionalScenario,
   resolveBuildToolResolvedScenario,
   resolveBuildToolResolvedSkillMatrixContext,
 } from "./resolve-build-scenario"
-import { finalPanelSchema } from "./resolve-build-schemas"
+import { resolveBuildToolSourceEntriesContext } from "./resolve-build-source-entry-context"
 
 export interface BuildToolResolvedDamageExecutionContext<
   TAgent extends CatalogItem,
@@ -80,12 +76,6 @@ export interface BuildToolResolveTriggeredDamageContextOptions<
   TDriveDisc extends CatalogItem,
 > extends BuildToolResolveLoadoutContextOptions<TAgent, TWEngine, TDriveDisc> {
   scenario: BuildToolScenarioInput
-}
-
-export interface BuildToolResolvedSourceEntriesContext {
-  utilityOnly: boolean
-  scenario: ResolveStaticBuildSourceEntriesInput["scenario"]
-  panel: ResolveStaticBuildSourceEntriesInput["panel"]
 }
 
 export interface BuildToolResolvedSourceEntriesExecutionContext<
@@ -205,64 +195,6 @@ export function resolveBuildToolTriggeredDamageContext<
       { damageType: "anomaly" | "disorder" }
     >,
     wEngine: loadoutResolution.wEngine,
-  }
-}
-
-export function resolveBuildToolSourceEntriesContext(input: {
-  scenario: BuildToolScenarioInput | undefined
-  finalPanel: z.input<typeof finalPanelSchema> | undefined
-}):
-  | {
-      ok: true
-      context: BuildToolResolvedSourceEntriesContext
-    }
-  | {
-      ok: false
-      response:
-        | BuildToolMissingFinalPanelResponse
-        | BuildToolUnsupportedAnomalyTypeResponse
-    } {
-  const utilityOnly =
-    !input.scenario ||
-    input.scenario.damageType === "normal" ||
-    input.scenario.damageType === "sheer"
-
-  const scenarioResolution = resolveBuildToolOptionalScenario(input.scenario)
-  if (!scenarioResolution.ok) {
-    return scenarioResolution
-  }
-
-  const scenario = scenarioResolution.scenario
-  let panel: ResolveStaticBuildSourceEntriesInput["panel"]
-
-  if (
-    scenario &&
-    (scenario.damageType === "anomaly" || scenario.damageType === "disorder")
-  ) {
-    const fullPanel = finalPanelSchema.safeParse(input.finalPanel)
-    if (!fullPanel.success) {
-      return {
-        ok: false,
-        response: buildMissingSourceEntryFinalPanelResponse(),
-      }
-    }
-    panel = fullPanel.data
-  } else if (input.finalPanel) {
-    panel = {
-      attack: input.finalPanel.attack ?? 0,
-      critRate: input.finalPanel.critRate ?? 0,
-      critDamage: input.finalPanel.critDamage ?? 0,
-      ...input.finalPanel,
-    }
-  }
-
-  return {
-    ok: true,
-    context: {
-      utilityOnly,
-      scenario,
-      panel,
-    },
   }
 }
 
