@@ -15,6 +15,8 @@ import type {
 export type StaticBuildMode = "baseline" | "full-buff" | "manual"
 export type StaticBuildBaseMode = Exclude<StaticBuildMode, "manual">
 export type StaticBuildDamageType = "normal" | "sheer" | "anomaly" | "disorder"
+export type StaticBuildSourceType = "agent" | "w-engine" | "drive-disc"
+export type StaticBuildBaseDamageStat = "attack" | "sheerForce"
 
 export type StaticBuildSkillTag =
   | "basic"
@@ -364,7 +366,7 @@ export interface StaticBuildResolvedPanel {
   anomalyCritDamage: number
   penetrationRate: number
   penetrationValue: number
-  baseDamageStat: "attack" | "sheerForce"
+  baseDamageStat: StaticBuildBaseDamageStat
   baseDamageValue: number
 }
 
@@ -376,7 +378,7 @@ export interface StaticBuildTraceModifier {
 
 export interface StaticBuildTraceItem {
   effectId: string
-  sourceType: StaticBuildEffectDefinition["sourceType"]
+  sourceType: StaticBuildSourceType
   sourceName: string
   label: string
   status: "applied" | "skipped" | "unsupported"
@@ -436,7 +438,7 @@ export interface StaticBuildSourceNoteGuidance {
 
 export interface StaticBuildSourceNoteEntry {
   id: string
-  sourceType: StaticBuildEffectDefinition["sourceType"]
+  sourceType: StaticBuildSourceType
   sourceId: string
   owner: StaticBuildSourceNoteOwner
   status: StaticBuildSourceNoteStatus
@@ -461,7 +463,7 @@ export type StaticBuildDiagnosticOwner =
 export interface StaticBuildDiagnosticEntry {
   kind: StaticBuildDiagnosticKind
   owner: StaticBuildDiagnosticOwner
-  sourceType?: StaticBuildEffectDefinition["sourceType"]
+  sourceType?: StaticBuildSourceType
   sourceId?: string
   keys: string[]
   message: string
@@ -518,7 +520,7 @@ export interface StaticBuildCaveatSummary {
 }
 
 export interface StaticBuildResolveSummary {
-  baseDamageStat: StaticBuildResolvedPanel["baseDamageStat"]
+  baseDamageStat: StaticBuildBaseDamageStat
   baseDamageValue: number
   expectedTotal: number
   critTotal: number
@@ -623,23 +625,25 @@ export interface StaticBuildAssumptionSummary {
 export type StaticBuildSourceDamageViewRequirementSummary =
   StaticBuildRequirementSummary<StaticBuildSourceDamageViewRequirementKind>
 
+export type StaticBuildSourceDamageViewResolutionMode = "standalone" | "delta"
+
 export interface StaticBuildSourceDamageViewMeta {
   canonicalLabel: string
   stableKey: string
   entryKind: "source-damage-view"
   damageType: Extract<StaticBuildDamageType, "anomaly" | "disorder">
-  resolutionMode: "standalone" | "delta"
+  resolutionMode: StaticBuildSourceDamageViewResolutionMode
 }
 
 export interface StaticBuildSourceDamageViewEntry {
   id: string
   label: string
   metadata: StaticBuildSourceDamageViewMeta
-  sourceType: StaticBuildEffectDefinition["sourceType"]
+  sourceType: StaticBuildSourceType
   sourceId: string
   damageType: StaticBuildDamageType
   supported: boolean
-  resolutionMode: "standalone" | "delta"
+  resolutionMode: StaticBuildSourceDamageViewResolutionMode
   requirements: StaticBuildSourceDamageViewRequirement[]
   requirementSummary: StaticBuildSourceDamageViewRequirementSummary
   diagnostics: StaticBuildDiagnosticEntry[]
@@ -763,7 +767,7 @@ export interface StaticBuildSourceUtilityViewEntry {
   id: string
   label: string
   metadata: StaticBuildSourceUtilityViewMeta
-  sourceType: StaticBuildEffectDefinition["sourceType"]
+  sourceType: StaticBuildSourceType
   sourceId: string
   supported: boolean
   utilityType: StaticBuildSourceUtilityViewType
@@ -966,11 +970,11 @@ export interface StaticBuildTriggerMatrixRowMeta {
   entryKind: StaticBuildTriggerMatrixEntryKind
   templateSource: StaticBuildTriggerMatrixTemplateSource
   damageType: Extract<StaticBuildDamageType, "anomaly" | "disorder">
-  sourceType?: StaticBuildEffectDefinition["sourceType"]
+  sourceType?: StaticBuildSourceType
   sourceId?: string
   sourceStableKey?: string
   sourceViewId?: string
-  sourceViewResolutionMode?: StaticBuildSourceDamageViewEntry["resolutionMode"]
+  sourceViewResolutionMode?: StaticBuildSourceDamageViewResolutionMode
 }
 
 export interface StaticBuildTriggerMatrixRow {
@@ -1070,7 +1074,7 @@ export interface StaticBuildSkillMatrixRow {
 
 export interface StaticBuildSkillMatrixSummary {
   rowCount: number
-  baseDamageStat: StaticBuildResolvedPanel["baseDamageStat"]
+  baseDamageStat: StaticBuildBaseDamageStat
   baseDamageValue: number
   attack?: number
   hp?: number

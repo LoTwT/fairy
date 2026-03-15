@@ -7788,6 +7788,108 @@ caveatSummary` 这些兼容字段补齐。
 - `V199.3` 已完成：现有测试与 runtime 校验已覆盖
 - `V199.4` 已完成：roadmap、索引与架构文档已同步
 
+## 203. V200 explicit build source types
+
+`V199` 收口后，`build/types.ts` 的公开 contract 中仍直接复用 raw `sourceType` 的稳定缺口集中在：
+
+1. `StaticBuildTraceItem.sourceType`
+2. `StaticBuildSourceNoteEntry.sourceType`
+3. `StaticBuildDiagnosticEntry.sourceType`
+4. `StaticBuildSourceDamageViewEntry.sourceType`
+5. `StaticBuildSourceUtilityViewEntry.sourceType`
+6. `StaticBuildTriggerMatrixRowMeta.sourceType`
+
+`V200` 只解决这一件事：
+
+1. 把 `build/types.ts` 公开 contract 中的 `sourceType` 统一改为显式 `StaticBuildSourceType`
+
+### 203.1 分阶段
+
+1. `V200.1` scope freeze
+2. `V200.2` runtime/type contract alignment
+3. `V200.3` tests / prompt alignment
+4. `V200.4` docs closeout
+
+### 203.2 非目标
+
+1. 不改变任何 `sourceType` 的运行时值
+2. 不改变 compact contract
+3. 不改变 resolver / matrix / views 的 runtime 逻辑
+4. 不新增新的 source type
+
+### 203.3 当前状态
+
+- `V200.1` 已完成：冻结到 explicit build source types
+- `V200.2` 已完成：`build/types.ts` 的公开 `sourceType` 字段已统一为显式 `StaticBuildSourceType`
+- `V200.3` 已完成：现有测试与 runtime 校验已覆盖
+- `V200.4` 已完成：roadmap、索引与架构文档已同步
+
+## 204. V201 explicit build base damage stat types
+
+`V200` 收口后，`build/types.ts` 中仍直接复用 raw `baseDamageStat` 的稳定缺口集中在：
+
+1. `StaticBuildResolvedPanel.baseDamageStat`
+2. `StaticBuildResolveSummary.baseDamageStat`
+3. `StaticBuildSkillMatrixSummary.baseDamageStat`
+
+`V201` 只解决这一件事：
+
+1. 把 `build/types.ts` 公开 contract 中的 `baseDamageStat` 统一改为显式 `StaticBuildBaseDamageStat`
+
+### 204.1 分阶段
+
+1. `V201.1` scope freeze
+2. `V201.2` runtime/type contract alignment
+3. `V201.3` tests / prompt alignment
+4. `V201.4` docs closeout
+
+### 204.2 非目标
+
+1. 不改变 `baseDamageStat` 的值域
+2. 不改变 compact contract
+3. 不改变 runtime 计算逻辑
+4. 不改变任何 summary 结构
+
+### 204.3 当前状态
+
+- `V201.1` 已完成：冻结到 explicit build base damage stat types
+- `V201.2` 已完成：`build/types.ts` 的 `baseDamageStat` 已统一为显式 `StaticBuildBaseDamageStat`
+- `V201.3` 已完成：现有测试与 runtime 校验已覆盖
+- `V201.4` 已完成：roadmap、索引与架构文档已同步
+
+## 205. V202 explicit source-damage resolution mode types
+
+`V201` 收口后，`build/types.ts` 中仍有一处直接复用 raw source-damage resolution mode 的稳定缺口：
+
+1. `StaticBuildSourceDamageViewMeta.resolutionMode`
+2. `StaticBuildSourceDamageViewEntry.resolutionMode`
+3. `StaticBuildTriggerMatrixRowMeta.sourceViewResolutionMode`
+
+`V202` 只解决这一件事：
+
+1. 把 `build/types.ts` 中 source-damage-view 的 resolution mode 统一改为显式 `StaticBuildSourceDamageViewResolutionMode`
+
+### 205.1 分阶段
+
+1. `V202.1` scope freeze
+2. `V202.2` runtime/type contract alignment
+3. `V202.3` tests / prompt alignment
+4. `V202.4` docs closeout
+
+### 205.2 非目标
+
+1. 不改变 `resolutionMode` 的值域
+2. 不改变 utility view 的 resolution mode
+3. 不改变 trigger row runtime 值
+4. 不改变 resolver / matrix / views 的 runtime 逻辑
+
+### 205.3 当前状态
+
+- `V202.1` 已完成：冻结到 explicit source-damage resolution mode types
+- `V202.2` 已完成：source-damage-view 的 resolution mode 已统一为显式 `StaticBuildSourceDamageViewResolutionMode`
+- `V202.3` 已完成：现有测试与 runtime 校验已覆盖
+- `V202.4` 已完成：roadmap、索引与架构文档已同步
+
 ## 174. V171 explicit compact top-level summary effect summaries
 
 `V170` 收口后，compact contract 中下一批仍直接复用 raw effect summary item type 的显式缺口主要集中在 top-level `summary`：

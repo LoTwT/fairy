@@ -948,3 +948,6 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 197. `V197` explicit compact profile and loadout traits：当前阶段已收口；compact `profile / loadout` 的 trait 字段已统一为显式 compact types，不再通过 indexed access 复用 raw trait shape，见 [静态构筑解析系统 V197](./static-build-resolver-v197.md)
 198. `V198` explicit compact trace status：当前阶段已收口；compact `trace.status` 已改为显式 compact type，不再通过 indexed access 复用 raw trace contract，见 [静态构筑解析系统 V198](./static-build-resolver-v198.md)
 199. `V199` explicit compact skill row tag and attribute：当前阶段已收口；compact `skill-matrix row` 的 `skillTag / attribute` 已改为显式 compact types，不再通过 indexed access 复用 raw row trait shape，见 [静态构筑解析系统 V199](./static-build-resolver-v199.md)
+200. `V200` explicit build source types：当前阶段已收口；`build/types.ts` 的公开 `sourceType` 字段已统一为显式 `StaticBuildSourceType`，不再通过 indexed access 复用 effect definition shape，见 [静态构筑解析系统 V200](./static-build-resolver-v200.md)
+201. `V201` explicit build base damage stat types：当前阶段已收口；`build/types.ts` 的 `baseDamageStat` 已统一为显式 `StaticBuildBaseDamageStat`，不再通过 indexed access 复用 raw panel shape，见 [静态构筑解析系统 V201](./static-build-resolver-v201.md)
+202. `V202` explicit source-damage resolution mode types：当前阶段已收口；source-damage-view 的 `resolutionMode` 已统一为显式 `StaticBuildSourceDamageViewResolutionMode`，不再通过 indexed access 复用 entry shape，见 [静态构筑解析系统 V202](./static-build-resolver-v202.md)
