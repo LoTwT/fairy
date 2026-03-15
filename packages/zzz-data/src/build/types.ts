@@ -739,6 +739,7 @@ export type StaticBuildEntryLabel = string
 export type StaticBuildRowLabel = string
 export type StaticBuildCanonicalLabel = string
 export type StaticBuildStableKey = string
+export type StaticBuildSourceViewId = StaticBuildEntryId
 
 export interface StaticBuildSourceDamageViewMeta {
   canonicalLabel: StaticBuildCanonicalLabel
@@ -1081,8 +1082,8 @@ export interface StaticBuildTriggerMatrixRowMeta {
   damageType: Extract<StaticBuildDamageType, "anomaly" | "disorder">
   sourceType?: StaticBuildSourceType
   sourceId?: StaticBuildSourceId
-  sourceStableKey?: string
-  sourceViewId?: string
+  sourceStableKey?: StaticBuildStableKey
+  sourceViewId?: StaticBuildSourceViewId
   sourceViewResolutionMode?: StaticBuildSourceDamageViewResolutionMode
 }
 

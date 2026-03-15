@@ -193,6 +193,7 @@ export type {
   StaticBuildSourceUtilityViewTargetScope,
   StaticBuildSourceUtilityViewType,
   StaticBuildSourceViewCount,
+  StaticBuildSourceViewId,
   StaticBuildSpecialMultiplier,
   StaticBuildStableKey,
   StaticBuildStandaloneCount,

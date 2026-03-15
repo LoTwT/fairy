@@ -10767,5 +10767,35 @@ caveatSummary` 这些兼容字段补齐。
 - `V296.1` 已完成：冻结到 entry / row id contract
 - `V296.2` 已完成：`types.ts` 已让 source-note / source-view / matrix row 统一复用显式 type
 - `V296.3` 已完成：`build/index.ts` 已正式导出这些 type
-- `V296.4` 进行中：等待现有 build / agent 测试与 runtime 校验完成
-- `V296.5` 进行中：等待 roadmap、索引与架构文档同步
+- `V296.4` 已完成：现有 build / agent 测试与 runtime 校验已覆盖
+- `V296.5` 已完成：roadmap、索引与架构文档已同步
+
+## 300. V297 build source-view link contracts
+
+`V296` 收口后，trigger-matrix row metadata 中对 source-view 的引用字段仍以匿名 `string` 暴露，和前面的显式公开 contract 仍不对称。
+
+`V297` 只解决一件事：
+
+1. 为 source-view link 相关字段补显式 type，并让 trigger-matrix row metadata 统一复用，不改变任何运行时行为
+
+### 300.1 分阶段
+
+1. `V297.1` scope freeze
+2. `V297.2` type alignment
+3. `V297.3` export alignment
+4. `V297.4` tests / runtime alignment
+5. `V297.5` docs closeout
+
+### 300.2 非目标
+
+1. 不改变 source-view 引用的字符串内容或匹配逻辑
+2. 不处理 `sourceId`
+3. 不处理通用 `id`
+
+### 300.3 当前状态
+
+- `V297.1` 已完成：冻结到 source-view link contract
+- `V297.2` 已完成：`types.ts` 已让 trigger-matrix row metadata 统一复用显式 type
+- `V297.3` 已完成：`build/index.ts` 已正式导出这个 type
+- `V297.4` 进行中：等待现有 build / agent 测试与 runtime 校验完成
+- `V297.5` 进行中：等待 roadmap、索引与架构文档同步
