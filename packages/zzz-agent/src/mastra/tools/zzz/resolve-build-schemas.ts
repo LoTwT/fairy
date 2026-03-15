@@ -1,6 +1,9 @@
 import type {
+  StaticBuildAnomalyMastery,
   StaticBuildDamageType,
   StaticBuildDriveDiscPieces,
+  StaticBuildEnergyGenerationRate,
+  StaticBuildRemainingTime,
   StaticBuildSkillTag,
 } from "zzz-data"
 import { z as zod } from "zod"
@@ -116,7 +119,7 @@ export interface BuildToolDisorderScenarioInput extends BuildToolBaseScenarioInp
   damageType: "disorder"
   skillTag: BuildToolSkillTag
   anomalyType: string
-  remainingTime: number
+  remainingTime: StaticBuildRemainingTime
 }
 
 export type BuildToolScenarioInput =
@@ -139,9 +142,9 @@ export interface BuildToolFinalPanelInput {
   critDamage: number
   hp?: number
   sheerForce?: number
-  energyGenerationRate?: number
+  energyGenerationRate?: StaticBuildEnergyGenerationRate
   anomalyProficiency?: number
-  anomalyMastery?: number
+  anomalyMastery?: StaticBuildAnomalyMastery
   anomalyCritRate?: number
   anomalyCritDamage?: number
   penetrationRate?: number

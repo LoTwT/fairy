@@ -1,6 +1,7 @@
 import type { AnomalyType } from "../calculator/types.js"
 import type {
   StaticBuildAgentMindscape,
+  StaticBuildAnomalyMastery,
   StaticBuildDamageType,
   StaticBuildDriveDiscPieces,
   StaticBuildDynamicCountKey,
@@ -8,6 +9,7 @@ import type {
   StaticBuildDynamicSnapshotInput,
   StaticBuildDynamicValueKey,
   StaticBuildEffectDefinition,
+  StaticBuildEnergyGenerationRate,
   StaticBuildResolvedSnapshotBucketKey,
   StaticBuildResolvedSnapshotInput,
   StaticBuildResolvedSnapshotMultiplierKey,
@@ -84,7 +86,7 @@ function multipliedDynamicCountAndValue(input: {
 }
 
 function steppedEnergyGenerationValue(input: {
-  energyGenerationRate?: number
+  energyGenerationRate?: StaticBuildEnergyGenerationRate
   threshold: number
   step: number
   perStep: number
@@ -4776,8 +4778,8 @@ function matchesStaticBuildSourceNote(
     sourceId?: string
     damageType: StaticBuildDamageType
     agentMindscape?: StaticBuildAgentMindscape
-    energyGenerationRate?: number
-    anomalyMastery?: number
+    energyGenerationRate?: StaticBuildEnergyGenerationRate
+    anomalyMastery?: StaticBuildAnomalyMastery
     dynamicSnapshot?: StaticBuildDynamicSnapshotInput
     stateSnapshot?: StaticBuildStateSnapshotInput
     resolvedSnapshot?: StaticBuildResolvedSnapshotInput
@@ -4960,8 +4962,8 @@ export function getStaticBuildSourceNoteEntries(input: {
   sourceId?: string
   damageType: StaticBuildDamageType
   agentMindscape?: StaticBuildAgentMindscape
-  energyGenerationRate?: number
-  anomalyMastery?: number
+  energyGenerationRate?: StaticBuildEnergyGenerationRate
+  anomalyMastery?: StaticBuildAnomalyMastery
   dynamicSnapshot?: StaticBuildDynamicSnapshotInput
   stateSnapshot?: StaticBuildStateSnapshotInput
   resolvedSnapshot?: StaticBuildResolvedSnapshotInput
@@ -4994,8 +4996,8 @@ export function getStaticBuildSourceNotes(input: {
   sourceId?: string
   damageType: StaticBuildDamageType
   agentMindscape?: StaticBuildAgentMindscape
-  energyGenerationRate?: number
-  anomalyMastery?: number
+  energyGenerationRate?: StaticBuildEnergyGenerationRate
+  anomalyMastery?: StaticBuildAnomalyMastery
   dynamicSnapshot?: StaticBuildDynamicSnapshotInput
   stateSnapshot?: StaticBuildStateSnapshotInput
   resolvedSnapshot?: StaticBuildResolvedSnapshotInput

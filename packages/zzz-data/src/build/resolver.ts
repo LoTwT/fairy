@@ -8,6 +8,7 @@ import type {
   StaticBuildDiagnosticOwner,
   StaticBuildDynamicSnapshotInput,
   StaticBuildEffectDefinition,
+  StaticBuildResolvedAnomalyProficiency,
   StaticBuildResolvedBuckets,
   StaticBuildSourceNoteEntry,
   StaticBuildSourceNoteOwner,
@@ -456,7 +457,7 @@ function effectMatches(
     stateSnapshot?: StaticBuildStateSnapshotInput
     isStunned: boolean
     resolvedCritRate?: number
-    resolvedAnomalyProficiency?: number
+    resolvedAnomalyProficiency?: StaticBuildResolvedAnomalyProficiency
   },
 ) {
   const condition = effect.condition
@@ -621,7 +622,7 @@ function applyEffects(
     combatTags: Set<string>
     isStunned: boolean
     resolvedCritRate?: number
-    resolvedAnomalyProficiency?: number
+    resolvedAnomalyProficiency?: StaticBuildResolvedAnomalyProficiency
     baseMode: StaticBuildBaseMode
     valueContext: StaticBuildValueContext
     overrides: Map<string, { enabled?: boolean; stacks?: number }>

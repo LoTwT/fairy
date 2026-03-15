@@ -109,6 +109,10 @@ export type StaticBuildAgentLevel = number
 export type StaticBuildAgentMindscape = number
 export type StaticBuildCoreSkillLevel = number
 export type StaticBuildWEngineRefinement = number
+export type StaticBuildEnergyGenerationRate = number
+export type StaticBuildAnomalyMastery = number
+export type StaticBuildResolvedAnomalyProficiency = number
+export type StaticBuildRemainingTime = number
 
 export interface StaticBuildDynamicSnapshotInput {
   flags?: Partial<Record<StaticBuildDynamicFlagKey, boolean>>
@@ -154,9 +158,9 @@ export interface StaticBuildFinalPanelInput {
   critDamage: number
   hp?: number
   sheerForce?: number
-  energyGenerationRate?: number
+  energyGenerationRate?: StaticBuildEnergyGenerationRate
   anomalyProficiency?: number
-  anomalyMastery?: number
+  anomalyMastery?: StaticBuildAnomalyMastery
   anomalyCritRate?: number
   anomalyCritDamage?: number
   penetrationRate?: number
@@ -307,10 +311,10 @@ export interface StaticBuildValueContext {
   agentMindscape: StaticBuildAgentMindscape
   coreSkillLevel: StaticBuildCoreSkillLevel
   wEngineRefinement: StaticBuildWEngineRefinement
-  energyGenerationRate?: number
-  anomalyMastery?: number
-  resolvedAnomalyProficiency?: number
-  remainingTime?: number
+  energyGenerationRate?: StaticBuildEnergyGenerationRate
+  anomalyMastery?: StaticBuildAnomalyMastery
+  resolvedAnomalyProficiency?: StaticBuildResolvedAnomalyProficiency
+  remainingTime?: StaticBuildRemainingTime
   dynamicSnapshot?: StaticBuildDynamicSnapshotInput
   stateSnapshot?: StaticBuildStateSnapshotInput
 }
@@ -369,9 +373,9 @@ export interface StaticBuildResolvedPanel {
   critDamage: number
   hp?: number
   sheerForce?: number
-  energyGenerationRate?: number
+  energyGenerationRate?: StaticBuildEnergyGenerationRate
   anomalyProficiency: number
-  anomalyMastery?: number
+  anomalyMastery?: StaticBuildAnomalyMastery
   anomalyCritRate: number
   anomalyCritDamage: number
   penetrationRate: number
