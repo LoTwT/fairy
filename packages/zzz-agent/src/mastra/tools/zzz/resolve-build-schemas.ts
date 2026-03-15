@@ -8,6 +8,7 @@ import type {
   StaticBuildBaseAttack,
   StaticBuildCritDamage,
   StaticBuildCritRate,
+  StaticBuildDamageMultiplierInputValue,
   StaticBuildDamageReduction,
   StaticBuildDamageType,
   StaticBuildDefenderBaseDefense,
@@ -24,6 +25,7 @@ import type {
   StaticBuildRemainingTime,
   StaticBuildResistanceReduction,
   StaticBuildSheerForce,
+  StaticBuildSkillMultiplierInputValue,
   StaticBuildSkillTag,
   StaticBuildSpecialMultiplier,
   StaticBuildStunVulnerability,
@@ -123,19 +125,19 @@ interface BuildToolBaseScenarioInput {
 export interface BuildToolNormalScenarioInput extends BuildToolBaseScenarioInput {
   damageType: "normal"
   skillTag: BuildToolSkillTag
-  skillMultiplier: number | string
+  skillMultiplier: StaticBuildSkillMultiplierInputValue
 }
 
 export interface BuildToolSheerScenarioInput extends BuildToolBaseScenarioInput {
   damageType: "sheer"
   skillTag: BuildToolSkillTag
-  skillMultiplier: number | string
+  skillMultiplier: StaticBuildSkillMultiplierInputValue
 }
 
 export interface BuildToolAnomalyScenarioInput extends BuildToolBaseScenarioInput {
   damageType: "anomaly"
   skillTag: BuildToolSkillTag
-  damageMultiplier: number | string
+  damageMultiplier: StaticBuildDamageMultiplierInputValue
 }
 
 export interface BuildToolDisorderScenarioInput extends BuildToolBaseScenarioInput {

@@ -135,6 +135,8 @@ export type StaticBuildNonStunVulnerability = number
 export type StaticBuildSpecialMultiplier = number
 export type StaticBuildResolvedAnomalyProficiency = number
 export type StaticBuildRemainingTime = number
+export type StaticBuildSkillMultiplierInputValue = number | string
+export type StaticBuildDamageMultiplierInputValue = number | string
 
 export interface StaticBuildDynamicSnapshotInput {
   flags?: Partial<Record<StaticBuildDynamicFlagKey, boolean>>
@@ -217,7 +219,7 @@ interface StaticBuildScenarioBaseInput {
 
 interface StaticBuildSkillMultiplierScenarioInput extends StaticBuildScenarioBaseInput {
   skillTag: StaticBuildSkillTag
-  skillMultiplier: number | string
+  skillMultiplier: StaticBuildSkillMultiplierInputValue
 }
 
 export interface StaticBuildNormalScenarioInput extends StaticBuildSkillMultiplierScenarioInput {
@@ -231,14 +233,14 @@ export interface StaticBuildSheerScenarioInput extends StaticBuildSkillMultiplie
 export interface StaticBuildAnomalyScenarioInput extends StaticBuildScenarioBaseInput {
   damageType: "anomaly"
   skillTag: StaticBuildSkillTag
-  damageMultiplier: number | string
+  damageMultiplier: StaticBuildDamageMultiplierInputValue
 }
 
 export interface StaticBuildDisorderScenarioInput extends StaticBuildScenarioBaseInput {
   damageType: "disorder"
   skillTag: StaticBuildSkillTag
   anomalyType: AnomalyType
-  remainingTime: number
+  remainingTime: StaticBuildRemainingTime
 }
 
 export type StaticBuildScenarioInput =
