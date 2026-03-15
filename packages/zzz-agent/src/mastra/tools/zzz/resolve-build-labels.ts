@@ -6,3 +6,5 @@ export const specialtyLabels = {
   Defense: "防护",
   Rupture: "命破",
 } as const
+
+export type BuildToolSpecialtyKey = keyof typeof specialtyLabels

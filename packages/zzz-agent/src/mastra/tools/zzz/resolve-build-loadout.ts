@@ -10,7 +10,7 @@ import type {
   BuildToolUnsupportedWEngineResponse,
   CatalogItem,
 } from "./resolve-build-contracts"
-import type { specialtyLabels } from "./resolve-build-labels"
+import type { BuildToolSpecialtyKey } from "./resolve-build-labels"
 import { catalogNames, findCatalogItem } from "./resolve-build-catalog"
 import {
   buildIncompatibleWEngineResponse,
@@ -91,8 +91,8 @@ export interface BuildToolSourceUtilitySupport<T extends CatalogItem> {
 }
 
 export interface BuildToolResolveLoadoutContextOptions<
-  TAgent extends CatalogItem & { specialty: keyof typeof specialtyLabels },
-  TWEngine extends CatalogItem & { specialty: keyof typeof specialtyLabels },
+  TAgent extends CatalogItem & { specialty: BuildToolSpecialtyKey },
+  TWEngine extends CatalogItem & { specialty: BuildToolSpecialtyKey },
   TDriveDisc extends CatalogItem,
 > extends BuildToolProgressionInput {
   scopeLabel: BuildToolScopeLabel
@@ -111,8 +111,8 @@ export interface BuildToolResolveLoadoutContextOptions<
 }
 
 export interface BuildToolResolveSourceEntriesLoadoutContextOptions<
-  TAgent extends CatalogItem & { specialty: keyof typeof specialtyLabels },
-  TWEngine extends CatalogItem & { specialty: keyof typeof specialtyLabels },
+  TAgent extends CatalogItem & { specialty: BuildToolSpecialtyKey },
+  TWEngine extends CatalogItem & { specialty: BuildToolSpecialtyKey },
   TDriveDisc extends CatalogItem,
 > extends BuildToolProgressionInput {
   utilityOnly: boolean
@@ -158,8 +158,8 @@ export function resolveBuildToolAgent<T extends CatalogItem>(
 }
 
 export function resolveBuildToolWEngine<
-  TAgent extends CatalogItem & { specialty: keyof typeof specialtyLabels },
-  TWEngine extends CatalogItem & { specialty: keyof typeof specialtyLabels },
+  TAgent extends CatalogItem & { specialty: BuildToolSpecialtyKey },
+  TWEngine extends CatalogItem & { specialty: BuildToolSpecialtyKey },
 >(
   scopeLabel: BuildToolScopeLabel,
   supportedWEngines: readonly TWEngine[],
@@ -296,8 +296,8 @@ export function resolveBuildToolSourceUtilitySupport<
 }
 
 export function resolveBuildToolLoadoutContext<
-  TAgent extends CatalogItem & { specialty: keyof typeof specialtyLabels },
-  TWEngine extends CatalogItem & { specialty: keyof typeof specialtyLabels },
+  TAgent extends CatalogItem & { specialty: BuildToolSpecialtyKey },
+  TWEngine extends CatalogItem & { specialty: BuildToolSpecialtyKey },
   TDriveDisc extends CatalogItem,
 >(
   options: BuildToolResolveLoadoutContextOptions<TAgent, TWEngine, TDriveDisc>,
@@ -357,8 +357,8 @@ export function resolveBuildToolLoadoutContext<
 }
 
 export function resolveBuildToolSourceEntriesLoadoutContext<
-  TAgent extends CatalogItem & { specialty: keyof typeof specialtyLabels },
-  TWEngine extends CatalogItem & { specialty: keyof typeof specialtyLabels },
+  TAgent extends CatalogItem & { specialty: BuildToolSpecialtyKey },
+  TWEngine extends CatalogItem & { specialty: BuildToolSpecialtyKey },
   TDriveDisc extends CatalogItem,
 >(
   options: BuildToolResolveSourceEntriesLoadoutContextOptions<
