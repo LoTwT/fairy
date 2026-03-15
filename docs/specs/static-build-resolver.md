@@ -1072,3 +1072,4 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 321. `V321` source note lookup input contracts：已收口；`definitions.ts` 中 `source note` 相关 helper 的 inline lookup input 已统一收成显式公开 contract，不改变任何运行时行为
 322. `V322` resolver summary input list contracts：当前阶段已收口；`resolver.ts` 中公开 summary helper 仍直接暴露的数组输入已统一收成显式公开 list contract，不改变任何运行时行为，见 [静态构筑解析系统 V322](./static-build-resolver-v322.md)
 323. `V323` derived view assumption list contracts：当前阶段已收口；`views.ts`、`utility-views.ts`、`source-entries.ts`、`matrix.ts`、`trigger-matrix.ts` 中公开 summary helper 仍直接暴露的 assumption / unsupported list 输入已统一收成显式公开 list contract，不改变任何运行时行为，见 [静态构筑解析系统 V323](./static-build-resolver-v323.md)
+324. `V324` resolver effect context list contracts：当前阶段已收口；`resolver.ts` 中 effect-application 与 diagnostics helper 仍直接使用的内联 list 输入已统一收成显式公开 list contract，不改变任何运行时行为，见 [静态构筑解析系统 V324](./static-build-resolver-v324.md)

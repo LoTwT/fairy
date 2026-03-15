@@ -5,7 +5,6 @@ import type {
   StaticBuildBaseMode,
   StaticBuildBucket,
   StaticBuildCritRate,
-  StaticBuildDiagnosticEntry,
   StaticBuildDiagnosticEntryList,
   StaticBuildDiagnosticKind,
   StaticBuildDiagnosticOwner,
@@ -170,7 +169,7 @@ function createEmptyBuckets(): StaticBuildResolvedBuckets {
   }
 }
 
-function summarizeDiagnostics(diagnostics: StaticBuildDiagnosticEntry[]) {
+function summarizeDiagnostics(diagnostics: StaticBuildDiagnosticEntryList) {
   return (Object.keys(diagnosticLabels) as StaticBuildDiagnosticKind[])
     .map((key) => ({
       key,
@@ -639,9 +638,9 @@ function applyEffects(
       string,
       { enabled?: boolean; stacks?: StaticBuildEffectStacks }
     >
-    assumptions: string[]
-    diagnostics: StaticBuildDiagnosticEntry[]
-    unsupportedEffects: string[]
+    assumptions: StaticBuildAssumptionList
+    diagnostics: StaticBuildDiagnosticEntryList
+    unsupportedEffects: StaticBuildUnsupportedEffectList
     usesAttackAsBase: boolean
     hasBaseAttack: boolean
   },
@@ -831,9 +830,9 @@ export function resolveStaticBuildDamage(
     )
   }
 
-  const assumptions: string[] = []
-  const diagnostics: StaticBuildDiagnosticEntry[] = []
-  const unsupportedEffects: string[] = []
+  const assumptions: StaticBuildAssumptionList = []
+  const diagnostics: StaticBuildDiagnosticEntryList = []
+  const unsupportedEffects: StaticBuildUnsupportedEffectList = []
   const agentMindscape = input.loadout.agentMindscape ?? 0
 
   const attribute =

@@ -11652,3 +11652,32 @@ caveatSummary` 这些兼容字段补齐。
 - `V323.2` 已完成：派生视图 summary helper 的 assumption / unsupported list 输入已统一复用显式公开 list contract
 - `V323.3` 已完成：校验与提交已通过
 - `V323.4` 已完成：roadmap、索引与架构文档已同步
+
+## 327. V324 resolver effect context list contracts
+
+### 327.1 目标
+
+`V324` 只解决一件事：
+
+- 把 `resolver.ts` 中 effect-application 与 diagnostics helper 仍直接使用的内联 list 输入，统一收成显式公开 list contract。
+
+### 327.2 范围
+
+1. `summarizeDiagnostics()`
+2. `applyEffects()` context 中的 `assumptions`
+3. `applyEffects()` context 中的 `diagnostics`
+4. `applyEffects()` context 中的 `unsupportedEffects`
+5. `resolveStaticBuildDamage()` 中对应 list 初始化
+
+### 327.3 非目标
+
+1. 不修改任何 effect 匹配或结算逻辑
+2. 不新增新的 summary 字段
+3. 不处理 `Set<string>` 一类集合 contract
+
+### 327.4 当前状态
+
+- `V324.1` 已完成：范围冻结到 resolver effect context list contract
+- `V324.2` 已完成：resolver effect-application 与 diagnostics helper 的内联 list 输入已统一复用显式公开 list contract
+- `V324.3` 已完成：校验与提交已通过
+- `V324.4` 已完成：roadmap、索引与架构文档已同步
