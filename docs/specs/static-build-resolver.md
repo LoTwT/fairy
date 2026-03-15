@@ -990,3 +990,4 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 239. `V239` build-tool schema module：当前阶段已收口；高层 build tool 的 zod schema 与输入 contract type 已固定到单独共享模块，不改变任何 tool 的输入输出 shape，见 [静态构筑解析系统 V239](./static-build-resolver-v239.md)
 240. `V240` build-tool loadout helpers：当前阶段已收口；高层 build tool 的 loadout helper、support helper 与 loadout-context resolver 已固定到单独共享模块，不改变任何 tool 的输入输出 shape，见 [静态构筑解析系统 V240](./static-build-resolver-v240.md)
 241. `V241` build-tool scenario helpers：当前阶段已收口；高层 build tool 的 `attribute / disorder.anomalyType / damageType` 归一化 helper 已固定到单独共享模块，不改变任何 tool 的输入输出 shape，见 [静态构筑解析系统 V241](./static-build-resolver-v241.md)
+242. `V242` build-tool execution helpers：当前阶段已收口；高层 build tool 的 execution-context helper 已固定到单独共享模块，并移除旧的 `resolve-build-shared.ts`，不改变任何 tool 的输入输出 shape，见 [静态构筑解析系统 V242](./static-build-resolver-v242.md)

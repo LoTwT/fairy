@@ -4,6 +4,7 @@ import {
   resolveStaticBuildSourceUtilityViews,
 } from "zzz-data"
 import { buildToolScopeLabels } from "./resolve-build-contracts"
+import { resolveBuildToolSourceUtilityExecutionContext } from "./resolve-build-execution"
 import {
   buildToolDescriptions,
   buildToolSourceUtilityViewCatalogPreset,
@@ -13,7 +14,6 @@ import {
   resolveBuildSourceUtilityInputSchema,
   resolveBuildSourceUtilityViewsIncludeDetailsSchema,
 } from "./resolve-build-schemas"
-import { resolveBuildToolSourceUtilityExecutionContext } from "./resolve-build-shared"
 
 export const resolveBuildSourceUtilityViews = createTool({
   id: "resolve-build-source-utility-views",

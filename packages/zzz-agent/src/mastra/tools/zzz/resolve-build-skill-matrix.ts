@@ -4,13 +4,13 @@ import {
   resolveStaticBuildSkillMatrix,
 } from "zzz-data"
 import { buildToolScopeLabels } from "./resolve-build-contracts"
+import { resolveBuildToolSkillMatrixExecutionContext } from "./resolve-build-execution"
 import {
   buildToolDescriptions,
   buildToolSkillMatrixCatalogPreset,
 } from "./resolve-build-presets"
 import { buildSkillMatrixSuccessResponse } from "./resolve-build-responses"
 import { resolveBuildSkillMatrixInputSchema } from "./resolve-build-schemas"
-import { resolveBuildToolSkillMatrixExecutionContext } from "./resolve-build-shared"
 
 export const resolveBuildSkillMatrix = createTool({
   id: "resolve-build-skill-matrix",

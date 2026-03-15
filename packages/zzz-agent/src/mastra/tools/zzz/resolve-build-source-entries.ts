@@ -4,6 +4,7 @@ import {
   resolveStaticBuildSourceEntries,
 } from "zzz-data"
 import { buildToolScopeLabels } from "./resolve-build-contracts"
+import { resolveBuildToolSourceEntriesExecutionContext } from "./resolve-build-execution"
 import {
   buildToolDescriptions,
   buildToolSourceEntryCatalogPreset,
@@ -13,7 +14,6 @@ import {
   resolveBuildSourceEntriesIncludeDetailsSchema,
   resolveBuildSourceEntriesInputSchema,
 } from "./resolve-build-schemas"
-import { resolveBuildToolSourceEntriesExecutionContext } from "./resolve-build-shared"
 
 export const resolveBuildSourceEntries = createTool({
   id: "resolve-build-source-entries",

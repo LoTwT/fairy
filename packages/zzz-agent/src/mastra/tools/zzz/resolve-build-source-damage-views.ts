@@ -4,6 +4,7 @@ import {
   resolveStaticBuildSourceDamageViews,
 } from "zzz-data"
 import { buildToolScopeLabels } from "./resolve-build-contracts"
+import { resolveBuildToolTriggeredDamageContext } from "./resolve-build-execution"
 import {
   buildToolDescriptions,
   buildToolSourceDamageViewCatalogPreset,
@@ -13,7 +14,6 @@ import {
   resolveBuildInputSchema,
   resolveBuildSourceDamageViewsIncludeDetailsSchema,
 } from "./resolve-build-schemas"
-import { resolveBuildToolTriggeredDamageContext } from "./resolve-build-shared"
 
 export const resolveBuildSourceDamageViews = createTool({
   id: "resolve-build-source-damage-views",

@@ -4,6 +4,7 @@ import {
   resolveStaticBuildTriggerMatrix,
 } from "zzz-data"
 import { buildToolScopeLabels } from "./resolve-build-contracts"
+import { resolveBuildToolTriggeredDamageContext } from "./resolve-build-execution"
 import {
   buildToolDescriptions,
   buildToolTriggerMatrixCatalogPreset,
@@ -13,7 +14,6 @@ import {
   resolveBuildInputSchema,
   resolveBuildTriggerMatrixIncludeDetailsSchema,
 } from "./resolve-build-schemas"
-import { resolveBuildToolTriggeredDamageContext } from "./resolve-build-shared"
 
 export const resolveBuildTriggerMatrix = createTool({
   id: "resolve-build-trigger-matrix",

@@ -1,6 +1,7 @@
 import { createTool } from "@mastra/core/tools"
 import { compactStaticBuildResult, resolveStaticBuildDamage } from "zzz-data"
 import { buildToolScopeLabels } from "./resolve-build-contracts"
+import { resolveBuildToolDamageExecutionContext } from "./resolve-build-execution"
 import {
   buildToolDamageCatalogPreset,
   buildToolDescriptions,
@@ -10,7 +11,6 @@ import {
   resolveBuildDamageIncludeDetailsSchema,
   resolveBuildInputSchema,
 } from "./resolve-build-schemas"
-import { resolveBuildToolDamageExecutionContext } from "./resolve-build-shared"
 
 export const resolveBuildDamage = createTool({
   id: "resolve-build-damage",
