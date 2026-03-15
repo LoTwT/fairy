@@ -2,6 +2,7 @@ import type {
   AnomalyDamageParams,
   AnomalyType,
   CritParams,
+  DamageBreakdown,
   DamageResult,
   DazeVulnerabilityParams,
   DefenseParams,
@@ -28,6 +29,7 @@ import type {
   StaticBuildDiagnosticOwner,
   StaticBuildDiagnosticSummary,
   StaticBuildEntryCaveatSummary,
+  StaticBuildEntryDamage,
   StaticBuildMode,
   StaticBuildProfileResult,
   StaticBuildRequirementSummary,
@@ -41,12 +43,16 @@ import type {
   StaticBuildSkillMatrixRow,
   StaticBuildSkillMatrixRowDamageSummary,
   StaticBuildSkillMatrixRowMeta,
+  StaticBuildSkillMatrixSummary,
   StaticBuildSkillTag,
   StaticBuildSourceDamageViewEffectSummaryItem,
   StaticBuildSourceDamageViewEntry,
+  StaticBuildSourceDamageViewMeta,
   StaticBuildSourceDamageViewRequirement,
   StaticBuildSourceDamageViewRequirementKind,
+  StaticBuildSourceDamageViewSummary,
   StaticBuildSourceEntry,
+  StaticBuildSourceEntryCollectionSummary,
   StaticBuildSourceNoteEntry,
   StaticBuildSourceNoteGuidance,
   StaticBuildSourceNoteGuidanceKind,
@@ -55,13 +61,17 @@ import type {
   StaticBuildSourceNoteStatus,
   StaticBuildSourceNoteSummary,
   StaticBuildSourceUtilityViewEntry,
+  StaticBuildSourceUtilityViewEntrySummary,
+  StaticBuildSourceUtilityViewMeta,
   StaticBuildSourceUtilityViewRequirement,
   StaticBuildSourceUtilityViewRequirementKind,
+  StaticBuildSourceUtilityViewSummary,
   StaticBuildTraceItem,
   StaticBuildTraceModifier,
   StaticBuildTriggerMatrixEffectSummaryItem,
   StaticBuildTriggerMatrixRow,
   StaticBuildTriggerMatrixRowMeta,
+  StaticBuildTriggerMatrixSummary,
 } from "./types.js"
 
 export type CompactStaticBuildSourceType = "agent" | "w-engine" | "drive-disc"
@@ -1016,7 +1026,7 @@ export function compactStaticBuildDamageParams(
 }
 
 export function compactStaticBuildDamageBreakdown(
-  breakdown: DamageResult["breakdown"],
+  breakdown: DamageBreakdown,
 ): CompactStaticBuildDamageBreakdown {
   return {
     baseDamage: breakdown.baseDamage,
@@ -1662,7 +1672,7 @@ export function compactStaticBuildSkillMatrixResult(
 }
 
 export function compactStaticBuildSkillMatrixSummary(
-  summary: ResolveStaticBuildSkillMatrixResult["summary"],
+  summary: StaticBuildSkillMatrixSummary,
   includeDetails = false,
 ): CompactStaticBuildSkillMatrixSummary {
   return {
@@ -1830,7 +1840,7 @@ export function compactStaticBuildTriggerMatrixResult(
 }
 
 export function compactStaticBuildTriggerMatrixSummary(
-  summary: ResolveStaticBuildTriggerMatrixResult["summary"],
+  summary: StaticBuildTriggerMatrixSummary,
 ): CompactStaticBuildTriggerMatrixSummary {
   return {
     rowCount: summary.rowCount,
@@ -1935,9 +1945,7 @@ export function compactStaticBuildTriggerMatrixRow(
 }
 
 export function compactStaticBuildEntryDamageSummary(
-  damage:
-    | NonNullable<StaticBuildTriggerMatrixRow["damage"]>
-    | NonNullable<StaticBuildSourceDamageViewEntry["damage"]>,
+  damage: StaticBuildEntryDamage,
 ): CompactStaticBuildEntryDamageSummary {
   return {
     expected: damage.expected,
@@ -2003,7 +2011,7 @@ export function compactStaticBuildSourceEntryCollection(
 }
 
 export function compactStaticBuildSourceEntryCollectionSummary(
-  summary: ResolveStaticBuildSourceEntriesResult["summary"],
+  summary: StaticBuildSourceEntryCollectionSummary,
 ): CompactStaticBuildSourceEntryCollectionSummary {
   return {
     entryCount: summary.entryCount,
@@ -2097,7 +2105,7 @@ export function compactStaticBuildSourceDamageViewsResult(
 }
 
 export function compactStaticBuildSourceDamageViewsSummary(
-  summary: ResolveStaticBuildSourceDamageViewsResult["summary"],
+  summary: StaticBuildSourceDamageViewSummary,
 ): CompactStaticBuildSourceDamageViewsSummary {
   return {
     entryCount: summary.entryCount,
@@ -2205,7 +2213,7 @@ export function compactStaticBuildSourceDamageViewEntry(
 }
 
 export function compactStaticBuildSourceDamageViewMeta(
-  metadata: StaticBuildSourceDamageViewEntry["metadata"],
+  metadata: StaticBuildSourceDamageViewMeta,
 ): CompactStaticBuildSourceDamageViewMeta {
   return {
     canonicalLabel: metadata.canonicalLabel,
@@ -2251,7 +2259,7 @@ export function compactStaticBuildSourceUtilityViewsResult(
 }
 
 export function compactStaticBuildSourceUtilityViewsSummary(
-  summary: ResolveStaticBuildSourceUtilityViewsResult["summary"],
+  summary: StaticBuildSourceUtilityViewSummary,
 ): CompactStaticBuildSourceUtilityViewsSummary {
   return {
     entryCount: summary.entryCount,
@@ -2302,7 +2310,7 @@ export function compactStaticBuildSourceUtilityViewsSummary(
 }
 
 export function compactStaticBuildSourceUtilityViewEntrySummary(
-  summary: StaticBuildSourceUtilityViewEntry["summary"],
+  summary: StaticBuildSourceUtilityViewEntrySummary,
 ): CompactStaticBuildSourceUtilityViewEntrySummary {
   return {
     value: summary.value,
@@ -2372,7 +2380,7 @@ export function compactStaticBuildSourceUtilityViewEntry(
 }
 
 export function compactStaticBuildSourceUtilityViewMeta(
-  metadata: StaticBuildSourceUtilityViewEntry["metadata"],
+  metadata: StaticBuildSourceUtilityViewMeta,
 ): CompactStaticBuildSourceUtilityViewMeta {
   return {
     canonicalLabel: metadata.canonicalLabel,

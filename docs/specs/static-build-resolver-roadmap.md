@@ -7924,6 +7924,46 @@ caveatSummary` 这些兼容字段补齐。
 - `V203.3` 已完成：现有测试与 runtime 校验已覆盖
 - `V203.4` 已完成：roadmap、索引与架构文档已同步
 
+## 207. V204 explicit compact helper input contracts
+
+`V203` 收口后，`compact.ts` 中仍有一批导出的 helper 函数参数通过 indexed access 复用上游 shape：
+
+1. `compactStaticBuildDamageBreakdown`
+2. `compactStaticBuildSkillMatrixSummary`
+3. `compactStaticBuildTriggerMatrixSummary`
+4. `compactStaticBuildEntryDamageSummary`
+5. `compactStaticBuildSourceEntryCollectionSummary`
+6. `compactStaticBuildSourceDamageViewsSummary`
+7. `compactStaticBuildSourceDamageViewMeta`
+8. `compactStaticBuildSourceUtilityViewsSummary`
+9. `compactStaticBuildSourceUtilityViewEntrySummary`
+10. `compactStaticBuildSourceUtilityViewMeta`
+
+`V204` 只解决这一件事：
+
+1. 把这批导出 helper 的参数签名改为显式公开类型，不再通过 indexed access 复用上游对象字段
+
+### 207.1 分阶段
+
+1. `V204.1` scope freeze
+2. `V204.2` runtime/type contract alignment
+3. `V204.3` tests / prompt alignment
+4. `V204.4` docs closeout
+
+### 207.2 非目标
+
+1. 不改变 helper 的 runtime 逻辑
+2. 不改变 compact 输出字段
+3. 不改变 build / calculator 的值域
+4. 不新增新的运行时分支
+
+### 207.3 当前状态
+
+- `V204.1` 已完成：冻结到 explicit compact helper input contracts
+- `V204.2` 已完成：compact 导出 helper 的参数签名已统一为显式公开类型
+- `V204.3` 已完成：现有测试与 runtime 校验已覆盖
+- `V204.4` 已完成：roadmap、索引与架构文档已同步
+
 ## 174. V171 explicit compact top-level summary effect summaries
 
 `V170` 收口后，compact contract 中下一批仍直接复用 raw effect summary item type 的显式缺口主要集中在 top-level `summary`：

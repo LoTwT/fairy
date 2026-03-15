@@ -601,6 +601,12 @@ export interface StaticBuildSourceDamageViewRequirement {
   satisfied: boolean
 }
 
+export interface StaticBuildEntryDamage {
+  expected: number
+  crit: number
+  noCrit: number
+}
+
 export interface StaticBuildRequirementSummaryGroup<
   TKey extends string = string,
 > {
@@ -655,11 +661,7 @@ export interface StaticBuildSourceDamageViewEntry {
   caveatSummary: StaticBuildEntryCaveatSummary
   assumptionSummary: StaticBuildAssumptionSummary
   assumptions: string[]
-  damage?: {
-    expected: number
-    crit: number
-    noCrit: number
-  }
+  damage?: StaticBuildEntryDamage
   summary?: StaticBuildResolveSummary
   build?: ResolveStaticBuildResult
 }
@@ -992,11 +994,7 @@ export interface StaticBuildTriggerMatrixRow {
   sourceNoteSummary: StaticBuildSourceNoteSummary
   assumptionSummary: StaticBuildAssumptionSummary
   assumptions: string[]
-  damage?: {
-    expected: number
-    crit: number
-    noCrit: number
-  }
+  damage?: StaticBuildEntryDamage
   summary?: StaticBuildResolveSummary
   build?: ResolveStaticBuildResult
 }

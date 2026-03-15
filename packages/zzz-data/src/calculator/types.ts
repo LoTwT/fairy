@@ -137,29 +137,25 @@ export interface DisorderDamageParams extends Omit<
 
 // ---------- Return type ----------
 
+export interface DamageBreakdown {
+  baseDamage: number
+  bonusMultiplier: number
+  critMultiplier: number
+  defenseMultiplier: number
+  resistanceMultiplier: number
+  vulnerabilityMultiplier: number
+  dazeVulnerabilityMultiplier: number
+  sheerBonusMultiplier: number
+  anomalyProficiencyMultiplier: number
+  damageLevelMultiplier: number
+  anomalyBonusMultiplier: number
+  anomalyCritMultiplier: number
+  specialMultiplier: number
+}
+
 export interface DamageResult {
   /** Final damage value (unrounded) */
   total: number
   /** Per-multiplier breakdown for debugging / display */
-  breakdown: {
-    baseDamage: number
-    bonusMultiplier: number
-    critMultiplier: number
-    defenseMultiplier: number
-    resistanceMultiplier: number
-    vulnerabilityMultiplier: number
-    dazeVulnerabilityMultiplier: number
-    /** sheer bonus multiplier or 1 for non-sheer damage */
-    sheerBonusMultiplier: number
-    /** anomaly proficiency multiplier or 1 for non-anomaly damage */
-    anomalyProficiencyMultiplier: number
-    /** damage level multiplier or 1 for non-anomaly damage */
-    damageLevelMultiplier: number
-    /** anomaly bonus multiplier or 1 for non-anomaly damage */
-    anomalyBonusMultiplier: number
-    /** anomaly crit multiplier or 1 for non-anomaly damage */
-    anomalyCritMultiplier: number
-    /** special multiplier (distance falloff etc.) */
-    specialMultiplier: number
-  }
+  breakdown: DamageBreakdown
 }
