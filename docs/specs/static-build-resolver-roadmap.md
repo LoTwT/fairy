@@ -12558,3 +12558,48 @@ caveatSummary` 这些兼容字段补齐。
 - `V353.2` 已完成：导出输入与结果 shape 已统一复用显式公开 contract
 - `V353.3` 已完成：校验与提交
 - `V353.4` 已完成：roadmap、索引与架构文档同步
+
+## 357. V354 buhflipexplode helper input contracts
+
+### 357.1 目标
+
+`V354` 只解决一件事：
+
+- 给 `buhflipexplode` 公开公式 helper 的输入标量和 tag 列表补显式公开 contract，不改变任何公式逻辑。
+
+### 357.2 范围
+
+1. `BuhflipNodeLevel`
+2. `BuhflipEnemyBaseDefense`
+3. `BuhflipEnemyBaseDaze`
+4. `BuhflipEnemyBaseHP`
+5. `BuhflipEnemyHPMult`
+6. `BuhflipBossHPMult`
+7. `BuhflipPP60kTotalHP`
+8. `BuhflipEnemyTag`
+9. `BuhflipEnemyTagList`
+10. `BuhflipEnemyId`
+11. `BuhflipVersionIndex`
+12. `calcEnemyDEF()`
+13. `calcEnemyDaze()`
+14. `calcSDEnemyHP()`
+15. `calcTSEnemyHP()`
+16. `calcBossHP()`
+17. `calcPP20k()`
+18. `calcSDEnemyAltHPReduction()`
+19. `calcTSEnemyAltHPReduction()`
+20. `calcDABossAltHPReduction()`
+21. `calcTSBossAltHPReduction()`
+
+### 357.3 非目标
+
+1. 不改变任何 HP / DEF / Daze / altHP 公式
+2. 不修改 merge 逻辑
+3. 不把 `buhflipexplode` 加入根包公开导出
+
+### 357.4 当前状态
+
+- `V354.1` 已完成：范围冻结到 buhflipexplode helper 输入 contract
+- `V354.2` 已完成：公开公式 helper 输入已统一复用显式公开 alias
+- `V354.3` 已完成：校验与提交
+- `V354.4` 已完成：roadmap、索引与架构文档同步

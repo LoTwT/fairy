@@ -251,3 +251,4 @@
 - [静态构筑解析系统 V351](./specs/static-build-resolver-v351.md) — 当前阶段：已收口；`zzz-agent` utility helper 文本 contract 已统一复用显式公开 alias
 - [静态构筑解析系统 V352](./specs/static-build-resolver-v352.md) — 当前阶段：已收口；`zzz-agent` scorer helper 文本与 tool-name contract 已统一复用显式公开 alias
 - [静态构筑解析系统 V353](./specs/static-build-resolver-v353.md) — 当前阶段：已收口；`zzz-agent` source-entry context helper 的导出输入与结果 shape 已统一复用显式公开 contract
+- [静态构筑解析系统 V354](./specs/static-build-resolver-v354.md) — 当前阶段：已收口；`buhflipexplode` 公开公式 helper 的输入标量与 tag 列表已统一复用显式公开 contract

@@ -259,6 +259,28 @@ export type TSVersionsJson = Array<{
   versions: Record<string, TSVersionData>
 }>
 
+export type BuhflipNodeLevel = number
+
+export type BuhflipEnemyBaseDefense = number
+
+export type BuhflipEnemyBaseDaze = number
+
+export type BuhflipEnemyBaseHP = number
+
+export type BuhflipEnemyHPMult = number
+
+export type BuhflipBossHPMult = number
+
+export type BuhflipPP60kTotalHP = number
+
+export type BuhflipEnemyTag = string
+
+export type BuhflipEnemyTagList = readonly BuhflipEnemyTag[]
+
+export type BuhflipEnemyId = string
+
+export type BuhflipVersionIndex = number
+
 // ─── Enemy stat calculations ──────────────────────────────────────────────────
 
 /**
@@ -270,7 +292,10 @@ export type TSVersionsJson = Array<{
  * @param baseDEF - `BuhflipEnemy.baseDEF`
  * @param nodeLvl - 1-based node level (1–70)
  */
-export function calcEnemyDEF(baseDEF: number, nodeLvl: number): number {
+export function calcEnemyDEF(
+  baseDEF: BuhflipEnemyBaseDefense,
+  nodeLvl: BuhflipNodeLevel,
+): number {
   return (baseDEF * NODE_DEF_MULT[nodeLvl - 1]) / 100
 }
 
@@ -283,7 +308,10 @@ export function calcEnemyDEF(baseDEF: number, nodeLvl: number): number {
  * @param baseDaze - daze for one side: `BuhflipEnemy.baseDaze[0]` or `[1]`
  * @param nodeLvl - 1-based node level (1–70)
  */
-export function calcEnemyDaze(baseDaze: number, nodeLvl: number): number {
+export function calcEnemyDaze(
+  baseDaze: BuhflipEnemyBaseDaze,
+  nodeLvl: BuhflipNodeLevel,
+): number {
   return (baseDaze * NODE_DAZE_MULT[nodeLvl - 1]) / 100
 }
 
@@ -299,9 +327,9 @@ export function calcEnemyDaze(baseDaze: number, nodeLvl: number): number {
  * @param nodeLvl  - 1-based node level
  */
 export function calcSDEnemyHP(
-  baseHP: number,
-  sideHPMult: number,
-  nodeLvl: number,
+  baseHP: BuhflipEnemyBaseHP,
+  sideHPMult: BuhflipEnemyHPMult,
+  nodeLvl: BuhflipNodeLevel,
 ): number {
   return Math.round((sideHPMult * baseHP * NODE_HP_MULT[nodeLvl - 1]) / 10000)
 }
@@ -317,9 +345,9 @@ export function calcSDEnemyHP(
  * @param nodeLvl    - 1-based node level
  */
 export function calcTSEnemyHP(
-  baseHP: number,
-  sideHPMult: number,
-  nodeLvl: number,
+  baseHP: BuhflipEnemyBaseHP,
+  sideHPMult: BuhflipEnemyHPMult,
+  nodeLvl: BuhflipNodeLevel,
 ): number {
   return Math.round(
     (baseHP * sideHPMult * NODE_ENEMY_HP_MULT[nodeLvl - 1]) / 10000,
@@ -339,9 +367,9 @@ export function calcTSEnemyHP(
  * @param mult    - boss mult from version data (e.g. `DAEnemyRef.mult`)
  */
 export function calcBossHP(
-  baseHP: number,
-  nodeLvl: number,
-  mult: number,
+  baseHP: BuhflipEnemyBaseHP,
+  nodeLvl: BuhflipNodeLevel,
+  mult: BuhflipBossHPMult,
 ): number {
   return Math.floor(
     (BOSS_HP_COEFF * baseHP * NODE_HP_MULT[nodeLvl - 1] * mult) / 10000,
@@ -353,7 +381,7 @@ export function calcBossHP(
  *
  * Formula: `Math.ceil(PP20K_FACTOR × total60k)`
  */
-export function calcPP20k(total60k: number): number {
+export function calcPP20k(total60k: BuhflipPP60kTotalHP): number {
   return Math.ceil(PP20K_FACTOR * total60k)
 }
 
@@ -380,8 +408,8 @@ export function calcPP20k(total60k: number): number {
  * @returns reduction fraction (0–1); multiply by the enemy's HP to get the amount to subtract
  */
 export function calcSDEnemyAltHPReduction(
-  tags: string[],
-  id: string,
+  tags: BuhflipEnemyTagList,
+  id: BuhflipEnemyId,
   isFirstInWave: boolean,
 ): number {
   const hasSpecial =
@@ -410,8 +438,8 @@ export function calcSDEnemyAltHPReduction(
  * @returns reduction fraction (0–1)
  */
 export function calcTSEnemyAltHPReduction(
-  tags: string[],
-  id: string,
+  tags: BuhflipEnemyTagList,
+  id: BuhflipEnemyId,
   isFirstInWave: boolean,
 ): number {
   const hasSpecial =
@@ -448,9 +476,9 @@ export function calcTSEnemyAltHPReduction(
  * @returns reduction fraction (0–1)
  */
 export function calcDABossAltHPReduction(
-  tags: string[],
-  id: string,
-  versionIdx: number,
+  tags: BuhflipEnemyTagList,
+  id: BuhflipEnemyId,
+  versionIdx: BuhflipVersionIndex,
 ): number {
   if (tags.length < 1 || (tags.length === 1 && tags.includes("spoiler")))
     return 0
@@ -471,7 +499,10 @@ export function calcDABossAltHPReduction(
  * @returns reduction fraction (0–1)
  * @see calcDABossAltHPReduction
  */
-export function calcTSBossAltHPReduction(tags: string[], id: string): number {
+export function calcTSBossAltHPReduction(
+  tags: BuhflipEnemyTagList,
+  id: BuhflipEnemyId,
+): number {
   if (tags.length < 1 || (tags.length === 1 && tags.includes("spoiler")))
     return 0
   let r = 0

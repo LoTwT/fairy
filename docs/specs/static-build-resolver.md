@@ -1102,3 +1102,4 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 351. `V351` agent utility helper text contracts：当前阶段已收口；`zzz-agent` utility helper 文本 contract 已统一复用显式公开 alias，不改变任何匹配、归一化或文本清洗逻辑，见 [静态构筑解析系统 V351](./static-build-resolver-v351.md)
 352. `V352` agent scorer helper text contracts：当前阶段已收口；`zzz-agent` scorer helper 文本与 tool-name contract 已统一复用显式公开 alias，不改变任何评分逻辑，见 [静态构筑解析系统 V352](./static-build-resolver-v352.md)
 353. `V353` agent source-entry context contracts：当前阶段已收口；`zzz-agent` source-entry context helper 的导出输入与结果 shape 已统一复用显式公开 contract，不改变任何 scenario 或 panel 归一化逻辑，见 [静态构筑解析系统 V353](./static-build-resolver-v353.md)
+354. `V354` buhflipexplode helper input contracts：当前阶段已收口；`buhflipexplode` 公开公式 helper 的输入标量与 tag 列表已统一复用显式公开 contract，不改变任何公式逻辑，见 [静态构筑解析系统 V354](./static-build-resolver-v354.md)
