@@ -23,6 +23,7 @@ import {
   findCatalogItem,
   normalizeCatalogValue,
 } from "./resolve-build-catalog"
+import { specialtyLabels } from "./resolve-build-labels"
 import {
   buildMissingSourceEntryFinalPanelResponse,
   buildUnsupportedAnomalyTypeResponse,
@@ -286,15 +287,6 @@ export interface BuildToolResolvedTriggeredDamageContext<
   >
   wEngine: TWEngine | undefined
 }
-
-export const specialtyLabels = {
-  Attack: "强攻",
-  Stun: "击破",
-  Anomaly: "异常",
-  Support: "支援",
-  Defense: "防护",
-  Rupture: "命破",
-} as const
 
 export const skillTagSchema = z.enum([
   "basic",
