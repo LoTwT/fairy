@@ -1,9 +1,12 @@
 import type {
   StaticBuildAgentCatalogEntry,
+  StaticBuildAgentId,
   StaticBuildCatalogEntry,
+  StaticBuildDriveDiscId,
   StaticBuildSpecialty,
   StaticBuildUtilityAgentCatalogEntry,
   StaticBuildWEngineCatalogEntry,
+  StaticBuildWEngineId,
 } from "./types.js"
 import agentsZh from "../../data/zh-CN/agents.json"
 import wEnginesZh from "../../data/zh-CN/w-engines.json"
@@ -307,26 +310,26 @@ export const supportedStaticBuildDriveDiscs = [
 ] satisfies StaticBuildCatalogEntry[]
 
 export function getStaticBuildAgent(
-  id: string,
+  id: StaticBuildAgentId,
 ): StaticBuildAgentCatalogEntry | undefined {
   return supportedStaticBuildAgents.find((item) => item.id === id)
 }
 
 export function getStaticBuildUtilityAgent(
-  id: string,
+  id: StaticBuildAgentId,
 ): StaticBuildUtilityAgentCatalogEntry | undefined {
   return supportedStaticBuildUtilityAgents.find((item) => item.id === id)
 }
 
 export function getStaticBuildWEngine(
-  id: string | undefined,
+  id: StaticBuildWEngineId | undefined,
 ): StaticBuildWEngineCatalogEntry | undefined {
   if (!id) return undefined
   return supportedStaticBuildWEngines.find((item) => item.id === id)
 }
 
 export function getStaticBuildUtilityWEngine(
-  id: string | undefined,
+  id: StaticBuildWEngineId | undefined,
 ): StaticBuildWEngineCatalogEntry | undefined {
   if (!id) return undefined
   return supportedStaticBuildUtilityWEngines.find((item) => item.id === id)
@@ -349,7 +352,7 @@ export function getCompatibleStaticBuildUtilityWEngines(
 }
 
 export function getStaticBuildDriveDisc(
-  id: string,
+  id: StaticBuildDriveDiscId,
 ): StaticBuildCatalogEntry | undefined {
   return supportedStaticBuildDriveDiscs.find((item) => item.id === id)
 }

@@ -394,6 +394,9 @@ export interface ResolveStaticBuildSkillMatrixInput {
 }
 
 export type StaticBuildCatalogId = string
+export type StaticBuildAgentId = StaticBuildCatalogId
+export type StaticBuildWEngineId = StaticBuildCatalogId
+export type StaticBuildDriveDiscId = StaticBuildCatalogId
 
 export interface StaticBuildCatalogEntry {
   id: StaticBuildCatalogId

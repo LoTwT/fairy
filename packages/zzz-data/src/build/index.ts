@@ -61,6 +61,7 @@ export type {
   ResolveStaticBuildTriggerMatrixResult,
   StaticBuildActionName,
   StaticBuildAgentCatalogEntry,
+  StaticBuildAgentId,
   StaticBuildAgentLevel,
   StaticBuildAgentMindscape,
   StaticBuildAlias,
@@ -112,6 +113,7 @@ export type {
   StaticBuildDiagnosticMessage,
   StaticBuildDiagnosticOwner,
   StaticBuildDisplayName,
+  StaticBuildDriveDiscId,
   StaticBuildDriveDiscPieces,
   StaticBuildDriveDiscSetInput,
   StaticBuildDynamicCountKey,
@@ -248,6 +250,7 @@ export type {
   StaticBuildVariableFormulaMultiplierList,
   StaticBuildVulnerabilityBonus,
   StaticBuildWEngineCatalogEntry,
+  StaticBuildWEngineId,
   StaticBuildWEngineRefinement,
 } from "./types.js"
 

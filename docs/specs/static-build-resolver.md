@@ -1065,4 +1065,5 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 314. `V314` compact remaining scalar and count contracts：当前阶段已收口；`compact.ts` 中剩余的 build scalar、count、matrix metadata scalar/text contract 已统一复用显式 compact alias，并完成当前 `compact` 公开 contract 的 raw `number/string` 收口，不改变任何运行时行为，见 [静态构筑解析系统 V314](./static-build-resolver-v314.md)
 315. `V315` snapshot input map contracts：当前阶段已收口；`build/types.ts` 中仍直接暴露的 snapshot/input `Record<..., number>` contract 已统一复用显式公开 map type，不改变任何运行时行为，见 [静态构筑解析系统 V315](./static-build-resolver-v315.md)
 316. `V316` skill-matrix metadata numeric contracts：当前阶段已收口；`build/types.ts` 中 `skill-matrix row metadata` 剩余的裸 `number` 字段已统一复用显式公开 type，不改变任何运行时行为，见 [静态构筑解析系统 V316](./static-build-resolver-v316.md)
-317. `V317` profile definition contracts：当前阶段进行中；当前目标是把 `profiles.ts` 中通过局部 interface 推断暴露出来的 profile shape 提升为 `build/types.ts` 的显式公开 contract，不改变任何运行时行为
+317. `V317` profile definition contracts：当前阶段已收口；`profiles.ts` 中通过局部 interface 推断暴露出来的 profile shape 已统一提升为 `build/types.ts` 的显式公开 contract，不改变任何运行时行为，见 [静态构筑解析系统 V317](./static-build-resolver-v317.md)
+318. `V318` public helper id input contracts：当前阶段进行中；当前目标是为 build-layer 对外 helper 仍直接暴露的 `agentId / wEngineId / driveDiscId` 输入补显式公开 type，不改变任何运行时行为

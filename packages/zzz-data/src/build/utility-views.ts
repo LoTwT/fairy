@@ -11,6 +11,7 @@ import type {
   StaticBuildSourceUtilityViewRequirementKind,
   StaticBuildSourceUtilityViewRequirementSummary,
   StaticBuildSourceUtilityViewSummary,
+  StaticBuildWEngineId,
   StaticBuildWEngineRefinement,
 } from "./types.js"
 import {
@@ -94,7 +95,9 @@ const sourceUtilityViewRequirementKinds = [
   "panel-value",
 ] as const satisfies StaticBuildSourceUtilityViewRequirementKind[]
 
-export function hasStaticBuildSourceUtilityViewCoverage(wEngineId?: string) {
+export function hasStaticBuildSourceUtilityViewCoverage(
+  wEngineId?: StaticBuildWEngineId,
+) {
   return !!wEngineId && utilityViewWEngineIdSet.has(wEngineId)
 }
 

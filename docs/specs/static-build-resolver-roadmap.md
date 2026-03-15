@@ -11467,5 +11467,38 @@ caveatSummary` 这些兼容字段补齐。
 
 - `V317.1` 已完成：范围冻结到 profile definition contract
 - `V317.2` 已完成：profile 公开 shape 已统一落到 `build/types.ts`
-- `V317.3` 进行中：校验与提交
+- `V317.3` 已完成：校验与提交已通过
 - `V317.4` 已完成：roadmap、索引与架构文档已同步
+
+## 321. V318 public helper id input contracts
+
+### 321.1 目标
+
+`V318` 只解决一件事：
+
+- 为 build-layer 对外 helper 仍直接暴露的 `agentId / wEngineId / driveDiscId` 输入补显式公开 type
+
+### 321.2 范围
+
+1. `StaticBuildAgentId`
+2. `StaticBuildWEngineId`
+3. `StaticBuildDriveDiscId`
+4. `getStaticBuildAgent() / getStaticBuildUtilityAgent()`
+5. `getStaticBuildWEngine() / getStaticBuildUtilityWEngine()`
+6. `getStaticBuildDriveDisc()`
+7. `hasStaticBuildSourceViewCoverage()`
+8. `hasStaticBuildSourceUtilityViewCoverage()`
+9. `hasStaticBuildTriggerMatrixCoverage()`
+
+### 321.3 非目标
+
+1. 不修改任何 lookup runtime 逻辑
+2. 不调整 catalog 数据内容
+3. 不处理 `sourceViewId / entryId / rowId` 之外的其他 helper 输入
+
+### 321.4 当前状态
+
+- `V318.1` 已完成：范围冻结到 public helper id input contract
+- `V318.2` 已完成：对外 helper 的 `agentId / wEngineId / driveDiscId` 已统一复用显式公开 alias
+- `V318.3` 进行中：校验与提交
+- `V318.4` 已完成：roadmap、索引与架构文档已同步

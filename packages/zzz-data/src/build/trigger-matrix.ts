@@ -1,6 +1,7 @@
 import type {
   ResolveStaticBuildTriggerMatrixInput,
   ResolveStaticBuildTriggerMatrixResult,
+  StaticBuildAgentId,
   StaticBuildEntryCaveatSummary,
   StaticBuildSourceDamageViewEntry,
   StaticBuildTriggerMatrixEffectSummaryItem,
@@ -58,7 +59,9 @@ const triggerMatrixGroupLabels: Record<
   "source-view": "额外来源结算",
 }
 
-export function hasStaticBuildTriggerMatrixCoverage(agentId: string) {
+export function hasStaticBuildTriggerMatrixCoverage(
+  agentId: StaticBuildAgentId,
+) {
   return hasStaticBuildSourceViewCoverage(agentId)
 }
 

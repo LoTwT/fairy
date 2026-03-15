@@ -3,6 +3,7 @@ import type {
   ResolveStaticBuildInput,
   ResolveStaticBuildResult,
   ResolveStaticBuildSourceDamageViewsResult,
+  StaticBuildAgentId,
   StaticBuildBaseMode,
   StaticBuildCatalogEntry,
   StaticBuildDriveDiscSetsInput,
@@ -93,7 +94,7 @@ const sourceDamageViewRequirementKinds = [
   "resolved-multiplier",
 ] as const satisfies StaticBuildSourceDamageViewRequirementKind[]
 
-export function hasStaticBuildSourceViewCoverage(agentId: string) {
+export function hasStaticBuildSourceViewCoverage(agentId: StaticBuildAgentId) {
   return sourceViewAgentIdSet.has(agentId)
 }
 
