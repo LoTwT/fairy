@@ -1,6 +1,11 @@
-# 依赖说明
+# Monorepo 依赖说明
 
-本文档记录当前 monorepo 中各 `devDependencies` 的用途；运行时依赖仅在需要理解包职责时补充说明。
+本文档记录当前 monorepo 的依赖范围，覆盖：
+
+1. 根目录 `devDependencies`
+2. `packages/zzz-data` 的 `devDependencies`
+3. `packages/zzz-agent` 的 `devDependencies`
+4. 仅在需要理解包职责时补充的关键运行时依赖
 
 ## 根目录
 
