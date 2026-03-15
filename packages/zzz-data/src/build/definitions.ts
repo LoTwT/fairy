@@ -9,11 +9,14 @@ import type {
   StaticBuildEffectDefinition,
   StaticBuildEffectLoadoutInput,
   StaticBuildEnergyGenerationRate,
+  StaticBuildReadonlySourceNoteKeyList,
   StaticBuildResolvedSnapshotBucketKey,
   StaticBuildResolvedSnapshotMultiplierKey,
   StaticBuildSourceCoverageId,
   StaticBuildSourceNoteEntry,
   StaticBuildSourceNoteGuidance,
+  StaticBuildSourceNoteKeyList,
+  StaticBuildSourceNoteKeySet,
   StaticBuildSourceNoteLookupInput,
   StaticBuildSourceNoteOwner,
   StaticBuildSourceNoteStatus,
@@ -4014,7 +4017,7 @@ interface StaticBuildSourceNote {
   disorderSourceTypes?: readonly AnomalyType[]
   ownerOverride?: StaticBuildSourceNoteOwner
   statusOverride?: StaticBuildSourceNoteStatus
-  keysOverride?: readonly string[]
+  keysOverride?: StaticBuildReadonlySourceNoteKeyList
   note: string
 }
 
@@ -4156,11 +4159,11 @@ function inferStaticBuildSourceNoteGuidance(
 
 function collectStaticBuildSourceNoteKeys(
   note: StaticBuildSourceNote,
-): string[] {
+): StaticBuildSourceNoteKeyList {
   if (note.keysOverride) {
     return [...note.keysOverride]
   }
-  const keys = new Set<string>()
+  const keys: StaticBuildSourceNoteKeySet = new Set()
   if (note.requiresAnomalyMastery || note.requiresMissingAnomalyMastery) {
     keys.add("finalPanel.anomalyMastery")
   }

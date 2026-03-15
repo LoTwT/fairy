@@ -264,6 +264,9 @@ export type StaticBuildCombatTagList = StaticBuildCombatTag[]
 export type StaticBuildCombatTagSet = Set<StaticBuildCombatTag>
 export type StaticBuildAliasList = StaticBuildAlias[]
 export type StaticBuildSourceNoteKeyList = StaticBuildSourceNoteKey[]
+export type StaticBuildReadonlySourceNoteKeyList =
+  readonly StaticBuildSourceNoteKey[]
+export type StaticBuildSourceNoteKeySet = Set<StaticBuildSourceNoteKey>
 export type StaticBuildAgentIdSet = Set<StaticBuildAgentId>
 export type StaticBuildWEngineIdSet = Set<StaticBuildWEngineId>
 export type StaticBuildDefenderBaseDefense = number

@@ -11893,3 +11893,32 @@ caveatSummary` 这些兼容字段补齐。
 - `V331.2` 已完成：coverage helper 已统一复用显式公开 contract
 - `V331.3` 已完成：校验与提交已通过
 - `V331.4` 已完成：roadmap、索引与架构文档已同步
+
+## 335. V332 source-note key collection contracts
+
+### 335.1 目标
+
+`V332` 只解决一件事：
+
+- 把 `definitions.ts` 中 source-note key 收集仍直接使用的只读 `string[]` 与 `Set<string>` 统一收成显式公开 contract。
+
+### 335.2 范围
+
+1. `StaticBuildReadonlySourceNoteKeyList`
+2. `StaticBuildSourceNoteKeySet`
+3. `StaticBuildSourceNote.keysOverride`
+4. `collectStaticBuildSourceNoteKeys()`
+5. `build/index.ts` 对应 type export
+
+### 335.3 非目标
+
+1. 不修改任何 source-note key 文案
+2. 不调整 source-note 推导逻辑
+3. 不处理 `definitions.ts` 中其他业务 `Set` / `Map`
+
+### 335.4 当前状态
+
+- `V332.1` 已完成：范围冻结到 source-note key collection contract
+- `V332.2` 已完成：source-note key collection 已统一复用显式公开 contract
+- `V332.3` 已完成：校验与提交已通过
+- `V332.4` 已完成：roadmap、索引与架构文档已同步
