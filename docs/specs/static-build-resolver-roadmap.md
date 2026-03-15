@@ -10557,5 +10557,35 @@ caveatSummary` 这些兼容字段补齐。
 - `V289.1` 已完成：冻结到 group label text contract
 - `V289.2` 已完成：`types.ts` 已让各类 group summary 统一复用显式 type
 - `V289.3` 已完成：`build/index.ts` 已正式导出这个 type
-- `V289.4` 进行中：等待现有 build / agent 测试与 runtime 校验完成
-- `V289.5` 进行中：等待 roadmap、索引与架构文档同步
+- `V289.4` 已完成：现有 build / agent 测试与 runtime 校验已覆盖
+- `V289.5` 已完成：roadmap、索引与架构文档已同步
+
+## 293. V290 build entry and row label text contracts
+
+`V289` 收口后，source-view entry 与 matrix row 公开 contract 中的 `label` 仍以匿名 `string` 暴露，和前面的显式公开 contract 仍不对称。
+
+`V290` 只解决一件事：
+
+1. 为 entry / row label 文本补显式 type，并让 source-damage-view / source-utility-view / trigger-matrix / skill-matrix 统一复用，不改变任何运行时行为
+
+### 293.1 分阶段
+
+1. `V290.1` scope freeze
+2. `V290.2` type alignment
+3. `V290.3` export alignment
+4. `V290.4` tests / runtime alignment
+5. `V290.5` docs closeout
+
+### 293.2 非目标
+
+1. 不改变 entry / row label 的字符串内容或生成逻辑
+2. 不处理 skill-matrix row `group`
+3. 不处理 `canonicalLabel / stableKey`
+
+### 293.3 当前状态
+
+- `V290.1` 已完成：冻结到 entry / row label text contract
+- `V290.2` 已完成：`types.ts` 已让 source-view entry 与 matrix row 统一复用显式 type
+- `V290.3` 已完成：`build/index.ts` 已正式导出这些 type
+- `V290.4` 进行中：等待现有 build / agent 测试与 runtime 校验完成
+- `V290.5` 进行中：等待 roadmap、索引与架构文档同步

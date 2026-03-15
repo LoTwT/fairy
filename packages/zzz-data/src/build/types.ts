@@ -729,6 +729,8 @@ export type StaticBuildSourceDamageViewRequirementSummary =
   StaticBuildRequirementSummary<StaticBuildSourceDamageViewRequirementKind>
 
 export type StaticBuildSourceDamageViewResolutionMode = "standalone" | "delta"
+export type StaticBuildEntryLabel = string
+export type StaticBuildRowLabel = string
 
 export interface StaticBuildSourceDamageViewMeta {
   canonicalLabel: string
@@ -740,7 +742,7 @@ export interface StaticBuildSourceDamageViewMeta {
 
 export interface StaticBuildSourceDamageViewEntry {
   id: string
-  label: string
+  label: StaticBuildEntryLabel
   metadata: StaticBuildSourceDamageViewMeta
   sourceType: StaticBuildSourceType
   sourceId: string
@@ -864,7 +866,7 @@ export interface StaticBuildSourceUtilityViewMeta {
 
 export interface StaticBuildSourceUtilityViewEntry {
   id: string
-  label: string
+  label: StaticBuildEntryLabel
   metadata: StaticBuildSourceUtilityViewMeta
   sourceType: StaticBuildSourceType
   sourceId: string
@@ -1078,7 +1080,7 @@ export interface StaticBuildTriggerMatrixRowMeta {
 
 export interface StaticBuildTriggerMatrixRow {
   id: string
-  label: string
+  label: StaticBuildRowLabel
   supported: boolean
   metadata: StaticBuildTriggerMatrixRowMeta
   effectSummary: StaticBuildTriggerMatrixEffectSummaryItem[]
@@ -1145,7 +1147,7 @@ export interface StaticBuildSkillMatrixRowDamageSummary {
 export interface StaticBuildSkillMatrixRow {
   id: string
   group: string
-  label: string
+  label: StaticBuildRowLabel
   metadata: StaticBuildSkillMatrixRowMeta
   skillTag: StaticBuildSkillTag
   damageType: StaticBuildDamageType
