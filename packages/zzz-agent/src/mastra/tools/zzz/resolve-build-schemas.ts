@@ -1,4 +1,3 @@
-import type { z } from "zod"
 import { z as zod } from "zod"
 
 export const skillTagSchema = zod.enum([
@@ -130,6 +129,22 @@ export interface BuildToolSkillMatrixContextInput {
   enemy: BuildToolEnemyInput
 }
 
+export interface BuildToolFinalPanelInput {
+  attack: number
+  baseAttack?: number
+  critRate: number
+  critDamage: number
+  hp?: number
+  sheerForce?: number
+  energyGenerationRate?: number
+  anomalyProficiency?: number
+  anomalyMastery?: number
+  anomalyCritRate?: number
+  anomalyCritDamage?: number
+  penetrationRate?: number
+  penetrationValue?: number
+}
+
 export const enemySchema = zod.object({
   attackerLevel: zod.number().optional().default(60),
   defenderBaseDefense: zod.number(),
@@ -225,8 +240,6 @@ export const finalPanelSchema = zod.object({
   penetrationRate: zod.number().optional(),
   penetrationValue: zod.number().optional(),
 })
-
-export type BuildToolFinalPanelInput = z.input<typeof finalPanelSchema>
 
 export const resolveBuildScenarioSchema = zod.discriminatedUnion("damageType", [
   zod.object({
