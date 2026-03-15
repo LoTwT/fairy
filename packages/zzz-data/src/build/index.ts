@@ -123,6 +123,7 @@ export type {
   StaticBuildFlatAttack,
   StaticBuildFormulaMultiplierMap,
   StaticBuildGroupCount,
+  StaticBuildGroupLabel,
   StaticBuildHP,
   StaticBuildIgnoreResistance,
   StaticBuildLoadoutInput,

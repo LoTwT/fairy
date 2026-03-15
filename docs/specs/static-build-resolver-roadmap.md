@@ -10527,5 +10527,35 @@ caveatSummary` 这些兼容字段补齐。
 - `V288.1` 已完成：冻结到 effect label text contract
 - `V288.2` 已完成：`types.ts` 已让 effect definition / trace / effect summaries 统一复用显式 type
 - `V288.3` 已完成：`build/index.ts` 已正式导出这个 type
-- `V288.4` 进行中：等待现有 build / agent 测试与 runtime 校验完成
-- `V288.5` 进行中：等待 roadmap、索引与架构文档同步
+- `V288.4` 已完成：现有 build / agent 测试与 runtime 校验已覆盖
+- `V288.5` 已完成：roadmap、索引与架构文档已同步
+
+## 292. V289 build group label text contracts
+
+`V288` 收口后，各类 group summary 公开 contract 中的 `label` 仍以匿名 `string` 暴露，和前面的显式公开 contract 仍不对称。
+
+`V289` 只解决一件事：
+
+1. 为 group summary label 文本补显式 type，并让 diagnostic/source-note/source-view/source-entry/trigger-matrix/skill-matrix 的 group summary 统一复用，不改变任何运行时行为
+
+### 292.1 分阶段
+
+1. `V289.1` scope freeze
+2. `V289.2` type alignment
+3. `V289.3` export alignment
+4. `V289.4` tests / runtime alignment
+5. `V289.5` docs closeout
+
+### 292.2 非目标
+
+1. 不改变 group label 的字符串内容或生成逻辑
+2. 不处理 entry / row 的 label
+3. 不处理 effect label
+
+### 292.3 当前状态
+
+- `V289.1` 已完成：冻结到 group label text contract
+- `V289.2` 已完成：`types.ts` 已让各类 group summary 统一复用显式 type
+- `V289.3` 已完成：`build/index.ts` 已正式导出这个 type
+- `V289.4` 进行中：等待现有 build / agent 测试与 runtime 校验完成
+- `V289.5` 进行中：等待 roadmap、索引与架构文档同步

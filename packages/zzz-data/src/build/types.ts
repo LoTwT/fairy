@@ -19,6 +19,7 @@ export type StaticBuildSourceType = "agent" | "w-engine" | "drive-disc"
 export type StaticBuildEffectId = string
 export type StaticBuildSourceName = string
 export type StaticBuildEffectLabel = string
+export type StaticBuildGroupLabel = string
 export type StaticBuildBaseDamageStat = "attack" | "sheerForce"
 export type StaticBuildSpecialty = AgentSpecialty
 
@@ -567,7 +568,7 @@ export interface StaticBuildDiagnosticEntry {
 
 export interface StaticBuildDiagnosticGroupSummary {
   key: StaticBuildDiagnosticKind
-  label: string
+  label: StaticBuildGroupLabel
   count: StaticBuildDiagnosticCount
 }
 
@@ -589,7 +590,7 @@ export interface StaticBuildDiagnosticSummary {
 
 export interface StaticBuildSourceNoteGroupSummary {
   key: StaticBuildSourceNoteStatus
-  label: string
+  label: StaticBuildGroupLabel
   count: StaticBuildSourceNoteCount
 }
 
@@ -777,7 +778,7 @@ export type StaticBuildSourceDamageViewGroupKey = "standalone" | "delta"
 
 export interface StaticBuildSourceDamageViewGroupSummary {
   key: StaticBuildSourceDamageViewGroupKey
-  label: string
+  label: StaticBuildGroupLabel
   count: StaticBuildGroupCount
   supportedCount: StaticBuildSupportedCount
   unsupportedCount: StaticBuildUnsupportedCount
@@ -906,7 +907,7 @@ export type StaticBuildSourceUtilityViewGroupKey = "trigger" | "rate"
 
 export interface StaticBuildSourceUtilityViewGroupSummary {
   key: StaticBuildSourceUtilityViewGroupKey
-  label: string
+  label: StaticBuildGroupLabel
   count: StaticBuildGroupCount
   supportedCount: StaticBuildSupportedCount
   unsupportedCount: StaticBuildUnsupportedCount
@@ -970,7 +971,7 @@ export type StaticBuildSourceEntryGroupKey =
 
 export interface StaticBuildSourceEntryGroupSummary {
   key: StaticBuildSourceEntryGroupKey
-  label: string
+  label: StaticBuildGroupLabel
   count: StaticBuildGroupCount
   supportedCount: StaticBuildSupportedCount
   unsupportedCount: StaticBuildUnsupportedCount
@@ -1018,7 +1019,7 @@ export type StaticBuildTriggerMatrixEntryKind = "main-formula" | "source-view"
 
 export interface StaticBuildTriggerMatrixGroupSummary {
   key: StaticBuildTriggerMatrixEntryKind
-  label: string
+  label: StaticBuildGroupLabel
   count: StaticBuildGroupCount
   supportedCount: StaticBuildSupportedCount
   unsupportedCount: StaticBuildUnsupportedCount
@@ -1192,7 +1193,7 @@ export interface StaticBuildSkillMatrixSummary {
 
 export interface StaticBuildSkillMatrixGroupSummary {
   key: string
-  label: string
+  label: StaticBuildGroupLabel
   count: StaticBuildGroupCount
   commonBuckets: StaticBuildBucketValueMap
   variableBuckets: StaticBuildVariableBucketList
