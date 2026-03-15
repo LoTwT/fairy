@@ -11,6 +11,125 @@ export const skillTagSchema = zod.enum([
   "assist",
 ])
 
+export type BuildToolSkillTag =
+  | "basic"
+  | "dash"
+  | "special"
+  | "enhancedSpecial"
+  | "chain"
+  | "ultimate"
+  | "assist"
+
+export interface BuildToolEnemyInput {
+  attackerLevel?: number
+  defenderBaseDefense: number
+  defenderResistance: number
+  defenseBonus?: number
+  defenseReduction?: number
+  resistanceReduction?: number
+  ignoreResistance?: number
+  vulnerabilityBonus?: number
+  damageReduction?: number
+  isStunned?: boolean
+  stunVulnerability?: number
+  nonStunVulnerability?: number
+  specialMultiplier?: number
+}
+
+export interface BuildToolDynamicSnapshotInput {
+  flags?: {
+    ariaDreamtime?: boolean
+    burniceEmberState?: boolean
+  }
+  counts?: {
+    burniceEmberExtraTriggers?: number
+  }
+  values?: {
+    ariaExflowDamageRatio?: number
+    ariaStunnedDamageRatio?: number
+    burniceEmberDamageRatio?: number
+  }
+}
+
+export interface BuildToolStateSnapshotInput {
+  flags?: {
+    alicePolarityAssaultState?: boolean
+    miyabiFrostburnBreakState?: boolean
+  }
+  values?: {
+    alicePolarityAssaultDamageRatio?: number
+    miyabiFrostburnBreakDamageRatio?: number
+  }
+}
+
+export interface BuildToolResolvedSnapshotInput {
+  bucketDeltas?: {
+    bonusDamageSum?: number
+    defenseReduction?: number
+    penetrationRate?: number
+    resistanceReduction?: number
+    ignoreResistance?: number
+    sheerBonusSum?: number
+    anomalyProficiency?: number
+    anomalyBonusDamageSum?: number
+    anomalyCritRate?: number
+    anomalyCritDamage?: number
+  }
+  multiplierFactors?: {
+    skillMultiplierFactor?: number
+  }
+}
+
+export type BuildToolDamageType = "normal" | "sheer" | "anomaly" | "disorder"
+
+interface BuildToolBaseScenarioInput {
+  attribute?: string
+  extraAbilityActive?: boolean
+  combatTags?: string[]
+  dynamicSnapshot?: BuildToolDynamicSnapshotInput
+  stateSnapshot?: BuildToolStateSnapshotInput
+  resolvedSnapshot?: BuildToolResolvedSnapshotInput
+  enemy: BuildToolEnemyInput
+}
+
+export interface BuildToolNormalScenarioInput extends BuildToolBaseScenarioInput {
+  damageType: "normal"
+  skillTag: BuildToolSkillTag
+  skillMultiplier: number | string
+}
+
+export interface BuildToolSheerScenarioInput extends BuildToolBaseScenarioInput {
+  damageType: "sheer"
+  skillTag: BuildToolSkillTag
+  skillMultiplier: number | string
+}
+
+export interface BuildToolAnomalyScenarioInput extends BuildToolBaseScenarioInput {
+  damageType: "anomaly"
+  skillTag: BuildToolSkillTag
+  damageMultiplier: number | string
+}
+
+export interface BuildToolDisorderScenarioInput extends BuildToolBaseScenarioInput {
+  damageType: "disorder"
+  skillTag: BuildToolSkillTag
+  anomalyType: string
+  remainingTime: number
+}
+
+export type BuildToolScenarioInput =
+  | BuildToolNormalScenarioInput
+  | BuildToolSheerScenarioInput
+  | BuildToolAnomalyScenarioInput
+  | BuildToolDisorderScenarioInput
+
+export interface BuildToolSkillMatrixContextInput {
+  attribute?: string
+  extraAbilityActive?: boolean
+  combatTags?: string[]
+  enemy: BuildToolEnemyInput
+}
+
 export const enemySchema = zod.object({
   attackerLevel: zod.number().optional().default(60),
   defenderBaseDefense: zod.number(),
@@ -328,9 +447,3 @@ export const resolveBuildSourceEntriesIncludeDetailsSchema = zod
   .describe(
     "是否返回 source-entry collection 完整明细，包括顶层 collection.assumptions，以及每条 entry 的 entry.assumptions / entry.requirements / entry.diagnostics / entry.sourceNotes；若某条 source-damage-view entry 原始结果带有 build，也会一并返回完整 build 结果（trace、damageParams 等）。默认 false，只保留各类 *Summary 与紧凑字段。",
   )
-
-export type BuildToolScenarioInput = z.infer<typeof resolveBuildScenarioSchema>
-
-export type BuildToolSkillMatrixContextInput = z.infer<
-  typeof resolveBuildSkillMatrixContextSchema
->
