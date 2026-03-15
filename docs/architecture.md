@@ -2,7 +2,7 @@
 
 ## 仓库级 AI 协作文件
 
-当前 `static-build-resolver` contract 收口阶段已推进到 `V305`。`V304` 已完成 `skill-matrix row metadata actionName / skillName` 的显式公开 type；当前正在收口 `sourceStatId / sourceStatName`。
+当前 `static-build-resolver` contract 收口阶段已推进到 `V306`。`V305` 已完成 `skill-matrix row metadata sourceStatId / sourceStatName` 的显式公开 type；当前正在收口 `segmentLabel`。
 
 ```
 .

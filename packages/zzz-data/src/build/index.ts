@@ -159,6 +159,7 @@ export type {
   StaticBuildRowLabel,
   StaticBuildSatisfiedRequirementCount,
   StaticBuildScenarioInput,
+  StaticBuildSegmentLabel,
   StaticBuildSheerBonusSum,
   StaticBuildSheerForce,
   StaticBuildSkillMatrixAttributeSource,

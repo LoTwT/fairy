@@ -1153,7 +1153,7 @@ export interface StaticBuildSkillMatrixRowMeta {
   aggregationType: StaticBuildSkillMatrixAggregationType
   isAdditionalDamage: boolean
   variantAxis?: StaticBuildSkillMatrixVariantAxis
-  segmentLabel?: string
+  segmentLabel?: StaticBuildSegmentLabel
   segmentIndex?: number
   targetSize?: StaticBuildTargetSize
 }
@@ -1169,6 +1169,7 @@ export type StaticBuildActionName = string
 export type StaticBuildSkillName = string
 export type StaticBuildSourceStatId = string
 export type StaticBuildSourceStatName = string
+export type StaticBuildSegmentLabel = string
 
 export interface StaticBuildSkillMatrixRow {
   id: StaticBuildRowId
