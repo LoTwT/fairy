@@ -15,7 +15,7 @@
 
 - [伤害计算算法](./specs/damage-calculation.md) — 四种伤害类型（常规/贯穿/异常/紊乱）的完整乘区公式、TypeScript 类型签名与参考数值
 - [静态构筑解析系统](./specs/static-build-resolver.md) — 静态效果系统、输入输出 contract、热插拔乘区管线与模块设计
-- [静态构筑解析系统路线图](./specs/static-build-resolver-roadmap.md) — 当前执行状态：已推进到 `V315`；当前 contract 已覆盖 single-build resolver、skill matrix、trigger matrix、source damage views、source utility views、unified source-entry collection，以及对应 compact helper exports。最近阶段已完成 `V205 ~ V314` 的高层 build tool、build-layer source view 输入 contract 与 compact 公开 contract 收口；当前正在收口 `build/types.ts` 中剩余的 snapshot/input map contract。
+- [静态构筑解析系统路线图](./specs/static-build-resolver-roadmap.md) — 当前执行状态：已推进到 `V316`；当前 contract 已覆盖 single-build resolver、skill matrix、trigger matrix、source damage views、source utility views、unified source-entry collection，以及对应 compact helper exports。最近阶段已完成 `V205 ~ V315` 的高层 build tool、build-layer source view 输入 contract、compact 公开 contract 与 snapshot/input map contract 收口；当前正在收口 `build/types.ts` 中 `skill-matrix row metadata` 剩余的 numeric contract。
 - [静态构筑解析系统 V93](./specs/static-build-resolver-v93.md) — 当前阶段：已收口；`source-damage-view groups[*]` 已新增稳定 `caveatSummary`
 - [静态构筑解析系统 V94](./specs/static-build-resolver-v94.md) — 当前阶段：已收口；`source-utility-view` 顶层结果与 `summary` 已新增稳定 `caveatSummary`
 - [静态构筑解析系统 V95](./specs/static-build-resolver-v95.md) — 当前阶段：已收口；`source-utility-view groups[*]` 已新增稳定 `caveatSummary`

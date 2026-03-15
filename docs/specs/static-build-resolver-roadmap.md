@@ -11410,5 +11410,33 @@ caveatSummary` 这些兼容字段补齐。
 
 - `V315.1` 已完成：范围冻结到 snapshot/input map contract
 - `V315.2` 已完成：`build/types.ts` 已统一复用这批显式公开 map type
-- `V315.3` 进行中：校验与提交
+- `V315.3` 已完成：校验与提交已通过
 - `V315.4` 已完成：roadmap、索引与架构文档已同步
+
+## 319. V316 skill-matrix metadata numeric contracts
+
+### 319.1 目标
+
+`V316` 只解决一件事：
+
+- 为 `build/types.ts` 中 `skill-matrix row metadata` 剩余的裸 `number` 字段补显式公开 type
+
+### 319.2 范围
+
+1. `StaticBuildSkillMatrixRowMeta.order`
+2. `StaticBuildSkillMatrixRowMeta.sourceSkillTypeId`
+3. `StaticBuildSkillMatrixRowMeta.sourceOccurrence`
+4. `StaticBuildSkillMatrixRowMeta.segmentIndex`
+
+### 319.3 非目标
+
+1. 不修改任何 runtime 行为
+2. 不处理 `compact.ts`
+3. 不新增新的 metadata 字段
+
+### 319.4 当前状态
+
+- `V316.1` 已完成：范围冻结到 skill-matrix metadata numeric contract
+- `V316.2` 已完成：`build/types.ts` 已统一复用既有显式 numeric alias
+- `V316.3` 进行中：校验与提交
+- `V316.4` 已完成：roadmap、索引与架构文档已同步

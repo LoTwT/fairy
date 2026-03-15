@@ -1190,17 +1190,17 @@ export interface ResolveStaticBuildTriggerMatrixResult {
 }
 
 export interface StaticBuildSkillMatrixRowMeta {
-  order: number
+  order: StaticBuildOrder
   actionName: StaticBuildActionName
   skillName: StaticBuildSkillName
   qualifiers: StaticBuildSkillQualifierList
   canonicalLabel: StaticBuildCanonicalLabel
   stableKey: StaticBuildStableKey
   templateSource: StaticBuildSkillMatrixTemplateSource
-  sourceSkillTypeId: number
+  sourceSkillTypeId: StaticBuildSourceSkillTypeId
   sourceStatId: StaticBuildSourceStatId
   sourceStatName: StaticBuildSourceStatName
-  sourceOccurrence: number
+  sourceOccurrence: StaticBuildSourceOccurrence
   attributeSource: StaticBuildSkillMatrixAttributeSource
   templateCombatTags: StaticBuildCombatTagList
   entryType: StaticBuildSkillMatrixEntryType
@@ -1208,7 +1208,7 @@ export interface StaticBuildSkillMatrixRowMeta {
   isAdditionalDamage: boolean
   variantAxis?: StaticBuildSkillMatrixVariantAxis
   segmentLabel?: StaticBuildSegmentLabel
-  segmentIndex?: number
+  segmentIndex?: StaticBuildSegmentIndex
   targetSize?: StaticBuildTargetSize
 }
 
