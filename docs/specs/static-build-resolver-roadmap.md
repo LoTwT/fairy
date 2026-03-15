@@ -11117,6 +11117,38 @@ caveatSummary` 这些兼容字段补齐。
 ### 311.4 当前状态
 
 - `V308.1` 已完成：范围冻结到 summary key contract
-- `V308.2` 进行中：准备在 `types.ts` 中落显式 key type
-- `V308.3` 待开始：导出与测试对齐
-- `V308.4` 待开始：文档收口
+- `V308.2` 已完成：`types.ts` 已让 summary map/list 统一复用显式 key type
+- `V308.3` 已完成：`build/index.ts` 已正式导出这些 type
+- `V308.4` 已完成：roadmap、索引与架构文档已同步
+
+## 312. V309 build list element text contracts
+
+### 312.1 目标
+
+`V309` 只解决一件事：
+
+- 为剩余公开 `string[]` alias 的元素补显式公开 type
+
+### 312.2 范围
+
+1. `StaticBuildSkillQualifierList`
+2. `StaticBuildAssumptionList`
+3. `StaticBuildUnsupportedEffectList`
+4. `StaticBuildCombatTagList`
+5. `StaticBuildAliasList`
+6. `StaticBuildSourceNoteKeyList`
+7. `StaticBuildDiagnosticKeyList`
+8. `build/index.ts` 对外导出对应元素 type
+
+### 312.3 非目标
+
+1. 不处理 list 的聚合逻辑
+2. 不处理 map key/value 语义
+3. 不处理 `bucket / formula-multiplier` key
+
+### 312.4 当前状态
+
+- `V309.1` 已完成：范围冻结到 list element text contract
+- `V309.2` 进行中：准备在 `types.ts` 中落显式 list element type
+- `V309.3` 待开始：导出与测试对齐
+- `V309.4` 待开始：文档收口

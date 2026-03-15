@@ -62,7 +62,8 @@ export type StaticBuildSkillMatrixAttributeSource =
   | "context"
   | "template"
 
-export type StaticBuildSkillQualifierList = string[]
+export type StaticBuildSkillQualifier = string
+export type StaticBuildSkillQualifierList = StaticBuildSkillQualifier[]
 
 export type StaticBuildBucket =
   | "attackPercent"
@@ -182,11 +183,17 @@ export type StaticBuildFormulaMultiplierMap = Record<
 export type StaticBuildVariableBucketList = StaticBuildBucketKey[]
 export type StaticBuildVariableFormulaMultiplierList =
   StaticBuildFormulaMultiplierKey[]
-export type StaticBuildAssumptionList = string[]
-export type StaticBuildUnsupportedEffectList = string[]
-export type StaticBuildCombatTagList = string[]
-export type StaticBuildAliasList = string[]
-export type StaticBuildSourceNoteKeyList = string[]
+export type StaticBuildAssumptionText = string
+export type StaticBuildUnsupportedEffectText = string
+export type StaticBuildCombatTag = string
+export type StaticBuildAlias = string
+export type StaticBuildSourceNoteKey = string
+export type StaticBuildAssumptionList = StaticBuildAssumptionText[]
+export type StaticBuildUnsupportedEffectList =
+  StaticBuildUnsupportedEffectText[]
+export type StaticBuildCombatTagList = StaticBuildCombatTag[]
+export type StaticBuildAliasList = StaticBuildAlias[]
+export type StaticBuildSourceNoteKeyList = StaticBuildSourceNoteKey[]
 export type StaticBuildDefenderBaseDefense = number
 export type StaticBuildDefenderResistance = number
 export type StaticBuildDefenseBonus = number
@@ -572,7 +579,8 @@ export type StaticBuildDiagnosticOwner =
   | "source"
   | "process"
 
-export type StaticBuildDiagnosticKeyList = string[]
+export type StaticBuildDiagnosticKey = string
+export type StaticBuildDiagnosticKeyList = StaticBuildDiagnosticKey[]
 
 export type StaticBuildDiagnosticMessage = string
 

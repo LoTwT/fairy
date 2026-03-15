@@ -2,7 +2,7 @@
 
 ## 仓库级 AI 协作文件
 
-当前 `static-build-resolver` contract 收口阶段已推进到 `V308`。`V307` 已完成 `skill-matrix row skillMultiplier` 的显式公开 type；当前正在收口 `summary map/list key`。
+当前 `static-build-resolver` contract 收口阶段已推进到 `V309`。`V308` 已完成 `summary map/list key` 的显式公开 type；当前正在收口剩余 `string[]` alias 的元素类型。
 
 ```
 .
