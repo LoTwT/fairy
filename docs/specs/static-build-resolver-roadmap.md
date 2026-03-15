@@ -11922,3 +11922,32 @@ caveatSummary` 这些兼容字段补齐。
 - `V332.2` 已完成：source-note key collection 已统一复用显式公开 contract
 - `V332.3` 已完成：校验与提交已通过
 - `V332.4` 已完成：roadmap、索引与架构文档已同步
+
+## 336. V333 skill-matrix helper map contracts
+
+### 336.1 目标
+
+`V333` 只解决一件事：
+
+- 把 `matrix.ts` 中 skill-matrix helper 仍直接使用的 `Map<string, ...>` 统一收成显式公开 contract。
+
+### 336.2 范围
+
+1. `StaticBuildSourceStatOccurrenceMap`
+2. `StaticBuildSkillMatrixGroupRowMap`
+3. `buildGeneratedSkillMatrixTemplates()`
+4. `summarizeSkillMatrix()`
+5. `build/index.ts` 对应 type export
+
+### 336.3 非目标
+
+1. 不修改任何 skill-matrix 行生成逻辑
+2. 不处理 `summary` 里 assumptions/unsupported 的 `Set`
+3. 不调整 group 排序或矩阵输出字段
+
+### 336.4 当前状态
+
+- `V333.1` 已完成：范围冻结到 skill-matrix helper map contract
+- `V333.2` 已完成：skill-matrix helper 已统一复用显式公开 contract
+- `V333.3` 已完成：校验与提交已通过
+- `V333.4` 已完成：roadmap、索引与架构文档已同步

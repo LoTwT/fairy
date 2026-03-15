@@ -12,11 +12,13 @@ import type {
   StaticBuildRowEffectSummaryAccumulator,
   StaticBuildSkillMatrixAttributeSource,
   StaticBuildSkillMatrixEffectSummaryItem,
+  StaticBuildSkillMatrixGroupRowMap,
   StaticBuildSkillMatrixRow,
   StaticBuildSkillMatrixRowMeta,
   StaticBuildSkillMatrixTemplateSource,
   StaticBuildSkillTag,
   StaticBuildSourceDamageViewRequirementSummary,
+  StaticBuildSourceStatOccurrenceMap,
   StaticBuildUnsupportedEffectList,
   StaticBuildVariableBucketList,
   StaticBuildVariableFormulaMultiplierList,
@@ -344,7 +346,7 @@ function buildGeneratedSkillMatrixTemplates(agentId: string) {
   const templates: SkillMatrixTemplate[] = []
 
   for (const skill of agent.skills) {
-    const occurrenceByName = new Map<string, number>()
+    const occurrenceByName: StaticBuildSourceStatOccurrenceMap = new Map()
     let damageIndex = 0
 
     for (const stat of skill.stats as GenericSkillStatItem[]) {
@@ -580,12 +582,12 @@ function summarizeSkillMatrix(rows: StaticBuildSkillMatrixRow[]) {
     ...new Set(rows.flatMap((row) => row.unsupportedEffects)),
   ]
   const groups = Array.from(
-    rows.reduce((map, row) => {
+    rows.reduce<StaticBuildSkillMatrixGroupRowMap>((map, row) => {
       const groupRows = map.get(row.group) ?? []
       groupRows.push(row)
       map.set(row.group, groupRows)
       return map
-    }, new Map<string, StaticBuildSkillMatrixRow[]>()),
+    }, new Map()),
   ).map(([group, groupRows]) => ({
     ...(() => {
       const assumptions: StaticBuildAssumptionList = [

@@ -269,6 +269,10 @@ export type StaticBuildReadonlySourceNoteKeyList =
 export type StaticBuildSourceNoteKeySet = Set<StaticBuildSourceNoteKey>
 export type StaticBuildAgentIdSet = Set<StaticBuildAgentId>
 export type StaticBuildWEngineIdSet = Set<StaticBuildWEngineId>
+export type StaticBuildSourceStatOccurrenceMap = Map<
+  StaticBuildSourceStatName,
+  StaticBuildSourceOccurrence
+>
 export type StaticBuildDefenderBaseDefense = number
 export type StaticBuildDefenderResistance = number
 export type StaticBuildDefenseBonus = number
@@ -1446,6 +1450,11 @@ export interface StaticBuildSkillMatrixGroupSummary {
   assumptions: StaticBuildAssumptionList
   unsupportedEffects: StaticBuildUnsupportedEffectList
 }
+
+export type StaticBuildSkillMatrixGroupRowMap = Map<
+  StaticBuildSkillMatrixGroupKey,
+  StaticBuildSkillMatrixRow[]
+>
 
 export interface StaticBuildSkillMatrixEffectSummaryItem {
   effectId: StaticBuildEffectId
