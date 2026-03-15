@@ -270,7 +270,7 @@ export interface StaticBuildResolvedSnapshotInput {
 }
 
 export interface StaticBuildDriveDiscSetInput {
-  id: StaticBuildCatalogId
+  id: StaticBuildDriveDiscId
   pieces: StaticBuildDriveDiscPieces
 }
 
@@ -278,9 +278,15 @@ export type StaticBuildDriveDiscSetsInput =
   | StaticBuildDriveDiscSetInput[]
   | undefined
 
+export interface StaticBuildEffectLoadoutInput {
+  agentId: StaticBuildAgentId
+  wEngineId?: StaticBuildWEngineId
+  driveDiscSets?: StaticBuildDriveDiscSetsInput
+}
+
 export interface StaticBuildLoadoutInput {
-  agentId: StaticBuildCatalogId
-  wEngineId?: StaticBuildCatalogId
+  agentId: StaticBuildAgentId
+  wEngineId?: StaticBuildWEngineId
   driveDiscSets?: StaticBuildDriveDiscSetsInput
   agentLevel?: StaticBuildAgentLevel
   agentMindscape?: StaticBuildAgentMindscape

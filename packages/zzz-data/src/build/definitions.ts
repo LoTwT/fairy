@@ -1,14 +1,17 @@
 import type { AnomalyType } from "../calculator/types.js"
 import type {
+  StaticBuildAgentId,
   StaticBuildAgentMindscape,
   StaticBuildAnomalyMastery,
   StaticBuildDamageType,
+  StaticBuildDriveDiscId,
   StaticBuildDriveDiscPieces,
   StaticBuildDynamicCountKey,
   StaticBuildDynamicFlagKey,
   StaticBuildDynamicSnapshotInput,
   StaticBuildDynamicValueKey,
   StaticBuildEffectDefinition,
+  StaticBuildEffectLoadoutInput,
   StaticBuildEnergyGenerationRate,
   StaticBuildResolvedSnapshotBucketKey,
   StaticBuildResolvedSnapshotInput,
@@ -22,6 +25,7 @@ import type {
   StaticBuildStateSnapshotInput,
   StaticBuildStateValueKey,
   StaticBuildValueContext,
+  StaticBuildWEngineId,
 } from "./types.js"
 import { calcDisorderDamageMultiplier } from "../calculator/factors.js"
 
@@ -4720,11 +4724,9 @@ const staticBuildSourceNotes: readonly StaticBuildSourceNote[] = [
   },
 ]
 
-export function getStaticBuildEffectsForLoadout(loadout: {
-  agentId: string
-  wEngineId?: string
-  driveDiscSets?: Array<{ id: string; pieces: 2 | 4 }>
-}): StaticBuildEffectDefinition[] {
+export function getStaticBuildEffectsForLoadout(
+  loadout: StaticBuildEffectLoadoutInput,
+): StaticBuildEffectDefinition[] {
   const effects = staticBuildEffectDefinitions.filter((effect) => {
     if (effect.sourceType === "agent")
       return effect.sourceId === loadout.agentId
@@ -4762,7 +4764,11 @@ export function getStaticBuildEffectsForLoadout(loadout: {
 
 export function hasStaticBuildEffectsForSource(
   sourceType: StaticBuildSourceType,
-  sourceId: string | undefined,
+  sourceId:
+    | StaticBuildAgentId
+    | StaticBuildWEngineId
+    | StaticBuildDriveDiscId
+    | undefined,
 ) {
   if (!sourceId) return false
   return staticBuildEffectDefinitions.some(

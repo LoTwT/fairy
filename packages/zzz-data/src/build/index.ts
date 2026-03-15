@@ -124,6 +124,7 @@ export type {
   StaticBuildEffectDefinition,
   StaticBuildEffectId,
   StaticBuildEffectLabel,
+  StaticBuildEffectLoadoutInput,
   StaticBuildEffectOverride,
   StaticBuildEffectStacks,
   StaticBuildEffectSummaryBucket,

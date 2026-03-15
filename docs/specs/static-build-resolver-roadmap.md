@@ -11500,5 +11500,33 @@ caveatSummary` 这些兼容字段补齐。
 
 - `V318.1` 已完成：范围冻结到 public helper id input contract
 - `V318.2` 已完成：对外 helper 的 `agentId / wEngineId / driveDiscId` 已统一复用显式公开 alias
-- `V318.3` 进行中：校验与提交
+- `V318.3` 已完成：校验与提交已通过
 - `V318.4` 已完成：roadmap、索引与架构文档已同步
+
+## 322. V319 loadout selection contracts
+
+### 322.1 目标
+
+`V319` 只解决一件事：
+
+- 把 `build/types.ts` 与 `definitions.ts` 中仍然宽泛使用 `StaticBuildCatalogId` 或 inline object 的 loadout 选择输入，统一收成显式公开 contract。
+
+### 322.2 范围
+
+1. `StaticBuildDriveDiscSetInput.id`
+2. `StaticBuildLoadoutInput.agentId / wEngineId`
+3. `StaticBuildEffectLoadoutInput`
+4. `getStaticBuildEffectsForLoadout()`
+
+### 322.3 非目标
+
+1. 不修改任何 runtime 逻辑
+2. 不调整 catalog 数据内容
+3. 不处理 source-note / source-coverage helper 的输入 contract
+
+### 322.4 当前状态
+
+- `V319.1` 已完成：范围冻结到 loadout selection contract
+- `V319.2` 已完成：loadout 选择输入已统一复用显式 agent/w-engine/drive-disc id alias
+- `V319.3` 进行中：校验与提交
+- `V319.4` 已完成：roadmap、索引与架构文档已同步
