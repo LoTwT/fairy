@@ -16,6 +16,7 @@ import {
 } from "zzz-data"
 import {
   buildIncompatibleWEngineResponse,
+  buildToolScopeLabels,
   buildUnsupportedAgentResponse,
   buildUnsupportedAnomalyTypeResponse,
   buildUnsupportedDriveDiscResponse,
@@ -54,7 +55,7 @@ export const resolveBuildSourceEntries = createTool({
     const agent = findCatalogItem(agentCatalog, input.agent)
     if (!agent) {
       return buildUnsupportedAgentResponse(
-        "source-entry collection",
+        buildToolScopeLabels.sourceEntryCollection,
         agentCatalog,
         input.agent,
       )
@@ -79,7 +80,7 @@ export const resolveBuildSourceEntries = createTool({
       : undefined
     if (input.wEngine && !wEngine) {
       return buildUnsupportedWEngineResponse(
-        "resolver",
+        buildToolScopeLabels.sourceEntryCollection,
         compatibleWEngines,
         input.wEngine,
       )
@@ -101,7 +102,7 @@ export const resolveBuildSourceEntries = createTool({
       )
       if (!disc) {
         return buildUnsupportedDriveDiscResponse(
-          "resolver",
+          buildToolScopeLabels.sourceEntryCollection,
           supportedStaticBuildDriveDiscs,
           discInput.name,
         )
@@ -135,8 +136,7 @@ export const resolveBuildSourceEntries = createTool({
       if (!fullPanel.success) {
         return {
           found: false,
-          message:
-            "anomaly / disorder 的 source-entry collection 需要完整 finalPanel（至少 attack、critRate、critDamage，以及异常相关面板）。",
+          message: `anomaly / disorder 的 ${buildToolScopeLabels.sourceEntryCollection} 需要完整 finalPanel（至少 attack、critRate、critDamage，以及异常相关面板）。`,
         }
       }
     }
@@ -159,11 +159,30 @@ export const resolveBuildSourceEntries = createTool({
     })
 
     if (collection.entries.length === 0) {
+      if (utilityOnly && !wEngine) {
+        return {
+          message: `当前 ${buildToolScopeLabels.sourceEntryCollection} 暂未覆盖 ${agent.name} 的可返回条目；${buildToolScopeLabels.sourceUtilityView} 目前只覆盖音擎来源。`,
+          found: false,
+          supportedUtilityWEngines,
+        }
+      }
+
+      if (!utilityOnly && !wEngine) {
+        return {
+          found: false,
+          message: `当前 ${buildToolScopeLabels.sourceEntryCollection} 暂未覆盖 ${agent.name} 这套构筑的额外来源条目。`,
+          supportedSourceViewAgents: catalogNames(
+            supportedStaticBuildSourceViewAgents,
+          ),
+          supportedUtilityWEngines,
+        }
+      }
+
       return {
         found: false,
         message: utilityOnly
-          ? `当前 source-entry collection 暂未覆盖 ${agent.name} 的可返回条目；utility entries 目前只覆盖音擎来源。`
-          : `当前 source-entry collection 暂未覆盖 ${agent.name} 这套构筑的额外来源条目。`,
+          ? `当前 ${buildToolScopeLabels.sourceEntryCollection} 暂未覆盖 ${agent.name} 的可返回条目；${buildToolScopeLabels.sourceUtilityView} 目前只覆盖音擎来源。`
+          : `当前 ${buildToolScopeLabels.sourceEntryCollection} 暂未覆盖 ${agent.name} 这套构筑的额外来源条目。`,
         supportedSourceViewAgents: catalogNames(
           supportedStaticBuildSourceViewAgents,
         ),

@@ -901,9 +901,37 @@ describe("resolveBuildSourceEntries tool", () => {
     })
 
     expect((result as any).found).toBe(false)
+    expect((result as any).message).toContain("source-entry collection")
     expect((result as any).message).toContain(
-      "utility entries 目前只覆盖音擎来源",
+      "source-specific utility view 目前只覆盖音擎来源",
     )
     expect((result as any).supportedUtilityWEngines).toContain("「月相」-朔")
+  })
+
+  it("uses source-entry-collection scope labels for unsupported w-engines", async () => {
+    const result = await runTool(resolveBuildSourceEntries, {
+      agent: "爱丽丝",
+      wEngine: "不存在的音擎",
+      finalPanel: {
+        attack: 2800,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 200,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "enhancedSpecial",
+        damageMultiplier: "500%",
+        attribute: "物理",
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(false)
+    expect((result as any).message).toContain("source-entry collection")
+    expect((result as any).supportedWEngines).toContain("嵌合编译器")
   })
 })

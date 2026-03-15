@@ -11,6 +11,7 @@ import {
 } from "zzz-data"
 import {
   buildIncompatibleWEngineResponse,
+  buildToolScopeLabels,
   buildUnsupportedAgentResponse,
   buildUnsupportedAnomalyTypeResponse,
   buildUnsupportedDriveDiscResponse,
@@ -52,7 +53,7 @@ export const resolveBuildTriggerMatrix = createTool({
     )
     if (!agent) {
       return buildUnsupportedAgentResponse(
-        "trigger-entry matrix",
+        buildToolScopeLabels.triggerMatrix,
         supportedStaticBuildTriggerMatrixAgents,
         input.agent,
       )
@@ -66,7 +67,7 @@ export const resolveBuildTriggerMatrix = createTool({
         agent.specialty,
       )
       return buildUnsupportedWEngineResponse(
-        "trigger-entry matrix",
+        buildToolScopeLabels.triggerMatrix,
         compatibleWEngines,
         input.wEngine,
       )
@@ -91,7 +92,7 @@ export const resolveBuildTriggerMatrix = createTool({
       )
       if (!disc) {
         return buildUnsupportedDriveDiscResponse(
-          "trigger-entry matrix",
+          buildToolScopeLabels.triggerMatrix,
           supportedStaticBuildDriveDiscs,
           discInput.name,
         )

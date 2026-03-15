@@ -8,6 +8,18 @@ export interface CatalogItem {
   specialty?: string
 }
 
+export const buildToolScopeLabels = {
+  resolver: "resolver",
+  skillMatrix: "skill matrix",
+  triggerMatrix: "trigger-entry matrix",
+  sourceDamageView: "source-specific damage view",
+  sourceUtilityView: "source-specific utility view",
+  sourceEntryCollection: "source-entry collection",
+} as const
+
+export type BuildToolScopeLabel =
+  (typeof buildToolScopeLabels)[keyof typeof buildToolScopeLabels]
+
 export const specialtyLabels = {
   Attack: "强攻",
   Stun: "击破",
@@ -327,7 +339,7 @@ export function candidateNames<T extends CatalogItem>(
 }
 
 export function buildUnsupportedAgentResponse<T extends CatalogItem>(
-  scopeLabel: string,
+  scopeLabel: BuildToolScopeLabel,
   items: readonly T[],
   query: string,
 ) {
@@ -340,7 +352,7 @@ export function buildUnsupportedAgentResponse<T extends CatalogItem>(
 }
 
 export function buildUnsupportedWEngineResponse<T extends CatalogItem>(
-  scopeLabel: string,
+  scopeLabel: BuildToolScopeLabel,
   items: readonly T[],
   query: string,
 ) {
@@ -370,7 +382,7 @@ export function buildIncompatibleWEngineResponse<
 }
 
 export function buildUnsupportedDriveDiscResponse<T extends CatalogItem>(
-  scopeLabel: string,
+  scopeLabel: BuildToolScopeLabel,
   items: readonly T[],
   query: string,
 ) {
@@ -395,6 +407,40 @@ export function buildUnsupportedAnomalyTypeResponse(query: string) {
       "auricInk",
       "frost",
     ],
+  }
+}
+
+export function buildUncoveredSourceDamageViewResponse<T extends CatalogItem>(
+  items: readonly T[],
+  query: string,
+) {
+  return {
+    found: false as const,
+    message: `当前 ${buildToolScopeLabels.sourceDamageView} 暂未覆盖代理人「${query}」`,
+    supportedAgents: catalogNames(items),
+    candidates: candidateNames(items, query),
+  }
+}
+
+export function buildMissingSourceUtilityWEngineResponse<T extends CatalogItem>(
+  agentName: string,
+  items: readonly T[],
+) {
+  return {
+    found: false as const,
+    message: `请先提供 ${agentName} 当前使用的音擎；${buildToolScopeLabels.sourceUtilityView} 目前只覆盖音擎来源。`,
+    supportedWEngines: catalogNames(items),
+  }
+}
+
+export function buildUncoveredSourceUtilityWEngineResponse<
+  T extends CatalogItem,
+>(items: readonly T[], query: string) {
+  return {
+    found: false as const,
+    message: `当前 ${buildToolScopeLabels.sourceUtilityView} 暂未覆盖音擎「${query}」`,
+    supportedWEngines: catalogNames(items),
+    candidates: candidateNames(items, query),
   }
 }
 

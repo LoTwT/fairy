@@ -460,4 +460,14 @@ describe("resolveBuildSourceUtilityViews tool", () => {
       ]),
     )
   })
+
+  it("uses source-utility-view scope labels when w-engine input is missing", async () => {
+    const result = await runTool(resolveBuildSourceUtilityViews, {
+      agent: "猫又",
+    })
+
+    expect((result as any).found).toBe(false)
+    expect((result as any).message).toContain("source-specific utility view")
+    expect((result as any).supportedWEngines).toContain("「月相」-朔")
+  })
 })

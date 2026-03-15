@@ -394,6 +394,33 @@ describe("resolveBuildSourceDamageViews tool", () => {
     )
   })
 
+  it("uses source-damage-view scope labels for unsupported w-engines", async () => {
+    const result = await runTool(resolveBuildSourceDamageViews, {
+      agent: "爱丽丝",
+      wEngine: "不存在的音擎",
+      finalPanel: {
+        attack: 2800,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 200,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "enhancedSpecial",
+        damageMultiplier: "500%",
+        attribute: "物理",
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(false)
+    expect((result as any).message).toContain("source-specific damage view")
+    expect((result as any).supportedWEngines).toContain("嵌合编译器")
+  })
+
   it("returns Aria exflow as a covered delta source view", async () => {
     const result = await runTool(resolveBuildSourceDamageViews, {
       agent: "爱芮",

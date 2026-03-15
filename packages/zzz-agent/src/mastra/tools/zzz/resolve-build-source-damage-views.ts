@@ -12,12 +12,12 @@ import {
 } from "zzz-data"
 import {
   buildIncompatibleWEngineResponse,
+  buildToolScopeLabels,
+  buildUncoveredSourceDamageViewResponse,
   buildUnsupportedAgentResponse,
   buildUnsupportedAnomalyTypeResponse,
   buildUnsupportedDriveDiscResponse,
   buildUnsupportedWEngineResponse,
-  candidateNames,
-  catalogNames,
   findCatalogItem,
   normalizeAnomalyType,
   resolveBuildInputSchema,
@@ -52,7 +52,7 @@ export const resolveBuildSourceDamageViews = createTool({
     const agent = findCatalogItem(supportedStaticBuildAgents, input.agent)
     if (!agent) {
       return buildUnsupportedAgentResponse(
-        "source-specific damage view",
+        buildToolScopeLabels.sourceDamageView,
         supportedStaticBuildSourceViewAgents,
         input.agent,
       )
@@ -66,7 +66,7 @@ export const resolveBuildSourceDamageViews = createTool({
         agent.specialty,
       )
       return buildUnsupportedWEngineResponse(
-        "resolver",
+        buildToolScopeLabels.sourceDamageView,
         compatibleWEngines,
         input.wEngine,
       )
@@ -91,7 +91,7 @@ export const resolveBuildSourceDamageViews = createTool({
       )
       if (!disc) {
         return buildUnsupportedDriveDiscResponse(
-          "resolver",
+          buildToolScopeLabels.sourceDamageView,
           supportedStaticBuildDriveDiscs,
           discInput.name,
         )
@@ -129,15 +129,10 @@ export const resolveBuildSourceDamageViews = createTool({
       })
 
       if (views.entries.length === 0) {
-        return {
-          found: false,
-          message: `当前 source-specific damage view 暂未覆盖代理人「${agent.name}」`,
-          supportedAgents: catalogNames(supportedStaticBuildSourceViewAgents),
-          candidates: candidateNames(
-            supportedStaticBuildSourceViewAgents,
-            input.agent,
-          ),
-        }
+        return buildUncoveredSourceDamageViewResponse(
+          supportedStaticBuildSourceViewAgents,
+          agent.name,
+        )
       }
 
       return {
@@ -170,15 +165,10 @@ export const resolveBuildSourceDamageViews = createTool({
     })
 
     if (views.entries.length === 0) {
-      return {
-        found: false,
-        message: `当前 source-specific damage view 暂未覆盖代理人「${agent.name}」`,
-        supportedAgents: catalogNames(supportedStaticBuildSourceViewAgents),
-        candidates: candidateNames(
-          supportedStaticBuildSourceViewAgents,
-          input.agent,
-        ),
-      }
+      return buildUncoveredSourceDamageViewResponse(
+        supportedStaticBuildSourceViewAgents,
+        agent.name,
+      )
     }
 
     return {

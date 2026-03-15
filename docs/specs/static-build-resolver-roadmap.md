@@ -7964,6 +7964,39 @@ caveatSummary` 这些兼容字段补齐。
 - `V204.3` 已完成：现有测试与 runtime 校验已覆盖
 - `V204.4` 已完成：roadmap、索引与架构文档已同步
 
+## 208. V205 build-tool unsupported scope alignment
+
+`V204` 收口后，`zzz-agent` 高层 build tools 在 unsupported / coverage-gap 返回里仍有一层不一致：
+
+1. `source-damage-view`、`source-utility-view`、`source-entry collection` 仍混用 `"resolver"` 作为 message scope label
+2. `source-view` coverage-gap 已有共享语义，但仍散落在各 tool 内手工拼装
+3. `source-entry collection` 的 unsupported key 与 standalone views 不同，不能为了复用 helper 而退化字段名
+
+`V205` 只解决这一件事：
+
+1. 统一高层 build tools 的 unsupported scope label 与 coverage-gap 组装语义，不改变成功返回 contract
+
+### 208.1 分阶段
+
+1. `V205.1` scope freeze
+2. `V205.2` shared helper / runtime alignment
+3. `V205.3` tests / prompt alignment
+4. `V205.4` docs closeout
+
+### 208.2 非目标
+
+1. 不改变底层 `zzz-data` runtime
+2. 不改变高层 tool 的成功返回 shape
+3. 不改变 source-entry collection 的自有 key
+4. 不新增新的 build 计算能力
+
+### 208.3 当前状态
+
+- `V205.1` 已完成：冻结到 build-tool unsupported scope alignment
+- `V205.2` 已完成：shared helper 与 `source-view / source-entry` 高层 tool 的 scope label 已统一
+- `V205.3` 已完成：高层回归测试已覆盖 scope label 与 key 稳定性
+- `V205.4` 已完成：roadmap、索引与架构文档已同步
+
 ## 174. V171 explicit compact top-level summary effect summaries
 
 `V170` 收口后，compact contract 中下一批仍直接复用 raw effect summary item type 的显式缺口主要集中在 top-level `summary`：

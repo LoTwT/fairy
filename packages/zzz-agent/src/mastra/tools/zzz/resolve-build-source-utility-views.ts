@@ -11,11 +11,12 @@ import {
 } from "zzz-data"
 import {
   buildIncompatibleWEngineResponse,
+  buildMissingSourceUtilityWEngineResponse,
+  buildToolScopeLabels,
+  buildUncoveredSourceUtilityWEngineResponse,
   buildUnsupportedAgentResponse,
   buildUnsupportedDriveDiscResponse,
   buildUnsupportedWEngineResponse,
-  candidateNames,
-  catalogNames,
   findCatalogItem,
   resolveBuildSourceUtilityInputSchema,
 } from "./resolve-build-shared"
@@ -40,7 +41,7 @@ export const resolveBuildSourceUtilityViews = createTool({
     )
     if (!agent) {
       return buildUnsupportedAgentResponse(
-        "source-specific utility view",
+        buildToolScopeLabels.sourceUtilityView,
         supportedStaticBuildUtilityAgents,
         input.agent,
       )
@@ -55,7 +56,7 @@ export const resolveBuildSourceUtilityViews = createTool({
       : undefined
     if (input.wEngine && !wEngine) {
       return buildUnsupportedWEngineResponse(
-        "resolver",
+        buildToolScopeLabels.sourceUtilityView,
         compatibleWEngines,
         input.wEngine,
       )
@@ -70,15 +71,12 @@ export const resolveBuildSourceUtilityViews = createTool({
     }
 
     if (!wEngine) {
-      return {
-        found: false,
-        message: `请先提供 ${agent.name} 当前使用的音擎；utility / energy view 目前只覆盖音擎来源。`,
-        supportedWEngines: catalogNames(
-          supportedStaticBuildSourceUtilityViewWEngines.filter(
-            (item) => item.specialty === agent.specialty,
-          ),
+      return buildMissingSourceUtilityWEngineResponse(
+        agent.name,
+        supportedStaticBuildSourceUtilityViewWEngines.filter(
+          (item) => item.specialty === agent.specialty,
         ),
-      }
+      )
     }
 
     const driveDiscSets = []
@@ -89,7 +87,7 @@ export const resolveBuildSourceUtilityViews = createTool({
       )
       if (!disc) {
         return buildUnsupportedDriveDiscResponse(
-          "resolver",
+          buildToolScopeLabels.sourceUtilityView,
           supportedStaticBuildDriveDiscs,
           discInput.name,
         )
@@ -111,21 +109,12 @@ export const resolveBuildSourceUtilityViews = createTool({
     })
 
     if (views.entries.length === 0) {
-      return {
-        found: false,
-        message: `当前 source-specific utility view 暂未覆盖音擎「${wEngine.name}」`,
-        supportedWEngines: catalogNames(
-          supportedStaticBuildSourceUtilityViewWEngines.filter(
-            (item) => item.specialty === agent.specialty,
-          ),
+      return buildUncoveredSourceUtilityWEngineResponse(
+        supportedStaticBuildSourceUtilityViewWEngines.filter(
+          (item) => item.specialty === agent.specialty,
         ),
-        candidates: candidateNames(
-          supportedStaticBuildSourceUtilityViewWEngines.filter(
-            (item) => item.specialty === agent.specialty,
-          ),
-          input.wEngine,
-        ),
-      }
+        wEngine.name,
+      )
     }
 
     return {

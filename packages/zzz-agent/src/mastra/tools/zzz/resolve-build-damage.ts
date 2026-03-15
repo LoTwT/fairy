@@ -11,6 +11,7 @@ import {
 } from "zzz-data"
 import {
   buildIncompatibleWEngineResponse,
+  buildToolScopeLabels,
   buildUnsupportedAgentResponse,
   buildUnsupportedAnomalyTypeResponse,
   buildUnsupportedDriveDiscResponse,
@@ -37,7 +38,7 @@ export const resolveBuildDamage = createTool({
     const agent = findCatalogItem(supportedStaticBuildAgents, input.agent)
     if (!agent) {
       return buildUnsupportedAgentResponse(
-        "resolver",
+        buildToolScopeLabels.resolver,
         supportedStaticBuildAgents,
         input.agent,
       )
@@ -51,7 +52,7 @@ export const resolveBuildDamage = createTool({
         agent.specialty,
       )
       return buildUnsupportedWEngineResponse(
-        "resolver",
+        buildToolScopeLabels.resolver,
         compatibleWEngines,
         input.wEngine,
       )
@@ -76,7 +77,7 @@ export const resolveBuildDamage = createTool({
       )
       if (!disc) {
         return buildUnsupportedDriveDiscResponse(
-          "resolver",
+          buildToolScopeLabels.resolver,
           supportedStaticBuildDriveDiscs,
           discInput.name,
         )
