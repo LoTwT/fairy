@@ -3,6 +3,7 @@ import type {
   ResolveStaticBuildSkillMatrixInput,
   ResolveStaticBuildSkillMatrixResult,
   StaticBuildAssumptionList,
+  StaticBuildAssumptionSet,
   StaticBuildBucketValueMap,
   StaticBuildCombatTagList,
   StaticBuildDamageType,
@@ -20,6 +21,7 @@ import type {
   StaticBuildSourceDamageViewRequirementSummary,
   StaticBuildSourceStatOccurrenceMap,
   StaticBuildUnsupportedEffectList,
+  StaticBuildUnsupportedEffectSet,
   StaticBuildVariableBucketList,
   StaticBuildVariableFormulaMultiplierList,
 } from "./types.js"
@@ -575,11 +577,15 @@ function summarizeSkillMatrix(rows: StaticBuildSkillMatrixRow[]) {
   const { commonBuckets, variableBuckets } = summarizeBuckets(rows)
   const { commonFormulaMultipliers, variableFormulaMultipliers } =
     summarizeFormulaMultipliers(rows)
-  const assumptions: StaticBuildAssumptionList = [
-    ...new Set(rows.flatMap((row) => row.assumptions)),
-  ]
+  const assumptionSet: StaticBuildAssumptionSet = new Set(
+    rows.flatMap((row) => row.assumptions),
+  )
+  const assumptions: StaticBuildAssumptionList = [...assumptionSet]
+  const unsupportedEffectSet: StaticBuildUnsupportedEffectSet = new Set(
+    rows.flatMap((row) => row.unsupportedEffects),
+  )
   const unsupportedEffects: StaticBuildUnsupportedEffectList = [
-    ...new Set(rows.flatMap((row) => row.unsupportedEffects)),
+    ...unsupportedEffectSet,
   ]
   const groups = Array.from(
     rows.reduce<StaticBuildSkillMatrixGroupRowMap>((map, row) => {
@@ -590,11 +596,15 @@ function summarizeSkillMatrix(rows: StaticBuildSkillMatrixRow[]) {
     }, new Map()),
   ).map(([group, groupRows]) => ({
     ...(() => {
-      const assumptions: StaticBuildAssumptionList = [
-        ...new Set(groupRows.flatMap((row) => row.assumptions)),
-      ]
+      const assumptionSet: StaticBuildAssumptionSet = new Set(
+        groupRows.flatMap((row) => row.assumptions),
+      )
+      const assumptions: StaticBuildAssumptionList = [...assumptionSet]
+      const unsupportedEffectSet: StaticBuildUnsupportedEffectSet = new Set(
+        groupRows.flatMap((row) => row.unsupportedEffects),
+      )
       const unsupportedEffects: StaticBuildUnsupportedEffectList = [
-        ...new Set(groupRows.flatMap((row) => row.unsupportedEffects)),
+        ...unsupportedEffectSet,
       ]
       return {
         assumptionSummary: summarizeAssumptions(assumptions),
@@ -2096,8 +2106,11 @@ export function resolveStaticBuildSkillMatrix(
       `${agent.name} 当前使用通用技能矩阵模板生成，技能标签来自 stat name 归一化，未达到 curated 手工模板的展示精度`,
     )
   }
-  const unsupportedEffects = [
-    ...new Set(rows.flatMap((row) => row.unsupportedEffects)),
+  const unsupportedEffectSet: StaticBuildUnsupportedEffectSet = new Set(
+    rows.flatMap((row) => row.unsupportedEffects),
+  )
+  const unsupportedEffects: StaticBuildUnsupportedEffectList = [
+    ...unsupportedEffectSet,
   ]
 
   return {

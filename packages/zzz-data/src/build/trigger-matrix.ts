@@ -3,6 +3,7 @@ import type {
   ResolveStaticBuildTriggerMatrixResult,
   StaticBuildAgentId,
   StaticBuildAssumptionList,
+  StaticBuildAssumptionSet,
   StaticBuildEffectSummaryAccumulatorMap,
   StaticBuildEntryCaveatSummary,
   StaticBuildRowEffectSummaryAccumulator,
@@ -120,7 +121,11 @@ export function resolveStaticBuildTriggerMatrix(
     ...views.entries.map((entry) => toTriggerMatrixRow(entry)),
   ].toSorted(compareTriggerMatrixRows)
 
-  const assumptions = [...new Set([...build.assumptions, ...views.assumptions])]
+  const assumptionSet: StaticBuildAssumptionSet = new Set([
+    ...build.assumptions,
+    ...views.assumptions,
+  ])
+  const assumptions: StaticBuildAssumptionList = [...assumptionSet]
   const summary = summarizeTriggerMatrixRows(rows, assumptions)
 
   return {

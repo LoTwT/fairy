@@ -11951,3 +11951,33 @@ caveatSummary` 这些兼容字段补齐。
 - `V333.2` 已完成：skill-matrix helper 已统一复用显式公开 contract
 - `V333.3` 已完成：校验与提交已通过
 - `V333.4` 已完成：roadmap、索引与架构文档已同步
+
+## 337. V334 assumption and unsupported-effect set contracts
+
+### 337.1 目标
+
+`V334` 只解决一件事：
+
+- 把 `skill-matrix` 与 `trigger-matrix` 中 assumptions / unsupported-effects 去重时仍直接使用的 `Set<string>` 统一收成显式公开 contract。
+
+### 337.2 范围
+
+1. `StaticBuildAssumptionSet`
+2. `StaticBuildUnsupportedEffectSet`
+3. `summarizeSkillMatrix()`
+4. `resolveStaticBuildSkillMatrix()`
+5. `resolveStaticBuildTriggerMatrix()`
+6. `build/index.ts` 对应 type export
+
+### 337.3 非目标
+
+1. 不修改 assumptions 或 unsupported-effects 文案
+2. 不改变 summary 聚合逻辑
+3. 不处理 `source-entry` 等其他普通数组复制
+
+### 337.4 当前状态
+
+- `V334.1` 已完成：范围冻结到 assumption / unsupported-effect set contract
+- `V334.2` 已完成：`skill-matrix / trigger-matrix` 已统一复用显式公开 set contract
+- `V334.3` 待完成：校验与提交
+- `V334.4` 待完成：roadmap、索引与架构文档同步

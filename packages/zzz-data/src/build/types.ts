@@ -260,6 +260,9 @@ export type StaticBuildResolvedSnapshotMultiplierFactorMap = Partial<
 export type StaticBuildAssumptionList = StaticBuildAssumptionText[]
 export type StaticBuildUnsupportedEffectList =
   StaticBuildUnsupportedEffectText[]
+export type StaticBuildAssumptionSet = Set<StaticBuildAssumptionText>
+export type StaticBuildUnsupportedEffectSet =
+  Set<StaticBuildUnsupportedEffectText>
 export type StaticBuildCombatTagList = StaticBuildCombatTag[]
 export type StaticBuildCombatTagSet = Set<StaticBuildCombatTag>
 export type StaticBuildAliasList = StaticBuildAlias[]

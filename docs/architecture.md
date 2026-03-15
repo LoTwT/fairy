@@ -318,3 +318,7 @@ const total = base * bonus * crit * resistance * custom
 - **derivedFields 机制**：部分表（agent-skill、agent-cinema、agent-skill-desc）只有代理人名称没有 ID，通过 `derivedFields` 从 agent-stat 跨表注入 `agentId`
 - **内部类型**：generate 脚本将 xlsx 列结构写入 `scripts/generate/types/`，仅供内部参考，不对外暴露
 - **公开类型**：`src/index.ts` 手动维护，与数据源无关，后续随爬虫数据结构确定后重建
+
+## Build Resolver 最新阶段
+
+- `V334` assumption and unsupported-effect set contracts：当前阶段进行中；`skill-matrix / trigger-matrix` 中 assumptions 与 unsupported-effects 去重仍直接使用的 `Set<string>` 已开始统一收成显式公开 contract
