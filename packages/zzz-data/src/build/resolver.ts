@@ -82,6 +82,12 @@ const effectBucketLabels = {
   skillMultiplierFactor: "技能倍率",
 } as const
 
+function getThresholdEntries<TKey extends string>(
+  record: Partial<Record<TKey, number>>,
+): Array<[TKey, number]> {
+  return Object.entries(record) as Array<[TKey, number]>
+}
+
 function parseSkillMultiplier(value: number | string): number {
   if (typeof value === "number") return value
   const trimmed = value.trim()
@@ -558,13 +564,8 @@ function effectMatches(
 
   if (
     condition.minimumDynamicCounts &&
-    Object.entries(condition.minimumDynamicCounts).some(
-      ([key, value]) =>
-        (context.dynamicSnapshot?.counts?.[
-          key as keyof NonNullable<
-            NonNullable<typeof context.dynamicSnapshot>["counts"]
-          >
-        ] ?? 0) < (value ?? 0),
+    getThresholdEntries(condition.minimumDynamicCounts).some(
+      ([key, value]) => (context.dynamicSnapshot?.counts?.[key] ?? 0) < value,
     )
   ) {
     return false
@@ -572,13 +573,8 @@ function effectMatches(
 
   if (
     condition.minimumDynamicValues &&
-    Object.entries(condition.minimumDynamicValues).some(
-      ([key, value]) =>
-        (context.dynamicSnapshot?.values?.[
-          key as keyof NonNullable<
-            NonNullable<typeof context.dynamicSnapshot>["values"]
-          >
-        ] ?? 0) < (value ?? 0),
+    getThresholdEntries(condition.minimumDynamicValues).some(
+      ([key, value]) => (context.dynamicSnapshot?.values?.[key] ?? 0) < value,
     )
   ) {
     return false
@@ -586,13 +582,8 @@ function effectMatches(
 
   if (
     condition.minimumStateValues &&
-    Object.entries(condition.minimumStateValues).some(
-      ([key, value]) =>
-        (context.stateSnapshot?.values?.[
-          key as keyof NonNullable<
-            NonNullable<typeof context.stateSnapshot>["values"]
-          >
-        ] ?? 0) < (value ?? 0),
+    getThresholdEntries(condition.minimumStateValues).some(
+      ([key, value]) => (context.stateSnapshot?.values?.[key] ?? 0) < value,
     )
   ) {
     return false
