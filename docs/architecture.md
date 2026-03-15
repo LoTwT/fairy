@@ -2,7 +2,7 @@
 
 ## 仓库级 AI 协作文件
 
-当前 `static-build-resolver` contract 收口阶段已推进到 `V309`。`V308` 已完成 `summary map/list key` 的显式公开 type；当前正在收口剩余 `string[]` alias 的元素类型。
+当前 `static-build-resolver` contract 收口阶段已推进到 `V310`。`V309` 已完成剩余 `string[]` alias 的元素类型；当前正在收口 `compact.ts` 顶层与 skill-matrix 中复用最频繁的匿名 list/map/key contract。
 
 ```
 .

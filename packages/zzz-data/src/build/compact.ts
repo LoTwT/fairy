@@ -20,18 +20,24 @@ import type {
   ResolveStaticBuildSourceEntriesResult,
   ResolveStaticBuildSourceUtilityViewsResult,
   ResolveStaticBuildTriggerMatrixResult,
+  StaticBuildAliasList,
+  StaticBuildAssumptionList,
   StaticBuildAssumptionSummary,
   StaticBuildBaseMode,
   StaticBuildBucket,
   StaticBuildCaveatSummary,
+  StaticBuildCombatTagList,
   StaticBuildDiagnosticEntry,
+  StaticBuildDiagnosticKeyList,
   StaticBuildDiagnosticKind,
   StaticBuildDiagnosticOwner,
   StaticBuildDiagnosticSummary,
   StaticBuildEntryCaveatSummary,
   StaticBuildEntryDamage,
+  StaticBuildFormulaMultiplierMap,
   StaticBuildMode,
   StaticBuildProfileResult,
+  StaticBuildRequirementKey,
   StaticBuildRequirementSummary,
   StaticBuildRequirementSummaryGroup,
   StaticBuildResolvedBuckets,
@@ -44,6 +50,7 @@ import type {
   StaticBuildSkillMatrixRowDamageSummary,
   StaticBuildSkillMatrixRowMeta,
   StaticBuildSkillMatrixSummary,
+  StaticBuildSkillQualifierList,
   StaticBuildSkillTag,
   StaticBuildSourceDamageViewEffectSummaryItem,
   StaticBuildSourceDamageViewEntry,
@@ -57,6 +64,7 @@ import type {
   StaticBuildSourceNoteGuidance,
   StaticBuildSourceNoteGuidanceKind,
   StaticBuildSourceNoteGuidanceTarget,
+  StaticBuildSourceNoteKeyList,
   StaticBuildSourceNoteOwner,
   StaticBuildSourceNoteStatus,
   StaticBuildSourceNoteSummary,
@@ -72,6 +80,7 @@ import type {
   StaticBuildTriggerMatrixRow,
   StaticBuildTriggerMatrixRowMeta,
   StaticBuildTriggerMatrixSummary,
+  StaticBuildUnsupportedEffectList,
 } from "./types.js"
 
 export type CompactStaticBuildSourceType = "agent" | "w-engine" | "drive-disc"
@@ -157,6 +166,17 @@ export type CompactStaticBuildTraceStatus =
   | "unsupported"
 
 export type CompactStaticBuildSkillTag = StaticBuildSkillTag
+export type CompactStaticBuildFormulaMultiplierMap =
+  StaticBuildFormulaMultiplierMap
+export type CompactStaticBuildAliasList = StaticBuildAliasList
+export type CompactStaticBuildAssumptionList = StaticBuildAssumptionList
+export type CompactStaticBuildUnsupportedEffectList =
+  StaticBuildUnsupportedEffectList
+export type CompactStaticBuildDiagnosticKeyList = StaticBuildDiagnosticKeyList
+export type CompactStaticBuildSourceNoteKeyList = StaticBuildSourceNoteKeyList
+export type CompactStaticBuildCombatTagList = StaticBuildCombatTagList
+export type CompactStaticBuildSkillQualifierList = StaticBuildSkillQualifierList
+export type CompactStaticBuildRequirementKey = StaticBuildRequirementKey
 
 export interface CompactStaticBuildResult {
   profile: CompactStaticBuildProfile
@@ -178,8 +198,8 @@ export interface CompactStaticBuildResult {
   }
   diagnostics?: CompactStaticBuildDiagnosticEntry[]
   sourceNotes?: CompactStaticBuildSourceNoteEntry[]
-  assumptions?: string[]
-  unsupportedEffects?: string[]
+  assumptions?: CompactStaticBuildAssumptionList
+  unsupportedEffects?: CompactStaticBuildUnsupportedEffectList
   damageParams?:
     | CompactStaticBuildNormalDamageParams
     | CompactStaticBuildSheerDamageParams
@@ -194,7 +214,7 @@ export interface CompactStaticBuildResolveSummary {
   expectedTotal: number
   critTotal: number
   noCritTotal: number
-  formulaMultipliers: Record<string, number>
+  formulaMultipliers: CompactStaticBuildFormulaMultiplierMap
   assumptionCount: number
   diagnosticCount: number
   sourceNoteCount: number
@@ -225,7 +245,7 @@ export interface CompactStaticBuildProfile {
 export interface CompactStaticBuildCatalogEntry {
   id: string
   name: string
-  aliases: string[]
+  aliases: CompactStaticBuildAliasList
 }
 
 export interface CompactStaticBuildAgentCatalogEntry extends CompactStaticBuildCatalogEntry {
@@ -242,7 +262,7 @@ export interface CompactStaticBuildWEngineCatalogEntry extends CompactStaticBuil
 export interface CompactStaticBuildDriveDiscSet {
   id: string
   name: string
-  aliases: string[]
+  aliases: CompactStaticBuildAliasList
   pieces: 2 | 4
 }
 
@@ -413,7 +433,7 @@ export interface CompactStaticBuildDiagnosticEntry {
   owner: StaticBuildDiagnosticOwner
   sourceType?: CompactStaticBuildSourceType
   sourceId?: string
-  keys: string[]
+  keys: CompactStaticBuildDiagnosticKeyList
   message: string
 }
 
@@ -451,7 +471,7 @@ export interface CompactStaticBuildSourceNoteEntry {
   owner: StaticBuildSourceNoteOwner
   status: StaticBuildSourceNoteStatus
   guidance: CompactStaticBuildSourceNoteGuidance
-  keys: string[]
+  keys: CompactStaticBuildSourceNoteKeyList
   message: string
 }
 
@@ -528,13 +548,13 @@ export type CompactStaticBuildSourceUtilityViewRequirementSummary =
 
 export interface CompactStaticBuildSourceDamageViewRequirement {
   kind: StaticBuildSourceDamageViewRequirementKind
-  key: string
+  key: CompactStaticBuildRequirementKey
   satisfied: boolean
 }
 
 export interface CompactStaticBuildSourceUtilityViewRequirement {
   kind: StaticBuildSourceUtilityViewRequirementKind
-  key: string
+  key: CompactStaticBuildRequirementKey
   satisfied: boolean
 }
 
@@ -593,7 +613,7 @@ export interface StaticBuildCompactSkillMatrixRow {
   skillTag: CompactStaticBuildSkillTag
   damageType: CompactStaticBuildSourceDamageType
   attribute: CompactStaticBuildAgentAttribute
-  combatTags: string[]
+  combatTags: CompactStaticBuildCombatTagList
   skillMultiplier: string
   damage: StaticBuildSkillMatrixRowDamageSummary
   summary: CompactStaticBuildResolveSummary
@@ -605,8 +625,8 @@ export interface StaticBuildCompactSkillMatrixRow {
   requirementSummary: CompactStaticBuildSourceDamageViewRequirementSummary
   assumptionSummary: CompactStaticBuildAssumptionSummary
   caveatSummary: CompactStaticBuildCaveatSummary
-  assumptions?: string[]
-  unsupportedEffects?: string[]
+  assumptions?: CompactStaticBuildAssumptionList
+  unsupportedEffects?: CompactStaticBuildUnsupportedEffectList
   build?: CompactStaticBuildResult
 }
 
@@ -622,8 +642,8 @@ export interface CompactStaticBuildSkillMatrixResult {
   caveatSummary: CompactStaticBuildCaveatSummary
   diagnosticSummary: CompactStaticBuildDiagnosticSummary
   sourceNoteSummary: CompactStaticBuildSourceNoteSummary
-  assumptions?: string[]
-  unsupportedEffects?: string[]
+  assumptions?: CompactStaticBuildAssumptionList
+  unsupportedEffects?: CompactStaticBuildUnsupportedEffectList
   rows: StaticBuildCompactSkillMatrixRow[]
 }
 
@@ -631,7 +651,7 @@ export interface CompactStaticBuildSkillMatrixRowMeta {
   order: number
   actionName: string
   skillName: string
-  qualifiers: string[]
+  qualifiers: CompactStaticBuildSkillQualifierList
   canonicalLabel: string
   stableKey: string
   templateSource: CompactStaticBuildSkillMatrixTemplateSource
@@ -640,7 +660,7 @@ export interface CompactStaticBuildSkillMatrixRowMeta {
   sourceStatName: string
   sourceOccurrence: number
   attributeSource: CompactStaticBuildSkillMatrixAttributeSource
-  templateCombatTags: string[]
+  templateCombatTags: CompactStaticBuildCombatTagList
   entryType: CompactStaticBuildSkillMatrixEntryType
   aggregationType: CompactStaticBuildSkillMatrixAggregationType
   isAdditionalDamage: boolean
@@ -656,7 +676,7 @@ export interface CompactStaticBuildSkillMatrixGroupSummary {
   count: number
   commonBuckets: Record<string, number>
   variableBuckets: string[]
-  commonFormulaMultipliers: Record<string, number>
+  commonFormulaMultipliers: CompactStaticBuildFormulaMultiplierMap
   variableFormulaMultipliers: string[]
   effectSummary: CompactStaticBuildSkillMatrixEffectSummaryItem[]
   requirementSummary: CompactStaticBuildSourceDamageViewRequirementSummary
@@ -664,8 +684,8 @@ export interface CompactStaticBuildSkillMatrixGroupSummary {
   caveatSummary: CompactStaticBuildCaveatSummary
   diagnosticSummary: CompactStaticBuildDiagnosticSummary
   sourceNoteSummary: CompactStaticBuildSourceNoteSummary
-  assumptions?: string[]
-  unsupportedEffects?: string[]
+  assumptions?: CompactStaticBuildAssumptionList
+  unsupportedEffects?: CompactStaticBuildUnsupportedEffectList
 }
 
 export interface CompactStaticBuildSkillMatrixSummary {
@@ -681,7 +701,7 @@ export interface CompactStaticBuildSkillMatrixSummary {
   penetrationValue: number
   commonBuckets: Record<string, number>
   variableBuckets: string[]
-  commonFormulaMultipliers: Record<string, number>
+  commonFormulaMultipliers: CompactStaticBuildFormulaMultiplierMap
   variableFormulaMultipliers: string[]
   effectSummary: CompactStaticBuildSkillMatrixEffectSummaryItem[]
   requirementSummary: CompactStaticBuildSourceDamageViewRequirementSummary

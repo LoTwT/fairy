@@ -11149,6 +11149,39 @@ caveatSummary` 这些兼容字段补齐。
 ### 312.4 当前状态
 
 - `V309.1` 已完成：范围冻结到 list element text contract
-- `V309.2` 进行中：准备在 `types.ts` 中落显式 list element type
-- `V309.3` 待开始：导出与测试对齐
-- `V309.4` 待开始：文档收口
+- `V309.2` 已完成：`types.ts` 已让剩余公开 list 统一复用显式 list-element type
+- `V309.3` 已完成：`build/index.ts` 已正式导出这些元素 type
+- `V309.4` 已完成：roadmap、索引与架构文档已同步
+
+## 313. V310 compact shared list/map contracts
+
+### 313.1 目标
+
+`V310` 只解决一件事：
+
+- 为 `compact.ts` 顶层和 `skill-matrix` 里复用最频繁的匿名 list/map/key 补显式 compact contract
+
+### 313.2 范围
+
+1. `CompactStaticBuildFormulaMultiplierMap`
+2. `CompactStaticBuildAliasList`
+3. `CompactStaticBuildAssumptionList`
+4. `CompactStaticBuildUnsupportedEffectList`
+5. `CompactStaticBuildDiagnosticKeyList`
+6. `CompactStaticBuildSourceNoteKeyList`
+7. `CompactStaticBuildCombatTagList`
+8. `CompactStaticBuildSkillQualifierList`
+9. `CompactStaticBuildRequirementKey`
+
+### 313.3 非目标
+
+1. 不处理 `compact.ts` 中剩余的匿名 `label / id / name`
+2. 不处理 `commonBuckets / variableBuckets`
+3. 不处理 compact helper 的运行时逻辑
+
+### 313.4 当前状态
+
+- `V310.1` 已完成：范围冻结到 compact shared list/map contract
+- `V310.2` 已完成：`compact.ts` 已统一复用显式 compact alias
+- `V310.3` 待开始：校验与提交
+- `V310.4` 已完成：roadmap、索引与架构文档已同步
