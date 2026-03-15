@@ -20,12 +20,31 @@ import type {
   ResolveStaticBuildSourceEntriesResult,
   ResolveStaticBuildSourceUtilityViewsResult,
   ResolveStaticBuildTriggerMatrixResult,
+  StaticBuildActionName,
+  StaticBuildAgentLevel,
+  StaticBuildAgentMindscape,
   StaticBuildAliasList,
+  StaticBuildAnomalyBonusDamageSum,
+  StaticBuildAnomalyCritDamage,
+  StaticBuildAnomalyCritMultiplier,
+  StaticBuildAnomalyCritRate,
+  StaticBuildAnomalyMastery,
+  StaticBuildAnomalyProficiency,
+  StaticBuildAnomalyProficiencyMultiplier,
+  StaticBuildAppliedEntryCount,
+  StaticBuildAppliedRowCount,
+  StaticBuildAssumptionCount,
   StaticBuildAssumptionList,
   StaticBuildAssumptionSummary,
   StaticBuildAttack,
+  StaticBuildAttackerLevelBase,
+  StaticBuildAttackPercent,
+  StaticBuildBaseAttack,
+  StaticBuildBaseDamage,
   StaticBuildBaseDamageValue,
   StaticBuildBaseMode,
+  StaticBuildBonusDamageSum,
+  StaticBuildBonusMultiplier,
   StaticBuildBucket,
   StaticBuildBucketValueMap,
   StaticBuildCanonicalLabel,
@@ -33,8 +52,24 @@ import type {
   StaticBuildCombatTagList,
   StaticBuildConditionLabel,
   StaticBuildCooldownSeconds,
+  StaticBuildCoreSkillLevel,
   StaticBuildCritDamage,
+  StaticBuildCriticalTotal,
+  StaticBuildCritMultiplier,
   StaticBuildCritRate,
+  StaticBuildDamageLevelMultiplier,
+  StaticBuildDamageMultiplier,
+  StaticBuildDamageMultiplierFactor,
+  StaticBuildDamageReduction,
+  StaticBuildDamageResultTotal,
+  StaticBuildDazeVulnerabilityMultiplier,
+  StaticBuildDefenderBaseDefense,
+  StaticBuildDefenderResistance,
+  StaticBuildDefenseBonus,
+  StaticBuildDefenseMultiplier,
+  StaticBuildDefenseReduction,
+  StaticBuildDeltaCount,
+  StaticBuildDiagnosticCount,
   StaticBuildDiagnosticEntry,
   StaticBuildDiagnosticKeyList,
   StaticBuildDiagnosticKind,
@@ -47,36 +82,62 @@ import type {
   StaticBuildEffectSummaryBucket,
   StaticBuildEffectSummaryCondition,
   StaticBuildEffectSummaryValue,
+  StaticBuildEnergyGenerationRate,
   StaticBuildEntryCaveatSummary,
+  StaticBuildEntryCount,
   StaticBuildEntryDamage,
   StaticBuildEntryId,
   StaticBuildEntryLabel,
+  StaticBuildExpectedTotal,
+  StaticBuildFlatAttack,
   StaticBuildFormulaMultiplierMap,
+  StaticBuildGroupCount,
   StaticBuildGroupLabel,
   StaticBuildHP,
+  StaticBuildIgnoreResistance,
+  StaticBuildMainFormulaCount,
   StaticBuildMode,
+  StaticBuildModifierValue,
+  StaticBuildNonCriticalTotal,
+  StaticBuildNonStunVulnerability,
+  StaticBuildOrder,
   StaticBuildPenetrationRate,
   StaticBuildPenetrationValue,
   StaticBuildProfileResult,
+  StaticBuildRateCount,
+  StaticBuildRemainingTime,
+  StaticBuildRequirementCount,
   StaticBuildRequirementKey,
   StaticBuildRequirementSummary,
   StaticBuildRequirementSummaryGroup,
+  StaticBuildResistanceMultiplier,
+  StaticBuildResistanceReduction,
   StaticBuildResolvedBuckets,
   StaticBuildResolvedLoadout,
   StaticBuildResolvedPanel,
   StaticBuildResolveEffectSummaryItem,
   StaticBuildResolveSummary,
+  StaticBuildRowCount,
   StaticBuildRowId,
   StaticBuildRowLabel,
+  StaticBuildSatisfiedRequirementCount,
+  StaticBuildSegmentIndex,
   StaticBuildSegmentLabel,
+  StaticBuildSheerBonusMultiplier,
+  StaticBuildSheerBonusSum,
+  StaticBuildSheerForce,
   StaticBuildSkillMatrixEffectSummaryItem,
   StaticBuildSkillMatrixGroupKey,
   StaticBuildSkillMatrixRow,
   StaticBuildSkillMatrixRowDamageSummary,
   StaticBuildSkillMatrixRowMeta,
   StaticBuildSkillMatrixSummary,
+  StaticBuildSkillMultiplierFactor,
+  StaticBuildSkillMultiplierText,
+  StaticBuildSkillName,
   StaticBuildSkillQualifierList,
   StaticBuildSkillTag,
+  StaticBuildSourceDamageViewCount,
   StaticBuildSourceDamageViewEffectSummaryItem,
   StaticBuildSourceDamageViewEntry,
   StaticBuildSourceDamageViewGroupKey,
@@ -89,6 +150,7 @@ import type {
   StaticBuildSourceEntryGroupKey,
   StaticBuildSourceId,
   StaticBuildSourceName,
+  StaticBuildSourceNoteCount,
   StaticBuildSourceNoteEntry,
   StaticBuildSourceNoteGuidance,
   StaticBuildSourceNoteGuidanceKind,
@@ -98,8 +160,11 @@ import type {
   StaticBuildSourceNoteOwner,
   StaticBuildSourceNoteStatus,
   StaticBuildSourceNoteSummary,
+  StaticBuildSourceOccurrence,
+  StaticBuildSourceSkillTypeId,
   StaticBuildSourceStatId,
   StaticBuildSourceStatName,
+  StaticBuildSourceUtilityViewCount,
   StaticBuildSourceUtilityViewEntry,
   StaticBuildSourceUtilityViewEntrySummary,
   StaticBuildSourceUtilityViewGroupKey,
@@ -107,20 +172,37 @@ import type {
   StaticBuildSourceUtilityViewRequirement,
   StaticBuildSourceUtilityViewRequirementKind,
   StaticBuildSourceUtilityViewSummary,
+  StaticBuildSourceViewCount,
   StaticBuildSourceViewId,
+  StaticBuildSpecialMultiplier,
   StaticBuildStableKey,
+  StaticBuildStandaloneCount,
+  StaticBuildStunVulnerability,
+  StaticBuildSupportedCount,
+  StaticBuildTotalEntryCount,
+  StaticBuildTotalRowCount,
   StaticBuildTraceItem,
   StaticBuildTraceModifier,
   StaticBuildTraceReason,
+  StaticBuildTriggerCount,
   StaticBuildTriggerLabel,
   StaticBuildTriggerMatrixEffectSummaryItem,
   StaticBuildTriggerMatrixRow,
   StaticBuildTriggerMatrixRowMeta,
   StaticBuildTriggerMatrixSummary,
+  StaticBuildUnsatisfiedRequirementCount,
+  StaticBuildUnsupportedCount,
+  StaticBuildUnsupportedEffectCount,
   StaticBuildUnsupportedEffectList,
   StaticBuildUtilityValue,
   StaticBuildVariableBucketList,
   StaticBuildVariableFormulaMultiplierList,
+  StaticBuildVirtualAgentAnomalyProficiency,
+  StaticBuildVirtualAgentAttack,
+  StaticBuildVirtualAgentLevel,
+  StaticBuildVulnerabilityBonus,
+  StaticBuildVulnerabilityMultiplier,
+  StaticBuildWEngineRefinement,
 } from "./types.js"
 
 export type CompactStaticBuildSourceType = "agent" | "w-engine" | "drive-disc"
@@ -213,24 +295,97 @@ export type CompactStaticBuildVariableBucketList = StaticBuildVariableBucketList
 export type CompactStaticBuildVariableFormulaMultiplierList =
   StaticBuildVariableFormulaMultiplierList
 export type CompactStaticBuildDisplayName = StaticBuildDisplayName
+export type CompactStaticBuildAgentLevel = StaticBuildAgentLevel
+export type CompactStaticBuildAgentMindscape = StaticBuildAgentMindscape
 export type CompactStaticBuildAttack = StaticBuildAttack
+export type CompactStaticBuildAttackPercent = StaticBuildAttackPercent
+export type CompactStaticBuildAttackerLevelBase = StaticBuildAttackerLevelBase
+export type CompactStaticBuildBaseAttack = StaticBuildBaseAttack
 export type CompactStaticBuildHP = StaticBuildHP
+export type CompactStaticBuildFlatAttack = StaticBuildFlatAttack
+export type CompactStaticBuildBonusDamageSum = StaticBuildBonusDamageSum
 export type CompactStaticBuildCritRate = StaticBuildCritRate
 export type CompactStaticBuildCritDamage = StaticBuildCritDamage
+export type CompactStaticBuildSheerForce = StaticBuildSheerForce
+export type CompactStaticBuildEnergyGenerationRate =
+  StaticBuildEnergyGenerationRate
+export type CompactStaticBuildAnomalyMastery = StaticBuildAnomalyMastery
+export type CompactStaticBuildAnomalyProficiency = StaticBuildAnomalyProficiency
+export type CompactStaticBuildAnomalyBonusDamageSum =
+  StaticBuildAnomalyBonusDamageSum
+export type CompactStaticBuildAnomalyCritRate = StaticBuildAnomalyCritRate
+export type CompactStaticBuildAnomalyCritDamage = StaticBuildAnomalyCritDamage
 export type CompactStaticBuildPenetrationRate = StaticBuildPenetrationRate
 export type CompactStaticBuildPenetrationValue = StaticBuildPenetrationValue
+export type CompactStaticBuildDefenseReduction = StaticBuildDefenseReduction
+export type CompactStaticBuildResistanceReduction =
+  StaticBuildResistanceReduction
+export type CompactStaticBuildIgnoreResistance = StaticBuildIgnoreResistance
+export type CompactStaticBuildVulnerabilityBonus = StaticBuildVulnerabilityBonus
+export type CompactStaticBuildDamageReduction = StaticBuildDamageReduction
+export type CompactStaticBuildStunVulnerability = StaticBuildStunVulnerability
+export type CompactStaticBuildNonStunVulnerability =
+  StaticBuildNonStunVulnerability
+export type CompactStaticBuildSheerBonusSum = StaticBuildSheerBonusSum
+export type CompactStaticBuildSkillMultiplierFactor =
+  StaticBuildSkillMultiplierFactor
+export type CompactStaticBuildModifierValue = StaticBuildModifierValue
 export type CompactStaticBuildBaseDamageValue = StaticBuildBaseDamageValue
+export type CompactStaticBuildBaseDamage = StaticBuildBaseDamage
+export type CompactStaticBuildExpectedTotal = StaticBuildExpectedTotal
+export type CompactStaticBuildCriticalTotal = StaticBuildCriticalTotal
+export type CompactStaticBuildNonCriticalTotal = StaticBuildNonCriticalTotal
+export type CompactStaticBuildDamageResultTotal = StaticBuildDamageResultTotal
+export type CompactStaticBuildDiagnosticCount = StaticBuildDiagnosticCount
+export type CompactStaticBuildSourceNoteCount = StaticBuildSourceNoteCount
+export type CompactStaticBuildAssumptionCount = StaticBuildAssumptionCount
+export type CompactStaticBuildUnsupportedEffectCount =
+  StaticBuildUnsupportedEffectCount
+export type CompactStaticBuildRequirementCount = StaticBuildRequirementCount
+export type CompactStaticBuildSatisfiedRequirementCount =
+  StaticBuildSatisfiedRequirementCount
+export type CompactStaticBuildUnsatisfiedRequirementCount =
+  StaticBuildUnsatisfiedRequirementCount
+export type CompactStaticBuildGroupCount = StaticBuildGroupCount
+export type CompactStaticBuildSupportedCount = StaticBuildSupportedCount
+export type CompactStaticBuildUnsupportedCount = StaticBuildUnsupportedCount
+export type CompactStaticBuildEntryCount = StaticBuildEntryCount
+export type CompactStaticBuildStandaloneCount = StaticBuildStandaloneCount
+export type CompactStaticBuildDeltaCount = StaticBuildDeltaCount
+export type CompactStaticBuildTriggerCount = StaticBuildTriggerCount
+export type CompactStaticBuildRateCount = StaticBuildRateCount
+export type CompactStaticBuildSourceDamageViewCount =
+  StaticBuildSourceDamageViewCount
+export type CompactStaticBuildSourceUtilityViewCount =
+  StaticBuildSourceUtilityViewCount
+export type CompactStaticBuildRowCount = StaticBuildRowCount
+export type CompactStaticBuildMainFormulaCount = StaticBuildMainFormulaCount
+export type CompactStaticBuildSourceViewCount = StaticBuildSourceViewCount
+export type CompactStaticBuildAppliedEntryCount = StaticBuildAppliedEntryCount
+export type CompactStaticBuildTotalEntryCount = StaticBuildTotalEntryCount
+export type CompactStaticBuildAppliedRowCount = StaticBuildAppliedRowCount
+export type CompactStaticBuildTotalRowCount = StaticBuildTotalRowCount
+export type CompactStaticBuildDefenderBaseDefense =
+  StaticBuildDefenderBaseDefense
+export type CompactStaticBuildDefenderResistance = StaticBuildDefenderResistance
+export type CompactStaticBuildDefenseBonus = StaticBuildDefenseBonus
+export type CompactStaticBuildSpecialMultiplier = StaticBuildSpecialMultiplier
 export type CompactStaticBuildEntryId = StaticBuildEntryId
 export type CompactStaticBuildEntryLabel = StaticBuildEntryLabel
 export type CompactStaticBuildRowId = StaticBuildRowId
 export type CompactStaticBuildRowLabel = StaticBuildRowLabel
+export type CompactStaticBuildActionName = StaticBuildActionName
+export type CompactStaticBuildSkillName = StaticBuildSkillName
 export type CompactStaticBuildCanonicalLabel = StaticBuildCanonicalLabel
 export type CompactStaticBuildStableKey = StaticBuildStableKey
 export type CompactStaticBuildSourceId = StaticBuildSourceId
 export type CompactStaticBuildSourceViewId = StaticBuildSourceViewId
 export type CompactStaticBuildSourceName = StaticBuildSourceName
+export type CompactStaticBuildSourceSkillTypeId = StaticBuildSourceSkillTypeId
 export type CompactStaticBuildSourceStatId = StaticBuildSourceStatId
 export type CompactStaticBuildSourceStatName = StaticBuildSourceStatName
+export type CompactStaticBuildSourceOccurrence = StaticBuildSourceOccurrence
+export type CompactStaticBuildOrder = StaticBuildOrder
 export type CompactStaticBuildEffectId = StaticBuildEffectId
 export type CompactStaticBuildEffectLabel = StaticBuildEffectLabel
 export type CompactStaticBuildEffectSummaryBucket =
@@ -242,9 +397,12 @@ export type CompactStaticBuildTraceReason = StaticBuildTraceReason
 export type CompactStaticBuildTriggerLabel = StaticBuildTriggerLabel
 export type CompactStaticBuildConditionLabel = StaticBuildConditionLabel
 export type CompactStaticBuildSegmentLabel = StaticBuildSegmentLabel
+export type CompactStaticBuildSegmentIndex = StaticBuildSegmentIndex
 export type CompactStaticBuildGroupLabel = StaticBuildGroupLabel
 export type CompactStaticBuildSkillMatrixGroupKey =
   StaticBuildSkillMatrixGroupKey
+export type CompactStaticBuildSkillMultiplierText =
+  StaticBuildSkillMultiplierText
 export type CompactStaticBuildSourceDamageViewGroupKey =
   StaticBuildSourceDamageViewGroupKey
 export type CompactStaticBuildSourceUtilityViewGroupKey =
@@ -264,6 +422,36 @@ export type CompactStaticBuildDiagnosticMessage = StaticBuildDiagnosticMessage
 export type CompactStaticBuildSourceNoteMessage = StaticBuildSourceNoteMessage
 export type CompactStaticBuildUtilityValue = StaticBuildUtilityValue
 export type CompactStaticBuildCooldownSeconds = StaticBuildCooldownSeconds
+export type CompactStaticBuildCoreSkillLevel = StaticBuildCoreSkillLevel
+export type CompactStaticBuildWEngineRefinement = StaticBuildWEngineRefinement
+export type CompactStaticBuildVirtualAgentLevel = StaticBuildVirtualAgentLevel
+export type CompactStaticBuildVirtualAgentAttack = StaticBuildVirtualAgentAttack
+export type CompactStaticBuildVirtualAgentAnomalyProficiency =
+  StaticBuildVirtualAgentAnomalyProficiency
+export type CompactStaticBuildDamageMultiplier = StaticBuildDamageMultiplier
+export type CompactStaticBuildDamageMultiplierFactor =
+  StaticBuildDamageMultiplierFactor
+export type CompactStaticBuildBonusMultiplier = StaticBuildBonusMultiplier
+export type CompactStaticBuildCritMultiplier = StaticBuildCritMultiplier
+export type CompactStaticBuildDefenseMultiplier = StaticBuildDefenseMultiplier
+export type CompactStaticBuildResistanceMultiplier =
+  StaticBuildResistanceMultiplier
+export type CompactStaticBuildVulnerabilityMultiplier =
+  StaticBuildVulnerabilityMultiplier
+export type CompactStaticBuildDazeVulnerabilityMultiplier =
+  StaticBuildDazeVulnerabilityMultiplier
+export type CompactStaticBuildSheerBonusMultiplier =
+  StaticBuildSheerBonusMultiplier
+export type CompactStaticBuildAnomalyProficiencyMultiplier =
+  StaticBuildAnomalyProficiencyMultiplier
+export type CompactStaticBuildDamageLevelMultiplier =
+  StaticBuildDamageLevelMultiplier
+export type CompactStaticBuildAnomalyBonusMultiplier =
+  StaticBuildAnomalyBonusMultiplier
+export type CompactStaticBuildAnomalyCritMultiplier =
+  StaticBuildAnomalyCritMultiplier
+export type CompactStaticBuildRemainingTime = StaticBuildRemainingTime
+export type CompactStaticBuildStackCount = StaticBuildStackCount
 
 export interface CompactStaticBuildResult {
   profile: CompactStaticBuildProfile
@@ -297,15 +485,15 @@ export interface CompactStaticBuildResult {
 
 export interface CompactStaticBuildResolveSummary {
   baseDamageStat: CompactStaticBuildBaseDamageStat
-  baseDamageValue: number
-  expectedTotal: number
-  critTotal: number
-  noCritTotal: number
+  baseDamageValue: CompactStaticBuildBaseDamageValue
+  expectedTotal: CompactStaticBuildExpectedTotal
+  critTotal: CompactStaticBuildCriticalTotal
+  noCritTotal: CompactStaticBuildNonCriticalTotal
   formulaMultipliers: CompactStaticBuildFormulaMultiplierMap
-  assumptionCount: number
-  diagnosticCount: number
-  sourceNoteCount: number
-  unsupportedEffectCount: number
+  assumptionCount: CompactStaticBuildAssumptionCount
+  diagnosticCount: CompactStaticBuildDiagnosticCount
+  sourceNoteCount: CompactStaticBuildSourceNoteCount
+  unsupportedEffectCount: CompactStaticBuildUnsupportedEffectCount
   hasDiagnostics: boolean
   hasSourceNotes: boolean
   hasUnsupportedEffects: boolean
@@ -357,162 +545,162 @@ export interface CompactStaticBuildLoadout {
   agent: CompactStaticBuildAgentCatalogEntry
   wEngine?: CompactStaticBuildWEngineCatalogEntry
   driveDiscSets: CompactStaticBuildDriveDiscSet[]
-  agentLevel: number
-  agentMindscape: number
-  coreSkillLevel: number
-  wEngineRefinement: number
+  agentLevel: CompactStaticBuildAgentLevel
+  agentMindscape: CompactStaticBuildAgentMindscape
+  coreSkillLevel: CompactStaticBuildCoreSkillLevel
+  wEngineRefinement: CompactStaticBuildWEngineRefinement
 }
 
 export interface CompactStaticBuildResolvedBuckets {
-  attackPercent: number
-  flatAttack: number
-  bonusDamageSum: number
-  critRate: number
-  critDamage: number
-  defenseReduction: number
-  penetrationRate: number
-  penetrationValue: number
-  resistanceReduction: number
-  ignoreResistance: number
-  vulnerabilityBonus: number
-  damageReduction: number
-  stunVulnerability: number
-  nonStunVulnerability: number
-  sheerBonusSum: number
-  anomalyMastery: number
-  anomalyProficiency: number
-  anomalyBonusDamageSum: number
-  anomalyCritRate: number
-  anomalyCritDamage: number
-  skillMultiplierFactor: number
+  attackPercent: CompactStaticBuildAttackPercent
+  flatAttack: CompactStaticBuildFlatAttack
+  bonusDamageSum: CompactStaticBuildBonusDamageSum
+  critRate: CompactStaticBuildCritRate
+  critDamage: CompactStaticBuildCritDamage
+  defenseReduction: CompactStaticBuildDefenseReduction
+  penetrationRate: CompactStaticBuildPenetrationRate
+  penetrationValue: CompactStaticBuildPenetrationValue
+  resistanceReduction: CompactStaticBuildResistanceReduction
+  ignoreResistance: CompactStaticBuildIgnoreResistance
+  vulnerabilityBonus: CompactStaticBuildVulnerabilityBonus
+  damageReduction: CompactStaticBuildDamageReduction
+  stunVulnerability: CompactStaticBuildStunVulnerability
+  nonStunVulnerability: CompactStaticBuildNonStunVulnerability
+  sheerBonusSum: CompactStaticBuildSheerBonusSum
+  anomalyMastery: CompactStaticBuildAnomalyMastery
+  anomalyProficiency: CompactStaticBuildAnomalyProficiency
+  anomalyBonusDamageSum: CompactStaticBuildAnomalyBonusDamageSum
+  anomalyCritRate: CompactStaticBuildAnomalyCritRate
+  anomalyCritDamage: CompactStaticBuildAnomalyCritDamage
+  skillMultiplierFactor: CompactStaticBuildSkillMultiplierFactor
 }
 
 export interface CompactStaticBuildResolvedPanel {
-  attack: number
-  baseAttack?: number
-  agentLevel: number
-  critRate: number
-  critDamage: number
-  hp?: number
-  sheerForce?: number
-  energyGenerationRate?: number
-  anomalyProficiency: number
-  anomalyMastery?: number
-  anomalyCritRate: number
-  anomalyCritDamage: number
-  penetrationRate: number
-  penetrationValue: number
+  attack: CompactStaticBuildAttack
+  baseAttack?: CompactStaticBuildBaseAttack
+  agentLevel: CompactStaticBuildAgentLevel
+  critRate: CompactStaticBuildCritRate
+  critDamage: CompactStaticBuildCritDamage
+  hp?: CompactStaticBuildHP
+  sheerForce?: CompactStaticBuildSheerForce
+  energyGenerationRate?: CompactStaticBuildEnergyGenerationRate
+  anomalyProficiency: CompactStaticBuildAnomalyProficiency
+  anomalyMastery?: CompactStaticBuildAnomalyMastery
+  anomalyCritRate: CompactStaticBuildAnomalyCritRate
+  anomalyCritDamage: CompactStaticBuildAnomalyCritDamage
+  penetrationRate: CompactStaticBuildPenetrationRate
+  penetrationValue: CompactStaticBuildPenetrationValue
   baseDamageStat: "attack" | "sheerForce"
-  baseDamageValue: number
+  baseDamageValue: CompactStaticBuildBaseDamageValue
 }
 
 export interface CompactStaticBuildDefenseParams {
-  attackerLevelBase: number
-  defenderBaseDefense: number
-  defenseBonus: number
-  defenseReduction: number
-  penetrationRate: number
-  penetrationValue: number
+  attackerLevelBase: CompactStaticBuildAttackerLevelBase
+  defenderBaseDefense: CompactStaticBuildDefenderBaseDefense
+  defenseBonus: CompactStaticBuildDefenseBonus
+  defenseReduction: CompactStaticBuildDefenseReduction
+  penetrationRate: CompactStaticBuildPenetrationRate
+  penetrationValue: CompactStaticBuildPenetrationValue
 }
 
 export interface CompactStaticBuildResistanceParams {
-  defenderResistance: number
-  resistanceReduction: number
-  ignoreResistance: number
+  defenderResistance: CompactStaticBuildDefenderResistance
+  resistanceReduction: CompactStaticBuildResistanceReduction
+  ignoreResistance: CompactStaticBuildIgnoreResistance
 }
 
 export interface CompactStaticBuildVulnerabilityParams {
-  vulnerabilityBonus: number
-  damageReduction: number
+  vulnerabilityBonus: CompactStaticBuildVulnerabilityBonus
+  damageReduction: CompactStaticBuildDamageReduction
 }
 
 export interface CompactStaticBuildDazeVulnerabilityParams {
   isStunned: boolean
-  stunVulnerability: number
-  nonStunVulnerability: number
+  stunVulnerability: CompactStaticBuildStunVulnerability
+  nonStunVulnerability: CompactStaticBuildNonStunVulnerability
 }
 
 export interface CompactStaticBuildCritParams {
-  critRate: number
-  critDamage: number
+  critRate: CompactStaticBuildCritRate
+  critDamage: CompactStaticBuildCritDamage
 }
 
 export interface CompactStaticBuildNormalDamageParams {
-  baseDamage: number
-  bonusDamageSum: number
+  baseDamage: CompactStaticBuildBaseDamage
+  bonusDamageSum: CompactStaticBuildBonusDamageSum
   crit: CompactStaticBuildCritParams
   defense: CompactStaticBuildDefenseParams
   resistance: CompactStaticBuildResistanceParams
   vulnerability: CompactStaticBuildVulnerabilityParams
   dazeVulnerability: CompactStaticBuildDazeVulnerabilityParams
-  specialMultiplier?: number
+  specialMultiplier?: CompactStaticBuildSpecialMultiplier
 }
 
 export interface CompactStaticBuildSheerDamageParams {
-  baseDamage: number
-  bonusDamageSum: number
+  baseDamage: CompactStaticBuildBaseDamage
+  bonusDamageSum: CompactStaticBuildBonusDamageSum
   crit: CompactStaticBuildCritParams
-  sheerBonusSum: number
+  sheerBonusSum: CompactStaticBuildSheerBonusSum
   resistance: CompactStaticBuildResistanceParams
   vulnerability: CompactStaticBuildVulnerabilityParams
   dazeVulnerability: CompactStaticBuildDazeVulnerabilityParams
-  specialMultiplier?: number
+  specialMultiplier?: CompactStaticBuildSpecialMultiplier
 }
 
 export interface CompactStaticBuildAnomalyDamageParams {
-  virtualAgentLevel: number
-  virtualAgentAttack: number
-  virtualAgentAnomalyProficiency: number
-  damageMultiplier: number
-  bonusDamageSum: number
+  virtualAgentLevel: CompactStaticBuildVirtualAgentLevel
+  virtualAgentAttack: CompactStaticBuildVirtualAgentAttack
+  virtualAgentAnomalyProficiency: CompactStaticBuildVirtualAgentAnomalyProficiency
+  damageMultiplier: CompactStaticBuildDamageMultiplier
+  bonusDamageSum: CompactStaticBuildBonusDamageSum
   defense: CompactStaticBuildDefenseParams
   resistance: CompactStaticBuildResistanceParams
   vulnerability: CompactStaticBuildVulnerabilityParams
   dazeVulnerability: CompactStaticBuildDazeVulnerabilityParams
-  anomalyBonusDamageSum: number
-  anomalyCritRate: number
-  anomalyCritDamage: number
+  anomalyBonusDamageSum: CompactStaticBuildAnomalyBonusDamageSum
+  anomalyCritRate: CompactStaticBuildAnomalyCritRate
+  anomalyCritDamage: CompactStaticBuildAnomalyCritDamage
 }
 
 export interface CompactStaticBuildDisorderDamageParams extends Omit<
   CompactStaticBuildAnomalyDamageParams,
   "damageMultiplier"
 > {
-  damageMultiplierFactor?: number
+  damageMultiplierFactor?: CompactStaticBuildDamageMultiplierFactor
   anomalyType: AnomalyType
-  remainingTime: number
+  remainingTime: CompactStaticBuildRemainingTime
 }
 
 export interface CompactStaticBuildDamageBreakdown {
-  baseDamage: number
-  bonusMultiplier: number
-  critMultiplier: number
-  defenseMultiplier: number
-  resistanceMultiplier: number
-  vulnerabilityMultiplier: number
-  dazeVulnerabilityMultiplier: number
-  sheerBonusMultiplier: number
-  anomalyProficiencyMultiplier: number
-  damageLevelMultiplier: number
-  anomalyBonusMultiplier: number
-  anomalyCritMultiplier: number
-  specialMultiplier: number
+  baseDamage: CompactStaticBuildBaseDamage
+  bonusMultiplier: CompactStaticBuildBonusMultiplier
+  critMultiplier: CompactStaticBuildCritMultiplier
+  defenseMultiplier: CompactStaticBuildDefenseMultiplier
+  resistanceMultiplier: CompactStaticBuildResistanceMultiplier
+  vulnerabilityMultiplier: CompactStaticBuildVulnerabilityMultiplier
+  dazeVulnerabilityMultiplier: CompactStaticBuildDazeVulnerabilityMultiplier
+  sheerBonusMultiplier: CompactStaticBuildSheerBonusMultiplier
+  anomalyProficiencyMultiplier: CompactStaticBuildAnomalyProficiencyMultiplier
+  damageLevelMultiplier: CompactStaticBuildDamageLevelMultiplier
+  anomalyBonusMultiplier: CompactStaticBuildAnomalyBonusMultiplier
+  anomalyCritMultiplier: CompactStaticBuildAnomalyCritMultiplier
+  specialMultiplier: CompactStaticBuildSpecialMultiplier
 }
 
 export interface CompactStaticBuildDamageResult {
-  total: number
+  total: CompactStaticBuildDamageResultTotal
   breakdown: CompactStaticBuildDamageBreakdown
 }
 
 export interface CompactStaticBuildDiagnosticGroupSummary {
   key: StaticBuildDiagnosticKind
   label: CompactStaticBuildGroupLabel
-  count: number
+  count: CompactStaticBuildDiagnosticCount
 }
 
 export interface CompactStaticBuildDiagnosticOwnerGroupSummary {
   key: StaticBuildDiagnosticOwner
-  count: number
+  count: CompactStaticBuildDiagnosticCount
 }
 
 export interface CompactStaticBuildDiagnosticEntry {
@@ -525,7 +713,7 @@ export interface CompactStaticBuildDiagnosticEntry {
 }
 
 export interface CompactStaticBuildDiagnosticSummary {
-  count: number
+  count: CompactStaticBuildDiagnosticCount
   hasDiagnostics: boolean
   hasDefaultedInput: boolean
   hasCoverageGap: boolean
@@ -538,12 +726,12 @@ export interface CompactStaticBuildDiagnosticSummary {
 export interface CompactStaticBuildSourceNoteGroupSummary {
   key: StaticBuildSourceNoteStatus
   label: CompactStaticBuildGroupLabel
-  count: number
+  count: CompactStaticBuildSourceNoteCount
 }
 
 export interface CompactStaticBuildSourceNoteOwnerGroupSummary {
   key: StaticBuildSourceNoteOwner
-  count: number
+  count: CompactStaticBuildSourceNoteCount
 }
 
 export interface CompactStaticBuildSourceNoteGuidance {
@@ -563,7 +751,7 @@ export interface CompactStaticBuildSourceNoteEntry {
 }
 
 export interface CompactStaticBuildSourceNoteSummary {
-  count: number
+  count: CompactStaticBuildSourceNoteCount
   hasSourceNotes: boolean
   hasMissingInput: boolean
   hasProcessOnly: boolean
@@ -573,20 +761,20 @@ export interface CompactStaticBuildSourceNoteSummary {
 }
 
 export interface CompactStaticBuildAssumptionSummary {
-  count: number
+  count: CompactStaticBuildAssumptionCount
   hasAssumptions: boolean
 }
 
 export interface CompactStaticBuildCaveatSummary {
-  assumptionCount: number
-  unsupportedEffectCount: number
+  assumptionCount: CompactStaticBuildAssumptionCount
+  unsupportedEffectCount: CompactStaticBuildUnsupportedEffectCount
   hasAssumptions: boolean
   hasUnsupportedEffects: boolean
 }
 
 export interface CompactStaticBuildTraceModifier {
   bucket: StaticBuildBucket
-  value: number
+  value: CompactStaticBuildModifierValue
   combine: "sum" | "multiply"
 }
 
@@ -597,13 +785,13 @@ export interface CompactStaticBuildTraceItem {
   label: CompactStaticBuildEffectLabel
   status: CompactStaticBuildTraceStatus
   reason?: CompactStaticBuildTraceReason
-  stacks?: number
+  stacks?: CompactStaticBuildStackCount
   modifiers?: CompactStaticBuildTraceModifier[]
 }
 
 export interface CompactStaticBuildEntryCaveatSummary {
-  assumptionCount: number
-  unsupportedCount: number
+  assumptionCount: CompactStaticBuildAssumptionCount
+  unsupportedCount: CompactStaticBuildUnsupportedCount
   hasAssumptions: boolean
   hasUnsupported: boolean
 }
@@ -612,17 +800,17 @@ export interface CompactStaticBuildRequirementSummaryGroup<
   TKey extends string = string,
 > {
   key: TKey
-  count: number
-  satisfiedCount: number
-  unsatisfiedCount: number
+  count: CompactStaticBuildRequirementCount
+  satisfiedCount: CompactStaticBuildSatisfiedRequirementCount
+  unsatisfiedCount: CompactStaticBuildUnsatisfiedRequirementCount
 }
 
 export interface CompactStaticBuildRequirementSummary<
   TKey extends string = string,
 > {
-  count: number
-  satisfiedCount: number
-  unsatisfiedCount: number
+  count: CompactStaticBuildRequirementCount
+  satisfiedCount: CompactStaticBuildSatisfiedRequirementCount
+  unsatisfiedCount: CompactStaticBuildUnsatisfiedRequirementCount
   hasUnsatisfied: boolean
   groups: CompactStaticBuildRequirementSummaryGroup<TKey>[]
 }
@@ -659,8 +847,8 @@ export interface CompactStaticBuildAppliedRowEffectSummaryItem {
   label: CompactStaticBuildEffectLabel
   bucket: CompactStaticBuildEffectSummaryBucket
   value: CompactStaticBuildEffectSummaryValue
-  appliedRowCount: number
-  totalRowCount: number
+  appliedRowCount: CompactStaticBuildAppliedRowCount
+  totalRowCount: CompactStaticBuildTotalRowCount
   appliesToAllRows: boolean
   condition: CompactStaticBuildEffectSummaryCondition
 }
@@ -671,8 +859,8 @@ export interface CompactStaticBuildAppliedEntryEffectSummaryItem {
   label: CompactStaticBuildEffectLabel
   bucket: CompactStaticBuildEffectSummaryBucket
   value: CompactStaticBuildEffectSummaryValue
-  appliedEntryCount: number
-  totalEntryCount: number
+  appliedEntryCount: CompactStaticBuildAppliedEntryCount
+  totalEntryCount: CompactStaticBuildTotalEntryCount
   appliesToAllEntries: boolean
   condition: CompactStaticBuildEffectSummaryCondition
 }
@@ -701,7 +889,7 @@ export interface StaticBuildCompactSkillMatrixRow {
   damageType: CompactStaticBuildSourceDamageType
   attribute: CompactStaticBuildAgentAttribute
   combatTags: CompactStaticBuildCombatTagList
-  skillMultiplier: string
+  skillMultiplier: CompactStaticBuildSkillMultiplierText
   damage: StaticBuildSkillMatrixRowDamageSummary
   summary: CompactStaticBuildResolveSummary
   resolvedBuckets: CompactStaticBuildResolvedBuckets
@@ -735,17 +923,17 @@ export interface CompactStaticBuildSkillMatrixResult {
 }
 
 export interface CompactStaticBuildSkillMatrixRowMeta {
-  order: number
-  actionName: string
-  skillName: string
+  order: CompactStaticBuildOrder
+  actionName: CompactStaticBuildActionName
+  skillName: CompactStaticBuildSkillName
   qualifiers: CompactStaticBuildSkillQualifierList
   canonicalLabel: CompactStaticBuildCanonicalLabel
   stableKey: CompactStaticBuildStableKey
   templateSource: CompactStaticBuildSkillMatrixTemplateSource
-  sourceSkillTypeId: number
+  sourceSkillTypeId: CompactStaticBuildSourceSkillTypeId
   sourceStatId: CompactStaticBuildSourceStatId
   sourceStatName: CompactStaticBuildSourceStatName
-  sourceOccurrence: number
+  sourceOccurrence: CompactStaticBuildSourceOccurrence
   attributeSource: CompactStaticBuildSkillMatrixAttributeSource
   templateCombatTags: CompactStaticBuildCombatTagList
   entryType: CompactStaticBuildSkillMatrixEntryType
@@ -753,14 +941,14 @@ export interface CompactStaticBuildSkillMatrixRowMeta {
   isAdditionalDamage: boolean
   variantAxis?: CompactStaticBuildSkillMatrixVariantAxis
   segmentLabel?: CompactStaticBuildSegmentLabel
-  segmentIndex?: number
+  segmentIndex?: CompactStaticBuildSegmentIndex
   targetSize?: CompactStaticBuildTargetSize
 }
 
 export interface CompactStaticBuildSkillMatrixGroupSummary {
   key: CompactStaticBuildSkillMatrixGroupKey
   label: CompactStaticBuildGroupLabel
-  count: number
+  count: CompactStaticBuildGroupCount
   commonBuckets: CompactStaticBuildBucketValueMap
   variableBuckets: CompactStaticBuildVariableBucketList
   commonFormulaMultipliers: CompactStaticBuildFormulaMultiplierMap
@@ -776,12 +964,12 @@ export interface CompactStaticBuildSkillMatrixGroupSummary {
 }
 
 export interface CompactStaticBuildSkillMatrixSummary {
-  rowCount: number
+  rowCount: CompactStaticBuildRowCount
   baseDamageStat: CompactStaticBuildBaseDamageStat
   baseDamageValue: CompactStaticBuildBaseDamageValue
   attack?: CompactStaticBuildAttack
   hp?: CompactStaticBuildHP
-  sheerForce?: number
+  sheerForce?: CompactStaticBuildSheerForce
   critRate: CompactStaticBuildCritRate
   critDamage: CompactStaticBuildCritDamage
   penetrationRate: CompactStaticBuildPenetrationRate
@@ -1449,9 +1637,9 @@ export interface StaticBuildCompactTriggerMatrixRow {
 export interface CompactStaticBuildTriggerMatrixGroupSummary {
   key: StaticBuildTriggerMatrixEntryKind
   label: CompactStaticBuildGroupLabel
-  count: number
-  supportedCount: number
-  unsupportedCount: number
+  count: CompactStaticBuildGroupCount
+  supportedCount: CompactStaticBuildSupportedCount
+  unsupportedCount: CompactStaticBuildUnsupportedCount
   effectSummary: CompactStaticBuildTriggerMatrixEffectSummaryItem[]
   requirementSummary: CompactStaticBuildSourceDamageViewRequirementSummary
   caveatSummary: CompactStaticBuildEntryCaveatSummary
@@ -1471,17 +1659,17 @@ export interface CompactStaticBuildTriggerMatrixRowMeta {
   >
   sourceType?: CompactStaticBuildSourceType
   sourceId?: CompactStaticBuildSourceId
-  sourceStableKey?: string
+  sourceStableKey?: CompactStaticBuildStableKey
   sourceViewId?: CompactStaticBuildSourceViewId
   sourceViewResolutionMode?: CompactStaticBuildSourceDamageViewResolutionMode
 }
 
 export interface CompactStaticBuildTriggerMatrixSummary {
-  rowCount: number
-  mainFormulaCount: number
-  sourceViewCount: number
-  supportedCount: number
-  unsupportedCount: number
+  rowCount: CompactStaticBuildRowCount
+  mainFormulaCount: CompactStaticBuildMainFormulaCount
+  sourceViewCount: CompactStaticBuildSourceViewCount
+  supportedCount: CompactStaticBuildSupportedCount
+  unsupportedCount: CompactStaticBuildUnsupportedCount
   hasSourceViews: boolean
   effectSummary: CompactStaticBuildTriggerMatrixEffectSummaryItem[]
   requirementSummary: CompactStaticBuildSourceDamageViewRequirementSummary
@@ -1535,9 +1723,9 @@ export interface StaticBuildCompactSourceDamageViewEntry {
 export interface CompactStaticBuildSourceDamageViewGroupSummary {
   key: CompactStaticBuildSourceDamageViewGroupKey
   label: CompactStaticBuildGroupLabel
-  count: number
-  supportedCount: number
-  unsupportedCount: number
+  count: CompactStaticBuildGroupCount
+  supportedCount: CompactStaticBuildSupportedCount
+  unsupportedCount: CompactStaticBuildUnsupportedCount
   effectSummary: CompactStaticBuildSourceDamageViewEffectSummaryItem[]
   requirementSummary: CompactStaticBuildSourceDamageViewRequirementSummary
   caveatSummary: CompactStaticBuildEntryCaveatSummary
@@ -1547,12 +1735,12 @@ export interface CompactStaticBuildSourceDamageViewGroupSummary {
 }
 
 export interface CompactStaticBuildSourceDamageViewsSummary {
-  entryCount: number
-  standaloneCount: number
-  deltaCount: number
-  triggerCount: number
-  supportedCount: number
-  unsupportedCount: number
+  entryCount: CompactStaticBuildEntryCount
+  standaloneCount: CompactStaticBuildStandaloneCount
+  deltaCount: CompactStaticBuildDeltaCount
+  triggerCount: CompactStaticBuildTriggerCount
+  supportedCount: CompactStaticBuildSupportedCount
+  unsupportedCount: CompactStaticBuildUnsupportedCount
   effectSummary: CompactStaticBuildSourceDamageViewEffectSummaryItem[]
   requirementSummary: CompactStaticBuildSourceDamageViewRequirementSummary
   caveatSummary: CompactStaticBuildEntryCaveatSummary
@@ -1599,18 +1787,18 @@ export interface CompactStaticBuildSourceUtilityViewEntrySummary {
   unit: CompactStaticBuildSourceUtilityUnit
   resolutionMode: CompactStaticBuildSourceUtilityResolutionMode
   targetScope: CompactStaticBuildSourceUtilityTargetScope
-  requirementCount: number
+  requirementCount: CompactStaticBuildRequirementCount
   hasUnsatisfiedRequirements: boolean
-  diagnosticCount: number
-  sourceNoteCount: number
-  assumptionCount: number
+  diagnosticCount: CompactStaticBuildDiagnosticCount
+  sourceNoteCount: CompactStaticBuildSourceNoteCount
+  assumptionCount: CompactStaticBuildAssumptionCount
   hasUnsupported: boolean
 }
 
 export interface CompactStaticBuildEntryDamageSummary {
-  expected: number
-  crit: number
-  noCrit: number
+  expected: CompactStaticBuildExpectedTotal
+  crit: CompactStaticBuildCriticalTotal
+  noCrit: CompactStaticBuildNonCriticalTotal
 }
 
 export interface CompactStaticBuildSourceDamageViewMeta {
@@ -1637,9 +1825,9 @@ export interface CompactStaticBuildSourceUtilityViewMeta {
 export interface CompactStaticBuildSourceEntryGroupSummary {
   key: CompactStaticBuildSourceEntryGroupKey
   label: CompactStaticBuildGroupLabel
-  count: number
-  supportedCount: number
-  unsupportedCount: number
+  count: CompactStaticBuildGroupCount
+  supportedCount: CompactStaticBuildSupportedCount
+  unsupportedCount: CompactStaticBuildUnsupportedCount
   effectSummary: CompactStaticBuildSourceEntryEffectSummaryItem[]
   sourceDamageRequirementSummary: CompactStaticBuildSourceDamageViewRequirementSummary
   sourceUtilityRequirementSummary: CompactStaticBuildSourceUtilityViewRequirementSummary
@@ -1650,11 +1838,11 @@ export interface CompactStaticBuildSourceEntryGroupSummary {
 }
 
 export interface CompactStaticBuildSourceEntryCollectionSummary {
-  entryCount: number
-  sourceDamageViewCount: number
-  sourceUtilityViewCount: number
-  supportedCount: number
-  unsupportedCount: number
+  entryCount: CompactStaticBuildEntryCount
+  sourceDamageViewCount: CompactStaticBuildSourceDamageViewCount
+  sourceUtilityViewCount: CompactStaticBuildSourceUtilityViewCount
+  supportedCount: CompactStaticBuildSupportedCount
+  unsupportedCount: CompactStaticBuildUnsupportedCount
   isUtilityOnly: boolean
   effectSummary: CompactStaticBuildSourceEntryEffectSummaryItem[]
   sourceDamageRequirementSummary: CompactStaticBuildSourceDamageViewRequirementSummary
@@ -1683,9 +1871,9 @@ export interface CompactStaticBuildSourceEntryCollection {
 export interface CompactStaticBuildSourceUtilityViewGroupSummary {
   key: CompactStaticBuildSourceUtilityViewGroupKey
   label: CompactStaticBuildGroupLabel
-  count: number
-  supportedCount: number
-  unsupportedCount: number
+  count: CompactStaticBuildGroupCount
+  supportedCount: CompactStaticBuildSupportedCount
+  unsupportedCount: CompactStaticBuildUnsupportedCount
   effectSummary: CompactStaticBuildSourceUtilityViewEffectSummaryItem[]
   requirementSummary: CompactStaticBuildSourceUtilityViewRequirementSummary
   caveatSummary: CompactStaticBuildEntryCaveatSummary
@@ -1695,11 +1883,11 @@ export interface CompactStaticBuildSourceUtilityViewGroupSummary {
 }
 
 export interface CompactStaticBuildSourceUtilityViewsSummary {
-  entryCount: number
-  triggerCount: number
-  rateCount: number
-  supportedCount: number
-  unsupportedCount: number
+  entryCount: CompactStaticBuildEntryCount
+  triggerCount: CompactStaticBuildTriggerCount
+  rateCount: CompactStaticBuildRateCount
+  supportedCount: CompactStaticBuildSupportedCount
+  unsupportedCount: CompactStaticBuildUnsupportedCount
   effectSummary: CompactStaticBuildSourceUtilityViewEffectSummaryItem[]
   requirementSummary: CompactStaticBuildSourceUtilityViewRequirementSummary
   caveatSummary: CompactStaticBuildEntryCaveatSummary
