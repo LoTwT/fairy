@@ -1,3 +1,8 @@
+import type {
+  StaticBuildDamageType,
+  StaticBuildDriveDiscPieces,
+  StaticBuildSkillTag,
+} from "zzz-data"
 import { z as zod } from "zod"
 
 export const skillTagSchema = zod.enum([
@@ -10,14 +15,12 @@ export const skillTagSchema = zod.enum([
   "assist",
 ])
 
-export type BuildToolSkillTag =
-  | "basic"
-  | "dash"
-  | "special"
-  | "enhancedSpecial"
-  | "chain"
-  | "ultimate"
-  | "assist"
+export type BuildToolSkillTag = StaticBuildSkillTag
+
+export interface BuildToolDriveDiscSetInput {
+  name: string
+  pieces: StaticBuildDriveDiscPieces
+}
 
 export interface BuildToolEnemyInput {
   attackerLevel?: number
@@ -79,7 +82,7 @@ export interface BuildToolResolvedSnapshotInput {
   }
 }
 
-export type BuildToolDamageType = "normal" | "sheer" | "anomaly" | "disorder"
+export type BuildToolDamageType = StaticBuildDamageType
 
 interface BuildToolBaseScenarioInput {
   attribute?: string
@@ -293,17 +296,15 @@ export const resolveBuildScenarioSchema = zod.discriminatedUnion("damageType", [
   }),
 ])
 
+export const driveDiscSetSchema = zod.object({
+  name: zod.string().describe("驱动盘名称或 ID"),
+  pieces: zod.union([zod.literal(2), zod.literal(4)]),
+})
+
 export const resolveBuildInputSchema = zod.object({
   agent: zod.string().describe("代理人名称或 ID"),
   wEngine: zod.string().optional().describe("音擎名称或 ID"),
-  driveDiscs: zod
-    .array(
-      zod.object({
-        name: zod.string().describe("驱动盘名称或 ID"),
-        pieces: zod.union([zod.literal(2), zod.literal(4)]),
-      }),
-    )
-    .optional(),
+  driveDiscs: zod.array(driveDiscSetSchema).optional(),
   coreSkillLevel: zod.number().min(1).max(7).optional().default(7),
   wEngineRefinement: zod.number().min(1).max(5).optional().default(1),
   agentLevel: zod.number().min(1).max(60).optional(),
@@ -329,14 +330,7 @@ export const resolveBuildInputSchema = zod.object({
 export const resolveBuildSourceUtilityInputSchema = zod.object({
   agent: zod.string().describe("代理人名称或 ID"),
   wEngine: zod.string().optional().describe("音擎名称或 ID"),
-  driveDiscs: zod
-    .array(
-      zod.object({
-        name: zod.string().describe("驱动盘名称或 ID"),
-        pieces: zod.union([zod.literal(2), zod.literal(4)]),
-      }),
-    )
-    .optional(),
+  driveDiscs: zod.array(driveDiscSetSchema).optional(),
   coreSkillLevel: zod.number().min(1).max(7).optional().default(7),
   wEngineRefinement: zod.number().min(1).max(5).optional().default(1),
   agentLevel: zod.number().min(1).max(60).optional(),
@@ -385,14 +379,7 @@ export const resolveBuildSkillMatrixContextSchema = zod.object({
 export const resolveBuildSkillMatrixInputSchema = zod.object({
   agent: zod.string().describe("代理人名称或 ID"),
   wEngine: zod.string().optional().describe("音擎名称或 ID"),
-  driveDiscs: zod
-    .array(
-      zod.object({
-        name: zod.string().describe("驱动盘名称或 ID"),
-        pieces: zod.union([zod.literal(2), zod.literal(4)]),
-      }),
-    )
-    .optional(),
+  driveDiscs: zod.array(driveDiscSetSchema).optional(),
   agentMindscape: zod.number().int().min(0).max(6).optional(),
   coreSkillLevel: zod.number().min(1).max(7).optional().default(7),
   wEngineRefinement: zod.number().min(1).max(5).optional().default(1),
