@@ -10139,3 +10139,32 @@ caveatSummary` 这些兼容字段补齐。
 - `V275.2` 已完成：`types.ts` 已让 skill-matrix summary 的 panel / result 标量统一复用现有显式 scalar type
 - `V275.3` 已完成：现有 build / agent 测试与 runtime 校验已覆盖
 - `V275.4` 已完成：roadmap、索引与架构文档已同步
+
+## 279. V276 build summary map contracts
+
+`V275` 收口后，`resolve summary / skill-matrix summary` 中的 `formulaMultipliers / commonBuckets / commonFormulaMultipliers` 仍以匿名 `Record<string, number>` 暴露，和前面的显式公开 contract 仍不对称。
+
+`V276` 只解决一件事：
+
+1. 为这组公开 map contract 补显式 type，并让 resolve summary / skill-matrix summary / group summary 统一复用，不改变任何运行时行为
+
+### 279.1 分阶段
+
+1. `V276.1` scope freeze
+2. `V276.2` type alignment
+3. `V276.3` export alignment
+4. `V276.4` tests / runtime alignment
+5. `V276.5` docs closeout
+
+### 279.2 非目标
+
+1. 不改变相关 map 的 key/value 语义
+2. 不改变 summary 字段集合
+3. 不处理 `variableBuckets / variableFormulaMultipliers` 这类字符串列表 contract
+
+### 279.3 当前状态
+
+- `V276.1` 已完成：冻结到 build summary map contract
+- `V275.2` 已完成：`types.ts` 已让 skill-matrix summary 的 panel / result 标量统一复用现有显式 scalar type
+- `V275.3` 已完成：现有 build / agent 测试与 runtime 校验已覆盖
+- `V275.4` 已完成：roadmap、索引与架构文档已同步

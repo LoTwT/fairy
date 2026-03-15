@@ -159,6 +159,8 @@ export type StaticBuildAppliedRowCount = number
 export type StaticBuildTotalRowCount = number
 export type StaticBuildUtilityValue = number
 export type StaticBuildCooldownSeconds = number
+export type StaticBuildBucketValueMap = Record<string, number>
+export type StaticBuildFormulaMultiplierMap = Record<string, number>
 export type StaticBuildDefenderBaseDefense = number
 export type StaticBuildDefenderResistance = number
 export type StaticBuildDefenseBonus = number
@@ -601,7 +603,7 @@ export interface StaticBuildResolveSummary {
   expectedTotal: StaticBuildExpectedTotal
   critTotal: StaticBuildCriticalTotal
   noCritTotal: StaticBuildNonCriticalTotal
-  formulaMultipliers: Record<string, number>
+  formulaMultipliers: StaticBuildFormulaMultiplierMap
   assumptionCount: StaticBuildAssumptionCount
   diagnosticCount: StaticBuildDiagnosticCount
   sourceNoteCount: StaticBuildSourceNoteCount
@@ -1157,9 +1159,9 @@ export interface StaticBuildSkillMatrixSummary {
   critDamage: StaticBuildCritDamage
   penetrationRate: StaticBuildPenetrationRate
   penetrationValue: StaticBuildPenetrationValue
-  commonBuckets: Record<string, number>
+  commonBuckets: StaticBuildBucketValueMap
   variableBuckets: string[]
-  commonFormulaMultipliers: Record<string, number>
+  commonFormulaMultipliers: StaticBuildFormulaMultiplierMap
   variableFormulaMultipliers: string[]
   effectSummary: StaticBuildSkillMatrixEffectSummaryItem[]
   requirementSummary: StaticBuildSourceDamageViewRequirementSummary
@@ -1174,9 +1176,9 @@ export interface StaticBuildSkillMatrixGroupSummary {
   key: string
   label: string
   count: StaticBuildGroupCount
-  commonBuckets: Record<string, number>
+  commonBuckets: StaticBuildBucketValueMap
   variableBuckets: string[]
-  commonFormulaMultipliers: Record<string, number>
+  commonFormulaMultipliers: StaticBuildFormulaMultiplierMap
   variableFormulaMultipliers: string[]
   effectSummary: StaticBuildSkillMatrixEffectSummaryItem[]
   requirementSummary: StaticBuildSourceDamageViewRequirementSummary
