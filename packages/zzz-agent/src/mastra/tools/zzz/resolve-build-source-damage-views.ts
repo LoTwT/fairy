@@ -16,6 +16,7 @@ import {
   buildUncoveredSourceDamageViewResponse,
   buildUnsupportedAgentResponse,
   buildUnsupportedAnomalyTypeResponse,
+  buildUnsupportedDamageTypeResponse,
   buildUnsupportedDriveDiscResponse,
   buildUnsupportedWEngineResponse,
   findCatalogItem,
@@ -41,12 +42,10 @@ export const resolveBuildSourceDamageViews = createTool({
       input.scenario.damageType !== "anomaly" &&
       input.scenario.damageType !== "disorder"
     ) {
-      return {
-        found: false,
-        message:
-          "source-specific damage view 只用于 anomaly / disorder 的额外结算，不适用于 normal / sheer。",
-        supportedDamageTypes: ["anomaly", "disorder"],
-      }
+      return buildUnsupportedDamageTypeResponse(
+        buildToolScopeLabels.sourceDamageView,
+        ["anomaly", "disorder"],
+      )
     }
 
     const agent = findCatalogItem(supportedStaticBuildAgents, input.agent)

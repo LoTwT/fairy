@@ -14,6 +14,7 @@ import {
   buildToolScopeLabels,
   buildUnsupportedAgentResponse,
   buildUnsupportedAnomalyTypeResponse,
+  buildUnsupportedDamageTypeResponse,
   buildUnsupportedDriveDiscResponse,
   buildUnsupportedWEngineResponse,
   findCatalogItem,
@@ -39,12 +40,10 @@ export const resolveBuildTriggerMatrix = createTool({
       input.scenario.damageType !== "anomaly" &&
       input.scenario.damageType !== "disorder"
     ) {
-      return {
-        found: false,
-        message:
-          "trigger-entry matrix 只用于 anomaly / disorder，不适用于 normal / sheer。",
-        supportedDamageTypes: ["anomaly", "disorder"],
-      }
+      return buildUnsupportedDamageTypeResponse(
+        buildToolScopeLabels.triggerMatrix,
+        ["anomaly", "disorder"],
+      )
     }
 
     const agent = findCatalogItem(

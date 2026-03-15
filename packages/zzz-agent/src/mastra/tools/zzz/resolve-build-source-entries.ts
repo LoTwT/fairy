@@ -16,6 +16,7 @@ import {
 } from "zzz-data"
 import {
   buildIncompatibleWEngineResponse,
+  buildMissingSourceEntryFinalPanelResponse,
   buildToolScopeLabels,
   buildUnsupportedAgentResponse,
   buildUnsupportedAnomalyTypeResponse,
@@ -134,10 +135,7 @@ export const resolveBuildSourceEntries = createTool({
     ) {
       const fullPanel = finalPanelSchema.safeParse(input.finalPanel)
       if (!fullPanel.success) {
-        return {
-          found: false,
-          message: `anomaly / disorder 的 ${buildToolScopeLabels.sourceEntryCollection} 需要完整 finalPanel（至少 attack、critRate、critDamage，以及异常相关面板）。`,
-        }
+        return buildMissingSourceEntryFinalPanelResponse()
       }
     }
 

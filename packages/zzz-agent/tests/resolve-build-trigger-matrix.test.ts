@@ -505,6 +505,7 @@ describe("resolveBuildTriggerMatrix tool", () => {
     })
 
     expect((result as any).found).toBe(false)
+    expect((result as any).message).toContain("trigger-entry matrix")
     expect((result as any).supportedDamageTypes).toEqual([
       "anomaly",
       "disorder",

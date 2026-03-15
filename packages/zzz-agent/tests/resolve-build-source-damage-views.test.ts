@@ -362,6 +362,7 @@ describe("resolveBuildSourceDamageViews tool", () => {
     })
 
     expect((result as any).found).toBe(false)
+    expect((result as any).message).toContain("source-specific damage view")
     expect((result as any).supportedDamageTypes).toEqual([
       "anomaly",
       "disorder",

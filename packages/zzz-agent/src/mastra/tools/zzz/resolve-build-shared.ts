@@ -20,6 +20,71 @@ export const buildToolScopeLabels = {
 export type BuildToolScopeLabel =
   (typeof buildToolScopeLabels)[keyof typeof buildToolScopeLabels]
 
+export interface BuildToolUnsupportedAgentResponse {
+  found: false
+  message: string
+  supportedAgents: string[]
+  candidates: string[]
+}
+
+export interface BuildToolUnsupportedWEngineResponse {
+  found: false
+  message: string
+  supportedWEngines: string[]
+  candidates: string[]
+}
+
+export interface BuildToolIncompatibleWEngineResponse {
+  found: false
+  message: string
+  supportedWEngines: string[]
+  candidates: string[]
+}
+
+export interface BuildToolUnsupportedDriveDiscResponse {
+  found: false
+  message: string
+  supportedDriveDiscs: string[]
+  candidates: string[]
+}
+
+export interface BuildToolUnsupportedAnomalyTypeResponse {
+  found: false
+  message: string
+  supportedAnomalyTypes: readonly string[]
+}
+
+export interface BuildToolUnsupportedDamageTypeResponse {
+  found: false
+  message: string
+  supportedDamageTypes: readonly string[]
+}
+
+export interface BuildToolUncoveredSourceDamageViewResponse {
+  found: false
+  message: string
+  supportedAgents: string[]
+  candidates: string[]
+}
+
+export interface BuildToolMissingSourceUtilityWEngineResponse {
+  found: false
+  message: string
+  supportedWEngines: string[]
+}
+
+export interface BuildToolUncoveredSourceUtilityWEngineResponse {
+  found: false
+  message: string
+  supportedWEngines: string[]
+  candidates: string[]
+}
+
+export interface BuildToolMissingFinalPanelResponse {
+  found: false
+  message: string
+}
+
 export const specialtyLabels = {
   Attack: "强攻",
   Stun: "击破",
@@ -342,7 +407,7 @@ export function buildUnsupportedAgentResponse<T extends CatalogItem>(
   scopeLabel: BuildToolScopeLabel,
   items: readonly T[],
   query: string,
-) {
+): BuildToolUnsupportedAgentResponse {
   return {
     found: false as const,
     message: `当前 ${scopeLabel} 暂不支持代理人「${query}」`,
@@ -355,7 +420,7 @@ export function buildUnsupportedWEngineResponse<T extends CatalogItem>(
   scopeLabel: BuildToolScopeLabel,
   items: readonly T[],
   query: string,
-) {
+): BuildToolUnsupportedWEngineResponse {
   return {
     found: false as const,
     message: `当前 ${scopeLabel} 暂不支持音擎「${query}」`,
@@ -372,7 +437,7 @@ export function buildIncompatibleWEngineResponse<
   wEngine: TWEngine,
   compatibleWEngines: readonly CatalogItem[],
   query: string,
-) {
+): BuildToolIncompatibleWEngineResponse {
   return {
     found: false as const,
     message: `${agent.name} 为 ${specialtyLabels[agent.specialty]}代理人，无法使用 ${wEngine.name}（${specialtyLabels[wEngine.specialty]}音擎）`,
@@ -385,7 +450,7 @@ export function buildUnsupportedDriveDiscResponse<T extends CatalogItem>(
   scopeLabel: BuildToolScopeLabel,
   items: readonly T[],
   query: string,
-) {
+): BuildToolUnsupportedDriveDiscResponse {
   return {
     found: false as const,
     message: `当前 ${scopeLabel} 暂不支持驱动盘「${query}」`,
@@ -394,7 +459,9 @@ export function buildUnsupportedDriveDiscResponse<T extends CatalogItem>(
   }
 }
 
-export function buildUnsupportedAnomalyTypeResponse(query: string) {
+export function buildUnsupportedAnomalyTypeResponse(
+  query: string,
+): BuildToolUnsupportedAnomalyTypeResponse {
   return {
     found: false as const,
     message: `当前 resolver 无法识别异常类型「${query}」`,
@@ -410,10 +477,21 @@ export function buildUnsupportedAnomalyTypeResponse(query: string) {
   }
 }
 
+export function buildUnsupportedDamageTypeResponse(
+  scopeLabel: BuildToolScopeLabel,
+  supportedDamageTypes: readonly string[],
+): BuildToolUnsupportedDamageTypeResponse {
+  return {
+    found: false,
+    message: `${scopeLabel} 只适用于 ${supportedDamageTypes.join(" / ")}。`,
+    supportedDamageTypes,
+  }
+}
+
 export function buildUncoveredSourceDamageViewResponse<T extends CatalogItem>(
   items: readonly T[],
   query: string,
-) {
+): BuildToolUncoveredSourceDamageViewResponse {
   return {
     found: false as const,
     message: `当前 ${buildToolScopeLabels.sourceDamageView} 暂未覆盖代理人「${query}」`,
@@ -425,7 +503,7 @@ export function buildUncoveredSourceDamageViewResponse<T extends CatalogItem>(
 export function buildMissingSourceUtilityWEngineResponse<T extends CatalogItem>(
   agentName: string,
   items: readonly T[],
-) {
+): BuildToolMissingSourceUtilityWEngineResponse {
   return {
     found: false as const,
     message: `请先提供 ${agentName} 当前使用的音擎；${buildToolScopeLabels.sourceUtilityView} 目前只覆盖音擎来源。`,
@@ -435,12 +513,22 @@ export function buildMissingSourceUtilityWEngineResponse<T extends CatalogItem>(
 
 export function buildUncoveredSourceUtilityWEngineResponse<
   T extends CatalogItem,
->(items: readonly T[], query: string) {
+>(
+  items: readonly T[],
+  query: string,
+): BuildToolUncoveredSourceUtilityWEngineResponse {
   return {
     found: false as const,
     message: `当前 ${buildToolScopeLabels.sourceUtilityView} 暂未覆盖音擎「${query}」`,
     supportedWEngines: catalogNames(items),
     candidates: candidateNames(items, query),
+  }
+}
+
+export function buildMissingSourceEntryFinalPanelResponse(): BuildToolMissingFinalPanelResponse {
+  return {
+    found: false,
+    message: `anomaly / disorder 的 ${buildToolScopeLabels.sourceEntryCollection} 需要完整 finalPanel（至少 attack、critRate、critDamage，以及异常相关面板）。`,
   }
 }
 
