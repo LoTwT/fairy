@@ -14,11 +14,10 @@ import {
   supportedStaticBuildWEngines,
 } from "zzz-data"
 import {
-  buildSourceEntryCollectionSuccessResponse,
   buildToolScopeLabels,
   resolveBuildSourceEntriesInputSchema,
   resolveBuildToolSourceEntriesExecutionContext,
-  resolveBuildToolUncoveredSourceEntryResponse,
+  resolveBuildToolSourceEntryCollectionResponse,
 } from "./resolve-build-shared"
 
 export const resolveBuildSourceEntries = createTool({
@@ -82,20 +81,18 @@ export const resolveBuildSourceEntries = createTool({
       effectOverrides: input.effectOverrides,
     })
 
-    if (collection.entries.length === 0) {
-      return resolveBuildToolUncoveredSourceEntryResponse({
-        agentName: agent.name,
-        utilityOnly,
-        wEngine,
-        wEngineQuery: input.wEngine,
-        compatibleWEngines,
-        supportedSourceViewAgents: supportedStaticBuildSourceViewAgents,
-        supportedUtilityWEngines,
-      })
-    }
-
-    return buildSourceEntryCollectionSuccessResponse(
-      compactStaticBuildSourceEntryCollection(collection, input.includeDetails),
-    )
+    return resolveBuildToolSourceEntryCollectionResponse({
+      agentName: agent.name,
+      utilityOnly,
+      wEngine,
+      wEngineQuery: input.wEngine,
+      compatibleWEngines,
+      supportedSourceViewAgents: supportedStaticBuildSourceViewAgents,
+      supportedUtilityWEngines,
+      collection: compactStaticBuildSourceEntryCollection(
+        collection,
+        input.includeDetails,
+      ),
+    })
   },
 })

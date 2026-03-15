@@ -381,6 +381,16 @@ export interface BuildToolResolveSourceEntryCoverageResponseOptions<
   supportedUtilityWEngines: string[]
 }
 
+export interface BuildToolResolveSourceEntryCollectionResponseOptions<
+  TSourceViewAgent extends CatalogItem,
+  TWEngine extends CatalogItem,
+> extends BuildToolResolveSourceEntryCoverageResponseOptions<
+  TSourceViewAgent,
+  TWEngine
+> {
+  collection: CompactStaticBuildSourceEntryCollection
+}
+
 export interface BuildToolResolveSourceEntriesExecutionContextOptions<
   TAgent extends CatalogItem & { specialty: keyof typeof specialtyLabels },
   TWEngine extends CatalogItem & { specialty: keyof typeof specialtyLabels },
@@ -1697,6 +1707,25 @@ export function resolveBuildToolUncoveredSourceEntryResponse<
       ? candidateNames(options.compatibleWEngines, options.wEngineQuery)
       : [],
   )
+}
+
+export function resolveBuildToolSourceEntryCollectionResponse<
+  TSourceViewAgent extends CatalogItem,
+  TWEngine extends CatalogItem,
+>(
+  options: BuildToolResolveSourceEntryCollectionResponseOptions<
+    TSourceViewAgent,
+    TWEngine
+  >,
+):
+  | BuildToolUncoveredSourceEntryUtilityOnlyResponse
+  | BuildToolUncoveredSourceEntryCoverageResponse
+  | BuildToolSourceEntryCollectionSuccessResponse {
+  if (options.collection.entries.length === 0) {
+    return resolveBuildToolUncoveredSourceEntryResponse(options)
+  }
+
+  return buildSourceEntryCollectionSuccessResponse(options.collection)
 }
 
 export function buildDamageSuccessResponse(
