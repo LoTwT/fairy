@@ -12,8 +12,8 @@ import { resolveBuildToolSourceDamageViewsResponse } from "./resolve-build-respo
 import {
   resolveBuildInputSchema,
   resolveBuildSourceDamageViewsIncludeDetailsSchema,
-  resolveBuildToolTriggeredDamageContext,
-} from "./resolve-build-shared"
+} from "./resolve-build-schemas"
+import { resolveBuildToolTriggeredDamageContext } from "./resolve-build-shared"
 
 export const resolveBuildSourceDamageViews = createTool({
   id: "resolve-build-source-damage-views",

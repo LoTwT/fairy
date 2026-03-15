@@ -9,10 +9,8 @@ import {
   buildToolSkillMatrixCatalogPreset,
 } from "./resolve-build-presets"
 import { buildSkillMatrixSuccessResponse } from "./resolve-build-responses"
-import {
-  resolveBuildSkillMatrixInputSchema,
-  resolveBuildToolSkillMatrixExecutionContext,
-} from "./resolve-build-shared"
+import { resolveBuildSkillMatrixInputSchema } from "./resolve-build-schemas"
+import { resolveBuildToolSkillMatrixExecutionContext } from "./resolve-build-shared"
 
 export const resolveBuildSkillMatrix = createTool({
   id: "resolve-build-skill-matrix",

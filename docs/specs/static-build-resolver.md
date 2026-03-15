@@ -987,3 +987,4 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 236. `V236` build-tool response helpers：当前阶段已收口；高层 build tool 的 success response 与 source-view/source-entry coverage response helper 已固定到单独共享模块，不改变任何 tool 的输入输出 shape，见 [静态构筑解析系统 V236](./static-build-resolver-v236.md)
 237. `V237` build-tool specialty labels：当前阶段已收口；高层 build tool 的 `specialtyLabels` 已固定到单独共享模块，不改变任何 tool 的输入输出 shape，见 [静态构筑解析系统 V237](./static-build-resolver-v237.md)
 238. `V238` build-tool reject response helpers：当前阶段已收口；高层 build tool 的 reject-path response helper 已固定到单独共享模块，不改变任何 tool 的输入输出 shape，见 [静态构筑解析系统 V238](./static-build-resolver-v238.md)
+239. `V239` build-tool schema module：当前阶段已收口；高层 build tool 的 zod schema 与输入 contract type 已固定到单独共享模块，不改变任何 tool 的输入输出 shape，见 [静态构筑解析系统 V239](./static-build-resolver-v239.md)

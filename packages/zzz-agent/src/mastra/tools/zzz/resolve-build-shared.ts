@@ -1,3 +1,4 @@
+import type { z } from "zod"
 import type {
   AgentAttributeLabel,
   AnomalyType,
@@ -17,7 +18,10 @@ import type {
   CatalogItem,
 } from "./resolve-build-contracts"
 import type { specialtyLabels } from "./resolve-build-labels"
-import { z } from "zod"
+import type {
+  BuildToolScenarioInput,
+  BuildToolSkillMatrixContextInput,
+} from "./resolve-build-schemas"
 import {
   catalogNames,
   findCatalogItem,
@@ -32,6 +36,7 @@ import {
   buildUnsupportedDriveDiscResponse,
   buildUnsupportedWEngineResponse,
 } from "./resolve-build-responses"
+import { finalPanelSchema } from "./resolve-build-schemas"
 
 export interface BuildToolResolvedDriveDiscSets {
   ok: true
@@ -132,12 +137,6 @@ export interface BuildToolResolvedLoadoutOptions extends BuildToolProgressionInp
   wEngine?: Pick<CatalogItem, "id">
   driveDiscSets?: StaticBuildDriveDiscSetInput[]
 }
-
-export type BuildToolScenarioInput = z.infer<typeof resolveBuildScenarioSchema>
-
-export type BuildToolSkillMatrixContextInput = z.infer<
-  typeof resolveBuildSkillMatrixContextSchema
->
 
 export type BuildToolResolvedScenario =
   | (Omit<
@@ -290,332 +289,6 @@ export interface BuildToolResolvedTriggeredDamageContext<
   >
   wEngine: TWEngine | undefined
 }
-
-export const skillTagSchema = z.enum([
-  "basic",
-  "dash",
-  "special",
-  "enhancedSpecial",
-  "chain",
-  "ultimate",
-  "assist",
-])
-
-export const enemySchema = z.object({
-  attackerLevel: z.number().optional().default(60),
-  defenderBaseDefense: z.number(),
-  defenderResistance: z.number(),
-  defenseBonus: z.number().optional().default(0),
-  defenseReduction: z.number().optional().default(0),
-  resistanceReduction: z.number().optional().default(0),
-  ignoreResistance: z.number().optional().default(0),
-  vulnerabilityBonus: z.number().optional().default(0),
-  damageReduction: z.number().optional().default(0),
-  isStunned: z.boolean().optional().default(false),
-  stunVulnerability: z.number().optional().default(0),
-  nonStunVulnerability: z.number().optional().default(0),
-  specialMultiplier: z.number().optional().default(1),
-})
-
-export const dynamicSnapshotSchema = z
-  .object({
-    flags: z
-      .object({
-        ariaDreamtime: z.boolean().optional(),
-        burniceEmberState: z.boolean().optional(),
-      })
-      .optional(),
-    counts: z
-      .object({
-        burniceEmberExtraTriggers: z.number().int().min(0).optional(),
-      })
-      .optional(),
-    values: z
-      .object({
-        ariaExflowDamageRatio: z.number().min(0).optional(),
-        ariaStunnedDamageRatio: z.number().min(0).optional(),
-        burniceEmberDamageRatio: z.number().min(0).optional(),
-      })
-      .optional(),
-  })
-  .optional()
-
-export const stateSnapshotSchema = z
-  .object({
-    flags: z
-      .object({
-        alicePolarityAssaultState: z.boolean().optional(),
-        miyabiFrostburnBreakState: z.boolean().optional(),
-      })
-      .optional(),
-    values: z
-      .object({
-        alicePolarityAssaultDamageRatio: z.number().min(0).optional(),
-        miyabiFrostburnBreakDamageRatio: z.number().min(0).optional(),
-      })
-      .optional(),
-  })
-  .optional()
-
-export const resolvedSnapshotSchema = z
-  .object({
-    bucketDeltas: z
-      .object({
-        bonusDamageSum: z.number().optional(),
-        defenseReduction: z.number().optional(),
-        penetrationRate: z.number().optional(),
-        resistanceReduction: z.number().optional(),
-        ignoreResistance: z.number().optional(),
-        sheerBonusSum: z.number().optional(),
-        anomalyProficiency: z.number().optional(),
-        anomalyBonusDamageSum: z.number().optional(),
-        anomalyCritRate: z.number().optional(),
-        anomalyCritDamage: z.number().optional(),
-      })
-      .optional(),
-    multiplierFactors: z
-      .object({
-        skillMultiplierFactor: z.number().min(0).optional(),
-      })
-      .optional(),
-  })
-  .optional()
-
-export const finalPanelSchema = z.object({
-  attack: z.number(),
-  baseAttack: z.number().optional(),
-  critRate: z.number(),
-  critDamage: z.number(),
-  hp: z.number().optional(),
-  sheerForce: z.number().optional(),
-  energyGenerationRate: z.number().optional(),
-  anomalyProficiency: z.number().optional(),
-  anomalyMastery: z.number().optional(),
-  anomalyCritRate: z.number().optional(),
-  anomalyCritDamage: z.number().optional(),
-  penetrationRate: z.number().optional(),
-  penetrationValue: z.number().optional(),
-})
-
-export const resolveBuildScenarioSchema = z.discriminatedUnion("damageType", [
-  z.object({
-    damageType: z.literal("normal"),
-    skillTag: skillTagSchema,
-    skillMultiplier: z.union([z.number(), z.string()]),
-    attribute: z.string().optional(),
-    extraAbilityActive: z.boolean().optional(),
-    combatTags: z.array(z.string()).optional(),
-    dynamicSnapshot: dynamicSnapshotSchema,
-    stateSnapshot: stateSnapshotSchema,
-    resolvedSnapshot: resolvedSnapshotSchema,
-    enemy: enemySchema,
-  }),
-  z.object({
-    damageType: z.literal("sheer"),
-    skillTag: skillTagSchema,
-    skillMultiplier: z.union([z.number(), z.string()]),
-    attribute: z.string().optional(),
-    extraAbilityActive: z.boolean().optional(),
-    combatTags: z.array(z.string()).optional(),
-    dynamicSnapshot: dynamicSnapshotSchema,
-    stateSnapshot: stateSnapshotSchema,
-    resolvedSnapshot: resolvedSnapshotSchema,
-    enemy: enemySchema,
-  }),
-  z.object({
-    damageType: z.literal("anomaly"),
-    skillTag: skillTagSchema,
-    damageMultiplier: z.union([z.number(), z.string()]),
-    attribute: z.string().optional(),
-    extraAbilityActive: z.boolean().optional(),
-    combatTags: z.array(z.string()).optional(),
-    dynamicSnapshot: dynamicSnapshotSchema,
-    stateSnapshot: stateSnapshotSchema,
-    resolvedSnapshot: resolvedSnapshotSchema,
-    enemy: enemySchema,
-  }),
-  z.object({
-    damageType: z.literal("disorder"),
-    skillTag: skillTagSchema,
-    anomalyType: z.string(),
-    remainingTime: z.number().min(0),
-    attribute: z.string().optional(),
-    extraAbilityActive: z.boolean().optional(),
-    combatTags: z.array(z.string()).optional(),
-    dynamicSnapshot: dynamicSnapshotSchema,
-    stateSnapshot: stateSnapshotSchema,
-    resolvedSnapshot: resolvedSnapshotSchema,
-    enemy: enemySchema,
-  }),
-])
-
-export const resolveBuildInputSchema = z.object({
-  agent: z.string().describe("代理人名称或 ID"),
-  wEngine: z.string().optional().describe("音擎名称或 ID"),
-  driveDiscs: z
-    .array(
-      z.object({
-        name: z.string().describe("驱动盘名称或 ID"),
-        pieces: z.union([z.literal(2), z.literal(4)]),
-      }),
-    )
-    .optional(),
-  coreSkillLevel: z.number().min(1).max(7).optional().default(7),
-  wEngineRefinement: z.number().min(1).max(5).optional().default(1),
-  agentLevel: z.number().min(1).max(60).optional(),
-  agentMindscape: z.number().int().min(0).max(6).optional(),
-  mode: z
-    .enum(["baseline", "full-buff", "manual"])
-    .optional()
-    .default("baseline"),
-  manualBaseMode: z.enum(["baseline", "full-buff"]).optional(),
-  finalPanel: finalPanelSchema,
-  scenario: resolveBuildScenarioSchema,
-  effectOverrides: z
-    .array(
-      z.object({
-        effectId: z.string(),
-        enabled: z.boolean().optional(),
-        stacks: z.number().int().min(0).optional(),
-      }),
-    )
-    .optional(),
-})
-
-export const resolveBuildSourceUtilityInputSchema = z.object({
-  agent: z.string().describe("代理人名称或 ID"),
-  wEngine: z.string().optional().describe("音擎名称或 ID"),
-  driveDiscs: z
-    .array(
-      z.object({
-        name: z.string().describe("驱动盘名称或 ID"),
-        pieces: z.union([z.literal(2), z.literal(4)]),
-      }),
-    )
-    .optional(),
-  coreSkillLevel: z.number().min(1).max(7).optional().default(7),
-  wEngineRefinement: z.number().min(1).max(5).optional().default(1),
-  agentLevel: z.number().min(1).max(60).optional(),
-  agentMindscape: z.number().int().min(0).max(6).optional(),
-  finalPanel: finalPanelSchema.partial().optional(),
-})
-
-export const resolveBuildSourceEntriesInputSchema =
-  resolveBuildSourceUtilityInputSchema.extend({
-    mode: z
-      .enum(["baseline", "full-buff", "manual"])
-      .optional()
-      .default("baseline"),
-    manualBaseMode: z.enum(["baseline", "full-buff"]).optional(),
-    scenario: resolveBuildScenarioSchema.optional(),
-    effectOverrides: z
-      .array(
-        z.object({
-          effectId: z.string(),
-          enabled: z.boolean().optional(),
-          stacks: z.number().int().min(0).optional(),
-        }),
-      )
-      .optional(),
-  })
-
-export const skillMatrixFinalPanelSchema = finalPanelSchema.pick({
-  attack: true,
-  baseAttack: true,
-  critRate: true,
-  critDamage: true,
-  hp: true,
-  sheerForce: true,
-  energyGenerationRate: true,
-  penetrationRate: true,
-  penetrationValue: true,
-})
-
-export const resolveBuildSkillMatrixContextSchema = z.object({
-  attribute: z.string().optional(),
-  extraAbilityActive: z.boolean().optional(),
-  combatTags: z.array(z.string()).optional(),
-  enemy: enemySchema,
-})
-
-export const resolveBuildSkillMatrixInputSchema = z.object({
-  agent: z.string().describe("代理人名称或 ID"),
-  wEngine: z.string().optional().describe("音擎名称或 ID"),
-  driveDiscs: z
-    .array(
-      z.object({
-        name: z.string().describe("驱动盘名称或 ID"),
-        pieces: z.union([z.literal(2), z.literal(4)]),
-      }),
-    )
-    .optional(),
-  agentMindscape: z.number().int().min(0).max(6).optional(),
-  coreSkillLevel: z.number().min(1).max(7).optional().default(7),
-  wEngineRefinement: z.number().min(1).max(5).optional().default(1),
-  mode: z
-    .enum(["baseline", "full-buff", "manual"])
-    .optional()
-    .default("baseline"),
-  manualBaseMode: z.enum(["baseline", "full-buff"]).optional(),
-  finalPanel: skillMatrixFinalPanelSchema,
-  context: resolveBuildSkillMatrixContextSchema,
-  effectOverrides: z
-    .array(
-      z.object({
-        effectId: z.string(),
-        enabled: z.boolean().optional(),
-        stacks: z.number().int().min(0).optional(),
-      }),
-    )
-    .optional(),
-  includeDetails: z
-    .boolean()
-    .optional()
-    .default(false)
-    .describe(
-      "是否返回 skill matrix 完整明细，包括顶层 matrix.assumptions / matrix.unsupportedEffects，以及每行的 row.assumptions / row.unsupportedEffects / row.diagnostics / row.sourceNotes / build。默认 false，以避免上下文过大。",
-    ),
-})
-
-export const resolveBuildDamageIncludeDetailsSchema = z
-  .boolean()
-  .optional()
-  .default(false)
-  .describe(
-    "是否返回完整单场景 build 细节（assumptions、unsupportedEffects、diagnostics/sourceNotes、trace、damageParams）。默认 false，以避免上下文过大。",
-  )
-
-export const resolveBuildTriggerMatrixIncludeDetailsSchema = z
-  .boolean()
-  .optional()
-  .default(false)
-  .describe(
-    "是否返回 trigger matrix 完整明细，包括顶层 matrix.assumptions，以及每行的 row.assumptions / row.requirements / row.diagnostics / row.sourceNotes；在原始结果带 build 时也透传 row.build。默认 false，只保留各类 *Summary 与紧凑字段。",
-  )
-
-export const resolveBuildSourceDamageViewsIncludeDetailsSchema = z
-  .boolean()
-  .optional()
-  .default(false)
-  .describe(
-    "是否返回 source-damage-view 完整明细，包括顶层 views.assumptions，以及每条 entry 的 entry.assumptions / entry.requirements / entry.diagnostics / entry.sourceNotes；在原始结果带 build 时也透传 entry.build。默认 false，只保留各类 *Summary 与紧凑字段。",
-  )
-
-export const resolveBuildSourceUtilityViewsIncludeDetailsSchema = z
-  .boolean()
-  .optional()
-  .default(false)
-  .describe(
-    "是否返回 source-utility-view 完整明细，包括顶层 views.assumptions，以及每条 entry 的 entry.assumptions / entry.requirements / entry.diagnostics / entry.sourceNotes。默认 false，只保留各类 *Summary 与紧凑字段。",
-  )
-
-export const resolveBuildSourceEntriesIncludeDetailsSchema = z
-  .boolean()
-  .optional()
-  .default(false)
-  .describe(
-    "是否返回 source-entry collection 完整明细，包括顶层 collection.assumptions，以及每条 entry 的 entry.assumptions / entry.requirements / entry.diagnostics / entry.sourceNotes；若某条 source-damage-view entry 原始结果带有 build，也会一并返回完整 build 结果（trace、damageParams 等）。默认 false，只保留各类 *Summary 与紧凑字段。",
-  )
 
 export function resolveBuildToolAgent<T extends CatalogItem>(
   scopeLabel: BuildToolScopeLabel,

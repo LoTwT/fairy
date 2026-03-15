@@ -11,9 +11,9 @@ import {
 import { buildTriggerMatrixSuccessResponse } from "./resolve-build-responses"
 import {
   resolveBuildInputSchema,
-  resolveBuildToolTriggeredDamageContext,
   resolveBuildTriggerMatrixIncludeDetailsSchema,
-} from "./resolve-build-shared"
+} from "./resolve-build-schemas"
+import { resolveBuildToolTriggeredDamageContext } from "./resolve-build-shared"
 
 export const resolveBuildTriggerMatrix = createTool({
   id: "resolve-build-trigger-matrix",

@@ -12,8 +12,8 @@ import { resolveBuildToolSourceEntryCollectionResponse } from "./resolve-build-r
 import {
   resolveBuildSourceEntriesIncludeDetailsSchema,
   resolveBuildSourceEntriesInputSchema,
-  resolveBuildToolSourceEntriesExecutionContext,
-} from "./resolve-build-shared"
+} from "./resolve-build-schemas"
+import { resolveBuildToolSourceEntriesExecutionContext } from "./resolve-build-shared"
 
 export const resolveBuildSourceEntries = createTool({
   id: "resolve-build-source-entries",

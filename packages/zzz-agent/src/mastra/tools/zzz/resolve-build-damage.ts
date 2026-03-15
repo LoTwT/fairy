@@ -9,8 +9,8 @@ import { buildDamageSuccessResponse } from "./resolve-build-responses"
 import {
   resolveBuildDamageIncludeDetailsSchema,
   resolveBuildInputSchema,
-  resolveBuildToolDamageExecutionContext,
-} from "./resolve-build-shared"
+} from "./resolve-build-schemas"
+import { resolveBuildToolDamageExecutionContext } from "./resolve-build-shared"
 
 export const resolveBuildDamage = createTool({
   id: "resolve-build-damage",

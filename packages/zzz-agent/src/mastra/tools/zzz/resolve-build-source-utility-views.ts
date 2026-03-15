@@ -12,8 +12,8 @@ import { resolveBuildToolSourceUtilityViewsResponse } from "./resolve-build-resp
 import {
   resolveBuildSourceUtilityInputSchema,
   resolveBuildSourceUtilityViewsIncludeDetailsSchema,
-  resolveBuildToolSourceUtilityExecutionContext,
-} from "./resolve-build-shared"
+} from "./resolve-build-schemas"
+import { resolveBuildToolSourceUtilityExecutionContext } from "./resolve-build-shared"
 
 export const resolveBuildSourceUtilityViews = createTool({
   id: "resolve-build-source-utility-views",
