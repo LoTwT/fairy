@@ -1,4 +1,7 @@
-import type { AgentAttributeLabel } from "zzz-data"
+import type {
+  AgentAttributeLabel,
+  ResolveStaticBuildSourceEntriesInput,
+} from "zzz-data"
 import { createTool } from "@mastra/core/tools"
 import { z } from "zod"
 import {
@@ -114,24 +117,25 @@ export const resolveBuildSourceEntries = createTool({
       driveDiscSets.push({ id: disc.id, pieces: discInput.pieces })
     }
 
-    let scenario = input.scenario
-    if (scenario?.damageType === "disorder") {
-      const anomalyType = normalizeAnomalyType(scenario.anomalyType)
+    let scenario: ResolveStaticBuildSourceEntriesInput["scenario"]
+    if (input.scenario?.damageType === "disorder") {
+      const anomalyType = normalizeAnomalyType(input.scenario.anomalyType)
       if (!anomalyType) {
-        return buildUnsupportedAnomalyTypeResponse(scenario.anomalyType)
+        return buildUnsupportedAnomalyTypeResponse(input.scenario.anomalyType)
       }
       scenario = {
-        ...scenario,
+        ...input.scenario,
         anomalyType,
-        attribute: scenario.attribute as AgentAttributeLabel | undefined,
+        attribute: input.scenario.attribute as AgentAttributeLabel | undefined,
       }
-    } else if (scenario) {
+    } else if (input.scenario) {
       scenario = {
-        ...scenario,
-        attribute: scenario.attribute as AgentAttributeLabel | undefined,
+        ...input.scenario,
+        attribute: input.scenario.attribute as AgentAttributeLabel | undefined,
       }
     }
 
+    let panel: ResolveStaticBuildSourceEntriesInput["panel"]
     if (
       scenario &&
       (scenario.damageType === "anomaly" || scenario.damageType === "disorder")
@@ -139,6 +143,14 @@ export const resolveBuildSourceEntries = createTool({
       const fullPanel = finalPanelSchema.safeParse(input.finalPanel)
       if (!fullPanel.success) {
         return buildMissingSourceEntryFinalPanelResponse()
+      }
+      panel = fullPanel.data
+    } else if (input.finalPanel) {
+      panel = {
+        attack: input.finalPanel.attack ?? 0,
+        critRate: input.finalPanel.critRate ?? 0,
+        critDamage: input.finalPanel.critDamage ?? 0,
+        ...input.finalPanel,
       }
     }
 
@@ -154,8 +166,8 @@ export const resolveBuildSourceEntries = createTool({
         coreSkillLevel: input.coreSkillLevel,
         wEngineRefinement: input.wEngineRefinement,
       },
-      panel: input.finalPanel as any,
-      scenario: scenario as any,
+      panel,
+      scenario,
       effectOverrides: input.effectOverrides,
     })
 

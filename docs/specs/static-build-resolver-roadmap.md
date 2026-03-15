@@ -8066,6 +8066,40 @@ caveatSummary` 这些兼容字段补齐。
 - `V207.3` 已完成：现有高层回归测试与 runtime 校验已覆盖
 - `V207.4` 已完成：roadmap、索引与架构文档已同步
 
+## 211. V208 source-entry tool typed panel normalization
+
+`V207` 收口后，`resolve-build-source-entries.ts` 里还保留最后两个明显的类型逃逸：
+
+1. `panel: input.finalPanel as any`
+2. `scenario: scenario as any`
+
+根因是高层 tool 允许 utility-only 路径传 partial `finalPanel`，而底层 `zzz-data` 的 `ResolveStaticBuildSourceEntriesInput` 仍要求完整 panel。
+
+`V208` 只解决这一件事：
+
+1. 在高层 tool 内显式归一化 `panel / scenario`，去掉这两个 `as any`
+
+### 211.1 分阶段
+
+1. `V208.1` scope freeze
+2. `V208.2` runtime/type contract alignment
+3. `V208.3` tests / prompt alignment
+4. `V208.4` docs closeout
+
+### 211.2 非目标
+
+1. 不改变 `source-entry collection` 的返回 shape
+2. 不放宽 anomaly / disorder 对完整 `finalPanel` 的要求
+3. 不改变底层 `zzz-data` 的 `ResolveStaticBuildSourceEntriesInput` contract
+4. 不新增新的 build 计算能力
+
+### 211.3 当前状态
+
+- `V208.1` 已完成：冻结到 source-entry tool typed panel normalization
+- `V208.2` 已完成：`resolve-build-source-entries.ts` 已去掉最后两个 `as any`
+- `V208.3` 已完成：utility-only partial `finalPanel` 回归测试已覆盖
+- `V208.4` 已完成：roadmap、索引与架构文档已同步
+
 ## 174. V171 explicit compact top-level summary effect summaries
 
 `V170` 收口后，compact contract 中下一批仍直接复用 raw effect summary item type 的显式缺口主要集中在 top-level `summary`：

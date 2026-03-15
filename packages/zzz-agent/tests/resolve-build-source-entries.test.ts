@@ -226,6 +226,23 @@ describe("resolveBuildSourceEntries tool", () => {
     })
   })
 
+  it("accepts utility-only partial finalPanel snapshots", async () => {
+    const result = await runTool(resolveBuildSourceEntries, {
+      agent: "妮可",
+      wEngine: "时光切片",
+      wEngineRefinement: 1,
+      finalPanel: {
+        energyGenerationRate: 0.3,
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    expect((result as any).collection.summary.isUtilityOnly).toBe(true)
+    expect(
+      (result as any).collection.summary.sourceUtilityViewCount,
+    ).toBeGreaterThan(0)
+  })
+
   it("aggregates top-level and group effect summary for mixed Alice source entries", async () => {
     const result = await runTool(resolveBuildSourceEntries, {
       agent: "爱丽丝",
