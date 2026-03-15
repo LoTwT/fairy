@@ -11555,5 +11555,33 @@ caveatSummary` 这些兼容字段补齐。
 
 - `V320.1` 已完成：范围冻结到 source coverage id contract
 - `V320.2` 已完成：source coverage helper 的 `sourceId` 已统一复用显式公开 id alias
-- `V320.3` 进行中：校验与提交
+- `V320.3` 已完成：校验与提交已通过
 - `V320.4` 已完成：roadmap、索引与架构文档已同步
+
+## 324. V321 source note lookup input contracts
+
+### 324.1 目标
+
+`V321` 只解决一件事：
+
+- 把 `definitions.ts` 中 `source note` 相关 helper 仍直接暴露的 inline lookup input，统一收成显式公开 contract。
+
+### 324.2 范围
+
+1. `StaticBuildSourceNoteLookupInput`
+2. `matchesStaticBuildSourceNote()`
+3. `getStaticBuildSourceNoteEntries()`
+4. `getStaticBuildSourceNotes()`
+
+### 324.3 非目标
+
+1. 不修改任何 runtime 匹配逻辑
+2. 不处理 `source note` 输出结构
+3. 不调整 source-note 数据内容
+
+### 324.4 当前状态
+
+- `V321.1` 已完成：范围冻结到 source note lookup input contract
+- `V321.2` 已完成：source note helper 的 lookup input 已统一复用显式公开 contract
+- `V321.3` 进行中：校验与提交
+- `V321.4` 已完成：roadmap、索引与架构文档已同步

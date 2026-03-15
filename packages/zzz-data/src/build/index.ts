@@ -207,6 +207,7 @@ export type {
   StaticBuildSourceNoteGuidanceTarget,
   StaticBuildSourceNoteKey,
   StaticBuildSourceNoteKeyList,
+  StaticBuildSourceNoteLookupInput,
   StaticBuildSourceNoteMessage,
   StaticBuildSourceNoteOwner,
   StaticBuildSourceNoteStatus,

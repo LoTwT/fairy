@@ -1,27 +1,24 @@
 import type { AnomalyType } from "../calculator/types.js"
 import type {
   StaticBuildAgentMindscape,
-  StaticBuildAnomalyMastery,
   StaticBuildDamageType,
   StaticBuildDriveDiscPieces,
   StaticBuildDynamicCountKey,
   StaticBuildDynamicFlagKey,
-  StaticBuildDynamicSnapshotInput,
   StaticBuildDynamicValueKey,
   StaticBuildEffectDefinition,
   StaticBuildEffectLoadoutInput,
   StaticBuildEnergyGenerationRate,
   StaticBuildResolvedSnapshotBucketKey,
-  StaticBuildResolvedSnapshotInput,
   StaticBuildResolvedSnapshotMultiplierKey,
   StaticBuildSourceCoverageId,
   StaticBuildSourceNoteEntry,
   StaticBuildSourceNoteGuidance,
+  StaticBuildSourceNoteLookupInput,
   StaticBuildSourceNoteOwner,
   StaticBuildSourceNoteStatus,
   StaticBuildSourceType,
   StaticBuildStateFlagKey,
-  StaticBuildStateSnapshotInput,
   StaticBuildStateValueKey,
   StaticBuildValueContext,
 } from "./types.js"
@@ -4773,20 +4770,7 @@ export function hasStaticBuildEffectsForSource(
 
 function matchesStaticBuildSourceNote(
   note: StaticBuildSourceNote,
-  input: {
-    sourceType: StaticBuildSourceType
-    sourceId?: string
-    damageType: StaticBuildDamageType
-    agentMindscape?: StaticBuildAgentMindscape
-    energyGenerationRate?: StaticBuildEnergyGenerationRate
-    anomalyMastery?: StaticBuildAnomalyMastery
-    dynamicSnapshot?: StaticBuildDynamicSnapshotInput
-    stateSnapshot?: StaticBuildStateSnapshotInput
-    resolvedSnapshot?: StaticBuildResolvedSnapshotInput
-    isStunned?: boolean
-    disorderSourceType?: AnomalyType
-    pieces?: StaticBuildDriveDiscPieces
-  },
+  input: StaticBuildSourceNoteLookupInput,
 ) {
   if (!input.sourceId) return false
   if (
@@ -4957,20 +4941,9 @@ function matchesStaticBuildSourceNote(
   return true
 }
 
-export function getStaticBuildSourceNoteEntries(input: {
-  sourceType: StaticBuildSourceType
-  sourceId?: string
-  damageType: StaticBuildDamageType
-  agentMindscape?: StaticBuildAgentMindscape
-  energyGenerationRate?: StaticBuildEnergyGenerationRate
-  anomalyMastery?: StaticBuildAnomalyMastery
-  dynamicSnapshot?: StaticBuildDynamicSnapshotInput
-  stateSnapshot?: StaticBuildStateSnapshotInput
-  resolvedSnapshot?: StaticBuildResolvedSnapshotInput
-  isStunned?: boolean
-  disorderSourceType?: AnomalyType
-  pieces?: StaticBuildDriveDiscPieces
-}) {
+export function getStaticBuildSourceNoteEntries(
+  input: StaticBuildSourceNoteLookupInput,
+) {
   if (!input.sourceId) return []
   return staticBuildSourceNotes
     .filter((note) => matchesStaticBuildSourceNote(note, input))
@@ -4991,20 +4964,9 @@ export function getStaticBuildSourceNoteEntries(input: {
     })
 }
 
-export function getStaticBuildSourceNotes(input: {
-  sourceType: StaticBuildSourceType
-  sourceId?: string
-  damageType: StaticBuildDamageType
-  agentMindscape?: StaticBuildAgentMindscape
-  energyGenerationRate?: StaticBuildEnergyGenerationRate
-  anomalyMastery?: StaticBuildAnomalyMastery
-  dynamicSnapshot?: StaticBuildDynamicSnapshotInput
-  stateSnapshot?: StaticBuildStateSnapshotInput
-  resolvedSnapshot?: StaticBuildResolvedSnapshotInput
-  isStunned?: boolean
-  disorderSourceType?: AnomalyType
-  pieces?: StaticBuildDriveDiscPieces
-}) {
+export function getStaticBuildSourceNotes(
+  input: StaticBuildSourceNoteLookupInput,
+) {
   return getStaticBuildSourceNoteEntries(input).map((note) => note.message)
 }
 

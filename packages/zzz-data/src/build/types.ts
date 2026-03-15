@@ -368,6 +368,21 @@ export type StaticBuildScenarioInput =
   | StaticBuildAnomalyScenarioInput
   | StaticBuildDisorderScenarioInput
 
+export interface StaticBuildSourceNoteLookupInput {
+  sourceType: StaticBuildSourceType
+  sourceId?: StaticBuildSourceCoverageId
+  damageType: StaticBuildDamageType
+  agentMindscape?: StaticBuildAgentMindscape
+  energyGenerationRate?: StaticBuildEnergyGenerationRate
+  anomalyMastery?: StaticBuildAnomalyMastery
+  dynamicSnapshot?: StaticBuildDynamicSnapshotInput
+  stateSnapshot?: StaticBuildStateSnapshotInput
+  resolvedSnapshot?: StaticBuildResolvedSnapshotInput
+  isStunned?: boolean
+  disorderSourceType?: AnomalyType
+  pieces?: StaticBuildDriveDiscPieces
+}
+
 export interface StaticBuildEffectOverride {
   effectId: StaticBuildEffectId
   enabled?: boolean
