@@ -24,6 +24,7 @@ export type StaticBuildEffectSummaryValue = string
 export type StaticBuildEffectSummaryCondition = string
 export type StaticBuildGroupLabel = string
 export type StaticBuildDisplayName = string
+export type StaticBuildTraceReason = string
 export type StaticBuildBaseDamageStat = "attack" | "sheerForce"
 export type StaticBuildSpecialty = AgentSpecialty
 
@@ -481,7 +482,7 @@ export interface StaticBuildTraceItem {
   sourceName: StaticBuildSourceName
   label: StaticBuildEffectLabel
   status: "applied" | "skipped" | "unsupported"
-  reason?: string
+  reason?: StaticBuildTraceReason
   stacks?: StaticBuildEffectStacks
   modifiers?: StaticBuildTraceModifier[]
 }

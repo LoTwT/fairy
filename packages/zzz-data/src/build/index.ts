@@ -211,6 +211,7 @@ export type {
   StaticBuildTotalEntryCount,
   StaticBuildTotalRowCount,
   StaticBuildTraceItem,
+  StaticBuildTraceReason,
   StaticBuildTriggerCount,
   StaticBuildTriggerMatrixEntryKind,
   StaticBuildTriggerMatrixRow,
