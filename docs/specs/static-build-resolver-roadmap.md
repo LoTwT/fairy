@@ -8773,6 +8773,39 @@ caveatSummary` 这些兼容字段补齐。
 - `V229.3` 已完成：现有高层回归测试与 runtime 校验已覆盖
 - `V229.4` 已完成：roadmap、索引与架构文档已同步
 
+## 233. V230 source-utility response helper contracts
+
+`V229` 收口后，`resolve-build-source-utility-views.ts` 仍保留最后一段本地后处理分支：
+
+1. 缺少音擎时返回 missing-w-engine coverage response
+2. `views.entries.length === 0` 时返回 uncovered coverage response
+3. 非空时 compact 并返回 success response
+
+`V230` 只解决这一件事：
+
+1. 把 `resolve-build-source-utility-views.ts` 的 missing / uncovered / success 后处理固定成 shared helper，不改变任何 tool 的输入输出 shape
+
+### 233.1 分阶段
+
+1. `V230.1` scope freeze
+2. `V230.2` shared helper / runtime alignment
+3. `V230.3` tests / prompt alignment
+4. `V230.4` docs closeout
+
+### 233.2 非目标
+
+1. 不改变 `resolve-build-source-utility-views` 的输入 schema
+2. 不改变成功返回中的 `views` shape
+3. 不改变 missing / uncovered coverage 的 message 文案和字段名
+4. 不改变底层 `zzz-data` runtime
+
+### 233.3 当前状态
+
+- `V230.1` 已完成：冻结到 source-utility-view response helper contracts
+- `V230.2` 已完成：`resolve-build-source-utility-views.ts` 的 missing / uncovered / success 后处理已统一复用 shared helper
+- `V230.3` 已完成：现有高层回归测试与 runtime 校验已覆盖
+- `V230.4` 已完成：roadmap、索引与架构文档已同步
+
 ## 174. V171 explicit compact top-level summary effect summaries
 
 `V170` 收口后，compact contract 中下一批仍直接复用 raw effect summary item type 的显式缺口主要集中在 top-level `summary`：

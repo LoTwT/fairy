@@ -355,6 +355,12 @@ export interface BuildToolResolveSourceUtilityCoverageResponseOptions<
   wEngine?: TWEngine
 }
 
+export interface BuildToolResolveSourceUtilityViewsResponseOptions<
+  TWEngine extends CatalogItem,
+> extends BuildToolResolveSourceUtilityCoverageResponseOptions<TWEngine> {
+  views?: CompactStaticBuildSourceUtilityViewsResult
+}
+
 export interface BuildToolResolveSourceDamageCoverageResponseOptions<
   TAgent extends CatalogItem,
 > {
@@ -1426,6 +1432,25 @@ export function resolveBuildToolSourceUtilityCoverageResponse<
     options.supportedWEngines,
     options.wEngine.name,
   )
+}
+
+export function resolveBuildToolSourceUtilityViewsResponse<
+  TWEngine extends CatalogItem,
+>(
+  options: BuildToolResolveSourceUtilityViewsResponseOptions<TWEngine>,
+):
+  | BuildToolMissingSourceUtilityWEngineResponse
+  | BuildToolUncoveredSourceUtilityWEngineResponse
+  | BuildToolSourceUtilityViewsSuccessResponse {
+  if (
+    !options.wEngine ||
+    !options.views ||
+    options.views.entries.length === 0
+  ) {
+    return resolveBuildToolSourceUtilityCoverageResponse(options)
+  }
+
+  return buildSourceUtilityViewsSuccessResponse(options.views)
 }
 
 export function buildMissingSourceEntryFinalPanelResponse(): BuildToolMissingFinalPanelResponse {
