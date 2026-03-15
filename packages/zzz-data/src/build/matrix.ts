@@ -6,6 +6,7 @@ import type {
   StaticBuildBucketValueMap,
   StaticBuildCombatTagList,
   StaticBuildDamageType,
+  StaticBuildEffectBucketLabelMap,
   StaticBuildFormulaMultiplierMap,
   StaticBuildSkillMatrixAttributeSource,
   StaticBuildSkillMatrixEffectSummaryItem,
@@ -428,7 +429,7 @@ function summarizeFormulaMultipliers(rows: StaticBuildSkillMatrixRow[]) {
   return { commonFormulaMultipliers, variableFormulaMultipliers }
 }
 
-const bucketLabels = {
+const bucketLabels: StaticBuildEffectBucketLabelMap = {
   attackPercent: "攻击%",
   flatAttack: "固定攻击",
   bonusDamageSum: "增伤",
@@ -524,10 +525,7 @@ function summarizeSkillMatrixEffects(
 
       item.rows.add(row.id)
       for (const modifier of trace.modifiers) {
-        item.bucketTexts.add(
-          bucketLabels[modifier.bucket as keyof typeof bucketLabels] ??
-            modifier.bucket,
-        )
+        item.bucketTexts.add(bucketLabels[modifier.bucket] ?? modifier.bucket)
         item.valueTexts.add(
           formatModifier(modifier.bucket, modifier.value, modifier.combine),
         )

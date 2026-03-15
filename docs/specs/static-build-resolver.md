@@ -1077,3 +1077,4 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 326. `V326` catalog source list contracts：当前阶段已收口；`catalog.ts` 中上游 source item 的 `attributes` 列表和 alias override map 已统一收成显式公开 contract，不改变任何运行时行为，见 [静态构筑解析系统 V326](./static-build-resolver-v326.md)
 327. `V327` label map contracts：当前阶段已收口；`build` 各模块中固定 `Record<..., string>` 的 label map 已统一收成显式公开 contract，不改变任何运行时行为，见 [静态构筑解析系统 V327](./static-build-resolver-v327.md)
 328. `V328` combat tag collection contracts：当前阶段已收口；`combatTags` 在 `resolver` 和 `skill-matrix template` 里的 collection shape 已统一收成显式公开 contract，不改变任何运行时行为，见 [静态构筑解析系统 V328](./static-build-resolver-v328.md)
+329. `V329` bucket label map contracts：当前阶段已收口；`resolver / source-damage-view / trigger-matrix / skill-matrix` 中固定的 bucket label map 已统一收成显式公开 contract，不改变任何运行时行为，见 [静态构筑解析系统 V329](./static-build-resolver-v329.md)

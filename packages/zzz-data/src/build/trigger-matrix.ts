@@ -5,6 +5,7 @@ import type {
   StaticBuildAssumptionList,
   StaticBuildEntryCaveatSummary,
   StaticBuildSourceDamageViewEntry,
+  StaticBuildTriggerMatrixBucketLabelMap,
   StaticBuildTriggerMatrixEffectSummaryItem,
   StaticBuildTriggerMatrixEntryKind,
   StaticBuildTriggerMatrixGroupLabelMap,
@@ -24,7 +25,7 @@ import {
   supportedStaticBuildSourceViewAgents,
 } from "./views.js"
 
-const triggerMatrixBucketLabels = {
+const triggerMatrixBucketLabels: StaticBuildTriggerMatrixBucketLabelMap = {
   attack: "攻击力",
   hp: "生命值",
   sheerForce: "贯穿力",
@@ -298,9 +299,7 @@ function summarizeTriggerMatrixEffects(
       item.rows.add(row.id)
       for (const modifier of trace.modifiers) {
         item.bucketTexts.add(
-          triggerMatrixBucketLabels[
-            modifier.bucket as keyof typeof triggerMatrixBucketLabels
-          ] ?? modifier.bucket,
+          triggerMatrixBucketLabels[modifier.bucket] ?? modifier.bucket,
         )
         item.valueTexts.add(
           formatTriggerMatrixModifier(

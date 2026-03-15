@@ -10,6 +10,7 @@ import type {
   StaticBuildDriveDiscSetsInput,
   StaticBuildEntryCaveatSummary,
   StaticBuildResolvedLoadout,
+  StaticBuildSourceDamageViewBucketLabelMap,
   StaticBuildSourceDamageViewEffectSummaryItem,
   StaticBuildSourceDamageViewEntry,
   StaticBuildSourceDamageViewGroupKey,
@@ -54,31 +55,32 @@ const sourceDamageViewGroupLabels: StaticBuildSourceDamageViewGroupLabelMap = {
   delta: "增量结算条目",
 }
 
-const sourceDamageViewBucketLabels = {
-  attack: "攻击力",
-  hp: "生命值",
-  sheerForce: "贯穿力",
-  anomalyProficiency: "异常精通",
-  anomalyMastery: "异常掌控",
-  critRate: "暴击率",
-  critDamage: "暴击伤害",
-  bonusDamageSum: "增伤区",
-  skillMultiplierFactor: "技能倍率",
-  penetrationRate: "穿透率",
-  penetrationValue: "穿透值",
-  resistanceReduction: "减抗",
-  ignoreResistance: "无视抗性",
-  defenseReduction: "减防",
-  vulnerabilityBonus: "易伤",
-  damageReduction: "减伤",
-  stunVulnerability: "失衡易伤",
-  nonStunVulnerability: "非失衡易伤",
-  sheerBonusSum: "贯穿增伤",
-  anomalyBonusDamageSum: "异常增伤",
-  anomalyCritRate: "异常暴击率",
-  anomalyCritDamage: "异常暴击伤害",
-  energyGenerationRate: "能量自动回复",
-} as const
+const sourceDamageViewBucketLabels: StaticBuildSourceDamageViewBucketLabelMap =
+  {
+    attack: "攻击力",
+    hp: "生命值",
+    sheerForce: "贯穿力",
+    anomalyProficiency: "异常精通",
+    anomalyMastery: "异常掌控",
+    critRate: "暴击率",
+    critDamage: "暴击伤害",
+    bonusDamageSum: "增伤区",
+    skillMultiplierFactor: "技能倍率",
+    penetrationRate: "穿透率",
+    penetrationValue: "穿透值",
+    resistanceReduction: "减抗",
+    ignoreResistance: "无视抗性",
+    defenseReduction: "减防",
+    vulnerabilityBonus: "易伤",
+    damageReduction: "减伤",
+    stunVulnerability: "失衡易伤",
+    nonStunVulnerability: "非失衡易伤",
+    sheerBonusSum: "贯穿增伤",
+    anomalyBonusDamageSum: "异常增伤",
+    anomalyCritRate: "异常暴击率",
+    anomalyCritDamage: "异常暴击伤害",
+    energyGenerationRate: "能量自动回复",
+  } as const
 
 const sourceDamageViewRequirementKinds = [
   "combat-tag",
@@ -357,9 +359,7 @@ export function summarizeSourceDamageViewEffects(
       item.entries.add(entry.id)
       for (const modifier of trace.modifiers) {
         item.bucketTexts.add(
-          sourceDamageViewBucketLabels[
-            modifier.bucket as keyof typeof sourceDamageViewBucketLabels
-          ] ?? modifier.bucket,
+          sourceDamageViewBucketLabels[modifier.bucket] ?? modifier.bucket,
         )
         item.valueTexts.add(
           formatSourceDamageViewModifier(

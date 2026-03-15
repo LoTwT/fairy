@@ -11801,3 +11801,32 @@ caveatSummary` 这些兼容字段补齐。
 - `V328.2` 已完成：combat tag collection 已统一复用显式公开 contract
 - `V328.3` 已完成：校验与提交已通过
 - `V328.4` 已完成：roadmap、索引与架构文档已同步
+
+## 332. V329 bucket label map contracts
+
+### 332.1 目标
+
+`V329` 只解决一件事：
+
+- 把 `resolver / source-damage-view / trigger-matrix / skill-matrix` 中固定的 bucket label map 统一收成显式公开 contract。
+
+### 332.2 范围
+
+1. `StaticBuildEffectBucketLabelMap`
+2. `StaticBuildSourceDamageViewBucketKey`
+3. `StaticBuildSourceDamageViewBucketLabelMap`
+4. `StaticBuildTriggerMatrixBucketLabelMap`
+5. 对应 label map 常量与 `build/index.ts` type export
+
+### 332.3 非目标
+
+1. 不修改任何 bucket label 文案
+2. 不调整任何 effect summary 聚合逻辑
+3. 不处理 reducer 中的 `Set<string>` 聚合容器
+
+### 332.4 当前状态
+
+- `V329.1` 已完成：范围冻结到 bucket label map contract
+- `V329.2` 已完成：bucket label map 已统一复用显式公开 contract
+- `V329.3` 已完成：校验与提交已通过
+- `V329.4` 已完成：roadmap、索引与架构文档已同步

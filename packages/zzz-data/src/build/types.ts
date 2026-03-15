@@ -90,6 +90,31 @@ export type StaticBuildBucket =
   | "anomalyCritDamage"
   | "skillMultiplierFactor"
 
+export type StaticBuildSourceDamageViewBucketKey =
+  | "attack"
+  | "hp"
+  | "sheerForce"
+  | "anomalyProficiency"
+  | "anomalyMastery"
+  | "critRate"
+  | "critDamage"
+  | "bonusDamageSum"
+  | "skillMultiplierFactor"
+  | "penetrationRate"
+  | "penetrationValue"
+  | "resistanceReduction"
+  | "ignoreResistance"
+  | "defenseReduction"
+  | "vulnerabilityBonus"
+  | "damageReduction"
+  | "stunVulnerability"
+  | "nonStunVulnerability"
+  | "sheerBonusSum"
+  | "anomalyBonusDamageSum"
+  | "anomalyCritRate"
+  | "anomalyCritDamage"
+  | "energyGenerationRate"
+
 export type StaticBuildDynamicFlagKey = "ariaDreamtime" | "burniceEmberState"
 
 export type StaticBuildDynamicCountKey = "burniceEmberExtraTriggers"
@@ -634,6 +659,9 @@ export type StaticBuildSourceNoteStatusLabelMap = Record<
   StaticBuildSourceNoteStatus,
   StaticBuildGroupLabel
 >
+export type StaticBuildEffectBucketLabelMap = Partial<
+  Record<StaticBuildBucket, StaticBuildEffectSummaryBucket>
+>
 
 export type StaticBuildSourceNoteGuidanceKind =
   | "provide-input"
@@ -923,6 +951,10 @@ export type StaticBuildSourceDamageViewGroupLabelMap = Record<
   StaticBuildSourceDamageViewGroupKey,
   StaticBuildGroupLabel
 >
+export type StaticBuildSourceDamageViewBucketLabelMap = Record<
+  StaticBuildSourceDamageViewBucketKey,
+  StaticBuildEffectSummaryBucket
+>
 
 export interface StaticBuildSourceDamageViewGroupSummary {
   key: StaticBuildSourceDamageViewGroupKey
@@ -1175,6 +1207,10 @@ export type StaticBuildTriggerMatrixEntryKind = "main-formula" | "source-view"
 export type StaticBuildTriggerMatrixGroupLabelMap = Record<
   StaticBuildTriggerMatrixEntryKind,
   StaticBuildGroupLabel
+>
+export type StaticBuildTriggerMatrixBucketLabelMap = Record<
+  StaticBuildSourceDamageViewBucketKey,
+  StaticBuildEffectSummaryBucket
 >
 
 export interface StaticBuildTriggerMatrixGroupSummary {

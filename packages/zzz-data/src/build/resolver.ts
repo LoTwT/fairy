@@ -11,6 +11,7 @@ import type {
   StaticBuildDiagnosticLabelMap,
   StaticBuildDiagnosticOwner,
   StaticBuildDynamicSnapshotInput,
+  StaticBuildEffectBucketLabelMap,
   StaticBuildEffectDefinition,
   StaticBuildEffectStacks,
   StaticBuildResolvedAnomalyProficiency,
@@ -68,7 +69,7 @@ const sourceNoteLabels: StaticBuildSourceNoteStatusLabelMap = {
   "research-only": "仅研究说明",
 }
 
-const effectBucketLabels = {
+const effectBucketLabels: StaticBuildEffectBucketLabelMap = {
   attackPercent: "攻击力",
   flatAttack: "攻击力",
   bonusDamageSum: "增伤",
@@ -300,9 +301,7 @@ export function summarizeResolveEffects(trace: StaticBuildTraceItemList) {
 
     for (const modifier of item.modifiers) {
       effect.bucketTexts.add(
-        effectBucketLabels[
-          modifier.bucket as keyof typeof effectBucketLabels
-        ] ?? modifier.bucket,
+        effectBucketLabels[modifier.bucket] ?? modifier.bucket,
       )
       effect.valueTexts.add(
         formatEffectModifier(modifier.bucket, modifier.value, modifier.combine),
