@@ -149,10 +149,14 @@ export interface TSNodeView {
   sides: TSSideView[]
 }
 
+export type VersionPeriodText = string
+
+export type VersionPeriodLabel = string
+
 export interface VersionPeriodInfo {
-  raw: string
-  startLabel?: string
-  endLabel?: string
+  raw: VersionPeriodText
+  startLabel?: VersionPeriodLabel
+  endLabel?: VersionPeriodLabel
   isRange: boolean
   isOngoing: boolean
   isPlaceholder: boolean

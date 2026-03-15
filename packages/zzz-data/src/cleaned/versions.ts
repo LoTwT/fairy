@@ -8,7 +8,7 @@ import type {
   TSModeItem,
   TSVersionItem,
 } from "../game-modes.js"
-import type { VersionPeriodInfo } from "./types.js"
+import type { VersionPeriodInfo, VersionPeriodText } from "./types.js"
 
 function normalizeKey(value: string): string {
   return value.toLowerCase().replace(/[\s\-_]/g, "")
@@ -93,7 +93,9 @@ function resolveModeName<T extends { name: string }>(
     ?.name
 }
 
-export function analyzeVersionPeriod(versionTime: string): VersionPeriodInfo {
+export function analyzeVersionPeriod(
+  versionTime: VersionPeriodText,
+): VersionPeriodInfo {
   const raw = versionTime.trim()
   const parts = raw.split(/\s*-\s*/).filter(Boolean)
   const [startLabel, endLabel] = parts

@@ -12283,3 +12283,32 @@ caveatSummary` 这些兼容字段补齐。
 - `V344.2` 已完成：`stripRichText()` 已统一复用 `RichTextString`
 - `V344.3` 待完成：校验与提交
 - `V344.4` 待完成：roadmap、索引与架构文档同步
+
+## 348. V345 version period text contracts
+
+### 348.1 目标
+
+`V345` 只解决一件事：
+
+- 把 cleaned 版本周期文本输入与输出统一收成显式公开 contract，不改变任何版本周期解析逻辑。
+
+### 348.2 范围
+
+1. `VersionPeriodText`
+2. `VersionPeriodLabel`
+3. `VersionPeriodInfo`
+4. `analyzeVersionPeriod(versionTime: VersionPeriodText)`
+5. roadmap、索引与架构文档同步
+
+### 348.3 非目标
+
+1. 不改变 `versionTime` 的 display-only 语义
+2. 不新增日期对象或更复杂的时间解析
+3. 不调整 SD/TS/DA version selection 逻辑
+
+### 348.4 当前状态
+
+- `V345.1` 已完成：范围冻结到 cleaned version-period contract
+- `V345.2` 已完成：版本周期文本输入与输出已统一复用显式 alias
+- `V345.3` 待完成：校验与提交
+- `V345.4` 待完成：roadmap、索引与架构文档同步
