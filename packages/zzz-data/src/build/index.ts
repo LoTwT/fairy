@@ -192,6 +192,7 @@ export type {
   StaticBuildUnsatisfiedRequirementCount,
   StaticBuildUnsupportedCount,
   StaticBuildUnsupportedEffectCount,
+  StaticBuildUnsupportedEffectList,
   StaticBuildUtilityAgentCatalogEntry,
   StaticBuildUtilityValue,
   StaticBuildVariableBucketList,

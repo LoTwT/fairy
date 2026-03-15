@@ -164,6 +164,7 @@ export type StaticBuildFormulaMultiplierMap = Record<string, number>
 export type StaticBuildVariableBucketList = string[]
 export type StaticBuildVariableFormulaMultiplierList = string[]
 export type StaticBuildAssumptionList = string[]
+export type StaticBuildUnsupportedEffectList = string[]
 export type StaticBuildDefenderBaseDefense = number
 export type StaticBuildDefenderResistance = number
 export type StaticBuildDefenseBonus = number
@@ -660,7 +661,7 @@ export interface ResolveStaticBuildResult {
   diagnostics: StaticBuildDiagnosticEntry[]
   sourceNotes: StaticBuildSourceNoteEntry[]
   assumptions: StaticBuildAssumptionList
-  unsupportedEffects: string[]
+  unsupportedEffects: StaticBuildUnsupportedEffectList
 }
 
 export type StaticBuildSourceDamageViewRequirementKind =
@@ -1147,7 +1148,7 @@ export interface StaticBuildSkillMatrixRow {
   assumptionSummary: StaticBuildAssumptionSummary
   caveatSummary: StaticBuildCaveatSummary
   assumptions: StaticBuildAssumptionList
-  unsupportedEffects: string[]
+  unsupportedEffects: StaticBuildUnsupportedEffectList
   build: ResolveStaticBuildResult
 }
 
@@ -1190,7 +1191,7 @@ export interface StaticBuildSkillMatrixGroupSummary {
   diagnosticSummary: StaticBuildDiagnosticSummary
   sourceNoteSummary: StaticBuildSourceNoteSummary
   assumptions: StaticBuildAssumptionList
-  unsupportedEffects: string[]
+  unsupportedEffects: StaticBuildUnsupportedEffectList
 }
 
 export interface StaticBuildSkillMatrixEffectSummaryItem {
@@ -1219,5 +1220,5 @@ export interface ResolveStaticBuildSkillMatrixResult {
   sourceNoteSummary: StaticBuildSourceNoteSummary
   rows: StaticBuildSkillMatrixRow[]
   assumptions: StaticBuildAssumptionList
-  unsupportedEffects: string[]
+  unsupportedEffects: StaticBuildUnsupportedEffectList
 }
