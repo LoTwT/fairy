@@ -328,3 +328,4 @@ const total = base * bonus * crit * resistance * custom
 - `V338` source-view requirement key helper contracts：当前阶段已收口；`views.ts / utility-views.ts` 中 requirement helper 的 `key` 参数已统一复用既有 `StaticBuildRequirementKey`
 - `V339` modifier formatter helper contracts：当前阶段已收口；`resolver.ts / views.ts / trigger-matrix.ts / matrix.ts` 中 modifier formatter helper 的 `bucket / value / combine` 参数已统一复用显式公开 modifier contract
 - `V340` modifier scalar tail contracts：当前阶段已收口；compact trace combine、`resolver.ts:formatEffectValue()` 与 `skill-matrix` 的 `segmentLabel / segmentIndex` 已统一复用显式 alias
+- `V341` resolver helper context contracts：当前阶段已收口；`resolver.ts` 中 effect match/apply helper 的上下文 shape 与 `parseSkillMultiplier()` 的输入输出已统一复用显式公开 contract

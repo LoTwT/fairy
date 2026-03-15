@@ -575,6 +575,21 @@ export interface StaticBuildValueContext {
   stateSnapshot?: StaticBuildStateSnapshotInput
 }
 
+export interface StaticBuildEffectMatchContext {
+  attribute?: AgentAttribute
+  damageType: StaticBuildDamageType
+  disorderSourceType?: AnomalyType
+  agentMindscape: StaticBuildAgentMindscape
+  skillTag: StaticBuildSkillTag
+  extraAbilityActive: boolean
+  combatTags: StaticBuildCombatTagSet
+  dynamicSnapshot?: StaticBuildDynamicSnapshotInput
+  stateSnapshot?: StaticBuildStateSnapshotInput
+  isStunned: boolean
+  resolvedCritRate?: StaticBuildCritRate
+  resolvedAnomalyProficiency?: StaticBuildResolvedAnomalyProficiency
+}
+
 export interface StaticBuildModifierDefinition {
   bucket: StaticBuildBucket
   combine?: StaticBuildModifierCombine
@@ -597,6 +612,12 @@ export interface StaticBuildEffectDefinition {
   fullBuffStacks?: StaticBuildEffectStacks
   condition?: StaticBuildEffectCondition
   modifiers: StaticBuildModifierDefinition[]
+}
+
+export interface StaticBuildEffectApplyContext extends StaticBuildEffectMatchContext {
+  baseMode: StaticBuildBaseMode
+  valueContext: StaticBuildValueContext
+  overrides: Map<StaticBuildEffectId, StaticBuildEffectOverride>
 }
 
 export interface StaticBuildResolvedBuckets {

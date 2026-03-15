@@ -12165,3 +12165,33 @@ caveatSummary` 这些兼容字段补齐。
 - `V340.2` 已完成：compact trace combine、formatter value 与 segment scalar 已统一复用显式 alias
 - `V340.3` 已完成：校验与提交
 - `V340.4` 已完成：roadmap、索引与架构文档同步
+
+## 344. V341 resolver helper context contracts
+
+### 344.1 目标
+
+`V341` 只解决一件事：
+
+- 把 `resolver.ts` 中 effect match/apply helper 仍直接内联的上下文 shape，以及 `parseSkillMultiplier()` 的裸输入输出统一收成显式公开 contract。
+
+### 344.2 范围
+
+1. `StaticBuildEffectMatchContext`
+2. `StaticBuildEffectApplyContext`
+3. `parseSkillMultiplier()`
+4. `effectMatches()`
+5. `applyEffects()`
+6. `build/index.ts` 对应 type export
+
+### 344.3 非目标
+
+1. 不改变 effect 匹配逻辑
+2. 不调整任何条件判定语义
+3. 不修改实际伤害结果
+
+### 344.4 当前状态
+
+- `V341.1` 已完成：范围冻结到 resolver helper context contract
+- `V341.2` 已完成：effect helper context 与 skill-multiplier parser 已统一复用显式公开 contract
+- `V341.3` 已完成：校验与提交
+- `V341.4` 已完成：roadmap、索引与架构文档同步

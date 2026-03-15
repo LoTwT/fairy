@@ -238,3 +238,4 @@
 - [静态构筑解析系统 V338](./specs/static-build-resolver-v338.md) — 当前阶段：已收口；`views.ts / utility-views.ts` 中 requirement helper 的 `key` 参数已统一复用既有 `StaticBuildRequirementKey`
 - [静态构筑解析系统 V339](./specs/static-build-resolver-v339.md) — 当前阶段：已收口；`resolver.ts / views.ts / trigger-matrix.ts / matrix.ts` 中 modifier formatter helper 的 `bucket / value / combine` 参数已统一复用显式公开 modifier contract
 - [静态构筑解析系统 V340](./specs/static-build-resolver-v340.md) — 当前阶段：已收口；compact trace combine、`resolver.ts:formatEffectValue()` 与 `skill-matrix` 的 `segmentLabel / segmentIndex` 已统一复用显式 alias
+- [静态构筑解析系统 V341](./specs/static-build-resolver-v341.md) — 当前阶段：已收口；`resolver.ts` 中 effect match/apply helper 的上下文 shape 与 `parseSkillMultiplier()` 的输入输出已统一复用显式公开 contract

@@ -4,28 +4,27 @@ import type {
   StaticBuildAssumptionList,
   StaticBuildBaseMode,
   StaticBuildBucket,
-  StaticBuildCombatTagSet,
-  StaticBuildCritRate,
+  StaticBuildDamageMultiplier,
   StaticBuildDiagnosticEntryList,
   StaticBuildDiagnosticKind,
   StaticBuildDiagnosticLabelMap,
   StaticBuildDiagnosticOwner,
-  StaticBuildDynamicSnapshotInput,
+  StaticBuildEffectApplyContext,
   StaticBuildEffectBucketLabelMap,
   StaticBuildEffectDefinition,
+  StaticBuildEffectMatchContext,
   StaticBuildEffectStacks,
   StaticBuildEffectSummaryAccumulatorMap,
   StaticBuildModifierDefinition,
   StaticBuildModifierValue,
-  StaticBuildResolvedAnomalyProficiency,
   StaticBuildResolvedBuckets,
   StaticBuildResolveEffectSummaryAccumulator,
+  StaticBuildSkillMultiplierInputValue,
   StaticBuildSourceNoteEntry,
   StaticBuildSourceNoteEntryList,
   StaticBuildSourceNoteOwner,
   StaticBuildSourceNoteStatus,
   StaticBuildSourceNoteStatusLabelMap,
-  StaticBuildStateSnapshotInput,
   StaticBuildTraceItem,
   StaticBuildTraceItemList,
   StaticBuildTraceModifier,
@@ -104,7 +103,9 @@ function getThresholdEntries<TKey extends string>(
   return Object.entries(record) as Array<[TKey, number]>
 }
 
-function parseSkillMultiplier(value: number | string): number {
+function parseSkillMultiplier(
+  value: StaticBuildSkillMultiplierInputValue,
+): StaticBuildDamageMultiplier {
   if (typeof value === "number") return value
   const trimmed = value.trim()
   if (trimmed.endsWith("%")) {
@@ -453,20 +454,7 @@ function resolveEffectState(
 
 function effectMatches(
   effect: StaticBuildEffectDefinition,
-  context: {
-    attribute: string | undefined
-    damageType: string
-    disorderSourceType?: string
-    agentMindscape: number
-    skillTag: string
-    extraAbilityActive: boolean
-    combatTags: StaticBuildCombatTagSet
-    dynamicSnapshot?: StaticBuildDynamicSnapshotInput
-    stateSnapshot?: StaticBuildStateSnapshotInput
-    isStunned: boolean
-    resolvedCritRate?: StaticBuildCritRate
-    resolvedAnomalyProficiency?: StaticBuildResolvedAnomalyProficiency
-  },
+  context: StaticBuildEffectMatchContext,
 ) {
   const condition = effect.condition
   if (!condition) return true
@@ -620,23 +608,7 @@ function effectMatches(
 
 function applyEffects(
   effects: StaticBuildEffectDefinition[],
-  context: {
-    attribute: string | undefined
-    damageType: string
-    disorderSourceType?: string
-    agentMindscape: number
-    skillTag: string
-    extraAbilityActive: boolean
-    combatTags: StaticBuildCombatTagSet
-    isStunned: boolean
-    resolvedCritRate?: StaticBuildCritRate
-    resolvedAnomalyProficiency?: StaticBuildResolvedAnomalyProficiency
-    baseMode: StaticBuildBaseMode
-    valueContext: StaticBuildValueContext
-    overrides: Map<
-      string,
-      { enabled?: boolean; stacks?: StaticBuildEffectStacks }
-    >
+  context: StaticBuildEffectApplyContext & {
     assumptions: StaticBuildAssumptionList
     diagnostics: StaticBuildDiagnosticEntryList
     unsupportedEffects: StaticBuildUnsupportedEffectList
