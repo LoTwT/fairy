@@ -98,6 +98,7 @@ export type {
   StaticBuildDeltaCount,
   StaticBuildDiagnosticCount,
   StaticBuildDiagnosticEntry,
+  StaticBuildDiagnosticKeyList,
   StaticBuildDiagnosticKind,
   StaticBuildDiagnosticOwner,
   StaticBuildDriveDiscPieces,

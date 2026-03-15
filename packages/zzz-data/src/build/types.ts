@@ -545,12 +545,14 @@ export type StaticBuildDiagnosticOwner =
   | "source"
   | "process"
 
+export type StaticBuildDiagnosticKeyList = string[]
+
 export interface StaticBuildDiagnosticEntry {
   kind: StaticBuildDiagnosticKind
   owner: StaticBuildDiagnosticOwner
   sourceType?: StaticBuildSourceType
   sourceId?: string
-  keys: string[]
+  keys: StaticBuildDiagnosticKeyList
   message: string
 }
 
