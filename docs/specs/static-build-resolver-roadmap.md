@@ -10887,5 +10887,33 @@ caveatSummary` 这些兼容字段补齐。
 - `V300.1` 已完成：冻结到 display-name contract
 - `V300.2` 已完成：`types.ts` 已让 catalog / profile 统一复用显式 type
 - `V300.3` 已完成：`build/index.ts` 已正式导出这个 type
-- `V300.4` 进行中：等待现有 build / agent 测试与 runtime 校验完成
-- `V300.5` 进行中：等待 roadmap、索引与架构文档同步
+- `V300.4` 已完成：现有 build / agent 测试与 runtime 校验已覆盖
+- `V300.5` 已完成：roadmap、索引与架构文档已同步
+
+## 304. V301 build skill-matrix group summary key contracts
+
+`V300` 收口后，`skill-matrix group summary.key` 仍以匿名 `string` 暴露，和已有的 `StaticBuildSkillMatrixGroupKey` 仍不对称。
+
+`V301` 只解决一件事：
+
+1. 让 `skill-matrix group summary.key` 统一复用既有 `StaticBuildSkillMatrixGroupKey`，不改变任何运行时行为
+
+### 304.1 分阶段
+
+1. `V301.1` scope freeze
+2. `V301.2` type alignment
+3. `V301.3` tests / runtime alignment
+4. `V301.4` docs closeout
+
+### 304.2 非目标
+
+1. 不改变 group key 的字符串内容或分组逻辑
+2. 不新增新的 group key 类型
+3. 不处理 requirement key
+
+### 304.3 当前状态
+
+- `V301.1` 已完成：冻结到 skill-matrix group summary key contract
+- `V301.2` 已完成：`types.ts` 已让 group summary key 统一复用既有公开 type
+- `V301.3` 进行中：等待现有 build / agent 测试与 runtime 校验完成
+- `V301.4` 进行中：等待 roadmap、索引与架构文档同步

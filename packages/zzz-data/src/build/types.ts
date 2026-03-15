@@ -1213,7 +1213,7 @@ export interface StaticBuildSkillMatrixSummary {
 }
 
 export interface StaticBuildSkillMatrixGroupSummary {
-  key: string
+  key: StaticBuildSkillMatrixGroupKey
   label: StaticBuildGroupLabel
   count: StaticBuildGroupCount
   commonBuckets: StaticBuildBucketValueMap
