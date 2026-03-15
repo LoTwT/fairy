@@ -1,5 +1,4 @@
 import { createTool } from "@mastra/core/tools"
-import { z } from "zod"
 import { compactStaticBuildResult, resolveStaticBuildDamage } from "zzz-data"
 import {
   buildToolDamageCatalogPreset,
@@ -8,6 +7,7 @@ import {
 import {
   buildDamageSuccessResponse,
   buildToolScopeLabels,
+  resolveBuildDamageIncludeDetailsSchema,
   resolveBuildInputSchema,
   resolveBuildToolDamageExecutionContext,
 } from "./resolve-build-shared"
@@ -16,13 +16,7 @@ export const resolveBuildDamage = createTool({
   id: "resolve-build-damage",
   description: buildToolDescriptions.resolver,
   inputSchema: resolveBuildInputSchema.extend({
-    includeDetails: z
-      .boolean()
-      .optional()
-      .default(false)
-      .describe(
-        "是否返回完整单场景 build 细节（assumptions、unsupportedEffects、diagnostics/sourceNotes、trace、damageParams）。默认 false，以避免上下文过大。",
-      ),
+    includeDetails: resolveBuildDamageIncludeDetailsSchema,
   }),
   execute: async (input) => {
     const contextResolution = resolveBuildToolDamageExecutionContext({

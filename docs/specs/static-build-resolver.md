@@ -981,3 +981,4 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 230. `V230` source-utility response helper contracts：当前阶段已收口；`resolve-build-source-utility-views.ts` 的 missing / uncovered / success 后处理已收进 shared helper，不改变任何 tool 的输入输出 shape，见 [静态构筑解析系统 V230](./static-build-resolver-v230.md)
 231. `V231` build-tool catalog presets：当前阶段已收口；6 个高层 build tool 的重复 catalog preset 已固定到共享模块，不改变任何 tool 的输入输出 shape，见 [静态构筑解析系统 V231](./static-build-resolver-v231.md)
 232. `V232` build-tool descriptions：当前阶段已收口；6 个高层 build tool 的 `description` 已固定到共享模块，不改变任何 tool 的输入输出 shape，见 [静态构筑解析系统 V232](./static-build-resolver-v232.md)
+233. `V233` build-tool include-details schemas：当前阶段已收口；除 skill-matrix 外，其余高层 build tools 的 `includeDetails` schema 已固定到 shared 模块，不改变任何 tool 的输入输出 shape，见 [静态构筑解析系统 V233](./static-build-resolver-v233.md)

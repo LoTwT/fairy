@@ -1,5 +1,4 @@
 import { createTool } from "@mastra/core/tools"
-import { z } from "zod"
 import {
   compactStaticBuildSourceEntryCollection,
   resolveStaticBuildSourceEntries,
@@ -10,6 +9,7 @@ import {
 } from "./resolve-build-presets"
 import {
   buildToolScopeLabels,
+  resolveBuildSourceEntriesIncludeDetailsSchema,
   resolveBuildSourceEntriesInputSchema,
   resolveBuildToolSourceEntriesExecutionContext,
   resolveBuildToolSourceEntryCollectionResponse,
@@ -19,13 +19,7 @@ export const resolveBuildSourceEntries = createTool({
   id: "resolve-build-source-entries",
   description: buildToolDescriptions.sourceEntryCollection,
   inputSchema: resolveBuildSourceEntriesInputSchema.extend({
-    includeDetails: z
-      .boolean()
-      .optional()
-      .default(false)
-      .describe(
-        "是否返回 source-entry collection 完整明细，包括顶层 collection.assumptions，以及每条 entry 的 entry.assumptions / entry.requirements / entry.diagnostics / entry.sourceNotes；若某条 source-damage-view entry 原始结果带有 build，也会一并返回完整 build 结果（trace、damageParams 等）。默认 false，只保留各类 *Summary 与紧凑字段。",
-      ),
+    includeDetails: resolveBuildSourceEntriesIncludeDetailsSchema,
   }),
   execute: async (input) => {
     const contextResolution = resolveBuildToolSourceEntriesExecutionContext({

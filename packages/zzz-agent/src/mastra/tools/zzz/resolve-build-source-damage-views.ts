@@ -1,5 +1,4 @@
 import { createTool } from "@mastra/core/tools"
-import { z } from "zod"
 import {
   compactStaticBuildSourceDamageViewsResult,
   resolveStaticBuildSourceDamageViews,
@@ -11,6 +10,7 @@ import {
 import {
   buildToolScopeLabels,
   resolveBuildInputSchema,
+  resolveBuildSourceDamageViewsIncludeDetailsSchema,
   resolveBuildToolSourceDamageViewsResponse,
   resolveBuildToolTriggeredDamageContext,
 } from "./resolve-build-shared"
@@ -19,13 +19,7 @@ export const resolveBuildSourceDamageViews = createTool({
   id: "resolve-build-source-damage-views",
   description: buildToolDescriptions.sourceDamageView,
   inputSchema: resolveBuildInputSchema.extend({
-    includeDetails: z
-      .boolean()
-      .optional()
-      .default(false)
-      .describe(
-        "是否返回 source-damage-view 完整明细，包括顶层 views.assumptions，以及每条 entry 的 entry.assumptions / entry.requirements / entry.diagnostics / entry.sourceNotes；在原始结果带 build 时也透传 entry.build。默认 false，只保留各类 *Summary 与紧凑字段。",
-      ),
+    includeDetails: resolveBuildSourceDamageViewsIncludeDetailsSchema,
   }),
   execute: async (input) => {
     const contextResolution = resolveBuildToolTriggeredDamageContext({

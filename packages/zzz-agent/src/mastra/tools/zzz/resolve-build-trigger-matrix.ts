@@ -1,5 +1,4 @@
 import { createTool } from "@mastra/core/tools"
-import { z } from "zod"
 import {
   compactStaticBuildTriggerMatrixResult,
   resolveStaticBuildTriggerMatrix,
@@ -13,19 +12,14 @@ import {
   buildTriggerMatrixSuccessResponse,
   resolveBuildInputSchema,
   resolveBuildToolTriggeredDamageContext,
+  resolveBuildTriggerMatrixIncludeDetailsSchema,
 } from "./resolve-build-shared"
 
 export const resolveBuildTriggerMatrix = createTool({
   id: "resolve-build-trigger-matrix",
   description: buildToolDescriptions.triggerMatrix,
   inputSchema: resolveBuildInputSchema.extend({
-    includeDetails: z
-      .boolean()
-      .optional()
-      .default(false)
-      .describe(
-        "是否返回 trigger matrix 完整明细，包括顶层 matrix.assumptions，以及每行的 row.assumptions / row.requirements / row.diagnostics / row.sourceNotes；在原始结果带 build 时也透传 row.build。默认 false，只保留各类 *Summary 与紧凑字段。",
-      ),
+    includeDetails: resolveBuildTriggerMatrixIncludeDetailsSchema,
   }),
   execute: async (input) => {
     const contextResolution = resolveBuildToolTriggeredDamageContext({

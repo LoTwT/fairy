@@ -1,5 +1,4 @@
 import { createTool } from "@mastra/core/tools"
-import { z } from "zod"
 import {
   compactStaticBuildSourceUtilityViewsResult,
   resolveStaticBuildSourceUtilityViews,
@@ -11,6 +10,7 @@ import {
 import {
   buildToolScopeLabels,
   resolveBuildSourceUtilityInputSchema,
+  resolveBuildSourceUtilityViewsIncludeDetailsSchema,
   resolveBuildToolSourceUtilityExecutionContext,
   resolveBuildToolSourceUtilityViewsResponse,
 } from "./resolve-build-shared"
@@ -19,13 +19,7 @@ export const resolveBuildSourceUtilityViews = createTool({
   id: "resolve-build-source-utility-views",
   description: buildToolDescriptions.sourceUtilityView,
   inputSchema: resolveBuildSourceUtilityInputSchema.extend({
-    includeDetails: z
-      .boolean()
-      .optional()
-      .default(false)
-      .describe(
-        "是否返回 source-utility-view 完整明细，包括顶层 views.assumptions，以及每条 entry 的 entry.assumptions / entry.requirements / entry.diagnostics / entry.sourceNotes。默认 false，只保留各类 *Summary 与紧凑字段。",
-      ),
+    includeDetails: resolveBuildSourceUtilityViewsIncludeDetailsSchema,
   }),
   execute: async (input) => {
     const contextResolution = resolveBuildToolSourceUtilityExecutionContext({

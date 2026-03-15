@@ -744,6 +744,46 @@ export const resolveBuildSkillMatrixInputSchema = z.object({
     ),
 })
 
+export const resolveBuildDamageIncludeDetailsSchema = z
+  .boolean()
+  .optional()
+  .default(false)
+  .describe(
+    "是否返回完整单场景 build 细节（assumptions、unsupportedEffects、diagnostics/sourceNotes、trace、damageParams）。默认 false，以避免上下文过大。",
+  )
+
+export const resolveBuildTriggerMatrixIncludeDetailsSchema = z
+  .boolean()
+  .optional()
+  .default(false)
+  .describe(
+    "是否返回 trigger matrix 完整明细，包括顶层 matrix.assumptions，以及每行的 row.assumptions / row.requirements / row.diagnostics / row.sourceNotes；在原始结果带 build 时也透传 row.build。默认 false，只保留各类 *Summary 与紧凑字段。",
+  )
+
+export const resolveBuildSourceDamageViewsIncludeDetailsSchema = z
+  .boolean()
+  .optional()
+  .default(false)
+  .describe(
+    "是否返回 source-damage-view 完整明细，包括顶层 views.assumptions，以及每条 entry 的 entry.assumptions / entry.requirements / entry.diagnostics / entry.sourceNotes；在原始结果带 build 时也透传 entry.build。默认 false，只保留各类 *Summary 与紧凑字段。",
+  )
+
+export const resolveBuildSourceUtilityViewsIncludeDetailsSchema = z
+  .boolean()
+  .optional()
+  .default(false)
+  .describe(
+    "是否返回 source-utility-view 完整明细，包括顶层 views.assumptions，以及每条 entry 的 entry.assumptions / entry.requirements / entry.diagnostics / entry.sourceNotes。默认 false，只保留各类 *Summary 与紧凑字段。",
+  )
+
+export const resolveBuildSourceEntriesIncludeDetailsSchema = z
+  .boolean()
+  .optional()
+  .default(false)
+  .describe(
+    "是否返回 source-entry collection 完整明细，包括顶层 collection.assumptions，以及每条 entry 的 entry.assumptions / entry.requirements / entry.diagnostics / entry.sourceNotes；若某条 source-damage-view entry 原始结果带有 build，也会一并返回完整 build 结果（trace、damageParams 等）。默认 false，只保留各类 *Summary 与紧凑字段。",
+  )
+
 export function normalizeCatalogValue(value: string) {
   return value.toLowerCase().replace(/[\s\-_·・.()（）【】[\]「」]/g, "")
 }
