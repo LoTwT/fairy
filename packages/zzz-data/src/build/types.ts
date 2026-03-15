@@ -64,6 +64,8 @@ export type StaticBuildSkillMatrixAttributeSource =
 
 export type StaticBuildSkillQualifier = string
 export type StaticBuildSkillQualifierList = StaticBuildSkillQualifier[]
+export type StaticBuildSourceAttributeText = string
+export type StaticBuildSourceAttributeList = StaticBuildSourceAttributeText[]
 
 export type StaticBuildBucket =
   | "attackPercent"
@@ -418,6 +420,10 @@ export type StaticBuildCatalogId = string
 export type StaticBuildAgentId = StaticBuildCatalogId
 export type StaticBuildWEngineId = StaticBuildCatalogId
 export type StaticBuildDriveDiscId = StaticBuildCatalogId
+export type StaticBuildCatalogAliasOverrideMap = Record<
+  StaticBuildCatalogId,
+  StaticBuildAliasList
+>
 export type StaticBuildSourceCoverageId =
   | StaticBuildAgentId
   | StaticBuildWEngineId

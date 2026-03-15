@@ -1,8 +1,11 @@
 import type {
   StaticBuildAgentCatalogEntry,
   StaticBuildAgentId,
+  StaticBuildAliasList,
+  StaticBuildCatalogAliasOverrideMap,
   StaticBuildCatalogEntry,
   StaticBuildDriveDiscId,
+  StaticBuildSourceAttributeList,
   StaticBuildSpecialty,
   StaticBuildUtilityAgentCatalogEntry,
   StaticBuildWEngineCatalogEntry,
@@ -17,7 +20,7 @@ interface AgentListSourceItem {
   slug: string
   name: string
   specialty: string
-  attributes: string[]
+  attributes: StaticBuildSourceAttributeList
 }
 
 interface WEngineListSourceItem {
@@ -39,7 +42,7 @@ const supportedUtilitySpecialties = new Set<StaticBuildSpecialty>([
   "Support",
 ])
 
-const agentAliasOverrides: Record<string, string[]> = {
+const agentAliasOverrides: StaticBuildCatalogAliasOverrideMap = {
   "1041": ["11号", "soldier11", "soldier 11"],
   "1091": ["hoshimi miyabi", "miyabi"],
   "1191": ["艾莲·乔", "ellen", "ellen joe"],
@@ -53,7 +56,7 @@ const agentAliasOverrides: Record<string, string[]> = {
   "1381": ["零号安比", "soldier 0 anby", "soldier0anby"],
 }
 
-const wEngineAliasOverrides: Record<string, string[]> = {
+const wEngineAliasOverrides: StaticBuildCatalogAliasOverrideMap = {
   "14119": ["deep sea visitor", "deep-sea visitor"],
   "14118": ["fusion compiler", "fusion-compiler"],
   "14117": ["flamemaker shaker", "flamemaker-shaker"],
@@ -66,7 +69,7 @@ const wEngineAliasOverrides: Record<string, string[]> = {
   "14152": ["serpentine seeker", "serpentine-seeker"],
 }
 
-function unique(values: Array<string | undefined>) {
+function unique(values: Array<StaticBuildAliasList[number] | undefined>) {
   return [...new Set(values.filter((value): value is string => Boolean(value)))]
 }
 

@@ -11711,3 +11711,34 @@ caveatSummary` 这些兼容字段补齐。
 - `V325.2` 已完成：skill-matrix summary helper 的 map/list shape 已统一复用显式公开 contract
 - `V325.3` 已完成：校验与提交已通过
 - `V325.4` 已完成：roadmap、索引与架构文档已同步
+
+## 329. V326 catalog source list contracts
+
+### 329.1 目标
+
+`V326` 只解决一件事：
+
+- 把 `catalog.ts` 中上游 source item 的 `attributes` 列表和 alias override map 统一收成显式公开 contract。
+
+### 329.2 范围
+
+1. `StaticBuildSourceAttributeText`
+2. `StaticBuildSourceAttributeList`
+3. `StaticBuildCatalogAliasOverrideMap`
+4. `AgentListSourceItem.attributes`
+5. `agentAliasOverrides`
+6. `wEngineAliasOverrides`
+7. `build/index.ts` 对应 type export
+
+### 329.3 非目标
+
+1. 不修改任何 catalog 运行时筛选逻辑
+2. 不处理 `Set<string>` 形式的内部索引结构
+3. 不调整 alias 内容
+
+### 329.4 当前状态
+
+- `V326.1` 已完成：范围冻结到 catalog source list contract
+- `V326.2` 已完成：catalog source list 与 alias override map 已统一复用显式公开 contract
+- `V326.3` 已完成：校验与提交已通过
+- `V326.4` 已完成：roadmap、索引与架构文档已同步
