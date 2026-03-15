@@ -3,7 +3,9 @@ import type {
   ResolveStaticBuildSkillMatrixInput,
   ResolveStaticBuildSkillMatrixResult,
   StaticBuildAssumptionList,
+  StaticBuildBucketValueMap,
   StaticBuildDamageType,
+  StaticBuildFormulaMultiplierMap,
   StaticBuildSkillMatrixAttributeSource,
   StaticBuildSkillMatrixEffectSummaryItem,
   StaticBuildSkillMatrixRow,
@@ -12,6 +14,8 @@ import type {
   StaticBuildSkillTag,
   StaticBuildSourceDamageViewRequirementSummary,
   StaticBuildUnsupportedEffectList,
+  StaticBuildVariableBucketList,
+  StaticBuildVariableFormulaMultiplierList,
 } from "./types.js"
 import agentDetailsZh from "../../data/zh-CN/agent-details.json"
 import { toAgentAttribute } from "../terms.js"
@@ -369,13 +373,13 @@ function summarizeBuckets(rows: StaticBuildSkillMatrixRow[]) {
   const first = rows[0]?.build.resolvedBuckets
   if (!first) {
     return {
-      commonBuckets: {} as Record<string, number>,
-      variableBuckets: [] as string[],
+      commonBuckets: {} as StaticBuildBucketValueMap,
+      variableBuckets: [] as StaticBuildVariableBucketList,
     }
   }
 
-  const commonBuckets: Record<string, number> = {}
-  const variableBuckets: string[] = []
+  const commonBuckets: StaticBuildBucketValueMap = {}
+  const variableBuckets: StaticBuildVariableBucketList = []
 
   for (const [bucket, value] of Object.entries(first)) {
     const same = rows.every(
@@ -396,13 +400,15 @@ function summarizeFormulaMultipliers(rows: StaticBuildSkillMatrixRow[]) {
   const first = rows[0]?.build.damage.expected.breakdown
   if (!first) {
     return {
-      commonFormulaMultipliers: {} as Record<string, number>,
-      variableFormulaMultipliers: [] as string[],
+      commonFormulaMultipliers: {} as StaticBuildFormulaMultiplierMap,
+      variableFormulaMultipliers:
+        [] as StaticBuildVariableFormulaMultiplierList,
     }
   }
 
-  const commonFormulaMultipliers: Record<string, number> = {}
-  const variableFormulaMultipliers: string[] = []
+  const commonFormulaMultipliers: StaticBuildFormulaMultiplierMap = {}
+  const variableFormulaMultipliers: StaticBuildVariableFormulaMultiplierList =
+    []
 
   for (const [bucket, value] of Object.entries(first)) {
     if (bucket === "baseDamage") continue

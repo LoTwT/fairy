@@ -11681,3 +11681,33 @@ caveatSummary` 这些兼容字段补齐。
 - `V324.2` 已完成：resolver effect-application 与 diagnostics helper 的内联 list 输入已统一复用显式公开 list contract
 - `V324.3` 已完成：校验与提交已通过
 - `V324.4` 已完成：roadmap、索引与架构文档已同步
+
+## 328. V325 skill matrix map and list contracts
+
+### 328.1 目标
+
+`V325` 只解决一件事：
+
+- 把 `matrix.ts` 中 `commonBuckets / variableBuckets / commonFormulaMultipliers / variableFormulaMultipliers` 仍直接使用的 map/list shape，统一收成显式公开 contract。
+
+### 328.2 范围
+
+1. `summarizeBuckets()`
+2. `summarizeFormulaMultipliers()`
+3. `StaticBuildBucketValueMap`
+4. `StaticBuildVariableBucketList`
+5. `StaticBuildFormulaMultiplierMap`
+6. `StaticBuildVariableFormulaMultiplierList`
+
+### 328.3 非目标
+
+1. 不修改 skill-matrix summary runtime 逻辑
+2. 不处理 `SkillMatrixTemplate.combatTags`
+3. 不处理 effect summary 内部 `Set<string>` 聚合
+
+### 328.4 当前状态
+
+- `V325.1` 已完成：范围冻结到 skill matrix map/list contract
+- `V325.2` 已完成：skill-matrix summary helper 的 map/list shape 已统一复用显式公开 contract
+- `V325.3` 已完成：校验与提交已通过
+- `V325.4` 已完成：roadmap、索引与架构文档已同步
