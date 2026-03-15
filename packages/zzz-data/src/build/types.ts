@@ -122,6 +122,17 @@ export type StaticBuildAnomalyCritRate = number
 export type StaticBuildAnomalyCritDamage = number
 export type StaticBuildPenetrationRate = number
 export type StaticBuildPenetrationValue = number
+export type StaticBuildDefenderBaseDefense = number
+export type StaticBuildDefenderResistance = number
+export type StaticBuildDefenseBonus = number
+export type StaticBuildDefenseReduction = number
+export type StaticBuildResistanceReduction = number
+export type StaticBuildIgnoreResistance = number
+export type StaticBuildVulnerabilityBonus = number
+export type StaticBuildDamageReduction = number
+export type StaticBuildStunVulnerability = number
+export type StaticBuildNonStunVulnerability = number
+export type StaticBuildSpecialMultiplier = number
 export type StaticBuildResolvedAnomalyProficiency = number
 export type StaticBuildRemainingTime = number
 
@@ -179,19 +190,19 @@ export interface StaticBuildFinalPanelInput {
 }
 
 export interface StaticBuildEnemyInput {
-  attackerLevel?: number
-  defenderBaseDefense: number
-  defenderResistance: number
-  defenseBonus?: number
-  defenseReduction?: number
-  resistanceReduction?: number
-  ignoreResistance?: number
-  vulnerabilityBonus?: number
-  damageReduction?: number
+  attackerLevel?: StaticBuildAgentLevel
+  defenderBaseDefense: StaticBuildDefenderBaseDefense
+  defenderResistance: StaticBuildDefenderResistance
+  defenseBonus?: StaticBuildDefenseBonus
+  defenseReduction?: StaticBuildDefenseReduction
+  resistanceReduction?: StaticBuildResistanceReduction
+  ignoreResistance?: StaticBuildIgnoreResistance
+  vulnerabilityBonus?: StaticBuildVulnerabilityBonus
+  damageReduction?: StaticBuildDamageReduction
   isStunned?: boolean
-  stunVulnerability?: number
-  nonStunVulnerability?: number
-  specialMultiplier?: number
+  stunVulnerability?: StaticBuildStunVulnerability
+  nonStunVulnerability?: StaticBuildNonStunVulnerability
+  specialMultiplier?: StaticBuildSpecialMultiplier
 }
 
 interface StaticBuildScenarioBaseInput {

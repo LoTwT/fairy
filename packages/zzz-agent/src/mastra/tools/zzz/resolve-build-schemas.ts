@@ -1,4 +1,5 @@
 import type {
+  StaticBuildAgentLevel,
   StaticBuildAnomalyCritDamage,
   StaticBuildAnomalyCritRate,
   StaticBuildAnomalyMastery,
@@ -7,15 +8,26 @@ import type {
   StaticBuildBaseAttack,
   StaticBuildCritDamage,
   StaticBuildCritRate,
+  StaticBuildDamageReduction,
   StaticBuildDamageType,
+  StaticBuildDefenderBaseDefense,
+  StaticBuildDefenderResistance,
+  StaticBuildDefenseBonus,
+  StaticBuildDefenseReduction,
   StaticBuildDriveDiscPieces,
   StaticBuildEnergyGenerationRate,
   StaticBuildHP,
+  StaticBuildIgnoreResistance,
+  StaticBuildNonStunVulnerability,
   StaticBuildPenetrationRate,
   StaticBuildPenetrationValue,
   StaticBuildRemainingTime,
+  StaticBuildResistanceReduction,
   StaticBuildSheerForce,
   StaticBuildSkillTag,
+  StaticBuildSpecialMultiplier,
+  StaticBuildStunVulnerability,
+  StaticBuildVulnerabilityBonus,
 } from "zzz-data"
 import { z as zod } from "zod"
 
@@ -37,19 +49,19 @@ export interface BuildToolDriveDiscSetInput {
 }
 
 export interface BuildToolEnemyInput {
-  attackerLevel?: number
-  defenderBaseDefense: number
-  defenderResistance: number
-  defenseBonus?: number
-  defenseReduction?: number
-  resistanceReduction?: number
-  ignoreResistance?: number
-  vulnerabilityBonus?: number
-  damageReduction?: number
+  attackerLevel?: StaticBuildAgentLevel
+  defenderBaseDefense: StaticBuildDefenderBaseDefense
+  defenderResistance: StaticBuildDefenderResistance
+  defenseBonus?: StaticBuildDefenseBonus
+  defenseReduction?: StaticBuildDefenseReduction
+  resistanceReduction?: StaticBuildResistanceReduction
+  ignoreResistance?: StaticBuildIgnoreResistance
+  vulnerabilityBonus?: StaticBuildVulnerabilityBonus
+  damageReduction?: StaticBuildDamageReduction
   isStunned?: boolean
-  stunVulnerability?: number
-  nonStunVulnerability?: number
-  specialMultiplier?: number
+  stunVulnerability?: StaticBuildStunVulnerability
+  nonStunVulnerability?: StaticBuildNonStunVulnerability
+  specialMultiplier?: StaticBuildSpecialMultiplier
 }
 
 export interface BuildToolDynamicSnapshotInput {
