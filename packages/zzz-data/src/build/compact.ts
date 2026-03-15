@@ -97,6 +97,7 @@ import type {
   StaticBuildIgnoreResistance,
   StaticBuildMainFormulaCount,
   StaticBuildMode,
+  StaticBuildModifierCombine,
   StaticBuildModifierValue,
   StaticBuildNonCriticalTotal,
   StaticBuildNonStunVulnerability,
@@ -330,6 +331,7 @@ export type CompactStaticBuildSheerBonusSum = StaticBuildSheerBonusSum
 export type CompactStaticBuildSkillMultiplierFactor =
   StaticBuildSkillMultiplierFactor
 export type CompactStaticBuildModifierValue = StaticBuildModifierValue
+export type CompactStaticBuildModifierCombine = StaticBuildModifierCombine
 export type CompactStaticBuildBaseDamageValue = StaticBuildBaseDamageValue
 export type CompactStaticBuildBaseDamage = StaticBuildBaseDamage
 export type CompactStaticBuildExpectedTotal = StaticBuildExpectedTotal
@@ -775,7 +777,7 @@ export interface CompactStaticBuildCaveatSummary {
 export interface CompactStaticBuildTraceModifier {
   bucket: StaticBuildBucket
   value: CompactStaticBuildModifierValue
-  combine: "sum" | "multiply"
+  combine: CompactStaticBuildModifierCombine
 }
 
 export interface CompactStaticBuildTraceItem {

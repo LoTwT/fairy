@@ -13,6 +13,8 @@ import type {
   StaticBuildFormulaMultiplierMap,
   StaticBuildGenericSkillStatItem,
   StaticBuildRowEffectSummaryAccumulator,
+  StaticBuildSegmentIndex,
+  StaticBuildSegmentLabel,
   StaticBuildSkillMatrixAttributeSource,
   StaticBuildSkillMatrixEffectSummaryItem,
   StaticBuildSkillMatrixGroupRowMap,
@@ -124,8 +126,8 @@ function inferSkillMatrixRowMeta(
   }
 
   let targetSize: StaticBuildSkillMatrixRowMeta["targetSize"]
-  let segmentLabel: string | undefined
-  let segmentIndex: number | undefined
+  let segmentLabel: StaticBuildSegmentLabel | undefined
+  let segmentIndex: StaticBuildSegmentIndex | undefined
 
   if (qualifiers.length > 0) {
     const last = qualifiers.at(-1)!

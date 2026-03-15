@@ -327,3 +327,4 @@ const total = base * bonus * crit * resistance * custom
 - `V337` skill-matrix template contracts：当前阶段已收口；`matrix.ts` 中 skill-matrix template / source-stat helper 的本地 interface 与裸参数已统一复用显式公开 contract
 - `V338` source-view requirement key helper contracts：当前阶段已收口；`views.ts / utility-views.ts` 中 requirement helper 的 `key` 参数已统一复用既有 `StaticBuildRequirementKey`
 - `V339` modifier formatter helper contracts：当前阶段已收口；`resolver.ts / views.ts / trigger-matrix.ts / matrix.ts` 中 modifier formatter helper 的 `bucket / value / combine` 参数已统一复用显式公开 modifier contract
+- `V340` modifier scalar tail contracts：当前阶段已收口；compact trace combine、`resolver.ts:formatEffectValue()` 与 `skill-matrix` 的 `segmentLabel / segmentIndex` 已统一复用显式 alias

@@ -113,7 +113,7 @@ function parseSkillMultiplier(value: number | string): number {
   return Number.parseFloat(trimmed)
 }
 
-function formatEffectValue(value: number) {
+function formatEffectValue(value: StaticBuildTraceModifier["value"]) {
   const normalized = Number.parseFloat(value.toFixed(3))
   return Number.isInteger(normalized)
     ? String(normalized)

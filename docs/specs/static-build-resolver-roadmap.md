@@ -12136,3 +12136,32 @@ caveatSummary` 这些兼容字段补齐。
 - `V339.2` 已完成：formatter helper 与 combine trait 已统一复用显式公开 contract
 - `V339.3` 已完成：校验与提交
 - `V339.4` 已完成：roadmap、索引与架构文档同步
+
+## 343. V340 modifier scalar tail contracts
+
+### 343.1 目标
+
+`V340` 只解决一件事：
+
+- 把当前公开 contract 尾部仍遗留的少量 modifier/scalar 裸类型统一收成既有显式 alias，包括 compact trace combine、resolver formatter value、以及 skill-matrix metadata 的 segment scalar。
+
+### 343.2 范围
+
+1. `CompactStaticBuildModifierCombine`
+2. `CompactStaticBuildTraceModifier.combine`
+3. `resolver.ts:formatEffectValue()`
+4. `matrix.ts:segmentLabel`
+5. `matrix.ts:segmentIndex`
+
+### 343.3 非目标
+
+1. 不改变 compact 输出 shape
+2. 不调整 skill-matrix metadata 语义
+3. 不新增新的运行时字段
+
+### 343.4 当前状态
+
+- `V340.1` 已完成：范围冻结到 modifier/scalar 尾部 contract
+- `V340.2` 已完成：compact trace combine、formatter value 与 segment scalar 已统一复用显式 alias
+- `V340.3` 已完成：校验与提交
+- `V340.4` 已完成：roadmap、索引与架构文档同步
