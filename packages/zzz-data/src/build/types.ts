@@ -137,6 +137,7 @@ export type StaticBuildResolvedAnomalyProficiency = number
 export type StaticBuildRemainingTime = number
 export type StaticBuildSkillMultiplierInputValue = number | string
 export type StaticBuildDamageMultiplierInputValue = number | string
+export type StaticBuildEffectStacks = number
 
 export interface StaticBuildDynamicSnapshotInput {
   flags?: Partial<Record<StaticBuildDynamicFlagKey, boolean>>
@@ -252,7 +253,7 @@ export type StaticBuildScenarioInput =
 export interface StaticBuildEffectOverride {
   effectId: string
   enabled?: boolean
-  stacks?: number
+  stacks?: StaticBuildEffectStacks
 }
 
 export interface ResolveStaticBuildInput {
@@ -327,8 +328,8 @@ export interface StaticBuildEffectCondition {
   minimumDynamicCounts?: Partial<Record<StaticBuildDynamicCountKey, number>>
   minimumDynamicValues?: Partial<Record<StaticBuildDynamicValueKey, number>>
   minimumStateValues?: Partial<Record<StaticBuildStateValueKey, number>>
-  minimumResolvedCritRate?: number
-  minimumResolvedAnomalyProficiency?: number
+  minimumResolvedCritRate?: StaticBuildCritRate
+  minimumResolvedAnomalyProficiency?: StaticBuildResolvedAnomalyProficiency
 }
 
 export interface StaticBuildValueContext {
@@ -356,11 +357,11 @@ export interface StaticBuildEffectDefinition {
   sourceName: string
   label: string
   alreadyInPanel?: boolean
-  maxStacks?: number
+  maxStacks?: StaticBuildEffectStacks
   baselineEnabled?: boolean
   fullBuffEnabled?: boolean
-  baselineStacks?: number
-  fullBuffStacks?: number
+  baselineStacks?: StaticBuildEffectStacks
+  fullBuffStacks?: StaticBuildEffectStacks
   condition?: StaticBuildEffectCondition
   modifiers: StaticBuildModifierDefinition[]
 }
@@ -421,7 +422,7 @@ export interface StaticBuildTraceItem {
   label: string
   status: "applied" | "skipped" | "unsupported"
   reason?: string
-  stacks?: number
+  stacks?: StaticBuildEffectStacks
   modifiers?: StaticBuildTraceModifier[]
 }
 

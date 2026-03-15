@@ -3,11 +3,13 @@ import type {
   ResolveStaticBuildResult,
   StaticBuildBaseMode,
   StaticBuildBucket,
+  StaticBuildCritRate,
   StaticBuildDiagnosticEntry,
   StaticBuildDiagnosticKind,
   StaticBuildDiagnosticOwner,
   StaticBuildDynamicSnapshotInput,
   StaticBuildEffectDefinition,
+  StaticBuildEffectStacks,
   StaticBuildResolvedAnomalyProficiency,
   StaticBuildResolvedBuckets,
   StaticBuildSourceNoteEntry,
@@ -421,7 +423,10 @@ function resolveBaseMode(input: ResolveStaticBuildInput): StaticBuildBaseMode {
 function resolveEffectState(
   effect: StaticBuildEffectDefinition,
   baseMode: StaticBuildBaseMode,
-  overrides: Map<string, { enabled?: boolean; stacks?: number }>,
+  overrides: Map<
+    string,
+    { enabled?: boolean; stacks?: StaticBuildEffectStacks }
+  >,
 ) {
   const defaultEnabled =
     baseMode === "full-buff"
@@ -456,7 +461,7 @@ function effectMatches(
     dynamicSnapshot?: StaticBuildDynamicSnapshotInput
     stateSnapshot?: StaticBuildStateSnapshotInput
     isStunned: boolean
-    resolvedCritRate?: number
+    resolvedCritRate?: StaticBuildCritRate
     resolvedAnomalyProficiency?: StaticBuildResolvedAnomalyProficiency
   },
 ) {
@@ -621,11 +626,14 @@ function applyEffects(
     extraAbilityActive: boolean
     combatTags: Set<string>
     isStunned: boolean
-    resolvedCritRate?: number
+    resolvedCritRate?: StaticBuildCritRate
     resolvedAnomalyProficiency?: StaticBuildResolvedAnomalyProficiency
     baseMode: StaticBuildBaseMode
     valueContext: StaticBuildValueContext
-    overrides: Map<string, { enabled?: boolean; stacks?: number }>
+    overrides: Map<
+      string,
+      { enabled?: boolean; stacks?: StaticBuildEffectStacks }
+    >
     assumptions: string[]
     diagnostics: StaticBuildDiagnosticEntry[]
     unsupportedEffects: string[]

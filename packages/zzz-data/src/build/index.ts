@@ -94,6 +94,7 @@ export type {
   StaticBuildEffectCondition,
   StaticBuildEffectDefinition,
   StaticBuildEffectOverride,
+  StaticBuildEffectStacks,
   StaticBuildEnemyInput,
   StaticBuildEnergyGenerationRate,
   StaticBuildEntryCaveatSummary,
