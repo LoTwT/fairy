@@ -1,20 +1,7 @@
 import type {
-  StaticBuildAgentCatalogEntry,
-  StaticBuildFinalPanelInput,
+  StaticBuildProfileDefinition,
   StaticBuildProfileId,
 } from "./types.js"
-
-export interface StaticBuildProfileDefinition {
-  id: StaticBuildProfileId
-  name: string
-  supportsDamageType: (damageType: string) => boolean
-  resolveBaseDamageValue: (input: {
-    agent: StaticBuildAgentCatalogEntry
-    panel: StaticBuildFinalPanelInput
-    assumptions: string[]
-  }) => number
-  baseDamageStat: "attack" | "sheerForce"
-}
 
 export const staticBuildProfiles = {
   "standard-normal": {

@@ -2,7 +2,7 @@
 
 ## 仓库级 AI 协作文件
 
-当前 `static-build-resolver` contract 收口阶段已推进到 `V316`。`V313` 已完成 `skill-matrix / source-utility-view` 里剩余最大的 compact scalar/list contract；`V314` 已完成 `compact.ts` 中剩余 build scalar、count、matrix metadata scalar/text contract 的显式化，当前 `compact` 公开 contract 已在既有范围内完成 raw `number/string` 收口；`V315` 已完成 `build/types.ts` 中 snapshot/input map contract 的显式化；当前正在收口 `skill-matrix row metadata` 中剩余的 numeric contract。
+当前 `static-build-resolver` contract 收口阶段已推进到 `V317`。`V313` 已完成 `skill-matrix / source-utility-view` 里剩余最大的 compact scalar/list contract；`V314` 已完成 `compact.ts` 中剩余 build scalar、count、matrix metadata scalar/text contract 的显式化，当前 `compact` 公开 contract 已在既有范围内完成 raw `number/string` 收口；`V315` 已完成 `build/types.ts` 中 snapshot/input map contract 的显式化；`V316` 已完成 `skill-matrix row metadata` numeric contract 的显式化；当前正在收口 `profiles.ts` 中通过局部 interface 暴露的 profile definition contract。
 
 ```
 .

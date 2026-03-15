@@ -11438,5 +11438,34 @@ caveatSummary` 这些兼容字段补齐。
 
 - `V316.1` 已完成：范围冻结到 skill-matrix metadata numeric contract
 - `V316.2` 已完成：`build/types.ts` 已统一复用既有显式 numeric alias
-- `V316.3` 进行中：校验与提交
+- `V316.3` 已完成：校验与提交已通过
 - `V316.4` 已完成：roadmap、索引与架构文档已同步
+
+## 320. V317 profile definition contracts
+
+### 320.1 目标
+
+`V317` 只解决一件事：
+
+- 把 `profiles.ts` 中通过局部 interface 推断暴露出来的 profile shape 提升为 `build/types.ts` 的显式公开 contract
+
+### 320.2 范围
+
+1. `StaticBuildProfileName`
+2. `StaticBuildProfileResolveBaseDamageValueInput`
+3. `StaticBuildProfileSupportsDamageType`
+4. `StaticBuildProfileResolveBaseDamageValue`
+5. `StaticBuildProfileDefinition`
+
+### 320.3 非目标
+
+1. 不修改任何 profile runtime 逻辑
+2. 不新增 profile 类型
+3. 不调整 `staticBuildProfiles` 的数据内容
+
+### 320.4 当前状态
+
+- `V317.1` 已完成：范围冻结到 profile definition contract
+- `V317.2` 已完成：profile 公开 shape 已统一落到 `build/types.ts`
+- `V317.3` 进行中：校验与提交
+- `V317.4` 已完成：roadmap、索引与架构文档已同步

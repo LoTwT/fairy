@@ -424,6 +424,25 @@ export type StaticBuildProfileId =
   | "standard-anomaly"
   | "standard-disorder"
   | "yixuan-sheer"
+export type StaticBuildProfileName = StaticBuildDisplayName
+export interface StaticBuildProfileResolveBaseDamageValueInput {
+  agent: StaticBuildAgentCatalogEntry
+  panel: StaticBuildFinalPanelInput
+  assumptions: StaticBuildAssumptionList
+}
+export type StaticBuildProfileSupportsDamageType = (
+  damageType: StaticBuildDamageType,
+) => boolean
+export type StaticBuildProfileResolveBaseDamageValue = (
+  input: StaticBuildProfileResolveBaseDamageValueInput,
+) => StaticBuildBaseDamageValue
+export interface StaticBuildProfileDefinition {
+  id: StaticBuildProfileId
+  name: StaticBuildProfileName
+  supportsDamageType: StaticBuildProfileSupportsDamageType
+  resolveBaseDamageValue: StaticBuildProfileResolveBaseDamageValue
+  baseDamageStat: StaticBuildBaseDamageStat
+}
 
 export interface StaticBuildEffectCondition {
   damageTypes?: StaticBuildDamageType[]
