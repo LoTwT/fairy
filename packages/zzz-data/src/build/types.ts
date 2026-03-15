@@ -137,6 +137,9 @@ export type StaticBuildDiagnosticCount = number
 export type StaticBuildSourceNoteCount = number
 export type StaticBuildAssumptionCount = number
 export type StaticBuildUnsupportedEffectCount = number
+export type StaticBuildRequirementCount = number
+export type StaticBuildSatisfiedRequirementCount = number
+export type StaticBuildUnsatisfiedRequirementCount = number
 export type StaticBuildDefenderBaseDefense = number
 export type StaticBuildDefenderResistance = number
 export type StaticBuildDefenseBonus = number
@@ -664,15 +667,15 @@ export interface StaticBuildRequirementSummaryGroup<
   TKey extends string = string,
 > {
   key: TKey
-  count: number
-  satisfiedCount: number
-  unsatisfiedCount: number
+  count: StaticBuildRequirementCount
+  satisfiedCount: StaticBuildSatisfiedRequirementCount
+  unsatisfiedCount: StaticBuildUnsatisfiedRequirementCount
 }
 
 export interface StaticBuildRequirementSummary<TKey extends string = string> {
-  count: number
-  satisfiedCount: number
-  unsatisfiedCount: number
+  count: StaticBuildRequirementCount
+  satisfiedCount: StaticBuildSatisfiedRequirementCount
+  unsatisfiedCount: StaticBuildUnsatisfiedRequirementCount
   hasUnsatisfied: boolean
   groups: StaticBuildRequirementSummaryGroup<TKey>[]
 }
@@ -852,7 +855,7 @@ export interface StaticBuildSourceUtilityViewEntrySummary {
   unit: "energy" | "energy-per-second" | "decibel"
   resolutionMode: StaticBuildSourceUtilityViewResolutionMode
   targetScope: StaticBuildSourceUtilityViewTargetScope
-  requirementCount: number
+  requirementCount: StaticBuildRequirementCount
   hasUnsatisfiedRequirements: boolean
   diagnosticCount: StaticBuildDiagnosticCount
   sourceNoteCount: StaticBuildSourceNoteCount

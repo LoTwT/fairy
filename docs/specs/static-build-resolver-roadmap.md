@@ -9991,3 +9991,33 @@ caveatSummary` 这些兼容字段补齐。
 - `V270.3` 已完成：`build/index.ts` 已统一导出这些新 type
 - `V270.4` 已完成：现有 build / agent 测试与 runtime 校验已覆盖
 - `V270.5` 已完成：roadmap、索引与架构文档已同步
+
+## 274. V271 build requirement count contracts
+
+`V270` 收口后，`requirementCount / satisfiedCount / unsatisfiedCount` 这组 requirement 计数仍在 `types.ts` 中以裸 `number` 暴露，和前面的 scalar contract 仍不对称。
+
+`V271` 只解决一件事：
+
+1. 为这组 build-layer requirement 计数补显式 type，并让 requirement summary 与 utility entry summary 统一复用，不改变任何运行时行为
+
+### 274.1 分阶段
+
+1. `V271.1` scope freeze
+2. `V271.2` type alignment
+3. `V271.3` export alignment
+4. `V271.4` tests / runtime alignment
+5. `V271.5` docs closeout
+
+### 274.2 非目标
+
+1. 不改变 requirement summary 的字段集合
+2. 不处理 view/group/support count contract
+3. 不扩展 compact layer 的 requirement count contract
+
+### 274.3 当前状态
+
+- `V271.1` 已完成：冻结到 build requirement count contract
+- `V271.2` 已完成：`types.ts` 已新增显式 requirement-count scalar alias，并让 requirement summary / utility entry summary 统一复用
+- `V271.3` 已完成：`build/index.ts` 已统一导出这些新 type
+- `V271.4` 已完成：现有 build / agent 测试与 runtime 校验已覆盖
+- `V271.5` 已完成：roadmap、索引与架构文档已同步
