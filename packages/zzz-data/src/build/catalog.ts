@@ -4,8 +4,9 @@ import type {
   StaticBuildAliasList,
   StaticBuildCatalogAliasOverrideMap,
   StaticBuildCatalogEntry,
+  StaticBuildDisplayName,
   StaticBuildDriveDiscId,
-  StaticBuildSourceAttributeList,
+  StaticBuildSourceSlug,
   StaticBuildSpecialty,
   StaticBuildUtilityAgentCatalogEntry,
   StaticBuildWEngineCatalogEntry,
@@ -14,21 +15,6 @@ import type {
 import agentsZh from "../../data/zh-CN/agents.json"
 import wEnginesZh from "../../data/zh-CN/w-engines.json"
 import { toAgentAttribute, toAgentSpecialty } from "../terms.js"
-
-interface AgentListSourceItem {
-  id: string
-  slug: string
-  name: string
-  specialty: string
-  attributes: StaticBuildSourceAttributeList
-}
-
-interface WEngineListSourceItem {
-  id: string
-  slug: string
-  name: string
-  specialty: { id: string; name: string }
-}
 
 const supportedSpecialties = new Set<StaticBuildSpecialty>([
   "Attack",
@@ -73,11 +59,11 @@ function unique(values: Array<StaticBuildAliasList[number] | undefined>) {
   return [...new Set(values.filter((value): value is string => Boolean(value)))]
 }
 
-function compactNameAlias(name: string) {
+function compactNameAlias(name: StaticBuildDisplayName) {
   return name.replace(/[·・「」&\s]/g, "")
 }
 
-function slugAliases(slug: string) {
+function slugAliases(slug: StaticBuildSourceSlug) {
   return [slug, slug.replace(/-/g, " "), slug.replace(/-/g, "")]
 }
 

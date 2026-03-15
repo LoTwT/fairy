@@ -458,6 +458,8 @@ export type StaticBuildCatalogId = string
 export type StaticBuildAgentId = StaticBuildCatalogId
 export type StaticBuildWEngineId = StaticBuildCatalogId
 export type StaticBuildDriveDiscId = StaticBuildCatalogId
+export type StaticBuildSourceSlug = string
+export type StaticBuildSourceSpecialtyName = string
 export type StaticBuildCatalogAliasOverrideMap = Record<
   StaticBuildCatalogId,
   StaticBuildAliasList
@@ -471,6 +473,26 @@ export interface StaticBuildCatalogEntry {
   id: StaticBuildCatalogId
   name: StaticBuildDisplayName
   aliases: StaticBuildAliasList
+}
+
+export interface StaticBuildSourceSpecialtyRef {
+  id: StaticBuildCatalogId
+  name: StaticBuildSourceSpecialtyName
+}
+
+export interface StaticBuildAgentListSourceItem {
+  id: StaticBuildAgentId
+  slug: StaticBuildSourceSlug
+  name: StaticBuildDisplayName
+  specialty: StaticBuildSourceSpecialtyName
+  attributes: StaticBuildSourceAttributeList
+}
+
+export interface StaticBuildWEngineListSourceItem {
+  id: StaticBuildWEngineId
+  slug: StaticBuildSourceSlug
+  name: StaticBuildDisplayName
+  specialty: StaticBuildSourceSpecialtyRef
 }
 
 export interface StaticBuildBaseAgentCatalogEntry extends StaticBuildCatalogEntry {

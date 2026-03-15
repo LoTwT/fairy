@@ -12010,3 +12010,34 @@ caveatSummary` 这些兼容字段补齐。
 - `V335.2` 已完成：`source-entry / resolver / skill-matrix` 已统一复用既有 set contract
 - `V335.3` 待完成：校验与提交
 - `V335.4` 待完成：roadmap、索引与架构文档同步
+
+## 339. V336 catalog source item contracts
+
+### 339.1 目标
+
+`V336` 只解决一件事：
+
+- 把 `catalog.ts` 中读取上游 `agents.json / w-engines.json` 时仍直接使用的本地 source item interface 与裸 `string` 文本字段统一收成显式公开 contract。
+
+### 339.2 范围
+
+1. `StaticBuildSourceSlug`
+2. `StaticBuildSourceSpecialtyName`
+3. `StaticBuildSourceSpecialtyRef`
+4. `StaticBuildAgentListSourceItem`
+5. `StaticBuildWEngineListSourceItem`
+6. `catalog.ts` 对这些 source item 的读取和 helper 参数
+7. `build/index.ts` 对应 type export
+
+### 339.3 非目标
+
+1. 不改变 catalog 的支持范围
+2. 不调整 alias 生成逻辑
+3. 不修改上游 JSON 数据 shape
+
+### 339.4 当前状态
+
+- `V336.1` 已完成：范围冻结到 catalog source item contract
+- `V336.2` 已完成：catalog source item 与 helper 参数已统一复用显式公开 contract
+- `V336.3` 待完成：校验与提交
+- `V336.4` 待完成：roadmap、索引与架构文档同步

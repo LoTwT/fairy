@@ -64,6 +64,7 @@ export type {
   StaticBuildAgentId,
   StaticBuildAgentIdSet,
   StaticBuildAgentLevel,
+  StaticBuildAgentListSourceItem,
   StaticBuildAgentMindscape,
   StaticBuildAlias,
   StaticBuildAliasList,
@@ -238,6 +239,9 @@ export type {
   StaticBuildSourceNoteOwner,
   StaticBuildSourceNoteStatus,
   StaticBuildSourceNoteStatusLabelMap,
+  StaticBuildSourceSlug,
+  StaticBuildSourceSpecialtyName,
+  StaticBuildSourceSpecialtyRef,
   StaticBuildSourceStatId,
   StaticBuildSourceStatName,
   StaticBuildSourceStatOccurrenceMap,
@@ -288,6 +292,7 @@ export type {
   StaticBuildWEngineCatalogEntry,
   StaticBuildWEngineId,
   StaticBuildWEngineIdSet,
+  StaticBuildWEngineListSourceItem,
   StaticBuildWEngineRefinement,
 } from "./types.js"
 
