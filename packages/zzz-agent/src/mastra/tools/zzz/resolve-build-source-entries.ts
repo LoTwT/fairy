@@ -16,13 +16,11 @@ import {
 import {
   buildSourceEntryCollectionSuccessResponse,
   buildToolScopeLabels,
-  buildUncoveredSourceEntryCoverageResponse,
-  buildUncoveredSourceEntryUtilityOnlyResponse,
-  candidateNames,
   resolveBuildSourceEntriesInputSchema,
   resolveBuildToolLoadoutContext,
   resolveBuildToolSourceEntriesContext,
   resolveBuildToolSourceUtilitySupport,
+  resolveBuildToolUncoveredSourceEntryResponse,
 } from "./resolve-build-shared"
 
 export const resolveBuildSourceEntries = createTool({
@@ -93,34 +91,15 @@ export const resolveBuildSourceEntries = createTool({
     })
 
     if (collection.entries.length === 0) {
-      if (utilityOnly && !wEngine) {
-        return buildUncoveredSourceEntryUtilityOnlyResponse(
-          agent.name,
-          supportedUtilityWEngines,
-        )
-      }
-
-      if (!utilityOnly && !wEngine) {
-        return buildUncoveredSourceEntryCoverageResponse(
-          agent.name,
-          supportedStaticBuildSourceViewAgents,
-          supportedUtilityWEngines,
-        )
-      }
-
-      return utilityOnly
-        ? buildUncoveredSourceEntryUtilityOnlyResponse(
-            agent.name,
-            supportedUtilityWEngines,
-          )
-        : buildUncoveredSourceEntryCoverageResponse(
-            agent.name,
-            supportedStaticBuildSourceViewAgents,
-            supportedUtilityWEngines,
-            input.wEngine
-              ? candidateNames(compatibleWEngines, input.wEngine)
-              : [],
-          )
+      return resolveBuildToolUncoveredSourceEntryResponse({
+        agentName: agent.name,
+        utilityOnly,
+        wEngine,
+        wEngineQuery: input.wEngine,
+        compatibleWEngines,
+        supportedSourceViewAgents: supportedStaticBuildSourceViewAgents,
+        supportedUtilityWEngines,
+      })
     }
 
     return buildSourceEntryCollectionSuccessResponse(

@@ -263,6 +263,19 @@ export interface BuildToolResolvedSourceEntriesContext {
   panel: ResolveStaticBuildSourceEntriesInput["panel"]
 }
 
+export interface BuildToolResolveSourceEntryCoverageResponseOptions<
+  TSourceViewAgent extends CatalogItem,
+  TWEngine extends CatalogItem,
+> {
+  agentName: string
+  utilityOnly: boolean
+  wEngine?: TWEngine
+  wEngineQuery?: string
+  compatibleWEngines: readonly TWEngine[]
+  supportedSourceViewAgents: readonly TSourceViewAgent[]
+  supportedUtilityWEngines: string[]
+}
+
 export interface BuildToolResolvedTriggeredDamageContext<
   TAgent extends CatalogItem,
   TWEngine extends CatalogItem,
@@ -1262,6 +1275,34 @@ export function buildUncoveredSourceEntryCoverageResponse<
     supportedUtilityWEngines,
     ...(candidates && candidates.length > 0 ? { candidates } : {}),
   }
+}
+
+export function resolveBuildToolUncoveredSourceEntryResponse<
+  TSourceViewAgent extends CatalogItem,
+  TWEngine extends CatalogItem,
+>(
+  options: BuildToolResolveSourceEntryCoverageResponseOptions<
+    TSourceViewAgent,
+    TWEngine
+  >,
+):
+  | BuildToolUncoveredSourceEntryUtilityOnlyResponse
+  | BuildToolUncoveredSourceEntryCoverageResponse {
+  if (options.utilityOnly || !options.wEngine) {
+    return buildUncoveredSourceEntryUtilityOnlyResponse(
+      options.agentName,
+      options.supportedUtilityWEngines,
+    )
+  }
+
+  return buildUncoveredSourceEntryCoverageResponse(
+    options.agentName,
+    options.supportedSourceViewAgents,
+    options.supportedUtilityWEngines,
+    options.wEngineQuery
+      ? candidateNames(options.compatibleWEngines, options.wEngineQuery)
+      : [],
+  )
 }
 
 export function buildDamageSuccessResponse(

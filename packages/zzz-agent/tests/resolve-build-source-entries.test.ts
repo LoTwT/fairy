@@ -925,6 +925,36 @@ describe("resolveBuildSourceEntries tool", () => {
     expect((result as any).supportedUtilityWEngines).toContain("「月相」-朔")
   })
 
+  it("returns coverage scope when anomaly/disorder source entries are unavailable", async () => {
+    const result = await runTool(resolveBuildSourceEntries, {
+      agent: "猫又",
+      wEngine: "加农转子",
+      mode: "baseline",
+      finalPanel: {
+        attack: 2800,
+        critRate: 0.2,
+        critDamage: 0.5,
+        anomalyProficiency: 200,
+      },
+      scenario: {
+        damageType: "anomaly",
+        skillTag: "enhancedSpecial",
+        damageMultiplier: "500%",
+        attribute: "物理",
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(false)
+    expect((result as any).message).toContain("source-entry collection")
+    expect((result as any).message).toContain("额外来源条目")
+    expect((result as any).supportedSourceViewAgents).toContain("爱丽丝")
+    expect((result as any).supportedUtilityWEngines).toContain("「月相」-朔")
+  })
+
   it("uses source-entry-collection scope labels for unsupported w-engines", async () => {
     const result = await runTool(resolveBuildSourceEntries, {
       agent: "爱丽丝",
