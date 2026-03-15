@@ -4,6 +4,7 @@ import type {
   StaticBuildAssumptionList,
   StaticBuildBaseMode,
   StaticBuildBucket,
+  StaticBuildCombatTagSet,
   StaticBuildCritRate,
   StaticBuildDiagnosticEntryList,
   StaticBuildDiagnosticKind,
@@ -463,7 +464,7 @@ function effectMatches(
     agentMindscape: number
     skillTag: string
     extraAbilityActive: boolean
-    combatTags: Set<string>
+    combatTags: StaticBuildCombatTagSet
     dynamicSnapshot?: StaticBuildDynamicSnapshotInput
     stateSnapshot?: StaticBuildStateSnapshotInput
     isStunned: boolean
@@ -630,7 +631,7 @@ function applyEffects(
     agentMindscape: number
     skillTag: string
     extraAbilityActive: boolean
-    combatTags: Set<string>
+    combatTags: StaticBuildCombatTagSet
     isStunned: boolean
     resolvedCritRate?: StaticBuildCritRate
     resolvedAnomalyProficiency?: StaticBuildResolvedAnomalyProficiency

@@ -236,6 +236,7 @@ export type StaticBuildAssumptionList = StaticBuildAssumptionText[]
 export type StaticBuildUnsupportedEffectList =
   StaticBuildUnsupportedEffectText[]
 export type StaticBuildCombatTagList = StaticBuildCombatTag[]
+export type StaticBuildCombatTagSet = Set<StaticBuildCombatTag>
 export type StaticBuildAliasList = StaticBuildAlias[]
 export type StaticBuildSourceNoteKeyList = StaticBuildSourceNoteKey[]
 export type StaticBuildDefenderBaseDefense = number

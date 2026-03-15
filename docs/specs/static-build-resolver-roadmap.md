@@ -11773,3 +11773,31 @@ caveatSummary` 这些兼容字段补齐。
 - `V327.2` 已完成：固定 label map 已统一复用显式公开 contract
 - `V327.3` 已完成：校验与提交已通过
 - `V327.4` 已完成：roadmap、索引与架构文档已同步
+
+## 331. V328 combat tag collection contracts
+
+### 331.1 目标
+
+`V328` 只解决一件事：
+
+- 把 `combatTags` 在 `resolver` 和 `skill-matrix template` 里的 collection shape 统一收成显式公开 contract。
+
+### 331.2 范围
+
+1. `StaticBuildCombatTagSet`
+2. `resolver.ts` 中 `combatTags` 的 helper context
+3. `SkillMatrixTemplate.combatTags`
+4. `build/index.ts` 对应 type export
+
+### 331.3 非目标
+
+1. 不修改任何 `combatTags` 判定逻辑
+2. 不处理其他 `Set<string>` 聚合容器
+3. 不调整任何模板里的 tag 值
+
+### 331.4 当前状态
+
+- `V328.1` 已完成：范围冻结到 combat tag collection contract
+- `V328.2` 已完成：combat tag collection 已统一复用显式公开 contract
+- `V328.3` 已完成：校验与提交已通过
+- `V328.4` 已完成：roadmap、索引与架构文档已同步

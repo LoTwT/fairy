@@ -92,6 +92,7 @@ export type {
   StaticBuildCatalogId,
   StaticBuildCombatTag,
   StaticBuildCombatTagList,
+  StaticBuildCombatTagSet,
   StaticBuildConditionLabel,
   StaticBuildCooldownSeconds,
   StaticBuildCoreSkillLevel,

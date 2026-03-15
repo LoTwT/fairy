@@ -4,6 +4,7 @@ import type {
   ResolveStaticBuildSkillMatrixResult,
   StaticBuildAssumptionList,
   StaticBuildBucketValueMap,
+  StaticBuildCombatTagList,
   StaticBuildDamageType,
   StaticBuildFormulaMultiplierMap,
   StaticBuildSkillMatrixAttributeSource,
@@ -38,7 +39,7 @@ interface SkillMatrixTemplate {
   skillTag: StaticBuildSkillTag
   damageType?: StaticBuildDamageType
   attribute?: string
-  combatTags?: string[]
+  combatTags?: StaticBuildCombatTagList
 }
 
 interface GenericSkillStatItem {
