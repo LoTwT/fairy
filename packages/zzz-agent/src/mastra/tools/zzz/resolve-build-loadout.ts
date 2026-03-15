@@ -9,8 +9,8 @@ import type {
   BuildToolUnsupportedDriveDiscResponse,
   BuildToolUnsupportedWEngineResponse,
   CatalogItem,
+  SpecialtyCatalogItem,
 } from "./resolve-build-contracts"
-import type { BuildToolSpecialtyKey } from "./resolve-build-labels"
 import { catalogNames, findCatalogItem } from "./resolve-build-catalog"
 import {
   buildIncompatibleWEngineResponse,
@@ -91,8 +91,8 @@ export interface BuildToolSourceUtilitySupport<T extends CatalogItem> {
 }
 
 export interface BuildToolResolveLoadoutContextOptions<
-  TAgent extends CatalogItem & { specialty: BuildToolSpecialtyKey },
-  TWEngine extends CatalogItem & { specialty: BuildToolSpecialtyKey },
+  TAgent extends SpecialtyCatalogItem,
+  TWEngine extends SpecialtyCatalogItem,
   TDriveDisc extends CatalogItem,
 > extends BuildToolProgressionInput {
   scopeLabel: BuildToolScopeLabel
@@ -111,8 +111,8 @@ export interface BuildToolResolveLoadoutContextOptions<
 }
 
 export interface BuildToolResolveSourceEntriesLoadoutContextOptions<
-  TAgent extends CatalogItem & { specialty: BuildToolSpecialtyKey },
-  TWEngine extends CatalogItem & { specialty: BuildToolSpecialtyKey },
+  TAgent extends SpecialtyCatalogItem,
+  TWEngine extends SpecialtyCatalogItem,
   TDriveDisc extends CatalogItem,
 > extends BuildToolProgressionInput {
   utilityOnly: boolean
@@ -158,8 +158,8 @@ export function resolveBuildToolAgent<T extends CatalogItem>(
 }
 
 export function resolveBuildToolWEngine<
-  TAgent extends CatalogItem & { specialty: BuildToolSpecialtyKey },
-  TWEngine extends CatalogItem & { specialty: BuildToolSpecialtyKey },
+  TAgent extends SpecialtyCatalogItem,
+  TWEngine extends SpecialtyCatalogItem,
 >(
   scopeLabel: BuildToolScopeLabel,
   supportedWEngines: readonly TWEngine[],
@@ -282,10 +282,10 @@ export function buildToolResolvedLoadoutInput({
 }
 
 export function resolveBuildToolSourceUtilitySupport<
-  T extends CatalogItem & { specialty?: string },
+  T extends CatalogItem<SpecialtyCatalogItem["specialty"]>,
 >(
   supportedWEngines: readonly T[],
-  specialty: string | undefined,
+  specialty: SpecialtyCatalogItem["specialty"] | undefined,
 ): BuildToolSourceUtilitySupport<T> {
   const items = supportedWEngines.filter((item) => item.specialty === specialty)
 
@@ -296,8 +296,8 @@ export function resolveBuildToolSourceUtilitySupport<
 }
 
 export function resolveBuildToolLoadoutContext<
-  TAgent extends CatalogItem & { specialty: BuildToolSpecialtyKey },
-  TWEngine extends CatalogItem & { specialty: BuildToolSpecialtyKey },
+  TAgent extends SpecialtyCatalogItem,
+  TWEngine extends SpecialtyCatalogItem,
   TDriveDisc extends CatalogItem,
 >(
   options: BuildToolResolveLoadoutContextOptions<TAgent, TWEngine, TDriveDisc>,
@@ -357,8 +357,8 @@ export function resolveBuildToolLoadoutContext<
 }
 
 export function resolveBuildToolSourceEntriesLoadoutContext<
-  TAgent extends CatalogItem & { specialty: BuildToolSpecialtyKey },
-  TWEngine extends CatalogItem & { specialty: BuildToolSpecialtyKey },
+  TAgent extends SpecialtyCatalogItem,
+  TWEngine extends SpecialtyCatalogItem,
   TDriveDisc extends CatalogItem,
 >(
   options: BuildToolResolveSourceEntriesLoadoutContextOptions<

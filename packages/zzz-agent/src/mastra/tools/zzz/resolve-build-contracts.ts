@@ -6,12 +6,17 @@ import type {
   CompactStaticBuildSourceUtilityViewsResult,
   CompactStaticBuildTriggerMatrixResult,
 } from "zzz-data"
+import type { BuildToolSpecialtyKey } from "./resolve-build-labels"
 
-export interface CatalogItem {
+export interface CatalogItem<TSpecialty extends string = string> {
   id: string
   name: string
   aliases: readonly string[]
-  specialty?: string
+  specialty?: TSpecialty
+}
+
+export type SpecialtyCatalogItem = CatalogItem<BuildToolSpecialtyKey> & {
+  specialty: BuildToolSpecialtyKey
 }
 
 export type BuildToolScopeKey =

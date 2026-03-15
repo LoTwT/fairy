@@ -7,8 +7,8 @@ import type {
   BuildToolUnsupportedDriveDiscResponse,
   BuildToolUnsupportedWEngineResponse,
   CatalogItem,
+  SpecialtyCatalogItem,
 } from "./resolve-build-contracts"
-import type { BuildToolSpecialtyKey } from "./resolve-build-labels"
 import type {
   BuildToolRejectedAgent,
   BuildToolRejectedDriveDiscSets,
@@ -72,8 +72,8 @@ export interface BuildToolResolvedSourceUtilityExecutionContext<
 }
 
 export interface BuildToolResolveTriggeredDamageContextOptions<
-  TAgent extends CatalogItem & { specialty: BuildToolSpecialtyKey },
-  TWEngine extends CatalogItem & { specialty: BuildToolSpecialtyKey },
+  TAgent extends SpecialtyCatalogItem,
+  TWEngine extends SpecialtyCatalogItem,
   TDriveDisc extends CatalogItem,
 > extends BuildToolResolveLoadoutContextOptions<TAgent, TWEngine, TDriveDisc> {
   scenario: BuildToolScenarioInput
@@ -95,8 +95,8 @@ export interface BuildToolResolvedSourceEntriesExecutionContext<
 }
 
 export interface BuildToolResolveSourceEntriesExecutionContextOptions<
-  TAgent extends CatalogItem & { specialty: BuildToolSpecialtyKey },
-  TWEngine extends CatalogItem & { specialty: BuildToolSpecialtyKey },
+  TAgent extends SpecialtyCatalogItem,
+  TWEngine extends SpecialtyCatalogItem,
   TDriveDisc extends CatalogItem,
 > extends BuildToolResolveSourceEntriesLoadoutContextOptions<
   TAgent,
@@ -109,24 +109,24 @@ export interface BuildToolResolveSourceEntriesExecutionContextOptions<
 }
 
 export interface BuildToolResolveDamageExecutionContextOptions<
-  TAgent extends CatalogItem & { specialty: BuildToolSpecialtyKey },
-  TWEngine extends CatalogItem & { specialty: BuildToolSpecialtyKey },
+  TAgent extends SpecialtyCatalogItem,
+  TWEngine extends SpecialtyCatalogItem,
   TDriveDisc extends CatalogItem,
 > extends BuildToolResolveLoadoutContextOptions<TAgent, TWEngine, TDriveDisc> {
   scenario: BuildToolScenarioInput
 }
 
 export interface BuildToolResolveSkillMatrixExecutionContextOptions<
-  TAgent extends CatalogItem & { specialty: BuildToolSpecialtyKey },
-  TWEngine extends CatalogItem & { specialty: BuildToolSpecialtyKey },
+  TAgent extends SpecialtyCatalogItem,
+  TWEngine extends SpecialtyCatalogItem,
   TDriveDisc extends CatalogItem,
 > extends BuildToolResolveLoadoutContextOptions<TAgent, TWEngine, TDriveDisc> {
   context: BuildToolSkillMatrixContextInput
 }
 
 export interface BuildToolResolveSourceUtilityExecutionContextOptions<
-  TAgent extends CatalogItem & { specialty: BuildToolSpecialtyKey },
-  TWEngine extends CatalogItem & { specialty: BuildToolSpecialtyKey },
+  TAgent extends SpecialtyCatalogItem,
+  TWEngine extends SpecialtyCatalogItem,
   TDriveDisc extends CatalogItem,
 > extends BuildToolResolveLoadoutContextOptions<TAgent, TWEngine, TDriveDisc> {
   supportedSourceUtilityWEngines: readonly TWEngine[]
@@ -147,8 +147,8 @@ export interface BuildToolResolvedTriggeredDamageContext<
 }
 
 export function resolveBuildToolTriggeredDamageContext<
-  TAgent extends CatalogItem & { specialty: BuildToolSpecialtyKey },
-  TWEngine extends CatalogItem & { specialty: BuildToolSpecialtyKey },
+  TAgent extends SpecialtyCatalogItem,
+  TWEngine extends SpecialtyCatalogItem,
   TDriveDisc extends CatalogItem,
 >(
   options: BuildToolResolveTriggeredDamageContextOptions<
@@ -200,8 +200,8 @@ export function resolveBuildToolTriggeredDamageContext<
 }
 
 export function resolveBuildToolSourceEntriesExecutionContext<
-  TAgent extends CatalogItem & { specialty: BuildToolSpecialtyKey },
-  TWEngine extends CatalogItem & { specialty: BuildToolSpecialtyKey },
+  TAgent extends SpecialtyCatalogItem,
+  TWEngine extends SpecialtyCatalogItem,
   TDriveDisc extends CatalogItem,
 >(
   options: BuildToolResolveSourceEntriesExecutionContextOptions<
@@ -256,8 +256,8 @@ export function resolveBuildToolSourceEntriesExecutionContext<
 }
 
 export function resolveBuildToolDamageExecutionContext<
-  TAgent extends CatalogItem & { specialty: BuildToolSpecialtyKey },
-  TWEngine extends CatalogItem & { specialty: BuildToolSpecialtyKey },
+  TAgent extends SpecialtyCatalogItem,
+  TWEngine extends SpecialtyCatalogItem,
   TDriveDisc extends CatalogItem,
 >(
   options: BuildToolResolveDamageExecutionContextOptions<
@@ -296,8 +296,8 @@ export function resolveBuildToolDamageExecutionContext<
 }
 
 export function resolveBuildToolSkillMatrixExecutionContext<
-  TAgent extends CatalogItem & { specialty: BuildToolSpecialtyKey },
-  TWEngine extends CatalogItem & { specialty: BuildToolSpecialtyKey },
+  TAgent extends SpecialtyCatalogItem,
+  TWEngine extends SpecialtyCatalogItem,
   TDriveDisc extends CatalogItem,
 >(
   options: BuildToolResolveSkillMatrixExecutionContextOptions<
@@ -325,8 +325,8 @@ export function resolveBuildToolSkillMatrixExecutionContext<
 }
 
 export function resolveBuildToolSourceUtilityExecutionContext<
-  TAgent extends CatalogItem & { specialty: BuildToolSpecialtyKey },
-  TWEngine extends CatalogItem & { specialty: BuildToolSpecialtyKey },
+  TAgent extends SpecialtyCatalogItem,
+  TWEngine extends SpecialtyCatalogItem,
   TDriveDisc extends CatalogItem,
 >(
   options: BuildToolResolveSourceUtilityExecutionContextOptions<

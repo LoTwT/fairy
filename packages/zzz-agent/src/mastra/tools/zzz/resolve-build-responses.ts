@@ -27,8 +27,8 @@ import type {
   BuildToolUnsupportedDriveDiscResponse,
   BuildToolUnsupportedWEngineResponse,
   CatalogItem,
+  SpecialtyCatalogItem,
 } from "./resolve-build-contracts"
-import type { BuildToolSpecialtyKey } from "./resolve-build-labels"
 import { candidateNames, catalogNames } from "./resolve-build-catalog"
 import { buildToolScopeLabels } from "./resolve-build-contracts"
 import { specialtyLabels } from "./resolve-build-labels"
@@ -110,8 +110,8 @@ export function buildUnsupportedWEngineResponse<T extends CatalogItem>(
 }
 
 export function buildIncompatibleWEngineResponse<
-  TAgent extends CatalogItem & { specialty: BuildToolSpecialtyKey },
-  TWEngine extends CatalogItem & { specialty: BuildToolSpecialtyKey },
+  TAgent extends SpecialtyCatalogItem,
+  TWEngine extends SpecialtyCatalogItem,
 >(
   agent: TAgent,
   wEngine: TWEngine,
