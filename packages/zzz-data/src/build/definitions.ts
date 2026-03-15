@@ -1,4 +1,7 @@
 import type {
+  StaticBuildDynamicCountKey,
+  StaticBuildDynamicSnapshotInput,
+  StaticBuildDynamicValueKey,
   StaticBuildEffectDefinition,
   StaticBuildResolvedSnapshotBucketKey,
   StaticBuildResolvedSnapshotInput,
@@ -7,6 +10,8 @@ import type {
   StaticBuildSourceNoteGuidance,
   StaticBuildSourceNoteOwner,
   StaticBuildSourceNoteStatus,
+  StaticBuildStateSnapshotInput,
+  StaticBuildStateValueKey,
   StaticBuildValueContext,
 } from "./types.js"
 import { calcDisorderDamageMultiplier } from "../calculator/factors.js"
@@ -52,27 +57,19 @@ function ariaM1AnomalyCritRate({
   return Math.max(0.25, 0.25 + Math.max(0, (anomalyMastery ?? 0) - 100) * 0.005)
 }
 
-function dynamicValue(
-  key: keyof NonNullable<StaticBuildValueContext["dynamicSnapshot"]>["values"],
-) {
+function dynamicValue(key: StaticBuildDynamicValueKey) {
   return ({ dynamicSnapshot }: StaticBuildValueContext): number =>
     dynamicSnapshot?.values?.[key] ?? 0
 }
 
-function stateMultiplierDelta(
-  key: keyof NonNullable<StaticBuildValueContext["stateSnapshot"]>["values"],
-) {
+function stateMultiplierDelta(key: StaticBuildStateValueKey) {
   return ({ stateSnapshot }: StaticBuildValueContext): number =>
     (stateSnapshot?.values?.[key] ?? 0) - 1
 }
 
 function multipliedDynamicCountAndValue(input: {
-  countKey: keyof NonNullable<
-    StaticBuildValueContext["dynamicSnapshot"]
-  >["counts"]
-  valueKey: keyof NonNullable<
-    StaticBuildValueContext["dynamicSnapshot"]
-  >["values"]
+  countKey: StaticBuildDynamicCountKey
+  valueKey: StaticBuildDynamicValueKey
 }) {
   return ({ dynamicSnapshot }: StaticBuildValueContext): number =>
     (dynamicSnapshot?.counts?.[input.countKey] ?? 0) *
@@ -4805,8 +4802,8 @@ function matchesStaticBuildSourceNote(
     agentMindscape?: number
     energyGenerationRate?: number
     anomalyMastery?: number
-    dynamicSnapshot?: StaticBuildValueContext["dynamicSnapshot"]
-    stateSnapshot?: StaticBuildValueContext["stateSnapshot"]
+    dynamicSnapshot?: StaticBuildDynamicSnapshotInput
+    stateSnapshot?: StaticBuildStateSnapshotInput
     resolvedSnapshot?: StaticBuildResolvedSnapshotInput
     isStunned?: boolean
     disorderSourceType?:
@@ -4996,8 +4993,8 @@ export function getStaticBuildSourceNoteEntries(input: {
   agentMindscape?: number
   energyGenerationRate?: number
   anomalyMastery?: number
-  dynamicSnapshot?: StaticBuildValueContext["dynamicSnapshot"]
-  stateSnapshot?: StaticBuildValueContext["stateSnapshot"]
+  dynamicSnapshot?: StaticBuildDynamicSnapshotInput
+  stateSnapshot?: StaticBuildStateSnapshotInput
   resolvedSnapshot?: StaticBuildResolvedSnapshotInput
   isStunned?: boolean
   disorderSourceType?:
@@ -5037,8 +5034,8 @@ export function getStaticBuildSourceNotes(input: {
   agentMindscape?: number
   energyGenerationRate?: number
   anomalyMastery?: number
-  dynamicSnapshot?: StaticBuildValueContext["dynamicSnapshot"]
-  stateSnapshot?: StaticBuildValueContext["stateSnapshot"]
+  dynamicSnapshot?: StaticBuildDynamicSnapshotInput
+  stateSnapshot?: StaticBuildStateSnapshotInput
   resolvedSnapshot?: StaticBuildResolvedSnapshotInput
   isStunned?: boolean
   disorderSourceType?:

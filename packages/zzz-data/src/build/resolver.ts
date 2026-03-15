@@ -6,11 +6,13 @@ import type {
   StaticBuildDiagnosticEntry,
   StaticBuildDiagnosticKind,
   StaticBuildDiagnosticOwner,
+  StaticBuildDynamicSnapshotInput,
   StaticBuildEffectDefinition,
   StaticBuildResolvedBuckets,
   StaticBuildSourceNoteEntry,
   StaticBuildSourceNoteOwner,
   StaticBuildSourceNoteStatus,
+  StaticBuildStateSnapshotInput,
   StaticBuildTraceItem,
   StaticBuildValueContext,
 } from "./types.js"
@@ -444,8 +446,8 @@ function effectMatches(
     skillTag: string
     extraAbilityActive: boolean
     combatTags: Set<string>
-    dynamicSnapshot?: StaticBuildValueContext["dynamicSnapshot"]
-    stateSnapshot?: StaticBuildValueContext["stateSnapshot"]
+    dynamicSnapshot?: StaticBuildDynamicSnapshotInput
+    stateSnapshot?: StaticBuildStateSnapshotInput
     isStunned: boolean
     resolvedCritRate?: number
     resolvedAnomalyProficiency?: number
