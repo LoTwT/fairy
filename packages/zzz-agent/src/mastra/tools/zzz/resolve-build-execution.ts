@@ -1,4 +1,7 @@
-import type { ResolveStaticBuildSourceEntriesInput } from "zzz-data"
+import type {
+  StaticBuildFinalPanelInput,
+  StaticBuildScenarioInput,
+} from "zzz-data"
 import type {
   BuildToolIncompatibleWEngineResponse,
   BuildToolUnsupportedAgentResponse,
@@ -85,8 +88,8 @@ export interface BuildToolResolvedSourceEntriesExecutionContext<
 > {
   ok: true
   utilityOnly: boolean
-  scenario: ResolveStaticBuildSourceEntriesInput["scenario"]
-  panel: ResolveStaticBuildSourceEntriesInput["panel"]
+  scenario: StaticBuildScenarioInput | undefined
+  panel: StaticBuildFinalPanelInput | undefined
   agent: TAgent
   compatibleWEngines: readonly TWEngine[]
   wEngine: TWEngine | undefined

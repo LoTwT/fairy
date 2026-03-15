@@ -1,4 +1,7 @@
-import type { ResolveStaticBuildSourceEntriesInput } from "zzz-data"
+import type {
+  StaticBuildFinalPanelInput,
+  StaticBuildScenarioInput,
+} from "zzz-data"
 import type {
   BuildToolMissingFinalPanelResponse,
   BuildToolUnsupportedAnomalyTypeResponse,
@@ -13,8 +16,8 @@ import { finalPanelSchema } from "./resolve-build-schemas"
 
 export interface BuildToolResolvedSourceEntriesContext {
   utilityOnly: boolean
-  scenario: ResolveStaticBuildSourceEntriesInput["scenario"]
-  panel: ResolveStaticBuildSourceEntriesInput["panel"]
+  scenario: StaticBuildScenarioInput | undefined
+  panel: StaticBuildFinalPanelInput | undefined
 }
 
 export function resolveBuildToolSourceEntriesContext(input: {
@@ -42,7 +45,7 @@ export function resolveBuildToolSourceEntriesContext(input: {
   }
 
   const scenario = scenarioResolution.scenario
-  let panel: ResolveStaticBuildSourceEntriesInput["panel"]
+  let panel: StaticBuildFinalPanelInput | undefined
 
   if (
     scenario &&
