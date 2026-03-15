@@ -4,7 +4,10 @@ import {
   compactStaticBuildSourceUtilityViewsResult,
   resolveStaticBuildSourceUtilityViews,
 } from "zzz-data"
-import { buildToolSourceUtilityViewCatalogPreset } from "./resolve-build-presets"
+import {
+  buildToolDescriptions,
+  buildToolSourceUtilityViewCatalogPreset,
+} from "./resolve-build-presets"
 import {
   buildToolScopeLabels,
   resolveBuildSourceUtilityInputSchema,
@@ -14,8 +17,7 @@ import {
 
 export const resolveBuildSourceUtilityViews = createTool({
   id: "resolve-build-source-utility-views",
-  description:
-    "查询 source-specific utility / resource 条目。当前覆盖稳定可表达的音擎回能、后场回能速率与喧响值条目，不并回主伤害公式。",
+  description: buildToolDescriptions.sourceUtilityView,
   inputSchema: resolveBuildSourceUtilityInputSchema.extend({
     includeDetails: z
       .boolean()

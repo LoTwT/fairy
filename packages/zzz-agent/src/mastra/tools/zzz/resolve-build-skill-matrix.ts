@@ -3,7 +3,10 @@ import {
   compactStaticBuildSkillMatrixResult,
   resolveStaticBuildSkillMatrix,
 } from "zzz-data"
-import { buildToolSkillMatrixCatalogPreset } from "./resolve-build-presets"
+import {
+  buildToolDescriptions,
+  buildToolSkillMatrixCatalogPreset,
+} from "./resolve-build-presets"
 import {
   buildSkillMatrixSuccessResponse,
   buildToolScopeLabels,
@@ -13,8 +16,7 @@ import {
 
 export const resolveBuildSkillMatrix = createTool({
   id: "resolve-build-skill-matrix",
-  description:
-    "基于 zzz-data 的静态构筑解析器批量计算全技能/全段伤害矩阵。当前仅支持强攻/命破代理人，以及对应特性的强攻/命破音擎；异常代理人暂只支持单次 resolver。",
+  description: buildToolDescriptions.skillMatrix,
   inputSchema: resolveBuildSkillMatrixInputSchema,
   execute: async (input) => {
     const contextResolution = resolveBuildToolSkillMatrixExecutionContext({

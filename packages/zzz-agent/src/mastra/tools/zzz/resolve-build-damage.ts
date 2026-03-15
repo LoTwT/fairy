@@ -1,7 +1,10 @@
 import { createTool } from "@mastra/core/tools"
 import { z } from "zod"
 import { compactStaticBuildResult, resolveStaticBuildDamage } from "zzz-data"
-import { buildToolDamageCatalogPreset } from "./resolve-build-presets"
+import {
+  buildToolDamageCatalogPreset,
+  buildToolDescriptions,
+} from "./resolve-build-presets"
 import {
   buildDamageSuccessResponse,
   buildToolScopeLabels,
@@ -11,8 +14,7 @@ import {
 
 export const resolveBuildDamage = createTool({
   id: "resolve-build-damage",
-  description:
-    "基于 zzz-data 的静态构筑解析器直接计算伤害。当前支持全部强攻/命破/异常代理人，以及对应特性的强攻/命破/异常音擎；异常代理人当前支持 anomaly / disorder 单次 resolver，不支持 skill matrix。",
+  description: buildToolDescriptions.resolver,
   inputSchema: resolveBuildInputSchema.extend({
     includeDetails: z
       .boolean()
