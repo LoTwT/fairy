@@ -960,3 +960,4 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 209. `V209` build-tool loadout helper contracts：当前阶段已收口；6 个高层 build tool 的 `driveDiscSets` 解析与 `loadout` 组装已收进 shared helper，不改变任何 tool 的输入输出 shape，见 [静态构筑解析系统 V209](./static-build-resolver-v209.md)
 210. `V210` build-tool catalog helper contracts：当前阶段已收口；6 个高层 build tool 的 `agent / wEngine` 解析与兼容校验已收进 shared helper，不改变任何 tool 的输入输出 shape，见 [静态构筑解析系统 V210](./static-build-resolver-v210.md)
 211. `V211` build-tool scenario helper contracts：当前阶段已收口；高层 build tool 的 `attribute / disorder.anomalyType` 归一化已收进 shared helper，不改变任何 tool 的输入输出 shape，见 [静态构筑解析系统 V211](./static-build-resolver-v211.md)
+212. `V212` build-tool damage-type helper contracts：当前阶段已收口；`trigger-matrix / source-damage-view` 的 damage-type gating 已收进 shared helper，不改变任何 tool 的输入输出 shape，见 [静态构筑解析系统 V212](./static-build-resolver-v212.md)

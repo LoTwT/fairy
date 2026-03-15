@@ -13,9 +13,9 @@ import {
   buildToolLoadoutInput,
   buildToolScopeLabels,
   buildUncoveredSourceDamageViewResponse,
-  buildUnsupportedDamageTypeResponse,
   resolveBuildInputSchema,
   resolveBuildToolAgent,
+  resolveBuildToolDamageType,
   resolveBuildToolDisorderScenario,
   resolveBuildToolDriveDiscSets,
   resolveBuildToolScenario,
@@ -36,14 +36,13 @@ export const resolveBuildSourceDamageViews = createTool({
       ),
   }),
   execute: async (input) => {
-    if (
-      input.scenario.damageType !== "anomaly" &&
-      input.scenario.damageType !== "disorder"
-    ) {
-      return buildUnsupportedDamageTypeResponse(
-        buildToolScopeLabels.sourceDamageView,
-        ["anomaly", "disorder"],
-      )
+    const damageTypeResolution = resolveBuildToolDamageType(
+      buildToolScopeLabels.sourceDamageView,
+      input.scenario.damageType,
+      ["anomaly", "disorder"],
+    )
+    if (!damageTypeResolution.ok) {
+      return damageTypeResolution.response
     }
 
     const agentResolution = resolveBuildToolAgent(
@@ -86,7 +85,7 @@ export const resolveBuildSourceDamageViews = createTool({
       wEngineRefinement: input.wEngineRefinement,
     })
 
-    if (input.scenario.damageType === "disorder") {
+    if (damageTypeResolution.damageType === "disorder") {
       const disorderScenarioResolution = resolveBuildToolDisorderScenario(
         input.scenario,
       )

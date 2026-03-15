@@ -12,9 +12,9 @@ import {
   buildToolLoadoutInput,
   buildToolScopeLabels,
   buildTriggerMatrixSuccessResponse,
-  buildUnsupportedDamageTypeResponse,
   resolveBuildInputSchema,
   resolveBuildToolAgent,
+  resolveBuildToolDamageType,
   resolveBuildToolDisorderScenario,
   resolveBuildToolDriveDiscSets,
   resolveBuildToolScenario,
@@ -35,14 +35,13 @@ export const resolveBuildTriggerMatrix = createTool({
       ),
   }),
   execute: async (input) => {
-    if (
-      input.scenario.damageType !== "anomaly" &&
-      input.scenario.damageType !== "disorder"
-    ) {
-      return buildUnsupportedDamageTypeResponse(
-        buildToolScopeLabels.triggerMatrix,
-        ["anomaly", "disorder"],
-      )
+    const damageTypeResolution = resolveBuildToolDamageType(
+      buildToolScopeLabels.triggerMatrix,
+      input.scenario.damageType,
+      ["anomaly", "disorder"],
+    )
+    if (!damageTypeResolution.ok) {
+      return damageTypeResolution.response
     }
 
     const agentResolution = resolveBuildToolAgent(
@@ -86,7 +85,7 @@ export const resolveBuildTriggerMatrix = createTool({
     })
 
     const scenarioResolution =
-      input.scenario.damageType === "disorder"
+      damageTypeResolution.damageType === "disorder"
         ? resolveBuildToolDisorderScenario(input.scenario)
         : {
             ok: true as const,

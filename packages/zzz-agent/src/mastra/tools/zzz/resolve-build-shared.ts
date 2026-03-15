@@ -764,6 +764,35 @@ export function buildUnsupportedDamageTypeResponse(
   }
 }
 
+export function resolveBuildToolDamageType<TDamageType extends string>(
+  scopeLabel: BuildToolScopeLabel,
+  damageType: string,
+  supportedDamageTypes: readonly TDamageType[],
+):
+  | {
+      ok: true
+      damageType: TDamageType
+    }
+  | {
+      ok: false
+      response: BuildToolUnsupportedDamageTypeResponse
+    } {
+  if (!supportedDamageTypes.includes(damageType as TDamageType)) {
+    return {
+      ok: false,
+      response: buildUnsupportedDamageTypeResponse(
+        scopeLabel,
+        supportedDamageTypes,
+      ),
+    }
+  }
+
+  return {
+    ok: true,
+    damageType: damageType as TDamageType,
+  }
+}
+
 export function buildUncoveredSourceDamageViewResponse<T extends CatalogItem>(
   items: readonly T[],
   query: string,
