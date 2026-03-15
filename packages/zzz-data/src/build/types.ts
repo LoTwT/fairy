@@ -589,6 +589,8 @@ export interface StaticBuildTraceItem {
   modifiers?: StaticBuildTraceModifier[]
 }
 
+export type StaticBuildTraceItemList = StaticBuildTraceItem[]
+
 export interface StaticBuildProfileResult {
   id: StaticBuildProfileId
   name: StaticBuildDisplayName
@@ -653,6 +655,8 @@ export interface StaticBuildSourceNoteEntry {
   message: StaticBuildSourceNoteMessage
 }
 
+export type StaticBuildSourceNoteEntryList = StaticBuildSourceNoteEntry[]
+
 export type StaticBuildDiagnosticKind =
   | "defaulted-input"
   | "coverage-gap"
@@ -679,6 +683,8 @@ export interface StaticBuildDiagnosticEntry {
   keys: StaticBuildDiagnosticKeyList
   message: StaticBuildDiagnosticMessage
 }
+
+export type StaticBuildDiagnosticEntryList = StaticBuildDiagnosticEntry[]
 
 export interface StaticBuildDiagnosticGroupSummary {
   key: StaticBuildDiagnosticKind

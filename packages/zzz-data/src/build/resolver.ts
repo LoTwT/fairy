@@ -1,10 +1,12 @@
 import type {
   ResolveStaticBuildInput,
   ResolveStaticBuildResult,
+  StaticBuildAssumptionList,
   StaticBuildBaseMode,
   StaticBuildBucket,
   StaticBuildCritRate,
   StaticBuildDiagnosticEntry,
+  StaticBuildDiagnosticEntryList,
   StaticBuildDiagnosticKind,
   StaticBuildDiagnosticOwner,
   StaticBuildDynamicSnapshotInput,
@@ -13,10 +15,13 @@ import type {
   StaticBuildResolvedAnomalyProficiency,
   StaticBuildResolvedBuckets,
   StaticBuildSourceNoteEntry,
+  StaticBuildSourceNoteEntryList,
   StaticBuildSourceNoteOwner,
   StaticBuildSourceNoteStatus,
   StaticBuildStateSnapshotInput,
   StaticBuildTraceItem,
+  StaticBuildTraceItemList,
+  StaticBuildUnsupportedEffectList,
   StaticBuildValueContext,
 } from "./types.js"
 import {
@@ -176,7 +181,7 @@ function summarizeDiagnostics(diagnostics: StaticBuildDiagnosticEntry[]) {
 }
 
 export function summarizeDiagnosticEntries(
-  diagnostics: StaticBuildDiagnosticEntry[],
+  diagnostics: StaticBuildDiagnosticEntryList,
 ) {
   const kindGroups = summarizeDiagnostics(diagnostics)
   const ownerGroups = (
@@ -221,7 +226,7 @@ function summarizeSourceNotes(sourceNotes: StaticBuildSourceNoteEntry[]) {
 }
 
 export function summarizeSourceNoteEntries(
-  sourceNotes: StaticBuildSourceNoteEntry[],
+  sourceNotes: StaticBuildSourceNoteEntryList,
 ) {
   const statusGroups = summarizeSourceNotes(sourceNotes)
   const ownerGroups = (
@@ -257,14 +262,14 @@ export function summarizeSourceNoteEntries(
   }
 }
 
-export function summarizeAssumptions(assumptions: string[]) {
+export function summarizeAssumptions(assumptions: StaticBuildAssumptionList) {
   return {
     count: assumptions.length,
     hasAssumptions: assumptions.length > 0,
   }
 }
 
-export function summarizeResolveEffects(trace: StaticBuildTraceItem[]) {
+export function summarizeResolveEffects(trace: StaticBuildTraceItemList) {
   const summary = new Map<
     string,
     {
@@ -313,8 +318,8 @@ export function summarizeResolveEffects(trace: StaticBuildTraceItem[]) {
 }
 
 export function summarizeResolveCaveats(
-  assumptions: string[],
-  unsupportedEffects: string[],
+  assumptions: StaticBuildAssumptionList,
+  unsupportedEffects: StaticBuildUnsupportedEffectList,
 ) {
   return {
     assumptionCount: assumptions.length,

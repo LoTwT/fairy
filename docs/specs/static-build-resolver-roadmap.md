@@ -11583,5 +11583,37 @@ caveatSummary` 这些兼容字段补齐。
 
 - `V321.1` 已完成：范围冻结到 source note lookup input contract
 - `V321.2` 已完成：source note helper 的 lookup input 已统一复用显式公开 contract
-- `V321.3` 进行中：校验与提交
+- `V321.3` 已完成：校验与提交已通过
 - `V321.4` 已完成：roadmap、索引与架构文档已同步
+
+## 325. V322 resolver summary input list contracts
+
+### 325.1 目标
+
+`V322` 只解决一件事：
+
+- 把 `resolver.ts` 中公开 summary helper 仍直接暴露的数组输入，统一收成显式公开 list contract。
+
+### 325.2 范围
+
+1. `StaticBuildDiagnosticEntryList`
+2. `StaticBuildSourceNoteEntryList`
+3. `StaticBuildTraceItemList`
+4. `summarizeDiagnosticEntries()`
+5. `summarizeSourceNoteEntries()`
+6. `summarizeAssumptions()`
+7. `summarizeResolveEffects()`
+8. `summarizeResolveCaveats()`
+
+### 325.3 非目标
+
+1. 不修改任何 summary runtime 逻辑
+2. 不新增新的 summary 字段
+3. 不处理 compact helper 输出 contract
+
+### 325.4 当前状态
+
+- `V322.1` 已完成：范围冻结到 resolver summary input list contract
+- `V322.2` 已完成：resolver summary helper 的数组输入已统一复用显式公开 list contract
+- `V322.3` 进行中：校验与提交
+- `V322.4` 已完成：roadmap、索引与架构文档已同步
