@@ -2,6 +2,7 @@ import type {
   ResolveStaticBuildSourceUtilityViewsInput,
   ResolveStaticBuildSourceUtilityViewsResult,
   StaticBuildCatalogEntry,
+  StaticBuildDriveDiscSetsInput,
   StaticBuildEntryCaveatSummary,
   StaticBuildResolvedLoadout,
   StaticBuildSourceUtilityViewEntry,
@@ -98,7 +99,7 @@ export function hasStaticBuildSourceUtilityViewCoverage(wEngineId?: string) {
 }
 
 function resolveDriveDiscSets(
-  sets: ResolveStaticBuildSourceUtilityViewsInput["loadout"]["driveDiscSets"],
+  sets: StaticBuildDriveDiscSetsInput,
 ): Array<StaticBuildCatalogEntry & { pieces: 2 | 4 }> {
   return (sets ?? []).map((set) => {
     const disc = getStaticBuildDriveDisc(set.id)

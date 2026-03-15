@@ -5,6 +5,7 @@ import type {
   ResolveStaticBuildSourceDamageViewsResult,
   StaticBuildBaseMode,
   StaticBuildCatalogEntry,
+  StaticBuildDriveDiscSetsInput,
   StaticBuildEntryCaveatSummary,
   StaticBuildResolvedLoadout,
   StaticBuildSourceDamageViewEffectSummaryItem,
@@ -103,7 +104,7 @@ function resolveBaseMode(input: ResolveStaticBuildInput): StaticBuildBaseMode {
 }
 
 function resolveDriveDiscSets(
-  sets: ResolveStaticBuildInput["loadout"]["driveDiscSets"],
+  sets: StaticBuildDriveDiscSetsInput,
 ): Array<StaticBuildCatalogEntry & { pieces: 2 | 4 }> {
   return (sets ?? []).map((set) => {
     const disc = getStaticBuildDriveDisc(set.id)

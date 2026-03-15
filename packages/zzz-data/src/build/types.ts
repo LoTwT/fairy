@@ -128,10 +128,14 @@ export interface StaticBuildDriveDiscSetInput {
   pieces: 2 | 4
 }
 
+export type StaticBuildDriveDiscSetsInput =
+  | StaticBuildDriveDiscSetInput[]
+  | undefined
+
 export interface StaticBuildLoadoutInput {
   agentId: string
   wEngineId?: string
-  driveDiscSets?: StaticBuildDriveDiscSetInput[]
+  driveDiscSets?: StaticBuildDriveDiscSetsInput
   agentLevel?: number
   agentMindscape?: number
   coreSkillLevel?: number
