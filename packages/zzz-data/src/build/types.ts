@@ -111,6 +111,17 @@ export type StaticBuildCoreSkillLevel = number
 export type StaticBuildWEngineRefinement = number
 export type StaticBuildEnergyGenerationRate = number
 export type StaticBuildAnomalyMastery = number
+export type StaticBuildAttack = number
+export type StaticBuildBaseAttack = number
+export type StaticBuildCritRate = number
+export type StaticBuildCritDamage = number
+export type StaticBuildHP = number
+export type StaticBuildSheerForce = number
+export type StaticBuildAnomalyProficiency = number
+export type StaticBuildAnomalyCritRate = number
+export type StaticBuildAnomalyCritDamage = number
+export type StaticBuildPenetrationRate = number
+export type StaticBuildPenetrationValue = number
 export type StaticBuildResolvedAnomalyProficiency = number
 export type StaticBuildRemainingTime = number
 
@@ -152,19 +163,19 @@ export interface StaticBuildLoadoutInput {
 }
 
 export interface StaticBuildFinalPanelInput {
-  attack: number
-  baseAttack?: number
-  critRate: number
-  critDamage: number
-  hp?: number
-  sheerForce?: number
+  attack: StaticBuildAttack
+  baseAttack?: StaticBuildBaseAttack
+  critRate: StaticBuildCritRate
+  critDamage: StaticBuildCritDamage
+  hp?: StaticBuildHP
+  sheerForce?: StaticBuildSheerForce
   energyGenerationRate?: StaticBuildEnergyGenerationRate
-  anomalyProficiency?: number
+  anomalyProficiency?: StaticBuildAnomalyProficiency
   anomalyMastery?: StaticBuildAnomalyMastery
-  anomalyCritRate?: number
-  anomalyCritDamage?: number
-  penetrationRate?: number
-  penetrationValue?: number
+  anomalyCritRate?: StaticBuildAnomalyCritRate
+  anomalyCritDamage?: StaticBuildAnomalyCritDamage
+  penetrationRate?: StaticBuildPenetrationRate
+  penetrationValue?: StaticBuildPenetrationValue
 }
 
 export interface StaticBuildEnemyInput {
@@ -366,20 +377,20 @@ export interface StaticBuildResolvedBuckets {
 }
 
 export interface StaticBuildResolvedPanel {
-  attack: number
-  baseAttack?: number
-  agentLevel: number
-  critRate: number
-  critDamage: number
-  hp?: number
-  sheerForce?: number
+  attack: StaticBuildAttack
+  baseAttack?: StaticBuildBaseAttack
+  agentLevel: StaticBuildAgentLevel
+  critRate: StaticBuildCritRate
+  critDamage: StaticBuildCritDamage
+  hp?: StaticBuildHP
+  sheerForce?: StaticBuildSheerForce
   energyGenerationRate?: StaticBuildEnergyGenerationRate
-  anomalyProficiency: number
+  anomalyProficiency: StaticBuildAnomalyProficiency
   anomalyMastery?: StaticBuildAnomalyMastery
-  anomalyCritRate: number
-  anomalyCritDamage: number
-  penetrationRate: number
-  penetrationValue: number
+  anomalyCritRate: StaticBuildAnomalyCritRate
+  anomalyCritDamage: StaticBuildAnomalyCritDamage
+  penetrationRate: StaticBuildPenetrationRate
+  penetrationValue: StaticBuildPenetrationValue
   baseDamageStat: StaticBuildBaseDamageStat
   baseDamageValue: number
 }

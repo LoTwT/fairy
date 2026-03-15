@@ -1,9 +1,20 @@
 import type {
+  StaticBuildAnomalyCritDamage,
+  StaticBuildAnomalyCritRate,
   StaticBuildAnomalyMastery,
+  StaticBuildAnomalyProficiency,
+  StaticBuildAttack,
+  StaticBuildBaseAttack,
+  StaticBuildCritDamage,
+  StaticBuildCritRate,
   StaticBuildDamageType,
   StaticBuildDriveDiscPieces,
   StaticBuildEnergyGenerationRate,
+  StaticBuildHP,
+  StaticBuildPenetrationRate,
+  StaticBuildPenetrationValue,
   StaticBuildRemainingTime,
+  StaticBuildSheerForce,
   StaticBuildSkillTag,
 } from "zzz-data"
 import { z as zod } from "zod"
@@ -136,19 +147,19 @@ export interface BuildToolSkillMatrixContextInput {
 }
 
 export interface BuildToolFinalPanelInput {
-  attack: number
-  baseAttack?: number
-  critRate: number
-  critDamage: number
-  hp?: number
-  sheerForce?: number
+  attack: StaticBuildAttack
+  baseAttack?: StaticBuildBaseAttack
+  critRate: StaticBuildCritRate
+  critDamage: StaticBuildCritDamage
+  hp?: StaticBuildHP
+  sheerForce?: StaticBuildSheerForce
   energyGenerationRate?: StaticBuildEnergyGenerationRate
-  anomalyProficiency?: number
+  anomalyProficiency?: StaticBuildAnomalyProficiency
   anomalyMastery?: StaticBuildAnomalyMastery
-  anomalyCritRate?: number
-  anomalyCritDamage?: number
-  penetrationRate?: number
-  penetrationValue?: number
+  anomalyCritRate?: StaticBuildAnomalyCritRate
+  anomalyCritDamage?: StaticBuildAnomalyCritDamage
+  penetrationRate?: StaticBuildPenetrationRate
+  penetrationValue?: StaticBuildPenetrationValue
 }
 
 export const enemySchema = zod.object({
