@@ -11086,6 +11086,37 @@ caveatSummary` 这些兼容字段补齐。
 ### 310.4 当前状态
 
 - `V307.1` 已完成：范围冻结到 skill-matrix skillMultiplier contract
-- `V307.2` 进行中：准备在 `types.ts` 中落显式 skillMultiplier type
-- `V307.3` 待开始：导出与测试对齐
-- `V307.4` 待开始：文档收口
+- `V307.2` 已完成：`types.ts` 已让 skill-matrix row 统一复用显式 skillMultiplier type
+- `V307.3` 已完成：`build/index.ts` 已正式导出这些 type
+- `V307.4` 已完成：roadmap、索引与架构文档已同步
+
+## 311. V308 build summary key contracts
+
+### 311.1 目标
+
+`V308` 只解决一件事：
+
+- 为 `bucket / formula-multiplier` 相关公开 map/list 中的匿名 key 补显式公开 type
+
+### 311.2 范围
+
+1. 新增 `bucket key` type
+2. 新增 `formula-multiplier key` type
+3. `StaticBuildBucketValueMap`
+4. `StaticBuildFormulaMultiplierMap`
+5. `StaticBuildVariableBucketList`
+6. `StaticBuildVariableFormulaMultiplierList`
+7. `build/index.ts` 对外导出
+
+### 311.3 非目标
+
+1. 不处理 map/value 的数值含义
+2. 不处理 `skillMultiplier`
+3. 不处理 `assumption / unsupportedEffect` 文本
+
+### 311.4 当前状态
+
+- `V308.1` 已完成：范围冻结到 summary key contract
+- `V308.2` 进行中：准备在 `types.ts` 中落显式 key type
+- `V308.3` 待开始：导出与测试对齐
+- `V308.4` 待开始：文档收口

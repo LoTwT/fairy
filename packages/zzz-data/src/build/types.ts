@@ -172,10 +172,16 @@ export type StaticBuildAppliedRowCount = number
 export type StaticBuildTotalRowCount = number
 export type StaticBuildUtilityValue = number
 export type StaticBuildCooldownSeconds = number
-export type StaticBuildBucketValueMap = Record<string, number>
-export type StaticBuildFormulaMultiplierMap = Record<string, number>
-export type StaticBuildVariableBucketList = string[]
-export type StaticBuildVariableFormulaMultiplierList = string[]
+export type StaticBuildBucketKey = string
+export type StaticBuildFormulaMultiplierKey = string
+export type StaticBuildBucketValueMap = Record<StaticBuildBucketKey, number>
+export type StaticBuildFormulaMultiplierMap = Record<
+  StaticBuildFormulaMultiplierKey,
+  number
+>
+export type StaticBuildVariableBucketList = StaticBuildBucketKey[]
+export type StaticBuildVariableFormulaMultiplierList =
+  StaticBuildFormulaMultiplierKey[]
 export type StaticBuildAssumptionList = string[]
 export type StaticBuildUnsupportedEffectList = string[]
 export type StaticBuildCombatTagList = string[]
