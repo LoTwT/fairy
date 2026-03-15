@@ -128,6 +128,11 @@ export type StaticBuildAnomalyBonusDamageSum = number
 export type StaticBuildPenetrationRate = number
 export type StaticBuildPenetrationValue = number
 export type StaticBuildSkillMultiplierFactor = number
+export type StaticBuildModifierValue = number
+export type StaticBuildBaseDamageValue = number
+export type StaticBuildExpectedTotal = number
+export type StaticBuildCriticalTotal = number
+export type StaticBuildNonCriticalTotal = number
 export type StaticBuildDefenderBaseDefense = number
 export type StaticBuildDefenderResistance = number
 export type StaticBuildDefenseBonus = number
@@ -412,12 +417,12 @@ export interface StaticBuildResolvedPanel {
   penetrationRate: StaticBuildPenetrationRate
   penetrationValue: StaticBuildPenetrationValue
   baseDamageStat: StaticBuildBaseDamageStat
-  baseDamageValue: number
+  baseDamageValue: StaticBuildBaseDamageValue
 }
 
 export interface StaticBuildTraceModifier {
   bucket: StaticBuildBucket
-  value: number
+  value: StaticBuildModifierValue
   combine: "sum" | "multiply"
 }
 
@@ -566,10 +571,10 @@ export interface StaticBuildCaveatSummary {
 
 export interface StaticBuildResolveSummary {
   baseDamageStat: StaticBuildBaseDamageStat
-  baseDamageValue: number
-  expectedTotal: number
-  critTotal: number
-  noCritTotal: number
+  baseDamageValue: StaticBuildBaseDamageValue
+  expectedTotal: StaticBuildExpectedTotal
+  critTotal: StaticBuildCriticalTotal
+  noCritTotal: StaticBuildNonCriticalTotal
   formulaMultipliers: Record<string, number>
   assumptionCount: number
   diagnosticCount: number
@@ -646,9 +651,9 @@ export interface StaticBuildSourceDamageViewRequirement {
 }
 
 export interface StaticBuildEntryDamage {
-  expected: number
-  crit: number
-  noCrit: number
+  expected: StaticBuildExpectedTotal
+  crit: StaticBuildCriticalTotal
+  noCrit: StaticBuildNonCriticalTotal
 }
 
 export interface StaticBuildRequirementSummaryGroup<
@@ -1085,9 +1090,9 @@ export interface StaticBuildSkillMatrixRowMeta {
 }
 
 export interface StaticBuildSkillMatrixRowDamageSummary {
-  expected: number
-  crit: number
-  noCrit: number
+  expected: StaticBuildExpectedTotal
+  crit: StaticBuildCriticalTotal
+  noCrit: StaticBuildNonCriticalTotal
 }
 
 export interface StaticBuildSkillMatrixRow {

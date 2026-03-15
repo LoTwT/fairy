@@ -9931,3 +9931,33 @@ caveatSummary` 这些兼容字段补齐。
 - `V268.3` 已完成：`build/index.ts` 已统一导出这些新 type
 - `V268.4` 已完成：现有 build / agent 测试与 runtime 校验已覆盖
 - `V268.5` 已完成：roadmap、索引与架构文档已同步
+
+## 272. V269 build damage result scalar contracts
+
+`V268` 收口后，`baseDamageValue / expected / crit / noCrit / trace modifier value` 这组结算结果标量仍在 `types.ts` 中以裸 `number` 暴露，和前面的 snapshot / panel / enemy / bucket scalar contract 仍不对称。
+
+`V269` 只解决一件事：
+
+1. 为这组 build-layer 结算结果标量补显式 type，并让 `resolvedPanel / resolveSummary / entryDamage / rowDamageSummary / traceModifier` 统一复用，不改变任何运行时行为
+
+### 272.1 分阶段
+
+1. `V269.1` scope freeze
+2. `V269.2` type alignment
+3. `V269.3` export alignment
+4. `V269.4` tests / runtime alignment
+5. `V269.5` docs closeout
+
+### 272.2 非目标
+
+1. 不改变 damage result 字段集合
+2. 不改变 trace modifier 结算逻辑
+3. 不扩展 compact layer 的 damage result contract
+
+### 272.3 当前状态
+
+- `V269.1` 已完成：冻结到 build damage result scalar contract
+- `V269.2` 已完成：`types.ts` 已新增显式 damage-result scalar alias，并让 `resolvedPanel / resolveSummary / entryDamage / rowDamageSummary / traceModifier` 统一复用
+- `V269.3` 已完成：`build/index.ts` 已统一导出这些新 type
+- `V269.4` 已完成：现有 build / agent 测试与 runtime 校验已覆盖
+- `V269.5` 已完成：roadmap、索引与架构文档已同步
