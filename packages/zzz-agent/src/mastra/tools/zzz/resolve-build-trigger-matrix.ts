@@ -8,8 +8,8 @@ import {
   buildToolDescriptions,
   buildToolTriggerMatrixCatalogPreset,
 } from "./resolve-build-presets"
+import { buildTriggerMatrixSuccessResponse } from "./resolve-build-responses"
 import {
-  buildTriggerMatrixSuccessResponse,
   resolveBuildInputSchema,
   resolveBuildToolTriggeredDamageContext,
   resolveBuildTriggerMatrixIncludeDetailsSchema,

@@ -5,8 +5,8 @@ import {
   buildToolDamageCatalogPreset,
   buildToolDescriptions,
 } from "./resolve-build-presets"
+import { buildDamageSuccessResponse } from "./resolve-build-responses"
 import {
-  buildDamageSuccessResponse,
   resolveBuildDamageIncludeDetailsSchema,
   resolveBuildInputSchema,
   resolveBuildToolDamageExecutionContext,

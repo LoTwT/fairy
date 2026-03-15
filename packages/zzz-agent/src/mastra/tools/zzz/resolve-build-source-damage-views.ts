@@ -8,10 +8,10 @@ import {
   buildToolDescriptions,
   buildToolSourceDamageViewCatalogPreset,
 } from "./resolve-build-presets"
+import { resolveBuildToolSourceDamageViewsResponse } from "./resolve-build-responses"
 import {
   resolveBuildInputSchema,
   resolveBuildSourceDamageViewsIncludeDetailsSchema,
-  resolveBuildToolSourceDamageViewsResponse,
   resolveBuildToolTriggeredDamageContext,
 } from "./resolve-build-shared"
 

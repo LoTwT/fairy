@@ -8,11 +8,11 @@ import {
   buildToolDescriptions,
   buildToolSourceEntryCatalogPreset,
 } from "./resolve-build-presets"
+import { resolveBuildToolSourceEntryCollectionResponse } from "./resolve-build-responses"
 import {
   resolveBuildSourceEntriesIncludeDetailsSchema,
   resolveBuildSourceEntriesInputSchema,
   resolveBuildToolSourceEntriesExecutionContext,
-  resolveBuildToolSourceEntryCollectionResponse,
 } from "./resolve-build-shared"
 
 export const resolveBuildSourceEntries = createTool({

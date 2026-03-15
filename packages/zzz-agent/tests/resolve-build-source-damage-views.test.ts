@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest"
 
-import { resolveBuildToolSourceDamageCoverageResponse } from "../src/mastra/tools/zzz/resolve-build-shared"
+import { resolveBuildToolSourceDamageCoverageResponse } from "../src/mastra/tools/zzz/resolve-build-responses"
 import { resolveBuildSourceDamageViews } from "../src/mastra/tools/zzz/resolve-build-source-damage-views"
 import { runTool } from "./shared"
 
