@@ -104,6 +104,7 @@ export type {
   StaticBuildDiagnosticKind,
   StaticBuildDiagnosticMessage,
   StaticBuildDiagnosticOwner,
+  StaticBuildDisplayName,
   StaticBuildDriveDiscPieces,
   StaticBuildDriveDiscSetInput,
   StaticBuildDynamicCountKey,

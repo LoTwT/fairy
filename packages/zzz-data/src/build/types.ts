@@ -23,6 +23,7 @@ export type StaticBuildEffectSummaryBucket = string
 export type StaticBuildEffectSummaryValue = string
 export type StaticBuildEffectSummaryCondition = string
 export type StaticBuildGroupLabel = string
+export type StaticBuildDisplayName = string
 export type StaticBuildBaseDamageStat = "attack" | "sheerForce"
 export type StaticBuildSpecialty = AgentSpecialty
 
@@ -340,7 +341,7 @@ export type StaticBuildCatalogId = string
 
 export interface StaticBuildCatalogEntry {
   id: StaticBuildCatalogId
-  name: string
+  name: StaticBuildDisplayName
   aliases: StaticBuildAliasList
 }
 
@@ -487,7 +488,7 @@ export interface StaticBuildTraceItem {
 
 export interface StaticBuildProfileResult {
   id: StaticBuildProfileId
-  name: string
+  name: StaticBuildDisplayName
 }
 
 export interface StaticBuildResolvedLoadout {
