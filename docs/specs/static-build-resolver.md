@@ -951,3 +951,4 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 200. `V200` explicit build source types：当前阶段已收口；`build/types.ts` 的公开 `sourceType` 字段已统一为显式 `StaticBuildSourceType`，不再通过 indexed access 复用 effect definition shape，见 [静态构筑解析系统 V200](./static-build-resolver-v200.md)
 201. `V201` explicit build base damage stat types：当前阶段已收口；`build/types.ts` 的 `baseDamageStat` 已统一为显式 `StaticBuildBaseDamageStat`，不再通过 indexed access 复用 raw panel shape，见 [静态构筑解析系统 V201](./static-build-resolver-v201.md)
 202. `V202` explicit source-damage resolution mode types：当前阶段已收口；source-damage-view 的 `resolutionMode` 已统一为显式 `StaticBuildSourceDamageViewResolutionMode`，不再通过 indexed access 复用 entry shape，见 [静态构筑解析系统 V202](./static-build-resolver-v202.md)
+203. `V203` explicit build specialty type：当前阶段已收口；`build` 层已补显式 `StaticBuildSpecialty`，catalog entry 与兼容 helper 的 `specialty` 已统一为这个类型，见 [静态构筑解析系统 V203](./static-build-resolver-v203.md)

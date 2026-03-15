@@ -7890,6 +7890,40 @@ caveatSummary` 这些兼容字段补齐。
 - `V202.3` 已完成：现有测试与 runtime 校验已覆盖
 - `V202.4` 已完成：roadmap、索引与架构文档已同步
 
+## 206. V203 explicit build specialty type
+
+`V202` 收口后，`build` 层公开 catalog contract 中仍通过字段来源间接表达 `specialty` 语义：
+
+1. `StaticBuildBaseAgentCatalogEntry.specialty`
+2. `StaticBuildWEngineCatalogEntry.specialty`
+3. `getCompatibleStaticBuildWEngines(specialty)`
+4. `getCompatibleStaticBuildUtilityWEngines(specialty)`
+
+`V203` 只解决这一件事：
+
+1. 为 `build` 层补显式 `StaticBuildSpecialty`，并让 catalog 公开 helper 统一使用这个类型
+
+### 206.1 分阶段
+
+1. `V203.1` scope freeze
+2. `V203.2` runtime/type contract alignment
+3. `V203.3` tests / prompt alignment
+4. `V203.4` docs closeout
+
+### 206.2 非目标
+
+1. 不改变 `specialty` 的值域
+2. 不改变 catalog 构建逻辑
+3. 不改变兼容校验行为
+4. 不改变 compact contract
+
+### 206.3 当前状态
+
+- `V203.1` 已完成：冻结到 explicit build specialty type
+- `V203.2` 已完成：build catalog entry 与兼容 helper 的 `specialty` 已统一为显式 `StaticBuildSpecialty`
+- `V203.3` 已完成：现有测试与 runtime 校验已覆盖
+- `V203.4` 已完成：roadmap、索引与架构文档已同步
+
 ## 174. V171 explicit compact top-level summary effect summaries
 
 `V170` 收口后，compact contract 中下一批仍直接复用 raw effect summary item type 的显式缺口主要集中在 top-level `summary`：

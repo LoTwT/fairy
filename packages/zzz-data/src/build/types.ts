@@ -17,6 +17,7 @@ export type StaticBuildBaseMode = Exclude<StaticBuildMode, "manual">
 export type StaticBuildDamageType = "normal" | "sheer" | "anomaly" | "disorder"
 export type StaticBuildSourceType = "agent" | "w-engine" | "drive-disc"
 export type StaticBuildBaseDamageStat = "attack" | "sheerForce"
+export type StaticBuildSpecialty = AgentSpecialty
 
 export type StaticBuildSkillTag =
   | "basic"
@@ -249,7 +250,7 @@ export interface StaticBuildCatalogEntry {
 }
 
 export interface StaticBuildBaseAgentCatalogEntry extends StaticBuildCatalogEntry {
-  specialty: AgentSpecialty
+  specialty: StaticBuildSpecialty
   defaultAttribute: AgentAttribute
 }
 
@@ -262,7 +263,7 @@ export type StaticBuildUtilityAgentCatalogEntry =
   StaticBuildBaseAgentCatalogEntry
 
 export interface StaticBuildWEngineCatalogEntry extends StaticBuildCatalogEntry {
-  specialty: AgentSpecialty
+  specialty: StaticBuildSpecialty
 }
 
 export type StaticBuildProfileId =

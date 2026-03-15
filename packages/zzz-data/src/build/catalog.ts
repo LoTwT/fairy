@@ -1,6 +1,7 @@
 import type {
   StaticBuildAgentCatalogEntry,
   StaticBuildCatalogEntry,
+  StaticBuildSpecialty,
   StaticBuildUtilityAgentCatalogEntry,
   StaticBuildWEngineCatalogEntry,
 } from "./types.js"
@@ -23,8 +24,12 @@ interface WEngineListSourceItem {
   specialty: { id: string; name: string }
 }
 
-const supportedSpecialties = new Set(["Attack", "Rupture", "Anomaly"])
-const supportedUtilitySpecialties = new Set([
+const supportedSpecialties = new Set<StaticBuildSpecialty>([
+  "Attack",
+  "Rupture",
+  "Anomaly",
+])
+const supportedUtilitySpecialties = new Set<StaticBuildSpecialty>([
   "Attack",
   "Rupture",
   "Anomaly",
@@ -173,7 +178,7 @@ export const supportedStaticBuildWEngines = (
     (
       item,
     ): item is WEngineListSourceItem & {
-      specialty: StaticBuildWEngineCatalogEntry["specialty"]
+      specialty: StaticBuildSpecialty
     } => Boolean(item && supportedSpecialties.has(item.specialty)),
   )
   .sort((left, right) => Number(left.id) - Number(right.id))
@@ -203,7 +208,7 @@ export const supportedStaticBuildUtilityWEngines = (
     (
       item,
     ): item is WEngineListSourceItem & {
-      specialty: StaticBuildWEngineCatalogEntry["specialty"]
+      specialty: StaticBuildSpecialty
     } => Boolean(item && supportedUtilitySpecialties.has(item.specialty)),
   )
   .sort((left, right) => Number(left.id) - Number(right.id))
@@ -328,7 +333,7 @@ export function getStaticBuildUtilityWEngine(
 }
 
 export function getCompatibleStaticBuildWEngines(
-  specialty: StaticBuildAgentCatalogEntry["specialty"],
+  specialty: StaticBuildSpecialty,
 ) {
   return supportedStaticBuildWEngines.filter(
     (item) => item.specialty === specialty,
@@ -336,7 +341,7 @@ export function getCompatibleStaticBuildWEngines(
 }
 
 export function getCompatibleStaticBuildUtilityWEngines(
-  specialty: StaticBuildUtilityAgentCatalogEntry["specialty"],
+  specialty: StaticBuildSpecialty,
 ) {
   return supportedStaticBuildUtilityWEngines.filter(
     (item) => item.specialty === specialty,
