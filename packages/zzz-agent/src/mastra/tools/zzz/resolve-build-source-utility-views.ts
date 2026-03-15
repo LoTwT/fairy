@@ -13,9 +13,8 @@ import {
   buildSourceUtilityViewsSuccessResponse,
   buildToolScopeLabels,
   resolveBuildSourceUtilityInputSchema,
-  resolveBuildToolLoadoutContext,
   resolveBuildToolSourceUtilityCoverageResponse,
-  resolveBuildToolSourceUtilitySupport,
+  resolveBuildToolSourceUtilityExecutionContext,
 } from "./resolve-build-shared"
 
 export const resolveBuildSourceUtilityViews = createTool({
@@ -32,10 +31,12 @@ export const resolveBuildSourceUtilityViews = createTool({
       ),
   }),
   execute: async (input) => {
-    const loadoutResolution = resolveBuildToolLoadoutContext({
+    const contextResolution = resolveBuildToolSourceUtilityExecutionContext({
       scopeLabel: buildToolScopeLabels.sourceUtilityView,
       supportedAgents: supportedStaticBuildUtilityAgents,
       supportedWEngines: supportedStaticBuildUtilityWEngines,
+      supportedSourceUtilityWEngines:
+        supportedStaticBuildSourceUtilityViewWEngines,
       supportedDriveDiscs: supportedStaticBuildDriveDiscs,
       agentQuery: input.agent,
       wEngineQuery: input.wEngine,
@@ -47,20 +48,16 @@ export const resolveBuildSourceUtilityViews = createTool({
       coreSkillLevel: input.coreSkillLevel,
       wEngineRefinement: input.wEngineRefinement,
     })
-    if (!loadoutResolution.ok) {
-      return loadoutResolution.response
+    if (!contextResolution.ok) {
+      return contextResolution.response
     }
-    const { agent, wEngine, loadout } = loadoutResolution
-
-    const sourceUtilitySupport = resolveBuildToolSourceUtilitySupport(
-      supportedStaticBuildSourceUtilityViewWEngines,
-      agent.specialty,
-    )
+    const { agent, wEngine, loadout, supportedUtilityWEngines } =
+      contextResolution
 
     if (!wEngine) {
       return resolveBuildToolSourceUtilityCoverageResponse({
         agentName: agent.name,
-        supportedWEngines: sourceUtilitySupport.items,
+        supportedWEngines: supportedUtilityWEngines,
       })
     }
 
@@ -72,7 +69,7 @@ export const resolveBuildSourceUtilityViews = createTool({
     if (views.entries.length === 0) {
       return resolveBuildToolSourceUtilityCoverageResponse({
         agentName: agent.name,
-        supportedWEngines: sourceUtilitySupport.items,
+        supportedWEngines: supportedUtilityWEngines,
         wEngine,
       })
     }

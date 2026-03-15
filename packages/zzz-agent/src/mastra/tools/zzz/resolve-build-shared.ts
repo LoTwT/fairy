@@ -179,6 +179,18 @@ export interface BuildToolResolvedSkillMatrixExecutionContext<
   context: BuildToolResolvedSkillMatrixContext
 }
 
+export interface BuildToolResolvedSourceUtilityExecutionContext<
+  TAgent extends CatalogItem,
+  TWEngine extends CatalogItem,
+> {
+  ok: true
+  agent: TAgent
+  wEngine: TWEngine | undefined
+  loadout: StaticBuildLoadoutInput
+  supportedUtilityWEngines: TWEngine[]
+  supportedUtilityWEngineNames: string[]
+}
+
 export interface BuildToolResolvedAgent<T extends CatalogItem> {
   ok: true
   agent: T
@@ -391,6 +403,14 @@ export interface BuildToolResolveSkillMatrixExecutionContextOptions<
   TDriveDisc extends CatalogItem,
 > extends BuildToolResolveLoadoutContextOptions<TAgent, TWEngine, TDriveDisc> {
   context: BuildToolSkillMatrixContextInput
+}
+
+export interface BuildToolResolveSourceUtilityExecutionContextOptions<
+  TAgent extends CatalogItem & { specialty: keyof typeof specialtyLabels },
+  TWEngine extends CatalogItem & { specialty: keyof typeof specialtyLabels },
+  TDriveDisc extends CatalogItem,
+> extends BuildToolResolveLoadoutContextOptions<TAgent, TWEngine, TDriveDisc> {
+  supportedSourceUtilityWEngines: readonly TWEngine[]
 }
 
 export interface BuildToolResolvedTriggeredDamageContext<
@@ -1562,6 +1582,41 @@ export function resolveBuildToolSkillMatrixExecutionContext<
     wEngine: loadoutResolution.wEngine,
     loadout: loadoutResolution.loadout,
     context: resolveBuildToolResolvedSkillMatrixContext(options.context),
+  }
+}
+
+export function resolveBuildToolSourceUtilityExecutionContext<
+  TAgent extends CatalogItem & { specialty: keyof typeof specialtyLabels },
+  TWEngine extends CatalogItem & { specialty: keyof typeof specialtyLabels },
+  TDriveDisc extends CatalogItem,
+>(
+  options: BuildToolResolveSourceUtilityExecutionContextOptions<
+    TAgent,
+    TWEngine,
+    TDriveDisc
+  >,
+):
+  | BuildToolResolvedSourceUtilityExecutionContext<TAgent, TWEngine>
+  | BuildToolRejectedAgent
+  | BuildToolRejectedWEngine
+  | BuildToolRejectedDriveDiscSets {
+  const loadoutResolution = resolveBuildToolLoadoutContext(options)
+  if (!loadoutResolution.ok) {
+    return loadoutResolution
+  }
+
+  const sourceUtilitySupport = resolveBuildToolSourceUtilitySupport(
+    options.supportedSourceUtilityWEngines,
+    loadoutResolution.agent.specialty,
+  )
+
+  return {
+    ok: true,
+    agent: loadoutResolution.agent,
+    wEngine: loadoutResolution.wEngine,
+    loadout: loadoutResolution.loadout,
+    supportedUtilityWEngines: sourceUtilitySupport.items,
+    supportedUtilityWEngineNames: sourceUtilitySupport.names,
   }
 }
 
