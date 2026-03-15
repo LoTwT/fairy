@@ -191,6 +191,7 @@ export type {
   StaticBuildSkillQualifier,
   StaticBuildSkillQualifierList,
   StaticBuildSkillTag,
+  StaticBuildSourceCoverageId,
   StaticBuildSourceDamageViewCount,
   StaticBuildSourceDamageViewEntry,
   StaticBuildSourceDamageViewMeta,

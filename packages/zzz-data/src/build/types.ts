@@ -403,6 +403,10 @@ export type StaticBuildCatalogId = string
 export type StaticBuildAgentId = StaticBuildCatalogId
 export type StaticBuildWEngineId = StaticBuildCatalogId
 export type StaticBuildDriveDiscId = StaticBuildCatalogId
+export type StaticBuildSourceCoverageId =
+  | StaticBuildAgentId
+  | StaticBuildWEngineId
+  | StaticBuildDriveDiscId
 
 export interface StaticBuildCatalogEntry {
   id: StaticBuildCatalogId

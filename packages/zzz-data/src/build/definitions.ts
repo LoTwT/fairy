@@ -1,10 +1,8 @@
 import type { AnomalyType } from "../calculator/types.js"
 import type {
-  StaticBuildAgentId,
   StaticBuildAgentMindscape,
   StaticBuildAnomalyMastery,
   StaticBuildDamageType,
-  StaticBuildDriveDiscId,
   StaticBuildDriveDiscPieces,
   StaticBuildDynamicCountKey,
   StaticBuildDynamicFlagKey,
@@ -16,6 +14,7 @@ import type {
   StaticBuildResolvedSnapshotBucketKey,
   StaticBuildResolvedSnapshotInput,
   StaticBuildResolvedSnapshotMultiplierKey,
+  StaticBuildSourceCoverageId,
   StaticBuildSourceNoteEntry,
   StaticBuildSourceNoteGuidance,
   StaticBuildSourceNoteOwner,
@@ -25,7 +24,6 @@ import type {
   StaticBuildStateSnapshotInput,
   StaticBuildStateValueKey,
   StaticBuildValueContext,
-  StaticBuildWEngineId,
 } from "./types.js"
 import { calcDisorderDamageMultiplier } from "../calculator/factors.js"
 
@@ -4764,11 +4762,7 @@ export function getStaticBuildEffectsForLoadout(
 
 export function hasStaticBuildEffectsForSource(
   sourceType: StaticBuildSourceType,
-  sourceId:
-    | StaticBuildAgentId
-    | StaticBuildWEngineId
-    | StaticBuildDriveDiscId
-    | undefined,
+  sourceId: StaticBuildSourceCoverageId | undefined,
 ) {
   if (!sourceId) return false
   return staticBuildEffectDefinitions.some(
@@ -5016,7 +5010,7 @@ export function getStaticBuildSourceNotes(input: {
 
 export function hasStaticBuildCoverageForSource(
   sourceType: StaticBuildSourceType,
-  sourceId: string | undefined,
+  sourceId: StaticBuildSourceCoverageId | undefined,
 ) {
   if (!sourceId) return false
   return (

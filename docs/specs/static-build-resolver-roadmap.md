@@ -11528,5 +11528,32 @@ caveatSummary` 这些兼容字段补齐。
 
 - `V319.1` 已完成：范围冻结到 loadout selection contract
 - `V319.2` 已完成：loadout 选择输入已统一复用显式 agent/w-engine/drive-disc id alias
-- `V319.3` 进行中：校验与提交
+- `V319.3` 已完成：校验与提交已通过
 - `V319.4` 已完成：roadmap、索引与架构文档已同步
+
+## 323. V320 source coverage id contracts
+
+### 323.1 目标
+
+`V320` 只解决一件事：
+
+- 把 `definitions.ts` 中 source coverage helper 仍直接暴露的 `sourceId` 输入，统一收成显式公开 id alias。
+
+### 323.2 范围
+
+1. `StaticBuildSourceCoverageId`
+2. `hasStaticBuildEffectsForSource()`
+3. `hasStaticBuildCoverageForSource()`
+
+### 323.3 非目标
+
+1. 不修改任何 runtime 逻辑
+2. 不处理 source-note lookup 的整体验证输入 contract
+3. 不调整 source-note / effect definition 数据
+
+### 323.4 当前状态
+
+- `V320.1` 已完成：范围冻结到 source coverage id contract
+- `V320.2` 已完成：source coverage helper 的 `sourceId` 已统一复用显式公开 id alias
+- `V320.3` 进行中：校验与提交
+- `V320.4` 已完成：roadmap、索引与架构文档已同步
