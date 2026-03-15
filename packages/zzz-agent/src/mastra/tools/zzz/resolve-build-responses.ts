@@ -8,6 +8,7 @@ import type {
 } from "zzz-data"
 import type {
   BuildToolDamageSuccessResponse,
+  BuildToolIncompatibleWEngineResponse,
   BuildToolMissingFinalPanelResponse,
   BuildToolMissingSourceUtilityWEngineResponse,
   BuildToolScopeLabel,
@@ -20,12 +21,16 @@ import type {
   BuildToolUncoveredSourceEntryCoverageResponse,
   BuildToolUncoveredSourceEntryUtilityOnlyResponse,
   BuildToolUncoveredSourceUtilityWEngineResponse,
+  BuildToolUnsupportedAgentResponse,
   BuildToolUnsupportedAnomalyTypeResponse,
   BuildToolUnsupportedDamageTypeResponse,
+  BuildToolUnsupportedDriveDiscResponse,
+  BuildToolUnsupportedWEngineResponse,
   CatalogItem,
 } from "./resolve-build-contracts"
 import { candidateNames, catalogNames } from "./resolve-build-catalog"
 import { buildToolScopeLabels } from "./resolve-build-contracts"
+import { specialtyLabels } from "./resolve-build-labels"
 
 export interface BuildToolResolveSourceUtilityCoverageResponseOptions<
   TWEngine extends CatalogItem,
@@ -75,6 +80,62 @@ export interface BuildToolResolveSourceEntryCollectionResponseOptions<
   TWEngine
 > {
   collection: CompactStaticBuildSourceEntryCollection
+}
+
+export function buildUnsupportedAgentResponse<T extends CatalogItem>(
+  scopeLabel: BuildToolScopeLabel,
+  items: readonly T[],
+  query: string,
+): BuildToolUnsupportedAgentResponse {
+  return {
+    found: false as const,
+    message: `当前 ${scopeLabel} 暂不支持代理人「${query}」`,
+    supportedAgents: catalogNames(items),
+    candidates: candidateNames(items, query),
+  }
+}
+
+export function buildUnsupportedWEngineResponse<T extends CatalogItem>(
+  scopeLabel: BuildToolScopeLabel,
+  items: readonly T[],
+  query: string,
+): BuildToolUnsupportedWEngineResponse {
+  return {
+    found: false as const,
+    message: `当前 ${scopeLabel} 暂不支持音擎「${query}」`,
+    supportedWEngines: catalogNames(items),
+    candidates: candidateNames(items, query),
+  }
+}
+
+export function buildIncompatibleWEngineResponse<
+  TAgent extends CatalogItem & { specialty: keyof typeof specialtyLabels },
+  TWEngine extends CatalogItem & { specialty: keyof typeof specialtyLabels },
+>(
+  agent: TAgent,
+  wEngine: TWEngine,
+  compatibleWEngines: readonly CatalogItem[],
+  query: string,
+): BuildToolIncompatibleWEngineResponse {
+  return {
+    found: false as const,
+    message: `${agent.name} 为 ${specialtyLabels[agent.specialty]}代理人，无法使用 ${wEngine.name}（${specialtyLabels[wEngine.specialty]}音擎）`,
+    supportedWEngines: catalogNames(compatibleWEngines),
+    candidates: candidateNames(compatibleWEngines, query),
+  }
+}
+
+export function buildUnsupportedDriveDiscResponse<T extends CatalogItem>(
+  scopeLabel: BuildToolScopeLabel,
+  items: readonly T[],
+  query: string,
+): BuildToolUnsupportedDriveDiscResponse {
+  return {
+    found: false as const,
+    message: `当前 ${scopeLabel} 暂不支持驱动盘「${query}」`,
+    supportedDriveDiscs: catalogNames(items),
+    candidates: candidateNames(items, query),
+  }
 }
 
 export function buildUncoveredSourceDamageViewResponse<T extends CatalogItem>(
