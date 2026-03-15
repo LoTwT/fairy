@@ -113,15 +113,21 @@ export type StaticBuildEnergyGenerationRate = number
 export type StaticBuildAnomalyMastery = number
 export type StaticBuildAttack = number
 export type StaticBuildBaseAttack = number
+export type StaticBuildAttackPercent = number
+export type StaticBuildFlatAttack = number
+export type StaticBuildBonusDamageSum = number
 export type StaticBuildCritRate = number
 export type StaticBuildCritDamage = number
 export type StaticBuildHP = number
 export type StaticBuildSheerForce = number
+export type StaticBuildSheerBonusSum = number
 export type StaticBuildAnomalyProficiency = number
 export type StaticBuildAnomalyCritRate = number
 export type StaticBuildAnomalyCritDamage = number
+export type StaticBuildAnomalyBonusDamageSum = number
 export type StaticBuildPenetrationRate = number
 export type StaticBuildPenetrationValue = number
+export type StaticBuildSkillMultiplierFactor = number
 export type StaticBuildDefenderBaseDefense = number
 export type StaticBuildDefenderResistance = number
 export type StaticBuildDefenseBonus = number
@@ -367,27 +373,27 @@ export interface StaticBuildEffectDefinition {
 }
 
 export interface StaticBuildResolvedBuckets {
-  attackPercent: number
-  flatAttack: number
-  bonusDamageSum: number
-  critRate: number
-  critDamage: number
-  defenseReduction: number
-  penetrationRate: number
-  penetrationValue: number
-  resistanceReduction: number
-  ignoreResistance: number
-  vulnerabilityBonus: number
-  damageReduction: number
-  stunVulnerability: number
-  nonStunVulnerability: number
-  sheerBonusSum: number
-  anomalyMastery: number
-  anomalyProficiency: number
-  anomalyBonusDamageSum: number
-  anomalyCritRate: number
-  anomalyCritDamage: number
-  skillMultiplierFactor: number
+  attackPercent: StaticBuildAttackPercent
+  flatAttack: StaticBuildFlatAttack
+  bonusDamageSum: StaticBuildBonusDamageSum
+  critRate: StaticBuildCritRate
+  critDamage: StaticBuildCritDamage
+  defenseReduction: StaticBuildDefenseReduction
+  penetrationRate: StaticBuildPenetrationRate
+  penetrationValue: StaticBuildPenetrationValue
+  resistanceReduction: StaticBuildResistanceReduction
+  ignoreResistance: StaticBuildIgnoreResistance
+  vulnerabilityBonus: StaticBuildVulnerabilityBonus
+  damageReduction: StaticBuildDamageReduction
+  stunVulnerability: StaticBuildStunVulnerability
+  nonStunVulnerability: StaticBuildNonStunVulnerability
+  sheerBonusSum: StaticBuildSheerBonusSum
+  anomalyMastery: StaticBuildAnomalyMastery
+  anomalyProficiency: StaticBuildAnomalyProficiency
+  anomalyBonusDamageSum: StaticBuildAnomalyBonusDamageSum
+  anomalyCritRate: StaticBuildAnomalyCritRate
+  anomalyCritDamage: StaticBuildAnomalyCritDamage
+  skillMultiplierFactor: StaticBuildSkillMultiplierFactor
 }
 
 export interface StaticBuildResolvedPanel {

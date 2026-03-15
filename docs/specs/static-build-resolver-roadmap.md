@@ -9901,3 +9901,33 @@ caveatSummary` 这些兼容字段补齐。
 - `V267.3` 已完成：`resolver.ts` 已统一复用 `StaticBuildEffectStacks` / `StaticBuildCritRate` / `StaticBuildResolvedAnomalyProficiency`
 - `V267.4` 已完成：现有 build / agent 测试与 runtime 校验已覆盖
 - `V267.5` 已完成：roadmap、索引与架构文档已同步
+
+## 271. V268 build resolved bucket scalar contracts
+
+`V267` 收口后，`StaticBuildResolvedBuckets` 这组 bucket 标量仍以整组裸 `number` 暴露，和前面的 `finalPanel / enemy / scenario / effect-state` 显式 scalar contract 不对称。
+
+`V268` 只解决一件事：
+
+1. 为 `StaticBuildResolvedBuckets` 对应的公开 bucket 标量补显式 type，并让 build-layer 导出统一复用，不改变任何运行时行为
+
+### 271.1 分阶段
+
+1. `V268.1` scope freeze
+2. `V268.2` type alignment
+3. `V268.3` export alignment
+4. `V268.4` tests / runtime alignment
+5. `V268.5` docs closeout
+
+### 271.2 非目标
+
+1. 不改变 `StaticBuildResolvedBuckets` 字段集合
+2. 不改变 bucket 结算逻辑
+3. 不扩展 `resolvedSnapshot` 的 key contract
+
+### 271.3 当前状态
+
+- `V268.1` 已完成：冻结到 resolved bucket scalar contract
+- `V268.2` 已完成：`types.ts` 已新增显式 bucket scalar alias，并让 `StaticBuildResolvedBuckets` 统一复用
+- `V268.3` 已完成：`build/index.ts` 已统一导出这些新 type
+- `V268.4` 已完成：现有 build / agent 测试与 runtime 校验已覆盖
+- `V268.5` 已完成：roadmap、索引与架构文档已同步
