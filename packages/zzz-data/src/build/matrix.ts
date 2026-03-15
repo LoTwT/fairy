@@ -2,6 +2,7 @@ import type { AgentDetails } from "../gachabase/types.js"
 import type {
   ResolveStaticBuildSkillMatrixInput,
   ResolveStaticBuildSkillMatrixResult,
+  StaticBuildAssumptionList,
   StaticBuildDamageType,
   StaticBuildSkillMatrixAttributeSource,
   StaticBuildSkillMatrixEffectSummaryItem,
@@ -10,6 +11,7 @@ import type {
   StaticBuildSkillMatrixTemplateSource,
   StaticBuildSkillTag,
   StaticBuildSourceDamageViewRequirementSummary,
+  StaticBuildUnsupportedEffectList,
 } from "./types.js"
 import agentDetailsZh from "../../data/zh-CN/agent-details.json"
 import { toAgentAttribute } from "../terms.js"
@@ -557,8 +559,8 @@ function summarizeSkillMatrixRequirements(): StaticBuildSourceDamageViewRequirem
 }
 
 function summarizeSkillMatrixCaveats(
-  assumptions: string[],
-  unsupportedEffects: string[],
+  assumptions: StaticBuildAssumptionList,
+  unsupportedEffects: StaticBuildUnsupportedEffectList,
 ) {
   return {
     assumptionCount: assumptions.length,
@@ -573,8 +575,10 @@ function summarizeSkillMatrix(rows: StaticBuildSkillMatrixRow[]) {
   const { commonBuckets, variableBuckets } = summarizeBuckets(rows)
   const { commonFormulaMultipliers, variableFormulaMultipliers } =
     summarizeFormulaMultipliers(rows)
-  const assumptions = [...new Set(rows.flatMap((row) => row.assumptions))]
-  const unsupportedEffects = [
+  const assumptions: StaticBuildAssumptionList = [
+    ...new Set(rows.flatMap((row) => row.assumptions)),
+  ]
+  const unsupportedEffects: StaticBuildUnsupportedEffectList = [
     ...new Set(rows.flatMap((row) => row.unsupportedEffects)),
   ]
   const groups = Array.from(
@@ -586,10 +590,10 @@ function summarizeSkillMatrix(rows: StaticBuildSkillMatrixRow[]) {
     }, new Map<string, StaticBuildSkillMatrixRow[]>()),
   ).map(([group, groupRows]) => ({
     ...(() => {
-      const assumptions = [
+      const assumptions: StaticBuildAssumptionList = [
         ...new Set(groupRows.flatMap((row) => row.assumptions)),
       ]
-      const unsupportedEffects = [
+      const unsupportedEffects: StaticBuildUnsupportedEffectList = [
         ...new Set(groupRows.flatMap((row) => row.unsupportedEffects)),
       ]
       return {
@@ -1988,7 +1992,7 @@ export function resolveStaticBuildSkillMatrix(
     throw new RangeError(`No skill matrix templates for agentId=${agent.id}`)
   }
 
-  const assumptions: string[] = []
+  const assumptions: StaticBuildAssumptionList = []
   const globalCombatTags = input.context.combatTags ?? []
   const globalExtraAbilityActive = input.context.extraAbilityActive
 

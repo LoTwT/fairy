@@ -11615,5 +11615,40 @@ caveatSummary` 这些兼容字段补齐。
 
 - `V322.1` 已完成：范围冻结到 resolver summary input list contract
 - `V322.2` 已完成：resolver summary helper 的数组输入已统一复用显式公开 list contract
-- `V322.3` 进行中：校验与提交
+- `V322.3` 已完成：校验与提交已通过
 - `V322.4` 已完成：roadmap、索引与架构文档已同步
+
+## 326. V323 derived view assumption list contracts
+
+### 326.1 目标
+
+`V323` 只解决一件事：
+
+- 把 `views.ts`、`utility-views.ts`、`source-entries.ts`、`matrix.ts`、`trigger-matrix.ts` 中仍直接暴露的 assumption / unsupported list 输入，统一收成显式公开 list contract。
+
+### 326.2 范围
+
+1. `summarizeSourceDamageViews()`
+2. `summarizeSourceDamageViewCaveats()`
+3. `summarizeSourceUtilityViews()`
+4. `summarizeSourceUtilityViewCaveats()`
+5. `summarizeSourceEntries()`
+6. `summarizeSourceEntryCaveats()`
+7. `summarizeSourceEntryAssumptions()`
+8. `summarizeSkillMatrixCaveats()`
+9. `summarizeTriggerMatrixRows()`
+10. `summarizeTriggerMatrixCaveats()`
+11. `summarizeTriggerMatrixRowCaveat()`
+
+### 326.3 非目标
+
+1. 不修改任何 summary runtime 逻辑
+2. 不新增新的 summary 字段
+3. 不处理 compact helper 输出 contract
+
+### 326.4 当前状态
+
+- `V323.1` 已完成：范围冻结到 derived view assumption list contract
+- `V323.2` 已完成：派生视图 summary helper 的 assumption / unsupported list 输入已统一复用显式公开 list contract
+- `V323.3` 已完成：校验与提交已通过
+- `V323.4` 已完成：roadmap、索引与架构文档已同步

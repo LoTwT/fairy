@@ -4,6 +4,7 @@ import type {
   ResolveStaticBuildResult,
   ResolveStaticBuildSourceDamageViewsResult,
   StaticBuildAgentId,
+  StaticBuildAssumptionList,
   StaticBuildBaseMode,
   StaticBuildCatalogEntry,
   StaticBuildDriveDiscSetsInput,
@@ -255,7 +256,7 @@ function getSourceDamageViewGroupOrder(
 
 function summarizeSourceDamageViews(
   entries: StaticBuildSourceDamageViewEntry[],
-  assumptions: string[],
+  assumptions: StaticBuildAssumptionList,
 ): StaticBuildSourceDamageViewSummary {
   const standaloneEntries = entries.filter(
     (entry) => entry.resolutionMode === "standalone",
@@ -436,7 +437,7 @@ function formatSourceDamageViewNumber(value: number) {
 
 function summarizeSourceDamageViewCaveats(
   entries: StaticBuildSourceDamageViewEntry[],
-  assumptions: string[],
+  assumptions: StaticBuildAssumptionList,
 ): StaticBuildEntryCaveatSummary {
   const unsupportedCount = entries.filter((entry) => !entry.supported).length
   return {

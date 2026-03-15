@@ -1,6 +1,7 @@
 import type {
   ResolveStaticBuildSourceUtilityViewsInput,
   ResolveStaticBuildSourceUtilityViewsResult,
+  StaticBuildAssumptionList,
   StaticBuildCatalogEntry,
   StaticBuildDriveDiscSetsInput,
   StaticBuildEntryCaveatSummary,
@@ -447,7 +448,7 @@ function getSourceUtilityViewGroupOrder(
 
 function summarizeSourceUtilityViews(
   entries: StaticBuildSourceUtilityViewEntry[],
-  assumptions: string[],
+  assumptions: StaticBuildAssumptionList,
 ): StaticBuildSourceUtilityViewSummary {
   const triggerEntries = entries.filter(
     (entry) => entry.resolutionMode === "trigger",
@@ -514,7 +515,7 @@ function summarizeSourceUtilityViews(
 
 function summarizeSourceUtilityViewCaveats(
   entries: StaticBuildSourceUtilityViewEntry[],
-  assumptions: string[],
+  assumptions: StaticBuildAssumptionList,
 ): StaticBuildEntryCaveatSummary {
   const unsupportedCount = entries.filter((entry) => !entry.supported).length
   return {

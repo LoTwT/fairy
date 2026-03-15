@@ -1,6 +1,7 @@
 import type {
   ResolveStaticBuildSourceEntriesInput,
   ResolveStaticBuildSourceEntriesResult,
+  StaticBuildAssumptionList,
   StaticBuildAssumptionSummary,
   StaticBuildEntryCaveatSummary,
   StaticBuildResolvedLoadout,
@@ -125,7 +126,7 @@ function getSourceEntryGroupOrder(entry: StaticBuildSourceEntry) {
 
 function summarizeSourceEntries(
   entries: StaticBuildSourceEntry[],
-  assumptions: string[],
+  assumptions: StaticBuildAssumptionList,
 ): StaticBuildSourceEntryCollectionSummary {
   const sourceDamageEntries = entries.filter(
     (entry) => entry.metadata.entryKind === "source-damage-view",
@@ -217,7 +218,7 @@ function summarizeSourceEntries(
 
 function summarizeSourceEntryCaveats(
   entries: StaticBuildSourceEntry[],
-  assumptions: string[],
+  assumptions: StaticBuildAssumptionList,
 ): StaticBuildEntryCaveatSummary {
   const unsupportedCount = entries.filter((entry) => !entry.supported).length
 
@@ -230,7 +231,7 @@ function summarizeSourceEntryCaveats(
 }
 
 function summarizeSourceEntryAssumptions(
-  assumptions: string[],
+  assumptions: StaticBuildAssumptionList,
 ): StaticBuildAssumptionSummary {
   return summarizeAssumptions(assumptions)
 }

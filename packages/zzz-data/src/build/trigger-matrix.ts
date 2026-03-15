@@ -2,6 +2,7 @@ import type {
   ResolveStaticBuildTriggerMatrixInput,
   ResolveStaticBuildTriggerMatrixResult,
   StaticBuildAgentId,
+  StaticBuildAssumptionList,
   StaticBuildEntryCaveatSummary,
   StaticBuildSourceDamageViewEntry,
   StaticBuildTriggerMatrixEffectSummaryItem,
@@ -197,7 +198,7 @@ function getTriggerMatrixGroupOrder(key: StaticBuildTriggerMatrixEntryKind) {
 
 function summarizeTriggerMatrixRows(
   rows: StaticBuildTriggerMatrixRow[],
-  assumptions: string[],
+  assumptions: StaticBuildAssumptionList,
 ): StaticBuildTriggerMatrixSummary {
   const mainFormulaRows = rows.filter(
     (row) => row.metadata.entryKind === "main-formula",
@@ -377,7 +378,7 @@ function formatNumber(value: number) {
 
 function summarizeTriggerMatrixCaveats(
   rows: StaticBuildTriggerMatrixRow[],
-  assumptions: string[],
+  assumptions: StaticBuildAssumptionList,
 ): StaticBuildEntryCaveatSummary {
   const unsupportedCount = rows.filter((row) => !row.supported).length
 
@@ -391,7 +392,7 @@ function summarizeTriggerMatrixCaveats(
 
 function summarizeTriggerMatrixRowCaveat(
   supported: boolean,
-  assumptions: string[],
+  assumptions: StaticBuildAssumptionList,
 ): StaticBuildEntryCaveatSummary {
   return {
     assumptionCount: assumptions.length,
