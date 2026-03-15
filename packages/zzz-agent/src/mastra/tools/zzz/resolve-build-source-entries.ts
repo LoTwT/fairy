@@ -1,7 +1,4 @@
-import type {
-  AgentAttributeLabel,
-  ResolveStaticBuildSourceEntriesInput,
-} from "zzz-data"
+import type { ResolveStaticBuildSourceEntriesInput } from "zzz-data"
 import { createTool } from "@mastra/core/tools"
 import { z } from "zod"
 import {
@@ -24,14 +21,14 @@ import {
   buildToolScopeLabels,
   buildUncoveredSourceEntryCoverageResponse,
   buildUncoveredSourceEntryUtilityOnlyResponse,
-  buildUnsupportedAnomalyTypeResponse,
   candidateNames,
   catalogNames,
   finalPanelSchema,
-  normalizeAnomalyType,
   resolveBuildSourceEntriesInputSchema,
   resolveBuildToolAgent,
+  resolveBuildToolDisorderScenario,
   resolveBuildToolDriveDiscSets,
+  resolveBuildToolScenario,
   resolveBuildToolWEngine,
 } from "./resolve-build-shared"
 
@@ -111,20 +108,15 @@ export const resolveBuildSourceEntries = createTool({
 
     let scenario: ResolveStaticBuildSourceEntriesInput["scenario"]
     if (input.scenario?.damageType === "disorder") {
-      const anomalyType = normalizeAnomalyType(input.scenario.anomalyType)
-      if (!anomalyType) {
-        return buildUnsupportedAnomalyTypeResponse(input.scenario.anomalyType)
+      const disorderScenarioResolution = resolveBuildToolDisorderScenario(
+        input.scenario,
+      )
+      if (!disorderScenarioResolution.ok) {
+        return disorderScenarioResolution.response
       }
-      scenario = {
-        ...input.scenario,
-        anomalyType,
-        attribute: input.scenario.attribute as AgentAttributeLabel | undefined,
-      }
+      scenario = disorderScenarioResolution.scenario
     } else if (input.scenario) {
-      scenario = {
-        ...input.scenario,
-        attribute: input.scenario.attribute as AgentAttributeLabel | undefined,
-      }
+      scenario = resolveBuildToolScenario(input.scenario)
     }
 
     let panel: ResolveStaticBuildSourceEntriesInput["panel"]

@@ -1,4 +1,5 @@
 import type {
+  AgentAttributeLabel,
   AnomalyType,
   CompactStaticBuildResult,
   CompactStaticBuildSkillMatrixResult,
@@ -697,6 +698,58 @@ export function buildUnsupportedAnomalyTypeResponse(
       "auricInk",
       "frost",
     ],
+  }
+}
+
+export function normalizeBuildToolAttribute(
+  value: string | undefined,
+): AgentAttributeLabel | undefined {
+  return value as AgentAttributeLabel | undefined
+}
+
+export function resolveBuildToolScenario<T extends { attribute?: string }>(
+  scenario: T,
+): Omit<T, "attribute"> & { attribute?: AgentAttributeLabel } {
+  return {
+    ...scenario,
+    attribute: normalizeBuildToolAttribute(scenario.attribute),
+  }
+}
+
+export function resolveBuildToolDisorderScenario<
+  T extends {
+    anomalyType: string
+    attribute?: string
+  },
+>(
+  scenario: T,
+):
+  | {
+      ok: true
+      scenario: Omit<T, "anomalyType" | "attribute"> & {
+        anomalyType: AnomalyType
+        attribute?: AgentAttributeLabel
+      }
+    }
+  | {
+      ok: false
+      response: BuildToolUnsupportedAnomalyTypeResponse
+    } {
+  const anomalyType = normalizeAnomalyType(scenario.anomalyType)
+  if (!anomalyType) {
+    return {
+      ok: false,
+      response: buildUnsupportedAnomalyTypeResponse(scenario.anomalyType),
+    }
+  }
+
+  return {
+    ok: true,
+    scenario: {
+      ...scenario,
+      anomalyType,
+      attribute: normalizeBuildToolAttribute(scenario.attribute),
+    },
   }
 }
 

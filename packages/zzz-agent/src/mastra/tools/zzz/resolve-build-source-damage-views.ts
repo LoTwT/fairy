@@ -1,4 +1,3 @@
-import type { AgentAttributeLabel } from "zzz-data"
 import { createTool } from "@mastra/core/tools"
 import { z } from "zod"
 import {
@@ -14,12 +13,12 @@ import {
   buildToolLoadoutInput,
   buildToolScopeLabels,
   buildUncoveredSourceDamageViewResponse,
-  buildUnsupportedAnomalyTypeResponse,
   buildUnsupportedDamageTypeResponse,
-  normalizeAnomalyType,
   resolveBuildInputSchema,
   resolveBuildToolAgent,
+  resolveBuildToolDisorderScenario,
   resolveBuildToolDriveDiscSets,
+  resolveBuildToolScenario,
   resolveBuildToolWEngine,
 } from "./resolve-build-shared"
 
@@ -88,9 +87,11 @@ export const resolveBuildSourceDamageViews = createTool({
     })
 
     if (input.scenario.damageType === "disorder") {
-      const anomalyType = normalizeAnomalyType(input.scenario.anomalyType)
-      if (!anomalyType) {
-        return buildUnsupportedAnomalyTypeResponse(input.scenario.anomalyType)
+      const disorderScenarioResolution = resolveBuildToolDisorderScenario(
+        input.scenario,
+      )
+      if (!disorderScenarioResolution.ok) {
+        return disorderScenarioResolution.response
       }
 
       const views = resolveStaticBuildSourceDamageViews({
@@ -98,13 +99,7 @@ export const resolveBuildSourceDamageViews = createTool({
         manualBaseMode: input.manualBaseMode,
         loadout,
         panel: input.finalPanel,
-        scenario: {
-          ...input.scenario,
-          anomalyType,
-          attribute: input.scenario.attribute as
-            | AgentAttributeLabel
-            | undefined,
-        },
+        scenario: disorderScenarioResolution.scenario,
         effectOverrides: input.effectOverrides,
       })
 
@@ -125,10 +120,7 @@ export const resolveBuildSourceDamageViews = createTool({
       manualBaseMode: input.manualBaseMode,
       loadout,
       panel: input.finalPanel,
-      scenario: {
-        ...input.scenario,
-        attribute: input.scenario.attribute as AgentAttributeLabel | undefined,
-      },
+      scenario: resolveBuildToolScenario(input.scenario),
       effectOverrides: input.effectOverrides,
     })
 

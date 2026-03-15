@@ -1,4 +1,3 @@
-import type { AgentAttributeLabel } from "zzz-data"
 import { createTool } from "@mastra/core/tools"
 import { z } from "zod"
 import {
@@ -13,12 +12,12 @@ import {
   buildToolLoadoutInput,
   buildToolScopeLabels,
   buildTriggerMatrixSuccessResponse,
-  buildUnsupportedAnomalyTypeResponse,
   buildUnsupportedDamageTypeResponse,
-  normalizeAnomalyType,
   resolveBuildInputSchema,
   resolveBuildToolAgent,
+  resolveBuildToolDisorderScenario,
   resolveBuildToolDriveDiscSets,
+  resolveBuildToolScenario,
   resolveBuildToolWEngine,
 } from "./resolve-build-shared"
 
@@ -86,27 +85,15 @@ export const resolveBuildTriggerMatrix = createTool({
       wEngineRefinement: input.wEngineRefinement,
     })
 
-    const scenario =
+    const scenarioResolution =
       input.scenario.damageType === "disorder"
-        ? {
-            ...input.scenario,
-            anomalyType: normalizeAnomalyType(input.scenario.anomalyType),
-            attribute: input.scenario.attribute as
-              | AgentAttributeLabel
-              | undefined,
-          }
+        ? resolveBuildToolDisorderScenario(input.scenario)
         : {
-            ...input.scenario,
-            attribute: input.scenario.attribute as
-              | AgentAttributeLabel
-              | undefined,
+            ok: true as const,
+            scenario: resolveBuildToolScenario(input.scenario),
           }
-
-    if (
-      input.scenario.damageType === "disorder" &&
-      scenario.anomalyType === undefined
-    ) {
-      return buildUnsupportedAnomalyTypeResponse(input.scenario.anomalyType)
+    if (!scenarioResolution.ok) {
+      return scenarioResolution.response
     }
 
     const matrix = resolveStaticBuildTriggerMatrix({
@@ -114,7 +101,7 @@ export const resolveBuildTriggerMatrix = createTool({
       manualBaseMode: input.manualBaseMode,
       loadout,
       panel: input.finalPanel,
-      scenario,
+      scenario: scenarioResolution.scenario,
       effectOverrides: input.effectOverrides,
     })
 
