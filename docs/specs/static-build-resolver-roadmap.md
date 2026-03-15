@@ -11374,3 +11374,41 @@ caveatSummary` 这些兼容字段补齐。
 - `V314.2` 已完成：`compact.ts` 已统一复用这批显式 compact alias
 - `V314.3` 已完成：全量校验与提交已通过
 - `V314.4` 已完成：roadmap、索引与架构文档已同步
+
+## 318. V315 snapshot input map contracts
+
+### 318.1 目标
+
+`V315` 只解决一件事：
+
+- 为 `build/types.ts` 中仍直接暴露的 snapshot/input `Record<..., number>` contract 补显式公开 map type
+
+### 318.2 范围
+
+1. `StaticBuildBucketValueMap`
+2. `StaticBuildFormulaMultiplierMap`
+3. `StaticBuildDynamicCountMap`
+4. `StaticBuildDynamicValueMap`
+5. `StaticBuildStateValueMap`
+6. `StaticBuildResolvedSnapshotBucketDeltaMap`
+7. `StaticBuildResolvedSnapshotMultiplierFactorMap`
+8. `StaticBuildEffectStacks`
+9. `StaticBuildDynamicSnapshotInput`
+10. `StaticBuildStateSnapshotInput`
+11. `StaticBuildResolvedSnapshotInput`
+12. `StaticBuildEffectCondition.minimumDynamicCounts`
+13. `StaticBuildEffectCondition.minimumDynamicValues`
+14. `StaticBuildEffectCondition.minimumStateValues`
+
+### 318.3 非目标
+
+1. 不调整任何运行时 resolver 逻辑
+2. 不处理 `skill-matrix row metadata` 里的剩余 numeric contract
+3. 不处理 `compact.ts`，该层已在 `V314` 收口
+
+### 318.4 当前状态
+
+- `V315.1` 已完成：范围冻结到 snapshot/input map contract
+- `V315.2` 已完成：`build/types.ts` 已统一复用这批显式公开 map type
+- `V315.3` 进行中：校验与提交
+- `V315.4` 已完成：roadmap、索引与架构文档已同步

@@ -199,10 +199,13 @@ export type StaticBuildUtilityValue = number
 export type StaticBuildCooldownSeconds = number
 export type StaticBuildBucketKey = string
 export type StaticBuildFormulaMultiplierKey = string
-export type StaticBuildBucketValueMap = Record<StaticBuildBucketKey, number>
+export type StaticBuildBucketValueMap = Record<
+  StaticBuildBucketKey,
+  StaticBuildModifierValue
+>
 export type StaticBuildFormulaMultiplierMap = Record<
   StaticBuildFormulaMultiplierKey,
-  number
+  StaticBuildModifierValue
 >
 export type StaticBuildVariableBucketList = StaticBuildBucketKey[]
 export type StaticBuildVariableFormulaMultiplierList =
@@ -212,6 +215,21 @@ export type StaticBuildUnsupportedEffectText = string
 export type StaticBuildCombatTag = string
 export type StaticBuildAlias = string
 export type StaticBuildSourceNoteKey = string
+export type StaticBuildDynamicCountMap = Partial<
+  Record<StaticBuildDynamicCountKey, StaticBuildStackCount>
+>
+export type StaticBuildDynamicValueMap = Partial<
+  Record<StaticBuildDynamicValueKey, StaticBuildModifierValue>
+>
+export type StaticBuildStateValueMap = Partial<
+  Record<StaticBuildStateValueKey, StaticBuildModifierValue>
+>
+export type StaticBuildResolvedSnapshotBucketDeltaMap = Partial<
+  Record<StaticBuildResolvedSnapshotBucketKey, StaticBuildModifierValue>
+>
+export type StaticBuildResolvedSnapshotMultiplierFactorMap = Partial<
+  Record<StaticBuildResolvedSnapshotMultiplierKey, StaticBuildModifierValue>
+>
 export type StaticBuildAssumptionList = StaticBuildAssumptionText[]
 export type StaticBuildUnsupportedEffectList =
   StaticBuildUnsupportedEffectText[]
@@ -233,24 +251,22 @@ export type StaticBuildResolvedAnomalyProficiency = number
 export type StaticBuildRemainingTime = number
 export type StaticBuildSkillMultiplierInputValue = number | string
 export type StaticBuildDamageMultiplierInputValue = number | string
-export type StaticBuildEffectStacks = number
+export type StaticBuildEffectStacks = StaticBuildStackCount
 
 export interface StaticBuildDynamicSnapshotInput {
   flags?: Partial<Record<StaticBuildDynamicFlagKey, boolean>>
-  counts?: Partial<Record<StaticBuildDynamicCountKey, number>>
-  values?: Partial<Record<StaticBuildDynamicValueKey, number>>
+  counts?: StaticBuildDynamicCountMap
+  values?: StaticBuildDynamicValueMap
 }
 
 export interface StaticBuildStateSnapshotInput {
   flags?: Partial<Record<StaticBuildStateFlagKey, boolean>>
-  values?: Partial<Record<StaticBuildStateValueKey, number>>
+  values?: StaticBuildStateValueMap
 }
 
 export interface StaticBuildResolvedSnapshotInput {
-  bucketDeltas?: Partial<Record<StaticBuildResolvedSnapshotBucketKey, number>>
-  multiplierFactors?: Partial<
-    Record<StaticBuildResolvedSnapshotMultiplierKey, number>
-  >
+  bucketDeltas?: StaticBuildResolvedSnapshotBucketDeltaMap
+  multiplierFactors?: StaticBuildResolvedSnapshotMultiplierFactorMap
 }
 
 export interface StaticBuildDriveDiscSetInput {
@@ -423,9 +439,9 @@ export interface StaticBuildEffectCondition {
   requiredDynamicCounts?: StaticBuildDynamicCountKey[]
   requiredDynamicValues?: StaticBuildDynamicValueKey[]
   requiredStateValues?: StaticBuildStateValueKey[]
-  minimumDynamicCounts?: Partial<Record<StaticBuildDynamicCountKey, number>>
-  minimumDynamicValues?: Partial<Record<StaticBuildDynamicValueKey, number>>
-  minimumStateValues?: Partial<Record<StaticBuildStateValueKey, number>>
+  minimumDynamicCounts?: StaticBuildDynamicCountMap
+  minimumDynamicValues?: StaticBuildDynamicValueMap
+  minimumStateValues?: StaticBuildStateValueMap
   minimumResolvedCritRate?: StaticBuildCritRate
   minimumResolvedAnomalyProficiency?: StaticBuildResolvedAnomalyProficiency
 }
