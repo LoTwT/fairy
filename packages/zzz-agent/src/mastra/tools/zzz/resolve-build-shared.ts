@@ -157,6 +157,28 @@ export interface BuildToolResolvedLoadoutContext<
   loadout: StaticBuildLoadoutInput
 }
 
+export interface BuildToolResolvedDamageExecutionContext<
+  TAgent extends CatalogItem,
+  TWEngine extends CatalogItem,
+> {
+  ok: true
+  agent: TAgent
+  wEngine: TWEngine | undefined
+  loadout: StaticBuildLoadoutInput
+  scenario: BuildToolResolvedScenario
+}
+
+export interface BuildToolResolvedSkillMatrixExecutionContext<
+  TAgent extends CatalogItem,
+  TWEngine extends CatalogItem,
+> {
+  ok: true
+  agent: TAgent
+  wEngine: TWEngine | undefined
+  loadout: StaticBuildLoadoutInput
+  context: BuildToolResolvedSkillMatrixContext
+}
+
 export interface BuildToolResolvedAgent<T extends CatalogItem> {
   ok: true
   agent: T
@@ -209,6 +231,10 @@ export interface BuildToolResolvedLoadoutOptions extends BuildToolProgressionInp
 
 export type BuildToolScenarioInput = z.infer<typeof resolveBuildScenarioSchema>
 
+export type BuildToolSkillMatrixContextInput = z.infer<
+  typeof resolveBuildSkillMatrixContextSchema
+>
+
 export type BuildToolResolvedScenario =
   | (Omit<
       Exclude<BuildToolScenarioInput, { damageType: "disorder" }>,
@@ -223,6 +249,13 @@ export type BuildToolResolvedScenario =
       anomalyType: AnomalyType
       attribute?: AgentAttributeLabel
     })
+
+export type BuildToolResolvedSkillMatrixContext = Omit<
+  BuildToolSkillMatrixContextInput,
+  "attribute"
+> & {
+  attribute?: AgentAttributeLabel
+}
 
 export interface BuildToolSourceUtilitySupport<T extends CatalogItem> {
   items: T[]
@@ -342,6 +375,22 @@ export interface BuildToolResolveSourceEntriesExecutionContextOptions<
   scenario: BuildToolScenarioInput | undefined
   finalPanel: z.input<typeof finalPanelSchema> | undefined
   supportedSourceUtilityWEngines: readonly TWEngine[]
+}
+
+export interface BuildToolResolveDamageExecutionContextOptions<
+  TAgent extends CatalogItem & { specialty: keyof typeof specialtyLabels },
+  TWEngine extends CatalogItem & { specialty: keyof typeof specialtyLabels },
+  TDriveDisc extends CatalogItem,
+> extends BuildToolResolveLoadoutContextOptions<TAgent, TWEngine, TDriveDisc> {
+  scenario: BuildToolScenarioInput
+}
+
+export interface BuildToolResolveSkillMatrixExecutionContextOptions<
+  TAgent extends CatalogItem & { specialty: keyof typeof specialtyLabels },
+  TWEngine extends CatalogItem & { specialty: keyof typeof specialtyLabels },
+  TDriveDisc extends CatalogItem,
+> extends BuildToolResolveLoadoutContextOptions<TAgent, TWEngine, TDriveDisc> {
+  context: BuildToolSkillMatrixContextInput
 }
 
 export interface BuildToolResolvedTriggeredDamageContext<
@@ -1191,6 +1240,12 @@ export function resolveBuildToolResolvedScenario(
   }
 }
 
+export function resolveBuildToolResolvedSkillMatrixContext(
+  context: BuildToolSkillMatrixContextInput,
+): BuildToolResolvedSkillMatrixContext {
+  return resolveBuildToolScenario(context)
+}
+
 export function resolveBuildToolOptionalScenario(
   scenario: BuildToolScenarioInput | undefined,
 ):
@@ -1438,6 +1493,75 @@ export function resolveBuildToolSourceEntriesExecutionContext<
     wEngine: loadoutResolution.wEngine,
     loadout: loadoutResolution.loadout,
     supportedUtilityWEngines: sourceUtilitySupport.names,
+  }
+}
+
+export function resolveBuildToolDamageExecutionContext<
+  TAgent extends CatalogItem & { specialty: keyof typeof specialtyLabels },
+  TWEngine extends CatalogItem & { specialty: keyof typeof specialtyLabels },
+  TDriveDisc extends CatalogItem,
+>(
+  options: BuildToolResolveDamageExecutionContextOptions<
+    TAgent,
+    TWEngine,
+    TDriveDisc
+  >,
+):
+  | BuildToolResolvedDamageExecutionContext<TAgent, TWEngine>
+  | {
+      ok: false
+      response:
+        | BuildToolUnsupportedAnomalyTypeResponse
+        | BuildToolUnsupportedAgentResponse
+        | BuildToolUnsupportedWEngineResponse
+        | BuildToolIncompatibleWEngineResponse
+        | BuildToolUnsupportedDriveDiscResponse
+    } {
+  const loadoutResolution = resolveBuildToolLoadoutContext(options)
+  if (!loadoutResolution.ok) {
+    return loadoutResolution
+  }
+
+  const scenarioResolution = resolveBuildToolResolvedScenario(options.scenario)
+  if (!scenarioResolution.ok) {
+    return scenarioResolution
+  }
+
+  return {
+    ok: true,
+    agent: loadoutResolution.agent,
+    wEngine: loadoutResolution.wEngine,
+    loadout: loadoutResolution.loadout,
+    scenario: scenarioResolution.scenario,
+  }
+}
+
+export function resolveBuildToolSkillMatrixExecutionContext<
+  TAgent extends CatalogItem & { specialty: keyof typeof specialtyLabels },
+  TWEngine extends CatalogItem & { specialty: keyof typeof specialtyLabels },
+  TDriveDisc extends CatalogItem,
+>(
+  options: BuildToolResolveSkillMatrixExecutionContextOptions<
+    TAgent,
+    TWEngine,
+    TDriveDisc
+  >,
+):
+  | BuildToolResolvedSkillMatrixExecutionContext<TAgent, TWEngine>
+  | BuildToolRejectedAgent
+  | BuildToolRejectedWEngine
+  | BuildToolRejectedDriveDiscSets {
+  const loadoutResolution = resolveBuildToolLoadoutContext(options)
+  if (!loadoutResolution.ok) {
+    return loadoutResolution
+  }
+
+  return {
+    ok: true,
+    agent: loadoutResolution.agent,
+    wEngine: loadoutResolution.wEngine,
+    loadout: loadoutResolution.loadout,
+    context: resolveBuildToolResolvedSkillMatrixContext(options.context),
   }
 }
 

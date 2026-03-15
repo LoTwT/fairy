@@ -12,8 +12,7 @@ import {
   buildDamageSuccessResponse,
   buildToolScopeLabels,
   resolveBuildInputSchema,
-  resolveBuildToolLoadoutContext,
-  resolveBuildToolResolvedScenario,
+  resolveBuildToolDamageExecutionContext,
 } from "./resolve-build-shared"
 
 export const resolveBuildDamage = createTool({
@@ -30,7 +29,7 @@ export const resolveBuildDamage = createTool({
       ),
   }),
   execute: async (input) => {
-    const loadoutResolution = resolveBuildToolLoadoutContext({
+    const contextResolution = resolveBuildToolDamageExecutionContext({
       scopeLabel: buildToolScopeLabels.resolver,
       supportedAgents: supportedStaticBuildAgents,
       supportedWEngines: supportedStaticBuildWEngines,
@@ -44,23 +43,19 @@ export const resolveBuildDamage = createTool({
       agentMindscape: input.agentMindscape,
       coreSkillLevel: input.coreSkillLevel,
       wEngineRefinement: input.wEngineRefinement,
+      scenario: input.scenario,
     })
-    if (!loadoutResolution.ok) {
-      return loadoutResolution.response
+    if (!contextResolution.ok) {
+      return contextResolution.response
     }
-    const { loadout } = loadoutResolution
-
-    const scenarioResolution = resolveBuildToolResolvedScenario(input.scenario)
-    if (!scenarioResolution.ok) {
-      return scenarioResolution.response
-    }
+    const { loadout, scenario } = contextResolution
 
     const build = resolveStaticBuildDamage({
       mode: input.mode,
       manualBaseMode: input.manualBaseMode,
       loadout,
       panel: input.finalPanel,
-      scenario: scenarioResolution.scenario,
+      scenario,
       effectOverrides: input.effectOverrides,
     })
 
