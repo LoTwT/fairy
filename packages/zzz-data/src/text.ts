@@ -18,7 +18,7 @@ const blankLinePattern = /\n{3,}/g
  * This helper preserves line breaks from `<br/>` tags and removes all other
  * markup. It does not decode HTML entities.
  */
-export function stripRichText(value: string): string {
+export function stripRichText(value: RichTextString): string {
   return value
     .replace(lineBreakPattern, "\n")
     .replace(tagPattern, "")

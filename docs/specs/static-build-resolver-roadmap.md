@@ -12257,3 +12257,29 @@ caveatSummary` 这些兼容字段补齐。
 - `V343.2` 已完成：独立 scalar helper 输入已统一复用显式公开 contract
 - `V343.3` 已完成：校验与提交
 - `V343.4` 已完成：roadmap、索引与架构文档同步
+
+## 347. V344 text helper input contracts
+
+### 347.1 目标
+
+`V344` 只解决一件事：
+
+- 让 `stripRichText()` 的输入直接复用既有 `RichTextString` contract，不改变任何文本清洗逻辑。
+
+### 347.2 范围
+
+1. `stripRichText(value: RichTextString): string`
+2. roadmap、索引与架构文档同步
+
+### 347.3 非目标
+
+1. 不新增新的文本 helper
+2. 不改变 rich text 清洗规则
+3. 不扩展 HTML entity decode 或其他格式化能力
+
+### 347.4 当前状态
+
+- `V344.1` 已完成：范围冻结到 text helper 输入 contract
+- `V344.2` 已完成：`stripRichText()` 已统一复用 `RichTextString`
+- `V344.3` 待完成：校验与提交
+- `V344.4` 待完成：roadmap、索引与架构文档同步

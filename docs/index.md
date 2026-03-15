@@ -241,3 +241,4 @@
 - [静态构筑解析系统 V341](./specs/static-build-resolver-v341.md) — 当前阶段：已收口；`resolver.ts` 中 effect match/apply helper 的上下文 shape 与 `parseSkillMultiplier()` 的输入输出已统一复用显式公开 contract
 - [静态构筑解析系统 V342](./specs/static-build-resolver-v342.md) — 当前阶段：已收口；`matrix.ts` 中最后残留的 `parseSegmentToken(token: string)` helper 已统一复用显式公开 contract
 - [静态构筑解析系统 V343](./specs/static-build-resolver-v343.md) — 当前阶段：已收口；`calculator/factors.ts` 中独立导出的 scalar helper 输入已统一复用显式公开 contract
+- [静态构筑解析系统 V344](./specs/static-build-resolver-v344.md) — 当前阶段：已收口；`stripRichText()` 的输入已统一复用既有 `RichTextString` contract
