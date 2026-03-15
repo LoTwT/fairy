@@ -163,6 +163,7 @@ export type StaticBuildBucketValueMap = Record<string, number>
 export type StaticBuildFormulaMultiplierMap = Record<string, number>
 export type StaticBuildVariableBucketList = string[]
 export type StaticBuildVariableFormulaMultiplierList = string[]
+export type StaticBuildAssumptionList = string[]
 export type StaticBuildDefenderBaseDefense = number
 export type StaticBuildDefenderResistance = number
 export type StaticBuildDefenseBonus = number
@@ -658,7 +659,7 @@ export interface ResolveStaticBuildResult {
   trace: StaticBuildTraceItem[]
   diagnostics: StaticBuildDiagnosticEntry[]
   sourceNotes: StaticBuildSourceNoteEntry[]
-  assumptions: string[]
+  assumptions: StaticBuildAssumptionList
   unsupportedEffects: string[]
 }
 
@@ -739,7 +740,7 @@ export interface StaticBuildSourceDamageViewEntry {
   effectSummary: StaticBuildSourceDamageViewEffectSummaryItem[]
   caveatSummary: StaticBuildEntryCaveatSummary
   assumptionSummary: StaticBuildAssumptionSummary
-  assumptions: string[]
+  assumptions: StaticBuildAssumptionList
   damage?: StaticBuildEntryDamage
   summary?: StaticBuildResolveSummary
   build?: ResolveStaticBuildResult
@@ -800,7 +801,7 @@ export interface ResolveStaticBuildSourceDamageViewsResult {
   sourceNoteSummary: StaticBuildSourceNoteSummary
   assumptionSummary: StaticBuildAssumptionSummary
   entries: StaticBuildSourceDamageViewEntry[]
-  assumptions: string[]
+  assumptions: StaticBuildAssumptionList
 }
 
 export type StaticBuildSourceUtilityViewType =
@@ -870,7 +871,7 @@ export interface StaticBuildSourceUtilityViewEntry {
   effectSummary: StaticBuildSourceDamageViewEffectSummaryItem[]
   caveatSummary: StaticBuildEntryCaveatSummary
   assumptionSummary: StaticBuildAssumptionSummary
-  assumptions: string[]
+  assumptions: StaticBuildAssumptionList
 }
 
 export interface StaticBuildSourceUtilityViewEntrySummary {
@@ -934,7 +935,7 @@ export interface ResolveStaticBuildSourceUtilityViewsResult {
   sourceNoteSummary: StaticBuildSourceNoteSummary
   assumptionSummary: StaticBuildAssumptionSummary
   entries: StaticBuildSourceUtilityViewEntry[]
-  assumptions: string[]
+  assumptions: StaticBuildAssumptionList
 }
 
 export interface ResolveStaticBuildSourceEntriesInput {
@@ -995,7 +996,7 @@ export interface ResolveStaticBuildSourceEntriesResult {
   sourceNoteSummary: StaticBuildSourceNoteSummary
   assumptionSummary: StaticBuildAssumptionSummary
   entries: StaticBuildSourceEntry[]
-  assumptions: string[]
+  assumptions: StaticBuildAssumptionList
 }
 
 export type StaticBuildTriggerMatrixEntryKind = "main-formula" | "source-view"
@@ -1072,7 +1073,7 @@ export interface StaticBuildTriggerMatrixRow {
   sourceNotes: StaticBuildSourceNoteEntry[]
   sourceNoteSummary: StaticBuildSourceNoteSummary
   assumptionSummary: StaticBuildAssumptionSummary
-  assumptions: string[]
+  assumptions: StaticBuildAssumptionList
   damage?: StaticBuildEntryDamage
   summary?: StaticBuildResolveSummary
   build?: ResolveStaticBuildResult
@@ -1093,7 +1094,7 @@ export interface ResolveStaticBuildTriggerMatrixResult {
   sourceNoteSummary: StaticBuildSourceNoteSummary
   assumptionSummary: StaticBuildAssumptionSummary
   rows: StaticBuildTriggerMatrixRow[]
-  assumptions: string[]
+  assumptions: StaticBuildAssumptionList
 }
 
 export interface StaticBuildSkillMatrixRowMeta {
@@ -1145,7 +1146,7 @@ export interface StaticBuildSkillMatrixRow {
   requirementSummary: StaticBuildSourceDamageViewRequirementSummary
   assumptionSummary: StaticBuildAssumptionSummary
   caveatSummary: StaticBuildCaveatSummary
-  assumptions: string[]
+  assumptions: StaticBuildAssumptionList
   unsupportedEffects: string[]
   build: ResolveStaticBuildResult
 }
@@ -1188,7 +1189,7 @@ export interface StaticBuildSkillMatrixGroupSummary {
   caveatSummary: StaticBuildCaveatSummary
   diagnosticSummary: StaticBuildDiagnosticSummary
   sourceNoteSummary: StaticBuildSourceNoteSummary
-  assumptions: string[]
+  assumptions: StaticBuildAssumptionList
   unsupportedEffects: string[]
 }
 
@@ -1217,6 +1218,6 @@ export interface ResolveStaticBuildSkillMatrixResult {
   diagnosticSummary: StaticBuildDiagnosticSummary
   sourceNoteSummary: StaticBuildSourceNoteSummary
   rows: StaticBuildSkillMatrixRow[]
-  assumptions: string[]
+  assumptions: StaticBuildAssumptionList
   unsupportedEffects: string[]
 }

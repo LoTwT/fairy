@@ -70,6 +70,7 @@ export type {
   StaticBuildAppliedEntryCount,
   StaticBuildAppliedRowCount,
   StaticBuildAssumptionCount,
+  StaticBuildAssumptionList,
   StaticBuildAttack,
   StaticBuildAttackPercent,
   StaticBuildBaseAgentCatalogEntry,

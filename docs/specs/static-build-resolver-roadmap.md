@@ -10197,5 +10197,35 @@ caveatSummary` 这些兼容字段补齐。
 - `V277.1` 已完成：冻结到 build summary variable list contract
 - `V277.2` 已完成：`types.ts` 已让 skill-matrix summary / group summary 的 variable list 字段统一复用显式 type
 - `V277.3` 已完成：`build/index.ts` 已正式导出这些 type
-- `V277.4` 进行中：等待现有 build / agent 测试与 runtime 校验完成
-- `V277.5` 进行中：等待 roadmap、索引与架构文档同步
+- `V277.4` 已完成：现有 build / agent 测试与 runtime 校验已覆盖
+- `V277.5` 已完成：roadmap、索引与架构文档已同步
+
+## 281. V278 build assumption list contracts
+
+`V277` 收口后，single-build / source views / source-entry / trigger-matrix / skill-matrix 中的 `assumptions` 仍以匿名 `string[]` 暴露，和前面的显式公开 contract 仍不对称。
+
+`V278` 只解决一件事：
+
+1. 为这组公开 assumptions 列表补显式 type，并让各层结果统一复用，不改变任何运行时行为
+
+### 281.1 分阶段
+
+1. `V278.1` scope freeze
+2. `V278.2` type alignment
+3. `V278.3` export alignment
+4. `V278.4` tests / runtime alignment
+5. `V278.5` docs closeout
+
+### 281.2 非目标
+
+1. 不改变 assumptions 的字符串内容、顺序或生成逻辑
+2. 不处理 `unsupportedEffects`
+3. 不处理 `combatTags / aliases / qualifiers / keys`
+
+### 281.3 当前状态
+
+- `V278.1` 已完成：冻结到 assumptions 列表 contract
+- `V278.2` 已完成：`types.ts` 已让各层公开 `assumptions` 字段统一复用显式 type
+- `V278.3` 已完成：`build/index.ts` 已正式导出这个 type
+- `V278.4` 进行中：等待现有 build / agent 测试与 runtime 校验完成
+- `V278.5` 进行中：等待 roadmap、索引与架构文档同步
