@@ -1,6 +1,13 @@
-import type { CatalogItem } from "./resolve-build-contracts"
+import type {
+  BuildToolCatalogNameList,
+  BuildToolCatalogValue,
+  BuildToolNormalizedCatalogValue,
+  CatalogItem,
+} from "./resolve-build-contracts"
 
-export function normalizeCatalogValue(value: string) {
+export function normalizeCatalogValue(
+  value: BuildToolCatalogValue,
+): BuildToolNormalizedCatalogValue {
   return value.toLowerCase().replace(/[\s\-_·・.()（）【】[\]「」]/g, "")
 }
 
@@ -10,7 +17,7 @@ function getCatalogFields(item: CatalogItem) {
 
 export function findCatalogItem<T extends CatalogItem>(
   items: readonly T[],
-  query: string,
+  query: BuildToolCatalogValue,
 ): T | undefined {
   const qLow = query.toLowerCase()
   const qNorm = normalizeCatalogValue(query)
@@ -37,7 +44,7 @@ export function findCatalogItem<T extends CatalogItem>(
 
 export function findCatalogCandidates<T extends CatalogItem>(
   items: readonly T[],
-  query: string,
+  query: BuildToolCatalogValue,
 ) {
   const qNorm = normalizeCatalogValue(query)
   if (!qNorm) return []
@@ -68,13 +75,15 @@ export function findCatalogCandidates<T extends CatalogItem>(
     .map((item) => item.item)
 }
 
-export function catalogNames<T extends CatalogItem>(items: readonly T[]) {
+export function catalogNames<T extends CatalogItem>(
+  items: readonly T[],
+): BuildToolCatalogNameList {
   return items.map((item) => item.name)
 }
 
 export function candidateNames<T extends CatalogItem>(
   items: readonly T[],
-  query: string,
-) {
+  query: BuildToolCatalogValue,
+): BuildToolCatalogNameList {
   return findCatalogCandidates(items, query).map((item) => item.name)
 }

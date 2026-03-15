@@ -8,10 +8,18 @@ import type {
 } from "zzz-data"
 import type { BuildToolSpecialtyKey } from "./resolve-build-labels"
 
+export type BuildToolCatalogValue = string
+
+export type BuildToolNormalizedCatalogValue = string
+
+export type BuildToolCatalogName = string
+
+export type BuildToolCatalogNameList = readonly BuildToolCatalogName[]
+
 export interface CatalogItem<TSpecialty extends string = string> {
   id: string
-  name: string
-  aliases: readonly string[]
+  name: BuildToolCatalogName
+  aliases: BuildToolCatalogNameList
   specialty?: TSpecialty
 }
 

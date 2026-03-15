@@ -12395,3 +12395,36 @@ caveatSummary` 这些兼容字段补齐。
 - `V348.2` 已完成：`stripRichText()` 输出已统一复用 `PlainTextString`
 - `V348.3` 待完成：校验与提交
 - `V348.4` 待完成：roadmap、索引与架构文档同步
+
+## 352. V349 agent catalog helper text contracts
+
+### 352.1 目标
+
+`V349` 只解决一件事：
+
+- 给 `zzz-agent` 的 catalog helper 文本 contract 补显式公开 alias，不改变任何匹配逻辑。
+
+### 352.2 范围
+
+1. `BuildToolCatalogValue`
+2. `BuildToolNormalizedCatalogValue`
+3. `BuildToolCatalogName`
+4. `BuildToolCatalogNameList`
+5. `CatalogItem.name / aliases`
+6. `normalizeCatalogValue()`
+7. `findCatalogItem()`
+8. `findCatalogCandidates()`
+9. `catalogNames()` / `candidateNames()`
+
+### 352.3 非目标
+
+1. 不调整 fuzzy match 规则
+2. 不改变候选排序阈值
+3. 不修改高层 tool schema
+
+### 352.4 当前状态
+
+- `V349.1` 已完成：范围冻结到 agent catalog helper text contract
+- `V349.2` 已完成：catalog helper 文本 contract 已统一复用显式 alias
+- `V349.3` 待完成：校验与提交
+- `V349.4` 待完成：roadmap、索引与架构文档同步
