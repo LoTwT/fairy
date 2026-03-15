@@ -1052,4 +1052,5 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 301. `V301` build skill-matrix group summary key contracts：当前阶段已收口；`skill-matrix group summary.key` 已统一复用既有 `StaticBuildSkillMatrixGroupKey`，不改变任何运行时行为，见 [静态构筑解析系统 V301](./static-build-resolver-v301.md)
 302. `V302` build trace reason contracts：当前阶段已收口；trace item 公开 contract 中的 `reason` 已统一复用显式公开 type，不改变任何运行时行为，见 [静态构筑解析系统 V302](./static-build-resolver-v302.md)
 303. `V303` build source-utility label contracts：当前阶段已收口；`source-utility-view entry` 公开 contract 中的 `triggerLabel / conditionLabel` 已统一复用显式公开 type，不改变任何运行时行为，见 [静态构筑解析系统 V303](./static-build-resolver-v303.md)
-304. `V304` build skill matrix action-name contracts：当前阶段进行中；当前目标是为 `skill-matrix row metadata` 公开 contract 中的 `actionName / skillName` 补显式公开 type，并统一复用，不改变任何运行时行为
+304. `V304` build skill matrix action-name contracts：当前阶段已收口；`skill-matrix row metadata` 公开 contract 中的 `actionName / skillName` 已统一复用显式公开 type，不改变任何运行时行为，见 [静态构筑解析系统 V304](./static-build-resolver-v304.md)
+305. `V305` build skill matrix source-stat contracts：当前阶段进行中；当前目标是为 `skill-matrix row metadata` 公开 contract 中的 `sourceStatId / sourceStatName` 补显式公开 type，并统一复用，不改变任何运行时行为

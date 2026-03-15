@@ -191,6 +191,8 @@ export type {
   StaticBuildSourceNoteMessage,
   StaticBuildSourceNoteOwner,
   StaticBuildSourceNoteStatus,
+  StaticBuildSourceStatId,
+  StaticBuildSourceStatName,
   StaticBuildSourceUtilityViewCount,
   StaticBuildSourceUtilityViewEntry,
   StaticBuildSourceUtilityViewMeta,

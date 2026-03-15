@@ -1144,8 +1144,8 @@ export interface StaticBuildSkillMatrixRowMeta {
   stableKey: StaticBuildStableKey
   templateSource: StaticBuildSkillMatrixTemplateSource
   sourceSkillTypeId: number
-  sourceStatId: string
-  sourceStatName: string
+  sourceStatId: StaticBuildSourceStatId
+  sourceStatName: StaticBuildSourceStatName
   sourceOccurrence: number
   attributeSource: StaticBuildSkillMatrixAttributeSource
   templateCombatTags: StaticBuildCombatTagList
@@ -1167,6 +1167,8 @@ export interface StaticBuildSkillMatrixRowDamageSummary {
 export type StaticBuildSkillMatrixGroupKey = string
 export type StaticBuildActionName = string
 export type StaticBuildSkillName = string
+export type StaticBuildSourceStatId = string
+export type StaticBuildSourceStatName = string
 
 export interface StaticBuildSkillMatrixRow {
   id: StaticBuildRowId

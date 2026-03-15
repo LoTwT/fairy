@@ -11003,6 +11003,35 @@ caveatSummary` 这些兼容字段补齐。
 ### 307.4 当前状态
 
 - `V304.1` 已完成：范围冻结到 skill-matrix action / skill name
-- `V304.2` 进行中：准备在 `types.ts` 中落显式文本 type
-- `V304.3` 待开始：导出与测试对齐
-- `V304.4` 待开始：文档收口
+- `V304.2` 已完成：`types.ts` 已让 skill-matrix metadata 统一复用显式文本 type
+- `V304.3` 已完成：`build/index.ts` 已正式导出这些 type
+- `V304.4` 已完成：roadmap、索引与架构文档已同步
+
+## 308. V305 build skill matrix source-stat contracts
+
+### 308.1 目标
+
+`V305` 只解决一件事：
+
+- 为 `StaticBuildSkillMatrixRowMeta` 中仍然直接暴露的 `sourceStatId / sourceStatName` 补显式公开 type
+
+### 308.2 范围
+
+1. 新增 `sourceStatId` 文本 type
+2. 新增 `sourceStatName` 文本 type
+3. `StaticBuildSkillMatrixRowMeta.sourceStatId`
+4. `StaticBuildSkillMatrixRowMeta.sourceStatName`
+5. `build/index.ts` 对外导出
+
+### 308.3 非目标
+
+1. 不处理 `segmentLabel`
+2. 不处理 `skillMultiplier`
+3. 不处理 `triggerLabel / conditionLabel`
+
+### 308.4 当前状态
+
+- `V305.1` 已完成：范围冻结到 skill-matrix source-stat contract
+- `V305.2` 进行中：准备在 `types.ts` 中落显式 source-stat type
+- `V305.3` 待开始：导出与测试对齐
+- `V305.4` 待开始：文档收口
