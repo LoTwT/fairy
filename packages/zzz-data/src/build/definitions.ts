@@ -10,6 +10,7 @@ import type {
   StaticBuildSourceNoteGuidance,
   StaticBuildSourceNoteOwner,
   StaticBuildSourceNoteStatus,
+  StaticBuildSourceType,
   StaticBuildStateSnapshotInput,
   StaticBuildStateValueKey,
   StaticBuildValueContext,
@@ -3979,7 +3980,7 @@ export const staticBuildEffectDefinitions = [
 ] as const satisfies StaticBuildEffectDefinition[]
 
 interface StaticBuildSourceNote {
-  sourceType: StaticBuildEffectDefinition["sourceType"]
+  sourceType: StaticBuildSourceType
   sourceId: string
   minimumPieces?: 2 | 4
   minimumMindscape?: number
@@ -4783,7 +4784,7 @@ export function getStaticBuildEffectsForLoadout(loadout: {
 }
 
 export function hasStaticBuildEffectsForSource(
-  sourceType: StaticBuildEffectDefinition["sourceType"],
+  sourceType: StaticBuildSourceType,
   sourceId: string | undefined,
 ) {
   if (!sourceId) return false
@@ -4796,7 +4797,7 @@ export function hasStaticBuildEffectsForSource(
 function matchesStaticBuildSourceNote(
   note: StaticBuildSourceNote,
   input: {
-    sourceType: StaticBuildEffectDefinition["sourceType"]
+    sourceType: StaticBuildSourceType
     sourceId?: string
     damageType: "normal" | "sheer" | "anomaly" | "disorder"
     agentMindscape?: number
@@ -4987,7 +4988,7 @@ function matchesStaticBuildSourceNote(
 }
 
 export function getStaticBuildSourceNoteEntries(input: {
-  sourceType: StaticBuildEffectDefinition["sourceType"]
+  sourceType: StaticBuildSourceType
   sourceId?: string
   damageType: "normal" | "sheer" | "anomaly" | "disorder"
   agentMindscape?: number
@@ -5028,7 +5029,7 @@ export function getStaticBuildSourceNoteEntries(input: {
 }
 
 export function getStaticBuildSourceNotes(input: {
-  sourceType: StaticBuildEffectDefinition["sourceType"]
+  sourceType: StaticBuildSourceType
   sourceId?: string
   damageType: "normal" | "sheer" | "anomaly" | "disorder"
   agentMindscape?: number
@@ -5052,7 +5053,7 @@ export function getStaticBuildSourceNotes(input: {
 }
 
 export function hasStaticBuildCoverageForSource(
-  sourceType: StaticBuildEffectDefinition["sourceType"],
+  sourceType: StaticBuildSourceType,
   sourceId: string | undefined,
 ) {
   if (!sourceId) return false
