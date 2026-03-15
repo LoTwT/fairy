@@ -10707,5 +10707,35 @@ caveatSummary` 这些兼容字段补齐。
 - `V294.1` 已完成：冻结到 sourceId contract
 - `V294.2` 已完成：`types.ts` 已让相关 sourceId 字段统一复用显式 type
 - `V294.3` 已完成：`build/index.ts` 已正式导出这个 type
-- `V294.4` 进行中：等待现有 build / agent 测试与 runtime 校验完成
-- `V294.5` 进行中：等待 roadmap、索引与架构文档同步
+- `V294.4` 已完成：现有 build / agent 测试与 runtime 校验已覆盖
+- `V294.5` 已完成：roadmap、索引与架构文档已同步
+
+## 298. V295 build catalog id contracts
+
+`V294` 收口后，loadout / catalog 相关公开 contract 中的通用 catalog `id` 仍以匿名 `string` 暴露，和前面的显式公开 contract 仍不对称。
+
+`V295` 只解决一件事：
+
+1. 为 catalog `id` 补显式 type，并让 drive-disc set input / loadout ids / catalog entry 统一复用，不改变任何运行时行为
+
+### 298.1 分阶段
+
+1. `V295.1` scope freeze
+2. `V295.2` type alignment
+3. `V295.3` export alignment
+4. `V295.4` tests / runtime alignment
+5. `V295.5` docs closeout
+
+### 298.2 非目标
+
+1. 不改变 catalog id 的字符串内容或匹配逻辑
+2. 不处理 `sourceId`
+3. 不处理 entry / row 的 `id`
+
+### 298.3 当前状态
+
+- `V295.1` 已完成：冻结到 catalog id contract
+- `V295.2` 已完成：`types.ts` 已让 drive-disc set input / loadout ids / catalog entry 统一复用显式 type
+- `V295.3` 已完成：`build/index.ts` 已正式导出这个 type
+- `V295.4` 进行中：等待现有 build / agent 测试与 runtime 校验完成
+- `V295.5` 进行中：等待 roadmap、索引与架构文档同步

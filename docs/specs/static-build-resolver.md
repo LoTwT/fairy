@@ -1042,4 +1042,5 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 291. `V291` build skill-matrix group key contracts：当前阶段已收口；`StaticBuildSkillMatrixRow.group` 已统一复用显式公开 key type，不改变任何运行时行为，见 [静态构筑解析系统 V291](./static-build-resolver-v291.md)
 292. `V292` build canonical label text contracts：当前阶段已收口；source-view / skill-matrix metadata 中的 `canonicalLabel` 已统一复用显式公开 text type，不改变任何运行时行为，见 [静态构筑解析系统 V292](./static-build-resolver-v292.md)
 293. `V293` build stable key contracts：当前阶段已收口；source-view / trigger-matrix / skill-matrix metadata 中的 `stableKey` 已统一复用显式公开 type，不改变任何运行时行为，见 [静态构筑解析系统 V293](./static-build-resolver-v293.md)
-294. `V294` build source id contracts：当前阶段进行中；当前目标是为 effect/source-note/diagnostic/source-view/trigger-row metadata 中的 `sourceId` 补显式公开 type，并统一复用，不改变任何运行时行为，见 [静态构筑解析系统 V294](./static-build-resolver-v294.md)
+294. `V294` build source id contracts：当前阶段已收口；effect/source-note/diagnostic/source-view/trigger-row metadata 中的 `sourceId` 已统一复用显式公开 type，不改变任何运行时行为，见 [静态构筑解析系统 V294](./static-build-resolver-v294.md)
+295. `V295` build catalog id contracts：当前阶段进行中；当前目标是为 drive-disc set input / loadout ids / catalog entry 中的 catalog `id` 补显式公开 type，并统一复用，不改变任何运行时行为，见 [静态构筑解析系统 V295](./static-build-resolver-v295.md)
