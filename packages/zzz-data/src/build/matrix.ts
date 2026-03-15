@@ -7,7 +7,9 @@ import type {
   StaticBuildCombatTagList,
   StaticBuildDamageType,
   StaticBuildEffectBucketLabelMap,
+  StaticBuildEffectSummaryAccumulatorMap,
   StaticBuildFormulaMultiplierMap,
+  StaticBuildRowEffectSummaryAccumulator,
   StaticBuildSkillMatrixAttributeSource,
   StaticBuildSkillMatrixEffectSummaryItem,
   StaticBuildSkillMatrixRow,
@@ -494,17 +496,8 @@ function formatModifier(
 function summarizeSkillMatrixEffects(
   rows: StaticBuildSkillMatrixRow[],
 ): StaticBuildSkillMatrixEffectSummaryItem[] {
-  const summary = new Map<
-    string,
-    {
-      effectId: string
-      sourceName: string
-      label: string
-      bucketTexts: Set<string>
-      valueTexts: Set<string>
-      rows: Set<string>
-    }
-  >()
+  const summary: StaticBuildEffectSummaryAccumulatorMap<StaticBuildRowEffectSummaryAccumulator> =
+    new Map()
 
   for (const row of rows) {
     for (const trace of row.build.trace) {
@@ -516,9 +509,9 @@ function summarizeSkillMatrixEffects(
           effectId: trace.effectId,
           sourceName: trace.sourceName,
           label: trace.label,
-          bucketTexts: new Set<string>(),
-          valueTexts: new Set<string>(),
-          rows: new Set<string>(),
+          bucketTexts: new Set(),
+          valueTexts: new Set(),
+          rows: new Set(),
         }
         summary.set(trace.effectId, item)
       }

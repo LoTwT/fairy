@@ -804,6 +804,35 @@ export interface StaticBuildResolveSummary {
   sourceNoteGroups: StaticBuildSourceNoteGroupSummary[]
 }
 
+export type StaticBuildEffectSummaryBucketSet =
+  Set<StaticBuildEffectSummaryBucket>
+export type StaticBuildEffectSummaryValueSet =
+  Set<StaticBuildEffectSummaryValue>
+export type StaticBuildEntryIdSet = Set<StaticBuildEntryId>
+export type StaticBuildRowIdSet = Set<StaticBuildRowId>
+export type StaticBuildEffectSummaryAccumulatorMap<TAccumulator> = Map<
+  StaticBuildEffectId,
+  TAccumulator
+>
+
+export interface StaticBuildEffectSummaryAccumulator {
+  effectId: StaticBuildEffectId
+  sourceName: StaticBuildSourceName
+  label: StaticBuildEffectLabel
+  bucketTexts: StaticBuildEffectSummaryBucketSet
+  valueTexts: StaticBuildEffectSummaryValueSet
+}
+
+export interface StaticBuildResolveEffectSummaryAccumulator extends StaticBuildEffectSummaryAccumulator {}
+
+export interface StaticBuildEntryEffectSummaryAccumulator extends StaticBuildEffectSummaryAccumulator {
+  entries: StaticBuildEntryIdSet
+}
+
+export interface StaticBuildRowEffectSummaryAccumulator extends StaticBuildEffectSummaryAccumulator {
+  rows: StaticBuildRowIdSet
+}
+
 export interface StaticBuildResolveEffectSummaryItem {
   effectId: StaticBuildEffectId
   sourceName: StaticBuildSourceName

@@ -11830,3 +11830,37 @@ caveatSummary` 这些兼容字段补齐。
 - `V329.2` 已完成：bucket label map 已统一复用显式公开 contract
 - `V329.3` 已完成：校验与提交已通过
 - `V329.4` 已完成：roadmap、索引与架构文档已同步
+
+## 333. V330 effect summary accumulator contracts
+
+### 333.1 目标
+
+`V330` 只解决一件事：
+
+- 把 `resolver / source-damage-view / trigger-matrix / skill-matrix` 中 effect-summary reducer 仍直接使用的 `Map<string>` / `Set<string>` 聚合容器统一收成显式公开 contract。
+
+### 333.2 范围
+
+1. `StaticBuildEffectSummaryBucketSet`
+2. `StaticBuildEffectSummaryValueSet`
+3. `StaticBuildEntryIdSet`
+4. `StaticBuildRowIdSet`
+5. `StaticBuildEffectSummaryAccumulatorMap`
+6. `StaticBuildEffectSummaryAccumulator`
+7. `StaticBuildResolveEffectSummaryAccumulator`
+8. `StaticBuildEntryEffectSummaryAccumulator`
+9. `StaticBuildRowEffectSummaryAccumulator`
+10. 对应 summary reducer 与 `build/index.ts` type export
+
+### 333.3 非目标
+
+1. 不处理 `views.ts / utility-views.ts / definitions.ts` 中其他业务索引用的 `Set<string>` / `Map<string, ...>`
+2. 不修改任何 effect-summary 输出字段
+3. 不调整任何聚合顺序或判定逻辑
+
+### 333.4 当前状态
+
+- `V330.1` 已完成：范围冻结到 effect summary accumulator contract
+- `V330.2` 已完成：effect summary reducer 已统一复用显式公开 contract
+- `V330.3` 已完成：校验与提交已通过
+- `V330.4` 已完成：roadmap、索引与架构文档已同步

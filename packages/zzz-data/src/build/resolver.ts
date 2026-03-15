@@ -14,8 +14,10 @@ import type {
   StaticBuildEffectBucketLabelMap,
   StaticBuildEffectDefinition,
   StaticBuildEffectStacks,
+  StaticBuildEffectSummaryAccumulatorMap,
   StaticBuildResolvedAnomalyProficiency,
   StaticBuildResolvedBuckets,
+  StaticBuildResolveEffectSummaryAccumulator,
   StaticBuildSourceNoteEntry,
   StaticBuildSourceNoteEntryList,
   StaticBuildSourceNoteOwner,
@@ -273,16 +275,8 @@ export function summarizeAssumptions(assumptions: StaticBuildAssumptionList) {
 }
 
 export function summarizeResolveEffects(trace: StaticBuildTraceItemList) {
-  const summary = new Map<
-    string,
-    {
-      effectId: string
-      sourceName: string
-      label: string
-      bucketTexts: Set<string>
-      valueTexts: Set<string>
-    }
-  >()
+  const summary: StaticBuildEffectSummaryAccumulatorMap<StaticBuildResolveEffectSummaryAccumulator> =
+    new Map()
 
   for (const item of trace) {
     if (item.status !== "applied" || !item.modifiers?.length) continue
@@ -293,8 +287,8 @@ export function summarizeResolveEffects(trace: StaticBuildTraceItemList) {
         effectId: item.effectId,
         sourceName: item.sourceName,
         label: item.label,
-        bucketTexts: new Set<string>(),
-        valueTexts: new Set<string>(),
+        bucketTexts: new Set(),
+        valueTexts: new Set(),
       }
       summary.set(item.effectId, effect)
     }

@@ -8,7 +8,9 @@ import type {
   StaticBuildBaseMode,
   StaticBuildCatalogEntry,
   StaticBuildDriveDiscSetsInput,
+  StaticBuildEffectSummaryAccumulatorMap,
   StaticBuildEntryCaveatSummary,
+  StaticBuildEntryEffectSummaryAccumulator,
   StaticBuildResolvedLoadout,
   StaticBuildSourceDamageViewBucketLabelMap,
   StaticBuildSourceDamageViewEffectSummaryItem,
@@ -326,17 +328,8 @@ function summarizeSourceDamageViews(
 export function summarizeSourceDamageViewEffects(
   entries: StaticBuildSourceDamageViewEntry[],
 ): StaticBuildSourceDamageViewEffectSummaryItem[] {
-  const summary = new Map<
-    string,
-    {
-      effectId: string
-      sourceName: string
-      label: string
-      bucketTexts: Set<string>
-      valueTexts: Set<string>
-      entries: Set<string>
-    }
-  >()
+  const summary: StaticBuildEffectSummaryAccumulatorMap<StaticBuildEntryEffectSummaryAccumulator> =
+    new Map()
 
   for (const entry of entries) {
     if (!entry.build) continue
@@ -349,9 +342,9 @@ export function summarizeSourceDamageViewEffects(
           effectId: trace.effectId,
           sourceName: trace.sourceName,
           label: trace.label,
-          bucketTexts: new Set<string>(),
-          valueTexts: new Set<string>(),
-          entries: new Set<string>(),
+          bucketTexts: new Set(),
+          valueTexts: new Set(),
+          entries: new Set(),
         }
         summary.set(trace.effectId, item)
       }

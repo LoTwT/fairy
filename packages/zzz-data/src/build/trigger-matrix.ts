@@ -3,7 +3,9 @@ import type {
   ResolveStaticBuildTriggerMatrixResult,
   StaticBuildAgentId,
   StaticBuildAssumptionList,
+  StaticBuildEffectSummaryAccumulatorMap,
   StaticBuildEntryCaveatSummary,
+  StaticBuildRowEffectSummaryAccumulator,
   StaticBuildSourceDamageViewEntry,
   StaticBuildTriggerMatrixBucketLabelMap,
   StaticBuildTriggerMatrixEffectSummaryItem,
@@ -266,17 +268,8 @@ function summarizeTriggerMatrixRows(
 function summarizeTriggerMatrixEffects(
   rows: StaticBuildTriggerMatrixRow[],
 ): StaticBuildTriggerMatrixEffectSummaryItem[] {
-  const summary = new Map<
-    string,
-    {
-      effectId: string
-      sourceName: string
-      label: string
-      bucketTexts: Set<string>
-      valueTexts: Set<string>
-      rows: Set<string>
-    }
-  >()
+  const summary: StaticBuildEffectSummaryAccumulatorMap<StaticBuildRowEffectSummaryAccumulator> =
+    new Map()
 
   for (const row of rows) {
     if (!row.build) continue
@@ -289,9 +282,9 @@ function summarizeTriggerMatrixEffects(
           effectId: trace.effectId,
           sourceName: trace.sourceName,
           label: trace.label,
-          bucketTexts: new Set<string>(),
-          valueTexts: new Set<string>(),
-          rows: new Set<string>(),
+          bucketTexts: new Set(),
+          valueTexts: new Set(),
+          rows: new Set(),
         }
         summary.set(trace.effectId, item)
       }
