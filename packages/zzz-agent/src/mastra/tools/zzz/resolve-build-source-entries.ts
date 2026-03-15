@@ -17,9 +17,7 @@ import {
   buildSourceEntryCollectionSuccessResponse,
   buildToolScopeLabels,
   resolveBuildSourceEntriesInputSchema,
-  resolveBuildToolSourceEntriesContext,
-  resolveBuildToolSourceEntriesLoadoutContext,
-  resolveBuildToolSourceUtilitySupport,
+  resolveBuildToolSourceEntriesExecutionContext,
   resolveBuildToolUncoveredSourceEntryResponse,
 } from "./resolve-build-shared"
 
@@ -37,22 +35,15 @@ export const resolveBuildSourceEntries = createTool({
       ),
   }),
   execute: async (input) => {
-    const contextResolution = resolveBuildToolSourceEntriesContext({
-      scenario: input.scenario,
-      finalPanel: input.finalPanel,
-    })
-    if (!contextResolution.ok) {
-      return contextResolution.response
-    }
-    const { utilityOnly, scenario, panel } = contextResolution.context
-
-    const loadoutResolution = resolveBuildToolSourceEntriesLoadoutContext({
-      utilityOnly,
+    const contextResolution = resolveBuildToolSourceEntriesExecutionContext({
+      utilityOnly: false,
       scopeLabel: buildToolScopeLabels.sourceEntryCollection,
       supportedAgents: supportedStaticBuildAgents,
       supportedUtilityAgents: supportedStaticBuildUtilityAgents,
       supportedWEngines: supportedStaticBuildWEngines,
       supportedUtilityWEngines: supportedStaticBuildUtilityWEngines,
+      supportedSourceUtilityWEngines:
+        supportedStaticBuildSourceUtilityViewWEngines,
       supportedDriveDiscs: supportedStaticBuildDriveDiscs,
       agentQuery: input.agent,
       wEngineQuery: input.wEngine,
@@ -65,18 +56,22 @@ export const resolveBuildSourceEntries = createTool({
       agentMindscape: input.agentMindscape,
       coreSkillLevel: input.coreSkillLevel,
       wEngineRefinement: input.wEngineRefinement,
+      scenario: input.scenario,
+      finalPanel: input.finalPanel,
     })
-    if (!loadoutResolution.ok) {
-      return loadoutResolution.response
+    if (!contextResolution.ok) {
+      return contextResolution.response
     }
-    const { agent, compatibleWEngines, wEngine } = loadoutResolution
-
-    const sourceUtilitySupport = resolveBuildToolSourceUtilitySupport(
-      supportedStaticBuildSourceUtilityViewWEngines,
-      agent.specialty,
-    )
-    const supportedUtilityWEngines = sourceUtilitySupport.names
-    const { loadout } = loadoutResolution
+    const {
+      utilityOnly,
+      scenario,
+      panel,
+      agent,
+      compatibleWEngines,
+      wEngine,
+      loadout,
+      supportedUtilityWEngines,
+    } = contextResolution
 
     const collection = resolveStaticBuildSourceEntries({
       mode: input.mode,

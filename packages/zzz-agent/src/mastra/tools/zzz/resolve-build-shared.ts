@@ -287,6 +287,21 @@ export interface BuildToolResolvedSourceEntriesContext {
   panel: ResolveStaticBuildSourceEntriesInput["panel"]
 }
 
+export interface BuildToolResolvedSourceEntriesExecutionContext<
+  TAgent extends CatalogItem,
+  TWEngine extends CatalogItem,
+> {
+  ok: true
+  utilityOnly: boolean
+  scenario: ResolveStaticBuildSourceEntriesInput["scenario"]
+  panel: ResolveStaticBuildSourceEntriesInput["panel"]
+  agent: TAgent
+  compatibleWEngines: readonly TWEngine[]
+  wEngine: TWEngine | undefined
+  loadout: StaticBuildLoadoutInput
+  supportedUtilityWEngines: string[]
+}
+
 export interface BuildToolResolveSourceUtilityCoverageResponseOptions<
   TWEngine extends CatalogItem,
 > {
@@ -313,6 +328,20 @@ export interface BuildToolResolveSourceEntryCoverageResponseOptions<
   compatibleWEngines: readonly TWEngine[]
   supportedSourceViewAgents: readonly TSourceViewAgent[]
   supportedUtilityWEngines: string[]
+}
+
+export interface BuildToolResolveSourceEntriesExecutionContextOptions<
+  TAgent extends CatalogItem & { specialty: keyof typeof specialtyLabels },
+  TWEngine extends CatalogItem & { specialty: keyof typeof specialtyLabels },
+  TDriveDisc extends CatalogItem,
+> extends BuildToolResolveSourceEntriesLoadoutContextOptions<
+  TAgent,
+  TWEngine,
+  TDriveDisc
+> {
+  scenario: BuildToolScenarioInput | undefined
+  finalPanel: z.input<typeof finalPanelSchema> | undefined
+  supportedSourceUtilityWEngines: readonly TWEngine[]
 }
 
 export interface BuildToolResolvedTriggeredDamageContext<
@@ -1353,6 +1382,62 @@ export function resolveBuildToolSourceEntriesContext(input: {
       scenario,
       panel,
     },
+  }
+}
+
+export function resolveBuildToolSourceEntriesExecutionContext<
+  TAgent extends CatalogItem & { specialty: keyof typeof specialtyLabels },
+  TWEngine extends CatalogItem & { specialty: keyof typeof specialtyLabels },
+  TDriveDisc extends CatalogItem,
+>(
+  options: BuildToolResolveSourceEntriesExecutionContextOptions<
+    TAgent,
+    TWEngine,
+    TDriveDisc
+  >,
+):
+  | BuildToolResolvedSourceEntriesExecutionContext<TAgent, TWEngine>
+  | {
+      ok: false
+      response:
+        | BuildToolMissingFinalPanelResponse
+        | BuildToolUnsupportedAnomalyTypeResponse
+        | BuildToolUnsupportedAgentResponse
+        | BuildToolUnsupportedWEngineResponse
+        | BuildToolIncompatibleWEngineResponse
+        | BuildToolUnsupportedDriveDiscResponse
+    } {
+  const sourceEntriesContext = resolveBuildToolSourceEntriesContext({
+    scenario: options.scenario,
+    finalPanel: options.finalPanel,
+  })
+  if (!sourceEntriesContext.ok) {
+    return sourceEntriesContext
+  }
+
+  const loadoutResolution = resolveBuildToolSourceEntriesLoadoutContext({
+    ...options,
+    utilityOnly: sourceEntriesContext.context.utilityOnly,
+  })
+  if (!loadoutResolution.ok) {
+    return loadoutResolution
+  }
+
+  const sourceUtilitySupport = resolveBuildToolSourceUtilitySupport(
+    options.supportedSourceUtilityWEngines,
+    loadoutResolution.agent.specialty,
+  )
+
+  return {
+    ok: true,
+    utilityOnly: sourceEntriesContext.context.utilityOnly,
+    scenario: sourceEntriesContext.context.scenario,
+    panel: sourceEntriesContext.context.panel,
+    agent: loadoutResolution.agent,
+    compatibleWEngines: loadoutResolution.compatibleWEngines,
+    wEngine: loadoutResolution.wEngine,
+    loadout: loadoutResolution.loadout,
+    supportedUtilityWEngines: sourceUtilitySupport.names,
   }
 }
 
