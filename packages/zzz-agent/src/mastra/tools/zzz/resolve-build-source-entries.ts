@@ -17,8 +17,8 @@ import {
   buildSourceEntryCollectionSuccessResponse,
   buildToolScopeLabels,
   resolveBuildSourceEntriesInputSchema,
-  resolveBuildToolLoadoutContext,
   resolveBuildToolSourceEntriesContext,
+  resolveBuildToolSourceEntriesLoadoutContext,
   resolveBuildToolSourceUtilitySupport,
   resolveBuildToolUncoveredSourceEntryResponse,
 } from "./resolve-build-shared"
@@ -46,24 +46,21 @@ export const resolveBuildSourceEntries = createTool({
     }
     const { utilityOnly, scenario, panel } = contextResolution.context
 
-    const agentCatalog = utilityOnly
-      ? supportedStaticBuildUtilityAgents
-      : supportedStaticBuildAgents
-
-    const loadoutResolution = resolveBuildToolLoadoutContext({
+    const loadoutResolution = resolveBuildToolSourceEntriesLoadoutContext({
+      utilityOnly,
       scopeLabel: buildToolScopeLabels.sourceEntryCollection,
-      supportedAgents: agentCatalog,
-      supportedWEngines: utilityOnly
-        ? supportedStaticBuildUtilityWEngines
-        : supportedStaticBuildWEngines,
+      supportedAgents: supportedStaticBuildAgents,
+      supportedUtilityAgents: supportedStaticBuildUtilityAgents,
+      supportedWEngines: supportedStaticBuildWEngines,
+      supportedUtilityWEngines: supportedStaticBuildUtilityWEngines,
       supportedDriveDiscs: supportedStaticBuildDriveDiscs,
       agentQuery: input.agent,
       wEngineQuery: input.wEngine,
       driveDiscs: input.driveDiscs,
       getCompatibleWEngines: (agent) =>
-        utilityOnly
-          ? getCompatibleStaticBuildUtilityWEngines(agent.specialty)
-          : getCompatibleStaticBuildWEngines(agent.specialty),
+        getCompatibleStaticBuildWEngines(agent.specialty),
+      getCompatibleUtilityWEngines: (agent) =>
+        getCompatibleStaticBuildUtilityWEngines(agent.specialty),
       agentLevel: input.agentLevel,
       agentMindscape: input.agentMindscape,
       coreSkillLevel: input.coreSkillLevel,

@@ -249,6 +249,30 @@ export interface BuildToolResolveLoadoutContextOptions<
   getCompatibleWEngines: (agent: TAgent) => readonly TWEngine[]
 }
 
+export interface BuildToolResolveSourceEntriesLoadoutContextOptions<
+  TAgent extends CatalogItem & { specialty: keyof typeof specialtyLabels },
+  TWEngine extends CatalogItem & { specialty: keyof typeof specialtyLabels },
+  TDriveDisc extends CatalogItem,
+> extends BuildToolProgressionInput {
+  utilityOnly: boolean
+  scopeLabel: BuildToolScopeLabel
+  supportedAgents: readonly TAgent[]
+  supportedUtilityAgents: readonly TAgent[]
+  supportedWEngines: readonly TWEngine[]
+  supportedUtilityWEngines: readonly TWEngine[]
+  supportedDriveDiscs: readonly TDriveDisc[]
+  agentQuery: string
+  wEngineQuery?: string
+  driveDiscs?:
+    | Array<{
+        name: string
+        pieces: 2 | 4
+      }>
+    | undefined
+  getCompatibleWEngines: (agent: TAgent) => readonly TWEngine[]
+  getCompatibleUtilityWEngines: (agent: TAgent) => readonly TWEngine[]
+}
+
 export interface BuildToolResolveTriggeredDamageContextOptions<
   TAgent extends CatalogItem & { specialty: keyof typeof specialtyLabels },
   TWEngine extends CatalogItem & { specialty: keyof typeof specialtyLabels },
@@ -955,6 +979,43 @@ export function resolveBuildToolLoadoutContext<
       wEngineRefinement: options.wEngineRefinement,
     }),
   }
+}
+
+export function resolveBuildToolSourceEntriesLoadoutContext<
+  TAgent extends CatalogItem & { specialty: keyof typeof specialtyLabels },
+  TWEngine extends CatalogItem & { specialty: keyof typeof specialtyLabels },
+  TDriveDisc extends CatalogItem,
+>(
+  options: BuildToolResolveSourceEntriesLoadoutContextOptions<
+    TAgent,
+    TWEngine,
+    TDriveDisc
+  >,
+):
+  | BuildToolResolvedLoadoutContext<TAgent, TWEngine>
+  | BuildToolRejectedAgent
+  | BuildToolRejectedWEngine
+  | BuildToolRejectedDriveDiscSets {
+  return resolveBuildToolLoadoutContext({
+    scopeLabel: options.scopeLabel,
+    supportedAgents: options.utilityOnly
+      ? options.supportedUtilityAgents
+      : options.supportedAgents,
+    supportedWEngines: options.utilityOnly
+      ? options.supportedUtilityWEngines
+      : options.supportedWEngines,
+    supportedDriveDiscs: options.supportedDriveDiscs,
+    agentQuery: options.agentQuery,
+    wEngineQuery: options.wEngineQuery,
+    driveDiscs: options.driveDiscs,
+    getCompatibleWEngines: options.utilityOnly
+      ? options.getCompatibleUtilityWEngines
+      : options.getCompatibleWEngines,
+    agentLevel: options.agentLevel,
+    agentMindscape: options.agentMindscape,
+    coreSkillLevel: options.coreSkillLevel,
+    wEngineRefinement: options.wEngineRefinement,
+  })
 }
 
 export function resolveBuildToolTriggeredDamageContext<
