@@ -1079,3 +1079,4 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 328. `V328` combat tag collection contracts：当前阶段已收口；`combatTags` 在 `resolver` 和 `skill-matrix template` 里的 collection shape 已统一收成显式公开 contract，不改变任何运行时行为，见 [静态构筑解析系统 V328](./static-build-resolver-v328.md)
 329. `V329` bucket label map contracts：当前阶段已收口；`resolver / source-damage-view / trigger-matrix / skill-matrix` 中固定的 bucket label map 已统一收成显式公开 contract，不改变任何运行时行为，见 [静态构筑解析系统 V329](./static-build-resolver-v329.md)
 330. `V330` effect summary accumulator contracts：当前阶段已收口；`resolver / source-damage-view / trigger-matrix / skill-matrix` 中 effect-summary reducer 仍直接使用的 `Map<string>` / `Set<string>` 聚合容器已统一收成显式公开 contract，不改变任何运行时行为，见 [静态构筑解析系统 V330](./static-build-resolver-v330.md)
+331. `V331` coverage id set contracts：当前阶段已收口；`source-view / source-utility-view` 的 coverage helper 仍直接使用的 `Set<string>` 已统一收成显式公开 contract，不改变任何运行时行为，见 [静态构筑解析系统 V331](./static-build-resolver-v331.md)

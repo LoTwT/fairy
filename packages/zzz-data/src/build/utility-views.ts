@@ -14,6 +14,7 @@ import type {
   StaticBuildSourceUtilityViewRequirementSummary,
   StaticBuildSourceUtilityViewSummary,
   StaticBuildWEngineId,
+  StaticBuildWEngineIdSet,
   StaticBuildWEngineRefinement,
 } from "./types.js"
 import {
@@ -36,7 +37,9 @@ const utilityViewWEngineIds = [
   "13106",
   "14117",
 ] as const
-const utilityViewWEngineIdSet = new Set<string>(utilityViewWEngineIds)
+const utilityViewWEngineIdSet: StaticBuildWEngineIdSet = new Set(
+  utilityViewWEngineIds,
+)
 
 const lunarNovilunaEnergyRefund = [3, 3.5, 4, 4.5, 5] as const
 const magneticStormCharlieEnergyRefund = [3.5, 4, 4.5, 5, 5.5] as const

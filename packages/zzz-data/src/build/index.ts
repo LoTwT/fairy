@@ -62,6 +62,7 @@ export type {
   StaticBuildActionName,
   StaticBuildAgentCatalogEntry,
   StaticBuildAgentId,
+  StaticBuildAgentIdSet,
   StaticBuildAgentLevel,
   StaticBuildAgentMindscape,
   StaticBuildAlias,
@@ -280,6 +281,7 @@ export type {
   StaticBuildVulnerabilityBonus,
   StaticBuildWEngineCatalogEntry,
   StaticBuildWEngineId,
+  StaticBuildWEngineIdSet,
   StaticBuildWEngineRefinement,
 } from "./types.js"
 

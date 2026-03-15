@@ -4,6 +4,7 @@ import type {
   ResolveStaticBuildResult,
   ResolveStaticBuildSourceDamageViewsResult,
   StaticBuildAgentId,
+  StaticBuildAgentIdSet,
   StaticBuildAssumptionList,
   StaticBuildBaseMode,
   StaticBuildCatalogEntry,
@@ -38,7 +39,7 @@ import {
 } from "./resolver.js"
 
 const sourceViewAgentIds = ["1091", "1171", "1331", "1401", "1501"] as const
-const sourceViewAgentIdSet = new Set<string>(sourceViewAgentIds)
+const sourceViewAgentIdSet: StaticBuildAgentIdSet = new Set(sourceViewAgentIds)
 
 const vivianExflowRatios = {
   ether: [0.0307, 0.0359, 0.0411, 0.0463, 0.0515, 0.0565, 0.0615],
