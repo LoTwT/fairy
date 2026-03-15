@@ -1050,4 +1050,5 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 299. `V299` build effect-summary text contracts：当前阶段已收口；effect-summary 公开 contract 中的 `bucket / value / condition` 已统一复用显式公开 type，不改变任何运行时行为，见 [静态构筑解析系统 V299](./static-build-resolver-v299.md)
 300. `V300` build display name contracts：当前阶段已收口；catalog / profile 公开 contract 中的通用 `name` 已统一复用显式公开 type，不改变任何运行时行为，见 [静态构筑解析系统 V300](./static-build-resolver-v300.md)
 301. `V301` build skill-matrix group summary key contracts：当前阶段已收口；`skill-matrix group summary.key` 已统一复用既有 `StaticBuildSkillMatrixGroupKey`，不改变任何运行时行为，见 [静态构筑解析系统 V301](./static-build-resolver-v301.md)
-302. `V302` build trace reason contracts：当前阶段进行中；当前目标是为 trace item 公开 contract 中的 `reason` 补显式公开 type，并统一复用，不改变任何运行时行为，见 [静态构筑解析系统 V302](./static-build-resolver-v302.md)
+302. `V302` build trace reason contracts：当前阶段已收口；trace item 公开 contract 中的 `reason` 已统一复用显式公开 type，不改变任何运行时行为，见 [静态构筑解析系统 V302](./static-build-resolver-v302.md)
+303. `V303` build source-utility label contracts：当前阶段进行中；当前目标是为 `source-utility-view entry` 公开 contract 中的 `triggerLabel / conditionLabel` 补显式公开 type，并统一复用，不改变任何运行时行为，见 [静态构筑解析系统 V303](./static-build-resolver-v303.md)

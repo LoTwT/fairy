@@ -25,6 +25,8 @@ export type StaticBuildEffectSummaryCondition = string
 export type StaticBuildGroupLabel = string
 export type StaticBuildDisplayName = string
 export type StaticBuildTraceReason = string
+export type StaticBuildTriggerLabel = string
+export type StaticBuildConditionLabel = string
 export type StaticBuildBaseDamageStat = "attack" | "sheerForce"
 export type StaticBuildSpecialty = AgentSpecialty
 
@@ -896,8 +898,8 @@ export interface StaticBuildSourceUtilityViewEntry {
   requirementSummary: StaticBuildSourceUtilityViewRequirementSummary
   value: StaticBuildUtilityValue
   unit: "energy" | "energy-per-second" | "decibel"
-  triggerLabel?: string
-  conditionLabel?: string
+  triggerLabel?: StaticBuildTriggerLabel
+  conditionLabel?: StaticBuildConditionLabel
   cooldownSeconds?: StaticBuildCooldownSeconds
   summary: StaticBuildSourceUtilityViewEntrySummary
   diagnostics: StaticBuildDiagnosticEntry[]
