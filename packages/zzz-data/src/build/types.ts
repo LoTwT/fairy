@@ -133,6 +133,10 @@ export type StaticBuildBaseDamageValue = number
 export type StaticBuildExpectedTotal = number
 export type StaticBuildCriticalTotal = number
 export type StaticBuildNonCriticalTotal = number
+export type StaticBuildDiagnosticCount = number
+export type StaticBuildSourceNoteCount = number
+export type StaticBuildAssumptionCount = number
+export type StaticBuildUnsupportedEffectCount = number
 export type StaticBuildDefenderBaseDefense = number
 export type StaticBuildDefenderResistance = number
 export type StaticBuildDefenseBonus = number
@@ -522,16 +526,16 @@ export interface StaticBuildDiagnosticEntry {
 export interface StaticBuildDiagnosticGroupSummary {
   key: StaticBuildDiagnosticKind
   label: string
-  count: number
+  count: StaticBuildDiagnosticCount
 }
 
 export interface StaticBuildDiagnosticOwnerGroupSummary {
   key: StaticBuildDiagnosticOwner
-  count: number
+  count: StaticBuildDiagnosticCount
 }
 
 export interface StaticBuildDiagnosticSummary {
-  count: number
+  count: StaticBuildDiagnosticCount
   hasDiagnostics: boolean
   hasDefaultedInput: boolean
   hasCoverageGap: boolean
@@ -544,16 +548,16 @@ export interface StaticBuildDiagnosticSummary {
 export interface StaticBuildSourceNoteGroupSummary {
   key: StaticBuildSourceNoteStatus
   label: string
-  count: number
+  count: StaticBuildSourceNoteCount
 }
 
 export interface StaticBuildSourceNoteOwnerGroupSummary {
   key: StaticBuildSourceNoteOwner
-  count: number
+  count: StaticBuildSourceNoteCount
 }
 
 export interface StaticBuildSourceNoteSummary {
-  count: number
+  count: StaticBuildSourceNoteCount
   hasSourceNotes: boolean
   hasMissingInput: boolean
   hasProcessOnly: boolean
@@ -563,8 +567,8 @@ export interface StaticBuildSourceNoteSummary {
 }
 
 export interface StaticBuildCaveatSummary {
-  assumptionCount: number
-  unsupportedEffectCount: number
+  assumptionCount: StaticBuildAssumptionCount
+  unsupportedEffectCount: StaticBuildUnsupportedEffectCount
   hasAssumptions: boolean
   hasUnsupportedEffects: boolean
 }
@@ -576,10 +580,10 @@ export interface StaticBuildResolveSummary {
   critTotal: StaticBuildCriticalTotal
   noCritTotal: StaticBuildNonCriticalTotal
   formulaMultipliers: Record<string, number>
-  assumptionCount: number
-  diagnosticCount: number
-  sourceNoteCount: number
-  unsupportedEffectCount: number
+  assumptionCount: StaticBuildAssumptionCount
+  diagnosticCount: StaticBuildDiagnosticCount
+  sourceNoteCount: StaticBuildSourceNoteCount
+  unsupportedEffectCount: StaticBuildUnsupportedEffectCount
   hasDiagnostics: boolean
   hasSourceNotes: boolean
   hasUnsupportedEffects: boolean
@@ -674,7 +678,7 @@ export interface StaticBuildRequirementSummary<TKey extends string = string> {
 }
 
 export interface StaticBuildAssumptionSummary {
-  count: number
+  count: StaticBuildAssumptionCount
   hasAssumptions: boolean
 }
 
@@ -850,9 +854,9 @@ export interface StaticBuildSourceUtilityViewEntrySummary {
   targetScope: StaticBuildSourceUtilityViewTargetScope
   requirementCount: number
   hasUnsatisfiedRequirements: boolean
-  diagnosticCount: number
-  sourceNoteCount: number
-  assumptionCount: number
+  diagnosticCount: StaticBuildDiagnosticCount
+  sourceNoteCount: StaticBuildSourceNoteCount
+  assumptionCount: StaticBuildAssumptionCount
   hasUnsupported: boolean
 }
 
@@ -888,7 +892,7 @@ export interface StaticBuildSourceUtilityViewSummary {
 }
 
 export interface StaticBuildEntryCaveatSummary {
-  assumptionCount: number
+  assumptionCount: StaticBuildAssumptionCount
   unsupportedCount: number
   hasAssumptions: boolean
   hasUnsupported: boolean
