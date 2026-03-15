@@ -1029,4 +1029,5 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 278. `V278` build assumption list contracts：当前阶段已收口；build-layer 已新增显式 `StaticBuildAssumptionList`，并让 single-build / source views / source-entry / trigger-matrix / skill-matrix 的 `assumptions` 统一复用这个 type，不改变任何运行时行为，见 [静态构筑解析系统 V278](./static-build-resolver-v278.md)
 279. `V279` build unsupported-effect list contracts：当前阶段已收口；build-layer 已新增显式 `StaticBuildUnsupportedEffectList`，并让 single-build / skill-matrix 的 `unsupportedEffects` 统一复用这个 type，不改变任何运行时行为，见 [静态构筑解析系统 V279](./static-build-resolver-v279.md)
 280. `V280` build combat-tag list contracts：当前阶段已收口；build-layer 已新增显式 `StaticBuildCombatTagList`，并让 build-layer 公开 contract 中的 `combatTags` 统一复用这个 type，不改变任何运行时行为，见 [静态构筑解析系统 V280](./static-build-resolver-v280.md)
-281. `V281` build alias list contracts：当前阶段进行中；当前目标是为 build catalog 公开 contract 中的 `aliases` 补显式公开列表 type，并统一复用，不改变任何运行时行为，见 [静态构筑解析系统 V281](./static-build-resolver-v281.md)
+281. `V281` build alias list contracts：当前阶段已收口；build-layer 已新增显式 `StaticBuildAliasList`，并让 build catalog 公开 contract 中的 `aliases` 统一复用这个 type，不改变任何运行时行为，见 [静态构筑解析系统 V281](./static-build-resolver-v281.md)
+282. `V282` build source-note key list contracts：当前阶段进行中；当前目标是为 source-note 公开 contract 中的 `keys` 补显式公开列表 type，并统一复用，不改变任何运行时行为，见 [静态构筑解析系统 V282](./static-build-resolver-v282.md)

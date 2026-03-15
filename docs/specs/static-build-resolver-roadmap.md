@@ -10317,5 +10317,35 @@ caveatSummary` 这些兼容字段补齐。
 - `V281.1` 已完成：冻结到 alias 列表 contract
 - `V281.2` 已完成：`types.ts` 已让 `StaticBuildCatalogEntry.aliases` 统一复用显式 type
 - `V281.3` 已完成：`build/index.ts` 已正式导出这个 type
-- `V281.4` 进行中：等待现有 build / agent 测试与 runtime 校验完成
-- `V281.5` 进行中：等待 roadmap、索引与架构文档同步
+- `V281.4` 已完成：现有 build / agent 测试与 runtime 校验已覆盖
+- `V281.5` 已完成：roadmap、索引与架构文档已同步
+
+## 285. V282 build source-note key list contracts
+
+`V281` 收口后，source-note 公开 contract 中的 `keys` 仍以匿名 `string[]` 暴露，和前面的显式公开 contract 仍不对称。
+
+`V282` 只解决一件事：
+
+1. 为 source-note key 列表补显式 type，并让 `StaticBuildSourceNoteEntry` 统一复用，不改变任何运行时行为
+
+### 285.1 分阶段
+
+1. `V282.1` scope freeze
+2. `V282.2` type alignment
+3. `V282.3` export alignment
+4. `V282.4` tests / runtime alignment
+5. `V282.5` docs closeout
+
+### 285.2 非目标
+
+1. 不改变 source-note keys 的字符串内容、顺序或使用逻辑
+2. 不处理 diagnostic keys
+3. 不处理 skill qualifiers
+
+### 285.3 当前状态
+
+- `V282.1` 已完成：冻结到 source-note key 列表 contract
+- `V282.2` 已完成：`types.ts` 已让 `StaticBuildSourceNoteEntry.keys` 统一复用显式 type
+- `V282.3` 已完成：`build/index.ts` 已正式导出这个 type
+- `V282.4` 进行中：等待现有 build / agent 测试与 runtime 校验完成
+- `V282.5` 进行中：等待 roadmap、索引与架构文档同步

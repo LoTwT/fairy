@@ -164,6 +164,7 @@ export type {
   StaticBuildSourceNoteGuidance,
   StaticBuildSourceNoteGuidanceKind,
   StaticBuildSourceNoteGuidanceTarget,
+  StaticBuildSourceNoteKeyList,
   StaticBuildSourceNoteOwner,
   StaticBuildSourceNoteStatus,
   StaticBuildSourceUtilityViewCount,

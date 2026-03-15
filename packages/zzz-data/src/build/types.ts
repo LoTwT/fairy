@@ -167,6 +167,7 @@ export type StaticBuildAssumptionList = string[]
 export type StaticBuildUnsupportedEffectList = string[]
 export type StaticBuildCombatTagList = string[]
 export type StaticBuildAliasList = string[]
+export type StaticBuildSourceNoteKeyList = string[]
 export type StaticBuildDefenderBaseDefense = number
 export type StaticBuildDefenderResistance = number
 export type StaticBuildDefenseBonus = number
@@ -527,7 +528,7 @@ export interface StaticBuildSourceNoteEntry {
   owner: StaticBuildSourceNoteOwner
   status: StaticBuildSourceNoteStatus
   guidance: StaticBuildSourceNoteGuidance
-  keys: string[]
+  keys: StaticBuildSourceNoteKeyList
   message: string
 }
 
