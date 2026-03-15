@@ -23,11 +23,18 @@ import type {
   StaticBuildAliasList,
   StaticBuildAssumptionList,
   StaticBuildAssumptionSummary,
+  StaticBuildAttack,
+  StaticBuildBaseDamageValue,
   StaticBuildBaseMode,
   StaticBuildBucket,
+  StaticBuildBucketValueMap,
   StaticBuildCanonicalLabel,
   StaticBuildCaveatSummary,
   StaticBuildCombatTagList,
+  StaticBuildConditionLabel,
+  StaticBuildCooldownSeconds,
+  StaticBuildCritDamage,
+  StaticBuildCritRate,
   StaticBuildDiagnosticEntry,
   StaticBuildDiagnosticKeyList,
   StaticBuildDiagnosticKind,
@@ -46,7 +53,10 @@ import type {
   StaticBuildEntryLabel,
   StaticBuildFormulaMultiplierMap,
   StaticBuildGroupLabel,
+  StaticBuildHP,
   StaticBuildMode,
+  StaticBuildPenetrationRate,
+  StaticBuildPenetrationValue,
   StaticBuildProfileResult,
   StaticBuildRequirementKey,
   StaticBuildRequirementSummary,
@@ -58,6 +68,7 @@ import type {
   StaticBuildResolveSummary,
   StaticBuildRowId,
   StaticBuildRowLabel,
+  StaticBuildSegmentLabel,
   StaticBuildSkillMatrixEffectSummaryItem,
   StaticBuildSkillMatrixGroupKey,
   StaticBuildSkillMatrixRow,
@@ -87,6 +98,8 @@ import type {
   StaticBuildSourceNoteOwner,
   StaticBuildSourceNoteStatus,
   StaticBuildSourceNoteSummary,
+  StaticBuildSourceStatId,
+  StaticBuildSourceStatName,
   StaticBuildSourceUtilityViewEntry,
   StaticBuildSourceUtilityViewEntrySummary,
   StaticBuildSourceUtilityViewGroupKey,
@@ -99,11 +112,15 @@ import type {
   StaticBuildTraceItem,
   StaticBuildTraceModifier,
   StaticBuildTraceReason,
+  StaticBuildTriggerLabel,
   StaticBuildTriggerMatrixEffectSummaryItem,
   StaticBuildTriggerMatrixRow,
   StaticBuildTriggerMatrixRowMeta,
   StaticBuildTriggerMatrixSummary,
   StaticBuildUnsupportedEffectList,
+  StaticBuildUtilityValue,
+  StaticBuildVariableBucketList,
+  StaticBuildVariableFormulaMultiplierList,
 } from "./types.js"
 
 export type CompactStaticBuildSourceType = "agent" | "w-engine" | "drive-disc"
@@ -191,7 +208,18 @@ export type CompactStaticBuildTraceStatus =
 export type CompactStaticBuildSkillTag = StaticBuildSkillTag
 export type CompactStaticBuildFormulaMultiplierMap =
   StaticBuildFormulaMultiplierMap
+export type CompactStaticBuildBucketValueMap = StaticBuildBucketValueMap
+export type CompactStaticBuildVariableBucketList = StaticBuildVariableBucketList
+export type CompactStaticBuildVariableFormulaMultiplierList =
+  StaticBuildVariableFormulaMultiplierList
 export type CompactStaticBuildDisplayName = StaticBuildDisplayName
+export type CompactStaticBuildAttack = StaticBuildAttack
+export type CompactStaticBuildHP = StaticBuildHP
+export type CompactStaticBuildCritRate = StaticBuildCritRate
+export type CompactStaticBuildCritDamage = StaticBuildCritDamage
+export type CompactStaticBuildPenetrationRate = StaticBuildPenetrationRate
+export type CompactStaticBuildPenetrationValue = StaticBuildPenetrationValue
+export type CompactStaticBuildBaseDamageValue = StaticBuildBaseDamageValue
 export type CompactStaticBuildEntryId = StaticBuildEntryId
 export type CompactStaticBuildEntryLabel = StaticBuildEntryLabel
 export type CompactStaticBuildRowId = StaticBuildRowId
@@ -201,6 +229,8 @@ export type CompactStaticBuildStableKey = StaticBuildStableKey
 export type CompactStaticBuildSourceId = StaticBuildSourceId
 export type CompactStaticBuildSourceViewId = StaticBuildSourceViewId
 export type CompactStaticBuildSourceName = StaticBuildSourceName
+export type CompactStaticBuildSourceStatId = StaticBuildSourceStatId
+export type CompactStaticBuildSourceStatName = StaticBuildSourceStatName
 export type CompactStaticBuildEffectId = StaticBuildEffectId
 export type CompactStaticBuildEffectLabel = StaticBuildEffectLabel
 export type CompactStaticBuildEffectSummaryBucket =
@@ -209,6 +239,9 @@ export type CompactStaticBuildEffectSummaryValue = StaticBuildEffectSummaryValue
 export type CompactStaticBuildEffectSummaryCondition =
   StaticBuildEffectSummaryCondition
 export type CompactStaticBuildTraceReason = StaticBuildTraceReason
+export type CompactStaticBuildTriggerLabel = StaticBuildTriggerLabel
+export type CompactStaticBuildConditionLabel = StaticBuildConditionLabel
+export type CompactStaticBuildSegmentLabel = StaticBuildSegmentLabel
 export type CompactStaticBuildGroupLabel = StaticBuildGroupLabel
 export type CompactStaticBuildSkillMatrixGroupKey =
   StaticBuildSkillMatrixGroupKey
@@ -229,6 +262,8 @@ export type CompactStaticBuildSkillQualifierList = StaticBuildSkillQualifierList
 export type CompactStaticBuildRequirementKey = StaticBuildRequirementKey
 export type CompactStaticBuildDiagnosticMessage = StaticBuildDiagnosticMessage
 export type CompactStaticBuildSourceNoteMessage = StaticBuildSourceNoteMessage
+export type CompactStaticBuildUtilityValue = StaticBuildUtilityValue
+export type CompactStaticBuildCooldownSeconds = StaticBuildCooldownSeconds
 
 export interface CompactStaticBuildResult {
   profile: CompactStaticBuildProfile
@@ -708,8 +743,8 @@ export interface CompactStaticBuildSkillMatrixRowMeta {
   stableKey: CompactStaticBuildStableKey
   templateSource: CompactStaticBuildSkillMatrixTemplateSource
   sourceSkillTypeId: number
-  sourceStatId: string
-  sourceStatName: string
+  sourceStatId: CompactStaticBuildSourceStatId
+  sourceStatName: CompactStaticBuildSourceStatName
   sourceOccurrence: number
   attributeSource: CompactStaticBuildSkillMatrixAttributeSource
   templateCombatTags: CompactStaticBuildCombatTagList
@@ -717,7 +752,7 @@ export interface CompactStaticBuildSkillMatrixRowMeta {
   aggregationType: CompactStaticBuildSkillMatrixAggregationType
   isAdditionalDamage: boolean
   variantAxis?: CompactStaticBuildSkillMatrixVariantAxis
-  segmentLabel?: string
+  segmentLabel?: CompactStaticBuildSegmentLabel
   segmentIndex?: number
   targetSize?: CompactStaticBuildTargetSize
 }
@@ -726,10 +761,10 @@ export interface CompactStaticBuildSkillMatrixGroupSummary {
   key: CompactStaticBuildSkillMatrixGroupKey
   label: CompactStaticBuildGroupLabel
   count: number
-  commonBuckets: Record<string, number>
-  variableBuckets: string[]
+  commonBuckets: CompactStaticBuildBucketValueMap
+  variableBuckets: CompactStaticBuildVariableBucketList
   commonFormulaMultipliers: CompactStaticBuildFormulaMultiplierMap
-  variableFormulaMultipliers: string[]
+  variableFormulaMultipliers: CompactStaticBuildVariableFormulaMultiplierList
   effectSummary: CompactStaticBuildSkillMatrixEffectSummaryItem[]
   requirementSummary: CompactStaticBuildSourceDamageViewRequirementSummary
   assumptionSummary: CompactStaticBuildAssumptionSummary
@@ -743,18 +778,18 @@ export interface CompactStaticBuildSkillMatrixGroupSummary {
 export interface CompactStaticBuildSkillMatrixSummary {
   rowCount: number
   baseDamageStat: CompactStaticBuildBaseDamageStat
-  baseDamageValue: number
-  attack?: number
-  hp?: number
+  baseDamageValue: CompactStaticBuildBaseDamageValue
+  attack?: CompactStaticBuildAttack
+  hp?: CompactStaticBuildHP
   sheerForce?: number
-  critRate: number
-  critDamage: number
-  penetrationRate: number
-  penetrationValue: number
-  commonBuckets: Record<string, number>
-  variableBuckets: string[]
+  critRate: CompactStaticBuildCritRate
+  critDamage: CompactStaticBuildCritDamage
+  penetrationRate: CompactStaticBuildPenetrationRate
+  penetrationValue: CompactStaticBuildPenetrationValue
+  commonBuckets: CompactStaticBuildBucketValueMap
+  variableBuckets: CompactStaticBuildVariableBucketList
   commonFormulaMultipliers: CompactStaticBuildFormulaMultiplierMap
-  variableFormulaMultipliers: string[]
+  variableFormulaMultipliers: CompactStaticBuildVariableFormulaMultiplierList
   effectSummary: CompactStaticBuildSkillMatrixEffectSummaryItem[]
   requirementSummary: CompactStaticBuildSourceDamageViewRequirementSummary
   assumptionSummary: CompactStaticBuildAssumptionSummary
@@ -1539,11 +1574,11 @@ export interface StaticBuildCompactSourceUtilityViewEntry {
   targetScope: CompactStaticBuildSourceUtilityTargetScope
   requirements?: CompactStaticBuildSourceUtilityViewRequirement[]
   requirementSummary: CompactStaticBuildSourceUtilityViewRequirementSummary
-  value: number
+  value: CompactStaticBuildUtilityValue
   unit: CompactStaticBuildSourceUtilityUnit
-  triggerLabel?: string
-  conditionLabel?: string
-  cooldownSeconds?: number
+  triggerLabel?: CompactStaticBuildTriggerLabel
+  conditionLabel?: CompactStaticBuildConditionLabel
+  cooldownSeconds?: CompactStaticBuildCooldownSeconds
   summary: CompactStaticBuildSourceUtilityViewEntrySummary
   diagnostics?: CompactStaticBuildDiagnosticEntry[]
   diagnosticSummary: CompactStaticBuildDiagnosticSummary
@@ -1560,7 +1595,7 @@ export type StaticBuildCompactSourceEntry =
   | StaticBuildCompactSourceUtilityViewEntry
 
 export interface CompactStaticBuildSourceUtilityViewEntrySummary {
-  value: number
+  value: CompactStaticBuildUtilityValue
   unit: CompactStaticBuildSourceUtilityUnit
   resolutionMode: CompactStaticBuildSourceUtilityResolutionMode
   targetScope: CompactStaticBuildSourceUtilityTargetScope

@@ -11256,5 +11256,46 @@ caveatSummary` 这些兼容字段补齐。
 
 - `V312.1` 已完成：范围冻结到 source/trigger compact text contract
 - `V312.2` 已完成：`compact.ts` 已统一复用这批显式 compact alias
-- `V312.3` 待开始：校验与提交
+- `V312.3` 已完成：全量校验与提交已通过
 - `V312.4` 已完成：roadmap、索引与架构文档已同步
+
+## 316. V313 compact matrix and utility scalar contracts
+
+### 316.1 目标
+
+`V313` 只解决一件事：
+
+- 为 `compact.ts` 中 `skill-matrix` 与 `source-utility-view` 剩余最大的匿名 scalar/list contract 补显式 compact alias
+
+### 316.2 范围
+
+1. `CompactStaticBuildBucketValueMap`
+2. `CompactStaticBuildVariableBucketList`
+3. `CompactStaticBuildVariableFormulaMultiplierList`
+4. `CompactStaticBuildAttack`
+5. `CompactStaticBuildHP`
+6. `CompactStaticBuildCritRate`
+7. `CompactStaticBuildCritDamage`
+8. `CompactStaticBuildPenetrationRate`
+9. `CompactStaticBuildPenetrationValue`
+10. `CompactStaticBuildBaseDamageValue`
+11. `CompactStaticBuildSourceStatId`
+12. `CompactStaticBuildSourceStatName`
+13. `CompactStaticBuildSegmentLabel`
+14. `CompactStaticBuildUtilityValue`
+15. `CompactStaticBuildCooldownSeconds`
+16. `CompactStaticBuildTriggerLabel`
+17. `CompactStaticBuildConditionLabel`
+
+### 316.3 非目标
+
+1. 不处理 `sheerForce` 的 compact scalar alias
+2. 不处理 `order / sourceOccurrence / segmentIndex`
+3. 不处理 compact helper 的运行时逻辑
+
+### 316.4 当前状态
+
+- `V313.1` 已完成：范围冻结到 matrix/utility scalar contract
+- `V313.2` 已完成：`compact.ts` 已统一复用这批显式 compact alias
+- `V313.3` 待开始：校验与提交
+- `V313.4` 已完成：roadmap、索引与架构文档已同步

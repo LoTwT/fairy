@@ -2,7 +2,7 @@
 
 ## 仓库级 AI 协作文件
 
-当前 `static-build-resolver` contract 收口阶段已推进到 `V312`。`V311` 已完成 `compact.ts` 中剩余的 `id / label / name / sourceId / reason / effect-summary text`；当前正在收口 `trigger-matrix / source-damage-views / source-utility-views / source-entry collection` 里的 compact `id / label / sourceId / canonicalLabel / stableKey / assumptions`。
+当前 `static-build-resolver` contract 收口阶段已推进到 `V313`。`V312` 已完成 `trigger-matrix / source-damage-views / source-utility-views / source-entry collection` 里的 compact `id / label / sourceId / canonicalLabel / stableKey / assumptions`；当前正在收口 `skill-matrix` 与 `source-utility-view` 里剩余最大的匿名 scalar/list contract。
 
 ```
 .
