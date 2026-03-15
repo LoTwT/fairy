@@ -11981,3 +11981,32 @@ caveatSummary` 这些兼容字段补齐。
 - `V334.2` 已完成：`skill-matrix / trigger-matrix` 已统一复用显式公开 set contract
 - `V334.3` 待完成：校验与提交
 - `V334.4` 待完成：roadmap、索引与架构文档同步
+
+## 338. V335 assumption and combat-tag set reuse
+
+### 338.1 目标
+
+`V335` 只解决一件事：
+
+- 把 `source-entry` 的 assumptions 去重集合，以及 `resolver / skill-matrix` 中 combat-tag 去重集合统一复用既有显式公开 set contract。
+
+### 338.2 范围
+
+1. `resolveStaticBuildSourceEntries()`
+2. `resolveStaticBuildDamage()`
+3. `resolveStaticBuildSkillMatrix()`
+4. `StaticBuildAssumptionSet`
+5. `StaticBuildCombatTagSet`
+
+### 338.3 非目标
+
+1. 不新增任何新的公开 alias
+2. 不改变 assumptions 或 combatTags 的输出顺序
+3. 不修改任何业务逻辑
+
+### 338.4 当前状态
+
+- `V335.1` 已完成：范围冻结到 assumption / combat-tag set reuse
+- `V335.2` 已完成：`source-entry / resolver / skill-matrix` 已统一复用既有 set contract
+- `V335.3` 待完成：校验与提交
+- `V335.4` 待完成：roadmap、索引与架构文档同步

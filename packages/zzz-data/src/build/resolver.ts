@@ -1021,7 +1021,9 @@ export function resolveStaticBuildDamage(
         ? input.scenario.remainingTime
         : undefined,
   }
-  const combatTags = new Set(input.scenario.combatTags ?? [])
+  const combatTags: StaticBuildCombatTagSet = new Set(
+    input.scenario.combatTags ?? [],
+  )
   const usesAttackAsBase = profile.baseDamageStat === "attack"
 
   const firstPass = applyEffects(effects, {

@@ -6,6 +6,7 @@ import type {
   StaticBuildAssumptionSet,
   StaticBuildBucketValueMap,
   StaticBuildCombatTagList,
+  StaticBuildCombatTagSet,
   StaticBuildDamageType,
   StaticBuildEffectBucketLabelMap,
   StaticBuildEffectSummaryAccumulatorMap,
@@ -2023,9 +2024,11 @@ export function resolveStaticBuildSkillMatrix(
       : resolvedContextAttribute
         ? "context"
         : "agent-default"
-    const combatTags = [
-      ...new Set([...(template.combatTags ?? []), ...globalCombatTags]),
-    ]
+    const combatTagSet: StaticBuildCombatTagSet = new Set([
+      ...(template.combatTags ?? []),
+      ...globalCombatTags,
+    ])
+    const combatTags: StaticBuildCombatTagList = [...combatTagSet]
 
     const damageType: "normal" | "sheer" =
       template.damageType === "sheer"

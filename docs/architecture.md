@@ -322,3 +322,4 @@ const total = base * bonus * crit * resistance * custom
 ## Build Resolver 最新阶段
 
 - `V334` assumption and unsupported-effect set contracts：当前阶段进行中；`skill-matrix / trigger-matrix` 中 assumptions 与 unsupported-effects 去重仍直接使用的 `Set<string>` 已开始统一收成显式公开 contract
+- `V335` assumption and combat-tag set reuse：当前阶段进行中；`source-entry` 的 assumptions 去重集合与 `resolver / skill-matrix` 的 combat-tag 去重集合已开始统一复用既有显式公开 set contract

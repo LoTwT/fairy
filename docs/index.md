@@ -232,3 +232,4 @@
 - [静态构筑解析系统 V71](./specs/static-build-resolver-v71.md) — 当前阶段：已收口；`trigger-entry rows` 已新增局部 `assumptionSummary`
 - [静态构筑解析系统 V72](./specs/static-build-resolver-v72.md) — 当前阶段：已收口；`source-damage views` 顶层已新增 `assumptionSummary`
 - [静态构筑解析系统 V334](./specs/static-build-resolver-v334.md) — 当前阶段：进行中；`skill-matrix / trigger-matrix` 中 assumptions 与 unsupported-effects 去重仍直接使用的 `Set<string>` 已开始统一收成显式公开 contract
+- [静态构筑解析系统 V335](./specs/static-build-resolver-v335.md) — 当前阶段：进行中；`source-entry` 的 assumptions 去重集合与 `resolver / skill-matrix` 的 combat-tag 去重集合已开始统一复用既有显式公开 set contract

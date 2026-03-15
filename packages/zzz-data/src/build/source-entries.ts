@@ -2,6 +2,7 @@ import type {
   ResolveStaticBuildSourceEntriesInput,
   ResolveStaticBuildSourceEntriesResult,
   StaticBuildAssumptionList,
+  StaticBuildAssumptionSet,
   StaticBuildAssumptionSummary,
   StaticBuildEntryCaveatSummary,
   StaticBuildResolvedLoadout,
@@ -77,7 +78,8 @@ export function resolveStaticBuildSourceEntries(
   }
 
   const sortedEntries = entries.toSorted(compareSourceEntries)
-  const uniqueAssumptions = [...new Set(assumptions)]
+  const assumptionSet: StaticBuildAssumptionSet = new Set(assumptions)
+  const uniqueAssumptions: StaticBuildAssumptionList = [...assumptionSet]
   const summary = summarizeSourceEntries(sortedEntries, uniqueAssumptions)
 
   return {
