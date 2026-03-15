@@ -14,6 +14,22 @@ export interface CatalogItem {
   specialty?: string
 }
 
+export type BuildToolScopeKey =
+  | "resolver"
+  | "skillMatrix"
+  | "triggerMatrix"
+  | "sourceDamageView"
+  | "sourceUtilityView"
+  | "sourceEntryCollection"
+
+export type BuildToolScopeLabel =
+  | "resolver"
+  | "skill matrix"
+  | "trigger-entry matrix"
+  | "source-specific damage view"
+  | "source-specific utility view"
+  | "source-entry collection"
+
 export const buildToolScopeLabels = {
   resolver: "resolver",
   skillMatrix: "skill matrix",
@@ -21,10 +37,7 @@ export const buildToolScopeLabels = {
   sourceDamageView: "source-specific damage view",
   sourceUtilityView: "source-specific utility view",
   sourceEntryCollection: "source-entry collection",
-} as const
-
-export type BuildToolScopeLabel =
-  (typeof buildToolScopeLabels)[keyof typeof buildToolScopeLabels]
+} as const satisfies Record<BuildToolScopeKey, BuildToolScopeLabel>
 
 export interface BuildToolUnsupportedAgentResponse {
   found: false
