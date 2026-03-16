@@ -1201,3 +1201,6 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 450. `V450` lookup-game-mode DA data contracts：当前阶段已收口；`lookup-game-mode.ts` 中 `DA` 成功结果的 `data` 顶层版本对象已统一复用显式 interface，不改变任何版本查询、敌人选择或 `damageContext` 计算逻辑，见 [静态构筑解析系统 V450](./static-build-resolver-v450.md)
 451. `V451` lookup-game-mode SD data contracts：当前阶段已收口；`lookup-game-mode.ts` 中 `SD` 成功结果的 `data` 顶层版本对象已统一复用显式 interface，不改变任何版本查询、难度解析、敌人选择或 `damageContext` 计算逻辑，见 [静态构筑解析系统 V451](./static-build-resolver-v451.md)
 452. `V452` lookup-game-mode TS data contracts：当前阶段已收口；`lookup-game-mode.ts` 中 `TS` 成功结果的 `data` 顶层版本对象已统一复用显式 interface，不改变任何版本查询、难度解析、敌人选择或 `damageContext` 计算逻辑，见 [静态构筑解析系统 V452](./static-build-resolver-v452.md)
+453. `V453` lookup-agent scalar contracts：当前阶段已收口；`lookup-agent.ts` 的基础标量 raw contract 已统一复用显式或命名上游 type，不改变任何查询、筛选、技能裁剪或计算逻辑，见 [静态构筑解析系统 V453](./static-build-resolver-v453.md)
+454. `V454` lookup-bangboo scalar contracts：当前阶段已收口；`lookup-bangboo.ts` 的基础标量 raw contract 已统一复用显式或命名上游 type，不改变任何查询、筛选或属性计算逻辑，见 [静态构筑解析系统 V454](./static-build-resolver-v454.md)
+455. `V455` lookup-w-engine scalar contracts：当前阶段已收口；`lookup-w-engine.ts` 的基础标量 raw contract 已统一复用显式或命名上游 type，不改变任何查询、筛选或属性计算逻辑，见 [静态构筑解析系统 V455](./static-build-resolver-v455.md)

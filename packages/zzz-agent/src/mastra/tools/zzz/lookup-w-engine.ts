@@ -1,4 +1,12 @@
-import type { WEngineDetails, WEngineListItem } from "zzz-data"
+import type {
+  GachabaseId,
+  GachabaseName,
+  GachabaseRarity,
+  GachabaseStatName,
+  GachabaseStatValue,
+  WEngineDetails,
+  WEngineListItem,
+} from "zzz-data"
 import { createTool } from "@mastra/core/tools"
 import { z } from "zod"
 import { calcWEngineBaseATK, calcWEngineSecondaryStat } from "zzz-data"
@@ -14,11 +22,11 @@ export type LookupWEngineQueryName = string
 
 export type LookupWEngineLocale = "en" | "zh-CN"
 
-export type LookupWEngineListItemId = WEngineListItem["id"]
+export type LookupWEngineListItemId = GachabaseId
 
-export type LookupWEngineListItemName = WEngineListItem["name"]
+export type LookupWEngineListItemName = GachabaseName
 
-export type LookupWEngineListItemRarity = WEngineListItem["rarity"]
+export type LookupWEngineListItemRarity = GachabaseRarity
 
 export type LookupWEngineSpecialtyName = string
 
@@ -65,20 +73,18 @@ export interface LookupWEngineActiveEffect {
   effect: LookupWEngineEffectText
 }
 
-export type LookupWEngineBaseStatName = WEngineListItem["baseStat"]["name"]
+export type LookupWEngineBaseStatName = GachabaseStatName
 
-export type LookupWEngineBaseStatValue = WEngineListItem["baseStat"]["value"]
+export type LookupWEngineBaseStatValue = GachabaseStatValue
 
 export interface LookupWEngineBaseStat {
   name: LookupWEngineBaseStatName
   value: LookupWEngineBaseStatValue
 }
 
-export type LookupWEngineAdvancedStatName =
-  WEngineListItem["advancedStat"]["name"]
+export type LookupWEngineAdvancedStatName = GachabaseStatName
 
-export type LookupWEngineAdvancedStatValue =
-  WEngineListItem["advancedStat"]["value"]
+export type LookupWEngineAdvancedStatValue = GachabaseStatValue
 
 export interface LookupWEngineAdvancedStat {
   name: LookupWEngineAdvancedStatName

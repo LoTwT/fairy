@@ -1,4 +1,12 @@
-import type { BangbooItem } from "zzz-data"
+import type {
+  BangbooItem,
+  GachabaseId,
+  GachabaseName,
+  GachabaseRarity,
+  GachabaseStatId,
+  GachabaseStatName,
+  GachabaseStatValue,
+} from "zzz-data"
 import { createTool } from "@mastra/core/tools"
 import { z } from "zod"
 import { calcBangbooStat } from "zzz-data"
@@ -8,11 +16,11 @@ export type LookupBangbooQueryName = string
 
 export type LookupBangbooLocale = "en" | "zh-CN"
 
-export type LookupBangbooId = BangbooItem["id"]
+export type LookupBangbooId = GachabaseId
 
-export type LookupBangbooName = BangbooItem["name"]
+export type LookupBangbooName = GachabaseName
 
-export type LookupBangbooRarity = BangbooItem["rarity"]
+export type LookupBangbooRarity = GachabaseRarity
 
 export interface LookupBangbooListItemSummary {
   id: LookupBangbooId
@@ -44,8 +52,7 @@ export type LookupBangbooSkillName = string
 
 export type LookupBangbooSkillDescriptionText = string
 
-export type LookupBangbooSkillStatTitle =
-  BangbooItem["skills"][number]["stats"][number]["title"]
+export type LookupBangbooSkillStatTitle = GachabaseName
 
 export type LookupBangbooSkillStatValueText = string
 
@@ -67,15 +74,13 @@ export interface LookupBangbooSkillEntry {
 
 export type LookupBangbooSkillEntryList = LookupBangbooSkillEntry[]
 
-export type LookupBangbooBaseStatId = BangbooItem["baseStats"][number]["id"]
+export type LookupBangbooBaseStatId = GachabaseStatId
 
-export type LookupBangbooBaseStatName = BangbooItem["baseStats"][number]["name"]
+export type LookupBangbooBaseStatName = GachabaseStatName
 
-export type LookupBangbooBaseStatValue =
-  BangbooItem["baseStats"][number]["value"]
+export type LookupBangbooBaseStatValue = GachabaseStatValue
 
-export type LookupBangbooBaseStatGrowthPerLevel =
-  BangbooItem["baseStats"][number]["growthPerLevel"]
+export type LookupBangbooBaseStatGrowthPerLevel = GachabaseStatValue
 
 export interface LookupBangbooBaseStatEntry {
   id: LookupBangbooBaseStatId

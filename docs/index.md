@@ -350,3 +350,6 @@
 - [静态构筑解析系统 V450](./specs/static-build-resolver-v450.md) — 当前阶段：已收口；`lookup-game-mode.ts` 中 `DA` 成功结果的 `data` 顶层版本对象已统一复用显式 interface
 - [静态构筑解析系统 V451](./specs/static-build-resolver-v451.md) — 当前阶段：已收口；`lookup-game-mode.ts` 中 `SD` 成功结果的 `data` 顶层版本对象已统一复用显式 interface
 - [静态构筑解析系统 V452](./specs/static-build-resolver-v452.md) — 当前阶段：已收口；`lookup-game-mode.ts` 中 `TS` 成功结果的 `data` 顶层版本对象已统一复用显式 interface
+- [静态构筑解析系统 V453](./specs/static-build-resolver-v453.md) — 当前阶段：已收口；`lookup-agent.ts` 的基础标量 raw contract 已统一复用显式或命名上游 type
+- [静态构筑解析系统 V454](./specs/static-build-resolver-v454.md) — 当前阶段：已收口；`lookup-bangboo.ts` 的基础标量 raw contract 已统一复用显式或命名上游 type
+- [静态构筑解析系统 V455](./specs/static-build-resolver-v455.md) — 当前阶段：已收口；`lookup-w-engine.ts` 的基础标量 raw contract 已统一复用显式或命名上游 type

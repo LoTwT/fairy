@@ -1,4 +1,17 @@
-import type { AgentDetails, AgentListItem } from "zzz-data"
+import type {
+  AgentAttributeLabel,
+  AgentDetails,
+  AgentListItem,
+  AgentSpecialtyLabel,
+  AttackTypeLabel,
+  GachabaseId,
+  GachabaseMaxLevel,
+  GachabaseName,
+  GachabasePromotion,
+  GachabaseRarity,
+  GachabaseStatId,
+  GachabaseStatValue,
+} from "zzz-data"
 import { createTool } from "@mastra/core/tools"
 import { z } from "zod"
 import { calcAgentStat } from "zzz-data"
@@ -15,19 +28,19 @@ export type LookupAgentQueryName = string
 
 export type LookupAgentLocale = "en" | "zh-CN"
 
-export type LookupAgentId = AgentListItem["id"]
+export type LookupAgentId = GachabaseId
 
-export type LookupAgentName = AgentListItem["name"]
+export type LookupAgentName = GachabaseName
 
-export type LookupAgentRarity = AgentListItem["rarity"]
+export type LookupAgentRarity = GachabaseRarity
 
-export type LookupAgentSpecialty = AgentListItem["specialty"]
+export type LookupAgentSpecialty = AgentSpecialtyLabel
 
-export type LookupAgentAttribute = AgentListItem["attributes"][number]
+export type LookupAgentAttribute = AgentAttributeLabel
 
 export type LookupAgentAttributeList = LookupAgentAttribute[]
 
-export type LookupAgentAttackType = AgentListItem["attackTypes"][number]
+export type LookupAgentAttackType = AttackTypeLabel
 
 export type LookupAgentAttackTypeList = LookupAgentAttackType[]
 
@@ -63,11 +76,9 @@ export type LookupAgentCalculatedStatMap = Record<
   LookupAgentCalculatedStatValue
 >
 
-export type LookupAgentStatBoostStatId =
-  AgentDetails["promotions"][number]["statBoosts"][number]["statId"]
+export type LookupAgentStatBoostStatId = GachabaseStatId
 
-export type LookupAgentStatBoostValue =
-  AgentDetails["promotions"][number]["statBoosts"][number]["value"]
+export type LookupAgentStatBoostValue = GachabaseStatValue
 
 export interface LookupAgentStatBoostEntry {
   statId: LookupAgentStatBoostStatId
@@ -76,11 +87,9 @@ export interface LookupAgentStatBoostEntry {
 
 export type LookupAgentStatBoostEntryList = LookupAgentStatBoostEntry[]
 
-export type LookupAgentPromotionValue =
-  AgentDetails["promotions"][number]["promotion"]
+export type LookupAgentPromotionValue = GachabasePromotion
 
-export type LookupAgentPromotionMaxLevel =
-  AgentDetails["promotions"][number]["maxLevel"]
+export type LookupAgentPromotionMaxLevel = GachabaseMaxLevel
 
 export interface LookupAgentPromotionEntry {
   promotion: LookupAgentPromotionValue
@@ -172,7 +181,7 @@ export interface LookupAgentStatEntry {
 
 export type LookupAgentStatEntryList = LookupAgentStatEntry[]
 
-export type LookupAgentFullName = AgentDetails["fullName"]
+export type LookupAgentFullName = GachabaseName
 
 export type LookupAgentOptionalRarity = LookupAgentRarity | undefined
 
