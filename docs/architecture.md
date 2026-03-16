@@ -421,3 +421,4 @@ const total = base * bonus * crit * resistance * custom
 - `V431` bangboo and drive-disc list contracts：当前阶段已收口；`lookup-bangboo.ts` 与 `lookup-drive-disc.ts` 中列表项和未命中候选项的结果 contract 已统一复用显式 alias / interface
 - `V432` lookup-agent list contracts：当前阶段已收口；`lookup-agent.ts` 中列表模式与未命中候选项的结果 contract 已统一复用显式 alias / interface
 - `V433` lookup-agent trimmed nested contracts：当前阶段已收口；`lookup-agent.ts` 的 trimmed result 中 `skills / coreSkills / mindscapes / stats` 的匿名嵌套 contract 已统一复用显式 alias / interface
+- `V434` drive-disc set-effect list contracts：当前阶段已收口；`lookup-drive-disc.ts` 中 `setEffects` 的匿名列表 contract 已统一复用显式 alias

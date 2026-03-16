@@ -22,6 +22,8 @@ export interface LookupDriveDiscSetEffect {
   bonus: LookupDriveDiscSetEffectBonus
 }
 
+export type LookupDriveDiscSetEffectList = LookupDriveDiscSetEffect[]
+
 export type LookupDriveDiscCandidateName = string
 
 export interface LookupDriveDiscCandidate {
@@ -44,7 +46,7 @@ export interface LookupDriveDiscTrimmedResult {
   id: LookupDriveDiscId
   name: LookupDriveDiscName
   tag: LookupDriveDiscTag
-  setEffects: LookupDriveDiscSetEffect[]
+  setEffects: LookupDriveDiscSetEffectList
 }
 
 export const lookupDriveDisc = createTool({
@@ -118,10 +120,13 @@ export const lookupDriveDisc = createTool({
         id: disc.id,
         name: disc.name,
         tag: disc.tag,
-        setEffects: disc.setEffects.map((e) => ({
-          pieces: e.pieces,
-          bonus: stripHtml(e.bonus),
-        })),
+        setEffects: disc.setEffects.map(
+          (e) =>
+            ({
+              pieces: e.pieces,
+              bonus: stripHtml(e.bonus),
+            }) satisfies LookupDriveDiscSetEffect,
+        ),
       } satisfies LookupDriveDiscTrimmedResult,
     }
   },

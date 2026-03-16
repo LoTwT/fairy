@@ -331,3 +331,4 @@
 - [静态构筑解析系统 V431](./specs/static-build-resolver-v431.md) — 当前阶段：已收口；`lookup-bangboo.ts` 与 `lookup-drive-disc.ts` 中列表项和未命中候选项的结果 contract 已统一复用显式 alias / interface
 - [静态构筑解析系统 V432](./specs/static-build-resolver-v432.md) — 当前阶段：已收口；`lookup-agent.ts` 中列表模式与未命中候选项的结果 contract 已统一复用显式 alias / interface
 - [静态构筑解析系统 V433](./specs/static-build-resolver-v433.md) — 当前阶段：已收口；`lookup-agent.ts` 的 trimmed result 中 `skills / coreSkills / mindscapes / stats` 的匿名嵌套 contract 已统一复用显式 alias / interface
+- [静态构筑解析系统 V434](./specs/static-build-resolver-v434.md) — 当前阶段：已收口；`lookup-drive-disc.ts` 中 `setEffects` 的匿名列表 contract 已统一复用显式 alias
