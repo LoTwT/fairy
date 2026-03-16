@@ -88,6 +88,16 @@ export interface BuildToolDynamicSnapshotValues {
   burniceEmberDamageRatio?: BuildToolSnapshotRatio
 }
 
+export interface BuildToolStateSnapshotFlags {
+  alicePolarityAssaultState?: BuildToolStateSnapshotFlag
+  miyabiFrostburnBreakState?: BuildToolStateSnapshotFlag
+}
+
+export interface BuildToolStateSnapshotValues {
+  alicePolarityAssaultDamageRatio?: BuildToolSnapshotRatio
+  miyabiFrostburnBreakDamageRatio?: BuildToolSnapshotRatio
+}
+
 export interface BuildToolDriveDiscSetInput {
   name: BuildToolDriveDiscSetName
   pieces: StaticBuildDriveDiscPieces
@@ -116,14 +126,8 @@ export interface BuildToolDynamicSnapshotInput {
 }
 
 export interface BuildToolStateSnapshotInput {
-  flags?: {
-    alicePolarityAssaultState?: BuildToolStateSnapshotFlag
-    miyabiFrostburnBreakState?: BuildToolStateSnapshotFlag
-  }
-  values?: {
-    alicePolarityAssaultDamageRatio?: BuildToolSnapshotRatio
-    miyabiFrostburnBreakDamageRatio?: BuildToolSnapshotRatio
-  }
+  flags?: BuildToolStateSnapshotFlags
+  values?: BuildToolStateSnapshotValues
 }
 
 export interface BuildToolResolvedSnapshotInput {

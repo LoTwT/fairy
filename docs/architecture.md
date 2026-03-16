@@ -453,5 +453,6 @@ const total = base * bonus * crit * resistance * custom
 - `V472` cleaned encounter view scalar contracts：当前阶段已收口；`cleaned/types.ts` 中 encounter/view 的位置索引、数量与 side 标量字段已统一复用显式 alias 或 `game-modes` 上游数值 alias
 - `V473` cleaned encounter and node-buff text contracts：当前阶段已收口；`cleaned/types.ts` 中 encounter 候选名与 `SD/TS node buff` 文本字段已统一复用 `game-modes` 上游 alias
 - `V474` resolve-build dynamic snapshot object contracts：当前阶段已收口；`resolve-build-schemas.ts` 中 `dynamicSnapshot` 的匿名嵌套对象已统一复用显式 interface
+- `V475` resolve-build state snapshot object contracts：当前阶段已收口；`resolve-build-schemas.ts` 中 `stateSnapshot` 的匿名嵌套对象已统一复用显式 interface
 - `V459` calculator disorder damage params contracts：当前阶段已收口；`calculator/types.ts` 中 `DisorderDamageParams` 已统一改为显式 interface
 - `V460` compact disorder damage params contracts：当前阶段已收口；`build/compact.ts` 中 `CompactStaticBuildDisorderDamageParams` 已统一改为显式 interface

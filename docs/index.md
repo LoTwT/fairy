@@ -372,3 +372,4 @@
 - [静态构筑解析系统 V472](./specs/static-build-resolver-v472.md) — 当前阶段：已收口；`cleaned/types.ts` 中 encounter/view 的位置索引、数量与 side 标量字段已统一复用显式 alias 或 `game-modes` 上游数值 alias
 - [静态构筑解析系统 V473](./specs/static-build-resolver-v473.md) — 当前阶段：已收口；`cleaned/types.ts` 中 encounter 候选名与 `SD/TS node buff` 文本字段已统一复用 `game-modes` 上游 alias
 - [静态构筑解析系统 V474](./specs/static-build-resolver-v474.md) — 当前阶段：已收口；`resolve-build-schemas.ts` 中 `dynamicSnapshot` 的匿名嵌套对象已统一复用显式 interface
+- [静态构筑解析系统 V475](./specs/static-build-resolver-v475.md) — 当前阶段：已收口；`resolve-build-schemas.ts` 中 `stateSnapshot` 的匿名嵌套对象已统一复用显式 interface
