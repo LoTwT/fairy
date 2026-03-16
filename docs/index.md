@@ -298,3 +298,4 @@
 - [静态构筑解析系统 V398](./specs/static-build-resolver-v398.md) — 当前阶段：已收口；`buhflipexplode/index.ts` 中敌人 `desc / perf` 的匿名文本二元 tuple 已统一复用显式 alias
 - [静态构筑解析系统 V399](./specs/static-build-resolver-v399.md) — 当前阶段：已收口；`buhflipexplode/index.ts` 中 `SD/DA/TS` 敌人引用的 `id` 已统一复用 `BuhflipEnemyId`
 - [静态构筑解析系统 V400](./specs/static-build-resolver-v400.md) — 当前阶段：已收口；`buhflipexplode/index.ts` 中 `SD/DA/TS` 版本容器的 `versionName / versionTime / mode name` 已统一复用显式 alias
+- [静态构筑解析系统 V401](./specs/static-build-resolver-v401.md) — 当前阶段：已收口；`buhflipexplode/index.ts` 中敌人 `name / image / misc / spoiler*` 文本字段已统一复用显式 alias

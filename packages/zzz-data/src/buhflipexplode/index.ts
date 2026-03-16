@@ -180,6 +180,10 @@ export type BuhflipVersionIndex = number
 
 export type BuhflipVersionRecordKey = string
 
+export type BuhflipEnemyName = string
+
+export type BuhflipEnemyImage = string
+
 export type BuhflipVersionName = string
 
 export type BuhflipVersionTime = string
@@ -189,6 +193,10 @@ export type BuhflipVersionsModeName = string
 export type BuhflipTextPairValue = string
 
 export type BuhflipTextPair = [BuhflipTextPairValue, BuhflipTextPairValue]
+
+export type BuhflipEnemyMiscText = string
+
+export type BuhflipEnemySpoilerText = string
 
 export type BuhflipElementMultiplier = number
 
@@ -233,7 +241,7 @@ export type BuhflipAltHPReduction = number
  * The top-level object is `Record<BuhflipEnemyId, BuhflipEnemy>` keyed by enemy ID.
  */
 export interface BuhflipEnemy {
-  name: string
+  name: BuhflipEnemyName
   /** [type 0 base HP, type 1 base HP] */
   baseHP: BuhflipEnemyBaseHPPair
   baseDEF: BuhflipEnemyBaseDefense
@@ -244,7 +252,7 @@ export interface BuhflipEnemy {
   /** Stun duration in seconds */
   stunTime: BuhflipEnemyStunTime
   baseAnom: BuhflipEnemyBaseAnomaly
-  image: string
+  image: BuhflipEnemyImage
   /**
    * Elemental damage multipliers [ice, fire, electric, ether, physical].
    * Values < 1 mean the enemy resists that element; > 1 means weakness.
@@ -255,9 +263,9 @@ export interface BuhflipEnemy {
   mods: BuhflipEnemyModifierList
   desc?: BuhflipTextPair
   perf?: BuhflipTextPair
-  misc?: string
-  spoilerDesc?: string
-  spoilerPerf?: string
+  misc?: BuhflipEnemyMiscText
+  spoilerDesc?: BuhflipEnemySpoilerText
+  spoilerPerf?: BuhflipEnemySpoilerText
 }
 
 /** `buhflipexplode-enemies.json` top-level shape */

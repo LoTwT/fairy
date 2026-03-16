@@ -14109,3 +14109,34 @@ caveatSummary` 这些兼容字段补齐。
 
 - `V400.1` 已完成：范围冻结到 buhflipexplode version text contract
 - `V400.2` 已完成：`SD/DA/TS` 版本容器文本字段已统一复用显式 alias
+
+## 404. V401 buhflipexplode enemy text contracts
+
+### 404.1 目标
+
+`V401` 只解决一件事：
+
+- 把 `buhflipexplode` 的敌人文本字段统一复用显式 text alias。
+
+### 404.2 范围
+
+1. `BuhflipEnemyName`
+2. `BuhflipEnemyImage`
+3. `BuhflipEnemyMiscText`
+4. `BuhflipEnemySpoilerText`
+5. `BuhflipEnemy.name`
+6. `BuhflipEnemy.image`
+7. `BuhflipEnemy.misc`
+8. `BuhflipEnemy.spoilerDesc`
+9. `BuhflipEnemy.spoilerPerf`
+
+### 404.3 非目标
+
+1. 不改任何 raw/published JSON shape
+2. 不改 `desc / perf` pair contract
+3. 不改版本容器或 enemy ref contract
+
+### 404.4 当前状态
+
+- `V401.1` 已完成：范围冻结到 buhflipexplode enemy text contract
+- `V401.2` 已完成：敌人文本字段已统一复用显式 alias
