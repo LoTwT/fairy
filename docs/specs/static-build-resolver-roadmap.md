@@ -14140,3 +14140,31 @@ caveatSummary` 这些兼容字段补齐。
 
 - `V401.1` 已完成：范围冻结到 buhflipexplode enemy text contract
 - `V401.2` 已完成：敌人文本字段已统一复用显式 alias
+
+## 405. V402 buhflipexplode enemy ref list contracts
+
+### 405.1 目标
+
+`V402` 只解决一件事：
+
+- 把 `buhflipexplode` 的敌人引用数组统一复用显式 list alias。
+
+### 405.2 范围
+
+1. `SDEnemyRefList`
+2. `DAEnemyRefList`
+3. `TSEnemyRefList`
+4. `SDWave.enemies`
+5. `DAVersionData.versionEnemies`
+6. `TSWave.enemies`
+
+### 405.3 非目标
+
+1. 不改任何 raw/published JSON shape
+2. 不改 `wave / side / node` 的上层容器
+3. 不改 enemy ref 单项字段 contract
+
+### 405.4 当前状态
+
+- `V402.1` 已完成：范围冻结到 buhflipexplode enemy ref list contract
+- `V402.2` 已完成：`SD/DA/TS` 敌人引用集合已统一复用显式 list alias

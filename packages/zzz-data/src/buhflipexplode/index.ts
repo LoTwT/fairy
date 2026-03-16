@@ -279,8 +279,9 @@ export interface SDEnemyRef {
   type: BuhflipEnemyRefType
   count: BuhflipEnemyCount
 }
+export type SDEnemyRefList = SDEnemyRef[]
 export interface SDWave {
-  enemies: SDEnemyRef[]
+  enemies: SDEnemyRefList
 }
 export interface SDSide {
   /** Elemental damage multipliers [ice, fire, electric, ether, physical] for this side */
@@ -322,13 +323,14 @@ export interface DAEnemyRef {
   /** Boss HP multiplier (e.g. 180 for Wandering Hunter) */
   mult: BuhflipBossHPMult
 }
+export type DAEnemyRefList = DAEnemyRef[]
 export interface DAVersionData {
   versionName: BuhflipVersionName
   versionTime: BuhflipVersionTime
   versionDazeMult: BuhflipVersionDazeMultiplier
   versionAnomMult: BuhflipVersionAnomalyMultiplier
   buffNames: BuhflipBuffTextList
-  versionEnemies: DAEnemyRef[]
+  versionEnemies: DAEnemyRefList
 }
 /** `buhflipexplode-deadly-assault.json` top-level shape */
 export type DAVersionsJson = Record<BuhflipVersionRecordKey, DAVersionData>
@@ -342,8 +344,9 @@ export interface TSEnemyRef {
   /** Boss mult (absent for regular enemies) */
   mult?: BuhflipBossHPMult
 }
+export type TSEnemyRefList = TSEnemyRef[]
 export interface TSWave {
-  enemies: TSEnemyRef[]
+  enemies: TSEnemyRefList
 }
 export interface TSSide {
   sideHPMult?: BuhflipEnemyHPMult
