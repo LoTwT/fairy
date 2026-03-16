@@ -20,7 +20,7 @@
  * Source: sd.js `nodeBossHPMult` / ts.js
  */
 // prettier-ignore
-export const NODE_HP_MULT: readonly number[] = [
+export const NODE_HP_MULT: BuhflipNodeMultiplierTable = [
   100, 116, 135, 157, 181, 193, 206, 220, 235, 271, 291, 314, 338, 364, 419,
   431, 444, 458, 472, 543, 618, 703, 801, 912, 1049, 1134, 1227, 1328, 1437,
   1653, 1792, 1942, 2106, 2283, 2626, 2865, 3126, 3411, 3722, 4281, 4717, 5197,
@@ -35,7 +35,7 @@ export const NODE_HP_MULT: readonly number[] = [
  * Source: ts.js `nodeEnemyHPMult`
  */
 // prettier-ignore
-export const NODE_ENEMY_HP_MULT: readonly number[] = [
+export const NODE_ENEMY_HP_MULT: BuhflipNodeMultiplierTable = [
   100, 116, 135, 157, 181, 193, 206, 220, 235, 271, 291, 314, 338, 364, 419,
   431, 444, 458, 472, 543, 618, 703, 801, 912, 1049, 1111, 1176, 1246, 1320,
   1518, 1609, 1706, 1809, 1919, 2207, 2320, 2440, 2566, 2698, 3103, 3404, 3734,
@@ -51,7 +51,7 @@ export const NODE_ENEMY_HP_MULT: readonly number[] = [
  * Source: sd.js / ts.js `nodeDEFMult`
  */
 // prettier-ignore
-export const NODE_DEF_MULT: readonly number[] = [
+export const NODE_DEF_MULT: BuhflipNodeMultiplierTable = [
   100, 108, 116, 124, 132, 142, 152, 164, 176, 188, 200, 214, 228, 242, 258,
   274, 290, 306, 324, 344, 362, 382, 402, 422, 444, 466, 490, 512, 536, 562,
   586, 612, 638, 666, 694, 722, 750, 780, 810, 842, 872, 904, 938, 970, 1004,
@@ -66,7 +66,7 @@ export const NODE_DEF_MULT: readonly number[] = [
  * Source: sd.js / ts.js `nodeDazeMult`
  */
 // prettier-ignore
-export const NODE_DAZE_MULT: readonly number[] = [
+export const NODE_DAZE_MULT: BuhflipNodeMultiplierTable = [
   100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
   100, 100, 100, 100, 100, 100, 101, 102, 103, 104, 104, 105, 106, 107, 108,
   110, 113, 115, 118, 120, 123, 125, 128, 130, 133, 137, 142, 146, 151, 155,
@@ -137,6 +137,10 @@ export const PP20K_FACTOR = 0.281083138
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 export type BuhflipNodeLevel = number
+
+export type BuhflipNodeMultiplierValue = number
+
+export type BuhflipNodeMultiplierTable = readonly BuhflipNodeMultiplierValue[]
 
 export type BuhflipEnemyBaseDefense = number
 

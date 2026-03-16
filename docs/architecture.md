@@ -396,3 +396,4 @@ const total = base * bonus * crit * resistance * custom
 - `V406` buhflipexplode version record contracts：当前阶段已收口；`buhflipexplode/index.ts` 中 `SD/DA/TS` version record 容器已统一复用显式 alias
 - `V407` buhflipexplode versions mode list contracts：当前阶段已收口；`buhflipexplode/index.ts` 中 `SD/TS` 顶层 mode list 已统一复用显式 list alias
 - `V408` buhflipexplode enemy record contracts：当前阶段已收口；`buhflipexplode/index.ts` 中顶层 enemy record 已统一复用显式 alias
+- `V409` buhflipexplode multiplier table contracts：当前阶段已收口；`buhflipexplode/index.ts` 中四个 multiplier table 常量已统一复用显式 readonly list alias
