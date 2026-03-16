@@ -350,3 +350,7 @@ const total = base * bonus * crit * resistance * custom
 - `V360` buhflipexplode helper result contracts：当前阶段已收口；`buhflipexplode` 公开公式 helper 的返回值已统一复用显式公开 contract
 - `V361` crawl decode payload contracts：当前阶段已收口；`decodeSvelteKitData()` 的返回值已统一复用显式公开 contract
 - `V362` generate worksheet config text contracts：当前阶段已收口；`generate/config.ts` 的 worksheet config 公开文本字段已统一复用显式公开 contract
+- `V363` resolver progress docs de-hardcoding：当前阶段已收口；顶层文档里的 resolver 进度说明已改为以 roadmap 为准，不再硬编码旧阶段号
+- `V364` agent response contract aliases：当前阶段已收口；`resolve-build-contracts.ts` 的公共 response text/list/id/flag 字段已统一复用显式 alias
+- `V365` agent response helper option contracts：当前阶段已收口；`resolve-build-responses.ts` 的公开 option 与 helper 参数已统一复用 agent response 公共 alias
+- `V366` agent execution context contracts：当前阶段已收口；`resolve-build-execution.ts` 的公开 execution context 字段已统一复用 agent response 公共 alias

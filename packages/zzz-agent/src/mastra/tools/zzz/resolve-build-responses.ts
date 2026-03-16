@@ -7,6 +7,10 @@ import type {
   CompactStaticBuildTriggerMatrixResult,
 } from "zzz-data"
 import type {
+  BuildToolAnomalyTypeValue,
+  BuildToolCandidateCatalogNameList,
+  BuildToolCatalogName,
+  BuildToolCatalogValue,
   BuildToolDamageSuccessResponse,
   BuildToolIncompatibleWEngineResponse,
   BuildToolMissingFinalPanelResponse,
@@ -15,7 +19,10 @@ import type {
   BuildToolSkillMatrixSuccessResponse,
   BuildToolSourceDamageViewsSuccessResponse,
   BuildToolSourceEntryCollectionSuccessResponse,
+  BuildToolSourceEntryUtilityOnlyFlag,
   BuildToolSourceUtilityViewsSuccessResponse,
+  BuildToolSupportedCatalogNameList,
+  BuildToolSupportedDamageTypeList,
   BuildToolTriggerMatrixSuccessResponse,
   BuildToolUncoveredSourceDamageViewResponse,
   BuildToolUncoveredSourceEntryCoverageResponse,
@@ -36,7 +43,7 @@ import { specialtyLabels } from "./resolve-build-labels"
 export interface BuildToolResolveSourceUtilityCoverageResponseOptions<
   TWEngine extends CatalogItem,
 > {
-  agentName: string
+  agentName: BuildToolCatalogName
   supportedWEngines: readonly TWEngine[]
   wEngine?: TWEngine
 }
@@ -50,7 +57,7 @@ export interface BuildToolResolveSourceUtilityViewsResponseOptions<
 export interface BuildToolResolveSourceDamageCoverageResponseOptions<
   TAgent extends CatalogItem,
 > {
-  agentName: string
+  agentName: BuildToolCatalogName
   supportedAgents: readonly TAgent[]
 }
 
@@ -64,13 +71,13 @@ export interface BuildToolResolveSourceEntryCoverageResponseOptions<
   TSourceViewAgent extends CatalogItem,
   TWEngine extends CatalogItem,
 > {
-  agentName: string
-  utilityOnly: boolean
+  agentName: BuildToolCatalogName
+  utilityOnly: BuildToolSourceEntryUtilityOnlyFlag
   wEngine?: TWEngine
-  wEngineQuery?: string
+  wEngineQuery?: BuildToolCatalogValue
   compatibleWEngines: readonly TWEngine[]
   supportedSourceViewAgents: readonly TSourceViewAgent[]
-  supportedUtilityWEngines: string[]
+  supportedUtilityWEngines: BuildToolSupportedCatalogNameList
 }
 
 export interface BuildToolResolveSourceEntryCollectionResponseOptions<
@@ -86,7 +93,7 @@ export interface BuildToolResolveSourceEntryCollectionResponseOptions<
 export function buildUnsupportedAgentResponse<T extends CatalogItem>(
   scopeLabel: BuildToolScopeLabel,
   items: readonly T[],
-  query: string,
+  query: BuildToolCatalogValue,
 ): BuildToolUnsupportedAgentResponse {
   return {
     found: false as const,
@@ -99,7 +106,7 @@ export function buildUnsupportedAgentResponse<T extends CatalogItem>(
 export function buildUnsupportedWEngineResponse<T extends CatalogItem>(
   scopeLabel: BuildToolScopeLabel,
   items: readonly T[],
-  query: string,
+  query: BuildToolCatalogValue,
 ): BuildToolUnsupportedWEngineResponse {
   return {
     found: false as const,
@@ -116,7 +123,7 @@ export function buildIncompatibleWEngineResponse<
   agent: TAgent,
   wEngine: TWEngine,
   compatibleWEngines: readonly CatalogItem[],
-  query: string,
+  query: BuildToolCatalogValue,
 ): BuildToolIncompatibleWEngineResponse {
   return {
     found: false as const,
@@ -129,7 +136,7 @@ export function buildIncompatibleWEngineResponse<
 export function buildUnsupportedDriveDiscResponse<T extends CatalogItem>(
   scopeLabel: BuildToolScopeLabel,
   items: readonly T[],
-  query: string,
+  query: BuildToolCatalogValue,
 ): BuildToolUnsupportedDriveDiscResponse {
   return {
     found: false as const,
@@ -141,7 +148,7 @@ export function buildUnsupportedDriveDiscResponse<T extends CatalogItem>(
 
 export function buildUncoveredSourceDamageViewResponse<T extends CatalogItem>(
   items: readonly T[],
-  query: string,
+  query: BuildToolCatalogValue,
 ): BuildToolUncoveredSourceDamageViewResponse {
   return {
     found: false as const,
@@ -180,7 +187,7 @@ export function resolveBuildToolSourceDamageViewsResponse<
 }
 
 export function buildMissingSourceUtilityWEngineResponse<T extends CatalogItem>(
-  agentName: string,
+  agentName: BuildToolCatalogName,
   items: readonly T[],
 ): BuildToolMissingSourceUtilityWEngineResponse {
   return {
@@ -194,7 +201,7 @@ export function buildUncoveredSourceUtilityWEngineResponse<
   T extends CatalogItem,
 >(
   items: readonly T[],
-  query: string,
+  query: BuildToolCatalogValue,
 ): BuildToolUncoveredSourceUtilityWEngineResponse {
   return {
     found: false as const,
@@ -244,8 +251,8 @@ export function resolveBuildToolSourceUtilityViewsResponse<
 }
 
 export function buildUncoveredSourceEntryUtilityOnlyResponse(
-  agentName: string,
-  supportedUtilityWEngines: string[],
+  agentName: BuildToolCatalogName,
+  supportedUtilityWEngines: BuildToolSupportedCatalogNameList,
 ): BuildToolUncoveredSourceEntryUtilityOnlyResponse {
   return {
     found: false,
@@ -257,10 +264,10 @@ export function buildUncoveredSourceEntryUtilityOnlyResponse(
 export function buildUncoveredSourceEntryCoverageResponse<
   T extends CatalogItem,
 >(
-  agentName: string,
+  agentName: BuildToolCatalogName,
   sourceViewAgents: readonly T[],
-  supportedUtilityWEngines: string[],
-  candidates?: string[],
+  supportedUtilityWEngines: BuildToolSupportedCatalogNameList,
+  candidates?: BuildToolCandidateCatalogNameList,
 ): BuildToolUncoveredSourceEntryCoverageResponse {
   return {
     found: false,
@@ -373,7 +380,7 @@ export function buildSourceEntryCollectionSuccessResponse(
 }
 
 export function buildUnsupportedAnomalyTypeResponse(
-  value: string,
+  value: BuildToolAnomalyTypeValue,
 ): BuildToolUnsupportedAnomalyTypeResponse {
   return {
     found: false,
@@ -393,7 +400,7 @@ export function buildUnsupportedAnomalyTypeResponse(
 
 export function buildUnsupportedDamageTypeResponse(
   scopeLabel: BuildToolScopeLabel,
-  supportedDamageTypes: readonly string[],
+  supportedDamageTypes: BuildToolSupportedDamageTypeList,
 ): BuildToolUnsupportedDamageTypeResponse {
   return {
     found: false,

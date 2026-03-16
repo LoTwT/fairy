@@ -12,9 +12,15 @@ export type BuildToolCatalogValue = string
 
 export type BuildToolNormalizedCatalogValue = string
 
+export type BuildToolCatalogId = string
+
 export type BuildToolCatalogName = string
 
 export type BuildToolCatalogNameList = readonly BuildToolCatalogName[]
+
+export type BuildToolSupportedCatalogNameList = BuildToolCatalogName[]
+
+export type BuildToolCandidateCatalogNameList = BuildToolCatalogName[]
 
 export type BuildToolAttributeValue = string
 
@@ -22,8 +28,18 @@ export type BuildToolAnomalyTypeValue = BuildToolCatalogValue
 
 export type BuildToolDamageTypeValue = string
 
+export type BuildToolSupportedAnomalyTypeList =
+  readonly BuildToolAnomalyTypeValue[]
+
+export type BuildToolSupportedDamageTypeList =
+  readonly BuildToolDamageTypeValue[]
+
+export type BuildToolResponseMessageText = string
+
+export type BuildToolSourceEntryUtilityOnlyFlag = boolean
+
 export interface CatalogItem<TSpecialty extends string = string> {
-  id: string
+  id: BuildToolCatalogId
   name: BuildToolCatalogName
   aliases: BuildToolCatalogNameList
   specialty?: TSpecialty
@@ -60,81 +76,81 @@ export const buildToolScopeLabels = {
 
 export interface BuildToolUnsupportedAgentResponse {
   found: false
-  message: string
-  supportedAgents: string[]
-  candidates: string[]
+  message: BuildToolResponseMessageText
+  supportedAgents: BuildToolSupportedCatalogNameList
+  candidates: BuildToolCandidateCatalogNameList
 }
 
 export interface BuildToolUnsupportedWEngineResponse {
   found: false
-  message: string
-  supportedWEngines: string[]
-  candidates: string[]
+  message: BuildToolResponseMessageText
+  supportedWEngines: BuildToolSupportedCatalogNameList
+  candidates: BuildToolCandidateCatalogNameList
 }
 
 export interface BuildToolIncompatibleWEngineResponse {
   found: false
-  message: string
-  supportedWEngines: string[]
-  candidates: string[]
+  message: BuildToolResponseMessageText
+  supportedWEngines: BuildToolSupportedCatalogNameList
+  candidates: BuildToolCandidateCatalogNameList
 }
 
 export interface BuildToolUnsupportedDriveDiscResponse {
   found: false
-  message: string
-  supportedDriveDiscs: string[]
-  candidates: string[]
+  message: BuildToolResponseMessageText
+  supportedDriveDiscs: BuildToolSupportedCatalogNameList
+  candidates: BuildToolCandidateCatalogNameList
 }
 
 export interface BuildToolUnsupportedAnomalyTypeResponse {
   found: false
-  message: string
-  supportedAnomalyTypes: readonly string[]
+  message: BuildToolResponseMessageText
+  supportedAnomalyTypes: BuildToolSupportedAnomalyTypeList
 }
 
 export interface BuildToolUnsupportedDamageTypeResponse {
   found: false
-  message: string
-  supportedDamageTypes: readonly string[]
+  message: BuildToolResponseMessageText
+  supportedDamageTypes: BuildToolSupportedDamageTypeList
 }
 
 export interface BuildToolUncoveredSourceDamageViewResponse {
   found: false
-  message: string
-  supportedAgents: string[]
-  candidates: string[]
+  message: BuildToolResponseMessageText
+  supportedAgents: BuildToolSupportedCatalogNameList
+  candidates: BuildToolCandidateCatalogNameList
 }
 
 export interface BuildToolMissingSourceUtilityWEngineResponse {
   found: false
-  message: string
-  supportedWEngines: string[]
+  message: BuildToolResponseMessageText
+  supportedWEngines: BuildToolSupportedCatalogNameList
 }
 
 export interface BuildToolUncoveredSourceUtilityWEngineResponse {
   found: false
-  message: string
-  supportedWEngines: string[]
-  candidates: string[]
+  message: BuildToolResponseMessageText
+  supportedWEngines: BuildToolSupportedCatalogNameList
+  candidates: BuildToolCandidateCatalogNameList
 }
 
 export interface BuildToolMissingFinalPanelResponse {
   found: false
-  message: string
+  message: BuildToolResponseMessageText
 }
 
 export interface BuildToolUncoveredSourceEntryUtilityOnlyResponse {
   found: false
-  message: string
-  supportedUtilityWEngines: string[]
+  message: BuildToolResponseMessageText
+  supportedUtilityWEngines: BuildToolSupportedCatalogNameList
 }
 
 export interface BuildToolUncoveredSourceEntryCoverageResponse {
   found: false
-  message: string
-  supportedSourceViewAgents: string[]
-  supportedUtilityWEngines: string[]
-  candidates?: string[]
+  message: BuildToolResponseMessageText
+  supportedSourceViewAgents: BuildToolSupportedCatalogNameList
+  supportedUtilityWEngines: BuildToolSupportedCatalogNameList
+  candidates?: BuildToolCandidateCatalogNameList
 }
 
 export interface BuildToolDamageSuccessResponse {

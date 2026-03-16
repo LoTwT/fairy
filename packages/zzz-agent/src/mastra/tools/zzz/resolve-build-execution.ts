@@ -4,6 +4,8 @@ import type {
 } from "zzz-data"
 import type {
   BuildToolIncompatibleWEngineResponse,
+  BuildToolSourceEntryUtilityOnlyFlag,
+  BuildToolSupportedCatalogNameList,
   BuildToolUnsupportedAgentResponse,
   BuildToolUnsupportedAnomalyTypeResponse,
   BuildToolUnsupportedDamageTypeResponse,
@@ -71,7 +73,7 @@ export interface BuildToolResolvedSourceUtilityExecutionContext<
   wEngine: TWEngine | undefined
   loadout: StaticBuildLoadoutInput
   supportedUtilityWEngines: TWEngine[]
-  supportedUtilityWEngineNames: string[]
+  supportedUtilityWEngineNames: BuildToolSupportedCatalogNameList
 }
 
 export interface BuildToolResolveTriggeredDamageContextOptions<
@@ -87,14 +89,14 @@ export interface BuildToolResolvedSourceEntriesExecutionContext<
   TWEngine extends CatalogItem,
 > {
   ok: true
-  utilityOnly: boolean
+  utilityOnly: BuildToolSourceEntryUtilityOnlyFlag
   scenario: StaticBuildScenarioInput | undefined
   panel: StaticBuildFinalPanelInput | undefined
   agent: TAgent
   compatibleWEngines: readonly TWEngine[]
   wEngine: TWEngine | undefined
   loadout: StaticBuildLoadoutInput
-  supportedUtilityWEngines: string[]
+  supportedUtilityWEngines: BuildToolSupportedCatalogNameList
 }
 
 export interface BuildToolResolveSourceEntriesExecutionContextOptions<

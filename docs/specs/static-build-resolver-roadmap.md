@@ -12881,3 +12881,93 @@ caveatSummary` 这些兼容字段补齐。
 - `V363.2` 已完成：顶层概述已改为以 roadmap 为准
 - `V363.3` 已完成：文档校验与提交
 - `V363.4` 已完成：spec、roadmap、索引与架构文档同步
+
+## 367. V364 agent response contract aliases
+
+### 367.1 目标
+
+`V364` 只解决一件事：
+
+- 给 `resolve-build-contracts.ts` 的公共 response text/list/id/flag 字段补显式 alias。
+
+### 367.2 范围
+
+1. `BuildToolCatalogId`
+2. `BuildToolResponseMessageText`
+3. `BuildToolSupportedCatalogNameList`
+4. `BuildToolCandidateCatalogNameList`
+5. `BuildToolSupportedAnomalyTypeList`
+6. `BuildToolSupportedDamageTypeList`
+7. `BuildToolSourceEntryUtilityOnlyFlag`
+
+### 367.3 非目标
+
+1. 不改 response builder 逻辑
+2. 不改 message 文案
+3. 不改 tool 行为
+
+### 367.4 当前状态
+
+- `V364.1` 已完成：范围冻结到 agent response 公共 alias
+- `V364.2` 已完成：`resolve-build-contracts.ts` 的公共 response 字段已统一复用显式 alias
+- `V364.3` 已完成：全量校验与提交
+- `V364.4` 已完成：roadmap、索引与架构文档同步
+
+## 368. V365 agent response helper option contracts
+
+### 368.1 目标
+
+`V365` 只解决一件事：
+
+- 把 `resolve-build-responses.ts` 的公开 option 与 helper 参数改为复用 agent response 公共 alias。
+
+### 368.2 范围
+
+1. `BuildToolResolveSourceUtilityCoverageResponseOptions`
+2. `BuildToolResolveSourceDamageCoverageResponseOptions`
+3. `BuildToolResolveSourceEntryCoverageResponseOptions`
+4. `buildUnsupported*Response()` / `buildUncovered*Response()`
+5. `buildUnsupportedAnomalyTypeResponse()`
+6. `buildUnsupportedDamageTypeResponse()`
+
+### 368.3 非目标
+
+1. 不改 response 返回结构
+2. 不改 candidates 生成逻辑
+3. 不改高层 tool 行为
+
+### 368.4 当前状态
+
+- `V365.1` 已完成：范围冻结到 response helper option contract
+- `V365.2` 已完成：`resolve-build-responses.ts` 的公开 option 与 helper 参数已统一复用显式 alias
+- `V365.3` 已完成：全量校验与提交
+- `V365.4` 已完成：roadmap、索引与架构文档同步
+
+## 369. V366 agent execution context contracts
+
+### 369.1 目标
+
+`V366` 只解决一件事：
+
+- 把 `resolve-build-execution.ts` 的公开 execution context 字段改为复用 agent response 公共 alias。
+
+### 369.2 范围
+
+1. `BuildToolResolvedSourceUtilityExecutionContext`
+2. `BuildToolResolvedSourceEntriesExecutionContext`
+3. `supportedUtilityWEngineNames`
+4. `supportedUtilityWEngines`
+5. `utilityOnly`
+
+### 369.3 非目标
+
+1. 不改 execution helper 逻辑
+2. 不改 source-entry context gating
+3. 不改 loadout helper 返回结构
+
+### 369.4 当前状态
+
+- `V366.1` 已完成：范围冻结到 execution context contract
+- `V366.2` 已完成：`resolve-build-execution.ts` 的公开 execution context 已统一复用显式 alias
+- `V366.3` 已完成：全量校验与提交
+- `V366.4` 已完成：roadmap、索引与架构文档同步

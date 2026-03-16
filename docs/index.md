@@ -260,3 +260,7 @@
 - [静态构筑解析系统 V360](./specs/static-build-resolver-v360.md) — 当前阶段：已收口；`buhflipexplode` 公开公式 helper 的返回值已统一复用显式公开 contract
 - [静态构筑解析系统 V361](./specs/static-build-resolver-v361.md) — 当前阶段：已收口；`decodeSvelteKitData()` 的返回值已统一复用显式公开 contract
 - [静态构筑解析系统 V362](./specs/static-build-resolver-v362.md) — 当前阶段：已收口；`generate/config.ts` 的 worksheet config 公开文本字段已统一复用显式公开 contract
+- [静态构筑解析系统 V363](./specs/static-build-resolver-v363.md) — 当前阶段：已收口；顶层文档里的 resolver 进度说明已改为以 roadmap 为准，不再硬编码旧阶段号
+- [静态构筑解析系统 V364](./specs/static-build-resolver-v364.md) — 当前阶段：已收口；`resolve-build-contracts.ts` 的公共 response text/list/id/flag 字段已统一复用显式 alias
+- [静态构筑解析系统 V365](./specs/static-build-resolver-v365.md) — 当前阶段：已收口；`resolve-build-responses.ts` 的公开 option 与 helper 参数已统一复用 agent response 公共 alias
+- [静态构筑解析系统 V366](./specs/static-build-resolver-v366.md) — 当前阶段：已收口；`resolve-build-execution.ts` 的公开 execution context 字段已统一复用 agent response 公共 alias

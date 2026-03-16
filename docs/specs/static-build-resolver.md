@@ -1112,3 +1112,6 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 361. `V361` crawl decode payload contracts：当前阶段已收口；`decodeSvelteKitData()` 的返回值已统一复用显式公开 contract，不改变任何解码逻辑，见 [静态构筑解析系统 V361](./static-build-resolver-v361.md)
 362. `V362` generate worksheet config text contracts：当前阶段已收口；`generate/config.ts` 的 worksheet config 公开文本字段已统一复用显式公开 contract，不改变任何 generate 行为，见 [静态构筑解析系统 V362](./static-build-resolver-v362.md)
 363. `V363` resolver progress docs de-hardcoding：当前阶段已收口；顶层文档里的 resolver 进度说明已改为以 roadmap 为准，不再硬编码旧阶段号，见 [静态构筑解析系统 V363](./static-build-resolver-v363.md)
+364. `V364` agent response contract aliases：当前阶段已收口；`resolve-build-contracts.ts` 的公共 response text/list/id/flag 字段已统一复用显式 alias，不改变任何响应语义，见 [静态构筑解析系统 V364](./static-build-resolver-v364.md)
+365. `V365` agent response helper option contracts：当前阶段已收口；`resolve-build-responses.ts` 的公开 option 与 helper 参数已统一复用 agent response 公共 alias，不改变任何 response builder 行为，见 [静态构筑解析系统 V365](./static-build-resolver-v365.md)
+366. `V366` agent execution context contracts：当前阶段已收口；`resolve-build-execution.ts` 的公开 execution context 字段已统一复用 agent response 公共 alias，不改变任何 execution helper 逻辑，见 [静态构筑解析系统 V366](./static-build-resolver-v366.md)
