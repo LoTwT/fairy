@@ -23,9 +23,13 @@ export type LookupAgentRarity = AgentListItem["rarity"]
 
 export type LookupAgentSpecialty = AgentListItem["specialty"]
 
-export type LookupAgentAttributeList = AgentListItem["attributes"]
+export type LookupAgentAttribute = AgentListItem["attributes"][number]
 
-export type LookupAgentAttackTypeList = AgentListItem["attackTypes"]
+export type LookupAgentAttributeList = LookupAgentAttribute[]
+
+export type LookupAgentAttackType = AgentListItem["attackTypes"][number]
+
+export type LookupAgentAttackTypeList = LookupAgentAttackType[]
 
 export interface LookupAgentListItemSummary {
   id: LookupAgentId

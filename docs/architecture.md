@@ -434,3 +434,4 @@ const total = base * bonus * crit * resistance * custom
 - `V444` lookup-bangboo raw list contracts：当前阶段已收口；`lookup-bangboo.ts` 中 `skills[*].stats` 与 `baseStats` 已统一复用显式 alias
 - `V445` lookup-w-engine raw stat contracts：当前阶段已收口；`lookup-w-engine.ts` 中 `baseStat / advancedStat` 已统一复用显式 interface
 - `V446` lookup-bangboo raw entry contracts：当前阶段已收口；`lookup-bangboo.ts` 中 `baseStats[*]` 与 `skills[*].stats[*]` 已统一复用显式 interface
+- `V447` lookup-agent display list contracts：当前阶段已收口；`lookup-agent.ts` 中 `attributes / attackTypes` 已统一复用显式 alias
