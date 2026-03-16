@@ -95,3 +95,17 @@ it("returns normalized damageContext for game mode enemies", async () => {
   expect((ts as any).damageContext.sideElementMultiplier).toBe(1.2)
   expect((tsSideThree as any).selectedEnemy.side).toBe(3)
 })
+
+it("returns structured DA enemy candidates for ambiguous searches", async () => {
+  const daAmbiguous = await runTool(lookupGameMode, {
+    mode: "DA",
+    version: "2.7.3",
+    enemyName: "e",
+    locale: "en",
+  })
+
+  expect((daAmbiguous as any).selectedEnemy).toBeUndefined()
+  expect((daAmbiguous as any).enemyCandidates.length).toBeGreaterThan(1)
+  expect((daAmbiguous as any).enemyCandidates[0]?.name).toBeTypeOf("string")
+  expect((daAmbiguous as any).enemyCandidates[0]?.node).toBeUndefined()
+})

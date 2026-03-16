@@ -1190,3 +1190,4 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 439. `V439` lookup-w-engine trimmed result contracts：当前阶段已收口；`lookup-w-engine.ts` 的顶层 trimmed result contract 已统一复用显式 interface，不改变任何音擎查询、筛选、属性计算或精炼被动选择逻辑，见 [静态构筑解析系统 V439](./static-build-resolver-v439.md)
 440. `V440` lookup-game-mode unavailable result contracts：当前阶段已收口；`lookup-game-mode.ts` 中未找到版本 / 未找到难度的顶层返回结构已统一复用显式 interface，不改变任何 DA/SD/TS 查询、敌人选择或 `damageContext` 生成逻辑，见 [静态构筑解析系统 V440](./static-build-resolver-v440.md)
 441. `V441` lookup-game-mode boss search result contracts：当前阶段已收口；`lookup-game-mode.ts` 的 DA/SD/TS boss 搜索顶层返回结构已统一复用显式 interface，不改变任何版本搜索、敌人选择或 `damageContext` 生成逻辑，见 [静态构筑解析系统 V441](./static-build-resolver-v441.md)
+442. `V442` lookup-game-mode resolved result contracts：当前阶段已收口；`lookup-game-mode.ts` 的 DA/SD/TS 成功解析顶层返回结构已统一复用显式 interface，且 DA `enemyCandidates` 已对齐为结构化候选项，不改变任何版本查找、难度解析或 `damageContext` 公式逻辑，见 [静态构筑解析系统 V442](./static-build-resolver-v442.md)

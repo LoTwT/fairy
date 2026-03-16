@@ -339,3 +339,4 @@
 - [静态构筑解析系统 V439](./specs/static-build-resolver-v439.md) — 当前阶段：已收口；`lookup-w-engine.ts` 的顶层 trimmed result contract 已统一复用显式 interface
 - [静态构筑解析系统 V440](./specs/static-build-resolver-v440.md) — 当前阶段：已收口；`lookup-game-mode.ts` 中未找到版本 / 未找到难度的顶层返回结构已统一复用显式 interface
 - [静态构筑解析系统 V441](./specs/static-build-resolver-v441.md) — 当前阶段：已收口；`lookup-game-mode.ts` 的 DA/SD/TS boss 搜索顶层返回结构已统一复用显式 interface
+- [静态构筑解析系统 V442](./specs/static-build-resolver-v442.md) — 当前阶段：已收口；`lookup-game-mode.ts` 的 DA/SD/TS 成功解析顶层返回结构已统一复用显式 interface，且 DA `enemyCandidates` 已对齐为结构化候选项

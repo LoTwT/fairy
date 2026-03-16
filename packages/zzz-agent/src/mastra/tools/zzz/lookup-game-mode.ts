@@ -126,6 +126,54 @@ export interface LookupGameModeBossSearchResult {
   results: LookupGameModeVersionSearchResultList
 }
 
+export type LookupGameModeDAData = DeadlyAssaultJson[number]
+
+export type LookupGameModeSDData = ShiyuDefenseJson[number]["versions"][number]
+
+export type LookupGameModeTSData =
+  ThresholdSimulationJson[number]["versions"][number]
+
+export type LookupGameModeSelectedEnemyValue =
+  | LookupGameModeSelectedEnemy
+  | undefined
+
+export type LookupGameModeEncounterCandidateValueList =
+  | LookupGameModeEncounterCandidateList
+  | undefined
+
+export type LookupGameModeDamageContextValue =
+  | LookupGameModeDamageContext
+  | undefined
+
+export interface LookupGameModeDAResolvedResult {
+  found: true
+  mode: LookupGameModeMode
+  data: LookupGameModeDAData
+  selectedEnemy: LookupGameModeSelectedEnemyValue
+  enemyCandidates: LookupGameModeEncounterCandidateValueList
+  damageContext: LookupGameModeDamageContextValue
+}
+
+export interface LookupGameModeSDResolvedResult {
+  found: true
+  mode: LookupGameModeMode
+  difficulty: LookupGameModeDifficultyName
+  data: LookupGameModeSDData
+  selectedEnemy: LookupGameModeSelectedEnemyValue
+  enemyCandidates: LookupGameModeEncounterCandidateValueList
+  damageContext: LookupGameModeDamageContextValue
+}
+
+export interface LookupGameModeTSResolvedResult {
+  found: true
+  mode: LookupGameModeMode
+  difficulty: LookupGameModeDifficultyName
+  data: LookupGameModeTSData
+  selectedEnemy: LookupGameModeSelectedEnemyValue
+  enemyCandidates: LookupGameModeEncounterCandidateValueList
+  damageContext: LookupGameModeDamageContextValue
+}
+
 export interface LookupGameModeDamageContext {
   enemyName: LookupGameModeEnemyName
   attribute: NonNullable<ReturnType<typeof normalizeDamageAttribute>>
@@ -188,6 +236,17 @@ function toSelectedEnemy(
     node: candidate.node,
     side: candidate.side,
     wave: candidate.wave,
+  }
+}
+
+function toEncounterCandidateFromName(
+  name: LookupGameModeEnemyName,
+): LookupGameModeEncounterCandidate {
+  return {
+    name,
+    node: undefined,
+    side: undefined,
+    wave: undefined,
   }
 }
 
@@ -325,13 +384,13 @@ export const lookupGameMode = createTool({
           : undefined,
         enemyCandidates:
           !selection.selected && (enemyName || attribute)
-            ? selection.candidates
+            ? selection.candidates.map(toEncounterCandidateFromName)
             : undefined,
         damageContext: toLookupDamageContext(
           buildDADamageContext(item, attributeLabel, enemyName),
           attribute,
         ),
-      }
+      } satisfies LookupGameModeDAResolvedResult
     }
 
     if (mode === "SD") {
@@ -404,7 +463,7 @@ export const lookupGameMode = createTool({
           }),
           attribute,
         ),
-      }
+      } satisfies LookupGameModeSDResolvedResult
     }
 
     // TS
@@ -473,6 +532,6 @@ export const lookupGameMode = createTool({
         buildTSDamageContext(vItem, attributeLabel, { node, side, enemyName }),
         attribute,
       ),
-    }
+    } satisfies LookupGameModeTSResolvedResult
   },
 })
