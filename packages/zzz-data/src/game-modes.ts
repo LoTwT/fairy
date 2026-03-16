@@ -146,10 +146,12 @@ export interface SDEnemyItem extends EnemyBase {
   type: EnemyCategoryCode
   count: GameModeEnemyCount
 }
+export type SDEnemyItemList = SDEnemyItem[]
 
 export interface SDWaveItem {
-  enemies: SDEnemyItem[]
+  enemies: SDEnemyItemList
 }
+export type SDWaveItemList = SDWaveItem[]
 
 export interface SDSideItem {
   /** Side-wide raw multiplier buckets in the same order as `ElementMult`. */
@@ -162,7 +164,7 @@ export interface SDSideItem {
   hp60k: GameModeHP60k
   /** Raw alternative HP value from upstream data. */
   altHp: GameModeAltHP
-  waves: SDWaveItem[]
+  waves: SDWaveItemList
 }
 
 export interface SDNodeItem {
