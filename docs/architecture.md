@@ -436,3 +436,4 @@ const total = base * bonus * crit * resistance * custom
 - `V446` lookup-bangboo raw entry contracts：当前阶段已收口；`lookup-bangboo.ts` 中 `baseStats[*]` 与 `skills[*].stats[*]` 已统一复用显式 interface
 - `V447` lookup-agent display list contracts：当前阶段已收口；`lookup-agent.ts` 中 `attributes / attackTypes` 已统一复用显式 alias
 - `V448` lookup-agent progression contracts：当前阶段已收口；`lookup-agent.ts` 中 `promotions` 与 `coreSkills[*].statBoosts` 已统一复用显式 interface
+- `V449` lookup-game-mode damage-context field contracts：当前阶段已收口；`lookup-game-mode.ts` 的 `damageContext` 剩余 raw field contract 已统一复用显式 alias

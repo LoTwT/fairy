@@ -346,3 +346,4 @@
 - [静态构筑解析系统 V446](./specs/static-build-resolver-v446.md) — 当前阶段：已收口；`lookup-bangboo.ts` 中 `baseStats[*]` 与 `skills[*].stats[*]` 已统一复用显式 interface
 - [静态构筑解析系统 V447](./specs/static-build-resolver-v447.md) — 当前阶段：已收口；`lookup-agent.ts` 中 `attributes / attackTypes` 已统一复用显式 alias
 - [静态构筑解析系统 V448](./specs/static-build-resolver-v448.md) — 当前阶段：已收口；`lookup-agent.ts` 中 `promotions` 与 `coreSkills[*].statBoosts` 已统一复用显式 interface
+- [静态构筑解析系统 V449](./specs/static-build-resolver-v449.md) — 当前阶段：已收口；`lookup-game-mode.ts` 的 `damageContext` 剩余 raw field contract 已统一复用显式 alias

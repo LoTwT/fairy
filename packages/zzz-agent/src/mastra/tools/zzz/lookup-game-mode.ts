@@ -145,6 +145,38 @@ export type LookupGameModeDamageContextValue =
   | LookupGameModeDamageContext
   | undefined
 
+export type LookupGameModeWeakness =
+  EncounterDamageContext["weaknesses"][number]
+
+export type LookupGameModeWeaknessList = LookupGameModeWeakness[] | undefined
+
+export type LookupGameModeResistance =
+  EncounterDamageContext["resistances"][number]
+
+export type LookupGameModeResistanceList =
+  | LookupGameModeResistance[]
+  | undefined
+
+export type LookupGameModeMechanicsText =
+  | EncounterDamageContext["mechanics"]
+  | undefined
+
+export type LookupGameModeDamageContextNode =
+  | EncounterDamageContext["node"]
+  | undefined
+
+export type LookupGameModeDamageContextSide =
+  | EncounterDamageContext["side"]
+  | undefined
+
+export type LookupGameModeDamageContextWave =
+  | EncounterDamageContext["wave"]
+  | undefined
+
+export type LookupGameModeSideElementMultiplier =
+  | EncounterDamageContext["sideElementMultiplier"]
+  | undefined
+
 export interface LookupGameModeDAResolvedResult {
   found: true
   mode: LookupGameModeMode
@@ -180,13 +212,13 @@ export interface LookupGameModeDamageContext {
   elementMultiplier: number
   defenderBaseDefense: number
   recommendedDefenderResistance: LookupGameModeRecommendedResistance
-  weaknesses: EncounterDamageContext["weaknesses"] | undefined
-  resistances: EncounterDamageContext["resistances"] | undefined
-  mechanics: EncounterDamageContext["mechanics"]
-  node: EncounterDamageContext["node"]
-  side: EncounterDamageContext["side"]
-  wave: EncounterDamageContext["wave"]
-  sideElementMultiplier: EncounterDamageContext["sideElementMultiplier"]
+  weaknesses: LookupGameModeWeaknessList
+  resistances: LookupGameModeResistanceList
+  mechanics: LookupGameModeMechanicsText
+  node: LookupGameModeDamageContextNode
+  side: LookupGameModeDamageContextSide
+  wave: LookupGameModeDamageContextWave
+  sideElementMultiplier: LookupGameModeSideElementMultiplier
 }
 
 function toLookupDamageContext(
