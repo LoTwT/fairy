@@ -13708,3 +13708,38 @@ caveatSummary` 这些兼容字段补齐。
 - `V386.2` 已完成：`gachabase/types.ts` 里的代理人相关 raw published field 已统一复用显式 alias / named interface
 - `V386.3` 已完成：全量校验与提交
 - `V386.4` 已完成：roadmap、索引与架构文档同步
+
+## 390. V387 gachabase w-engine raw field contracts
+
+### 390.1 目标
+
+`V387` 只解决一件事：
+
+- 把 `gachabase/types.ts` 里 `w-engine` 相关 raw published field 统一改成显式 alias / named interface。
+
+### 390.2 范围
+
+1. `GachabaseMinLevel`
+2. `GachabaseEffectLevel`
+3. `WEngineEffect`
+4. `WEngineSpecialtyRef`
+5. `WEngineStatValue`
+6. `WEngineListItem`
+7. `WEngineLevel`
+8. `WEngineStar`
+9. `WEngineExclusiveAgentRef`
+10. `WEngineDetailsAssets`
+11. `WEngineDetails`
+
+### 390.3 非目标
+
+1. 不改 `agents.json`、`bangboo.json`、`drive-discs.json` 相关 contract
+2. 不改公开 JSON shape
+3. 不改任何 helper 计算逻辑
+
+### 390.4 当前状态
+
+- `V387.1` 已完成：范围冻结到 gachabase w-engine raw field contract
+- `V387.2` 已完成：`gachabase/types.ts` 里的 w-engine 相关 raw published field 已统一复用显式 alias / named interface
+- `V387.3` 已完成：全量校验与提交
+- `V387.4` 已完成：roadmap、索引与架构文档同步

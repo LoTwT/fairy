@@ -20,11 +20,13 @@ export type GachabaseGrowthPerLevel = number | null
 export type GachabaseLevel = number
 export type GachabasePromotion = number
 export type GachabaseMaxLevel = number
+export type GachabaseMinLevel = number
 export type GachabaseGender = string
 export type GachabaseHeight = string
 export type GachabaseBirthday = string
 export type GachabaseAssetPath = string
 export type GachabaseStringValueList = string[]
+export type GachabaseEffectLevel = number
 
 export interface StatBoost {
   statId: GachabaseStatId
@@ -166,47 +168,68 @@ export interface AgentDetails {
 // ─── w-engines.json ───────────────────────────────────────────────────────────
 
 export interface WEngineEffect {
-  level: number
-  name: string
+  level: GachabaseEffectLevel
+  name: GachabaseName
   /** Source-compatible rich text string with inline HTML-like markup. */
   effect: RichTextString
 }
 
+export interface WEngineSpecialtyRef {
+  id: GachabaseId
+  name: AgentSpecialtyLabel
+}
+
+export interface WEngineStatValue {
+  id: GachabaseStatId
+  name: GachabaseStatName
+  value: GachabaseStatValue
+}
+
 export interface WEngineListItem {
-  id: string
-  slug: string
-  name: string
-  icon: string
-  rarity: number
+  id: GachabaseId
+  slug: GachabaseSlug
+  name: GachabaseName
+  icon: GachabaseIcon
+  rarity: GachabaseRarity
   /** `specialty.name` is localized; normalize with `toAgentSpecialty()` */
-  specialty: { id: string; name: AgentSpecialtyLabel }
-  exclusiveAgentName: string | null
-  baseStat: { id: string; name: string; value: number }
-  advancedStat: { id: string; name: string; value: number }
+  specialty: WEngineSpecialtyRef
+  exclusiveAgentName: GachabaseName | null
+  baseStat: WEngineStatValue
+  advancedStat: WEngineStatValue
   effects: WEngineEffect[]
 }
 
 // ─── w-engine-details.json ────────────────────────────────────────────────────
 
 export interface WEngineLevel {
-  level: number
-  baseStatGrowth: number
+  level: GachabaseLevel
+  baseStatGrowth: GachabaseStatValue
 }
 
 export interface WEngineStar {
-  star: number
-  minLevel: number
-  maxLevel: number
-  baseStatGrowth: number
-  advancedStatGrowth: number
+  star: GachabaseLevel
+  minLevel: GachabaseMinLevel
+  maxLevel: GachabaseMaxLevel
+  baseStatGrowth: GachabaseStatValue
+  advancedStatGrowth: GachabaseStatValue
+}
+
+export interface WEngineExclusiveAgentRef {
+  id: GachabaseId
+  slug: GachabaseSlug
+  name: GachabaseName
+}
+
+export interface WEngineDetailsAssets {
+  splashArt: SplashArt
 }
 
 export interface WEngineDetails {
-  id: string
-  slug: string
-  name: string
-  exclusiveAgent: { id: string; slug: string; name: string } | null
-  assets: { splashArt: SplashArt }
+  id: GachabaseId
+  slug: GachabaseSlug
+  name: GachabaseName
+  exclusiveAgent: WEngineExclusiveAgentRef | null
+  assets: WEngineDetailsAssets
   levels: WEngineLevel[]
   stars: WEngineStar[]
 }
