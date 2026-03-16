@@ -402,3 +402,4 @@ const total = base * bonus * crit * resistance * custom
 - `V412` game-modes deadly-assault list contracts：当前阶段已收口；`game-modes.ts` 中 `Deadly Assault` 的匿名 list contract 已统一复用显式 alias
 - `V413` game-modes shiyu-defense enemy and wave list contracts：当前阶段已收口；`game-modes.ts` 中 `Shiyu Defense` 的 `enemy/wave` 匿名 list contract 已统一复用显式 alias
 - `V414` game-modes shiyu-defense side and node list contracts：当前阶段已收口；`game-modes.ts` 中 `Shiyu Defense` 的 `side/node` 匿名 list contract 已统一复用显式 alias
+- `V415` game-modes shiyu-defense version and mode list contracts：当前阶段已收口；`game-modes.ts` 中 `Shiyu Defense` 的 `version/mode` 匿名 list contract 已统一复用显式 alias

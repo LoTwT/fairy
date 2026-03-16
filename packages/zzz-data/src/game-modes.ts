@@ -187,14 +187,16 @@ export interface SDVersionItem {
   versionAnomMult: GameModeVersionAnomalyMultiplier
   nodes: SDNodeItemList
 }
+export type SDVersionItemList = SDVersionItem[]
 
 export interface SDModeItem {
   name: GameModeModeName
-  versions: SDVersionItem[]
+  versions: SDVersionItemList
 }
+export type SDModeItemList = SDModeItem[]
 
 /** `shiyu-defense.json` top-level shape */
-export type ShiyuDefenseJson = SDModeItem[]
+export type ShiyuDefenseJson = SDModeItemList
 
 // ─── threshold-simulation.json ────────────────────────────────────────────────
 
