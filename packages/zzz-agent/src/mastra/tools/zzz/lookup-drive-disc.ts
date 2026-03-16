@@ -7,6 +7,10 @@ export type LookupDriveDiscQueryName = string
 
 export type LookupDriveDiscLocale = "en" | "zh-CN"
 
+export type LookupDriveDiscId = DriveDiscItem["id"]
+
+export type LookupDriveDiscName = DriveDiscItem["name"]
+
 export type LookupDriveDiscTag = string
 
 export type LookupDriveDiscSetEffectPieces = number
@@ -25,9 +29,20 @@ export interface LookupDriveDiscCandidate {
   tag: LookupDriveDiscTag
 }
 
+export type LookupDriveDiscCandidateList = LookupDriveDiscCandidate[]
+
+export interface LookupDriveDiscListItemSummary {
+  id: LookupDriveDiscId
+  name: LookupDriveDiscName
+  tag: LookupDriveDiscTag
+}
+
+export type LookupDriveDiscListItemSummaryList =
+  LookupDriveDiscListItemSummary[]
+
 export interface LookupDriveDiscTrimmedResult {
-  id: DriveDiscItem["id"]
-  name: DriveDiscItem["name"]
+  id: LookupDriveDiscId
+  name: LookupDriveDiscName
   tag: LookupDriveDiscTag
   setEffects: LookupDriveDiscSetEffect[]
 }
@@ -60,11 +75,14 @@ export const lookupDriveDisc = createTool({
       return {
         found: true,
         total: discs.length,
-        driveDiscs: discs.map((d) => ({
-          id: d.id,
-          name: d.name,
-          tag: d.tag,
-        })),
+        driveDiscs: discs.map(
+          (d) =>
+            ({
+              id: d.id,
+              name: d.name,
+              tag: d.tag,
+            }) satisfies LookupDriveDiscListItemSummary,
+        ),
       }
     }
 

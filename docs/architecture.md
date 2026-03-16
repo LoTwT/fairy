@@ -418,3 +418,4 @@ const total = base * bonus * crit * resistance * custom
 - `V428` lookup agent and w-engine trimmed-result contracts：当前阶段已收口；`lookup-w-engine` 与 `lookup-agent` 的顶层 trimmed-result key 已统一复用显式 alias
 - `V429` lookup-game-mode result contracts：当前阶段已收口；`lookup-game-mode.ts` 中版本搜索、候选敌人与可选列表的结果 contract 已统一复用显式 alias / interface
 - `V430` lookup-w-engine list contracts：当前阶段已收口；`lookup-w-engine.ts` 中列表项与未命中候选项的结果 contract 已统一复用显式 alias / interface
+- `V431` bangboo and drive-disc list contracts：当前阶段已收口；`lookup-bangboo.ts` 与 `lookup-drive-disc.ts` 中列表项和未命中候选项的结果 contract 已统一复用显式 alias / interface

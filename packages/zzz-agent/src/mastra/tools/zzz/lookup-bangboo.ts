@@ -8,6 +8,27 @@ export type LookupBangbooQueryName = string
 
 export type LookupBangbooLocale = "en" | "zh-CN"
 
+export type LookupBangbooId = BangbooItem["id"]
+
+export type LookupBangbooName = BangbooItem["name"]
+
+export type LookupBangbooRarity = BangbooItem["rarity"]
+
+export interface LookupBangbooListItemSummary {
+  id: LookupBangbooId
+  name: LookupBangbooName
+  rarity: LookupBangbooRarity
+}
+
+export type LookupBangbooListItemSummaryList = LookupBangbooListItemSummary[]
+
+export interface LookupBangbooCandidate {
+  name: LookupBangbooName
+  rarity: LookupBangbooRarity
+}
+
+export type LookupBangbooCandidateList = LookupBangbooCandidate[]
+
 export type LookupBangbooCalculatedStatName = string
 
 export type LookupBangbooCalculatedStatValue = number
@@ -81,11 +102,14 @@ export const lookupBangboo = createTool({
       return {
         found: true,
         total: filtered.length,
-        bangboos: filtered.map((b) => ({
-          id: b.id,
-          name: b.name,
-          rarity: b.rarity,
-        })),
+        bangboos: filtered.map(
+          (b) =>
+            ({
+              id: b.id,
+              name: b.name,
+              rarity: b.rarity,
+            }) satisfies LookupBangbooListItemSummary,
+        ),
       }
     }
 
@@ -104,10 +128,13 @@ export const lookupBangboo = createTool({
       return {
         found: false,
         message: `未找到名称包含「${name}」的邦布`,
-        candidates: candidates.map((b) => ({
-          name: b.name,
-          rarity: b.rarity,
-        })),
+        candidates: candidates.map(
+          (b) =>
+            ({
+              name: b.name,
+              rarity: b.rarity,
+            }) satisfies LookupBangbooCandidate,
+        ),
       }
     }
 
