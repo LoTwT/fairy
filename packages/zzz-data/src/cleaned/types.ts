@@ -116,14 +116,24 @@ export interface SDSideView {
   sideHPMult: number
   hp60k: number
   altHp: number
-  enemies: FlattenedEnemyView<SDEnemyItem>[]
+  enemies: SDSideEnemyViewList
 }
+export type SDSideEnemyView = FlattenedEnemyView<SDEnemyItem>
+export type SDSideEnemyViewList = SDSideEnemyView[]
+
+export type SDNodeBuffName = string
+export type SDNodeBuffNameList = SDNodeBuffName[]
+
+export type SDNodeBuffDescription = string
+export type SDNodeBuffDescriptionList = SDNodeBuffDescription[]
+
+export type SDSideViewList = SDSideView[]
 
 export interface SDNodeView {
   node: number
-  buffNames: string[]
-  buffDescriptions: string[]
-  sides: SDSideView[]
+  buffNames: SDNodeBuffNameList
+  buffDescriptions: SDNodeBuffDescriptionList
+  sides: SDSideViewList
 }
 
 export type TSSideRole = "boss" | "regular"

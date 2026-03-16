@@ -407,3 +407,4 @@ const total = base * bonus * crit * resistance * custom
 - `V417` game-modes threshold-simulation side and node list contracts：当前阶段已收口；`game-modes.ts` 中 `Threshold Simulation` 的 `side/node` 匿名 list contract 已统一复用显式 alias
 - `V418` game-modes threshold-simulation version and mode list contracts：当前阶段已收口；`game-modes.ts` 中 `Threshold Simulation` 的 `version/mode` 匿名 list contract 已统一复用显式 alias
 - `V419` cleaned encounter and DA buff text list contracts：当前阶段已收口；`cleaned/types.ts` 中候选名、弱点、抗性与 `DA buff` 名字列表已统一复用显式 alias
+- `V420` cleaned shiyu-defense view list contracts：当前阶段已收口；`cleaned/types.ts` 中 `Shiyu Defense` 视图的敌人列表、buff 名称/描述列表与 side 列表已统一复用显式 alias
