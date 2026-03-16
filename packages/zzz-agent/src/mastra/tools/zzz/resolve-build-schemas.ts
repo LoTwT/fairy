@@ -519,11 +519,6 @@ export const resolveBuildScenarioSchema = zod.discriminatedUnion("damageType", [
   }),
 ])
 
-export const driveDiscSetSchema = zod.object({
-  name: zod.string().describe("驱动盘名称或 ID"),
-  pieces: zod.union([zod.literal(2), zod.literal(4)]),
-})
-
 export const agentIdentifierSchema = zod.string().describe("代理人名称或 ID")
 
 export const wEngineIdentifierSchema = zod
@@ -548,6 +543,18 @@ export const wEngineRefinementSchema = zod
 export const agentLevelSchema = zod.number().min(1).max(60).optional()
 
 export const agentMindscapeSchema = zod.number().int().min(0).max(6).optional()
+
+export const driveDiscSetNameSchema = zod.string().describe("驱动盘名称或 ID")
+
+export const driveDiscSetPiecesSchema = zod.union([
+  zod.literal(2),
+  zod.literal(4),
+])
+
+export const driveDiscSetSchema = zod.object({
+  name: driveDiscSetNameSchema,
+  pieces: driveDiscSetPiecesSchema,
+})
 
 export const buildModeSchema = zod
   .enum(["baseline", "full-buff", "manual"])
