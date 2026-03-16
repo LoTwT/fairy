@@ -390,3 +390,4 @@
 - [静态构筑解析系统 V490](./specs/static-build-resolver-v490.md) — 当前阶段：已收口；`resolve-build-schemas.ts` 中 `effectOverride` 的 leaf schema 已统一复用共享 schema 常量
 - [静态构筑解析系统 V491](./specs/static-build-resolver-v491.md) — 当前阶段：已收口；`resolve-build-schemas.ts` 中 `combatTags` 的元素 schema 已统一复用共享 schema 常量
 - [静态构筑解析系统 V492](./specs/static-build-resolver-v492.md) — 当前阶段：已收口；`resolve-build-schemas.ts` 中 `scenario.damageType` 的 branch literal schema 已统一复用共享 schema 常量
+- [静态构筑解析系统 V493](./specs/static-build-resolver-v493.md) — 当前阶段：已收口；`resolve-build-schemas.ts` 中 `scenario` multiplier 的共享 `number|string` scalar schema 已统一复用共享 schema 常量

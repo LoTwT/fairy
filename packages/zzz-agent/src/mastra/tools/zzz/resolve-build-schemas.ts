@@ -84,6 +84,10 @@ export type BuildToolScenarioAttributeValue = BuildToolAttributeValue
 
 export type BuildToolScenarioExtraAbilityFlag = boolean
 
+export type BuildToolScenarioMultiplierNumberValue = number
+
+export type BuildToolScenarioMultiplierTextValue = string
+
 export type BuildToolScenarioCombatTagList = StaticBuildCombatTagList
 
 export interface BuildToolDynamicSnapshotFlags {
@@ -475,14 +479,18 @@ export const scenarioAttributeSchema = zod.string().optional()
 
 export const scenarioExtraAbilityActiveSchema = zod.boolean().optional()
 
+export const scenarioMultiplierNumberSchema = zod.number()
+
+export const scenarioMultiplierTextSchema = zod.string()
+
 export const scenarioSkillMultiplierSchema = zod.union([
-  zod.number(),
-  zod.string(),
+  scenarioMultiplierNumberSchema,
+  scenarioMultiplierTextSchema,
 ])
 
 export const scenarioDamageMultiplierSchema = zod.union([
-  zod.number(),
-  zod.string(),
+  scenarioMultiplierNumberSchema,
+  scenarioMultiplierTextSchema,
 ])
 
 export const scenarioAnomalyTypeSchema = zod.string()

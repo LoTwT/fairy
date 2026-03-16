@@ -471,5 +471,6 @@ const total = base * bonus * crit * resistance * custom
 - `V490` resolve-build effect override scalar schemas：当前阶段已收口；`resolve-build-schemas.ts` 中 `effectOverride` 的 leaf schema 已统一复用共享 schema 常量
 - `V491` resolve-build combat tag element schema：当前阶段已收口；`resolve-build-schemas.ts` 中 `combatTags` 的元素 schema 已统一复用共享 schema 常量
 - `V492` resolve-build scenario damage-type literal schemas：当前阶段已收口；`resolve-build-schemas.ts` 中 `scenario.damageType` 的 branch literal schema 已统一复用共享 schema 常量
+- `V493` resolve-build scenario multiplier scalar schemas：当前阶段已收口；`resolve-build-schemas.ts` 中 `scenarioSkillMultiplier / scenarioDamageMultiplier` 共享的 `number|string` scalar schema 已统一复用共享 schema 常量
 - `V459` calculator disorder damage params contracts：当前阶段已收口；`calculator/types.ts` 中 `DisorderDamageParams` 已统一改为显式 interface
 - `V460` compact disorder damage params contracts：当前阶段已收口；`build/compact.ts` 中 `CompactStaticBuildDisorderDamageParams` 已统一改为显式 interface
