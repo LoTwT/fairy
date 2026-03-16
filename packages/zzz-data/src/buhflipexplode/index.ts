@@ -283,11 +283,12 @@ export type SDEnemyRefList = SDEnemyRef[]
 export interface SDWave {
   enemies: SDEnemyRefList
 }
+export type SDWaveList = SDWave[]
 export interface SDSide {
   /** Elemental damage multipliers [ice, fire, electric, ether, physical] for this side */
   sideElementMult: BuhflipElementMultiplierTuple
   sideHPMult: BuhflipEnemyHPMult
-  waves: SDWave[]
+  waves: SDWaveList
 }
 export interface SDNode {
   buffName: BuhflipBuffTextValue
@@ -348,9 +349,10 @@ export type TSEnemyRefList = TSEnemyRef[]
 export interface TSWave {
   enemies: TSEnemyRefList
 }
+export type TSWaveList = TSWave[]
 export interface TSSide {
   sideHPMult?: BuhflipEnemyHPMult
-  waves: TSWave[]
+  waves: TSWaveList
 }
 export interface TSNode {
   buffNames: BuhflipBuffTextList

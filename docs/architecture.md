@@ -390,3 +390,4 @@ const total = base * bonus * crit * resistance * custom
 - `V400` buhflipexplode version text contracts：当前阶段已收口；`buhflipexplode/index.ts` 中 `SD/DA/TS` 版本容器的 `versionName / versionTime / mode name` 已统一复用显式 alias
 - `V401` buhflipexplode enemy text contracts：当前阶段已收口；`buhflipexplode/index.ts` 中敌人 `name / image / misc / spoiler*` 文本字段已统一复用显式 alias
 - `V402` buhflipexplode enemy ref list contracts：当前阶段已收口；`buhflipexplode/index.ts` 中 `SD/DA/TS` 敌人引用集合已统一复用显式 list alias
+- `V403` buhflipexplode wave list contracts：当前阶段已收口；`buhflipexplode/index.ts` 中 `SD/TS` wave 集合已统一复用显式 list alias

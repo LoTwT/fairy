@@ -1151,3 +1151,4 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 400. `V400` buhflipexplode version text contracts：当前阶段已收口；`buhflipexplode/index.ts` 中 `SD/DA/TS` 版本容器的 `versionName / versionTime / mode name` 已统一复用显式 alias，见 [静态构筑解析系统 V400](./static-build-resolver-v400.md)
 401. `V401` buhflipexplode enemy text contracts：当前阶段已收口；`buhflipexplode/index.ts` 中敌人 `name / image / misc / spoiler*` 文本字段已统一复用显式 alias，见 [静态构筑解析系统 V401](./static-build-resolver-v401.md)
 402. `V402` buhflipexplode enemy ref list contracts：当前阶段已收口；`buhflipexplode/index.ts` 中 `SD/DA/TS` 敌人引用集合已统一复用显式 list alias，见 [静态构筑解析系统 V402](./static-build-resolver-v402.md)
+403. `V403` buhflipexplode wave list contracts：当前阶段已收口；`buhflipexplode/index.ts` 中 `SD/TS` wave 集合已统一复用显式 list alias，见 [静态构筑解析系统 V403](./static-build-resolver-v403.md)
