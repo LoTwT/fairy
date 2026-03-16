@@ -345,3 +345,6 @@ const total = base * bonus * crit * resistance * custom
 - `V355` generate header helper text contracts：当前阶段已收口；`normalizeHeader()` 的输入输出已统一复用显式公开文本 contract
 - `V356` merge shared helper contracts：当前阶段已收口；`scripts/merge/shared.ts` 的公开 merge helper 输入已统一复用显式公开 contract
 - `V357` crawl shared helper contracts：当前阶段已收口；`scripts/crawl/shared.ts` 的公开 crawl helper 输入输出已统一复用显式公开 contract
+- `V358` canonical term helper contracts：当前阶段已收口；`terms.ts` 的 canonical helper 输入输出已统一复用显式公开 contract
+- `V359` generate cell helper contracts：当前阶段已收口；`extractCellValue()` 的输入输出已统一复用显式公开 contract
+- `V360` buhflipexplode helper result contracts：当前阶段已收口；`buhflipexplode` 公开公式 helper 的返回值已统一复用显式公开 contract

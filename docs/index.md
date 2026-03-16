@@ -255,3 +255,6 @@
 - [静态构筑解析系统 V355](./specs/static-build-resolver-v355.md) — 当前阶段：已收口；`normalizeHeader()` 的输入输出已统一复用显式公开文本 contract
 - [静态构筑解析系统 V356](./specs/static-build-resolver-v356.md) — 当前阶段：已收口；`scripts/merge/shared.ts` 的公开 merge helper 输入已统一复用显式公开 contract
 - [静态构筑解析系统 V357](./specs/static-build-resolver-v357.md) — 当前阶段：已收口；`scripts/crawl/shared.ts` 的公开 crawl helper 输入输出已统一复用显式公开 contract
+- [静态构筑解析系统 V358](./specs/static-build-resolver-v358.md) — 当前阶段：已收口；`terms.ts` 的 canonical helper 输入输出已统一复用显式公开 contract
+- [静态构筑解析系统 V359](./specs/static-build-resolver-v359.md) — 当前阶段：已收口；`extractCellValue()` 的输入输出已统一复用显式公开 contract
+- [静态构筑解析系统 V360](./specs/static-build-resolver-v360.md) — 当前阶段：已收口；`buhflipexplode` 公开公式 helper 的返回值已统一复用显式公开 contract

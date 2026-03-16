@@ -419,9 +419,13 @@ export const worksheetConfigs: WorksheetConfig[] = [
 // Cell value extraction
 // ---------------------------------------------------------------------------
 
+export type GenerateCellValue = CellValue
+
+export type GenerateExtractedCellValue = string | number | boolean | null
+
 export function extractCellValue(
-  cell: CellValue,
-): string | number | boolean | null {
+  cell: GenerateCellValue,
+): GenerateExtractedCellValue {
   if (cell === null || cell === undefined) return null
 
   // Formula cell

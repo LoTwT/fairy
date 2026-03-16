@@ -12703,3 +12703,92 @@ caveatSummary` 这些兼容字段补齐。
 - `V357.2` 已完成：crawl shared helper 输入输出已统一复用显式公开 alias
 - `V357.3` 已完成：校验与提交
 - `V357.4` 已完成：roadmap、索引与架构文档同步
+
+## 361. V358 canonical term helper contracts
+
+### 361.1 目标
+
+`V358` 只解决一件事：
+
+- 给 `terms.ts` 里公开导出的 canonical helper 的 lookup 文本和 index contract 补显式公开 alias，不改变任何术语归一化逻辑。
+
+### 361.2 范围
+
+1. `CanonicalTermLookupText`
+2. `BaseResistanceIndex`
+3. `toAgentSpecialty()`
+4. `toAgentAttribute()`
+5. `toAttackType()`
+6. `toBaseResistanceAttribute()`
+7. `getElementMultIndex()`
+
+### 361.3 非目标
+
+1. 不改术语映射表
+2. 不改属性桶顺序
+3. 不改 canonicalizer 逻辑
+
+### 361.4 当前状态
+
+- `V358.1` 已完成：范围冻结到 canonical term helper contract
+- `V358.2` 已完成：canonical helper 输入输出已统一复用显式公开 alias
+- `V358.3` 已完成：校验与提交
+- `V358.4` 已完成：roadmap、索引与架构文档同步
+
+## 362. V359 generate cell helper contracts
+
+### 362.1 目标
+
+`V359` 只解决一件事：
+
+- 给 `extractCellValue()` 的输入输出补显式公开 contract，不改变任何 cell-value 解析逻辑。
+
+### 362.2 范围
+
+1. `GenerateCellValue`
+2. `GenerateExtractedCellValue`
+3. `extractCellValue()`
+
+### 362.3 非目标
+
+1. 不改单元格解析逻辑
+2. 不改 `normalizeHeader()`
+3. 不改 generate 流程
+
+### 362.4 当前状态
+
+- `V359.1` 已完成：范围冻结到 generate cell helper contract
+- `V359.2` 已完成：`extractCellValue()` 已统一复用显式公开 alias
+- `V359.3` 已完成：校验与提交
+- `V359.4` 已完成：roadmap、索引与架构文档同步
+
+## 363. V360 buhflipexplode helper result contracts
+
+### 363.1 目标
+
+`V360` 只解决一件事：
+
+- 给 `buhflipexplode` 公开公式 helper 的结果标量补显式公开 contract，不改变任何公式逻辑。
+
+### 363.2 范围
+
+1. `BuhflipEnemyDefense`
+2. `BuhflipEnemyDaze`
+3. `BuhflipEnemyHP`
+4. `BuhflipBossHP`
+5. `BuhflipPP20kHP`
+6. `BuhflipAltHPReduction`
+7. 10 个公开公式 helper 的返回值
+
+### 363.3 非目标
+
+1. 不改任何公式
+2. 不改 merge/crawl 流程
+3. 不扩大 buhflipexplode 导出范围
+
+### 363.4 当前状态
+
+- `V360.1` 已完成：范围冻结到 buhflipexplode helper 结果 contract
+- `V360.2` 已完成：公开公式 helper 返回值已统一复用显式公开 alias
+- `V360.3` 已完成：校验与提交
+- `V360.4` 已完成：roadmap、索引与架构文档同步

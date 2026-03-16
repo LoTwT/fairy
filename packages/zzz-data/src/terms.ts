@@ -80,6 +80,10 @@ export const baseResistanceAttributes = [
 
 export type BaseResistanceAttribute = (typeof baseResistanceAttributes)[number]
 
+export type CanonicalTermLookupText = string | undefined
+
+export type BaseResistanceIndex = number
+
 // This order matches game-modes `elementMult`.
 export const ELEMENT_MULT_ORDER = baseResistanceAttributes
 
@@ -99,25 +103,25 @@ const canonicalizeAttribute = createCanonicalizer(attributeLabels)
 const canonicalizeAttackType = createCanonicalizer(attackTypeLabels)
 
 export function toAgentSpecialty(
-  value: string | undefined,
+  value: CanonicalTermLookupText,
 ): AgentSpecialty | undefined {
   return canonicalizeSpecialty(value) as AgentSpecialty | undefined
 }
 
 export function toAgentAttribute(
-  value: string | undefined,
+  value: CanonicalTermLookupText,
 ): AgentAttribute | undefined {
   return canonicalizeAttribute(value) as AgentAttribute | undefined
 }
 
 export function toAttackType(
-  value: string | undefined,
+  value: CanonicalTermLookupText,
 ): AttackType | undefined {
   return canonicalizeAttackType(value) as AttackType | undefined
 }
 
 export function toBaseResistanceAttribute(
-  value: string | undefined,
+  value: CanonicalTermLookupText,
 ): BaseResistanceAttribute | undefined {
   const attribute = toAgentAttribute(value)
   if (!attribute) return undefined
@@ -125,8 +129,8 @@ export function toBaseResistanceAttribute(
 }
 
 export function getElementMultIndex(
-  value: string | undefined,
-): number | undefined {
+  value: CanonicalTermLookupText,
+): BaseResistanceIndex | undefined {
   const attribute = toBaseResistanceAttribute(value)
   if (!attribute) return undefined
   return ELEMENT_MULT_ORDER.indexOf(attribute)

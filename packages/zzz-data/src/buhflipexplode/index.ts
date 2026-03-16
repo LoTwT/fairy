@@ -281,6 +281,18 @@ export type BuhflipEnemyId = string
 
 export type BuhflipVersionIndex = number
 
+export type BuhflipEnemyDefense = number
+
+export type BuhflipEnemyDaze = number
+
+export type BuhflipEnemyHP = number
+
+export type BuhflipBossHP = number
+
+export type BuhflipPP20kHP = number
+
+export type BuhflipAltHPReduction = number
+
 // ─── Enemy stat calculations ──────────────────────────────────────────────────
 
 /**
@@ -295,7 +307,7 @@ export type BuhflipVersionIndex = number
 export function calcEnemyDEF(
   baseDEF: BuhflipEnemyBaseDefense,
   nodeLvl: BuhflipNodeLevel,
-): number {
+): BuhflipEnemyDefense {
   return (baseDEF * NODE_DEF_MULT[nodeLvl - 1]) / 100
 }
 
@@ -311,7 +323,7 @@ export function calcEnemyDEF(
 export function calcEnemyDaze(
   baseDaze: BuhflipEnemyBaseDaze,
   nodeLvl: BuhflipNodeLevel,
-): number {
+): BuhflipEnemyDaze {
   return (baseDaze * NODE_DAZE_MULT[nodeLvl - 1]) / 100
 }
 
@@ -330,7 +342,7 @@ export function calcSDEnemyHP(
   baseHP: BuhflipEnemyBaseHP,
   sideHPMult: BuhflipEnemyHPMult,
   nodeLvl: BuhflipNodeLevel,
-): number {
+): BuhflipEnemyHP {
   return Math.round((sideHPMult * baseHP * NODE_HP_MULT[nodeLvl - 1]) / 10000)
 }
 
@@ -348,7 +360,7 @@ export function calcTSEnemyHP(
   baseHP: BuhflipEnemyBaseHP,
   sideHPMult: BuhflipEnemyHPMult,
   nodeLvl: BuhflipNodeLevel,
-): number {
+): BuhflipEnemyHP {
   return Math.round(
     (baseHP * sideHPMult * NODE_ENEMY_HP_MULT[nodeLvl - 1]) / 10000,
   )
@@ -370,7 +382,7 @@ export function calcBossHP(
   baseHP: BuhflipEnemyBaseHP,
   nodeLvl: BuhflipNodeLevel,
   mult: BuhflipBossHPMult,
-): number {
+): BuhflipBossHP {
   return Math.floor(
     (BOSS_HP_COEFF * baseHP * NODE_HP_MULT[nodeLvl - 1] * mult) / 10000,
   )
@@ -381,7 +393,7 @@ export function calcBossHP(
  *
  * Formula: `Math.ceil(PP20K_FACTOR × total60k)`
  */
-export function calcPP20k(total60k: BuhflipPP60kTotalHP): number {
+export function calcPP20k(total60k: BuhflipPP60kTotalHP): BuhflipPP20kHP {
   return Math.ceil(PP20K_FACTOR * total60k)
 }
 
@@ -411,7 +423,7 @@ export function calcSDEnemyAltHPReduction(
   tags: BuhflipEnemyTagList,
   id: BuhflipEnemyId,
   isFirstInWave: boolean,
-): number {
+): BuhflipAltHPReduction {
   const hasSpecial =
     tags.length >= 1 &&
     !(tags.length === 1 && (tags.includes("spoiler") || tags.includes("hitch")))
@@ -441,7 +453,7 @@ export function calcTSEnemyAltHPReduction(
   tags: BuhflipEnemyTagList,
   id: BuhflipEnemyId,
   isFirstInWave: boolean,
-): number {
+): BuhflipAltHPReduction {
   const hasSpecial =
     tags.length >= 1 &&
     !(tags.length === 1 && (tags.includes("spoiler") || tags.includes("hitch")))
@@ -479,7 +491,7 @@ export function calcDABossAltHPReduction(
   tags: BuhflipEnemyTagList,
   id: BuhflipEnemyId,
   versionIdx: BuhflipVersionIndex,
-): number {
+): BuhflipAltHPReduction {
   if (tags.length < 1 || (tags.length === 1 && tags.includes("spoiler")))
     return 0
   let r = 0
@@ -502,7 +514,7 @@ export function calcDABossAltHPReduction(
 export function calcTSBossAltHPReduction(
   tags: BuhflipEnemyTagList,
   id: BuhflipEnemyId,
-): number {
+): BuhflipAltHPReduction {
   if (tags.length < 1 || (tags.length === 1 && tags.includes("spoiler")))
     return 0
   let r = 0

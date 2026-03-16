@@ -1106,3 +1106,6 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 355. `V355` generate header helper text contracts：当前阶段已收口；`normalizeHeader()` 的输入输出已统一复用显式公开文本 contract，不改变任何列头归一化逻辑，见 [静态构筑解析系统 V355](./static-build-resolver-v355.md)
 356. `V356` merge shared helper contracts：当前阶段已收口；`scripts/merge/shared.ts` 的公开 merge helper 输入已统一复用显式公开 contract，不改变任何读写行为，见 [静态构筑解析系统 V356](./static-build-resolver-v356.md)
 357. `V357` crawl shared helper contracts：当前阶段已收口；`scripts/crawl/shared.ts` 的公开 crawl helper 输入输出已统一复用显式公开 contract，不改变任何抓取逻辑，见 [静态构筑解析系统 V357](./static-build-resolver-v357.md)
+358. `V358` canonical term helper contracts：当前阶段已收口；`terms.ts` 的 canonical helper 输入输出已统一复用显式公开 contract，不改变任何术语归一化逻辑，见 [静态构筑解析系统 V358](./static-build-resolver-v358.md)
+359. `V359` generate cell helper contracts：当前阶段已收口；`extractCellValue()` 的输入输出已统一复用显式公开 contract，不改变任何 cell-value 解析逻辑，见 [静态构筑解析系统 V359](./static-build-resolver-v359.md)
+360. `V360` buhflipexplode helper result contracts：当前阶段已收口；`buhflipexplode` 公开公式 helper 的返回值已统一复用显式公开 contract，不改变任何公式逻辑，见 [静态构筑解析系统 V360](./static-build-resolver-v360.md)
