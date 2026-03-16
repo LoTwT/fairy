@@ -82,19 +82,53 @@ export const NODE_DAZE_MULT: BuhflipNodeMultiplierTable = [
 
 /** Stable Node: node levels per node index */
 // prettier-ignore
-export const SD_STABLE_NODE_LVLS = [25, 28, 30, 33, 35, 38, 40, 43, 45, 50] as const
+export const SD_STABLE_NODE_LVLS: BuhflipNodeLevelList = [
+  25, 
+28, 
+30, 
+33, 
+35, 
+38, 
+40, 
+43, 
+45, 
+50,
+] as const
 /** Disputed Node: node levels per node index */
 // prettier-ignore
-export const SD_DISPUTED_NODE_LVLS = [40, 43, 45, 48, 50, 53, 55, 60] as const
+export const SD_DISPUTED_NODE_LVLS: BuhflipNodeLevelList = [
+  40, 
+43, 
+45, 
+48, 
+50, 
+53, 
+55, 
+60,
+] as const
 /** Ambush Node: node levels per node index */
 // prettier-ignore
-export const SD_AMBUSH_NODE_LVLS = [50, 53, 55, 60, 65] as const
+export const SD_AMBUSH_NODE_LVLS: BuhflipNodeLevelList = [50, 53, 55, 60, 65] as const
 /** Critical Node: node levels per node index (versions before 2.5) */
 // prettier-ignore
-export const SD_PRE25_CRIT_NODE_LVLS = [50, 53, 55, 58, 60, 65, 70] as const
+export const SD_PRE25_CRIT_NODE_LVLS: BuhflipNodeLevelList = [
+  50, 
+53, 
+55, 
+58, 
+60, 
+65, 
+70,
+] as const
 /** Critical Node: node levels per node index (versions from 2.5 onward) */
 // prettier-ignore
-export const SD_POST25_CRIT_NODE_LVLS = [50, 55, 60, 65, 70] as const
+export const SD_POST25_CRIT_NODE_LVLS: BuhflipNodeLevelList = [
+  50, 
+55, 
+60, 
+65, 
+70,
+] as const
 
 /**
  * 1-based Critical Node version index at which the post-2.5 layout begins.
@@ -106,13 +140,26 @@ export const SD_V25_BOUNDARY = 38
 
 /** Easy Mode: node levels per node index */
 // prettier-ignore
-export const TS_EASY_NODE_LVLS = [55, 58, 60, 65] as const
+export const TS_EASY_NODE_LVLS: BuhflipNodeLevelList = [55, 58, 60, 65] as const
 /** Hard Mode: node levels per node index (versions before 2.6) */
 // prettier-ignore
-export const TS_PRE26_HARD_NODE_LVLS = [60, 63, 65, 70, 70, 70] as const
+export const TS_PRE26_HARD_NODE_LVLS: BuhflipNodeLevelList = [
+  60, 
+63, 
+65, 
+70, 
+70, 
+70,
+] as const
 /** Hard Mode: node levels per node index (versions from 2.6 onward) */
 // prettier-ignore
-export const TS_POST26_HARD_NODE_LVLS = [60, 65, 70, 70, 70] as const
+export const TS_POST26_HARD_NODE_LVLS: BuhflipNodeLevelList = [
+  60, 
+65, 
+70, 
+70, 
+70,
+] as const
 
 /**
  * 1-based Hard Mode version index at which the post-2.6 layout begins.
@@ -137,6 +184,8 @@ export const PP20K_FACTOR = 0.281083138
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 export type BuhflipNodeLevel = number
+
+export type BuhflipNodeLevelList = readonly BuhflipNodeLevel[]
 
 export type BuhflipNodeMultiplierValue = number
 

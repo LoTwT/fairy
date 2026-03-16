@@ -307,3 +307,4 @@
 - [静态构筑解析系统 V407](./specs/static-build-resolver-v407.md) — 当前阶段：已收口；`buhflipexplode/index.ts` 中 `SD/TS` 顶层 mode list 已统一复用显式 list alias
 - [静态构筑解析系统 V408](./specs/static-build-resolver-v408.md) — 当前阶段：已收口；`buhflipexplode/index.ts` 中顶层 enemy record 已统一复用显式 alias
 - [静态构筑解析系统 V409](./specs/static-build-resolver-v409.md) — 当前阶段：已收口；`buhflipexplode/index.ts` 中四个 multiplier table 常量已统一复用显式 readonly list alias
+- [静态构筑解析系统 V410](./specs/static-build-resolver-v410.md) — 当前阶段：已收口；`buhflipexplode/index.ts` 中 `SD/TS` node level 常量列表已统一复用显式 readonly list alias
