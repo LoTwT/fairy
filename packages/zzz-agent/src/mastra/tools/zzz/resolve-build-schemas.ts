@@ -98,6 +98,23 @@ export interface BuildToolStateSnapshotValues {
   miyabiFrostburnBreakDamageRatio?: BuildToolSnapshotRatio
 }
 
+export interface BuildToolResolvedSnapshotBucketDeltas {
+  bonusDamageSum?: BuildToolResolvedSnapshotDeltaValue
+  defenseReduction?: BuildToolResolvedSnapshotDeltaValue
+  penetrationRate?: BuildToolResolvedSnapshotDeltaValue
+  resistanceReduction?: BuildToolResolvedSnapshotDeltaValue
+  ignoreResistance?: BuildToolResolvedSnapshotDeltaValue
+  sheerBonusSum?: BuildToolResolvedSnapshotDeltaValue
+  anomalyProficiency?: BuildToolResolvedSnapshotDeltaValue
+  anomalyBonusDamageSum?: BuildToolResolvedSnapshotDeltaValue
+  anomalyCritRate?: BuildToolResolvedSnapshotDeltaValue
+  anomalyCritDamage?: BuildToolResolvedSnapshotDeltaValue
+}
+
+export interface BuildToolResolvedSnapshotMultiplierFactors {
+  skillMultiplierFactor?: BuildToolResolvedSnapshotMultiplierFactorValue
+}
+
 export interface BuildToolDriveDiscSetInput {
   name: BuildToolDriveDiscSetName
   pieces: StaticBuildDriveDiscPieces
@@ -131,21 +148,8 @@ export interface BuildToolStateSnapshotInput {
 }
 
 export interface BuildToolResolvedSnapshotInput {
-  bucketDeltas?: {
-    bonusDamageSum?: BuildToolResolvedSnapshotDeltaValue
-    defenseReduction?: BuildToolResolvedSnapshotDeltaValue
-    penetrationRate?: BuildToolResolvedSnapshotDeltaValue
-    resistanceReduction?: BuildToolResolvedSnapshotDeltaValue
-    ignoreResistance?: BuildToolResolvedSnapshotDeltaValue
-    sheerBonusSum?: BuildToolResolvedSnapshotDeltaValue
-    anomalyProficiency?: BuildToolResolvedSnapshotDeltaValue
-    anomalyBonusDamageSum?: BuildToolResolvedSnapshotDeltaValue
-    anomalyCritRate?: BuildToolResolvedSnapshotDeltaValue
-    anomalyCritDamage?: BuildToolResolvedSnapshotDeltaValue
-  }
-  multiplierFactors?: {
-    skillMultiplierFactor?: BuildToolResolvedSnapshotMultiplierFactorValue
-  }
+  bucketDeltas?: BuildToolResolvedSnapshotBucketDeltas
+  multiplierFactors?: BuildToolResolvedSnapshotMultiplierFactors
 }
 
 export type BuildToolDamageType = StaticBuildDamageType
