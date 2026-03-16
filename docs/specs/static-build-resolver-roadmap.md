@@ -13523,3 +13523,59 @@ caveatSummary` 这些兼容字段补齐。
 - `V383.2` 已完成：`gachabase` 公式 helper 的输入输出已统一复用显式标量 alias
 - `V383.3` 已完成：全量校验与提交
 - `V383.4` 已完成：roadmap、索引与架构文档同步
+
+## 387. V384 buhflipexplode raw field contracts
+
+### 387.1 目标
+
+`V384` 只解决一件事：
+
+- 把 `buhflipexplode` raw interface 的公开字段统一改成显式 alias / pair alias / list alias。
+
+### 387.2 范围
+
+1. `BuhflipNodeLevel`
+2. `BuhflipEnemyBaseDefense`
+3. `BuhflipEnemyBaseDaze`
+4. `BuhflipEnemyBaseHP`
+5. `BuhflipEnemyBaseDazePair`
+6. `BuhflipEnemyBaseHPPair`
+7. `BuhflipEnemyHPMult`
+8. `BuhflipBossHPMult`
+9. `BuhflipPP60kTotalHP`
+10. `BuhflipEnemyTag`
+11. `BuhflipEnemyTagList`
+12. `BuhflipEnemyModifier`
+13. `BuhflipEnemyModifierList`
+14. `BuhflipEnemyId`
+15. `BuhflipVersionIndex`
+16. `BuhflipEnemyRefType`
+17. `BuhflipEnemyCount`
+18. `BuhflipEnemyStunMultiplier`
+19. `BuhflipEnemyStunTime`
+20. `BuhflipEnemyBaseAnomaly`
+21. `BuhflipVersionDazeMultiplier`
+22. `BuhflipVersionAnomalyMultiplier`
+23. `BuhflipMainBuffNum`
+24. `BuhflipEnemy`
+25. `SDEnemyRef`
+26. `SDSide`
+27. `SDVersionData`
+28. `DAEnemyRef`
+29. `DAVersionData`
+30. `TSEnemyRef`
+31. `TSSide`
+32. `TSVersionData`
+
+### 387.3 非目标
+
+1. 不改任何 `buhflipexplode` 公式 helper 逻辑
+2. 不改爬虫或 merge 输出
+3. 不把 `buhflipexplode` 扩大到根包公开导出
+
+### 387.4 当前状态
+
+- `V384.1` 已完成：范围冻结到 buhflipexplode raw field contract
+- `V384.2` 已完成：`buhflipexplode` raw interface 的公开字段已统一复用显式 alias / pair alias / list alias
+- `V384.3` 已完成：全量校验与提交
+- `V384.4` 已完成：roadmap、索引与架构文档同步

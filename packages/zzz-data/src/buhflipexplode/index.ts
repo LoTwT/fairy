@@ -136,6 +136,70 @@ export const PP20K_FACTOR = 0.281083138
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
+export type BuhflipNodeLevel = number
+
+export type BuhflipEnemyBaseDefense = number
+
+export type BuhflipEnemyBaseDaze = number
+
+export type BuhflipEnemyBaseHP = number
+
+export type BuhflipEnemyBaseDazePair = readonly [
+  BuhflipEnemyBaseDaze,
+  BuhflipEnemyBaseDaze,
+]
+
+export type BuhflipEnemyBaseHPPair = readonly [
+  BuhflipEnemyBaseHP,
+  BuhflipEnemyBaseHP,
+]
+
+export type BuhflipEnemyHPMult = number
+
+export type BuhflipBossHPMult = number
+
+export type BuhflipPP60kTotalHP = number
+
+export type BuhflipEnemyTag = string
+
+export type BuhflipEnemyTagList = readonly BuhflipEnemyTag[]
+
+export type BuhflipEnemyModifier = string
+
+export type BuhflipEnemyModifierList = readonly BuhflipEnemyModifier[]
+
+export type BuhflipEnemyId = string
+
+export type BuhflipVersionIndex = number
+
+export type BuhflipEnemyRefType = number
+
+export type BuhflipEnemyCount = number
+
+export type BuhflipEnemyStunMultiplier = number
+
+export type BuhflipEnemyStunTime = number
+
+export type BuhflipEnemyBaseAnomaly = number
+
+export type BuhflipVersionDazeMultiplier = number
+
+export type BuhflipVersionAnomalyMultiplier = number
+
+export type BuhflipMainBuffNum = number
+
+export type BuhflipEnemyDefense = number
+
+export type BuhflipEnemyDaze = number
+
+export type BuhflipEnemyHP = number
+
+export type BuhflipBossHP = number
+
+export type BuhflipPP20kHP = number
+
+export type BuhflipAltHPReduction = number
+
 /**
  * Single enemy entry from buhflipexplode-enemies.json.
  * The top-level object is `Record<string, BuhflipEnemy>` keyed by enemy ID.
@@ -143,24 +207,24 @@ export const PP20K_FACTOR = 0.281083138
 export interface BuhflipEnemy {
   name: string
   /** [type 0 base HP, type 1 base HP] */
-  baseHP: [number, number]
-  baseDEF: number
+  baseHP: BuhflipEnemyBaseHPPair
+  baseDEF: BuhflipEnemyBaseDefense
   /** [type 0 base daze, type 1 base daze] */
-  baseDaze: [number, number]
+  baseDaze: BuhflipEnemyBaseDazePair
   /** Stun damage multiplier (%) */
-  stunMult: number
+  stunMult: BuhflipEnemyStunMultiplier
   /** Stun duration in seconds */
-  stunTime: number
-  baseAnom: number
+  stunTime: BuhflipEnemyStunTime
+  baseAnom: BuhflipEnemyBaseAnomaly
   image: string
   /**
    * Elemental damage multipliers [ice, fire, electric, ether, physical].
    * Values < 1 mean the enemy resists that element; > 1 means weakness.
    */
   elementMult: [number, number, number, number, number]
-  tags: string[]
+  tags: BuhflipEnemyTagList
   /** In-combat modifiers, e.g. "40-dmg-res", "no-freeze" */
-  mods: string[]
+  mods: BuhflipEnemyModifierList
   desc?: [string, string]
   perf?: [string, string]
   misc?: string
@@ -176,13 +240,13 @@ export type BuhflipEnemyDB = Record<string, BuhflipEnemy>
 export interface SDEnemyRef {
   id: string
   /** Selects baseHP[type] / baseDaze[type] */
-  type: number
-  count: number
+  type: BuhflipEnemyRefType
+  count: BuhflipEnemyCount
 }
 export interface SDSide {
   /** Elemental damage multipliers [ice, fire, electric, ether, physical] for this side */
   sideElementMult: [number, number, number, number, number]
-  sideHPMult: number
+  sideHPMult: BuhflipEnemyHPMult
   waves: Array<{ enemies: SDEnemyRef[] }>
 }
 export interface SDNode {
@@ -193,13 +257,13 @@ export interface SDNode {
 export interface SDVersionData {
   versionName: string
   versionTime: string
-  versionDazeMult: number
-  versionAnomMult: number
+  versionDazeMult: BuhflipVersionDazeMultiplier
+  versionAnomMult: BuhflipVersionAnomalyMultiplier
   versionEnemies: { nodes: SDNode[] }
   /** Critical Node only: version-level buff (overrides node.buffName post-2.5) */
   buffName?: string | string[]
   buffDesc?: string | string[]
-  mainBuffNum?: number
+  mainBuffNum?: BuhflipMainBuffNum
 }
 /** `buhflipexplode-shiyu-defense.json` top-level shape */
 export type SDVersionsJson = Array<{
@@ -211,15 +275,15 @@ export type SDVersionsJson = Array<{
 
 export interface DAEnemyRef {
   id: string
-  type: number
+  type: BuhflipEnemyRefType
   /** Boss HP multiplier (e.g. 180 for Wandering Hunter) */
-  mult: number
+  mult: BuhflipBossHPMult
 }
 export interface DAVersionData {
   versionName: string
   versionTime: string
-  versionDazeMult: number
-  versionAnomMult: number
+  versionDazeMult: BuhflipVersionDazeMultiplier
+  versionAnomMult: BuhflipVersionAnomalyMultiplier
   buffNames: string[]
   versionEnemies: DAEnemyRef[]
 }
@@ -230,13 +294,13 @@ export type DAVersionsJson = Record<string, DAVersionData>
 
 export interface TSEnemyRef {
   id: string
-  type: number
-  count?: number
+  type: BuhflipEnemyRefType
+  count?: BuhflipEnemyCount
   /** Boss mult (absent for regular enemies) */
-  mult?: number
+  mult?: BuhflipBossHPMult
 }
 export interface TSSide {
-  sideHPMult?: number
+  sideHPMult?: BuhflipEnemyHPMult
   waves: Array<{ enemies: TSEnemyRef[] }>
 }
 export interface TSNode {
@@ -247,10 +311,10 @@ export interface TSNode {
 export interface TSVersionData {
   versionName: string
   versionTime: string
-  versionBossDazeMult: number
-  versionEnemyDazeMult: number
-  versionBossAnomMult: number
-  versionEnemyAnomMult: number
+  versionBossDazeMult: BuhflipVersionDazeMultiplier
+  versionEnemyDazeMult: BuhflipVersionDazeMultiplier
+  versionBossAnomMult: BuhflipVersionAnomalyMultiplier
+  versionEnemyAnomMult: BuhflipVersionAnomalyMultiplier
   versionEnemies: { nodes: TSNode[] }
 }
 /** `buhflipexplode-threshold-simulation.json` top-level shape */
@@ -258,40 +322,6 @@ export type TSVersionsJson = Array<{
   name: string
   versions: Record<string, TSVersionData>
 }>
-
-export type BuhflipNodeLevel = number
-
-export type BuhflipEnemyBaseDefense = number
-
-export type BuhflipEnemyBaseDaze = number
-
-export type BuhflipEnemyBaseHP = number
-
-export type BuhflipEnemyHPMult = number
-
-export type BuhflipBossHPMult = number
-
-export type BuhflipPP60kTotalHP = number
-
-export type BuhflipEnemyTag = string
-
-export type BuhflipEnemyTagList = readonly BuhflipEnemyTag[]
-
-export type BuhflipEnemyId = string
-
-export type BuhflipVersionIndex = number
-
-export type BuhflipEnemyDefense = number
-
-export type BuhflipEnemyDaze = number
-
-export type BuhflipEnemyHP = number
-
-export type BuhflipBossHP = number
-
-export type BuhflipPP20kHP = number
-
-export type BuhflipAltHPReduction = number
 
 // ─── Enemy stat calculations ──────────────────────────────────────────────────
 
