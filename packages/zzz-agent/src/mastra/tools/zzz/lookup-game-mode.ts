@@ -28,6 +28,8 @@ import {
 } from "zzz-data"
 import { loadJson, normalizeDamageAttribute } from "./utils"
 
+export type LookupGameModeMode = "DA" | "SD" | "TS"
+
 export type LookupGameModeAttributeInput = string | undefined
 
 export type LookupGameModeEncounterCandidateName = string
@@ -44,6 +46,40 @@ export interface LookupGameModeEncounterCandidate {
   side: LookupGameModeEncounterSide
   wave: LookupGameModeEncounterWave
 }
+
+export type LookupGameModeEncounterCandidateList =
+  LookupGameModeEncounterCandidate[]
+
+export type LookupGameModeSelectedEnemy = LookupGameModeEncounterCandidate
+
+export type LookupGameModeDifficultyName = string
+
+export type LookupGameModeDifficultyList = LookupGameModeDifficultyName[]
+
+export type LookupGameModeVersionKey = string
+
+export type LookupGameModeVersionKeyList = LookupGameModeVersionKey[]
+
+export type LookupGameModeVersionName = string
+
+export type LookupGameModeBossName = string
+
+export type LookupGameModeBossNameList = LookupGameModeBossName[]
+
+export interface LookupGameModeVersionSearchResult {
+  versionKey: LookupGameModeVersionKey
+  versionName: LookupGameModeVersionName
+}
+
+export type LookupGameModeVersionSearchResultList =
+  LookupGameModeVersionSearchResult[]
+
+export interface LookupGameModeDAVersionSearchResult extends LookupGameModeVersionSearchResult {
+  bosses: LookupGameModeBossNameList
+}
+
+export type LookupGameModeDAVersionSearchResultList =
+  LookupGameModeDAVersionSearchResult[]
 
 export type LookupGameModeRecommendedResistance = number
 
@@ -98,6 +134,41 @@ function toEncounterCandidate(
     node: candidate.node,
     side: candidate.side,
     wave: candidate.wave,
+  }
+}
+
+function toSelectedEnemy(
+  candidate: FlattenedEnemyView,
+): LookupGameModeSelectedEnemy {
+  return {
+    name: candidate.enemy.name,
+    node: candidate.node,
+    side: candidate.side,
+    wave: candidate.wave,
+  }
+}
+
+function toVersionSearchResult(version: {
+  versionKey: string
+  versionName: string
+}): LookupGameModeVersionSearchResult {
+  return {
+    versionKey: version.versionKey,
+    versionName: version.versionName,
+  }
+}
+
+function toDAVersionSearchResult(version: {
+  versionKey: string
+  versionName: string
+  versionEnemies: Array<{ name: string }>
+}): LookupGameModeDAVersionSearchResult {
+  return {
+    versionKey: version.versionKey,
+    versionName: version.versionName,
+    bosses: version.versionEnemies.map(
+      (enemy): LookupGameModeBossName => enemy.name,
+    ),
   }
 }
 
@@ -175,15 +246,11 @@ export const lookupGameMode = createTool({
         const matches = findDAVersionsByEnemyName(data, boss)
         return {
           found: matches.length > 0,
-          mode: "DA",
+          mode: "DA" satisfies LookupGameModeMode,
           message: matches.length
             ? undefined
             : `未找到包含 boss「${boss}」的 DA 版本`,
-          results: matches.map((v) => ({
-            versionKey: v.versionKey,
-            versionName: v.versionName,
-            bosses: v.versionEnemies.map((e) => e.name),
-          })),
+          results: matches.map(toDAVersionSearchResult),
         }
       }
 
@@ -193,7 +260,9 @@ export const lookupGameMode = createTool({
         return {
           found: false,
           message: `未找到 DA 版本 ${version}`,
-          availableVersions: data.map((v) => v.versionKey),
+          availableVersions: data.map(
+            (v): LookupGameModeVersionKey => v.versionKey,
+          ),
         }
       }
 
@@ -201,10 +270,15 @@ export const lookupGameMode = createTool({
 
       return {
         found: true,
-        mode: "DA",
+        mode: "DA" satisfies LookupGameModeMode,
         data: item,
         selectedEnemy: selection.selected
-          ? { name: selection.selected.enemy.name }
+          ? ({
+              name: selection.selected.enemy.name,
+              node: undefined,
+              side: undefined,
+              wave: undefined,
+            } satisfies LookupGameModeSelectedEnemy)
           : undefined,
         enemyCandidates:
           !selection.selected && (enemyName || attribute)
@@ -228,7 +302,9 @@ export const lookupGameMode = createTool({
         return {
           found: false,
           message: `未找到 SD 难度「${difficulty}」`,
-          availableDifficulties: data.map((m) => m.name),
+          availableDifficulties: data.map(
+            (m): LookupGameModeDifficultyName => m.name,
+          ),
         }
       }
 
@@ -237,15 +313,12 @@ export const lookupGameMode = createTool({
         const matches = findSDVersionsByEnemyName(modeItem, boss)
         return {
           found: matches.length > 0,
-          mode: "SD",
+          mode: "SD" satisfies LookupGameModeMode,
           difficulty: modeItem.name,
           message: matches.length
             ? undefined
             : `未找到包含 boss「${boss}」的 SD 版本`,
-          results: matches.map((v) => ({
-            versionKey: v.versionKey,
-            versionName: v.versionName,
-          })),
+          results: matches.map(toVersionSearchResult),
         }
       }
 
@@ -257,7 +330,9 @@ export const lookupGameMode = createTool({
         return {
           found: false,
           message: `未找到 SD ${modeItem.name} 版本 ${version}`,
-          availableVersions: modeItem.versions.map((v) => v.versionKey),
+          availableVersions: modeItem.versions.map(
+            (v): LookupGameModeVersionKey => v.versionKey,
+          ),
         }
       }
 
@@ -268,16 +343,11 @@ export const lookupGameMode = createTool({
           : flattenSDEnemies(vItem, { node, side })
       return {
         found: true,
-        mode: "SD",
+        mode: "SD" satisfies LookupGameModeMode,
         difficulty: modeItem.name,
         data: vItem,
         selectedEnemy: selection.selected
-          ? {
-              name: selection.selected.enemy.name,
-              node: selection.selected.node,
-              side: selection.selected.side,
-              wave: selection.selected.wave,
-            }
+          ? toSelectedEnemy(selection.selected)
           : undefined,
         enemyCandidates:
           !selection.selected && (enemyName || attribute || node || side)
@@ -305,7 +375,9 @@ export const lookupGameMode = createTool({
       return {
         found: false,
         message: `未找到 TS 难度「${difficulty}」`,
-        availableDifficulties: data.map((m) => m.name),
+        availableDifficulties: data.map(
+          (m): LookupGameModeDifficultyName => m.name,
+        ),
       }
     }
 
@@ -314,15 +386,12 @@ export const lookupGameMode = createTool({
       const matches = findTSVersionsByEnemyName(modeItem, boss)
       return {
         found: matches.length > 0,
-        mode: "TS",
+        mode: "TS" satisfies LookupGameModeMode,
         difficulty: modeItem.name,
         message: matches.length
           ? undefined
           : `未找到包含 boss「${boss}」的 TS 版本`,
-        results: matches.map((v) => ({
-          versionKey: v.versionKey,
-          versionName: v.versionName,
-        })),
+        results: matches.map(toVersionSearchResult),
       }
     }
 
@@ -334,7 +403,9 @@ export const lookupGameMode = createTool({
       return {
         found: false,
         message: `未找到 TS ${modeItem.name} 版本 ${version}`,
-        availableVersions: modeItem.versions.map((v) => v.versionKey),
+        availableVersions: modeItem.versions.map(
+          (v): LookupGameModeVersionKey => v.versionKey,
+        ),
       }
     }
 
@@ -345,16 +416,11 @@ export const lookupGameMode = createTool({
         : flattenTSEnemies(vItem, { node, side })
     return {
       found: true,
-      mode: "TS",
+      mode: "TS" satisfies LookupGameModeMode,
       difficulty: modeItem.name,
       data: vItem,
       selectedEnemy: selection.selected
-        ? {
-            name: selection.selected.enemy.name,
-            node: selection.selected.node,
-            side: selection.selected.side,
-            wave: selection.selected.wave,
-          }
+        ? toSelectedEnemy(selection.selected)
         : undefined,
       enemyCandidates:
         !selection.selected && (enemyName || attribute || node || side)

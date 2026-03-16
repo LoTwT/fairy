@@ -1177,3 +1177,4 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 426. `V426` gachabase remaining outer list contracts：当前阶段已收口；`gachabase/types.ts` 中 `w-engine`、`bangboo` 与 `drive-disc` 剩余外层列表已统一复用显式 alias，不改变任何 published JSON shape、lookup 行为或 build resolver 逻辑，见 [静态构筑解析系统 V426](./static-build-resolver-v426.md)
 427. `V427` lookup-bangboo trimmed-result contracts：当前阶段已收口；`lookup-bangboo` 的顶层 trimmed-result key 已统一复用显式 alias，不改变任何邦布查询、筛选或属性计算逻辑，见 [静态构筑解析系统 V427](./static-build-resolver-v427.md)
 428. `V428` lookup agent and w-engine trimmed-result contracts：当前阶段已收口；`lookup-w-engine` 与 `lookup-agent` 的顶层 trimmed-result key 已统一复用显式 alias，不改变任何查询、筛选或属性计算逻辑，见 [静态构筑解析系统 V428](./static-build-resolver-v428.md)
+429. `V429` lookup-game-mode result contracts：当前阶段已收口；`lookup-game-mode.ts` 中版本搜索、候选敌人与可选列表的结果 contract 已统一复用显式 alias / interface，不改变任何 DA/SD/TS 查询、敌人选择或 `damageContext` 生成逻辑，见 [静态构筑解析系统 V429](./static-build-resolver-v429.md)

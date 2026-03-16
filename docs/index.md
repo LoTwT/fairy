@@ -326,3 +326,4 @@
 - [静态构筑解析系统 V426](./specs/static-build-resolver-v426.md) — 当前阶段：已收口；`gachabase/types.ts` 中 `w-engine / bangboo / drive-disc` 剩余外层 list contract 已统一复用显式 alias
 - [静态构筑解析系统 V427](./specs/static-build-resolver-v427.md) — 当前阶段：已收口；`lookup-bangboo` 的顶层 trimmed-result key contract 已统一复用显式 alias
 - [静态构筑解析系统 V428](./specs/static-build-resolver-v428.md) — 当前阶段：已收口；`lookup-w-engine` 与 `lookup-agent` 的顶层 trimmed-result key contract 已统一复用显式 alias
+- [静态构筑解析系统 V429](./specs/static-build-resolver-v429.md) — 当前阶段：已收口；`lookup-game-mode.ts` 中版本搜索、候选敌人与可选列表的结果 contract 已统一复用显式 alias / interface
