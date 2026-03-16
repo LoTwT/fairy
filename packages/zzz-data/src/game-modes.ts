@@ -214,6 +214,7 @@ export interface TSBossEnemyItem extends EnemyBase {
   /** zh-CN only */
   mechanics?: GameModeMechanicsText
 }
+export type TSBossEnemyItemList = TSBossEnemyItem[]
 
 export interface TSRegularEnemyItem extends EnemyBase {
   /** Raw source-compatible enemy category from upstream data. */
@@ -221,14 +222,17 @@ export interface TSRegularEnemyItem extends EnemyBase {
   /** Raw source-compatible enemy count from upstream data. */
   count: GameModeEnemyCount
 }
+export type TSRegularEnemyItemList = TSRegularEnemyItem[]
 
 export interface TSBossWaveItem {
-  enemies: TSBossEnemyItem[]
+  enemies: TSBossEnemyItemList
 }
+export type TSBossWaveItemList = TSBossWaveItem[]
 
 export interface TSRegularWaveItem {
-  enemies: TSRegularEnemyItem[]
+  enemies: TSRegularEnemyItemList
 }
+export type TSRegularWaveItemList = TSRegularWaveItem[]
 
 export interface TSBossSideItem {
   /** Node enemy level in published data. */
@@ -237,7 +241,7 @@ export interface TSBossSideItem {
   hp60k: GameModeHP60k
   /** Raw alternative HP value from upstream data. */
   altHp: GameModeAltHP
-  waves: TSBossWaveItem[]
+  waves: TSBossWaveItemList
 }
 
 export interface TSRegularSideItem {
@@ -251,7 +255,7 @@ export interface TSRegularSideItem {
   hp60k: GameModeHP60k
   /** Raw alternative HP value from upstream data. */
   altHp: GameModeAltHP
-  waves: TSRegularWaveItem[]
+  waves: TSRegularWaveItemList
 }
 
 export interface TSNodeItem {
