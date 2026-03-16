@@ -106,6 +106,10 @@ export interface LookupWEngineTrimmedResult {
   advancedStat?: LookupWEngineAdvancedStat
 }
 
+export type LookupWEngineRawListItemList = WEngineListItem[]
+
+export type LookupWEngineDetailsList = WEngineDetails[]
+
 export const lookupWEngine = createTool({
   id: "lookup-w-engine",
   description:
@@ -160,7 +164,9 @@ export const lookupWEngine = createTool({
       refinement,
       locale,
     } = input
-    const engines = loadJson<WEngineListItem[]>(`data/${locale}/w-engines.json`)
+    const engines = loadJson<LookupWEngineRawListItemList>(
+      `data/${locale}/w-engines.json`,
+    )
 
     // List mode: no name provided
     if (!name) {
@@ -214,7 +220,7 @@ export const lookupWEngine = createTool({
       }
     }
 
-    const details = loadJson<WEngineDetails[]>(
+    const details = loadJson<LookupWEngineDetailsList>(
       `data/${locale}/w-engine-details.json`,
     )
     const detail = details.find((d) => d.id === engine.id)

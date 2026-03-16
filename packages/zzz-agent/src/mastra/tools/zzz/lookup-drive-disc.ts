@@ -49,6 +49,8 @@ export interface LookupDriveDiscTrimmedResult {
   setEffects: LookupDriveDiscSetEffectList
 }
 
+export type LookupDriveDiscItemList = DriveDiscItem[]
+
 export const lookupDriveDisc = createTool({
   id: "lookup-drive-disc",
   description:
@@ -70,7 +72,9 @@ export const lookupDriveDisc = createTool({
       locale,
     }: { name?: LookupDriveDiscQueryName; locale: LookupDriveDiscLocale } =
       input
-    const discs = loadJson<DriveDiscItem[]>(`data/${locale}/drive-discs.json`)
+    const discs = loadJson<LookupDriveDiscItemList>(
+      `data/${locale}/drive-discs.json`,
+    )
 
     // List mode: no name provided
     if (!name) {

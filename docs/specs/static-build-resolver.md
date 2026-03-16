@@ -1206,3 +1206,4 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 455. `V455` lookup-w-engine scalar contracts：当前阶段已收口；`lookup-w-engine.ts` 的基础标量 raw contract 已统一复用显式或命名上游 type，不改变任何查询、筛选或属性计算逻辑，见 [静态构筑解析系统 V455](./static-build-resolver-v455.md)
 456. `V456` lookup-game-mode damage-context leaf contracts：当前阶段已收口；`lookup-game-mode.ts` 的 `damageContext` leaf scalar contract 已统一复用显式 alias，不改变任何版本查询、敌人选择或 `damageContext` 计算逻辑，见 [静态构筑解析系统 V456](./static-build-resolver-v456.md)
 457. `V457` lookup-drive-disc scalar contracts：当前阶段已收口；`lookup-drive-disc.ts` 的基础标量 raw contract 已统一复用命名上游 type，不改变任何查询、筛选或返回逻辑，见 [静态构筑解析系统 V457](./static-build-resolver-v457.md)
+458. `V458` lookup raw list container contracts：当前阶段已收口；`zzz-agent` 各 lookup 工具的 `loadJson<T[]>` raw 列表容器已统一复用命名 list contract，不改变任何查询、筛选或返回逻辑，见 [静态构筑解析系统 V458](./static-build-resolver-v458.md)

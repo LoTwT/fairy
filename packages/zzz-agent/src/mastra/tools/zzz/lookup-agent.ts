@@ -211,9 +211,17 @@ export interface LookupAgentTrimmedResult {
   promotions?: LookupAgentPromotionList
 }
 
+export type LookupAgentDetailsList = AgentDetails[]
+
+export type LookupAgentRawListItemList = AgentListItem[]
+
 function findAgent(name: LookupAgentQueryName, locale: LookupAgentLocale) {
-  const details = loadJson<AgentDetails[]>(`data/${locale}/agent-details.json`)
-  const list = loadJson<AgentListItem[]>(`data/${locale}/agents.json`)
+  const details = loadJson<LookupAgentDetailsList>(
+    `data/${locale}/agent-details.json`,
+  )
+  const list = loadJson<LookupAgentRawListItemList>(
+    `data/${locale}/agents.json`,
+  )
 
   // Try matching against short name/slug in list first (most common input)
   let detail: AgentDetails | undefined
@@ -485,7 +493,9 @@ export const lookupAgent = createTool({
       mindscape,
       locale,
     } = input
-    const list = loadJson<AgentListItem[]>(`data/${locale}/agents.json`)
+    const list = loadJson<LookupAgentRawListItemList>(
+      `data/${locale}/agents.json`,
+    )
 
     // List mode: no name provided
     if (!name) {

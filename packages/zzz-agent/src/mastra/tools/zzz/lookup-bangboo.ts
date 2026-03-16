@@ -100,6 +100,8 @@ export interface LookupBangbooTrimmedResult {
   baseStats?: LookupBangbooBaseStatList
 }
 
+export type LookupBangbooItemList = BangbooItem[]
+
 export const lookupBangboo = createTool({
   id: "lookup-bangboo",
   description:
@@ -145,7 +147,9 @@ export const lookupBangboo = createTool({
       optimization?: number
       locale: LookupBangbooLocale
     } = input
-    const bangboos = loadJson<BangbooItem[]>(`data/${locale}/bangboo.json`)
+    const bangboos = loadJson<LookupBangbooItemList>(
+      `data/${locale}/bangboo.json`,
+    )
 
     // List mode: no name provided
     if (!name) {
