@@ -461,5 +461,6 @@ const total = base * bonus * crit * resistance * custom
 - `V480` resolve-build resolved snapshot nested schemas：当前阶段已收口；`resolve-build-schemas.ts` 中 `resolvedSnapshot` 的匿名 nested Zod schema 已统一复用共享 schema 常量
 - `V481` resolve-build combat tag list schema：当前阶段已收口；`resolve-build-schemas.ts` 中重复出现的 `combatTags` 列表 schema 已统一复用共享 schema 常量
 - `V482` resolve-build top-level input scalar schemas：当前阶段已收口；`resolve-build-schemas.ts` 中重复出现的顶层输入 scalar schema 已统一复用共享 schema 常量
+- `V483` resolve-build enemy scalar schemas：当前阶段已收口；`resolve-build-schemas.ts` 中 `enemySchema` 的重复 scalar schema 已统一复用共享 schema 常量
 - `V459` calculator disorder damage params contracts：当前阶段已收口；`calculator/types.ts` 中 `DisorderDamageParams` 已统一改为显式 interface
 - `V460` compact disorder damage params contracts：当前阶段已收口；`build/compact.ts` 中 `CompactStaticBuildDisorderDamageParams` 已统一改为显式 interface

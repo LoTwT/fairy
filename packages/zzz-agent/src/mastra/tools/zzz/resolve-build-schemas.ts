@@ -226,20 +226,49 @@ export interface BuildToolFinalPanelInput {
   penetrationValue?: StaticBuildPenetrationValue
 }
 
+export const enemyAttackerLevelSchema = zod.number().optional().default(60)
+
+export const enemyDefenderBaseDefenseSchema = zod.number()
+
+export const enemyDefenderResistanceSchema = zod.number()
+
+export const enemyDefenseBonusSchema = zod.number().optional().default(0)
+
+export const enemyDefenseReductionSchema = zod.number().optional().default(0)
+
+export const enemyResistanceReductionSchema = zod.number().optional().default(0)
+
+export const enemyIgnoreResistanceSchema = zod.number().optional().default(0)
+
+export const enemyVulnerabilityBonusSchema = zod.number().optional().default(0)
+
+export const enemyDamageReductionSchema = zod.number().optional().default(0)
+
+export const enemyIsStunnedSchema = zod.boolean().optional().default(false)
+
+export const enemyStunVulnerabilitySchema = zod.number().optional().default(0)
+
+export const enemyNonStunVulnerabilitySchema = zod
+  .number()
+  .optional()
+  .default(0)
+
+export const enemySpecialMultiplierSchema = zod.number().optional().default(1)
+
 export const enemySchema = zod.object({
-  attackerLevel: zod.number().optional().default(60),
-  defenderBaseDefense: zod.number(),
-  defenderResistance: zod.number(),
-  defenseBonus: zod.number().optional().default(0),
-  defenseReduction: zod.number().optional().default(0),
-  resistanceReduction: zod.number().optional().default(0),
-  ignoreResistance: zod.number().optional().default(0),
-  vulnerabilityBonus: zod.number().optional().default(0),
-  damageReduction: zod.number().optional().default(0),
-  isStunned: zod.boolean().optional().default(false),
-  stunVulnerability: zod.number().optional().default(0),
-  nonStunVulnerability: zod.number().optional().default(0),
-  specialMultiplier: zod.number().optional().default(1),
+  attackerLevel: enemyAttackerLevelSchema,
+  defenderBaseDefense: enemyDefenderBaseDefenseSchema,
+  defenderResistance: enemyDefenderResistanceSchema,
+  defenseBonus: enemyDefenseBonusSchema,
+  defenseReduction: enemyDefenseReductionSchema,
+  resistanceReduction: enemyResistanceReductionSchema,
+  ignoreResistance: enemyIgnoreResistanceSchema,
+  vulnerabilityBonus: enemyVulnerabilityBonusSchema,
+  damageReduction: enemyDamageReductionSchema,
+  isStunned: enemyIsStunnedSchema,
+  stunVulnerability: enemyStunVulnerabilitySchema,
+  nonStunVulnerability: enemyNonStunVulnerabilitySchema,
+  specialMultiplier: enemySpecialMultiplierSchema,
 })
 
 export const dynamicSnapshotFlagsSchema = zod.object({
