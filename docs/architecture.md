@@ -451,5 +451,6 @@ const total = base * bonus * crit * resistance * custom
 - `V470` cleaned encounter and DA buff text contracts：当前阶段已收口；`cleaned/types.ts` 中 encounter / DA buff 文本字段已统一复用 `game-modes` 上游 alias
 - `V471` cleaned enemy damage context scalar contracts：当前阶段已收口；`cleaned/types.ts` 中 `EnemyDamageContext` 的核心标识与数值字段已统一复用 `game-modes` 上游 alias
 - `V472` cleaned encounter view scalar contracts：当前阶段已收口；`cleaned/types.ts` 中 encounter/view 的位置索引、数量与 side 标量字段已统一复用显式 alias 或 `game-modes` 上游数值 alias
+- `V473` cleaned encounter and node-buff text contracts：当前阶段已收口；`cleaned/types.ts` 中 encounter 候选名与 `SD/TS node buff` 文本字段已统一复用 `game-modes` 上游 alias
 - `V459` calculator disorder damage params contracts：当前阶段已收口；`calculator/types.ts` 中 `DisorderDamageParams` 已统一改为显式 interface
 - `V460` compact disorder damage params contracts：当前阶段已收口；`build/compact.ts` 中 `CompactStaticBuildDisorderDamageParams` 已统一改为显式 interface

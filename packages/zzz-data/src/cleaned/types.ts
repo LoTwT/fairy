@@ -110,7 +110,7 @@ export type EncounterMatchList<
   TEncounter extends FlattenedEnemyView = FlattenedEnemyView,
 > = TEncounter[]
 
-export type EncounterCandidate = string
+export type EncounterCandidate = GameModeEnemyName
 
 export type EncounterCandidateList = EncounterCandidate[]
 
@@ -178,10 +178,10 @@ export interface SDSideEnemyView {
 }
 export type SDSideEnemyViewList = SDSideEnemyView[]
 
-export type SDNodeBuffName = string
+export type SDNodeBuffName = GameModeBuffName
 export type SDNodeBuffNameList = SDNodeBuffName[]
 
-export type SDNodeBuffDescription = string
+export type SDNodeBuffDescription = GameModeBuffEffect
 export type SDNodeBuffDescriptionList = SDNodeBuffDescription[]
 
 export type SDSideViewList = SDSideView[]
@@ -249,7 +249,7 @@ export interface TSRegularSideEnemyView {
   sideRole: "regular"
 }
 export type TSRegularSideEnemyViewList = TSRegularSideEnemyView[]
-export type TSNodeBuffName = string
+export type TSNodeBuffName = GameModeBuffName
 export type TSNodeBuffNameList = TSNodeBuffName[]
 export type TSSideViewList = TSSideView[]
 
