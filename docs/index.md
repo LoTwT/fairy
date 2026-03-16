@@ -311,3 +311,4 @@
 - [静态构筑解析系统 V411](./specs/static-build-resolver-v411.md) — 当前阶段：已收口；`V394~V396` 在总规格/索引/架构中的历史状态说明已统一同步
 - [静态构筑解析系统 V412](./specs/static-build-resolver-v412.md) — 当前阶段：已收口；`game-modes.ts` 中 `Deadly Assault` 的匿名 list contract 已统一复用显式 alias
 - [静态构筑解析系统 V413](./specs/static-build-resolver-v413.md) — 当前阶段：已收口；`game-modes.ts` 中 `Shiyu Defense` 的 `enemy/wave` 匿名 list contract 已统一复用显式 alias
+- [静态构筑解析系统 V414](./specs/static-build-resolver-v414.md) — 当前阶段：已收口；`game-modes.ts` 中 `Shiyu Defense` 的 `side/node` 匿名 list contract 已统一复用显式 alias

@@ -166,12 +166,15 @@ export interface SDSideItem {
   altHp: GameModeAltHP
   waves: SDWaveItemList
 }
+export type SDSideSlot = SDSideItem | null
+export type SDSideSlotList = SDSideSlot[]
 
 export interface SDNodeItem {
   buffName?: GameModeBuffName | GameModeBuffNameList
   buffDesc?: GameModeBuffEffect | GameModeBuffEffectList
-  sides: (SDSideItem | null)[]
+  sides: SDSideSlotList
 }
+export type SDNodeItemList = SDNodeItem[]
 
 export interface SDVersionItem {
   versionKey: GameModeVersionKey
@@ -182,7 +185,7 @@ export interface SDVersionItem {
   versionDazeMult: GameModeVersionDazeMultiplier
   /** Raw anomaly multiplier applied to this SD version. */
   versionAnomMult: GameModeVersionAnomalyMultiplier
-  nodes: SDNodeItem[]
+  nodes: SDNodeItemList
 }
 
 export interface SDModeItem {
