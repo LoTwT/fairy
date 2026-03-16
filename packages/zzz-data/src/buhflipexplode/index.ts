@@ -180,6 +180,16 @@ export type BuhflipVersionIndex = number
 
 export type BuhflipVersionRecordKey = string
 
+export type BuhflipElementMultiplier = number
+
+export type BuhflipElementMultiplierTuple = [
+  BuhflipElementMultiplier,
+  BuhflipElementMultiplier,
+  BuhflipElementMultiplier,
+  BuhflipElementMultiplier,
+  BuhflipElementMultiplier,
+]
+
 export type BuhflipEnemyRefType = number
 
 export type BuhflipEnemyCount = number
@@ -229,7 +239,7 @@ export interface BuhflipEnemy {
    * Elemental damage multipliers [ice, fire, electric, ether, physical].
    * Values < 1 mean the enemy resists that element; > 1 means weakness.
    */
-  elementMult: [number, number, number, number, number]
+  elementMult: BuhflipElementMultiplierTuple
   tags: BuhflipEnemyTagList
   /** In-combat modifiers, e.g. "40-dmg-res", "no-freeze" */
   mods: BuhflipEnemyModifierList
@@ -256,7 +266,7 @@ export interface SDWave {
 }
 export interface SDSide {
   /** Elemental damage multipliers [ice, fire, electric, ether, physical] for this side */
-  sideElementMult: [number, number, number, number, number]
+  sideElementMult: BuhflipElementMultiplierTuple
   sideHPMult: BuhflipEnemyHPMult
   waves: SDWave[]
 }
