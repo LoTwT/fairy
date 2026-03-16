@@ -1232,3 +1232,4 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 481. `V481` resolve-build combat tag list schema：当前阶段已收口；`resolve-build-schemas.ts` 中重复出现的 `combatTags` 列表 schema 已统一复用共享 schema 常量，不改变值域、校验规则、序列化结构或 resolver/tool 行为，见 [静态构筑解析系统 V481](./static-build-resolver-v481.md)
 482. `V482` resolve-build top-level input scalar schemas：当前阶段已收口；`resolve-build-schemas.ts` 中重复出现的顶层输入 scalar schema 已统一复用共享 schema 常量，不改变字段值域、默认值、校验规则、序列化结构或 resolver/tool 行为，见 [静态构筑解析系统 V482](./static-build-resolver-v482.md)
 483. `V483` resolve-build enemy scalar schemas：当前阶段已收口；`resolve-build-schemas.ts` 中 `enemySchema` 的重复 scalar schema 已统一复用共享 schema 常量，不改变字段值域、默认值、校验规则、序列化结构或 resolver/tool 行为，见 [静态构筑解析系统 V483](./static-build-resolver-v483.md)
+484. `V484` resolve-build final panel scalar schemas：当前阶段已收口；`resolve-build-schemas.ts` 中 `finalPanelSchema` 的重复 scalar schema 已统一复用共享 schema 常量，不改变字段值域、默认值、校验规则、序列化结构或 resolver/tool 行为，见 [静态构筑解析系统 V484](./static-build-resolver-v484.md)

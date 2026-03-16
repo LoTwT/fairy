@@ -335,20 +335,46 @@ export const resolvedSnapshotSchema = zod
   })
   .optional()
 
+export const finalPanelAttackSchema = zod.number()
+
+export const finalPanelBaseAttackSchema = zod.number().optional()
+
+export const finalPanelCritRateSchema = zod.number()
+
+export const finalPanelCritDamageSchema = zod.number()
+
+export const finalPanelHPSchema = zod.number().optional()
+
+export const finalPanelSheerForceSchema = zod.number().optional()
+
+export const finalPanelEnergyGenerationRateSchema = zod.number().optional()
+
+export const finalPanelAnomalyProficiencySchema = zod.number().optional()
+
+export const finalPanelAnomalyMasterySchema = zod.number().optional()
+
+export const finalPanelAnomalyCritRateSchema = zod.number().optional()
+
+export const finalPanelAnomalyCritDamageSchema = zod.number().optional()
+
+export const finalPanelPenetrationRateSchema = zod.number().optional()
+
+export const finalPanelPenetrationValueSchema = zod.number().optional()
+
 export const finalPanelSchema = zod.object({
-  attack: zod.number(),
-  baseAttack: zod.number().optional(),
-  critRate: zod.number(),
-  critDamage: zod.number(),
-  hp: zod.number().optional(),
-  sheerForce: zod.number().optional(),
-  energyGenerationRate: zod.number().optional(),
-  anomalyProficiency: zod.number().optional(),
-  anomalyMastery: zod.number().optional(),
-  anomalyCritRate: zod.number().optional(),
-  anomalyCritDamage: zod.number().optional(),
-  penetrationRate: zod.number().optional(),
-  penetrationValue: zod.number().optional(),
+  attack: finalPanelAttackSchema,
+  baseAttack: finalPanelBaseAttackSchema,
+  critRate: finalPanelCritRateSchema,
+  critDamage: finalPanelCritDamageSchema,
+  hp: finalPanelHPSchema,
+  sheerForce: finalPanelSheerForceSchema,
+  energyGenerationRate: finalPanelEnergyGenerationRateSchema,
+  anomalyProficiency: finalPanelAnomalyProficiencySchema,
+  anomalyMastery: finalPanelAnomalyMasterySchema,
+  anomalyCritRate: finalPanelAnomalyCritRateSchema,
+  anomalyCritDamage: finalPanelAnomalyCritDamageSchema,
+  penetrationRate: finalPanelPenetrationRateSchema,
+  penetrationValue: finalPanelPenetrationValueSchema,
 })
 
 export const resolveBuildScenarioSchema = zod.discriminatedUnion("damageType", [

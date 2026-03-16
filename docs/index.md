@@ -381,3 +381,4 @@
 - [静态构筑解析系统 V481](./specs/static-build-resolver-v481.md) — 当前阶段：已收口；`resolve-build-schemas.ts` 中重复出现的 `combatTags` 列表 schema 已统一复用共享 schema 常量
 - [静态构筑解析系统 V482](./specs/static-build-resolver-v482.md) — 当前阶段：已收口；`resolve-build-schemas.ts` 中重复出现的顶层输入 scalar schema 已统一复用共享 schema 常量
 - [静态构筑解析系统 V483](./specs/static-build-resolver-v483.md) — 当前阶段：已收口；`resolve-build-schemas.ts` 中 `enemySchema` 的重复 scalar schema 已统一复用共享 schema 常量
+- [静态构筑解析系统 V484](./specs/static-build-resolver-v484.md) — 当前阶段：已收口；`resolve-build-schemas.ts` 中 `finalPanelSchema` 的重复 scalar schema 已统一复用共享 schema 常量
