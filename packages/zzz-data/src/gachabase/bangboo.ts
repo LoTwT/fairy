@@ -5,6 +5,16 @@
 // optimizationBoost stores cumulative values per optimization level.
 // Pass the boost value from the CURRENT unlocked level directly (do NOT sum across levels).
 
+export type BangbooBaseStatValue = number
+
+export type BangbooStatGrowthPerLevel = number | null
+
+export type BangbooLevel = number
+
+export type BangbooOptimizationBoost = number
+
+export type BangbooCalculatedStatValue = number
+
 /**
  * Calculate a Bangboo base stat at a given level with optimization boost.
  *
@@ -16,11 +26,11 @@
  * @param optimizationBoost - optimizations[currentLevel].statBoosts[statId].value (cumulative, take current level directly)
  */
 export function calcBangbooStat(
-  value: number,
-  growthPerLevel: number | null,
-  level: number,
-  optimizationBoost: number,
-): number {
+  value: BangbooBaseStatValue,
+  growthPerLevel: BangbooStatGrowthPerLevel,
+  level: BangbooLevel,
+  optimizationBoost: BangbooOptimizationBoost,
+): BangbooCalculatedStatValue {
   const growth = growthPerLevel ?? 0
   return Math.floor(value + growth * (level - 1)) + optimizationBoost
 }

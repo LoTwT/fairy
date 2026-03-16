@@ -280,3 +280,4 @@
 - [静态构筑解析系统 V380](./specs/static-build-resolver-v380.md) — 当前阶段：已收口；`lookup-drive-disc.ts` 的 query、candidate、set-effect 与 trimmed result 已统一复用显式 alias / interface
 - [静态构筑解析系统 V381](./specs/static-build-resolver-v381.md) — 当前阶段：已收口；`calc-damage.ts` 的 multiplier helper 输入输出与 anomaly type list 已统一复用显式 alias
 - [静态构筑解析系统 V382](./specs/static-build-resolver-v382.md) — 当前阶段：已收口；`terms.ts` 的 canonical term helper 输入输出与 group-map 已统一复用显式 alias
+- [静态构筑解析系统 V383](./specs/static-build-resolver-v383.md) — 当前阶段：已收口；`gachabase` 公式 helper 的输入输出已统一复用显式标量 alias

@@ -1131,3 +1131,4 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 380. `V380` drive-disc lookup helper contracts：当前阶段已收口；`lookup-drive-disc.ts` 的 query、candidate、set-effect 与 trimmed result 已统一复用显式 alias / interface，不改变任何驱动盘查询或 set-effect 文本清洗逻辑，见 [静态构筑解析系统 V380](./static-build-resolver-v380.md)
 381. `V381` calc-damage helper contracts：当前阶段已收口；`calc-damage.ts` 的 multiplier helper 输入输出与 anomaly type list 已统一复用显式 alias，不改变任何伤害公式或 tool schema，见 [静态构筑解析系统 V381](./static-build-resolver-v381.md)
 382. `V382` canonical term helper contracts：当前阶段已收口；`terms.ts` 的 canonical term helper 输入输出与 group-map 已统一复用显式 alias，不改变任何术语映射或公开标准化语义，见 [静态构筑解析系统 V382](./static-build-resolver-v382.md)
+383. `V383` gachabase stat helper contracts：当前阶段已收口；`gachabase` 公式 helper 的输入输出已统一复用显式标量 alias，不改变任何计算公式或公开 JSON contract，见 [静态构筑解析系统 V383](./static-build-resolver-v383.md)

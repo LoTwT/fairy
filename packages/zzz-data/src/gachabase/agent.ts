@@ -5,6 +5,18 @@
 // Both promotionBoost and coreSkillBoost store cumulative values per level.
 // Pass the boost value from the CURRENT unlocked level directly (do NOT sum across levels).
 
+export type AgentBaseStatValue = number
+
+export type AgentStatGrowthPerLevel = number
+
+export type AgentLevel = number
+
+export type AgentPromotionBoost = number
+
+export type AgentCoreSkillBoost = number
+
+export type AgentCalculatedStatValue = number
+
 /**
  * Calculate an Agent base stat at a given level with promotion and core skill boosts.
  *
@@ -17,12 +29,12 @@
  * @param coreSkillBoost - coreSkills[currentLevel].statBoosts[statId].value (cumulative, take current level directly)
  */
 export function calcAgentStat(
-  value: number,
-  growthPerLevel: number,
-  level: number,
-  promotionBoost: number,
-  coreSkillBoost: number,
-): number {
+  value: AgentBaseStatValue,
+  growthPerLevel: AgentStatGrowthPerLevel,
+  level: AgentLevel,
+  promotionBoost: AgentPromotionBoost,
+  coreSkillBoost: AgentCoreSkillBoost,
+): AgentCalculatedStatValue {
   return (
     Math.floor(value + growthPerLevel * (level - 1)) +
     promotionBoost +

@@ -13477,3 +13477,49 @@ caveatSummary` 这些兼容字段补齐。
 - `V382.2` 已完成：`terms.ts` 的 canonical term helper 输入输出与 group-map 已统一复用显式 alias
 - `V382.3` 已完成：全量校验与提交
 - `V382.4` 已完成：roadmap、索引与架构文档同步
+
+## 386. V383 gachabase stat helper contracts
+
+### 386.1 目标
+
+`V383` 只解决一件事：
+
+- 把 `gachabase` 公式 helper 的输入输出统一改成显式标量 alias。
+
+### 386.2 范围
+
+1. `AgentBaseStatValue`
+2. `AgentStatGrowthPerLevel`
+3. `AgentLevel`
+4. `AgentPromotionBoost`
+5. `AgentCoreSkillBoost`
+6. `AgentCalculatedStatValue`
+7. `BangbooBaseStatValue`
+8. `BangbooStatGrowthPerLevel`
+9. `BangbooLevel`
+10. `BangbooOptimizationBoost`
+11. `BangbooCalculatedStatValue`
+12. `WEngineBaseATKValue`
+13. `WEngineLevelBaseStatGrowth`
+14. `WEngineStarBaseStatGrowth`
+15. `WEngineCalculatedBaseATK`
+16. `WEngineSecondaryBaseValue`
+17. `WEngineStarAdvancedStatGrowth`
+18. `WEngineCalculatedSecondaryStatValue`
+19. `calcAgentStat()`
+20. `calcBangbooStat()`
+21. `calcWEngineBaseATK()`
+22. `calcWEngineSecondaryStat()`
+
+### 386.3 非目标
+
+1. 不改任何计算公式
+2. 不改公开 JSON contract
+3. 不改调用方语义
+
+### 386.4 当前状态
+
+- `V383.1` 已完成：范围冻结到 gachabase stat helper contract
+- `V383.2` 已完成：`gachabase` 公式 helper 的输入输出已统一复用显式标量 alias
+- `V383.3` 已完成：全量校验与提交
+- `V383.4` 已完成：roadmap、索引与架构文档同步

@@ -4,6 +4,20 @@
 //   gachabase-w-engines.json      — baseStat.value, advancedStat.value, effects
 //   w-engine-details.json — levels[lv].baseStatGrowth, stars[star].baseStatGrowth/advancedStatGrowth
 
+export type WEngineBaseATKValue = number
+
+export type WEngineLevelBaseStatGrowth = number
+
+export type WEngineStarBaseStatGrowth = number
+
+export type WEngineCalculatedBaseATK = number
+
+export type WEngineSecondaryBaseValue = number
+
+export type WEngineStarAdvancedStatGrowth = number
+
+export type WEngineCalculatedSecondaryStatValue = number
+
 /**
  * Calculate W-Engine Base ATK at a given level and star (breakthrough count).
  *
@@ -14,10 +28,10 @@
  * @param starBaseStatGrowth - stars[star].baseStatGrowth from w-engine-details.json (star 0–5)
  */
 export function calcWEngineBaseATK(
-  baseVal: number,
-  lvBaseStatGrowth: number,
-  starBaseStatGrowth: number,
-): number {
+  baseVal: WEngineBaseATKValue,
+  lvBaseStatGrowth: WEngineLevelBaseStatGrowth,
+  starBaseStatGrowth: WEngineStarBaseStatGrowth,
+): WEngineCalculatedBaseATK {
   return (
     baseVal +
     Math.floor(((lvBaseStatGrowth + starBaseStatGrowth) * baseVal) / 10000)
@@ -37,8 +51,8 @@ export function calcWEngineBaseATK(
  * @param starAdvancedStatGrowth - stars[star].advancedStatGrowth from w-engine-details.json (star 0–5)
  */
 export function calcWEngineSecondaryStat(
-  baseValue: number,
-  starAdvancedStatGrowth: number,
-): number {
+  baseValue: WEngineSecondaryBaseValue,
+  starAdvancedStatGrowth: WEngineStarAdvancedStatGrowth,
+): WEngineCalculatedSecondaryStatValue {
   return baseValue * (1 + starAdvancedStatGrowth / 10000)
 }
