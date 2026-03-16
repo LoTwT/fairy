@@ -1,17 +1,23 @@
 import type {
   DAEnemyItem,
   EnemyBase,
+  GameModeAltHP,
   GameModeAttributeText,
   GameModeBuffEffect,
   GameModeBuffIconUrl,
   GameModeBuffKey,
   GameModeBuffName,
+  GameModeElementMultiplier,
   GameModeElementMultiplierTuple,
+  GameModeEnemyCount,
   GameModeEnemyDaze,
   GameModeEnemyDefense,
+  GameModeEnemyHPMult,
   GameModeEnemyId,
   GameModeEnemyName,
+  GameModeHP60k,
   GameModeMechanicsText,
+  GameModeNodeLevel,
   GameModeStunMultiplier,
   GameModeStunTime,
   SDEnemyItem,
@@ -29,9 +35,29 @@ export interface ElementMultiplierMap {
 }
 
 export interface EncounterFilter {
-  node?: number
-  side?: number
+  node?: EncounterNodeIndex
+  side?: EncounterSideIndex
 }
+
+export type EncounterNodeIndex = number
+
+export type EncounterSideIndex = number
+
+export type EncounterWaveIndex = number
+
+export type EncounterEnemyIndex = number
+
+export type EncounterEnemyCount = GameModeEnemyCount
+
+export type EncounterNodeLevel = GameModeNodeLevel
+
+export type EncounterSideHPMult = GameModeEnemyHPMult
+
+export type EncounterHP60k = GameModeHP60k
+
+export type EncounterAltHP = GameModeAltHP
+
+export type EncounterElementMultiplier = GameModeElementMultiplier
 
 export type ElementMultiplierTuple = GameModeElementMultiplierTuple
 
@@ -57,16 +83,16 @@ export interface EnemyDamageContext {
   dazeMultiplier: GameModeStunMultiplier
   dazeDuration: GameModeStunTime
   resistanceBucket: BaseResistanceAttribute
-  elementMultiplier: number
+  elementMultiplier: EncounterElementMultiplier
   multipliers: ElementMultiplierMap
 }
 
 export interface FlattenedEnemyView<TEnemy extends EnemyBase = EnemyBase> {
-  node?: number
-  side?: number
-  wave?: number
-  enemyIndex: number
-  count: number
+  node?: EncounterNodeIndex
+  side?: EncounterSideIndex
+  wave?: EncounterWaveIndex
+  enemyIndex: EncounterEnemyIndex
+  count: EncounterEnemyCount
   enemy: TEnemy
   sideElementMultRaw?: ElementMultiplierTuple
   sideElementMult?: ElementMultiplierMap
@@ -97,15 +123,15 @@ export type EncounterResistance = GameModeAttributeText
 export type EncounterResistanceList = EncounterResistance[]
 
 export interface EncounterDamageContext extends EnemyDamageContext {
-  node?: number
-  side?: number
-  wave?: number
-  enemyIndex: number
+  node?: EncounterNodeIndex
+  side?: EncounterSideIndex
+  wave?: EncounterWaveIndex
+  enemyIndex: EncounterEnemyIndex
   weaknesses: EncounterWeaknessList
   resistances: EncounterResistanceList
   mechanics?: GameModeMechanicsText
   sideMultipliers?: ElementMultiplierMap
-  sideElementMultiplier?: number
+  sideElementMultiplier?: EncounterElementMultiplier
 }
 
 export type DABuffViewName = GameModeBuffName
@@ -120,32 +146,32 @@ export interface DABuffView {
 }
 
 export interface DAEnemyView {
-  node?: number
-  side?: number
-  wave?: number
-  enemyIndex: number
-  count: number
+  node?: EncounterNodeIndex
+  side?: EncounterSideIndex
+  wave?: EncounterWaveIndex
+  enemyIndex: EncounterEnemyIndex
+  count: EncounterEnemyCount
   enemy: DAEnemyItem
   sideElementMultRaw?: ElementMultiplierTuple
   sideElementMult?: ElementMultiplierMap
 }
 
 export interface SDSideView {
-  side: number
-  nodeLevel: number
+  side: EncounterSideIndex
+  nodeLevel: EncounterNodeLevel
   sideElementMultRaw: ElementMultiplierTuple
   sideElementMult: ElementMultiplierMap
-  sideHPMult: number
-  hp60k: number
-  altHp: number
+  sideHPMult: EncounterSideHPMult
+  hp60k: EncounterHP60k
+  altHp: EncounterAltHP
   enemies: SDSideEnemyViewList
 }
 export interface SDSideEnemyView {
-  node?: number
-  side?: number
-  wave?: number
-  enemyIndex: number
-  count: number
+  node?: EncounterNodeIndex
+  side?: EncounterSideIndex
+  wave?: EncounterWaveIndex
+  enemyIndex: EncounterEnemyIndex
+  count: EncounterEnemyCount
   enemy: SDEnemyItem
   sideElementMultRaw?: ElementMultiplierTuple
   sideElementMult?: ElementMultiplierMap
@@ -161,7 +187,7 @@ export type SDNodeBuffDescriptionList = SDNodeBuffDescription[]
 export type SDSideViewList = SDSideView[]
 
 export interface SDNodeView {
-  node: number
+  node: EncounterNodeIndex
   buffNames: SDNodeBuffNameList
   buffDescriptions: SDNodeBuffDescriptionList
   sides: SDSideViewList
@@ -178,33 +204,33 @@ export interface TSFlattenedEnemyView<
 }
 
 export interface TSBossSideView {
-  side: number
+  side: EncounterSideIndex
   sideRole: "boss"
-  nodeLevel: number
-  hp60k: number
-  altHp: number
+  nodeLevel: EncounterNodeLevel
+  hp60k: EncounterHP60k
+  altHp: EncounterAltHP
   enemies: TSBossSideEnemyViewList
 }
 
 export interface TSRegularSideView {
-  side: number
+  side: EncounterSideIndex
   sideRole: "regular"
-  nodeLevel: number
+  nodeLevel: EncounterNodeLevel
   sideElementMultRaw?: ElementMultiplierTuple
   sideElementMult?: ElementMultiplierMap
-  sideHPMult: number
-  hp60k: number
-  altHp: number
+  sideHPMult: EncounterSideHPMult
+  hp60k: EncounterHP60k
+  altHp: EncounterAltHP
   enemies: TSRegularSideEnemyViewList
 }
 
 export type TSSideView = TSBossSideView | TSRegularSideView
 export interface TSBossSideEnemyView {
-  node?: number
-  side?: number
-  wave?: number
-  enemyIndex: number
-  count: number
+  node?: EncounterNodeIndex
+  side?: EncounterSideIndex
+  wave?: EncounterWaveIndex
+  enemyIndex: EncounterEnemyIndex
+  count: EncounterEnemyCount
   enemy: TSBossEnemyItem
   sideElementMultRaw?: ElementMultiplierTuple
   sideElementMult?: ElementMultiplierMap
@@ -212,11 +238,11 @@ export interface TSBossSideEnemyView {
 }
 export type TSBossSideEnemyViewList = TSBossSideEnemyView[]
 export interface TSRegularSideEnemyView {
-  node?: number
-  side?: number
-  wave?: number
-  enemyIndex: number
-  count: number
+  node?: EncounterNodeIndex
+  side?: EncounterSideIndex
+  wave?: EncounterWaveIndex
+  enemyIndex: EncounterEnemyIndex
+  count: EncounterEnemyCount
   enemy: TSRegularEnemyItem
   sideElementMultRaw?: ElementMultiplierTuple
   sideElementMult?: ElementMultiplierMap
@@ -228,7 +254,7 @@ export type TSNodeBuffNameList = TSNodeBuffName[]
 export type TSSideViewList = TSSideView[]
 
 export interface TSNodeView {
-  node: number
+  node: EncounterNodeIndex
   buffNames: TSNodeBuffNameList
   sides: TSSideViewList
 }
