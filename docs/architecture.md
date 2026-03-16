@@ -381,9 +381,9 @@ const total = base * bonus * crit * resistance * custom
 - `V391` game-modes buff record key contracts：当前阶段已收口；`game-modes.ts` 中 `BuffsJson` 已统一复用显式 record-key alias
 - `V392` buhflipexplode wave object contracts：当前阶段已收口；`buhflipexplode/index.ts` 中 `SDSide.waves` 与 `TSSide.waves` 已统一复用显式 named interface
 - `V393` buhflipexplode version container contracts：当前阶段已收口；`buhflipexplode/index.ts` 中 `SD/TS` 的版本容器已统一复用显式 named interface
-- `V394` buhflipexplode version record key contracts：当前阶段进行中；`buhflipexplode/index.ts` 中 `SD/DA/TS` 的版本 record key 正在统一复用显式 alias
-- `V395` buhflipexplode enemy db key contracts：当前阶段进行中；`buhflipexplode/index.ts` 中 `BuhflipEnemyDB` 的顶层 record key 正在统一复用显式 enemy-id alias
-- `V396` buhflipexplode buff text contracts：当前阶段进行中；`buhflipexplode/index.ts` 中 `buffName / buffDesc / buffNames` 正在统一复用显式 buff 文本 alias
+- `V394` buhflipexplode version record key contracts：当前阶段已收口；`buhflipexplode/index.ts` 中 `SD/DA/TS` 的版本 record key 已统一复用显式 alias
+- `V395` buhflipexplode enemy db key contracts：当前阶段已收口；`buhflipexplode/index.ts` 中 `BuhflipEnemyDB` 的顶层 record key 已统一复用显式 enemy-id alias
+- `V396` buhflipexplode buff text contracts：当前阶段已收口；`buhflipexplode/index.ts` 中 `buffName / buffDesc / buffNames` 已统一复用显式 buff 文本 alias
 - `V397` buhflipexplode element multiplier tuple contracts：当前阶段已收口；`buhflipexplode/index.ts` 中敌人与 SD side 的元素倍率五元组已统一复用显式 tuple alias
 - `V398` buhflipexplode text pair contracts：当前阶段已收口；`buhflipexplode/index.ts` 中敌人 `desc / perf` 的匿名文本二元 tuple 已统一复用显式 alias
 - `V399` buhflipexplode enemy ref id contracts：当前阶段已收口；`buhflipexplode/index.ts` 中 `SD/DA/TS` 敌人引用的 `id` 已统一复用 `BuhflipEnemyId`
@@ -398,3 +398,4 @@ const total = base * bonus * crit * resistance * custom
 - `V408` buhflipexplode enemy record contracts：当前阶段已收口；`buhflipexplode/index.ts` 中顶层 enemy record 已统一复用显式 alias
 - `V409` buhflipexplode multiplier table contracts：当前阶段已收口；`buhflipexplode/index.ts` 中四个 multiplier table 常量已统一复用显式 readonly list alias
 - `V410` buhflipexplode node level list contracts：当前阶段已收口；`buhflipexplode/index.ts` 中 `SD/TS` node level 常量列表已统一复用显式 readonly list alias
+- `V411` buhflipexplode milestone status sync：当前阶段已收口；`V394~V396` 在总规格/索引/架构中的历史状态说明已统一同步

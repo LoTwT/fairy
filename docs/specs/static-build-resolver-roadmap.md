@@ -14385,3 +14385,31 @@ caveatSummary` 这些兼容字段补齐。
 
 - `V410.1` 已完成：范围冻结到 buhflipexplode node level list contract
 - `V410.2` 已完成：`SD/TS` node level 常量列表已统一复用显式 readonly list alias
+
+## 414. V411 buhflipexplode milestone status sync
+
+### 414.1 目标
+
+`V411` 只解决一件事：
+
+- 收口 `buhflipexplode` 历史阶段在总规格/索引/架构中的状态漂移。
+
+### 414.2 范围
+
+1. `V394`
+2. `V395`
+3. `V396`
+4. 总规格索引
+5. 文档入口索引
+6. 架构摘要
+
+### 414.3 非目标
+
+1. 不改任何运行时代码
+2. 不改任何 raw/public contract
+3. 不改 `V397+` 的阶段说明
+
+### 414.4 当前状态
+
+- `V411.1` 已完成：范围冻结到 buhflipexplode 历史阶段状态同步
+- `V411.2` 已完成：`V394~V396` 已在总规格/索引/架构中统一标记为已收口
