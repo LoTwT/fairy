@@ -55,14 +55,16 @@ export interface LookupBangbooSkillEntry {
 
 export type LookupBangbooSkillEntryList = LookupBangbooSkillEntry[]
 
-export type LookupBangbooTrimmedResultKey = string
+export type LookupBangbooBaseStatList = BangbooItem["baseStats"]
 
-export type LookupBangbooTrimmedValue = unknown
-
-export type LookupBangbooTrimmedResult = Record<
-  LookupBangbooTrimmedResultKey,
-  LookupBangbooTrimmedValue
->
+export interface LookupBangbooTrimmedResult {
+  id: LookupBangbooId
+  name: LookupBangbooName
+  rarity: LookupBangbooRarity
+  calculatedStats: LookupBangbooCalculatedStatMap | undefined
+  skills: LookupBangbooSkillEntryList
+  baseStats?: LookupBangbooBaseStatList
+}
 
 export const lookupBangboo = createTool({
   id: "lookup-bangboo",
