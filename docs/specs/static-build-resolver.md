@@ -1187,3 +1187,4 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 436. `V436` lookup-game-mode version enemy ref contracts：当前阶段已收口；`lookup-game-mode.ts` 中 `versionEnemies` 的匿名引用项 contract 与 `enemyName` 文本字段已统一复用显式 alias / interface，不改变任何 DA/SD/TS 查询、敌人选择或 `damageContext` 生成逻辑，见 [静态构筑解析系统 V436](./static-build-resolver-v436.md)
 437. `V437` lookup-agent trimmed result contracts：当前阶段已收口；`lookup-agent.ts` 的顶层 trimmed result contract 已统一复用显式 interface，不改变任何代理人查询、筛选、技能过滤或属性计算逻辑，见 [静态构筑解析系统 V437](./static-build-resolver-v437.md)
 438. `V438` lookup-bangboo trimmed result contracts：当前阶段已收口；`lookup-bangboo.ts` 的顶层 trimmed result contract 已统一复用显式 interface，不改变任何邦布查询、筛选、技能裁剪或属性计算逻辑，见 [静态构筑解析系统 V438](./static-build-resolver-v438.md)
+439. `V439` lookup-w-engine trimmed result contracts：当前阶段已收口；`lookup-w-engine.ts` 的顶层 trimmed result contract 已统一复用显式 interface，不改变任何音擎查询、筛选、属性计算或精炼被动选择逻辑，见 [静态构筑解析系统 V439](./static-build-resolver-v439.md)

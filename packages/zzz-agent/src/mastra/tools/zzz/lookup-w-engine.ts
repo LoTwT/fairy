@@ -65,14 +65,24 @@ export interface LookupWEngineActiveEffect {
   effect: LookupWEngineEffectText
 }
 
-export type LookupWEngineTrimmedResultKey = string
+export type LookupWEngineBaseStat = WEngineListItem["baseStat"]
 
-export type LookupWEngineTrimmedValue = unknown
+export type LookupWEngineAdvancedStat = WEngineListItem["advancedStat"]
 
-export type LookupWEngineTrimmedResult = Record<
-  LookupWEngineTrimmedResultKey,
-  LookupWEngineTrimmedValue
->
+export type LookupWEngineActiveEffectValue = LookupWEngineActiveEffect | null
+
+export interface LookupWEngineTrimmedResult {
+  id: LookupWEngineListItemId
+  name: LookupWEngineListItemName
+  rarity: LookupWEngineListItemRarity
+  specialty: LookupWEngineSpecialtyName
+  exclusiveAgentName: LookupWEngineExclusiveAgentName
+  calculatedATK: LookupWEngineCalculatedAttack
+  calculatedSecondaryStat: LookupWEngineCalculatedSecondaryStat | undefined
+  activeEffect: LookupWEngineActiveEffectValue
+  baseStat?: LookupWEngineBaseStat
+  advancedStat?: LookupWEngineAdvancedStat
+}
 
 export const lookupWEngine = createTool({
   id: "lookup-w-engine",
