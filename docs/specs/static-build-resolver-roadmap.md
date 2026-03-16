@@ -14194,3 +14194,31 @@ caveatSummary` 这些兼容字段补齐。
 
 - `V403.1` 已完成：范围冻结到 buhflipexplode wave list contract
 - `V403.2` 已完成：`SD/TS` wave 集合已统一复用显式 list alias
+
+## 407. V404 buhflipexplode side slot list contracts
+
+### 407.1 目标
+
+`V404` 只解决一件事：
+
+- 把 `buhflipexplode` 的 side slot 集合统一复用显式 list alias。
+
+### 407.2 范围
+
+1. `SDSideSlot`
+2. `SDSideSlotList`
+3. `TSSideSlot`
+4. `TSSideSlotList`
+5. `SDNode.sides`
+6. `TSNode.sides`
+
+### 407.3 非目标
+
+1. 不改任何 raw/published JSON shape
+2. 不改 `wave list` contract
+3. 不改 `node / versions` 上层容器
+
+### 407.4 当前状态
+
+- `V404.1` 已完成：范围冻结到 buhflipexplode side slot list contract
+- `V404.2` 已完成：`SD/TS` side slot 集合已统一复用显式 alias

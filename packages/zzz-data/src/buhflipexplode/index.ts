@@ -290,10 +290,12 @@ export interface SDSide {
   sideHPMult: BuhflipEnemyHPMult
   waves: SDWaveList
 }
+export type SDSideSlot = SDSide | null
+export type SDSideSlotList = SDSideSlot[]
 export interface SDNode {
   buffName: BuhflipBuffTextValue
   buffDesc: BuhflipBuffTextValue
-  sides: (SDSide | null)[]
+  sides: SDSideSlotList
 }
 export interface SDVersionEnemies {
   nodes: SDNode[]
@@ -354,10 +356,12 @@ export interface TSSide {
   sideHPMult?: BuhflipEnemyHPMult
   waves: TSWaveList
 }
+export type TSSideSlot = TSSide | null
+export type TSSideSlotList = TSSideSlot[]
 export interface TSNode {
   buffNames: BuhflipBuffTextList
   /** sides[0] = boss side; sides[1..n] = regular enemy sides */
-  sides: (TSSide | null)[]
+  sides: TSSideSlotList
 }
 export interface TSVersionEnemies {
   nodes: TSNode[]
