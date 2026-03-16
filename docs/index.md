@@ -290,3 +290,4 @@
 - [静态构筑解析系统 V390](./specs/static-build-resolver-v390.md) — 当前阶段：已收口；`gachabase/types.ts` 中 `AgentSkin.assets` 已统一复用显式 named interface
 - [静态构筑解析系统 V391](./specs/static-build-resolver-v391.md) — 当前阶段：已收口；`game-modes.ts` 中 `BuffsJson` 已统一复用显式 record-key alias
 - [静态构筑解析系统 V392](./specs/static-build-resolver-v392.md) — 当前阶段：已收口；`buhflipexplode/index.ts` 中 `SDSide.waves` 与 `TSSide.waves` 已统一复用显式 named interface
+- [静态构筑解析系统 V393](./specs/static-build-resolver-v393.md) — 当前阶段：已收口；`buhflipexplode/index.ts` 中 `SD/TS` 的版本容器已统一复用显式 named interface

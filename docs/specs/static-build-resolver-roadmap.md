@@ -13886,3 +13886,35 @@ caveatSummary` 这些兼容字段补齐。
 - `V392.2` 已完成：`SDSide.waves` 与 `TSSide.waves` 已统一复用显式 named interface
 - `V392.3` 已完成：全量校验与提交
 - `V392.4` 已完成：roadmap、索引与架构文档同步
+
+## 396. V393 buhflipexplode version container contracts
+
+### 396.1 目标
+
+`V393` 只解决一件事：
+
+- 把 `buhflipexplode` 里剩余的版本容器 object 统一改成显式 named interface。
+
+### 396.2 范围
+
+1. `SDVersionEnemies`
+2. `SDVersionsMode`
+3. `TSVersionEnemies`
+4. `TSVersionsMode`
+5. `SDVersionData.versionEnemies`
+6. `TSVersionData.versionEnemies`
+7. `SDVersionsJson`
+8. `TSVersionsJson`
+
+### 396.3 非目标
+
+1. 不改任何 raw/published JSON shape
+2. 不改 enemy/version 公式 helper
+3. 不改 DA 的 `Record<string, DAVersionData>` contract
+
+### 396.4 当前状态
+
+- `V393.1` 已完成：范围冻结到 buhflipexplode version container contract
+- `V393.2` 已完成：`SD/TS` 版本容器已统一复用显式 named interface
+- `V393.3` 已完成：全量校验与提交
+- `V393.4` 已完成：roadmap、索引与架构文档同步

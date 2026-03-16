@@ -257,22 +257,26 @@ export interface SDNode {
   buffDesc: string | string[]
   sides: (SDSide | null)[]
 }
+export interface SDVersionEnemies {
+  nodes: SDNode[]
+}
 export interface SDVersionData {
   versionName: string
   versionTime: string
   versionDazeMult: BuhflipVersionDazeMultiplier
   versionAnomMult: BuhflipVersionAnomalyMultiplier
-  versionEnemies: { nodes: SDNode[] }
+  versionEnemies: SDVersionEnemies
   /** Critical Node only: version-level buff (overrides node.buffName post-2.5) */
   buffName?: string | string[]
   buffDesc?: string | string[]
   mainBuffNum?: BuhflipMainBuffNum
 }
-/** `buhflipexplode-shiyu-defense.json` top-level shape */
-export type SDVersionsJson = Array<{
+export interface SDVersionsMode {
   name: string
   versions: Record<string, SDVersionData>
-}>
+}
+/** `buhflipexplode-shiyu-defense.json` top-level shape */
+export type SDVersionsJson = SDVersionsMode[]
 
 // ── DA raw types ──
 
@@ -314,6 +318,9 @@ export interface TSNode {
   /** sides[0] = boss side; sides[1..n] = regular enemy sides */
   sides: (TSSide | null)[]
 }
+export interface TSVersionEnemies {
+  nodes: TSNode[]
+}
 export interface TSVersionData {
   versionName: string
   versionTime: string
@@ -321,13 +328,14 @@ export interface TSVersionData {
   versionEnemyDazeMult: BuhflipVersionDazeMultiplier
   versionBossAnomMult: BuhflipVersionAnomalyMultiplier
   versionEnemyAnomMult: BuhflipVersionAnomalyMultiplier
-  versionEnemies: { nodes: TSNode[] }
+  versionEnemies: TSVersionEnemies
 }
-/** `buhflipexplode-threshold-simulation.json` top-level shape */
-export type TSVersionsJson = Array<{
+export interface TSVersionsMode {
   name: string
   versions: Record<string, TSVersionData>
-}>
+}
+/** `buhflipexplode-threshold-simulation.json` top-level shape */
+export type TSVersionsJson = TSVersionsMode[]
 
 // ─── Enemy stat calculations ──────────────────────────────────────────────────
 
