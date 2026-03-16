@@ -365,3 +365,4 @@
 - [静态构筑解析系统 V465](./specs/static-build-resolver-v465.md) — 当前阶段：已收口；`game-modes.ts` 中 `BuffsJson` 已统一复用显式 record-value alias
 - [静态构筑解析系统 V466](./specs/static-build-resolver-v466.md) — 当前阶段：已收口；`buhflipexplode/index.ts` 中 enemy/version record 已统一复用显式 value alias
 - [静态构筑解析系统 V467](./specs/static-build-resolver-v467.md) — 当前阶段：已收口；`game-modes.ts` 中元素倍率五元组已统一复用显式 tuple alias
+- [静态构筑解析系统 V468](./specs/static-build-resolver-v468.md) — 当前阶段：已收口；`cleaned/types.ts` 中本地元素倍率 tuple 已统一对齐到 `game-modes` 上游 alias

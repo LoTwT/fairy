@@ -1216,3 +1216,4 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 465. `V465` game-modes buff record value contracts：当前阶段已收口；`game-modes.ts` 中 `BuffsJson` 已统一复用显式 record-value alias，不改变任何 published JSON shape 或 helper 逻辑，见 [静态构筑解析系统 V465](./static-build-resolver-v465.md)
 466. `V466` buhflipexplode record value contracts：当前阶段已收口；`buhflipexplode/index.ts` 中 enemy/version record 已统一复用显式 value alias，不改变任何 published JSON shape、record key 或 helper 逻辑，见 [静态构筑解析系统 V466](./static-build-resolver-v466.md)
 467. `V467` game-modes element multiplier tuple contracts：当前阶段已收口；`game-modes.ts` 中元素倍率五元组已统一复用显式 tuple alias，不改变任何 published JSON shape、`elementMult` 语义或 `cleaned` helper 行为，见 [静态构筑解析系统 V467](./static-build-resolver-v467.md)
+468. `V468` cleaned element multiplier tuple contracts：当前阶段已收口；`cleaned/types.ts` 中本地元素倍率 tuple contract 已统一对齐到 `game-modes` 上游 alias，不改变任何 `cleaned` helper 返回值、倍率顺序或 `ElementMultiplierMap` 结构，见 [静态构筑解析系统 V468](./static-build-resolver-v468.md)

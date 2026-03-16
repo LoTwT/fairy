@@ -1,11 +1,11 @@
 import type {
   DAEnemyItem,
-  ElementMult,
   EnemyBase,
   GameModeBuffEffect,
   GameModeBuffIconUrl,
   GameModeBuffKey,
   GameModeBuffName,
+  GameModeElementMultiplierTuple,
   GameModeEnemyDaze,
   GameModeEnemyDefense,
   GameModeEnemyId,
@@ -31,9 +31,7 @@ export interface EncounterFilter {
   side?: number
 }
 
-export type ElementMultiplierTuple =
-  | ElementMult
-  | readonly [number, number, number, number, number]
+export type ElementMultiplierTuple = GameModeElementMultiplierTuple
 
 export interface ElementMultiplierCarrier {
   elementMult: ElementMultiplierTuple
