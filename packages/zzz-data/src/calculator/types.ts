@@ -141,10 +141,18 @@ export interface AnomalyDamageParams {
   anomalyCritDamage: number
 }
 
-export interface DisorderDamageParams extends Omit<
-  AnomalyDamageParams,
-  "damageMultiplier"
-> {
+export interface DisorderDamageParams {
+  virtualAgentLevel: number
+  virtualAgentAttack: number
+  virtualAgentAnomalyProficiency: number
+  bonusDamageSum: number
+  defense: DefenseParams
+  resistance: ResistanceParams
+  vulnerability: VulnerabilityParams
+  dazeVulnerability: DazeVulnerabilityParams
+  anomalyBonusDamageSum: number
+  anomalyCritRate: number
+  anomalyCritDamage: number
   /** Optional extra multiplier factor applied on top of disorder base multiplier */
   damageMultiplierFactor?: number
   /** Anomaly type of the original status being consumed */

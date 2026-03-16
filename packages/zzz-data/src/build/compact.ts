@@ -664,10 +664,18 @@ export interface CompactStaticBuildAnomalyDamageParams {
   anomalyCritDamage: CompactStaticBuildAnomalyCritDamage
 }
 
-export interface CompactStaticBuildDisorderDamageParams extends Omit<
-  CompactStaticBuildAnomalyDamageParams,
-  "damageMultiplier"
-> {
+export interface CompactStaticBuildDisorderDamageParams {
+  virtualAgentLevel: CompactStaticBuildVirtualAgentLevel
+  virtualAgentAttack: CompactStaticBuildVirtualAgentAttack
+  virtualAgentAnomalyProficiency: CompactStaticBuildVirtualAgentAnomalyProficiency
+  bonusDamageSum: CompactStaticBuildBonusDamageSum
+  defense: CompactStaticBuildDefenseParams
+  resistance: CompactStaticBuildResistanceParams
+  vulnerability: CompactStaticBuildVulnerabilityParams
+  dazeVulnerability: CompactStaticBuildDazeVulnerabilityParams
+  anomalyBonusDamageSum: CompactStaticBuildAnomalyBonusDamageSum
+  anomalyCritRate: CompactStaticBuildAnomalyCritRate
+  anomalyCritDamage: CompactStaticBuildAnomalyCritDamage
   damageMultiplierFactor?: CompactStaticBuildDamageMultiplierFactor
   anomalyType: AnomalyType
   remainingTime: CompactStaticBuildRemainingTime

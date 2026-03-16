@@ -437,3 +437,5 @@ const total = base * bonus * crit * resistance * custom
 - `V447` lookup-agent display list contracts：当前阶段已收口；`lookup-agent.ts` 中 `attributes / attackTypes` 已统一复用显式 alias
 - `V448` lookup-agent progression contracts：当前阶段已收口；`lookup-agent.ts` 中 `promotions` 与 `coreSkills[*].statBoosts` 已统一复用显式 interface
 - `V449` lookup-game-mode damage-context field contracts：当前阶段已收口；`lookup-game-mode.ts` 的 `damageContext` 剩余 raw field contract 已统一复用显式 alias
+- `V459` calculator disorder damage params contracts：当前阶段已收口；`calculator/types.ts` 中 `DisorderDamageParams` 已统一改为显式 interface
+- `V460` compact disorder damage params contracts：当前阶段已收口；`build/compact.ts` 中 `CompactStaticBuildDisorderDamageParams` 已统一改为显式 interface

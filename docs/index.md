@@ -356,3 +356,5 @@
 - [静态构筑解析系统 V456](./specs/static-build-resolver-v456.md) — 当前阶段：已收口；`lookup-game-mode.ts` 的 `damageContext` leaf scalar contract 已统一复用显式 alias
 - [静态构筑解析系统 V457](./specs/static-build-resolver-v457.md) — 当前阶段：已收口；`lookup-drive-disc.ts` 的基础标量 raw contract 已统一复用命名上游 type
 - [静态构筑解析系统 V458](./specs/static-build-resolver-v458.md) — 当前阶段：已收口；`zzz-agent` 各 lookup 工具的 `loadJson<T[]>` raw 列表容器已统一复用命名 list contract
+- [静态构筑解析系统 V459](./specs/static-build-resolver-v459.md) — 当前阶段：已收口；`calculator/types.ts` 中 `DisorderDamageParams` 已统一改为显式 interface
+- [静态构筑解析系统 V460](./specs/static-build-resolver-v460.md) — 当前阶段：已收口；`build/compact.ts` 中 `CompactStaticBuildDisorderDamageParams` 已统一改为显式 interface
