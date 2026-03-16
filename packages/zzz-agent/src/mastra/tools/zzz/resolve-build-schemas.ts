@@ -379,6 +379,40 @@ export const driveDiscSetSchema = zod.object({
   pieces: zod.union([zod.literal(2), zod.literal(4)]),
 })
 
+export const agentIdentifierSchema = zod.string().describe("代理人名称或 ID")
+
+export const wEngineIdentifierSchema = zod
+  .string()
+  .optional()
+  .describe("音擎名称或 ID")
+
+export const coreSkillLevelSchema = zod
+  .number()
+  .min(1)
+  .max(7)
+  .optional()
+  .default(7)
+
+export const wEngineRefinementSchema = zod
+  .number()
+  .min(1)
+  .max(5)
+  .optional()
+  .default(1)
+
+export const agentLevelSchema = zod.number().min(1).max(60).optional()
+
+export const agentMindscapeSchema = zod.number().int().min(0).max(6).optional()
+
+export const buildModeSchema = zod
+  .enum(["baseline", "full-buff", "manual"])
+  .optional()
+  .default("baseline")
+
+export const manualBaseModeSchema = zod
+  .enum(["baseline", "full-buff"])
+  .optional()
+
 export const effectOverrideSchema = zod.object({
   effectId: zod.string(),
   enabled: zod.boolean().optional(),
@@ -386,41 +420,35 @@ export const effectOverrideSchema = zod.object({
 })
 
 export const resolveBuildInputSchema = zod.object({
-  agent: zod.string().describe("代理人名称或 ID"),
-  wEngine: zod.string().optional().describe("音擎名称或 ID"),
+  agent: agentIdentifierSchema,
+  wEngine: wEngineIdentifierSchema,
   driveDiscs: zod.array(driveDiscSetSchema).optional(),
-  coreSkillLevel: zod.number().min(1).max(7).optional().default(7),
-  wEngineRefinement: zod.number().min(1).max(5).optional().default(1),
-  agentLevel: zod.number().min(1).max(60).optional(),
-  agentMindscape: zod.number().int().min(0).max(6).optional(),
-  mode: zod
-    .enum(["baseline", "full-buff", "manual"])
-    .optional()
-    .default("baseline"),
-  manualBaseMode: zod.enum(["baseline", "full-buff"]).optional(),
+  coreSkillLevel: coreSkillLevelSchema,
+  wEngineRefinement: wEngineRefinementSchema,
+  agentLevel: agentLevelSchema,
+  agentMindscape: agentMindscapeSchema,
+  mode: buildModeSchema,
+  manualBaseMode: manualBaseModeSchema,
   finalPanel: finalPanelSchema,
   scenario: resolveBuildScenarioSchema,
   effectOverrides: zod.array(effectOverrideSchema).optional(),
 })
 
 export const resolveBuildSourceUtilityInputSchema = zod.object({
-  agent: zod.string().describe("代理人名称或 ID"),
-  wEngine: zod.string().optional().describe("音擎名称或 ID"),
+  agent: agentIdentifierSchema,
+  wEngine: wEngineIdentifierSchema,
   driveDiscs: zod.array(driveDiscSetSchema).optional(),
-  coreSkillLevel: zod.number().min(1).max(7).optional().default(7),
-  wEngineRefinement: zod.number().min(1).max(5).optional().default(1),
-  agentLevel: zod.number().min(1).max(60).optional(),
-  agentMindscape: zod.number().int().min(0).max(6).optional(),
+  coreSkillLevel: coreSkillLevelSchema,
+  wEngineRefinement: wEngineRefinementSchema,
+  agentLevel: agentLevelSchema,
+  agentMindscape: agentMindscapeSchema,
   finalPanel: finalPanelSchema.partial().optional(),
 })
 
 export const resolveBuildSourceEntriesInputSchema =
   resolveBuildSourceUtilityInputSchema.extend({
-    mode: zod
-      .enum(["baseline", "full-buff", "manual"])
-      .optional()
-      .default("baseline"),
-    manualBaseMode: zod.enum(["baseline", "full-buff"]).optional(),
+    mode: buildModeSchema,
+    manualBaseMode: manualBaseModeSchema,
     scenario: resolveBuildScenarioSchema.optional(),
     effectOverrides: zod.array(effectOverrideSchema).optional(),
   })
@@ -445,17 +473,14 @@ export const resolveBuildSkillMatrixContextSchema = zod.object({
 })
 
 export const resolveBuildSkillMatrixInputSchema = zod.object({
-  agent: zod.string().describe("代理人名称或 ID"),
-  wEngine: zod.string().optional().describe("音擎名称或 ID"),
+  agent: agentIdentifierSchema,
+  wEngine: wEngineIdentifierSchema,
   driveDiscs: zod.array(driveDiscSetSchema).optional(),
-  agentMindscape: zod.number().int().min(0).max(6).optional(),
-  coreSkillLevel: zod.number().min(1).max(7).optional().default(7),
-  wEngineRefinement: zod.number().min(1).max(5).optional().default(1),
-  mode: zod
-    .enum(["baseline", "full-buff", "manual"])
-    .optional()
-    .default("baseline"),
-  manualBaseMode: zod.enum(["baseline", "full-buff"]).optional(),
+  agentMindscape: agentMindscapeSchema,
+  coreSkillLevel: coreSkillLevelSchema,
+  wEngineRefinement: wEngineRefinementSchema,
+  mode: buildModeSchema,
+  manualBaseMode: manualBaseModeSchema,
   finalPanel: skillMatrixFinalPanelSchema,
   context: resolveBuildSkillMatrixContextSchema,
   effectOverrides: zod.array(effectOverrideSchema).optional(),
