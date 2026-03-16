@@ -33,6 +33,14 @@ export type AgentAttackTypeLabelList = AttackTypeLabel[]
 export type StatBoostList = StatBoost[]
 export type AgentSkillDescriptionList = AgentSkillDescription[]
 export type AgentSkillStatList = AgentSkillStat[]
+export type SplashArtList = SplashArt[]
+export type AgentSkinList = AgentSkin[]
+export type AgentStatList = AgentStat[]
+export type AgentPromotionList = AgentPromotion[]
+export type AgentSkillGroupList = AgentSkillGroup[]
+export type CoreSkillLevelList = CoreSkillLevel[]
+export type AgentPotentialVisionList = AgentPotentialVision[]
+export type AgentMindscapeList = AgentMindscape[]
 
 export interface StatBoost {
   statId: GachabaseStatId
@@ -144,7 +152,7 @@ export interface AgentExclusiveWeaponRef {
 }
 
 export interface AgentDetailsAssets {
-  mindscapeImages: SplashArt[]
+  mindscapeImages: SplashArtList
 }
 
 export interface AgentProfile {
@@ -164,13 +172,13 @@ export interface AgentDetails {
   exclusiveWeapon: AgentExclusiveWeaponRef | null
   assets: AgentDetailsAssets
   profile: AgentProfile
-  skins: AgentSkin[]
-  stats: AgentStat[]
-  promotions: AgentPromotion[]
-  skills: AgentSkillGroup[]
-  coreSkills: CoreSkillLevel[]
-  potentialVisions: AgentPotentialVision[]
-  mindscapes: AgentMindscape[]
+  skins: AgentSkinList
+  stats: AgentStatList
+  promotions: AgentPromotionList
+  skills: AgentSkillGroupList
+  coreSkills: CoreSkillLevelList
+  potentialVisions: AgentPotentialVisionList
+  mindscapes: AgentMindscapeList
 }
 
 // ─── w-engines.json ───────────────────────────────────────────────────────────

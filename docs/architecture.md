@@ -412,3 +412,4 @@ const total = base * bonus * crit * resistance * custom
 - `V422` cleaned encounter helper list contracts：当前阶段已收口；`cleaned encounter` helper 与返回类型中的 `matches`、候选名、弱点与抗性列表已统一复用显式 alias
 - `V423` gachabase agent list label contracts：当前阶段已收口；`gachabase/types.ts` 中 `AgentListItem.attributes` 与 `AgentListItem.attackTypes` 已统一复用显式 alias
 - `V424` gachabase shared skill list contracts：当前阶段已收口；`gachabase/types.ts` 中共享的 `StatBoost`、`AgentSkillDescription` 与 `AgentSkillStat` 列表已统一复用显式 alias
+- `V425` gachabase agent details outer list contracts：当前阶段已收口；`gachabase/types.ts` 中 `agent-details.json` 外层资源与内容列表已统一复用显式 alias
