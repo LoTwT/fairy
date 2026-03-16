@@ -15,9 +15,18 @@ export type ZzzAgentScorerToolNameList = readonly ZzzAgentScorerToolName[]
 
 export type ZzzAgentOutputFormatSectionName = string
 
+export type ZzzAgentOutputFormatMatchedFlag = boolean
+
+export type ZzzAgentOutputFormatSectionNameList =
+  ZzzAgentOutputFormatSectionName[]
+
+export type ZzzAgentOutputFormatMatchList = ZzzAgentOutputFormatMatch[]
+
+export type ZzzAgentOutputFormatScore = number
+
 export interface ZzzAgentOutputFormatMatch {
   name: ZzzAgentOutputFormatSectionName
-  matched: boolean
+  matched: ZzzAgentOutputFormatMatchedFlag
 }
 
 const outputFormatChecks = [
@@ -29,7 +38,7 @@ const outputFormatChecks = [
 
 export function getOutputFormatMatches(
   response: ZzzAgentScorerResponseText,
-): ZzzAgentOutputFormatMatch[] {
+): ZzzAgentOutputFormatMatchList {
   return outputFormatChecks.map(({ name, pattern }) => ({
     name,
     matched: pattern.test(response),
@@ -39,7 +48,7 @@ export function getOutputFormatMatches(
 export function scoreOutputFormat(
   response: ZzzAgentScorerResponseText,
   tools: ZzzAgentScorerToolNameList,
-) {
+): ZzzAgentOutputFormatScore {
   if (!tools.includes("calcDamage") && !tools.includes("calc-damage")) return 1
 
   const matches = getOutputFormatMatches(response)
@@ -81,8 +90,8 @@ export const outputFormatScorer = createScorer({
     if (!tools.includes("calcDamage") && !tools.includes("calc-damage")) {
       return "未发生伤害计算，跳过输出格式评分"
     }
-    const found: string[] = []
-    const missing: string[] = []
+    const found: ZzzAgentOutputFormatSectionNameList = []
+    const missing: ZzzAgentOutputFormatSectionNameList = []
 
     for (const { name, matched } of getOutputFormatMatches(response)) {
       if (matched) found.push(name)

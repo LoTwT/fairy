@@ -361,3 +361,4 @@ const total = base * bonus * crit * resistance * custom
 - `V371` agent damage-type helper contracts：当前阶段已收口；`resolveBuildToolDamageType()` 的公开 generic 边界已统一复用 `BuildToolDamageTypeValue`
 - `V372` agent catalog specialty contracts：当前阶段已收口；`CatalogItem` 的 specialty generic 已统一复用显式 alias
 - `V373` agent utils helper contracts：当前阶段已收口；`utils.ts` 的公开路径、alias-group、缓存与匹配分数字段已统一复用显式 alias / interface
+- `V374` agent scorer match contracts：当前阶段已收口；`zzz-scorer.ts` 的公开匹配 flag、section list 和 score contract 已统一复用显式 alias

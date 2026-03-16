@@ -271,3 +271,4 @@
 - [静态构筑解析系统 V371](./specs/static-build-resolver-v371.md) — 当前阶段：已收口；`resolveBuildToolDamageType()` 的公开 generic 边界已统一复用 `BuildToolDamageTypeValue`
 - [静态构筑解析系统 V372](./specs/static-build-resolver-v372.md) — 当前阶段：已收口；`CatalogItem` 的 specialty generic 已统一复用显式 alias
 - [静态构筑解析系统 V373](./specs/static-build-resolver-v373.md) — 当前阶段：已收口；`utils.ts` 的公开路径、alias-group、缓存与匹配分数字段已统一复用显式 alias / interface
+- [静态构筑解析系统 V374](./specs/static-build-resolver-v374.md) — 当前阶段：已收口；`zzz-scorer.ts` 的公开匹配 flag、section list 和 score contract 已统一复用显式 alias

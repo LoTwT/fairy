@@ -13186,3 +13186,34 @@ caveatSummary` 这些兼容字段补齐。
 - `V373.2` 已完成：`utils.ts` 的公开路径、alias-group、缓存与匹配分数字段已统一复用显式 alias / interface
 - `V373.3` 已完成：全量校验与提交
 - `V373.4` 已完成：roadmap、索引与架构文档同步
+
+## 377. V374 agent scorer match contracts
+
+### 377.1 目标
+
+`V374` 只解决一件事：
+
+- 把 `zzz-scorer.ts` 中输出格式评分 helper 的匹配 flag、section list 和 score contract 统一改成显式 alias。
+
+### 377.2 范围
+
+1. `ZzzAgentOutputFormatMatchedFlag`
+2. `ZzzAgentOutputFormatSectionNameList`
+3. `ZzzAgentOutputFormatMatchList`
+4. `ZzzAgentOutputFormatScore`
+5. `ZzzAgentOutputFormatMatch`
+6. `getOutputFormatMatches()`
+7. `scoreOutputFormat()`
+
+### 377.3 非目标
+
+1. 不改 output-format 评分逻辑
+2. 不改 `multiplierAccuracyScorer`
+3. 不改任何 judge prompt 或 zod schema
+
+### 377.4 当前状态
+
+- `V374.1` 已完成：范围冻结到 agent scorer match contract
+- `V374.2` 已完成：`zzz-scorer.ts` 的公开匹配 flag、section list 和 score contract 已统一复用显式 alias
+- `V374.3` 已完成：全量校验与提交
+- `V374.4` 已完成：roadmap、索引与架构文档同步
