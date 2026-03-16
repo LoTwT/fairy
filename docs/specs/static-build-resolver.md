@@ -1153,3 +1153,4 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 402. `V402` buhflipexplode enemy ref list contracts：当前阶段已收口；`buhflipexplode/index.ts` 中 `SD/DA/TS` 敌人引用集合已统一复用显式 list alias，见 [静态构筑解析系统 V402](./static-build-resolver-v402.md)
 403. `V403` buhflipexplode wave list contracts：当前阶段已收口；`buhflipexplode/index.ts` 中 `SD/TS` wave 集合已统一复用显式 list alias，见 [静态构筑解析系统 V403](./static-build-resolver-v403.md)
 404. `V404` buhflipexplode side slot list contracts：当前阶段已收口；`buhflipexplode/index.ts` 中 `SD/TS` side slot 集合已统一复用显式 alias，见 [静态构筑解析系统 V404](./static-build-resolver-v404.md)
+405. `V405` buhflipexplode node list contracts：当前阶段已收口；`buhflipexplode/index.ts` 中 `SD/TS` node 集合已统一复用显式 list alias，见 [静态构筑解析系统 V405](./static-build-resolver-v405.md)

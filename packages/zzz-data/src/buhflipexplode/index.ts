@@ -297,8 +297,9 @@ export interface SDNode {
   buffDesc: BuhflipBuffTextValue
   sides: SDSideSlotList
 }
+export type SDNodeList = SDNode[]
 export interface SDVersionEnemies {
-  nodes: SDNode[]
+  nodes: SDNodeList
 }
 export interface SDVersionData {
   versionName: BuhflipVersionName
@@ -363,8 +364,9 @@ export interface TSNode {
   /** sides[0] = boss side; sides[1..n] = regular enemy sides */
   sides: TSSideSlotList
 }
+export type TSNodeList = TSNode[]
 export interface TSVersionEnemies {
-  nodes: TSNode[]
+  nodes: TSNodeList
 }
 export interface TSVersionData {
   versionName: BuhflipVersionName

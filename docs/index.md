@@ -302,3 +302,4 @@
 - [静态构筑解析系统 V402](./specs/static-build-resolver-v402.md) — 当前阶段：已收口；`buhflipexplode/index.ts` 中 `SD/DA/TS` 敌人引用集合已统一复用显式 list alias
 - [静态构筑解析系统 V403](./specs/static-build-resolver-v403.md) — 当前阶段：已收口；`buhflipexplode/index.ts` 中 `SD/TS` wave 集合已统一复用显式 list alias
 - [静态构筑解析系统 V404](./specs/static-build-resolver-v404.md) — 当前阶段：已收口；`buhflipexplode/index.ts` 中 `SD/TS` side slot 集合已统一复用显式 alias
+- [静态构筑解析系统 V405](./specs/static-build-resolver-v405.md) — 当前阶段：已收口；`buhflipexplode/index.ts` 中 `SD/TS` node 集合已统一复用显式 list alias
