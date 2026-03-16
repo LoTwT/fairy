@@ -27,6 +27,7 @@ export type GachabaseBirthday = string
 export type GachabaseAssetPath = string
 export type GachabaseStringValueList = string[]
 export type GachabaseEffectLevel = number
+export type GachabaseDescriptionText = string
 
 export interface StatBoost {
   statId: GachabaseStatId
@@ -237,42 +238,44 @@ export interface WEngineDetails {
 // ─── bangboo.json ─────────────────────────────────────────────────────────────
 
 export interface BangbooStat {
-  id: string
-  name: string
-  value: number
-  growthPerLevel: number
+  id: GachabaseStatId
+  name: GachabaseStatName
+  value: GachabaseStatValue
+  growthPerLevel: GachabaseStatValue
 }
 
 export interface BangbooOptimization {
-  level: number
-  maxLevel: number
+  level: GachabaseLevel
+  maxLevel: GachabaseMaxLevel
   statBoosts: StatBoost[]
   statAdditions: StatBoost[]
 }
 
 export interface BangbooSkillStat {
-  title: string
-  values: string[]
+  title: GachabaseName
+  values: GachabaseStringValueList
 }
 
 export interface BangbooSkill {
-  typeId: string
-  name: string
+  typeId: GachabaseId
+  name: GachabaseName
   /** Source-compatible rich text string with inline HTML-like markup. */
   description: RichTextString
   stats: BangbooSkillStat[]
 }
 
+export interface BangbooAssets {
+  circleIcon: GachabaseAssetPath
+  splashArt: SplashArt
+}
+
 export interface BangbooItem {
-  id: string
-  slug: string
-  name: string
-  rarity: number
-  description: string
-  assets: {
-    circleIcon: string
-    splashArt: SplashArt
-  }
+  id: GachabaseId
+  slug: GachabaseSlug
+  name: GachabaseName
+  rarity: GachabaseRarity
+  description: GachabaseDescriptionText
+  assets: BangbooAssets
   baseStats: BangbooStat[]
   optimizations: BangbooOptimization[]
   skills: BangbooSkill[]
@@ -281,16 +284,16 @@ export interface BangbooItem {
 // ─── drive-discs.json ─────────────────────────────────────────────────────────
 
 export interface DriveDiscSetEffect {
-  pieces: number
+  pieces: GachabaseLevel
   /** Source-compatible rich text string with inline HTML-like markup. */
   bonus: RichTextString
 }
 
 export interface DriveDiscItem {
-  id: string
-  slug: string
-  name: string
-  icon: string
-  tag: string
+  id: GachabaseId
+  slug: GachabaseSlug
+  name: GachabaseName
+  icon: GachabaseIcon
+  tag: GachabaseName
   setEffects: DriveDiscSetEffect[]
 }

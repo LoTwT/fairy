@@ -13743,3 +13743,36 @@ caveatSummary` 这些兼容字段补齐。
 - `V387.2` 已完成：`gachabase/types.ts` 里的 w-engine 相关 raw published field 已统一复用显式 alias / named interface
 - `V387.3` 已完成：全量校验与提交
 - `V387.4` 已完成：roadmap、索引与架构文档同步
+
+## 391. V388 gachabase bangboo and drive-disc raw field contracts
+
+### 391.1 目标
+
+`V388` 只解决一件事：
+
+- 把 `gachabase/types.ts` 里 `bangboo` 与 `drive-disc` 相关 raw published field 统一改成显式 alias / named interface。
+
+### 391.2 范围
+
+1. `GachabaseDescriptionText`
+2. `BangbooStat`
+3. `BangbooOptimization`
+4. `BangbooSkillStat`
+5. `BangbooSkill`
+6. `BangbooAssets`
+7. `BangbooItem`
+8. `DriveDiscSetEffect`
+9. `DriveDiscItem`
+
+### 391.3 非目标
+
+1. 不改 `agents.json`、`agent-details.json`、`w-engine*.json` 相关 contract
+2. 不改公开 JSON shape
+3. 不改任何 helper 计算逻辑
+
+### 391.4 当前状态
+
+- `V388.1` 已完成：范围冻结到 gachabase bangboo and drive-disc raw field contract
+- `V388.2` 已完成：`gachabase/types.ts` 里的 bangboo 与 drive-disc 相关 raw published field 已统一复用显式 alias / named interface
+- `V388.3` 已完成：全量校验与提交
+- `V388.4` 已完成：roadmap、索引与架构文档同步

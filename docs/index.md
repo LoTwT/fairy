@@ -285,3 +285,4 @@
 - [静态构筑解析系统 V385](./specs/static-build-resolver-v385.md) — 当前阶段：已收口；`game-modes.ts` raw published interface 的公开字段已统一复用显式 alias / list alias
 - [静态构筑解析系统 V386](./specs/static-build-resolver-v386.md) — 当前阶段：已收口；`gachabase/types.ts` 里代理人相关 raw published field 已统一复用显式 alias / named interface
 - [静态构筑解析系统 V387](./specs/static-build-resolver-v387.md) — 当前阶段：已收口；`gachabase/types.ts` 里 w-engine 相关 raw published field 已统一复用显式 alias / named interface
+- [静态构筑解析系统 V388](./specs/static-build-resolver-v388.md) — 当前阶段：已收口；`gachabase/types.ts` 里 bangboo 与 drive-disc 相关 raw published field 已统一复用显式 alias / named interface

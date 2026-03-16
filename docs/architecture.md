@@ -375,3 +375,4 @@ const total = base * bonus * crit * resistance * custom
 - `V385` game-modes raw field contracts：当前阶段已收口；`game-modes.ts` raw published interface 的公开字段已统一复用显式 alias / list alias
 - `V386` gachabase agent raw field contracts：当前阶段已收口；`gachabase/types.ts` 里代理人相关 raw published field 已统一复用显式 alias / named interface
 - `V387` gachabase w-engine raw field contracts：当前阶段已收口；`gachabase/types.ts` 里 w-engine 相关 raw published field 已统一复用显式 alias / named interface
+- `V388` gachabase bangboo and drive-disc raw field contracts：当前阶段已收口；`gachabase/types.ts` 里 bangboo 与 drive-disc 相关 raw published field 已统一复用显式 alias / named interface
