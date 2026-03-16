@@ -1134,3 +1134,4 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 383. `V383` gachabase stat helper contracts：当前阶段已收口；`gachabase` 公式 helper 的输入输出已统一复用显式标量 alias，不改变任何计算公式或公开 JSON contract，见 [静态构筑解析系统 V383](./static-build-resolver-v383.md)
 384. `V384` buhflipexplode raw field contracts：当前阶段已收口；`buhflipexplode` raw interface 的公开字段已统一复用显式 alias / pair alias / list alias，不改变任何公式 helper、爬虫或 merge 输出，见 [静态构筑解析系统 V384](./static-build-resolver-v384.md)
 385. `V385` game-modes raw field contracts：当前阶段已收口；`game-modes.ts` raw published interface 的公开字段已统一复用显式 alias / list alias，不改变任何 published JSON shape、`cleaned` helper 语义或上层 resolver 逻辑，见 [静态构筑解析系统 V385](./static-build-resolver-v385.md)
+386. `V386` gachabase agent raw field contracts：当前阶段已收口；`gachabase/types.ts` 里代理人相关 raw published field 已统一复用显式 alias / named interface，不改变任何公开 JSON shape或 helper 逻辑，见 [静态构筑解析系统 V386](./static-build-resolver-v386.md)

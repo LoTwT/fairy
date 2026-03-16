@@ -13649,3 +13649,62 @@ caveatSummary` 这些兼容字段补齐。
 - `V385.2` 已完成：`game-modes.ts` raw published interface 的公开字段已统一复用显式 alias / list alias
 - `V385.3` 已完成：全量校验与提交
 - `V385.4` 已完成：roadmap、索引与架构文档同步
+
+## 389. V386 gachabase agent raw field contracts
+
+### 389.1 目标
+
+`V386` 只解决一件事：
+
+- 把 `gachabase/types.ts` 里代理人相关 raw published field 统一改成显式 alias / named interface。
+
+### 389.2 范围
+
+1. `GachabaseId`
+2. `GachabaseSlug`
+3. `GachabaseName`
+4. `GachabaseUrl`
+5. `GachabaseIcon`
+6. `GachabaseRarity`
+7. `GachabaseStatId`
+8. `GachabaseStatValue`
+9. `GachabaseStatName`
+10. `GachabaseGrowthPerLevel`
+11. `GachabaseLevel`
+12. `GachabasePromotion`
+13. `GachabaseMaxLevel`
+14. `GachabaseGender`
+15. `GachabaseHeight`
+16. `GachabaseBirthday`
+17. `GachabaseAssetPath`
+18. `GachabaseStringValueList`
+19. `StatBoost`
+20. `SplashArt`
+21. `AgentListItem`
+22. `AgentStat`
+23. `AgentPromotion`
+24. `AgentSkillDescription`
+25. `AgentSkillStat`
+26. `AgentSkillGroup`
+27. `CoreSkillLevel`
+28. `AgentSkin`
+29. `AgentMindscape`
+30. `AgentPotentialVision`
+31. `AgentFactionRef`
+32. `AgentExclusiveWeaponRef`
+33. `AgentDetailsAssets`
+34. `AgentProfile`
+35. `AgentDetails`
+
+### 389.3 非目标
+
+1. 不改 `w-engines.json`、`bangboo.json`、`drive-discs.json` 相关 contract
+2. 不改公开 JSON shape
+3. 不改任何 helper 计算逻辑
+
+### 389.4 当前状态
+
+- `V386.1` 已完成：范围冻结到 gachabase agent raw field contract
+- `V386.2` 已完成：`gachabase/types.ts` 里的代理人相关 raw published field 已统一复用显式 alias / named interface
+- `V386.3` 已完成：全量校验与提交
+- `V386.4` 已完成：roadmap、索引与架构文档同步

@@ -7,13 +7,32 @@ import type { RichTextString } from "../text.js"
 
 // ─── Shared ───────────────────────────────────────────────────────────────────
 
+export type GachabaseId = string
+export type GachabaseSlug = string
+export type GachabaseName = string
+export type GachabaseUrl = string
+export type GachabaseIcon = string
+export type GachabaseRarity = number
+export type GachabaseStatId = string
+export type GachabaseStatValue = number
+export type GachabaseStatName = string
+export type GachabaseGrowthPerLevel = number | null
+export type GachabaseLevel = number
+export type GachabasePromotion = number
+export type GachabaseMaxLevel = number
+export type GachabaseGender = string
+export type GachabaseHeight = string
+export type GachabaseBirthday = string
+export type GachabaseAssetPath = string
+export type GachabaseStringValueList = string[]
+
 export interface StatBoost {
-  statId: string
-  value: number
+  statId: GachabaseStatId
+  value: GachabaseStatValue
 }
 
 export interface SplashArt {
-  url: string
+  url: GachabaseUrl
   width: number
   height: number
 }
@@ -21,104 +40,120 @@ export interface SplashArt {
 // ─── agents.json ──────────────────────────────────────────────────────────────
 
 export interface AgentListItem {
-  id: string
-  slug: string
-  name: string
-  rarity: number
+  id: GachabaseId
+  slug: GachabaseSlug
+  name: GachabaseName
+  rarity: GachabaseRarity
   /** Localized display label. Normalize with `toAgentSpecialty()` for logic. */
   specialty: AgentSpecialtyLabel
   /** Localized display labels. Normalize with `toAgentAttribute()` for logic. */
   attributes: AgentAttributeLabel[]
   /** Localized display labels. Normalize with `toAttackType()` for logic. */
   attackTypes: AttackTypeLabel[]
-  url: string
+  url: GachabaseUrl
 }
 
 // ─── agent-details.json ───────────────────────────────────────────────────────
 
 export interface AgentStat {
-  id: string
-  name: string
-  value: number
-  growthPerLevel: number | null
+  id: GachabaseStatId
+  name: GachabaseStatName
+  value: GachabaseStatValue
+  growthPerLevel: GachabaseGrowthPerLevel
 }
 
 export interface AgentPromotion {
-  promotion: number
-  maxLevel: number
+  promotion: GachabasePromotion
+  maxLevel: GachabaseMaxLevel
   statBoosts: StatBoost[]
 }
 
 export interface AgentSkillDescription {
-  id: string
-  name: string
+  id: GachabaseId
+  name: GachabaseName
   /** Source-compatible rich text string with inline HTML-like markup. */
   description: RichTextString
 }
 
 export interface AgentSkillStat {
-  id: string
-  name: string
-  values: string[]
+  id: GachabaseId
+  name: GachabaseName
+  values: GachabaseStringValueList
 }
 
 export interface AgentSkillGroup {
-  typeId: string
-  typeName: string
+  typeId: GachabaseId
+  typeName: GachabaseName
   descriptions: AgentSkillDescription[]
   stats: AgentSkillStat[]
 }
 
 export interface CoreSkillLevel {
-  typeName: string
-  level: number
+  typeName: GachabaseName
+  level: GachabaseLevel
   skills: AgentSkillDescription[]
   statBoosts: StatBoost[]
 }
 
 export interface AgentSkin {
-  id: string
-  name: string
+  id: GachabaseId
+  name: GachabaseName
   assets: {
-    menuIcon: string
-    tabIcon: string
-    circleIcon: string
+    menuIcon: GachabaseAssetPath
+    tabIcon: GachabaseAssetPath
+    circleIcon: GachabaseAssetPath
     splashArt: SplashArt
   }
 }
 
 export interface AgentMindscape {
-  level: number
-  name: string
+  level: GachabaseLevel
+  name: GachabaseName
   /** Source-compatible rich text string with inline HTML-like markup. */
   description: RichTextString
 }
 
 export interface AgentPotentialVision {
-  id: string
-  name: string
-  abilityName: string
+  id: GachabaseId
+  name: GachabaseName
+  abilityName: GachabaseName
   /** Source-compatible rich text string with inline HTML-like markup. */
   abilityDesc: RichTextString
 }
 
+export interface AgentFactionRef {
+  id: GachabaseId
+  name: GachabaseName
+  icon: GachabaseIcon
+}
+
+export interface AgentExclusiveWeaponRef {
+  id: GachabaseId
+  slug: GachabaseSlug
+  name: GachabaseName
+}
+
+export interface AgentDetailsAssets {
+  mindscapeImages: SplashArt[]
+}
+
+export interface AgentProfile {
+  gender: GachabaseGender
+  height: GachabaseHeight
+  birthday: GachabaseBirthday
+}
+
 export interface AgentDetails {
-  id: string
-  fullName: string
-  faction: { id: string; name: string; icon: string } | null
+  id: GachabaseId
+  fullName: GachabaseName
+  faction: AgentFactionRef | null
   /**
    * Raw source-compatible field name from gachabase.
    * In ZZZ terminology this means the agent's signature W-Engine.
    */
-  exclusiveWeapon: { id: string; slug: string; name: string } | null
-  assets: {
-    mindscapeImages: SplashArt[]
-  }
-  profile: {
-    gender: string
-    height: string
-    birthday: string
-  }
+  exclusiveWeapon: AgentExclusiveWeaponRef | null
+  assets: AgentDetailsAssets
+  profile: AgentProfile
   skins: AgentSkin[]
   stats: AgentStat[]
   promotions: AgentPromotion[]
