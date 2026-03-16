@@ -30,6 +30,9 @@ export type GachabaseEffectLevel = number
 export type GachabaseDescriptionText = string
 export type AgentAttributeLabelList = AgentAttributeLabel[]
 export type AgentAttackTypeLabelList = AttackTypeLabel[]
+export type StatBoostList = StatBoost[]
+export type AgentSkillDescriptionList = AgentSkillDescription[]
+export type AgentSkillStatList = AgentSkillStat[]
 
 export interface StatBoost {
   statId: GachabaseStatId
@@ -70,7 +73,7 @@ export interface AgentStat {
 export interface AgentPromotion {
   promotion: GachabasePromotion
   maxLevel: GachabaseMaxLevel
-  statBoosts: StatBoost[]
+  statBoosts: StatBoostList
 }
 
 export interface AgentSkillDescription {
@@ -89,15 +92,15 @@ export interface AgentSkillStat {
 export interface AgentSkillGroup {
   typeId: GachabaseId
   typeName: GachabaseName
-  descriptions: AgentSkillDescription[]
-  stats: AgentSkillStat[]
+  descriptions: AgentSkillDescriptionList
+  stats: AgentSkillStatList
 }
 
 export interface CoreSkillLevel {
   typeName: GachabaseName
   level: GachabaseLevel
-  skills: AgentSkillDescription[]
-  statBoosts: StatBoost[]
+  skills: AgentSkillDescriptionList
+  statBoosts: StatBoostList
 }
 
 export interface AgentSkinAssets {
@@ -251,8 +254,8 @@ export interface BangbooStat {
 export interface BangbooOptimization {
   level: GachabaseLevel
   maxLevel: GachabaseMaxLevel
-  statBoosts: StatBoost[]
-  statAdditions: StatBoost[]
+  statBoosts: StatBoostList
+  statAdditions: StatBoostList
 }
 
 export interface BangbooSkillStat {
