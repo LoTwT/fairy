@@ -143,6 +143,10 @@ export interface SDEnemyItem extends EnemyBase {
   count: GameModeEnemyCount
 }
 
+export interface SDWaveItem {
+  enemies: SDEnemyItem[]
+}
+
 export interface SDSideItem {
   /** Side-wide raw multiplier buckets in the same order as `ElementMult`. */
   sideElementMult: ElementMult
@@ -154,7 +158,7 @@ export interface SDSideItem {
   hp60k: GameModeHP60k
   /** Raw alternative HP value from upstream data. */
   altHp: GameModeAltHP
-  waves: Array<{ enemies: SDEnemyItem[] }>
+  waves: SDWaveItem[]
 }
 
 export interface SDNodeItem {
@@ -207,6 +211,14 @@ export interface TSRegularEnemyItem extends EnemyBase {
   count: GameModeEnemyCount
 }
 
+export interface TSBossWaveItem {
+  enemies: TSBossEnemyItem[]
+}
+
+export interface TSRegularWaveItem {
+  enemies: TSRegularEnemyItem[]
+}
+
 export interface TSBossSideItem {
   /** Node enemy level in published data. */
   nodeLvl: GameModeNodeLevel
@@ -214,7 +226,7 @@ export interface TSBossSideItem {
   hp60k: GameModeHP60k
   /** Raw alternative HP value from upstream data. */
   altHp: GameModeAltHP
-  waves: Array<{ enemies: TSBossEnemyItem[] }>
+  waves: TSBossWaveItem[]
 }
 
 export interface TSRegularSideItem {
@@ -228,7 +240,7 @@ export interface TSRegularSideItem {
   hp60k: GameModeHP60k
   /** Raw alternative HP value from upstream data. */
   altHp: GameModeAltHP
-  waves: Array<{ enemies: TSRegularEnemyItem[] }>
+  waves: TSRegularWaveItem[]
 }
 
 export interface TSNodeItem {

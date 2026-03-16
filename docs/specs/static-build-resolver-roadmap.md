@@ -13776,3 +13776,33 @@ caveatSummary` 这些兼容字段补齐。
 - `V388.2` 已完成：`gachabase/types.ts` 里的 bangboo 与 drive-disc 相关 raw published field 已统一复用显式 alias / named interface
 - `V388.3` 已完成：全量校验与提交
 - `V388.4` 已完成：roadmap、索引与架构文档同步
+
+## 392. V389 game-modes wave object contracts
+
+### 392.1 目标
+
+`V389` 只解决一件事：
+
+- 把 `game-modes.ts` 里剩余的 wave object 统一改成显式 named interface。
+
+### 392.2 范围
+
+1. `SDWaveItem`
+2. `TSBossWaveItem`
+3. `TSRegularWaveItem`
+4. `SDSideItem.waves`
+5. `TSBossSideItem.waves`
+6. `TSRegularSideItem.waves`
+
+### 392.3 非目标
+
+1. 不改任何 published JSON shape
+2. 不改 `cleaned` helper 的消费语义
+3. 不改上层 lookup 或 resolver 逻辑
+
+### 392.4 当前状态
+
+- `V389.1` 已完成：范围冻结到 game-modes wave object contract
+- `V389.2` 已完成：`game-modes.ts` 里剩余的 wave object 已统一复用显式 named interface
+- `V389.3` 已完成：全量校验与提交
+- `V389.4` 已完成：roadmap、索引与架构文档同步
