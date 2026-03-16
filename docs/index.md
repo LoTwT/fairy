@@ -362,3 +362,5 @@
 - [静态构筑解析系统 V462](./specs/static-build-resolver-v462.md) — 当前阶段：已收口；`gachabase/types.ts` 中 `GachabaseStringValueList` 已统一复用显式基础文本 alias
 - [静态构筑解析系统 V463](./specs/static-build-resolver-v463.md) — 当前阶段：已收口；`cleaned/types.ts` 中 `EnemyDamageContextSource / DABuffSource` 已统一改为显式 interface
 - [静态构筑解析系统 V464](./specs/static-build-resolver-v464.md) — 当前阶段：已收口；`cleaned/types.ts` 中 `DA / SD / TS` 的 flattened enemy specialization 已统一改为显式 interface
+- [静态构筑解析系统 V465](./specs/static-build-resolver-v465.md) — 当前阶段：已收口；`game-modes.ts` 中 `BuffsJson` 已统一复用显式 record-value alias
+- [静态构筑解析系统 V466](./specs/static-build-resolver-v466.md) — 当前阶段：已收口；`buhflipexplode/index.ts` 中 enemy/version record 已统一复用显式 value alias

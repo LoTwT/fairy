@@ -1213,3 +1213,5 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 462. `V462` gachabase string value contracts：当前阶段已收口；`gachabase/types.ts` 中 `GachabaseStringValueList` 已统一复用显式基础文本 alias，不改变任何 published JSON shape 或文本内容，见 [静态构筑解析系统 V462](./static-build-resolver-v462.md)
 463. `V463` cleaned source object contracts：当前阶段已收口；`cleaned/types.ts` 中 `EnemyDamageContextSource / DABuffSource` 已统一改为显式 interface，不改变任何 helper 返回值或 published JSON shape，见 [静态构筑解析系统 V463](./static-build-resolver-v463.md)
 464. `V464` cleaned flattened enemy specialization contracts：当前阶段已收口；`cleaned/types.ts` 中 `DA / SD / TS` 的 flattened enemy specialization 已统一改为显式 interface，不改变任何 flatten helper 的遍历顺序、筛选逻辑或返回值，见 [静态构筑解析系统 V464](./static-build-resolver-v464.md)
+465. `V465` game-modes buff record value contracts：当前阶段已收口；`game-modes.ts` 中 `BuffsJson` 已统一复用显式 record-value alias，不改变任何 published JSON shape 或 helper 逻辑，见 [静态构筑解析系统 V465](./static-build-resolver-v465.md)
+466. `V466` buhflipexplode record value contracts：当前阶段已收口；`buhflipexplode/index.ts` 中 enemy/version record 已统一复用显式 value alias，不改变任何 published JSON shape、record key 或 helper 逻辑，见 [静态构筑解析系统 V466](./static-build-resolver-v466.md)

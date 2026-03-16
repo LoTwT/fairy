@@ -443,5 +443,7 @@ const total = base * bonus * crit * resistance * custom
 - `V462` gachabase string value contracts：当前阶段已收口；`gachabase/types.ts` 中 `GachabaseStringValueList` 已统一复用显式基础文本 alias
 - `V463` cleaned source object contracts：当前阶段已收口；`cleaned/types.ts` 中 `EnemyDamageContextSource / DABuffSource` 已统一改为显式 interface
 - `V464` cleaned flattened enemy specialization contracts：当前阶段已收口；`cleaned/types.ts` 中 `DA / SD / TS` 的 flattened enemy specialization 已统一改为显式 interface
+- `V465` game-modes buff record value contracts：当前阶段已收口；`game-modes.ts` 中 `BuffsJson` 已统一复用显式 record-value alias
+- `V466` buhflipexplode record value contracts：当前阶段已收口；`buhflipexplode/index.ts` 中 enemy/version record 已统一复用显式 value alias
 - `V459` calculator disorder damage params contracts：当前阶段已收口；`calculator/types.ts` 中 `DisorderDamageParams` 已统一改为显式 interface
 - `V460` compact disorder damage params contracts：当前阶段已收口；`build/compact.ts` 中 `CompactStaticBuildDisorderDamageParams` 已统一改为显式 interface

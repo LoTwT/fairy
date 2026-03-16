@@ -321,7 +321,8 @@ export interface BuhflipEnemy {
   spoilerPerf?: BuhflipEnemySpoilerText
 }
 
-export type BuhflipEnemyRecord = Record<BuhflipEnemyId, BuhflipEnemy>
+export type BuhflipEnemyRecordValue = BuhflipEnemy
+export type BuhflipEnemyRecord = Record<BuhflipEnemyId, BuhflipEnemyRecordValue>
 /** `buhflipexplode-enemies.json` top-level shape */
 export type BuhflipEnemyDB = BuhflipEnemyRecord
 
@@ -366,7 +367,11 @@ export interface SDVersionData {
   buffDesc?: BuhflipBuffTextValue
   mainBuffNum?: BuhflipMainBuffNum
 }
-export type SDVersionRecord = Record<BuhflipVersionRecordKey, SDVersionData>
+export type SDVersionRecordValue = SDVersionData
+export type SDVersionRecord = Record<
+  BuhflipVersionRecordKey,
+  SDVersionRecordValue
+>
 export interface SDVersionsMode {
   name: BuhflipVersionsModeName
   versions: SDVersionRecord
@@ -392,7 +397,11 @@ export interface DAVersionData {
   buffNames: BuhflipBuffTextList
   versionEnemies: DAEnemyRefList
 }
-export type DAVersionRecord = Record<BuhflipVersionRecordKey, DAVersionData>
+export type DAVersionRecordValue = DAVersionData
+export type DAVersionRecord = Record<
+  BuhflipVersionRecordKey,
+  DAVersionRecordValue
+>
 /** `buhflipexplode-deadly-assault.json` top-level shape */
 export type DAVersionsJson = DAVersionRecord
 
@@ -434,7 +443,11 @@ export interface TSVersionData {
   versionEnemyAnomMult: BuhflipVersionAnomalyMultiplier
   versionEnemies: TSVersionEnemies
 }
-export type TSVersionRecord = Record<BuhflipVersionRecordKey, TSVersionData>
+export type TSVersionRecordValue = TSVersionData
+export type TSVersionRecord = Record<
+  BuhflipVersionRecordKey,
+  TSVersionRecordValue
+>
 export interface TSVersionsMode {
   name: BuhflipVersionsModeName
   versions: TSVersionRecord

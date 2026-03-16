@@ -91,8 +91,10 @@ export interface BuffItem {
   effect: GameModeBuffEffect
 }
 
+export type GameModeBuffRecordValue = BuffItem
+
 /** `buffs.json` top-level shape — key is camelCase buff name */
-export type BuffsJson = Record<GameModeBuffRecordKey, BuffItem>
+export type BuffsJson = Record<GameModeBuffRecordKey, GameModeBuffRecordValue>
 
 // ─── deadly-assault.json ──────────────────────────────────────────────────────
 
