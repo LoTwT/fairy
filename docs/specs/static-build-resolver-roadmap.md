@@ -13029,3 +13029,70 @@ caveatSummary` 这些兼容字段补齐。
 - `V368.2` 已完成：`resolve-build-source-entry-context.ts` 的公开 `utilityOnly` 字段已统一复用显式 alias
 - `V368.3` 已完成：全量校验与提交
 - `V368.4` 已完成：roadmap、索引与架构文档同步
+
+## 372. V369 agent schema text and list contracts
+
+### 372.1 目标
+
+`V369` 只解决一件事：
+
+- 把 `resolve-build-schemas.ts` 里公开的名称、attribute、combat-tag、anomaly-type 文本字段改为复用显式 alias。
+
+### 372.2 范围
+
+1. `BuildToolDriveDiscSetName`
+2. `BuildToolScenarioAttributeValue`
+3. `BuildToolScenarioCombatTagList`
+4. `BuildToolDriveDiscSetInput`
+5. `BuildToolBaseScenarioInput`
+6. `BuildToolDisorderScenarioInput`
+7. `BuildToolSkillMatrixContextInput`
+
+### 372.3 非目标
+
+1. 不改 zod schema 逻辑
+2. 不改 scenario 解析逻辑
+3. 不改 resolver 行为
+
+### 372.4 当前状态
+
+- `V369.1` 已完成：范围冻结到 schema 文本/list contract
+- `V369.2` 已完成：`resolve-build-schemas.ts` 的公开名称、attribute、combat-tag、anomaly-type 字段已统一复用显式 alias
+- `V369.3` 已完成：全量校验与提交
+- `V369.4` 已完成：roadmap、索引与架构文档同步
+
+## 373. V370 agent schema snapshot scalar contracts
+
+### 373.1 目标
+
+`V370` 只解决一件事：
+
+- 把 `resolve-build-schemas.ts` 中 snapshot 与场景布尔/数值输入补成显式公开 alias。
+
+### 373.2 范围
+
+1. `BuildToolEnemyStunnedFlag`
+2. `BuildToolDynamicSnapshotFlag`
+3. `BuildToolStateSnapshotFlag`
+4. `BuildToolDynamicSnapshotCount`
+5. `BuildToolSnapshotRatio`
+6. `BuildToolResolvedSnapshotDeltaValue`
+7. `BuildToolResolvedSnapshotMultiplierFactorValue`
+8. `BuildToolScenarioExtraAbilityFlag`
+9. `BuildToolEnemyInput`
+10. `BuildToolDynamicSnapshotInput`
+11. `BuildToolStateSnapshotInput`
+12. `BuildToolResolvedSnapshotInput`
+
+### 373.3 非目标
+
+1. 不改 snapshot 字段语义
+2. 不改 zod default / min 校验
+3. 不改 resolver 计算逻辑
+
+### 373.4 当前状态
+
+- `V370.1` 已完成：范围冻结到 schema snapshot scalar contract
+- `V370.2` 已完成：`resolve-build-schemas.ts` 的公开 snapshot 与场景布尔/数值输入已统一复用显式 alias
+- `V370.3` 已完成：全量校验与提交
+- `V370.4` 已完成：roadmap、索引与架构文档同步

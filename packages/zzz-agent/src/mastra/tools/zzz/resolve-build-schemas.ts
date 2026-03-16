@@ -6,6 +6,7 @@ import type {
   StaticBuildAnomalyProficiency,
   StaticBuildAttack,
   StaticBuildBaseAttack,
+  StaticBuildCombatTagList,
   StaticBuildCritDamage,
   StaticBuildCritRate,
   StaticBuildDamageMultiplierInputValue,
@@ -31,6 +32,11 @@ import type {
   StaticBuildStunVulnerability,
   StaticBuildVulnerabilityBonus,
 } from "zzz-data"
+import type {
+  BuildToolAnomalyTypeValue,
+  BuildToolAttributeValue,
+  BuildToolCatalogValue,
+} from "./resolve-build-contracts"
 import { z as zod } from "zod"
 
 export const skillTagSchema = zod.enum([
@@ -45,8 +51,30 @@ export const skillTagSchema = zod.enum([
 
 export type BuildToolSkillTag = StaticBuildSkillTag
 
+export type BuildToolDriveDiscSetName = BuildToolCatalogValue
+
+export type BuildToolEnemyStunnedFlag = boolean
+
+export type BuildToolDynamicSnapshotFlag = boolean
+
+export type BuildToolStateSnapshotFlag = boolean
+
+export type BuildToolDynamicSnapshotCount = number
+
+export type BuildToolSnapshotRatio = number
+
+export type BuildToolResolvedSnapshotDeltaValue = number
+
+export type BuildToolResolvedSnapshotMultiplierFactorValue = number
+
+export type BuildToolScenarioAttributeValue = BuildToolAttributeValue
+
+export type BuildToolScenarioExtraAbilityFlag = boolean
+
+export type BuildToolScenarioCombatTagList = StaticBuildCombatTagList
+
 export interface BuildToolDriveDiscSetInput {
-  name: string
+  name: BuildToolDriveDiscSetName
   pieces: StaticBuildDriveDiscPieces
 }
 
@@ -60,7 +88,7 @@ export interface BuildToolEnemyInput {
   ignoreResistance?: StaticBuildIgnoreResistance
   vulnerabilityBonus?: StaticBuildVulnerabilityBonus
   damageReduction?: StaticBuildDamageReduction
-  isStunned?: boolean
+  isStunned?: BuildToolEnemyStunnedFlag
   stunVulnerability?: StaticBuildStunVulnerability
   nonStunVulnerability?: StaticBuildNonStunVulnerability
   specialMultiplier?: StaticBuildSpecialMultiplier
@@ -68,54 +96,54 @@ export interface BuildToolEnemyInput {
 
 export interface BuildToolDynamicSnapshotInput {
   flags?: {
-    ariaDreamtime?: boolean
-    burniceEmberState?: boolean
+    ariaDreamtime?: BuildToolDynamicSnapshotFlag
+    burniceEmberState?: BuildToolDynamicSnapshotFlag
   }
   counts?: {
-    burniceEmberExtraTriggers?: number
+    burniceEmberExtraTriggers?: BuildToolDynamicSnapshotCount
   }
   values?: {
-    ariaExflowDamageRatio?: number
-    ariaStunnedDamageRatio?: number
-    burniceEmberDamageRatio?: number
+    ariaExflowDamageRatio?: BuildToolSnapshotRatio
+    ariaStunnedDamageRatio?: BuildToolSnapshotRatio
+    burniceEmberDamageRatio?: BuildToolSnapshotRatio
   }
 }
 
 export interface BuildToolStateSnapshotInput {
   flags?: {
-    alicePolarityAssaultState?: boolean
-    miyabiFrostburnBreakState?: boolean
+    alicePolarityAssaultState?: BuildToolStateSnapshotFlag
+    miyabiFrostburnBreakState?: BuildToolStateSnapshotFlag
   }
   values?: {
-    alicePolarityAssaultDamageRatio?: number
-    miyabiFrostburnBreakDamageRatio?: number
+    alicePolarityAssaultDamageRatio?: BuildToolSnapshotRatio
+    miyabiFrostburnBreakDamageRatio?: BuildToolSnapshotRatio
   }
 }
 
 export interface BuildToolResolvedSnapshotInput {
   bucketDeltas?: {
-    bonusDamageSum?: number
-    defenseReduction?: number
-    penetrationRate?: number
-    resistanceReduction?: number
-    ignoreResistance?: number
-    sheerBonusSum?: number
-    anomalyProficiency?: number
-    anomalyBonusDamageSum?: number
-    anomalyCritRate?: number
-    anomalyCritDamage?: number
+    bonusDamageSum?: BuildToolResolvedSnapshotDeltaValue
+    defenseReduction?: BuildToolResolvedSnapshotDeltaValue
+    penetrationRate?: BuildToolResolvedSnapshotDeltaValue
+    resistanceReduction?: BuildToolResolvedSnapshotDeltaValue
+    ignoreResistance?: BuildToolResolvedSnapshotDeltaValue
+    sheerBonusSum?: BuildToolResolvedSnapshotDeltaValue
+    anomalyProficiency?: BuildToolResolvedSnapshotDeltaValue
+    anomalyBonusDamageSum?: BuildToolResolvedSnapshotDeltaValue
+    anomalyCritRate?: BuildToolResolvedSnapshotDeltaValue
+    anomalyCritDamage?: BuildToolResolvedSnapshotDeltaValue
   }
   multiplierFactors?: {
-    skillMultiplierFactor?: number
+    skillMultiplierFactor?: BuildToolResolvedSnapshotMultiplierFactorValue
   }
 }
 
 export type BuildToolDamageType = StaticBuildDamageType
 
 interface BuildToolBaseScenarioInput {
-  attribute?: string
-  extraAbilityActive?: boolean
-  combatTags?: string[]
+  attribute?: BuildToolScenarioAttributeValue
+  extraAbilityActive?: BuildToolScenarioExtraAbilityFlag
+  combatTags?: BuildToolScenarioCombatTagList
   dynamicSnapshot?: BuildToolDynamicSnapshotInput
   stateSnapshot?: BuildToolStateSnapshotInput
   resolvedSnapshot?: BuildToolResolvedSnapshotInput
@@ -143,7 +171,7 @@ export interface BuildToolAnomalyScenarioInput extends BuildToolBaseScenarioInpu
 export interface BuildToolDisorderScenarioInput extends BuildToolBaseScenarioInput {
   damageType: "disorder"
   skillTag: BuildToolSkillTag
-  anomalyType: string
+  anomalyType: BuildToolAnomalyTypeValue
   remainingTime: StaticBuildRemainingTime
 }
 
@@ -154,9 +182,9 @@ export type BuildToolScenarioInput =
   | BuildToolDisorderScenarioInput
 
 export interface BuildToolSkillMatrixContextInput {
-  attribute?: string
-  extraAbilityActive?: boolean
-  combatTags?: string[]
+  attribute?: BuildToolScenarioAttributeValue
+  extraAbilityActive?: BuildToolScenarioExtraAbilityFlag
+  combatTags?: BuildToolScenarioCombatTagList
   enemy: BuildToolEnemyInput
 }
 
