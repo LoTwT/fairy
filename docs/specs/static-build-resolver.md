@@ -1111,3 +1111,4 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 360. `V360` buhflipexplode helper result contracts：当前阶段已收口；`buhflipexplode` 公开公式 helper 的返回值已统一复用显式公开 contract，不改变任何公式逻辑，见 [静态构筑解析系统 V360](./static-build-resolver-v360.md)
 361. `V361` crawl decode payload contracts：当前阶段已收口；`decodeSvelteKitData()` 的返回值已统一复用显式公开 contract，不改变任何解码逻辑，见 [静态构筑解析系统 V361](./static-build-resolver-v361.md)
 362. `V362` generate worksheet config text contracts：当前阶段已收口；`generate/config.ts` 的 worksheet config 公开文本字段已统一复用显式公开 contract，不改变任何 generate 行为，见 [静态构筑解析系统 V362](./static-build-resolver-v362.md)
+363. `V363` resolver progress docs de-hardcoding：当前阶段已收口；顶层文档里的 resolver 进度说明已改为以 roadmap 为准，不再硬编码旧阶段号，见 [静态构筑解析系统 V363](./static-build-resolver-v363.md)

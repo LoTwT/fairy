@@ -12853,3 +12853,31 @@ caveatSummary` 这些兼容字段补齐。
 - `V362.2` 已完成：worksheet config 公开文本字段已统一复用显式公开 alias
 - `V362.3` 已完成：校验与提交
 - `V362.4` 已完成：roadmap、索引与架构文档同步
+
+## 366. V363 resolver progress docs de-hardcoding
+
+### 366.1 目标
+
+`V363` 只解决一件事：
+
+- 把顶层文档里的 resolver 进度说明改成不依赖硬编码阶段号的描述，并明确以 roadmap 为准。
+
+### 366.2 范围
+
+1. `docs/index.md`
+2. `docs/architecture.md`
+3. `docs/specs/static-build-resolver-roadmap.md`
+4. `docs/specs/static-build-resolver.md`
+
+### 366.3 非目标
+
+1. 不改运行时代码
+2. 不删历史阶段文档
+3. 不改 roadmap 阶段内容
+
+### 366.4 当前状态
+
+- `V363.1` 已完成：范围冻结到顶层进度文档去硬编码
+- `V363.2` 已完成：顶层概述已改为以 roadmap 为准
+- `V363.3` 已完成：文档校验与提交
+- `V363.4` 已完成：spec、roadmap、索引与架构文档同步

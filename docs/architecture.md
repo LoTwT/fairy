@@ -2,7 +2,7 @@
 
 ## 仓库级 AI 协作文件
 
-当前 `static-build-resolver` contract 收口阶段已推进到 `V333`。`V313` 已完成 `skill-matrix / source-utility-view` 里剩余最大的 compact scalar/list contract；`V314` 已完成 `compact.ts` 中剩余 build scalar、count、matrix metadata scalar/text contract 的显式化，当前 `compact` 公开 contract 已在既有范围内完成 raw `number/string` 收口；`V315` 已完成 `build/types.ts` 中 snapshot/input map contract 的显式化；`V316` 已完成 `skill-matrix row metadata` numeric contract 的显式化；`V317` 已完成 profile definition contract 的显式化；`V318` 已完成 build-layer 对外 helper 的 `agentId / wEngineId / driveDiscId` 输入 contract；`V319` 已完成 loadout 选择输入 contract；`V320` 已完成 source coverage helper 的 `sourceId` 输入 contract；`V321` 已完成 source-note helper 的 lookup input contract；`V322` 已完成 resolver summary helper 的数组输入 contract；`V323` 已完成 derived view summary helper 的 assumption / unsupported list 输入 contract；`V324` 已完成 resolver effect-application 与 diagnostics helper 的内联 list 输入 contract；`V325` 已完成 skill-matrix summary helper 的 map/list contract；`V326` 已完成 catalog source list 与 alias override map contract；`V327` 已完成固定 label map contract；`V328` 已完成 combat tag collection contract；`V329` 已完成 bucket label map contract；`V330` 已完成 effect-summary reducer accumulator contract；`V331` 已完成 source-view / source-utility-view coverage id set contract；`V332` 已完成 source-note key collection contract；`V333` 已完成 skill-matrix helper map contract。
+当前 `static-build-resolver` 已完成 single-build resolver、skill matrix、trigger matrix、source damage views、source utility views、unified source-entry collection，以及对应 compact/helper exports。当前最新执行状态与最近收口阶段以 [静态构筑解析系统路线图](./specs/static-build-resolver-roadmap.md) 为准，避免顶层概述再次因阶段号递增而漂移。
 
 ```
 .
