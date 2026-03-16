@@ -1,4 +1,5 @@
 import type {
+  DazeVulnerabilityParams,
   ResolveStaticBuildInput,
   ResolveStaticBuildResult,
   StaticBuildAssumptionList,
@@ -15,6 +16,7 @@ import type {
   StaticBuildEffectMatchContext,
   StaticBuildEffectStacks,
   StaticBuildEffectSummaryAccumulatorMap,
+  StaticBuildEnemyInput,
   StaticBuildModifierDefinition,
   StaticBuildModifierValue,
   StaticBuildResolvedBuckets,
@@ -25,6 +27,7 @@ import type {
   StaticBuildSourceNoteOwner,
   StaticBuildSourceNoteStatus,
   StaticBuildSourceNoteStatusLabelMap,
+  StaticBuildStateSnapshotInput,
   StaticBuildTraceItem,
   StaticBuildTraceItemList,
   StaticBuildTraceModifier,
@@ -176,6 +179,80 @@ function createEmptyBuckets(): StaticBuildResolvedBuckets {
     anomalyCritRate: 0,
     anomalyCritDamage: 0,
     skillMultiplierFactor: 1,
+  }
+}
+
+function resolveDazeVulnerabilityParams(input: {
+  agentId: string
+  combatTags: StaticBuildCombatTagSet
+  stateSnapshot?: StaticBuildStateSnapshotInput
+  enemy: StaticBuildEnemyInput
+  resolvedBuckets: StaticBuildResolvedBuckets
+  assumptions: StaticBuildAssumptionList
+  diagnostics: StaticBuildDiagnosticEntryList
+  isStunned: boolean
+}): DazeVulnerabilityParams {
+  const liveParams: DazeVulnerabilityParams = {
+    isStunned: input.isStunned,
+    stunVulnerability:
+      (input.enemy.stunVulnerability ?? 0) +
+      input.resolvedBuckets.stunVulnerability,
+    nonStunVulnerability:
+      (input.enemy.nonStunVulnerability ?? 0) +
+      input.resolvedBuckets.nonStunVulnerability,
+  }
+
+  if (input.agentId !== "1431" || !input.combatTags.has("etherCurtain")) {
+    return liveParams
+  }
+
+  const snapshotValue =
+    input.stateSnapshot?.values?.yeshunguangCurtainVulnerabilityRatio
+  const currentDazeVulnerability = input.isStunned
+    ? liveParams.stunVulnerability
+    : liveParams.nonStunVulnerability
+
+  const curtainVulnerability =
+    snapshotValue ?? Math.min(1.1, Math.max(0, currentDazeVulnerability))
+
+  if (snapshotValue === undefined) {
+    const message =
+      "叶瞬光的[帷幕易伤]未提供 scenario.stateSnapshot.values.yeshunguangCurtainVulnerabilityRatio，当前按敌人当前失衡易伤快照近似并按 110% 封顶处理"
+    input.assumptions.push(message)
+    input.diagnostics.push({
+      kind: "fallback",
+      owner: "stateSnapshot",
+      sourceType: "agent",
+      sourceId: input.agentId,
+      keys: [
+        "scenario.stateSnapshot.values.yeshunguangCurtainVulnerabilityRatio",
+      ],
+      message,
+    })
+  } else if (snapshotValue > 1.1) {
+    const message = "叶瞬光的[帷幕易伤]快照超过 110%，当前按 110% 封顶处理"
+    input.assumptions.push(message)
+    input.diagnostics.push({
+      kind: "fallback",
+      owner: "stateSnapshot",
+      sourceType: "agent",
+      sourceId: input.agentId,
+      keys: [
+        "scenario.stateSnapshot.values.yeshunguangCurtainVulnerabilityRatio",
+      ],
+      message,
+    })
+  }
+
+  const cappedCurtainVulnerability = Math.min(
+    1.1,
+    Math.max(0, curtainVulnerability),
+  )
+
+  return {
+    isStunned: input.isStunned,
+    stunVulnerability: cappedCurtainVulnerability,
+    nonStunVulnerability: cappedCurtainVulnerability,
   }
 }
 
@@ -1177,6 +1254,16 @@ export function resolveStaticBuildDamage(
         ? 1
         : parseSkillMultiplier(input.scenario.skillMultiplier)
   const enemy = input.scenario.enemy
+  const resolvedDazeVulnerability = resolveDazeVulnerabilityParams({
+    agentId: agent.id,
+    combatTags,
+    stateSnapshot: input.scenario.stateSnapshot,
+    enemy,
+    resolvedBuckets,
+    assumptions,
+    diagnostics,
+    isStunned,
+  })
   const baseDamage =
     baseDamageValue *
     parsedDamageMultiplier *
@@ -1213,14 +1300,7 @@ export function resolveStaticBuildDamage(
         damageReduction:
           (enemy.damageReduction ?? 0) + resolvedBuckets.damageReduction,
       },
-      dazeVulnerability: {
-        isStunned,
-        stunVulnerability:
-          (enemy.stunVulnerability ?? 0) + resolvedBuckets.stunVulnerability,
-        nonStunVulnerability:
-          (enemy.nonStunVulnerability ?? 0) +
-          resolvedBuckets.nonStunVulnerability,
-      },
+      dazeVulnerability: resolvedDazeVulnerability,
       specialMultiplier: enemy.specialMultiplier ?? 1,
     }
 
@@ -1287,14 +1367,7 @@ export function resolveStaticBuildDamage(
         damageReduction:
           (enemy.damageReduction ?? 0) + resolvedBuckets.damageReduction,
       },
-      dazeVulnerability: {
-        isStunned,
-        stunVulnerability:
-          (enemy.stunVulnerability ?? 0) + resolvedBuckets.stunVulnerability,
-        nonStunVulnerability:
-          (enemy.nonStunVulnerability ?? 0) +
-          resolvedBuckets.nonStunVulnerability,
-      },
+      dazeVulnerability: resolvedDazeVulnerability,
       anomalyBonusDamageSum: resolvedBuckets.anomalyBonusDamageSum,
       anomalyCritRate: resolvedPanel.anomalyCritRate,
       anomalyCritDamage: resolvedPanel.anomalyCritDamage,
@@ -1361,14 +1434,7 @@ export function resolveStaticBuildDamage(
         damageReduction:
           (enemy.damageReduction ?? 0) + resolvedBuckets.damageReduction,
       },
-      dazeVulnerability: {
-        isStunned,
-        stunVulnerability:
-          (enemy.stunVulnerability ?? 0) + resolvedBuckets.stunVulnerability,
-        nonStunVulnerability:
-          (enemy.nonStunVulnerability ?? 0) +
-          resolvedBuckets.nonStunVulnerability,
-      },
+      dazeVulnerability: resolvedDazeVulnerability,
       anomalyBonusDamageSum: resolvedBuckets.anomalyBonusDamageSum,
       anomalyCritRate: resolvedPanel.anomalyCritRate,
       anomalyCritDamage: resolvedPanel.anomalyCritDamage,
@@ -1430,14 +1496,7 @@ export function resolveStaticBuildDamage(
       damageReduction:
         (enemy.damageReduction ?? 0) + resolvedBuckets.damageReduction,
     },
-    dazeVulnerability: {
-      isStunned,
-      stunVulnerability:
-        (enemy.stunVulnerability ?? 0) + resolvedBuckets.stunVulnerability,
-      nonStunVulnerability:
-        (enemy.nonStunVulnerability ?? 0) +
-        resolvedBuckets.nonStunVulnerability,
-    },
+    dazeVulnerability: resolvedDazeVulnerability,
     specialMultiplier: enemy.specialMultiplier ?? 1,
   }
 

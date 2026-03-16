@@ -496,6 +496,48 @@ describe("resolveBuildDamage tool", () => {
     )
   })
 
+  it("supports Ye Shunguang curtain vulnerability snapshot through the high-level tool", async () => {
+    const result = await runTool(resolveBuildDamage, {
+      agent: "叶瞬光",
+      includeDetails: true,
+      mode: "full-buff",
+      finalPanel: {
+        attack: 3400,
+        baseAttack: 1300,
+        critRate: 0.45,
+        critDamage: 1.2,
+      },
+      scenario: {
+        damageType: "normal",
+        skillTag: "ultimate",
+        skillMultiplier: "700%",
+        attribute: "凛刃",
+        combatTags: ["hedao", "etherCurtain"],
+        stateSnapshot: {
+          values: {
+            yeshunguangCurtainVulnerabilityRatio: 0.8,
+          },
+        },
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+          isStunned: false,
+          stunVulnerability: 0.8,
+          nonStunVulnerability: 0,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    expect(
+      (result as any).build.damageParams.dazeVulnerability.nonStunVulnerability,
+    ).toBeCloseTo(0.8, 4)
+    expect(
+      (result as any).build.damage.expected.breakdown
+        .dazeVulnerabilityMultiplier,
+    ).toBeCloseTo(1.8, 4)
+  })
+
   it("supports Xisifu curated effects through the high-level tool", async () => {
     const result = await runTool(resolveBuildDamage, {
       agent: "希希芙",

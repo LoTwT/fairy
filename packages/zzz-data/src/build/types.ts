@@ -133,6 +133,7 @@ export type StaticBuildStateFlagKey =
 export type StaticBuildStateValueKey =
   | "alicePolarityAssaultDamageRatio"
   | "miyabiFrostburnBreakDamageRatio"
+  | "yeshunguangCurtainVulnerabilityRatio"
 
 export type StaticBuildResolvedSnapshotBucketKey =
   | "bonusDamageSum"
@@ -448,6 +449,9 @@ export interface StaticBuildSkillMatrixContextInput {
   attribute?: AgentAttributeLabel
   extraAbilityActive?: boolean
   combatTags?: StaticBuildCombatTagList
+  dynamicSnapshot?: StaticBuildDynamicSnapshotInput
+  stateSnapshot?: StaticBuildStateSnapshotInput
+  resolvedSnapshot?: StaticBuildResolvedSnapshotInput
   enemy: StaticBuildEnemyInput
 }
 

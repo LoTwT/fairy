@@ -820,6 +820,96 @@ describe("static build resolver", () => {
     ).toBe(false)
   })
 
+  it("replaces live daze vulnerability with Ye Shunguang curtain snapshot when provided", () => {
+    const result = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1431",
+        wEngineId: "14143",
+      },
+      panel: {
+        attack: 3400,
+        baseAttack: 1300,
+        critRate: 0.45,
+        critDamage: 1.2,
+      },
+      scenario: {
+        damageType: "normal",
+        skillTag: "ultimate",
+        skillMultiplier: "700%",
+        attribute: "凛刃",
+        combatTags: ["hedao", "etherCurtain"],
+        stateSnapshot: {
+          values: {
+            yeshunguangCurtainVulnerabilityRatio: 0.8,
+          },
+        },
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+          isStunned: false,
+          stunVulnerability: 0.8,
+          nonStunVulnerability: 0,
+        },
+      },
+    })
+
+    expect(result.damageParams.dazeVulnerability.stunVulnerability).toBeCloseTo(
+      0.8,
+      4,
+    )
+    expect(
+      result.damageParams.dazeVulnerability.nonStunVulnerability,
+    ).toBeCloseTo(0.8, 4)
+    expect(
+      result.damage.expected.breakdown.dazeVulnerabilityMultiplier,
+    ).toBeCloseTo(1.8, 4)
+  })
+
+  it("falls back to live daze vulnerability snapshot for Ye Shunguang curtain and caps it at 110%", () => {
+    const result = resolveStaticBuildDamage({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1431",
+      },
+      panel: {
+        attack: 3400,
+        baseAttack: 1300,
+        critRate: 0.45,
+        critDamage: 1.2,
+      },
+      scenario: {
+        damageType: "normal",
+        skillTag: "ultimate",
+        skillMultiplier: "700%",
+        attribute: "凛刃",
+        combatTags: ["hedao", "etherCurtain"],
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+          isStunned: true,
+          stunVulnerability: 1.3,
+        },
+      },
+    })
+
+    expect(result.damageParams.dazeVulnerability.stunVulnerability).toBeCloseTo(
+      1.1,
+      4,
+    )
+    expect(
+      result.damageParams.dazeVulnerability.nonStunVulnerability,
+    ).toBeCloseTo(1.1, 4)
+    expect(
+      result.damage.expected.breakdown.dazeVulnerabilityMultiplier,
+    ).toBeCloseTo(2.1, 4)
+    expect(
+      result.assumptions.some((item) =>
+        item.includes("yeshunguangCurtainVulnerabilityRatio"),
+      ),
+    ).toBe(true)
+  })
+
   it("applies curated effects for Xisifu and Fanged Trace", () => {
     const result = resolveStaticBuildDamage({
       mode: "full-buff",

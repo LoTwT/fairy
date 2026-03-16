@@ -138,6 +138,7 @@ interface StaticBuildStateSnapshot {
 - `miyabiFrostburnBreakState`
 - `alicePolarityAssaultDamageRatio`
 - `miyabiFrostburnBreakDamageRatio`
+- `yeshunguangCurtainVulnerabilityRatio`
 
 这一阶段只改文档、类型与 tool schema，不改结算行为。
 
@@ -185,6 +186,9 @@ interface StaticBuildStateSnapshot {
    - `scenario.stateSnapshot.flags.miyabiFrostburnBreakState`
    - `scenario.stateSnapshot.values.miyabiFrostburnBreakDamageRatio`
    - 当前仍不强行并入现有 anomaly / disorder 公式，只用于 state-aware assumptions 与来源记录
+3. `叶瞬光`
+   - `scenario.stateSnapshot.values.yeshunguangCurtainVulnerabilityRatio`
+   - 在 `combatTags: ["etherCurtain"]` 下，替换默认 `失衡易伤` 结算槽位；未提供时按敌人当前失衡易伤快照近似，并按 110% 封顶
 
 ### 6.4 `V6.4` assumptions refinement
 

@@ -113,6 +113,7 @@ export interface BuildToolStateSnapshotFlags {
 export interface BuildToolStateSnapshotValues {
   alicePolarityAssaultDamageRatio?: BuildToolSnapshotRatio
   miyabiFrostburnBreakDamageRatio?: BuildToolSnapshotRatio
+  yeshunguangCurtainVulnerabilityRatio?: BuildToolSnapshotRatio
 }
 
 export interface BuildToolResolvedSnapshotBucketDeltas {
@@ -233,6 +234,9 @@ export interface BuildToolSkillMatrixContextInput {
   attribute?: BuildToolScenarioAttributeValue
   extraAbilityActive?: BuildToolScenarioExtraAbilityFlag
   combatTags?: BuildToolScenarioCombatTagList
+  dynamicSnapshot?: BuildToolDynamicSnapshotInput
+  stateSnapshot?: BuildToolStateSnapshotInput
+  resolvedSnapshot?: BuildToolResolvedSnapshotInput
   enemy: BuildToolEnemyInput
 }
 
@@ -363,6 +367,11 @@ export const stateSnapshotMiyabiFrostburnBreakDamageRatioSchema = zod
   .min(0)
   .optional()
 
+export const stateSnapshotYeshunguangCurtainVulnerabilityRatioSchema = zod
+  .number()
+  .min(0)
+  .optional()
+
 export const stateSnapshotFlagsSchema = zod.object({
   alicePolarityAssaultState: stateSnapshotAlicePolarityAssaultStateSchema,
   miyabiFrostburnBreakState: stateSnapshotMiyabiFrostburnBreakStateSchema,
@@ -373,6 +382,8 @@ export const stateSnapshotValuesSchema = zod.object({
     stateSnapshotAlicePolarityAssaultDamageRatioSchema,
   miyabiFrostburnBreakDamageRatio:
     stateSnapshotMiyabiFrostburnBreakDamageRatioSchema,
+  yeshunguangCurtainVulnerabilityRatio:
+    stateSnapshotYeshunguangCurtainVulnerabilityRatioSchema,
 })
 
 export const stateSnapshotSchema = zod
@@ -665,6 +676,9 @@ export const resolveBuildSkillMatrixContextSchema = zod.object({
   attribute: scenarioAttributeSchema,
   extraAbilityActive: scenarioExtraAbilityActiveSchema,
   combatTags: combatTagListSchema.optional(),
+  dynamicSnapshot: dynamicSnapshotSchema,
+  stateSnapshot: stateSnapshotSchema,
+  resolvedSnapshot: resolvedSnapshotSchema,
   enemy: enemySchema,
 })
 

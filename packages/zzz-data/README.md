@@ -77,6 +77,7 @@ import {
   - `V6 stateSnapshot`：`scenario.stateSnapshot` 已进入公开 contract；当前首批已完成：
     - `爱丽丝`：`[极性强击]` 可通过 `scenario.stateSnapshot` 显式提供 source-specific 结算倍率，并接入 anomaly 路径
     - `雅`：`[霜灼·破]` 已支持 state-aware assumptions 与倍率快照记录，但独立烈霜异常槽仍未并入现有 anomaly / disorder 公式
+    - `叶瞬光`：`scenario.stateSnapshot.values.yeshunguangCurtainVulnerabilityRatio` 可在 `combatTags: ["etherCurtain"]` 下替换默认 `失衡易伤` 槽位；未提供时按敌人当前失衡易伤快照近似，并按 110% 封顶
   - `V7 resolvedSnapshot`：`scenario.resolvedSnapshot` 已接入 resolver，并在当前 contract 下完成前四批高价值来源收口；`柏妮思 M6` 的 `25% 火抗无视` 已可通过 `bucketDeltas.ignoreResistance` 显式提供，`格莉丝 M2`、`简`、`派派`、`时流贤者`、`柳 M2`、`薇薇安 M2` 的异常倍率折算可通过 `multiplierFactors.skillMultiplierFactor` 显式提供。当前可显式提供：
     - `bucketDeltas`：最终 bucket 增量
     - `multiplierFactors.skillMultiplierFactor`：最终结算倍率 factor
