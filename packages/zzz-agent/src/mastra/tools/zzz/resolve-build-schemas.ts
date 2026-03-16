@@ -73,6 +73,21 @@ export type BuildToolScenarioExtraAbilityFlag = boolean
 
 export type BuildToolScenarioCombatTagList = StaticBuildCombatTagList
 
+export interface BuildToolDynamicSnapshotFlags {
+  ariaDreamtime?: BuildToolDynamicSnapshotFlag
+  burniceEmberState?: BuildToolDynamicSnapshotFlag
+}
+
+export interface BuildToolDynamicSnapshotCounts {
+  burniceEmberExtraTriggers?: BuildToolDynamicSnapshotCount
+}
+
+export interface BuildToolDynamicSnapshotValues {
+  ariaExflowDamageRatio?: BuildToolSnapshotRatio
+  ariaStunnedDamageRatio?: BuildToolSnapshotRatio
+  burniceEmberDamageRatio?: BuildToolSnapshotRatio
+}
+
 export interface BuildToolDriveDiscSetInput {
   name: BuildToolDriveDiscSetName
   pieces: StaticBuildDriveDiscPieces
@@ -95,18 +110,9 @@ export interface BuildToolEnemyInput {
 }
 
 export interface BuildToolDynamicSnapshotInput {
-  flags?: {
-    ariaDreamtime?: BuildToolDynamicSnapshotFlag
-    burniceEmberState?: BuildToolDynamicSnapshotFlag
-  }
-  counts?: {
-    burniceEmberExtraTriggers?: BuildToolDynamicSnapshotCount
-  }
-  values?: {
-    ariaExflowDamageRatio?: BuildToolSnapshotRatio
-    ariaStunnedDamageRatio?: BuildToolSnapshotRatio
-    burniceEmberDamageRatio?: BuildToolSnapshotRatio
-  }
+  flags?: BuildToolDynamicSnapshotFlags
+  counts?: BuildToolDynamicSnapshotCounts
+  values?: BuildToolDynamicSnapshotValues
 }
 
 export interface BuildToolStateSnapshotInput {
