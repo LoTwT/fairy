@@ -282,11 +282,13 @@ export interface TSVersionItem {
   versionEnemyAnomMult: GameModeVersionAnomalyMultiplier
   nodes: TSNodeItemList
 }
+export type TSVersionItemList = TSVersionItem[]
 
 export interface TSModeItem {
   name: GameModeModeName
-  versions: TSVersionItem[]
+  versions: TSVersionItemList
 }
+export type TSModeItemList = TSModeItem[]
 
 /** `threshold-simulation.json` top-level shape */
-export type ThresholdSimulationJson = TSModeItem[]
+export type ThresholdSimulationJson = TSModeItemList
