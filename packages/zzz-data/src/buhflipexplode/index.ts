@@ -317,8 +317,9 @@ export interface SDVersionsMode {
   name: BuhflipVersionsModeName
   versions: SDVersionRecord
 }
+export type SDVersionsModeList = SDVersionsMode[]
 /** `buhflipexplode-shiyu-defense.json` top-level shape */
-export type SDVersionsJson = SDVersionsMode[]
+export type SDVersionsJson = SDVersionsModeList
 
 // ── DA raw types ──
 
@@ -384,8 +385,9 @@ export interface TSVersionsMode {
   name: BuhflipVersionsModeName
   versions: TSVersionRecord
 }
+export type TSVersionsModeList = TSVersionsMode[]
 /** `buhflipexplode-threshold-simulation.json` top-level shape */
-export type TSVersionsJson = TSVersionsMode[]
+export type TSVersionsJson = TSVersionsModeList
 
 // ─── Enemy stat calculations ──────────────────────────────────────────────────
 
