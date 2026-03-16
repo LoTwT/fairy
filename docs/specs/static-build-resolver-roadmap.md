@@ -13319,3 +13319,39 @@ caveatSummary` 这些兼容字段补齐。
 - `V377.2` 已完成：`lookup-game-mode.ts` 的 attribute 输入、encounter candidate 与 damageContext 输出已统一复用显式 alias / interface
 - `V377.3` 已完成：全量校验与提交
 - `V377.4` 已完成：roadmap、索引与架构文档同步
+
+## 381. V378 w-engine lookup helper contracts
+
+### 381.1 目标
+
+`V378` 只解决一件事：
+
+- 把 `lookup-w-engine.ts` 的 calculated stat、active effect 与 trimmed result 统一改成显式 alias / interface。
+
+### 381.2 范围
+
+1. `LookupWEngineQueryName`
+2. `LookupWEngineLocale`
+3. `LookupWEngineCalculatedAttack`
+4. `LookupWEngineCalculatedSecondaryStatName`
+5. `LookupWEngineCalculatedSecondaryStatValue`
+6. `LookupWEngineCalculatedSecondaryStat`
+7. `LookupWEngineEffectLevel`
+8. `LookupWEngineEffectName`
+9. `LookupWEngineEffectText`
+10. `LookupWEngineActiveEffect`
+11. `LookupWEngineTrimmedValue`
+12. `LookupWEngineTrimmedResult`
+
+### 381.3 非目标
+
+1. 不改音擎查询逻辑
+2. 不改 ATK / 副属性计算逻辑
+3. 不改返回字段语义
+
+### 381.4 当前状态
+
+- `V378.1` 已完成：范围冻结到 w-engine lookup helper contract
+- `V378.2` 已完成：`lookup-w-engine.ts` 的 calculated stat、active effect 与 trimmed result 已统一复用显式 alias / interface
+- `V378.3` 已完成：全量校验与提交
+- `V378.4` 已完成：roadmap、索引与架构文档同步

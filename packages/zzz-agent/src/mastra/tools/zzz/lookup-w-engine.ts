@@ -10,6 +10,40 @@ import {
   stripHtml,
 } from "./utils"
 
+export type LookupWEngineQueryName = string
+
+export type LookupWEngineLocale = "en" | "zh-CN"
+
+export type LookupWEngineCalculatedAttack = number | undefined
+
+export type LookupWEngineCalculatedSecondaryStatName = string
+
+export type LookupWEngineCalculatedSecondaryStatValue = number
+
+export interface LookupWEngineCalculatedSecondaryStat {
+  name: LookupWEngineCalculatedSecondaryStatName
+  value: LookupWEngineCalculatedSecondaryStatValue
+}
+
+export type LookupWEngineEffectLevel = number
+
+export type LookupWEngineEffectName = string
+
+export type LookupWEngineEffectText = string
+
+export interface LookupWEngineActiveEffect {
+  level: LookupWEngineEffectLevel
+  name: LookupWEngineEffectName
+  effect: LookupWEngineEffectText
+}
+
+export type LookupWEngineTrimmedValue = unknown
+
+export type LookupWEngineTrimmedResult = Record<
+  string,
+  LookupWEngineTrimmedValue
+>
+
 export const lookupWEngine = createTool({
   id: "lookup-w-engine",
   description:
@@ -118,8 +152,10 @@ export const lookupWEngine = createTool({
     const detail = details.find((d) => d.id === engine.id)
 
     // Calculate stats if level provided
-    let calculatedATK: number | undefined
-    let calculatedSecondaryStat: { name: string; value: number } | undefined
+    let calculatedATK: LookupWEngineCalculatedAttack
+    let calculatedSecondaryStat:
+      | LookupWEngineCalculatedSecondaryStat
+      | undefined
 
     if (level !== undefined && detail) {
       const s = star ?? 5
@@ -147,7 +183,7 @@ export const lookupWEngine = createTool({
     const activeEffect = engine.effects[ref - 1]
 
     // When calculated values are available, omit raw baseStat/advancedStat to reduce context
-    const wEngine: Record<string, unknown> = {
+    const wEngine: LookupWEngineTrimmedResult = {
       id: engine.id,
       name: engine.name,
       rarity: engine.rarity,
@@ -156,11 +192,11 @@ export const lookupWEngine = createTool({
       calculatedATK,
       calculatedSecondaryStat,
       activeEffect: activeEffect
-        ? {
+        ? ({
             level: activeEffect.level,
             name: activeEffect.name,
             effect: stripHtml(activeEffect.effect),
-          }
+          } satisfies LookupWEngineActiveEffect)
         : null,
     }
 

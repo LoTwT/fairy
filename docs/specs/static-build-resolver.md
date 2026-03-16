@@ -1126,3 +1126,4 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 375. `V375` agent catalog helper score contracts：当前阶段已收口；`resolve-build-catalog.ts` 的 field-list 与候选分数 contract 已统一复用显式 alias / interface，不改变任何 catalog 匹配逻辑，见 [静态构筑解析系统 V375](./static-build-resolver-v375.md)
 376. `V376` agent lookup helper contracts：当前阶段已收口；`lookup-agent.ts` 的 query、skill-type list 与 calculated-stat map 已统一复用显式 alias，不改变任何 lookup、过滤或面板计算逻辑，见 [静态构筑解析系统 V376](./static-build-resolver-v376.md)
 377. `V377` game-mode lookup helper contracts：当前阶段已收口；`lookup-game-mode.ts` 的 attribute 输入、encounter candidate 与 damageContext 输出已统一复用显式 alias / interface，不改变任何 DA/SD/TS 查询逻辑，见 [静态构筑解析系统 V377](./static-build-resolver-v377.md)
+378. `V378` w-engine lookup helper contracts：当前阶段已收口；`lookup-w-engine.ts` 的 calculated stat、active effect 与 trimmed result 已统一复用显式 alias / interface，不改变任何音擎查询或属性计算逻辑，见 [静态构筑解析系统 V378](./static-build-resolver-v378.md)
