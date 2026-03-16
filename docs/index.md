@@ -318,3 +318,4 @@
 - [静态构筑解析系统 V418](./specs/static-build-resolver-v418.md) — 当前阶段：已收口；`game-modes.ts` 中 `Threshold Simulation` 的 `version/mode` 匿名 list contract 已统一复用显式 alias
 - [静态构筑解析系统 V419](./specs/static-build-resolver-v419.md) — 当前阶段：已收口；`cleaned/types.ts` 中 encounter 与 `DA buff view` 的匿名文本 list contract 已统一复用显式 alias
 - [静态构筑解析系统 V420](./specs/static-build-resolver-v420.md) — 当前阶段：已收口；`cleaned/types.ts` 中 `Shiyu Defense` 视图的匿名嵌套 list contract 已统一复用显式 alias
+- [静态构筑解析系统 V421](./specs/static-build-resolver-v421.md) — 当前阶段：已收口；`cleaned/types.ts` 中 `Threshold Simulation` 视图的匿名嵌套 list contract 已统一复用显式 alias

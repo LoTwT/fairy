@@ -152,7 +152,7 @@ export interface TSBossSideView {
   nodeLevel: number
   hp60k: number
   altHp: number
-  enemies: TSFlattenedEnemyView<TSBossEnemyItem>[]
+  enemies: TSBossSideEnemyViewList
 }
 
 export interface TSRegularSideView {
@@ -164,15 +164,22 @@ export interface TSRegularSideView {
   sideHPMult: number
   hp60k: number
   altHp: number
-  enemies: TSFlattenedEnemyView<TSRegularEnemyItem>[]
+  enemies: TSRegularSideEnemyViewList
 }
 
 export type TSSideView = TSBossSideView | TSRegularSideView
+export type TSBossSideEnemyView = TSFlattenedEnemyView<TSBossEnemyItem>
+export type TSBossSideEnemyViewList = TSBossSideEnemyView[]
+export type TSRegularSideEnemyView = TSFlattenedEnemyView<TSRegularEnemyItem>
+export type TSRegularSideEnemyViewList = TSRegularSideEnemyView[]
+export type TSNodeBuffName = string
+export type TSNodeBuffNameList = TSNodeBuffName[]
+export type TSSideViewList = TSSideView[]
 
 export interface TSNodeView {
   node: number
-  buffNames: string[]
-  sides: TSSideView[]
+  buffNames: TSNodeBuffNameList
+  sides: TSSideViewList
 }
 
 export type VersionPeriodText = string
