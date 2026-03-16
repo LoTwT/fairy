@@ -13832,3 +13832,29 @@ caveatSummary` 这些兼容字段补齐。
 - `V390.2` 已完成：`AgentSkin.assets` 已统一复用显式 named interface
 - `V390.3` 已完成：全量校验与提交
 - `V390.4` 已完成：roadmap、索引与架构文档同步
+
+## 394. V391 game-modes buff record key contracts
+
+### 394.1 目标
+
+`V391` 只解决一件事：
+
+- 把 `BuffsJson` 的 record key 统一改成显式 alias。
+
+### 394.2 范围
+
+1. `GameModeBuffRecordKey`
+2. `BuffsJson`
+
+### 394.3 非目标
+
+1. 不改任何 published JSON shape
+2. 不改 buff item field contract
+3. 不改上层 cleaned/helper 或 resolver 逻辑
+
+### 394.4 当前状态
+
+- `V391.1` 已完成：范围冻结到 `BuffsJson` key contract
+- `V391.2` 已完成：`BuffsJson` 已统一复用显式 record-key alias
+- `V391.3` 已完成：全量校验与提交
+- `V391.4` 已完成：roadmap、索引与架构文档同步

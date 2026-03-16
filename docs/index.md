@@ -288,3 +288,4 @@
 - [静态构筑解析系统 V388](./specs/static-build-resolver-v388.md) — 当前阶段：已收口；`gachabase/types.ts` 里 bangboo 与 drive-disc 相关 raw published field 已统一复用显式 alias / named interface
 - [静态构筑解析系统 V389](./specs/static-build-resolver-v389.md) — 当前阶段：已收口；`game-modes.ts` 里剩余的 wave object 已统一复用显式 named interface
 - [静态构筑解析系统 V390](./specs/static-build-resolver-v390.md) — 当前阶段：已收口；`gachabase/types.ts` 中 `AgentSkin.assets` 已统一复用显式 named interface
+- [静态构筑解析系统 V391](./specs/static-build-resolver-v391.md) — 当前阶段：已收口；`game-modes.ts` 中 `BuffsJson` 已统一复用显式 record-key alias

@@ -23,6 +23,7 @@ export type GameModeEnemyDefense = number
 export type GameModeEnemyDaze = number
 export type GameModeBuffName = string
 export type GameModeBuffKey = string
+export type GameModeBuffRecordKey = string
 export type GameModeBuffIconUrl = string
 export type GameModeBuffEffect = string
 export type GameModeBuffEffectList = GameModeBuffEffect[]
@@ -91,7 +92,7 @@ export interface BuffItem {
 }
 
 /** `buffs.json` top-level shape — key is camelCase buff name */
-export type BuffsJson = Record<string, BuffItem>
+export type BuffsJson = Record<GameModeBuffRecordKey, BuffItem>
 
 // ─── deadly-assault.json ──────────────────────────────────────────────────────
 

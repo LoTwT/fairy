@@ -378,3 +378,4 @@ const total = base * bonus * crit * resistance * custom
 - `V388` gachabase bangboo and drive-disc raw field contracts：当前阶段已收口；`gachabase/types.ts` 里 bangboo 与 drive-disc 相关 raw published field 已统一复用显式 alias / named interface
 - `V389` game-modes wave object contracts：当前阶段已收口；`game-modes.ts` 里剩余的 wave object 已统一复用显式 named interface
 - `V390` gachabase agent skin asset contracts：当前阶段已收口；`gachabase/types.ts` 中 `AgentSkin.assets` 已统一复用显式 named interface
+- `V391` game-modes buff record key contracts：当前阶段已收口；`game-modes.ts` 中 `BuffsJson` 已统一复用显式 record-key alias
