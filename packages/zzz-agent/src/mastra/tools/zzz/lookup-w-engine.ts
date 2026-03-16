@@ -14,6 +14,34 @@ export type LookupWEngineQueryName = string
 
 export type LookupWEngineLocale = "en" | "zh-CN"
 
+export type LookupWEngineListItemId = WEngineListItem["id"]
+
+export type LookupWEngineListItemName = WEngineListItem["name"]
+
+export type LookupWEngineListItemRarity = WEngineListItem["rarity"]
+
+export type LookupWEngineSpecialtyName = string
+
+export type LookupWEngineExclusiveAgentName = string | undefined
+
+export interface LookupWEngineListItemSummary {
+  id: LookupWEngineListItemId
+  name: LookupWEngineListItemName
+  rarity: LookupWEngineListItemRarity
+  specialty: LookupWEngineSpecialtyName
+  exclusiveAgentName: LookupWEngineExclusiveAgentName
+}
+
+export type LookupWEngineListItemSummaryList = LookupWEngineListItemSummary[]
+
+export interface LookupWEngineCandidate {
+  name: LookupWEngineListItemName
+  rarity: LookupWEngineListItemRarity
+  specialty: LookupWEngineSpecialtyName
+}
+
+export type LookupWEngineCandidateList = LookupWEngineCandidate[]
+
 export type LookupWEngineCalculatedAttack = number | undefined
 
 export type LookupWEngineCalculatedSecondaryStatName = string
@@ -118,13 +146,16 @@ export const lookupWEngine = createTool({
       return {
         found: true,
         total: filtered.length,
-        wEngines: filtered.map((e) => ({
-          id: e.id,
-          name: e.name,
-          rarity: e.rarity,
-          specialty: e.specialty.name,
-          exclusiveAgentName: e.exclusiveAgentName,
-        })),
+        wEngines: filtered.map(
+          (e) =>
+            ({
+              id: e.id,
+              name: e.name,
+              rarity: e.rarity,
+              specialty: e.specialty.name,
+              exclusiveAgentName: e.exclusiveAgentName,
+            }) satisfies LookupWEngineListItemSummary,
+        ),
       }
     }
 
@@ -140,11 +171,14 @@ export const lookupWEngine = createTool({
       return {
         found: false,
         message: `未找到名称包含「${name}」的音擎`,
-        candidates: candidates.map((e) => ({
-          name: e.name,
-          rarity: e.rarity,
-          specialty: e.specialty.name,
-        })),
+        candidates: candidates.map(
+          (e) =>
+            ({
+              name: e.name,
+              rarity: e.rarity,
+              specialty: e.specialty.name,
+            }) satisfies LookupWEngineCandidate,
+        ),
       }
     }
 
