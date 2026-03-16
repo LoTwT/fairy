@@ -10,8 +10,18 @@
 
 // ─── Shared ───────────────────────────────────────────────────────────────────
 
+export type GameModeElementMultiplier = number
+
 /** Raw multiplier buckets in `ELEMENT_MULT_ORDER`: [ice, fire, electric, ether, physical] */
-export type ElementMult = [number, number, number, number, number]
+export type GameModeElementMultiplierTuple = [
+  GameModeElementMultiplier,
+  GameModeElementMultiplier,
+  GameModeElementMultiplier,
+  GameModeElementMultiplier,
+  GameModeElementMultiplier,
+]
+
+export type ElementMult = GameModeElementMultiplierTuple
 
 export type GameModeEnemyId = string
 export type GameModeEnemyName = string
