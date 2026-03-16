@@ -447,5 +447,6 @@ const total = base * bonus * crit * resistance * custom
 - `V466` buhflipexplode record value contracts：当前阶段已收口；`buhflipexplode/index.ts` 中 enemy/version record 已统一复用显式 value alias
 - `V467` game-modes element multiplier tuple contracts：当前阶段已收口；`game-modes.ts` 中元素倍率五元组已统一复用显式 tuple alias
 - `V468` cleaned element multiplier tuple contracts：当前阶段已收口；`cleaned/types.ts` 中本地元素倍率 tuple 已统一对齐到 `game-modes` 上游 alias
+- `V469` game-modes buff union value contracts：当前阶段已收口；`game-modes.ts` 中 buff 名称与描述的联合值已统一复用显式 alias
 - `V459` calculator disorder damage params contracts：当前阶段已收口；`calculator/types.ts` 中 `DisorderDamageParams` 已统一改为显式 interface
 - `V460` compact disorder damage params contracts：当前阶段已收口；`build/compact.ts` 中 `CompactStaticBuildDisorderDamageParams` 已统一改为显式 interface

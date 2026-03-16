@@ -37,6 +37,9 @@ export type GameModeBuffRecordKey = string
 export type GameModeBuffIconUrl = string
 export type GameModeBuffEffect = string
 export type GameModeBuffEffectList = GameModeBuffEffect[]
+export type GameModeBuffEffectValue =
+  | GameModeBuffEffect
+  | GameModeBuffEffectList
 export type GameModeAttributeText = string
 export type GameModeAttributeTextList = GameModeAttributeText[]
 export type GameModeMechanicsText = string
@@ -53,6 +56,7 @@ export type GameModeVersionDazeMultiplier = number
 export type GameModeVersionAnomalyMultiplier = number
 export type GameModeModeName = string
 export type GameModeBuffNameList = GameModeBuffName[]
+export type GameModeBuffNameValue = GameModeBuffName | GameModeBuffNameList
 
 /**
  * Currently observed raw upstream enemy category codes.
@@ -182,8 +186,8 @@ export type SDSideSlot = SDSideItem | null
 export type SDSideSlotList = SDSideSlot[]
 
 export interface SDNodeItem {
-  buffName?: GameModeBuffName | GameModeBuffNameList
-  buffDesc?: GameModeBuffEffect | GameModeBuffEffectList
+  buffName?: GameModeBuffNameValue
+  buffDesc?: GameModeBuffEffectValue
   sides: SDSideSlotList
 }
 export type SDNodeItemList = SDNodeItem[]
