@@ -13944,3 +13944,27 @@ caveatSummary` 这些兼容字段补齐。
 
 - `V394.1` 已完成：范围冻结到 buhflipexplode version record key contract
 - `V394.2` 已完成：`SD/DA/TS` 版本 key 已统一复用显式 alias
+
+## 398. V395 buhflipexplode enemy db key contracts
+
+### 398.1 目标
+
+`V395` 只解决一件事：
+
+- 把 `buhflipexplode` 敌人库的 record key 统一改成显式 alias。
+
+### 398.2 范围
+
+1. `BuhflipEnemyDB`
+2. `BuhflipEnemyId`
+
+### 398.3 非目标
+
+1. 不改任何 raw/published JSON shape
+2. 不改 enemy field contract
+3. 不改 SD/DA/TS 版本或 buff text contract
+
+### 398.4 当前状态
+
+- `V395.1` 已完成：范围冻结到 buhflipexplode enemy db key contract
+- `V395.2` 已完成：`BuhflipEnemyDB` 已统一复用显式 enemy-id alias

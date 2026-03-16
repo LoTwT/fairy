@@ -235,7 +235,7 @@ export interface BuhflipEnemy {
 }
 
 /** `buhflipexplode-enemies.json` top-level shape */
-export type BuhflipEnemyDB = Record<string, BuhflipEnemy>
+export type BuhflipEnemyDB = Record<BuhflipEnemyId, BuhflipEnemy>
 
 // ── SD raw types ──
 
