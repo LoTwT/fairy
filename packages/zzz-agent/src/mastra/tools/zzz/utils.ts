@@ -4,7 +4,43 @@ import { dirname, resolve } from "node:path"
 
 const _require = createRequire(import.meta.url)
 
-let zzzDataRoot: string
+export type ZzzAgentPackageRootPath = string
+
+export type ZzzAgentAliasGroupKey = string
+
+export type ZzzAgentAliasValue = string
+
+export type ZzzAgentAliasGroup = readonly ZzzAgentAliasValue[]
+
+export type ZzzAgentAliasGroupMap = Record<
+  ZzzAgentAliasGroupKey,
+  ZzzAgentAliasGroup
+>
+
+export type ZzzAgentAliasLookup = Record<
+  ZzzAgentLookupText,
+  ZzzAgentAliasGroupKey
+>
+
+export type ZzzAgentJsonCacheValue = unknown
+
+export type ZzzAgentJsonCache = Map<
+  ZzzAgentJsonRelativePath,
+  ZzzAgentJsonCacheValue
+>
+
+export type ZzzAgentMatchScore = number
+
+export interface ZzzAgentScoredMatch<T> {
+  item: T
+  score: ZzzAgentMatchScore
+}
+
+export type ZzzAgentScoredMatchList<T> = ZzzAgentScoredMatch<T>[]
+
+export type ZzzAgentMatchLimit = number
+
+let zzzDataRoot: ZzzAgentPackageRootPath
 try {
   const mainEntry = _require.resolve("zzz-data")
   // mainEntry => /path/to/packages/zzz-data/dist/index.mjs
@@ -17,7 +53,7 @@ try {
   )
 }
 
-const jsonCache = new Map<string, unknown>()
+const jsonCache: ZzzAgentJsonCache = new Map()
 
 export type ZzzAgentJsonRelativePath = string
 
@@ -64,8 +100,8 @@ function normalize(s: ZzzAgentLookupText): ZzzAgentLookupText {
   return s.toLowerCase().replace(/[\s\-_·・.()（）【】[\]「」]/g, "")
 }
 
-function createAliasLookup(groups: Record<string, string[]>) {
-  const lookup: Record<string, string> = {}
+function createAliasLookup(groups: ZzzAgentAliasGroupMap): ZzzAgentAliasLookup {
+  const lookup: ZzzAgentAliasLookup = {}
 
   for (const [canonical, aliases] of Object.entries(groups)) {
     lookup[normalize(canonical)] = canonical
@@ -227,12 +263,12 @@ export function findTopMatches<T>(
   items: T[],
   query: ZzzAgentLookupText,
   matchFields: ZzzAgentMatchField<T>[],
-  limit = 3,
+  limit: ZzzAgentMatchLimit = 3,
 ): T[] {
   const qNorm = normalize(query)
   if (!qNorm) return []
 
-  const scored: { item: T; score: number }[] = []
+  const scored: ZzzAgentScoredMatchList<T> = []
 
   for (const item of items) {
     let bestScore = 0

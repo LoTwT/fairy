@@ -1121,3 +1121,4 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 370. `V370` agent schema snapshot scalar contracts：当前阶段已收口；`resolve-build-schemas.ts` 的公开 snapshot 与场景布尔/数值输入已统一复用显式 alias，不改变任何 snapshot 语义或 resolver 逻辑，见 [静态构筑解析系统 V370](./static-build-resolver-v370.md)
 371. `V371` agent damage-type helper contracts：当前阶段已收口；`resolveBuildToolDamageType()` 的公开 generic 边界已统一复用 `BuildToolDamageTypeValue`，不改变任何 damage type 校验逻辑，见 [静态构筑解析系统 V371](./static-build-resolver-v371.md)
 372. `V372` agent catalog specialty contracts：当前阶段已收口；`CatalogItem` 的 specialty generic 已统一复用显式 alias，不改变任何 catalog 或 resolver 行为，见 [静态构筑解析系统 V372](./static-build-resolver-v372.md)
+373. `V373` agent utils helper contracts：当前阶段已收口；`utils.ts` 的公开路径、alias-group、缓存与匹配分数字段已统一复用显式 alias / interface，不改变任何匹配或缓存行为，见 [静态构筑解析系统 V373](./static-build-resolver-v373.md)

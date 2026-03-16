@@ -13148,3 +13148,41 @@ caveatSummary` 这些兼容字段补齐。
 - `V372.2` 已完成：`CatalogItem` 的 specialty generic 已统一复用显式 alias
 - `V372.3` 已完成：全量校验与提交
 - `V372.4` 已完成：roadmap、索引与架构文档同步
+
+## 376. V373 agent utils helper contracts
+
+### 376.1 目标
+
+`V373` 只解决一件事：
+
+- 把 `utils.ts` 中公开 helper 的路径、alias-group、缓存与匹配分数字段统一改成显式 alias / interface。
+
+### 376.2 范围
+
+1. `ZzzAgentPackageRootPath`
+2. `ZzzAgentAliasGroupKey`
+3. `ZzzAgentAliasValue`
+4. `ZzzAgentAliasGroup`
+5. `ZzzAgentAliasGroupMap`
+6. `ZzzAgentAliasLookup`
+7. `ZzzAgentJsonCacheValue`
+8. `ZzzAgentJsonCache`
+9. `ZzzAgentMatchScore`
+10. `ZzzAgentScoredMatch<T>`
+11. `ZzzAgentScoredMatchList<T>`
+12. `ZzzAgentMatchLimit`
+13. `createAliasLookup()`
+14. `findTopMatches()`
+
+### 376.3 非目标
+
+1. 不改 alias 归一化逻辑
+2. 不改 `findBestMatch()` / `findTopMatches()` 算法
+3. 不改 `loadJson()` 的读盘与缓存行为
+
+### 376.4 当前状态
+
+- `V373.1` 已完成：范围冻结到 agent utils helper contract
+- `V373.2` 已完成：`utils.ts` 的公开路径、alias-group、缓存与匹配分数字段已统一复用显式 alias / interface
+- `V373.3` 已完成：全量校验与提交
+- `V373.4` 已完成：roadmap、索引与架构文档同步
