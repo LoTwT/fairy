@@ -1147,3 +1147,4 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 396. `V396` buhflipexplode buff text contracts：当前阶段进行中；`buhflipexplode/index.ts` 中 `buffName / buffDesc / buffNames` 正在统一复用显式 buff 文本 alias，见 [静态构筑解析系统 V396](./static-build-resolver-v396.md)
 397. `V397` buhflipexplode element multiplier tuple contracts：当前阶段已收口；`buhflipexplode/index.ts` 中敌人与 SD side 的元素倍率五元组已统一复用显式 tuple alias，见 [静态构筑解析系统 V397](./static-build-resolver-v397.md)
 398. `V398` buhflipexplode text pair contracts：当前阶段已收口；`buhflipexplode/index.ts` 中敌人 `desc / perf` 的匿名文本二元 tuple 已统一复用显式 alias，见 [静态构筑解析系统 V398](./static-build-resolver-v398.md)
+399. `V399` buhflipexplode enemy ref id contracts：当前阶段已收口；`buhflipexplode/index.ts` 中 `SD/DA/TS` 敌人引用的 `id` 已统一复用 `BuhflipEnemyId`，见 [静态构筑解析系统 V399](./static-build-resolver-v399.md)

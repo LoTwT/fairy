@@ -260,7 +260,7 @@ export type BuhflipEnemyDB = Record<BuhflipEnemyId, BuhflipEnemy>
 // ── SD raw types ──
 
 export interface SDEnemyRef {
-  id: string
+  id: BuhflipEnemyId
   /** Selects baseHP[type] / baseDaze[type] */
   type: BuhflipEnemyRefType
   count: BuhflipEnemyCount
@@ -303,7 +303,7 @@ export type SDVersionsJson = SDVersionsMode[]
 // ── DA raw types ──
 
 export interface DAEnemyRef {
-  id: string
+  id: BuhflipEnemyId
   type: BuhflipEnemyRefType
   /** Boss HP multiplier (e.g. 180 for Wandering Hunter) */
   mult: BuhflipBossHPMult
@@ -322,7 +322,7 @@ export type DAVersionsJson = Record<BuhflipVersionRecordKey, DAVersionData>
 // ── TS raw types ──
 
 export interface TSEnemyRef {
-  id: string
+  id: BuhflipEnemyId
   type: BuhflipEnemyRefType
   count?: BuhflipEnemyCount
   /** Boss mult (absent for regular enemies) */

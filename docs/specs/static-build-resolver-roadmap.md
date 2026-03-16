@@ -14051,3 +14051,28 @@ caveatSummary` 这些兼容字段补齐。
 
 - `V398.1` 已完成：范围冻结到 buhflipexplode text pair contract
 - `V398.2` 已完成：敌人 `desc / perf` 已统一复用显式 text-pair alias
+
+## 402. V399 buhflipexplode enemy ref id contracts
+
+### 402.1 目标
+
+`V399` 只解决一件事：
+
+- 把 `buhflipexplode` 的敌人引用 `id` 统一复用显式 enemy-id alias。
+
+### 402.2 范围
+
+1. `SDEnemyRef.id`
+2. `DAEnemyRef.id`
+3. `TSEnemyRef.id`
+
+### 402.3 非目标
+
+1. 不改任何 raw/published JSON shape
+2. 不改 `BuhflipEnemyDB` 顶层 key contract
+3. 不改 enemy ref 的其他字段
+
+### 402.4 当前状态
+
+- `V399.1` 已完成：范围冻结到 buhflipexplode enemy ref id contract
+- `V399.2` 已完成：`SD/DA/TS` 敌人引用已统一复用 `BuhflipEnemyId`
