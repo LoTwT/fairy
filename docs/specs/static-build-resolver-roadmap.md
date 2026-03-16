@@ -13419,3 +13419,32 @@ caveatSummary` 这些兼容字段补齐。
 - `V380.2` 已完成：`lookup-drive-disc.ts` 的 query、candidate、set-effect 与 trimmed result 已统一复用显式 alias / interface
 - `V380.3` 已完成：全量校验与提交
 - `V380.4` 已完成：roadmap、索引与架构文档同步
+
+## 384. V381 calc-damage helper contracts
+
+### 384.1 目标
+
+`V381` 只解决一件事：
+
+- 把 `calc-damage.ts` 的 multiplier helper 输入输出与 anomaly type list 统一改成显式 alias。
+
+### 384.2 范围
+
+1. `CalcDamageMultiplierInput`
+2. `CalcDamageParsedMultiplier`
+3. `CalcDamageAnomalyTypeList`
+4. `parseMultiplier()`
+5. `anomalyTypes`
+
+### 384.3 非目标
+
+1. 不改伤害公式
+2. 不改 tool schema
+3. 不改返回字段语义
+
+### 384.4 当前状态
+
+- `V381.1` 已完成：范围冻结到 calc-damage helper contract
+- `V381.2` 已完成：`calc-damage.ts` 的 multiplier helper 输入输出与 anomaly type list 已统一复用显式 alias
+- `V381.3` 已完成：全量校验与提交
+- `V381.4` 已完成：roadmap、索引与架构文档同步

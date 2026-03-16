@@ -368,3 +368,4 @@ const total = base * bonus * crit * resistance * custom
 - `V378` w-engine lookup helper contracts：当前阶段已收口；`lookup-w-engine.ts` 的 calculated stat、active effect 与 trimmed result 已统一复用显式 alias / interface
 - `V379` bangboo lookup helper contracts：当前阶段已收口；`lookup-bangboo.ts` 的 calculated stat 与 trimmed result 已统一复用显式 alias
 - `V380` drive-disc lookup helper contracts：当前阶段已收口；`lookup-drive-disc.ts` 的 query、candidate、set-effect 与 trimmed result 已统一复用显式 alias / interface
+- `V381` calc-damage helper contracts：当前阶段已收口；`calc-damage.ts` 的 multiplier helper 输入输出与 anomaly type list 已统一复用显式 alias

@@ -24,8 +24,16 @@ import {
   getAttackerLevelBase,
 } from "zzz-data"
 
+export type CalcDamageMultiplierInput = string | number | undefined
+
+export type CalcDamageParsedMultiplier = number
+
+export type CalcDamageAnomalyTypeList = readonly AnomalyType[]
+
 /** Parse a multiplier that may be a number (5.0) or percentage string ("500%") */
-function parseMultiplier(v: string | number | undefined): number {
+function parseMultiplier(
+  v: CalcDamageMultiplierInput,
+): CalcDamageParsedMultiplier {
   if (v === undefined) return 0
   if (typeof v === "number") return v
   const s = v.trim()
@@ -33,7 +41,7 @@ function parseMultiplier(v: string | number | undefined): number {
   return Number.parseFloat(s) || 0
 }
 
-const anomalyTypes = [
+const anomalyTypes: CalcDamageAnomalyTypeList = [
   "fire",
   "electric",
   "ether",

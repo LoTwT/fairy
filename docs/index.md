@@ -278,3 +278,4 @@
 - [静态构筑解析系统 V378](./specs/static-build-resolver-v378.md) — 当前阶段：已收口；`lookup-w-engine.ts` 的 calculated stat、active effect 与 trimmed result 已统一复用显式 alias / interface
 - [静态构筑解析系统 V379](./specs/static-build-resolver-v379.md) — 当前阶段：已收口；`lookup-bangboo.ts` 的 calculated stat 与 trimmed result 已统一复用显式 alias
 - [静态构筑解析系统 V380](./specs/static-build-resolver-v380.md) — 当前阶段：已收口；`lookup-drive-disc.ts` 的 query、candidate、set-effect 与 trimmed result 已统一复用显式 alias / interface
+- [静态构筑解析系统 V381](./specs/static-build-resolver-v381.md) — 当前阶段：已收口；`calc-damage.ts` 的 multiplier helper 输入输出与 anomaly type list 已统一复用显式 alias
