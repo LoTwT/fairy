@@ -178,37 +178,25 @@ export type LookupGameModeDamageContextValue =
   | LookupGameModeDamageContext
   | undefined
 
-export type LookupGameModeWeakness =
-  EncounterDamageContext["weaknesses"][number]
+export type LookupGameModeWeakness = string
 
 export type LookupGameModeWeaknessList = LookupGameModeWeakness[] | undefined
 
-export type LookupGameModeResistance =
-  EncounterDamageContext["resistances"][number]
+export type LookupGameModeResistance = string
 
 export type LookupGameModeResistanceList =
   | LookupGameModeResistance[]
   | undefined
 
-export type LookupGameModeMechanicsText =
-  | EncounterDamageContext["mechanics"]
-  | undefined
+export type LookupGameModeMechanicsText = string | undefined
 
-export type LookupGameModeDamageContextNode =
-  | EncounterDamageContext["node"]
-  | undefined
+export type LookupGameModeDamageContextNode = number | undefined
 
-export type LookupGameModeDamageContextSide =
-  | EncounterDamageContext["side"]
-  | undefined
+export type LookupGameModeDamageContextSide = number | undefined
 
-export type LookupGameModeDamageContextWave =
-  | EncounterDamageContext["wave"]
-  | undefined
+export type LookupGameModeDamageContextWave = number | undefined
 
-export type LookupGameModeSideElementMultiplier =
-  | EncounterDamageContext["sideElementMultiplier"]
-  | undefined
+export type LookupGameModeSideElementMultiplier = number | undefined
 
 export interface LookupGameModeDAResolvedResult {
   found: true

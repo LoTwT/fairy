@@ -15604,3 +15604,56 @@ caveatSummary` 这些兼容字段补齐。
 
 - `V455.1` 已完成：范围冻结到 `lookup-w-engine` 的基础标量 raw contract
 - `V455.2` 已完成：相关字段已统一复用显式或命名上游 type
+
+## 459. V456 lookup-game-mode damage-context leaf contracts
+
+### 目标
+
+`V456` 只解决一件事：
+
+- 把 `lookup-game-mode.ts` 中 `damageContext` 的最后几项 leaf alias 从 `EncounterDamageContext[...]` 收口为显式标量 contract。
+
+### 范围
+
+1. `LookupGameModeWeakness`
+2. `LookupGameModeResistance`
+3. `LookupGameModeMechanicsText`
+4. `LookupGameModeDamageContextNode`
+5. `LookupGameModeDamageContextSide`
+6. `LookupGameModeDamageContextWave`
+7. `LookupGameModeSideElementMultiplier`
+
+### 非目标
+
+1. 不改 `lookup-game-mode` 的版本查询、敌人选择或 `damageContext` 计算逻辑
+2. 不改任何返回字段的值、顺序或可选性
+3. 不改 `damageContext` 的字段集合
+
+### 当前状态
+
+- `V456.1` 已完成：范围冻结到 `lookup-game-mode damageContext` 的 leaf scalar contract
+- `V456.2` 已完成：相关字段已统一复用显式标量 alias
+
+## 460. V457 lookup-drive-disc scalar contracts
+
+### 目标
+
+`V457` 只解决一件事：
+
+- 把 `lookup-drive-disc.ts` 中仍直接复用 `DriveDiscItem` raw indexed-access 的基础标量 contract 收口为命名上游 type。
+
+### 范围
+
+1. `LookupDriveDiscId`
+2. `LookupDriveDiscName`
+
+### 非目标
+
+1. 不改 `lookup-drive-disc` 的查询、筛选或返回逻辑
+2. 不改任何返回字段的值、顺序或可选性
+3. 不改 `setEffects` 的 nested contract
+
+### 当前状态
+
+- `V457.1` 已完成：范围冻结到 `lookup-drive-disc` 的基础标量 raw contract
+- `V457.2` 已完成：相关字段已统一复用命名上游 type

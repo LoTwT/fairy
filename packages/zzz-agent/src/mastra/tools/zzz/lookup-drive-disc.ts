@@ -1,4 +1,4 @@
-import type { DriveDiscItem } from "zzz-data"
+import type { DriveDiscItem, GachabaseId, GachabaseName } from "zzz-data"
 import { createTool } from "@mastra/core/tools"
 import { z } from "zod"
 import { findBestMatch, findTopMatches, loadJson, stripHtml } from "./utils"
@@ -7,9 +7,9 @@ export type LookupDriveDiscQueryName = string
 
 export type LookupDriveDiscLocale = "en" | "zh-CN"
 
-export type LookupDriveDiscId = DriveDiscItem["id"]
+export type LookupDriveDiscId = GachabaseId
 
-export type LookupDriveDiscName = DriveDiscItem["name"]
+export type LookupDriveDiscName = GachabaseName
 
 export type LookupDriveDiscTag = string
 
