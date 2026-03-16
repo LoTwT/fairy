@@ -427,3 +427,4 @@ const total = base * bonus * crit * resistance * custom
 - `V437` lookup-agent trimmed result contracts：当前阶段已收口；`lookup-agent.ts` 的顶层 trimmed result contract 已统一复用显式 interface
 - `V438` lookup-bangboo trimmed result contracts：当前阶段已收口；`lookup-bangboo.ts` 的顶层 trimmed result contract 已统一复用显式 interface
 - `V439` lookup-w-engine trimmed result contracts：当前阶段已收口；`lookup-w-engine.ts` 的顶层 trimmed result contract 已统一复用显式 interface
+- `V440` lookup-game-mode unavailable result contracts：当前阶段已收口；`lookup-game-mode.ts` 中未找到版本 / 未找到难度的顶层返回结构已统一复用显式 interface

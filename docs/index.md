@@ -337,3 +337,4 @@
 - [静态构筑解析系统 V437](./specs/static-build-resolver-v437.md) — 当前阶段：已收口；`lookup-agent.ts` 的顶层 trimmed result contract 已统一复用显式 interface
 - [静态构筑解析系统 V438](./specs/static-build-resolver-v438.md) — 当前阶段：已收口；`lookup-bangboo.ts` 的顶层 trimmed result contract 已统一复用显式 interface
 - [静态构筑解析系统 V439](./specs/static-build-resolver-v439.md) — 当前阶段：已收口；`lookup-w-engine.ts` 的顶层 trimmed result contract 已统一复用显式 interface
+- [静态构筑解析系统 V440](./specs/static-build-resolver-v440.md) — 当前阶段：已收口；`lookup-game-mode.ts` 中未找到版本 / 未找到难度的顶层返回结构已统一复用显式 interface

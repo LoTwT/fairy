@@ -91,6 +91,20 @@ export type LookupGameModeVersionEnemyRefList = LookupGameModeVersionEnemyRef[]
 
 export type LookupGameModeRecommendedResistance = number
 
+export type LookupGameModeLookupMessage = string
+
+export interface LookupGameModeUnavailableVersionsResult {
+  found: false
+  message: LookupGameModeLookupMessage
+  availableVersions: LookupGameModeVersionKeyList
+}
+
+export interface LookupGameModeUnavailableDifficultiesResult {
+  found: false
+  message: LookupGameModeLookupMessage
+  availableDifficulties: LookupGameModeDifficultyList
+}
+
 export interface LookupGameModeDamageContext {
   enemyName: LookupGameModeEnemyName
   attribute: NonNullable<ReturnType<typeof normalizeDamageAttribute>>
@@ -271,7 +285,7 @@ export const lookupGameMode = createTool({
           availableVersions: data.map(
             (v): LookupGameModeVersionKey => v.versionKey,
           ),
-        }
+        } satisfies LookupGameModeUnavailableVersionsResult
       }
 
       const selection = selectDAEnemy(item, enemyName)
@@ -313,7 +327,7 @@ export const lookupGameMode = createTool({
           availableDifficulties: data.map(
             (m): LookupGameModeDifficultyName => m.name,
           ),
-        }
+        } satisfies LookupGameModeUnavailableDifficultiesResult
       }
 
       // Boss search mode
@@ -341,7 +355,7 @@ export const lookupGameMode = createTool({
           availableVersions: modeItem.versions.map(
             (v): LookupGameModeVersionKey => v.versionKey,
           ),
-        }
+        } satisfies LookupGameModeUnavailableVersionsResult
       }
 
       const selection = selectSDEnemy(vItem, { node, side, enemyName })
@@ -386,7 +400,7 @@ export const lookupGameMode = createTool({
         availableDifficulties: data.map(
           (m): LookupGameModeDifficultyName => m.name,
         ),
-      }
+      } satisfies LookupGameModeUnavailableDifficultiesResult
     }
 
     // Boss search mode
@@ -414,7 +428,7 @@ export const lookupGameMode = createTool({
         availableVersions: modeItem.versions.map(
           (v): LookupGameModeVersionKey => v.versionKey,
         ),
-      }
+      } satisfies LookupGameModeUnavailableVersionsResult
     }
 
     const selection = selectTSEnemy(vItem, { node, side, enemyName })
