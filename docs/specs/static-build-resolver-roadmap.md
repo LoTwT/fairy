@@ -13355,3 +13355,34 @@ caveatSummary` 这些兼容字段补齐。
 - `V378.2` 已完成：`lookup-w-engine.ts` 的 calculated stat、active effect 与 trimmed result 已统一复用显式 alias / interface
 - `V378.3` 已完成：全量校验与提交
 - `V378.4` 已完成：roadmap、索引与架构文档同步
+
+## 382. V379 bangboo lookup helper contracts
+
+### 382.1 目标
+
+`V379` 只解决一件事：
+
+- 把 `lookup-bangboo.ts` 的 calculated stat 与 trimmed result 统一改成显式 alias。
+
+### 382.2 范围
+
+1. `LookupBangbooQueryName`
+2. `LookupBangbooLocale`
+3. `LookupBangbooCalculatedStatName`
+4. `LookupBangbooCalculatedStatValue`
+5. `LookupBangbooCalculatedStatMap`
+6. `LookupBangbooTrimmedValue`
+7. `LookupBangbooTrimmedResult`
+
+### 382.3 非目标
+
+1. 不改邦布查询逻辑
+2. 不改属性计算逻辑
+3. 不改返回字段语义
+
+### 382.4 当前状态
+
+- `V379.1` 已完成：范围冻结到 bangboo lookup helper contract
+- `V379.2` 已完成：`lookup-bangboo.ts` 的 calculated stat 与 trimmed result 已统一复用显式 alias
+- `V379.3` 已完成：全量校验与提交
+- `V379.4` 已完成：roadmap、索引与架构文档同步

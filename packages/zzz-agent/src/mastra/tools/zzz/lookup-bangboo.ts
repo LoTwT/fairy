@@ -4,6 +4,26 @@ import { z } from "zod"
 import { calcBangbooStat } from "zzz-data"
 import { findBestMatch, findTopMatches, loadJson, stripHtml } from "./utils"
 
+export type LookupBangbooQueryName = string
+
+export type LookupBangbooLocale = "en" | "zh-CN"
+
+export type LookupBangbooCalculatedStatName = string
+
+export type LookupBangbooCalculatedStatValue = number
+
+export type LookupBangbooCalculatedStatMap = Record<
+  LookupBangbooCalculatedStatName,
+  LookupBangbooCalculatedStatValue
+>
+
+export type LookupBangbooTrimmedValue = unknown
+
+export type LookupBangbooTrimmedResult = Record<
+  string,
+  LookupBangbooTrimmedValue
+>
+
 export const lookupBangboo = createTool({
   id: "lookup-bangboo",
   description:
@@ -36,7 +56,19 @@ export const lookupBangboo = createTool({
       .describe("数据语言"),
   }),
   execute: async (input) => {
-    const { name, rarity, level, optimization, locale } = input
+    const {
+      name,
+      rarity,
+      level,
+      optimization,
+      locale,
+    }: {
+      name?: LookupBangbooQueryName
+      rarity?: number
+      level?: number
+      optimization?: number
+      locale: LookupBangbooLocale
+    } = input
     const bangboos = loadJson<BangbooItem[]>(`data/${locale}/bangboo.json`)
 
     // List mode: no name provided
@@ -78,7 +110,7 @@ export const lookupBangboo = createTool({
     }
 
     // Calculate stats if level provided
-    let calculatedStats: Record<string, number> | undefined
+    let calculatedStats: LookupBangbooCalculatedStatMap | undefined
     if (level !== undefined) {
       const opt = optimization ?? 6
       calculatedStats = {}
@@ -101,7 +133,7 @@ export const lookupBangboo = createTool({
     }
 
     // When calculatedStats is available, omit raw baseStats to reduce context
-    const result: Record<string, unknown> = {
+    const result: LookupBangbooTrimmedResult = {
       id: bangboo.id,
       name: bangboo.name,
       rarity: bangboo.rarity,
