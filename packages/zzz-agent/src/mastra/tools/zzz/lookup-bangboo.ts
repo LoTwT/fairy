@@ -44,7 +44,10 @@ export type LookupBangbooSkillName = string
 
 export type LookupBangbooSkillDescriptionText = string
 
-export type LookupBangbooSkillStatList = BangbooItem["skills"][number]["stats"]
+export type LookupBangbooSkillStatEntry =
+  BangbooItem["skills"][number]["stats"][number]
+
+export type LookupBangbooSkillStatList = LookupBangbooSkillStatEntry[]
 
 export interface LookupBangbooSkillEntry {
   typeId: LookupBangbooSkillTypeId
@@ -55,7 +58,9 @@ export interface LookupBangbooSkillEntry {
 
 export type LookupBangbooSkillEntryList = LookupBangbooSkillEntry[]
 
-export type LookupBangbooBaseStatList = BangbooItem["baseStats"]
+export type LookupBangbooBaseStatEntry = BangbooItem["baseStats"][number]
+
+export type LookupBangbooBaseStatList = LookupBangbooBaseStatEntry[]
 
 export interface LookupBangbooTrimmedResult {
   id: LookupBangbooId

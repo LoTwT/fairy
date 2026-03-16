@@ -431,3 +431,4 @@ const total = base * bonus * crit * resistance * custom
 - `V441` lookup-game-mode boss search result contracts：当前阶段已收口；`lookup-game-mode.ts` 的 DA/SD/TS boss 搜索顶层返回结构已统一复用显式 interface
 - `V442` lookup-game-mode resolved result contracts：当前阶段已收口；`lookup-game-mode.ts` 的 DA/SD/TS 成功解析顶层返回结构已统一复用显式 interface，且 DA `enemyCandidates` 已对齐为结构化候选项
 - `V443` lookup-agent skill stat value contracts：当前阶段已收口；`lookup-agent.ts` 的 `LookupAgentSkillStatValueList` 已统一复用显式文本 alias
+- `V444` lookup-bangboo raw list contracts：当前阶段已收口；`lookup-bangboo.ts` 中 `skills[*].stats` 与 `baseStats` 已统一复用显式 alias

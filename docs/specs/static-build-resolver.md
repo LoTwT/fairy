@@ -1192,3 +1192,4 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 441. `V441` lookup-game-mode boss search result contracts：当前阶段已收口；`lookup-game-mode.ts` 的 DA/SD/TS boss 搜索顶层返回结构已统一复用显式 interface，不改变任何版本搜索、敌人选择或 `damageContext` 生成逻辑，见 [静态构筑解析系统 V441](./static-build-resolver-v441.md)
 442. `V442` lookup-game-mode resolved result contracts：当前阶段已收口；`lookup-game-mode.ts` 的 DA/SD/TS 成功解析顶层返回结构已统一复用显式 interface，且 DA `enemyCandidates` 已对齐为结构化候选项，不改变任何版本查找、难度解析或 `damageContext` 公式逻辑，见 [静态构筑解析系统 V442](./static-build-resolver-v442.md)
 443. `V443` lookup-agent skill stat value contracts：当前阶段已收口；`lookup-agent.ts` 的 `LookupAgentSkillStatValueList` 已统一复用显式文本 alias，不改变任何查询、筛选或技能裁剪逻辑，见 [静态构筑解析系统 V443](./static-build-resolver-v443.md)
+444. `V444` lookup-bangboo raw list contracts：当前阶段已收口；`lookup-bangboo.ts` 中 `skills[*].stats` 与 `baseStats` 已统一复用显式 alias，不改变任何查询、筛选或属性计算逻辑，见 [静态构筑解析系统 V444](./static-build-resolver-v444.md)
