@@ -280,27 +280,27 @@ export const stateSnapshotSchema = zod
   })
   .optional()
 
+export const resolvedSnapshotBucketDeltasSchema = zod.object({
+  bonusDamageSum: zod.number().optional(),
+  defenseReduction: zod.number().optional(),
+  penetrationRate: zod.number().optional(),
+  resistanceReduction: zod.number().optional(),
+  ignoreResistance: zod.number().optional(),
+  sheerBonusSum: zod.number().optional(),
+  anomalyProficiency: zod.number().optional(),
+  anomalyBonusDamageSum: zod.number().optional(),
+  anomalyCritRate: zod.number().optional(),
+  anomalyCritDamage: zod.number().optional(),
+})
+
+export const resolvedSnapshotMultiplierFactorsSchema = zod.object({
+  skillMultiplierFactor: zod.number().min(0).optional(),
+})
+
 export const resolvedSnapshotSchema = zod
   .object({
-    bucketDeltas: zod
-      .object({
-        bonusDamageSum: zod.number().optional(),
-        defenseReduction: zod.number().optional(),
-        penetrationRate: zod.number().optional(),
-        resistanceReduction: zod.number().optional(),
-        ignoreResistance: zod.number().optional(),
-        sheerBonusSum: zod.number().optional(),
-        anomalyProficiency: zod.number().optional(),
-        anomalyBonusDamageSum: zod.number().optional(),
-        anomalyCritRate: zod.number().optional(),
-        anomalyCritDamage: zod.number().optional(),
-      })
-      .optional(),
-    multiplierFactors: zod
-      .object({
-        skillMultiplierFactor: zod.number().min(0).optional(),
-      })
-      .optional(),
+    bucketDeltas: resolvedSnapshotBucketDeltasSchema.optional(),
+    multiplierFactors: resolvedSnapshotMultiplierFactorsSchema.optional(),
   })
   .optional()
 

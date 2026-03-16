@@ -458,5 +458,6 @@ const total = base * bonus * crit * resistance * custom
 - `V477` resolve-build effect override contracts：当前阶段已收口；`resolve-build-schemas.ts` 中 `effectOverrides[]` 的匿名对象已统一复用显式 interface 与共享 schema
 - `V478` resolve-build dynamic snapshot nested schemas：当前阶段已收口；`resolve-build-schemas.ts` 中 `dynamicSnapshot` 的匿名 nested Zod schema 已统一复用共享 schema 常量
 - `V479` resolve-build state snapshot nested schemas：当前阶段已收口；`resolve-build-schemas.ts` 中 `stateSnapshot` 的匿名 nested Zod schema 已统一复用共享 schema 常量
+- `V480` resolve-build resolved snapshot nested schemas：当前阶段已收口；`resolve-build-schemas.ts` 中 `resolvedSnapshot` 的匿名 nested Zod schema 已统一复用共享 schema 常量
 - `V459` calculator disorder damage params contracts：当前阶段已收口；`calculator/types.ts` 中 `DisorderDamageParams` 已统一改为显式 interface
 - `V460` compact disorder damage params contracts：当前阶段已收口；`build/compact.ts` 中 `CompactStaticBuildDisorderDamageParams` 已统一改为显式 interface
