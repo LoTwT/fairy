@@ -404,3 +404,4 @@ const total = base * bonus * crit * resistance * custom
 - `V414` game-modes shiyu-defense side and node list contracts：当前阶段已收口；`game-modes.ts` 中 `Shiyu Defense` 的 `side/node` 匿名 list contract 已统一复用显式 alias
 - `V415` game-modes shiyu-defense version and mode list contracts：当前阶段已收口；`game-modes.ts` 中 `Shiyu Defense` 的 `version/mode` 匿名 list contract 已统一复用显式 alias
 - `V416` game-modes threshold-simulation enemy and wave list contracts：当前阶段已收口；`game-modes.ts` 中 `Threshold Simulation` 的 `enemy/wave` 匿名 list contract 已统一复用显式 alias
+- `V417` game-modes threshold-simulation side and node list contracts：当前阶段已收口；`game-modes.ts` 中 `Threshold Simulation` 的 `side/node` 匿名 list contract 已统一复用显式 alias

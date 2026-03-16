@@ -257,12 +257,15 @@ export interface TSRegularSideItem {
   altHp: GameModeAltHP
   waves: TSRegularWaveItemList
 }
+export type TSSideSlot = TSBossSideItem | TSRegularSideItem | null
+export type TSSideSlotList = TSSideSlot[]
 
 export interface TSNodeItem {
   buffNames: GameModeBuffNameList
   /** sides[0] = boss side; sides[1..n] = regular enemy sides */
-  sides: (TSBossSideItem | TSRegularSideItem | null)[]
+  sides: TSSideSlotList
 }
+export type TSNodeItemList = TSNodeItem[]
 
 export interface TSVersionItem {
   versionKey: GameModeVersionKey
@@ -277,7 +280,7 @@ export interface TSVersionItem {
   versionBossAnomMult: GameModeVersionAnomalyMultiplier
   /** Raw regular-enemy anomaly multiplier applied to this TS version. */
   versionEnemyAnomMult: GameModeVersionAnomalyMultiplier
-  nodes: TSNodeItem[]
+  nodes: TSNodeItemList
 }
 
 export interface TSModeItem {

@@ -314,3 +314,4 @@
 - [静态构筑解析系统 V414](./specs/static-build-resolver-v414.md) — 当前阶段：已收口；`game-modes.ts` 中 `Shiyu Defense` 的 `side/node` 匿名 list contract 已统一复用显式 alias
 - [静态构筑解析系统 V415](./specs/static-build-resolver-v415.md) — 当前阶段：已收口；`game-modes.ts` 中 `Shiyu Defense` 的 `version/mode` 匿名 list contract 已统一复用显式 alias
 - [静态构筑解析系统 V416](./specs/static-build-resolver-v416.md) — 当前阶段：已收口；`game-modes.ts` 中 `Threshold Simulation` 的 `enemy/wave` 匿名 list contract 已统一复用显式 alias
+- [静态构筑解析系统 V417](./specs/static-build-resolver-v417.md) — 当前阶段：已收口；`game-modes.ts` 中 `Threshold Simulation` 的 `side/node` 匿名 list contract 已统一复用显式 alias
