@@ -385,3 +385,4 @@
 - [静态构筑解析系统 V485](./specs/static-build-resolver-v485.md) — 当前阶段：已收口；`resolve-build-schemas.ts` 中 `scenario/context` 的重复 scalar schema 已统一复用共享 schema 常量
 - [静态构筑解析系统 V486](./specs/static-build-resolver-v486.md) — 当前阶段：已收口；`resolve-build-schemas.ts` 中 `dynamicSnapshot` 的 leaf scalar schema 已统一复用共享 schema 常量
 - [静态构筑解析系统 V487](./specs/static-build-resolver-v487.md) — 当前阶段：已收口；`resolve-build-schemas.ts` 中 `stateSnapshot` 的 leaf scalar schema 已统一复用共享 schema 常量
+- [静态构筑解析系统 V488](./specs/static-build-resolver-v488.md) — 当前阶段：已收口；`resolve-build-schemas.ts` 中 `resolvedSnapshot` 的 delta/factor leaf scalar schema 已统一复用共享 schema 常量

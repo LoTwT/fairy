@@ -356,21 +356,48 @@ export const stateSnapshotSchema = zod
   })
   .optional()
 
+export const resolvedSnapshotBonusDamageSumSchema = zod.number().optional()
+
+export const resolvedSnapshotDefenseReductionSchema = zod.number().optional()
+
+export const resolvedSnapshotPenetrationRateSchema = zod.number().optional()
+
+export const resolvedSnapshotResistanceReductionSchema = zod.number().optional()
+
+export const resolvedSnapshotIgnoreResistanceSchema = zod.number().optional()
+
+export const resolvedSnapshotSheerBonusSumSchema = zod.number().optional()
+
+export const resolvedSnapshotAnomalyProficiencySchema = zod.number().optional()
+
+export const resolvedSnapshotAnomalyBonusDamageSumSchema = zod
+  .number()
+  .optional()
+
+export const resolvedSnapshotAnomalyCritRateSchema = zod.number().optional()
+
+export const resolvedSnapshotAnomalyCritDamageSchema = zod.number().optional()
+
+export const resolvedSnapshotSkillMultiplierFactorSchema = zod
+  .number()
+  .min(0)
+  .optional()
+
 export const resolvedSnapshotBucketDeltasSchema = zod.object({
-  bonusDamageSum: zod.number().optional(),
-  defenseReduction: zod.number().optional(),
-  penetrationRate: zod.number().optional(),
-  resistanceReduction: zod.number().optional(),
-  ignoreResistance: zod.number().optional(),
-  sheerBonusSum: zod.number().optional(),
-  anomalyProficiency: zod.number().optional(),
-  anomalyBonusDamageSum: zod.number().optional(),
-  anomalyCritRate: zod.number().optional(),
-  anomalyCritDamage: zod.number().optional(),
+  bonusDamageSum: resolvedSnapshotBonusDamageSumSchema,
+  defenseReduction: resolvedSnapshotDefenseReductionSchema,
+  penetrationRate: resolvedSnapshotPenetrationRateSchema,
+  resistanceReduction: resolvedSnapshotResistanceReductionSchema,
+  ignoreResistance: resolvedSnapshotIgnoreResistanceSchema,
+  sheerBonusSum: resolvedSnapshotSheerBonusSumSchema,
+  anomalyProficiency: resolvedSnapshotAnomalyProficiencySchema,
+  anomalyBonusDamageSum: resolvedSnapshotAnomalyBonusDamageSumSchema,
+  anomalyCritRate: resolvedSnapshotAnomalyCritRateSchema,
+  anomalyCritDamage: resolvedSnapshotAnomalyCritDamageSchema,
 })
 
 export const resolvedSnapshotMultiplierFactorsSchema = zod.object({
-  skillMultiplierFactor: zod.number().min(0).optional(),
+  skillMultiplierFactor: resolvedSnapshotSkillMultiplierFactorSchema,
 })
 
 export const resolvedSnapshotSchema = zod
