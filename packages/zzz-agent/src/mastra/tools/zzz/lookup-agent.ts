@@ -63,7 +63,32 @@ export type LookupAgentCalculatedStatMap = Record<
   LookupAgentCalculatedStatValue
 >
 
-export type LookupAgentPromotionList = AgentDetails["promotions"]
+export type LookupAgentStatBoostStatId =
+  AgentDetails["promotions"][number]["statBoosts"][number]["statId"]
+
+export type LookupAgentStatBoostValue =
+  AgentDetails["promotions"][number]["statBoosts"][number]["value"]
+
+export interface LookupAgentStatBoostEntry {
+  statId: LookupAgentStatBoostStatId
+  value: LookupAgentStatBoostValue
+}
+
+export type LookupAgentStatBoostEntryList = LookupAgentStatBoostEntry[]
+
+export type LookupAgentPromotionValue =
+  AgentDetails["promotions"][number]["promotion"]
+
+export type LookupAgentPromotionMaxLevel =
+  AgentDetails["promotions"][number]["maxLevel"]
+
+export interface LookupAgentPromotionEntry {
+  promotion: LookupAgentPromotionValue
+  maxLevel: LookupAgentPromotionMaxLevel
+  statBoosts: LookupAgentStatBoostEntryList
+}
+
+export type LookupAgentPromotionList = LookupAgentPromotionEntry[]
 
 export type LookupAgentSkillGroupId = string
 
@@ -111,7 +136,7 @@ export interface LookupAgentCoreSkillEntry {
   level: LookupAgentCoreSkillLevel
   typeName: LookupAgentCoreSkillTypeName
   skills: LookupAgentSkillDescriptionEntryList
-  statBoosts: AgentDetails["coreSkills"][number]["statBoosts"]
+  statBoosts: LookupAgentStatBoostEntryList
 }
 
 export type LookupAgentCoreSkillEntryList = LookupAgentCoreSkillEntry[]
@@ -302,7 +327,13 @@ function trimAgent(
               description: stripHtml(s.description),
             }) satisfies LookupAgentSkillDescriptionEntry,
         ),
-        statBoosts: c.statBoosts,
+        statBoosts: c.statBoosts.map(
+          (boost) =>
+            ({
+              statId: boost.statId,
+              value: boost.value,
+            }) satisfies LookupAgentStatBoostEntry,
+        ),
       }) satisfies LookupAgentCoreSkillEntry,
   )
 
@@ -346,7 +377,20 @@ function trimAgent(
           growthPerLevel: s.growthPerLevel,
         }) satisfies LookupAgentStatEntry,
     )
-    result.promotions = detail.promotions
+    result.promotions = detail.promotions.map(
+      (promotion) =>
+        ({
+          promotion: promotion.promotion,
+          maxLevel: promotion.maxLevel,
+          statBoosts: promotion.statBoosts.map(
+            (boost) =>
+              ({
+                statId: boost.statId,
+                value: boost.value,
+              }) satisfies LookupAgentStatBoostEntry,
+          ),
+        }) satisfies LookupAgentPromotionEntry,
+    )
   }
 
   return result

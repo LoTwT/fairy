@@ -1196,3 +1196,4 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 445. `V445` lookup-w-engine raw stat contracts：当前阶段已收口；`lookup-w-engine.ts` 中 `baseStat / advancedStat` 已统一复用显式 interface，不改变任何查询、筛选或属性计算逻辑，见 [静态构筑解析系统 V445](./static-build-resolver-v445.md)
 446. `V446` lookup-bangboo raw entry contracts：当前阶段已收口；`lookup-bangboo.ts` 中 `baseStats[*]` 与 `skills[*].stats[*]` 已统一复用显式 interface，不改变任何查询、筛选或属性计算逻辑，见 [静态构筑解析系统 V446](./static-build-resolver-v446.md)
 447. `V447` lookup-agent display list contracts：当前阶段已收口；`lookup-agent.ts` 中 `attributes / attackTypes` 已统一复用显式 alias，不改变任何查询、筛选或技能裁剪逻辑，见 [静态构筑解析系统 V447](./static-build-resolver-v447.md)
+448. `V448` lookup-agent progression contracts：当前阶段已收口；`lookup-agent.ts` 中 `promotions` 与 `coreSkills[*].statBoosts` 已统一复用显式 interface，不改变任何查询、筛选或技能裁剪逻辑，见 [静态构筑解析系统 V448](./static-build-resolver-v448.md)
