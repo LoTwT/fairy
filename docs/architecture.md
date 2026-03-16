@@ -343,3 +343,5 @@ const total = base * bonus * crit * resistance * custom
 - `V353` agent source-entry context contracts：当前阶段已收口；`zzz-agent` source-entry context helper 的导出输入与结果 shape 已统一复用显式公开 contract
 - `V354` buhflipexplode helper input contracts：当前阶段已收口；`buhflipexplode` 公开公式 helper 的输入标量与 tag 列表已统一复用显式公开 contract
 - `V355` generate header helper text contracts：当前阶段已收口；`normalizeHeader()` 的输入输出已统一复用显式公开文本 contract
+- `V356` merge shared helper contracts：当前阶段已收口；`scripts/merge/shared.ts` 的公开 merge helper 输入已统一复用显式公开 contract
+- `V357` crawl shared helper contracts：当前阶段已收口；`scripts/crawl/shared.ts` 的公开 crawl helper 输入输出已统一复用显式公开 contract

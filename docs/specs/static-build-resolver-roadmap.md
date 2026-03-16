@@ -12630,3 +12630,76 @@ caveatSummary` 这些兼容字段补齐。
 - `V355.2` 已完成：`normalizeHeader()` 已统一复用显式公开文本 alias
 - `V355.3` 已完成：校验与提交
 - `V355.4` 已完成：roadmap、索引与架构文档同步
+
+## 359. V356 merge shared helper contracts
+
+### 359.1 目标
+
+`V356` 只解决一件事：
+
+- 给 `scripts/merge/shared.ts` 里公开 merge helper 的路径、文件名、locale 与 payload 输入补显式公开 contract，不改变任何读写行为。
+
+### 359.2 范围
+
+1. `MergeRawRelativePath`
+2. `MergeXlsxFileName`
+3. `MergeOutputLocale`
+4. `MergeOutputJsonName`
+5. `MergeI18nFileName`
+6. `MergeOutputData`
+7. `readRaw()`
+8. `readXlsx()`
+9. `writeOut()`
+10. `writeI18n()`
+
+### 359.3 非目标
+
+1. 不改 merge 目录常量
+2. 不改 JSON 输出路径
+3. 不改 merge 行为
+
+### 359.4 当前状态
+
+- `V356.1` 已完成：范围冻结到 merge shared helper contract
+- `V356.2` 已完成：merge shared helper 输入已统一复用显式公开 alias
+- `V356.3` 已完成：校验与提交
+- `V356.4` 已完成：roadmap、索引与架构文档同步
+
+## 360. V357 crawl shared helper contracts
+
+### 360.1 目标
+
+`V357` 只解决一件事：
+
+- 给 `scripts/crawl/shared.ts` 里公开 crawl helper 的 URL、HTML、delay 与 extractor contract 补显式公开 alias，不改变任何抓取逻辑。
+
+### 360.2 范围
+
+1. `CrawlTaskName`
+2. `CrawlTargetUrl`
+3. `CrawlHtmlText`
+4. `CrawlDelayMilliseconds`
+5. `CrawlBatchSize`
+6. `CrawlSvelteKitData`
+7. `CrawlExtractedPayload`
+8. `CrawlExtractor`
+9. `CrawlTask`
+10. `fetchStatic()`
+11. `fetchJson()`
+12. `fetchDynamic()`
+13. `decodeSvelteKitData()`
+14. `delay()`
+15. `batchProcess()`
+
+### 360.3 非目标
+
+1. 不改 Playwright 或 fetch 行为
+2. 不改 batch 语义
+3. 不改 crawl 任务列表
+
+### 360.4 当前状态
+
+- `V357.1` 已完成：范围冻结到 crawl shared helper contract
+- `V357.2` 已完成：crawl shared helper 输入输出已统一复用显式公开 alias
+- `V357.3` 已完成：校验与提交
+- `V357.4` 已完成：roadmap、索引与架构文档同步
