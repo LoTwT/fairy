@@ -368,3 +368,4 @@
 - [静态构筑解析系统 V468](./specs/static-build-resolver-v468.md) — 当前阶段：已收口；`cleaned/types.ts` 中本地元素倍率 tuple 已统一对齐到 `game-modes` 上游 alias
 - [静态构筑解析系统 V469](./specs/static-build-resolver-v469.md) — 当前阶段：已收口；`game-modes.ts` 中 buff 名称与描述的联合值已统一复用显式 alias
 - [静态构筑解析系统 V470](./specs/static-build-resolver-v470.md) — 当前阶段：已收口；`cleaned/types.ts` 中 encounter / DA buff 文本字段已统一对齐到 `game-modes` 上游 alias
+- [静态构筑解析系统 V471](./specs/static-build-resolver-v471.md) — 当前阶段：已收口；`cleaned/types.ts` 中 `EnemyDamageContext` 的核心标识与数值字段已统一对齐到 `game-modes` 上游 alias

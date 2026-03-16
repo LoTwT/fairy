@@ -50,12 +50,12 @@ export interface EnemyDamageContextSource {
 }
 
 export interface EnemyDamageContext {
-  enemyId: string
-  enemyName: string
-  baseDefense: number
-  dazeGauge: number
-  dazeMultiplier: number
-  dazeDuration: number
+  enemyId: GameModeEnemyId
+  enemyName: GameModeEnemyName
+  baseDefense: GameModeEnemyDefense
+  dazeGauge: GameModeEnemyDaze
+  dazeMultiplier: GameModeStunMultiplier
+  dazeDuration: GameModeStunTime
   resistanceBucket: BaseResistanceAttribute
   elementMultiplier: number
   multipliers: ElementMultiplierMap
