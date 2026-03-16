@@ -271,19 +271,44 @@ export const enemySchema = zod.object({
   specialMultiplier: enemySpecialMultiplierSchema,
 })
 
+export const dynamicSnapshotAriaDreamtimeSchema = zod.boolean().optional()
+
+export const dynamicSnapshotBurniceEmberStateSchema = zod.boolean().optional()
+
+export const dynamicSnapshotBurniceEmberExtraTriggersSchema = zod
+  .number()
+  .int()
+  .min(0)
+  .optional()
+
+export const dynamicSnapshotAriaExflowDamageRatioSchema = zod
+  .number()
+  .min(0)
+  .optional()
+
+export const dynamicSnapshotAriaStunnedDamageRatioSchema = zod
+  .number()
+  .min(0)
+  .optional()
+
+export const dynamicSnapshotBurniceEmberDamageRatioSchema = zod
+  .number()
+  .min(0)
+  .optional()
+
 export const dynamicSnapshotFlagsSchema = zod.object({
-  ariaDreamtime: zod.boolean().optional(),
-  burniceEmberState: zod.boolean().optional(),
+  ariaDreamtime: dynamicSnapshotAriaDreamtimeSchema,
+  burniceEmberState: dynamicSnapshotBurniceEmberStateSchema,
 })
 
 export const dynamicSnapshotCountsSchema = zod.object({
-  burniceEmberExtraTriggers: zod.number().int().min(0).optional(),
+  burniceEmberExtraTriggers: dynamicSnapshotBurniceEmberExtraTriggersSchema,
 })
 
 export const dynamicSnapshotValuesSchema = zod.object({
-  ariaExflowDamageRatio: zod.number().min(0).optional(),
-  ariaStunnedDamageRatio: zod.number().min(0).optional(),
-  burniceEmberDamageRatio: zod.number().min(0).optional(),
+  ariaExflowDamageRatio: dynamicSnapshotAriaExflowDamageRatioSchema,
+  ariaStunnedDamageRatio: dynamicSnapshotAriaStunnedDamageRatioSchema,
+  burniceEmberDamageRatio: dynamicSnapshotBurniceEmberDamageRatioSchema,
 })
 
 export const dynamicSnapshotSchema = zod
