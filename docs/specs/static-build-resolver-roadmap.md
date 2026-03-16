@@ -14076,3 +14076,36 @@ caveatSummary` 这些兼容字段补齐。
 
 - `V399.1` 已完成：范围冻结到 buhflipexplode enemy ref id contract
 - `V399.2` 已完成：`SD/DA/TS` 敌人引用已统一复用 `BuhflipEnemyId`
+
+## 403. V400 buhflipexplode version text contracts
+
+### 403.1 目标
+
+`V400` 只解决一件事：
+
+- 把 `buhflipexplode` 的版本容器文本字段统一复用显式 text alias。
+
+### 403.2 范围
+
+1. `BuhflipVersionName`
+2. `BuhflipVersionTime`
+3. `BuhflipVersionsModeName`
+4. `SDVersionData.versionName`
+5. `SDVersionData.versionTime`
+6. `SDVersionsMode.name`
+7. `DAVersionData.versionName`
+8. `DAVersionData.versionTime`
+9. `TSVersionData.versionName`
+10. `TSVersionData.versionTime`
+11. `TSVersionsMode.name`
+
+### 403.3 非目标
+
+1. 不改任何 raw/published JSON shape
+2. 不改敌人文本字段
+3. 不改版本 record key / enemy ref / buff text contract
+
+### 403.4 当前状态
+
+- `V400.1` 已完成：范围冻结到 buhflipexplode version text contract
+- `V400.2` 已完成：`SD/DA/TS` 版本容器文本字段已统一复用显式 alias

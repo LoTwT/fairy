@@ -387,3 +387,4 @@ const total = base * bonus * crit * resistance * custom
 - `V397` buhflipexplode element multiplier tuple contracts：当前阶段已收口；`buhflipexplode/index.ts` 中敌人与 SD side 的元素倍率五元组已统一复用显式 tuple alias
 - `V398` buhflipexplode text pair contracts：当前阶段已收口；`buhflipexplode/index.ts` 中敌人 `desc / perf` 的匿名文本二元 tuple 已统一复用显式 alias
 - `V399` buhflipexplode enemy ref id contracts：当前阶段已收口；`buhflipexplode/index.ts` 中 `SD/DA/TS` 敌人引用的 `id` 已统一复用 `BuhflipEnemyId`
+- `V400` buhflipexplode version text contracts：当前阶段已收口；`buhflipexplode/index.ts` 中 `SD/DA/TS` 版本容器的 `versionName / versionTime / mode name` 已统一复用显式 alias

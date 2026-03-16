@@ -180,6 +180,12 @@ export type BuhflipVersionIndex = number
 
 export type BuhflipVersionRecordKey = string
 
+export type BuhflipVersionName = string
+
+export type BuhflipVersionTime = string
+
+export type BuhflipVersionsModeName = string
+
 export type BuhflipTextPairValue = string
 
 export type BuhflipTextPair = [BuhflipTextPairValue, BuhflipTextPairValue]
@@ -283,8 +289,8 @@ export interface SDVersionEnemies {
   nodes: SDNode[]
 }
 export interface SDVersionData {
-  versionName: string
-  versionTime: string
+  versionName: BuhflipVersionName
+  versionTime: BuhflipVersionTime
   versionDazeMult: BuhflipVersionDazeMultiplier
   versionAnomMult: BuhflipVersionAnomalyMultiplier
   versionEnemies: SDVersionEnemies
@@ -294,7 +300,7 @@ export interface SDVersionData {
   mainBuffNum?: BuhflipMainBuffNum
 }
 export interface SDVersionsMode {
-  name: string
+  name: BuhflipVersionsModeName
   versions: Record<BuhflipVersionRecordKey, SDVersionData>
 }
 /** `buhflipexplode-shiyu-defense.json` top-level shape */
@@ -309,8 +315,8 @@ export interface DAEnemyRef {
   mult: BuhflipBossHPMult
 }
 export interface DAVersionData {
-  versionName: string
-  versionTime: string
+  versionName: BuhflipVersionName
+  versionTime: BuhflipVersionTime
   versionDazeMult: BuhflipVersionDazeMultiplier
   versionAnomMult: BuhflipVersionAnomalyMultiplier
   buffNames: BuhflipBuffTextList
@@ -344,8 +350,8 @@ export interface TSVersionEnemies {
   nodes: TSNode[]
 }
 export interface TSVersionData {
-  versionName: string
-  versionTime: string
+  versionName: BuhflipVersionName
+  versionTime: BuhflipVersionTime
   versionBossDazeMult: BuhflipVersionDazeMultiplier
   versionEnemyDazeMult: BuhflipVersionDazeMultiplier
   versionBossAnomMult: BuhflipVersionAnomalyMultiplier
@@ -353,7 +359,7 @@ export interface TSVersionData {
   versionEnemies: TSVersionEnemies
 }
 export interface TSVersionsMode {
-  name: string
+  name: BuhflipVersionsModeName
   versions: Record<BuhflipVersionRecordKey, TSVersionData>
 }
 /** `buhflipexplode-threshold-simulation.json` top-level shape */
