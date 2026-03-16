@@ -410,3 +410,4 @@ const total = base * bonus * crit * resistance * custom
 - `V420` cleaned shiyu-defense view list contracts：当前阶段已收口；`cleaned/types.ts` 中 `Shiyu Defense` 视图的敌人列表、buff 名称/描述列表与 side 列表已统一复用显式 alias
 - `V421` cleaned threshold-simulation view list contracts：当前阶段已收口；`cleaned/types.ts` 中 `Threshold Simulation` 视图的 boss/regular 敌人列表、buff 名称列表与 side 列表已统一复用显式 alias
 - `V422` cleaned encounter helper list contracts：当前阶段已收口；`cleaned encounter` helper 与返回类型中的 `matches`、候选名、弱点与抗性列表已统一复用显式 alias
+- `V423` gachabase agent list label contracts：当前阶段已收口；`gachabase/types.ts` 中 `AgentListItem.attributes` 与 `AgentListItem.attackTypes` 已统一复用显式 alias

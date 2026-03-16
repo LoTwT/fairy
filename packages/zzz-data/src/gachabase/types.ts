@@ -28,6 +28,8 @@ export type GachabaseAssetPath = string
 export type GachabaseStringValueList = string[]
 export type GachabaseEffectLevel = number
 export type GachabaseDescriptionText = string
+export type AgentAttributeLabelList = AgentAttributeLabel[]
+export type AgentAttackTypeLabelList = AttackTypeLabel[]
 
 export interface StatBoost {
   statId: GachabaseStatId
@@ -50,9 +52,9 @@ export interface AgentListItem {
   /** Localized display label. Normalize with `toAgentSpecialty()` for logic. */
   specialty: AgentSpecialtyLabel
   /** Localized display labels. Normalize with `toAgentAttribute()` for logic. */
-  attributes: AgentAttributeLabel[]
+  attributes: AgentAttributeLabelList
   /** Localized display labels. Normalize with `toAttackType()` for logic. */
-  attackTypes: AttackTypeLabel[]
+  attackTypes: AgentAttackTypeLabelList
   url: GachabaseUrl
 }
 
