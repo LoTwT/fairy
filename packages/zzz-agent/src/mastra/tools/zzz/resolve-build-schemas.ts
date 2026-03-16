@@ -377,13 +377,31 @@ export const finalPanelSchema = zod.object({
   penetrationValue: finalPanelPenetrationValueSchema,
 })
 
+export const scenarioAttributeSchema = zod.string().optional()
+
+export const scenarioExtraAbilityActiveSchema = zod.boolean().optional()
+
+export const scenarioSkillMultiplierSchema = zod.union([
+  zod.number(),
+  zod.string(),
+])
+
+export const scenarioDamageMultiplierSchema = zod.union([
+  zod.number(),
+  zod.string(),
+])
+
+export const scenarioAnomalyTypeSchema = zod.string()
+
+export const scenarioRemainingTimeSchema = zod.number().min(0)
+
 export const resolveBuildScenarioSchema = zod.discriminatedUnion("damageType", [
   zod.object({
     damageType: zod.literal("normal"),
     skillTag: skillTagSchema,
-    skillMultiplier: zod.union([zod.number(), zod.string()]),
-    attribute: zod.string().optional(),
-    extraAbilityActive: zod.boolean().optional(),
+    skillMultiplier: scenarioSkillMultiplierSchema,
+    attribute: scenarioAttributeSchema,
+    extraAbilityActive: scenarioExtraAbilityActiveSchema,
     combatTags: combatTagListSchema.optional(),
     dynamicSnapshot: dynamicSnapshotSchema,
     stateSnapshot: stateSnapshotSchema,
@@ -393,9 +411,9 @@ export const resolveBuildScenarioSchema = zod.discriminatedUnion("damageType", [
   zod.object({
     damageType: zod.literal("sheer"),
     skillTag: skillTagSchema,
-    skillMultiplier: zod.union([zod.number(), zod.string()]),
-    attribute: zod.string().optional(),
-    extraAbilityActive: zod.boolean().optional(),
+    skillMultiplier: scenarioSkillMultiplierSchema,
+    attribute: scenarioAttributeSchema,
+    extraAbilityActive: scenarioExtraAbilityActiveSchema,
     combatTags: combatTagListSchema.optional(),
     dynamicSnapshot: dynamicSnapshotSchema,
     stateSnapshot: stateSnapshotSchema,
@@ -405,9 +423,9 @@ export const resolveBuildScenarioSchema = zod.discriminatedUnion("damageType", [
   zod.object({
     damageType: zod.literal("anomaly"),
     skillTag: skillTagSchema,
-    damageMultiplier: zod.union([zod.number(), zod.string()]),
-    attribute: zod.string().optional(),
-    extraAbilityActive: zod.boolean().optional(),
+    damageMultiplier: scenarioDamageMultiplierSchema,
+    attribute: scenarioAttributeSchema,
+    extraAbilityActive: scenarioExtraAbilityActiveSchema,
     combatTags: combatTagListSchema.optional(),
     dynamicSnapshot: dynamicSnapshotSchema,
     stateSnapshot: stateSnapshotSchema,
@@ -417,10 +435,10 @@ export const resolveBuildScenarioSchema = zod.discriminatedUnion("damageType", [
   zod.object({
     damageType: zod.literal("disorder"),
     skillTag: skillTagSchema,
-    anomalyType: zod.string(),
-    remainingTime: zod.number().min(0),
-    attribute: zod.string().optional(),
-    extraAbilityActive: zod.boolean().optional(),
+    anomalyType: scenarioAnomalyTypeSchema,
+    remainingTime: scenarioRemainingTimeSchema,
+    attribute: scenarioAttributeSchema,
+    extraAbilityActive: scenarioExtraAbilityActiveSchema,
     combatTags: combatTagListSchema.optional(),
     dynamicSnapshot: dynamicSnapshotSchema,
     stateSnapshot: stateSnapshotSchema,
@@ -521,8 +539,8 @@ export const skillMatrixFinalPanelSchema = finalPanelSchema.pick({
 })
 
 export const resolveBuildSkillMatrixContextSchema = zod.object({
-  attribute: zod.string().optional(),
-  extraAbilityActive: zod.boolean().optional(),
+  attribute: scenarioAttributeSchema,
+  extraAbilityActive: scenarioExtraAbilityActiveSchema,
   combatTags: combatTagListSchema.optional(),
   enemy: enemySchema,
 })
