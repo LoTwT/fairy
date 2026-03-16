@@ -180,6 +180,10 @@ export type BuhflipVersionIndex = number
 
 export type BuhflipVersionRecordKey = string
 
+export type BuhflipTextPairValue = string
+
+export type BuhflipTextPair = [BuhflipTextPairValue, BuhflipTextPairValue]
+
 export type BuhflipElementMultiplier = number
 
 export type BuhflipElementMultiplierTuple = [
@@ -243,8 +247,8 @@ export interface BuhflipEnemy {
   tags: BuhflipEnemyTagList
   /** In-combat modifiers, e.g. "40-dmg-res", "no-freeze" */
   mods: BuhflipEnemyModifierList
-  desc?: [string, string]
-  perf?: [string, string]
+  desc?: BuhflipTextPair
+  perf?: BuhflipTextPair
   misc?: string
   spoilerDesc?: string
   spoilerPerf?: string

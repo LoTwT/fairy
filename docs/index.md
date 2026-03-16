@@ -294,4 +294,5 @@
 - [静态构筑解析系统 V394](./specs/static-build-resolver-v394.md) — 当前阶段：进行中；`buhflipexplode/index.ts` 中 `SD/DA/TS` 的版本 record key 正在统一复用显式 alias
 - [静态构筑解析系统 V395](./specs/static-build-resolver-v395.md) — 当前阶段：进行中；`buhflipexplode/index.ts` 中 `BuhflipEnemyDB` 的顶层 record key 正在统一复用显式 enemy-id alias
 - [静态构筑解析系统 V396](./specs/static-build-resolver-v396.md) — 当前阶段：进行中；`buhflipexplode/index.ts` 中 `buffName / buffDesc / buffNames` 正在统一复用显式 buff 文本 alias
-- [静态构筑解析系统 V397](./specs/static-build-resolver-v397.md) — 当前阶段：进行中；`buhflipexplode/index.ts` 中敌人与 SD side 的元素倍率五元组正在统一复用显式 tuple alias
+- [静态构筑解析系统 V397](./specs/static-build-resolver-v397.md) — 当前阶段：已收口；`buhflipexplode/index.ts` 中敌人与 SD side 的元素倍率五元组已统一复用显式 tuple alias
+- [静态构筑解析系统 V398](./specs/static-build-resolver-v398.md) — 当前阶段：已收口；`buhflipexplode/index.ts` 中敌人 `desc / perf` 的匿名文本二元 tuple 已统一复用显式 alias

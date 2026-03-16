@@ -1145,4 +1145,5 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 394. `V394` buhflipexplode version record key contracts：当前阶段进行中；`buhflipexplode/index.ts` 中 `SD/DA/TS` 的版本 record key 正在统一复用显式 alias，见 [静态构筑解析系统 V394](./static-build-resolver-v394.md)
 395. `V395` buhflipexplode enemy db key contracts：当前阶段进行中；`buhflipexplode/index.ts` 中 `BuhflipEnemyDB` 的顶层 record key 正在统一复用显式 enemy-id alias，见 [静态构筑解析系统 V395](./static-build-resolver-v395.md)
 396. `V396` buhflipexplode buff text contracts：当前阶段进行中；`buhflipexplode/index.ts` 中 `buffName / buffDesc / buffNames` 正在统一复用显式 buff 文本 alias，见 [静态构筑解析系统 V396](./static-build-resolver-v396.md)
-397. `V397` buhflipexplode element multiplier tuple contracts：当前阶段进行中；`buhflipexplode/index.ts` 中敌人与 SD side 的元素倍率五元组正在统一复用显式 tuple alias，见 [静态构筑解析系统 V397](./static-build-resolver-v397.md)
+397. `V397` buhflipexplode element multiplier tuple contracts：当前阶段已收口；`buhflipexplode/index.ts` 中敌人与 SD side 的元素倍率五元组已统一复用显式 tuple alias，见 [静态构筑解析系统 V397](./static-build-resolver-v397.md)
+398. `V398` buhflipexplode text pair contracts：当前阶段已收口；`buhflipexplode/index.ts` 中敌人 `desc / perf` 的匿名文本二元 tuple 已统一复用显式 alias，见 [静态构筑解析系统 V398](./static-build-resolver-v398.md)

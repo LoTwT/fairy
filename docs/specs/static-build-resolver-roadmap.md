@@ -14025,3 +14025,29 @@ caveatSummary` 这些兼容字段补齐。
 
 - `V397.1` 已完成：范围冻结到 buhflipexplode element multiplier tuple contract
 - `V397.2` 已完成：元素倍率五元组已统一复用显式 tuple alias
+
+## 401. V398 buhflipexplode text pair contracts
+
+### 401.1 目标
+
+`V398` 只解决一件事：
+
+- 把 `buhflipexplode` 的文本 pair 统一改成显式 tuple alias。
+
+### 401.2 范围
+
+1. `BuhflipTextPairValue`
+2. `BuhflipTextPair`
+3. `BuhflipEnemy.desc`
+4. `BuhflipEnemy.perf`
+
+### 401.3 非目标
+
+1. 不改任何 raw/published JSON shape
+2. 不改 `misc / spoilerDesc / spoilerPerf` 的单字符串语义
+3. 不改 `buff` 或 `element multiplier` contract
+
+### 401.4 当前状态
+
+- `V398.1` 已完成：范围冻结到 buhflipexplode text pair contract
+- `V398.2` 已完成：敌人 `desc / perf` 已统一复用显式 text-pair alias

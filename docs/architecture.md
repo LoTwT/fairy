@@ -384,4 +384,5 @@ const total = base * bonus * crit * resistance * custom
 - `V394` buhflipexplode version record key contracts：当前阶段进行中；`buhflipexplode/index.ts` 中 `SD/DA/TS` 的版本 record key 正在统一复用显式 alias
 - `V395` buhflipexplode enemy db key contracts：当前阶段进行中；`buhflipexplode/index.ts` 中 `BuhflipEnemyDB` 的顶层 record key 正在统一复用显式 enemy-id alias
 - `V396` buhflipexplode buff text contracts：当前阶段进行中；`buhflipexplode/index.ts` 中 `buffName / buffDesc / buffNames` 正在统一复用显式 buff 文本 alias
-- `V397` buhflipexplode element multiplier tuple contracts：当前阶段进行中；`buhflipexplode/index.ts` 中敌人与 SD side 的元素倍率五元组正在统一复用显式 tuple alias
+- `V397` buhflipexplode element multiplier tuple contracts：当前阶段已收口；`buhflipexplode/index.ts` 中敌人与 SD side 的元素倍率五元组已统一复用显式 tuple alias
+- `V398` buhflipexplode text pair contracts：当前阶段已收口；`buhflipexplode/index.ts` 中敌人 `desc / perf` 的匿名文本二元 tuple 已统一复用显式 alias
