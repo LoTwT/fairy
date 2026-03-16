@@ -120,6 +120,12 @@ export interface BuildToolDriveDiscSetInput {
   pieces: StaticBuildDriveDiscPieces
 }
 
+export interface BuildToolEffectOverrideInput {
+  effectId: string
+  enabled?: boolean
+  stacks?: number
+}
+
 export interface BuildToolEnemyInput {
   attackerLevel?: StaticBuildAgentLevel
   defenderBaseDefense: StaticBuildDefenderBaseDefense
@@ -371,6 +377,12 @@ export const driveDiscSetSchema = zod.object({
   pieces: zod.union([zod.literal(2), zod.literal(4)]),
 })
 
+export const effectOverrideSchema = zod.object({
+  effectId: zod.string(),
+  enabled: zod.boolean().optional(),
+  stacks: zod.number().int().min(0).optional(),
+})
+
 export const resolveBuildInputSchema = zod.object({
   agent: zod.string().describe("代理人名称或 ID"),
   wEngine: zod.string().optional().describe("音擎名称或 ID"),
@@ -386,15 +398,7 @@ export const resolveBuildInputSchema = zod.object({
   manualBaseMode: zod.enum(["baseline", "full-buff"]).optional(),
   finalPanel: finalPanelSchema,
   scenario: resolveBuildScenarioSchema,
-  effectOverrides: zod
-    .array(
-      zod.object({
-        effectId: zod.string(),
-        enabled: zod.boolean().optional(),
-        stacks: zod.number().int().min(0).optional(),
-      }),
-    )
-    .optional(),
+  effectOverrides: zod.array(effectOverrideSchema).optional(),
 })
 
 export const resolveBuildSourceUtilityInputSchema = zod.object({
@@ -416,15 +420,7 @@ export const resolveBuildSourceEntriesInputSchema =
       .default("baseline"),
     manualBaseMode: zod.enum(["baseline", "full-buff"]).optional(),
     scenario: resolveBuildScenarioSchema.optional(),
-    effectOverrides: zod
-      .array(
-        zod.object({
-          effectId: zod.string(),
-          enabled: zod.boolean().optional(),
-          stacks: zod.number().int().min(0).optional(),
-        }),
-      )
-      .optional(),
+    effectOverrides: zod.array(effectOverrideSchema).optional(),
   })
 
 export const skillMatrixFinalPanelSchema = finalPanelSchema.pick({
@@ -460,15 +456,7 @@ export const resolveBuildSkillMatrixInputSchema = zod.object({
   manualBaseMode: zod.enum(["baseline", "full-buff"]).optional(),
   finalPanel: skillMatrixFinalPanelSchema,
   context: resolveBuildSkillMatrixContextSchema,
-  effectOverrides: zod
-    .array(
-      zod.object({
-        effectId: zod.string(),
-        enabled: zod.boolean().optional(),
-        stacks: zod.number().int().min(0).optional(),
-      }),
-    )
-    .optional(),
+  effectOverrides: zod.array(effectOverrideSchema).optional(),
   includeDetails: zod
     .boolean()
     .optional()
