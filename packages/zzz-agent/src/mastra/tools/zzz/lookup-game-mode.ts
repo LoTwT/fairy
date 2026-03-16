@@ -28,10 +28,44 @@ import {
 } from "zzz-data"
 import { loadJson, normalizeDamageAttribute } from "./utils"
 
+export type LookupGameModeAttributeInput = string | undefined
+
+export type LookupGameModeEncounterCandidateName = string
+
+export type LookupGameModeEncounterNode = number | undefined
+
+export type LookupGameModeEncounterSide = number | undefined
+
+export type LookupGameModeEncounterWave = number | undefined
+
+export interface LookupGameModeEncounterCandidate {
+  name: LookupGameModeEncounterCandidateName
+  node: LookupGameModeEncounterNode
+  side: LookupGameModeEncounterSide
+  wave: LookupGameModeEncounterWave
+}
+
+export type LookupGameModeRecommendedResistance = number
+
+export interface LookupGameModeDamageContext {
+  enemyName: string
+  attribute: NonNullable<ReturnType<typeof normalizeDamageAttribute>>
+  elementMultiplier: number
+  defenderBaseDefense: number
+  recommendedDefenderResistance: LookupGameModeRecommendedResistance
+  weaknesses: EncounterDamageContext["weaknesses"] | undefined
+  resistances: EncounterDamageContext["resistances"] | undefined
+  mechanics: EncounterDamageContext["mechanics"]
+  node: EncounterDamageContext["node"]
+  side: EncounterDamageContext["side"]
+  wave: EncounterDamageContext["wave"]
+  sideElementMultiplier: EncounterDamageContext["sideElementMultiplier"]
+}
+
 function toLookupDamageContext(
   context: EncounterDamageContext | undefined,
-  attributeInput: string | undefined,
-) {
+  attributeInput: LookupGameModeAttributeInput,
+): LookupGameModeDamageContext | undefined {
   if (!context) return undefined
 
   const attribute = normalizeDamageAttribute(attributeInput)
@@ -56,7 +90,9 @@ function toLookupDamageContext(
   }
 }
 
-function toEncounterCandidate(candidate: FlattenedEnemyView) {
+function toEncounterCandidate(
+  candidate: FlattenedEnemyView,
+): LookupGameModeEncounterCandidate {
   return {
     name: candidate.enemy.name,
     node: candidate.node,

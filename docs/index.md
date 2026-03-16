@@ -274,3 +274,4 @@
 - [静态构筑解析系统 V374](./specs/static-build-resolver-v374.md) — 当前阶段：已收口；`zzz-scorer.ts` 的公开匹配 flag、section list 和 score contract 已统一复用显式 alias
 - [静态构筑解析系统 V375](./specs/static-build-resolver-v375.md) — 当前阶段：已收口；`resolve-build-catalog.ts` 的 field-list 与候选分数 contract 已统一复用显式 alias / interface
 - [静态构筑解析系统 V376](./specs/static-build-resolver-v376.md) — 当前阶段：已收口；`lookup-agent.ts` 的 query、skill-type list 与 calculated-stat map 已统一复用显式 alias
+- [静态构筑解析系统 V377](./specs/static-build-resolver-v377.md) — 当前阶段：已收口；`lookup-game-mode.ts` 的 attribute 输入、encounter candidate 与 damageContext 输出已统一复用显式 alias / interface

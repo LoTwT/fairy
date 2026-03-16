@@ -1125,3 +1125,4 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 374. `V374` agent scorer match contracts：当前阶段已收口；`zzz-scorer.ts` 的公开匹配 flag、section list 和 score contract 已统一复用显式 alias，不改变任何 scorer 逻辑，见 [静态构筑解析系统 V374](./static-build-resolver-v374.md)
 375. `V375` agent catalog helper score contracts：当前阶段已收口；`resolve-build-catalog.ts` 的 field-list 与候选分数 contract 已统一复用显式 alias / interface，不改变任何 catalog 匹配逻辑，见 [静态构筑解析系统 V375](./static-build-resolver-v375.md)
 376. `V376` agent lookup helper contracts：当前阶段已收口；`lookup-agent.ts` 的 query、skill-type list 与 calculated-stat map 已统一复用显式 alias，不改变任何 lookup、过滤或面板计算逻辑，见 [静态构筑解析系统 V376](./static-build-resolver-v376.md)
+377. `V377` game-mode lookup helper contracts：当前阶段已收口；`lookup-game-mode.ts` 的 attribute 输入、encounter candidate 与 damageContext 输出已统一复用显式 alias / interface，不改变任何 DA/SD/TS 查询逻辑，见 [静态构筑解析系统 V377](./static-build-resolver-v377.md)

@@ -13285,3 +13285,37 @@ caveatSummary` 这些兼容字段补齐。
 - `V376.2` 已完成：`lookup-agent.ts` 的 query、skill-type list 与 calculated-stat map 已统一复用显式 alias
 - `V376.3` 已完成：全量校验与提交
 - `V376.4` 已完成：roadmap、索引与架构文档同步
+
+## 380. V377 game-mode lookup helper contracts
+
+### 380.1 目标
+
+`V377` 只解决一件事：
+
+- 把 `lookup-game-mode.ts` 的 attribute 输入、encounter candidate 与 damageContext 输出统一改成显式 alias / interface。
+
+### 380.2 范围
+
+1. `LookupGameModeAttributeInput`
+2. `LookupGameModeEncounterCandidateName`
+3. `LookupGameModeEncounterNode`
+4. `LookupGameModeEncounterSide`
+5. `LookupGameModeEncounterWave`
+6. `LookupGameModeEncounterCandidate`
+7. `LookupGameModeRecommendedResistance`
+8. `LookupGameModeDamageContext`
+9. `toLookupDamageContext()`
+10. `toEncounterCandidate()`
+
+### 380.3 非目标
+
+1. 不改 DA/SD/TS 查询逻辑
+2. 不改敌人定位或 damageContext 生成逻辑
+3. 不改 tool 返回字段语义
+
+### 380.4 当前状态
+
+- `V377.1` 已完成：范围冻结到 game-mode lookup helper contract
+- `V377.2` 已完成：`lookup-game-mode.ts` 的 attribute 输入、encounter candidate 与 damageContext 输出已统一复用显式 alias / interface
+- `V377.3` 已完成：全量校验与提交
+- `V377.4` 已完成：roadmap、索引与架构文档同步
