@@ -441,5 +441,7 @@ const total = base * bonus * crit * resistance * custom
 - `V460` compact disorder damage params contracts：当前阶段已收口；`build/compact.ts` 中 `CompactStaticBuildDisorderDamageParams` 已统一改为显式 interface
 - `V461` canonical term group contracts：当前阶段已收口；`terms.ts` 中 `CanonicalTermGroupMap` 已统一复用显式 key/list alias
 - `V462` gachabase string value contracts：当前阶段已收口；`gachabase/types.ts` 中 `GachabaseStringValueList` 已统一复用显式基础文本 alias
+- `V463` cleaned source object contracts：当前阶段已收口；`cleaned/types.ts` 中 `EnemyDamageContextSource / DABuffSource` 已统一改为显式 interface
+- `V464` cleaned flattened enemy specialization contracts：当前阶段已收口；`cleaned/types.ts` 中 `DA / SD / TS` 的 flattened enemy specialization 已统一改为显式 interface
 - `V459` calculator disorder damage params contracts：当前阶段已收口；`calculator/types.ts` 中 `DisorderDamageParams` 已统一改为显式 interface
 - `V460` compact disorder damage params contracts：当前阶段已收口；`build/compact.ts` 中 `CompactStaticBuildDisorderDamageParams` 已统一改为显式 interface

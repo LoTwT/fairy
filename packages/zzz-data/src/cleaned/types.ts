@@ -1,8 +1,17 @@
 import type {
-  DABuff,
   DAEnemyItem,
   ElementMult,
   EnemyBase,
+  GameModeBuffEffect,
+  GameModeBuffIconUrl,
+  GameModeBuffKey,
+  GameModeBuffName,
+  GameModeEnemyDaze,
+  GameModeEnemyDefense,
+  GameModeEnemyId,
+  GameModeEnemyName,
+  GameModeStunMultiplier,
+  GameModeStunTime,
   SDEnemyItem,
   TSBossEnemyItem,
   TSRegularEnemyItem,
@@ -30,14 +39,14 @@ export interface ElementMultiplierCarrier {
   elementMult: ElementMultiplierTuple
 }
 
-export interface EnemyDamageContextSource extends Omit<
-  Pick<
-    EnemyBase,
-    "id" | "name" | "elementMult" | "stunMult" | "stunTime" | "def" | "daze"
-  >,
-  "elementMult"
-> {
+export interface EnemyDamageContextSource {
+  id: GameModeEnemyId
+  name: GameModeEnemyName
   elementMult: ElementMultiplierTuple
+  stunMult: GameModeStunMultiplier
+  stunTime: GameModeStunTime
+  def: GameModeEnemyDefense
+  daze: GameModeEnemyDaze
 }
 
 export interface EnemyDamageContext {
@@ -110,7 +119,16 @@ export interface DABuffView {
   iconUrl?: string
 }
 
-export interface DAEnemyView extends FlattenedEnemyView<DAEnemyItem> {}
+export interface DAEnemyView {
+  node?: number
+  side?: number
+  wave?: number
+  enemyIndex: number
+  count: number
+  enemy: DAEnemyItem
+  sideElementMultRaw?: ElementMultiplierTuple
+  sideElementMult?: ElementMultiplierMap
+}
 
 export interface SDSideView {
   side: number
@@ -122,7 +140,16 @@ export interface SDSideView {
   altHp: number
   enemies: SDSideEnemyViewList
 }
-export type SDSideEnemyView = FlattenedEnemyView<SDEnemyItem>
+export interface SDSideEnemyView {
+  node?: number
+  side?: number
+  wave?: number
+  enemyIndex: number
+  count: number
+  enemy: SDEnemyItem
+  sideElementMultRaw?: ElementMultiplierTuple
+  sideElementMult?: ElementMultiplierMap
+}
 export type SDSideEnemyViewList = SDSideEnemyView[]
 
 export type SDNodeBuffName = string
@@ -172,9 +199,29 @@ export interface TSRegularSideView {
 }
 
 export type TSSideView = TSBossSideView | TSRegularSideView
-export type TSBossSideEnemyView = TSFlattenedEnemyView<TSBossEnemyItem>
+export interface TSBossSideEnemyView {
+  node?: number
+  side?: number
+  wave?: number
+  enemyIndex: number
+  count: number
+  enemy: TSBossEnemyItem
+  sideElementMultRaw?: ElementMultiplierTuple
+  sideElementMult?: ElementMultiplierMap
+  sideRole: "boss"
+}
 export type TSBossSideEnemyViewList = TSBossSideEnemyView[]
-export type TSRegularSideEnemyView = TSFlattenedEnemyView<TSRegularEnemyItem>
+export interface TSRegularSideEnemyView {
+  node?: number
+  side?: number
+  wave?: number
+  enemyIndex: number
+  count: number
+  enemy: TSRegularEnemyItem
+  sideElementMultRaw?: ElementMultiplierTuple
+  sideElementMult?: ElementMultiplierMap
+  sideRole: "regular"
+}
 export type TSRegularSideEnemyViewList = TSRegularSideEnemyView[]
 export type TSNodeBuffName = string
 export type TSNodeBuffNameList = TSNodeBuffName[]
@@ -203,4 +250,9 @@ export type ElementMultiplierSource =
   | ElementMultiplierCarrier
   | ElementMultiplierTuple
 
-export type DABuffSource = Pick<DABuff, "key" | "name" | "iconUrl" | "effect">
+export interface DABuffSource {
+  key: GameModeBuffKey
+  name?: GameModeBuffName
+  iconUrl?: GameModeBuffIconUrl
+  effect: GameModeBuffEffect
+}

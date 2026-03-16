@@ -360,3 +360,5 @@
 - [静态构筑解析系统 V460](./specs/static-build-resolver-v460.md) — 当前阶段：已收口；`build/compact.ts` 中 `CompactStaticBuildDisorderDamageParams` 已统一改为显式 interface
 - [静态构筑解析系统 V461](./specs/static-build-resolver-v461.md) — 当前阶段：已收口；`terms.ts` 中 `CanonicalTermGroupMap` 已统一复用显式 key/list alias
 - [静态构筑解析系统 V462](./specs/static-build-resolver-v462.md) — 当前阶段：已收口；`gachabase/types.ts` 中 `GachabaseStringValueList` 已统一复用显式基础文本 alias
+- [静态构筑解析系统 V463](./specs/static-build-resolver-v463.md) — 当前阶段：已收口；`cleaned/types.ts` 中 `EnemyDamageContextSource / DABuffSource` 已统一改为显式 interface
+- [静态构筑解析系统 V464](./specs/static-build-resolver-v464.md) — 当前阶段：已收口；`cleaned/types.ts` 中 `DA / SD / TS` 的 flattened enemy specialization 已统一改为显式 interface
