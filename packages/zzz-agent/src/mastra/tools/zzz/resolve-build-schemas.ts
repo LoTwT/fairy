@@ -263,20 +263,20 @@ export const dynamicSnapshotSchema = zod
   })
   .optional()
 
+export const stateSnapshotFlagsSchema = zod.object({
+  alicePolarityAssaultState: zod.boolean().optional(),
+  miyabiFrostburnBreakState: zod.boolean().optional(),
+})
+
+export const stateSnapshotValuesSchema = zod.object({
+  alicePolarityAssaultDamageRatio: zod.number().min(0).optional(),
+  miyabiFrostburnBreakDamageRatio: zod.number().min(0).optional(),
+})
+
 export const stateSnapshotSchema = zod
   .object({
-    flags: zod
-      .object({
-        alicePolarityAssaultState: zod.boolean().optional(),
-        miyabiFrostburnBreakState: zod.boolean().optional(),
-      })
-      .optional(),
-    values: zod
-      .object({
-        alicePolarityAssaultDamageRatio: zod.number().min(0).optional(),
-        miyabiFrostburnBreakDamageRatio: zod.number().min(0).optional(),
-      })
-      .optional(),
+    flags: stateSnapshotFlagsSchema.optional(),
+    values: stateSnapshotValuesSchema.optional(),
   })
   .optional()
 

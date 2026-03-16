@@ -376,3 +376,4 @@
 - [静态构筑解析系统 V476](./specs/static-build-resolver-v476.md) — 当前阶段：已收口；`resolve-build-schemas.ts` 中 `resolvedSnapshot` 的匿名嵌套对象已统一复用显式 interface
 - [静态构筑解析系统 V477](./specs/static-build-resolver-v477.md) — 当前阶段：已收口；`resolve-build-schemas.ts` 中 `effectOverrides[]` 的匿名对象已统一复用显式 interface 与共享 schema
 - [静态构筑解析系统 V478](./specs/static-build-resolver-v478.md) — 当前阶段：已收口；`resolve-build-schemas.ts` 中 `dynamicSnapshot` 的匿名 nested Zod schema 已统一复用共享 schema 常量
+- [静态构筑解析系统 V479](./specs/static-build-resolver-v479.md) — 当前阶段：已收口；`resolve-build-schemas.ts` 中 `stateSnapshot` 的匿名 nested Zod schema 已统一复用共享 schema 常量
