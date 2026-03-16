@@ -465,5 +465,6 @@ const total = base * bonus * crit * resistance * custom
 - `V484` resolve-build final panel scalar schemas：当前阶段已收口；`resolve-build-schemas.ts` 中 `finalPanelSchema` 的重复 scalar schema 已统一复用共享 schema 常量
 - `V485` resolve-build scenario scalar schemas：当前阶段已收口；`resolve-build-schemas.ts` 中 `scenario/context` 的重复 scalar schema 已统一复用共享 schema 常量
 - `V486` resolve-build dynamic snapshot scalar schemas：当前阶段已收口；`resolve-build-schemas.ts` 中 `dynamicSnapshot` 的 leaf scalar schema 已统一复用共享 schema 常量
+- `V487` resolve-build state snapshot scalar schemas：当前阶段已收口；`resolve-build-schemas.ts` 中 `stateSnapshot` 的 leaf scalar schema 已统一复用共享 schema 常量
 - `V459` calculator disorder damage params contracts：当前阶段已收口；`calculator/types.ts` 中 `DisorderDamageParams` 已统一改为显式 interface
 - `V460` compact disorder damage params contracts：当前阶段已收口；`build/compact.ts` 中 `CompactStaticBuildDisorderDamageParams` 已统一改为显式 interface
