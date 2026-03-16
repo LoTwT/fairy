@@ -59,6 +59,86 @@ export type LookupAgentCalculatedStatMap = Record<
   LookupAgentCalculatedStatValue
 >
 
+export type LookupAgentSkillGroupId = string
+
+export type LookupAgentSkillGroupName = string
+
+export type LookupAgentSkillDescriptionName = string
+
+export type LookupAgentSkillDescriptionText = string
+
+export interface LookupAgentSkillDescriptionEntry {
+  name: LookupAgentSkillDescriptionName
+  description: LookupAgentSkillDescriptionText
+}
+
+export type LookupAgentSkillDescriptionEntryList =
+  LookupAgentSkillDescriptionEntry[]
+
+export type LookupAgentSkillStatName = string
+
+export type LookupAgentSkillStatValueList = string[]
+
+export interface LookupAgentSkillStatEntry {
+  name: LookupAgentSkillStatName
+  values: LookupAgentSkillStatValueList
+}
+
+export type LookupAgentSkillStatEntryList = LookupAgentSkillStatEntry[]
+
+export interface LookupAgentSkillGroupEntry {
+  typeId: LookupAgentSkillGroupId
+  typeName: LookupAgentSkillGroupName
+  descriptions: LookupAgentSkillDescriptionEntryList
+  stats: LookupAgentSkillStatEntryList
+}
+
+export type LookupAgentSkillGroupEntryList = LookupAgentSkillGroupEntry[]
+
+export type LookupAgentCoreSkillLevel = number
+
+export type LookupAgentCoreSkillTypeName = string
+
+export interface LookupAgentCoreSkillEntry {
+  level: LookupAgentCoreSkillLevel
+  typeName: LookupAgentCoreSkillTypeName
+  skills: LookupAgentSkillDescriptionEntryList
+  statBoosts: AgentDetails["coreSkills"][number]["statBoosts"]
+}
+
+export type LookupAgentCoreSkillEntryList = LookupAgentCoreSkillEntry[]
+
+export type LookupAgentMindscapeLevel = number
+
+export type LookupAgentMindscapeName = string
+
+export type LookupAgentMindscapeDescriptionText = string
+
+export interface LookupAgentMindscapeEntry {
+  level: LookupAgentMindscapeLevel
+  name: LookupAgentMindscapeName
+  description: LookupAgentMindscapeDescriptionText
+}
+
+export type LookupAgentMindscapeEntryList = LookupAgentMindscapeEntry[]
+
+export type LookupAgentStatEntryId = string
+
+export type LookupAgentStatEntryName = string
+
+export type LookupAgentStatEntryValue = number
+
+export type LookupAgentStatGrowthPerLevel = number | null
+
+export interface LookupAgentStatEntry {
+  id: LookupAgentStatEntryId
+  name: LookupAgentStatEntryName
+  value: LookupAgentStatEntryValue
+  growthPerLevel: LookupAgentStatGrowthPerLevel
+}
+
+export type LookupAgentStatEntryList = LookupAgentStatEntry[]
+
 export type LookupAgentTrimmedResultKey = string
 
 export type LookupAgentTrimmedResultValue = unknown
@@ -145,7 +225,7 @@ function trimAgent(
   // Trim skills — strip HTML, keep descriptions and stats
   const requestedSkillTypes: LookupAgentSkillTypeList =
     skillTypes?.map(normalizeSkillToken) ?? []
-  const skills = detail.skills
+  const skills: LookupAgentSkillGroupEntryList = detail.skills
     .filter((sg) => {
       if (!requestedSkillTypes.length) return true
       return requestedSkillTypes.some(
@@ -154,44 +234,62 @@ function trimAgent(
           normalizeSkillToken(sg.typeName) === token,
       )
     })
-    .map((sg) => ({
-      typeId: sg.typeId,
-      typeName: sg.typeName,
-      descriptions: sg.descriptions.map((d) => ({
-        name: d.name,
-        description: stripHtml(d.description),
-      })),
-      stats: sg.stats.map((s) => ({
-        name: s.name,
-        values: s.values,
-      })),
-    }))
+    .map(
+      (sg) =>
+        ({
+          typeId: sg.typeId,
+          typeName: sg.typeName,
+          descriptions: sg.descriptions.map(
+            (d) =>
+              ({
+                name: d.name,
+                description: stripHtml(d.description),
+              }) satisfies LookupAgentSkillDescriptionEntry,
+          ),
+          stats: sg.stats.map(
+            (s) =>
+              ({
+                name: s.name,
+                values: s.values,
+              }) satisfies LookupAgentSkillStatEntry,
+          ),
+        }) satisfies LookupAgentSkillGroupEntry,
+    )
 
   // Trim core skills — filter first, then map to avoid unnecessary stripHtml
-  const filteredCoreSkills = (
+  const filteredCoreSkills: LookupAgentCoreSkillEntryList = (
     coreSkillLevel !== undefined
       ? detail.coreSkills.filter((c) => c.level === coreSkillLevel)
       : detail.coreSkills
-  ).map((c) => ({
-    level: c.level,
-    typeName: c.typeName,
-    skills: c.skills.map((s) => ({
-      name: s.name,
-      description: stripHtml(s.description),
-    })),
-    statBoosts: c.statBoosts,
-  }))
+  ).map(
+    (c) =>
+      ({
+        level: c.level,
+        typeName: c.typeName,
+        skills: c.skills.map(
+          (s) =>
+            ({
+              name: s.name,
+              description: stripHtml(s.description),
+            }) satisfies LookupAgentSkillDescriptionEntry,
+        ),
+        statBoosts: c.statBoosts,
+      }) satisfies LookupAgentCoreSkillEntry,
+  )
 
   // Trim mindscapes — only include up to requested level; 0 or undefined → empty
-  const mindscapes =
+  const mindscapes: LookupAgentMindscapeEntryList =
     mindscape !== undefined && mindscape > 0
       ? detail.mindscapes
           .filter((m) => m.level <= mindscape)
-          .map((m) => ({
-            level: m.level,
-            name: m.name,
-            description: stripHtml(m.description),
-          }))
+          .map(
+            (m) =>
+              ({
+                level: m.level,
+                name: m.name,
+                description: stripHtml(m.description),
+              }) satisfies LookupAgentMindscapeEntry,
+          )
       : []
 
   // When calculatedStats is available, omit raw stats/promotions to reduce context
@@ -210,12 +308,15 @@ function trimAgent(
   }
 
   if (!compact && !calculatedStats) {
-    result.stats = detail.stats.map((s) => ({
-      id: s.id,
-      name: s.name,
-      value: s.value,
-      growthPerLevel: s.growthPerLevel,
-    }))
+    result.stats = detail.stats.map(
+      (s) =>
+        ({
+          id: s.id,
+          name: s.name,
+          value: s.value,
+          growthPerLevel: s.growthPerLevel,
+        }) satisfies LookupAgentStatEntry,
+    )
     result.promotions = detail.promotions
   }
 

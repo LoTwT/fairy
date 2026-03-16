@@ -1181,3 +1181,4 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 430. `V430` lookup-w-engine list contracts：当前阶段已收口；`lookup-w-engine.ts` 中列表项与未命中候选项的结果 contract 已统一复用显式 alias / interface，不改变任何筛选、匹配或属性计算逻辑，见 [静态构筑解析系统 V430](./static-build-resolver-v430.md)
 431. `V431` bangboo and drive-disc list contracts：当前阶段已收口；`lookup-bangboo.ts` 与 `lookup-drive-disc.ts` 中列表项和未命中候选项的结果 contract 已统一复用显式 alias / interface，不改变任何查询、筛选、匹配或属性计算逻辑，见 [静态构筑解析系统 V431](./static-build-resolver-v431.md)
 432. `V432` lookup-agent list contracts：当前阶段已收口；`lookup-agent.ts` 中列表模式与未命中候选项的结果 contract 已统一复用显式 alias / interface，不改变任何查询、筛选、匹配或属性计算逻辑，见 [静态构筑解析系统 V432](./static-build-resolver-v432.md)
+433. `V433` lookup-agent trimmed nested contracts：当前阶段已收口；`lookup-agent.ts` 的 trimmed result 中 `skills / coreSkills / mindscapes / stats` 的匿名嵌套 contract 已统一复用显式 alias / interface，不改变任何技能过滤、文本裁剪或属性计算逻辑，见 [静态构筑解析系统 V433](./static-build-resolver-v433.md)
