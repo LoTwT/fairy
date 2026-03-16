@@ -13858,3 +13858,31 @@ caveatSummary` 这些兼容字段补齐。
 - `V391.2` 已完成：`BuffsJson` 已统一复用显式 record-key alias
 - `V391.3` 已完成：全量校验与提交
 - `V391.4` 已完成：roadmap、索引与架构文档同步
+
+## 395. V392 buhflipexplode wave object contracts
+
+### 395.1 目标
+
+`V392` 只解决一件事：
+
+- 把 `buhflipexplode` 里剩余的 wave object 统一改成显式 named interface。
+
+### 395.2 范围
+
+1. `SDWave`
+2. `TSWave`
+3. `SDSide.waves`
+4. `TSSide.waves`
+
+### 395.3 非目标
+
+1. 不改任何 raw/published JSON shape
+2. 不改 enemy/version 公式 helper
+3. 不改版本外层匿名 object contract
+
+### 395.4 当前状态
+
+- `V392.1` 已完成：范围冻结到 buhflipexplode wave object contract
+- `V392.2` 已完成：`SDSide.waves` 与 `TSSide.waves` 已统一复用显式 named interface
+- `V392.3` 已完成：全量校验与提交
+- `V392.4` 已完成：roadmap、索引与架构文档同步

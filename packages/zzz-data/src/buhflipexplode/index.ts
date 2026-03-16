@@ -243,11 +243,14 @@ export interface SDEnemyRef {
   type: BuhflipEnemyRefType
   count: BuhflipEnemyCount
 }
+export interface SDWave {
+  enemies: SDEnemyRef[]
+}
 export interface SDSide {
   /** Elemental damage multipliers [ice, fire, electric, ether, physical] for this side */
   sideElementMult: [number, number, number, number, number]
   sideHPMult: BuhflipEnemyHPMult
-  waves: Array<{ enemies: SDEnemyRef[] }>
+  waves: SDWave[]
 }
 export interface SDNode {
   buffName: string | string[]
@@ -299,9 +302,12 @@ export interface TSEnemyRef {
   /** Boss mult (absent for regular enemies) */
   mult?: BuhflipBossHPMult
 }
+export interface TSWave {
+  enemies: TSEnemyRef[]
+}
 export interface TSSide {
   sideHPMult?: BuhflipEnemyHPMult
-  waves: Array<{ enemies: TSEnemyRef[] }>
+  waves: TSWave[]
 }
 export interface TSNode {
   buffNames: string[]
