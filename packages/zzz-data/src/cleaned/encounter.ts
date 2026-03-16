@@ -1,15 +1,19 @@
 import type { EnemyBase } from "../game-modes.js"
 import type { AgentAttributeLabel } from "../terms.js"
 import type {
+  EncounterCandidateList,
   EncounterDamageContext,
+  EncounterMatchList,
+  EncounterResistanceList,
   EncounterSelectionResult,
+  EncounterWeaknessList,
   FlattenedEnemyView,
 } from "./types.js"
 import { buildEnemyDamageContext, getEnemyElementMultiplier } from "./enemy.js"
 
 interface EncounterEnemy extends EnemyBase {
-  weaknesses?: string[]
-  resistances?: string[]
+  weaknesses?: EncounterWeaknessList
+  resistances?: EncounterResistanceList
   mechanics?: string
 }
 
@@ -19,7 +23,7 @@ function normalizeText(value: string): string {
 
 function getCandidateNames<
   TEncounter extends FlattenedEnemyView<EncounterEnemy>,
->(encounters: readonly TEncounter[]): string[] {
+>(encounters: readonly TEncounter[]): EncounterCandidateList {
   return [...new Set(encounters.map((encounter) => encounter.enemy.name))]
 }
 
@@ -43,8 +47,8 @@ export function selectEncounterByEnemyName<
   }
 
   const normalizedName = normalizeText(enemyName)
-  const matches = encounters.filter((encounter) =>
-    normalizeText(encounter.enemy.name).includes(normalizedName),
+  const matches: EncounterMatchList<TEncounter> = encounters.filter(
+    (encounter) => normalizeText(encounter.enemy.name).includes(normalizedName),
   )
 
   if (matches.length === 1) {

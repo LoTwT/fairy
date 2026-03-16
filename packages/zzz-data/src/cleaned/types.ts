@@ -67,9 +67,13 @@ export interface EncounterSelectionResult<
   TEncounter extends FlattenedEnemyView = FlattenedEnemyView,
 > {
   selected?: TEncounter
-  matches: TEncounter[]
+  matches: EncounterMatchList<TEncounter>
   candidates: EncounterCandidateList
 }
+
+export type EncounterMatchList<
+  TEncounter extends FlattenedEnemyView = FlattenedEnemyView,
+> = TEncounter[]
 
 export type EncounterCandidate = string
 
