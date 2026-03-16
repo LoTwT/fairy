@@ -358,3 +358,5 @@
 - [静态构筑解析系统 V458](./specs/static-build-resolver-v458.md) — 当前阶段：已收口；`zzz-agent` 各 lookup 工具的 `loadJson<T[]>` raw 列表容器已统一复用命名 list contract
 - [静态构筑解析系统 V459](./specs/static-build-resolver-v459.md) — 当前阶段：已收口；`calculator/types.ts` 中 `DisorderDamageParams` 已统一改为显式 interface
 - [静态构筑解析系统 V460](./specs/static-build-resolver-v460.md) — 当前阶段：已收口；`build/compact.ts` 中 `CompactStaticBuildDisorderDamageParams` 已统一改为显式 interface
+- [静态构筑解析系统 V461](./specs/static-build-resolver-v461.md) — 当前阶段：已收口；`terms.ts` 中 `CanonicalTermGroupMap` 已统一复用显式 key/list alias
+- [静态构筑解析系统 V462](./specs/static-build-resolver-v462.md) — 当前阶段：已收口；`gachabase/types.ts` 中 `GachabaseStringValueList` 已统一复用显式基础文本 alias

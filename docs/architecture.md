@@ -439,3 +439,7 @@ const total = base * bonus * crit * resistance * custom
 - `V449` lookup-game-mode damage-context field contracts：当前阶段已收口；`lookup-game-mode.ts` 的 `damageContext` 剩余 raw field contract 已统一复用显式 alias
 - `V459` calculator disorder damage params contracts：当前阶段已收口；`calculator/types.ts` 中 `DisorderDamageParams` 已统一改为显式 interface
 - `V460` compact disorder damage params contracts：当前阶段已收口；`build/compact.ts` 中 `CompactStaticBuildDisorderDamageParams` 已统一改为显式 interface
+- `V461` canonical term group contracts：当前阶段已收口；`terms.ts` 中 `CanonicalTermGroupMap` 已统一复用显式 key/list alias
+- `V462` gachabase string value contracts：当前阶段已收口；`gachabase/types.ts` 中 `GachabaseStringValueList` 已统一复用显式基础文本 alias
+- `V459` calculator disorder damage params contracts：当前阶段已收口；`calculator/types.ts` 中 `DisorderDamageParams` 已统一改为显式 interface
+- `V460` compact disorder damage params contracts：当前阶段已收口；`build/compact.ts` 中 `CompactStaticBuildDisorderDamageParams` 已统一改为显式 interface

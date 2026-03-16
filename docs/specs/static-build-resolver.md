@@ -1209,3 +1209,5 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 458. `V458` lookup raw list container contracts：当前阶段已收口；`zzz-agent` 各 lookup 工具的 `loadJson<T[]>` raw 列表容器已统一复用命名 list contract，不改变任何查询、筛选或返回逻辑，见 [静态构筑解析系统 V458](./static-build-resolver-v458.md)
 459. `V459` calculator disorder damage params contracts：当前阶段已收口；`calculator/types.ts` 中 `DisorderDamageParams` 已统一改为显式 interface，不改变任何紊乱公式、乘区或返回数值，见 [静态构筑解析系统 V459](./static-build-resolver-v459.md)
 460. `V460` compact disorder damage params contracts：当前阶段已收口；`build/compact.ts` 中 `CompactStaticBuildDisorderDamageParams` 已统一改为显式 interface，不改变任何 compact helper 输出值、字段顺序或可选性，见 [静态构筑解析系统 V460](./static-build-resolver-v460.md)
+461. `V461` canonical term group contracts：当前阶段已收口；`terms.ts` 中 `CanonicalTermGroupMap` 已统一复用显式 key/list alias，不改变任何术语映射表内容或 canonicalize 行为，见 [静态构筑解析系统 V461](./static-build-resolver-v461.md)
+462. `V462` gachabase string value contracts：当前阶段已收口；`gachabase/types.ts` 中 `GachabaseStringValueList` 已统一复用显式基础文本 alias，不改变任何 published JSON shape 或文本内容，见 [静态构筑解析系统 V462](./static-build-resolver-v462.md)

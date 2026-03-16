@@ -11,7 +11,14 @@ export type CanonicalTermText = string
 
 export type NormalizedCanonicalTermText = string
 
-export type CanonicalTermGroupMap = Record<string, readonly CanonicalTermText[]>
+export type CanonicalTermGroupKey = string
+
+export type CanonicalTermTextList = readonly CanonicalTermText[]
+
+export type CanonicalTermGroupMap = Record<
+  CanonicalTermGroupKey,
+  CanonicalTermTextList
+>
 
 function normalizeTerm(value: CanonicalTermText): NormalizedCanonicalTermText {
   return value.toLowerCase().replace(/[\s\-_]/g, "")
