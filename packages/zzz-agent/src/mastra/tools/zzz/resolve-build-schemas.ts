@@ -55,6 +55,12 @@ export type BuildToolSkillTag = StaticBuildSkillTag
 
 export type BuildToolDriveDiscSetName = BuildToolCatalogValue
 
+export type BuildToolEffectOverrideId = string
+
+export type BuildToolEffectOverrideEnabledFlag = boolean
+
+export type BuildToolEffectOverrideStacks = number
+
 export type BuildToolEnemyStunnedFlag = boolean
 
 export type BuildToolDynamicSnapshotFlag = boolean
@@ -123,9 +129,9 @@ export interface BuildToolDriveDiscSetInput {
 }
 
 export interface BuildToolEffectOverrideInput {
-  effectId: string
-  enabled?: boolean
-  stacks?: number
+  effectId: BuildToolEffectOverrideId
+  enabled?: BuildToolEffectOverrideEnabledFlag
+  stacks?: BuildToolEffectOverrideStacks
 }
 
 export interface BuildToolEnemyInput {
@@ -565,10 +571,16 @@ export const manualBaseModeSchema = zod
   .enum(["baseline", "full-buff"])
   .optional()
 
+export const effectOverrideIdSchema = zod.string()
+
+export const effectOverrideEnabledSchema = zod.boolean().optional()
+
+export const effectOverrideStacksSchema = zod.number().int().min(0).optional()
+
 export const effectOverrideSchema = zod.object({
-  effectId: zod.string(),
-  enabled: zod.boolean().optional(),
-  stacks: zod.number().int().min(0).optional(),
+  effectId: effectOverrideIdSchema,
+  enabled: effectOverrideEnabledSchema,
+  stacks: effectOverrideStacksSchema,
 })
 
 export const resolveBuildInputSchema = zod.object({

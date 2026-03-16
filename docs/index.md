@@ -387,3 +387,4 @@
 - [静态构筑解析系统 V487](./specs/static-build-resolver-v487.md) — 当前阶段：已收口；`resolve-build-schemas.ts` 中 `stateSnapshot` 的 leaf scalar schema 已统一复用共享 schema 常量
 - [静态构筑解析系统 V488](./specs/static-build-resolver-v488.md) — 当前阶段：已收口；`resolve-build-schemas.ts` 中 `resolvedSnapshot` 的 delta/factor leaf scalar schema 已统一复用共享 schema 常量
 - [静态构筑解析系统 V489](./specs/static-build-resolver-v489.md) — 当前阶段：已收口；`resolve-build-schemas.ts` 中 `driveDiscSet` 的 leaf schema 已统一复用共享 schema 常量
+- [静态构筑解析系统 V490](./specs/static-build-resolver-v490.md) — 当前阶段：已收口；`resolve-build-schemas.ts` 中 `effectOverride` 的 leaf schema 已统一复用共享 schema 常量
