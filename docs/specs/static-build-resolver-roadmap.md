@@ -12971,3 +12971,61 @@ caveatSummary` 这些兼容字段补齐。
 - `V366.2` 已完成：`resolve-build-execution.ts` 的公开 execution context 已统一复用显式 alias
 - `V366.3` 已完成：全量校验与提交
 - `V366.4` 已完成：roadmap、索引与架构文档同步
+
+## 370. V367 agent loadout helper contracts
+
+### 370.1 目标
+
+`V367` 只解决一件事：
+
+- 把 `resolve-build-loadout.ts` 的公开 query/id/name/list/flag 字段统一改为复用 agent 公共 alias。
+
+### 370.2 范围
+
+1. `BuildToolDriveDiscInput`
+2. `BuildToolLoadoutInputOptions`
+3. `BuildToolSourceUtilitySupport`
+4. `BuildToolResolveLoadoutContextOptions`
+5. `BuildToolResolveSourceEntriesLoadoutContextOptions`
+6. `resolveBuildToolAgent()`
+7. `resolveBuildToolWEngine()`
+8. `resolveBuildToolDriveDiscSets()`
+
+### 370.3 非目标
+
+1. 不改 loadout 解析逻辑
+2. 不改 drive-disc 匹配逻辑
+3. 不改 `StaticBuildLoadoutInput`
+
+### 370.4 当前状态
+
+- `V367.1` 已完成：范围冻结到 loadout helper contract
+- `V367.2` 已完成：`resolve-build-loadout.ts` 的公开 query/id/name/list/flag 字段已统一复用显式 alias
+- `V367.3` 已完成：全量校验与提交
+- `V367.4` 已完成：roadmap、索引与架构文档同步
+
+## 371. V368 source-entry context flag contracts
+
+### 371.1 目标
+
+`V368` 只解决一件事：
+
+- 把 `resolve-build-source-entry-context.ts` 的 `utilityOnly` 字段改为复用 `BuildToolSourceEntryUtilityOnlyFlag`。
+
+### 371.2 范围
+
+1. `BuildToolResolvedSourceEntriesContext`
+2. `resolveBuildToolSourceEntriesContext()`
+
+### 371.3 非目标
+
+1. 不改 source-entry context gating 逻辑
+2. 不改 finalPanel 校验
+3. 不改 scenario 解析
+
+### 371.4 当前状态
+
+- `V368.1` 已完成：范围冻结到 source-entry context flag contract
+- `V368.2` 已完成：`resolve-build-source-entry-context.ts` 的公开 `utilityOnly` 字段已统一复用显式 alias
+- `V368.3` 已完成：全量校验与提交
+- `V368.4` 已完成：roadmap、索引与架构文档同步

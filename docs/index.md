@@ -264,3 +264,5 @@
 - [静态构筑解析系统 V364](./specs/static-build-resolver-v364.md) — 当前阶段：已收口；`resolve-build-contracts.ts` 的公共 response text/list/id/flag 字段已统一复用显式 alias
 - [静态构筑解析系统 V365](./specs/static-build-resolver-v365.md) — 当前阶段：已收口；`resolve-build-responses.ts` 的公开 option 与 helper 参数已统一复用 agent response 公共 alias
 - [静态构筑解析系统 V366](./specs/static-build-resolver-v366.md) — 当前阶段：已收口；`resolve-build-execution.ts` 的公开 execution context 字段已统一复用 agent response 公共 alias
+- [静态构筑解析系统 V367](./specs/static-build-resolver-v367.md) — 当前阶段：已收口；`resolve-build-loadout.ts` 的公开 query/id/name/list/flag 字段已统一复用 agent 公共 alias
+- [静态构筑解析系统 V368](./specs/static-build-resolver-v368.md) — 当前阶段：已收口；`resolve-build-source-entry-context.ts` 的公开 `utilityOnly` 字段已统一复用 `BuildToolSourceEntryUtilityOnlyFlag`

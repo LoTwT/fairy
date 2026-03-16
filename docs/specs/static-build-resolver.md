@@ -1115,3 +1115,5 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 364. `V364` agent response contract aliases：当前阶段已收口；`resolve-build-contracts.ts` 的公共 response text/list/id/flag 字段已统一复用显式 alias，不改变任何响应语义，见 [静态构筑解析系统 V364](./static-build-resolver-v364.md)
 365. `V365` agent response helper option contracts：当前阶段已收口；`resolve-build-responses.ts` 的公开 option 与 helper 参数已统一复用 agent response 公共 alias，不改变任何 response builder 行为，见 [静态构筑解析系统 V365](./static-build-resolver-v365.md)
 366. `V366` agent execution context contracts：当前阶段已收口；`resolve-build-execution.ts` 的公开 execution context 字段已统一复用 agent response 公共 alias，不改变任何 execution helper 逻辑，见 [静态构筑解析系统 V366](./static-build-resolver-v366.md)
+367. `V367` agent loadout helper contracts：当前阶段已收口；`resolve-build-loadout.ts` 的公开 query/id/name/list/flag 字段已统一复用 agent 公共 alias，不改变任何 loadout 解析逻辑，见 [静态构筑解析系统 V367](./static-build-resolver-v367.md)
+368. `V368` source-entry context flag contracts：当前阶段已收口；`resolve-build-source-entry-context.ts` 的公开 `utilityOnly` 字段已统一复用 `BuildToolSourceEntryUtilityOnlyFlag`，不改变任何 gating 逻辑，见 [静态构筑解析系统 V368](./static-build-resolver-v368.md)

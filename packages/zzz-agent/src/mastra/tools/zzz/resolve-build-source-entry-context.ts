@@ -4,6 +4,7 @@ import type {
 } from "zzz-data"
 import type {
   BuildToolMissingFinalPanelResponse,
+  BuildToolSourceEntryUtilityOnlyFlag,
   BuildToolUnsupportedAnomalyTypeResponse,
 } from "./resolve-build-contracts"
 import type {
@@ -15,7 +16,7 @@ import { resolveBuildToolOptionalScenario } from "./resolve-build-scenario"
 import { finalPanelSchema } from "./resolve-build-schemas"
 
 export interface BuildToolResolvedSourceEntriesContext {
-  utilityOnly: boolean
+  utilityOnly: BuildToolSourceEntryUtilityOnlyFlag
   scenario: StaticBuildScenarioInput | undefined
   panel: StaticBuildFinalPanelInput | undefined
 }

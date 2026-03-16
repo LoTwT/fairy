@@ -8,8 +8,12 @@ import type {
   StaticBuildWEngineRefinement,
 } from "zzz-data"
 import type {
+  BuildToolCatalogId,
+  BuildToolCatalogValue,
   BuildToolIncompatibleWEngineResponse,
   BuildToolScopeLabel,
+  BuildToolSourceEntryUtilityOnlyFlag,
+  BuildToolSupportedCatalogNameList,
   BuildToolUnsupportedAgentResponse,
   BuildToolUnsupportedDriveDiscResponse,
   BuildToolUnsupportedWEngineResponse,
@@ -23,6 +27,11 @@ import {
   buildUnsupportedDriveDiscResponse,
   buildUnsupportedWEngineResponse,
 } from "./resolve-build-responses"
+
+export interface BuildToolDriveDiscInput {
+  name: BuildToolCatalogValue
+  pieces: StaticBuildDriveDiscPieces
+}
 
 export interface BuildToolResolvedDriveDiscSets {
   ok: true
@@ -68,8 +77,8 @@ export interface BuildToolRejectedDriveDiscSets {
 }
 
 export interface BuildToolLoadoutInputOptions {
-  agentId: string
-  wEngineId?: string
+  agentId: BuildToolCatalogId
+  wEngineId?: BuildToolCatalogId
   driveDiscSets?: StaticBuildDriveDiscSetInput[]
   agentLevel?: StaticBuildAgentLevel
   agentMindscape?: StaticBuildAgentMindscape
@@ -92,7 +101,7 @@ export interface BuildToolResolvedLoadoutOptions extends BuildToolProgressionInp
 
 export interface BuildToolSourceUtilitySupport<T extends CatalogItem> {
   items: T[]
-  names: string[]
+  names: BuildToolSupportedCatalogNameList
 }
 
 export interface BuildToolResolveLoadoutContextOptions<
@@ -104,14 +113,9 @@ export interface BuildToolResolveLoadoutContextOptions<
   supportedAgents: readonly TAgent[]
   supportedWEngines: readonly TWEngine[]
   supportedDriveDiscs: readonly TDriveDisc[]
-  agentQuery: string
-  wEngineQuery?: string
-  driveDiscs?:
-    | Array<{
-        name: string
-        pieces: StaticBuildDriveDiscPieces
-      }>
-    | undefined
+  agentQuery: BuildToolCatalogValue
+  wEngineQuery?: BuildToolCatalogValue
+  driveDiscs?: BuildToolDriveDiscInput[] | undefined
   getCompatibleWEngines: (agent: TAgent) => readonly TWEngine[]
 }
 
@@ -120,21 +124,16 @@ export interface BuildToolResolveSourceEntriesLoadoutContextOptions<
   TWEngine extends SpecialtyCatalogItem,
   TDriveDisc extends CatalogItem,
 > extends BuildToolProgressionInput {
-  utilityOnly: boolean
+  utilityOnly: BuildToolSourceEntryUtilityOnlyFlag
   scopeLabel: BuildToolScopeLabel
   supportedAgents: readonly TAgent[]
   supportedUtilityAgents: readonly TAgent[]
   supportedWEngines: readonly TWEngine[]
   supportedUtilityWEngines: readonly TWEngine[]
   supportedDriveDiscs: readonly TDriveDisc[]
-  agentQuery: string
-  wEngineQuery?: string
-  driveDiscs?:
-    | Array<{
-        name: string
-        pieces: StaticBuildDriveDiscPieces
-      }>
-    | undefined
+  agentQuery: BuildToolCatalogValue
+  wEngineQuery?: BuildToolCatalogValue
+  driveDiscs?: BuildToolDriveDiscInput[] | undefined
   getCompatibleWEngines: (agent: TAgent) => readonly TWEngine[]
   getCompatibleUtilityWEngines: (agent: TAgent) => readonly TWEngine[]
 }
@@ -142,7 +141,7 @@ export interface BuildToolResolveSourceEntriesLoadoutContextOptions<
 export function resolveBuildToolAgent<T extends CatalogItem>(
   scopeLabel: BuildToolScopeLabel,
   supportedAgents: readonly T[],
-  query: string,
+  query: BuildToolCatalogValue,
 ): BuildToolResolvedAgent<T> | BuildToolRejectedAgent {
   const agent = findCatalogItem(supportedAgents, query)
   if (!agent) {
@@ -169,7 +168,7 @@ export function resolveBuildToolWEngine<
   scopeLabel: BuildToolScopeLabel,
   supportedWEngines: readonly TWEngine[],
   compatibleWEngines: readonly TWEngine[],
-  query: string | undefined,
+  query: BuildToolCatalogValue | undefined,
   agent: TAgent,
 ): BuildToolResolvedWEngine<TWEngine> | BuildToolRejectedWEngine {
   if (!query) {
@@ -211,12 +210,7 @@ export function resolveBuildToolWEngine<
 
 export function resolveBuildToolDriveDiscSets<T extends CatalogItem>(
   scopeLabel: BuildToolScopeLabel,
-  driveDiscs:
-    | Array<{
-        name: string
-        pieces: StaticBuildDriveDiscPieces
-      }>
-    | undefined,
+  driveDiscs: BuildToolDriveDiscInput[] | undefined,
   supportedDriveDiscs: readonly T[],
 ): BuildToolResolvedDriveDiscSets | BuildToolRejectedDriveDiscSets {
   const driveDiscSets: StaticBuildDriveDiscSetInput[] = []

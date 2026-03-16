@@ -354,3 +354,5 @@ const total = base * bonus * crit * resistance * custom
 - `V364` agent response contract aliases：当前阶段已收口；`resolve-build-contracts.ts` 的公共 response text/list/id/flag 字段已统一复用显式 alias
 - `V365` agent response helper option contracts：当前阶段已收口；`resolve-build-responses.ts` 的公开 option 与 helper 参数已统一复用 agent response 公共 alias
 - `V366` agent execution context contracts：当前阶段已收口；`resolve-build-execution.ts` 的公开 execution context 字段已统一复用 agent response 公共 alias
+- `V367` agent loadout helper contracts：当前阶段已收口；`resolve-build-loadout.ts` 的公开 query/id/name/list/flag 字段已统一复用 agent 公共 alias
+- `V368` source-entry context flag contracts：当前阶段已收口；`resolve-build-source-entry-context.ts` 的公开 `utilityOnly` 字段已统一复用 `BuildToolSourceEntryUtilityOnlyFlag`
