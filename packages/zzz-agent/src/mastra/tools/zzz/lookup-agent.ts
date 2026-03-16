@@ -15,6 +15,37 @@ export type LookupAgentQueryName = string
 
 export type LookupAgentLocale = "en" | "zh-CN"
 
+export type LookupAgentId = AgentListItem["id"]
+
+export type LookupAgentName = AgentListItem["name"]
+
+export type LookupAgentRarity = AgentListItem["rarity"]
+
+export type LookupAgentSpecialty = AgentListItem["specialty"]
+
+export type LookupAgentAttributeList = AgentListItem["attributes"]
+
+export type LookupAgentAttackTypeList = AgentListItem["attackTypes"]
+
+export interface LookupAgentListItemSummary {
+  id: LookupAgentId
+  name: LookupAgentName
+  rarity: LookupAgentRarity
+  specialty: LookupAgentSpecialty
+  attributes: LookupAgentAttributeList
+  attackTypes: LookupAgentAttackTypeList
+}
+
+export type LookupAgentListItemSummaryList = LookupAgentListItemSummary[]
+
+export interface LookupAgentCandidate {
+  name: LookupAgentName
+  rarity: LookupAgentRarity
+  specialty: LookupAgentSpecialty
+}
+
+export type LookupAgentCandidateList = LookupAgentCandidate[]
+
 export type LookupAgentSkillTypeValue = string
 
 export type LookupAgentSkillTypeList = LookupAgentSkillTypeValue[]
@@ -299,14 +330,17 @@ export const lookupAgent = createTool({
       return {
         found: true,
         total: filtered.length,
-        agents: filtered.map((a) => ({
-          id: a.id,
-          name: a.name,
-          rarity: a.rarity,
-          specialty: a.specialty,
-          attributes: a.attributes,
-          attackTypes: a.attackTypes,
-        })),
+        agents: filtered.map(
+          (a) =>
+            ({
+              id: a.id,
+              name: a.name,
+              rarity: a.rarity,
+              specialty: a.specialty,
+              attributes: a.attributes,
+              attackTypes: a.attackTypes,
+            }) satisfies LookupAgentListItemSummary,
+        ),
       }
     }
 
@@ -322,11 +356,14 @@ export const lookupAgent = createTool({
       return {
         found: false,
         message: `未找到名称包含「${name}」的代理人`,
-        candidates: candidates.map((a) => ({
-          name: a.name,
-          rarity: a.rarity,
-          specialty: a.specialty,
-        })),
+        candidates: candidates.map(
+          (a) =>
+            ({
+              name: a.name,
+              rarity: a.rarity,
+              specialty: a.specialty,
+            }) satisfies LookupAgentCandidate,
+        ),
       }
     }
     return {

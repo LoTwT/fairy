@@ -329,3 +329,4 @@
 - [静态构筑解析系统 V429](./specs/static-build-resolver-v429.md) — 当前阶段：已收口；`lookup-game-mode.ts` 中版本搜索、候选敌人与可选列表的结果 contract 已统一复用显式 alias / interface
 - [静态构筑解析系统 V430](./specs/static-build-resolver-v430.md) — 当前阶段：已收口；`lookup-w-engine.ts` 中列表项与未命中候选项的结果 contract 已统一复用显式 alias / interface
 - [静态构筑解析系统 V431](./specs/static-build-resolver-v431.md) — 当前阶段：已收口；`lookup-bangboo.ts` 与 `lookup-drive-disc.ts` 中列表项和未命中候选项的结果 contract 已统一复用显式 alias / interface
+- [静态构筑解析系统 V432](./specs/static-build-resolver-v432.md) — 当前阶段：已收口；`lookup-agent.ts` 中列表模式与未命中候选项的结果 contract 已统一复用显式 alias / interface
