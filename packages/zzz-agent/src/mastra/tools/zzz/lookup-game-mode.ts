@@ -34,6 +34,8 @@ export type LookupGameModeAttributeInput = string | undefined
 
 export type LookupGameModeEncounterCandidateName = string
 
+export type LookupGameModeEnemyName = string
+
 export type LookupGameModeEncounterNode = number | undefined
 
 export type LookupGameModeEncounterSide = number | undefined
@@ -81,10 +83,16 @@ export interface LookupGameModeDAVersionSearchResult extends LookupGameModeVersi
 export type LookupGameModeDAVersionSearchResultList =
   LookupGameModeDAVersionSearchResult[]
 
+export interface LookupGameModeVersionEnemyRef {
+  name: LookupGameModeEnemyName
+}
+
+export type LookupGameModeVersionEnemyRefList = LookupGameModeVersionEnemyRef[]
+
 export type LookupGameModeRecommendedResistance = number
 
 export interface LookupGameModeDamageContext {
-  enemyName: string
+  enemyName: LookupGameModeEnemyName
   attribute: NonNullable<ReturnType<typeof normalizeDamageAttribute>>
   elementMultiplier: number
   defenderBaseDefense: number
@@ -161,7 +169,7 @@ function toVersionSearchResult(version: {
 function toDAVersionSearchResult(version: {
   versionKey: string
   versionName: string
-  versionEnemies: Array<{ name: string }>
+  versionEnemies: LookupGameModeVersionEnemyRefList
 }): LookupGameModeDAVersionSearchResult {
   return {
     versionKey: version.versionKey,
