@@ -7,13 +7,17 @@
 
 type ValuesOf<T> = T[keyof T] extends readonly (infer U)[] ? U : never
 
-function normalizeTerm(value: string): string {
+export type CanonicalTermText = string
+
+export type NormalizedCanonicalTermText = string
+
+export type CanonicalTermGroupMap = Record<string, readonly CanonicalTermText[]>
+
+function normalizeTerm(value: CanonicalTermText): NormalizedCanonicalTermText {
   return value.toLowerCase().replace(/[\s\-_]/g, "")
 }
 
-function createCanonicalizer<T extends Record<string, readonly string[]>>(
-  groups: T,
-) {
+function createCanonicalizer<T extends CanonicalTermGroupMap>(groups: T) {
   const lookup = new Map<string, keyof T>()
 
   for (const [canonical, labels] of Object.entries(groups)) {

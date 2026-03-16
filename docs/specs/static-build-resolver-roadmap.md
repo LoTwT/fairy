@@ -13448,3 +13448,32 @@ caveatSummary` 这些兼容字段补齐。
 - `V381.2` 已完成：`calc-damage.ts` 的 multiplier helper 输入输出与 anomaly type list 已统一复用显式 alias
 - `V381.3` 已完成：全量校验与提交
 - `V381.4` 已完成：roadmap、索引与架构文档同步
+
+## 385. V382 canonical term helper contracts
+
+### 385.1 目标
+
+`V382` 只解决一件事：
+
+- 把 `terms.ts` 的 canonical term helper 输入输出与 group-map 统一改成显式 alias。
+
+### 385.2 范围
+
+1. `CanonicalTermText`
+2. `NormalizedCanonicalTermText`
+3. `CanonicalTermGroupMap`
+4. `normalizeTerm()`
+5. `createCanonicalizer()`
+
+### 385.3 非目标
+
+1. 不改术语映射表
+2. 不改公开 `toAgentSpecialty / toAgentAttribute / toAttackType` 语义
+3. 不改任何上游数据 contract
+
+### 385.4 当前状态
+
+- `V382.1` 已完成：范围冻结到 canonical term helper contract
+- `V382.2` 已完成：`terms.ts` 的 canonical term helper 输入输出与 group-map 已统一复用显式 alias
+- `V382.3` 已完成：全量校验与提交
+- `V382.4` 已完成：roadmap、索引与架构文档同步
