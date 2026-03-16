@@ -13806,3 +13806,29 @@ caveatSummary` 这些兼容字段补齐。
 - `V389.2` 已完成：`game-modes.ts` 里剩余的 wave object 已统一复用显式 named interface
 - `V389.3` 已完成：全量校验与提交
 - `V389.4` 已完成：roadmap、索引与架构文档同步
+
+## 393. V390 gachabase agent skin asset contracts
+
+### 393.1 目标
+
+`V390` 只解决一件事：
+
+- 把 `AgentSkin.assets` 统一改成显式 named interface。
+
+### 393.2 范围
+
+1. `AgentSkinAssets`
+2. `AgentSkin.assets`
+
+### 393.3 非目标
+
+1. 不改任何 published JSON shape
+2. 不改 agent helper 或上层 resolver 逻辑
+3. 不改其他 `gachabase` interface
+
+### 393.4 当前状态
+
+- `V390.1` 已完成：范围冻结到 `AgentSkin.assets` contract
+- `V390.2` 已完成：`AgentSkin.assets` 已统一复用显式 named interface
+- `V390.3` 已完成：全量校验与提交
+- `V390.4` 已完成：roadmap、索引与架构文档同步

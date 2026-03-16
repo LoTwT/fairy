@@ -98,15 +98,17 @@ export interface CoreSkillLevel {
   statBoosts: StatBoost[]
 }
 
+export interface AgentSkinAssets {
+  menuIcon: GachabaseAssetPath
+  tabIcon: GachabaseAssetPath
+  circleIcon: GachabaseAssetPath
+  splashArt: SplashArt
+}
+
 export interface AgentSkin {
   id: GachabaseId
   name: GachabaseName
-  assets: {
-    menuIcon: GachabaseAssetPath
-    tabIcon: GachabaseAssetPath
-    circleIcon: GachabaseAssetPath
-    splashArt: SplashArt
-  }
+  assets: AgentSkinAssets
 }
 
 export interface AgentMindscape {
