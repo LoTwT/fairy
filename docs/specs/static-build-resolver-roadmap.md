@@ -13217,3 +13217,35 @@ caveatSummary` 这些兼容字段补齐。
 - `V374.2` 已完成：`zzz-scorer.ts` 的公开匹配 flag、section list 和 score contract 已统一复用显式 alias
 - `V374.3` 已完成：全量校验与提交
 - `V374.4` 已完成：roadmap、索引与架构文档同步
+
+## 378. V375 agent catalog helper score contracts
+
+### 378.1 目标
+
+`V375` 只解决一件事：
+
+- 把 `resolve-build-catalog.ts` 的 field-list 与候选分数 contract 统一改成显式 alias / interface。
+
+### 378.2 范围
+
+1. `BuildToolCatalogFieldValue`
+2. `BuildToolCatalogFieldList`
+3. `BuildToolCatalogCandidateScore`
+4. `BuildToolScoredCatalogCandidate<T>`
+5. `BuildToolScoredCatalogCandidateList<T>`
+6. `getCatalogFields()`
+7. `findCatalogItem()`
+8. `findCatalogCandidates()`
+
+### 378.3 非目标
+
+1. 不改 catalog 匹配算法
+2. 不改 candidate 排序或阈值
+3. 不改任何 response builder 行为
+
+### 378.4 当前状态
+
+- `V375.1` 已完成：范围冻结到 agent catalog helper score contract
+- `V375.2` 已完成：`resolve-build-catalog.ts` 的 field-list 与候选分数 contract 已统一复用显式 alias / interface
+- `V375.3` 已完成：全量校验与提交
+- `V375.4` 已完成：roadmap、索引与架构文档同步

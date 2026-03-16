@@ -1123,3 +1123,4 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 372. `V372` agent catalog specialty contracts：当前阶段已收口；`CatalogItem` 的 specialty generic 已统一复用显式 alias，不改变任何 catalog 或 resolver 行为，见 [静态构筑解析系统 V372](./static-build-resolver-v372.md)
 373. `V373` agent utils helper contracts：当前阶段已收口；`utils.ts` 的公开路径、alias-group、缓存与匹配分数字段已统一复用显式 alias / interface，不改变任何匹配或缓存行为，见 [静态构筑解析系统 V373](./static-build-resolver-v373.md)
 374. `V374` agent scorer match contracts：当前阶段已收口；`zzz-scorer.ts` 的公开匹配 flag、section list 和 score contract 已统一复用显式 alias，不改变任何 scorer 逻辑，见 [静态构筑解析系统 V374](./static-build-resolver-v374.md)
+375. `V375` agent catalog helper score contracts：当前阶段已收口；`resolve-build-catalog.ts` 的 field-list 与候选分数 contract 已统一复用显式 alias / interface，不改变任何 catalog 匹配逻辑，见 [静态构筑解析系统 V375](./static-build-resolver-v375.md)

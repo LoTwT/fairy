@@ -5,13 +5,27 @@ import type {
   CatalogItem,
 } from "./resolve-build-contracts"
 
+export type BuildToolCatalogFieldValue = BuildToolCatalogValue
+
+export type BuildToolCatalogFieldList = BuildToolCatalogFieldValue[]
+
+export type BuildToolCatalogCandidateScore = number
+
+export interface BuildToolScoredCatalogCandidate<T> {
+  item: T
+  score: BuildToolCatalogCandidateScore
+}
+
+export type BuildToolScoredCatalogCandidateList<T> =
+  BuildToolScoredCatalogCandidate<T>[]
+
 export function normalizeCatalogValue(
   value: BuildToolCatalogValue,
 ): BuildToolNormalizedCatalogValue {
   return value.toLowerCase().replace(/[\s\-_·・.()（）【】[\]「」]/g, "")
 }
 
-function getCatalogFields(item: CatalogItem) {
+function getCatalogFields(item: CatalogItem): BuildToolCatalogFieldList {
   return [item.name, item.id, ...item.aliases].filter(Boolean)
 }
 
@@ -23,7 +37,7 @@ export function findCatalogItem<T extends CatalogItem>(
   const qNorm = normalizeCatalogValue(query)
 
   let bestItem: T | undefined
-  let bestScore = 0
+  let bestScore: BuildToolCatalogCandidateScore = 0
 
   for (const item of items) {
     for (const field of getCatalogFields(item)) {
@@ -49,14 +63,14 @@ export function findCatalogCandidates<T extends CatalogItem>(
   const qNorm = normalizeCatalogValue(query)
   if (!qNorm) return []
 
-  const scored: Array<{ item: T; score: number }> = []
+  const scored: BuildToolScoredCatalogCandidateList<T> = []
   for (const item of items) {
-    let bestScore = 0
+    let bestScore: BuildToolCatalogCandidateScore = 0
     for (const field of getCatalogFields(item)) {
       const normalized = normalizeCatalogValue(field)
       if (!normalized.includes(qNorm) && !qNorm.includes(normalized)) continue
 
-      let score = 0
+      let score: BuildToolCatalogCandidateScore = 0
       if (normalized.includes(qNorm)) {
         score = qNorm.length / normalized.length
         if (normalized.startsWith(qNorm)) score += 1
