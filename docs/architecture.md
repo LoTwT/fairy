@@ -372,3 +372,4 @@ const total = base * bonus * crit * resistance * custom
 - `V382` canonical term helper contracts：当前阶段已收口；`terms.ts` 的 canonical term helper 输入输出与 group-map 已统一复用显式 alias
 - `V383` gachabase stat helper contracts：当前阶段已收口；`gachabase` 公式 helper 的输入输出已统一复用显式标量 alias
 - `V384` buhflipexplode raw field contracts：当前阶段已收口；`buhflipexplode` raw interface 的公开字段已统一复用显式 alias / pair alias / list alias
+- `V385` game-modes raw field contracts：当前阶段已收口；`game-modes.ts` raw published interface 的公开字段已统一复用显式 alias / list alias

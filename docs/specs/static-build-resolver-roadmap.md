@@ -13579,3 +13579,73 @@ caveatSummary` 这些兼容字段补齐。
 - `V384.2` 已完成：`buhflipexplode` raw interface 的公开字段已统一复用显式 alias / pair alias / list alias
 - `V384.3` 已完成：全量校验与提交
 - `V384.4` 已完成：roadmap、索引与架构文档同步
+
+## 388. V385 game-modes raw field contracts
+
+### 388.1 目标
+
+`V385` 只解决一件事：
+
+- 把 `game-modes.ts` raw published interface 的公开字段统一改成显式 alias / list alias。
+
+### 388.2 范围
+
+1. `GameModeEnemyId`
+2. `GameModeEnemyName`
+3. `GameModeImageSlug`
+4. `GameModeStunMultiplier`
+5. `GameModeStunTime`
+6. `GameModeEnemyHP`
+7. `GameModeEnemyDefense`
+8. `GameModeEnemyDaze`
+9. `GameModeBuffName`
+10. `GameModeBuffKey`
+11. `GameModeBuffIconUrl`
+12. `GameModeBuffEffect`
+13. `GameModeBuffEffectList`
+14. `GameModeAttributeText`
+15. `GameModeAttributeTextList`
+16. `GameModeMechanicsText`
+17. `GameModeEnemyCount`
+18. `GameModeEnemyHPMult`
+19. `GameModeBossHPMult`
+20. `GameModeNodeLevel`
+21. `GameModeHP60k`
+22. `GameModeAltHP`
+23. `GameModeVersionKey`
+24. `GameModeVersionName`
+25. `GameModeVersionTime`
+26. `GameModeVersionDazeMultiplier`
+27. `GameModeVersionAnomalyMultiplier`
+28. `GameModeModeName`
+29. `GameModeBuffNameList`
+30. `EnemyBase`
+31. `BuffItem`
+32. `DABuff`
+33. `DAEnemyItem`
+34. `DAVersionItem`
+35. `SDEnemyItem`
+36. `SDSideItem`
+37. `SDNodeItem`
+38. `SDVersionItem`
+39. `SDModeItem`
+40. `TSBossEnemyItem`
+41. `TSRegularEnemyItem`
+42. `TSBossSideItem`
+43. `TSRegularSideItem`
+44. `TSNodeItem`
+45. `TSVersionItem`
+46. `TSModeItem`
+
+### 388.3 非目标
+
+1. 不改任何 published JSON shape
+2. 不改 `cleaned` helper 的消费语义
+3. 不改 `game-modes` 上层 lookup 或 resolver 逻辑
+
+### 388.4 当前状态
+
+- `V385.1` 已完成：范围冻结到 game-modes raw field contract
+- `V385.2` 已完成：`game-modes.ts` raw published interface 的公开字段已统一复用显式 alias / list alias
+- `V385.3` 已完成：全量校验与提交
+- `V385.4` 已完成：roadmap、索引与架构文档同步

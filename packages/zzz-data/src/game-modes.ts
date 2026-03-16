@@ -13,6 +13,36 @@
 /** Raw multiplier buckets in `ELEMENT_MULT_ORDER`: [ice, fire, electric, ether, physical] */
 export type ElementMult = [number, number, number, number, number]
 
+export type GameModeEnemyId = string
+export type GameModeEnemyName = string
+export type GameModeImageSlug = string
+export type GameModeStunMultiplier = number
+export type GameModeStunTime = number
+export type GameModeEnemyHP = number
+export type GameModeEnemyDefense = number
+export type GameModeEnemyDaze = number
+export type GameModeBuffName = string
+export type GameModeBuffKey = string
+export type GameModeBuffIconUrl = string
+export type GameModeBuffEffect = string
+export type GameModeBuffEffectList = GameModeBuffEffect[]
+export type GameModeAttributeText = string
+export type GameModeAttributeTextList = GameModeAttributeText[]
+export type GameModeMechanicsText = string
+export type GameModeEnemyCount = number
+export type GameModeEnemyHPMult = number
+export type GameModeBossHPMult = number
+export type GameModeNodeLevel = number
+export type GameModeHP60k = number
+export type GameModeAltHP = number
+export type GameModeVersionKey = string
+export type GameModeVersionName = string
+export type GameModeVersionTime = string
+export type GameModeVersionDazeMultiplier = number
+export type GameModeVersionAnomalyMultiplier = number
+export type GameModeModeName = string
+export type GameModeBuffNameList = GameModeBuffName[]
+
 /**
  * Currently observed raw upstream enemy category codes.
  *
@@ -33,31 +63,31 @@ export function isEnemyCategoryCode(
 }
 
 export interface EnemyBase {
-  id: string
-  name: string
+  id: GameModeEnemyId
+  name: GameModeEnemyName
   /** Enemy image asset slug/key from published data, not a full URL. */
-  image: string
+  image: GameModeImageSlug
   /** Raw source-compatible multiplier buckets, not per-locale labels. */
   elementMult: ElementMult
   /** Raw source-compatible field for daze/失衡倍率. */
-  stunMult: number
+  stunMult: GameModeStunMultiplier
   /** Raw source-compatible field for daze/失衡持续时间. */
-  stunTime: number
-  hp: number
+  stunTime: GameModeStunTime
+  hp: GameModeEnemyHP
   /** Enemy base defense, directly usable in damage calculations. */
-  def: number
+  def: GameModeEnemyDefense
   /** Enemy daze gauge / 失衡值. */
-  daze: number
+  daze: GameModeEnemyDaze
 }
 
 // ─── buffs.json ───────────────────────────────────────────────────────────────
 
 export interface BuffItem {
   /** zh-CN only */
-  name?: string
+  name?: GameModeBuffName
   /** zh-CN only */
-  iconUrl?: string
-  effect: string
+  iconUrl?: GameModeBuffIconUrl
+  effect: GameModeBuffEffect
 }
 
 /** `buffs.json` top-level shape — key is camelCase buff name */
@@ -66,38 +96,38 @@ export type BuffsJson = Record<string, BuffItem>
 // ─── deadly-assault.json ──────────────────────────────────────────────────────
 
 export interface DABuff {
-  key: string
+  key: GameModeBuffKey
   /** zh-CN only */
-  name?: string
+  name?: GameModeBuffName
   /** zh-CN only */
-  iconUrl?: string
-  effect: string
+  iconUrl?: GameModeBuffIconUrl
+  effect: GameModeBuffEffect
 }
 
 export interface DAEnemyItem extends EnemyBase {
   /** Raw source-compatible enemy category from upstream data. */
   type: EnemyCategoryCode
   /** Raw source-compatible HP multiplier bucket from upstream data. */
-  mult: number
+  mult: GameModeBossHPMult
   /** Raw source-compatible alternative HP value from upstream data. */
-  altHp: number
+  altHp: GameModeAltHP
   /** zh-CN only */
-  weaknesses?: string[]
+  weaknesses?: GameModeAttributeTextList
   /** zh-CN only */
-  resistances?: string[]
+  resistances?: GameModeAttributeTextList
   /** zh-CN only */
-  mechanics?: string
+  mechanics?: GameModeMechanicsText
 }
 
 export interface DAVersionItem {
-  versionKey: string
-  versionName: string
+  versionKey: GameModeVersionKey
+  versionName: GameModeVersionName
   /** Display-only time range string from published data, not a stable date format. */
-  versionTime: string
+  versionTime: GameModeVersionTime
   /** Raw daze multiplier applied to this DA season. */
-  versionDazeMult: number
+  versionDazeMult: GameModeVersionDazeMultiplier
   /** Raw anomaly multiplier applied to this DA season. */
-  versionAnomMult: number
+  versionAnomMult: GameModeVersionAnomalyMultiplier
   buffs: DABuff[]
   versionEnemies: DAEnemyItem[]
 }
@@ -110,43 +140,43 @@ export type DeadlyAssaultJson = DAVersionItem[]
 export interface SDEnemyItem extends EnemyBase {
   /** Raw source-compatible enemy category from upstream data. */
   type: EnemyCategoryCode
-  count: number
+  count: GameModeEnemyCount
 }
 
 export interface SDSideItem {
   /** Side-wide raw multiplier buckets in the same order as `ElementMult`. */
   sideElementMult: ElementMult
   /** Raw side HP multiplier from published data. */
-  sideHPMult: number
+  sideHPMult: GameModeEnemyHPMult
   /** Node enemy level in published data. */
-  nodeLvl: number
+  nodeLvl: GameModeNodeLevel
   /** Raw HP normalization field from upstream data. */
-  hp60k: number
+  hp60k: GameModeHP60k
   /** Raw alternative HP value from upstream data. */
-  altHp: number
+  altHp: GameModeAltHP
   waves: Array<{ enemies: SDEnemyItem[] }>
 }
 
 export interface SDNodeItem {
-  buffName?: string | string[]
-  buffDesc?: string | string[]
+  buffName?: GameModeBuffName | GameModeBuffNameList
+  buffDesc?: GameModeBuffEffect | GameModeBuffEffectList
   sides: (SDSideItem | null)[]
 }
 
 export interface SDVersionItem {
-  versionKey: string
-  versionName: string
+  versionKey: GameModeVersionKey
+  versionName: GameModeVersionName
   /** Display-only time range string from published data, not a stable date format. */
-  versionTime: string
+  versionTime: GameModeVersionTime
   /** Raw daze multiplier applied to this SD version. */
-  versionDazeMult: number
+  versionDazeMult: GameModeVersionDazeMultiplier
   /** Raw anomaly multiplier applied to this SD version. */
-  versionAnomMult: number
+  versionAnomMult: GameModeVersionAnomalyMultiplier
   nodes: SDNodeItem[]
 }
 
 export interface SDModeItem {
-  name: string
+  name: GameModeModeName
   versions: SDVersionItem[]
 }
 
@@ -159,31 +189,31 @@ export interface TSBossEnemyItem extends EnemyBase {
   /** Raw source-compatible enemy category from upstream data. */
   type: EnemyCategoryCode
   /** Raw source-compatible HP multiplier bucket from upstream data. */
-  mult: number
+  mult: GameModeBossHPMult
   /** Raw source-compatible alternative HP value from upstream data. */
-  altHp: number
+  altHp: GameModeAltHP
   /** zh-CN only */
-  weaknesses?: string[]
+  weaknesses?: GameModeAttributeTextList
   /** zh-CN only */
-  resistances?: string[]
+  resistances?: GameModeAttributeTextList
   /** zh-CN only */
-  mechanics?: string
+  mechanics?: GameModeMechanicsText
 }
 
 export interface TSRegularEnemyItem extends EnemyBase {
   /** Raw source-compatible enemy category from upstream data. */
   type: EnemyCategoryCode
   /** Raw source-compatible enemy count from upstream data. */
-  count: number
+  count: GameModeEnemyCount
 }
 
 export interface TSBossSideItem {
   /** Node enemy level in published data. */
-  nodeLvl: number
+  nodeLvl: GameModeNodeLevel
   /** Raw HP normalization field from upstream data. */
-  hp60k: number
+  hp60k: GameModeHP60k
   /** Raw alternative HP value from upstream data. */
-  altHp: number
+  altHp: GameModeAltHP
   waves: Array<{ enemies: TSBossEnemyItem[] }>
 }
 
@@ -191,40 +221,40 @@ export interface TSRegularSideItem {
   /** Optional side-wide raw multiplier buckets in the same order as `ElementMult`. */
   sideElementMult?: ElementMult
   /** Raw side HP multiplier from published data. */
-  sideHPMult: number
+  sideHPMult: GameModeEnemyHPMult
   /** Node enemy level in published data. */
-  nodeLvl: number
+  nodeLvl: GameModeNodeLevel
   /** Raw HP normalization field from upstream data. */
-  hp60k: number
+  hp60k: GameModeHP60k
   /** Raw alternative HP value from upstream data. */
-  altHp: number
+  altHp: GameModeAltHP
   waves: Array<{ enemies: TSRegularEnemyItem[] }>
 }
 
 export interface TSNodeItem {
-  buffNames: string[]
+  buffNames: GameModeBuffNameList
   /** sides[0] = boss side; sides[1..n] = regular enemy sides */
   sides: (TSBossSideItem | TSRegularSideItem | null)[]
 }
 
 export interface TSVersionItem {
-  versionKey: string
-  versionName: string
+  versionKey: GameModeVersionKey
+  versionName: GameModeVersionName
   /** Display-only time range string from published data, not a stable date format. */
-  versionTime: string
+  versionTime: GameModeVersionTime
   /** Raw boss-side daze multiplier applied to this TS version. */
-  versionBossDazeMult: number
+  versionBossDazeMult: GameModeVersionDazeMultiplier
   /** Raw regular-enemy daze multiplier applied to this TS version. */
-  versionEnemyDazeMult: number
+  versionEnemyDazeMult: GameModeVersionDazeMultiplier
   /** Raw boss-side anomaly multiplier applied to this TS version. */
-  versionBossAnomMult: number
+  versionBossAnomMult: GameModeVersionAnomalyMultiplier
   /** Raw regular-enemy anomaly multiplier applied to this TS version. */
-  versionEnemyAnomMult: number
+  versionEnemyAnomMult: GameModeVersionAnomalyMultiplier
   nodes: TSNodeItem[]
 }
 
 export interface TSModeItem {
-  name: string
+  name: GameModeModeName
   versions: TSVersionItem[]
 }
 
