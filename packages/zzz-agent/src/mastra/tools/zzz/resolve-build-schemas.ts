@@ -6,6 +6,7 @@ import type {
   StaticBuildAnomalyProficiency,
   StaticBuildAttack,
   StaticBuildBaseAttack,
+  StaticBuildCombatTag,
   StaticBuildCombatTagList,
   StaticBuildCritDamage,
   StaticBuildCritRate,
@@ -49,9 +50,13 @@ export const skillTagSchema = zod.enum([
   "assist",
 ])
 
-export const combatTagListSchema = zod.array(zod.string())
+export const combatTagSchema = zod.string()
+
+export const combatTagListSchema = zod.array(combatTagSchema)
 
 export type BuildToolSkillTag = StaticBuildSkillTag
+
+export type BuildToolCombatTag = StaticBuildCombatTag
 
 export type BuildToolDriveDiscSetName = BuildToolCatalogValue
 

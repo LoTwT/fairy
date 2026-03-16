@@ -469,5 +469,6 @@ const total = base * bonus * crit * resistance * custom
 - `V488` resolve-build resolved snapshot scalar schemas：当前阶段已收口；`resolve-build-schemas.ts` 中 `resolvedSnapshot` 的 delta/factor leaf scalar schema 已统一复用共享 schema 常量
 - `V489` resolve-build drive-disc set scalar schemas：当前阶段已收口；`resolve-build-schemas.ts` 中 `driveDiscSet` 的 leaf schema 已统一复用共享 schema 常量
 - `V490` resolve-build effect override scalar schemas：当前阶段已收口；`resolve-build-schemas.ts` 中 `effectOverride` 的 leaf schema 已统一复用共享 schema 常量
+- `V491` resolve-build combat tag element schema：当前阶段已收口；`resolve-build-schemas.ts` 中 `combatTags` 的元素 schema 已统一复用共享 schema 常量
 - `V459` calculator disorder damage params contracts：当前阶段已收口；`calculator/types.ts` 中 `DisorderDamageParams` 已统一改为显式 interface
 - `V460` compact disorder damage params contracts：当前阶段已收口；`build/compact.ts` 中 `CompactStaticBuildDisorderDamageParams` 已统一改为显式 interface
