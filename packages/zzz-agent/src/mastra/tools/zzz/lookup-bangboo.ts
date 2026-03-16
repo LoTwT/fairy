@@ -38,6 +38,23 @@ export type LookupBangbooCalculatedStatMap = Record<
   LookupBangbooCalculatedStatValue
 >
 
+export type LookupBangbooSkillTypeId = string
+
+export type LookupBangbooSkillName = string
+
+export type LookupBangbooSkillDescriptionText = string
+
+export type LookupBangbooSkillStatList = BangbooItem["skills"][number]["stats"]
+
+export interface LookupBangbooSkillEntry {
+  typeId: LookupBangbooSkillTypeId
+  name: LookupBangbooSkillName
+  description: LookupBangbooSkillDescriptionText
+  stats: LookupBangbooSkillStatList
+}
+
+export type LookupBangbooSkillEntryList = LookupBangbooSkillEntry[]
+
 export type LookupBangbooTrimmedResultKey = string
 
 export type LookupBangbooTrimmedValue = unknown
@@ -167,12 +184,15 @@ export const lookupBangboo = createTool({
       name: bangboo.name,
       rarity: bangboo.rarity,
       calculatedStats,
-      skills: bangboo.skills.map((s) => ({
-        typeId: s.typeId,
-        name: s.name,
-        description: stripHtml(s.description),
-        stats: s.stats,
-      })),
+      skills: bangboo.skills.map(
+        (s) =>
+          ({
+            typeId: s.typeId,
+            name: s.name,
+            description: stripHtml(s.description),
+            stats: s.stats,
+          }) satisfies LookupBangbooSkillEntry,
+      ) satisfies LookupBangbooSkillEntryList,
     }
 
     if (!calculatedStats) {
