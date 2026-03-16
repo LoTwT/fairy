@@ -168,6 +168,12 @@ export type BuhflipEnemyModifier = string
 
 export type BuhflipEnemyModifierList = readonly BuhflipEnemyModifier[]
 
+export type BuhflipBuffText = string
+
+export type BuhflipBuffTextList = BuhflipBuffText[]
+
+export type BuhflipBuffTextValue = BuhflipBuffText | BuhflipBuffTextList
+
 export type BuhflipEnemyId = string
 
 export type BuhflipVersionIndex = number
@@ -204,7 +210,7 @@ export type BuhflipAltHPReduction = number
 
 /**
  * Single enemy entry from buhflipexplode-enemies.json.
- * The top-level object is `Record<string, BuhflipEnemy>` keyed by enemy ID.
+ * The top-level object is `Record<BuhflipEnemyId, BuhflipEnemy>` keyed by enemy ID.
  */
 export interface BuhflipEnemy {
   name: string
@@ -255,8 +261,8 @@ export interface SDSide {
   waves: SDWave[]
 }
 export interface SDNode {
-  buffName: string | string[]
-  buffDesc: string | string[]
+  buffName: BuhflipBuffTextValue
+  buffDesc: BuhflipBuffTextValue
   sides: (SDSide | null)[]
 }
 export interface SDVersionEnemies {
@@ -269,8 +275,8 @@ export interface SDVersionData {
   versionAnomMult: BuhflipVersionAnomalyMultiplier
   versionEnemies: SDVersionEnemies
   /** Critical Node only: version-level buff (overrides node.buffName post-2.5) */
-  buffName?: string | string[]
-  buffDesc?: string | string[]
+  buffName?: BuhflipBuffTextValue
+  buffDesc?: BuhflipBuffTextValue
   mainBuffNum?: BuhflipMainBuffNum
 }
 export interface SDVersionsMode {
@@ -293,7 +299,7 @@ export interface DAVersionData {
   versionTime: string
   versionDazeMult: BuhflipVersionDazeMultiplier
   versionAnomMult: BuhflipVersionAnomalyMultiplier
-  buffNames: string[]
+  buffNames: BuhflipBuffTextList
   versionEnemies: DAEnemyRef[]
 }
 /** `buhflipexplode-deadly-assault.json` top-level shape */
@@ -316,7 +322,7 @@ export interface TSSide {
   waves: TSWave[]
 }
 export interface TSNode {
-  buffNames: string[]
+  buffNames: BuhflipBuffTextList
   /** sides[0] = boss side; sides[1..n] = regular enemy sides */
   sides: (TSSide | null)[]
 }

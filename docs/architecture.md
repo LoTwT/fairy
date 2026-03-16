@@ -383,3 +383,4 @@ const total = base * bonus * crit * resistance * custom
 - `V393` buhflipexplode version container contracts：当前阶段已收口；`buhflipexplode/index.ts` 中 `SD/TS` 的版本容器已统一复用显式 named interface
 - `V394` buhflipexplode version record key contracts：当前阶段进行中；`buhflipexplode/index.ts` 中 `SD/DA/TS` 的版本 record key 正在统一复用显式 alias
 - `V395` buhflipexplode enemy db key contracts：当前阶段进行中；`buhflipexplode/index.ts` 中 `BuhflipEnemyDB` 的顶层 record key 正在统一复用显式 enemy-id alias
+- `V396` buhflipexplode buff text contracts：当前阶段进行中；`buhflipexplode/index.ts` 中 `buffName / buffDesc / buffNames` 正在统一复用显式 buff 文本 alias

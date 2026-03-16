@@ -13968,3 +13968,34 @@ caveatSummary` 这些兼容字段补齐。
 
 - `V395.1` 已完成：范围冻结到 buhflipexplode enemy db key contract
 - `V395.2` 已完成：`BuhflipEnemyDB` 已统一复用显式 enemy-id alias
+
+## 399. V396 buhflipexplode buff text contracts
+
+### 399.1 目标
+
+`V396` 只解决一件事：
+
+- 把 `buhflipexplode` 的 buff 文本 contract 统一改成显式 alias。
+
+### 399.2 范围
+
+1. `BuhflipBuffText`
+2. `BuhflipBuffTextList`
+3. `BuhflipBuffTextValue`
+4. `SDNode.buffName`
+5. `SDNode.buffDesc`
+6. `SDVersionData.buffName`
+7. `SDVersionData.buffDesc`
+8. `DAVersionData.buffNames`
+9. `TSNode.buffNames`
+
+### 399.3 非目标
+
+1. 不改任何 raw/published JSON shape
+2. 不改 buff 的上层 cleaned/helper 语义
+3. 不改 element multiplier 或 desc/perf pair contract
+
+### 399.4 当前状态
+
+- `V396.1` 已完成：范围冻结到 buhflipexplode buff text contract
+- `V396.2` 已完成：buff 文本字段已统一复用显式 alias

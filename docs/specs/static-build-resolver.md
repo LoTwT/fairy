@@ -1144,3 +1144,4 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 393. `V393` buhflipexplode version container contracts：当前阶段已收口；`buhflipexplode/index.ts` 中 `SD/TS` 的版本容器已统一复用显式 named interface，不改变任何 raw/published JSON shape、公式 helper 或 DA 的 record contract，见 [静态构筑解析系统 V393](./static-build-resolver-v393.md)
 394. `V394` buhflipexplode version record key contracts：当前阶段进行中；`buhflipexplode/index.ts` 中 `SD/DA/TS` 的版本 record key 正在统一复用显式 alias，见 [静态构筑解析系统 V394](./static-build-resolver-v394.md)
 395. `V395` buhflipexplode enemy db key contracts：当前阶段进行中；`buhflipexplode/index.ts` 中 `BuhflipEnemyDB` 的顶层 record key 正在统一复用显式 enemy-id alias，见 [静态构筑解析系统 V395](./static-build-resolver-v395.md)
+396. `V396` buhflipexplode buff text contracts：当前阶段进行中；`buhflipexplode/index.ts` 中 `buffName / buffDesc / buffNames` 正在统一复用显式 buff 文本 alias，见 [静态构筑解析系统 V396](./static-build-resolver-v396.md)
