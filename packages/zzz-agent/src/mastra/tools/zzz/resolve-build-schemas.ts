@@ -173,6 +173,17 @@ export interface BuildToolResolvedSnapshotInput {
 
 export type BuildToolDamageType = StaticBuildDamageType
 
+export type BuildToolNormalDamageType = Extract<BuildToolDamageType, "normal">
+
+export type BuildToolSheerDamageType = Extract<BuildToolDamageType, "sheer">
+
+export type BuildToolAnomalyDamageType = Extract<BuildToolDamageType, "anomaly">
+
+export type BuildToolDisorderDamageType = Extract<
+  BuildToolDamageType,
+  "disorder"
+>
+
 interface BuildToolBaseScenarioInput {
   attribute?: BuildToolScenarioAttributeValue
   extraAbilityActive?: BuildToolScenarioExtraAbilityFlag
@@ -478,9 +489,17 @@ export const scenarioAnomalyTypeSchema = zod.string()
 
 export const scenarioRemainingTimeSchema = zod.number().min(0)
 
+export const normalDamageTypeSchema = zod.literal("normal")
+
+export const sheerDamageTypeSchema = zod.literal("sheer")
+
+export const anomalyDamageTypeSchema = zod.literal("anomaly")
+
+export const disorderDamageTypeSchema = zod.literal("disorder")
+
 export const resolveBuildScenarioSchema = zod.discriminatedUnion("damageType", [
   zod.object({
-    damageType: zod.literal("normal"),
+    damageType: normalDamageTypeSchema,
     skillTag: skillTagSchema,
     skillMultiplier: scenarioSkillMultiplierSchema,
     attribute: scenarioAttributeSchema,
@@ -492,7 +511,7 @@ export const resolveBuildScenarioSchema = zod.discriminatedUnion("damageType", [
     enemy: enemySchema,
   }),
   zod.object({
-    damageType: zod.literal("sheer"),
+    damageType: sheerDamageTypeSchema,
     skillTag: skillTagSchema,
     skillMultiplier: scenarioSkillMultiplierSchema,
     attribute: scenarioAttributeSchema,
@@ -504,7 +523,7 @@ export const resolveBuildScenarioSchema = zod.discriminatedUnion("damageType", [
     enemy: enemySchema,
   }),
   zod.object({
-    damageType: zod.literal("anomaly"),
+    damageType: anomalyDamageTypeSchema,
     skillTag: skillTagSchema,
     damageMultiplier: scenarioDamageMultiplierSchema,
     attribute: scenarioAttributeSchema,
@@ -516,7 +535,7 @@ export const resolveBuildScenarioSchema = zod.discriminatedUnion("damageType", [
     enemy: enemySchema,
   }),
   zod.object({
-    damageType: zod.literal("disorder"),
+    damageType: disorderDamageTypeSchema,
     skillTag: skillTagSchema,
     anomalyType: scenarioAnomalyTypeSchema,
     remainingTime: scenarioRemainingTimeSchema,
