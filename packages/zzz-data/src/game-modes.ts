@@ -104,6 +104,7 @@ export interface DABuff {
   iconUrl?: GameModeBuffIconUrl
   effect: GameModeBuffEffect
 }
+export type DABuffList = DABuff[]
 
 export interface DAEnemyItem extends EnemyBase {
   /** Raw source-compatible enemy category from upstream data. */
@@ -119,6 +120,7 @@ export interface DAEnemyItem extends EnemyBase {
   /** zh-CN only */
   mechanics?: GameModeMechanicsText
 }
+export type DAEnemyItemList = DAEnemyItem[]
 
 export interface DAVersionItem {
   versionKey: GameModeVersionKey
@@ -129,12 +131,13 @@ export interface DAVersionItem {
   versionDazeMult: GameModeVersionDazeMultiplier
   /** Raw anomaly multiplier applied to this DA season. */
   versionAnomMult: GameModeVersionAnomalyMultiplier
-  buffs: DABuff[]
-  versionEnemies: DAEnemyItem[]
+  buffs: DABuffList
+  versionEnemies: DAEnemyItemList
 }
+export type DAVersionItemList = DAVersionItem[]
 
 /** `deadly-assault.json` top-level shape */
-export type DeadlyAssaultJson = DAVersionItem[]
+export type DeadlyAssaultJson = DAVersionItemList
 
 // ─── shiyu-defense.json ───────────────────────────────────────────────────────
 
