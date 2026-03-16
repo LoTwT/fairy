@@ -17,10 +17,12 @@ export type LookupBangbooCalculatedStatMap = Record<
   LookupBangbooCalculatedStatValue
 >
 
+export type LookupBangbooTrimmedResultKey = string
+
 export type LookupBangbooTrimmedValue = unknown
 
 export type LookupBangbooTrimmedResult = Record<
-  string,
+  LookupBangbooTrimmedResultKey,
   LookupBangbooTrimmedValue
 >
 
