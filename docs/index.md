@@ -378,3 +378,4 @@
 - [静态构筑解析系统 V478](./specs/static-build-resolver-v478.md) — 当前阶段：已收口；`resolve-build-schemas.ts` 中 `dynamicSnapshot` 的匿名 nested Zod schema 已统一复用共享 schema 常量
 - [静态构筑解析系统 V479](./specs/static-build-resolver-v479.md) — 当前阶段：已收口；`resolve-build-schemas.ts` 中 `stateSnapshot` 的匿名 nested Zod schema 已统一复用共享 schema 常量
 - [静态构筑解析系统 V480](./specs/static-build-resolver-v480.md) — 当前阶段：已收口；`resolve-build-schemas.ts` 中 `resolvedSnapshot` 的匿名 nested Zod schema 已统一复用共享 schema 常量
+- [静态构筑解析系统 V481](./specs/static-build-resolver-v481.md) — 当前阶段：已收口；`resolve-build-schemas.ts` 中重复出现的 `combatTags` 列表 schema 已统一复用共享 schema 常量

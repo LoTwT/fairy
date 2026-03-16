@@ -49,6 +49,8 @@ export const skillTagSchema = zod.enum([
   "assist",
 ])
 
+export const combatTagListSchema = zod.array(zod.string())
+
 export type BuildToolSkillTag = StaticBuildSkillTag
 
 export type BuildToolDriveDiscSetName = BuildToolCatalogValue
@@ -327,7 +329,7 @@ export const resolveBuildScenarioSchema = zod.discriminatedUnion("damageType", [
     skillMultiplier: zod.union([zod.number(), zod.string()]),
     attribute: zod.string().optional(),
     extraAbilityActive: zod.boolean().optional(),
-    combatTags: zod.array(zod.string()).optional(),
+    combatTags: combatTagListSchema.optional(),
     dynamicSnapshot: dynamicSnapshotSchema,
     stateSnapshot: stateSnapshotSchema,
     resolvedSnapshot: resolvedSnapshotSchema,
@@ -339,7 +341,7 @@ export const resolveBuildScenarioSchema = zod.discriminatedUnion("damageType", [
     skillMultiplier: zod.union([zod.number(), zod.string()]),
     attribute: zod.string().optional(),
     extraAbilityActive: zod.boolean().optional(),
-    combatTags: zod.array(zod.string()).optional(),
+    combatTags: combatTagListSchema.optional(),
     dynamicSnapshot: dynamicSnapshotSchema,
     stateSnapshot: stateSnapshotSchema,
     resolvedSnapshot: resolvedSnapshotSchema,
@@ -351,7 +353,7 @@ export const resolveBuildScenarioSchema = zod.discriminatedUnion("damageType", [
     damageMultiplier: zod.union([zod.number(), zod.string()]),
     attribute: zod.string().optional(),
     extraAbilityActive: zod.boolean().optional(),
-    combatTags: zod.array(zod.string()).optional(),
+    combatTags: combatTagListSchema.optional(),
     dynamicSnapshot: dynamicSnapshotSchema,
     stateSnapshot: stateSnapshotSchema,
     resolvedSnapshot: resolvedSnapshotSchema,
@@ -364,7 +366,7 @@ export const resolveBuildScenarioSchema = zod.discriminatedUnion("damageType", [
     remainingTime: zod.number().min(0),
     attribute: zod.string().optional(),
     extraAbilityActive: zod.boolean().optional(),
-    combatTags: zod.array(zod.string()).optional(),
+    combatTags: combatTagListSchema.optional(),
     dynamicSnapshot: dynamicSnapshotSchema,
     stateSnapshot: stateSnapshotSchema,
     resolvedSnapshot: resolvedSnapshotSchema,
@@ -438,7 +440,7 @@ export const skillMatrixFinalPanelSchema = finalPanelSchema.pick({
 export const resolveBuildSkillMatrixContextSchema = zod.object({
   attribute: zod.string().optional(),
   extraAbilityActive: zod.boolean().optional(),
-  combatTags: zod.array(zod.string()).optional(),
+  combatTags: combatTagListSchema.optional(),
   enemy: enemySchema,
 })
 
