@@ -3,6 +3,35 @@ import { createTool } from "@mastra/core/tools"
 import { z } from "zod"
 import { findBestMatch, findTopMatches, loadJson, stripHtml } from "./utils"
 
+export type LookupDriveDiscQueryName = string
+
+export type LookupDriveDiscLocale = "en" | "zh-CN"
+
+export type LookupDriveDiscTag = string
+
+export type LookupDriveDiscSetEffectPieces = number
+
+export type LookupDriveDiscSetEffectBonus = string
+
+export interface LookupDriveDiscSetEffect {
+  pieces: LookupDriveDiscSetEffectPieces
+  bonus: LookupDriveDiscSetEffectBonus
+}
+
+export type LookupDriveDiscCandidateName = string
+
+export interface LookupDriveDiscCandidate {
+  name: LookupDriveDiscCandidateName
+  tag: LookupDriveDiscTag
+}
+
+export interface LookupDriveDiscTrimmedResult {
+  id: DriveDiscItem["id"]
+  name: DriveDiscItem["name"]
+  tag: LookupDriveDiscTag
+  setEffects: LookupDriveDiscSetEffect[]
+}
+
 export const lookupDriveDisc = createTool({
   id: "lookup-drive-disc",
   description:
@@ -19,7 +48,11 @@ export const lookupDriveDisc = createTool({
       .describe("数据语言"),
   }),
   execute: async (input) => {
-    const { name, locale } = input
+    const {
+      name,
+      locale,
+    }: { name?: LookupDriveDiscQueryName; locale: LookupDriveDiscLocale } =
+      input
     const discs = loadJson<DriveDiscItem[]>(`data/${locale}/drive-discs.json`)
 
     // List mode: no name provided
@@ -51,7 +84,13 @@ export const lookupDriveDisc = createTool({
       return {
         found: false,
         message: `未找到名称包含「${name}」的驱动盘`,
-        candidates: candidates.map((d) => ({ name: d.name, tag: d.tag })),
+        candidates: candidates.map(
+          (d) =>
+            ({
+              name: d.name,
+              tag: d.tag,
+            }) satisfies LookupDriveDiscCandidate,
+        ),
       }
     }
 
@@ -65,7 +104,7 @@ export const lookupDriveDisc = createTool({
           pieces: e.pieces,
           bonus: stripHtml(e.bonus),
         })),
-      },
+      } satisfies LookupDriveDiscTrimmedResult,
     }
   },
 })

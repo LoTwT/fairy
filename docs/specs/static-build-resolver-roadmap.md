@@ -13386,3 +13386,36 @@ caveatSummary` 这些兼容字段补齐。
 - `V379.2` 已完成：`lookup-bangboo.ts` 的 calculated stat 与 trimmed result 已统一复用显式 alias
 - `V379.3` 已完成：全量校验与提交
 - `V379.4` 已完成：roadmap、索引与架构文档同步
+
+## 383. V380 drive-disc lookup helper contracts
+
+### 383.1 目标
+
+`V380` 只解决一件事：
+
+- 把 `lookup-drive-disc.ts` 的 query、candidate、set-effect 与 trimmed result 统一改成显式 alias / interface。
+
+### 383.2 范围
+
+1. `LookupDriveDiscQueryName`
+2. `LookupDriveDiscLocale`
+3. `LookupDriveDiscTag`
+4. `LookupDriveDiscSetEffectPieces`
+5. `LookupDriveDiscSetEffectBonus`
+6. `LookupDriveDiscSetEffect`
+7. `LookupDriveDiscCandidateName`
+8. `LookupDriveDiscCandidate`
+9. `LookupDriveDiscTrimmedResult`
+
+### 383.3 非目标
+
+1. 不改驱动盘查询逻辑
+2. 不改 set-effect 文本清洗逻辑
+3. 不改返回字段语义
+
+### 383.4 当前状态
+
+- `V380.1` 已完成：范围冻结到 drive-disc lookup helper contract
+- `V380.2` 已完成：`lookup-drive-disc.ts` 的 query、candidate、set-effect 与 trimmed result 已统一复用显式 alias / interface
+- `V380.3` 已完成：全量校验与提交
+- `V380.4` 已完成：roadmap、索引与架构文档同步

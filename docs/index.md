@@ -277,3 +277,4 @@
 - [静态构筑解析系统 V377](./specs/static-build-resolver-v377.md) — 当前阶段：已收口；`lookup-game-mode.ts` 的 attribute 输入、encounter candidate 与 damageContext 输出已统一复用显式 alias / interface
 - [静态构筑解析系统 V378](./specs/static-build-resolver-v378.md) — 当前阶段：已收口；`lookup-w-engine.ts` 的 calculated stat、active effect 与 trimmed result 已统一复用显式 alias / interface
 - [静态构筑解析系统 V379](./specs/static-build-resolver-v379.md) — 当前阶段：已收口；`lookup-bangboo.ts` 的 calculated stat 与 trimmed result 已统一复用显式 alias
+- [静态构筑解析系统 V380](./specs/static-build-resolver-v380.md) — 当前阶段：已收口；`lookup-drive-disc.ts` 的 query、candidate、set-effect 与 trimmed result 已统一复用显式 alias / interface
