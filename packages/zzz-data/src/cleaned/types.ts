@@ -1,6 +1,7 @@
 import type {
   DAEnemyItem,
   EnemyBase,
+  GameModeAttributeText,
   GameModeBuffEffect,
   GameModeBuffIconUrl,
   GameModeBuffKey,
@@ -10,6 +11,7 @@ import type {
   GameModeEnemyDefense,
   GameModeEnemyId,
   GameModeEnemyName,
+  GameModeMechanicsText,
   GameModeStunMultiplier,
   GameModeStunTime,
   SDEnemyItem,
@@ -86,11 +88,11 @@ export type EncounterCandidate = string
 
 export type EncounterCandidateList = EncounterCandidate[]
 
-export type EncounterWeakness = string
+export type EncounterWeakness = GameModeAttributeText
 
 export type EncounterWeaknessList = EncounterWeakness[]
 
-export type EncounterResistance = string
+export type EncounterResistance = GameModeAttributeText
 
 export type EncounterResistanceList = EncounterResistance[]
 
@@ -101,20 +103,20 @@ export interface EncounterDamageContext extends EnemyDamageContext {
   enemyIndex: number
   weaknesses: EncounterWeaknessList
   resistances: EncounterResistanceList
-  mechanics?: string
+  mechanics?: GameModeMechanicsText
   sideMultipliers?: ElementMultiplierMap
   sideElementMultiplier?: number
 }
 
-export type DABuffViewName = string
+export type DABuffViewName = GameModeBuffName
 
 export type DABuffViewNameList = DABuffViewName[]
 
 export interface DABuffView {
-  key: string
+  key: GameModeBuffKey
   names: DABuffViewNameList
-  effect: string
-  iconUrl?: string
+  effect: GameModeBuffEffect
+  iconUrl?: GameModeBuffIconUrl
 }
 
 export interface DAEnemyView {

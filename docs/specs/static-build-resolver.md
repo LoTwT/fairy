@@ -1218,3 +1218,4 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 467. `V467` game-modes element multiplier tuple contracts：当前阶段已收口；`game-modes.ts` 中元素倍率五元组已统一复用显式 tuple alias，不改变任何 published JSON shape、`elementMult` 语义或 `cleaned` helper 行为，见 [静态构筑解析系统 V467](./static-build-resolver-v467.md)
 468. `V468` cleaned element multiplier tuple contracts：当前阶段已收口；`cleaned/types.ts` 中本地元素倍率 tuple contract 已统一对齐到 `game-modes` 上游 alias，不改变任何 `cleaned` helper 返回值、倍率顺序或 `ElementMultiplierMap` 结构，见 [静态构筑解析系统 V468](./static-build-resolver-v468.md)
 469. `V469` game-modes buff union value contracts：当前阶段已收口；`game-modes.ts` 中 buff 名称与描述的联合值已统一复用显式 alias，不改变任何 published JSON shape、单值/多值语义或上层 helper 行为，见 [静态构筑解析系统 V469](./static-build-resolver-v469.md)
+470. `V470` cleaned encounter and DA buff text contracts：当前阶段已收口；`cleaned/types.ts` 中 encounter / DA buff 的文本字段已统一复用 `game-modes` 上游 alias，不改变任何 `cleaned` helper 返回内容、文案值或视图逻辑，见 [静态构筑解析系统 V470](./static-build-resolver-v470.md)
