@@ -268,8 +268,9 @@ export interface BuhflipEnemy {
   spoilerPerf?: BuhflipEnemySpoilerText
 }
 
+export type BuhflipEnemyRecord = Record<BuhflipEnemyId, BuhflipEnemy>
 /** `buhflipexplode-enemies.json` top-level shape */
-export type BuhflipEnemyDB = Record<BuhflipEnemyId, BuhflipEnemy>
+export type BuhflipEnemyDB = BuhflipEnemyRecord
 
 // ── SD raw types ──
 

@@ -14302,3 +14302,27 @@ caveatSummary` 这些兼容字段补齐。
 
 - `V407.1` 已完成：范围冻结到 buhflipexplode versions mode list contract
 - `V407.2` 已完成：`SD/TS` 顶层 mode list 已统一复用显式 list alias
+
+## 411. V408 buhflipexplode enemy record contracts
+
+### 411.1 目标
+
+`V408` 只解决一件事：
+
+- 把 `buhflipexplode` 的顶层 enemy record 容器统一复用显式 `Record` alias。
+
+### 411.2 范围
+
+1. `BuhflipEnemyRecord`
+2. `BuhflipEnemyDB`
+
+### 411.3 非目标
+
+1. 不改任何 raw/published JSON shape
+2. 不改 enemy field contract
+3. 不改 `SD/DA/TS` enemy ref list
+
+### 411.4 当前状态
+
+- `V408.1` 已完成：范围冻结到 buhflipexplode enemy record contract
+- `V408.2` 已完成：顶层 enemy record 已统一复用显式 alias
