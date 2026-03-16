@@ -363,3 +363,4 @@ const total = base * bonus * crit * resistance * custom
 - `V373` agent utils helper contracts：当前阶段已收口；`utils.ts` 的公开路径、alias-group、缓存与匹配分数字段已统一复用显式 alias / interface
 - `V374` agent scorer match contracts：当前阶段已收口；`zzz-scorer.ts` 的公开匹配 flag、section list 和 score contract 已统一复用显式 alias
 - `V375` agent catalog helper score contracts：当前阶段已收口；`resolve-build-catalog.ts` 的 field-list 与候选分数 contract 已统一复用显式 alias / interface
+- `V376` agent lookup helper contracts：当前阶段已收口；`lookup-agent.ts` 的 query、skill-type list 与 calculated-stat map 已统一复用显式 alias

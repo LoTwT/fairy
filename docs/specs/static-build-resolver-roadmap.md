@@ -13249,3 +13249,39 @@ caveatSummary` 这些兼容字段补齐。
 - `V375.2` 已完成：`resolve-build-catalog.ts` 的 field-list 与候选分数 contract 已统一复用显式 alias / interface
 - `V375.3` 已完成：全量校验与提交
 - `V375.4` 已完成：roadmap、索引与架构文档同步
+
+## 379. V376 agent lookup helper contracts
+
+### 379.1 目标
+
+`V376` 只解决一件事：
+
+- 把 `lookup-agent.ts` 的 helper query、skill-type list、calculated-stat map 统一改成显式 alias。
+
+### 379.2 范围
+
+1. `LookupAgentQueryName`
+2. `LookupAgentLocale`
+3. `LookupAgentSkillTypeValue`
+4. `LookupAgentSkillTypeList`
+5. `LookupAgentCalculatedStatName`
+6. `LookupAgentCalculatedStatValue`
+7. `LookupAgentCalculatedStatMap`
+8. `LookupAgentTrimmedResultValue`
+9. `LookupAgentTrimmedResult`
+10. `findAgent()`
+11. `normalizeSkillToken()`
+12. `trimAgent()`
+
+### 379.3 非目标
+
+1. 不改任何 lookup 行为
+2. 不改 skill 过滤逻辑
+3. 不改面板计算或返回字段语义
+
+### 379.4 当前状态
+
+- `V376.1` 已完成：范围冻结到 agent lookup helper contract
+- `V376.2` 已完成：`lookup-agent.ts` 的 query、skill-type list 与 calculated-stat map 已统一复用显式 alias
+- `V376.3` 已完成：全量校验与提交
+- `V376.4` 已完成：roadmap、索引与架构文档同步

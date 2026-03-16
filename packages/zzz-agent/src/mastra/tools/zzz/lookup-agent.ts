@@ -11,7 +11,31 @@ import {
   stripHtml,
 } from "./utils"
 
-function findAgent(name: string, locale: string) {
+export type LookupAgentQueryName = string
+
+export type LookupAgentLocale = "en" | "zh-CN"
+
+export type LookupAgentSkillTypeValue = string
+
+export type LookupAgentSkillTypeList = LookupAgentSkillTypeValue[]
+
+export type LookupAgentCalculatedStatName = string
+
+export type LookupAgentCalculatedStatValue = number
+
+export type LookupAgentCalculatedStatMap = Record<
+  LookupAgentCalculatedStatName,
+  LookupAgentCalculatedStatValue
+>
+
+export type LookupAgentTrimmedResultValue = unknown
+
+export type LookupAgentTrimmedResult = Record<
+  string,
+  LookupAgentTrimmedResultValue
+>
+
+function findAgent(name: LookupAgentQueryName, locale: LookupAgentLocale) {
   const details = loadJson<AgentDetails[]>(`data/${locale}/agent-details.json`)
   const list = loadJson<AgentListItem[]>(`data/${locale}/agents.json`)
 
@@ -33,7 +57,9 @@ function findAgent(name: string, locale: string) {
   return { detail, listItem }
 }
 
-function normalizeSkillToken(value: string): string {
+function normalizeSkillToken(
+  value: LookupAgentSkillTypeValue,
+): LookupAgentSkillTypeValue {
   return value.toLowerCase().replace(/[\s\-_·・.()（）【】[\]「」]/g, "")
 }
 
@@ -45,10 +71,10 @@ function trimAgent(
   coreSkillLevel?: number,
   mindscape?: number,
   compact = false,
-  skillTypes?: string[],
+  skillTypes?: LookupAgentSkillTypeList,
 ) {
   // Calculate stats if level params provided
-  let calculatedStats: Record<string, number> | undefined
+  let calculatedStats: LookupAgentCalculatedStatMap | undefined
   if (level !== undefined) {
     const promo = promotion ?? 6
     const coreLevel = coreSkillLevel ?? 7
@@ -84,7 +110,8 @@ function trimAgent(
   }
 
   // Trim skills — strip HTML, keep descriptions and stats
-  const requestedSkillTypes = skillTypes?.map(normalizeSkillToken) ?? []
+  const requestedSkillTypes: LookupAgentSkillTypeList =
+    skillTypes?.map(normalizeSkillToken) ?? []
   const skills = detail.skills
     .filter((sg) => {
       if (!requestedSkillTypes.length) return true
@@ -135,7 +162,7 @@ function trimAgent(
       : []
 
   // When calculatedStats is available, omit raw stats/promotions to reduce context
-  const result: Record<string, unknown> = {
+  const result: LookupAgentTrimmedResult = {
     id: detail.id,
     fullName: detail.fullName,
     name: listItem?.name ?? detail.fullName,
