@@ -393,3 +393,4 @@ const total = base * bonus * crit * resistance * custom
 - `V403` buhflipexplode wave list contracts：当前阶段已收口；`buhflipexplode/index.ts` 中 `SD/TS` wave 集合已统一复用显式 list alias
 - `V404` buhflipexplode side slot list contracts：当前阶段已收口；`buhflipexplode/index.ts` 中 `SD/TS` side slot 集合已统一复用显式 alias
 - `V405` buhflipexplode node list contracts：当前阶段已收口；`buhflipexplode/index.ts` 中 `SD/TS` node 集合已统一复用显式 list alias
+- `V406` buhflipexplode version record contracts：当前阶段已收口；`buhflipexplode/index.ts` 中 `SD/DA/TS` version record 容器已统一复用显式 alias

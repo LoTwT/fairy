@@ -14248,3 +14248,31 @@ caveatSummary` 这些兼容字段补齐。
 
 - `V405.1` 已完成：范围冻结到 buhflipexplode node list contract
 - `V405.2` 已完成：`SD/TS` node 集合已统一复用显式 list alias
+
+## 409. V406 buhflipexplode version record contracts
+
+### 409.1 目标
+
+`V406` 只解决一件事：
+
+- 把 `buhflipexplode` 的 version record 容器统一复用显式 `Record` alias。
+
+### 409.2 范围
+
+1. `SDVersionRecord`
+2. `DAVersionRecord`
+3. `TSVersionRecord`
+4. `SDVersionsMode.versions`
+5. `DAVersionsJson`
+6. `TSVersionsMode.versions`
+
+### 409.3 非目标
+
+1. 不改任何 raw/published JSON shape
+2. 不改 `node list` contract
+3. 不改 `SD/TS` 顶层 mode list
+
+### 409.4 当前状态
+
+- `V406.1` 已完成：范围冻结到 buhflipexplode version record contract
+- `V406.2` 已完成：`SD/DA/TS` version record 已统一复用显式 alias
