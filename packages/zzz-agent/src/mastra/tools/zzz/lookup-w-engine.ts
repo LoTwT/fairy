@@ -65,9 +65,25 @@ export interface LookupWEngineActiveEffect {
   effect: LookupWEngineEffectText
 }
 
-export type LookupWEngineBaseStat = WEngineListItem["baseStat"]
+export type LookupWEngineBaseStatName = WEngineListItem["baseStat"]["name"]
 
-export type LookupWEngineAdvancedStat = WEngineListItem["advancedStat"]
+export type LookupWEngineBaseStatValue = WEngineListItem["baseStat"]["value"]
+
+export interface LookupWEngineBaseStat {
+  name: LookupWEngineBaseStatName
+  value: LookupWEngineBaseStatValue
+}
+
+export type LookupWEngineAdvancedStatName =
+  WEngineListItem["advancedStat"]["name"]
+
+export type LookupWEngineAdvancedStatValue =
+  WEngineListItem["advancedStat"]["value"]
+
+export interface LookupWEngineAdvancedStat {
+  name: LookupWEngineAdvancedStatName
+  value: LookupWEngineAdvancedStatValue
+}
 
 export type LookupWEngineActiveEffectValue = LookupWEngineActiveEffect | null
 
@@ -247,8 +263,14 @@ export const lookupWEngine = createTool({
     }
 
     if (!compact && !calculatedATK) {
-      wEngine.baseStat = engine.baseStat
-      wEngine.advancedStat = engine.advancedStat
+      wEngine.baseStat = {
+        name: engine.baseStat.name,
+        value: engine.baseStat.value,
+      }
+      wEngine.advancedStat = {
+        name: engine.advancedStat.name,
+        value: engine.advancedStat.value,
+      }
     }
 
     return { found: true, wEngine }

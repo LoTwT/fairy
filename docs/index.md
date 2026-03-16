@@ -342,3 +342,4 @@
 - [静态构筑解析系统 V442](./specs/static-build-resolver-v442.md) — 当前阶段：已收口；`lookup-game-mode.ts` 的 DA/SD/TS 成功解析顶层返回结构已统一复用显式 interface，且 DA `enemyCandidates` 已对齐为结构化候选项
 - [静态构筑解析系统 V443](./specs/static-build-resolver-v443.md) — 当前阶段：已收口；`lookup-agent.ts` 的 `LookupAgentSkillStatValueList` 已统一复用显式文本 alias
 - [静态构筑解析系统 V444](./specs/static-build-resolver-v444.md) — 当前阶段：已收口；`lookup-bangboo.ts` 中 `skills[*].stats` 与 `baseStats` 已统一复用显式 alias
+- [静态构筑解析系统 V445](./specs/static-build-resolver-v445.md) — 当前阶段：已收口；`lookup-w-engine.ts` 中 `baseStat / advancedStat` 已统一复用显式 interface
