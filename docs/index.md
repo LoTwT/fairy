@@ -291,3 +291,4 @@
 - [静态构筑解析系统 V391](./specs/static-build-resolver-v391.md) — 当前阶段：已收口；`game-modes.ts` 中 `BuffsJson` 已统一复用显式 record-key alias
 - [静态构筑解析系统 V392](./specs/static-build-resolver-v392.md) — 当前阶段：已收口；`buhflipexplode/index.ts` 中 `SDSide.waves` 与 `TSSide.waves` 已统一复用显式 named interface
 - [静态构筑解析系统 V393](./specs/static-build-resolver-v393.md) — 当前阶段：已收口；`buhflipexplode/index.ts` 中 `SD/TS` 的版本容器已统一复用显式 named interface
+- [静态构筑解析系统 V394](./specs/static-build-resolver-v394.md) — 当前阶段：进行中；`buhflipexplode/index.ts` 中 `SD/DA/TS` 的版本 record key 正在统一复用显式 alias

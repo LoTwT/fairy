@@ -13918,3 +13918,29 @@ caveatSummary` 这些兼容字段补齐。
 - `V393.2` 已完成：`SD/TS` 版本容器已统一复用显式 named interface
 - `V393.3` 已完成：全量校验与提交
 - `V393.4` 已完成：roadmap、索引与架构文档同步
+
+## 397. V394 buhflipexplode version record key contracts
+
+### 397.1 目标
+
+`V394` 只解决一件事：
+
+- 把 `buhflipexplode` 里剩余的版本 record key 统一改成显式 alias。
+
+### 397.2 范围
+
+1. `BuhflipVersionRecordKey`
+2. `SDVersionsMode.versions`
+3. `DAVersionsJson`
+4. `TSVersionsMode.versions`
+
+### 397.3 非目标
+
+1. 不改任何 raw/published JSON shape
+2. 不改版本容器 object contract
+3. 不改 enemy DB 或 buff text contract
+
+### 397.4 当前状态
+
+- `V394.1` 已完成：范围冻结到 buhflipexplode version record key contract
+- `V394.2` 已完成：`SD/DA/TS` 版本 key 已统一复用显式 alias

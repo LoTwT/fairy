@@ -172,6 +172,8 @@ export type BuhflipEnemyId = string
 
 export type BuhflipVersionIndex = number
 
+export type BuhflipVersionRecordKey = string
+
 export type BuhflipEnemyRefType = number
 
 export type BuhflipEnemyCount = number
@@ -273,7 +275,7 @@ export interface SDVersionData {
 }
 export interface SDVersionsMode {
   name: string
-  versions: Record<string, SDVersionData>
+  versions: Record<BuhflipVersionRecordKey, SDVersionData>
 }
 /** `buhflipexplode-shiyu-defense.json` top-level shape */
 export type SDVersionsJson = SDVersionsMode[]
@@ -295,7 +297,7 @@ export interface DAVersionData {
   versionEnemies: DAEnemyRef[]
 }
 /** `buhflipexplode-deadly-assault.json` top-level shape */
-export type DAVersionsJson = Record<string, DAVersionData>
+export type DAVersionsJson = Record<BuhflipVersionRecordKey, DAVersionData>
 
 // ── TS raw types ──
 
@@ -332,7 +334,7 @@ export interface TSVersionData {
 }
 export interface TSVersionsMode {
   name: string
-  versions: Record<string, TSVersionData>
+  versions: Record<BuhflipVersionRecordKey, TSVersionData>
 }
 /** `buhflipexplode-threshold-simulation.json` top-level shape */
 export type TSVersionsJson = TSVersionsMode[]
