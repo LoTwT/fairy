@@ -28,6 +28,8 @@ export type BuildToolAnomalyTypeValue = BuildToolCatalogValue
 
 export type BuildToolDamageTypeValue = string
 
+export type BuildToolCatalogSpecialtyValue = string
+
 export type BuildToolSupportedAnomalyTypeList =
   readonly BuildToolAnomalyTypeValue[]
 
@@ -38,7 +40,10 @@ export type BuildToolResponseMessageText = string
 
 export type BuildToolSourceEntryUtilityOnlyFlag = boolean
 
-export interface CatalogItem<TSpecialty extends string = string> {
+export interface CatalogItem<
+  TSpecialty extends BuildToolCatalogSpecialtyValue =
+    BuildToolCatalogSpecialtyValue,
+> {
   id: BuildToolCatalogId
   name: BuildToolCatalogName
   aliases: BuildToolCatalogNameList

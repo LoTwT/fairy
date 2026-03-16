@@ -13096,3 +13096,55 @@ caveatSummary` 这些兼容字段补齐。
 - `V370.2` 已完成：`resolve-build-schemas.ts` 的公开 snapshot 与场景布尔/数值输入已统一复用显式 alias
 - `V370.3` 已完成：全量校验与提交
 - `V370.4` 已完成：roadmap、索引与架构文档同步
+
+## 374. V371 agent damage-type helper contracts
+
+### 374.1 目标
+
+`V371` 只解决一件事：
+
+- 把 `resolveBuildToolDamageType()` 的公开 generic 边界收紧到 `BuildToolDamageTypeValue`。
+
+### 374.2 范围
+
+1. `resolveBuildToolDamageType()`
+2. `TDamageType`
+
+### 374.3 非目标
+
+1. 不改 damage type 校验逻辑
+2. 不改 response 结构
+3. 不改 scenario 解析逻辑
+
+### 374.4 当前状态
+
+- `V371.1` 已完成：范围冻结到 damage-type helper generic
+- `V371.2` 已完成：`resolveBuildToolDamageType()` 已统一复用显式 damage-type alias
+- `V371.3` 已完成：全量校验与提交
+- `V371.4` 已完成：roadmap、索引与架构文档同步
+
+## 375. V372 agent catalog specialty contracts
+
+### 375.1 目标
+
+`V372` 只解决一件事：
+
+- 给 `CatalogItem` 的 specialty generic 补显式 alias 边界。
+
+### 375.2 范围
+
+1. `BuildToolCatalogSpecialtyValue`
+2. `CatalogItem<TSpecialty>`
+
+### 375.3 非目标
+
+1. 不改 catalog 结构
+2. 不改 `SpecialtyCatalogItem`
+3. 不改 lookup / resolver 行为
+
+### 375.4 当前状态
+
+- `V372.1` 已完成：范围冻结到 catalog specialty generic
+- `V372.2` 已完成：`CatalogItem` 的 specialty generic 已统一复用显式 alias
+- `V372.3` 已完成：全量校验与提交
+- `V372.4` 已完成：roadmap、索引与架构文档同步

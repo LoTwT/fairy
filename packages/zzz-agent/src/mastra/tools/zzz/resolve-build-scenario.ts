@@ -140,7 +140,9 @@ export function resolveBuildToolOptionalScenario(
   return resolveBuildToolResolvedScenario(scenario)
 }
 
-export function resolveBuildToolDamageType<TDamageType extends string>(
+export function resolveBuildToolDamageType<
+  TDamageType extends BuildToolDamageTypeValue,
+>(
   scopeLabel: BuildToolScopeLabel,
   damageType: BuildToolDamageTypeValue,
   supportedDamageTypes: readonly TDamageType[],
