@@ -79,7 +79,9 @@ export type LookupAgentSkillDescriptionEntryList =
 
 export type LookupAgentSkillStatName = string
 
-export type LookupAgentSkillStatValueList = string[]
+export type LookupAgentSkillStatValueText = string
+
+export type LookupAgentSkillStatValueList = LookupAgentSkillStatValueText[]
 
 export interface LookupAgentSkillStatEntry {
   name: LookupAgentSkillStatName
