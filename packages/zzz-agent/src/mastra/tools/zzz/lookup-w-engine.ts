@@ -37,10 +37,12 @@ export interface LookupWEngineActiveEffect {
   effect: LookupWEngineEffectText
 }
 
+export type LookupWEngineTrimmedResultKey = string
+
 export type LookupWEngineTrimmedValue = unknown
 
 export type LookupWEngineTrimmedResult = Record<
-  string,
+  LookupWEngineTrimmedResultKey,
   LookupWEngineTrimmedValue
 >
 

@@ -415,3 +415,4 @@ const total = base * bonus * crit * resistance * custom
 - `V425` gachabase agent details outer list contracts：当前阶段已收口；`gachabase/types.ts` 中 `agent-details.json` 外层资源与内容列表已统一复用显式 alias
 - `V426` gachabase remaining outer list contracts：当前阶段已收口；`gachabase/types.ts` 中 `w-engine`、`bangboo` 与 `drive-disc` 剩余外层列表已统一复用显式 alias
 - `V427` lookup-bangboo trimmed-result contracts：当前阶段已收口；`lookup-bangboo` 的顶层 trimmed-result key 已统一复用显式 alias
+- `V428` lookup agent and w-engine trimmed-result contracts：当前阶段已收口；`lookup-w-engine` 与 `lookup-agent` 的顶层 trimmed-result key 已统一复用显式 alias

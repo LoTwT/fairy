@@ -28,10 +28,12 @@ export type LookupAgentCalculatedStatMap = Record<
   LookupAgentCalculatedStatValue
 >
 
+export type LookupAgentTrimmedResultKey = string
+
 export type LookupAgentTrimmedResultValue = unknown
 
 export type LookupAgentTrimmedResult = Record<
-  string,
+  LookupAgentTrimmedResultKey,
   LookupAgentTrimmedResultValue
 >
 
