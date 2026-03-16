@@ -343,3 +343,4 @@
 - [静态构筑解析系统 V443](./specs/static-build-resolver-v443.md) — 当前阶段：已收口；`lookup-agent.ts` 的 `LookupAgentSkillStatValueList` 已统一复用显式文本 alias
 - [静态构筑解析系统 V444](./specs/static-build-resolver-v444.md) — 当前阶段：已收口；`lookup-bangboo.ts` 中 `skills[*].stats` 与 `baseStats` 已统一复用显式 alias
 - [静态构筑解析系统 V445](./specs/static-build-resolver-v445.md) — 当前阶段：已收口；`lookup-w-engine.ts` 中 `baseStat / advancedStat` 已统一复用显式 interface
+- [静态构筑解析系统 V446](./specs/static-build-resolver-v446.md) — 当前阶段：已收口；`lookup-bangboo.ts` 中 `baseStats[*]` 与 `skills[*].stats[*]` 已统一复用显式 interface

@@ -44,8 +44,17 @@ export type LookupBangbooSkillName = string
 
 export type LookupBangbooSkillDescriptionText = string
 
-export type LookupBangbooSkillStatEntry =
-  BangbooItem["skills"][number]["stats"][number]
+export type LookupBangbooSkillStatTitle =
+  BangbooItem["skills"][number]["stats"][number]["title"]
+
+export type LookupBangbooSkillStatValueText = string
+
+export type LookupBangbooSkillStatValueList = LookupBangbooSkillStatValueText[]
+
+export interface LookupBangbooSkillStatEntry {
+  title: LookupBangbooSkillStatTitle
+  values: LookupBangbooSkillStatValueList
+}
 
 export type LookupBangbooSkillStatList = LookupBangbooSkillStatEntry[]
 
@@ -58,7 +67,22 @@ export interface LookupBangbooSkillEntry {
 
 export type LookupBangbooSkillEntryList = LookupBangbooSkillEntry[]
 
-export type LookupBangbooBaseStatEntry = BangbooItem["baseStats"][number]
+export type LookupBangbooBaseStatId = BangbooItem["baseStats"][number]["id"]
+
+export type LookupBangbooBaseStatName = BangbooItem["baseStats"][number]["name"]
+
+export type LookupBangbooBaseStatValue =
+  BangbooItem["baseStats"][number]["value"]
+
+export type LookupBangbooBaseStatGrowthPerLevel =
+  BangbooItem["baseStats"][number]["growthPerLevel"]
+
+export interface LookupBangbooBaseStatEntry {
+  id: LookupBangbooBaseStatId
+  name: LookupBangbooBaseStatName
+  value: LookupBangbooBaseStatValue
+  growthPerLevel: LookupBangbooBaseStatGrowthPerLevel
+}
 
 export type LookupBangbooBaseStatList = LookupBangbooBaseStatEntry[]
 
@@ -197,13 +221,27 @@ export const lookupBangboo = createTool({
             typeId: s.typeId,
             name: s.name,
             description: stripHtml(s.description),
-            stats: s.stats,
+            stats: s.stats.map(
+              (stat) =>
+                ({
+                  title: stat.title,
+                  values: [...stat.values],
+                }) satisfies LookupBangbooSkillStatEntry,
+            ),
           }) satisfies LookupBangbooSkillEntry,
       ) satisfies LookupBangbooSkillEntryList,
     }
 
     if (!calculatedStats) {
-      result.baseStats = bangboo.baseStats
+      result.baseStats = bangboo.baseStats.map(
+        (stat) =>
+          ({
+            id: stat.id,
+            name: stat.name,
+            value: stat.value,
+            growthPerLevel: stat.growthPerLevel,
+          }) satisfies LookupBangbooBaseStatEntry,
+      )
     }
 
     return { found: true, bangboo: result }
