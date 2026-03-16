@@ -68,24 +68,40 @@ export interface EncounterSelectionResult<
 > {
   selected?: TEncounter
   matches: TEncounter[]
-  candidates: string[]
+  candidates: EncounterCandidateList
 }
+
+export type EncounterCandidate = string
+
+export type EncounterCandidateList = EncounterCandidate[]
+
+export type EncounterWeakness = string
+
+export type EncounterWeaknessList = EncounterWeakness[]
+
+export type EncounterResistance = string
+
+export type EncounterResistanceList = EncounterResistance[]
 
 export interface EncounterDamageContext extends EnemyDamageContext {
   node?: number
   side?: number
   wave?: number
   enemyIndex: number
-  weaknesses: string[]
-  resistances: string[]
+  weaknesses: EncounterWeaknessList
+  resistances: EncounterResistanceList
   mechanics?: string
   sideMultipliers?: ElementMultiplierMap
   sideElementMultiplier?: number
 }
 
+export type DABuffViewName = string
+
+export type DABuffViewNameList = DABuffViewName[]
+
 export interface DABuffView {
   key: string
-  names: string[]
+  names: DABuffViewNameList
   effect: string
   iconUrl?: string
 }
