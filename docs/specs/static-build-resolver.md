@@ -1185,3 +1185,4 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 434. `V434` drive-disc set-effect list contracts：当前阶段已收口；`lookup-drive-disc.ts` 中 `setEffects` 的匿名列表 contract 已统一复用显式 alias，不改变任何查询、模糊匹配或文本裁剪逻辑，见 [静态构筑解析系统 V434](./static-build-resolver-v434.md)
 435. `V435` bangboo skill entry contracts：当前阶段已收口；`lookup-bangboo.ts` trimmed result 中 `skills` 的匿名 entry contract 已统一复用显式 alias / interface，不改变任何查询、模糊匹配、属性计算或技能裁剪逻辑，见 [静态构筑解析系统 V435](./static-build-resolver-v435.md)
 436. `V436` lookup-game-mode version enemy ref contracts：当前阶段已收口；`lookup-game-mode.ts` 中 `versionEnemies` 的匿名引用项 contract 与 `enemyName` 文本字段已统一复用显式 alias / interface，不改变任何 DA/SD/TS 查询、敌人选择或 `damageContext` 生成逻辑，见 [静态构筑解析系统 V436](./static-build-resolver-v436.md)
+437. `V437` lookup-agent trimmed result contracts：当前阶段已收口；`lookup-agent.ts` 的顶层 trimmed result contract 已统一复用显式 interface，不改变任何代理人查询、筛选、技能过滤或属性计算逻辑，见 [静态构筑解析系统 V437](./static-build-resolver-v437.md)

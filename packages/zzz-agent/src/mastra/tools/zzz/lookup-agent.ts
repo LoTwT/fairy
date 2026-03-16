@@ -59,6 +59,8 @@ export type LookupAgentCalculatedStatMap = Record<
   LookupAgentCalculatedStatValue
 >
 
+export type LookupAgentPromotionList = AgentDetails["promotions"]
+
 export type LookupAgentSkillGroupId = string
 
 export type LookupAgentSkillGroupName = string
@@ -139,14 +141,35 @@ export interface LookupAgentStatEntry {
 
 export type LookupAgentStatEntryList = LookupAgentStatEntry[]
 
-export type LookupAgentTrimmedResultKey = string
+export type LookupAgentFullName = AgentDetails["fullName"]
 
-export type LookupAgentTrimmedResultValue = unknown
+export type LookupAgentOptionalRarity = LookupAgentRarity | undefined
 
-export type LookupAgentTrimmedResult = Record<
-  LookupAgentTrimmedResultKey,
-  LookupAgentTrimmedResultValue
->
+export type LookupAgentOptionalSpecialty = LookupAgentSpecialty | undefined
+
+export type LookupAgentOptionalAttributeList =
+  | LookupAgentAttributeList
+  | undefined
+
+export type LookupAgentOptionalAttackTypeList =
+  | LookupAgentAttackTypeList
+  | undefined
+
+export interface LookupAgentTrimmedResult {
+  id: LookupAgentId
+  fullName: LookupAgentFullName
+  name: LookupAgentName | LookupAgentFullName
+  rarity: LookupAgentOptionalRarity
+  specialty: LookupAgentOptionalSpecialty
+  attributes: LookupAgentOptionalAttributeList
+  attackTypes: LookupAgentOptionalAttackTypeList
+  calculatedStats: LookupAgentCalculatedStatMap | undefined
+  skills: LookupAgentSkillGroupEntryList
+  coreSkills: LookupAgentCoreSkillEntryList
+  mindscapes: LookupAgentMindscapeEntryList
+  stats?: LookupAgentStatEntryList
+  promotions?: LookupAgentPromotionList
+}
 
 function findAgent(name: LookupAgentQueryName, locale: LookupAgentLocale) {
   const details = loadJson<AgentDetails[]>(`data/${locale}/agent-details.json`)

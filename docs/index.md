@@ -334,3 +334,4 @@
 - [静态构筑解析系统 V434](./specs/static-build-resolver-v434.md) — 当前阶段：已收口；`lookup-drive-disc.ts` 中 `setEffects` 的匿名列表 contract 已统一复用显式 alias
 - [静态构筑解析系统 V435](./specs/static-build-resolver-v435.md) — 当前阶段：已收口；`lookup-bangboo.ts` trimmed result 中 `skills` 的匿名 entry contract 已统一复用显式 alias / interface
 - [静态构筑解析系统 V436](./specs/static-build-resolver-v436.md) — 当前阶段：已收口；`lookup-game-mode.ts` 中 `versionEnemies` 的匿名引用项 contract 与 `enemyName` 文本字段已统一复用显式 alias / interface
+- [静态构筑解析系统 V437](./specs/static-build-resolver-v437.md) — 当前阶段：已收口；`lookup-agent.ts` 的顶层 trimmed result contract 已统一复用显式 interface

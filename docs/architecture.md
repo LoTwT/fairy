@@ -424,3 +424,4 @@ const total = base * bonus * crit * resistance * custom
 - `V434` drive-disc set-effect list contracts：当前阶段已收口；`lookup-drive-disc.ts` 中 `setEffects` 的匿名列表 contract 已统一复用显式 alias
 - `V435` bangboo skill entry contracts：当前阶段已收口；`lookup-bangboo.ts` trimmed result 中 `skills` 的匿名 entry contract 已统一复用显式 alias / interface
 - `V436` lookup-game-mode version enemy ref contracts：当前阶段已收口；`lookup-game-mode.ts` 中 `versionEnemies` 的匿名引用项 contract 与 `enemyName` 文本字段已统一复用显式 alias / interface
+- `V437` lookup-agent trimmed result contracts：当前阶段已收口；`lookup-agent.ts` 的顶层 trimmed result contract 已统一复用显式 interface
