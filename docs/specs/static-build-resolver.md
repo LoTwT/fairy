@@ -1109,3 +1109,5 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 358. `V358` canonical term helper contracts：当前阶段已收口；`terms.ts` 的 canonical helper 输入输出已统一复用显式公开 contract，不改变任何术语归一化逻辑，见 [静态构筑解析系统 V358](./static-build-resolver-v358.md)
 359. `V359` generate cell helper contracts：当前阶段已收口；`extractCellValue()` 的输入输出已统一复用显式公开 contract，不改变任何 cell-value 解析逻辑，见 [静态构筑解析系统 V359](./static-build-resolver-v359.md)
 360. `V360` buhflipexplode helper result contracts：当前阶段已收口；`buhflipexplode` 公开公式 helper 的返回值已统一复用显式公开 contract，不改变任何公式逻辑，见 [静态构筑解析系统 V360](./static-build-resolver-v360.md)
+361. `V361` crawl decode payload contracts：当前阶段已收口；`decodeSvelteKitData()` 的返回值已统一复用显式公开 contract，不改变任何解码逻辑，见 [静态构筑解析系统 V361](./static-build-resolver-v361.md)
+362. `V362` generate worksheet config text contracts：当前阶段已收口；`generate/config.ts` 的 worksheet config 公开文本字段已统一复用显式公开 contract，不改变任何 generate 行为，见 [静态构筑解析系统 V362](./static-build-resolver-v362.md)

@@ -258,3 +258,5 @@
 - [静态构筑解析系统 V358](./specs/static-build-resolver-v358.md) — 当前阶段：已收口；`terms.ts` 的 canonical helper 输入输出已统一复用显式公开 contract
 - [静态构筑解析系统 V359](./specs/static-build-resolver-v359.md) — 当前阶段：已收口；`extractCellValue()` 的输入输出已统一复用显式公开 contract
 - [静态构筑解析系统 V360](./specs/static-build-resolver-v360.md) — 当前阶段：已收口；`buhflipexplode` 公开公式 helper 的返回值已统一复用显式公开 contract
+- [静态构筑解析系统 V361](./specs/static-build-resolver-v361.md) — 当前阶段：已收口；`decodeSvelteKitData()` 的返回值已统一复用显式公开 contract
+- [静态构筑解析系统 V362](./specs/static-build-resolver-v362.md) — 当前阶段：已收口；`generate/config.ts` 的 worksheet config 公开文本字段已统一复用显式公开 contract

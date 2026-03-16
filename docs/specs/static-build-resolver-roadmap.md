@@ -12792,3 +12792,64 @@ caveatSummary` 这些兼容字段补齐。
 - `V360.2` 已完成：公开公式 helper 返回值已统一复用显式公开 alias
 - `V360.3` 已完成：校验与提交
 - `V360.4` 已完成：roadmap、索引与架构文档同步
+
+## 364. V361 crawl decode payload contracts
+
+### 364.1 目标
+
+`V361` 只解决一件事：
+
+- 给 `decodeSvelteKitData()` 的返回值补显式公开 contract，不改变任何解码逻辑。
+
+### 364.2 范围
+
+1. `CrawlDecodedPayload`
+2. `decodeSvelteKitData()`
+
+### 364.3 非目标
+
+1. 不改递归解码逻辑
+2. 不改循环引用处理
+3. 不改 crawl 流程
+
+### 364.4 当前状态
+
+- `V361.1` 已完成：范围冻结到 crawl decode payload contract
+- `V361.2` 已完成：`decodeSvelteKitData()` 返回值已统一复用显式公开 alias
+- `V361.3` 已完成：校验与提交
+- `V361.4` 已完成：roadmap、索引与架构文档同步
+
+## 365. V362 generate worksheet config text contracts
+
+### 365.1 目标
+
+`V362` 只解决一件事：
+
+- 给 `generate/config.ts` 里公开导出的 worksheet config interface 文本字段补显式 contract，不改变任何 generate 行为。
+
+### 365.2 范围
+
+1. `GenerateFieldName`
+2. `GenerateTypeExpression`
+3. `GenerateSourceJsonName`
+4. `GenerateWorksheetName`
+5. `GenerateJsonFileName`
+6. `GenerateInterfaceName`
+7. `GenerateTypeGroupName`
+8. `GenerateWorksheetColumnHeader`
+9. `ColumnDef`
+10. `DerivedField`
+11. `WorksheetConfig`
+
+### 365.3 非目标
+
+1. 不改 `worksheetConfigs`
+2. 不改 generate 流程
+3. 不改 cell-value 解析逻辑
+
+### 365.4 当前状态
+
+- `V362.1` 已完成：范围冻结到 worksheet config 文本 contract
+- `V362.2` 已完成：worksheet config 公开文本字段已统一复用显式公开 alias
+- `V362.3` 已完成：校验与提交
+- `V362.4` 已完成：roadmap、索引与架构文档同步

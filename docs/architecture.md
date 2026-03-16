@@ -348,3 +348,5 @@ const total = base * bonus * crit * resistance * custom
 - `V358` canonical term helper contracts：当前阶段已收口；`terms.ts` 的 canonical helper 输入输出已统一复用显式公开 contract
 - `V359` generate cell helper contracts：当前阶段已收口；`extractCellValue()` 的输入输出已统一复用显式公开 contract
 - `V360` buhflipexplode helper result contracts：当前阶段已收口；`buhflipexplode` 公开公式 helper 的返回值已统一复用显式公开 contract
+- `V361` crawl decode payload contracts：当前阶段已收口；`decodeSvelteKitData()` 的返回值已统一复用显式公开 contract
+- `V362` generate worksheet config text contracts：当前阶段已收口；`generate/config.ts` 的 worksheet config 公开文本字段已统一复用显式公开 contract

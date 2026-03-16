@@ -4,30 +4,46 @@ import type { CellValue } from "exceljs"
 // Config types
 // ---------------------------------------------------------------------------
 
+export type GenerateFieldName = string
+
+export type GenerateTypeExpression = string
+
+export type GenerateSourceJsonName = string
+
+export type GenerateWorksheetName = string
+
+export type GenerateJsonFileName = string
+
+export type GenerateInterfaceName = string
+
+export type GenerateTypeGroupName = string
+
+export type GenerateWorksheetColumnHeader = string
+
 export interface ColumnDef {
-  field: string
-  type: string
+  field: GenerateFieldName
+  type: GenerateTypeExpression
 }
 
 export interface DerivedField {
-  field: string
-  type: string
+  field: GenerateFieldName
+  type: GenerateTypeExpression
   /** Which jsonFileName to look up the mapping from */
-  sourceJson: string
+  sourceJson: GenerateSourceJsonName
   /** Field in the current dataset to match against */
-  matchField: string
+  matchField: GenerateFieldName
   /** Field in the source dataset to match on */
-  sourceMatchField: string
+  sourceMatchField: GenerateFieldName
   /** Field in the source dataset to take the value from */
-  sourceValueField: string
+  sourceValueField: GenerateFieldName
 }
 
 export interface WorksheetConfig {
-  sheetName: string
-  jsonFileName: string
-  typeName: string
-  typeGroup: string
-  columns: Record<string, ColumnDef>
+  sheetName: GenerateWorksheetName
+  jsonFileName: GenerateJsonFileName
+  typeName: GenerateInterfaceName
+  typeGroup: GenerateTypeGroupName
+  columns: Record<GenerateWorksheetColumnHeader, ColumnDef>
   derivedFields?: DerivedField[]
 }
 

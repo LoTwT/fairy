@@ -7,6 +7,8 @@ export type CrawlTargetUrl = string
 
 export type CrawlHtmlText = string
 
+export type CrawlDecodedPayload = unknown
+
 export type CrawlDelayMilliseconds = number
 
 export type CrawlBatchSize = number
@@ -61,7 +63,9 @@ export async function fetchDynamic(
  * 规则：对象/数组中的整数值均为 data[] 的索引引用；递归时追踪当前解析路径，
  * 检测到循环直接返回 data[N] 原始值（可正确处理字面数字，如 rarity=4）。
  */
-export function decodeSvelteKitData(data: CrawlSvelteKitData): unknown {
+export function decodeSvelteKitData(
+  data: CrawlSvelteKitData,
+): CrawlDecodedPayload {
   const resolving = new Set<number>()
   function resolve(value: unknown): unknown {
     if (typeof value === "number") {
