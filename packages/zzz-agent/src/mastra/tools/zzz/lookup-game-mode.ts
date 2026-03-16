@@ -1,10 +1,14 @@
 import type {
   AgentAttributeLabel,
+  DABuffList,
+  DAEnemyItemList,
   DeadlyAssaultJson,
   EncounterDamageContext,
   FlattenedEnemyView,
+  SDNodeItemList,
   ShiyuDefenseJson,
   ThresholdSimulationJson,
+  TSNodeItemList,
 } from "zzz-data"
 import { createTool } from "@mastra/core/tools"
 import { z } from "zod"
@@ -126,12 +130,41 @@ export interface LookupGameModeBossSearchResult {
   results: LookupGameModeVersionSearchResultList
 }
 
-export type LookupGameModeDAData = DeadlyAssaultJson[number]
+export type LookupGameModeVersionTime = string
 
-export type LookupGameModeSDData = ShiyuDefenseJson[number]["versions"][number]
+export type LookupGameModeVersionDazeMultiplier = number
 
-export type LookupGameModeTSData =
-  ThresholdSimulationJson[number]["versions"][number]
+export type LookupGameModeVersionAnomalyMultiplier = number
+
+export interface LookupGameModeDAData {
+  versionKey: LookupGameModeVersionKey
+  versionName: LookupGameModeVersionName
+  versionTime: LookupGameModeVersionTime
+  versionDazeMult: LookupGameModeVersionDazeMultiplier
+  versionAnomMult: LookupGameModeVersionAnomalyMultiplier
+  buffs: DABuffList
+  versionEnemies: DAEnemyItemList
+}
+
+export interface LookupGameModeSDData {
+  versionKey: LookupGameModeVersionKey
+  versionName: LookupGameModeVersionName
+  versionTime: LookupGameModeVersionTime
+  versionDazeMult: LookupGameModeVersionDazeMultiplier
+  versionAnomMult: LookupGameModeVersionAnomalyMultiplier
+  nodes: SDNodeItemList
+}
+
+export interface LookupGameModeTSData {
+  versionKey: LookupGameModeVersionKey
+  versionName: LookupGameModeVersionName
+  versionTime: LookupGameModeVersionTime
+  versionBossDazeMult: LookupGameModeVersionDazeMultiplier
+  versionEnemyDazeMult: LookupGameModeVersionDazeMultiplier
+  versionBossAnomMult: LookupGameModeVersionAnomalyMultiplier
+  versionEnemyAnomMult: LookupGameModeVersionAnomalyMultiplier
+  nodes: TSNodeItemList
+}
 
 export type LookupGameModeSelectedEnemyValue =
   | LookupGameModeSelectedEnemy

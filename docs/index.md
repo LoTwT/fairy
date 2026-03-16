@@ -347,3 +347,6 @@
 - [静态构筑解析系统 V447](./specs/static-build-resolver-v447.md) — 当前阶段：已收口；`lookup-agent.ts` 中 `attributes / attackTypes` 已统一复用显式 alias
 - [静态构筑解析系统 V448](./specs/static-build-resolver-v448.md) — 当前阶段：已收口；`lookup-agent.ts` 中 `promotions` 与 `coreSkills[*].statBoosts` 已统一复用显式 interface
 - [静态构筑解析系统 V449](./specs/static-build-resolver-v449.md) — 当前阶段：已收口；`lookup-game-mode.ts` 的 `damageContext` 剩余 raw field contract 已统一复用显式 alias
+- [静态构筑解析系统 V450](./specs/static-build-resolver-v450.md) — 当前阶段：已收口；`lookup-game-mode.ts` 中 `DA` 成功结果的 `data` 顶层版本对象已统一复用显式 interface
+- [静态构筑解析系统 V451](./specs/static-build-resolver-v451.md) — 当前阶段：已收口；`lookup-game-mode.ts` 中 `SD` 成功结果的 `data` 顶层版本对象已统一复用显式 interface
+- [静态构筑解析系统 V452](./specs/static-build-resolver-v452.md) — 当前阶段：已收口；`lookup-game-mode.ts` 中 `TS` 成功结果的 `data` 顶层版本对象已统一复用显式 interface

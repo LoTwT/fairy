@@ -1198,3 +1198,6 @@ generic assumptions / coverage gaps / unsupported effects 的结构化镜像。
 447. `V447` lookup-agent display list contracts：当前阶段已收口；`lookup-agent.ts` 中 `attributes / attackTypes` 已统一复用显式 alias，不改变任何查询、筛选或技能裁剪逻辑，见 [静态构筑解析系统 V447](./static-build-resolver-v447.md)
 448. `V448` lookup-agent progression contracts：当前阶段已收口；`lookup-agent.ts` 中 `promotions` 与 `coreSkills[*].statBoosts` 已统一复用显式 interface，不改变任何查询、筛选或技能裁剪逻辑，见 [静态构筑解析系统 V448](./static-build-resolver-v448.md)
 449. `V449` lookup-game-mode damage-context field contracts：当前阶段已收口；`lookup-game-mode.ts` 的 `damageContext` 剩余 raw field contract 已统一复用显式 alias，不改变任何版本查询、敌人选择或 `damageContext` 计算逻辑，见 [静态构筑解析系统 V449](./static-build-resolver-v449.md)
+450. `V450` lookup-game-mode DA data contracts：当前阶段已收口；`lookup-game-mode.ts` 中 `DA` 成功结果的 `data` 顶层版本对象已统一复用显式 interface，不改变任何版本查询、敌人选择或 `damageContext` 计算逻辑，见 [静态构筑解析系统 V450](./static-build-resolver-v450.md)
+451. `V451` lookup-game-mode SD data contracts：当前阶段已收口；`lookup-game-mode.ts` 中 `SD` 成功结果的 `data` 顶层版本对象已统一复用显式 interface，不改变任何版本查询、难度解析、敌人选择或 `damageContext` 计算逻辑，见 [静态构筑解析系统 V451](./static-build-resolver-v451.md)
+452. `V452` lookup-game-mode TS data contracts：当前阶段已收口；`lookup-game-mode.ts` 中 `TS` 成功结果的 `data` 顶层版本对象已统一复用显式 interface，不改变任何版本查询、难度解析、敌人选择或 `damageContext` 计算逻辑，见 [静态构筑解析系统 V452](./static-build-resolver-v452.md)
