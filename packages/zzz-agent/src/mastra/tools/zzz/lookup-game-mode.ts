@@ -93,6 +93,12 @@ export type LookupGameModeRecommendedResistance = number
 
 export type LookupGameModeLookupMessage = string
 
+export type LookupGameModeOptionalLookupMessage =
+  | LookupGameModeLookupMessage
+  | undefined
+
+export type LookupGameModeFoundFlag = boolean
+
 export interface LookupGameModeUnavailableVersionsResult {
   found: false
   message: LookupGameModeLookupMessage
@@ -103,6 +109,21 @@ export interface LookupGameModeUnavailableDifficultiesResult {
   found: false
   message: LookupGameModeLookupMessage
   availableDifficulties: LookupGameModeDifficultyList
+}
+
+export interface LookupGameModeDABossSearchResult {
+  found: LookupGameModeFoundFlag
+  mode: LookupGameModeMode
+  message: LookupGameModeOptionalLookupMessage
+  results: LookupGameModeDAVersionSearchResultList
+}
+
+export interface LookupGameModeBossSearchResult {
+  found: LookupGameModeFoundFlag
+  mode: LookupGameModeMode
+  difficulty: LookupGameModeDifficultyName
+  message: LookupGameModeOptionalLookupMessage
+  results: LookupGameModeVersionSearchResultList
 }
 
 export interface LookupGameModeDamageContext {
@@ -273,7 +294,7 @@ export const lookupGameMode = createTool({
             ? undefined
             : `未找到包含 boss「${boss}」的 DA 版本`,
           results: matches.map(toDAVersionSearchResult),
-        }
+        } satisfies LookupGameModeDABossSearchResult
       }
 
       const item = findDAVersion(data, version)
@@ -341,7 +362,7 @@ export const lookupGameMode = createTool({
             ? undefined
             : `未找到包含 boss「${boss}」的 SD 版本`,
           results: matches.map(toVersionSearchResult),
-        }
+        } satisfies LookupGameModeBossSearchResult
       }
 
       const vItem = findSDVersion(data, {
@@ -414,7 +435,7 @@ export const lookupGameMode = createTool({
           ? undefined
           : `未找到包含 boss「${boss}」的 TS 版本`,
         results: matches.map(toVersionSearchResult),
-      }
+      } satisfies LookupGameModeBossSearchResult
     }
 
     const vItem = findTSVersion(data, {
