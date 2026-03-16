@@ -323,3 +323,4 @@
 - [静态构筑解析系统 V423](./specs/static-build-resolver-v423.md) — 当前阶段：已收口；`gachabase/types.ts` 中 `AgentListItem` 的 display-label list contract 已统一复用显式 alias
 - [静态构筑解析系统 V424](./specs/static-build-resolver-v424.md) — 当前阶段：已收口；`gachabase/types.ts` 中共享的技能/加成 list contract 已统一复用显式 alias
 - [静态构筑解析系统 V425](./specs/static-build-resolver-v425.md) — 当前阶段：已收口；`gachabase/types.ts` 中 `agent-details.json` 外层 list contract 已统一复用显式 alias
+- [静态构筑解析系统 V426](./specs/static-build-resolver-v426.md) — 当前阶段：已收口；`gachabase/types.ts` 中 `w-engine / bangboo / drive-disc` 剩余外层 list contract 已统一复用显式 alias

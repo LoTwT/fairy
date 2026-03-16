@@ -41,6 +41,14 @@ export type AgentSkillGroupList = AgentSkillGroup[]
 export type CoreSkillLevelList = CoreSkillLevel[]
 export type AgentPotentialVisionList = AgentPotentialVision[]
 export type AgentMindscapeList = AgentMindscape[]
+export type WEngineEffectList = WEngineEffect[]
+export type WEngineLevelList = WEngineLevel[]
+export type WEngineStarList = WEngineStar[]
+export type BangbooSkillStatList = BangbooSkillStat[]
+export type BangbooStatList = BangbooStat[]
+export type BangbooOptimizationList = BangbooOptimization[]
+export type BangbooSkillList = BangbooSkill[]
+export type DriveDiscSetEffectList = DriveDiscSetEffect[]
 
 export interface StatBoost {
   statId: GachabaseStatId
@@ -212,7 +220,7 @@ export interface WEngineListItem {
   exclusiveAgentName: GachabaseName | null
   baseStat: WEngineStatValue
   advancedStat: WEngineStatValue
-  effects: WEngineEffect[]
+  effects: WEngineEffectList
 }
 
 // ─── w-engine-details.json ────────────────────────────────────────────────────
@@ -246,8 +254,8 @@ export interface WEngineDetails {
   name: GachabaseName
   exclusiveAgent: WEngineExclusiveAgentRef | null
   assets: WEngineDetailsAssets
-  levels: WEngineLevel[]
-  stars: WEngineStar[]
+  levels: WEngineLevelList
+  stars: WEngineStarList
 }
 
 // ─── bangboo.json ─────────────────────────────────────────────────────────────
@@ -276,7 +284,7 @@ export interface BangbooSkill {
   name: GachabaseName
   /** Source-compatible rich text string with inline HTML-like markup. */
   description: RichTextString
-  stats: BangbooSkillStat[]
+  stats: BangbooSkillStatList
 }
 
 export interface BangbooAssets {
@@ -291,9 +299,9 @@ export interface BangbooItem {
   rarity: GachabaseRarity
   description: GachabaseDescriptionText
   assets: BangbooAssets
-  baseStats: BangbooStat[]
-  optimizations: BangbooOptimization[]
-  skills: BangbooSkill[]
+  baseStats: BangbooStatList
+  optimizations: BangbooOptimizationList
+  skills: BangbooSkillList
 }
 
 // ─── drive-discs.json ─────────────────────────────────────────────────────────
@@ -310,5 +318,5 @@ export interface DriveDiscItem {
   name: GachabaseName
   icon: GachabaseIcon
   tag: GachabaseName
-  setEffects: DriveDiscSetEffect[]
+  setEffects: DriveDiscSetEffectList
 }
