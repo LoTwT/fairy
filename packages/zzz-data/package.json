@@ -2,62 +2,21 @@
   "name": "zzz-data",
   "type": "module",
   "version": "0.0.1",
+  "private": true,
   "packageManager": "pnpm@10.31.0",
-  "description": "zzz data",
-  "author": "LoTwT <l709937065@gmail.com>",
-  "license": "MIT",
-  "homepage": "https://github.com/LoTwT/zzz-data#readme",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/LoTwT/zzz-data.git"
-  },
-  "bugs": {
-    "url": "https://github.com/LoTwT/zzz-data/issues"
-  },
-  "keywords": [
-    "zenless zone zero",
-    "zzz",
-    "zzz data"
-  ],
-  "exports": {
-    ".": "./dist/index.mjs",
-    "./data/*/*": "./data/*/*.json"
-  },
-  "main": "./dist/index.mjs",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.mts",
-  "typesVersions": {
-    "*": {
-      "*": [
-        "./dist/*",
-        "./*"
-      ]
-    }
-  },
-  "files": [
-    "data/en/*.json",
-    "data/zh-CN/*.json",
-    "dist"
-  ],
+  "description": "Zenless Zone Zero raw data crawl scripts",
   "scripts": {
     "generate": "tsx scripts/generate/index.ts",
     "crawl": "tsx scripts/crawl/index.ts",
     "crawl:gachabase": "tsx scripts/crawl/index.ts gachabase",
     "crawl:buhflipexplode": "tsx scripts/crawl/index.ts buhflipexplode",
-    "crawl:mihoyo-wiki": "tsx scripts/crawl/index.ts mihoyo-wiki",
-    "merge": "tsx scripts/merge/index.ts",
-    "data:prepare": "pnpm run crawl && pnpm run merge",
-    "test": "vitest run",
-    "build": "tsdown",
-    "release": "pnpm run build && pnpm run merge && pnpm publish"
+    "crawl:mihoyo-wiki": "tsx scripts/crawl/index.ts mihoyo-wiki"
   },
   "devDependencies": {
     "@types/node": "^25.3.5",
     "cheerio": "^1.2.0",
     "exceljs": "^4.4.0",
     "playwright": "^1.58.2",
-    "tsdown": "^0.21.1",
-    "tsx": "^4.21.0",
-    "vitest": "^4.0.18"
+    "tsx": "^4.21.0"
   }
 }

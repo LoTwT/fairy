@@ -5,20 +5,16 @@
     "moduleDetection": "force",
     "module": "esnext",
     "moduleResolution": "bundler",
-    "paths": {
-      "@/*": ["./src/*"]
-    },
     "resolveJsonModule": true,
     "types": ["node"],
     "strict": true,
     "noFallthroughCasesInSwitch": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "declaration": true,
     "esModuleInterop": true,
     "isolatedModules": true,
     "skipDefaultLibCheck": true,
     "skipLibCheck": true
   },
-  "include": ["src", "scripts", "tests"]
+  "include": ["scripts/crawl/**/*.ts", "scripts/generate/**/*.ts"]
 }
