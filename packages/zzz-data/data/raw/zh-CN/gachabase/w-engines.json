@@ -1,156 +1,9 @@
 [
   {
-    "id": "13020",
-    "slug": "the-simmering-pot",
-    "name": "炎炙沸釜",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/5237426375793960994_272_14050658.webp",
-    "rarity": 3,
-    "specialty": {
-      "id": "2",
-      "name": "击破"
-    },
-    "exclusiveAgentName": null,
-    "baseStat": {
-      "id": "12101",
-      "name": "基础攻击力",
-      "value": 40
-    },
-    "advancedStat": {
-      "id": "12202",
-      "name": "冲击力",
-      "value": 0.06
-    },
-    "effects": [
-      {
-        "level": 1,
-        "name": "红油辣锅",
-        "effect": "发动<span style=\"color: #FFFFFF\">[支援突击]</span> 时，装备者对目标造成的失衡值提升<span style=\"color: #2BAD00\">7.2%</span>，装备者造成的伤害提升<span style=\"color: #2BAD00\">7.2%</span>，持续30秒，重复触发时刷新持续时间。"
-      },
-      {
-        "level": 2,
-        "name": "红油辣锅",
-        "effect": "发动<span style=\"color: #FFFFFF\">[支援突击]</span> 时，装备者对目标造成的失衡值提升<span style=\"color: #2BAD00\">8.2%</span>，装备者造成的伤害提升<span style=\"color: #2BAD00\">8.2%</span>，持续30秒，重复触发时刷新持续时间。"
-      },
-      {
-        "level": 3,
-        "name": "红油辣锅",
-        "effect": "发动<span style=\"color: #FFFFFF\">[支援突击]</span> 时，装备者对目标造成的失衡值提升<span style=\"color: #2BAD00\">9.2%</span>，装备者造成的伤害提升<span style=\"color: #2BAD00\">9.2%</span>，持续30秒，重复触发时刷新持续时间。"
-      },
-      {
-        "level": 4,
-        "name": "红油辣锅",
-        "effect": "发动<span style=\"color: #FFFFFF\">[支援突击]</span> 时，装备者对目标造成的失衡值提升<span style=\"color: #2BAD00\">10.2%</span>，装备者造成的伤害提升<span style=\"color: #2BAD00\">10.2%</span>，持续30秒，重复触发时刷新持续时间。"
-      },
-      {
-        "level": 5,
-        "name": "红油辣锅",
-        "effect": "发动<span style=\"color: #FFFFFF\">[支援突击]</span> 时，装备者对目标造成的失衡值提升<span style=\"color: #2BAD00\">11.5%</span>，装备者造成的伤害提升<span style=\"color: #2BAD00\">11.5%</span>，持续30秒，重复触发时刷新持续时间。"
-      }
-    ]
-  },
-  {
-    "id": "14151",
-    "slug": "neon-fantasies",
-    "name": "霓虹妄想",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/14423666084058728060_272_14050658.webp",
-    "rarity": 4,
-    "specialty": {
-      "id": "2",
-      "name": "击破"
-    },
-    "exclusiveAgentName": "南宫羽",
-    "baseStat": {
-      "id": "12101",
-      "name": "基础攻击力",
-      "value": 48
-    },
-    "advancedStat": {
-      "id": "31402",
-      "name": "异常掌控",
-      "value": 0.12
-    },
-    "effects": [
-      {
-        "level": 1,
-        "name": "迪斯科恶魔",
-        "effect": "(Test1)装备者的异常精通提升<span style=\"color: #2BAD00\">90</span>点；装备者<span style=\"color: #FFFFFF\">[强化特殊技]</span>或<span style=\"color: #FFFFFF\">[普通攻击]</span>造成<color=#ELEMENT_Ether>以太属性</color>伤害时，全队造成的伤害提升<span style=\"color: #2BAD00\">15%</span>，持续40秒，最多叠加2层，同一招式内最多触发一次，重复触发时刷新持续时间，拥有2层效果时，装备者的异常精通额外提升<span style=\"color: #2BAD00\">60</span>点，该效果全队唯一。"
-      },
-      {
-        "level": 2,
-        "name": "迪斯科恶魔",
-        "effect": "(Test1)装备者的异常精通提升<span style=\"color: #2BAD00\">90</span>点；装备者<span style=\"color: #FFFFFF\">[强化特殊技]</span>或<span style=\"color: #FFFFFF\">[普通攻击]</span>造成<color=#ELEMENT_Ether>以太属性</color>伤害时，全队造成的伤害提升<span style=\"color: #2BAD00\">15%</span>，持续40秒，最多叠加2层，同一招式内最多触发一次，重复触发时刷新持续时间，拥有2层效果时，装备者的异常精通额外提升<span style=\"color: #2BAD00\">60</span>点，该效果全队唯一。"
-      },
-      {
-        "level": 3,
-        "name": "迪斯科恶魔",
-        "effect": "(Test1)装备者的异常精通提升<span style=\"color: #2BAD00\">90</span>点；装备者<span style=\"color: #FFFFFF\">[强化特殊技]</span>或<span style=\"color: #FFFFFF\">[普通攻击]</span>造成<color=#ELEMENT_Ether>以太属性</color>伤害时，全队造成的伤害提升<span style=\"color: #2BAD00\">15%</span>，持续40秒，最多叠加2层，同一招式内最多触发一次，重复触发时刷新持续时间，拥有2层效果时，装备者的异常精通额外提升<span style=\"color: #2BAD00\">60</span>点，该效果全队唯一。"
-      },
-      {
-        "level": 4,
-        "name": "迪斯科恶魔",
-        "effect": "(Test1)装备者的异常精通提升<span style=\"color: #2BAD00\">90</span>点；装备者<span style=\"color: #FFFFFF\">[强化特殊技]</span>或<span style=\"color: #FFFFFF\">[普通攻击]</span>造成<color=#ELEMENT_Ether>以太属性</color>伤害时，全队造成的伤害提升<span style=\"color: #2BAD00\">15%</span>，持续40秒，最多叠加2层，同一招式内最多触发一次，重复触发时刷新持续时间，拥有2层效果时，装备者的异常精通额外提升<span style=\"color: #2BAD00\">60</span>点，该效果全队唯一。"
-      },
-      {
-        "level": 5,
-        "name": "迪斯科恶魔",
-        "effect": "(Test1)装备者的异常精通提升<span style=\"color: #2BAD00\">90</span>点；装备者<span style=\"color: #FFFFFF\">[强化特殊技]</span>或<span style=\"color: #FFFFFF\">[普通攻击]</span>造成<color=#ELEMENT_Ether>以太属性</color>伤害时，全队造成的伤害提升<span style=\"color: #2BAD00\">15%</span>，持续40秒，最多叠加2层，同一招式内最多触发一次，重复触发时刷新持续时间，拥有2层效果时，装备者的异常精通额外提升<span style=\"color: #2BAD00\">60</span>点，该效果全队唯一。"
-      }
-    ]
-  },
-  {
-    "id": "14152",
-    "slug": "serpentine-seeker",
-    "name": "鳞齿寻踪",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/305530623966086148_272_14050658.webp",
-    "rarity": 4,
-    "specialty": {
-      "id": "1",
-      "name": "强攻"
-    },
-    "exclusiveAgentName": "希希芙",
-    "baseStat": {
-      "id": "12101",
-      "name": "基础攻击力",
-      "value": 48
-    },
-    "advancedStat": {
-      "id": "30502",
-      "name": "能量自动回复",
-      "value": 0.24
-    },
-    "effects": [
-      {
-        "level": 1,
-        "name": "仿生毒素",
-        "effect": "暴击率提高<span style=\"color: #2BAD00\">25%</span>；装备者单次消耗的能量达到20点时，每消耗20点能量，获得3秒增益效果：造成<span style=\"color: #2EB6FF\">电属性伤害</span>时无视目标<span style=\"color: #2BAD00\">30%</span>防御力；重复获得时，延长持续时间，至多延长至30秒；进入接战状态时，获得10秒该增益；装备者为非当前操作中角色时，持续时间不再减少。"
-      },
-      {
-        "level": 2,
-        "name": "仿生毒素",
-        "effect": "暴击率提高<span style=\"color: #2BAD00\">28.8%</span>；装备者单次消耗的能量达到20点时，每消耗20点能量，获得3秒增益效果：造成<span style=\"color: #2EB6FF\">电属性伤害</span>时无视目标<span style=\"color: #2BAD00\">34.5%</span>防御力；重复获得时，延长持续时间，至多延长至30秒；进入接战状态时，获得10秒该增益；装备者为非当前操作中角色时，持续时间不再减少。"
-      },
-      {
-        "level": 3,
-        "name": "仿生毒素",
-        "effect": "暴击率提高<span style=\"color: #2BAD00\">32.5%</span>；装备者单次消耗的能量达到20点时，每消耗20点能量，获得3秒增益效果：造成<span style=\"color: #2EB6FF\">电属性伤害</span>时无视目标<span style=\"color: #2BAD00\">39%</span>防御力；重复获得时，延长持续时间，至多延长至30秒；进入接战状态时，获得10秒该增益；装备者为非当前操作中角色时，持续时间不再减少。"
-      },
-      {
-        "level": 4,
-        "name": "仿生毒素",
-        "effect": "暴击率提高<span style=\"color: #2BAD00\">36.3%</span>；装备者单次消耗的能量达到20点时，每消耗20点能量，获得3秒增益效果：造成<span style=\"color: #2EB6FF\">电属性伤害</span>时无视目标<span style=\"color: #2BAD00\">43.5%</span>防御力；重复获得时，延长持续时间，至多延长至30秒；进入接战状态时，获得10秒该增益；装备者为非当前操作中角色时，持续时间不再减少。"
-      },
-      {
-        "level": 5,
-        "name": "仿生毒素",
-        "effect": "暴击率提高<span style=\"color: #2BAD00\">40%</span>；装备者单次消耗的能量达到20点时，每消耗20点能量，获得3秒增益效果：造成<span style=\"color: #2EB6FF\">电属性伤害</span>时无视目标<span style=\"color: #2BAD00\">48%</span>防御力；重复获得时，延长持续时间，至多延长至30秒；进入接战状态时，获得10秒该增益；装备者为非当前操作中角色时，持续时间不再减少。"
-      }
-    ]
-  },
-  {
     "id": "14150",
     "slug": "angel-in-the-shell",
     "name": "壳中之灵",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/9669739024892046384_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/9669739024892046384_260_13755883.webp",
     "rarity": 4,
     "specialty": {
       "id": "3",
@@ -199,7 +52,7 @@
     "id": "14149",
     "slug": "thoughtbop",
     "name": "思络成歌",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/7429951814988590005_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/7429951814988590005_260_13755883.webp",
     "rarity": 4,
     "specialty": {
       "id": "4",
@@ -248,7 +101,7 @@
     "id": "14143",
     "slug": "cloudcleave-radiance",
     "name": "云霓孤光",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/8055566802664098205_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/8055566802664098205_250_13063804.webp",
     "rarity": 4,
     "specialty": {
       "id": "1",
@@ -297,7 +150,7 @@
     "id": "14134",
     "slug": "half-sugar-bunny",
     "name": "半糖雪兔",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/8302091321625222884_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/8302091321625222884_250_13063804.webp",
     "rarity": 4,
     "specialty": {
       "id": "5",
@@ -346,7 +199,7 @@
     "id": "13019",
     "slug": "cauldron-of-clarity",
     "name": "青漪灵鼎",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/13683906103121238376_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/13683906103121238376_250_13063804.webp",
     "rarity": 3,
     "specialty": {
       "id": "6",
@@ -395,7 +248,7 @@
     "id": "14148",
     "slug": "yesterday-calls",
     "name": "昨夜来电",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/1288195807934587945_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/1288195807934587945_250_13063804.webp",
     "rarity": 4,
     "specialty": {
       "id": "2",
@@ -444,7 +297,7 @@
     "id": "14147",
     "slug": "wrathful-vajra",
     "name": "怒目金刚",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/2215766288012715839_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/2215766288012715839_250_13063804.webp",
     "rarity": 4,
     "specialty": {
       "id": "6",
@@ -493,7 +346,7 @@
     "id": "14105",
     "slug": "krakens-cradle",
     "name": "海妖摇篮",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/17270851181675704974_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/17270851181675704974_250_13063804.webp",
     "rarity": 4,
     "specialty": {
       "id": "6",
@@ -539,10 +392,59 @@
     ]
   },
   {
+    "id": "13105",
+    "slug": "test-a-lucia-1051",
+    "name": "(Test1)Test-A-露西亚-1051",
+    "icon": "",
+    "rarity": 3,
+    "specialty": {
+      "id": "1",
+      "name": "强攻"
+    },
+    "exclusiveAgentName": "伊德海莉",
+    "baseStat": {
+      "id": "12101",
+      "name": "基础攻击力",
+      "value": 42
+    },
+    "advancedStat": {
+      "id": "12102",
+      "name": "攻击力百分比",
+      "value": 0.1
+    },
+    "effects": [
+      {
+        "level": 1,
+        "name": "(Test1)test-武器技能名",
+        "effect": ""
+      },
+      {
+        "level": 2,
+        "name": "(Test1)test-武器技能名",
+        "effect": ""
+      },
+      {
+        "level": 3,
+        "name": "(Test1)test-武器技能名",
+        "effect": ""
+      },
+      {
+        "level": 4,
+        "name": "(Test1)test-武器技能名",
+        "effect": ""
+      },
+      {
+        "level": 5,
+        "name": "(Test1)test-武器技能名",
+        "effect": ""
+      }
+    ]
+  },
+  {
     "id": "14145",
     "slug": "dreamlit-hearth",
     "name": "铸梦炉歌",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/14424828666234304416_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/14424828666234304416_250_13063804.webp",
     "rarity": 4,
     "specialty": {
       "id": "4",
@@ -591,7 +493,7 @@
     "id": "13144",
     "slug": "grill-owisp",
     "name": "燔火胧夜",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/2167835481448336366_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/2167835481448336366_250_13063804.webp",
     "rarity": 3,
     "specialty": {
       "id": "6",
@@ -640,7 +542,7 @@
     "id": "14137",
     "slug": "qingming-birdcage",
     "name": "青溟笼舍",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/14664936329557540257_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/14664936329557540257_250_13063804.webp",
     "rarity": 4,
     "specialty": {
       "id": "6",
@@ -689,7 +591,7 @@
     "id": "14133",
     "slug": "flight-of-fancy",
     "name": "飞鸟星梦",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/11876828231878856583_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/11876828231878856583_250_13063804.webp",
     "rarity": 4,
     "specialty": {
       "id": "3",
@@ -738,7 +640,7 @@
     "id": "14146",
     "slug": "cordis-germina",
     "name": "机巧心种",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/6653494995125539789_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/6653494995125539789_250_13063804.webp",
     "rarity": 4,
     "specialty": {
       "id": "1",
@@ -787,7 +689,7 @@
     "id": "14141",
     "slug": "metanukimorphosis",
     "name": "狸法七变化",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/14502521081514906470_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/14502521081514906470_250_13063804.webp",
     "rarity": 4,
     "specialty": {
       "id": "4",
@@ -836,7 +738,7 @@
     "id": "14124",
     "slug": "riot-suppressor-mark-vi",
     "name": "防暴者Ⅵ型",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/9053883884698072842_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/9053883884698072842_250_13063804.webp",
     "rarity": 4,
     "specialty": {
       "id": "1",
@@ -885,7 +787,7 @@
     "id": "14129",
     "slug": "myriad-eclipse",
     "name": "千面日陨",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/18441994489171329950_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/18441994489171329950_250_13063804.webp",
     "rarity": 4,
     "specialty": {
       "id": "1",
@@ -934,7 +836,7 @@
     "id": "14131",
     "slug": "elegant-vanity",
     "name": "玲珑妆匣",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/17583747718610004501_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/17583747718610004501_250_13063804.webp",
     "rarity": 4,
     "specialty": {
       "id": "4",
@@ -983,7 +885,7 @@
     "id": "14130",
     "slug": "bellicose-blaze",
     "name": "嚣枪喧焰",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/3801614239057960492_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/3801614239057960492_250_13063804.webp",
     "rarity": 4,
     "specialty": {
       "id": "1",
@@ -1032,7 +934,7 @@
     "id": "14132",
     "slug": "heartstring-nocturne",
     "name": "心弦夜响",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/17224156199016021346_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/17224156199016021346_250_13063804.webp",
     "rarity": 4,
     "specialty": {
       "id": "1",
@@ -1081,7 +983,7 @@
     "id": "14125",
     "slug": "ice-jade-teapot",
     "name": "玉壶青冰",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/3800981583187073749_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/3800981583187073749_250_13063804.webp",
     "rarity": 4,
     "specialty": {
       "id": "2",
@@ -1130,7 +1032,7 @@
     "id": "14122",
     "slug": "timeweaver",
     "name": "时流贤者",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/2361211180638574087_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/2361211180638574087_250_13063804.webp",
     "rarity": 4,
     "specialty": {
       "id": "3",
@@ -1179,7 +1081,7 @@
     "id": "14140",
     "slug": "practiced-perfection",
     "name": "十方锻星",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/2257960741162567074_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/2257960741162567074_250_13063804.webp",
     "rarity": 4,
     "specialty": {
       "id": "3",
@@ -1228,7 +1130,7 @@
     "id": "14139",
     "slug": "roaring-fur-nace",
     "name": "福虓炉炉",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/7259912763619678927_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/7259912763619678927_250_13063804.webp",
     "rarity": 4,
     "specialty": {
       "id": "2",
@@ -1277,7 +1179,7 @@
     "id": "14126",
     "slug": "sharpened-stinger",
     "name": "淬锋钳刺",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/8152096239426011424_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/8152096239426011424_250_13063804.webp",
     "rarity": 4,
     "specialty": {
       "id": "3",
@@ -1326,7 +1228,7 @@
     "id": "14136",
     "slug": "spectral-gaze",
     "name": "索魂影眸",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/3319162674555138433_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/3319162674555138433_250_13063804.webp",
     "rarity": 4,
     "specialty": {
       "id": "2",
@@ -1375,7 +1277,7 @@
     "id": "14138",
     "slug": "severed-innocence",
     "name": "牺牲洁纯",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/4990246965813297039_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/4990246965813297039_250_13063804.webp",
     "rarity": 4,
     "specialty": {
       "id": "1",
@@ -1424,7 +1326,7 @@
     "id": "14118",
     "slug": "fusion-compiler",
     "name": "嵌合编译器",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/13172456692747309131_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/13172456692747309131_250_13063804.webp",
     "rarity": 4,
     "specialty": {
       "id": "3",
@@ -1473,7 +1375,7 @@
     "id": "14117",
     "slug": "flamemaker-shaker",
     "name": "灼心摇壶",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/13608970186740529905_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/13608970186740529905_250_13063804.webp",
     "rarity": 4,
     "specialty": {
       "id": "3",
@@ -1522,7 +1424,7 @@
     "id": "14001",
     "slug": "cannon-rotor",
     "name": "加农转子",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/17291691433245760086_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/17291691433245760086_250_13063804.webp",
     "rarity": 3,
     "specialty": {
       "id": "1",
@@ -1571,7 +1473,7 @@
     "id": "14116",
     "slug": "blazing-laurel",
     "name": "焰心桂冠",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/689203601306621273_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/689203601306621273_250_13063804.webp",
     "rarity": 4,
     "specialty": {
       "id": "2",
@@ -1620,7 +1522,7 @@
     "id": "14120",
     "slug": "zanshin-herb-case",
     "name": "残心青囊",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/14387961856592767944_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/14387961856592767944_250_13063804.webp",
     "rarity": 4,
     "specialty": {
       "id": "1",
@@ -1669,7 +1571,7 @@
     "id": "14110",
     "slug": "hellfire-gears",
     "name": "燃狱齿轮",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/13548889107326396113_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/13548889107326396113_250_13063804.webp",
     "rarity": 4,
     "specialty": {
       "id": "2",
@@ -1718,7 +1620,7 @@
     "id": "14102",
     "slug": "steel-cushion",
     "name": "钢铁肉垫",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/3727706231379869149_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/3727706231379869149_250_13063804.webp",
     "rarity": 4,
     "specialty": {
       "id": "1",
@@ -1767,7 +1669,7 @@
     "id": "14104",
     "slug": "the-brimstone",
     "name": "硫磺石",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/4609234265709346596_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/4609234265709346596_250_13063804.webp",
     "rarity": 4,
     "specialty": {
       "id": "1",
@@ -1816,7 +1718,7 @@
     "id": "14003",
     "slug": "six-shooter",
     "name": "左轮转子",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/1048126356036618624_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/1048126356036618624_250_13063804.webp",
     "rarity": 3,
     "specialty": {
       "id": "2",
@@ -1865,7 +1767,7 @@
     "id": "14107",
     "slug": "tusks-of-fury",
     "name": "奔袭獠牙",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/74727045392462316_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/74727045392462316_250_13063804.webp",
     "rarity": 4,
     "specialty": {
       "id": "5",
@@ -1914,7 +1816,7 @@
     "id": "14121",
     "slug": "weeping-cradle",
     "name": "啜泣摇篮",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/17487839183587550139_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/17487839183587550139_250_13063804.webp",
     "rarity": 4,
     "specialty": {
       "id": "4",
@@ -1963,7 +1865,7 @@
     "id": "14114",
     "slug": "the-restrained",
     "name": "拘缚者",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/17884298363682674960_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/17884298363682674960_250_13063804.webp",
     "rarity": 4,
     "specialty": {
       "id": "2",
@@ -2012,7 +1914,7 @@
     "id": "14109",
     "slug": "hailstorm-shrine",
     "name": "霰落星殿",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/12108579259460836385_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/12108579259460836385_250_13063804.webp",
     "rarity": 4,
     "specialty": {
       "id": "3",
@@ -2061,7 +1963,7 @@
     "id": "13127",
     "slug": "peacekeeper-specialized",
     "name": "维序者-特化型",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/10755867759139457358_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/10755867759139457358_250_13063804.webp",
     "rarity": 3,
     "specialty": {
       "id": "5",
@@ -2110,7 +2012,7 @@
     "id": "14119",
     "slug": "deep-sea-visitor",
     "name": "深海访客",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/13630996402709424784_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/13630996402709424784_250_13063804.webp",
     "rarity": 4,
     "specialty": {
       "id": "1",
@@ -2159,7 +2061,7 @@
     "id": "13128",
     "slug": "roaring-ride",
     "name": "轰鸣座驾",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/10786185987247493831_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/10786185987247493831_250_13063804.webp",
     "rarity": 3,
     "specialty": {
       "id": "3",
@@ -2208,7 +2110,7 @@
     "id": "13142",
     "slug": "tremor-trigram-vessel",
     "name": "震元奇枢",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/1569914992420386318_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/1569914992420386318_250_13063804.webp",
     "rarity": 3,
     "specialty": {
       "id": "5",
@@ -2257,7 +2159,7 @@
     "id": "13135",
     "slug": "box-cutter",
     "name": "裁纸刀",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/9432089935397565383_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/9432089935397565383_250_13063804.webp",
     "rarity": 3,
     "specialty": {
       "id": "2",
@@ -2306,7 +2208,7 @@
     "id": "14002",
     "slug": "unfettered-game-ball",
     "name": "逍遥游球",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/2863038979997465136_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/2863038979997465136_250_13063804.webp",
     "rarity": 3,
     "specialty": {
       "id": "4",
@@ -2355,7 +2257,7 @@
     "id": "13009",
     "slug": "electro-lip-gloss",
     "name": "触电唇彩",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/8278823189502747467_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/8278823189502747467_250_13063804.webp",
     "rarity": 3,
     "specialty": {
       "id": "3",
@@ -2404,7 +2306,7 @@
     "id": "13101",
     "slug": "demara-battery-mark-ii",
     "name": "德玛拉电池Ⅱ型",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/3893124051674327734_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/3893124051674327734_250_13063804.webp",
     "rarity": 3,
     "specialty": {
       "id": "2",
@@ -2453,7 +2355,7 @@
     "id": "13008",
     "slug": "weeping-gemini",
     "name": "双生泣星",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/5941300241046102669_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/5941300241046102669_250_13063804.webp",
     "rarity": 3,
     "specialty": {
       "id": "3",
@@ -2502,7 +2404,7 @@
     "id": "13013",
     "slug": "gilded-blossom",
     "name": "鎏金花信",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/15104215860712795980_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/15104215860712795980_250_13063804.webp",
     "rarity": 3,
     "specialty": {
       "id": "1",
@@ -2551,7 +2453,7 @@
     "id": "13014",
     "slug": "radiowave-journey",
     "name": "电波漫步",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/12912807887204130966_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/12912807887204130966_250_13063804.webp",
     "rarity": 3,
     "specialty": {
       "id": "6",
@@ -2600,7 +2502,7 @@
     "id": "13106",
     "slug": "housekeeper",
     "name": "家政员",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/6666468113399227453_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/6666468113399227453_250_13063804.webp",
     "rarity": 3,
     "specialty": {
       "id": "1",
@@ -2649,7 +2551,7 @@
     "id": "13111",
     "slug": "drill-rig-red-axis",
     "name": "旋钻机-赤轴",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/12456785872476983902_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/12456785872476983902_250_13063804.webp",
     "rarity": 3,
     "specialty": {
       "id": "1",
@@ -2698,7 +2600,7 @@
     "id": "13115",
     "slug": "kaboom-the-cannon",
     "name": "好斗的阿炮",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/4175156182529753901_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/4175156182529753901_250_13063804.webp",
     "rarity": 3,
     "specialty": {
       "id": "4",
@@ -2747,7 +2649,7 @@
     "id": "13113",
     "slug": "bashful-demon",
     "name": "含羞恶面",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/7276144844641234541_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/7276144844641234541_250_13063804.webp",
     "rarity": 3,
     "specialty": {
       "id": "4",
@@ -2796,7 +2698,7 @@
     "id": "13015",
     "slug": "marcato-desire",
     "name": "强音热望",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/15776112863445148120_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/15776112863445148120_250_13063804.webp",
     "rarity": 3,
     "specialty": {
       "id": "1",
@@ -2845,7 +2747,7 @@
     "id": "13010",
     "slug": "bunny-band",
     "name": "兔能环",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/17505149526367325467_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/17505149526367325467_250_13063804.webp",
     "rarity": 3,
     "specialty": {
       "id": "5",
@@ -2894,7 +2796,7 @@
     "id": "13103",
     "slug": "the-vault",
     "name": "聚宝箱",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/15411383610664024344_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/15411383610664024344_250_13063804.webp",
     "rarity": 3,
     "specialty": {
       "id": "4",
@@ -2943,7 +2845,7 @@
     "id": "13007",
     "slug": "original-transmorpher",
     "name": "正版变身器",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/4098303117924185359_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/4098303117924185359_250_13063804.webp",
     "rarity": 3,
     "specialty": {
       "id": "5",
@@ -2992,7 +2894,7 @@
     "id": "13112",
     "slug": "big-cylinder",
     "name": "比格气缸",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/8331231276527781665_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/8331231276527781665_250_13063804.webp",
     "rarity": 3,
     "specialty": {
       "id": "5",
@@ -3041,7 +2943,7 @@
     "id": "13016",
     "slug": "reel-projector",
     "name": "光影刻刀",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/9964315085084264143_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/9964315085084264143_250_13063804.webp",
     "rarity": 3,
     "specialty": {
       "id": "5",
@@ -3090,7 +2992,7 @@
     "id": "13108",
     "slug": "starlight-engine-replica",
     "name": "仿制星徽引擎",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/15621645452053854921_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/15621645452053854921_250_13063804.webp",
     "rarity": 3,
     "specialty": {
       "id": "1",
@@ -3139,7 +3041,7 @@
     "id": "13011",
     "slug": "spring-embrace",
     "name": "春日融融",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/9243015773386100158_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/9243015773386100158_250_13063804.webp",
     "rarity": 3,
     "specialty": {
       "id": "5",
@@ -3188,7 +3090,7 @@
     "id": "13012",
     "slug": "puzzle-sphere",
     "name": "幻变魔方",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/4127154233325250721_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/4127154233325250721_250_13063804.webp",
     "rarity": 3,
     "specialty": {
       "id": "6",
@@ -3237,7 +3139,7 @@
     "id": "12004",
     "slug": "reverb-mark-i",
     "name": "「残响」-Ⅰ型",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/17459247729230365622_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/17459247729230365622_250_13063804.webp",
     "rarity": 2,
     "specialty": {
       "id": "4",
@@ -3286,7 +3188,7 @@
     "id": "12005",
     "slug": "reverb-mark-ii",
     "name": "「残响」-Ⅱ型",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/4789109120989482936_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/4789109120989482936_250_13063804.webp",
     "rarity": 2,
     "specialty": {
       "id": "4",
@@ -3335,7 +3237,7 @@
     "id": "13006",
     "slug": "precious-fossilized-core",
     "name": "贵重骨核",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/13644397909319236033_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/13644397909319236033_250_13063804.webp",
     "rarity": 3,
     "specialty": {
       "id": "2",
@@ -3384,7 +3286,7 @@
     "id": "13005",
     "slug": "steam-oven",
     "name": "人为刀俎",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/11080232539185678824_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/11080232539185678824_250_13063804.webp",
     "rarity": 3,
     "specialty": {
       "id": "2",
@@ -3433,7 +3335,7 @@
     "id": "12011",
     "slug": "magnetic-storm-bravo",
     "name": "「电磁暴」-贰式",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/16783453157324086550_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/16783453157324086550_250_13063804.webp",
     "rarity": 2,
     "specialty": {
       "id": "3",
@@ -3482,7 +3384,7 @@
     "id": "12010",
     "slug": "magnetic-storm-alpha",
     "name": "「电磁暴」-壹式",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/622598703379351911_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/622598703379351911_250_13063804.webp",
     "rarity": 2,
     "specialty": {
       "id": "3",
@@ -3531,7 +3433,7 @@
     "id": "12014",
     "slug": "identity-inflection",
     "name": "「恒等式」-变格",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/10969179391400700480_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/10969179391400700480_250_13063804.webp",
     "rarity": 2,
     "specialty": {
       "id": "5",
@@ -3580,7 +3482,7 @@
     "id": "12007",
     "slug": "vortex-revolver",
     "name": "「湍流」-铳型",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/2118393471963685271_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/2118393471963685271_250_13063804.webp",
     "rarity": 2,
     "specialty": {
       "id": "2",
@@ -3629,7 +3531,7 @@
     "id": "12013",
     "slug": "identity-base",
     "name": "「恒等式」-本格",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/3882764756299831416_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/3882764756299831416_250_13063804.webp",
     "rarity": 2,
     "specialty": {
       "id": "5",
@@ -3678,7 +3580,7 @@
     "id": "13002",
     "slug": "slice-of-time",
     "name": "时光切片",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/17493638764316260072_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/17493638764316260072_250_13063804.webp",
     "rarity": 3,
     "specialty": {
       "id": "4",
@@ -3727,7 +3629,7 @@
     "id": "12012",
     "slug": "magnetic-storm-charlie",
     "name": "「电磁暴」-叁式",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/391165317762579724_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/391165317762579724_250_13063804.webp",
     "rarity": 2,
     "specialty": {
       "id": "3",
@@ -3776,7 +3678,7 @@
     "id": "12006",
     "slug": "reverb-mark-iii",
     "name": "「残响」-Ⅲ型",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/9451400540761640542_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/9451400540761640542_250_13063804.webp",
     "rarity": 2,
     "specialty": {
       "id": "4",
@@ -3825,7 +3727,7 @@
     "id": "13003",
     "slug": "rainforest-gourmet",
     "name": "雨林饕客",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/12756531416094013385_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/12756531416094013385_250_13063804.webp",
     "rarity": 3,
     "specialty": {
       "id": "3",
@@ -3874,7 +3776,7 @@
     "id": "12008",
     "slug": "vortex-arrow",
     "name": "「湍流」-矢型",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/596613373516178711_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/596613373516178711_250_13063804.webp",
     "rarity": 2,
     "specialty": {
       "id": "2",
@@ -3923,7 +3825,7 @@
     "id": "12015",
     "slug": "cinder-cobalt",
     "name": "「灰烬」-钴蓝",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/6045294162516804468_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/6045294162516804468_250_13063804.webp",
     "rarity": 2,
     "specialty": {
       "id": "6",
@@ -3972,7 +3874,7 @@
     "id": "13004",
     "slug": "starlight-engine",
     "name": "星徽引擎",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/18019646391641434626_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/18019646391641434626_250_13063804.webp",
     "rarity": 3,
     "specialty": {
       "id": "1",
@@ -4021,7 +3923,7 @@
     "id": "12009",
     "slug": "vortex-hatchet",
     "name": "「湍流」-斧型",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/8804320959502960521_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/8804320959502960521_250_13063804.webp",
     "rarity": 2,
     "specialty": {
       "id": "2",
@@ -4070,7 +3972,7 @@
     "id": "13001",
     "slug": "street-superstar",
     "name": "街头巨星",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/7474876093297000093_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/7474876093297000093_250_13063804.webp",
     "rarity": 3,
     "specialty": {
       "id": "1",
@@ -4119,7 +4021,7 @@
     "id": "12002",
     "slug": "lunar-decrescent",
     "name": "「月相」-晦",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/1850987664660578130_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/1850987664660578130_250_13063804.webp",
     "rarity": 2,
     "specialty": {
       "id": "1",
@@ -4168,7 +4070,7 @@
     "id": "12003",
     "slug": "lunar-noviluna",
     "name": "「月相」-朔",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/11054165785664757010_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/11054165785664757010_250_13063804.webp",
     "rarity": 2,
     "specialty": {
       "id": "1",
@@ -4217,7 +4119,7 @@
     "id": "12001",
     "slug": "lunar-pleniluna",
     "name": "「月相」-望",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/1211505729819342974_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/1211505729819342974_250_13063804.webp",
     "rarity": 2,
     "specialty": {
       "id": "1",

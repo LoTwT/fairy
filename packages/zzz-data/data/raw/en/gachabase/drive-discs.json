@@ -1,43 +1,9 @@
 [
   {
-    "id": "33800",
-    "slug": "notes-from-the-chained",
-    "name": "Notes From the Chained",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/8927972225216233150_272_14050658.webp",
-    "tag": "",
-    "setEffects": [
-      {
-        "pieces": 2,
-        "bonus": ""
-      },
-      {
-        "pieces": 4,
-        "bonus": ""
-      }
-    ]
-  },
-  {
-    "id": "33700",
-    "slug": "bunny-in-wonderland",
-    "name": "Bunny in Wonderland",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/8070883109952236990_272_14050658.webp",
-    "tag": "HP Increase",
-    "setEffects": [
-      {
-        "pieces": 2,
-        "bonus": "HP +10%"
-      },
-      {
-        "pieces": 4,
-        "bonus": "When the equipper is a Defense character: When the equipper launches an <span style=\"color: #FFFFFF\">EX Special Attack</span> or any squad member triggers a <span style=\"color: #FFFFFF\">Defensive Assist</span> or Evasive Assist, all squad members' DMG increases by 6%, stacking up to 3 times, lasting 25s. Stacks decay one at a time, and duration refreshes when gained or decayed. Passive effects of the same name do not stack."
-      }
-    ]
-  },
-  {
     "id": "33500",
     "slug": "white-water-ballad",
     "name": "White Water Ballad",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/15256054950634286512_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/15256054950634286512_250_13063804.webp",
     "tag": "Physical DMG Increase",
     "setEffects": [
       {
@@ -54,7 +20,7 @@
     "id": "33600",
     "slug": "shining-aria",
     "name": "Shining Aria",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/6405303809026053405_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/6405303809026053405_250_13063804.webp",
     "tag": "Ether DMG Increase",
     "setEffects": [
       {
@@ -71,7 +37,7 @@
     "id": "33300",
     "slug": "dawns-bloom",
     "name": "Dawn's Bloom",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/9951647463642941889_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/9951647463642941889_250_13063804.webp",
     "tag": "[Basic Attack] DMG Boost",
     "setEffects": [
       {
@@ -88,7 +54,7 @@
     "id": "33400",
     "slug": "moonlight-lullaby",
     "name": "Moonlight Lullaby",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/1295007943211081436_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/1295007943211081436_250_13063804.webp",
     "tag": "Energy Regen Increase",
     "setEffects": [
       {
@@ -105,7 +71,7 @@
     "id": "33100",
     "slug": "yunkui-tales",
     "name": "Yunkui Tales",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/595209732608804379_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/595209732608804379_250_13063804.webp",
     "tag": "HP Increase",
     "setEffects": [
       {
@@ -122,7 +88,7 @@
     "id": "33000",
     "slug": "phaethons-melody",
     "name": "Phaethon's Melody",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/167598110323414469_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/167598110323414469_250_13063804.webp",
     "tag": "Anomaly Mastery Increased",
     "setEffects": [
       {
@@ -139,7 +105,7 @@
     "id": "33200",
     "slug": "king-of-the-summit",
     "name": "King of the Summit",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/3284579302654696866_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/3284579302654696866_250_13063804.webp",
     "tag": "Daze Increase",
     "setEffects": [
       {
@@ -156,7 +122,7 @@
     "id": "31200",
     "slug": "shockstar-disco",
     "name": "Shockstar Disco",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/8153104799998832781_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/8153104799998832781_250_13063804.webp",
     "tag": "Impact Increase",
     "setEffects": [
       {
@@ -173,7 +139,7 @@
     "id": "31900",
     "slug": "proto-punk",
     "name": "Proto Punk",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/2823002548560698438_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/2823002548560698438_250_13063804.webp",
     "tag": "Shield Effect Increase",
     "setEffects": [
       {
@@ -190,7 +156,7 @@
     "id": "32500",
     "slug": "polar-metal",
     "name": "Polar Metal",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/3698863287995628166_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/3698863287995628166_250_13063804.webp",
     "tag": "Ice DMG Increase",
     "setEffects": [
       {
@@ -207,7 +173,7 @@
     "id": "31500",
     "slug": "soul-rock",
     "name": "Soul Rock",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/11852994127028461909_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/11852994127028461909_250_13063804.webp",
     "tag": "DEF Increase",
     "setEffects": [
       {
@@ -224,7 +190,7 @@
     "id": "32200",
     "slug": "inferno-metal",
     "name": "Inferno Metal",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/6552982482348001530_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/6552982482348001530_250_13063804.webp",
     "tag": "Fire DMG Increase",
     "setEffects": [
       {
@@ -241,7 +207,7 @@
     "id": "32600",
     "slug": "fanged-metal",
     "name": "Fanged Metal",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/1250328841212571812_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/1250328841212571812_250_13063804.webp",
     "tag": "Physical DMG Increase",
     "setEffects": [
       {
@@ -258,7 +224,7 @@
     "id": "31100",
     "slug": "puffer-electro",
     "name": "Puffer Electro",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/12062784149747603368_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/12062784149747603368_250_13063804.webp",
     "tag": "PEN Ratio Increase",
     "setEffects": [
       {
@@ -275,7 +241,7 @@
     "id": "31600",
     "slug": "swing-jazz",
     "name": "Swing Jazz",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/10897754582695982645_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/10897754582695982645_250_13063804.webp",
     "tag": "Energy Regen Increase",
     "setEffects": [
       {
@@ -292,7 +258,7 @@
     "id": "32700",
     "slug": "branch-blade-song",
     "name": "Branch & Blade Song",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/12366742306052617196_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/12366742306052617196_250_13063804.webp",
     "tag": "CRIT DMG Increase",
     "setEffects": [
       {
@@ -309,7 +275,7 @@
     "id": "31400",
     "slug": "hormone-punk",
     "name": "Hormone Punk",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/10554887091494904227_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/10554887091494904227_250_13063804.webp",
     "tag": "ATK Increase",
     "setEffects": [
       {
@@ -326,7 +292,7 @@
     "id": "32400",
     "slug": "thunder-metal",
     "name": "Thunder Metal",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/10396133369472090167_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/10396133369472090167_250_13063804.webp",
     "tag": "Electric DMG Increase",
     "setEffects": [
       {
@@ -343,7 +309,7 @@
     "id": "31300",
     "slug": "freedom-blues",
     "name": "Freedom Blues",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/33791772347458054_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/33791772347458054_250_13063804.webp",
     "tag": "Anomaly Proficiency Increase",
     "setEffects": [
       {
@@ -360,7 +326,7 @@
     "id": "32900",
     "slug": "shadow-harmony",
     "name": "Shadow Harmony",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/1406942339580742274_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/1406942339580742274_250_13063804.webp",
     "tag": "Aftershock and Dash Attack DMG Boost",
     "setEffects": [
       {
@@ -377,7 +343,7 @@
     "id": "32300",
     "slug": "chaotic-metal",
     "name": "Chaotic Metal",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/10656303896342821109_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/10656303896342821109_250_13063804.webp",
     "tag": "Ether DMG Increase",
     "setEffects": [
       {
@@ -394,7 +360,7 @@
     "id": "31800",
     "slug": "chaos-jazz",
     "name": "Chaos Jazz",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/8550517955469675130_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/8550517955469675130_250_13063804.webp",
     "tag": "Anomaly Proficiency Increase",
     "setEffects": [
       {
@@ -411,7 +377,7 @@
     "id": "32800",
     "slug": "astral-voice",
     "name": "Astral Voice",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/10883627343944238887_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/10883627343944238887_250_13063804.webp",
     "tag": "ATK Increase",
     "setEffects": [
       {
@@ -428,7 +394,7 @@
     "id": "31000",
     "slug": "woodpecker-electro",
     "name": "Woodpecker Electro",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/15146347244774769381_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/15146347244774769381_250_13063804.webp",
     "tag": "CRIT Rate Increase",
     "setEffects": [
       {

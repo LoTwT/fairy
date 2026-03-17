@@ -1,43 +1,9 @@
 [
   {
-    "id": "33800",
-    "slug": "notes-from-the-chained",
-    "name": "囚徒手记",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/8927972225216233150_272_14050658.webp",
-    "tag": "冰属性伤害提升",
-    "setEffects": [
-      {
-        "pieces": 2,
-        "bonus": "<span style=\"color: #98EFF0\">冰属性伤害</span>+10%。"
-      },
-      {
-        "pieces": 4,
-        "bonus": "装备者触发<span style=\"color: #FFFFFF\">[异放]</span>时，装备者异常精通提升48点，持续30秒；重复触发时刷新持续时间；装备者触发<span style=\"color: #FFFFFF\">[冻结]</span>效果时，装备者造成的属性异常伤害、<span style=\"color: #FFFFFF\">[紊乱]</span>伤害提升16%，持续30秒，重复触发时刷新持续时间。"
-      }
-    ]
-  },
-  {
-    "id": "33700",
-    "slug": "bunny-in-wonderland",
-    "name": "雪兔梦游仙境",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/8070883109952236990_272_14050658.webp",
-    "tag": "生命值提升",
-    "setEffects": [
-      {
-        "pieces": 2,
-        "bonus": "生命值+10%"
-      },
-      {
-        "pieces": 4,
-        "bonus": "[防护]角色装备时：装备者发动<span style=\"color: #FFFFFF\">[强化特殊技]</span>或队伍中任意队友发动<span style=\"color: #FFFFFF\">[招架支援]</span>、[回避支援]时，全队角色造成伤害提升6%，最多叠加3层，持续25秒，层数逐层衰减，获得或者衰减时刷新持续时间，同名被动效果之间不可叠加。"
-      }
-    ]
-  },
-  {
     "id": "33500",
     "slug": "white-water-ballad",
     "name": "沧浪行歌",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/15256054950634286512_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/15256054950634286512_250_13063804.webp",
     "tag": "物理伤害提升",
     "setEffects": [
       {
@@ -54,7 +20,7 @@
     "id": "33600",
     "slug": "shining-aria",
     "name": "流光咏叹",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/6405303809026053405_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/6405303809026053405_250_13063804.webp",
     "tag": "以太伤害提升",
     "setEffects": [
       {
@@ -71,7 +37,7 @@
     "id": "33300",
     "slug": "dawns-bloom",
     "name": "拂晓生花",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/9951647463642941889_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/9951647463642941889_250_13063804.webp",
     "tag": "[普通攻击]伤害提升",
     "setEffects": [
       {
@@ -88,7 +54,7 @@
     "id": "33400",
     "slug": "moonlight-lullaby",
     "name": "月光骑士颂",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/1295007943211081436_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/1295007943211081436_250_13063804.webp",
     "tag": "能量自动回复提升",
     "setEffects": [
       {
@@ -105,7 +71,7 @@
     "id": "33100",
     "slug": "yunkui-tales",
     "name": "云岿如我",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/595209732608804379_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/595209732608804379_250_13063804.webp",
     "tag": "生命值提升",
     "setEffects": [
       {
@@ -122,7 +88,7 @@
     "id": "33000",
     "slug": "phaethons-melody",
     "name": "法厄同之歌",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/167598110323414469_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/167598110323414469_250_13063804.webp",
     "tag": "异常掌控提升",
     "setEffects": [
       {
@@ -139,7 +105,7 @@
     "id": "33200",
     "slug": "king-of-the-summit",
     "name": "山大王",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/3284579302654696866_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/3284579302654696866_250_13063804.webp",
     "tag": "失衡值提升",
     "setEffects": [
       {
@@ -156,7 +122,7 @@
     "id": "31200",
     "slug": "shockstar-disco",
     "name": "震星迪斯科",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/8153104799998832781_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/8153104799998832781_250_13063804.webp",
     "tag": "冲击力提升",
     "setEffects": [
       {
@@ -173,7 +139,7 @@
     "id": "31900",
     "slug": "proto-punk",
     "name": "原始朋克",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/2823002548560698438_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/2823002548560698438_250_13063804.webp",
     "tag": "施加的护盾值提升",
     "setEffects": [
       {
@@ -190,7 +156,7 @@
     "id": "32500",
     "slug": "polar-metal",
     "name": "极地重金属",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/3698863287995628166_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/3698863287995628166_250_13063804.webp",
     "tag": "冰属性伤害提升",
     "setEffects": [
       {
@@ -207,7 +173,7 @@
     "id": "31500",
     "slug": "soul-rock",
     "name": "灵魂摇滚",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/11852994127028461909_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/11852994127028461909_250_13063804.webp",
     "tag": "防御力提升",
     "setEffects": [
       {
@@ -224,7 +190,7 @@
     "id": "32200",
     "slug": "inferno-metal",
     "name": "炎狱重金属",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/6552982482348001530_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/6552982482348001530_250_13063804.webp",
     "tag": "火属性伤害提升",
     "setEffects": [
       {
@@ -241,7 +207,7 @@
     "id": "32600",
     "slug": "fanged-metal",
     "name": "獠牙重金属",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/1250328841212571812_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/1250328841212571812_250_13063804.webp",
     "tag": "物理伤害提升",
     "setEffects": [
       {
@@ -258,7 +224,7 @@
     "id": "31100",
     "slug": "puffer-electro",
     "name": "河豚电音",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/12062784149747603368_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/12062784149747603368_250_13063804.webp",
     "tag": "穿透率提升",
     "setEffects": [
       {
@@ -275,7 +241,7 @@
     "id": "31600",
     "slug": "swing-jazz",
     "name": "摇摆爵士",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/10897754582695982645_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/10897754582695982645_250_13063804.webp",
     "tag": "能量自动回复提升",
     "setEffects": [
       {
@@ -292,7 +258,7 @@
     "id": "32700",
     "slug": "branch-blade-song",
     "name": "折枝剑歌",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/12366742306052617196_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/12366742306052617196_250_13063804.webp",
     "tag": "暴击伤害提升",
     "setEffects": [
       {
@@ -309,7 +275,7 @@
     "id": "31400",
     "slug": "hormone-punk",
     "name": "激素朋克",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/10554887091494904227_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/10554887091494904227_250_13063804.webp",
     "tag": "攻击力提升",
     "setEffects": [
       {
@@ -326,7 +292,7 @@
     "id": "32400",
     "slug": "thunder-metal",
     "name": "雷暴重金属",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/10396133369472090167_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/10396133369472090167_250_13063804.webp",
     "tag": "电属性伤害提升",
     "setEffects": [
       {
@@ -343,7 +309,7 @@
     "id": "31300",
     "slug": "freedom-blues",
     "name": "自由蓝调",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/33791772347458054_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/33791772347458054_250_13063804.webp",
     "tag": "异常精通提升",
     "setEffects": [
       {
@@ -360,7 +326,7 @@
     "id": "32900",
     "slug": "shadow-harmony",
     "name": "如影相随",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/1406942339580742274_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/1406942339580742274_250_13063804.webp",
     "tag": "[追加攻击]和[冲刺攻击]伤害提升",
     "setEffects": [
       {
@@ -377,7 +343,7 @@
     "id": "32300",
     "slug": "chaotic-metal",
     "name": "混沌重金属",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/10656303896342821109_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/10656303896342821109_250_13063804.webp",
     "tag": "以太伤害提升",
     "setEffects": [
       {
@@ -394,7 +360,7 @@
     "id": "31800",
     "slug": "chaos-jazz",
     "name": "混沌爵士",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/8550517955469675130_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/8550517955469675130_250_13063804.webp",
     "tag": "异常精通提升",
     "setEffects": [
       {
@@ -411,7 +377,7 @@
     "id": "32800",
     "slug": "astral-voice",
     "name": "静听嘉音",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/10883627343944238887_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/10883627343944238887_250_13063804.webp",
     "tag": "攻击力提升",
     "setEffects": [
       {
@@ -428,7 +394,7 @@
     "id": "31000",
     "slug": "woodpecker-electro",
     "name": "啄木鸟电音",
-    "icon": "https://cdn.gachabase.net/prod/zzz/assets/15146347244774769381_272_14050658.webp",
+    "icon": "https://cdn.gachabase.net/prod/zzz/assets/15146347244774769381_250_13063804.webp",
     "tag": "暴击率提升",
     "setEffects": [
       {

@@ -1,928 +1,5 @@
 [
   {
-    "id": "13020",
-    "slug": "the-simmering-pot",
-    "name": "The Simmering Pot",
-    "shortComment": "",
-    "longComment": "\"Spicy without the burn, rich without the grease, bold on the first bite, with a sweet finish.\" Copy this review and leave a good review and photo to redeem one serving of Waifei Peninsula's handmade beef meatballs at Simmer hotpot.",
-    "exclusiveAgent": null,
-    "assets": {
-      "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/1601829534894324589_272_14050658.webp",
-        "width": 400,
-        "height": 354
-      }
-    },
-    "levels": [
-      {
-        "level": 0,
-        "baseStatGrowth": 0
-      },
-      {
-        "level": 1,
-        "baseStatGrowth": 1568
-      },
-      {
-        "level": 2,
-        "baseStatGrowth": 3136
-      },
-      {
-        "level": 3,
-        "baseStatGrowth": 4705
-      },
-      {
-        "level": 4,
-        "baseStatGrowth": 6273
-      },
-      {
-        "level": 5,
-        "baseStatGrowth": 7841
-      },
-      {
-        "level": 6,
-        "baseStatGrowth": 9409
-      },
-      {
-        "level": 7,
-        "baseStatGrowth": 10977
-      },
-      {
-        "level": 8,
-        "baseStatGrowth": 12545
-      },
-      {
-        "level": 9,
-        "baseStatGrowth": 14114
-      },
-      {
-        "level": 10,
-        "baseStatGrowth": 15682
-      },
-      {
-        "level": 11,
-        "baseStatGrowth": 17250
-      },
-      {
-        "level": 12,
-        "baseStatGrowth": 18818
-      },
-      {
-        "level": 13,
-        "baseStatGrowth": 20386
-      },
-      {
-        "level": 14,
-        "baseStatGrowth": 21954
-      },
-      {
-        "level": 15,
-        "baseStatGrowth": 23523
-      },
-      {
-        "level": 16,
-        "baseStatGrowth": 25091
-      },
-      {
-        "level": 17,
-        "baseStatGrowth": 26659
-      },
-      {
-        "level": 18,
-        "baseStatGrowth": 28227
-      },
-      {
-        "level": 19,
-        "baseStatGrowth": 29795
-      },
-      {
-        "level": 20,
-        "baseStatGrowth": 31363
-      },
-      {
-        "level": 21,
-        "baseStatGrowth": 32932
-      },
-      {
-        "level": 22,
-        "baseStatGrowth": 34500
-      },
-      {
-        "level": 23,
-        "baseStatGrowth": 36068
-      },
-      {
-        "level": 24,
-        "baseStatGrowth": 37636
-      },
-      {
-        "level": 25,
-        "baseStatGrowth": 39204
-      },
-      {
-        "level": 26,
-        "baseStatGrowth": 40772
-      },
-      {
-        "level": 27,
-        "baseStatGrowth": 42341
-      },
-      {
-        "level": 28,
-        "baseStatGrowth": 43909
-      },
-      {
-        "level": 29,
-        "baseStatGrowth": 45477
-      },
-      {
-        "level": 30,
-        "baseStatGrowth": 47045
-      },
-      {
-        "level": 31,
-        "baseStatGrowth": 48613
-      },
-      {
-        "level": 32,
-        "baseStatGrowth": 50181
-      },
-      {
-        "level": 33,
-        "baseStatGrowth": 51750
-      },
-      {
-        "level": 34,
-        "baseStatGrowth": 53318
-      },
-      {
-        "level": 35,
-        "baseStatGrowth": 54886
-      },
-      {
-        "level": 36,
-        "baseStatGrowth": 56454
-      },
-      {
-        "level": 37,
-        "baseStatGrowth": 58022
-      },
-      {
-        "level": 38,
-        "baseStatGrowth": 59590
-      },
-      {
-        "level": 39,
-        "baseStatGrowth": 61159
-      },
-      {
-        "level": 40,
-        "baseStatGrowth": 62727
-      },
-      {
-        "level": 41,
-        "baseStatGrowth": 64295
-      },
-      {
-        "level": 42,
-        "baseStatGrowth": 65863
-      },
-      {
-        "level": 43,
-        "baseStatGrowth": 67431
-      },
-      {
-        "level": 44,
-        "baseStatGrowth": 68999
-      },
-      {
-        "level": 45,
-        "baseStatGrowth": 70568
-      },
-      {
-        "level": 46,
-        "baseStatGrowth": 72136
-      },
-      {
-        "level": 47,
-        "baseStatGrowth": 73704
-      },
-      {
-        "level": 48,
-        "baseStatGrowth": 75272
-      },
-      {
-        "level": 49,
-        "baseStatGrowth": 76840
-      },
-      {
-        "level": 50,
-        "baseStatGrowth": 78408
-      },
-      {
-        "level": 51,
-        "baseStatGrowth": 79977
-      },
-      {
-        "level": 52,
-        "baseStatGrowth": 81545
-      },
-      {
-        "level": 53,
-        "baseStatGrowth": 83113
-      },
-      {
-        "level": 54,
-        "baseStatGrowth": 84681
-      },
-      {
-        "level": 55,
-        "baseStatGrowth": 86249
-      },
-      {
-        "level": 56,
-        "baseStatGrowth": 87817
-      },
-      {
-        "level": 57,
-        "baseStatGrowth": 89386
-      },
-      {
-        "level": 58,
-        "baseStatGrowth": 90954
-      },
-      {
-        "level": 59,
-        "baseStatGrowth": 92522
-      },
-      {
-        "level": 60,
-        "baseStatGrowth": 94090
-      }
-    ],
-    "stars": [
-      {
-        "star": 0,
-        "minLevel": 0,
-        "maxLevel": 10,
-        "baseStatGrowth": 0,
-        "advancedStatGrowth": 0
-      },
-      {
-        "star": 1,
-        "minLevel": 10,
-        "maxLevel": 20,
-        "baseStatGrowth": 8922,
-        "advancedStatGrowth": 3000
-      },
-      {
-        "star": 2,
-        "minLevel": 20,
-        "maxLevel": 30,
-        "baseStatGrowth": 17844,
-        "advancedStatGrowth": 6000
-      },
-      {
-        "star": 3,
-        "minLevel": 30,
-        "maxLevel": 40,
-        "baseStatGrowth": 26766,
-        "advancedStatGrowth": 9000
-      },
-      {
-        "star": 4,
-        "minLevel": 40,
-        "maxLevel": 50,
-        "baseStatGrowth": 35688,
-        "advancedStatGrowth": 12000
-      },
-      {
-        "star": 5,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "baseStatGrowth": 44610,
-        "advancedStatGrowth": 15000
-      }
-    ]
-  },
-  {
-    "id": "14151",
-    "slug": "neon-fantasies",
-    "name": "Neon Fantasies",
-    "shortComment": "...",
-    "longComment": "...",
-    "exclusiveAgent": {
-      "id": "1511",
-      "slug": "nangong-yu",
-      "name": "Nangong Yu"
-    },
-    "assets": {
-      "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/5764758546643923986_272_14050658.webp",
-        "width": 369,
-        "height": 400
-      }
-    },
-    "levels": [
-      {
-        "level": 0,
-        "baseStatGrowth": 0
-      },
-      {
-        "level": 1,
-        "baseStatGrowth": 1568
-      },
-      {
-        "level": 2,
-        "baseStatGrowth": 3136
-      },
-      {
-        "level": 3,
-        "baseStatGrowth": 4705
-      },
-      {
-        "level": 4,
-        "baseStatGrowth": 6273
-      },
-      {
-        "level": 5,
-        "baseStatGrowth": 7841
-      },
-      {
-        "level": 6,
-        "baseStatGrowth": 9409
-      },
-      {
-        "level": 7,
-        "baseStatGrowth": 10977
-      },
-      {
-        "level": 8,
-        "baseStatGrowth": 12545
-      },
-      {
-        "level": 9,
-        "baseStatGrowth": 14114
-      },
-      {
-        "level": 10,
-        "baseStatGrowth": 15682
-      },
-      {
-        "level": 11,
-        "baseStatGrowth": 17250
-      },
-      {
-        "level": 12,
-        "baseStatGrowth": 18818
-      },
-      {
-        "level": 13,
-        "baseStatGrowth": 20386
-      },
-      {
-        "level": 14,
-        "baseStatGrowth": 21954
-      },
-      {
-        "level": 15,
-        "baseStatGrowth": 23523
-      },
-      {
-        "level": 16,
-        "baseStatGrowth": 25091
-      },
-      {
-        "level": 17,
-        "baseStatGrowth": 26659
-      },
-      {
-        "level": 18,
-        "baseStatGrowth": 28227
-      },
-      {
-        "level": 19,
-        "baseStatGrowth": 29795
-      },
-      {
-        "level": 20,
-        "baseStatGrowth": 31363
-      },
-      {
-        "level": 21,
-        "baseStatGrowth": 32932
-      },
-      {
-        "level": 22,
-        "baseStatGrowth": 34500
-      },
-      {
-        "level": 23,
-        "baseStatGrowth": 36068
-      },
-      {
-        "level": 24,
-        "baseStatGrowth": 37636
-      },
-      {
-        "level": 25,
-        "baseStatGrowth": 39204
-      },
-      {
-        "level": 26,
-        "baseStatGrowth": 40772
-      },
-      {
-        "level": 27,
-        "baseStatGrowth": 42341
-      },
-      {
-        "level": 28,
-        "baseStatGrowth": 43909
-      },
-      {
-        "level": 29,
-        "baseStatGrowth": 45477
-      },
-      {
-        "level": 30,
-        "baseStatGrowth": 47045
-      },
-      {
-        "level": 31,
-        "baseStatGrowth": 48613
-      },
-      {
-        "level": 32,
-        "baseStatGrowth": 50181
-      },
-      {
-        "level": 33,
-        "baseStatGrowth": 51750
-      },
-      {
-        "level": 34,
-        "baseStatGrowth": 53318
-      },
-      {
-        "level": 35,
-        "baseStatGrowth": 54886
-      },
-      {
-        "level": 36,
-        "baseStatGrowth": 56454
-      },
-      {
-        "level": 37,
-        "baseStatGrowth": 58022
-      },
-      {
-        "level": 38,
-        "baseStatGrowth": 59590
-      },
-      {
-        "level": 39,
-        "baseStatGrowth": 61159
-      },
-      {
-        "level": 40,
-        "baseStatGrowth": 62727
-      },
-      {
-        "level": 41,
-        "baseStatGrowth": 64295
-      },
-      {
-        "level": 42,
-        "baseStatGrowth": 65863
-      },
-      {
-        "level": 43,
-        "baseStatGrowth": 67431
-      },
-      {
-        "level": 44,
-        "baseStatGrowth": 68999
-      },
-      {
-        "level": 45,
-        "baseStatGrowth": 70568
-      },
-      {
-        "level": 46,
-        "baseStatGrowth": 72136
-      },
-      {
-        "level": 47,
-        "baseStatGrowth": 73704
-      },
-      {
-        "level": 48,
-        "baseStatGrowth": 75272
-      },
-      {
-        "level": 49,
-        "baseStatGrowth": 76840
-      },
-      {
-        "level": 50,
-        "baseStatGrowth": 78408
-      },
-      {
-        "level": 51,
-        "baseStatGrowth": 79977
-      },
-      {
-        "level": 52,
-        "baseStatGrowth": 81545
-      },
-      {
-        "level": 53,
-        "baseStatGrowth": 83113
-      },
-      {
-        "level": 54,
-        "baseStatGrowth": 84681
-      },
-      {
-        "level": 55,
-        "baseStatGrowth": 86249
-      },
-      {
-        "level": 56,
-        "baseStatGrowth": 87817
-      },
-      {
-        "level": 57,
-        "baseStatGrowth": 89386
-      },
-      {
-        "level": 58,
-        "baseStatGrowth": 90954
-      },
-      {
-        "level": 59,
-        "baseStatGrowth": 92522
-      },
-      {
-        "level": 60,
-        "baseStatGrowth": 94090
-      }
-    ],
-    "stars": [
-      {
-        "star": 0,
-        "minLevel": 0,
-        "maxLevel": 10,
-        "baseStatGrowth": 0,
-        "advancedStatGrowth": 0
-      },
-      {
-        "star": 1,
-        "minLevel": 10,
-        "maxLevel": 20,
-        "baseStatGrowth": 8922,
-        "advancedStatGrowth": 3000
-      },
-      {
-        "star": 2,
-        "minLevel": 20,
-        "maxLevel": 30,
-        "baseStatGrowth": 17844,
-        "advancedStatGrowth": 6000
-      },
-      {
-        "star": 3,
-        "minLevel": 30,
-        "maxLevel": 40,
-        "baseStatGrowth": 26766,
-        "advancedStatGrowth": 9000
-      },
-      {
-        "star": 4,
-        "minLevel": 40,
-        "maxLevel": 50,
-        "baseStatGrowth": 35688,
-        "advancedStatGrowth": 12000
-      },
-      {
-        "star": 5,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "baseStatGrowth": 44610,
-        "advancedStatGrowth": 15000
-      }
-    ]
-  },
-  {
-    "id": "14152",
-    "slug": "serpentine-seeker",
-    "name": "Serpentine Seeker",
-    "shortComment": "...",
-    "longComment": "...",
-    "exclusiveAgent": {
-      "id": "1521",
-      "slug": "cissia",
-      "name": "Cissia"
-    },
-    "assets": {
-      "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/9251458339680724443_272_14050658.webp",
-        "width": 379,
-        "height": 398
-      }
-    },
-    "levels": [
-      {
-        "level": 0,
-        "baseStatGrowth": 0
-      },
-      {
-        "level": 1,
-        "baseStatGrowth": 1568
-      },
-      {
-        "level": 2,
-        "baseStatGrowth": 3136
-      },
-      {
-        "level": 3,
-        "baseStatGrowth": 4705
-      },
-      {
-        "level": 4,
-        "baseStatGrowth": 6273
-      },
-      {
-        "level": 5,
-        "baseStatGrowth": 7841
-      },
-      {
-        "level": 6,
-        "baseStatGrowth": 9409
-      },
-      {
-        "level": 7,
-        "baseStatGrowth": 10977
-      },
-      {
-        "level": 8,
-        "baseStatGrowth": 12545
-      },
-      {
-        "level": 9,
-        "baseStatGrowth": 14114
-      },
-      {
-        "level": 10,
-        "baseStatGrowth": 15682
-      },
-      {
-        "level": 11,
-        "baseStatGrowth": 17250
-      },
-      {
-        "level": 12,
-        "baseStatGrowth": 18818
-      },
-      {
-        "level": 13,
-        "baseStatGrowth": 20386
-      },
-      {
-        "level": 14,
-        "baseStatGrowth": 21954
-      },
-      {
-        "level": 15,
-        "baseStatGrowth": 23523
-      },
-      {
-        "level": 16,
-        "baseStatGrowth": 25091
-      },
-      {
-        "level": 17,
-        "baseStatGrowth": 26659
-      },
-      {
-        "level": 18,
-        "baseStatGrowth": 28227
-      },
-      {
-        "level": 19,
-        "baseStatGrowth": 29795
-      },
-      {
-        "level": 20,
-        "baseStatGrowth": 31363
-      },
-      {
-        "level": 21,
-        "baseStatGrowth": 32932
-      },
-      {
-        "level": 22,
-        "baseStatGrowth": 34500
-      },
-      {
-        "level": 23,
-        "baseStatGrowth": 36068
-      },
-      {
-        "level": 24,
-        "baseStatGrowth": 37636
-      },
-      {
-        "level": 25,
-        "baseStatGrowth": 39204
-      },
-      {
-        "level": 26,
-        "baseStatGrowth": 40772
-      },
-      {
-        "level": 27,
-        "baseStatGrowth": 42341
-      },
-      {
-        "level": 28,
-        "baseStatGrowth": 43909
-      },
-      {
-        "level": 29,
-        "baseStatGrowth": 45477
-      },
-      {
-        "level": 30,
-        "baseStatGrowth": 47045
-      },
-      {
-        "level": 31,
-        "baseStatGrowth": 48613
-      },
-      {
-        "level": 32,
-        "baseStatGrowth": 50181
-      },
-      {
-        "level": 33,
-        "baseStatGrowth": 51750
-      },
-      {
-        "level": 34,
-        "baseStatGrowth": 53318
-      },
-      {
-        "level": 35,
-        "baseStatGrowth": 54886
-      },
-      {
-        "level": 36,
-        "baseStatGrowth": 56454
-      },
-      {
-        "level": 37,
-        "baseStatGrowth": 58022
-      },
-      {
-        "level": 38,
-        "baseStatGrowth": 59590
-      },
-      {
-        "level": 39,
-        "baseStatGrowth": 61159
-      },
-      {
-        "level": 40,
-        "baseStatGrowth": 62727
-      },
-      {
-        "level": 41,
-        "baseStatGrowth": 64295
-      },
-      {
-        "level": 42,
-        "baseStatGrowth": 65863
-      },
-      {
-        "level": 43,
-        "baseStatGrowth": 67431
-      },
-      {
-        "level": 44,
-        "baseStatGrowth": 68999
-      },
-      {
-        "level": 45,
-        "baseStatGrowth": 70568
-      },
-      {
-        "level": 46,
-        "baseStatGrowth": 72136
-      },
-      {
-        "level": 47,
-        "baseStatGrowth": 73704
-      },
-      {
-        "level": 48,
-        "baseStatGrowth": 75272
-      },
-      {
-        "level": 49,
-        "baseStatGrowth": 76840
-      },
-      {
-        "level": 50,
-        "baseStatGrowth": 78408
-      },
-      {
-        "level": 51,
-        "baseStatGrowth": 79977
-      },
-      {
-        "level": 52,
-        "baseStatGrowth": 81545
-      },
-      {
-        "level": 53,
-        "baseStatGrowth": 83113
-      },
-      {
-        "level": 54,
-        "baseStatGrowth": 84681
-      },
-      {
-        "level": 55,
-        "baseStatGrowth": 86249
-      },
-      {
-        "level": 56,
-        "baseStatGrowth": 87817
-      },
-      {
-        "level": 57,
-        "baseStatGrowth": 89386
-      },
-      {
-        "level": 58,
-        "baseStatGrowth": 90954
-      },
-      {
-        "level": 59,
-        "baseStatGrowth": 92522
-      },
-      {
-        "level": 60,
-        "baseStatGrowth": 94090
-      }
-    ],
-    "stars": [
-      {
-        "star": 0,
-        "minLevel": 0,
-        "maxLevel": 10,
-        "baseStatGrowth": 0,
-        "advancedStatGrowth": 0
-      },
-      {
-        "star": 1,
-        "minLevel": 10,
-        "maxLevel": 20,
-        "baseStatGrowth": 8922,
-        "advancedStatGrowth": 3000
-      },
-      {
-        "star": 2,
-        "minLevel": 20,
-        "maxLevel": 30,
-        "baseStatGrowth": 17844,
-        "advancedStatGrowth": 6000
-      },
-      {
-        "star": 3,
-        "minLevel": 30,
-        "maxLevel": 40,
-        "baseStatGrowth": 26766,
-        "advancedStatGrowth": 9000
-      },
-      {
-        "star": 4,
-        "minLevel": 40,
-        "maxLevel": 50,
-        "baseStatGrowth": 35688,
-        "advancedStatGrowth": 12000
-      },
-      {
-        "star": 5,
-        "minLevel": 50,
-        "maxLevel": 60,
-        "baseStatGrowth": 44610,
-        "advancedStatGrowth": 15000
-      }
-    ]
-  },
-  {
     "id": "14150",
     "slug": "angel-in-the-shell",
     "name": "Angel in the Shell",
@@ -935,9 +12,9 @@
     },
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/13862343391636347053_272_14050658.webp",
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/13862343391636347053_260_13755883.webp",
         "width": 400,
-        "height": 375
+        "height": 400
       }
     },
     "levels": [
@@ -1244,9 +321,9 @@
     },
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/5558760277573070174_272_14050658.webp",
-        "width": 392,
-        "height": 399
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/5558760277573070174_260_13755883.webp",
+        "width": 400,
+        "height": 400
       }
     },
     "levels": [
@@ -1553,8 +630,8 @@
     },
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/1519860062051055945_272_14050658.webp",
-        "width": 317,
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/1519860062051055945_250_13063804.webp",
+        "width": 400,
         "height": 400
       }
     },
@@ -1862,9 +939,9 @@
     },
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/10427424036599226432_272_14050658.webp",
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/10427424036599226432_250_13063804.webp",
         "width": 400,
-        "height": 348
+        "height": 400
       }
     },
     "levels": [
@@ -2167,8 +1244,8 @@
     "exclusiveAgent": null,
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/2659664290355545901_272_14050658.webp",
-        "width": 383,
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/2659664290355545901_250_13063804.webp",
+        "width": 400,
         "height": 400
       }
     },
@@ -2476,9 +1553,9 @@
     },
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/7811031625612841062_272_14050658.webp",
-        "width": 377,
-        "height": 382
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/7811031625612841062_250_13063804.webp",
+        "width": 400,
+        "height": 400
       }
     },
     "levels": [
@@ -2785,8 +1862,8 @@
     },
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/15278433149209878007_272_14050658.webp",
-        "width": 360,
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/15278433149209878007_250_13063804.webp",
+        "width": 400,
         "height": 400
       }
     },
@@ -3094,9 +2171,318 @@
     },
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/160857775030303653_272_14050658.webp",
-        "width": 375,
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/160857775030303653_250_13063804.webp",
+        "width": 400,
         "height": 400
+      }
+    },
+    "levels": [
+      {
+        "level": 0,
+        "baseStatGrowth": 0
+      },
+      {
+        "level": 1,
+        "baseStatGrowth": 1568
+      },
+      {
+        "level": 2,
+        "baseStatGrowth": 3136
+      },
+      {
+        "level": 3,
+        "baseStatGrowth": 4705
+      },
+      {
+        "level": 4,
+        "baseStatGrowth": 6273
+      },
+      {
+        "level": 5,
+        "baseStatGrowth": 7841
+      },
+      {
+        "level": 6,
+        "baseStatGrowth": 9409
+      },
+      {
+        "level": 7,
+        "baseStatGrowth": 10977
+      },
+      {
+        "level": 8,
+        "baseStatGrowth": 12545
+      },
+      {
+        "level": 9,
+        "baseStatGrowth": 14114
+      },
+      {
+        "level": 10,
+        "baseStatGrowth": 15682
+      },
+      {
+        "level": 11,
+        "baseStatGrowth": 17250
+      },
+      {
+        "level": 12,
+        "baseStatGrowth": 18818
+      },
+      {
+        "level": 13,
+        "baseStatGrowth": 20386
+      },
+      {
+        "level": 14,
+        "baseStatGrowth": 21954
+      },
+      {
+        "level": 15,
+        "baseStatGrowth": 23523
+      },
+      {
+        "level": 16,
+        "baseStatGrowth": 25091
+      },
+      {
+        "level": 17,
+        "baseStatGrowth": 26659
+      },
+      {
+        "level": 18,
+        "baseStatGrowth": 28227
+      },
+      {
+        "level": 19,
+        "baseStatGrowth": 29795
+      },
+      {
+        "level": 20,
+        "baseStatGrowth": 31363
+      },
+      {
+        "level": 21,
+        "baseStatGrowth": 32932
+      },
+      {
+        "level": 22,
+        "baseStatGrowth": 34500
+      },
+      {
+        "level": 23,
+        "baseStatGrowth": 36068
+      },
+      {
+        "level": 24,
+        "baseStatGrowth": 37636
+      },
+      {
+        "level": 25,
+        "baseStatGrowth": 39204
+      },
+      {
+        "level": 26,
+        "baseStatGrowth": 40772
+      },
+      {
+        "level": 27,
+        "baseStatGrowth": 42341
+      },
+      {
+        "level": 28,
+        "baseStatGrowth": 43909
+      },
+      {
+        "level": 29,
+        "baseStatGrowth": 45477
+      },
+      {
+        "level": 30,
+        "baseStatGrowth": 47045
+      },
+      {
+        "level": 31,
+        "baseStatGrowth": 48613
+      },
+      {
+        "level": 32,
+        "baseStatGrowth": 50181
+      },
+      {
+        "level": 33,
+        "baseStatGrowth": 51750
+      },
+      {
+        "level": 34,
+        "baseStatGrowth": 53318
+      },
+      {
+        "level": 35,
+        "baseStatGrowth": 54886
+      },
+      {
+        "level": 36,
+        "baseStatGrowth": 56454
+      },
+      {
+        "level": 37,
+        "baseStatGrowth": 58022
+      },
+      {
+        "level": 38,
+        "baseStatGrowth": 59590
+      },
+      {
+        "level": 39,
+        "baseStatGrowth": 61159
+      },
+      {
+        "level": 40,
+        "baseStatGrowth": 62727
+      },
+      {
+        "level": 41,
+        "baseStatGrowth": 64295
+      },
+      {
+        "level": 42,
+        "baseStatGrowth": 65863
+      },
+      {
+        "level": 43,
+        "baseStatGrowth": 67431
+      },
+      {
+        "level": 44,
+        "baseStatGrowth": 68999
+      },
+      {
+        "level": 45,
+        "baseStatGrowth": 70568
+      },
+      {
+        "level": 46,
+        "baseStatGrowth": 72136
+      },
+      {
+        "level": 47,
+        "baseStatGrowth": 73704
+      },
+      {
+        "level": 48,
+        "baseStatGrowth": 75272
+      },
+      {
+        "level": 49,
+        "baseStatGrowth": 76840
+      },
+      {
+        "level": 50,
+        "baseStatGrowth": 78408
+      },
+      {
+        "level": 51,
+        "baseStatGrowth": 79977
+      },
+      {
+        "level": 52,
+        "baseStatGrowth": 81545
+      },
+      {
+        "level": 53,
+        "baseStatGrowth": 83113
+      },
+      {
+        "level": 54,
+        "baseStatGrowth": 84681
+      },
+      {
+        "level": 55,
+        "baseStatGrowth": 86249
+      },
+      {
+        "level": 56,
+        "baseStatGrowth": 87817
+      },
+      {
+        "level": 57,
+        "baseStatGrowth": 89386
+      },
+      {
+        "level": 58,
+        "baseStatGrowth": 90954
+      },
+      {
+        "level": 59,
+        "baseStatGrowth": 92522
+      },
+      {
+        "level": 60,
+        "baseStatGrowth": 94090
+      }
+    ],
+    "stars": [
+      {
+        "star": 0,
+        "minLevel": 0,
+        "maxLevel": 10,
+        "baseStatGrowth": 0,
+        "advancedStatGrowth": 0
+      },
+      {
+        "star": 1,
+        "minLevel": 10,
+        "maxLevel": 20,
+        "baseStatGrowth": 8922,
+        "advancedStatGrowth": 3000
+      },
+      {
+        "star": 2,
+        "minLevel": 20,
+        "maxLevel": 30,
+        "baseStatGrowth": 17844,
+        "advancedStatGrowth": 6000
+      },
+      {
+        "star": 3,
+        "minLevel": 30,
+        "maxLevel": 40,
+        "baseStatGrowth": 26766,
+        "advancedStatGrowth": 9000
+      },
+      {
+        "star": 4,
+        "minLevel": 40,
+        "maxLevel": 50,
+        "baseStatGrowth": 35688,
+        "advancedStatGrowth": 12000
+      },
+      {
+        "star": 5,
+        "minLevel": 50,
+        "maxLevel": 60,
+        "baseStatGrowth": 44610,
+        "advancedStatGrowth": 15000
+      }
+    ]
+  },
+  {
+    "id": "13105",
+    "slug": "test-a-lucia-1051",
+    "name": "Test-A-Lucia-1051",
+    "shortComment": "",
+    "longComment": "TEST",
+    "exclusiveAgent": {
+      "id": "1051",
+      "slug": "yidhari-murphy",
+      "name": "Yidhari"
+    },
+    "assets": {
+      "splashArt": {
+        "url": "",
+        "width": 0,
+        "height": 0
       }
     },
     "levels": [
@@ -3403,8 +2789,8 @@
     },
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/9040608625690851286_272_14050658.webp",
-        "width": 367,
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/9040608625690851286_250_13063804.webp",
+        "width": 400,
         "height": 400
       }
     },
@@ -3712,9 +3098,9 @@
     },
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/17653889802566983537_272_14050658.webp",
-        "width": 359,
-        "height": 364
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/17653889802566983537_250_13063804.webp",
+        "width": 400,
+        "height": 400
       }
     },
     "levels": [
@@ -4021,8 +3407,8 @@
     },
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/11396623558123596303_272_14050658.webp",
-        "width": 369,
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/11396623558123596303_250_13063804.webp",
+        "width": 400,
         "height": 400
       }
     },
@@ -4330,9 +3716,9 @@
     },
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/15676500043685922232_272_14050658.webp",
-        "width": 358,
-        "height": 357
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/15676500043685922232_250_13063804.webp",
+        "width": 400,
+        "height": 400
       }
     },
     "levels": [
@@ -4639,8 +4025,8 @@
     },
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/1873601171397431226_272_14050658.webp",
-        "width": 376,
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/1873601171397431226_250_13063804.webp",
+        "width": 400,
         "height": 400
       }
     },
@@ -4948,8 +4334,8 @@
     },
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/4381256793057267126_272_14050658.webp",
-        "width": 335,
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/4381256793057267126_250_13063804.webp",
+        "width": 400,
         "height": 400
       }
     },
@@ -5257,9 +4643,9 @@
     },
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/17214389486554486233_272_14050658.webp",
-        "width": 369,
-        "height": 388
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/17214389486554486233_250_13063804.webp",
+        "width": 400,
+        "height": 400
       }
     },
     "levels": [
@@ -5566,9 +4952,9 @@
     },
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/16460407352928337145_272_14050658.webp",
-        "width": 359,
-        "height": 365
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/16460407352928337145_250_13063804.webp",
+        "width": 400,
+        "height": 400
       }
     },
     "levels": [
@@ -5875,9 +5261,9 @@
     },
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/8841819400996548756_272_14050658.webp",
-        "width": 332,
-        "height": 391
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/8841819400996548756_250_13063804.webp",
+        "width": 400,
+        "height": 400
       }
     },
     "levels": [
@@ -6184,9 +5570,9 @@
     },
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/14451241678795102998_272_14050658.webp",
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/14451241678795102998_250_13063804.webp",
         "width": 400,
-        "height": 334
+        "height": 400
       }
     },
     "levels": [
@@ -6493,9 +5879,9 @@
     },
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/8936503721916339757_272_14050658.webp",
-        "width": 364,
-        "height": 359
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/8936503721916339757_250_13063804.webp",
+        "width": 400,
+        "height": 400
       }
     },
     "levels": [
@@ -6802,8 +6188,8 @@
     },
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/13171377602915851420_272_14050658.webp",
-        "width": 384,
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/13171377602915851420_250_13063804.webp",
+        "width": 400,
         "height": 400
       }
     },
@@ -7111,9 +6497,9 @@
     },
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/15147954421116790570_272_14050658.webp",
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/15147954421116790570_250_13063804.webp",
         "width": 400,
-        "height": 347
+        "height": 400
       }
     },
     "levels": [
@@ -7420,9 +6806,9 @@
     },
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/1754438024109142197_272_14050658.webp",
-        "width": 387,
-        "height": 370
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/1754438024109142197_250_13063804.webp",
+        "width": 400,
+        "height": 400
       }
     },
     "levels": [
@@ -7729,8 +7115,8 @@
     },
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/9411389049279467886_272_14050658.webp",
-        "width": 381,
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/9411389049279467886_250_13063804.webp",
+        "width": 400,
         "height": 400
       }
     },
@@ -8038,9 +7424,9 @@
     },
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/7627348333635396508_272_14050658.webp",
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/7627348333635396508_250_13063804.webp",
         "width": 400,
-        "height": 362
+        "height": 400
       }
     },
     "levels": [
@@ -8347,9 +7733,9 @@
     },
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/16009435898450488828_272_14050658.webp",
-        "width": 386,
-        "height": 350
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/16009435898450488828_250_13063804.webp",
+        "width": 400,
+        "height": 400
       }
     },
     "levels": [
@@ -8656,9 +8042,9 @@
     },
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/10324161233009988307_272_14050658.webp",
-        "width": 385,
-        "height": 387
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/10324161233009988307_250_13063804.webp",
+        "width": 400,
+        "height": 400
       }
     },
     "levels": [
@@ -8965,9 +8351,9 @@
     },
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/2230420914152973624_272_14050658.webp",
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/2230420914152973624_250_13063804.webp",
         "width": 400,
-        "height": 368
+        "height": 400
       }
     },
     "levels": [
@@ -9274,9 +8660,9 @@
     },
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/10202288609345969567_272_14050658.webp",
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/10202288609345969567_250_13063804.webp",
         "width": 400,
-        "height": 353
+        "height": 400
       }
     },
     "levels": [
@@ -9579,9 +8965,9 @@
     "exclusiveAgent": null,
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/8170634603151639128_272_14050658.webp",
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/8170634603151639128_250_13063804.webp",
         "width": 400,
-        "height": 361
+        "height": 400
       }
     },
     "levels": [
@@ -9888,9 +9274,9 @@
     },
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/10646773036203317382_272_14050658.webp",
-        "width": 374,
-        "height": 393
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/10646773036203317382_250_13063804.webp",
+        "width": 400,
+        "height": 400
       }
     },
     "levels": [
@@ -10197,7 +9583,7 @@
     },
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/8626808593218440901_272_14050658.webp",
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/8626808593218440901_250_13063804.webp",
         "width": 400,
         "height": 400
       }
@@ -10506,9 +9892,9 @@
     },
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/820268989263423171_272_14050658.webp",
-        "width": 379,
-        "height": 385
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/820268989263423171_250_13063804.webp",
+        "width": 400,
+        "height": 400
       }
     },
     "levels": [
@@ -10815,9 +10201,9 @@
     },
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/16588544403602613547_272_14050658.webp",
-        "width": 398,
-        "height": 376
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/16588544403602613547_250_13063804.webp",
+        "width": 400,
+        "height": 400
       }
     },
     "levels": [
@@ -11124,9 +10510,9 @@
     },
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/6679926639778928859_272_14050658.webp",
-        "width": 369,
-        "height": 362
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/6679926639778928859_250_13063804.webp",
+        "width": 400,
+        "height": 400
       }
     },
     "levels": [
@@ -11429,9 +10815,9 @@
     "exclusiveAgent": null,
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/4684827152905429742_272_14050658.webp",
-        "width": 371,
-        "height": 360
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/4684827152905429742_250_13063804.webp",
+        "width": 400,
+        "height": 400
       }
     },
     "levels": [
@@ -11738,8 +11124,8 @@
     },
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/14318212602800627298_272_14050658.webp",
-        "width": 382,
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/14318212602800627298_250_13063804.webp",
+        "width": 400,
         "height": 400
       }
     },
@@ -12047,8 +11433,8 @@
     },
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/16771620008259487433_272_14050658.webp",
-        "width": 383,
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/16771620008259487433_250_13063804.webp",
+        "width": 400,
         "height": 400
       }
     },
@@ -12356,9 +11742,9 @@
     },
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/16892860305011961456_272_14050658.webp",
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/16892860305011961456_250_13063804.webp",
         "width": 400,
-        "height": 368
+        "height": 400
       }
     },
     "levels": [
@@ -12665,9 +12051,9 @@
     },
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/7996765698387457884_272_14050658.webp",
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/7996765698387457884_250_13063804.webp",
         "width": 400,
-        "height": 392
+        "height": 400
       }
     },
     "levels": [
@@ -12974,9 +12360,9 @@
     },
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/9777952039835305921_272_14050658.webp",
-        "width": 394,
-        "height": 398
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/9777952039835305921_250_13063804.webp",
+        "width": 400,
+        "height": 400
       }
     },
     "levels": [
@@ -13283,9 +12669,9 @@
     },
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/7763974041216526379_272_14050658.webp",
-        "width": 373,
-        "height": 362
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/7763974041216526379_250_13063804.webp",
+        "width": 400,
+        "height": 400
       }
     },
     "levels": [
@@ -13592,8 +12978,8 @@
     },
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/15943180123549500205_272_14050658.webp",
-        "width": 373,
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/15943180123549500205_250_13063804.webp",
+        "width": 400,
         "height": 400
       }
     },
@@ -13901,9 +13287,9 @@
     },
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/3644609800577270860_272_14050658.webp",
-        "width": 394,
-        "height": 382
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/3644609800577270860_250_13063804.webp",
+        "width": 400,
+        "height": 400
       }
     },
     "levels": [
@@ -14210,9 +13596,9 @@
     },
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/16171559347590751102_272_14050658.webp",
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/16171559347590751102_250_13063804.webp",
         "width": 400,
-        "height": 372
+        "height": 400
       }
     },
     "levels": [
@@ -14515,9 +13901,9 @@
     "exclusiveAgent": null,
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/3952417166432341036_272_14050658.webp",
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/3952417166432341036_250_13063804.webp",
         "width": 400,
-        "height": 350
+        "height": 400
       }
     },
     "levels": [
@@ -14820,8 +14206,8 @@
     "exclusiveAgent": null,
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/15499762061750667900_272_14050658.webp",
-        "width": 350,
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/15499762061750667900_250_13063804.webp",
+        "width": 400,
         "height": 400
       }
     },
@@ -15129,9 +14515,9 @@
     },
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/5211144728560347045_272_14050658.webp",
-        "width": 378,
-        "height": 357
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/5211144728560347045_250_13063804.webp",
+        "width": 400,
+        "height": 400
       }
     },
     "levels": [
@@ -15434,9 +14820,9 @@
     "exclusiveAgent": null,
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/9946975923754380421_272_14050658.webp",
-        "width": 375,
-        "height": 373
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/9946975923754380421_250_13063804.webp",
+        "width": 400,
+        "height": 400
       }
     },
     "levels": [
@@ -15739,9 +15125,9 @@
     "exclusiveAgent": null,
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/5178325164497501505_272_14050658.webp",
-        "width": 389,
-        "height": 382
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/5178325164497501505_250_13063804.webp",
+        "width": 400,
+        "height": 400
       }
     },
     "levels": [
@@ -16044,9 +15430,9 @@
     "exclusiveAgent": null,
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/6027182273569331921_272_14050658.webp",
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/6027182273569331921_250_13063804.webp",
         "width": 400,
-        "height": 368
+        "height": 400
       }
     },
     "levels": [
@@ -16353,9 +15739,9 @@
     },
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/9291843440677533818_272_14050658.webp",
-        "width": 397,
-        "height": 396
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/9291843440677533818_250_13063804.webp",
+        "width": 400,
+        "height": 400
       }
     },
     "levels": [
@@ -16662,9 +16048,9 @@
     },
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/18100713370015259184_272_14050658.webp",
-        "width": 362,
-        "height": 366
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/18100713370015259184_250_13063804.webp",
+        "width": 400,
+        "height": 400
       }
     },
     "levels": [
@@ -16971,9 +16357,9 @@
     },
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/12700018417013927954_272_14050658.webp",
-        "width": 373,
-        "height": 398
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/12700018417013927954_250_13063804.webp",
+        "width": 400,
+        "height": 400
       }
     },
     "levels": [
@@ -17280,9 +16666,9 @@
     },
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/13475409755179575499_272_14050658.webp",
-        "width": 388,
-        "height": 365
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/13475409755179575499_250_13063804.webp",
+        "width": 400,
+        "height": 400
       }
     },
     "levels": [
@@ -17585,8 +16971,8 @@
     "exclusiveAgent": null,
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/7482137846490706279_272_14050658.webp",
-        "width": 349,
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/7482137846490706279_250_13063804.webp",
+        "width": 400,
         "height": 400
       }
     },
@@ -17890,9 +17276,9 @@
     "exclusiveAgent": null,
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/10453131142893263913_272_14050658.webp",
-        "width": 386,
-        "height": 388
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/10453131142893263913_250_13063804.webp",
+        "width": 400,
+        "height": 400
       }
     },
     "levels": [
@@ -18199,9 +17585,9 @@
     },
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/3392273509600171026_272_14050658.webp",
-        "width": 382,
-        "height": 365
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/3392273509600171026_250_13063804.webp",
+        "width": 400,
+        "height": 400
       }
     },
     "levels": [
@@ -18504,9 +17890,9 @@
     "exclusiveAgent": null,
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/209281607846105638_272_14050658.webp",
-        "width": 373,
-        "height": 363
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/209281607846105638_250_13063804.webp",
+        "width": 400,
+        "height": 400
       }
     },
     "levels": [
@@ -18813,8 +18199,8 @@
     },
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/2448005377571332362_272_14050658.webp",
-        "width": 347,
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/2448005377571332362_250_13063804.webp",
+        "width": 400,
         "height": 400
       }
     },
@@ -19118,8 +18504,8 @@
     "exclusiveAgent": null,
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/14684438101221296362_272_14050658.webp",
-        "width": 383,
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/14684438101221296362_250_13063804.webp",
+        "width": 400,
         "height": 400
       }
     },
@@ -19427,9 +18813,9 @@
     },
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/15090782206857045759_272_14050658.webp",
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/15090782206857045759_250_13063804.webp",
         "width": 400,
-        "height": 389
+        "height": 400
       }
     },
     "levels": [
@@ -19732,9 +19118,9 @@
     "exclusiveAgent": null,
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/18364339827443768073_272_14050658.webp",
-        "width": 366,
-        "height": 394
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/18364339827443768073_250_13063804.webp",
+        "width": 400,
+        "height": 400
       }
     },
     "levels": [
@@ -20037,9 +19423,9 @@
     "exclusiveAgent": null,
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/5663474003074608588_272_14050658.webp",
-        "width": 363,
-        "height": 363
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/5663474003074608588_250_13063804.webp",
+        "width": 400,
+        "height": 400
       }
     },
     "levels": [
@@ -20342,9 +19728,9 @@
     "exclusiveAgent": null,
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/17751699353599439731_272_14050658.webp",
-        "width": 363,
-        "height": 354
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/17751699353599439731_250_13063804.webp",
+        "width": 400,
+        "height": 400
       }
     },
     "levels": [
@@ -20647,9 +20033,9 @@
     "exclusiveAgent": null,
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/5683777611972939483_272_14050658.webp",
-        "width": 361,
-        "height": 354
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/5683777611972939483_250_13063804.webp",
+        "width": 400,
+        "height": 400
       }
     },
     "levels": [
@@ -20952,9 +20338,9 @@
     "exclusiveAgent": null,
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/9018110348880752704_272_14050658.webp",
-        "width": 350,
-        "height": 348
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/9018110348880752704_250_13063804.webp",
+        "width": 400,
+        "height": 400
       }
     },
     "levels": [
@@ -21257,8 +20643,8 @@
     "exclusiveAgent": null,
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/9060492658271209028_272_14050658.webp",
-        "width": 376,
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/9060492658271209028_250_13063804.webp",
+        "width": 400,
         "height": 400
       }
     },
@@ -21562,9 +20948,9 @@
     "exclusiveAgent": null,
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/1777346118168965608_272_14050658.webp",
-        "width": 374,
-        "height": 360
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/1777346118168965608_250_13063804.webp",
+        "width": 400,
+        "height": 400
       }
     },
     "levels": [
@@ -21867,9 +21253,9 @@
     "exclusiveAgent": null,
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/753558117964550416_272_14050658.webp",
-        "width": 374,
-        "height": 360
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/753558117964550416_250_13063804.webp",
+        "width": 400,
+        "height": 400
       }
     },
     "levels": [
@@ -22172,9 +21558,9 @@
     "exclusiveAgent": null,
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/3071102424205692352_272_14050658.webp",
-        "width": 368,
-        "height": 375
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/3071102424205692352_250_13063804.webp",
+        "width": 400,
+        "height": 400
       }
     },
     "levels": [
@@ -22477,9 +21863,9 @@
     "exclusiveAgent": null,
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/11208866625897124879_272_14050658.webp",
-        "width": 361,
-        "height": 354
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/11208866625897124879_250_13063804.webp",
+        "width": 400,
+        "height": 400
       }
     },
     "levels": [
@@ -22782,9 +22168,9 @@
     "exclusiveAgent": null,
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/3532129574579443743_272_14050658.webp",
-        "width": 362,
-        "height": 354
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/3532129574579443743_250_13063804.webp",
+        "width": 400,
+        "height": 400
       }
     },
     "levels": [
@@ -23087,9 +22473,9 @@
     "exclusiveAgent": null,
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/5771737288885376558_272_14050658.webp",
-        "width": 393,
-        "height": 360
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/5771737288885376558_250_13063804.webp",
+        "width": 400,
+        "height": 400
       }
     },
     "levels": [
@@ -23392,9 +22778,9 @@
     "exclusiveAgent": null,
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/1247135196460007849_272_14050658.webp",
-        "width": 374,
-        "height": 360
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/1247135196460007849_250_13063804.webp",
+        "width": 400,
+        "height": 400
       }
     },
     "levels": [
@@ -23697,9 +23083,9 @@
     "exclusiveAgent": null,
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/15298019163141011365_272_14050658.webp",
-        "width": 361,
-        "height": 354
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/15298019163141011365_250_13063804.webp",
+        "width": 400,
+        "height": 400
       }
     },
     "levels": [
@@ -24002,9 +23388,9 @@
     "exclusiveAgent": null,
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/4899041300055864745_272_14050658.webp",
-        "width": 371,
-        "height": 390
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/4899041300055864745_250_13063804.webp",
+        "width": 400,
+        "height": 400
       }
     },
     "levels": [
@@ -24307,9 +23693,9 @@
     "exclusiveAgent": null,
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/12922716714361432993_272_14050658.webp",
-        "width": 361,
-        "height": 354
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/12922716714361432993_250_13063804.webp",
+        "width": 400,
+        "height": 400
       }
     },
     "levels": [
@@ -24612,9 +23998,9 @@
     "exclusiveAgent": null,
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/3170499147893610787_272_14050658.webp",
-        "width": 374,
-        "height": 360
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/3170499147893610787_250_13063804.webp",
+        "width": 400,
+        "height": 400
       }
     },
     "levels": [
@@ -24917,9 +24303,9 @@
     "exclusiveAgent": null,
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/3300974479519013266_272_14050658.webp",
-        "width": 362,
-        "height": 388
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/3300974479519013266_250_13063804.webp",
+        "width": 400,
+        "height": 400
       }
     },
     "levels": [
@@ -25222,9 +24608,9 @@
     "exclusiveAgent": null,
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/16822323173157307179_272_14050658.webp",
-        "width": 367,
-        "height": 360
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/16822323173157307179_250_13063804.webp",
+        "width": 400,
+        "height": 400
       }
     },
     "levels": [
@@ -25527,9 +24913,9 @@
     "exclusiveAgent": null,
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/9031943580913178475_272_14050658.webp",
-        "width": 372,
-        "height": 389
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/9031943580913178475_250_13063804.webp",
+        "width": 400,
+        "height": 400
       }
     },
     "levels": [
@@ -25832,9 +25218,9 @@
     "exclusiveAgent": null,
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/17751609352032126606_272_14050658.webp",
-        "width": 368,
-        "height": 373
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/17751609352032126606_250_13063804.webp",
+        "width": 400,
+        "height": 400
       }
     },
     "levels": [
@@ -26137,9 +25523,9 @@
     "exclusiveAgent": null,
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/8222645684665378077_272_14050658.webp",
-        "width": 368,
-        "height": 375
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/8222645684665378077_250_13063804.webp",
+        "width": 400,
+        "height": 400
       }
     },
     "levels": [
@@ -26442,9 +25828,9 @@
     "exclusiveAgent": null,
     "assets": {
       "splashArt": {
-        "url": "https://cdn.gachabase.net/prod/zzz/assets/6364556929419810322_272_14050658.webp",
-        "width": 368,
-        "height": 373
+        "url": "https://cdn.gachabase.net/prod/zzz/assets/6364556929419810322_250_13063804.webp",
+        "width": 400,
+        "height": 400
       }
     },
     "levels": [

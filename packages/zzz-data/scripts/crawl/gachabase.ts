@@ -2,6 +2,15 @@ import type { CrawlTask } from "./shared.js"
 import { batchProcess, decodeSvelteKitData, fetchJson } from "./shared.js"
 
 const BASE_URL = "https://zzz.gachabase.net"
+const GACHABASE_BRANCH = "release"
+
+function buildDataUrl(path: string, lang: string): string {
+  const params = new URLSearchParams({
+    lang,
+    branch: GACHABASE_BRANCH,
+  })
+  return `${BASE_URL}${path}/__data.json?${params.toString()}`
+}
 
 // 将字符串中的各类 Unicode 空白归一化为普通空格
 function norm(s: unknown) {
@@ -791,7 +800,7 @@ async function fetchAllWEngineDetails(
   return batchProcess(
     wEngineList,
     async (we) => {
-      const url = `${BASE_URL}/w-engines/${we.id}/${we.slug}/__data.json?lang=${lang}`
+      const url = buildDataUrl(`/w-engines/${we.id}/${we.slug}`, lang)
       const json = await fetchJson<SvelteKitDataJson>(url)
       const pageNode = json.nodes[1]
       if (!pageNode || !Array.isArray(pageNode.data)) {
@@ -1036,7 +1045,7 @@ async function fetchAllBangbooDetails(
   return batchProcess(
     bangbooList,
     async (b) => {
-      const url = `${BASE_URL}/bangboo/${b.id}/${b.slug}/__data.json?lang=${lang}`
+      const url = buildDataUrl(`/bangboo/${b.id}/${b.slug}`, lang)
       const json = await fetchJson<SvelteKitDataJson>(url)
       const pageNode = json.nodes[1]
       if (!pageNode || !Array.isArray(pageNode.data)) {
@@ -1114,7 +1123,7 @@ async function fetchAllAgentDetails(
     agentList,
     async (agent) => {
       const json = await fetchJson<SvelteKitDataJson>(
-        `${agent.url}/__data.json?lang=${lang}`,
+        buildDataUrl(`/agents/${agent.id}/${agent.slug}`, lang),
       )
       const pageNode = json.nodes[1]
       if (!pageNode || !Array.isArray(pageNode.data)) {
@@ -1134,35 +1143,35 @@ const LANGS = ["en", "zh-CN"] as const
 export const tasks: CrawlTask[] = LANGS.flatMap((lang) => [
   {
     name: `${lang}/gachabase/agents`,
-    url: `${BASE_URL}/agents/__data.json?lang=${lang}`,
+    url: buildDataUrl("/agents", lang),
     extract: (_, html) => parseAgentList(html),
   },
   {
     name: `${lang}/gachabase/agent-details`,
-    url: `${BASE_URL}/agents/__data.json?lang=${lang}`,
+    url: buildDataUrl("/agents", lang),
     extract: async (_, html) =>
       fetchAllAgentDetails(parseAgentList(html), lang),
   },
   {
     name: `${lang}/gachabase/w-engines`,
-    url: `${BASE_URL}/w-engines/__data.json?lang=${lang}`,
+    url: buildDataUrl("/w-engines", lang),
     extract: (_, html) => parseWEngineList(html),
   },
   {
     name: `${lang}/gachabase/w-engine-details`,
-    url: `${BASE_URL}/w-engines/__data.json?lang=${lang}`,
+    url: buildDataUrl("/w-engines", lang),
     extract: async (_, html) =>
       fetchAllWEngineDetails(parseWEngineList(html), lang),
   },
   {
     name: `${lang}/gachabase/bangboo`,
-    url: `${BASE_URL}/bangboo/__data.json?lang=${lang}`,
+    url: buildDataUrl("/bangboo", lang),
     extract: async (_, html) =>
       fetchAllBangbooDetails(parseBangbooList(html), lang),
   },
   {
     name: `${lang}/gachabase/drive-discs`,
-    url: `${BASE_URL}/drive-discs/__data.json?lang=${lang}`,
+    url: buildDataUrl("/drive-discs", lang),
     extract: (_, html) => parseDriveDiscList(html),
   },
 ])
