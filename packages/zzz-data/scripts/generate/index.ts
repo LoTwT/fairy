@@ -1,4 +1,9 @@
-import type { ColumnDef, WorksheetConfig } from "./config"
+import type {
+  ColumnDef,
+  DerivedField,
+  GenerateDataRow,
+  WorksheetConfig,
+} from "./config"
 import { mkdirSync, writeFileSync } from "node:fs"
 import { dirname, resolve } from "node:path"
 import process from "node:process"
@@ -39,6 +44,134 @@ function generateInterface(config: WorksheetConfig): string {
   return lines.join("\n")
 }
 
+function isNullableType(type: string): boolean {
+  return type.includes("null")
+}
+
+function readWorksheetRows(
+  worksheet: ExcelJS.Worksheet,
+  config: WorksheetConfig,
+): {
+  missingHeaders: string[]
+  rows: GenerateDataRow[]
+} {
+  const headerRow = worksheet.getRow(1)
+  const colMap = new Map<number, ColumnDef>()
+
+  headerRow.eachCell({ includeEmpty: false }, (cell, colNumber) => {
+    const raw = extractCellValue(cell.value, {
+      worksheet,
+      address: cell.address,
+    })
+    if (typeof raw !== "string") return
+    const normalized = normalizeHeader(raw)
+    const colDef = config.columns[normalized]
+    if (colDef) {
+      colMap.set(colNumber, colDef)
+    }
+  })
+
+  const foundFields = new Set(
+    [...colMap.values()].map((column) => column.field),
+  )
+  const missingHeaders = Object.entries(config.columns)
+    .filter(([, colDef]) => !foundFields.has(colDef.field))
+    .map(([header, colDef]) => `${header} (${colDef.field})`)
+
+  if (missingHeaders.length > 0) {
+    return { missingHeaders, rows: [] }
+  }
+
+  const rows: GenerateDataRow[] = []
+  for (let rowNum = 2; rowNum <= worksheet.rowCount; rowNum++) {
+    const row = worksheet.getRow(rowNum)
+    let hasValue = false
+    const obj: GenerateDataRow = {}
+
+    for (const [colIdx, colDef] of colMap) {
+      const cell = row.getCell(colIdx)
+      let val = extractCellValue(cell.value, {
+        worksheet,
+        address: cell.address,
+      })
+
+      if (colDef.type === "boolean") {
+        val = Boolean(val)
+      } else if (colDef.type === "number" && val !== null) {
+        const num = Number(val)
+        val = Number.isNaN(num) ? null : num
+      } else if (
+        colDef.type.startsWith("number") &&
+        val !== null &&
+        val !== ""
+      ) {
+        const num = Number(val)
+        val = Number.isNaN(num) ? null : num
+      } else if (colDef.type === "string" && val !== null) {
+        val = String(val)
+      } else if (
+        colDef.type.startsWith("string") &&
+        val !== null &&
+        val !== ""
+      ) {
+        val = String(val)
+      }
+
+      if (isNullableType(colDef.type) && (val === "" || val === undefined)) {
+        val = null
+      }
+
+      obj[colDef.field] = val ?? null
+      if (val !== null) hasValue = true
+    }
+
+    if (hasValue) {
+      rows.push(obj)
+    }
+  }
+
+  return { missingHeaders: [], rows }
+}
+
+function groupSourceRowsByField(
+  sourceRows: GenerateDataRow[],
+  field: string,
+): Map<unknown, GenerateDataRow[]> {
+  const groupedRows = new Map<unknown, GenerateDataRow[]>()
+
+  for (const sourceRow of sourceRows) {
+    const key = sourceRow[field]
+    if (key == null) continue
+    const rows = groupedRows.get(key) ?? []
+    rows.push(sourceRow)
+    groupedRows.set(key, rows)
+  }
+
+  return groupedRows
+}
+
+function selectDerivedSourceRow(
+  derivedField: DerivedField,
+  sourceRows: GenerateDataRow[],
+  matchValue: unknown,
+): GenerateDataRow | undefined {
+  if (sourceRows.length === 0) {
+    return undefined
+  }
+
+  if (sourceRows.length === 1) {
+    return sourceRows[0]
+  }
+
+  if (derivedField.resolveSourceRow) {
+    return derivedField.resolveSourceRow(sourceRows, matchValue)
+  }
+
+  throw new Error(
+    `Multiple source rows matched "${String(matchValue)}" for derived field "${derivedField.field}".`,
+  )
+}
+
 // ---------------------------------------------------------------------------
 // Main
 // ---------------------------------------------------------------------------
@@ -51,8 +184,9 @@ async function main() {
   mkdirSync(TYPES_DIR, { recursive: true })
 
   // Pass 1: Read all worksheets into memory
-  const allData = new Map<string, Record<string, unknown>[]>()
+  const allData = new Map<string, GenerateDataRow[]>()
   const typeGroups = new Map<string, WorksheetConfig[]>()
+  const validationErrors: string[] = []
 
   for (const config of worksheetConfigs) {
     const group = typeGroups.get(config.typeGroup) || []
@@ -61,79 +195,30 @@ async function main() {
 
     const worksheet = workbook.getWorksheet(config.sheetName)
     if (!worksheet) {
-      console.warn(`⚠ Worksheet "${config.sheetName}" not found, skipping.`)
-      allData.set(config.jsonFileName, [])
+      validationErrors.push(`Worksheet "${config.sheetName}" not found.`)
       continue
     }
 
-    // Read header row (row 1)
-    const headerRow = worksheet.getRow(1)
-    const colMap = new Map<number, ColumnDef>()
-
-    headerRow.eachCell({ includeEmpty: false }, (cell, colNumber) => {
-      const raw = extractCellValue(cell.value)
-      if (typeof raw !== "string") return
-      const normalized = normalizeHeader(raw)
-      const colDef = config.columns[normalized]
-      if (colDef) {
-        colMap.set(colNumber, colDef)
-      }
-    })
-
-    // Validate all columns found
-    const foundFields = new Set([...colMap.values()].map((c) => c.field))
-    for (const [header, colDef] of Object.entries(config.columns)) {
-      if (!foundFields.has(colDef.field)) {
-        console.warn(
-          `⚠ [${config.sheetName}] Column "${header}" (${colDef.field}) not found in worksheet.`,
-        )
-      }
-    }
-
-    // Read data rows
-    const rows: Record<string, unknown>[] = []
-    const rowCount = worksheet.rowCount
-    for (let rowNum = 2; rowNum <= rowCount; rowNum++) {
-      const row = worksheet.getRow(rowNum)
-      let hasValue = false
-      const obj: Record<string, unknown> = {}
-      for (const [colIdx, colDef] of colMap) {
-        let val = extractCellValue(row.getCell(colIdx).value)
-        if (colDef.type === "boolean") {
-          val = Boolean(val)
-        } else if (colDef.type === "number" && val !== null) {
-          const num = Number(val)
-          val = Number.isNaN(num) ? null : num
-        } else if (
-          colDef.type.startsWith("number") &&
-          val !== null &&
-          val !== ""
-        ) {
-          const num = Number(val)
-          val = Number.isNaN(num) ? null : num
-        } else if (colDef.type === "string" && val !== null) {
-          val = String(val)
-        } else if (
-          colDef.type.startsWith("string") &&
-          val !== null &&
-          val !== ""
-        ) {
-          val = String(val)
-        }
-        if (colDef.type.includes("null") && (val === "" || val === undefined)) {
-          val = null
-        }
-        obj[colDef.field] = val ?? null
-        if (val !== null) hasValue = true
-      }
-      if (hasValue) rows.push(obj)
+    const { missingHeaders, rows } = readWorksheetRows(worksheet, config)
+    if (missingHeaders.length > 0) {
+      validationErrors.push(
+        `[${config.sheetName}] Missing columns: ${missingHeaders.join(", ")}`,
+      )
+      continue
     }
 
     allData.set(config.jsonFileName, rows)
     console.log(`  read ${config.sheetName} — ${rows.length} rows`)
   }
 
+  if (validationErrors.length > 0) {
+    throw new Error(
+      `Workbook validation failed:\n${validationErrors.map((error) => `- ${error}`).join("\n")}`,
+    )
+  }
+
   // Pass 2: Inject derived fields
+  const derivedFieldErrors: string[] = []
   for (const config of worksheetConfigs) {
     if (!config.derivedFields) continue
     const rows = allData.get(config.jsonFileName)
@@ -142,36 +227,67 @@ async function main() {
     for (const df of config.derivedFields) {
       const sourceRows = allData.get(df.sourceJson)
       if (!sourceRows) {
-        console.warn(
-          `⚠ Source "${df.sourceJson}" not found for derived field "${df.field}"`,
+        derivedFieldErrors.push(
+          `Source "${df.sourceJson}" not found for derived field "${df.field}".`,
         )
         continue
       }
-      // Build lookup map: sourceMatchField value -> sourceValueField value
-      // Only use the first match (for agent-stat, filter to playable agents with id < 2000)
-      const lookup = new Map<unknown, unknown>()
-      for (const sr of sourceRows) {
-        const key = sr[df.sourceMatchField]
-        if (key != null && !lookup.has(key)) {
-          lookup.set(key, sr[df.sourceValueField])
-        }
-      }
-      // Inject
+
+      const sourceRowsByKey = groupSourceRowsByField(
+        sourceRows,
+        df.sourceMatchField,
+      )
       let injected = 0
+
       for (const row of rows) {
         const matchVal = row[df.matchField]
-        const derived = lookup.get(matchVal)
-        if (derived !== undefined) {
-          row[df.field] = derived
-          injected++
-        } else {
-          row[df.field] = null
+        const matchingSourceRows = sourceRowsByKey.get(matchVal) ?? []
+
+        let sourceRow: GenerateDataRow | undefined
+        try {
+          sourceRow = selectDerivedSourceRow(df, matchingSourceRows, matchVal)
+        } catch (error) {
+          derivedFieldErrors.push(
+            `[${config.jsonFileName}.${df.field}] ${error instanceof Error ? error.message : String(error)}`,
+          )
+          continue
         }
+
+        if (!sourceRow) {
+          const message = `[${config.jsonFileName}.${df.field}] No source row matched "${String(matchVal)}".`
+          if (isNullableType(df.type)) {
+            row[df.field] = null
+            continue
+          }
+          derivedFieldErrors.push(message)
+          continue
+        }
+
+        const derived = sourceRow[df.sourceValueField]
+        if (derived === undefined || derived === null) {
+          const message = `[${config.jsonFileName}.${df.field}] Source field "${df.sourceValueField}" is empty for "${String(matchVal)}".`
+          if (isNullableType(df.type)) {
+            row[df.field] = null
+            continue
+          }
+          derivedFieldErrors.push(message)
+          continue
+        }
+
+        row[df.field] = derived
+        injected++
       }
+
       console.log(
         `  inject ${df.field} into ${config.jsonFileName} — ${injected}/${rows.length} matched`,
       )
     }
+  }
+
+  if (derivedFieldErrors.length > 0) {
+    throw new Error(
+      `Derived field resolution failed:\n${derivedFieldErrors.map((error) => `- ${error}`).join("\n")}`,
+    )
   }
 
   // Pass 3: Write JSON files

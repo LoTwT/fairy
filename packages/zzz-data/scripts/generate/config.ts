@@ -1,4 +1,4 @@
-import type { CellValue } from "exceljs"
+import type { CellValue, Worksheet } from "exceljs"
 
 // ---------------------------------------------------------------------------
 // Config types
@@ -20,6 +20,13 @@ export type GenerateTypeGroupName = string
 
 export type GenerateWorksheetColumnHeader = string
 
+export type GenerateDataRow = Record<GenerateFieldName, unknown>
+
+export type DerivedSourceRowResolver = (
+  sourceRows: GenerateDataRow[],
+  matchValue: unknown,
+) => GenerateDataRow | undefined
+
 export interface ColumnDef {
   field: GenerateFieldName
   type: GenerateTypeExpression
@@ -36,6 +43,8 @@ export interface DerivedField {
   sourceMatchField: GenerateFieldName
   /** Field in the source dataset to take the value from */
   sourceValueField: GenerateFieldName
+  /** Resolve duplicate source rows into a single deterministic match */
+  resolveSourceRow?: DerivedSourceRowResolver
 }
 
 export interface WorksheetConfig {
@@ -51,6 +60,32 @@ export interface WorksheetConfig {
 // Worksheet configs
 // ---------------------------------------------------------------------------
 
+function preferRowWithNumberFieldLessThan(
+  field: GenerateFieldName,
+  upperBound: number,
+): DerivedSourceRowResolver {
+  return (sourceRows, matchValue) => {
+    const preferredRows = sourceRows.filter((row) => {
+      const value = row[field]
+      return typeof value === "number" && value < upperBound
+    })
+
+    if (preferredRows.length === 1) {
+      return preferredRows[0]
+    }
+
+    if (preferredRows.length === 0) {
+      throw new Error(
+        `No preferred source row found for "${String(matchValue)}" using ${field} < ${upperBound}.`,
+      )
+    }
+
+    throw new Error(
+      `Multiple preferred source rows found for "${String(matchValue)}" using ${field} < ${upperBound}.`,
+    )
+  }
+}
+
 export const worksheetConfigs: WorksheetConfig[] = [
   {
     sheetName: "代理人技能数据",
@@ -65,6 +100,7 @@ export const worksheetConfigs: WorksheetConfig[] = [
         matchField: "agent",
         sourceMatchField: "agent",
         sourceValueField: "id",
+        resolveSourceRow: preferRowWithNumberFieldLessThan("id", 2000),
       },
     ],
     columns: {
@@ -161,6 +197,7 @@ export const worksheetConfigs: WorksheetConfig[] = [
         matchField: "agent",
         sourceMatchField: "agent",
         sourceValueField: "id",
+        resolveSourceRow: preferRowWithNumberFieldLessThan("id", 2000),
       },
     ],
     columns: {
@@ -184,6 +221,7 @@ export const worksheetConfigs: WorksheetConfig[] = [
         matchField: "agent",
         sourceMatchField: "agent",
         sourceValueField: "id",
+        resolveSourceRow: preferRowWithNumberFieldLessThan("id", 2000),
       },
     ],
     columns: {
@@ -439,15 +477,251 @@ export type GenerateCellValue = CellValue
 
 export type GenerateExtractedCellValue = string | number | boolean | null
 
+export interface GenerateCellExtractionContext {
+  worksheet?: Worksheet
+  address?: string
+  formulaStack?: Set<string>
+}
+
+type GenerateFormulaToken =
+  | { type: "number"; value: number }
+  | { type: "reference"; value: string }
+  | { type: "operator"; value: "+" | "-" | "*" | "/" | "^" | "(" | ")" }
+
+function normalizeCellReference(reference: string): string {
+  return reference.replaceAll("$", "")
+}
+
+function describeCellContext(context?: GenerateCellExtractionContext): string {
+  const sheetName = context?.worksheet?.name ?? "<unknown-sheet>"
+  const address = context?.address
+    ? normalizeCellReference(context.address)
+    : "<unknown-cell>"
+  return `${sheetName}!${address}`
+}
+
+function tokenizeFormula(formula: string): GenerateFormulaToken[] {
+  const input = formula.startsWith("=") ? formula.slice(1) : formula
+  const tokens: GenerateFormulaToken[] = []
+  let cursor = 0
+
+  while (cursor < input.length) {
+    const rest = input.slice(cursor)
+    const char = rest[0]
+
+    if (/\s/.test(char)) {
+      cursor += 1
+      continue
+    }
+
+    if (/[+\-*/^()]/.test(char)) {
+      tokens.push({
+        type: "operator",
+        value: char as GenerateFormulaToken["value"],
+      })
+      cursor += 1
+      continue
+    }
+
+    const referenceMatch = rest.match(/^\$?[A-Z]+\$?\d+/)
+    if (referenceMatch) {
+      tokens.push({
+        type: "reference",
+        value: normalizeCellReference(referenceMatch[0]),
+      })
+      cursor += referenceMatch[0].length
+      continue
+    }
+
+    const numberMatch = rest.match(/^(?:\d+(?:\.\d+)?|\.\d+)/)
+    if (numberMatch) {
+      tokens.push({
+        type: "number",
+        value: Number(numberMatch[0]),
+      })
+      cursor += numberMatch[0].length
+      continue
+    }
+
+    throw new Error(`Unsupported formula token "${rest}"`)
+  }
+
+  return tokens
+}
+
+function evaluateFormulaReference(
+  reference: string,
+  context: GenerateCellExtractionContext,
+): number {
+  const worksheet = context.worksheet
+  if (!worksheet) {
+    throw new Error(
+      `Missing worksheet context for formula reference ${reference}`,
+    )
+  }
+
+  const cell = worksheet.getCell(reference)
+  const value = extractCellValue(cell.value, {
+    worksheet,
+    address: cell.address,
+    formulaStack: context.formulaStack,
+  })
+
+  const numeric = typeof value === "number" ? value : Number(value)
+  if (!Number.isFinite(numeric)) {
+    throw new TypeError(
+      `Referenced cell ${worksheet.name}!${reference} is not numeric: ${String(value)}`,
+    )
+  }
+
+  return numeric
+}
+
+function evaluateFormula(
+  formula: string,
+  context?: GenerateCellExtractionContext,
+): number {
+  if (!context?.worksheet || !context.address) {
+    throw new Error(
+      `Cannot evaluate formula "${formula}" without worksheet context`,
+    )
+  }
+
+  const address = normalizeCellReference(context.address)
+  const formulaStack = context.formulaStack ?? new Set<string>()
+  if (formulaStack.has(address)) {
+    throw new Error(`Circular formula reference detected at ${address}`)
+  }
+
+  const tokens = tokenizeFormula(formula)
+  let cursor = 0
+
+  const peek = () => tokens[cursor]
+  const consume = () => {
+    const token = tokens[cursor]
+    cursor += 1
+    return token
+  }
+  const consumeOperator = (operator: string): boolean => {
+    const token = peek()
+    if (token?.type === "operator" && token.value === operator) {
+      cursor += 1
+      return true
+    }
+    return false
+  }
+
+  function parsePrimary(): number {
+    const token = consume()
+    if (!token) {
+      throw new Error(`Unexpected end of formula "${formula}"`)
+    }
+
+    if (token.type === "number") {
+      return token.value
+    }
+
+    if (token.type === "reference") {
+      return evaluateFormulaReference(token.value, {
+        ...context,
+        formulaStack,
+      })
+    }
+
+    if (token.type === "operator" && token.value === "(") {
+      const value = parseExpression()
+      if (!consumeOperator(")")) {
+        throw new Error(`Missing closing parenthesis in formula "${formula}"`)
+      }
+      return value
+    }
+
+    throw new Error(`Unexpected token "${token.value}" in formula "${formula}"`)
+  }
+
+  function parseUnary(): number {
+    if (consumeOperator("+")) {
+      return parseUnary()
+    }
+    if (consumeOperator("-")) {
+      return -parseUnary()
+    }
+    return parsePrimary()
+  }
+
+  function parsePower(): number {
+    let value = parseUnary()
+    while (consumeOperator("^")) {
+      value **= parseUnary()
+    }
+    return value
+  }
+
+  function parseTerm(): number {
+    let value = parsePower()
+    while (true) {
+      if (consumeOperator("*")) {
+        value *= parsePower()
+        continue
+      }
+      if (consumeOperator("/")) {
+        value /= parsePower()
+        continue
+      }
+      return value
+    }
+  }
+
+  function parseExpression(): number {
+    let value = parseTerm()
+    while (true) {
+      if (consumeOperator("+")) {
+        value += parseTerm()
+        continue
+      }
+      if (consumeOperator("-")) {
+        value -= parseTerm()
+        continue
+      }
+      return value
+    }
+  }
+
+  formulaStack.add(address)
+  try {
+    const value = parseExpression()
+    if (cursor !== tokens.length) {
+      throw new Error(`Unsupported trailing tokens in formula "${formula}"`)
+    }
+    if (!Number.isFinite(value)) {
+      throw new TypeError(
+        `Formula "${formula}" did not produce a finite number`,
+      )
+    }
+    return value
+  } finally {
+    formulaStack.delete(address)
+  }
+}
+
 export function extractCellValue(
   cell: GenerateCellValue,
+  context?: GenerateCellExtractionContext,
 ): GenerateExtractedCellValue {
   if (cell === null || cell === undefined) return null
 
   // Formula cell
   if (typeof cell === "object" && "formula" in cell) {
     const fc = cell as { formula: string; result?: CellValue }
-    return fc.result !== undefined ? extractCellValue(fc.result) : null
+    try {
+      return fc.result !== undefined
+        ? extractCellValue(fc.result, context)
+        : evaluateFormula(fc.formula, context)
+    } catch (error) {
+      throw new Error(
+        `Failed to evaluate formula at ${describeCellContext(context)}: ${error instanceof Error ? error.message : String(error)}`,
+      )
+    }
   }
 
   // Rich text
@@ -459,7 +733,7 @@ export function extractCellValue(
   // Hyperlink
   if (typeof cell === "object" && "hyperlink" in cell) {
     const hl = cell as { hyperlink: string; text?: CellValue }
-    return hl.text !== undefined ? extractCellValue(hl.text) : null
+    return hl.text !== undefined ? extractCellValue(hl.text, context) : null
   }
 
   // Error
