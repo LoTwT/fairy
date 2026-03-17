@@ -4,6 +4,10 @@ import path from "node:path"
 import process from "node:process"
 import { fileURLToPath } from "node:url"
 import * as cheerio from "cheerio"
+import {
+  buildDeadlyAssaultPageData,
+  DEADLY_ASSAULT_PAGE_DATA_TASK_NAME,
+} from "./buhflipexplode-deadly-assault.js"
 import { tasks as buhflipexplodeTasks } from "./buhflipexplode.js"
 import { tasks as gachabaseTasks } from "./gachabase.js"
 import { tasks as mihoyoWikiTasks } from "./mihoyo-wiki.js"
@@ -37,6 +41,45 @@ function createStageDir(): string {
 
 function getStageOutputPath(stageDir: string, task: CrawlTask): string {
   return path.join(stageDir, getRelativeOutputPath(task))
+}
+
+function getStageJsonPath(stageDir: string, name: string): string {
+  return path.join(stageDir, `${name}.json`)
+}
+
+function readStageJson<T>(stageDir: string, name: string): T {
+  return JSON.parse(
+    fs.readFileSync(getStageJsonPath(stageDir, name), "utf-8"),
+  ) as T
+}
+
+function writeStageJson(stageDir: string, name: string, data: unknown): void {
+  const outPath = getStageJsonPath(stageDir, name)
+  fs.mkdirSync(path.dirname(outPath), { recursive: true })
+  fs.writeFileSync(outPath, JSON.stringify(data, null, 2), "utf-8")
+  console.log(`  → ${outPath}`)
+}
+
+function writeDerivedOutputs(stageDir: string, tasks: CrawlTask[]): void {
+  const taskNames = new Set(tasks.map((task) => task.name))
+  const deadlyAssaultInputs = [
+    "en/buhflipexplode/deadly-assault",
+    "en/buhflipexplode/enemies",
+    "en/buhflipexplode/buffs",
+  ]
+
+  if (!deadlyAssaultInputs.every((name) => taskNames.has(name))) {
+    return
+  }
+
+  const pageData = buildDeadlyAssaultPageData(
+    readStageJson(stageDir, "en/buhflipexplode/deadly-assault"),
+    readStageJson(stageDir, "en/buhflipexplode/enemies"),
+    readStageJson(stageDir, "en/buhflipexplode/buffs"),
+  )
+
+  console.log(`Deriving: ${DEADLY_ASSAULT_PAGE_DATA_TASK_NAME}`)
+  writeStageJson(stageDir, DEADLY_ASSAULT_PAGE_DATA_TASK_NAME, pageData)
 }
 
 function commitStageDir(stageDir: string, tasks: CrawlTask[]): void {
@@ -76,6 +119,7 @@ async function run() {
       console.log(`  → ${outPath}`)
     }
 
+    writeDerivedOutputs(stageDir, tasks)
     commitStageDir(stageDir, tasks)
   } finally {
     fs.rmSync(stageDir, { recursive: true, force: true })

@@ -44,6 +44,7 @@ pnpm run crawl:mihoyo-wiki
 data/raw/
 ├── en/
 │   ├── buhflipexplode/
+│   │   └── deadly-assault-page-data.json  # 基于 buhflipexplode 原始 JSON 复刻页面规则的派生快照
 │   └── gachabase/
 └── zh-CN/
     ├── gachabase/
@@ -52,5 +53,6 @@ data/raw/
 
 `scripts/crawl/index.ts` 会按任务名直接生成 `data/raw/<task-name>.json`，所以新增抓取任务时，任务名本身就是输出相对路径。
 每次执行抓取时，脚本会先把当前任务集合写入临时目录，全部成功后再替换对应来源目录，既能清理历史残留，也能保留上一份可用快照直到本轮抓取完成。
+其中 `buhflipexplode` 抓取完成后，还会额外读取 `deadly-assault.json`、`enemies.json` 与 `buffs.json`，按 `Deadly Assault` 页面当前 `da.js` 规则复算出页面展示用的 `deadly-assault-page-data.json`。
 
 `.sources/source.xlsx` 不纳入版本管理；仓库只跟踪它的 metadata 与导出的文本快照。

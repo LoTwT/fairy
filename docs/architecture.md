@@ -59,6 +59,7 @@ packages/zzz-data/
    - 抓取 `https://www.buhflipexplode.org`
    - 当前只保留 `en`
    - 直接消费其公开 JSON 端点
+   - 抓取完成后，会基于 `deadly-assault.json`、`enemies.json` 与 `buffs.json` 复算 `Deadly Assault` 页面展示数值，并额外产出 `data/raw/en/buhflipexplode/deadly-assault-page-data.json`
 3. `mihoyo-wiki.ts`
    - 抓取米游社百科危局强袭战条目
    - 当前只保留 `zh-CN`
