@@ -483,10 +483,12 @@ export interface GenerateCellExtractionContext {
   formulaStack?: Set<string>
 }
 
+type GenerateFormulaOperator = "+" | "-" | "*" | "/" | "^" | "(" | ")"
+
 type GenerateFormulaToken =
   | { type: "number"; value: number }
   | { type: "reference"; value: string }
-  | { type: "operator"; value: "+" | "-" | "*" | "/" | "^" | "(" | ")" }
+  | { type: "operator"; value: GenerateFormulaOperator }
 
 function normalizeCellReference(reference: string): string {
   return reference.replaceAll("$", "")
@@ -498,6 +500,12 @@ function describeCellContext(context?: GenerateCellExtractionContext): string {
     ? normalizeCellReference(context.address)
     : "<unknown-cell>"
   return `${sheetName}!${address}`
+}
+
+function isGenerateFormulaOperator(
+  value: string,
+): value is GenerateFormulaOperator {
+  return /^[+\-*/^()]$/.test(value)
 }
 
 function tokenizeFormula(formula: string): GenerateFormulaToken[] {
@@ -514,10 +522,10 @@ function tokenizeFormula(formula: string): GenerateFormulaToken[] {
       continue
     }
 
-    if (/[+\-*/^()]/.test(char)) {
+    if (isGenerateFormulaOperator(char)) {
       tokens.push({
         type: "operator",
-        value: char as GenerateFormulaToken["value"],
+        value: char,
       })
       cursor += 1
       continue

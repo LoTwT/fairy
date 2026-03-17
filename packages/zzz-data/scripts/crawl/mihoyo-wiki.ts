@@ -27,6 +27,8 @@ interface ContentListData {
   }>
 }
 
+type ContentListItem = ContentListData["list"][number]["list"][number]
+
 interface EntryModule {
   name: string
   components: Array<{ component_id: string; data: string }>
@@ -77,6 +79,23 @@ async function fetchApi<T>(url: string): Promise<T> {
 function stripHtml(html: string): string {
   const $ = cheerio.load(html)
   return $.text().replace(/\s+/g, " ").trim()
+}
+
+function parseContentList(html: string): ContentListItem[] {
+  const json = JSON.parse(html) as ApiResponse<ContentListData>
+  if (json.retcode !== 0) {
+    throw new Error(`API retcode ${json.retcode} for ${LIST_API}`)
+  }
+
+  const channel = json.data.list.find((group) => group.id === CHANNEL_ID_DA)
+  if (!channel) {
+    throw new Error(`Missing content list for channel ${CHANNEL_ID_DA}`)
+  }
+  if (!Array.isArray(channel.list) || channel.list.length === 0) {
+    throw new Error(`Empty content list for channel ${CHANNEL_ID_DA}`)
+  }
+
+  return channel.list
 }
 
 // ---- 解析函数 ----
@@ -223,12 +242,7 @@ function parseEntry(
 
 // ---- 爬取入口 ----
 
-async function fetchAllDAEntries(): Promise<DAEntry[]> {
-  const listData = await fetchApi<ContentListData>(
-    `${LIST_API}?app_sn=zzz_wiki&channel_id=${CHANNEL_ID_DA}`,
-  )
-  const items = listData.list[0]?.list ?? []
-
+async function fetchAllDAEntries(items: ContentListItem[]): Promise<DAEntry[]> {
   const entries = await batchProcess(
     items,
     async (item) => {
@@ -254,6 +268,7 @@ export const tasks: CrawlTask[] = [
   {
     name: "zh-CN/mihoyo-wiki/deadly-assault",
     url: `${LIST_API}?app_sn=zzz_wiki&channel_id=${CHANNEL_ID_DA}`,
-    extract: () => fetchAllDAEntries(),
+    headers: FETCH_HEADERS,
+    extract: (_, html) => fetchAllDAEntries(parseContentList(html)),
   },
 ]

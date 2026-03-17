@@ -17,6 +17,8 @@ export type CrawlSvelteKitData = unknown[]
 
 export type CrawlExtractedPayload = unknown
 
+type CrawlRequestHeaders = NonNullable<Parameters<typeof fetch>[1]>["headers"]
+
 export type CrawlExtractor = (
   $: cheerio.CheerioAPI,
   html: CrawlHtmlText,
@@ -27,14 +29,19 @@ export interface CrawlTask {
   name: CrawlTaskName
   /** 目标 URL */
   url: CrawlTargetUrl
+  /** 请求头（静态请求场景） */
+  headers?: CrawlRequestHeaders
   /** 是否需要 JS 渲染（动态页面） */
   dynamic?: boolean
   /** 从 HTML 中提取数据，支持 async（用于多步爬取）。html 为原始响应文本，适合 JSON 端点直接解析 */
   extract: CrawlExtractor
 }
 
-export async function fetchStatic(url: CrawlTargetUrl): Promise<CrawlHtmlText> {
-  const res = await fetch(url)
+export async function fetchStatic(
+  url: CrawlTargetUrl,
+  headers?: CrawlRequestHeaders,
+): Promise<CrawlHtmlText> {
+  const res = await fetch(url, headers ? { headers } : undefined)
   if (!res.ok) throw new Error(`fetch ${url} failed: ${res.status}`)
   return res.text()
 }

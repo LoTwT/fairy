@@ -10,13 +10,15 @@
     "crawl": "tsx scripts/crawl/index.ts",
     "crawl:gachabase": "tsx scripts/crawl/index.ts gachabase",
     "crawl:buhflipexplode": "tsx scripts/crawl/index.ts buhflipexplode",
-    "crawl:mihoyo-wiki": "tsx scripts/crawl/index.ts mihoyo-wiki"
+    "crawl:mihoyo-wiki": "tsx scripts/crawl/index.ts mihoyo-wiki",
+    "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
     "@types/node": "^25.3.5",
     "cheerio": "^1.2.0",
     "exceljs": "^4.4.0",
     "playwright": "^1.58.2",
-    "tsx": "^4.21.0"
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
   }
 }

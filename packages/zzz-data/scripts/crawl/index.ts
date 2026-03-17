@@ -65,7 +65,7 @@ async function run() {
       console.log(`Crawling: ${task.name} (${task.url})`)
       const html = task.dynamic
         ? await fetchDynamic(task.url)
-        : await fetchStatic(task.url)
+        : await fetchStatic(task.url, task.headers)
 
       const $ = cheerio.load(html)
       const data = await task.extract($, html)

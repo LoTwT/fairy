@@ -226,6 +226,7 @@ async function main() {
   }
 
   const sourceBuffer = readFileSync(XLSX_PATH)
+  const workbookBuffer = Uint8Array.from(sourceBuffer).buffer
   const sourceHash = computeSourceHash(sourceBuffer)
   const previousSourceMetadata = readSourceMetadata()
 
@@ -241,7 +242,7 @@ async function main() {
     )
   }
 
-  await workbook.xlsx.load(sourceBuffer)
+  await workbook.xlsx.load(workbookBuffer)
 
   mkdirSync(DATA_DIR, { recursive: true })
   mkdirSync(TYPES_DIR, { recursive: true })
