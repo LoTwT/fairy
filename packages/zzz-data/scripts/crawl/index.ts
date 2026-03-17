@@ -20,11 +20,28 @@ const tasks: CrawlTask[] = filter
   ? allTasks.filter((t) => t.name.includes(filter))
   : allTasks
 
+function getOutputPath(task: CrawlTask): string {
+  return path.join(outputDir, `${task.name}.json`)
+}
+
+function resetOutputDirs(tasks: CrawlTask[]): void {
+  const outputDirs = new Set(
+    tasks.map((task) => path.dirname(getOutputPath(task))),
+  )
+
+  outputDirs.forEach((dir) => {
+    fs.rmSync(dir, { recursive: true, force: true })
+    fs.mkdirSync(dir, { recursive: true })
+  })
+}
+
 async function run() {
   if (tasks.length === 0) {
     console.log("No crawl tasks configured.")
     return
   }
+
+  resetOutputDirs(tasks)
 
   for (const task of tasks) {
     console.log(`Crawling: ${task.name} (${task.url})`)
@@ -35,7 +52,7 @@ async function run() {
     const $ = cheerio.load(html)
     const data = await task.extract($, html)
 
-    const outPath = path.join(outputDir, `${task.name}.json`)
+    const outPath = getOutputPath(task)
     fs.mkdirSync(path.dirname(outPath), { recursive: true })
     fs.writeFileSync(outPath, JSON.stringify(data, null, 2), "utf-8")
     console.log(`  → ${outPath}`)

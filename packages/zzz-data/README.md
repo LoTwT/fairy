@@ -51,5 +51,6 @@ data/raw/
 ```
 
 `scripts/crawl/index.ts` 会按任务名直接生成 `data/raw/<task-name>.json`，所以新增抓取任务时，任务名本身就是输出相对路径。
+每次执行抓取时，脚本会先清空这次任务对应的来源目录，再写入当前任务集合，避免历史文件残留。
 
 `.sources/source.xlsx` 不纳入版本管理；仓库只跟踪它的 metadata 与导出的文本快照。

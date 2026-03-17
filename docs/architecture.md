@@ -64,6 +64,8 @@ packages/zzz-data/
    - 当前只保留 `zh-CN`
    - 通过列表接口 + 详情接口拼装百科原始条目
 
+执行抓取前，`scripts/crawl/index.ts` 会按本次任务集合重建对应的 `data/raw/<lang>/<source>/` 目录，避免任务重命名或删减后残留旧文件。
+
 ## xlsx 读取链路
 
 `scripts/generate/index.ts` 会读取 `.sources/source.xlsx`，按 `scripts/generate/config.ts` 中的 worksheet 配置导出，并在成功后更新 `.sources/source.xlsx.metadata.json`：
