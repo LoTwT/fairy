@@ -20,18 +20,35 @@ const tasks: CrawlTask[] = filter
   ? allTasks.filter((t) => t.name.includes(filter))
   : allTasks
 
-function getOutputPath(task: CrawlTask): string {
-  return path.join(outputDir, `${task.name}.json`)
+function getRelativeOutputPath(task: CrawlTask): string {
+  return `${task.name}.json`
 }
 
-function resetOutputDirs(tasks: CrawlTask[]): void {
-  const outputDirs = new Set(
-    tasks.map((task) => path.dirname(getOutputPath(task))),
-  )
+function getOutputDirs(tasks: CrawlTask[]): string[] {
+  return [
+    ...new Set(tasks.map((task) => path.dirname(getRelativeOutputPath(task)))),
+  ]
+}
 
-  outputDirs.forEach((dir) => {
-    fs.rmSync(dir, { recursive: true, force: true })
-    fs.mkdirSync(dir, { recursive: true })
+function createStageDir(): string {
+  fs.mkdirSync(outputDir, { recursive: true })
+  return fs.mkdtempSync(path.join(outputDir, ".crawl-stage-"))
+}
+
+function getStageOutputPath(stageDir: string, task: CrawlTask): string {
+  return path.join(stageDir, getRelativeOutputPath(task))
+}
+
+function commitStageDir(stageDir: string, tasks: CrawlTask[]): void {
+  const outputDirs = getOutputDirs(tasks)
+
+  outputDirs.forEach((relativeDir) => {
+    const stageOutputDir = path.join(stageDir, relativeDir)
+    const finalOutputDir = path.join(outputDir, relativeDir)
+
+    fs.rmSync(finalOutputDir, { recursive: true, force: true })
+    fs.mkdirSync(path.dirname(finalOutputDir), { recursive: true })
+    fs.renameSync(stageOutputDir, finalOutputDir)
   })
 }
 
@@ -41,21 +58,27 @@ async function run() {
     return
   }
 
-  resetOutputDirs(tasks)
+  const stageDir = createStageDir()
 
-  for (const task of tasks) {
-    console.log(`Crawling: ${task.name} (${task.url})`)
-    const html = task.dynamic
-      ? await fetchDynamic(task.url)
-      : await fetchStatic(task.url)
+  try {
+    for (const task of tasks) {
+      console.log(`Crawling: ${task.name} (${task.url})`)
+      const html = task.dynamic
+        ? await fetchDynamic(task.url)
+        : await fetchStatic(task.url)
 
-    const $ = cheerio.load(html)
-    const data = await task.extract($, html)
+      const $ = cheerio.load(html)
+      const data = await task.extract($, html)
 
-    const outPath = getOutputPath(task)
-    fs.mkdirSync(path.dirname(outPath), { recursive: true })
-    fs.writeFileSync(outPath, JSON.stringify(data, null, 2), "utf-8")
-    console.log(`  → ${outPath}`)
+      const outPath = getStageOutputPath(stageDir, task)
+      fs.mkdirSync(path.dirname(outPath), { recursive: true })
+      fs.writeFileSync(outPath, JSON.stringify(data, null, 2), "utf-8")
+      console.log(`  → ${outPath}`)
+    }
+
+    commitStageDir(stageDir, tasks)
+  } finally {
+    fs.rmSync(stageDir, { recursive: true, force: true })
   }
 
   console.log("Done.")

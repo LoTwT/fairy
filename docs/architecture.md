@@ -64,7 +64,7 @@ packages/zzz-data/
    - 当前只保留 `zh-CN`
    - 通过列表接口 + 详情接口拼装百科原始条目
 
-执行抓取前，`scripts/crawl/index.ts` 会按本次任务集合重建对应的 `data/raw/<lang>/<source>/` 目录，避免任务重命名或删减后残留旧文件。
+执行抓取时，`scripts/crawl/index.ts` 会先将本次任务集合写入临时目录；只有全部任务成功后，才替换对应的 `data/raw/<lang>/<source>/` 目录。这样既能清理任务重命名或删减后的旧文件，也不会在中途失败时丢掉上一份可用快照。
 
 ## xlsx 读取链路
 

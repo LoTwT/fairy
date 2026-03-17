@@ -194,6 +194,24 @@ function readVal<T>(d: unknown[], idx: number): T {
   return d[idx] as T
 }
 
+function resolveSkillStatValue(
+  d: unknown[],
+  valueRef: number,
+  templateText: string,
+): string {
+  const value = d[valueRef]
+
+  if (!Array.isArray(value)) {
+    return String(value)
+  }
+
+  if (value.length === 0) {
+    return templateText
+  }
+
+  return String(d[value[0] as number])
+}
+
 function parseAgentDetail(pageData: unknown[], agentId: string): AgentDetail {
   const d = pageData
   const root = d[0] as { data: number }
@@ -391,15 +409,18 @@ function parseAgentDetail(pageData: unknown[], agentId: string): AgentDetail {
       const statsArr = readVal<number[]>(d, skillRaw.stats)
       const skillStats: SkillStat[] = statsArr
         .map((sIdx) => {
-          const s = d[sIdx] as { id: number; name: number; values: number }
+          const s = d[sIdx] as {
+            id: number
+            name: number
+            text: number
+            values: number
+          }
+          const templateText = norm(readVal(d, s.text))
           const valuesArr = readVal<number[]>(d, s.values)
           if (!valuesArr.length) return null
-          const values = valuesArr.map((vIdx) => {
-            const inner = d[vIdx]
-            return String(
-              Array.isArray(inner) ? d[(inner as number[])[0]] : inner,
-            )
-          })
+          const values = valuesArr.map((vIdx) =>
+            resolveSkillStatValue(d, vIdx, templateText),
+          )
           return {
             id: String(readVal(d, s.id)),
             name: norm(readVal(d, s.name)),
@@ -417,12 +438,11 @@ function parseAgentDetail(pageData: unknown[], agentId: string): AgentDetail {
     },
   )
 
-  // core_skills — 文本用通用解码器，stat_boosts 用直接导航（需要 divisor）
+  // core_skills — 文本用通用解码器，等级按数组顺序展开，stat_boosts 用直接导航（需要 divisor）
   const coreSkillsRawArr = readVal<number[]>(d, agentObj.core_skills)
   const coreSkills: CoreSkill[] = (
     a.core_skills as Array<{
       type: { name: string }
-      level: unknown
       skills: Array<{ id: string; name: string; description: string }>
     }>
   ).map((cs, i) => {
@@ -437,7 +457,7 @@ function parseAgentDetail(pageData: unknown[], agentId: string): AgentDetail {
     })
     return {
       typeName: norm(cs.type.name),
-      level: typeof cs.level === "number" ? cs.level : i + 1,
+      level: i + 1,
       skills: cs.skills.map((s) => ({
         id: s.id,
         name: norm(s.name),
