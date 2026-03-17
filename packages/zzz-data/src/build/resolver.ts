@@ -184,6 +184,7 @@ function createEmptyBuckets(): StaticBuildResolvedBuckets {
 
 function resolveDazeVulnerabilityParams(input: {
   agentId: string
+  agentMindscape: number
   combatTags: StaticBuildCombatTagSet
   stateSnapshot?: StaticBuildStateSnapshotInput
   enemy: StaticBuildEnemyInput
@@ -206,6 +207,10 @@ function resolveDazeVulnerabilityParams(input: {
     return liveParams
   }
 
+  const curtainVulnerabilityCap = input.agentMindscape >= 4 ? 2 : 1.1
+  const curtainVulnerabilityCapText = `${Math.round(
+    curtainVulnerabilityCap * 100,
+  )}%`
   const snapshotValue =
     input.stateSnapshot?.values?.yeshunguangCurtainVulnerabilityRatio
   const currentDazeVulnerability = input.isStunned
@@ -213,11 +218,11 @@ function resolveDazeVulnerabilityParams(input: {
     : liveParams.nonStunVulnerability
 
   const curtainVulnerability =
-    snapshotValue ?? Math.min(1.1, Math.max(0, currentDazeVulnerability))
+    snapshotValue ??
+    Math.min(curtainVulnerabilityCap, Math.max(0, currentDazeVulnerability))
 
   if (snapshotValue === undefined) {
-    const message =
-      "叶瞬光的[帷幕易伤]未提供 scenario.stateSnapshot.values.yeshunguangCurtainVulnerabilityRatio，当前按敌人当前失衡易伤快照近似并按 110% 封顶处理"
+    const message = `叶瞬光的[帷幕易伤]未提供 scenario.stateSnapshot.values.yeshunguangCurtainVulnerabilityRatio，当前按敌人当前失衡易伤快照近似并按 ${curtainVulnerabilityCapText} 封顶处理`
     input.assumptions.push(message)
     input.diagnostics.push({
       kind: "fallback",
@@ -229,8 +234,8 @@ function resolveDazeVulnerabilityParams(input: {
       ],
       message,
     })
-  } else if (snapshotValue > 1.1) {
-    const message = "叶瞬光的[帷幕易伤]快照超过 110%，当前按 110% 封顶处理"
+  } else if (snapshotValue > curtainVulnerabilityCap) {
+    const message = `叶瞬光的[帷幕易伤]快照超过 ${curtainVulnerabilityCapText}，当前按 ${curtainVulnerabilityCapText} 封顶处理`
     input.assumptions.push(message)
     input.diagnostics.push({
       kind: "fallback",
@@ -245,7 +250,7 @@ function resolveDazeVulnerabilityParams(input: {
   }
 
   const cappedCurtainVulnerability = Math.min(
-    1.1,
+    curtainVulnerabilityCap,
     Math.max(0, curtainVulnerability),
   )
 
@@ -1256,6 +1261,7 @@ export function resolveStaticBuildDamage(
   const enemy = input.scenario.enemy
   const resolvedDazeVulnerability = resolveDazeVulnerabilityParams({
     agentId: agent.id,
+    agentMindscape,
     combatTags,
     stateSnapshot: input.scenario.stateSnapshot,
     enemy,

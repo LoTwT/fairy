@@ -633,6 +633,45 @@ describe("static build skill matrix", () => {
     ).toBeCloseTo(0.8, 4)
   })
 
+  it("raises Ye Shunguang curtain vulnerability cap to 200% in skill matrix at mindscape 4", () => {
+    const result = resolveStaticBuildSkillMatrix({
+      mode: "full-buff",
+      loadout: {
+        agentId: "1431",
+        agentMindscape: 4,
+      },
+      panel: {
+        attack: 3400,
+        baseAttack: 1300,
+        critRate: 0.45,
+        critDamage: 1.2,
+      },
+      context: {
+        combatTags: ["hedao", "etherCurtain"],
+        stateSnapshot: {
+          values: {
+            yeshunguangCurtainVulnerabilityRatio: 1.8,
+          },
+        },
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+          isStunned: false,
+          stunVulnerability: 0.8,
+          nonStunVulnerability: 0,
+        },
+      },
+    })
+
+    const ultimateRow = result.rows.find((row) => row.skillTag === "ultimate")
+    expect(
+      ultimateRow?.build.damage.expected.breakdown.dazeVulnerabilityMultiplier,
+    ).toBeCloseTo(2.8, 4)
+    expect(
+      ultimateRow?.build.damageParams.dazeVulnerability.nonStunVulnerability,
+    ).toBeCloseTo(1.8, 4)
+  })
+
   it("applies Xisifu curated effects on generic attack matrix rows", () => {
     const result = resolveStaticBuildSkillMatrix({
       mode: "full-buff",

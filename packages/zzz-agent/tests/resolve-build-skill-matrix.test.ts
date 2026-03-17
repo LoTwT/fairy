@@ -655,6 +655,48 @@ describe("resolveBuildSkillMatrix tool", () => {
     ).toBeCloseTo(0.8, 4)
   })
 
+  it("supports Ye Shunguang mindscape-4 curtain cap through the high-level skill matrix tool", async () => {
+    const result = await runTool(resolveBuildSkillMatrix, {
+      agent: "叶瞬光",
+      agentMindscape: 4,
+      mode: "full-buff",
+      includeDetails: true,
+      finalPanel: {
+        attack: 3400,
+        baseAttack: 1300,
+        critRate: 0.45,
+        critDamage: 1.2,
+      },
+      context: {
+        combatTags: ["hedao", "etherCurtain"],
+        stateSnapshot: {
+          values: {
+            yeshunguangCurtainVulnerabilityRatio: 1.8,
+          },
+        },
+        enemy: {
+          defenderBaseDefense: 953,
+          defenderResistance: 0.2,
+          isStunned: false,
+          stunVulnerability: 0.8,
+          nonStunVulnerability: 0,
+        },
+      },
+    })
+
+    expect((result as any).found).toBe(true)
+    expect((result as any).matrix.loadout.agentMindscape).toBe(4)
+    const ultimateRow = (result as any).matrix.rows.find(
+      (row: any) => row.skillTag === "ultimate",
+    )
+    expect(
+      ultimateRow?.build.damage.expected.breakdown.dazeVulnerabilityMultiplier,
+    ).toBeCloseTo(2.8, 4)
+    expect(
+      ultimateRow?.build.damageParams.dazeVulnerability.nonStunVulnerability,
+    ).toBeCloseTo(1.8, 4)
+  })
+
   it("returns Xisifu generic attack matrix rows with curated buckets applied", async () => {
     const result = await runTool(resolveBuildSkillMatrix, {
       agent: "希希芙",

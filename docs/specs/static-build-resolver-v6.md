@@ -188,7 +188,8 @@ interface StaticBuildStateSnapshot {
    - 当前仍不强行并入现有 anomaly / disorder 公式，只用于 state-aware assumptions 与来源记录
 3. `叶瞬光`
    - `scenario.stateSnapshot.values.yeshunguangCurtainVulnerabilityRatio`
-   - 在 `combatTags: ["etherCurtain"]` 下，替换默认 `失衡易伤` 结算槽位；未提供时按敌人当前失衡易伤快照近似，并按 110% 封顶
+   - 在 `combatTags: ["etherCurtain"]` 下，替换默认 `失衡易伤` 结算槽位；未提供时按敌人当前失衡易伤快照近似
+   - 默认按 `110%` 封顶；`agentMindscape >= 4` 时按 `200%` 封顶
 
 ### 6.4 `V6.4` assumptions refinement
 
