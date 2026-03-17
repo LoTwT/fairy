@@ -4,7 +4,8 @@ import type {
   GenerateDataRow,
   WorksheetConfig,
 } from "./config"
-import { mkdirSync, writeFileSync } from "node:fs"
+import { createHash } from "node:crypto"
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs"
 import { dirname, resolve } from "node:path"
 import process from "node:process"
 import { fileURLToPath } from "node:url"
@@ -13,9 +14,16 @@ import { extractCellValue, normalizeHeader, worksheetConfigs } from "./config"
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const ROOT = resolve(__dirname, "../..")
-const XLSX_PATH = resolve(ROOT, "source.xlsx")
+const SOURCE_DIR = resolve(ROOT, ".sources")
+const XLSX_PATH = resolve(SOURCE_DIR, "source.xlsx")
+const SOURCE_METADATA_PATH = resolve(SOURCE_DIR, "source.xlsx.metadata.json")
 const DATA_DIR = resolve(ROOT, "data/xlsx")
 const TYPES_DIR = resolve(__dirname, "types")
+
+interface SourceMetadata {
+  sha256: string
+  processedAt: string
+}
 
 // ---------------------------------------------------------------------------
 // Type generation helpers
@@ -172,13 +180,68 @@ function selectDerivedSourceRow(
   )
 }
 
+function computeSourceHash(sourceBuffer: Uint8Array): string {
+  return createHash("sha256").update(sourceBuffer).digest("hex")
+}
+
+function readSourceMetadata(): SourceMetadata | null {
+  if (!existsSync(SOURCE_METADATA_PATH)) {
+    return null
+  }
+
+  const raw = JSON.parse(
+    readFileSync(SOURCE_METADATA_PATH, "utf-8"),
+  ) as Partial<SourceMetadata>
+
+  if (typeof raw.sha256 !== "string" || typeof raw.processedAt !== "string") {
+    throw new TypeError(`Invalid source metadata file: ${SOURCE_METADATA_PATH}`)
+  }
+
+  return {
+    sha256: raw.sha256,
+    processedAt: raw.processedAt,
+  }
+}
+
+function writeSourceMetadata(metadata: SourceMetadata): void {
+  writeFileSync(
+    SOURCE_METADATA_PATH,
+    `${JSON.stringify(metadata, null, 2)}\n`,
+    "utf-8",
+  )
+}
+
 // ---------------------------------------------------------------------------
 // Main
 // ---------------------------------------------------------------------------
 
 async function main() {
+  mkdirSync(SOURCE_DIR, { recursive: true })
   const workbook = new ExcelJS.Workbook()
-  await workbook.xlsx.readFile(XLSX_PATH)
+
+  if (!existsSync(XLSX_PATH)) {
+    throw new Error(
+      `Missing local xlsx source at ${XLSX_PATH}. Download the latest source.xlsx before running generate.`,
+    )
+  }
+
+  const sourceBuffer = readFileSync(XLSX_PATH)
+  const sourceHash = computeSourceHash(sourceBuffer)
+  const previousSourceMetadata = readSourceMetadata()
+
+  if (!previousSourceMetadata) {
+    console.log("  source metadata missing — will create a new metadata file")
+  } else if (previousSourceMetadata.sha256 === sourceHash) {
+    console.log(
+      `  source hash unchanged since ${previousSourceMetadata.processedAt}`,
+    )
+  } else {
+    console.log(
+      `  source hash changed since ${previousSourceMetadata.processedAt}`,
+    )
+  }
+
+  await workbook.xlsx.load(sourceBuffer)
 
   mkdirSync(DATA_DIR, { recursive: true })
   mkdirSync(TYPES_DIR, { recursive: true })
@@ -315,6 +378,12 @@ async function main() {
     "utf-8",
   )
   console.log(`✓ types/index.ts`)
+
+  writeSourceMetadata({
+    sha256: sourceHash,
+    processedAt: new Date().toISOString(),
+  })
+  console.log(`✓ .sources/source.xlsx.metadata.json`)
 
   console.log("\nDone!")
 }

@@ -19,6 +19,6 @@
 
 - `@types/node` — Node.js 类型，供抓取脚本与 generate 脚本使用
 - `cheerio` — HTML 解析，处理静态页面与百科富文本
-- `exceljs` — 读取 `source.xlsx`
+- `exceljs` — 读取 `.sources/source.xlsx`
 - `playwright` — 浏览器自动化，处理 JS 渲染页面抓取
 - `tsx` — 直接运行 TypeScript 抓取脚本与 generate 脚本

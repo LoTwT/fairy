@@ -2,7 +2,7 @@
 
 ## 仓库级 AI 协作文件
 
-当前仓库维护两条数据输入链路：原始数据抓取，以及 `source.xlsx -> data/xlsx` 的快照生成。`packages/zzz-data/data/` 当前被刻意清空，作为后续重构的最简起点；需要时再由脚本重新生成。运行入口、输出目录和数据源说明以 `packages/zzz-data/README.md`、`packages/zzz-data/scripts/crawl/` 与 `packages/zzz-data/scripts/generate/` 为准。
+当前仓库维护两条数据输入链路：原始数据抓取，以及 `.sources/source.xlsx -> data/xlsx` 的快照生成。`packages/zzz-data/.sources/source.xlsx` 是手动下载的本地 xlsx 输入，不纳入版本管理；`.sources/source.xlsx.metadata.json` 记录最近一次成功处理的哈希与时间。运行入口、输出目录和数据源说明以 `packages/zzz-data/README.md`、`packages/zzz-data/scripts/crawl/` 与 `packages/zzz-data/scripts/generate/` 为准。
 
 ```
 .
@@ -26,12 +26,14 @@
 
 ```
 packages/zzz-data/
-├── source.xlsx                  # xlsx 数据源
-├── data/                        # 当前为空；运行 generate / crawl 后按需生成
-│   ├── xlsx/
-│   └── raw/
+├── .sources/
+│   ├── source.xlsx              # 手动下载的本地 xlsx 输入（gitignored）
+│   └── source.xlsx.metadata.json # 最近一次成功处理的 sha256 / processedAt
+├── data/
+│   ├── xlsx/                    # generate 生成的快照 JSON
+│   └── raw/                     # crawl 按需生成的原始抓取数据
 ├── scripts/generate/
-│   ├── index.ts                 # 主入口：读取 source.xlsx 并写入 data/xlsx/
+│   ├── index.ts                 # 主入口：读取 .sources/source.xlsx，更新 metadata，并写入 data/xlsx/
 │   ├── config.ts                # worksheet 到字段映射的 source of truth
 │   └── types/                   # 由 generate 脚本同步产出的内部类型
 ├── scripts/crawl/
@@ -64,7 +66,7 @@ packages/zzz-data/
 
 ## xlsx 读取链路
 
-`scripts/generate/index.ts` 会读取 `source.xlsx`，按 `scripts/generate/config.ts` 中的 worksheet 配置导出：
+`scripts/generate/index.ts` 会读取 `.sources/source.xlsx`，按 `scripts/generate/config.ts` 中的 worksheet 配置导出，并在成功后更新 `.sources/source.xlsx.metadata.json`：
 
 - `data/xlsx/*.json`：每个工作表对应的快照 JSON
 - `scripts/generate/types/*`：按 worksheet 结构同步生成的内部类型
@@ -73,5 +75,4 @@ packages/zzz-data/
 
 - 已删除 `merge`、`src/`、`tests/`、`dist/`、发布相关配置和所有对外 API / 计算能力
 - 当前仓库不再维护公开 TypeScript API、构筑解析、伤害计算、cleaned helper 或 npm 发布产物
-- 如需扩展当前仓库，只在两条链路内变更：`scripts/crawl` / `data/raw`，以及 `scripts/generate` / `source.xlsx` / `data/xlsx`
-- `data/` 下的文件当前被清空，只是为了给这轮重构保留一个更简洁的起点；后续是否重新纳入版本控制，取决于重构方案
+- 如需扩展当前仓库，只在两条链路内变更：`scripts/crawl` / `data/raw`，以及 `scripts/generate` / `.sources/source.xlsx` / `.sources/source.xlsx.metadata.json` / `data/xlsx`

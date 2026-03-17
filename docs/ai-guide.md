@@ -1,19 +1,19 @@
 # AI 协作指南
 
-本文档是 `Codex App` 与 `Claude Code` 共享的项目说明。当前仓库保留 ZZZ 原始数据抓取脚本，以及从 `source.xlsx` 读取并生成 `data/xlsx` 的脚本；`packages/zzz-data/data/` 当前被刻意清空，作为后续重构的最简起点。项目知识、命令、工作流统一维护在 `docs/`，根目录的 `AGENTS.md` 与 `CLAUDE.md` 只保留各自工具的入口约定。
+本文档是 `Codex App` 与 `Claude Code` 共享的项目说明。当前仓库保留 ZZZ 原始数据抓取脚本，以及从 `packages/zzz-data/.sources/source.xlsx` 读取并生成 `data/xlsx` 的脚本；`.sources/source.xlsx` 是手动下载的本地输入，不纳入版本管理，`.sources/source.xlsx.metadata.json` 记录最近一次成功处理的哈希与时间。项目知识、命令、工作流统一维护在 `docs/`，根目录的 `AGENTS.md` 与 `CLAUDE.md` 只保留各自工具的入口约定。
 
 ## 关键命令
 
 ```bash
 # zzz-data 子包命令（在 packages/zzz-data 下）
-pnpm run generate              # 读取 source.xlsx，重新生成 data/xlsx/*.json 与 scripts/generate/types/*
+pnpm run generate              # 读取 .sources/source.xlsx，更新 metadata，并重新生成 data/xlsx/*.json 与 scripts/generate/types/*
 pnpm run crawl                 # 运行全部抓取任务，重新生成 data/raw/**/*.json
 pnpm run crawl:gachabase      # 只抓 gachabase 数据
 pnpm run crawl:buhflipexplode # 只抓 buhflipexplode 数据
 pnpm run crawl:mihoyo-wiki    # 只抓米游社百科危局强袭战数据
 
 # 根目录命令
-pnpm run generate              # 透传 zzz-data 的 xlsx 读取与快照生成
+pnpm run generate              # 透传 zzz-data 的 xlsx 读取、metadata 更新与快照生成
 pnpm run crawl                 # 透传 zzz-data 全量抓取
 pnpm run crawl:gachabase      # 透传 zzz-data gachabase 抓取
 pnpm run crawl:buhflipexplode # 透传 zzz-data buhflipexplode 抓取
@@ -28,7 +28,7 @@ pnpm run prettier             # prettier 格式化
 
 1. 先检查本次改动是否改变了目录结构、命令或运行说明；如有变化，先更新文档
 2. `pnpm run lint --fix && pnpm run prettier`
-3. 如果修改了抓取逻辑，运行对应的抓取命令；如果修改了 xlsx 读取逻辑，运行 `pnpm run generate`；如执行后会重新生成 `packages/zzz-data/data/` 下的产物，应结合当前重构阶段决定是否保留；如果这轮不适合实际执行，在结论中明确说明未运行
+3. 如果修改了抓取逻辑，运行对应的抓取命令；如果修改了 xlsx 读取逻辑，先确认最新下载的 `.sources/source.xlsx` 已就位，再运行 `pnpm run generate`；脚本会在成功后更新 `.sources/source.xlsx.metadata.json`，并重新生成 `packages/zzz-data/data/xlsx/` 与 `scripts/generate/types/` 下的产物；如果这轮不适合实际执行，在结论中明确说明未运行
 
 ## 文档维护规则
 
