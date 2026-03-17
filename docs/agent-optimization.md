@@ -30,7 +30,7 @@
 **问题**: System Prompt 共约 306 行，其中截图识别指南占 ~130 行（40%+），包括两种截图类型的详细布局描述和对比表。在纯文本查询场景下这些内容完全无用，白白消耗 token budget，还可能干扰 LLM 在非截图场景下的推理路径。
 
 - [x] 拆为 `BASE_PROMPT` + `SCREENSHOT_SUMMARY` + `SCREENSHOT_GUIDE` 三层结构
-- 默认只注入精简版截图摘要；调用方设置 `includeScreenshot: true` 时再注入完整截图指南，`includeScreenshot: false` 时完全关闭截图提示
+- 默认只注入精简版截图摘要；调用方设置 `includeScreenshot: true` 时注入完整截图指南，`includeScreenshot: false` 时完全关闭截图提示；若 `requestContext.all` 中已携带图片消息或附件信号，也会自动启用完整截图指南
 
 ## 5. ~~[低] 其他问题~~ ✅
 

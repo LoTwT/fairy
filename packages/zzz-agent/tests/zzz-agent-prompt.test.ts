@@ -251,3 +251,54 @@ it("keeps screenshot summary by default", async () => {
   expect(full.includes("图片识别指南")).toBe(true)
   expect(off.includes("截图处理摘要")).toBe(false)
 })
+
+it("auto-enables screenshot guide when requestContext contains image messages", async () => {
+  const full = getInstructionText(
+    await zzzAgent.getInstructions({
+      requestContext: {
+        get: () => undefined,
+        all: {
+          messages: [
+            {
+              role: "user",
+              content: [
+                {
+                  type: "text",
+                  text: "帮我看面板",
+                },
+                {
+                  type: "image_url",
+                  image_url: "https://example.com/panel.png",
+                },
+              ],
+            },
+          ],
+        },
+      } as any,
+    }),
+  )
+
+  expect(full.includes("截图处理摘要")).toBe(true)
+  expect(full.includes("图片识别指南")).toBe(true)
+})
+
+it("auto-enables screenshot guide when requestContext contains image attachments", async () => {
+  const full = getInstructionText(
+    await zzzAgent.getInstructions({
+      requestContext: {
+        get: () => undefined,
+        all: {
+          attachments: [
+            {
+              mimeType: "image/png",
+              url: "https://example.com/build-card",
+            },
+          ],
+        },
+      } as any,
+    }),
+  )
+
+  expect(full.includes("截图处理摘要")).toBe(true)
+  expect(full.includes("图片识别指南")).toBe(true)
+})

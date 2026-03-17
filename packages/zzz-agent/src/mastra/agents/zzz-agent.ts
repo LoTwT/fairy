@@ -21,6 +21,87 @@ import {
   resolveBuildTriggerMatrix,
 } from "../tools/zzz"
 
+function isImageLikeUrl(value: string) {
+  return (
+    value.startsWith("data:image/") ||
+    /\.(?:png|jpe?g|webp|gif|bmp|avif|svg)(?:[?#].*)?$/i.test(value)
+  )
+}
+
+function hasImageSignal(value: unknown): boolean {
+  if (!value) return false
+
+  if (typeof value === "string") {
+    return isImageLikeUrl(value)
+  }
+
+  if (Array.isArray(value)) {
+    return value.some((item) => hasImageSignal(item))
+  }
+
+  if (typeof value !== "object") {
+    return false
+  }
+
+  const record = value as Record<string, unknown>
+  const type = typeof record.type === "string" ? record.type : undefined
+  if (
+    type === "image" ||
+    type === "input_image" ||
+    type === "image_url" ||
+    type === "image-file"
+  ) {
+    return true
+  }
+
+  const mimeType =
+    typeof record.mimeType === "string"
+      ? record.mimeType
+      : typeof record.contentType === "string"
+        ? record.contentType
+        : typeof record.mediaType === "string"
+          ? record.mediaType
+          : undefined
+  if (mimeType?.startsWith("image/")) {
+    return true
+  }
+
+  const directImageFields = [
+    record.image,
+    record.images,
+    record.imageUrl,
+    record.image_url,
+    record.attachments,
+    record.messages,
+    record.content,
+  ]
+  if (directImageFields.some((item) => hasImageSignal(item))) {
+    return true
+  }
+
+  return Object.values(record).some((item) => hasImageSignal(item))
+}
+
+function shouldIncludeScreenshotGuide(
+  requestContext:
+    | { get: (key: string) => unknown; all?: Record<string, unknown> }
+    | undefined,
+) {
+  const includeScreenshot = requestContext?.get("includeScreenshot") as
+    | boolean
+    | undefined
+
+  if (includeScreenshot === false) {
+    return false
+  }
+
+  if (includeScreenshot === true) {
+    return true
+  }
+
+  return hasImageSignal(requestContext?.all)
+}
+
 const BASE_PROMPT = `你是绝区零（Zenless Zone Zero）伤害计算专家。用户会描述队伍配置（1-3 位代理人，各自携带音擎和驱动盘，可选邦布），你需要查询数据、提取乘区、计算并展示伤害。
 
 ## 角色定位
@@ -390,12 +471,9 @@ export const zzzAgent = new Agent({
   description:
     "绝区零伤害计算助手，支持队伍配置分析、乘区提取、伤害计算和结果展示",
   instructions: ({ requestContext }) => {
-    const includeScreenshot = requestContext?.get("includeScreenshot") as
-      | boolean
-      | undefined
-
-    if (includeScreenshot === false) return BASE_PROMPT
-    if (includeScreenshot === true) {
+    const includeScreenshotGuide = shouldIncludeScreenshotGuide(requestContext)
+    if (requestContext?.get("includeScreenshot") === false) return BASE_PROMPT
+    if (includeScreenshotGuide) {
       return `${BASE_PROMPT}\n\n${SCREENSHOT_SUMMARY}\n\n${SCREENSHOT_GUIDE}`
     }
 
