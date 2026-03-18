@@ -107,6 +107,7 @@ export function calcExpectedCritMultiplier(params: CritParams): number {
 }
 
 export function calcDefenseMultiplier(params: DefenseParams): number {
+  const attackerLevelBase = getAttackerLevelBase(params.attackerLevel)
   const defenderDefense =
     params.defenderBaseDefense *
     (1 + params.defenseBonus - params.defenseReduction)
@@ -115,9 +116,7 @@ export function calcDefenseMultiplier(params: DefenseParams): number {
     defenderDefense * (1 - params.penetrationRate) - params.penetrationValue,
   )
 
-  return (
-    params.attackerLevelBase / (effectiveDefense + params.attackerLevelBase)
-  )
+  return attackerLevelBase / (effectiveDefense + attackerLevelBase)
 }
 
 export function calcResistanceMultiplier(params: ResistanceParams): number {

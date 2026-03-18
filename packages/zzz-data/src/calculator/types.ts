@@ -4,7 +4,7 @@ export interface CritParams {
 }
 
 export interface DefenseParams {
-  attackerLevelBase: number
+  attackerLevel: number
   defenderBaseDefense: number
   defenseBonus: number
   defenseReduction: number

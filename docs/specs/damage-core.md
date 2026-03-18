@@ -249,7 +249,8 @@ Clamp：
 
 约定：
 
-- `attackerLevelBase` 由 `getAttackerLevelBase(level)` 计算
+- `calcDefenseMultiplier(params)` 接收 `attackerLevel`
+- helper 内部通过 `getAttackerLevelBase(level)` 计算攻击方等级基数
 - `defenseReduction` 同时承载减防与无视防御汇总值
 
 上游所需数据：
