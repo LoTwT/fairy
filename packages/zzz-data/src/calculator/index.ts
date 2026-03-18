@@ -1,3 +1,5 @@
+export { ceilDisplayDamage, sumDisplayedSegments } from "./display.js"
+
 export {
   ATTACKER_LEVEL_BASE,
   calcBaseDamage,
@@ -16,8 +18,6 @@ export {
   calcResolvedNormalDamage,
   calcResolvedSheerDamage,
 } from "./resolved.js"
-
-export { ceilDisplayDamage, sumDisplayedSegments } from "./display.js"
 
 export type {
   CritParams,

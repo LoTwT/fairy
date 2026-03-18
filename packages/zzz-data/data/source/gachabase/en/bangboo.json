@@ -278,33 +278,15 @@
         "stats": [
           {
             "title": "Required Angels of Delusion Characters",
-            "values": [
-              "2",
-              "2",
-              "2",
-              "2",
-              "2"
-            ]
+            "values": ["2", "2", "2", "2", "2"]
           },
           {
             "title": "ATK Increase",
-            "values": [
-              "50",
-              "50",
-              "50",
-              "50",
-              "50"
-            ]
+            "values": ["50", "50", "50", "50", "50"]
           },
           {
             "title": "Anomaly Buildup Increase",
-            "values": [
-              "15%",
-              "15%",
-              "15%",
-              "15%",
-              "15%"
-            ]
+            "values": ["15%", "15%", "15%", "15%", "15%"]
           }
         ]
       },
@@ -671,13 +653,7 @@
         "stats": [
           {
             "title": "DMG Increase",
-            "values": [
-              "30%",
-              "30%",
-              "30%",
-              "30%",
-              "30%"
-            ]
+            "values": ["30%", "30%", "30%", "30%", "30%"]
           }
         ]
       },
@@ -1014,23 +990,11 @@
         "stats": [
           {
             "title": "Required Krampus Characters",
-            "values": [
-              "2",
-              "2",
-              "2",
-              "2",
-              "2"
-            ]
+            "values": ["2", "2", "2", "2", "2"]
           },
           {
             "title": "Daze Increase Per Stack",
-            "values": [
-              "4%",
-              "4%",
-              "4%",
-              "4%",
-              "4%"
-            ]
+            "values": ["4%", "4%", "4%", "4%", "4%"]
           }
         ]
       },
@@ -1367,13 +1331,7 @@
         "stats": [
           {
             "title": "DMG Increase",
-            "values": [
-              "30%",
-              "30%",
-              "30%",
-              "30%",
-              "30%"
-            ]
+            "values": ["30%", "30%", "30%", "30%", "30%"]
           }
         ]
       },
@@ -1710,33 +1668,15 @@
         "stats": [
           {
             "title": "Required Spook Shack Characters",
-            "values": [
-              "2",
-              "2",
-              "2",
-              "2",
-              "2"
-            ]
+            "values": ["2", "2", "2", "2", "2"]
           },
           {
             "title": "Spectral Bubble: HP Recovery Increase",
-            "values": [
-              "20%",
-              "20%",
-              "20%",
-              "20%",
-              "20%"
-            ]
+            "values": ["20%", "20%", "20%", "20%", "20%"]
           },
           {
             "title": "Twinkling Star: Energy Generation Increase",
-            "values": [
-              "20%",
-              "20%",
-              "20%",
-              "20%",
-              "20%"
-            ]
+            "values": ["20%", "20%", "20%", "20%", "20%"]
           }
         ]
       },
@@ -2073,23 +2013,11 @@
         "stats": [
           {
             "title": "Required Defense Force Characters",
-            "values": [
-              "2",
-              "2",
-              "2",
-              "2",
-              "2"
-            ]
+            "values": ["2", "2", "2", "2", "2"]
           },
           {
             "title": "DMG Increase",
-            "values": [
-              "22.5%",
-              "22.5%",
-              "22.5%",
-              "22.5%",
-              "22.5%"
-            ]
+            "values": ["22.5%", "22.5%", "22.5%", "22.5%", "22.5%"]
           }
         ]
       },
@@ -2426,33 +2354,15 @@
         "stats": [
           {
             "title": "Required Yunkui Summit Characters",
-            "values": [
-              "2",
-              "2",
-              "2",
-              "2",
-              "2"
-            ]
+            "values": ["2", "2", "2", "2", "2"]
           },
           {
             "title": "DMG Increase",
-            "values": [
-              "25%",
-              "25%",
-              "25%",
-              "25%",
-              "25%"
-            ]
+            "values": ["25%", "25%", "25%", "25%", "25%"]
           },
           {
             "title": "Cooldown Reduction",
-            "values": [
-              "4s",
-              "4s",
-              "4s",
-              "4s",
-              "4s"
-            ]
+            "values": ["4s", "4s", "4s", "4s", "4s"]
           }
         ]
       },
@@ -2720,13 +2630,7 @@
         "stats": [
           {
             "title": "Proportion Energy Generated",
-            "values": [
-              "60%",
-              "60%",
-              "60%",
-              "60%",
-              "60%"
-            ]
+            "values": ["60%", "60%", "60%", "60%", "60%"]
           }
         ]
       }
@@ -3026,33 +2930,15 @@
         "stats": [
           {
             "title": "Anomaly Buildup Increase",
-            "values": [
-              "40%",
-              "40%",
-              "40%",
-              "40%",
-              "40%"
-            ]
+            "values": ["40%", "40%", "40%", "40%", "40%"]
           },
           {
             "title": "Duration Extension",
-            "values": [
-              "5s",
-              "5s",
-              "5s",
-              "5s",
-              "5s"
-            ]
+            "values": ["5s", "5s", "5s", "5s", "5s"]
           },
           {
             "title": "Additional Activations",
-            "values": [
-              "4 times",
-              "4 times",
-              "4 times",
-              "4 times",
-              "4 times"
-            ]
+            "values": ["4 times", "4 times", "4 times", "4 times", "4 times"]
           }
         ]
       },
@@ -3449,13 +3335,7 @@
         "stats": [
           {
             "title": "Anomaly Buildup Increase",
-            "values": [
-              "100%",
-              "100%",
-              "100%",
-              "100%",
-              "100%"
-            ]
+            "values": ["100%", "100%", "100%", "100%", "100%"]
           }
         ]
       },
@@ -3792,13 +3672,7 @@
         "stats": [
           {
             "title": "DMG Increase",
-            "values": [
-              "35%",
-              "35%",
-              "35%",
-              "35%",
-              "35%"
-            ]
+            "values": ["35%", "35%", "35%", "35%", "35%"]
           }
         ]
       },
@@ -4120,13 +3994,7 @@
         "stats": [
           {
             "title": "HP Recovery",
-            "values": [
-              "4% HP",
-              "4% HP",
-              "4% HP",
-              "4% HP",
-              "4% HP"
-            ]
+            "values": ["4% HP", "4% HP", "4% HP", "4% HP", "4% HP"]
           }
         ]
       },
@@ -4463,23 +4331,11 @@
         "stats": [
           {
             "title": "DMG Increase",
-            "values": [
-              "30%",
-              "30%",
-              "30%",
-              "30%",
-              "30%"
-            ]
+            "values": ["30%", "30%", "30%", "30%", "30%"]
           },
           {
             "title": "Anomaly Buildup Increase",
-            "values": [
-              "60%",
-              "60%",
-              "60%",
-              "60%",
-              "60%"
-            ]
+            "values": ["60%", "60%", "60%", "60%", "60%"]
           }
         ]
       },
@@ -4816,23 +4672,11 @@
         "stats": [
           {
             "title": "DMG Increase",
-            "values": [
-              "25%",
-              "25%",
-              "25%",
-              "25%",
-              "25%"
-            ]
+            "values": ["25%", "25%", "25%", "25%", "25%"]
           },
           {
             "title": "Max DMG Increase",
-            "values": [
-              "100%",
-              "100%",
-              "100%",
-              "100%",
-              "100%"
-            ]
+            "values": ["100%", "100%", "100%", "100%", "100%"]
           }
         ]
       }
@@ -5162,13 +5006,7 @@
         "stats": [
           {
             "title": "Anomaly Buildup Increase",
-            "values": [
-              "100%",
-              "100%",
-              "100%",
-              "100%",
-              "100%"
-            ]
+            "values": ["100%", "100%", "100%", "100%", "100%"]
           }
         ]
       },
@@ -5490,13 +5328,7 @@
         "stats": [
           {
             "title": "Energy Generation Increase",
-            "values": [
-              "20%",
-              "20%",
-              "20%",
-              "20%",
-              "20%"
-            ]
+            "values": ["20%", "20%", "20%", "20%", "20%"]
           }
         ]
       },
@@ -5833,13 +5665,7 @@
         "stats": [
           {
             "title": "Anomaly Buildup Increase",
-            "values": [
-              "100%",
-              "100%",
-              "100%",
-              "100%",
-              "100%"
-            ]
+            "values": ["100%", "100%", "100%", "100%", "100%"]
           }
         ]
       },
@@ -6176,13 +6002,7 @@
         "stats": [
           {
             "title": "Anomaly Buildup Increase",
-            "values": [
-              "100%",
-              "100%",
-              "100%",
-              "100%",
-              "100%"
-            ]
+            "values": ["100%", "100%", "100%", "100%", "100%"]
           }
         ]
       },
@@ -6519,13 +6339,7 @@
         "stats": [
           {
             "title": "Anomaly Buildup Increase",
-            "values": [
-              "100%",
-              "100%",
-              "100%",
-              "100%",
-              "100%"
-            ]
+            "values": ["100%", "100%", "100%", "100%", "100%"]
           }
         ]
       },
@@ -6862,13 +6676,7 @@
         "stats": [
           {
             "title": "DMG Increase",
-            "values": [
-              "120%",
-              "120%",
-              "120%",
-              "120%",
-              "120%"
-            ]
+            "values": ["120%", "120%", "120%", "120%", "120%"]
           }
         ]
       },
@@ -7205,23 +7013,11 @@
         "stats": [
           {
             "title": "DMG Increase",
-            "values": [
-              "36%",
-              "36%",
-              "36%",
-              "36%",
-              "36%"
-            ]
+            "values": ["36%", "36%", "36%", "36%", "36%"]
           },
           {
             "title": "Cooldown Reduction",
-            "values": [
-              "4s",
-              "4s",
-              "4s",
-              "4s",
-              "4s"
-            ]
+            "values": ["4s", "4s", "4s", "4s", "4s"]
           }
         ]
       },
@@ -7558,23 +7354,11 @@
         "stats": [
           {
             "title": "DMG Increase",
-            "values": [
-              "20%",
-              "20%",
-              "20%",
-              "20%",
-              "20%"
-            ]
+            "values": ["20%", "20%", "20%", "20%", "20%"]
           },
           {
             "title": "Additional DMG Increase",
-            "values": [
-              "15%",
-              "15%",
-              "15%",
-              "15%",
-              "15%"
-            ]
+            "values": ["15%", "15%", "15%", "15%", "15%"]
           }
         ]
       },
@@ -7911,23 +7695,11 @@
         "stats": [
           {
             "title": "DMG Increase",
-            "values": [
-              "20%",
-              "20%",
-              "20%",
-              "20%",
-              "20%"
-            ]
+            "values": ["20%", "20%", "20%", "20%", "20%"]
           },
           {
             "title": "Additional DMG Increase",
-            "values": [
-              "20%",
-              "20%",
-              "20%",
-              "20%",
-              "20%"
-            ]
+            "values": ["20%", "20%", "20%", "20%", "20%"]
           }
         ]
       },
@@ -8259,13 +8031,7 @@
           },
           {
             "title": "Duration",
-            "values": [
-              "10s",
-              "10s",
-              "10s",
-              "10s",
-              "10s"
-            ]
+            "values": ["10s", "10s", "10s", "10s", "10s"]
           }
         ]
       },
@@ -8632,13 +8398,7 @@
         "stats": [
           {
             "title": "DMG Increase",
-            "values": [
-              "30%",
-              "30%",
-              "30%",
-              "30%",
-              "30%"
-            ]
+            "values": ["30%", "30%", "30%", "30%", "30%"]
           }
         ]
       },
@@ -9035,33 +8795,15 @@
         "stats": [
           {
             "title": "DMG Increase",
-            "values": [
-              "45%",
-              "45%",
-              "45%",
-              "45%",
-              "45%"
-            ]
+            "values": ["45%", "45%", "45%", "45%", "45%"]
           },
           {
             "title": "Daze Increase",
-            "values": [
-              "27%",
-              "27%",
-              "27%",
-              "27%",
-              "27%"
-            ]
+            "values": ["27%", "27%", "27%", "27%", "27%"]
           },
           {
             "title": "Anomaly Buildup Increase",
-            "values": [
-              "90%",
-              "90%",
-              "90%",
-              "90%",
-              "90%"
-            ]
+            "values": ["90%", "90%", "90%", "90%", "90%"]
           }
         ]
       },
@@ -9398,33 +9140,15 @@
         "stats": [
           {
             "title": "DMG Increase (1 Enemy)",
-            "values": [
-              "45%",
-              "45%",
-              "45%",
-              "45%",
-              "45%"
-            ]
+            "values": ["45%", "45%", "45%", "45%", "45%"]
           },
           {
             "title": "DMG Increase (2 Enemies)",
-            "values": [
-              "35%",
-              "35%",
-              "35%",
-              "35%",
-              "35%"
-            ]
+            "values": ["35%", "35%", "35%", "35%", "35%"]
           },
           {
             "title": "DMG Increase (3 or More Enemies)",
-            "values": [
-              "25%",
-              "25%",
-              "25%",
-              "25%",
-              "25%"
-            ]
+            "values": ["25%", "25%", "25%", "25%", "25%"]
           }
         ]
       },
@@ -9761,13 +9485,7 @@
         "stats": [
           {
             "title": "Daze Increase",
-            "values": [
-              "18%",
-              "18%",
-              "18%",
-              "18%",
-              "18%"
-            ]
+            "values": ["18%", "18%", "18%", "18%", "18%"]
           }
         ]
       }
@@ -10067,23 +9785,11 @@
         "stats": [
           {
             "title": "Anomaly Buildup Increase",
-            "values": [
-              "20%",
-              "20%",
-              "20%",
-              "20%",
-              "20%"
-            ]
+            "values": ["20%", "20%", "20%", "20%", "20%"]
           },
           {
             "title": "Continuous Strikes Duration Extension",
-            "values": [
-              "0.8s",
-              "0.8s",
-              "0.8s",
-              "0.8s",
-              "0.8s"
-            ]
+            "values": ["0.8s", "0.8s", "0.8s", "0.8s", "0.8s"]
           }
         ]
       }
@@ -10383,13 +10089,7 @@
         "stats": [
           {
             "title": "Anomaly Buildup Increase",
-            "values": [
-              "60%",
-              "60%",
-              "60%",
-              "60%",
-              "60%"
-            ]
+            "values": ["60%", "60%", "60%", "60%", "60%"]
           }
         ]
       },
@@ -10702,33 +10402,15 @@
         "stats": [
           {
             "title": "Buff 1: HP Recovery Increase",
-            "values": [
-              "20%",
-              "20%",
-              "20%",
-              "20%",
-              "20%"
-            ]
+            "values": ["20%", "20%", "20%", "20%", "20%"]
           },
           {
             "title": "Buff 2: Shield Generated Increase",
-            "values": [
-              "20%",
-              "20%",
-              "20%",
-              "20%",
-              "20%"
-            ]
+            "values": ["20%", "20%", "20%", "20%", "20%"]
           },
           {
             "title": "Buff 3: Energy Regen Increase",
-            "values": [
-              "0.04/s",
-              "0.04/s",
-              "0.04/s",
-              "0.04/s",
-              "0.04/s"
-            ]
+            "values": ["0.04/s", "0.04/s", "0.04/s", "0.04/s", "0.04/s"]
           }
         ]
       }
@@ -10959,23 +10641,11 @@
         "stats": [
           {
             "title": "HP Recovery Increase",
-            "values": [
-              "20%",
-              "20%",
-              "20%",
-              "20%",
-              "20%"
-            ]
+            "values": ["20%", "20%", "20%", "20%", "20%"]
           },
           {
             "title": "Additional Activations",
-            "values": [
-              "3 times",
-              "3 times",
-              "3 times",
-              "3 times",
-              "3 times"
-            ]
+            "values": ["3 times", "3 times", "3 times", "3 times", "3 times"]
           }
         ]
       }
@@ -11275,13 +10945,7 @@
         "stats": [
           {
             "title": "DMG Increase",
-            "values": [
-              "30%",
-              "30%",
-              "30%",
-              "30%",
-              "30%"
-            ]
+            "values": ["30%", "30%", "30%", "30%", "30%"]
           }
         ]
       },
@@ -11618,13 +11282,7 @@
         "stats": [
           {
             "title": "DMG Increase",
-            "values": [
-              "30%",
-              "30%",
-              "30%",
-              "30%",
-              "30%"
-            ]
+            "values": ["30%", "30%", "30%", "30%", "30%"]
           }
         ]
       },
@@ -11961,13 +11619,7 @@
         "stats": [
           {
             "title": "Anomaly Buildup Increase",
-            "values": [
-              "60%",
-              "60%",
-              "60%",
-              "60%",
-              "60%"
-            ]
+            "values": ["60%", "60%", "60%", "60%", "60%"]
           }
         ]
       },
@@ -12304,43 +11956,19 @@
         "stats": [
           {
             "title": "Shield Generated (1 Enemy)",
-            "values": [
-              "10% HP",
-              "10% HP",
-              "10% HP",
-              "10% HP",
-              "10% HP"
-            ]
+            "values": ["10% HP", "10% HP", "10% HP", "10% HP", "10% HP"]
           },
           {
             "title": "Shield Generated (2 Enemies)",
-            "values": [
-              "12% HP",
-              "12% HP",
-              "12% HP",
-              "12% HP",
-              "12% HP"
-            ]
+            "values": ["12% HP", "12% HP", "12% HP", "12% HP", "12% HP"]
           },
           {
             "title": "Shield Generated (3 or More Enemies)",
-            "values": [
-              "15% HP",
-              "15% HP",
-              "15% HP",
-              "15% HP",
-              "15% HP"
-            ]
+            "values": ["15% HP", "15% HP", "15% HP", "15% HP", "15% HP"]
           },
           {
             "title": "Shield Duration",
-            "values": [
-              "24s",
-              "24s",
-              "24s",
-              "24s",
-              "24s"
-            ]
+            "values": ["24s", "24s", "24s", "24s", "24s"]
           }
         ]
       },
@@ -12677,13 +12305,7 @@
         "stats": [
           {
             "title": "Anomaly Buildup Increase",
-            "values": [
-              "60%",
-              "60%",
-              "60%",
-              "60%",
-              "60%"
-            ]
+            "values": ["60%", "60%", "60%", "60%", "60%"]
           }
         ]
       },
@@ -13020,13 +12642,7 @@
         "stats": [
           {
             "title": "DMG Increase",
-            "values": [
-              "30%",
-              "30%",
-              "30%",
-              "30%",
-              "30%"
-            ]
+            "values": ["30%", "30%", "30%", "30%", "30%"]
           }
         ]
       }

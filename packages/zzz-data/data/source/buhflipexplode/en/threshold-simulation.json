@@ -34,13 +34,7 @@
                   ]
                 },
                 {
-                  "sideElementMult": [
-                    1,
-                    1.2,
-                    0.8,
-                    1,
-                    1
-                  ],
+                  "sideElementMult": [1, 1.2, 0.8, 1, 1],
                   "sideHPMult": 220,
                   "waves": [
                     {
@@ -96,13 +90,7 @@
                   ]
                 },
                 {
-                  "sideElementMult": [
-                    1.2,
-                    1.2,
-                    0.8,
-                    1,
-                    1
-                  ],
+                  "sideElementMult": [1.2, 1.2, 0.8, 1, 1],
                   "sideHPMult": 220,
                   "waves": [
                     {
@@ -133,13 +121,7 @@
                 null,
                 null,
                 {
-                  "sideElementMult": [
-                    0.8,
-                    1,
-                    1,
-                    0.8,
-                    1
-                  ],
+                  "sideElementMult": [0.8, 1, 1, 0.8, 1],
                   "sideHPMult": 180,
                   "waves": [
                     {
@@ -192,13 +174,7 @@
                   ]
                 },
                 {
-                  "sideElementMult": [
-                    0.8,
-                    1,
-                    1,
-                    0.8,
-                    1
-                  ],
+                  "sideElementMult": [0.8, 1, 1, 0.8, 1],
                   "sideHPMult": 220,
                   "waves": [
                     {
@@ -227,13 +203,7 @@
                   ]
                 },
                 {
-                  "sideElementMult": [
-                    1,
-                    0.8,
-                    1,
-                    1,
-                    1.2
-                  ],
+                  "sideElementMult": [1, 0.8, 1, 1, 1.2],
                   "sideHPMult": 220,
                   "waves": [
                     {
@@ -263,13 +233,7 @@
                 },
                 null,
                 {
-                  "sideElementMult": [
-                    1.2,
-                    0.8,
-                    1,
-                    1,
-                    0.8
-                  ],
+                  "sideElementMult": [1.2, 0.8, 1, 1, 0.8],
                   "sideHPMult": 180,
                   "waves": [
                     {
@@ -313,13 +277,7 @@
                   ]
                 },
                 {
-                  "sideElementMult": [
-                    1,
-                    0.8,
-                    1.2,
-                    1.2,
-                    0.8
-                  ],
+                  "sideElementMult": [1, 0.8, 1.2, 1.2, 0.8],
                   "sideHPMult": 220,
                   "waves": [
                     {
@@ -348,13 +306,7 @@
                   ]
                 },
                 {
-                  "sideElementMult": [
-                    1,
-                    1,
-                    0.8,
-                    1,
-                    1.2
-                  ],
+                  "sideElementMult": [1, 1, 0.8, 1, 1.2],
                   "sideHPMult": 220,
                   "waves": [
                     {
@@ -379,13 +331,7 @@
                 },
                 null,
                 {
-                  "sideElementMult": [
-                    0.8,
-                    1,
-                    1,
-                    1,
-                    1.2
-                  ],
+                  "sideElementMult": [0.8, 1, 1, 1, 1.2],
                   "sideHPMult": 180,
                   "waves": [
                     {
@@ -441,13 +387,7 @@
                   ]
                 },
                 {
-                  "sideElementMult": [
-                    0.8,
-                    1,
-                    1,
-                    0.8,
-                    1
-                  ],
+                  "sideElementMult": [0.8, 1, 1, 0.8, 1],
                   "sideHPMult": 300,
                   "waves": [
                     {
@@ -471,13 +411,7 @@
                   ]
                 },
                 {
-                  "sideElementMult": [
-                    1,
-                    0.8,
-                    1,
-                    1.2,
-                    1
-                  ],
+                  "sideElementMult": [1, 0.8, 1, 1.2, 1],
                   "sideHPMult": 300,
                   "waves": [
                     {
@@ -502,13 +436,7 @@
                 },
                 null,
                 {
-                  "sideElementMult": [
-                    0.8,
-                    1,
-                    1,
-                    1.2,
-                    0.8
-                  ],
+                  "sideElementMult": [0.8, 1, 1, 1.2, 0.8],
                   "sideHPMult": 220,
                   "waves": [
                     {
@@ -561,13 +489,7 @@
                   ]
                 },
                 {
-                  "sideElementMult": [
-                    1,
-                    1.2,
-                    0.8,
-                    1,
-                    1
-                  ],
+                  "sideElementMult": [1, 1.2, 0.8, 1, 1],
                   "sideHPMult": 300,
                   "waves": [
                     {
@@ -591,13 +513,7 @@
                   ]
                 },
                 {
-                  "sideElementMult": [
-                    1.2,
-                    0.8,
-                    1,
-                    1,
-                    0.8
-                  ],
+                  "sideElementMult": [1.2, 0.8, 1, 1, 0.8],
                   "sideHPMult": 300,
                   "waves": [
                     {
@@ -632,13 +548,7 @@
                 },
                 null,
                 {
-                  "sideElementMult": [
-                    1.2,
-                    1,
-                    1,
-                    0.8,
-                    1.2
-                  ],
+                  "sideElementMult": [1.2, 1, 1, 0.8, 1.2],
                   "sideHPMult": 220,
                   "waves": [
                     {
@@ -691,13 +601,7 @@
                   ]
                 },
                 {
-                  "sideElementMult": [
-                    1.2,
-                    0.8,
-                    1,
-                    1.2,
-                    0.8
-                  ],
+                  "sideElementMult": [1.2, 0.8, 1, 1.2, 0.8],
                   "sideHPMult": 300,
                   "waves": [
                     {
@@ -721,13 +625,7 @@
                   ]
                 },
                 {
-                  "sideElementMult": [
-                    1.2,
-                    1,
-                    0.8,
-                    1,
-                    1
-                  ],
+                  "sideElementMult": [1.2, 1, 0.8, 1, 1],
                   "sideHPMult": 300,
                   "waves": [
                     {
@@ -751,13 +649,7 @@
                   ]
                 },
                 {
-                  "sideElementMult": [
-                    0.8,
-                    1,
-                    1,
-                    0.8,
-                    1
-                  ],
+                  "sideElementMult": [0.8, 1, 1, 0.8, 1],
                   "sideHPMult": 300,
                   "waves": [
                     {
@@ -777,13 +669,7 @@
                   ]
                 },
                 {
-                  "sideElementMult": [
-                    0.8,
-                    1,
-                    1,
-                    1.2,
-                    0.8
-                  ],
+                  "sideElementMult": [0.8, 1, 1, 1.2, 0.8],
                   "sideHPMult": 220,
                   "waves": [
                     {
@@ -831,13 +717,7 @@
                   ]
                 },
                 {
-                  "sideElementMult": [
-                    1,
-                    1,
-                    1.2,
-                    0.8,
-                    1
-                  ],
+                  "sideElementMult": [1, 1, 1.2, 0.8, 1],
                   "sideHPMult": 300,
                   "waves": [
                     {
@@ -861,13 +741,7 @@
                   ]
                 },
                 {
-                  "sideElementMult": [
-                    1,
-                    1,
-                    0.8,
-                    1.2,
-                    0.8
-                  ],
+                  "sideElementMult": [1, 1, 0.8, 1.2, 0.8],
                   "sideHPMult": 300,
                   "waves": [
                     {
@@ -896,13 +770,7 @@
                   ]
                 },
                 {
-                  "sideElementMult": [
-                    0.8,
-                    1,
-                    1,
-                    0.8,
-                    1
-                  ],
+                  "sideElementMult": [0.8, 1, 1, 0.8, 1],
                   "sideHPMult": 240,
                   "waves": [
                     {
@@ -931,13 +799,7 @@
                   ]
                 },
                 {
-                  "sideElementMult": [
-                    1,
-                    0.8,
-                    1,
-                    1.2,
-                    0.8
-                  ],
+                  "sideElementMult": [1, 0.8, 1, 1.2, 0.8],
                   "sideHPMult": 220,
                   "waves": [
                     {
@@ -968,12 +830,7 @@
               ]
             },
             {
-              "buffNames": [
-                "Artful",
-                "Sonata",
-                "Collapse",
-                "Raging Waves"
-              ],
+              "buffNames": ["Artful", "Sonata", "Collapse", "Raging Waves"],
               "sides": [
                 {
                   "waves": [
@@ -990,13 +847,7 @@
                   ]
                 },
                 {
-                  "sideElementMult": [
-                    1,
-                    1,
-                    0.8,
-                    1.2,
-                    0.8
-                  ],
+                  "sideElementMult": [1, 1, 0.8, 1.2, 0.8],
                   "sideHPMult": 300,
                   "waves": [
                     {
@@ -1025,13 +876,7 @@
                   ]
                 },
                 {
-                  "sideElementMult": [
-                    1.2,
-                    0.8,
-                    1,
-                    0.8,
-                    1
-                  ],
+                  "sideElementMult": [1.2, 0.8, 1, 0.8, 1],
                   "sideHPMult": 300,
                   "waves": [
                     {
@@ -1055,13 +900,7 @@
                   ]
                 },
                 {
-                  "sideElementMult": [
-                    0.8,
-                    1,
-                    1,
-                    0.8,
-                    1
-                  ],
+                  "sideElementMult": [0.8, 1, 1, 0.8, 1],
                   "sideHPMult": 240,
                   "waves": [
                     {
@@ -1090,13 +929,7 @@
                   ]
                 },
                 {
-                  "sideElementMult": [
-                    1.2,
-                    1,
-                    0.8,
-                    1,
-                    1
-                  ],
+                  "sideElementMult": [1.2, 1, 0.8, 1, 1],
                   "sideHPMult": 220,
                   "waves": [
                     {
@@ -1144,13 +977,7 @@
                   ]
                 },
                 {
-                  "sideElementMult": [
-                    1,
-                    1,
-                    1,
-                    0.8,
-                    1.2
-                  ],
+                  "sideElementMult": [1, 1, 1, 0.8, 1.2],
                   "sideHPMult": 300,
                   "waves": [
                     {
@@ -1170,13 +997,7 @@
                   ]
                 },
                 {
-                  "sideElementMult": [
-                    1,
-                    1,
-                    1.2,
-                    0.8,
-                    1
-                  ],
+                  "sideElementMult": [1, 1, 1.2, 0.8, 1],
                   "sideHPMult": 240,
                   "waves": [
                     {
@@ -1200,13 +1021,7 @@
                   ]
                 },
                 {
-                  "sideElementMult": [
-                    1.2,
-                    0.8,
-                    1,
-                    0.8,
-                    1
-                  ],
+                  "sideElementMult": [1.2, 0.8, 1, 0.8, 1],
                   "sideHPMult": 300,
                   "waves": [
                     {
@@ -1230,13 +1045,7 @@
                   ]
                 },
                 {
-                  "sideElementMult": [
-                    0.8,
-                    1,
-                    1,
-                    1.2,
-                    0.8
-                  ],
+                  "sideElementMult": [0.8, 1, 1, 1.2, 0.8],
                   "sideHPMult": 220,
                   "waves": [
                     {
@@ -1296,13 +1105,7 @@
                   ]
                 },
                 {
-                  "sideElementMult": [
-                    1,
-                    0.8,
-                    1.2,
-                    1.2,
-                    0.8
-                  ],
+                  "sideElementMult": [1, 0.8, 1.2, 1.2, 0.8],
                   "sideHPMult": 350,
                   "waves": [
                     {
@@ -1326,13 +1129,7 @@
                   ]
                 },
                 {
-                  "sideElementMult": [
-                    1.2,
-                    0.8,
-                    1,
-                    1,
-                    0.8
-                  ],
+                  "sideElementMult": [1.2, 0.8, 1, 1, 0.8],
                   "sideHPMult": 350,
                   "waves": [
                     {
@@ -1357,13 +1154,7 @@
                 },
                 null,
                 {
-                  "sideElementMult": [
-                    0.8,
-                    1,
-                    1,
-                    0.8,
-                    1
-                  ],
+                  "sideElementMult": [0.8, 1, 1, 0.8, 1],
                   "sideHPMult": 260,
                   "waves": [
                     {
@@ -1411,13 +1202,7 @@
                   ]
                 },
                 {
-                  "sideElementMult": [
-                    1.2,
-                    0.8,
-                    1,
-                    0.8,
-                    1
-                  ],
+                  "sideElementMult": [1.2, 0.8, 1, 0.8, 1],
                   "sideHPMult": 350,
                   "waves": [
                     {
@@ -1441,13 +1226,7 @@
                   ]
                 },
                 {
-                  "sideElementMult": [
-                    1,
-                    1,
-                    0.8,
-                    1.2,
-                    0.8
-                  ],
+                  "sideElementMult": [1, 1, 0.8, 1.2, 0.8],
                   "sideHPMult": 350,
                   "waves": [
                     {
@@ -1477,13 +1256,7 @@
                 },
                 null,
                 {
-                  "sideElementMult": [
-                    0.8,
-                    1,
-                    1,
-                    1.2,
-                    0.8
-                  ],
+                  "sideElementMult": [0.8, 1, 1, 1.2, 0.8],
                   "sideHPMult": 260,
                   "waves": [
                     {
@@ -1531,13 +1304,7 @@
                   ]
                 },
                 {
-                  "sideElementMult": [
-                    0.8,
-                    0.8,
-                    1.2,
-                    1,
-                    1
-                  ],
+                  "sideElementMult": [0.8, 0.8, 1.2, 1, 1],
                   "sideHPMult": 280,
                   "waves": [
                     {
@@ -1561,13 +1328,7 @@
                   ]
                 },
                 {
-                  "sideElementMult": [
-                    1.2,
-                    1.2,
-                    0.8,
-                    1,
-                    0.8
-                  ],
+                  "sideElementMult": [1.2, 1.2, 0.8, 1, 0.8],
                   "sideHPMult": 350,
                   "waves": [
                     {
@@ -1596,13 +1357,7 @@
                   ]
                 },
                 {
-                  "sideElementMult": [
-                    1,
-                    1.2,
-                    1,
-                    0.8,
-                    0.8
-                  ],
+                  "sideElementMult": [1, 1.2, 1, 0.8, 0.8],
                   "sideHPMult": 350,
                   "waves": [
                     {
@@ -1631,13 +1386,7 @@
                   ]
                 },
                 {
-                  "sideElementMult": [
-                    1,
-                    0.8,
-                    1,
-                    1.2,
-                    0.8
-                  ],
+                  "sideElementMult": [1, 0.8, 1, 1.2, 0.8],
                   "sideHPMult": 260,
                   "waves": [
                     {
@@ -1690,13 +1439,7 @@
                   ]
                 },
                 {
-                  "sideElementMult": [
-                    1.2,
-                    1,
-                    0.8,
-                    1.2,
-                    0.8
-                  ],
+                  "sideElementMult": [1.2, 1, 0.8, 1.2, 0.8],
                   "sideHPMult": 300,
                   "waves": [
                     {
@@ -1720,13 +1463,7 @@
                   ]
                 },
                 {
-                  "sideElementMult": [
-                    1,
-                    0.8,
-                    1.2,
-                    0.8,
-                    0.8
-                  ],
+                  "sideElementMult": [1, 0.8, 1.2, 0.8, 0.8],
                   "sideHPMult": 300,
                   "waves": [
                     {
@@ -1750,13 +1487,7 @@
                   ]
                 },
                 {
-                  "sideElementMult": [
-                    1,
-                    0.8,
-                    0.8,
-                    1.2,
-                    1
-                  ],
+                  "sideElementMult": [1, 0.8, 0.8, 1.2, 1],
                   "sideHPMult": 300,
                   "waves": [
                     {
@@ -1780,13 +1511,7 @@
                   ]
                 },
                 {
-                  "sideElementMult": [
-                    0.8,
-                    1,
-                    1,
-                    1,
-                    1.2
-                  ],
+                  "sideElementMult": [0.8, 1, 1, 1, 1.2],
                   "sideHPMult": 260,
                   "waves": [
                     {

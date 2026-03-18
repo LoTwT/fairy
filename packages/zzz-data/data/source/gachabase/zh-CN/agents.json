@@ -5,12 +5,8 @@
     "name": "爱芮",
     "rarity": 4,
     "specialty": "异常",
-    "attributes": [
-      "以太"
-    ],
-    "attackTypes": [
-      "打击"
-    ],
+    "attributes": ["以太"],
+    "attackTypes": ["打击"],
     "url": "https://zzz.gachabase.net/agents/1501/aria"
   },
   {
@@ -19,12 +15,8 @@
     "name": "千夏",
     "rarity": 4,
     "specialty": "支援",
-    "attributes": [
-      "物理"
-    ],
-    "attackTypes": [
-      "打击"
-    ],
+    "attributes": ["物理"],
+    "attackTypes": ["打击"],
     "url": "https://zzz.gachabase.net/agents/1491/sunna"
   },
   {
@@ -33,12 +25,8 @@
     "name": "叶瞬光",
     "rarity": 4,
     "specialty": "强攻",
-    "attributes": [
-      "凛刃"
-    ],
-    "attackTypes": [
-      "斩击"
-    ],
+    "attributes": ["凛刃"],
+    "attackTypes": ["斩击"],
     "url": "https://zzz.gachabase.net/agents/1431/ye-shunguang"
   },
   {
@@ -47,12 +35,8 @@
     "name": "照",
     "rarity": 4,
     "specialty": "防护",
-    "attributes": [
-      "冰属性"
-    ],
-    "attackTypes": [
-      "斩击"
-    ],
+    "attributes": ["冰属性"],
+    "attackTypes": ["斩击"],
     "url": "https://zzz.gachabase.net/agents/1341/zhao"
   },
   {
@@ -61,12 +45,8 @@
     "name": "琉音",
     "rarity": 4,
     "specialty": "击破",
-    "attributes": [
-      "物理"
-    ],
-    "attackTypes": [
-      "斩击"
-    ],
+    "attributes": ["物理"],
+    "attackTypes": ["斩击"],
     "url": "https://zzz.gachabase.net/agents/1481/dialyn"
   },
   {
@@ -75,12 +55,8 @@
     "name": "般岳",
     "rarity": 4,
     "specialty": "命破",
-    "attributes": [
-      "火属性"
-    ],
-    "attackTypes": [
-      "打击"
-    ],
+    "attributes": ["火属性"],
+    "attackTypes": ["打击"],
     "url": "https://zzz.gachabase.net/agents/1471/banyue"
   },
   {
@@ -89,12 +65,8 @@
     "name": "卢西娅",
     "rarity": 4,
     "specialty": "支援",
-    "attributes": [
-      "以太"
-    ],
-    "attackTypes": [
-      "打击"
-    ],
+    "attributes": ["以太"],
+    "attackTypes": ["打击"],
     "url": "https://zzz.gachabase.net/agents/1451/lucia-elowen"
   },
   {
@@ -103,12 +75,8 @@
     "name": "真斗",
     "rarity": 3,
     "specialty": "命破",
-    "attributes": [
-      "火属性"
-    ],
-    "attackTypes": [
-      "斩击"
-    ],
+    "attributes": ["火属性"],
+    "attackTypes": ["斩击"],
     "url": "https://zzz.gachabase.net/agents/1441/komano-manato"
   },
   {
@@ -117,12 +85,8 @@
     "name": "伊德海莉",
     "rarity": 4,
     "specialty": "命破",
-    "attributes": [
-      "冰属性"
-    ],
-    "attackTypes": [
-      "打击"
-    ],
+    "attributes": ["冰属性"],
+    "attackTypes": ["打击"],
     "url": "https://zzz.gachabase.net/agents/1051/yidhari-murphy"
   },
   {
@@ -131,12 +95,8 @@
     "name": "仪玄",
     "rarity": 4,
     "specialty": "命破",
-    "attributes": [
-      "玄墨"
-    ],
-    "attackTypes": [
-      "打击"
-    ],
+    "attributes": ["玄墨"],
+    "attackTypes": ["打击"],
     "url": "https://zzz.gachabase.net/agents/1371/yixuan"
   },
   {
@@ -145,12 +105,8 @@
     "name": "橘福福",
     "rarity": 4,
     "specialty": "击破",
-    "attributes": [
-      "火属性"
-    ],
-    "attackTypes": [
-      "打击"
-    ],
+    "attributes": ["火属性"],
+    "attackTypes": ["打击"],
     "url": "https://zzz.gachabase.net/agents/1391/ju-fufu"
   },
   {
@@ -159,12 +115,8 @@
     "name": "潘引壶",
     "rarity": 3,
     "specialty": "防护",
-    "attributes": [
-      "物理"
-    ],
-    "attackTypes": [
-      "打击"
-    ],
+    "attributes": ["物理"],
+    "attackTypes": ["打击"],
     "url": "https://zzz.gachabase.net/agents/1421/pan-yinhu"
   },
   {
@@ -173,13 +125,8 @@
     "name": "「席德」",
     "rarity": 4,
     "specialty": "强攻",
-    "attributes": [
-      "电属性"
-    ],
-    "attackTypes": [
-      "斩击",
-      "打击"
-    ],
+    "attributes": ["电属性"],
+    "attackTypes": ["斩击", "打击"],
     "url": "https://zzz.gachabase.net/agents/1461/seed"
   },
   {
@@ -188,12 +135,8 @@
     "name": "爱丽丝",
     "rarity": 4,
     "specialty": "异常",
-    "attributes": [
-      "物理"
-    ],
-    "attackTypes": [
-      "斩击"
-    ],
+    "attributes": ["物理"],
+    "attackTypes": ["斩击"],
     "url": "https://zzz.gachabase.net/agents/1401/alice-thymefield"
   },
   {
@@ -202,12 +145,8 @@
     "name": "柚叶",
     "rarity": 4,
     "specialty": "支援",
-    "attributes": [
-      "物理"
-    ],
-    "attackTypes": [
-      "打击"
-    ],
+    "attributes": ["物理"],
+    "attackTypes": ["打击"],
     "url": "https://zzz.gachabase.net/agents/1411/ukinami-yuzuha"
   },
   {
@@ -216,12 +155,8 @@
     "name": "零号·安比",
     "rarity": 4,
     "specialty": "强攻",
-    "attributes": [
-      "电属性"
-    ],
-    "attackTypes": [
-      "斩击"
-    ],
+    "attributes": ["电属性"],
+    "attackTypes": ["斩击"],
     "url": "https://zzz.gachabase.net/agents/1381/soldier-0-anby"
   },
   {
@@ -230,12 +165,8 @@
     "name": "波可娜",
     "rarity": 3,
     "specialty": "击破",
-    "attributes": [
-      "物理"
-    ],
-    "attackTypes": [
-      "斩击"
-    ],
+    "attributes": ["物理"],
+    "attackTypes": ["斩击"],
     "url": "https://zzz.gachabase.net/agents/1351/pulchra-fellini"
   },
   {
@@ -244,12 +175,8 @@
     "name": "薇薇安",
     "rarity": 4,
     "specialty": "异常",
-    "attributes": [
-      "以太"
-    ],
-    "attackTypes": [
-      "斩击"
-    ],
+    "attributes": ["以太"],
+    "attackTypes": ["斩击"],
     "url": "https://zzz.gachabase.net/agents/1331/vivian-banshee"
   },
   {
@@ -258,12 +185,8 @@
     "name": "赛斯",
     "rarity": 3,
     "specialty": "防护",
-    "attributes": [
-      "电属性"
-    ],
-    "attackTypes": [
-      "斩击"
-    ],
+    "attributes": ["电属性"],
+    "attackTypes": ["斩击"],
     "url": "https://zzz.gachabase.net/agents/1271/seth-lowell"
   },
   {
@@ -272,12 +195,8 @@
     "name": "青衣",
     "rarity": 4,
     "specialty": "击破",
-    "attributes": [
-      "电属性"
-    ],
-    "attackTypes": [
-      "打击"
-    ],
+    "attributes": ["电属性"],
+    "attackTypes": ["打击"],
     "url": "https://zzz.gachabase.net/agents/1251/qingyi"
   },
   {
@@ -286,12 +205,8 @@
     "name": "朱鸢",
     "rarity": 4,
     "specialty": "强攻",
-    "attributes": [
-      "以太"
-    ],
-    "attackTypes": [
-      "穿透"
-    ],
+    "attributes": ["以太"],
+    "attackTypes": ["穿透"],
     "url": "https://zzz.gachabase.net/agents/1241/zhu-yuan"
   },
   {
@@ -300,12 +215,8 @@
     "name": "丽娜",
     "rarity": 4,
     "specialty": "支援",
-    "attributes": [
-      "电属性"
-    ],
-    "attackTypes": [
-      "打击"
-    ],
+    "attributes": ["电属性"],
+    "attackTypes": ["打击"],
     "url": "https://zzz.gachabase.net/agents/1211/alexandrina-sebastiane"
   },
   {
@@ -314,12 +225,8 @@
     "name": "莱特",
     "rarity": 4,
     "specialty": "击破",
-    "attributes": [
-      "火属性"
-    ],
-    "attackTypes": [
-      "打击"
-    ],
+    "attributes": ["火属性"],
+    "attackTypes": ["打击"],
     "url": "https://zzz.gachabase.net/agents/1161/lighter"
   },
   {
@@ -328,13 +235,8 @@
     "name": "奥菲丝&「鬼火」",
     "rarity": 4,
     "specialty": "强攻",
-    "attributes": [
-      "火属性"
-    ],
-    "attackTypes": [
-      "穿透",
-      "斩击"
-    ],
+    "attributes": ["火属性"],
+    "attackTypes": ["穿透", "斩击"],
     "url": "https://zzz.gachabase.net/agents/1301/orphie-magnusson-magus"
   },
   {
@@ -343,12 +245,8 @@
     "name": "艾莲",
     "rarity": 4,
     "specialty": "强攻",
-    "attributes": [
-      "冰属性"
-    ],
-    "attackTypes": [
-      "斩击"
-    ],
+    "attributes": ["冰属性"],
+    "attackTypes": ["斩击"],
     "url": "https://zzz.gachabase.net/agents/1191/ellen-joe"
   },
   {
@@ -357,12 +255,8 @@
     "name": "简",
     "rarity": 4,
     "specialty": "异常",
-    "attributes": [
-      "物理"
-    ],
-    "attackTypes": [
-      "斩击"
-    ],
+    "attributes": ["物理"],
+    "attackTypes": ["斩击"],
     "url": "https://zzz.gachabase.net/agents/1261/jane-doe"
   },
   {
@@ -371,12 +265,8 @@
     "name": "派派",
     "rarity": 3,
     "specialty": "异常",
-    "attributes": [
-      "物理"
-    ],
-    "attackTypes": [
-      "斩击"
-    ],
+    "attributes": ["物理"],
+    "attackTypes": ["斩击"],
     "url": "https://zzz.gachabase.net/agents/1281/piper-wheel"
   },
   {
@@ -385,12 +275,8 @@
     "name": "耀嘉音",
     "rarity": 4,
     "specialty": "支援",
-    "attributes": [
-      "以太"
-    ],
-    "attackTypes": [
-      "打击"
-    ],
+    "attributes": ["以太"],
+    "attackTypes": ["打击"],
     "url": "https://zzz.gachabase.net/agents/1311/astra-yao"
   },
   {
@@ -399,12 +285,8 @@
     "name": "「扳机」",
     "rarity": 4,
     "specialty": "击破",
-    "attributes": [
-      "电属性"
-    ],
-    "attackTypes": [
-      "穿透"
-    ],
+    "attributes": ["电属性"],
+    "attackTypes": ["穿透"],
     "url": "https://zzz.gachabase.net/agents/1361/trigger"
   },
   {
@@ -413,12 +295,8 @@
     "name": "伊芙琳",
     "rarity": 4,
     "specialty": "强攻",
-    "attributes": [
-      "火属性"
-    ],
-    "attackTypes": [
-      "斩击"
-    ],
+    "attributes": ["火属性"],
+    "attackTypes": ["斩击"],
     "url": "https://zzz.gachabase.net/agents/1321/evelyn-chevalier"
   },
   {
@@ -427,12 +305,8 @@
     "name": "柳",
     "rarity": 4,
     "specialty": "异常",
-    "attributes": [
-      "电属性"
-    ],
-    "attackTypes": [
-      "斩击"
-    ],
+    "attributes": ["电属性"],
+    "attackTypes": ["斩击"],
     "url": "https://zzz.gachabase.net/agents/1221/tsukishiro-yanagi"
   },
   {
@@ -441,12 +315,8 @@
     "name": "雨果",
     "rarity": 4,
     "specialty": "强攻",
-    "attributes": [
-      "冰属性"
-    ],
-    "attackTypes": [
-      "斩击"
-    ],
+    "attributes": ["冰属性"],
+    "attackTypes": ["斩击"],
     "url": "https://zzz.gachabase.net/agents/1291/hugo-vlad"
   },
   {
@@ -455,13 +325,8 @@
     "name": "悠真",
     "rarity": 4,
     "specialty": "强攻",
-    "attributes": [
-      "电属性"
-    ],
-    "attackTypes": [
-      "穿透",
-      "斩击"
-    ],
+    "attributes": ["电属性"],
+    "attackTypes": ["穿透", "斩击"],
     "url": "https://zzz.gachabase.net/agents/1201/asaba-harumasa"
   },
   {
@@ -470,12 +335,8 @@
     "name": "柏妮思",
     "rarity": 4,
     "specialty": "异常",
-    "attributes": [
-      "火属性"
-    ],
-    "attackTypes": [
-      "穿透"
-    ],
+    "attributes": ["火属性"],
+    "attackTypes": ["穿透"],
     "url": "https://zzz.gachabase.net/agents/1171/burnice-white"
   },
   {
@@ -484,12 +345,8 @@
     "name": "格莉丝",
     "rarity": 4,
     "specialty": "异常",
-    "attributes": [
-      "电属性"
-    ],
-    "attackTypes": [
-      "穿透"
-    ],
+    "attributes": ["电属性"],
+    "attackTypes": ["穿透"],
     "url": "https://zzz.gachabase.net/agents/1181/grace-howard"
   },
   {
@@ -498,12 +355,8 @@
     "name": "安东",
     "rarity": 3,
     "specialty": "强攻",
-    "attributes": [
-      "电属性"
-    ],
-    "attackTypes": [
-      "穿透"
-    ],
+    "attributes": ["电属性"],
+    "attackTypes": ["穿透"],
     "url": "https://zzz.gachabase.net/agents/1111/anton-ivanov"
   },
   {
@@ -512,12 +365,8 @@
     "name": "莱卡恩",
     "rarity": 4,
     "specialty": "击破",
-    "attributes": [
-      "冰属性"
-    ],
-    "attackTypes": [
-      "打击"
-    ],
+    "attributes": ["冰属性"],
+    "attackTypes": ["打击"],
     "url": "https://zzz.gachabase.net/agents/1141/von-lycaon"
   },
   {
@@ -526,12 +375,8 @@
     "name": "苍角",
     "rarity": 3,
     "specialty": "支援",
-    "attributes": [
-      "冰属性"
-    ],
-    "attackTypes": [
-      "斩击"
-    ],
+    "attributes": ["冰属性"],
+    "attackTypes": ["斩击"],
     "url": "https://zzz.gachabase.net/agents/1131/soukaku"
   },
   {
@@ -540,12 +385,8 @@
     "name": "比利",
     "rarity": 3,
     "specialty": "强攻",
-    "attributes": [
-      "物理"
-    ],
-    "attackTypes": [
-      "穿透"
-    ],
+    "attributes": ["物理"],
+    "attackTypes": ["穿透"],
     "url": "https://zzz.gachabase.net/agents/1081/billy-kid"
   },
   {
@@ -554,12 +395,8 @@
     "name": "可琳",
     "rarity": 3,
     "specialty": "强攻",
-    "attributes": [
-      "物理"
-    ],
-    "attackTypes": [
-      "斩击"
-    ],
+    "attributes": ["物理"],
+    "attackTypes": ["斩击"],
     "url": "https://zzz.gachabase.net/agents/1061/corin-wickes"
   },
   {
@@ -568,12 +405,8 @@
     "name": "「11号」",
     "rarity": 4,
     "specialty": "强攻",
-    "attributes": [
-      "火属性"
-    ],
-    "attackTypes": [
-      "斩击"
-    ],
+    "attributes": ["火属性"],
+    "attackTypes": ["斩击"],
     "url": "https://zzz.gachabase.net/agents/1041/soldier-11"
   },
   {
@@ -582,12 +415,8 @@
     "name": "雅",
     "rarity": 4,
     "specialty": "异常",
-    "attributes": [
-      "烈霜"
-    ],
-    "attackTypes": [
-      "斩击"
-    ],
+    "attributes": ["烈霜"],
+    "attackTypes": ["斩击"],
     "url": "https://zzz.gachabase.net/agents/1091/hoshimi-miyabi"
   },
   {
@@ -596,12 +425,8 @@
     "name": "本",
     "rarity": 3,
     "specialty": "防护",
-    "attributes": [
-      "火属性"
-    ],
-    "attackTypes": [
-      "打击"
-    ],
+    "attributes": ["火属性"],
+    "attackTypes": ["打击"],
     "url": "https://zzz.gachabase.net/agents/1121/ben-bigger"
   },
   {
@@ -610,13 +435,8 @@
     "name": "凯撒",
     "rarity": 4,
     "specialty": "防护",
-    "attributes": [
-      "物理"
-    ],
-    "attackTypes": [
-      "斩击",
-      "打击"
-    ],
+    "attributes": ["物理"],
+    "attackTypes": ["斩击", "打击"],
     "url": "https://zzz.gachabase.net/agents/1071/caesar-king"
   },
   {
@@ -625,12 +445,8 @@
     "name": "露西",
     "rarity": 3,
     "specialty": "支援",
-    "attributes": [
-      "火属性"
-    ],
-    "attackTypes": [
-      "打击"
-    ],
+    "attributes": ["火属性"],
+    "attackTypes": ["打击"],
     "url": "https://zzz.gachabase.net/agents/1151/luciana-de-montefio"
   },
   {
@@ -639,12 +455,8 @@
     "name": "猫又",
     "rarity": 4,
     "specialty": "强攻",
-    "attributes": [
-      "物理"
-    ],
-    "attackTypes": [
-      "斩击"
-    ],
+    "attributes": ["物理"],
+    "attackTypes": ["斩击"],
     "url": "https://zzz.gachabase.net/agents/1021/nekomiya-mana"
   },
   {
@@ -653,12 +465,8 @@
     "name": "妮可",
     "rarity": 3,
     "specialty": "支援",
-    "attributes": [
-      "以太"
-    ],
-    "attackTypes": [
-      "打击"
-    ],
+    "attributes": ["以太"],
+    "attackTypes": ["打击"],
     "url": "https://zzz.gachabase.net/agents/1031/nicole-demara"
   },
   {
@@ -667,12 +475,8 @@
     "name": "珂蕾妲",
     "rarity": 4,
     "specialty": "击破",
-    "attributes": [
-      "火属性"
-    ],
-    "attackTypes": [
-      "打击"
-    ],
+    "attributes": ["火属性"],
+    "attackTypes": ["打击"],
     "url": "https://zzz.gachabase.net/agents/1101/koleda-belobog"
   },
   {
@@ -681,12 +485,8 @@
     "name": "安比",
     "rarity": 3,
     "specialty": "击破",
-    "attributes": [
-      "电属性"
-    ],
-    "attackTypes": [
-      "斩击"
-    ],
+    "attributes": ["电属性"],
+    "attackTypes": ["斩击"],
     "url": "https://zzz.gachabase.net/agents/1011/anby-demara"
   }
 ]

@@ -113,12 +113,8 @@
             "ether": 3300,
             "physical": 4950
           },
-          "weaknesses": [
-            "ice"
-          ],
-          "resistances": [
-            "physical"
-          ],
+          "weaknesses": ["ice"],
+          "resistances": ["physical"],
           "immunities": [],
           "tags": [],
           "mods": [],
@@ -153,20 +149,11 @@
             "ether": 3300,
             "physical": 3960
           },
-          "weaknesses": [
-            "fire"
-          ],
-          "resistances": [
-            "electric"
-          ],
-          "immunities": [
-            "freeze"
-          ],
+          "weaknesses": ["fire"],
+          "resistances": ["electric"],
+          "immunities": ["freeze"],
           "tags": [],
-          "mods": [
-            "40-dmg-res",
-            "no-freeze"
-          ],
+          "mods": ["40-dmg-res", "no-freeze"],
           "description": "• Boss enemies gain 1 stack of <span style='font-weight:bold;'>Battle-Hardened</span> every 10s, increasing their DMG dealt by <span style='color:#cc0000;font-weight:bold;'>20%</span> and stacking up to 3 times. When inflicting <span style='color:#7756c6;font-weight:bold;'>Attribute Anomaly</span>, removes 1 stack of <span style='font-weight:bold;'>Battle-Hardened</span> and increases their DMG taken by <span style='color:#2bad00;font-weight:bold;'>15%</span> for 20s.",
           "performance": "• Successfully inflicting <span style='color:#7756c6;font-weight:bold;'>Attribute Anomaly</span> on enemies grants <span style='color:#ffaf2c;font-weight:bold;'>150 Performance Points</span>. A maximum of 5000 Performance Points can be obtained.",
           "misc": ""
@@ -198,10 +185,7 @@
             "ether": 2750,
             "physical": 3960
           },
-          "weaknesses": [
-            "ice",
-            "ether"
-          ],
+          "weaknesses": ["ice", "ether"],
           "resistances": [],
           "immunities": [],
           "tags": [],
@@ -274,12 +258,8 @@
             "ether": 3300,
             "physical": 4950
           },
-          "weaknesses": [
-            "ice"
-          ],
-          "resistances": [
-            "physical"
-          ],
+          "weaknesses": ["ice"],
+          "resistances": ["physical"],
           "immunities": [],
           "tags": [],
           "mods": [],
@@ -314,12 +294,8 @@
             "ether": 3300,
             "physical": 3960
           },
-          "weaknesses": [
-            "electric"
-          ],
-          "resistances": [
-            "fire"
-          ],
+          "weaknesses": ["electric"],
+          "resistances": ["fire"],
           "immunities": [],
           "tags": [],
           "mods": [],
@@ -354,10 +330,7 @@
             "ether": 2500,
             "physical": 3600
           },
-          "weaknesses": [
-            "ice",
-            "ether"
-          ],
+          "weaknesses": ["ice", "ether"],
           "resistances": [],
           "immunities": [],
           "tags": [],
@@ -430,10 +403,7 @@
             "ether": 2750,
             "physical": 3960
           },
-          "weaknesses": [
-            "ice",
-            "ether"
-          ],
+          "weaknesses": ["ice", "ether"],
           "resistances": [],
           "immunities": [],
           "tags": [],
@@ -477,20 +447,11 @@
             "ether": 2500,
             "physical": 3600
           },
-          "weaknesses": [
-            "electric",
-            "ether"
-          ],
+          "weaknesses": ["electric", "ether"],
           "resistances": [],
-          "immunities": [
-            "freeze"
-          ],
-          "tags": [
-            "ucc"
-          ],
-          "mods": [
-            "no-freeze"
-          ],
+          "immunities": ["freeze"],
+          "tags": ["ucc"],
+          "mods": ["no-freeze"],
           "description": "• When dealing sufficient DMG to the boss enemy's legs, <span style='color:#ca9a00;font-weight:bold;'>IMPAIRED!!</span> will be triggered. Upon successfully breaking the boss enemy's legs, the Agent restores <span style='color:#2bad00;font-weight:bold;'>1000</span> Decibels, and the boss gains 1 stack of <span style='font-weight:bold;'>Disintegration</span> for 20 seconds, up to a maximum of 4 stacks. When the Agent's attacks hit an enemy, for each stack of <span style='font-weight:bold;'>Disintegration</span> the target has, CRIT DMG is increased by <span style='color:#2bad00;font-weight:bold;'>25%</span>.",
           "performance": "• Successfully <span style='color:#ca9a00;font-weight:bold;'>impairing</span> an enemy grants <span style='color:#ffaf2c;font-weight:bold;'>800 Performance Points</span>. A maximum of 5000 Performance Points can be obtained.",
           "misc": ""
@@ -522,20 +483,11 @@
             "ether": 3300,
             "physical": 3960
           },
-          "weaknesses": [
-            "fire"
-          ],
-          "resistances": [
-            "electric"
-          ],
-          "immunities": [
-            "freeze"
-          ],
+          "weaknesses": ["fire"],
+          "resistances": ["electric"],
+          "immunities": ["freeze"],
           "tags": [],
-          "mods": [
-            "40-dmg-res",
-            "no-freeze"
-          ],
+          "mods": ["40-dmg-res", "no-freeze"],
           "description": "• Boss enemies gain 1 stack of <span style='font-weight:bold;'>Battle-Hardened</span> every 10s, increasing their DMG dealt by <span style='color:#cc0000;font-weight:bold;'>20%</span> and stacking up to 3 times. When inflicting <span style='color:#7756c6;font-weight:bold;'>Attribute Anomaly</span>, removes 1 stack of <span style='font-weight:bold;'>Battle-Hardened</span> and increases their DMG taken by <span style='color:#2bad00;font-weight:bold;'>15%</span> for 20s.",
           "performance": "• Successfully inflicting <span style='color:#7756c6;font-weight:bold;'>Attribute Anomaly</span> on enemies grants <span style='color:#ffaf2c;font-weight:bold;'>150 Performance Points</span>. A maximum of 5000 Performance Points can be obtained.",
           "misc": ""
@@ -604,10 +556,7 @@
             "ether": 2750,
             "physical": 3960
           },
-          "weaknesses": [
-            "ice",
-            "ether"
-          ],
+          "weaknesses": ["ice", "ether"],
           "resistances": [],
           "immunities": [],
           "tags": [],
@@ -643,12 +592,8 @@
             "ether": 3300,
             "physical": 3960
           },
-          "weaknesses": [
-            "electric"
-          ],
-          "resistances": [
-            "fire"
-          ],
+          "weaknesses": ["electric"],
+          "resistances": ["fire"],
           "immunities": [],
           "tags": [],
           "mods": [],
@@ -683,10 +628,7 @@
             "ether": 2750,
             "physical": 3960
           },
-          "weaknesses": [
-            "ice",
-            "ether"
-          ],
+          "weaknesses": ["ice", "ether"],
           "resistances": [],
           "immunities": [],
           "tags": [],
@@ -759,20 +701,11 @@
             "ether": 3300,
             "physical": 3960
           },
-          "weaknesses": [
-            "fire"
-          ],
-          "resistances": [
-            "electric"
-          ],
-          "immunities": [
-            "freeze"
-          ],
+          "weaknesses": ["fire"],
+          "resistances": ["electric"],
+          "immunities": ["freeze"],
           "tags": [],
-          "mods": [
-            "40-dmg-res",
-            "no-freeze"
-          ],
+          "mods": ["40-dmg-res", "no-freeze"],
           "description": "• When not in a <span style='color:#ffe599;font-weight:bold;'>Stunned</span> state, Boss enemies gain 1 stack of <span style='font-weight:bold;'>All or Nothing</span> every 6s, stacking up to 3 stacks. Each stack of <span style='font-weight:bold;'>All or Nothing</span> increases the damage dealt by the Boss enemy by <span style='color:#cc0000;font-weight:bold;'>10%</span>. When an Agent's attack hits an enemy, the Agent's CRIT DMG increases by <span style='color:#2bad00;font-weight:bold;'>25%</span> for each stack of <span style='font-weight:bold;'>All or Nothing</span> the target has. <span style='font-weight:bold;'>All or Nothing</span> stacks will be reset when the enemy recovers from being Stunned.",
           "performance": "• Successfully triggering <span style='font-weight:bold;'>Perfect Dodge</span> grants <span style='color:#ffaf2c;font-weight:bold;'>200 Performance Points</span>. A maximum of 5000 Performance Points can be obtained.",
           "misc": ""
@@ -804,12 +737,8 @@
             "ether": 3300,
             "physical": 4950
           },
-          "weaknesses": [
-            "ice"
-          ],
-          "resistances": [
-            "physical"
-          ],
+          "weaknesses": ["ice"],
+          "resistances": ["physical"],
           "immunities": [],
           "tags": [],
           "mods": [],
@@ -844,10 +773,7 @@
             "ether": 2500,
             "physical": 3600
           },
-          "weaknesses": [
-            "ice",
-            "ether"
-          ],
+          "weaknesses": ["ice", "ether"],
           "resistances": [],
           "immunities": [],
           "tags": [],
@@ -928,20 +854,11 @@
             "ether": 2500,
             "physical": 3600
           },
-          "weaknesses": [
-            "electric",
-            "ether"
-          ],
+          "weaknesses": ["electric", "ether"],
           "resistances": [],
-          "immunities": [
-            "freeze"
-          ],
-          "tags": [
-            "ucc"
-          ],
-          "mods": [
-            "no-freeze"
-          ],
+          "immunities": ["freeze"],
+          "tags": ["ucc"],
+          "mods": ["no-freeze"],
           "description": "• When dealing sufficient DMG to the boss enemy's legs, <span style='color:#ca9a00;font-weight:bold;'>IMPAIRED!!</span> will be triggered. Upon successfully breaking the boss enemy's legs, the Agent restores <span style='color:#2bad00;font-weight:bold;'>1000</span> Decibels, and the boss gains 1 stack of <span style='font-weight:bold;'>Disintegration</span> for 20 seconds, up to a maximum of 4 stacks. When the Agent's attacks hit an enemy, for each stack of <span style='font-weight:bold;'>Disintegration</span> the target has, CRIT DMG is increased by <span style='color:#2bad00;font-weight:bold;'>25%</span>.",
           "performance": "• Successfully <span style='color:#ca9a00;font-weight:bold;'>impairing</span> an enemy grants <span style='color:#ffaf2c;font-weight:bold;'>800 Performance Points</span>. A maximum of 5000 Performance Points can be obtained.",
           "misc": ""
@@ -973,12 +890,8 @@
             "ether": 3300,
             "physical": 4950
           },
-          "weaknesses": [
-            "ice"
-          ],
-          "resistances": [
-            "physical"
-          ],
+          "weaknesses": ["ice"],
+          "resistances": ["physical"],
           "immunities": [],
           "tags": [],
           "mods": [],
@@ -1013,20 +926,11 @@
             "ether": 3300,
             "physical": 3960
           },
-          "weaknesses": [
-            "fire"
-          ],
-          "resistances": [
-            "electric"
-          ],
-          "immunities": [
-            "freeze"
-          ],
+          "weaknesses": ["fire"],
+          "resistances": ["electric"],
+          "immunities": ["freeze"],
           "tags": [],
-          "mods": [
-            "40-dmg-res",
-            "no-freeze"
-          ],
+          "mods": ["40-dmg-res", "no-freeze"],
           "description": "• When the Agent hits the boss enemy with a <span style='font-weight:bold;'>Defensive Assist</span> or <span style='font-weight:bold;'>Chain Attack</span>, they apply 1 stack of <span style='font-weight:bold;'>Weakening</span> to the target, lasting 20s. The duration of each stack is calculated separately. For each stack of <span style='font-weight:bold;'>Weakening</span> on the target, Agent CRIT DMG is increased by <span style='color:#2bad00;font-weight:bold;'>15%</span>. When the boss enemy has 4 stacks of <span style='font-weight:bold;'>Weakening</span>, <span style='font-weight:bold;'>Defensive Assist</span> will deflect the boss enemy's attack, causing a Stagger effect.",
           "performance": "• Successfully triggering <span style='font-weight:bold;'>Perfect Assist</span> grants <span style='color:#ffaf2c;font-weight:bold;'>300 Performance Points</span>. A maximum of 5000 Performance Points can be obtained.",
           "misc": ""
@@ -1103,20 +1007,11 @@
             "ether": 2500,
             "physical": 3600
           },
-          "weaknesses": [
-            "electric",
-            "ether"
-          ],
+          "weaknesses": ["electric", "ether"],
           "resistances": [],
-          "immunities": [
-            "freeze"
-          ],
-          "tags": [
-            "ucc"
-          ],
-          "mods": [
-            "no-freeze"
-          ],
+          "immunities": ["freeze"],
+          "tags": ["ucc"],
+          "mods": ["no-freeze"],
           "description": "• When dealing sufficient DMG to the boss enemy's legs, <span style='color:#ca9a00;font-weight:bold;'>IMPAIRED!!</span> will be triggered. Upon successfully breaking the boss enemy's legs, the Agent restores <span style='color:#2bad00;font-weight:bold;'>1000</span> Decibels, and the boss gains 1 stack of <span style='font-weight:bold;'>Disintegration</span> for 20 seconds, up to a maximum of 4 stacks. When the Agent's attacks hit an enemy, for each stack of <span style='font-weight:bold;'>Disintegration</span> the target has, CRIT DMG is increased by <span style='color:#2bad00;font-weight:bold;'>25%</span>.",
           "performance": "• Successfully <span style='color:#ca9a00;font-weight:bold;'>impairing</span> an enemy grants <span style='color:#ffaf2c;font-weight:bold;'>800 Performance Points</span>. A maximum of 5000 Performance Points can be obtained.",
           "misc": ""
@@ -1148,20 +1043,11 @@
             "ether": 3300,
             "physical": 3960
           },
-          "weaknesses": [
-            "fire"
-          ],
-          "resistances": [
-            "electric"
-          ],
-          "immunities": [
-            "freeze"
-          ],
+          "weaknesses": ["fire"],
+          "resistances": ["electric"],
+          "immunities": ["freeze"],
           "tags": [],
-          "mods": [
-            "40-dmg-res",
-            "no-freeze"
-          ],
+          "mods": ["40-dmg-res", "no-freeze"],
           "description": "• Boss enemies gain 1 stack of <span style='font-weight:bold;'>Battle-Hardened</span> every 10s, increasing their DMG dealt by <span style='color:#cc0000;font-weight:bold;'>20%</span> and stacking up to 3 times. When inflicting <span style='color:#7756c6;font-weight:bold;'>Attribute Anomaly</span>, removes 1 stack of <span style='font-weight:bold;'>Battle-Hardened</span> and increases their DMG taken by <span style='color:#2bad00;font-weight:bold;'>15%</span> for 20s.",
           "performance": "• Successfully triggering <span style='font-weight:bold;'>Perfect Dodge</span> grants <span style='color:#ffaf2c;font-weight:bold;'>200 Performance Points</span>. A maximum of 5000 Performance Points can be obtained.",
           "misc": ""
@@ -1193,12 +1079,8 @@
             "ether": 3300,
             "physical": 3960
           },
-          "weaknesses": [
-            "electric"
-          ],
-          "resistances": [
-            "fire"
-          ],
+          "weaknesses": ["electric"],
+          "resistances": ["fire"],
           "immunities": [],
           "tags": [],
           "mods": [],
@@ -1270,10 +1152,7 @@
             "ether": 2750,
             "physical": 3960
           },
-          "weaknesses": [
-            "ice",
-            "ether"
-          ],
+          "weaknesses": ["ice", "ether"],
           "resistances": [],
           "immunities": [],
           "tags": [],
@@ -1309,12 +1188,8 @@
             "ether": 3300,
             "physical": 3960
           },
-          "weaknesses": [
-            "electric"
-          ],
-          "resistances": [
-            "fire"
-          ],
+          "weaknesses": ["electric"],
+          "resistances": ["fire"],
           "immunities": [],
           "tags": [],
           "mods": [],
@@ -1349,20 +1224,11 @@
             "ether": 3300,
             "physical": 3960
           },
-          "weaknesses": [
-            "fire"
-          ],
-          "resistances": [
-            "electric"
-          ],
-          "immunities": [
-            "freeze"
-          ],
+          "weaknesses": ["fire"],
+          "resistances": ["electric"],
+          "immunities": ["freeze"],
           "tags": [],
-          "mods": [
-            "40-dmg-res",
-            "no-freeze"
-          ],
+          "mods": ["40-dmg-res", "no-freeze"],
           "description": "• When the Agent hits the boss enemy with a <span style='font-weight:bold;'>Defensive Assist</span> or <span style='font-weight:bold;'>Chain Attack</span>, they apply 1 stack of <span style='font-weight:bold;'>Weakening</span> to the target, lasting 20s. The duration of each stack is calculated separately. For each stack of <span style='font-weight:bold;'>Weakening</span> on the target, Agent CRIT DMG is increased by <span style='color:#2bad00;font-weight:bold;'>15%</span>. When the boss enemy has 4 stacks of <span style='font-weight:bold;'>Weakening</span>, <span style='font-weight:bold;'>Defensive Assist</span> will deflect the boss enemy's attack, causing a Stagger effect.",
           "performance": "• Successfully triggering a <span style='font-weight:bold;'>Perfect Assist</span> grants <span style='color:#ffaf2c;font-weight:bold;'>350 Performance Points</span>. A maximum of 5000 Performance Points can be obtained.",
           "misc": ""
@@ -1431,10 +1297,7 @@
             "ether": 2500,
             "physical": 3600
           },
-          "weaknesses": [
-            "ice",
-            "ether"
-          ],
+          "weaknesses": ["ice", "ether"],
           "resistances": [],
           "immunities": [],
           "tags": [],
@@ -1470,12 +1333,8 @@
             "ether": 3300,
             "physical": 4950
           },
-          "weaknesses": [
-            "ice"
-          ],
-          "resistances": [
-            "physical"
-          ],
+          "weaknesses": ["ice"],
+          "resistances": ["physical"],
           "immunities": [],
           "tags": [],
           "mods": [],
@@ -1518,20 +1377,11 @@
             "ether": 2500,
             "physical": 3600
           },
-          "weaknesses": [
-            "electric",
-            "ether"
-          ],
+          "weaknesses": ["electric", "ether"],
           "resistances": [],
-          "immunities": [
-            "freeze"
-          ],
-          "tags": [
-            "ucc"
-          ],
-          "mods": [
-            "no-freeze"
-          ],
+          "immunities": ["freeze"],
+          "tags": ["ucc"],
+          "mods": ["no-freeze"],
           "description": "• When dealing sufficient DMG to the boss enemy's legs, <span style='color:#ca9a00;font-weight:bold;'>IMPAIRED!!</span> will be triggered. Upon successfully breaking the boss enemy's legs, the Agent restores <span style='color:#2bad00;font-weight:bold;'>1000</span> Decibels, and the boss gains 1 stack of <span style='font-weight:bold;'>Disintegration</span> for 20 seconds, up to a maximum of 4 stacks. When the Agent's attacks hit an enemy, for each stack of <span style='font-weight:bold;'>Disintegration</span> the target has, CRIT DMG is increased by <span style='color:#2bad00;font-weight:bold;'>25%</span>.",
           "performance": "• Successfully <span style='color:#ca9a00;font-weight:bold;'>impairing</span> an enemy grants <span style='color:#ffaf2c;font-weight:bold;'>800 Performance Points</span>. A maximum of 5000 Performance Points can be obtained.",
           "misc": ""
@@ -1600,12 +1450,8 @@
             "ether": 3300,
             "physical": 4950
           },
-          "weaknesses": [
-            "ice"
-          ],
-          "resistances": [
-            "physical"
-          ],
+          "weaknesses": ["ice"],
+          "resistances": ["physical"],
           "immunities": [],
           "tags": [],
           "mods": [],
@@ -1648,20 +1494,11 @@
             "ether": 2500,
             "physical": 3600
           },
-          "weaknesses": [
-            "electric",
-            "ether"
-          ],
+          "weaknesses": ["electric", "ether"],
           "resistances": [],
-          "immunities": [
-            "freeze"
-          ],
-          "tags": [
-            "ucc"
-          ],
-          "mods": [
-            "no-freeze"
-          ],
+          "immunities": ["freeze"],
+          "tags": ["ucc"],
+          "mods": ["no-freeze"],
           "description": "• When dealing sufficient DMG to the boss enemy's legs, <span style='color:#ca9a00;font-weight:bold;'>IMPAIRED!!</span> will be triggered. Upon successfully breaking the boss enemy's legs, the Agent restores <span style='color:#2bad00;font-weight:bold;'>1000</span> Decibels, and the boss gains 1 stack of <span style='font-weight:bold;'>Disintegration</span> for 20 seconds, up to a maximum of 4 stacks. When the Agent's attacks hit an enemy, for each stack of <span style='font-weight:bold;'>Disintegration</span> the target has, CRIT DMG is increased by <span style='color:#2bad00;font-weight:bold;'>25%</span>.",
           "performance": "• Successfully <span style='color:#ca9a00;font-weight:bold;'>impairing</span> an enemy grants <span style='color:#ffaf2c;font-weight:bold;'>800 Performance Points</span>. A maximum of 5000 Performance Points can be obtained.",
           "misc": ""
@@ -1693,20 +1530,11 @@
             "ether": 3300,
             "physical": 3960
           },
-          "weaknesses": [
-            "fire"
-          ],
-          "resistances": [
-            "electric"
-          ],
-          "immunities": [
-            "freeze"
-          ],
+          "weaknesses": ["fire"],
+          "resistances": ["electric"],
+          "immunities": ["freeze"],
           "tags": [],
-          "mods": [
-            "40-dmg-res",
-            "no-freeze"
-          ],
+          "mods": ["40-dmg-res", "no-freeze"],
           "description": "• Boss enemies gain 1 stack of <span style='font-weight:bold;'>Battle-Hardened</span> every 10s, increasing their DMG dealt by <span style='color:#cc0000;font-weight:bold;'>20%</span> and stacking up to 3 times. When inflicting <span style='color:#7756c6;font-weight:bold;'>Attribute Anomaly</span>, removes 1 stack of <span style='font-weight:bold;'>Battle-Hardened</span> and increases their DMG taken by <span style='color:#2bad00;font-weight:bold;'>15%</span> for 20s.",
           "performance": "• Successfully triggering <span style='font-weight:bold;'>Perfect Dodge</span> grants <span style='color:#ffaf2c;font-weight:bold;'>200 Performance Points</span>. A maximum of 5000 Performance Points can be obtained.",
           "misc": ""
@@ -1775,10 +1603,7 @@
             "ether": 2750,
             "physical": 3960
           },
-          "weaknesses": [
-            "ice",
-            "ether"
-          ],
+          "weaknesses": ["ice", "ether"],
           "resistances": [],
           "immunities": [],
           "tags": [],
@@ -1814,10 +1639,7 @@
             "ether": 2750,
             "physical": 3960
           },
-          "weaknesses": [
-            "ice",
-            "ether"
-          ],
+          "weaknesses": ["ice", "ether"],
           "resistances": [],
           "immunities": [],
           "tags": [],
@@ -1853,12 +1675,8 @@
             "ether": 3300,
             "physical": 3960
           },
-          "weaknesses": [
-            "electric"
-          ],
-          "resistances": [
-            "fire"
-          ],
+          "weaknesses": ["electric"],
+          "resistances": ["fire"],
           "immunities": [],
           "tags": [],
           "mods": [],
@@ -1930,10 +1748,7 @@
             "ether": 2750,
             "physical": 3960
           },
-          "weaknesses": [
-            "ice",
-            "ether"
-          ],
+          "weaknesses": ["ice", "ether"],
           "resistances": [],
           "immunities": [],
           "tags": [],
@@ -1969,12 +1784,8 @@
             "ether": 3300,
             "physical": 4950
           },
-          "weaknesses": [
-            "ice"
-          ],
-          "resistances": [
-            "physical"
-          ],
+          "weaknesses": ["ice"],
+          "resistances": ["physical"],
           "immunities": [],
           "tags": [],
           "mods": [],
@@ -2009,20 +1820,11 @@
             "ether": 3300,
             "physical": 3960
           },
-          "weaknesses": [
-            "fire"
-          ],
-          "resistances": [
-            "electric"
-          ],
-          "immunities": [
-            "freeze"
-          ],
+          "weaknesses": ["fire"],
+          "resistances": ["electric"],
+          "immunities": ["freeze"],
           "tags": [],
-          "mods": [
-            "40-dmg-res",
-            "no-freeze"
-          ],
+          "mods": ["40-dmg-res", "no-freeze"],
           "description": "• When the Agent hits the boss enemy with a <span style='font-weight:bold;'>Defensive Assist</span> or <span style='font-weight:bold;'>Chain Attack</span>, they apply 1 stack of <span style='font-weight:bold;'>Weakening</span> to the target, lasting 20s. The duration of each stack is calculated separately. For each stack of <span style='font-weight:bold;'>Weakening</span> on the target, Agent CRIT DMG is increased by <span style='color:#2bad00;font-weight:bold;'>15%</span>. When the boss enemy has 4 stacks of <span style='font-weight:bold;'>Weakening</span>, <span style='font-weight:bold;'>Defensive Assist</span> will deflect the boss enemy's attack, causing a Stagger effect.",
           "performance": "• Successfully triggering a <span style='font-weight:bold;'>Perfect Assist</span> grants <span style='color:#ffaf2c;font-weight:bold;'>350 Performance Points</span>. A maximum of 5000 Performance Points can be obtained.",
           "misc": ""
@@ -2098,22 +1900,11 @@
             "ether": 3000,
             "physical": 4320
           },
-          "weaknesses": [
-            "ether"
-          ],
-          "resistances": [
-            "ice"
-          ],
-          "immunities": [
-            "freeze"
-          ],
-          "tags": [
-            "miasma"
-          ],
-          "mods": [
-            "40-dmg-res",
-            "no-freeze"
-          ],
+          "weaknesses": ["ether"],
+          "resistances": ["ice"],
+          "immunities": ["freeze"],
+          "tags": ["miasma"],
+          "mods": ["40-dmg-res", "no-freeze"],
           "description": "• When the Miasma Priest switches phase, their <span style='color:#7756c6;font-weight:bold;'>Anomaly Buildup RES</span> increases by <span style='color:#cc0000;font-weight:bold;'>10%</span> and CRIT DMG taken increases by <span style='color:#2bad00;font-weight:bold;'>30%</span>. This effect can stack up to 2 times and is cleared when Miasmic Shield breaks.",
           "performance": "• When an Agent successfully performs 3 <span style='font-weight:bold;'>Defensive Assists</span> within 3 seconds</span>, earn <span style='color:#ffaf2c;font-weight:bold;'>1000 Performance Points</span>. A maximum of 5000 Performance Points can be obtained.",
           "misc": "• Suitable for Agents with <span style='font-weight:bold;'>Rupture</span> specialty."
@@ -2145,10 +1936,7 @@
             "ether": 2750,
             "physical": 3960
           },
-          "weaknesses": [
-            "ice",
-            "ether"
-          ],
+          "weaknesses": ["ice", "ether"],
           "resistances": [],
           "immunities": [],
           "tags": [],
@@ -2184,20 +1972,11 @@
             "ether": 3300,
             "physical": 3960
           },
-          "weaknesses": [
-            "fire"
-          ],
-          "resistances": [
-            "electric"
-          ],
-          "immunities": [
-            "freeze"
-          ],
+          "weaknesses": ["fire"],
+          "resistances": ["electric"],
+          "immunities": ["freeze"],
           "tags": [],
-          "mods": [
-            "40-dmg-res",
-            "no-freeze"
-          ],
+          "mods": ["40-dmg-res", "no-freeze"],
           "description": "• When the Agent hits the boss enemy with a <span style='font-weight:bold;'>Defensive Assist</span> or <span style='font-weight:bold;'>Chain Attack</span>, they apply 1 stack of <span style='font-weight:bold;'>Weakening</span> to the target, lasting 20s. The duration of each stack is calculated separately. For each stack of <span style='font-weight:bold;'>Weakening</span> on the target, Agent CRIT DMG is increased by <span style='color:#2bad00;font-weight:bold;'>15%</span>. When the boss enemy has 4 stacks of <span style='font-weight:bold;'>Weakening</span>, <span style='font-weight:bold;'>Defensive Assist</span> will deflect the boss enemy's attack, causing a Stagger effect.",
           "performance": "• Successfully triggering a <span style='font-weight:bold;'>Perfect Assist</span> grants <span style='color:#ffaf2c;font-weight:bold;'>350 Performance Points</span>. A maximum of 5000 Performance Points can be obtained.",
           "misc": ""
@@ -2266,20 +2045,11 @@
             "ether": 3300,
             "physical": 3960
           },
-          "weaknesses": [
-            "fire"
-          ],
-          "resistances": [
-            "electric"
-          ],
-          "immunities": [
-            "freeze"
-          ],
+          "weaknesses": ["fire"],
+          "resistances": ["electric"],
+          "immunities": ["freeze"],
           "tags": [],
-          "mods": [
-            "40-dmg-res",
-            "no-freeze"
-          ],
+          "mods": ["40-dmg-res", "no-freeze"],
           "description": "• When the Agent hits the boss enemy with a <span style='font-weight:bold;'>Defensive Assist</span> or <span style='font-weight:bold;'>Chain Attack</span>, they apply 1 stack of <span style='font-weight:bold;'>Weakening</span> to the target, lasting 20s. The duration of each stack is calculated separately. For each stack of <span style='font-weight:bold;'>Weakening</span> on the target, Agent CRIT DMG is increased by <span style='color:#2bad00;font-weight:bold;'>15%</span>. When the boss enemy has 4 stacks of <span style='font-weight:bold;'>Weakening</span>, <span style='font-weight:bold;'>Defensive Assist</span> will deflect the boss enemy's attack, causing a Stagger effect.",
           "performance": "• Successfully triggering a <span style='font-weight:bold;'>Perfect Assist</span> grants <span style='color:#ffaf2c;font-weight:bold;'>350 Performance Points</span>. A maximum of 5000 Performance Points can be obtained.",
           "misc": ""
@@ -2319,20 +2089,11 @@
             "ether": 2500,
             "physical": 3600
           },
-          "weaknesses": [
-            "electric",
-            "ether"
-          ],
+          "weaknesses": ["electric", "ether"],
           "resistances": [],
-          "immunities": [
-            "freeze"
-          ],
-          "tags": [
-            "ucc"
-          ],
-          "mods": [
-            "no-freeze"
-          ],
+          "immunities": ["freeze"],
+          "tags": ["ucc"],
+          "mods": ["no-freeze"],
           "description": "• When dealing sufficient DMG to the boss enemy's legs, <span style='color:#ca9a00;font-weight:bold;'>IMPAIRED!!</span> will be triggered. Upon successfully breaking the boss enemy's legs, the Agent restores <span style='color:#2bad00;font-weight:bold;'>1000</span> Decibels, and the boss gains 1 stack of <span style='font-weight:bold;'>Disintegration</span> for 20 seconds, up to a maximum of 4 stacks. When the Agent's attacks hit an enemy, for each stack of <span style='font-weight:bold;'>Disintegration</span> the target has, CRIT DMG is increased by <span style='color:#2bad00;font-weight:bold;'>25%</span>.",
           "performance": "• Successfully <span style='color:#ca9a00;font-weight:bold;'>impairing</span> an enemy grants <span style='color:#ffaf2c;font-weight:bold;'>800 Performance Points</span>. A maximum of 5000 Performance Points can be obtained.",
           "misc": ""
@@ -2364,12 +2125,8 @@
             "ether": 3300,
             "physical": 4950
           },
-          "weaknesses": [
-            "ice"
-          ],
-          "resistances": [
-            "physical"
-          ],
+          "weaknesses": ["ice"],
+          "resistances": ["physical"],
           "immunities": [],
           "tags": [],
           "mods": [],
@@ -2448,22 +2205,11 @@
             "ether": 3000,
             "physical": 4320
           },
-          "weaknesses": [
-            "ether"
-          ],
-          "resistances": [
-            "ice"
-          ],
-          "immunities": [
-            "freeze"
-          ],
-          "tags": [
-            "miasma"
-          ],
-          "mods": [
-            "40-dmg-res",
-            "no-freeze"
-          ],
+          "weaknesses": ["ether"],
+          "resistances": ["ice"],
+          "immunities": ["freeze"],
+          "tags": ["miasma"],
+          "mods": ["40-dmg-res", "no-freeze"],
           "description": "• When the Miasma Priest switches phase, their <span style='color:#7756c6;font-weight:bold;'>Anomaly Buildup RES</span> increases by <span style='color:#cc0000;font-weight:bold;'>10%</span> and CRIT DMG taken increases by <span style='color:#2bad00;font-weight:bold;'>30%</span>. This effect can stack up to 2 times and is cleared when Miasmic Shield breaks.",
           "performance": "• When an Agent successfully performs 3 <span style='font-weight:bold;'>Defensive Assists</span> within 3 seconds</span>, earn <span style='color:#ffaf2c;font-weight:bold;'>1000 Performance Points</span>. A maximum of 5000 Performance Points can be obtained.",
           "misc": "• Suitable for Agents with <span style='font-weight:bold;'>Rupture</span> specialty."
@@ -2495,20 +2241,11 @@
             "ether": 3300,
             "physical": 3960
           },
-          "weaknesses": [
-            "fire"
-          ],
-          "resistances": [
-            "electric"
-          ],
-          "immunities": [
-            "freeze"
-          ],
+          "weaknesses": ["fire"],
+          "resistances": ["electric"],
+          "immunities": ["freeze"],
           "tags": [],
-          "mods": [
-            "40-dmg-res",
-            "no-freeze"
-          ],
+          "mods": ["40-dmg-res", "no-freeze"],
           "description": "• Boss enemies gain 1 stack of <span style='font-weight:bold;'>Battle-Hardened</span> every 10s, increasing their DMG dealt by <span style='color:#cc0000;font-weight:bold;'>20%</span> and stacking up to 3 times. When inflicting <span style='color:#7756c6;font-weight:bold;'>Attribute Anomaly</span>, removes 1 stack of <span style='font-weight:bold;'>Battle-Hardened</span> and increases their DMG taken by <span style='color:#2bad00;font-weight:bold;'>15%</span> for 20s.",
           "performance": "• Successfully triggering <span style='font-weight:bold;'>Perfect Dodge</span> grants <span style='color:#ffaf2c;font-weight:bold;'>200 Performance Points</span>. A maximum of 5000 Performance Points can be obtained.",
           "misc": ""
@@ -2540,10 +2277,7 @@
             "ether": 2750,
             "physical": 3960
           },
-          "weaknesses": [
-            "ice",
-            "ether"
-          ],
+          "weaknesses": ["ice", "ether"],
           "resistances": [],
           "immunities": [],
           "tags": [],
@@ -2623,22 +2357,11 @@
             "ether": 3300,
             "physical": 4752
           },
-          "weaknesses": [
-            "ether"
-          ],
-          "resistances": [
-            "ice"
-          ],
-          "immunities": [
-            "freeze"
-          ],
-          "tags": [
-            "miasma"
-          ],
-          "mods": [
-            "40-dmg-res",
-            "no-freeze"
-          ],
+          "weaknesses": ["ether"],
+          "resistances": ["ice"],
+          "immunities": ["freeze"],
+          "tags": ["miasma"],
+          "mods": ["40-dmg-res", "no-freeze"],
           "description": "• When the Miasma Priest switches phase, their <span style='color:#7756c6;font-weight:bold;'>Anomaly Buildup RES</span> increases by <span style='color:#cc0000;font-weight:bold;'>10%</span> and CRIT DMG taken increases by <span style='color:#2bad00;font-weight:bold;'>30%</span>. This effect can stack up to 2 times and is cleared when Miasmic Shield breaks.",
           "performance": "• When an Agent successfully performs 3 <span style='font-weight:bold;'>Defensive Assists</span> within 3 seconds</span>, earn <span style='color:#ffaf2c;font-weight:bold;'>1000 Performance Points</span>. A maximum of 5000 Performance Points can be obtained.",
           "misc": "• Suitable for Agents with <span style='font-weight:bold;'>Rupture</span> specialty."
@@ -2677,23 +2400,11 @@
             "ether": 3300,
             "physical": 3960
           },
-          "weaknesses": [
-            "ether",
-            "physical"
-          ],
-          "resistances": [
-            "fire"
-          ],
-          "immunities": [
-            "freeze"
-          ],
-          "tags": [
-            "miasma"
-          ],
-          "mods": [
-            "40-dmg-res",
-            "no-freeze"
-          ],
+          "weaknesses": ["ether", "physical"],
+          "resistances": ["fire"],
+          "immunities": ["freeze"],
+          "tags": ["miasma"],
+          "mods": ["40-dmg-res", "no-freeze"],
           "description": "• When Miasmic Fiend is affected by <span style='color:#7756c6;font-weight:bold;'>Attribute Anomaly</span>, it takes <span style='color:#2bad00;font-weight:bold;'>8%</span> bonus <span style='color:#7756c6;font-weight:bold;'>Anomaly DMG</span> from Agents, stacking up to 6 times; activating Miasmic Shield clears all stacks, with each stack increasing the reduction efficiency of Miasmic Shield by <span style='color:#2bad00;font-weight:bold;'>2.5%</span>.",
           "performance": "• When Agents bait Miasmic Fiend's ground attack into detonating at least 5 Miasma Pools at once and avoid being hit by the attack and pool explosions, they will earn <span style='color:#ffaf2c;font-weight:bold;'>1700 Performance Points</span>, up to a maximum of 5000 Performance Points.",
           "misc": "• Suitable for Agents with <span style='font-weight:bold;'>Anomaly</span> specialty."
@@ -2725,20 +2436,11 @@
             "ether": 3630,
             "physical": 4356
           },
-          "weaknesses": [
-            "fire"
-          ],
-          "resistances": [
-            "electric"
-          ],
-          "immunities": [
-            "freeze"
-          ],
+          "weaknesses": ["fire"],
+          "resistances": ["electric"],
+          "immunities": ["freeze"],
           "tags": [],
-          "mods": [
-            "40-dmg-res",
-            "no-freeze"
-          ],
+          "mods": ["40-dmg-res", "no-freeze"],
           "description": "• When the Agent hits the boss enemy with a <span style='font-weight:bold;'>Defensive Assist</span> or <span style='font-weight:bold;'>Chain Attack</span>, they apply 1 stack of <span style='font-weight:bold;'>Weakening</span> to the target, lasting 20s. The duration of each stack is calculated separately. For each stack of <span style='font-weight:bold;'>Weakening</span> on the target, Agent CRIT DMG is increased by <span style='color:#2bad00;font-weight:bold;'>15%</span>. When the boss enemy has 4 stacks of <span style='font-weight:bold;'>Weakening</span>, <span style='font-weight:bold;'>Defensive Assist</span> will deflect the boss enemy's attack, causing a Stagger effect.",
           "performance": "• Successfully triggering a <span style='font-weight:bold;'>Perfect Assist</span> grants <span style='color:#ffaf2c;font-weight:bold;'>350 Performance Points</span>. A maximum of 5000 Performance Points can be obtained.",
           "misc": ""
@@ -2814,23 +2516,11 @@
             "ether": 3300,
             "physical": 3960
           },
-          "weaknesses": [
-            "ether",
-            "physical"
-          ],
-          "resistances": [
-            "fire"
-          ],
-          "immunities": [
-            "freeze"
-          ],
-          "tags": [
-            "miasma"
-          ],
-          "mods": [
-            "40-dmg-res",
-            "no-freeze"
-          ],
+          "weaknesses": ["ether", "physical"],
+          "resistances": ["fire"],
+          "immunities": ["freeze"],
+          "tags": ["miasma"],
+          "mods": ["40-dmg-res", "no-freeze"],
           "description": "• When Miasmic Fiend is affected by <span style='color:#7756c6;font-weight:bold;'>Attribute Anomaly</span>, it takes <span style='color:#2bad00;font-weight:bold;'>8%</span> bonus <span style='color:#7756c6;font-weight:bold;'>Anomaly DMG</span> from Agents, stacking up to 6 times; activating Miasmic Shield clears all stacks, with each stack increasing the reduction efficiency of Miasmic Shield by <span style='color:#2bad00;font-weight:bold;'>2.5%</span>.",
           "performance": "• When Agents bait Miasmic Fiend's ground attack into detonating at least 5 Miasma Pools at once and avoid being hit by the attack and pool explosions, they will earn <span style='color:#ffaf2c;font-weight:bold;'>1700 Performance Points</span>, up to a maximum of 5000 Performance Points.",
           "misc": "• Suitable for Agents with <span style='font-weight:bold;'>Anomaly</span> specialty."
@@ -2862,10 +2552,7 @@
             "ether": 3025,
             "physical": 4356
           },
-          "weaknesses": [
-            "ice",
-            "ether"
-          ],
+          "weaknesses": ["ice", "ether"],
           "resistances": [],
           "immunities": [],
           "tags": [],
@@ -2901,10 +2588,7 @@
             "ether": 3025,
             "physical": 4356
           },
-          "weaknesses": [
-            "ice",
-            "ether"
-          ],
+          "weaknesses": ["ice", "ether"],
           "resistances": [],
           "immunities": [],
           "tags": [],
@@ -2977,10 +2661,7 @@
             "ether": 3025,
             "physical": 4356
           },
-          "weaknesses": [
-            "ice",
-            "ether"
-          ],
+          "weaknesses": ["ice", "ether"],
           "resistances": [],
           "immunities": [],
           "tags": [],
@@ -3023,22 +2704,11 @@
             "ether": 3300,
             "physical": 4752
           },
-          "weaknesses": [
-            "ether"
-          ],
-          "resistances": [
-            "ice"
-          ],
-          "immunities": [
-            "freeze"
-          ],
-          "tags": [
-            "miasma"
-          ],
-          "mods": [
-            "40-dmg-res",
-            "no-freeze"
-          ],
+          "weaknesses": ["ether"],
+          "resistances": ["ice"],
+          "immunities": ["freeze"],
+          "tags": ["miasma"],
+          "mods": ["40-dmg-res", "no-freeze"],
           "description": "• When the Miasma Priest switches phase, their <span style='color:#7756c6;font-weight:bold;'>Anomaly Buildup RES</span> increases by <span style='color:#cc0000;font-weight:bold;'>10%</span> and CRIT DMG taken increases by <span style='color:#2bad00;font-weight:bold;'>30%</span>. This effect can stack up to 2 times and is cleared when Miasmic Shield breaks.",
           "performance": "• When an Agent successfully performs 3 <span style='font-weight:bold;'>Defensive Assists</span> within 3 seconds</span>, earn <span style='color:#ffaf2c;font-weight:bold;'>1000 Performance Points</span>. A maximum of 5000 Performance Points can be obtained.",
           "misc": "• Suitable for Agents with <span style='font-weight:bold;'>Rupture</span> specialty."
@@ -3070,12 +2740,8 @@
             "ether": 3630,
             "physical": 4356
           },
-          "weaknesses": [
-            "electric"
-          ],
-          "resistances": [
-            "fire"
-          ],
+          "weaknesses": ["electric"],
+          "resistances": ["fire"],
           "immunities": [],
           "tags": [],
           "mods": [],
@@ -3154,23 +2820,11 @@
             "ether": 4356,
             "physical": 4356
           },
-          "weaknesses": [
-            "electric",
-            "physical"
-          ],
-          "resistances": [
-            "ice"
-          ],
-          "immunities": [
-            "freeze"
-          ],
-          "tags": [
-            "miasma"
-          ],
-          "mods": [
-            "40-dmg-res",
-            "no-freeze"
-          ],
+          "weaknesses": ["electric", "physical"],
+          "resistances": ["ice"],
+          "immunities": ["freeze"],
+          "tags": ["miasma"],
+          "mods": ["40-dmg-res", "no-freeze"],
           "description": "• When an Agent hits The Defiler with <span style='font-weight:bold;'>Defensive Assist</span>, the whole squad gains 1 stack of <span style='font-weight:bold;'>Adjudication</span>; when an Agent knocks down The Defiler attacking in mid-air, the whole squad gains 4 stacks of <span style='font-weight:bold;'>Adjudication</span>. <span style='font-weight:bold;'>Adjudication</span> can stack up to 6 times and lasts for 30 seconds. Repeated triggers reset the duration.<br>• For each stack of <span style='font-weight:bold;'>Adjudication</span>, the Agent's CRIT DMG increases by <span style='color:#2bad00;font-weight:bold;'>8%</span>.<br>• The Defiler receives <span style='color:#cc0000;font-weight:bold;'>25%</span> less <span style='color:#7756c6;font-weight:bold;'>Attribute Anomaly DMG</span>.",
           "performance": "• When an Agent causes <span style='color:#ca9a00;font-weight:bold;'>IMPAIRED!!</span> status, they gain <span style='color:#ffaf2c;font-weight:bold;'>2500 Performance Points</span>; when an Agent shoots down The Defiler while it's attacking in mid-air, they gain <span style='color:#ffaf2c;font-weight:bold;'>1500 Performance Points</span>, up to a maximum of 5000 Performance Points.",
           "misc": "• Suitable for Agents with <span style='font-weight:bold;'>Attack</span> specialty."
@@ -3209,23 +2863,11 @@
             "ether": 3300,
             "physical": 3960
           },
-          "weaknesses": [
-            "ether",
-            "physical"
-          ],
-          "resistances": [
-            "fire"
-          ],
-          "immunities": [
-            "freeze"
-          ],
-          "tags": [
-            "miasma"
-          ],
-          "mods": [
-            "40-dmg-res",
-            "no-freeze"
-          ],
+          "weaknesses": ["ether", "physical"],
+          "resistances": ["fire"],
+          "immunities": ["freeze"],
+          "tags": ["miasma"],
+          "mods": ["40-dmg-res", "no-freeze"],
           "description": "• When Miasmic Fiend is affected by <span style='color:#7756c6;font-weight:bold;'>Attribute Anomaly</span>, it takes <span style='color:#2bad00;font-weight:bold;'>8%</span> bonus <span style='color:#7756c6;font-weight:bold;'>Anomaly DMG</span> from Agents, stacking up to 6 times; activating Miasmic Shield clears all stacks, with each stack increasing the reduction efficiency of Miasmic Shield by <span style='color:#2bad00;font-weight:bold;'>2.5%</span>.",
           "performance": "• When Agents bait Miasmic Fiend's ground attack into detonating at least 5 Miasma Pools at once and avoid being hit by the attack and pool explosions, they will earn <span style='color:#ffaf2c;font-weight:bold;'>1700 Performance Points</span>, up to a maximum of 5000 Performance Points.",
           "misc": "• Suitable for Agents with <span style='font-weight:bold;'>Anomaly</span> specialty."
@@ -3264,22 +2906,11 @@
             "ether": 3300,
             "physical": 4752
           },
-          "weaknesses": [
-            "ether"
-          ],
-          "resistances": [
-            "ice"
-          ],
-          "immunities": [
-            "freeze"
-          ],
-          "tags": [
-            "miasma"
-          ],
-          "mods": [
-            "40-dmg-res",
-            "no-freeze"
-          ],
+          "weaknesses": ["ether"],
+          "resistances": ["ice"],
+          "immunities": ["freeze"],
+          "tags": ["miasma"],
+          "mods": ["40-dmg-res", "no-freeze"],
           "description": "• When the Miasma Priest switches phase, their <span style='color:#7756c6;font-weight:bold;'>Anomaly Buildup RES</span> increases by <span style='color:#cc0000;font-weight:bold;'>10%</span> and CRIT DMG taken increases by <span style='color:#2bad00;font-weight:bold;'>30%</span>. This effect can stack up to 2 times and is cleared when Miasmic Shield breaks.",
           "performance": "• When an Agent successfully performs 3 <span style='font-weight:bold;'>Defensive Assists</span> within 3 seconds</span>, earn <span style='color:#ffaf2c;font-weight:bold;'>1000 Performance Points</span>. A maximum of 5000 Performance Points can be obtained.",
           "misc": "• Suitable for Agents with <span style='font-weight:bold;'>Rupture</span> specialty."
@@ -3355,23 +2986,11 @@
             "ether": 4356,
             "physical": 4356
           },
-          "weaknesses": [
-            "electric",
-            "physical"
-          ],
-          "resistances": [
-            "ice"
-          ],
-          "immunities": [
-            "freeze"
-          ],
-          "tags": [
-            "miasma"
-          ],
-          "mods": [
-            "40-dmg-res",
-            "no-freeze"
-          ],
+          "weaknesses": ["electric", "physical"],
+          "resistances": ["ice"],
+          "immunities": ["freeze"],
+          "tags": ["miasma"],
+          "mods": ["40-dmg-res", "no-freeze"],
           "description": "• When an Agent hits The Defiler with <span style='font-weight:bold;'>Defensive Assist</span>, the whole squad gains 1 stack of <span style='font-weight:bold;'>Adjudication</span>; when an Agent knocks down The Defiler attacking in mid-air, the whole squad gains 4 stacks of <span style='font-weight:bold;'>Adjudication</span>. <span style='font-weight:bold;'>Adjudication</span> can stack up to 6 times and lasts for 30 seconds. Repeated triggers reset the duration.<br>• For each stack of <span style='font-weight:bold;'>Adjudication</span>, the Agent's CRIT DMG increases by <span style='color:#2bad00;font-weight:bold;'>8%</span>.<br>• The Defiler receives <span style='color:#cc0000;font-weight:bold;'>25%</span> less <span style='color:#7756c6;font-weight:bold;'>Attribute Anomaly DMG</span>.",
           "performance": "• When an Agent causes <span style='color:#ca9a00;font-weight:bold;'>IMPAIRED!!</span> status, they gain <span style='color:#ffaf2c;font-weight:bold;'>2500 Performance Points</span>; when an Agent shoots down The Defiler while it's attacking in mid-air, they gain <span style='color:#ffaf2c;font-weight:bold;'>1500 Performance Points</span>, up to a maximum of 5000 Performance Points.",
           "misc": "• Suitable for Agents with <span style='font-weight:bold;'>Attack</span> specialty."
@@ -3403,10 +3022,7 @@
             "ether": 3025,
             "physical": 4356
           },
-          "weaknesses": [
-            "ice",
-            "ether"
-          ],
+          "weaknesses": ["ice", "ether"],
           "resistances": [],
           "immunities": [],
           "tags": [],
@@ -3442,20 +3058,11 @@
             "ether": 3630,
             "physical": 4356
           },
-          "weaknesses": [
-            "fire"
-          ],
-          "resistances": [
-            "electric"
-          ],
-          "immunities": [
-            "freeze"
-          ],
+          "weaknesses": ["fire"],
+          "resistances": ["electric"],
+          "immunities": ["freeze"],
           "tags": [],
-          "mods": [
-            "40-dmg-res",
-            "no-freeze"
-          ],
+          "mods": ["40-dmg-res", "no-freeze"],
           "description": "• When the Agent hits the boss enemy with a <span style='font-weight:bold;'>Defensive Assist</span> or <span style='font-weight:bold;'>Chain Attack</span>, they apply 1 stack of <span style='font-weight:bold;'>Weakening</span> to the target, lasting 20s. The duration of each stack is calculated separately. For each stack of <span style='font-weight:bold;'>Weakening</span> on the target, Agent CRIT DMG is increased by <span style='color:#2bad00;font-weight:bold;'>15%</span>. When the boss enemy has 4 stacks of <span style='font-weight:bold;'>Weakening</span>, <span style='font-weight:bold;'>Defensive Assist</span> will deflect the boss enemy's attack, causing a Stagger effect.",
           "performance": "• Successfully triggering a <span style='font-weight:bold;'>Perfect Assist</span> grants <span style='color:#ffaf2c;font-weight:bold;'>350 Performance Points</span>. A maximum of 5000 Performance Points can be obtained.",
           "misc": ""
@@ -3531,23 +3138,11 @@
             "ether": 3300,
             "physical": 3960
           },
-          "weaknesses": [
-            "ether",
-            "physical"
-          ],
-          "resistances": [
-            "fire"
-          ],
-          "immunities": [
-            "freeze"
-          ],
-          "tags": [
-            "miasma"
-          ],
-          "mods": [
-            "40-dmg-res",
-            "no-freeze"
-          ],
+          "weaknesses": ["ether", "physical"],
+          "resistances": ["fire"],
+          "immunities": ["freeze"],
+          "tags": ["miasma"],
+          "mods": ["40-dmg-res", "no-freeze"],
           "description": "• When Miasmic Fiend is affected by <span style='color:#7756c6;font-weight:bold;'>Attribute Anomaly</span>, it takes <span style='color:#2bad00;font-weight:bold;'>8%</span> bonus <span style='color:#7756c6;font-weight:bold;'>Anomaly DMG</span> from Agents, stacking up to 6 times; activating Miasmic Shield clears all stacks, with each stack increasing the reduction efficiency of Miasmic Shield by <span style='color:#2bad00;font-weight:bold;'>2.5%</span>.",
           "performance": "• When Agents bait Miasmic Fiend's ground attack into detonating at least 5 Miasma Pools at once and avoid being hit by the attack and pool explosions, they will earn <span style='color:#ffaf2c;font-weight:bold;'>1700 Performance Points</span>, up to a maximum of 5000 Performance Points.",
           "misc": "• Suitable for Agents with <span style='font-weight:bold;'>Anomaly</span> specialty."
@@ -3587,20 +3182,11 @@
             "ether": 2750,
             "physical": 3960
           },
-          "weaknesses": [
-            "electric",
-            "ether"
-          ],
+          "weaknesses": ["electric", "ether"],
           "resistances": [],
-          "immunities": [
-            "freeze"
-          ],
-          "tags": [
-            "ucc"
-          ],
-          "mods": [
-            "no-freeze"
-          ],
+          "immunities": ["freeze"],
+          "tags": ["ucc"],
+          "mods": ["no-freeze"],
           "description": "• When dealing sufficient DMG to the boss enemy's legs, <span style='color:#ca9a00;font-weight:bold;'>IMPAIRED!!</span> will be triggered. Upon successfully breaking the boss enemy's legs, the Agent restores <span style='color:#2bad00;font-weight:bold;'>1000</span> Decibels, and the boss gains 1 stack of <span style='font-weight:bold;'>Disintegration</span> for 20 seconds, up to a maximum of 4 stacks. When the Agent's attacks hit an enemy, for each stack of <span style='font-weight:bold;'>Disintegration</span> the target has, CRIT DMG is increased by <span style='color:#2bad00;font-weight:bold;'>25%</span>.",
           "performance": "• Successfully <span style='color:#ca9a00;font-weight:bold;'>impairing</span> an enemy grants <span style='color:#ffaf2c;font-weight:bold;'>800 Performance Points</span>. A maximum of 5000 Performance Points can be obtained.",
           "misc": ""
@@ -3639,22 +3225,11 @@
             "ether": 3300,
             "physical": 4752
           },
-          "weaknesses": [
-            "ether"
-          ],
-          "resistances": [
-            "ice"
-          ],
-          "immunities": [
-            "freeze"
-          ],
-          "tags": [
-            "miasma"
-          ],
-          "mods": [
-            "40-dmg-res",
-            "no-freeze"
-          ],
+          "weaknesses": ["ether"],
+          "resistances": ["ice"],
+          "immunities": ["freeze"],
+          "tags": ["miasma"],
+          "mods": ["40-dmg-res", "no-freeze"],
           "description": "• When the Miasma Priest switches phase, their <span style='color:#7756c6;font-weight:bold;'>Anomaly Buildup RES</span> increases by <span style='color:#cc0000;font-weight:bold;'>10%</span> and CRIT DMG taken increases by <span style='color:#2bad00;font-weight:bold;'>30%</span>. This effect can stack up to 2 times and is cleared when Miasmic Shield breaks.",
           "performance": "• When an Agent successfully performs 3 <span style='font-weight:bold;'>Defensive Assists</span> within 3 seconds</span>, earn <span style='color:#ffaf2c;font-weight:bold;'>1000 Performance Points</span>. A maximum of 5000 Performance Points can be obtained.",
           "misc": "• Suitable for Agents with <span style='font-weight:bold;'>Rupture</span> specialty."
@@ -3730,22 +3305,11 @@
             "ether": 3300,
             "physical": 4752
           },
-          "weaknesses": [
-            "ether"
-          ],
-          "resistances": [
-            "ice"
-          ],
-          "immunities": [
-            "freeze"
-          ],
-          "tags": [
-            "miasma"
-          ],
-          "mods": [
-            "40-dmg-res",
-            "no-freeze"
-          ],
+          "weaknesses": ["ether"],
+          "resistances": ["ice"],
+          "immunities": ["freeze"],
+          "tags": ["miasma"],
+          "mods": ["40-dmg-res", "no-freeze"],
           "description": "• When the Miasma Priest switches phase, their <span style='color:#7756c6;font-weight:bold;'>Anomaly Buildup RES</span> increases by <span style='color:#cc0000;font-weight:bold;'>10%</span> and CRIT DMG taken increases by <span style='color:#2bad00;font-weight:bold;'>30%</span>. This effect can stack up to 2 times and is cleared when Miasmic Shield breaks.",
           "performance": "• When an Agent successfully performs 3 <span style='font-weight:bold;'>Defensive Assists</span> within 3 seconds</span>, earn <span style='color:#ffaf2c;font-weight:bold;'>1000 Performance Points</span>. A maximum of 5000 Performance Points can be obtained.",
           "misc": "• Suitable for Agents with <span style='font-weight:bold;'>Rupture</span> specialty."
@@ -3784,23 +3348,11 @@
             "ether": 4356,
             "physical": 4356
           },
-          "weaknesses": [
-            "electric",
-            "physical"
-          ],
-          "resistances": [
-            "ice"
-          ],
-          "immunities": [
-            "freeze"
-          ],
-          "tags": [
-            "miasma"
-          ],
-          "mods": [
-            "40-dmg-res",
-            "no-freeze"
-          ],
+          "weaknesses": ["electric", "physical"],
+          "resistances": ["ice"],
+          "immunities": ["freeze"],
+          "tags": ["miasma"],
+          "mods": ["40-dmg-res", "no-freeze"],
           "description": "• When an Agent hits The Defiler with <span style='font-weight:bold;'>Defensive Assist</span>, the whole squad gains 1 stack of <span style='font-weight:bold;'>Adjudication</span>; when an Agent knocks down The Defiler attacking in mid-air, the whole squad gains 4 stacks of <span style='font-weight:bold;'>Adjudication</span>. <span style='font-weight:bold;'>Adjudication</span> can stack up to 6 times and lasts for 30 seconds. Repeated triggers reset the duration.<br>• For each stack of <span style='font-weight:bold;'>Adjudication</span>, the Agent's CRIT DMG increases by <span style='color:#2bad00;font-weight:bold;'>8%</span>.<br>• The Defiler receives <span style='color:#cc0000;font-weight:bold;'>25%</span> less <span style='color:#7756c6;font-weight:bold;'>Attribute Anomaly DMG</span>.",
           "performance": "• When an Agent causes <span style='color:#ca9a00;font-weight:bold;'>IMPAIRED!!</span> status, they gain <span style='color:#ffaf2c;font-weight:bold;'>2500 Performance Points</span>; when an Agent shoots down The Defiler while it's attacking in mid-air, they gain <span style='color:#ffaf2c;font-weight:bold;'>1500 Performance Points</span>, up to a maximum of 5000 Performance Points.",
           "misc": "• Suitable for Agents with <span style='font-weight:bold;'>Attack</span> specialty."
@@ -3832,10 +3384,7 @@
             "ether": 3025,
             "physical": 4356
           },
-          "weaknesses": [
-            "ice",
-            "ether"
-          ],
+          "weaknesses": ["ice", "ether"],
           "resistances": [],
           "immunities": [],
           "tags": [],
@@ -3921,24 +3470,11 @@
             "ether": 4554,
             "physical": 6831
           },
-          "weaknesses": [
-            "ice",
-            "fire"
-          ],
-          "resistances": [
-            "physical"
-          ],
-          "immunities": [
-            "freeze"
-          ],
-          "tags": [
-            "hunter",
-            "miasma"
-          ],
-          "mods": [
-            "40-dmg-res",
-            "no-freeze"
-          ],
+          "weaknesses": ["ice", "fire"],
+          "resistances": ["physical"],
+          "immunities": ["freeze"],
+          "tags": ["hunter", "miasma"],
+          "mods": ["40-dmg-res", "no-freeze"],
           "description": "• Wandering Hunter's Base <span style='color:#5555ff;font-weight:bold;'>DEF</span> increases by <span style='color:#cc0000;font-weight:bold;'>40%</span> in <span style='color:#b4317b;font-weight:bold;'>Miasmic Field</span>; when an Agent hits Wandering Hunter with <span style='font-weight:bold;'>Assist Follow-Up</span> or <span style='font-weight:bold;'>Dodge Counter</span>, 1 stack of <span style='font-weight:bold;'>Wavering</span> is applied. <span style='font-weight:bold;'>Wavering</span> can stack up to 5 times and lasts 15 seconds. Repeated triggers reset the duration.<br>• When an Agent's attacks hit Wandering Hunter, for each stack of <span style='font-weight:bold;'>Wavering</span>, the Agent's <span style='color:#b4317b;font-weight:bold;'>Sheer DMG</span> is increased by <span style='color:#2bad00;font-weight:bold;'>7%</span>.",
           "performance": "• During the hide-and-seek phase, using <span style='font-weight:bold;'>Perception Technique</span> to break Drowned Ideal Lucia's true form will grant <span style='color:#ffaf2c;font-weight:bold;'>3000 Performance Points</span>; Exposing his true form and activating <span style='font-weight:bold;'>Defensive Assist</span> or <span style='font-weight:bold;'>Assist Follow-Up</span> against Wandering Hunter will grant <span style='color:#ffaf2c;font-weight:bold;'>2000 Performance Points</span>, up to a maximum of 5000 Performance Points.",
           "misc": "• Suitable for Agents with <span style='font-weight:bold;'>Rupture</span> specialty."
@@ -3977,23 +3513,11 @@
             "ether": 3300,
             "physical": 3960
           },
-          "weaknesses": [
-            "ether",
-            "physical"
-          ],
-          "resistances": [
-            "fire"
-          ],
-          "immunities": [
-            "freeze"
-          ],
-          "tags": [
-            "miasma"
-          ],
-          "mods": [
-            "40-dmg-res",
-            "no-freeze"
-          ],
+          "weaknesses": ["ether", "physical"],
+          "resistances": ["fire"],
+          "immunities": ["freeze"],
+          "tags": ["miasma"],
+          "mods": ["40-dmg-res", "no-freeze"],
           "description": "• When Miasmic Fiend is affected by <span style='color:#7756c6;font-weight:bold;'>Attribute Anomaly</span>, it takes <span style='color:#2bad00;font-weight:bold;'>8%</span> bonus <span style='color:#7756c6;font-weight:bold;'>Anomaly DMG</span> from Agents, stacking up to 6 times; activating Miasmic Shield clears all stacks, with each stack increasing the reduction efficiency of Miasmic Shield by <span style='color:#2bad00;font-weight:bold;'>2.5%</span>.",
           "performance": "• When Agents bait Miasmic Fiend's ground attack into detonating at least 5 Miasma Pools at once and avoid being hit by the attack and pool explosions, they will earn <span style='color:#ffaf2c;font-weight:bold;'>1700 Performance Points</span>, up to a maximum of 5000 Performance Points.",
           "misc": "• Suitable for Agents with <span style='font-weight:bold;'>Anomaly</span> specialty."
@@ -4032,23 +3556,11 @@
             "ether": 4356,
             "physical": 4356
           },
-          "weaknesses": [
-            "electric",
-            "physical"
-          ],
-          "resistances": [
-            "ice"
-          ],
-          "immunities": [
-            "freeze"
-          ],
-          "tags": [
-            "miasma"
-          ],
-          "mods": [
-            "40-dmg-res",
-            "no-freeze"
-          ],
+          "weaknesses": ["electric", "physical"],
+          "resistances": ["ice"],
+          "immunities": ["freeze"],
+          "tags": ["miasma"],
+          "mods": ["40-dmg-res", "no-freeze"],
           "description": "• When an Agent hits The Defiler with <span style='font-weight:bold;'>Defensive Assist</span>, the whole squad gains 1 stack of <span style='font-weight:bold;'>Adjudication</span>; when an Agent knocks down The Defiler attacking in mid-air, the whole squad gains 4 stacks of <span style='font-weight:bold;'>Adjudication</span>. <span style='font-weight:bold;'>Adjudication</span> can stack up to 6 times and lasts for 30 seconds. Repeated triggers reset the duration.<br>• For each stack of <span style='font-weight:bold;'>Adjudication</span>, the Agent's CRIT DMG increases by <span style='color:#2bad00;font-weight:bold;'>8%</span>.<br>• The Defiler receives <span style='color:#cc0000;font-weight:bold;'>25%</span> less <span style='color:#7756c6;font-weight:bold;'>Attribute Anomaly DMG</span>.",
           "performance": "• When an Agent causes <span style='color:#ca9a00;font-weight:bold;'>IMPAIRED!!</span> status, they gain <span style='color:#ffaf2c;font-weight:bold;'>2500 Performance Points</span>; when an Agent shoots down The Defiler while it's attacking in mid-air, they gain <span style='color:#ffaf2c;font-weight:bold;'>1500 Performance Points</span>, up to a maximum of 5000 Performance Points.",
           "misc": "• Suitable for Agents with <span style='font-weight:bold;'>Attack</span> specialty."
@@ -4130,24 +3642,11 @@
             "ether": 4554,
             "physical": 6831
           },
-          "weaknesses": [
-            "ice",
-            "fire"
-          ],
-          "resistances": [
-            "physical"
-          ],
-          "immunities": [
-            "freeze"
-          ],
-          "tags": [
-            "hunter",
-            "miasma"
-          ],
-          "mods": [
-            "40-dmg-res",
-            "no-freeze"
-          ],
+          "weaknesses": ["ice", "fire"],
+          "resistances": ["physical"],
+          "immunities": ["freeze"],
+          "tags": ["hunter", "miasma"],
+          "mods": ["40-dmg-res", "no-freeze"],
           "description": "• Wandering Hunter's Base <span style='color:#5555ff;font-weight:bold;'>DEF</span> increases by <span style='color:#cc0000;font-weight:bold;'>40%</span> in <span style='color:#b4317b;font-weight:bold;'>Miasmic Field</span>; when an Agent hits Wandering Hunter with <span style='font-weight:bold;'>Assist Follow-Up</span> or <span style='font-weight:bold;'>Dodge Counter</span>, 1 stack of <span style='font-weight:bold;'>Wavering</span> is applied. <span style='font-weight:bold;'>Wavering</span> can stack up to 5 times and lasts 15 seconds. Repeated triggers reset the duration.<br>• When an Agent's attacks hit Wandering Hunter, for each stack of <span style='font-weight:bold;'>Wavering</span>, the Agent's <span style='color:#b4317b;font-weight:bold;'>Sheer DMG</span> is increased by <span style='color:#2bad00;font-weight:bold;'>7%</span>.",
           "performance": "• During the hide-and-seek phase, using <span style='font-weight:bold;'>Perception Technique</span> to break Drowned Ideal Lucia's true form will grant <span style='color:#ffaf2c;font-weight:bold;'>3000 Performance Points</span>; Exposing his true form and activating <span style='font-weight:bold;'>Defensive Assist</span> or <span style='font-weight:bold;'>Assist Follow-Up</span> against Wandering Hunter will grant <span style='color:#ffaf2c;font-weight:bold;'>2000 Performance Points</span>, up to a maximum of 5000 Performance Points.",
           "misc": "• Suitable for Agents with <span style='font-weight:bold;'>Rupture</span> specialty."
@@ -4179,12 +3678,8 @@
             "ether": 3630,
             "physical": 4356
           },
-          "weaknesses": [
-            "electric"
-          ],
-          "resistances": [
-            "fire"
-          ],
+          "weaknesses": ["electric"],
+          "resistances": ["fire"],
           "immunities": [],
           "tags": [],
           "mods": [],
@@ -4226,22 +3721,11 @@
             "ether": 3300,
             "physical": 4752
           },
-          "weaknesses": [
-            "ether"
-          ],
-          "resistances": [
-            "ice"
-          ],
-          "immunities": [
-            "freeze"
-          ],
-          "tags": [
-            "miasma"
-          ],
-          "mods": [
-            "40-dmg-res",
-            "no-freeze"
-          ],
+          "weaknesses": ["ether"],
+          "resistances": ["ice"],
+          "immunities": ["freeze"],
+          "tags": ["miasma"],
+          "mods": ["40-dmg-res", "no-freeze"],
           "description": "• When the Miasma Priest switches phase, their <span style='color:#7756c6;font-weight:bold;'>Anomaly Buildup RES</span> increases by <span style='color:#cc0000;font-weight:bold;'>10%</span> and CRIT DMG taken increases by <span style='color:#2bad00;font-weight:bold;'>30%</span>. This effect can stack up to 2 times and is cleared when Miasmic Shield breaks.",
           "performance": "• When an Agent successfully performs 3 <span style='font-weight:bold;'>Defensive Assists</span> within 3 seconds</span>, earn <span style='color:#ffaf2c;font-weight:bold;'>1000 Performance Points</span>. A maximum of 5000 Performance Points can be obtained.",
           "misc": "• Suitable for Agents with <span style='font-weight:bold;'>Rupture</span> specialty."
@@ -4310,10 +3794,7 @@
             "ether": 3025,
             "physical": 4356
           },
-          "weaknesses": [
-            "ice",
-            "ether"
-          ],
+          "weaknesses": ["ice", "ether"],
           "resistances": [],
           "immunities": [],
           "tags": [],
@@ -4356,23 +3837,11 @@
             "ether": 4356,
             "physical": 4356
           },
-          "weaknesses": [
-            "ice",
-            "physical"
-          ],
-          "resistances": [
-            "electric"
-          ],
-          "immunities": [
-            "freeze"
-          ],
-          "tags": [
-            "miasma"
-          ],
-          "mods": [
-            "40-dmg-res",
-            "no-freeze"
-          ],
+          "weaknesses": ["ice", "physical"],
+          "resistances": ["electric"],
+          "immunities": ["freeze"],
+          "tags": ["miasma"],
+          "mods": ["40-dmg-res", "no-freeze"],
           "description": "• When Sobek and The Thrall alternate turns, The Thrall gains 1 stack of <span style='font-weight:bold;'>Contract</span> and 1 stack of <span style='font-weight:bold;'>Self-Sacrifice</span>. <span style='font-weight:bold;'>Contract</span> and <span style='font-weight:bold;'>Self-Sacrifice</span> can stack up to 3 times. Each stack of <span style='font-weight:bold;'>Contract</span> increases <span style='color:#7756c6;font-weight:bold;'>All-Attribute Anomaly RES</span> by <span style='color:#cc0000;font-weight:bold;'>15%</span>, each stack of <span style='font-weight:bold;'>Self-Sacrifice</span> increases <span style='color:#ffe599;font-weight:bold;'>Stun DMG Multiplier</span> by <span style='color:#2bad00;font-weight:bold;'>10%</span>. When The Thrall is <span style='color:#ffe599;font-weight:bold;'>Stunned</span>, CRIT DMG taken increases by <span style='color:#2bad00;font-weight:bold;'>50%</span>.",
           "performance": "• When Agents inflict <span style='font-weight:bold;'>Weakened</span> on Sobek and The Thrall, <span style='color:#ffaf2c;font-weight:bold;'>1500 Performance Points</span> will be awarded. When an Agent eliminates Sobek, <span style='color:#ffaf2c;font-weight:bold;'>2000 Performance Points</span> will be awarded. Up to a maximum of 5000 Performance Points can be earned.",
           "misc": "• Suitable for Agents with <span style='font-weight:bold;'>Stun</span> specialty."
@@ -4411,23 +3880,11 @@
             "ether": 3300,
             "physical": 3960
           },
-          "weaknesses": [
-            "ether",
-            "physical"
-          ],
-          "resistances": [
-            "fire"
-          ],
-          "immunities": [
-            "freeze"
-          ],
-          "tags": [
-            "miasma"
-          ],
-          "mods": [
-            "40-dmg-res",
-            "no-freeze"
-          ],
+          "weaknesses": ["ether", "physical"],
+          "resistances": ["fire"],
+          "immunities": ["freeze"],
+          "tags": ["miasma"],
+          "mods": ["40-dmg-res", "no-freeze"],
           "description": "• When Miasmic Fiend is affected by <span style='color:#7756c6;font-weight:bold;'>Attribute Anomaly</span>, it takes <span style='color:#2bad00;font-weight:bold;'>8%</span> bonus <span style='color:#7756c6;font-weight:bold;'>Anomaly DMG</span> from Agents, stacking up to 6 times; activating Miasmic Shield clears all stacks, with each stack increasing the reduction efficiency of Miasmic Shield by <span style='color:#2bad00;font-weight:bold;'>2.5%</span>.",
           "performance": "• When Agents bait Miasmic Fiend's ground attack into detonating at least 5 Miasma Pools at once and avoid being hit by the attack and pool explosions, they will earn <span style='color:#ffaf2c;font-weight:bold;'>1700 Performance Points</span>, up to a maximum of 5000 Performance Points.",
           "misc": "• Suitable for Agents with <span style='font-weight:bold;'>Anomaly</span> specialty."
@@ -4509,24 +3966,11 @@
             "ether": 4554,
             "physical": 6831
           },
-          "weaknesses": [
-            "ice",
-            "fire"
-          ],
-          "resistances": [
-            "physical"
-          ],
-          "immunities": [
-            "freeze"
-          ],
-          "tags": [
-            "hunter",
-            "miasma"
-          ],
-          "mods": [
-            "40-dmg-res",
-            "no-freeze"
-          ],
+          "weaknesses": ["ice", "fire"],
+          "resistances": ["physical"],
+          "immunities": ["freeze"],
+          "tags": ["hunter", "miasma"],
+          "mods": ["40-dmg-res", "no-freeze"],
           "description": "• Wandering Hunter's Base <span style='color:#5555ff;font-weight:bold;'>DEF</span> increases by <span style='color:#cc0000;font-weight:bold;'>40%</span> in <span style='color:#b4317b;font-weight:bold;'>Miasmic Field</span>; when an Agent hits Wandering Hunter with <span style='font-weight:bold;'>Assist Follow-Up</span> or <span style='font-weight:bold;'>Dodge Counter</span>, 1 stack of <span style='font-weight:bold;'>Wavering</span> is applied. <span style='font-weight:bold;'>Wavering</span> can stack up to 5 times and lasts 15 seconds. Repeated triggers reset the duration.<br>• When an Agent's attacks hit Wandering Hunter, for each stack of <span style='font-weight:bold;'>Wavering</span>, the Agent's <span style='color:#b4317b;font-weight:bold;'>Sheer DMG</span> is increased by <span style='color:#2bad00;font-weight:bold;'>7%</span>.",
           "performance": "• During the hide-and-seek phase, using <span style='font-weight:bold;'>Perception Technique</span> to break Drowned Ideal Lucia's true form will grant <span style='color:#ffaf2c;font-weight:bold;'>3000 Performance Points</span>; Exposing his true form and activating <span style='font-weight:bold;'>Defensive Assist</span> or <span style='font-weight:bold;'>Assist Follow-Up</span> against Wandering Hunter will grant <span style='color:#ffaf2c;font-weight:bold;'>2000 Performance Points</span>, up to a maximum of 5000 Performance Points.",
           "misc": "• Suitable for Agents with <span style='font-weight:bold;'>Rupture</span> specialty."
@@ -4565,23 +4009,11 @@
             "ether": 4356,
             "physical": 4356
           },
-          "weaknesses": [
-            "ice",
-            "physical"
-          ],
-          "resistances": [
-            "electric"
-          ],
-          "immunities": [
-            "freeze"
-          ],
-          "tags": [
-            "miasma"
-          ],
-          "mods": [
-            "40-dmg-res",
-            "no-freeze"
-          ],
+          "weaknesses": ["ice", "physical"],
+          "resistances": ["electric"],
+          "immunities": ["freeze"],
+          "tags": ["miasma"],
+          "mods": ["40-dmg-res", "no-freeze"],
           "description": "• When Sobek and The Thrall alternate turns, The Thrall gains 1 stack of <span style='font-weight:bold;'>Contract</span> and 1 stack of <span style='font-weight:bold;'>Self-Sacrifice</span>. <span style='font-weight:bold;'>Contract</span> and <span style='font-weight:bold;'>Self-Sacrifice</span> can stack up to 3 times. Each stack of <span style='font-weight:bold;'>Contract</span> increases <span style='color:#7756c6;font-weight:bold;'>All-Attribute Anomaly RES</span> by <span style='color:#cc0000;font-weight:bold;'>15%</span>, each stack of <span style='font-weight:bold;'>Self-Sacrifice</span> increases <span style='color:#ffe599;font-weight:bold;'>Stun DMG Multiplier</span> by <span style='color:#2bad00;font-weight:bold;'>10%</span>. When The Thrall is <span style='color:#ffe599;font-weight:bold;'>Stunned</span>, CRIT DMG taken increases by <span style='color:#2bad00;font-weight:bold;'>50%</span>.",
           "performance": "• When Agents inflict <span style='font-weight:bold;'>Weakened</span> on Sobek and The Thrall, <span style='color:#ffaf2c;font-weight:bold;'>1500 Performance Points</span> will be awarded. When an Agent eliminates Sobek, <span style='color:#ffaf2c;font-weight:bold;'>2000 Performance Points</span> will be awarded. Up to a maximum of 5000 Performance Points can be earned.",
           "misc": "• Suitable for Agents with <span style='font-weight:bold;'>Stun</span> specialty."
@@ -4613,12 +4045,8 @@
             "ether": 3630,
             "physical": 5445
           },
-          "weaknesses": [
-            "ice"
-          ],
-          "resistances": [
-            "physical"
-          ],
+          "weaknesses": ["ice"],
+          "resistances": ["physical"],
           "immunities": [],
           "tags": [],
           "mods": [],
@@ -4703,24 +4131,11 @@
             "ether": 6187.5,
             "physical": 4950
           },
-          "weaknesses": [
-            "physical"
-          ],
-          "resistances": [
-            "ice",
-            "ether"
-          ],
-          "immunities": [
-            "freeze"
-          ],
-          "tags": [
-            "miasma",
-            "shutdown"
-          ],
-          "mods": [
-            "40-dmg-res",
-            "no-freeze"
-          ],
+          "weaknesses": ["physical"],
+          "resistances": ["ice", "ether"],
+          "immunities": ["freeze"],
+          "tags": ["miasma", "shutdown"],
+          "mods": ["40-dmg-res", "no-freeze"],
           "description": "• Primordial Nightmare's <span style='color:#7756c6;font-weight:bold;'>Attribute Anomaly DMG</span> taken is reduced by <span style='color:#cc0000;font-weight:bold;'>30%</span>. When switching from Miasmic Shield state to normal state, or from normal state to Miasmic Shield state, Agent CRIT DMG against them is increased by <span style='color:#2bad00;font-weight:bold;'>20%</span>. This effect can stack up to 3 times and resets when Primordial Nightmare recovers from <span style='color:#ffe599;font-weight:bold;'>Stun</span>.",
           "performance": "• Triggering <span style='color:#b4317b;font-weight:bold;'>PURIFIED!!</span> grants <span style='color:#ffaf2c;font-weight:bold;'>1000 Performance Points</span>. During the Control Skill, each successful counter against Primordial Nightmare's attacks grants <span style='color:#ffaf2c;font-weight:bold;'>500 Performance Points</span>. Performing a <span style='color:#b47ede;font-weight:bold;'>SHUTDOWN!!</span> on Primordial Nightmare's Control Skill grants <span style='color:#ffaf2c;font-weight:bold;'>2000 Performance Points</span>, up to a maximum of 5000 Performance Points.",
           "misc": "• Suitable for Agents with <span style='font-weight:bold;'>Attack</span> specialty."
@@ -4759,23 +4174,11 @@
             "ether": 3300,
             "physical": 3960
           },
-          "weaknesses": [
-            "ether",
-            "physical"
-          ],
-          "resistances": [
-            "fire"
-          ],
-          "immunities": [
-            "freeze"
-          ],
-          "tags": [
-            "miasma"
-          ],
-          "mods": [
-            "40-dmg-res",
-            "no-freeze"
-          ],
+          "weaknesses": ["ether", "physical"],
+          "resistances": ["fire"],
+          "immunities": ["freeze"],
+          "tags": ["miasma"],
+          "mods": ["40-dmg-res", "no-freeze"],
           "description": "• When Miasmic Fiend is affected by <span style='color:#7756c6;font-weight:bold;'>Attribute Anomaly</span>, it takes <span style='color:#2bad00;font-weight:bold;'>8%</span> bonus <span style='color:#7756c6;font-weight:bold;'>Anomaly DMG</span> from Agents, stacking up to 6 times; activating Miasmic Shield clears all stacks, with each stack increasing the reduction efficiency of Miasmic Shield by <span style='color:#2bad00;font-weight:bold;'>2.5%</span>.",
           "performance": "• When Agents bait Miasmic Fiend's ground attack into detonating at least 5 Miasma Pools at once and avoid being hit by the attack and pool explosions, they will earn <span style='color:#ffaf2c;font-weight:bold;'>1700 Performance Points</span>, up to a maximum of 5000 Performance Points.",
           "misc": "• Suitable for Agents with <span style='font-weight:bold;'>Anomaly</span> specialty."
@@ -4820,24 +4223,11 @@
             "ether": 4554,
             "physical": 6831
           },
-          "weaknesses": [
-            "ice",
-            "fire"
-          ],
-          "resistances": [
-            "physical"
-          ],
-          "immunities": [
-            "freeze"
-          ],
-          "tags": [
-            "hunter",
-            "miasma"
-          ],
-          "mods": [
-            "40-dmg-res",
-            "no-freeze"
-          ],
+          "weaknesses": ["ice", "fire"],
+          "resistances": ["physical"],
+          "immunities": ["freeze"],
+          "tags": ["hunter", "miasma"],
+          "mods": ["40-dmg-res", "no-freeze"],
           "description": "• Wandering Hunter's Base <span style='color:#5555ff;font-weight:bold;'>DEF</span> increases by <span style='color:#cc0000;font-weight:bold;'>40%</span> in <span style='color:#b4317b;font-weight:bold;'>Miasmic Field</span>; when an Agent hits Wandering Hunter with <span style='font-weight:bold;'>Assist Follow-Up</span> or <span style='font-weight:bold;'>Dodge Counter</span>, 1 stack of <span style='font-weight:bold;'>Wavering</span> is applied. <span style='font-weight:bold;'>Wavering</span> can stack up to 5 times and lasts 15 seconds. Repeated triggers reset the duration.<br>• When an Agent's attacks hit Wandering Hunter, for each stack of <span style='font-weight:bold;'>Wavering</span>, the Agent's <span style='color:#b4317b;font-weight:bold;'>Sheer DMG</span> is increased by <span style='color:#2bad00;font-weight:bold;'>7%</span>.",
           "performance": "• During the hide-and-seek phase, using <span style='font-weight:bold;'>Perception Technique</span> to break Drowned Ideal Lucia's true form will grant <span style='color:#ffaf2c;font-weight:bold;'>3000 Performance Points</span>; Exposing his true form and activating <span style='font-weight:bold;'>Defensive Assist</span> or <span style='font-weight:bold;'>Assist Follow-Up</span> against Wandering Hunter will grant <span style='color:#ffaf2c;font-weight:bold;'>2000 Performance Points</span>, up to a maximum of 5000 Performance Points.",
           "misc": "• Suitable for Agents with <span style='font-weight:bold;'>Rupture</span> specialty."
@@ -4913,23 +4303,11 @@
             "ether": 4356,
             "physical": 4356
           },
-          "weaknesses": [
-            "electric",
-            "physical"
-          ],
-          "resistances": [
-            "ice"
-          ],
-          "immunities": [
-            "freeze"
-          ],
-          "tags": [
-            "miasma"
-          ],
-          "mods": [
-            "40-dmg-res",
-            "no-freeze"
-          ],
+          "weaknesses": ["electric", "physical"],
+          "resistances": ["ice"],
+          "immunities": ["freeze"],
+          "tags": ["miasma"],
+          "mods": ["40-dmg-res", "no-freeze"],
           "description": "• When an Agent hits The Defiler with <span style='font-weight:bold;'>Defensive Assist</span>, the whole squad gains 1 stack of <span style='font-weight:bold;'>Adjudication</span>; when an Agent knocks down The Defiler attacking in mid-air, the whole squad gains 4 stacks of <span style='font-weight:bold;'>Adjudication</span>. <span style='font-weight:bold;'>Adjudication</span> can stack up to 6 times and lasts for 30 seconds. Repeated triggers reset the duration.<br>• For each stack of <span style='font-weight:bold;'>Adjudication</span>, the Agent's CRIT DMG increases by <span style='color:#2bad00;font-weight:bold;'>8%</span>.<br>• The Defiler receives <span style='color:#cc0000;font-weight:bold;'>25%</span> less <span style='color:#7756c6;font-weight:bold;'>Attribute Anomaly DMG</span>.",
           "performance": "• When an Agent causes <span style='color:#ca9a00;font-weight:bold;'>IMPAIRED!!</span> status, they gain <span style='color:#ffaf2c;font-weight:bold;'>2500 Performance Points</span>; when an Agent shoots down The Defiler while it's attacking in mid-air, they gain <span style='color:#ffaf2c;font-weight:bold;'>1500 Performance Points</span>, up to a maximum of 5000 Performance Points.",
           "misc": "• Suitable for Agents with <span style='font-weight:bold;'>Attack</span> specialty."
@@ -4961,10 +4339,7 @@
             "ether": 3025,
             "physical": 4356
           },
-          "weaknesses": [
-            "ice",
-            "ether"
-          ],
+          "weaknesses": ["ice", "ether"],
           "resistances": [],
           "immunities": [],
           "tags": [],
@@ -5007,22 +4382,11 @@
             "ether": 3300,
             "physical": 4752
           },
-          "weaknesses": [
-            "ether"
-          ],
-          "resistances": [
-            "ice"
-          ],
-          "immunities": [
-            "freeze"
-          ],
-          "tags": [
-            "miasma"
-          ],
-          "mods": [
-            "40-dmg-res",
-            "no-freeze"
-          ],
+          "weaknesses": ["ether"],
+          "resistances": ["ice"],
+          "immunities": ["freeze"],
+          "tags": ["miasma"],
+          "mods": ["40-dmg-res", "no-freeze"],
           "description": "• When the Miasma Priest switches phase, their <span style='color:#7756c6;font-weight:bold;'>Anomaly Buildup RES</span> increases by <span style='color:#cc0000;font-weight:bold;'>10%</span> and CRIT DMG taken increases by <span style='color:#2bad00;font-weight:bold;'>30%</span>. This effect can stack up to 2 times and is cleared when Miasmic Shield breaks.",
           "performance": "• When an Agent successfully performs 3 <span style='font-weight:bold;'>Defensive Assists</span> within 3 seconds</span>, earn <span style='color:#ffaf2c;font-weight:bold;'>1000 Performance Points</span>. A maximum of 5000 Performance Points can be obtained.",
           "misc": "• Suitable for Agents with <span style='font-weight:bold;'>Rupture</span> specialty."
@@ -5104,24 +4468,11 @@
             "ether": 6187.5,
             "physical": 4950
           },
-          "weaknesses": [
-            "physical"
-          ],
-          "resistances": [
-            "ice",
-            "ether"
-          ],
-          "immunities": [
-            "freeze"
-          ],
-          "tags": [
-            "miasma",
-            "shutdown"
-          ],
-          "mods": [
-            "40-dmg-res",
-            "no-freeze"
-          ],
+          "weaknesses": ["physical"],
+          "resistances": ["ice", "ether"],
+          "immunities": ["freeze"],
+          "tags": ["miasma", "shutdown"],
+          "mods": ["40-dmg-res", "no-freeze"],
           "description": "• Primordial Nightmare's <span style='color:#7756c6;font-weight:bold;'>Attribute Anomaly DMG</span> taken is reduced by <span style='color:#cc0000;font-weight:bold;'>30%</span>. When switching from Miasmic Shield state to normal state, or from normal state to Miasmic Shield state, Agent CRIT DMG against them is increased by <span style='color:#2bad00;font-weight:bold;'>20%</span>. This effect can stack up to 3 times and resets when Primordial Nightmare recovers from <span style='color:#ffe599;font-weight:bold;'>Stun</span>.",
           "performance": "• Triggering <span style='color:#b4317b;font-weight:bold;'>PURIFIED!!</span> grants <span style='color:#ffaf2c;font-weight:bold;'>1000 Performance Points</span>. During the Control Skill, each successful counter against Primordial Nightmare's attacks grants <span style='color:#ffaf2c;font-weight:bold;'>500 Performance Points</span>. Performing a <span style='color:#b47ede;font-weight:bold;'>SHUTDOWN!!</span> on Primordial Nightmare's Control Skill grants <span style='color:#ffaf2c;font-weight:bold;'>2000 Performance Points</span>, up to a maximum of 5000 Performance Points.",
           "misc": "• Suitable for Agents with <span style='font-weight:bold;'>Attack</span> specialty."
@@ -5161,20 +4512,11 @@
             "ether": 2750,
             "physical": 3960
           },
-          "weaknesses": [
-            "electric",
-            "ether"
-          ],
+          "weaknesses": ["electric", "ether"],
           "resistances": [],
-          "immunities": [
-            "freeze"
-          ],
-          "tags": [
-            "ucc"
-          ],
-          "mods": [
-            "no-freeze"
-          ],
+          "immunities": ["freeze"],
+          "tags": ["ucc"],
+          "mods": ["no-freeze"],
           "description": "• When dealing sufficient DMG to the boss enemy's legs, <span style='color:#ca9a00;font-weight:bold;'>IMPAIRED!!</span> will be triggered. Upon successfully breaking the boss enemy's legs, the Agent restores <span style='color:#2bad00;font-weight:bold;'>1000</span> Decibels, and the boss gains 1 stack of <span style='font-weight:bold;'>Disintegration</span> for 20 seconds, up to a maximum of 4 stacks. When the Agent's attacks hit an enemy, for each stack of <span style='font-weight:bold;'>Disintegration</span> the target has, CRIT DMG is increased by <span style='color:#2bad00;font-weight:bold;'>25%</span>.",
           "performance": "• Successfully <span style='color:#ca9a00;font-weight:bold;'>impairing</span> an enemy grants <span style='color:#ffaf2c;font-weight:bold;'>800 Performance Points</span>. A maximum of 5000 Performance Points can be obtained.",
           "misc": ""
@@ -5219,24 +4561,11 @@
             "ether": 4554,
             "physical": 6831
           },
-          "weaknesses": [
-            "ice",
-            "fire"
-          ],
-          "resistances": [
-            "physical"
-          ],
-          "immunities": [
-            "freeze"
-          ],
-          "tags": [
-            "hunter",
-            "miasma"
-          ],
-          "mods": [
-            "40-dmg-res",
-            "no-freeze"
-          ],
+          "weaknesses": ["ice", "fire"],
+          "resistances": ["physical"],
+          "immunities": ["freeze"],
+          "tags": ["hunter", "miasma"],
+          "mods": ["40-dmg-res", "no-freeze"],
           "description": "• Wandering Hunter's Base <span style='color:#5555ff;font-weight:bold;'>DEF</span> increases by <span style='color:#cc0000;font-weight:bold;'>40%</span> in <span style='color:#b4317b;font-weight:bold;'>Miasmic Field</span>; when an Agent hits Wandering Hunter with <span style='font-weight:bold;'>Assist Follow-Up</span> or <span style='font-weight:bold;'>Dodge Counter</span>, 1 stack of <span style='font-weight:bold;'>Wavering</span> is applied. <span style='font-weight:bold;'>Wavering</span> can stack up to 5 times and lasts 15 seconds. Repeated triggers reset the duration.<br>• When an Agent's attacks hit Wandering Hunter, for each stack of <span style='font-weight:bold;'>Wavering</span>, the Agent's <span style='color:#b4317b;font-weight:bold;'>Sheer DMG</span> is increased by <span style='color:#2bad00;font-weight:bold;'>7%</span>.",
           "performance": "• During the hide-and-seek phase, using <span style='font-weight:bold;'>Perception Technique</span> to break Drowned Ideal Lucia's true form will grant <span style='color:#ffaf2c;font-weight:bold;'>3000 Performance Points</span>; Exposing his true form and activating <span style='font-weight:bold;'>Defensive Assist</span> or <span style='font-weight:bold;'>Assist Follow-Up</span> against Wandering Hunter will grant <span style='color:#ffaf2c;font-weight:bold;'>2000 Performance Points</span>, up to a maximum of 5000 Performance Points.",
           "misc": "• Suitable for Agents with <span style='font-weight:bold;'>Rupture</span> specialty."
@@ -5318,24 +4647,11 @@
             "ether": 6187.5,
             "physical": 4950
           },
-          "weaknesses": [
-            "physical"
-          ],
-          "resistances": [
-            "ice",
-            "ether"
-          ],
-          "immunities": [
-            "freeze"
-          ],
-          "tags": [
-            "miasma",
-            "shutdown"
-          ],
-          "mods": [
-            "40-dmg-res",
-            "no-freeze"
-          ],
+          "weaknesses": ["physical"],
+          "resistances": ["ice", "ether"],
+          "immunities": ["freeze"],
+          "tags": ["miasma", "shutdown"],
+          "mods": ["40-dmg-res", "no-freeze"],
           "description": "• Primordial Nightmare's <span style='color:#7756c6;font-weight:bold;'>Attribute Anomaly DMG</span> taken is reduced by <span style='color:#cc0000;font-weight:bold;'>30%</span>. When switching from Miasmic Shield state to normal state, or from normal state to Miasmic Shield state, Agent CRIT DMG against them is increased by <span style='color:#2bad00;font-weight:bold;'>20%</span>. This effect can stack up to 3 times and resets when Primordial Nightmare recovers from <span style='color:#ffe599;font-weight:bold;'>Stun</span>.",
           "performance": "• Triggering <span style='color:#b4317b;font-weight:bold;'>PURIFIED!!</span> grants <span style='color:#ffaf2c;font-weight:bold;'>1000 Performance Points</span>. During the Control Skill, each successful counter against Primordial Nightmare's attacks grants <span style='color:#ffaf2c;font-weight:bold;'>500 Performance Points</span>. Performing a <span style='color:#b47ede;font-weight:bold;'>SHUTDOWN!!</span> on Primordial Nightmare's Control Skill grants <span style='color:#ffaf2c;font-weight:bold;'>2000 Performance Points</span>, up to a maximum of 5000 Performance Points.",
           "misc": "• Suitable for Agents with <span style='font-weight:bold;'>Attack</span> specialty."
@@ -5374,22 +4690,11 @@
             "ether": 3300,
             "physical": 4752
           },
-          "weaknesses": [
-            "ether"
-          ],
-          "resistances": [
-            "ice"
-          ],
-          "immunities": [
-            "freeze"
-          ],
-          "tags": [
-            "miasma"
-          ],
-          "mods": [
-            "40-dmg-res",
-            "no-freeze"
-          ],
+          "weaknesses": ["ether"],
+          "resistances": ["ice"],
+          "immunities": ["freeze"],
+          "tags": ["miasma"],
+          "mods": ["40-dmg-res", "no-freeze"],
           "description": "• When the Miasma Priest switches phase, their <span style='color:#7756c6;font-weight:bold;'>Anomaly Buildup RES</span> increases by <span style='color:#cc0000;font-weight:bold;'>10%</span> and CRIT DMG taken increases by <span style='color:#2bad00;font-weight:bold;'>30%</span>. This effect can stack up to 2 times and is cleared when Miasmic Shield breaks.",
           "performance": "• When an Agent successfully performs 3 <span style='font-weight:bold;'>Defensive Assists</span> within 3 seconds</span>, earn <span style='color:#ffaf2c;font-weight:bold;'>1000 Performance Points</span>. A maximum of 5000 Performance Points can be obtained.",
           "misc": "• Suitable for Agents with <span style='font-weight:bold;'>Rupture</span> specialty."
@@ -5421,10 +4726,7 @@
             "ether": 3025,
             "physical": 4356
           },
-          "weaknesses": [
-            "ice",
-            "ether"
-          ],
+          "weaknesses": ["ice", "ether"],
           "resistances": [],
           "immunities": [],
           "tags": [],
@@ -5504,23 +4806,11 @@
             "ether": 3437.5,
             "physical": 4950
           },
-          "weaknesses": [
-            "ether"
-          ],
-          "resistances": [
-            "ice",
-            "fire"
-          ],
-          "immunities": [
-            "freeze"
-          ],
-          "tags": [
-            "shutdown"
-          ],
-          "mods": [
-            "40-dmg-res",
-            "no-freeze"
-          ],
+          "weaknesses": ["ether"],
+          "resistances": ["ice", "fire"],
+          "immunities": ["freeze"],
+          "tags": ["shutdown"],
+          "mods": ["40-dmg-res", "no-freeze"],
           "description": "• When Discordant Solo is being attacked, the CRIT DMG of this attack decreases by <span style='color:#cc0000;font-weight:bold;'>40%</span>. When an Agent activates or extends an Ether Veil, the whole squad gains 1 stack of <span style='font-weight:bold;'>Sonic Resonance</span>. <span style='font-weight:bold;'>Sonic Resonance</span> stacks up to 3 times, and each stack increases Agent <span style='color:#7756c6;font-weight:bold;'>Anomaly Buildup Rate</span> by <span style='color:#2bad00;font-weight:bold;'>8%</span> and <span style='color:#7756c6;font-weight:bold;'>Attribute Anomaly DMG</span> by <span style='color:#2bad00;font-weight:bold;'>15%</span>.",
           "performance": "• During the Control Skill, each successful counter against Discordant Solo's attacks grants <span style='color:#ffaf2c;font-weight:bold;'>350 Performance Points</span>.<br>• Performing a <span style='color:#b47ede;font-weight:bold;'>SHUTDOWN!!</span> against Discordant Solo's Control Skill or countering the final hit of certain attacks and inflicting an <span style='color:#ca9a00;font-weight:bold;'>IMPAIRED!!</span> effect grants <span style='color:#ffaf2c;font-weight:bold;'>750 Performance Points</span>, up to a maximum of 5000 Performance Points.",
           "misc": "• Suitable for Agents with <span style='font-weight:bold;'>Anomaly</span> specialty."
@@ -5559,23 +4849,11 @@
             "ether": 4356,
             "physical": 4356
           },
-          "weaknesses": [
-            "electric",
-            "physical"
-          ],
-          "resistances": [
-            "ice"
-          ],
-          "immunities": [
-            "freeze"
-          ],
-          "tags": [
-            "miasma"
-          ],
-          "mods": [
-            "40-dmg-res",
-            "no-freeze"
-          ],
+          "weaknesses": ["electric", "physical"],
+          "resistances": ["ice"],
+          "immunities": ["freeze"],
+          "tags": ["miasma"],
+          "mods": ["40-dmg-res", "no-freeze"],
           "description": "• When an Agent hits The Defiler with <span style='font-weight:bold;'>Defensive Assist</span>, the whole squad gains 1 stack of <span style='font-weight:bold;'>Adjudication</span>; when an Agent knocks down The Defiler attacking in mid-air, the whole squad gains 4 stacks of <span style='font-weight:bold;'>Adjudication</span>. <span style='font-weight:bold;'>Adjudication</span> can stack up to 6 times and lasts for 30 seconds. Repeated triggers reset the duration.<br>• For each stack of <span style='font-weight:bold;'>Adjudication</span>, the Agent's CRIT DMG increases by <span style='color:#2bad00;font-weight:bold;'>5%</span>, <span style='color:#f0d12b;font-weight:bold;'>Physical DMG</span> increases by <span style='color:#2bad00;font-weight:bold;'>5%</span>, and <span style='color:#2eb6ff;font-weight:bold;'>Electric DMG</span> increases by <span style='color:#2bad00;font-weight:bold;'>5%</span>.<br>• The Defiler receives <span style='color:#cc0000;font-weight:bold;'>25%</span> less <span style='color:#7756c6;font-weight:bold;'>Attribute Anomaly DMG</span>.",
           "performance": "• When an Agent causes <span style='color:#ca9a00;font-weight:bold;'>IMPAIRED!!</span> status, they gain <span style='color:#ffaf2c;font-weight:bold;'>2500 Performance Points</span>; when an Agent shoots down The Defiler while it's attacking in mid-air, they gain <span style='color:#ffaf2c;font-weight:bold;'>1500 Performance Points</span>, up to a maximum of 5000 Performance Points.",
           "misc": "• Suitable for Agents with <span style='font-weight:bold;'>Attack</span> specialty."
@@ -5620,24 +4898,11 @@
             "ether": 4554,
             "physical": 6831
           },
-          "weaknesses": [
-            "ice",
-            "fire"
-          ],
-          "resistances": [
-            "physical"
-          ],
-          "immunities": [
-            "freeze"
-          ],
-          "tags": [
-            "hunter",
-            "miasma"
-          ],
-          "mods": [
-            "40-dmg-res",
-            "no-freeze"
-          ],
+          "weaknesses": ["ice", "fire"],
+          "resistances": ["physical"],
+          "immunities": ["freeze"],
+          "tags": ["hunter", "miasma"],
+          "mods": ["40-dmg-res", "no-freeze"],
           "description": "• Wandering Hunter's Base <span style='color:#5555ff;font-weight:bold;'>DEF</span> increases by <span style='color:#cc0000;font-weight:bold;'>40%</span> in <span style='color:#b4317b;font-weight:bold;'>Miasmic Field</span>; when an Agent hits Wandering Hunter with <span style='font-weight:bold;'>Assist Follow-Up</span> or <span style='font-weight:bold;'>Dodge Counter</span>, 1 stack of <span style='font-weight:bold;'>Wavering</span> is applied. <span style='font-weight:bold;'>Wavering</span> can stack up to 5 times and lasts 15 seconds. Repeated triggers reset the duration.<br>• When an Agent's attacks hit Wandering Hunter, for each stack of <span style='font-weight:bold;'>Wavering</span>, the Agent's <span style='color:#b4317b;font-weight:bold;'>Sheer DMG</span> is increased by <span style='color:#2bad00;font-weight:bold;'>7%</span>.",
           "performance": "• During the hide-and-seek phase, using <span style='font-weight:bold;'>Perception Technique</span> to break Drowned Ideal Lucia's true form will grant <span style='color:#ffaf2c;font-weight:bold;'>3000 Performance Points</span>; Exposing his true form and activating <span style='font-weight:bold;'>Defensive Assist</span> or <span style='font-weight:bold;'>Assist Follow-Up</span> against Wandering Hunter will grant <span style='color:#ffaf2c;font-weight:bold;'>2000 Performance Points</span>, up to a maximum of 5000 Performance Points.",
           "misc": "• Suitable for Agents with <span style='font-weight:bold;'>Rupture</span> specialty."
@@ -5713,23 +4978,11 @@
             "ether": 3300,
             "physical": 3960
           },
-          "weaknesses": [
-            "ether",
-            "physical"
-          ],
-          "resistances": [
-            "fire"
-          ],
-          "immunities": [
-            "freeze"
-          ],
-          "tags": [
-            "miasma"
-          ],
-          "mods": [
-            "40-dmg-res",
-            "no-freeze"
-          ],
+          "weaknesses": ["ether", "physical"],
+          "resistances": ["fire"],
+          "immunities": ["freeze"],
+          "tags": ["miasma"],
+          "mods": ["40-dmg-res", "no-freeze"],
           "description": "• When Miasmic Fiend is affected by <span style='color:#7756c6;font-weight:bold;'>Attribute Anomaly</span>, it takes <span style='color:#2bad00;font-weight:bold;'>8%</span> bonus <span style='color:#7756c6;font-weight:bold;'>Anomaly DMG</span> from Agents, stacking up to 6 times; activating Miasmic Shield clears all stacks, with each stack increasing the reduction efficiency of Miasmic Shield by <span style='color:#2bad00;font-weight:bold;'>2.5%</span>.",
           "performance": "• When Agents bait Miasmic Fiend's ground attack into detonating at least 5 Miasma Pools at once and avoid being hit by the attack and pool explosions, they will earn <span style='color:#ffaf2c;font-weight:bold;'>1700 Performance Points</span>, up to a maximum of 5000 Performance Points.",
           "misc": "• Suitable for Agents with <span style='font-weight:bold;'>Anomaly</span> specialty."
@@ -5768,23 +5021,11 @@
             "ether": 4356,
             "physical": 4356
           },
-          "weaknesses": [
-            "ice",
-            "physical"
-          ],
-          "resistances": [
-            "electric"
-          ],
-          "immunities": [
-            "freeze"
-          ],
-          "tags": [
-            "miasma"
-          ],
-          "mods": [
-            "40-dmg-res",
-            "no-freeze"
-          ],
+          "weaknesses": ["ice", "physical"],
+          "resistances": ["electric"],
+          "immunities": ["freeze"],
+          "tags": ["miasma"],
+          "mods": ["40-dmg-res", "no-freeze"],
           "description": "• When Sobek and The Thrall alternate turns, The Thrall gains 1 stack of <span style='font-weight:bold;'>Contract</span> and 1 stack of <span style='font-weight:bold;'>Self-Sacrifice</span>. <span style='font-weight:bold;'>Contract</span> and <span style='font-weight:bold;'>Self-Sacrifice</span> can stack up to 3 times. Each stack of <span style='font-weight:bold;'>Contract</span> increases <span style='color:#7756c6;font-weight:bold;'>All-Attribute Anomaly RES</span> by <span style='color:#cc0000;font-weight:bold;'>15%</span>, each stack of <span style='font-weight:bold;'>Self-Sacrifice</span> reduces The Thrall's <span style='color:#5555ff;font-weight:bold;'>DEF</span> by <span style='color:#2bad00;font-weight:bold;'>8%</span>. When The Thrall is <span style='color:#ffe599;font-weight:bold;'>Stunned</span>, CRIT DMG taken increases by <span style='color:#2bad00;font-weight:bold;'>50%</span>.",
           "performance": "• When Agents inflict <span style='font-weight:bold;'>Weakened</span> on Sobek and The Thrall, <span style='color:#ffaf2c;font-weight:bold;'>1500 Performance Points</span> will be awarded. When an Agent eliminates Sobek, <span style='color:#ffaf2c;font-weight:bold;'>2000 Performance Points</span> will be awarded. Up to a maximum of 5000 Performance Points can be earned.",
           "misc": "• Suitable for Agents with <span style='font-weight:bold;'>Stun</span> specialty."
@@ -5816,20 +5057,11 @@
             "ether": 3630,
             "physical": 4356
           },
-          "weaknesses": [
-            "fire"
-          ],
-          "resistances": [
-            "electric"
-          ],
-          "immunities": [
-            "freeze"
-          ],
+          "weaknesses": ["fire"],
+          "resistances": ["electric"],
+          "immunities": ["freeze"],
           "tags": [],
-          "mods": [
-            "40-dmg-res",
-            "no-freeze"
-          ],
+          "mods": ["40-dmg-res", "no-freeze"],
           "description": "• When the Agent hits the boss enemy with a <span style='font-weight:bold;'>Defensive Assist</span> or <span style='font-weight:bold;'>Chain Attack</span>, they apply 1 stack of <span style='font-weight:bold;'>Weakening</span> to the target, lasting 20s. The duration of each stack is calculated separately. For each stack of <span style='font-weight:bold;'>Weakening</span> on the target, Agent CRIT DMG is increased by <span style='color:#2bad00;font-weight:bold;'>15%</span>. When the boss enemy has 4 stacks of <span style='font-weight:bold;'>Weakening</span>, <span style='font-weight:bold;'>Defensive Assist</span> will deflect the boss enemy's attack, causing a Stagger effect.",
           "performance": "• Successfully triggering a <span style='font-weight:bold;'>Perfect Assist</span> grants <span style='color:#ffaf2c;font-weight:bold;'>350 Performance Points</span>. A maximum of 5000 Performance Points can be obtained.",
           "misc": ""
@@ -5911,25 +5143,11 @@
             "ether": 2922.33,
             "physical": 4208.16
           },
-          "weaknesses": [
-            "electric",
-            "ether"
-          ],
-          "resistances": [
-            "fire"
-          ],
-          "immunities": [
-            "freeze"
-          ],
-          "tags": [
-            "spoiler",
-            "shutdown",
-            "convert"
-          ],
-          "mods": [
-            "40-dmg-res",
-            "no-freeze"
-          ],
+          "weaknesses": ["electric", "ether"],
+          "resistances": ["fire"],
+          "immunities": ["freeze"],
+          "tags": ["spoiler", "shutdown", "convert"],
+          "mods": ["40-dmg-res", "no-freeze"],
           "description": "• While Corruptive Barrier is active, <span style='color:#7756c6;font-weight:bold;'>Anomaly DMG</span> taken by <span style='color:#ff0000;font-weight:bold;'>BOSS</span> is increased by <span style='color:#2bad00;font-weight:bold;'>50%</span>, and <span style='color:#7756c6;font-weight:bold;'>Anomaly Buildup</span> inflicted on it by Agents is increased by <span style='color:#2bad00;font-weight:bold;'>30%</span>. When <span style='color:#ff0000;font-weight:bold;'>BOSS</span> is <span style='color:#ffe599;font-weight:bold;'>Stunned</span>, <span style='color:#7756c6;font-weight:bold;'>Anomaly DMG</span> dealt to it by Agents is increased by <span style='color:#2bad00;font-weight:bold;'>40%</span>, and <span style='color:#7756c6;font-weight:bold;'>Anomaly Buildup</span> is increased by <span style='color:#2bad00;font-weight:bold;'>20%</span>.<br>• When <span style='color:#ff0000;font-weight:bold;'>BOSS</span> is not <span style='color:#ffe599;font-weight:bold;'>Stunned</span>, DMG taken is reduced by <span style='color:#cc0000;font-weight:bold;'>15%</span>.",
           "performance": "Each successful counter and subsequent trigger of a special stagger against <span style='color:#ff0000;font-weight:bold;'>BOSS</span>'s attacks grants <span style='color:#ffaf2c;font-weight:bold;'>1000 Performance Points</span>. During the Control Skill, each successful counter against <span style='color:#ff0000;font-weight:bold;'>BOSS</span>'s attacks grants <span style='color:#ffaf2c;font-weight:bold;'>500 Performance Points</span>.<br>• Performing a <span style='color:#b47ede;font-weight:bold;'>SHUTDOWN!!</span> on <span style='color:#ff0000;font-weight:bold;'>BOSS</span>'s Control Skill grants <span style='color:#ffaf2c;font-weight:bold;'>2000 Performance Points</span>. Maximum obtainable Performance Points: 5000.",
           "misc": "• Suitable for Agents with <span style='font-weight:bold;'>Anomaly</span> specialty."
@@ -5968,22 +5186,11 @@
             "ether": 3300,
             "physical": 4752
           },
-          "weaknesses": [
-            "ether"
-          ],
-          "resistances": [
-            "ice"
-          ],
-          "immunities": [
-            "freeze"
-          ],
-          "tags": [
-            "miasma"
-          ],
-          "mods": [
-            "40-dmg-res",
-            "no-freeze"
-          ],
+          "weaknesses": ["ether"],
+          "resistances": ["ice"],
+          "immunities": ["freeze"],
+          "tags": ["miasma"],
+          "mods": ["40-dmg-res", "no-freeze"],
           "description": "• When the Miasma Priest switches phase, their <span style='color:#7756c6;font-weight:bold;'>Anomaly Buildup RES</span> increases by <span style='color:#cc0000;font-weight:bold;'>10%</span> and CRIT DMG taken increases by <span style='color:#2bad00;font-weight:bold;'>30%</span>. This effect can stack up to 2 times and is cleared when Miasmic Shield breaks.",
           "performance": "• When an Agent successfully performs 3 <span style='font-weight:bold;'>Defensive Assists</span> within 3 seconds</span>, earn <span style='color:#ffaf2c;font-weight:bold;'>1000 Performance Points</span>. A maximum of 5000 Performance Points can be obtained.",
           "misc": "• Suitable for Agents with <span style='font-weight:bold;'>Rupture</span> specialty."
@@ -6015,10 +5222,7 @@
             "ether": 3025,
             "physical": 4356
           },
-          "weaknesses": [
-            "ice",
-            "ether"
-          ],
+          "weaknesses": ["ice", "ether"],
           "resistances": [],
           "immunities": [],
           "tags": [],
@@ -6098,23 +5302,11 @@
             "ether": 3437.5,
             "physical": 4950
           },
-          "weaknesses": [
-            "ether"
-          ],
-          "resistances": [
-            "ice",
-            "fire"
-          ],
-          "immunities": [
-            "freeze"
-          ],
-          "tags": [
-            "shutdown"
-          ],
-          "mods": [
-            "40-dmg-res",
-            "no-freeze"
-          ],
+          "weaknesses": ["ether"],
+          "resistances": ["ice", "fire"],
+          "immunities": ["freeze"],
+          "tags": ["shutdown"],
+          "mods": ["40-dmg-res", "no-freeze"],
           "description": "• When Discordant Solo is being attacked, the CRIT DMG of this attack decreases by <span style='color:#cc0000;font-weight:bold;'>40%</span>. When an Agent activates or extends an Ether Veil, the whole squad gains 1 stack of <span style='font-weight:bold;'>Sonic Resonance</span>. <span style='font-weight:bold;'>Sonic Resonance</span> stacks up to 3 times, and each stack increases Agent <span style='color:#7756c6;font-weight:bold;'>Anomaly Buildup Rate</span> by <span style='color:#2bad00;font-weight:bold;'>8%</span> and <span style='color:#7756c6;font-weight:bold;'>Attribute Anomaly DMG</span> by <span style='color:#2bad00;font-weight:bold;'>15%</span>.",
           "performance": "• During the Control Skill, each successful counter against Discordant Solo's attacks grants <span style='color:#ffaf2c;font-weight:bold;'>350 Performance Points</span>.<br>• Performing a <span style='color:#b47ede;font-weight:bold;'>SHUTDOWN!!</span> against Discordant Solo's Control Skill or countering the final hit of certain attacks and inflicting an <span style='color:#ca9a00;font-weight:bold;'>IMPAIRED!!</span> effect grants <span style='color:#ffaf2c;font-weight:bold;'>750 Performance Points</span>, up to a maximum of 5000 Performance Points.",
           "misc": "• Suitable for Agents with <span style='font-weight:bold;'>Anomaly</span> specialty."
@@ -6154,20 +5346,11 @@
             "ether": 2750,
             "physical": 3960
           },
-          "weaknesses": [
-            "electric",
-            "ether"
-          ],
+          "weaknesses": ["electric", "ether"],
           "resistances": [],
-          "immunities": [
-            "freeze"
-          ],
-          "tags": [
-            "ucc"
-          ],
-          "mods": [
-            "no-freeze"
-          ],
+          "immunities": ["freeze"],
+          "tags": ["ucc"],
+          "mods": ["no-freeze"],
           "description": "• When dealing sufficient DMG to the boss enemy's legs, <span style='color:#ca9a00;font-weight:bold;'>IMPAIRED!!</span> will be triggered. Upon successfully breaking the boss enemy's legs, the Agent restores <span style='color:#2bad00;font-weight:bold;'>1000</span> Decibels, and the boss gains 1 stack of <span style='font-weight:bold;'>Disintegration</span> for 20 seconds, up to a maximum of 4 stacks. When the Agent's attacks hit an enemy, for each stack of <span style='font-weight:bold;'>Disintegration</span> the target has, CRIT DMG is increased by <span style='color:#2bad00;font-weight:bold;'>25%</span>.",
           "performance": "• Successfully <span style='color:#ca9a00;font-weight:bold;'>impairing</span> an enemy grants <span style='color:#ffaf2c;font-weight:bold;'>800 Performance Points</span>. A maximum of 5000 Performance Points can be obtained.",
           "misc": ""
@@ -6206,23 +5389,11 @@
             "ether": 4356,
             "physical": 4356
           },
-          "weaknesses": [
-            "ice",
-            "physical"
-          ],
-          "resistances": [
-            "electric"
-          ],
-          "immunities": [
-            "freeze"
-          ],
-          "tags": [
-            "miasma"
-          ],
-          "mods": [
-            "40-dmg-res",
-            "no-freeze"
-          ],
+          "weaknesses": ["ice", "physical"],
+          "resistances": ["electric"],
+          "immunities": ["freeze"],
+          "tags": ["miasma"],
+          "mods": ["40-dmg-res", "no-freeze"],
           "description": "• When Sobek and The Thrall alternate turns, The Thrall gains 1 stack of <span style='font-weight:bold;'>Contract</span> and 1 stack of <span style='font-weight:bold;'>Self-Sacrifice</span>. <span style='font-weight:bold;'>Contract</span> and <span style='font-weight:bold;'>Self-Sacrifice</span> can stack up to 3 times. Each stack of <span style='font-weight:bold;'>Contract</span> increases <span style='color:#7756c6;font-weight:bold;'>All-Attribute Anomaly RES</span> by <span style='color:#cc0000;font-weight:bold;'>15%</span>, each stack of <span style='font-weight:bold;'>Self-Sacrifice</span> reduces The Thrall's <span style='color:#5555ff;font-weight:bold;'>DEF</span> by <span style='color:#2bad00;font-weight:bold;'>8%</span>. When The Thrall is <span style='color:#ffe599;font-weight:bold;'>Stunned</span>, CRIT DMG taken increases by <span style='color:#2bad00;font-weight:bold;'>50%</span>.",
           "performance": "• When Agents inflict <span style='font-weight:bold;'>Weakened</span> on Sobek and The Thrall, <span style='color:#ffaf2c;font-weight:bold;'>1500 Performance Points</span> will be awarded. When an Agent eliminates Sobek, <span style='color:#ffaf2c;font-weight:bold;'>2000 Performance Points</span> will be awarded. Up to a maximum of 5000 Performance Points can be earned.",
           "misc": "• Suitable for Agents with <span style='font-weight:bold;'>Stun</span> specialty."
@@ -6304,25 +5475,11 @@
             "ether": 2922.33,
             "physical": 4208.16
           },
-          "weaknesses": [
-            "electric",
-            "ether"
-          ],
-          "resistances": [
-            "fire"
-          ],
-          "immunities": [
-            "freeze"
-          ],
-          "tags": [
-            "spoiler",
-            "shutdown",
-            "convert"
-          ],
-          "mods": [
-            "40-dmg-res",
-            "no-freeze"
-          ],
+          "weaknesses": ["electric", "ether"],
+          "resistances": ["fire"],
+          "immunities": ["freeze"],
+          "tags": ["spoiler", "shutdown", "convert"],
+          "mods": ["40-dmg-res", "no-freeze"],
           "description": "• While Corruptive Barrier is active, <span style='color:#7756c6;font-weight:bold;'>Anomaly DMG</span> taken by <span style='color:#ff0000;font-weight:bold;'>BOSS</span> is increased by <span style='color:#2bad00;font-weight:bold;'>50%</span>, and <span style='color:#7756c6;font-weight:bold;'>Anomaly Buildup</span> inflicted on it by Agents is increased by <span style='color:#2bad00;font-weight:bold;'>30%</span>. When <span style='color:#ff0000;font-weight:bold;'>BOSS</span> is <span style='color:#ffe599;font-weight:bold;'>Stunned</span>, <span style='color:#7756c6;font-weight:bold;'>Anomaly DMG</span> dealt to it by Agents is increased by <span style='color:#2bad00;font-weight:bold;'>40%</span>, and <span style='color:#7756c6;font-weight:bold;'>Anomaly Buildup</span> is increased by <span style='color:#2bad00;font-weight:bold;'>20%</span>.<br>• When <span style='color:#ff0000;font-weight:bold;'>BOSS</span> is not <span style='color:#ffe599;font-weight:bold;'>Stunned</span>, DMG taken is reduced by <span style='color:#cc0000;font-weight:bold;'>15%</span>.",
           "performance": "Each successful counter and subsequent trigger of a special stagger against <span style='color:#ff0000;font-weight:bold;'>BOSS</span>'s attacks grants <span style='color:#ffaf2c;font-weight:bold;'>1000 Performance Points</span>. During the Control Skill, each successful counter against <span style='color:#ff0000;font-weight:bold;'>BOSS</span>'s attacks grants <span style='color:#ffaf2c;font-weight:bold;'>500 Performance Points</span>.<br>• Performing a <span style='color:#b47ede;font-weight:bold;'>SHUTDOWN!!</span> on <span style='color:#ff0000;font-weight:bold;'>BOSS</span>'s Control Skill grants <span style='color:#ffaf2c;font-weight:bold;'>2000 Performance Points</span>. Maximum obtainable Performance Points: 5000.",
           "misc": "• Suitable for Agents with <span style='font-weight:bold;'>Anomaly</span> specialty."
@@ -6367,24 +5524,11 @@
             "ether": 6187.5,
             "physical": 4950
           },
-          "weaknesses": [
-            "physical"
-          ],
-          "resistances": [
-            "ice",
-            "ether"
-          ],
-          "immunities": [
-            "freeze"
-          ],
-          "tags": [
-            "miasma",
-            "shutdown"
-          ],
-          "mods": [
-            "40-dmg-res",
-            "no-freeze"
-          ],
+          "weaknesses": ["physical"],
+          "resistances": ["ice", "ether"],
+          "immunities": ["freeze"],
+          "tags": ["miasma", "shutdown"],
+          "mods": ["40-dmg-res", "no-freeze"],
           "description": "• Primordial Nightmare's <span style='color:#7756c6;font-weight:bold;'>Attribute Anomaly DMG</span> taken is reduced by <span style='color:#cc0000;font-weight:bold;'>30%</span>. When switching from Miasmic Shield state to normal state, or from normal state to Miasmic Shield state, Agent CRIT DMG against them is increased by <span style='color:#2bad00;font-weight:bold;'>20%</span>. This effect can stack up to 3 times and resets when Primordial Nightmare recovers from <span style='color:#ffe599;font-weight:bold;'>Stun</span>.",
           "performance": "• Triggering <span style='color:#b4317b;font-weight:bold;'>PURIFIED!!</span> grants <span style='color:#ffaf2c;font-weight:bold;'>1000 Performance Points</span>. During the Control Skill, each successful counter against Primordial Nightmare's attacks grants <span style='color:#ffaf2c;font-weight:bold;'>500 Performance Points</span>. Performing a <span style='color:#b47ede;font-weight:bold;'>SHUTDOWN!!</span> on Primordial Nightmare's Control Skill grants <span style='color:#ffaf2c;font-weight:bold;'>2000 Performance Points</span>, up to a maximum of 5000 Performance Points.",
           "misc": "• Suitable for Agents with <span style='font-weight:bold;'>Attack</span> specialty."
@@ -6423,23 +5567,11 @@
             "ether": 4356,
             "physical": 4356
           },
-          "weaknesses": [
-            "electric",
-            "physical"
-          ],
-          "resistances": [
-            "ice"
-          ],
-          "immunities": [
-            "freeze"
-          ],
-          "tags": [
-            "miasma"
-          ],
-          "mods": [
-            "40-dmg-res",
-            "no-freeze"
-          ],
+          "weaknesses": ["electric", "physical"],
+          "resistances": ["ice"],
+          "immunities": ["freeze"],
+          "tags": ["miasma"],
+          "mods": ["40-dmg-res", "no-freeze"],
           "description": "• When an Agent hits The Defiler with <span style='font-weight:bold;'>Defensive Assist</span>, the whole squad gains 1 stack of <span style='font-weight:bold;'>Adjudication</span>; when an Agent knocks down The Defiler attacking in mid-air, the whole squad gains 4 stacks of <span style='font-weight:bold;'>Adjudication</span>. <span style='font-weight:bold;'>Adjudication</span> can stack up to 6 times and lasts for 30 seconds. Repeated triggers reset the duration.<br>• For each stack of <span style='font-weight:bold;'>Adjudication</span>, the Agent's CRIT DMG increases by <span style='color:#2bad00;font-weight:bold;'>5%</span>, <span style='color:#f0d12b;font-weight:bold;'>Physical DMG</span> increases by <span style='color:#2bad00;font-weight:bold;'>5%</span>, and <span style='color:#2eb6ff;font-weight:bold;'>Electric DMG</span> increases by <span style='color:#2bad00;font-weight:bold;'>5%</span>.<br>• The Defiler receives <span style='color:#cc0000;font-weight:bold;'>25%</span> less <span style='color:#7756c6;font-weight:bold;'>Attribute Anomaly DMG</span>.",
           "performance": "• When an Agent causes <span style='color:#ca9a00;font-weight:bold;'>IMPAIRED!!</span> status, they gain <span style='color:#ffaf2c;font-weight:bold;'>2500 Performance Points</span>; when an Agent shoots down The Defiler while it's attacking in mid-air, they gain <span style='color:#ffaf2c;font-weight:bold;'>1500 Performance Points</span>, up to a maximum of 5000 Performance Points.",
           "misc": "• Suitable for Agents with <span style='font-weight:bold;'>Attack</span> specialty."

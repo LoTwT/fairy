@@ -5,12 +5,12 @@
   "packageManager": "pnpm@10.31.0",
   "description": "Zenless Zone Zero data sync scripts and pure damage calculator core",
   "license": "MIT",
-  "sideEffects": false,
   "keywords": [
     "zenless zone zero",
     "zzz",
     "damage calculator"
   ],
+  "sideEffects": false,
   "exports": {
     ".": {
       "types": "./dist/index.d.mts",
@@ -23,8 +23,8 @@
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.mts",
   "files": [
-    "dist",
-    "data/source"
+    "data/source",
+    "dist"
   ],
   "scripts": {
     "sync": "tsx scripts/sources/index.ts",
