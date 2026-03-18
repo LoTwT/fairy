@@ -2,14 +2,16 @@
 
 ## 仓库级 AI 协作文件
 
-当前仓库统一通过 `scripts/sources/` 管理四个数据源同步：`xlsx` 负责 `.sources/source.xlsx -> data/source/xlsx/zh-CN` 与 `scripts/sources/xlsx/types` 的快照生成，`gachabase`、`buhflipexplode`、`mihoyo-wiki` 负责远端 source 数据抓取与派生快照更新。`packages/zzz-data/.sources/source.xlsx` 是手动下载的本地 xlsx 输入，不纳入版本管理；`.sources/source.xlsx.metadata.json` 记录最近一次成功处理的哈希与时间。运行入口、输出目录和数据源说明以 `packages/zzz-data/README.md` 与 `packages/zzz-data/scripts/sources/` 为准。
+当前仓库统一通过 `scripts/sources/` 管理四个数据源同步：`xlsx` 负责 `.sources/source.xlsx -> data/source/xlsx/zh-CN` 与 `scripts/sources/xlsx/types` 的快照生成，`gachabase`、`buhflipexplode`、`mihoyo-wiki` 负责远端 source 数据抓取与派生快照更新。同时，`packages/zzz-data/src/calculator/` 提供可发布的纯函数伤害计算核心，规格文档位于 `docs/specs/damage-core.md`。`packages/zzz-data/.sources/source.xlsx` 是手动下载的本地 xlsx 输入，不纳入版本管理；`.sources/source.xlsx.metadata.json` 记录最近一次成功处理的哈希与时间。运行入口、输出目录和数据源说明以 `packages/zzz-data/README.md`、`packages/zzz-data/scripts/sources/` 与 `docs/specs/damage-core.md` 为准。
 
 ```
 .
 ├── docs/
 │   ├── index.md           # 文档索引
 │   ├── ai-guide.md        # Codex App 与 Claude Code 共享说明
-│   └── dependencies.md    # 当前依赖说明
+│   ├── dependencies.md    # 当前依赖说明
+│   └── specs/
+│       └── damage-core.md # 伤害计算核心规格
 ├── AGENTS.md              # Codex App 入口文件（薄入口，指向 docs/）
 ├── CLAUDE.md              # Claude Code 入口文件（薄入口，指向 docs/）
 └── .claude/               # Claude Code 本地设置
@@ -31,6 +33,19 @@ packages/zzz-data/
 │   └── source.xlsx.metadata.json # 最近一次成功处理的 sha256 / processedAt
 ├── data/
 │   └── source/                  # 按 source / locale 组织的输出快照
+├── src/
+│   ├── calculator/
+│   │   ├── display.ts           # 展示用取整 helper
+│   │   ├── factors.ts           # 各乘区纯函数
+│   │   ├── index.ts             # calculator 导出
+│   │   ├── resolved.ts          # 常规 / sheer resolved core
+│   │   └── types.ts             # 对外公开的 calculator 类型
+│   └── index.ts                 # npm 入口
+├── tests/
+│   └── calculator/
+│       ├── display.test.ts      # 展示 helper 测试
+│       ├── factors.test.ts      # 乘区 helper 测试
+│       └── resolved.test.ts     # resolved core 测试
 ├── scripts/
 │   └── sources/
 │       ├── index.ts             # 主入口：按 source 名称调度 sync
@@ -43,9 +58,9 @@ packages/zzz-data/
 │       ├── buhflipexplode.ts    # buhflipexplode JSON 端点抓取
 │       ├── buhflipexplode-deadly-assault.ts # Deadly Assault 页面派生规则
 │       └── mihoyo-wiki.ts       # 米游社百科危局强袭战抓取
-├── README.md                    # 抓取与 xlsx 读取说明
-├── package.json                 # sync 命令与依赖
-└── tsconfig.json                # 覆盖 sources 脚本的 TypeScript 配置
+├── README.md                    # 抓取、xlsx 读取与 calculator 说明
+├── package.json                 # sync/build/test 命令与依赖
+└── tsconfig.json                # 覆盖 src / tests / scripts/sources 的 TypeScript 配置
 ```
 
 ## 远端数据源同步链路
@@ -75,8 +90,21 @@ packages/zzz-data/
 - `data/source/xlsx/zh-CN/*.json`：每个工作表对应的快照 JSON
 - `scripts/sources/xlsx/types/*`：按 worksheet 结构同步生成的内部类型
 
+## 计算核心边界
+
+`docs/specs/damage-core.md` 定义了当前恢复的纯函数伤害计算核心边界：
+
+- 只覆盖常规伤害与 `sheer` 贯穿伤害
+- 只提供 `resolved core`、`factor helpers`、`display helpers`
+- 不读取 `data/source/`，不解析 source 原文本，不做高层 resolver
+- 后续如需扩展异常、紊乱、失衡值、异常积蓄等能力，先更新 spec，再扩展 `src/calculator/` 与 `tests/calculator/`
+
 ## 当前边界
 
-- 已删除 `merge`、`src/`、`tests/`、`dist/`、发布相关配置和所有对外 API / 计算能力
-- 当前仓库不再维护公开 TypeScript API、构筑解析、伤害计算、cleaned helper 或 npm 发布产物
-- 如需扩展当前仓库，只在 `scripts/sources` 内新增或调整数据源同步逻辑，并保持 `.sources/source.xlsx` / `.sources/source.xlsx.metadata.json` / `data/source` / `scripts/sources/xlsx/types` 这几类输入输出约定一致
+- `packages/zzz-data` 当前同时承担两类职责：
+  - `scripts/sources/` 负责数据源同步
+  - `src/calculator/` 负责可发布的纯函数伤害计算核心
+- 当前仓库仍然不维护高层构筑解析、source 文本乘区抽取、cleaned helper 或场景级 resolver
+- 如需扩展当前仓库：
+  - 调整数据源同步时，保持 `.sources/source.xlsx` / `.sources/source.xlsx.metadata.json` / `data/source` / `scripts/sources/xlsx/types` 这几类输入输出约定一致
+  - 调整计算能力时，以 `docs/specs/damage-core.md` 为 source of truth

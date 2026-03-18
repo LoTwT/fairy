@@ -2,15 +2,38 @@
   "name": "zzz-data",
   "type": "module",
   "version": "0.0.1",
-  "private": true,
   "packageManager": "pnpm@10.31.0",
-  "description": "Zenless Zone Zero data sync scripts",
+  "description": "Zenless Zone Zero data sync scripts and pure damage calculator core",
+  "license": "MIT",
+  "sideEffects": false,
+  "keywords": [
+    "zenless zone zero",
+    "zzz",
+    "damage calculator"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs",
+      "default": "./dist/index.mjs"
+    },
+    "./data/source/*": "./data/source/*"
+  },
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "files": [
+    "dist",
+    "data/source"
+  ],
   "scripts": {
     "sync": "tsx scripts/sources/index.ts",
     "sync:xlsx": "tsx scripts/sources/index.ts xlsx",
     "sync:gachabase": "tsx scripts/sources/index.ts gachabase",
     "sync:buhflipexplode": "tsx scripts/sources/index.ts buhflipexplode",
     "sync:mihoyo-wiki": "tsx scripts/sources/index.ts mihoyo-wiki",
+    "build": "tsdown src/index.ts --format esm --dts",
+    "test": "vitest run",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
@@ -18,7 +41,9 @@
     "cheerio": "^1.2.0",
     "exceljs": "^4.4.0",
     "playwright": "^1.58.2",
+    "tsdown": "^0.16.6",
     "tsx": "^4.21.0",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.18"
   }
 }

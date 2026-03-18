@@ -1,6 +1,6 @@
 # zzz-data
 
-Zenless Zone Zero 数据源同步脚本与 xlsx 读取脚本。
+Zenless Zone Zero 数据源同步脚本、xlsx 读取脚本与纯函数伤害计算核心。
 
 ## 保留范围
 
@@ -11,9 +11,12 @@ Zenless Zone Zero 数据源同步脚本与 xlsx 读取脚本。
 - `scripts/sources/`：统一的数据源同步脚本
 - `scripts/sources/xlsx/types/`：由 `sync:xlsx` 生成的内部类型产物
 - `data/source/`：按 source / locale 组织的数据源输出快照
-- `package.json` / `tsconfig.json`：最小运行配置
+- `src/calculator/`：对外发布的纯函数伤害计算核心
+- `tests/calculator/`：calculator 测试
+- `docs/specs/damage-core.md`：calculator 规格文档
+- `package.json` / `tsconfig.json`：同步、构建、测试与类型检查配置
 
-已删除 `merge`、`src/`、`tests/`、`dist/`、对外发布 API 与构筑解析相关内容。
+当前仍未恢复高层构筑解析、source 文本乘区抽取与场景级 resolver。
 
 ## 数据源
 
@@ -29,9 +32,12 @@ pnpm run sync:xlsx
 pnpm run sync:gachabase
 pnpm run sync:buhflipexplode
 pnpm run sync:mihoyo-wiki
+pnpm run build
+pnpm run test
+pnpm run typecheck
 ```
 
-运行 `pnpm run sync:xlsx` 前，请先将手动下载的最新 xlsx 放到 `.sources/source.xlsx`。脚本会在成功后更新 `.sources/source.xlsx.metadata.json`，并重新生成 `data/source/xlsx/zh-CN/*.json` 与 `scripts/sources/xlsx/types/*`。`pnpm run sync` 会依次执行 `xlsx`、`gachabase`、`buhflipexplode`、`mihoyo-wiki` 四个数据源同步。
+运行 `pnpm run sync:xlsx` 前，请先将手动下载的最新 xlsx 放到 `.sources/source.xlsx`。脚本会在成功后更新 `.sources/source.xlsx.metadata.json`，并重新生成 `data/source/xlsx/zh-CN/*.json` 与 `scripts/sources/xlsx/types/*`。`pnpm run sync` 会依次执行 `xlsx`、`gachabase`、`buhflipexplode`、`mihoyo-wiki` 四个数据源同步。`pnpm run build` 使用 `tsdown` 输出 `dist/` 下的 npm 发布产物，`pnpm run test` 使用 `vitest` 运行纯函数计算核心测试，`pnpm run typecheck` 检查 `src/`、`tests/` 与 `scripts/sources/`。
 
 ## 输出目录
 
@@ -57,3 +63,27 @@ data/source/
 其中 `buhflipexplode` 同步完成后，还会额外读取 `deadly-assault.json`、`enemies.json` 与 `buffs.json`，按 `Deadly Assault` 页面当前 `da.js` 规则复算出页面展示用的 `deadly-assault-page-data.json`，并落到 `data/source/buhflipexplode/en/`。
 
 `.sources/source.xlsx` 不纳入版本管理；仓库只跟踪它的 metadata 与导出的文本快照。
+
+## Calculator API
+
+当前 `src/calculator/` 只公开三层纯函数 API：
+
+- `resolved core`
+  - `calcResolvedNormalDamage`
+  - `calcResolvedSheerDamage`
+- `factor helpers`
+  - `calcBaseDamage`
+  - `getAttackerLevelBase`
+  - `calcBonusMultiplier`
+  - `calcCritMultiplier`
+  - `calcExpectedCritMultiplier`
+  - `calcDefenseMultiplier`
+  - `calcResistanceMultiplier`
+  - `calcVulnerabilityMultiplier`
+  - `calcDazeVulnerabilityMultiplier`
+  - `calcSheerBonusMultiplier`
+- `display helpers`
+  - `ceilDisplayDamage`
+  - `sumDisplayedSegments`
+
+当前版本只覆盖常规伤害与 `sheer` 贯穿伤害，详细输入、公式和 clamp 规则见 [../../docs/specs/damage-core.md](../../docs/specs/damage-core.md)。
