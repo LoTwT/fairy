@@ -8,6 +8,7 @@ import {
   buildDeadlyAssaultPageData,
   DEADLY_ASSAULT_PAGE_DATA_TASK_NAME,
 } from "./buhflipexplode-deadly-assault.js"
+import { filterBuhflipexplodeOfficialData } from "./buhflipexplode-official.js"
 import { tasks as buhflipexplodeTasks } from "./buhflipexplode.js"
 import { tasks as gachabaseTasks } from "./gachabase.js"
 import { tasks as mihoyoWikiTasks } from "./mihoyo-wiki.js"
@@ -87,6 +88,51 @@ function writeStageJson(stageDir: string, name: string, data: unknown): void {
   console.log(`  → ${outPath}`)
 }
 
+function filterSourceOutputs(stageDir: string, tasks: CrawlTask[]): void {
+  const taskNames = new Set(tasks.map((task) => task.name))
+  const buhflipexplodeInputs = [
+    "buhflipexplode/en/shiyu-defense",
+    "buhflipexplode/en/deadly-assault",
+    "buhflipexplode/en/threshold-simulation",
+    "buhflipexplode/en/enemies",
+    "buhflipexplode/en/buffs",
+  ]
+
+  if (!buhflipexplodeInputs.every((name) => taskNames.has(name))) {
+    return
+  }
+
+  console.log("Filtering: buhflipexplode official history")
+  const filtered = filterBuhflipexplodeOfficialData({
+    shiyuDefense: readStageJson(stageDir, "buhflipexplode/en/shiyu-defense"),
+    deadlyAssault: readStageJson(stageDir, "buhflipexplode/en/deadly-assault"),
+    thresholdSimulation: readStageJson(
+      stageDir,
+      "buhflipexplode/en/threshold-simulation",
+    ),
+    enemies: readStageJson(stageDir, "buhflipexplode/en/enemies"),
+    buffs: readStageJson(stageDir, "buhflipexplode/en/buffs"),
+  })
+
+  writeStageJson(
+    stageDir,
+    "buhflipexplode/en/shiyu-defense",
+    filtered.shiyuDefense,
+  )
+  writeStageJson(
+    stageDir,
+    "buhflipexplode/en/deadly-assault",
+    filtered.deadlyAssault,
+  )
+  writeStageJson(
+    stageDir,
+    "buhflipexplode/en/threshold-simulation",
+    filtered.thresholdSimulation,
+  )
+  writeStageJson(stageDir, "buhflipexplode/en/enemies", filtered.enemies)
+  writeStageJson(stageDir, "buhflipexplode/en/buffs", filtered.buffs)
+}
+
 function writeDerivedOutputs(stageDir: string, tasks: CrawlTask[]): void {
   const taskNames = new Set(tasks.map((task) => task.name))
   const deadlyAssaultInputs = [
@@ -148,6 +194,7 @@ async function syncRemoteSources(filter?: RemoteSourceName): Promise<void> {
       console.log(`  → ${outPath}`)
     }
 
+    filterSourceOutputs(stageDir, tasks)
     writeDerivedOutputs(stageDir, tasks)
     commitStageDir(stageDir, tasks)
   } finally {

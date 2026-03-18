@@ -42,10 +42,12 @@ packages/zzz-data/
 │   │   └── types.ts             # 对外公开的 calculator 类型
 │   └── index.ts                 # npm 入口
 ├── tests/
-│   └── calculator/
-│       ├── display.test.ts      # 展示 helper 测试
-│       ├── factors.test.ts      # 乘区 helper 测试
-│       └── resolved.test.ts     # resolved core 测试
+│   ├── calculator/
+│   │   ├── display.test.ts      # 展示 helper 测试
+│   │   ├── factors.test.ts      # 乘区 helper 测试
+│   │   └── resolved.test.ts     # resolved core 测试
+│   └── sources/
+│       └── buhflipexplode-official.test.ts # buhflipexplode 正式服过滤测试
 ├── scripts/
 │   └── sources/
 │       ├── index.ts             # 主入口：按 source 名称调度 sync
@@ -56,6 +58,7 @@ packages/zzz-data/
 │       │   └── types/           # 由 sync:xlsx 同步产出的内部类型
 │       ├── gachabase.ts         # gachabase 列表页与详情页抓取
 │       ├── buhflipexplode.ts    # buhflipexplode JSON 端点抓取
+│       ├── buhflipexplode-official.ts # buhflipexplode 正式服过滤规则
 │       ├── buhflipexplode-deadly-assault.ts # Deadly Assault 页面派生规则
 │       └── mihoyo-wiki.ts       # 米游社百科危局强袭战抓取
 ├── README.md                    # 抓取、xlsx 读取与 calculator 说明
@@ -75,7 +78,8 @@ packages/zzz-data/
    - 抓取 `https://www.buhflipexplode.org`
    - 当前只保留 `en`
    - 直接消费其公开 JSON 端点
-   - 抓取完成后，会基于 `deadly-assault.json`、`enemies.json` 与 `buffs.json` 复算 `Deadly Assault` 页面展示数值，并额外产出 `data/source/buhflipexplode/en/deadly-assault-page-data.json`
+   - 抓取完成后，`scripts/sources/index.ts` 会先按官网页面的正式服阈值裁掉 beta / leaks 版本，并基于剩余正式服历史回收 `enemies.json` 与 `buffs.json` 的引用范围
+   - 过滤完成后，会基于 `deadly-assault.json`、`enemies.json` 与 `buffs.json` 复算 `Deadly Assault` 页面展示数值，并额外产出 `data/source/buhflipexplode/en/deadly-assault-page-data.json`
 3. `mihoyo-wiki.ts`
    - 抓取米游社百科危局强袭战条目
    - 当前只保留 `zh-CN`

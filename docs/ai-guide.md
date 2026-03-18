@@ -1,6 +1,6 @@
 # AI 协作指南
 
-本文档是 `Codex App` 与 `Claude Code` 共享的项目说明。当前仓库统一通过 `packages/zzz-data/scripts/sources` 管理四个数据源同步：`xlsx` 负责读取 `packages/zzz-data/.sources/source.xlsx` 并生成 `data/source/xlsx/zh-CN` / `scripts/sources/xlsx/types`，`gachabase`、`buhflipexplode`、`mihoyo-wiki` 负责远端 source 数据抓取与派生快照更新。同时，`packages/zzz-data/src/calculator/` 提供一个可发布的纯函数伤害计算核心，规格文档位于 `docs/specs/damage-core.md`。`.sources/source.xlsx` 是手动下载的本地输入，不纳入版本管理，`.sources/source.xlsx.metadata.json` 记录最近一次成功处理的哈希与时间。项目知识、命令、工作流统一维护在 `docs/`，根目录的 `AGENTS.md` 与 `CLAUDE.md` 只保留各自工具的入口约定。
+本文档是 `Codex App` 与 `Claude Code` 共享的项目说明。当前仓库统一通过 `packages/zzz-data/scripts/sources` 管理四个数据源同步：`xlsx` 负责读取 `packages/zzz-data/.sources/source.xlsx` 并生成 `data/source/xlsx/zh-CN` / `scripts/sources/xlsx/types`，`gachabase`、`buhflipexplode`、`mihoyo-wiki` 负责远端 source 数据抓取与派生快照更新。其中 `buhflipexplode` 在写入 `data/source/` 前会先过滤为官网当前可见的正式服历史版本。`packages/zzz-data/src/calculator/` 同时提供一个可发布的纯函数伤害计算核心，规格文档位于 `docs/specs/damage-core.md`。`.sources/source.xlsx` 是手动下载的本地输入，不纳入版本管理，`.sources/source.xlsx.metadata.json` 记录最近一次成功处理的哈希与时间。项目知识、命令、工作流统一维护在 `docs/`，根目录的 `AGENTS.md` 与 `CLAUDE.md` 只保留各自工具的入口约定。
 
 ## 关键命令
 

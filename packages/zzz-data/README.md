@@ -13,6 +13,7 @@ Zenless Zone Zero 数据源同步脚本、xlsx 读取脚本与纯函数伤害计
 - `data/source/`：按 source / locale 组织的数据源输出快照
 - `src/calculator/`：对外发布的纯函数伤害计算核心
 - `tests/calculator/`：calculator 测试
+- `tests/sources/`：source 同步与过滤测试
 - `docs/specs/damage-core.md`：calculator 规格文档
 - `package.json` / `tsconfig.json`：同步、构建、测试与类型检查配置
 
@@ -60,7 +61,7 @@ data/source/
 
 `scripts/sources/index.ts` 会按 source 名称调度同步；所有任务统一写到 `data/source/<source>/<locale>/<name>.json`，所以新增 source 任务时，任务名本身也遵循同样的 `source/locale/name` 约定。
 每次执行远端同步时，脚本会先把当前任务集合写入临时目录，全部成功后再替换对应来源目录，既能清理历史残留，也能保留上一份可用快照直到本轮同步完成。
-其中 `buhflipexplode` 同步完成后，还会额外读取 `deadly-assault.json`、`enemies.json` 与 `buffs.json`，按 `Deadly Assault` 页面当前 `da.js` 规则复算出页面展示用的 `deadly-assault-page-data.json`，并落到 `data/source/buhflipexplode/en/`。
+其中 `buhflipexplode` 会在写入前先按官网页面当前的正式服阈值裁掉 beta / leaks 版本，再基于剩余正式服历史版本回收 `enemies.json` 与 `buffs.json` 的引用范围。同步完成后，还会额外读取过滤后的 `deadly-assault.json`、`enemies.json` 与 `buffs.json`，按 `Deadly Assault` 页面当前 `da.js` 规则复算出页面展示用的 `deadly-assault-page-data.json`，并落到 `data/source/buhflipexplode/en/`。
 
 `.sources/source.xlsx` 不纳入版本管理；仓库只跟踪它的 metadata 与导出的文本快照。
 
