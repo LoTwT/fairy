@@ -1142,35 +1142,35 @@ const LANGS = ["en", "zh-CN"] as const
 
 export const tasks: CrawlTask[] = LANGS.flatMap((lang) => [
   {
-    name: `${lang}/gachabase/agents`,
+    name: `gachabase/${lang}/agents`,
     url: buildDataUrl("/agents", lang),
     extract: (_, html) => parseAgentList(html),
   },
   {
-    name: `${lang}/gachabase/agent-details`,
+    name: `gachabase/${lang}/agent-details`,
     url: buildDataUrl("/agents", lang),
     extract: async (_, html) =>
       fetchAllAgentDetails(parseAgentList(html), lang),
   },
   {
-    name: `${lang}/gachabase/w-engines`,
+    name: `gachabase/${lang}/w-engines`,
     url: buildDataUrl("/w-engines", lang),
     extract: (_, html) => parseWEngineList(html),
   },
   {
-    name: `${lang}/gachabase/w-engine-details`,
+    name: `gachabase/${lang}/w-engine-details`,
     url: buildDataUrl("/w-engines", lang),
     extract: async (_, html) =>
       fetchAllWEngineDetails(parseWEngineList(html), lang),
   },
   {
-    name: `${lang}/gachabase/bangboo`,
+    name: `gachabase/${lang}/bangboo`,
     url: buildDataUrl("/bangboo", lang),
     extract: async (_, html) =>
       fetchAllBangbooDetails(parseBangbooList(html), lang),
   },
   {
-    name: `${lang}/gachabase/drive-discs`,
+    name: `gachabase/${lang}/drive-discs`,
     url: buildDataUrl("/drive-discs", lang),
     extract: (_, html) => parseDriveDiscList(html),
   },

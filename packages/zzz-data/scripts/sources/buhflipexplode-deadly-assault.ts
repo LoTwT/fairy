@@ -14,7 +14,7 @@ const POMPEY_PERF_OVERRIDE =
   "• Successfully triggering <span style='font-weight:bold;'>Perfect Assist</span> grants <span style='color:#ffaf2c;font-weight:bold;'>300 Performance Points</span>. A maximum of 5000 Performance Points can be obtained."
 
 export const DEADLY_ASSAULT_PAGE_DATA_TASK_NAME =
-  "en/buhflipexplode/deadly-assault-page-data"
+  "buhflipexplode/en/deadly-assault-page-data"
 
 type ElementName = (typeof ELEMENTS)[number]
 

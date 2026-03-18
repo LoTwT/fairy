@@ -147,27 +147,27 @@ function createJsonTask(
 
 export const tasks: CrawlTask[] = [
   createJsonTask(
-    "en/buhflipexplode/shiyu-defense",
+    "buhflipexplode/en/shiyu-defense",
     `${BASE_URL}/zzz/sd/sd-versions.json`,
     assertVersionList,
   ),
   createJsonTask(
-    "en/buhflipexplode/deadly-assault",
+    "buhflipexplode/en/deadly-assault",
     `${BASE_URL}/zzz/da/da-versions.json`,
     assertDeadlyAssaultMap,
   ),
   createJsonTask(
-    "en/buhflipexplode/threshold-simulation",
+    "buhflipexplode/en/threshold-simulation",
     `${BASE_URL}/zzz/ts/ts-versions.json`,
     assertVersionList,
   ),
   createJsonTask(
-    "en/buhflipexplode/enemies",
+    "buhflipexplode/en/enemies",
     `${BASE_URL}/assets/zzz/enemies.json`,
     assertEnemyMap,
   ),
   createJsonTask(
-    "en/buhflipexplode/buffs",
+    "buhflipexplode/en/buffs",
     `${BASE_URL}/assets/zzz/buffs.json`,
     assertBuffMap,
   ),

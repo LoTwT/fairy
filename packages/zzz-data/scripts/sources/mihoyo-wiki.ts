@@ -266,7 +266,7 @@ async function fetchAllDAEntries(items: ContentListItem[]): Promise<DAEntry[]> {
 
 export const tasks: CrawlTask[] = [
   {
-    name: "zh-CN/mihoyo-wiki/deadly-assault",
+    name: "mihoyo-wiki/zh-CN/deadly-assault",
     url: `${LIST_API}?app_sn=zzz_wiki&channel_id=${CHANNEL_ID_DA}`,
     headers: FETCH_HEADERS,
     extract: (_, html) => fetchAllDAEntries(parseContentList(html)),

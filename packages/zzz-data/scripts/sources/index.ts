@@ -15,7 +15,7 @@ import { fetchDynamic, fetchStatic } from "./shared.js"
 import { syncXlsxSource } from "./xlsx/index.js"
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const outputDir = path.resolve(__dirname, "../../data/raw")
+const outputDir = path.resolve(__dirname, "../../data/source")
 
 const REMOTE_SOURCE_NAMES = [
   "gachabase",
@@ -90,9 +90,9 @@ function writeStageJson(stageDir: string, name: string, data: unknown): void {
 function writeDerivedOutputs(stageDir: string, tasks: CrawlTask[]): void {
   const taskNames = new Set(tasks.map((task) => task.name))
   const deadlyAssaultInputs = [
-    "en/buhflipexplode/deadly-assault",
-    "en/buhflipexplode/enemies",
-    "en/buhflipexplode/buffs",
+    "buhflipexplode/en/deadly-assault",
+    "buhflipexplode/en/enemies",
+    "buhflipexplode/en/buffs",
   ]
 
   if (!deadlyAssaultInputs.every((name) => taskNames.has(name))) {
@@ -100,9 +100,9 @@ function writeDerivedOutputs(stageDir: string, tasks: CrawlTask[]): void {
   }
 
   const pageData = buildDeadlyAssaultPageData(
-    readStageJson(stageDir, "en/buhflipexplode/deadly-assault"),
-    readStageJson(stageDir, "en/buhflipexplode/enemies"),
-    readStageJson(stageDir, "en/buhflipexplode/buffs"),
+    readStageJson(stageDir, "buhflipexplode/en/deadly-assault"),
+    readStageJson(stageDir, "buhflipexplode/en/enemies"),
+    readStageJson(stageDir, "buhflipexplode/en/buffs"),
   )
 
   console.log(`Deriving: ${DEADLY_ASSAULT_PAGE_DATA_TASK_NAME}`)

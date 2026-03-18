@@ -2,7 +2,7 @@
 
 ## 仓库级 AI 协作文件
 
-当前仓库统一通过 `scripts/sources/` 管理四个数据源同步：`xlsx` 负责 `.sources/source.xlsx -> data/xlsx` 与 `scripts/sources/xlsx/types` 的快照生成，`gachabase`、`buhflipexplode`、`mihoyo-wiki` 负责远端原始数据抓取与派生快照更新。`packages/zzz-data/.sources/source.xlsx` 是手动下载的本地 xlsx 输入，不纳入版本管理；`.sources/source.xlsx.metadata.json` 记录最近一次成功处理的哈希与时间。运行入口、输出目录和数据源说明以 `packages/zzz-data/README.md` 与 `packages/zzz-data/scripts/sources/` 为准。
+当前仓库统一通过 `scripts/sources/` 管理四个数据源同步：`xlsx` 负责 `.sources/source.xlsx -> data/source/xlsx/zh-CN` 与 `scripts/sources/xlsx/types` 的快照生成，`gachabase`、`buhflipexplode`、`mihoyo-wiki` 负责远端 source 数据抓取与派生快照更新。`packages/zzz-data/.sources/source.xlsx` 是手动下载的本地 xlsx 输入，不纳入版本管理；`.sources/source.xlsx.metadata.json` 记录最近一次成功处理的哈希与时间。运行入口、输出目录和数据源说明以 `packages/zzz-data/README.md` 与 `packages/zzz-data/scripts/sources/` 为准。
 
 ```
 .
@@ -30,14 +30,13 @@ packages/zzz-data/
 │   ├── source.xlsx              # 手动下载的本地 xlsx 输入（gitignored）
 │   └── source.xlsx.metadata.json # 最近一次成功处理的 sha256 / processedAt
 ├── data/
-│   ├── xlsx/                    # sync:xlsx 生成的快照 JSON
-│   └── raw/                     # 远端数据源同步生成的原始抓取数据
+│   └── source/                  # 按 source / locale 组织的输出快照
 ├── scripts/
 │   └── sources/
 │       ├── index.ts             # 主入口：按 source 名称调度 sync
 │       ├── shared.ts            # fetch / playwright / batching / SvelteKit data 解码工具
 │       ├── xlsx/
-│       │   ├── index.ts         # 读取 .sources/source.xlsx，更新 metadata，并写入 data/xlsx/
+│       │   ├── index.ts         # 读取 .sources/source.xlsx，更新 metadata，并写入 data/source/xlsx/zh-CN/
 │       │   ├── config.ts        # worksheet 到字段映射的 source of truth
 │       │   └── types/           # 由 sync:xlsx 同步产出的内部类型
 │       ├── gachabase.ts         # gachabase 列表页与详情页抓取
@@ -51,7 +50,7 @@ packages/zzz-data/
 
 ## 远端数据源同步链路
 
-`scripts/sources/index.ts` 在运行远端数据源同步时，会聚合三个来源的任务列表，逐个抓取并将结果写到 `data/raw/<task-name>.json`：
+`scripts/sources/index.ts` 在运行远端数据源同步时，会聚合三个来源的任务列表，逐个抓取并将结果写到 `data/source/<source>/<locale>/<name>.json`：
 
 1. `gachabase.ts`
    - 抓取 `https://zzz.gachabase.net`
@@ -61,23 +60,23 @@ packages/zzz-data/
    - 抓取 `https://www.buhflipexplode.org`
    - 当前只保留 `en`
    - 直接消费其公开 JSON 端点
-   - 抓取完成后，会基于 `deadly-assault.json`、`enemies.json` 与 `buffs.json` 复算 `Deadly Assault` 页面展示数值，并额外产出 `data/raw/en/buhflipexplode/deadly-assault-page-data.json`
+   - 抓取完成后，会基于 `deadly-assault.json`、`enemies.json` 与 `buffs.json` 复算 `Deadly Assault` 页面展示数值，并额外产出 `data/source/buhflipexplode/en/deadly-assault-page-data.json`
 3. `mihoyo-wiki.ts`
    - 抓取米游社百科危局强袭战条目
    - 当前只保留 `zh-CN`
    - 通过列表接口 + 详情接口拼装百科原始条目
 
-执行远端同步时，`scripts/sources/index.ts` 会先将本次任务集合写入临时目录；只有全部任务成功后，才替换对应的 `data/raw/<lang>/<source>/` 目录。这样既能清理任务重命名或删减后的旧文件，也不会在中途失败时丢掉上一份可用快照。
+执行远端同步时，`scripts/sources/index.ts` 会先将本次任务集合写入临时目录；只有全部任务成功后，才替换对应的 `data/source/<source>/<locale>/` 目录。这样既能清理任务重命名或删减后的旧文件，也不会在中途失败时丢掉上一份可用快照。
 
 ## xlsx 读取链路
 
 `scripts/sources/xlsx/index.ts` 会读取 `.sources/source.xlsx`，按 `scripts/sources/xlsx/config.ts` 中的 worksheet 配置导出，并在成功后更新 `.sources/source.xlsx.metadata.json`：
 
-- `data/xlsx/*.json`：每个工作表对应的快照 JSON
+- `data/source/xlsx/zh-CN/*.json`：每个工作表对应的快照 JSON
 - `scripts/sources/xlsx/types/*`：按 worksheet 结构同步生成的内部类型
 
 ## 当前边界
 
 - 已删除 `merge`、`src/`、`tests/`、`dist/`、发布相关配置和所有对外 API / 计算能力
 - 当前仓库不再维护公开 TypeScript API、构筑解析、伤害计算、cleaned helper 或 npm 发布产物
-- 如需扩展当前仓库，只在 `scripts/sources` 内新增或调整数据源同步逻辑，并保持 `.sources/source.xlsx` / `.sources/source.xlsx.metadata.json` / `data/xlsx` / `data/raw` / `scripts/sources/xlsx/types` 这几类输入输出约定一致
+- 如需扩展当前仓库，只在 `scripts/sources` 内新增或调整数据源同步逻辑，并保持 `.sources/source.xlsx` / `.sources/source.xlsx.metadata.json` / `data/source` / `scripts/sources/xlsx/types` 这几类输入输出约定一致

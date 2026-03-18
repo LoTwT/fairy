@@ -16,7 +16,7 @@ const ROOT = resolve(__dirname, "../../..")
 const SOURCE_DIR = resolve(ROOT, ".sources")
 const XLSX_PATH = resolve(SOURCE_DIR, "source.xlsx")
 const SOURCE_METADATA_PATH = resolve(SOURCE_DIR, "source.xlsx.metadata.json")
-const DATA_DIR = resolve(ROOT, "data/xlsx")
+const DATA_DIR = resolve(ROOT, "data/source/xlsx/zh-CN")
 const TYPES_DIR = resolve(__dirname, "types")
 
 interface SourceMetadata {
