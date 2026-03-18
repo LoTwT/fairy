@@ -7,13 +7,12 @@ import type {
 import { createHash } from "node:crypto"
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs"
 import { dirname, resolve } from "node:path"
-import process from "node:process"
 import { fileURLToPath } from "node:url"
 import ExcelJS from "exceljs"
 import { extractCellValue, normalizeHeader, worksheetConfigs } from "./config"
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
-const ROOT = resolve(__dirname, "../..")
+const ROOT = resolve(__dirname, "../../..")
 const SOURCE_DIR = resolve(ROOT, ".sources")
 const XLSX_PATH = resolve(SOURCE_DIR, "source.xlsx")
 const SOURCE_METADATA_PATH = resolve(SOURCE_DIR, "source.xlsx.metadata.json")
@@ -215,13 +214,13 @@ function writeSourceMetadata(metadata: SourceMetadata): void {
 // Main
 // ---------------------------------------------------------------------------
 
-async function main() {
+export async function syncXlsxSource() {
   mkdirSync(SOURCE_DIR, { recursive: true })
   const workbook = new ExcelJS.Workbook()
 
   if (!existsSync(XLSX_PATH)) {
     throw new Error(
-      `Missing local xlsx source at ${XLSX_PATH}. Download the latest source.xlsx before running generate.`,
+      `Missing local xlsx source at ${XLSX_PATH}. Download the latest source.xlsx before running sync:xlsx.`,
     )
   }
 
@@ -388,8 +387,3 @@ async function main() {
 
   console.log("\nDone!")
 }
-
-main().catch((err) => {
-  console.error(err)
-  process.exit(1)
-})

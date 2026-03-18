@@ -12,17 +12,44 @@ import { tasks as buhflipexplodeTasks } from "./buhflipexplode.js"
 import { tasks as gachabaseTasks } from "./gachabase.js"
 import { tasks as mihoyoWikiTasks } from "./mihoyo-wiki.js"
 import { fetchDynamic, fetchStatic } from "./shared.js"
+import { syncXlsxSource } from "./xlsx/index.js"
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const outputDir = path.resolve(__dirname, "../../data/raw")
 
+const REMOTE_SOURCE_NAMES = [
+  "gachabase",
+  "buhflipexplode",
+  "mihoyo-wiki",
+] as const
+const SOURCE_NAMES = ["xlsx", ...REMOTE_SOURCE_NAMES] as const
+
+type RemoteSourceName = (typeof REMOTE_SOURCE_NAMES)[number]
+type SourceName = (typeof SOURCE_NAMES)[number]
+
+const allRemoteTasks = [
+  ...gachabaseTasks,
+  ...buhflipexplodeTasks,
+  ...mihoyoWikiTasks,
+]
+
 fs.mkdirSync(outputDir, { recursive: true })
 
-const filter = process.argv[2] // e.g. "gachabase" | "buhflipexplode"
-const allTasks = [...gachabaseTasks, ...buhflipexplodeTasks, ...mihoyoWikiTasks]
-const tasks: CrawlTask[] = filter
-  ? allTasks.filter((t) => t.name.includes(filter))
-  : allTasks
+function isRemoteSourceName(value: string): value is RemoteSourceName {
+  return REMOTE_SOURCE_NAMES.includes(value as RemoteSourceName)
+}
+
+function isSourceName(value: string): value is SourceName {
+  return SOURCE_NAMES.includes(value as SourceName)
+}
+
+function getRemoteTasks(filter?: RemoteSourceName): CrawlTask[] {
+  if (!filter) {
+    return allRemoteTasks
+  }
+
+  return allRemoteTasks.filter((task) => task.name.includes(filter))
+}
 
 function getRelativeOutputPath(task: CrawlTask): string {
   return `${task.name}.json`
@@ -36,7 +63,7 @@ function getOutputDirs(tasks: CrawlTask[]): string[] {
 
 function createStageDir(): string {
   fs.mkdirSync(outputDir, { recursive: true })
-  return fs.mkdtempSync(path.join(outputDir, ".crawl-stage-"))
+  return fs.mkdtempSync(path.join(outputDir, ".sync-stage-"))
 }
 
 function getStageOutputPath(stageDir: string, task: CrawlTask): string {
@@ -95,9 +122,11 @@ function commitStageDir(stageDir: string, tasks: CrawlTask[]): void {
   })
 }
 
-async function run() {
+async function syncRemoteSources(filter?: RemoteSourceName): Promise<void> {
+  const tasks = getRemoteTasks(filter)
+
   if (tasks.length === 0) {
-    console.log("No crawl tasks configured.")
+    console.log("No remote source tasks configured.")
     return
   }
 
@@ -105,7 +134,7 @@ async function run() {
 
   try {
     for (const task of tasks) {
-      console.log(`Crawling: ${task.name} (${task.url})`)
+      console.log(`Syncing: ${task.name} (${task.url})`)
       const html = task.dynamic
         ? await fetchDynamic(task.url)
         : await fetchStatic(task.url, task.headers)
@@ -123,6 +152,34 @@ async function run() {
     commitStageDir(stageDir, tasks)
   } finally {
     fs.rmSync(stageDir, { recursive: true, force: true })
+  }
+}
+
+async function run(): Promise<void> {
+  const filter = process.argv[2]
+
+  if (filter && !isSourceName(filter)) {
+    throw new Error(
+      `Unknown source "${filter}". Supported: ${SOURCE_NAMES.join(", ")}`,
+    )
+  }
+
+  if (!filter) {
+    console.log("Syncing: xlsx")
+    await syncXlsxSource()
+    await syncRemoteSources()
+    console.log("Done.")
+    return
+  }
+
+  if (filter === "xlsx") {
+    console.log("Syncing: xlsx")
+    await syncXlsxSource()
+    return
+  }
+
+  if (isRemoteSourceName(filter)) {
+    await syncRemoteSources(filter)
   }
 
   console.log("Done.")

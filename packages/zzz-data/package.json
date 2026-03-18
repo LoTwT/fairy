@@ -4,13 +4,13 @@
   "version": "0.0.1",
   "private": true,
   "packageManager": "pnpm@10.31.0",
-  "description": "Zenless Zone Zero raw data crawl scripts",
+  "description": "Zenless Zone Zero data sync scripts",
   "scripts": {
-    "generate": "tsx scripts/generate/index.ts",
-    "crawl": "tsx scripts/crawl/index.ts",
-    "crawl:gachabase": "tsx scripts/crawl/index.ts gachabase",
-    "crawl:buhflipexplode": "tsx scripts/crawl/index.ts buhflipexplode",
-    "crawl:mihoyo-wiki": "tsx scripts/crawl/index.ts mihoyo-wiki",
+    "sync": "tsx scripts/sources/index.ts",
+    "sync:xlsx": "tsx scripts/sources/index.ts xlsx",
+    "sync:gachabase": "tsx scripts/sources/index.ts gachabase",
+    "sync:buhflipexplode": "tsx scripts/sources/index.ts buhflipexplode",
+    "sync:mihoyo-wiki": "tsx scripts/sources/index.ts mihoyo-wiki",
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {

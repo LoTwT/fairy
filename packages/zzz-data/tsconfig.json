@@ -16,5 +16,5 @@
     "skipDefaultLibCheck": true,
     "skipLibCheck": true
   },
-  "include": ["scripts/crawl/**/*.ts", "scripts/generate/**/*.ts"]
+  "include": ["scripts/sources/**/*.ts"]
 }
