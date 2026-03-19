@@ -34,9 +34,9 @@ pnpm run prettier             # prettier 格式化
 修改数据源同步脚本、xlsx 读取脚本、伤害计算核心或文档后，按下面顺序处理：
 
 1. 先检查本次改动是否改变了目录结构、命令或运行说明；如有变化，先更新文档
-2. `pnpm run lint --fix && pnpm run prettier`
-3. 如果修改了某个数据源的同步逻辑，运行对应的 `pnpm run sync:<source>`；如果修改了整体调度逻辑，可运行 `pnpm run sync`。其中修改 `xlsx` 读取逻辑前，先确认最新下载的 `.sources/source.xlsx` 已就位；`sync:xlsx` 成功后会更新 `.sources/source.xlsx.metadata.json`，并重新生成 `packages/zzz-data/data/source/xlsx/zh-CN/` 与 `scripts/sources/xlsx/types/` 下的产物；如果修改了处理后 enemy 数据生成逻辑，运行 `pnpm run generate:enemy`；如果这轮不适合实际执行，在结论中明确说明未运行
-4. 如果修改了 `src/`、`tests/`、构建配置或对外 API，至少运行 `pnpm --filter zzz-data run typecheck && pnpm --filter zzz-data run test && pnpm --filter zzz-data run build`
+2. 如果修改了某个数据源的同步逻辑，运行对应的 `pnpm run sync:<source>`；如果修改了整体调度逻辑，可运行 `pnpm run sync`。其中修改 `xlsx` 读取逻辑前，先确认最新下载的 `.sources/source.xlsx` 已就位；`sync:xlsx` 成功后会更新 `.sources/source.xlsx.metadata.json`，并重新生成 `packages/zzz-data/data/source/xlsx/zh-CN/` 与 `scripts/sources/xlsx/types/` 下的产物；如果修改了处理后 enemy 数据生成逻辑，运行 `pnpm run generate:enemy`；如果这轮不适合实际执行，在结论中明确说明未运行
+3. 项目代码或生成产物发生变化后，执行 `pnpm --filter zzz-data run typecheck && pnpm run prettier`
+4. 如果修改了 `src/`、`tests/`、构建配置或对外 API，在第 3 步之后继续运行 `pnpm --filter zzz-data run test && pnpm --filter zzz-data run build`
 
 ## 文档维护规则
 
