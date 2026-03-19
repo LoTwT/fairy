@@ -1,0 +1,107 @@
+{
+  "id": "10300",
+  "base": {
+    "typeStats": [
+      {
+        "enemyType": 0,
+        "baseHp": 17218,
+        "baseDaze": 5991
+      },
+      {
+        "enemyType": 1,
+        "baseHp": 17218,
+        "baseDaze": 5991
+      }
+    ],
+    "baseDefense": 60,
+    "stunDamageMultiplierPercent": 150,
+    "stunDurationSeconds": 12,
+    "anomalyBaseBuildup": 3000,
+    "resistanceByElement": {
+      "ice": -0.2,
+      "fire": 0,
+      "electric": 0,
+      "ether": -0.2,
+      "physical": 0
+    },
+    "immunities": []
+  },
+  "trace": {
+    "buhflipexplode": {
+      "tags": [],
+      "mods": []
+    }
+  },
+  "modes": {
+    "deadlyAssault": {
+      "history": [
+        {
+          "version": "1.4.2",
+          "versionName": "1.4 Phase 2",
+          "versionTime": "10/01/2025 - 24/01/2025",
+          "side": 3,
+          "enemyType": 0,
+          "hpMultiplierPercent": 160,
+          "dazeMultiplierPercent": 100,
+          "anomalyMultiplierPercent": 100,
+          "rawHp": 59700536,
+          "altHp": 59700536,
+          "altHpAdjustments": [],
+          "defense": 953,
+          "maxDaze": 14078.85,
+          "maxAnomalyBuildup": {
+            "ice": 2500,
+            "fire": 3000,
+            "electric": 3000,
+            "ether": 2500,
+            "physical": 3600
+          }
+        },
+        {
+          "version": "1.5.3",
+          "versionName": "1.5 Phase 3",
+          "versionTime": "21/02/2025 - 07/03/2025",
+          "side": 3,
+          "enemyType": 1,
+          "hpMultiplierPercent": 192,
+          "dazeMultiplierPercent": 100,
+          "anomalyMultiplierPercent": 100,
+          "rawHp": 71640643,
+          "altHp": 71640643,
+          "altHpAdjustments": [],
+          "defense": 953,
+          "maxDaze": 14078.85,
+          "maxAnomalyBuildup": {
+            "ice": 2500,
+            "fire": 3000,
+            "electric": 3000,
+            "ether": 2500,
+            "physical": 3600
+          }
+        },
+        {
+          "version": "1.6.3",
+          "versionName": "1.6 Phase 3",
+          "versionTime": "18/04/2025 - 02/05/2025",
+          "side": 1,
+          "enemyType": 1,
+          "hpMultiplierPercent": 175,
+          "dazeMultiplierPercent": 100,
+          "anomalyMultiplierPercent": 100,
+          "rawHp": 65297461,
+          "altHp": 65297461,
+          "altHpAdjustments": [],
+          "defense": 953,
+          "maxDaze": 14078.85,
+          "maxAnomalyBuildup": {
+            "ice": 2500,
+            "fire": 3000,
+            "electric": 3000,
+            "ether": 2500,
+            "physical": 3600
+          }
+        }
+      ]
+    }
+  }
+}

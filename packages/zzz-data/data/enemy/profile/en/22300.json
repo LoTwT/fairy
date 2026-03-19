@@ -1,0 +1,69 @@
+{
+  "id": "22300",
+  "locale": "en",
+  "name": "The Defiler",
+  "aliases": [],
+  "imageKey": "the-defiler",
+  "tags": ["miasma"],
+  "summary": "• When an Agent hits The Defiler with <span style='font-weight:bold;'>Defensive Assist</span>, the whole squad gains 1 stack of <span style='font-weight:bold;'>Adjudication</span>; when an Agent knocks down The Defiler attacking in mid-air, the whole squad gains 4 stacks of <span style='font-weight:bold;'>Adjudication</span>. <span style='font-weight:bold;'>Adjudication</span> can stack up to 6 times and lasts for 30 seconds. Repeated triggers reset the duration.<br>• For each stack of <span style='font-weight:bold;'>Adjudication</span>, the Agent's CRIT DMG increases by <span style='color:#2bad00;font-weight:bold;'>5%</span>, <span style='color:#f0d12b;font-weight:bold;'>Physical DMG</span> increases by <span style='color:#2bad00;font-weight:bold;'>5%</span>, and <span style='color:#2eb6ff;font-weight:bold;'>Electric DMG</span> increases by <span style='color:#2bad00;font-weight:bold;'>5%</span>.<br>• The Defiler receives <span style='color:#cc0000;font-weight:bold;'>25%</span> less <span style='color:#7756c6;font-weight:bold;'>Attribute Anomaly DMG</span>.",
+  "modes": {
+    "deadlyAssault": {
+      "appearances": [
+        {
+          "version": "2.2.1",
+          "versionName": "2.2 Phase 1",
+          "versionTime": "05/09/2025 - 19/09/2025",
+          "side": 1,
+          "description": "• When an Agent hits The Defiler with <span style='font-weight:bold;'>Defensive Assist</span>, the whole squad gains 1 stack of <span style='font-weight:bold;'>Adjudication</span>; when an Agent knocks down The Defiler attacking in mid-air, the whole squad gains 4 stacks of <span style='font-weight:bold;'>Adjudication</span>. <span style='font-weight:bold;'>Adjudication</span> can stack up to 6 times and lasts for 30 seconds. Repeated triggers reset the duration.<br>• For each stack of <span style='font-weight:bold;'>Adjudication</span>, the Agent's CRIT DMG increases by <span style='color:#2bad00;font-weight:bold;'>8%</span>.<br>• The Defiler receives <span style='color:#cc0000;font-weight:bold;'>25%</span> less <span style='color:#7756c6;font-weight:bold;'>Attribute Anomaly DMG</span>.",
+          "performance": "• When an Agent causes <span style='color:#ca9a00;font-weight:bold;'>IMPAIRED!!</span> status, they gain <span style='color:#ffaf2c;font-weight:bold;'>2500 Performance Points</span>; when an Agent shoots down The Defiler while it's attacking in mid-air, they gain <span style='color:#ffaf2c;font-weight:bold;'>1500 Performance Points</span>, up to a maximum of 5000 Performance Points.",
+          "misc": "• Suitable for Agents with <span style='font-weight:bold;'>Attack</span> specialty."
+        },
+        {
+          "version": "2.2.2",
+          "versionName": "2.2 Phase 2",
+          "versionTime": "19/09/2025 - 03/10/2025",
+          "side": 1,
+          "description": "• When an Agent hits The Defiler with <span style='font-weight:bold;'>Defensive Assist</span>, the whole squad gains 1 stack of <span style='font-weight:bold;'>Adjudication</span>; when an Agent knocks down The Defiler attacking in mid-air, the whole squad gains 4 stacks of <span style='font-weight:bold;'>Adjudication</span>. <span style='font-weight:bold;'>Adjudication</span> can stack up to 6 times and lasts for 30 seconds. Repeated triggers reset the duration.<br>• For each stack of <span style='font-weight:bold;'>Adjudication</span>, the Agent's CRIT DMG increases by <span style='color:#2bad00;font-weight:bold;'>8%</span>.<br>• The Defiler receives <span style='color:#cc0000;font-weight:bold;'>25%</span> less <span style='color:#7756c6;font-weight:bold;'>Attribute Anomaly DMG</span>.",
+          "performance": "• When an Agent causes <span style='color:#ca9a00;font-weight:bold;'>IMPAIRED!!</span> status, they gain <span style='color:#ffaf2c;font-weight:bold;'>2500 Performance Points</span>; when an Agent shoots down The Defiler while it's attacking in mid-air, they gain <span style='color:#ffaf2c;font-weight:bold;'>1500 Performance Points</span>, up to a maximum of 5000 Performance Points.",
+          "misc": "• Suitable for Agents with <span style='font-weight:bold;'>Attack</span> specialty."
+        },
+        {
+          "version": "2.3.1",
+          "versionName": "2.3 Phase 1",
+          "versionTime": "17/10/2025 - 31/10/2025",
+          "side": 2,
+          "description": "• When an Agent hits The Defiler with <span style='font-weight:bold;'>Defensive Assist</span>, the whole squad gains 1 stack of <span style='font-weight:bold;'>Adjudication</span>; when an Agent knocks down The Defiler attacking in mid-air, the whole squad gains 4 stacks of <span style='font-weight:bold;'>Adjudication</span>. <span style='font-weight:bold;'>Adjudication</span> can stack up to 6 times and lasts for 30 seconds. Repeated triggers reset the duration.<br>• For each stack of <span style='font-weight:bold;'>Adjudication</span>, the Agent's CRIT DMG increases by <span style='color:#2bad00;font-weight:bold;'>8%</span>.<br>• The Defiler receives <span style='color:#cc0000;font-weight:bold;'>25%</span> less <span style='color:#7756c6;font-weight:bold;'>Attribute Anomaly DMG</span>.",
+          "performance": "• When an Agent causes <span style='color:#ca9a00;font-weight:bold;'>IMPAIRED!!</span> status, they gain <span style='color:#ffaf2c;font-weight:bold;'>2500 Performance Points</span>; when an Agent shoots down The Defiler while it's attacking in mid-air, they gain <span style='color:#ffaf2c;font-weight:bold;'>1500 Performance Points</span>, up to a maximum of 5000 Performance Points.",
+          "misc": "• Suitable for Agents with <span style='font-weight:bold;'>Attack</span> specialty."
+        },
+        {
+          "version": "2.3.2",
+          "versionName": "2.3 Phase 2",
+          "versionTime": "31/10/2025 - 14/11/2025",
+          "side": 3,
+          "description": "• When an Agent hits The Defiler with <span style='font-weight:bold;'>Defensive Assist</span>, the whole squad gains 1 stack of <span style='font-weight:bold;'>Adjudication</span>; when an Agent knocks down The Defiler attacking in mid-air, the whole squad gains 4 stacks of <span style='font-weight:bold;'>Adjudication</span>. <span style='font-weight:bold;'>Adjudication</span> can stack up to 6 times and lasts for 30 seconds. Repeated triggers reset the duration.<br>• For each stack of <span style='font-weight:bold;'>Adjudication</span>, the Agent's CRIT DMG increases by <span style='color:#2bad00;font-weight:bold;'>8%</span>.<br>• The Defiler receives <span style='color:#cc0000;font-weight:bold;'>25%</span> less <span style='color:#7756c6;font-weight:bold;'>Attribute Anomaly DMG</span>.",
+          "performance": "• When an Agent causes <span style='color:#ca9a00;font-weight:bold;'>IMPAIRED!!</span> status, they gain <span style='color:#ffaf2c;font-weight:bold;'>2500 Performance Points</span>; when an Agent shoots down The Defiler while it's attacking in mid-air, they gain <span style='color:#ffaf2c;font-weight:bold;'>1500 Performance Points</span>, up to a maximum of 5000 Performance Points.",
+          "misc": "• Suitable for Agents with <span style='font-weight:bold;'>Attack</span> specialty."
+        },
+        {
+          "version": "2.5.2",
+          "versionName": "2.5 Phase 2",
+          "versionTime": "16/01/2026 - 30/01/2026",
+          "side": 1,
+          "description": "• When an Agent hits The Defiler with <span style='font-weight:bold;'>Defensive Assist</span>, the whole squad gains 1 stack of <span style='font-weight:bold;'>Adjudication</span>; when an Agent knocks down The Defiler attacking in mid-air, the whole squad gains 4 stacks of <span style='font-weight:bold;'>Adjudication</span>. <span style='font-weight:bold;'>Adjudication</span> can stack up to 6 times and lasts for 30 seconds. Repeated triggers reset the duration.<br>• For each stack of <span style='font-weight:bold;'>Adjudication</span>, the Agent's CRIT DMG increases by <span style='color:#2bad00;font-weight:bold;'>8%</span>.<br>• The Defiler receives <span style='color:#cc0000;font-weight:bold;'>25%</span> less <span style='color:#7756c6;font-weight:bold;'>Attribute Anomaly DMG</span>.",
+          "performance": "• When an Agent causes <span style='color:#ca9a00;font-weight:bold;'>IMPAIRED!!</span> status, they gain <span style='color:#ffaf2c;font-weight:bold;'>2500 Performance Points</span>; when an Agent shoots down The Defiler while it's attacking in mid-air, they gain <span style='color:#ffaf2c;font-weight:bold;'>1500 Performance Points</span>, up to a maximum of 5000 Performance Points.",
+          "misc": "• Suitable for Agents with <span style='font-weight:bold;'>Attack</span> specialty."
+        },
+        {
+          "version": "2.6.2",
+          "versionName": "2.6 Phase 2",
+          "versionTime": "27/02/2026 - 13/03/2026",
+          "side": 2,
+          "description": "• When an Agent hits The Defiler with <span style='font-weight:bold;'>Defensive Assist</span>, the whole squad gains 1 stack of <span style='font-weight:bold;'>Adjudication</span>; when an Agent knocks down The Defiler attacking in mid-air, the whole squad gains 4 stacks of <span style='font-weight:bold;'>Adjudication</span>. <span style='font-weight:bold;'>Adjudication</span> can stack up to 6 times and lasts for 30 seconds. Repeated triggers reset the duration.<br>• For each stack of <span style='font-weight:bold;'>Adjudication</span>, the Agent's CRIT DMG increases by <span style='color:#2bad00;font-weight:bold;'>5%</span>, <span style='color:#f0d12b;font-weight:bold;'>Physical DMG</span> increases by <span style='color:#2bad00;font-weight:bold;'>5%</span>, and <span style='color:#2eb6ff;font-weight:bold;'>Electric DMG</span> increases by <span style='color:#2bad00;font-weight:bold;'>5%</span>.<br>• The Defiler receives <span style='color:#cc0000;font-weight:bold;'>25%</span> less <span style='color:#7756c6;font-weight:bold;'>Attribute Anomaly DMG</span>.",
+          "performance": "• When an Agent causes <span style='color:#ca9a00;font-weight:bold;'>IMPAIRED!!</span> status, they gain <span style='color:#ffaf2c;font-weight:bold;'>2500 Performance Points</span>; when an Agent shoots down The Defiler while it's attacking in mid-air, they gain <span style='color:#ffaf2c;font-weight:bold;'>1500 Performance Points</span>, up to a maximum of 5000 Performance Points.",
+          "misc": "• Suitable for Agents with <span style='font-weight:bold;'>Attack</span> specialty."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "id": "24300",
+  "locale": "en",
+  "name": "Ye Shiyuan the Thrall",
+  "aliases": [],
+  "imageKey": "the-thrall",
+  "tags": ["miasma"],
+  "summary": "• When Sobek and The Thrall alternate turns, The Thrall gains 1 stack of <span style='font-weight:bold;'>Contract</span> and 1 stack of <span style='font-weight:bold;'>Self-Sacrifice</span>. <span style='font-weight:bold;'>Contract</span> and <span style='font-weight:bold;'>Self-Sacrifice</span> can stack up to 3 times. Each stack of <span style='font-weight:bold;'>Contract</span> increases <span style='color:#7756c6;font-weight:bold;'>All-Attribute Anomaly RES</span> by <span style='color:#cc0000;font-weight:bold;'>15%</span>, each stack of <span style='font-weight:bold;'>Self-Sacrifice</span> reduces The Thrall's <span style='color:#5555ff;font-weight:bold;'>DEF</span> by <span style='color:#2bad00;font-weight:bold;'>8%</span>. When The Thrall is <span style='color:#ffe599;font-weight:bold;'>Stunned</span>, CRIT DMG taken increases by <span style='color:#2bad00;font-weight:bold;'>50%</span>.",
+  "modes": {
+    "deadlyAssault": {
+      "appearances": [
+        {
+          "version": "2.4.1",
+          "versionName": "2.4 Phase 1",
+          "versionTime": "28/11/2025 - 12/12/2025",
+          "side": 2,
+          "description": "• When Sobek and The Thrall alternate turns, The Thrall gains 1 stack of <span style='font-weight:bold;'>Contract</span> and 1 stack of <span style='font-weight:bold;'>Self-Sacrifice</span>. <span style='font-weight:bold;'>Contract</span> and <span style='font-weight:bold;'>Self-Sacrifice</span> can stack up to 3 times. Each stack of <span style='font-weight:bold;'>Contract</span> increases <span style='color:#7756c6;font-weight:bold;'>All-Attribute Anomaly RES</span> by <span style='color:#cc0000;font-weight:bold;'>15%</span>, each stack of <span style='font-weight:bold;'>Self-Sacrifice</span> increases <span style='color:#ffe599;font-weight:bold;'>Stun DMG Multiplier</span> by <span style='color:#2bad00;font-weight:bold;'>10%</span>. When The Thrall is <span style='color:#ffe599;font-weight:bold;'>Stunned</span>, CRIT DMG taken increases by <span style='color:#2bad00;font-weight:bold;'>50%</span>.",
+          "performance": "• When Agents inflict <span style='font-weight:bold;'>Weakened</span> on Sobek and The Thrall, <span style='color:#ffaf2c;font-weight:bold;'>1500 Performance Points</span> will be awarded. When an Agent eliminates Sobek, <span style='color:#ffaf2c;font-weight:bold;'>2000 Performance Points</span> will be awarded. Up to a maximum of 5000 Performance Points can be earned.",
+          "misc": "• Suitable for Agents with <span style='font-weight:bold;'>Stun</span> specialty."
+        },
+        {
+          "version": "2.4.2",
+          "versionName": "2.4 Phase 2",
+          "versionTime": "12/12/2025 - 02/01/2026",
+          "side": 2,
+          "description": "• When Sobek and The Thrall alternate turns, The Thrall gains 1 stack of <span style='font-weight:bold;'>Contract</span> and 1 stack of <span style='font-weight:bold;'>Self-Sacrifice</span>. <span style='font-weight:bold;'>Contract</span> and <span style='font-weight:bold;'>Self-Sacrifice</span> can stack up to 3 times. Each stack of <span style='font-weight:bold;'>Contract</span> increases <span style='color:#7756c6;font-weight:bold;'>All-Attribute Anomaly RES</span> by <span style='color:#cc0000;font-weight:bold;'>15%</span>, each stack of <span style='font-weight:bold;'>Self-Sacrifice</span> increases <span style='color:#ffe599;font-weight:bold;'>Stun DMG Multiplier</span> by <span style='color:#2bad00;font-weight:bold;'>10%</span>. When The Thrall is <span style='color:#ffe599;font-weight:bold;'>Stunned</span>, CRIT DMG taken increases by <span style='color:#2bad00;font-weight:bold;'>50%</span>.",
+          "performance": "• When Agents inflict <span style='font-weight:bold;'>Weakened</span> on Sobek and The Thrall, <span style='color:#ffaf2c;font-weight:bold;'>1500 Performance Points</span> will be awarded. When an Agent eliminates Sobek, <span style='color:#ffaf2c;font-weight:bold;'>2000 Performance Points</span> will be awarded. Up to a maximum of 5000 Performance Points can be earned.",
+          "misc": "• Suitable for Agents with <span style='font-weight:bold;'>Stun</span> specialty."
+        },
+        {
+          "version": "2.6.3",
+          "versionName": "2.6 Phase 3",
+          "versionTime": "13/03/2026 - 27/03/2026",
+          "side": 2,
+          "description": "• When Sobek and The Thrall alternate turns, The Thrall gains 1 stack of <span style='font-weight:bold;'>Contract</span> and 1 stack of <span style='font-weight:bold;'>Self-Sacrifice</span>. <span style='font-weight:bold;'>Contract</span> and <span style='font-weight:bold;'>Self-Sacrifice</span> can stack up to 3 times. Each stack of <span style='font-weight:bold;'>Contract</span> increases <span style='color:#7756c6;font-weight:bold;'>All-Attribute Anomaly RES</span> by <span style='color:#cc0000;font-weight:bold;'>15%</span>, each stack of <span style='font-weight:bold;'>Self-Sacrifice</span> reduces The Thrall's <span style='color:#5555ff;font-weight:bold;'>DEF</span> by <span style='color:#2bad00;font-weight:bold;'>8%</span>. When The Thrall is <span style='color:#ffe599;font-weight:bold;'>Stunned</span>, CRIT DMG taken increases by <span style='color:#2bad00;font-weight:bold;'>50%</span>.",
+          "performance": "• When Agents inflict <span style='font-weight:bold;'>Weakened</span> on Sobek and The Thrall, <span style='color:#ffaf2c;font-weight:bold;'>1500 Performance Points</span> will be awarded. When an Agent eliminates Sobek, <span style='color:#ffaf2c;font-weight:bold;'>2000 Performance Points</span> will be awarded. Up to a maximum of 5000 Performance Points can be earned.",
+          "misc": "• Suitable for Agents with <span style='font-weight:bold;'>Stun</span> specialty."
+        }
+      ]
+    }
+  }
+}

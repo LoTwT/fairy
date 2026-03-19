@@ -10,6 +10,7 @@
     "sync:gachabase": "pnpm --filter zzz-data run sync:gachabase",
     "sync:buhflipexplode": "pnpm --filter zzz-data run sync:buhflipexplode",
     "sync:mihoyo-wiki": "pnpm --filter zzz-data run sync:mihoyo-wiki",
+    "generate:enemy": "pnpm --filter zzz-data run generate:enemy",
     "build": "pnpm --filter zzz-data run build",
     "test": "pnpm --filter zzz-data run test",
     "prepare": "simple-git-hooks",

@@ -1,0 +1,42 @@
+{
+  "id": "25300",
+  "locale": "en",
+  "name": "Primordial Nightmare: \"The Creator\"",
+  "aliases": [],
+  "imageKey": "primordial-nightmare",
+  "tags": ["miasma", "shutdown"],
+  "summary": "• Primordial Nightmare's <span style='color:#7756c6;font-weight:bold;'>Attribute Anomaly DMG</span> taken is reduced by <span style='color:#cc0000;font-weight:bold;'>30%</span>. When switching from Miasmic Shield state to normal state, or from normal state to Miasmic Shield state, Agent CRIT DMG against them is increased by <span style='color:#2bad00;font-weight:bold;'>20%</span>. This effect can stack up to 3 times and resets when Primordial Nightmare recovers from <span style='color:#ffe599;font-weight:bold;'>Stun</span>.",
+  "modes": {
+    "deadlyAssault": {
+      "appearances": [
+        {
+          "version": "2.5.1",
+          "versionName": "2.5 Phase 1",
+          "versionTime": "02/01/2026 - 16/01/2026",
+          "side": 1,
+          "description": "• Primordial Nightmare's <span style='color:#7756c6;font-weight:bold;'>Attribute Anomaly DMG</span> taken is reduced by <span style='color:#cc0000;font-weight:bold;'>30%</span>. When switching from Miasmic Shield state to normal state, or from normal state to Miasmic Shield state, Agent CRIT DMG against them is increased by <span style='color:#2bad00;font-weight:bold;'>20%</span>. This effect can stack up to 3 times and resets when Primordial Nightmare recovers from <span style='color:#ffe599;font-weight:bold;'>Stun</span>.",
+          "performance": "• Triggering <span style='color:#b4317b;font-weight:bold;'>PURIFIED!!</span> grants <span style='color:#ffaf2c;font-weight:bold;'>1000 Performance Points</span>. During the Control Skill, each successful counter against Primordial Nightmare's attacks grants <span style='color:#ffaf2c;font-weight:bold;'>500 Performance Points</span>. Performing a <span style='color:#b47ede;font-weight:bold;'>SHUTDOWN!!</span> on Primordial Nightmare's Control Skill grants <span style='color:#ffaf2c;font-weight:bold;'>2000 Performance Points</span>, up to a maximum of 5000 Performance Points.",
+          "misc": "• Suitable for Agents with <span style='font-weight:bold;'>Attack</span> specialty."
+        },
+        {
+          "version": "2.5.3",
+          "versionName": "2.5 Phase 3",
+          "versionTime": "30/01/2026 - 13/02/2026",
+          "side": 1,
+          "description": "• Primordial Nightmare's <span style='color:#7756c6;font-weight:bold;'>Attribute Anomaly DMG</span> taken is reduced by <span style='color:#cc0000;font-weight:bold;'>30%</span>. When switching from Miasmic Shield state to normal state, or from normal state to Miasmic Shield state, Agent CRIT DMG against them is increased by <span style='color:#2bad00;font-weight:bold;'>20%</span>. This effect can stack up to 3 times and resets when Primordial Nightmare recovers from <span style='color:#ffe599;font-weight:bold;'>Stun</span>.",
+          "performance": "• Triggering <span style='color:#b4317b;font-weight:bold;'>PURIFIED!!</span> grants <span style='color:#ffaf2c;font-weight:bold;'>1000 Performance Points</span>. During the Control Skill, each successful counter against Primordial Nightmare's attacks grants <span style='color:#ffaf2c;font-weight:bold;'>500 Performance Points</span>. Performing a <span style='color:#b47ede;font-weight:bold;'>SHUTDOWN!!</span> on Primordial Nightmare's Control Skill grants <span style='color:#ffaf2c;font-weight:bold;'>2000 Performance Points</span>, up to a maximum of 5000 Performance Points.",
+          "misc": "• Suitable for Agents with <span style='font-weight:bold;'>Attack</span> specialty."
+        },
+        {
+          "version": "2.6.1",
+          "versionName": "2.6 Phase 1",
+          "versionTime": "13/02/2026 - 27/02/2026",
+          "side": 1,
+          "description": "• Primordial Nightmare's <span style='color:#7756c6;font-weight:bold;'>Attribute Anomaly DMG</span> taken is reduced by <span style='color:#cc0000;font-weight:bold;'>30%</span>. When switching from Miasmic Shield state to normal state, or from normal state to Miasmic Shield state, Agent CRIT DMG against them is increased by <span style='color:#2bad00;font-weight:bold;'>20%</span>. This effect can stack up to 3 times and resets when Primordial Nightmare recovers from <span style='color:#ffe599;font-weight:bold;'>Stun</span>.",
+          "performance": "• Triggering <span style='color:#b4317b;font-weight:bold;'>PURIFIED!!</span> grants <span style='color:#ffaf2c;font-weight:bold;'>1000 Performance Points</span>. During the Control Skill, each successful counter against Primordial Nightmare's attacks grants <span style='color:#ffaf2c;font-weight:bold;'>500 Performance Points</span>. Performing a <span style='color:#b47ede;font-weight:bold;'>SHUTDOWN!!</span> on Primordial Nightmare's Control Skill grants <span style='color:#ffaf2c;font-weight:bold;'>2000 Performance Points</span>, up to a maximum of 5000 Performance Points.",
+          "misc": "• Suitable for Agents with <span style='font-weight:bold;'>Attack</span> specialty."
+        }
+      ]
+    }
+  }
+}

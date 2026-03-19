@@ -1,0 +1,239 @@
+{
+  "id": "14300",
+  "base": {
+    "typeStats": [
+      {
+        "enemyType": 0,
+        "baseHp": 26787,
+        "baseDaze": 6097
+      },
+      {
+        "enemyType": 1,
+        "baseHp": 26787,
+        "baseDaze": 6097
+      }
+    ],
+    "baseDefense": 60,
+    "stunDamageMultiplierPercent": 200,
+    "stunDurationSeconds": 7,
+    "anomalyBaseBuildup": 3300,
+    "resistanceByElement": {
+      "ice": -0.2,
+      "fire": 0,
+      "electric": 0,
+      "ether": -0.2,
+      "physical": 0
+    },
+    "immunities": []
+  },
+  "trace": {
+    "buhflipexplode": {
+      "tags": [],
+      "mods": []
+    }
+  },
+  "modes": {
+    "deadlyAssault": {
+      "history": [
+        {
+          "version": "1.4.1",
+          "versionName": "1.4 Phase 1",
+          "versionTime": "20/12/2024 - 10/01/2025",
+          "side": 3,
+          "enemyType": 0,
+          "hpMultiplierPercent": 100,
+          "dazeMultiplierPercent": 100,
+          "anomalyMultiplierPercent": 100,
+          "rawHp": 58049652,
+          "altHp": 58049652,
+          "altHpAdjustments": [],
+          "defense": 953,
+          "maxDaze": 14327.95,
+          "maxAnomalyBuildup": {
+            "ice": 2750,
+            "fire": 3300,
+            "electric": 3300,
+            "ether": 2750,
+            "physical": 3960
+          }
+        },
+        {
+          "version": "1.5.2",
+          "versionName": "1.5 Phase 2",
+          "versionTime": "07/02/2025 - 21/02/2025",
+          "side": 3,
+          "enemyType": 0,
+          "hpMultiplierPercent": 120,
+          "dazeMultiplierPercent": 100,
+          "anomalyMultiplierPercent": 100,
+          "rawHp": 69659582,
+          "altHp": 69659582,
+          "altHpAdjustments": [],
+          "defense": 953,
+          "maxDaze": 14327.95,
+          "maxAnomalyBuildup": {
+            "ice": 2750,
+            "fire": 3300,
+            "electric": 3300,
+            "ether": 2750,
+            "physical": 3960
+          }
+        },
+        {
+          "version": "1.6.2",
+          "versionName": "1.6 Phase 2",
+          "versionTime": "04/04/2025 - 18/04/2025",
+          "side": 1,
+          "enemyType": 0,
+          "hpMultiplierPercent": 135,
+          "dazeMultiplierPercent": 100,
+          "anomalyMultiplierPercent": 100,
+          "rawHp": 78367030,
+          "altHp": 78367030,
+          "altHpAdjustments": [],
+          "defense": 953,
+          "maxDaze": 14327.95,
+          "maxAnomalyBuildup": {
+            "ice": 2750,
+            "fire": 3300,
+            "electric": 3300,
+            "ether": 2750,
+            "physical": 3960
+          }
+        },
+        {
+          "version": "1.7.2",
+          "versionName": "1.7 Phase 2",
+          "versionTime": "16/05/2025 - 30/05/2025",
+          "side": 1,
+          "enemyType": 0,
+          "hpMultiplierPercent": 145,
+          "dazeMultiplierPercent": 100,
+          "anomalyMultiplierPercent": 100,
+          "rawHp": 84171995,
+          "altHp": 84171995,
+          "altHpAdjustments": [],
+          "defense": 953,
+          "maxDaze": 14327.95,
+          "maxAnomalyBuildup": {
+            "ice": 2750,
+            "fire": 3300,
+            "electric": 3300,
+            "ether": 2750,
+            "physical": 3960
+          }
+        },
+        {
+          "version": "1.7.3",
+          "versionName": "1.7 Phase 3",
+          "versionTime": "30/05/2025 - 13/06/2025",
+          "side": 1,
+          "enemyType": 1,
+          "hpMultiplierPercent": 145,
+          "dazeMultiplierPercent": 100,
+          "anomalyMultiplierPercent": 100,
+          "rawHp": 84171995,
+          "altHp": 84171995,
+          "altHpAdjustments": [],
+          "defense": 953,
+          "maxDaze": 14327.95,
+          "maxAnomalyBuildup": {
+            "ice": 2750,
+            "fire": 3300,
+            "electric": 3300,
+            "ether": 2750,
+            "physical": 3960
+          }
+        },
+        {
+          "version": "2.0.1",
+          "versionName": "2.0 Phase 1",
+          "versionTime": "13/06/2025 - 27/06/2025",
+          "side": 2,
+          "enemyType": 0,
+          "hpMultiplierPercent": 155,
+          "dazeMultiplierPercent": 100,
+          "anomalyMultiplierPercent": 100,
+          "rawHp": 89976961,
+          "altHp": 89976961,
+          "altHpAdjustments": [],
+          "defense": 953,
+          "maxDaze": 14327.95,
+          "maxAnomalyBuildup": {
+            "ice": 2750,
+            "fire": 3300,
+            "electric": 3300,
+            "ether": 2750,
+            "physical": 3960
+          }
+        },
+        {
+          "version": "2.1.2",
+          "versionName": "2.1 Phase 2",
+          "versionTime": "08/08/2025 - 22/08/2025",
+          "side": 3,
+          "enemyType": 0,
+          "hpMultiplierPercent": 170,
+          "dazeMultiplierPercent": 100,
+          "anomalyMultiplierPercent": 110,
+          "rawHp": 98684408,
+          "altHp": 98684408,
+          "altHpAdjustments": [],
+          "defense": 953,
+          "maxDaze": 14327.95,
+          "maxAnomalyBuildup": {
+            "ice": 3025,
+            "fire": 3630,
+            "electric": 3630,
+            "ether": 3025,
+            "physical": 4356
+          }
+        },
+        {
+          "version": "2.4.1",
+          "versionName": "2.4 Phase 1",
+          "versionTime": "28/11/2025 - 12/12/2025",
+          "side": 1,
+          "enemyType": 1,
+          "hpMultiplierPercent": 220,
+          "dazeMultiplierPercent": 100,
+          "anomalyMultiplierPercent": 110,
+          "rawHp": 127709235,
+          "altHp": 127709235,
+          "altHpAdjustments": [],
+          "defense": 953,
+          "maxDaze": 14327.95,
+          "maxAnomalyBuildup": {
+            "ice": 3025,
+            "fire": 3630,
+            "electric": 3630,
+            "ether": 3025,
+            "physical": 4356
+          }
+        },
+        {
+          "version": "2.5.2",
+          "versionName": "2.5 Phase 2",
+          "versionTime": "16/01/2026 - 30/01/2026",
+          "side": 2,
+          "enemyType": 1,
+          "hpMultiplierPercent": 250,
+          "dazeMultiplierPercent": 100,
+          "anomalyMultiplierPercent": 110,
+          "rawHp": 145124130,
+          "altHp": 145124130,
+          "altHpAdjustments": [],
+          "defense": 953,
+          "maxDaze": 14327.95,
+          "maxAnomalyBuildup": {
+            "ice": 3025,
+            "fire": 3630,
+            "electric": 3630,
+            "ether": 3025,
+            "physical": 4356
+          }
+        }
+      ]
+    }
+  }
+}

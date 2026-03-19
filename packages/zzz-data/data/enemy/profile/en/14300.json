@@ -1,0 +1,87 @@
+{
+  "id": "14300",
+  "locale": "en",
+  "name": "Notorious: Marionette",
+  "aliases": [],
+  "imageKey": "marionettes-not",
+  "tags": [],
+  "summary": "• DMG dealt by Boss enemies increases by <span style='color:#cc0000;font-weight:bold;'>25%</span>. When a clone is destroyed</span> or when the main body is <span style='color:#ffe599;font-weight:bold;'>stunned</span>, 1/5 stacks of <span style='font-weight:bold;'>On Thin Ice</span> is inflicted on Boss enemies respectively. Each stack of <span style='font-weight:bold;'>On Thin Ice</span> decreases the DMG dealt by the Boss by <span style='color:#2bad00;font-weight:bold;'>5%</span> and increases the <span style='color:#98eff0;font-weight:bold;'>Ice DMG</span> and <span style='color:#fe437e;font-weight:bold;'>Ether DMG</span> dealt to the Boss by Agents by <span style='color:#2bad00;font-weight:bold;'>10%</span>. <span style='font-weight:bold;'>On Thin Ice</span> stacks will be reset when the enemy recovers from <span style='color:#ffe599;font-weight:bold;'>Stun</span>.",
+  "modes": {
+    "deadlyAssault": {
+      "appearances": [
+        {
+          "version": "1.4.1",
+          "versionName": "1.4 Phase 1",
+          "versionTime": "20/12/2024 - 10/01/2025",
+          "side": 3,
+          "description": "• DMG dealt by Boss enemies increases by <span style='color:#cc0000;font-weight:bold;'>25%</span>. When a clone is destroyed</span> or when the main body is <span style='color:#ffe599;font-weight:bold;'>stunned</span>, 1/5 stacks of <span style='font-weight:bold;'>On Thin Ice</span> is inflicted on Boss enemies respectively. Each stack of <span style='font-weight:bold;'>On Thin Ice</span> decreases the DMG dealt by the Boss by <span style='color:#2bad00;font-weight:bold;'>5%</span> and increases the <span style='color:#98eff0;font-weight:bold;'>Ice DMG</span> and <span style='color:#2eb6ff;font-weight:bold;'>Electric DMG</span> dealt to the Boss by Agents by <span style='color:#2bad00;font-weight:bold;'>10%</span>. <span style='font-weight:bold;'>On Thin Ice</span> stacks will be reset when the enemy recovers from <span style='color:#ffe599;font-weight:bold;'>Stun</span>.",
+          "performance": "• Successfully destroying a dance partner grants <span style='color:#ffaf2c;font-weight:bold;'>200 Performance Points</span>. A maximum of 5000 Performance Points can be obtained."
+        },
+        {
+          "version": "1.5.2",
+          "versionName": "1.5 Phase 2",
+          "versionTime": "07/02/2025 - 21/02/2025",
+          "side": 3,
+          "description": "• DMG dealt by Boss enemies increases by <span style='color:#cc0000;font-weight:bold;'>25%</span>. When a clone is destroyed</span> or when the main body is <span style='color:#ffe599;font-weight:bold;'>stunned</span>, 1/5 stacks of <span style='font-weight:bold;'>On Thin Ice</span> is inflicted on Boss enemies respectively. Each stack of <span style='font-weight:bold;'>On Thin Ice</span> decreases the DMG dealt by the Boss by <span style='color:#2bad00;font-weight:bold;'>5%</span> and increases the <span style='color:#98eff0;font-weight:bold;'>Ice DMG</span> and <span style='color:#2eb6ff;font-weight:bold;'>Electric DMG</span> dealt to the Boss by Agents by <span style='color:#2bad00;font-weight:bold;'>10%</span>. <span style='font-weight:bold;'>On Thin Ice</span> stacks will be reset when the enemy recovers from <span style='color:#ffe599;font-weight:bold;'>Stun</span>.",
+          "performance": "• Successfully destroying a dance partner grants <span style='color:#ffaf2c;font-weight:bold;'>200 Performance Points</span>. A maximum of 5000 Performance Points can be obtained."
+        },
+        {
+          "version": "1.6.2",
+          "versionName": "1.6 Phase 2",
+          "versionTime": "04/04/2025 - 18/04/2025",
+          "side": 1,
+          "description": "• DMG dealt by Boss enemies increases by <span style='color:#cc0000;font-weight:bold;'>25%</span>. When a clone is destroyed</span> or when the main body is <span style='color:#ffe599;font-weight:bold;'>stunned</span>, 1/5 stacks of <span style='font-weight:bold;'>On Thin Ice</span> is inflicted on Boss enemies respectively. Each stack of <span style='font-weight:bold;'>On Thin Ice</span> decreases the DMG dealt by the Boss by <span style='color:#2bad00;font-weight:bold;'>5%</span> and increases the <span style='color:#98eff0;font-weight:bold;'>Ice DMG</span> and <span style='color:#2eb6ff;font-weight:bold;'>Electric DMG</span> dealt to the Boss by Agents by <span style='color:#2bad00;font-weight:bold;'>10%</span>. <span style='font-weight:bold;'>On Thin Ice</span> stacks will be reset when the enemy recovers from <span style='color:#ffe599;font-weight:bold;'>Stun</span>.",
+          "performance": "• Successfully destroying a dance partner grants <span style='color:#ffaf2c;font-weight:bold;'>200 Performance Points</span>. A maximum of 5000 Performance Points can be obtained."
+        },
+        {
+          "version": "1.7.2",
+          "versionName": "1.7 Phase 2",
+          "versionTime": "16/05/2025 - 30/05/2025",
+          "side": 1,
+          "description": "• DMG dealt by Boss enemies increases by <span style='color:#cc0000;font-weight:bold;'>25%</span>. When a clone is destroyed</span> or when the main body is <span style='color:#ffe599;font-weight:bold;'>stunned</span>, 1/5 stacks of <span style='font-weight:bold;'>On Thin Ice</span> is inflicted on Boss enemies respectively. Each stack of <span style='font-weight:bold;'>On Thin Ice</span> decreases the DMG dealt by the Boss by <span style='color:#2bad00;font-weight:bold;'>5%</span> and increases the <span style='color:#98eff0;font-weight:bold;'>Ice DMG</span> and <span style='color:#2eb6ff;font-weight:bold;'>Electric DMG</span> dealt to the Boss by Agents by <span style='color:#2bad00;font-weight:bold;'>10%</span>. <span style='font-weight:bold;'>On Thin Ice</span> stacks will be reset when the enemy recovers from <span style='color:#ffe599;font-weight:bold;'>Stun</span>.",
+          "performance": "• Successfully destroying a dance partner grants <span style='color:#ffaf2c;font-weight:bold;'>200 Performance Points</span>. A maximum of 5000 Performance Points can be obtained."
+        },
+        {
+          "version": "1.7.3",
+          "versionName": "1.7 Phase 3",
+          "versionTime": "30/05/2025 - 13/06/2025",
+          "side": 1,
+          "description": "• DMG dealt by Boss enemies increases by <span style='color:#cc0000;font-weight:bold;'>25%</span>. When a clone is destroyed</span> or when the main body is <span style='color:#ffe599;font-weight:bold;'>stunned</span>, 1/5 stacks of <span style='font-weight:bold;'>On Thin Ice</span> is inflicted on Boss enemies respectively. Each stack of <span style='font-weight:bold;'>On Thin Ice</span> decreases the DMG dealt by the Boss by <span style='color:#2bad00;font-weight:bold;'>5%</span> and increases the <span style='color:#98eff0;font-weight:bold;'>Ice DMG</span> and <span style='color:#fe437e;font-weight:bold;'>Ether DMG</span> dealt to the Boss by Agents by <span style='color:#2bad00;font-weight:bold;'>10%</span>. <span style='font-weight:bold;'>On Thin Ice</span> stacks will be reset when the enemy recovers from <span style='color:#ffe599;font-weight:bold;'>Stun</span>.",
+          "performance": "• Successfully destroying a dance partner grants <span style='color:#ffaf2c;font-weight:bold;'>200 Performance Points</span>. A maximum of 5000 Performance Points can be obtained."
+        },
+        {
+          "version": "2.0.1",
+          "versionName": "2.0 Phase 1",
+          "versionTime": "13/06/2025 - 27/06/2025",
+          "side": 2,
+          "description": "• DMG dealt by Boss enemies increases by <span style='color:#cc0000;font-weight:bold;'>25%</span>. When a clone is destroyed</span> or when the main body is <span style='color:#ffe599;font-weight:bold;'>stunned</span>, 1/5 stacks of <span style='font-weight:bold;'>On Thin Ice</span> is inflicted on Boss enemies respectively. Each stack of <span style='font-weight:bold;'>On Thin Ice</span> decreases the DMG dealt by the Boss by <span style='color:#2bad00;font-weight:bold;'>5%</span> and increases the <span style='color:#98eff0;font-weight:bold;'>Ice DMG</span> and <span style='color:#2eb6ff;font-weight:bold;'>Electric DMG</span> dealt to the Boss by Agents by <span style='color:#2bad00;font-weight:bold;'>10%</span>. <span style='font-weight:bold;'>On Thin Ice</span> stacks will be reset when the enemy recovers from <span style='color:#ffe599;font-weight:bold;'>Stun</span>.",
+          "performance": "• Successfully destroying a dance partner grants <span style='color:#ffaf2c;font-weight:bold;'>200 Performance Points</span>. A maximum of 5000 Performance Points can be obtained."
+        },
+        {
+          "version": "2.1.2",
+          "versionName": "2.1 Phase 2",
+          "versionTime": "08/08/2025 - 22/08/2025",
+          "side": 3,
+          "description": "• DMG dealt by Boss enemies increases by <span style='color:#cc0000;font-weight:bold;'>25%</span>. When a clone is destroyed</span> or when the main body is <span style='color:#ffe599;font-weight:bold;'>stunned</span>, 1/5 stacks of <span style='font-weight:bold;'>On Thin Ice</span> is inflicted on Boss enemies respectively. Each stack of <span style='font-weight:bold;'>On Thin Ice</span> decreases the DMG dealt by the Boss by <span style='color:#2bad00;font-weight:bold;'>5%</span> and increases the <span style='color:#98eff0;font-weight:bold;'>Ice DMG</span> and <span style='color:#2eb6ff;font-weight:bold;'>Electric DMG</span> dealt to the Boss by Agents by <span style='color:#2bad00;font-weight:bold;'>10%</span>. <span style='font-weight:bold;'>On Thin Ice</span> stacks will be reset when the enemy recovers from <span style='color:#ffe599;font-weight:bold;'>Stun</span>.",
+          "performance": "• Successfully destroying a dance partner grants <span style='color:#ffaf2c;font-weight:bold;'>200 Performance Points</span>. A maximum of 5000 Performance Points can be obtained."
+        },
+        {
+          "version": "2.4.1",
+          "versionName": "2.4 Phase 1",
+          "versionTime": "28/11/2025 - 12/12/2025",
+          "side": 1,
+          "description": "• DMG dealt by Boss enemies increases by <span style='color:#cc0000;font-weight:bold;'>25%</span>. When a clone is destroyed</span> or when the main body is <span style='color:#ffe599;font-weight:bold;'>stunned</span>, 1/5 stacks of <span style='font-weight:bold;'>On Thin Ice</span> is inflicted on Boss enemies respectively. Each stack of <span style='font-weight:bold;'>On Thin Ice</span> decreases the DMG dealt by the Boss by <span style='color:#2bad00;font-weight:bold;'>5%</span> and increases the <span style='color:#98eff0;font-weight:bold;'>Ice DMG</span> and <span style='color:#fe437e;font-weight:bold;'>Ether DMG</span> dealt to the Boss by Agents by <span style='color:#2bad00;font-weight:bold;'>10%</span>. <span style='font-weight:bold;'>On Thin Ice</span> stacks will be reset when the enemy recovers from <span style='color:#ffe599;font-weight:bold;'>Stun</span>.",
+          "performance": "• Successfully destroying a dance partner grants <span style='color:#ffaf2c;font-weight:bold;'>200 Performance Points</span>. A maximum of 5000 Performance Points can be obtained."
+        },
+        {
+          "version": "2.5.2",
+          "versionName": "2.5 Phase 2",
+          "versionTime": "16/01/2026 - 30/01/2026",
+          "side": 2,
+          "description": "• DMG dealt by Boss enemies increases by <span style='color:#cc0000;font-weight:bold;'>25%</span>. When a clone is destroyed</span> or when the main body is <span style='color:#ffe599;font-weight:bold;'>stunned</span>, 1/5 stacks of <span style='font-weight:bold;'>On Thin Ice</span> is inflicted on Boss enemies respectively. Each stack of <span style='font-weight:bold;'>On Thin Ice</span> decreases the DMG dealt by the Boss by <span style='color:#2bad00;font-weight:bold;'>5%</span> and increases the <span style='color:#98eff0;font-weight:bold;'>Ice DMG</span> and <span style='color:#fe437e;font-weight:bold;'>Ether DMG</span> dealt to the Boss by Agents by <span style='color:#2bad00;font-weight:bold;'>10%</span>. <span style='font-weight:bold;'>On Thin Ice</span> stacks will be reset when the enemy recovers from <span style='color:#ffe599;font-weight:bold;'>Stun</span>.",
+          "performance": "• Successfully destroying a dance partner grants <span style='color:#ffaf2c;font-weight:bold;'>200 Performance Points</span>. A maximum of 5000 Performance Points can be obtained."
+        }
+      ]
+    }
+  }
+}

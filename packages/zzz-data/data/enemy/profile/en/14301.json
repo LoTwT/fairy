@@ -1,0 +1,87 @@
+{
+  "id": "14301",
+  "locale": "en",
+  "name": "Notorious: Pompey",
+  "aliases": [],
+  "imageKey": "pompey-not",
+  "tags": [],
+  "summary": "• When the Agent hits the boss enemy with a <span style='font-weight:bold;'>Defensive Assist</span> or <span style='font-weight:bold;'>Chain Attack</span>, they apply 1 stack of <span style='font-weight:bold;'>Weakening</span> to the target, lasting 20s. The duration of each stack is calculated separately. For each stack of <span style='font-weight:bold;'>Weakening</span> on the target, Agent CRIT DMG is increased by <span style='color:#2bad00;font-weight:bold;'>15%</span>. When the boss enemy has 4 stacks of <span style='font-weight:bold;'>Weakening</span>, <span style='font-weight:bold;'>Defensive Assist</span> will deflect the boss enemy's attack, causing a Stagger effect.",
+  "modes": {
+    "deadlyAssault": {
+      "appearances": [
+        {
+          "version": "1.5.3",
+          "versionName": "1.5 Phase 3",
+          "versionTime": "21/02/2025 - 07/03/2025",
+          "side": 1,
+          "description": "• When not in a <span style='color:#ffe599;font-weight:bold;'>Stunned</span> state, Boss enemies gain 1 stack of <span style='font-weight:bold;'>All or Nothing</span> every 6s, stacking up to 3 stacks. Each stack of <span style='font-weight:bold;'>All or Nothing</span> increases the damage dealt by the Boss enemy by <span style='color:#cc0000;font-weight:bold;'>10%</span>. When an Agent's attack hits an enemy, the Agent's CRIT DMG increases by <span style='color:#2bad00;font-weight:bold;'>25%</span> for each stack of <span style='font-weight:bold;'>All or Nothing</span> the target has. <span style='font-weight:bold;'>All or Nothing</span> stacks will be reset when the enemy recovers from being Stunned.",
+          "performance": "• Successfully triggering <span style='font-weight:bold;'>Perfect Dodge</span> grants <span style='color:#ffaf2c;font-weight:bold;'>200 Performance Points</span>. A maximum of 5000 Performance Points can be obtained."
+        },
+        {
+          "version": "1.5.4",
+          "versionName": "1.5 Phase 4",
+          "versionTime": "07/03/2025 - 21/03/2025",
+          "side": 3,
+          "description": "• When the Agent hits the boss enemy with a <span style='font-weight:bold;'>Defensive Assist</span> or <span style='font-weight:bold;'>Chain Attack</span>, they apply 1 stack of <span style='font-weight:bold;'>Weakening</span> to the target, lasting 20s. The duration of each stack is calculated separately. For each stack of <span style='font-weight:bold;'>Weakening</span> on the target, Agent CRIT DMG is increased by <span style='color:#2bad00;font-weight:bold;'>15%</span>. When the boss enemy has 4 stacks of <span style='font-weight:bold;'>Weakening</span>, <span style='font-weight:bold;'>Defensive Assist</span> will deflect the boss enemy's attack, causing a Stagger effect.",
+          "performance": "• Successfully triggering <span style='font-weight:bold;'>Perfect Assist</span> grants <span style='color:#ffaf2c;font-weight:bold;'>300 Performance Points</span>. A maximum of 5000 Performance Points can be obtained."
+        },
+        {
+          "version": "1.6.2",
+          "versionName": "1.6 Phase 2",
+          "versionTime": "04/04/2025 - 18/04/2025",
+          "side": 3,
+          "description": "• When the Agent hits the boss enemy with a <span style='font-weight:bold;'>Defensive Assist</span> or <span style='font-weight:bold;'>Chain Attack</span>, they apply 1 stack of <span style='font-weight:bold;'>Weakening</span> to the target, lasting 20s. The duration of each stack is calculated separately. For each stack of <span style='font-weight:bold;'>Weakening</span> on the target, Agent CRIT DMG is increased by <span style='color:#2bad00;font-weight:bold;'>15%</span>. When the boss enemy has 4 stacks of <span style='font-weight:bold;'>Weakening</span>, <span style='font-weight:bold;'>Defensive Assist</span> will deflect the boss enemy's attack, causing a Stagger effect.",
+          "performance": "• Successfully triggering a <span style='font-weight:bold;'>Perfect Assist</span> grants <span style='color:#ffaf2c;font-weight:bold;'>350 Performance Points</span>. A maximum of 5000 Performance Points can be obtained."
+        },
+        {
+          "version": "1.7.3",
+          "versionName": "1.7 Phase 3",
+          "versionTime": "30/05/2025 - 13/06/2025",
+          "side": 3,
+          "description": "• When the Agent hits the boss enemy with a <span style='font-weight:bold;'>Defensive Assist</span> or <span style='font-weight:bold;'>Chain Attack</span>, they apply 1 stack of <span style='font-weight:bold;'>Weakening</span> to the target, lasting 20s. The duration of each stack is calculated separately. For each stack of <span style='font-weight:bold;'>Weakening</span> on the target, Agent CRIT DMG is increased by <span style='color:#2bad00;font-weight:bold;'>15%</span>. When the boss enemy has 4 stacks of <span style='font-weight:bold;'>Weakening</span>, <span style='font-weight:bold;'>Defensive Assist</span> will deflect the boss enemy's attack, causing a Stagger effect.",
+          "performance": "• Successfully triggering a <span style='font-weight:bold;'>Perfect Assist</span> grants <span style='color:#ffaf2c;font-weight:bold;'>350 Performance Points</span>. A maximum of 5000 Performance Points can be obtained."
+        },
+        {
+          "version": "2.0.1",
+          "versionName": "2.0 Phase 1",
+          "versionTime": "13/06/2025 - 27/06/2025",
+          "side": 3,
+          "description": "• When the Agent hits the boss enemy with a <span style='font-weight:bold;'>Defensive Assist</span> or <span style='font-weight:bold;'>Chain Attack</span>, they apply 1 stack of <span style='font-weight:bold;'>Weakening</span> to the target, lasting 20s. The duration of each stack is calculated separately. For each stack of <span style='font-weight:bold;'>Weakening</span> on the target, Agent CRIT DMG is increased by <span style='color:#2bad00;font-weight:bold;'>15%</span>. When the boss enemy has 4 stacks of <span style='font-weight:bold;'>Weakening</span>, <span style='font-weight:bold;'>Defensive Assist</span> will deflect the boss enemy's attack, causing a Stagger effect.",
+          "performance": "• Successfully triggering a <span style='font-weight:bold;'>Perfect Assist</span> grants <span style='color:#ffaf2c;font-weight:bold;'>350 Performance Points</span>. A maximum of 5000 Performance Points can be obtained."
+        },
+        {
+          "version": "2.0.2",
+          "versionName": "2.0 Phase 2",
+          "versionTime": "27/06/2025 - 11/07/2025",
+          "side": 1,
+          "description": "• When the Agent hits the boss enemy with a <span style='font-weight:bold;'>Defensive Assist</span> or <span style='font-weight:bold;'>Chain Attack</span>, they apply 1 stack of <span style='font-weight:bold;'>Weakening</span> to the target, lasting 20s. The duration of each stack is calculated separately. For each stack of <span style='font-weight:bold;'>Weakening</span> on the target, Agent CRIT DMG is increased by <span style='color:#2bad00;font-weight:bold;'>15%</span>. When the boss enemy has 4 stacks of <span style='font-weight:bold;'>Weakening</span>, <span style='font-weight:bold;'>Defensive Assist</span> will deflect the boss enemy's attack, causing a Stagger effect.",
+          "performance": "• Successfully triggering a <span style='font-weight:bold;'>Perfect Assist</span> grants <span style='color:#ffaf2c;font-weight:bold;'>350 Performance Points</span>. A maximum of 5000 Performance Points can be obtained."
+        },
+        {
+          "version": "2.1.1",
+          "versionName": "2.1 Phase 1",
+          "versionTime": "25/07/2025 - 08/08/2025",
+          "side": 3,
+          "description": "• When the Agent hits the boss enemy with a <span style='font-weight:bold;'>Defensive Assist</span> or <span style='font-weight:bold;'>Chain Attack</span>, they apply 1 stack of <span style='font-weight:bold;'>Weakening</span> to the target, lasting 20s. The duration of each stack is calculated separately. For each stack of <span style='font-weight:bold;'>Weakening</span> on the target, Agent CRIT DMG is increased by <span style='color:#2bad00;font-weight:bold;'>15%</span>. When the boss enemy has 4 stacks of <span style='font-weight:bold;'>Weakening</span>, <span style='font-weight:bold;'>Defensive Assist</span> will deflect the boss enemy's attack, causing a Stagger effect.",
+          "performance": "• Successfully triggering a <span style='font-weight:bold;'>Perfect Assist</span> grants <span style='color:#ffaf2c;font-weight:bold;'>350 Performance Points</span>. A maximum of 5000 Performance Points can be obtained."
+        },
+        {
+          "version": "2.2.2",
+          "versionName": "2.2 Phase 2",
+          "versionTime": "19/09/2025 - 03/10/2025",
+          "side": 3,
+          "description": "• When the Agent hits the boss enemy with a <span style='font-weight:bold;'>Defensive Assist</span> or <span style='font-weight:bold;'>Chain Attack</span>, they apply 1 stack of <span style='font-weight:bold;'>Weakening</span> to the target, lasting 20s. The duration of each stack is calculated separately. For each stack of <span style='font-weight:bold;'>Weakening</span> on the target, Agent CRIT DMG is increased by <span style='color:#2bad00;font-weight:bold;'>15%</span>. When the boss enemy has 4 stacks of <span style='font-weight:bold;'>Weakening</span>, <span style='font-weight:bold;'>Defensive Assist</span> will deflect the boss enemy's attack, causing a Stagger effect.",
+          "performance": "• Successfully triggering a <span style='font-weight:bold;'>Perfect Assist</span> grants <span style='color:#ffaf2c;font-weight:bold;'>350 Performance Points</span>. A maximum of 5000 Performance Points can be obtained."
+        },
+        {
+          "version": "2.6.3",
+          "versionName": "2.6 Phase 3",
+          "versionTime": "13/03/2026 - 27/03/2026",
+          "side": 3,
+          "description": "• When the Agent hits the boss enemy with a <span style='font-weight:bold;'>Defensive Assist</span> or <span style='font-weight:bold;'>Chain Attack</span>, they apply 1 stack of <span style='font-weight:bold;'>Weakening</span> to the target, lasting 20s. The duration of each stack is calculated separately. For each stack of <span style='font-weight:bold;'>Weakening</span> on the target, Agent CRIT DMG is increased by <span style='color:#2bad00;font-weight:bold;'>15%</span>. When the boss enemy has 4 stacks of <span style='font-weight:bold;'>Weakening</span>, <span style='font-weight:bold;'>Defensive Assist</span> will deflect the boss enemy's attack, causing a Stagger effect.",
+          "performance": "• Successfully triggering a <span style='font-weight:bold;'>Perfect Assist</span> grants <span style='color:#ffaf2c;font-weight:bold;'>350 Performance Points</span>. A maximum of 5000 Performance Points can be obtained."
+        }
+      ]
+    }
+  }
+}

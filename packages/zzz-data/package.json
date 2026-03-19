@@ -17,13 +17,15 @@
       "import": "./dist/index.mjs",
       "default": "./dist/index.mjs"
     },
-    "./data/source/*": "./data/source/*"
+    "./data/source/*": "./data/source/*",
+    "./data/enemy/*": "./data/enemy/*"
   },
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.mts",
   "files": [
     "data/source",
+    "data/enemy",
     "dist"
   ],
   "scripts": {
@@ -32,6 +34,7 @@
     "sync:gachabase": "tsx scripts/sources/index.ts gachabase",
     "sync:buhflipexplode": "tsx scripts/sources/index.ts buhflipexplode",
     "sync:mihoyo-wiki": "tsx scripts/sources/index.ts mihoyo-wiki",
+    "generate:enemy": "tsx scripts/data/enemy.ts",
     "build": "tsdown src/index.ts --format esm --dts",
     "test": "vitest run",
     "typecheck": "tsc --noEmit"

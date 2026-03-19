@@ -1,0 +1,87 @@
+{
+  "id": "15300",
+  "locale": "en",
+  "name": "Notorious: Dead End Butcher",
+  "aliases": [],
+  "imageKey": "dead-end-butcher-not",
+  "tags": [],
+  "summary": "• DMG dealt to boss enemies by <span style='color:#7756c6;font-weight:bold;'>Attribute Anomaly</span> is increased by <span style='color:#2bad00;font-weight:bold;'>50%</span>. While Notorious: Dead End Butcher is in <span style='font-weight:bold;'>Ether Enhanced</span> state, the DMG it takes is reduced by <span style='color:#cc0000;font-weight:bold;'>15%</span>, and the <span style='color:#ffe599;font-weight:bold;'>Daze</span> value dealt by Agents to it is reduced by <span style='color:#cc0000;font-weight:bold;'>30%</span>. Triggering <span style='color:#7756c6;font-weight:bold;'>Disorder</span> on Notorious: Dead End Butcher immediately forces it to exit the <span style='font-weight:bold;'>Ether Enhanced</span> state.",
+  "modes": {
+    "deadlyAssault": {
+      "appearances": [
+        {
+          "version": "1.5.1",
+          "versionName": "1.5 Phase 1",
+          "versionTime": "24/01/2025 - 07/02/2025",
+          "side": 1,
+          "description": "• DMG dealt to boss enemies by <span style='color:#7756c6;font-weight:bold;'>Attribute Anomaly</span> is increased by <span style='color:#2bad00;font-weight:bold;'>50%</span>. While Notorious: Dead End Butcher is in <span style='font-weight:bold;'>Ether Enhanced</span> state, the DMG it takes is reduced by <span style='color:#cc0000;font-weight:bold;'>15%</span>, and the <span style='color:#ffe599;font-weight:bold;'>Daze</span> value dealt by Agents to it is reduced by <span style='color:#cc0000;font-weight:bold;'>30%</span>. Triggering <span style='color:#7756c6;font-weight:bold;'>Disorder</span> on Notorious: Dead End Butcher immediately forces it to exit the <span style='font-weight:bold;'>Ether Enhanced</span> state.",
+          "performance": "• Successfully triggering <span style='font-weight:bold;'>Perfect Dodge</span> grants <span style='color:#ffaf2c;font-weight:bold;'>200 Performance Points</span>. A maximum of 5000 Performance Points can be obtained."
+        },
+        {
+          "version": "1.5.2",
+          "versionName": "1.5 Phase 2",
+          "versionTime": "07/02/2025 - 21/02/2025",
+          "side": 1,
+          "description": "• DMG dealt to boss enemies by <span style='color:#7756c6;font-weight:bold;'>Attribute Anomaly</span> is increased by <span style='color:#2bad00;font-weight:bold;'>50%</span>. While Notorious: Dead End Butcher is in <span style='font-weight:bold;'>Ether Enhanced</span> state, the DMG it takes is reduced by <span style='color:#cc0000;font-weight:bold;'>15%</span>, and the <span style='color:#ffe599;font-weight:bold;'>Daze</span> value dealt by Agents to it is reduced by <span style='color:#cc0000;font-weight:bold;'>30%</span>. Triggering <span style='color:#7756c6;font-weight:bold;'>Disorder</span> on Notorious: Dead End Butcher immediately forces it to exit the <span style='font-weight:bold;'>Ether Enhanced</span> state.",
+          "performance": "• Successfully triggering <span style='font-weight:bold;'>Perfect Dodge</span> grants <span style='color:#ffaf2c;font-weight:bold;'>200 Performance Points</span>. A maximum of 5000 Performance Points can be obtained."
+        },
+        {
+          "version": "1.7.2",
+          "versionName": "1.7 Phase 2",
+          "versionTime": "16/05/2025 - 30/05/2025",
+          "side": 2,
+          "description": "• DMG dealt to boss enemies by <span style='color:#7756c6;font-weight:bold;'>Attribute Anomaly</span> is increased by <span style='color:#2bad00;font-weight:bold;'>50%</span>. While Notorious: Dead End Butcher is in <span style='font-weight:bold;'>Ether Enhanced</span> state, the DMG it takes is reduced by <span style='color:#cc0000;font-weight:bold;'>15%</span>, and the <span style='color:#ffe599;font-weight:bold;'>Daze</span> value dealt by Agents to it is reduced by <span style='color:#cc0000;font-weight:bold;'>30%</span>. Triggering <span style='color:#7756c6;font-weight:bold;'>Disorder</span> on Notorious: Dead End Butcher immediately forces it to exit the <span style='font-weight:bold;'>Ether Enhanced</span> state.",
+          "performance": "• Successfully triggering <span style='font-weight:bold;'>Perfect Dodge</span> grants <span style='color:#ffaf2c;font-weight:bold;'>200 Performance Points</span>. A maximum of 5000 Performance Points can be obtained."
+        },
+        {
+          "version": "2.0.3",
+          "versionName": "2.0 Phase 3",
+          "versionTime": "11/07/2025 - 25/07/2025",
+          "side": 3,
+          "description": "• DMG dealt to boss enemies by <span style='color:#7756c6;font-weight:bold;'>Attribute Anomaly</span> is increased by <span style='color:#2bad00;font-weight:bold;'>50%</span>. While Notorious: Dead End Butcher is in <span style='font-weight:bold;'>Ether Enhanced</span> state, the DMG it takes is reduced by <span style='color:#cc0000;font-weight:bold;'>15%</span>, and the <span style='color:#ffe599;font-weight:bold;'>Daze</span> value dealt by Agents to it is reduced by <span style='color:#cc0000;font-weight:bold;'>30%</span>. Triggering <span style='color:#7756c6;font-weight:bold;'>Disorder</span> on Notorious: Dead End Butcher immediately forces it to exit the <span style='font-weight:bold;'>Ether Enhanced</span> state.",
+          "performance": "• Successfully triggering <span style='font-weight:bold;'>Perfect Dodge</span> grants <span style='color:#ffaf2c;font-weight:bold;'>200 Performance Points</span>. A maximum of 5000 Performance Points can be obtained."
+        },
+        {
+          "version": "2.1.2",
+          "versionName": "2.1 Phase 2",
+          "versionTime": "08/08/2025 - 22/08/2025",
+          "side": 2,
+          "description": "• DMG dealt to boss enemies by <span style='color:#7756c6;font-weight:bold;'>Attribute Anomaly</span> is increased by <span style='color:#2bad00;font-weight:bold;'>50%</span>. While Notorious: Dead End Butcher is in <span style='font-weight:bold;'>Ether Enhanced</span> state, the DMG it takes is reduced by <span style='color:#cc0000;font-weight:bold;'>15%</span>, and the <span style='color:#ffe599;font-weight:bold;'>Daze</span> value dealt by Agents to it is reduced by <span style='color:#cc0000;font-weight:bold;'>30%</span>. Triggering <span style='color:#7756c6;font-weight:bold;'>Disorder</span> on Notorious: Dead End Butcher immediately forces it to exit the <span style='font-weight:bold;'>Ether Enhanced</span> state.",
+          "performance": "• Successfully inflicting <span style='color:#7756c6;font-weight:bold;'>Disorder</span> grants <span style='color:#ffaf2c;font-weight:bold;'>200 Performance Points</span>, up to a maximum of 5000 Performance Points."
+        },
+        {
+          "version": "2.1.3",
+          "versionName": "2.1 Phase 3",
+          "versionTime": "22/08/2025 - 05/09/2025",
+          "side": 1,
+          "description": "• DMG dealt to boss enemies by <span style='color:#7756c6;font-weight:bold;'>Attribute Anomaly</span> is increased by <span style='color:#2bad00;font-weight:bold;'>50%</span>. While Notorious: Dead End Butcher is in <span style='font-weight:bold;'>Ether Enhanced</span> state, the DMG it takes is reduced by <span style='color:#cc0000;font-weight:bold;'>15%</span>, and the <span style='color:#ffe599;font-weight:bold;'>Daze</span> value dealt by Agents to it is reduced by <span style='color:#cc0000;font-weight:bold;'>30%</span>. Triggering <span style='color:#7756c6;font-weight:bold;'>Disorder</span> on Notorious: Dead End Butcher immediately forces it to exit the <span style='font-weight:bold;'>Ether Enhanced</span> state.",
+          "performance": "• Successfully inflicting <span style='color:#7756c6;font-weight:bold;'>Disorder</span> grants <span style='color:#ffaf2c;font-weight:bold;'>200 Performance Points</span>, up to a maximum of 5000 Performance Points."
+        },
+        {
+          "version": "2.2.2",
+          "versionName": "2.2 Phase 2",
+          "versionTime": "19/09/2025 - 03/10/2025",
+          "side": 2,
+          "description": "• DMG dealt to boss enemies by <span style='color:#7756c6;font-weight:bold;'>Attribute Anomaly</span> is increased by <span style='color:#2bad00;font-weight:bold;'>50%</span>. While Notorious: Dead End Butcher is in <span style='font-weight:bold;'>Ether Enhanced</span> state, the DMG it takes is reduced by <span style='color:#cc0000;font-weight:bold;'>15%</span>, and the <span style='color:#ffe599;font-weight:bold;'>Daze</span> value dealt by Agents to it is reduced by <span style='color:#cc0000;font-weight:bold;'>30%</span>. Triggering <span style='color:#7756c6;font-weight:bold;'>Disorder</span> on Notorious: Dead End Butcher immediately forces it to exit the <span style='font-weight:bold;'>Ether Enhanced</span> state.",
+          "performance": "• Successfully inflicting <span style='color:#7756c6;font-weight:bold;'>Disorder</span> grants <span style='color:#ffaf2c;font-weight:bold;'>200 Performance Points</span>, up to a maximum of 5000 Performance Points."
+        },
+        {
+          "version": "2.3.1",
+          "versionName": "2.3 Phase 1",
+          "versionTime": "17/10/2025 - 31/10/2025",
+          "side": 3,
+          "description": "• DMG dealt to boss enemies by <span style='color:#7756c6;font-weight:bold;'>Attribute Anomaly</span> is increased by <span style='color:#2bad00;font-weight:bold;'>50%</span>. While Notorious: Dead End Butcher is in <span style='font-weight:bold;'>Ether Enhanced</span> state, the DMG it takes is reduced by <span style='color:#cc0000;font-weight:bold;'>15%</span>, and the <span style='color:#ffe599;font-weight:bold;'>Daze</span> value dealt by Agents to it is reduced by <span style='color:#cc0000;font-weight:bold;'>30%</span>. Triggering <span style='color:#7756c6;font-weight:bold;'>Disorder</span> on Notorious: Dead End Butcher immediately forces it to exit the <span style='font-weight:bold;'>Ether Enhanced</span> state.",
+          "performance": "• Successfully inflicting <span style='color:#7756c6;font-weight:bold;'>Disorder</span> grants <span style='color:#ffaf2c;font-weight:bold;'>200 Performance Points</span>, up to a maximum of 5000 Performance Points."
+        },
+        {
+          "version": "2.6.1",
+          "versionName": "2.6 Phase 1",
+          "versionTime": "13/02/2026 - 27/02/2026",
+          "side": 3,
+          "description": "• DMG dealt to boss enemies by <span style='color:#7756c6;font-weight:bold;'>Attribute Anomaly</span> is increased by <span style='color:#2bad00;font-weight:bold;'>50%</span>. While Notorious: Dead End Butcher is in <span style='font-weight:bold;'>Ether Enhanced</span> state, the DMG it takes is reduced by <span style='color:#cc0000;font-weight:bold;'>15%</span>, and the <span style='color:#ffe599;font-weight:bold;'>Daze</span> value dealt by Agents to it is reduced by <span style='color:#cc0000;font-weight:bold;'>30%</span>. Triggering <span style='color:#7756c6;font-weight:bold;'>Disorder</span> on Notorious: Dead End Butcher immediately forces it to exit the <span style='font-weight:bold;'>Ether Enhanced</span> state.",
+          "performance": "• Successfully inflicting <span style='color:#7756c6;font-weight:bold;'>Disorder</span> grants <span style='color:#ffaf2c;font-weight:bold;'>200 Performance Points</span>, up to a maximum of 5000 Performance Points."
+        }
+      ]
+    }
+  }
+}

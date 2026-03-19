@@ -1,0 +1,146 @@
+{
+  "id": "25300",
+  "base": {
+    "typeStats": [
+      {
+        "enemyType": 0,
+        "baseHp": 48789,
+        "baseDaze": 7760
+      },
+      {
+        "enemyType": 1,
+        "baseHp": 48789,
+        "baseDaze": 7760
+      }
+    ],
+    "baseDefense": 30,
+    "stunDamageMultiplierPercent": 150,
+    "stunDurationSeconds": 15,
+    "anomalyBaseBuildup": 4500,
+    "resistanceByElement": {
+      "ice": 0.2,
+      "fire": 0,
+      "electric": 0,
+      "ether": 0.2,
+      "physical": -0.2
+    },
+    "immunities": ["freeze"]
+  },
+  "trace": {
+    "buhflipexplode": {
+      "tags": ["miasma", "shutdown"],
+      "mods": ["40-dmg-res", "no-freeze"]
+    }
+  },
+  "modes": {
+    "deadlyAssault": {
+      "history": [
+        {
+          "version": "2.5.1",
+          "versionName": "2.5 Phase 1",
+          "versionTime": "02/01/2026 - 16/01/2026",
+          "side": 1,
+          "enemyType": 0,
+          "hpMultiplierPercent": 205,
+          "dazeMultiplierPercent": 100,
+          "anomalyMultiplierPercent": 110,
+          "rawHp": 216746115,
+          "altHp": 203741349,
+          "altHpAdjustments": [
+            {
+              "key": "miasma",
+              "label": "PURIFIED!!",
+              "rate": 0.045,
+              "triggerCount": 3
+            },
+            {
+              "key": "shutdown",
+              "label": "SHUTDOWN!!",
+              "rate": 0.015,
+              "triggerCount": 1
+            }
+          ],
+          "defense": 477,
+          "maxDaze": 18236,
+          "maxAnomalyBuildup": {
+            "ice": 6187.5,
+            "fire": 4950,
+            "electric": 4950,
+            "ether": 6187.5,
+            "physical": 4950
+          }
+        },
+        {
+          "version": "2.5.3",
+          "versionName": "2.5 Phase 3",
+          "versionTime": "30/01/2026 - 13/02/2026",
+          "side": 1,
+          "enemyType": 0,
+          "hpMultiplierPercent": 205,
+          "dazeMultiplierPercent": 100,
+          "anomalyMultiplierPercent": 110,
+          "rawHp": 216746115,
+          "altHp": 203741349,
+          "altHpAdjustments": [
+            {
+              "key": "miasma",
+              "label": "PURIFIED!!",
+              "rate": 0.045,
+              "triggerCount": 3
+            },
+            {
+              "key": "shutdown",
+              "label": "SHUTDOWN!!",
+              "rate": 0.015,
+              "triggerCount": 1
+            }
+          ],
+          "defense": 477,
+          "maxDaze": 18236,
+          "maxAnomalyBuildup": {
+            "ice": 6187.5,
+            "fire": 4950,
+            "electric": 4950,
+            "ether": 6187.5,
+            "physical": 4950
+          }
+        },
+        {
+          "version": "2.6.1",
+          "versionName": "2.6 Phase 1",
+          "versionTime": "13/02/2026 - 27/02/2026",
+          "side": 1,
+          "enemyType": 0,
+          "hpMultiplierPercent": 235,
+          "dazeMultiplierPercent": 100,
+          "anomalyMultiplierPercent": 110,
+          "rawHp": 248465059,
+          "altHp": 233557156,
+          "altHpAdjustments": [
+            {
+              "key": "miasma",
+              "label": "PURIFIED!!",
+              "rate": 0.045,
+              "triggerCount": 3
+            },
+            {
+              "key": "shutdown",
+              "label": "SHUTDOWN!!",
+              "rate": 0.015,
+              "triggerCount": 1
+            }
+          ],
+          "defense": 477,
+          "maxDaze": 18236,
+          "maxAnomalyBuildup": {
+            "ice": 6187.5,
+            "fire": 4950,
+            "electric": 4950,
+            "ether": 6187.5,
+            "physical": 4950
+          }
+        }
+      ]
+    }
+  }
+}

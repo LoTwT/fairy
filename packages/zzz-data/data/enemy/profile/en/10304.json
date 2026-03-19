@@ -1,0 +1,79 @@
+{
+  "id": "10304",
+  "locale": "en",
+  "name": "Unknown Corruption Complex",
+  "aliases": [],
+  "imageKey": "unknown-corruption-complex",
+  "tags": ["ucc"],
+  "summary": "• When dealing sufficient DMG to the boss enemy's legs, <span style='color:#ca9a00;font-weight:bold;'>IMPAIRED!!</span> will be triggered. Upon successfully breaking the boss enemy's legs, the Agent restores <span style='color:#2bad00;font-weight:bold;'>1000</span> Decibels, and the boss gains 1 stack of <span style='font-weight:bold;'>Disintegration</span> for 20 seconds, up to a maximum of 4 stacks. When the Agent's attacks hit an enemy, for each stack of <span style='font-weight:bold;'>Disintegration</span> the target has, CRIT DMG is increased by <span style='color:#2bad00;font-weight:bold;'>25%</span>.",
+  "modes": {
+    "deadlyAssault": {
+      "appearances": [
+        {
+          "version": "1.5.1",
+          "versionName": "1.5 Phase 1",
+          "versionTime": "24/01/2025 - 07/02/2025",
+          "side": 2,
+          "description": "• When dealing sufficient DMG to the boss enemy's legs, <span style='color:#ca9a00;font-weight:bold;'>IMPAIRED!!</span> will be triggered. Upon successfully breaking the boss enemy's legs, the Agent restores <span style='color:#2bad00;font-weight:bold;'>1000</span> Decibels, and the boss gains 1 stack of <span style='font-weight:bold;'>Disintegration</span> for 20 seconds, up to a maximum of 4 stacks. When the Agent's attacks hit an enemy, for each stack of <span style='font-weight:bold;'>Disintegration</span> the target has, CRIT DMG is increased by <span style='color:#2bad00;font-weight:bold;'>25%</span>.",
+          "performance": "• Successfully <span style='color:#ca9a00;font-weight:bold;'>impairing</span> an enemy grants <span style='color:#ffaf2c;font-weight:bold;'>800 Performance Points</span>. A maximum of 5000 Performance Points can be obtained."
+        },
+        {
+          "version": "1.5.4",
+          "versionName": "1.5 Phase 4",
+          "versionTime": "07/03/2025 - 21/03/2025",
+          "side": 1,
+          "description": "• When dealing sufficient DMG to the boss enemy's legs, <span style='color:#ca9a00;font-weight:bold;'>IMPAIRED!!</span> will be triggered. Upon successfully breaking the boss enemy's legs, the Agent restores <span style='color:#2bad00;font-weight:bold;'>1000</span> Decibels, and the boss gains 1 stack of <span style='font-weight:bold;'>Disintegration</span> for 20 seconds, up to a maximum of 4 stacks. When the Agent's attacks hit an enemy, for each stack of <span style='font-weight:bold;'>Disintegration</span> the target has, CRIT DMG is increased by <span style='color:#2bad00;font-weight:bold;'>25%</span>.",
+          "performance": "• Successfully <span style='color:#ca9a00;font-weight:bold;'>impairing</span> an enemy grants <span style='color:#ffaf2c;font-weight:bold;'>800 Performance Points</span>. A maximum of 5000 Performance Points can be obtained."
+        },
+        {
+          "version": "1.6.1",
+          "versionName": "1.6 Phase 1",
+          "versionTime": "21/03/2025 - 04/04/2025",
+          "side": 1,
+          "description": "• When dealing sufficient DMG to the boss enemy's legs, <span style='color:#ca9a00;font-weight:bold;'>IMPAIRED!!</span> will be triggered. Upon successfully breaking the boss enemy's legs, the Agent restores <span style='color:#2bad00;font-weight:bold;'>1000</span> Decibels, and the boss gains 1 stack of <span style='font-weight:bold;'>Disintegration</span> for 20 seconds, up to a maximum of 4 stacks. When the Agent's attacks hit an enemy, for each stack of <span style='font-weight:bold;'>Disintegration</span> the target has, CRIT DMG is increased by <span style='color:#2bad00;font-weight:bold;'>25%</span>.",
+          "performance": "• Successfully <span style='color:#ca9a00;font-weight:bold;'>impairing</span> an enemy grants <span style='color:#ffaf2c;font-weight:bold;'>800 Performance Points</span>. A maximum of 5000 Performance Points can be obtained."
+        },
+        {
+          "version": "1.6.3",
+          "versionName": "1.6 Phase 3",
+          "versionTime": "18/04/2025 - 02/05/2025",
+          "side": 3,
+          "description": "• When dealing sufficient DMG to the boss enemy's legs, <span style='color:#ca9a00;font-weight:bold;'>IMPAIRED!!</span> will be triggered. Upon successfully breaking the boss enemy's legs, the Agent restores <span style='color:#2bad00;font-weight:bold;'>1000</span> Decibels, and the boss gains 1 stack of <span style='font-weight:bold;'>Disintegration</span> for 20 seconds, up to a maximum of 4 stacks. When the Agent's attacks hit an enemy, for each stack of <span style='font-weight:bold;'>Disintegration</span> the target has, CRIT DMG is increased by <span style='color:#2bad00;font-weight:bold;'>25%</span>.",
+          "performance": "• Successfully <span style='color:#ca9a00;font-weight:bold;'>impairing</span> an enemy grants <span style='color:#ffaf2c;font-weight:bold;'>800 Performance Points</span>. A maximum of 5000 Performance Points can be obtained."
+        },
+        {
+          "version": "1.7.1",
+          "versionName": "1.7 Phase 1",
+          "versionTime": "02/05/2025 - 16/05/2025",
+          "side": 2,
+          "description": "• When dealing sufficient DMG to the boss enemy's legs, <span style='color:#ca9a00;font-weight:bold;'>IMPAIRED!!</span> will be triggered. Upon successfully breaking the boss enemy's legs, the Agent restores <span style='color:#2bad00;font-weight:bold;'>1000</span> Decibels, and the boss gains 1 stack of <span style='font-weight:bold;'>Disintegration</span> for 20 seconds, up to a maximum of 4 stacks. When the Agent's attacks hit an enemy, for each stack of <span style='font-weight:bold;'>Disintegration</span> the target has, CRIT DMG is increased by <span style='color:#2bad00;font-weight:bold;'>25%</span>.",
+          "performance": "• Successfully <span style='color:#ca9a00;font-weight:bold;'>impairing</span> an enemy grants <span style='color:#ffaf2c;font-weight:bold;'>800 Performance Points</span>. A maximum of 5000 Performance Points can be obtained."
+        },
+        {
+          "version": "2.0.2",
+          "versionName": "2.0 Phase 2",
+          "versionTime": "27/06/2025 - 11/07/2025",
+          "side": 2,
+          "description": "• When dealing sufficient DMG to the boss enemy's legs, <span style='color:#ca9a00;font-weight:bold;'>IMPAIRED!!</span> will be triggered. Upon successfully breaking the boss enemy's legs, the Agent restores <span style='color:#2bad00;font-weight:bold;'>1000</span> Decibels, and the boss gains 1 stack of <span style='font-weight:bold;'>Disintegration</span> for 20 seconds, up to a maximum of 4 stacks. When the Agent's attacks hit an enemy, for each stack of <span style='font-weight:bold;'>Disintegration</span> the target has, CRIT DMG is increased by <span style='color:#2bad00;font-weight:bold;'>25%</span>.",
+          "performance": "• Successfully <span style='color:#ca9a00;font-weight:bold;'>impairing</span> an enemy grants <span style='color:#ffaf2c;font-weight:bold;'>800 Performance Points</span>. A maximum of 5000 Performance Points can be obtained."
+        },
+        {
+          "version": "2.2.3",
+          "versionName": "2.2 Phase 3",
+          "versionTime": "03/10/2025 - 17/10/2025",
+          "side": 2,
+          "description": "• When dealing sufficient DMG to the boss enemy's legs, <span style='color:#ca9a00;font-weight:bold;'>IMPAIRED!!</span> will be triggered. Upon successfully breaking the boss enemy's legs, the Agent restores <span style='color:#2bad00;font-weight:bold;'>1000</span> Decibels, and the boss gains 1 stack of <span style='font-weight:bold;'>Disintegration</span> for 20 seconds, up to a maximum of 4 stacks. When the Agent's attacks hit an enemy, for each stack of <span style='font-weight:bold;'>Disintegration</span> the target has, CRIT DMG is increased by <span style='color:#2bad00;font-weight:bold;'>25%</span>.",
+          "performance": "• Successfully <span style='color:#ca9a00;font-weight:bold;'>impairing</span> an enemy grants <span style='color:#ffaf2c;font-weight:bold;'>800 Performance Points</span>. A maximum of 5000 Performance Points can be obtained."
+        },
+        {
+          "version": "2.5.3",
+          "versionName": "2.5 Phase 3",
+          "versionTime": "30/01/2026 - 13/02/2026",
+          "side": 2,
+          "description": "• When dealing sufficient DMG to the boss enemy's legs, <span style='color:#ca9a00;font-weight:bold;'>IMPAIRED!!</span> will be triggered. Upon successfully breaking the boss enemy's legs, the Agent restores <span style='color:#2bad00;font-weight:bold;'>1000</span> Decibels, and the boss gains 1 stack of <span style='font-weight:bold;'>Disintegration</span> for 20 seconds, up to a maximum of 4 stacks. When the Agent's attacks hit an enemy, for each stack of <span style='font-weight:bold;'>Disintegration</span> the target has, CRIT DMG is increased by <span style='color:#2bad00;font-weight:bold;'>25%</span>.",
+          "performance": "• Successfully <span style='color:#ca9a00;font-weight:bold;'>impairing</span> an enemy grants <span style='color:#ffaf2c;font-weight:bold;'>800 Performance Points</span>. A maximum of 5000 Performance Points can be obtained."
+        }
+      ]
+    }
+  }
+}

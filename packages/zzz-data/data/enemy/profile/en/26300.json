@@ -1,0 +1,24 @@
+{
+  "id": "26300",
+  "locale": "en",
+  "name": "Discordant Solo: Vesper",
+  "aliases": [],
+  "imageKey": "discordant-solo",
+  "tags": ["shutdown"],
+  "summary": "• When Discordant Solo is being attacked, the CRIT DMG of this attack decreases by <span style='color:#cc0000;font-weight:bold;'>40%</span>. When an Agent activates or extends an Ether Veil, the whole squad gains 1 stack of <span style='font-weight:bold;'>Sonic Resonance</span>. <span style='font-weight:bold;'>Sonic Resonance</span> stacks up to 3 times, and each stack increases Agent <span style='color:#7756c6;font-weight:bold;'>Anomaly Buildup Rate</span> by <span style='color:#2bad00;font-weight:bold;'>8%</span> and <span style='color:#7756c6;font-weight:bold;'>Attribute Anomaly DMG</span> by <span style='color:#2bad00;font-weight:bold;'>15%</span>.",
+  "modes": {
+    "deadlyAssault": {
+      "appearances": [
+        {
+          "version": "2.6.2",
+          "versionName": "2.6 Phase 2",
+          "versionTime": "27/02/2026 - 13/03/2026",
+          "side": 1,
+          "description": "• When Discordant Solo is being attacked, the CRIT DMG of this attack decreases by <span style='color:#cc0000;font-weight:bold;'>40%</span>. When an Agent activates or extends an Ether Veil, the whole squad gains 1 stack of <span style='font-weight:bold;'>Sonic Resonance</span>. <span style='font-weight:bold;'>Sonic Resonance</span> stacks up to 3 times, and each stack increases Agent <span style='color:#7756c6;font-weight:bold;'>Anomaly Buildup Rate</span> by <span style='color:#2bad00;font-weight:bold;'>8%</span> and <span style='color:#7756c6;font-weight:bold;'>Attribute Anomaly DMG</span> by <span style='color:#2bad00;font-weight:bold;'>15%</span>.",
+          "performance": "• During the Control Skill, each successful counter against Discordant Solo's attacks grants <span style='color:#ffaf2c;font-weight:bold;'>350 Performance Points</span>.<br>• Performing a <span style='color:#b47ede;font-weight:bold;'>SHUTDOWN!!</span> against Discordant Solo's Control Skill or countering the final hit of certain attacks and inflicting an <span style='color:#ca9a00;font-weight:bold;'>IMPAIRED!!</span> effect grants <span style='color:#ffaf2c;font-weight:bold;'>750 Performance Points</span>, up to a maximum of 5000 Performance Points.",
+          "misc": "• Suitable for Agents with <span style='font-weight:bold;'>Anomaly</span> specialty."
+        }
+      ]
+    }
+  }
+}
