@@ -1,17 +1,16 @@
 import fs from "node:fs"
 import path from "node:path"
 import { fileURLToPath } from "node:url"
+import { ATTRIBUTE_KEYS, type AttributeKey } from "../shared/combat.js"
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const DATA_DIR = path.resolve(__dirname, "../../data")
 const SOURCE_DIR = path.join(DATA_DIR, "source")
 const OUTPUT_DIR = path.join(DATA_DIR, "enemy")
 
-const ELEMENT_KEYS = ["ice", "fire", "electric", "ether", "physical"] as const
 const PROFILE_LOCALES = ["en", "zh-CN"] as const
 
 type Locale = (typeof PROFILE_LOCALES)[number]
-type ElementKey = (typeof ELEMENT_KEYS)[number]
 type EnemyId = string
 type EnemyType = 0 | 1
 
@@ -58,7 +57,7 @@ interface DeadlyAssaultPageSide {
   altHpAdjustments: AltHpAdjustment[]
   defense: number
   maxDaze: number
-  maxAnomalyBuildup: Record<ElementKey, number> | null
+  maxAnomalyBuildup: Record<AttributeKey, number> | null
   description: string
   performance: string
   misc: string
@@ -139,15 +138,15 @@ interface EnemyMechanicsAppearance {
   versionTime: string
   side: 1 | 2 | 3
   enemyType: EnemyType
-  hpMultiplierPercent: number
-  dazeMultiplierPercent: number
-  anomalyMultiplierPercent: number
+  hpMultiplier: number
+  dazeMultiplier: number
+  anomalyMultiplier: number
   rawHp: number
   altHp: number
   altHpAdjustments: AltHpAdjustment[]
   defense: number
   maxDaze: number
-  maxAnomalyBuildup: Record<ElementKey, number> | null
+  maxAnomalyBuildup: Record<AttributeKey, number> | null
 }
 
 interface EnemyMechanicsFile {
@@ -155,10 +154,10 @@ interface EnemyMechanicsFile {
   base: {
     typeStats: EnemyBaseTypeStats[]
     baseDefense: number
-    stunDamageMultiplierPercent: number
+    stunDamageMultiplier: number
     stunDurationSeconds: number
     anomalyBaseBuildup: number
-    resistanceByElement: Record<ElementKey, number>
+    resistanceByElement: Record<AttributeKey, number>
     immunities: Array<"anomaly" | "freeze">
   }
   trace?: {
@@ -227,13 +226,13 @@ function slugify(value: string): string {
 
 function buildResistanceByElement(
   elementMult: number[],
-): Record<ElementKey, number> {
+): Record<AttributeKey, number> {
   return Object.fromEntries(
-    ELEMENT_KEYS.map((element, index) => [
+    ATTRIBUTE_KEYS.map((element, index) => [
       element,
       Number((elementMult[index] - 1).toFixed(4)),
     ]),
-  ) as Record<ElementKey, number>
+  ) as Record<AttributeKey, number>
 }
 
 function getImmunities(mods: string[]): Array<"anomaly" | "freeze"> {
@@ -477,7 +476,7 @@ function generateEnemyData(): void {
           baseDaze: enemy.baseDaze[index] ?? 0,
         })),
         baseDefense: enemy.baseDEF,
-        stunDamageMultiplierPercent: enemy.stunMult,
+        stunDamageMultiplier: enemy.stunMult / 100,
         stunDurationSeconds: enemy.stunTime,
         anomalyBaseBuildup: enemy.baseAnom,
         resistanceByElement,
@@ -497,9 +496,9 @@ function generateEnemyData(): void {
             versionTime: appearance.versionTime,
             side: appearance.side.side,
             enemyType: appearance.side.enemyType as EnemyType,
-            hpMultiplierPercent: appearance.side.hpMultiplier,
-            dazeMultiplierPercent: appearance.side.dazeMultiplier,
-            anomalyMultiplierPercent: appearance.side.anomalyMultiplier,
+            hpMultiplier: appearance.side.hpMultiplier / 100,
+            dazeMultiplier: appearance.side.dazeMultiplier / 100,
+            anomalyMultiplier: appearance.side.anomalyMultiplier / 100,
             rawHp: appearance.side.rawHp,
             altHp: appearance.side.altHp,
             altHpAdjustments: appearance.side.altHpAdjustments,

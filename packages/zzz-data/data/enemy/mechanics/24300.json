@@ -14,7 +14,7 @@
       }
     ],
     "baseDefense": 60,
-    "stunDamageMultiplierPercent": 200,
+    "stunDamageMultiplier": 2,
     "stunDurationSeconds": 12,
     "anomalyBaseBuildup": 3960,
     "resistanceByElement": {
@@ -41,9 +41,9 @@
           "versionTime": "28/11/2025 - 12/12/2025",
           "side": 2,
           "enemyType": 0,
-          "hpMultiplierPercent": 180,
-          "dazeMultiplierPercent": 100,
-          "anomalyMultiplierPercent": 110,
+          "hpMultiplier": 1.8,
+          "dazeMultiplier": 1,
+          "anomalyMultiplier": 1.1,
           "rawHp": 161506628,
           "altHp": 157468963,
           "altHpAdjustments": [
@@ -70,9 +70,9 @@
           "versionTime": "12/12/2025 - 02/01/2026",
           "side": 2,
           "enemyType": 0,
-          "hpMultiplierPercent": 180,
-          "dazeMultiplierPercent": 100,
-          "anomalyMultiplierPercent": 110,
+          "hpMultiplier": 1.8,
+          "dazeMultiplier": 1,
+          "anomalyMultiplier": 1.1,
           "rawHp": 161506628,
           "altHp": 157468963,
           "altHpAdjustments": [
@@ -99,9 +99,9 @@
           "versionTime": "13/03/2026 - 27/03/2026",
           "side": 2,
           "enemyType": 1,
-          "hpMultiplierPercent": 180,
-          "dazeMultiplierPercent": 100,
-          "anomalyMultiplierPercent": 110,
+          "hpMultiplier": 1.8,
+          "dazeMultiplier": 1,
+          "anomalyMultiplier": 1.1,
           "rawHp": 161506628,
           "altHp": 157468963,
           "altHpAdjustments": [

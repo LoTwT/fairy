@@ -1,442 +1,589 @@
-# 战斗语义快照规格（V1）
+# 战斗语义规格（V2）
 
 ## 范围
 
-本规格定义一套面向静态伤害计算的通用语义结构，用于承载：
+本规格定义面向静态伤害计算的上游输入结构，服务于：
 
-- `agent`
-- `w-engine`
-- `drive-disc`
-- `buff`
-- 其他未来需要参与伤害计算的实体
+- 角色面板截图解析
+- 配装信息解析
+- 文本规则结构化
+- 向 `damage-core` 提供最终结算输入
 
-本规格只解决：
+共享基础类型与数值语义见 [shared-combat-types.md](./shared-combat-types.md)。
 
-- 某个瞬间需要参与计算的静态规则如何表达
-- 哪些数值属于“面板组装”
-- 哪些数值属于“当前快照额外效果”
-- 上层如何把这些规则汇总为 `damage-core` 需要的数值输入
+本规格覆盖：
 
-本规格明确不解决：
+- 最终面板快照 `panel`
+- 装备快照 `wEngine` / `driveDiscs`
+- 面板外额外效果 `extras`
+- 结构化效果 `effects`
+
+本规格不覆盖：
 
 - 完整战斗过程模拟
-- 状态机、事件流、持续时间流逝
-- 从原始 source 文本自动抽取全部规则
+- 状态机、事件流和持续时间流逝
 - 特殊属性的独立建模
   - 当前 `烈霜`、`凛刃`、`玄墨` 等特殊属性暂不单独建模
-  - 在本规格范围内，先按其原始属性参与计算
+  - 仍按其原始属性参与计算
 
 ## 设计目标
 
-- 让“静态快照计算”只组合强相关的数据
-- 把“组装面板”和“当前快照额外效果”分开
-- 支持用户直接输入最终面板，避免重复叠加
-- 作为 `damage-core` 之上的轻量规则层，不引入完整战斗引擎
-- 给后续 `agent / w-engine / drive-disc / buff` 的处理后数据提供统一结构
+- 让外部调用优先围绕“最终面板 + 面板外效果”工作
+- 允许截图直接提供最终面板，而不要求外部先理解来源拆解
+- 同时保留装备与结构化效果，方便校验、补全与解释
+- 明确 `effects` 是真源，`panel / extras` 是结算视图
 
-## 设计原则
+## 核心分层
 
-### 1. 计算时只组合强相关内容
+### 1. `effects` 是真源
 
-一次静态计算真正需要组合的只有两组数据：
+`wEngine` 与 `driveDiscs` 中的结构化效果统一使用 `effects` 表达。
 
-1. 当前已经确定的有效面板
-2. 这个瞬间额外生效的快照规则
-
-其他内容，例如：
-
-- 展示文案
-- 图片
-- 原始 source 结构
-- 非当前瞬间生效的说明
-
-都不应进入这层结构。
-
-### 2. 面板组装和快照加成分开
-
-有些数值会进入最终面板，有些不会；并不存在一个始终可靠的通用规则。
-
-因此本规格不尝试在抽象层面强行判断“所有来源里哪些一定进面板”，而是只做这两个区分：
+这些 `effects` 不直接等于 calculator 输入，而是后续被归并为：
 
 - `panel`
-  - 只用于“系统根据规则组装面板”的场景
-- `snapshot`
-  - 只表示这个瞬间会额外参与计算的效果
+- `extras.modifiers`
+- `extras.overrides`
 
-### 3. `final-panel` 优先于 `assembled-panel`
+### 2. `panel` 是主结算输入
 
-如果调用方直接提供最终面板：
+`panel` 表示当前角色在某个静态快照下的最终有效面板。
 
-- `panel` 整块应被忽略
-- 只使用 `snapshot` 参与计算
+这层优先来自：
 
-如果调用方没有提供最终面板，而是希望系统根据结构化规则组装：
+- 截图直接识别
+- 用户手动输入
 
-- 才使用 `panel.contributions`
+如果某些字段截图未提供，例如 `penFlat` 或 `attributeDamageBonus`，才允许从装备信息回填。
 
-### 4. 先解决静态快照，不做过程模拟
+### 3. `equipment` 是辅助输入
 
-本规格只描述“这个瞬间需要哪些输入和规则”，不模拟：
+`wEngine` 和 `driveDiscs` 的职责是：
 
-- buff 何时获得
-- 状态如何流转
-- 层数如何随时间变化
+- 校验面板是否合理
+- 在面板缺字段时回填
+- 解释某个面板值或额外效果来自哪里
 
-这些都由外部在这个瞬间以输入值的形式提供。
+它们不是第一优先级的计算主输入。
 
-## 与 `damage-core` 的关系
+### 4. `extras` 承接面板外效果
 
-`docs/specs/damage-core.md` 负责定义纯函数公式层。
+所有不会加到最终面板、但会在当前瞬间参与伤害计算的数值，统一进入：
 
-本规格位于其上游，作用是把处理后实体数据整理成更接近 `damage-core` 的输入语义。
+- `extras.modifiers`
+- `extras.overrides`
 
-职责分层如下：
+## 常量键定义
 
-- `damage-core`
-  - 只关心已归一化好的数值乘区
-- `combat-semantics`
-  - 关心某个实体在当前快照下可能提供哪些面板贡献和额外乘区
-- `profile`
-  - 关心展示与文本
+### `AttributeKey`
 
-## 核心概念
+沿用 [shared-combat-types.md](./shared-combat-types.md) 中的 `AttributeKey`。
 
-### `PanelInputMode`
+说明：
+
+- 当前角色只按单属性处理
+- `attributeDamageBonus` 也只记录当前角色对应属性的那一项
+
+### `PANEL_STAT_KEYS`
 
 ```ts
-// 调用方是直接提供最终面板，还是让系统根据规则组装面板。
-type PanelInputMode = "final-panel" | "assembled-panel"
+export const PANEL_STAT_KEYS = [
+  "hp",
+  "atk",
+  "def",
+  "impact",
+  "critRate",
+  "critDamage",
+  "anomalyMastery",
+  "anomalyProficiency",
+  "penRate",
+  "penFlat",
+  "energyRegen",
+] as const
+
+export type PanelStatKey = (typeof PANEL_STAT_KEYS)[number]
 ```
 
-约定：
+说明：
 
-- `final-panel`
-  - 调用方已经提供最终有效面板
-  - `panel.contributions` 不再参与本次计算
-- `assembled-panel`
-  - 调用方没有提供最终面板
-  - 系统可根据 `panel.contributions` 与外部输入组装面板
+- 这批字段代表最终面板中直接参与静态伤害计算的核心数值
+- `energyRegen` 统一承接截图中的“能量回复”与“能量自动回复”
 
-### `PanelStatKey`
+### `DAMAGE_BONUS_KEYS`
 
 ```ts
-// 会进入最终有效面板的属性键。
-type PanelStatKey =
-  | "atk"
-  | "critRate"
-  | "critDamage"
-  | "penFlat"
-  | "penRate"
-  | "impact"
-  | "anomalyMastery"
-  | "anomalyProficiency"
+export const DAMAGE_BONUS_KEYS = [
+  "physicalDamageBonus",
+  "fireDamageBonus",
+  "iceDamageBonus",
+  "electricDamageBonus",
+  "etherDamageBonus",
+] as const
+
+export type DamageBonusKey = (typeof DAMAGE_BONUS_KEYS)[number]
 ```
 
-约定：
+说明：
 
-- 这里只保留当前静态伤害计算最相关的面板属性
-- `ratio` 语义统一用小数表示，例如 `0.15` 表示 `15%`
+- 这组键只用于装备与效果来源层的结构化表达
+- 最终对外结算输入仍推荐通过 `panel.attributeDamageBonus` 提供当前角色单属性伤害加成
 
-### `SnapshotModifierKey`
+### `DRIVE_DISC_SLOTS`
 
 ```ts
-// 不默认进入面板、但在当前瞬间直接参与伤害计算的槽位。
-type SnapshotModifierKey =
-  | "damageBonus"
-  | "sheerBonus"
-  | "defenseReduction"
-  | "resistanceReduction"
-  | "vulnerabilityBonus"
-  | "dazeVulnerabilityBonus"
-  | "specialMultiplier"
-  | "critRate"
-  | "critDamage"
-  | "penFlat"
-  | "penRate"
+export const DRIVE_DISC_SLOTS = [1, 2, 3, 4, 5, 6] as const
+
+export type DriveDiscSlot = (typeof DRIVE_DISC_SLOTS)[number]
 ```
 
-约定：
-
-- 这些键表示的是“这个瞬间额外参与计算的贡献”
-- 并不意味着它们一定不显示在游戏 UI 面板里
-- 它们只是“不作为最终面板的默认组成部分”来处理
-
-## 通用结构
-
-### `SnapshotInputDefinition`
+### `EXTRA_MODIFIER_KEYS`
 
 ```ts
-interface SnapshotInputDefinition {
-  // 输入键，供 condition / stack / override 引用。
-  key: string
+export const EXTRA_MODIFIER_KEYS = [
+  "damageBonus",
+  "sheerBonus",
+  "defenseReduction",
+  "resistanceReduction",
+  "vulnerabilityBonus",
+  "dazeVulnerabilityBonus",
+  "specialMultiplier",
+] as const
 
-  // 给 AI / UI 展示的短名称。
-  label: string
+export type ExtraModifierKey = (typeof EXTRA_MODIFIER_KEYS)[number]
+```
 
-  // 输入类型；stack 本质上仍是 number，但语义更明确。
-  kind: "boolean" | "number" | "stack"
+### `OVERRIDE_KEYS`
 
-  // 对这个输入的说明。
-  description: string
+```ts
+export const OVERRIDE_KEYS = ["dazeVulnerabilityBonus"] as const
 
-  // 数值单位；ratio 用 0.15 表示 15%。
-  unit?: "flat" | "ratio" | "stack"
+export type OverrideKey = (typeof OVERRIDE_KEYS)[number]
+```
 
-  // 外部未显式提供时的默认值。
-  defaultValue?: boolean | number
+## 统一数值语义
 
-  // 数值下限。
-  min?: number
+沿用 [shared-combat-types.md](./shared-combat-types.md) 中的统一数值语义。
 
-  // 数值上限。
-  max?: number
+## 结构化效果
+
+### `StaticValueDefinition`
+
+```ts
+interface StaticValueDefinition {
+  // 固定取值。
+  kind: "static"
+
+  // 数值本体。
+  value: number
 }
 ```
 
-目标：
-
-- 描述“这个瞬间必须由外部告诉系统”的状态值
-- 例如：
-  - 是否处于某状态
-  - 当前层数
-  - 当前某个快照 bonus ratio
-
-### `ActivationCondition`
+### `LevelTableValueDefinition`
 
 ```ts
-interface ActivationCondition {
-  // 引用哪个 snapshot input。
+interface LevelTableValueDefinition {
+  // 按等级取值。
+  kind: "by-level"
+
+  // 用哪个输入决定当前等级。
   inputKey: string
 
-  // 条件比较方式。
-  operator: "equals" | "gte" | "lte"
-
-  // 条件需要满足的值。
-  value: boolean | number
+  // 各等级对应的值。
+  values: Record<number, number>
 }
 ```
 
-目标：
+说明：
 
-- 描述某条规则在什么快照输入下生效
-- 只表达“这一刻是否生效”，不表达过程
+- TypeScript 类型层可视为 `Record<number, number>`
+- JSON 落盘时，对象键会序列化为十进制字符串，例如 `"1": 0.15`
+- 如果当前等级在 `values` 中不存在，则视为该效果当前不生效
 
-### `PanelContributionDefinition`
+### `ValueDefinition`
 
 ```ts
-interface PanelContributionDefinition {
-  // 规则稳定 id。
-  id: string
-
-  // 简短标签，给 AI / UI 展示。
-  label: string
-
-  // 作用到哪个面板属性。
-  stat: PanelStatKey
-
-  // 固定数值；ratio 用 0.15 表示 15%。
-  value?: number
-
-  // 数值单位。
-  unit?: "flat" | "ratio"
-
-  // 生效条件；为空表示默认参与面板组装。
-  activation?: ActivationCondition[]
-
-  // 如果这是层数型面板收益，层数从哪个输入读取。
-  stackInputKey?: string
-
-  // 每层提供多少数值。
-  valuePerStack?: number
-
-  // 最大层数。
-  maxStacks?: number
-}
+type ValueDefinition = StaticValueDefinition | LevelTableValueDefinition
 ```
 
-目标：
-
-- 描述“如果系统要组装最终面板，这条规则会给面板带来什么贡献”
-- 这类规则只在 `assembled-panel` 模式下使用
-
-约定：
-
-- 如果同时存在 `value` 和 `stackInputKey`，则总值按：
-  - `value + valuePerStack × stacks`
-  - 其中 `stacks` 需要 clamp 到 `maxStacks`
-- 如果调用方提供的是 `final-panel`，则整条规则不参与本次计算
-
-### `SnapshotModifierDefinition`
+### `StructuredPanelEffect`
 
 ```ts
-interface SnapshotModifierDefinition {
+interface StructuredPanelEffect {
   // 规则稳定 id。
   id: string
 
   // 简短标签。
   label: string
 
-  // 作用到哪个快照计算槽位。
-  stat: SnapshotModifierKey
+  // 该效果最终会进入面板。
+  bucket: "panel"
 
-  // 固定数值；ratio 用 0.10 表示 10%。
-  value?: number
+  // 面板字段或属性伤害字段。
+  key: PanelStatKey | DamageBonusKey
 
-  // 数值单位。
-  unit?: "flat" | "ratio" | "multiplier"
+  // 数值定义。
+  value: ValueDefinition
+
+  // 单位语义。
+  unit: "flat" | "ratio"
+}
+```
+
+用途：
+
+- 表达会进入最终面板的效果来源
+- 例如：
+  - 音擎高级属性
+  - 驱动盘 2 件套中的暴击率
+  - 驱动盘 2 件套中的属性伤害
+  - 核心技特殊属性
+
+### `StructuredExtraModifierEffect`
+
+```ts
+interface StructuredExtraModifierEffect {
+  // 规则稳定 id。
+  id: string
+
+  // 简短标签。
+  label: string
+
+  // 该效果最终会进入面板外额外乘区。
+  bucket: "modifier"
+
+  // 额外乘区槽位。
+  key: ExtraModifierKey
+
+  // 数值定义。
+  value: ValueDefinition
+
+  // 单位语义。
+  unit: "ratio" | "flat" | "multiplier"
 
   // 作用目标。
   target: "self" | "team" | "enemy"
-
-  // 生效条件。
-  activation?: ActivationCondition[]
-
-  // 如果是层数型效果，层数从哪个输入读取。
-  stackInputKey?: string
-
-  // 每层提供多少数值。
-  valuePerStack?: number
-
-  // 最大层数。
-  maxStacks?: number
 }
 ```
 
-目标：
+用途：
 
-- 描述当前瞬间额外参与计算的贡献项
-- 不要求它们进入最终面板
+- 表达不会进入面板、但这个瞬间参与计算的效果
+- 例如：
+  - 普通攻击伤害提升
+  - 对敌伤害提升
+  - 减防
+  - 减抗
 
-约定：
-
-- `ratio` 统一用加成语义
-  - `0.25` 表示 `+25%`
-- `multiplier` 统一用最终倍率语义
-  - `1.5` 表示 `1.5x`
-- 如果是层数型效果，总值按：
-  - `value + valuePerStack × stacks`
-  - 其中 `stacks` 需要 clamp 到 `maxStacks`
-
-### `SnapshotOverrideDefinition`
+### `StructuredOverrideEffect`
 
 ```ts
-interface SnapshotOverrideDefinition {
+interface StructuredOverrideEffect {
   // 规则稳定 id。
   id: string
 
   // 简短标签。
   label: string
 
-  // 被覆盖的目标槽位。
-  stat: "dazeVulnerabilityBonus"
+  // 该效果最终会进入覆盖规则。
+  bucket: "override"
 
-  // 从哪个 snapshot input 取覆盖值。
-  inputKey: string
+  // 被覆盖的槽位。
+  key: OverrideKey
 
-  // 生效条件。
-  activation?: ActivationCondition[]
+  // 覆盖值。
+  value: ValueDefinition
 
-  // 覆盖值上限；ratio 语义下 1.10 表示 110% bonus。
+  // 覆盖上限。
   capValue?: number
 }
 ```
 
-目标：
+用途：
 
-- 描述“某个槽位不是普通叠加，而是由当前快照输入直接给定”
-- 当前只保留最明确需要的 `dazeVulnerabilityBonus` 覆盖场景
+- 表达不是普通叠加，而是覆盖某个结算槽位的规则
+- 当前只开放 `dazeVulnerabilityBonus`
 
-约定：
-
-- 这不是普通加法，而是槽位覆盖
-- 上层 resolver 应在进入 `damage-core` 前先处理覆盖逻辑
-
-### `CombatSemanticsBlock`
+### `StructuredEffect`
 
 ```ts
-interface CombatSemanticsBlock {
-  // 只用于组装最终面板的规则。
-  panel?: {
-    // 所有可能参与面板组装的贡献项。
-    contributions: PanelContributionDefinition[]
-  }
+type StructuredEffect =
+  | StructuredPanelEffect
+  | StructuredExtraModifierEffect
+  | StructuredOverrideEffect
+```
 
-  // 当前快照下直接参与计算的规则。
-  snapshot: {
-    // 外部在这个瞬间需要补充的输入。
-    inputs: SnapshotInputDefinition[]
+## 最终结算视图
 
-    // 当前瞬间额外生效的乘区或数值贡献。
-    modifiers: SnapshotModifierDefinition[]
+### `AgentPanelSnapshot`
 
-    // 当前瞬间的槽位覆盖规则。
-    overrides: SnapshotOverrideDefinition[]
+```ts
+interface AgentPanelSnapshot {
+  // 内部解析出的角色 id；截图本身通常不直接提供。
+  agentId?: string
+
+  // 截图中读取到的角色名。
+  agentName?: string
+
+  // 角色等级。
+  level?: number
+
+  // 影画等级。
+  cinemaLevel?: number
+
+  // 最终面板数值。
+  stats: Partial<Record<PanelStatKey, number>>
+
+  // 当前角色单属性伤害加成。
+  attributeDamageBonus?: {
+    // 当前角色属性。
+    attribute: AttributeKey
+
+    // 该属性伤害加成；ratio 语义。
+    value: number
   }
 }
 ```
 
-目标：
+说明：
 
-- 作为 `agent / w-engine / drive-disc / buff` 可复用的通用结构
-- 用最少的分层表达“组装面板”和“当前快照计算”
+- 这是对外最重要的计算主输入
+- 如果截图能直接给到该字段，应优先使用截图值
+- `penFlat` 与 `attributeDamageBonus` 在截图缺失时，允许从装备信息回填
 
-## 计算时的组合方式
+### `WEngineSnapshot`
 
-### `final-panel`
+```ts
+interface WEngineSnapshot {
+  // 音擎 id。
+  id?: string
 
-如果调用方已经提供最终有效面板：
+  // 音擎名称。
+  name?: string
 
-1. 忽略 `panel.contributions`
-2. 读取 `snapshot.inputs`
-3. 根据 `activation`、层数和 `overrides` 得到当前快照的额外效果
-4. 将结果汇总为 `damage-core` 所需的 resolved 数值
+  // 音擎等级。
+  level?: number
 
-### `assembled-panel`
+  // 精炼等级。
+  refineRank?: number
 
-如果调用方没有提供最终面板：
+  // 音擎基础攻击力。
+  baseAtk?: number
 
-1. 读取 `panel.contributions`
-2. 根据 `snapshot.inputs` 和 `activation` 组装出最终有效面板
-3. 再处理 `snapshot.modifiers`
-4. 再处理 `snapshot.overrides`
-5. 汇总为 `damage-core` 所需的 resolved 数值
+  // 音擎高级属性。
+  advancedStat?: {
+    // 高级属性键。
+    key: PanelStatKey | "hpPercent" | "atkPercent" | "defPercent"
 
-## 统一数值语义
+    // 高级属性值。
+    value: number
+  }
 
-为避免字段解释不一致，统一采用以下规则：
+  // 音擎被动原文或摘要。
+  descriptionText?: string
 
-- 百分比加成统一使用 `ratio`
-  - `0.15` 表示 `15%`
-- 固定值统一使用 `flat`
-  - `200` 表示固定增加 `200`
-- 最终倍率统一使用 `multiplier`
-  - `1.5` 表示 `1.5x`
+  // 从音擎信息结构化出的效果。
+  effects?: StructuredEffect[]
+}
+```
 
-本规格不接受：
+说明：
 
-- 带 `%` 的字符串数值
-- 同一字段既可能是百分比又可能是倍率
+- `baseAtk` 与 `advancedStat` 是静态面板来源
+- `descriptionText` 用于展示、追溯和 review
+- `effects` 是结构化真源，后续可被归并到 `panel` 或 `extras`
 
-## 当前限制
+### `DriveDiscStatEntry`
 
-- 当前不单独建模特殊属性替换
-  - `烈霜`、`凛刃`、`玄墨` 暂时仍按原始属性参与计算
-- 当前 `SnapshotOverrideDefinition.stat` 只开放 `dazeVulnerabilityBonus`
-- 当前结构只描述“静态快照下如何结算”，不描述获取过程
+```ts
+type DriveDiscStatKey = PanelStatKey | DamageBonusKey
+
+interface DriveDiscStatEntry {
+  // 词条键。
+  key: DriveDiscStatKey
+
+  // 词条数值。
+  value: number
+}
+```
+
+### `DriveDiscSnapshot`
+
+```ts
+interface DriveDiscSnapshot {
+  // 盘位。
+  slot: DriveDiscSlot
+
+  // 套装名。
+  setName?: string
+
+  // 等级。
+  level?: number
+
+  // 主词条。
+  mainStat?: DriveDiscStatEntry
+
+  // 副词条。
+  subStats?: DriveDiscStatEntry[]
+}
+```
+
+### `DriveDiscSetEffectSnapshot`
+
+```ts
+interface DriveDiscSetEffectSnapshot {
+  // 套装名。
+  setName: string
+
+  // 2 件套原文。
+  twoPieceEffectText?: string
+
+  // 4 件套原文。
+  fourPieceEffectText?: string
+
+  // 2 件套结构化效果。
+  twoPieceEffects?: StructuredEffect[]
+
+  // 4 件套结构化效果。
+  fourPieceEffects?: StructuredEffect[]
+}
+```
+
+说明：
+
+- 原文和结构化效果同时保留
+- 原文用于解释与 review
+- `StructuredEffect` 才是后续归并到 `panel` 或 `extras` 的正式来源
+
+### `DriveDiscSnapshotGroup`
+
+```ts
+interface DriveDiscSnapshotGroup {
+  // 六个盘位快照。
+  discs?: Partial<Record<DriveDiscSlot, DriveDiscSnapshot>>
+
+  // 套装效果快照。
+  setEffects?: DriveDiscSetEffectSnapshot[]
+}
+```
+
+### `CombatExtraModifier`
+
+```ts
+interface CombatExtraModifier {
+  // 规则稳定 id 或临时标识。
+  id?: string
+
+  // 额外乘区槽位。
+  stat: ExtraModifierKey
+
+  // 数值本体。
+  value: number
+
+  // 单位语义。
+  unit: "ratio" | "flat" | "multiplier"
+
+  // 来源说明。
+  source?: string
+}
+```
+
+### `CombatOverride`
+
+```ts
+interface CombatOverride {
+  // 规则稳定 id 或临时标识。
+  id?: string
+
+  // 被覆盖槽位。
+  stat: OverrideKey
+
+  // 覆盖值。
+  value: number
+
+  // 上限。
+  capValue?: number
+
+  // 来源说明。
+  source?: string
+}
+```
+
+### `CombatExtras`
+
+```ts
+interface CombatExtras {
+  // 不进面板、但本次计算额外参与的效果。
+  modifiers: CombatExtraModifier[]
+
+  // 覆盖类效果。
+  overrides: CombatOverride[]
+}
+```
+
+### `AgentCombatInput`
+
+```ts
+interface AgentCombatInput {
+  // 最终面板主输入。
+  panel: AgentPanelSnapshot
+
+  // 音擎快照。
+  wEngine?: WEngineSnapshot
+
+  // 驱动盘快照。
+  driveDiscs?: DriveDiscSnapshotGroup
+
+  // 面板外额外效果。
+  extras?: CombatExtras
+}
+```
+
+## 结算优先级
+
+1. 优先读取 `panel`
+2. 如果 `panel` 缺少某些字段，例如 `penFlat` 或 `attributeDamageBonus`，允许从：
+   - `wEngine`
+   - `driveDiscs`
+   - `effects`
+     回填
+3. `extras` 中的内容不进入面板，直接作为当前快照额外效果参与结算
+4. 覆盖类规则优先于普通叠加
+
+## 面板来源边界
+
+当前建议按以下原则归类：
+
+- `panel`
+  - 代理人基础属性
+  - 代理人突破
+  - 核心技特殊属性
+  - 音擎基础攻击力
+  - 音擎高级属性
+  - 驱动盘主词条
+  - 驱动盘副词条
+  - 驱动盘 2 件套中的面板型属性
+  - 驱动盘 2 件套中的属性伤害
+
+- `extras`
+  - 大多数战斗内触发的被动
+  - 驱动盘 4 件套
+  - 场地 buff
+  - 敌方 debuff
+  - 不直接进入面板的临时乘区
 
 ## 推荐落地顺序
 
-1. 先以 `agent` 为第一批试点
-2. 先验证：
-   - `panel.contributions`
-   - `snapshot.inputs`
-   - `snapshot.modifiers`
-   - `snapshot.overrides`
-3. 再扩展到 `buff`
-4. 再扩展到 `w-engine` 和 `drive-disc`
+1. 先冻结来源矩阵
+   - 哪些来源进入 `panel`
+   - 哪些来源进入 `extras`
+   - 哪些来源属于 `overrides`
+2. 再补全缺失的结构化 source
+   - 尤其是驱动盘主词条和副词条
+3. 再基于本规格重构静态快照示例与后续 resolver
+4. 最后再处理文本派生规则的 AI 理解与人工 review 流程
 
 ## 与其他规格的边界
 
 - 修改纯函数公式、乘区或 resolved 输入时，更新 [damage-core.md](./damage-core.md)
 - 修改 `data/enemy/` 目录、字段或语义时，更新 [enemy-data.md](./enemy-data.md)
-- 修改本规格中的静态快照语义结构时，更新本文档
+- 修改本规格中的最终输入结构、效果归类或结算视图时，更新本文档

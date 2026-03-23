@@ -17,6 +17,7 @@ Zenless Zone Zero 数据源同步脚本、xlsx 读取脚本与纯函数伤害计
 - `tests/calculator/`：calculator 测试
 - `tests/sources/`：source 同步与过滤测试
 - `docs/specs/damage-core.md`：calculator 规格文档
+- `docs/specs/combat-semantics.md`：静态伤害计算的通用语义与最终输入规格
 - `docs/specs/enemy-data.md`：`data/enemy/` 结构规格
 - `package.json` / `tsconfig.json`：同步、构建、测试与类型检查配置
 

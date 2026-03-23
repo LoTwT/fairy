@@ -4,6 +4,8 @@
 
 本规格定义 `packages/zzz-data/data/enemy/` 的处理后数据结构。
 
+共享基础类型与数值语义见 [shared-combat-types.md](./shared-combat-types.md)。
+
 当前版本只覆盖：
 
 - `Deadly Assault` 中出现过的敌人
@@ -64,8 +66,8 @@ type EnemyType = 0 | 1
 // 当前规格只覆盖 Deadly Assault。
 type EnemyMode = "deadly-assault"
 
-// 仓库内部统一使用的小写英文元素键。
-type ElementKey = "ice" | "fire" | "electric" | "ether" | "physical"
+// 共享属性键，沿用 shared-combat-types.md。
+type AttributeKey = "physical" | "fire" | "ice" | "electric" | "ether"
 
 // 当前已结构化的免疫类型。
 type EnemyImmunity = "anomaly" | "freeze"
@@ -250,14 +252,14 @@ interface EnemyMechanicsDeadlyAssaultAppearance {
   // 当期 DA 实际使用的 enemyType。
   enemyType: EnemyType
 
-  // 页面展示语义的 HP 百分比，例如 260 表示 260%。
-  hpMultiplierPercent: number
+  // HP 倍率，使用 multiplier 语义，例如 2.6 表示 260%。
+  hpMultiplier: number
 
-  // 页面展示语义的 Daze 百分比，例如 100 表示 100%。
-  dazeMultiplierPercent: number
+  // Daze 倍率，使用 multiplier 语义，例如 1 表示 100%。
+  dazeMultiplier: number
 
-  // 页面展示语义的 Anomaly 百分比，例如 110 表示 110%。
-  anomalyMultiplierPercent: number
+  // Anomaly 倍率，使用 multiplier 语义，例如 1.1 表示 110%。
+  anomalyMultiplier: number
 
   // 直接按页面公式计算出的名义 HP。
   rawHp: number
@@ -290,7 +292,7 @@ interface EnemyMechanicsDeadlyAssaultAppearance {
   maxDaze: number
 
   // 页面展示的 Max Anomaly Buildup；当前无法计算时为 null。
-  maxAnomalyBuildup: Record<ElementKey, number> | null
+  maxAnomalyBuildup: Record<AttributeKey, number> | null
 }
 
 interface EnemyMechanicsFile {
@@ -305,8 +307,8 @@ interface EnemyMechanicsFile {
     // 基础防御值。
     baseDefense: number
 
-    // 失衡期间承伤倍率，使用百分比展示语义，例如 150。
-    stunDamageMultiplierPercent: number
+    // 失衡期间承伤倍率，使用 multiplier 语义，例如 1.5 表示 150%。
+    stunDamageMultiplier: number
 
     // 失衡持续时间，单位秒。
     stunDurationSeconds: number
@@ -315,7 +317,7 @@ interface EnemyMechanicsFile {
     anomalyBaseBuildup: number
 
     // 计算语义的元素抗性映射。
-    resistanceByElement: Record<ElementKey, number>
+    resistanceByElement: Record<AttributeKey, number>
 
     // 当前已结构化的免疫列表。
     immunities: EnemyImmunity[]
@@ -348,12 +350,17 @@ interface EnemyMechanicsFile {
 - `base` 不保留可由其他字段直接推导出的重复字段
 - `trace` 只用于来源追溯，不应被当作标准化计算语义
 - `modes.deadlyAssault.history` 放 `Deadly Assault` 的版本实例数据和页面派生值
-- `stunDamageMultiplierPercent` 使用展示语义，例如 `150`
+- `stunDamageMultiplier` 使用 multiplier 语义：
+  - `1.5` 表示 150% 失衡承伤倍率
 - `resistanceByElement` 使用计算语义：
   - `0.2` 表示 20% 抗性
   - `-0.2` 表示 20% 弱点
   - `1` 表示 100% 抗性
-- `hpMultiplierPercent`、`dazeMultiplierPercent`、`anomalyMultiplierPercent` 使用页面展示语义，例如 `260`、`100`、`110`
+- `hpMultiplier`、`dazeMultiplier`、`anomalyMultiplier` 使用 multiplier 语义：
+  - `2.6` 表示 260%
+  - `1` 表示 100%
+  - `1.1` 表示 110%
+- `rawHp`、`altHp`、`defense`、`maxDaze`、`maxAnomalyBuildup` 是页面派生后的结果值，不再额外做百分比换算
 
 ## 边界
 

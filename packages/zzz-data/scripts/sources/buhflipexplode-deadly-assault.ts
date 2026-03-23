@@ -2,6 +2,7 @@ import {
   DEADLY_ASSAULT_BETA_VERSION_INDEX,
   DEADLY_ASSAULT_NO_LEAKS_VERSION_COUNT,
 } from "./buhflipexplode-official.js"
+import { ATTRIBUTE_KEYS, type AttributeKey } from "../shared/combat.js"
 
 const DEADLY_ASSAULT_SCORE_20K_RATIO = 0.281083138
 const DEADLY_ASSAULT_HP_FACTOR = (8.74 * 24795) / 10000
@@ -10,7 +11,6 @@ const DEADLY_ASSAULT_DAZE_FACTOR = 2.35
 const DEADLY_ASSAULT_POMPEY_PERF_OVERRIDE_VERSION_INDEX = 6
 const SPECIAL_DAZE_PENALTY_ENEMY_ID = "24300"
 
-const ELEMENTS = ["ice", "fire", "electric", "ether", "physical"] as const
 const ANOMALY_ELEMENT_FACTORS = [1, 1, 1, 1, 1.2] as const
 
 const POMPEY_PERF_OVERRIDE =
@@ -18,8 +18,6 @@ const POMPEY_PERF_OVERRIDE =
 
 export const DEADLY_ASSAULT_PAGE_DATA_TASK_NAME =
   "buhflipexplode/en/deadly-assault-page-data"
-
-type ElementName = (typeof ELEMENTS)[number]
 
 interface DeadlyAssaultVersionEnemy {
   id: string
@@ -83,9 +81,9 @@ interface DeadlyAssaultPageSide {
   maxDaze: number
   stunDamageMultiplier: number
   stunTime: number
-  maxAnomalyBuildup: Record<ElementName, number> | null
-  weaknesses: ElementName[]
-  resistances: ElementName[]
+  maxAnomalyBuildup: Record<AttributeKey, number> | null
+  weaknesses: AttributeKey[]
+  resistances: AttributeKey[]
   immunities: string[]
   tags: string[]
   mods: string[]
@@ -316,7 +314,7 @@ function buildSide(
   const maxAnomalyBuildup = enemy.mods.includes("no-anom")
     ? null
     : (Object.fromEntries(
-        ELEMENTS.map((element, index) => [
+        ATTRIBUTE_KEYS.map((element, index) => [
           element,
           roundTo(
             anomalyBase *
@@ -325,7 +323,7 @@ function buildSide(
             2,
           ),
         ]),
-      ) as Record<ElementName, number>)
+      ) as Record<AttributeKey, number>)
 
   return {
     side,
@@ -353,8 +351,12 @@ function buildSide(
     stunDamageMultiplier: enemy.stunMult,
     stunTime: enemy.stunTime,
     maxAnomalyBuildup,
-    weaknesses: ELEMENTS.filter((_, index) => enemy.elementMult[index] < 1),
-    resistances: ELEMENTS.filter((_, index) => enemy.elementMult[index] > 1),
+    weaknesses: ATTRIBUTE_KEYS.filter(
+      (_, index) => enemy.elementMult[index] < 1,
+    ),
+    resistances: ATTRIBUTE_KEYS.filter(
+      (_, index) => enemy.elementMult[index] > 1,
+    ),
     immunities: getImmunities(enemy.mods),
     tags: enemy.tags,
     mods: enemy.mods,
