@@ -1,6 +1,6 @@
 # AI 协作指南
 
-本文档是 `Codex App` 与 `Claude Code` 共享的项目说明。当前仓库统一通过 `packages/zzz-data/scripts/sources` 管理四个数据源同步：`xlsx` 负责读取 `packages/zzz-data/.sources/source.xlsx` 并生成 `data/source/xlsx/zh-CN` / `scripts/sources/xlsx/types`，`gachabase`、`buhflipexplode`、`mihoyo-wiki` 负责远端 source 数据抓取与派生快照更新。其中 `buhflipexplode` 在写入 `data/source/` 前会先过滤为官网当前可见的正式服历史版本。`packages/zzz-data/src/calculator/` 同时提供一个可发布的纯函数伤害计算核心，规格文档位于 `docs/specs/damage-core.md`；战斗相关共享类型与数值语义由 `docs/specs/shared-combat-types.md` 定义；面向静态伤害计算的通用战斗语义结构与最终输入模型由 `docs/specs/combat-semantics.md` 定义；处理后 `enemy` 数据结构由 `docs/specs/enemy-data.md` 定义。`.sources/source.xlsx` 是手动下载的本地输入，不纳入版本管理，`.sources/source.xlsx.metadata.json` 记录最近一次成功处理的哈希与时间。项目知识、命令、工作流统一维护在 `docs/`，根目录的 `AGENTS.md` 与 `CLAUDE.md` 只保留各自工具的入口约定。
+本文档是 `Codex App` 与 `Claude Code` 共享的项目说明。当前仓库统一通过 `packages/zzz-data/scripts/sources` 管理四个数据源同步：`xlsx` 负责读取 `packages/zzz-data/.sources/source.xlsx` 并生成 `data/source/xlsx/zh-CN` / `scripts/sources/xlsx/types`，`gachabase`、`buhflipexplode`、`mihoyo-wiki` 负责远端 source 数据抓取与派生快照更新。其中 `buhflipexplode` 在写入 `data/source/` 前会先过滤为官网当前可见的正式服历史版本。`packages/zzz-data/src/calculator/` 同时提供一个可发布的纯函数伤害计算核心，规格文档位于 `docs/specs/damage-core.md`；战斗相关共享类型与数值语义由 `docs/specs/shared-combat-types.md` 定义；来源默认归类矩阵由 `docs/specs/combat-source-matrix.md` 定义；面向静态伤害计算的通用战斗语义结构与最终输入模型由 `docs/specs/combat-semantics.md` 定义；处理后 `enemy` 数据结构由 `docs/specs/enemy-data.md` 定义。`.sources/source.xlsx` 是手动下载的本地输入，不纳入版本管理，`.sources/source.xlsx.metadata.json` 记录最近一次成功处理的哈希与时间。项目知识、命令、工作流统一维护在 `docs/`，根目录的 `AGENTS.md` 与 `CLAUDE.md` 只保留各自工具的入口约定。
 
 ## 关键命令
 
@@ -50,6 +50,7 @@ pnpm run prettier             # prettier 格式化
 - 新增/删除依赖时，更新 `docs/dependencies.md`
 - 修改伤害计算范围、纯函数 API 或公式行为时，更新 `docs/specs/damage-core.md`
 - 修改战斗相关共享属性键或统一数值语义时，更新 `docs/specs/shared-combat-types.md`
+- 修改来源到 `panel / extras / ignore` 的默认归类时，更新 `docs/specs/combat-source-matrix.md`
 - 修改静态伤害计算的最终输入结构、`effects` 真源或 `panel / extras` 结算视图时，更新 `docs/specs/combat-semantics.md`
 - 修改 `data/enemy/` 的目录、文件结构或字段语义时，更新 `docs/specs/enemy-data.md`
 - 修改抓取目标、xlsx 读取逻辑、输出目录或命令时，更新 `packages/zzz-data/README.md`

@@ -7,6 +7,7 @@
 - [依赖说明](./dependencies.md) — 当前保留的根目录与 `packages/zzz-data` 依赖
 - [Damage Core Spec](./specs/damage-core.md) — 纯函数伤害计算核心 V1 的范围、公式、输入与测试约定
 - [Shared Combat Types Spec](./specs/shared-combat-types.md) — 战斗相关规格共享的属性键与统一数值语义
+- [Combat Source Matrix Spec](./specs/combat-source-matrix.md) — 各类来源默认进入 `panel`、`extras` 或 `ignore` 的归类矩阵
 - [Combat Semantics Spec](./specs/combat-semantics.md) — 静态伤害计算的通用语义结构，定义 `effects`、`panel`、`extras` 与最终输入模型
 - [Enemy Data Spec](./specs/enemy-data.md) — `data/enemy/` 的目录、文件结构与字段约定
 - [zzz-data README](../packages/zzz-data/README.md) — 抓取目标、xlsx 读取命令与数据目录说明

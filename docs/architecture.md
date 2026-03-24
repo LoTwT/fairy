@@ -2,7 +2,7 @@
 
 ## 仓库级 AI 协作文件
 
-当前仓库统一通过 `scripts/sources/` 管理四个数据源同步：`xlsx` 负责 `.sources/source.xlsx -> data/source/xlsx/zh-CN` 与 `scripts/sources/xlsx/types` 的快照生成，`gachabase`、`buhflipexplode`、`mihoyo-wiki` 负责远端 source 数据抓取与派生快照更新。同时，`packages/zzz-data/src/calculator/` 提供可发布的纯函数伤害计算核心，规格文档位于 `docs/specs/damage-core.md`；战斗相关共享属性键与数值语义由 `docs/specs/shared-combat-types.md` 定义；静态伤害计算上游的通用战斗语义结构由 `docs/specs/combat-semantics.md` 定义，当前以 `effects` 为真源、`panel / extras` 为结算视图；处理后 `enemy` 数据结构的目标规格位于 `docs/specs/enemy-data.md`。`packages/zzz-data/.sources/source.xlsx` 是手动下载的本地 xlsx 输入，不纳入版本管理；`.sources/source.xlsx.metadata.json` 记录最近一次成功处理的哈希与时间。运行入口、输出目录和数据源说明以 `packages/zzz-data/README.md`、`packages/zzz-data/scripts/sources/` 与 `docs/specs/` 为准。
+当前仓库统一通过 `scripts/sources/` 管理四个数据源同步：`xlsx` 负责 `.sources/source.xlsx -> data/source/xlsx/zh-CN` 与 `scripts/sources/xlsx/types` 的快照生成，`gachabase`、`buhflipexplode`、`mihoyo-wiki` 负责远端 source 数据抓取与派生快照更新。同时，`packages/zzz-data/src/calculator/` 提供可发布的纯函数伤害计算核心，规格文档位于 `docs/specs/damage-core.md`；战斗相关共享属性键与数值语义由 `docs/specs/shared-combat-types.md` 定义；来源默认归类矩阵由 `docs/specs/combat-source-matrix.md` 定义；静态伤害计算上游的通用战斗语义结构由 `docs/specs/combat-semantics.md` 定义，当前以 `effects` 为真源、`panel / extras` 为结算视图；处理后 `enemy` 数据结构的目标规格位于 `docs/specs/enemy-data.md`。`packages/zzz-data/.sources/source.xlsx` 是手动下载的本地 xlsx 输入，不纳入版本管理；`.sources/source.xlsx.metadata.json` 记录最近一次成功处理的哈希与时间。运行入口、输出目录和数据源说明以 `packages/zzz-data/README.md`、`packages/zzz-data/scripts/sources/` 与 `docs/specs/` 为准。
 
 ```
 .
@@ -13,6 +13,7 @@
 │   └── specs/
 │       ├── damage-core.md # 伤害计算核心规格
 │       ├── shared-combat-types.md # 战斗相关共享属性键与数值语义
+│       ├── combat-source-matrix.md # 来源到 panel / extras / ignore 的默认归类
 │       ├── combat-semantics.md # 静态伤害计算的通用语义与最终输入结构规格
 │       └── enemy-data.md  # enemy 处理后数据结构规格
 ├── AGENTS.md              # Codex App 入口文件（薄入口，指向 docs/）

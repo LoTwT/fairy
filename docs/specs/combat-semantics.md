@@ -10,12 +10,14 @@
 - 向 `damage-core` 提供最终结算输入
 
 共享基础类型与数值语义见 [shared-combat-types.md](./shared-combat-types.md)。
+来源默认归类见 [combat-source-matrix.md](./combat-source-matrix.md)。
 
 本规格覆盖：
 
 - 最终面板快照 `panel`
 - 装备快照 `wEngine` / `driveDiscs`
 - 面板外额外效果 `extras`
+- 敌方与模式上下文 `context`
 - 结构化效果 `effects`
 
 本规格不覆盖：
@@ -31,7 +33,7 @@
 - 让外部调用优先围绕“最终面板 + 面板外效果”工作
 - 允许截图直接提供最终面板，而不要求外部先理解来源拆解
 - 同时保留装备与结构化效果，方便校验、补全与解释
-- 明确 `effects` 是真源，`panel / extras` 是结算视图
+- 明确 `effects` 是真源，`panel / extras / context` 是结算视图
 
 ## 核心分层
 
@@ -44,6 +46,7 @@
 - `panel`
 - `extras.modifiers`
 - `extras.overrides`
+- `context`
 
 ### 2. `panel` 是主结算输入
 
@@ -72,6 +75,17 @@
 
 - `extras.modifiers`
 - `extras.overrides`
+
+### 5. `context` 承接敌方与模式上下文
+
+所有不属于角色最终面板、但属于本次计算稳定上下文的内容，统一进入 `context`。
+
+典型内容包括：
+
+- 敌方基础防御
+- 敌方抗性
+- 敌方失衡承伤倍率
+- 玩法版本实例值，如 `rawHp`、`altHp`
 
 ## 常量键定义
 
@@ -330,6 +344,9 @@ interface AgentPanelSnapshot {
   // 影画等级。
   cinemaLevel?: number
 
+  // 潜能激化等级。
+  potentialLevel?: number
+
   // 最终面板数值。
   stats: Partial<Record<PanelStatKey, number>>
 
@@ -520,6 +537,57 @@ interface CombatExtras {
 }
 ```
 
+### `EnemyContextSnapshot`
+
+```ts
+interface EnemyContextSnapshot {
+  // 敌人 id。
+  enemyId?: string
+
+  // 敌人名称。
+  enemyName?: string
+
+  // 敌方基础防御。
+  baseDefense?: number
+
+  // 敌方元素抗性。
+  resistanceByAttribute?: Partial<Record<AttributeKey, number>>
+
+  // 敌方失衡承伤倍率；multiplier 语义。
+  stunDamageMultiplier?: number
+}
+```
+
+### `ModeContextSnapshot`
+
+```ts
+interface ModeContextSnapshot {
+  // 模式名，例如 "deadly-assault"。
+  mode?: string
+
+  // 版本键，例如 "2.6.3"。
+  version?: string
+
+  // 玩法实例中的名义 HP。
+  rawHp?: number
+
+  // 玩法实例中的替代 HP。
+  altHp?: number
+}
+```
+
+### `CombatContext`
+
+```ts
+interface CombatContext {
+  // 敌方稳定上下文。
+  enemy?: EnemyContextSnapshot
+
+  // 模式或关卡稳定上下文。
+  mode?: ModeContextSnapshot
+}
+```
+
 ### `AgentCombatInput`
 
 ```ts
@@ -535,6 +603,9 @@ interface AgentCombatInput {
 
   // 面板外额外效果。
   extras?: CombatExtras
+
+  // 敌方与模式上下文。
+  context?: CombatContext
 }
 ```
 
@@ -547,7 +618,8 @@ interface AgentCombatInput {
    - `effects`
      回填
 3. `extras` 中的内容不进入面板，直接作为当前快照额外效果参与结算
-4. 覆盖类规则优先于普通叠加
+4. `context` 提供敌方与模式稳定上下文，不与角色 `panel` 混合
+5. 覆盖类规则优先于普通叠加
 
 ## 面板来源边界
 
@@ -571,12 +643,18 @@ interface AgentCombatInput {
   - 敌方 debuff
   - 不直接进入面板的临时乘区
 
+- `context`
+  - 敌方基础防御、抗性、失衡承伤倍率
+  - 玩法版本实例值
+  - 不属于角色面板、但属于本次计算稳定上下文的内容
+
 ## 推荐落地顺序
 
 1. 先冻结来源矩阵
    - 哪些来源进入 `panel`
    - 哪些来源进入 `extras`
    - 哪些来源属于 `overrides`
+   - 哪些来源属于 `context`
 2. 再补全缺失的结构化 source
    - 尤其是驱动盘主词条和副词条
 3. 再基于本规格重构静态快照示例与后续 resolver
