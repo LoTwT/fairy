@@ -1,0 +1,34 @@
+{
+  "id": "31200",
+  "effects": {
+    "twoPiece": [
+      {
+        "id": "31200:2pc:impact",
+        "label": "2 件套冲击力",
+        "bucket": "panel",
+        "key": "impact",
+        "value": {
+          "kind": "static",
+          "value": 0.06
+        },
+        "unit": "ratio"
+      }
+    ],
+    "fourPiece": []
+  },
+  "trace": {
+    "sourceRefs": [
+      "data/source/xlsx/zh-CN/drive-disc-desc.json",
+      "data/source/gachabase/zh-CN/drive-discs.json",
+      "data/source/gachabase/en/drive-discs.json"
+    ],
+    "twoPieceEffectTexts": {
+      "en": "Impact +6%",
+      "zh-CN": "冲击力+6%。"
+    },
+    "fourPieceEffectTexts": {
+      "en": "Basic Attacks, Dash Attacks, and Dodge Counters inflict 20% more Daze to the main target.",
+      "zh-CN": "[普通攻击]、[冲刺攻击]、[闪避反击]对主要攻击目标造成的失衡值提升20%。"
+    }
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "id": "33600",
+  "effects": {
+    "twoPiece": [
+      {
+        "id": "33600:2pc:ether-dmg",
+        "label": "2 件套以太伤害",
+        "bucket": "panel",
+        "key": "etherDamageBonus",
+        "value": {
+          "kind": "static",
+          "value": 0.1
+        },
+        "unit": "ratio"
+      }
+    ],
+    "fourPiece": [
+      {
+        "id": "33600:4pc:anomaly-proficiency",
+        "label": "4 件套异常精通",
+        "bucket": "modifier",
+        "key": "anomalyProficiency",
+        "value": {
+          "kind": "static",
+          "value": 36
+        },
+        "unit": "flat",
+        "target": "self",
+        "conditionText": "装备者发动[普通攻击]命中敌人时，持续8秒。"
+      },
+      {
+        "id": "33600:4pc:damage-bonus",
+        "label": "4 件套伤害",
+        "bucket": "modifier",
+        "key": "damageBonus",
+        "value": {
+          "kind": "static",
+          "value": 0.25
+        },
+        "unit": "ratio",
+        "target": "self",
+        "conditionText": "当场上有敌人进入失衡状态时，持续18秒。"
+      }
+    ]
+  },
+  "trace": {
+    "sourceRefs": [
+      "data/source/xlsx/zh-CN/drive-disc-desc.json",
+      "data/source/gachabase/zh-CN/drive-discs.json",
+      "data/source/gachabase/en/drive-discs.json"
+    ],
+    "twoPieceEffectTexts": {
+      "en": "Ether DMG +10%",
+      "zh-CN": "以太伤害+10%。"
+    },
+    "fourPieceEffectTexts": {
+      "en": "When the equipper's Basic Attack hits an enemy, their Anomaly Proficiency increases by 36, lasting 8s. Repeated triggers reset the duration. When any enemy on the field is Stunned, the equipper's DMG increases by 25% for 18s. Repeated triggers reset the duration.",
+      "zh-CN": "装备者发动[普通攻击]命中敌人时，自身异常精通提升36点，持续8秒，重复触发时刷新持续时间；当场上有敌人进入失衡状态时，装备者造成的伤害提升25%，持续18秒，重复触发时刷新持续时间。"
+    }
+  }
+}

@@ -1,0 +1,374 @@
+{
+  "id": "13101",
+  "panel": {
+    "baseAtkByLevel": {
+      "0": 42,
+      "1": 48.5856,
+      "2": 55.1712,
+      "3": 61.761,
+      "4": 68.3466,
+      "5": 74.9322,
+      "6": 81.5178,
+      "7": 88.1034,
+      "8": 94.689,
+      "9": 101.2788,
+      "10": 107.8644,
+      "11": 151.9224,
+      "12": 158.508,
+      "13": 165.0936,
+      "14": 171.6792,
+      "15": 178.269,
+      "16": 184.8546,
+      "17": 191.4402,
+      "18": 198.0258,
+      "19": 204.6114,
+      "20": 211.197,
+      "21": 255.2592,
+      "22": 261.8448,
+      "23": 268.4304,
+      "24": 275.016,
+      "25": 281.6016,
+      "26": 288.1872,
+      "27": 294.777,
+      "28": 301.3626,
+      "29": 307.9482,
+      "30": 314.5338,
+      "31": 358.5918,
+      "32": 365.1774,
+      "33": 371.7672,
+      "34": 378.3528,
+      "35": 384.9384,
+      "36": 391.524,
+      "37": 398.1096,
+      "38": 404.6952,
+      "39": 411.285,
+      "40": 417.8706,
+      "41": 461.9286,
+      "42": 468.5142,
+      "43": 475.0998,
+      "44": 481.6854,
+      "45": 488.2752,
+      "46": 494.8608,
+      "47": 501.4464,
+      "48": 508.032,
+      "49": 514.6176,
+      "50": 521.2032,
+      "51": 565.2654,
+      "52": 571.851,
+      "53": 578.4366,
+      "54": 585.0222,
+      "55": 591.6078,
+      "56": 598.1934,
+      "57": 604.7832,
+      "58": 611.3688,
+      "59": 617.9544,
+      "60": 624.54
+    },
+    "advancedStatByLevel": {
+      "0": {
+        "key": "impact",
+        "value": 0.06
+      },
+      "1": {
+        "key": "impact",
+        "value": 0.06
+      },
+      "2": {
+        "key": "impact",
+        "value": 0.06
+      },
+      "3": {
+        "key": "impact",
+        "value": 0.06
+      },
+      "4": {
+        "key": "impact",
+        "value": 0.06
+      },
+      "5": {
+        "key": "impact",
+        "value": 0.06
+      },
+      "6": {
+        "key": "impact",
+        "value": 0.06
+      },
+      "7": {
+        "key": "impact",
+        "value": 0.06
+      },
+      "8": {
+        "key": "impact",
+        "value": 0.06
+      },
+      "9": {
+        "key": "impact",
+        "value": 0.06
+      },
+      "10": {
+        "key": "impact",
+        "value": 0.06
+      },
+      "11": {
+        "key": "impact",
+        "value": 0.078
+      },
+      "12": {
+        "key": "impact",
+        "value": 0.078
+      },
+      "13": {
+        "key": "impact",
+        "value": 0.078
+      },
+      "14": {
+        "key": "impact",
+        "value": 0.078
+      },
+      "15": {
+        "key": "impact",
+        "value": 0.078
+      },
+      "16": {
+        "key": "impact",
+        "value": 0.078
+      },
+      "17": {
+        "key": "impact",
+        "value": 0.078
+      },
+      "18": {
+        "key": "impact",
+        "value": 0.078
+      },
+      "19": {
+        "key": "impact",
+        "value": 0.078
+      },
+      "20": {
+        "key": "impact",
+        "value": 0.078
+      },
+      "21": {
+        "key": "impact",
+        "value": 0.096
+      },
+      "22": {
+        "key": "impact",
+        "value": 0.096
+      },
+      "23": {
+        "key": "impact",
+        "value": 0.096
+      },
+      "24": {
+        "key": "impact",
+        "value": 0.096
+      },
+      "25": {
+        "key": "impact",
+        "value": 0.096
+      },
+      "26": {
+        "key": "impact",
+        "value": 0.096
+      },
+      "27": {
+        "key": "impact",
+        "value": 0.096
+      },
+      "28": {
+        "key": "impact",
+        "value": 0.096
+      },
+      "29": {
+        "key": "impact",
+        "value": 0.096
+      },
+      "30": {
+        "key": "impact",
+        "value": 0.096
+      },
+      "31": {
+        "key": "impact",
+        "value": 0.114
+      },
+      "32": {
+        "key": "impact",
+        "value": 0.114
+      },
+      "33": {
+        "key": "impact",
+        "value": 0.114
+      },
+      "34": {
+        "key": "impact",
+        "value": 0.114
+      },
+      "35": {
+        "key": "impact",
+        "value": 0.114
+      },
+      "36": {
+        "key": "impact",
+        "value": 0.114
+      },
+      "37": {
+        "key": "impact",
+        "value": 0.114
+      },
+      "38": {
+        "key": "impact",
+        "value": 0.114
+      },
+      "39": {
+        "key": "impact",
+        "value": 0.114
+      },
+      "40": {
+        "key": "impact",
+        "value": 0.114
+      },
+      "41": {
+        "key": "impact",
+        "value": 0.132
+      },
+      "42": {
+        "key": "impact",
+        "value": 0.132
+      },
+      "43": {
+        "key": "impact",
+        "value": 0.132
+      },
+      "44": {
+        "key": "impact",
+        "value": 0.132
+      },
+      "45": {
+        "key": "impact",
+        "value": 0.132
+      },
+      "46": {
+        "key": "impact",
+        "value": 0.132
+      },
+      "47": {
+        "key": "impact",
+        "value": 0.132
+      },
+      "48": {
+        "key": "impact",
+        "value": 0.132
+      },
+      "49": {
+        "key": "impact",
+        "value": 0.132
+      },
+      "50": {
+        "key": "impact",
+        "value": 0.132
+      },
+      "51": {
+        "key": "impact",
+        "value": 0.15
+      },
+      "52": {
+        "key": "impact",
+        "value": 0.15
+      },
+      "53": {
+        "key": "impact",
+        "value": 0.15
+      },
+      "54": {
+        "key": "impact",
+        "value": 0.15
+      },
+      "55": {
+        "key": "impact",
+        "value": 0.15
+      },
+      "56": {
+        "key": "impact",
+        "value": 0.15
+      },
+      "57": {
+        "key": "impact",
+        "value": 0.15
+      },
+      "58": {
+        "key": "impact",
+        "value": 0.15
+      },
+      "59": {
+        "key": "impact",
+        "value": 0.15
+      },
+      "60": {
+        "key": "impact",
+        "value": 0.15
+      }
+    }
+  },
+  "effects": {
+    "modifiers": [
+      {
+        "id": "passive:电-damage-bonus",
+        "label": "电属性伤害",
+        "bucket": "modifier",
+        "key": "electricDamageBonus",
+        "value": {
+          "kind": "by-level",
+          "inputKey": "refineRank",
+          "values": {
+            "1": 0.15,
+            "2": 0.175,
+            "3": 0.2,
+            "4": 0.22,
+            "5": 0.24
+          }
+        },
+        "unit": "ratio",
+        "target": "self"
+      }
+    ],
+    "overrides": []
+  },
+  "trace": {
+    "sourceRefs": [
+      "data/source/gachabase/zh-CN/w-engines.json",
+      "data/source/gachabase/en/w-engines.json",
+      "data/source/gachabase/zh-CN/w-engine-details.json",
+      "data/source/gachabase/en/w-engine-details.json",
+      "data/source/xlsx/zh-CN/w-engine-stat.json",
+      "data/source/xlsx/zh-CN/w-engine-desc.json"
+    ],
+    "skillNameTexts": {
+      "en": "In a Flash of Light",
+      "zh-CN": "电光石火"
+    },
+    "skillDescriptionsByRefine": {
+      "1": {
+        "en": "Increases Electric DMG by 15%. When the equipper hits an enemy with a Dodge Counter or Assist Attack, their Energy Generation Rate increases by 18% for 8s.",
+        "zh-CN": "电属性伤害提升15%；[闪避反击]或[支援攻击]命中敌人时，装备者的能量获得效率提升18%，持续8秒。"
+      },
+      "2": {
+        "en": "Increases Electric DMG by 17.5%. When the equipper hits an enemy with a Dodge Counter or Assist Attack, their Energy Generation Rate increases by 20.5% for 8s.",
+        "zh-CN": "电属性伤害提升17.5%；[闪避反击]或[支援攻击]命中敌人时，装备者的能量获得效率提升20.5%，持续8秒。"
+      },
+      "3": {
+        "en": "Increases Electric DMG by 20%. When the equipper hits an enemy with a Dodge Counter or Assist Attack, their Energy Generation Rate increases by 23% for 8s.",
+        "zh-CN": "电属性伤害提升20%；[闪避反击]或[支援攻击]命中敌人时，装备者的能量获得效率提升23%，持续8秒。"
+      },
+      "4": {
+        "en": "Increases Electric DMG by 22%. When the equipper hits an enemy with a Dodge Counter or Assist Attack, their Energy Generation Rate increases by 25% for 8s.",
+        "zh-CN": "电属性伤害提升22%；[闪避反击]或[支援攻击]命中敌人时，装备者的能量获得效率提升25%，持续8秒。"
+      },
+      "5": {
+        "en": "Increases Electric DMG by 24%. When the equipper hits an enemy with a Dodge Counter or Assist Attack, their Energy Generation Rate increases by 27.5% for 8s.",
+        "zh-CN": "电属性伤害提升24%；[闪避反击]或[支援攻击]命中敌人时，装备者的能量获得效率提升27.5%，持续8秒。"
+      }
+    }
+  }
+}

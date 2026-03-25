@@ -1,0 +1,34 @@
+{
+  "id": "32800",
+  "effects": {
+    "twoPiece": [
+      {
+        "id": "32800:2pc:atk-percent",
+        "label": "2 件套攻击力",
+        "bucket": "panel",
+        "key": "atkPercent",
+        "value": {
+          "kind": "static",
+          "value": 0.1
+        },
+        "unit": "ratio"
+      }
+    ],
+    "fourPiece": []
+  },
+  "trace": {
+    "sourceRefs": [
+      "data/source/xlsx/zh-CN/drive-disc-desc.json",
+      "data/source/gachabase/zh-CN/drive-discs.json",
+      "data/source/gachabase/en/drive-discs.json"
+    ],
+    "twoPieceEffectTexts": {
+      "en": "ATK +10%",
+      "zh-CN": "攻击力+10%。"
+    },
+    "fourPieceEffectTexts": {
+      "en": "Whenever any squad member enters the field using a Quick Assist, all squad members gain 1 stack of Astral, up to a maximum of 3 stacks, and lasting 15s. Repeated triggers reset the duration. Each stack of Astral increases the DMG dealt by the character entering the field using a Quick Assist by 8%. Passive effects of the same name do not stack.",
+      "zh-CN": "队伍中任意角色通过[快速支援]入场时，全队角色获得1层[嘉音]，最多叠加3层，持续15秒，重复触发时刷新持续时间，每拥有1层[嘉音]，通过[快速支援]入场的角色造成的伤害提升8%，同名被动效果之间不可叠加。"
+    }
+  }
+}

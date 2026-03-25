@@ -1,0 +1,374 @@
+{
+  "id": "14138",
+  "panel": {
+    "baseAtkByLevel": {
+      "0": 48,
+      "1": 55.5264,
+      "2": 63.0528,
+      "3": 70.584,
+      "4": 78.1104,
+      "5": 85.6368,
+      "6": 93.1632,
+      "7": 100.6896,
+      "8": 108.216,
+      "9": 115.7472,
+      "10": 123.2736,
+      "11": 173.6256,
+      "12": 181.152,
+      "13": 188.6784,
+      "14": 196.2048,
+      "15": 203.736,
+      "16": 211.2624,
+      "17": 218.7888,
+      "18": 226.3152,
+      "19": 233.8416,
+      "20": 241.368,
+      "21": 291.7248,
+      "22": 299.2512,
+      "23": 306.7776,
+      "24": 314.304,
+      "25": 321.8304,
+      "26": 329.3568,
+      "27": 336.888,
+      "28": 344.4144,
+      "29": 351.9408,
+      "30": 359.4672,
+      "31": 409.8192,
+      "32": 417.3456,
+      "33": 424.8768,
+      "34": 432.4032,
+      "35": 439.9296,
+      "36": 447.456,
+      "37": 454.9824,
+      "38": 462.5088,
+      "39": 470.04,
+      "40": 477.5664,
+      "41": 527.9184,
+      "42": 535.4448,
+      "43": 542.9712,
+      "44": 550.4976,
+      "45": 558.0288,
+      "46": 565.5552,
+      "47": 573.0816,
+      "48": 580.608,
+      "49": 588.1344,
+      "50": 595.6608,
+      "51": 646.0176,
+      "52": 653.544,
+      "53": 661.0704,
+      "54": 668.5968,
+      "55": 676.1232,
+      "56": 683.6496,
+      "57": 691.1808,
+      "58": 698.7072,
+      "59": 706.2336,
+      "60": 713.76
+    },
+    "advancedStatByLevel": {
+      "0": {
+        "key": "critDamage",
+        "value": 0.192
+      },
+      "1": {
+        "key": "critDamage",
+        "value": 0.192
+      },
+      "2": {
+        "key": "critDamage",
+        "value": 0.192
+      },
+      "3": {
+        "key": "critDamage",
+        "value": 0.192
+      },
+      "4": {
+        "key": "critDamage",
+        "value": 0.192
+      },
+      "5": {
+        "key": "critDamage",
+        "value": 0.192
+      },
+      "6": {
+        "key": "critDamage",
+        "value": 0.192
+      },
+      "7": {
+        "key": "critDamage",
+        "value": 0.192
+      },
+      "8": {
+        "key": "critDamage",
+        "value": 0.192
+      },
+      "9": {
+        "key": "critDamage",
+        "value": 0.192
+      },
+      "10": {
+        "key": "critDamage",
+        "value": 0.192
+      },
+      "11": {
+        "key": "critDamage",
+        "value": 0.2496
+      },
+      "12": {
+        "key": "critDamage",
+        "value": 0.2496
+      },
+      "13": {
+        "key": "critDamage",
+        "value": 0.2496
+      },
+      "14": {
+        "key": "critDamage",
+        "value": 0.2496
+      },
+      "15": {
+        "key": "critDamage",
+        "value": 0.2496
+      },
+      "16": {
+        "key": "critDamage",
+        "value": 0.2496
+      },
+      "17": {
+        "key": "critDamage",
+        "value": 0.2496
+      },
+      "18": {
+        "key": "critDamage",
+        "value": 0.2496
+      },
+      "19": {
+        "key": "critDamage",
+        "value": 0.2496
+      },
+      "20": {
+        "key": "critDamage",
+        "value": 0.2496
+      },
+      "21": {
+        "key": "critDamage",
+        "value": 0.3072
+      },
+      "22": {
+        "key": "critDamage",
+        "value": 0.3072
+      },
+      "23": {
+        "key": "critDamage",
+        "value": 0.3072
+      },
+      "24": {
+        "key": "critDamage",
+        "value": 0.3072
+      },
+      "25": {
+        "key": "critDamage",
+        "value": 0.3072
+      },
+      "26": {
+        "key": "critDamage",
+        "value": 0.3072
+      },
+      "27": {
+        "key": "critDamage",
+        "value": 0.3072
+      },
+      "28": {
+        "key": "critDamage",
+        "value": 0.3072
+      },
+      "29": {
+        "key": "critDamage",
+        "value": 0.3072
+      },
+      "30": {
+        "key": "critDamage",
+        "value": 0.3072
+      },
+      "31": {
+        "key": "critDamage",
+        "value": 0.3648
+      },
+      "32": {
+        "key": "critDamage",
+        "value": 0.3648
+      },
+      "33": {
+        "key": "critDamage",
+        "value": 0.3648
+      },
+      "34": {
+        "key": "critDamage",
+        "value": 0.3648
+      },
+      "35": {
+        "key": "critDamage",
+        "value": 0.3648
+      },
+      "36": {
+        "key": "critDamage",
+        "value": 0.3648
+      },
+      "37": {
+        "key": "critDamage",
+        "value": 0.3648
+      },
+      "38": {
+        "key": "critDamage",
+        "value": 0.3648
+      },
+      "39": {
+        "key": "critDamage",
+        "value": 0.3648
+      },
+      "40": {
+        "key": "critDamage",
+        "value": 0.3648
+      },
+      "41": {
+        "key": "critDamage",
+        "value": 0.4224
+      },
+      "42": {
+        "key": "critDamage",
+        "value": 0.4224
+      },
+      "43": {
+        "key": "critDamage",
+        "value": 0.4224
+      },
+      "44": {
+        "key": "critDamage",
+        "value": 0.4224
+      },
+      "45": {
+        "key": "critDamage",
+        "value": 0.4224
+      },
+      "46": {
+        "key": "critDamage",
+        "value": 0.4224
+      },
+      "47": {
+        "key": "critDamage",
+        "value": 0.4224
+      },
+      "48": {
+        "key": "critDamage",
+        "value": 0.4224
+      },
+      "49": {
+        "key": "critDamage",
+        "value": 0.4224
+      },
+      "50": {
+        "key": "critDamage",
+        "value": 0.4224
+      },
+      "51": {
+        "key": "critDamage",
+        "value": 0.48
+      },
+      "52": {
+        "key": "critDamage",
+        "value": 0.48
+      },
+      "53": {
+        "key": "critDamage",
+        "value": 0.48
+      },
+      "54": {
+        "key": "critDamage",
+        "value": 0.48
+      },
+      "55": {
+        "key": "critDamage",
+        "value": 0.48
+      },
+      "56": {
+        "key": "critDamage",
+        "value": 0.48
+      },
+      "57": {
+        "key": "critDamage",
+        "value": 0.48
+      },
+      "58": {
+        "key": "critDamage",
+        "value": 0.48
+      },
+      "59": {
+        "key": "critDamage",
+        "value": 0.48
+      },
+      "60": {
+        "key": "critDamage",
+        "value": 0.48
+      }
+    }
+  },
+  "effects": {
+    "modifiers": [
+      {
+        "id": "passive:self-crit-damage",
+        "label": "自身暴击伤害",
+        "bucket": "modifier",
+        "key": "critDamage",
+        "value": {
+          "kind": "by-level",
+          "inputKey": "refineRank",
+          "values": {
+            "1": 0.3,
+            "2": 0.345,
+            "3": 0.39,
+            "4": 0.435,
+            "5": 0.48
+          }
+        },
+        "unit": "ratio",
+        "target": "self"
+      }
+    ],
+    "overrides": []
+  },
+  "trace": {
+    "sourceRefs": [
+      "data/source/gachabase/zh-CN/w-engines.json",
+      "data/source/gachabase/en/w-engines.json",
+      "data/source/gachabase/zh-CN/w-engine-details.json",
+      "data/source/gachabase/en/w-engine-details.json",
+      "data/source/xlsx/zh-CN/w-engine-stat.json",
+      "data/source/xlsx/zh-CN/w-engine-desc.json"
+    ],
+    "skillNameTexts": {
+      "en": "Tranquil Blossom",
+      "zh-CN": "光静花冷"
+    },
+    "skillDescriptionsByRefine": {
+      "1": {
+        "en": "CRIT DMG is increased by 30%. When the equipper lands a hit with a Basic Attack, Special Attack, or Aftershock, they gain 1 stack of a buff. Each stack increases the equipper's CRIT DMG by an additional 10%, stacking up to 3 times. The effect lasts for 30s, with each stack's duration calculated separately, and can only be triggered once per use of a skill. With all 3 stacks, the equipper's Electric DMG increases by 20%.",
+        "zh-CN": "暴击伤害提升30%；装备者发动[普通攻击] 、[特殊技]或[追加攻击]命中敌人时，可分别获得1层增益效果，每层增益效果使装备者的暴击伤害额外提升10%，最多叠加3层，持续30秒，每层效果单独结算持续时间，同一招式内最多触发一次；拥有3层增益效果时，装备者造成的电属性伤害提升20%。"
+      },
+      "2": {
+        "en": "CRIT DMG is increased by 34.5%. When the equipper lands a hit with a Basic Attack, Special Attack, or Aftershock, they gain 1 stack of a buff. Each stack increases the equipper's CRIT DMG by an additional 11.5%, stacking up to 3 times. The effect lasts for 30s, with each stack's duration calculated separately, and can only be triggered once per use of a skill. With all 3 stacks, the equipper's Electric DMG increases by 23%.",
+        "zh-CN": "暴击伤害提升34.5%；装备者发动[普通攻击] 、[特殊技]或[追加攻击]命中敌人时，可分别获得1层增益效果，每层增益效果使装备者的暴击伤害额外提升11.5%，最多叠加3层，持续30秒，每层效果单独结算持续时间，同一招式内最多触发一次；拥有3层增益效果时，装备者造成的电属性伤害提升23%。"
+      },
+      "3": {
+        "en": "CRIT DMG is increased by 39%. When the equipper lands a hit with a Basic Attack, Special Attack, or Aftershock, they gain 1 stack of a buff. Each stack increases the equipper's CRIT DMG by an additional 13%, stacking up to 3 times. The effect lasts for 30s, with each stack's duration calculated separately, and can only be triggered once per use of a skill. With all 3 stacks, the equipper's Electric DMG increases by 26%.",
+        "zh-CN": "暴击伤害提升39%；装备者发动[普通攻击] 、[特殊技]或[追加攻击]命中敌人时，可分别获得1层增益效果，每层增益效果使装备者的暴击伤害额外提升13%，最多叠加3层，持续30秒，每层效果单独结算持续时间，同一招式内最多触发一次；拥有3层增益效果时，装备者造成的电属性伤害提升26%。"
+      },
+      "4": {
+        "en": "CRIT DMG is increased by 43.5%. When the equipper lands a hit with a Basic Attack, Special Attack, or Aftershock, they gain 1 stack of a buff. Each stack increases the equipper's CRIT DMG by an additional 14.5%, stacking up to 3 times. The effect lasts for 30s, with each stack's duration calculated separately, and can only be triggered once per use of a skill. With all 3 stacks, the equipper's Electric DMG increases by 29%.",
+        "zh-CN": "暴击伤害提升43.5%；装备者发动[普通攻击] 、[特殊技]或[追加攻击]命中敌人时，可分别获得1层增益效果，每层增益效果使装备者的暴击伤害额外提升14.5%，最多叠加3层，持续30秒，每层效果单独结算持续时间，同一招式内最多触发一次；拥有3层增益效果时，装备者造成的电属性伤害提升29%。"
+      },
+      "5": {
+        "en": "CRIT DMG is increased by 48%. When the equipper lands a hit with a Basic Attack, Special Attack, or Aftershock, they gain 1 stack of a buff. Each stack increases the equipper's CRIT DMG by an additional 16%, stacking up to 3 times. The effect lasts for 30s, with each stack's duration calculated separately, and can only be triggered once per use of a skill. With all 3 stacks, the equipper's Electric DMG increases by 32%.",
+        "zh-CN": "暴击伤害提升48%；装备者发动[普通攻击] 、[特殊技]或[追加攻击]命中敌人时，可分别获得1层增益效果，每层增益效果使装备者的暴击伤害额外提升16%，最多叠加3层，持续30秒，每层效果单独结算持续时间，同一招式内最多触发一次；拥有3层增益效果时，装备者造成的电属性伤害提升32%。"
+      }
+    }
+  }
+}

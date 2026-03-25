@@ -1,0 +1,375 @@
+{
+  "id": "13135",
+  "panel": {
+    "baseAtkByLevel": {
+      "0": 42,
+      "1": 48.5856,
+      "2": 55.1712,
+      "3": 61.761,
+      "4": 68.3466,
+      "5": 74.9322,
+      "6": 81.5178,
+      "7": 88.1034,
+      "8": 94.689,
+      "9": 101.2788,
+      "10": 107.8644,
+      "11": 151.9224,
+      "12": 158.508,
+      "13": 165.0936,
+      "14": 171.6792,
+      "15": 178.269,
+      "16": 184.8546,
+      "17": 191.4402,
+      "18": 198.0258,
+      "19": 204.6114,
+      "20": 211.197,
+      "21": 255.2592,
+      "22": 261.8448,
+      "23": 268.4304,
+      "24": 275.016,
+      "25": 281.6016,
+      "26": 288.1872,
+      "27": 294.777,
+      "28": 301.3626,
+      "29": 307.9482,
+      "30": 314.5338,
+      "31": 358.5918,
+      "32": 365.1774,
+      "33": 371.7672,
+      "34": 378.3528,
+      "35": 384.9384,
+      "36": 391.524,
+      "37": 398.1096,
+      "38": 404.6952,
+      "39": 411.285,
+      "40": 417.8706,
+      "41": 461.9286,
+      "42": 468.5142,
+      "43": 475.0998,
+      "44": 481.6854,
+      "45": 488.2752,
+      "46": 494.8608,
+      "47": 501.4464,
+      "48": 508.032,
+      "49": 514.6176,
+      "50": 521.2032,
+      "51": 565.2654,
+      "52": 571.851,
+      "53": 578.4366,
+      "54": 585.0222,
+      "55": 591.6078,
+      "56": 598.1934,
+      "57": 604.7832,
+      "58": 611.3688,
+      "59": 617.9544,
+      "60": 624.54
+    },
+    "advancedStatByLevel": {
+      "0": {
+        "key": "impact",
+        "value": 0.06
+      },
+      "1": {
+        "key": "impact",
+        "value": 0.06
+      },
+      "2": {
+        "key": "impact",
+        "value": 0.06
+      },
+      "3": {
+        "key": "impact",
+        "value": 0.06
+      },
+      "4": {
+        "key": "impact",
+        "value": 0.06
+      },
+      "5": {
+        "key": "impact",
+        "value": 0.06
+      },
+      "6": {
+        "key": "impact",
+        "value": 0.06
+      },
+      "7": {
+        "key": "impact",
+        "value": 0.06
+      },
+      "8": {
+        "key": "impact",
+        "value": 0.06
+      },
+      "9": {
+        "key": "impact",
+        "value": 0.06
+      },
+      "10": {
+        "key": "impact",
+        "value": 0.06
+      },
+      "11": {
+        "key": "impact",
+        "value": 0.078
+      },
+      "12": {
+        "key": "impact",
+        "value": 0.078
+      },
+      "13": {
+        "key": "impact",
+        "value": 0.078
+      },
+      "14": {
+        "key": "impact",
+        "value": 0.078
+      },
+      "15": {
+        "key": "impact",
+        "value": 0.078
+      },
+      "16": {
+        "key": "impact",
+        "value": 0.078
+      },
+      "17": {
+        "key": "impact",
+        "value": 0.078
+      },
+      "18": {
+        "key": "impact",
+        "value": 0.078
+      },
+      "19": {
+        "key": "impact",
+        "value": 0.078
+      },
+      "20": {
+        "key": "impact",
+        "value": 0.078
+      },
+      "21": {
+        "key": "impact",
+        "value": 0.096
+      },
+      "22": {
+        "key": "impact",
+        "value": 0.096
+      },
+      "23": {
+        "key": "impact",
+        "value": 0.096
+      },
+      "24": {
+        "key": "impact",
+        "value": 0.096
+      },
+      "25": {
+        "key": "impact",
+        "value": 0.096
+      },
+      "26": {
+        "key": "impact",
+        "value": 0.096
+      },
+      "27": {
+        "key": "impact",
+        "value": 0.096
+      },
+      "28": {
+        "key": "impact",
+        "value": 0.096
+      },
+      "29": {
+        "key": "impact",
+        "value": 0.096
+      },
+      "30": {
+        "key": "impact",
+        "value": 0.096
+      },
+      "31": {
+        "key": "impact",
+        "value": 0.114
+      },
+      "32": {
+        "key": "impact",
+        "value": 0.114
+      },
+      "33": {
+        "key": "impact",
+        "value": 0.114
+      },
+      "34": {
+        "key": "impact",
+        "value": 0.114
+      },
+      "35": {
+        "key": "impact",
+        "value": 0.114
+      },
+      "36": {
+        "key": "impact",
+        "value": 0.114
+      },
+      "37": {
+        "key": "impact",
+        "value": 0.114
+      },
+      "38": {
+        "key": "impact",
+        "value": 0.114
+      },
+      "39": {
+        "key": "impact",
+        "value": 0.114
+      },
+      "40": {
+        "key": "impact",
+        "value": 0.114
+      },
+      "41": {
+        "key": "impact",
+        "value": 0.132
+      },
+      "42": {
+        "key": "impact",
+        "value": 0.132
+      },
+      "43": {
+        "key": "impact",
+        "value": 0.132
+      },
+      "44": {
+        "key": "impact",
+        "value": 0.132
+      },
+      "45": {
+        "key": "impact",
+        "value": 0.132
+      },
+      "46": {
+        "key": "impact",
+        "value": 0.132
+      },
+      "47": {
+        "key": "impact",
+        "value": 0.132
+      },
+      "48": {
+        "key": "impact",
+        "value": 0.132
+      },
+      "49": {
+        "key": "impact",
+        "value": 0.132
+      },
+      "50": {
+        "key": "impact",
+        "value": 0.132
+      },
+      "51": {
+        "key": "impact",
+        "value": 0.15
+      },
+      "52": {
+        "key": "impact",
+        "value": 0.15
+      },
+      "53": {
+        "key": "impact",
+        "value": 0.15
+      },
+      "54": {
+        "key": "impact",
+        "value": 0.15
+      },
+      "55": {
+        "key": "impact",
+        "value": 0.15
+      },
+      "56": {
+        "key": "impact",
+        "value": 0.15
+      },
+      "57": {
+        "key": "impact",
+        "value": 0.15
+      },
+      "58": {
+        "key": "impact",
+        "value": 0.15
+      },
+      "59": {
+        "key": "impact",
+        "value": 0.15
+      },
+      "60": {
+        "key": "impact",
+        "value": 0.15
+      }
+    }
+  },
+  "effects": {
+    "modifiers": [
+      {
+        "id": "passive:物理-damage-bonus",
+        "label": "物理属性伤害",
+        "bucket": "modifier",
+        "key": "physicalDamageBonus",
+        "value": {
+          "kind": "by-level",
+          "inputKey": "refineRank",
+          "values": {
+            "1": 0.15,
+            "2": 0.173,
+            "3": 0.195,
+            "4": 0.218,
+            "5": 0.24
+          }
+        },
+        "unit": "ratio",
+        "target": "self",
+        "conditionText": "发动[追加攻击]时，装备者造成的物理伤害提升15%，造成的失衡值提升10%，持续10秒。"
+      }
+    ],
+    "overrides": []
+  },
+  "trace": {
+    "sourceRefs": [
+      "data/source/gachabase/zh-CN/w-engines.json",
+      "data/source/gachabase/en/w-engines.json",
+      "data/source/gachabase/zh-CN/w-engine-details.json",
+      "data/source/gachabase/en/w-engine-details.json",
+      "data/source/xlsx/zh-CN/w-engine-stat.json",
+      "data/source/xlsx/zh-CN/w-engine-desc.json"
+    ],
+    "skillNameTexts": {
+      "en": "Watch Your Fingers",
+      "zh-CN": "小心手指"
+    },
+    "skillDescriptionsByRefine": {
+      "1": {
+        "en": "Upon launching an Aftershock, the equipper's Physical DMG increases by 15%, and Daze increases by 10%, lasting 10s.",
+        "zh-CN": "发动[追加攻击]时，装备者造成的物理伤害提升15%，造成的失衡值提升10%，持续10秒。"
+      },
+      "2": {
+        "en": "Upon launching an Aftershock, the equipper's Physical DMG increases by 17.3%, and Daze increases by 11.5%, lasting 10s.",
+        "zh-CN": "发动[追加攻击]时，装备者造成的物理伤害提升17.3%，造成的失衡值提升11.5%，持续10秒。"
+      },
+      "3": {
+        "en": "Upon launching an Aftershock, the equipper's Physical DMG increases by 19.5%, and Daze increases by 13%, lasting 10s.",
+        "zh-CN": "发动[追加攻击]时，装备者造成的物理伤害提升19.5%，造成的失衡值提升13%，持续10秒。"
+      },
+      "4": {
+        "en": "Upon launching an Aftershock, the equipper's Physical DMG increases by 21.8%, and Daze increases by 14.5%, lasting 10s.",
+        "zh-CN": "发动[追加攻击]时，装备者造成的物理伤害提升21.8%，造成的失衡值提升14.5%，持续10秒。"
+      },
+      "5": {
+        "en": "Upon launching an Aftershock, the equipper's Physical DMG increases by 24%, and Daze increases by 16%, lasting 10s.",
+        "zh-CN": "发动[追加攻击]时，装备者造成的物理伤害提升24%，造成的失衡值提升16%，持续10秒。"
+      }
+    }
+  }
+}

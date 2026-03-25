@@ -1,0 +1,354 @@
+{
+  "id": "14104",
+  "panel": {
+    "baseAtkByLevel": {
+      "0": 46,
+      "1": 53.2128,
+      "2": 60.4256,
+      "3": 67.643,
+      "4": 74.8558,
+      "5": 82.0686,
+      "6": 89.2814,
+      "7": 96.4942,
+      "8": 103.707,
+      "9": 110.9244,
+      "10": 118.1372,
+      "11": 166.3912,
+      "12": 173.604,
+      "13": 180.8168,
+      "14": 188.0296,
+      "15": 195.247,
+      "16": 202.4598,
+      "17": 209.6726,
+      "18": 216.8854,
+      "19": 224.0982,
+      "20": 231.311,
+      "21": 279.5696,
+      "22": 286.7824,
+      "23": 293.9952,
+      "24": 301.208,
+      "25": 308.4208,
+      "26": 315.6336,
+      "27": 322.851,
+      "28": 330.0638,
+      "29": 337.2766,
+      "30": 344.4894,
+      "31": 392.7434,
+      "32": 399.9562,
+      "33": 407.1736,
+      "34": 414.3864,
+      "35": 421.5992,
+      "36": 428.812,
+      "37": 436.0248,
+      "38": 443.2376,
+      "39": 450.455,
+      "40": 457.6678,
+      "41": 505.9218,
+      "42": 513.1346,
+      "43": 520.3474,
+      "44": 527.5602,
+      "45": 534.7776,
+      "46": 541.9904,
+      "47": 549.2032,
+      "48": 556.416,
+      "49": 563.6288,
+      "50": 570.8416,
+      "51": 619.1002,
+      "52": 626.313,
+      "53": 633.5258,
+      "54": 640.7386,
+      "55": 647.9514,
+      "56": 655.1642,
+      "57": 662.3816,
+      "58": 669.5944,
+      "59": 676.8072,
+      "60": 684.02
+    },
+    "advancedStatByLevel": {
+      "0": {
+        "key": "atkPercent",
+        "value": 0.12
+      },
+      "1": {
+        "key": "atkPercent",
+        "value": 0.12
+      },
+      "2": {
+        "key": "atkPercent",
+        "value": 0.12
+      },
+      "3": {
+        "key": "atkPercent",
+        "value": 0.12
+      },
+      "4": {
+        "key": "atkPercent",
+        "value": 0.12
+      },
+      "5": {
+        "key": "atkPercent",
+        "value": 0.12
+      },
+      "6": {
+        "key": "atkPercent",
+        "value": 0.12
+      },
+      "7": {
+        "key": "atkPercent",
+        "value": 0.12
+      },
+      "8": {
+        "key": "atkPercent",
+        "value": 0.12
+      },
+      "9": {
+        "key": "atkPercent",
+        "value": 0.12
+      },
+      "10": {
+        "key": "atkPercent",
+        "value": 0.12
+      },
+      "11": {
+        "key": "atkPercent",
+        "value": 0.156
+      },
+      "12": {
+        "key": "atkPercent",
+        "value": 0.156
+      },
+      "13": {
+        "key": "atkPercent",
+        "value": 0.156
+      },
+      "14": {
+        "key": "atkPercent",
+        "value": 0.156
+      },
+      "15": {
+        "key": "atkPercent",
+        "value": 0.156
+      },
+      "16": {
+        "key": "atkPercent",
+        "value": 0.156
+      },
+      "17": {
+        "key": "atkPercent",
+        "value": 0.156
+      },
+      "18": {
+        "key": "atkPercent",
+        "value": 0.156
+      },
+      "19": {
+        "key": "atkPercent",
+        "value": 0.156
+      },
+      "20": {
+        "key": "atkPercent",
+        "value": 0.156
+      },
+      "21": {
+        "key": "atkPercent",
+        "value": 0.192
+      },
+      "22": {
+        "key": "atkPercent",
+        "value": 0.192
+      },
+      "23": {
+        "key": "atkPercent",
+        "value": 0.192
+      },
+      "24": {
+        "key": "atkPercent",
+        "value": 0.192
+      },
+      "25": {
+        "key": "atkPercent",
+        "value": 0.192
+      },
+      "26": {
+        "key": "atkPercent",
+        "value": 0.192
+      },
+      "27": {
+        "key": "atkPercent",
+        "value": 0.192
+      },
+      "28": {
+        "key": "atkPercent",
+        "value": 0.192
+      },
+      "29": {
+        "key": "atkPercent",
+        "value": 0.192
+      },
+      "30": {
+        "key": "atkPercent",
+        "value": 0.192
+      },
+      "31": {
+        "key": "atkPercent",
+        "value": 0.228
+      },
+      "32": {
+        "key": "atkPercent",
+        "value": 0.228
+      },
+      "33": {
+        "key": "atkPercent",
+        "value": 0.228
+      },
+      "34": {
+        "key": "atkPercent",
+        "value": 0.228
+      },
+      "35": {
+        "key": "atkPercent",
+        "value": 0.228
+      },
+      "36": {
+        "key": "atkPercent",
+        "value": 0.228
+      },
+      "37": {
+        "key": "atkPercent",
+        "value": 0.228
+      },
+      "38": {
+        "key": "atkPercent",
+        "value": 0.228
+      },
+      "39": {
+        "key": "atkPercent",
+        "value": 0.228
+      },
+      "40": {
+        "key": "atkPercent",
+        "value": 0.228
+      },
+      "41": {
+        "key": "atkPercent",
+        "value": 0.264
+      },
+      "42": {
+        "key": "atkPercent",
+        "value": 0.264
+      },
+      "43": {
+        "key": "atkPercent",
+        "value": 0.264
+      },
+      "44": {
+        "key": "atkPercent",
+        "value": 0.264
+      },
+      "45": {
+        "key": "atkPercent",
+        "value": 0.264
+      },
+      "46": {
+        "key": "atkPercent",
+        "value": 0.264
+      },
+      "47": {
+        "key": "atkPercent",
+        "value": 0.264
+      },
+      "48": {
+        "key": "atkPercent",
+        "value": 0.264
+      },
+      "49": {
+        "key": "atkPercent",
+        "value": 0.264
+      },
+      "50": {
+        "key": "atkPercent",
+        "value": 0.264
+      },
+      "51": {
+        "key": "atkPercent",
+        "value": 0.3
+      },
+      "52": {
+        "key": "atkPercent",
+        "value": 0.3
+      },
+      "53": {
+        "key": "atkPercent",
+        "value": 0.3
+      },
+      "54": {
+        "key": "atkPercent",
+        "value": 0.3
+      },
+      "55": {
+        "key": "atkPercent",
+        "value": 0.3
+      },
+      "56": {
+        "key": "atkPercent",
+        "value": 0.3
+      },
+      "57": {
+        "key": "atkPercent",
+        "value": 0.3
+      },
+      "58": {
+        "key": "atkPercent",
+        "value": 0.3
+      },
+      "59": {
+        "key": "atkPercent",
+        "value": 0.3
+      },
+      "60": {
+        "key": "atkPercent",
+        "value": 0.3
+      }
+    }
+  },
+  "effects": {
+    "modifiers": [],
+    "overrides": []
+  },
+  "trace": {
+    "sourceRefs": [
+      "data/source/gachabase/zh-CN/w-engines.json",
+      "data/source/gachabase/en/w-engines.json",
+      "data/source/gachabase/zh-CN/w-engine-details.json",
+      "data/source/gachabase/en/w-engine-details.json",
+      "data/source/xlsx/zh-CN/w-engine-stat.json",
+      "data/source/xlsx/zh-CN/w-engine-desc.json"
+    ],
+    "skillNameTexts": {
+      "en": "Scorching Breath",
+      "zh-CN": "炽烈吐息"
+    },
+    "skillDescriptionsByRefine": {
+      "1": {
+        "en": "Upon hitting an enemy with a Basic Attack, Dash Attack, or Dodge Counter, the equipper's ATK increases by 3.5% for 8s, stacking up to 8 times. This effect can trigger once every 0.5s. The duration of each stack is calculated separately.",
+        "zh-CN": "[普通攻击]、[冲刺攻击]或[闪避反击]命中敌人时，装备者的攻击力提升3.5%，最多叠加8层，持续8秒，0.5秒内最多触发一次，每层效果单独结算持续时间。"
+      },
+      "2": {
+        "en": "Upon hitting an enemy with a Basic Attack, Dash Attack, or Dodge Counter, the equipper's ATK increases by 4.4% for 8s, stacking up to 8 times. This effect can trigger once every 0.5s. The duration of each stack is calculated separately.",
+        "zh-CN": "[普通攻击]、[冲刺攻击]或[闪避反击]命中敌人时，装备者的攻击力提升4.4%，最多叠加8层，持续8秒，0.5秒内最多触发一次，每层效果单独结算持续时间。"
+      },
+      "3": {
+        "en": "Upon hitting an enemy with a Basic Attack, Dash Attack, or Dodge Counter, the equipper's ATK increases by 5.2% for 8s, stacking up to 8 times. This effect can trigger once every 0.5s. The duration of each stack is calculated separately.",
+        "zh-CN": "[普通攻击]、[冲刺攻击]或[闪避反击]命中敌人时，装备者的攻击力提升5.2%，最多叠加8层，持续8秒，0.5秒内最多触发一次，每层效果单独结算持续时间。"
+      },
+      "4": {
+        "en": "Upon hitting an enemy with a Basic Attack, Dash Attack, or Dodge Counter, the equipper's ATK increases by 6% for 8s, stacking up to 8 times. This effect can trigger once every 0.5s. The duration of each stack is calculated separately.",
+        "zh-CN": "[普通攻击]、[冲刺攻击]或[闪避反击]命中敌人时，装备者的攻击力提升6%，最多叠加8层，持续8秒，0.5秒内最多触发一次，每层效果单独结算持续时间。"
+      },
+      "5": {
+        "en": "Upon hitting an enemy with a Basic Attack, Dash Attack, or Dodge Counter, the equipper's ATK increases by 7% for 8s, stacking up to 8 times. This effect can trigger once every 0.5s. The duration of each stack is calculated separately.",
+        "zh-CN": "[普通攻击]、[冲刺攻击]或[闪避反击]命中敌人时，装备者的攻击力提升7%，最多叠加8层，持续8秒，0.5秒内最多触发一次，每层效果单独结算持续时间。"
+      }
+    }
+  }
+}

@@ -18,7 +18,10 @@
       "default": "./dist/index.mjs"
     },
     "./data/source/*": "./data/source/*",
-    "./data/enemy/*": "./data/enemy/*"
+    "./data/enemy/*": "./data/enemy/*",
+    "./data/agent/*": "./data/agent/*",
+    "./data/w-engine/*": "./data/w-engine/*",
+    "./data/drive-disc/*": "./data/drive-disc/*"
   },
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
@@ -26,6 +29,9 @@
   "files": [
     "data/source",
     "data/enemy",
+    "data/agent",
+    "data/w-engine",
+    "data/drive-disc",
     "dist"
   ],
   "scripts": {
@@ -35,6 +41,9 @@
     "sync:buhflipexplode": "tsx scripts/sources/index.ts buhflipexplode",
     "sync:mihoyo-wiki": "tsx scripts/sources/index.ts mihoyo-wiki",
     "generate:enemy": "tsx scripts/data/enemy.ts",
+    "generate:agent": "tsx scripts/data/agent.ts",
+    "generate:w-engine": "tsx scripts/data/w-engine.ts",
+    "generate:drive-disc": "tsx scripts/data/drive-disc.ts",
     "build": "tsdown src/index.ts --format esm --dts",
     "test": "vitest run",
     "typecheck": "tsc --noEmit"

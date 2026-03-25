@@ -1,0 +1,85 @@
+{
+  "id": "32500",
+  "effects": {
+    "twoPiece": [
+      {
+        "id": "32500:2pc:ice-dmg",
+        "label": "2 件套冰属性伤害",
+        "bucket": "panel",
+        "key": "iceDamageBonus",
+        "value": {
+          "kind": "static",
+          "value": 0.1
+        },
+        "unit": "ratio"
+      }
+    ],
+    "fourPiece": [
+      {
+        "id": "32500:4pc:basic-dmg",
+        "label": "4 件套普通攻击伤害",
+        "bucket": "modifier",
+        "key": "normalAttackDamageBonus",
+        "value": {
+          "kind": "static",
+          "value": 0.2
+        },
+        "unit": "ratio",
+        "target": "self"
+      },
+      {
+        "id": "32500:4pc:dash-dmg",
+        "label": "4 件套冲刺攻击伤害",
+        "bucket": "modifier",
+        "key": "dashAttackDamageBonus",
+        "value": {
+          "kind": "static",
+          "value": 0.2
+        },
+        "unit": "ratio",
+        "target": "self"
+      },
+      {
+        "id": "32500:4pc:basic-dmg-bonus",
+        "label": "4 件套普通攻击额外伤害",
+        "bucket": "modifier",
+        "key": "normalAttackDamageBonus",
+        "value": {
+          "kind": "static",
+          "value": 0.2
+        },
+        "unit": "ratio",
+        "target": "self",
+        "conditionText": "队伍中任意角色对敌人施加[冻结]或触发[碎冰]效果时，额外提升20%，持续12秒。"
+      },
+      {
+        "id": "32500:4pc:dash-dmg-bonus",
+        "label": "4 件套冲刺攻击额外伤害",
+        "bucket": "modifier",
+        "key": "dashAttackDamageBonus",
+        "value": {
+          "kind": "static",
+          "value": 0.2
+        },
+        "unit": "ratio",
+        "target": "self",
+        "conditionText": "队伍中任意角色对敌人施加[冻结]或触发[碎冰]效果时，额外提升20%，持续12秒。"
+      }
+    ]
+  },
+  "trace": {
+    "sourceRefs": [
+      "data/source/xlsx/zh-CN/drive-disc-desc.json",
+      "data/source/gachabase/zh-CN/drive-discs.json",
+      "data/source/gachabase/en/drive-discs.json"
+    ],
+    "twoPieceEffectTexts": {
+      "en": "Ice DMG +10%",
+      "zh-CN": "冰属性伤害+10%。"
+    },
+    "fourPieceEffectTexts": {
+      "en": "Increase the DMG of Basic Attack and Dash Attack by 20%. When any squad member inflicts Freeze or Shatter, this effect increases by an additional 20% for 12s.",
+      "zh-CN": "[普通攻击]和[冲刺攻击]造成的伤害提升20%，队伍中任意角色对敌人施加[冻结]或触发[碎冰]效果时，该增益效果额外提升20%，持续12秒。"
+    }
+  }
+}

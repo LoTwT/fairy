@@ -1,0 +1,375 @@
+{
+  "id": "13010",
+  "panel": {
+    "baseAtkByLevel": {
+      "0": 40,
+      "1": 46.272,
+      "2": 52.544,
+      "3": 58.82,
+      "4": 65.092,
+      "5": 71.364,
+      "6": 77.636,
+      "7": 83.908,
+      "8": 90.18,
+      "9": 96.456,
+      "10": 102.728,
+      "11": 144.688,
+      "12": 150.96,
+      "13": 157.232,
+      "14": 163.504,
+      "15": 169.78,
+      "16": 176.052,
+      "17": 182.324,
+      "18": 188.596,
+      "19": 194.868,
+      "20": 201.14,
+      "21": 243.104,
+      "22": 249.376,
+      "23": 255.648,
+      "24": 261.92,
+      "25": 268.192,
+      "26": 274.464,
+      "27": 280.74,
+      "28": 287.012,
+      "29": 293.284,
+      "30": 299.556,
+      "31": 341.516,
+      "32": 347.788,
+      "33": 354.064,
+      "34": 360.336,
+      "35": 366.608,
+      "36": 372.88,
+      "37": 379.152,
+      "38": 385.424,
+      "39": 391.7,
+      "40": 397.972,
+      "41": 439.932,
+      "42": 446.204,
+      "43": 452.476,
+      "44": 458.748,
+      "45": 465.024,
+      "46": 471.296,
+      "47": 477.568,
+      "48": 483.84,
+      "49": 490.112,
+      "50": 496.384,
+      "51": 538.348,
+      "52": 544.62,
+      "53": 550.892,
+      "54": 557.164,
+      "55": 563.436,
+      "56": 569.708,
+      "57": 575.984,
+      "58": 582.256,
+      "59": 588.528,
+      "60": 594.8
+    },
+    "advancedStatByLevel": {
+      "0": {
+        "key": "defPercent",
+        "value": 0.16
+      },
+      "1": {
+        "key": "defPercent",
+        "value": 0.16
+      },
+      "2": {
+        "key": "defPercent",
+        "value": 0.16
+      },
+      "3": {
+        "key": "defPercent",
+        "value": 0.16
+      },
+      "4": {
+        "key": "defPercent",
+        "value": 0.16
+      },
+      "5": {
+        "key": "defPercent",
+        "value": 0.16
+      },
+      "6": {
+        "key": "defPercent",
+        "value": 0.16
+      },
+      "7": {
+        "key": "defPercent",
+        "value": 0.16
+      },
+      "8": {
+        "key": "defPercent",
+        "value": 0.16
+      },
+      "9": {
+        "key": "defPercent",
+        "value": 0.16
+      },
+      "10": {
+        "key": "defPercent",
+        "value": 0.16
+      },
+      "11": {
+        "key": "defPercent",
+        "value": 0.208
+      },
+      "12": {
+        "key": "defPercent",
+        "value": 0.208
+      },
+      "13": {
+        "key": "defPercent",
+        "value": 0.208
+      },
+      "14": {
+        "key": "defPercent",
+        "value": 0.208
+      },
+      "15": {
+        "key": "defPercent",
+        "value": 0.208
+      },
+      "16": {
+        "key": "defPercent",
+        "value": 0.208
+      },
+      "17": {
+        "key": "defPercent",
+        "value": 0.208
+      },
+      "18": {
+        "key": "defPercent",
+        "value": 0.208
+      },
+      "19": {
+        "key": "defPercent",
+        "value": 0.208
+      },
+      "20": {
+        "key": "defPercent",
+        "value": 0.208
+      },
+      "21": {
+        "key": "defPercent",
+        "value": 0.256
+      },
+      "22": {
+        "key": "defPercent",
+        "value": 0.256
+      },
+      "23": {
+        "key": "defPercent",
+        "value": 0.256
+      },
+      "24": {
+        "key": "defPercent",
+        "value": 0.256
+      },
+      "25": {
+        "key": "defPercent",
+        "value": 0.256
+      },
+      "26": {
+        "key": "defPercent",
+        "value": 0.256
+      },
+      "27": {
+        "key": "defPercent",
+        "value": 0.256
+      },
+      "28": {
+        "key": "defPercent",
+        "value": 0.256
+      },
+      "29": {
+        "key": "defPercent",
+        "value": 0.256
+      },
+      "30": {
+        "key": "defPercent",
+        "value": 0.256
+      },
+      "31": {
+        "key": "defPercent",
+        "value": 0.304
+      },
+      "32": {
+        "key": "defPercent",
+        "value": 0.304
+      },
+      "33": {
+        "key": "defPercent",
+        "value": 0.304
+      },
+      "34": {
+        "key": "defPercent",
+        "value": 0.304
+      },
+      "35": {
+        "key": "defPercent",
+        "value": 0.304
+      },
+      "36": {
+        "key": "defPercent",
+        "value": 0.304
+      },
+      "37": {
+        "key": "defPercent",
+        "value": 0.304
+      },
+      "38": {
+        "key": "defPercent",
+        "value": 0.304
+      },
+      "39": {
+        "key": "defPercent",
+        "value": 0.304
+      },
+      "40": {
+        "key": "defPercent",
+        "value": 0.304
+      },
+      "41": {
+        "key": "defPercent",
+        "value": 0.352
+      },
+      "42": {
+        "key": "defPercent",
+        "value": 0.352
+      },
+      "43": {
+        "key": "defPercent",
+        "value": 0.352
+      },
+      "44": {
+        "key": "defPercent",
+        "value": 0.352
+      },
+      "45": {
+        "key": "defPercent",
+        "value": 0.352
+      },
+      "46": {
+        "key": "defPercent",
+        "value": 0.352
+      },
+      "47": {
+        "key": "defPercent",
+        "value": 0.352
+      },
+      "48": {
+        "key": "defPercent",
+        "value": 0.352
+      },
+      "49": {
+        "key": "defPercent",
+        "value": 0.352
+      },
+      "50": {
+        "key": "defPercent",
+        "value": 0.352
+      },
+      "51": {
+        "key": "defPercent",
+        "value": 0.4
+      },
+      "52": {
+        "key": "defPercent",
+        "value": 0.4
+      },
+      "53": {
+        "key": "defPercent",
+        "value": 0.4
+      },
+      "54": {
+        "key": "defPercent",
+        "value": 0.4
+      },
+      "55": {
+        "key": "defPercent",
+        "value": 0.4
+      },
+      "56": {
+        "key": "defPercent",
+        "value": 0.4
+      },
+      "57": {
+        "key": "defPercent",
+        "value": 0.4
+      },
+      "58": {
+        "key": "defPercent",
+        "value": 0.4
+      },
+      "59": {
+        "key": "defPercent",
+        "value": 0.4
+      },
+      "60": {
+        "key": "defPercent",
+        "value": 0.4
+      }
+    }
+  },
+  "effects": {
+    "modifiers": [
+      {
+        "id": "passive:self-atk-percent",
+        "label": "自身攻击力",
+        "bucket": "modifier",
+        "key": "atkPercent",
+        "value": {
+          "kind": "by-level",
+          "inputKey": "refineRank",
+          "values": {
+            "1": 0.1,
+            "2": 0.115,
+            "3": 0.13,
+            "4": 0.145,
+            "5": 0.16
+          }
+        },
+        "unit": "ratio",
+        "target": "self",
+        "conditionText": "拥有护盾时，装备者的攻击力提升10%。"
+      }
+    ],
+    "overrides": []
+  },
+  "trace": {
+    "sourceRefs": [
+      "data/source/gachabase/zh-CN/w-engines.json",
+      "data/source/gachabase/en/w-engines.json",
+      "data/source/gachabase/zh-CN/w-engine-details.json",
+      "data/source/gachabase/en/w-engine-details.json",
+      "data/source/xlsx/zh-CN/w-engine-stat.json",
+      "data/source/xlsx/zh-CN/w-engine-desc.json"
+    ],
+    "skillNameTexts": {
+      "en": "Pet the Bunny",
+      "zh-CN": "摸摸兔兔"
+    },
+    "skillDescriptionsByRefine": {
+      "1": {
+        "en": "Increases Max HP by 8%. Increases the equipper's ATK by 10% when they are shielded.",
+        "zh-CN": "生命值上限提升8%；拥有护盾时，装备者的攻击力提升10%。"
+      },
+      "2": {
+        "en": "Increases Max HP by 9.2%. Increases the equipper's ATK by 11.5% when they are shielded.",
+        "zh-CN": "生命值上限提升9.2%；拥有护盾时，装备者的攻击力提升11.5%。"
+      },
+      "3": {
+        "en": "Increases Max HP by 10.4%. Increases the equipper's ATK by 13% when they are shielded.",
+        "zh-CN": "生命值上限提升10.4%；拥有护盾时，装备者的攻击力提升13%。"
+      },
+      "4": {
+        "en": "Increases Max HP by 11.6%. Increases the equipper's ATK by 14.5% when they are shielded.",
+        "zh-CN": "生命值上限提升11.6%；拥有护盾时，装备者的攻击力提升14.5%。"
+      },
+      "5": {
+        "en": "Increases Max HP by 12.8%. Increases the equipper's ATK by 16% when they are shielded.",
+        "zh-CN": "生命值上限提升12.8%；拥有护盾时，装备者的攻击力提升16%。"
+      }
+    }
+  }
+}

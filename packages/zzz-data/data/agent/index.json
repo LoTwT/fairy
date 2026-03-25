@@ -1,0 +1,786 @@
+{
+  "1011": {
+    "id": "1011",
+    "slug": "anby-demara",
+    "names": {
+      "en": "Anby",
+      "zh-CN": "安比"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/5123071849885634985_250_13063804.webp",
+    "rank": "A",
+    "attribute": "电属性",
+    "specialty": "击破",
+    "locales": [
+      "en",
+      "zh-CN"
+    ]
+  },
+  "1021": {
+    "id": "1021",
+    "slug": "nekomiya-mana",
+    "names": {
+      "en": "Nekomata",
+      "zh-CN": "猫又"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/2917128260402111275_250_13063804.webp",
+    "rank": "S",
+    "attribute": "物理",
+    "specialty": "强攻",
+    "locales": [
+      "en",
+      "zh-CN"
+    ]
+  },
+  "1031": {
+    "id": "1031",
+    "slug": "nicole-demara",
+    "names": {
+      "en": "Nicole",
+      "zh-CN": "妮可"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/12332029566089688015_250_13063804.webp",
+    "rank": "A",
+    "attribute": "以太",
+    "specialty": "支援",
+    "locales": [
+      "en",
+      "zh-CN"
+    ]
+  },
+  "1041": {
+    "id": "1041",
+    "slug": "soldier-11",
+    "names": {
+      "en": "Soldier 11",
+      "zh-CN": "「11号」"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/7405762202106192512_250_13063804.webp",
+    "rank": "S",
+    "attribute": "火属性",
+    "specialty": "强攻",
+    "locales": [
+      "en",
+      "zh-CN"
+    ]
+  },
+  "1051": {
+    "id": "1051",
+    "slug": "yidhari-murphy",
+    "names": {
+      "en": "Yidhari",
+      "zh-CN": "伊德海莉"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/7024396511364036125_250_13063804.webp",
+    "rank": "S",
+    "attribute": "冰属性",
+    "specialty": "命破",
+    "locales": [
+      "en",
+      "zh-CN"
+    ]
+  },
+  "1061": {
+    "id": "1061",
+    "slug": "corin-wickes",
+    "names": {
+      "en": "Corin",
+      "zh-CN": "可琳"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/1388597397099972926_250_13063804.webp",
+    "rank": "A",
+    "attribute": "物理",
+    "specialty": "强攻",
+    "locales": [
+      "en",
+      "zh-CN"
+    ]
+  },
+  "1071": {
+    "id": "1071",
+    "slug": "caesar-king",
+    "names": {
+      "en": "Caesar",
+      "zh-CN": "凯撒"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/13431281988215436824_250_13063804.webp",
+    "rank": "S",
+    "attribute": "物理",
+    "specialty": "防护",
+    "locales": [
+      "en",
+      "zh-CN"
+    ]
+  },
+  "1081": {
+    "id": "1081",
+    "slug": "billy-kid",
+    "names": {
+      "en": "Billy",
+      "zh-CN": "比利"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/1223274141054970124_250_13063804.webp",
+    "rank": "A",
+    "attribute": "物理",
+    "specialty": "强攻",
+    "locales": [
+      "en",
+      "zh-CN"
+    ]
+  },
+  "1091": {
+    "id": "1091",
+    "slug": "hoshimi-miyabi",
+    "names": {
+      "en": "Miyabi",
+      "zh-CN": "雅"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/17029674214991521680_250_13063804.webp",
+    "rank": "S",
+    "attribute": "烈霜",
+    "specialty": "异常",
+    "locales": [
+      "en",
+      "zh-CN"
+    ]
+  },
+  "1101": {
+    "id": "1101",
+    "slug": "koleda-belobog",
+    "names": {
+      "en": "Koleda",
+      "zh-CN": "珂蕾妲"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/6422455281380862052_250_13063804.webp",
+    "rank": "S",
+    "attribute": "火属性",
+    "specialty": "击破",
+    "locales": [
+      "en",
+      "zh-CN"
+    ]
+  },
+  "1111": {
+    "id": "1111",
+    "slug": "anton-ivanov",
+    "names": {
+      "en": "Anton",
+      "zh-CN": "安东"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/15566066413832790666_250_13063804.webp",
+    "rank": "A",
+    "attribute": "电属性",
+    "specialty": "强攻",
+    "locales": [
+      "en",
+      "zh-CN"
+    ]
+  },
+  "1121": {
+    "id": "1121",
+    "slug": "ben-bigger",
+    "names": {
+      "en": "Ben",
+      "zh-CN": "本"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/952336653931629666_250_13063804.webp",
+    "rank": "A",
+    "attribute": "火属性",
+    "specialty": "防护",
+    "locales": [
+      "en",
+      "zh-CN"
+    ]
+  },
+  "1131": {
+    "id": "1131",
+    "slug": "soukaku",
+    "names": {
+      "en": "Soukaku",
+      "zh-CN": "苍角"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/6851888913022018237_250_13063804.webp",
+    "rank": "A",
+    "attribute": "冰属性",
+    "specialty": "支援",
+    "locales": [
+      "en",
+      "zh-CN"
+    ]
+  },
+  "1141": {
+    "id": "1141",
+    "slug": "von-lycaon",
+    "names": {
+      "en": "Lycaon",
+      "zh-CN": "莱卡恩"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/13302469800740501433_250_13063804.webp",
+    "rank": "S",
+    "attribute": "冰属性",
+    "specialty": "击破",
+    "locales": [
+      "en",
+      "zh-CN"
+    ]
+  },
+  "1151": {
+    "id": "1151",
+    "slug": "luciana-de-montefio",
+    "names": {
+      "en": "Lucy",
+      "zh-CN": "露西"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/507960910581511745_250_13063804.webp",
+    "rank": "A",
+    "attribute": "火属性",
+    "specialty": "支援",
+    "locales": [
+      "en",
+      "zh-CN"
+    ]
+  },
+  "1161": {
+    "id": "1161",
+    "slug": "lighter",
+    "names": {
+      "en": "Lighter",
+      "zh-CN": "莱特"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/13951624617351390726_250_13063804.webp",
+    "rank": "S",
+    "attribute": "火属性",
+    "specialty": "击破",
+    "locales": [
+      "en",
+      "zh-CN"
+    ]
+  },
+  "1171": {
+    "id": "1171",
+    "slug": "burnice-white",
+    "names": {
+      "en": "Burnice",
+      "zh-CN": "柏妮思"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/12422640396647720948_250_13063804.webp",
+    "rank": "S",
+    "attribute": "火属性",
+    "specialty": "异常",
+    "locales": [
+      "en",
+      "zh-CN"
+    ]
+  },
+  "1181": {
+    "id": "1181",
+    "slug": "grace-howard",
+    "names": {
+      "en": "Grace",
+      "zh-CN": "格莉丝"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/17124583671676298213_250_13063804.webp",
+    "rank": "S",
+    "attribute": "电属性",
+    "specialty": "异常",
+    "locales": [
+      "en",
+      "zh-CN"
+    ]
+  },
+  "1191": {
+    "id": "1191",
+    "slug": "ellen-joe",
+    "names": {
+      "en": "Ellen",
+      "zh-CN": "艾莲"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/3263107928351854511_250_13063804.webp",
+    "rank": "S",
+    "attribute": "冰属性",
+    "specialty": "强攻",
+    "locales": [
+      "en",
+      "zh-CN"
+    ]
+  },
+  "1201": {
+    "id": "1201",
+    "slug": "asaba-harumasa",
+    "names": {
+      "en": "Harumasa",
+      "zh-CN": "悠真"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/8855083735935117713_250_13063804.webp",
+    "rank": "S",
+    "attribute": "电属性",
+    "specialty": "强攻",
+    "locales": [
+      "en",
+      "zh-CN"
+    ]
+  },
+  "1211": {
+    "id": "1211",
+    "slug": "alexandrina-sebastiane",
+    "names": {
+      "en": "Rina",
+      "zh-CN": "丽娜"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/13987336947892715149_250_13063804.webp",
+    "rank": "S",
+    "attribute": "电属性",
+    "specialty": "支援",
+    "locales": [
+      "en",
+      "zh-CN"
+    ]
+  },
+  "1221": {
+    "id": "1221",
+    "slug": "tsukishiro-yanagi",
+    "names": {
+      "en": "Yanagi",
+      "zh-CN": "柳"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/15126380718372614776_250_13063804.webp",
+    "rank": "S",
+    "attribute": "电属性",
+    "specialty": "异常",
+    "locales": [
+      "en",
+      "zh-CN"
+    ]
+  },
+  "1241": {
+    "id": "1241",
+    "slug": "zhu-yuan",
+    "names": {
+      "en": "Zhu Yuan",
+      "zh-CN": "朱鸢"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/12791867747434372520_250_13063804.webp",
+    "rank": "S",
+    "attribute": "以太",
+    "specialty": "强攻",
+    "locales": [
+      "en",
+      "zh-CN"
+    ]
+  },
+  "1251": {
+    "id": "1251",
+    "slug": "qingyi",
+    "names": {
+      "en": "Qingyi",
+      "zh-CN": "青衣"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/11688984806535145501_250_13063804.webp",
+    "rank": "S",
+    "attribute": "电属性",
+    "specialty": "击破",
+    "locales": [
+      "en",
+      "zh-CN"
+    ]
+  },
+  "1261": {
+    "id": "1261",
+    "slug": "jane-doe",
+    "names": {
+      "en": "Jane",
+      "zh-CN": "简"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/5046049092693362629_250_13063804.webp",
+    "rank": "S",
+    "attribute": "物理",
+    "specialty": "异常",
+    "locales": [
+      "en",
+      "zh-CN"
+    ]
+  },
+  "1271": {
+    "id": "1271",
+    "slug": "seth-lowell",
+    "names": {
+      "en": "Seth",
+      "zh-CN": "赛斯"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/7713775648799888817_250_13063804.webp",
+    "rank": "A",
+    "attribute": "电属性",
+    "specialty": "防护",
+    "locales": [
+      "en",
+      "zh-CN"
+    ]
+  },
+  "1281": {
+    "id": "1281",
+    "slug": "piper-wheel",
+    "names": {
+      "en": "Piper",
+      "zh-CN": "派派"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/16841556765562484502_250_13063804.webp",
+    "rank": "A",
+    "attribute": "物理",
+    "specialty": "异常",
+    "locales": [
+      "en",
+      "zh-CN"
+    ]
+  },
+  "1291": {
+    "id": "1291",
+    "slug": "hugo-vlad",
+    "names": {
+      "en": "Hugo",
+      "zh-CN": "雨果"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/13195099369828681310_250_13063804.webp",
+    "rank": "S",
+    "attribute": "冰属性",
+    "specialty": "强攻",
+    "locales": [
+      "en",
+      "zh-CN"
+    ]
+  },
+  "1301": {
+    "id": "1301",
+    "slug": "orphie-magnusson-magus",
+    "names": {
+      "en": "Orphie & Magus",
+      "zh-CN": "奥菲丝&「鬼火」"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/12086238248934186249_250_13063804.webp",
+    "rank": "S",
+    "attribute": "火属性",
+    "specialty": "强攻",
+    "locales": [
+      "en",
+      "zh-CN"
+    ]
+  },
+  "1311": {
+    "id": "1311",
+    "slug": "astra-yao",
+    "names": {
+      "en": "Astra Yao",
+      "zh-CN": "耀嘉音"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/9098932387371686496_250_13063804.webp",
+    "rank": "S",
+    "attribute": "以太",
+    "specialty": "支援",
+    "locales": [
+      "en",
+      "zh-CN"
+    ]
+  },
+  "1321": {
+    "id": "1321",
+    "slug": "evelyn-chevalier",
+    "names": {
+      "en": "Evelyn",
+      "zh-CN": "伊芙琳"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/17777910355695944251_250_13063804.webp",
+    "rank": "S",
+    "attribute": "火属性",
+    "specialty": "强攻",
+    "locales": [
+      "en",
+      "zh-CN"
+    ]
+  },
+  "1331": {
+    "id": "1331",
+    "slug": "vivian-banshee",
+    "names": {
+      "en": "Vivian",
+      "zh-CN": "薇薇安"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/3189006484082064133_250_13063804.webp",
+    "rank": "S",
+    "attribute": "以太",
+    "specialty": "异常",
+    "locales": [
+      "en",
+      "zh-CN"
+    ]
+  },
+  "1341": {
+    "id": "1341",
+    "slug": "zhao",
+    "names": {
+      "en": "Zhao",
+      "zh-CN": "照"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/11373165317415010219_250_13063804.webp",
+    "rank": "S",
+    "attribute": "冰属性",
+    "specialty": "防护",
+    "locales": [
+      "en",
+      "zh-CN"
+    ]
+  },
+  "1351": {
+    "id": "1351",
+    "slug": "pulchra-fellini",
+    "names": {
+      "en": "Pulchra",
+      "zh-CN": "波可娜"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/5455631580270997489_250_13063804.webp",
+    "rank": "A",
+    "attribute": "物理",
+    "specialty": "击破",
+    "locales": [
+      "en",
+      "zh-CN"
+    ]
+  },
+  "1361": {
+    "id": "1361",
+    "slug": "trigger",
+    "names": {
+      "en": "Trigger",
+      "zh-CN": "「扳机」"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/8461644046892534109_250_13063804.webp",
+    "rank": "S",
+    "attribute": "电属性",
+    "specialty": "击破",
+    "locales": [
+      "en",
+      "zh-CN"
+    ]
+  },
+  "1371": {
+    "id": "1371",
+    "slug": "yixuan",
+    "names": {
+      "en": "Yixuan",
+      "zh-CN": "仪玄"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/8181127786147919207_250_13063804.webp",
+    "rank": "S",
+    "attribute": "玄墨",
+    "specialty": "命破",
+    "locales": [
+      "en",
+      "zh-CN"
+    ]
+  },
+  "1381": {
+    "id": "1381",
+    "slug": "soldier-0-anby",
+    "names": {
+      "en": "Soldier 0 - Anby",
+      "zh-CN": "零号·安比"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/11270497580385734763_250_13063804.webp",
+    "rank": "S",
+    "attribute": "电属性",
+    "specialty": "强攻",
+    "locales": [
+      "en",
+      "zh-CN"
+    ]
+  },
+  "1391": {
+    "id": "1391",
+    "slug": "ju-fufu",
+    "names": {
+      "en": "Ju Fufu",
+      "zh-CN": "橘福福"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/6695500689617062377_250_13063804.webp",
+    "rank": "S",
+    "attribute": "火属性",
+    "specialty": "击破",
+    "locales": [
+      "en",
+      "zh-CN"
+    ]
+  },
+  "1401": {
+    "id": "1401",
+    "slug": "alice-thymefield",
+    "names": {
+      "en": "Alice",
+      "zh-CN": "爱丽丝"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/13776830235775281550_250_13063804.webp",
+    "rank": "S",
+    "attribute": "物理",
+    "specialty": "异常",
+    "locales": [
+      "en",
+      "zh-CN"
+    ]
+  },
+  "1411": {
+    "id": "1411",
+    "slug": "ukinami-yuzuha",
+    "names": {
+      "en": "Yuzuha",
+      "zh-CN": "柚叶"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/11797223261096004262_250_13063804.webp",
+    "rank": "S",
+    "attribute": "物理",
+    "specialty": "支援",
+    "locales": [
+      "en",
+      "zh-CN"
+    ]
+  },
+  "1421": {
+    "id": "1421",
+    "slug": "pan-yinhu",
+    "names": {
+      "en": "Pan Yinhu",
+      "zh-CN": "潘引壶"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/12997805920942425475_250_13063804.webp",
+    "rank": "A",
+    "attribute": "物理",
+    "specialty": "防护",
+    "locales": [
+      "en",
+      "zh-CN"
+    ]
+  },
+  "1431": {
+    "id": "1431",
+    "slug": "ye-shunguang",
+    "names": {
+      "en": "Ye Shunguang",
+      "zh-CN": "叶瞬光"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/16796395657999955813_250_13063804.webp",
+    "rank": "S",
+    "attribute": "凛刃",
+    "specialty": "强攻",
+    "locales": [
+      "en",
+      "zh-CN"
+    ]
+  },
+  "1441": {
+    "id": "1441",
+    "slug": "komano-manato",
+    "names": {
+      "en": "Manato",
+      "zh-CN": "真斗"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/10901726263146534694_250_13063804.webp",
+    "rank": "A",
+    "attribute": "火属性",
+    "specialty": "命破",
+    "locales": [
+      "en",
+      "zh-CN"
+    ]
+  },
+  "1451": {
+    "id": "1451",
+    "slug": "lucia-elowen",
+    "names": {
+      "en": "Lucia",
+      "zh-CN": "卢西娅"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/17186911319521718795_250_13063804.webp",
+    "rank": "S",
+    "attribute": "以太",
+    "specialty": "支援",
+    "locales": [
+      "en",
+      "zh-CN"
+    ]
+  },
+  "1461": {
+    "id": "1461",
+    "slug": "seed",
+    "names": {
+      "en": "Seed",
+      "zh-CN": "「席德」"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/16822402867883982043_250_13063804.webp",
+    "rank": "S",
+    "attribute": "电属性",
+    "specialty": "强攻",
+    "locales": [
+      "en",
+      "zh-CN"
+    ]
+  },
+  "1471": {
+    "id": "1471",
+    "slug": "banyue",
+    "names": {
+      "en": "Banyue",
+      "zh-CN": "般岳"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/17706936136820843090_250_13063804.webp",
+    "rank": "S",
+    "attribute": "火属性",
+    "specialty": "命破",
+    "locales": [
+      "en",
+      "zh-CN"
+    ]
+  },
+  "1481": {
+    "id": "1481",
+    "slug": "dialyn",
+    "names": {
+      "en": "Dialyn",
+      "zh-CN": "琉音"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/12250340899603181129_250_13063804.webp",
+    "rank": "S",
+    "attribute": "物理",
+    "specialty": "击破",
+    "locales": [
+      "en",
+      "zh-CN"
+    ]
+  },
+  "1491": {
+    "id": "1491",
+    "slug": "sunna",
+    "names": {
+      "en": "Sunna",
+      "zh-CN": "千夏"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/18294561496188756235_260_13755883.webp",
+    "rank": "S",
+    "attribute": "物理",
+    "specialty": "支援",
+    "locales": [
+      "en",
+      "zh-CN"
+    ]
+  },
+  "1501": {
+    "id": "1501",
+    "slug": "aria",
+    "names": {
+      "en": "Aria",
+      "zh-CN": "爱芮"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/8355725577799397669_260_13755883.webp",
+    "rank": "S",
+    "attribute": "以太",
+    "specialty": "异常",
+    "locales": [
+      "en",
+      "zh-CN"
+    ]
+  }
+}

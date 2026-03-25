@@ -1,0 +1,354 @@
+{
+  "id": "13112",
+  "panel": {
+    "baseAtkByLevel": {
+      "0": 42,
+      "1": 48.5856,
+      "2": 55.1712,
+      "3": 61.761,
+      "4": 68.3466,
+      "5": 74.9322,
+      "6": 81.5178,
+      "7": 88.1034,
+      "8": 94.689,
+      "9": 101.2788,
+      "10": 107.8644,
+      "11": 151.9224,
+      "12": 158.508,
+      "13": 165.0936,
+      "14": 171.6792,
+      "15": 178.269,
+      "16": 184.8546,
+      "17": 191.4402,
+      "18": 198.0258,
+      "19": 204.6114,
+      "20": 211.197,
+      "21": 255.2592,
+      "22": 261.8448,
+      "23": 268.4304,
+      "24": 275.016,
+      "25": 281.6016,
+      "26": 288.1872,
+      "27": 294.777,
+      "28": 301.3626,
+      "29": 307.9482,
+      "30": 314.5338,
+      "31": 358.5918,
+      "32": 365.1774,
+      "33": 371.7672,
+      "34": 378.3528,
+      "35": 384.9384,
+      "36": 391.524,
+      "37": 398.1096,
+      "38": 404.6952,
+      "39": 411.285,
+      "40": 417.8706,
+      "41": 461.9286,
+      "42": 468.5142,
+      "43": 475.0998,
+      "44": 481.6854,
+      "45": 488.2752,
+      "46": 494.8608,
+      "47": 501.4464,
+      "48": 508.032,
+      "49": 514.6176,
+      "50": 521.2032,
+      "51": 565.2654,
+      "52": 571.851,
+      "53": 578.4366,
+      "54": 585.0222,
+      "55": 591.6078,
+      "56": 598.1934,
+      "57": 604.7832,
+      "58": 611.3688,
+      "59": 617.9544,
+      "60": 624.54
+    },
+    "advancedStatByLevel": {
+      "0": {
+        "key": "defPercent",
+        "value": 0.16
+      },
+      "1": {
+        "key": "defPercent",
+        "value": 0.16
+      },
+      "2": {
+        "key": "defPercent",
+        "value": 0.16
+      },
+      "3": {
+        "key": "defPercent",
+        "value": 0.16
+      },
+      "4": {
+        "key": "defPercent",
+        "value": 0.16
+      },
+      "5": {
+        "key": "defPercent",
+        "value": 0.16
+      },
+      "6": {
+        "key": "defPercent",
+        "value": 0.16
+      },
+      "7": {
+        "key": "defPercent",
+        "value": 0.16
+      },
+      "8": {
+        "key": "defPercent",
+        "value": 0.16
+      },
+      "9": {
+        "key": "defPercent",
+        "value": 0.16
+      },
+      "10": {
+        "key": "defPercent",
+        "value": 0.16
+      },
+      "11": {
+        "key": "defPercent",
+        "value": 0.208
+      },
+      "12": {
+        "key": "defPercent",
+        "value": 0.208
+      },
+      "13": {
+        "key": "defPercent",
+        "value": 0.208
+      },
+      "14": {
+        "key": "defPercent",
+        "value": 0.208
+      },
+      "15": {
+        "key": "defPercent",
+        "value": 0.208
+      },
+      "16": {
+        "key": "defPercent",
+        "value": 0.208
+      },
+      "17": {
+        "key": "defPercent",
+        "value": 0.208
+      },
+      "18": {
+        "key": "defPercent",
+        "value": 0.208
+      },
+      "19": {
+        "key": "defPercent",
+        "value": 0.208
+      },
+      "20": {
+        "key": "defPercent",
+        "value": 0.208
+      },
+      "21": {
+        "key": "defPercent",
+        "value": 0.256
+      },
+      "22": {
+        "key": "defPercent",
+        "value": 0.256
+      },
+      "23": {
+        "key": "defPercent",
+        "value": 0.256
+      },
+      "24": {
+        "key": "defPercent",
+        "value": 0.256
+      },
+      "25": {
+        "key": "defPercent",
+        "value": 0.256
+      },
+      "26": {
+        "key": "defPercent",
+        "value": 0.256
+      },
+      "27": {
+        "key": "defPercent",
+        "value": 0.256
+      },
+      "28": {
+        "key": "defPercent",
+        "value": 0.256
+      },
+      "29": {
+        "key": "defPercent",
+        "value": 0.256
+      },
+      "30": {
+        "key": "defPercent",
+        "value": 0.256
+      },
+      "31": {
+        "key": "defPercent",
+        "value": 0.304
+      },
+      "32": {
+        "key": "defPercent",
+        "value": 0.304
+      },
+      "33": {
+        "key": "defPercent",
+        "value": 0.304
+      },
+      "34": {
+        "key": "defPercent",
+        "value": 0.304
+      },
+      "35": {
+        "key": "defPercent",
+        "value": 0.304
+      },
+      "36": {
+        "key": "defPercent",
+        "value": 0.304
+      },
+      "37": {
+        "key": "defPercent",
+        "value": 0.304
+      },
+      "38": {
+        "key": "defPercent",
+        "value": 0.304
+      },
+      "39": {
+        "key": "defPercent",
+        "value": 0.304
+      },
+      "40": {
+        "key": "defPercent",
+        "value": 0.304
+      },
+      "41": {
+        "key": "defPercent",
+        "value": 0.352
+      },
+      "42": {
+        "key": "defPercent",
+        "value": 0.352
+      },
+      "43": {
+        "key": "defPercent",
+        "value": 0.352
+      },
+      "44": {
+        "key": "defPercent",
+        "value": 0.352
+      },
+      "45": {
+        "key": "defPercent",
+        "value": 0.352
+      },
+      "46": {
+        "key": "defPercent",
+        "value": 0.352
+      },
+      "47": {
+        "key": "defPercent",
+        "value": 0.352
+      },
+      "48": {
+        "key": "defPercent",
+        "value": 0.352
+      },
+      "49": {
+        "key": "defPercent",
+        "value": 0.352
+      },
+      "50": {
+        "key": "defPercent",
+        "value": 0.352
+      },
+      "51": {
+        "key": "defPercent",
+        "value": 0.4
+      },
+      "52": {
+        "key": "defPercent",
+        "value": 0.4
+      },
+      "53": {
+        "key": "defPercent",
+        "value": 0.4
+      },
+      "54": {
+        "key": "defPercent",
+        "value": 0.4
+      },
+      "55": {
+        "key": "defPercent",
+        "value": 0.4
+      },
+      "56": {
+        "key": "defPercent",
+        "value": 0.4
+      },
+      "57": {
+        "key": "defPercent",
+        "value": 0.4
+      },
+      "58": {
+        "key": "defPercent",
+        "value": 0.4
+      },
+      "59": {
+        "key": "defPercent",
+        "value": 0.4
+      },
+      "60": {
+        "key": "defPercent",
+        "value": 0.4
+      }
+    }
+  },
+  "effects": {
+    "modifiers": [],
+    "overrides": []
+  },
+  "trace": {
+    "sourceRefs": [
+      "data/source/gachabase/zh-CN/w-engines.json",
+      "data/source/gachabase/en/w-engines.json",
+      "data/source/gachabase/zh-CN/w-engine-details.json",
+      "data/source/gachabase/en/w-engine-details.json",
+      "data/source/xlsx/zh-CN/w-engine-stat.json",
+      "data/source/xlsx/zh-CN/w-engine-desc.json"
+    ],
+    "skillNameTexts": {
+      "en": "Ten Ton Top",
+      "zh-CN": "万斤顶"
+    },
+    "skillDescriptionsByRefine": {
+      "1": {
+        "en": "Reduces DMG taken by 7.5%. After being attacked, the next attack to hit an enemy will trigger a critical hit and deal 600% of the equipper's DEF as additional DMG. This effect can be triggered once every 7.5s.",
+        "zh-CN": "受到的伤害降低7.5%；受到敌方攻击后，下一次攻击命中敌人时，额外造成装备者600%防御力的伤害，且必定触发暴击，7.5秒内最多触发一次。"
+      },
+      "2": {
+        "en": "Reduces DMG taken by 8.5%. After being attacked, the next attack to hit an enemy will trigger a critical hit and deal 690% of the equipper's DEF as additional DMG. This effect can be triggered once every 7.5s.",
+        "zh-CN": "受到的伤害降低8.5%；受到敌方攻击后，下一次攻击命中敌人时，额外造成装备者690%防御力的伤害，且必定触发暴击，7.5秒内最多触发一次。"
+      },
+      "3": {
+        "en": "Reduces DMG taken by 9.5%. After being attacked, the next attack to hit an enemy will trigger a critical hit and deal 780% of the equipper's DEF as additional DMG. This effect can be triggered once every 7.5s.",
+        "zh-CN": "受到的伤害降低9.5%；受到敌方攻击后，下一次攻击命中敌人时，额外造成装备者780%防御力的伤害，且必定触发暴击，7.5秒内最多触发一次。"
+      },
+      "4": {
+        "en": "Reduces DMG taken by 10.5%. After being attacked, the next attack to hit an enemy will trigger a critical hit and deal 870% of the equipper's DEF as additional DMG. This effect can be triggered once every 7.5s.",
+        "zh-CN": "受到的伤害降低10.5%；受到敌方攻击后，下一次攻击命中敌人时，额外造成装备者870%防御力的伤害，且必定触发暴击，7.5秒内最多触发一次。"
+      },
+      "5": {
+        "en": "Reduces DMG taken by 12%. After being attacked, the next attack to hit an enemy will trigger a critical hit and deal 960% of the equipper's DEF as additional DMG. This effect can be triggered once every 7.5s.",
+        "zh-CN": "受到的伤害降低12%；受到敌方攻击后，下一次攻击命中敌人时，额外造成装备者960%防御力的伤害，且必定触发暴击，7.5秒内最多触发一次。"
+      }
+    }
+  }
+}

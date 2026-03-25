@@ -1,0 +1,395 @@
+{
+  "id": "14122",
+  "panel": {
+    "baseAtkByLevel": {
+      "0": 48,
+      "1": 55.5264,
+      "2": 63.0528,
+      "3": 70.584,
+      "4": 78.1104,
+      "5": 85.6368,
+      "6": 93.1632,
+      "7": 100.6896,
+      "8": 108.216,
+      "9": 115.7472,
+      "10": 123.2736,
+      "11": 173.6256,
+      "12": 181.152,
+      "13": 188.6784,
+      "14": 196.2048,
+      "15": 203.736,
+      "16": 211.2624,
+      "17": 218.7888,
+      "18": 226.3152,
+      "19": 233.8416,
+      "20": 241.368,
+      "21": 291.7248,
+      "22": 299.2512,
+      "23": 306.7776,
+      "24": 314.304,
+      "25": 321.8304,
+      "26": 329.3568,
+      "27": 336.888,
+      "28": 344.4144,
+      "29": 351.9408,
+      "30": 359.4672,
+      "31": 409.8192,
+      "32": 417.3456,
+      "33": 424.8768,
+      "34": 432.4032,
+      "35": 439.9296,
+      "36": 447.456,
+      "37": 454.9824,
+      "38": 462.5088,
+      "39": 470.04,
+      "40": 477.5664,
+      "41": 527.9184,
+      "42": 535.4448,
+      "43": 542.9712,
+      "44": 550.4976,
+      "45": 558.0288,
+      "46": 565.5552,
+      "47": 573.0816,
+      "48": 580.608,
+      "49": 588.1344,
+      "50": 595.6608,
+      "51": 646.0176,
+      "52": 653.544,
+      "53": 661.0704,
+      "54": 668.5968,
+      "55": 676.1232,
+      "56": 683.6496,
+      "57": 691.1808,
+      "58": 698.7072,
+      "59": 706.2336,
+      "60": 713.76
+    },
+    "advancedStatByLevel": {
+      "0": {
+        "key": "atkPercent",
+        "value": 0.12
+      },
+      "1": {
+        "key": "atkPercent",
+        "value": 0.12
+      },
+      "2": {
+        "key": "atkPercent",
+        "value": 0.12
+      },
+      "3": {
+        "key": "atkPercent",
+        "value": 0.12
+      },
+      "4": {
+        "key": "atkPercent",
+        "value": 0.12
+      },
+      "5": {
+        "key": "atkPercent",
+        "value": 0.12
+      },
+      "6": {
+        "key": "atkPercent",
+        "value": 0.12
+      },
+      "7": {
+        "key": "atkPercent",
+        "value": 0.12
+      },
+      "8": {
+        "key": "atkPercent",
+        "value": 0.12
+      },
+      "9": {
+        "key": "atkPercent",
+        "value": 0.12
+      },
+      "10": {
+        "key": "atkPercent",
+        "value": 0.12
+      },
+      "11": {
+        "key": "atkPercent",
+        "value": 0.156
+      },
+      "12": {
+        "key": "atkPercent",
+        "value": 0.156
+      },
+      "13": {
+        "key": "atkPercent",
+        "value": 0.156
+      },
+      "14": {
+        "key": "atkPercent",
+        "value": 0.156
+      },
+      "15": {
+        "key": "atkPercent",
+        "value": 0.156
+      },
+      "16": {
+        "key": "atkPercent",
+        "value": 0.156
+      },
+      "17": {
+        "key": "atkPercent",
+        "value": 0.156
+      },
+      "18": {
+        "key": "atkPercent",
+        "value": 0.156
+      },
+      "19": {
+        "key": "atkPercent",
+        "value": 0.156
+      },
+      "20": {
+        "key": "atkPercent",
+        "value": 0.156
+      },
+      "21": {
+        "key": "atkPercent",
+        "value": 0.192
+      },
+      "22": {
+        "key": "atkPercent",
+        "value": 0.192
+      },
+      "23": {
+        "key": "atkPercent",
+        "value": 0.192
+      },
+      "24": {
+        "key": "atkPercent",
+        "value": 0.192
+      },
+      "25": {
+        "key": "atkPercent",
+        "value": 0.192
+      },
+      "26": {
+        "key": "atkPercent",
+        "value": 0.192
+      },
+      "27": {
+        "key": "atkPercent",
+        "value": 0.192
+      },
+      "28": {
+        "key": "atkPercent",
+        "value": 0.192
+      },
+      "29": {
+        "key": "atkPercent",
+        "value": 0.192
+      },
+      "30": {
+        "key": "atkPercent",
+        "value": 0.192
+      },
+      "31": {
+        "key": "atkPercent",
+        "value": 0.228
+      },
+      "32": {
+        "key": "atkPercent",
+        "value": 0.228
+      },
+      "33": {
+        "key": "atkPercent",
+        "value": 0.228
+      },
+      "34": {
+        "key": "atkPercent",
+        "value": 0.228
+      },
+      "35": {
+        "key": "atkPercent",
+        "value": 0.228
+      },
+      "36": {
+        "key": "atkPercent",
+        "value": 0.228
+      },
+      "37": {
+        "key": "atkPercent",
+        "value": 0.228
+      },
+      "38": {
+        "key": "atkPercent",
+        "value": 0.228
+      },
+      "39": {
+        "key": "atkPercent",
+        "value": 0.228
+      },
+      "40": {
+        "key": "atkPercent",
+        "value": 0.228
+      },
+      "41": {
+        "key": "atkPercent",
+        "value": 0.264
+      },
+      "42": {
+        "key": "atkPercent",
+        "value": 0.264
+      },
+      "43": {
+        "key": "atkPercent",
+        "value": 0.264
+      },
+      "44": {
+        "key": "atkPercent",
+        "value": 0.264
+      },
+      "45": {
+        "key": "atkPercent",
+        "value": 0.264
+      },
+      "46": {
+        "key": "atkPercent",
+        "value": 0.264
+      },
+      "47": {
+        "key": "atkPercent",
+        "value": 0.264
+      },
+      "48": {
+        "key": "atkPercent",
+        "value": 0.264
+      },
+      "49": {
+        "key": "atkPercent",
+        "value": 0.264
+      },
+      "50": {
+        "key": "atkPercent",
+        "value": 0.264
+      },
+      "51": {
+        "key": "atkPercent",
+        "value": 0.3
+      },
+      "52": {
+        "key": "atkPercent",
+        "value": 0.3
+      },
+      "53": {
+        "key": "atkPercent",
+        "value": 0.3
+      },
+      "54": {
+        "key": "atkPercent",
+        "value": 0.3
+      },
+      "55": {
+        "key": "atkPercent",
+        "value": 0.3
+      },
+      "56": {
+        "key": "atkPercent",
+        "value": 0.3
+      },
+      "57": {
+        "key": "atkPercent",
+        "value": 0.3
+      },
+      "58": {
+        "key": "atkPercent",
+        "value": 0.3
+      },
+      "59": {
+        "key": "atkPercent",
+        "value": 0.3
+      },
+      "60": {
+        "key": "atkPercent",
+        "value": 0.3
+      }
+    }
+  },
+  "effects": {
+    "modifiers": [
+      {
+        "id": "passive:self-anomaly-proficiency",
+        "label": "自身异常精通",
+        "bucket": "modifier",
+        "key": "anomalyProficiency",
+        "value": {
+          "kind": "by-level",
+          "inputKey": "refineRank",
+          "values": {
+            "1": 75,
+            "2": 85,
+            "3": 95,
+            "4": 105,
+            "5": 115
+          }
+        },
+        "unit": "flat",
+        "target": "self",
+        "conditionText": "[特殊技]或[强化特殊技]命中处于属性异常状态下的敌人时，装备者的异常精通提升75点，持续15秒"
+      },
+      {
+        "id": "passive:self-damage-bonus",
+        "label": "自身造成伤害",
+        "bucket": "modifier",
+        "key": "damageBonus",
+        "value": {
+          "kind": "by-level",
+          "inputKey": "refineRank",
+          "values": {
+            "1": 0.25,
+            "2": 0.275,
+            "3": 0.3,
+            "4": 0.325,
+            "5": 0.35
+          }
+        },
+        "unit": "ratio",
+        "target": "self",
+        "conditionText": "当装备者的异常精通大于等于375点时，由装备者造成的[紊乱]伤害提升25%。"
+      }
+    ],
+    "overrides": []
+  },
+  "trace": {
+    "sourceRefs": [
+      "data/source/gachabase/zh-CN/w-engines.json",
+      "data/source/gachabase/en/w-engines.json",
+      "data/source/gachabase/zh-CN/w-engine-details.json",
+      "data/source/gachabase/en/w-engine-details.json",
+      "data/source/xlsx/zh-CN/w-engine-stat.json",
+      "data/source/xlsx/zh-CN/w-engine-desc.json"
+    ],
+    "skillNameTexts": {
+      "en": "Time-Devouring Stratagem",
+      "zh-CN": "时喰奇谋"
+    },
+    "skillDescriptionsByRefine": {
+      "1": {
+        "en": "The equipper's Electric Anomaly Buildup Rate increases by 30%. When Special Attacks or EX Special Attacks hit enemies suffering an Attribute Anomaly, the equipper's Anomaly Proficiency increases by 75 for 15s.\nWhen the equipper's Anomaly Proficiency is greater than or equal to 375, Disorder DMG inflicted by the equipper increases by 25%.",
+        "zh-CN": "装备者的电属性异常积蓄效率提升30%；[特殊技]或[强化特殊技]命中处于属性异常状态下的敌人时，装备者的异常精通提升75点，持续15秒；\n当装备者的异常精通大于等于375点时，由装备者造成的[紊乱]伤害提升25%。"
+      },
+      "2": {
+        "en": "The equipper's Electric Anomaly Buildup Rate increases by 35%. When Special Attacks or EX Special Attacks hit enemies suffering an Attribute Anomaly, the equipper's Anomaly Proficiency increases by 85 for 15s.\nWhen the equipper's Anomaly Proficiency is greater than or equal to 375, Disorder DMG inflicted by the equipper increases by 27.5%.",
+        "zh-CN": "装备者的电属性异常积蓄效率提升35%；[特殊技]或[强化特殊技]命中处于属性异常状态下的敌人时，装备者的异常精通提升85点，持续15秒；\n当装备者的异常精通大于等于375点时，由装备者造成的[紊乱]伤害提升27.5%。"
+      },
+      "3": {
+        "en": "The equipper's Electric Anomaly Buildup Rate increases by 40%. When Special Attacks or EX Special Attacks hit enemies suffering an Attribute Anomaly, the equipper's Anomaly Proficiency increases by 95 for 15s.\nWhen the equipper's Anomaly Proficiency is greater than or equal to 375, Disorder DMG inflicted by the equipper increases by 30%.",
+        "zh-CN": "装备者的电属性异常积蓄效率提升40%；[特殊技]或[强化特殊技]命中处于属性异常状态下的敌人时，装备者的异常精通提升95点，持续15秒；\n当装备者的异常精通大于等于375点时，由装备者造成的[紊乱]伤害提升30%。"
+      },
+      "4": {
+        "en": "The equipper's Electric Anomaly Buildup Rate increases by 45%. When Special Attacks or EX Special Attacks hit enemies suffering an Attribute Anomaly, the equipper's Anomaly Proficiency increases by 105 for 15s.\nWhen the equipper's Anomaly Proficiency is greater than or equal to 375, Disorder DMG inflicted by the equipper increases by 32.5%.",
+        "zh-CN": "装备者的电属性异常积蓄效率提升45%；[特殊技]或[强化特殊技]命中处于属性异常状态下的敌人时，装备者的异常精通提升105点，持续15秒；\n当装备者的异常精通大于等于375点时，由装备者造成的[紊乱]伤害提升32.5%。"
+      },
+      "5": {
+        "en": "The equipper's Electric Anomaly Buildup Rate increases by 50%. When Special Attacks or EX Special Attacks hit enemies suffering an Attribute Anomaly, the equipper's Anomaly Proficiency increases by 115 for 15s.\nWhen the equipper's Anomaly Proficiency is greater than or equal to 375, Disorder DMG inflicted by the equipper increases by 35%.",
+        "zh-CN": "装备者的电属性异常积蓄效率提升50%；[特殊技]或[强化特殊技]命中处于属性异常状态下的敌人时，装备者的异常精通提升115点，持续15秒；\n当装备者的异常精通大于等于375点时，由装备者造成的[紊乱]伤害提升35%。"
+      }
+    }
+  }
+}

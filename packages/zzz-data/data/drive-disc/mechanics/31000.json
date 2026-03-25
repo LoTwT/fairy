@@ -1,0 +1,34 @@
+{
+  "id": "31000",
+  "effects": {
+    "twoPiece": [
+      {
+        "id": "31000:2pc:crit-rate",
+        "label": "2 件套暴击率",
+        "bucket": "panel",
+        "key": "critRate",
+        "value": {
+          "kind": "static",
+          "value": 0.08
+        },
+        "unit": "ratio"
+      }
+    ],
+    "fourPiece": []
+  },
+  "trace": {
+    "sourceRefs": [
+      "data/source/xlsx/zh-CN/drive-disc-desc.json",
+      "data/source/gachabase/zh-CN/drive-discs.json",
+      "data/source/gachabase/en/drive-discs.json"
+    ],
+    "twoPieceEffectTexts": {
+      "en": "CRIT Rate +8%",
+      "zh-CN": "暴击率+8%。"
+    },
+    "fourPieceEffectTexts": {
+      "en": "Landing a critical hit on an enemy with a Basic Attack, Dodge Counter, or EX Special Attack increases the equipper's ATK by 9% for 6s. The buff duration for different skills are calculated separately.",
+      "zh-CN": "[普通攻击]、[闪避反击]或[强化特殊技]命中敌人并触发暴击时，分别为装备者提供1层增益效果，每层增益效果使装备者的攻击力提升9%，持续6秒，不同招式分别结算持续时间。"
+    }
+  }
+}

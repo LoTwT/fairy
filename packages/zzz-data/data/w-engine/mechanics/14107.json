@@ -1,0 +1,375 @@
+{
+  "id": "14107",
+  "panel": {
+    "baseAtkByLevel": {
+      "0": 48,
+      "1": 55.5264,
+      "2": 63.0528,
+      "3": 70.584,
+      "4": 78.1104,
+      "5": 85.6368,
+      "6": 93.1632,
+      "7": 100.6896,
+      "8": 108.216,
+      "9": 115.7472,
+      "10": 123.2736,
+      "11": 173.6256,
+      "12": 181.152,
+      "13": 188.6784,
+      "14": 196.2048,
+      "15": 203.736,
+      "16": 211.2624,
+      "17": 218.7888,
+      "18": 226.3152,
+      "19": 233.8416,
+      "20": 241.368,
+      "21": 291.7248,
+      "22": 299.2512,
+      "23": 306.7776,
+      "24": 314.304,
+      "25": 321.8304,
+      "26": 329.3568,
+      "27": 336.888,
+      "28": 344.4144,
+      "29": 351.9408,
+      "30": 359.4672,
+      "31": 409.8192,
+      "32": 417.3456,
+      "33": 424.8768,
+      "34": 432.4032,
+      "35": 439.9296,
+      "36": 447.456,
+      "37": 454.9824,
+      "38": 462.5088,
+      "39": 470.04,
+      "40": 477.5664,
+      "41": 527.9184,
+      "42": 535.4448,
+      "43": 542.9712,
+      "44": 550.4976,
+      "45": 558.0288,
+      "46": 565.5552,
+      "47": 573.0816,
+      "48": 580.608,
+      "49": 588.1344,
+      "50": 595.6608,
+      "51": 646.0176,
+      "52": 653.544,
+      "53": 661.0704,
+      "54": 668.5968,
+      "55": 676.1232,
+      "56": 683.6496,
+      "57": 691.1808,
+      "58": 698.7072,
+      "59": 706.2336,
+      "60": 713.76
+    },
+    "advancedStatByLevel": {
+      "0": {
+        "key": "impact",
+        "value": 0.072
+      },
+      "1": {
+        "key": "impact",
+        "value": 0.072
+      },
+      "2": {
+        "key": "impact",
+        "value": 0.072
+      },
+      "3": {
+        "key": "impact",
+        "value": 0.072
+      },
+      "4": {
+        "key": "impact",
+        "value": 0.072
+      },
+      "5": {
+        "key": "impact",
+        "value": 0.072
+      },
+      "6": {
+        "key": "impact",
+        "value": 0.072
+      },
+      "7": {
+        "key": "impact",
+        "value": 0.072
+      },
+      "8": {
+        "key": "impact",
+        "value": 0.072
+      },
+      "9": {
+        "key": "impact",
+        "value": 0.072
+      },
+      "10": {
+        "key": "impact",
+        "value": 0.072
+      },
+      "11": {
+        "key": "impact",
+        "value": 0.0936
+      },
+      "12": {
+        "key": "impact",
+        "value": 0.0936
+      },
+      "13": {
+        "key": "impact",
+        "value": 0.0936
+      },
+      "14": {
+        "key": "impact",
+        "value": 0.0936
+      },
+      "15": {
+        "key": "impact",
+        "value": 0.0936
+      },
+      "16": {
+        "key": "impact",
+        "value": 0.0936
+      },
+      "17": {
+        "key": "impact",
+        "value": 0.0936
+      },
+      "18": {
+        "key": "impact",
+        "value": 0.0936
+      },
+      "19": {
+        "key": "impact",
+        "value": 0.0936
+      },
+      "20": {
+        "key": "impact",
+        "value": 0.0936
+      },
+      "21": {
+        "key": "impact",
+        "value": 0.1152
+      },
+      "22": {
+        "key": "impact",
+        "value": 0.1152
+      },
+      "23": {
+        "key": "impact",
+        "value": 0.1152
+      },
+      "24": {
+        "key": "impact",
+        "value": 0.1152
+      },
+      "25": {
+        "key": "impact",
+        "value": 0.1152
+      },
+      "26": {
+        "key": "impact",
+        "value": 0.1152
+      },
+      "27": {
+        "key": "impact",
+        "value": 0.1152
+      },
+      "28": {
+        "key": "impact",
+        "value": 0.1152
+      },
+      "29": {
+        "key": "impact",
+        "value": 0.1152
+      },
+      "30": {
+        "key": "impact",
+        "value": 0.1152
+      },
+      "31": {
+        "key": "impact",
+        "value": 0.1368
+      },
+      "32": {
+        "key": "impact",
+        "value": 0.1368
+      },
+      "33": {
+        "key": "impact",
+        "value": 0.1368
+      },
+      "34": {
+        "key": "impact",
+        "value": 0.1368
+      },
+      "35": {
+        "key": "impact",
+        "value": 0.1368
+      },
+      "36": {
+        "key": "impact",
+        "value": 0.1368
+      },
+      "37": {
+        "key": "impact",
+        "value": 0.1368
+      },
+      "38": {
+        "key": "impact",
+        "value": 0.1368
+      },
+      "39": {
+        "key": "impact",
+        "value": 0.1368
+      },
+      "40": {
+        "key": "impact",
+        "value": 0.1368
+      },
+      "41": {
+        "key": "impact",
+        "value": 0.1584
+      },
+      "42": {
+        "key": "impact",
+        "value": 0.1584
+      },
+      "43": {
+        "key": "impact",
+        "value": 0.1584
+      },
+      "44": {
+        "key": "impact",
+        "value": 0.1584
+      },
+      "45": {
+        "key": "impact",
+        "value": 0.1584
+      },
+      "46": {
+        "key": "impact",
+        "value": 0.1584
+      },
+      "47": {
+        "key": "impact",
+        "value": 0.1584
+      },
+      "48": {
+        "key": "impact",
+        "value": 0.1584
+      },
+      "49": {
+        "key": "impact",
+        "value": 0.1584
+      },
+      "50": {
+        "key": "impact",
+        "value": 0.1584
+      },
+      "51": {
+        "key": "impact",
+        "value": 0.18
+      },
+      "52": {
+        "key": "impact",
+        "value": 0.18
+      },
+      "53": {
+        "key": "impact",
+        "value": 0.18
+      },
+      "54": {
+        "key": "impact",
+        "value": 0.18
+      },
+      "55": {
+        "key": "impact",
+        "value": 0.18
+      },
+      "56": {
+        "key": "impact",
+        "value": 0.18
+      },
+      "57": {
+        "key": "impact",
+        "value": 0.18
+      },
+      "58": {
+        "key": "impact",
+        "value": 0.18
+      },
+      "59": {
+        "key": "impact",
+        "value": 0.18
+      },
+      "60": {
+        "key": "impact",
+        "value": 0.18
+      }
+    }
+  },
+  "effects": {
+    "modifiers": [
+      {
+        "id": "passive:team-damage-bonus",
+        "label": "全队造成伤害",
+        "bucket": "modifier",
+        "key": "damageBonus",
+        "value": {
+          "kind": "by-level",
+          "inputKey": "refineRank",
+          "values": {
+            "1": 0.18,
+            "2": 0.225,
+            "3": 0.27,
+            "4": 0.315,
+            "5": 0.36
+          }
+        },
+        "unit": "ratio",
+        "target": "team",
+        "conditionText": "队伍中任意角色触发[破招]或[极限闪避]时，全队角色造成的伤害提升18%，造成的失衡值提升12%，持续20秒，同名被动效果之间不可叠加。"
+      }
+    ],
+    "overrides": []
+  },
+  "trace": {
+    "sourceRefs": [
+      "data/source/gachabase/zh-CN/w-engines.json",
+      "data/source/gachabase/en/w-engines.json",
+      "data/source/gachabase/zh-CN/w-engine-details.json",
+      "data/source/gachabase/en/w-engine-details.json",
+      "data/source/xlsx/zh-CN/w-engine-stat.json",
+      "data/source/xlsx/zh-CN/w-engine-desc.json"
+    ],
+    "skillNameTexts": {
+      "en": "Invincible Rider",
+      "zh-CN": "不破铁骑"
+    },
+    "skillDescriptionsByRefine": {
+      "1": {
+        "en": "The Shield value provided by the equipper increases by 30%. When any squad member triggers Interrupt or Perfect Dodge, all squad members' DMG increases by 18% and Daze dealt increases by 12% for 20s. Passive effects of the same name do not stack.",
+        "zh-CN": "装备者施加的护盾值提升30%；队伍中任意角色触发[破招]或[极限闪避]时，全队角色造成的伤害提升18%，造成的失衡值提升12%，持续20秒，同名被动效果之间不可叠加。"
+      },
+      "2": {
+        "en": "The Shield value provided by the equipper increases by 38%. When any squad member triggers Interrupt or Perfect Dodge, all squad members' DMG increases by 22.5% and Daze dealt increases by 15% for 20s. Passive effects of the same name do not stack.",
+        "zh-CN": "装备者施加的护盾值提升38%；队伍中任意角色触发[破招]或[极限闪避]时，全队角色造成的伤害提升22.5%，造成的失衡值提升15%，持续20秒，同名被动效果之间不可叠加。"
+      },
+      "3": {
+        "en": "The Shield value provided by the equipper increases by 46%. When any squad member triggers Interrupt or Perfect Dodge, all squad members' DMG increases by 27% and Daze dealt increases by 18% for 20s. Passive effects of the same name do not stack.",
+        "zh-CN": "装备者施加的护盾值提升46%；队伍中任意角色触发[破招]或[极限闪避]时，全队角色造成的伤害提升27%，造成的失衡值提升18%，持续20秒，同名被动效果之间不可叠加。"
+      },
+      "4": {
+        "en": "The Shield value provided by the equipper increases by 52%. When any squad member triggers Interrupt or Perfect Dodge, all squad members' DMG increases by 31.5% and Daze dealt increases by 21% for 20s. Passive effects of the same name do not stack.",
+        "zh-CN": "装备者施加的护盾值提升52%；队伍中任意角色触发[破招]或[极限闪避]时，全队角色造成的伤害提升31.5%，造成的失衡值提升21%，持续20秒，同名被动效果之间不可叠加。"
+      },
+      "5": {
+        "en": "The Shield value provided by the equipper increases by 60%. When any squad member triggers Interrupt or Perfect Dodge, all squad members' DMG increases by 36% and Daze dealt increases by 24% for 20s. Passive effects of the same name do not stack.",
+        "zh-CN": "装备者施加的护盾值提升60%；队伍中任意角色触发[破招]或[极限闪避]时，全队角色造成的伤害提升36%，造成的失衡值提升24%，持续20秒，同名被动效果之间不可叠加。"
+      }
+    }
+  }
+}

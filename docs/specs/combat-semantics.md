@@ -106,6 +106,7 @@ export const PANEL_STAT_KEYS = [
   "atk",
   "def",
   "impact",
+  "sheerForce",
   "critRate",
   "critDamage",
   "anomalyMastery",
@@ -122,6 +123,24 @@ export type PanelStatKey = (typeof PANEL_STAT_KEYS)[number]
 
 - 这批字段代表最终面板中直接参与静态伤害计算的核心数值
 - `energyRegen` 统一承接截图中的“能量回复”与“能量自动回复”
+- `sheerForce` 统一承接角色或战斗中生效的贯穿力
+
+### `PERCENT_STAT_KEYS`
+
+```ts
+export const PERCENT_STAT_KEYS = [
+  "hpPercent",
+  "atkPercent",
+  "defPercent",
+] as const
+
+export type PercentStatKey = (typeof PERCENT_STAT_KEYS)[number]
+```
+
+说明：
+
+- 这组键只用于来源层表达稳定进入最终面板的百分比属性
+- 最终对外结算输入仍推荐直接通过 `panel.stats` 提供已汇总后的最终数值
 
 ### `DAMAGE_BONUS_KEYS`
 
@@ -142,6 +161,21 @@ export type DamageBonusKey = (typeof DAMAGE_BONUS_KEYS)[number]
 - 这组键只用于装备与效果来源层的结构化表达
 - 最终对外结算输入仍推荐通过 `panel.attributeDamageBonus` 提供当前角色单属性伤害加成
 
+### `SourcePanelStatKey`
+
+```ts
+type SourcePanelStatKey = PanelStatKey | PercentStatKey | DamageBonusKey
+```
+
+说明：
+
+- `SourcePanelStatKey` 只用于处理后数据中的来源层结构化效果
+- 它可以表达稳定进入最终面板、但未必直接以最终值展示的来源项
+- 例如：
+  - `atkPercent`
+  - `hpPercent`
+  - `physicalDamageBonus`
+
 ### `DRIVE_DISC_SLOTS`
 
 ```ts
@@ -154,7 +188,32 @@ export type DriveDiscSlot = (typeof DRIVE_DISC_SLOTS)[number]
 
 ```ts
 export const EXTRA_MODIFIER_KEYS = [
+  "hpPercent",
+  "atkPercent",
+  "defPercent",
+  "impact",
+  "sheerForce",
+  "critRate",
+  "critDamage",
+  "anomalyMastery",
+  "anomalyProficiency",
+  "penRate",
+  "penFlat",
+  "energyRegen",
+  "physicalDamageBonus",
+  "fireDamageBonus",
+  "iceDamageBonus",
+  "electricDamageBonus",
+  "etherDamageBonus",
   "damageBonus",
+  "normalAttackDamageBonus",
+  "dashAttackDamageBonus",
+  "followUpAttackDamageBonus",
+  "chainAttackDamageBonus",
+  "ultimateDamageBonus",
+  "specialAttackDamageBonus",
+  "enhancedSpecialDamageBonus",
+  "assistDamageBonus",
   "sheerBonus",
   "defenseReduction",
   "resistanceReduction",
@@ -165,6 +224,14 @@ export const EXTRA_MODIFIER_KEYS = [
 
 export type ExtraModifierKey = (typeof EXTRA_MODIFIER_KEYS)[number]
 ```
+
+说明：
+
+- 这组键同时承接：
+  - 面板外的伤害类乘区
+  - 战斗内临时生效的面板型加成
+- 也包括不会并入稳定 `panel`、但只在当前快照下生效的临时属性伤害加成
+- 它们默认不会直接并入稳定 `panel`，而是进入 `extras.modifiers`
 
 ### `OVERRIDE_KEYS`
 
@@ -233,7 +300,7 @@ interface StructuredPanelEffect {
   bucket: "panel"
 
   // 面板字段或属性伤害字段。
-  key: PanelStatKey | DamageBonusKey
+  key: SourcePanelStatKey
 
   // 数值定义。
   value: ValueDefinition
@@ -276,6 +343,9 @@ interface StructuredExtraModifierEffect {
 
   // 作用目标。
   target: "self" | "team" | "enemy"
+
+  // 当前仅保留最小条件文本，说明这条效果在什么条件下生效。
+  conditionText?: string
 }
 ```
 
@@ -309,6 +379,9 @@ interface StructuredOverrideEffect {
 
   // 覆盖上限。
   capValue?: number
+
+  // 当前仅保留最小条件文本，说明这条覆盖规则在什么条件下生效。
+  conditionText?: string
 }
 ```
 
@@ -389,7 +462,7 @@ interface WEngineSnapshot {
   // 音擎高级属性。
   advancedStat?: {
     // 高级属性键。
-    key: PanelStatKey | "hpPercent" | "atkPercent" | "defPercent"
+    key: PanelStatKey | PercentStatKey
 
     // 高级属性值。
     value: number
@@ -412,7 +485,7 @@ interface WEngineSnapshot {
 ### `DriveDiscStatEntry`
 
 ```ts
-type DriveDiscStatKey = PanelStatKey | DamageBonusKey
+type DriveDiscStatKey = SourcePanelStatKey
 
 interface DriveDiscStatEntry {
   // 词条键。

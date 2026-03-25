@@ -1,0 +1,242 @@
+{
+  "31000": {
+    "id": "31000",
+    "slug": "woodpecker-electro",
+    "names": {
+      "en": "Woodpecker Electro",
+      "zh-CN": "啄木鸟电音"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/15146347244774769381_250_13063804.webp",
+    "locales": ["en", "zh-CN"]
+  },
+  "31100": {
+    "id": "31100",
+    "slug": "puffer-electro",
+    "names": {
+      "en": "Puffer Electro",
+      "zh-CN": "河豚电音"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/12062784149747603368_250_13063804.webp",
+    "locales": ["en", "zh-CN"]
+  },
+  "31200": {
+    "id": "31200",
+    "slug": "shockstar-disco",
+    "names": {
+      "en": "Shockstar Disco",
+      "zh-CN": "震星迪斯科"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/8153104799998832781_250_13063804.webp",
+    "locales": ["en", "zh-CN"]
+  },
+  "31300": {
+    "id": "31300",
+    "slug": "freedom-blues",
+    "names": {
+      "en": "Freedom Blues",
+      "zh-CN": "自由蓝调"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/33791772347458054_250_13063804.webp",
+    "locales": ["en", "zh-CN"]
+  },
+  "31400": {
+    "id": "31400",
+    "slug": "hormone-punk",
+    "names": {
+      "en": "Hormone Punk",
+      "zh-CN": "激素朋克"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/10554887091494904227_250_13063804.webp",
+    "locales": ["en", "zh-CN"]
+  },
+  "31500": {
+    "id": "31500",
+    "slug": "soul-rock",
+    "names": {
+      "en": "Soul Rock",
+      "zh-CN": "灵魂摇滚"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/11852994127028461909_250_13063804.webp",
+    "locales": ["en", "zh-CN"]
+  },
+  "31600": {
+    "id": "31600",
+    "slug": "swing-jazz",
+    "names": {
+      "en": "Swing Jazz",
+      "zh-CN": "摇摆爵士"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/10897754582695982645_250_13063804.webp",
+    "locales": ["en", "zh-CN"]
+  },
+  "31800": {
+    "id": "31800",
+    "slug": "chaos-jazz",
+    "names": {
+      "en": "Chaos Jazz",
+      "zh-CN": "混沌爵士"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/8550517955469675130_250_13063804.webp",
+    "locales": ["en", "zh-CN"]
+  },
+  "31900": {
+    "id": "31900",
+    "slug": "proto-punk",
+    "names": {
+      "en": "Proto Punk",
+      "zh-CN": "原始朋克"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/2823002548560698438_250_13063804.webp",
+    "locales": ["en", "zh-CN"]
+  },
+  "32200": {
+    "id": "32200",
+    "slug": "inferno-metal",
+    "names": {
+      "en": "Inferno Metal",
+      "zh-CN": "炎狱重金属"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/6552982482348001530_250_13063804.webp",
+    "locales": ["en", "zh-CN"]
+  },
+  "32300": {
+    "id": "32300",
+    "slug": "chaotic-metal",
+    "names": {
+      "en": "Chaotic Metal",
+      "zh-CN": "混沌重金属"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/10656303896342821109_250_13063804.webp",
+    "locales": ["en", "zh-CN"]
+  },
+  "32400": {
+    "id": "32400",
+    "slug": "thunder-metal",
+    "names": {
+      "en": "Thunder Metal",
+      "zh-CN": "雷暴重金属"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/10396133369472090167_250_13063804.webp",
+    "locales": ["en", "zh-CN"]
+  },
+  "32500": {
+    "id": "32500",
+    "slug": "polar-metal",
+    "names": {
+      "en": "Polar Metal",
+      "zh-CN": "极地重金属"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/3698863287995628166_250_13063804.webp",
+    "locales": ["en", "zh-CN"]
+  },
+  "32600": {
+    "id": "32600",
+    "slug": "fanged-metal",
+    "names": {
+      "en": "Fanged Metal",
+      "zh-CN": "獠牙重金属"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/1250328841212571812_250_13063804.webp",
+    "locales": ["en", "zh-CN"]
+  },
+  "32700": {
+    "id": "32700",
+    "slug": "branch-blade-song",
+    "names": {
+      "en": "Branch & Blade Song",
+      "zh-CN": "折枝剑歌"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/12366742306052617196_250_13063804.webp",
+    "locales": ["en", "zh-CN"]
+  },
+  "32800": {
+    "id": "32800",
+    "slug": "astral-voice",
+    "names": {
+      "en": "Astral Voice",
+      "zh-CN": "静听嘉音"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/10883627343944238887_250_13063804.webp",
+    "locales": ["en", "zh-CN"]
+  },
+  "32900": {
+    "id": "32900",
+    "slug": "shadow-harmony",
+    "names": {
+      "en": "Shadow Harmony",
+      "zh-CN": "如影相随"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/1406942339580742274_250_13063804.webp",
+    "locales": ["en", "zh-CN"]
+  },
+  "33000": {
+    "id": "33000",
+    "slug": "phaethons-melody",
+    "names": {
+      "en": "Phaethon's Melody",
+      "zh-CN": "法厄同之歌"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/167598110323414469_250_13063804.webp",
+    "locales": ["en", "zh-CN"]
+  },
+  "33100": {
+    "id": "33100",
+    "slug": "yunkui-tales",
+    "names": {
+      "en": "Yunkui Tales",
+      "zh-CN": "云岿如我"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/595209732608804379_250_13063804.webp",
+    "locales": ["en", "zh-CN"]
+  },
+  "33200": {
+    "id": "33200",
+    "slug": "king-of-the-summit",
+    "names": {
+      "en": "King of the Summit",
+      "zh-CN": "山大王"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/3284579302654696866_250_13063804.webp",
+    "locales": ["en", "zh-CN"]
+  },
+  "33300": {
+    "id": "33300",
+    "slug": "dawns-bloom",
+    "names": {
+      "en": "Dawn's Bloom",
+      "zh-CN": "拂晓生花"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/9951647463642941889_250_13063804.webp",
+    "locales": ["en", "zh-CN"]
+  },
+  "33400": {
+    "id": "33400",
+    "slug": "moonlight-lullaby",
+    "names": {
+      "en": "Moonlight Lullaby",
+      "zh-CN": "月光骑士颂"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/1295007943211081436_250_13063804.webp",
+    "locales": ["en", "zh-CN"]
+  },
+  "33500": {
+    "id": "33500",
+    "slug": "white-water-ballad",
+    "names": {
+      "en": "White Water Ballad",
+      "zh-CN": "沧浪行歌"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/15256054950634286512_250_13063804.webp",
+    "locales": ["en", "zh-CN"]
+  },
+  "33600": {
+    "id": "33600",
+    "slug": "shining-aria",
+    "names": {
+      "en": "Shining Aria",
+      "zh-CN": "流光咏叹"
+    },
+    "imageKey": "https://cdn.gachabase.net/prod/zzz/assets/6405303809026053405_250_13063804.webp",
+    "locales": ["en", "zh-CN"]
+  }
+}

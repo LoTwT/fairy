@@ -1,0 +1,375 @@
+{
+  "id": "12015",
+  "panel": {
+    "baseAtkByLevel": {
+      "0": 32,
+      "1": 37.0176,
+      "2": 42.0352,
+      "3": 47.056,
+      "4": 52.0736,
+      "5": 57.0912,
+      "6": 62.1088,
+      "7": 67.1264,
+      "8": 72.144,
+      "9": 77.1648,
+      "10": 82.1824,
+      "11": 115.7504,
+      "12": 120.768,
+      "13": 125.7856,
+      "14": 130.8032,
+      "15": 135.824,
+      "16": 140.8416,
+      "17": 145.8592,
+      "18": 150.8768,
+      "19": 155.8944,
+      "20": 160.912,
+      "21": 194.4832,
+      "22": 199.5008,
+      "23": 204.5184,
+      "24": 209.536,
+      "25": 214.5536,
+      "26": 219.5712,
+      "27": 224.592,
+      "28": 229.6096,
+      "29": 234.6272,
+      "30": 239.6448,
+      "31": 273.2128,
+      "32": 278.2304,
+      "33": 283.2512,
+      "34": 288.2688,
+      "35": 293.2864,
+      "36": 298.304,
+      "37": 303.3216,
+      "38": 308.3392,
+      "39": 313.36,
+      "40": 318.3776,
+      "41": 351.9456,
+      "42": 356.9632,
+      "43": 361.9808,
+      "44": 366.9984,
+      "45": 372.0192,
+      "46": 377.0368,
+      "47": 382.0544,
+      "48": 387.072,
+      "49": 392.0896,
+      "50": 397.1072,
+      "51": 430.6784,
+      "52": 435.696,
+      "53": 440.7136,
+      "54": 445.7312,
+      "55": 450.7488,
+      "56": 455.7664,
+      "57": 460.7872,
+      "58": 465.8048,
+      "59": 470.8224,
+      "60": 475.84
+    },
+    "advancedStatByLevel": {
+      "0": {
+        "key": "hpPercent",
+        "value": 0.08
+      },
+      "1": {
+        "key": "hpPercent",
+        "value": 0.08
+      },
+      "2": {
+        "key": "hpPercent",
+        "value": 0.08
+      },
+      "3": {
+        "key": "hpPercent",
+        "value": 0.08
+      },
+      "4": {
+        "key": "hpPercent",
+        "value": 0.08
+      },
+      "5": {
+        "key": "hpPercent",
+        "value": 0.08
+      },
+      "6": {
+        "key": "hpPercent",
+        "value": 0.08
+      },
+      "7": {
+        "key": "hpPercent",
+        "value": 0.08
+      },
+      "8": {
+        "key": "hpPercent",
+        "value": 0.08
+      },
+      "9": {
+        "key": "hpPercent",
+        "value": 0.08
+      },
+      "10": {
+        "key": "hpPercent",
+        "value": 0.08
+      },
+      "11": {
+        "key": "hpPercent",
+        "value": 0.104
+      },
+      "12": {
+        "key": "hpPercent",
+        "value": 0.104
+      },
+      "13": {
+        "key": "hpPercent",
+        "value": 0.104
+      },
+      "14": {
+        "key": "hpPercent",
+        "value": 0.104
+      },
+      "15": {
+        "key": "hpPercent",
+        "value": 0.104
+      },
+      "16": {
+        "key": "hpPercent",
+        "value": 0.104
+      },
+      "17": {
+        "key": "hpPercent",
+        "value": 0.104
+      },
+      "18": {
+        "key": "hpPercent",
+        "value": 0.104
+      },
+      "19": {
+        "key": "hpPercent",
+        "value": 0.104
+      },
+      "20": {
+        "key": "hpPercent",
+        "value": 0.104
+      },
+      "21": {
+        "key": "hpPercent",
+        "value": 0.128
+      },
+      "22": {
+        "key": "hpPercent",
+        "value": 0.128
+      },
+      "23": {
+        "key": "hpPercent",
+        "value": 0.128
+      },
+      "24": {
+        "key": "hpPercent",
+        "value": 0.128
+      },
+      "25": {
+        "key": "hpPercent",
+        "value": 0.128
+      },
+      "26": {
+        "key": "hpPercent",
+        "value": 0.128
+      },
+      "27": {
+        "key": "hpPercent",
+        "value": 0.128
+      },
+      "28": {
+        "key": "hpPercent",
+        "value": 0.128
+      },
+      "29": {
+        "key": "hpPercent",
+        "value": 0.128
+      },
+      "30": {
+        "key": "hpPercent",
+        "value": 0.128
+      },
+      "31": {
+        "key": "hpPercent",
+        "value": 0.152
+      },
+      "32": {
+        "key": "hpPercent",
+        "value": 0.152
+      },
+      "33": {
+        "key": "hpPercent",
+        "value": 0.152
+      },
+      "34": {
+        "key": "hpPercent",
+        "value": 0.152
+      },
+      "35": {
+        "key": "hpPercent",
+        "value": 0.152
+      },
+      "36": {
+        "key": "hpPercent",
+        "value": 0.152
+      },
+      "37": {
+        "key": "hpPercent",
+        "value": 0.152
+      },
+      "38": {
+        "key": "hpPercent",
+        "value": 0.152
+      },
+      "39": {
+        "key": "hpPercent",
+        "value": 0.152
+      },
+      "40": {
+        "key": "hpPercent",
+        "value": 0.152
+      },
+      "41": {
+        "key": "hpPercent",
+        "value": 0.176
+      },
+      "42": {
+        "key": "hpPercent",
+        "value": 0.176
+      },
+      "43": {
+        "key": "hpPercent",
+        "value": 0.176
+      },
+      "44": {
+        "key": "hpPercent",
+        "value": 0.176
+      },
+      "45": {
+        "key": "hpPercent",
+        "value": 0.176
+      },
+      "46": {
+        "key": "hpPercent",
+        "value": 0.176
+      },
+      "47": {
+        "key": "hpPercent",
+        "value": 0.176
+      },
+      "48": {
+        "key": "hpPercent",
+        "value": 0.176
+      },
+      "49": {
+        "key": "hpPercent",
+        "value": 0.176
+      },
+      "50": {
+        "key": "hpPercent",
+        "value": 0.176
+      },
+      "51": {
+        "key": "hpPercent",
+        "value": 0.2
+      },
+      "52": {
+        "key": "hpPercent",
+        "value": 0.2
+      },
+      "53": {
+        "key": "hpPercent",
+        "value": 0.2
+      },
+      "54": {
+        "key": "hpPercent",
+        "value": 0.2
+      },
+      "55": {
+        "key": "hpPercent",
+        "value": 0.2
+      },
+      "56": {
+        "key": "hpPercent",
+        "value": 0.2
+      },
+      "57": {
+        "key": "hpPercent",
+        "value": 0.2
+      },
+      "58": {
+        "key": "hpPercent",
+        "value": 0.2
+      },
+      "59": {
+        "key": "hpPercent",
+        "value": 0.2
+      },
+      "60": {
+        "key": "hpPercent",
+        "value": 0.2
+      }
+    }
+  },
+  "effects": {
+    "modifiers": [
+      {
+        "id": "passive:self-atk-percent",
+        "label": "自身攻击力",
+        "bucket": "modifier",
+        "key": "atkPercent",
+        "value": {
+          "kind": "by-level",
+          "inputKey": "refineRank",
+          "values": {
+            "1": 0.072,
+            "2": 0.082,
+            "3": 0.093,
+            "4": 0.104,
+            "5": 0.115
+          }
+        },
+        "unit": "ratio",
+        "target": "self",
+        "conditionText": "成为接战状态下的当前操作角色时，装备者的攻击力提升7.2%，持续10秒，20秒内最多触发一次。"
+      }
+    ],
+    "overrides": []
+  },
+  "trace": {
+    "sourceRefs": [
+      "data/source/gachabase/zh-CN/w-engines.json",
+      "data/source/gachabase/en/w-engines.json",
+      "data/source/gachabase/zh-CN/w-engine-details.json",
+      "data/source/gachabase/en/w-engine-details.json",
+      "data/source/xlsx/zh-CN/w-engine-stat.json",
+      "data/source/xlsx/zh-CN/w-engine-desc.json"
+    ],
+    "skillNameTexts": {
+      "en": "Dim Flame",
+      "zh-CN": "黯火"
+    },
+    "skillDescriptionsByRefine": {
+      "1": {
+        "en": "Upon becoming the active character in combat, the equipper's ATK increases by 7.2% for 10s. This effect can trigger once every 20s.",
+        "zh-CN": "成为接战状态下的当前操作角色时，装备者的攻击力提升7.2%，持续10秒，20秒内最多触发一次。"
+      },
+      "2": {
+        "en": "Upon becoming the active character in combat, the equipper's ATK increases by 8.2% for 10s. This effect can trigger once every 20s.",
+        "zh-CN": "成为接战状态下的当前操作角色时，装备者的攻击力提升8.2%，持续10秒，20秒内最多触发一次。"
+      },
+      "3": {
+        "en": "Upon becoming the active character in combat, the equipper's ATK increases by 9.3% for 10s. This effect can trigger once every 20s.",
+        "zh-CN": "成为接战状态下的当前操作角色时，装备者的攻击力提升9.3%，持续10秒，20秒内最多触发一次。"
+      },
+      "4": {
+        "en": "Upon becoming the active character in combat, the equipper's ATK increases by 10.4% for 10s. This effect can trigger once every 20s.",
+        "zh-CN": "成为接战状态下的当前操作角色时，装备者的攻击力提升10.4%，持续10秒，20秒内最多触发一次。"
+      },
+      "5": {
+        "en": "Upon becoming the active character in combat, the equipper's ATK increases by 11.5% for 10s. This effect can trigger once every 20s.",
+        "zh-CN": "成为接战状态下的当前操作角色时，装备者的攻击力提升11.5%，持续10秒，20秒内最多触发一次。"
+      }
+    }
+  }
+}

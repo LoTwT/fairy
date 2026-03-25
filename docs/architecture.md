@@ -2,7 +2,7 @@
 
 ## 仓库级 AI 协作文件
 
-当前仓库统一通过 `scripts/sources/` 管理四个数据源同步：`xlsx` 负责 `.sources/source.xlsx -> data/source/xlsx/zh-CN` 与 `scripts/sources/xlsx/types` 的快照生成，`gachabase`、`buhflipexplode`、`mihoyo-wiki` 负责远端 source 数据抓取与派生快照更新。同时，`packages/zzz-data/src/calculator/` 提供可发布的纯函数伤害计算核心，规格文档位于 `docs/specs/damage-core.md`；战斗相关共享属性键与数值语义由 `docs/specs/shared-combat-types.md` 定义；来源默认归类矩阵由 `docs/specs/combat-source-matrix.md` 定义；静态伤害计算上游的通用战斗语义结构由 `docs/specs/combat-semantics.md` 定义，当前以 `effects` 为真源、`panel / extras` 为结算视图；处理后 `enemy` 数据结构的目标规格位于 `docs/specs/enemy-data.md`。`packages/zzz-data/.sources/source.xlsx` 是手动下载的本地 xlsx 输入，不纳入版本管理；`.sources/source.xlsx.metadata.json` 记录最近一次成功处理的哈希与时间。运行入口、输出目录和数据源说明以 `packages/zzz-data/README.md`、`packages/zzz-data/scripts/sources/` 与 `docs/specs/` 为准。
+当前仓库统一通过 `scripts/sources/` 管理四个数据源同步：`xlsx` 负责 `.sources/source.xlsx -> data/source/xlsx/zh-CN` 与 `scripts/sources/xlsx/types` 的快照生成，`gachabase`、`buhflipexplode`、`mihoyo-wiki` 负责远端 source 数据抓取与派生快照更新。同时，`packages/zzz-data/src/calculator/` 提供可发布的纯函数伤害计算核心，规格文档位于 `docs/specs/damage-core.md`；战斗相关共享属性键与数值语义由 `docs/specs/shared-combat-types.md` 定义；来源默认归类矩阵由 `docs/specs/combat-source-matrix.md` 定义；静态伤害计算上游的通用战斗语义结构由 `docs/specs/combat-semantics.md` 定义，当前以 `effects` 为真源、`panel / extras / context` 为结算视图；处理后 `enemy / agent / w-engine / drive-disc` 数据结构规格分别位于 `docs/specs/enemy-data.md`、`docs/specs/agent-data.md`、`docs/specs/w-engine-data.md` 与 `docs/specs/drive-disc-data.md`。`packages/zzz-data/.sources/source.xlsx` 是手动下载的本地 xlsx 输入，不纳入版本管理；`.sources/source.xlsx.metadata.json` 记录最近一次成功处理的哈希与时间。运行入口、输出目录和数据源说明以 `packages/zzz-data/README.md`、`packages/zzz-data/scripts/sources/` 与 `docs/specs/` 为准。
 
 ```
 .
@@ -15,7 +15,10 @@
 │       ├── shared-combat-types.md # 战斗相关共享属性键与数值语义
 │       ├── combat-source-matrix.md # 来源到 panel / extras / ignore 的默认归类
 │       ├── combat-semantics.md # 静态伤害计算的通用语义与最终输入结构规格
-│       └── enemy-data.md  # enemy 处理后数据结构规格
+│       ├── enemy-data.md  # enemy 处理后数据结构规格
+│       ├── agent-data.md  # agent 处理后数据结构规格
+│       ├── w-engine-data.md # w-engine 处理后数据结构规格
+│       └── drive-disc-data.md # drive-disc 处理后数据结构规格
 ├── AGENTS.md              # Codex App 入口文件（薄入口，指向 docs/）
 ├── CLAUDE.md              # Claude Code 入口文件（薄入口，指向 docs/）
 └── .claude/               # Claude Code 本地设置
@@ -37,7 +40,9 @@ packages/zzz-data/
 │   └── source.xlsx.metadata.json # 最近一次成功处理的 sha256 / processedAt
 ├── data/
 │   ├── source/                  # 按 source / locale 组织的输出快照
-│   └── enemy/                   # 按 enemy-data 规格生成的处理后 enemy 数据
+│   ├── enemy/                   # 按 enemy-data 规格生成的处理后 enemy 数据
+│   ├── w-engine/                # 按 w-engine-data 规格生成的处理后音擎数据
+│   └── drive-disc/              # 按 drive-disc-data 规格生成的处理后驱动盘数据
 ├── src/
 │   ├── calculator/
 │   │   ├── display.ts           # 展示用取整 helper
@@ -67,7 +72,9 @@ packages/zzz-data/
 │   │   ├── buhflipexplode-deadly-assault.ts # Deadly Assault 页面派生规则
 │   │   └── mihoyo-wiki.ts       # 米游社百科危局强袭战抓取
 │   └── data/
-│       └── enemy.ts             # 生成 data/enemy/
+│       ├── enemy.ts             # 生成 data/enemy/
+│       ├── w-engine.ts          # 生成 data/w-engine/
+│       └── drive-disc.ts        # 生成 data/drive-disc/
 ├── README.md                    # 抓取、xlsx 读取与 calculator 说明
 ├── package.json                 # sync/build/test 命令与依赖
 └── tsconfig.json                # 覆盖 src / tests / scripts/sources 的 TypeScript 配置
@@ -103,7 +110,7 @@ packages/zzz-data/
 
 ## 处理后数据生成
 
-当前只有一条处理后数据生成链路：
+当前已有两条处理后数据生成链路：
 
 1. `scripts/data/enemy.ts`
    - 读取 `data/source/buhflipexplode/en/deadly-assault-page-data.json`
@@ -111,6 +118,16 @@ packages/zzz-data/
    - 读取 `data/source/mihoyo-wiki/zh-CN/deadly-assault.json`
    - 只生成 `Deadly Assault` 范围内出现过的 enemy
    - 输出到 `data/enemy/index.json`、`data/enemy/profile/<locale>/` 与 `data/enemy/mechanics/`
+2. `scripts/data/w-engine.ts`
+   - 读取 `data/source/xlsx/zh-CN/w-engine-stat.json`
+   - 读取 `data/source/xlsx/zh-CN/w-engine-desc.json`
+   - 读取 `data/source/gachabase/{en,zh-CN}/w-engines.json`
+   - 读取 `data/source/gachabase/{en,zh-CN}/w-engine-details.json`
+   - 生成 `data/w-engine/index.json`、`data/w-engine/profile/<locale>/` 与 `data/w-engine/mechanics/`
+3. `scripts/data/drive-disc.ts`
+   - 读取 `data/source/xlsx/zh-CN/drive-disc-desc.json`
+   - 读取 `data/source/gachabase/{en,zh-CN}/drive-discs.json`
+   - 生成 `data/drive-disc/index.json`、`data/drive-disc/profile/<locale>/` 与 `data/drive-disc/mechanics/`
 
 ## 计算核心边界
 
@@ -127,6 +144,7 @@ packages/zzz-data/
   - `scripts/sources/` 负责数据源同步
   - `src/calculator/` 负责可发布的纯函数伤害计算核心
 - `scripts/data/` 当前负责处理后数据生成；`data/enemy/` 结构以 `docs/specs/enemy-data.md` 为 source of truth
+- `data/agent/`、`data/w-engine/`、`data/drive-disc/` 当前分别由 `pnpm run generate:agent`、`pnpm run generate:w-engine`、`pnpm run generate:drive-disc` 生成，并以对应的 spec 为 source of truth
 - 静态伤害计算上游的通用语义与最终输入结构以 `docs/specs/combat-semantics.md` 为 source of truth
 - 当前仓库仍然不维护高层构筑解析、source 文本乘区抽取、cleaned helper 或场景级 resolver
 - 如需扩展当前仓库：

@@ -1,0 +1,375 @@
+{
+  "id": "12010",
+  "panel": {
+    "baseAtkByLevel": {
+      "0": 32,
+      "1": 37.0176,
+      "2": 42.0352,
+      "3": 47.056,
+      "4": 52.0736,
+      "5": 57.0912,
+      "6": 62.1088,
+      "7": 67.1264,
+      "8": 72.144,
+      "9": 77.1648,
+      "10": 82.1824,
+      "11": 115.7504,
+      "12": 120.768,
+      "13": 125.7856,
+      "14": 130.8032,
+      "15": 135.824,
+      "16": 140.8416,
+      "17": 145.8592,
+      "18": 150.8768,
+      "19": 155.8944,
+      "20": 160.912,
+      "21": 194.4832,
+      "22": 199.5008,
+      "23": 204.5184,
+      "24": 209.536,
+      "25": 214.5536,
+      "26": 219.5712,
+      "27": 224.592,
+      "28": 229.6096,
+      "29": 234.6272,
+      "30": 239.6448,
+      "31": 273.2128,
+      "32": 278.2304,
+      "33": 283.2512,
+      "34": 288.2688,
+      "35": 293.2864,
+      "36": 298.304,
+      "37": 303.3216,
+      "38": 308.3392,
+      "39": 313.36,
+      "40": 318.3776,
+      "41": 351.9456,
+      "42": 356.9632,
+      "43": 361.9808,
+      "44": 366.9984,
+      "45": 372.0192,
+      "46": 377.0368,
+      "47": 382.0544,
+      "48": 387.072,
+      "49": 392.0896,
+      "50": 397.1072,
+      "51": 430.6784,
+      "52": 435.696,
+      "53": 440.7136,
+      "54": 445.7312,
+      "55": 450.7488,
+      "56": 455.7664,
+      "57": 460.7872,
+      "58": 465.8048,
+      "59": 470.8224,
+      "60": 475.84
+    },
+    "advancedStatByLevel": {
+      "0": {
+        "key": "atkPercent",
+        "value": 0.08
+      },
+      "1": {
+        "key": "atkPercent",
+        "value": 0.08
+      },
+      "2": {
+        "key": "atkPercent",
+        "value": 0.08
+      },
+      "3": {
+        "key": "atkPercent",
+        "value": 0.08
+      },
+      "4": {
+        "key": "atkPercent",
+        "value": 0.08
+      },
+      "5": {
+        "key": "atkPercent",
+        "value": 0.08
+      },
+      "6": {
+        "key": "atkPercent",
+        "value": 0.08
+      },
+      "7": {
+        "key": "atkPercent",
+        "value": 0.08
+      },
+      "8": {
+        "key": "atkPercent",
+        "value": 0.08
+      },
+      "9": {
+        "key": "atkPercent",
+        "value": 0.08
+      },
+      "10": {
+        "key": "atkPercent",
+        "value": 0.08
+      },
+      "11": {
+        "key": "atkPercent",
+        "value": 0.104
+      },
+      "12": {
+        "key": "atkPercent",
+        "value": 0.104
+      },
+      "13": {
+        "key": "atkPercent",
+        "value": 0.104
+      },
+      "14": {
+        "key": "atkPercent",
+        "value": 0.104
+      },
+      "15": {
+        "key": "atkPercent",
+        "value": 0.104
+      },
+      "16": {
+        "key": "atkPercent",
+        "value": 0.104
+      },
+      "17": {
+        "key": "atkPercent",
+        "value": 0.104
+      },
+      "18": {
+        "key": "atkPercent",
+        "value": 0.104
+      },
+      "19": {
+        "key": "atkPercent",
+        "value": 0.104
+      },
+      "20": {
+        "key": "atkPercent",
+        "value": 0.104
+      },
+      "21": {
+        "key": "atkPercent",
+        "value": 0.128
+      },
+      "22": {
+        "key": "atkPercent",
+        "value": 0.128
+      },
+      "23": {
+        "key": "atkPercent",
+        "value": 0.128
+      },
+      "24": {
+        "key": "atkPercent",
+        "value": 0.128
+      },
+      "25": {
+        "key": "atkPercent",
+        "value": 0.128
+      },
+      "26": {
+        "key": "atkPercent",
+        "value": 0.128
+      },
+      "27": {
+        "key": "atkPercent",
+        "value": 0.128
+      },
+      "28": {
+        "key": "atkPercent",
+        "value": 0.128
+      },
+      "29": {
+        "key": "atkPercent",
+        "value": 0.128
+      },
+      "30": {
+        "key": "atkPercent",
+        "value": 0.128
+      },
+      "31": {
+        "key": "atkPercent",
+        "value": 0.152
+      },
+      "32": {
+        "key": "atkPercent",
+        "value": 0.152
+      },
+      "33": {
+        "key": "atkPercent",
+        "value": 0.152
+      },
+      "34": {
+        "key": "atkPercent",
+        "value": 0.152
+      },
+      "35": {
+        "key": "atkPercent",
+        "value": 0.152
+      },
+      "36": {
+        "key": "atkPercent",
+        "value": 0.152
+      },
+      "37": {
+        "key": "atkPercent",
+        "value": 0.152
+      },
+      "38": {
+        "key": "atkPercent",
+        "value": 0.152
+      },
+      "39": {
+        "key": "atkPercent",
+        "value": 0.152
+      },
+      "40": {
+        "key": "atkPercent",
+        "value": 0.152
+      },
+      "41": {
+        "key": "atkPercent",
+        "value": 0.176
+      },
+      "42": {
+        "key": "atkPercent",
+        "value": 0.176
+      },
+      "43": {
+        "key": "atkPercent",
+        "value": 0.176
+      },
+      "44": {
+        "key": "atkPercent",
+        "value": 0.176
+      },
+      "45": {
+        "key": "atkPercent",
+        "value": 0.176
+      },
+      "46": {
+        "key": "atkPercent",
+        "value": 0.176
+      },
+      "47": {
+        "key": "atkPercent",
+        "value": 0.176
+      },
+      "48": {
+        "key": "atkPercent",
+        "value": 0.176
+      },
+      "49": {
+        "key": "atkPercent",
+        "value": 0.176
+      },
+      "50": {
+        "key": "atkPercent",
+        "value": 0.176
+      },
+      "51": {
+        "key": "atkPercent",
+        "value": 0.2
+      },
+      "52": {
+        "key": "atkPercent",
+        "value": 0.2
+      },
+      "53": {
+        "key": "atkPercent",
+        "value": 0.2
+      },
+      "54": {
+        "key": "atkPercent",
+        "value": 0.2
+      },
+      "55": {
+        "key": "atkPercent",
+        "value": 0.2
+      },
+      "56": {
+        "key": "atkPercent",
+        "value": 0.2
+      },
+      "57": {
+        "key": "atkPercent",
+        "value": 0.2
+      },
+      "58": {
+        "key": "atkPercent",
+        "value": 0.2
+      },
+      "59": {
+        "key": "atkPercent",
+        "value": 0.2
+      },
+      "60": {
+        "key": "atkPercent",
+        "value": 0.2
+      }
+    }
+  },
+  "effects": {
+    "modifiers": [
+      {
+        "id": "passive:self-anomaly-mastery",
+        "label": "自身异常掌控",
+        "bucket": "modifier",
+        "key": "anomalyMastery",
+        "value": {
+          "kind": "by-level",
+          "inputKey": "refineRank",
+          "values": {
+            "1": 25,
+            "2": 28,
+            "3": 32,
+            "4": 36,
+            "5": 40
+          }
+        },
+        "unit": "flat",
+        "target": "self",
+        "conditionText": "累积属性异常积蓄值时，装备者的异常掌控提升25点，持续10秒，20秒内最多触发一次。"
+      }
+    ],
+    "overrides": []
+  },
+  "trace": {
+    "sourceRefs": [
+      "data/source/gachabase/zh-CN/w-engines.json",
+      "data/source/gachabase/en/w-engines.json",
+      "data/source/gachabase/zh-CN/w-engine-details.json",
+      "data/source/gachabase/en/w-engine-details.json",
+      "data/source/xlsx/zh-CN/w-engine-stat.json",
+      "data/source/xlsx/zh-CN/w-engine-desc.json"
+    ],
+    "skillNameTexts": {
+      "en": "Disordered Current",
+      "zh-CN": "紊乱电流"
+    },
+    "skillDescriptionsByRefine": {
+      "1": {
+        "en": "Accumulating Anomaly Buildup increases the equipper's Anomaly Mastery by 25 for 10s. This effect can trigger once every 20s.",
+        "zh-CN": "累积属性异常积蓄值时，装备者的异常掌控提升25点，持续10秒，20秒内最多触发一次。"
+      },
+      "2": {
+        "en": "Accumulating Anomaly Buildup increases the equipper's Anomaly Mastery by 28 for 10s. This effect can trigger once every 20s.",
+        "zh-CN": "累积属性异常积蓄值时，装备者的异常掌控提升28点，持续10秒，20秒内最多触发一次。"
+      },
+      "3": {
+        "en": "Accumulating Anomaly Buildup increases the equipper's Anomaly Mastery by 32 for 10s. This effect can trigger once every 20s.",
+        "zh-CN": "累积属性异常积蓄值时，装备者的异常掌控提升32点，持续10秒，20秒内最多触发一次。"
+      },
+      "4": {
+        "en": "Accumulating Anomaly Buildup increases the equipper's Anomaly Mastery by 36 for 10s. This effect can trigger once every 20s.",
+        "zh-CN": "累积属性异常积蓄值时，装备者的异常掌控提升36点，持续10秒，20秒内最多触发一次。"
+      },
+      "5": {
+        "en": "Accumulating Anomaly Buildup increases the equipper's Anomaly Mastery by 40 for 10s. This effect can trigger once every 20s.",
+        "zh-CN": "累积属性异常积蓄值时，装备者的异常掌控提升40点，持续10秒，20秒内最多触发一次。"
+      }
+    }
+  }
+}

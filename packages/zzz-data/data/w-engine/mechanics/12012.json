@@ -1,0 +1,354 @@
+{
+  "id": "12012",
+  "panel": {
+    "baseAtkByLevel": {
+      "0": 32,
+      "1": 37.0176,
+      "2": 42.0352,
+      "3": 47.056,
+      "4": 52.0736,
+      "5": 57.0912,
+      "6": 62.1088,
+      "7": 67.1264,
+      "8": 72.144,
+      "9": 77.1648,
+      "10": 82.1824,
+      "11": 115.7504,
+      "12": 120.768,
+      "13": 125.7856,
+      "14": 130.8032,
+      "15": 135.824,
+      "16": 140.8416,
+      "17": 145.8592,
+      "18": 150.8768,
+      "19": 155.8944,
+      "20": 160.912,
+      "21": 194.4832,
+      "22": 199.5008,
+      "23": 204.5184,
+      "24": 209.536,
+      "25": 214.5536,
+      "26": 219.5712,
+      "27": 224.592,
+      "28": 229.6096,
+      "29": 234.6272,
+      "30": 239.6448,
+      "31": 273.2128,
+      "32": 278.2304,
+      "33": 283.2512,
+      "34": 288.2688,
+      "35": 293.2864,
+      "36": 298.304,
+      "37": 303.3216,
+      "38": 308.3392,
+      "39": 313.36,
+      "40": 318.3776,
+      "41": 351.9456,
+      "42": 356.9632,
+      "43": 361.9808,
+      "44": 366.9984,
+      "45": 372.0192,
+      "46": 377.0368,
+      "47": 382.0544,
+      "48": 387.072,
+      "49": 392.0896,
+      "50": 397.1072,
+      "51": 430.6784,
+      "52": 435.696,
+      "53": 440.7136,
+      "54": 445.7312,
+      "55": 450.7488,
+      "56": 455.7664,
+      "57": 460.7872,
+      "58": 465.8048,
+      "59": 470.8224,
+      "60": 475.84
+    },
+    "advancedStatByLevel": {
+      "0": {
+        "key": "penRate",
+        "value": 0.064
+      },
+      "1": {
+        "key": "penRate",
+        "value": 0.064
+      },
+      "2": {
+        "key": "penRate",
+        "value": 0.064
+      },
+      "3": {
+        "key": "penRate",
+        "value": 0.064
+      },
+      "4": {
+        "key": "penRate",
+        "value": 0.064
+      },
+      "5": {
+        "key": "penRate",
+        "value": 0.064
+      },
+      "6": {
+        "key": "penRate",
+        "value": 0.064
+      },
+      "7": {
+        "key": "penRate",
+        "value": 0.064
+      },
+      "8": {
+        "key": "penRate",
+        "value": 0.064
+      },
+      "9": {
+        "key": "penRate",
+        "value": 0.064
+      },
+      "10": {
+        "key": "penRate",
+        "value": 0.064
+      },
+      "11": {
+        "key": "penRate",
+        "value": 0.0832
+      },
+      "12": {
+        "key": "penRate",
+        "value": 0.0832
+      },
+      "13": {
+        "key": "penRate",
+        "value": 0.0832
+      },
+      "14": {
+        "key": "penRate",
+        "value": 0.0832
+      },
+      "15": {
+        "key": "penRate",
+        "value": 0.0832
+      },
+      "16": {
+        "key": "penRate",
+        "value": 0.0832
+      },
+      "17": {
+        "key": "penRate",
+        "value": 0.0832
+      },
+      "18": {
+        "key": "penRate",
+        "value": 0.0832
+      },
+      "19": {
+        "key": "penRate",
+        "value": 0.0832
+      },
+      "20": {
+        "key": "penRate",
+        "value": 0.0832
+      },
+      "21": {
+        "key": "penRate",
+        "value": 0.1024
+      },
+      "22": {
+        "key": "penRate",
+        "value": 0.1024
+      },
+      "23": {
+        "key": "penRate",
+        "value": 0.1024
+      },
+      "24": {
+        "key": "penRate",
+        "value": 0.1024
+      },
+      "25": {
+        "key": "penRate",
+        "value": 0.1024
+      },
+      "26": {
+        "key": "penRate",
+        "value": 0.1024
+      },
+      "27": {
+        "key": "penRate",
+        "value": 0.1024
+      },
+      "28": {
+        "key": "penRate",
+        "value": 0.1024
+      },
+      "29": {
+        "key": "penRate",
+        "value": 0.1024
+      },
+      "30": {
+        "key": "penRate",
+        "value": 0.1024
+      },
+      "31": {
+        "key": "penRate",
+        "value": 0.1216
+      },
+      "32": {
+        "key": "penRate",
+        "value": 0.1216
+      },
+      "33": {
+        "key": "penRate",
+        "value": 0.1216
+      },
+      "34": {
+        "key": "penRate",
+        "value": 0.1216
+      },
+      "35": {
+        "key": "penRate",
+        "value": 0.1216
+      },
+      "36": {
+        "key": "penRate",
+        "value": 0.1216
+      },
+      "37": {
+        "key": "penRate",
+        "value": 0.1216
+      },
+      "38": {
+        "key": "penRate",
+        "value": 0.1216
+      },
+      "39": {
+        "key": "penRate",
+        "value": 0.1216
+      },
+      "40": {
+        "key": "penRate",
+        "value": 0.1216
+      },
+      "41": {
+        "key": "penRate",
+        "value": 0.1408
+      },
+      "42": {
+        "key": "penRate",
+        "value": 0.1408
+      },
+      "43": {
+        "key": "penRate",
+        "value": 0.1408
+      },
+      "44": {
+        "key": "penRate",
+        "value": 0.1408
+      },
+      "45": {
+        "key": "penRate",
+        "value": 0.1408
+      },
+      "46": {
+        "key": "penRate",
+        "value": 0.1408
+      },
+      "47": {
+        "key": "penRate",
+        "value": 0.1408
+      },
+      "48": {
+        "key": "penRate",
+        "value": 0.1408
+      },
+      "49": {
+        "key": "penRate",
+        "value": 0.1408
+      },
+      "50": {
+        "key": "penRate",
+        "value": 0.1408
+      },
+      "51": {
+        "key": "penRate",
+        "value": 0.16
+      },
+      "52": {
+        "key": "penRate",
+        "value": 0.16
+      },
+      "53": {
+        "key": "penRate",
+        "value": 0.16
+      },
+      "54": {
+        "key": "penRate",
+        "value": 0.16
+      },
+      "55": {
+        "key": "penRate",
+        "value": 0.16
+      },
+      "56": {
+        "key": "penRate",
+        "value": 0.16
+      },
+      "57": {
+        "key": "penRate",
+        "value": 0.16
+      },
+      "58": {
+        "key": "penRate",
+        "value": 0.16
+      },
+      "59": {
+        "key": "penRate",
+        "value": 0.16
+      },
+      "60": {
+        "key": "penRate",
+        "value": 0.16
+      }
+    }
+  },
+  "effects": {
+    "modifiers": [],
+    "overrides": []
+  },
+  "trace": {
+    "sourceRefs": [
+      "data/source/gachabase/zh-CN/w-engines.json",
+      "data/source/gachabase/en/w-engines.json",
+      "data/source/gachabase/zh-CN/w-engine-details.json",
+      "data/source/gachabase/en/w-engine-details.json",
+      "data/source/xlsx/zh-CN/w-engine-stat.json",
+      "data/source/xlsx/zh-CN/w-engine-desc.json"
+    ],
+    "skillNameTexts": {
+      "en": "Charge Overload",
+      "zh-CN": "过载电荷"
+    },
+    "skillDescriptionsByRefine": {
+      "1": {
+        "en": "Whenever a squad member inflicts an Attribute Anomaly on an enemy, the equipper generates 3.5 Energy. This effect can trigger once every 12s.",
+        "zh-CN": "队伍中任意角色对敌人施加属性异常效果时，装备者回复3.5点能量，12秒内最多触发一次。"
+      },
+      "2": {
+        "en": "Whenever a squad member inflicts an Attribute Anomaly on an enemy, the equipper generates 4 Energy. This effect can trigger once every 12s.",
+        "zh-CN": "队伍中任意角色对敌人施加属性异常效果时，装备者回复4点能量，12秒内最多触发一次。"
+      },
+      "3": {
+        "en": "Whenever a squad member inflicts an Attribute Anomaly on an enemy, the equipper generates 4.5 Energy. This effect can trigger once every 12s.",
+        "zh-CN": "队伍中任意角色对敌人施加属性异常效果时，装备者回复4.5点能量，12秒内最多触发一次。"
+      },
+      "4": {
+        "en": "Whenever a squad member inflicts an Attribute Anomaly on an enemy, the equipper generates 5 Energy. This effect can trigger once every 12s.",
+        "zh-CN": "队伍中任意角色对敌人施加属性异常效果时，装备者回复5点能量，12秒内最多触发一次。"
+      },
+      "5": {
+        "en": "Whenever a squad member inflicts an Attribute Anomaly on an enemy, the equipper generates 5.5 Energy. This effect can trigger once every 12s.",
+        "zh-CN": "队伍中任意角色对敌人施加属性异常效果时，装备者回复5.5点能量，12秒内最多触发一次。"
+      }
+    }
+  }
+}

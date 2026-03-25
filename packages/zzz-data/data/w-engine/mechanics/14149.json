@@ -1,0 +1,375 @@
+{
+  "id": "14149",
+  "panel": {
+    "baseAtkByLevel": {
+      "0": 48,
+      "1": 55.5264,
+      "2": 63.0528,
+      "3": 70.584,
+      "4": 78.1104,
+      "5": 85.6368,
+      "6": 93.1632,
+      "7": 100.6896,
+      "8": 108.216,
+      "9": 115.7472,
+      "10": 123.2736,
+      "11": 173.6256,
+      "12": 181.152,
+      "13": 188.6784,
+      "14": 196.2048,
+      "15": 203.736,
+      "16": 211.2624,
+      "17": 218.7888,
+      "18": 226.3152,
+      "19": 233.8416,
+      "20": 241.368,
+      "21": 291.7248,
+      "22": 299.2512,
+      "23": 306.7776,
+      "24": 314.304,
+      "25": 321.8304,
+      "26": 329.3568,
+      "27": 336.888,
+      "28": 344.4144,
+      "29": 351.9408,
+      "30": 359.4672,
+      "31": 409.8192,
+      "32": 417.3456,
+      "33": 424.8768,
+      "34": 432.4032,
+      "35": 439.9296,
+      "36": 447.456,
+      "37": 454.9824,
+      "38": 462.5088,
+      "39": 470.04,
+      "40": 477.5664,
+      "41": 527.9184,
+      "42": 535.4448,
+      "43": 542.9712,
+      "44": 550.4976,
+      "45": 558.0288,
+      "46": 565.5552,
+      "47": 573.0816,
+      "48": 580.608,
+      "49": 588.1344,
+      "50": 595.6608,
+      "51": 646.0176,
+      "52": 653.544,
+      "53": 661.0704,
+      "54": 668.5968,
+      "55": 676.1232,
+      "56": 683.6496,
+      "57": 691.1808,
+      "58": 698.7072,
+      "59": 706.2336,
+      "60": 713.76
+    },
+    "advancedStatByLevel": {
+      "0": {
+        "key": "energyRegen",
+        "value": 0.24
+      },
+      "1": {
+        "key": "energyRegen",
+        "value": 0.24
+      },
+      "2": {
+        "key": "energyRegen",
+        "value": 0.24
+      },
+      "3": {
+        "key": "energyRegen",
+        "value": 0.24
+      },
+      "4": {
+        "key": "energyRegen",
+        "value": 0.24
+      },
+      "5": {
+        "key": "energyRegen",
+        "value": 0.24
+      },
+      "6": {
+        "key": "energyRegen",
+        "value": 0.24
+      },
+      "7": {
+        "key": "energyRegen",
+        "value": 0.24
+      },
+      "8": {
+        "key": "energyRegen",
+        "value": 0.24
+      },
+      "9": {
+        "key": "energyRegen",
+        "value": 0.24
+      },
+      "10": {
+        "key": "energyRegen",
+        "value": 0.24
+      },
+      "11": {
+        "key": "energyRegen",
+        "value": 0.312
+      },
+      "12": {
+        "key": "energyRegen",
+        "value": 0.312
+      },
+      "13": {
+        "key": "energyRegen",
+        "value": 0.312
+      },
+      "14": {
+        "key": "energyRegen",
+        "value": 0.312
+      },
+      "15": {
+        "key": "energyRegen",
+        "value": 0.312
+      },
+      "16": {
+        "key": "energyRegen",
+        "value": 0.312
+      },
+      "17": {
+        "key": "energyRegen",
+        "value": 0.312
+      },
+      "18": {
+        "key": "energyRegen",
+        "value": 0.312
+      },
+      "19": {
+        "key": "energyRegen",
+        "value": 0.312
+      },
+      "20": {
+        "key": "energyRegen",
+        "value": 0.312
+      },
+      "21": {
+        "key": "energyRegen",
+        "value": 0.384
+      },
+      "22": {
+        "key": "energyRegen",
+        "value": 0.384
+      },
+      "23": {
+        "key": "energyRegen",
+        "value": 0.384
+      },
+      "24": {
+        "key": "energyRegen",
+        "value": 0.384
+      },
+      "25": {
+        "key": "energyRegen",
+        "value": 0.384
+      },
+      "26": {
+        "key": "energyRegen",
+        "value": 0.384
+      },
+      "27": {
+        "key": "energyRegen",
+        "value": 0.384
+      },
+      "28": {
+        "key": "energyRegen",
+        "value": 0.384
+      },
+      "29": {
+        "key": "energyRegen",
+        "value": 0.384
+      },
+      "30": {
+        "key": "energyRegen",
+        "value": 0.384
+      },
+      "31": {
+        "key": "energyRegen",
+        "value": 0.456
+      },
+      "32": {
+        "key": "energyRegen",
+        "value": 0.456
+      },
+      "33": {
+        "key": "energyRegen",
+        "value": 0.456
+      },
+      "34": {
+        "key": "energyRegen",
+        "value": 0.456
+      },
+      "35": {
+        "key": "energyRegen",
+        "value": 0.456
+      },
+      "36": {
+        "key": "energyRegen",
+        "value": 0.456
+      },
+      "37": {
+        "key": "energyRegen",
+        "value": 0.456
+      },
+      "38": {
+        "key": "energyRegen",
+        "value": 0.456
+      },
+      "39": {
+        "key": "energyRegen",
+        "value": 0.456
+      },
+      "40": {
+        "key": "energyRegen",
+        "value": 0.456
+      },
+      "41": {
+        "key": "energyRegen",
+        "value": 0.528
+      },
+      "42": {
+        "key": "energyRegen",
+        "value": 0.528
+      },
+      "43": {
+        "key": "energyRegen",
+        "value": 0.528
+      },
+      "44": {
+        "key": "energyRegen",
+        "value": 0.528
+      },
+      "45": {
+        "key": "energyRegen",
+        "value": 0.528
+      },
+      "46": {
+        "key": "energyRegen",
+        "value": 0.528
+      },
+      "47": {
+        "key": "energyRegen",
+        "value": 0.528
+      },
+      "48": {
+        "key": "energyRegen",
+        "value": 0.528
+      },
+      "49": {
+        "key": "energyRegen",
+        "value": 0.528
+      },
+      "50": {
+        "key": "energyRegen",
+        "value": 0.528
+      },
+      "51": {
+        "key": "energyRegen",
+        "value": 0.6
+      },
+      "52": {
+        "key": "energyRegen",
+        "value": 0.6
+      },
+      "53": {
+        "key": "energyRegen",
+        "value": 0.6
+      },
+      "54": {
+        "key": "energyRegen",
+        "value": 0.6
+      },
+      "55": {
+        "key": "energyRegen",
+        "value": 0.6
+      },
+      "56": {
+        "key": "energyRegen",
+        "value": 0.6
+      },
+      "57": {
+        "key": "energyRegen",
+        "value": 0.6
+      },
+      "58": {
+        "key": "energyRegen",
+        "value": 0.6
+      },
+      "59": {
+        "key": "energyRegen",
+        "value": 0.6
+      },
+      "60": {
+        "key": "energyRegen",
+        "value": 0.6
+      }
+    }
+  },
+  "effects": {
+    "modifiers": [
+      {
+        "id": "passive:self-energy-regen",
+        "label": "自身能量自动回复",
+        "bucket": "modifier",
+        "key": "energyRegen",
+        "value": {
+          "kind": "by-level",
+          "inputKey": "refineRank",
+          "values": {
+            "1": 0.6,
+            "2": 0.69,
+            "3": 0.78,
+            "4": 0.87,
+            "5": 0.96
+          }
+        },
+        "unit": "flat",
+        "target": "self",
+        "conditionText": "装备者为非操作中角色时，能量自动回复提升0.6点/秒"
+      }
+    ],
+    "overrides": []
+  },
+  "trace": {
+    "sourceRefs": [
+      "data/source/gachabase/zh-CN/w-engines.json",
+      "data/source/gachabase/en/w-engines.json",
+      "data/source/gachabase/zh-CN/w-engine-details.json",
+      "data/source/gachabase/en/w-engine-details.json",
+      "data/source/xlsx/zh-CN/w-engine-stat.json",
+      "data/source/xlsx/zh-CN/w-engine-desc.json"
+    ],
+    "skillNameTexts": {
+      "en": "Decibel Monologue",
+      "zh-CN": "喧响独白"
+    },
+    "skillDescriptionsByRefine": {
+      "1": {
+        "en": "While not the active character, the equipper's Energy Regen increases by 0.6/s. When the equipper uses an EX Special Attack and deals Physical DMG, all squad members gain a buff that increases DMG dealt by 12.5% for 40s, stacking up to 2 times. Repeated triggers reset the duration. At 2 stacks, characters gain an additional 10% ATK. Only one instance of this effect can exist in the same squad.",
+        "zh-CN": "装备者为非操作中角色时，能量自动回复提升0.6点/秒；装备者发动[强化特殊技]造成物理伤害时，使全队角色获得增益效果：角色造成伤害提升12.5%，效果持续40秒，最多叠加2层，重复触发时刷新持续时间；拥有2层效果时，角色的攻击力额外提升10%，该效果全队唯一。"
+      },
+      "2": {
+        "en": "While not the active character, the equipper's Energy Regen increases by 0.69/s. When the equipper uses an EX Special Attack and deals Physical DMG, all squad members gain a buff that increases DMG dealt by 14.3% for 40s, stacking up to 2 times. Repeated triggers reset the duration. At 2 stacks, characters gain an additional 11.5% ATK. Only one instance of this effect can exist in the same squad.",
+        "zh-CN": "装备者为非操作中角色时，能量自动回复提升0.69点/秒；装备者发动[强化特殊技]造成物理伤害时，使全队角色获得增益效果：角色造成伤害提升14.3%，效果持续40秒，最多叠加2层，重复触发时刷新持续时间；拥有2层效果时，角色的攻击力额外提升11.5%，该效果全队唯一。"
+      },
+      "3": {
+        "en": "While not the active character, the equipper's Energy Regen increases by 0.78/s. When the equipper uses an EX Special Attack and deals Physical DMG, all squad members gain a buff that increases DMG dealt by 16.1% for 40s, stacking up to 2 times. Repeated triggers reset the duration. At 2 stacks, characters gain an additional 13% ATK. Only one instance of this effect can exist in the same squad.",
+        "zh-CN": "装备者为非操作中角色时，能量自动回复提升0.78点/秒；装备者发动[强化特殊技]造成物理伤害时，使全队角色获得增益效果：角色造成伤害提升16.1%，效果持续40秒，最多叠加2层，重复触发时刷新持续时间；拥有2层效果时，角色的攻击力额外提升13%，该效果全队唯一。"
+      },
+      "4": {
+        "en": "While not the active character, the equipper's Energy Regen increases by 0.87/s. When the equipper uses an EX Special Attack and deals Physical DMG, all squad members gain a buff that increases DMG dealt by 17.9% for 40s, stacking up to 2 times. Repeated triggers reset the duration. At 2 stacks, characters gain an additional 14.5% ATK. Only one instance of this effect can exist in the same squad.",
+        "zh-CN": "装备者为非操作中角色时，能量自动回复提升0.87点/秒；装备者发动[强化特殊技]造成物理伤害时，使全队角色获得增益效果：角色造成伤害提升17.9%，效果持续40秒，最多叠加2层，重复触发时刷新持续时间；拥有2层效果时，角色的攻击力额外提升14.5%，该效果全队唯一。"
+      },
+      "5": {
+        "en": "While not the active character, the equipper's Energy Regen increases by 0.96/s. When the equipper uses an EX Special Attack and deals Physical DMG, all squad members gain a buff that increases DMG dealt by 20% for 40s, stacking up to 2 times. Repeated triggers reset the duration. At 2 stacks, characters gain an additional 16% ATK. Only one instance of this effect can exist in the same squad.",
+        "zh-CN": "装备者为非操作中角色时，能量自动回复提升0.96点/秒；装备者发动[强化特殊技]造成物理伤害时，使全队角色获得增益效果：角色造成伤害提升20%，效果持续40秒，最多叠加2层，重复触发时刷新持续时间；拥有2层效果时，角色的攻击力额外提升16%，该效果全队唯一。"
+      }
+    }
+  }
+}

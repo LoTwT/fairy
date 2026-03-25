@@ -1,0 +1,395 @@
+{
+  "id": "14143",
+  "panel": {
+    "baseAtkByLevel": {
+      "0": 50,
+      "1": 57.84,
+      "2": 65.68,
+      "3": 73.525,
+      "4": 81.365,
+      "5": 89.205,
+      "6": 97.045,
+      "7": 104.885,
+      "8": 112.725,
+      "9": 120.57,
+      "10": 128.41,
+      "11": 180.86,
+      "12": 188.7,
+      "13": 196.54,
+      "14": 204.38,
+      "15": 212.225,
+      "16": 220.065,
+      "17": 227.905,
+      "18": 235.745,
+      "19": 243.585,
+      "20": 251.425,
+      "21": 303.88,
+      "22": 311.72,
+      "23": 319.56,
+      "24": 327.4,
+      "25": 335.24,
+      "26": 343.08,
+      "27": 350.925,
+      "28": 358.765,
+      "29": 366.605,
+      "30": 374.445,
+      "31": 426.895,
+      "32": 434.735,
+      "33": 442.58,
+      "34": 450.42,
+      "35": 458.26,
+      "36": 466.1,
+      "37": 473.94,
+      "38": 481.78,
+      "39": 489.625,
+      "40": 497.465,
+      "41": 549.915,
+      "42": 557.755,
+      "43": 565.595,
+      "44": 573.435,
+      "45": 581.28,
+      "46": 589.12,
+      "47": 596.96,
+      "48": 604.8,
+      "49": 612.64,
+      "50": 620.48,
+      "51": 672.935,
+      "52": 680.775,
+      "53": 688.615,
+      "54": 696.455,
+      "55": 704.295,
+      "56": 712.135,
+      "57": 719.98,
+      "58": 727.82,
+      "59": 735.66,
+      "60": 743.5
+    },
+    "advancedStatByLevel": {
+      "0": {
+        "key": "critDamage",
+        "value": 0.192
+      },
+      "1": {
+        "key": "critDamage",
+        "value": 0.192
+      },
+      "2": {
+        "key": "critDamage",
+        "value": 0.192
+      },
+      "3": {
+        "key": "critDamage",
+        "value": 0.192
+      },
+      "4": {
+        "key": "critDamage",
+        "value": 0.192
+      },
+      "5": {
+        "key": "critDamage",
+        "value": 0.192
+      },
+      "6": {
+        "key": "critDamage",
+        "value": 0.192
+      },
+      "7": {
+        "key": "critDamage",
+        "value": 0.192
+      },
+      "8": {
+        "key": "critDamage",
+        "value": 0.192
+      },
+      "9": {
+        "key": "critDamage",
+        "value": 0.192
+      },
+      "10": {
+        "key": "critDamage",
+        "value": 0.192
+      },
+      "11": {
+        "key": "critDamage",
+        "value": 0.2496
+      },
+      "12": {
+        "key": "critDamage",
+        "value": 0.2496
+      },
+      "13": {
+        "key": "critDamage",
+        "value": 0.2496
+      },
+      "14": {
+        "key": "critDamage",
+        "value": 0.2496
+      },
+      "15": {
+        "key": "critDamage",
+        "value": 0.2496
+      },
+      "16": {
+        "key": "critDamage",
+        "value": 0.2496
+      },
+      "17": {
+        "key": "critDamage",
+        "value": 0.2496
+      },
+      "18": {
+        "key": "critDamage",
+        "value": 0.2496
+      },
+      "19": {
+        "key": "critDamage",
+        "value": 0.2496
+      },
+      "20": {
+        "key": "critDamage",
+        "value": 0.2496
+      },
+      "21": {
+        "key": "critDamage",
+        "value": 0.3072
+      },
+      "22": {
+        "key": "critDamage",
+        "value": 0.3072
+      },
+      "23": {
+        "key": "critDamage",
+        "value": 0.3072
+      },
+      "24": {
+        "key": "critDamage",
+        "value": 0.3072
+      },
+      "25": {
+        "key": "critDamage",
+        "value": 0.3072
+      },
+      "26": {
+        "key": "critDamage",
+        "value": 0.3072
+      },
+      "27": {
+        "key": "critDamage",
+        "value": 0.3072
+      },
+      "28": {
+        "key": "critDamage",
+        "value": 0.3072
+      },
+      "29": {
+        "key": "critDamage",
+        "value": 0.3072
+      },
+      "30": {
+        "key": "critDamage",
+        "value": 0.3072
+      },
+      "31": {
+        "key": "critDamage",
+        "value": 0.3648
+      },
+      "32": {
+        "key": "critDamage",
+        "value": 0.3648
+      },
+      "33": {
+        "key": "critDamage",
+        "value": 0.3648
+      },
+      "34": {
+        "key": "critDamage",
+        "value": 0.3648
+      },
+      "35": {
+        "key": "critDamage",
+        "value": 0.3648
+      },
+      "36": {
+        "key": "critDamage",
+        "value": 0.3648
+      },
+      "37": {
+        "key": "critDamage",
+        "value": 0.3648
+      },
+      "38": {
+        "key": "critDamage",
+        "value": 0.3648
+      },
+      "39": {
+        "key": "critDamage",
+        "value": 0.3648
+      },
+      "40": {
+        "key": "critDamage",
+        "value": 0.3648
+      },
+      "41": {
+        "key": "critDamage",
+        "value": 0.4224
+      },
+      "42": {
+        "key": "critDamage",
+        "value": 0.4224
+      },
+      "43": {
+        "key": "critDamage",
+        "value": 0.4224
+      },
+      "44": {
+        "key": "critDamage",
+        "value": 0.4224
+      },
+      "45": {
+        "key": "critDamage",
+        "value": 0.4224
+      },
+      "46": {
+        "key": "critDamage",
+        "value": 0.4224
+      },
+      "47": {
+        "key": "critDamage",
+        "value": 0.4224
+      },
+      "48": {
+        "key": "critDamage",
+        "value": 0.4224
+      },
+      "49": {
+        "key": "critDamage",
+        "value": 0.4224
+      },
+      "50": {
+        "key": "critDamage",
+        "value": 0.4224
+      },
+      "51": {
+        "key": "critDamage",
+        "value": 0.48
+      },
+      "52": {
+        "key": "critDamage",
+        "value": 0.48
+      },
+      "53": {
+        "key": "critDamage",
+        "value": 0.48
+      },
+      "54": {
+        "key": "critDamage",
+        "value": 0.48
+      },
+      "55": {
+        "key": "critDamage",
+        "value": 0.48
+      },
+      "56": {
+        "key": "critDamage",
+        "value": 0.48
+      },
+      "57": {
+        "key": "critDamage",
+        "value": 0.48
+      },
+      "58": {
+        "key": "critDamage",
+        "value": 0.48
+      },
+      "59": {
+        "key": "critDamage",
+        "value": 0.48
+      },
+      "60": {
+        "key": "critDamage",
+        "value": 0.48
+      }
+    }
+  },
+  "effects": {
+    "modifiers": [
+      {
+        "id": "passive:self-crit-damage",
+        "label": "自身暴击伤害",
+        "bucket": "modifier",
+        "key": "critDamage",
+        "value": {
+          "kind": "by-level",
+          "inputKey": "refineRank",
+          "values": {
+            "1": 0.25,
+            "2": 0.287,
+            "3": 0.325,
+            "4": 0.362,
+            "5": 0.4
+          }
+        },
+        "unit": "ratio",
+        "target": "self",
+        "conditionText": "装备者开启[以太帷幕]时，自身造成的伤害提升25%，暴击伤害提升25%，持续40秒，重复触发时刷新持续时间。"
+      },
+      {
+        "id": "passive:self-damage-bonus",
+        "label": "自身造成伤害",
+        "bucket": "modifier",
+        "key": "damageBonus",
+        "value": {
+          "kind": "by-level",
+          "inputKey": "refineRank",
+          "values": {
+            "1": 0.25,
+            "2": 0.287,
+            "3": 0.325,
+            "4": 0.362,
+            "5": 0.4
+          }
+        },
+        "unit": "ratio",
+        "target": "self",
+        "conditionText": "装备者开启[以太帷幕]时，自身造成的伤害提升25%，暴击伤害提升25%，持续40秒，重复触发时刷新持续时间。"
+      }
+    ],
+    "overrides": []
+  },
+  "trace": {
+    "sourceRefs": [
+      "data/source/gachabase/zh-CN/w-engines.json",
+      "data/source/gachabase/en/w-engines.json",
+      "data/source/gachabase/zh-CN/w-engine-details.json",
+      "data/source/gachabase/en/w-engine-details.json",
+      "data/source/xlsx/zh-CN/w-engine-stat.json",
+      "data/source/xlsx/zh-CN/w-engine-desc.json"
+    ],
+    "skillNameTexts": {
+      "en": "Jade Soul, Frozen Heart",
+      "zh-CN": "玉魄冰心"
+    },
+    "skillDescriptionsByRefine": {
+      "1": {
+        "en": "The equipper's DMG ignores 20% of the target's Physical RES. When the equipper activates an Ether Veil, the equipper's DMG increases by 25% and CRIT DMG increases by 25% for 40s. Repeated triggers reset the duration.",
+        "zh-CN": "装备者造成的伤害无视目标20%物理属性伤害抗性；装备者开启[以太帷幕]时，自身造成的伤害提升25%，暴击伤害提升25%，持续40秒，重复触发时刷新持续时间。"
+      },
+      "2": {
+        "en": "The equipper's DMG ignores 22% of the target's Physical RES. When the equipper activates an Ether Veil, the equipper's DMG increases by 28.7% and CRIT DMG increases by 28.7% for 40s. Repeated triggers reset the duration.",
+        "zh-CN": "装备者造成的伤害无视目标22%物理属性伤害抗性；装备者开启[以太帷幕]时，自身造成的伤害提升28.7%，暴击伤害提升28.7%，持续40秒，重复触发时刷新持续时间。"
+      },
+      "3": {
+        "en": "The equipper's DMG ignores 24% of the target's Physical RES. When the equipper activates an Ether Veil, the equipper's DMG increases by 32.5% and CRIT DMG increases by 32.5% for 40s. Repeated triggers reset the duration.",
+        "zh-CN": "装备者造成的伤害无视目标24%物理属性伤害抗性；装备者开启[以太帷幕]时，自身造成的伤害提升32.5%，暴击伤害提升32.5%，持续40秒，重复触发时刷新持续时间。"
+      },
+      "4": {
+        "en": "The equipper's DMG ignores 26% of the target's Physical RES. When the equipper activates an Ether Veil, the equipper's DMG increases by 36.2% and CRIT DMG increases by 36.2% for 40s. Repeated triggers reset the duration.",
+        "zh-CN": "装备者造成的伤害无视目标26%物理属性伤害抗性；装备者开启[以太帷幕]时，自身造成的伤害提升36.2%，暴击伤害提升36.2%，持续40秒，重复触发时刷新持续时间。"
+      },
+      "5": {
+        "en": "The equipper's DMG ignores 28% of the target's Physical RES. When the equipper activates an Ether Veil, the equipper's DMG increases by 40% and CRIT DMG increases by 40% for 40s. Repeated triggers reset the duration.",
+        "zh-CN": "装备者造成的伤害无视目标28%物理属性伤害抗性；装备者开启[以太帷幕]时，自身造成的伤害提升40%，暴击伤害提升40%，持续40秒，重复触发时刷新持续时间。"
+      }
+    }
+  }
+}

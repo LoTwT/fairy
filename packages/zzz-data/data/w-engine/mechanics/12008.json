@@ -1,0 +1,354 @@
+{
+  "id": "12008",
+  "panel": {
+    "baseAtkByLevel": {
+      "0": 32,
+      "1": 37.0176,
+      "2": 42.0352,
+      "3": 47.056,
+      "4": 52.0736,
+      "5": 57.0912,
+      "6": 62.1088,
+      "7": 67.1264,
+      "8": 72.144,
+      "9": 77.1648,
+      "10": 82.1824,
+      "11": 115.7504,
+      "12": 120.768,
+      "13": 125.7856,
+      "14": 130.8032,
+      "15": 135.824,
+      "16": 140.8416,
+      "17": 145.8592,
+      "18": 150.8768,
+      "19": 155.8944,
+      "20": 160.912,
+      "21": 194.4832,
+      "22": 199.5008,
+      "23": 204.5184,
+      "24": 209.536,
+      "25": 214.5536,
+      "26": 219.5712,
+      "27": 224.592,
+      "28": 229.6096,
+      "29": 234.6272,
+      "30": 239.6448,
+      "31": 273.2128,
+      "32": 278.2304,
+      "33": 283.2512,
+      "34": 288.2688,
+      "35": 293.2864,
+      "36": 298.304,
+      "37": 303.3216,
+      "38": 308.3392,
+      "39": 313.36,
+      "40": 318.3776,
+      "41": 351.9456,
+      "42": 356.9632,
+      "43": 361.9808,
+      "44": 366.9984,
+      "45": 372.0192,
+      "46": 377.0368,
+      "47": 382.0544,
+      "48": 387.072,
+      "49": 392.0896,
+      "50": 397.1072,
+      "51": 430.6784,
+      "52": 435.696,
+      "53": 440.7136,
+      "54": 445.7312,
+      "55": 450.7488,
+      "56": 455.7664,
+      "57": 460.7872,
+      "58": 465.8048,
+      "59": 470.8224,
+      "60": 475.84
+    },
+    "advancedStatByLevel": {
+      "0": {
+        "key": "impact",
+        "value": 0.048
+      },
+      "1": {
+        "key": "impact",
+        "value": 0.048
+      },
+      "2": {
+        "key": "impact",
+        "value": 0.048
+      },
+      "3": {
+        "key": "impact",
+        "value": 0.048
+      },
+      "4": {
+        "key": "impact",
+        "value": 0.048
+      },
+      "5": {
+        "key": "impact",
+        "value": 0.048
+      },
+      "6": {
+        "key": "impact",
+        "value": 0.048
+      },
+      "7": {
+        "key": "impact",
+        "value": 0.048
+      },
+      "8": {
+        "key": "impact",
+        "value": 0.048
+      },
+      "9": {
+        "key": "impact",
+        "value": 0.048
+      },
+      "10": {
+        "key": "impact",
+        "value": 0.048
+      },
+      "11": {
+        "key": "impact",
+        "value": 0.0624
+      },
+      "12": {
+        "key": "impact",
+        "value": 0.0624
+      },
+      "13": {
+        "key": "impact",
+        "value": 0.0624
+      },
+      "14": {
+        "key": "impact",
+        "value": 0.0624
+      },
+      "15": {
+        "key": "impact",
+        "value": 0.0624
+      },
+      "16": {
+        "key": "impact",
+        "value": 0.0624
+      },
+      "17": {
+        "key": "impact",
+        "value": 0.0624
+      },
+      "18": {
+        "key": "impact",
+        "value": 0.0624
+      },
+      "19": {
+        "key": "impact",
+        "value": 0.0624
+      },
+      "20": {
+        "key": "impact",
+        "value": 0.0624
+      },
+      "21": {
+        "key": "impact",
+        "value": 0.0768
+      },
+      "22": {
+        "key": "impact",
+        "value": 0.0768
+      },
+      "23": {
+        "key": "impact",
+        "value": 0.0768
+      },
+      "24": {
+        "key": "impact",
+        "value": 0.0768
+      },
+      "25": {
+        "key": "impact",
+        "value": 0.0768
+      },
+      "26": {
+        "key": "impact",
+        "value": 0.0768
+      },
+      "27": {
+        "key": "impact",
+        "value": 0.0768
+      },
+      "28": {
+        "key": "impact",
+        "value": 0.0768
+      },
+      "29": {
+        "key": "impact",
+        "value": 0.0768
+      },
+      "30": {
+        "key": "impact",
+        "value": 0.0768
+      },
+      "31": {
+        "key": "impact",
+        "value": 0.0912
+      },
+      "32": {
+        "key": "impact",
+        "value": 0.0912
+      },
+      "33": {
+        "key": "impact",
+        "value": 0.0912
+      },
+      "34": {
+        "key": "impact",
+        "value": 0.0912
+      },
+      "35": {
+        "key": "impact",
+        "value": 0.0912
+      },
+      "36": {
+        "key": "impact",
+        "value": 0.0912
+      },
+      "37": {
+        "key": "impact",
+        "value": 0.0912
+      },
+      "38": {
+        "key": "impact",
+        "value": 0.0912
+      },
+      "39": {
+        "key": "impact",
+        "value": 0.0912
+      },
+      "40": {
+        "key": "impact",
+        "value": 0.0912
+      },
+      "41": {
+        "key": "impact",
+        "value": 0.1056
+      },
+      "42": {
+        "key": "impact",
+        "value": 0.1056
+      },
+      "43": {
+        "key": "impact",
+        "value": 0.1056
+      },
+      "44": {
+        "key": "impact",
+        "value": 0.1056
+      },
+      "45": {
+        "key": "impact",
+        "value": 0.1056
+      },
+      "46": {
+        "key": "impact",
+        "value": 0.1056
+      },
+      "47": {
+        "key": "impact",
+        "value": 0.1056
+      },
+      "48": {
+        "key": "impact",
+        "value": 0.1056
+      },
+      "49": {
+        "key": "impact",
+        "value": 0.1056
+      },
+      "50": {
+        "key": "impact",
+        "value": 0.1056
+      },
+      "51": {
+        "key": "impact",
+        "value": 0.12
+      },
+      "52": {
+        "key": "impact",
+        "value": 0.12
+      },
+      "53": {
+        "key": "impact",
+        "value": 0.12
+      },
+      "54": {
+        "key": "impact",
+        "value": 0.12
+      },
+      "55": {
+        "key": "impact",
+        "value": 0.12
+      },
+      "56": {
+        "key": "impact",
+        "value": 0.12
+      },
+      "57": {
+        "key": "impact",
+        "value": 0.12
+      },
+      "58": {
+        "key": "impact",
+        "value": 0.12
+      },
+      "59": {
+        "key": "impact",
+        "value": 0.12
+      },
+      "60": {
+        "key": "impact",
+        "value": 0.12
+      }
+    }
+  },
+  "effects": {
+    "modifiers": [],
+    "overrides": []
+  },
+  "trace": {
+    "sourceRefs": [
+      "data/source/gachabase/zh-CN/w-engines.json",
+      "data/source/gachabase/en/w-engines.json",
+      "data/source/gachabase/zh-CN/w-engine-details.json",
+      "data/source/gachabase/en/w-engine-details.json",
+      "data/source/xlsx/zh-CN/w-engine-stat.json",
+      "data/source/xlsx/zh-CN/w-engine-desc.json"
+    ],
+    "skillNameTexts": {
+      "en": "Tsunami",
+      "zh-CN": "巨浪"
+    },
+    "skillDescriptionsByRefine": {
+      "1": {
+        "en": "The equipper's attacks inflict 8% more Daze on their main target.",
+        "zh-CN": "攻击命中敌人时，装备者对主要攻击目标造成的失衡值提升8%。"
+      },
+      "2": {
+        "en": "The equipper's attacks inflict 9% more Daze on their main target.",
+        "zh-CN": "攻击命中敌人时，装备者对主要攻击目标造成的失衡值提升9%。"
+      },
+      "3": {
+        "en": "The equipper's attacks inflict 10% more Daze on their main target.",
+        "zh-CN": "攻击命中敌人时，装备者对主要攻击目标造成的失衡值提升10%。"
+      },
+      "4": {
+        "en": "The equipper's attacks inflict 11% more Daze on their main target.",
+        "zh-CN": "攻击命中敌人时，装备者对主要攻击目标造成的失衡值提升11%。"
+      },
+      "5": {
+        "en": "The equipper's attacks inflict 12% more Daze on their main target.",
+        "zh-CN": "攻击命中敌人时，装备者对主要攻击目标造成的失衡值提升12%。"
+      }
+    }
+  }
+}

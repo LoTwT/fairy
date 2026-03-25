@@ -1,0 +1,61 @@
+{
+  "id": "32700",
+  "effects": {
+    "twoPiece": [
+      {
+        "id": "32700:2pc:crit-dmg",
+        "label": "2 件套暴击伤害",
+        "bucket": "panel",
+        "key": "critDamage",
+        "value": {
+          "kind": "static",
+          "value": 0.16
+        },
+        "unit": "ratio"
+      }
+    ],
+    "fourPiece": [
+      {
+        "id": "32700:4pc:crit-dmg",
+        "label": "4 件套暴击伤害",
+        "bucket": "modifier",
+        "key": "critDamage",
+        "value": {
+          "kind": "static",
+          "value": 0.3
+        },
+        "unit": "ratio",
+        "target": "self",
+        "conditionText": "异常掌控大于等于115点时。"
+      },
+      {
+        "id": "32700:4pc:crit-rate",
+        "label": "4 件套暴击率",
+        "bucket": "modifier",
+        "key": "critRate",
+        "value": {
+          "kind": "static",
+          "value": 0.12
+        },
+        "unit": "ratio",
+        "target": "self",
+        "conditionText": "队伍中任意角色对敌人施加[冻结]或触发[碎冰]效果时，持续15秒。"
+      }
+    ]
+  },
+  "trace": {
+    "sourceRefs": [
+      "data/source/xlsx/zh-CN/drive-disc-desc.json",
+      "data/source/gachabase/zh-CN/drive-discs.json",
+      "data/source/gachabase/en/drive-discs.json"
+    ],
+    "twoPieceEffectTexts": {
+      "en": "CRIT DMG +16%",
+      "zh-CN": "暴击伤害+16%。"
+    },
+    "fourPieceEffectTexts": {
+      "en": "When Anomaly Mastery exceeds or equals 115 points, the equipper's CRIT DMG increases by 30%. When any squad member applies Freeze or triggers the Shatter effect on an enemy, the equipper's CRIT Rate increases by 12%, lasting 15s.",
+      "zh-CN": "异常掌控大于等于115点时，装备者的暴击伤害提升30%；队伍中任意角色对敌人施加[冻结]或触发[碎冰]效果时，装备者的暴击率提升12%，持续15秒。"
+    }
+  }
+}

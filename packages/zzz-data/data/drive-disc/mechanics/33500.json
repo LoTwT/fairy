@@ -1,0 +1,74 @@
+{
+  "id": "33500",
+  "effects": {
+    "twoPiece": [
+      {
+        "id": "33500:2pc:physical-dmg",
+        "label": "2 件套物理属性伤害",
+        "bucket": "panel",
+        "key": "physicalDamageBonus",
+        "value": {
+          "kind": "static",
+          "value": 0.1
+        },
+        "unit": "ratio"
+      }
+    ],
+    "fourPiece": [
+      {
+        "id": "33500:4pc:crit-rate-in-veil",
+        "label": "4 件套帷幕内暴击率",
+        "bucket": "modifier",
+        "key": "critRate",
+        "value": {
+          "kind": "static",
+          "value": 0.1
+        },
+        "unit": "ratio",
+        "target": "self",
+        "conditionText": "装备者处于任意[以太帷幕]中时；离开后效果仍保留15秒。"
+      },
+      {
+        "id": "33500:4pc:crit-rate-attack",
+        "label": "4 件套帷幕触发暴击率",
+        "bucket": "modifier",
+        "key": "critRate",
+        "value": {
+          "kind": "static",
+          "value": 0.1
+        },
+        "unit": "ratio",
+        "target": "self",
+        "conditionText": "装备者为[强攻]角色时，开启[以太帷幕]或延长[以太帷幕]持续时间后持续30秒。"
+      },
+      {
+        "id": "33500:4pc:atk-percent",
+        "label": "4 件套帷幕触发攻击力",
+        "bucket": "modifier",
+        "key": "atkPercent",
+        "value": {
+          "kind": "static",
+          "value": 0.1
+        },
+        "unit": "ratio",
+        "target": "self",
+        "conditionText": "装备者为[强攻]角色时，开启[以太帷幕]或延长[以太帷幕]持续时间后持续30秒。"
+      }
+    ]
+  },
+  "trace": {
+    "sourceRefs": [
+      "data/source/xlsx/zh-CN/drive-disc-desc.json",
+      "data/source/gachabase/zh-CN/drive-discs.json",
+      "data/source/gachabase/en/drive-discs.json"
+    ],
+    "twoPieceEffectTexts": {
+      "en": "Physical DMG +10%",
+      "zh-CN": "物理伤害+10%。"
+    },
+    "fourPieceEffectTexts": {
+      "en": "When the equipper is within any Ether Veil, their CRIT Rate increases by 10%. After leaving the Ether Veil, this buff remains for 15s. If the equipper is an Attack character, activating an Ether Veil or extending an Ether Veil's duration increases their CRIT Rate by 10% and ATK by 10% for 30s. Repeated triggers reset the duration.",
+      "zh-CN": "装备者处于任意[以太帷幕]中时，自身暴击率提高10%，离开[以太帷幕]后，该增益效果仍然保留，持续15秒；装备者为[强攻]角色时，开启[以太帷幕]或延长[以太帷幕]的持续时间会使自身暴击率提升10%和攻击力提升10%，持续30秒，重复触发时刷新持续时间。"
+    }
+  }
+}

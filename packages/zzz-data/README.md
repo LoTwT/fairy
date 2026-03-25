@@ -13,6 +13,12 @@ Zenless Zone Zero 数据源同步脚本、xlsx 读取脚本与纯函数伤害计
 - `scripts/sources/xlsx/types/`：由 `sync:xlsx` 生成的内部类型产物
 - `data/source/`：按 source / locale 组织的数据源输出快照
 - `data/enemy/`：按 `enemy-data` 规格生成的处理后敌人数据
+- `data/agent/`：按 `agent-data` 规格生成的处理后代理人数据
+- `data/w-engine/`：按 `w-engine-data` 规格生成的处理后音擎数据
+- `data/drive-disc/`：按 `drive-disc-data` 规格生成的处理后驱动盘数据
+- `docs/specs/agent-data.md`：`data/agent/` 结构规格
+- `docs/specs/w-engine-data.md`：`data/w-engine/` 结构规格
+- `docs/specs/drive-disc-data.md`：`data/drive-disc/` 结构规格
 - `src/calculator/`：对外发布的纯函数伤害计算核心
 - `tests/calculator/`：calculator 测试
 - `tests/sources/`：source 同步与过滤测试
@@ -38,12 +44,15 @@ pnpm run sync:gachabase
 pnpm run sync:buhflipexplode
 pnpm run sync:mihoyo-wiki
 pnpm run generate:enemy
+pnpm run generate:agent
+pnpm run generate:w-engine
+pnpm run generate:drive-disc
 pnpm run build
 pnpm run test
 pnpm run typecheck
 ```
 
-运行 `pnpm run sync:xlsx` 前，请先将手动下载的最新 xlsx 放到 `.sources/source.xlsx`。脚本会在成功后更新 `.sources/source.xlsx.metadata.json`，并重新生成 `data/source/xlsx/zh-CN/*.json` 与 `scripts/sources/xlsx/types/*`。`pnpm run sync` 会依次执行 `xlsx`、`gachabase`、`buhflipexplode`、`mihoyo-wiki` 四个数据源同步。`pnpm run generate:enemy` 会基于正式服 `Deadly Assault` source 快照生成 `data/enemy/`。`pnpm run build` 使用 `tsdown` 输出 `dist/` 下的 npm 发布产物，`pnpm run test` 使用 `vitest` 运行纯函数计算核心测试，`pnpm run typecheck` 检查 `src/`、`tests/`、`scripts/sources/` 与 `scripts/data/`。
+运行 `pnpm run sync:xlsx` 前，请先将手动下载的最新 xlsx 放到 `.sources/source.xlsx`。脚本会在成功后更新 `.sources/source.xlsx.metadata.json`，并重新生成 `data/source/xlsx/zh-CN/*.json` 与 `scripts/sources/xlsx/types/*`。`pnpm run sync` 会依次执行 `xlsx`、`gachabase`、`buhflipexplode`、`mihoyo-wiki` 四个数据源同步。`pnpm run generate:enemy` 会基于正式服 `Deadly Assault` source 快照生成 `data/enemy/`；`pnpm run generate:agent` 会基于 `xlsx` 与 `gachabase` source 快照生成 `data/agent/`；`pnpm run generate:w-engine` 会基于 `xlsx` 与 `gachabase` source 快照生成 `data/w-engine/`；`pnpm run generate:drive-disc` 会基于 `xlsx` 与 `gachabase` source 快照生成 `data/drive-disc/`。`pnpm run build` 使用 `tsdown` 输出 `dist/` 下的 npm 发布产物，`pnpm run test` 使用 `vitest` 运行纯函数计算核心测试，`pnpm run typecheck` 检查 `src/`、`tests/`、`scripts/sources/` 与 `scripts/data/`。
 
 ## 输出目录
 
@@ -80,6 +89,45 @@ data/enemy/
 ```
 
 字段定义见 [../../docs/specs/enemy-data.md](../../docs/specs/enemy-data.md)。
+
+处理后 agent 数据由 `pnpm run generate:agent` 写入：
+
+```text
+data/agent/
+├── index.json
+├── profile/
+│   ├── en/
+│   └── zh-CN/
+└── mechanics/
+```
+
+字段定义见 [../../docs/specs/agent-data.md](../../docs/specs/agent-data.md)。
+
+处理后 w-engine 数据由 `pnpm run generate:w-engine` 写入：
+
+```text
+data/w-engine/
+├── index.json
+├── profile/
+│   ├── en/
+│   └── zh-CN/
+└── mechanics/
+```
+
+字段定义见 [../../docs/specs/w-engine-data.md](../../docs/specs/w-engine-data.md)。
+
+处理后 drive-disc 数据由 `pnpm run generate:drive-disc` 写入：
+
+```text
+data/drive-disc/
+├── index.json
+├── profile/
+│   ├── en/
+│   └── zh-CN/
+└── mechanics/
+```
+
+字段定义见 [../../docs/specs/drive-disc-data.md](../../docs/specs/drive-disc-data.md)。
 
 `.sources/source.xlsx` 不纳入版本管理；仓库只跟踪它的 metadata 与导出的文本快照。
 

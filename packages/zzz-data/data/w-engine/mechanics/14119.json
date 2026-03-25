@@ -1,0 +1,394 @@
+{
+  "id": "14119",
+  "panel": {
+    "baseAtkByLevel": {
+      "0": 48,
+      "1": 55.5264,
+      "2": 63.0528,
+      "3": 70.584,
+      "4": 78.1104,
+      "5": 85.6368,
+      "6": 93.1632,
+      "7": 100.6896,
+      "8": 108.216,
+      "9": 115.7472,
+      "10": 123.2736,
+      "11": 173.6256,
+      "12": 181.152,
+      "13": 188.6784,
+      "14": 196.2048,
+      "15": 203.736,
+      "16": 211.2624,
+      "17": 218.7888,
+      "18": 226.3152,
+      "19": 233.8416,
+      "20": 241.368,
+      "21": 291.7248,
+      "22": 299.2512,
+      "23": 306.7776,
+      "24": 314.304,
+      "25": 321.8304,
+      "26": 329.3568,
+      "27": 336.888,
+      "28": 344.4144,
+      "29": 351.9408,
+      "30": 359.4672,
+      "31": 409.8192,
+      "32": 417.3456,
+      "33": 424.8768,
+      "34": 432.4032,
+      "35": 439.9296,
+      "36": 447.456,
+      "37": 454.9824,
+      "38": 462.5088,
+      "39": 470.04,
+      "40": 477.5664,
+      "41": 527.9184,
+      "42": 535.4448,
+      "43": 542.9712,
+      "44": 550.4976,
+      "45": 558.0288,
+      "46": 565.5552,
+      "47": 573.0816,
+      "48": 580.608,
+      "49": 588.1344,
+      "50": 595.6608,
+      "51": 646.0176,
+      "52": 653.544,
+      "53": 661.0704,
+      "54": 668.5968,
+      "55": 676.1232,
+      "56": 683.6496,
+      "57": 691.1808,
+      "58": 698.7072,
+      "59": 706.2336,
+      "60": 713.76
+    },
+    "advancedStatByLevel": {
+      "0": {
+        "key": "critRate",
+        "value": 0.096
+      },
+      "1": {
+        "key": "critRate",
+        "value": 0.096
+      },
+      "2": {
+        "key": "critRate",
+        "value": 0.096
+      },
+      "3": {
+        "key": "critRate",
+        "value": 0.096
+      },
+      "4": {
+        "key": "critRate",
+        "value": 0.096
+      },
+      "5": {
+        "key": "critRate",
+        "value": 0.096
+      },
+      "6": {
+        "key": "critRate",
+        "value": 0.096
+      },
+      "7": {
+        "key": "critRate",
+        "value": 0.096
+      },
+      "8": {
+        "key": "critRate",
+        "value": 0.096
+      },
+      "9": {
+        "key": "critRate",
+        "value": 0.096
+      },
+      "10": {
+        "key": "critRate",
+        "value": 0.096
+      },
+      "11": {
+        "key": "critRate",
+        "value": 0.1248
+      },
+      "12": {
+        "key": "critRate",
+        "value": 0.1248
+      },
+      "13": {
+        "key": "critRate",
+        "value": 0.1248
+      },
+      "14": {
+        "key": "critRate",
+        "value": 0.1248
+      },
+      "15": {
+        "key": "critRate",
+        "value": 0.1248
+      },
+      "16": {
+        "key": "critRate",
+        "value": 0.1248
+      },
+      "17": {
+        "key": "critRate",
+        "value": 0.1248
+      },
+      "18": {
+        "key": "critRate",
+        "value": 0.1248
+      },
+      "19": {
+        "key": "critRate",
+        "value": 0.1248
+      },
+      "20": {
+        "key": "critRate",
+        "value": 0.1248
+      },
+      "21": {
+        "key": "critRate",
+        "value": 0.1536
+      },
+      "22": {
+        "key": "critRate",
+        "value": 0.1536
+      },
+      "23": {
+        "key": "critRate",
+        "value": 0.1536
+      },
+      "24": {
+        "key": "critRate",
+        "value": 0.1536
+      },
+      "25": {
+        "key": "critRate",
+        "value": 0.1536
+      },
+      "26": {
+        "key": "critRate",
+        "value": 0.1536
+      },
+      "27": {
+        "key": "critRate",
+        "value": 0.1536
+      },
+      "28": {
+        "key": "critRate",
+        "value": 0.1536
+      },
+      "29": {
+        "key": "critRate",
+        "value": 0.1536
+      },
+      "30": {
+        "key": "critRate",
+        "value": 0.1536
+      },
+      "31": {
+        "key": "critRate",
+        "value": 0.1824
+      },
+      "32": {
+        "key": "critRate",
+        "value": 0.1824
+      },
+      "33": {
+        "key": "critRate",
+        "value": 0.1824
+      },
+      "34": {
+        "key": "critRate",
+        "value": 0.1824
+      },
+      "35": {
+        "key": "critRate",
+        "value": 0.1824
+      },
+      "36": {
+        "key": "critRate",
+        "value": 0.1824
+      },
+      "37": {
+        "key": "critRate",
+        "value": 0.1824
+      },
+      "38": {
+        "key": "critRate",
+        "value": 0.1824
+      },
+      "39": {
+        "key": "critRate",
+        "value": 0.1824
+      },
+      "40": {
+        "key": "critRate",
+        "value": 0.1824
+      },
+      "41": {
+        "key": "critRate",
+        "value": 0.2112
+      },
+      "42": {
+        "key": "critRate",
+        "value": 0.2112
+      },
+      "43": {
+        "key": "critRate",
+        "value": 0.2112
+      },
+      "44": {
+        "key": "critRate",
+        "value": 0.2112
+      },
+      "45": {
+        "key": "critRate",
+        "value": 0.2112
+      },
+      "46": {
+        "key": "critRate",
+        "value": 0.2112
+      },
+      "47": {
+        "key": "critRate",
+        "value": 0.2112
+      },
+      "48": {
+        "key": "critRate",
+        "value": 0.2112
+      },
+      "49": {
+        "key": "critRate",
+        "value": 0.2112
+      },
+      "50": {
+        "key": "critRate",
+        "value": 0.2112
+      },
+      "51": {
+        "key": "critRate",
+        "value": 0.24
+      },
+      "52": {
+        "key": "critRate",
+        "value": 0.24
+      },
+      "53": {
+        "key": "critRate",
+        "value": 0.24
+      },
+      "54": {
+        "key": "critRate",
+        "value": 0.24
+      },
+      "55": {
+        "key": "critRate",
+        "value": 0.24
+      },
+      "56": {
+        "key": "critRate",
+        "value": 0.24
+      },
+      "57": {
+        "key": "critRate",
+        "value": 0.24
+      },
+      "58": {
+        "key": "critRate",
+        "value": 0.24
+      },
+      "59": {
+        "key": "critRate",
+        "value": 0.24
+      },
+      "60": {
+        "key": "critRate",
+        "value": 0.24
+      }
+    }
+  },
+  "effects": {
+    "modifiers": [
+      {
+        "id": "passive:crit-rate",
+        "label": "被动暴击率",
+        "bucket": "modifier",
+        "key": "critRate",
+        "value": {
+          "kind": "by-level",
+          "inputKey": "refineRank",
+          "values": {
+            "1": 0.1,
+            "2": 0.125,
+            "3": 0.15,
+            "4": 0.175,
+            "5": 0.2
+          }
+        },
+        "unit": "ratio",
+        "target": "self",
+        "conditionText": "[普通攻击]命中敌人时，装备者的暴击率提升10%，持续8秒"
+      },
+      {
+        "id": "passive:冰-damage-bonus",
+        "label": "冰属性伤害",
+        "bucket": "modifier",
+        "key": "iceDamageBonus",
+        "value": {
+          "kind": "by-level",
+          "inputKey": "refineRank",
+          "values": {
+            "1": 0.25,
+            "2": 0.315,
+            "3": 0.38,
+            "4": 0.445,
+            "5": 0.5
+          }
+        },
+        "unit": "ratio",
+        "target": "self"
+      }
+    ],
+    "overrides": []
+  },
+  "trace": {
+    "sourceRefs": [
+      "data/source/gachabase/zh-CN/w-engines.json",
+      "data/source/gachabase/en/w-engines.json",
+      "data/source/gachabase/zh-CN/w-engine-details.json",
+      "data/source/gachabase/en/w-engine-details.json",
+      "data/source/xlsx/zh-CN/w-engine-stat.json",
+      "data/source/xlsx/zh-CN/w-engine-desc.json"
+    ],
+    "skillNameTexts": {
+      "en": "Lord of Seas",
+      "zh-CN": "诸洋之王"
+    },
+    "skillDescriptionsByRefine": {
+      "1": {
+        "en": "Increases Ice DMG by 25%. Upon hitting an enemy with a Basic Attack, the equipper's CRIT Rate increases by 10% for 8s. When dealing Ice DMG with a Dash Attack, the equipper's CRIT Rate increases by an additional 10% for 15s. The duration of each effect is calculated separately.",
+        "zh-CN": "冰属性伤害提升25%；[普通攻击]命中敌人时，装备者的暴击率提升10%，持续8秒；[冲刺攻击]造成冰属性伤害时，装备者的暴击率额外提升10%，持续15秒，每种增益效果单独结算持续时间。"
+      },
+      "2": {
+        "en": "Increases Ice DMG by 31.5%. Upon hitting an enemy with a Basic Attack, the equipper's CRIT Rate increases by 12.5% for 8s. When dealing Ice DMG with a Dash Attack, the equipper's CRIT Rate increases by an additional 12.5% for 15s. The duration of each effect is calculated separately.",
+        "zh-CN": "冰属性伤害提升31.5%；[普通攻击]命中敌人时，装备者的暴击率提升12.5%，持续8秒；[冲刺攻击]造成冰属性伤害时，装备者的暴击率额外提升12.5%，持续15秒，每种增益效果单独结算持续时间。"
+      },
+      "3": {
+        "en": "Increases Ice DMG by 38%. Upon hitting an enemy with a Basic Attack, the equipper's CRIT Rate increases by 15% for 8s. When dealing Ice DMG with a Dash Attack, the equipper's CRIT Rate increases by an additional 15% for 15s. The duration of each effect is calculated separately.",
+        "zh-CN": "冰属性伤害提升38%；[普通攻击]命中敌人时，装备者的暴击率提升15%，持续8秒；[冲刺攻击]造成冰属性伤害时，装备者的暴击率额外提升15%，持续15秒，每种增益效果单独结算持续时间。"
+      },
+      "4": {
+        "en": "Increases Ice DMG by 44.5%. Upon hitting an enemy with a Basic Attack, the equipper's CRIT Rate increases by 17.5% for 8s. When dealing Ice DMG with a Dash Attack, the equipper's CRIT Rate increases by an additional 17.5% for 15s. The duration of each effect is calculated separately.",
+        "zh-CN": "冰属性伤害提升44.5%；[普通攻击]命中敌人时，装备者的暴击率提升17.5%，持续8秒；[冲刺攻击]造成冰属性伤害时，装备者的暴击率额外提升17.5%，持续15秒，每种增益效果单独结算持续时间。"
+      },
+      "5": {
+        "en": "Increases Ice DMG by 50%. Upon hitting an enemy with a Basic Attack, the equipper's CRIT Rate increases by 20% for 8s. When dealing Ice DMG with a Dash Attack, the equipper's CRIT Rate increases by an additional 20% for 15s. The duration of each effect is calculated separately.",
+        "zh-CN": "冰属性伤害提升50%；[普通攻击]命中敌人时，装备者的暴击率提升20%，持续8秒；[冲刺攻击]造成冰属性伤害时，装备者的暴击率额外提升20%，持续15秒，每种增益效果单独结算持续时间。"
+      }
+    }
+  }
+}

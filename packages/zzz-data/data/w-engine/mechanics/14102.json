@@ -1,0 +1,394 @@
+{
+  "id": "14102",
+  "panel": {
+    "baseAtkByLevel": {
+      "0": 46,
+      "1": 53.2128,
+      "2": 60.4256,
+      "3": 67.643,
+      "4": 74.8558,
+      "5": 82.0686,
+      "6": 89.2814,
+      "7": 96.4942,
+      "8": 103.707,
+      "9": 110.9244,
+      "10": 118.1372,
+      "11": 166.3912,
+      "12": 173.604,
+      "13": 180.8168,
+      "14": 188.0296,
+      "15": 195.247,
+      "16": 202.4598,
+      "17": 209.6726,
+      "18": 216.8854,
+      "19": 224.0982,
+      "20": 231.311,
+      "21": 279.5696,
+      "22": 286.7824,
+      "23": 293.9952,
+      "24": 301.208,
+      "25": 308.4208,
+      "26": 315.6336,
+      "27": 322.851,
+      "28": 330.0638,
+      "29": 337.2766,
+      "30": 344.4894,
+      "31": 392.7434,
+      "32": 399.9562,
+      "33": 407.1736,
+      "34": 414.3864,
+      "35": 421.5992,
+      "36": 428.812,
+      "37": 436.0248,
+      "38": 443.2376,
+      "39": 450.455,
+      "40": 457.6678,
+      "41": 505.9218,
+      "42": 513.1346,
+      "43": 520.3474,
+      "44": 527.5602,
+      "45": 534.7776,
+      "46": 541.9904,
+      "47": 549.2032,
+      "48": 556.416,
+      "49": 563.6288,
+      "50": 570.8416,
+      "51": 619.1002,
+      "52": 626.313,
+      "53": 633.5258,
+      "54": 640.7386,
+      "55": 647.9514,
+      "56": 655.1642,
+      "57": 662.3816,
+      "58": 669.5944,
+      "59": 676.8072,
+      "60": 684.02
+    },
+    "advancedStatByLevel": {
+      "0": {
+        "key": "critRate",
+        "value": 0.096
+      },
+      "1": {
+        "key": "critRate",
+        "value": 0.096
+      },
+      "2": {
+        "key": "critRate",
+        "value": 0.096
+      },
+      "3": {
+        "key": "critRate",
+        "value": 0.096
+      },
+      "4": {
+        "key": "critRate",
+        "value": 0.096
+      },
+      "5": {
+        "key": "critRate",
+        "value": 0.096
+      },
+      "6": {
+        "key": "critRate",
+        "value": 0.096
+      },
+      "7": {
+        "key": "critRate",
+        "value": 0.096
+      },
+      "8": {
+        "key": "critRate",
+        "value": 0.096
+      },
+      "9": {
+        "key": "critRate",
+        "value": 0.096
+      },
+      "10": {
+        "key": "critRate",
+        "value": 0.096
+      },
+      "11": {
+        "key": "critRate",
+        "value": 0.1248
+      },
+      "12": {
+        "key": "critRate",
+        "value": 0.1248
+      },
+      "13": {
+        "key": "critRate",
+        "value": 0.1248
+      },
+      "14": {
+        "key": "critRate",
+        "value": 0.1248
+      },
+      "15": {
+        "key": "critRate",
+        "value": 0.1248
+      },
+      "16": {
+        "key": "critRate",
+        "value": 0.1248
+      },
+      "17": {
+        "key": "critRate",
+        "value": 0.1248
+      },
+      "18": {
+        "key": "critRate",
+        "value": 0.1248
+      },
+      "19": {
+        "key": "critRate",
+        "value": 0.1248
+      },
+      "20": {
+        "key": "critRate",
+        "value": 0.1248
+      },
+      "21": {
+        "key": "critRate",
+        "value": 0.1536
+      },
+      "22": {
+        "key": "critRate",
+        "value": 0.1536
+      },
+      "23": {
+        "key": "critRate",
+        "value": 0.1536
+      },
+      "24": {
+        "key": "critRate",
+        "value": 0.1536
+      },
+      "25": {
+        "key": "critRate",
+        "value": 0.1536
+      },
+      "26": {
+        "key": "critRate",
+        "value": 0.1536
+      },
+      "27": {
+        "key": "critRate",
+        "value": 0.1536
+      },
+      "28": {
+        "key": "critRate",
+        "value": 0.1536
+      },
+      "29": {
+        "key": "critRate",
+        "value": 0.1536
+      },
+      "30": {
+        "key": "critRate",
+        "value": 0.1536
+      },
+      "31": {
+        "key": "critRate",
+        "value": 0.1824
+      },
+      "32": {
+        "key": "critRate",
+        "value": 0.1824
+      },
+      "33": {
+        "key": "critRate",
+        "value": 0.1824
+      },
+      "34": {
+        "key": "critRate",
+        "value": 0.1824
+      },
+      "35": {
+        "key": "critRate",
+        "value": 0.1824
+      },
+      "36": {
+        "key": "critRate",
+        "value": 0.1824
+      },
+      "37": {
+        "key": "critRate",
+        "value": 0.1824
+      },
+      "38": {
+        "key": "critRate",
+        "value": 0.1824
+      },
+      "39": {
+        "key": "critRate",
+        "value": 0.1824
+      },
+      "40": {
+        "key": "critRate",
+        "value": 0.1824
+      },
+      "41": {
+        "key": "critRate",
+        "value": 0.2112
+      },
+      "42": {
+        "key": "critRate",
+        "value": 0.2112
+      },
+      "43": {
+        "key": "critRate",
+        "value": 0.2112
+      },
+      "44": {
+        "key": "critRate",
+        "value": 0.2112
+      },
+      "45": {
+        "key": "critRate",
+        "value": 0.2112
+      },
+      "46": {
+        "key": "critRate",
+        "value": 0.2112
+      },
+      "47": {
+        "key": "critRate",
+        "value": 0.2112
+      },
+      "48": {
+        "key": "critRate",
+        "value": 0.2112
+      },
+      "49": {
+        "key": "critRate",
+        "value": 0.2112
+      },
+      "50": {
+        "key": "critRate",
+        "value": 0.2112
+      },
+      "51": {
+        "key": "critRate",
+        "value": 0.24
+      },
+      "52": {
+        "key": "critRate",
+        "value": 0.24
+      },
+      "53": {
+        "key": "critRate",
+        "value": 0.24
+      },
+      "54": {
+        "key": "critRate",
+        "value": 0.24
+      },
+      "55": {
+        "key": "critRate",
+        "value": 0.24
+      },
+      "56": {
+        "key": "critRate",
+        "value": 0.24
+      },
+      "57": {
+        "key": "critRate",
+        "value": 0.24
+      },
+      "58": {
+        "key": "critRate",
+        "value": 0.24
+      },
+      "59": {
+        "key": "critRate",
+        "value": 0.24
+      },
+      "60": {
+        "key": "critRate",
+        "value": 0.24
+      }
+    }
+  },
+  "effects": {
+    "modifiers": [
+      {
+        "id": "passive:self-damage-bonus",
+        "label": "自身造成伤害",
+        "bucket": "modifier",
+        "key": "damageBonus",
+        "value": {
+          "kind": "by-level",
+          "inputKey": "refineRank",
+          "values": {
+            "1": 0.25,
+            "2": 0.315,
+            "3": 0.38,
+            "4": 0.44,
+            "5": 0.5
+          }
+        },
+        "unit": "ratio",
+        "target": "self",
+        "conditionText": "从背后攻击命中敌人时，装备者造成的伤害提升25%。"
+      },
+      {
+        "id": "passive:物理-damage-bonus",
+        "label": "物理属性伤害",
+        "bucket": "modifier",
+        "key": "physicalDamageBonus",
+        "value": {
+          "kind": "by-level",
+          "inputKey": "refineRank",
+          "values": {
+            "1": 0.2,
+            "2": 0.25,
+            "3": 0.3,
+            "4": 0.35,
+            "5": 0.4
+          }
+        },
+        "unit": "ratio",
+        "target": "self"
+      }
+    ],
+    "overrides": []
+  },
+  "trace": {
+    "sourceRefs": [
+      "data/source/gachabase/zh-CN/w-engines.json",
+      "data/source/gachabase/en/w-engines.json",
+      "data/source/gachabase/zh-CN/w-engine-details.json",
+      "data/source/gachabase/en/w-engine-details.json",
+      "data/source/xlsx/zh-CN/w-engine-stat.json",
+      "data/source/xlsx/zh-CN/w-engine-desc.json"
+    ],
+    "skillNameTexts": {
+      "en": "Metal Cat Claws",
+      "zh-CN": "合金猫爪"
+    },
+    "skillDescriptionsByRefine": {
+      "1": {
+        "en": "Increases Physical DMG by 20%. The equipper's DMG increases by 25% when hitting the enemy from behind.",
+        "zh-CN": "物理伤害提升20%；从背后攻击命中敌人时，装备者造成的伤害提升25%。"
+      },
+      "2": {
+        "en": "Increases Physical DMG by 25%. The equipper's DMG increases by 31.5% when hitting the enemy from behind.",
+        "zh-CN": "物理伤害提升25%；从背后攻击命中敌人时，装备者造成的伤害提升31.5%。"
+      },
+      "3": {
+        "en": "Increases Physical DMG by 30%. The equipper's DMG increases by 38% when hitting the enemy from behind.",
+        "zh-CN": "物理伤害提升30%；从背后攻击命中敌人时，装备者造成的伤害提升38%。"
+      },
+      "4": {
+        "en": "Increases Physical DMG by 35%. The equipper's DMG increases by 44% when hitting the enemy from behind.",
+        "zh-CN": "物理伤害提升35%；从背后攻击命中敌人时，装备者造成的伤害提升44%。"
+      },
+      "5": {
+        "en": "Increases Physical DMG by 40%. The equipper's DMG increases by 50% when hitting the enemy from behind.",
+        "zh-CN": "物理伤害提升40%；从背后攻击命中敌人时，装备者造成的伤害提升50%。"
+      }
+    }
+  }
+}

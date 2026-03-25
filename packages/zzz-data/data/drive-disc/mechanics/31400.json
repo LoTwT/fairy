@@ -1,0 +1,48 @@
+{
+  "id": "31400",
+  "effects": {
+    "twoPiece": [
+      {
+        "id": "31400:2pc:atk-percent",
+        "label": "2 件套攻击力",
+        "bucket": "panel",
+        "key": "atkPercent",
+        "value": {
+          "kind": "static",
+          "value": 0.1
+        },
+        "unit": "ratio"
+      }
+    ],
+    "fourPiece": [
+      {
+        "id": "31400:4pc:atk-percent",
+        "label": "4 件套攻击力",
+        "bucket": "modifier",
+        "key": "atkPercent",
+        "value": {
+          "kind": "static",
+          "value": 0.25
+        },
+        "unit": "ratio",
+        "target": "self",
+        "conditionText": "成为接战状态下的当前操作角色时，持续10秒，20秒内最多触发一次。"
+      }
+    ]
+  },
+  "trace": {
+    "sourceRefs": [
+      "data/source/xlsx/zh-CN/drive-disc-desc.json",
+      "data/source/gachabase/zh-CN/drive-discs.json",
+      "data/source/gachabase/en/drive-discs.json"
+    ],
+    "twoPieceEffectTexts": {
+      "en": "ATK +10%",
+      "zh-CN": "攻击力+10%。"
+    },
+    "fourPieceEffectTexts": {
+      "en": "Upon becoming the active character in combat, the equipper's ATK increases by 25% for 10s. This effect can trigger once every 20s.",
+      "zh-CN": "成为接战状态下的当前操作角色时，装备者的攻击力提升25%，持续10秒，20秒内最多触发一次。"
+    }
+  }
+}

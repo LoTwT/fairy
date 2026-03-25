@@ -1,0 +1,374 @@
+{
+  "id": "14137",
+  "panel": {
+    "baseAtkByLevel": {
+      "0": 50,
+      "1": 57.84,
+      "2": 65.68,
+      "3": 73.525,
+      "4": 81.365,
+      "5": 89.205,
+      "6": 97.045,
+      "7": 104.885,
+      "8": 112.725,
+      "9": 120.57,
+      "10": 128.41,
+      "11": 180.86,
+      "12": 188.7,
+      "13": 196.54,
+      "14": 204.38,
+      "15": 212.225,
+      "16": 220.065,
+      "17": 227.905,
+      "18": 235.745,
+      "19": 243.585,
+      "20": 251.425,
+      "21": 303.88,
+      "22": 311.72,
+      "23": 319.56,
+      "24": 327.4,
+      "25": 335.24,
+      "26": 343.08,
+      "27": 350.925,
+      "28": 358.765,
+      "29": 366.605,
+      "30": 374.445,
+      "31": 426.895,
+      "32": 434.735,
+      "33": 442.58,
+      "34": 450.42,
+      "35": 458.26,
+      "36": 466.1,
+      "37": 473.94,
+      "38": 481.78,
+      "39": 489.625,
+      "40": 497.465,
+      "41": 549.915,
+      "42": 557.755,
+      "43": 565.595,
+      "44": 573.435,
+      "45": 581.28,
+      "46": 589.12,
+      "47": 596.96,
+      "48": 604.8,
+      "49": 612.64,
+      "50": 620.48,
+      "51": 672.935,
+      "52": 680.775,
+      "53": 688.615,
+      "54": 696.455,
+      "55": 704.295,
+      "56": 712.135,
+      "57": 719.98,
+      "58": 727.82,
+      "59": 735.66,
+      "60": 743.5
+    },
+    "advancedStatByLevel": {
+      "0": {
+        "key": "hpPercent",
+        "value": 0.12
+      },
+      "1": {
+        "key": "hpPercent",
+        "value": 0.12
+      },
+      "2": {
+        "key": "hpPercent",
+        "value": 0.12
+      },
+      "3": {
+        "key": "hpPercent",
+        "value": 0.12
+      },
+      "4": {
+        "key": "hpPercent",
+        "value": 0.12
+      },
+      "5": {
+        "key": "hpPercent",
+        "value": 0.12
+      },
+      "6": {
+        "key": "hpPercent",
+        "value": 0.12
+      },
+      "7": {
+        "key": "hpPercent",
+        "value": 0.12
+      },
+      "8": {
+        "key": "hpPercent",
+        "value": 0.12
+      },
+      "9": {
+        "key": "hpPercent",
+        "value": 0.12
+      },
+      "10": {
+        "key": "hpPercent",
+        "value": 0.12
+      },
+      "11": {
+        "key": "hpPercent",
+        "value": 0.156
+      },
+      "12": {
+        "key": "hpPercent",
+        "value": 0.156
+      },
+      "13": {
+        "key": "hpPercent",
+        "value": 0.156
+      },
+      "14": {
+        "key": "hpPercent",
+        "value": 0.156
+      },
+      "15": {
+        "key": "hpPercent",
+        "value": 0.156
+      },
+      "16": {
+        "key": "hpPercent",
+        "value": 0.156
+      },
+      "17": {
+        "key": "hpPercent",
+        "value": 0.156
+      },
+      "18": {
+        "key": "hpPercent",
+        "value": 0.156
+      },
+      "19": {
+        "key": "hpPercent",
+        "value": 0.156
+      },
+      "20": {
+        "key": "hpPercent",
+        "value": 0.156
+      },
+      "21": {
+        "key": "hpPercent",
+        "value": 0.192
+      },
+      "22": {
+        "key": "hpPercent",
+        "value": 0.192
+      },
+      "23": {
+        "key": "hpPercent",
+        "value": 0.192
+      },
+      "24": {
+        "key": "hpPercent",
+        "value": 0.192
+      },
+      "25": {
+        "key": "hpPercent",
+        "value": 0.192
+      },
+      "26": {
+        "key": "hpPercent",
+        "value": 0.192
+      },
+      "27": {
+        "key": "hpPercent",
+        "value": 0.192
+      },
+      "28": {
+        "key": "hpPercent",
+        "value": 0.192
+      },
+      "29": {
+        "key": "hpPercent",
+        "value": 0.192
+      },
+      "30": {
+        "key": "hpPercent",
+        "value": 0.192
+      },
+      "31": {
+        "key": "hpPercent",
+        "value": 0.228
+      },
+      "32": {
+        "key": "hpPercent",
+        "value": 0.228
+      },
+      "33": {
+        "key": "hpPercent",
+        "value": 0.228
+      },
+      "34": {
+        "key": "hpPercent",
+        "value": 0.228
+      },
+      "35": {
+        "key": "hpPercent",
+        "value": 0.228
+      },
+      "36": {
+        "key": "hpPercent",
+        "value": 0.228
+      },
+      "37": {
+        "key": "hpPercent",
+        "value": 0.228
+      },
+      "38": {
+        "key": "hpPercent",
+        "value": 0.228
+      },
+      "39": {
+        "key": "hpPercent",
+        "value": 0.228
+      },
+      "40": {
+        "key": "hpPercent",
+        "value": 0.228
+      },
+      "41": {
+        "key": "hpPercent",
+        "value": 0.264
+      },
+      "42": {
+        "key": "hpPercent",
+        "value": 0.264
+      },
+      "43": {
+        "key": "hpPercent",
+        "value": 0.264
+      },
+      "44": {
+        "key": "hpPercent",
+        "value": 0.264
+      },
+      "45": {
+        "key": "hpPercent",
+        "value": 0.264
+      },
+      "46": {
+        "key": "hpPercent",
+        "value": 0.264
+      },
+      "47": {
+        "key": "hpPercent",
+        "value": 0.264
+      },
+      "48": {
+        "key": "hpPercent",
+        "value": 0.264
+      },
+      "49": {
+        "key": "hpPercent",
+        "value": 0.264
+      },
+      "50": {
+        "key": "hpPercent",
+        "value": 0.264
+      },
+      "51": {
+        "key": "hpPercent",
+        "value": 0.3
+      },
+      "52": {
+        "key": "hpPercent",
+        "value": 0.3
+      },
+      "53": {
+        "key": "hpPercent",
+        "value": 0.3
+      },
+      "54": {
+        "key": "hpPercent",
+        "value": 0.3
+      },
+      "55": {
+        "key": "hpPercent",
+        "value": 0.3
+      },
+      "56": {
+        "key": "hpPercent",
+        "value": 0.3
+      },
+      "57": {
+        "key": "hpPercent",
+        "value": 0.3
+      },
+      "58": {
+        "key": "hpPercent",
+        "value": 0.3
+      },
+      "59": {
+        "key": "hpPercent",
+        "value": 0.3
+      },
+      "60": {
+        "key": "hpPercent",
+        "value": 0.3
+      }
+    }
+  },
+  "effects": {
+    "modifiers": [
+      {
+        "id": "passive:crit-rate",
+        "label": "被动暴击率",
+        "bucket": "modifier",
+        "key": "critRate",
+        "value": {
+          "kind": "by-level",
+          "inputKey": "refineRank",
+          "values": {
+            "1": 0.2,
+            "2": 0.23,
+            "3": 0.26,
+            "4": 0.29,
+            "5": 0.32
+          }
+        },
+        "unit": "ratio",
+        "target": "self"
+      }
+    ],
+    "overrides": []
+  },
+  "trace": {
+    "sourceRefs": [
+      "data/source/gachabase/zh-CN/w-engines.json",
+      "data/source/gachabase/en/w-engines.json",
+      "data/source/gachabase/zh-CN/w-engine-details.json",
+      "data/source/gachabase/en/w-engine-details.json",
+      "data/source/xlsx/zh-CN/w-engine-stat.json",
+      "data/source/xlsx/zh-CN/w-engine-desc.json"
+    ],
+    "skillNameTexts": {
+      "en": "Cloud Flow",
+      "zh-CN": "云流运转"
+    },
+    "skillDescriptionsByRefine": {
+      "1": {
+        "en": "CRIT Rate increases by 20%. When the equipper launches an EX Special Attack, the character gains 1 stack of Qingming Companion effect, stacking up to 2 times and lasting 15s. On entering combat, immediately gain 2 stacks. Repeated triggers reset the duration. Each stack of the Qingming Companion effect increases the equipper's Ether DMG by 8%, and increases Ultimate and EX Special Attack Ether Sheer DMG by 10%.",
+        "zh-CN": "暴击率提升20%；装备者释放[强化特殊技]时角色获得1层[青溟同行]效果，最多叠加2层，持续15秒，进入接战状态时直接获得2层，重复触发时刷新持续时间；每层[青溟同行]效果使装备者造成的以太伤害提升8%，[终结技]或[强化特殊技]造成的以太贯穿伤害提升10%。"
+      },
+      "2": {
+        "en": "CRIT Rate increases by 23%. When the equipper launches an EX Special Attack, the character gains 1 stack of Qingming Companion effect, stacking up to 2 times and lasting 15s. On entering combat, immediately gain 2 stacks. Repeated triggers reset the duration. Each stack of the Qingming Companion effect increases the equipper's Ether DMG by 9.2%, and increases Ultimate and EX Special Attack Ether Sheer DMG by 11.5%.",
+        "zh-CN": "暴击率提升23%；装备者释放[强化特殊技]时角色获得1层[青溟同行]效果，最多叠加2层，持续15秒，进入接战状态时直接获得2层，重复触发时刷新持续时间；每层[青溟同行]效果使装备者造成的以太伤害提升9.2%，[终结技]或[强化特殊技]造成的以太贯穿伤害提升11.5%。"
+      },
+      "3": {
+        "en": "CRIT Rate increases by 26%. When the equipper launches an EX Special Attack, the character gains 1 stack of Qingming Companion effect, stacking up to 2 times and lasting 15s. On entering combat, immediately gain 2 stacks. Repeated triggers reset the duration. Each stack of the Qingming Companion effect increases the equipper's Ether DMG by 10.4%, and increases Ultimate and EX Special Attack Ether Sheer DMG by 13%.",
+        "zh-CN": "暴击率提升26%；装备者释放[强化特殊技]时角色获得1层[青溟同行]效果，最多叠加2层，持续15秒，进入接战状态时直接获得2层，重复触发时刷新持续时间；每层[青溟同行]效果使装备者造成的以太伤害提升10.4%，[终结技]或[强化特殊技]造成的以太贯穿伤害提升13%。"
+      },
+      "4": {
+        "en": "CRIT Rate increases by 29%. When the equipper launches an EX Special Attack, the character gains 1 stack of Qingming Companion effect, stacking up to 2 times and lasting 15s. On entering combat, immediately gain 2 stacks. Repeated triggers reset the duration. Each stack of the Qingming Companion effect increases the equipper's Ether DMG by 11.6%, and increases Ultimate and EX Special Attack Ether Sheer DMG by 14.5%.",
+        "zh-CN": "暴击率提升29%；装备者释放[强化特殊技]时角色获得1层[青溟同行]效果，最多叠加2层，持续15秒，进入接战状态时直接获得2层，重复触发时刷新持续时间；每层[青溟同行]效果使装备者造成的以太伤害提升11.6%，[终结技]或[强化特殊技]造成的以太贯穿伤害提升14.5%。"
+      },
+      "5": {
+        "en": "CRIT Rate increases by 32%. When the equipper launches an EX Special Attack, the character gains 1 stack of Qingming Companion effect, stacking up to 2 times and lasting 15s. On entering combat, immediately gain 2 stacks. Repeated triggers reset the duration. Each stack of the Qingming Companion effect increases the equipper's Ether DMG by 12.8%, and increases Ultimate and EX Special Attack Ether Sheer DMG by 16%.",
+        "zh-CN": "暴击率提升32%；装备者释放[强化特殊技]时角色获得1层[青溟同行]效果，最多叠加2层，持续15秒，进入接战状态时直接获得2层，重复触发时刷新持续时间；每层[青溟同行]效果使装备者造成的以太伤害提升12.8%，[终结技]或[强化特殊技]造成的以太贯穿伤害提升16%。"
+      }
+    }
+  }
+}

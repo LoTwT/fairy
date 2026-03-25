@@ -1,0 +1,374 @@
+{
+  "id": "14118",
+  "panel": {
+    "baseAtkByLevel": {
+      "0": 46,
+      "1": 53.2128,
+      "2": 60.4256,
+      "3": 67.643,
+      "4": 74.8558,
+      "5": 82.0686,
+      "6": 89.2814,
+      "7": 96.4942,
+      "8": 103.707,
+      "9": 110.9244,
+      "10": 118.1372,
+      "11": 166.3912,
+      "12": 173.604,
+      "13": 180.8168,
+      "14": 188.0296,
+      "15": 195.247,
+      "16": 202.4598,
+      "17": 209.6726,
+      "18": 216.8854,
+      "19": 224.0982,
+      "20": 231.311,
+      "21": 279.5696,
+      "22": 286.7824,
+      "23": 293.9952,
+      "24": 301.208,
+      "25": 308.4208,
+      "26": 315.6336,
+      "27": 322.851,
+      "28": 330.0638,
+      "29": 337.2766,
+      "30": 344.4894,
+      "31": 392.7434,
+      "32": 399.9562,
+      "33": 407.1736,
+      "34": 414.3864,
+      "35": 421.5992,
+      "36": 428.812,
+      "37": 436.0248,
+      "38": 443.2376,
+      "39": 450.455,
+      "40": 457.6678,
+      "41": 505.9218,
+      "42": 513.1346,
+      "43": 520.3474,
+      "44": 527.5602,
+      "45": 534.7776,
+      "46": 541.9904,
+      "47": 549.2032,
+      "48": 556.416,
+      "49": 563.6288,
+      "50": 570.8416,
+      "51": 619.1002,
+      "52": 626.313,
+      "53": 633.5258,
+      "54": 640.7386,
+      "55": 647.9514,
+      "56": 655.1642,
+      "57": 662.3816,
+      "58": 669.5944,
+      "59": 676.8072,
+      "60": 684.02
+    },
+    "advancedStatByLevel": {
+      "0": {
+        "key": "penRate",
+        "value": 0.096
+      },
+      "1": {
+        "key": "penRate",
+        "value": 0.096
+      },
+      "2": {
+        "key": "penRate",
+        "value": 0.096
+      },
+      "3": {
+        "key": "penRate",
+        "value": 0.096
+      },
+      "4": {
+        "key": "penRate",
+        "value": 0.096
+      },
+      "5": {
+        "key": "penRate",
+        "value": 0.096
+      },
+      "6": {
+        "key": "penRate",
+        "value": 0.096
+      },
+      "7": {
+        "key": "penRate",
+        "value": 0.096
+      },
+      "8": {
+        "key": "penRate",
+        "value": 0.096
+      },
+      "9": {
+        "key": "penRate",
+        "value": 0.096
+      },
+      "10": {
+        "key": "penRate",
+        "value": 0.096
+      },
+      "11": {
+        "key": "penRate",
+        "value": 0.1248
+      },
+      "12": {
+        "key": "penRate",
+        "value": 0.1248
+      },
+      "13": {
+        "key": "penRate",
+        "value": 0.1248
+      },
+      "14": {
+        "key": "penRate",
+        "value": 0.1248
+      },
+      "15": {
+        "key": "penRate",
+        "value": 0.1248
+      },
+      "16": {
+        "key": "penRate",
+        "value": 0.1248
+      },
+      "17": {
+        "key": "penRate",
+        "value": 0.1248
+      },
+      "18": {
+        "key": "penRate",
+        "value": 0.1248
+      },
+      "19": {
+        "key": "penRate",
+        "value": 0.1248
+      },
+      "20": {
+        "key": "penRate",
+        "value": 0.1248
+      },
+      "21": {
+        "key": "penRate",
+        "value": 0.1536
+      },
+      "22": {
+        "key": "penRate",
+        "value": 0.1536
+      },
+      "23": {
+        "key": "penRate",
+        "value": 0.1536
+      },
+      "24": {
+        "key": "penRate",
+        "value": 0.1536
+      },
+      "25": {
+        "key": "penRate",
+        "value": 0.1536
+      },
+      "26": {
+        "key": "penRate",
+        "value": 0.1536
+      },
+      "27": {
+        "key": "penRate",
+        "value": 0.1536
+      },
+      "28": {
+        "key": "penRate",
+        "value": 0.1536
+      },
+      "29": {
+        "key": "penRate",
+        "value": 0.1536
+      },
+      "30": {
+        "key": "penRate",
+        "value": 0.1536
+      },
+      "31": {
+        "key": "penRate",
+        "value": 0.1824
+      },
+      "32": {
+        "key": "penRate",
+        "value": 0.1824
+      },
+      "33": {
+        "key": "penRate",
+        "value": 0.1824
+      },
+      "34": {
+        "key": "penRate",
+        "value": 0.1824
+      },
+      "35": {
+        "key": "penRate",
+        "value": 0.1824
+      },
+      "36": {
+        "key": "penRate",
+        "value": 0.1824
+      },
+      "37": {
+        "key": "penRate",
+        "value": 0.1824
+      },
+      "38": {
+        "key": "penRate",
+        "value": 0.1824
+      },
+      "39": {
+        "key": "penRate",
+        "value": 0.1824
+      },
+      "40": {
+        "key": "penRate",
+        "value": 0.1824
+      },
+      "41": {
+        "key": "penRate",
+        "value": 0.2112
+      },
+      "42": {
+        "key": "penRate",
+        "value": 0.2112
+      },
+      "43": {
+        "key": "penRate",
+        "value": 0.2112
+      },
+      "44": {
+        "key": "penRate",
+        "value": 0.2112
+      },
+      "45": {
+        "key": "penRate",
+        "value": 0.2112
+      },
+      "46": {
+        "key": "penRate",
+        "value": 0.2112
+      },
+      "47": {
+        "key": "penRate",
+        "value": 0.2112
+      },
+      "48": {
+        "key": "penRate",
+        "value": 0.2112
+      },
+      "49": {
+        "key": "penRate",
+        "value": 0.2112
+      },
+      "50": {
+        "key": "penRate",
+        "value": 0.2112
+      },
+      "51": {
+        "key": "penRate",
+        "value": 0.24
+      },
+      "52": {
+        "key": "penRate",
+        "value": 0.24
+      },
+      "53": {
+        "key": "penRate",
+        "value": 0.24
+      },
+      "54": {
+        "key": "penRate",
+        "value": 0.24
+      },
+      "55": {
+        "key": "penRate",
+        "value": 0.24
+      },
+      "56": {
+        "key": "penRate",
+        "value": 0.24
+      },
+      "57": {
+        "key": "penRate",
+        "value": 0.24
+      },
+      "58": {
+        "key": "penRate",
+        "value": 0.24
+      },
+      "59": {
+        "key": "penRate",
+        "value": 0.24
+      },
+      "60": {
+        "key": "penRate",
+        "value": 0.24
+      }
+    }
+  },
+  "effects": {
+    "modifiers": [
+      {
+        "id": "passive:self-atk-percent",
+        "label": "自身攻击力",
+        "bucket": "modifier",
+        "key": "atkPercent",
+        "value": {
+          "kind": "by-level",
+          "inputKey": "refineRank",
+          "values": {
+            "1": 0.12,
+            "2": 0.15,
+            "3": 0.18,
+            "4": 0.21,
+            "5": 0.24
+          }
+        },
+        "unit": "ratio",
+        "target": "self"
+      }
+    ],
+    "overrides": []
+  },
+  "trace": {
+    "sourceRefs": [
+      "data/source/gachabase/zh-CN/w-engines.json",
+      "data/source/gachabase/en/w-engines.json",
+      "data/source/gachabase/zh-CN/w-engine-details.json",
+      "data/source/gachabase/en/w-engine-details.json",
+      "data/source/xlsx/zh-CN/w-engine-stat.json",
+      "data/source/xlsx/zh-CN/w-engine-desc.json"
+    ],
+    "skillNameTexts": {
+      "en": "Data Flood",
+      "zh-CN": "数据洪流"
+    },
+    "skillDescriptionsByRefine": {
+      "1": {
+        "en": "Increases ATK by 12%.\nWhen using a Special Attack or EX Special Attack, the equipper's Anomaly Proficiency is increased by 25 for 8s, stacking up to 3 times. The duration of each stack is calculated separately.",
+        "zh-CN": "攻击力提升12%；发动[特殊技]或[强化特殊技]时，装备者的异常精通提升25点，最多叠加3层，持续8秒，每层效果单独结算持续时间。"
+      },
+      "2": {
+        "en": "Increases ATK by 15%.\nWhen using a Special Attack or EX Special Attack, the equipper's Anomaly Proficiency is increased by 31 for 8s, stacking up to 3 times. The duration of each stack is calculated separately.",
+        "zh-CN": "攻击力提升15%；发动[特殊技]或[强化特殊技]时，装备者的异常精通提升31点，最多叠加3层，持续8秒，每层效果单独结算持续时间。"
+      },
+      "3": {
+        "en": "Increases ATK by 18%.\nWhen using a Special Attack or EX Special Attack, the equipper's Anomaly Proficiency is increased by 37 for 8s, stacking up to 3 times. The duration of each stack is calculated separately.",
+        "zh-CN": "攻击力提升18%；发动[特殊技]或[强化特殊技]时，装备者的异常精通提升37点，最多叠加3层，持续8秒，每层效果单独结算持续时间。"
+      },
+      "4": {
+        "en": "Increases ATK by 21%.\nWhen using a Special Attack or EX Special Attack, the equipper's Anomaly Proficiency is increased by 43 for 8s, stacking up to 3 times. The duration of each stack is calculated separately.",
+        "zh-CN": "攻击力提升21%；发动[特殊技]或[强化特殊技]时，装备者的异常精通提升43点，最多叠加3层，持续8秒，每层效果单独结算持续时间。"
+      },
+      "5": {
+        "en": "Increases ATK by 24%.\nWhen using a Special Attack or EX Special Attack, the equipper's Anomaly Proficiency is increased by 50 for 8s, stacking up to 3 times. The duration of each stack is calculated separately.",
+        "zh-CN": "攻击力提升24%；发动[特殊技]或[强化特殊技]时，装备者的异常精通提升50点，最多叠加3层，持续8秒，每层效果单独结算持续时间。"
+      }
+    }
+  }
+}

@@ -1,0 +1,1130 @@
+{
+  "id": "1251",
+  "panel": {
+    "baseStatsByLevel": {
+      "1": {
+        "hp": 663,
+        "atk": 109,
+        "def": 49,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "2": {
+        "hp": 753.0269,
+        "atk": 115.4272,
+        "def": 55.6882,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "3": {
+        "hp": 843.0538,
+        "atk": 121.8544,
+        "def": 62.3764,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "4": {
+        "hp": 933.0807,
+        "atk": 128.2816,
+        "def": 69.0646,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "5": {
+        "hp": 1023.1076,
+        "atk": 134.7088,
+        "def": 75.7528,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "6": {
+        "hp": 1113.1345,
+        "atk": 141.136,
+        "def": 82.441,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "7": {
+        "hp": 1203.1614,
+        "atk": 147.5632,
+        "def": 89.1292,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "8": {
+        "hp": 1293.1883,
+        "atk": 153.9904,
+        "def": 95.8174,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "9": {
+        "hp": 1383.2152,
+        "atk": 160.4176,
+        "def": 102.5056,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "10": {
+        "hp": 1473.2421,
+        "atk": 166.8448,
+        "def": 109.1938,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "11": {
+        "hp": 1563.269,
+        "atk": 173.272,
+        "def": 115.882,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "12": {
+        "hp": 1653.2959,
+        "atk": 179.6992,
+        "def": 122.5702,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "13": {
+        "hp": 1743.3228,
+        "atk": 186.1264,
+        "def": 129.2584,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "14": {
+        "hp": 1833.3497,
+        "atk": 192.5536,
+        "def": 135.9466,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "15": {
+        "hp": 1923.3766,
+        "atk": 198.9808,
+        "def": 142.6348,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "16": {
+        "hp": 2013.4035,
+        "atk": 205.408,
+        "def": 149.323,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "17": {
+        "hp": 2103.4304,
+        "atk": 211.8352,
+        "def": 156.0112,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "18": {
+        "hp": 2193.4573,
+        "atk": 218.2624,
+        "def": 162.6994,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "19": {
+        "hp": 2283.4842,
+        "atk": 224.6896,
+        "def": 169.3876,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "20": {
+        "hp": 2373.5111,
+        "atk": 231.1168,
+        "def": 176.0758,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "21": {
+        "hp": 2463.538,
+        "atk": 237.544,
+        "def": 182.764,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "22": {
+        "hp": 2553.5649,
+        "atk": 243.9712,
+        "def": 189.4522,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "23": {
+        "hp": 2643.5918,
+        "atk": 250.3984,
+        "def": 196.1404,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "24": {
+        "hp": 2733.6187,
+        "atk": 256.8256,
+        "def": 202.8286,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "25": {
+        "hp": 2823.6456,
+        "atk": 263.2528,
+        "def": 209.5168,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "26": {
+        "hp": 2913.6725,
+        "atk": 269.68,
+        "def": 216.205,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "27": {
+        "hp": 3003.6994,
+        "atk": 276.1072,
+        "def": 222.8932,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "28": {
+        "hp": 3093.7263,
+        "atk": 282.5344,
+        "def": 229.5814,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "29": {
+        "hp": 3183.7532,
+        "atk": 288.9616,
+        "def": 236.2696,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "30": {
+        "hp": 3273.7801,
+        "atk": 295.3888,
+        "def": 242.9578,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "31": {
+        "hp": 3363.807,
+        "atk": 301.816,
+        "def": 249.646,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "32": {
+        "hp": 3453.8339,
+        "atk": 308.2432,
+        "def": 256.3342,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "33": {
+        "hp": 3543.8608,
+        "atk": 314.6704,
+        "def": 263.0224,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "34": {
+        "hp": 3633.8877,
+        "atk": 321.0976,
+        "def": 269.7106,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "35": {
+        "hp": 3723.9146,
+        "atk": 327.5248,
+        "def": 276.3988,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "36": {
+        "hp": 3813.9415,
+        "atk": 333.952,
+        "def": 283.087,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "37": {
+        "hp": 3903.9684,
+        "atk": 340.3792,
+        "def": 289.7752,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "38": {
+        "hp": 3993.9953,
+        "atk": 346.8064,
+        "def": 296.4634,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "39": {
+        "hp": 4084.0222,
+        "atk": 353.2336,
+        "def": 303.1516,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "40": {
+        "hp": 4174.0491,
+        "atk": 359.6608,
+        "def": 309.8398,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "41": {
+        "hp": 4264.076,
+        "atk": 366.088,
+        "def": 316.528,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "42": {
+        "hp": 4354.1029,
+        "atk": 372.5152,
+        "def": 323.2162,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "43": {
+        "hp": 4444.1298,
+        "atk": 378.9424,
+        "def": 329.9044,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "44": {
+        "hp": 4534.1567,
+        "atk": 385.3696,
+        "def": 336.5926,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "45": {
+        "hp": 4624.1836,
+        "atk": 391.7968,
+        "def": 343.2808,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "46": {
+        "hp": 4714.2105,
+        "atk": 398.224,
+        "def": 349.969,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "47": {
+        "hp": 4804.2374,
+        "atk": 404.6512,
+        "def": 356.6572,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "48": {
+        "hp": 4894.2643,
+        "atk": 411.0784,
+        "def": 363.3454,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "49": {
+        "hp": 4984.2912,
+        "atk": 417.5056,
+        "def": 370.0336,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "50": {
+        "hp": 5074.3181,
+        "atk": 423.9328,
+        "def": 376.7218,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "51": {
+        "hp": 5164.345,
+        "atk": 430.36,
+        "def": 383.41,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "52": {
+        "hp": 5254.3719,
+        "atk": 436.7872,
+        "def": 390.0982,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "53": {
+        "hp": 5344.3988,
+        "atk": 443.2144,
+        "def": 396.7864,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "54": {
+        "hp": 5434.4257,
+        "atk": 449.6416,
+        "def": 403.4746,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "55": {
+        "hp": 5524.4526,
+        "atk": 456.0688,
+        "def": 410.1628,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "56": {
+        "hp": 5614.4795,
+        "atk": 462.496,
+        "def": 416.851,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "57": {
+        "hp": 5704.5064,
+        "atk": 468.9232,
+        "def": 423.5392,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "58": {
+        "hp": 5794.5333,
+        "atk": 475.3504,
+        "def": 430.2274,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "59": {
+        "hp": 5884.5602,
+        "atk": 481.7776,
+        "def": 436.9156,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      },
+      "60": {
+        "hp": 5974.5871,
+        "atk": 488.2048,
+        "def": 443.6038,
+        "impact": 118,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 94,
+        "anomalyProficiency": 93,
+        "penRate": 0,
+        "energyRegen": 1.2
+      }
+    },
+    "promotionStatsByLevel": {
+      "1": {
+        "hp": 0,
+        "atk": 0,
+        "def": 0
+      },
+      "2": {
+        "hp": 0,
+        "atk": 0,
+        "def": 0
+      },
+      "3": {
+        "hp": 0,
+        "atk": 0,
+        "def": 0
+      },
+      "4": {
+        "hp": 0,
+        "atk": 0,
+        "def": 0
+      },
+      "5": {
+        "hp": 0,
+        "atk": 0,
+        "def": 0
+      },
+      "6": {
+        "hp": 0,
+        "atk": 0,
+        "def": 0
+      },
+      "7": {
+        "hp": 0,
+        "atk": 0,
+        "def": 0
+      },
+      "8": {
+        "hp": 0,
+        "atk": 0,
+        "def": 0
+      },
+      "9": {
+        "hp": 0,
+        "atk": 0,
+        "def": 0
+      },
+      "10": {
+        "hp": 0,
+        "atk": 0,
+        "def": 0
+      },
+      "11": {
+        "hp": 455,
+        "atk": 39,
+        "def": 34
+      },
+      "12": {
+        "hp": 455,
+        "atk": 39,
+        "def": 34
+      },
+      "13": {
+        "hp": 455,
+        "atk": 39,
+        "def": 34
+      },
+      "14": {
+        "hp": 455,
+        "atk": 39,
+        "def": 34
+      },
+      "15": {
+        "hp": 455,
+        "atk": 39,
+        "def": 34
+      },
+      "16": {
+        "hp": 455,
+        "atk": 39,
+        "def": 34
+      },
+      "17": {
+        "hp": 455,
+        "atk": 39,
+        "def": 34
+      },
+      "18": {
+        "hp": 455,
+        "atk": 39,
+        "def": 34
+      },
+      "19": {
+        "hp": 455,
+        "atk": 39,
+        "def": 34
+      },
+      "20": {
+        "hp": 455,
+        "atk": 39,
+        "def": 34
+      },
+      "21": {
+        "hp": 911,
+        "atk": 78,
+        "def": 68
+      },
+      "22": {
+        "hp": 911,
+        "atk": 78,
+        "def": 68
+      },
+      "23": {
+        "hp": 911,
+        "atk": 78,
+        "def": 68
+      },
+      "24": {
+        "hp": 911,
+        "atk": 78,
+        "def": 68
+      },
+      "25": {
+        "hp": 911,
+        "atk": 78,
+        "def": 68
+      },
+      "26": {
+        "hp": 911,
+        "atk": 78,
+        "def": 68
+      },
+      "27": {
+        "hp": 911,
+        "atk": 78,
+        "def": 68
+      },
+      "28": {
+        "hp": 911,
+        "atk": 78,
+        "def": 68
+      },
+      "29": {
+        "hp": 911,
+        "atk": 78,
+        "def": 68
+      },
+      "30": {
+        "hp": 911,
+        "atk": 78,
+        "def": 68
+      },
+      "31": {
+        "hp": 1366,
+        "atk": 117,
+        "def": 101
+      },
+      "32": {
+        "hp": 1366,
+        "atk": 117,
+        "def": 101
+      },
+      "33": {
+        "hp": 1366,
+        "atk": 117,
+        "def": 101
+      },
+      "34": {
+        "hp": 1366,
+        "atk": 117,
+        "def": 101
+      },
+      "35": {
+        "hp": 1366,
+        "atk": 117,
+        "def": 101
+      },
+      "36": {
+        "hp": 1366,
+        "atk": 117,
+        "def": 101
+      },
+      "37": {
+        "hp": 1366,
+        "atk": 117,
+        "def": 101
+      },
+      "38": {
+        "hp": 1366,
+        "atk": 117,
+        "def": 101
+      },
+      "39": {
+        "hp": 1366,
+        "atk": 117,
+        "def": 101
+      },
+      "40": {
+        "hp": 1366,
+        "atk": 117,
+        "def": 101
+      },
+      "41": {
+        "hp": 1821,
+        "atk": 156,
+        "def": 135
+      },
+      "42": {
+        "hp": 1821,
+        "atk": 156,
+        "def": 135
+      },
+      "43": {
+        "hp": 1821,
+        "atk": 156,
+        "def": 135
+      },
+      "44": {
+        "hp": 1821,
+        "atk": 156,
+        "def": 135
+      },
+      "45": {
+        "hp": 1821,
+        "atk": 156,
+        "def": 135
+      },
+      "46": {
+        "hp": 1821,
+        "atk": 156,
+        "def": 135
+      },
+      "47": {
+        "hp": 1821,
+        "atk": 156,
+        "def": 135
+      },
+      "48": {
+        "hp": 1821,
+        "atk": 156,
+        "def": 135
+      },
+      "49": {
+        "hp": 1821,
+        "atk": 156,
+        "def": 135
+      },
+      "50": {
+        "hp": 1821,
+        "atk": 156,
+        "def": 135
+      },
+      "51": {
+        "hp": 2276,
+        "atk": 195,
+        "def": 169
+      },
+      "52": {
+        "hp": 2276,
+        "atk": 195,
+        "def": 169
+      },
+      "53": {
+        "hp": 2276,
+        "atk": 195,
+        "def": 169
+      },
+      "54": {
+        "hp": 2276,
+        "atk": 195,
+        "def": 169
+      },
+      "55": {
+        "hp": 2276,
+        "atk": 195,
+        "def": 169
+      },
+      "56": {
+        "hp": 2276,
+        "atk": 195,
+        "def": 169
+      },
+      "57": {
+        "hp": 2276,
+        "atk": 195,
+        "def": 169
+      },
+      "58": {
+        "hp": 2276,
+        "atk": 195,
+        "def": 169
+      },
+      "59": {
+        "hp": 2276,
+        "atk": 195,
+        "def": 169
+      },
+      "60": {
+        "hp": 2276,
+        "atk": 195,
+        "def": 169
+      }
+    },
+    "coreSpecialPanelEffects": [
+      {
+        "id": "core:12201",
+        "label": "核心技基础冲击力",
+        "bucket": "panel",
+        "key": "impact",
+        "value": {
+          "kind": "by-level",
+          "inputKey": "coreSkillLevel",
+          "values": {
+            "2": 6,
+            "3": 6,
+            "4": 12,
+            "5": 12,
+            "6": 18,
+            "7": 18
+          }
+        },
+        "unit": "flat"
+      },
+      {
+        "id": "core:12101",
+        "label": "核心技基础攻击力",
+        "bucket": "panel",
+        "key": "atk",
+        "value": {
+          "kind": "by-level",
+          "inputKey": "coreSkillLevel",
+          "values": {
+            "2": 0,
+            "3": 25,
+            "4": 25,
+            "5": 50,
+            "6": 50,
+            "7": 75
+          }
+        },
+        "unit": "flat"
+      }
+    ],
+    "cinemaPanelEffects": [],
+    "potentialPanelEffects": []
+  },
+  "effects": {
+    "modifiers": [
+      {
+        "id": "1251:cinema:6:self-crit-damage",
+        "label": "影画6自身暴击伤害",
+        "bucket": "modifier",
+        "key": "critDamage",
+        "value": {
+          "kind": "static",
+          "value": 1
+        },
+        "unit": "ratio",
+        "target": "self",
+        "conditionText": "[普通攻击：醉花月云转]的打断等级大幅提升，招式的暴击伤害额外提升100%"
+      }
+    ],
+    "overrides": []
+  },
+  "trace": {
+    "sourceRefs": [
+      "data/source/xlsx/zh-CN/agent-stat.json",
+      "data/source/gachabase/zh-CN/agents.json",
+      "data/source/gachabase/en/agents.json",
+      "data/source/gachabase/zh-CN/agent-details.json",
+      "data/source/gachabase/en/agent-details.json"
+    ],
+    "coreTexts": {
+      "zh-CN": "青衣在[普通攻击：醉花月云转]中发动终结一击命中敌人时，会对敌人施加5层[羁服]，最多叠加20层，每层[羁服]能够使目标的失衡易伤倍率提升4%；在[普通攻击：醉花月云转]中每发动一次突进攻击，终结一击将额外施加1层[羁服]，在发动终结一击时，若触发[极限闪避]，可以直接施加{0}层[羁服]；对普通或精英敌人施加[羁服]时，施加的层数翻倍；目标从失衡状态恢复时，对应[羁服]层数重置。"
+    },
+    "additionalAbilityTexts": {
+      "zh-CN": "队伍中存在[强攻]角色或与自身阵营相同的角色时触发：\n[普通攻击]造成的失衡值提升20%；此外，若青衣的冲击力高于120点，每超过1点冲击力会使自身的攻击力提升6点，通过这种方式最多使自身的攻击力提升600点。"
+    },
+    "cinemaTexts": [
+      {
+        "en": "When Qingyi enters combat, Flash Connect Voltage is instantly restored to its maximum, and the accumulation rate is increased by 30%. When using her Basic Attack: Enchanted Moonlit Blossoms, if Flash Connect Voltage is at its maximum, the attack will reduce the DEF of the enemy it hits by 15%, and Qingyi's CRIT Rate against that enemy will increase by 20% for 15s.",
+        "zh-CN": "青衣进入战场时，立即使[闪络电压]回复至上限，并使其后继累积效率提升30%；发动[普通攻击：醉花月云转]时，若[闪络电压]已累积至上限，则使本次招式命中的敌人防御力降低15%，且自身对该目标的暴击率提升20%，持续15秒。"
+      },
+      {
+        "en": "The Stun DMG Multiplier increase provided by each stack of Subjugation in Core Passive: Eternal Seasons increases to 135% of its original value. When Qingyi's attack hits an enemy and the stacks of Subjugation she applies reaches its maximum stacks, her Daze dealt to the target increases by 15%.",
+        "zh-CN": "[核心被动：千秋岁]中每层[羁服]提供的失衡易伤倍率提升效果提升至原本的135%；青衣攻击命中敌人时，若对其施加的[羁服]已叠加至层数上限，则自身对其造成的失衡值提升15%。"
+      },
+      {
+        "en": "Basic Attack, Dodge, Assist, Special Attack, and Chain Attack Lv. +2",
+        "zh-CN": "[普通攻击]、[闪避]、[支援技]、[特殊技]、[连携技] 技能等级+2"
+      },
+      {
+        "en": "Upon entering or exiting Flash Connect state, gain a shield equal to 10% of Qingyi's Max HP. If a previous shield is still active when the shield effect refreshes, Qingyi generates 5 Energy. This Energy Generation effect can be triggered once every 10s.",
+        "zh-CN": "进入或退出[闪络]状态时，获得等同于青衣10%生命值上限的护盾；护盾效果刷新时，如果上一次获得的护盾仍然存在，则为青衣回复5点能量，能量回复效果10秒内最多触发一次。"
+      },
+      {
+        "en": "Basic Attack, Dodge, Assist, Special Attack, and Chain Attack Lv. +2",
+        "zh-CN": "[普通攻击]、[闪避]、[支援技]、[特殊技]、[连携技] 技能等级+2"
+      },
+      {
+        "en": "The Interrupt Level of Basic Attack: Enchanted Moonlit Blossoms is greatly increased, and the CRIT DMG is increased by an additional 100%. When Qingyi hits an enemy with her Basic Attack: Enchanted Moonlit Blossoms, the target's Attribute DMG RES is reduced by 20% for 15s.",
+        "zh-CN": "[普通攻击：醉花月云转]的打断等级大幅提升，招式的暴击伤害额外提升100%；青衣[普通攻击：醉花月云转]命中敌人时，目标的全属性伤害抗性降低20%，持续15秒。"
+      }
+    ]
+  }
+}

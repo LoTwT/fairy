@@ -1,0 +1,85 @@
+{
+  "id": "31800",
+  "effects": {
+    "twoPiece": [
+      {
+        "id": "31800:2pc:anomaly-proficiency",
+        "label": "2 件套异常精通",
+        "bucket": "panel",
+        "key": "anomalyProficiency",
+        "value": {
+          "kind": "static",
+          "value": 30
+        },
+        "unit": "flat"
+      }
+    ],
+    "fourPiece": [
+      {
+        "id": "31800:4pc:fire-dmg",
+        "label": "4 件套火属性伤害",
+        "bucket": "modifier",
+        "key": "fireDamageBonus",
+        "value": {
+          "kind": "static",
+          "value": 0.15
+        },
+        "unit": "ratio",
+        "target": "self"
+      },
+      {
+        "id": "31800:4pc:electric-dmg",
+        "label": "4 件套电属性伤害",
+        "bucket": "modifier",
+        "key": "electricDamageBonus",
+        "value": {
+          "kind": "static",
+          "value": 0.15
+        },
+        "unit": "ratio",
+        "target": "self"
+      },
+      {
+        "id": "31800:4pc:ex-special-dmg",
+        "label": "4 件套强化特殊技伤害",
+        "bucket": "modifier",
+        "key": "enhancedSpecialDamageBonus",
+        "value": {
+          "kind": "static",
+          "value": 0.2
+        },
+        "unit": "ratio",
+        "target": "self",
+        "conditionText": "位于后场时生效；换入前场后效果保留5秒，保留效果7.5秒内最多触发一次。"
+      },
+      {
+        "id": "31800:4pc:assist-dmg",
+        "label": "4 件套支援攻击伤害",
+        "bucket": "modifier",
+        "key": "assistDamageBonus",
+        "value": {
+          "kind": "static",
+          "value": 0.2
+        },
+        "unit": "ratio",
+        "target": "self",
+        "conditionText": "位于后场时生效；换入前场后效果保留5秒，保留效果7.5秒内最多触发一次。"
+      }
+    ]
+  },
+  "trace": {
+    "sourceRefs": [
+      "data/source/xlsx/zh-CN/drive-disc-desc.json",
+      "data/source/gachabase/zh-CN/drive-discs.json",
+      "data/source/gachabase/en/drive-discs.json"
+    ],
+    "twoPieceEffectTexts": {
+      "en": "Anomaly Proficiency +30",
+      "zh-CN": "异常精通+30点。"
+    },
+    "fourPieceEffectTexts": {
+      "en": "Fire DMG and Electric DMG increases by 15%. While off-field, EX Special Attack and Assist Attack DMG increases by 20%. When switching on-field, this buff continues for 5s, and this continuation effect can trigger once every 7.5s.",
+      "zh-CN": "火属性伤害和电属性伤害提升15%；位于后场时，[强化特殊技]和[支援攻击]造成的伤害提升20%，换入前场后，该增益效果仍然保留，持续5秒，保留效果7.5秒内最多触发一次。"
+    }
+  }
+}
