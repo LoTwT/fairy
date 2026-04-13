@@ -1,0 +1,16 @@
+{
+  "name": "@randomplay/fairy-cli",
+  "type": "module",
+  "version": "0.0.0",
+  "private": true,
+  "bin": {
+    "fairy": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsdown",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@randomplay/fairy-core": "workspace:*"
+  }
+}

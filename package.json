@@ -1,0 +1,38 @@
+{
+  "name": "fairy",
+  "type": "module",
+  "version": "0.0.0",
+  "private": true,
+  "packageManager": "pnpm@10.33.0",
+  "engines": {
+    "node": "24.x"
+  },
+  "scripts": {
+    "build": "pnpm -r run build",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "typecheck": "pnpm -r run typecheck",
+    "verify:artifacts": "node ./tests/verify-artifacts.mjs",
+    "check": "pnpm lint && pnpm typecheck && pnpm build && pnpm verify:artifacts && pnpm test",
+    "prepare": "simple-git-hooks"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "8.2.0",
+    "@types/node": "24.12.2",
+    "eslint": "10.2.0",
+    "jiti": "2.6.1",
+    "lint-staged": "16.4.0",
+    "simple-git-hooks": "2.13.1",
+    "tsdown": "0.21.8",
+    "typescript": "6.0.2",
+    "vitest": "4.1.4"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm exec lint-staged"
+  },
+  "lint-staged": {
+    "*.{ts,js,json,md}": "eslint --fix"
+  }
+}
