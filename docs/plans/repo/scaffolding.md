@@ -152,7 +152,7 @@ All three packages also define:
 - No workspace dependencies in the scaffolding phase
 - Exports: same pattern as data
 - Build: `tsdown` (config in `tsdown.config.ts`)
-- Do not add `@randomplay/fairy-data` here until `docs/plans/data-core-integration.md` defines and approves that dependency
+- Do not add `@randomplay/fairy-data` here until `docs/plans/data/core-mapping.md` defines and approves that dependency
 
 ### `@randomplay/fairy-cli` (`packages/cli`)
 
