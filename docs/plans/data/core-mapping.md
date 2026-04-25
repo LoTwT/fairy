@@ -1,4 +1,4 @@
-# Data-Core Integration Plan
+# Data-to-Core Mapping Plan
 
 ## Status
 
@@ -14,6 +14,7 @@ Define how normalized data from `@randomplay/fairy-data` maps into the input mod
 - Dependency direction
 - Contract ownership
 - Compatibility strategy
+- Scenario input touchpoints
 
 ## Deliverables
 
@@ -21,7 +22,10 @@ Define how normalized data from `@randomplay/fairy-data` maps into the input mod
 - Integration examples
 - Dependency decision
 - Compatibility notes
+- Validation and error-reporting expectations
 
 ## Notes
 
-Fill in this document before wiring `data` and `core` together.
+Fill in this document after [Data Contract](contract.md) defines normalized records and [Scenario Contract](../scenario/contract.md) defines runtime calculation inputs.
+
+This plan defines the contract only. Implementation belongs in [Data-to-Core Mapping Implementation](core-mapping-implementation.md), and user-supplied runtime inputs are described separately in [Scenario Contract](../scenario/contract.md).

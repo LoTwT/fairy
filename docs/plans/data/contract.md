@@ -24,4 +24,6 @@ Define the normalized data schema, type boundaries, and versioning rules for `@r
 
 ## Notes
 
-Fill in this document before data artifacts or data types are finalized.
+Fill in this document after [Data Ingestion](ingestion.md) identifies the source, provenance, and correction requirements that the normalized contract must preserve.
+
+The contract should also account for the raw artifact requirements described by [Data Ingestion](ingestion.md), the scenario shape described by [Scenario Contract](../scenario/contract.md), and the input needs of [Core Domain Model](../core/domain-model.md).
