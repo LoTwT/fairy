@@ -22,7 +22,7 @@ The first implementation should split `packages/core/src` into explicit domain s
 - `types.ts`
   - snapshots, events, traces, result types, modifier types, and anomaly buildup contribution-history records required for virtual-agent weighting
 - `constants.ts`
-  - level table, clamp ranges, status defaults, threshold tables, tag vocabulary, rounding constants
+  - level table, clamp ranges, status defaults, threshold tables, tag vocabulary, attribute alias helpers, rounding constants
 - `math.ts`
   - `clamp`, `ceilDisplay`, `floorInt`, `trunc4`, and other deterministic numeric helpers
 - `modifiers.ts`
@@ -131,6 +131,7 @@ Acceptance for Stage 4:
 - tests validate virtual-agent level is floored after weighted averaging
 - tests validate live enemy-side multiplier resolution at anomaly-damage time
 - tests validate disorder tag isolation
+- tests validate attribute aliases are included in modifier tag matching
 
 ### Stage 5 — Implement resources, shield, and interruption
 

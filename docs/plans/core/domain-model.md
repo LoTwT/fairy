@@ -99,6 +99,11 @@ Modifier conditions share a fixed tag vocabulary so that tag-filtered rules beha
 
 A tag-filtered modifier applies when its tag set intersects the target event's tag set. Effects tagged only with a source anomaly (for example `burn`) do not apply to `disorder` damage unless the modifier is also tagged `disorder`.
 
+Attribute aliases participate in modifier tag matching. An event keeps its original attribute tag and also adds its alias channel when the alias differs from the original attribute:
+
+- `frost` events match both `frost` and `ice` modifiers
+- `auricInk` events match both `auricInk` and `ether` modifiers
+
 ## Rule Layers
 
 ### 1. Stat resolution
@@ -285,6 +290,8 @@ The implementation phase should expose pure functions in roughly these groups:
   - `calculateInterruptOutcome`
 - aggregate entry
   - `evaluateFrameEvent`
+- tag helpers
+  - `getAttributeModifierTags`
 
 Function names may be refined during implementation, but the exported surface must preserve:
 
@@ -401,7 +408,7 @@ Implementation must cover at least these scenarios:
 - disorder tag isolation: a modifier tagged only `burn` does not apply to disorder damage; a modifier tagged `disorder` does
 - disorder daze calculation
 - freeze duration and daze recovery duration formulas
-- stun duration percent → speed delta transformer: a `-40%` duration input becomes a `+60%` speed adjustment (non-linear)
+- stun duration percent → speed delta transformer: a `-40%` duration input becomes about a `+66.67%` speed adjustment (non-linear)
 - fixed daze recovery delay composes additively and is independent of recovery speed
 - energy, flash, noise, shield reduction, and corruption calculations
 - bucket clamp behavior
