@@ -1,7 +1,7 @@
 # Pending Term Resolution Table
 
-Status: S2 draft  
-Owner: @TechLead  
+Status: S2 draft
+Owner: @TechLead
 Purpose: collect terms that affect executable schema, data matching, trace fields, or V1 display.
 
 ## Locked By @lo-user Screenshots
@@ -23,6 +23,9 @@ Purpose: collect terms that affect executable schema, data matching, trace field
 | 闪能上限 | Max Adrenaline | `maxAdrenaline` | locked by D-11 | new V1 field |
 | 能量获得效率 | Energy Generation Rate | `energyGenerationRate` | locked by D-11 | replaces `energyGainEfficiency` |
 | 能量上限 | Energy Limit | `maxEnergy` | locked by D-11 | new V1 field |
+| 音擎 | W-Engine | `wEngine` | locked by TL-3 schema | `weaponEngine` is alias only |
+| 驱动盘 | Drive Disc | `driveDiscs` | locked by TL-3 schema | array field; `DriveDisc` remains type name |
+| 影画 | Mindscape Cinema | `mindscapeCinema` | locked by TL-3 schema | `mindscape` is alias only |
 
 ## Required For V1 Display / i18n
 
@@ -31,7 +34,7 @@ Purpose: collect terms that affect executable schema, data matching, trace field
 | Basic stats | attack, maxHp, defense, impact, critRate, critDamage, penetrationRate, flatPenetration, anomalyMastery, anomalyProficiency, sheerForce |
 | Attack tags | basic, dash, dodgeCounter, special, exSpecial, ultimate, chain, assistAssault, parrySupportTag, quickAssist, evadeAssist, heavyHit, followUp |
 | Game modes | lostVoid, defenseGameMode |
-| Equipment and sources | wEngine or weaponEngine, driveDisc, driveDiscSet2, driveDiscSet4, mindscapeCinema, resonium |
+| Equipment and sources | wEngine, driveDiscs, driveDiscSet2, driveDiscSet4, mindscapeCinema, resonium |
 
 ## Still Pending
 
@@ -40,8 +43,6 @@ Purpose: collect terms that affect executable schema, data matching, trace field
 | 式舆防卫战 | `defenseGameMode` | official English not yet verified | S2 data-source discovery or @lo-user screenshot |
 | 鸣徽分类 | `critical`, `duel`, etc. | complete zh/en enum list not collected | S2 source crawl or later screenshots |
 | 零号空洞子模块 | not in V1 | not needed for damage calculator display | keep out unless data source needs stable enum |
-| 音擎 field name | `wEngine` / `weaponEngine` | official term is W-Engine; field readability undecided | decide during S2 schema review |
-| 驱动盘 field name | `driveDisc` / `drive` | official term is Drive Disc; field readability undecided | decide during S2 schema review |
 | 支援突击 | `assistAssault` | official English pending | keep ID from glossary v0.3.2 until verified |
 | 招架支援（标签） | `parrySupportTag` | official English pending | keep tag/event split |
 | 回避支援 | `evadeAssist` | official English pending | keep ID from glossary v0.3.2 until verified |
@@ -73,3 +74,7 @@ Aliases are accepted for data ingestion, migration, and prompt matching, but new
 | `penRate` | `penetrationRate` |
 | `penFlat` | `flatPenetration` |
 | `hpMax` | `maxHp` |
+| `weaponEngine` | `wEngine` |
+| `driveDisc` | `driveDiscs` |
+| `drive` | `driveDiscs` |
+| `mindscape` | `mindscapeCinema` |
