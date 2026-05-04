@@ -1,0 +1,27 @@
+# Fairy · Agent Entry
+
+Fairy is a ZZZ static snapshot damage calculator for 1-3 agents.
+
+## Read First
+
+1. Project map: [docs/index.md](docs/index.md)
+2. Product scope: [docs/product/v2.0.md](docs/product/v2.0.md)
+3. Terminology: [docs/glossary/glossary.md](docs/glossary/glossary.md)
+4. Data contracts: [docs/data-contract/](docs/data-contract/)
+
+## Current Rules
+
+- Use glossary terms for public schema, API, trace, and docs names.
+- D-11 is official-first naming: prefer ZZZ official English semantic camelCase.
+- Keep JSON schema keys and enum values language-independent English.
+- Default human-facing language is `zh`; `en` is optional where V1 needs it.
+- Do not add runtime script injection for handlers.
+- Formal `@fairy/data` data must come from Excel/crawler pipelines, not hand-written values.
+- Test fixtures may be hand-written and reviewed; they do not ship as formal data.
+
+## Current Phase
+
+S2 data-contract design. First outputs:
+
+- `docs/architecture/naming-policy.md`
+- `docs/data-contract/pending-term-resolution-table.md`
