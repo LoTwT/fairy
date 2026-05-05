@@ -25,6 +25,10 @@
 | **D-10** | 数据维护责任 | ✅ 锁定（v2.0 修订） | V1 阶段：lo-user 提供 Excel 主源 + 爬虫每版本手动 release；data 包必须做完整角色/音擎/驱动盘/影画/鸣徽/潜能激化数据 | 中 |
 | **D-11** | 命名体系（v2.0 新增） | ✅ 锁定 | 选项 A 全套官方化：公开 schema / core API / data 字段优先使用 ZZZ 官方英文的语义化 camelCase；旧 `breach*` 进 sourceAliases / migration | 中 |
 | **D-12** | buhflipexplode 算法处理 | ✅ 锁定 | 选项 B：Fairy 保持 MIT；buhflipexplode GPL JS 仅 raw 留档/参考，不复制进 runtime；Fairy 独立实现等价算法；每次抓取用 hash + 算法快照文档 + parity 对账监控 drift | 高 |
+| **D-13** | V1 范围收窄到危局强袭战 | ✅ 锁定（2026-05-05 cleaned schema 讨论会） | V1 = DA 计算器；buhflipexplode = DA overlay 主源；Excel `敌人属性`保留 raw archive 作为 V1.x+ 扩展源；通用敌人 / 部位破坏 / 失衡恢复时间在 V1.x；V1 黄金集收窄到 20 锚点（去掉 18 部位破坏 / 19 凶心疯汉 / 20 装甲哈提，V1.x 数据扩展时一次性补） | 中 |
+| **D-14** | cleaned data typed modifier 双层结构 | ✅ 锁定（2026-05-05） | Layer 1 原文层 `sourceText` / `localizedText` + Layer 2 计算层 `modifiers[]` / `calculationEffects[]` + 风险层 `unparsedEffects[]`；bucket 受控 enum 严格匹配 glossary v0.4 D-11；效果 4 级（L1 静态 / L2 静态条件 / L3 动态参数 / L4 时序需 `requiresActivation`）；确定性 pipeline + sourceTextHash + parserVersion + effectTemplateId + 人工 audit gate；AI 候选不能直接入 cleaned | 中 |
+| **D-15** | V1 package exports 4 入口 | ✅ 锁定（2026-05-05） | V1 全做：`@fairy/data/cleaned`（总入口）/ `@fairy/data/cleaned/<domain>` / `@fairy/data/types` / `@fairy/data/cleaned/i18n/<domain>`；data 包 game labels 源码 `packages/data/src/i18n/` → 发布 `packages/data/cleaned/i18n/`；UX ERR-* `docs/ux/i18n/` 完全独立 | 中 |
+| **D-16** | Source priority + multi-source + unknown policy | ✅ 锁定（2026-05-05） | Excel base / buhflipexplode DA overlay / 米游社 i18n；冲突 fail loud + manual review；entity-level `sources[]` + 关键数值字段级 `sourceRefs`；unknown 分级 blocking（影响计算）/ non-blocking（纯展示）；新增 ERR-DAT-005（multi-source conflict / 未解析 modifier blocking）+ ERR-DAT-006 或 ERR-UI-004（locale mapping unresolved / 展示缺失 non-blocking） | 中 |
 | **D-1=D**（S2 节奏） | V1 推进顺序 | ✅ 锁定 | S2 双门槛：schema discovery + 并行 scraper 准备；S6 全量化最后；不允许 data 全量化阻塞 core 启动 | 中 |
 
 ---
@@ -122,6 +126,94 @@
 **重要 errata**：v0.1 ~ v0.3 阶段曾用 `anomalyMastery = 异常精通` / `anomalyProficiency = 异常掌控`（候选 X），与 ZZZ 官方反向；2026-05-05 lo-user 截图验证后锁定为候选 Y。
 
 **来源**：v2.0 §6 D-11，三角色独立得到一致方向，lo-user 2026-05-05 拍板。
+
+### D-13 V1 范围收窄到危局强袭战
+
+**锁定状态**：@lo-user 2026-05-05 cleaned schema 讨论会上将 V1 范围明确收窄到危局强袭战（DA）计算器。
+
+**范围**：
+- V1 优先 `@fairy/data/cleaned/deadly-assault`：buhflipexplode = DA boss / multiplier / buff overlay 主源
+- `cleaned/enemies` 全局 enemy base 不作为 V1 必交付
+- Excel `敌人属性`（412 unique）保留 raw archive，V1.x+ 扩展源
+- DA boss 能映射 Excel 时补 `baseEnemyRef`；映射不到（如 Sanguine Sweeper）→ `externalBossId + sourceRefs + unresolvedMapping`
+- V1 黄金集 23 锚点收窄到 **20 锚点**：推迟 18 部位破坏 / 19 凶心疯汉失衡恢复 / 20 装甲哈提失衡恢复 到 V1.x
+
+**理由**：
+- 与 lo-user "V1 主要支持危局强袭战 + Excel 后备" 框定一致
+- V1 推进速度优先；4 方一致推荐 A（黄金集收窄）
+- UX 资产损耗极小（仅 starter-scenarios S2 enemy swap）
+
+**来源**：会议纪要 [`docs/product/meetings/2026-05-05-cleaned-schema-design.md`](../meetings/2026-05-05-cleaned-schema-design.md) §2.3 / §2.7
+
+### D-14 cleaned data typed modifier 双层结构
+
+**锁定状态**：@lo-user 2026-05-05 提出新设想，4 方一致接受。
+
+**双层结构**：
+- **Layer 1 原文层** `sourceText` / `localizedText`：核心技 / 音擎 / 驱动盘 / Buff 描述原文 + i18n + 人工复核
+- **Layer 2 计算层** `modifiers[]` / `calculationEffects[]`：完整 typed modifier（id / handlerId / params / appliesTo / when / bucket / source / priority / stackingGroup / operation），与 PR #5 / #10 一致
+- **风险层** `unparsedEffects[]`：不能可靠归类的效果，blocking / non-blocking 分级
+
+**bucket 受控 enum**：严格匹配 glossary v0.4 D-11 锁定 enum（`damageBonusZone` / `sheerDamageBonusZone` / `dazeVulnerabilityZone` / 6 个属性 *DamageBonus 等）；不允许自由字符串
+
+**效果 4 级**：
+- L1 静态属性增益 → 直接 typed modifier
+- L2 静态条件触发 → typed modifier + Condition DSL when
+- L3 动态参数 → handler ID + params
+- L4 时序触发（"3 秒内"等）→ V1 必须 `requiresActivation: true` + snapshot 显式 active；data 不假设持续时间
+
+**确定性 pipeline**：
+- 固定表格字段自动转换
+- 已知文本模式 parser/template registry
+- 每条转换记录 `sourceTextHash + parserVersion + effectTemplateId + sourceRefs`，文本/parser 变化 fail loud
+- AI 候选不能直接入 cleaned，必须 schema validation + golden/parity test + 人工接受记录
+
+**人工不可消除但可控**：每次新数据 release 才需要 audit unresolved；不修就不发布
+
+**来源**：会议纪要 §2.6
+
+### D-15 V1 package exports 4 入口
+
+**锁定状态**：@lo-user 2026-05-05 拍板"V1 就可以"。
+
+**4 入口 V1 全做**：
+- `@fairy/data/cleaned`（总入口，AI plugin 一次性 import 整个 GameData）
+- `@fairy/data/cleaned/<domain>`（按 entity / domain 细分，如 `deadly-assault`）
+- `@fairy/data/types`（TS 类型独立入口）
+- `@fairy/data/cleaned/i18n/<domain>`（i18n 资源按需加载）
+
+**i18n 路径分离**：
+- data 包 game labels 源码 `packages/data/src/i18n/<domain>.{zh,en}.json` → 发布 `packages/data/cleaned/i18n/`
+- UX ERR-* runtime catalog `docs/ux/i18n/messages.{zh,en}.json` 完全独立
+
+**来源**：会议纪要 §2.5 / §2.8
+
+### D-16 Source priority + multi-source metadata + unknown policy
+
+**锁定状态**：4 方共识 2026-05-05。
+
+**Source priority**：
+- Excel = base entity 主源
+- buhflipexplode = DA event/enemy overlay
+- 米游社 = 中文 i18n / 描述源
+- 冲突时 fail loud + manual review，**不自动覆盖**
+
+**Multi-source metadata**：
+- entity-level `sources[]`
+- 关键数值字段级 `sourceRefs`（DA boss slot multiplier、buff 数值、effective HP / daze / anomaly 派生字段等必须有）
+- 发布前测试断言 required fields 没 sourceRef 失败
+- trace 中可解释每个关键字段来自 Excel / buhflipexplode / 米游社
+
+**Unknown policy**：
+- **blocking**（影响计算 / 匹配 / source 追溯）：阻断 cleaned 发布；进 unresolved 队列
+- **non-blocking**（纯描述缺失等）：随 warning 发布，但 manifest 中可查
+- 不补假数据；不静默降级
+
+**新增 ERR keys**（UX 跟随 schema PR 加 catalog）：
+- `ERR-DAT-005` blocking：multi-source conflict / 未解析 modifier 影响计算
+- `ERR-DAT-006` 或 `ERR-UI-004` non-blocking：locale mapping unresolved / 展示缺失
+
+**来源**：会议纪要 §2.9 / §2.10 / §2.11
 
 ### D-12 buhflipexplode 算法处理
 
