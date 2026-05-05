@@ -12,11 +12,12 @@ Fairy 是绝区零 1-3 代理人静态快照伤害计算器。V1 目标是 `@fai
 - QA 策略：[qa/](qa/)
 - UX 文案与场景：[ux/](ux/)
 
-## S2 当前重点
+## S3 当前重点
 
-1. 先锁命名策略与 pending 术语。
-2. 再定义 `BattleSnapshot`、`GameData`、`CalcResult`、handler、trace。
-3. 最后进入 core/cli 实现与 data 全量化。
+1. 落地 `@fairy/core` runtime schema、validators 与黄金 fixture 接入。
+2. 实现核心公式与逐乘区 trace，包括常规 / 贯穿 / 真实伤害 / 异常 / 紊乱 / 失衡值。
+3. 实现 handler registry、Condition DSL 与 source/provenance/版本双路径硬契约。
+4. 并行推进 `@fairy/data` scraper 骨架与 monorepo 开发指南。
 
 ## 关键文档
 
