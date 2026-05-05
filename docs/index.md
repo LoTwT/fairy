@@ -27,5 +27,7 @@ Fairy 是绝区零 1-3 代理人静态快照伤害计算器。V1 目标是 `@fai
 - Cleaned schema spec：[data-contract/cleaned-schema-spec.md](data-contract/cleaned-schema-spec.md)
 - Source metadata contract：[data-source/source-metadata-contract.md](data-source/source-metadata-contract.md)
 - Robots / ToS check：[data-source/robots-tos-check.md](data-source/robots-tos-check.md)
+- Excel workbook source audit：[data-source/excel/](data-source/excel/)
 - 米游社危局强袭战 source snapshot：[data-source/mihoyo/](data-source/mihoyo/)
 - buhflipexplode 危局强袭战 source snapshot：[data-source/buhflipexplode/](data-source/buhflipexplode/)
+- V1 golden source coverage：[qa/golden-source-coverage.md](qa/golden-source-coverage.md)

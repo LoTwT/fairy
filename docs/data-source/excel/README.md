@@ -1,0 +1,65 @@
+# Excel Workbook Source
+
+Status: S5-2b source-shape audit baseline
+Owner: @TechLead
+Related task: task #40
+
+`data/source/excel/data.xlsx` is the lo-user-provided workbook source for
+base-game data. The workbook is retained in git as raw/source archive and is not
+published in the `@fairy/data` package.
+
+## Current Audit
+
+- Workbook: `data/source/excel/data.xlsx`
+- Workbook version marker: `2.6.0_R14028417`
+- Workbook hash:
+  `9f42ecf734f45908c18bedf7ae937479f9f1563e4b3314a50d76cb99233a260b`
+- Sheet count: 31
+- Audit artifact: `data/source/excel/workbook-audit.json`
+
+The audit records sheet visibility, ranges, range row/column counts, non-empty
+row counts, first header row, and V1 scope classification. It does not publish
+cleaned game data and does not infer typed modifiers from text.
+
+## V1 Candidate Sheets
+
+V1 main scope is Deadly Assault. Excel remains the base-game source and fallback,
+but V1 does not require full `cleaned/enemies`.
+
+Candidate sheets for the narrowed V1 reader:
+
+| Group | Sheets |
+|---|---|
+| agents | `代理人属性`, `代理人技能数据`, `代理人技能描述`, `代理人核心技描述`, `代理人强化`, `代理人觉醒`, `代理人影画描述`, `代理人晋升属性` |
+| W-Engines | `音擎属性`, `音擎描述`, hidden `音擎升级表` |
+| Drive Discs | `驱动盘描述`, hidden `驱动盘升级表` |
+
+Deferred in V1 unless a golden anchor requires a minimal subset:
+
+| Group | Sheets |
+|---|---|
+| enemies | `敌人属性` |
+| Bangboo | `邦布属性`, `邦布技能` |
+
+Historical/archive-only:
+
+- `敌人属性（1.3版本）`
+
+## Parser Policy
+
+The workbook audit uses `xlsx` as a repository devDependency. It is only used for
+source verification and generation scripts. It must not become a runtime
+dependency of the published `@fairy/data` package.
+
+Useful commands:
+
+- `pnpm --filter @fairy/data audit:excel`
+- `pnpm --filter @fairy/data verify:excel`
+
+The verify gate checks:
+
+- workbook SHA-256 matches `data/source/source-manifest.json`;
+- workbook version marker remains `2.6.0_R14028417`;
+- workbook has 31 sheets;
+- all V1 candidate sheets are present;
+- `workbook-audit.json` is not stale against the current workbook and parser.
