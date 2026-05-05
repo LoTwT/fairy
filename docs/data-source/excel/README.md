@@ -24,11 +24,14 @@ cleaned game data and does not infer typed modifiers from text.
 The V1 replay baseline uses a narrower generated artifact:
 
 - `data/cleaned/audit/v1-agent-source-candidates.json`
+- `data/cleaned/audit/nicole.acceptance.json`
+- `data/cleaned/audit/yanagi.acceptance.json`
 
 That artifact extracts only Yixuan / Nicole / Yanagi identity rows and
 calculation-relevant source text candidates needed by the DD-002 19-anchor
-golden scope. It does not read Excel enemy rows and does not publish trusted
-typed modifiers without manual acceptance.
+golden scope. The acceptance artifacts record lo-user-approved G22/G23 mappings.
+The reader does not read Excel enemy rows and does not publish trusted typed
+modifiers without deterministic template support or manual acceptance.
 
 ## V1 Candidate Sheets
 

@@ -153,7 +153,12 @@ function calculateSegment(
   errors.push(...modifierEvaluation.errors)
   const formulaActor = getFormulaActor(snapshot, activeActor, segment, index)
 
-  const baseDamage = getBaseDamage(formulaActor.actor, segment, formulaActor.disorderMultiplier)
+  const baseDamage = getBaseDamage(
+    formulaActor.actor,
+    segment,
+    formulaActor.disorderMultiplier,
+    formulaActor.polarityBaseDamageExtra,
+  )
   const damageBonusValue = getDamageBonus(formulaActor.actor, segment)
     + sumBucketContributors(modifierEvaluation.contributorsByBucket.get("damageBonusZone"))
   const damageBonusMultiplier = clamp(1 + damageBonusValue, 0, 6)
@@ -572,6 +577,7 @@ interface FormulaActorContext {
   trace: TraceEvent[]
   disorderMultiplier?: number
   disorderDazeMultiplier?: number
+  polarityBaseDamageExtra?: number
 }
 
 function getFormulaActor(
@@ -623,7 +629,11 @@ function getFormulaActor(
   ]
 
   if (segment.damageType === "disorder") {
-    const disorder = getDisorderFormula(segment)
+    const disorder = getDisorderFormula(
+      segment,
+      segment.anomalyContribution?.polarityDisorder?.originalDisorderDamageRatio,
+    )
+    const polarityExtra = getPolarityDisorderExtra(snapshot, segment)
     trace.push(makeTraceEvent({
       kind: "formula",
       path: `attackSegments[${index}].disorderFormulaId`,
@@ -639,6 +649,23 @@ function getFormulaActor(
       displayValue: disorder.formulaId,
       sourceAnchor: "guide-3.4.1",
     }))
+    if (polarityExtra !== undefined) {
+      trace.push(makeTraceEvent({
+        kind: "formula",
+        path: `attackSegments[${index}].polarityDisorderBaseDamageExtra`,
+        inputs: {
+          providerActorId: polarityExtra.providerActorId,
+          skillLevelKey: polarityExtra.skillLevelKey,
+          skillLevel: polarityExtra.skillLevel,
+          anomalyProficiency: polarityExtra.anomalyProficiency,
+          anomalyProficiencyMultiplier: polarityExtra.anomalyProficiencyMultiplier,
+        },
+        formula: "polarityDisorderBaseDamageExtra = provider.anomalyProficiency * (basePercent + skillLevel * perSkillLevelPercent) / 100",
+        rawValue: polarityExtra.value,
+        displayValue: "polarityDisorderBaseDamageExtra",
+        ...(polarityExtra.source === undefined ? {} : { source: polarityExtra.source }),
+      }))
+    }
     trace.push(makeTraceEvent({
       kind: "formula",
       path: `attackSegments[${index}].disorderDazeLevelZone`,
@@ -657,6 +684,7 @@ function getFormulaActor(
       trace,
       disorderMultiplier: disorder.multiplier,
       disorderDazeMultiplier: getDisorderDazeLevelMultiplier(formulaActor.actor.level),
+      ...(polarityExtra === undefined ? {} : { polarityBaseDamageExtra: polarityExtra.value }),
     }
   }
 
@@ -827,7 +855,12 @@ function calculateManualEvent(
   }
 }
 
-function getBaseDamage(activeActor: AgentSnapshot, segment: AttackSegment, disorderMultiplier?: number): number {
+function getBaseDamage(
+  activeActor: AgentSnapshot,
+  segment: AttackSegment,
+  disorderMultiplier?: number,
+  polarityBaseDamageExtra = 0,
+): number {
   const multiplier = segment.multiplier ?? 1
   if (segment.damageType === "sheer")
     return (activeActor.panel.sheerForce ?? 0) * multiplier
@@ -836,7 +869,7 @@ function getBaseDamage(activeActor: AgentSnapshot, segment: AttackSegment, disor
     return 0
 
   if (segment.damageType === "disorder")
-    return activeActor.panel.attack * (disorderMultiplier ?? multiplier)
+    return activeActor.panel.attack * (disorderMultiplier ?? multiplier) + polarityBaseDamageExtra
 
   return activeActor.panel.attack * multiplier
 }
@@ -1058,7 +1091,7 @@ function isPhysicalAnomaly(segment: AttackSegment): boolean {
     || segment.anomalyContribution?.status === "flinch"
 }
 
-function getDisorderFormula(segment: AttackSegment): {
+function getDisorderFormula(segment: AttackSegment, originalDisorderDamageRatio = 0.15): {
   formulaId: string
   formula: string
   multiplier: number
@@ -1072,8 +1105,8 @@ function getDisorderFormula(segment: AttackSegment): {
       return {
         formulaId,
         remainingDurationSeconds,
-        formula: "polarity disorder multiplier = electric disorder multiplier * 0.15 unless segment.multiplier overrides it",
-        multiplier: segment.multiplier ?? (4.5 + Math.floor(remainingDurationSeconds) * 1.25) * 0.15,
+        formula: "polarity disorder multiplier = electric disorder multiplier * originalDisorderDamageRatio unless segment.multiplier overrides it",
+        multiplier: segment.multiplier ?? (4.5 + Math.floor(remainingDurationSeconds) * 1.25) * originalDisorderDamageRatio,
       }
     case "disorder-burn":
       return {
@@ -1111,6 +1144,48 @@ function getDisorderFormula(segment: AttackSegment): {
         formula: "physical/ice disorder multiplier = 4.5 + floor(T) * 0.075",
         multiplier: 4.5 + Math.floor(remainingDurationSeconds) * 0.075,
       }
+  }
+}
+
+function getPolarityDisorderExtra(snapshot: BattleSnapshot, segment: AttackSegment): {
+  providerActorId: string
+  skillLevelKey: string
+  skillLevel: number
+  anomalyProficiency: number
+  anomalyProficiencyMultiplier: number
+  value: number
+  source?: SourceRef
+} | undefined {
+  const polarity = segment.anomalyContribution?.polarityDisorder
+  if (segment.anomalyContribution?.status !== "polarityDisorder" || polarity === undefined)
+    return undefined
+
+  const provider = snapshot.team.find(candidate => candidate.agentId === polarity.providerActorId)
+  if (provider === undefined)
+    throw new Error("polarityDisorder.providerActorId must reference a team agent")
+
+  const skillLevel = provider.skillLevels?.[polarity.skillLevelKey]
+  if (skillLevel === undefined)
+    throw new Error("polarityDisorder.skillLevelKey must reference an explicit provider skill level")
+  if (skillLevel < 1 || skillLevel > 16)
+    throw new Error("polarityDisorder provider skill level must be between 1 and 16")
+
+  const anomalyProficiency = provider.panel.anomalyProficiency
+  if (anomalyProficiency === undefined)
+    throw new Error("polarityDisorder provider panel.anomalyProficiency is required")
+  const anomalyProficiencyMultiplier = (
+    polarity.anomalyProficiencyBasePercent
+    + skillLevel * polarity.anomalyProficiencyPerSkillLevelPercent
+  ) / 100
+
+  return {
+    providerActorId: polarity.providerActorId,
+    skillLevelKey: polarity.skillLevelKey,
+    skillLevel,
+    anomalyProficiency,
+    anomalyProficiencyMultiplier,
+    value: anomalyProficiency * anomalyProficiencyMultiplier,
+    ...(polarity.source === undefined ? {} : { source: polarity.source }),
   }
 }
 

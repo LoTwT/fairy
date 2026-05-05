@@ -1,0 +1,45 @@
+{
+  "schemaVersion": "fairy-manual-acceptance-v1",
+  "parserVersion": "golden-v1-replay-v0.1.0",
+  "generatedAt": "2026-05-05T18:20:00+08:00",
+  "agentId": "nicole",
+  "records": [
+    {
+      "agentId": "nicole",
+      "effectId": "nicole-defense-reduction",
+      "sourceId": "lo-user-excel",
+      "sourceRefs": [
+        {
+          "sourceId": "lo-user-excel",
+          "sourceVersion": "2.6.0_R14028417",
+          "sourceAnchor": "代理人核心技描述!D4:J4"
+        }
+      ],
+      "sourceTextHash": "07f9d239f43d3deafd4a001cdae349a6f10325cb3bbae090181a00f48e293549",
+      "parserVersion": "golden-v1-replay-v0.1.0",
+      "acceptedBy": "@lo-user",
+      "acceptedAt": "2026-05-05T18:45:21+08:00",
+      "decisionRef": {
+        "target": "#fairy:e2e57d52",
+        "messageId": "6af6f017"
+      },
+      "reason": "lo-user confirmed A/B as explicit active/inactive states and C as a skill-level-parameterized formula based on source formula, guide, and context.",
+      "acceptedMapping": {
+        "effectTemplateId": "excel-core-passive-defense-reduction-v1",
+        "handlerId": "defense-reduction",
+        "bucket": "defenseZone",
+        "appliesTo": {
+          "kind": "enemy"
+        },
+        "params": {
+          "value": 0.4,
+          "corePassiveLevel": 7,
+          "durationSeconds": 3.5
+        },
+        "requiresActivation": true,
+        "activationModel": "snapshotActiveFlag",
+        "inactiveStateMustHaveNoEffect": true
+      }
+    }
+  ]
+}

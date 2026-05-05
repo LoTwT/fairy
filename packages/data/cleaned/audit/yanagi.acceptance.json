@@ -1,0 +1,102 @@
+{
+  "schemaVersion": "fairy-manual-acceptance-v1",
+  "parserVersion": "golden-v1-replay-v0.1.0",
+  "generatedAt": "2026-05-05T18:20:00+08:00",
+  "agentId": "yanagi",
+  "records": [
+    {
+      "agentId": "yanagi",
+      "effectId": "yanagi-disorder-boost",
+      "sourceId": "lo-user-excel",
+      "sourceRefs": [
+        {
+          "sourceId": "lo-user-excel",
+          "sourceVersion": "2.6.0_R14028417",
+          "sourceAnchor": "代理人核心技描述!D23:J23"
+        }
+      ],
+      "sourceTextHash": "1d5b17072f8389b59b4f0083ac99c84d2c0e9dd68467a32909c8a5e0938b1462",
+      "parserVersion": "golden-v1-replay-v0.1.0",
+      "acceptedBy": "@lo-user",
+      "acceptedAt": "2026-05-05T18:45:21+08:00",
+      "decisionRef": {
+        "target": "#fairy:e2e57d52",
+        "messageId": "6af6f017"
+      },
+      "reason": "lo-user confirmed A/B as explicit active/inactive states and C as a skill-level-parameterized formula based on source formula, guide, and context.",
+      "acceptedMapping": {
+        "effectTemplateId": "excel-core-passive-disorder-boost-v1",
+        "handlerId": "anomaly-damage-bonus",
+        "bucket": "anomalyDamageBonusZone",
+        "appliesTo": {
+          "kind": "segment"
+        },
+        "params": {
+          "value": 2.5,
+          "corePassiveLevel": 7,
+          "durationSeconds": 15
+        },
+        "requiresActivation": true,
+        "activationModel": "snapshotActiveFlag",
+        "inactiveStateMustHaveNoEffect": true
+      }
+    },
+    {
+      "agentId": "yanagi",
+      "effectId": "yanagi-polarity-disorder-ex-special",
+      "sourceId": "lo-user-excel",
+      "sourceRefs": [
+        {
+          "sourceId": "lo-user-excel",
+          "sourceVersion": "2.6.0_R14028417",
+          "sourceAnchor": "代理人技能描述!C298"
+        }
+      ],
+      "sourceTextHash": "4ac89b99d4fead4a8cb78d2dfdf84f32a93864cb11c4307e0474d5087bb25f5b",
+      "parserVersion": "golden-v1-replay-v0.1.0",
+      "acceptedBy": "@lo-user",
+      "acceptedAt": "2026-05-05T18:45:21+08:00",
+      "decisionRef": {
+        "target": "#fairy:e2e57d52",
+        "messageId": "6af6f017"
+      },
+      "reason": "lo-user confirmed A/B as explicit active/inactive states and C as a skill-level-parameterized formula based on source formula, guide, and context.",
+      "acceptedMapping": {
+        "effectTemplateId": "excel-yanagi-polarity-disorder-v1",
+        "templateKind": "attackSegment.anomalyContribution.polarityDisorder",
+        "handlerId": "polarity-disorder-template",
+        "appliesTo": {
+          "kind": "segment"
+        },
+        "params": {
+          "providerActorId": "yanagi",
+          "skillLevelKey": "special",
+          "originalDisorderDamageRatio": 0.15,
+          "anomalyProficiencyBasePercent": 5,
+          "anomalyProficiencyPerSkillLevelPercent": 2.25,
+          "clearsOriginalAnomaly": false
+        },
+        "supportedSkillLevels": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16
+        ],
+        "requiresActivation": true,
+        "activationModel": "snapshotAttackSegmentTemplate"
+      }
+    }
+  ]
+}

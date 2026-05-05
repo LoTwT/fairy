@@ -11,6 +11,8 @@ const repoRoot = join(packageDir, "../..")
 const workbookPath = join(repoRoot, "data/source/excel/data.xlsx")
 const sourceManifestPath = join(repoRoot, "data/source/source-manifest.json")
 const candidatePath = join(repoRoot, "data/cleaned/audit/v1-agent-source-candidates.json")
+const nicoleAcceptancePath = join(repoRoot, "data/cleaned/audit/nicole.acceptance.json")
+const yanagiAcceptancePath = join(repoRoot, "data/cleaned/audit/yanagi.acceptance.json")
 const replayReportPath = join(repoRoot, "data/cleaned/golden/v1-replay-report.json")
 const buhflipexplodeVersionsPath = join(
   repoRoot,
@@ -25,6 +27,16 @@ const sourceId = "lo-user-excel"
 const parserVersion = "golden-v1-replay-v0.1.0"
 const excelSourceVersion = "2.6.0_R14028417"
 const replaySourceVersion = "excel-2.6.0_R14028417+buhflipexplode-2026-05-05T0445Z"
+const manualAcceptance = {
+  acceptedBy: "@lo-user",
+  acceptedAt: "2026-05-05T18:45:21+08:00",
+  decisionRef: {
+    target: "#fairy:e2e57d52",
+    messageId: "6af6f017",
+  },
+  reason:
+    "lo-user confirmed A/B as explicit active/inactive states and C as a skill-level-parameterized formula based on source formula, guide, and context.",
+} as const
 
 const v1AnchorIds = [
   "G01",
@@ -510,6 +522,98 @@ function makeEffectCandidate(input: {
   }
 }
 
+function candidateById(candidates: ReturnType<typeof buildCandidates>, effectId: string) {
+  const candidate = candidates.effectCandidates.find(effect => effect.effectId === effectId)
+  if (candidate === undefined)
+    throw new Error(`Missing effect candidate ${effectId}`)
+  return candidate
+}
+
+function acceptedRecord(
+  candidates: ReturnType<typeof buildCandidates>,
+  effectId: string,
+  acceptedMapping: Record<string, unknown>,
+) {
+  const candidate = candidateById(candidates, effectId)
+  return {
+    agentId: candidate.agentId,
+    effectId,
+    sourceId,
+    sourceRefs: candidate.sourceRefs,
+    sourceTextHash: candidate.sourceTextHash,
+    parserVersion,
+    ...manualAcceptance,
+    acceptedMapping,
+  }
+}
+
+function buildAcceptanceArtifacts(generatedAt: string, candidates: ReturnType<typeof buildCandidates>) {
+  const nicoleDefenseReduction = acceptedRecord(candidates, "nicole-defense-reduction", {
+    effectTemplateId: "excel-core-passive-defense-reduction-v1",
+    handlerId: "defense-reduction",
+    bucket: "defenseZone",
+    appliesTo: { kind: "enemy" },
+    params: {
+      value: 0.4,
+      corePassiveLevel: 7,
+      durationSeconds: 3.5,
+    },
+    requiresActivation: true,
+    activationModel: "snapshotActiveFlag",
+    inactiveStateMustHaveNoEffect: true,
+  })
+
+  const yanagiDisorderBoost = acceptedRecord(candidates, "yanagi-disorder-boost", {
+    effectTemplateId: "excel-core-passive-disorder-boost-v1",
+    handlerId: "anomaly-damage-bonus",
+    bucket: "anomalyDamageBonusZone",
+    appliesTo: { kind: "segment" },
+    params: {
+      value: 2.5,
+      corePassiveLevel: 7,
+      durationSeconds: 15,
+    },
+    requiresActivation: true,
+    activationModel: "snapshotActiveFlag",
+    inactiveStateMustHaveNoEffect: true,
+  })
+
+  const yanagiPolarityDisorder = acceptedRecord(candidates, "yanagi-polarity-disorder-ex-special", {
+    effectTemplateId: "excel-yanagi-polarity-disorder-v1",
+    templateKind: "attackSegment.anomalyContribution.polarityDisorder",
+    handlerId: "polarity-disorder-template",
+    appliesTo: { kind: "segment" },
+    params: {
+      providerActorId: "yanagi",
+      skillLevelKey: "special",
+      originalDisorderDamageRatio: 0.15,
+      anomalyProficiencyBasePercent: 5,
+      anomalyProficiencyPerSkillLevelPercent: 2.25,
+      clearsOriginalAnomaly: false,
+    },
+    supportedSkillLevels: Array.from({ length: 16 }, (_, index) => index + 1),
+    requiresActivation: true,
+    activationModel: "snapshotAttackSegmentTemplate",
+  })
+
+  return {
+    nicole: {
+      schemaVersion: "fairy-manual-acceptance-v1",
+      parserVersion,
+      generatedAt,
+      agentId: "nicole",
+      records: [nicoleDefenseReduction],
+    },
+    yanagi: {
+      schemaVersion: "fairy-manual-acceptance-v1",
+      parserVersion,
+      generatedAt,
+      agentId: "yanagi",
+      records: [yanagiDisorderBoost, yanagiPolarityDisorder],
+    },
+  }
+}
+
 function buildCandidates(generatedAt: string) {
   const { workbook, workbookSha256, workbookVersion } = loadWorkbook()
   return {
@@ -716,7 +820,71 @@ function passedAnchor(id: string, sourceRefs: Array<Record<string, string>>, not
   return { id, status: "passed", sourceRefs, notes }
 }
 
+function acceptanceRecordFor(
+  artifacts: ReturnType<typeof buildAcceptanceArtifacts>,
+  agentId: "nicole" | "yanagi",
+  effectId: string,
+) {
+  const record = artifacts[agentId].records.find(item => item.effectId === effectId)
+  if (record === undefined)
+    throw new Error(`Missing ${agentId} acceptance record for ${effectId}`)
+  return record
+}
+
+function firstSourceRef(record: ReturnType<typeof acceptanceRecordFor>): Record<string, string> {
+  const source = record.sourceRefs[0]
+  if (source === undefined)
+    throw new Error(`Missing accepted source ref for ${record.effectId}`)
+  return source
+}
+
+function nicoleDefenseReductionModifier(
+  artifacts: ReturnType<typeof buildAcceptanceArtifacts>,
+  active: boolean,
+) {
+  const record = acceptanceRecordFor(artifacts, "nicole", "nicole-defense-reduction")
+  return {
+    id: "nicole-defense-reduction",
+    handlerId: "defense-reduction",
+    bucket: "defenseZone",
+    params: { value: 0.4 },
+    appliesTo: { kind: "enemy" },
+    active,
+    source: firstSourceRef(record),
+  }
+}
+
+function yanagiDisorderBoostModifier(
+  artifacts: ReturnType<typeof buildAcceptanceArtifacts>,
+  active: boolean,
+) {
+  const record = acceptanceRecordFor(artifacts, "yanagi", "yanagi-disorder-boost")
+  return {
+    id: "yanagi-disorder-boost",
+    handlerId: "anomaly-damage-bonus",
+    bucket: "anomalyDamageBonusZone",
+    params: { value: 2.5 },
+    appliesTo: { kind: "segment" },
+    when: { field: "segment.damageType", op: "eq", value: "disorder" },
+    active,
+    source: firstSourceRef(record),
+  }
+}
+
+function yanagiPolarityDisorderInput(artifacts: ReturnType<typeof buildAcceptanceArtifacts>) {
+  const record = acceptanceRecordFor(artifacts, "yanagi", "yanagi-polarity-disorder-ex-special")
+  return {
+    providerActorId: "yanagi",
+    skillLevelKey: "special",
+    originalDisorderDamageRatio: 0.15,
+    anomalyProficiencyBasePercent: 5,
+    anomalyProficiencyPerSkillLevelPercent: 2.25,
+    source: firstSourceRef(record),
+  }
+}
+
 function buildReplayReport(generatedAt: string, candidates = buildCandidates(generatedAt)) {
+  const acceptanceArtifacts = buildAcceptanceArtifacts(generatedAt, candidates)
   const enemy = loadBuhflipexplodeBoss()
   const snapshot = baseSnapshot(candidates, enemy)
   const anchors: AnchorReport[] = []
@@ -1165,36 +1333,154 @@ function buildReplayReport(generatedAt: string, candidates = buildCandidates(gen
     anchors.push(passedAnchor("G21", [sourceRef("代理人属性!A37:AF37")], ["One-agent Yixuan path has no teammate modifiers and keeps sheer defense skip."]))
   }
 
-  const effectCandidates = candidates.effectCandidates as Array<{
-    effectId: string
-    goldenAnchors: string[]
-    releaseGateRequired: boolean
-    unparsedEffect: Record<string, unknown>
-    sourceRefs: Array<Record<string, string>>
-  }>
-  for (const anchorId of ["G22", "G23"]) {
-    const diagnostics = effectCandidates
-      .filter(candidate =>
-        candidate.releaseGateRequired === true
-        && candidate.goldenAnchors.includes(anchorId),
-      )
-      .map(candidate => ({
-        key: "ERR-DAT-005",
-        severity: "blocking",
-        reason: candidate.unparsedEffect.reason,
-        effectId: candidate.effectId,
-        sourceTextHash: candidate.unparsedEffect.sourceTextHash,
-        sourceRefs: candidate.sourceRefs,
-      }))
-    anchors.push({
-      id: anchorId,
-      status: "blocked",
-      sourceRefs: diagnostics.flatMap(diagnostic => diagnostic.sourceRefs as Array<Record<string, string>>),
-      diagnostics,
-      notes: [
-        "Source text is extracted and hashed, but replay must not apply inferred Nicole/Yanagi modifiers before manual acceptance.",
+  {
+    const nicoleRecord = acceptanceRecordFor(acceptanceArtifacts, "nicole", "nicole-defense-reduction")
+    const team = [
+      snapshot.team[0]!,
+      agentSnapshot(candidates, "nicole", {
+        attack: 2000,
+        maxHp: 10000,
+        impact: 80,
+        anomalyProficiency: 300,
+        anomalyMastery: 100,
+      }),
+    ]
+    const inactive = calculate({
+      ...snapshot,
+      team,
+      modifiers: [nicoleDefenseReductionModifier(acceptanceArtifacts, false)],
+    })
+    const active = calculate({
+      ...snapshot,
+      team,
+      modifiers: [nicoleDefenseReductionModifier(acceptanceArtifacts, true)],
+    })
+    const inactiveModifier = inactive.modifiers.find(modifier => modifier.id === "nicole-defense-reduction")
+    const activeModifier = active.modifiers.find(modifier => modifier.id === "nicole-defense-reduction")
+    if (inactiveModifier?.active !== false || inactiveModifier.inactiveReason !== "inactive-flag")
+      throw new Error("G22 inactive snapshot must keep Nicole defense reduction disabled")
+    if (activeModifier?.active !== true)
+      throw new Error("G22 active snapshot must apply Nicole defense reduction")
+    assertClose(
+      bucket(inactive, "defenseZone").effectiveMultiplier,
+      bucket(calculate(snapshot), "defenseZone").effectiveMultiplier,
+      0.00001,
+      "G22 inactive defenseZone",
+    )
+    if (active.summary.rawTotalDamage <= inactive.summary.rawTotalDamage)
+      throw new Error("G22 active Nicole defense reduction should increase damage over inactive snapshot")
+    anchors.push(passedAnchor("G22", nicoleRecord.sourceRefs, [
+      "Nicole defense reduction is manually accepted by lo-user and replayed as explicit inactive/active snapshot states.",
+      "Inactive keeps the default defenseZone; active applies the 40% defense reduction from core passive level 7.",
+    ]))
+  }
+
+  {
+    const nicoleRecord = acceptanceRecordFor(acceptanceArtifacts, "nicole", "nicole-defense-reduction")
+    const yanagiDisorderRecord = acceptanceRecordFor(acceptanceArtifacts, "yanagi", "yanagi-disorder-boost")
+    const yanagiPolarityRecord = acceptanceRecordFor(acceptanceArtifacts, "yanagi", "yanagi-polarity-disorder-ex-special")
+    const yanagi = agentSnapshot(candidates, "yanagi", {
+      attack: 1600,
+      maxHp: 10000,
+      impact: 86,
+      anomalyProficiency: 300,
+      anomalyMastery: 112,
+    })
+    const team = [
+      snapshot.team[0]!,
+      agentSnapshot(candidates, "nicole", {
+        attack: 2000,
+        maxHp: 10000,
+        impact: 80,
+        anomalyProficiency: 300,
+        anomalyMastery: 100,
+      }),
+      {
+        ...yanagi,
+        skillLevels: { special: 12 },
+      },
+    ]
+    const polaritySegment = {
+      ...snapshot.attackSegments[0]!,
+      id: "seg-g23-polarity-disorder",
+      attribute: "electric",
+      damageType: "disorder",
+      multiplier: undefined,
+      anomalyContribution: {
+        status: "polarityDisorder",
+        buildup: 100,
+        remainingDurationSeconds: 5,
+        polarityDisorder: yanagiPolarityDisorderInput(acceptanceArtifacts),
+        contributors: [
+          { actorId: "yixuan", buildup: 40, included: true },
+          { actorId: "nicole", buildup: 20, included: true },
+          { actorId: "yanagi", buildup: 40, included: true },
+        ],
+      },
+    } as const
+    const inactive = calculate({
+      ...snapshot,
+      team,
+      attackSegments: [polaritySegment],
+      modifiers: [
+        nicoleDefenseReductionModifier(acceptanceArtifacts, true),
+        yanagiDisorderBoostModifier(acceptanceArtifacts, false),
       ],
     })
+    const active = calculate({
+      ...snapshot,
+      team,
+      attackSegments: [polaritySegment],
+      modifiers: [
+        nicoleDefenseReductionModifier(acceptanceArtifacts, true),
+        yanagiDisorderBoostModifier(acceptanceArtifacts, true),
+      ],
+    })
+    const inactiveModifier = inactive.modifiers.find(modifier => modifier.id === "yanagi-disorder-boost")
+    const activeModifier = active.modifiers.find(modifier => modifier.id === "yanagi-disorder-boost")
+    if (inactiveModifier?.active !== false || inactiveModifier.inactiveReason !== "inactive-flag")
+      throw new Error("G23 inactive snapshot must keep Yanagi disorder boost disabled")
+    if (activeModifier?.active !== true)
+      throw new Error("G23 active snapshot must apply Yanagi disorder boost")
+    if (active.summary.rawTotalDamage <= inactive.summary.rawTotalDamage)
+      throw new Error("G23 active Yanagi disorder boost should increase damage over inactive snapshot")
+    assertClose(
+      trace(active, "attackSegments[0].polarityDisorderBaseDamageExtra").rawValue as number,
+      96,
+      0.00001,
+      "G23 skill level 12 polarity extra",
+    )
+
+    for (let skillLevel = 1; skillLevel <= 16; skillLevel += 1) {
+      const leveled = calculate({
+        ...snapshot,
+        team: [
+          snapshot.team[0]!,
+          team[1]!,
+          {
+            ...yanagi,
+            skillLevels: { special: skillLevel },
+          },
+        ],
+        attackSegments: [polaritySegment],
+      })
+      assertClose(
+        trace(leveled, "attackSegments[0].polarityDisorderBaseDamageExtra").rawValue as number,
+        300 * ((5 + skillLevel * 2.25) / 100),
+        0.00001,
+        `G23 polarity extra skill level ${skillLevel}`,
+      )
+    }
+
+    anchors.push(passedAnchor("G23", [
+      ...nicoleRecord.sourceRefs,
+      ...yanagiDisorderRecord.sourceRefs,
+      ...yanagiPolarityRecord.sourceRefs,
+    ], [
+      "Yanagi disorder boost is manually accepted by lo-user and replayed as explicit inactive/active snapshot states.",
+      "Yanagi polarity-disorder EX Special template supports skill levels 1-16; level 12 yields 96 base-damage extra from 300 anomaly proficiency.",
+      "Three-agent virtual contribution trace includes Yixuan, Nicole, and Yanagi.",
+    ]))
   }
 
   for (const anchorId of deferredAnchorIds) {
@@ -1211,14 +1497,15 @@ function buildReplayReport(generatedAt: string, candidates = buildCandidates(gen
   }
 
   const v1Anchors = anchors.filter(anchor => v1AnchorIds.includes(anchor.id as (typeof v1AnchorIds)[number]))
+  const blockingDiagnostics = v1Anchors.flatMap(anchor => anchor.diagnostics ?? []).length
   const summary = {
     v1AnchorCount: v1AnchorIds.length,
     passed: v1Anchors.filter(anchor => anchor.status === "passed").length,
     pendingHarness: v1Anchors.filter(anchor => anchor.status === "pendingHarness").length,
     blocked: v1Anchors.filter(anchor => anchor.status === "blocked").length,
     deferred: anchors.filter(anchor => anchor.status === "deferred").length,
-    blockingDiagnostics: v1Anchors.flatMap(anchor => anchor.diagnostics ?? []).length,
-    releaseReady: false,
+    blockingDiagnostics,
+    releaseReady: v1Anchors.every(anchor => anchor.status === "passed") && blockingDiagnostics === 0,
   }
 
   return {
@@ -1231,7 +1518,7 @@ function buildReplayReport(generatedAt: string, candidates = buildCandidates(gen
       releaseGate:
         "releaseReady becomes true only when all V1 anchors pass executable replay and blockingDiagnostics is zero.",
       manualAcceptance:
-        "G22/G23 must emit ERR-DAT-005 until lo-user manual acceptance records exist for the sourceTextHash values in v1-agent-source-candidates.json.",
+        "G22/G23 use lo-user manual acceptance records tied to the sourceTextHash values in v1-agent-source-candidates.json; A/B effects are replayed as explicit inactive/active snapshot states, and C is skill-level parameterized.",
     },
     v1AnchorIds,
     deferredAnchorIds,
@@ -1242,12 +1529,19 @@ function buildReplayReport(generatedAt: string, candidates = buildCandidates(gen
 
 function assertArtifactsFresh(generatedAt: string): void {
   const expectedCandidates = buildCandidates(generatedAt)
+  const expectedAcceptance = buildAcceptanceArtifacts(generatedAt, expectedCandidates)
   const expectedReport = buildReplayReport(generatedAt, expectedCandidates)
   const actualCandidates = readJson<unknown>(candidatePath)
+  const actualNicoleAcceptance = readJson<unknown>(nicoleAcceptancePath)
+  const actualYanagiAcceptance = readJson<unknown>(yanagiAcceptancePath)
   const actualReport = readJson<unknown>(replayReportPath)
 
   if (JSON.stringify(actualCandidates) !== JSON.stringify(expectedCandidates))
     throw new Error("V1 source candidates are stale; rerun pnpm --filter @fairy/data audit:golden-v1")
+  if (JSON.stringify(actualNicoleAcceptance) !== JSON.stringify(expectedAcceptance.nicole))
+    throw new Error("Nicole acceptance artifact is stale; rerun pnpm --filter @fairy/data audit:golden-v1")
+  if (JSON.stringify(actualYanagiAcceptance) !== JSON.stringify(expectedAcceptance.yanagi))
+    throw new Error("Yanagi acceptance artifact is stale; rerun pnpm --filter @fairy/data audit:golden-v1")
   if (JSON.stringify(actualReport) !== JSON.stringify(expectedReport))
     throw new Error("V1 replay report is stale; rerun pnpm --filter @fairy/data audit:golden-v1")
 }
@@ -1255,25 +1549,36 @@ function assertArtifactsFresh(generatedAt: string): void {
 function auditCommand(flags: Record<string, string | true>): void {
   const generatedAt = String(flags["generated-at"] ?? new Date().toISOString())
   const candidates = buildCandidates(generatedAt)
+  const acceptanceArtifacts = buildAcceptanceArtifacts(generatedAt, candidates)
   const report = buildReplayReport(generatedAt, candidates)
   writeJson(candidatePath, candidates)
+  writeJson(nicoleAcceptancePath, acceptanceArtifacts.nicole)
+  writeJson(yanagiAcceptancePath, acceptanceArtifacts.yanagi)
   writeJson(replayReportPath, report)
 }
 
 function verifyCommand(): void {
   if (!existsSync(candidatePath))
     throw new Error("Missing data/cleaned/audit/v1-agent-source-candidates.json; run audit:golden-v1 first")
+  if (!existsSync(nicoleAcceptancePath))
+    throw new Error("Missing data/cleaned/audit/nicole.acceptance.json; run audit:golden-v1 first")
+  if (!existsSync(yanagiAcceptancePath))
+    throw new Error("Missing data/cleaned/audit/yanagi.acceptance.json; run audit:golden-v1 first")
   if (!existsSync(replayReportPath))
     throw new Error("Missing data/cleaned/golden/v1-replay-report.json; run audit:golden-v1 first")
 
-  const report = readJson<{ generatedAt: string; summary: { v1AnchorCount: number; blocked: number; pendingHarness: number } }>(replayReportPath)
+  const report = readJson<{ generatedAt: string; summary: { v1AnchorCount: number; blocked: number; pendingHarness: number; blockingDiagnostics: number; releaseReady: boolean } }>(replayReportPath)
   assertArtifactsFresh(report.generatedAt)
   if (report.summary.v1AnchorCount !== 19)
     throw new Error(`Expected 19 V1 anchors, got ${report.summary.v1AnchorCount}`)
-  if (report.summary.blocked !== 2)
-    throw new Error(`Expected G22/G23 to be blocked by manual acceptance, got ${report.summary.blocked} blocked anchors`)
+  if (report.summary.blocked !== 0)
+    throw new Error(`Expected no blocked anchors after G22/G23 manual acceptance, got ${report.summary.blocked}`)
   if (report.summary.pendingHarness !== 0)
     throw new Error(`Expected no pending harness entries after G04/G09/G10 executable assertions, got ${report.summary.pendingHarness}`)
+  if (report.summary.blockingDiagnostics !== 0)
+    throw new Error(`Expected no blocking diagnostics after G22/G23 manual acceptance, got ${report.summary.blockingDiagnostics}`)
+  if (report.summary.releaseReady !== true)
+    throw new Error("Expected V1 golden replay releaseReady=true after all 19 anchors pass")
 }
 
 async function main(): Promise<void> {
