@@ -1,13 +1,14 @@
 # Golden Fixtures
 
-Status: QA-S3-1 draft
+Status: QA-S3-2 schema sync
 Owner: @QA
-Inputs: Product v2.0, TL-3 data contract, QA-1 v0.2, QA-2 v0.2.1
+Inputs: Product v2.0, TL-3 data contract, S3 core PR #12, QA-1 v0.2, QA-2 v0.2.1
 
 This directory contains QA-owned fixture specifications for the V1 golden
 regression set. The files are schema-facing, but not yet runtime test files.
 They become executable after `packages/core` runtime validators and test helpers
-land in S3.
+land in S3. As of S3 core PR #12, anomaly/disorder formula anchors G12/G15/G16
+are schema-ready; source-data-dependent anchors remain marked `pending-data`.
 
 ## Files
 

@@ -1,6 +1,6 @@
 {
-  "schemaVersion": "qa-golden-fixtures-v0.2",
-  "contractVersion": "tl-3@26d9a33",
+  "schemaVersion": "qa-golden-fixtures-v0.3",
+  "contractVersion": "s3-core@5de4105",
   "qaMapping": "QA-1 v0.2",
   "cases": [
     {
@@ -161,14 +161,20 @@
     {
       "id": "G12-anomaly-threshold-rank-trigger-physical",
       "group": "anomaly-disorder",
-      "status": "pending-data",
+      "status": "ready-for-schema",
       "anchor": "anomaly threshold by enemy rank and trigger count; physical multiplier 1.2x",
       "snapshotFocus": {
         "enemy.rank": "boss",
-        "enemy.anomalyTriggerCounts.physical": "varied",
-        "rules.anomalyThreshold": "required"
+        "enemy.anomalyTriggerCounts.assault": "varied",
+        "attackSegments[0].attribute": "physical",
+        "attackSegments[0].damageType": "anomaly",
+        "attackSegments[0].anomalyContribution.status": "assault",
+        "rules.anomalyThreshold": "core rule constants"
       },
-      "expected": { "traceContains": ["anomalyThreshold", "enemy.rank", "triggerCount", "physicalMultiplier:1.2"] }
+      "expected": {
+        "numeric": [{ "path": "trace[?path=attackSegments[0].anomalyContribution.anomalyThreshold].rawValue", "approx": 3745.2, "relativeTolerance": 0.001 }],
+        "traceContains": ["anomalyThreshold", "enemyRank:boss", "triggerCount", "status:assault", "physicalMultiplier:1.2"]
+      }
     },
     {
       "id": "G13-special-threshold-multipliers-multiply",
@@ -204,26 +210,41 @@
     {
       "id": "G15-disorder-seven-formulas",
       "group": "anomaly-disorder",
-      "status": "pending-formula",
+      "status": "ready-for-schema",
       "anchor": "seven disorder formulas depend on remaining duration T",
       "snapshotFocus": {
         "attackSegments[0].damageType": "disorder",
-        "remainingDurationT": "varied by status"
+        "attackSegments[0].anomalyContribution.status": ["burn", "shock", "corruption", "disorder", "frozen", "assault", "polarityDisorder"],
+        "attackSegments[0].anomalyContribution.remainingDurationSeconds": "varied by status"
       },
       "expected": {
-        "coverage": "one fixture per committed disorder attribute/status path",
-        "traceContains": ["disorderFormulaId", "remainingDurationT", "sourceAnchor"]
+        "formulaMatrix": [
+          { "status": "burn", "attribute": "fire", "remainingDurationSeconds": 2.5, "disorderFormulaId": "disorder-burn", "rawMultiplier": 7 },
+          { "status": "shock", "attribute": "electric", "remainingDurationSeconds": 2, "disorderFormulaId": "disorder-shock", "rawMultiplier": 7 },
+          { "status": "corruption", "attribute": "ether", "remainingDurationSeconds": 2.5, "disorderFormulaId": "disorder-corruption", "rawMultiplier": 7.625 },
+          { "status": "disorder", "attribute": "auricInk", "remainingDurationSeconds": 2.5, "disorderFormulaId": "disorder-corruption", "rawMultiplier": 7.625 },
+          { "status": "frozen", "attribute": "frost", "remainingDurationSeconds": 3, "disorderFormulaId": "disorder-frost", "rawMultiplier": 8.25 },
+          { "status": "frozen", "attribute": "ice", "remainingDurationSeconds": 3, "disorderFormulaId": "disorder-physical-or-ice", "rawMultiplier": 4.725 },
+          { "status": "assault", "attribute": "physical", "remainingDurationSeconds": 3, "disorderFormulaId": "disorder-physical-or-ice", "rawMultiplier": 4.725 },
+          { "status": "polarityDisorder", "attribute": "electric", "remainingDurationSeconds": 4, "disorderFormulaId": "disorder-polarity", "rawMultiplier": 1.425 }
+        ],
+        "traceContains": ["disorderFormulaId", "remainingDurationT", "sourceAnchor", "disorderDazeLevelZone"]
       }
     },
     {
       "id": "G16-daze-level-zone",
       "group": "anomaly-disorder",
-      "status": "pending-formula",
-      "anchor": "daze level zone = 1 + 0.0075 * level",
-      "snapshotFocus": { "levelInput": "attacker or enemy level per final formula" },
+      "status": "ready-for-schema",
+      "anchor": "disorder daze level zone = 1 + 0.0075 * formula actor level",
+      "snapshotFocus": {
+        "attackSegments[0].damageType": "disorder",
+        "attackSegments[0].anomalyContribution.status": "shock",
+        "formulaActor.level": 60
+      },
       "expected": {
-        "formula": "dazeLevelZone = 1 + 0.0075 * level",
-        "traceContains": ["dazeLevelZone", "level"]
+        "formula": "disorderDazeLevelZone = 1 + 0.0075 * level",
+        "numeric": [{ "path": "buckets[?bucketId=disorderDazeLevelZone].effectiveMultiplier", "approx": 1.45, "relativeTolerance": 0.0005 }],
+        "traceContains": ["disorderDazeLevelZone", "level", "bucketContribution"]
       }
     },
     {
@@ -332,7 +353,7 @@
         "attackSegments[0].damageType": "disorder"
       },
       "expected": {
-        "traceContains": ["provider:Nicole", "provider:Yanagi", "polarityDisorder", "contributionShare", "virtualAgent"]
+        "traceContains": ["provider:Nicole", "provider:Yanagi", "polarityDisorder", "buildupContributionRatio", "virtualAgent", "disorderFormulaId"]
       }
     }
   ]
