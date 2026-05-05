@@ -26,7 +26,7 @@
 
 ```jsonc
 {
-  "$schemaVersion": "v1",
+  "schemaVersion": "v1",
   "ruleSetVersion": "rules-v0.1-attached-2026-05-04",
   "dataVersion": "data-v0.1.0",
   "sourceVersion": "ZZZ-2.x",
@@ -37,11 +37,11 @@
       "agentId": "yixuan",
       "level": 60,
       "agentSpecialty": "rupture",
-      "agentAttribute": "auricInk",
+      "attribute": "auricInk",
       "skillLevels": { "basic": 9, "dodge": 9, "special": 12, "chain": 9, "core": 6 },
       "wEngine": { "id": "qingmingLongShe", "level": 60, "refinement": 5 },
       "driveDiscs": [/* 6 件，slot I–VI */],
-      "mindscapeCinema": 0,
+      "mindscapeCinema": { "level": 0 },
       "panel": {
         "attack": 3000,
         "maxHp": 18305,
@@ -53,40 +53,34 @@
         "anomalyProficiency": 117,
         "anomalyMastery": 92,
         "impact": 93,
-        "sheerForce": 2423,
-        "_provenance": "panel"
+        "sheerForce": 2423
       }
     }
   ],
 
-  "activeActor": {
-    "agentId": "yixuan",
-    "attack": {
+  "fieldProvenance": { "team[0].panel": "panel" },
+  "activeActor": { "agentId": "yixuan" },
+  "attackSegments": [
+    {
+      "id": "seg-1",
+      "actorId": "yixuan",
       "skill": "exSpecial",
       "skillName": "sigilShroudBreak",
-      "segments": [
-        {
-          "id": "seg-1",
-          "damageRatio": 12.0,
-          "dazeRatio": 3.741,
-          "attribute": "auricInk",
-          "tags": ["exSpecial", "heavyHit"],
-          "distanceDecay": 1.0
-        }
-      ]
+      "damageRatio": 12.0,
+      "dazeRatio": 3.741,
+      "attribute": "auricInk",
+      "tags": ["exSpecial", "heavyHit"],
+      "distanceDecay": 1.0
     }
-  },
+  ],
 
   "enemy": {
     "enemyId": "corruptionPriest",
     "level": 80,
-    "tier": "boss",
-    "weaknessAttribute": "ether",
-    "states": {
-      "dazed": false,
-      "corruptedShield": true,
-      "corruptedDomain": true
-    },
+    "rank": "boss",
+    "weakness": "ether",
+    "states": ["corruptedDomain"],
+    "corruptedShield": { "active": true },
     "anomalyTriggerCounts": { "fire": 0, "ice": 0, "physical": 0, "ether": 0, "electric": 0 }
   },
 
@@ -148,28 +142,31 @@
     {
       "agentId": "yanagi",
       "agentSpecialty": "anomaly",
-      "agentAttribute": "electric",
+      "attribute": "electric",
       "panel": {
         "attack": 2400,
-        "anomalyProficiency": 600,    // 异常精通（伤害侧）
-        "anomalyMastery": 450,         // 异常掌控（积蓄侧）
+        "anomalyProficiency": 600,
+        "anomalyMastery": 450,
         "critRate": 0.30,
-        "critDamage": 1.50,
-        "_provenance": "panel"
+        "critDamage": 1.50
       }
     }
   ],
-  "activeActor": {
-    "agentId": "yanagi",
-    "attack": {
+  "fieldProvenance": { "team[0].panel": "panel" },
+  "activeActor": { "agentId": "yanagi" },
+  "attackSegments": [
+    {
+      "id": "seg-1",
+      "actorId": "yanagi",
       "skill": "exSpecial",
-      "segments": [{ /* ... */ }]
+      "tags": ["exSpecial"]
     }
-  },
+  ],
   "enemy": {
     "enemyId": "pompey",
-    "tier": "boss",
-    "weaknessAttribute": "electric",
+    "rank": "boss",
+    "weakness": "electric",
+    "states": [],
     "anomalyTriggerCounts": { "electric": 0 }
     // pompey 的 electric resistance: 0.4 (特例，攻略 1.5)
   }
@@ -189,7 +186,7 @@
       "anomalyProficiency": 600,
       "buildupContributionRatio": 1.0
     },
-    "anomalyMasteryZone": "= 600/100 = 6.0",
+    "anomalyProficiencyZone": "= 600/100 = 6.0 (异常伤害公式 PART 03.3.1，使用精通侧)",
     "damageLevelZone": "trunc(1 + 1/59*(60-1), 4) = 2.0",
     "anomalyDamageBonusZone": "1.0",
     "warnings": ["Pompey has special electric resistance 0.4"]
@@ -209,7 +206,7 @@
 > errata v0.1.1：v0.1 误把莱卡恩 specialty 写为"强攻"；正确为"击破"（agentSpecialty: `stun`）。莱卡恩的额外能力效果引用攻略 1.7：队伍属性/阵营条件触发时，攻击失衡敌人 → 目标失衡易伤倍率 +35%。已修正。
 
 **en**：
-> Yixuan (Rupture, frontline) + Nicole (Support, provides 40% defense reduction) + Lycaon (Attack, provides daze vulnerability buff). Demonstrates V1 team of 1–3 agents + activeActor anchor + typed modifier `appliesTo` propagation. When Yixuan triggers her EX Special, both Nicole's defense reduction and Lycaon's daze vulnerability bonus apply to the calculation.
+> Yixuan (Rupture, frontline) + Nicole (Support, provides 40% defense reduction) + Lycaon (**Stun**, provides daze vulnerability buff). Demonstrates V1 team of 1–3 agents + activeActor anchor + typed modifier `appliesTo` propagation. When Yixuan triggers her EX Special, both Nicole's defense reduction and Lycaon's daze vulnerability bonus apply to the calculation.
 
 ### 最小 BattleSnapshot（关键字段）
 
@@ -220,13 +217,13 @@
     { "agentId": "nicole", "agentSpecialty": "support", /* ...面板 */ },
     { "agentId": "lycaon", "agentSpecialty": "stun", /* ...面板 */ }
   ],
-  "activeActor": {
-    "agentId": "yixuan",
-    "attack": { "skill": "exSpecial", "segments": [/*...*/] }
-  },
+  "activeActor": { "agentId": "yixuan" },
+  "attackSegments": [
+    { "id": "seg-1", "actorId": "yixuan", "skill": "exSpecial", "tags": ["exSpecial"] }
+  ],
   "modifiers": [
     {
-      "id": "nicole-cunning-pursuit",
+      "id": "support-defense-reduction",         // illustrative — 实际 handlerId / source 由 S3 锁
       "handlerId": "defense-reduction",
       "params": { "value": 0.40 },
       "appliesTo": { "kind": "enemy" },
@@ -234,7 +231,7 @@
       "active": true
     },
     {
-      "id": "lycaon-additional-ability",
+      "id": "stun-daze-vulnerability",           // illustrative
       "handlerId": "daze-vulnerability-bonus",
       "params": { "value": 0.35 },
       "appliesTo": { "kind": "enemy", "when": { "dazed": true } },
@@ -244,7 +241,8 @@
   ],
   "enemy": {
     "enemyId": "corruptionPriest",
-    "states": { "dazed": true, "corruptedShield": false }
+    "states": ["dazed"],
+    "corruptedShield": { "active": false }
   }
 }
 ```

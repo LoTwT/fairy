@@ -283,7 +283,7 @@ Top 3 zone contributions:
 |---|---|---|
 | `{{activeAgentName}}` | i18n: `glossary[agentId].label.<lang>` 派生；fallback `result.summary.activeActorId` | UX-1 glossary + UX-2 messages |
 | `{{attackName}}` | `result.attackSegments[i].id` 或 i18n 资源；多段时聚合段名 | TL-3 calc-result.md §3 |
-| `{{damageType}}` | `result.summary.damageType` (enum: `regular` / `sheer` / `true` / `anomaly` / `disorder`) | TL-3 calc-result.md §2 |
+| `{{damageType}}` | `result.summary.damageType` (enum: `regular` / `sheer` / `anomaly` / `disorder` / `trueDamage` / `daze`，与 TL-3/PR #7 锁定一致) | TL-3 calc-result.md §2 |
 | `{{expectedDamage}}` | `result.summary.expectedDamage` | TL-3 calc-result.md §2 |
 | `{{expectedDamageRaw}}` | `result.summary.rawTotalDamage` | TL-3 calc-result.md §2 |
 | `{{expectedDamageDisplay}}` | `result.summary.displayTotalDamage` | TL-3 calc-result.md §2 |

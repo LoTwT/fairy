@@ -135,7 +135,7 @@ CalcResult
 interface CalcSummary {
   activeActorId: string         // 谁打出的 → AI prompt: "{{活动代理人}} 的"
   enemyId?: string              // 打了谁
-  damageType: DamageType        // regular / sheer / true / anomaly / disorder
+  damageType: DamageType        // regular / sheer / anomaly / disorder / trueDamage / daze（与 TL-3/PR #7 锁定一致）
   rawTotalDamage: number        // 理论值（不取整）
   displayTotalDamage: number    // 游戏显示值（每段向上取整后求和）
   expectedDamage?: number       // 期望值（含 critRate * critDamage 加权）
@@ -222,8 +222,8 @@ interface Diagnostic {
 
 **核心原则**（D-02-rev / D-11）：
 - core **不输出本地化字符串**，只输出 `key` + `messageParams`
-- CLI / AI prompt / Web UI 自己用 `messages.zh.json` / `messages.en.json` 渲染（UX-2 资源）
-- `key` 与 UX-2 messages.json 中的 21 条 ERR-* 一一对应
+- CLI / AI prompt / Web UI 自己用 `messages.zh.json` / `messages.en.json` 渲染（UX i18n 资源）
+- `key` 与 messages 资源中的 ERR-* key 一一对应（v0.4 = 27 条）
 
 **`errors[]` vs `warnings[]`**：
 - `errors[]` 非空 = 计算不可信（如 ERR-DAT-003 命破系数缺失，无法算贯穿）；UI 必须阻止用户当作可信结果使用
