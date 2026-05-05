@@ -4,6 +4,15 @@
   "private": true,
   "type": "module",
   "bin": {
-    "fairy": "./dist/index.js"
+    "fairy": "./bin/fairy.js"
+  },
+  "scripts": {
+    "cli": "tsx src/index.ts",
+    "check": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@fairy/core": "workspace:*",
+    "tsx": "^4.21.0"
   }
 }
