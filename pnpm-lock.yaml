@@ -33,7 +33,11 @@ importers:
         specifier: ^4.4.3
         version: 4.4.3
 
-  packages/data: {}
+  packages/data:
+    dependencies:
+      '@fairy/core':
+        specifier: workspace:*
+        version: link:../core
 
 packages:
 

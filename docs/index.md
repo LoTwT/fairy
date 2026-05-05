@@ -12,11 +12,11 @@ Fairy 是绝区零 1-3 代理人静态快照伤害计算器。V1 目标是 `@fai
 - QA 策略：[qa/](qa/)
 - UX 文案与场景：[ux/](ux/)
 
-## S4 / S5 当前重点
+## S5 当前重点
 
-1. 落地 `@fairy/cli` JSON-only 命令壳，覆盖 `calc` / `compare` / `scan` / `explain` / `migrate`。
-2. CLI 通过 `@fairy/core` 固定格式入口输出三档伤害、逐乘区 trace 与中英 diagnostic。
-3. 推进 `@fairy/data` Excel reader 与爬虫接入，保留 source metadata 并清洗为 GameData schema。
+1. 推进 `@fairy/data` Excel reader 与爬虫接入，保留 source metadata 并清洗为 GameData schema。
+2. 先完成不阻塞 Excel 的 schema discovery、importer/crawler adapter skeleton、source metadata contract、robots/ToS 记录。
+3. 等 lo-user Excel 到位后接入实际 reader / cleaning，并补齐 golden 所需数据。
 4. 将 23 个 golden fixture schema-ready 锚点接入真实数据复算，作为 V1 发布 gate。
 
 ## 关键文档
@@ -24,3 +24,5 @@ Fairy 是绝区零 1-3 代理人静态快照伤害计算器。V1 目标是 `@fai
 - 命名策略：[architecture/naming-policy.md](architecture/naming-policy.md)
 - Monorepo 开发指南：[architecture/monorepo-development.md](architecture/monorepo-development.md)
 - Pending 术语表：[data-contract/pending-term-resolution-table.md](data-contract/pending-term-resolution-table.md)
+- Source metadata contract：[data-source/source-metadata-contract.md](data-source/source-metadata-contract.md)
+- Robots / ToS check：[data-source/robots-tos-check.md](data-source/robots-tos-check.md)
