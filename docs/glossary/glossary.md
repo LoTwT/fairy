@@ -1,4 +1,4 @@
-# 绝区零伤害计算器 · 术语词典 v0.3.2
+# 绝区零伤害计算器 · 术语词典 v0.4
 
 作者：@UX  日期：2026-05-05  状态：v0.3.2（批量 errata，lo-user 截图全部收口 + D-11 全套官方化原则层 lock + 双语三档优先级）
 
@@ -425,11 +425,11 @@
 | **角色属性** | `agentAttribute` | enumValue | Attribute | enum: §4.1 attribute |
 | **核心被动** | `coreSkill` | typeName | Core Skill | 默认被动，不需激活 |
 | **额外能力** | `additionalAbility` | typeName | Additional Ability | 队伍条件触发的被动 |
-| 影画 | `mindscape` | typeName | Mindscape | 0~6 命 |
-| 影画词条 | `mindscapeEffect` | fieldId | — | data 派生 typed modifier |
+| 影画 | `mindscapeCinema`（v0.4 主名） | fieldId / typeName | Mindscape Cinema | 0~6 命；v0.4 改名为 ZZZ 国际服官方 "Mindscape Cinema"；旧 `mindscape` 进 sourceAliases |
+| 影画词条 | `mindscapeCinemaEffect` | fieldId | — | data 派生 typed modifier；v0.4 重命名 |
 | 音擎 | `wEngine` | typeName | W-Engine | 含等级 / 精炼 |
 | 音擎被动 | `wEnginePassive` | fieldId | W-Engine Passive | data 派生 typed modifier |
-| 驱动盘 | `driveDisc` | typeName | Drive Disc | 6 件 |
+| 驱动盘 | `driveDiscs`（snapshot 字段名，plural array） / `DriveDisc`（TS 类型名 singular） | fieldId / typeName | Drive Disc | v0.4 区分：snapshot 字段名 `driveDiscs[]`（plural array）；TS 类型 `DriveDisc`（singular），与 TL-3 PR #5 BattleSnapshot 一致 |
 | 驱动盘主词条 | `driveDiscMainStat` | fieldId | Main Stat | slot 受限 |
 | 驱动盘副词条 | `driveDiscSubStat` | fieldId | Sub Stat | 每件 4 个 |
 | 驱动盘 4 件套 | `driveDiscSet4` | typeName | 4-Piece Set Effect | data 派生 typed modifier |
@@ -616,7 +616,7 @@
 | `flinch` | `["Flinch"]` |
 | `wEngine` 或 `weaponEngine`（S2 锁） | `["W-Engine"]` |
 | `driveDisc` 或 `drive`（S2 锁） | `["Drive Disc"]` |
-| `mindscape` | `["Mindscape"]` |
+| `mindscapeCinema` | `["mindscape", "Mindscape", "Mindscape Cinema"]` |
 | `coreSkill` | `["Core Skill"]` |
 | `additionalAbility` | `["Additional Ability"]` |
 | `anomalyProficiency` | `["Anomaly Proficiency"]` |
