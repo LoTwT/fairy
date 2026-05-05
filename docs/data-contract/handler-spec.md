@@ -162,6 +162,7 @@ type MultiplierBucket =
   | "damageLevelZone"
   | "anomalyDamageBonusZone"
   | "anomalyCritZone"
+  | "disorderDazeLevelZone"
   | "dazeValueZone"
   | "dazeResistanceZone"
   | "dazeInflictZone"

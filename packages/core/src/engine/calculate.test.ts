@@ -241,7 +241,7 @@ describe("calculate", () => {
     expect(result.buckets.some(bucket => bucket.bucketId === "dazeInflictZone")).toBe(true)
   })
 
-  it("does not emit trusted anomaly damage before TL-S3-4", () => {
+  it("computes anomaly damage without the standard crit bucket", () => {
     const result = calculate({
       ...baseSnapshot,
       team: [
@@ -268,29 +268,356 @@ describe("calculate", () => {
       ],
     })
 
-    expect(result.summary.rawTotalDamage).toBe(0)
-    expect(result.warnings.some(item => item.key === "ERR-CALC-PENDING-ANOMALY")).toBe(true)
+    expect(result.summary.rawTotalDamage).toBeCloseTo(5454.545, 3)
+    expect(result.warnings.some(item => item.key === "ERR-CALC-PENDING-ANOMALY")).toBe(false)
     expect(result.buckets.some(bucket => bucket.bucketId === "critZone")).toBe(false)
-    expect(result.trace.some(event => event.displayValue === "pending-formula")).toBe(true)
+    expect(result.buckets.find(bucket => bucket.bucketId === "anomalyProficiencyZone")?.effectiveMultiplier).toBe(6)
+    expect(result.trace.some(event => event.path === "attackSegments[0].anomalyContribution.anomalyThreshold")).toBe(true)
   })
 
-  it("does not emit trusted disorder damage before TL-S3-4", () => {
+  it("traces the physical anomaly threshold by rank and trigger count", () => {
     const result = calculate({
       ...baseSnapshot,
+      enemy: {
+        ...baseSnapshot.enemy,
+        anomalyTriggerCounts: { assault: 2 },
+      },
       attackSegments: [
         {
           ...baseSnapshot.attackSegments[0]!,
-          id: "seg-disorder",
-          damageType: "disorder",
+          id: "seg-physical-anomaly",
+          attribute: "physical",
+          damageType: "anomaly",
           anomalyContribution: {
-            status: "disorder",
+            status: "assault",
             buildup: 100,
           },
         },
       ],
     })
+    const thresholdTrace = result.trace.find(event =>
+      event.path === "attackSegments[0].anomalyContribution.anomalyThreshold",
+    )
 
-    expect(result.summary.rawTotalDamage).toBe(0)
-    expect(result.warnings.some(item => item.key === "ERR-CALC-PENDING-DISORDER")).toBe(true)
+    expect(thresholdTrace?.inputs).toMatchObject({
+      enemyRank: "boss",
+      triggerCount: 2,
+      status: "assault",
+      physicalMultiplier: 1.2,
+    })
+    expect(thresholdTrace?.rawValue).toBeCloseTo(3745.2, 1)
+  })
+
+  it("floors anomaly mastery before emitting anomaly buildup", () => {
+    const result = calculate({
+      ...baseSnapshot,
+      team: [
+        {
+          ...baseSnapshot.team[0]!,
+          panel: {
+            ...baseSnapshot.team[0]!.panel,
+            anomalyMastery: 123.9,
+          },
+        },
+      ],
+      attackSegments: [
+        {
+          ...baseSnapshot.attackSegments[0]!,
+          id: "seg-anomaly-buildup",
+          damageType: "anomaly",
+          anomalyContribution: {
+            status: "shock",
+            buildup: 100,
+          },
+        },
+      ],
+    })
+    const buildupTrace = result.trace.find(event => event.path === "attackSegments[0].anomalyBuildup")
+
+    expect(result.attackSegments[0]?.anomalyBuildup).toBe(123)
+    expect(buildupTrace?.inputs).toMatchObject({
+      anomalyMastery: 123.9,
+      flooredAnomalyMastery: 123,
+    })
+    expect(buildupTrace?.displayValue).toBe("floorForFormula")
+  })
+
+  it("applies anomaly crit contributors without creating the standard crit bucket", () => {
+    const result = calculate({
+      ...baseSnapshot,
+      team: [
+        {
+          ...baseSnapshot.team[0]!,
+          panel: {
+            ...baseSnapshot.team[0]!.panel,
+            critRate: 1,
+            critDamage: 2,
+            anomalyProficiency: 100,
+          },
+        },
+      ],
+      attackSegments: [
+        {
+          ...baseSnapshot.attackSegments[0]!,
+          id: "seg-anomaly-crit",
+          damageType: "anomaly",
+          anomalyContribution: {
+            status: "shock",
+            buildup: 100,
+          },
+        },
+      ],
+      modifiers: [
+        {
+          id: "exclusive-anomaly-crit",
+          handlerId: "anomaly-crit-bonus",
+          params: { value: 0.5 },
+          appliesTo: { kind: "segment" },
+          source,
+        },
+      ],
+    })
+
+    expect(result.buckets.some(bucket => bucket.bucketId === "critZone")).toBe(false)
+    expect(result.buckets.find(bucket => bucket.bucketId === "anomalyCritZone")?.effectiveMultiplier).toBe(1.5)
+    expect(result.summary.rawTotalDamage).toBeCloseTo(1363.636, 3)
+  })
+
+  it("builds virtual anomaly contributors from included buildup and overflow", () => {
+    const result = calculate({
+      ...baseSnapshot,
+      team: [
+        {
+          ...baseSnapshot.team[0]!,
+          panel: {
+            ...baseSnapshot.team[0]!.panel,
+            anomalyProficiency: 100,
+            anomalyMastery: 100,
+          },
+        },
+        {
+          agentId: "nicole",
+          level: 40,
+          agentSpecialty: "support",
+          attribute: "ether",
+          panel: {
+            attack: 2000,
+            maxHp: 10000,
+            impact: 80,
+            anomalyProficiency: 300,
+            anomalyMastery: 100,
+          },
+        },
+      ],
+      attackSegments: [
+        {
+          ...baseSnapshot.attackSegments[0]!,
+          id: "seg-virtual-anomaly",
+          damageType: "anomaly",
+          anomalyContribution: {
+            status: "shock",
+            buildup: 120,
+            overflowBuildup: 20,
+            contributors: [
+              { actorId: "yixuan", buildup: 60, included: true },
+              { actorId: "nicole", buildup: 60, included: true },
+              { actorId: "bangboo-a", buildup: 60, included: false, excludedReason: "bangboo" },
+            ],
+          },
+        },
+      ],
+    })
+    const virtualTrace = result.trace.find(event =>
+      event.path === "attackSegments[0].anomalyContribution.virtualAgent",
+    )
+    const rows = (virtualTrace?.inputs as { virtualAgent?: Array<Record<string, unknown>> } | undefined)?.virtualAgent ?? []
+
+    expect(result.summary.rawTotalDamage).toBeGreaterThan(0)
+    expect(virtualTrace?.inputs).toMatchObject({
+      flooredLevel: 52,
+      overflowBuildup: 20,
+    })
+    expect(rows).toEqual(expect.arrayContaining([
+      expect.objectContaining({ actorId: "yixuan", effectiveBuildup: 60, buildupContributionRatio: 0.6 }),
+      expect.objectContaining({ actorId: "nicole", effectiveBuildup: 40, buildupContributionRatio: 0.4 }),
+      expect.objectContaining({ actorId: "bangboo-a", effectiveBuildup: 0, excludedReason: "bangboo" }),
+    ]))
+  })
+
+  it("computes shock disorder from remaining duration and disorder daze level", () => {
+    const result = calculate({
+      ...baseSnapshot,
+      attackSegments: [
+        {
+          ...baseSnapshot.attackSegments[0]!,
+          id: "seg-shock-disorder",
+          attribute: "electric",
+          damageType: "disorder",
+          anomalyContribution: {
+            status: "shock",
+            buildup: 100,
+            remainingDurationSeconds: 5,
+          },
+        },
+      ],
+    })
+    const disorderTrace = result.trace.find(event => event.path === "attackSegments[0].disorderFormulaId")
+    const disorderDazeBucket = result.buckets.find(bucket => bucket.bucketId === "disorderDazeLevelZone")
+    const rawTrace = result.trace.find(event => event.path === "attackSegments[0].rawDamage")
+
+    expect(result.summary.rawTotalDamage).toBeCloseTo(14170.455, 3)
+    expect(result.summary.disorderDamage).toBeCloseTo(14170.455, 3)
+    expect(result.attackSegments[0]?.dazeValue).toBe(348)
+    expect(disorderDazeBucket?.effectiveMultiplier).toBe(1.45)
+    expect(rawTrace?.formula).toContain("disorderDazeLevelZone")
+    expect(rawTrace?.refs).toEqual(expect.arrayContaining(disorderDazeBucket?.traceRefs ?? []))
+    expect(disorderTrace?.inputs).toMatchObject({
+      disorderFormulaId: "disorder-shock",
+      remainingDurationT: 5,
+      sourceAnchor: "guide-3.4.1",
+    })
+    expect(disorderTrace?.rawValue).toBe(10.75)
+    expect(result.warnings.some(item => item.key === "ERR-CALC-PENDING-DISORDER")).toBe(false)
+  })
+
+  it("rejects anomaly and disorder segments without anomaly status before calculation", () => {
+    expect(() => calculate({
+      ...baseSnapshot,
+      attackSegments: [
+        {
+          ...baseSnapshot.attackSegments[0]!,
+          id: "seg-anomaly-missing-status",
+          damageType: "anomaly",
+        },
+      ],
+    })).toThrow(/anomalyContribution\.status/)
+
+    expect(() => calculate({
+      ...baseSnapshot,
+      attackSegments: [
+        {
+          ...baseSnapshot.attackSegments[0]!,
+          id: "seg-disorder-missing-status",
+          attribute: "electric",
+          damageType: "disorder",
+        },
+      ],
+    })).toThrow(/anomalyContribution\.status/)
+  })
+
+  it.each([
+    ["burn", "fire", 2.5, "disorder-burn", 7],
+    ["shock", "electric", 2, "disorder-shock", 7],
+    ["corruption", "ether", 2.5, "disorder-corruption", 7.625],
+    ["disorder", "auricInk", 2.5, "disorder-corruption", 7.625],
+    ["frozen", "frost", 3, "disorder-frost", 8.25],
+    ["frozen", "ice", 3, "disorder-physical-or-ice", 4.725],
+    ["assault", "physical", 3, "disorder-physical-or-ice", 4.725],
+    ["polarityDisorder", "electric", 4, "disorder-polarity", 1.425],
+  ] as const)("traces %s/%s disorder multiplier", (status, attribute, remainingDurationSeconds, formulaId, multiplier) => {
+    const result = calculate({
+      ...baseSnapshot,
+      attackSegments: [
+        {
+          ...baseSnapshot.attackSegments[0]!,
+          id: `seg-${formulaId}`,
+          attribute,
+          damageType: "disorder",
+          multiplier: status === "polarityDisorder" ? undefined : 1,
+          anomalyContribution: {
+            status,
+            buildup: 100,
+            remainingDurationSeconds,
+          },
+        },
+      ],
+    })
+    const disorderTrace = result.trace.find(event => event.path === "attackSegments[0].disorderFormulaId")
+
+    expect(disorderTrace?.displayValue).toBe(formulaId)
+    expect(disorderTrace?.rawValue).toBeCloseTo(multiplier, 5)
+  })
+
+  it("traces three-agent polarity disorder providers and virtual shares", () => {
+    const result = calculate({
+      ...baseSnapshot,
+      team: [
+        baseSnapshot.team[0]!,
+        {
+          agentId: "nicole",
+          level: 60,
+          agentSpecialty: "support",
+          attribute: "ether",
+          panel: {
+            attack: 800,
+            maxHp: 10000,
+            anomalyProficiency: 100,
+          },
+        },
+        {
+          agentId: "yanagi",
+          level: 60,
+          agentSpecialty: "anomaly",
+          attribute: "electric",
+          panel: {
+            attack: 1600,
+            maxHp: 10000,
+            anomalyProficiency: 220,
+          },
+        },
+      ],
+      attackSegments: [
+        {
+          ...baseSnapshot.attackSegments[0]!,
+          id: "seg-polarity-disorder",
+          attribute: "electric",
+          damageType: "disorder",
+          multiplier: undefined,
+          anomalyContribution: {
+            status: "polarityDisorder",
+            buildup: 100,
+            remainingDurationSeconds: 5,
+            contributors: [
+              { actorId: "yixuan", buildup: 40, included: true },
+              { actorId: "yanagi", buildup: 60, included: true },
+            ],
+          },
+        },
+      ],
+      modifiers: [
+        {
+          id: "nicole-defense-reduction",
+          handlerId: "defense-reduction",
+          params: { value: 0.4 },
+          appliesTo: { kind: "enemy" },
+          source: { sourceId: "provider:Nicole", sourceVersion: "rules-v0.1" },
+        },
+        {
+          id: "yanagi-anomaly-damage",
+          handlerId: "anomaly-damage-bonus",
+          params: { value: 0.2 },
+          appliesTo: { kind: "segment" },
+          source: { sourceId: "provider:Yanagi", sourceVersion: "rules-v0.1" },
+        },
+      ],
+    })
+    const disorderTrace = result.trace.find(event => event.path === "attackSegments[0].disorderFormulaId")
+    const virtualTrace = result.trace.find(event =>
+      event.path === "attackSegments[0].anomalyContribution.virtualAgent",
+    )
+    const rows = (virtualTrace?.inputs as { virtualAgent?: Array<Record<string, unknown>> } | undefined)?.virtualAgent ?? []
+    const sourceIds = result.trace.map(event => event.source?.sourceId).filter(Boolean)
+
+    expect(disorderTrace?.displayValue).toBe("disorder-polarity")
+    expect(disorderTrace?.inputs).toMatchObject({
+      status: "polarityDisorder",
+      remainingDurationT: 5,
+    })
+    expect(disorderTrace?.rawValue).toBeCloseTo(1.6125, 4)
+    expect(rows).toEqual(expect.arrayContaining([
+      expect.objectContaining({ actorId: "yixuan", buildupContributionRatio: 0.4 }),
+      expect.objectContaining({ actorId: "yanagi", buildupContributionRatio: 0.6 }),
+    ]))
+    expect(sourceIds).toEqual(expect.arrayContaining(["provider:Nicole", "provider:Yanagi"]))
   })
 })
