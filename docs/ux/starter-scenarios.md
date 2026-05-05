@@ -236,7 +236,7 @@
       "id": "stun-daze-vulnerability",           // illustrative
       "handlerId": "daze-vulnerability-bonus",
       "params": { "value": 0.35 },
-      "appliesTo": { "kind": "enemy" }, "when": { "dazed": true },
+      "appliesTo": { "kind": "enemy" }, "when": { "field": "enemy.states", "op": "in", "value": "dazed" },
       "source": { "sourceId": "lycaon.additionalAbility" },
       "active": true
     }
