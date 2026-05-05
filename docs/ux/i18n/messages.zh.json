@@ -5,8 +5,8 @@
     "ruleSetVersion": "rules-v0.1-attached-2026-05-04",
     "schemaVersion": "v1",
     "generatedBy": "@UX",
-    "totalEntries": 28,
-    "scope": "P0 必填 — 伤害计算器实际触发的错误文案；v0.4 扩展 ERR-VER-* / ERR-EVENT-* 系列；UX-S3-1 扩展 ERR-CALC-PENDING-* 系列（PR #10 commit dacf36c 锁定）"
+    "totalEntries": 33,
+    "scope": "P0 必填 — 伤害计算器实际触发的错误文案；v0.4 扩展 ERR-VER-* / ERR-EVENT-* 系列；UX-S3-1 扩展 ERR-CALC-PENDING-* 系列；UX-S4-1 扩展 ERR-CLI-* 系列（CLI 参数 / schema 错误，Product 决策选 A 双语化 2026-05-05）"
   },
   "ERR-RNG-001": "增伤区已超过攻略上限 600%（PART 01.2）。已截断展示，原始累加值为 {raw}%。",
   "ERR-RNG-002": "暴击率有效范围 0~100%（攻略 PART 01.3）。已自动 clamp 为 {clamped}%。",
@@ -35,5 +35,10 @@
   "ERR-UI-003": "团队中存在 unsupported 字段（如 subordinate / 邦布）。V1 不支持此特性，对应字段已忽略。",
   "ERR-OCR-000": "本工具不识别截图。截图仅作为录入时的视觉参考。请按字段对照填写。",
   "ERR-CALC-PENDING-ANOMALY": "⚠ 当前 V1 PR #10 阶段：异常伤害公式仅返回 schema 兼容骨架，**未输出可信数值**。完整异常计算（虚拟代理人加权 / 异常触发计数表 / 异常暴击区 / overflow 排除等）由 task #27 [TL-S3-4] 实现。",
-  "ERR-CALC-PENDING-DISORDER": "⚠ 当前 V1 PR #10 阶段：紊乱伤害公式仅返回 schema 兼容骨架，**未输出可信数值**。完整紊乱计算（七属性倍率 / 失衡等级区 / 紊乱失衡值 / disorderFormulaId trace evidence 等）由 task #27 [TL-S3-4] 实现。"
+  "ERR-CALC-PENDING-DISORDER": "⚠ 当前 V1 PR #10 阶段：紊乱伤害公式仅返回 schema 兼容骨架，**未输出可信数值**。完整紊乱计算（七属性倍率 / 失衡等级区 / 紊乱失衡值 / disorderFormulaId trace evidence 等）由 task #27 [TL-S3-4] 实现。",
+  "ERR-CLI-ARG": "命令行参数错误：{message}。运行 `fairy help <command>` 查看用法。",
+  "ERR-CLI-CMD": "未知子命令：{command}。可用命令：calc / compare / scan / explain / migrate / help。",
+  "ERR-CLI-JSON": "输入 JSON 解析失败：{input}。请检查文件格式或使用 `fairy explain` 查看示例。",
+  "ERR-CLI-SCHEMA": "输入不符合 BattleSnapshot schema。详情见 JSON `error.details` 字段；请参考 docs/data-contract/battle-snapshot.md。",
+  "ERR-CLI-UNCAUGHT": "未捕获错误：{message}。请提交 issue 附上输入与命令。"
 }
