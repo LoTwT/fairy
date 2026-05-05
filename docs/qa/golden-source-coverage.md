@@ -76,6 +76,33 @@ These rows are enough for a minimal #40 agent/source-text reader. They are not
 enough to publish trusted typed modifiers until the acceptance gate records which
 template/handler was accepted for each effect.
 
+## Manual Acceptance Gate
+
+G22/G23 stay in the V1 replay gate, but calculation-relevant natural-language
+effects must not be guessed. Before a typed modifier derived from Nicole/Yanagi
+source text can enter replay, it needs an acceptance record.
+
+Suggested storage path:
+
+- `data/cleaned/audit/<agent>.acceptance.json`
+
+Minimum acceptance record fields:
+
+| Field | Requirement |
+|---|---|
+| `agentId` | Stable cleaned agent id, e.g. `nicole` / `yanagi`. |
+| `effectId` | Stable modifier/effect id used by replay. |
+| `sourceId` | `lo-user-excel`. |
+| `sourceAnchor` | Exact workbook anchor, e.g. `代理人核心技描述!D4:J4`. |
+| `sourceTextHash` | SHA-256 of the accepted source text after parser normalization. |
+| `effectTemplateId` / `handlerId` | The deterministic template or runtime handler being accepted. |
+| `acceptedBy` | For V1 dogfooding, this must be `@lo-user`. |
+| `acceptedAt` | ISO timestamp of the manual acceptance. |
+
+Replay rule: if an effect required by G22/G23 has no matching acceptance record,
+the replay harness must emit blocking `ERR-DAT-005` and must not silently apply a
+modifier inferred from text.
+
 ## Immediate #40 Minimum Range
 
 The V1 20-anchor release gate does not require full W-Engine, Drive Disc,
@@ -107,10 +134,10 @@ TL recommendation:
   composition implemented before true-data replay. It is formula/reference work,
   not blocked by Excel/Mihoyo/buhflipexplode extraction, but it expands the
   current #43 scope.
-- **Nicole/Yanagi**: keep G22/G23 in V1, but gate them behind manual acceptance
-  records for the specific source anchors above. If no acceptance record exists,
-  the replay harness should emit `ERR-DAT-005` instead of silently applying a
-  guessed modifier.
+- **Nicole/Yanagi**: Product accepted the manual gate above. Keep G22/G23 in V1,
+  but require acceptance records for the specific source anchors. If no
+  acceptance record exists, the replay harness should emit `ERR-DAT-005` instead
+  of silently applying a guessed modifier.
 
 If either decision is unresolved, #43 can still build the replay harness but must
 fail loud before claiming V1 release readiness.
