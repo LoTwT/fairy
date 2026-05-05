@@ -18,4 +18,6 @@ Current generated artifacts:
 
 - `audit/v1-agent-source-candidates.json` — minimal Excel-derived source
   candidates for V1 team-modifier replay.
-- `golden/v1-replay-report.json` — source-backed V1 golden replay baseline.
+- `audit/nicole.acceptance.json` and `audit/yanagi.acceptance.json` —
+  lo-user manual acceptance records for G22/G23 source-text mappings.
+- `golden/v1-replay-report.json` — source-backed V1 golden replay report.

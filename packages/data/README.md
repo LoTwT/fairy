@@ -8,8 +8,8 @@ Current state:
 - raw source archives are retained under the repo-level `data/source/`;
 - buhflipexplode and Mihoyo Deadly Assault source snapshots have offline
   verification scripts;
-- V1 golden source candidates and the replay baseline are generated under
-  repo-level `data/cleaned/`;
+- V1 golden source candidates, manual acceptance records, and the replay report
+  are generated under repo-level `data/cleaned/`;
 - `pnpm --filter @fairy/data sync-cleaned` mirrors repo-level cleaned JSON into
   package-local `packages/data/cleaned/` for npm packaging;
 - package exports include TypeScript source/types plus package-local cleaned

@@ -241,6 +241,112 @@ describe("BattleSnapshot schema", () => {
       issue.path.join(".") === "attackSegments.0.anomalyContribution.status",
     )).toBe(true)
   })
+
+  it("rejects polarity disorder without an explicit provider and supported skill level", () => {
+    const yanagi = {
+      agentId: "yanagi",
+      level: 60,
+      agentSpecialty: "anomaly",
+      attribute: "electric",
+      skillLevels: { special: 12 },
+      panel: {
+        attack: 1600,
+        maxHp: 10000,
+        anomalyProficiency: 300,
+      },
+    }
+    const base = {
+      schemaVersion: "1.0.0",
+      gameVersion: "ZZZ-2.2",
+      ruleSetVersion: "rules-v0.1",
+      dataVersion: "data-v0.1.0",
+      sourceVersion: "source-v0.1.0",
+      team: [minimalAgent, yanagi],
+      activeActor: { agentId: "yixuan" },
+      attackSegments: [
+        {
+          id: "seg-polarity",
+          attribute: "electric",
+          tags: ["exSpecial"],
+          damageType: "disorder",
+          anomalyContribution: {
+            status: "polarityDisorder",
+            remainingDurationSeconds: 5,
+            polarityDisorder: {
+              providerActorId: "yanagi",
+              skillLevelKey: "special",
+              originalDisorderDamageRatio: 0.15,
+              anomalyProficiencyBasePercent: 5,
+              anomalyProficiencyPerSkillLevelPercent: 2.25,
+            },
+          },
+        },
+      ],
+      enemy: {
+        level: 60,
+        rank: "boss",
+      },
+    }
+
+    expect(battleSnapshotSchema.safeParse(base).success).toBe(true)
+
+    const missingProvider = battleSnapshotSchema.safeParse({
+      ...base,
+      team: [minimalAgent],
+    })
+    expect(missingProvider.success).toBe(false)
+    expect(missingProvider.error?.issues.some(issue =>
+      issue.path.join(".") === "attackSegments.0.anomalyContribution.polarityDisorder.providerActorId",
+    )).toBe(true)
+
+    const missingSkillLevel = battleSnapshotSchema.safeParse({
+      ...base,
+      team: [
+        minimalAgent,
+        {
+          ...yanagi,
+          skillLevels: {},
+        },
+      ],
+    })
+    expect(missingSkillLevel.success).toBe(false)
+    expect(missingSkillLevel.error?.issues.some(issue =>
+      issue.path.join(".") === "attackSegments.0.anomalyContribution.polarityDisorder.skillLevelKey",
+    )).toBe(true)
+
+    const outOfRangeSkillLevel = battleSnapshotSchema.safeParse({
+      ...base,
+      team: [
+        minimalAgent,
+        {
+          ...yanagi,
+          skillLevels: { special: 17 },
+        },
+      ],
+    })
+    expect(outOfRangeSkillLevel.success).toBe(false)
+    expect(outOfRangeSkillLevel.error?.issues.some(issue =>
+      issue.message === "polarityDisorder provider skill level must be between 1 and 16",
+    )).toBe(true)
+
+    const missingAnomalyProficiency = battleSnapshotSchema.safeParse({
+      ...base,
+      team: [
+        minimalAgent,
+        {
+          ...yanagi,
+          panel: {
+            attack: 1600,
+            maxHp: 10000,
+          },
+        },
+      ],
+    })
+    expect(missingAnomalyProficiency.success).toBe(false)
+    expect(missingAnomalyProficiency.error?.issues.some(issue =>
+      issue.path.join(".") === "team.1.panel.anomalyProficiency",
+    )).toBe(true)
+  })
 })
 
 describe("CalcResult schema", () => {

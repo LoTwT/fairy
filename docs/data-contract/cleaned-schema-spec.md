@@ -538,8 +538,9 @@ V1 cleaned-data implementation must add tests for these gates:
 - V1 golden true-data replay uses the 19-anchor scope and records anchors 13,
   18, 19, and 20 as V1.x deferred, not skipped accidentally.
 - `verify:golden-v1` passes as an offline freshness gate for the generated V1
-  agent source candidates and replay report; V1 release remains blocked until
-  its report has zero `ERR-DAT-005` diagnostics and no `pendingHarness` anchors.
+  agent source candidates, manual acceptance records, and replay report; V1
+  release requires zero `ERR-DAT-005` diagnostics, no `pendingHarness` anchors,
+  and `releaseReady=true`.
 
 ## 10. Implementation Impact
 
@@ -576,14 +577,21 @@ missing QA coverage.
 The first replay harness baseline writes:
 
 - `data/cleaned/audit/v1-agent-source-candidates.json`;
+- `data/cleaned/audit/nicole.acceptance.json`;
+- `data/cleaned/audit/yanagi.acceptance.json`;
 - `data/cleaned/golden/v1-replay-report.json`.
 
 `verify:golden-v1` verifies those artifacts against retained Excel and DA source
-snapshots. The baseline intentionally keeps G22/G23 blocked by `ERR-DAT-005`
-until manual acceptance records exist. G04/G09/G10 now have executable replay
-assertions: G04 reproduces the guide breakpoint scan, G09 asserts sourced DA
-daze ratio display flooring, and G10 asserts frost/auric resistance plus
-anomaly-buildup-resistance lane mapping.
+snapshots. The current baseline has 19 V1 anchors passed, zero blocking
+diagnostics, and `releaseReady=true`. G04 reproduces the guide breakpoint scan,
+G09 asserts sourced DA daze ratio display flooring, G10 asserts frost/auric
+resistance plus anomaly-buildup-resistance lane mapping, and G22/G23 use
+lo-user manual acceptance records for Nicole/Yanagi active-state and
+polarity-disorder template semantics. The polarity-disorder template requires an
+explicit provider agent in `team` and an explicit supported skill level
+(`skillLevels[skillLevelKey]` in 1-16) plus provider `panel.anomalyProficiency`;
+missing or out-of-range inputs are validation failures, not silent level-1 or
+zero-proficiency fallbacks.
 
 ## 11. Review Checklist
 

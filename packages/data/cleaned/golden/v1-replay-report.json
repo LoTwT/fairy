@@ -5,7 +5,7 @@
   "policy": {
     "scope": "V1 true-data replay harness baseline after DD-002: 19 anchors in V1, G13/G18/G19/G20 deferred.",
     "releaseGate": "releaseReady becomes true only when all V1 anchors pass executable replay and blockingDiagnostics is zero.",
-    "manualAcceptance": "G22/G23 must emit ERR-DAT-005 until lo-user manual acceptance records exist for the sourceTextHash values in v1-agent-source-candidates.json."
+    "manualAcceptance": "G22/G23 use lo-user manual acceptance records tied to the sourceTextHash values in v1-agent-source-candidates.json; A/B effects are replayed as explicit inactive/active snapshot states, and C is skill-level parameterized."
   },
   "v1AnchorIds": [
     "G01",
@@ -36,12 +36,12 @@
   ],
   "summary": {
     "v1AnchorCount": 19,
-    "passed": 17,
+    "passed": 19,
     "pendingHarness": 0,
-    "blocked": 2,
+    "blocked": 0,
     "deferred": 4,
-    "blockingDiagnostics": 3,
-    "releaseReady": false
+    "blockingDiagnostics": 0,
+    "releaseReady": true
   },
   "anchors": [
     {
@@ -324,7 +324,7 @@
     },
     {
       "id": "G22",
-      "status": "blocked",
+      "status": "passed",
       "sourceRefs": [
         {
           "sourceId": "lo-user-excel",
@@ -332,30 +332,20 @@
           "sourceAnchor": "代理人核心技描述!D4:J4"
         }
       ],
-      "diagnostics": [
-        {
-          "key": "ERR-DAT-005",
-          "severity": "blocking",
-          "reason": "ambiguousCondition",
-          "effectId": "nicole-defense-reduction",
-          "sourceTextHash": "07f9d239f43d3deafd4a001cdae349a6f10325cb3bbae090181a00f48e293549",
-          "sourceRefs": [
-            {
-              "sourceId": "lo-user-excel",
-              "sourceVersion": "2.6.0_R14028417",
-              "sourceAnchor": "代理人核心技描述!D4:J4"
-            }
-          ]
-        }
-      ],
       "notes": [
-        "Source text is extracted and hashed, but replay must not apply inferred Nicole/Yanagi modifiers before manual acceptance."
+        "Nicole defense reduction is manually accepted by lo-user and replayed as explicit inactive/active snapshot states.",
+        "Inactive keeps the default defenseZone; active applies the 40% defense reduction from core passive level 7."
       ]
     },
     {
       "id": "G23",
-      "status": "blocked",
+      "status": "passed",
       "sourceRefs": [
+        {
+          "sourceId": "lo-user-excel",
+          "sourceVersion": "2.6.0_R14028417",
+          "sourceAnchor": "代理人核心技描述!D4:J4"
+        },
         {
           "sourceId": "lo-user-excel",
           "sourceVersion": "2.6.0_R14028417",
@@ -367,38 +357,10 @@
           "sourceAnchor": "代理人技能描述!C298"
         }
       ],
-      "diagnostics": [
-        {
-          "key": "ERR-DAT-005",
-          "severity": "blocking",
-          "reason": "ambiguousCondition",
-          "effectId": "yanagi-disorder-boost",
-          "sourceTextHash": "1d5b17072f8389b59b4f0083ac99c84d2c0e9dd68467a32909c8a5e0938b1462",
-          "sourceRefs": [
-            {
-              "sourceId": "lo-user-excel",
-              "sourceVersion": "2.6.0_R14028417",
-              "sourceAnchor": "代理人核心技描述!D23:J23"
-            }
-          ]
-        },
-        {
-          "key": "ERR-DAT-005",
-          "severity": "blocking",
-          "reason": "unknownHandler",
-          "effectId": "yanagi-polarity-disorder-ex-special",
-          "sourceTextHash": "4ac89b99d4fead4a8cb78d2dfdf84f32a93864cb11c4307e0474d5087bb25f5b",
-          "sourceRefs": [
-            {
-              "sourceId": "lo-user-excel",
-              "sourceVersion": "2.6.0_R14028417",
-              "sourceAnchor": "代理人技能描述!C298"
-            }
-          ]
-        }
-      ],
       "notes": [
-        "Source text is extracted and hashed, but replay must not apply inferred Nicole/Yanagi modifiers before manual acceptance."
+        "Yanagi disorder boost is manually accepted by lo-user and replayed as explicit inactive/active snapshot states.",
+        "Yanagi polarity-disorder EX Special template supports skill levels 1-16; level 12 yields 96 base-damage extra from 300 anomaly proficiency.",
+        "Three-agent virtual contribution trace includes Yixuan, Nicole, and Yanagi."
       ]
     },
     {

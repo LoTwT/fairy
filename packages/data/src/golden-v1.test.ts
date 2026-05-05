@@ -6,6 +6,10 @@ import { describe, expect, it } from "vitest"
 const repoRoot = join(import.meta.dirname, "../../..")
 const candidatePath = join(repoRoot, "data/cleaned/audit/v1-agent-source-candidates.json")
 const packageCandidatePath = join(repoRoot, "packages/data/cleaned/audit/v1-agent-source-candidates.json")
+const nicoleAcceptancePath = join(repoRoot, "data/cleaned/audit/nicole.acceptance.json")
+const packageNicoleAcceptancePath = join(repoRoot, "packages/data/cleaned/audit/nicole.acceptance.json")
+const yanagiAcceptancePath = join(repoRoot, "data/cleaned/audit/yanagi.acceptance.json")
+const packageYanagiAcceptancePath = join(repoRoot, "packages/data/cleaned/audit/yanagi.acceptance.json")
 const replayReportPath = join(repoRoot, "data/cleaned/golden/v1-replay-report.json")
 const packageReplayReportPath = join(repoRoot, "packages/data/cleaned/golden/v1-replay-report.json")
 
@@ -70,11 +74,11 @@ describe("V1 golden true-data replay baseline", () => {
     expect(report.deferredAnchorIds).toEqual(["G13", "G18", "G19", "G20"])
     expect(report.summary).toMatchObject({
       v1AnchorCount: 19,
-      passed: 17,
+      passed: 19,
       pendingHarness: 0,
-      blocked: 2,
-      blockingDiagnostics: 3,
-      releaseReady: false,
+      blocked: 0,
+      blockingDiagnostics: 0,
+      releaseReady: true,
     })
 
     const g13 = report.anchors.find(anchor => anchor.id === "G13")
@@ -91,29 +95,11 @@ describe("V1 golden true-data replay baseline", () => {
     const g11 = report.anchors.find(anchor => anchor.id === "G11")
     expect(g11?.status).toBe("passed")
     const g22 = report.anchors.find(anchor => anchor.id === "G22")
-    expect(g22?.status).toBe("blocked")
-    expect(g22?.diagnostics).toEqual([
-      expect.objectContaining({
-        key: "ERR-DAT-005",
-        effectId: "nicole-defense-reduction",
-        reason: "ambiguousCondition",
-      }),
-    ])
+    expect(g22?.status).toBe("passed")
+    expect(g22?.notes.join("\n")).toContain("inactive/active snapshot states")
     const g23 = report.anchors.find(anchor => anchor.id === "G23")
-    expect(g23?.diagnostics).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({
-          key: "ERR-DAT-005",
-          effectId: "yanagi-disorder-boost",
-          reason: "ambiguousCondition",
-        }),
-        expect.objectContaining({
-          key: "ERR-DAT-005",
-          effectId: "yanagi-polarity-disorder-ex-special",
-          reason: "unknownHandler",
-        }),
-      ]),
-    )
+    expect(g23?.status).toBe("passed")
+    expect(g23?.notes.join("\n")).toContain("skill levels 1-16")
   })
 
   it("extracts only the minimal V1 agent rows and source text candidates", () => {
@@ -163,8 +149,57 @@ describe("V1 golden true-data replay baseline", () => {
     ).toBe(true)
   })
 
+  it("records lo-user manual acceptance for G22/G23 source mappings", () => {
+    const nicole = readJson<{
+      records: Array<{
+        effectId: string
+        acceptedBy: string
+        decisionRef: { target: string; messageId: string }
+        acceptedMapping: Record<string, unknown>
+      }>
+    }>(nicoleAcceptancePath)
+    const yanagi = readJson<{
+      records: Array<{
+        effectId: string
+        acceptedBy: string
+        decisionRef: { target: string; messageId: string }
+        acceptedMapping: { supportedSkillLevels?: number[]; inactiveStateMustHaveNoEffect?: boolean }
+      }>
+    }>(yanagiAcceptancePath)
+
+    expect(nicole.records).toHaveLength(1)
+    expect(nicole.records[0]).toMatchObject({
+      effectId: "nicole-defense-reduction",
+      acceptedBy: "@lo-user",
+      decisionRef: { target: "#fairy:e2e57d52", messageId: "6af6f017" },
+      acceptedMapping: {
+        handlerId: "defense-reduction",
+        requiresActivation: true,
+        inactiveStateMustHaveNoEffect: true,
+      },
+    })
+    expect(yanagi.records.map(record => record.effectId)).toEqual([
+      "yanagi-disorder-boost",
+      "yanagi-polarity-disorder-ex-special",
+    ])
+    expect(yanagi.records.every(record =>
+      record.acceptedBy === "@lo-user"
+      && record.decisionRef.messageId === "6af6f017",
+    )).toBe(true)
+    expect(
+      yanagi.records.find(record => record.effectId === "yanagi-disorder-boost")
+        ?.acceptedMapping.inactiveStateMustHaveNoEffect,
+    ).toBe(true)
+    expect(
+      yanagi.records.find(record => record.effectId === "yanagi-polarity-disorder-ex-special")
+        ?.acceptedMapping.supportedSkillLevels,
+    ).toEqual(Array.from({ length: 16 }, (_, index) => index + 1))
+  })
+
   it("keeps the synced package copy byte-identical to cleaned staging", () => {
     expect(readFileSync(packageCandidatePath, "utf8")).toBe(readFileSync(candidatePath, "utf8"))
+    expect(readFileSync(packageNicoleAcceptancePath, "utf8")).toBe(readFileSync(nicoleAcceptancePath, "utf8"))
+    expect(readFileSync(packageYanagiAcceptancePath, "utf8")).toBe(readFileSync(yanagiAcceptancePath, "utf8"))
     expect(readFileSync(packageReplayReportPath, "utf8")).toBe(readFileSync(replayReportPath, "utf8"))
   })
 })

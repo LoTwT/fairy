@@ -629,6 +629,7 @@ describe("calculate", () => {
           level: 60,
           agentSpecialty: "anomaly",
           attribute: "electric",
+          skillLevels: { special: 12 },
           panel: {
             attack: 1600,
             maxHp: 10000,
@@ -647,6 +648,14 @@ describe("calculate", () => {
             status: "polarityDisorder",
             buildup: 100,
             remainingDurationSeconds: 5,
+            polarityDisorder: {
+              providerActorId: "yanagi",
+              skillLevelKey: "special",
+              originalDisorderDamageRatio: 0.15,
+              anomalyProficiencyBasePercent: 5,
+              anomalyProficiencyPerSkillLevelPercent: 2.25,
+              source: { sourceId: "provider:Yanagi", sourceVersion: "rules-v0.1" },
+            },
             contributors: [
               { actorId: "yixuan", buildup: 40, included: true },
               { actorId: "yanagi", buildup: 60, included: true },
@@ -672,6 +681,9 @@ describe("calculate", () => {
       ],
     })
     const disorderTrace = result.trace.find(event => event.path === "attackSegments[0].disorderFormulaId")
+    const polarityExtraTrace = result.trace.find(event =>
+      event.path === "attackSegments[0].polarityDisorderBaseDamageExtra",
+    )
     const virtualTrace = result.trace.find(event =>
       event.path === "attackSegments[0].anomalyContribution.virtualAgent",
     )
@@ -684,10 +696,139 @@ describe("calculate", () => {
       remainingDurationT: 5,
     })
     expect(disorderTrace?.rawValue).toBeCloseTo(1.6125, 4)
+    expect(polarityExtraTrace?.rawValue).toBeCloseTo(70.4, 4)
+    expect(polarityExtraTrace?.inputs).toMatchObject({
+      providerActorId: "yanagi",
+      skillLevelKey: "special",
+      skillLevel: 12,
+      anomalyProficiencyMultiplier: 0.32,
+    })
     expect(rows).toEqual(expect.arrayContaining([
       expect.objectContaining({ actorId: "yixuan", buildupContributionRatio: 0.4 }),
       expect.objectContaining({ actorId: "yanagi", buildupContributionRatio: 0.6 }),
     ]))
     expect(sourceIds).toEqual(expect.arrayContaining(["provider:Nicole", "provider:Yanagi"]))
+  })
+
+  it("supports polarity disorder proficiency formula across skill levels", () => {
+    for (let skillLevel = 1; skillLevel <= 16; skillLevel += 1) {
+      const result = calculate({
+        ...baseSnapshot,
+        team: [
+          baseSnapshot.team[0]!,
+          {
+            agentId: "yanagi",
+            level: 60,
+            agentSpecialty: "anomaly",
+            attribute: "electric",
+            skillLevels: { special: skillLevel },
+            panel: {
+              attack: 1600,
+              maxHp: 10000,
+              anomalyProficiency: 220,
+            },
+          },
+        ],
+        attackSegments: [
+          {
+            ...baseSnapshot.attackSegments[0]!,
+            id: `seg-polarity-skill-${skillLevel}`,
+            attribute: "electric",
+            damageType: "disorder",
+            multiplier: undefined,
+            anomalyContribution: {
+              status: "polarityDisorder",
+              buildup: 100,
+              remainingDurationSeconds: 5,
+              polarityDisorder: {
+                providerActorId: "yanagi",
+                skillLevelKey: "special",
+                originalDisorderDamageRatio: 0.15,
+                anomalyProficiencyBasePercent: 5,
+                anomalyProficiencyPerSkillLevelPercent: 2.25,
+              },
+            },
+          },
+        ],
+      })
+      const polarityExtraTrace = result.trace.find(event =>
+        event.path === "attackSegments[0].polarityDisorderBaseDamageExtra",
+      )
+
+      expect(polarityExtraTrace?.rawValue).toBeCloseTo(220 * ((5 + skillLevel * 2.25) / 100), 5)
+    }
+  })
+
+  it.each([
+    ["missing provider", [baseSnapshot.team[0]!], /providerActorId/],
+    [
+      "missing skill level",
+      [
+        baseSnapshot.team[0]!,
+        {
+          agentId: "yanagi",
+          level: 60,
+          agentSpecialty: "anomaly",
+          attribute: "electric",
+          panel: { attack: 1600, maxHp: 10000, anomalyProficiency: 220 },
+        },
+      ],
+      /skillLevelKey/,
+    ],
+    [
+      "out-of-range skill level",
+      [
+        baseSnapshot.team[0]!,
+        {
+          agentId: "yanagi",
+          level: 60,
+          agentSpecialty: "anomaly",
+          attribute: "electric",
+          skillLevels: { special: 17 },
+          panel: { attack: 1600, maxHp: 10000, anomalyProficiency: 220 },
+        },
+      ],
+      /between 1 and 16/,
+    ],
+    [
+      "missing anomaly proficiency",
+      [
+        baseSnapshot.team[0]!,
+        {
+          agentId: "yanagi",
+          level: 60,
+          agentSpecialty: "anomaly",
+          attribute: "electric",
+          skillLevels: { special: 12 },
+          panel: { attack: 1600, maxHp: 10000 },
+        },
+      ],
+      /anomalyProficiency/,
+    ],
+  ] as const)("fails loud for polarity disorder %s", (_, team, expectedError) => {
+    expect(() => calculate({
+      ...baseSnapshot,
+      team,
+      attackSegments: [
+        {
+          ...baseSnapshot.attackSegments[0]!,
+          id: "seg-polarity-invalid-input",
+          attribute: "electric",
+          damageType: "disorder",
+          anomalyContribution: {
+            status: "polarityDisorder",
+            buildup: 100,
+            remainingDurationSeconds: 5,
+            polarityDisorder: {
+              providerActorId: "yanagi",
+              skillLevelKey: "special",
+              originalDisorderDamageRatio: 0.15,
+              anomalyProficiencyBasePercent: 5,
+              anomalyProficiencyPerSkillLevelPercent: 2.25,
+            },
+          },
+        },
+      ],
+    })).toThrow(expectedError)
   })
 })

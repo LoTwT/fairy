@@ -124,6 +124,17 @@ export const anomalyContributionInputSchema = z
     overflowBuildup: z.number().finite().optional(),
     remainingDurationSeconds: z.number().finite().nonnegative().optional(),
     contributors: z.array(anomalyContributionActorInputSchema).optional(),
+    polarityDisorder: z
+      .object({
+        providerActorId: z.string().min(1),
+        skillLevelKey: z.string().min(1),
+        originalDisorderDamageRatio: z.number().finite(),
+        anomalyProficiencyBasePercent: z.number().finite(),
+        anomalyProficiencyPerSkillLevelPercent: z.number().finite(),
+        source: sourceRefSchema.optional(),
+      })
+      .strict()
+      .optional(),
   })
   .strict()
 
@@ -273,6 +284,7 @@ export const battleSnapshotSchema = z
   .strict()
   .superRefine((snapshot, ctx) => {
     const teamAgentIds = new Set(snapshot.team.map(agent => agent.agentId))
+    const teamByAgentId = new Map(snapshot.team.map(agent => [agent.agentId, agent]))
 
     if (!teamAgentIds.has(snapshot.activeActor.agentId)) {
       ctx.addIssue({
@@ -288,6 +300,46 @@ export const battleSnapshotSchema = z
           code: "custom",
           path: ["attackSegments", index, "actorId"],
           message: "attackSegments[].actorId must reference a team agent when provided",
+        })
+      }
+
+      const polarityDisorder = segment.anomalyContribution?.polarityDisorder
+      if (polarityDisorder === undefined)
+        return
+
+      const provider = teamByAgentId.get(polarityDisorder.providerActorId)
+      if (provider === undefined) {
+        ctx.addIssue({
+          code: "custom",
+          path: ["attackSegments", index, "anomalyContribution", "polarityDisorder", "providerActorId"],
+          message: "polarityDisorder.providerActorId must reference a team agent",
+        })
+        return
+      }
+
+      const skillLevel = provider.skillLevels?.[polarityDisorder.skillLevelKey]
+      if (skillLevel === undefined) {
+        ctx.addIssue({
+          code: "custom",
+          path: ["attackSegments", index, "anomalyContribution", "polarityDisorder", "skillLevelKey"],
+          message: "polarityDisorder.skillLevelKey must reference an explicit provider skill level",
+        })
+        return
+      }
+
+      if (skillLevel < 1 || skillLevel > 16) {
+        ctx.addIssue({
+          code: "custom",
+          path: ["attackSegments", index, "anomalyContribution", "polarityDisorder", "skillLevelKey"],
+          message: "polarityDisorder provider skill level must be between 1 and 16",
+        })
+      }
+
+      if (provider.panel.anomalyProficiency === undefined) {
+        ctx.addIssue({
+          code: "custom",
+          path: ["team", snapshot.team.indexOf(provider), "panel", "anomalyProficiency"],
+          message: "polarityDisorder provider panel.anomalyProficiency is required",
         })
       }
     })

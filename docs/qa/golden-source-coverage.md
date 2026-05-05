@@ -37,13 +37,13 @@ needed before true-data replay. It does not change QA's fixture assertions.
 | G01 | Core defense formula + guide reference | Covered by core rules. | Replay fixture only. |
 | G02 | Core defense formula + corrupted-shield state | Covered by core rules; DA boss can provide real boss context if needed. | Replay fixture can use DA boss from buhflipexplode. |
 | G03 | Core crit expected-value formula | Covered by core rules. | Replay fixture only. |
-| G04 | Core bucket scan / marginal breakpoint formula | Formula representation still marked `pending-formula` in QA fixture. | Decide exact executable scan representation before release gate. Not source-blocked. |
+| G04 | Core bucket scan / marginal breakpoint formula | Covered by executable replay against guide breakpoints. | Passed. |
 | G05 | Core sheer formula + corrupted-shield boss context | DA boss data available from buhflipexplode/Mihoyo. | Replay fixture should pick a DA corrupted-shield-compatible boss and preserve source refs. |
 | G06 | Core sheer formula + default 60+ boss context | DA boss data available from buhflipexplode/Mihoyo. | Replay fixture can use same DA boss with shield inactive or another DA boss. |
 | G07 | Core per-segment rounding | Covered by core rules. | Replay fixture only. |
 | G08 | Core anomaly mastery floor | Covered by core rules. | Replay fixture only. |
-| G09 | Base daze value + display-floor behavior | buhflipexplode DA enemies expose `baseDaze[]` and DA periods expose `versionDazeMult[]`. | Cleaned DA boss slot must expose sourced base daze/effective daze. |
-| G10 | Attribute alias mapping (frost/auric -> ice/ether) | Covered by glossary/naming policy/core mapping. | Replay fixture only. |
+| G09 | Base daze value + display-floor behavior | buhflipexplode DA enemies expose `baseDaze[]` and DA periods expose `versionDazeMult[]`; replay verifies raw/display floor behavior. | Passed. |
+| G10 | Attribute alias mapping (frost/auric -> ice/ether) | Covered by glossary/naming policy/core mapping; replay verifies resistance and anomaly-buildup-resistance lanes. | Passed. |
 | G11 | Attribute damage-bonus alias mapping | Covered by glossary/naming policy/core mapping. | Replay fixture only. |
 | G12 | Core anomaly threshold table | Covered by core rules. | Replay fixture only. |
 | G13 | Special enemy + Deadly Assault anomaly-threshold modifiers | Deferred to V1.x by @lo-user on 2026-05-05. Reference guide / Product v2.0 documents the rule; core currently supports only explicit `thresholdOverride`, not data-driven threshold-rule composition. | V1.x should implement sourced threshold-rule support and replay this anchor. |
@@ -52,8 +52,8 @@ needed before true-data replay. It does not change QA's fixture assertions.
 | G16 | Disorder daze-level zone | Covered by core rules. | Replay fixture only. |
 | G17 | Corrupted-shield cleanse true damage | Core rules covered; DA boss max HP available from buhflipexplode. | Cleaned DA boss slot must expose sourced max HP/effective max HP. |
 | G21 | 1-agent Yixuan sheer | Excel has Yixuan agent row; panel values remain user snapshot. | Minimal Excel agent mapping for Yixuan id/attribute/specialty/label/source refs. |
-| G22 | Yixuan + Nicole defense reduction | Excel has Nicole rows/descriptions. | Minimal Excel agent mapping plus manually accepted typed modifier for Nicole defense reduction; unresolved if source text cannot be mapped confidently. |
-| G23 | Yixuan + Nicole + Yanagi polarity disorder | Excel has Yanagi rows/descriptions; core supports polarity disorder. | Minimal Excel agent mapping plus manually accepted typed modifier/source refs for Yanagi polarity-disorder behavior. |
+| G22 | Yixuan + Nicole defense reduction | Excel has Nicole rows/descriptions; lo-user accepted the defense-reduction mapping. | Passed with explicit inactive/active snapshot replay. |
+| G23 | Yixuan + Nicole + Yanagi polarity disorder | Excel has Yanagi rows/descriptions; lo-user accepted the disorder boost and EX Special polarity-disorder template. | Passed with explicit inactive/active replay and skill-level parameterized polarity-disorder template. |
 
 ## Agent Source Evidence For G21-G23
 
@@ -69,14 +69,15 @@ Calculation-relevant source text candidates:
 
 | Anchor | Source anchor | Candidate normalized effect | Acceptance status |
 |---|---|---|---|
-| G22 Nicole defense reduction | `代理人核心技描述!D4:J4` | Target defense reduction by core passive level; level 7 text says target defense is reduced by 40% for 3.5s. Bucket should map to the defense-zone reduction path, not penetration. | Needs deterministic parser/template or manual acceptance before cleaned typed modifier output. |
+| G22 Nicole defense reduction | `代理人核心技描述!D4:J4` | Target defense reduction by core passive level; level 7 text says target defense is reduced by 40% for 3.5s. Bucket maps to the defense-zone reduction path, not penetration. | Accepted by @lo-user on 2026-05-05 as `requiresActivation`; replay verifies inactive/no-effect and active/effect snapshots. |
 | G22 Nicole ether damage bonus | `代理人核心技描述!K4:L4` | Additional ability grants team damage against the debuffed target for ether damage. Not required for a pure defense-reduction G22 replay unless the fixture explicitly activates it. | Keep as source-text candidate; do not auto-activate. |
-| G23 Yanagi disorder boost | `代理人核心技描述!D23:J23` | Core passive increases disorder damage multiplier after EX Special; level 7 text reaches +250% and also grants electric damage. | Needs manual acceptance because the duration/trigger state is snapshot-active, not timeline-simulated. |
-| G23 Yanagi polarity disorder | `代理人技能描述!C298`, `代理人技能描述!C303` | EX Special / Ultimate can trigger Polarity Disorder using a formula based on original Disorder damage plus Yanagi Anomaly Proficiency. | Needs a dedicated handler/template because the text carries a formula placeholder (`{CAL:...}`) and must preserve source refs. |
+| G23 Yanagi disorder boost | `代理人核心技描述!D23:J23` | Core passive increases disorder damage multiplier after EX Special; level 7 text reaches +250% and also grants electric damage. | Accepted by @lo-user on 2026-05-05 as `requiresActivation`; replay verifies inactive/no-effect and active/effect snapshots. |
+| G23 Yanagi polarity disorder | `代理人技能描述!C298`, `代理人技能描述!C303` | EX Special / Ultimate can trigger Polarity Disorder using a formula based on original Disorder damage plus Yanagi Anomaly Proficiency. | EX Special accepted by @lo-user on 2026-05-05 as a skill-level parameterized template; replay verifies skill levels 1-16. Ultimate remains a non-blocking candidate. |
 
-These rows are enough for a minimal #40 agent/source-text reader. They are not
-enough to publish trusted typed modifiers until the acceptance gate records which
-template/handler was accepted for each effect.
+These rows are enough for a minimal #40 agent/source-text reader. Trusted G22
+and G23 replay now uses the acceptance records described below; any future
+source-text effect still needs the same deterministic-template or manual
+acceptance treatment before it can become a typed modifier.
 
 ## Manual Acceptance Gate
 
@@ -84,9 +85,10 @@ G22/G23 stay in the V1 replay gate, but calculation-relevant natural-language
 effects must not be guessed. Before a typed modifier derived from Nicole/Yanagi
 source text can enter replay, it needs an acceptance record.
 
-Suggested storage path:
+Storage path:
 
-- `data/cleaned/audit/<agent>.acceptance.json`
+- `data/cleaned/audit/nicole.acceptance.json`
+- `data/cleaned/audit/yanagi.acceptance.json`
 
 Minimum acceptance record fields:
 
@@ -95,7 +97,7 @@ Minimum acceptance record fields:
 | `agentId` | Stable cleaned agent id, e.g. `nicole` / `yanagi`. |
 | `effectId` | Stable modifier/effect id used by replay. |
 | `sourceId` | `lo-user-excel`. |
-| `sourceAnchor` | Exact workbook anchor, e.g. `代理人核心技描述!D4:J4`. |
+| `sourceRefs[]` | Exact workbook anchors, e.g. `代理人核心技描述!D4:J4`. |
 | `sourceTextHash` | SHA-256 of the accepted source text after parser normalization. |
 | `effectTemplateId` / `handlerId` | The deterministic template or runtime handler being accepted. |
 | `acceptedBy` | For V1 dogfooding, this must be `@lo-user`. |
@@ -104,6 +106,14 @@ Minimum acceptance record fields:
 Replay rule: if an effect required by G22/G23 has no matching acceptance record,
 the replay harness must emit blocking `ERR-DAT-005` and must not silently apply a
 modifier inferred from text.
+
+Current accepted records:
+
+| Effect | Acceptance semantics |
+|---|---|
+| `nicole-defense-reduction` | `requiresActivation=true`; inactive snapshot must have no defense-reduction effect, active snapshot applies 40% defense reduction from core passive level 7. |
+| `yanagi-disorder-boost` | `requiresActivation=true`; inactive snapshot must have no disorder-damage boost, active snapshot applies +250% anomaly/disorder damage bonus from core passive level 7. |
+| `yanagi-polarity-disorder-ex-special` | EX Special polarity disorder template; supports skill levels 1-16 using `(5 + specialLevel * 2.25) / 100` times Yanagi anomaly proficiency, plus 15% of original disorder damage. Snapshot validation fails loud if the Yanagi provider is missing, `skillLevels.special` is missing, the skill level is outside 1-16, or provider `panel.anomalyProficiency` is missing. |
 
 ## Immediate #40 Minimum Range
 
@@ -131,38 +141,40 @@ cleaned artifacts:
 - `data/cleaned/audit/v1-agent-source-candidates.json` — minimal #40 reader
   output for Yixuan / Nicole / Yanagi identity rows plus calculation-relevant
   source text candidates and `sourceTextHash` values.
+- `data/cleaned/audit/nicole.acceptance.json` and
+  `data/cleaned/audit/yanagi.acceptance.json` — lo-user manual acceptance
+  records for G22/G23 source-text mappings.
 - `data/cleaned/golden/v1-replay-report.json` — #43 replay baseline for the
   DD-002 19-anchor scope.
 
-The current baseline intentionally reports:
+The current replay report intentionally reports:
 
 | Status | Anchors | Meaning |
 |---|---|---|
-| `passed` | 17 anchors | Core calculation replay ran with sourced Excel/DA refs. G04/G09/G10 now have executable assertions. |
-| `pendingHarness` | none | No V1 anchors are pending harness after the G04/G09/G10 replay patch. |
-| `blocked` | G22, G23 | Excel source text is extracted and hashed, but trusted modifier replay needs manual acceptance or deterministic template support. |
+| `passed` | 19 anchors | All V1 anchors pass executable replay with sourced Excel/DA refs and lo-user accepted G22/G23 mappings. |
+| `pendingHarness` | none | No V1 anchors are pending harness. |
+| `blocked` | none | G22/G23 `ERR-DAT-005` diagnostics are cleared by acceptance records. |
 | `deferred` | G13, G18-G20 | Explicit V1.x scope. |
 
 `pnpm --filter @fairy/data verify:golden-v1` is an offline freshness and shape
 gate. It verifies the artifacts are regenerated from the retained sources and
-that the blocking/pending statuses stay explicit. It does not mark V1
-`releaseReady` until G22/G23 blocking `ERR-DAT-005` diagnostics are cleared.
+that V1 replay has `passed=19`, `pendingHarness=0`, `blocked=0`,
+`blockingDiagnostics=0`, and `releaseReady=true`.
 
-## Product / Human Decisions Needed
-
-| Decision | Why |
-|---|---|
-| Nicole/Yanagi modifier acceptance | Natural-language conversion cannot be fully automatic. Any V1 typed modifier used in G22/G23 needs deterministic parser support or explicit manual acceptance tied to the source anchors above. |
+## Product / Human Decisions
 
 TL recommendation:
 
 - **G13**: deferred by @lo-user on 2026-05-05. Track with G18/G19/G20 as V1.x
   golden expansion work. Do not use `thresholdOverride` to claim the anchor in
   V1, because that would bypass sourced rule composition and source trace.
-- **Nicole/Yanagi**: Product accepted the manual gate above. Keep G22/G23 in V1,
-  but require acceptance records for the specific source anchors. If no
-  acceptance record exists, the replay harness should emit `ERR-DAT-005` instead
-  of silently applying a guessed modifier.
+- **Nicole/Yanagi**: @lo-user accepted the G22/G23 mapping semantics on
+  2026-05-05. A/B effects are explicit inactive/active snapshot states; C is a
+  skill-level-parameterized EX Special polarity-disorder template. C must fail
+  loud when provider, explicit skill level, or provider anomaly proficiency input
+  is missing. If a required acceptance record is removed or its source hash
+  changes, the replay harness must fail instead of silently applying a guessed
+  modifier.
 
-#43 can build the replay harness for the 19 V1 anchors. G13 must remain listed
-as an explicit V1.x gap rather than disappearing from QA visibility.
+#43 now has a release-ready replay baseline for the 19 V1 anchors. G13 remains
+listed as an explicit V1.x gap rather than disappearing from QA visibility.
