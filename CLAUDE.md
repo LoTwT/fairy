@@ -21,10 +21,12 @@ Fairy is a ZZZ static snapshot damage calculator for 1-3 agents.
 
 ## Current Phase
 
-S4 CLI shell and S5 data ingestion. Current engineering entry points:
+S5 data ingestion. Current engineering entry points:
 
 - `docs/architecture/naming-policy.md`
 - `docs/architecture/monorepo-development.md`
 - `docs/data-contract/`
+- `docs/data-source/`
 - `packages/core/src/engine/`
 - `packages/cli/`
+- `packages/data/`

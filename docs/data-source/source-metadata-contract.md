@@ -1,0 +1,95 @@
+# Source Metadata Contract
+
+Status: S5 segment 1 baseline
+Owner: @TechLead
+Related contracts: `docs/data-contract/game-data.md`
+
+`@fairy/data` publishes cleaned `GameData`, not raw source files. Every cleaned
+row must retain enough metadata to reconstruct where it came from and which
+parser/version produced it.
+
+## SourceDocument
+
+Each source snapshot is represented as a `SourceDocument`:
+
+```ts
+interface SourceDocument {
+  id: string
+  kind: "excel" | "mihoyoWiki" | "thirdPartySite" | "manualReview"
+  url?: string
+  fileName?: string
+  gameVersion?: string
+  sourceVersion: string
+  fetchedAt?: string
+  parsedAt: string
+  parserVersion: string
+  licenseNote?: string
+}
+```
+
+Rules:
+
+- `id` must match a registered source descriptor.
+- `sourceVersion` must be stable for the source snapshot. Prefer workbook hash,
+  HTTP ETag, HTTP Last-Modified, or payload hash.
+- `parsedAt` is required for every source. `fetchedAt` is required for network
+  sources once real fetchers exist.
+- `parserVersion` must change when parser logic changes in a way that can alter
+  cleaned output.
+- `licenseNote` records usage constraints; it is not a legal clearance.
+
+## SourceRef
+
+Every formal data row and formal modifier must point back to a `SourceRef`:
+
+```ts
+interface SourceRef {
+  sourceId: string
+  sourceAnchor?: string
+  sourceVersion?: string
+  dataPath?: string
+}
+```
+
+Rules:
+
+- `sourceId` must match a `SourceDocument.id`.
+- `sourceVersion` should be copied when a row can survive across multiple source
+  snapshots.
+- `sourceAnchor` should be the closest source-local row/cell/asset path, such as
+  `Agents!A42`, `da-versions.json#versionEnemies[0]`, or a wiki page slug.
+- `dataPath` should point to the cleaned destination path, such as
+  `agents.yixuan.skillIds[0]`.
+
+## Formal Data Boundary
+
+Formal data is any row that ships from `@fairy/data` as canonical game data:
+
+- agents
+- skills and skill segments
+- W-Engines
+- Drive Discs
+- enemies
+- Resonium
+- modifier templates
+- rule tables
+- aliases derived from source terms
+
+Formal data must not be typed by hand. A row can enter `@fairy/data` only after
+the parser has linked it to a source document and source anchor. Manual review
+may approve or reject source-derived rows, but `manualReview` is not a source for
+inventing values.
+
+QA fixtures under `fixtures/golden/` are separate. They may be hand-authored and
+reviewed because they are test assertions, not published game data.
+
+## Segment 1 Implementation
+
+`packages/data` currently exposes:
+
+- source descriptors with fetch/compliance policy;
+- helpers for building `SourceDocument` and `SourceRef`;
+- a discovery-only empty `GameData` generator that validates the metadata shape;
+- adapter interfaces for future Excel/crawler implementations.
+
+This package intentionally contains no formal rows until S5 segment 2.
