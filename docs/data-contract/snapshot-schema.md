@@ -75,7 +75,7 @@ V1 心智模型简化：**activeActor 只是代理人**。V1.1+ 才考虑 active
 ### 1.6 多段攻击 = attackSegments[]
 
 **一次"攻击"可以有多段**（如仪玄强化特殊技 5 段普攻 + 总击）。每段独立：
-- 独立 `damageRatio` / `dazeRatio` / `attribute` / `tags` / `distanceDecay`
+- 独立 `multiplier` / `baseDazeMultiplier` / `attribute` / `tags` / `distanceDecay`（v0.4 同步 TL-3 PR #7 命名）
 - **逐段向上取整**后求和（攻略 PART 01 开头硬规则）→ 对应 SegmentResult.segmentDisplayDamage / displayTotalDamage
 
 为什么不退化为单段：
@@ -201,7 +201,7 @@ debug 档展示。trace 的关键证据字段（TL-3 calc-result.md §8）：
 | 暴击 | `critRate` / `critDamage` / `critZone` / `expectedMultiplier` / 三档伤害 |
 | 抗性 | 弱点 / 抗性属性映射 / `resistanceZone` |
 | 减易伤 | `vulnerabilityZone` / `dazeVulnerabilityZone` |
-| 失衡 | `dazeValue` / `dazeRatio` / `dazeCap` / `dazeResistance` / 恢复速度时间 |
+| 失衡 | `dazeValue` / `dazeRatio` / `dazeCap` / `dazeResistance` / 恢复速度时间（注：`dazeRatio` 此处指失衡比例字段，与 `attackSegment.baseDazeMultiplier` 不同概念） |
 | 异常 | `anomalyMastery` / `anomalyProficiency` / `anomalyBuildup` / `anomalyThreshold` / 触发计数 |
 | 紊乱 | 公式 id / 剩余持续时间 / 虚拟代理人贡献 / overflow / 排除 |
 | 命破 / 贯穿 | `agentSpecialty: rupture` / `sheerForce` / `sheerDamage` / `sheerDamageBonusZone` / 防御跳过证据 |

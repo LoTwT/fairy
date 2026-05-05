@@ -39,7 +39,7 @@
       "agentSpecialty": "rupture",
       "attribute": "auricInk",
       "skillLevels": { "basic": 9, "dodge": 9, "special": 12, "chain": 9, "core": 6 },
-      "wEngine": { "id": "qingmingLongShe", "level": 60, "refinement": 5 },
+      "wEngine": { "id": "qingmingLongShe", "level": 60, "phase": 5 },
       "driveDiscs": [/* 6 件，slot I–VI */],
       "mindscapeCinema": { "level": 0 },
       "panel": {
@@ -81,7 +81,7 @@
     "rank": "boss",
     "states": ["corruptedDomain"],
     "corruptedShield": { "active": true },
-    "anomalyTriggerCounts": { "fire": 0, "ice": 0, "physical": 0, "ether": 0, "electric": 0 }
+    "anomalyTriggerCounts": { "burn": 0, "frozen": 0, "assault": 0, "corruption": 0, "shock": 0 }
   },
 
   "modifiers": [],
@@ -98,7 +98,7 @@
   "critDamageMax": "≈ X * (1 + critDamage)",
   "nonCritDamage": "≈ X / (1 + critRate * critDamage)",
   "trace": {
-    "baseDamageZone": "= sheerForce 2423 * damageRatio 12.0",
+    "baseDamageZone": "= sheerForce 2423 * multiplier 12.0",
     "damageBonusZone": "1.0 (无外援)",
     "critZone": "暴击时 1 + 200.4% = 3.004 / 期望 1 + 0.554*2.004 = 2.110",
     "defenseZone": "已跳过 (sheer 伤害)",
@@ -169,7 +169,7 @@
     "enemyId": "pompey",
     "rank": "boss",
     "states": [],
-    "anomalyTriggerCounts": { "electric": 0 }
+    "anomalyTriggerCounts": { "shock": 0 }
     // pompey 的 electric resistance: 0.4 (特例，攻略 1.5；data 包提供敌人抗性表)
   }
 }
@@ -236,7 +236,7 @@
       "id": "stun-daze-vulnerability",           // illustrative
       "handlerId": "daze-vulnerability-bonus",
       "params": { "value": 0.35 },
-      "appliesTo": { "kind": "enemy", "when": { "dazed": true } },
+      "appliesTo": { "kind": "enemy" }, "when": { "dazed": true },
       "source": { "sourceId": "lycaon.additionalAbility" },
       "active": true
     }
