@@ -21,4 +21,5 @@ Fairy 是绝区零 1-3 代理人静态快照伤害计算器。V1 目标是 `@fai
 ## 关键文档
 
 - 命名策略：[architecture/naming-policy.md](architecture/naming-policy.md)
+- Monorepo 开发指南：[architecture/monorepo-development.md](architecture/monorepo-development.md)
 - Pending 术语表：[data-contract/pending-term-resolution-table.md](data-contract/pending-term-resolution-table.md)
