@@ -5,8 +5,8 @@
     "ruleSetVersion": "rules-v0.1-attached-2026-05-04",
     "schemaVersion": "v1",
     "generatedBy": "@UX",
-    "totalEntries": 26,
-    "scope": "P0 required — runtime error messages for damage calculator; v0.4 extends ERR-VER-* / ERR-EVENT-* series"
+    "totalEntries": 28,
+    "scope": "P0 required — runtime error messages for damage calculator; v0.4 extends ERR-VER-* / ERR-EVENT-* series; UX-S3-1 extends ERR-CALC-PENDING-* series (locked by PR #10 commit dacf36c)"
   },
   "ERR-RNG-001": "Damage Bonus Zone exceeds the cap of 600% (Strategy PART 01.2). Truncated for display; raw accumulated value: {raw}%.",
   "ERR-RNG-002": "CRIT Rate must be within 0–100% (Strategy PART 01.3). Auto-clamped to {clamped}%.",
@@ -33,5 +33,7 @@
   "ERR-UI-001": "This attack deals no damage in this scenario. Possible causes: Resistance Zone is 0, damage reduction floored at 20%, or hit on a non-weakness attribute.",
   "ERR-UI-002": "Loading example build / data…",
   "ERR-UI-003": "Team contains unsupported field (e.g., subordinate / Bangboo). V1 does not support this feature; the corresponding field has been ignored.",
-  "ERR-OCR-000": "This tool does not parse screenshots. Screenshots are visual references only. Please fill in fields manually."
+  "ERR-OCR-000": "This tool does not parse screenshots. Screenshots are visual references only. Please fill in fields manually.",
+  "ERR-CALC-PENDING-ANOMALY": "⚠ V1 PR #10 stage: anomaly damage formula returns a schema-compatible skeleton only and does **not produce trustworthy values**. Full anomaly computation (virtual agent weighting / anomaly trigger count table / anomaly crit zone / overflow exclusion, etc.) is implemented by task #27 [TL-S3-4].",
+  "ERR-CALC-PENDING-DISORDER": "⚠ V1 PR #10 stage: disorder damage formula returns a schema-compatible skeleton only and does **not produce trustworthy values**. Full disorder computation (seven-attribute multipliers / daze level zone / disorder daze accumulation / disorderFormulaId trace evidence, etc.) is implemented by task #27 [TL-S3-4]."
 }

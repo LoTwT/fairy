@@ -5,8 +5,8 @@
     "ruleSetVersion": "rules-v0.1-attached-2026-05-04",
     "schemaVersion": "v1",
     "generatedBy": "@UX",
-    "totalEntries": 26,
-    "scope": "P0 必填 — 伤害计算器实际触发的错误文案；v0.4 扩展 ERR-VER-* / ERR-EVENT-* 系列"
+    "totalEntries": 28,
+    "scope": "P0 必填 — 伤害计算器实际触发的错误文案；v0.4 扩展 ERR-VER-* / ERR-EVENT-* 系列；UX-S3-1 扩展 ERR-CALC-PENDING-* 系列（PR #10 commit dacf36c 锁定）"
   },
   "ERR-RNG-001": "增伤区已超过攻略上限 600%（PART 01.2）。已截断展示，原始累加值为 {raw}%。",
   "ERR-RNG-002": "暴击率有效范围 0~100%（攻略 PART 01.3）。已自动 clamp 为 {clamped}%。",
@@ -33,5 +33,7 @@
   "ERR-UI-001": "该攻击在此情境下不造成伤害。可能原因：抗性区为 0、减伤叠加至 20% 下限、命中无效弱点。",
   "ERR-UI-002": "正在加载示例构筑 / 数据…",
   "ERR-UI-003": "团队中存在 unsupported 字段（如 subordinate / 邦布）。V1 不支持此特性，对应字段已忽略。",
-  "ERR-OCR-000": "本工具不识别截图。截图仅作为录入时的视觉参考。请按字段对照填写。"
+  "ERR-OCR-000": "本工具不识别截图。截图仅作为录入时的视觉参考。请按字段对照填写。",
+  "ERR-CALC-PENDING-ANOMALY": "⚠ 当前 V1 PR #10 阶段：异常伤害公式仅返回 schema 兼容骨架，**未输出可信数值**。完整异常计算（虚拟代理人加权 / 异常触发计数表 / 异常暴击区 / overflow 排除等）由 task #27 [TL-S3-4] 实现。",
+  "ERR-CALC-PENDING-DISORDER": "⚠ 当前 V1 PR #10 阶段：紊乱伤害公式仅返回 schema 兼容骨架，**未输出可信数值**。完整紊乱计算（七属性倍率 / 失衡等级区 / 紊乱失衡值 / disorderFormulaId trace evidence 等）由 task #27 [TL-S3-4] 实现。"
 }
