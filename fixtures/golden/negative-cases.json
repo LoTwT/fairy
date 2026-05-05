@@ -1,0 +1,137 @@
+{
+  "schemaVersion": "qa-negative-fixtures-v0.1",
+  "contractVersion": "tl-3@26d9a33",
+  "cases": [
+    {
+      "id": "N01-team-empty",
+      "area": "schema",
+      "inputMutation": { "team": [] },
+      "expected": { "errors": [{ "path": "team", "reason": "team must contain 1-3 agents" }] }
+    },
+    {
+      "id": "N02-team-four-agents",
+      "area": "schema",
+      "inputMutation": { "team.length": 4 },
+      "expected": { "errors": [{ "path": "team", "reason": "team must contain 1-3 agents" }] }
+    },
+    {
+      "id": "N03-active-actor-not-in-team",
+      "area": "schema",
+      "inputMutation": { "activeActor.agentId": "agent-not-in-team" },
+      "expected": { "errors": [{ "path": "activeActor.agentId", "reason": "active actor must match exactly one team member" }] }
+    },
+    {
+      "id": "N04-stale-single-attack-segment",
+      "area": "schema",
+      "inputMutation": { "attackSegment": { "id": "legacy-single-segment" }, "attackSegments": "missing" },
+      "expected": { "errors": [{ "path": "attackSegments", "reason": "attackSegments[] is required" }] }
+    },
+    {
+      "id": "N05-old-breach-field-outside-migration",
+      "area": "alias-migration",
+      "inputMutation": { "team[0].panel.breachForce": 2423 },
+      "expected": {
+        "errorsOrMigrationRequired": true,
+        "canonicalOutputMustNotContain": ["breachForce"],
+        "migrationTraceIfAccepted": { "kind": "aliasMigration", "sourceAlias": "breachForce", "displayValue": "sheerForce" }
+      }
+    },
+    {
+      "id": "N06-old-anomaly-candidate-x-swap",
+      "area": "alias-migration",
+      "inputMutation": { "sourceAlias": "candidateXAnomalyMasteryMeansDamage" },
+      "expected": {
+        "canonicalMeaning": { "anomalyMastery": "buildup", "anomalyProficiency": "damage" },
+        "migrationTraceRequired": true
+      }
+    },
+    {
+      "id": "N07-formal-data-modifier-missing-source",
+      "area": "source-rules",
+      "inputMutation": { "modifier.origin": "formal-data", "modifier.source": "missing" },
+      "expected": {
+        "errors": [{ "reason": "formal data modifiers require source" }],
+        "calculationTrustworthy": false
+      }
+    },
+    {
+      "id": "N08-user-modifier-missing-source",
+      "area": "source-rules",
+      "inputMutation": { "modifier.origin": "user-snapshot", "modifier.source": "missing" },
+      "expected": {
+        "warnings": ["ERR-SRC-001"],
+        "modifierResult": { "sourceMissing": true },
+        "bucketContributor": { "sourceMissing": true, "diagnosticRefs": "required" },
+        "calculationMayContinue": true
+      }
+    },
+    {
+      "id": "N09-unknown-handler-id",
+      "area": "handler",
+      "inputMutation": { "modifiers[0].handlerId": "runtime-js-or-unknown" },
+      "expected": { "errors": [{ "path": "modifiers[0].handlerId", "reason": "handlerId must resolve to registered deterministic handler" }] }
+    },
+    {
+      "id": "N10-condition-missing-path",
+      "area": "condition-dsl",
+      "inputMutation": { "modifiers[0].when": { "field": "enemy.states.nonexistent", "op": "exists" } },
+      "expected": {
+        "conditionResult": false,
+        "modifierResult": { "active": false, "inactiveReason": "conditionNotMet" },
+        "traceContains": ["condition result"]
+      }
+    },
+    {
+      "id": "N11-condition-array-in-semantics",
+      "area": "condition-dsl",
+      "inputMutation": { "modifiers[0].when": { "field": "segment.tags", "op": "in", "value": "exSpecial" } },
+      "expected": {
+        "assertion": "true only when segment.tags contains exSpecial; false otherwise",
+        "traceContains": ["condition result"]
+      }
+    },
+    {
+      "id": "N12-version-mismatch-recalculate",
+      "area": "versioning",
+      "inputMutation": {
+        "importedVersions": { "gameVersion": "old", "ruleSetVersion": "old", "dataVersion": "old", "sourceVersion": "old" },
+        "selectedPath": "recalculateCurrent"
+      },
+      "expected": {
+        "resultUsesCurrentVersions": true,
+        "originalFieldsRequired": ["originalGameVersion", "originalRuleSetVersion", "originalDataVersion", "originalSourceVersion"],
+        "traceContains": ["recalculateCurrent"]
+      }
+    },
+    {
+      "id": "N13-version-mismatch-read-only",
+      "area": "versioning",
+      "inputMutation": { "importedVersions": { "gameVersion": "old", "schemaVersion": "old" }, "selectedPath": "keepOriginalReadOnly" },
+      "expected": {
+        "preservesOriginalVersionFields": true,
+        "readOnly": true,
+        "traceContains": ["keepOriginalReadOnly"]
+      }
+    },
+    {
+      "id": "N14-locale-does-not-localize-json",
+      "area": "i18n",
+      "inputMutation": { "locale": "en", "options.lang": "en" },
+      "expected": {
+        "jsonKeysRemainEnglish": true,
+        "enumValuesRemainEnglish": true,
+        "diagnosticsUseKeys": true,
+        "localizedMessagesNotInCoreResult": true
+      }
+    },
+    {
+      "id": "N15-unsupported-subordinate-v1",
+      "area": "unsupported-feature",
+      "inputMutation": { "team[0].subordinate": { "id": "bangboo-placeholder" } },
+      "expected": {
+        "warningsOrErrors": ["unsupported-feature"],
+        "traceMustNotInclude": ["bangbooAnomalyContribution", "bangbooCorruptedShieldReduction"]
+      }
+    }
+  ]
+}

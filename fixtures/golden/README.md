@@ -1,0 +1,40 @@
+# Golden Fixtures
+
+Status: QA-S3-1 draft
+Owner: @QA
+Inputs: Product v2.0, TL-3 data contract, QA-1 v0.2, QA-2 v0.2.1
+
+This directory contains QA-owned fixture specifications for the V1 golden
+regression set. The files are schema-facing, but not yet runtime test files.
+They become executable after `packages/core` runtime validators and test helpers
+land in S3.
+
+## Files
+
+- `golden-cases.json`: the 23 golden anchors from Product v2.0 / QA-1 v0.2,
+  mapped to TL-3 schema paths and required trace evidence.
+- `negative-cases.json`: reverse cases for schema validation, source rules,
+  version mismatch, source alias migration, and Condition DSL boundaries.
+
+## Fixture Status
+
+- `ready-for-schema`: path-level fixture is ready once runtime validators exist.
+- `pending-formula`: paths are stable, but exact numeric expectations need the
+  formula implementation to choose a precise representation.
+- `pending-data`: depends on `@fairy/data` source discovery or cleaned source
+  rows.
+
+No formal game data is hand-written here. Numeric values in this directory are
+QA assertions derived from documented golden anchors; data rows still need
+source metadata before V1 release.
+
+## Required Runtime Behavior
+
+- canonical snapshots must use `attackSegments[]`, not `attackSegment`;
+- canonical output must use official-first public fields, not old aliases such
+  as `breachForce`, `hpMax`, or swapped anomaly names;
+- trace evidence must be sufficient to assert the expected paths without
+  reading implementation internals;
+- user/temporary source-missing contributors may warn, while formal data source
+  omissions fail loudly;
+- `--lang` / `locale` must not localize JSON keys or enum values.

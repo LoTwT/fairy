@@ -1,0 +1,339 @@
+{
+  "schemaVersion": "qa-golden-fixtures-v0.2",
+  "contractVersion": "tl-3@26d9a33",
+  "qaMapping": "QA-1 v0.2",
+  "cases": [
+    {
+      "id": "G01-defense-default-boss",
+      "group": "defense-crit",
+      "status": "ready-for-schema",
+      "anchor": "60 agent vs 60+ boss default defenseZone = 0.4545",
+      "snapshotFocus": {
+        "team[0].level": 60,
+        "enemy.level": 60,
+        "enemy.rank": "boss",
+        "attackSegments[0].damageType": "regular"
+      },
+      "expected": {
+        "numeric": [{ "path": "buckets[?bucketId=defenseZone].effectiveMultiplier", "approx": 0.4545, "relativeTolerance": 0.0005 }],
+        "traceContains": ["levelBase", "baseDefense", "effectiveDefense", "defenseZone"],
+        "traceNotContains": ["defenseReduction"]
+      }
+    },
+    {
+      "id": "G02-defense-corrupted-shield-boss",
+      "group": "defense-crit",
+      "status": "ready-for-schema",
+      "anchor": "60 agent vs corrupted-shield boss defenseZone ~= 0.3165",
+      "snapshotFocus": {
+        "enemy.corruptedShield.active": true,
+        "enemy.rank": "boss",
+        "attackSegments[0].damageType": "regular"
+      },
+      "expected": {
+        "numeric": [{ "path": "buckets[?bucketId=defenseZone].effectiveMultiplier", "approx": 0.3165, "relativeTolerance": 0.001 }],
+        "traceContains": ["corruptedShield", "defenseZone"]
+      }
+    },
+    {
+      "id": "G03-crit-expected-value",
+      "group": "defense-crit",
+      "status": "ready-for-schema",
+      "anchor": "crit expectation = 1 + critRate * critDamage",
+      "snapshotFocus": {
+        "team[active].panel.critRate": 0.5,
+        "team[active].panel.critDamage": 1.0,
+        "options.resultMode": "expected"
+      },
+      "expected": {
+        "formula": "expectedMultiplier = 1 + critRate * critDamage",
+        "resultPaths": ["summary.nonCritDamage", "summary.critDamage", "summary.expectedDamage", "buckets[?bucketId=critZone]"],
+        "traceContains": ["critRate", "critDamage", "expectedMultiplier"]
+      }
+    },
+    {
+      "id": "G04-marginal-breakpoints",
+      "group": "defense-crit",
+      "status": "pending-formula",
+      "anchor": "damage bonus breakpoints 199.17%, 268.61%, 161.67%",
+      "snapshotFocus": { "bucketScan": ["damageBonusZone", "critZone", "defenseZone"] },
+      "expected": {
+        "numericAnchors": ["199.17%", "268.61%", "161.67%"],
+        "traceContains": ["damageBonusZone", "critZone", "defenseZone"]
+      }
+    },
+    {
+      "id": "G05-sheer-vs-corrupted-shield-ratio",
+      "group": "sheer-rupture",
+      "status": "ready-for-schema",
+      "anchor": "sheer damage vs corrupted-shield boss ~= regular damage 3.16x",
+      "snapshotFocus": {
+        "team[active].agentSpecialty": "rupture",
+        "team[active].panel.sheerForce": "required",
+        "enemy.corruptedShield.active": true,
+        "pairedSegments": ["regular", "sheer"]
+      },
+      "expected": {
+        "numeric": [{ "path": "pairedResult.sheerToRegularRatio", "approx": 3.16, "relativeTolerance": 0.005 }],
+        "traceContains": ["agentSpecialty:rupture", "sheerForce", "sheerDamageBonusZone", "defenseSkipped"]
+      }
+    },
+    {
+      "id": "G06-sheer-vs-default-boss-ratio",
+      "group": "sheer-rupture",
+      "status": "ready-for-schema",
+      "anchor": "sheer damage vs default 60+ boss ~= regular damage 2.2x",
+      "snapshotFocus": {
+        "team[active].agentSpecialty": "rupture",
+        "enemy.corruptedShield.active": false,
+        "pairedSegments": ["regular", "sheer"]
+      },
+      "expected": {
+        "numeric": [{ "path": "pairedResult.sheerToRegularRatio", "approx": 2.2, "relativeTolerance": 0.005 }],
+        "traceContains": ["defenseZone", "defenseSkipped"]
+      }
+    },
+    {
+      "id": "G07-multi-segment-ceil-before-sum",
+      "group": "rounding-display",
+      "status": "ready-for-schema",
+      "anchor": "multi-segment damage rounds each segment up before sum",
+      "snapshotFocus": {
+        "attackSegments": [
+          { "id": "seg-a", "expectedRawFractional": true },
+          { "id": "seg-b", "expectedRawFractional": true }
+        ]
+      },
+      "expected": {
+        "invariants": [
+          "attackSegments[i].segmentDisplayDamage = ceil(attackSegments[i].rawDamage)",
+          "summary.displayTotalDamage = sum(attackSegments[].segmentDisplayDamage)",
+          "summary.displayTotalDamage may differ from ceil(summary.rawTotalDamage)"
+        ],
+        "traceContains": ["ceilPerSegment"]
+      }
+    },
+    {
+      "id": "G08-anomaly-mastery-floor-before-buildup",
+      "group": "rounding-display",
+      "status": "ready-for-schema",
+      "anchor": "Anomaly Mastery floors before buildup",
+      "snapshotFocus": {
+        "team[active].panel.anomalyMastery": "fractional effective value",
+        "attackSegments[0].anomalyContribution.status": "shock"
+      },
+      "expected": { "traceContains": ["anomalyMastery", "floorForFormula", "anomalyBuildup"] }
+    },
+    {
+      "id": "G09-daze-ratio-display-floor",
+      "group": "rounding-display",
+      "status": "pending-formula",
+      "anchor": "daze ratio floors for display",
+      "snapshotFocus": {
+        "attackSegments[0].damageType": "daze",
+        "enemy.baseDaze": "required"
+      },
+      "expected": { "traceContains": ["dazeRatioRaw", "dazeRatioDisplay", "floorForDisplay"] }
+    },
+    {
+      "id": "G10-frost-auric-resistance-mapping",
+      "group": "attribute-mapping",
+      "status": "ready-for-schema",
+      "anchor": "Frost/Auric Ink resistance and buildup resistance map to Ice/Ether",
+      "snapshotFocus": {
+        "attackSegments[].attribute": ["frost", "auricInk"],
+        "enemy.resistance": ["ice", "ether"],
+        "enemy.anomalyBuildupResistance": ["ice", "ether"]
+      },
+      "expected": { "traceContains": ["frost->ice", "auricInk->ether"] }
+    },
+    {
+      "id": "G11-frost-auric-damage-bonus-mapping",
+      "group": "attribute-mapping",
+      "status": "ready-for-schema",
+      "anchor": "Frost/Auric Ink damage bonus maps to Ice/Ether bonus",
+      "snapshotFocus": {
+        "team[active].panel.iceDamageBonus": "used by frost",
+        "team[active].panel.etherDamageBonus": "used by auricInk"
+      },
+      "expected": { "traceContains": ["iceDamageBonus", "etherDamageBonus", "damageBonusZone"] }
+    },
+    {
+      "id": "G12-anomaly-threshold-rank-trigger-physical",
+      "group": "anomaly-disorder",
+      "status": "pending-data",
+      "anchor": "anomaly threshold by enemy rank and trigger count; physical multiplier 1.2x",
+      "snapshotFocus": {
+        "enemy.rank": "boss",
+        "enemy.anomalyTriggerCounts.physical": "varied",
+        "rules.anomalyThreshold": "required"
+      },
+      "expected": { "traceContains": ["anomalyThreshold", "enemy.rank", "triggerCount", "physicalMultiplier:1.2"] }
+    },
+    {
+      "id": "G13-special-threshold-multipliers-multiply",
+      "group": "anomaly-disorder",
+      "status": "pending-data",
+      "anchor": "special enemy +20% and defense-mode +10% threshold multipliers are multiplicative",
+      "snapshotFocus": {
+        "context.gameMode": "defenseGameMode",
+        "context.activeRuleIds": ["special-threshold-plus-10"],
+        "enemy.specialRules": ["threshold-plus-20"]
+      },
+      "expected": {
+        "traceContains": ["threshold-plus-20", "threshold-plus-10", "multiply"],
+        "traceNotContains": ["additiveMerge"]
+      }
+    },
+    {
+      "id": "G14-virtual-agent-contribution",
+      "group": "anomaly-disorder",
+      "status": "ready-for-schema",
+      "anchor": "virtual agent weighting, floored level, overflow and Bangboo excluded",
+      "snapshotFocus": {
+        "attackSegments[0].anomalyContribution.contributors": [
+          { "actorId": "agent-a", "included": true },
+          { "actorId": "bangboo-a", "included": false, "excludedReason": "bangboo" }
+        ],
+        "attackSegments[0].anomalyContribution.overflowBuildup": "required"
+      },
+      "expected": {
+        "traceContains": ["virtualAgent", "flooredLevel", "buildupContributionRatio", "overflowBuildup", "excludedReason:bangboo"]
+      }
+    },
+    {
+      "id": "G15-disorder-seven-formulas",
+      "group": "anomaly-disorder",
+      "status": "pending-formula",
+      "anchor": "seven disorder formulas depend on remaining duration T",
+      "snapshotFocus": {
+        "attackSegments[0].damageType": "disorder",
+        "remainingDurationT": "varied by status"
+      },
+      "expected": {
+        "coverage": "one fixture per committed disorder attribute/status path",
+        "traceContains": ["disorderFormulaId", "remainingDurationT", "sourceAnchor"]
+      }
+    },
+    {
+      "id": "G16-daze-level-zone",
+      "group": "anomaly-disorder",
+      "status": "pending-formula",
+      "anchor": "daze level zone = 1 + 0.0075 * level",
+      "snapshotFocus": { "levelInput": "attacker or enemy level per final formula" },
+      "expected": {
+        "formula": "dazeLevelZone = 1 + 0.0075 * level",
+        "traceContains": ["dazeLevelZone", "level"]
+      }
+    },
+    {
+      "id": "G17-corrupted-shield-cleanse-true-damage",
+      "group": "true-damage-events",
+      "status": "ready-for-schema",
+      "anchor": "corrupted shield cleanse true damage: 15% / 3% / 2.5%",
+      "snapshotFocus": {
+        "manualEvents[0].kind": "corruptedShieldCleanse",
+        "manualEvents[0].basePath": "enemy.maxHp",
+        "manualEvents[0].trueDamageRule": "varied",
+        "enemy.maxHp": "required"
+      },
+      "expected": {
+        "numericRules": [
+          { "trueDamageRule": "default15Percent", "multiplier": 0.15 },
+          { "trueDamageRule": "pre22CorruptionPriest3Percent", "multiplier": 0.03 },
+          { "trueDamageRule": "post22ShieldBoss25Permille", "multiplier": 0.025 }
+        ],
+        "resultPaths": ["events[0].baseValue", "events[0].multiplier", "events[0].rawDamage", "events[0].displayDamage"]
+      }
+    },
+    {
+      "id": "G18-part-break-true-damage",
+      "group": "true-damage-events",
+      "status": "pending-data",
+      "anchor": "part-break true-damage multiplier table",
+      "snapshotFocus": {
+        "manualEvents[0].kind": "partBreak",
+        "manualEvents[0].partId": "required",
+        "manualEvents[0].basePath": "enemy.maxHp or part.maxHp"
+      },
+      "expected": {
+        "traceContains": ["partId", "partType", "trueDamageRule", "sourceAnchor"],
+        "traceNotContains": ["damageBonusZone", "critZone", "defenseZone"]
+      }
+    },
+    {
+      "id": "G19-lost-void-daze-recovery-861",
+      "group": "daze-recovery",
+      "status": "pending-data",
+      "anchor": "Lost Void daze recovery example ~= 8.61s",
+      "snapshotFocus": {
+        "context.gameMode": "lostVoid",
+        "context.resoniumIds": "required",
+        "enemy.enemyId": "frenzied-henchman-equivalent"
+      },
+      "expected": {
+        "numeric": [{ "path": "trace.dazeRecoveryTime", "approx": 8.61, "relativeTolerance": 0.005 }],
+        "traceContains": ["dazeRecoveryTime", "resoniumIds", "recoveryRate"]
+      }
+    },
+    {
+      "id": "G20-lost-void-daze-recovery-642",
+      "group": "daze-recovery",
+      "status": "pending-data",
+      "anchor": "Lost Void daze recovery example ~= 6.42s",
+      "snapshotFocus": {
+        "context.gameMode": "lostVoid",
+        "context.resoniumIds": "required",
+        "enemy.enemyId": "armored-hati-equivalent"
+      },
+      "expected": {
+        "numeric": [{ "path": "trace.dazeRecoveryTime", "approx": 6.42, "relativeTolerance": 0.005 }],
+        "traceContains": ["dazeRecoveryTime", "resoniumIds", "catalystState"]
+      }
+    },
+    {
+      "id": "G21-team-one-yixuan-sheer",
+      "group": "team-modifiers",
+      "status": "ready-for-schema",
+      "anchor": "1-agent Yixuan naked sheer vs corrupted-shield boss matches sheer anchor",
+      "snapshotFocus": {
+        "team.length": 1,
+        "team[0].agentSpecialty": "rupture",
+        "team[0].panel.sheerForce": "required",
+        "activeActor.agentId": "team[0].agentId"
+      },
+      "expected": {
+        "traceContains": ["noTeammateModifiers", "sheerForce", "defenseSkipped"],
+        "traceNotContains": ["provider:Nicole", "provider:Yanagi"]
+      }
+    },
+    {
+      "id": "G22-team-two-nicole-defense-reduction",
+      "group": "team-modifiers",
+      "status": "ready-for-schema",
+      "anchor": "2-agent Yixuan + Nicole defense reduction 40%",
+      "snapshotFocus": {
+        "team.length": 2,
+        "modifiers[?id=nicole-defense-reduction].handlerId": "defense-reduction",
+        "modifiers[?id=nicole-defense-reduction].appliesTo.kind": "enemy"
+      },
+      "expected": {
+        "traceContains": ["provider:Nicole", "defenseReduction", "value:0.4", "conditionResult:true"]
+      }
+    },
+    {
+      "id": "G23-team-three-polarity-disorder",
+      "group": "team-modifiers",
+      "status": "ready-for-schema",
+      "anchor": "3-agent Yixuan + Nicole + Yanagi polarity disorder",
+      "snapshotFocus": {
+        "team.length": 3,
+        "team includes": ["Yixuan", "Nicole", "Yanagi"],
+        "attackSegments[0].damageType": "disorder"
+      },
+      "expected": {
+        "traceContains": ["provider:Nicole", "provider:Yanagi", "polarityDisorder", "contributionShare", "virtualAgent"]
+      }
+    }
+  ]
+}
