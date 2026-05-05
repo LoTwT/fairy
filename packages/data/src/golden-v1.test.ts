@@ -70,8 +70,8 @@ describe("V1 golden true-data replay baseline", () => {
     expect(report.deferredAnchorIds).toEqual(["G13", "G18", "G19", "G20"])
     expect(report.summary).toMatchObject({
       v1AnchorCount: 19,
-      passed: 14,
-      pendingHarness: 3,
+      passed: 17,
+      pendingHarness: 0,
       blocked: 2,
       blockingDiagnostics: 3,
       releaseReady: false,
@@ -79,10 +79,15 @@ describe("V1 golden true-data replay baseline", () => {
 
     const g13 = report.anchors.find(anchor => anchor.id === "G13")
     expect(g13?.status).toBe("deferred")
+    const g04 = report.anchors.find(anchor => anchor.id === "G04")
+    expect(g04?.status).toBe("passed")
+    expect(g04?.notes.join("\n")).toContain("199.17%, 268.61%, and 161.67%")
+    const g09 = report.anchors.find(anchor => anchor.id === "G09")
+    expect(g09?.status).toBe("passed")
+    expect(g09?.notes.join("\n")).toContain("daze ratio display floors")
     const g10 = report.anchors.find(anchor => anchor.id === "G10")
-    expect(g10?.status).toBe("pendingHarness")
-    expect(g10?.notes.join("\n")).toContain("Resistance mapping is asserted")
-    expect(g10?.notes.join("\n")).toContain("Anomaly-buildup-resistance mapping is still pending")
+    expect(g10?.status).toBe("passed")
+    expect(g10?.notes.join("\n")).toContain("both resistanceZone and anomaly-buildup-resistance")
     const g11 = report.anchors.find(anchor => anchor.id === "G11")
     expect(g11?.status).toBe("passed")
     const g22 = report.anchors.find(anchor => anchor.id === "G22")

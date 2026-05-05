@@ -220,6 +220,10 @@ describe("calculate", () => {
   it("applies daze modifiers to regular attack segments with baseDazeMultiplier", () => {
     const result = calculate({
       ...baseSnapshot,
+      enemy: {
+        ...baseSnapshot.enemy,
+        dazeCap: 1000,
+      },
       attackSegments: [
         {
           ...baseSnapshot.attackSegments[0]!,
@@ -238,6 +242,8 @@ describe("calculate", () => {
     })
 
     expect(result.attackSegments[0]?.dazeValue).toBe(180)
+    expect(result.attackSegments[0]?.dazeRatioRaw).toBe(18)
+    expect(result.attackSegments[0]?.dazeRatioDisplay).toBe(18)
     expect(result.buckets.some(bucket => bucket.bucketId === "dazeInflictZone")).toBe(true)
   })
 
@@ -340,6 +346,70 @@ describe("calculate", () => {
       flooredAnomalyMastery: 123,
     })
     expect(buildupTrace?.displayValue).toBe("floorForFormula")
+  })
+
+  it("maps frost and auric ink anomaly buildup resistance to ice and ether", () => {
+    const frost = calculate({
+      ...baseSnapshot,
+      team: [
+        {
+          ...baseSnapshot.team[0]!,
+          panel: {
+            ...baseSnapshot.team[0]!.panel,
+            anomalyMastery: 100,
+          },
+        },
+      ],
+      enemy: {
+        ...baseSnapshot.enemy,
+        anomalyBuildupResistance: { ice: 0.15, ether: 0.35 },
+      },
+      attackSegments: [
+        {
+          ...baseSnapshot.attackSegments[0]!,
+          id: "seg-frost-buildup",
+          attribute: "frost",
+          damageType: "anomaly",
+          anomalyContribution: { status: "frozen", buildup: 100 },
+        },
+      ],
+    })
+    const auric = calculate({
+      ...baseSnapshot,
+      team: [
+        {
+          ...baseSnapshot.team[0]!,
+          panel: {
+            ...baseSnapshot.team[0]!.panel,
+            anomalyMastery: 100,
+          },
+        },
+      ],
+      enemy: {
+        ...baseSnapshot.enemy,
+        anomalyBuildupResistance: { ice: 0.15, ether: 0.35 },
+      },
+      attackSegments: [
+        {
+          ...baseSnapshot.attackSegments[0]!,
+          id: "seg-auric-buildup",
+          attribute: "auricInk",
+          damageType: "anomaly",
+          anomalyContribution: { status: "corruption", buildup: 100 },
+        },
+      ],
+    })
+
+    expect(frost.attackSegments[0]?.anomalyBuildup).toBe(85)
+    expect(auric.attackSegments[0]?.anomalyBuildup).toBe(65)
+    expect(frost.trace.find(event => event.path === "attackSegments[0].anomalyBuildup")?.inputs).toMatchObject({
+      resistanceAttribute: "ice",
+      anomalyBuildupResistance: 0.15,
+    })
+    expect(auric.trace.find(event => event.path === "attackSegments[0].anomalyBuildup")?.inputs).toMatchObject({
+      resistanceAttribute: "ether",
+      anomalyBuildupResistance: 0.35,
+    })
   })
 
   it("applies anomaly crit contributors without creating the standard crit bucket", () => {

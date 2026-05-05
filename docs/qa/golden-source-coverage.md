@@ -138,16 +138,15 @@ The current baseline intentionally reports:
 
 | Status | Anchors | Meaning |
 |---|---|---|
-| `passed` | 14 anchors | Core calculation replay ran with sourced Excel/DA refs. |
-| `pendingHarness` | G04, G09, G10 | Source coverage is available, but the executable bucket-scan / daze-display / anomaly-buildup-resistance assertion still needs a concrete replay representation. G10 already asserts frost/auric resistance lanes, but its anomaly-buildup-resistance half is pending. |
+| `passed` | 17 anchors | Core calculation replay ran with sourced Excel/DA refs. G04/G09/G10 now have executable assertions. |
+| `pendingHarness` | none | No V1 anchors are pending harness after the G04/G09/G10 replay patch. |
 | `blocked` | G22, G23 | Excel source text is extracted and hashed, but trusted modifier replay needs manual acceptance or deterministic template support. |
 | `deferred` | G13, G18-G20 | Explicit V1.x scope. |
 
 `pnpm --filter @fairy/data verify:golden-v1` is an offline freshness and shape
 gate. It verifies the artifacts are regenerated from the retained sources and
 that the blocking/pending statuses stay explicit. It does not mark V1
-`releaseReady` until G04/G09 executable assertions are implemented and G22/G23
-blocking `ERR-DAT-005` diagnostics are cleared.
+`releaseReady` until G22/G23 blocking `ERR-DAT-005` diagnostics are cleared.
 
 ## Product / Human Decisions Needed
 

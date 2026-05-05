@@ -36,8 +36,8 @@
   ],
   "summary": {
     "v1AnchorCount": 19,
-    "passed": 14,
-    "pendingHarness": 3,
+    "passed": 17,
+    "pendingHarness": 0,
     "blocked": 2,
     "deferred": 4,
     "blockingDiagnostics": 3,
@@ -98,10 +98,16 @@
     },
     {
       "id": "G04",
-      "status": "pendingHarness",
-      "sourceRefs": [],
+      "status": "passed",
+      "sourceRefs": [
+        {
+          "sourceId": "zzz-data-introduction",
+          "sourceVersion": "2026-05-05",
+          "sourceAnchor": "docs/reference/zzz-data-introduction.txt:121-123"
+        }
+      ],
       "notes": [
-        "Source coverage is not blocked, but the executable bucket-scan assertion still needs a CLI/core replay representation."
+        "Executable bucket-scan replay reproduces the guide's 199.17%, 268.61%, and 161.67% penetration-vs-damage-bonus breakpoints."
       ]
     },
     {
@@ -172,7 +178,7 @@
     },
     {
       "id": "G09",
-      "status": "pendingHarness",
+      "status": "passed",
       "sourceRefs": [
         {
           "sourceId": "buhflipexplode-zzz-da",
@@ -186,12 +192,12 @@
         }
       ],
       "notes": [
-        "buhflipexplode DA source exposes baseDaze/versionDazeMult; executable daze ratio display-floor assertion still needs a replay representation."
+        "buhflipexplode DA baseDaze/versionDazeMult feeds enemy.dazeCap; replay asserts daze ratio display floors the percentage value."
       ]
     },
     {
       "id": "G10",
-      "status": "pendingHarness",
+      "status": "passed",
       "sourceRefs": [
         {
           "sourceId": "lo-user-excel",
@@ -200,8 +206,7 @@
         }
       ],
       "notes": [
-        "Resistance mapping is asserted: frost uses enemy.resistance.ice and auricInk uses enemy.resistance.ether.",
-        "Anomaly-buildup-resistance mapping is still pending because current core replay does not consume enemy.anomalyBuildupResistance."
+        "Frost maps to Ice and Auric Ink maps to Ether for both resistanceZone and anomaly-buildup-resistance."
       ]
     },
     {

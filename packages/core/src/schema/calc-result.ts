@@ -47,6 +47,8 @@ export const segmentResultSchema = z
     critDamage: z.number().finite().optional(),
     nonCritDamage: z.number().finite().optional(),
     dazeValue: z.number().finite().optional(),
+    dazeRatioRaw: z.number().finite().optional(),
+    dazeRatioDisplay: z.number().finite().optional(),
     anomalyBuildup: z.number().finite().optional(),
     traceRefs: z.array(z.string().min(1)),
   })

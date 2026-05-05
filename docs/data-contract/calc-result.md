@@ -84,6 +84,8 @@ interface SegmentResult {
   critDamage?: number
   nonCritDamage?: number
   dazeValue?: number
+  dazeRatioRaw?: number
+  dazeRatioDisplay?: number
   anomalyBuildup?: number
   traceRefs: string[]
 }

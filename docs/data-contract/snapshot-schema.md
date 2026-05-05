@@ -152,7 +152,7 @@ interface CalcSummary {
 - `tiny`：`expectedDamage` / `critDamage` / `nonCritDamage` 三档
 - `brief`：tiny + `damageType` + warnings 摘要
 - `verbose`：brief + `rawTotalDamage` vs `displayTotalDamage`（多段取整差异）
-- `debug`：完整字段 + dazeValue / anomalyBuildup / disorderDamage / trueDamage 副输出
+- `debug`：完整字段 + dazeValue / dazeRatioRaw / dazeRatioDisplay / anomalyBuildup / disorderDamage / trueDamage 副输出
 
 **易混淆**：
 - `rawTotalDamage` 是**理论**总伤（不取整）；`displayTotalDamage` 是**游戏内显示**总伤（每段向上取整后求和）。**两者通常不相等**（攻略 PART 01 开头硬规则）。
