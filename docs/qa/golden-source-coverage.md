@@ -5,9 +5,11 @@ Owner: @TechLead
 Reviewers: @Product, @QA, @lo-user
 Related tasks: task #40, task #43
 
-This document narrows the original 23 golden anchors to the V1 20-anchor release
-gate locked by D-13. Anchors G18/G19/G20 are deferred to V1.x because they
-require non-DA enemy / part-break data.
+This document narrows the original 23 golden anchors to the V1 19-anchor release
+gate locked by D-13 plus DD-002. Anchors G13/G18/G19/G20 are deferred to V1.x:
+G13 requires data-driven anomaly-threshold rule composition that is outside the
+current #43 true-data replay scope, while G18/G19/G20 require non-DA enemy /
+part-break data.
 
 The goal of this audit is to decide the minimum source and cleaned-data work
 needed before true-data replay. It does not change QA's fixture assertions.
@@ -16,8 +18,8 @@ needed before true-data replay. It does not change QA's fixture assertions.
 
 | Set | Anchor IDs | V1 status |
 |---|---|---|
-| V1 release gate | G01-G17, G21-G23 | Must pass before V1 release. |
-| Deferred V1.x | G18-G20 | Not V1 blockers. |
+| V1 release gate | G01-G12, G14-G17, G21-G23 | Must pass before V1 release. |
+| Deferred V1.x | G13, G18-G20 | Not V1 blockers. |
 
 ## Source Status Summary
 
@@ -28,7 +30,7 @@ needed before true-data replay. It does not change QA's fixture assertions.
 | Mihoyo DA snapshot | PR #24 retained 35 details and zh/en alignment. | Chinese buff/boss/room text and source anchors for later typed-modifier review. |
 | Excel workbook | Raw workbook retained; `workbook-audit.json` records sheet/column shape. | Minimal agent kit data for Yixuan / Nicole / Yanagi team-modifier anchors, if V1 replay uses formal sourced modifiers. |
 
-## 20-Anchor Matrix
+## 19-Anchor Matrix
 
 | ID | V1 source dependency | Current source coverage | Remaining work |
 |---|---|---|---|
@@ -44,7 +46,7 @@ needed before true-data replay. It does not change QA's fixture assertions.
 | G10 | Attribute alias mapping (frost/auric -> ice/ether) | Covered by glossary/naming policy/core mapping. | Replay fixture only. |
 | G11 | Attribute damage-bonus alias mapping | Covered by glossary/naming policy/core mapping. | Replay fixture only. |
 | G12 | Core anomaly threshold table | Covered by core rules. | Replay fixture only. |
-| G13 | Special enemy + Deadly Assault anomaly-threshold modifiers | Reference guide / Product v2.0 documents the rule; core currently supports only explicit `thresholdOverride`, not data-driven threshold-rule composition. | Product/TL decision needed: keep by implementing sourced threshold-rule support, or defer if V1 should avoid non-DA enemy special-rule expansion. |
+| G13 | Special enemy + Deadly Assault anomaly-threshold modifiers | Deferred to V1.x by @lo-user on 2026-05-05. Reference guide / Product v2.0 documents the rule; core currently supports only explicit `thresholdOverride`, not data-driven threshold-rule composition. | V1.x should implement sourced threshold-rule support and replay this anchor. |
 | G14 | Virtual agent anomaly contribution | Covered by core rules and snapshot input. | Replay fixture only; no formal game row required. |
 | G15 | Seven disorder formulas | Covered by core rules. | Replay fixture only. |
 | G16 | Disorder daze-level zone | Covered by core rules. | Replay fixture only. |
@@ -105,7 +107,7 @@ modifier inferred from text.
 
 ## Immediate #40 Minimum Range
 
-The V1 20-anchor release gate does not require full W-Engine, Drive Disc,
+The V1 19-anchor release gate does not require full W-Engine, Drive Disc,
 Mindscape Cinema, Resonium, Bangboo, or global enemy cleaning.
 
 Minimum Excel reader work for #43:
@@ -121,23 +123,47 @@ Minimum Excel reader work for #43:
 4. Keep `cleaned/enemies` deferred. DA boss fields required by G09/G17 should
    come from buhflipexplode/Mihoyo DA sources, not the Excel enemy table.
 
+## Replay Harness Baseline
+
+`pnpm --filter @fairy/data audit:golden-v1` generates two machine-readable
+cleaned artifacts:
+
+- `data/cleaned/audit/v1-agent-source-candidates.json` — minimal #40 reader
+  output for Yixuan / Nicole / Yanagi identity rows plus calculation-relevant
+  source text candidates and `sourceTextHash` values.
+- `data/cleaned/golden/v1-replay-report.json` — #43 replay baseline for the
+  DD-002 19-anchor scope.
+
+The current baseline intentionally reports:
+
+| Status | Anchors | Meaning |
+|---|---|---|
+| `passed` | 14 anchors | Core calculation replay ran with sourced Excel/DA refs. |
+| `pendingHarness` | G04, G09, G10 | Source coverage is available, but the executable bucket-scan / daze-display / anomaly-buildup-resistance assertion still needs a concrete replay representation. G10 already asserts frost/auric resistance lanes, but its anomaly-buildup-resistance half is pending. |
+| `blocked` | G22, G23 | Excel source text is extracted and hashed, but trusted modifier replay needs manual acceptance or deterministic template support. |
+| `deferred` | G13, G18-G20 | Explicit V1.x scope. |
+
+`pnpm --filter @fairy/data verify:golden-v1` is an offline freshness and shape
+gate. It verifies the artifacts are regenerated from the retained sources and
+that the blocking/pending statuses stay explicit. It does not mark V1
+`releaseReady` until G04/G09 executable assertions are implemented and G22/G23
+blocking `ERR-DAT-005` diagnostics are cleared.
+
 ## Product / Human Decisions Needed
 
 | Decision | Why |
 |---|---|
-| G13 keep vs defer | It is inside the 20-anchor set. Keeping it means implementing data-driven anomaly-threshold rule composition from the guide/reference source. Deferring it means the V1 release gate becomes 19 executable anchors plus a documented V1.x gap. |
 | Nicole/Yanagi modifier acceptance | Natural-language conversion cannot be fully automatic. Any V1 typed modifier used in G22/G23 needs deterministic parser support or explicit manual acceptance tied to the source anchors above. |
 
 TL recommendation:
 
-- **G13**: defer from V1 release readiness unless Product wants threshold-rule
-  composition implemented before true-data replay. It is formula/reference work,
-  not blocked by Excel/Mihoyo/buhflipexplode extraction, but it expands the
-  current #43 scope.
+- **G13**: deferred by @lo-user on 2026-05-05. Track with G18/G19/G20 as V1.x
+  golden expansion work. Do not use `thresholdOverride` to claim the anchor in
+  V1, because that would bypass sourced rule composition and source trace.
 - **Nicole/Yanagi**: Product accepted the manual gate above. Keep G22/G23 in V1,
   but require acceptance records for the specific source anchors. If no
   acceptance record exists, the replay harness should emit `ERR-DAT-005` instead
   of silently applying a guessed modifier.
 
-If either decision is unresolved, #43 can still build the replay harness but must
-fail loud before claiming V1 release readiness.
+#43 can build the replay harness for the 19 V1 anchors. G13 must remain listed
+as an explicit V1.x gap rather than disappearing from QA visibility.

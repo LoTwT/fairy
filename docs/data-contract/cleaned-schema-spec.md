@@ -35,13 +35,14 @@ V1 focuses on Hollow Zero Assault / Deadly Assault data.
 - Excel `敌人属性` is retained as a source archive and fallback source. It is not
   fully cleaned in V1 unless a V1 calculation/golden case requires a minimal
   subset.
-- V1 golden-data release coverage is narrowed to 20 anchors. Anchors 18, 19, and
-  20 are deferred to V1.x with the non-DA enemy expansion.
+- V1 golden-data release coverage is narrowed to 19 anchors. Anchors 13, 18,
+  19, and 20 are deferred to V1.x.
 
 Deferred V1.x anchors:
 
 | Anchor | Reason |
 |---|---|
+| 13 special threshold multipliers | Requires data-driven anomaly-threshold rule composition; V1 core currently supports explicit `thresholdOverride` only. |
 | 18 part-break true damage examples | Requires non-DA enemy/part-break data. |
 | 19 daze recovery example: 凶心疯汉 | Requires non-DA enemy data. |
 | 20 daze recovery example: 装甲哈提 | Requires non-DA enemy data. |
@@ -534,8 +535,11 @@ V1 cleaned-data implementation must add tests for these gates:
 - zh/en i18n key sets are aligned for published data i18n resources;
 - unresolved mapping is machine-readable and fails golden cases when required
   fields are missing;
-- V1 golden true-data replay uses the 20-anchor scope and records anchors 18,
-  19, and 20 as V1.x deferred, not skipped accidentally.
+- V1 golden true-data replay uses the 19-anchor scope and records anchors 13,
+  18, 19, and 20 as V1.x deferred, not skipped accidentally.
+- `verify:golden-v1` passes as an offline freshness gate for the generated V1
+  agent source candidates and replay report; V1 release remains blocked until
+  its report has zero `ERR-DAT-005` diagnostics and no `pendingHarness` anchors.
 
 ## 10. Implementation Impact
 
@@ -565,9 +569,21 @@ not UX runtime messages. They must write data i18n resources under
 
 ### 10.3 task #43 True-Data Replay
 
-V1 release gate uses the narrowed 20-anchor golden scope. Anchors 18, 19, and 20
-remain tracked as V1.x deferred items and must not be interpreted as missing
-QA coverage.
+V1 release gate uses the narrowed 19-anchor golden scope. Anchors 13, 18, 19,
+and 20 remain tracked as V1.x deferred items and must not be interpreted as
+missing QA coverage.
+
+The first replay harness baseline writes:
+
+- `data/cleaned/audit/v1-agent-source-candidates.json`;
+- `data/cleaned/golden/v1-replay-report.json`.
+
+`verify:golden-v1` verifies those artifacts against retained Excel and DA source
+snapshots. The baseline intentionally keeps G22/G23 blocked by `ERR-DAT-005`
+until manual acceptance records exist, and keeps G04/G09/G10 as
+`pendingHarness` until their executable replay assertions are complete. G10
+already asserts frost/auric resistance lanes, but anomaly-buildup-resistance
+mapping is not yet consumed by the core replay harness.
 
 ## 11. Review Checklist
 

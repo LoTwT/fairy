@@ -21,6 +21,15 @@ The audit records sheet visibility, ranges, range row/column counts, non-empty
 row counts, first header row, and V1 scope classification. It does not publish
 cleaned game data and does not infer typed modifiers from text.
 
+The V1 replay baseline uses a narrower generated artifact:
+
+- `data/cleaned/audit/v1-agent-source-candidates.json`
+
+That artifact extracts only Yixuan / Nicole / Yanagi identity rows and
+calculation-relevant source text candidates needed by the DD-002 19-anchor
+golden scope. It does not read Excel enemy rows and does not publish trusted
+typed modifiers without manual acceptance.
+
 ## V1 Candidate Sheets
 
 V1 main scope is Deadly Assault. Excel remains the base-game source and fallback,
@@ -54,7 +63,9 @@ dependency of the published `@fairy/data` package.
 Useful commands:
 
 - `pnpm --filter @fairy/data audit:excel`
+- `pnpm --filter @fairy/data audit:golden-v1`
 - `pnpm --filter @fairy/data verify:excel`
+- `pnpm --filter @fairy/data verify:golden-v1`
 
 The verify gate checks:
 

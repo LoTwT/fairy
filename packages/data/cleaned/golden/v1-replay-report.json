@@ -1,0 +1,432 @@
+{
+  "schemaVersion": "fairy-v1-golden-replay-report-v1",
+  "parserVersion": "golden-v1-replay-v0.1.0",
+  "generatedAt": "2026-05-05T18:20:00+08:00",
+  "policy": {
+    "scope": "V1 true-data replay harness baseline after DD-002: 19 anchors in V1, G13/G18/G19/G20 deferred.",
+    "releaseGate": "releaseReady becomes true only when all V1 anchors pass executable replay and blockingDiagnostics is zero.",
+    "manualAcceptance": "G22/G23 must emit ERR-DAT-005 until lo-user manual acceptance records exist for the sourceTextHash values in v1-agent-source-candidates.json."
+  },
+  "v1AnchorIds": [
+    "G01",
+    "G02",
+    "G03",
+    "G04",
+    "G05",
+    "G06",
+    "G07",
+    "G08",
+    "G09",
+    "G10",
+    "G11",
+    "G12",
+    "G14",
+    "G15",
+    "G16",
+    "G17",
+    "G21",
+    "G22",
+    "G23"
+  ],
+  "deferredAnchorIds": [
+    "G13",
+    "G18",
+    "G19",
+    "G20"
+  ],
+  "summary": {
+    "v1AnchorCount": 19,
+    "passed": 14,
+    "pendingHarness": 3,
+    "blocked": 2,
+    "deferred": 4,
+    "blockingDiagnostics": 3,
+    "releaseReady": false
+  },
+  "anchors": [
+    {
+      "id": "G01",
+      "status": "passed",
+      "sourceRefs": [
+        {
+          "sourceId": "buhflipexplode-zzz-da",
+          "sourceVersion": "2026-05-05T0445Z",
+          "sourceAnchor": "da/da-versions.live.json#2.7.3.versionEnemies[0]"
+        },
+        {
+          "sourceId": "buhflipexplode-zzz-da",
+          "sourceVersion": "2026-05-05T0445Z",
+          "sourceAnchor": "assets/zzz/enemies.live.json#27300"
+        }
+      ],
+      "notes": [
+        "Default boss defense multiplier replays against sourced DA slot 0 boss context."
+      ]
+    },
+    {
+      "id": "G02",
+      "status": "passed",
+      "sourceRefs": [
+        {
+          "sourceId": "buhflipexplode-zzz-da",
+          "sourceVersion": "2026-05-05T0445Z",
+          "sourceAnchor": "da/da-versions.live.json#2.7.3.versionEnemies[0]"
+        },
+        {
+          "sourceId": "buhflipexplode-zzz-da",
+          "sourceVersion": "2026-05-05T0445Z",
+          "sourceAnchor": "assets/zzz/enemies.live.json#27300"
+        }
+      ],
+      "notes": [
+        "Corrupted-shield state uses the core 1.8x defense multiplier with sourced boss context."
+      ]
+    },
+    {
+      "id": "G03",
+      "status": "passed",
+      "sourceRefs": [
+        {
+          "sourceId": "lo-user-excel",
+          "sourceVersion": "2.6.0_R14028417",
+          "sourceAnchor": "代理人属性!A37:AF37"
+        }
+      ],
+      "notes": [
+        "Crit expected value uses 1 + critRate * critDamage."
+      ]
+    },
+    {
+      "id": "G04",
+      "status": "pendingHarness",
+      "sourceRefs": [],
+      "notes": [
+        "Source coverage is not blocked, but the executable bucket-scan assertion still needs a CLI/core replay representation."
+      ]
+    },
+    {
+      "id": "G05",
+      "status": "passed",
+      "sourceRefs": [
+        {
+          "sourceId": "buhflipexplode-zzz-da",
+          "sourceVersion": "2026-05-05T0445Z",
+          "sourceAnchor": "da/da-versions.live.json#2.7.3.versionEnemies[0]"
+        },
+        {
+          "sourceId": "buhflipexplode-zzz-da",
+          "sourceVersion": "2026-05-05T0445Z",
+          "sourceAnchor": "assets/zzz/enemies.live.json#27300"
+        }
+      ],
+      "notes": [
+        "Sheer damage skips defense while regular damage sees corrupted-shield defense."
+      ]
+    },
+    {
+      "id": "G06",
+      "status": "passed",
+      "sourceRefs": [
+        {
+          "sourceId": "buhflipexplode-zzz-da",
+          "sourceVersion": "2026-05-05T0445Z",
+          "sourceAnchor": "da/da-versions.live.json#2.7.3.versionEnemies[0]"
+        },
+        {
+          "sourceId": "buhflipexplode-zzz-da",
+          "sourceVersion": "2026-05-05T0445Z",
+          "sourceAnchor": "assets/zzz/enemies.live.json#27300"
+        }
+      ],
+      "notes": [
+        "Sheer vs default boss ratio replays with the same sourced boss context."
+      ]
+    },
+    {
+      "id": "G07",
+      "status": "passed",
+      "sourceRefs": [
+        {
+          "sourceId": "lo-user-excel",
+          "sourceVersion": "2.6.0_R14028417",
+          "sourceAnchor": "代理人属性!A37:AF37"
+        }
+      ],
+      "notes": [
+        "Two fractional segments ceil before summing."
+      ]
+    },
+    {
+      "id": "G08",
+      "status": "passed",
+      "sourceRefs": [
+        {
+          "sourceId": "lo-user-excel",
+          "sourceVersion": "2.6.0_R14028417",
+          "sourceAnchor": "代理人属性!A37:AF37"
+        }
+      ],
+      "notes": [
+        "Anomaly Mastery floors before buildup."
+      ]
+    },
+    {
+      "id": "G09",
+      "status": "pendingHarness",
+      "sourceRefs": [
+        {
+          "sourceId": "buhflipexplode-zzz-da",
+          "sourceVersion": "2026-05-05T0445Z",
+          "sourceAnchor": "da/da-versions.live.json#2.7.3.versionEnemies[0]"
+        },
+        {
+          "sourceId": "buhflipexplode-zzz-da",
+          "sourceVersion": "2026-05-05T0445Z",
+          "sourceAnchor": "assets/zzz/enemies.live.json#27300"
+        }
+      ],
+      "notes": [
+        "buhflipexplode DA source exposes baseDaze/versionDazeMult; executable daze ratio display-floor assertion still needs a replay representation."
+      ]
+    },
+    {
+      "id": "G10",
+      "status": "pendingHarness",
+      "sourceRefs": [
+        {
+          "sourceId": "lo-user-excel",
+          "sourceVersion": "2.6.0_R14028417",
+          "sourceAnchor": "代理人属性!A37:AF37"
+        }
+      ],
+      "notes": [
+        "Resistance mapping is asserted: frost uses enemy.resistance.ice and auricInk uses enemy.resistance.ether.",
+        "Anomaly-buildup-resistance mapping is still pending because current core replay does not consume enemy.anomalyBuildupResistance."
+      ]
+    },
+    {
+      "id": "G11",
+      "status": "passed",
+      "sourceRefs": [
+        {
+          "sourceId": "lo-user-excel",
+          "sourceVersion": "2.6.0_R14028417",
+          "sourceAnchor": "代理人属性!A37:AF37"
+        }
+      ],
+      "notes": [
+        "Frost/Auric use Ice/Ether damage-bonus panel fields."
+      ]
+    },
+    {
+      "id": "G12",
+      "status": "passed",
+      "sourceRefs": [
+        {
+          "sourceId": "buhflipexplode-zzz-da",
+          "sourceVersion": "2026-05-05T0445Z",
+          "sourceAnchor": "da/da-versions.live.json#2.7.3.versionEnemies[0]"
+        },
+        {
+          "sourceId": "buhflipexplode-zzz-da",
+          "sourceVersion": "2026-05-05T0445Z",
+          "sourceAnchor": "assets/zzz/enemies.live.json#27300"
+        }
+      ],
+      "notes": [
+        "Boss trigger-count threshold and physical 1.2x multiplier replay from core constants."
+      ]
+    },
+    {
+      "id": "G14",
+      "status": "passed",
+      "sourceRefs": [
+        {
+          "sourceId": "lo-user-excel",
+          "sourceVersion": "2.6.0_R14028417",
+          "sourceAnchor": "代理人属性!A37:AF37"
+        },
+        {
+          "sourceId": "lo-user-excel",
+          "sourceVersion": "2.6.0_R14028417",
+          "sourceAnchor": "代理人属性!A4:AF4"
+        }
+      ],
+      "notes": [
+        "Virtual contribution rows include Bangboo exclusion and overflow handling."
+      ]
+    },
+    {
+      "id": "G15",
+      "status": "passed",
+      "sourceRefs": [
+        {
+          "sourceId": "lo-user-excel",
+          "sourceVersion": "2.6.0_R14028417",
+          "sourceAnchor": "代理人属性!A37:AF37"
+        }
+      ],
+      "notes": [
+        "All seven disorder formula paths replay, including polarity disorder."
+      ]
+    },
+    {
+      "id": "G16",
+      "status": "passed",
+      "sourceRefs": [
+        {
+          "sourceId": "lo-user-excel",
+          "sourceVersion": "2.6.0_R14028417",
+          "sourceAnchor": "代理人属性!A37:AF37"
+        }
+      ],
+      "notes": [
+        "Disorder daze-level zone uses formula actor level 60."
+      ]
+    },
+    {
+      "id": "G17",
+      "status": "passed",
+      "sourceRefs": [
+        {
+          "sourceId": "buhflipexplode-zzz-da",
+          "sourceVersion": "2026-05-05T0445Z",
+          "sourceAnchor": "da/da-versions.live.json#2.7.3.versionEnemies[0]"
+        },
+        {
+          "sourceId": "buhflipexplode-zzz-da",
+          "sourceVersion": "2026-05-05T0445Z",
+          "sourceAnchor": "assets/zzz/enemies.live.json#27300"
+        }
+      ],
+      "notes": [
+        "Corrupted shield cleanse uses sourced DA boss maxHp as event base."
+      ]
+    },
+    {
+      "id": "G21",
+      "status": "passed",
+      "sourceRefs": [
+        {
+          "sourceId": "lo-user-excel",
+          "sourceVersion": "2.6.0_R14028417",
+          "sourceAnchor": "代理人属性!A37:AF37"
+        }
+      ],
+      "notes": [
+        "One-agent Yixuan path has no teammate modifiers and keeps sheer defense skip."
+      ]
+    },
+    {
+      "id": "G22",
+      "status": "blocked",
+      "sourceRefs": [
+        {
+          "sourceId": "lo-user-excel",
+          "sourceVersion": "2.6.0_R14028417",
+          "sourceAnchor": "代理人核心技描述!D4:J4"
+        }
+      ],
+      "diagnostics": [
+        {
+          "key": "ERR-DAT-005",
+          "severity": "blocking",
+          "reason": "ambiguousCondition",
+          "effectId": "nicole-defense-reduction",
+          "sourceTextHash": "07f9d239f43d3deafd4a001cdae349a6f10325cb3bbae090181a00f48e293549",
+          "sourceRefs": [
+            {
+              "sourceId": "lo-user-excel",
+              "sourceVersion": "2.6.0_R14028417",
+              "sourceAnchor": "代理人核心技描述!D4:J4"
+            }
+          ]
+        }
+      ],
+      "notes": [
+        "Source text is extracted and hashed, but replay must not apply inferred Nicole/Yanagi modifiers before manual acceptance."
+      ]
+    },
+    {
+      "id": "G23",
+      "status": "blocked",
+      "sourceRefs": [
+        {
+          "sourceId": "lo-user-excel",
+          "sourceVersion": "2.6.0_R14028417",
+          "sourceAnchor": "代理人核心技描述!D23:J23"
+        },
+        {
+          "sourceId": "lo-user-excel",
+          "sourceVersion": "2.6.0_R14028417",
+          "sourceAnchor": "代理人技能描述!C298"
+        }
+      ],
+      "diagnostics": [
+        {
+          "key": "ERR-DAT-005",
+          "severity": "blocking",
+          "reason": "ambiguousCondition",
+          "effectId": "yanagi-disorder-boost",
+          "sourceTextHash": "1d5b17072f8389b59b4f0083ac99c84d2c0e9dd68467a32909c8a5e0938b1462",
+          "sourceRefs": [
+            {
+              "sourceId": "lo-user-excel",
+              "sourceVersion": "2.6.0_R14028417",
+              "sourceAnchor": "代理人核心技描述!D23:J23"
+            }
+          ]
+        },
+        {
+          "key": "ERR-DAT-005",
+          "severity": "blocking",
+          "reason": "unknownHandler",
+          "effectId": "yanagi-polarity-disorder-ex-special",
+          "sourceTextHash": "4ac89b99d4fead4a8cb78d2dfdf84f32a93864cb11c4307e0474d5087bb25f5b",
+          "sourceRefs": [
+            {
+              "sourceId": "lo-user-excel",
+              "sourceVersion": "2.6.0_R14028417",
+              "sourceAnchor": "代理人技能描述!C298"
+            }
+          ]
+        }
+      ],
+      "notes": [
+        "Source text is extracted and hashed, but replay must not apply inferred Nicole/Yanagi modifiers before manual acceptance."
+      ]
+    },
+    {
+      "id": "G13",
+      "status": "deferred",
+      "sourceRefs": [],
+      "notes": [
+        "Deferred to V1.x by @lo-user on 2026-05-05; requires data-driven anomaly-threshold rule composition."
+      ]
+    },
+    {
+      "id": "G18",
+      "status": "deferred",
+      "sourceRefs": [],
+      "notes": [
+        "Deferred to V1.x by D-13; requires non-DA enemy / part-break data expansion."
+      ]
+    },
+    {
+      "id": "G19",
+      "status": "deferred",
+      "sourceRefs": [],
+      "notes": [
+        "Deferred to V1.x by D-13; requires non-DA enemy / part-break data expansion."
+      ]
+    },
+    {
+      "id": "G20",
+      "status": "deferred",
+      "sourceRefs": [],
+      "notes": [
+        "Deferred to V1.x by D-13; requires non-DA enemy / part-break data expansion."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,467 @@
+{
+  "schemaVersion": "fairy-v1-agent-source-candidates-v1",
+  "parserVersion": "golden-v1-replay-v0.1.0",
+  "generatedAt": "2026-05-05T18:20:00+08:00",
+  "policy": {
+    "scope": "Minimal #40 reader output for #43 V1 replay. It extracts only Yixuan/Nicole/Yanagi identity and calculation-relevant source text candidates.",
+    "formalDataPolicy": "Candidates are not trusted cleaned modifiers. Effects with trustStatus=requiresManualAcceptance must emit ERR-DAT-005 until an accepted record exists.",
+    "enemyPolicy": "No Excel enemy rows are read; V1 DA boss fields must come from buhflipexplode/Mihoyo DA source snapshots."
+  },
+  "source": {
+    "sourceId": "lo-user-excel",
+    "parserVersion": "golden-v1-replay-v0.1.0",
+    "workbook": {
+      "path": "data/source/excel/data.xlsx",
+      "sha256": "9f42ecf734f45908c18bedf7ae937479f9f1563e4b3314a50d76cb99233a260b",
+      "version": "2.6.0_R14028417"
+    }
+  },
+  "agents": {
+    "nicole": {
+      "agentId": "nicole",
+      "sourceKey": "1031",
+      "label": {
+        "zh": "妮可",
+        "en": "Nicole"
+      },
+      "attribute": "ether",
+      "agentSpecialty": "support",
+      "sourceAliases": [
+        "妮可",
+        "Nicole"
+      ],
+      "sourceRefs": [
+        {
+          "sourceId": "lo-user-excel",
+          "sourceVersion": "2.6.0_R14028417",
+          "sourceAnchor": "代理人属性!A4:AF4"
+        }
+      ],
+      "baseStatsByLevel": {
+        "60": {
+          "maxHp": 8145.8433,
+          "attack": 574.1691,
+          "defense": 622.6159
+        }
+      },
+      "sourceShape": {
+        "workbookSheet": "代理人属性",
+        "rowNumber": 4,
+        "range": "代理人属性!A4:AF4",
+        "excelId": 1031
+      }
+    },
+    "yanagi": {
+      "agentId": "yanagi",
+      "sourceKey": "1221",
+      "label": {
+        "zh": "柳",
+        "en": "Yanagi"
+      },
+      "attribute": "electric",
+      "agentSpecialty": "anomaly",
+      "sourceAliases": [
+        "柳",
+        "月城柳",
+        "Yanagi"
+      ],
+      "sourceRefs": [
+        {
+          "sourceId": "lo-user-excel",
+          "sourceVersion": "2.6.0_R14028417",
+          "sourceAnchor": "代理人属性!A23:AF23"
+        }
+      ],
+      "baseStatsByLevel": {
+        "60": {
+          "maxHp": 7788.6961,
+          "attack": 797.574,
+          "defense": 612.6038
+        }
+      },
+      "sourceShape": {
+        "workbookSheet": "代理人属性",
+        "rowNumber": 23,
+        "range": "代理人属性!A23:AF23",
+        "excelId": 1221
+      }
+    },
+    "yixuan": {
+      "agentId": "yixuan",
+      "sourceKey": "1371",
+      "label": {
+        "zh": "仪玄",
+        "en": "Yixuan"
+      },
+      "attribute": "auricInk",
+      "agentSpecialty": "rupture",
+      "sourceAliases": [
+        "仪玄",
+        "Yixuan"
+      ],
+      "sourceRefs": [
+        {
+          "sourceId": "lo-user-excel",
+          "sourceVersion": "2.6.0_R14028417",
+          "sourceAnchor": "代理人属性!A37:AF37"
+        }
+      ],
+      "baseStatsByLevel": {
+        "60": {
+          "maxHp": 7953.8621,
+          "attack": 872.5748,
+          "defense": 441.1145
+        }
+      },
+      "sourceShape": {
+        "workbookSheet": "代理人属性",
+        "rowNumber": 37,
+        "range": "代理人属性!A37:AF37",
+        "excelId": 1371
+      }
+    }
+  },
+  "effectCandidates": [
+    {
+      "effectId": "nicole-defense-reduction",
+      "agentId": "nicole",
+      "goldenAnchors": [
+        "G22"
+      ],
+      "sourceRefs": [
+        {
+          "sourceId": "lo-user-excel",
+          "sourceVersion": "2.6.0_R14028417",
+          "sourceAnchor": "代理人核心技描述!D4:J4"
+        }
+      ],
+      "sourceText": "妮可在[特殊技]、[强化特殊技]、[连携技]、[终结技]等招式中，上弹并强化[普通攻击]与[冲刺攻击]；强化子弹或能量场命中敌人时，目标的防御力降低20%，持续3.5秒。\n---\n妮可在[特殊技]、[强化特殊技]、[连携技]、[终结技]等招式中，上弹并强化[普通攻击]与[冲刺攻击]；强化子弹或能量场命中敌人时，目标的防御力降低25%，持续3.5秒。\n---\n妮可在[特殊技]、[强化特殊技]、[连携技]、[终结技]等招式中，上弹并强化[普通攻击]与[冲刺攻击]；强化子弹或能量场命中敌人时，目标的防御力降低30%，持续3.5秒。\n---\n妮可在[特殊技]、[强化特殊技]、[连携技]、[终结技]等招式中，上弹并强化[普通攻击]与[冲刺攻击]；强化子弹或能量场命中敌人时，目标的防御力降低34%，持续3.5秒。\n---\n妮可在[特殊技]、[强化特殊技]、[连携技]、[终结技]等招式中，上弹并强化[普通攻击]与[冲刺攻击]；强化子弹或能量场命中敌人时，目标的防御力降低36%，持续3.5秒。\n---\n妮可在[特殊技]、[强化特殊技]、[连携技]、[终结技]等招式中，上弹并强化[普通攻击]与[冲刺攻击]；强化子弹或能量场命中敌人时，目标的防御力降低38%，持续3.5秒。\n---\n妮可在[特殊技]、[强化特殊技]、[连携技]、[终结技]等招式中，上弹并强化[普通攻击]与[冲刺攻击]；强化子弹或能量场命中敌人时，目标的防御力降低40%，持续3.5秒。",
+      "sourceTextHash": "07f9d239f43d3deafd4a001cdae349a6f10325cb3bbae090181a00f48e293549",
+      "parserVersion": "golden-v1-replay-v0.1.0",
+      "suggestedEffect": {
+        "effectTemplateId": "excel-core-passive-defense-reduction-v1",
+        "handlerId": "defense-reduction",
+        "bucket": "defenseZone",
+        "operation": "add",
+        "appliesTo": {
+          "kind": "enemy"
+        },
+        "params": {
+          "valueByCorePassiveLevel": {
+            "1": 0.2,
+            "2": 0.25,
+            "3": 0.3,
+            "4": 0.34,
+            "5": 0.36,
+            "6": 0.38,
+            "7": 0.4
+          },
+          "durationSeconds": 3.5
+        },
+        "requiresActivation": true
+      },
+      "trustStatus": "requiresManualAcceptance",
+      "releaseGateRequired": true,
+      "unparsedEffect": {
+        "id": "nicole-defense-reduction",
+        "severity": "blocking",
+        "reason": "ambiguousCondition",
+        "diagnosticKey": "ERR-DAT-005",
+        "sourceText": "妮可在[特殊技]、[强化特殊技]、[连携技]、[终结技]等招式中，上弹并强化[普通攻击]与[冲刺攻击]；强化子弹或能量场命中敌人时，目标的防御力降低20%，持续3.5秒。\n---\n妮可在[特殊技]、[强化特殊技]、[连携技]、[终结技]等招式中，上弹并强化[普通攻击]与[冲刺攻击]；强化子弹或能量场命中敌人时，目标的防御力降低25%，持续3.5秒。\n---\n妮可在[特殊技]、[强化特殊技]、[连携技]、[终结技]等招式中，上弹并强化[普通攻击]与[冲刺攻击]；强化子弹或能量场命中敌人时，目标的防御力降低30%，持续3.5秒。\n---\n妮可在[特殊技]、[强化特殊技]、[连携技]、[终结技]等招式中，上弹并强化[普通攻击]与[冲刺攻击]；强化子弹或能量场命中敌人时，目标的防御力降低34%，持续3.5秒。\n---\n妮可在[特殊技]、[强化特殊技]、[连携技]、[终结技]等招式中，上弹并强化[普通攻击]与[冲刺攻击]；强化子弹或能量场命中敌人时，目标的防御力降低36%，持续3.5秒。\n---\n妮可在[特殊技]、[强化特殊技]、[连携技]、[终结技]等招式中，上弹并强化[普通攻击]与[冲刺攻击]；强化子弹或能量场命中敌人时，目标的防御力降低38%，持续3.5秒。\n---\n妮可在[特殊技]、[强化特殊技]、[连携技]、[终结技]等招式中，上弹并强化[普通攻击]与[冲刺攻击]；强化子弹或能量场命中敌人时，目标的防御力降低40%，持续3.5秒。",
+        "sourceRefs": [
+          {
+            "sourceId": "lo-user-excel",
+            "sourceVersion": "2.6.0_R14028417",
+            "sourceAnchor": "代理人核心技描述!D4:J4"
+          }
+        ],
+        "sourceTextHash": "07f9d239f43d3deafd4a001cdae349a6f10325cb3bbae090181a00f48e293549",
+        "parserVersion": "golden-v1-replay-v0.1.0"
+      },
+      "notes": [
+        "Value pattern is deterministic, but V1 does not simulate whether Nicole's enhanced bullet/field is currently active."
+      ]
+    },
+    {
+      "effectId": "nicole-ether-damage-bonus",
+      "agentId": "nicole",
+      "goldenAnchors": [
+        "G22"
+      ],
+      "sourceRefs": [
+        {
+          "sourceId": "lo-user-excel",
+          "sourceVersion": "2.6.0_R14028417",
+          "sourceAnchor": "代理人核心技描述!K4:L4"
+        }
+      ],
+      "sourceText": "额外能力：狡兔三窟\n---\n队伍中存在与自身属性或阵营相同的角色时触发：\n妮可通过[核心被动：机关箱]对敌人施加减益效果时，所有单位对目标造成的以太伤害额外提升25%，持续3.5秒。",
+      "sourceTextHash": "14ccde77c673ae2a3ddf946833ce7934610986d125b6ab08b64cb78f162f49c1",
+      "parserVersion": "golden-v1-replay-v0.1.0",
+      "suggestedEffect": {
+        "effectTemplateId": "excel-extra-ability-conditional-ether-bonus-v1",
+        "handlerId": "damage-bonus",
+        "bucket": "damageBonusZone",
+        "operation": "add",
+        "appliesTo": {
+          "kind": "team",
+          "includeSelf": true
+        },
+        "params": {
+          "value": 0.25,
+          "attribute": "ether",
+          "durationSeconds": 3.5
+        },
+        "requiresActivation": true
+      },
+      "trustStatus": "requiresManualAcceptance",
+      "releaseGateRequired": false,
+      "unparsedEffect": {
+        "id": "nicole-ether-damage-bonus",
+        "severity": "nonBlocking",
+        "reason": "ambiguousCondition",
+        "diagnosticKey": "ERR-DAT-005",
+        "sourceText": "额外能力：狡兔三窟\n---\n队伍中存在与自身属性或阵营相同的角色时触发：\n妮可通过[核心被动：机关箱]对敌人施加减益效果时，所有单位对目标造成的以太伤害额外提升25%，持续3.5秒。",
+        "sourceRefs": [
+          {
+            "sourceId": "lo-user-excel",
+            "sourceVersion": "2.6.0_R14028417",
+            "sourceAnchor": "代理人核心技描述!K4:L4"
+          }
+        ],
+        "sourceTextHash": "14ccde77c673ae2a3ddf946833ce7934610986d125b6ab08b64cb78f162f49c1",
+        "parserVersion": "golden-v1-replay-v0.1.0"
+      },
+      "notes": [
+        "Not required for the pure G22 defense-reduction replay path unless the fixture explicitly activates Nicole's extra ability."
+      ]
+    },
+    {
+      "effectId": "yanagi-disorder-boost",
+      "agentId": "yanagi",
+      "goldenAnchors": [
+        "G23"
+      ],
+      "sourceRefs": [
+        {
+          "sourceId": "lo-user-excel",
+          "sourceVersion": "2.6.0_R14028417",
+          "sourceAnchor": "代理人核心技描述!D23:J23"
+        }
+      ],
+      "sourceText": "月城柳发动[强化特殊技]后，队伍中任意角色对敌人施加[紊乱]效果时，[紊乱]效果的伤害倍率提升125%，持续15秒；[强化特殊技]命中敌人时，月城柳对目标造成的电属性伤害提升10%，持续15秒。\n---\n月城柳发动[强化特殊技]后，队伍中任意角色对敌人施加[紊乱]效果时，[紊乱]效果的伤害倍率提升145%，持续15秒；[强化特殊技]命中敌人时，月城柳对目标造成的电属性伤害提升11.6%，持续15秒。\n---\n月城柳发动[强化特殊技]后，队伍中任意角色对敌人施加[紊乱]效果时，[紊乱]效果的伤害倍率提升166%，持续15秒；[强化特殊技]命中敌人时，月城柳对目标造成的电属性伤害提升13.3%，持续15秒。\n---\n月城柳发动[强化特殊技]后，队伍中任意角色对敌人施加[紊乱]效果时，[紊乱]效果的伤害倍率提升188%，持续15秒；[强化特殊技]命中敌人时，月城柳对目标造成的电属性伤害提升15%，持续15秒。\n---\n月城柳发动[强化特殊技]后，队伍中任意角色对敌人施加[紊乱]效果时，[紊乱]效果的伤害倍率提升208%，持续15秒；[强化特殊技]命中敌人时，月城柳对目标造成的电属性伤害提升16.6%，持续15秒。\n---\n月城柳发动[强化特殊技]后，队伍中任意角色对敌人施加[紊乱]效果时，[紊乱]效果的伤害倍率提升230%，持续15秒；[强化特殊技]命中敌人时，月城柳对目标造成的电属性伤害提升18.3%，持续15秒。\n---\n月城柳发动[强化特殊技]后，队伍中任意角色对敌人施加[紊乱]效果时，[紊乱]效果的伤害倍率提升250%，持续15秒；[强化特殊技]命中敌人时，月城柳对目标造成的电属性伤害提升20%，持续15秒。",
+      "sourceTextHash": "1d5b17072f8389b59b4f0083ac99c84d2c0e9dd68467a32909c8a5e0938b1462",
+      "parserVersion": "golden-v1-replay-v0.1.0",
+      "suggestedEffect": {
+        "effectTemplateId": "excel-core-passive-disorder-boost-v1",
+        "handlerId": "anomaly-damage-bonus",
+        "bucket": "anomalyDamageBonusZone",
+        "operation": "add",
+        "appliesTo": {
+          "kind": "segment"
+        },
+        "params": {
+          "disorderDamageMultiplierBonusByCorePassiveLevel": {
+            "1": 1.25,
+            "2": 1.45,
+            "3": 1.66,
+            "4": 1.88,
+            "5": 2.08,
+            "6": 2.3,
+            "7": 2.5
+          },
+          "electricDamageBonusByCorePassiveLevel": {
+            "1": 0.1,
+            "2": 0.116,
+            "3": 0.133,
+            "4": 0.15,
+            "5": 0.166,
+            "6": 0.183,
+            "7": 0.2
+          },
+          "durationSeconds": 15
+        },
+        "requiresActivation": true
+      },
+      "trustStatus": "requiresManualAcceptance",
+      "releaseGateRequired": true,
+      "unparsedEffect": {
+        "id": "yanagi-disorder-boost",
+        "severity": "blocking",
+        "reason": "ambiguousCondition",
+        "diagnosticKey": "ERR-DAT-005",
+        "sourceText": "月城柳发动[强化特殊技]后，队伍中任意角色对敌人施加[紊乱]效果时，[紊乱]效果的伤害倍率提升125%，持续15秒；[强化特殊技]命中敌人时，月城柳对目标造成的电属性伤害提升10%，持续15秒。\n---\n月城柳发动[强化特殊技]后，队伍中任意角色对敌人施加[紊乱]效果时，[紊乱]效果的伤害倍率提升145%，持续15秒；[强化特殊技]命中敌人时，月城柳对目标造成的电属性伤害提升11.6%，持续15秒。\n---\n月城柳发动[强化特殊技]后，队伍中任意角色对敌人施加[紊乱]效果时，[紊乱]效果的伤害倍率提升166%，持续15秒；[强化特殊技]命中敌人时，月城柳对目标造成的电属性伤害提升13.3%，持续15秒。\n---\n月城柳发动[强化特殊技]后，队伍中任意角色对敌人施加[紊乱]效果时，[紊乱]效果的伤害倍率提升188%，持续15秒；[强化特殊技]命中敌人时，月城柳对目标造成的电属性伤害提升15%，持续15秒。\n---\n月城柳发动[强化特殊技]后，队伍中任意角色对敌人施加[紊乱]效果时，[紊乱]效果的伤害倍率提升208%，持续15秒；[强化特殊技]命中敌人时，月城柳对目标造成的电属性伤害提升16.6%，持续15秒。\n---\n月城柳发动[强化特殊技]后，队伍中任意角色对敌人施加[紊乱]效果时，[紊乱]效果的伤害倍率提升230%，持续15秒；[强化特殊技]命中敌人时，月城柳对目标造成的电属性伤害提升18.3%，持续15秒。\n---\n月城柳发动[强化特殊技]后，队伍中任意角色对敌人施加[紊乱]效果时，[紊乱]效果的伤害倍率提升250%，持续15秒；[强化特殊技]命中敌人时，月城柳对目标造成的电属性伤害提升20%，持续15秒。",
+        "sourceRefs": [
+          {
+            "sourceId": "lo-user-excel",
+            "sourceVersion": "2.6.0_R14028417",
+            "sourceAnchor": "代理人核心技描述!D23:J23"
+          }
+        ],
+        "sourceTextHash": "1d5b17072f8389b59b4f0083ac99c84d2c0e9dd68467a32909c8a5e0938b1462",
+        "parserVersion": "golden-v1-replay-v0.1.0"
+      },
+      "notes": [
+        "The source text depends on a prior EX Special activation and an active 15s window. V1 needs manual acceptance before compiling this into replay modifiers."
+      ]
+    },
+    {
+      "effectId": "yanagi-polarity-disorder-ex-special",
+      "agentId": "yanagi",
+      "goldenAnchors": [
+        "G23"
+      ],
+      "sourceRefs": [
+        {
+          "sourceId": "lo-user-excel",
+          "sourceVersion": "2.6.0_R14028417",
+          "sourceAnchor": "代理人技能描述!C298"
+        }
+      ],
+      "sourceText": "能量足够时，长按 <IconMap:Icon_SpecialReady> 发动：\n积蓄力量向前快速突刺，随后发动下落攻击，造成大量电属性伤害；\n突刺发动时，月城柳会切换当前架势，并进入[森罗万象]状态，持续15秒，状态持续期间，从[普通攻击]第五段或其他招式衔接后继[普通攻击]时，将直接从第三段[普通攻击] 起手；\n下落攻击命中处于属性异常状态下的敌人时，将会触发特殊的[紊乱]效果[极性紊乱]，对目标造成原本[紊乱]效果15%的伤害，并额外附加月城柳{CAL:5+AvatarSkillLevel(1)*2.25,100,2}%异常精通的伤害，[极性紊乱]不会清除目标所处的属性异常状态；\n招式发动期间拥有无敌效果。",
+      "sourceTextHash": "4ac89b99d4fead4a8cb78d2dfdf84f32a93864cb11c4307e0474d5087bb25f5b",
+      "parserVersion": "golden-v1-replay-v0.1.0",
+      "suggestedEffect": {
+        "effectTemplateId": "excel-yanagi-polarity-disorder-v1",
+        "handlerId": "polarity-disorder",
+        "operation": "set",
+        "appliesTo": {
+          "kind": "segment"
+        },
+        "params": {
+          "skill": "强化特殊技：月华流转",
+          "originalDisorderDamageRatio": 0.15,
+          "anomalyProficiencyFormula": "5 + AvatarSkillLevel(1) * 2.25",
+          "clearsOriginalAnomaly": false
+        },
+        "requiresActivation": true
+      },
+      "trustStatus": "requiresManualAcceptance",
+      "releaseGateRequired": true,
+      "unparsedEffect": {
+        "id": "yanagi-polarity-disorder-ex-special",
+        "severity": "blocking",
+        "reason": "unknownHandler",
+        "diagnosticKey": "ERR-DAT-005",
+        "sourceText": "能量足够时，长按 <IconMap:Icon_SpecialReady> 发动：\n积蓄力量向前快速突刺，随后发动下落攻击，造成大量电属性伤害；\n突刺发动时，月城柳会切换当前架势，并进入[森罗万象]状态，持续15秒，状态持续期间，从[普通攻击]第五段或其他招式衔接后继[普通攻击]时，将直接从第三段[普通攻击] 起手；\n下落攻击命中处于属性异常状态下的敌人时，将会触发特殊的[紊乱]效果[极性紊乱]，对目标造成原本[紊乱]效果15%的伤害，并额外附加月城柳{CAL:5+AvatarSkillLevel(1)*2.25,100,2}%异常精通的伤害，[极性紊乱]不会清除目标所处的属性异常状态；\n招式发动期间拥有无敌效果。",
+        "sourceRefs": [
+          {
+            "sourceId": "lo-user-excel",
+            "sourceVersion": "2.6.0_R14028417",
+            "sourceAnchor": "代理人技能描述!C298"
+          }
+        ],
+        "sourceTextHash": "4ac89b99d4fead4a8cb78d2dfdf84f32a93864cb11c4307e0474d5087bb25f5b",
+        "parserVersion": "golden-v1-replay-v0.1.0"
+      },
+      "notes": [
+        "Core supports polarityDisorder status in snapshots, but the text-to-snapshot/template handler is not deterministic yet."
+      ]
+    },
+    {
+      "effectId": "yanagi-polarity-disorder-ultimate",
+      "agentId": "yanagi",
+      "goldenAnchors": [
+        "G23"
+      ],
+      "sourceRefs": [
+        {
+          "sourceId": "lo-user-excel",
+          "sourceVersion": "2.6.0_R14028417",
+          "sourceAnchor": "代理人技能描述!C303"
+        }
+      ],
+      "sourceText": "喧响等级达到[极]时，点按 <IconMap:Icon_UltimateReady> 发动：\n激发自身能力，在极短时间内对前方大范围敌人发动强力斩击，并追加落雷攻击，造成大量电属性伤害；\n落雷攻击命中处于属性异常状态下的敌人时，将会触发特殊的[紊乱]效果[极性紊乱]，对目标造成原本[紊乱]效果15%的伤害，并额外附加月城柳{CAL:5+AvatarSkillLevel(3)*2.25,100,2}%异常精通的伤害，[极性紊乱]不会清除目标所处的属性异常状态；\n招式发动期间拥有无敌效果；\n招式发动后，可以直接衔接当前架势下第三段[普通攻击]。",
+      "sourceTextHash": "9ce687e4fee5887aaf0b3f3dc5bc5a5dfefe2fb8d2b936bb150614b5b2891b54",
+      "parserVersion": "golden-v1-replay-v0.1.0",
+      "suggestedEffect": {
+        "effectTemplateId": "excel-yanagi-polarity-disorder-v1",
+        "handlerId": "polarity-disorder",
+        "operation": "set",
+        "appliesTo": {
+          "kind": "segment"
+        },
+        "params": {
+          "skill": "终结技：雷影天华",
+          "originalDisorderDamageRatio": 0.15,
+          "anomalyProficiencyFormula": "5 + AvatarSkillLevel(3) * 2.25",
+          "clearsOriginalAnomaly": false
+        },
+        "requiresActivation": true
+      },
+      "trustStatus": "requiresManualAcceptance",
+      "releaseGateRequired": false,
+      "unparsedEffect": {
+        "id": "yanagi-polarity-disorder-ultimate",
+        "severity": "nonBlocking",
+        "reason": "unknownHandler",
+        "diagnosticKey": "ERR-DAT-005",
+        "sourceText": "喧响等级达到[极]时，点按 <IconMap:Icon_UltimateReady> 发动：\n激发自身能力，在极短时间内对前方大范围敌人发动强力斩击，并追加落雷攻击，造成大量电属性伤害；\n落雷攻击命中处于属性异常状态下的敌人时，将会触发特殊的[紊乱]效果[极性紊乱]，对目标造成原本[紊乱]效果15%的伤害，并额外附加月城柳{CAL:5+AvatarSkillLevel(3)*2.25,100,2}%异常精通的伤害，[极性紊乱]不会清除目标所处的属性异常状态；\n招式发动期间拥有无敌效果；\n招式发动后，可以直接衔接当前架势下第三段[普通攻击]。",
+        "sourceRefs": [
+          {
+            "sourceId": "lo-user-excel",
+            "sourceVersion": "2.6.0_R14028417",
+            "sourceAnchor": "代理人技能描述!C303"
+          }
+        ],
+        "sourceTextHash": "9ce687e4fee5887aaf0b3f3dc5bc5a5dfefe2fb8d2b936bb150614b5b2891b54",
+        "parserVersion": "golden-v1-replay-v0.1.0"
+      },
+      "notes": [
+        "Kept as a source-text candidate for G23; not applied automatically in V1 replay."
+      ]
+    },
+    {
+      "effectId": "yixuan-sheer-core-passive",
+      "agentId": "yixuan",
+      "goldenAnchors": [
+        "G21"
+      ],
+      "sourceRefs": [
+        {
+          "sourceId": "lo-user-excel",
+          "sourceVersion": "2.6.0_R14028417",
+          "sourceAnchor": "代理人核心技描述!D37:J37"
+        }
+      ],
+      "sourceText": "仪玄会额外根据自身最大生命值提高贯穿力，每1点最大生命值将提高0.1点贯穿力；\n仪玄发动招式造成的玄墨伤害均为贯穿伤害，无视敌人防御，使用贯穿力作为招式伤害倍率；\n仪玄累积玄墨异常积蓄值时，具有独立的属性异常积蓄槽，触发属性异常效果时，额外回复10点闪能，每10秒最多触发一次；\n仪玄进入战斗时即可恢复全部闪能，在勘域模式中此效果180秒内最多触发一次，触发极限闪避时额外回复5点闪能，每1秒最多触发一次；\n消耗闪能时，仪玄会积累[术法值]，每消耗一点闪能，积累0.667点[术法值]，[术法值]足够时，可额外释放终结技：[终结技：符法千重]，[术法值]上限为120点；\n仪玄施展[普通攻击：玄墨极阵]、[普通攻击：青溟震击]、[强化特殊技]、[支援突击]、[连携技]、[终结技]造成的伤害提升30%；\n释放[终结技：符法千重]后，仪玄获得一点[玄墨值]，仪玄可消耗一点[玄墨值]，释放[普通攻击：玄墨极阵]。\n---\n仪玄会额外根据自身最大生命值提高贯穿力，每1点最大生命值将提高0.1点贯穿力；\n仪玄发动招式造成的玄墨伤害均为贯穿伤害，无视敌人防御，使用贯穿力作为招式伤害倍率；\n仪玄累积玄墨异常积蓄值时，具有独立的属性异常积蓄槽，触发属性异常效果时，额外回复10点闪能，每10秒最多触发一次；\n仪玄进入战斗时即可恢复全部闪能，在勘域模式中此效果180秒内最多触发一次，触发极限闪避时额外回复5点闪能，每1秒最多触发一次；\n消耗闪能时，仪玄会积累[术法值]，每消耗一点闪能，积累0.667点[术法值]，[术法值]足够时，可额外释放终结技：[终结技：符法千重]，[术法值]上限为120点；\n仪玄施展[普通攻击：玄墨极阵]、[普通攻击：青溟震击]、[强化特殊技]、[支援突击]、[连携技]、[终结技]造成的伤害提升35%；\n释放[终结技：符法千重]后，仪玄获得一点[玄墨值]，仪玄可消耗一点[玄墨值]，释放[普通攻击：玄墨极阵]。\n---\n仪玄会额外根据自身最大生命值提高贯穿力，每1点最大生命值将提高0.1点贯穿力；\n仪玄发动招式造成的玄墨伤害均为贯穿伤害，无视敌人防御，使用贯穿力作为招式伤害倍率；\n仪玄累积玄墨异常积蓄值时，具有独立的属性异常积蓄槽，触发属性异常效果时，额外回复10点闪能，每10秒最多触发一次；\n仪玄进入战斗时即可恢复全部闪能，在勘域模式中此效果180秒内最多触发一次，触发极限闪避时额外回复5点闪能，每1秒最多触发一次；\n消耗闪能时，仪玄会积累[术法值]，每消耗一点闪能，积累0.667点[术法值]，[术法值]足够时，可额外释放终结技：[终结技：符法千重]，[术法值]上限为120点；\n仪玄施展[普通攻击：玄墨极阵]、[普通攻击：青溟震击]、[强化特殊技]、[支援突击]、[连携技]、[终结技]造成的伤害提升40%；\n释放[终结技：符法千重]后，仪玄获得一点[玄墨值]，仪玄可消耗一点[玄墨值]，释放[普通攻击：玄墨极阵]。\n---\n仪玄会额外根据自身最大生命值提高贯穿力，每1点最大生命值将提高0.1点贯穿力；\n仪玄发动招式造成的玄墨伤害均为贯穿伤害，无视敌人防御，使用贯穿力作为招式伤害倍率；\n仪玄累积玄墨异常积蓄值时，具有独立的属性异常积蓄槽，触发属性异常效果时，额外回复10点闪能，每10秒最多触发一次；\n仪玄进入战斗时即可恢复全部闪能，在勘域模式中此效果180秒内最多触发一次，触发极限闪避时额外回复5点闪能，每1秒最多触发一次；\n消耗闪能时，仪玄会积累[术法值]，每消耗一点闪能，积累0.667点[术法值]，[术法值]足够时，可额外释放终结技：[终结技：符法千重]，[术法值]上限为120点；\n仪玄施展[普通攻击：玄墨极阵]、[普通攻击：青溟震击]、[强化特殊技]、[支援突击]、[连携技]、[终结技]造成的伤害提升45%；\n释放[终结技：符法千重]后，仪玄获得一点[玄墨值]，仪玄可消耗一点[玄墨值]，释放[普通攻击：玄墨极阵]。\n---\n仪玄会额外根据自身最大生命值提高贯穿力，每1点最大生命值将提高0.1点贯穿力；\n仪玄发动招式造成的玄墨伤害均为贯穿伤害，无视敌人防御，使用贯穿力作为招式伤害倍率；\n仪玄累积玄墨异常积蓄值时，具有独立的属性异常积蓄槽，触发属性异常效果时，额外回复10点闪能，每10秒最多触发一次；\n仪玄进入战斗时即可恢复全部闪能，在勘域模式中此效果180秒内最多触发一次，触发极限闪避时额外回复5点闪能，每1秒最多触发一次；\n消耗闪能时，仪玄会积累[术法值]，每消耗一点闪能，积累0.667点[术法值]，[术法值]足够时，可额外释放终结技：[终结技：符法千重]，[术法值]上限为120点；\n仪玄施展[普通攻击：玄墨极阵]、[普通攻击：青溟震击]、[强化特殊技]、[支援突击]、[连携技]、[终结技]造成的伤害提升50%；\n释放[终结技：符法千重]后，仪玄获得一点[玄墨值]，仪玄可消耗一点[玄墨值]，释放[普通攻击：玄墨极阵]。\n---\n仪玄会额外根据自身最大生命值提高贯穿力，每1点最大生命值将提高0.1点贯穿力；\n仪玄发动招式造成的玄墨伤害均为贯穿伤害，无视敌人防御，使用贯穿力作为招式伤害倍率；\n仪玄累积玄墨异常积蓄值时，具有独立的属性异常积蓄槽，触发属性异常效果时，额外回复10点闪能，每10秒最多触发一次；\n仪玄进入战斗时即可恢复全部闪能，在勘域模式中此效果180秒内最多触发一次，触发极限闪避时额外回复5点闪能，每1秒最多触发一次；\n消耗闪能时，仪玄会积累[术法值]，每消耗一点闪能，积累0.667点[术法值]，[术法值]足够时，可额外释放终结技：[终结技：符法千重]，[术法值]上限为120点；\n仪玄施展[普通攻击：玄墨极阵]、[普通攻击：青溟震击]、[强化特殊技]、[支援突击]、[连携技]、[终结技]造成的伤害提升55%；\n释放[终结技：符法千重]后，仪玄获得一点[玄墨值]，仪玄可消耗一点[玄墨值]，释放[普通攻击：玄墨极阵]。\n---\n仪玄会额外根据自身最大生命值提高贯穿力，每1点最大生命值将提高0.1点贯穿力；\n仪玄发动招式造成的玄墨伤害均为贯穿伤害，无视敌人防御，使用贯穿力作为招式伤害倍率；\n仪玄累积玄墨异常积蓄值时，具有独立的属性异常积蓄槽，触发属性异常效果时，额外回复10点闪能，每10秒最多触发一次；\n仪玄进入战斗时即可恢复全部闪能，在勘域模式中此效果180秒内最多触发一次，触发极限闪避时额外回复5点闪能，每1秒最多触发一次；\n消耗闪能时，仪玄会积累[术法值]，每消耗一点闪能，积累0.667点[术法值]，[术法值]足够时，可额外释放终结技：[终结技：符法千重]，[术法值]上限为120点；\n仪玄施展[普通攻击：玄墨极阵]、[普通攻击：青溟震击]、[强化特殊技]、[支援突击]、[连携技]、[终结技]造成的伤害提升60%；\n释放[终结技：符法千重]后，仪玄获得一点[玄墨值]，仪玄可消耗一点[玄墨值]，释放[普通攻击：玄墨极阵]。",
+      "sourceTextHash": "bf32cf2b43a1254f41cef1b1b959ad8a834cf605bef9e7c1846dc92727c3b37b",
+      "parserVersion": "golden-v1-replay-v0.1.0",
+      "suggestedEffect": {
+        "effectTemplateId": "excel-yixuan-sheer-force-v1",
+        "handlerId": "sheer-force-derived-panel",
+        "operation": "set",
+        "appliesTo": {
+          "kind": "self"
+        },
+        "params": {
+          "sheerForcePerMaxHp": 0.1,
+          "damageType": "sheer",
+          "attribute": "auricInk"
+        },
+        "requiresActivation": false
+      },
+      "trustStatus": "requiresManualAcceptance",
+      "releaseGateRequired": false,
+      "unparsedEffect": {
+        "id": "yixuan-sheer-core-passive",
+        "severity": "nonBlocking",
+        "reason": "unknownHandler",
+        "diagnosticKey": "ERR-DAT-005",
+        "sourceText": "仪玄会额外根据自身最大生命值提高贯穿力，每1点最大生命值将提高0.1点贯穿力；\n仪玄发动招式造成的玄墨伤害均为贯穿伤害，无视敌人防御，使用贯穿力作为招式伤害倍率；\n仪玄累积玄墨异常积蓄值时，具有独立的属性异常积蓄槽，触发属性异常效果时，额外回复10点闪能，每10秒最多触发一次；\n仪玄进入战斗时即可恢复全部闪能，在勘域模式中此效果180秒内最多触发一次，触发极限闪避时额外回复5点闪能，每1秒最多触发一次；\n消耗闪能时，仪玄会积累[术法值]，每消耗一点闪能，积累0.667点[术法值]，[术法值]足够时，可额外释放终结技：[终结技：符法千重]，[术法值]上限为120点；\n仪玄施展[普通攻击：玄墨极阵]、[普通攻击：青溟震击]、[强化特殊技]、[支援突击]、[连携技]、[终结技]造成的伤害提升30%；\n释放[终结技：符法千重]后，仪玄获得一点[玄墨值]，仪玄可消耗一点[玄墨值]，释放[普通攻击：玄墨极阵]。\n---\n仪玄会额外根据自身最大生命值提高贯穿力，每1点最大生命值将提高0.1点贯穿力；\n仪玄发动招式造成的玄墨伤害均为贯穿伤害，无视敌人防御，使用贯穿力作为招式伤害倍率；\n仪玄累积玄墨异常积蓄值时，具有独立的属性异常积蓄槽，触发属性异常效果时，额外回复10点闪能，每10秒最多触发一次；\n仪玄进入战斗时即可恢复全部闪能，在勘域模式中此效果180秒内最多触发一次，触发极限闪避时额外回复5点闪能，每1秒最多触发一次；\n消耗闪能时，仪玄会积累[术法值]，每消耗一点闪能，积累0.667点[术法值]，[术法值]足够时，可额外释放终结技：[终结技：符法千重]，[术法值]上限为120点；\n仪玄施展[普通攻击：玄墨极阵]、[普通攻击：青溟震击]、[强化特殊技]、[支援突击]、[连携技]、[终结技]造成的伤害提升35%；\n释放[终结技：符法千重]后，仪玄获得一点[玄墨值]，仪玄可消耗一点[玄墨值]，释放[普通攻击：玄墨极阵]。\n---\n仪玄会额外根据自身最大生命值提高贯穿力，每1点最大生命值将提高0.1点贯穿力；\n仪玄发动招式造成的玄墨伤害均为贯穿伤害，无视敌人防御，使用贯穿力作为招式伤害倍率；\n仪玄累积玄墨异常积蓄值时，具有独立的属性异常积蓄槽，触发属性异常效果时，额外回复10点闪能，每10秒最多触发一次；\n仪玄进入战斗时即可恢复全部闪能，在勘域模式中此效果180秒内最多触发一次，触发极限闪避时额外回复5点闪能，每1秒最多触发一次；\n消耗闪能时，仪玄会积累[术法值]，每消耗一点闪能，积累0.667点[术法值]，[术法值]足够时，可额外释放终结技：[终结技：符法千重]，[术法值]上限为120点；\n仪玄施展[普通攻击：玄墨极阵]、[普通攻击：青溟震击]、[强化特殊技]、[支援突击]、[连携技]、[终结技]造成的伤害提升40%；\n释放[终结技：符法千重]后，仪玄获得一点[玄墨值]，仪玄可消耗一点[玄墨值]，释放[普通攻击：玄墨极阵]。\n---\n仪玄会额外根据自身最大生命值提高贯穿力，每1点最大生命值将提高0.1点贯穿力；\n仪玄发动招式造成的玄墨伤害均为贯穿伤害，无视敌人防御，使用贯穿力作为招式伤害倍率；\n仪玄累积玄墨异常积蓄值时，具有独立的属性异常积蓄槽，触发属性异常效果时，额外回复10点闪能，每10秒最多触发一次；\n仪玄进入战斗时即可恢复全部闪能，在勘域模式中此效果180秒内最多触发一次，触发极限闪避时额外回复5点闪能，每1秒最多触发一次；\n消耗闪能时，仪玄会积累[术法值]，每消耗一点闪能，积累0.667点[术法值]，[术法值]足够时，可额外释放终结技：[终结技：符法千重]，[术法值]上限为120点；\n仪玄施展[普通攻击：玄墨极阵]、[普通攻击：青溟震击]、[强化特殊技]、[支援突击]、[连携技]、[终结技]造成的伤害提升45%；\n释放[终结技：符法千重]后，仪玄获得一点[玄墨值]，仪玄可消耗一点[玄墨值]，释放[普通攻击：玄墨极阵]。\n---\n仪玄会额外根据自身最大生命值提高贯穿力，每1点最大生命值将提高0.1点贯穿力；\n仪玄发动招式造成的玄墨伤害均为贯穿伤害，无视敌人防御，使用贯穿力作为招式伤害倍率；\n仪玄累积玄墨异常积蓄值时，具有独立的属性异常积蓄槽，触发属性异常效果时，额外回复10点闪能，每10秒最多触发一次；\n仪玄进入战斗时即可恢复全部闪能，在勘域模式中此效果180秒内最多触发一次，触发极限闪避时额外回复5点闪能，每1秒最多触发一次；\n消耗闪能时，仪玄会积累[术法值]，每消耗一点闪能，积累0.667点[术法值]，[术法值]足够时，可额外释放终结技：[终结技：符法千重]，[术法值]上限为120点；\n仪玄施展[普通攻击：玄墨极阵]、[普通攻击：青溟震击]、[强化特殊技]、[支援突击]、[连携技]、[终结技]造成的伤害提升50%；\n释放[终结技：符法千重]后，仪玄获得一点[玄墨值]，仪玄可消耗一点[玄墨值]，释放[普通攻击：玄墨极阵]。\n---\n仪玄会额外根据自身最大生命值提高贯穿力，每1点最大生命值将提高0.1点贯穿力；\n仪玄发动招式造成的玄墨伤害均为贯穿伤害，无视敌人防御，使用贯穿力作为招式伤害倍率；\n仪玄累积玄墨异常积蓄值时，具有独立的属性异常积蓄槽，触发属性异常效果时，额外回复10点闪能，每10秒最多触发一次；\n仪玄进入战斗时即可恢复全部闪能，在勘域模式中此效果180秒内最多触发一次，触发极限闪避时额外回复5点闪能，每1秒最多触发一次；\n消耗闪能时，仪玄会积累[术法值]，每消耗一点闪能，积累0.667点[术法值]，[术法值]足够时，可额外释放终结技：[终结技：符法千重]，[术法值]上限为120点；\n仪玄施展[普通攻击：玄墨极阵]、[普通攻击：青溟震击]、[强化特殊技]、[支援突击]、[连携技]、[终结技]造成的伤害提升55%；\n释放[终结技：符法千重]后，仪玄获得一点[玄墨值]，仪玄可消耗一点[玄墨值]，释放[普通攻击：玄墨极阵]。\n---\n仪玄会额外根据自身最大生命值提高贯穿力，每1点最大生命值将提高0.1点贯穿力；\n仪玄发动招式造成的玄墨伤害均为贯穿伤害，无视敌人防御，使用贯穿力作为招式伤害倍率；\n仪玄累积玄墨异常积蓄值时，具有独立的属性异常积蓄槽，触发属性异常效果时，额外回复10点闪能，每10秒最多触发一次；\n仪玄进入战斗时即可恢复全部闪能，在勘域模式中此效果180秒内最多触发一次，触发极限闪避时额外回复5点闪能，每1秒最多触发一次；\n消耗闪能时，仪玄会积累[术法值]，每消耗一点闪能，积累0.667点[术法值]，[术法值]足够时，可额外释放终结技：[终结技：符法千重]，[术法值]上限为120点；\n仪玄施展[普通攻击：玄墨极阵]、[普通攻击：青溟震击]、[强化特殊技]、[支援突击]、[连携技]、[终结技]造成的伤害提升60%；\n释放[终结技：符法千重]后，仪玄获得一点[玄墨值]，仪玄可消耗一点[玄墨值]，释放[普通攻击：玄墨极阵]。",
+        "sourceRefs": [
+          {
+            "sourceId": "lo-user-excel",
+            "sourceVersion": "2.6.0_R14028417",
+            "sourceAnchor": "代理人核心技描述!D37:J37"
+          }
+        ],
+        "sourceTextHash": "bf32cf2b43a1254f41cef1b1b959ad8a834cf605bef9e7c1846dc92727c3b37b",
+        "parserVersion": "golden-v1-replay-v0.1.0"
+      },
+      "notes": [
+        "The replay harness uses explicit snapshot panel.sheerForce for G21 until the cleaned resolver supports derived panel fields."
+      ]
+    }
+  ]
+}
