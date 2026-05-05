@@ -58,16 +58,17 @@
     }
   ],
 
-  "fieldProvenance": { "team[0].panel": "panel" },
+  "fieldProvenance": { "team[0].panel": { "provenance": "panel" } },
   "activeActor": { "agentId": "yixuan" },
   "attackSegments": [
     {
       "id": "seg-1",
       "actorId": "yixuan",
-      "skill": "exSpecial",
-      "skillName": "sigilShroudBreak",
-      "damageRatio": 12.0,
-      "dazeRatio": 3.741,
+      "skillId": "yixuan.exSpecial.sigilShroudBreak",
+      "levelKey": "lv12",
+      "multiplier": 12.0,
+      "baseDazeMultiplier": 3.741,
+      "damageType": "sheer",
       "attribute": "auricInk",
       "tags": ["exSpecial", "heavyHit"],
       "distanceDecay": 1.0
@@ -78,7 +79,6 @@
     "enemyId": "corruptionPriest",
     "level": 80,
     "rank": "boss",
-    "weakness": "ether",
     "states": ["corruptedDomain"],
     "corruptedShield": { "active": true },
     "anomalyTriggerCounts": { "fire": 0, "ice": 0, "physical": 0, "ether": 0, "electric": 0 }
@@ -152,23 +152,25 @@
       }
     }
   ],
-  "fieldProvenance": { "team[0].panel": "panel" },
+  "fieldProvenance": { "team[0].panel": { "provenance": "panel" } },
   "activeActor": { "agentId": "yanagi" },
   "attackSegments": [
     {
       "id": "seg-1",
       "actorId": "yanagi",
-      "skill": "exSpecial",
+      "skillId": "yanagi.exSpecial",
+      "multiplier": 5.0,
+      "damageType": "anomaly",
+      "attribute": "electric",
       "tags": ["exSpecial"]
     }
   ],
   "enemy": {
     "enemyId": "pompey",
     "rank": "boss",
-    "weakness": "electric",
     "states": [],
     "anomalyTriggerCounts": { "electric": 0 }
-    // pompey 的 electric resistance: 0.4 (特例，攻略 1.5)
+    // pompey 的 electric resistance: 0.4 (特例，攻略 1.5；data 包提供敌人抗性表)
   }
 }
 ```
@@ -219,7 +221,7 @@
   ],
   "activeActor": { "agentId": "yixuan" },
   "attackSegments": [
-    { "id": "seg-1", "actorId": "yixuan", "skill": "exSpecial", "tags": ["exSpecial"] }
+    { "id": "seg-1", "actorId": "yixuan", "skillId": "yixuan.exSpecial", "multiplier": 12.0, "damageType": "sheer", "attribute": "auricInk", "tags": ["exSpecial"] }
   ],
   "modifiers": [
     {
@@ -227,7 +229,7 @@
       "handlerId": "defense-reduction",
       "params": { "value": 0.40 },
       "appliesTo": { "kind": "enemy" },
-      "source": { "kind": "agentSkill", "agentId": "nicole", "skillId": "exSpecial" },
+      "source": { "sourceId": "nicole.exSpecial" },
       "active": true
     },
     {
@@ -235,7 +237,7 @@
       "handlerId": "daze-vulnerability-bonus",
       "params": { "value": 0.35 },
       "appliesTo": { "kind": "enemy", "when": { "dazed": true } },
-      "source": { "kind": "agentSkill", "agentId": "lycaon", "skillId": "additionalAbility" },
+      "source": { "sourceId": "lycaon.additionalAbility" },
       "active": true
     }
   ],

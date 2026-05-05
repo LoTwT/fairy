@@ -5,7 +5,7 @@
     "ruleSetVersion": "rules-v0.1-attached-2026-05-04",
     "schemaVersion": "v1",
     "generatedBy": "@UX",
-    "totalEntries": 27,
+    "totalEntries": 26,
     "scope": "P0 必填 — 伤害计算器实际触发的错误文案；v0.4 扩展 ERR-VER-* / ERR-EVENT-* 系列"
   },
   "ERR-RNG-001": "增伤区已超过攻略上限 600%（PART 01.2）。已截断展示，原始累加值为 {raw}%。",
