@@ -6,6 +6,10 @@
   "type": "module",
   "scripts": {
     "check": "pnpm -r --if-present check",
+    "fairy": "node packages/cli/bin/fairy.js",
+    "fairy:s1": "node packages/cli/bin/fairy.js calc examples/snapshots/s1-yixuan-sheer.json --lang zh --pretty",
+    "fairy:s2": "node packages/cli/bin/fairy.js calc examples/snapshots/s2-yanagi-disorder.json --lang zh --pretty",
+    "fairy:s3": "node packages/cli/bin/fairy.js calc examples/snapshots/s3-team-g22-g23-acceptance.json --lang zh --pretty",
     "test": "pnpm -r --if-present test"
   },
   "devDependencies": {
