@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "source-manifest-v1",
+  "generatedAt": "2026-05-05T12:18:30+08:00",
+  "distributionPolicy": {
+    "rawSourceArchive": "versioned-in-git-not-packaged",
+    "publishedArtifacts": "cleaned-json-and-types-only"
+  },
+  "sources": [
+    {
+      "id": "lo-user-excel",
+      "kind": "excel",
+      "path": "data/source/excel/data.xlsx",
+      "metadataPath": "data/source/excel/META.md",
+      "sha256": "9f42ecf734f45908c18bedf7ae937479f9f1563e4b3314a50d76cb99233a260b",
+      "bytes": 961305,
+      "receivedAt": "2026-05-05T12:16:24+08:00",
+      "providedBy": "@lo-user",
+      "attachmentId": "ad475609-e4c6-4213-819b-b214ad0ade65",
+      "distribution": "raw-retained-not-packaged",
+      "usage": "primary workbook source for cleaned game data"
+    },
+    {
+      "id": "zzz-data-introduction",
+      "kind": "referenceGuide",
+      "path": "docs/reference/zzz-data-introduction.txt",
+      "sha256": "4275c1f475e067985f9827fc9501ffd3b3b6a0c8ef319fe234b23236032cc87f",
+      "bytes": 95719,
+      "receivedAt": "2026-05-05T12:16:24+08:00",
+      "providedBy": "@lo-user",
+      "attachmentId": "a9012315-c0be-440a-9b82-a9c4ef603e12",
+      "distribution": "reference-retained-not-packaged",
+      "usage": "formula and terminology reference; not a formal data source"
+    }
+  ]
+}

@@ -6,8 +6,17 @@
   "exports": {
     ".": "./src/index.ts"
   },
+  "files": [
+    "src",
+    "!src/**/*.test.ts",
+    "dist",
+    "cleaned",
+    "README.md",
+    "package.json"
+  ],
   "scripts": {
     "check": "tsc -p tsconfig.json --noEmit",
+    "sync-cleaned": "node scripts/sync-cleaned.mjs",
     "test": "vitest run"
   },
   "dependencies": {
