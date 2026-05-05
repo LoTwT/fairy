@@ -1,8 +1,8 @@
 # UX i18n 资源说明
 
 Owner: @UX
-Status: v0.1（伴随 UX-S4-1 落地：Product 决策选 A，CLI ERR-CLI-* 全套双语化）
-Inputs: D-02-rev / D-11 / Product CLI ERR-CLI-* 决策（A，2026-05-05）
+Status: v0.2（UX-S5-2 落地：cleaned data pipeline diagnostics ERR-DAT-005 / ERR-DAT-006，D-16 锁定 2026-05-05）
+Inputs: D-02-rev / D-11 / Product CLI ERR-CLI-* 决策（A，2026-05-05）/ D-13 / D-14 / D-16 / cleaned-schema-spec.md §6.5 + §7
 
 ## 资源文件
 
@@ -13,23 +13,25 @@ Inputs: D-02-rev / D-11 / Product CLI ERR-CLI-* 决策（A，2026-05-05）
 
 ## i18n 范围（V1）
 
-V1 双语覆盖 **core engine 业务侧 diagnostic** + **CLI shell / argument validation 错误**（Product 决策 A，2026-05-05），共 **33 条**。
+V1 双语覆盖 **core engine 业务侧 diagnostic** + **CLI shell / argument validation 错误**（Product 决策 A，2026-05-05）+ **cleaned data pipeline diagnostics**（D-16 锁定 UX-S5-2），共 **35 条**。
 
 ### 双语条目分组
 
 | 系列 | 数量 | 含义 | 引入版本 |
 |---|---|---|---|
 | `ERR-RNG-*` | 9 | 乘区数值越界 | v0.3 |
-| `ERR-DAT-*` | 4 | 内置 / data 包数据缺失 | v0.3 |
+| `ERR-DAT-001~004` | 4 | 内置 / data 包数据缺失 | v0.3 |
 | `ERR-SRC-001` | 1 | 无来源 modifier（user / temporary contributor） | v0.3 / v0.4 重写 |
 | `ERR-VER-*` | 4 | 版本不匹配双路径（重算 / 只读 / 二次确认）含 4 个 `original*` | v0.3 / v0.4 |
 | `ERR-EVENT-*` | 4 | 真实伤害手动事件（partBreak / corruptedShieldCleanse 等） | v0.4 |
 | `ERR-UI-*` | 3 | 空结果 / 加载 / unsupported feature | v0.3 / v0.4 |
 | `ERR-OCR-000` | 1 | 不识别截图 | v0.3 |
 | `ERR-CALC-PENDING-*` | 2 | anomaly / disorder PR #10 阶段 schema 骨架占位（TL-S3-4 实装后实际不再 emit，但保留资源） | UX-S3-1 |
-| **`ERR-CLI-*`** | **5** | **CLI argument / schema 错误**（A 决策双语化） | **UX-S4-1** |
+| `ERR-CLI-*` | 5 | CLI argument / schema 错误（A 决策双语化） | UX-S4-1 |
+| **`ERR-DAT-005`** | **1** | **cleaned data 阻断发布的未解析效果（多源冲突 / 未知 bucket / 未知 handler / 模糊条件 / 模糊目标 / 未知文本模式）— blocking** | **UX-S5-2** |
+| **`ERR-DAT-006`** | **1** | **cleaned data 本地化映射未解析（米游社 / Excel / buhflipexplode 之间 zh/en 对应缺失）— non-blocking warning** | **UX-S5-2** |
 
-合计 33 条。
+合计 35 条。
 
 ### Placeholder 约定（v0.4 + UX-S4-1）
 
@@ -42,13 +44,26 @@ V1 双语覆盖 **core engine 业务侧 diagnostic** + **CLI shell / argument va
 | `ERR-EVENT-003` | `{eventId}` / `{partId}` / `{enemyId}` |
 | `ERR-VER-001~004` | `{originalRuleSetVersion}` / `{originalDataVersion}` / `{originalSourceVersion}` / `{originalGameVersion}` / `{currentRuleSetVersion}` |
 | `ERR-SRC-001` | `{path}` |
-| **`ERR-CLI-ARG`** | **`{message}`** |
-| **`ERR-CLI-CMD`** | **`{command}`** |
-| **`ERR-CLI-JSON`** | **`{input}`** |
-| **`ERR-CLI-SCHEMA`** | （无 placeholder；schema 详情保持在 JSON `error.details` 字段） |
-| **`ERR-CLI-UNCAUGHT`** | **`{message}`** |
+| `ERR-CLI-ARG` | `{message}` |
+| `ERR-CLI-CMD` | `{command}` |
+| `ERR-CLI-JSON` | `{input}` |
+| `ERR-CLI-SCHEMA` | （无 placeholder；schema 详情保持在 JSON `error.details` 字段） |
+| `ERR-CLI-UNCAUGHT` | `{message}` |
+| **`ERR-DAT-005`** | **`{reason}` / `{effectId}` / `{sourceText}`** |
+| **`ERR-DAT-006`** | **`{language}` / `{path}`** |
 
-ERR-CLI-* placeholder 由 TL（task #33 [TL-S4-follow]）锁定，本文件以此为权威；后续若新增 ERR-CLI-* 系列条目，TL/UX 协作锁 placeholder 后再增。
+ERR-CLI-* placeholder 由 TL（task #33 [TL-S4-follow]）锁定。ERR-DAT-005 / ERR-DAT-006 placeholder 由 UX 基于 cleaned-schema-spec.md §6.5 `UnparsedEffect.reason` enum + §7 diagnostic open items 锁定（task #52 [UX-S5-2-err-catalog]，2026-05-05）。
+
+**ERR-DAT-005 `{reason}` 取值**（与 cleaned-schema-spec.md §6.5 `UnparsedEffect.reason` 严格一致）：
+- `unknownTextPattern` — 文本模式未注册
+- `unknownBucket` — bucket 不在 D-11 enum 中
+- `unknownHandler` — handler 未注册到 registry
+- `ambiguousCondition` — Condition DSL 条件歧义
+- `ambiguousTarget` — `appliesTo` 目标歧义
+- `sourceConflict` — 多源同字段冲突
+（`localeMappingUnresolved` 单独走 ERR-DAT-006，不进 ERR-DAT-005）
+
+**ERR-DAT-006 `{language}` 取值**：`zh` / `en`
 
 ## 文件维护规则
 
@@ -68,4 +83,5 @@ ERR-CLI-* placeholder 由 TL（task #33 [TL-S4-follow]）锁定，本文件以�
 ## 决策与历史
 
 - 2026-05-05：Product 初始决策 B（CLI 错误英文 only），后基于"P1 玩家高频场景（snapshot.json schema 错）"反馈撤回，最终决策 A（CLI 错误也双语化）
-- v0.4 / UX-S3-1 / UX-S4-1 累积，资源在 main 分支按 PR 流入
+- 2026-05-05：D-13 / D-14 / D-16 锁定 cleaned data pipeline；UX-S5-2 加 ERR-DAT-005（blocking unparsed / multi-source conflict）+ ERR-DAT-006（locale mapping unresolved）；reason enum 严格对齐 cleaned-schema-spec.md §6.5
+- v0.4 / UX-S3-1 / UX-S4-1 / UX-S5-2 累积，资源在 main 分支按 PR 流入
