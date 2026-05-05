@@ -66,6 +66,26 @@ export const bucketContributorSchema = z
     diagnosticRefs: z.array(z.string().min(1)).optional(),
   })
   .strict()
+  .superRefine((contributor, ctx) => {
+    if (contributor.source !== undefined)
+      return
+
+    if (contributor.sourceMissing !== true) {
+      ctx.addIssue({
+        code: "custom",
+        path: ["sourceMissing"],
+        message: "sourceMissing must be true when source is omitted",
+      })
+    }
+
+    if (contributor.diagnosticRefs === undefined || contributor.diagnosticRefs.length === 0) {
+      ctx.addIssue({
+        code: "custom",
+        path: ["diagnosticRefs"],
+        message: "diagnosticRefs must reference a warning when source is omitted",
+      })
+    }
+  })
 
 export const bucketResultSchema = z
   .object({

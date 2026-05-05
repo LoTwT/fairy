@@ -13,6 +13,16 @@ import {
 import { typedModifierSchema } from "./modifier"
 
 const numberTableSchema = z.record(z.string(), z.number().finite())
+const formalModifierSchema = typedModifierSchema.superRefine((modifier, ctx) => {
+  if (modifier.source !== undefined)
+    return
+
+  ctx.addIssue({
+    code: "custom",
+    path: ["source"],
+    message: "formal data modifiers require source",
+  })
+})
 
 export const agentDataSchema = z
   .object({
@@ -25,7 +35,7 @@ export const agentDataSchema = z
     skillIds: z.array(z.string().min(1)),
     mindscapeCinema: z.record(z.string(), z.unknown()).optional(),
     potentialActivation: z.record(z.string(), z.unknown()).optional(),
-    corePassiveModifiers: z.array(typedModifierSchema).optional(),
+    corePassiveModifiers: z.array(formalModifierSchema).optional(),
     sourceAliases: z.array(z.string().min(1)).optional(),
   })
   .strict()
@@ -61,7 +71,7 @@ export const wEngineDataSchema = z
     label: localizedLabelSchema,
     source: sourceRefSchema,
     baseStatsByLevel: z.record(z.string(), z.record(z.string(), z.number().finite())).optional(),
-    passiveModifiers: z.array(typedModifierSchema).optional(),
+    passiveModifiers: z.array(formalModifierSchema).optional(),
     sourceAliases: z.array(z.string().min(1)).optional(),
   })
   .strict()
@@ -71,8 +81,8 @@ export const driveDiscDataSchema = z
     id: z.string().min(1),
     label: localizedLabelSchema,
     source: sourceRefSchema,
-    twoPieceModifiers: z.array(typedModifierSchema).optional(),
-    fourPieceModifiers: z.array(typedModifierSchema).optional(),
+    twoPieceModifiers: z.array(formalModifierSchema).optional(),
+    fourPieceModifiers: z.array(formalModifierSchema).optional(),
     sourceAliases: z.array(z.string().min(1)).optional(),
   })
   .strict()
@@ -84,7 +94,7 @@ export const resoniumDataSchema = z
     sourceMode: z.literal("lostVoid"),
     category: z.string().min(1).optional(),
     source: sourceRefSchema,
-    modifiers: z.array(typedModifierSchema).optional(),
+    modifiers: z.array(formalModifierSchema).optional(),
     sourceAliases: z.array(z.string().min(1)).optional(),
   })
   .strict()
@@ -101,7 +111,7 @@ export const enemyDataSchema = z
       .partialRecord(resistanceAttributeSchema, z.number().finite())
       .optional(),
     dazeRecovery: z.record(z.string(), z.unknown()).optional(),
-    specialRules: z.array(typedModifierSchema).optional(),
+    specialRules: z.array(formalModifierSchema).optional(),
     sourceAliases: z.array(z.string().min(1)).optional(),
   })
   .strict()
@@ -128,7 +138,7 @@ export const gameDataSchema = z
     driveDiscs: z.record(z.string(), driveDiscDataSchema),
     enemies: z.record(z.string(), enemyDataSchema),
     resonium: z.record(z.string(), resoniumDataSchema),
-    modifiers: z.record(z.string(), typedModifierSchema),
+    modifiers: z.record(z.string(), formalModifierSchema),
     rules: z.record(z.string(), z.unknown()),
     aliases: sourceAliasTableSchema,
   })

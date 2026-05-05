@@ -150,6 +150,68 @@ describe("BattleSnapshot schema", () => {
 
     expect(result.success).toBe(false)
   })
+
+  it("rejects an attack segment actor outside the team", () => {
+    const result = battleSnapshotSchema.safeParse({
+      schemaVersion: "1.0.0",
+      gameVersion: "ZZZ-2.2",
+      ruleSetVersion: "rules-v0.1",
+      dataVersion: "data-v0.1.0",
+      sourceVersion: "source-v0.1.0",
+      team: [minimalAgent],
+      activeActor: { agentId: "yixuan" },
+      attackSegments: [
+        {
+          id: "seg-1",
+          actorId: "yanagi",
+          attribute: "auricInk",
+          tags: ["exSpecial"],
+          damageType: "sheer",
+        },
+      ],
+      enemy: {
+        level: 60,
+        rank: "boss",
+      },
+    })
+
+    expect(result.success).toBe(false)
+  })
+
+  it("rejects legacy panel aliases outside migration", () => {
+    const result = battleSnapshotSchema.safeParse({
+      schemaVersion: "1.0.0",
+      gameVersion: "ZZZ-2.2",
+      ruleSetVersion: "rules-v0.1",
+      dataVersion: "data-v0.1.0",
+      sourceVersion: "source-v0.1.0",
+      team: [
+        {
+          ...minimalAgent,
+          panel: {
+            ...minimalAgent.panel,
+            breachForce: 2423,
+            hpMax: 18000,
+          },
+        },
+      ],
+      activeActor: { agentId: "yixuan" },
+      attackSegments: [
+        {
+          id: "seg-1",
+          attribute: "auricInk",
+          tags: ["exSpecial"],
+          damageType: "sheer",
+        },
+      ],
+      enemy: {
+        level: 60,
+        rank: "boss",
+      },
+    })
+
+    expect(result.success).toBe(false)
+  })
 })
 
 describe("CalcResult schema", () => {
@@ -213,6 +275,59 @@ describe("CalcResult schema", () => {
 
     expect(result.success).toBe(true)
   })
+
+  it("rejects unsourced bucket contributors without warning trace", () => {
+    const result = calcResultSchema.safeParse({
+      schemaVersion: "1.0.0",
+      gameVersion: "ZZZ-2.2",
+      ruleSetVersion: "rules-v0.1",
+      dataVersion: "data-v0.1.0",
+      sourceVersion: "source-v0.1.0",
+      calculationId: "calc-1",
+      summary: {
+        activeActorId: "yixuan",
+        damageType: "sheer",
+        rawTotalDamage: 10.2,
+        displayTotalDamage: 11,
+      },
+      attackSegments: [
+        {
+          id: "seg-1",
+          actorId: "yixuan",
+          attribute: "auricInk",
+          tags: ["exSpecial"],
+          damageType: "sheer",
+          rawDamage: 10.2,
+          segmentDisplayDamage: 11,
+          roundingMode: "ceilPerSegment",
+          traceRefs: ["trace-rounding-1"],
+        },
+      ],
+      buckets: [
+        {
+          bucketId: "sheerDamageBonusZone",
+          before: 1,
+          after: 1.2,
+          effectiveMultiplier: 1.2,
+          contributors: [
+            {
+              id: "manual-bonus",
+              value: 0.2,
+              operation: "add",
+              active: true,
+            },
+          ],
+          traceRefs: ["trace-bucket-1"],
+        },
+      ],
+      modifiers: [],
+      trace: [],
+      warnings: [],
+      errors: [],
+    })
+
+    expect(result.success).toBe(false)
+  })
 })
 
 describe("Condition schema", () => {
@@ -262,5 +377,48 @@ describe("GameData schema", () => {
     })
 
     expect(result.success).toBe(true)
+  })
+
+  it("rejects formal data modifiers without source", () => {
+    const result = gameDataSchema.safeParse({
+      schemaVersion: "1.0.0",
+      gameVersion: "ZZZ-2.2",
+      dataVersion: "data-v0.1.0",
+      sourceVersion: "source-v0.1.0",
+      generatedAt: "2026-05-05T00:00:00.000Z",
+      sources: [
+        {
+          id: "excel-1",
+          kind: "excel",
+          fileName: "source.xlsx",
+          sourceVersion: "source-v0.1.0",
+          parsedAt: "2026-05-05T00:00:00.000Z",
+          parserVersion: "parser-v0.1.0",
+        },
+      ],
+      agents: {},
+      skills: {},
+      wEngines: {},
+      driveDiscs: {},
+      enemies: {},
+      resonium: {},
+      modifiers: {
+        unsourcedFormalModifier: {
+          id: "unsourced-formal-modifier",
+          handlerId: "damage-bonus",
+          bucket: "damageBonusZone",
+          params: { value: 0.1 },
+          appliesTo: { kind: "activeActor" },
+        },
+      },
+      rules: {},
+      aliases: {
+        fields: {},
+        enumValues: {},
+        sourceTerms: {},
+      },
+    })
+
+    expect(result.success).toBe(false)
   })
 })
