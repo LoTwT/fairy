@@ -5,9 +5,10 @@ Fairy is a ZZZ static snapshot damage calculator for 1-3 agents.
 ## Read First
 
 1. Project map: [docs/index.md](docs/index.md)
-2. Product scope: [docs/product/v2.0.md](docs/product/v2.0.md)
-3. Terminology: [docs/glossary/glossary.md](docs/glossary/glossary.md)
-4. Data contracts: [docs/data-contract/](docs/data-contract/)
+2. V1 dogfooding quick start: [docs/getting-started.md](docs/getting-started.md)
+3. Product scope: [docs/product/v2.0.md](docs/product/v2.0.md)
+4. Terminology: [docs/glossary/glossary.md](docs/glossary/glossary.md)
+5. Data contracts: [docs/data-contract/](docs/data-contract/)
 
 ## Current Rules
 
@@ -34,3 +35,4 @@ S5 data ingestion. Current engineering entry points:
 - `packages/core/src/engine/`
 - `packages/cli/`
 - `packages/data/`
+- `examples/snapshots/`

@@ -4,6 +4,7 @@ Fairy 是绝区零 1-3 代理人静态快照伤害计算器。V1 目标是 `@fai
 
 ## 快速入口
 
+- V1 dogfooding 上手：[getting-started.md](getting-started.md)
 - 项目范围与里程碑：[product/v2.0.md](product/v2.0.md)
 - 术语权威：[glossary/glossary.md](glossary/glossary.md)
 - 数据契约：[data-contract/](data-contract/)
@@ -32,3 +33,4 @@ Fairy 是绝区零 1-3 代理人静态快照伤害计算器。V1 目标是 `@fai
 - 米游社危局强袭战 source snapshot：[data-source/mihoyo/](data-source/mihoyo/)
 - buhflipexplode 危局强袭战 source snapshot：[data-source/buhflipexplode/](data-source/buhflipexplode/)
 - V1 golden source coverage：[qa/golden-source-coverage.md](qa/golden-source-coverage.md)
+- Starter scenarios narrative：[ux/starter-scenarios.md](ux/starter-scenarios.md)

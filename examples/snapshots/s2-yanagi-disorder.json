@@ -1,0 +1,81 @@
+{
+  "schemaVersion": "1.0.0",
+  "gameVersion": "ZZZ-2.7.3",
+  "ruleSetVersion": "rules-v0.1",
+  "dataVersion": "data-v0.1.0",
+  "sourceVersion": "dogfood-examples-v0.1.0",
+  "team": [
+    {
+      "agentId": "yanagi",
+      "level": 60,
+      "agentSpecialty": "anomaly",
+      "attribute": "electric",
+      "skillLevels": {
+        "special": 12
+      },
+      "panel": {
+        "attack": 2400,
+        "maxHp": 10000,
+        "defense": 600,
+        "impact": 86,
+        "critRate": 0.3,
+        "critDamage": 1.5,
+        "anomalyProficiency": 600,
+        "anomalyMastery": 450
+      }
+    }
+  ],
+  "activeActor": {
+    "agentId": "yanagi"
+  },
+  "attackSegments": [
+    {
+      "id": "s2-yanagi-shock-disorder",
+      "actorId": "yanagi",
+      "skillId": "yanagi.disorder.shock",
+      "multiplier": 1,
+      "attribute": "electric",
+      "tags": [
+        "exSpecial"
+      ],
+      "damageType": "disorder",
+      "anomalyContribution": {
+        "status": "shock",
+        "buildup": 100,
+        "remainingDurationSeconds": 5,
+        "contributors": [
+          {
+            "actorId": "yanagi",
+            "buildup": 100,
+            "included": true,
+            "source": {
+              "sourceId": "fairy-starter-scenario",
+              "sourceVersion": "v0.4.1",
+              "sourceAnchor": "docs/ux/starter-scenarios.md#scenario-s2"
+            }
+          }
+        ]
+      },
+      "source": {
+        "sourceId": "fairy-starter-scenario",
+        "sourceVersion": "v0.4.1",
+        "sourceAnchor": "docs/ux/starter-scenarios.md#scenario-s2"
+      }
+    }
+  ],
+  "enemy": {
+    "enemyId": "pompey",
+    "level": 60,
+    "rank": "boss",
+    "maxHp": 1000000,
+    "resistance": {
+      "electric": 0.4
+    },
+    "anomalyTriggerCounts": {
+      "shock": 0
+    },
+    "states": []
+  },
+  "modifiers": [],
+  "manualEvents": []
+}

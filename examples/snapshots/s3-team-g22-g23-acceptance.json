@@ -1,0 +1,169 @@
+{
+  "schemaVersion": "1.0.0",
+  "gameVersion": "ZZZ-2.7.3",
+  "ruleSetVersion": "rules-v0.1",
+  "dataVersion": "data-v0.1.0",
+  "sourceVersion": "dogfood-examples-v0.1.0",
+  "team": [
+    {
+      "agentId": "yixuan",
+      "level": 60,
+      "agentSpecialty": "rupture",
+      "attribute": "auricInk",
+      "panel": {
+        "attack": 1000,
+        "maxHp": 12000,
+        "defense": 600,
+        "impact": 120,
+        "critRate": 0,
+        "critDamage": 0,
+        "anomalyProficiency": 300,
+        "anomalyMastery": 100,
+        "sheerForce": 1000
+      }
+    },
+    {
+      "agentId": "nicole",
+      "level": 60,
+      "agentSpecialty": "support",
+      "attribute": "ether",
+      "panel": {
+        "attack": 2000,
+        "maxHp": 10000,
+        "defense": 600,
+        "impact": 80,
+        "critRate": 0.1,
+        "critDamage": 0.5,
+        "anomalyProficiency": 300,
+        "anomalyMastery": 100
+      }
+    },
+    {
+      "agentId": "yanagi",
+      "level": 60,
+      "agentSpecialty": "anomaly",
+      "attribute": "electric",
+      "skillLevels": {
+        "special": 12
+      },
+      "panel": {
+        "attack": 1600,
+        "maxHp": 10000,
+        "defense": 600,
+        "impact": 86,
+        "critRate": 0.3,
+        "critDamage": 1.5,
+        "anomalyProficiency": 300,
+        "anomalyMastery": 112
+      }
+    }
+  ],
+  "activeActor": {
+    "agentId": "yixuan"
+  },
+  "attackSegments": [
+    {
+      "id": "s3-yanagi-polarity-disorder",
+      "actorId": "yixuan",
+      "skillId": "yanagi.exSpecial.polarityDisorder",
+      "attribute": "electric",
+      "tags": [
+        "exSpecial"
+      ],
+      "damageType": "disorder",
+      "anomalyContribution": {
+        "status": "polarityDisorder",
+        "buildup": 100,
+        "remainingDurationSeconds": 5,
+        "contributors": [
+          {
+            "actorId": "yixuan",
+            "buildup": 40,
+            "included": true
+          },
+          {
+            "actorId": "nicole",
+            "buildup": 20,
+            "included": true
+          },
+          {
+            "actorId": "yanagi",
+            "buildup": 40,
+            "included": true
+          }
+        ],
+        "polarityDisorder": {
+          "providerActorId": "yanagi",
+          "skillLevelKey": "special",
+          "originalDisorderDamageRatio": 0.15,
+          "anomalyProficiencyBasePercent": 5,
+          "anomalyProficiencyPerSkillLevelPercent": 2.25,
+          "source": {
+            "sourceId": "lo-user-excel",
+            "sourceVersion": "2.6.0_R14028417",
+            "sourceAnchor": "代理人技能描述!C298"
+          }
+        }
+      },
+      "source": {
+        "sourceId": "fairy-starter-scenario",
+        "sourceVersion": "v0.4.1",
+        "sourceAnchor": "docs/ux/starter-scenarios.md#scenario-s3"
+      }
+    }
+  ],
+  "enemy": {
+    "enemyId": "corruptionPriest",
+    "level": 60,
+    "rank": "boss",
+    "maxHp": 1000000,
+    "states": [
+      "dazed"
+    ],
+    "corruptedShield": {
+      "active": false
+    }
+  },
+  "modifiers": [
+    {
+      "id": "support-defense-reduction",
+      "handlerId": "defense-reduction",
+      "bucket": "defenseZone",
+      "params": {
+        "value": 0.4
+      },
+      "appliesTo": {
+        "kind": "enemy"
+      },
+      "active": true,
+      "source": {
+        "sourceId": "lo-user-excel",
+        "sourceVersion": "2.6.0_R14028417",
+        "sourceAnchor": "代理人核心技描述!D4:J4"
+      }
+    },
+    {
+      "id": "yanagi-disorder-boost",
+      "handlerId": "anomaly-damage-bonus",
+      "bucket": "anomalyDamageBonusZone",
+      "params": {
+        "value": 2.5
+      },
+      "appliesTo": {
+        "kind": "segment"
+      },
+      "when": {
+        "field": "segment.damageType",
+        "op": "eq",
+        "value": "disorder"
+      },
+      "active": true,
+      "source": {
+        "sourceId": "lo-user-excel",
+        "sourceVersion": "2.6.0_R14028417",
+        "sourceAnchor": "代理人核心技描述!D23:J23"
+      }
+    }
+  ],
+  "manualEvents": []
+}
