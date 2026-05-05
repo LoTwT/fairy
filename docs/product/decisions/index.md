@@ -24,6 +24,7 @@
 | **D-09** | 紊乱是否进 V1 | ✅ 锁定 | 紊乱进 V1 计算引擎；V1 不提供专用交互 surface，仅 core / JSON 输出；V2 时再考虑 UI | 高 |
 | **D-10** | 数据维护责任 | ✅ 锁定（v2.0 修订） | V1 阶段：lo-user 提供 Excel 主源 + 爬虫每版本手动 release；data 包必须做完整角色/音擎/驱动盘/影画/鸣徽/潜能激化数据 | 中 |
 | **D-11** | 命名体系（v2.0 新增） | ✅ 锁定 | 选项 A 全套官方化：公开 schema / core API / data 字段优先使用 ZZZ 官方英文的语义化 camelCase；旧 `breach*` 进 sourceAliases / migration | 中 |
+| **D-12** | buhflipexplode 算法处理 | ✅ 锁定 | 选项 B：Fairy 保持 MIT；buhflipexplode GPL JS 仅 raw 留档/参考，不复制进 runtime；Fairy 独立实现等价算法；每次抓取用 hash + 算法快照文档 + parity 对账监控 drift | 高 |
 | **D-1=D**（S2 节奏） | V1 推进顺序 | ✅ 锁定 | S2 双门槛：schema discovery + 并行 scraper 准备；S6 全量化最后；不允许 data 全量化阻塞 core 启动 | 中 |
 
 ---
@@ -121,6 +122,22 @@
 **重要 errata**：v0.1 ~ v0.3 阶段曾用 `anomalyMastery = 异常精通` / `anomalyProficiency = 异常掌控`（候选 X），与 ZZZ 官方反向；2026-05-05 lo-user 截图验证后锁定为候选 Y。
 
 **来源**：v2.0 §6 D-11，三角色独立得到一致方向，lo-user 2026-05-05 拍板。
+
+### D-12 buhflipexplode 算法处理
+
+**锁定状态**：@lo-user 2026-05-05 选择选项 B。Fairy 保持 MIT，不复制 / 改写 buhflipexplode GPL-3.0 JavaScript 到 MIT runtime 包。
+
+**处理边界**：
+- raw JSON / JS / HTML 可入 `data/source/raw/buhflipexplode/` 留档；不进入 npm/package 发布物
+- README / metadata 需声明数据版权归 miHoYo 或各自权利方；如有侵权联系删除
+- buhflipexplode 算法逻辑仅作为参考；Fairy 在 `@fairy/core` / `@fairy/data` 中独立实现等价逻辑
+- 如未来需要直接运行原 JS，必须另开 GPL adapter/package 决策，不进入默认 MIT runtime
+
+**drift gate**：
+- fetch 模式：手动 release 抓 live 站点，生成 raw snapshot + `algorithm-manifest.json`
+- verify 模式：CI 离线校验已入仓 snapshot / manifest / hash，一律不依赖实时外网
+- 算法快照文档：首次接入或 hash/签名变化时更新
+- parity：用 archived raw inputs + 离线 expected outputs 对账；live 网站 smoke 仅作为 release 手动步骤
 
 ---
 

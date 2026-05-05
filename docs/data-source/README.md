@@ -1,13 +1,13 @@
 # Data Source Ingestion
 
-Status: S5 segment 1 baseline
+Status: S5 segment 2 source baseline
 Owner: @TechLead
 Inputs: CONFIRM-4, CONFIRM-11, task #31, TL-4 scraper preparation
 
 This directory records the source-ingestion boundary for `@fairy/data`.
-Segment 1 is intentionally a skeleton: it defines source descriptors, adapter
-interfaces, metadata rules, and crawler compliance notes before any formal game
-data is generated.
+Segment 1 defined source descriptors, adapter interfaces, metadata rules, and
+crawler compliance notes. Segment 2 starts adding retained source snapshots and
+offline verification gates before formal cleaned game data is generated.
 
 ## Segment 1 Scope
 
@@ -35,20 +35,24 @@ anchors. Hand-written values may exist only in QA fixtures, not in
 
 | Source ID | Kind | Current status | Formal data ready | Notes |
 |---|---|---:|---:|---|
-| `lo-user-excel` | `excel` | waiting for upload | no | Workbook path/version/hash to be recorded after lo-user provides the file. |
+| `lo-user-excel` | `excel` | source retained | no | Workbook committed under `data/source/excel/` with hash metadata. |
 | `mihoyo-zzz-critical-assault` | `mihoyoWiki` | discovery only | no | Public wiki page reachable; robots.txt not found on 2026-05-05. |
-| `buhflipexplode-zzz-da` | `thirdPartySite` | discovery only | no | Public page reachable; data asset endpoints identified; redistribution requires review. |
+| `buhflipexplode-zzz-da` | `thirdPartySite` | source retained / ready for adapter | no | Live-only source snapshot retained; D-12 forbids copying GPL JS into Fairy runtime. |
 
 Implementation entry: `packages/data/src/sources.ts`.
 
+Source-specific notes:
+
+- [buhflipexplode Deadly Assault](buhflipexplode/)
+
 ## Next Segment
 
-Once the Excel file is available and Product/human review accepts the source
-usage policy, S5 segment 2 should add:
+S5 segment 2 should continue with:
 
 - Excel reader with sheet/column discovery and workbook hash versioning.
-- Mihoyo and buhflipexplode fetchers with cached snapshots and conditional
-  request support.
+- Mihoyo fetcher with cached snapshots and conditional request support.
+- buhflipexplode transforms from the retained live-only snapshot into cleaned
+  Deadly Assault data and parity fixtures.
 - Raw record schemas and transforms into `GameData`.
 - Golden-anchor source coverage for the 23 fixture cases.
 - Negative validation that formal modifiers and formal rows cannot miss source

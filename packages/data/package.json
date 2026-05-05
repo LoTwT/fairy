@@ -16,8 +16,10 @@
   ],
   "scripts": {
     "check": "tsc -p tsconfig.json --noEmit",
+    "fetch:buhflipexplode-da": "node scripts/buhflipexplode-da-source.mjs fetch",
     "sync-cleaned": "node scripts/sync-cleaned.mjs",
-    "test": "vitest run"
+    "test": "vitest run",
+    "verify:buhflipexplode-da": "node scripts/buhflipexplode-da-source.mjs verify --snapshot 2026-05-05T0445Z"
   },
   "dependencies": {
     "@fairy/core": "workspace:*"

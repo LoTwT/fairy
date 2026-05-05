@@ -1,0 +1,112 @@
+{
+  "schemaVersion": "buhflipexplode-algorithm-manifest-v1",
+  "sourceId": "buhflipexplode-zzz-da",
+  "generatedAt": "2026-05-05T12:45:00+08:00",
+  "snapshotId": "2026-05-05T0445Z",
+  "runtimePolicy": {
+    "licenseDecision": "option-b-fairy-mit-independent-implementation",
+    "runtimeCodePolicy": "Do not copy GPL-3.0 buhflipexplode JS into MIT Fairy runtime packages.",
+    "rawArchivePolicy": "Retain fetched JS/JSON snapshots in git but exclude them from npm/package outputs."
+  },
+  "runtimeConfig": {
+    "vLive": 35,
+    "vBeta": 36,
+    "v22": 19,
+    "v28": 36,
+    "fetchAssets": [
+      "da-versions.json",
+      "../../assets/zzz/enemies.json",
+      "../../assets/zzz/buffs.json"
+    ]
+  },
+  "liveDataPolicy": {
+    "liveVersionCount": 35,
+    "betaStartIndex": 36,
+    "liveVersionKeys": [
+      "1.4.1",
+      "1.4.2",
+      "1.5.1",
+      "1.5.2",
+      "1.5.3",
+      "1.5.4",
+      "1.6.1",
+      "1.6.2",
+      "1.6.3",
+      "1.7.1",
+      "1.7.2",
+      "1.7.3",
+      "2.0.1",
+      "2.0.2",
+      "2.0.3",
+      "2.1.1",
+      "2.1.2",
+      "2.1.3",
+      "2.2.1",
+      "2.2.2",
+      "2.2.3",
+      "2.3.1",
+      "2.3.2",
+      "2.3.3",
+      "2.4.1",
+      "2.4.2",
+      "2.5.1",
+      "2.5.2",
+      "2.5.3",
+      "2.6.1",
+      "2.6.2",
+      "2.6.3",
+      "2.7.1",
+      "2.7.2",
+      "2.7.3"
+    ],
+    "excludedVersionKeys": [
+      "2.8.1",
+      "2.8.2",
+      "2.8.3",
+      "3.0.1",
+      "3.0.2",
+      "3.0.3"
+    ],
+    "excludedReason": "da.js labels versions with index >= vBeta as BETA and changeVersion hides versions above vLive unless leaks are enabled."
+  },
+  "algorithmSource": {
+    "path": "da/da.js",
+    "sha256": "ccdcb7b9fe129d519f24881f11ec8ac6f7d7a9e1e54ec4c314a8b7bbb0276958",
+    "normalizedSha256": "5a97e114e007232ef89dce9f7d5d10bdb5f920f26e0e657721086c8c459f459c",
+    "sectionHashMode": "selected algorithm section normalized hash; upgrade to AST/function-level extraction if da.js structure changes."
+  },
+  "sections": [
+    {
+      "name": "loadHPData",
+      "sourceStartMarker": "function loadHPData()",
+      "sourceEndMarker": "async function showVersion",
+      "bytes": 1117,
+      "sha256": "c4e1411dec43e1b203c5d7b3b4ef8d3b58297a7047c9548449491e534ab8fcf8",
+      "normalizedSha256": "85a719f2cebb4dd128e8cc89f4444d5a825abfb5b29cf57b4ca9de630490a963"
+    },
+    {
+      "name": "showEnemies",
+      "sourceStartMarker": "function showEnemies()",
+      "sourceEndMarker": "function generateWR",
+      "bytes": 4228,
+      "sha256": "83d6c921510f1bc499f48856cac812aa0487db414f0f93aaaae1f332e57ee138",
+      "normalizedSha256": "723289396ee97dfc896fa297eff537fb9ea079b43384442a57f0c9aad98dc3e2"
+    },
+    {
+      "name": "generateEnemyStats",
+      "sourceStartMarker": "function generateEnemyStats",
+      "sourceEndMarker": "function loadSavedState",
+      "bytes": 844,
+      "sha256": "000e0b49ecdadf9beab1863706d0b703ac46e8c3852810770c43a850f96d8297",
+      "normalizedSha256": "9c790b92cab404c6a9c27927163a38bcf958294ab865564c85683cc9c5625838"
+    },
+    {
+      "name": "calculateBoss",
+      "sourceStartMarker": "function calculateBoss",
+      "sourceEndMarker": "function toggleChart",
+      "bytes": 804,
+      "sha256": "f85205214c5e85f9c185d2b4dce4cc894e892b19d61e79dc13d8292eecd8acea",
+      "normalizedSha256": "9101186bdf6f78fc87dac7a5b2619c37d15060381854e996c83fe60a209d2ef9"
+    }
+  ]
+}

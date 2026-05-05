@@ -133,15 +133,17 @@ describe("@fairy/data source discovery skeleton", () => {
     expect(() => assertDiscoveryOnlyGameData(gameData)).toThrow(detail)
   })
 
-  it("documents buhflipexplode public data asset endpoints for the next adapter", () => {
+  it("documents buhflipexplode retained live source assets for the next adapter", () => {
     const descriptor = getDataSourceDescriptor("buhflipexplode-zzz-da")
 
     expect(descriptor.discoveredAssets).toEqual(
       expect.arrayContaining([
-        "https://www.buhflipexplode.org/zzz/da/da-versions.json",
-        "https://www.buhflipexplode.org/assets/zzz/enemies.json",
-        "https://www.buhflipexplode.org/assets/zzz/buffs.json",
+        "data/source/raw/buhflipexplode/2026-05-05T0445Z/da/da-versions.live.json",
+        "data/source/raw/buhflipexplode/2026-05-05T0445Z/assets/zzz/enemies.live.json",
+        "data/source/raw/buhflipexplode/2026-05-05T0445Z/assets/zzz/buffs.live.json",
+        "data/source/raw/buhflipexplode/2026-05-05T0445Z/algorithm-manifest.json",
       ]),
     )
+    expect(descriptor.compliance.redistribution).toBe("cleanedDataOnly")
   })
 })
