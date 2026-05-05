@@ -1,6 +1,6 @@
 # Starter Scenarios — UX v0.3 重定向稿 A
 
-作者：@UX  日期：2026-05-05  状态：v0.4（v0.1.1 patch 修正 + JSON 字段同步 TL-3 schema）
+作者：@UX  日期：2026-05-05  状态：v0.4.1（UX-S5-1-patch — 对齐 D-13 V1 = DA + cleaned-schema-spec.md externalBossId 体系）
 
 > Starter scenarios = AI plugin / CLI 用户首次接入时的"开箱即用"参考用例。每个 scenario 包含：
 > - 自然语言描述（zh + en 双语）
@@ -9,6 +9,10 @@
 >
 > 命名 / 字段以 glossary v0.3.2 + naming-policy.md 为准。Pending 项保留 sourceAliases 兼容。
 > 用途：AI plugin 让 LLM 引用作为 prompt context；CLI 用户复制后改自己面板；QA 黄金集对账参考。
+
+> **v0.4.1 erratum（D-13 V1 = DA 收窄）**：
+> - V1 黄金集收窄到 20 锚点（参见 `docs/product/decisions/index.md` D-13）。**部位破坏典型真实伤害**（黄金集锚点 18）与**失衡恢复时间算例**（锚点 19 凶心疯汉 / 锚点 20 装甲哈提）所对应的 starter scenario 推迟到 V1.x，等 cleaned/enemies + Excel 非 DA enemy 派生数据落地后补。当前 v0.4.1 只覆盖 V1 DA 主场景（S1 / S2 / S3）。
+> - 所有 `enemyId` 在 V1 cleaned 体系下指向 `cleaned/deadly-assault` 的 `externalBossId`（buhflipexplode raw）；能映射 Excel 时附 `baseEnemyRef`。详见 `docs/data-contract/cleaned-schema-spec.md` §5.2 / §5.3。
 
 ---
 
@@ -167,6 +171,10 @@
   ],
   "enemy": {
     "enemyId": "pompey",
+    // v0.4.1 footnote (D-13 / cleaned-schema-spec.md §5.2)：`pompey` 在 V1 cleaned 下对应
+    // `cleaned/deadly-assault` 的两个 externalBossId 形态：`12300` Corrupted Overlord: Pompey
+    // 与 `14301` Notorious: Pompey（buhflipexplode raw）。本场景默认引用 12300 形态；具体 HP / 抗性
+    // 由 cleaned/deadly-assault 的 boss slot multiplier + base 数值驱动。
     "rank": "boss",
     "states": [],
     "anomalyTriggerCounts": { "shock": 0 }
