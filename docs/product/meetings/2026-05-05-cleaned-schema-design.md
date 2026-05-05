@@ -151,7 +151,7 @@
 
 - **结论**：UX 跟随 schema 设计 PR 的 diagnostic contract 同步加 catalog
   - `ERR-DAT-005` blocking：multi-source conflict / 未解析 modifier 影响计算
-  - `ERR-DAT-006` 或 `ERR-UI-004` non-blocking warning：locale mapping unresolved / 展示缺失
+  - `ERR-DAT-006` non-blocking warning：locale mapping unresolved / 展示缺失（与 PR #21 cleaned schema spec 锁定一致）
 
 ### 2.12 core 热替换 / 热增减
 
@@ -175,7 +175,7 @@
 | ERR-DAT-005 / ERR-DAT-006 加 catalog（schema PR 合入后） | @UX | 跟随 schema PR 后启动 |
 | 实施 PR：#42 米游社抓取（HTML 解析 + selector drift gate） | @TechLead | 等 schema PR 合入 |
 | 实施 PR：#43 黄金集 20 锚点真数据复算 | @TechLead + @QA | 等 schema PR 合入 |
-| #40 Excel reader（V1 不做实际清洗，仅 raw archive） | @TechLead | V1.x+ |
+| #40 Excel reader：V1 不做全量 Excel **enemy** cleaning / `cleaned/enemies`；非敌人 Excel 派生数据（角色 / 音擎 / 驱动盘 / 影画 / 鸣徽 / 潜能激化等）不默认推迟，按 schema spec 实施时按需推进；data.xlsx raw archive 已在 PR #18 入仓 | @TechLead | 部分 V1 / 部分 V1.x（具体粒度由 schema spec 决定） |
 
 ---
 

@@ -28,7 +28,7 @@
 | **D-13** | V1 范围收窄到危局强袭战 | ✅ 锁定（2026-05-05 cleaned schema 讨论会） | V1 = DA 计算器；buhflipexplode = DA overlay 主源；Excel `敌人属性`保留 raw archive 作为 V1.x+ 扩展源；通用敌人 / 部位破坏 / 失衡恢复时间在 V1.x；V1 黄金集收窄到 20 锚点（去掉 18 部位破坏 / 19 凶心疯汉 / 20 装甲哈提，V1.x 数据扩展时一次性补） | 中 |
 | **D-14** | cleaned data typed modifier 双层结构 | ✅ 锁定（2026-05-05） | Layer 1 原文层 `sourceText` / `localizedText` + Layer 2 计算层 `modifiers[]` / `calculationEffects[]` + 风险层 `unparsedEffects[]`；bucket 受控 enum 严格匹配 glossary v0.4 D-11；效果 4 级（L1 静态 / L2 静态条件 / L3 动态参数 / L4 时序需 `requiresActivation`）；确定性 pipeline + sourceTextHash + parserVersion + effectTemplateId + 人工 audit gate；AI 候选不能直接入 cleaned | 中 |
 | **D-15** | V1 package exports 4 入口 | ✅ 锁定（2026-05-05） | V1 全做：`@fairy/data/cleaned`（总入口）/ `@fairy/data/cleaned/<domain>` / `@fairy/data/types` / `@fairy/data/cleaned/i18n/<domain>`；data 包 game labels 源码 `packages/data/src/i18n/` → 发布 `packages/data/cleaned/i18n/`；UX ERR-* `docs/ux/i18n/` 完全独立 | 中 |
-| **D-16** | Source priority + multi-source + unknown policy | ✅ 锁定（2026-05-05） | Excel base / buhflipexplode DA overlay / 米游社 i18n；冲突 fail loud + manual review；entity-level `sources[]` + 关键数值字段级 `sourceRefs`；unknown 分级 blocking（影响计算）/ non-blocking（纯展示）；新增 ERR-DAT-005（multi-source conflict / 未解析 modifier blocking）+ ERR-DAT-006 或 ERR-UI-004（locale mapping unresolved / 展示缺失 non-blocking） | 中 |
+| **D-16** | Source priority + multi-source + unknown policy | ✅ 锁定（2026-05-05） | Excel base / buhflipexplode DA overlay / 米游社 i18n；冲突 fail loud + manual review；entity-level `sources[]` + 关键数值字段级 `sourceRefs`；unknown 分级 blocking（影响计算）/ non-blocking（纯展示）；新增 ERR-DAT-005（multi-source conflict / 未解析 modifier blocking）+ ERR-DAT-006（locale mapping unresolved / 展示缺失 non-blocking，与 PR #21 cleaned schema spec 锁定一致） | 中 |
 | **D-1=D**（S2 节奏） | V1 推进顺序 | ✅ 锁定 | S2 双门槛：schema discovery + 并行 scraper 准备；S6 全量化最后；不允许 data 全量化阻塞 core 启动 | 中 |
 
 ---
@@ -211,7 +211,7 @@
 
 **新增 ERR keys**（UX 跟随 schema PR 加 catalog）：
 - `ERR-DAT-005` blocking：multi-source conflict / 未解析 modifier 影响计算
-- `ERR-DAT-006` 或 `ERR-UI-004` non-blocking：locale mapping unresolved / 展示缺失
+- `ERR-DAT-006` non-blocking：locale mapping unresolved / 展示缺失（与 PR #21 cleaned schema spec 锁定一致；不再使用 ERR-UI-004 占位）
 
 **来源**：会议纪要 §2.9 / §2.10 / §2.11
 
