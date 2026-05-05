@@ -122,6 +122,7 @@ export const anomalyContributionInputSchema = z
     buildup: z.number().finite().optional(),
     thresholdOverride: z.number().finite().optional(),
     overflowBuildup: z.number().finite().optional(),
+    remainingDurationSeconds: z.number().finite().nonnegative().optional(),
     contributors: z.array(anomalyContributionActorInputSchema).optional(),
   })
   .strict()
@@ -144,6 +145,18 @@ export const attackSegmentSchema = z
     source: sourceRefSchema.optional(),
   })
   .strict()
+  .superRefine((segment, ctx) => {
+    if (
+      (segment.damageType === "anomaly" || segment.damageType === "disorder")
+      && segment.anomalyContribution?.status === undefined
+    ) {
+      ctx.addIssue({
+        code: "custom",
+        path: ["anomalyContribution", "status"],
+        message: "anomalyContribution.status is required for anomaly and disorder segments",
+      })
+    }
+  })
 
 export const enemySnapshotSchema = z
   .object({

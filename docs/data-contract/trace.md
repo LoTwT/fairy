@@ -125,6 +125,7 @@ Anomaly/disorder trace must expose:
 - overflow buildup
 - excluded Bangboo buildup
 - disorder formula id and remaining duration
+- `disorderDazeLevelZone` when disorder damage uses the daze-level multiplier
 
 ## 7. Daze Evidence
 

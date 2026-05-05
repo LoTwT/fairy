@@ -212,6 +212,35 @@ describe("BattleSnapshot schema", () => {
 
     expect(result.success).toBe(false)
   })
+
+  it("requires anomaly status for anomaly and disorder segments", () => {
+    const result = battleSnapshotSchema.safeParse({
+      schemaVersion: "1.0.0",
+      gameVersion: "ZZZ-2.2",
+      ruleSetVersion: "rules-v0.1",
+      dataVersion: "data-v0.1.0",
+      sourceVersion: "source-v0.1.0",
+      team: [minimalAgent],
+      activeActor: { agentId: "yixuan" },
+      attackSegments: [
+        {
+          id: "seg-1",
+          attribute: "electric",
+          tags: ["exSpecial"],
+          damageType: "disorder",
+        },
+      ],
+      enemy: {
+        level: 60,
+        rank: "boss",
+      },
+    })
+
+    expect(result.success).toBe(false)
+    expect(result.error?.issues.some(issue =>
+      issue.path.join(".") === "attackSegments.0.anomalyContribution.status",
+    )).toBe(true)
+  })
 })
 
 describe("CalcResult schema", () => {

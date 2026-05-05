@@ -167,6 +167,7 @@ export const multiplierBucketSchema = z.enum([
   "damageLevelZone",
   "anomalyDamageBonusZone",
   "anomalyCritZone",
+  "disorderDazeLevelZone",
   "dazeValueZone",
   "dazeResistanceZone",
   "dazeInflictZone",

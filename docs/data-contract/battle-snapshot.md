@@ -235,6 +235,7 @@ interface AnomalyContributionInput {
   buildup?: number
   thresholdOverride?: number
   overflowBuildup?: number
+  remainingDurationSeconds?: number
   contributors?: AnomalyContributionActorInput[]
 }
 
@@ -254,6 +255,11 @@ This input is optional. If absent, the resolver may derive contribution rows
 from `GameData` and battle state. If present, core must preserve contribution,
 overflow, and exclusion evidence in `CalcResult.trace` so golden anchors can
 assert virtual-agent behavior.
+
+`anomalyContribution.status` is required when `damageType` is `"anomaly"` or
+`"disorder"`; core must not infer a default status. `remainingDurationSeconds`
+records the remaining duration `T` used by disorder formula traces. If omitted,
+core may fall back to the current default duration for that anomaly status.
 
 ## 7. Enemy Snapshot
 

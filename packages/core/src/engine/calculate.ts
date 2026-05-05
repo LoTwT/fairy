@@ -1,5 +1,6 @@
 import type {
   AgentSnapshot,
+  AnomalyStatus,
   AttackSegment,
   BattleSnapshot,
   BucketContributor,
@@ -7,6 +8,7 @@ import type {
   CalcResult,
   DamageType,
   Diagnostic,
+  EnemyRank,
   ManualEvent,
   ManualEventResult,
   ModifierResult,
@@ -145,24 +147,13 @@ function calculateSegment(
   const errors: Diagnostic[] = []
   const damageType = segment.damageType
   const sourceFields = getContributorSourceFields(segment.source, `attackSegments[${index}].source`, warnings)
-
-  if (isPendingAnomalyOrDisorder(damageType)) {
-    return calculatePendingAnomalyOrDisorderSegment(
-      activeActor,
-      segment,
-      index,
-      sourceFields,
-      warnings,
-      errors,
-    )
-  }
-
   const modifierEvaluation = evaluateModifiers(snapshot, activeActor, segment, index)
   warnings.push(...modifierEvaluation.warnings)
   errors.push(...modifierEvaluation.errors)
+  const formulaActor = getFormulaActor(snapshot, activeActor, segment, index)
 
-  const baseDamage = getBaseDamage(activeActor, segment)
-  const damageBonusValue = getDamageBonus(activeActor, segment)
+  const baseDamage = getBaseDamage(formulaActor.actor, segment, formulaActor.disorderMultiplier)
+  const damageBonusValue = getDamageBonus(formulaActor.actor, segment)
     + sumBucketContributors(modifierEvaluation.contributorsByBucket.get("damageBonusZone"))
   const damageBonusMultiplier = clamp(1 + damageBonusValue, 0, 6)
   const critRate = clamp(activeActor.panel.critRate ?? 0, 0, 1)
@@ -202,7 +193,7 @@ function calculateSegment(
       contributors: [
         makeContributor({
           id: `${segment.id}:attribute-damage-bonus`,
-          value: getDamageBonus(activeActor, segment),
+          value: getDamageBonus(formulaActor.actor, segment),
           operation: "add",
           ...sourceFields,
         }),
@@ -230,10 +221,10 @@ function calculateSegment(
   if (usesDefenseZone(damageType)) {
     const defenseReduction = sumBucketContributors(modifierEvaluation.contributorsByBucket.get("defenseZone"))
     const defense = getDefenseMultiplier({
-      attackerLevel: activeActor.level,
+      attackerLevel: formulaActor.actor.level,
       enemy: snapshot.enemy,
-      ...(activeActor.panel.penetrationRate === undefined ? {} : { penetrationRate: activeActor.panel.penetrationRate }),
-      ...(activeActor.panel.flatPenetration === undefined ? {} : { flatPenetration: activeActor.panel.flatPenetration }),
+      ...(formulaActor.actor.panel.penetrationRate === undefined ? {} : { penetrationRate: formulaActor.actor.panel.penetrationRate }),
+      ...(formulaActor.actor.panel.flatPenetration === undefined ? {} : { flatPenetration: formulaActor.actor.panel.flatPenetration }),
       defenseReduction,
     })
     bucketInputs.push(makeBucket({
@@ -253,7 +244,7 @@ function calculateSegment(
   }
 
   if (damageType === "sheer") {
-    const sheerDamageBonusValue = (activeActor.panel.sheerDamageBonus ?? 0)
+    const sheerDamageBonusValue = (formulaActor.actor.panel.sheerDamageBonus ?? 0)
       + sumBucketContributors(modifierEvaluation.contributorsByBucket.get("sheerDamageBonusZone"))
     const sheerDamageBonusMultiplier = clamp(1 + sheerDamageBonusValue, 0.2, 9)
     bucketInputs.push(makeBucket({
@@ -263,7 +254,7 @@ function calculateSegment(
       contributors: [
         makeContributor({
           id: `${segment.id}:sheer-damage-bonus`,
-          value: activeActor.panel.sheerDamageBonus ?? 0,
+          value: formulaActor.actor.panel.sheerDamageBonus ?? 0,
           operation: "add",
           ...sourceFields,
         }),
@@ -274,12 +265,12 @@ function calculateSegment(
 
   if (damageType === "anomaly" || damageType === "disorder") {
     const anomalyProficiencyValue = clamp(
-      (activeActor.panel.anomalyProficiency ?? 100) / 100
+      (formulaActor.actor.panel.anomalyProficiency ?? 100) / 100
       + sumBucketContributors(modifierEvaluation.contributorsByBucket.get("anomalyProficiencyZone")),
       0,
       10,
     )
-    const damageLevelValue = getDamageLevelMultiplier(activeActor.level)
+    const damageLevelValue = getDamageLevelMultiplier(formulaActor.actor.level)
       + sumBucketContributors(modifierEvaluation.contributorsByBucket.get("damageLevelZone"))
     const anomalyDamageBonusValue = 1
       + sumBucketContributors(modifierEvaluation.contributorsByBucket.get("anomalyDamageBonusZone"))
@@ -293,7 +284,7 @@ function calculateSegment(
         contributors: [
           makeContributor({
             id: `${segment.id}:anomaly-proficiency`,
-            value: activeActor.panel.anomalyProficiency ?? 100,
+            value: formulaActor.actor.panel.anomalyProficiency ?? 100,
             operation: "multiply",
             ...sourceFields,
           }),
@@ -307,7 +298,7 @@ function calculateSegment(
         contributors: [
           makeContributor({
             id: `${segment.id}:damage-level`,
-            value: activeActor.level,
+            value: formulaActor.actor.level,
             operation: "multiply",
             ...sourceFields,
           }),
@@ -327,6 +318,23 @@ function calculateSegment(
         contributors: getModifierContributors(modifierEvaluation, "anomalyCritZone"),
       }),
     )
+  }
+
+  if (damageType === "disorder") {
+    const disorderDazeLevelMultiplier = formulaActor.disorderDazeMultiplier ?? 1
+    bucketInputs.push(makeBucket({
+      bucketId: "disorderDazeLevelZone",
+      after: disorderDazeLevelMultiplier,
+      effectiveMultiplier: disorderDazeLevelMultiplier,
+      contributors: [
+        makeContributor({
+          id: `${segment.id}:disorder-daze-level`,
+          value: disorderDazeLevelMultiplier,
+          operation: "multiply",
+          ...sourceFields,
+        }),
+      ],
+    }))
   }
 
   bucketInputs.push(
@@ -389,16 +397,16 @@ function calculateSegment(
     }),
   )
 
-  if (segment.baseDazeMultiplier !== undefined) {
+  if (segment.baseDazeMultiplier !== undefined || damageType === "disorder") {
     bucketInputs.push(
       makeBucket({
         bucketId: "dazeValueZone",
-        after: getBaseDaze(activeActor, segment),
-        effectiveMultiplier: getBaseDaze(activeActor, segment),
+        after: getBaseDaze(formulaActor.actor, segment),
+        effectiveMultiplier: getBaseDaze(formulaActor.actor, segment),
         contributors: [
           makeContributor({
             id: `${segment.id}:base-daze`,
-            value: getBaseDaze(activeActor, segment),
+            value: getBaseDaze(formulaActor.actor, segment),
             operation: "add",
             ...sourceFields,
           }),
@@ -429,6 +437,7 @@ function calculateSegment(
   const segmentDisplayDamage = Math.ceil(rawDamage)
   const trace = [
     ...modifierEvaluation.trace,
+    ...formulaActor.trace,
     ...bucketTrace,
     makeTraceEvent({
       kind: "formula",
@@ -472,7 +481,24 @@ function calculateSegment(
     .reduce((total, bucket) => total * bucket.effectiveMultiplier, 1)
   const nonCritDamage = damageType === "daze" ? 0 : baseDamage * nonCritMultiplier
   const critDamage = damageType === "daze" ? 0 : nonCritDamage * (1 + critDamageBonus)
-  const dazeValue = getDazeValue(activeActor, segment, buckets)
+  const dazeValue = getDazeValue(formulaActor.actor, segment, buckets, formulaActor.disorderDazeMultiplier)
+  const anomalyBuildup = segment.anomalyContribution?.buildup === undefined
+    ? undefined
+    : getAnomalyBuildup(formulaActor.actor, segment)
+  if (anomalyBuildup !== undefined) {
+    trace.push(makeTraceEvent({
+      kind: "formula",
+      path: `attackSegments[${index}].anomalyBuildup`,
+      inputs: {
+        buildup: segment.anomalyContribution?.buildup ?? 0,
+        anomalyMastery: formulaActor.actor.panel.anomalyMastery ?? 100,
+        flooredAnomalyMastery: Math.floor(formulaActor.actor.panel.anomalyMastery ?? 100),
+      },
+      formula: "anomalyBuildup = buildup * floor(anomalyMastery) / 100",
+      rawValue: anomalyBuildup,
+      displayValue: "floorForFormula",
+    }))
+  }
 
   return {
     result: {
@@ -488,9 +514,9 @@ function calculateSegment(
       expectedDamage: rawDamage,
       critDamage,
       nonCritDamage,
-      ...(segment.baseDazeMultiplier === undefined ? {} : { baseDaze: getBaseDaze(activeActor, segment) }),
+      ...(segment.baseDazeMultiplier === undefined && segment.damageType !== "disorder" ? {} : { baseDaze: getBaseDaze(formulaActor.actor, segment) }),
       ...(dazeValue === undefined ? {} : { dazeValue }),
-      ...(segment.anomalyContribution?.buildup === undefined ? {} : { anomalyBuildup: getAnomalyBuildup(activeActor, segment) }),
+      ...(anomalyBuildup === undefined ? {} : { anomalyBuildup }),
       traceRefs: trace.map(event => event.id),
     },
     buckets,
@@ -501,99 +527,102 @@ function calculateSegment(
   }
 }
 
-function calculatePendingAnomalyOrDisorderSegment(
+interface FormulaActorContext {
+  actor: AgentSnapshot
+  trace: TraceEvent[]
+  disorderMultiplier?: number
+  disorderDazeMultiplier?: number
+}
+
+function getFormulaActor(
+  snapshot: BattleSnapshot,
   activeActor: AgentSnapshot,
   segment: AttackSegment,
   index: number,
-  sourceFields: ContributorSourceFields,
-  warnings: Diagnostic[],
-  errors: Diagnostic[],
-): SegmentCalculation {
-  const diagnosticKey = segment.damageType === "anomaly"
-    ? "ERR-CALC-PENDING-ANOMALY"
-    : "ERR-CALC-PENDING-DISORDER"
-  warnings.push(warning(diagnosticKey, `attackSegments[${index}].damageType`, {
-    damageType: segment.damageType,
-    followUpTask: "#27",
-  }))
+): FormulaActorContext {
+  if (segment.damageType !== "anomaly" && segment.damageType !== "disorder") {
+    return {
+      actor: activeActor,
+      trace: [],
+    }
+  }
 
-  const rawBuckets = [
-    makeBucket({
-      bucketId: "baseDamageZone",
-      before: 0,
-      after: 0,
-      effectiveMultiplier: 0,
-      contributors: [
-        makeContributor({
-          id: `${segment.id}:pending-${segment.damageType}`,
-          value: 0,
-          operation: "ignore",
-          active: false,
-          inactiveReason: `${segment.damageType}-formula-pending`,
-          ...sourceFields,
-        }),
-      ],
-    }),
-  ]
-  const { buckets, trace: bucketTrace } = attachBucketContributionTrace(rawBuckets)
+  const hasContributorEvidence = (segment.anomalyContribution?.contributors?.length ?? 0) > 0
+  const formulaActor = hasContributorEvidence
+    ? getVirtualAgent(snapshot, activeActor, segment)
+    : { actor: activeActor, traceRows: [] }
+  const threshold = getAnomalyThreshold(snapshot, segment)
   const trace = [
-    ...bucketTrace,
-    makeTraceEvent({
-      kind: "warning",
-      path: `attackSegments[${index}].damageType`,
-      inputs: {
-        damageType: segment.damageType,
-        diagnosticKey,
-        followUpTask: "#27",
-      },
-      displayValue: "pending-formula",
-      refs: buckets.flatMap(bucket => bucket.traceRefs),
-    }),
+    ...(hasContributorEvidence
+      ? [
+          makeTraceEvent({
+            kind: "formula",
+            path: `attackSegments[${index}].anomalyContribution.virtualAgent`,
+            inputs: {
+              virtualAgent: formulaActor.traceRows,
+              flooredLevel: formulaActor.actor.level,
+              overflowBuildup: segment.anomalyContribution?.overflowBuildup ?? 0,
+              excludedReasons: formulaActor.traceRows
+                .filter(row => row.excludedReason !== undefined)
+                .map(row => `excludedReason:${row.excludedReason}`),
+            },
+            formula: "virtualAgent = weighted average of included buildup contributors; Bangboo and overflow are excluded",
+            rawValue: formulaActor.actor.agentId,
+            displayValue: "virtualAgent",
+          }),
+        ]
+      : []),
     makeTraceEvent({
       kind: "formula",
-      path: `attackSegments[${index}].rawDamage`,
-      inputs: {
-        damageType: segment.damageType,
-        diagnosticKey,
-      },
-      formula: "pending anomaly/disorder formula: no trusted numeric damage emitted in PR #10",
-      rawValue: 0,
-      displayValue: "pending-formula",
-      refs: buckets.flatMap(bucket => bucket.traceRefs),
-    }),
-    makeTraceEvent({
-      kind: "rounding",
-      path: `attackSegments[${index}].segmentDisplayDamage`,
-      rawValue: 0,
-      displayValue: 0,
-      rounding: {
-        mode: "ceilPerSegment",
-        input: 0,
-        output: 0,
-        reason: "Pending anomaly/disorder formula emits zero display damage until task #27 implements trusted evidence.",
-      },
+      path: `attackSegments[${index}].anomalyContribution.anomalyThreshold`,
+      inputs: threshold,
+      formula: "anomalyThreshold = rankTriggerTable[enemy.rank][triggerCount] * physicalMultiplier",
+      rawValue: threshold.threshold,
+      displayValue: "anomalyThreshold",
     }),
   ]
 
+  if (segment.damageType === "disorder") {
+    const disorder = getDisorderFormula(segment)
+    trace.push(makeTraceEvent({
+      kind: "formula",
+      path: `attackSegments[${index}].disorderFormulaId`,
+      inputs: {
+        disorderFormulaId: disorder.formulaId,
+        remainingDurationT: disorder.remainingDurationSeconds,
+        status: segment.anomalyContribution?.status,
+        attribute: segment.attribute,
+        sourceAnchor: "guide-3.4.1",
+      },
+      formula: disorder.formula,
+      rawValue: disorder.multiplier,
+      displayValue: disorder.formulaId,
+      sourceAnchor: "guide-3.4.1",
+    }))
+    trace.push(makeTraceEvent({
+      kind: "formula",
+      path: `attackSegments[${index}].disorderDazeLevelZone`,
+      inputs: {
+        level: formulaActor.actor.level,
+        dazeLevelZone: getDisorderDazeLevelMultiplier(formulaActor.actor.level),
+      },
+      formula: "disorderDazeLevelZone = 1 + 0.0075 * level",
+      rawValue: getDisorderDazeLevelMultiplier(formulaActor.actor.level),
+      displayValue: "dazeLevelZone",
+      sourceAnchor: "guide-3.4.2",
+    }))
+
+    return {
+      actor: formulaActor.actor,
+      trace,
+      disorderMultiplier: disorder.multiplier,
+      disorderDazeMultiplier: getDisorderDazeLevelMultiplier(formulaActor.actor.level),
+    }
+  }
+
   return {
-    result: {
-      id: segment.id,
-      actorId: segment.actorId ?? activeActor.agentId,
-      attribute: segment.attribute,
-      tags: segment.tags,
-      damageType: segment.damageType,
-      rawDamage: 0,
-      segmentDisplayDamage: 0,
-      roundingMode: "ceilPerSegment",
-      baseDamage: 0,
-      expectedDamage: 0,
-      traceRefs: trace.map(event => event.id),
-    },
-    buckets,
-    modifiers: [],
+    actor: formulaActor.actor,
     trace,
-    warnings,
-    errors,
   }
 }
 
@@ -758,7 +787,7 @@ function calculateManualEvent(
   }
 }
 
-function getBaseDamage(activeActor: AgentSnapshot, segment: AttackSegment): number {
+function getBaseDamage(activeActor: AgentSnapshot, segment: AttackSegment, disorderMultiplier?: number): number {
   const multiplier = segment.multiplier ?? 1
   if (segment.damageType === "sheer")
     return (activeActor.panel.sheerForce ?? 0) * multiplier
@@ -766,27 +795,38 @@ function getBaseDamage(activeActor: AgentSnapshot, segment: AttackSegment): numb
   if (segment.damageType === "daze")
     return 0
 
+  if (segment.damageType === "disorder")
+    return activeActor.panel.attack * (disorderMultiplier ?? multiplier)
+
   return activeActor.panel.attack * multiplier
 }
 
 function getBaseDaze(activeActor: AgentSnapshot, segment: AttackSegment): number {
-  return (activeActor.panel.impact ?? 0) * (segment.baseDazeMultiplier ?? 0)
+  const multiplier = segment.damageType === "disorder"
+    ? segment.baseDazeMultiplier ?? 2
+    : segment.baseDazeMultiplier ?? 0
+  return (activeActor.panel.impact ?? 0) * multiplier
 }
 
-function getDazeValue(activeActor: AgentSnapshot, segment: AttackSegment, buckets: BucketResult[]): number | undefined {
-  if (segment.baseDazeMultiplier === undefined)
+function getDazeValue(
+  activeActor: AgentSnapshot,
+  segment: AttackSegment,
+  buckets: BucketResult[],
+  extraMultiplier = 1,
+): number | undefined {
+  if (segment.baseDazeMultiplier === undefined && segment.damageType !== "disorder")
     return undefined
 
   const multiplier = buckets
     .filter(bucket => bucket.bucketId === "dazeInflictZone" || bucket.bucketId === "dazeReceiveZone")
     .reduce((total, bucket) => total * bucket.effectiveMultiplier, 1)
 
-  return getBaseDaze(activeActor, segment) * multiplier
+  return getBaseDaze(activeActor, segment) * multiplier * extraMultiplier
 }
 
 function getAnomalyBuildup(activeActor: AgentSnapshot, segment: AttackSegment): number {
   const baseBuildup = segment.anomalyContribution?.buildup ?? 0
-  return baseBuildup * ((activeActor.panel.anomalyMastery ?? 100) / 100)
+  return baseBuildup * (Math.floor(activeActor.panel.anomalyMastery ?? 100) / 100)
 }
 
 function getDamageBonus(activeActor: AgentSnapshot, segment: AttackSegment): number {
@@ -796,6 +836,256 @@ function getDamageBonus(activeActor: AgentSnapshot, segment: AttackSegment): num
   const panelRecord = activeActor.panel as unknown as Record<string, unknown>
   const attributeBonus = getAttributeDamageBonus(panelRecord, segment.attribute)
   return typeof attributeBonus === "number" ? attributeBonus : 0
+}
+
+interface VirtualAgentTraceRow {
+  actorId: string
+  included: boolean
+  buildup: number
+  effectiveBuildup: number
+  buildupContributionRatio: number
+  level: number
+  flooredLevel: number
+  excludedReason?: string
+}
+
+function getVirtualAgent(
+  snapshot: BattleSnapshot,
+  activeActor: AgentSnapshot,
+  segment: AttackSegment,
+): {
+  actor: AgentSnapshot
+  traceRows: VirtualAgentTraceRow[]
+} {
+  const contribution = segment.anomalyContribution
+  const contributors = contribution?.contributors ?? [
+    {
+      actorId: segment.actorId ?? activeActor.agentId,
+      buildup: contribution?.buildup ?? 1,
+      included: true,
+    },
+  ]
+  const overflowBuildup = contribution?.overflowBuildup ?? 0
+  const effectiveBuildupByIndex = getEffectiveBuildupByContributor(contributors, overflowBuildup)
+  const rows: Array<VirtualAgentTraceRow & { attack: number; impact: number; anomalyProficiency: number; anomalyMastery: number; penetrationRate: number; flatPenetration: number }> = []
+
+  contributors.forEach((contributor, contributorIndex) => {
+    const agent = snapshot.team.find(candidate => candidate.agentId === contributor.actorId) ?? activeActor
+    const effectiveBuildup = contributor.included && contributor.excludedReason === undefined
+      ? effectiveBuildupByIndex.get(contributorIndex) ?? contributor.buildup
+      : 0
+
+    rows.push({
+      actorId: contributor.actorId,
+      included: contributor.included,
+      buildup: contributor.buildup,
+      effectiveBuildup,
+      buildupContributionRatio: 0,
+      level: contributor.level ?? agent.level,
+      flooredLevel: Math.floor(contributor.level ?? agent.level),
+      ...(contributor.excludedReason === undefined ? {} : { excludedReason: contributor.excludedReason }),
+      attack: agent.panel.attack,
+      impact: agent.panel.impact ?? 0,
+      anomalyProficiency: contributor.anomalyProficiency ?? agent.panel.anomalyProficiency ?? 100,
+      anomalyMastery: Math.floor(contributor.anomalyMastery ?? agent.panel.anomalyMastery ?? 100),
+      penetrationRate: agent.panel.penetrationRate ?? 0,
+      flatPenetration: agent.panel.flatPenetration ?? 0,
+    })
+  })
+
+  const totalEffectiveBuildup = sum(rows.map(row => row.effectiveBuildup))
+  if (totalEffectiveBuildup <= 0) {
+    return {
+      actor: activeActor,
+      traceRows: rows.map(row => ({
+        actorId: row.actorId,
+        included: row.included,
+        buildup: row.buildup,
+        effectiveBuildup: row.effectiveBuildup,
+        buildupContributionRatio: 0,
+        level: row.level,
+        flooredLevel: row.flooredLevel,
+        ...(row.excludedReason === undefined ? {} : { excludedReason: row.excludedReason }),
+      })),
+    }
+  }
+
+  rows.forEach((row) => {
+    row.buildupContributionRatio = row.effectiveBuildup / totalEffectiveBuildup
+  })
+
+  const weightedLevel = Math.floor(sum(rows.map(row => row.flooredLevel * row.buildupContributionRatio)))
+  const panel = {
+    ...activeActor.panel,
+    attack: sum(rows.map(row => row.attack * row.buildupContributionRatio)),
+    impact: sum(rows.map(row => row.impact * row.buildupContributionRatio)),
+    anomalyProficiency: sum(rows.map(row => row.anomalyProficiency * row.buildupContributionRatio)),
+    anomalyMastery: sum(rows.map(row => row.anomalyMastery * row.buildupContributionRatio)),
+    penetrationRate: sum(rows.map(row => row.penetrationRate * row.buildupContributionRatio)),
+    flatPenetration: sum(rows.map(row => row.flatPenetration * row.buildupContributionRatio)),
+  }
+
+  return {
+    actor: {
+      ...activeActor,
+      agentId: `virtual:${segment.id}`,
+      level: Math.max(1, weightedLevel),
+      panel,
+    },
+    traceRows: rows.map(row => ({
+      actorId: row.actorId,
+      included: row.included,
+      buildup: row.buildup,
+      effectiveBuildup: row.effectiveBuildup,
+      buildupContributionRatio: row.buildupContributionRatio,
+      level: row.level,
+      flooredLevel: row.flooredLevel,
+      ...(row.excludedReason === undefined ? {} : { excludedReason: row.excludedReason }),
+    })),
+  }
+}
+
+function getEffectiveBuildupByContributor(
+  contributors: Array<{ buildup: number; included: boolean; excludedReason?: string | undefined }>,
+  overflowBuildup: number,
+): Map<number, number> {
+  const effective = new Map<number, number>()
+  let remainingOverflow = Math.max(0, overflowBuildup)
+
+  for (let index = contributors.length - 1; index >= 0; index -= 1) {
+    const contributor = contributors[index]!
+    if (!contributor.included || contributor.excludedReason !== undefined)
+      continue
+
+    const overflowDeduction = Math.min(contributor.buildup, remainingOverflow)
+    effective.set(index, contributor.buildup - overflowDeduction)
+    remainingOverflow -= overflowDeduction
+  }
+
+  contributors.forEach((contributor, index) => {
+    if (contributor.included && contributor.excludedReason === undefined && !effective.has(index))
+      effective.set(index, contributor.buildup)
+  })
+
+  return effective
+}
+
+function getAnomalyThreshold(snapshot: BattleSnapshot, segment: AttackSegment): {
+  threshold: number
+  enemyRank: EnemyRank
+  triggerCount: number
+  status: AnomalyStatus | undefined
+  physicalMultiplier: number
+} {
+  const status = segment.anomalyContribution?.status
+  const triggerCount = clampTriggerCount(
+    segment.anomalyContribution?.triggerCountBefore
+    ?? (status === undefined ? 0 : snapshot.enemy.anomalyTriggerCounts?.[status] ?? 0),
+  )
+  const rank = snapshot.enemy.rank === "special" ? "boss" : snapshot.enemy.rank
+  const physicalMultiplier = isPhysicalAnomaly(segment) ? 1.2 : 1
+  const baseThreshold = anomalyThresholdTable[rank][triggerCount] ?? anomalyThresholdTable[rank][0]!
+  return {
+    threshold: segment.anomalyContribution?.thresholdOverride ?? baseThreshold * physicalMultiplier,
+    enemyRank: snapshot.enemy.rank,
+    triggerCount,
+    status,
+    physicalMultiplier,
+  }
+}
+
+const anomalyThresholdTable: Record<Exclude<EnemyRank, "special">, number[]> = {
+  normal: [600, 612, 624, 636, 648, 660, 673, 686, 699, 712],
+  elite: [2250, 2295, 2340, 2386, 2433, 2481, 2530, 2580, 2631, 2683],
+  boss: [3000, 3060, 3121, 3183, 3246, 3310, 3376, 3443, 3511, 3581],
+}
+
+function clampTriggerCount(count: number): number {
+  return Math.max(0, Math.min(9, Math.floor(count)))
+}
+
+function isPhysicalAnomaly(segment: AttackSegment): boolean {
+  return segment.attribute === "physical"
+    || segment.anomalyContribution?.status === "assault"
+    || segment.anomalyContribution?.status === "flinch"
+}
+
+function getDisorderFormula(segment: AttackSegment): {
+  formulaId: string
+  formula: string
+  multiplier: number
+  remainingDurationSeconds: number
+} {
+  const status = segment.anomalyContribution?.status ?? "disorder"
+  const remainingDurationSeconds = segment.anomalyContribution?.remainingDurationSeconds ?? getDefaultDisorderDuration(segment)
+  const formulaId = getDisorderFormulaId(segment, status)
+  switch (formulaId) {
+    case "disorder-polarity":
+      return {
+        formulaId,
+        remainingDurationSeconds,
+        formula: "polarity disorder multiplier = electric disorder multiplier * 0.15 unless segment.multiplier overrides it",
+        multiplier: segment.multiplier ?? (4.5 + Math.floor(remainingDurationSeconds) * 1.25) * 0.15,
+      }
+    case "disorder-burn":
+      return {
+        formulaId,
+        remainingDurationSeconds,
+        formula: "burn disorder multiplier = 4.5 + floor(T / 0.5) * 0.5",
+        multiplier: 4.5 + Math.floor(remainingDurationSeconds / 0.5) * 0.5,
+      }
+    case "disorder-shock":
+      return {
+        formulaId,
+        remainingDurationSeconds,
+        formula: "shock disorder multiplier = 4.5 + floor(T) * 1.25",
+        multiplier: 4.5 + Math.floor(remainingDurationSeconds) * 1.25,
+      }
+    case "disorder-corruption":
+      return {
+        formulaId,
+        remainingDurationSeconds,
+        formula: "corruption disorder multiplier = 4.5 + floor(T / 0.5) * 0.625",
+        multiplier: 4.5 + Math.floor(remainingDurationSeconds / 0.5) * 0.625,
+      }
+    case "disorder-frost":
+      return {
+        formulaId,
+        remainingDurationSeconds,
+        formula: "frost disorder multiplier = 6 + floor(T) * 0.75",
+        multiplier: 6 + Math.floor(remainingDurationSeconds) * 0.75,
+      }
+    case "disorder-physical-or-ice":
+    default:
+      return {
+        formulaId,
+        remainingDurationSeconds,
+        formula: "physical/ice disorder multiplier = 4.5 + floor(T) * 0.075",
+        multiplier: 4.5 + Math.floor(remainingDurationSeconds) * 0.075,
+      }
+  }
+}
+
+function getDefaultDisorderDuration(segment: AttackSegment): number {
+  return segment.attribute === "frost" ? 20 : 10
+}
+
+function getDisorderFormulaId(segment: AttackSegment, status: AnomalyStatus): string {
+  if (status === "polarityDisorder")
+    return "disorder-polarity"
+  if (status === "burn")
+    return "disorder-burn"
+  if (status === "shock")
+    return "disorder-shock"
+  if (status === "corruption" || segment.attribute === "ether" || segment.attribute === "auricInk")
+    return "disorder-corruption"
+  if (segment.attribute === "frost")
+    return "disorder-frost"
+  return "disorder-physical-or-ice"
+}
+
+function getDisorderDazeLevelMultiplier(level: number): number {
+  return 1 + 0.0075 * level
 }
 
 function getCritMultiplier(
@@ -823,7 +1113,7 @@ function getFormulaLabel(damageType: DamageType): string {
     case "anomaly":
       return "baseDamageZone * damageBonusZone * anomalyProficiencyZone * defenseZone * resistanceZone * vulnerabilityZone * dazeVulnerabilityZone * damageLevelZone * anomalyDamageBonusZone * anomalyCritZone * specialZone"
     case "disorder":
-      return "baseDamageZone * damageBonusZone * anomalyProficiencyZone * defenseZone * resistanceZone * vulnerabilityZone * dazeVulnerabilityZone * damageLevelZone * anomalyDamageBonusZone * anomalyCritZone * specialZone"
+      return "baseDamageZone * damageBonusZone * anomalyProficiencyZone * defenseZone * resistanceZone * vulnerabilityZone * dazeVulnerabilityZone * damageLevelZone * anomalyDamageBonusZone * anomalyCritZone * disorderDazeLevelZone * specialZone"
     case "daze":
       return "dazeValueZone * dazeInflictZone * dazeReceiveZone"
     case "trueDamage":
@@ -839,10 +1129,6 @@ function usesDefenseZone(damageType: DamageType): boolean {
 
 function usesStandardCrit(damageType: DamageType): boolean {
   return damageType === "regular" || damageType === "sheer"
-}
-
-function isPendingAnomalyOrDisorder(damageType: DamageType): boolean {
-  return damageType === "anomaly" || damageType === "disorder"
 }
 
 function isDamageFormulaBucket(bucket: BucketResult): boolean {
