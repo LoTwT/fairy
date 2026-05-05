@@ -21,7 +21,8 @@ Fairy is a ZZZ static snapshot damage calculator for 1-3 agents.
 
 ## Current Phase
 
-S2 data-contract design. First outputs:
+S3 core implementation. Current engineering entry points:
 
 - `docs/architecture/naming-policy.md`
-- `docs/data-contract/pending-term-resolution-table.md`
+- `docs/architecture/monorepo-development.md`
+- `docs/data-contract/`
