@@ -21,4 +21,5 @@ derived from source documents and preserve source metadata.
 Useful source checks:
 
 - `pnpm --filter @fairy/data verify:buhflipexplode-da`
+- `pnpm --filter @fairy/data verify:excel`
 - `pnpm --filter @fairy/data verify:mihoyo-da`

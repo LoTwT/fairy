@@ -41,6 +41,7 @@ Implementation entry: `packages/data/src/sources.ts`.
 
 Source-specific notes:
 
+- [Excel workbook](excel/)
 - [buhflipexplode Deadly Assault](buhflipexplode/)
 - [Mihoyo Deadly Assault](mihoyo/)
 
@@ -48,7 +49,8 @@ Source-specific notes:
 
 S5 segment 2 should continue with:
 
-- Excel reader with sheet/column discovery and workbook hash versioning.
+- Excel reader with sheet/column discovery and workbook hash versioning. Current
+  baseline: `data/source/excel/workbook-audit.json`.
 - Mihoyo transforms from the retained detail snapshot into Deadly Assault
   i18n/mapping resources and typed-modifier review queues.
 - buhflipexplode transforms from the retained live-only snapshot into cleaned

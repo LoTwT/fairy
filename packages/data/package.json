@@ -15,18 +15,21 @@
     "package.json"
   ],
   "scripts": {
+    "audit:excel": "node scripts/excel-source.mjs audit --generated-at 2026-05-05T17:40:00+08:00",
     "check": "tsc -p tsconfig.json --noEmit",
     "fetch:buhflipexplode-da": "node scripts/buhflipexplode-da-source.mjs fetch",
     "fetch:mihoyo-da": "node scripts/mihoyo-da-source.mjs fetch",
     "sync-cleaned": "node scripts/sync-cleaned.mjs",
     "test": "vitest run",
     "verify:buhflipexplode-da": "node scripts/buhflipexplode-da-source.mjs verify --snapshot 2026-05-05T0445Z",
+    "verify:excel": "node scripts/excel-source.mjs verify",
     "verify:mihoyo-da": "node scripts/mihoyo-da-source.mjs verify --snapshot 2026-05-05T0850Z"
   },
   "dependencies": {
     "@fairy/core": "workspace:*"
   },
   "devDependencies": {
-    "cheerio": "^1.2.0"
+    "cheerio": "^1.2.0",
+    "xlsx": "^0.18.5"
   }
 }

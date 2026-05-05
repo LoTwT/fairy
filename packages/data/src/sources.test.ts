@@ -22,7 +22,7 @@ function createDiscoveryGameData() {
 
     return buildSourceDocument(descriptor, {
       ...options,
-      fileName: "pending-lo-user-upload.xlsx",
+      fileName: "data/source/excel/data.xlsx",
     })
   })
 
@@ -160,6 +160,23 @@ describe("@fairy/data source discovery skeleton", () => {
     )
     expect(descriptor.compliance.notes.join("\n")).toContain(
       "x-rpc-wiki_app: zzz",
+    )
+  })
+
+  it("documents the retained Excel workbook audit without marking formal rows ready", () => {
+    const descriptor = getDataSourceDescriptor("lo-user-excel")
+
+    expect(descriptor.status).toBe("readyForAdapter")
+    expect(descriptor.formalDataReady).toBe(false)
+    expect(descriptor.discoveredAssets).toEqual(
+      expect.arrayContaining([
+        "data/source/excel/data.xlsx",
+        "data/source/excel/workbook-audit.json",
+      ]),
+    )
+    expect(descriptor.compliance.redistribution).toBe("cleanedDataOnly")
+    expect(descriptor.compliance.notes.join("\n")).toContain(
+      "do not infer typed modifiers",
     )
   })
 })

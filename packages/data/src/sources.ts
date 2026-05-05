@@ -46,8 +46,8 @@ export const dataSourceDescriptors = [
     id: "lo-user-excel",
     kind: "excel",
     label: "lo-user provided ZZZ data workbook",
-    fileNameHint: "pending-lo-user-upload.xlsx",
-    status: "awaitingFile",
+    fileNameHint: "data/source/excel/data.xlsx",
+    status: "readyForAdapter",
     formalDataReady: false,
     parserTargets: [
       "agent skill multipliers",
@@ -57,7 +57,12 @@ export const dataSourceDescriptors = [
       "agent enhancement / potential activation fields",
     ],
     sourceVersionStrategy:
-      "Use the workbook file hash plus any workbook-provided game version once the file is uploaded.",
+      "Use the retained workbook hash plus the workbook-provided version marker from 首页!A1.",
+    discoveredAssets: [
+      "data/source/excel/data.xlsx",
+      "data/source/excel/META.md",
+      "data/source/excel/workbook-audit.json",
+    ],
     fetchPolicy: {
       mode: "manualUpload",
       maxRequestsPerMinute: 0,
@@ -68,11 +73,11 @@ export const dataSourceDescriptors = [
     compliance: {
       robotsTxt: "notApplicable",
       termsStatus: "requiresHumanReview",
-      redistribution: "privateUntilReviewed",
+      redistribution: "cleanedDataOnly",
       notes: [
-        "No Excel file is present in this PR.",
-        "Formal data rows must not be typed by hand while the source workbook is pending.",
-        "Keep the workbook outside public git unless lo-user confirms redistribution is allowed.",
+        "The workbook is retained in git under data/source/excel/ as a raw/source archive.",
+        "The workbook and derived audit artifacts must not be published in the @fairy/data package.",
+        "Use workbook-audit.json for sheet/column discovery; do not infer typed modifiers from text without deterministic parser support or manual acceptance.",
       ],
     },
   },
