@@ -82,6 +82,8 @@ Observed on 2026-05-05:
 - The about page says most images/data are officially sourced from in-game and
   public fandoms.
 - No explicit data redistribution license was found in this check.
+- D-12 locks option B: retain raw source snapshots and attribution, but do not
+  copy GPL-3.0 JavaScript into Fairy MIT runtime packages.
 
 Engineering policy for segment 2:
 
@@ -91,6 +93,8 @@ Engineering policy for segment 2:
 - Prefer one request per asset per manual run; automated mode must respect the
   same 12 requests/minute ceiling and conditional-request policy.
 - Do not copy images or site presentation assets into `@fairy/data`.
+- Do not retain upstream non-live / beta / leaks data; keep only live-filtered
+  source-format subsets for data JSON payloads.
 - Preserve source attribution and mark derived rows with `sourceId:
   "buhflipexplode-zzz-da"`.
 

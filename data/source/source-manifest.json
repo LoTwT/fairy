@@ -1,6 +1,6 @@
 {
   "schemaVersion": "source-manifest-v1",
-  "generatedAt": "2026-05-05T12:18:30+08:00",
+  "generatedAt": "2026-05-05T12:45:00+08:00",
   "distributionPolicy": {
     "rawSourceArchive": "versioned-in-git-not-packaged",
     "publishedArtifacts": "cleaned-json-and-types-only"
@@ -30,6 +30,18 @@
       "attachmentId": "a9012315-c0be-440a-9b82-a9c4ef603e12",
       "distribution": "reference-retained-not-packaged",
       "usage": "formula and terminology reference; not a formal data source"
+    },
+    {
+      "id": "buhflipexplode-zzz-da-2026-05-05T0445Z",
+      "kind": "rawHttpSnapshot",
+      "path": "data/source/raw/buhflipexplode/2026-05-05T0445Z/fetch-manifest.json",
+      "metadataPath": "data/source/raw/buhflipexplode/2026-05-05T0445Z/algorithm-manifest.json",
+      "sha256": "9f8ce6099f8a55ba499bbb5ef02c6647220739a34132514513b3c174e0f222fe",
+      "bytes": 6814,
+      "fetchedAt": "2026-05-05T12:45:00+08:00",
+      "providedBy": "buhflipexplode.org public HTTP",
+      "distribution": "raw-retained-not-packaged",
+      "usage": "Deadly Assault live-only source-format snapshot and algorithm drift baseline; GPL JS is retained for audit but not copied into Fairy runtime"
     }
   ]
 }
