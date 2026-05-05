@@ -16,7 +16,8 @@
 | **D-02-rev** | 多语言（v2.0 修订） | ✅ 锁定 | V1 中英文双语；英文为字段/函数命名权威；中文默认显示；`--lang en|zh`；术语 / 错误 / prompt 资源保留 `zh` / `en` 双轨；JSON schema 字段名 / enum 永远英文 | 高 |
 | **D-03** | 内置敌人范围 | ✅ 锁定（v2.0 修订） | DoD = "data 实际范围 = V1 覆盖范围"；缺数据时 fail loud；不预设固定数量 | 中 |
 | **D-04** | 分享形式 | ✅ 锁定（v2.0 修订） | V1 仅 JSON 文件导入导出；压缩构筑代码 / URL 编码 → V1.1+；真正短链 → V2 | 高 |
-| **D-05** | 开源协议 | ✅ 锁定 | MIT；攻略原文不嵌入仓库；数据包仅清洗后结构发布 | 中 |
+| **D-05** | 开源协议 | ✅ 锁定（已修订） | 见 D-05-rev | 中 |
+| **D-05-rev** | 开源协议 / 源数据留档 | ✅ 锁定 | 代码保持 MIT；`data/source/` 与 `docs/reference/` 保留源格式留档并版本控制；npm/package 仅分发清洗后的 JSON + TypeScript 类型；攻略原文入 `docs/reference/` 仅供参考，不作为 formal data | 中 |
 | **D-06** | V1 第一目标用户 | ✅ 锁定 | P2 配队与对比（v2.0 后改为 CLI / AI surface 服务此画像） | 中 |
 | **D-07** | 数据规则源 | ✅ 锁定 | 攻略 NGA 44468012 快照（rules-v0.1-attached-2026-05-04） + 数据来源（lo-user 提供 Excel + 米游社危局强袭战 + buhflipexplode.org/zzz/da/） | 高 |
 | **D-08** | 视觉调性 | ⏳ 推迟 | V1 无 Web UI，调性决策推迟到 V2 阶段 | — |
@@ -79,6 +80,19 @@
 **双语范围限制**（lo-user 2026-05-05）：仅覆盖伤害计算器实际使用的术语，不强求长尾。UX 落地为 P0/P1/P2 三档优先级。
 
 **locale code 简洁形式**：使用 `en` / `zh`，不带 region subtag（`zh-CN` / `en-US`）。
+
+### D-05-rev 开源协议 / 源数据留档
+
+**v2.0 修订状态**：代码仓库仍按 MIT。源格式数据需要入仓留档以保证数据清洗可审计，但发布产物只包含清洗后的 JSON 与 TypeScript 类型。
+
+**目录边界**：
+- `data/source/`：Excel、raw crawler payload、source manifest；版本控制保留，不进入 npm/package 发布物
+- `docs/reference/`：攻略原文等参考材料；版本控制保留，不进入 npm/package 发布物
+- `data/cleaned/`：清洗后的派生 JSON staging 目录；发布前同步到 `packages/data/cleaned/`
+- `packages/data/cleaned/`：`@fairy/data` npm/package 内实际分发的清洗 JSON mirror
+- `packages/data/src/types/`：清洗数据与 source manifest 的 TypeScript 类型
+
+**确认来源**：@lo-user 2026-05-05 要求 `data.xlsx` 与 `zzz-data-introduction.txt` 入仓，并要求 raw source format 留档但不分发。
 
 ### D-11 命名体系（v2.0 新增）
 
