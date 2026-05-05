@@ -26,6 +26,7 @@ import {
   getDazeVulnerabilityMultiplier,
   getDefenseMultiplier,
   getResistance,
+  getResistanceAttribute,
   getResistanceMultiplier,
   getVulnerabilityMultiplier,
   isEnemyDazed,
@@ -482,10 +483,45 @@ function calculateSegment(
   const nonCritDamage = damageType === "daze" ? 0 : baseDamage * nonCritMultiplier
   const critDamage = damageType === "daze" ? 0 : nonCritDamage * (1 + critDamageBonus)
   const dazeValue = getDazeValue(formulaActor.actor, segment, buckets, formulaActor.disorderDazeMultiplier)
+  const dazeRatio = dazeValue === undefined || snapshot.enemy.dazeCap === undefined || snapshot.enemy.dazeCap <= 0
+    ? undefined
+    : {
+        raw: (dazeValue / snapshot.enemy.dazeCap) * 100,
+        display: Math.floor((dazeValue / snapshot.enemy.dazeCap) * 100),
+      }
+  if (dazeRatio !== undefined) {
+    trace.push(
+      makeTraceEvent({
+        kind: "formula",
+        path: `attackSegments[${index}].dazeRatioRaw`,
+        inputs: {
+          dazeValue,
+          enemyDazeCap: snapshot.enemy.dazeCap,
+        },
+        formula: "dazeRatioRaw = dazeValue / enemy.dazeCap * 100",
+        rawValue: dazeRatio.raw,
+      }),
+      makeTraceEvent({
+        kind: "rounding",
+        path: `attackSegments[${index}].dazeRatioDisplay`,
+        rawValue: dazeRatio.raw,
+        displayValue: dazeRatio.display,
+        rounding: {
+          mode: "floorForDisplay",
+          input: dazeRatio.raw,
+          output: dazeRatio.display,
+          reason: "Daze ratio display floors the percentage value.",
+        },
+      }),
+    )
+  }
+
   const anomalyBuildup = segment.anomalyContribution?.buildup === undefined
     ? undefined
-    : getAnomalyBuildup(formulaActor.actor, segment)
+    : getAnomalyBuildup(snapshot, formulaActor.actor, segment)
   if (anomalyBuildup !== undefined) {
+    const resistanceAttribute = getResistanceAttribute(segment.attribute)
+    const anomalyBuildupResistance = snapshot.enemy.anomalyBuildupResistance?.[resistanceAttribute] ?? 0
     trace.push(makeTraceEvent({
       kind: "formula",
       path: `attackSegments[${index}].anomalyBuildup`,
@@ -493,8 +529,11 @@ function calculateSegment(
         buildup: segment.anomalyContribution?.buildup ?? 0,
         anomalyMastery: formulaActor.actor.panel.anomalyMastery ?? 100,
         flooredAnomalyMastery: Math.floor(formulaActor.actor.panel.anomalyMastery ?? 100),
+        resistanceAttribute,
+        anomalyBuildupResistance,
+        anomalyBuildupResistanceMultiplier: getAnomalyBuildupResistanceMultiplier(anomalyBuildupResistance),
       },
-      formula: "anomalyBuildup = buildup * floor(anomalyMastery) / 100",
+      formula: "anomalyBuildup = buildup * floor(anomalyMastery) / 100 * anomalyBuildupResistanceMultiplier",
       rawValue: anomalyBuildup,
       displayValue: "floorForFormula",
     }))
@@ -516,6 +555,7 @@ function calculateSegment(
       nonCritDamage,
       ...(segment.baseDazeMultiplier === undefined && segment.damageType !== "disorder" ? {} : { baseDaze: getBaseDaze(formulaActor.actor, segment) }),
       ...(dazeValue === undefined ? {} : { dazeValue }),
+      ...(dazeRatio === undefined ? {} : { dazeRatioRaw: dazeRatio.raw, dazeRatioDisplay: dazeRatio.display }),
       ...(anomalyBuildup === undefined ? {} : { anomalyBuildup }),
       traceRefs: trace.map(event => event.id),
     },
@@ -824,9 +864,17 @@ function getDazeValue(
   return getBaseDaze(activeActor, segment) * multiplier * extraMultiplier
 }
 
-function getAnomalyBuildup(activeActor: AgentSnapshot, segment: AttackSegment): number {
+function getAnomalyBuildup(snapshot: BattleSnapshot, activeActor: AgentSnapshot, segment: AttackSegment): number {
   const baseBuildup = segment.anomalyContribution?.buildup ?? 0
-  return baseBuildup * (Math.floor(activeActor.panel.anomalyMastery ?? 100) / 100)
+  const resistanceAttribute = getResistanceAttribute(segment.attribute)
+  const buildupResistance = snapshot.enemy.anomalyBuildupResistance?.[resistanceAttribute] ?? 0
+  return baseBuildup
+    * (Math.floor(activeActor.panel.anomalyMastery ?? 100) / 100)
+    * getAnomalyBuildupResistanceMultiplier(buildupResistance)
+}
+
+function getAnomalyBuildupResistanceMultiplier(resistance: number): number {
+  return clamp(1 - resistance, 0, 2)
 }
 
 function getDamageBonus(activeActor: AgentSnapshot, segment: AttackSegment): number {

@@ -580,10 +580,10 @@ The first replay harness baseline writes:
 
 `verify:golden-v1` verifies those artifacts against retained Excel and DA source
 snapshots. The baseline intentionally keeps G22/G23 blocked by `ERR-DAT-005`
-until manual acceptance records exist, and keeps G04/G09/G10 as
-`pendingHarness` until their executable replay assertions are complete. G10
-already asserts frost/auric resistance lanes, but anomaly-buildup-resistance
-mapping is not yet consumed by the core replay harness.
+until manual acceptance records exist. G04/G09/G10 now have executable replay
+assertions: G04 reproduces the guide breakpoint scan, G09 asserts sourced DA
+daze ratio display flooring, and G10 asserts frost/auric resistance plus
+anomaly-buildup-resistance lane mapping.
 
 ## 11. Review Checklist
 

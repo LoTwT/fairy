@@ -220,6 +220,14 @@ function sourceRef(sourceAnchor: string): Record<string, string> {
   }
 }
 
+function guideSourceRef(sourceAnchor: string): Record<string, string> {
+  return {
+    sourceId: "zzz-data-introduction",
+    sourceVersion: "2026-05-05",
+    sourceAnchor,
+  }
+}
+
 function buildAgentCandidates(workbook: XLSX.WorkBook) {
   const rows = rowsForSheet(workbook, "代理人属性")
   const headers = headerMap(rows[0] ?? [])
@@ -667,6 +675,43 @@ function assertClose(actual: number | undefined, expected: number, tolerance: nu
     throw new Error(`${label}: expected ${expected}, got ${actual}`)
 }
 
+function defensePenetrationBreakpoint(
+  snapshot: ReturnType<typeof baseSnapshot>,
+  input: { basePenetrationRate?: number; addedPenetrationRate: number; defenseReduction?: number },
+): number {
+  const source = guideSourceRef("docs/reference/zzz-data-introduction.txt:121-123")
+  const modifiers = input.defenseReduction === undefined
+    ? []
+    : [
+        {
+          id: "g04-defense-reduction",
+          handlerId: "defense-reduction",
+          params: { value: input.defenseReduction },
+          appliesTo: { kind: "activeActor" },
+          source,
+        },
+      ]
+
+  const withPenetration = (penetrationRate: number) => calculate({
+    ...snapshot,
+    team: [
+      {
+        ...snapshot.team[0]!,
+        panel: {
+          ...snapshot.team[0]!.panel,
+          penetrationRate,
+        },
+      },
+    ],
+    modifiers,
+  })
+
+  const baseline = withPenetration(input.basePenetrationRate ?? 0)
+  const increased = withPenetration((input.basePenetrationRate ?? 0) + input.addedPenetrationRate)
+  const penetrationGain = increased.summary.rawTotalDamage / baseline.summary.rawTotalDamage - 1
+  return 0.3 / penetrationGain
+}
+
 function passedAnchor(id: string, sourceRefs: Array<Record<string, string>>, notes: string[] = []): AnchorReport {
   return { id, status: "passed", sourceRefs, notes }
 }
@@ -713,14 +758,30 @@ function buildReplayReport(generatedAt: string, candidates = buildCandidates(gen
     anchors.push(passedAnchor("G03", [sourceRef("代理人属性!A37:AF37")], ["Crit expected value uses 1 + critRate * critDamage."]))
   }
 
-  anchors.push({
-    id: "G04",
-    status: "pendingHarness",
-    sourceRefs: [],
-    notes: [
-      "Source coverage is not blocked, but the executable bucket-scan assertion still needs a CLI/core replay representation.",
-    ],
-  })
+  {
+    const guideRef = guideSourceRef("docs/reference/zzz-data-introduction.txt:121-123")
+    assertClose(
+      defensePenetrationBreakpoint(snapshot, { addedPenetrationRate: 0.24 }),
+      1.9917,
+      0.0005,
+      "G04 default penetration breakpoint",
+    )
+    assertClose(
+      defensePenetrationBreakpoint(snapshot, { addedPenetrationRate: 0.24, defenseReduction: 0.4 }),
+      2.6861,
+      0.0005,
+      "G04 Nicole defense-reduction penetration breakpoint",
+    )
+    assertClose(
+      defensePenetrationBreakpoint(snapshot, { basePenetrationRate: 0.3, addedPenetrationRate: 0.24 }),
+      1.6167,
+      0.0005,
+      "G04 Rina penetration breakpoint",
+    )
+    anchors.push(passedAnchor("G04", [guideRef], [
+      "Executable bucket-scan replay reproduces the guide's 199.17%, 268.61%, and 161.67% penetration-vs-damage-bonus breakpoints.",
+    ]))
+  }
 
   {
     const regular = calculate({
@@ -822,14 +883,29 @@ function buildReplayReport(generatedAt: string, candidates = buildCandidates(gen
     anchors.push(passedAnchor("G08", [sourceRef("代理人属性!A37:AF37")], ["Anomaly Mastery floors before buildup."]))
   }
 
-  anchors.push({
-    id: "G09",
-    status: "pendingHarness",
-    sourceRefs: enemy.sourceRefs,
-    notes: [
-      "buhflipexplode DA source exposes baseDaze/versionDazeMult; executable daze ratio display-floor assertion still needs a replay representation.",
-    ],
-  })
+  {
+    const dazeCap = Number(snapshot.enemy.dazeCap)
+    const result = calculate({
+      ...snapshot,
+      attackSegments: [
+        {
+          ...snapshot.attackSegments[0]!,
+          id: "seg-daze-ratio",
+          damageType: "daze",
+          baseDazeMultiplier: (dazeCap * 0.12345) / Number(snapshot.team[0]!.panel.impact),
+        },
+      ],
+    })
+    assertClose(result.attackSegments[0]?.dazeValue, dazeCap * 0.12345, 0.00001, "G09 sourced DA daze value")
+    assertClose(result.attackSegments[0]?.dazeRatioRaw, 12.345, 0.00001, "G09 daze ratio raw")
+    if (result.attackSegments[0]?.dazeRatioDisplay !== 12)
+      throw new Error(`G09 daze ratio display expected 12, got ${result.attackSegments[0]?.dazeRatioDisplay}`)
+    if (trace(result, "attackSegments[0].dazeRatioDisplay").rounding?.mode !== "floorForDisplay")
+      throw new Error("G09 missing floorForDisplay trace")
+    anchors.push(passedAnchor("G09", enemy.sourceRefs, [
+      "buhflipexplode DA baseDaze/versionDazeMult feeds enemy.dazeCap; replay asserts daze ratio display floors the percentage value.",
+    ]))
+  }
 
   {
     const frost = calculate({
@@ -882,19 +958,65 @@ function buildReplayReport(generatedAt: string, candidates = buildCandidates(gen
         anomalyBuildupResistance: { ice: 0.15, ether: 0.35 },
       },
     })
+    const frostBuildup = calculate({
+      ...snapshot,
+      team: [
+        {
+          ...snapshot.team[0]!,
+          panel: {
+            ...snapshot.team[0]!.panel,
+            anomalyMastery: 100,
+          },
+        },
+      ],
+      attackSegments: [
+        {
+          ...snapshot.attackSegments[0]!,
+          id: "seg-frost-buildup",
+          attribute: "frost",
+          damageType: "anomaly",
+          anomalyContribution: { status: "frozen", buildup: 100 },
+        },
+      ],
+      enemy: {
+        ...snapshot.enemy,
+        anomalyBuildupResistance: { ice: 0.15, ether: 0.35 },
+      },
+    })
+    const auricBuildup = calculate({
+      ...snapshot,
+      team: [
+        {
+          ...snapshot.team[0]!,
+          panel: {
+            ...snapshot.team[0]!.panel,
+            anomalyMastery: 100,
+          },
+        },
+      ],
+      attackSegments: [
+        {
+          ...snapshot.attackSegments[0]!,
+          id: "seg-auric-buildup",
+          attribute: "auricInk",
+          damageType: "anomaly",
+          anomalyContribution: { status: "corruption", buildup: 100 },
+        },
+      ],
+      enemy: {
+        ...snapshot.enemy,
+        anomalyBuildupResistance: { ice: 0.15, ether: 0.35 },
+      },
+    })
     assertClose(bucket(frost, "resistanceZone").effectiveMultiplier, 0.8, 0.00001, "G10 frost resistance")
     assertClose(bucket(auric, "resistanceZone").effectiveMultiplier, 0.6, 0.00001, "G10 auric resistance")
+    assertClose(frostBuildup.attackSegments[0]?.anomalyBuildup, 85, 0.00001, "G10 frost anomaly buildup resistance")
+    assertClose(auricBuildup.attackSegments[0]?.anomalyBuildup, 65, 0.00001, "G10 auric anomaly buildup resistance")
     assertClose(bucket(frost, "damageBonusZone").effectiveMultiplier, 1.2, 0.00001, "G11 frost damage bonus")
     assertClose(bucket(auric, "damageBonusZone").effectiveMultiplier, 1.4, 0.00001, "G11 auric damage bonus")
-    anchors.push({
-      id: "G10",
-      status: "pendingHarness",
-      sourceRefs: [sourceRef("代理人属性!A37:AF37")],
-      notes: [
-        "Resistance mapping is asserted: frost uses enemy.resistance.ice and auricInk uses enemy.resistance.ether.",
-        "Anomaly-buildup-resistance mapping is still pending because current core replay does not consume enemy.anomalyBuildupResistance.",
-      ],
-    })
+    anchors.push(passedAnchor("G10", [sourceRef("代理人属性!A37:AF37")], [
+      "Frost maps to Ice and Auric Ink maps to Ether for both resistanceZone and anomaly-buildup-resistance.",
+    ]))
     anchors.push(passedAnchor("G11", [sourceRef("代理人属性!A37:AF37")], ["Frost/Auric use Ice/Ether damage-bonus panel fields."]))
   }
 
@@ -1150,8 +1272,8 @@ function verifyCommand(): void {
     throw new Error(`Expected 19 V1 anchors, got ${report.summary.v1AnchorCount}`)
   if (report.summary.blocked !== 2)
     throw new Error(`Expected G22/G23 to be blocked by manual acceptance, got ${report.summary.blocked} blocked anchors`)
-  if (report.summary.pendingHarness !== 3)
-    throw new Error(`Expected G04/G09/G10 pending harness entries, got ${report.summary.pendingHarness}`)
+  if (report.summary.pendingHarness !== 0)
+    throw new Error(`Expected no pending harness entries after G04/G09/G10 executable assertions, got ${report.summary.pendingHarness}`)
 }
 
 async function main(): Promise<void> {
