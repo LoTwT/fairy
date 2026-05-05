@@ -493,20 +493,31 @@ will add zh/en messages after the diagnostic placeholders are locked.
 
 ## 8. Mihoyo Mapping
 
-Mihoyo list data is confirmed available for channel `108`. Detail API discovery
-is not complete.
+Mihoyo source snapshot `data/source/raw/mihoyo/zzz-da/2026-05-05T0850Z/`
+confirms that channel `108` and Deadly Assault detail text are available through
+public JSON APIs.
 
 V1 implementation rules:
 
-- Try API discovery again before HTML parsing.
-- If no stable API is found, parse cached HTML snapshots.
-- HTML parser output must include selector drift checks.
-- If a selector drift or zh/en mapping mismatch occurs, emit unresolved mapping.
-- lo-user can manually help identify endpoints or selectors.
+- Fetch channel 13 public list JSON and derive the channel 108 period
+  `content_id` values from the list. Do not hard-code detail ids.
+- Fetch detail pages with `entry_page?app_sn=zzz_wiki&entry_page_id={id}&lang=zh-cn`.
+- Send header `x-rpc-wiki_app: zzz`; without it, the API can return unrelated
+  cross-namespace content for the same numeric id.
+- Direct HTML fetch is a Nuxt shell and does not contain the required detail
+  text. Use Cheerio to parse rich HTML fragments embedded in JSON component
+  data, not the page shell.
+- Extract and anchor three selectable buffs, three boss descriptions/attributes,
+  and three boss-room field/mechanism text blocks for the latest period and
+  retained source history.
+- If API shape, component structure, or zh/en mapping drifts, emit unresolved
+  mapping. Blocking unresolved issues prevent cleaned release.
+- If a future source drift requires browser rendering, pause and ask lo-user
+  before adding Playwright/Puppeteer as a production crawler dependency.
 
-Mihoyo data is used for Chinese labels and descriptions. It is not the primary
-source for numeric DA multipliers unless a numeric field is explicitly anchored
-and reviewed.
+Mihoyo data is used for Chinese labels, descriptions, and period/boss/buff
+source text. It is not the primary source for numeric DA multipliers unless a
+numeric field is explicitly anchored and reviewed.
 
 ## 9. Validation Gates
 
@@ -544,9 +555,13 @@ The eventual Excel reader still needs to parse:
 
 ### 10.2 task #42 Mihoyo Crawler
 
-V1 should produce Deadly Assault i18n/mapping resources, not UX runtime messages.
-It must write data i18n resources under `packages/data/src/i18n/` and sync them
-to `packages/data/cleaned/i18n/`.
+V1 source ingestion retains Mihoyo Deadly Assault detail snapshots and a
+Mihoyo/buhflipexplode zh/en source-text alignment artifact. The implementation
+must not infer typed modifiers from natural language in the source snapshot PR.
+
+Later cleaned transforms should produce Deadly Assault i18n/mapping resources,
+not UX runtime messages. They must write data i18n resources under
+`packages/data/src/i18n/` and sync them to `packages/data/cleaned/i18n/`.
 
 ### 10.3 task #43 True-Data Replay
 

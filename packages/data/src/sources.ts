@@ -81,15 +81,23 @@ export const dataSourceDescriptors = [
     kind: "mihoyoWiki",
     label: "Mihoyo ZZZ wiki Critical Assault map",
     url: "https://baike.mihoyo.com/zzz/wiki/channel/map/13/108",
-    status: "discoveryOnly",
+    status: "readyForAdapter",
     formalDataReady: false,
     parserTargets: [
-      "critical assault stage list",
-      "enemy identifiers",
-      "official wiki source anchors",
+      "Deadly Assault period list",
+      "three selectable period buffs",
+      "three boss room detail texts and challenge targets",
+      "official Chinese labels and descriptions",
+      "Mihoyo/buhflipexplode zh/en source-text anchors",
     ],
     sourceVersionStrategy:
-      "Use HTTP ETag/Last-Modified when present, otherwise hash the fetched HTML/API payload.",
+      "Use the retained snapshot id plus fetch-manifest hashes for the channel and entry_page API payloads.",
+    discoveredAssets: [
+      "data/source/raw/mihoyo/zzz-da/2026-05-05T0850Z/channel-108/periods.json",
+      "data/source/raw/mihoyo/zzz-da/2026-05-05T0850Z/parsed/period-details.json",
+      "data/source/raw/mihoyo/zzz-da/2026-05-05T0850Z/alignment/mihoyo-buhflipexplode.json",
+      "data/source/raw/mihoyo/zzz-da/2026-05-05T0850Z/fetch-manifest.json",
+    ],
     fetchPolicy: {
       mode: "httpGet",
       maxRequestsPerMinute: 12,
@@ -104,6 +112,8 @@ export const dataSourceDescriptors = [
       notes: [
         "robots.txt returned HTTP 404 on 2026-05-05.",
         "The target page returned HTTP 200 with cache-control max-age=300.",
+        "The rendered Nuxt page shell does not contain detail content; use public JSON API payloads and parse embedded rich-text HTML fragments.",
+        "entry_page requests must include x-rpc-wiki_app: zzz to avoid cross-namespace content_id collisions.",
         "Do not crawl authenticated or private APIs; use public wiki responses only.",
       ],
     },

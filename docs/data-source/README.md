@@ -18,11 +18,9 @@ offline verification gates before formal cleaned game data is generated.
   `@fairy/core`.
 - Record robots.txt / ToS observations and conservative fetch rules.
 
-## Out Of Scope For This PR
+## Source Snapshot Scope
 
-- No Excel workbook is committed.
 - No formal `GameData` rows are hand-written.
-- No production crawler performs network fetching.
 - No cleaned agent, skill, W-Engine, Drive Disc, enemy, or rule data is
   published.
 
@@ -36,7 +34,7 @@ anchors. Hand-written values may exist only in QA fixtures, not in
 | Source ID | Kind | Current status | Formal data ready | Notes |
 |---|---|---:|---:|---|
 | `lo-user-excel` | `excel` | source retained | no | Workbook committed under `data/source/excel/` with hash metadata. |
-| `mihoyo-zzz-critical-assault` | `mihoyoWiki` | discovery only | no | Public wiki page reachable; robots.txt not found on 2026-05-05. |
+| `mihoyo-zzz-critical-assault` | `mihoyoWiki` | source retained / ready for adapter | no | Public API snapshot retained for DA detail text and zh/en source-text alignment. |
 | `buhflipexplode-zzz-da` | `thirdPartySite` | source retained / ready for adapter | no | Live-only source snapshot retained; D-12 forbids copying GPL JS into Fairy runtime. |
 
 Implementation entry: `packages/data/src/sources.ts`.
@@ -44,16 +42,18 @@ Implementation entry: `packages/data/src/sources.ts`.
 Source-specific notes:
 
 - [buhflipexplode Deadly Assault](buhflipexplode/)
+- [Mihoyo Deadly Assault](mihoyo/)
 
 ## Next Segment
 
 S5 segment 2 should continue with:
 
 - Excel reader with sheet/column discovery and workbook hash versioning.
-- Mihoyo fetcher with cached snapshots and conditional request support.
+- Mihoyo transforms from the retained detail snapshot into Deadly Assault
+  i18n/mapping resources and typed-modifier review queues.
 - buhflipexplode transforms from the retained live-only snapshot into cleaned
   Deadly Assault data and parity fixtures.
 - Raw record schemas and transforms into `GameData`.
-- Golden-anchor source coverage for the 23 fixture cases.
+- Golden-anchor source coverage for the V1 20-anchor fixture scope.
 - Negative validation that formal modifiers and formal rows cannot miss source
   metadata.

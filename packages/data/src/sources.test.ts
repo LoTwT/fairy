@@ -146,4 +146,20 @@ describe("@fairy/data source discovery skeleton", () => {
     )
     expect(descriptor.compliance.redistribution).toBe("cleanedDataOnly")
   })
+
+  it("documents Mihoyo retained Deadly Assault detail assets for the next adapter", () => {
+    const descriptor = getDataSourceDescriptor("mihoyo-zzz-critical-assault")
+
+    expect(descriptor.status).toBe("readyForAdapter")
+    expect(descriptor.discoveredAssets).toEqual(
+      expect.arrayContaining([
+        "data/source/raw/mihoyo/zzz-da/2026-05-05T0850Z/channel-108/periods.json",
+        "data/source/raw/mihoyo/zzz-da/2026-05-05T0850Z/parsed/period-details.json",
+        "data/source/raw/mihoyo/zzz-da/2026-05-05T0850Z/alignment/mihoyo-buhflipexplode.json",
+      ]),
+    )
+    expect(descriptor.compliance.notes.join("\n")).toContain(
+      "x-rpc-wiki_app: zzz",
+    )
+  })
 })

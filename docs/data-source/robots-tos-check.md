@@ -33,12 +33,22 @@ Observed on 2026-05-05:
 - The page is Nuxt HTML for `绳网情报站-绝区零WIKI` and references Mihoyo static /
   API hosts such as `webstatic.mihoyo.com`, `api-takumi.mihoyo.com`, and
   `act-api-takumi.mihoyo.com`.
+- Direct HTML fetch returns the Nuxt shell only; Deadly Assault detail text is
+  available from public JSON APIs used by the rendered page.
+- `entry_page` detail requests require header `x-rpc-wiki_app: zzz`; without it,
+  the same numeric id can resolve to unrelated wiki content in another
+  namespace.
 
 Engineering policy for segment 2:
 
 - Fetch only public wiki responses needed for live-server data.
 - Do not use authenticated endpoints, private APIs, beta-only data, or bypass
   mechanisms.
+- Use the channel 13 public list API to derive channel 108 period `content_id`
+  values. Do not hard-code detail ids.
+- Parse `entry_page` JSON and embedded rich HTML fragments; rendered browser
+  automation is discovery-only unless a future source drift requires human
+  review.
 - Cache fetched payloads and prefer conditional requests using ETag /
   Last-Modified.
 - Default automated fetch rate: no more than 12 requests per minute, lower if a

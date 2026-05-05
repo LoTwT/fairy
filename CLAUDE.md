@@ -18,6 +18,9 @@ Fairy is a ZZZ static snapshot damage calculator for 1-3 agents.
 - Do not add runtime script injection for handlers.
 - Formal `@fairy/data` data must come from Excel/crawler pipelines, not hand-written values.
 - Test fixtures may be hand-written and reviewed; they do not ship as formal data.
+- Current Mihoyo DA ingestion uses public JSON APIs plus Cheerio for embedded
+  rich-text fragments; Playwright/browser rendering is discovery-only unless a
+  new decision explicitly approves it.
 
 ## Current Phase
 
@@ -27,6 +30,7 @@ S5 data ingestion. Current engineering entry points:
 - `docs/architecture/monorepo-development.md`
 - `docs/data-contract/`
 - `docs/data-source/`
+- `docs/data-source/mihoyo/`
 - `packages/core/src/engine/`
 - `packages/cli/`
 - `packages/data/`
