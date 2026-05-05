@@ -31,4 +31,6 @@ calculation so the same snapshot can produce expected, forced-crit, and
 forced-non-crit output.
 
 Invalid arguments, invalid JSON, and schema validation failures are reported as
-JSON error objects on stderr.
+JSON error objects on stderr. Their stable `error.code` stays language-independent,
+while `error.message` is rendered through the same `--lang zh|en` catalog with
+English fallback strings.
