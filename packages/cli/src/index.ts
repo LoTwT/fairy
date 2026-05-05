@@ -3,6 +3,7 @@ import { calculate, parseBattleSnapshot } from "@fairy/core"
 import { readFile } from "node:fs/promises"
 import { dirname, resolve } from "node:path"
 import { fileURLToPath, pathToFileURL } from "node:url"
+import { cliErrorFallbackMessages, isCliErrorCode, type CliErrorCode } from "./errors"
 
 type Lang = "zh" | "en"
 type ResultMode = "expected" | "crit" | "nonCrit"
@@ -17,6 +18,7 @@ interface CliIo {
 }
 
 type MessageCatalog = Record<string, string>
+type MessageParams = Record<string, unknown>
 
 interface ParsedArgs {
   command: string
@@ -45,7 +47,7 @@ export async function runCli(argv: string[], io: CliIo = nodeIo()): Promise<numb
 
   try {
     if (!langResult.ok)
-      throw cliError("ERR-CLI-ARG", langResult.message)
+      throw cliError("ERR-CLI-ARG", { message: langResult.message })
 
     if (parsed.flags.has("help") || parsed.command === "help") {
       writeJson(io, getHelp(), parsed.flags.has("pretty"))
@@ -64,11 +66,11 @@ export async function runCli(argv: string[], io: CliIo = nodeIo()): Promise<numb
       case "migrate":
         return await runMigrate(parsed, io, lang)
       default:
-        throw cliError("ERR-CLI-CMD", `Unsupported command: ${parsed.command}`)
+        throw cliError("ERR-CLI-CMD", { command: parsed.command })
     }
   }
   catch (err) {
-    const body = toCliErrorBody(err)
+    const body = await toCliErrorBody(err, io, lang)
     io.stderr(`${JSON.stringify(body)}\n`)
     return 1
   }
@@ -84,7 +86,7 @@ async function runCalc(parsed: ParsedArgs, io: CliIo, lang: Lang): Promise<numbe
 
 async function runCompare(parsed: ParsedArgs, io: CliIo, lang: Lang): Promise<number> {
   if (parsed.inputs.length < 2)
-    throw cliError("ERR-CLI-ARG", "compare requires two snapshot inputs")
+    throw cliError("ERR-CLI-ARG", { message: "compare requires two snapshot inputs" })
 
   const leftInput = await readSnapshotInput(parsed, io, 0)
   const rightInput = await readSnapshotInput(parsed, io, 1)
@@ -115,7 +117,7 @@ async function runScan(parsed: ParsedArgs, io: CliIo, lang: Lang): Promise<numbe
   const to = readNumberFlag(parsed, "to")
   const step = readNumberFlag(parsed, "step")
   if (step <= 0)
-    throw cliError("ERR-CLI-ARG", "--step must be greater than 0")
+    throw cliError("ERR-CLI-ARG", { message: "--step must be greater than 0" })
 
   const snapshot = await readSnapshotInput(parsed, io, 0)
   const resultMode = parseResultMode(parsed.flags.get("result-mode") ?? parsed.flags.get("resultMode"))
@@ -232,7 +234,7 @@ async function readSnapshotInput(parsed: ParsedArgs, io: CliIo, index: number): 
     return JSON.parse(text) as unknown
   }
   catch (err) {
-    throw cliError("ERR-CLI-JSON", `Invalid JSON input at ${input}`, err)
+    throw cliError("ERR-CLI-JSON", { input }, describeUnknownError(err))
   }
 }
 
@@ -262,13 +264,13 @@ function parseResultMode(value: string | boolean | undefined): ResultMode | unde
     return undefined
   if (value === "expected" || value === "crit" || value === "nonCrit")
     return value
-  throw cliError("ERR-CLI-ARG", "--result-mode must be expected, crit, or nonCrit")
+  throw cliError("ERR-CLI-ARG", { message: "--result-mode must be expected, crit, or nonCrit" })
 }
 
 function readStringFlag(parsed: ParsedArgs, name: string): string {
   const value = parsed.flags.get(name)
   if (typeof value !== "string" || value.length === 0)
-    throw cliError("ERR-CLI-ARG", `--${name} is required`)
+    throw cliError("ERR-CLI-ARG", { message: `--${name} is required` })
   return value
 }
 
@@ -276,21 +278,21 @@ function readNumberFlag(parsed: ParsedArgs, name: string): number {
   const rawValue = readStringFlag(parsed, name)
   const value = Number(rawValue)
   if (!Number.isFinite(value))
-    throw cliError("ERR-CLI-ARG", `--${name} must be a number`)
+    throw cliError("ERR-CLI-ARG", { message: `--${name} must be a number` })
   return value
 }
 
 function setPath(input: unknown, path: string, value: unknown): unknown {
   const parts = path.match(/[^[.\]]+/g)
   if (parts === null || parts.length === 0)
-    throw cliError("ERR-CLI-ARG", `Invalid scan path: ${path}`)
+    throw cliError("ERR-CLI-ARG", { message: `Invalid scan path: ${path}` })
 
   let cursor = input as Record<string, unknown> | unknown[]
   for (let index = 0; index < parts.length - 1; index += 1) {
     const part = parts[index]!
     const next = Array.isArray(cursor) ? cursor[Number(part)] : cursor[part]
     if (next === null || typeof next !== "object")
-      throw cliError("ERR-CLI-ARG", `Cannot scan missing path segment: ${parts.slice(0, index + 1).join(".")}`)
+      throw cliError("ERR-CLI-ARG", { message: `Cannot scan missing path segment: ${parts.slice(0, index + 1).join(".")}` })
     cursor = next as Record<string, unknown> | unknown[]
   }
 
@@ -324,8 +326,12 @@ function writeDiagnosticLines(io: CliIo, diagnostics: Diagnostic[], messages: Me
 
 function renderDiagnostic(diagnostic: Diagnostic, messages: MessageCatalog): string {
   const template = messages[diagnostic.key] ?? diagnostic.key
+  return renderMessageTemplate(template, diagnostic.messageParams)
+}
+
+function renderMessageTemplate(template: string, params: MessageParams = {}): string {
   return template.replace(/\{([^}]+)\}/g, (_, key: string) => {
-    const value = diagnostic.messageParams?.[key]
+    const value = params[key]
     return value === undefined ? `{${key}}` : String(value)
   })
 }
@@ -351,44 +357,98 @@ function getHelp() {
   }
 }
 
-function cliError(code: string, message: string, details?: unknown): Error & { code: string; details?: unknown } {
-  const err = new Error(message) as Error & { code: string; details?: unknown }
+function cliError(code: CliErrorCode, messageParams: MessageParams = {}, details?: unknown): Error & {
+  code: CliErrorCode
+  messageParams: MessageParams
+  details?: unknown
+} {
+  const err = new Error(renderMessageTemplate(cliErrorFallbackMessages[code], messageParams)) as Error & {
+    code: CliErrorCode
+    messageParams: MessageParams
+    details?: unknown
+  }
   err.code = code
+  err.messageParams = messageParams
   if (details !== undefined)
     err.details = details
   return err
 }
 
-function toCliErrorBody(err: unknown): CliErrorBody {
+async function toCliErrorBody(err: unknown, io?: CliIo, lang: Lang = defaultLang): Promise<CliErrorBody> {
+  const normalized = normalizeCliError(err)
+  const message = await renderCliErrorMessage(normalized.code, normalized.messageParams, io, lang)
+  return {
+    ok: false,
+    error: {
+      code: normalized.code,
+      message,
+      ...(normalized.details === undefined ? {} : { details: normalized.details }),
+    },
+  }
+}
+
+interface NormalizedCliError {
+  code: CliErrorCode
+  messageParams: MessageParams
+  details?: unknown
+}
+
+function normalizeCliError(err: unknown): NormalizedCliError {
   if (isZodErrorLike(err)) {
     return {
-      ok: false,
-      error: {
-        code: "ERR-CLI-SCHEMA",
-        message: "Input does not match BattleSnapshot schema.",
-        details: err.issues,
-      },
+      code: "ERR-CLI-SCHEMA",
+      messageParams: {},
+      details: err.issues,
     }
   }
 
   if (err instanceof Error) {
-    const maybeCoded = err as Error & { code?: string; details?: unknown }
-    return {
-      ok: false,
-      error: {
-        code: maybeCoded.code ?? "ERR-CLI-UNCAUGHT",
-        message: err.message,
+    const maybeCoded = err as Error & { code?: string; messageParams?: MessageParams; details?: unknown }
+    if (maybeCoded.code !== undefined && isCliErrorCode(maybeCoded.code)) {
+      return {
+        code: maybeCoded.code,
+        messageParams: maybeCoded.messageParams ?? { message: err.message },
         ...(maybeCoded.details === undefined ? {} : { details: maybeCoded.details }),
-      },
+      }
+    }
+
+    return {
+      code: "ERR-CLI-UNCAUGHT",
+      messageParams: { message: err.message },
+      ...(maybeCoded.details === undefined ? {} : { details: maybeCoded.details }),
     }
   }
 
   return {
-    ok: false,
-    error: {
-      code: "ERR-CLI-UNCAUGHT",
-      message: String(err),
-    },
+    code: "ERR-CLI-UNCAUGHT",
+    messageParams: { message: String(err) },
+  }
+}
+
+async function renderCliErrorMessage(
+  code: CliErrorCode,
+  messageParams: MessageParams,
+  io: CliIo | undefined,
+  lang: Lang,
+): Promise<string> {
+  if (io !== undefined) {
+    try {
+      const messages = await io.loadMessages(lang)
+      const template = messages[code]
+      if (template !== undefined)
+        return renderMessageTemplate(template, messageParams)
+    }
+    catch {
+      // Fall through to stable English fallback when catalog loading fails.
+    }
+  }
+
+  return renderMessageTemplate(cliErrorFallbackMessages[code], messageParams)
+}
+
+function describeUnknownError(err: unknown): { cause: string } {
+  return {
+    cause: err instanceof Error ? err.message : String(err),
   }
 }
 
@@ -425,7 +485,17 @@ if (process.argv[1] !== undefined && import.meta.url === pathToFileURL(process.a
   runCli(process.argv.slice(2)).then((code) => {
     process.exitCode = code
   }).catch((err: unknown) => {
-    process.stderr.write(`${JSON.stringify(toCliErrorBody(err))}\n`)
+    toCliErrorBody(err).then((body) => {
+      process.stderr.write(`${JSON.stringify(body)}\n`)
+    }).catch((fallbackErr: unknown) => {
+      process.stderr.write(`${JSON.stringify({
+        ok: false,
+        error: {
+          code: "ERR-CLI-UNCAUGHT",
+          message: String(fallbackErr),
+        },
+      })}\n`)
+    })
     process.exitCode = 1
   })
 }

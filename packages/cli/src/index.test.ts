@@ -52,6 +52,11 @@ const baseSnapshot = {
 }
 
 const messages = {
+  "ERR-CLI-ARG": "Localized argument problem: {message}",
+  "ERR-CLI-CMD": "Localized command problem: {command}",
+  "ERR-CLI-JSON": "Localized JSON problem: {input}",
+  "ERR-CLI-SCHEMA": "Localized schema problem.",
+  "ERR-CLI-UNCAUGHT": "Localized uncaught problem: {message}",
   "ERR-SRC-001": "Modifier at {path} has no source.",
 }
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), "../../..")
@@ -224,22 +229,96 @@ describe("fairy cli", () => {
   it("returns JSON errors for invalid arguments", async () => {
     const io = fakeIo({ stdin: JSON.stringify(baseSnapshot) })
     const code = await runCli(["calc", "-", "--lang", "fr"], io)
-    const error = JSON.parse(io.output.stderr) as { ok: false; error: { code: string } }
+    const error = JSON.parse(io.output.stderr) as { ok: false; error: { code: string; message: string } }
 
     expect(code).toBe(1)
     expect(error.error.code).toBe("ERR-CLI-ARG")
+    expect(error.error.message).toBe("Localized argument problem: --lang must be zh or en")
+    expect(io.output.stdout).toBe("")
+  })
+
+  it("renders unknown command errors through the catalog", async () => {
+    const io = fakeIo()
+    const code = await runCli(["unknown"], io)
+    const error = JSON.parse(io.output.stderr) as { ok: false; error: { code: string; message: string } }
+
+    expect(code).toBe(1)
+    expect(error.error.code).toBe("ERR-CLI-CMD")
+    expect(error.error.message).toBe("Localized command problem: unknown")
     expect(io.output.stdout).toBe("")
   })
 
   it("returns JSON schema errors for invalid snapshots", async () => {
     const io = fakeIo({ stdin: JSON.stringify({ schemaVersion: "1.0.0" }) })
     const code = await runCli(["calc", "-"], io)
-    const error = JSON.parse(io.output.stderr) as { ok: false; error: { code: string; details: unknown[] } }
+    const error = JSON.parse(io.output.stderr) as { ok: false; error: { code: string; message: string; details: unknown[] } }
 
     expect(code).toBe(1)
     expect(error.error.code).toBe("ERR-CLI-SCHEMA")
+    expect(error.error.message).toBe("Localized schema problem.")
     expect(error.error.details.length).toBeGreaterThan(0)
     expect(io.output.stdout).toBe("")
+  })
+
+  it("renders JSON parse errors through the catalog and preserves details", async () => {
+    const io = fakeIo({
+      files: {
+        "/repo/broken.json": "{",
+      },
+    })
+    const code = await runCli(["calc", "broken.json"], io)
+    const error = JSON.parse(io.output.stderr) as {
+      ok: false
+      error: { code: string; message: string; details: { cause: string } }
+    }
+
+    expect(code).toBe(1)
+    expect(error.error.code).toBe("ERR-CLI-JSON")
+    expect(error.error.message).toBe("Localized JSON problem: broken.json")
+    expect(error.error.details.cause).toContain("Expected")
+    expect(io.output.stdout).toBe("")
+  })
+
+  it("falls back to English CLI errors when catalog keys are missing", async () => {
+    const io = fakeIo({ stdin: JSON.stringify(baseSnapshot), messages: {} })
+    const code = await runCli(["calc", "-", "--lang", "fr"], io)
+    const error = JSON.parse(io.output.stderr) as { ok: false; error: { code: string; message: string } }
+
+    expect(code).toBe(1)
+    expect(error.error.code).toBe("ERR-CLI-ARG")
+    expect(error.error.message).toContain("Command argument error: --lang must be zh or en")
+    expect(io.output.stdout).toBe("")
+  })
+
+  it("renders uncaught CLI errors through the catalog", async () => {
+    const io = fakeIo()
+    const code = await runCli(["calc", "missing.json"], io)
+    const error = JSON.parse(io.output.stderr) as { ok: false; error: { code: string; message: string } }
+
+    expect(code).toBe(1)
+    expect(error.error.code).toBe("ERR-CLI-UNCAUGHT")
+    expect(error.error.message).toContain("Localized uncaught problem: missing test file: /repo/missing.json")
+    expect(io.output.stdout).toBe("")
+  })
+
+  it("uses the real zh catalog for CLI schema errors", () => {
+    const run = spawnSync(process.execPath, [
+      resolve(repoRoot, "packages/cli/bin/fairy.js"),
+      "calc",
+      "-",
+      "--lang",
+      "zh",
+    ], {
+      cwd: tmpdir(),
+      input: JSON.stringify({ schemaVersion: "1.0.0" }),
+      encoding: "utf8",
+    })
+    const error = JSON.parse(run.stderr) as { ok: false; error: { code: string; message: string } }
+
+    expect(run.status).toBe(1)
+    expect(run.stdout).toBe("")
+    expect(error.error.code).toBe("ERR-CLI-SCHEMA")
+    expect(error.error.message).toContain("输入不符合 BattleSnapshot schema")
   })
 })
 
@@ -262,6 +341,7 @@ function withoutAttackSegmentSource() {
 function fakeIo(input: {
   stdin?: string
   files?: Record<string, string>
+  messages?: Record<string, string>
 } = {}) {
   const output = {
     stdout: "",
@@ -284,6 +364,6 @@ function fakeIo(input: {
     stderr: (text: string) => {
       output.stderr += text
     },
-    loadMessages: async () => messages,
+    loadMessages: async () => input.messages ?? messages,
   }
 }
