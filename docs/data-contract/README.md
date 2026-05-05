@@ -17,6 +17,8 @@ mirror these contracts after cross-role review.
 
 - [BattleSnapshot](battle-snapshot.md): user-authored static battle input.
 - [GameData](game-data.md): cleaned generated game data consumed by core.
+- [Cleaned schema spec](cleaned-schema-spec.md): S5 cleaned-data publication,
+  Deadly Assault domain, typed modifier pipeline, and package export contract.
 - [CalcResult](calc-result.md): JSON-only calculation output.
 - [Trace](trace.md): explainability and golden-test evidence model.
 - [Handler spec](handler-spec.md): safe typed modifier and handler boundary.
