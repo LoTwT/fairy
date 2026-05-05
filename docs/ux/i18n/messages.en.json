@@ -5,8 +5,8 @@
     "ruleSetVersion": "rules-v0.1-attached-2026-05-04",
     "schemaVersion": "v1",
     "generatedBy": "@UX",
-    "totalEntries": 28,
-    "scope": "P0 required — runtime error messages for damage calculator; v0.4 extends ERR-VER-* / ERR-EVENT-* series; UX-S3-1 extends ERR-CALC-PENDING-* series (locked by PR #10 commit dacf36c)"
+    "totalEntries": 33,
+    "scope": "P0 required — runtime error messages for damage calculator; v0.4 extends ERR-VER-* / ERR-EVENT-* series; UX-S3-1 extends ERR-CALC-PENDING-* series; UX-S4-1 extends ERR-CLI-* series (CLI argument / schema errors; Product decided Option A bilingual 2026-05-05)"
   },
   "ERR-RNG-001": "Damage Bonus Zone exceeds the cap of 600% (Strategy PART 01.2). Truncated for display; raw accumulated value: {raw}%.",
   "ERR-RNG-002": "CRIT Rate must be within 0–100% (Strategy PART 01.3). Auto-clamped to {clamped}%.",
@@ -35,5 +35,10 @@
   "ERR-UI-003": "Team contains unsupported field (e.g., subordinate / Bangboo). V1 does not support this feature; the corresponding field has been ignored.",
   "ERR-OCR-000": "This tool does not parse screenshots. Screenshots are visual references only. Please fill in fields manually.",
   "ERR-CALC-PENDING-ANOMALY": "⚠ V1 PR #10 stage: anomaly damage formula returns a schema-compatible skeleton only and does **not produce trustworthy values**. Full anomaly computation (virtual agent weighting / anomaly trigger count table / anomaly crit zone / overflow exclusion, etc.) is implemented by task #27 [TL-S3-4].",
-  "ERR-CALC-PENDING-DISORDER": "⚠ V1 PR #10 stage: disorder damage formula returns a schema-compatible skeleton only and does **not produce trustworthy values**. Full disorder computation (seven-attribute multipliers / daze level zone / disorder daze accumulation / disorderFormulaId trace evidence, etc.) is implemented by task #27 [TL-S3-4]."
+  "ERR-CALC-PENDING-DISORDER": "⚠ V1 PR #10 stage: disorder damage formula returns a schema-compatible skeleton only and does **not produce trustworthy values**. Full disorder computation (seven-attribute multipliers / daze level zone / disorder daze accumulation / disorderFormulaId trace evidence, etc.) is implemented by task #27 [TL-S3-4].",
+  "ERR-CLI-ARG": "Command argument error: {message}. Run `fairy help <command>` for usage.",
+  "ERR-CLI-CMD": "Unknown subcommand: {command}. Available: calc / compare / scan / explain / migrate / help.",
+  "ERR-CLI-JSON": "Failed to parse input JSON: {input}. Check the file format or run `fairy explain` for an example.",
+  "ERR-CLI-SCHEMA": "Input does not match BattleSnapshot schema. See JSON `error.details` for specifics; refer to docs/data-contract/battle-snapshot.md.",
+  "ERR-CLI-UNCAUGHT": "Uncaught error: {message}. Please file an issue with the input and command."
 }
