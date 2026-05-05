@@ -14,15 +14,16 @@ Fairy 是绝区零 1-3 代理人静态快照伤害计算器。V1 目标是 `@fai
 
 ## S5 当前重点
 
-1. 推进 `@fairy/data` Excel reader 与爬虫接入，保留 source metadata 并清洗为 GameData schema。
-2. 先完成不阻塞 Excel 的 schema discovery、importer/crawler adapter skeleton、source metadata contract、robots/ToS 记录。
-3. 等 lo-user Excel 到位后接入实际 reader / cleaning，并补齐 golden 所需数据。
-4. 将 23 个 golden fixture schema-ready 锚点接入真实数据复算，作为 V1 发布 gate。
+1. 以危局强袭战（Deadly Assault）为 V1 cleaned-data 主场景，优先产出 `@fairy/data/cleaned/deadly-assault`。
+2. 保留 Excel 与 raw crawler source archive，但 V1 不要求全量清洗 Excel enemy；Excel enemy 作为后备 / V1.x 扩展源。
+3. 米游社用于危局强袭战中文 i18n / 描述映射；buhflipexplode 用于 DA period / boss slot / buff / multiplier overlay。
+4. V1 golden fixture 真数据复算收窄到 20 个锚点；部位破坏与非 DA enemy 失衡恢复锚点推迟到 V1.x。
 
 ## 关键文档
 
 - 命名策略：[architecture/naming-policy.md](architecture/naming-policy.md)
 - Monorepo 开发指南：[architecture/monorepo-development.md](architecture/monorepo-development.md)
 - Pending 术语表：[data-contract/pending-term-resolution-table.md](data-contract/pending-term-resolution-table.md)
+- Cleaned schema spec：[data-contract/cleaned-schema-spec.md](data-contract/cleaned-schema-spec.md)
 - Source metadata contract：[data-source/source-metadata-contract.md](data-source/source-metadata-contract.md)
 - Robots / ToS check：[data-source/robots-tos-check.md](data-source/robots-tos-check.md)
