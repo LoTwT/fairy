@@ -1,6 +1,6 @@
 {
   "schemaVersion": "source-manifest-v1",
-  "generatedAt": "2026-05-05T12:45:00+08:00",
+  "generatedAt": "2026-05-05T16:50:00+08:00",
   "distributionPolicy": {
     "rawSourceArchive": "versioned-in-git-not-packaged",
     "publishedArtifacts": "cleaned-json-and-types-only"
@@ -42,6 +42,18 @@
       "providedBy": "buhflipexplode.org public HTTP",
       "distribution": "raw-retained-not-packaged",
       "usage": "Deadly Assault live-only source-format snapshot and algorithm drift baseline; GPL JS is retained for audit but not copied into Fairy runtime"
+    },
+    {
+      "id": "mihoyo-zzz-da-2026-05-05T0850Z",
+      "kind": "rawHttpSnapshot",
+      "path": "data/source/raw/mihoyo/zzz-da/2026-05-05T0850Z/fetch-manifest.json",
+      "metadataPath": "data/source/raw/mihoyo/zzz-da/2026-05-05T0850Z/alignment/mihoyo-buhflipexplode.json",
+      "sha256": "19ad8241710dc8db3581e10985053cfcd07fb1460aad88580e9e65cadb80690c",
+      "bytes": 25334,
+      "fetchedAt": "2026-05-05T16:50:00+08:00",
+      "providedBy": "baike.mihoyo.com public API",
+      "distribution": "raw-retained-not-packaged",
+      "usage": "Deadly Assault Chinese detail text snapshot and Mihoyo/buhflipexplode zh/en source-text alignment baseline"
     }
   ]
 }

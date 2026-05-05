@@ -16,7 +16,7 @@ Fairy 是绝区零 1-3 代理人静态快照伤害计算器。V1 目标是 `@fai
 
 1. 以危局强袭战（Deadly Assault）为 V1 cleaned-data 主场景，优先产出 `@fairy/data/cleaned/deadly-assault`。
 2. 保留 Excel 与 raw crawler source archive，但 V1 不要求全量清洗 Excel enemy；Excel enemy 作为后备 / V1.x 扩展源。
-3. 米游社用于危局强袭战中文 i18n / 描述映射；buhflipexplode 用于 DA period / boss slot / buff / multiplier overlay。
+3. 米游社用于危局强袭战中文详情正文、3 个可选 buff、3 个 boss 房间机制文本、zh/en source-text 对照；buhflipexplode 用于 DA period / boss slot / buff / multiplier overlay 和英文源文本。
 4. V1 golden fixture 真数据复算收窄到 20 个锚点；部位破坏与非 DA enemy 失衡恢复锚点推迟到 V1.x。
 
 ## 关键文档
@@ -27,3 +27,5 @@ Fairy 是绝区零 1-3 代理人静态快照伤害计算器。V1 目标是 `@fai
 - Cleaned schema spec：[data-contract/cleaned-schema-spec.md](data-contract/cleaned-schema-spec.md)
 - Source metadata contract：[data-source/source-metadata-contract.md](data-source/source-metadata-contract.md)
 - Robots / ToS check：[data-source/robots-tos-check.md](data-source/robots-tos-check.md)
+- 米游社危局强袭战 source snapshot：[data-source/mihoyo/](data-source/mihoyo/)
+- buhflipexplode 危局强袭战 source snapshot：[data-source/buhflipexplode/](data-source/buhflipexplode/)
