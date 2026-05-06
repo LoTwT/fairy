@@ -1,6 +1,6 @@
 # Prompt Templates — UX v0.3 重定向稿 B
 
-作者：@UX  日期：2026-05-05  状态：v0.4（基于 TL-3 PR #5 已 merge 的字段映射 v1.0 + UX-v0.4 errata）
+作者：@UX  日期：2026-05-05  状态：v0.4.1（D-19 patch — 默认 nonCrit/crit 双栏，expected 改为可选）
 
 > **用途**：AI plugin / CLI / Slock skill 把 `CalcResult` JSON 渲染为人类可读输出的模板库。
 > **结构**：4 档输出粒度（tiny / brief / verbose / debug）× 2 语言（zh / en）= 8 套模板。
@@ -13,12 +13,12 @@
 
 | 档 | 受众 | 内容 | 输出长度 |
 |---|---|---|---|
-| **tiny** | 普通玩家（移动端 AI 聊天 / 一行汇总） | 仅总伤害三档数字（暴击 / 期望 / 非暴击） | ≤ 2 行 |
+| **tiny** | 普通玩家（移动端 AI 聊天 / 一行汇总） | 仅总伤害双栏数字（暴击 / 非暴击） | ≤ 2 行 |
 | **brief** | 配装规划玩家（P2 配队党） | tiny + 关键乘区贡献 top 3 + warnings 摘要 | ≤ 8 行 |
 | **verbose** | 数据党 / 攻略作者（P3） | brief + 完整乘区拆解 + 公式溯源 + warnings 全文 | 完整段落 |
 | **debug** | 开发者 / QA 对账 | verbose + trace 中所有 modifier（生效 + 未生效 + 原因）+ 版本元数据 | 详尽 |
 
-CLI flag 切换：`--detail tiny|brief|verbose|debug`，默认 `brief`。
+CLI `calc` JSON 视图切换：`--view brief|verbose`，默认 `brief`。AI/plugin 渲染器仍可在 tiny / brief / verbose / debug 四档之间选择人类可读模板。
 AI plugin 默认按用户问题深度自动选档；显式可指定。
 
 ---
@@ -28,31 +28,31 @@ AI plugin 默认按用户问题深度自动选档；显式可指定。
 ### T1 · tiny / zh
 
 ```
-{{activeAgentName}} 的 {{attackName}} 期望伤害 {{expectedDamage}}（暴击 {{critDamage}} / 非暴击 {{nonCritDamage}}）。
+{{activeAgentName}} 的 {{attackName}}：非暴击 {{nonCritDamage}} / 暴击 {{critDamage}}。
 ```
 
 填充示例（仪玄 强化特殊技 vs 秽息司祭）：
 ```
-仪玄 的 符法千重-破 期望伤害 8,123,456（暴击 12,500,000 / 非暴击 4,200,000）。
+仪玄 的 符法千重-破：非暴击 4,200,000 / 暴击 12,500,000。
 ```
 
 ### T2 · tiny / en
 
 ```
-{{activeAgentName}}'s {{attackName}} deals {{expectedDamage}} expected damage (crit {{critDamage}} / non-crit {{nonCritDamage}}).
+{{activeAgentName}}'s {{attackName}} deals {{nonCritDamage}} non-crit / {{critDamage}} crit damage.
 ```
 
 Example fill:
 ```
-Yixuan's Sigil Shroud — Break deals 8,123,456 expected damage (crit 12,500,000 / non-crit 4,200,000).
+Yixuan's Sigil Shroud — Break deals 4,200,000 non-crit / 12,500,000 crit damage.
 ```
 
 ### T3 · brief / zh
 
 ```
 {{activeAgentName}} 的 {{attackName}}（{{damageType}}）
-- 期望伤害：{{expectedDamage}}
-- 暴击伤害：{{critDamage}} / 非暴击伤害：{{nonCritDamage}}
+- 非暴击伤害：{{nonCritDamage}}
+- 暴击伤害：{{critDamage}}
 
 主要乘区贡献（top 3）：
 {{#topZones}}
@@ -65,8 +65,8 @@ Yixuan's Sigil Shroud — Break deals 8,123,456 expected damage (crit 12,500,000
 填充示例：
 ```
 仪玄 的 符法千重-破（贯穿伤害）
-- 期望伤害：8,123,456
-- 暴击伤害：12,500,000 / 非暴击伤害：4,200,000
+- 非暴击伤害：4,200,000
+- 暴击伤害：12,500,000
 
 主要乘区贡献（top 3）：
 - 基础伤害区：29,076（贡献 35%）
@@ -80,8 +80,8 @@ Yixuan's Sigil Shroud — Break deals 8,123,456 expected damage (crit 12,500,000
 
 ```
 {{activeAgentName}}'s {{attackName}} ({{damageType}})
-- Expected damage: {{expectedDamage}}
-- Crit: {{critDamage}} / Non-crit: {{nonCritDamage}}
+- Non-crit damage: {{nonCritDamage}}
+- Crit damage: {{critDamage}}
 
 Top 3 zone contributions:
 {{#topZones}}
@@ -94,8 +94,8 @@ Top 3 zone contributions:
 Example fill:
 ```
 Yixuan's Sigil Shroud — Break (Sheer Damage)
-- Expected damage: 8,123,456
-- Crit: 12,500,000 / Non-crit: 4,200,000
+- Non-crit damage: 4,200,000
+- Crit damage: 12,500,000
 
 Top 3 zone contributions:
 - Base Damage Zone: 29,076 (35%)
@@ -111,10 +111,9 @@ Top 3 zone contributions:
 # {{activeAgentName}} · {{attackName}} · {{damageType}}
 
 **结果**
-- 期望伤害（理论值）：{{expectedDamageRaw}}
-- 期望伤害（游戏内显示，向上取整）：{{expectedDamageDisplay}}
-- 暴击伤害：{{critDamage}}
 - 非暴击伤害：{{nonCritDamage}}
+- 暴击伤害：{{critDamage}}
+{{#hasExpectedDamage}}- 期望伤害（可选 result-mode=expected）：{{expectedDamage}}{{/hasExpectedDamage}}
 {{#hasMultipleSegments}}- 多段总和（逐段向上取整后）：{{segmentDisplaySum}}{{/hasMultipleSegments}}
 
 **乘区拆解**
@@ -147,10 +146,9 @@ Top 3 zone contributions:
 # {{activeAgentName}} · {{attackName}} · {{damageType}}
 
 **Result**
-- Expected damage (raw): {{expectedDamageRaw}}
-- Expected damage (in-game display, ceil per segment): {{expectedDamageDisplay}}
-- Crit damage: {{critDamage}}
 - Non-crit damage: {{nonCritDamage}}
+- Crit damage: {{critDamage}}
+{{#hasExpectedDamage}}- Expected damage (optional result-mode=expected): {{expectedDamage}}{{/hasExpectedDamage}}
 {{#hasMultipleSegments}}- Multi-segment sum (ceil per segment): {{segmentDisplaySum}}{{/hasMultipleSegments}}
 
 **Zone breakdown**
@@ -284,11 +282,11 @@ Top 3 zone contributions:
 | `{{activeAgentName}}` | i18n: `glossary[agentId].label.<lang>` 派生；fallback `result.summary.activeActorId` | UX-1 glossary + UX-2 messages |
 | `{{attackName}}` | `result.attackSegments[i].id` 或 i18n 资源；多段时聚合段名 | TL-3 calc-result.md §3 |
 | `{{damageType}}` | `result.summary.damageType` (enum: `regular` / `sheer` / `anomaly` / `disorder` / `trueDamage` / `daze`，与 TL-3/PR #7 锁定一致) | TL-3 calc-result.md §2 |
-| `{{expectedDamage}}` | `result.summary.expectedDamage` | TL-3 calc-result.md §2 |
-| `{{expectedDamageRaw}}` | `result.summary.rawTotalDamage` | TL-3 calc-result.md §2 |
-| `{{expectedDamageDisplay}}` | `result.summary.displayTotalDamage` | TL-3 calc-result.md §2 |
-| `{{critDamage}}` | `result.summary.critDamage` | TL-3 calc-result.md §2 |
-| `{{nonCritDamage}}` | `result.summary.nonCritDamage` | TL-3 calc-result.md §2 |
+| `{{nonCritDamage}}` | `result.summary.lanes.nonCrit.displayDamage` | TL-3 calc-result.md §2 + D-19 |
+| `{{critDamage}}` | `result.summary.lanes.crit.displayDamage` | TL-3 calc-result.md §2 + D-19 |
+| `{{expectedDamage}}` | Optional: `result.summary.expectedDamage` when `--result-mode expected` is requested | TL-3 calc-result.md §2 + D-19 |
+| `{{expectedDamageRaw}}` | Deprecated transition: `result.summary.rawTotalDamage` in verbose/full results | TL-3 calc-result.md §2 + D-19 |
+| `{{expectedDamageDisplay}}` | Deprecated transition: `result.summary.displayTotalDamage` in verbose/full results | TL-3 calc-result.md §2 + D-19 |
 | `{{segmentDisplaySum}}` | `Σ result.attackSegments[].segmentDisplayDamage` (= `displayTotalDamage`) | TL-3 calc-result.md §3 |
 | `{{segments}}` 循环（各段 raw/display） | `result.attackSegments[]` (each: `id` / `rawDamage` / `segmentDisplayDamage` / `roundingMode`) | TL-3 calc-result.md §3 |
 | `{{topZones}}` (top 3 by contribution) | `result.buckets[]` 按 `effectiveMultiplier` 偏离 1 的程度排序 top 3；each bucket: `bucketId` / `effectiveMultiplier` / contributors[] top 1 | TL-3 calc-result.md §4 |
@@ -313,7 +311,7 @@ Top 3 zone contributions:
 - `defenseSkipped`（贯穿伤害）：检查 `result.summary.damageType === "sheer"` 且 trace 中有 `defenseSkipped` 标记 → verbose 档输出"防御区已跳过"
 
 **双语 i18n 边界（与 v0.3 一致）**：
-- 模板内嵌固定标签（"期望伤害" / "Expected damage" 等）硬编码
+- 模板内嵌固定标签（"非暴击伤害" / "Crit damage" 等）硬编码
 - `{{warnings.message}}` / `{{errors.message}}` 走 `messages.<lang>.json`（UX-2 v0.4）
 - 术语标签（`贯穿伤害` / `Sheer Damage`）走 glossary v0.4 `label.<lang>`
 
@@ -321,7 +319,7 @@ Top 3 zone contributions:
 
 ## 双语 i18n 复用 messages 资源
 
-模板内嵌的固定标签（如 `期望伤害` / `Expected damage` / `已生效 modifiers` / `Active modifiers`）是模板硬编码，**不**走 `messages.zh.json` / `messages.en.json`（那是错误文案库）。
+模板内嵌的固定标签（如 `非暴击伤害` / `Crit damage` / `已生效 modifiers` / `Active modifiers`）是模板硬编码，**不**走 `messages.zh.json` / `messages.en.json`（那是错误文案库）。
 
 但模板填充中的：
 - `{{warnings.message}}` — 走 `messages.<lang>.json` 的 ERR-* 文案（与 UX-2 一致）

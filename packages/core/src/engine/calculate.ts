@@ -3,6 +3,7 @@ import type {
   AnomalyStatus,
   AttackSegment,
   BattleSnapshot,
+  CalcSummary,
   BucketContributor,
   BucketResult,
   CalcResult,
@@ -86,6 +87,10 @@ export function calculate(input: unknown, options: CalculateOptions = {}): CalcR
     ...attackSegments.map(segment => segment.expectedDamage ?? segment.rawDamage),
     ...eventResults.map(event => event.rawDamage),
   ])
+  const dazeValue = sum(attackSegments.map(segment => segment.dazeValue ?? 0))
+  const anomalyBuildup = sum(attackSegments.map(segment => segment.anomalyBuildup ?? 0))
+  const lanes = getSummaryLanes(attackSegments, eventResults)
+  const daze = getSummaryDaze(attackSegments, dazeValue, snapshot.enemy.dazeCap)
   const result: CalcResult = {
     schemaVersion: snapshot.schemaVersion,
     gameVersion: snapshot.gameVersion,
@@ -103,13 +108,15 @@ export function calculate(input: unknown, options: CalculateOptions = {}): CalcR
       activeActorId: activeActor.agentId,
       ...(snapshot.enemy.enemyId === undefined ? {} : { enemyId: snapshot.enemy.enemyId }),
       damageType: getSummaryDamageType(attackSegments, eventResults),
+      lanes,
+      ...(daze === undefined ? {} : { daze }),
       rawTotalDamage,
       displayTotalDamage,
       expectedDamage,
       critDamage: sum(attackSegments.map(segment => segment.critDamage ?? segment.rawDamage)),
       nonCritDamage: sum(attackSegments.map(segment => segment.nonCritDamage ?? segment.rawDamage)),
-      dazeValue: sum(attackSegments.map(segment => segment.dazeValue ?? 0)),
-      anomalyBuildup: sum(attackSegments.map(segment => segment.anomalyBuildup ?? 0)),
+      dazeValue,
+      anomalyBuildup,
       disorderDamage: sum(attackSegments.filter(segment => segment.damageType === "disorder").map(segment => segment.rawDamage)),
       trueDamage: sum(eventResults.map(event => event.rawDamage)),
     },
@@ -1374,6 +1381,65 @@ function getActiveActor(snapshot: BattleSnapshot): AgentSnapshot {
     throw new Error("activeActor.agentId must reference a team agent")
 
   return actor
+}
+
+function getSummaryLanes(
+  attackSegments: SegmentResult[],
+  manualEvents: ManualEventResult[],
+): CalcSummary["lanes"] {
+  const crittableSegments = attackSegments.filter(segment => usesStandardCrit(segment.damageType))
+  const fixedSegments = attackSegments.filter(segment => !usesStandardCrit(segment.damageType))
+  const fixedRawDamage = sum([
+    ...fixedSegments.map(segment => segment.rawDamage),
+    ...manualEvents.map(event => event.rawDamage),
+  ])
+  const fixedDisplayDamage = sum([
+    ...fixedSegments.map(segment => segment.segmentDisplayDamage),
+    ...manualEvents.map(event => event.displayDamage),
+  ])
+  const lanes: CalcSummary["lanes"] = {}
+
+  if (crittableSegments.length > 0) {
+    const nonCritRawDamage = sum(crittableSegments.map(segment => segment.nonCritDamage ?? segment.rawDamage)) + fixedRawDamage
+    const critRawDamage = sum(crittableSegments.map(segment => segment.critDamage ?? segment.rawDamage)) + fixedRawDamage
+    lanes.nonCrit = {
+      rawDamage: nonCritRawDamage,
+      displayDamage: sum(crittableSegments.map(segment => Math.ceil(segment.nonCritDamage ?? segment.rawDamage))) + fixedDisplayDamage,
+    }
+    lanes.crit = {
+      rawDamage: critRawDamage,
+      displayDamage: sum(crittableSegments.map(segment => Math.ceil(segment.critDamage ?? segment.rawDamage))) + fixedDisplayDamage,
+    }
+  }
+
+  if (fixedSegments.length > 0 || manualEvents.length > 0) {
+    lanes.fixed = {
+      rawDamage: fixedRawDamage,
+      displayDamage: fixedDisplayDamage,
+    }
+  }
+
+  return lanes
+}
+
+function getSummaryDaze(
+  attackSegments: SegmentResult[],
+  value: number,
+  enemyDazeCap: number | undefined,
+): CalcSummary["daze"] | undefined {
+  if (!attackSegments.some(segment => segment.dazeValue !== undefined))
+    return undefined
+
+  if (enemyDazeCap === undefined || enemyDazeCap <= 0) {
+    return { value }
+  }
+
+  const ratioRaw = (value / enemyDazeCap) * 100
+  return {
+    value,
+    ratioRaw,
+    ratioDisplay: Math.floor(ratioRaw),
+  }
 }
 
 function getSummaryDamageType(

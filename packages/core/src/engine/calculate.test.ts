@@ -55,6 +55,11 @@ describe("calculate", () => {
     expect(defense?.effectiveMultiplier).toBeCloseTo(0.454545, 5)
     expect(result.summary.rawTotalDamage).toBeCloseTo(454.545, 3)
     expect(result.summary.displayTotalDamage).toBe(455)
+    expect(result.summary.lanes.nonCrit?.rawDamage).toBeCloseTo(454.545, 3)
+    expect(result.summary.lanes.nonCrit?.displayDamage).toBe(455)
+    expect(result.summary.lanes.crit?.rawDamage).toBeCloseTo(454.545, 3)
+    expect(result.summary.lanes.crit?.displayDamage).toBe(455)
+    expect(result.summary.lanes.fixed).toBeUndefined()
   })
 
   it("shows the corrupted shield sheer damage defense skip ratio", () => {
@@ -244,6 +249,9 @@ describe("calculate", () => {
     expect(result.attackSegments[0]?.dazeValue).toBe(180)
     expect(result.attackSegments[0]?.dazeRatioRaw).toBe(18)
     expect(result.attackSegments[0]?.dazeRatioDisplay).toBe(18)
+    expect(result.summary.daze?.value).toBe(180)
+    expect(result.summary.daze?.ratioRaw).toBe(18)
+    expect(result.summary.daze?.ratioDisplay).toBe(18)
     expect(result.buckets.some(bucket => bucket.bucketId === "dazeInflictZone")).toBe(true)
   })
 

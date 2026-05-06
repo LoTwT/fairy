@@ -50,6 +50,19 @@ interface CalcSummary {
   activeActorId: string
   enemyId?: string
   damageType: DamageType
+  lanes: {
+    nonCrit?: DamageLane
+    crit?: DamageLane
+    fixed?: DamageLane
+  }
+  daze?: {
+    value: number
+    ratioRaw?: number
+    ratioDisplay?: number
+  }
+
+  // Deprecated transition fields. Kept in verbose/full results for V1
+  // compatibility; default CLI brief output does not expose them.
   rawTotalDamage: number
   displayTotalDamage: number
   expectedDamage?: number
@@ -60,11 +73,28 @@ interface CalcSummary {
   disorderDamage?: number
   trueDamage?: number
 }
+
+interface DamageLane {
+  rawDamage: number
+  displayDamage: number
+}
 ```
 
-`rawTotalDamage` is the theoretical sum before display rounding.
-`displayTotalDamage` is the game-style displayed total after each segment has
-been rounded according to the segment rounding rule.
+`lanes.nonCrit` and `lanes.crit` are the default user-facing damage outcomes
+for standard crittable damage (`regular` / `sheer`). They are deterministic
+branches, not a crit-rate expectation. `lanes.fixed` is used for deterministic
+damage paths such as anomaly/disorder/daze/manual events; when a calculation
+mixes crittable and fixed damage, the fixed amount is also included in the
+non-crit and crit lane totals.
+
+`daze.value` is the accumulated daze value. When `enemy.dazeCap` is available,
+`daze.ratioRaw` is `daze.value / enemy.dazeCap * 100`, and
+`daze.ratioDisplay` is the floored in-game percentage display.
+
+`rawTotalDamage`, `displayTotalDamage`, and `expectedDamage` are retained for
+V1 transition compatibility and full trace/audit views. New CLI/user-facing
+renderers should prefer `lanes` and only request expectation explicitly through
+`--result-mode expected`.
 
 ## 3. Segment Results
 

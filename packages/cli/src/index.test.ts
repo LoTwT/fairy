@@ -62,15 +62,33 @@ const messages = {
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), "../../..")
 
 describe("fairy cli", () => {
-  it("calculates a snapshot from stdin and writes CalcResult JSON", async () => {
+  it("calculates a snapshot from stdin and writes brief JSON by default", async () => {
     const io = fakeIo({ stdin: JSON.stringify(baseSnapshot) })
     const code = await runCli(["calc", "-", "--lang", "en"], io)
+    const result = JSON.parse(io.output.stdout) as {
+      schemaVersion: string
+      summary: { lanes: { nonCrit: { rawDamage: number; displayDamage: number }; crit: { rawDamage: number; displayDamage: number } }; expectedDamage?: number }
+      trace?: unknown[]
+    }
+
+    expect(code).toBe(0)
+    expect(result.schemaVersion).toBe("fairy-cli-calc-brief-v1")
+    expect(result.summary.lanes.nonCrit.rawDamage).toBeCloseTo(454.545, 3)
+    expect(result.summary.lanes.nonCrit.displayDamage).toBe(455)
+    expect(result.summary.lanes.crit.rawDamage).toBeCloseTo(454.545, 3)
+    expect(result.summary.expectedDamage).toBeUndefined()
+    expect(result.trace).toBeUndefined()
+    expect(io.output.stderr).toBe("")
+  })
+
+  it("writes the full CalcResult when --view verbose is selected", async () => {
+    const io = fakeIo({ stdin: JSON.stringify(baseSnapshot) })
+    const code = await runCli(["calc", "-", "--view", "verbose"], io)
     const result = JSON.parse(io.output.stdout) as { summary: { rawTotalDamage: number }; trace: unknown[] }
 
     expect(code).toBe(0)
     expect(result.summary.rawTotalDamage).toBeCloseTo(454.545, 3)
     expect(result.trace.length).toBeGreaterThan(0)
-    expect(io.output.stderr).toBe("")
   })
 
   it("renders localized warning diagnostics to stderr without changing stdout JSON", async () => {
@@ -180,11 +198,32 @@ describe("fairy cli", () => {
     snapshot.team[0]!.panel.critRate = 0.5
     snapshot.team[0]!.panel.critDamage = 1
     const io = fakeIo({ stdin: JSON.stringify(snapshot) })
-    const code = await runCli(["calc", "-", "--result-mode", "crit"], io)
+    const code = await runCli(["calc", "-", "--result-mode", "crit", "--view", "verbose"], io)
     const result = JSON.parse(io.output.stdout) as { summary: { rawTotalDamage: number } }
 
     expect(code).toBe(0)
     expect(result.summary.rawTotalDamage).toBeCloseTo(909.091, 3)
+  })
+
+  it("keeps expected mode optional in brief output", async () => {
+    const snapshot = structuredClone(baseSnapshot)
+    snapshot.team[0]!.panel.critRate = 0.5
+    snapshot.team[0]!.panel.critDamage = 1
+    const io = fakeIo({ stdin: JSON.stringify(snapshot) })
+    const code = await runCli(["calc", "-", "--result-mode", "expected"], io)
+    const result = JSON.parse(io.output.stdout) as {
+      resultMode: string
+      summary: {
+        expectedDamage: number
+        lanes: { nonCrit: { rawDamage: number }; crit: { rawDamage: number } }
+      }
+    }
+
+    expect(code).toBe(0)
+    expect(result.resultMode).toBe("expected")
+    expect(result.summary.expectedDamage).toBeCloseTo(681.818, 3)
+    expect(result.summary.lanes.nonCrit.rawDamage).toBeCloseTo(454.545, 3)
+    expect(result.summary.lanes.crit.rawDamage).toBeCloseTo(909.091, 3)
   })
 
   it("accepts boolean flags before the input path", async () => {
@@ -194,10 +233,10 @@ describe("fairy cli", () => {
       },
     })
     const code = await runCli(["calc", "--pretty", "snapshot.json"], io)
-    const result = JSON.parse(io.output.stdout) as { summary: { rawTotalDamage: number } }
+    const result = JSON.parse(io.output.stdout) as { summary: { lanes: { nonCrit: { rawDamage: number } } } }
 
     expect(code).toBe(0)
-    expect(result.summary.rawTotalDamage).toBeCloseTo(454.545, 3)
+    expect(result.summary.lanes.nonCrit.rawDamage).toBeCloseTo(454.545, 3)
     expect(io.output.stdout.startsWith("{\n")).toBe(true)
   })
 
@@ -234,6 +273,17 @@ describe("fairy cli", () => {
     expect(code).toBe(1)
     expect(error.error.code).toBe("ERR-CLI-ARG")
     expect(error.error.message).toBe("Localized argument problem: --lang must be zh or en")
+    expect(io.output.stdout).toBe("")
+  })
+
+  it("returns a localized error for invalid view values", async () => {
+    const io = fakeIo({ stdin: JSON.stringify(baseSnapshot) })
+    const code = await runCli(["calc", "-", "--view", "full"], io)
+    const error = JSON.parse(io.output.stderr) as { ok: false; error: { code: string; message: string } }
+
+    expect(code).toBe(1)
+    expect(error.error.code).toBe("ERR-CLI-ARG")
+    expect(error.error.message).toBe("Localized argument problem: --view must be brief or verbose")
     expect(io.output.stdout).toBe("")
   })
 

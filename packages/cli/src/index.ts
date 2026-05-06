@@ -7,6 +7,7 @@ import { cliErrorFallbackMessages, isCliErrorCode, type CliErrorCode } from "./e
 
 type Lang = "zh" | "en"
 type ResultMode = "expected" | "crit" | "nonCrit"
+type View = "brief" | "verbose"
 
 interface CliIo {
   cwd: string
@@ -78,9 +79,11 @@ export async function runCli(argv: string[], io: CliIo = nodeIo()): Promise<numb
 
 async function runCalc(parsed: ParsedArgs, io: CliIo, lang: Lang): Promise<number> {
   const snapshot = await readSnapshotInput(parsed, io, 0)
-  const result = calculate(withResultMode(snapshot, parseResultMode(parsed.flags.get("result-mode") ?? parsed.flags.get("resultMode"))))
+  const view = parseView(parsed.flags.get("view"))
+  const resultMode = parseResultMode(parsed.flags.get("result-mode") ?? parsed.flags.get("resultMode"))
+  const result = calculate(withResultMode(snapshot, resultMode))
   await writeDiagnostics(io, result, lang)
-  writeJson(io, result, parsed.flags.has("pretty"))
+  writeJson(io, view === "verbose" ? result : toBriefCalcResult(result, resultMode), parsed.flags.has("pretty"))
   return result.errors.length > 0 ? 1 : 0
 }
 
@@ -267,6 +270,35 @@ function parseResultMode(value: string | boolean | undefined): ResultMode | unde
   throw cliError("ERR-CLI-ARG", { message: "--result-mode must be expected, crit, or nonCrit" })
 }
 
+function parseView(value: string | boolean | undefined): View {
+  if (value === undefined || value === false)
+    return "brief"
+  if (value === "brief" || value === "verbose")
+    return value
+  throw cliError("ERR-CLI-ARG", { message: "--view must be brief or verbose" })
+}
+
+function toBriefCalcResult(result: CalcResult, resultMode: ResultMode | undefined) {
+  const summary = result.summary
+  return {
+    schemaVersion: "fairy-cli-calc-brief-v1",
+    view: "brief",
+    ...(resultMode === undefined ? {} : { resultMode }),
+    calculationId: result.calculationId,
+    summary: {
+      activeActorId: summary.activeActorId,
+      ...(summary.enemyId === undefined ? {} : { enemyId: summary.enemyId }),
+      damageType: summary.damageType,
+      lanes: summary.lanes,
+      ...(summary.daze === undefined ? {} : { daze: summary.daze }),
+      ...(summary.anomalyBuildup === undefined || summary.anomalyBuildup === 0 ? {} : { anomalyBuildup: summary.anomalyBuildup }),
+      ...(resultMode === "expected" ? { expectedDamage: summary.expectedDamage ?? summary.rawTotalDamage } : {}),
+    },
+    warnings: result.warnings,
+    errors: result.errors,
+  }
+}
+
 function readStringFlag(parsed: ParsedArgs, name: string): string {
   const value = parsed.flags.get(name)
   if (typeof value !== "string" || value.length === 0)
@@ -346,6 +378,7 @@ function getHelp() {
     commands: supportedCommands,
     flags: {
       "--lang": ["zh", "en"],
+      "--view": ["brief", "verbose"],
       "--result-mode": ["expected", "crit", "nonCrit"],
       "--pretty": true,
       "--path": "scan target path",

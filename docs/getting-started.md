@@ -41,6 +41,7 @@ The examples are strict JSON files under `examples/snapshots/`:
 | `pnpm --silent fairy:s1` | `examples/snapshots/s1-yixuan-sheer.json` | S1 Yixuan sheer damage against Corruption Priest |
 | `pnpm --silent fairy:s2` | `examples/snapshots/s2-yanagi-disorder.json` | S2 Yanagi shock disorder against Pompey |
 | `pnpm --silent fairy:s3` | `examples/snapshots/s3-team-g22-g23-acceptance.json` | S3 V1 G22/G23 manual-acceptance demo with Nicole and Yanagi accepted effects |
+| direct file | `examples/snapshots/dogfood-anby-core-f-basic16-dullahan-9528.json` | Dogfooding regression: Anby core F basic 16 vs Dullahan defense 952.8 |
 
 The narrative source for S1 and S2 is
 [`docs/ux/starter-scenarios.md`](ux/starter-scenarios.md). That document uses
@@ -63,6 +64,7 @@ The root alias forwards arguments to `@fairy/cli`:
 ```bash
 pnpm --silent fairy -- help --pretty
 pnpm --silent fairy -- calc examples/snapshots/s1-yixuan-sheer.json --lang zh --pretty
+pnpm --silent fairy -- calc examples/snapshots/s1-yixuan-sheer.json --lang zh --view verbose --pretty
 pnpm --silent fairy -- explain examples/snapshots/s1-yixuan-sheer.json --lang zh --pretty
 pnpm --silent fairy -- scan examples/snapshots/s1-yixuan-sheer.json --path 'team[0].panel.attack' --from 1000 --to 2000 --step 100 --pretty
 ```
@@ -88,14 +90,20 @@ cat examples/snapshots/s1-yixuan-sheer.json \
 
 Every CLI command writes JSON to stdout. For `calc`, start with:
 
-- `summary.displayTotalDamage`
-- `summary.rawTotalDamage`
-- `attackSegments[]`
-- `buckets[]`
-- `modifiers[]`
-- `trace[]`
+- `summary.lanes.nonCrit.displayDamage`
+- `summary.lanes.crit.displayDamage`
+- `summary.daze.value`
 - `warnings[]`
 - `errors[]`
+
+`fairy calc` defaults to `--view brief`, so it only prints the summary-first
+shape plus diagnostics. Use `--view verbose` when you need legacy full fields
+such as `summary.rawTotalDamage`, `attackSegments[]`, `buckets[]`,
+`modifiers[]`, and `trace[]`.
+
+Use `--result-mode expected` only for statistical/theory checks. The default
+brief view shows deterministic non-crit and crit lanes instead of crit-rate
+expectation.
 
 Warnings and errors are also rendered to stderr in the selected `--lang zh|en`
 language. JSON diagnostic keys remain language-independent.

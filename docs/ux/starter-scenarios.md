@@ -1,6 +1,6 @@
 # Starter Scenarios — UX v0.3 重定向稿 A
 
-作者：@UX  日期：2026-05-05  状态：v0.4.1（UX-S5-1-patch — 对齐 D-13 V1 = DA + cleaned-schema-spec.md externalBossId 体系）
+作者：@UX  日期：2026-05-05  状态：v0.4.2（D-19 patch — 默认 nonCrit/crit 双栏，expected 改为可选）
 
 > Starter scenarios = AI plugin / CLI 用户首次接入时的"开箱即用"参考用例。每个 scenario 包含：
 > - 自然语言描述（zh + en 双语）
@@ -98,13 +98,14 @@
 ```jsonc
 {
   "damageType": "sheer",
-  "expectedDamage": "≈ X (具体值由 core 计算)",
-  "critDamageMax": "≈ X * (1 + critDamage)",
-  "nonCritDamage": "≈ X / (1 + critRate * critDamage)",
+  "lanes": {
+    "nonCrit": { "displayDamage": "≈ X（由 core 计算）" },
+    "crit": { "displayDamage": "≈ X * (1 + critDamage)" }
+  },
   "trace": {
     "baseDamageZone": "= sheerForce 2423 * multiplier 12.0",
     "damageBonusZone": "1.0 (无外援)",
-    "critZone": "暴击时 1 + 200.4% = 3.004 / 期望 1 + 0.554*2.004 = 2.110",
+    "critZone": "暴击时 1 + 200.4% = 3.004；默认输出同时展示非暴击 / 暴击两栏，不使用期望模式",
     "defenseZone": "已跳过 (sheer 伤害)",
     "resistanceZone": "1 - (-0.2) = 1.2 (玄墨按以太结算; 司祭以太 0.4 抗性? — 待 data 验证)",
     "vulnerabilityZone": "1 + 25% 秽盾减伤 reverse = 0.75",
