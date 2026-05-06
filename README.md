@@ -10,13 +10,18 @@ V1 focuses on a TypeScript monorepo with three packages:
 
 Start with [docs/index.md](docs/index.md).
 
-## V1 Dogfooding Status
+## V1 Release Gate Status
 
-V1 is currently validated through lo-user single-person dogfooding plus QA
-regression. It has not gone through broad community dogfooding yet.
+V1 has passed lo-user single-person dogfooding with an overall 4/5 score and
+zero unresolved B-Calc blockers. It has not gone through broad community
+dogfooding yet.
 
 Use [docs/getting-started.md](docs/getting-started.md) for the repo-local
 dogfooding flow and executable examples.
+
+`fairy calc` defaults to `--view brief`, which returns summary-first non-crit
+and crit lanes. The dogfooding Anby fixture is covered by the `@fairy/cli` test
+suite and remains part of the fixed `pnpm test` verification chain.
 
 ## Development
 

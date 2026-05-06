@@ -13,13 +13,14 @@ Fairy 是绝区零 1-3 代理人静态快照伤害计算器。V1 目标是 `@fai
 - QA 策略：[qa/](qa/)
 - UX 文案与场景：[ux/](ux/)
 
-## S5 当前重点
+## V1 release gate 当前重点
 
-1. 以危局强袭战（Deadly Assault）为 V1 cleaned-data 主场景，优先产出 `@fairy/data/cleaned/deadly-assault`。
-2. 保留 Excel 与 raw crawler source archive，但 V1 不要求全量清洗 Excel enemy；Excel enemy 作为后备 / V1.x 扩展源。
-3. 米游社用于危局强袭战中文详情正文、3 个可选 buff、3 个 boss 房间机制文本、zh/en source-text 对照；buhflipexplode 用于 DA period / boss slot / buff / multiplier overlay 和英文源文本。
-4. V1 golden fixture 真数据复算收窄到 19 个锚点；G13 异常阈值规则组合、部位破坏与非 DA enemy 失衡恢复锚点推迟到 V1.x。
-5. 当前 #43 replay 已生成 `data/cleaned/audit/v1-agent-source-candidates.json`、`data/cleaned/audit/*.acceptance.json` 与 `data/cleaned/golden/v1-replay-report.json`；19 个 V1 锚点全部跑通，`releaseReady=true`，G13/G18/G19/G20 仍作为 V1.x deferred 可见。
+1. lo-user 单人 dogfooding 已给出 4/5，B-Calc blocker 当前为 0；V1 仍未经过广泛社区 dogfooding。
+2. V1 golden fixture 真数据复算收窄到 19 个锚点；G13 异常阈值规则组合、G18 部位破坏真实伤害、G19/G20 失衡恢复时间推迟到 V1.x。
+3. `data/cleaned/audit/v1-agent-source-candidates.json`、`data/cleaned/audit/*.acceptance.json` 与 `data/cleaned/golden/v1-replay-report.json` 已生成；19 个 V1 锚点全部跑通，`releaseReady=true`，G13/G18/G19/G20 仍作为 V1.x deferred 可见。
+4. `fairy calc` 默认 `--view brief`，输出 summary-first 的 non-crit / crit lanes；完整 trace 通过 `--view verbose` 查看。
+5. 安比 dogfooding fixture `examples/snapshots/dogfood-anby-core-f-basic16-dullahan-9528.json` 已进入 `packages/cli/src/examples.test.ts`，因此由根命令 `pnpm test` 固定覆盖。
+6. V1 tag / release notes 前仍需 Product errata 与 QA release-readiness review；release 流程本身另行锁定。
 
 ## 关键文档
 

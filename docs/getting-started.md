@@ -1,12 +1,14 @@
 # Fairy V1 Dogfooding Quick Start
 
-Status: V1 dogfood candidate
+Status: V1 release-gate candidate
 
 Fairy V1 is currently a repo-local CLI baseline. It is not published as a
 global npm package yet. Use this guide for dogfooding and pre-release review.
 
-V1 dogfooding is currently scoped to lo-user single-person deep validation plus
-QA regression. It has not gone through broad community dogfooding yet.
+V1 dogfooding has passed lo-user single-person deep validation with an overall
+4/5 score and zero unresolved B-Calc blockers. QA regression and release notes
+still gate the V1 tag. Fairy has not gone through broad community dogfooding
+yet.
 
 ## 1. Prepare a Clean Checkout
 
@@ -42,6 +44,11 @@ The examples are strict JSON files under `examples/snapshots/`:
 | `pnpm --silent fairy:s2` | `examples/snapshots/s2-yanagi-disorder.json` | S2 Yanagi shock disorder against Pompey |
 | `pnpm --silent fairy:s3` | `examples/snapshots/s3-team-g22-g23-acceptance.json` | S3 V1 G22/G23 manual-acceptance demo with Nicole and Yanagi accepted effects |
 | direct file | `examples/snapshots/dogfood-anby-core-f-basic16-dullahan-9528.json` | Dogfooding regression: Anby core F basic 16 vs Dullahan defense 952.8 |
+
+The Anby dogfooding fixture is not only a manual example. It is asserted in
+`packages/cli/src/examples.test.ts` and therefore runs as part of the fixed
+`pnpm test` verification chain. Expected summary values are non-crit `224`,
+crit `336`, and daze value `37.536`.
 
 The narrative source for S1 and S2 is
 [`docs/ux/starter-scenarios.md`](ux/starter-scenarios.md). That document uses
@@ -134,5 +141,6 @@ Feedback routing:
 - Users provide or edit explicit JSON snapshots.
 - The V1 golden gate is 19 anchors passed with zero blocking diagnostics.
 - The V1 dogfooding gate is lo-user single-person deep validation plus QA
-  regression; broad community validation is deferred.
+  regression. It passed 4/5 with zero unresolved B-Calc blockers; broad
+  community validation is deferred.
 - G13, G18, G19, and G20 are intentionally deferred to V1.x.
