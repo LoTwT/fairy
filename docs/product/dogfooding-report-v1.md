@@ -1,0 +1,126 @@
+# Fairy V1 · Dogfooding Report
+
+- 文档版本：v1.0（release gate evidence）
+- 报告人：@Product
+- dogfooding 期间：2026-05-05 ~ 2026-05-07
+- 试用人：lo-user 单人深度试用（DD-003 锁定）
+- 整体打分：**4 / 5**
+- 结论：**通过 release gate**
+
+---
+
+## 1. dogfooding 范围
+
+按 `docs/product/dogfooding-v1.md` §1.2 执行：
+
+| 维度 | 验证方式 | 结果 |
+|---|---|---|
+| **可用性** | 按 getting-started.md 从零跑通 | ✅ clone + install + S1/S2/S3 alias + verify:golden-v1 全过 |
+| **可读性** | CLI 输出能看懂 / trace + sourceRefs 够解释 | ⚠️ 默认输出反馈"太复杂"→ 触发 D-19 reform，已修 |
+| **数值正确性** | S1/S2/S3 + 自建 snapshot 数值符合预期 | ✅ 安比核心技 F + basic 16 + 杜拉罕 defense 952.8 → nonCrit=224 / crit=336 / dazeValue=37.536，三方校对通过 |
+| **错误友好性** | ERR-* 文案能让试用人 self-recover | （未做边界探测，未触发 ERR 文案验证） |
+| **范围漏洞** | 想算但 V1 不支持 | 未报告 |
+
+---
+
+## 2. dogfooding 反馈卡（汇总）
+
+### F-2026-05-06-01：默认 CLI 输出过于复杂
+- **类别**：U-Scenario
+- **现象**：lo-user 试用 Day 1/2 反馈默认 `fairy calc` 输出包含 `attackSegments / buckets / modifiers / trace` 全字段太多，需要 jq 过滤才能看到核心结果
+- **期望**：默认输出简洁，需要详尽时 opt-in
+- **解决**：D-19 V1 CLI 输出 reform — `--view brief|verbose` 默认 brief，`summary.lanes.{nonCrit, crit, fixed}` + `summary.daze` 一眼看懂
+- **修复 PR**：#30（commit `74c5f83`）
+- **状态**：✅ 已修 + lo-user 验证通过
+
+### F-2026-05-06-02：暴击 / 不暴击应并列展示，废 expectation 默认
+- **类别**：U-Scenario / B-Calc.non-blocker（输出形态）
+- **现象**：原默认输出含 expectation 加权平均；玩家对账时不直观，希望直接看到 nonCrit / crit 两栏并列
+- **期望**：默认 nonCrit + crit 双值；expected 可选
+- **解决**：D-19 同 PR：summary lanes 双栏 + `--result-mode expected` 保留可选
+- **修复 PR**：#30
+- **状态**：✅ 已修
+
+### F-2026-05-06-03：自建 snapshot 流程
+- **类别**：U-Scenario（dogfooding 体验，非 bug）
+- **现象**：lo-user 想自建 my-anby-snapshot.json 测自己队伍，但需要查游戏内权威数值（base attack / 倍率 / boss defense 等）
+- **期望**：有人帮查权威数据
+- **解决**：TL 协助提供 Excel 数据源对照（task #62 / #63）；Anby fixture 加入正式 fixture 集
+- **状态**：✅ 已解决；安比 fixture 入仓作为 dogfooding regression baseline
+
+### F-2026-05-06-04：G22/G23 manual acceptance + provider/skill-level fail-loud
+- **类别**：B-Calc.blocker（实施期间发现）
+- **现象**：QA 在 PR #28 review 中发现 C 模板（Yanagi 极性紊乱）在缺 provider 或缺技能等级时会 silent fallback 到 1 级 / 0 精通，违反"技能等级必须明确"心智
+- **期望**：fail loud
+- **解决**：schema 层加 fail-loud 校验 + 负向测试
+- **修复 PR**：#28 commit `3f5e67a`
+- **状态**：✅ 已修 + QA 二次复核通过
+
+---
+
+## 3. lo-user 整体打分
+
+**4 / 5**
+
+dogfooding 通过 release gate（≥4/5）。
+
+### 4/5 而不是 5/5 的可能失分点
+
+> 待 lo-user 选填 — 暂无具体失分项；按"无具体失分点"记录。如果 lo-user 后续想补充，可作为 V1.x backlog 触发条件。
+
+---
+
+## 4. 已知限制（V1 release notes 待标注）
+
+- **DD-003 单人 dogfooding 限制**：V1 仅由 lo-user 单人深度 dogfood 验证 + QA 回归，**未经社区广泛验证**
+- **V1 黄金集 = 19 anchors**（D-13 errata）：G13 / G18 / G19 / G20 推迟到 V1.x（涉及 data-driven anomaly threshold rule composition / 部位破坏真实伤害 / 失衡恢复时间等扩展功能）
+- **米游社 sourceConflict 3 个**（21 澄意 / 8 灼冽 / 1 破招）：non-blocking historical 记录，cleaned typed modifier 发布前需人工 audit gate 触发时再决（Day 0 不阻塞）
+- **dogfooding 边界探测未完整覆盖**：lo-user Day 3（`--lang en` 验证 / 故意造错 ERR-* 验证）未执行；Product 自评属 known limitation，不阻塞 release
+
+---
+
+## 5. release-readiness gate
+
+按 `docs/product/dogfooding-v1.md` §4.1 检查：
+
+| 条件 | 状态 |
+|---|---|
+| B-Calc.blocker：0 件未修 | ✅ 0 件 |
+| B-Calc.non-blocker：已重新分类 | ✅ F-02 归 U-Scenario，已 absorbed by D-19 |
+| U-ErrCopy / U-Scenario：可修已修，不修加 known limitation 注解 | ✅ F-01 / F-02 / F-03 已修；无 unresolved item |
+| P-Range：全部入 V1.x backlog | ✅ G13/G18/G19/G20 已 V1.x（D-13）；其他无新增 |
+| lo-user 整体打分 ≥ 4/5 | ✅ 4/5 |
+
+**通过 release gate**。
+
+---
+
+## 6. 后续流程
+
+按 `docs/product/dogfooding-v1.md` §4.2：
+
+1. ✅ lo-user 宣布通过 + 打分（2026-05-07 00:58）
+2. ✅ Product 整理 dogfooding-report-v1.md（本文件，入仓后）
+3. ⏳ QA release-readiness review task：
+   - 重跑 `pnpm check` / `pnpm test` / `verify:golden-v1` / S1/S2/S3 alias + `jq empty`
+   - 抽查 B-Calc.blocker 修复回归（D-19 PR #30 / G22/G23 PR #28）
+4. ⏳ Product errata PR：DD-001（米游社 D-17）+ DD-002（D-13 19 anchors）+ DD-003（dogfooding gate）+ dogfooding-report 链接 + V1 release notes
+5. ⏳ V1 release（git tag 命名 / 是否 npm publish 待 errata PR 时一并定）
+
+---
+
+## 附录 A · dogfooding 期间合入的关键 PR
+
+| PR | 内容 | commit |
+|---|---|---|
+| PR #28 | G22/G23 manual acceptance + fail-loud | `3f5e67a` |
+| PR #30 | D-19 CLI 输出 reform（brief view + lanes） | `74c5f83` |
+
+## 附录 B · 整体打分明细（lo-user 自评）
+
+1. 安装是否成功？花了多久？卡在哪？— 成功 / 一次跑通
+2. 跑过哪些命令？— calc + verify:golden-v1 + S1/S2/S3 alias + 自建 my-anby-snapshot
+3. 输出能看懂吗？哪里看不懂？— 默认输出曾"太复杂"反馈触发 D-19 修复，修后看懂
+4. 数值是否对得上预期？— 安比 nonCrit 224 / crit 336 / dazeValue 37.536 三方校对通过
+5. 想算但 V1 不支持的场景？— 未报告
+6. 整体 1~5 分？— **4 / 5**
