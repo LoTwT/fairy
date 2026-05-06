@@ -19,6 +19,39 @@ export const calcSummarySchema = z
     activeActorId: z.string().min(1),
     enemyId: z.string().min(1).optional(),
     damageType: damageTypeSchema,
+    lanes: z
+      .object({
+        nonCrit: z
+          .object({
+            rawDamage: z.number().finite(),
+            displayDamage: z.number().finite(),
+          })
+          .strict()
+          .optional(),
+        crit: z
+          .object({
+            rawDamage: z.number().finite(),
+            displayDamage: z.number().finite(),
+          })
+          .strict()
+          .optional(),
+        fixed: z
+          .object({
+            rawDamage: z.number().finite(),
+            displayDamage: z.number().finite(),
+          })
+          .strict()
+          .optional(),
+      })
+      .strict(),
+    daze: z
+      .object({
+        value: z.number().finite(),
+        ratioRaw: z.number().finite().optional(),
+        ratioDisplay: z.number().finite().optional(),
+      })
+      .strict()
+      .optional(),
     rawTotalDamage: z.number().finite(),
     displayTotalDamage: z.number().finite(),
     expectedDamage: z.number().finite().optional(),

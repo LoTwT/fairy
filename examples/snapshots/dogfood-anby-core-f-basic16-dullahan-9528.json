@@ -1,0 +1,66 @@
+{
+  "schemaVersion": "1.0.0",
+  "gameVersion": "ZZZ-2.7.3",
+  "ruleSetVersion": "rules-v0.1",
+  "dataVersion": "data-v0.1.0",
+  "sourceVersion": "dogfood-examples-v0.1.0",
+  "team": [
+    {
+      "agentId": "anby",
+      "level": 60,
+      "agentSpecialty": "stun",
+      "attribute": "electric",
+      "skillLevels": {
+        "basic": 16,
+        "core": 6
+      },
+      "panel": {
+        "attack": 658.957,
+        "maxHp": 7500.7134,
+        "defense": 612.6038,
+        "impact": 136,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyProficiency": 93,
+        "anomalyMastery": 94
+      }
+    }
+  ],
+  "activeActor": {
+    "agentId": "anby"
+  },
+  "attackSegments": [
+    {
+      "id": "dogfood-anby-basic-1",
+      "actorId": "anby",
+      "skillId": "anby.basic.voltSwift.segment1",
+      "levelKey": "basic",
+      "multiplier": 0.747,
+      "baseDazeMultiplier": 0.276,
+      "attribute": "electric",
+      "tags": [
+        "basic"
+      ],
+      "damageType": "regular",
+      "distanceDecay": 1,
+      "source": {
+        "sourceId": "manual-dogfood",
+        "sourceVersion": "2026-05-06",
+        "sourceAnchor": "slock:#fairy:6ddbcee4"
+      }
+    }
+  ],
+  "enemy": {
+    "enemyId": "dullahan-defense-9528-branch",
+    "level": 70,
+    "rank": "boss",
+    "maxHp": 4160105.1,
+    "defense": 952.8,
+    "dazeCap": 8229.7,
+    "resistance": {
+      "electric": 0
+    }
+  },
+  "modifiers": [],
+  "manualEvents": []
+}

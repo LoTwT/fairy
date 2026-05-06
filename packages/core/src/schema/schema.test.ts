@@ -361,6 +361,10 @@ describe("CalcResult schema", () => {
       summary: {
         activeActorId: "yixuan",
         damageType: "sheer",
+        lanes: {
+          nonCrit: { rawDamage: 10.2, displayDamage: 11 },
+          crit: { rawDamage: 10.2, displayDamage: 11 },
+        },
         rawTotalDamage: 10.2,
         displayTotalDamage: 11,
       },
@@ -422,6 +426,10 @@ describe("CalcResult schema", () => {
       summary: {
         activeActorId: "yixuan",
         damageType: "sheer",
+        lanes: {
+          nonCrit: { rawDamage: 10.2, displayDamage: 11 },
+          crit: { rawDamage: 10.2, displayDamage: 11 },
+        },
         rawTotalDamage: 10.2,
         displayTotalDamage: 11,
       },

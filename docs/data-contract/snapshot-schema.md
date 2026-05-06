@@ -136,9 +136,20 @@ interface CalcSummary {
   activeActorId: string         // 谁打出的 → AI prompt: "{{活动代理人}} 的"
   enemyId?: string              // 打了谁
   damageType: DamageType        // regular / sheer / anomaly / disorder / trueDamage / daze（与 TL-3/PR #7 锁定一致）
+  lanes: {
+    nonCrit?: { rawDamage: number; displayDamage: number }
+    crit?: { rawDamage: number; displayDamage: number }
+    fixed?: { rawDamage: number; displayDamage: number }
+  }
+  daze?: {
+    value: number
+    ratioRaw?: number
+    ratioDisplay?: number
+  }
+  // Deprecated transition fields, kept for verbose/full compatibility.
   rawTotalDamage: number        // 理论值（不取整）
   displayTotalDamage: number    // 游戏显示值（每段向上取整后求和）
-  expectedDamage?: number       // 期望值（含 critRate * critDamage 加权）
+  expectedDamage?: number       // 可选期望值（仅显式 result-mode=expected 时作为理论分析）
   critDamage?: number           // 暴击数值
   nonCritDamage?: number        // 非暴击数值
   dazeValue?: number            // 该次累积的失衡值
@@ -149,14 +160,14 @@ interface CalcSummary {
 ```
 
 **UX 渲染优先级**：
-- `tiny`：`expectedDamage` / `critDamage` / `nonCritDamage` 三档
-- `brief`：tiny + `damageType` + warnings 摘要
-- `verbose`：brief + `rawTotalDamage` vs `displayTotalDamage`（多段取整差异）
+- `tiny`：`lanes.nonCrit.displayDamage` / `lanes.crit.displayDamage` 双栏
+- `brief`：tiny + `damageType` + `daze` + warnings 摘要
+- `verbose`：brief + legacy `rawTotalDamage` vs `displayTotalDamage`（多段取整差异）+ full trace evidence
 - `debug`：完整字段 + dazeValue / dazeRatioRaw / dazeRatioDisplay / anomalyBuildup / disorderDamage / trueDamage 副输出
 
 **易混淆**：
 - `rawTotalDamage` 是**理论**总伤（不取整）；`displayTotalDamage` 是**游戏内显示**总伤（每段向上取整后求和）。**两者通常不相等**（攻略 PART 01 开头硬规则）。
-- `expectedDamage` 是统计意义上的**期望**（含暴击概率加权）；不是"显示值"。
+- `expectedDamage` 是统计意义上的**期望**（含暴击概率加权）；不是默认显示结果，只在显式 expected 模式 / verbose 审计里出现。
 
 ### 2.3 attackSegments / SegmentResult：多段证据
 
@@ -277,10 +288,10 @@ UX 心智：用户在 UI 上点"添加一次秽盾净除事件 + 选规则版本
 
 | 字段 | tiny | brief | verbose | debug |
 |---|---|---|---|---|
-| `summary.expectedDamage` | ✓ | ✓ | ✓ | ✓ |
-| `summary.critDamage` / `nonCritDamage` | ✓ | ✓ | ✓ | ✓ |
+| `summary.lanes.nonCrit` / `lanes.crit` | ✓ | ✓ | ✓ | ✓ |
+| `summary.expectedDamage` | — | — | 可选 | ✓ |
 | `summary.damageType` | — | ✓ | ✓ | ✓ |
-| `summary.rawTotalDamage` vs `displayTotalDamage` | — | — | ✓ | ✓ |
+| `summary.rawTotalDamage` vs `displayTotalDamage` | — | — | legacy | ✓ |
 | `attackSegments[]` 逐段 | — | — | （多段时简表） | 完整 |
 | `buckets[]` top 3 contributors | — | ✓ | — | — |
 | `buckets[]` 完整 | — | — | ✓ | ✓ |
@@ -303,7 +314,7 @@ UX 心智：用户在 UI 上点"添加一次秽盾净除事件 + 选规则版本
 
 1. **glossary v0.4 errata**：`mindscape` 主名 → `mindscapeCinema`；`driveDisc` → `driveDiscs`（plural 字段）+ `DriveDisc`（singular 类型名）双名约定；`stagger` → `daze*` 全套确认
 2. **UX-2 starter scenarios JSON skeleton 同步**：S1 / S2 / S3 三个 BattleSnapshot 替换为 TL-3 真实字段（`mindscapeCinema` / `driveDiscs` / `panelSnapshot` 改 `panel` / 加 `attribute` / `agentSpecialty` / `attackSegments[]` / `enemy` 完整结构）
-3. **UX-3 prompt-templates 字段映射 v1.0**：把 `{{placeholder}}` 占位符全部填实成 TL-3 真实字段路径（如 `result.summary.expectedDamage` / `result.buckets[?bucketId=defenseZone]` 等）
+3. **UX-3 prompt-templates 字段映射 v1.0**：把 `{{placeholder}}` 占位符全部填实成 TL-3/D-19 真实字段路径（如 `result.summary.lanes.nonCrit.displayDamage` / `result.buckets[?bucketId=defenseZone]` 等）
 4. **错误文案库扩展**：随 ERR-VER-* 双路径具体化、ERR-EVENT-* 真实伤害事件错误（如缺 baseValue）等新增条目
 5. **本文档**最终路径 = `docs/data-contract/snapshot-schema.md`（与 Product UX-4 任务描述一致）；UX 维护内容 + TL 维护可执行 schema 引用边界
 

@@ -29,6 +29,7 @@
 | **D-14** | cleaned data typed modifier 双层结构 | ✅ 锁定（2026-05-05） | Layer 1 原文层 `sourceText` / `localizedText` + Layer 2 计算层 `modifiers[]` / `calculationEffects[]` + 风险层 `unparsedEffects[]`；bucket 受控 enum 严格匹配 glossary v0.4 D-11；效果 4 级（L1 静态 / L2 静态条件 / L3 动态参数 / L4 时序需 `requiresActivation`）；确定性 pipeline + sourceTextHash + parserVersion + effectTemplateId + 人工 audit gate；AI 候选不能直接入 cleaned | 中 |
 | **D-15** | V1 package exports 4 入口 | ✅ 锁定（2026-05-05） | V1 全做：`@fairy/data/cleaned`（总入口）/ `@fairy/data/cleaned/<domain>` / `@fairy/data/types` / `@fairy/data/cleaned/i18n/<domain>`；data 包 game labels 源码 `packages/data/src/i18n/` → 发布 `packages/data/cleaned/i18n/`；UX ERR-* `docs/ux/i18n/` 完全独立 | 中 |
 | **D-16** | Source priority + multi-source + unknown policy | ✅ 锁定（2026-05-05） | Excel base / buhflipexplode DA overlay / 米游社 i18n；冲突 fail loud + manual review；entity-level `sources[]` + 关键数值字段级 `sourceRefs`；unknown 分级 blocking（影响计算）/ non-blocking（纯展示）；新增 ERR-DAT-005（multi-source conflict / 未解析 modifier blocking）+ ERR-DAT-006（locale mapping unresolved / 展示缺失 non-blocking，与 PR #21 cleaned schema spec 锁定一致） | 中 |
+| **D-19** | V1 CLI 输出改革 | ✅ 锁定（2026-05-06） | `fairy calc` 默认 `--view brief` summary-first；完整 trace 通过 `--view verbose`；默认输出 `summary.lanes.nonCrit` / `summary.lanes.crit`，不使用期望伤害；`--result-mode expected` 保留为可选理论分析；其他二元输入差异通过 `fairy compare` | 中 |
 | **D-1=D**（S2 节奏） | V1 推进顺序 | ✅ 锁定 | S2 双门槛：schema discovery + 并行 scraper 准备；S6 全量化最后；不允许 data 全量化阻塞 core 启动 | 中 |
 
 ---
@@ -214,6 +215,26 @@
 - `ERR-DAT-006` non-blocking：locale mapping unresolved / 展示缺失（与 PR #21 cleaned schema spec 锁定一致；不再使用 ERR-UI-004 占位）
 
 **来源**：会议纪要 §2.9 / §2.10 / §2.11
+
+### D-19 V1 CLI 输出改革
+
+**锁定状态**：@lo-user 2026-05-06 在 D-19 讨论 thread 中拍板。
+
+**输出视图**：
+- `fairy calc` 默认 `--view brief`，只输出 summary-first 结果与 diagnostics
+- `--view verbose` 输出完整 `CalcResult`，包含 `attackSegments[]` / `buckets[]` / `modifiers[]` / `trace[]`
+- `--view` 合法值固定为 `brief|verbose`，非法值必须 fail loud
+
+**结果语义**：
+- 默认 summary 使用 `lanes.nonCrit` / `lanes.crit` 双栏展示，不使用暴击率加权期望值
+- `--result-mode expected` 保留为可选理论分析；默认输出不把 expectation 当主结果
+- 旧 `rawTotalDamage` / `displayTotalDamage` / `expectedDamage` / `critDamage` / `nonCritDamage` 字段保留过渡，避免一次性破坏现有审计与脚本
+
+**二元场景边界**：
+- 只有同一输入下的 RNG 双面性（暴击 / 不暴击）进入 `calc` lanes
+- buff active/inactive、敌人状态前后、异常/紊乱触发与否等输入差异使用 `fairy compare`
+
+**来源**：Slock `#fairy:9f8fe6b6` D-19 输出结构讨论；lo-user 2026-05-06 拍板 Q1=`--view brief|verbose`、Q2=summary-first、Q3=保留 expected 可选。
 
 ### D-12 buhflipexplode 算法处理
 

@@ -46,6 +46,47 @@ describe("dogfooding examples", () => {
     }
   })
 
+  it("covers the accepted Anby core F basic 16 dogfood fixture", () => {
+    const run = spawnSync("pnpm", [
+      "--silent",
+      "--filter",
+      "@fairy/cli",
+      "run",
+      "cli",
+      "--",
+      "calc",
+      resolve(examplesDir, "dogfood-anby-core-f-basic16-dullahan-9528.json"),
+      "--lang",
+      "zh",
+    ], {
+      cwd: repoRoot,
+      encoding: "utf8",
+    })
+    const parsed = JSON.parse(run.stdout) as {
+      summary: {
+        expectedDamage?: number
+        lanes: {
+          nonCrit: { rawDamage: number; displayDamage: number }
+          crit: { rawDamage: number; displayDamage: number }
+        }
+        daze: { value: number; ratioRaw: number; ratioDisplay: number }
+      }
+      errors: unknown[]
+    }
+
+    expect(run.status, `exit status\nstderr:\n${run.stderr}`).toBe(0)
+    expect(run.stderr).toBe("")
+    expect(parsed.errors).toEqual([])
+    expect(parsed.summary.expectedDamage).toBeUndefined()
+    expect(parsed.summary.lanes.nonCrit.rawDamage).toBeCloseTo(223.7458540909091, 10)
+    expect(parsed.summary.lanes.nonCrit.displayDamage).toBe(224)
+    expect(parsed.summary.lanes.crit.rawDamage).toBeCloseTo(335.6187811363636, 10)
+    expect(parsed.summary.lanes.crit.displayDamage).toBe(336)
+    expect(parsed.summary.daze.value).toBe(37.536)
+    expect(parsed.summary.daze.ratioRaw).toBeCloseTo(0.4561041107209254, 12)
+    expect(parsed.summary.daze.ratioDisplay).toBe(0)
+  })
+
   it("keeps root example aliases JSON-only when called with pnpm --silent", () => {
     for (const script of ["fairy:s1", "fairy:s2", "fairy:s3"]) {
       const run = spawnSync("pnpm", ["--silent", script], {
