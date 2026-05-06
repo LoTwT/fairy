@@ -25,7 +25,10 @@ Fairy is a ZZZ static snapshot damage calculator for 1-3 agents.
 
 ## Current Phase
 
-S5 data ingestion. Current engineering entry points:
+V1 release gate preparation. lo-user dogfooding has passed 4/5 with zero
+unresolved B-Calc blockers; Product errata, release notes, and QA
+release-readiness review remain before any V1 tag. Current engineering entry
+points:
 
 - `docs/architecture/naming-policy.md`
 - `docs/architecture/monorepo-development.md`
@@ -36,3 +39,10 @@ S5 data ingestion. Current engineering entry points:
 - `packages/cli/`
 - `packages/data/`
 - `examples/snapshots/`
+
+Release-gate notes:
+
+- `fairy calc` defaults to `--view brief`; use `--view verbose` for full trace.
+- The Anby dogfooding fixture
+  `examples/snapshots/dogfood-anby-core-f-basic16-dullahan-9528.json` is covered
+  by `packages/cli/src/examples.test.ts` and therefore by root `pnpm test`.
