@@ -18,21 +18,29 @@
 ## Install
 
 ```bash
-# CLI
-pnpm dlx @randomplay/cli fairy --help
+# CLI — one-shot via pnpm dlx (no install)
+pnpm dlx @randomplay/cli --help
+pnpm dlx @randomplay/cli calc <your-snapshot.json> --view brief
+
+# CLI — local install in your project
+pnpm add -D @randomplay/cli
+pnpm exec fairy --help
+pnpm exec fairy calc <your-snapshot.json> --view brief
 
 # Library
 pnpm add @randomplay/data @randomplay/core
 ```
 
-Verified on Node ≥ 22.14.
+Verified on Node ≥ 22.14. The `pnpm dlx` invocation runs the CLI's `fairy` bin directly — you don't pass `fairy` as a separate argument.
 
 ## Verify
 
-After install, run the golden smoke:
+After install, run a smoke calc:
 
 ```bash
-fairy calc <your-snapshot.json> --view brief
+pnpm exec fairy calc <your-snapshot.json> --view brief
+# or, without install:
+pnpm dlx @randomplay/cli calc <your-snapshot.json> --view brief
 ```
 
 Or clone the repo and run the bundled smoke chain:
