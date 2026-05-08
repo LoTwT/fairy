@@ -2,6 +2,10 @@
 
 JSON-only command shell over `@fairy/core`.
 
+Command and flag schemas are defined with `citty`, while stdout remains JSON-only
+for AI/plugin consumers. Help output is therefore JSON (`fairy help` or
+`fairy --help`) instead of citty's default human text renderer.
+
 ## Commands
 
 ```bash
