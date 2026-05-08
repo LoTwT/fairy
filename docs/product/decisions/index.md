@@ -25,10 +25,12 @@
 | **D-10** | 数据维护责任 | ✅ 锁定（v2.0 修订） | V1 阶段：lo-user 提供 Excel 主源 + 爬虫每版本手动 release；data 包必须做完整角色/音擎/驱动盘/影画/鸣徽/潜能激化数据 | 中 |
 | **D-11** | 命名体系（v2.0 新增） | ✅ 锁定 | 选项 A 全套官方化：公开 schema / core API / data 字段优先使用 ZZZ 官方英文的语义化 camelCase；旧 `breach*` 进 sourceAliases / migration | 中 |
 | **D-12** | buhflipexplode 算法处理 | ✅ 锁定 | 选项 B：Fairy 保持 MIT；buhflipexplode GPL JS 仅 raw 留档/参考，不复制进 runtime；Fairy 独立实现等价算法；每次抓取用 hash + 算法快照文档 + parity 对账监控 drift | 高 |
-| **D-13** | V1 范围收窄到危局强袭战 | ✅ 锁定（2026-05-05 cleaned schema 讨论会） | V1 = DA 计算器；buhflipexplode = DA overlay 主源；Excel `敌人属性`保留 raw archive 作为 V1.x+ 扩展源；通用敌人 / 部位破坏 / 失衡恢复时间在 V1.x；V1 黄金集收窄到 20 锚点（去掉 18 部位破坏 / 19 凶心疯汉 / 20 装甲哈提，V1.x 数据扩展时一次性补） | 中 |
+| **D-13** | V1 范围收窄到危局强袭战 | ✅ 锁定（2026-05-05 errata：黄金集 19 anchors） | V1 = DA 计算器；buhflipexplode = DA overlay 主源；Excel `敌人属性`保留 raw archive 作为 V1.x+ 扩展源；通用敌人 / 部位破坏 / 失衡恢复时间在 V1.x；V1 黄金集 19 anchors（G01-G12 + G14-G17 + G21-G23）；V1.x defer = G13 / G18 / G19 / G20 | 中 |
 | **D-14** | cleaned data typed modifier 双层结构 | ✅ 锁定（2026-05-05） | Layer 1 原文层 `sourceText` / `localizedText` + Layer 2 计算层 `modifiers[]` / `calculationEffects[]` + 风险层 `unparsedEffects[]`；bucket 受控 enum 严格匹配 glossary v0.4 D-11；效果 4 级（L1 静态 / L2 静态条件 / L3 动态参数 / L4 时序需 `requiresActivation`）；确定性 pipeline + sourceTextHash + parserVersion + effectTemplateId + 人工 audit gate；AI 候选不能直接入 cleaned | 中 |
 | **D-15** | V1 package exports 4 入口 | ✅ 锁定（2026-05-05） | V1 全做：`@randomplay/data/cleaned`（总入口）/ `@randomplay/data/cleaned/<domain>` / `@randomplay/data/types` / `@randomplay/data/cleaned/i18n/<domain>`；data 包 game labels 源码 `packages/data/src/i18n/` → 发布 `packages/data/cleaned/i18n/`；UX ERR-* `docs/ux/i18n/` 完全独立 | 中 |
 | **D-16** | Source priority + multi-source + unknown policy | ✅ 锁定（2026-05-05） | Excel base / buhflipexplode DA overlay / 米游社 i18n；冲突 fail loud + manual review；entity-level `sources[]` + 关键数值字段级 `sourceRefs`；unknown 分级 blocking（影响计算）/ non-blocking（纯展示）；新增 ERR-DAT-005（multi-source conflict / 未解析 modifier blocking）+ ERR-DAT-006（locale mapping unresolved / 展示缺失 non-blocking，与 PR #21 cleaned schema spec 锁定一致） | 中 |
+| **D-17** | 米游社 V1 抓取范围 + 工具栈 | ✅ 锁定（2026-05-05 升级 + 2026-05-08 audit 决议） | 范围扩展为 DA 详情正文 + 乘区文本 + zh/en alignment；工具：列表 API + entry_page detail JSON + cheerio；2026-05-08 sourceConflict audit accept buhflipexplode（与 nanoka 三方比对 2:1） | 中 |
+| **D-18** | V1 dogfooding gate（DD-003） | ✅ 锁定（2026-05-05） + 通过（2026-05-08 4/5） | V1 release gate 第 2 项从"3+ 社区试用"收窄为 lo-user 单人深度 dogfood + QA 回归；known limitations 显式标注未经社区广泛验证 + Day 3 跳过 | 高 |
 | **D-19** | V1 CLI 输出改革 | ✅ 锁定（2026-05-06） | `fairy calc` 默认 `--view brief` summary-first；完整 trace 通过 `--view verbose`；默认输出 `summary.lanes.nonCrit` / `summary.lanes.crit`，不使用期望伤害；`--result-mode expected` 保留为可选理论分析；其他二元输入差异通过 `fairy compare` | 中 |
 | **D-1=D**（S2 节奏） | V1 推进顺序 | ✅ 锁定 | S2 双门槛：schema discovery + 并行 scraper 准备；S6 全量化最后；不允许 data 全量化阻塞 core 启动 | 中 |
 
@@ -137,14 +139,21 @@
 - `cleaned/enemies` 全局 enemy base 不作为 V1 必交付
 - Excel `敌人属性`（412 unique）保留 raw archive，V1.x+ 扩展源
 - DA boss 能映射 Excel 时补 `baseEnemyRef`；映射不到（如 Sanguine Sweeper）→ `externalBossId + sourceRefs + unresolvedMapping`
-- V1 黄金集 23 锚点收窄到 **20 锚点**：推迟 18 部位破坏 / 19 凶心疯汉失衡恢复 / 20 装甲哈提失衡恢复 到 V1.x
+- V1 黄金集 23 锚点收窄到 ~~20 锚点~~ → **19 锚点**（D-13 errata，2026-05-05 17:53 lo-user 拍板）
+
+**2026-05-05 17:53 D-13 errata（lo-user 拍板）**：黄金集 20 → **19 anchors**。
+- **V1 19 anchors**：G01-G12 + G14-G17 + G21-G23
+- **V1.x defer**：G13（data-driven anomaly threshold rule composition）+ G18 部位破坏 + G19 凶心疯汉失衡恢复 + G20 装甲哈提失衡恢复
+- **G13 defer 理由**：需要 `anomalyThresholdModifiers[]` schema + core 组合逻辑 + source trace + fixture；当前 core 仅有 `thresholdOverride`，保留 V1 会扩大 #43 + 触动 core；defer 可逆，V1.x 与通用/特殊敌人规则一起做更聚焦
+- **状态**：✅ V1 release-ready milestone 时 PR #28 已实施 19 anchors（commit `3f5e67a`）
+- **影响 doc**：`docs/qa/golden-source-coverage.md`（matrix 标 G13 deferred） / `docs/product/meetings/2026-05-05-cleaned-schema-design.md` §2.7
 
 **理由**：
 - 与 lo-user "V1 主要支持危局强袭战 + Excel 后备" 框定一致
 - V1 推进速度优先；4 方一致推荐 A（黄金集收窄）
 - UX 资产损耗极小（仅 starter-scenarios S2 enemy swap）
 
-**来源**：会议纪要 [`docs/product/meetings/2026-05-05-cleaned-schema-design.md`](../meetings/2026-05-05-cleaned-schema-design.md) §2.3 / §2.7
+**来源**：会议纪要 [`docs/product/meetings/2026-05-05-cleaned-schema-design.md`](../meetings/2026-05-05-cleaned-schema-design.md) §2.3 / §2.7；2026-05-05 17:53 thread `#fairy:43-scope` lo-user 同意 G13 defer。
 
 ### D-14 cleaned data typed modifier 双层结构
 
@@ -242,6 +251,64 @@ buhflipexplode 危局强袭战 buff `sourceConflict` 已做人工 audit。lo-use
 - buff active/inactive、敌人状态前后、异常/紊乱触发与否等输入差异使用 `fairy compare`
 
 **来源**：Slock `#fairy:9f8fe6b6` D-19 输出结构讨论；lo-user 2026-05-06 拍板 Q1=`--view brief|verbose`、Q2=summary-first、Q3=保留 expected 可选。
+
+### D-17 米游社 V1 抓取范围 + 工具栈（2026-05-05 升级）
+
+**锁定状态**：@lo-user 2026-05-05 16:46（thread `#fairy:e6993153`）将米游社范围从"i18n 名称源"扩展为"DA 详情正文 + 乘区文本 + zh/en 对照"，作为 V1 必交付。TL 16:52 完成 API discovery 收敛实施方案。
+
+**V1 抓取范围**（每期）：
+- **3 个可选 buff**（含乘区文本）
+- **3 个 boss 属性 + 描述**
+- **3 个 boss 房间场地 buff**（含乘区文本）
+- **CN ↔ EN 对照**：与 buhflipexplode 描述对齐，作为 V1 必交付
+
+**工具栈**：
+- 列表 API：`https://baike.mihoyo.com/zzz/...` 频道 13 list → 子频道 108 取 35 期 `content_id`
+- 详情 API：`https://act-api-takumi-static.mihoyo.com/hoyowiki/zzz/wapi/entry_page?app_sn=zzz_wiki&entry_page_id={content_id}&lang=zh-cn`，请求头 `x-rpc-wiki_app: zzz`
+- 富文本解析：`multi_table` / `rich_row_base_info` HTML 用 cheerio 离线解析
+- **Playwright 不进生产依赖**（仅手工 sanity 检查时使用）
+
+**Source 角色**（与 D-16 一致）：
+- buhflipexplode = DA event/enemy overlay 主源
+- 米游社 = 中文 i18n / 描述源 + DA 详情乘区文本 zh/en alignment
+- Excel = base entity 主源
+- 冲突时 fail loud + manual review
+
+**parity manifest**：抓取产物附 CN/EN parity manifest，alignment 失败 fail loud（ERR-DAT-005 blocking）；V1 不预设 alignment unresolved 的 ERR reason，待真出现再补（保留 ERR-DAT-006 non-blocking 兜底）。
+
+**实施 PR**：#24（commit `4b9ac2a`）— TL 自带 docs 同步（`docs/data-source/mihoyo/*` / `docs/data-contract/cleaned-schema-spec.md` DA domain / `docs/index.md` / `CLAUDE.md` / `robots.txt` / source registry / package README）。
+
+**2026-05-08 sourceConflict audit 决议**（与 D-16 同步）：PR #24 留存的 3 条米游社 vs buhflipexplode 数值冲突（21 澄意 / 8 灼冽 / 1 破招）已人工 audit。lo-user 用 nanoka (`https://zzz.nanoka.cc/boss/`) 作为人工查询源（不接管线），三方比对 nanoka 与 buhflipexplode 一致（2:1 vs Mihoyo），lo-user 决策 `Q1，按 buhflipexplode`。cleaned release evidence 记录为 `resolved-prefer-buhflipexplode`，Mihoyo 原值与 sourceRefs 保留为审计线索。详见 `data/cleaned/audit/mihoyo-buhflipexplode.source-conflicts.json`（PR #33 commit `04e7077`）。
+
+**可逆性**：中（API 形态变更需要重抓 + parity 重核）
+
+**来源**：thread `#fairy:e6993153`（lo-user 16:46 / TL 16:46~16:52 / QA 16:46）+ doc-drift-log DD-001 + PR #24 / #33。
+
+### D-18 V1 dogfooding gate（DD-003）
+
+**锁定状态**：@lo-user 2026-05-05 20:23（thread `#fairy:dogfooding`）将 V1 release gate 第 2 项从 "3+ 社区试用" 收窄为 **lo-user 单人深度 dogfood + QA 回归**。
+
+**Gate 条件**（dogfooding-v1.md §4.1）：
+- B-Calc.blocker：0 件未修
+- B-Calc.non-blocker：已重新分类
+- U-ErrCopy / U-Scenario：可修已修，不修加 known limitation 注解
+- D-Data：audit gate 决议落地
+- P-Range：全部入 V1.x backlog
+- **lo-user 整体打分 ≥ 4/5**（自评）
+
+**已知限制**（V1 release notes 必须标注）：
+- V1 仅由 lo-user 单人深度 dogfood 验证 + QA 回归，**未经社区广泛验证**
+- dogfooding Day 3 边界探测（`--lang en` / 故意造错 ERR-* 验证）lo-user 决策跳过，V1.x 视真实使用反馈再决定是否回补
+
+**触发 V1.x 扩 dogfood 范围的条件**：
+- 真实社区使用反馈出现重复性 B-Calc / U-* 问题
+- 计算结果与第三方计算器结构性 drift
+
+**实施结果**：dogfooding 期间 lo-user 整体打分 = **4/5**，通过 gate。详见 `docs/product/dogfooding-report-v1.md`。
+
+**可逆性**：高（V1.x 可扩 dogfood 范围）
+
+**来源**：thread `#fairy:dogfooding` 20:22~20:23 lo-user 自荐试用 + 拍方案 B；doc-drift-log DD-003；dogfooding-report-v1.md。
 
 ### D-12 buhflipexplode 算法处理
 
