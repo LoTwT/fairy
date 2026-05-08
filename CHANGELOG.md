@@ -18,7 +18,7 @@ First public release of the `@randomplay/data` / `@randomplay/core` / `@randompl
 - **`@randomplay/data`** — `cleaned/` typed-modifier dataset for the Deadly Assault (DA) domain; four export entries `cleaned/`, `cleaned/<domain>`, `types`, `cleaned/i18n/<domain>`; multi-source provenance (`sources[]` + `sourceRefs`).
 - **Mihoyo source pipeline** — list API + `entry_page` detail JSON + cheerio rich-text parsing; CN/EN parity manifest; coverage = 3 buffs + 3 boss attributes + 3 stage buffs per period (35 periods).
 - **buhflipexplode source pipeline** — raw snapshot + `algorithm-manifest.json` + parity drift gate; D-12 boundary preserved (Fairy stays MIT, no GPL JS in runtime).
-- **V1 golden anchor set (19 anchors)** — G01–G12, G14–G17, G21–G23; full passing in CI (`pnpm verify:golden-v1`).
+- **V1 golden anchor set (19 anchors)** — G01–G12, G14–G17, G21–G23; full passing in CI (`pnpm --filter @randomplay/data verify:golden-v1`).
 - **Anby dogfooding fixture** — base attack 583.957 / multiplier 0.747 at lvl 16 / generic Dullahan defense 952.8; `pnpm fairy:s1|s2|s3` aliases for quick smoke.
 - **Dogfooding artifacts** — `docs/product/dogfooding-report-v1.md` (4/5 release-gate evidence) + `docs/product/dogfooding-v1.md` (runbook).
 - **Release tooling** — `bumpp` thin wrapper (`scripts/release-bump.mjs`) + allowlist publish workflow (`@randomplay/data,core,cli`) + GitHub OIDC + Trusted Publisher path + retry-safe `gitHead` check + rollback runbook (`docs/release/release-workflow.md`).

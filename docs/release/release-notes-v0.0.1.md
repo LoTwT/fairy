@@ -39,7 +39,7 @@ Or clone the repo and run the bundled smoke chain:
 
 ```bash
 pnpm install --frozen-lockfile
-pnpm verify:golden-v1
+pnpm --filter @randomplay/data verify:golden-v1
 pnpm fairy:s1   # Anby S1 baseline
 pnpm fairy:s2
 pnpm fairy:s3
@@ -83,7 +83,12 @@ See `docs/product/decisions/index.md` for the full decisions log and `docs/produ
 If a critical regression surfaces post-release, follow `docs/release/release-workflow.md` rollback section:
 
 1. Mark the GitHub Release as pre-release.
-2. `npm deprecate @randomplay/{data,core,cli}@0.0.1 "<reason + tracking issue>"` from the package owner account.
+2. Deprecate each affected package version separately (npm CLI does not accept brace expansion):
+   ```bash
+   npm deprecate @randomplay/data@0.0.1 "<reason + tracking issue>"
+   npm deprecate @randomplay/core@0.0.1 "<reason + tracking issue>"
+   npm deprecate @randomplay/cli@0.0.1 "<reason + tracking issue>"
+   ```
 3. Open a `revert` PR against `main` and cut a `v0.0.2` patch via the standard release pipeline.
 
 ## Links
