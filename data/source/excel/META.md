@@ -52,7 +52,7 @@ Slock attachment: `ad475609-e4c6-4213-819b-b214ad0ade65`
 
 ## Usage Rules
 
-- Use this workbook as a source document for `@fairy/data` cleaning.
+- Use this workbook as a source document for `@randomplay/data` cleaning.
 - Every cleaned row derived from the workbook must retain `sourceId:
   "lo-user-excel"`, a workbook source version / hash, and a sheet/cell or row
   anchor where available.

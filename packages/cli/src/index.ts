@@ -1,5 +1,5 @@
-import type { CalcResult, Diagnostic } from "@fairy/core"
-import { calculate, parseBattleSnapshot } from "@fairy/core"
+import type { CalcResult, Diagnostic } from "@randomplay/core"
+import { calculate, parseBattleSnapshot } from "@randomplay/core"
 import { defineCommand, parseArgs as parseCittyArgs, type ArgsDef } from "citty"
 import { readFile } from "node:fs/promises"
 import { dirname, resolve } from "node:path"

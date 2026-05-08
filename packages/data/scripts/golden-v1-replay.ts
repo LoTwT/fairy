@@ -2,7 +2,7 @@ import { createHash } from "node:crypto"
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs"
 import { dirname, join } from "node:path"
 import { fileURLToPath } from "node:url"
-import { calculate } from "@fairy/core"
+import { calculate } from "@randomplay/core"
 import * as XLSX from "xlsx"
 
 const packageDir = fileURLToPath(new URL("..", import.meta.url))
@@ -1537,13 +1537,13 @@ function assertArtifactsFresh(generatedAt: string): void {
   const actualReport = readJson<unknown>(replayReportPath)
 
   if (JSON.stringify(actualCandidates) !== JSON.stringify(expectedCandidates))
-    throw new Error("V1 source candidates are stale; rerun pnpm --filter @fairy/data audit:golden-v1")
+    throw new Error("V1 source candidates are stale; rerun pnpm --filter @randomplay/data audit:golden-v1")
   if (JSON.stringify(actualNicoleAcceptance) !== JSON.stringify(expectedAcceptance.nicole))
-    throw new Error("Nicole acceptance artifact is stale; rerun pnpm --filter @fairy/data audit:golden-v1")
+    throw new Error("Nicole acceptance artifact is stale; rerun pnpm --filter @randomplay/data audit:golden-v1")
   if (JSON.stringify(actualYanagiAcceptance) !== JSON.stringify(expectedAcceptance.yanagi))
-    throw new Error("Yanagi acceptance artifact is stale; rerun pnpm --filter @fairy/data audit:golden-v1")
+    throw new Error("Yanagi acceptance artifact is stale; rerun pnpm --filter @randomplay/data audit:golden-v1")
   if (JSON.stringify(actualReport) !== JSON.stringify(expectedReport))
-    throw new Error("V1 replay report is stale; rerun pnpm --filter @fairy/data audit:golden-v1")
+    throw new Error("V1 replay report is stale; rerun pnpm --filter @randomplay/data audit:golden-v1")
 }
 
 function auditCommand(flags: Record<string, string | true>): void {

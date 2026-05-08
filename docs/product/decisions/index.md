@@ -27,7 +27,7 @@
 | **D-12** | buhflipexplode 算法处理 | ✅ 锁定 | 选项 B：Fairy 保持 MIT；buhflipexplode GPL JS 仅 raw 留档/参考，不复制进 runtime；Fairy 独立实现等价算法；每次抓取用 hash + 算法快照文档 + parity 对账监控 drift | 高 |
 | **D-13** | V1 范围收窄到危局强袭战 | ✅ 锁定（2026-05-05 cleaned schema 讨论会） | V1 = DA 计算器；buhflipexplode = DA overlay 主源；Excel `敌人属性`保留 raw archive 作为 V1.x+ 扩展源；通用敌人 / 部位破坏 / 失衡恢复时间在 V1.x；V1 黄金集收窄到 20 锚点（去掉 18 部位破坏 / 19 凶心疯汉 / 20 装甲哈提，V1.x 数据扩展时一次性补） | 中 |
 | **D-14** | cleaned data typed modifier 双层结构 | ✅ 锁定（2026-05-05） | Layer 1 原文层 `sourceText` / `localizedText` + Layer 2 计算层 `modifiers[]` / `calculationEffects[]` + 风险层 `unparsedEffects[]`；bucket 受控 enum 严格匹配 glossary v0.4 D-11；效果 4 级（L1 静态 / L2 静态条件 / L3 动态参数 / L4 时序需 `requiresActivation`）；确定性 pipeline + sourceTextHash + parserVersion + effectTemplateId + 人工 audit gate；AI 候选不能直接入 cleaned | 中 |
-| **D-15** | V1 package exports 4 入口 | ✅ 锁定（2026-05-05） | V1 全做：`@fairy/data/cleaned`（总入口）/ `@fairy/data/cleaned/<domain>` / `@fairy/data/types` / `@fairy/data/cleaned/i18n/<domain>`；data 包 game labels 源码 `packages/data/src/i18n/` → 发布 `packages/data/cleaned/i18n/`；UX ERR-* `docs/ux/i18n/` 完全独立 | 中 |
+| **D-15** | V1 package exports 4 入口 | ✅ 锁定（2026-05-05） | V1 全做：`@randomplay/data/cleaned`（总入口）/ `@randomplay/data/cleaned/<domain>` / `@randomplay/data/types` / `@randomplay/data/cleaned/i18n/<domain>`；data 包 game labels 源码 `packages/data/src/i18n/` → 发布 `packages/data/cleaned/i18n/`；UX ERR-* `docs/ux/i18n/` 完全独立 | 中 |
 | **D-16** | Source priority + multi-source + unknown policy | ✅ 锁定（2026-05-05） | Excel base / buhflipexplode DA overlay / 米游社 i18n；冲突 fail loud + manual review；entity-level `sources[]` + 关键数值字段级 `sourceRefs`；unknown 分级 blocking（影响计算）/ non-blocking（纯展示）；新增 ERR-DAT-005（multi-source conflict / 未解析 modifier blocking）+ ERR-DAT-006（locale mapping unresolved / 展示缺失 non-blocking，与 PR #21 cleaned schema spec 锁定一致） | 中 |
 | **D-19** | V1 CLI 输出改革 | ✅ 锁定（2026-05-06） | `fairy calc` 默认 `--view brief` summary-first；完整 trace 通过 `--view verbose`；默认输出 `summary.lanes.nonCrit` / `summary.lanes.crit`，不使用期望伤害；`--result-mode expected` 保留为可选理论分析；其他二元输入差异通过 `fairy compare` | 中 |
 | **D-1=D**（S2 节奏） | V1 推进顺序 | ✅ 锁定 | S2 双门槛：schema discovery + 并行 scraper 准备；S6 全量化最后；不允许 data 全量化阻塞 core 启动 | 中 |
@@ -41,7 +41,7 @@
 | **CONFIRM-1** | Handler 注入边界 | V1 仅允许"已注册 handler ID + 数据驱动参数注入"；不允许内联 JS；未来 V1.x+ 受信任扩展包显式注册（固定 EffectHandler 接口、纯函数、无 IO/网络/随机/时间依赖、必须输出 trace、带 manifest/version/source；CLI 默认不加载外部扩展） |
 | **CONFIRM-2** | CLI 输出形态 | CLI = core 的薄壳，输出仅 JSON；下游消费者（AI plugin / Slock skill / 玩家脚本 / 未来 Web UI）按需自渲染 |
 | **CONFIRM-3** | PNG 收益曲线导出 | 推迟到 V1.1+；V1 仅 CSV |
-| **CONFIRM-4** | "手写"边界两层 | L1 = `@fairy/data` 对外发布的"游戏内数值规则数据"（不允许人工手填）；L2 = 开发期内部 fixture（`fixtures/golden/`，仅供 core 单测，允许人工手写并审核） |
+| **CONFIRM-4** | "手写"边界两层 | L1 = `@randomplay/data` 对外发布的"游戏内数值规则数据"（不允许人工手填）；L2 = 开发期内部 fixture（`fixtures/golden/`，仅供 core 单测，允许人工手写并审核） |
 | **CONFIRM-5** | data 包 V1 覆盖度 DoD | "黄金集硬要求 + 其余按 data 实际范围"；首批 20+ 黄金锚点涉及的代理人/敌人/装备 data 必须齐全；其余 fail loud |
 | **CONFIRM-6** | monorepo 工具 | pnpm workspaces（lo-user 拍板 2026-05-05） |
 | **CONFIRM-7** | V1 不做明确清单 | 能量循环 / 闪能循环 / 喧响循环模拟、秽盾完整状态机、打断时序、部位破坏时序、Web UI、OCR/截图识别（→V1.1）、AI plugin（→V1.1） |
@@ -49,7 +49,7 @@
 | **CONFIRM-9** | 潜能激化定义 | 代理人加强系统，会带来技能形态、数值变动；具体效果由 data 包提供 |
 | **CONFIRM-10** | AI 集成形态 | Claude Code Plugin 结构（V1.1 启动）；多工具适配通过 `.claude-plugin/plugins/<name>/skills` + `.cursor/` + `.codex/` 等配置目录；V1 仓库不预留 AI 工具目录 |
 | **CONFIRM-11** | 数据源 | 米游社危局强袭战页（https://baike.mihoyo.com/zzz/wiki/channel/map/13/108）+ buhflipexplode.org/zzz/da/ + lo-user 提供 Excel；仅正式服 |
-| **CONFIRM-12** | 数据契约两层职责分离 | `@fairy/data` = 游戏内确定的数值规则（不允许手写）；用户 `snapshot.json` = 玩家面板快照 + 装备选择 + 增益勾选（必须由用户提供） |
+| **CONFIRM-12** | 数据契约两层职责分离 | `@randomplay/data` = 游戏内确定的数值规则（不允许手写）；用户 `snapshot.json` = 玩家面板快照 + 装备选择 + 增益勾选（必须由用户提供） |
 | **CONFIRM-13** | 用户 override data 值 | 允许 + trace `overriddenFromData` 强标（原值/用户值/字段路径/原因/版本）；fieldProvenance 扩展为 `"data" | "user-override" | "panel" | "stats"`；verbose / debug 档默认显示该标记 |
 
 ---
@@ -95,7 +95,7 @@
 - `data/source/`：Excel、raw crawler payload、source manifest；版本控制保留，不进入 npm/package 发布物
 - `docs/reference/`：攻略原文等参考材料；版本控制保留，不进入 npm/package 发布物
 - `data/cleaned/`：清洗后的派生 JSON staging 目录；发布前同步到 `packages/data/cleaned/`
-- `packages/data/cleaned/`：`@fairy/data` npm/package 内实际分发的清洗 JSON mirror
+- `packages/data/cleaned/`：`@randomplay/data` npm/package 内实际分发的清洗 JSON mirror
 - `packages/data/src/types/`：清洗数据与 source manifest 的 TypeScript 类型
 
 **确认来源**：@lo-user 2026-05-05 要求 `data.xlsx` 与 `zzz-data-introduction.txt` 入仓，并要求 raw source format 留档但不分发。
@@ -133,7 +133,7 @@
 **锁定状态**：@lo-user 2026-05-05 cleaned schema 讨论会上将 V1 范围明确收窄到危局强袭战（DA）计算器。
 
 **范围**：
-- V1 优先 `@fairy/data/cleaned/deadly-assault`：buhflipexplode = DA boss / multiplier / buff overlay 主源
+- V1 优先 `@randomplay/data/cleaned/deadly-assault`：buhflipexplode = DA boss / multiplier / buff overlay 主源
 - `cleaned/enemies` 全局 enemy base 不作为 V1 必交付
 - Excel `敌人属性`（412 unique）保留 raw archive，V1.x+ 扩展源
 - DA boss 能映射 Excel 时补 `baseEnemyRef`；映射不到（如 Sanguine Sweeper）→ `externalBossId + sourceRefs + unresolvedMapping`
@@ -178,10 +178,10 @@
 **锁定状态**：@lo-user 2026-05-05 拍板"V1 就可以"。
 
 **4 入口 V1 全做**：
-- `@fairy/data/cleaned`（总入口，AI plugin 一次性 import 整个 GameData）
-- `@fairy/data/cleaned/<domain>`（按 entity / domain 细分，如 `deadly-assault`）
-- `@fairy/data/types`（TS 类型独立入口）
-- `@fairy/data/cleaned/i18n/<domain>`（i18n 资源按需加载）
+- `@randomplay/data/cleaned`（总入口，AI plugin 一次性 import 整个 GameData）
+- `@randomplay/data/cleaned/<domain>`（按 entity / domain 细分，如 `deadly-assault`）
+- `@randomplay/data/types`（TS 类型独立入口）
+- `@randomplay/data/cleaned/i18n/<domain>`（i18n 资源按需加载）
 
 **i18n 路径分离**：
 - data 包 game labels 源码 `packages/data/src/i18n/<domain>.{zh,en}.json` → 发布 `packages/data/cleaned/i18n/`
@@ -250,7 +250,7 @@ buhflipexplode 危局强袭战 buff `sourceConflict` 已做人工 audit。lo-use
 **处理边界**：
 - raw JSON / JS / HTML 可入 `data/source/raw/buhflipexplode/` 留档；不进入 npm/package 发布物
 - README / metadata 需声明数据版权归 miHoYo 或各自权利方；如有侵权联系删除
-- buhflipexplode 算法逻辑仅作为参考；Fairy 在 `@fairy/core` / `@fairy/data` 中独立实现等价逻辑
+- buhflipexplode 算法逻辑仅作为参考；Fairy 在 `@randomplay/core` / `@randomplay/data` 中独立实现等价逻辑
 - 如未来需要直接运行原 JS，必须另开 GPL adapter/package 决策，不进入默认 MIT runtime
 
 **drift gate**：

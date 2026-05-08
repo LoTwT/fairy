@@ -74,8 +74,8 @@ ERR-CLI-* placeholder 由 TL（task #33 [TL-S4-follow]）锁定。ERR-DAT-005 / 
 
 ## 引用方
 
-- `@fairy/core`：`Diagnostic.key` + `Diagnostic.messageParams`，core **不**输出本地化字符串
-- `@fairy/cli`：
+- `@randomplay/core`：`Diagnostic.key` + `Diagnostic.messageParams`，core **不**输出本地化字符串
+- `@randomplay/cli`：
   - 业务 diagnostic：`renderDiagnostic(diagnostic, messages)` 按 `--lang` 加载对应 catalog 渲染
   - CLI shell 错误（ERR-CLI-*）：cliError 保留稳定 `code` + 通过 catalog 渲染本地化 `message`；catalog 缺 key 时用英文 fallback 常量表（task #33 [TL-S4-follow]）
 - AI plugin / Web UI（V1.1+）：从 catalog 反序列化 + 模板填充，遵循 prompt-templates.md 4 档输出粒度

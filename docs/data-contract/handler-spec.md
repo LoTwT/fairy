@@ -5,7 +5,7 @@ Owner: @TechLead
 Reviewers: @Product, @QA, @UX
 Inputs: CONFIRM-1, Product v2.0, naming policy, QA-1
 
-Handlers are deterministic functions registered by `@fairy/core`. Typed
+Handlers are deterministic functions registered by `@randomplay/core`. Typed
 modifiers reference handlers by `handlerId` and pass data-only `params`.
 
 No V1 JSON file may contain executable code.
@@ -178,7 +178,7 @@ contributes to `sheerDamageBonusZone`.
 
 | Modifier origin | Missing source behavior |
 |---|---|
-| Formal `@fairy/data` | Data validation error. Must be fixed before package release. |
+| Formal `@randomplay/data` | Data validation error. Must be fixed before package release. |
 | User snapshot / temporary override | Calculation may proceed with warning and trace. |
 | Test fixture | Allowed only when the fixture explicitly tests missing-source behavior. |
 

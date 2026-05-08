@@ -80,7 +80,7 @@ The page's boss score calculator uses a fixed threshold table of score chunks
 and HP chunks. HP chunks scale with the selected source version's HP multiplier.
 
 This supports Deadly Assault display parity only; it is not a replacement for
-Fairy's `@fairy/core` damage formula engine.
+Fairy's `@randomplay/core` damage formula engine.
 
 ## Drift Rules
 

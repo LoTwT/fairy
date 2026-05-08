@@ -6,7 +6,7 @@ Related task: task #40
 
 `data/source/excel/data.xlsx` is the lo-user-provided workbook source for
 base-game data. The workbook is retained in git as raw/source archive and is not
-published in the `@fairy/data` package.
+published in the `@randomplay/data` package.
 
 ## Current Audit
 
@@ -61,14 +61,14 @@ Historical/archive-only:
 
 The workbook audit uses `xlsx` as a repository devDependency. It is only used for
 source verification and generation scripts. It must not become a runtime
-dependency of the published `@fairy/data` package.
+dependency of the published `@randomplay/data` package.
 
 Useful commands:
 
-- `pnpm --filter @fairy/data audit:excel`
-- `pnpm --filter @fairy/data audit:golden-v1`
-- `pnpm --filter @fairy/data verify:excel`
-- `pnpm --filter @fairy/data verify:golden-v1`
+- `pnpm --filter @randomplay/data audit:excel`
+- `pnpm --filter @randomplay/data audit:golden-v1`
+- `pnpm --filter @randomplay/data verify:excel`
+- `pnpm --filter @randomplay/data verify:golden-v1`
 
 The verify gate checks:
 

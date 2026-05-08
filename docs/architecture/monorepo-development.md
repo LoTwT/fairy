@@ -31,9 +31,9 @@ This guide defines how to work in the Fairy pnpm workspace without breaking pack
 
 | Package | Owns | Must Not Own |
 |---|---|---|
-| `@fairy/core` | Runtime schemas, validators, pure calculation functions, registered handler interfaces, traceable `CalcResult` output | Crawlers, file IO, network IO, CLI rendering, formal data source parsing |
-| `@fairy/data` | Source readers, raw-to-clean transforms, source metadata, alias migration, queryable game data | Formula decisions, CLI UX, hand-written formal game values |
-| `@fairy/cli` | JSON input/output shell, citty command/flag schemas, diagnostics rendering when needed | Core math, source scraping, package-private data mutation |
+| `@randomplay/core` | Runtime schemas, validators, pure calculation functions, registered handler interfaces, traceable `CalcResult` output | Crawlers, file IO, network IO, CLI rendering, formal data source parsing |
+| `@randomplay/data` | Source readers, raw-to-clean transforms, source metadata, alias migration, queryable game data | Formula decisions, CLI UX, hand-written formal game values |
+| `@randomplay/cli` | JSON input/output shell, citty command/flag schemas, diagnostics rendering when needed | Core math, source scraping, package-private data mutation |
 
 The core package is the lowest-level runtime dependency. It must stay deterministic and side-effect-light so QA can validate formulas and trace output independently.
 
@@ -42,17 +42,17 @@ The core package is the lowest-level runtime dependency. It must stay determinis
 Allowed:
 
 ```text
-@fairy/cli  -> @fairy/core
-@fairy/cli  -> @fairy/data
-@fairy/data -> @fairy/core   # only for shared schema/types/validators when useful
+@randomplay/cli  -> @randomplay/core
+@randomplay/cli  -> @randomplay/data
+@randomplay/data -> @randomplay/core   # only for shared schema/types/validators when useful
 ```
 
 Forbidden:
 
 ```text
-@fairy/core -> @fairy/data
-@fairy/core -> @fairy/cli
-@fairy/data -> @fairy/cli
+@randomplay/core -> @randomplay/data
+@randomplay/core -> @randomplay/cli
+@randomplay/data -> @randomplay/cli
 ```
 
 Core code must not read files, call the network, use wall-clock time, use randomness, or infer hidden state in formula paths. If a handler needs data, the resolved data must be passed through `GameData`, `BattleSnapshot`, or registered handler params.
@@ -75,24 +75,24 @@ pnpm test
 Run one package:
 
 ```bash
-pnpm --filter @fairy/core check
-pnpm --filter @fairy/core test
-pnpm --filter @fairy/data check
-pnpm --filter @fairy/cli check
+pnpm --filter @randomplay/core check
+pnpm --filter @randomplay/core test
+pnpm --filter @randomplay/data check
+pnpm --filter @randomplay/cli check
 ```
 
 Package scripts may be added incrementally, but every PR that changes runtime code should leave `pnpm check` and relevant package tests passing.
 
 ## Data and Fixture Boundary
 
-Formal data in `@fairy/data` must be source-derived:
+Formal data in `@randomplay/data` must be source-derived:
 
 - Excel rows supplied by @lo-user;
 - live-server crawler output from approved sources;
 - source metadata with `sourceId`, `sourceVersion`, `fetchedAt` or `parsedAt`, and parser version;
 - alias migration at the ingestion boundary.
 
-Do not hand-write formal game data directly into `@fairy/data`.
+Do not hand-write formal game data directly into `@randomplay/data`.
 
 Fixtures are different. QA-owned fixtures under `fixtures/golden/` may be hand-authored and reviewed because they are test assertions, not redistributable game data. Before V1 release, golden fixtures that depend on real game values must either point to source-derived rows or be marked as pending data.
 

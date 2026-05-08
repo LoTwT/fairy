@@ -90,7 +90,7 @@
 2. **i18n 双轨化（lo-user 决策 D-02-rev）**：locale code lock 为 **`zh` / `en`**（不带 region subtag）；资源文件 `messages.zh.json` / `messages.en.json`；CLI flag `--lang en|zh`，默认 `zh`
 3. **JSON schema 字段名 / enum 值永远英文**，与 `--lang` 无关；`--lang` 仅影响错误消息 / 解释 / AI plugin 输出文本（TL 边界限定）
 
-> 项目唯一权威术语对照表，作为 `@fairy/data` schema、`@fairy/core` API、`@fairy/cli` 输出、AI plugin prompt 模板、UX 错误文案、QA 黄金集断言**共同基线**。
+> 项目唯一权威术语对照表，作为 `@randomplay/data` schema、`@randomplay/core` API、`@randomplay/cli` 输出、AI plugin prompt 模板、UX 错误文案、QA 黄金集断言**共同基线**。
 >
 > **命名规则**：英文 ID 优先采用 **ZZZ 国际服官方命名**；遇官方未明的，使用语义化 camelCase 作为内部 key 并在 `officialEnglishName` 标 `pending`。
 >

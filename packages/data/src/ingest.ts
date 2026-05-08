@@ -1,4 +1,4 @@
-import { parseGameData, type GameData, type SourceDocument } from "@fairy/core"
+import { parseGameData, type GameData, type SourceDocument } from "@randomplay/core"
 
 export interface CreateEmptyGameDataOptions {
   gameVersion: string

@@ -10,8 +10,8 @@ as a third-party Deadly Assault source.
 ## License Boundary
 
 Fairy keeps the repository and runtime packages under MIT. buhflipexplode source
-code is GPL-3.0, so Fairy does not copy its JavaScript into `@fairy/core`,
-`@fairy/data`, or `@fairy/cli` runtime implementation.
+code is GPL-3.0, so Fairy does not copy its JavaScript into `@randomplay/core`,
+`@randomplay/data`, or `@randomplay/cli` runtime implementation.
 
 Allowed:
 

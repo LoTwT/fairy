@@ -48,7 +48,7 @@ interface BattleSnapshot {
 | `schemaVersion` | Snapshot JSON schema version. |
 | `gameVersion` | ZZZ game major/minor version used by the user. |
 | `ruleSetVersion` | Formula/rule implementation version. |
-| `dataVersion` | Cleaned `@fairy/data` package version. |
+| `dataVersion` | Cleaned `@randomplay/data` package version. |
 | `sourceVersion` | Source-data snapshot version. |
 | `original*` | Preserved values when an imported snapshot is recalculated with newer rules/data. |
 

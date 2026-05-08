@@ -1,5 +1,5 @@
 {
-  "name": "@fairy/cli",
+  "name": "@randomplay/cli",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -12,7 +12,7 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@fairy/core": "workspace:*",
+    "@randomplay/core": "workspace:*",
     "citty": "0.2.2",
     "tsx": "^4.21.0"
   }

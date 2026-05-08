@@ -20,7 +20,7 @@ importers:
 
   packages/cli:
     dependencies:
-      '@fairy/core':
+      '@randomplay/core':
         specifier: workspace:*
         version: link:../core
       citty:
@@ -38,7 +38,7 @@ importers:
 
   packages/data:
     dependencies:
-      '@fairy/core':
+      '@randomplay/core':
         specifier: workspace:*
         version: link:../core
     devDependencies:

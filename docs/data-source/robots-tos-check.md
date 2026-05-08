@@ -102,7 +102,7 @@ Engineering policy for segment 2:
 - Cache each asset snapshot and record hashes separately.
 - Prefer one request per asset per manual run; automated mode must respect the
   same 12 requests/minute ceiling and conditional-request policy.
-- Do not copy images or site presentation assets into `@fairy/data`.
+- Do not copy images or site presentation assets into `@randomplay/data`.
 - Do not retain upstream non-live / beta / leaks data; keep only live-filtered
   source-format subsets for data JSON payloads.
 - Preserve source attribution and mark derived rows with `sourceId:

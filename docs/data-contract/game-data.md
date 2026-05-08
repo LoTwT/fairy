@@ -5,8 +5,8 @@ Owner: @TechLead
 Reviewers: @Product, @QA
 Inputs: Product v2.0, D-11 naming policy, data-source decisions
 
-`GameData` is the cleaned, generated data shape that `@fairy/data` publishes and
-`@fairy/core` consumes through a resolver. It is not raw Excel, raw HTML, or
+`GameData` is the cleaned, generated data shape that `@randomplay/data` publishes and
+`@randomplay/core` consumes through a resolver. It is not raw Excel, raw HTML, or
 user-authored calculation input.
 
 ## 1. Data Pipeline Boundary
@@ -17,7 +17,7 @@ raw source (Excel / crawler)
   -> cleaned GameData
   -> resolver(GameData, BattleSnapshot)
   -> resolved calculation input
-  -> @fairy/core
+  -> @randomplay/core
 ```
 
 Core must not depend on raw source field names. `sourceAliases` are accepted only

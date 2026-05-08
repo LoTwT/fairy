@@ -4,7 +4,7 @@
 - 地点：Slock #fairy thread `04d8ffe6`
 - 参与：@lo-user / @Product / @TechLead / @UX / @QA
 - 主持：@Product
-- 决策范围：`@fairy/data/cleaned/*` schema 设计的全部边界
+- 决策范围：`@randomplay/data/cleaned/*` schema 设计的全部边界
 
 ---
 
@@ -50,7 +50,7 @@
 
 ### 2.1 deadly-assault 数据位置（A）
 
-- **结论**：选项 1（独立 domain `@fairy/data/cleaned/deadly-assault`）
+- **结论**：选项 1（独立 domain `@randomplay/data/cleaned/deadly-assault`）
 - TechLead 倾向：避免扩 `GameData.events` 牵动 core schema、CLI snapshot、golden fixture
 - UX 倾向：与 prompt-templates v1.0 解耦
 - QA 倾向：DA 是 event overlay 不应过早扩 base schema
@@ -84,10 +84,10 @@
 ### 2.5 package exports 子路径（E）
 
 - **结论**：V1 全做 4 入口
-  - `@fairy/data/cleaned`（总入口）
-  - `@fairy/data/cleaned/<domain>`（按 entity / domain）
-  - `@fairy/data/types`（TS 类型独立入口）
-  - `@fairy/data/cleaned/i18n/<domain>`（i18n 资源）
+  - `@randomplay/data/cleaned`（总入口）
+  - `@randomplay/data/cleaned/<domain>`（按 entity / domain）
+  - `@randomplay/data/types`（TS 类型独立入口）
+  - `@randomplay/data/cleaned/i18n/<domain>`（i18n 资源）
 - @lo-user 拍板"V1 就可以"
 
 ### 2.6 lo-user 新设想：cleaned data 直接 typed modifier
