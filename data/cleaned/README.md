@@ -20,4 +20,8 @@ Current generated artifacts:
   candidates for V1 team-modifier replay.
 - `audit/nicole.acceptance.json` and `audit/yanagi.acceptance.json` —
   lo-user manual acceptance records for G22/G23 source-text mappings.
+- `audit/mihoyo-buhflipexplode.source-conflicts.json` — manual audit
+  resolution for the three historical Mihoyo/buhflipexplode Deadly Assault
+  buff source conflicts, preferring buhflipexplode after nanoka lookup while
+  retaining Mihoyo source trace.
 - `golden/v1-replay-report.json` — source-backed V1 golden replay report.
