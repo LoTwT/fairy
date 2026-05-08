@@ -3,7 +3,8 @@
 - 文档版本：v0.1（Product 起草，定稿入仓 `docs/product/dogfooding-v1.md`）
 - Owner：@Product
 - 起始：2026-05-05
-- 形态：repo-local CLI baseline（非 npm 全局）
+- 形态：repo-local CLI baseline（dogfooding 期间不验证 npm 全局发布）
+- **release 形态以 `docs/product/dogfooding-report-v1.md` §6 + release workflow（PR #36 `a0ca3e6`）为准**
 - 试用人：**仅 lo-user 一人深度试用**（DD-003 锁定）
 - 已知限制：V1 仅由 lo-user 单人 dogfood 验证 + QA 回归，未经社区广泛验证
 
@@ -32,9 +33,9 @@
 - **错误友好性**：ERR-* 文案是否能让试用人 self-recover
 - **范围漏洞**：是否有"想算但 V1 不支持"的常见场景
 
-### 1.3 不验证什么（V1 范围外）
+### 1.3 不验证什么（dogfooding 范围外）
 - 浏览器 / Web UI（V2）
-- npm 全局发布（V1.x 决定）
+- npm 全局发布（dogfooding 不验证；V1 release 形态由 release workflow 处理 — 见报告 §6）
 - 社区使用（DD-003 已声明 V1 限制）
 
 ---
@@ -119,7 +120,7 @@ Owner: <自动按类别填>
    - 输出 release-readiness 证据
 4. Product 发 errata PR（DD-001 + DD-002 + DD-003 + dogfooding-report 链接）
 5. Product errata + V1 release notes 合入后 → V1 正式发布
-6. **release 形态（git tag 命名 / 是否 npm publish）待 errata PR 时一并定**
+6. **release 形态以报告 `docs/product/dogfooding-report-v1.md` §6 为准**（`@randomplay/{data,core,cli}` npm publish via OIDC + Trusted Publisher，起始版本 `v0.0.1`，rollback runbook 完整）— PR #35 / #36 已落地
 
 ### 4.3 不通过怎么办
 - B-Calc / blocker 必修：循环 TL 修 → QA 回归 → lo-user 重测受影响场景
