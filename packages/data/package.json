@@ -1,25 +1,41 @@
 {
   "name": "@randomplay/data",
   "version": "0.0.0",
-  "private": true,
+  "license": "MIT",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LoTwT/fairy.git",
+    "directory": "packages/data"
+  },
   "exports": {
-    ".": "./src/index.ts"
+    ".": {
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs"
+    },
+    "./types": {
+      "types": "./dist/types.d.mts",
+      "import": "./dist/types.mjs"
+    },
+    "./cleaned/*": "./cleaned/*"
   },
   "files": [
-    "src",
-    "!src/**/*.test.ts",
     "dist",
     "cleaned",
     "README.md",
     "package.json"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "audit:excel": "node scripts/excel-source.mjs audit --generated-at 2026-05-05T17:40:00+08:00",
     "audit:golden-v1": "tsx scripts/golden-v1-replay.ts audit --generated-at 2026-05-05T18:20:00+08:00",
+    "build": "tsdown src/index.ts src/types.ts --format esm --dts --clean --out-dir dist",
     "check": "tsc -p tsconfig.json --noEmit",
     "fetch:buhflipexplode-da": "node scripts/buhflipexplode-da-source.mjs fetch",
     "fetch:mihoyo-da": "node scripts/mihoyo-da-source.mjs fetch",
+    "prepublishOnly": "pnpm build",
     "sync-cleaned": "node scripts/sync-cleaned.mjs",
     "test": "vitest run",
     "verify:buhflipexplode-da": "node scripts/buhflipexplode-da-source.mjs verify --snapshot 2026-05-05T0445Z",

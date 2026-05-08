@@ -1,0 +1,334 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+permissions:
+  contents: write
+  id-token: write
+
+jobs:
+  publish:
+    name: Publish workspace packages
+    runs-on: ubuntu-latest
+    environment: npm-publish
+    env:
+      PUBLISH_PACKAGES: '["packages/core","packages/data","packages/cli"]'
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: pnpm/action-setup@v6
+        with:
+          version: 10.33.0
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+          package-manager-cache: false
+
+      - name: Derive release version
+        id: release
+        shell: bash
+        run: |
+          set -euo pipefail
+          TAG="${GITHUB_REF_NAME}"
+          if [[ ! "$TAG" =~ ^v([0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?)$ ]]; then
+            echo "Tag must be vX.Y.Z or vX.Y.Z-prerelease, got $TAG" >&2
+            exit 1
+          fi
+          VERSION="${TAG#v}"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Validate release metadata
+        shell: bash
+        env:
+          VERSION: ${{ steps.release.outputs.version }}
+        run: |
+          set -euo pipefail
+          ROOT_VERSION="$(node -p "require('./package.json').version")"
+          COMMIT_SUBJECT="$(git log -1 --pretty=%s)"
+
+          test "$ROOT_VERSION" = "$VERSION" || { echo "root package.json version $ROOT_VERSION != $VERSION" >&2; exit 1; }
+          test "$COMMIT_SUBJECT" = "chore: release v$VERSION" || { echo "unexpected release commit: $COMMIT_SUBJECT" >&2; exit 1; }
+          git fetch origin main:refs/remotes/origin/main --tags
+          git merge-base --is-ancestor HEAD origin/main || { echo "release tag commit is not contained in origin/main" >&2; exit 1; }
+
+      - name: Validate npm CLI version
+        shell: bash
+        run: |
+          set -euo pipefail
+          NPM_VERSION="$(npm --version)"
+          node - "$NPM_VERSION" <<'NODE'
+          const version = process.argv[2]
+          const [major = 0, minor = 0, patch = 0] = version.split('.').map(Number)
+          const ok = major > 11 || (major === 11 && (minor > 5 || (minor === 5 && patch >= 1)))
+          if (!ok) {
+            console.error(`npm ${version} does not satisfy >= 11.5.1`)
+            process.exit(1)
+          }
+          console.log(`npm ${version} satisfies >= 11.5.1`)
+          NODE
+
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm check
+      - run: pnpm test
+      - run: pnpm build
+      - run: pnpm --filter @randomplay/data verify:golden-v1
+      - run: pnpm --filter @randomplay/data verify:mihoyo-da
+      - run: pnpm --filter @randomplay/data verify:buhflipexplode-da
+      - run: pnpm --filter @randomplay/data verify:excel
+      - run: pnpm --silent fairy:s1 | jq empty
+      - run: pnpm --silent fairy:s2 | jq empty
+      - run: pnpm --silent fairy:s3 | jq empty
+
+      - name: Resolve publish package allowlist
+        id: packages
+        shell: bash
+        env:
+          VERSION: ${{ steps.release.outputs.version }}
+        run: |
+          set -euo pipefail
+          node <<'NODE'
+          const fs = require('node:fs')
+          const path = require('node:path')
+
+          const root = process.cwd()
+          const releaseVersion = process.env.VERSION
+          const allowlist = JSON.parse(process.env.PUBLISH_PACKAGES)
+
+          if (!Array.isArray(allowlist) || !allowlist.length) {
+            console.error('PUBLISH_PACKAGES must be a non-empty JSON array of package directories.')
+            process.exit(1)
+          }
+
+          const seen = new Set()
+          const packages = allowlist.map((directory) => {
+            if (seen.has(directory)) {
+              console.error(`Duplicate publish package directory: ${directory}`)
+              process.exit(1)
+            }
+            seen.add(directory)
+
+            const manifestPath = path.join(root, directory, 'package.json')
+            if (!fs.existsSync(manifestPath)) {
+              console.error(`Publish package manifest not found: ${directory}/package.json`)
+              process.exit(1)
+            }
+
+            const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'))
+            if (!manifest.name) {
+              console.error(`${directory}/package.json missing name`)
+              process.exit(1)
+            }
+            if (manifest.private === true) {
+              console.error(`${manifest.name} is private and cannot be published`)
+              process.exit(1)
+            }
+            if (manifest.version !== releaseVersion) {
+              console.error(`${directory}/package.json version ${manifest.version} != ${releaseVersion}`)
+              process.exit(1)
+            }
+            if (manifest.publishConfig?.access !== 'public') {
+              console.error(`${manifest.name} must set publishConfig.access = public`)
+              process.exit(1)
+            }
+            if (manifest.exports?.['.'] === './src/index.ts') {
+              console.error(`${manifest.name} exports TypeScript source instead of built dist output`)
+              process.exit(1)
+            }
+
+            return { name: manifest.name, version: manifest.version, directory }
+          })
+
+          fs.writeFileSync(process.env.GITHUB_OUTPUT, `packages=${JSON.stringify(packages)}\n`, { flag: 'a' })
+          console.log(JSON.stringify(packages, null, 2))
+          NODE
+
+      - name: Prepare npm publish manifests
+        shell: bash
+        env:
+          VERSION: ${{ steps.release.outputs.version }}
+        run: |
+          set -euo pipefail
+          node scripts/prepare-npm-publish.mjs "$VERSION"
+
+      - name: Validate npm package tarballs
+        shell: bash
+        env:
+          PACKAGES: ${{ steps.packages.outputs.packages }}
+          VERSION: ${{ steps.release.outputs.version }}
+        run: |
+          set -euo pipefail
+          node <<'NODE'
+          const { execFileSync, spawnSync } = require('node:child_process')
+          const { mkdtempSync, rmSync } = require('node:fs')
+          const { tmpdir } = require('node:os')
+          const path = require('node:path')
+
+          const packages = JSON.parse(process.env.PACKAGES)
+          const version = process.env.VERSION
+          const tmp = mkdtempSync(path.join(tmpdir(), 'fairy-npm-pack-'))
+          const packageNames = new Set(packages.map(pkg => pkg.name))
+
+          try {
+            for (const pkg of packages) {
+              const result = spawnSync('npm', ['pack', '--json', '--pack-destination', tmp], {
+                cwd: pkg.directory,
+                encoding: 'utf8',
+                stdio: ['ignore', 'pipe', 'inherit'],
+              })
+              if (result.status !== 0) process.exit(result.status ?? 1)
+
+              const [packResult] = JSON.parse(result.stdout)
+              const tarball = path.join(tmp, packResult.filename)
+              const manifest = JSON.parse(execFileSync('tar', ['-xOf', tarball, 'package/package.json'], { encoding: 'utf8' }))
+
+              if (manifest.name !== pkg.name) {
+                console.error(`tarball name ${manifest.name} != ${pkg.name}`)
+                process.exit(1)
+              }
+              if (manifest.version !== version) {
+                console.error(`${manifest.name} tarball version ${manifest.version} != ${version}`)
+                process.exit(1)
+              }
+              const serialized = JSON.stringify(manifest)
+              if (serialized.includes('workspace:')) {
+                console.error(`${manifest.name} tarball package.json still contains workspace protocol`)
+                process.exit(1)
+              }
+              for (const key of ['dependencies', 'optionalDependencies', 'peerDependencies']) {
+                const deps = manifest[key] ?? {}
+                for (const [name, specifier] of Object.entries(deps)) {
+                  if (packageNames.has(name) && specifier !== version) {
+                    console.error(`${manifest.name} ${key}.${name} ${specifier} != ${version}`)
+                    process.exit(1)
+                  }
+                }
+              }
+              if (manifest.exports?.['.'] === './src/index.ts') {
+                console.error(`${manifest.name} tarball exports TypeScript source`)
+                process.exit(1)
+              }
+              console.log(`${manifest.name}@${manifest.version} npm tarball validated`)
+            }
+          }
+          finally {
+            rmSync(tmp, { recursive: true, force: true })
+          }
+          NODE
+
+      - name: Resolve npm publish state
+        id: npm-packages
+        shell: bash
+        env:
+          PACKAGES: ${{ steps.packages.outputs.packages }}
+          VERSION: ${{ steps.release.outputs.version }}
+        run: |
+          set -euo pipefail
+          node <<'NODE'
+          const { execFileSync } = require('node:child_process')
+          const fs = require('node:fs')
+
+          const packages = JSON.parse(process.env.PACKAGES)
+          const version = process.env.VERSION
+          const releaseSha = process.env.GITHUB_SHA
+          const publish = []
+          const existing = []
+
+          for (const pkg of packages) {
+            let exists = false
+            try {
+              execFileSync('npm', ['view', `${pkg.name}@${version}`, 'version', '--silent'], { stdio: 'pipe' })
+              exists = true
+            }
+            catch {
+              exists = false
+            }
+
+            if (!exists) {
+              publish.push(pkg)
+              continue
+            }
+
+            const gitHead = execFileSync('npm', ['view', `${pkg.name}@${version}`, 'gitHead', '--silent'], { encoding: 'utf8' }).trim()
+            if (!gitHead) {
+              console.error(`${pkg.name}@${version} exists on npm without gitHead`)
+              process.exit(1)
+            }
+            if (gitHead !== releaseSha) {
+              console.error(`${pkg.name}@${version} gitHead ${gitHead} != ${releaseSha}`)
+              process.exit(1)
+            }
+            existing.push(pkg)
+          }
+
+          fs.writeFileSync(process.env.GITHUB_OUTPUT, `publish=${JSON.stringify(publish)}\nexisting=${JSON.stringify(existing)}\n`, { flag: 'a' })
+          console.log('to publish:', JSON.stringify(publish, null, 2))
+          console.log('existing for this release:', JSON.stringify(existing, null, 2))
+          NODE
+
+      - name: Publish packages to npm with trusted publishing
+        shell: bash
+        env:
+          PACKAGES: ${{ steps.npm-packages.outputs.publish }}
+        run: |
+          set -euo pipefail
+          node <<'NODE'
+          const { spawnSync } = require('node:child_process')
+          const packages = JSON.parse(process.env.PACKAGES)
+
+          for (const pkg of packages) {
+            console.log(`Publishing ${pkg.name} from ${pkg.directory}`)
+            const result = spawnSync('npm', ['publish', '--access', 'public', '--no-git-checks'], {
+              cwd: pkg.directory,
+              stdio: 'inherit',
+            })
+            if (result.status !== 0) process.exit(result.status ?? 1)
+          }
+          NODE
+
+      - name: Registry install smoke
+        shell: bash
+        env:
+          VERSION: ${{ steps.release.outputs.version }}
+        run: |
+          set -euo pipefail
+          TMP_DIR="$(mktemp -d)"
+          cd "$TMP_DIR"
+          npm init -y >/dev/null
+          npm install "@randomplay/core@$VERSION" "@randomplay/data@$VERSION" "@randomplay/cli@$VERSION" >/dev/null
+          node --input-type=module <<'NODE'
+          import { calculate, parseBattleSnapshot } from '@randomplay/core'
+          import * as data from '@randomplay/data'
+          import replay from '@randomplay/data/cleaned/golden/v1-replay-report.json' with { type: 'json' }
+
+          if (typeof calculate !== 'function') throw new Error('@randomplay/core calculate export missing')
+          if (typeof parseBattleSnapshot !== 'function') throw new Error('@randomplay/core parseBattleSnapshot export missing')
+          if (!Object.keys(data).length) throw new Error('@randomplay/data root export is empty')
+          if (replay.summary?.releaseReady !== true) throw new Error('golden replay report is not release ready')
+          NODE
+          ./node_modules/.bin/fairy --help | jq empty
+          ./node_modules/.bin/fairy calc "$GITHUB_WORKSPACE/examples/snapshots/s1-yixuan-sheer.json" --lang zh | jq empty
+          jq 'del(.attackSegments[0].source)' "$GITHUB_WORKSPACE/examples/snapshots/s1-yixuan-sheer.json" > warning-snapshot.json
+          ./node_modules/.bin/fairy calc warning-snapshot.json --lang en > warning-output.json 2> warning-stderr.txt
+          jq empty warning-output.json
+          grep -q "ERR-SRC-001" warning-stderr.txt
+
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.release.outputs.version }}
+        run: |
+          if gh release view "v$VERSION" >/dev/null 2>&1; then
+            gh release edit "v$VERSION" \
+              --title "fairy v$VERSION" \
+              --notes-file CHANGELOG.md
+          else
+            gh release create "v$VERSION" \
+              --title "fairy v$VERSION" \
+              --notes-file CHANGELOG.md \
+              --verify-tag
+          fi
