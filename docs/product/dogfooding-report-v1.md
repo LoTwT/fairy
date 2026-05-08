@@ -114,15 +114,24 @@ dogfooding 通过 release gate（≥4/5）。
 
 ## 6. 后续流程
 
-按 `docs/product/dogfooding-v1.md` §4.2：
+按 `docs/product/dogfooding-v1.md` §4.2 + 2026-05-08 release decisions：
+
+**release 决策快照**（lo-user 拍板）：
+- npm scope: `@randomplay/data` / `@randomplay/core` / `@randomplay/cli`（root = `fairy-monorepo`，CLI bin 仍 `fairy`）
+- 起始版本 `v0.0.1`（与 design-system 同节奏）
+- npm publish = 是（OIDC + Trusted Publisher，复用 design-system DS-D-09）
+- release artifact = 手写 `CHANGELOG.md` + GitHub Release page
+- 公告 = 仅 #fairy
+- rollback = 完整 runbook（npm deprecate + revert PR + GitHub Release pre-release）
+
+**5-Phase 流水线**：
 
 1. ✅ lo-user 宣布通过 + 打分（2026-05-07 00:58）
-2. ✅ Product 整理 dogfooding-report-v1.md（本文件，入仓后）
-3. ⏳ QA release-readiness review task：
-   - 重跑 `pnpm check` / `pnpm test` / `verify:golden-v1` / S1/S2/S3 alias + `jq empty`
-   - 抽查 B-Calc.blocker 修复回归（D-19 PR #30 / G22/G23 PR #28）
-4. ⏳ Product errata PR：DD-001（米游社 D-17）+ DD-002（D-13 19 anchors）+ DD-003（dogfooding gate）+ dogfooding-report 链接 + V1 release notes
-5. ⏳ V1 release（git tag 命名 / 是否 npm publish 待 errata PR 时一并定）
+2. ✅ Product 整理 dogfooding-report-v1.md（本文件）
+3. ✅ Phase 1 包名 rename PR #35（`@fairy/*` → `@randomplay/*`，commit `dd78a4b`）+ Phase 2 release workflow PR #36（bumpp + allowlist publish + OIDC，commit `a0ca3e6`）
+4. ⏳ Phase 3 PR #31 refresh + QA re-pass + Product squash merge；Product 起 errata PR：DD-001（米游社 D-17 + 2026-05-08 audit 决议）+ DD-002（D-13 19 anchors）+ DD-003（dogfooding gate）+ V1 release notes 草稿
+5. ⏳ Phase 4 lo-user 手动首发 v0.0.1（Trusted Publisher 限制必须先有包）+ 在 npmjs.com 配 Trusted Publisher
+6. ⏳ Phase 5 release CI v0.0.x OIDC 验证 + QA smoke + verify:golden-v1 复跑 + 公告 #fairy
 
 ---
 
@@ -134,6 +143,8 @@ dogfooding 通过 release gate（≥4/5）。
 | PR #30 | D-19 CLI 输出 reform（brief view + lanes） | `74c5f83` |
 | PR #33 | 米游社 sourceConflict audit 决议（accept buhflipexplode） | `04e7077` |
 | PR #34 | CLI framework 切 citty | `4c7b753` |
+| PR #35 | npm scope rename `@fairy/*` → `@randomplay/*`（root `fairy-monorepo`，CLI bin `fairy` 不变） | `dd78a4b` |
+| PR #36 | release workflow + package-readiness（bumpp + allowlist publish + OIDC + rollback runbook） | `a0ca3e6` |
 
 ## 附录 B · 整体打分明细（lo-user 自评）
 
