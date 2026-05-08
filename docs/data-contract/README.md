@@ -1,7 +1,7 @@
 # Data Contract
 
 Data-contract documents define the stable JSON and TypeScript-facing contracts used by
-`@fairy/data`, `@fairy/core`, and `@fairy/cli`.
+`@randomplay/data`, `@randomplay/core`, and `@randomplay/cli`.
 
 S2 starts with documents first. Runtime validators and package source schemas should
 mirror these contracts after cross-role review.
@@ -31,5 +31,5 @@ mirror these contracts after cross-role review.
 - `--lang` only affects messages, explanations, and prompt rendering.
 - Runtime handlers are registered deterministic functions. JSON data never
   contains arbitrary scripts.
-- Formal `@fairy/data` values must be source-derived. User overrides and test
+- Formal `@randomplay/data` values must be source-derived. User overrides and test
   fixtures are separate provenance classes.

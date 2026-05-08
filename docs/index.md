@@ -1,6 +1,6 @@
 # Fairy 文档导航
 
-Fairy 是绝区零 1-3 代理人静态快照伤害计算器。V1 目标是 `@fairy/data`、`@fairy/core`、`@fairy/cli`，Web UI 与 AI plugin 后置。
+Fairy 是绝区零 1-3 代理人静态快照伤害计算器。V1 目标是 `@randomplay/data`、`@randomplay/core`、`@randomplay/cli`，Web UI 与 AI plugin 后置。
 
 ## 快速入口
 

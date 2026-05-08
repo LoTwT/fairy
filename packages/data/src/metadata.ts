@@ -3,11 +3,11 @@ import {
   sourceRefSchema,
   type SourceDocument,
   type SourceRef,
-} from "@fairy/core"
+} from "@randomplay/core"
 import type { DataSourceDescriptor } from "./sources"
 
 export const DATA_SOURCE_SKELETON_PARSER_VERSION =
-  "@fairy/data-source-skeleton-v0.1.0"
+  "@randomplay/data-source-skeleton-v0.1.0"
 
 export interface BuildSourceDocumentOptions {
   sourceVersion: string

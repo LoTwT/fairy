@@ -25,7 +25,7 @@ needed before true-data replay. It does not change QA's fixture assertions.
 
 | Source | Current state | V1 replay use |
 |---|---|---|
-| Core rules / guide reference | Implemented in `@fairy/core`, reference retained in `docs/reference/`. | Formula-only anchors such as defense, crit, rounding, anomaly/disorder constants. |
+| Core rules / guide reference | Implemented in `@randomplay/core`, reference retained in `docs/reference/`. | Formula-only anchors such as defense, crit, rounding, anomaly/disorder constants. |
 | buhflipexplode DA snapshot | PR #19 retained 35 live periods, boss data, buffs, multipliers, and algorithm drift gate. | DA boss base HP/DEF/daze/anomaly data, period multipliers, English buff/boss text. |
 | Mihoyo DA snapshot | PR #24 retained 35 details and zh/en alignment. | Chinese buff/boss/room text and source anchors for later typed-modifier review. |
 | Excel workbook | Raw workbook retained; `workbook-audit.json` records sheet/column shape. | Minimal agent kit data for Yixuan / Nicole / Yanagi team-modifier anchors, if V1 replay uses formal sourced modifiers. |
@@ -135,7 +135,7 @@ Minimum Excel reader work for #43:
 
 ## Replay Harness Baseline
 
-`pnpm --filter @fairy/data audit:golden-v1` generates two machine-readable
+`pnpm --filter @randomplay/data audit:golden-v1` generates two machine-readable
 cleaned artifacts:
 
 - `data/cleaned/audit/v1-agent-source-candidates.json` — minimal #40 reader
@@ -156,7 +156,7 @@ The current replay report intentionally reports:
 | `blocked` | none | G22/G23 `ERR-DAT-005` diagnostics are cleared by acceptance records. |
 | `deferred` | G13, G18-G20 | Explicit V1.x scope. |
 
-`pnpm --filter @fairy/data verify:golden-v1` is an offline freshness and shape
+`pnpm --filter @randomplay/data verify:golden-v1` is an offline freshness and shape
 gate. It verifies the artifacts are regenerated from the retained sources and
 that V1 replay has `passed=19`, `pendingHarness=0`, `blocked=0`,
 `blockingDiagnostics=0`, and `releaseReady=true`.

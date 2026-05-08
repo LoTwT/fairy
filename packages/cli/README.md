@@ -1,6 +1,6 @@
-# @fairy/cli
+# @randomplay/cli
 
-JSON-only command shell over `@fairy/core`.
+JSON-only command shell over `@randomplay/core`.
 
 Command and flag schemas are defined with `citty`, while stdout remains JSON-only
 for AI/plugin consumers. Help output is therefore JSON (`fairy help` or
@@ -9,12 +9,12 @@ for AI/plugin consumers. Help output is therefore JSON (`fairy help` or
 ## Commands
 
 ```bash
-pnpm --silent --filter @fairy/cli run cli -- calc snapshot.json --lang zh --pretty
-pnpm --silent --filter @fairy/cli run cli -- calc snapshot.json --view verbose --lang zh --pretty
-pnpm --silent --filter @fairy/cli run cli -- compare left.json right.json --lang en
-pnpm --silent --filter @fairy/cli run cli -- scan snapshot.json --path team[0].panel.attack --from 1000 --to 2000 --step 100
-pnpm --silent --filter @fairy/cli run cli -- explain snapshot.json
-pnpm --silent --filter @fairy/cli run cli -- migrate snapshot.json
+pnpm --silent --filter @randomplay/cli run cli -- calc snapshot.json --lang zh --pretty
+pnpm --silent --filter @randomplay/cli run cli -- calc snapshot.json --view verbose --lang zh --pretty
+pnpm --silent --filter @randomplay/cli run cli -- compare left.json right.json --lang en
+pnpm --silent --filter @randomplay/cli run cli -- scan snapshot.json --path team[0].panel.attack --from 1000 --to 2000 --step 100
+pnpm --silent --filter @randomplay/cli run cli -- explain snapshot.json
+pnpm --silent --filter @randomplay/cli run cli -- migrate snapshot.json
 ```
 
 Use `-` instead of a file path to read JSON from stdin.
@@ -46,7 +46,7 @@ Brief `summary` exposes deterministic result lanes:
 - `summary.anomalyBuildup` when non-zero anomaly buildup is produced
 
 Use `--view verbose` to return the full authoritative `CalcResult` from
-`@fairy/core`, including `attackSegments`, `buckets`, `modifiers`, `events`,
+`@randomplay/core`, including `attackSegments`, `buckets`, `modifiers`, `events`,
 `trace`, and legacy transition fields such as `summary.rawTotalDamage`,
 `summary.displayTotalDamage`, and `summary.expectedDamage`.
 

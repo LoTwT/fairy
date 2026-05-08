@@ -4,7 +4,7 @@ Status: S5 segment 1 baseline
 Owner: @TechLead
 Related contracts: `docs/data-contract/game-data.md`
 
-`@fairy/data` publishes cleaned `GameData`, not raw source files. Every cleaned
+`@randomplay/data` publishes cleaned `GameData`, not raw source files. Every cleaned
 row must retain enough metadata to reconstruct where it came from and which
 parser/version produced it.
 
@@ -63,7 +63,7 @@ Rules:
 
 ## Formal Data Boundary
 
-Formal data is any row that ships from `@fairy/data` as canonical game data:
+Formal data is any row that ships from `@randomplay/data` as canonical game data:
 
 - agents
 - skills and skill segments
@@ -75,7 +75,7 @@ Formal data is any row that ships from `@fairy/data` as canonical game data:
 - rule tables
 - aliases derived from source terms
 
-Formal data must not be typed by hand. A row can enter `@fairy/data` only after
+Formal data must not be typed by hand. A row can enter `@randomplay/data` only after
 the parser has linked it to a source document and source anchor. Manual review
 may approve or reject source-derived rows, but `manualReview` is not a source for
 inventing values.

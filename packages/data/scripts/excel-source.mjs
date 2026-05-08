@@ -265,7 +265,7 @@ function buildAudit(generatedAt) {
       formalDataPolicy:
         "This audit records sheet and column shape only. It does not publish formal cleaned game rows or infer typed modifiers.",
       parserDependencyPolicy:
-        "The XLSX parser is a repository devDependency for source verification and generation; it must not become an @fairy/data runtime dependency.",
+        "The XLSX parser is a repository devDependency for source verification and generation; it must not become an @randomplay/data runtime dependency.",
     },
     missingRequiredCandidateSheets,
     v1CandidateSheets,
@@ -287,7 +287,7 @@ function verifyCommand() {
   const expected = buildAudit(readJson(auditPath).generatedAt)
   const actual = readJson(auditPath)
   if (JSON.stringify(actual) !== JSON.stringify(expected))
-    throw new Error("Excel workbook audit is stale; rerun pnpm --filter @fairy/data audit:excel")
+    throw new Error("Excel workbook audit is stale; rerun pnpm --filter @randomplay/data audit:excel")
   if (actual.workbook.version !== "2.6.0_R14028417")
     throw new Error(`Unexpected workbook version: ${actual.workbook.version}`)
   if (actual.workbook.sheetCount !== 31)

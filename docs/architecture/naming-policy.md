@@ -6,7 +6,7 @@ Inputs: glossary v0.3.2, D-11, @lo-user screenshots, Product v2.0
 
 ## 1. Principle
 
-Public schema, `@fairy/core` API, `@fairy/data` output, `@fairy/cli` JSON, and trace fields use English semantic identifiers.
+Public schema, `@randomplay/core` API, `@randomplay/data` output, `@randomplay/cli` JSON, and trace fields use English semantic identifiers.
 
 D-11 is official-first:
 

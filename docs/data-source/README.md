@@ -4,18 +4,18 @@ Status: S5 segment 2 source baseline
 Owner: @TechLead
 Inputs: CONFIRM-4, CONFIRM-11, task #31, TL-4 scraper preparation
 
-This directory records the source-ingestion boundary for `@fairy/data`.
+This directory records the source-ingestion boundary for `@randomplay/data`.
 Segment 1 defined source descriptors, adapter interfaces, metadata rules, and
 crawler compliance notes. Segment 2 starts adding retained source snapshots and
 offline verification gates before formal cleaned game data is generated.
 
 ## Segment 1 Scope
 
-- Define `@fairy/data` source descriptors for the lo-user Excel workbook,
+- Define `@randomplay/data` source descriptors for the lo-user Excel workbook,
   Mihoyo ZZZ wiki Critical Assault page, and buhflipexplode Deadly Assault page.
 - Provide adapter interfaces for future Excel/crawler readers.
 - Validate `SourceDocument` and empty `GameData` metadata against
-  `@fairy/core`.
+  `@randomplay/core`.
 - Record robots.txt / ToS observations and conservative fetch rules.
 
 ## Source Snapshot Scope
@@ -27,7 +27,7 @@ offline verification gates before formal cleaned game data is generated.
 Formal V1 data must be generated from reviewed source documents and keep
 `sourceId`, `sourceVersion`, `parsedAt` / `fetchedAt`, `parserVersion`, and row
 anchors. Hand-written values may exist only in QA fixtures, not in
-`@fairy/data` published data.
+`@randomplay/data` published data.
 
 ## Source Registry
 

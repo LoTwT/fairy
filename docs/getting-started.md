@@ -22,7 +22,7 @@ cd fairy
 pnpm install --frozen-lockfile
 pnpm check
 pnpm test
-pnpm --filter @fairy/data verify:golden-v1
+pnpm --filter @randomplay/data verify:golden-v1
 ```
 
 ## 2. Run the First Example
@@ -66,7 +66,7 @@ the anomaly is already ready to settle for this calculation.
 
 ## 3. Use the Full CLI
 
-The root alias forwards arguments to `@fairy/cli`:
+The root alias forwards arguments to `@randomplay/cli`:
 
 ```bash
 pnpm --silent fairy -- help --pretty
@@ -79,7 +79,7 @@ pnpm --silent fairy -- scan examples/snapshots/s1-yixuan-sheer.json --path 'team
 Use the package-level command when you want the exact underlying invocation:
 
 ```bash
-pnpm --silent --filter @fairy/cli run cli -- calc ../../examples/snapshots/s1-yixuan-sheer.json --lang zh --pretty
+pnpm --silent --filter @randomplay/cli run cli -- calc ../../examples/snapshots/s1-yixuan-sheer.json --lang zh --pretty
 ```
 
 The package-level command runs with `packages/cli` as its working directory;

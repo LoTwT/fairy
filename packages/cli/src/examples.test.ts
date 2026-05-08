@@ -26,7 +26,7 @@ describe("dogfooding examples", () => {
       const run = spawnSync("pnpm", [
         "--silent",
         "--filter",
-        "@fairy/cli",
+        "@randomplay/cli",
         "run",
         "cli",
         "--",
@@ -50,7 +50,7 @@ describe("dogfooding examples", () => {
     const run = spawnSync("pnpm", [
       "--silent",
       "--filter",
-      "@fairy/cli",
+      "@randomplay/cli",
       "run",
       "cli",
       "--",

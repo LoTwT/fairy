@@ -5,8 +5,8 @@ Owner: @TechLead
 Reviewers: @Product, @UX, @QA
 Inputs: BattleSnapshot, GameData, handler spec, trace contract
 
-`CalcResult` is the only authoritative output of `@fairy/core` and
-`@fairy/cli`. Human-readable tables, prompt outputs, and future UI views are
+`CalcResult` is the only authoritative output of `@randomplay/core` and
+`@randomplay/cli`. Human-readable tables, prompt outputs, and future UI views are
 renderers over this JSON.
 
 ## 1. Shape

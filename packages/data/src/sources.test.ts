@@ -35,7 +35,7 @@ function createDiscoveryGameData() {
   })
 }
 
-describe("@fairy/data source discovery skeleton", () => {
+describe("@randomplay/data source discovery skeleton", () => {
   it("keeps source descriptor ids unique", () => {
     const ids = dataSourceDescriptors.map(source => source.id)
     expect(new Set(ids).size).toBe(ids.length)
@@ -46,7 +46,7 @@ describe("@fairy/data source discovery skeleton", () => {
     expect(dataSourceDescriptors.every(source => !source.formalDataReady)).toBe(true)
   })
 
-  it("builds SourceDocument metadata that validates against @fairy/core", () => {
+  it("builds SourceDocument metadata that validates against @randomplay/core", () => {
     const descriptor = getDataSourceDescriptor("mihoyo-zzz-critical-assault")
     const sourceDocument = buildSourceDocument(descriptor, {
       sourceVersion: "etag:0E83857DC32EB629AC2FE1208C88796E",
@@ -60,7 +60,7 @@ describe("@fairy/data source discovery skeleton", () => {
       id: "mihoyo-zzz-critical-assault",
       kind: "mihoyoWiki",
       url: "https://baike.mihoyo.com/zzz/wiki/channel/map/13/108",
-      parserVersion: "@fairy/data-source-skeleton-v0.1.0",
+      parserVersion: "@randomplay/data-source-skeleton-v0.1.0",
     })
   })
 

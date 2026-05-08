@@ -1,4 +1,4 @@
-import type { SourceDocument } from "@fairy/core"
+import type { SourceDocument } from "@randomplay/core"
 
 export type DataSourceKind = Extract<
   SourceDocument["kind"],
@@ -76,7 +76,7 @@ export const dataSourceDescriptors = [
       redistribution: "cleanedDataOnly",
       notes: [
         "The workbook is retained in git under data/source/excel/ as a raw/source archive.",
-        "The workbook and derived audit artifacts must not be published in the @fairy/data package.",
+        "The workbook and derived audit artifacts must not be published in the @randomplay/data package.",
         "Use workbook-audit.json for sheet/column discovery; do not infer typed modifiers from text without deterministic parser support or manual acceptance.",
       ],
     },

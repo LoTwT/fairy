@@ -17,7 +17,7 @@ Fairy is a ZZZ static snapshot damage calculator for 1-3 agents.
 - Keep JSON schema keys and enum values language-independent English.
 - Default human-facing language is `zh`; `en` is optional where V1 needs it.
 - Do not add runtime script injection for handlers.
-- Formal `@fairy/data` data must come from Excel/crawler pipelines, not hand-written values.
+- Formal `@randomplay/data` data must come from Excel/crawler pipelines, not hand-written values.
 - Test fixtures may be hand-written and reviewed; they do not ship as formal data.
 - Current Mihoyo DA ingestion uses public JSON APIs plus Cheerio for embedded
   rich-text fragments; Playwright/browser rendering is discovery-only unless a

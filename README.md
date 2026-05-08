@@ -4,9 +4,9 @@ Fairy is a Zenless Zone Zero static snapshot damage calculator.
 
 V1 focuses on a TypeScript monorepo with three packages:
 
-- `@fairy/data`: official-release data ingestion, cleaning, and queryable game data.
-- `@fairy/core`: pure calculation functions and traceable multiplier breakdowns.
-- `@fairy/cli`: JSON-only command-line access to `@fairy/core`.
+- `@randomplay/data`: official-release data ingestion, cleaning, and queryable game data.
+- `@randomplay/core`: pure calculation functions and traceable multiplier breakdowns.
+- `@randomplay/cli`: JSON-only command-line access to `@randomplay/core`.
 
 Start with [docs/index.md](docs/index.md).
 
@@ -20,7 +20,7 @@ Use [docs/getting-started.md](docs/getting-started.md) for the repo-local
 dogfooding flow and executable examples.
 
 `fairy calc` defaults to `--view brief`, which returns summary-first non-crit
-and crit lanes. The dogfooding Anby fixture is covered by the `@fairy/cli` test
+and crit lanes. The dogfooding Anby fixture is covered by the `@randomplay/cli` test
 suite and remains part of the fixed `pnpm test` verification chain.
 
 ## Development

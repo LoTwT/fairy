@@ -1,4 +1,4 @@
-import type { GameData } from "@fairy/core"
+import type { GameData } from "@randomplay/core"
 
 export type CleanedDataKind = "gameData" | "gameLabelI18n" | "sourceManifest"
 

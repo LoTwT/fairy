@@ -13,7 +13,7 @@
   "policy": {
     "v1Scope": "V1 candidate sheets cover agents, W-Engines, Drive Discs, mindscape cinema, and potential activation. Full cleaned/enemies is deferred by D-13 unless a V1 golden anchor requires a minimal subset.",
     "formalDataPolicy": "This audit records sheet and column shape only. It does not publish formal cleaned game rows or infer typed modifiers.",
-    "parserDependencyPolicy": "The XLSX parser is a repository devDependency for source verification and generation; it must not become an @fairy/data runtime dependency."
+    "parserDependencyPolicy": "The XLSX parser is a repository devDependency for source verification and generation; it must not become an @randomplay/data runtime dependency."
   },
   "missingRequiredCandidateSheets": [],
   "v1CandidateSheets": [

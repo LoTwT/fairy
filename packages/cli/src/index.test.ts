@@ -139,7 +139,7 @@ describe("fairy cli", () => {
     const run = spawnSync("pnpm", [
       "--silent",
       "--filter",
-      "@fairy/cli",
+      "@randomplay/cli",
       "run",
       "cli",
       "--",
@@ -178,7 +178,7 @@ describe("fairy cli", () => {
   it("shows pnpm lifecycle output without --silent, so docs must not recommend it", () => {
     const run = spawnSync("pnpm", [
       "--filter",
-      "@fairy/cli",
+      "@randomplay/cli",
       "run",
       "cli",
       "--",

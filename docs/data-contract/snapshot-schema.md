@@ -101,7 +101,7 @@ UX 心智 / AI prompt 写法：把 attackSegments 描述为"一连串攻击点"�
 
 | 层 | 来源 | 允许人工编辑？ | 用户可在 snapshot 中覆盖？ |
 |---|---|---|---|
-| `@fairy/data` 游戏规则数据 | Excel + 爬虫 | ❌ 不允许人工编辑 | — |
+| `@randomplay/data` 游戏规则数据 | Excel + 爬虫 | ❌ 不允许人工编辑 | — |
 | BattleSnapshot 中引用 data 的字段 | data 派生 | — | ✅ overrides + `overriddenFromData` trace |
 | BattleSnapshot 中用户面板 / 装备选择 / 增益勾选 | 用户提供 | ✅ 必须 | — |
 | 测试 fixtures（`__fixtures__/golden/`） | 人工审核（L2） | ✅ 仅供 core 单测 | — |
