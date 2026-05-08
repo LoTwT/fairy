@@ -10,6 +10,7 @@ Fairy 是绝区零 1-3 代理人静态快照伤害计算器。V1 目标是 `@ran
 - 数据契约：[data-contract/](data-contract/)
 - 架构与工程：[architecture/](architecture/)
 - 数据来源：[data-source/](data-source/)
+- 发布流程：[release/release-workflow.md](release/release-workflow.md)
 - QA 策略：[qa/](qa/)
 - UX 文案与场景：[ux/](ux/)
 
@@ -34,4 +35,5 @@ Fairy 是绝区零 1-3 代理人静态快照伤害计算器。V1 目标是 `@ran
 - 米游社危局强袭战 source snapshot：[data-source/mihoyo/](data-source/mihoyo/)
 - buhflipexplode 危局强袭战 source snapshot：[data-source/buhflipexplode/](data-source/buhflipexplode/)
 - V1 golden source coverage：[qa/golden-source-coverage.md](qa/golden-source-coverage.md)
+- Release workflow：[release/release-workflow.md](release/release-workflow.md)
 - Starter scenarios narrative：[ux/starter-scenarios.md](ux/starter-scenarios.md)

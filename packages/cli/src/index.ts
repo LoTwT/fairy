@@ -2,8 +2,10 @@ import type { CalcResult, Diagnostic } from "@randomplay/core"
 import { calculate, parseBattleSnapshot } from "@randomplay/core"
 import { defineCommand, parseArgs as parseCittyArgs, type ArgsDef } from "citty"
 import { readFile } from "node:fs/promises"
-import { dirname, resolve } from "node:path"
-import { fileURLToPath, pathToFileURL } from "node:url"
+import { resolve } from "node:path"
+import { pathToFileURL } from "node:url"
+import enMessages from "../../../docs/ux/i18n/messages.en.json" with { type: "json" }
+import zhMessages from "../../../docs/ux/i18n/messages.zh.json" with { type: "json" }
 import { cliErrorFallbackMessages, isCliErrorCode, type CliErrorCode } from "./errors"
 
 type Lang = "zh" | "en"
@@ -39,7 +41,15 @@ interface CliErrorBody {
 
 const supportedCommands = ["calc", "compare", "scan", "explain", "migrate"] as const
 const defaultLang: Lang = "zh"
-const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), "../../..")
+
+function toMessageCatalog(raw: Record<string, unknown>): MessageCatalog {
+  return Object.fromEntries(Object.entries(raw).filter(([, value]) => typeof value === "string")) as MessageCatalog
+}
+
+const messageCatalogs = {
+  en: toMessageCatalog(enMessages),
+  zh: toMessageCatalog(zhMessages),
+} satisfies Record<Lang, MessageCatalog>
 
 const commonArgs = {
   help: {
@@ -688,11 +698,7 @@ function nodeIo(): CliIo {
     }),
     stdout: text => process.stdout.write(text),
     stderr: text => process.stderr.write(text),
-    loadMessages: async (lang) => {
-      const path = resolve(repoRoot, "docs", "ux", "i18n", `messages.${lang}.json`)
-      const raw = await readFile(path, "utf8")
-      return JSON.parse(raw) as MessageCatalog
-    },
+    loadMessages: async lang => messageCatalogs[lang],
   }
 }
 

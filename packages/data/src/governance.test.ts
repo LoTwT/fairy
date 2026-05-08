@@ -47,9 +47,9 @@ describe("S5 data governance", () => {
 
     expect(npmIgnore).toContain("data/source/")
     expect(packageJson.files).toEqual(
-      expect.arrayContaining(["src", "dist", "cleaned"]),
+      expect.arrayContaining(["dist", "cleaned"]),
     )
-    expect(packageJson.files).toContain("!src/**/*.test.ts")
+    expect(packageJson.files).not.toContain("src")
     expect(packageJson.files?.some(entry => entry.includes("source"))).toBe(false)
   })
 
