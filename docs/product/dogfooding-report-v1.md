@@ -18,7 +18,7 @@
 | **可用性** | 按 getting-started.md 从零跑通 | ✅ clone + install + S1/S2/S3 alias + verify:golden-v1 全过 |
 | **可读性** | CLI 输出能看懂 / trace + sourceRefs 够解释 | ⚠️ 默认输出反馈"太复杂"→ 触发 D-19 reform，已修 |
 | **数值正确性** | S1/S2/S3 + 自建 snapshot 数值符合预期 | ✅ 安比核心技 F + basic 16 + 杜拉罕 defense 952.8 → nonCrit=224 / crit=336 / dazeValue=37.536，三方校对通过 |
-| **错误友好性** | ERR-* 文案能让试用人 self-recover | （未做边界探测，未触发 ERR 文案验证） |
+| **错误友好性** | ERR-* 文案能让试用人 self-recover | ⚠️ Day 3 边界探测 lo-user 决策跳过，未触发 ERR 文案验证；记 known limitation（§4） |
 | **范围漏洞** | 想算但 V1 不支持 | 未报告 |
 
 ---
@@ -56,6 +56,22 @@
 - **修复 PR**：#28 commit `3f5e67a`
 - **状态**：✅ 已修 + QA 二次复核通过
 
+### F-2026-05-08-05：米游社 sourceConflict 3 条 audit 决议
+- **类别**：D-Data（dogfooding 期间触发的 audit gate，非 calc bug）
+- **现象**：cleaned typed modifier 留存 3 条米游社 vs buhflipexplode 危局强袭战 buff 数值冲突（21 澄意 / 8 灼冽 / 1 破招），Day 0 标记 non-blocking 但 release 前需要拍板
+- **期望**：人工 audit + 决议
+- **解决**：lo-user 用 nanoka (`https://zzz.nanoka.cc/boss/`) 作为人工查询源（不接管线），三方比对结果 nanoka 与 buhflipexplode 一致（2:1 vs Mihoyo）；lo-user 决策 `Q1，按 buhflipexplode`，cleaned release evidence 记录为 `resolved-prefer-buhflipexplode`，Mihoyo 原值与 sourceRefs 保留作为审计线索
+- **修复 PR**：#33 commit `04e7077`（task #72）
+- **状态**：✅ 已决议，audit 文件入仓 `data/cleaned/audit/mihoyo-buhflipexplode.source-conflicts.json`
+
+### F-2026-05-08-06：CLI framework 切 citty
+- **类别**：U-Scenario（dogfooding 期间触发的 CLI baseline 收敛，非 calc bug）
+- **现象**：现有 CLI 是手写 thin shell（parseArgs + switch），lo-user 询问 unjs 生态 citty 是否更合适
+- **期望**：V1 release 前在 baseline 阶段切换，避免 V1.x 再做 breaking 迁移
+- **解决**：TL 调研后确认 citty 更贴合 ESM-first / 类型安全 / 命令子树扩展，实施迁移
+- **修复 PR**：#34 commit `4c7b753`（task #73）
+- **状态**：✅ 已合入 main + QA 回归通过
+
 ---
 
 ## 3. lo-user 整体打分
@@ -74,8 +90,8 @@ dogfooding 通过 release gate（≥4/5）。
 
 - **DD-003 单人 dogfooding 限制**：V1 仅由 lo-user 单人深度 dogfood 验证 + QA 回归，**未经社区广泛验证**
 - **V1 黄金集 = 19 anchors**（D-13 errata）：G13 / G18 / G19 / G20 推迟到 V1.x（涉及 data-driven anomaly threshold rule composition / 部位破坏真实伤害 / 失衡恢复时间等扩展功能）
-- **米游社 sourceConflict 3 个**（21 澄意 / 8 灼冽 / 1 破招）：non-blocking historical 记录，cleaned typed modifier 发布前需人工 audit gate 触发时再决（Day 0 不阻塞）
-- **dogfooding 边界探测未完整覆盖**：lo-user Day 3（`--lang en` 验证 / 故意造错 ERR-* 验证）未执行；Product 自评属 known limitation，不阻塞 release
+- **米游社 sourceConflict 3 个**（21 澄意 / 8 灼冽 / 1 破招）：~~non-blocking historical 记录，cleaned typed modifier 发布前需人工 audit gate 触发时再决~~ → ✅ 2026-05-08 已 audit 决议（accept buhflipexplode；F-05 / PR #33），不再属于 known limitation，转记为已解决项
+- **dogfooding 边界探测 Day 3 跳过**：lo-user 决策跳过 Day 3（`--lang en` 验证 / 故意造错 ERR-* 验证），release 后视真实使用反馈再决定是否回补；属 known limitation，不阻塞 release
 
 ---
 
@@ -87,7 +103,8 @@ dogfooding 通过 release gate（≥4/5）。
 |---|---|
 | B-Calc.blocker：0 件未修 | ✅ 0 件 |
 | B-Calc.non-blocker：已重新分类 | ✅ F-02 归 U-Scenario，已 absorbed by D-19 |
-| U-ErrCopy / U-Scenario：可修已修，不修加 known limitation 注解 | ✅ F-01 / F-02 / F-03 已修；无 unresolved item |
+| U-ErrCopy / U-Scenario：可修已修，不修加 known limitation 注解 | ✅ F-01 / F-02 / F-03 / F-06 已修；Day 3 跳过记 known limitation |
+| D-Data：audit gate 决议落地 | ✅ F-05 已决议（accept buhflipexplode），audit 文件入仓 |
 | P-Range：全部入 V1.x backlog | ✅ G13/G18/G19/G20 已 V1.x（D-13）；其他无新增 |
 | lo-user 整体打分 ≥ 4/5 | ✅ 4/5 |
 
@@ -115,6 +132,8 @@ dogfooding 通过 release gate（≥4/5）。
 |---|---|---|
 | PR #28 | G22/G23 manual acceptance + fail-loud | `3f5e67a` |
 | PR #30 | D-19 CLI 输出 reform（brief view + lanes） | `74c5f83` |
+| PR #33 | 米游社 sourceConflict audit 决议（accept buhflipexplode） | `04e7077` |
+| PR #34 | CLI framework 切 citty | `4c7b753` |
 
 ## 附录 B · 整体打分明细（lo-user 自评）
 
