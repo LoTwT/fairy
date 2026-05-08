@@ -1,5 +1,6 @@
 import type { CalcResult, Diagnostic } from "@fairy/core"
 import { calculate, parseBattleSnapshot } from "@fairy/core"
+import { defineCommand, parseArgs as parseCittyArgs, type ArgsDef } from "citty"
 import { readFile } from "node:fs/promises"
 import { dirname, resolve } from "node:path"
 import { fileURLToPath, pathToFileURL } from "node:url"
@@ -37,16 +38,158 @@ interface CliErrorBody {
 }
 
 const supportedCommands = ["calc", "compare", "scan", "explain", "migrate"] as const
-const booleanFlags = new Set(["help", "pretty"])
 const defaultLang: Lang = "zh"
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), "../../..")
 
+const commonArgs = {
+  help: {
+    type: "boolean",
+    description: "Show JSON help output.",
+  },
+  lang: {
+    type: "string",
+    description: "Diagnostic language.",
+    valueHint: "zh|en",
+  },
+  pretty: {
+    type: "boolean",
+    description: "Pretty-print JSON output.",
+  },
+} satisfies ArgsDef
+
+const resultModeArg = {
+  "result-mode": {
+    type: "string",
+    description: "Select expected, crit, or nonCrit result mode.",
+    valueHint: "expected|crit|nonCrit",
+  },
+} satisfies ArgsDef
+
+const commandDefinitions = {
+  calc: defineCommand({
+    meta: {
+      name: "calc",
+      description: "Calculate one BattleSnapshot.",
+    },
+    args: {
+      input: {
+        type: "positional",
+        description: "Snapshot JSON path, or '-' for stdin.",
+        required: false,
+      },
+      view: {
+        type: "string",
+        description: "Output brief summary or verbose CalcResult.",
+        valueHint: "brief|verbose",
+      },
+      ...resultModeArg,
+      ...commonArgs,
+    },
+  }),
+  compare: defineCommand({
+    meta: {
+      name: "compare",
+      description: "Compare two BattleSnapshots.",
+    },
+    args: {
+      left: {
+        type: "positional",
+        description: "Left snapshot JSON path, or '-' for stdin.",
+        required: false,
+      },
+      right: {
+        type: "positional",
+        description: "Right snapshot JSON path.",
+        required: false,
+      },
+      ...resultModeArg,
+      ...commonArgs,
+    },
+  }),
+  scan: defineCommand({
+    meta: {
+      name: "scan",
+      description: "Scan a numeric snapshot path across a range.",
+    },
+    args: {
+      input: {
+        type: "positional",
+        description: "Snapshot JSON path, or '-' for stdin.",
+        required: false,
+      },
+      path: {
+        type: "string",
+        description: "Snapshot path to mutate.",
+      },
+      from: {
+        type: "string",
+        description: "Scan start value.",
+      },
+      to: {
+        type: "string",
+        description: "Scan end value.",
+      },
+      step: {
+        type: "string",
+        description: "Scan step value.",
+      },
+      ...resultModeArg,
+      ...commonArgs,
+    },
+  }),
+  explain: defineCommand({
+    meta: {
+      name: "explain",
+      description: "Return full explanation fields for one BattleSnapshot.",
+    },
+    args: {
+      input: {
+        type: "positional",
+        description: "Snapshot JSON path, or '-' for stdin.",
+        required: false,
+      },
+      ...resultModeArg,
+      ...commonArgs,
+    },
+  }),
+  migrate: defineCommand({
+    meta: {
+      name: "migrate",
+      description: "Normalize a BattleSnapshot with registered migrations.",
+    },
+    args: {
+      input: {
+        type: "positional",
+        description: "Snapshot JSON path, or '-' for stdin.",
+        required: false,
+      },
+      ...commonArgs,
+    },
+  }),
+  help: defineCommand({
+    meta: {
+      name: "help",
+      description: "Show JSON help output.",
+    },
+    args: {
+      command: {
+        type: "positional",
+        description: "Optional command name.",
+        required: false,
+      },
+      ...commonArgs,
+    },
+  }),
+}
+
 export async function runCli(argv: string[], io: CliIo = nodeIo()): Promise<number> {
-  const parsed = parseArgs(argv)
-  const langResult = parseLang(parsed.flags.get("lang"))
-  const lang = langResult.ok ? langResult.lang : defaultLang
+  let lang: Lang = defaultLang
 
   try {
+    const parsed = parseArgs(argv)
+    const langResult = parseLang(parsed.flags.get("lang"))
+    lang = langResult.ok ? langResult.lang : defaultLang
+
     if (!langResult.ok)
       throw cliError("ERR-CLI-ARG", { message: langResult.message })
 
@@ -188,44 +331,83 @@ function parseArgs(argv: string[]): ParsedArgs {
   const args = [...argv]
   if (args[0] === "--")
     args.shift()
-  const command = args.shift() ?? "help"
-  const inputs: string[] = []
+  const command = normalizeCommand(args.shift())
+  if (!isCliCommand(command))
+    return parseUnknownCommandArgs(command, args)
+
+  return parseCommandArgs(command, args)
+}
+
+function normalizeCommand(command: string | undefined): string {
+  if (command === undefined || command === "--help" || command === "-h")
+    return "help"
+  return command
+}
+
+function isCliCommand(command: string): command is keyof typeof commandDefinitions {
+  return command in commandDefinitions
+}
+
+function parseCommandArgs(command: keyof typeof commandDefinitions, rawArgs: string[]): ParsedArgs {
+  try {
+    const argsDef = (commandDefinitions[command].args ?? {}) as ArgsDef
+    const args = parseCittyArgs(rawArgs, argsDef)
+    return {
+      command,
+      inputs: readInputArgs(command, args),
+      flags: readFlagArgs(args),
+    }
+  }
+  catch (err) {
+    throw cliError("ERR-CLI-ARG", { message: describeCittyArgError(err) })
+  }
+}
+
+function parseUnknownCommandArgs(command: string, rawArgs: string[]): ParsedArgs {
+  try {
+    const args = parseCittyArgs(rawArgs, commonArgs)
+    return {
+      command,
+      inputs: [],
+      flags: readFlagArgs(args),
+    }
+  }
+  catch {
+    return {
+      command,
+      inputs: [],
+      flags: new Map(),
+    }
+  }
+}
+
+function readInputArgs(command: keyof typeof commandDefinitions, args: Record<string, unknown>): string[] {
+  switch (command) {
+    case "compare":
+      return [args.left, args.right].filter(isString)
+    case "help":
+      return [args.command].filter(isString)
+    default:
+      return [args.input].filter(isString)
+  }
+}
+
+function readFlagArgs(args: Record<string, unknown>): Map<string, string | boolean> {
   const flags = new Map<string, string | boolean>()
-
-  for (let index = 0; index < args.length; index += 1) {
-    const arg = args[index]!
-    if (!arg.startsWith("--")) {
-      inputs.push(arg)
-      continue
-    }
-
-    const [rawName, inlineValue] = arg.slice(2).split("=", 2)
-    const name = rawName ?? ""
-    if (booleanFlags.has(name)) {
-      flags.set(name, true)
-      continue
-    }
-
-    if (inlineValue !== undefined) {
-      flags.set(name, inlineValue)
-      continue
-    }
-
-    const next = args[index + 1]
-    if (next !== undefined && !next.startsWith("--")) {
-      flags.set(name, next)
-      index += 1
-    }
-    else {
-      flags.set(name, true)
-    }
+  for (const name of ["help", "lang", "pretty", "view", "result-mode", "resultMode", "path", "from", "to", "step"]) {
+    const value = args[name]
+    if (typeof value === "string" || typeof value === "boolean")
+      flags.set(name, value)
   }
+  return flags
+}
 
-  return {
-    command,
-    inputs,
-    flags,
-  }
+function isString(value: unknown): value is string {
+  return typeof value === "string"
+}
+
+function describeCittyArgError(err: unknown): string {
+  return err instanceof Error ? err.message : String(err)
 }
 
 async function readSnapshotInput(parsed: ParsedArgs, io: CliIo, index: number): Promise<unknown> {

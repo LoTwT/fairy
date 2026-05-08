@@ -155,6 +155,26 @@ describe("fairy cli", () => {
     expect(run.stderr).toBe("")
   })
 
+  it("keeps citty help flags JSON-only", async () => {
+    const rootIo = fakeIo()
+    const rootCode = await runCli(["--help"], rootIo)
+    const rootHelp = JSON.parse(rootIo.output.stdout) as { schemaVersion: string; commands: string[] }
+
+    expect(rootCode).toBe(0)
+    expect(rootHelp.schemaVersion).toBe("fairy-cli-help-v1")
+    expect(rootHelp.commands).toEqual(["calc", "compare", "scan", "explain", "migrate"])
+    expect(rootIo.output.stderr).toBe("")
+
+    const calcIo = fakeIo()
+    const calcCode = await runCli(["calc", "--help"], calcIo)
+    const calcHelp = JSON.parse(calcIo.output.stdout) as { schemaVersion: string; commands: string[] }
+
+    expect(calcCode).toBe(0)
+    expect(calcHelp.schemaVersion).toBe("fairy-cli-help-v1")
+    expect(calcHelp.commands).toEqual(rootHelp.commands)
+    expect(calcIo.output.stderr).toBe("")
+  })
+
   it("shows pnpm lifecycle output without --silent, so docs must not recommend it", () => {
     const run = spawnSync("pnpm", [
       "--filter",
@@ -199,6 +219,18 @@ describe("fairy cli", () => {
     snapshot.team[0]!.panel.critDamage = 1
     const io = fakeIo({ stdin: JSON.stringify(snapshot) })
     const code = await runCli(["calc", "-", "--result-mode", "crit", "--view", "verbose"], io)
+    const result = JSON.parse(io.output.stdout) as { summary: { rawTotalDamage: number } }
+
+    expect(code).toBe(0)
+    expect(result.summary.rawTotalDamage).toBeCloseTo(909.091, 3)
+  })
+
+  it("keeps the legacy camelCase resultMode alias through citty parsing", async () => {
+    const snapshot = structuredClone(baseSnapshot)
+    snapshot.team[0]!.panel.critRate = 0.5
+    snapshot.team[0]!.panel.critDamage = 1
+    const io = fakeIo({ stdin: JSON.stringify(snapshot) })
+    const code = await runCli(["calc", "-", "--resultMode", "crit", "--view", "verbose"], io)
     const result = JSON.parse(io.output.stdout) as { summary: { rawTotalDamage: number } }
 
     expect(code).toBe(0)
@@ -265,6 +297,26 @@ describe("fairy cli", () => {
     expect(result.rows[1]!.summary.rawTotalDamage).toBeGreaterThan(result.rows[0]!.summary.rawTotalDamage)
   })
 
+  it("keeps explain and migrate command schemas executable", async () => {
+    const explainIo = fakeIo({ stdin: JSON.stringify(baseSnapshot) })
+    const explainCode = await runCli(["explain", "-"], explainIo)
+    const explain = JSON.parse(explainIo.output.stdout) as { schemaVersion: string; trace: unknown[] }
+
+    expect(explainCode).toBe(0)
+    expect(explain.schemaVersion).toBe("fairy-cli-explain-v1")
+    expect(explain.trace.length).toBeGreaterThan(0)
+    expect(explainIo.output.stderr).toBe("")
+
+    const migrateIo = fakeIo({ stdin: JSON.stringify(baseSnapshot) })
+    const migrateCode = await runCli(["migrate", "-"], migrateIo)
+    const migrate = JSON.parse(migrateIo.output.stdout) as { schemaVersion: string; migrated: boolean }
+
+    expect(migrateCode).toBe(0)
+    expect(migrate.schemaVersion).toBe("fairy-cli-migrate-v1")
+    expect(migrate.migrated).toBe(false)
+    expect(migrateIo.output.stderr).toBe("")
+  })
+
   it("returns JSON errors for invalid arguments", async () => {
     const io = fakeIo({ stdin: JSON.stringify(baseSnapshot) })
     const code = await runCli(["calc", "-", "--lang", "fr"], io)
@@ -290,6 +342,17 @@ describe("fairy cli", () => {
   it("renders unknown command errors through the catalog", async () => {
     const io = fakeIo()
     const code = await runCli(["unknown"], io)
+    const error = JSON.parse(io.output.stderr) as { ok: false; error: { code: string; message: string } }
+
+    expect(code).toBe(1)
+    expect(error.error.code).toBe("ERR-CLI-CMD")
+    expect(error.error.message).toBe("Localized command problem: unknown")
+    expect(io.output.stdout).toBe("")
+  })
+
+  it("keeps --lang available for unknown command errors", async () => {
+    const io = fakeIo()
+    const code = await runCli(["unknown", "--lang", "en"], io)
     const error = JSON.parse(io.output.stderr) as { ok: false; error: { code: string; message: string } }
 
     expect(code).toBe(1)

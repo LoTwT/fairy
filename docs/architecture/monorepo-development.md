@@ -33,7 +33,7 @@ This guide defines how to work in the Fairy pnpm workspace without breaking pack
 |---|---|---|
 | `@fairy/core` | Runtime schemas, validators, pure calculation functions, registered handler interfaces, traceable `CalcResult` output | Crawlers, file IO, network IO, CLI rendering, formal data source parsing |
 | `@fairy/data` | Source readers, raw-to-clean transforms, source metadata, alias migration, queryable game data | Formula decisions, CLI UX, hand-written formal game values |
-| `@fairy/cli` | JSON input/output shell, command parsing, diagnostics rendering when needed | Core math, source scraping, package-private data mutation |
+| `@fairy/cli` | JSON input/output shell, citty command/flag schemas, diagnostics rendering when needed | Core math, source scraping, package-private data mutation |
 
 The core package is the lowest-level runtime dependency. It must stay deterministic and side-effect-light so QA can validate formulas and trace output independently.
 
