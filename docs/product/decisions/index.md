@@ -199,6 +199,13 @@
 - 米游社 = 中文 i18n / 描述源
 - 冲突时 fail loud + manual review，**不自动覆盖**
 
+**2026-05-08 sourceConflict audit 补充**：PR #24 留存的 3 条米游社 /
+buhflipexplode 危局强袭战 buff `sourceConflict` 已做人工 audit。lo-user 决策
+`Q1，按 buhflipexplode`；nanoka (`https://zzz.nanoka.cc/boss/`) 仅作为人工查询源，
+且 3 条均与 buhflipexplode 一致。因此 cleaned release evidence 记录为
+`resolved-prefer-buhflipexplode`，Mihoyo 原值和 source refs 继续保留为审计线索。
+详见 `data/cleaned/audit/mihoyo-buhflipexplode.source-conflicts.json`。
+
 **Multi-source metadata**：
 - entity-level `sources[]`
 - 关键数值字段级 `sourceRefs`（DA boss slot multiplier、buff 数值、effective HP / daze / anomaly 派生字段等必须有）

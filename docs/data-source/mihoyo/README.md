@@ -79,6 +79,25 @@ Current non-blocking source conflicts are recorded in
 `alignment/mihoyo-buhflipexplode.json`. They are source-text differences, not
 published cleaned modifiers.
 
+The three release-relevant buff conflicts from this snapshot were manually
+audited after lo-user provided nanoka (`https://zzz.nanoka.cc/boss/`) as a
+lookup-only third source. Nanoka matched buhflipexplode for all three records,
+so the cleaned release evidence resolves them as
+`resolved-prefer-buhflipexplode` in
+`data/cleaned/audit/mihoyo-buhflipexplode.source-conflicts.json`. The raw
+Mihoyo alignment artifact remains unchanged and continues to retain the original
+Mihoyo values, buhflipexplode values, hashes, and source anchors for audit
+trace. Nanoka is not part of the crawler or cleaned-data pipeline.
+
+UX impact was checked with:
+
+```bash
+rg -n "澄意|灼冽|破招|Clarity|Blazing Chill|Interrupt" docs/ux/starter-scenarios.md
+```
+
+The command had no matches, so no starter-scenario update is required for this
+audit resolution.
+
 ## Verification
 
 `packages/data/scripts/mihoyo-da-source.mjs` has separate commands:
