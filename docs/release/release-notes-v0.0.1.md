@@ -80,12 +80,6 @@ This release lands under the formal decisions:
 
 See `docs/product/decisions/index.md` for the full decisions log and `docs/product/dogfooding-report-v1.md` for dogfooding evidence (4/5).
 
-## Acknowledgements
-
-- buhflipexplode (`buhflipexplode.org/zzz/da/`) for the DA reference dataset
-- 米游社 wiki (`baike.mihoyo.com/zzz/`) for CN i18n + 乘区文本
-- `zzz.nanoka.cc/boss/` for third-party manual verification
-
 ## Rollback
 
 If a critical regression surfaces post-release, follow `docs/release/release-workflow.md` rollback section:
