@@ -299,7 +299,28 @@ jobs:
           TMP_DIR="$(mktemp -d)"
           cd "$TMP_DIR"
           npm init -y >/dev/null
-          npm install "@randomplay/core@$VERSION" "@randomplay/data@$VERSION" "@randomplay/cli@$VERSION" >/dev/null
+
+          # Retry npm install with backoff to absorb npm registry CDN
+          # propagation lag immediately after publish. Total budget is
+          # MAX_ATTEMPTS * DELAY ≈ 60s, well under the typical worst-case
+          # propagation window observed for newly-published versions.
+          # Mirrors design-system PR #13 (1f9bf89e) and the canonical
+          # runbook at LoTwT/ai/docs/npm-release-from-zero-to-shipped.md.
+          MAX_ATTEMPTS=6
+          DELAY=10
+          ATTEMPT=1
+          until npm install "@randomplay/core@$VERSION" "@randomplay/data@$VERSION" "@randomplay/cli@$VERSION" >/dev/null 2>&1; do
+            if [ "$ATTEMPT" -ge "$MAX_ATTEMPTS" ]; then
+              echo "npm install failed after $MAX_ATTEMPTS attempts (npm CDN propagation timeout?)" >&2
+              # Final attempt without redirect so the real error surfaces in logs.
+              npm install "@randomplay/core@$VERSION" "@randomplay/data@$VERSION" "@randomplay/cli@$VERSION"
+              exit 1
+            fi
+            echo "npm install attempt $ATTEMPT failed (likely npm CDN propagation lag); waiting ${DELAY}s before retry..."
+            sleep "$DELAY"
+            ATTEMPT=$((ATTEMPT + 1))
+          done
+          echo "npm install succeeded on attempt $ATTEMPT"
           node --input-type=module <<'NODE'
           import { calculate, parseBattleSnapshot } from '@randomplay/core'
           import * as data from '@randomplay/data'
