@@ -178,6 +178,14 @@ export const attackSegmentSchema = z
     }
   })
 
+export const dazeRecoveryModifierSchema = z
+  .object({
+    id: z.string().min(1),
+    value: z.number().finite(),
+    source: sourceRefSchema.optional(),
+  })
+  .strict()
+
 export const enemySnapshotSchema = z
   .object({
     enemyId: z.string().min(1).optional(),
@@ -189,6 +197,8 @@ export const enemySnapshotSchema = z
     dazeCap: z.number().finite().optional(),
     resistance: z.partialRecord(resistanceAttributeSchema, z.number().finite()).optional(),
     dazeResistance: z.number().finite().optional(),
+    dazeRecoveryRate: z.number().finite().positive().optional(),
+    dazeRecoveryModifiers: z.array(dazeRecoveryModifierSchema).optional(),
     anomalyBuildupResistance: z
       .partialRecord(resistanceAttributeSchema, z.number().finite())
       .optional(),
@@ -207,6 +217,32 @@ export const enemySnapshotSchema = z
     overrides: z.array(fieldOverrideSchema).optional(),
   })
   .strict()
+  .superRefine((enemy, ctx) => {
+    const dazeRecoveryModifiers = enemy.dazeRecoveryModifiers ?? []
+    if (dazeRecoveryModifiers.length > 0 && enemy.dazeRecoveryRate === undefined) {
+      ctx.addIssue({
+        code: "custom",
+        path: ["dazeRecoveryRate"],
+        message: "enemy.dazeRecoveryRate is required when dazeRecoveryModifiers are provided",
+      })
+      return
+    }
+
+    if (enemy.dazeRecoveryRate === undefined)
+      return
+
+    const dazeRecoveryRateMultiplier = 1 + dazeRecoveryModifiers.reduce(
+      (total, modifier) => total + modifier.value,
+      0,
+    )
+    if (dazeRecoveryRateMultiplier <= 0) {
+      ctx.addIssue({
+        code: "custom",
+        path: ["dazeRecoveryModifiers"],
+        message: "dazeRecoveryModifiers must compose to a positive effective daze recovery rate",
+      })
+    }
+  })
 
 const baseManualEventSchema = z.object({
   id: z.string().min(1),
@@ -360,6 +396,7 @@ export type AgentSnapshot = z.infer<typeof agentSnapshotSchema>
 export type AnomalyThresholdModifier = z.infer<typeof anomalyThresholdModifierSchema>
 export type AnomalyContributionInput = z.infer<typeof anomalyContributionInputSchema>
 export type AttackSegment = z.infer<typeof attackSegmentSchema>
+export type DazeRecoveryModifier = z.infer<typeof dazeRecoveryModifierSchema>
 export type EnemySnapshot = z.infer<typeof enemySnapshotSchema>
 export type ManualEvent = z.infer<typeof manualEventSchema>
 export type BattleSnapshot = z.infer<typeof battleSnapshotSchema>

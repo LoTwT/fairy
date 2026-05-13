@@ -137,7 +137,8 @@ Daze trace must expose:
 - `dazeInflictZone`
 - `dazeReceiveZone`
 - `dazeRatio` raw/display values
-- `dazeRecoveryTime` and recovery-rate contributors
+- `dazeRecoveryTime`, `effectiveDazeRecoveryRate`, and sourced recovery-rate
+  modifier contributors
 - Resonium source ids for Lost Void examples
 
 ## 8. Version Trace

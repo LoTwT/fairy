@@ -36,7 +36,7 @@ V1 focuses on Hollow Zero Assault / Deadly Assault data.
   fully cleaned in V1 unless a V1 calculation/golden case requires a minimal
   subset.
 - V1 golden-data release coverage was narrowed to 19 anchors. V1.x Track B has
-  added anchors 13 and 18; anchors 19 and 20 remain deferred to V1.x.
+  added anchors 13, 18, and 19; anchor 20 remains deferred to V1.x.
 
 V1.x anchor status:
 
@@ -44,7 +44,7 @@ V1.x anchor status:
 |---|---|
 | 13 special threshold multipliers | Implemented in executable replay using sourced `anomalyThresholdModifiers[]` composition. |
 | 18 part-break true damage examples | Implemented in executable replay using Excel non-DA enemy data plus guide §1.1 part-break multiplier table. |
-| 19 daze recovery example: 凶心疯汉 | Deferred; requires non-DA enemy recovery data. |
+| 19 daze recovery example: 凶心疯汉 | Implemented in executable replay using Excel base recovery rate plus guide §2.3.2 recovery-rate modifier composition. |
 | 20 daze recovery example: 装甲哈提 | Deferred; requires non-DA enemy recovery data. |
 
 ### 1.2 Source Priority
@@ -535,8 +535,8 @@ V1 cleaned-data implementation must add tests for these gates:
 - zh/en i18n key sets are aligned for published data i18n resources;
 - unresolved mapping is machine-readable and fails golden cases when required
   fields are missing;
-- Golden true-data replay uses the executable anchor scope and records anchors
-  19 and 20 as V1.x deferred, not skipped accidentally. G13 and G18 are now
+- Golden true-data replay uses the executable anchor scope and records anchor
+  20 as V1.x deferred, not skipped accidentally. G13, G18, and G19 are now
   executable anchors.
 - `verify:golden-v1` passes as an offline freshness gate for the generated V1
   agent source candidates, manual acceptance records, and replay report; V1
@@ -571,9 +571,9 @@ not UX runtime messages. They must write data i18n resources under
 
 ### 10.3 task #43 True-Data Replay
 
-V1 release gate used the narrowed 19-anchor golden scope. V1.x Track B adds G13
-and G18 as executable anchors. Anchors 19 and 20 remain tracked as
-V1.x deferred items and must not be interpreted as missing QA coverage.
+V1 release gate used the narrowed 19-anchor golden scope. V1.x Track B adds G13,
+G18, and G19 as executable anchors. Anchor 20 remains tracked as a V1.x
+deferred item and must not be interpreted as missing QA coverage.
 
 The first replay harness baseline writes:
 
@@ -583,13 +583,14 @@ The first replay harness baseline writes:
 - `data/cleaned/golden/v1-replay-report.json`.
 
 `verify:golden-v1` verifies those artifacts against retained Excel and DA source
-snapshots. The current baseline has 21 executable anchors passed, zero blocking
+snapshots. The current baseline has 22 executable anchors passed, zero blocking
 diagnostics, and `releaseReady=true`. G04 reproduces the guide breakpoint scan,
 G09 asserts sourced DA daze ratio display flooring, G10 asserts frost/auric
 resistance plus anomaly-buildup-resistance lane mapping, G13 asserts sourced
 anomaly-threshold rule composition, G18 asserts sourced
-part-break true damage, and G22/G23 use lo-user manual acceptance records for
-Nicole/Yanagi active-state and polarity-disorder template semantics. The
+part-break true damage, G19 asserts sourced daze recovery-rate composition for
+凶心疯汉, and G22/G23 use lo-user manual acceptance records for Nicole/Yanagi
+active-state and polarity-disorder template semantics. The
 polarity-disorder template requires an explicit provider agent in `team` and an
 explicit supported skill level (`skillLevels[skillLevelKey]` in 1-16) plus
 provider `panel.anomalyProficiency`; missing or out-of-range inputs are
