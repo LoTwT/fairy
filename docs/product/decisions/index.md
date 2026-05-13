@@ -25,7 +25,7 @@
 | **D-10** | 数据维护责任 | ✅ 锁定（v2.0 修订） | V1 阶段：lo-user 提供 Excel 主源 + 爬虫每版本手动 release；data 包必须做完整角色/音擎/驱动盘/影画/鸣徽/潜能激化数据 | 中 |
 | **D-11** | 命名体系（v2.0 新增） | ✅ 锁定 | 选项 A 全套官方化：公开 schema / core API / data 字段优先使用 ZZZ 官方英文的语义化 camelCase；旧 `breach*` 进 sourceAliases / migration | 中 |
 | **D-12** | buhflipexplode 算法处理 | ✅ 锁定 | 选项 B：Fairy 保持 MIT；buhflipexplode GPL JS 仅 raw 留档/参考，不复制进 runtime；Fairy 独立实现等价算法；每次抓取用 hash + 算法快照文档 + parity 对账监控 drift | 高 |
-| **D-13** | V1 范围收窄到危局强袭战 | ✅ 锁定（2026-05-05 errata：黄金集 19 anchors） | V1 = DA 计算器；buhflipexplode = DA overlay 主源；Excel `敌人属性`保留 raw archive 作为 V1.x+ 扩展源；通用敌人 / 部位破坏 / 失衡恢复时间在 V1.x；V1 黄金集 19 anchors（G01-G12 + G14-G17 + G21-G23）；V1.x defer = G13 / G18 / G19 / G20 | 中 |
+| **D-13** | V1 范围收窄到危局强袭战 | ✅ 锁定（2026-05-05 errata：黄金集 19 anchors；2026-05-13 G18 V1.x done） | V1 = DA 计算器；buhflipexplode = DA overlay 主源；Excel `敌人属性`保留 raw archive 作为 V1.x+ 扩展源；V1 黄金集 19 anchors（G01-G12 + G14-G17 + G21-G23）；V1.x Track B 已补 G18，remaining defer = G13 / G19 / G20 | 中 |
 | **D-14** | cleaned data typed modifier 双层结构 | ✅ 锁定（2026-05-05） | Layer 1 原文层 `sourceText` / `localizedText` + Layer 2 计算层 `modifiers[]` / `calculationEffects[]` + 风险层 `unparsedEffects[]`；bucket 受控 enum 严格匹配 glossary v0.4 D-11；效果 4 级（L1 静态 / L2 静态条件 / L3 动态参数 / L4 时序需 `requiresActivation`）；确定性 pipeline + sourceTextHash + parserVersion + effectTemplateId + 人工 audit gate；AI 候选不能直接入 cleaned | 中 |
 | **D-15** | V1 package exports 4 入口 | ✅ 锁定（2026-05-05） | V1 全做：`@randomplay/data/cleaned`（总入口）/ `@randomplay/data/cleaned/<domain>` / `@randomplay/data/types` / `@randomplay/data/cleaned/i18n/<domain>`；data 包 game labels 源码 `packages/data/src/i18n/` → 发布 `packages/data/cleaned/i18n/`；UX ERR-* `docs/ux/i18n/` 完全独立 | 中 |
 | **D-16** | Source priority + multi-source + unknown policy | ✅ 锁定（2026-05-05） | Excel base / buhflipexplode DA overlay / 米游社 i18n；冲突 fail loud + manual review；entity-level `sources[]` + 关键数值字段级 `sourceRefs`；unknown 分级 blocking（影响计算）/ non-blocking（纯展示）；新增 ERR-DAT-005（multi-source conflict / 未解析 modifier blocking）+ ERR-DAT-006（locale mapping unresolved / 展示缺失 non-blocking，与 PR #21 cleaned schema spec 锁定一致） | 中 |
@@ -147,6 +147,10 @@
 - **G13 defer 理由**：需要 `anomalyThresholdModifiers[]` schema + core 组合逻辑 + source trace + fixture；当前 core 仅有 `thresholdOverride`，保留 V1 会扩大 #43 + 触动 core；defer 可逆，V1.x 与通用/特殊敌人规则一起做更聚焦
 - **状态**：✅ V1 release-ready milestone 时 PR #28 已实施 19 anchors（commit `3f5e67a`）
 - **影响 doc**：`docs/qa/golden-source-coverage.md`（matrix 标 G13 deferred） / `docs/product/meetings/2026-05-05-cleaned-schema-design.md` §2.7
+
+**2026-05-13 V1.x Track B update**：
+- **G18 implemented**：部位破坏典型真实伤害倍率表已进入 executable replay，使用 Excel `敌人属性` 中格莱特 70 级最大生命值 + 攻略 §1.1 工程机械部位破坏 5% 最大生命值真实伤害规则。
+- **Remaining V1.x deferred**：G13 anomaly-threshold rule composition + G19/G20 失衡恢复时间。
 
 **理由**：
 - 与 lo-user "V1 主要支持危局强袭战 + Excel 后备" 框定一致

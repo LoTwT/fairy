@@ -55,12 +55,13 @@ const v1AnchorIds = [
   "G15",
   "G16",
   "G17",
+  "G18",
   "G21",
   "G22",
   "G23",
 ] as const
 
-const deferredAnchorIds = ["G13", "G18", "G19", "G20"] as const
+const deferredAnchorIds = ["G13", "G19", "G20"] as const
 
 const agentSpecs = {
   nicole: { excelId: 1031, zh: "妮可", en: "Nicole" },
@@ -694,6 +695,41 @@ function loadBuhflipexplodeBoss() {
   }
 }
 
+function loadExcelEnemy(name: string, indexId: number) {
+  const { workbook } = loadWorkbook()
+  const rows = rowsForSheet(workbook, "敌人属性")
+  const headers = headerMap(rows[0] ?? [])
+  const rowIndex = rows.findIndex(row =>
+    String(rowValue(row, headers, "完整名称") ?? "") === name
+    && Number(rowValue(row, headers, "IndexID")) === indexId,
+  )
+  if (rowIndex < 0)
+    throw new Error(`Missing enemy row for ${name} (${indexId})`)
+
+  const row = rows[rowIndex]!
+  const rowNumber = rowIndex + 1
+  const tags = String(rowValue(row, headers, "标签列表") ?? "")
+  const rank = tags.includes("首领")
+    ? "boss"
+    : tags.includes("中体型")
+      ? "elite"
+      : "normal"
+
+  return {
+    enemyId: `excel:${indexId}`,
+    sourceRefs: [sourceRef(`敌人属性!A${rowNumber}:AU${rowNumber}`)],
+    snapshot: {
+      enemyId: `excel:${indexId}`,
+      level: 70,
+      rank,
+      maxHp: numberValue(rowValue(row, headers, "70级最大生命值"), `${name}.70级最大生命值`),
+      baseDaze: numberValue(rowValue(row, headers, "70级最大失衡值上限"), `${name}.70级最大失衡值上限`),
+      dazeCap: numberValue(rowValue(row, headers, "70级最大失衡值上限"), `${name}.70级最大失衡值上限`),
+      defense: numberValue(rowValue(row, headers, "60级及以上防御力"), `${name}.60级及以上防御力`),
+    },
+  }
+}
+
 function agentSnapshot(
   candidates: ReturnType<typeof buildCandidates>,
   agentId: "yixuan" | "nicole" | "yanagi",
@@ -1318,6 +1354,35 @@ function buildReplayReport(generatedAt: string, candidates = buildCandidates(gen
   }
 
   {
+    const greta = loadExcelEnemy("格莱特", 11301)
+    const guideRef = guideSourceRef("docs/reference/zzz-data-introduction.txt:62-71")
+    const result = calculate({
+      ...snapshot,
+      enemy: greta.snapshot,
+      manualEvents: [
+        {
+          id: "greta-leg-part-break",
+          kind: "partBreak",
+          partId: "leg",
+          partType: "engineering-machine-leg",
+          basePath: "enemy.maxHp",
+          multiplier: 0.05,
+          trueDamageRule: "engineering-machine-part-break-5-percent-max-hp",
+          source: guideRef,
+        },
+      ],
+    })
+    const event = result.events?.find(candidate => candidate.id === "greta-leg-part-break")
+    assertClose(event?.baseValue, greta.snapshot.maxHp, 0.00001, "G18 part-break base HP")
+    assertClose(event?.multiplier, 0.05, 0.00001, "G18 part-break multiplier")
+    assertClose(event?.rawDamage, greta.snapshot.maxHp * 0.05, 0.00001, "G18 part-break true damage")
+    assertClose(result.summary.trueDamage, greta.snapshot.maxHp * 0.05, 0.00001, "G18 summary true damage")
+    anchors.push(passedAnchor("G18", [...greta.sourceRefs, guideRef], [
+      "Part-break manual event uses sourced Greta level-70 max HP from Excel and the guide's 5% engineering-machine part-break true-damage multiplier.",
+    ]))
+  }
+
+  {
     const result = calculate({
       ...snapshot,
       attackSegments: [
@@ -1491,7 +1556,7 @@ function buildReplayReport(generatedAt: string, candidates = buildCandidates(gen
       notes: [
         anchorId === "G13"
           ? "Deferred to V1.x by @lo-user on 2026-05-05; requires data-driven anomaly-threshold rule composition."
-          : "Deferred to V1.x by D-13; requires non-DA enemy / part-break data expansion.",
+          : "Deferred to V1.x by D-13; requires non-DA enemy daze-recovery data expansion.",
       ],
     })
   }
@@ -1514,9 +1579,9 @@ function buildReplayReport(generatedAt: string, candidates = buildCandidates(gen
     generatedAt,
     policy: {
       scope:
-        "V1 true-data replay harness baseline after DD-002: 19 anchors in V1, G13/G18/G19/G20 deferred.",
+        "V1.x true-data replay harness after G18: 20 anchors pass executable replay, G13/G19/G20 remain deferred.",
       releaseGate:
-        "releaseReady becomes true only when all V1 anchors pass executable replay and blockingDiagnostics is zero.",
+        "releaseReady becomes true only when all executable anchors pass replay and blockingDiagnostics is zero.",
       manualAcceptance:
         "G22/G23 use lo-user manual acceptance records tied to the sourceTextHash values in v1-agent-source-candidates.json; A/B effects are replayed as explicit inactive/active snapshot states, and C is skill-level parameterized.",
     },
@@ -1569,8 +1634,8 @@ function verifyCommand(): void {
 
   const report = readJson<{ generatedAt: string; summary: { v1AnchorCount: number; blocked: number; pendingHarness: number; blockingDiagnostics: number; releaseReady: boolean } }>(replayReportPath)
   assertArtifactsFresh(report.generatedAt)
-  if (report.summary.v1AnchorCount !== 19)
-    throw new Error(`Expected 19 V1 anchors, got ${report.summary.v1AnchorCount}`)
+  if (report.summary.v1AnchorCount !== 20)
+    throw new Error(`Expected 20 executable anchors, got ${report.summary.v1AnchorCount}`)
   if (report.summary.blocked !== 0)
     throw new Error(`Expected no blocked anchors after G22/G23 manual acceptance, got ${report.summary.blocked}`)
   if (report.summary.pendingHarness !== 0)
@@ -1578,7 +1643,7 @@ function verifyCommand(): void {
   if (report.summary.blockingDiagnostics !== 0)
     throw new Error(`Expected no blocking diagnostics after G22/G23 manual acceptance, got ${report.summary.blockingDiagnostics}`)
   if (report.summary.releaseReady !== true)
-    throw new Error("Expected V1 golden replay releaseReady=true after all 19 anchors pass")
+    throw new Error("Expected golden replay releaseReady=true after all 20 executable anchors pass")
 }
 
 async function main(): Promise<void> {
