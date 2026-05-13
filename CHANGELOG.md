@@ -7,10 +7,36 @@ All notable changes to Fairy are documented in this file.
 ### Changed
 
 - Migrate release flow to v3 runbook (#39)
+
 ## 0.0.1 - 2026-05-10
 
 ### Added
 
+- Add agent data parsing and API endpoints
+- Add middleware for CORS, CSRF, caching, and trailing slash handling
+- Implement OpenAPI integration with agents API and add response schemas
+- Add W-Engines data parsing, API endpoints, and schemas
+- Add Bangboos data parsing, API endpoints, and schemas
+- Add Drive Discs data parsing, API endpoints, schemas, and JSON data
+- Implement web scraper for agent data
+- Add energy limit and regeneration properties to agent schema and data
+- Add type satisfaction for schemas in agents, bangboos, drive discs, and w-engines
+- Add typecheck script to package.json and fix baseUrl path in tsconfig.json
+- Enhance agent scraping logic and update common images structure
+- Implement bangboo scraping and add bangboos data structure
+- Refactor scraping logic to use NAVIGATION_OPTIONS for page navigation
+- Add W-Engines scraping functionality and data structure
+- Add Drive Discs scraping functionality and data structure
+- Rename parse-data script to gen-data and add generate-data functionality
+- Add rarity extraction
+- Add additional properties to agent schema and types
+- Add avatar, sprite, rarity, and rarityIcon fields to Bangboo schema and data
+- Update WEngine schema and type to replace rank with rarity and add new properties
+- Add avatar and sprite fields to DriveDisc schema and data
+- Add timing logs for data generation and scraping processes
+- Scrape deadly assaults
+- Add anomalies schema, API, and data handling
+- Add deadly assaults api, schema and types
 - Add runtime contract schemas (#7)
 - Add formula engine and handler DSL
 - Implement anomaly and disorder formulas
@@ -26,6 +52,7 @@ All notable changes to Fairy are documented in this file.
 
 ### Changed
 
+- Migrate to monorepo (#1)
 - Reinit (#2)
 - Retry npm install with backoff for CDN propagation (#38)
 
@@ -50,4 +77,6 @@ All notable changes to Fairy are documented in this file.
 
 ### Fixed
 
+- Update agent parsing logic to exclude header row and improve data integrity
+- Update release scripts to ensure build before publishing
 - Localize shell error messages
