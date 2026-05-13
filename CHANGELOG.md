@@ -1,47 +1,48 @@
 # Changelog
 
-All notable changes to Fairy will be documented in this file.
+All notable changes to Fairy are documented in this file.
 
-The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) (simplified) and Fairy uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
-
-## [Unreleased]
-
-## [v0.0.1] — 2026-05-08
-
-First public release of the `@randomplay/data` / `@randomplay/core` / `@randomplay/cli` packages on npm. Functionally equivalent to the dogfooding-passed V1 milestone (see `docs/product/dogfooding-report-v1.md`).
+## 0.0.1 - 2026-05-10
 
 ### Added
 
-- **`@randomplay/cli`** — `fairy` binary with five subcommands `calc / compare / scan / explain / migrate` built on [`citty`](https://github.com/unjs/citty); JSON-only output; `--lang en|zh` switch; ERR-CLI catalog (bilingual).
-- **`fairy calc` D-19 summary-first output** — `--view brief|verbose` (default `brief`); `summary.lanes.{nonCrit, crit, fixed}` two-lane output; `--result-mode expected` opt-in for expected damage; legacy `--resultMode` alias preserved.
-- **`@randomplay/core`** — five damage classes; handler/DSL pipeline; anomaly + disorder calculation including virtual agent / overflow / seven-attribute disorder / `disorderDazeLevelZone`.
-- **`@randomplay/data`** — `cleaned/` typed-modifier dataset for the Deadly Assault (DA) domain; four export entries `cleaned/`, `cleaned/<domain>`, `types`, `cleaned/i18n/<domain>`; multi-source provenance (`sources[]` + `sourceRefs`).
-- **Mihoyo source pipeline** — list API + `entry_page` detail JSON + cheerio rich-text parsing; CN/EN parity manifest; coverage = 3 buffs + 3 boss attributes + 3 stage buffs per period (35 periods).
-- **buhflipexplode source pipeline** — raw snapshot + `algorithm-manifest.json` + parity drift gate; D-12 boundary preserved (Fairy stays MIT, no GPL JS in runtime).
-- **V1 golden anchor set (19 anchors)** — G01–G12, G14–G17, G21–G23; full passing in CI (`pnpm --filter @randomplay/data verify:golden-v1`).
-- **Anby dogfooding fixture** — base attack 583.957 / multiplier 0.747 at lvl 16 / generic Dullahan defense 952.8; `pnpm fairy:s1|s2|s3` aliases for quick smoke.
-- **Dogfooding artifacts** — `docs/product/dogfooding-report-v1.md` (4/5 release-gate evidence) + `docs/product/dogfooding-v1.md` (runbook).
-- **Release tooling** — `bumpp` thin wrapper (`scripts/release-bump.mjs`) + allowlist publish workflow (`@randomplay/data,core,cli`) + GitHub OIDC + Trusted Publisher path + retry-safe `gitHead` check + rollback runbook (`docs/release/release-workflow.md`).
+- Add runtime contract schemas (#7)
+- Add formula engine and handler DSL
+- Implement anomaly and disorder formulas
+- Add JSON command shell
+- Add source ingestion skeleton
+- Add buhflipexplode DA source snapshot
+- Archive Mihoyo Deadly Assault source
+- Add V1 golden replay baseline
+- Clear golden harness pending anchors
+- Accept G22 G23 golden modifiers
+- Add D-19 summary-first calc output (#30)
+- Migrate command parsing to citty
 
 ### Changed
 
-- **npm scope** — packages renamed from `@fairy/*` to `@randomplay/{data,core,cli}` (PR #35 commit `dd78a4b`); root monorepo name = `fairy-monorepo` (private); CLI binary stays `fairy`.
-- **米游社 sourceConflict audit (3 records, D-16 + D-17)** — 21 澄意 / 8 灼冽 / 1 破招 resolved as `resolved-prefer-buhflipexplode`; manual three-way verification against `https://zzz.nanoka.cc/boss/` showed nanoka aligned with buhflipexplode (2:1 vs Mihoyo); audit evidence at `data/cleaned/audit/mihoyo-buhflipexplode.source-conflicts.json`.
+- Reinit (#2)
+- Retry npm install with backoff for CDN propagation (#38)
 
-### Known limitations
+### Documentation
 
-- **DD-003 single-person dogfooding (D-18)** — V1 was validated only by `@lo-user` deep dogfood + QA regression; not validated against community usage. Wider validation deferred to V1.x.
-- **Day 3 边界探测 skipped** — `--lang en` cross-locale verification and intentional ERR-* triggering not exercised during dogfooding (lo-user decision); gaps may surface post-release.
-- **Golden anchor V1.x defer** — G13 (data-driven anomaly threshold rule composition) / G18 部位破坏 / G19 凶心疯汉失衡恢复 / G20 装甲哈提失衡恢复 deferred to V1.x with broader scope.
-- **No Web UI / no AI plugin** — V2 (Web UI) and V1.1 (AI plugin / screenshot recognition / Bangboo) remain on the roadmap.
+- Add decisions log index (PM-1, #4)
+- Draft S2 data contracts (TL-3, #5)
+- Add monorepo development guide (#9)
+- V0.4 errata — sync to TL-3 schema + extend i18n (#8)
+- Add ERR-CALC-PENDING-ANOMALY/DISORDER zh+en messages (#11)
+- Add ERR-CLI-* bilingual messages + i18n README (UX-S4-1) (#15)
+- Cleaned schema meeting minutes + D-13~D-16 (PM-S5-2-meeting, #20)
+- Add cleaned schema design spec
+- Starter-scenarios v0.4.1 patch — D-13 V1 = DA (UX-S5-1, #48) (#22)
+- ERR-DAT-005 / ERR-DAT-006 catalog (UX-S5-2-err-catalog, #52) (#23)
+- Audit Excel source coverage (#25)
+- Add V1 dogfooding quick start (#29)
+- Update V1 release-gate status
+- Resolve DA source conflict audit
+- Add V1 dogfooding report — passes release gate (4/5) (#31)
+- V1 errata + v0.0.1 CHANGELOG + release notes draft (#37)
 
-### Decisions referenced
+### Fixed
 
-- **D-13** golden anchor scope (19 anchors)
-- **D-16** source priority + multi-source metadata + 2026-05-08 audit
-- **D-17** Mihoyo V1 抓取范围 + 工具栈
-- **D-18** V1 dogfooding gate (DD-003)
-- **D-19** V1 CLI 输出改革 (`--view brief|verbose` summary-first)
-
-[Unreleased]: https://github.com/LoTwT/fairy/compare/v0.0.1...HEAD
-[v0.0.1]: https://github.com/LoTwT/fairy/releases/tag/v0.0.1
+- Localize shell error messages

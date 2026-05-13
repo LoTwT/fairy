@@ -1,6 +1,7 @@
-# Fairy v0.0.1 — Release Notes (draft)
+# Fairy v0.0.1 — Release Notes
 
-> First public release. This document is the source of truth for the GitHub Release page body. Edit here, then paste at release time.
+> First public release. This document records the GitHub Release page body used
+> for v0.0.1.
 
 ## TL;DR
 
@@ -13,7 +14,8 @@
 - **Cleaned data** — DA-domain typed modifier dataset with multi-source provenance; 19-anchor V1 golden set; bundled Anby dogfooding fixture.
 - **Mihoyo + buhflipexplode sources** — Mihoyo `entry_page` detail JSON + cheerio rich-text parsing with CN/EN parity manifest; buhflipexplode raw snapshot + drift gate (no GPL JS in runtime).
 - **Audit-resolved data deltas** — 3 米游社 / buhflipexplode source conflicts manually audited and resolved in favor of buhflipexplode (verified against `zzz.nanoka.cc`, 2:1 alignment).
-- **Release pipeline** — bumpp + allowlist publish + GitHub OIDC + Trusted Publisher + rollback runbook.
+- **Release pipeline** — v0.0.1 was the bootstrap release; subsequent releases
+  follow the canonical v3 runbook linked from `docs/release/README.md`.
 
 ## Install
 
@@ -82,7 +84,7 @@ See `docs/product/decisions/index.md` for the full decisions log and `docs/produ
 
 ## Rollback
 
-If a critical regression surfaces post-release, follow `docs/release/release-workflow.md` rollback section:
+If a critical regression surfaces post-release, follow the canonical release runbook linked from `docs/release/README.md`:
 
 1. Mark the GitHub Release as pre-release.
 2. Deprecate each affected package version separately (npm CLI does not accept brace expansion):
@@ -97,5 +99,5 @@ If a critical regression surfaces post-release, follow `docs/release/release-wor
 
 - Repository — https://github.com/LoTwT/fairy
 - Dogfooding report — `docs/product/dogfooding-report-v1.md`
-- Release workflow — `docs/release/release-workflow.md`
+- Release workflow — `docs/release/README.md`
 - Decisions log — `docs/product/decisions/index.md`
