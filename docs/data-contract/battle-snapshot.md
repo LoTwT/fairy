@@ -285,6 +285,8 @@ interface EnemySnapshot {
   dazeCap?: number
   resistance?: Partial<Record<ResistanceAttribute, number>>
   dazeResistance?: number
+  dazeRecoveryRate?: number
+  dazeRecoveryModifiers?: DazeRecoveryModifier[]
   anomalyBuildupResistance?: Partial<Record<ResistanceAttribute, number>>
   anomalyTriggerCounts?: Partial<Record<AnomalyStatus, number>>
   states?: EnemyState[]
@@ -292,10 +294,23 @@ interface EnemySnapshot {
   fieldProvenance?: FieldProvenanceMap
   overrides?: FieldOverride[]
 }
+
+interface DazeRecoveryModifier {
+  id: string
+  value: number
+  source?: SourceRef
+}
 ```
 
 `frost` damage maps to ice resistance and ice damage bonus. `auricInk` maps to
 ether resistance and ether damage bonus. Attribute mapping must be traceable.
+`dazeRecoveryRate` records the enemy's base recovery speed as a per-second
+ratio. `dazeRecoveryModifiers[]` records sourced additive rate modifiers such
+as guide §2.3.2's +60% / -9% effects; core traces
+`enemy.dazeRecoveryTime = 1 / effectiveDazeRecoveryRate`.
+If `dazeRecoveryModifiers[]` is non-empty, `dazeRecoveryRate` is required and
+the composed `1 + sum(dazeRecoveryModifiers[].value)` multiplier must stay
+positive.
 
 ## 8. Typed Modifiers
 

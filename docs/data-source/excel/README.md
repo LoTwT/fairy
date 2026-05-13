@@ -30,8 +30,10 @@ The V1 replay baseline uses a narrower generated artifact:
 That artifact extracts only Yixuan / Nicole / Yanagi identity rows and
 calculation-relevant source text candidates needed by the DD-002 19-anchor
 golden scope. The acceptance artifacts record lo-user-approved G22/G23 mappings.
-The reader does not read Excel enemy rows and does not publish trusted typed
-modifiers without deterministic template support or manual acceptance.
+The replay harness reads minimal Excel enemy rows only when V1.x golden anchors
+require them (currently Greta for G18 and 匪祸侵蚀体·凶心疯汉 for G19). It does not
+publish trusted typed modifiers without deterministic template support or manual
+acceptance.
 
 ## V1 Candidate Sheets
 

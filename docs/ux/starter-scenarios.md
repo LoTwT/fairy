@@ -11,7 +11,7 @@
 > 用途：AI plugin 让 LLM 引用作为 prompt context；CLI 用户复制后改自己面板；QA 黄金集对账参考。
 
 > **v0.4.1 erratum（D-13 V1 = DA 收窄）**：
-> - V1 黄金集收窄到 20 锚点（参见 `docs/product/decisions/index.md` D-13）。**部位破坏典型真实伤害**（黄金集锚点 18）与**失衡恢复时间算例**（锚点 19 凶心疯汉 / 锚点 20 装甲哈提）所对应的 starter scenario 推迟到 V1.x，等 cleaned/enemies + Excel 非 DA enemy 派生数据落地后补。当前 v0.4.1 只覆盖 V1 DA 主场景（S1 / S2 / S3）。
+> - V1 黄金集收窄到 19 锚点（参见 `docs/product/decisions/index.md` D-13）。V1.x Track B 已补黄金集锚点 13 / 18 / 19；**失衡恢复时间算例**锚点 20（装甲哈提）所对应的 starter scenario 仍推迟到后续 V1.x，等剩余 cleaned/enemies + Excel 非 DA enemy 派生数据落地后补。当前 v0.4.1 只覆盖 V1 DA 主场景（S1 / S2 / S3）。
 > - 所有 `enemyId` 在 V1 cleaned 体系下指向 `cleaned/deadly-assault` 的 `externalBossId`（buhflipexplode raw）；能映射 Excel 时附 `baseEnemyRef`。详见 `docs/data-contract/cleaned-schema-spec.md` §5.2 / §5.3。
 
 ---

@@ -58,6 +58,7 @@ export function calculate(input: unknown, options: CalculateOptions = {}): CalcR
   const manualEventResults = (snapshot.manualEvents ?? []).map((event, index) =>
     calculateManualEvent(snapshot, event, index),
   )
+  const enemyTrace = getEnemyTrace(snapshot)
 
   for (const segment of segmentComputations) {
     warnings.push(...segment.warnings)
@@ -70,6 +71,7 @@ export function calculate(input: unknown, options: CalculateOptions = {}): CalcR
   }
 
   const trace = [
+    ...enemyTrace,
     ...segmentComputations.flatMap(segment => segment.trace),
     ...manualEventResults.flatMap(event => event.trace),
   ]
@@ -915,6 +917,38 @@ function getAnomalyBuildup(snapshot: BattleSnapshot, activeActor: AgentSnapshot,
 
 function getAnomalyBuildupResistanceMultiplier(resistance: number): number {
   return clamp(1 - resistance, 0, 2)
+}
+
+function getEnemyTrace(snapshot: BattleSnapshot): TraceEvent[] {
+  const baseDazeRecoveryRate = snapshot.enemy.dazeRecoveryRate
+  if (baseDazeRecoveryRate === undefined)
+    return []
+
+  const dazeRecoveryModifiers = snapshot.enemy.dazeRecoveryModifiers ?? []
+  const dazeRecoveryRateMultiplier = 1 + sum(dazeRecoveryModifiers.map(modifier => modifier.value))
+  const effectiveDazeRecoveryRate = baseDazeRecoveryRate * dazeRecoveryRateMultiplier
+  const dazeRecoveryTime = 1 / effectiveDazeRecoveryRate
+
+  return [
+    makeTraceEvent({
+      kind: "formula",
+      path: "enemy.dazeRecoveryTime",
+      inputs: {
+        enemyId: snapshot.enemy.enemyId,
+        baseDazeRecoveryRate,
+        dazeRecoveryModifiers: dazeRecoveryModifiers.map(modifier => ({
+          id: modifier.id,
+          value: modifier.value,
+          ...(modifier.source === undefined ? {} : { source: modifier.source }),
+        })),
+        dazeRecoveryRateMultiplier,
+        effectiveDazeRecoveryRate,
+      },
+      formula: "dazeRecoveryTime = 1 / (baseDazeRecoveryRate * (1 + sum(dazeRecoveryModifiers)))",
+      rawValue: dazeRecoveryTime,
+      displayValue: "dazeRecoveryTime",
+    }),
+  ]
 }
 
 function getDamageBonus(activeActor: AgentSnapshot, segment: AttackSegment): number {

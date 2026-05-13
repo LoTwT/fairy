@@ -57,12 +57,13 @@ const v1AnchorIds = [
   "G16",
   "G17",
   "G18",
+  "G19",
   "G21",
   "G22",
   "G23",
 ] as const
 
-const deferredAnchorIds = ["G19", "G20"] as const
+const deferredAnchorIds = ["G20"] as const
 
 const agentSpecs = {
   nicole: { excelId: 1031, zh: "妮可", en: "Nicole" },
@@ -719,6 +720,7 @@ function loadExcelEnemy(name: string, indexId: number) {
   return {
     enemyId: `excel:${indexId}`,
     sourceRefs: [sourceRef(`敌人属性!A${rowNumber}:AU${rowNumber}`)],
+    defaultDazeRecoveryTime: numberValue(rowValue(row, headers, "默认失衡恢复时间"), `${name}.默认失衡恢复时间`),
     snapshot: {
       enemyId: `excel:${indexId}`,
       level: 70,
@@ -727,6 +729,7 @@ function loadExcelEnemy(name: string, indexId: number) {
       baseDaze: numberValue(rowValue(row, headers, "70级最大失衡值上限"), `${name}.70级最大失衡值上限`),
       dazeCap: numberValue(rowValue(row, headers, "70级最大失衡值上限"), `${name}.70级最大失衡值上限`),
       defense: numberValue(rowValue(row, headers, "60级及以上防御力"), `${name}.60级及以上防御力`),
+      dazeRecoveryRate: numberValue(rowValue(row, headers, "基础失衡恢复速度"), `${name}.基础失衡恢复速度`),
     },
   }
 }
@@ -1469,6 +1472,39 @@ function buildReplayReport(generatedAt: string, candidates = buildCandidates(gen
   }
 
   {
+    const mad = loadExcelEnemy("匪祸侵蚀体·凶心疯汉", 11521)
+    const guideRef = guideSourceRef("docs/reference/zzz-data-introduction.txt:181-202")
+    const result = calculate({
+      ...snapshot,
+      enemy: {
+        ...mad.snapshot,
+        dazeRecoveryModifiers: [
+          {
+            id: "hypnotic-watch-before-rework",
+            value: 0.6,
+            source: guideRef,
+          },
+          {
+            id: "duel-t-cane-pre-catalyst",
+            value: -0.09,
+            source: guideRef,
+          },
+        ],
+      },
+    })
+    const recoveryTrace = trace(result, "enemy.dazeRecoveryTime")
+    const inputs = recoveryTrace.inputs as Record<string, unknown>
+    assertClose(mad.snapshot.dazeRecoveryRate, 0.0769, 0.000001, "G19 base daze recovery rate")
+    assertClose(mad.defaultDazeRecoveryTime, 13.0039, 0.0001, "G19 default daze recovery time")
+    assertClose(inputs.dazeRecoveryRateMultiplier as number, 1.51, 0.000001, "G19 daze recovery modifier sum")
+    assertClose(inputs.effectiveDazeRecoveryRate as number, 0.116119, 0.000001, "G19 effective daze recovery rate")
+    assertClose(recoveryTrace.rawValue as number, 8.611857, 0.00001, "G19 daze recovery time")
+    anchors.push(passedAnchor("G19", [...mad.sourceRefs, guideRef], [
+      "Mad Psycho daze recovery uses Excel base 7.69%/s and guide §2.3.2 modifier composition (+60% -9%) to replay 11.61%/s and 8.61s.",
+    ]))
+  }
+
+  {
     const result = calculate({
       ...snapshot,
       attackSegments: [
@@ -1640,7 +1676,7 @@ function buildReplayReport(generatedAt: string, candidates = buildCandidates(gen
       status: "deferred",
       sourceRefs: [],
       notes: [
-        "Deferred to V1.x by D-13; requires non-DA enemy daze-recovery data expansion.",
+        "Deferred to V1.x by D-13; requires remaining non-DA enemy daze-recovery data expansion.",
       ],
     })
   }
@@ -1663,7 +1699,7 @@ function buildReplayReport(generatedAt: string, candidates = buildCandidates(gen
     generatedAt,
     policy: {
       scope:
-        "V1.x true-data replay harness after G13: 21 anchors pass executable replay, G19/G20 remain deferred.",
+        "V1.x true-data replay harness after G19: 22 anchors pass executable replay, G20 remains deferred.",
       releaseGate:
         "releaseReady becomes true only when all executable anchors pass replay and blockingDiagnostics is zero.",
       manualAcceptance:
@@ -1718,8 +1754,8 @@ function verifyCommand(): void {
 
   const report = readJson<{ generatedAt: string; summary: { v1AnchorCount: number; blocked: number; pendingHarness: number; blockingDiagnostics: number; releaseReady: boolean } }>(replayReportPath)
   assertArtifactsFresh(report.generatedAt)
-  if (report.summary.v1AnchorCount !== 21)
-    throw new Error(`Expected 21 executable anchors, got ${report.summary.v1AnchorCount}`)
+  if (report.summary.v1AnchorCount !== v1AnchorIds.length)
+    throw new Error(`Expected ${v1AnchorIds.length} executable anchors, got ${report.summary.v1AnchorCount}`)
   if (report.summary.blocked !== 0)
     throw new Error(`Expected no blocked anchors after G22/G23 manual acceptance, got ${report.summary.blocked}`)
   if (report.summary.pendingHarness !== 0)
@@ -1727,7 +1763,7 @@ function verifyCommand(): void {
   if (report.summary.blockingDiagnostics !== 0)
     throw new Error(`Expected no blocking diagnostics after G22/G23 manual acceptance, got ${report.summary.blockingDiagnostics}`)
   if (report.summary.releaseReady !== true)
-    throw new Error("Expected golden replay releaseReady=true after all 21 executable anchors pass")
+    throw new Error(`Expected golden replay releaseReady=true after all ${v1AnchorIds.length} executable anchors pass`)
 }
 
 async function main(): Promise<void> {

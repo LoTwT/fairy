@@ -255,6 +255,75 @@ describe("calculate", () => {
     expect(result.buckets.some(bucket => bucket.bucketId === "dazeInflictZone")).toBe(true)
   })
 
+  it("traces enemy daze recovery time with sourced rate modifiers", () => {
+    const result = calculate({
+      ...baseSnapshot,
+      enemy: {
+        ...baseSnapshot.enemy,
+        enemyId: "excel:11521",
+        dazeRecoveryRate: 0.0769,
+        dazeRecoveryModifiers: [
+          {
+            id: "hypnotic-watch-before-rework",
+            value: 0.6,
+            source,
+          },
+          {
+            id: "duel-t-cane-pre-catalyst",
+            value: -0.09,
+            source,
+          },
+        ],
+      },
+    })
+    const recoveryTrace = result.trace.find(event => event.path === "enemy.dazeRecoveryTime")
+
+    expect(recoveryTrace?.inputs).toMatchObject({
+      enemyId: "excel:11521",
+      baseDazeRecoveryRate: 0.0769,
+      dazeRecoveryRateMultiplier: 1.51,
+      dazeRecoveryModifiers: [
+        { id: "hypnotic-watch-before-rework", value: 0.6 },
+        { id: "duel-t-cane-pre-catalyst", value: -0.09 },
+      ],
+    })
+    expect(recoveryTrace?.inputs?.effectiveDazeRecoveryRate).toBeCloseTo(0.116119, 6)
+    expect(recoveryTrace?.rawValue).toBeCloseTo(8.611857141552806, 5)
+  })
+
+  it("rejects daze recovery modifiers without a base recovery rate", () => {
+    expect(() => calculate({
+      ...baseSnapshot,
+      enemy: {
+        ...baseSnapshot.enemy,
+        dazeRecoveryModifiers: [
+          {
+            id: "orphan-recovery-modifier",
+            value: 0.6,
+            source,
+          },
+        ],
+      },
+    })).toThrow(/dazeRecoveryRate is required/)
+  })
+
+  it("rejects non-positive effective daze recovery rates", () => {
+    expect(() => calculate({
+      ...baseSnapshot,
+      enemy: {
+        ...baseSnapshot.enemy,
+        dazeRecoveryRate: 0.0769,
+        dazeRecoveryModifiers: [
+          {
+            id: "invalid-negative-recovery",
+            value: -1,
+            source,
+          },
+        ],
+      },
+    })).toThrow(/positive effective daze recovery rate/)
+  })
+
   it("computes anomaly damage without the standard crit bucket", () => {
     const result = calculate({
       ...baseSnapshot,
