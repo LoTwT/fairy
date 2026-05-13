@@ -7,9 +7,8 @@ Related tasks: task #40, task #43
 
 This document narrows the original 23 golden anchors to the V1 release gate
 locked by D-13 plus DD-002, then tracks V1.x golden expansion. The executable
-gate currently has 22 anchors: the original 19 V1 anchors plus G13, G18, and
-G19. Anchor G20 remains deferred to V1.x because it requires remaining non-DA
-enemy daze recovery data.
+gate currently has all 23 anchors: the original 19 V1 anchors plus G13, G18,
+G19, and G20.
 
 The goal of this audit is to decide the minimum source and cleaned-data work
 needed before true-data replay. It does not change QA's fixture assertions.
@@ -19,8 +18,8 @@ needed before true-data replay. It does not change QA's fixture assertions.
 | Set | Anchor IDs | Status |
 |---|---|---|
 | V1 release gate | G01-G12, G14-G17, G21-G23 | Must pass before V1 release. |
-| V1.x executable expansion | G13, G18, G19 | Passed after guide anomaly-threshold composition, non-DA Excel enemy + guide part-break true-damage replay, and daze recovery-rate composition replay. |
-| Deferred V1.x | G20 | Not current blocker. |
+| V1.x executable expansion | G13, G18, G19, G20 | Passed after guide anomaly-threshold composition, non-DA Excel enemy + guide part-break true-damage replay, and daze recovery-rate composition replay. |
+| Deferred V1.x | none | No golden anchors remain deferred. |
 
 ## Source Status Summary
 
@@ -31,7 +30,7 @@ needed before true-data replay. It does not change QA's fixture assertions.
 | Mihoyo DA snapshot | PR #24 retained 35 details and zh/en alignment. | Chinese buff/boss/room text and source anchors for later typed-modifier review. |
 | Excel workbook | Raw workbook retained; `workbook-audit.json` records sheet/column shape. | Minimal agent kit data for Yixuan / Nicole / Yanagi team-modifier anchors, if V1 replay uses formal sourced modifiers. |
 
-## 22-Anchor Matrix
+## 23-Anchor Matrix
 
 | ID | V1 source dependency | Current source coverage | Remaining work |
 |---|---|---|---|
@@ -54,6 +53,7 @@ needed before true-data replay. It does not change QA's fixture assertions.
 | G17 | Corrupted-shield cleanse true damage | Core rules covered; DA boss max HP available from buhflipexplode. | Cleaned DA boss slot must expose sourced max HP/effective max HP. |
 | G18 | Part-break true damage multiplier table | Excel provides non-DA Greta max HP; guide §1.1 provides engineering-machine 5% max HP true-damage rule. | Passed with `manualEvents.kind=partBreak`. |
 | G19 | Daze recovery time example: 凶心疯汉 | Excel provides base daze recovery rate 7.69%/s for 匪祸侵蚀体·凶心疯汉; guide §2.3.2 provides +60% and -9% recovery-rate modifiers and the 8.61s example. | Passed with `enemy.dazeRecoveryRate` plus sourced `dazeRecoveryModifiers[]`; no fixed time override is used. |
+| G20 | Daze recovery time example: 装甲哈提 | Excel provides base daze recovery rate 8.33%/s for 恶名·哈提; guide §2.3.2 provides +100% and -13% recovery-rate modifiers, formula result 15.58%/s, and final 6.42s. | Passed with `enemy.dazeRecoveryRate` plus sourced `dazeRecoveryModifiers[]`; replay notes the guide's `1/11.58%` denominator typo because the formula and final time match 15.58%/s. |
 | G21 | 1-agent Yixuan sheer | Excel has Yixuan agent row; panel values remain user snapshot. | Minimal Excel agent mapping for Yixuan id/attribute/specialty/label/source refs. |
 | G22 | Yixuan + Nicole defense reduction | Excel has Nicole rows/descriptions; lo-user accepted the defense-reduction mapping. | Passed with explicit inactive/active snapshot replay. |
 | G23 | Yixuan + Nicole + Yanagi polarity disorder | Excel has Yanagi rows/descriptions; lo-user accepted the disorder boost and EX Special polarity-disorder template. | Passed with explicit inactive/active replay and skill-level parameterized polarity-disorder template. |
@@ -148,20 +148,20 @@ cleaned artifacts:
   `data/cleaned/audit/yanagi.acceptance.json` — lo-user manual acceptance
   records for G22/G23 source-text mappings.
 - `data/cleaned/golden/v1-replay-report.json` — executable replay baseline for
-  the 22-anchor scope after G13, G18, and G19.
+  the 23-anchor scope after G13, G18, G19, and G20.
 
 The current replay report intentionally reports:
 
 | Status | Anchors | Meaning |
 |---|---|---|
-| `passed` | 22 anchors | All executable anchors pass replay with sourced Excel/DA/guide refs and lo-user accepted G22/G23 mappings. |
+| `passed` | 23 anchors | All executable anchors pass replay with sourced Excel/DA/guide refs and lo-user accepted G22/G23 mappings. |
 | `pendingHarness` | none | No V1 anchors are pending harness. |
 | `blocked` | none | G22/G23 `ERR-DAT-005` diagnostics are cleared by acceptance records. |
-| `deferred` | G20 | Explicit remaining V1.x scope. |
+| `deferred` | none | No golden anchors remain deferred. |
 
 `pnpm --filter @randomplay/data verify:golden-v1` is an offline freshness and shape
 gate. It verifies the artifacts are regenerated from the retained sources and
-that executable replay has `passed=22`, `pendingHarness=0`, `blocked=0`,
+that executable replay has `passed=23`, `pendingHarness=0`, `blocked=0`,
 `blockingDiagnostics=0`, and `releaseReady=true`.
 
 ## Product / Human Decisions
@@ -178,6 +178,10 @@ TL recommendation:
   recovery rate for 匪祸侵蚀体·凶心疯汉 plus guide §2.3.2 recovery-rate
   modifier composition. Do not use a fixed recovery-time override to claim this
   anchor.
+- **G20**: implemented during V1.x Track B using Excel `敌人属性` base daze
+  recovery rate for 恶名·哈提 plus guide §2.3.2 recovery-rate modifier
+  composition. The guide's `1/11.58%` denominator is recorded as a typo because
+  `8.33% * (1 + 100% - 13%) = 15.58%/s` and `1 / 15.58% ~= 6.42s`.
 - **Nicole/Yanagi**: @lo-user accepted the G22/G23 mapping semantics on
   2026-05-05. A/B effects are explicit inactive/active snapshot states; C is a
   skill-level-parameterized EX Special polarity-disorder template. C must fail
@@ -186,6 +190,6 @@ TL recommendation:
   changes, the replay harness must fail instead of silently applying a guessed
   modifier.
 
-#43 now has a release-ready replay baseline for the original 19 V1 anchors, and
-V1.x Track B has added G13/G18/G19 as executable anchors. G20 remains listed as
-an explicit V1.x gap rather than disappearing from QA visibility.
+The current replay baseline covers the original 19 V1 anchors, and V1.x Track B
+has added G13/G18/G19/G20 as executable anchors. No golden anchors remain
+deferred.

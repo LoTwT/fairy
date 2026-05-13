@@ -25,7 +25,7 @@
 | **D-10** | 数据维护责任 | ✅ 锁定（v2.0 修订） | V1 阶段：lo-user 提供 Excel 主源 + 爬虫每版本手动 release；data 包必须做完整角色/音擎/驱动盘/影画/鸣徽/潜能激化数据 | 中 |
 | **D-11** | 命名体系（v2.0 新增） | ✅ 锁定 | 选项 A 全套官方化：公开 schema / core API / data 字段优先使用 ZZZ 官方英文的语义化 camelCase；旧 `breach*` 进 sourceAliases / migration | 中 |
 | **D-12** | buhflipexplode 算法处理 | ✅ 锁定 | 选项 B：Fairy 保持 MIT；buhflipexplode GPL JS 仅 raw 留档/参考，不复制进 runtime；Fairy 独立实现等价算法；每次抓取用 hash + 算法快照文档 + parity 对账监控 drift | 高 |
-| **D-13** | V1 范围收窄到危局强袭战 | ✅ 锁定（2026-05-05 errata：黄金集 19 anchors；2026-05-13 G13/G18/G19 V1.x done） | V1 = DA 计算器；buhflipexplode = DA overlay 主源；Excel `敌人属性`保留 raw archive 作为 V1.x+ 扩展源；V1 黄金集 19 anchors（G01-G12 + G14-G17 + G21-G23）；V1.x Track B 已补 G13/G18/G19，remaining defer = G20 | 中 |
+| **D-13** | V1 范围收窄到危局强袭战 | ✅ 锁定（2026-05-05 errata：黄金集 19 anchors；2026-05-14 G13/G18/G19/G20 V1.x done） | V1 = DA 计算器；buhflipexplode = DA overlay 主源；Excel `敌人属性`保留 raw archive 作为 V1.x+ 扩展源；V1 黄金集 19 anchors（G01-G12 + G14-G17 + G21-G23）；V1.x Track B 已补 G13/G18/G19/G20，当前无 deferred golden anchor | 中 |
 | **D-14** | cleaned data typed modifier 双层结构 | ✅ 锁定（2026-05-05） | Layer 1 原文层 `sourceText` / `localizedText` + Layer 2 计算层 `modifiers[]` / `calculationEffects[]` + 风险层 `unparsedEffects[]`；bucket 受控 enum 严格匹配 glossary v0.4 D-11；效果 4 级（L1 静态 / L2 静态条件 / L3 动态参数 / L4 时序需 `requiresActivation`）；确定性 pipeline + sourceTextHash + parserVersion + effectTemplateId + 人工 audit gate；AI 候选不能直接入 cleaned | 中 |
 | **D-15** | V1 package exports 4 入口 | ✅ 锁定（2026-05-05） | V1 全做：`@randomplay/data/cleaned`（总入口）/ `@randomplay/data/cleaned/<domain>` / `@randomplay/data/types` / `@randomplay/data/cleaned/i18n/<domain>`；data 包 game labels 源码 `packages/data/src/i18n/` → 发布 `packages/data/cleaned/i18n/`；UX ERR-* `docs/ux/i18n/` 完全独立 | 中 |
 | **D-16** | Source priority + multi-source + unknown policy | ✅ 锁定（2026-05-05） | Excel base / buhflipexplode DA overlay / 米游社 i18n；冲突 fail loud + manual review；entity-level `sources[]` + 关键数值字段级 `sourceRefs`；unknown 分级 blocking（影响计算）/ non-blocking（纯展示）；新增 ERR-DAT-005（multi-source conflict / 未解析 modifier blocking）+ ERR-DAT-006（locale mapping unresolved / 展示缺失 non-blocking，与 PR #21 cleaned schema spec 锁定一致） | 中 |
@@ -148,11 +148,12 @@
 - **状态**：✅ V1 release-ready milestone 时 PR #28 已实施 19 anchors（commit `3f5e67a`）
 - **原影响 doc**：`docs/qa/golden-source-coverage.md`（当时 matrix 标 G13 deferred） / `docs/product/meetings/2026-05-05-cleaned-schema-design.md` §2.7；2026-05-13 Track B 已更新当前 docs。
 
-**2026-05-13 V1.x Track B update**：
+**2026-05-14 V1.x Track B update**：
 - **G13 implemented**：异常阈值特殊规则已进入 executable replay，使用攻略 §3.2.2 的基础阈值表、特殊敌人 1.1x/1.2x 阈值提升、危局强袭战第16期 1.1x 阈值提升，并通过 `anomalyThresholdModifiers[]` 乘算组合复现 3960 / 4752(物理) / 3630 / 4356(物理)。
 - **G18 implemented**：部位破坏典型真实伤害倍率表已进入 executable replay，使用 Excel `敌人属性` 中格莱特 70 级最大生命值 + 攻略 §1.1 工程机械部位破坏 5% 最大生命值真实伤害规则。
 - **G19 implemented**：凶心疯汉失衡恢复时间已进入 executable replay，使用 Excel `敌人属性` 中匪祸侵蚀体·凶心疯汉基础失衡恢复速度 7.69%/s + 攻略 §2.3.2 `+60% -9%` 失衡恢复速度组合复现 8.61 秒。
-- **Remaining V1.x deferred**：G20 装甲哈提失衡恢复时间。
+- **G20 implemented**：装甲哈提失衡恢复时间已进入 executable replay，使用 Excel `敌人属性` 中恶名·哈提基础失衡恢复速度 8.33%/s + 攻略 §2.3.2 `+100% -13%` 失衡恢复速度组合复现 6.42 秒；攻略原文 `1/11.58%` 记为分母 typo，因为公式与终值均对应 15.58%/s。
+- **Remaining V1.x deferred**：无。
 
 **理由**：
 - 与 lo-user "V1 主要支持危局强袭战 + Excel 后备" 框定一致

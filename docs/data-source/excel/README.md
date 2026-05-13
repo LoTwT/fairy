@@ -31,7 +31,8 @@ That artifact extracts only Yixuan / Nicole / Yanagi identity rows and
 calculation-relevant source text candidates needed by the DD-002 19-anchor
 golden scope. The acceptance artifacts record lo-user-approved G22/G23 mappings.
 The replay harness reads minimal Excel enemy rows only when V1.x golden anchors
-require them (currently Greta for G18 and 匪祸侵蚀体·凶心疯汉 for G19). It does not
+require them (currently Greta for G18, 匪祸侵蚀体·凶心疯汉 for G19, and
+恶名·哈提 for G20). It does not
 publish trusted typed modifiers without deterministic template support or manual
 acceptance.
 
