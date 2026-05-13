@@ -3,7 +3,7 @@
   "parserVersion": "golden-v1-replay-v0.1.0",
   "generatedAt": "2026-05-05T18:20:00+08:00",
   "policy": {
-    "scope": "V1.x true-data replay harness after G19: 22 anchors pass executable replay, G20 remains deferred.",
+    "scope": "V1.x true-data replay harness after G20: all 23 anchors pass executable replay, no anchors remain deferred.",
     "releaseGate": "releaseReady becomes true only when all executable anchors pass replay and blockingDiagnostics is zero.",
     "manualAcceptance": "G22/G23 use lo-user manual acceptance records tied to the sourceTextHash values in v1-agent-source-candidates.json; A/B effects are replayed as explicit inactive/active snapshot states, and C is skill-level parameterized."
   },
@@ -27,19 +27,18 @@
     "G17",
     "G18",
     "G19",
+    "G20",
     "G21",
     "G22",
     "G23"
   ],
-  "deferredAnchorIds": [
-    "G20"
-  ],
+  "deferredAnchorIds": [],
   "summary": {
-    "v1AnchorCount": 22,
-    "passed": 22,
+    "v1AnchorCount": 23,
+    "passed": 23,
     "pendingHarness": 0,
     "blocked": 0,
-    "deferred": 1,
+    "deferred": 0,
     "blockingDiagnostics": 0,
     "releaseReady": true
   },
@@ -362,6 +361,26 @@
       ]
     },
     {
+      "id": "G20",
+      "status": "passed",
+      "sourceRefs": [
+        {
+          "sourceId": "lo-user-excel",
+          "sourceVersion": "2.6.0_R14028417",
+          "sourceAnchor": "敌人属性!A89:AU89"
+        },
+        {
+          "sourceId": "zzz-data-introduction",
+          "sourceVersion": "2026-05-05",
+          "sourceAnchor": "docs/reference/zzz-data-introduction.txt:181-202"
+        }
+      ],
+      "notes": [
+        "Armored Hati daze recovery uses Excel base 8.33%/s and guide §2.3.2 modifier composition (+100% -13%) to replay 15.58%/s and 6.42s.",
+        "The guide sentence has a denominator typo (`1/11.58%`) but its formula and final 6.42s result match 15.58%/s."
+      ]
+    },
+    {
       "id": "G21",
       "status": "passed",
       "sourceRefs": [
@@ -414,14 +433,6 @@
         "Yanagi disorder boost is manually accepted by lo-user and replayed as explicit inactive/active snapshot states.",
         "Yanagi polarity-disorder EX Special template supports skill levels 1-16; level 12 yields 96 base-damage extra from 300 anomaly proficiency.",
         "Three-agent virtual contribution trace includes Yixuan, Nicole, and Yanagi."
-      ]
-    },
-    {
-      "id": "G20",
-      "status": "deferred",
-      "sourceRefs": [],
-      "notes": [
-        "Deferred to V1.x by D-13; requires remaining non-DA enemy daze-recovery data expansion."
       ]
     }
   ]

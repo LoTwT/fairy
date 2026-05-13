@@ -58,12 +58,13 @@ const v1AnchorIds = [
   "G17",
   "G18",
   "G19",
+  "G20",
   "G21",
   "G22",
   "G23",
 ] as const
 
-const deferredAnchorIds = ["G20"] as const
+const deferredAnchorIds = [] as const
 
 const agentSpecs = {
   nicole: { excelId: 1031, zh: "妮可", en: "Nicole" },
@@ -1505,6 +1506,40 @@ function buildReplayReport(generatedAt: string, candidates = buildCandidates(gen
   }
 
   {
+    const hati = loadExcelEnemy("恶名·哈提", 11195)
+    const guideRef = guideSourceRef("docs/reference/zzz-data-introduction.txt:181-202")
+    const result = calculate({
+      ...snapshot,
+      enemy: {
+        ...hati.snapshot,
+        dazeRecoveryModifiers: [
+          {
+            id: "withered-garden-intensity",
+            value: 1,
+            source: guideRef,
+          },
+          {
+            id: "duel-t-cane-post-catalyst",
+            value: -0.13,
+            source: guideRef,
+          },
+        ],
+      },
+    })
+    const recoveryTrace = trace(result, "enemy.dazeRecoveryTime")
+    const inputs = recoveryTrace.inputs as Record<string, unknown>
+    assertClose(hati.snapshot.dazeRecoveryRate, 0.0833, 0.000001, "G20 base daze recovery rate")
+    assertClose(hati.defaultDazeRecoveryTime, 12.0048, 0.0001, "G20 default daze recovery time")
+    assertClose(inputs.dazeRecoveryRateMultiplier as number, 1.87, 0.000001, "G20 daze recovery modifier sum")
+    assertClose(inputs.effectiveDazeRecoveryRate as number, 0.155771, 0.000001, "G20 effective daze recovery rate")
+    assertClose(recoveryTrace.rawValue as number, 6.419683, 0.00001, "G20 daze recovery time")
+    anchors.push(passedAnchor("G20", [...hati.sourceRefs, guideRef], [
+      "Armored Hati daze recovery uses Excel base 8.33%/s and guide §2.3.2 modifier composition (+100% -13%) to replay 15.58%/s and 6.42s.",
+      "The guide sentence has a denominator typo (`1/11.58%`) but its formula and final 6.42s result match 15.58%/s.",
+    ]))
+  }
+
+  {
     const result = calculate({
       ...snapshot,
       attackSegments: [
@@ -1699,7 +1734,7 @@ function buildReplayReport(generatedAt: string, candidates = buildCandidates(gen
     generatedAt,
     policy: {
       scope:
-        "V1.x true-data replay harness after G19: 22 anchors pass executable replay, G20 remains deferred.",
+        "V1.x true-data replay harness after G20: all 23 anchors pass executable replay, no anchors remain deferred.",
       releaseGate:
         "releaseReady becomes true only when all executable anchors pass replay and blockingDiagnostics is zero.",
       manualAcceptance:
