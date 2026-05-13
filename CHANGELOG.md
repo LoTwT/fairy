@@ -2,6 +2,11 @@
 
 All notable changes to Fairy are documented in this file.
 
+## 0.0.2 - 2026-05-13
+
+### Changed
+
+- Migrate release flow to v3 runbook (#39)
 ## 0.0.1 - 2026-05-10
 
 ### Added
