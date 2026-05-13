@@ -314,12 +314,60 @@ describe("calculate", () => {
     )
 
     expect(thresholdTrace?.inputs).toMatchObject({
+      baseThreshold: 3121,
       enemyRank: "boss",
       triggerCount: 2,
       status: "assault",
       physicalMultiplier: 1.2,
+      anomalyThresholdMultiplier: 1,
     })
     expect(thresholdTrace?.rawValue).toBeCloseTo(3745.2, 1)
+  })
+
+  it("composes sourced anomaly threshold modifiers without thresholdOverride", () => {
+    const result = calculate({
+      ...baseSnapshot,
+      attackSegments: [
+        {
+          ...baseSnapshot.attackSegments[0]!,
+          id: "seg-threshold-modifiers",
+          attribute: "physical",
+          damageType: "anomaly",
+          anomalyContribution: {
+            status: "assault",
+            buildup: 100,
+            triggerCountBefore: 0,
+            anomalyThresholdModifiers: [
+              {
+                id: "enemy-base-threshold-up",
+                multiplier: 1.2,
+                source,
+              },
+              {
+                id: "deadly-assault-threshold-up",
+                multiplier: 1.1,
+                source,
+              },
+            ],
+          },
+        },
+      ],
+    })
+    const thresholdTrace = result.trace.find(event =>
+      event.path === "attackSegments[0].anomalyContribution.anomalyThreshold",
+    )
+
+    expect(thresholdTrace?.inputs).toMatchObject({
+      baseThreshold: 3000,
+      physicalMultiplier: 1.2,
+      anomalyThresholdMultiplier: 1.32,
+      anomalyThresholdModifiers: [
+        { id: "enemy-base-threshold-up", multiplier: 1.2 },
+        { id: "deadly-assault-threshold-up", multiplier: 1.1 },
+      ],
+    })
+    expect(thresholdTrace?.formula).toContain("anomalyThresholdMultiplier")
+    expect(thresholdTrace?.rawValue).toBeCloseTo(4752, 5)
   })
 
   it("floors anomaly mastery before emitting anomaly buildup", () => {

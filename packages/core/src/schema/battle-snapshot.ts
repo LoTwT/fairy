@@ -115,12 +115,21 @@ export const anomalyContributionActorInputSchema = z
   })
   .strict()
 
+export const anomalyThresholdModifierSchema = z
+  .object({
+    id: z.string().min(1),
+    multiplier: z.number().finite().positive(),
+    source: sourceRefSchema.optional(),
+  })
+  .strict()
+
 export const anomalyContributionInputSchema = z
   .object({
     status: anomalyStatusSchema,
     triggerCountBefore: z.number().int().nonnegative().optional(),
     buildup: z.number().finite().optional(),
     thresholdOverride: z.number().finite().optional(),
+    anomalyThresholdModifiers: z.array(anomalyThresholdModifierSchema).optional(),
     overflowBuildup: z.number().finite().optional(),
     remainingDurationSeconds: z.number().finite().nonnegative().optional(),
     contributors: z.array(anomalyContributionActorInputSchema).optional(),
@@ -348,6 +357,7 @@ export const battleSnapshotSchema = z
 export type BattleContext = z.infer<typeof battleContextSchema>
 export type AgentPanelSnapshot = z.infer<typeof agentPanelSnapshotSchema>
 export type AgentSnapshot = z.infer<typeof agentSnapshotSchema>
+export type AnomalyThresholdModifier = z.infer<typeof anomalyThresholdModifierSchema>
 export type AnomalyContributionInput = z.infer<typeof anomalyContributionInputSchema>
 export type AttackSegment = z.infer<typeof attackSegmentSchema>
 export type EnemySnapshot = z.infer<typeof enemySnapshotSchema>

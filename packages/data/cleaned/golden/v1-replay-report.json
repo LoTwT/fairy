@@ -3,7 +3,7 @@
   "parserVersion": "golden-v1-replay-v0.1.0",
   "generatedAt": "2026-05-05T18:20:00+08:00",
   "policy": {
-    "scope": "V1.x true-data replay harness after G18: 20 anchors pass executable replay, G13/G19/G20 remain deferred.",
+    "scope": "V1.x true-data replay harness after G13: 21 anchors pass executable replay, G19/G20 remain deferred.",
     "releaseGate": "releaseReady becomes true only when all executable anchors pass replay and blockingDiagnostics is zero.",
     "manualAcceptance": "G22/G23 use lo-user manual acceptance records tied to the sourceTextHash values in v1-agent-source-candidates.json; A/B effects are replayed as explicit inactive/active snapshot states, and C is skill-level parameterized."
   },
@@ -20,6 +20,7 @@
     "G10",
     "G11",
     "G12",
+    "G13",
     "G14",
     "G15",
     "G16",
@@ -30,16 +31,15 @@
     "G23"
   ],
   "deferredAnchorIds": [
-    "G13",
     "G19",
     "G20"
   ],
   "summary": {
-    "v1AnchorCount": 20,
-    "passed": 20,
+    "v1AnchorCount": 21,
+    "passed": 21,
     "pendingHarness": 0,
     "blocked": 0,
-    "deferred": 3,
+    "deferred": 2,
     "blockingDiagnostics": 0,
     "releaseReady": true
   },
@@ -243,6 +243,21 @@
       ]
     },
     {
+      "id": "G13",
+      "status": "passed",
+      "sourceRefs": [
+        {
+          "sourceId": "zzz-data-introduction",
+          "sourceVersion": "2026-05-05",
+          "sourceAnchor": "docs/reference/zzz-data-introduction.txt:247-250"
+        }
+      ],
+      "notes": [
+        "Sourced anomalyThresholdModifiers replay the guide's multiplicative composition: 2.0+ special enemies use 1.2x or 1.1x base threshold modifiers, then DA #16 applies another 1.1x.",
+        "Replay asserts guide totals: corruption priest/ghost 3960 and 4752 physical; notorious Pompey 3630 and 4356 physical."
+      ]
+    },
+    {
       "id": "G14",
       "status": "passed",
       "sourceRefs": [
@@ -380,14 +395,6 @@
         "Yanagi disorder boost is manually accepted by lo-user and replayed as explicit inactive/active snapshot states.",
         "Yanagi polarity-disorder EX Special template supports skill levels 1-16; level 12 yields 96 base-damage extra from 300 anomaly proficiency.",
         "Three-agent virtual contribution trace includes Yixuan, Nicole, and Yanagi."
-      ]
-    },
-    {
-      "id": "G13",
-      "status": "deferred",
-      "sourceRefs": [],
-      "notes": [
-        "Deferred to V1.x by @lo-user on 2026-05-05; requires data-driven anomaly-threshold rule composition."
       ]
     },
     {

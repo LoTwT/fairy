@@ -89,7 +89,7 @@ dogfooding 通过 release gate（≥4/5）。
 ## 4. 已知限制（V1 release notes 待标注）
 
 - **DD-003 单人 dogfooding 限制**：V1 仅由 lo-user 单人深度 dogfood 验证 + QA 回归，**未经社区广泛验证**
-- **V1 黄金集 = 19 anchors**（D-13 errata）：G13 / G18 / G19 / G20 推迟到 V1.x（涉及 data-driven anomaly threshold rule composition / 部位破坏真实伤害 / 失衡恢复时间等扩展功能）
+- **V1 黄金集 = 19 anchors**（D-13 errata）：G13 / G18 / G19 / G20 原推迟到 V1.x；截至 2026-05-13，G13 / G18 已进入 executable replay，G19 / G20 仍待补（失衡恢复时间扩展功能）
 - **米游社 sourceConflict 3 个**（21 澄意 / 8 灼冽 / 1 破招）：~~non-blocking historical 记录，cleaned typed modifier 发布前需人工 audit gate 触发时再决~~ → ✅ 2026-05-08 已 audit 决议（accept buhflipexplode；F-05 / PR #33），不再属于 known limitation，转记为已解决项
 - **dogfooding 边界探测 Day 3 跳过**：lo-user 决策跳过 Day 3（`--lang en` 验证 / 故意造错 ERR-* 验证），release 后视真实使用反馈再决定是否回补；属 known limitation，不阻塞 release
 
@@ -105,7 +105,7 @@ dogfooding 通过 release gate（≥4/5）。
 | B-Calc.non-blocker：已重新分类 | ✅ F-02 归 U-Scenario，已 absorbed by D-19 |
 | U-ErrCopy / U-Scenario：可修已修，不修加 known limitation 注解 | ✅ F-01 / F-02 / F-03 / F-06 已修；Day 3 跳过记 known limitation |
 | D-Data：audit gate 决议落地 | ✅ F-05 已决议（accept buhflipexplode），audit 文件入仓 |
-| P-Range：全部入 V1.x backlog | ✅ G13/G18/G19/G20 已 V1.x（D-13）；其他无新增 |
+| P-Range：全部入 V1.x backlog | ✅ G13/G18 已完成；G19/G20 仍为 V1.x backlog（D-13）；其他无新增 |
 | lo-user 整体打分 ≥ 4/5 | ✅ 4/5 |
 
 **通过 release gate**。
