@@ -2,7 +2,7 @@ import { createHash } from "node:crypto"
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs"
 import { dirname, join } from "node:path"
 import { fileURLToPath } from "node:url"
-import { calculate } from "@randomplay/core"
+import { calculate } from "../../core/src/index"
 import * as XLSX from "xlsx"
 
 const packageDir = fileURLToPath(new URL("..", import.meta.url))
@@ -51,6 +51,7 @@ const v1AnchorIds = [
   "G10",
   "G11",
   "G12",
+  "G13",
   "G14",
   "G15",
   "G16",
@@ -61,7 +62,7 @@ const v1AnchorIds = [
   "G23",
 ] as const
 
-const deferredAnchorIds = ["G13", "G19", "G20"] as const
+const deferredAnchorIds = ["G19", "G20"] as const
 
 const agentSpecs = {
   nicole: { excelId: 1031, zh: "妮可", en: "Nicole" },
@@ -1246,6 +1247,91 @@ function buildReplayReport(generatedAt: string, candidates = buildCandidates(gen
   }
 
   {
+    const guideRef = guideSourceRef("docs/reference/zzz-data-introduction.txt:247-250")
+    const buildSegment = (
+      enemyThresholdMultiplier: number,
+      attribute: "electric" | "physical",
+      id: string,
+    ) => ({
+      ...snapshot.attackSegments[0]!,
+      id,
+      attribute,
+      damageType: "anomaly" as const,
+      anomalyContribution: {
+        status: attribute === "physical" ? "assault" as const : "shock" as const,
+        buildup: 100,
+        triggerCountBefore: 0,
+        anomalyThresholdModifiers: [
+          {
+            id: "enemy-base-anomaly-threshold-up",
+            multiplier: enemyThresholdMultiplier,
+            source: guideRef,
+          },
+          {
+            id: "deadly-assault-16-anomaly-threshold-up",
+            multiplier: 1.1,
+            source: guideRef,
+          },
+        ],
+      },
+    })
+    const priest = calculate({
+      ...snapshot,
+      enemy: {
+        ...snapshot.enemy,
+        enemyId: "guide:corruption-priest",
+      },
+      attackSegments: [buildSegment(1.2, "electric", "seg-g13-priest")],
+    })
+    const priestPhysical = calculate({
+      ...snapshot,
+      enemy: {
+        ...snapshot.enemy,
+        enemyId: "guide:corruption-priest",
+      },
+      attackSegments: [buildSegment(1.2, "physical", "seg-g13-priest-physical")],
+    })
+    const pompey = calculate({
+      ...snapshot,
+      enemy: {
+        ...snapshot.enemy,
+        enemyId: "guide:notorious-pompey",
+      },
+      attackSegments: [buildSegment(1.1, "electric", "seg-g13-pompey")],
+    })
+    const pompeyPhysical = calculate({
+      ...snapshot,
+      enemy: {
+        ...snapshot.enemy,
+        enemyId: "guide:notorious-pompey",
+      },
+      attackSegments: [buildSegment(1.1, "physical", "seg-g13-pompey-physical")],
+    })
+    const priestTrace = trace(priest, "attackSegments[0].anomalyContribution.anomalyThreshold")
+    const pompeyTrace = trace(pompey, "attackSegments[0].anomalyContribution.anomalyThreshold")
+    assertClose(priestTrace.rawValue as number, 3960, 0.00001, "G13 priest anomaly threshold")
+    assertClose(
+      trace(priestPhysical, "attackSegments[0].anomalyContribution.anomalyThreshold").rawValue as number,
+      4752,
+      0.00001,
+      "G13 priest physical anomaly threshold",
+    )
+    assertClose(pompeyTrace.rawValue as number, 3630, 0.00001, "G13 pompey anomaly threshold")
+    assertClose(
+      trace(pompeyPhysical, "attackSegments[0].anomalyContribution.anomalyThreshold").rawValue as number,
+      4356,
+      0.00001,
+      "G13 pompey physical anomaly threshold",
+    )
+    assertClose((priestTrace.inputs?.anomalyThresholdMultiplier as number | undefined), 1.32, 0.00001, "G13 priest modifier product")
+    assertClose((pompeyTrace.inputs?.anomalyThresholdMultiplier as number | undefined), 1.21, 0.00001, "G13 pompey modifier product")
+    anchors.push(passedAnchor("G13", [guideRef], [
+      "Sourced anomalyThresholdModifiers replay the guide's multiplicative composition: 2.0+ special enemies use 1.2x or 1.1x base threshold modifiers, then DA #16 applies another 1.1x.",
+      "Replay asserts guide totals: corruption priest/ghost 3960 and 4752 physical; notorious Pompey 3630 and 4356 physical.",
+    ]))
+  }
+
+  {
     const result = calculate({
       ...snapshot,
       team: [
@@ -1554,9 +1640,7 @@ function buildReplayReport(generatedAt: string, candidates = buildCandidates(gen
       status: "deferred",
       sourceRefs: [],
       notes: [
-        anchorId === "G13"
-          ? "Deferred to V1.x by @lo-user on 2026-05-05; requires data-driven anomaly-threshold rule composition."
-          : "Deferred to V1.x by D-13; requires non-DA enemy daze-recovery data expansion.",
+        "Deferred to V1.x by D-13; requires non-DA enemy daze-recovery data expansion.",
       ],
     })
   }
@@ -1579,7 +1663,7 @@ function buildReplayReport(generatedAt: string, candidates = buildCandidates(gen
     generatedAt,
     policy: {
       scope:
-        "V1.x true-data replay harness after G18: 20 anchors pass executable replay, G13/G19/G20 remain deferred.",
+        "V1.x true-data replay harness after G13: 21 anchors pass executable replay, G19/G20 remain deferred.",
       releaseGate:
         "releaseReady becomes true only when all executable anchors pass replay and blockingDiagnostics is zero.",
       manualAcceptance:
@@ -1634,8 +1718,8 @@ function verifyCommand(): void {
 
   const report = readJson<{ generatedAt: string; summary: { v1AnchorCount: number; blocked: number; pendingHarness: number; blockingDiagnostics: number; releaseReady: boolean } }>(replayReportPath)
   assertArtifactsFresh(report.generatedAt)
-  if (report.summary.v1AnchorCount !== 20)
-    throw new Error(`Expected 20 executable anchors, got ${report.summary.v1AnchorCount}`)
+  if (report.summary.v1AnchorCount !== 21)
+    throw new Error(`Expected 21 executable anchors, got ${report.summary.v1AnchorCount}`)
   if (report.summary.blocked !== 0)
     throw new Error(`Expected no blocked anchors after G22/G23 manual acceptance, got ${report.summary.blocked}`)
   if (report.summary.pendingHarness !== 0)
@@ -1643,7 +1727,7 @@ function verifyCommand(): void {
   if (report.summary.blockingDiagnostics !== 0)
     throw new Error(`Expected no blocking diagnostics after G22/G23 manual acceptance, got ${report.summary.blockingDiagnostics}`)
   if (report.summary.releaseReady !== true)
-    throw new Error("Expected golden replay releaseReady=true after all 20 executable anchors pass")
+    throw new Error("Expected golden replay releaseReady=true after all 21 executable anchors pass")
 }
 
 async function main(): Promise<void> {

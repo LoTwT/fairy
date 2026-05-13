@@ -56,6 +56,7 @@ S5 segment 2 should continue with:
 - buhflipexplode transforms from the retained live-only snapshot into cleaned
   Deadly Assault data and parity fixtures.
 - Raw record schemas and transforms into `GameData`.
-- Golden-anchor source coverage for the V1 20-anchor fixture scope.
+- Golden-anchor source coverage for the current 21-anchor executable fixture
+  scope.
 - Negative validation that formal modifiers and formal rows cannot miss source
   metadata.

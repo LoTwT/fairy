@@ -629,7 +629,7 @@ function getFormulaActor(
       kind: "formula",
       path: `attackSegments[${index}].anomalyContribution.anomalyThreshold`,
       inputs: threshold,
-      formula: "anomalyThreshold = rankTriggerTable[enemy.rank][triggerCount] * physicalMultiplier",
+      formula: "anomalyThreshold = rankTriggerTable[enemy.rank][triggerCount] * physicalMultiplier * anomalyThresholdMultiplier",
       rawValue: threshold.threshold,
       displayValue: "anomalyThreshold",
     }),
@@ -1060,10 +1060,18 @@ function getEffectiveBuildupByContributor(
 
 function getAnomalyThreshold(snapshot: BattleSnapshot, segment: AttackSegment): {
   threshold: number
+  baseThreshold: number
   enemyRank: EnemyRank
   triggerCount: number
   status: AnomalyStatus | undefined
   physicalMultiplier: number
+  anomalyThresholdMultiplier: number
+  anomalyThresholdModifiers: Array<{
+    id: string
+    multiplier: number
+    source?: SourceRef
+  }>
+  thresholdOverride?: number
 } {
   const status = segment.anomalyContribution?.status
   const triggerCount = clampTriggerCount(
@@ -1073,12 +1081,27 @@ function getAnomalyThreshold(snapshot: BattleSnapshot, segment: AttackSegment): 
   const rank = snapshot.enemy.rank === "special" ? "boss" : snapshot.enemy.rank
   const physicalMultiplier = isPhysicalAnomaly(segment) ? 1.2 : 1
   const baseThreshold = anomalyThresholdTable[rank][triggerCount] ?? anomalyThresholdTable[rank][0]!
+  const anomalyThresholdModifiers = segment.anomalyContribution?.anomalyThresholdModifiers ?? []
+  const anomalyThresholdMultiplier = anomalyThresholdModifiers.reduce(
+    (total, modifier) => total * modifier.multiplier,
+    1,
+  )
+  const composedThreshold = baseThreshold * physicalMultiplier * anomalyThresholdMultiplier
+  const thresholdOverride = segment.anomalyContribution?.thresholdOverride
   return {
-    threshold: segment.anomalyContribution?.thresholdOverride ?? baseThreshold * physicalMultiplier,
+    threshold: thresholdOverride ?? composedThreshold,
+    baseThreshold,
     enemyRank: snapshot.enemy.rank,
     triggerCount,
     status,
     physicalMultiplier,
+    anomalyThresholdMultiplier,
+    anomalyThresholdModifiers: anomalyThresholdModifiers.map(modifier => ({
+      id: modifier.id,
+      multiplier: modifier.multiplier,
+      ...(modifier.source === undefined ? {} : { source: modifier.source }),
+    })),
+    ...(thresholdOverride === undefined ? {} : { thresholdOverride }),
   }
 }
 

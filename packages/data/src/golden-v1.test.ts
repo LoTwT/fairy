@@ -29,7 +29,7 @@ describe("V1 golden true-data replay baseline", () => {
     )
   })
 
-  it("tracks the 20-anchor executable gate and deferred anchors explicitly", () => {
+  it("tracks the 21-anchor executable gate and deferred anchors explicitly", () => {
     const report = readJson<{
       v1AnchorIds: string[]
       deferredAnchorIds: string[]
@@ -49,7 +49,7 @@ describe("V1 golden true-data replay baseline", () => {
       }>
     }>(replayReportPath)
 
-    expect(report.v1AnchorIds).toHaveLength(20)
+    expect(report.v1AnchorIds).toHaveLength(21)
     expect(report.v1AnchorIds).toEqual([
       "G01",
       "G02",
@@ -63,6 +63,7 @@ describe("V1 golden true-data replay baseline", () => {
       "G10",
       "G11",
       "G12",
+      "G13",
       "G14",
       "G15",
       "G16",
@@ -72,10 +73,10 @@ describe("V1 golden true-data replay baseline", () => {
       "G22",
       "G23",
     ])
-    expect(report.deferredAnchorIds).toEqual(["G13", "G19", "G20"])
+    expect(report.deferredAnchorIds).toEqual(["G19", "G20"])
     expect(report.summary).toMatchObject({
-      v1AnchorCount: 20,
-      passed: 20,
+      v1AnchorCount: 21,
+      passed: 21,
       pendingHarness: 0,
       blocked: 0,
       blockingDiagnostics: 0,
@@ -83,7 +84,8 @@ describe("V1 golden true-data replay baseline", () => {
     })
 
     const g13 = report.anchors.find(anchor => anchor.id === "G13")
-    expect(g13?.status).toBe("deferred")
+    expect(g13?.status).toBe("passed")
+    expect(g13?.notes.join("\n")).toContain("3960 and 4752 physical")
     const g04 = report.anchors.find(anchor => anchor.id === "G04")
     expect(g04?.status).toBe("passed")
     expect(g04?.notes.join("\n")).toContain("199.17%, 268.61%, and 161.67%")

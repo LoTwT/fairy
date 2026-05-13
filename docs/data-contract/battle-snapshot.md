@@ -234,9 +234,16 @@ interface AnomalyContributionInput {
   triggerCountBefore?: number
   buildup?: number
   thresholdOverride?: number
+  anomalyThresholdModifiers?: AnomalyThresholdModifier[]
   overflowBuildup?: number
   remainingDurationSeconds?: number
   contributors?: AnomalyContributionActorInput[]
+}
+
+interface AnomalyThresholdModifier {
+  id: string
+  multiplier: number
+  source?: SourceRef
 }
 
 interface AnomalyContributionActorInput {
@@ -260,6 +267,10 @@ assert virtual-agent behavior.
 `"disorder"`; core must not infer a default status. `remainingDurationSeconds`
 records the remaining duration `T` used by disorder formula traces. If omitted,
 core may fall back to the current default duration for that anomaly status.
+`anomalyThresholdModifiers[]` records sourced multiplicative threshold rules
+such as special-enemy base-threshold increases and Deadly Assault mode
+modifiers. `thresholdOverride` remains an explicit escape hatch and should not
+be used to satisfy golden anchors that require rule composition evidence.
 
 ## 7. Enemy Snapshot
 
