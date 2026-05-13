@@ -3,8 +3,8 @@
   "parserVersion": "golden-v1-replay-v0.1.0",
   "generatedAt": "2026-05-05T18:20:00+08:00",
   "policy": {
-    "scope": "V1 true-data replay harness baseline after DD-002: 19 anchors in V1, G13/G18/G19/G20 deferred.",
-    "releaseGate": "releaseReady becomes true only when all V1 anchors pass executable replay and blockingDiagnostics is zero.",
+    "scope": "V1.x true-data replay harness after G18: 20 anchors pass executable replay, G13/G19/G20 remain deferred.",
+    "releaseGate": "releaseReady becomes true only when all executable anchors pass replay and blockingDiagnostics is zero.",
     "manualAcceptance": "G22/G23 use lo-user manual acceptance records tied to the sourceTextHash values in v1-agent-source-candidates.json; A/B effects are replayed as explicit inactive/active snapshot states, and C is skill-level parameterized."
   },
   "v1AnchorIds": [
@@ -24,22 +24,22 @@
     "G15",
     "G16",
     "G17",
+    "G18",
     "G21",
     "G22",
     "G23"
   ],
   "deferredAnchorIds": [
     "G13",
-    "G18",
     "G19",
     "G20"
   ],
   "summary": {
-    "v1AnchorCount": 19,
-    "passed": 19,
+    "v1AnchorCount": 20,
+    "passed": 20,
     "pendingHarness": 0,
     "blocked": 0,
-    "deferred": 4,
+    "deferred": 3,
     "blockingDiagnostics": 0,
     "releaseReady": true
   },
@@ -309,6 +309,25 @@
       ]
     },
     {
+      "id": "G18",
+      "status": "passed",
+      "sourceRefs": [
+        {
+          "sourceId": "lo-user-excel",
+          "sourceVersion": "2.6.0_R14028417",
+          "sourceAnchor": "敌人属性!A139:AU139"
+        },
+        {
+          "sourceId": "zzz-data-introduction",
+          "sourceVersion": "2026-05-05",
+          "sourceAnchor": "docs/reference/zzz-data-introduction.txt:62-71"
+        }
+      ],
+      "notes": [
+        "Part-break manual event uses sourced Greta level-70 max HP from Excel and the guide's 5% engineering-machine part-break true-damage multiplier."
+      ]
+    },
+    {
       "id": "G21",
       "status": "passed",
       "sourceRefs": [
@@ -372,19 +391,11 @@
       ]
     },
     {
-      "id": "G18",
-      "status": "deferred",
-      "sourceRefs": [],
-      "notes": [
-        "Deferred to V1.x by D-13; requires non-DA enemy / part-break data expansion."
-      ]
-    },
-    {
       "id": "G19",
       "status": "deferred",
       "sourceRefs": [],
       "notes": [
-        "Deferred to V1.x by D-13; requires non-DA enemy / part-break data expansion."
+        "Deferred to V1.x by D-13; requires non-DA enemy daze-recovery data expansion."
       ]
     },
     {
@@ -392,7 +403,7 @@
       "status": "deferred",
       "sourceRefs": [],
       "notes": [
-        "Deferred to V1.x by D-13; requires non-DA enemy / part-break data expansion."
+        "Deferred to V1.x by D-13; requires non-DA enemy daze-recovery data expansion."
       ]
     }
   ]

@@ -139,8 +139,9 @@ Feedback routing:
 - V1 is a static `BattleSnapshot` calculator, not a battle timeline simulator.
 - V1 does not yet provide a Web UI or automatic character/equipment resolver.
 - Users provide or edit explicit JSON snapshots.
-- The V1 golden gate is 19 anchors passed with zero blocking diagnostics.
+- The executable golden gate is 20 anchors passed with zero blocking diagnostics.
 - The V1 dogfooding gate is lo-user single-person deep validation plus QA
   regression. It passed 4/5 with zero unresolved B-Calc blockers; broad
   community validation is deferred.
-- G13, G18, G19, and G20 are intentionally deferred to V1.x.
+- G13, G19, and G20 are intentionally deferred to V1.x. G18 has been added as
+  a V1.x executable anchor.

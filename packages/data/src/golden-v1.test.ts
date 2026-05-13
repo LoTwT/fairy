@@ -29,7 +29,7 @@ describe("V1 golden true-data replay baseline", () => {
     )
   })
 
-  it("tracks the 19-anchor V1 gate and deferred anchors explicitly", () => {
+  it("tracks the 20-anchor executable gate and deferred anchors explicitly", () => {
     const report = readJson<{
       v1AnchorIds: string[]
       deferredAnchorIds: string[]
@@ -49,7 +49,7 @@ describe("V1 golden true-data replay baseline", () => {
       }>
     }>(replayReportPath)
 
-    expect(report.v1AnchorIds).toHaveLength(19)
+    expect(report.v1AnchorIds).toHaveLength(20)
     expect(report.v1AnchorIds).toEqual([
       "G01",
       "G02",
@@ -67,14 +67,15 @@ describe("V1 golden true-data replay baseline", () => {
       "G15",
       "G16",
       "G17",
+      "G18",
       "G21",
       "G22",
       "G23",
     ])
-    expect(report.deferredAnchorIds).toEqual(["G13", "G18", "G19", "G20"])
+    expect(report.deferredAnchorIds).toEqual(["G13", "G19", "G20"])
     expect(report.summary).toMatchObject({
-      v1AnchorCount: 19,
-      passed: 19,
+      v1AnchorCount: 20,
+      passed: 20,
       pendingHarness: 0,
       blocked: 0,
       blockingDiagnostics: 0,
@@ -94,6 +95,9 @@ describe("V1 golden true-data replay baseline", () => {
     expect(g10?.notes.join("\n")).toContain("both resistanceZone and anomaly-buildup-resistance")
     const g11 = report.anchors.find(anchor => anchor.id === "G11")
     expect(g11?.status).toBe("passed")
+    const g18 = report.anchors.find(anchor => anchor.id === "G18")
+    expect(g18?.status).toBe("passed")
+    expect(g18?.notes.join("\n")).toContain("Greta level-70 max HP")
     const g22 = report.anchors.find(anchor => anchor.id === "G22")
     expect(g22?.status).toBe("passed")
     expect(g22?.notes.join("\n")).toContain("inactive/active snapshot states")
