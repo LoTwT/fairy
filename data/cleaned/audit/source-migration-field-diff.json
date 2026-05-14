@@ -1,0 +1,407 @@
+{
+  "schemaVersion": "fairy-source-migration-field-diff-v1",
+  "generatedAt": "2026-05-14T23:35:00+08:00",
+  "scope": "Phase 1 initial sample audit. This file records machine-readable fixture coverage for sampled source fields only; it does not replace runtime cleaned data. Nanoka detail endpoints were added after the initial list-endpoint sample.",
+  "statusValues": [
+    "same",
+    "changed",
+    "missing-in-new",
+    "missing-in-excel",
+    "semantic-unknown"
+  ],
+  "sourceGateSummary": {
+    "prydwen": {
+      "sourceId": "prydwen-zzz",
+      "liveOnlyGate": "pass-with-weak-version-metadata",
+      "redistributionRisk": "accepted-by-owner",
+      "snapshotability": "html-snapshot",
+      "notes": "Public live-facing pages sampled. No explicit data redistribution license found."
+    },
+    "nanoka": {
+      "sourceId": "nanoka-zzz",
+      "liveOnlyGate": "pass-for-versioned-static-public-snapshot",
+      "redistributionRisk": "accepted-by-owner",
+      "snapshotability": "versioned-static-json",
+      "notes": "List endpoints are identity summaries, but detail endpoints under /zh|en|ja|ko/{character|bangboo|monster}/{id}.json expose calculation numeric fields for sampled agents, Bangboos, and monsters."
+    },
+    "gachabase": {
+      "sourceId": "gachabase-zzz",
+      "liveOnlyGate": "fail-beta-branch",
+      "redistributionRisk": "forbidden",
+      "snapshotability": "html-serialized-payload",
+      "notes": "All tested routes canonicalized to /beta and embedded branch beta. Numeric coverage is strong but cannot enter npm payload under current D-20 rules."
+    }
+  },
+  "entities": [
+    {
+      "entityType": "agent",
+      "entityId": "yixuan",
+      "excelSourceRefs": [
+        "data/source/excel/data.xlsx#代理人属性!A37:AF37"
+      ],
+      "fields": [
+        {
+          "fieldPath": "baseStatsByLevel.60.maxHp",
+          "excelValue": 7953.8621,
+          "candidates": {
+            "prydwen": {
+              "value": 8373,
+              "status": "changed",
+              "sourceAnchor": "https://www.prydwen.gg/zenless/characters-stats/#Yixuan row",
+              "notes": "Visible rendered table value. Difference likely reflects source drift or stat interpretation; requires ruling before baseline update.",
+              "promotable": false,
+              "blockedBy": [
+                "field:changed-requires-ruling"
+              ]
+            },
+            "nanoka": {
+              "value": {
+                "stats": {
+                  "hp_max": 673,
+                  "hp_growth": 842519
+                },
+                "level6": {
+                  "hp_max": 2310,
+                  "level_min": 50,
+                  "level_max": 60
+                },
+                "extraLevel6": {
+                  "prop": 11101,
+                  "value": 420
+                }
+              },
+              "status": "semantic-unknown",
+              "sourceAnchor": "https://static.nanoka.cc/zzz/3.0.2+15625449/zh/character/1371.json#stats.hp_max+hp_growth+level.6+extra_level.6",
+              "notes": "Detail endpoint exposes raw base/growth/level/extra HP fields. Requires normalization formula before comparing to final level-60 panel values.",
+              "promotable": false,
+              "blockedBy": [
+                "field:normalization-formula-required"
+              ]
+            },
+            "gachabase": {
+              "value": 8373,
+              "status": "semantic-unknown",
+              "sourceAnchor": "https://zzz.gachabase.net/agents/1371/yixuan?lang=en#Base HP",
+              "notes": "Value present, but source route canonicalizes to beta and is blocked by live-only gate.",
+              "promotable": false,
+              "blockedBy": [
+                "source-gate:fail-beta-branch",
+                "field:semantic-unknown-requires-ruling"
+              ]
+            }
+          }
+        },
+        {
+          "fieldPath": "baseStatsByLevel.60.attack",
+          "excelValue": 872.5748,
+          "candidates": {
+            "prydwen": {
+              "value": 872,
+              "status": "semantic-unknown",
+              "sourceAnchor": "https://www.prydwen.gg/zenless/characters-stats/#Yixuan row",
+              "notes": "Rendered value is rounded/truncated.",
+              "promotable": false,
+              "blockedBy": [
+                "field:semantic-unknown-requires-ruling"
+              ]
+            },
+            "nanoka": {
+              "value": {
+                "stats": {
+                  "attack": 126,
+                  "attack_growth": 88572
+                },
+                "level6": {
+                  "attack": 224,
+                  "level_min": 50,
+                  "level_max": 60
+                }
+              },
+              "status": "semantic-unknown",
+              "sourceAnchor": "https://static.nanoka.cc/zzz/3.0.2+15625449/zh/character/1371.json#stats.attack+attack_growth+level.6",
+              "notes": "Detail endpoint exposes raw base/growth/level attack fields. Requires normalization formula before comparing to final level-60 panel values.",
+              "promotable": false,
+              "blockedBy": [
+                "field:normalization-formula-required"
+              ]
+            },
+            "gachabase": {
+              "value": 872,
+              "status": "semantic-unknown",
+              "sourceAnchor": "https://zzz.gachabase.net/agents/1371/yixuan?lang=en#Base ATK",
+              "notes": "Rendered value is rounded and beta-gated.",
+              "promotable": false,
+              "blockedBy": [
+                "source-gate:fail-beta-branch",
+                "field:semantic-unknown-requires-ruling"
+              ]
+            }
+          }
+        },
+        {
+          "fieldPath": "skills.basicAttack.hit1.damageMultiplier",
+          "excelValue": null,
+          "candidates": {
+            "prydwen": {
+              "value": 0.458,
+              "status": "missing-in-excel",
+              "sourceAnchor": "https://www.prydwen.gg/zenless/characters/yixuan/#Basic Attack",
+              "notes": "Visible row: 1st-Hit DMG Multiplier 45.80%.",
+              "promotable": true
+            },
+            "nanoka": {
+              "value": 0.458,
+              "status": "missing-in-excel",
+              "sourceAnchor": "https://static.nanoka.cc/zzz/3.0.2+15625449/zh/character/1371.json#skill.basic.description.param.Skill1371001.Prop1001",
+              "notes": "Detail endpoint exposes deterministic skill params: damage_percentage=4580, stun_ratio=2860, attribute_infliction=2596.",
+              "promotable": true
+            },
+            "gachabase": {
+              "value": 0.458,
+              "status": "missing-in-excel",
+              "sourceAnchor": "https://zzz.gachabase.net/agents/1371/yixuan?lang=en#skill_data id 1371001",
+              "notes": "Serialized value damage_multiplier_base=4580, but beta-gated.",
+              "promotable": false,
+              "blockedBy": [
+                "source-gate:fail-beta-branch"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "entityType": "bangboo",
+      "entityId": "plugboo",
+      "excelSourceRefs": [
+        "data/source/excel/data.xlsx#邦布属性!A18:T18",
+        "data/source/excel/data.xlsx#邦布技能!A29:H30"
+      ],
+      "fields": [
+        {
+          "fieldPath": "baseStatsByLevel.60.attack",
+          "excelValue": 8057.0996,
+          "candidates": {
+            "prydwen": {
+              "value": 8057,
+              "status": "semantic-unknown",
+              "sourceAnchor": "https://www.prydwen.gg/zenless/bangboo/#Plugboo Stats",
+              "notes": "Rendered value is rounded/truncated.",
+              "promotable": false,
+              "blockedBy": [
+                "field:semantic-unknown-requires-ruling"
+              ]
+            },
+            "nanoka": {
+              "value": {
+                "stats": {
+                  "attack": 65,
+                  "attack_upgrade": 327644
+                },
+                "level6": {
+                  "attack": 6059,
+                  "level_min": 50,
+                  "level_max": 60
+                }
+              },
+              "status": "semantic-unknown",
+              "sourceAnchor": "https://static.nanoka.cc/zzz/3.0.2+15625449/zh/bangboo/54008.json#stats.attack+attack_upgrade+level.6",
+              "notes": "Detail endpoint exposes raw Bangboo base/growth/level attack fields. Requires normalization formula before comparing to final level-60 panel values.",
+              "promotable": false,
+              "blockedBy": [
+                "field:normalization-formula-required"
+              ]
+            },
+            "gachabase": {
+              "value": 8057,
+              "status": "semantic-unknown",
+              "sourceAnchor": "https://zzz.gachabase.net/bangboo/54008/plugboo?lang=en#Base ATK",
+              "notes": "Value present, beta-gated.",
+              "promotable": false,
+              "blockedBy": [
+                "source-gate:fail-beta-branch",
+                "field:semantic-unknown-requires-ruling"
+              ]
+            }
+          }
+        },
+        {
+          "fieldPath": "skills.plugboo-active.segments[0].multiplier",
+          "excelValue": 5.12,
+          "candidates": {
+            "prydwen": {
+              "value": 5.12,
+              "status": "same",
+              "sourceAnchor": "https://www.prydwen.gg/zenless/bangboo/#Plugboo Shock Sniper DMG Multiplier",
+              "promotable": true
+            },
+            "nanoka": {
+              "value": 5.12,
+              "status": "same",
+              "sourceAnchor": "https://static.nanoka.cc/zzz/3.0.2+15625449/zh/bangboo/54008.json#skill_prop.5400801.1001.main",
+              "notes": "Detail endpoint exposes 5400801.1001.main=51200, matching Excel/Gachabase after divisor normalization.",
+              "promotable": true
+            },
+            "gachabase": {
+              "value": 5.12,
+              "status": "same",
+              "sourceAnchor": "https://zzz.gachabase.net/bangboo/54008/plugboo?lang=en#skill_data id 5400801",
+              "notes": "Serialized damage_multiplier_base=51200, beta-gated.",
+              "promotable": false,
+              "blockedBy": [
+                "source-gate:fail-beta-branch"
+              ]
+            }
+          }
+        },
+        {
+          "fieldPath": "skills.plugboo-active.segments[0].dazeMultiplier",
+          "excelValue": 1.87,
+          "candidates": {
+            "prydwen": {
+              "value": 1.87,
+              "status": "same",
+              "sourceAnchor": "https://www.prydwen.gg/zenless/bangboo/#Plugboo Shock Sniper Daze Multiplier",
+              "promotable": true
+            },
+            "nanoka": {
+              "value": 1.87,
+              "status": "same",
+              "sourceAnchor": "https://static.nanoka.cc/zzz/3.0.2+15625449/zh/bangboo/54008.json#skill_prop.5400801.1002.main",
+              "notes": "Detail endpoint exposes 5400801.1002.main=18700, matching Excel/Gachabase after divisor normalization.",
+              "promotable": true
+            },
+            "gachabase": {
+              "value": 1.87,
+              "status": "same",
+              "sourceAnchor": "https://zzz.gachabase.net/bangboo/54008/plugboo?lang=en#skill_data id 5400801",
+              "notes": "Serialized daze_multiplier_base=18700, beta-gated.",
+              "promotable": false,
+              "blockedBy": [
+                "source-gate:fail-beta-branch"
+              ]
+            }
+          }
+        },
+        {
+          "fieldPath": "skills.plugboo-active.segments[0].anomalyBuildup",
+          "excelValue": 240,
+          "candidates": {
+            "prydwen": {
+              "value": null,
+              "status": "missing-in-new",
+              "sourceAnchor": "https://www.prydwen.gg/zenless/bangboo/#Plugboo Shock Sniper",
+              "notes": "HTML says accumulating Electric Anomaly Buildup but does not show numeric buildup.",
+              "promotable": false,
+              "blockedBy": [
+                "field:missing-in-source"
+              ]
+            },
+            "nanoka": {
+              "value": 240,
+              "status": "same",
+              "sourceAnchor": "https://static.nanoka.cc/zzz/3.0.2+15625449/zh/bangboo/54008.json#skill_prop.5400801.element_accumulation_value",
+              "notes": "Detail endpoint exposes element_accumulation_value=24000, matching Excel/Gachabase after divisor normalization.",
+              "promotable": true
+            },
+            "gachabase": {
+              "value": 240,
+              "status": "same",
+              "sourceAnchor": "https://zzz.gachabase.net/bangboo/54008/plugboo?lang=en#skill_data id 5400801",
+              "notes": "Serialized anomaly_buildup=24000, beta-gated.",
+              "promotable": false,
+              "blockedBy": [
+                "source-gate:fail-beta-branch"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "entityType": "enemy",
+      "entityId": "dullahan",
+      "excelSourceRefs": [
+        "data/source/excel/data.xlsx#敌人属性"
+      ],
+      "fields": [
+        {
+          "fieldPath": "identity.en",
+          "excelValue": null,
+          "candidates": {
+            "prydwen": {
+              "value": null,
+              "status": "missing-in-new",
+              "sourceAnchor": "sampled Prydwen ZZZ pages",
+              "promotable": false,
+              "blockedBy": [
+                "field:missing-in-source"
+              ]
+            },
+            "nanoka": {
+              "value": "Dullahan",
+              "status": "missing-in-excel",
+              "sourceAnchor": "https://static.nanoka.cc/zzz/3.0.2+15625449/zh/monster/30000.json#name",
+              "promotable": true
+            },
+            "gachabase": {
+              "value": null,
+              "status": "semantic-unknown",
+              "sourceAnchor": "not deeply probed",
+              "promotable": false,
+              "blockedBy": [
+                "source-gate:fail-beta-branch",
+                "field:semantic-unknown-requires-ruling"
+              ]
+            }
+          }
+        },
+        {
+          "fieldPath": "enemyPanel.defense",
+          "excelValue": null,
+          "candidates": {
+            "prydwen": {
+              "value": null,
+              "status": "missing-in-new",
+              "sourceAnchor": "sampled Prydwen ZZZ pages",
+              "promotable": false,
+              "blockedBy": [
+                "field:missing-in-source"
+              ]
+            },
+            "nanoka": {
+              "value": {
+                "monsterInfoId": 11154,
+                "hp": 7097,
+                "attack": 97,
+                "defence": 58,
+                "stun": 3502,
+                "autoRecoverRate": 0,
+                "elementAbnormal": {
+                  "30004": 3600
+                }
+              },
+              "status": "semantic-unknown",
+              "sourceAnchor": "https://static.nanoka.cc/zzz/3.0.2+15625449/zh/monster/30000.json#monster_info.11154.stats",
+              "notes": "Detail endpoint exposes monster stats, curves, resistances, and element_abnormal maps. Requires variant/level mapping before replacing Excel enemy rows.",
+              "promotable": false,
+              "blockedBy": [
+                "field:variant-mapping-required"
+              ]
+            },
+            "gachabase": {
+              "value": null,
+              "status": "semantic-unknown",
+              "sourceAnchor": "not deeply probed",
+              "promotable": false,
+              "blockedBy": [
+                "source-gate:fail-beta-branch",
+                "field:semantic-unknown-requires-ruling"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

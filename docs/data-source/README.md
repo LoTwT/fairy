@@ -44,6 +44,8 @@ Source-specific notes:
 - [Excel workbook](excel/)
 - [buhflipexplode Deadly Assault](buhflipexplode/)
 - [Mihoyo Deadly Assault](mihoyo/)
+- [Source migration candidates](source-migration-candidates.md)
+- [Source decision recommendation](source-decision-recommendation.md)
 
 ## Next Segment
 
