@@ -3,7 +3,7 @@
   "parserVersion": "golden-v1-replay-v0.1.0",
   "generatedAt": "2026-05-05T18:20:00+08:00",
   "policy": {
-    "scope": "Minimal reader output for executable V1/V1.1 replay. It extracts Yixuan/Nicole/Yanagi identity and calculation-relevant source text candidates plus Penguinboo numeric Bangboo rows for G24.",
+    "scope": "Minimal reader output for executable V1/V1.1 replay. It extracts Yixuan/Nicole/Yanagi identity and calculation-relevant source text candidates plus Penguinboo/Sharkboo numeric Bangboo rows for G24/G25.",
     "formalDataPolicy": "Candidates are not trusted cleaned modifiers. Effects with trustStatus=requiresManualAcceptance must emit ERR-DAT-005 until an accepted record exists.",
     "enemyPolicy": "No Excel enemy rows are read; V1 DA boss fields must come from buhflipexplode/Mihoyo DA source snapshots."
   },
@@ -171,6 +171,56 @@
         "range": "邦布属性!A42:T42",
         "excelId": 53001
       }
+    },
+    "sharkboo": {
+      "id": "sharkboo",
+      "sourceKey": "54001",
+      "label": {
+        "zh": "鲨牙布",
+        "en": "Sharkboo"
+      },
+      "sourceRefs": [
+        {
+          "sourceId": "lo-user-excel",
+          "sourceVersion": "2.6.0_R14028417",
+          "sourceAnchor": "邦布属性!A24:T24"
+        },
+        {
+          "sourceId": "lo-user-excel",
+          "sourceVersion": "2.6.0_R14028417",
+          "sourceAnchor": "邦布技能!A17:H17"
+        },
+        {
+          "sourceId": "lo-user-excel",
+          "sourceVersion": "2.6.0_R14028417",
+          "sourceAnchor": "邦布技能!A18:H18"
+        }
+      ],
+      "baseStatsByLevel": {
+        "60": {
+          "maxHp": 4210.2983,
+          "attack": 8057.0996,
+          "defense": 723.8011,
+          "impact": 99,
+          "critRate": 0.5,
+          "critDamage": 1,
+          "anomalyMastery": 132
+        }
+      },
+      "skillIds": [
+        "sharkboo-active",
+        "sharkboo-chain"
+      ],
+      "sourceAliases": [
+        "鲨牙布",
+        "Sharkboo"
+      ],
+      "sourceShape": {
+        "workbookSheet": "邦布属性",
+        "rowNumber": 24,
+        "range": "邦布属性!A24:T24",
+        "excelId": 54001
+      }
     }
   },
   "bangbooSkills": {
@@ -239,6 +289,76 @@
               "sourceId": "lo-user-excel",
               "sourceVersion": "2.6.0_R14028417",
               "sourceAnchor": "邦布技能!A3:H3"
+            }
+          ]
+        }
+      ]
+    },
+    "sharkboo-active": {
+      "id": "sharkboo-active",
+      "bangbooId": "sharkboo",
+      "label": {
+        "zh": "主动技能：旱地猎鲨"
+      },
+      "sourceRefs": [
+        {
+          "sourceId": "lo-user-excel",
+          "sourceVersion": "2.6.0_R14028417",
+          "sourceAnchor": "邦布技能!A17:H17"
+        }
+      ],
+      "tags": [
+        "special"
+      ],
+      "segments": [
+        {
+          "id": "sharkboo-active-hit",
+          "levelKey": "default",
+          "multiplier": 3.84,
+          "multiplierGrowth": 0.384,
+          "dazeMultiplier": 1.4,
+          "dazeMultiplierGrowth": 0.14,
+          "anomalyBuildup": 180,
+          "sourceRefs": [
+            {
+              "sourceId": "lo-user-excel",
+              "sourceVersion": "2.6.0_R14028417",
+              "sourceAnchor": "邦布技能!A17:H17"
+            }
+          ]
+        }
+      ]
+    },
+    "sharkboo-chain": {
+      "id": "sharkboo-chain",
+      "bangbooId": "sharkboo",
+      "label": {
+        "zh": "连携技：追猎不休"
+      },
+      "sourceRefs": [
+        {
+          "sourceId": "lo-user-excel",
+          "sourceVersion": "2.6.0_R14028417",
+          "sourceAnchor": "邦布技能!A18:H18"
+        }
+      ],
+      "tags": [
+        "chain"
+      ],
+      "segments": [
+        {
+          "id": "sharkboo-chain-hit",
+          "levelKey": "default",
+          "multiplier": 4.61,
+          "multiplierGrowth": 0.461,
+          "dazeMultiplier": 0.93,
+          "dazeMultiplierGrowth": 0.093,
+          "anomalyBuildup": 190,
+          "sourceRefs": [
+            {
+              "sourceId": "lo-user-excel",
+              "sourceVersion": "2.6.0_R14028417",
+              "sourceAnchor": "邦布技能!A18:H18"
             }
           ]
         }

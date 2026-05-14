@@ -297,8 +297,8 @@ V1.1 should add G24-G26 candidates, then trim to 1-3 based on source quality.
 | Candidate | Purpose | Source basis | Expected assertion |
 |---|---|---|---|
 | G24 Bangboo skill segment | Prove Bangboo data + explicit Bangboo actor calculation path | Excel `邦布属性` + `邦布技能` for one named Bangboo | Trace uses Bangboo panel attack, skill multiplier, daze multiplier, and source refs |
-| G25 Bangboo skill segment | Prove the same actor path with a second high-confidence Bangboo | Excel `邦布属性` + `邦布技能` for one named Bangboo | Trace uses Bangboo panel attack, skill multiplier, daze multiplier, and source refs |
-| G26 Bangboo skill segment | Prove the same actor path with a third high-confidence Bangboo | Excel `邦布属性` + `邦布技能` for one named Bangboo | Trace uses Bangboo panel attack, skill multiplier, daze multiplier, and source refs |
+| G25 Sharkboo skill segment | Prove the same actor path with a second high-confidence Bangboo | Excel `邦布属性!A24:T24` + `邦布技能!A17:H18` | Trace uses Sharkboo panel attack, skill multiplier, daze multiplier, and source refs |
+| G26 Plugboo skill segment | Prove the same actor path with a third high-confidence Bangboo | Excel `邦布属性!A18:T18` + `邦布技能!A29:H30` | Trace uses Plugboo panel attack, skill multiplier, daze multiplier, and source refs |
 
 Suggested candidate names for lo-user/Product review:
 

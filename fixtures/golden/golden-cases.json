@@ -682,6 +682,50 @@
           "Excel Path X has no Bangboo element field; fixture supplies explicit neutral element input."
         ]
       }
+    },
+    {
+      "id": "G25-bangboo-sharkboo-active-numeric",
+      "group": "bangboo-v1.1",
+      "status": "ready-for-schema",
+      "anchor": "Sharkboo active skill numeric contribution from Excel Path X",
+      "snapshotFocus": {
+        "bangboo.bangbooId": "sharkboo",
+        "bangboo.panel.attack": 8057.0996,
+        "bangboo.panel.impact": 99,
+        "bangboo.panel.anomalyMastery": 132,
+        "attackSegments[0].actor.kind": "bangboo",
+        "attackSegments[0].damageType": "regular",
+        "attackSegments[0].multiplier": 3.84,
+        "attackSegments[0].baseDazeMultiplier": 1.4,
+        "attackSegments[0].anomalyContribution.buildup": 180
+      },
+      "expected": {
+        "numeric": [
+          {
+            "path": "attackSegments[0].baseDamage",
+            "approx": 30939.262464,
+            "relativeTolerance": 0.000001
+          },
+          {
+            "path": "attackSegments[0].baseDaze",
+            "approx": 138.6,
+            "relativeTolerance": 0.000001
+          },
+          {
+            "path": "attackSegments[0].anomalyBuildup",
+            "approx": 237.6,
+            "relativeTolerance": 0.000001
+          }
+        ],
+        "traceContains": [
+          "bangbooActor",
+          "邦布属性!A24:T24",
+          "邦布技能!A17:H17"
+        ],
+        "notes": [
+          "Excel Path X has no Bangboo element field; fixture supplies explicit neutral element input."
+        ]
+      }
     }
   ]
 }
