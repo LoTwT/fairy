@@ -3,7 +3,7 @@
   "parserVersion": "golden-v1-replay-v0.1.0",
   "generatedAt": "2026-05-05T18:20:00+08:00",
   "policy": {
-    "scope": "Minimal #40 reader output for #43 V1 replay. It extracts only Yixuan/Nicole/Yanagi identity and calculation-relevant source text candidates.",
+    "scope": "Minimal reader output for executable V1/V1.1 replay. It extracts Yixuan/Nicole/Yanagi identity and calculation-relevant source text candidates plus Penguinboo numeric Bangboo rows for G24.",
     "formalDataPolicy": "Candidates are not trusted cleaned modifiers. Effects with trustStatus=requiresManualAcceptance must emit ERR-DAT-005 until an accepted record exists.",
     "enemyPolicy": "No Excel enemy rows are read; V1 DA boss fields must come from buhflipexplode/Mihoyo DA source snapshots."
   },
@@ -119,6 +119,130 @@
         "range": "代理人属性!A37:AF37",
         "excelId": 1371
       }
+    }
+  },
+  "bangboos": {
+    "penguinboo": {
+      "id": "penguinboo",
+      "sourceKey": "53001",
+      "label": {
+        "zh": "企鹅布",
+        "en": "Penguinboo"
+      },
+      "sourceRefs": [
+        {
+          "sourceId": "lo-user-excel",
+          "sourceVersion": "2.6.0_R14028417",
+          "sourceAnchor": "邦布属性!A42:T42"
+        },
+        {
+          "sourceId": "lo-user-excel",
+          "sourceVersion": "2.6.0_R14028417",
+          "sourceAnchor": "邦布技能!A2:H2"
+        },
+        {
+          "sourceId": "lo-user-excel",
+          "sourceVersion": "2.6.0_R14028417",
+          "sourceAnchor": "邦布技能!A3:H3"
+        }
+      ],
+      "baseStatsByLevel": {
+        "60": {
+          "maxHp": 3827.5423,
+          "attack": 6198.0006,
+          "defense": 723.8011,
+          "impact": 90,
+          "critRate": 0.5,
+          "critDamage": 1,
+          "anomalyMastery": 120
+        }
+      },
+      "skillIds": [
+        "penguinboo-active",
+        "penguinboo-chain"
+      ],
+      "sourceAliases": [
+        "企鹅布",
+        "Penguinboo"
+      ],
+      "sourceShape": {
+        "workbookSheet": "邦布属性",
+        "rowNumber": 42,
+        "range": "邦布属性!A42:T42",
+        "excelId": 53001
+      }
+    }
+  },
+  "bangbooSkills": {
+    "penguinboo-active": {
+      "id": "penguinboo-active",
+      "bangbooId": "penguinboo",
+      "label": {
+        "zh": "主动技能：冰刀舞"
+      },
+      "sourceRefs": [
+        {
+          "sourceId": "lo-user-excel",
+          "sourceVersion": "2.6.0_R14028417",
+          "sourceAnchor": "邦布技能!A2:H2"
+        }
+      ],
+      "tags": [
+        "special"
+      ],
+      "segments": [
+        {
+          "id": "penguinboo-active-hit",
+          "levelKey": "default",
+          "multiplier": 4.62,
+          "multiplierGrowth": 0.462,
+          "dazeMultiplier": 2.7,
+          "dazeMultiplierGrowth": 0.27,
+          "anomalyBuildup": 346,
+          "sourceRefs": [
+            {
+              "sourceId": "lo-user-excel",
+              "sourceVersion": "2.6.0_R14028417",
+              "sourceAnchor": "邦布技能!A2:H2"
+            }
+          ]
+        }
+      ]
+    },
+    "penguinboo-chain": {
+      "id": "penguinboo-chain",
+      "bangbooId": "penguinboo",
+      "label": {
+        "zh": "连携技：冰暴回旋"
+      },
+      "sourceRefs": [
+        {
+          "sourceId": "lo-user-excel",
+          "sourceVersion": "2.6.0_R14028417",
+          "sourceAnchor": "邦布技能!A3:H3"
+        }
+      ],
+      "tags": [
+        "chain"
+      ],
+      "segments": [
+        {
+          "id": "penguinboo-chain-hit",
+          "levelKey": "default",
+          "multiplier": 9.57,
+          "multiplierGrowth": 0.957,
+          "dazeMultiplier": 1.37,
+          "dazeMultiplierGrowth": 0.137,
+          "anomalyBuildup": 410,
+          "sourceRefs": [
+            {
+              "sourceId": "lo-user-excel",
+              "sourceVersion": "2.6.0_R14028417",
+              "sourceAnchor": "邦布技能!A3:H3"
+            }
+          ]
+        }
+      ]
     }
   },
   "effectCandidates": [

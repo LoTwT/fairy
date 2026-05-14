@@ -31,6 +31,7 @@ interface BattleSnapshot {
   context?: BattleContext
   team: [AgentSnapshot] | [AgentSnapshot, AgentSnapshot] | [AgentSnapshot, AgentSnapshot, AgentSnapshot]
   activeActor: ActiveActorRef
+  bangboo?: BangbooSnapshot
   attackSegments: AttackSegment[]
   enemy: EnemySnapshot
   modifiers?: TypedModifier[]
@@ -105,8 +106,40 @@ interface AgentSnapshot {
 ```
 
 `team` contains 1-3 agents. `activeActor.agentId` must match exactly one
-`team[].agentId`. V1 does not model Bangboo; `subordinate` is reserved for
-V1.1+ and must produce an unsupported-feature warning if provided.
+`team[].agentId`. V1.1 uses top-level `bangboo` as the canonical Bangboo actor
+slot. `team[].subordinate` is accepted only as a migration alias; a snapshot may
+have at most one subordinate, and `snapshot.bangboo` plus `team[].subordinate`
+must fail loud if they disagree.
+
+### Bangboo Actor
+
+```ts
+interface BangbooSnapshot {
+  bangbooId: string
+  level?: number
+  promotionPhase?: number
+  panel?: BangbooPanelSnapshot
+  skillLevels?: Partial<Record<string, number>>
+  activations?: Record<string, boolean | number | string>
+  fieldProvenance?: FieldProvenanceMap
+  overrides?: FieldOverride[]
+}
+
+interface BangbooPanelSnapshot {
+  attack?: number
+  maxHp?: number
+  defense?: number
+  impact?: number
+  critRate?: number
+  critDamage?: number
+  anomalyMastery?: number
+}
+```
+
+V1.1 Path X models Bangboo as an explicit attack-segment actor. It does not
+model Bangboo as a passive/team buff source, because the retained Excel Path X
+data has numeric panel and skill values but no source-backed passive text,
+element, or activation wording.
 
 ### Equipment Naming Decisions
 
@@ -203,6 +236,7 @@ authoritative round-trip contract.
 ```ts
 interface AttackSegment {
   id: string
+  actor?: ActorRef
   actorId?: string
   skillId?: string
   levelKey?: string
@@ -217,14 +251,21 @@ interface AttackSegment {
   anomalyContribution?: AnomalyContributionInput
   source?: SourceRef
 }
+
+type ActorRef =
+  | { kind: "agent"; agentId: string }
+  | { kind: "bangboo"; bangbooId?: string }
 ```
 
 `attackSegments[]` is a hard contract. Even a one-hit CLI example must use an
 array. Core rounds display damage per segment and then sums displayed segment
 values; it must never round only the final total.
 
-`actorId` defaults to `activeActor.agentId`. A segment with another `actorId`
-is valid only for explicit manual/assist scenarios and must be traceable.
+`actorId` defaults to `activeActor.agentId` and remains an agent-only legacy
+shortcut. Agent segments may also use `actor: { kind: "agent", agentId }`.
+Bangboo segments must use `actor: { kind: "bangboo" }` or include the selected
+`bangbooId`; they read `BattleSnapshot.bangboo.panel` and emit a stable result
+`actorId` such as `bangboo:penguinboo`.
 
 ### Anomaly Contribution Input
 

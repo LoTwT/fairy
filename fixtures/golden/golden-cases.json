@@ -15,9 +15,22 @@
         "attackSegments[0].damageType": "regular"
       },
       "expected": {
-        "numeric": [{ "path": "buckets[?bucketId=defenseZone].effectiveMultiplier", "approx": 0.4545, "relativeTolerance": 0.0005 }],
-        "traceContains": ["levelBase", "baseDefense", "effectiveDefense", "defenseZone"],
-        "traceNotContains": ["defenseReduction"]
+        "numeric": [
+          {
+            "path": "buckets[?bucketId=defenseZone].effectiveMultiplier",
+            "approx": 0.4545,
+            "relativeTolerance": 0.0005
+          }
+        ],
+        "traceContains": [
+          "levelBase",
+          "baseDefense",
+          "effectiveDefense",
+          "defenseZone"
+        ],
+        "traceNotContains": [
+          "defenseReduction"
+        ]
       }
     },
     {
@@ -31,8 +44,17 @@
         "attackSegments[0].damageType": "regular"
       },
       "expected": {
-        "numeric": [{ "path": "buckets[?bucketId=defenseZone].effectiveMultiplier", "approx": 0.3165, "relativeTolerance": 0.001 }],
-        "traceContains": ["corruptedShield", "defenseZone"]
+        "numeric": [
+          {
+            "path": "buckets[?bucketId=defenseZone].effectiveMultiplier",
+            "approx": 0.3165,
+            "relativeTolerance": 0.001
+          }
+        ],
+        "traceContains": [
+          "corruptedShield",
+          "defenseZone"
+        ]
       }
     },
     {
@@ -47,8 +69,17 @@
       },
       "expected": {
         "formula": "expectedMultiplier = 1 + critRate * critDamage",
-        "resultPaths": ["summary.nonCritDamage", "summary.critDamage", "summary.expectedDamage", "buckets[?bucketId=critZone]"],
-        "traceContains": ["critRate", "critDamage", "expectedMultiplier"]
+        "resultPaths": [
+          "summary.nonCritDamage",
+          "summary.critDamage",
+          "summary.expectedDamage",
+          "buckets[?bucketId=critZone]"
+        ],
+        "traceContains": [
+          "critRate",
+          "critDamage",
+          "expectedMultiplier"
+        ]
       }
     },
     {
@@ -56,10 +87,24 @@
       "group": "defense-crit",
       "status": "pending-formula",
       "anchor": "damage bonus breakpoints 199.17%, 268.61%, 161.67%",
-      "snapshotFocus": { "bucketScan": ["damageBonusZone", "critZone", "defenseZone"] },
+      "snapshotFocus": {
+        "bucketScan": [
+          "damageBonusZone",
+          "critZone",
+          "defenseZone"
+        ]
+      },
       "expected": {
-        "numericAnchors": ["199.17%", "268.61%", "161.67%"],
-        "traceContains": ["damageBonusZone", "critZone", "defenseZone"]
+        "numericAnchors": [
+          "199.17%",
+          "268.61%",
+          "161.67%"
+        ],
+        "traceContains": [
+          "damageBonusZone",
+          "critZone",
+          "defenseZone"
+        ]
       }
     },
     {
@@ -71,11 +116,25 @@
         "team[active].agentSpecialty": "rupture",
         "team[active].panel.sheerForce": "required",
         "enemy.corruptedShield.active": true,
-        "pairedSegments": ["regular", "sheer"]
+        "pairedSegments": [
+          "regular",
+          "sheer"
+        ]
       },
       "expected": {
-        "numeric": [{ "path": "pairedResult.sheerToRegularRatio", "approx": 3.16, "relativeTolerance": 0.005 }],
-        "traceContains": ["agentSpecialty:rupture", "sheerForce", "sheerDamageBonusZone", "defenseSkipped"]
+        "numeric": [
+          {
+            "path": "pairedResult.sheerToRegularRatio",
+            "approx": 3.16,
+            "relativeTolerance": 0.005
+          }
+        ],
+        "traceContains": [
+          "agentSpecialty:rupture",
+          "sheerForce",
+          "sheerDamageBonusZone",
+          "defenseSkipped"
+        ]
       }
     },
     {
@@ -86,11 +145,23 @@
       "snapshotFocus": {
         "team[active].agentSpecialty": "rupture",
         "enemy.corruptedShield.active": false,
-        "pairedSegments": ["regular", "sheer"]
+        "pairedSegments": [
+          "regular",
+          "sheer"
+        ]
       },
       "expected": {
-        "numeric": [{ "path": "pairedResult.sheerToRegularRatio", "approx": 2.2, "relativeTolerance": 0.005 }],
-        "traceContains": ["defenseZone", "defenseSkipped"]
+        "numeric": [
+          {
+            "path": "pairedResult.sheerToRegularRatio",
+            "approx": 2.2,
+            "relativeTolerance": 0.005
+          }
+        ],
+        "traceContains": [
+          "defenseZone",
+          "defenseSkipped"
+        ]
       }
     },
     {
@@ -100,8 +171,14 @@
       "anchor": "multi-segment damage rounds each segment up before sum",
       "snapshotFocus": {
         "attackSegments": [
-          { "id": "seg-a", "expectedRawFractional": true },
-          { "id": "seg-b", "expectedRawFractional": true }
+          {
+            "id": "seg-a",
+            "expectedRawFractional": true
+          },
+          {
+            "id": "seg-b",
+            "expectedRawFractional": true
+          }
         ]
       },
       "expected": {
@@ -110,7 +187,9 @@
           "summary.displayTotalDamage = sum(attackSegments[].segmentDisplayDamage)",
           "summary.displayTotalDamage may differ from ceil(summary.rawTotalDamage)"
         ],
-        "traceContains": ["ceilPerSegment"]
+        "traceContains": [
+          "ceilPerSegment"
+        ]
       }
     },
     {
@@ -122,7 +201,13 @@
         "team[active].panel.anomalyMastery": "fractional effective value",
         "attackSegments[0].anomalyContribution.status": "shock"
       },
-      "expected": { "traceContains": ["anomalyMastery", "floorForFormula", "anomalyBuildup"] }
+      "expected": {
+        "traceContains": [
+          "anomalyMastery",
+          "floorForFormula",
+          "anomalyBuildup"
+        ]
+      }
     },
     {
       "id": "G09-daze-ratio-display-floor",
@@ -133,7 +218,13 @@
         "attackSegments[0].damageType": "daze",
         "enemy.baseDaze": "required"
       },
-      "expected": { "traceContains": ["dazeRatioRaw", "dazeRatioDisplay", "floorForDisplay"] }
+      "expected": {
+        "traceContains": [
+          "dazeRatioRaw",
+          "dazeRatioDisplay",
+          "floorForDisplay"
+        ]
+      }
     },
     {
       "id": "G10-frost-auric-resistance-mapping",
@@ -141,11 +232,25 @@
       "status": "ready-for-schema",
       "anchor": "Frost/Auric Ink resistance and buildup resistance map to Ice/Ether",
       "snapshotFocus": {
-        "attackSegments[].attribute": ["frost", "auricInk"],
-        "enemy.resistance": ["ice", "ether"],
-        "enemy.anomalyBuildupResistance": ["ice", "ether"]
+        "attackSegments[].attribute": [
+          "frost",
+          "auricInk"
+        ],
+        "enemy.resistance": [
+          "ice",
+          "ether"
+        ],
+        "enemy.anomalyBuildupResistance": [
+          "ice",
+          "ether"
+        ]
       },
-      "expected": { "traceContains": ["frost->ice", "auricInk->ether"] }
+      "expected": {
+        "traceContains": [
+          "frost->ice",
+          "auricInk->ether"
+        ]
+      }
     },
     {
       "id": "G11-frost-auric-damage-bonus-mapping",
@@ -156,7 +261,13 @@
         "team[active].panel.iceDamageBonus": "used by frost",
         "team[active].panel.etherDamageBonus": "used by auricInk"
       },
-      "expected": { "traceContains": ["iceDamageBonus", "etherDamageBonus", "damageBonusZone"] }
+      "expected": {
+        "traceContains": [
+          "iceDamageBonus",
+          "etherDamageBonus",
+          "damageBonusZone"
+        ]
+      }
     },
     {
       "id": "G12-anomaly-threshold-rank-trigger-physical",
@@ -172,8 +283,20 @@
         "rules.anomalyThreshold": "core rule constants"
       },
       "expected": {
-        "numeric": [{ "path": "trace[?path=attackSegments[0].anomalyContribution.anomalyThreshold].rawValue", "approx": 3745.2, "relativeTolerance": 0.001 }],
-        "traceContains": ["anomalyThreshold", "enemyRank:boss", "triggerCount", "status:assault", "physicalMultiplier:1.2"]
+        "numeric": [
+          {
+            "path": "trace[?path=attackSegments[0].anomalyContribution.anomalyThreshold].rawValue",
+            "approx": 3745.2,
+            "relativeTolerance": 0.001
+          }
+        ],
+        "traceContains": [
+          "anomalyThreshold",
+          "enemyRank:boss",
+          "triggerCount",
+          "status:assault",
+          "physicalMultiplier:1.2"
+        ]
       }
     },
     {
@@ -183,12 +306,22 @@
       "anchor": "special enemy +20% and defense-mode +10% threshold multipliers are multiplicative",
       "snapshotFocus": {
         "context.gameMode": "defenseGameMode",
-        "context.activeRuleIds": ["special-threshold-plus-10"],
-        "enemy.specialRules": ["threshold-plus-20"]
+        "context.activeRuleIds": [
+          "special-threshold-plus-10"
+        ],
+        "enemy.specialRules": [
+          "threshold-plus-20"
+        ]
       },
       "expected": {
-        "traceContains": ["threshold-plus-20", "threshold-plus-10", "multiply"],
-        "traceNotContains": ["additiveMerge"]
+        "traceContains": [
+          "threshold-plus-20",
+          "threshold-plus-10",
+          "multiply"
+        ],
+        "traceNotContains": [
+          "additiveMerge"
+        ]
       }
     },
     {
@@ -198,13 +331,26 @@
       "anchor": "virtual agent weighting, floored level, overflow and Bangboo excluded",
       "snapshotFocus": {
         "attackSegments[0].anomalyContribution.contributors": [
-          { "actorId": "agent-a", "included": true },
-          { "actorId": "bangboo-a", "included": false, "excludedReason": "bangboo" }
+          {
+            "actorId": "agent-a",
+            "included": true
+          },
+          {
+            "actorId": "bangboo-a",
+            "included": false,
+            "excludedReason": "bangboo"
+          }
         ],
         "attackSegments[0].anomalyContribution.overflowBuildup": "required"
       },
       "expected": {
-        "traceContains": ["virtualAgent", "flooredLevel", "buildupContributionRatio", "overflowBuildup", "excludedReason:bangboo"]
+        "traceContains": [
+          "virtualAgent",
+          "flooredLevel",
+          "buildupContributionRatio",
+          "overflowBuildup",
+          "excludedReason:bangboo"
+        ]
       }
     },
     {
@@ -214,21 +360,82 @@
       "anchor": "seven disorder formulas depend on remaining duration T",
       "snapshotFocus": {
         "attackSegments[0].damageType": "disorder",
-        "attackSegments[0].anomalyContribution.status": ["burn", "shock", "corruption", "disorder", "frozen", "assault", "polarityDisorder"],
+        "attackSegments[0].anomalyContribution.status": [
+          "burn",
+          "shock",
+          "corruption",
+          "disorder",
+          "frozen",
+          "assault",
+          "polarityDisorder"
+        ],
         "attackSegments[0].anomalyContribution.remainingDurationSeconds": "varied by status"
       },
       "expected": {
         "formulaMatrix": [
-          { "status": "burn", "attribute": "fire", "remainingDurationSeconds": 2.5, "disorderFormulaId": "disorder-burn", "rawMultiplier": 7 },
-          { "status": "shock", "attribute": "electric", "remainingDurationSeconds": 2, "disorderFormulaId": "disorder-shock", "rawMultiplier": 7 },
-          { "status": "corruption", "attribute": "ether", "remainingDurationSeconds": 2.5, "disorderFormulaId": "disorder-corruption", "rawMultiplier": 7.625 },
-          { "status": "disorder", "attribute": "auricInk", "remainingDurationSeconds": 2.5, "disorderFormulaId": "disorder-corruption", "rawMultiplier": 7.625 },
-          { "status": "frozen", "attribute": "frost", "remainingDurationSeconds": 3, "disorderFormulaId": "disorder-frost", "rawMultiplier": 8.25 },
-          { "status": "frozen", "attribute": "ice", "remainingDurationSeconds": 3, "disorderFormulaId": "disorder-physical-or-ice", "rawMultiplier": 4.725 },
-          { "status": "assault", "attribute": "physical", "remainingDurationSeconds": 3, "disorderFormulaId": "disorder-physical-or-ice", "rawMultiplier": 4.725 },
-          { "status": "polarityDisorder", "attribute": "electric", "remainingDurationSeconds": 4, "disorderFormulaId": "disorder-polarity", "rawMultiplier": 1.425 }
+          {
+            "status": "burn",
+            "attribute": "fire",
+            "remainingDurationSeconds": 2.5,
+            "disorderFormulaId": "disorder-burn",
+            "rawMultiplier": 7
+          },
+          {
+            "status": "shock",
+            "attribute": "electric",
+            "remainingDurationSeconds": 2,
+            "disorderFormulaId": "disorder-shock",
+            "rawMultiplier": 7
+          },
+          {
+            "status": "corruption",
+            "attribute": "ether",
+            "remainingDurationSeconds": 2.5,
+            "disorderFormulaId": "disorder-corruption",
+            "rawMultiplier": 7.625
+          },
+          {
+            "status": "disorder",
+            "attribute": "auricInk",
+            "remainingDurationSeconds": 2.5,
+            "disorderFormulaId": "disorder-corruption",
+            "rawMultiplier": 7.625
+          },
+          {
+            "status": "frozen",
+            "attribute": "frost",
+            "remainingDurationSeconds": 3,
+            "disorderFormulaId": "disorder-frost",
+            "rawMultiplier": 8.25
+          },
+          {
+            "status": "frozen",
+            "attribute": "ice",
+            "remainingDurationSeconds": 3,
+            "disorderFormulaId": "disorder-physical-or-ice",
+            "rawMultiplier": 4.725
+          },
+          {
+            "status": "assault",
+            "attribute": "physical",
+            "remainingDurationSeconds": 3,
+            "disorderFormulaId": "disorder-physical-or-ice",
+            "rawMultiplier": 4.725
+          },
+          {
+            "status": "polarityDisorder",
+            "attribute": "electric",
+            "remainingDurationSeconds": 4,
+            "disorderFormulaId": "disorder-polarity",
+            "rawMultiplier": 1.425
+          }
         ],
-        "traceContains": ["disorderFormulaId", "remainingDurationT", "sourceAnchor", "disorderDazeLevelZone"]
+        "traceContains": [
+          "disorderFormulaId",
+          "remainingDurationT",
+          "sourceAnchor",
+          "disorderDazeLevelZone"
+        ]
       }
     },
     {
@@ -243,8 +450,18 @@
       },
       "expected": {
         "formula": "disorderDazeLevelZone = 1 + 0.0075 * level",
-        "numeric": [{ "path": "buckets[?bucketId=disorderDazeLevelZone].effectiveMultiplier", "approx": 1.45, "relativeTolerance": 0.0005 }],
-        "traceContains": ["disorderDazeLevelZone", "level", "bucketContribution"]
+        "numeric": [
+          {
+            "path": "buckets[?bucketId=disorderDazeLevelZone].effectiveMultiplier",
+            "approx": 1.45,
+            "relativeTolerance": 0.0005
+          }
+        ],
+        "traceContains": [
+          "disorderDazeLevelZone",
+          "level",
+          "bucketContribution"
+        ]
       }
     },
     {
@@ -260,11 +477,25 @@
       },
       "expected": {
         "numericRules": [
-          { "trueDamageRule": "default15Percent", "multiplier": 0.15 },
-          { "trueDamageRule": "pre22CorruptionPriest3Percent", "multiplier": 0.03 },
-          { "trueDamageRule": "post22ShieldBoss25Permille", "multiplier": 0.025 }
+          {
+            "trueDamageRule": "default15Percent",
+            "multiplier": 0.15
+          },
+          {
+            "trueDamageRule": "pre22CorruptionPriest3Percent",
+            "multiplier": 0.03
+          },
+          {
+            "trueDamageRule": "post22ShieldBoss25Permille",
+            "multiplier": 0.025
+          }
         ],
-        "resultPaths": ["events[0].baseValue", "events[0].multiplier", "events[0].rawDamage", "events[0].displayDamage"]
+        "resultPaths": [
+          "events[0].baseValue",
+          "events[0].multiplier",
+          "events[0].rawDamage",
+          "events[0].displayDamage"
+        ]
       }
     },
     {
@@ -278,8 +509,17 @@
         "manualEvents[0].basePath": "enemy.maxHp or part.maxHp"
       },
       "expected": {
-        "traceContains": ["partId", "partType", "trueDamageRule", "sourceAnchor"],
-        "traceNotContains": ["damageBonusZone", "critZone", "defenseZone"]
+        "traceContains": [
+          "partId",
+          "partType",
+          "trueDamageRule",
+          "sourceAnchor"
+        ],
+        "traceNotContains": [
+          "damageBonusZone",
+          "critZone",
+          "defenseZone"
+        ]
       }
     },
     {
@@ -293,8 +533,18 @@
         "enemy.enemyId": "frenzied-henchman-equivalent"
       },
       "expected": {
-        "numeric": [{ "path": "trace.dazeRecoveryTime", "approx": 8.61, "relativeTolerance": 0.005 }],
-        "traceContains": ["dazeRecoveryTime", "resoniumIds", "recoveryRate"]
+        "numeric": [
+          {
+            "path": "trace.dazeRecoveryTime",
+            "approx": 8.61,
+            "relativeTolerance": 0.005
+          }
+        ],
+        "traceContains": [
+          "dazeRecoveryTime",
+          "resoniumIds",
+          "recoveryRate"
+        ]
       }
     },
     {
@@ -308,8 +558,18 @@
         "enemy.enemyId": "armored-hati-equivalent"
       },
       "expected": {
-        "numeric": [{ "path": "trace.dazeRecoveryTime", "approx": 6.42, "relativeTolerance": 0.005 }],
-        "traceContains": ["dazeRecoveryTime", "resoniumIds", "catalystState"]
+        "numeric": [
+          {
+            "path": "trace.dazeRecoveryTime",
+            "approx": 6.42,
+            "relativeTolerance": 0.005
+          }
+        ],
+        "traceContains": [
+          "dazeRecoveryTime",
+          "resoniumIds",
+          "catalystState"
+        ]
       }
     },
     {
@@ -324,8 +584,15 @@
         "activeActor.agentId": "team[0].agentId"
       },
       "expected": {
-        "traceContains": ["noTeammateModifiers", "sheerForce", "defenseSkipped"],
-        "traceNotContains": ["provider:Nicole", "provider:Yanagi"]
+        "traceContains": [
+          "noTeammateModifiers",
+          "sheerForce",
+          "defenseSkipped"
+        ],
+        "traceNotContains": [
+          "provider:Nicole",
+          "provider:Yanagi"
+        ]
       }
     },
     {
@@ -339,7 +606,12 @@
         "modifiers[?id=nicole-defense-reduction].appliesTo.kind": "enemy"
       },
       "expected": {
-        "traceContains": ["provider:Nicole", "defenseReduction", "value:0.4", "conditionResult:true"]
+        "traceContains": [
+          "provider:Nicole",
+          "defenseReduction",
+          "value:0.4",
+          "conditionResult:true"
+        ]
       }
     },
     {
@@ -349,11 +621,66 @@
       "anchor": "3-agent Yixuan + Nicole + Yanagi polarity disorder",
       "snapshotFocus": {
         "team.length": 3,
-        "team includes": ["Yixuan", "Nicole", "Yanagi"],
+        "team includes": [
+          "Yixuan",
+          "Nicole",
+          "Yanagi"
+        ],
         "attackSegments[0].damageType": "disorder"
       },
       "expected": {
-        "traceContains": ["provider:Nicole", "provider:Yanagi", "polarityDisorder", "buildupContributionRatio", "virtualAgent", "disorderFormulaId"]
+        "traceContains": [
+          "provider:Nicole",
+          "provider:Yanagi",
+          "polarityDisorder",
+          "buildupContributionRatio",
+          "virtualAgent",
+          "disorderFormulaId"
+        ]
+      }
+    },
+    {
+      "id": "G24-bangboo-penguinboo-active-numeric",
+      "group": "bangboo-v1.1",
+      "status": "ready-for-schema",
+      "anchor": "Penguinboo active skill numeric contribution from Excel Path X",
+      "snapshotFocus": {
+        "bangboo.bangbooId": "penguinboo",
+        "bangboo.panel.attack": 6198.0006,
+        "bangboo.panel.impact": 90,
+        "bangboo.panel.anomalyMastery": 120,
+        "attackSegments[0].actor.kind": "bangboo",
+        "attackSegments[0].damageType": "regular",
+        "attackSegments[0].multiplier": 4.62,
+        "attackSegments[0].baseDazeMultiplier": 2.7,
+        "attackSegments[0].anomalyContribution.buildup": 346
+      },
+      "expected": {
+        "numeric": [
+          {
+            "path": "attackSegments[0].baseDamage",
+            "approx": 28634.762772,
+            "relativeTolerance": 0.000001
+          },
+          {
+            "path": "attackSegments[0].baseDaze",
+            "approx": 243,
+            "relativeTolerance": 0.000001
+          },
+          {
+            "path": "attackSegments[0].anomalyBuildup",
+            "approx": 415.2,
+            "relativeTolerance": 0.000001
+          }
+        ],
+        "traceContains": [
+          "bangbooActor",
+          "邦布属性!A42:T42",
+          "邦布技能!A2:H2"
+        ],
+        "notes": [
+          "Excel Path X has no Bangboo element field; fixture supplies explicit neutral element input."
+        ]
       }
     }
   ]

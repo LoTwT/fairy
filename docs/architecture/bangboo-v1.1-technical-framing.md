@@ -15,9 +15,10 @@ Locked decisions:
 
 - scope: 1-3 high-confidence Bangboo anchors plus generic schema and handler
   contract;
-- handler boundary: static/snapshotable modifiers only. Users, CLI, AI adapters,
-  or future UI must provide explicit `active`, `count`, or condition fields in
-  the snapshot. Core does not schedule triggered or periodic effects;
+- handler boundary: Bangboo-as-actor static/snapshotable attack segments only.
+  Users, CLI, AI adapters, or future UI must provide explicit Bangboo action
+  segments in the snapshot. Core does not schedule triggered or periodic
+  effects;
 - data sources: mixed strategy, consistent with V1: retained Excel source,
   buhflipexplode/Mihoyo source text when available, and manual audit only as
   reviewed evidence;
@@ -73,8 +74,8 @@ The core engine already supports:
   `excludedReason: "bangboo"`;
 - manual events for true-damage-like effects.
 
-The implementation must reuse these primitives instead of introducing a
-Bangboo-only effect engine.
+The implementation must reuse the formula pipeline and source-trace primitives
+instead of introducing a Bangboo-only effect engine.
 
 ## 3. Recommended Snapshot Shape
 
@@ -114,8 +115,8 @@ interface BangbooPanelSnapshot {
 Rationale:
 
 - there is one selected Bangboo for the team, not one subordinate per agent;
-- top-level placement makes team-wide Bangboo effects easier to reference in
-  `Condition` paths as `snapshot.bangboo.*`;
+- top-level placement makes the selected Bangboo actor easy to reference from
+  explicit Bangboo attack segments;
 - it avoids binding Bangboo lifecycle to an arbitrary agent slot;
 - it leaves `team[].subordinate` as a V1 migration/import alias rather than a
   canonical V1.1 field.
@@ -168,10 +169,15 @@ Excel `邦布技能` numeric fields.
 Bangboo damage is selected per segment through `AttackSegment.actor`, so V1.1
 does not need to break existing result summaries or team-buff resolution.
 
-### 3.3 Bangboo-Sourced Modifiers
+### 3.3 Deferred Bangboo-Sourced Modifiers
 
-Bangboo passive/support effects should compile to ordinary `TypedModifier`
-entries with Bangboo source metadata.
+V1.1 Path X does not implement Bangboo passive/team buff modifiers because the
+retained Excel source only has panel and skill numeric rows. Bangboo
+passive/support effects are V1.2+ work unless a reviewed text source is added.
+
+When that scope is reopened, Bangboo passive/support effects should compile to
+ordinary `TypedModifier` entries with Bangboo source metadata.
+
 
 ```ts
 {
@@ -266,18 +272,18 @@ No Bangboo-specific handler registry should be introduced in V1.1.
 
 Use existing handler categories:
 
-- damage, defense, resistance, vulnerability, daze, anomaly, and special-zone
-  modifiers remain ordinary `TypedModifier` handlers;
 - Bangboo damage segments use the existing formula pipeline with a Bangboo
   formula actor;
-- Bangboo effect activation uses existing `when` condition evaluation;
-- trace must include source kind through `source.sourceAnchor` and modifier ids.
+- damage, daze, and anomaly buildup reuse the existing segment formula path;
+- passive/team buff effects remain deferred and can later use ordinary
+  `TypedModifier` handlers;
+- trace must include Bangboo panel/skill source anchors.
 
 Required core changes:
 
 1. add Bangboo snapshot validation;
 2. add Bangboo formula-actor resolution for explicit Bangboo attack segments;
-3. allow `Condition` paths under `snapshot.bangboo.*`;
+3. support source traces for Bangboo panel and skill numeric rows;
 4. preserve existing agent-only `activeActor` compatibility;
 5. keep Bangboo anomaly contribution exclusion and corrupted-shield exclusions
    testable.
@@ -291,8 +297,8 @@ V1.1 should add G24-G26 candidates, then trim to 1-3 based on source quality.
 | Candidate | Purpose | Source basis | Expected assertion |
 |---|---|---|---|
 | G24 Bangboo skill segment | Prove Bangboo data + explicit Bangboo actor calculation path | Excel `邦布属性` + `邦布技能` for one named Bangboo | Trace uses Bangboo panel attack, skill multiplier, daze multiplier, and source refs |
-| G25 Bangboo anomaly exclusion | Prove guide hard rule that Bangboo buildup does not enter virtual-agent weighting | Guide §3.3.5 plus explicit contributor fixture | Virtual-agent rows keep `excludedReason: "bangboo"` and damage math excludes that row |
-| G26 Bangboo activation modifier | Prove static/snapshotable `requiresActivation` effect path | Selected Bangboo source text from Mihoyo/buhflipexplode plus manual acceptance if needed | Modifier applies only when `snapshot.bangboo.activations.*` condition is true and trace records active/inactive state |
+| G25 Bangboo skill segment | Prove the same actor path with a second high-confidence Bangboo | Excel `邦布属性` + `邦布技能` for one named Bangboo | Trace uses Bangboo panel attack, skill multiplier, daze multiplier, and source refs |
+| G26 Bangboo skill segment | Prove the same actor path with a third high-confidence Bangboo | Excel `邦布属性` + `邦布技能` for one named Bangboo | Trace uses Bangboo panel attack, skill multiplier, daze multiplier, and source refs |
 
 Suggested candidate names for lo-user/Product review:
 
@@ -351,10 +357,9 @@ data PR later wires real source rows. If source-driven anchors are ready, PRs
 T-001 exits when Product and QA agree that the following are testable:
 
 - schema location is canonical and migration behavior is defined;
-- core stays static/snapshotable and does not add timers;
+- core keeps Bangboo as explicit actor segments and does not add timers;
 - selected Bangboo data has source anchors;
 - selected G24+ anchors have observable trace assertions;
-- Bangboo anomaly exclusion remains explicit;
 - release can remain V0.0.4 patch with no SemVer-breaking public API removal;
 - future full Bangboo data coverage can be added without changing the snapshot
   shape again.
@@ -362,12 +367,9 @@ T-001 exits when Product and QA agree that the following are testable:
 ## 10. Open Questions
 
 1. Which 1-3 Bangboos should lo-user choose for V1.1 dogfooding anchors?
-2. Should V1.1 include explicit Bangboo attack segment calculation in the first
-   implementation PR, or ship modifier-only first and add Bangboo damage in a
-   second V1.1 PR?
-3. Should `BangbooSkillData` be top-level (`bangbooSkills`) or nested under
+2. Should `BangbooSkillData` be top-level (`bangbooSkills`) or nested under
    `BangbooData`?
-4. Which source is authoritative for Bangboo passive/support effect text if
+3. Which source is authoritative for Bangboo passive/support effect text if
    Excel only provides numeric skill segment rows?
-5. Does the CLI need a new helper command for selecting Bangboo effects, or is
+4. Does the CLI need a new helper command for selecting Bangboo effects, or is
    raw snapshot JSON enough for V0.0.4?

@@ -57,6 +57,34 @@ export const agentPanelSnapshotSchema = z
   })
   .strict()
 
+export const bangbooPanelSnapshotSchema = z
+  .object({
+    attack: z.number().finite().optional(),
+    maxHp: z.number().finite().optional(),
+    defense: z.number().finite().optional(),
+    impact: z.number().finite().optional(),
+    critRate: z.number().finite().optional(),
+    critDamage: z.number().finite().optional(),
+    anomalyMastery: z.number().finite().optional(),
+  })
+  .strict()
+
+export const bangbooSnapshotSchema = z
+  .object({
+    bangbooId: z.string().min(1),
+    level: z.number().int().positive().optional(),
+    promotionPhase: z.number().int().nonnegative().optional(),
+    panel: bangbooPanelSnapshotSchema.optional(),
+    skillLevels: z.record(z.string(), z.number().int().nonnegative()).optional(),
+    activations: z.record(
+      z.string(),
+      z.union([z.boolean(), z.number().finite(), z.string()]),
+    ).optional(),
+    fieldProvenance: fieldProvenanceMapSchema.optional(),
+    overrides: z.array(fieldOverrideSchema).optional(),
+  })
+  .strict()
+
 export const wEngineSnapshotSchema = z
   .object({
     id: z.string().min(1),
@@ -150,6 +178,18 @@ export const anomalyContributionInputSchema = z
 export const attackSegmentSchema = z
   .object({
     id: z.string().min(1),
+    actor: z
+      .discriminatedUnion("kind", [
+        z.object({
+          kind: z.literal("agent"),
+          agentId: z.string().min(1),
+        }).strict(),
+        z.object({
+          kind: z.literal("bangboo"),
+          bangbooId: z.string().min(1).optional(),
+        }).strict(),
+      ])
+      .optional(),
     actorId: z.string().min(1).optional(),
     skillId: z.string().min(1).optional(),
     levelKey: z.string().min(1).optional(),
@@ -166,6 +206,26 @@ export const attackSegmentSchema = z
   })
   .strict()
   .superRefine((segment, ctx) => {
+    if (segment.actor?.kind === "bangboo" && segment.actorId !== undefined) {
+      ctx.addIssue({
+        code: "custom",
+        path: ["actorId"],
+        message: "actorId is an agent-only legacy alias; Bangboo segments must use actor.kind=bangboo",
+      })
+    }
+
+    if (
+      segment.actor?.kind === "agent"
+      && segment.actorId !== undefined
+      && segment.actorId !== segment.actor.agentId
+    ) {
+      ctx.addIssue({
+        code: "custom",
+        path: ["actorId"],
+        message: "actorId must match actor.agentId when both are provided",
+      })
+    }
+
     if (
       (segment.damageType === "anomaly" || segment.damageType === "disorder")
       && segment.anomalyContribution?.status === undefined
@@ -319,6 +379,7 @@ export const battleSnapshotSchema = z
     ]),
     activeActor: z.object({ agentId: z.string().min(1) }).strict(),
     attackSegments: z.array(attackSegmentSchema).min(1),
+    bangboo: bangbooSnapshotSchema.optional(),
     enemy: enemySnapshotSchema,
     modifiers: z.array(typedModifierSchema).optional(),
     manualEvents: z.array(manualEventSchema).optional(),
@@ -330,12 +391,40 @@ export const battleSnapshotSchema = z
   .superRefine((snapshot, ctx) => {
     const teamAgentIds = new Set(snapshot.team.map(agent => agent.agentId))
     const teamByAgentId = new Map(snapshot.team.map(agent => [agent.agentId, agent]))
+    const subordinateEntries = snapshot.team
+      .map((agent, index) => ({ index, subordinate: agent.subordinate }))
+      .filter((entry): entry is { index: number; subordinate: NonNullable<typeof entry.subordinate> } =>
+        entry.subordinate !== undefined,
+      )
 
     if (!teamAgentIds.has(snapshot.activeActor.agentId)) {
       ctx.addIssue({
         code: "custom",
         path: ["activeActor", "agentId"],
         message: "activeActor.agentId must reference a team agent",
+      })
+    }
+
+    if (subordinateEntries.length > 1) {
+      subordinateEntries.forEach((entry) => {
+        ctx.addIssue({
+          code: "custom",
+          path: ["team", entry.index, "subordinate"],
+          message: "Only one team subordinate Bangboo is supported",
+        })
+      })
+    }
+
+    const subordinateBangbooId = subordinateEntries[0]?.subordinate.id
+    if (
+      snapshot.bangboo !== undefined
+      && subordinateBangbooId !== undefined
+      && subordinateBangbooId !== snapshot.bangboo.bangbooId
+    ) {
+      ctx.addIssue({
+        code: "custom",
+        path: ["bangboo", "bangbooId"],
+        message: "snapshot.bangboo must match team[].subordinate when both are provided",
       })
     }
 
@@ -346,6 +435,67 @@ export const battleSnapshotSchema = z
           path: ["attackSegments", index, "actorId"],
           message: "attackSegments[].actorId must reference a team agent when provided",
         })
+      }
+
+      if (segment.actor?.kind === "agent" && !teamAgentIds.has(segment.actor.agentId)) {
+        ctx.addIssue({
+          code: "custom",
+          path: ["attackSegments", index, "actor", "agentId"],
+          message: "attackSegments[].actor.agentId must reference a team agent when provided",
+        })
+      }
+
+      if (segment.actor?.kind === "bangboo") {
+        if (snapshot.bangboo === undefined) {
+          ctx.addIssue({
+            code: "custom",
+            path: ["attackSegments", index, "actor"],
+            message: "snapshot.bangboo is required for Bangboo attack segments",
+          })
+        }
+        else {
+          const segmentBangbooId = segment.actor.bangbooId
+          if (segmentBangbooId !== undefined && segmentBangbooId !== snapshot.bangboo.bangbooId) {
+            ctx.addIssue({
+              code: "custom",
+              path: ["attackSegments", index, "actor", "bangbooId"],
+              message: "attackSegments[].actor.bangbooId must match snapshot.bangboo.bangbooId",
+            })
+          }
+
+          if (snapshot.bangboo.panel === undefined) {
+            ctx.addIssue({
+              code: "custom",
+              path: ["bangboo", "panel"],
+              message: "snapshot.bangboo.panel is required for Bangboo attack segments",
+            })
+          }
+          else {
+            if (segment.damageType !== "daze" && snapshot.bangboo.panel.attack === undefined) {
+              ctx.addIssue({
+                code: "custom",
+                path: ["bangboo", "panel", "attack"],
+                message: "snapshot.bangboo.panel.attack is required for Bangboo damage segments",
+              })
+            }
+
+            if (segment.baseDazeMultiplier !== undefined && snapshot.bangboo.panel.impact === undefined) {
+              ctx.addIssue({
+                code: "custom",
+                path: ["bangboo", "panel", "impact"],
+                message: "snapshot.bangboo.panel.impact is required when a Bangboo segment has baseDazeMultiplier",
+              })
+            }
+
+            if (segment.anomalyContribution?.buildup !== undefined && snapshot.bangboo.panel.anomalyMastery === undefined) {
+              ctx.addIssue({
+                code: "custom",
+                path: ["bangboo", "panel", "anomalyMastery"],
+                message: "snapshot.bangboo.panel.anomalyMastery is required when a Bangboo segment has anomaly buildup",
+              })
+            }
+          }
+        }
       }
 
       const polarityDisorder = segment.anomalyContribution?.polarityDisorder
@@ -392,6 +542,8 @@ export const battleSnapshotSchema = z
 
 export type BattleContext = z.infer<typeof battleContextSchema>
 export type AgentPanelSnapshot = z.infer<typeof agentPanelSnapshotSchema>
+export type BangbooPanelSnapshot = z.infer<typeof bangbooPanelSnapshotSchema>
+export type BangbooSnapshot = z.infer<typeof bangbooSnapshotSchema>
 export type AgentSnapshot = z.infer<typeof agentSnapshotSchema>
 export type AnomalyThresholdModifier = z.infer<typeof anomalyThresholdModifierSchema>
 export type AnomalyContributionInput = z.infer<typeof anomalyContributionInputSchema>

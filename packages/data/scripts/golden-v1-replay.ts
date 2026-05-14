@@ -62,6 +62,7 @@ const v1AnchorIds = [
   "G21",
   "G22",
   "G23",
+  "G24",
 ] as const
 
 const deferredAnchorIds = [] as const
@@ -89,6 +90,17 @@ const specialtyMap = {
   支援: "support",
   防护: "defense",
   命破: "rupture",
+} as const
+
+const bangbooSpecs = {
+  penguinboo: {
+    excelId: 53001,
+    zh: "企鹅布",
+    en: "Penguinboo",
+    attrRange: "邦布属性!A42:T42",
+    activeRange: "邦布技能!A2:H2",
+    chainRange: "邦布技能!A3:H3",
+  },
 } as const
 
 type AnchorStatus = "passed" | "pendingHarness" | "blocked" | "deferred"
@@ -285,6 +297,99 @@ function buildAgentCandidates(workbook: XLSX.WorkBook) {
   }
 
   return agents
+}
+
+function buildBangbooCandidates(workbook: XLSX.WorkBook) {
+  const attrRows = rowsForSheet(workbook, "邦布属性")
+  const attrHeaders = headerMap(attrRows[0] ?? [])
+  const skillRows = rowsForSheet(workbook, "邦布技能")
+  const skillHeaders = headerMap(skillRows[0] ?? [])
+  const bangboos: Record<string, Record<string, unknown>> = {}
+  const bangbooSkills: Record<string, Record<string, unknown>> = {}
+
+  for (const [bangbooId, spec] of Object.entries(bangbooSpecs)) {
+    const attrRowIndex = attrRows.findIndex(row => rowValue(row, attrHeaders, "中文名称") === spec.zh && rowValue(row, attrHeaders, "ID") === spec.excelId)
+    if (attrRowIndex < 0)
+      throw new Error(`Missing Bangboo row for ${spec.zh} (${spec.excelId})`)
+
+    const attrRow = attrRows[attrRowIndex]!
+    const attrRowNumber = attrRowIndex + 1
+    const attrRange = `邦布属性!A${attrRowNumber}:T${attrRowNumber}`
+    const skillRowEntries = skillRows
+      .map((row, index) => ({ row, rowNumber: index + 1 }))
+      .filter(entry => rowValue(entry.row, skillHeaders, "名称") === spec.zh)
+
+    if (skillRowEntries.length !== 2)
+      throw new Error(`Expected two Bangboo skill rows for ${spec.zh}, got ${skillRowEntries.length}`)
+
+    const sourceRefs = [
+      sourceRef(attrRange),
+      ...skillRowEntries.map(entry => sourceRef(`邦布技能!A${entry.rowNumber}:H${entry.rowNumber}`)),
+    ]
+    const skillIds = skillRowEntries.map((entry) => {
+      const label = String(rowValue(entry.row, skillHeaders, "技能") ?? "")
+      const key = label.includes("连携技") ? "chain" : "active"
+      return `${bangbooId}-${key}`
+    })
+
+    bangboos[bangbooId] = {
+      id: bangbooId,
+      sourceKey: String(spec.excelId),
+      label: {
+        zh: spec.zh,
+        en: spec.en,
+      },
+      sourceRefs,
+      baseStatsByLevel: {
+        "60": {
+          maxHp: numberValue(rowValue(attrRow, attrHeaders, "60级生命值"), `${bangbooId}.60级生命值`),
+          attack: numberValue(rowValue(attrRow, attrHeaders, "60级攻击力"), `${bangbooId}.60级攻击力`),
+          defense: numberValue(rowValue(attrRow, attrHeaders, "60级防御力"), `${bangbooId}.60级防御力`),
+          impact: numberValue(rowValue(attrRow, attrHeaders, "冲击力"), `${bangbooId}.冲击力`),
+          critRate: numberValue(rowValue(attrRow, attrHeaders, "60级暴击率"), `${bangbooId}.60级暴击率`),
+          critDamage: numberValue(rowValue(attrRow, attrHeaders, "60级暴击伤害"), `${bangbooId}.60级暴击伤害`),
+          anomalyMastery: numberValue(rowValue(attrRow, attrHeaders, "异常掌控"), `${bangbooId}.异常掌控`),
+        },
+      },
+      skillIds,
+      sourceAliases: [spec.zh, spec.en],
+      sourceShape: {
+        workbookSheet: "邦布属性",
+        rowNumber: attrRowNumber,
+        range: attrRange,
+        excelId: spec.excelId,
+      },
+    }
+
+    for (const entry of skillRowEntries) {
+      const label = String(rowValue(entry.row, skillHeaders, "技能") ?? "")
+      const key = label.includes("连携技") ? "chain" : "active"
+      const tag = key === "chain" ? "chain" : "special"
+      const skillId = `${bangbooId}-${key}`
+      const sourceAnchor = `邦布技能!A${entry.rowNumber}:H${entry.rowNumber}`
+      bangbooSkills[skillId] = {
+        id: skillId,
+        bangbooId,
+        label: { zh: label },
+        sourceRefs: [sourceRef(sourceAnchor)],
+        tags: [tag],
+        segments: [
+          {
+            id: `${skillId}-hit`,
+            levelKey: "default",
+            multiplier: numberValue(rowValue(entry.row, skillHeaders, "伤害倍率"), `${skillId}.伤害倍率`),
+            multiplierGrowth: numberValue(rowValue(entry.row, skillHeaders, "伤害倍率成长"), `${skillId}.伤害倍率成长`),
+            dazeMultiplier: numberValue(rowValue(entry.row, skillHeaders, "失衡倍率"), `${skillId}.失衡倍率`),
+            dazeMultiplierGrowth: numberValue(rowValue(entry.row, skillHeaders, "失衡倍率成长"), `${skillId}.失衡倍率成长`),
+            anomalyBuildup: numberValue(rowValue(entry.row, skillHeaders, "异常积蓄"), `${skillId}.异常积蓄`),
+            sourceRefs: [sourceRef(sourceAnchor)],
+          },
+        ],
+      }
+    }
+  }
+
+  return { bangboos, bangbooSkills }
 }
 
 function buildTextCandidates(workbook: XLSX.WorkBook) {
@@ -620,13 +725,14 @@ function buildAcceptanceArtifacts(generatedAt: string, candidates: ReturnType<ty
 
 function buildCandidates(generatedAt: string) {
   const { workbook, workbookSha256, workbookVersion } = loadWorkbook()
+  const bangbooCandidates = buildBangbooCandidates(workbook)
   return {
     schemaVersion: "fairy-v1-agent-source-candidates-v1",
     parserVersion,
     generatedAt,
     policy: {
       scope:
-        "Minimal #40 reader output for #43 V1 replay. It extracts only Yixuan/Nicole/Yanagi identity and calculation-relevant source text candidates.",
+        "Minimal reader output for executable V1/V1.1 replay. It extracts Yixuan/Nicole/Yanagi identity and calculation-relevant source text candidates plus Penguinboo numeric Bangboo rows for G24.",
       formalDataPolicy:
         "Candidates are not trusted cleaned modifiers. Effects with trustStatus=requiresManualAcceptance must emit ERR-DAT-005 until an accepted record exists.",
       enemyPolicy:
@@ -642,6 +748,8 @@ function buildCandidates(generatedAt: string) {
       },
     },
     agents: buildAgentCandidates(workbook),
+    bangboos: bangbooCandidates.bangboos,
+    bangbooSkills: bangbooCandidates.bangbooSkills,
     effectCandidates: buildTextCandidates(workbook),
   }
 }
@@ -767,6 +875,75 @@ function agentSnapshot(
       ...basePanel,
       ...overrides,
     },
+  }
+}
+
+function bangbooSnapshot(
+  candidates: ReturnType<typeof buildCandidates>,
+  bangbooId: keyof typeof bangbooSpecs,
+) {
+  const bangboo = candidates.bangboos[bangbooId] as {
+    baseStatsByLevel: {
+      "60": {
+        maxHp: number
+        attack: number
+        defense: number
+        impact: number
+        critRate: number
+        critDamage: number
+        anomalyMastery: number
+      }
+    }
+    sourceRefs: Array<Record<string, string>>
+  }
+  const baseStats = bangboo.baseStatsByLevel["60"]
+
+  return {
+    bangbooId,
+    level: 60,
+    panel: baseStats,
+    fieldProvenance: {
+      "panel.maxHp": { provenance: "data", source: bangboo.sourceRefs[0] },
+      "panel.attack": { provenance: "data", source: bangboo.sourceRefs[0] },
+      "panel.defense": { provenance: "data", source: bangboo.sourceRefs[0] },
+      "panel.impact": { provenance: "data", source: bangboo.sourceRefs[0] },
+      "panel.critRate": { provenance: "data", source: bangboo.sourceRefs[0] },
+      "panel.critDamage": { provenance: "data", source: bangboo.sourceRefs[0] },
+      "panel.anomalyMastery": { provenance: "data", source: bangboo.sourceRefs[0] },
+    },
+  }
+}
+
+function bangbooSkillSegment(
+  candidates: ReturnType<typeof buildCandidates>,
+  skillId: string,
+  source: Record<string, string>,
+) {
+  const skill = candidates.bangbooSkills[skillId] as {
+    tags: string[]
+    segments: Array<{
+      multiplier: number
+      dazeMultiplier: number
+      anomalyBuildup: number
+    }>
+  }
+  const segment = skill.segments[0]
+  if (segment === undefined)
+    throw new Error(`Missing Bangboo skill segment for ${skillId}`)
+
+  return {
+    id: `${skillId}-segment`,
+    actor: { kind: "bangboo" as const },
+    attribute: "ice" as const,
+    tags: skill.tags,
+    damageType: "regular" as const,
+    multiplier: segment.multiplier,
+    baseDazeMultiplier: segment.dazeMultiplier,
+    anomalyContribution: {
+      status: "frozen" as const,
+      buildup: segment.anomalyBuildup,
+    },
+    source,
   }
 }
 
@@ -1705,6 +1882,53 @@ function buildReplayReport(generatedAt: string, candidates = buildCandidates(gen
     ]))
   }
 
+  {
+    const penguinboo = candidates.bangboos.penguinboo as {
+      sourceRefs: Array<Record<string, string>>
+      baseStatsByLevel: { "60": { attack: number; impact: number; anomalyMastery: number } }
+    }
+    const activeSkill = candidates.bangbooSkills["penguinboo-active"] as {
+      sourceRefs: Array<Record<string, string>>
+      segments: Array<{ multiplier: number; dazeMultiplier: number; anomalyBuildup: number }>
+    }
+    const skillSegment = activeSkill.segments[0]
+    if (skillSegment === undefined)
+      throw new Error("G24 missing Penguinboo active skill segment")
+
+    const result = calculate({
+      ...snapshot,
+      bangboo: bangbooSnapshot(candidates, "penguinboo"),
+      attackSegments: [
+        bangbooSkillSegment(candidates, "penguinboo-active", activeSkill.sourceRefs[0]!),
+      ],
+      enemy: {
+        level: 60,
+        rank: "boss",
+        resistance: { ice: 0 },
+        anomalyBuildupResistance: { ice: 0 },
+      },
+    })
+    const segment = result.attackSegments[0]
+    assertClose(segment?.baseDamage, 28634.762772, 0.000001, "G24 Penguinboo active base damage")
+    assertClose(segment?.baseDaze, 243, 0.000001, "G24 Penguinboo active base daze")
+    assertClose(segment?.dazeValue, 243, 0.000001, "G24 Penguinboo active daze value")
+    assertClose(segment?.anomalyBuildup, 415.2, 0.000001, "G24 Penguinboo active anomaly buildup")
+    assertClose(segment?.rawDamage, Number(segment?.nonCritDamage) * 1.5, 0.000001, "G24 Penguinboo crit expectation")
+    assertClose(penguinboo.baseStatsByLevel["60"].attack * skillSegment.multiplier, 28634.762772, 0.000001, "G24 source attack x multiplier")
+    assertClose(penguinboo.baseStatsByLevel["60"].impact * skillSegment.dazeMultiplier, 243, 0.000001, "G24 source impact x daze multiplier")
+    assertClose(skillSegment.anomalyBuildup * Math.floor(penguinboo.baseStatsByLevel["60"].anomalyMastery) / 100, 415.2, 0.000001, "G24 source anomaly buildup")
+    if (segment?.actorId !== "bangboo:penguinboo")
+      throw new Error(`G24 expected Bangboo actor id bangboo:penguinboo, got ${segment?.actorId}`)
+    if (!result.trace.some(event => event.displayValue === "bangbooActor"))
+      throw new Error("G24 expected Bangboo formula actor trace")
+
+    anchors.push(passedAnchor("G24", penguinboo.sourceRefs, [
+      "Penguinboo active skill replays Excel-only numeric contribution: level-60 attack 6198.0006 × 4.62 = 28634.762772 base damage.",
+      "Daze uses impact 90 × 2.7 = 243, and anomaly buildup uses 346 × floor(120)/100 = 415.2 before enemy resistance.",
+      "Excel Path X has no element field; the fixture supplies an explicit neutral ice segment and zero ice resistance so the anchor asserts sourced panel/skill numerics, not inferred element semantics.",
+    ]))
+  }
+
   for (const anchorId of deferredAnchorIds) {
     anchors.push({
       id: anchorId,
@@ -1734,7 +1958,7 @@ function buildReplayReport(generatedAt: string, candidates = buildCandidates(gen
     generatedAt,
     policy: {
       scope:
-        "V1.x true-data replay harness after G20: all 23 anchors pass executable replay, no anchors remain deferred.",
+        "V1.1 true-data replay harness after G24: all 24 anchors pass executable replay, no anchors remain deferred.",
       releaseGate:
         "releaseReady becomes true only when all executable anchors pass replay and blockingDiagnostics is zero.",
       manualAcceptance:

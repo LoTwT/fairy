@@ -3,7 +3,7 @@
   "parserVersion": "golden-v1-replay-v0.1.0",
   "generatedAt": "2026-05-05T18:20:00+08:00",
   "policy": {
-    "scope": "V1.x true-data replay harness after G20: all 23 anchors pass executable replay, no anchors remain deferred.",
+    "scope": "V1.1 true-data replay harness after G24: all 24 anchors pass executable replay, no anchors remain deferred.",
     "releaseGate": "releaseReady becomes true only when all executable anchors pass replay and blockingDiagnostics is zero.",
     "manualAcceptance": "G22/G23 use lo-user manual acceptance records tied to the sourceTextHash values in v1-agent-source-candidates.json; A/B effects are replayed as explicit inactive/active snapshot states, and C is skill-level parameterized."
   },
@@ -30,12 +30,13 @@
     "G20",
     "G21",
     "G22",
-    "G23"
+    "G23",
+    "G24"
   ],
   "deferredAnchorIds": [],
   "summary": {
-    "v1AnchorCount": 23,
-    "passed": 23,
+    "v1AnchorCount": 24,
+    "passed": 24,
     "pendingHarness": 0,
     "blocked": 0,
     "deferred": 0,
@@ -433,6 +434,32 @@
         "Yanagi disorder boost is manually accepted by lo-user and replayed as explicit inactive/active snapshot states.",
         "Yanagi polarity-disorder EX Special template supports skill levels 1-16; level 12 yields 96 base-damage extra from 300 anomaly proficiency.",
         "Three-agent virtual contribution trace includes Yixuan, Nicole, and Yanagi."
+      ]
+    },
+    {
+      "id": "G24",
+      "status": "passed",
+      "sourceRefs": [
+        {
+          "sourceId": "lo-user-excel",
+          "sourceVersion": "2.6.0_R14028417",
+          "sourceAnchor": "邦布属性!A42:T42"
+        },
+        {
+          "sourceId": "lo-user-excel",
+          "sourceVersion": "2.6.0_R14028417",
+          "sourceAnchor": "邦布技能!A2:H2"
+        },
+        {
+          "sourceId": "lo-user-excel",
+          "sourceVersion": "2.6.0_R14028417",
+          "sourceAnchor": "邦布技能!A3:H3"
+        }
+      ],
+      "notes": [
+        "Penguinboo active skill replays Excel-only numeric contribution: level-60 attack 6198.0006 × 4.62 = 28634.762772 base damage.",
+        "Daze uses impact 90 × 2.7 = 243, and anomaly buildup uses 346 × floor(120)/100 = 415.2 before enemy resistance.",
+        "Excel Path X has no element field; the fixture supplies an explicit neutral ice segment and zero ice resistance so the anchor asserts sourced panel/skill numerics, not inferred element semantics."
       ]
     }
   ]

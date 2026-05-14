@@ -36,7 +36,8 @@ V1 focuses on Hollow Zero Assault / Deadly Assault data.
   fully cleaned in V1 unless a V1 calculation/golden case requires a minimal
   subset.
 - V1 golden-data release coverage was narrowed to 19 anchors. V1.x Track B has
-  added anchors 13, 18, 19, and 20 as executable replay anchors.
+  added anchors 13, 18, 19, and 20 as executable replay anchors; V1.1 Bangboo B1
+  adds anchor 24.
 
 V1.x anchor status:
 
@@ -46,6 +47,7 @@ V1.x anchor status:
 | 18 part-break true damage examples | Implemented in executable replay using Excel non-DA enemy data plus guide §1.1 part-break multiplier table. |
 | 19 daze recovery example: 凶心疯汉 | Implemented in executable replay using Excel base recovery rate plus guide §2.3.2 recovery-rate modifier composition. |
 | 20 daze recovery example: 装甲哈提 | Implemented in executable replay using Excel base recovery rate plus guide §2.3.2 recovery-rate modifier composition; replay notes the guide's `1/11.58%` denominator typo. |
+| 24 Penguinboo numeric Bangboo actor | Implemented in executable replay using Excel Bangboo panel and skill numeric rows; no element or passive/team-buff behavior is inferred. |
 
 ### 1.2 Source Priority
 
@@ -535,8 +537,8 @@ V1 cleaned-data implementation must add tests for these gates:
 - zh/en i18n key sets are aligned for published data i18n resources;
 - unresolved mapping is machine-readable and fails golden cases when required
   fields are missing;
-- Golden true-data replay uses the executable anchor scope. G13, G18, G19, and
-  G20 are now executable anchors, and no golden anchors remain deferred.
+- Golden true-data replay uses the executable anchor scope. G13, G18, G19, G20,
+  and G24 are now executable anchors, and no golden anchors remain deferred.
 - `verify:golden-v1` passes as an offline freshness gate for the generated V1
   agent source candidates, manual acceptance records, and replay report; V1
   release requires zero `ERR-DAT-005` diagnostics, no `pendingHarness` anchors,
@@ -553,6 +555,7 @@ The eventual Excel reader still needs to parse:
 
 - agents;
 - skills and skill segments;
+- Bangboos and Bangboo skills for V1.1 Path X numeric actor segments;
 - W-Engines;
 - Drive Discs;
 - typed modifiers from source text/table rows;
@@ -571,7 +574,8 @@ not UX runtime messages. They must write data i18n resources under
 ### 10.3 task #43 True-Data Replay
 
 V1 release gate used the narrowed 19-anchor golden scope. V1.x Track B adds G13,
-G18, G19, and G20 as executable anchors. No golden anchors remain deferred.
+G18, G19, and G20 as executable anchors, and V1.1 Bangboo B1 adds G24. No golden
+anchors remain deferred.
 
 The first replay harness baseline writes:
 
@@ -581,15 +585,17 @@ The first replay harness baseline writes:
 - `data/cleaned/golden/v1-replay-report.json`.
 
 `verify:golden-v1` verifies those artifacts against retained Excel and DA source
-snapshots. The current baseline has 23 executable anchors passed, zero blocking
+snapshots. The current baseline has 24 executable anchors passed, zero blocking
 diagnostics, and `releaseReady=true`. G04 reproduces the guide breakpoint scan,
 G09 asserts sourced DA daze ratio display flooring, G10 asserts frost/auric
 resistance plus anomaly-buildup-resistance lane mapping, G13 asserts sourced
 anomaly-threshold rule composition, G18 asserts sourced
 part-break true damage, G19 asserts sourced daze recovery-rate composition for
 凶心疯汉, G20 asserts sourced daze recovery-rate composition for 装甲哈提 and
-records the guide's `1/11.58%` denominator typo, and G22/G23 use lo-user manual
-acceptance records for Nicole/Yanagi active-state and polarity-disorder template semantics. The
+records the guide's `1/11.58%` denominator typo, G22/G23 use lo-user manual
+acceptance records for Nicole/Yanagi active-state and polarity-disorder template
+semantics, and G24 asserts Penguinboo Excel numeric attack-segment contribution
+without inferring Bangboo element or passive/team-buff behavior. The
 polarity-disorder template requires an explicit provider agent in `team` and an
 explicit supported skill level (`skillLevels[skillLevelKey]` in 1-16) plus
 provider `panel.anomalyProficiency`; missing or out-of-range inputs are
