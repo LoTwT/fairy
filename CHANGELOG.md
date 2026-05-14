@@ -2,6 +2,23 @@
 
 All notable changes to Fairy are documented in this file.
 
+## 0.0.4 - 2026-05-14
+
+### Changed
+
+- Decouple release creation from registry smoke
+
+### Documentation
+
+- Document golden changelog convention
+- Draft Bangboo V1.1 technical framing
+
+### Golden Anchors
+
+- Add G24 bangboo actor anchor (#48)
+- Add G25 sharkboo anchor (#49)
+- Add G26 plugboo anchor
+
 ## 0.0.3 - 2026-05-14
 
 ### Changed
