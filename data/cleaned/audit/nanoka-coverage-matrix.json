@@ -29,7 +29,32 @@
       "entityId": "1371",
       "url": "https://static.nanoka.cc/zzz/3.0.2+15625449/zh/character/1371.json",
       "version": "3.0.2+15625449",
-      "releaseChannel": "stable"
+      "releaseChannel": "stable",
+      "fetchedAt": "2026-05-15T00:21:07+08:00",
+      "contentSha256": "6cb0a652f92d9daf0e6cd382d757c7755d543f9013defb61799b747aaf2b8868",
+      "server": "live"
+    },
+    {
+      "id": "nanoka-character-nekomata-1021",
+      "entityType": "agent",
+      "entityId": "1021",
+      "url": "https://static.nanoka.cc/zzz/3.0.2+15625449/zh/character/1021.json",
+      "version": "3.0.2+15625449",
+      "releaseChannel": "stable",
+      "fetchedAt": "2026-05-15T00:21:07+08:00",
+      "contentSha256": "85186a7568c11ff9f56e2085bf561485f0548ff29fc70e686c8aa3dca2b0f961",
+      "server": "live"
+    },
+    {
+      "id": "nanoka-character-soldier11-1041",
+      "entityType": "agent",
+      "entityId": "1041",
+      "url": "https://static.nanoka.cc/zzz/3.0.2+15625449/zh/character/1041.json",
+      "version": "3.0.2+15625449",
+      "releaseChannel": "stable",
+      "fetchedAt": "2026-05-15T00:21:07+08:00",
+      "contentSha256": "8acde3e5c3849a371c5a2fefe32bd38e2b96397067a73e27cd5a69296550fcc1",
+      "server": "live"
     },
     {
       "id": "nanoka-bangboo-plugboo-54008",
@@ -37,7 +62,10 @@
       "entityId": "54008",
       "url": "https://static.nanoka.cc/zzz/3.0.2+15625449/zh/bangboo/54008.json",
       "version": "3.0.2+15625449",
-      "releaseChannel": "stable"
+      "releaseChannel": "stable",
+      "fetchedAt": "2026-05-15T00:21:07+08:00",
+      "contentSha256": "2afc34c8b72b3a7dc6e18d945e83c12784a742817e4ce760ee8c4c17aa3b0261",
+      "server": "live"
     },
     {
       "id": "nanoka-monster-dullahan-30000",
@@ -45,7 +73,10 @@
       "entityId": "30000",
       "url": "https://static.nanoka.cc/zzz/3.0.2+15625449/zh/monster/30000.json",
       "version": "3.0.2+15625449",
-      "releaseChannel": "stable"
+      "releaseChannel": "stable",
+      "fetchedAt": "2026-05-15T00:21:07+08:00",
+      "contentSha256": "46eebea2270e748a6057d152a05a3296f2601efaccf299667318025f44bf492a",
+      "server": "live"
     },
     {
       "id": "nanoka-weapon-yixuan-signature-14137",
@@ -53,7 +84,10 @@
       "entityId": "14137",
       "url": "https://static.nanoka.cc/zzz/3.0.2+15625449/zh/weapon/14137.json",
       "version": "3.0.2+15625449",
-      "releaseChannel": "stable"
+      "releaseChannel": "stable",
+      "fetchedAt": "2026-05-15T00:21:07+08:00",
+      "contentSha256": "a0d7dfe24f24a5cfc623e750c33bbea7aead9952283d670861b9a67e814a667d",
+      "server": "live"
     },
     {
       "id": "nanoka-equipment-woodpecker-31000",
@@ -61,7 +95,10 @@
       "entityId": "31000",
       "url": "https://static.nanoka.cc/zzz/3.0.2+15625449/zh/equipment/31000.json",
       "version": "3.0.2+15625449",
-      "releaseChannel": "stable"
+      "releaseChannel": "stable",
+      "fetchedAt": "2026-05-15T00:21:07+08:00",
+      "contentSha256": "6af7dcce6a1863b1d801e54621056b2f92baab2c31672a4ed6c2cb1ff3fcf508",
+      "server": "live"
     }
   ],
   "rows": [
@@ -156,10 +193,10 @@
     },
     {
       "fieldId": "agents.basePanel",
-      "canonicalPath": "GameData.agents.*.baseStatsByLevel / AgentSnapshot.panel",
-      "fieldClass": "required",
+      "canonicalPath": "GameData.agents.*.baseStatsByLevel",
+      "fieldClass": "derived",
       "sourcePolicy": "nanoka",
-      "status": "needs-tl-research",
+      "status": "verified-from-nanoka",
       "nanokaEndpoint": "/{locale}/character/{id}.json",
       "rawFieldPaths": [
         "/stats/hp_max",
@@ -168,15 +205,31 @@
         "/stats/attack_growth",
         "/stats/defence",
         "/stats/defence_growth",
-        "/level/*",
+        "/level/*"
+      ],
+      "transformRule": "derive base panel as stats[key] + level[promotionPhase][key] + stats[key_growth] * (level - 1) / 10000; Yixuan level-60 HP and attack match shipped Excel base panel when extra_level is excluded",
+      "sampleEntity": "nanoka-character-yixuan-1371",
+      "rawAvailable": true,
+      "promotable": true,
+      "blockedBy": [],
+      "notes": "This promotes GameData baseStatsByLevel only. Snapshot final panel and promotion extra stats remain separate rows."
+    },
+    {
+      "fieldId": "agents.promotionExtraStats",
+      "canonicalPath": "GameData.agents.*.baseStatsByLevel extras / AgentSnapshot.panel final extras",
+      "fieldClass": "derived",
+      "sourcePolicy": "nanoka",
+      "status": "needs-tl-research",
+      "nanokaEndpoint": "/{locale}/character/{id}.json",
+      "rawFieldPaths": [
         "/extra_level/*/extra"
       ],
-      "transformRule": "derive final level/promotion panel values; formula must be proven against shipped anchors before promotion",
+      "transformRule": "resolve when and how extra_level rows compose into final snapshot panel or potentialActivation; do not fold into baseStatsByLevel without a schema decision",
       "sampleEntity": "nanoka-character-yixuan-1371",
       "rawAvailable": true,
       "promotable": false,
       "blockedBy": [
-        "field:normalization-formula-required"
+        "field:promotion-extra-stat-semantics-required"
       ]
     },
     {
@@ -184,7 +237,7 @@
       "canonicalPath": "AgentSnapshot.panel crit/pen/anomaly/impact/energy/adrenaline/sheer fields",
       "fieldClass": "required",
       "sourcePolicy": "nanoka",
-      "status": "needs-tl-research",
+      "status": "verified-from-nanoka",
       "nanokaEndpoint": "/{locale}/character/{id}.json",
       "rawFieldPaths": [
         "/stats/crit",
@@ -198,7 +251,7 @@
         "/stats/rp_max",
         "/stats/rp_recover"
       ],
-      "transformRule": "map source units and stat names to snapshot panel fields",
+      "transformRule": "raw stat fields exist; map source integer units to snapshot panel decimals before promotion",
       "sampleEntity": "nanoka-character-yixuan-1371",
       "rawAvailable": true,
       "promotable": false,
@@ -211,14 +264,14 @@
       "canonicalPath": "AgentSnapshot.panel.sheerForce/sheerDamageBonus and rupture rule inputs",
       "fieldClass": "required",
       "sourcePolicy": "nanoka",
-      "status": "needs-tl-research",
+      "status": "verified-from-nanoka",
       "nanokaEndpoint": "/{locale}/character/{id}.json",
       "rawFieldPaths": [
         "/stats/rbl",
         "/stats/rbl_correction_factor",
         "/stats/rbl_probability"
       ],
-      "transformRule": "validate semantic mapping from nanoka rbl fields to fairy rupture coefficients",
+      "transformRule": "raw rbl fields exist; validate semantic mapping from rbl/rbl_correction_factor/rbl_probability to fairy rupture coefficients",
       "sampleEntity": "nanoka-character-yixuan-1371",
       "rawAvailable": true,
       "promotable": false,
@@ -251,7 +304,7 @@
       "canonicalPath": "GameData.skills.*.tags,attribute,segments.*.damageType/hitCount/defaultTags",
       "fieldClass": "required",
       "sourcePolicy": "nanoka",
-      "status": "needs-tl-research",
+      "status": "verified-from-nanoka",
       "nanokaEndpoint": "/{locale}/character/{id}.json",
       "rawFieldPaths": [
         "/skill_list/*/element_type",
@@ -259,7 +312,7 @@
         "/skill_list/*/name",
         "/skill_list/*/desc"
       ],
-      "transformRule": "map source skill categories, hit types, and element ids to fairy attack tags and damage types",
+      "transformRule": "raw skill list element_type/hit_type/name/desc exists; map source enum ids to fairy attack tags, attributes, damage types, and hit groups before promotion",
       "sampleEntity": "nanoka-character-yixuan-1371",
       "rawAvailable": true,
       "promotable": false,
@@ -272,20 +325,23 @@
       "canonicalPath": "GameData.agents.*.mindscapeCinema/potentialActivation",
       "fieldClass": "optional",
       "sourcePolicy": "nanoka",
-      "status": "needs-tl-research",
+      "status": "verified-from-nanoka",
       "nanokaEndpoint": "/{locale}/character/{id}.json",
       "rawFieldPaths": [
+        "/talent",
         "/potential",
         "/potential_detail",
-        "/talent",
         "/extra_level"
       ],
-      "transformRule": "resolve source semantics; extra_level must not be treated as Mindscape without proof",
-      "sampleEntity": "nanoka-character-yixuan-1371",
+      "transformRule": "talent appears to carry Mindscape-like six-level raw text; potential/potential_detail appears for some agents and must be mapped separately to potentialActivation; extra_level remains promotion extra stats, not Mindscape",
+      "sampleEntity": "nanoka-character-soldier11-1041",
+      "supportingSamples": [
+        "nanoka-character-nekomata-1021"
+      ],
       "rawAvailable": true,
       "promotable": false,
       "blockedBy": [
-        "field:mindscape-semantic-mapping-required"
+        "field:mindscape-potential-semantic-mapping-required"
       ]
     },
     {
@@ -293,14 +349,14 @@
       "canonicalPath": "GameData.agents.*.corePassiveModifiers",
       "fieldClass": "optional",
       "sourcePolicy": "nanoka",
-      "status": "needs-tl-research",
+      "status": "verified-from-nanoka",
       "nanokaEndpoint": "/{locale}/character/{id}.json",
       "rawFieldPaths": [
         "/passive",
         "/talent",
         "/skill/*/description/*/desc"
       ],
-      "transformRule": "raw text may seed deterministic templates; formal modifiers require handlerId, params, appliesTo, when, and source",
+      "transformRule": "passive/talent/skill text exists; formal corePassiveModifiers require deterministic typed modifier templates before promotion",
       "sampleEntity": "nanoka-character-yixuan-1371",
       "rawAvailable": true,
       "promotable": false,
@@ -331,9 +387,9 @@
     {
       "fieldId": "bangboos.basePanel",
       "canonicalPath": "GameData.bangboos.*.baseStatsByLevel / BangbooSnapshot.panel",
-      "fieldClass": "required",
+      "fieldClass": "derived",
       "sourcePolicy": "nanoka",
-      "status": "needs-tl-research",
+      "status": "verified-from-nanoka",
       "nanokaEndpoint": "/{locale}/bangboo/{id}.json",
       "rawFieldPaths": [
         "/stats/attack",
@@ -346,13 +402,11 @@
         "/stats/element_abnormal_power",
         "/level/*"
       ],
-      "transformRule": "derive final Bangboo panel values; formula must be proven against G24-G26 before promotion",
+      "transformRule": "derive Bangboo base panel as stats[key] + level[promotionPhase][key] + stats[key_upgrade] * (level - 1) / 10000; Plugboo level-60 attack matches G26 shipped Excel value 8057.0996",
       "sampleEntity": "nanoka-bangboo-plugboo-54008",
       "rawAvailable": true,
-      "promotable": false,
-      "blockedBy": [
-        "field:bangboo-panel-normalization-required"
-      ]
+      "promotable": true,
+      "blockedBy": []
     },
     {
       "fieldId": "bangboos.skillSegments",
@@ -456,7 +510,7 @@
       "canonicalPath": "GameData.enemies.*.levelDefaults / EnemySnapshot maxHp,defense,baseDaze,dazeCap",
       "fieldClass": "required",
       "sourcePolicy": "nanoka",
-      "status": "needs-tl-research",
+      "status": "verified-from-nanoka",
       "nanokaEndpoint": "/{locale}/monster/{id}.json",
       "rawFieldPaths": [
         "/monster_info/*/stats/hp",
@@ -464,7 +518,7 @@
         "/monster_info/*/stats/stun",
         "/monster_info/*/curves"
       ],
-      "transformRule": "derive level-specific enemy stats from base stats and curves after variant mapping",
+      "transformRule": "monster_info stats and curves exist; derive level-specific enemy stats after monster_info variant mapping and curve formula validation",
       "sampleEntity": "nanoka-monster-dullahan-30000",
       "rawAvailable": true,
       "promotable": false,
@@ -478,7 +532,7 @@
       "canonicalPath": "GameData.enemies.*.resistance / EnemySnapshot.resistance",
       "fieldClass": "required",
       "sourcePolicy": "nanoka",
-      "status": "needs-tl-research",
+      "status": "verified-from-nanoka",
       "nanokaEndpoint": "/{locale}/monster/{id}.json",
       "rawFieldPaths": [
         "/monster_info/*/stats/fire_damage_res",
@@ -487,7 +541,7 @@
         "/monster_info/*/stats/ether_damage_res",
         "/monster_info/*/stats/physical_damage_res"
       ],
-      "transformRule": "map source resistance units to fairy decimal resistance values",
+      "transformRule": "damage/stun/buildup resistance fields exist per element; map source integer units to fairy resistance decimals after variant mapping",
       "sampleEntity": "nanoka-monster-dullahan-30000",
       "rawAvailable": true,
       "promotable": false,
@@ -501,7 +555,7 @@
       "canonicalPath": "EnemySnapshot.anomalyThresholdModifiers / GameData.rules.anomalyThreshold",
       "fieldClass": "required",
       "sourcePolicy": "nanoka",
-      "status": "needs-tl-research",
+      "status": "verified-from-nanoka",
       "nanokaEndpoint": "/{locale}/monster/{id}.json",
       "rawFieldPaths": [
         "/element_abnormal",
@@ -509,7 +563,7 @@
         "/monster_info/*/stats/*_buildup_res",
         "/monster_info/*/stats/*_buildup_curve"
       ],
-      "transformRule": "map element_abnormal and buildup resistance fields into threshold/composition inputs",
+      "transformRule": "element_abnormal, base_buildup_ratio, buildup_res, and buildup_curve fields exist; map them to fairy threshold/composition semantics after variant mapping",
       "sampleEntity": "nanoka-monster-dullahan-30000",
       "rawAvailable": true,
       "promotable": false,
@@ -523,7 +577,7 @@
       "canonicalPath": "GameData.enemies.*.dazeRecovery / EnemySnapshot.dazeRecoveryRate",
       "fieldClass": "required",
       "sourcePolicy": "nanoka",
-      "status": "needs-tl-research",
+      "status": "verified-from-nanoka",
       "nanokaEndpoint": "/{locale}/monster/{id}.json",
       "rawFieldPaths": [
         "/monster_info/*/stats/auto_recover_rate",
@@ -533,7 +587,7 @@
         "/monster_info/*/stats/destroy_recover_rate",
         "/monster_info/*/stats/destroy_recover_cd"
       ],
-      "transformRule": "map source recovery fields into fairy daze recovery rate/time semantics",
+      "transformRule": "auto_recover and stun recovery fields exist; map source recovery units into fairy dazeRecoveryRate/time semantics after variant mapping",
       "sampleEntity": "nanoka-monster-dullahan-30000",
       "rawAvailable": true,
       "promotable": false,
@@ -547,7 +601,7 @@
       "canonicalPath": "GameData.enemies.*.specialRules",
       "fieldClass": "optional",
       "sourcePolicy": "nanoka",
-      "status": "needs-tl-research",
+      "status": "verified-from-nanoka",
       "nanokaEndpoint": "/{locale}/monster/{id}.json",
       "rawFieldPaths": [
         "/desc",
@@ -555,7 +609,7 @@
         "/group_desc",
         "/monster_info/*/tag"
       ],
-      "transformRule": "raw text/tags can only promote through deterministic typed modifier templates",
+      "transformRule": "enemy description, card skill text, group description, and tags exist; formal specialRules require deterministic typed modifier templates before promotion",
       "sampleEntity": "nanoka-monster-dullahan-30000",
       "rawAvailable": true,
       "promotable": false,
@@ -588,7 +642,7 @@
       "canonicalPath": "GameData.wEngines.*.baseStatsByLevel / WEngineSnapshot",
       "fieldClass": "optional",
       "sourcePolicy": "nanoka",
-      "status": "needs-tl-research",
+      "status": "verified-from-nanoka",
       "nanokaEndpoint": "/{locale}/weapon/{id}.json",
       "rawFieldPaths": [
         "/base_property",
@@ -596,7 +650,7 @@
         "/level/*",
         "/stars/*"
       ],
-      "transformRule": "map base/rand properties, level rows, and star rows to cleaned W-Engine stat table",
+      "transformRule": "weapon detail exposes base_property, rand_property, level, and stars; map property ids/formats and level/star formulas before promotion",
       "sampleEntity": "nanoka-weapon-yixuan-signature-14137",
       "rawAvailable": true,
       "promotable": false,
@@ -609,14 +663,14 @@
       "canonicalPath": "GameData.wEngines.*.passiveModifiers",
       "fieldClass": "optional",
       "sourcePolicy": "nanoka",
-      "status": "needs-tl-research",
+      "status": "verified-from-nanoka",
       "nanokaEndpoint": "/{locale}/weapon/{id}.json",
       "rawFieldPaths": [
         "/talents",
         "/desc2",
         "/desc3"
       ],
-      "transformRule": "raw passive text/objects must be mapped to deterministic typed modifiers before promotion",
+      "transformRule": "weapon detail exposes talents for five refine levels and desc text; formal passiveModifiers require deterministic typed modifier templates before promotion",
       "sampleEntity": "nanoka-weapon-yixuan-signature-14137",
       "rawAvailable": true,
       "promotable": false,
@@ -648,13 +702,13 @@
       "canonicalPath": "GameData.driveDiscs.*.twoPieceModifiers/fourPieceModifiers",
       "fieldClass": "optional",
       "sourcePolicy": "nanoka",
-      "status": "needs-tl-research",
+      "status": "verified-from-nanoka",
       "nanokaEndpoint": "/{locale}/equipment/{id}.json",
       "rawFieldPaths": [
         "/desc2",
         "/desc4"
       ],
-      "transformRule": "desc2/desc4 are raw text; promotion requires deterministic templates producing formal modifiers",
+      "transformRule": "equipment detail and top-level equipment list expose desc2/desc4 in zh/en/ja/ko; formal twoPieceModifiers/fourPieceModifiers require deterministic typed modifier templates before promotion",
       "sampleEntity": "nanoka-equipment-woodpecker-31000",
       "rawAvailable": true,
       "promotable": false,
@@ -763,7 +817,7 @@
       "canonicalPath": "GameData.rules.anomalyThreshold / getAnomalyThreshold rank table",
       "fieldClass": "required",
       "sourcePolicy": "nanoka",
-      "status": "needs-tl-research",
+      "status": "verified-from-nanoka",
       "nanokaEndpoint": "/{locale}/monster/{id}.json or other nanoka config endpoint",
       "rawFieldPaths": [
         "/element_abnormal",
@@ -771,7 +825,7 @@
         "/monster_info/*/stats/*_buildup_res",
         "/monster_info/*/stats/*_buildup_curve"
       ],
-      "transformRule": "prove whether current rank/trigger threshold table is source-backed by nanoka or remains guide/runtime-owned",
+      "transformRule": "monster detail exposes candidate threshold/buildup fields; prove whether current rank/trigger threshold table is source-backed by nanoka or remains guide/runtime-owned",
       "sampleEntity": "nanoka-monster-dullahan-30000",
       "rawAvailable": true,
       "promotable": false,
@@ -816,15 +870,18 @@
       "canonicalPath": "GameData.rules.attributeMapping / frost/auric/resistance mappings",
       "fieldClass": "required",
       "sourcePolicy": "nanoka",
-      "status": "needs-tl-research",
+      "status": "verified-from-nanoka",
       "nanokaEndpoint": "/{locale}/character/{id}.json and /{locale}/monster/{id}.json or config endpoint",
       "rawFieldPaths": [
         "/special_element_type",
         "/monster_info/*/element",
         "/monster_info/*/stats/*_damage_res"
       ],
-      "transformRule": "map nanoka element ids and resistance fields to fairy attribute/resistance semantics",
+      "transformRule": "character element_type/special_element_type and monster element/resistance fields exist; map source enum ids into fairy attribute/resistance semantics before promotion",
       "sampleEntity": "nanoka-character-yixuan-1371",
+      "supportingSamples": [
+        "nanoka-monster-dullahan-30000"
+      ],
       "rawAvailable": true,
       "promotable": false,
       "blockedBy": [
@@ -849,17 +906,18 @@
     }
   ],
   "summary": {
-    "totalRows": 40,
-    "verifiedFromNanoka": 8,
-    "needsTlResearch": 24,
+    "totalRows": 41,
+    "verifiedFromNanoka": 25,
+    "needsTlResearch": 8,
     "needsOwnerResearch": 0,
     "deferred": 8,
-    "promotableNow": 7,
-    "notPromotableYet": 33
+    "promotableNow": 9,
+    "notPromotableYet": 32
   },
   "openResearchItems": [
     "source registry contract and content hash capture",
-    "agent and Bangboo panel normalization formulas",
+    "adapter source-ref emission and JSON pointer convention",
+    "agent promotion extra stats / final snapshot panel semantics",
     "agent stat unit mapping for crit/pen/anomaly/impact/adrenaline",
     "rupture rbl semantic mapping",
     "skill tag/damageType/hitCount mapping",
@@ -869,6 +927,7 @@
     "enemy monster_info variant mapping for cleaned/golden rows",
     "enemy level formula, resistance units, anomaly threshold mapping, and daze recovery semantics",
     "W-Engine stat/refine mapping",
-    "Drive Disc slot main stat and substat table source"
+    "Drive Disc slot main stat and substat table source",
+    "disorder formula and disorder daze-level source/config endpoint"
   ]
 }
