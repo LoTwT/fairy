@@ -22,13 +22,20 @@ Fairy is a ZZZ static snapshot damage calculator for 1-3 agents.
 - Current Mihoyo DA ingestion uses public JSON APIs plus Cheerio for embedded
   rich-text fragments; Playwright/browser rendering is discovery-only unless a
   new decision explicitly approves it.
+- Release workflow A3: npm publish success creates GitHub Release before
+  registry install smoke. Registry smoke remains a red post-publish consumer
+  check with 20 x 60s retry; if it fails, do not blindly rerun the same tag.
+  Verify npm versions, provenance, and fresh install/import/CLI smoke before
+  declaring release-ready.
+- Commit messages use Conventional Commits with release-visible semantics.
+  Ordinary test-only work stays `test:` and is skipped from release notes.
+  Golden-anchor or release-readiness contract additions use `feat(golden):` so
+  they enter CHANGELOG and GitHub Release notes.
 
 ## Current Phase
 
-V1 release gate preparation. lo-user dogfooding has passed 4/5 with zero
-unresolved B-Calc blockers; Product errata, release notes, and QA
-release-readiness review remain before any V1 tag. Current engineering entry
-points:
+V0.0.3 is shipped. V1.x golden consolidation is complete with 23 passed / 0
+deferred anchors and `releaseReady=true`. Current engineering entry points:
 
 - `docs/architecture/naming-policy.md`
 - `docs/architecture/monorepo-development.md`
