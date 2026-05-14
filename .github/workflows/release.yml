@@ -81,6 +81,7 @@ jobs:
       - run: pnpm --silent fairy:s3 | jq empty
 
       - name: Publish packages to npm with trusted publishing
+        id: publish
         run: |
           # pnpm -r publishes workspace packages in dependency order and
           # rewrites workspace:* dependencies to the release version.
@@ -89,7 +90,20 @@ jobs:
           # TLOG_CREATE_ENTRY_ERROR.
           pnpm -r publish --access public --no-git-checks
 
+      - name: Generate release notes
+        if: always() && steps.publish.outcome == 'success'
+        run: npx --yes git-cliff@2.13.1 --latest --strip header --output /tmp/release-notes.md
+
+      - name: Create GitHub Release
+        if: always() && steps.publish.outcome == 'success'
+        uses: softprops/action-gh-release@b4309332981a82ec1c5618f44dd2e27cc8bfbfda
+        with:
+          name: fairy v${{ steps.release.outputs.version }}
+          body_path: /tmp/release-notes.md
+          make_latest: true
+
       - name: Registry install smoke
+        if: always() && steps.publish.outcome == 'success'
         shell: bash
         env:
           VERSION: ${{ steps.release.outputs.version }}
@@ -99,31 +113,65 @@ jobs:
           cd "$TMP_DIR"
           npm init -y >/dev/null
 
-          # npm CDN propagation usually completes in 10-60s after publish
-          # but can tail into a few minutes. The first install attempt can
-          # race with `ETARGET notarget`. Retry within a bounded budget:
-          # 10 attempts x 30s delay = ~5 minutes total
-          # (9 sleeps x 30s + per-attempt install time).
-          #
-          # Note: hitting the cap means propagation timed out, NOT that the
-          # publish failed. Inspect `npm view <pkg>@${VERSION} version`
-          # out-of-band before rerunning the job - if the versions exist, the
-          # publish itself succeeded and only the smoke step needs a retry.
-          MAX_ATTEMPTS=10
-          DELAY=30
+          # npm CDN propagation usually completes in 10-60s after publish, but
+          # can tail into several minutes. The smoke is intentionally
+          # post-release: publish success is enough to create the GitHub
+          # Release, while a failed smoke keeps this workflow red so QA can
+          # distinguish propagation lag from a real install/runtime failure.
+          MAX_ATTEMPTS=20
+          DELAY=60
           ATTEMPT=1
-          until npm install "@randomplay/core@$VERSION" "@randomplay/data@$VERSION" "@randomplay/cli@$VERSION" >/dev/null 2>&1; do
+          PACKAGES=(
+            "@randomplay/core"
+            "@randomplay/data"
+            "@randomplay/cli"
+          )
+
+          while true; do
+            MISSING=()
+            for PACKAGE in "${PACKAGES[@]}"; do
+              if PACKAGE_VERSION="$(npm view "${PACKAGE}@${VERSION}" version 2>/dev/null)"; then
+                echo "npm registry has ${PACKAGE}@${PACKAGE_VERSION}"
+              else
+                MISSING+=("$PACKAGE")
+              fi
+            done
+
+            if [ "${#MISSING[@]}" -eq 0 ]; then
+              if npm install "@randomplay/core@$VERSION" "@randomplay/data@$VERSION" "@randomplay/cli@$VERSION" >/dev/null 2>&1; then
+                echo "npm install succeeded on attempt $ATTEMPT"
+                break
+              fi
+              echo "npm install attempt $ATTEMPT failed after all package versions were visible; retrying in case tarball propagation is lagging..."
+              rm -rf node_modules package-lock.json
+            else
+              echo "npm registry propagation attempt $ATTEMPT missing: ${MISSING[*]}"
+            fi
+
             if [ "$ATTEMPT" -ge "$MAX_ATTEMPTS" ]; then
-              echo "registry install smoke timed out after $MAX_ATTEMPTS attempts (~$((MAX_ATTEMPTS * DELAY))s). Publish may still have succeeded; verify with: npm view @randomplay/core@${VERSION} version && npm view @randomplay/data@${VERSION} version && npm view @randomplay/cli@${VERSION} version" >&2
-              # Final attempt without redirect so the real error surfaces in logs.
+              {
+                echo "### Registry install smoke failed"
+                echo ""
+                echo "- Version: ${VERSION}"
+                echo "- Attempts: ${MAX_ATTEMPTS}"
+                echo "- Delay: ${DELAY}s"
+                echo "- Missing packages on final attempt: ${MISSING[*]:-none}"
+                echo ""
+                echo "The publish step succeeded and the GitHub Release was already created. Treat this as a post-publish consumer smoke failure: verify npm package versions, provenance, and a fresh install before declaring release-ready."
+              } >> "$GITHUB_STEP_SUMMARY"
+              echo "registry install smoke timed out after $MAX_ATTEMPTS attempts (~$((MAX_ATTEMPTS * DELAY))s). Publish succeeded and GitHub Release creation already ran; verify with npm view/provenance/fresh install before declaring release-ready." >&2
+              echo "Final npm view diagnostics:" >&2
+              for PACKAGE in "${PACKAGES[@]}"; do
+                npm view "${PACKAGE}@${VERSION}" version || true
+              done
+              echo "Final npm install diagnostics:" >&2
               npm install "@randomplay/core@$VERSION" "@randomplay/data@$VERSION" "@randomplay/cli@$VERSION"
               exit 1
             fi
-            echo "npm install attempt $ATTEMPT failed (likely npm CDN propagation lag); waiting ${DELAY}s before retry..."
+            echo "waiting ${DELAY}s before retry..."
             sleep "$DELAY"
             ATTEMPT=$((ATTEMPT + 1))
           done
-          echo "npm install succeeded on attempt $ATTEMPT"
 
           node --input-type=module <<'NODE'
           import { calculate, parseBattleSnapshot } from '@randomplay/core'
@@ -143,13 +191,3 @@ jobs:
           ./node_modules/.bin/fairy calc warning-snapshot.json --lang en > warning-output.json 2> warning-stderr.txt
           jq empty warning-output.json
           grep -q "ERR-SRC-001" warning-stderr.txt
-
-      - name: Generate release notes
-        run: npx --yes git-cliff@2.13.1 --latest --strip header --output /tmp/release-notes.md
-
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@b4309332981a82ec1c5618f44dd2e27cc8bfbfda
-        with:
-          name: fairy v${{ steps.release.outputs.version }}
-          body_path: /tmp/release-notes.md
-          make_latest: true
