@@ -121,6 +121,10 @@ interface SegmentResult {
 }
 ```
 
+For V1.1 Bangboo attack segments, `actorId` uses a stable synthetic value such
+as `bangboo:penguinboo`. This preserves the V1 result shape while distinguishing
+Bangboo actor contribution from team-agent contribution.
+
 Multi-segment display totals are:
 
 ```ts

@@ -178,6 +178,87 @@ describe("BattleSnapshot schema", () => {
     expect(result.success).toBe(false)
   })
 
+  it("accepts explicit Bangboo attack segments", () => {
+    const result = battleSnapshotSchema.safeParse({
+      schemaVersion: "1.0.0",
+      gameVersion: "ZZZ-2.2",
+      ruleSetVersion: "rules-v0.1",
+      dataVersion: "data-v0.1.0",
+      sourceVersion: "source-v0.1.0",
+      team: [minimalAgent],
+      activeActor: { agentId: "yixuan" },
+      bangboo: {
+        bangbooId: "penguinboo",
+        level: 60,
+        panel: {
+          attack: 6198.0006,
+          maxHp: 3827.5423,
+          defense: 723.8011,
+          impact: 90,
+          critRate: 0.5,
+          critDamage: 1,
+          anomalyMastery: 120,
+        },
+      },
+      attackSegments: [
+        {
+          id: "penguinboo-active",
+          actor: { kind: "bangboo", bangbooId: "penguinboo" },
+          attribute: "ice",
+          tags: ["special"],
+          damageType: "regular",
+          multiplier: 4.62,
+          baseDazeMultiplier: 2.7,
+          anomalyContribution: { status: "frozen", buildup: 346 },
+        },
+      ],
+      enemy: {
+        level: 60,
+        rank: "boss",
+      },
+    })
+
+    expect(result.success).toBe(true)
+  })
+
+  it("rejects conflicting top-level Bangboo and team subordinate aliases", () => {
+    const result = battleSnapshotSchema.safeParse({
+      schemaVersion: "1.0.0",
+      gameVersion: "ZZZ-2.2",
+      ruleSetVersion: "rules-v0.1",
+      dataVersion: "data-v0.1.0",
+      sourceVersion: "source-v0.1.0",
+      team: [
+        {
+          ...minimalAgent,
+          subordinate: { kind: "bangboo", id: "sharkboo" },
+        },
+      ],
+      activeActor: { agentId: "yixuan" },
+      bangboo: {
+        bangbooId: "penguinboo",
+        panel: { attack: 6198.0006, maxHp: 3827.5423 },
+      },
+      attackSegments: [
+        {
+          id: "seg-1",
+          attribute: "auricInk",
+          tags: ["exSpecial"],
+          damageType: "sheer",
+        },
+      ],
+      enemy: {
+        level: 60,
+        rank: "boss",
+      },
+    })
+
+    expect(result.success).toBe(false)
+    expect(result.error?.issues.some(issue =>
+      issue.path.join(".") === "bangboo.bangbooId",
+    )).toBe(true)
+  })
+
   it("rejects legacy panel aliases outside migration", () => {
     const result = battleSnapshotSchema.safeParse({
       schemaVersion: "1.0.0",
@@ -506,6 +587,45 @@ describe("GameData schema", () => {
       ],
       agents: {},
       skills: {},
+      bangboos: {
+        penguinboo: {
+          id: "penguinboo",
+          label: { zh: "企鹅布", en: "Penguinboo" },
+          source,
+          baseStatsByLevel: {
+            "60": {
+              attack: 6198.0006,
+              maxHp: 3827.5423,
+              defense: 723.8011,
+              impact: 90,
+              critRate: 0.5,
+              critDamage: 1,
+              anomalyMastery: 120,
+            },
+          },
+          skillIds: ["penguinboo-active"],
+        },
+      },
+      bangbooSkills: {
+        "penguinboo-active": {
+          id: "penguinboo-active",
+          bangbooId: "penguinboo",
+          label: { zh: "主动技能：冰刀舞" },
+          source,
+          tags: ["special"],
+          segments: [
+            {
+              id: "penguinboo-active-hit",
+              levelKey: "default",
+              multiplierByLevel: { "1": 4.62 },
+              dazeMultiplierByLevel: { "1": 2.7 },
+              damageType: "regular",
+              defaultTags: ["special"],
+              source,
+            },
+          ],
+        },
+      },
       wEngines: {},
       driveDiscs: {},
       enemies: {},
@@ -541,6 +661,8 @@ describe("GameData schema", () => {
       ],
       agents: {},
       skills: {},
+      bangboos: {},
+      bangbooSkills: {},
       wEngines: {},
       driveDiscs: {},
       enemies: {},

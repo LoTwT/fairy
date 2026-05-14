@@ -2,6 +2,7 @@ import type {
   AgentSnapshot,
   AnomalyStatus,
   AttackSegment,
+  BangbooSnapshot,
   BattleSnapshot,
   CalcSummary,
   BucketContributor,
@@ -171,8 +172,8 @@ function calculateSegment(
   const damageBonusValue = getDamageBonus(formulaActor.actor, segment)
     + sumBucketContributors(modifierEvaluation.contributorsByBucket.get("damageBonusZone"))
   const damageBonusMultiplier = clamp(1 + damageBonusValue, 0, 6)
-  const critRate = clamp(activeActor.panel.critRate ?? 0, 0, 1)
-  const critDamageBonus = clamp(activeActor.panel.critDamage ?? 0, 0, 5)
+  const critRate = clamp(formulaActor.actor.panel.critRate ?? 0, 0, 1)
+  const critDamageBonus = clamp(formulaActor.actor.panel.critDamage ?? 0, 0, 5)
   const critMultiplier = getCritMultiplier(snapshot, segment, critRate, critDamageBonus)
   const resistance = getResistance(snapshot.enemy, segment.attribute)
   const resistanceReduction = sumBucketContributors(modifierEvaluation.contributorsByBucket.get("resistanceZone"))
@@ -556,7 +557,7 @@ function calculateSegment(
   return {
     result: {
       id: segment.id,
-      actorId: segment.actorId ?? activeActor.agentId,
+      actorId: formulaActor.actor.agentId,
       attribute: segment.attribute,
       tags: segment.tags,
       damageType,
@@ -595,6 +596,52 @@ function getFormulaActor(
   segment: AttackSegment,
   index: number,
 ): FormulaActorContext {
+  if (segment.actor?.kind === "bangboo") {
+    const bangboo = snapshot.bangboo
+    if (bangboo === undefined) {
+      return {
+        actor: activeActor,
+        trace: [],
+      }
+    }
+
+    const bangbooActor = bangbooFormulaActor(bangboo)
+    return {
+      actor: bangbooActor,
+      trace: [
+        makeTraceEvent({
+          kind: "formula",
+          path: `attackSegments[${index}].actor`,
+          inputs: {
+            actorKind: "bangboo",
+            bangbooId: bangboo.bangbooId,
+            source: bangboo.fieldProvenance,
+          },
+          formula: "formulaActor = snapshot.bangboo for explicit Bangboo attack segments",
+          rawValue: bangbooActor.agentId,
+          displayValue: "bangbooActor",
+        }),
+      ],
+    }
+  }
+
+  if (segment.actor?.kind === "agent") {
+    const actorAgentId = segment.actor.agentId
+    const segmentActor = snapshot.team.find(agent => agent.agentId === actorAgentId)
+    return {
+      actor: segmentActor ?? activeActor,
+      trace: [],
+    }
+  }
+
+  if (segment.actorId !== undefined) {
+    const segmentActor = snapshot.team.find(agent => agent.agentId === segment.actorId)
+    return {
+      actor: segmentActor ?? activeActor,
+      trace: [],
+    }
+  }
+
   if (segment.damageType !== "anomaly" && segment.damageType !== "disorder") {
     return {
       actor: activeActor,
@@ -700,6 +747,27 @@ function getFormulaActor(
   return {
     actor: formulaActor.actor,
     trace,
+  }
+}
+
+function bangbooFormulaActor(bangboo: BangbooSnapshot): AgentSnapshot {
+  const panel = bangboo.panel ?? {}
+  return {
+    agentId: `bangboo:${bangboo.bangbooId}`,
+    level: bangboo.level ?? 60,
+    agentSpecialty: "support",
+    attribute: "physical",
+    panel: {
+      attack: panel.attack ?? 0,
+      maxHp: panel.maxHp ?? 0,
+      ...(panel.defense === undefined ? {} : { defense: panel.defense }),
+      ...(panel.impact === undefined ? {} : { impact: panel.impact }),
+      ...(panel.critRate === undefined ? {} : { critRate: panel.critRate }),
+      ...(panel.critDamage === undefined ? {} : { critDamage: panel.critDamage }),
+      ...(panel.anomalyMastery === undefined ? {} : { anomalyMastery: panel.anomalyMastery }),
+    },
+    ...(bangboo.fieldProvenance === undefined ? {} : { fieldProvenance: bangboo.fieldProvenance }),
+    ...(bangboo.overrides === undefined ? {} : { overrides: bangboo.overrides }),
   }
 }
 
@@ -1513,6 +1581,9 @@ function getSummaryDamageType(
 }
 
 function getUnsupportedFeatureWarnings(snapshot: BattleSnapshot): Diagnostic[] {
+  if (snapshot.bangboo !== undefined)
+    return []
+
   const warnings: Diagnostic[] = []
   snapshot.team.forEach((agent, index) => {
     if (agent.subordinate !== undefined) {
@@ -1572,21 +1643,50 @@ function getModifierInactiveReason(
   return undefined
 }
 
+type SegmentTargetActor =
+  | { kind: "agent"; actor: AgentSnapshot }
+  | { kind: "bangboo"; actor: BangbooSnapshot }
+
+function getSegmentTargetActor(
+  snapshot: BattleSnapshot,
+  activeActor: AgentSnapshot,
+  segment: AttackSegment,
+): SegmentTargetActor {
+  if (segment.actor?.kind === "bangboo" && snapshot.bangboo !== undefined) {
+    return {
+      kind: "bangboo",
+      actor: snapshot.bangboo,
+    }
+  }
+
+  const agentId = segment.actor?.kind === "agent"
+    ? segment.actor.agentId
+    : segment.actorId
+  const actor = agentId === undefined
+    ? activeActor
+    : snapshot.team.find(agent => agent.agentId === agentId) ?? activeActor
+
+  return {
+    kind: "agent",
+    actor,
+  }
+}
+
 function doesTargetMatch(
   selector: TargetSelector,
   snapshot: BattleSnapshot,
   activeActor: AgentSnapshot,
   segment: AttackSegment,
 ): boolean {
-  const actorId = segment.actorId ?? activeActor.agentId
+  const segmentActor = getSegmentTargetActor(snapshot, activeActor, segment)
   switch (selector.kind) {
     case "self":
     case "activeActor":
-      return actorId === activeActor.agentId
+      return segmentActor.kind === "agent" && segmentActor.actor.agentId === activeActor.agentId
     case "agent":
-      return actorId === selector.agentId
+      return segmentActor.kind === "agent" && segmentActor.actor.agentId === selector.agentId
     case "team":
-      return selector.includeSelf === true || actorId !== activeActor.agentId
+      return segmentActor.kind === "agent" && (selector.includeSelf === true || segmentActor.actor.agentId !== activeActor.agentId)
     case "enemy":
     case "segment":
     case "global":
@@ -1611,6 +1711,10 @@ function getTargetValue(
       return snapshot.team
     case "self":
     case "activeActor":
+      {
+        const segmentActor = getSegmentTargetActor(snapshot, activeActor, segment)
+        return segmentActor.kind === "agent" ? segmentActor.actor : undefined
+      }
     case "global":
       return activeActor
   }

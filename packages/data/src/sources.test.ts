@@ -98,6 +98,20 @@ describe("@randomplay/data source discovery skeleton", () => {
       "agents=1",
     ],
     [
+      "Bangboo row",
+      (gameData: ReturnType<typeof createDiscoveryGameData>) => {
+        gameData.bangboos.handWrittenBangboo = {} as (typeof gameData.bangboos)[string]
+      },
+      "bangboos=1",
+    ],
+    [
+      "Bangboo skill row",
+      (gameData: ReturnType<typeof createDiscoveryGameData>) => {
+        gameData.bangbooSkills.handWrittenBangbooSkill = {} as (typeof gameData.bangbooSkills)[string]
+      },
+      "bangbooSkills=1",
+    ],
+    [
       "rule table",
       (gameData: ReturnType<typeof createDiscoveryGameData>) => {
         gameData.rules.manualRule = { multiplier: 1.2 }

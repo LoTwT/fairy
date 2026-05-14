@@ -29,7 +29,7 @@ describe("V1 golden true-data replay baseline", () => {
     )
   })
 
-  it("tracks the 23-anchor executable gate with no deferred anchors", () => {
+  it("tracks the 24-anchor executable gate with no deferred anchors", () => {
     const report = readJson<{
       v1AnchorIds: string[]
       deferredAnchorIds: string[]
@@ -49,7 +49,7 @@ describe("V1 golden true-data replay baseline", () => {
       }>
     }>(replayReportPath)
 
-    expect(report.v1AnchorIds).toHaveLength(23)
+    expect(report.v1AnchorIds).toHaveLength(24)
     expect(report.v1AnchorIds).toEqual([
       "G01",
       "G02",
@@ -74,11 +74,12 @@ describe("V1 golden true-data replay baseline", () => {
       "G21",
       "G22",
       "G23",
+      "G24",
     ])
     expect(report.deferredAnchorIds).toEqual([])
     expect(report.summary).toMatchObject({
-      v1AnchorCount: 23,
-      passed: 23,
+      v1AnchorCount: 24,
+      passed: 24,
       pendingHarness: 0,
       blocked: 0,
       deferred: 0,
@@ -116,12 +117,18 @@ describe("V1 golden true-data replay baseline", () => {
     const g23 = report.anchors.find(anchor => anchor.id === "G23")
     expect(g23?.status).toBe("passed")
     expect(g23?.notes.join("\n")).toContain("skill levels 1-16")
+    const g24 = report.anchors.find(anchor => anchor.id === "G24")
+    expect(g24?.status).toBe("passed")
+    expect(g24?.notes.join("\n")).toContain("6198.0006 × 4.62")
+    expect(g24?.notes.join("\n")).toContain("Excel Path X has no element field")
   })
 
-  it("extracts only the minimal V1 agent rows and source text candidates", () => {
+  it("extracts the minimal V1 agent rows, Bangboo rows, and source text candidates", () => {
     const candidates = readJson<{
       policy: { enemyPolicy: string }
       agents: Record<string, { sourceKey: string; attribute: string; agentSpecialty: string }>
+      bangboos: Record<string, { sourceKey: string; baseStatsByLevel: { "60": { attack: number; impact: number; anomalyMastery: number } } }>
+      bangbooSkills: Record<string, { segments: Array<{ multiplier: number; dazeMultiplier: number; anomalyBuildup: number }> }>
       effectCandidates: Array<{
         effectId: string
         releaseGateRequired: boolean
@@ -146,6 +153,22 @@ describe("V1 golden true-data replay baseline", () => {
       sourceKey: "1221",
       attribute: "electric",
       agentSpecialty: "anomaly",
+    })
+    expect(Object.keys(candidates.bangboos).sort()).toEqual(["penguinboo"])
+    expect(candidates.bangboos.penguinboo).toMatchObject({
+      sourceKey: "53001",
+      baseStatsByLevel: {
+        "60": {
+          attack: 6198.0006,
+          impact: 90,
+          anomalyMastery: 120,
+        },
+      },
+    })
+    expect(candidates.bangbooSkills["penguinboo-active"]?.segments[0]).toMatchObject({
+      multiplier: 4.62,
+      dazeMultiplier: 2.7,
+      anomalyBuildup: 346,
     })
     expect(candidates.policy.enemyPolicy).toContain("No Excel enemy rows are read")
 

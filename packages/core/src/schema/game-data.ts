@@ -65,6 +65,40 @@ export const skillDataSchema = z
   })
   .strict()
 
+export const bangbooPanelDataSchema = z
+  .object({
+    attack: z.number().finite().optional(),
+    maxHp: z.number().finite().optional(),
+    defense: z.number().finite().optional(),
+    impact: z.number().finite().optional(),
+    critRate: z.number().finite().optional(),
+    critDamage: z.number().finite().optional(),
+    anomalyMastery: z.number().finite().optional(),
+  })
+  .strict()
+
+export const bangbooDataSchema = z
+  .object({
+    id: z.string().min(1),
+    label: localizedLabelSchema,
+    source: sourceRefSchema,
+    baseStatsByLevel: z.record(z.string(), bangbooPanelDataSchema).optional(),
+    skillIds: z.array(z.string().min(1)),
+    sourceAliases: z.array(z.string().min(1)).optional(),
+  })
+  .strict()
+
+export const bangbooSkillDataSchema = z
+  .object({
+    id: z.string().min(1),
+    bangbooId: z.string().min(1),
+    label: localizedLabelSchema,
+    source: sourceRefSchema,
+    tags: z.array(attackTagSchema),
+    segments: z.array(skillSegmentDataSchema),
+  })
+  .strict()
+
 export const wEngineDataSchema = z
   .object({
     id: z.string().min(1),
@@ -134,6 +168,8 @@ export const gameDataSchema = z
     sources: z.array(sourceDocumentSchema),
     agents: z.record(z.string(), agentDataSchema),
     skills: z.record(z.string(), skillDataSchema),
+    bangboos: z.record(z.string(), bangbooDataSchema),
+    bangbooSkills: z.record(z.string(), bangbooSkillDataSchema),
     wEngines: z.record(z.string(), wEngineDataSchema),
     driveDiscs: z.record(z.string(), driveDiscDataSchema),
     enemies: z.record(z.string(), enemyDataSchema),
@@ -146,6 +182,8 @@ export const gameDataSchema = z
 
 export type AgentData = z.infer<typeof agentDataSchema>
 export type SkillData = z.infer<typeof skillDataSchema>
+export type BangbooData = z.infer<typeof bangbooDataSchema>
+export type BangbooSkillData = z.infer<typeof bangbooSkillDataSchema>
 export type WEngineData = z.infer<typeof wEngineDataSchema>
 export type DriveDiscData = z.infer<typeof driveDiscDataSchema>
 export type ResoniumData = z.infer<typeof resoniumDataSchema>

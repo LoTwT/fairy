@@ -62,6 +62,261 @@ describe("calculate", () => {
     expect(result.summary.lanes.fixed).toBeUndefined()
   })
 
+  it("calculates explicit Bangboo attack segments with Bangboo panel values", () => {
+    const result = calculate({
+      ...baseSnapshot,
+      bangboo: {
+        bangbooId: "penguinboo",
+        level: 60,
+        panel: {
+          attack: 6198.0006,
+          maxHp: 3827.5423,
+          defense: 723.8011,
+          impact: 90,
+          critRate: 0.5,
+          critDamage: 1,
+          anomalyMastery: 120,
+        },
+      },
+      attackSegments: [
+        {
+          id: "penguinboo-active",
+          actor: { kind: "bangboo", bangbooId: "penguinboo" },
+          attribute: "ice",
+          tags: ["special"],
+          damageType: "regular",
+          multiplier: 4.62,
+          baseDazeMultiplier: 2.7,
+          anomalyContribution: { status: "frozen", buildup: 346 },
+          source,
+        },
+      ],
+      enemy: {
+        level: 60,
+        rank: "boss",
+        resistance: { ice: 0 },
+        anomalyBuildupResistance: { ice: 0 },
+      },
+    })
+
+    const segment = result.attackSegments[0]
+    expect(segment?.actorId).toBe("bangboo:penguinboo")
+    expect(segment?.baseDamage).toBeCloseTo(28634.762772, 6)
+    expect(segment?.baseDaze).toBeCloseTo(243, 6)
+    expect(segment?.dazeValue).toBeCloseTo(243, 6)
+    expect(segment?.anomalyBuildup).toBeCloseTo(415.2, 6)
+    expect(segment?.rawDamage).toBeCloseTo(Number(segment?.nonCritDamage) * 1.5, 6)
+    expect(result.trace.some(event => event.displayValue === "bangbooActor")).toBe(true)
+  })
+
+  it("does not apply active agent modifiers to Bangboo attack segments", () => {
+    const bangbooSnapshot = {
+      ...baseSnapshot,
+      bangboo: {
+        bangbooId: "penguinboo",
+        level: 60,
+        panel: {
+          attack: 1000,
+          maxHp: 1000,
+          impact: 100,
+          critRate: 0,
+          critDamage: 0,
+          anomalyMastery: 100,
+        },
+      },
+      attackSegments: [
+        {
+          id: "penguinboo-active",
+          actor: { kind: "bangboo" as const, bangbooId: "penguinboo" },
+          attribute: "ice" as const,
+          tags: ["special" as const],
+          damageType: "regular" as const,
+          multiplier: 1,
+          source,
+        },
+      ],
+      enemy: {
+        level: 60,
+        rank: "boss" as const,
+        resistance: { ice: 0 },
+      },
+    }
+    const baseline = calculate(bangbooSnapshot)
+    const result = calculate({
+      ...bangbooSnapshot,
+      modifiers: [
+        {
+          id: "active-agent-bonus",
+          handlerId: "damage-bonus",
+          params: { value: 1 },
+          appliesTo: { kind: "activeActor" },
+          source,
+        },
+        {
+          id: "self-bonus",
+          handlerId: "damage-bonus",
+          params: { value: 1 },
+          appliesTo: { kind: "self" },
+          source,
+        },
+        {
+          id: "specific-agent-bonus",
+          handlerId: "damage-bonus",
+          params: { value: 1 },
+          appliesTo: { kind: "agent", agentId: "yixuan" },
+          source,
+        },
+        {
+          id: "team-bonus",
+          handlerId: "damage-bonus",
+          params: { value: 1 },
+          appliesTo: { kind: "team", includeSelf: true },
+          source,
+        },
+      ],
+    })
+
+    expect(result.attackSegments[0]?.rawDamage).toBeCloseTo(Number(baseline.attackSegments[0]?.rawDamage), 6)
+    expect(result.modifiers.map(modifier => [modifier.id, modifier.active])).toEqual([
+      ["active-agent-bonus", false],
+      ["self-bonus", false],
+      ["specific-agent-bonus", false],
+      ["team-bonus", false],
+    ])
+  })
+
+  it("still applies enemy, global, and segment modifiers to Bangboo attack segments", () => {
+    const result = calculate({
+      ...baseSnapshot,
+      bangboo: {
+        bangbooId: "penguinboo",
+        level: 60,
+        panel: {
+          attack: 1000,
+          maxHp: 1000,
+          impact: 100,
+          critRate: 0,
+          critDamage: 0,
+          anomalyMastery: 100,
+        },
+      },
+      attackSegments: [
+        {
+          id: "penguinboo-active",
+          actor: { kind: "bangboo" },
+          attribute: "ice",
+          tags: ["special"],
+          damageType: "regular",
+          multiplier: 1,
+          source,
+        },
+      ],
+      enemy: {
+        level: 60,
+        rank: "boss",
+        resistance: { ice: 0 },
+      },
+      modifiers: [
+        {
+          id: "enemy-bonus",
+          handlerId: "damage-bonus",
+          params: { value: 0.2 },
+          appliesTo: { kind: "enemy" },
+          source,
+        },
+        {
+          id: "global-bonus",
+          handlerId: "damage-bonus",
+          params: { value: 0.3 },
+          appliesTo: { kind: "global" },
+          source,
+        },
+        {
+          id: "segment-bonus",
+          handlerId: "damage-bonus",
+          params: { value: 0.4 },
+          appliesTo: { kind: "segment" },
+          source,
+        },
+      ],
+    })
+
+    expect(result.modifiers.every(modifier => modifier.active)).toBe(true)
+    expect(result.buckets.find(bucket => bucket.bucketId === "damageBonusZone")?.effectiveMultiplier).toBeCloseTo(1.9, 6)
+  })
+
+  it("targets explicit agent attack segment actors instead of falling back to activeActor", () => {
+    const result = calculate({
+      ...baseSnapshot,
+      team: [
+        baseSnapshot.team[0]!,
+        {
+          agentId: "nicole",
+          level: 60,
+          agentSpecialty: "support",
+          attribute: "ether",
+          panel: {
+            attack: 2000,
+            maxHp: 10000,
+            impact: 80,
+            critRate: 0,
+            critDamage: 0,
+          },
+        },
+      ],
+      attackSegments: [
+        {
+          id: "nicole-segment",
+          actor: { kind: "agent", agentId: "nicole" },
+          attribute: "ether",
+          tags: ["special"],
+          damageType: "regular",
+          multiplier: 1,
+          source,
+        },
+      ],
+      modifiers: [
+        {
+          id: "active-agent-bonus",
+          handlerId: "damage-bonus",
+          params: { value: 1 },
+          appliesTo: { kind: "activeActor" },
+          source,
+        },
+        {
+          id: "nicole-bonus",
+          handlerId: "damage-bonus",
+          params: { value: 0.5 },
+          appliesTo: { kind: "agent", agentId: "nicole" },
+          source,
+        },
+        {
+          id: "other-agent-bonus",
+          handlerId: "damage-bonus",
+          params: { value: 1 },
+          appliesTo: { kind: "agent", agentId: "yixuan" },
+          source,
+        },
+        {
+          id: "off-field-team-bonus",
+          handlerId: "damage-bonus",
+          params: { value: 0.25 },
+          appliesTo: { kind: "team" },
+          source,
+        },
+      ],
+    })
+
+    expect(result.attackSegments[0]?.actorId).toBe("nicole")
+    expect(result.modifiers.map(modifier => [modifier.id, modifier.active])).toEqual([
+      ["active-agent-bonus", false],
+      ["nicole-bonus", true],
+      ["other-agent-bonus", false],
+      ["off-field-team-bonus", true],
+    ])
+    expect(result.buckets.find(bucket => bucket.bucketId === "damageBonusZone")?.effectiveMultiplier).toBeCloseTo(1.75, 6)
+  })
+
   it("shows the corrupted shield sheer damage defense skip ratio", () => {
     const regular = calculate({
       ...baseSnapshot,

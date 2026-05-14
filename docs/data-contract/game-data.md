@@ -36,6 +36,8 @@ interface GameData {
 
   agents: Record<string, AgentData>
   skills: Record<string, SkillData>
+  bangboos: Record<string, BangbooData>
+  bangbooSkills: Record<string, BangbooSkillData>
   wEngines: Record<string, WEngineData>
   driveDiscs: Record<string, DriveDiscData>
   enemies: Record<string, EnemyData>
@@ -128,7 +130,43 @@ Skill data can provide default segments. `BattleSnapshot.attackSegments[]` still
 remains the executable calculation input because the user may override segment
 state, target, tags, distance decay, or manual scenario fields.
 
-## 6. Equipment And Sources
+## 6. Bangboos
+
+```ts
+interface BangbooData {
+  id: string
+  label: LocalizedLabel
+  source: SourceRef
+  baseStatsByLevel?: LevelTable<BangbooPanelStats>
+  skillIds: string[]
+  sourceAliases?: string[]
+}
+
+interface BangbooSkillData {
+  id: string
+  bangbooId: string
+  label: LocalizedLabel
+  source: SourceRef
+  tags: AttackTag[]
+  segments: SkillSegmentData[]
+}
+
+interface BangbooPanelStats {
+  attack?: number
+  maxHp?: number
+  defense?: number
+  impact?: number
+  critRate?: number
+  critDamage?: number
+  anomalyMastery?: number
+}
+```
+
+V1.1 Path X imports numeric Bangboo panel and skill values from Excel. It does
+not publish Bangboo passive/team-buff modifiers until source-backed effect text
+and activation wording are available.
+
+## 7. Equipment And Sources
 
 ```ts
 interface WEngineData {
@@ -164,7 +202,7 @@ V1 needs Resonium only when it affects damage, daze, anomaly, or recovery
 calculations. Lost Void submodules are out of bilingual scope unless a data
 source requires a stable internal key.
 
-## 7. Enemies
+## 8. Enemies
 
 ```ts
 interface EnemyData {
@@ -185,7 +223,7 @@ Enemy presets may be incomplete outside golden-anchor coverage. Missing required
 fields must be a data validation error or calculation error, not a silent
 fallback.
 
-## 8. Rule Tables
+## 9. Rule Tables
 
 ```ts
 interface RuleTables {
@@ -202,7 +240,7 @@ interface RuleTables {
 Rule tables carry `source` and `ruleSetVersion`. Numeric game data can have its
 own `dataVersion`; formula behavior is controlled by `ruleSetVersion`.
 
-## 9. Aliases And Migration
+## 10. Aliases And Migration
 
 ```ts
 interface SourceAliasTable {

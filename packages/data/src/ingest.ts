@@ -21,6 +21,8 @@ export function createEmptyGameData(
     sources: [...options.sources],
     agents: {},
     skills: {},
+    bangboos: {},
+    bangbooSkills: {},
     wEngines: {},
     driveDiscs: {},
     enemies: {},
@@ -39,6 +41,8 @@ export function assertDiscoveryOnlyGameData(gameData: GameData): void {
   const formalRecordCounts = {
     agents: Object.keys(gameData.agents).length,
     skills: Object.keys(gameData.skills).length,
+    bangboos: Object.keys(gameData.bangboos).length,
+    bangbooSkills: Object.keys(gameData.bangbooSkills).length,
     wEngines: Object.keys(gameData.wEngines).length,
     driveDiscs: Object.keys(gameData.driveDiscs).length,
     enemies: Object.keys(gameData.enemies).length,

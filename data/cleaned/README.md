@@ -17,7 +17,7 @@ Rules:
 Current generated artifacts:
 
 - `audit/v1-agent-source-candidates.json` — minimal Excel-derived source
-  candidates for V1 team-modifier replay.
+  candidates for V1 team-modifier replay and V1.1 Bangboo numeric replay.
 - `audit/nicole.acceptance.json` and `audit/yanagi.acceptance.json` —
   lo-user manual acceptance records for G22/G23 source-text mappings.
 - `audit/mihoyo-buhflipexplode.source-conflicts.json` — manual audit
@@ -25,3 +25,4 @@ Current generated artifacts:
   buff source conflicts, preferring buhflipexplode after nanoka lookup while
   retaining Mihoyo source trace.
 - `golden/v1-replay-report.json` — source-backed V1 golden replay report.
+  The current report includes the V1.1 G24 Penguinboo numeric anchor.
