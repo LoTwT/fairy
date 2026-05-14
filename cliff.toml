@@ -24,6 +24,11 @@ filter_unconventional = false
 filter_commits = false
 tag_pattern = "v[0-9]+\\.[0-9]+\\.[0-9]+"
 commit_parsers = [
+  { message = "^feat\\(golden\\)", group = "Golden Anchors" },
+  # Historical compatibility for v0.0.3 anchors that landed before the
+  # `feat(golden):` convention was documented.
+  { message = "^feat: add G(13|19) ", group = "Golden Anchors" },
+  { message = "^test: add G(18|20) ", group = "Golden Anchors" },
   { message = "^feat",     group = "Added" },
   { message = "^fix",      group = "Fixed" },
   { message = "^docs",     group = "Documentation" },

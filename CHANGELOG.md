@@ -4,14 +4,16 @@ All notable changes to Fairy are documented in this file.
 
 ## 0.0.3 - 2026-05-14
 
-### Added
-
-- Add G13 anomaly threshold composition (#42)
-- Add G19 daze recovery anchor (#43)
-
 ### Changed
 
 - Normalize release housekeeping (#40)
+
+### Golden Anchors
+
+- Add G18 part-break golden anchor (#41)
+- Add G13 anomaly threshold composition (#42)
+- Add G19 daze recovery anchor (#43)
+- Add G20 daze recovery anchor (#44)
 
 ## 0.0.2 - 2026-05-13
 
