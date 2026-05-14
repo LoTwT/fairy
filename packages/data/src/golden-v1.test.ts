@@ -29,7 +29,7 @@ describe("V1 golden true-data replay baseline", () => {
     )
   })
 
-  it("tracks the 25-anchor executable gate with no deferred anchors", () => {
+  it("tracks the 26-anchor executable gate with no deferred anchors", () => {
     const report = readJson<{
       v1AnchorIds: string[]
       deferredAnchorIds: string[]
@@ -49,7 +49,7 @@ describe("V1 golden true-data replay baseline", () => {
       }>
     }>(replayReportPath)
 
-    expect(report.v1AnchorIds).toHaveLength(25)
+    expect(report.v1AnchorIds).toHaveLength(26)
     expect(report.v1AnchorIds).toEqual([
       "G01",
       "G02",
@@ -76,11 +76,12 @@ describe("V1 golden true-data replay baseline", () => {
       "G23",
       "G24",
       "G25",
+      "G26",
     ])
     expect(report.deferredAnchorIds).toEqual([])
     expect(report.summary).toMatchObject({
-      v1AnchorCount: 25,
-      passed: 25,
+      v1AnchorCount: 26,
+      passed: 26,
       pendingHarness: 0,
       blocked: 0,
       deferred: 0,
@@ -126,6 +127,10 @@ describe("V1 golden true-data replay baseline", () => {
     expect(g25?.status).toBe("passed")
     expect(g25?.notes.join("\n")).toContain("8057.0996 × 3.84")
     expect(g25?.notes.join("\n")).toContain("138.6")
+    const g26 = report.anchors.find(anchor => anchor.id === "G26")
+    expect(g26?.status).toBe("passed")
+    expect(g26?.notes.join("\n")).toContain("8057.0996 × 5.12")
+    expect(g26?.notes.join("\n")).toContain("316.8")
   })
 
   it("extracts the minimal V1 agent rows, Bangboo rows, and source text candidates", () => {
@@ -159,7 +164,7 @@ describe("V1 golden true-data replay baseline", () => {
       attribute: "electric",
       agentSpecialty: "anomaly",
     })
-    expect(Object.keys(candidates.bangboos).sort()).toEqual(["penguinboo", "sharkboo"])
+    expect(Object.keys(candidates.bangboos).sort()).toEqual(["penguinboo", "plugboo", "sharkboo"])
     expect(candidates.bangboos.penguinboo).toMatchObject({
       sourceKey: "53001",
       baseStatsByLevel: {
@@ -189,6 +194,21 @@ describe("V1 golden true-data replay baseline", () => {
       multiplier: 3.84,
       dazeMultiplier: 1.4,
       anomalyBuildup: 180,
+    })
+    expect(candidates.bangboos.plugboo).toMatchObject({
+      sourceKey: "54008",
+      baseStatsByLevel: {
+        "60": {
+          attack: 8057.0996,
+          impact: 99,
+          anomalyMastery: 132,
+        },
+      },
+    })
+    expect(candidates.bangbooSkills["plugboo-active"]?.segments[0]).toMatchObject({
+      multiplier: 5.12,
+      dazeMultiplier: 1.87,
+      anomalyBuildup: 240,
     })
     expect(candidates.policy.enemyPolicy).toContain("No Excel enemy rows are read")
 

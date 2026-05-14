@@ -64,6 +64,7 @@ const v1AnchorIds = [
   "G23",
   "G24",
   "G25",
+  "G26",
 ] as const
 
 const deferredAnchorIds = [] as const
@@ -109,6 +110,14 @@ const bangbooSpecs = {
     attrRange: "邦布属性!A24:T24",
     activeRange: "邦布技能!A17:H17",
     chainRange: "邦布技能!A18:H18",
+  },
+  plugboo: {
+    excelId: 54008,
+    zh: "插头布",
+    en: "Plugboo",
+    attrRange: "邦布属性!A18:T18",
+    activeRange: "邦布技能!A29:H29",
+    chainRange: "邦布技能!A30:H30",
   },
 } as const
 
@@ -741,7 +750,7 @@ function buildCandidates(generatedAt: string) {
     generatedAt,
     policy: {
       scope:
-        "Minimal reader output for executable V1/V1.1 replay. It extracts Yixuan/Nicole/Yanagi identity and calculation-relevant source text candidates plus Penguinboo/Sharkboo numeric Bangboo rows for G24/G25.",
+        "Minimal reader output for executable V1/V1.1 replay. It extracts Yixuan/Nicole/Yanagi identity and calculation-relevant source text candidates plus Penguinboo/Sharkboo/Plugboo numeric Bangboo rows for G24-G26.",
       formalDataPolicy:
         "Candidates are not trusted cleaned modifiers. Effects with trustStatus=requiresManualAcceptance must emit ERR-DAT-005 until an accepted record exists.",
       enemyPolicy:
@@ -1985,6 +1994,53 @@ function buildReplayReport(generatedAt: string, candidates = buildCandidates(gen
     ]))
   }
 
+  {
+    const plugboo = candidates.bangboos.plugboo as {
+      sourceRefs: Array<Record<string, string>>
+      baseStatsByLevel: { "60": { attack: number; impact: number; anomalyMastery: number } }
+    }
+    const activeSkill = candidates.bangbooSkills["plugboo-active"] as {
+      sourceRefs: Array<Record<string, string>>
+      segments: Array<{ multiplier: number; dazeMultiplier: number; anomalyBuildup: number }>
+    }
+    const skillSegment = activeSkill.segments[0]
+    if (skillSegment === undefined)
+      throw new Error("G26 missing Plugboo active skill segment")
+
+    const result = calculate({
+      ...snapshot,
+      bangboo: bangbooSnapshot(candidates, "plugboo"),
+      attackSegments: [
+        bangbooSkillSegment(candidates, "plugboo-active", activeSkill.sourceRefs[0]!),
+      ],
+      enemy: {
+        level: 60,
+        rank: "boss",
+        resistance: { ice: 0 },
+        anomalyBuildupResistance: { ice: 0 },
+      },
+    })
+    const segment = result.attackSegments[0]
+    assertClose(segment?.baseDamage, 41252.349952, 0.000001, "G26 Plugboo active base damage")
+    assertClose(segment?.baseDaze, 185.13, 0.000001, "G26 Plugboo active base daze")
+    assertClose(segment?.dazeValue, 185.13, 0.000001, "G26 Plugboo active daze value")
+    assertClose(segment?.anomalyBuildup, 316.8, 0.000001, "G26 Plugboo active anomaly buildup")
+    assertClose(segment?.rawDamage, Number(segment?.nonCritDamage) * 1.5, 0.000001, "G26 Plugboo crit expectation")
+    assertClose(plugboo.baseStatsByLevel["60"].attack * skillSegment.multiplier, 41252.349952, 0.000001, "G26 source attack x multiplier")
+    assertClose(plugboo.baseStatsByLevel["60"].impact * skillSegment.dazeMultiplier, 185.13, 0.000001, "G26 source impact x daze multiplier")
+    assertClose(skillSegment.anomalyBuildup * Math.floor(plugboo.baseStatsByLevel["60"].anomalyMastery) / 100, 316.8, 0.000001, "G26 source anomaly buildup")
+    if (segment?.actorId !== "bangboo:plugboo")
+      throw new Error(`G26 expected Bangboo actor id bangboo:plugboo, got ${segment?.actorId}`)
+    if (!result.trace.some(event => event.displayValue === "bangbooActor"))
+      throw new Error("G26 expected Bangboo formula actor trace")
+
+    anchors.push(passedAnchor("G26", plugboo.sourceRefs, [
+      "Plugboo active skill replays Excel-only numeric contribution: level-60 attack 8057.0996 × 5.12 = 41252.349952 base damage.",
+      "Daze uses impact 99 × 1.87 = 185.13, and anomaly buildup uses 240 × floor(132)/100 = 316.8 before enemy resistance.",
+      "Excel Path X has no element field; the fixture reuses an explicit neutral ice segment and zero ice resistance so the anchor asserts sourced panel/skill numerics, not inferred element semantics.",
+    ]))
+  }
+
   for (const anchorId of deferredAnchorIds) {
     anchors.push({
       id: anchorId,
@@ -2014,7 +2070,7 @@ function buildReplayReport(generatedAt: string, candidates = buildCandidates(gen
     generatedAt,
     policy: {
       scope:
-        "V1.1 true-data replay harness after G25: all 25 anchors pass executable replay, no anchors remain deferred.",
+        "V1.1 true-data replay harness after G26: all 26 anchors pass executable replay, no anchors remain deferred.",
       releaseGate:
         "releaseReady becomes true only when all executable anchors pass replay and blockingDiagnostics is zero.",
       manualAcceptance:

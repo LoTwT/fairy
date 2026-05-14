@@ -25,4 +25,4 @@ Current generated artifacts:
   buff source conflicts, preferring buhflipexplode after nanoka lookup while
   retaining Mihoyo source trace.
 - `golden/v1-replay-report.json` — source-backed V1 golden replay report.
-  The current report includes the V1.1 G24 Penguinboo and G25 Sharkboo numeric anchors.
+  The current report includes the V1.1 G24 Penguinboo, G25 Sharkboo, and G26 Plugboo numeric anchors.
