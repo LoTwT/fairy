@@ -3,7 +3,7 @@
   "parserVersion": "golden-v1-replay-v0.1.0",
   "generatedAt": "2026-05-05T18:20:00+08:00",
   "policy": {
-    "scope": "V1.1 true-data replay harness after G24: all 24 anchors pass executable replay, no anchors remain deferred.",
+    "scope": "V1.1 true-data replay harness after G25: all 25 anchors pass executable replay, no anchors remain deferred.",
     "releaseGate": "releaseReady becomes true only when all executable anchors pass replay and blockingDiagnostics is zero.",
     "manualAcceptance": "G22/G23 use lo-user manual acceptance records tied to the sourceTextHash values in v1-agent-source-candidates.json; A/B effects are replayed as explicit inactive/active snapshot states, and C is skill-level parameterized."
   },
@@ -31,12 +31,13 @@
     "G21",
     "G22",
     "G23",
-    "G24"
+    "G24",
+    "G25"
   ],
   "deferredAnchorIds": [],
   "summary": {
-    "v1AnchorCount": 24,
-    "passed": 24,
+    "v1AnchorCount": 25,
+    "passed": 25,
     "pendingHarness": 0,
     "blocked": 0,
     "deferred": 0,
@@ -460,6 +461,32 @@
         "Penguinboo active skill replays Excel-only numeric contribution: level-60 attack 6198.0006 × 4.62 = 28634.762772 base damage.",
         "Daze uses impact 90 × 2.7 = 243, and anomaly buildup uses 346 × floor(120)/100 = 415.2 before enemy resistance.",
         "Excel Path X has no element field; the fixture supplies an explicit neutral ice segment and zero ice resistance so the anchor asserts sourced panel/skill numerics, not inferred element semantics."
+      ]
+    },
+    {
+      "id": "G25",
+      "status": "passed",
+      "sourceRefs": [
+        {
+          "sourceId": "lo-user-excel",
+          "sourceVersion": "2.6.0_R14028417",
+          "sourceAnchor": "邦布属性!A24:T24"
+        },
+        {
+          "sourceId": "lo-user-excel",
+          "sourceVersion": "2.6.0_R14028417",
+          "sourceAnchor": "邦布技能!A17:H17"
+        },
+        {
+          "sourceId": "lo-user-excel",
+          "sourceVersion": "2.6.0_R14028417",
+          "sourceAnchor": "邦布技能!A18:H18"
+        }
+      ],
+      "notes": [
+        "Sharkboo active skill replays Excel-only numeric contribution: level-60 attack 8057.0996 × 3.84 = 30939.262464 base damage.",
+        "Daze uses impact 99 × 1.4 = 138.6, and anomaly buildup uses 180 × floor(132)/100 = 237.6 before enemy resistance.",
+        "Excel Path X has no element field; the fixture reuses an explicit neutral ice segment and zero ice resistance so the anchor asserts sourced panel/skill numerics, not inferred element semantics."
       ]
     }
   ]
