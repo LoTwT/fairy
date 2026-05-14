@@ -22,6 +22,9 @@ mirror these contracts after cross-role review.
 - [CalcResult](calc-result.md): JSON-only calculation output.
 - [Trace](trace.md): explainability and golden-test evidence model.
 - [Handler spec](handler-spec.md): safe typed modifier and handler boundary.
+- [Source adapter contract](source-adapter-contract.md): source migration raw
+  snapshot, normalized candidate, cleaned adapter, source registry, and drift
+  report boundary.
 
 ## Hard Rules
 
