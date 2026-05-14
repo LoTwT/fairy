@@ -7,8 +7,8 @@ Related tasks: task #40, task #43
 
 This document narrows the original 23 golden anchors to the V1 release gate
 locked by D-13 plus DD-002, then tracks V1.x and V1.1 golden expansion. The
-executable gate currently has 25 anchors: the original 19 V1 anchors plus G13,
-G18, G19, G20, and G24-G25.
+executable gate currently has 26 anchors: the original 19 V1 anchors plus G13,
+G18, G19, G20, and G24-G26.
 
 The goal of this audit is to decide the minimum source and cleaned-data work
 needed before true-data replay. It does not change QA's fixture assertions.
@@ -19,7 +19,7 @@ needed before true-data replay. It does not change QA's fixture assertions.
 |---|---|---|
 | V1 release gate | G01-G12, G14-G17, G21-G23 | Must pass before V1 release. |
 | V1.x executable expansion | G13, G18, G19, G20 | Passed after guide anomaly-threshold composition, non-DA Excel enemy + guide part-break true-damage replay, and daze recovery-rate composition replay. |
-| V1.1 Bangboo actor expansion | G24-G25 | Passed with Excel-only Penguinboo and Sharkboo numeric attack-segment replay. |
+| V1.1 Bangboo actor expansion | G24-G26 | Passed with Excel-only Penguinboo, Sharkboo, and Plugboo numeric attack-segment replay. |
 | Deferred V1.x | none | No golden anchors remain deferred. |
 
 ## Source Status Summary
@@ -60,6 +60,7 @@ needed before true-data replay. It does not change QA's fixture assertions.
 | G23 | Yixuan + Nicole + Yanagi polarity disorder | Excel has Yanagi rows/descriptions; lo-user accepted the disorder boost and EX Special polarity-disorder template. | Passed with explicit inactive/active replay and skill-level parameterized polarity-disorder template. |
 | G24 | Penguinboo active skill numeric contribution | Excel has Penguinboo `邦布属性!A42:T42` and skill rows `邦布技能!A2:H3`; Path X uses numeric panel and skill multipliers only. | Passed with explicit Bangboo actor segment: attack `6198.0006 * 4.62 = 28634.762772`, daze `90 * 2.7 = 243`, and buildup `346 * floor(120)/100 = 415.2`. |
 | G25 | Sharkboo active skill numeric contribution | Excel has Sharkboo `邦布属性!A24:T24` and skill rows `邦布技能!A17:H18`; Path X uses numeric panel and skill multipliers only. | Passed with explicit Bangboo actor segment: attack `8057.0996 * 3.84 = 30939.262464`, daze `99 * 1.4 = 138.6`, and buildup `180 * floor(132)/100 = 237.6`. |
+| G26 | Plugboo active skill numeric contribution | Excel has Plugboo `邦布属性!A18:T18` and skill rows `邦布技能!A29:H30`; Path X uses numeric panel and skill multipliers only. | Passed with explicit Bangboo actor segment: attack `8057.0996 * 5.12 = 41252.349952`, daze `99 * 1.87 = 185.13`, and buildup `240 * floor(132)/100 = 316.8`. |
 
 ## Agent Source Evidence For G21-G23
 
@@ -88,7 +89,7 @@ acceptance treatment before it can become a typed modifier.
 ## Bangboo Source Evidence For G24+
 
 V1.1 Path X uses Excel numeric rows only. Excel does not provide Bangboo element
-or passive/trigger source text, so G24/G25 supply an explicit neutral segment
+or passive/trigger source text, so G24-G26 supply an explicit neutral segment
 attribute in the fixture and assert only sourced panel/skill numeric
 contribution.
 
@@ -100,6 +101,9 @@ contribution.
 | G25 | 鲨牙布 / Sharkboo | `邦布属性!A24:T24` | Level-60 panel: attack `8057.0996`, impact `99`, anomaly mastery `132`, crit `50%/100%`. |
 | G25 | 鲨牙布 active skill | `邦布技能!A17:H17` | Damage multiplier `3.84`, daze multiplier `1.4`, anomaly buildup `180`. |
 | G25 | 鲨牙布 chain skill | `邦布技能!A18:H18` | Imported as candidate data for completeness; not required by the G25 replay assertion. |
+| G26 | 插头布 / Plugboo | `邦布属性!A18:T18` | Level-60 panel: attack `8057.0996`, impact `99`, anomaly mastery `132`, crit `50%/100%`. |
+| G26 | 插头布 active skill | `邦布技能!A29:H29` | Damage multiplier `5.12`, daze multiplier `1.87`, anomaly buildup `240`. |
+| G26 | 插头布 chain skill | `邦布技能!A30:H30` | Imported as candidate data for completeness; not required by the G26 replay assertion. |
 
 ## Manual Acceptance Gate
 
@@ -169,20 +173,20 @@ cleaned artifacts:
   `data/cleaned/audit/yanagi.acceptance.json` — lo-user manual acceptance
   records for G22/G23 source-text mappings.
 - `data/cleaned/golden/v1-replay-report.json` — executable replay baseline for
-  the 25-anchor scope after G13, G18, G19, G20, and G24-G25.
+  the 26-anchor scope after G13, G18, G19, G20, and G24-G26.
 
 The current replay report intentionally reports:
 
 | Status | Anchors | Meaning |
 |---|---|---|
-| `passed` | 25 anchors | All executable anchors pass replay with sourced Excel/DA/guide refs, lo-user accepted G22/G23 mappings, and the G24-G25 Excel Bangboo numeric anchors. |
+| `passed` | 26 anchors | All executable anchors pass replay with sourced Excel/DA/guide refs, lo-user accepted G22/G23 mappings, and the G24-G26 Excel Bangboo numeric anchors. |
 | `pendingHarness` | none | No V1 anchors are pending harness. |
 | `blocked` | none | G22/G23 `ERR-DAT-005` diagnostics are cleared by acceptance records. |
 | `deferred` | none | No golden anchors remain deferred. |
 
 `pnpm --filter @randomplay/data verify:golden-v1` is an offline freshness and shape
 gate. It verifies the artifacts are regenerated from the retained sources and
-that executable replay has `passed=25`, `pendingHarness=0`, `blocked=0`,
+that executable replay has `passed=26`, `pendingHarness=0`, `blocked=0`,
 `blockingDiagnostics=0`, and `releaseReady=true`.
 
 ## Product / Human Decisions
@@ -210,11 +214,11 @@ TL recommendation:
   is missing. If a required acceptance record is removed or its source hash
   changes, the replay harness must fail instead of silently applying a guessed
   modifier.
-- **G24-G25**: implement the first Bangboo V1.1 Path X anchors with Penguinboo
-  and Sharkboo Excel numeric rows only. They intentionally do not claim
+- **G24-G26**: implement the first Bangboo V1.1 Path X anchors with Penguinboo,
+  Sharkboo, and Plugboo Excel numeric rows only. They intentionally do not claim
   source-backed Bangboo element or passive/team-buff behavior because those
   fields are absent from the retained Excel Path X data.
 
 The current replay baseline covers the original 19 V1 anchors, V1.x Track B
-added G13/G18/G19/G20, and V1.1 Bangboo B1 added G24 and B2 added G25.
+added G13/G18/G19/G20, and V1.1 Bangboo B1/B2/B3 added G24/G25/G26.
 No golden anchors remain deferred.

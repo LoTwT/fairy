@@ -3,7 +3,7 @@
   "parserVersion": "golden-v1-replay-v0.1.0",
   "generatedAt": "2026-05-05T18:20:00+08:00",
   "policy": {
-    "scope": "Minimal reader output for executable V1/V1.1 replay. It extracts Yixuan/Nicole/Yanagi identity and calculation-relevant source text candidates plus Penguinboo/Sharkboo numeric Bangboo rows for G24/G25.",
+    "scope": "Minimal reader output for executable V1/V1.1 replay. It extracts Yixuan/Nicole/Yanagi identity and calculation-relevant source text candidates plus Penguinboo/Sharkboo/Plugboo numeric Bangboo rows for G24-G26.",
     "formalDataPolicy": "Candidates are not trusted cleaned modifiers. Effects with trustStatus=requiresManualAcceptance must emit ERR-DAT-005 until an accepted record exists.",
     "enemyPolicy": "No Excel enemy rows are read; V1 DA boss fields must come from buhflipexplode/Mihoyo DA source snapshots."
   },
@@ -221,6 +221,56 @@
         "range": "邦布属性!A24:T24",
         "excelId": 54001
       }
+    },
+    "plugboo": {
+      "id": "plugboo",
+      "sourceKey": "54008",
+      "label": {
+        "zh": "插头布",
+        "en": "Plugboo"
+      },
+      "sourceRefs": [
+        {
+          "sourceId": "lo-user-excel",
+          "sourceVersion": "2.6.0_R14028417",
+          "sourceAnchor": "邦布属性!A18:T18"
+        },
+        {
+          "sourceId": "lo-user-excel",
+          "sourceVersion": "2.6.0_R14028417",
+          "sourceAnchor": "邦布技能!A29:H29"
+        },
+        {
+          "sourceId": "lo-user-excel",
+          "sourceVersion": "2.6.0_R14028417",
+          "sourceAnchor": "邦布技能!A30:H30"
+        }
+      ],
+      "baseStatsByLevel": {
+        "60": {
+          "maxHp": 4210.2983,
+          "attack": 8057.0996,
+          "defense": 723.8011,
+          "impact": 99,
+          "critRate": 0.5,
+          "critDamage": 1,
+          "anomalyMastery": 132
+        }
+      },
+      "skillIds": [
+        "plugboo-active",
+        "plugboo-chain"
+      ],
+      "sourceAliases": [
+        "插头布",
+        "Plugboo"
+      ],
+      "sourceShape": {
+        "workbookSheet": "邦布属性",
+        "rowNumber": 18,
+        "range": "邦布属性!A18:T18",
+        "excelId": 54008
+      }
     }
   },
   "bangbooSkills": {
@@ -359,6 +409,76 @@
               "sourceId": "lo-user-excel",
               "sourceVersion": "2.6.0_R14028417",
               "sourceAnchor": "邦布技能!A18:H18"
+            }
+          ]
+        }
+      ]
+    },
+    "plugboo-active": {
+      "id": "plugboo-active",
+      "bangbooId": "plugboo",
+      "label": {
+        "zh": "主动技能：电流狙击"
+      },
+      "sourceRefs": [
+        {
+          "sourceId": "lo-user-excel",
+          "sourceVersion": "2.6.0_R14028417",
+          "sourceAnchor": "邦布技能!A29:H29"
+        }
+      ],
+      "tags": [
+        "special"
+      ],
+      "segments": [
+        {
+          "id": "plugboo-active-hit",
+          "levelKey": "default",
+          "multiplier": 5.12,
+          "multiplierGrowth": 0.512,
+          "dazeMultiplier": 1.87,
+          "dazeMultiplierGrowth": 0.187,
+          "anomalyBuildup": 240,
+          "sourceRefs": [
+            {
+              "sourceId": "lo-user-excel",
+              "sourceVersion": "2.6.0_R14028417",
+              "sourceAnchor": "邦布技能!A29:H29"
+            }
+          ]
+        }
+      ]
+    },
+    "plugboo-chain": {
+      "id": "plugboo-chain",
+      "bangbooId": "plugboo",
+      "label": {
+        "zh": "连携技：高压电阻"
+      },
+      "sourceRefs": [
+        {
+          "sourceId": "lo-user-excel",
+          "sourceVersion": "2.6.0_R14028417",
+          "sourceAnchor": "邦布技能!A30:H30"
+        }
+      ],
+      "tags": [
+        "chain"
+      ],
+      "segments": [
+        {
+          "id": "plugboo-chain-hit",
+          "levelKey": "default",
+          "multiplier": 6.88,
+          "multiplierGrowth": 0.688,
+          "dazeMultiplier": 0.98,
+          "dazeMultiplierGrowth": 0.098,
+          "anomalyBuildup": 295,
+          "sourceRefs": [
+            {
+              "sourceId": "lo-user-excel",
+              "sourceVersion": "2.6.0_R14028417",
+              "sourceAnchor": "邦布技能!A30:H30"
             }
           ]
         }
