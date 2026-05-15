@@ -1,6 +1,6 @@
-# D-20 数据源迁移：Excel 永久停更后的换源决策 (v0.4)
+# D-20 数据源迁移：Excel 永久停更后的换源决策 (v0.4.1)
 
-> 状态：v0.4 final draft（2026-05-15）
+> 状态：v0.4.1 final draft（2026-05-15，含 TL review precision fold-in）
 > Owner: @Product
 > Cross-reviewer: @TechLead（artifacts + adapter contract + Phase 2 实施）/ @QA（8 acceptance gates + Phase 0-4 validation）
 > 触发：lo-user msg `89a85bb2`（2026-05-14 17:29）— Excel 数据源停止更新
@@ -70,8 +70,15 @@ V0.0.4 ship 后（2026-05-14），lo-user 通告 Excel 数据源（`data/source/
 {
   "sourceId": "nanoka-zzz",
   "kind": "wiki-static-json",
-  "urlPattern": "^https://static\\.nanoka\\.cc/zzz/[\\d.+]+/(?:zh|en|ja|ko)/[a-z]+/\\d+\\.json$",
-  "manifestUrl": "https://static.nanoka.cc/manifest.json",
+  // URL allowlist 拆为 3 类（per TL precision msg `547fbd05`）：
+  // (1) manifestUrl 用于读 manifest.zzz.live / latest / available
+  // (2) versionedIndexUrls 用于 DA period 索引、未来其他 index 类静态资源
+  // (3) localizedDetailUrls 用于角色 / 邦布 / 敌人 / W-Engine / 驱动盘 detail
+  "urlAllowlist": {
+    "manifestUrl": "^https://static\\.nanoka\\.cc/manifest\\.json$",
+    "versionedIndexUrls": "^https://static\\.nanoka\\.cc/zzz/[^/]+/[a-z]+\\.json$",
+    "localizedDetailUrls": "^https://static\\.nanoka\\.cc/zzz/[^/]+/(?:zh|en|ja|ko)/[a-z]+/\\d+\\.json$"
+  },
   "license": "unknown",
   "tosStatus": "audited-pending",
   // R1+R6+R4.a 边界：分清 license 明确许可 与 lo-user 接受残余风险
@@ -80,10 +87,13 @@ V0.0.4 ship 后（2026-05-14），lo-user 通告 Excel 数据源（`data/source/
   "scope": "numeric-primary",
   "server": "live",
   "releaseChannel": "stable",
-  // R1 Formal-Live Gate：cleaned output 必须 = live
-  "sourceVersion": "${manifest.zzz.live}",
+  // R1 Formal-Live Gate：current cleaned output rows 必须 == configuredLiveVersion（即 manifest.zzz.live）
+  "configuredLiveVersion": "2.8",         // 当前 release artifact lock 的 live version
   "liveVersionRef": "manifest.zzz.live",
+  // approvedLiveVersions 仅供 R4.a snapshot-diff 历史输入 / archived audit fixtures
+  // 不得用于 authorize current cleaned output（current cleaned output 必须 == configuredLiveVersion）
   "approvedLiveVersions": ["2.8"],
+  "approvedLiveVersionsScope": "snapshot-diff-historical-input | archived-audit-fixture",
   "fetchedAt": "2026-05-15T...",
   "lastVerifiedAt": "2026-05-15T...",
   "contentHash": "sha256:...",
@@ -106,13 +116,14 @@ V0.0.4 ship 后（2026-05-14），lo-user 通告 Excel 数据源（`data/source/
 }
 ```
 
-**硬要求**：
+**硬要求**（per TL precision msg `547fbd05` — 分清 current cleaned output 与 historical / archived audit）：
 
-1. **Cleaned output 必须用 `manifest.zzz.live`**（不是 `latest`）
-2. Research / drift audit / sample fetching 可读 `latest`，**但 latest 不得进 cleaned output**，除非 lo-user 显式 approve 新版本
+1. **Current cleaned output rows 必须 `sourceVersion == configuredLiveVersion`**（即 == `manifest.zzz.live` 解析值）。**`approvedLiveVersions[]` 不能 authorize current cleaned output**。
+2. Research / drift audit / sample fetching 可读 `manifest.zzz.latest`，**但 latest 不得进 current cleaned output**，除非 lo-user 显式 approve 新 `configuredLiveVersion`
 3. Time-windowed DA records 加 row-level filter：`period.begin_time <= configuredLiveSnapshotDate`；future-window periods → `forbiddenRows` + fail-loud
-4. R4.a patch history 的 diff 输入只能从 `approvedLiveVersions[]` 取，不能直接吃 latest/pre-release snapshots
-5. Version upgrade guard：如 `manifest.zzz.live` 从 `2.8` 升 `2.9`，adapter 检测 `fetchedLiveVersion != configuredLiveVersion` → fail-loud 等 lo-user approve `approvedLiveVersions` 扩展
+4. **R4.a patch history 的 diff 输入** 可以从 `approvedLiveVersions[]` 取（历史 live snapshots，作 derived 输入）；**不能直接吃 latest/pre-release snapshots**
+5. **Archived audit fixtures** 可用 `approvedLiveVersions[]` 中的历史 live snapshots
+6. Version upgrade guard：如 `manifest.zzz.live` 从 `2.8` 升 `2.9`，adapter 检测 `fetchedLiveVersion != configuredLiveVersion` → fail-loud；lo-user approve 新 live → 更新 `configuredLiveVersion`，并把旧 `2.8` 加入 `approvedLiveVersions[]` 作 historical snapshot-diff 输入
 
 ### 4.3 Per-row metadata（cleaned data 内嵌）
 
@@ -123,7 +134,9 @@ V0.0.4 ship 后（2026-05-14），lo-user 通告 Excel 数据源（`data/source/
 - 任何 cleaned row 引用的 `sourceId` 必须在 registry 存在
 - 任何 `redistributionRisk = cross-check-only | forbidden` 的 source 的 row 必须**不**进 npm payload
 - 任何 `redistributionRisk = accepted-by-owner` 必须有 `redistributionRiskRef` 引用 D-20
-- 任何 `sourceVersion != manifest.zzz.live`（且不在 `approvedLiveVersions`）→ fail-loud
+- **任何 current cleaned output row `sourceVersion != configuredLiveVersion` → fail-loud**（`approvedLiveVersions[]` 不放宽此要求）
+- 任何 snapshot-diff / archived audit input 的 `sourceVersion` 不在 `approvedLiveVersions[]` → fail-loud
+- 任何 URL 不匹配 `urlAllowlist.{manifestUrl, versionedIndexUrls, localizedDetailUrls}` 之一 → fail-loud
 - registry 缺关键字段 → fail-loud
 
 ### 4.5 QA scope boundary
@@ -358,9 +371,9 @@ lo-user 已 explicitly 接受以下残余风险（per msg `74b52454`）：
 
 | Risk | mitigation |
 |---|---|
-| Phase 2 nanoka adapter `boss_adjust` / score-HP / period-filter semantic mapping 复杂 | TL audit 已暴露具体 raw 字段；Phase 2 用最新 DA period 跑端到端 fixture 验证；QA Gate 4 enforce |
+| Phase 2 nanoka adapter `boss_adjust` / score-HP / period-filter semantic mapping 复杂 | TL audit 已暴露具体 raw 字段；Phase 2 用当前 live DA period 跑端到端 fixture 验证；QA Gate 4 enforce |
 | Phase 2 Sentinel typed promote 单位/命名 mapping 错 | live character fixture 与已知 V0.0.4 character 行为对照（lo-user 实测）；QA Gate 5 enforce |
-| Phase 2 panel normalization formula 与 G24-G26 数据不一致 | Phase 2 实施时 cross-check against G24-G26 已 ship 数据，QA Gate 4 fail-loud；TL ruling + Product surface |
+| Phase 2 panel normalization formula 与 G24-G26 数据不一致 | Phase 2 实施时 cross-check against G24-G26 已 ship 数据；QA Gate 3 evidence/promote rules enforce（panel typed promote 必须有 deterministic transform + normalized sample expectation）+ Phase 2 panel-specific acceptance check；TL ruling + Product surface |
 | Phase 2 patch history `manifest.available` 含未 approved-live 版本 | R4.a allowlist gating + QA Gate 6 enforce；diff 输入只取 `approvedLiveVersions[]` |
 | nanoka 停更（无 explicit SLA） | D-20 §4 supply chain audit trail + `lastVerifiedAt`；如停更 ≥ 6 周触发 source-switch evaluation；archived Excel V0.0.4 final + D-17 + D-12 snapshot 永久保留 |
 | nanoka 收到 takedown notice | §8 README disclaimer + §8.2 24-72h SLA + fallback to archived Excel/D-17/D-12 baseline 重新激活 |
@@ -378,6 +391,7 @@ lo-user 已 explicitly 接受以下残余风险（per msg `74b52454`）：
 
 ## Changelog
 
+- **v0.4.1** (2026-05-15) — TL review precision fold-in per PR #56 comment 4453935202 / msg `547fbd05`：(1) §4.1 source-registry `urlPattern` → `urlAllowlist.{manifestUrl, versionedIndexUrls, localizedDetailUrls}`（覆盖 `manifest.json` + DA `/boss.json` index + localized detail 3 类）；(2) §4.2 / §4.4 Formal-Live Gate 分清 `current cleaned output` 与 `snapshot-diff historical input / archived audit fixture`：current cleaned 必须 == `configuredLiveVersion`，`approvedLiveVersions[]` 不放宽 current cleaned output；(3) §13 risk log "最新 DA period" → "当前 live DA period"；(4) §13 risk log panel normalization 引用 Gate 3 + Phase 2 panel-specific acceptance（替代 Gate 4 — Gate 4 是 DA-specific）
 - **v0.4** (2026-05-15) — Final lock per lo-user `4b7cb27b`：R1/R4/R6 final lock + nanoka-exclusive for ALL source-backed data（含 DA）+ 鸣徽 removed + Sentinel+patch history 进 V0.1.0 scope（R4.a snapshot-diff）+ Formal-Live Gate (`manifest.zzz.live`) 新增 + 8 QA gates spec fold-in + 45-row matrix (PR #55) reference + D-17/D-12 retained as archived audit baseline until Phase 4 cutover + Phase 2 实施 deliverables 完整化
 - **v0.3** (2026-05-14 18:08) — QA consistency fix msg `c9c49106`：§8 D-20.OQ.3 措辞与 §5/§10 对齐
 - **v0.2** (2026-05-14 18:05) — QA quick review fold-in msg `169c67cc`：5 项 precision (Phase 3 configurable window + QA scope boundary + redistributionRisk enum + Phase 1 QA deliverables + Excel path fact-fix)
