@@ -10,6 +10,7 @@ type CoverageRow = {
   status: string
   promotable: boolean
   blockedBy?: string[]
+  auditArtifact?: string
 }
 
 type CoverageMatrix = {
@@ -50,17 +51,28 @@ describe("missing-fields fail-loud gate", () => {
     expect(unresolved.every(row => Array.isArray(row.blockedBy) && row.blockedBy.length > 0)).toBe(true)
     expect(unresolved.map(row => row.fieldId)).toEqual(
       expect.arrayContaining([
-        "driveDiscs.slotAndSubstatTables",
         "rules.disorderFormula",
         "rules.disorderDazeLevelZone",
       ]),
     )
+    expect(unresolved.map(row => row.fieldId)).not.toContain("driveDiscs.slotAndSubstatTables")
     expect(unresolved.map(row => row.fieldId)).not.toEqual(expect.arrayContaining([
       "metadata.sources",
       "metadata.sourceRefs",
       "agents.promotionExtraStats",
       "bangboos.element",
     ]))
+  })
+
+  it("keeps owner-escalated rows machine-readable and non-promotable", () => {
+    const matrix = readJson<CoverageMatrix>("data/cleaned/audit/nanoka-coverage-matrix.json")
+    const ownerRows = matrix.rows.filter(row => row.status === "needs-owner-research")
+    const driveDiscRow = ownerRows.find(row => row.fieldId === "driveDiscs.slotAndSubstatTables")
+
+    expect(driveDiscRow).toBeDefined()
+    expect(driveDiscRow?.promotable).toBe(false)
+    expect(driveDiscRow?.blockedBy).toContain("owner:drive-disc-slot-stat-source-required")
+    expect(driveDiscRow?.auditArtifact).toBe("data/cleaned/audit/nanoka-drive-disc-slot-stat-audit.json")
   })
 
   it("fails loudly when missing, deferred, or forbidden rows are present in a release report", () => {

@@ -26,6 +26,7 @@ type CoverageMatrix = {
     sourcePolicy?: string
     rawFieldPaths?: string[]
     transformRule?: string
+    auditArtifact?: string
   }>
 }
 
@@ -110,7 +111,7 @@ describe("nanoka source gate", () => {
     const matrix = readJson<CoverageMatrix>("data/cleaned/audit/nanoka-coverage-matrix.json")
     const rows = new Map(matrix.rows.map(row => [row.fieldId, row]))
 
-    expect(matrix.status).toBe("phase-2-bangboo-element-gate")
+    expect(matrix.status).toBe("phase-2-drive-disc-slot-audit-gate")
     expect(rows.get("metadata.sources")).toMatchObject({
       status: "verified-from-nanoka",
       promotable: true,
@@ -143,7 +144,7 @@ describe("nanoka source gate", () => {
     const rows = new Map(matrix.rows.map(row => [row.fieldId, row]))
     const row = rows.get("agents.promotionExtraStats")
 
-    expect(matrix.status).toBe("phase-2-bangboo-element-gate")
+    expect(matrix.status).toBe("phase-2-drive-disc-slot-audit-gate")
     expect(row).toMatchObject({
       status: "verified-from-nanoka",
       promotable: true,
@@ -170,7 +171,7 @@ describe("nanoka source gate", () => {
     const rows = new Map(matrix.rows.map(row => [row.fieldId, row]))
     const row = rows.get("bangboos.element")
 
-    expect(matrix.status).toBe("phase-2-bangboo-element-gate")
+    expect(matrix.status).toBe("phase-2-drive-disc-slot-audit-gate")
     expect(row).toMatchObject({
       status: "verified-from-nanoka",
       promotable: true,
@@ -207,5 +208,26 @@ describe("nanoka source gate", () => {
     ]))
     for (const row of matrix.rows)
       expect(row.blockedBy ?? []).not.toContain("field:variant-mapping-required")
+  })
+
+  it("escalates Drive Disc slot/stat tables with failed nanoka evidence", () => {
+    const matrix = readJson<CoverageMatrix>("data/cleaned/audit/nanoka-coverage-matrix.json")
+    const rows = new Map(matrix.rows.map(row => [row.fieldId, row]))
+    const row = rows.get("driveDiscs.slotAndSubstatTables")
+
+    expect(row).toMatchObject({
+      status: "needs-owner-research",
+      promotable: false,
+      sampleEntity: "nanoka-equipment-woodpecker-live-31000",
+      auditArtifact: "data/cleaned/audit/nanoka-drive-disc-slot-stat-audit.json",
+    })
+    expect(row?.blockedBy).toContain("owner:drive-disc-slot-stat-source-required")
+    expect(row?.rawFieldPaths).toEqual(expect.arrayContaining([
+      "/id",
+      "/name",
+      "/desc2",
+      "/desc4",
+    ]))
+    expect(row?.transformRule).toContain("do not synthesize")
   })
 })

@@ -10,6 +10,8 @@ const packageRegistryPath = join(packageDir, "source-registry.json")
 const matrixPath = join(repoRoot, "data/cleaned/audit/nanoka-coverage-matrix.json")
 const rootSnapshotDiffHistoryPath = join(repoRoot, "data/cleaned/audit/nanoka-snapshot-diff-history.json")
 const packageSnapshotDiffHistoryPath = join(packageDir, "cleaned/audit/nanoka-snapshot-diff-history.json")
+const rootDriveDiscSlotStatAuditPath = join(repoRoot, "data/cleaned/audit/nanoka-drive-disc-slot-stat-audit.json")
+const packageDriveDiscSlotStatAuditPath = join(packageDir, "cleaned/audit/nanoka-drive-disc-slot-stat-audit.json")
 
 const redistributionRisks = new Set([
   "accepted-by-owner",
@@ -118,7 +120,7 @@ function validateMatrixAgainstRegistry(matrix, registry) {
   const nanoka = sourceById(registry, "nanoka-zzz")
   validateNanokaRegistry(nanoka)
 
-  assert(matrix.status === "phase-2-bangboo-element-gate", "matrix status must match the latest Bangboo element gate")
+  assert(matrix.status === "phase-2-drive-disc-slot-audit-gate", "matrix status must match the latest Drive Disc slot/stat audit gate")
   assert(matrix.sourceVersionPolicy?.liveVersionRef === nanoka.liveVersionRef, "matrix liveVersionRef must match nanoka registry")
   assert(matrix.sourceVersionPolicy?.defaultReleaseSourceVersion === nanoka.configuredLiveVersion, "matrix default release version must match configuredLiveVersion")
   assert(matrix.sourceVersionResolved === nanoka.configuredLiveVersion, "matrix resolved sourceVersion must match configuredLiveVersion")
@@ -187,6 +189,18 @@ function validateMatrixAgainstRegistry(matrix, registry) {
   assert(bangbooElementRow.transformRule?.includes("source /id to match the requested Bangboo id"), "bangboos.element: transform must bind source /id to requested Bangboo id")
   for (const rawPath of ["/id", "/skill/*/level/*/desc"]) {
     assert(bangbooElementRow.rawFieldPaths?.includes(rawPath), `bangboos.element: missing raw path ${rawPath}`)
+  }
+
+  const driveDiscSlotRow = resourceRows.get("driveDiscs.slotAndSubstatTables")
+  assert(driveDiscSlotRow !== undefined, "driveDiscs.slotAndSubstatTables: missing Drive Disc slot/stat row")
+  assert(driveDiscSlotRow.status === "needs-owner-research", "driveDiscs.slotAndSubstatTables: row must escalate after failed nanoka audit")
+  assert(driveDiscSlotRow.promotable === false, "driveDiscs.slotAndSubstatTables: failed-evidence row must not be promotable")
+  assert(driveDiscSlotRow.sampleEntity === "nanoka-equipment-woodpecker-live-31000", "driveDiscs.slotAndSubstatTables: row must use approved live Woodpecker sample evidence")
+  assert(driveDiscSlotRow.blockedBy?.includes("owner:drive-disc-slot-stat-source-required"), "driveDiscs.slotAndSubstatTables: row must carry owner escalation blocker")
+  assert(driveDiscSlotRow.auditArtifact === "data/cleaned/audit/nanoka-drive-disc-slot-stat-audit.json", "driveDiscs.slotAndSubstatTables: row must point to failed-evidence audit artifact")
+  assert(driveDiscSlotRow.transformRule?.includes("do not synthesize"), "driveDiscs.slotAndSubstatTables: transform must preserve no-fabrication boundary")
+  for (const rawPath of ["/id", "/name", "/desc2", "/desc4"]) {
+    assert(driveDiscSlotRow.rawFieldPaths?.includes(rawPath), `driveDiscs.slotAndSubstatTables: missing observed raw path ${rawPath}`)
   }
 
   const promotionExtraRow = resourceRows.get("agents.promotionExtraStats")
@@ -309,6 +323,42 @@ function validateSnapshotDiffHistory(registry) {
   }
 }
 
+function validateDriveDiscSlotStatAudit(registry) {
+  const { rootText } = readMirroredText(
+    rootDriveDiscSlotStatAuditPath,
+    packageDriveDiscSlotStatAuditPath,
+    "packages/data/cleaned/audit/nanoka-drive-disc-slot-stat-audit.json",
+  )
+
+  const nanoka = sourceById(registry, "nanoka-zzz")
+  const audit = JSON.parse(rootText)
+  assert(audit.schemaVersion === "nanoka-drive-disc-slot-stat-audit/v0.1", "Drive Disc slot/stat audit schemaVersion drifted")
+  assert(audit.sourceId === "nanoka-zzz", "Drive Disc slot/stat audit sourceId drifted")
+  assert(audit.sourceVersion === nanoka.configuredLiveVersion, "Drive Disc slot/stat audit must use configured live version")
+  assert(audit.status === "not-found", "Drive Disc slot/stat audit must remain failed-evidence until a source is proven")
+  assert(audit.fieldId === "driveDiscs.slotAndSubstatTables", "Drive Disc slot/stat audit fieldId drifted")
+  assert(audit.sampleEntity === "nanoka-equipment-woodpecker-live-31000", "Drive Disc slot/stat audit sampleEntity drifted")
+  assert(audit.runtimeCutoverReady === false, "Drive Disc slot/stat audit must not imply runtime cutover")
+  assert(audit.summary?.foundSlotMainSubstatTable === false, "Drive Disc slot/stat audit must not claim slot/stat table found")
+  assert(audit.summary?.ownerResearchRequired === true, "Drive Disc slot/stat audit must require owner research")
+
+  const endpoints = audit.checkedEndpoints ?? []
+  assert(endpoints.some(endpoint => endpoint.url === "https://static.nanoka.cc/zzz/2.8/equipment.json" && endpoint.status === 200), "Drive Disc slot/stat audit must record live equipment index check")
+  const detail = endpoints.find(endpoint => endpoint.url === "https://static.nanoka.cc/zzz/2.8/zh/equipment/31000.json")
+  assert(detail?.status === 200, "Drive Disc slot/stat audit must record live Woodpecker detail check")
+  assert(detail.contentSha256 === "4190f6084521aead931a28ada9a44e6d9cd26a7fdb2401ffd0ab4e00a257f1ec", "Drive Disc slot/stat audit detail hash drifted")
+  for (const rawPath of ["/id", "/name", "/desc2", "/desc4"]) {
+    assert(detail.presentRawFieldPaths?.includes(rawPath), `Drive Disc slot/stat audit detail missing present raw path ${rawPath}`)
+  }
+  for (const rawPath of ["/slot", "/part", "/main_property", "/rand_property", "/level", "/stats"]) {
+    assert(detail.missingRawFieldPaths?.includes(rawPath), `Drive Disc slot/stat audit detail missing absent raw path ${rawPath}`)
+  }
+  assert(endpoints.some(endpoint => endpoint.status === 404 && endpoint.url.endsWith("/equipment_main_property.json")), "Drive Disc slot/stat audit must record missing main-property candidate endpoint")
+  assert(endpoints.some(endpoint => endpoint.status === 404 && endpoint.url.endsWith("/equipment_rand_property.json")), "Drive Disc slot/stat audit must record missing substat candidate endpoint")
+  assert(audit.decision?.matrixStatus === "needs-owner-research", "Drive Disc slot/stat audit decision must match owner-research matrix status")
+  assert(audit.decision?.blockedBy?.includes("owner:drive-disc-slot-stat-source-required"), "Drive Disc slot/stat audit decision must carry owner blocker")
+}
+
 function validateCoveredSourceRefs(registry) {
   const sourceIds = new Set(registry.sources.map(source => source.sourceId))
   const files = [
@@ -336,6 +386,7 @@ function main() {
   validateRegistryShape(registry)
   validateMatrixAgainstRegistry(matrix, registry)
   validateSnapshotDiffHistory(registry)
+  validateDriveDiscSlotStatAudit(registry)
   validateCoveredSourceRefs(registry)
 
   console.log("source registry verification passed")
