@@ -15,6 +15,7 @@ type SourceRegistry = {
 }
 
 type CoverageMatrix = {
+  status: string
   rows: Array<{
     fieldId: string
     status: string
@@ -22,6 +23,8 @@ type CoverageMatrix = {
     sampleEntity?: string
     supportingSampleEntities?: string[]
     blockedBy?: string[]
+    sourcePolicy?: string
+    rawFieldPaths?: string[]
   }>
 }
 
@@ -100,6 +103,38 @@ describe("nanoka source gate", () => {
         sampleEntity: "nanoka-character-yixuan-live-1371",
       })
     }
+  })
+
+  it("promotes metadata source registry and SourceRef rows only after executable gates exist", () => {
+    const matrix = readJson<CoverageMatrix>("data/cleaned/audit/nanoka-coverage-matrix.json")
+    const rows = new Map(matrix.rows.map(row => [row.fieldId, row]))
+
+    expect(matrix.status).toBe("phase-2-source-metadata-contract-gate")
+    expect(rows.get("metadata.sources")).toMatchObject({
+      status: "verified-from-nanoka",
+      promotable: true,
+      sampleEntity: "nanoka-manifest",
+      sourcePolicy: "derived-from-source-registry",
+    })
+    expect(rows.get("metadata.sources")?.blockedBy ?? []).toEqual([])
+    expect(rows.get("metadata.sources")?.rawFieldPaths).toEqual(expect.arrayContaining([
+      "/zzz/live",
+      "/zzz/latest",
+      "/zzz/available",
+    ]))
+
+    expect(rows.get("metadata.sourceRefs")).toMatchObject({
+      status: "verified-from-nanoka",
+      promotable: true,
+      sampleEntity: "nanoka-bangboo-plugboo-live-54008",
+      sourcePolicy: "derived-from-source-registry",
+    })
+    expect(rows.get("metadata.sourceRefs")?.blockedBy ?? []).toEqual([])
+    expect(rows.get("metadata.sourceRefs")?.rawFieldPaths).toEqual(expect.arrayContaining([
+      "/assets/*/url",
+      "/assets/*/localPath",
+      "/assets/*/sourceVersion",
+    ]))
   })
 
   it("locks enemy variant mapping to approved live monster detail samples", () => {

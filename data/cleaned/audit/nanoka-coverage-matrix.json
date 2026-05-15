@@ -1,7 +1,7 @@
 {
   "schemaVersion": "nanoka-coverage-matrix/v0.1",
-  "generatedAt": "2026-05-15T13:40:00+08:00",
-  "status": "phase-2-enemy-variant-mapping-gate",
+  "generatedAt": "2026-05-15T13:55:00+08:00",
+  "status": "phase-2-source-metadata-contract-gate",
   "sourceVersion": "manifest.zzz.live",
   "canonicalSchemas": [
     "packages/core/src/schema/game-data.ts",
@@ -317,39 +317,39 @@
       "canonicalPath": "GameData.sources[]",
       "fieldClass": "required",
       "sourcePolicy": "derived-from-source-registry",
-      "status": "needs-tl-research",
+      "status": "verified-from-nanoka",
       "nanokaEndpoint": "https://static.nanoka.cc/manifest.json and https://static.nanoka.cc/zzz/{sourceVersion}/{locale}/{entityType}/{id}.json",
       "rawFieldPaths": [
         "/zzz/live",
         "/zzz/latest",
         "/zzz/available"
       ],
-      "transformRule": "derive SourceDocument rows from source registry, parser version, source hash, liveVersionRef=manifest.zzz.live, approvedLiveVersions[], and stable-version allowlist",
+      "transformRule": "derive SourceDocument rows from source registry entries: sourceVersion=configuredLiveVersion and fetchedAt from registry; contentHash, liveVersionRef, approvedLiveVersions[], and URL allowlist remain in data/source-registry.json and are verified by CI",
       "sampleEntity": "nanoka-manifest",
       "rawAvailable": true,
-      "promotable": false,
-      "blockedBy": [
-        "source-registry-contract-required",
-        "content-hash-capture-required",
-        "live-version-policy-ci-required"
-      ]
+      "promotable": true,
+      "blockedBy": [],
+      "notes": "Task #148 closes the source-registry contract: data/source-registry.json and package mirror are byte-identical, contentHash is sha256-prefixed, configuredLiveVersion is approved, and verify:source-registry gates the live-version policy."
     },
     {
       "fieldId": "metadata.sourceRefs",
       "canonicalPath": "SourceRef.sourceId/sourceAnchor/sourceVersion/dataPath",
       "fieldClass": "required",
       "sourcePolicy": "derived-from-source-registry",
-      "status": "needs-tl-research",
+      "status": "verified-from-nanoka",
       "nanokaEndpoint": "all promoted nanoka rows",
-      "rawFieldPaths": [],
-      "transformRule": "attach endpoint URL, JSON pointer, content hash, approved sourceVersion, and liveVersionRef to every promoted field",
-      "sampleEntity": "nanoka-bangboo-plugboo-54008",
+      "rawFieldPaths": [
+        "/assets/*/url",
+        "/assets/*/localPath",
+        "/assets/*/sourceVersion",
+        "/assets/*/sha256"
+      ],
+      "transformRule": "derive SourceRef anchors from parsed adapter metadata records: sourceId/sourceVersion from ParsedSourceBatch, sourceAnchor=asset.url, dataPath=retained raw fixture path; content hashes and liveVersionRef resolve through source-registry/source-manifest by sourceId and retained path",
+      "sampleEntity": "nanoka-bangboo-plugboo-live-54008",
       "rawAvailable": true,
-      "promotable": false,
-      "blockedBy": [
-        "adapter-source-ref-emission-required",
-        "json-pointer-convention-required"
-      ]
+      "promotable": true,
+      "blockedBy": [],
+      "notes": "Task #148 adds buildSourceRefsForParsedBatch() and fail-loud tests requiring sourceAnchor and dataPath for every retained nanoka metadata record. This promotes the metadata contract only; runtime cleaned-data cutover remains blocked by row-specific gates."
     },
     {
       "fieldId": "metadata.snapshotDiffHistory",
@@ -1279,16 +1279,14 @@
   ],
   "summary": {
     "totalRows": 45,
-    "verifiedFromNanoka": 32,
-    "needsTlResearch": 7,
+    "verifiedFromNanoka": 34,
+    "needsTlResearch": 5,
     "needsOwnerResearch": 0,
     "deferred": 6,
-    "promotableNow": 16,
-    "notPromotableYet": 29
+    "promotableNow": 18,
+    "notPromotableYet": 27
   },
   "openResearchItems": [
-    "source registry contract, liveVersionRef policy, approvedLiveVersions[], and content hash capture",
-    "adapter source-ref emission and JSON pointer convention",
     "agent promotion extra stats / final snapshot panel semantics",
     "agent stat unit mapping for crit/pen/anomaly/impact/adrenaline",
     "rupture rbl semantic mapping",
