@@ -25,6 +25,7 @@ type CoverageMatrix = {
     blockedBy?: string[]
     sourcePolicy?: string
     rawFieldPaths?: string[]
+    transformRule?: string
   }>
 }
 
@@ -109,7 +110,7 @@ describe("nanoka source gate", () => {
     const matrix = readJson<CoverageMatrix>("data/cleaned/audit/nanoka-coverage-matrix.json")
     const rows = new Map(matrix.rows.map(row => [row.fieldId, row]))
 
-    expect(matrix.status).toBe("phase-2-source-metadata-contract-gate")
+    expect(matrix.status).toBe("phase-2-agent-promotion-extra-gate")
     expect(rows.get("metadata.sources")).toMatchObject({
       status: "verified-from-nanoka",
       promotable: true,
@@ -135,6 +136,33 @@ describe("nanoka source gate", () => {
       "/assets/*/localPath",
       "/assets/*/sourceVersion",
     ]))
+  })
+
+  it("promotes agent promotion extra stats only as a structured source artifact", () => {
+    const matrix = readJson<CoverageMatrix>("data/cleaned/audit/nanoka-coverage-matrix.json")
+    const rows = new Map(matrix.rows.map(row => [row.fieldId, row]))
+    const row = rows.get("agents.promotionExtraStats")
+
+    expect(matrix.status).toBe("phase-2-agent-promotion-extra-gate")
+    expect(row).toMatchObject({
+      status: "verified-from-nanoka",
+      promotable: true,
+      sampleEntity: "nanoka-character-nekomata-live-1021",
+    })
+    expect(row?.supportingSampleEntities).toEqual(expect.arrayContaining([
+      "nanoka-character-nekomata-live-1021",
+      "nanoka-character-yixuan-live-1371",
+    ]))
+    expect(row?.rawFieldPaths).toEqual(expect.arrayContaining([
+      "/id",
+      "/extra_level/*/max_level",
+      "/extra_level/*/extra/*/prop",
+      "/extra_level/*/extra/*/name",
+      "/extra_level/*/extra/*/value",
+    ]))
+    expect(row?.blockedBy).toContain("field:runtime-cutover-drift-required")
+    expect(row?.transformRule).toContain("/id matches the requested agent id")
+    expect(row?.transformRule).toContain("runtimeCutoverReady remains false")
   })
 
   it("locks enemy variant mapping to approved live monster detail samples", () => {

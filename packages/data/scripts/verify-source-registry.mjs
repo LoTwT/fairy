@@ -23,6 +23,32 @@ function readJson(path) {
   return JSON.parse(readFileSync(path, "utf8"))
 }
 
+function sleep(ms) {
+  Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms)
+}
+
+function readMirroredText(rootPath, packagePath, label) {
+  let lastError
+
+  for (let attempt = 0; attempt < 5; attempt += 1) {
+    try {
+      const rootText = readFileSync(rootPath, "utf8")
+      const packageText = readFileSync(packagePath, "utf8")
+      if (rootText === packageText)
+        return { rootText, packageText }
+
+      lastError = new Error(`${label} contents differ`)
+    }
+    catch (error) {
+      lastError = error
+    }
+
+    sleep(25)
+  }
+
+  throw new Error(`${label} must mirror data artifact byte-for-byte${lastError instanceof Error ? `: ${lastError.message}` : ""}`)
+}
+
 function assert(condition, message) {
   if (!condition)
     throw new Error(message)
@@ -92,7 +118,7 @@ function validateMatrixAgainstRegistry(matrix, registry) {
   const nanoka = sourceById(registry, "nanoka-zzz")
   validateNanokaRegistry(nanoka)
 
-  assert(matrix.status === "phase-2-source-metadata-contract-gate", "matrix status must match the latest source metadata contract gate")
+  assert(matrix.status === "phase-2-agent-promotion-extra-gate", "matrix status must match the latest agent promotion extra gate")
   assert(matrix.sourceVersionPolicy?.liveVersionRef === nanoka.liveVersionRef, "matrix liveVersionRef must match nanoka registry")
   assert(matrix.sourceVersionPolicy?.defaultReleaseSourceVersion === nanoka.configuredLiveVersion, "matrix default release version must match configuredLiveVersion")
   assert(matrix.sourceVersionResolved === nanoka.configuredLiveVersion, "matrix resolved sourceVersion must match configuredLiveVersion")
@@ -149,6 +175,34 @@ function validateMatrixAgainstRegistry(matrix, registry) {
   assert((metadataSourceRefsRow.blockedBy ?? []).length === 0, "metadata.sourceRefs: resolved SourceRef blockers must be removed")
   for (const rawPath of ["/assets/*/url", "/assets/*/localPath", "/assets/*/sourceVersion"]) {
     assert(metadataSourceRefsRow.rawFieldPaths?.includes(rawPath), `metadata.sourceRefs: missing raw path ${rawPath}`)
+  }
+
+  const promotionExtraRow = resourceRows.get("agents.promotionExtraStats")
+  assert(promotionExtraRow !== undefined, "agents.promotionExtraStats: missing promotion extra row")
+  assert(promotionExtraRow.status === "verified-from-nanoka", "agents.promotionExtraStats: row must be verified after live extra_level mapping")
+  assert(promotionExtraRow.promotable === true, "agents.promotionExtraStats: structured source artifact must be promotable after live mapping gate")
+  assert(promotionExtraRow.sampleEntity === "nanoka-character-nekomata-live-1021", "agents.promotionExtraStats: row must use live Nekomata sample evidence")
+  assert(promotionExtraRow.blockedBy?.includes("field:runtime-cutover-drift-required"), "agents.promotionExtraStats: runtime cutover must remain blocked until drift audit")
+  assert(promotionExtraRow.transformRule?.includes("/id matches the requested agent id"), "agents.promotionExtraStats: transform must bind source /id to requested agent id")
+  assert(promotionExtraRow.transformRule?.includes("runtimeCutoverReady remains false"), "agents.promotionExtraStats: transform must keep runtimeCutoverReady=false")
+  for (const rawPath of [
+    "/id",
+    "/extra_level/*/max_level",
+    "/extra_level/*/extra/*/prop",
+    "/extra_level/*/extra/*/name",
+    "/extra_level/*/extra/*/value",
+  ]) {
+    assert(promotionExtraRow.rawFieldPaths?.includes(rawPath), `agents.promotionExtraStats: missing raw path ${rawPath}`)
+  }
+  for (const sampleId of [
+    "nanoka-character-nekomata-live-1021",
+    "nanoka-character-yixuan-live-1371",
+  ]) {
+    const sample = sampleById.get(sampleId)
+    assert(sample !== undefined, `agents.promotionExtraStats: missing supporting live sample ${sampleId}`)
+    assert(sample.approvedForCleanedOutput === true, `${sampleId}: promotion extra supporting sample must be approved live evidence`)
+    assert(sample.version === nanoka.configuredLiveVersion, `${sampleId}: promotion extra supporting sample must use configuredLiveVersion`)
+    assert(promotionExtraRow.supportingSampleEntities?.includes(sampleId), `agents.promotionExtraStats: supporting samples must include ${sampleId}`)
   }
 
   for (const fieldId of [
@@ -216,9 +270,11 @@ function validateMatrixAgainstRegistry(matrix, registry) {
 }
 
 function validateSnapshotDiffHistory(registry) {
-  const rootText = readFileSync(rootSnapshotDiffHistoryPath, "utf8")
-  const packageText = readFileSync(packageSnapshotDiffHistoryPath, "utf8")
-  assert(rootText === packageText, "packages/data/cleaned/audit/nanoka-snapshot-diff-history.json must mirror data artifact byte-for-byte")
+  const { rootText } = readMirroredText(
+    rootSnapshotDiffHistoryPath,
+    packageSnapshotDiffHistoryPath,
+    "packages/data/cleaned/audit/nanoka-snapshot-diff-history.json",
+  )
 
   const nanoka = sourceById(registry, "nanoka-zzz")
   const history = JSON.parse(rootText)

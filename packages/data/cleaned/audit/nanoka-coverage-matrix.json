@@ -1,7 +1,7 @@
 {
   "schemaVersion": "nanoka-coverage-matrix/v0.1",
-  "generatedAt": "2026-05-15T13:55:00+08:00",
-  "status": "phase-2-source-metadata-contract-gate",
+  "generatedAt": "2026-05-15T14:10:00+08:00",
+  "status": "phase-2-agent-promotion-extra-gate",
   "sourceVersion": "manifest.zzz.live",
   "canonicalSchemas": [
     "packages/core/src/schema/game-data.ts",
@@ -457,17 +457,26 @@
       "canonicalPath": "GameData.agents.*.baseStatsByLevel extras / AgentSnapshot.panel final extras",
       "fieldClass": "derived",
       "sourcePolicy": "nanoka",
-      "status": "needs-tl-research",
+      "status": "verified-from-nanoka",
       "nanokaEndpoint": "/{locale}/character/{id}.json",
       "rawFieldPaths": [
-        "/extra_level/*/extra"
+        "/id",
+        "/extra_level/*/max_level",
+        "/extra_level/*/extra/*/prop",
+        "/extra_level/*/extra/*/name",
+        "/extra_level/*/extra/*/value"
       ],
-      "transformRule": "resolve when and how extra_level rows compose into final snapshot panel or potentialActivation; do not fold into baseStatsByLevel without a schema decision",
-      "sampleEntity": "nanoka-character-yixuan-1371",
+      "transformRule": "derive structured promotion-extra source artifacts from approved live character detail where /id matches the requested agent id; map prop 11101 -> maxHp raw, 12101 -> attack raw, and 20101 -> critRate basis-points / 10000. runtimeCutoverReady remains false; do not fold extras into final AgentSnapshot.panel until Phase 3/4 drift/cutover.",
+      "sampleEntity": "nanoka-character-nekomata-live-1021",
       "rawAvailable": true,
-      "promotable": false,
+      "promotable": true,
       "blockedBy": [
-        "field:promotion-extra-stat-semantics-required"
+        "field:runtime-cutover-drift-required"
+      ],
+      "notes": "Task #150 promotes promotion extra stats as a structured source artifact only. Live Nekomata and Yixuan samples prove deterministic unit mapping; final snapshot panel composition remains gated by runtimeCutoverReady=false.",
+      "supportingSampleEntities": [
+        "nanoka-character-nekomata-live-1021",
+        "nanoka-character-yixuan-live-1371"
       ]
     },
     {
@@ -1279,15 +1288,14 @@
   ],
   "summary": {
     "totalRows": 45,
-    "verifiedFromNanoka": 34,
-    "needsTlResearch": 5,
+    "verifiedFromNanoka": 35,
+    "needsTlResearch": 4,
     "needsOwnerResearch": 0,
     "deferred": 6,
-    "promotableNow": 18,
-    "notPromotableYet": 27
+    "promotableNow": 19,
+    "notPromotableYet": 26
   },
   "openResearchItems": [
-    "agent promotion extra stats / final snapshot panel semantics",
     "agent stat unit mapping for crit/pen/anomaly/impact/adrenaline",
     "rupture rbl semantic mapping",
     "skill tag/damageType/hitCount mapping",
