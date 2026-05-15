@@ -183,8 +183,10 @@ function validateMatrixAgainstRegistry(matrix, registry) {
   assert(promotionExtraRow.promotable === true, "agents.promotionExtraStats: structured source artifact must be promotable after live mapping gate")
   assert(promotionExtraRow.sampleEntity === "nanoka-character-nekomata-live-1021", "agents.promotionExtraStats: row must use live Nekomata sample evidence")
   assert(promotionExtraRow.blockedBy?.includes("field:runtime-cutover-drift-required"), "agents.promotionExtraStats: runtime cutover must remain blocked until drift audit")
+  assert(promotionExtraRow.transformRule?.includes("/id matches the requested agent id"), "agents.promotionExtraStats: transform must bind source /id to requested agent id")
   assert(promotionExtraRow.transformRule?.includes("runtimeCutoverReady remains false"), "agents.promotionExtraStats: transform must keep runtimeCutoverReady=false")
   for (const rawPath of [
+    "/id",
     "/extra_level/*/max_level",
     "/extra_level/*/extra/*/prop",
     "/extra_level/*/extra/*/name",

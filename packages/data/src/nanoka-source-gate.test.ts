@@ -154,12 +154,14 @@ describe("nanoka source gate", () => {
       "nanoka-character-yixuan-live-1371",
     ]))
     expect(row?.rawFieldPaths).toEqual(expect.arrayContaining([
+      "/id",
       "/extra_level/*/max_level",
       "/extra_level/*/extra/*/prop",
       "/extra_level/*/extra/*/name",
       "/extra_level/*/extra/*/value",
     ]))
     expect(row?.blockedBy).toContain("field:runtime-cutover-drift-required")
+    expect(row?.transformRule).toContain("/id matches the requested agent id")
     expect(row?.transformRule).toContain("runtimeCutoverReady remains false")
   })
 

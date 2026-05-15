@@ -77,6 +77,7 @@ describe("nanoka agent promotion extra source artifact gate", () => {
     const missingExtra = structuredClone(nekomata)
     const missingValue = structuredClone(nekomata)
     const unmappedProp = structuredClone(nekomata)
+    const idMismatch = readJson<NanokaPromotionExtraSource>("data/source/raw/nanoka/zzz/2.8/zh/character/1371.json")
 
     delete missingExtra.extra_level?.["1"]?.extra
     delete missingValue.extra_level?.["1"]?.extra?.["12101"]?.value
@@ -90,5 +91,6 @@ describe("nanoka agent promotion extra source artifact gate", () => {
     expect(() => deriveNanokaPromotionExtraStats(missingExtra, { sourceVersion: "2.8", agentId: 1021 })).toThrow("extra_level.1.extra")
     expect(() => deriveNanokaPromotionExtraStats(missingValue, { sourceVersion: "2.8", agentId: 1021 })).toThrow("extra_level.1.extra.12101.value")
     expect(() => deriveNanokaPromotionExtraStats(unmappedProp, { sourceVersion: "2.8", agentId: 1021 })).toThrow("unmapped promotion extra prop 99999")
+    expect(() => deriveNanokaPromotionExtraStats(idMismatch, { sourceVersion: "2.8", agentId: 1021 })).toThrow("agent id mismatch")
   })
 })

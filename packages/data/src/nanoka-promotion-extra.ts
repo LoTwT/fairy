@@ -11,6 +11,7 @@ export interface NanokaPromotionExtraLevelRaw {
 }
 
 export interface NanokaPromotionExtraSource {
+  id?: unknown
   extra_level?: Record<string, NanokaPromotionExtraLevelRaw>
 }
 
@@ -58,6 +59,10 @@ export function deriveNanokaPromotionExtraStats(
     agentId: number
   },
 ): NanokaPromotionExtraStatsArtifact {
+  const sourceAgentId = requiredFinite(source.id, "id")
+  if (sourceAgentId !== options.agentId)
+    throw new Error(`nanoka promotion extra agent id mismatch: source id ${sourceAgentId} does not match requested agent ${options.agentId}`)
+
   const extraLevels = requiredObject(source.extra_level, "extra_level") as Record<string, NanokaPromotionExtraLevelRaw>
   const stats: NanokaPromotionExtraStat[] = []
 

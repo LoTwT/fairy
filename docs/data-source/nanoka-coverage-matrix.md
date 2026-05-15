@@ -66,9 +66,10 @@ release-ready source evidence. Phase 2 slice 3 re-sampled existing
 Adrenaline / Resonance resource naming and unit transforms from live Yixuan
 evidence. Future promotions must continue to use approved live sample evidence
 or receive explicit owner approval for a newer version.
-Phase 2 task #150 promotes promotion extra stats from approved live `extra_level`
-evidence as a structured source artifact only; final snapshot panel composition
-remains blocked by `runtimeCutoverReady=false` until Phase 3/4 drift/cutover.
+Phase 2 task #150 promotes promotion extra stats from approved live character
+detail `/id` + `extra_level` evidence as a structured source artifact only;
+final snapshot panel composition remains blocked by `runtimeCutoverReady=false`
+until Phase 3/4 drift/cutover.
 
 ## Corrections To The Discussion Checklist
 
@@ -150,8 +151,9 @@ After task #150, 4 rows remain in `needs-tl-research`:
   verified from approved live Yixuan evidence and promoted with deterministic
   unit transforms.
 - `agents.promotionExtraStats` — nanoka live promotion-extra structured source
-  artifact row; task #150 maps approved live `extra_level` stat extras with
-  deterministic units and keeps `runtimeCutoverReady=false` until Phase 3/4.
+  artifact row; task #150 binds source `/id` to the requested agent, maps
+  approved live `extra_level` stat extras with deterministic units, and keeps
+  `runtimeCutoverReady=false` until Phase 3/4.
 - `deadlyAssault.periodsBossesBuffs` — nanoka live DA structured source artifact
   row; task #142 maps period, zones, buffs, monsters, weakness, rank goals, and
   `boss_adjust` with `runtimeCutoverReady=false` until Phase 3/4.

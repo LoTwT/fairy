@@ -460,12 +460,13 @@
       "status": "verified-from-nanoka",
       "nanokaEndpoint": "/{locale}/character/{id}.json",
       "rawFieldPaths": [
+        "/id",
         "/extra_level/*/max_level",
         "/extra_level/*/extra/*/prop",
         "/extra_level/*/extra/*/name",
         "/extra_level/*/extra/*/value"
       ],
-      "transformRule": "derive structured promotion-extra source artifacts from approved live extra_level rows; map prop 11101 -> maxHp raw, 12101 -> attack raw, and 20101 -> critRate basis-points / 10000. runtimeCutoverReady remains false; do not fold extras into final AgentSnapshot.panel until Phase 3/4 drift/cutover.",
+      "transformRule": "derive structured promotion-extra source artifacts from approved live character detail where /id matches the requested agent id; map prop 11101 -> maxHp raw, 12101 -> attack raw, and 20101 -> critRate basis-points / 10000. runtimeCutoverReady remains false; do not fold extras into final AgentSnapshot.panel until Phase 3/4 drift/cutover.",
       "sampleEntity": "nanoka-character-nekomata-live-1021",
       "rawAvailable": true,
       "promotable": true,
