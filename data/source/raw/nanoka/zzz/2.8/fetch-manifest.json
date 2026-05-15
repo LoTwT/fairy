@@ -2,8 +2,8 @@
   "schemaVersion": "nanoka-fetch-manifest-v1",
   "sourceId": "nanoka-zzz",
   "snapshotId": "2.8",
-  "fetchedAt": "2026-05-15T12:20:00+08:00",
-  "generatedAt": "2026-05-15T12:20:00+08:00",
+  "fetchedAt": "2026-05-15T13:20:00+08:00",
+  "generatedAt": "2026-05-15T13:20:00+08:00",
   "parserVersion": "nanoka-source-v0.1.0",
   "userAgent": "fairy-data-source-audit/0.1 (+https://github.com/LoTwT/fairy)",
   "formalLivePolicy": {
@@ -130,6 +130,153 @@
       "sha256": "781cb67799e6fb8c0438ab57ac5536507b85292161342f9870c18f42d890989f"
     },
     {
+      "id": "monster-dullahan-30000",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/monster/30000.json",
+      "path": "zh/monster/30000.json",
+      "entityType": "monster",
+      "language": "zh",
+      "entityId": 30000,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "enemy-variant-mapping-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/monster/30000.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b9-bded\"",
+        "lastModified": "Wed, 06 May 2026 01:00:41 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 48622,
+      "sha256": "99b2286a6a5a3847f067cfc06bd5c5c44b4a3eb2b1b5609df7af820eea55e855"
+    },
+    {
+      "id": "monster-greta-30004",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/monster/30004.json",
+      "path": "zh/monster/30004.json",
+      "entityType": "monster",
+      "language": "zh",
+      "entityId": 30004,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "enemy-variant-mapping-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/monster/30004.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b9-2e95\"",
+        "lastModified": "Wed, 06 May 2026 01:00:41 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 11926,
+      "sha256": "33a80f1ea374967371614bfde889fb3a01306e592c70c027b3cca2e4b5fa2e65"
+    },
+    {
+      "id": "monster-ruthless-fiend-200141",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/monster/200141.json",
+      "path": "zh/monster/200141.json",
+      "entityType": "monster",
+      "language": "zh",
+      "entityId": 200141,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "enemy-variant-mapping-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/monster/200141.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b9-50d4\"",
+        "lastModified": "Wed, 06 May 2026 01:00:41 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 20693,
+      "sha256": "d54d3a1660b3a66ff88c247c05f02beade5ead797a1efcb7c5bc97a952e71c05"
+    },
+    {
+      "id": "monster-notorious-hati-200014",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/monster/200014.json",
+      "path": "zh/monster/200014.json",
+      "entityType": "monster",
+      "language": "zh",
+      "entityId": 200014,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "enemy-variant-mapping-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/monster/200014.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b9-2aca\"",
+        "lastModified": "Wed, 06 May 2026 01:00:41 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 10955,
+      "sha256": "b49e34aab1a3372a8a43a91cbc6a3ef04328296d3f55822114743030275abb57"
+    },
+    {
+      "id": "monster-notorious-armored-hati-200034",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/monster/200034.json",
+      "path": "zh/monster/200034.json",
+      "entityType": "monster",
+      "language": "zh",
+      "entityId": 200034,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "enemy-variant-mapping-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/monster/200034.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b9-2cb8\"",
+        "lastModified": "Wed, 06 May 2026 01:00:41 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 11449,
+      "sha256": "6404adfb840c41fdab456a8e2ffb0e07963272d9a0bb27ad0e2e61858357b1b4"
+    },
+    {
+      "id": "monster-miasma-priest-30033",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/monster/30033.json",
+      "path": "zh/monster/30033.json",
+      "entityType": "monster",
+      "language": "zh",
+      "entityId": 30033,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "enemy-variant-mapping-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/monster/30033.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b9-7a7a\"",
+        "lastModified": "Wed, 06 May 2026 01:00:41 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 31355,
+      "sha256": "f5c9809560273f63fc0525b73e7291a6f754a1d850c642bc6458ec396ca8dbb2"
+    },
+    {
+      "id": "monster-notorious-pompey-300211",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/monster/300211.json",
+      "path": "zh/monster/300211.json",
+      "entityType": "monster",
+      "language": "zh",
+      "entityId": 300211,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "enemy-variant-mapping-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/monster/300211.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b9-2d19\"",
+        "lastModified": "Wed, 06 May 2026 01:00:41 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 11546,
+      "sha256": "6cab369294b398403bb6d7710e00418231f94d1487ae092cc69854467ead60e0"
+    },
+    {
       "id": "bangboo-plugboo-54008",
       "url": "https://static.nanoka.cc/zzz/2.8/zh/bangboo/54008.json",
       "path": "zh/bangboo/54008.json",
@@ -231,6 +378,103 @@
       "zoneCount": 3,
       "hasBossAdjust": true
     },
+    "enemySamples": {
+      "mappingCount": 7,
+      "canonicalMappings": [
+        {
+          "detailId": 30000,
+          "monsterInfoId": 11154,
+          "name": "杜拉罕",
+          "codeName": "Monster_DurahanGrey",
+          "tag": [
+            "Ether",
+            "Demote",
+            "Middle",
+            "Grey"
+          ],
+          "hasStats": true
+        },
+        {
+          "detailId": 30004,
+          "monsterInfoId": 11301,
+          "name": "格莱特",
+          "codeName": "Monster_BoringMachine",
+          "tag": [
+            "Mech",
+            "Gigantic",
+            "Boss"
+          ],
+          "hasStats": true
+        },
+        {
+          "detailId": 200141,
+          "monsterInfoId": 11521,
+          "name": "凶心疯汉",
+          "codeName": "Monster_RuthlessFiend",
+          "tag": [
+            "Ether",
+            "Demote",
+            "Large"
+          ],
+          "hasStats": true
+        },
+        {
+          "detailId": 200014,
+          "monsterInfoId": 11195,
+          "name": "恶名·哈提",
+          "codeName": "Monster_HatiArmoredBoss",
+          "tag": [
+            "Ether",
+            "Middle",
+            "Armored",
+            "Boss"
+          ],
+          "hasStats": true
+        },
+        {
+          "detailId": 200034,
+          "monsterInfoId": 11195,
+          "name": "恶名·装甲哈提",
+          "codeName": "Monster_HatiArmoredBoss",
+          "tag": [
+            "Ether",
+            "Middle",
+            "Armored",
+            "Boss"
+          ],
+          "hasStats": true
+        },
+        {
+          "detailId": 30033,
+          "monsterInfoId": 31031,
+          "name": "秽息司祭",
+          "codeName": "Monster_MentorMevorakh",
+          "tag": [
+            "Bios",
+            "Middle",
+            "Boss",
+            "MainStoryBoss",
+            "EtherBarrierBoss",
+            "Miasma"
+          ],
+          "hasStats": true
+        },
+        {
+          "detailId": 300211,
+          "monsterInfoId": 11881,
+          "name": "恶名·庞培",
+          "codeName": "Monster_NotoriousPompey",
+          "tag": [
+            "Ether",
+            "MainStoryBoss",
+            "Middle",
+            "UniqueDeathEff",
+            "DeathEffMiddle"
+          ],
+          "hasStats": true
+        }
+      ]
+    },
     "bangbooSample": {
       "id": 54008,
       "codeName": "Plugboo",
@@ -248,6 +492,6 @@
       "name": "啄木鸟电音",
       "hasSetDescriptions": true
     },
-    "retainedAssetCount": 8
+    "retainedAssetCount": 15
   }
 }

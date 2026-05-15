@@ -1,7 +1,7 @@
 {
   "schemaVersion": "nanoka-coverage-matrix/v0.1",
-  "generatedAt": "2026-05-15T12:45:00+08:00",
-  "status": "phase-0-r1-r6-locked",
+  "generatedAt": "2026-05-15T13:20:00+08:00",
+  "status": "phase-2-enemy-variant-mapping-gate",
   "sourceVersion": "manifest.zzz.live",
   "canonicalSchemas": [
     "packages/core/src/schema/game-data.ts",
@@ -215,6 +215,97 @@
       "releaseChannel": "stable",
       "fetchedAt": "2026-05-15T12:20:00+08:00",
       "contentSha256": "710c0e2fa5fca2779819b76c23a4abf8d445ba7e4a2f1cbfccd9145185143c94",
+      "server": "live",
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "release-gate-evidence"
+    },
+    {
+      "id": "nanoka-monster-dullahan-live-30000",
+      "entityType": "enemy",
+      "entityId": "30000",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/monster/30000.json",
+      "version": "2.8",
+      "releaseChannel": "stable",
+      "fetchedAt": "2026-05-15T13:20:00+08:00",
+      "contentSha256": "99b2286a6a5a3847f067cfc06bd5c5c44b4a3eb2b1b5609df7af820eea55e855",
+      "server": "live",
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "release-gate-evidence"
+    },
+    {
+      "id": "nanoka-monster-greta-live-30004",
+      "entityType": "enemy",
+      "entityId": "30004",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/monster/30004.json",
+      "version": "2.8",
+      "releaseChannel": "stable",
+      "fetchedAt": "2026-05-15T13:20:00+08:00",
+      "contentSha256": "33a80f1ea374967371614bfde889fb3a01306e592c70c027b3cca2e4b5fa2e65",
+      "server": "live",
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "release-gate-evidence"
+    },
+    {
+      "id": "nanoka-monster-ruthless-fiend-live-200141",
+      "entityType": "enemy",
+      "entityId": "200141",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/monster/200141.json",
+      "version": "2.8",
+      "releaseChannel": "stable",
+      "fetchedAt": "2026-05-15T13:20:00+08:00",
+      "contentSha256": "d54d3a1660b3a66ff88c247c05f02beade5ead797a1efcb7c5bc97a952e71c05",
+      "server": "live",
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "release-gate-evidence"
+    },
+    {
+      "id": "nanoka-monster-notorious-hati-live-200014",
+      "entityType": "enemy",
+      "entityId": "200014",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/monster/200014.json",
+      "version": "2.8",
+      "releaseChannel": "stable",
+      "fetchedAt": "2026-05-15T13:20:00+08:00",
+      "contentSha256": "b49e34aab1a3372a8a43a91cbc6a3ef04328296d3f55822114743030275abb57",
+      "server": "live",
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "release-gate-evidence"
+    },
+    {
+      "id": "nanoka-monster-notorious-armored-hati-live-200034",
+      "entityType": "enemy",
+      "entityId": "200034",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/monster/200034.json",
+      "version": "2.8",
+      "releaseChannel": "stable",
+      "fetchedAt": "2026-05-15T13:20:00+08:00",
+      "contentSha256": "6404adfb840c41fdab456a8e2ffb0e07963272d9a0bb27ad0e2e61858357b1b4",
+      "server": "live",
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "release-gate-evidence"
+    },
+    {
+      "id": "nanoka-monster-miasma-priest-live-30033",
+      "entityType": "enemy",
+      "entityId": "30033",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/monster/30033.json",
+      "version": "2.8",
+      "releaseChannel": "stable",
+      "fetchedAt": "2026-05-15T13:20:00+08:00",
+      "contentSha256": "f5c9809560273f63fc0525b73e7291a6f754a1d850c642bc6458ec396ca8dbb2",
+      "server": "live",
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "release-gate-evidence"
+    },
+    {
+      "id": "nanoka-monster-notorious-pompey-live-300211",
+      "entityType": "enemy",
+      "entityId": "300211",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/monster/300211.json",
+      "version": "2.8",
+      "releaseChannel": "stable",
+      "fetchedAt": "2026-05-15T13:20:00+08:00",
+      "contentSha256": "6cab369294b398403bb6d7710e00418231f94d1487ae092cc69854467ead60e0",
       "server": "live",
       "approvedForCleanedOutput": true,
       "evidenceUse": "release-gate-evidence"
@@ -688,12 +779,21 @@
         "/monster_info/*/type",
         "/monster_info/*/tag"
       ],
-      "transformRule": "map monster and monster_info identity fields to cleaned enemy ids and rank",
-      "sampleEntity": "nanoka-monster-dullahan-30000",
+      "transformRule": "map live monster detail identity fields to cleaned enemy ids and rank after selected monster_info variant mapping; full catalog promotion waits for enemy catalog scope lock",
+      "sampleEntity": "nanoka-monster-dullahan-live-30000",
       "rawAvailable": true,
       "promotable": false,
       "blockedBy": [
-        "field:variant-mapping-required"
+        "field:full-enemy-catalog-required"
+      ],
+      "supportingSampleEntities": [
+        "nanoka-monster-dullahan-live-30000",
+        "nanoka-monster-greta-live-30004",
+        "nanoka-monster-ruthless-fiend-live-200141",
+        "nanoka-monster-notorious-hati-live-200014",
+        "nanoka-monster-notorious-armored-hati-live-200034",
+        "nanoka-monster-miasma-priest-live-30033",
+        "nanoka-monster-notorious-pompey-live-300211"
       ]
     },
     {
@@ -701,17 +801,32 @@
       "canonicalPath": "GameData.enemies.* and golden enemy ids",
       "fieldClass": "required",
       "sourcePolicy": "nanoka",
-      "status": "needs-tl-research",
+      "status": "verified-from-nanoka",
       "nanokaEndpoint": "/{locale}/monster/{id}.json",
       "rawFieldPaths": [
-        "/monster_info/*"
+        "/id",
+        "/name",
+        "/monster_id",
+        "/monster_info/{monster_id}",
+        "/monster_info/{monster_id}/code_name",
+        "/monster_info/{monster_id}/tag",
+        "/monster_info/{monster_id}/stats"
       ],
-      "transformRule": "map monster_info variant ids to fairy cleaned enemy ids and G13/G18/G19/G20 golden rows",
-      "sampleEntity": "nanoka-monster-dullahan-30000",
+      "transformRule": "select detail.monster_id, require monster_info[monster_id], and map approved live samples to fairy cleaned enemy ids and G13/G18/G19/G20 golden rows",
+      "sampleEntity": "nanoka-monster-dullahan-live-30000",
       "rawAvailable": true,
-      "promotable": false,
+      "promotable": true,
       "blockedBy": [
-        "field:variant-mapping-required"
+        "field:runtime-cutover-drift-required"
+      ],
+      "supportingSampleEntities": [
+        "nanoka-monster-dullahan-live-30000",
+        "nanoka-monster-greta-live-30004",
+        "nanoka-monster-ruthless-fiend-live-200141",
+        "nanoka-monster-notorious-hati-live-200014",
+        "nanoka-monster-notorious-armored-hati-live-200034",
+        "nanoka-monster-miasma-priest-live-30033",
+        "nanoka-monster-notorious-pompey-live-300211"
       ]
     },
     {
@@ -727,13 +842,21 @@
         "/monster_info/*/stats/stun",
         "/monster_info/*/curves"
       ],
-      "transformRule": "monster_info stats and curves exist; derive level-specific enemy stats after monster_info variant mapping and curve formula validation",
-      "sampleEntity": "nanoka-monster-dullahan-30000",
+      "transformRule": "monster_info stats and curves exist for mapped live variants; derive level-specific enemy stats after level formula validation",
+      "sampleEntity": "nanoka-monster-dullahan-live-30000",
       "rawAvailable": true,
       "promotable": false,
       "blockedBy": [
-        "field:enemy-level-formula-required",
-        "field:variant-mapping-required"
+        "field:enemy-level-formula-required"
+      ],
+      "supportingSampleEntities": [
+        "nanoka-monster-dullahan-live-30000",
+        "nanoka-monster-greta-live-30004",
+        "nanoka-monster-ruthless-fiend-live-200141",
+        "nanoka-monster-notorious-hati-live-200014",
+        "nanoka-monster-notorious-armored-hati-live-200034",
+        "nanoka-monster-miasma-priest-live-30033",
+        "nanoka-monster-notorious-pompey-live-300211"
       ]
     },
     {
@@ -750,13 +873,21 @@
         "/monster_info/*/stats/ether_damage_res",
         "/monster_info/*/stats/physical_damage_res"
       ],
-      "transformRule": "damage/stun/buildup resistance fields exist per element; map source integer units to fairy resistance decimals after variant mapping",
-      "sampleEntity": "nanoka-monster-dullahan-30000",
+      "transformRule": "damage/stun/buildup resistance fields exist for mapped live variants; map source integer units to fairy resistance decimals after unit mapping",
+      "sampleEntity": "nanoka-monster-dullahan-live-30000",
       "rawAvailable": true,
       "promotable": false,
       "blockedBy": [
-        "field:resistance-unit-mapping-required",
-        "field:variant-mapping-required"
+        "field:resistance-unit-mapping-required"
+      ],
+      "supportingSampleEntities": [
+        "nanoka-monster-dullahan-live-30000",
+        "nanoka-monster-greta-live-30004",
+        "nanoka-monster-ruthless-fiend-live-200141",
+        "nanoka-monster-notorious-hati-live-200014",
+        "nanoka-monster-notorious-armored-hati-live-200034",
+        "nanoka-monster-miasma-priest-live-30033",
+        "nanoka-monster-notorious-pompey-live-300211"
       ]
     },
     {
@@ -772,13 +903,21 @@
         "/monster_info/*/stats/*_buildup_res",
         "/monster_info/*/stats/*_buildup_curve"
       ],
-      "transformRule": "element_abnormal, base_buildup_ratio, buildup_res, and buildup_curve fields exist; map them to fairy threshold/composition semantics after variant mapping",
-      "sampleEntity": "nanoka-monster-dullahan-30000",
+      "transformRule": "element_abnormal, base_buildup_ratio, buildup_res, and buildup_curve fields exist for mapped live variants; threshold/composition semantics remain blocked",
+      "sampleEntity": "nanoka-monster-dullahan-live-30000",
       "rawAvailable": true,
       "promotable": false,
       "blockedBy": [
-        "field:anomaly-threshold-mapping-required",
-        "field:variant-mapping-required"
+        "field:anomaly-threshold-mapping-required"
+      ],
+      "supportingSampleEntities": [
+        "nanoka-monster-dullahan-live-30000",
+        "nanoka-monster-greta-live-30004",
+        "nanoka-monster-ruthless-fiend-live-200141",
+        "nanoka-monster-notorious-hati-live-200014",
+        "nanoka-monster-notorious-armored-hati-live-200034",
+        "nanoka-monster-miasma-priest-live-30033",
+        "nanoka-monster-notorious-pompey-live-300211"
       ]
     },
     {
@@ -796,13 +935,21 @@
         "/monster_info/*/stats/destroy_recover_rate",
         "/monster_info/*/stats/destroy_recover_cd"
       ],
-      "transformRule": "auto_recover and stun recovery fields exist; map source recovery units into fairy dazeRecoveryRate/time semantics after variant mapping",
-      "sampleEntity": "nanoka-monster-dullahan-30000",
+      "transformRule": "auto_recover and stun recovery fields exist for mapped live variants; map source recovery units into fairy dazeRecoveryRate/time semantics after semantic mapping",
+      "sampleEntity": "nanoka-monster-dullahan-live-30000",
       "rawAvailable": true,
       "promotable": false,
       "blockedBy": [
-        "field:daze-recovery-semantic-mapping-required",
-        "field:variant-mapping-required"
+        "field:daze-recovery-semantic-mapping-required"
+      ],
+      "supportingSampleEntities": [
+        "nanoka-monster-dullahan-live-30000",
+        "nanoka-monster-greta-live-30004",
+        "nanoka-monster-ruthless-fiend-live-200141",
+        "nanoka-monster-notorious-hati-live-200014",
+        "nanoka-monster-notorious-armored-hati-live-200034",
+        "nanoka-monster-miasma-priest-live-30033",
+        "nanoka-monster-notorious-pompey-live-300211"
       ]
     },
     {
@@ -819,11 +966,20 @@
         "/monster_info/*/tag"
       ],
       "transformRule": "enemy description, card skill text, group description, and tags exist; formal specialRules require deterministic typed modifier templates before promotion",
-      "sampleEntity": "nanoka-monster-dullahan-30000",
+      "sampleEntity": "nanoka-monster-dullahan-live-30000",
       "rawAvailable": true,
       "promotable": false,
       "blockedBy": [
         "typed-modifier-template-required"
+      ],
+      "supportingSampleEntities": [
+        "nanoka-monster-dullahan-live-30000",
+        "nanoka-monster-greta-live-30004",
+        "nanoka-monster-ruthless-fiend-live-200141",
+        "nanoka-monster-notorious-hati-live-200014",
+        "nanoka-monster-notorious-armored-hati-live-200034",
+        "nanoka-monster-miasma-priest-live-30033",
+        "nanoka-monster-notorious-pompey-live-300211"
       ]
     },
     {
@@ -1123,12 +1279,12 @@
   ],
   "summary": {
     "totalRows": 45,
-    "verifiedFromNanoka": 31,
-    "needsTlResearch": 8,
+    "verifiedFromNanoka": 32,
+    "needsTlResearch": 7,
     "needsOwnerResearch": 0,
     "deferred": 6,
-    "promotableNow": 14,
-    "notPromotableYet": 31
+    "promotableNow": 15,
+    "notPromotableYet": 30
   },
   "openResearchItems": [
     "source registry contract, liveVersionRef policy, approvedLiveVersions[], and content hash capture",
@@ -1140,8 +1296,7 @@
     "mindscape/potential semantic mapping",
     "typed modifier templates for passives, W-Engines, Drive Discs, enemy rules, DA buffs, and Sentinel rows",
     "Bangboo element/attribute source field",
-    "enemy monster_info variant mapping for cleaned/golden rows",
-    "enemy level formula, resistance units, anomaly threshold mapping, and daze recovery semantics",
+    "enemy level formula, resistance units, anomaly threshold mapping, and daze recovery semantics after variant mapping",
     "W-Engine stat/refine mapping",
     "Drive Disc slot main stat and substat table source",
     "DA boss_adjust, score/HP, field-rule, and period filter semantic mapping",

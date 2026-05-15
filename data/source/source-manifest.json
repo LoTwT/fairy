@@ -59,12 +59,12 @@
       "id": "nanoka-zzz-2.8",
       "kind": "rawHttpSnapshot",
       "path": "data/source/raw/nanoka/zzz/2.8/fetch-manifest.json",
-      "sha256": "9ed32d472c117f294a897fa48c1f43a1ce738c872c2864f392bb401e0aa8e92b",
-      "bytes": 8374,
-      "fetchedAt": "2026-05-15T12:20:00+08:00",
+      "sha256": "e21e89b5f71e863589938ac293d26712457c0d8c3ce40c4da63c183991245c48",
+      "bytes": 16170,
+      "fetchedAt": "2026-05-15T13:20:00+08:00",
       "providedBy": "static.nanoka.cc public JSON",
       "distribution": "raw-retained-not-packaged",
-      "usage": "Nanoka live 2.8 raw snapshot fixture for Phase 2 source-gate and adapter-skeleton tests; not a runtime cleaned-data cutover"
+      "usage": "Nanoka live 2.8 raw snapshot fixture for Phase 2 source-gate, adapter-skeleton, and enemy variant mapping tests; not a runtime cleaned-data cutover"
     }
   ]
 }

@@ -113,6 +113,7 @@ function validateMatrixAgainstRegistry(matrix, registry) {
   const sampleById = new Map((matrix.sampleSources ?? []).map(sample => [sample.id, sample]))
   for (const row of matrix.rows ?? []) {
     assert(!row.fieldId?.startsWith("sentinel."), `${row.fieldId}: provisional sentinel fieldId must use canonical Adrenaline/Resonance naming`)
+    assert(!row.blockedBy?.includes("field:variant-mapping-required"), `${row.fieldId}: enemy variant mapping blocker must be resolved or replaced with the remaining precise blocker`)
 
     if (row.promotable !== true)
       continue
@@ -143,6 +144,39 @@ function validateMatrixAgainstRegistry(matrix, registry) {
   assert(daRow.promotable === true, "deadlyAssault.periodsBossesBuffs: DA source artifact row must be promotable after semantic mapping gate")
   assert(daRow.sampleEntity === "nanoka-boss-live-69036", "deadlyAssault.periodsBossesBuffs: DA row must use live period detail evidence")
   assert(daRow.blockedBy?.includes("field:runtime-cutover-drift-required"), "deadlyAssault.periodsBossesBuffs: DA row must keep runtime cutover blocked until drift audit")
+
+  const enemyVariantRow = resourceRows.get("enemies.variantMapping")
+  assert(enemyVariantRow !== undefined, "enemies.variantMapping: missing enemy variant mapping row")
+  assert(enemyVariantRow.status === "verified-from-nanoka", "enemies.variantMapping: row must be verified after live monster_info mapping")
+  assert(enemyVariantRow.promotable === true, "enemies.variantMapping: structured source artifact must be promotable after live mapping gate")
+  assert(enemyVariantRow.sampleEntity === "nanoka-monster-dullahan-live-30000", "enemies.variantMapping: row must use live Dullahan sample evidence")
+  assert(enemyVariantRow.blockedBy?.includes("field:runtime-cutover-drift-required"), "enemies.variantMapping: runtime cutover must remain blocked until drift audit")
+  for (const rawPath of [
+    "/id",
+    "/name",
+    "/monster_id",
+    "/monster_info/{monster_id}",
+    "/monster_info/{monster_id}/code_name",
+    "/monster_info/{monster_id}/tag",
+    "/monster_info/{monster_id}/stats",
+  ]) {
+    assert(enemyVariantRow.rawFieldPaths?.includes(rawPath), `enemies.variantMapping: missing raw path ${rawPath}`)
+  }
+  for (const sampleId of [
+    "nanoka-monster-dullahan-live-30000",
+    "nanoka-monster-greta-live-30004",
+    "nanoka-monster-ruthless-fiend-live-200141",
+    "nanoka-monster-notorious-hati-live-200014",
+    "nanoka-monster-notorious-armored-hati-live-200034",
+    "nanoka-monster-miasma-priest-live-30033",
+    "nanoka-monster-notorious-pompey-live-300211",
+  ]) {
+    const sample = sampleById.get(sampleId)
+    assert(sample !== undefined, `enemies.variantMapping: missing supporting live sample ${sampleId}`)
+    assert(sample.approvedForCleanedOutput === true, `${sampleId}: enemy supporting sample must be approved live evidence`)
+    assert(sample.version === nanoka.configuredLiveVersion, `${sampleId}: enemy supporting sample must use configuredLiveVersion`)
+    assert(enemyVariantRow.supportingSampleEntities?.includes(sampleId), `enemies.variantMapping: supporting samples must include ${sampleId}`)
+  }
 }
 
 function validateCoveredSourceRefs(registry) {
