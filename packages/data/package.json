@@ -31,7 +31,8 @@
   },
   "scripts": {
     "audit:excel": "node scripts/excel-source.mjs audit --generated-at 2026-05-05T17:40:00+08:00",
-    "audit:golden-v1": "tsx scripts/golden-v1-replay.ts audit --generated-at 2026-05-05T18:20:00+08:00",
+    "audit:golden-v1": "tsx scripts/golden-v1-replay.ts audit --generated-at 2026-05-15T18:46:10+08:00",
+    "audit:nanoka-runtime": "tsx scripts/nanoka-runtime-game-data.ts audit",
     "audit:source-migration": "node scripts/source-migration-drift.mjs audit",
     "build": "tsdown src/index.ts src/types.ts --format esm --dts --clean --out-dir dist",
     "check": "tsc -p tsconfig.json --noEmit",
@@ -47,6 +48,7 @@
     "verify:golden-v1": "tsx scripts/golden-v1-replay.ts verify",
     "verify:mihoyo-da": "node scripts/mihoyo-da-source.mjs verify --snapshot 2026-05-05T0850Z",
     "verify:nanoka": "node scripts/nanoka-source.mjs verify --snapshot 2.8",
+    "verify:nanoka-runtime": "tsx scripts/nanoka-runtime-game-data.ts verify",
     "verify:source-migration": "node scripts/source-migration-drift.mjs verify",
     "verify:source-registry": "node scripts/verify-source-registry.mjs"
   },

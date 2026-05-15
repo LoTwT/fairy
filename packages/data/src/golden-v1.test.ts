@@ -29,7 +29,7 @@ describe("V1 golden true-data replay baseline", () => {
     )
   })
 
-  it("tracks the 26-anchor executable gate with no deferred anchors", () => {
+  it("tracks the 28-anchor executable gate with no deferred anchors", () => {
     const report = readJson<{
       v1AnchorIds: string[]
       deferredAnchorIds: string[]
@@ -49,7 +49,7 @@ describe("V1 golden true-data replay baseline", () => {
       }>
     }>(replayReportPath)
 
-    expect(report.v1AnchorIds).toHaveLength(26)
+    expect(report.v1AnchorIds).toHaveLength(28)
     expect(report.v1AnchorIds).toEqual([
       "G01",
       "G02",
@@ -77,11 +77,13 @@ describe("V1 golden true-data replay baseline", () => {
       "G24",
       "G25",
       "G26",
+      "G27",
+      "G28",
     ])
     expect(report.deferredAnchorIds).toEqual([])
     expect(report.summary).toMatchObject({
-      v1AnchorCount: 26,
-      passed: 26,
+      v1AnchorCount: 28,
+      passed: 28,
       pendingHarness: 0,
       blocked: 0,
       deferred: 0,
@@ -131,6 +133,14 @@ describe("V1 golden true-data replay baseline", () => {
     expect(g26?.status).toBe("passed")
     expect(g26?.notes.join("\n")).toContain("8057.0996 × 5.12")
     expect(g26?.notes.join("\n")).toContain("316.8")
+    const g27 = report.anchors.find(anchor => anchor.id === "G27")
+    expect(g27?.status).toBe("passed")
+    expect(g27?.notes.join("\n")).toContain("872.5748 × first-basic 0.458")
+    expect(g27?.notes.join("\n")).toContain("maxAdrenaline 120")
+    const g28 = report.anchors.find(anchor => anchor.id === "G28")
+    expect(g28?.status).toBe("passed")
+    expect(g28?.notes.join("\n")).toContain("8057.0996 × active 5.12")
+    expect(g28?.notes.join("\n")).toContain("electric element")
   })
 
   it("extracts the minimal V1 agent rows, Bangboo rows, and source text candidates", () => {

@@ -134,8 +134,8 @@ Conclusion:
 - A follow-up matrix/schema update should move `deadlyAssault.periodsBossesBuffs` from
   `deferred` / `retained-non-nanoka` to a nanoka source-backed row with status
   at least `verified-from-nanoka`. After task #142 it can be marked promotable
-  as a structured source artifact, with `runtimeCutoverReady=false` until Phase
-  3 drift audit and Phase 4 cutover approval.
+  as a structured source artifact; Phase 3 drift rulings and Phase 4 cutover
+  approval clear the runtime gate.
 
 ## Adrenaline / Resonance Evidence
 
@@ -287,7 +287,7 @@ contract based on this feasibility audit:
 
 | Decision | Recommendation |
 |---|---|
-| DA from nanoka | Proceed. Nanoka has DA raw data, and task #142 maps it into a formal-live structured source artifact. Keep runtime implementation gated on Phase 3 drift audit and Phase 4 cutover. |
+| DA from nanoka | Proceed. Nanoka has DA raw data, and task #142 maps it into a formal-live structured source artifact. Phase 3 drift rulings and Phase 4 cutover approval clear the runtime gate. |
 | Formal-live version selection | Use `manifest.zzz.live` by default; allow `latest` only after explicit owner approval. |
 | Sentinel / decibel scope | Proceed as source-backed raw data; require a transform/naming decision before promotion. |
 | Patch history meaning | Prefer "snapshot-derived numeric diff history" for V0.1.0. Do not promise official patch-note prose from nanoka unless lo-user finds a separate endpoint. |

@@ -63,6 +63,7 @@ describe("S5 data governance", () => {
 
     expect(syncOutput).toContain("cleaned mirror check passed")
     expect(files).toContain("cleaned/golden/v1-replay-report.json")
+    expect(files).toContain("cleaned/runtime/game-data.json")
     expect(files).toContain("cleaned/audit/nanoka-coverage-matrix.json")
     expect(files).toContain("source-registry.json")
     expect(files.some(file => file.startsWith("data/source/"))).toBe(false)

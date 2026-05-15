@@ -90,15 +90,15 @@ V0.0.4 ship 后（2026-05-14），lo-user 通告 Excel 数据源（`data/source/
   // R1 Formal-Live Gate：current cleaned output rows 必须 == configuredLiveVersion（即 manifest.zzz.live）
   "configuredLiveVersion": "2.8",         // 当前 release artifact lock 的 live version
   "liveVersionRef": "manifest.zzz.live",
-  // approvedLiveVersions 仅供 R4.a snapshot-diff 历史输入 / archived audit fixtures
-  // 不得用于 authorize current cleaned output（current cleaned output 必须 == configuredLiveVersion）
+  // approvedLiveVersions 供 runtime-primary live lock、R4.a snapshot-diff 历史输入、
+  // archived audit fixtures 使用；current cleaned output 仍必须 == configuredLiveVersion
   "approvedLiveVersions": ["2.8"],
-  "approvedLiveVersionsScope": "snapshot-diff-historical-input | archived-audit-fixture",
+  "approvedLiveVersionsScope": "runtime-primary | snapshot-diff-historical-input | archived-audit-fixture",
   "fetchedAt": "2026-05-15T...",
   "lastVerifiedAt": "2026-05-15T...",
   "contentHash": "sha256:...",
   "takedownPath": "docs/data-source/takedown-rollback.md#nanoka",
-  "fallbackPlan": "archived Excel V0.0.4 snapshot + D-17 米游社 archived + D-12 buhflipexplode archived"
+  "fallbackPlan": "runtime rollback requires explicit lo-user hotfix approval; archived Excel/D-17/D-12 snapshots remain audit references only"
 }
 ```
 
@@ -195,20 +195,21 @@ QA 验证 supply chain 完整性 + Formal-Live Gate 执行 + structured `missing
 - ❌ Phase 3 不允许 silent fallback to Excel/D-17/D-12（archived as audit reference only）
 - 仅 drift audit，不是多源 fallback
 
-**Exit gate**：连续 2 sync drift report 无未 ruling 项 + golden replay G01-G26 全 PASS（仍跑 Excel ref）
+**Exit gate**：连续 2 sync drift report 无未 ruling 项 + golden replay G01-G26 全 PASS（仍跑 Excel ref）+ G27/G28 proof anchors PASS
 
 ### Phase 4 — Cutover + V0.1.0 ship
 
-- 入选源（nanoka）promote 为 runtime 主源，cleaned data 切换
-- Excel raw snapshot 移到 `docs/reference/archive/excel-v0.0.4-final/`
-- D-17 米游社 + D-12 buhflipexplode runtime path **正式 deprecate**（保留 archived snapshot 作 audit reference）
+- 入选源（nanoka）promote 为 runtime 主源，新增/切换 runtime cleaned artifact + loader/export
+- Excel / D-17 米游社 / D-12 buhflipexplode raw snapshots **不物理移动**，保留在 `data/source/...` 作 archived audit reference
+- D-17 米游社 + D-12 buhflipexplode runtime path **正式 deprecate**（runtime/export fail-loud if 引用 archived source ids）
 - G01-G26 历史 source refs **保留作 release evidence**（per R6 渐进）+ 同时加 new-source parallel refs
 - 新增 **G27 / G28**（new-source proof anchors）：1 个最新角色 + 1 个最新邦布
 - `v1-replay-report.json` 扩展到 28 anchors，`releaseReady=true` 保持
+- `data/cleaned/runtime/game-data.json` / package mirror 标 `runtimeCutoverReady=true`，`GameData.sourceVersion=nanoka-zzz@2.8`
 - Release `v0.1.0`（**minor bump，schema breaking**，per R5）
 - Release notes 标 "Schema migration: nanoka-exclusive source-backed data"
 
-**Phase 4 exit gate**：QA 8 gates 全 PASS（见 §9）+ G27/G28 anchor PASS + lo-user OK ship。
+**Phase 4 exit gate**：QA 8 gates 全 PASS（见 §9）+ 28 executable anchors PASS + archived source IDs 不被 runtime 引用 + lo-user OK ship。
 
 ## 6. Matrix reference
 
@@ -342,7 +343,7 @@ lo-user 已 explicitly 接受以下残余风险（per msg `74b52454`）：
 | D-20.OQ.1 | Phase 2 panel normalization formula 验证：与 G24-G26 已 ship Excel 数据一致后才能 promote | Phase 2 panel mapping |
 | D-20.OQ.2 | 字段缺失阈值：candidate 覆盖率达多少 % 进 Phase 3？（建议 ≥ 95%）| Phase 2 末 |
 | D-20.OQ.3 | Phase 3 并跑期：默认 2 sync / 2-3 周；如 drift unresolved 或 lo-user 指示，可延长到最多 6 周 | Phase 2 末 |
-| D-20.OQ.4 | G27/G28 entities：选哪个最新角色 + 邦布 | Phase 4 前 |
+| D-20.OQ.4 | G27/G28 entities：选哪个最新角色 + 邦布 | ✅ resolved：G27 = 仪玄 `1371`，G28 = Plugboo `54008` |
 | D-20.OQ.5 | Patch history schema 设计：snapshotDiffHistory 字段结构 + 多版本 diff 表达式 | Phase 2 patch tool |
 | D-20.OQ.6 | nanoka manifest.zzz.live 何时 approve 新版本（如 2.9 上线）| live version 升级时 |
 
@@ -376,8 +377,8 @@ lo-user 已 explicitly 接受以下残余风险（per msg `74b52454`）：
 | **Phase 1** | Schema-first inventory + audit + matrix lock (PR #52/#53/#54/#55) | TL + QA | done ✅ |
 | **Phase 1.5** | D-20 v0.4 PR（本文档）| Product | ~1-2 小时 |
 | **Phase 2** | nanoka adapter + panel normalization + enemy variant mapping + DA semantic + Sentinel typed promote + patch diff tool + 9 deliverables | TL + QA validate | ~3-5 天 |
-| **Phase 3** | Parallel period drift audit（默认 2 sync / 2-3 周，最长 6 周 fallback）| TL + Product + QA + lo-user 必要时 | 2-3 周（默认 sprint）|
-| **Phase 4** | Cutover + V0.1.0 release + G27/G28 anchor + D-17/D-12 deprecate + Excel archive | TL + QA + lo-user release approve | ~1 天 |
+| **Phase 3** | Parallel period drift audit（2 sync + rulings + G27/G28 proof anchors）| TL + Product + QA + lo-user 必要时 | done ✅ |
+| **Phase 4** | Runtime cutover + V0.1.0 release + G27/G28 executable replay + D-17/D-12 deprecate | TL + QA + lo-user release approve | in progress |
 
 **总估算**：**~3-4 周 sprint**（默认 Phase 3 短窗口 per Q2 紧急），最长 ~7-8 周（Phase 3 conservative fallback）。
 

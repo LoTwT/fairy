@@ -6,9 +6,10 @@ Reviewers: @Product, @QA, @lo-user
 Related tasks: task #40, task #43
 
 This document narrows the original 23 golden anchors to the V1 release gate
-locked by D-13 plus DD-002, then tracks V1.x and V1.1 golden expansion. The
-executable gate currently has 26 anchors: the original 19 V1 anchors plus G13,
-G18, G19, G20, and G24-G26.
+locked by D-13 plus DD-002, then tracks V1.x, V1.1, and V0.1.0 nanoka cutover
+golden expansion. The executable gate currently has 28 anchors: the original 19
+V1 anchors plus G13, G18, G19, G20, G24-G26, and G27/G28 nanoka runtime-primary
+proof anchors.
 
 The goal of this audit is to decide the minimum source and cleaned-data work
 needed before true-data replay. It does not change QA's fixture assertions.
@@ -20,6 +21,7 @@ needed before true-data replay. It does not change QA's fixture assertions.
 | V1 release gate | G01-G12, G14-G17, G21-G23 | Must pass before V1 release. |
 | V1.x executable expansion | G13, G18, G19, G20 | Passed after guide anomaly-threshold composition, non-DA Excel enemy + guide part-break true-damage replay, and daze recovery-rate composition replay. |
 | V1.1 Bangboo actor expansion | G24-G26 | Passed with Excel-only Penguinboo, Sharkboo, and Plugboo numeric attack-segment replay. |
+| V0.1.0 nanoka cutover proof anchors | G27-G28 | Passed with approved-live nanoka Yixuan and Plugboo runtime-primary source refs. |
 | Deferred V1.x | none | No golden anchors remain deferred. |
 
 ## Source Status Summary
@@ -31,7 +33,7 @@ needed before true-data replay. It does not change QA's fixture assertions.
 | Mihoyo DA snapshot | PR #24 retained 35 details and zh/en alignment. | Chinese buff/boss/room text and source anchors for later typed-modifier review. |
 | Excel workbook | Raw workbook retained; `workbook-audit.json` records sheet/column shape. | Minimal agent kit data for Yixuan / Nicole / Yanagi team-modifier anchors, if V1 replay uses formal sourced modifiers. |
 
-## 23-Anchor Matrix
+## 28-Anchor Matrix
 
 | ID | V1 source dependency | Current source coverage | Remaining work |
 |---|---|---|---|
@@ -61,6 +63,8 @@ needed before true-data replay. It does not change QA's fixture assertions.
 | G24 | Penguinboo active skill numeric contribution | Excel has Penguinboo `邦布属性!A42:T42` and skill rows `邦布技能!A2:H3`; Path X uses numeric panel and skill multipliers only. | Passed with explicit Bangboo actor segment: attack `6198.0006 * 4.62 = 28634.762772`, daze `90 * 2.7 = 243`, and buildup `346 * floor(120)/100 = 415.2`. |
 | G25 | Sharkboo active skill numeric contribution | Excel has Sharkboo `邦布属性!A24:T24` and skill rows `邦布技能!A17:H18`; Path X uses numeric panel and skill multipliers only. | Passed with explicit Bangboo actor segment: attack `8057.0996 * 3.84 = 30939.262464`, daze `99 * 1.4 = 138.6`, and buildup `180 * floor(132)/100 = 237.6`. |
 | G26 | Plugboo active skill numeric contribution | Excel has Plugboo `邦布属性!A18:T18` and skill rows `邦布技能!A29:H30`; Path X uses numeric panel and skill multipliers only. | Passed with explicit Bangboo actor segment: attack `8057.0996 * 5.12 = 41252.349952`, daze `99 * 1.87 = 185.13`, and buildup `240 * floor(132)/100 = 316.8`. |
+| G27 | Yixuan approved-live nanoka proof | Nanoka `data/source/raw/nanoka/zzz/2.8/zh/character/1371.json` provides identity, level-60 panel, resource values, rupture fields, and first-basic skill params. | Passed with executable replay: attack `872.5748 * 0.458 = 399.6392584`, daze `93 * 0.286 = 26.598`, maxAdrenaline `120`, automaticAdrenalineAccumulation `2`, resonanceRecovery `71.5`, adrenalineRecovery `0.52`. |
+| G28 | Plugboo approved-live nanoka proof | Nanoka `data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json` provides identity, level-60 panel, active skill numeric values, buildup, and electric element text. | Passed with executable replay: attack `8057.0996 * 5.12 = 41252.349952`, daze `99 * 1.87 = 185.13`, buildup `240 * floor(132)/100 = 316.8`, element `electric`. |
 
 ## Agent Source Evidence For G21-G23
 
@@ -104,6 +108,16 @@ contribution.
 | G26 | 插头布 / Plugboo | `邦布属性!A18:T18` | Level-60 panel: attack `8057.0996`, impact `99`, anomaly mastery `132`, crit `50%/100%`. |
 | G26 | 插头布 active skill | `邦布技能!A29:H29` | Damage multiplier `5.12`, daze multiplier `1.87`, anomaly buildup `240`. |
 | G26 | 插头布 chain skill | `邦布技能!A30:H30` | Imported as candidate data for completeness; not required by the G26 replay assertion. |
+
+## Nanoka Source Evidence For G27/G28
+
+Phase 4 keeps G01-G26 historical release evidence intact and adds parallel
+nanoka runtime-primary proof anchors:
+
+| Anchor | Entity | Source anchor | Runtime proof |
+|---|---|---|---|
+| G27 | 仪玄 / Yixuan | `data/source/raw/nanoka/zzz/2.8/zh/character/1371.json` | Level-60 panel, first-basic damage/daze params, `rp_*` Adrenaline values, `fever_recovery`, and rupture fields. |
+| G28 | 插头布 / Plugboo | `data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json` | Level-60 Bangboo panel, active skill `5400801` multiplier/daze/buildup, and electric element text. |
 
 ## Manual Acceptance Gate
 
@@ -173,20 +187,20 @@ cleaned artifacts:
   `data/cleaned/audit/yanagi.acceptance.json` — lo-user manual acceptance
   records for G22/G23 source-text mappings.
 - `data/cleaned/golden/v1-replay-report.json` — executable replay baseline for
-  the 26-anchor scope after G13, G18, G19, G20, and G24-G26.
+  the 28-anchor scope after G13, G18, G19, G20, G24-G26, and G27/G28.
 
 The current replay report intentionally reports:
 
 | Status | Anchors | Meaning |
 |---|---|---|
-| `passed` | 26 anchors | All executable anchors pass replay with sourced Excel/DA/guide refs, lo-user accepted G22/G23 mappings, and the G24-G26 Excel Bangboo numeric anchors. |
+| `passed` | 28 anchors | All executable anchors pass replay with sourced Excel/DA/guide refs, lo-user accepted G22/G23 mappings, G24-G26 Excel Bangboo numeric anchors, and G27/G28 nanoka runtime-primary proof anchors. |
 | `pendingHarness` | none | No V1 anchors are pending harness. |
 | `blocked` | none | G22/G23 `ERR-DAT-005` diagnostics are cleared by acceptance records. |
 | `deferred` | none | No golden anchors remain deferred. |
 
 `pnpm --filter @randomplay/data verify:golden-v1` is an offline freshness and shape
 gate. It verifies the artifacts are regenerated from the retained sources and
-that executable replay has `passed=26`, `pendingHarness=0`, `blocked=0`,
+that executable replay has `passed=28`, `pendingHarness=0`, `blocked=0`,
 `blockingDiagnostics=0`, and `releaseReady=true`.
 
 ## Product / Human Decisions

@@ -1,6 +1,6 @@
 # Cleaned Schema Contract
 
-Status: Phase 0 draft
+Status: Phase 4 runtime cutover gate
 Owner: @TechLead
 Reviewers: @Product, @QA
 Related: D-20 data-source migration, task #121
@@ -69,9 +69,9 @@ published.
    when it is truly a fairy formula/runtime contract. If the value is a game data
    row, guide value, or sourced constant, it must be researched against nanoka or
    escalated to lo-user.
-8. D-17 Mihoyo and D-12 buhflipexplode Deadly Assault artifacts remain archived
-   audit baselines until Phase 4 cutover. They are not an exception to the
-   R1/R6 nanoka source policy.
+8. D-17 Mihoyo and D-12 buhflipexplode Deadly Assault artifacts are archived
+   audit baselines after Phase 4 cutover. They are not runtime sources and are
+   not an exception to the R1/R6 nanoka source policy.
 
 ## Canonical Top-Level Inventory
 
@@ -116,3 +116,23 @@ slot/stat tables. Users provide the final `AgentSnapshot.panel` after equipped
 Drive Discs, while formal data only needs nanoka-backed Drive Disc identity and
 set-effect text for future typed modifier promotion. Slot/main/substat tables
 remain V1.x validation/recommendation scope.
+
+## Runtime Cleaned Artifact
+
+Phase 4 introduces the nanoka runtime artifact:
+
+- `data/cleaned/runtime/game-data.json`
+- `packages/data/cleaned/runtime/game-data.json`
+
+The artifact must parse as `CleanedGameDataArtifact<GameData>` and carry:
+
+- `runtimeCutoverReady: true`;
+- `runtimeSourcePolicy.primarySourceId: "nanoka-zzz"`;
+- `runtimeSourcePolicy.configuredLiveVersion: "2.8"`;
+- `runtimeSourcePolicy.archivedSourcesRuntimeAllowed: false`;
+- `GameData.sourceVersion: "nanoka-zzz@2.8"`.
+
+Runtime source refs must point only to nanoka `2.8`. Excel, D-17 Mihoyo, D-12
+buhflipexplode, and historical manual cross-check source IDs remain in the repo
+only as archived audit evidence and must fail validation if they appear in
+runtime `GameData`.

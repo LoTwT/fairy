@@ -1,7 +1,7 @@
 {
   "schemaVersion": "nanoka-coverage-matrix/v0.1",
-  "generatedAt": "2026-05-15T17:15:00+08:00",
-  "status": "phase-3-drift-foundation-gate",
+  "generatedAt": "2026-05-15T18:46:10+08:00",
+  "status": "phase-4-runtime-cutover-gate",
   "sourceVersion": "manifest.zzz.live",
   "canonicalSchemas": [
     "packages/core/src/schema/game-data.ts",
@@ -506,14 +506,12 @@
         "/extra_level/*/extra/*/name",
         "/extra_level/*/extra/*/value"
       ],
-      "transformRule": "derive structured promotion-extra source artifacts from approved live character detail where /id matches the requested agent id; map prop 11101 -> maxHp raw, 12101 -> attack raw, and 20101 -> critRate basis-points / 10000. runtimeCutoverReady remains false; do not fold extras into final AgentSnapshot.panel until Phase 3/4 drift/cutover.",
+      "transformRule": "derive structured promotion-extra runtime data from approved live character detail where /id matches the requested agent id; map prop 11101 -> maxHp raw, 12101 -> attack raw, and 20101 -> critRate basis-points / 10000. Phase 3 drift rulings and Phase 4 cutover clear the runtime gate; final AgentSnapshot.panel remains user-provided unless an explicit cleaned-data loader consumes this row.",
       "sampleEntity": "nanoka-character-nekomata-live-1021",
       "rawAvailable": true,
       "promotable": true,
-      "blockedBy": [
-        "field:runtime-cutover-drift-required"
-      ],
-      "notes": "Task #150 promotes promotion extra stats as a structured source artifact only. Live Nekomata and Yixuan samples prove deterministic unit mapping; final snapshot panel composition remains gated by runtimeCutoverReady=false.",
+      "blockedBy": [],
+      "notes": "Task #150 promotes promotion extra stats as structured source evidence. Live Nekomata and Yixuan samples prove deterministic unit mapping; Phase 3 rulings plus Phase 4 cutover allow runtime cleaned data to consume approved-live nanoka rows while final user snapshot panel values remain user-provided.",
       "supportingSampleEntities": [
         "nanoka-character-nekomata-live-1021",
         "nanoka-character-yixuan-live-1371"
@@ -878,13 +876,11 @@
         "/monster_info/{monster_id}/tag",
         "/monster_info/{monster_id}/stats"
       ],
-      "transformRule": "select detail.monster_id, require monster_info[monster_id], and map approved live samples to fairy cleaned enemy ids and G13/G18/G19/G20 golden rows",
+      "transformRule": "select detail.monster_id, require monster_info[monster_id], and map approved live samples to fairy cleaned enemy ids and G13/G18/G19/G20 golden rows. Phase 3 drift rulings and Phase 4 cutover clear the runtime gate.",
       "sampleEntity": "nanoka-monster-dullahan-live-30000",
       "rawAvailable": true,
       "promotable": true,
-      "blockedBy": [
-        "field:runtime-cutover-drift-required"
-      ],
+      "blockedBy": [],
       "supportingSampleEntities": [
         "nanoka-monster-dullahan-live-30000",
         "nanoka-monster-greta-live-30004",
@@ -1199,13 +1195,11 @@
         "/zone/*/layer_room/*/monster_weakness",
         "/boss_adjust/*"
       ],
-      "transformRule": "derive structured Deadly Assault period, zone, rank-goal, buff, room, monster, weakness, and boss-adjustment source artifacts from the approved nanoka live version; reject period rows with begin_time after configuredLiveSnapshotDate; runtimeCutoverReady remains false until Phase 3 drift audit and Phase 4 cutover",
+      "transformRule": "derive structured Deadly Assault period, zone, rank-goal, buff, room, monster, weakness, and boss-adjustment runtime data from the approved nanoka live version; reject period rows with begin_time after configuredLiveSnapshotDate. Phase 3 drift rulings and Phase 4 cutover clear the runtime gate.",
       "sampleEntity": "nanoka-boss-live-69036",
       "rawAvailable": true,
       "promotable": true,
-      "blockedBy": [
-        "field:runtime-cutover-drift-required"
-      ],
+      "blockedBy": [],
       "supportingSamples": [
         "nanoka-boss-live-index-2.8"
       ],

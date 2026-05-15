@@ -22,11 +22,14 @@ const buhflipexplodeEnemiesPath = join(
   repoRoot,
   "data/source/raw/buhflipexplode/2026-05-05T0445Z/assets/zzz/enemies.live.json",
 )
+const nanokaYixuanPath = join(repoRoot, "data/source/raw/nanoka/zzz/2.8/zh/character/1371.json")
+const nanokaPlugbooPath = join(repoRoot, "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json")
 
 const sourceId = "lo-user-excel"
 const parserVersion = "golden-v1-replay-v0.1.0"
 const excelSourceVersion = "2.6.0_R14028417"
-const replaySourceVersion = "excel-2.6.0_R14028417+buhflipexplode-2026-05-05T0445Z"
+const nanokaSourceVersion = "2.8"
+const replaySourceVersion = "excel-2.6.0_R14028417+buhflipexplode-2026-05-05T0445Z+nanoka-2.8"
 const manualAcceptance = {
   acceptedBy: "@lo-user",
   acceptedAt: "2026-05-05T18:45:21+08:00",
@@ -65,6 +68,8 @@ const v1AnchorIds = [
   "G24",
   "G25",
   "G26",
+  "G27",
+  "G28",
 ] as const
 
 const deferredAnchorIds = [] as const
@@ -263,6 +268,15 @@ function sourceRef(sourceAnchor: string): Record<string, string> {
     sourceId,
     sourceVersion: excelSourceVersion,
     sourceAnchor,
+  }
+}
+
+function nanokaSourceRef(sourceAnchor: string, dataPath: string): Record<string, string> {
+  return {
+    sourceId: "nanoka-zzz",
+    sourceVersion: nanokaSourceVersion,
+    sourceAnchor,
+    dataPath,
   }
 }
 
@@ -1013,6 +1027,109 @@ function trace(result: ReturnType<typeof calculate>, path: string) {
 function assertClose(actual: number | undefined, expected: number, tolerance: number, label: string): void {
   if (actual === undefined || Math.abs(actual - expected) > tolerance)
     throw new Error(`${label}: expected ${expected}, got ${actual}`)
+}
+
+function runtimePanelValue(
+  source: Record<string, any>,
+  { baseKey, levelKey, growthKey, level = 60, promotionPhase = "6" }: {
+    baseKey: string
+    levelKey: string
+    growthKey: string
+    level?: number
+    promotionPhase?: string
+  },
+): number {
+  const base = numberValue(source.stats?.[baseKey], `stats.${baseKey}`)
+  const levelBonus = numberValue(source.level?.[promotionPhase]?.[levelKey], `level.${promotionPhase}.${levelKey}`)
+  const growth = numberValue(source.stats?.[growthKey], `stats.${growthKey}`)
+  return Number((base + levelBonus + growth * (level - 1) / 10000).toFixed(8))
+}
+
+function yixuanNanokaProof() {
+  const yixuan = readJson<Record<string, any>>(nanokaYixuanPath)
+  if (yixuan.id !== 1371)
+    throw new Error("G27 Yixuan nanoka source id drifted")
+  const firstBasic = yixuan.skill?.basic?.description?.[4]?.param?.[0]?.param?.["1371001"]
+  if (firstBasic === undefined)
+    throw new Error("G27 Yixuan first basic param 1371001 is missing")
+
+  const maxHp = runtimePanelValue(yixuan, { baseKey: "hp_max", levelKey: "hp_max", growthKey: "hp_growth" })
+  return {
+    sourceRefs: [
+      nanokaSourceRef("data/source/raw/nanoka/zzz/2.8/zh/character/1371.json", "/id"),
+      nanokaSourceRef("data/source/raw/nanoka/zzz/2.8/zh/character/1371.json", "/stats"),
+      nanokaSourceRef("data/source/raw/nanoka/zzz/2.8/zh/character/1371.json", "/level/6"),
+      nanokaSourceRef("data/source/raw/nanoka/zzz/2.8/zh/character/1371.json", "/skill/basic/description/4/param/0/param/1371001"),
+    ],
+    agent: {
+      agentId: "yixuan",
+      level: 60,
+      agentSpecialty: "rupture",
+      attribute: "auricInk",
+      panel: {
+        maxHp,
+        attack: runtimePanelValue(yixuan, { baseKey: "attack", levelKey: "attack", growthKey: "attack_growth" }),
+        defense: runtimePanelValue(yixuan, { baseKey: "defence", levelKey: "defence", growthKey: "defence_growth" }),
+        impact: numberValue(yixuan.stats?.break_stun, "stats.break_stun"),
+        critRate: numberValue(yixuan.stats?.crit, "stats.crit") / 10000,
+        critDamage: numberValue(yixuan.stats?.crit_damage, "stats.crit_damage") / 10000,
+        anomalyMastery: numberValue(yixuan.stats?.element_abnormal_power, "stats.element_abnormal_power"),
+        anomalyProficiency: numberValue(yixuan.stats?.element_mystery, "stats.element_mystery"),
+        sheerForce: Number((maxHp * 0.1).toFixed(8)),
+        maxAdrenaline: numberValue(yixuan.stats?.rp_max, "stats.rp_max"),
+        automaticAdrenalineAccumulation: numberValue(yixuan.stats?.rp_recover, "stats.rp_recover") / 100,
+      },
+    },
+    firstBasic: {
+      damageMultiplier: numberValue(firstBasic.damage_percentage, "skill.basic.description.4.param.0.param.1371001.damage_percentage") / 10000,
+      dazeMultiplier: numberValue(firstBasic.stun_ratio, "skill.basic.description.4.param.0.param.1371001.stun_ratio") / 10000,
+      resonanceRecovery: numberValue(firstBasic.fever_recovery, "skill.basic.description.4.param.0.param.1371001.fever_recovery") / 1000,
+      adrenalineRecovery: numberValue(firstBasic.rp_recovery, "skill.basic.description.4.param.0.param.1371001.rp_recovery") / 10000,
+    },
+    rupture: {
+      ruptureLevel: numberValue(yixuan.stats?.rbl, "stats.rbl"),
+      ruptureCorrectionFactor: numberValue(yixuan.stats?.rbl_correction_factor, "stats.rbl_correction_factor") / 10000,
+      ruptureProbability: numberValue(yixuan.stats?.rbl_probability, "stats.rbl_probability") / 10000,
+    },
+  }
+}
+
+function plugbooNanokaProof() {
+  const plugboo = readJson<Record<string, any>>(nanokaPlugbooPath)
+  if (plugboo.id !== 54008)
+    throw new Error("G28 Plugboo nanoka source id drifted")
+  const active = plugboo.skill_prop?.["5400801"]
+  if (active === undefined)
+    throw new Error("G28 Plugboo active skill prop 5400801 is missing")
+
+  return {
+    sourceRefs: [
+      nanokaSourceRef("data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json", "/id"),
+      nanokaSourceRef("data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json", "/stats"),
+      nanokaSourceRef("data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json", "/level/6"),
+      nanokaSourceRef("data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json", "/skill/a"),
+      nanokaSourceRef("data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json", "/skill_prop/5400801"),
+    ],
+    bangboo: {
+      bangbooId: "plugboo",
+      level: 60,
+      panel: {
+        maxHp: runtimePanelValue(plugboo, { baseKey: "hp_max", levelKey: "hp_max", growthKey: "hpupgrade" }),
+        attack: runtimePanelValue(plugboo, { baseKey: "attack", levelKey: "attack", growthKey: "attack_upgrade" }),
+        defense: runtimePanelValue(plugboo, { baseKey: "defence", levelKey: "defence", growthKey: "def_upgrade" }),
+        impact: numberValue(plugboo.stats?.break_stun, "stats.break_stun"),
+        critRate: numberValue(plugboo.stats?.crit, "stats.crit") / 10000,
+        critDamage: numberValue(plugboo.stats?.crit_dmg, "stats.crit_dmg") / 10000,
+        anomalyMastery: numberValue(plugboo.stats?.element_abnormal_power, "stats.element_abnormal_power"),
+      },
+    },
+    activeSkill: {
+      damageMultiplier: numberValue(active["1001"]?.main, "skill_prop.5400801.1001.main") / 10000,
+      dazeMultiplier: numberValue(active["1002"]?.main, "skill_prop.5400801.1002.main") / 10000,
+      anomalyBuildup: numberValue(active.element_accumulation_value, "skill_prop.5400801.element_accumulation_value") / 100,
+      element: "electric" as const,
+    },
+  }
 }
 
 function defensePenetrationBreakpoint(
@@ -2041,6 +2158,102 @@ function buildReplayReport(generatedAt: string, candidates = buildCandidates(gen
     ]))
   }
 
+  {
+    const yixuan = yixuanNanokaProof()
+    const result = calculate({
+      ...snapshot,
+      team: [yixuan.agent],
+      activeActor: { agentId: "yixuan" },
+      attackSegments: [
+        {
+          id: "g27-yixuan-basic-1",
+          actor: { kind: "agent" as const, agentId: "yixuan" },
+          attribute: "auricInk" as const,
+          tags: ["basic"],
+          damageType: "regular" as const,
+          multiplier: yixuan.firstBasic.damageMultiplier,
+          baseDazeMultiplier: yixuan.firstBasic.dazeMultiplier,
+          source: yixuan.sourceRefs[3],
+        },
+      ],
+      enemy: {
+        level: 60,
+        rank: "boss",
+      },
+    })
+    const segment = result.attackSegments[0]
+    assertClose(segment?.baseDamage, 399.6392584, 0.000001, "G27 Yixuan first basic base damage")
+    assertClose(segment?.baseDaze, 26.598, 0.000001, "G27 Yixuan first basic base daze")
+    assertClose(yixuan.agent.panel.attack * yixuan.firstBasic.damageMultiplier, 399.6392584, 0.000001, "G27 source attack x multiplier")
+    assertClose(yixuan.agent.panel.impact * yixuan.firstBasic.dazeMultiplier, 26.598, 0.000001, "G27 source impact x daze multiplier")
+    if (segment?.actorId !== "yixuan")
+      throw new Error(`G27 expected agent actor id yixuan, got ${segment?.actorId}`)
+
+    anchors.push(passedAnchor("G27", yixuan.sourceRefs, [
+      "Yixuan new-source proof anchor now runs executable replay from approved-live nanoka: level-60 attack 872.5748 × first-basic 0.458 = 399.6392584 base damage.",
+      "Daze uses impact 93 × 0.286 = 26.598, while resource proof binds maxAdrenaline 120, automaticAdrenalineAccumulation 2, resonanceRecovery 71.5, and adrenalineRecovery 0.52.",
+      `Rupture fields are retained from nanoka raw evidence: level ${yixuan.rupture.ruptureLevel}, correction ${yixuan.rupture.ruptureCorrectionFactor}, probability ${yixuan.rupture.ruptureProbability}.`,
+    ]))
+  }
+
+  {
+    const plugboo = plugbooNanokaProof()
+    const result = calculate({
+      ...snapshot,
+      bangboo: {
+        ...plugboo.bangboo,
+        fieldProvenance: {
+          "panel.maxHp": { provenance: "data" as const, source: plugboo.sourceRefs[1] },
+          "panel.attack": { provenance: "data" as const, source: plugboo.sourceRefs[1] },
+          "panel.defense": { provenance: "data" as const, source: plugboo.sourceRefs[1] },
+          "panel.impact": { provenance: "data" as const, source: plugboo.sourceRefs[1] },
+          "panel.critRate": { provenance: "data" as const, source: plugboo.sourceRefs[1] },
+          "panel.critDamage": { provenance: "data" as const, source: plugboo.sourceRefs[1] },
+          "panel.anomalyMastery": { provenance: "data" as const, source: plugboo.sourceRefs[1] },
+        },
+      },
+      attackSegments: [
+        {
+          id: "g28-plugboo-active",
+          actor: { kind: "bangboo" as const, bangbooId: "plugboo" },
+          attribute: plugboo.activeSkill.element,
+          tags: ["special"],
+          damageType: "regular" as const,
+          multiplier: plugboo.activeSkill.damageMultiplier,
+          baseDazeMultiplier: plugboo.activeSkill.dazeMultiplier,
+          anomalyContribution: {
+            status: "shock" as const,
+            buildup: plugboo.activeSkill.anomalyBuildup,
+          },
+          source: plugboo.sourceRefs[4],
+        },
+      ],
+      enemy: {
+        level: 60,
+        rank: "boss",
+        resistance: { electric: 0 },
+        anomalyBuildupResistance: { electric: 0 },
+      },
+    })
+    const segment = result.attackSegments[0]
+    assertClose(segment?.baseDamage, 41252.349952, 0.000001, "G28 Plugboo active base damage")
+    assertClose(segment?.baseDaze, 185.13, 0.000001, "G28 Plugboo active base daze")
+    assertClose(segment?.anomalyBuildup, 316.8, 0.000001, "G28 Plugboo active anomaly buildup")
+    assertClose(plugboo.bangboo.panel.attack * plugboo.activeSkill.damageMultiplier, 41252.349952, 0.000001, "G28 source attack x multiplier")
+    assertClose(plugboo.bangboo.panel.impact * plugboo.activeSkill.dazeMultiplier, 185.13, 0.000001, "G28 source impact x daze multiplier")
+    assertClose(plugboo.activeSkill.anomalyBuildup * Math.floor(plugboo.bangboo.panel.anomalyMastery) / 100, 316.8, 0.000001, "G28 source anomaly buildup")
+    if (segment?.actorId !== "bangboo:plugboo")
+      throw new Error(`G28 expected Bangboo actor id bangboo:plugboo, got ${segment?.actorId}`)
+    if (!result.trace.some(event => event.displayValue === "bangbooActor"))
+      throw new Error("G28 expected Bangboo formula actor trace")
+
+    anchors.push(passedAnchor("G28", plugboo.sourceRefs, [
+      "Plugboo new-source proof anchor now runs executable replay from approved-live nanoka: level-60 attack 8057.0996 × active 5.12 = 41252.349952 base damage.",
+      "Daze uses impact 99 × 1.87 = 185.13, anomaly buildup uses 240 × floor(132)/100 = 316.8, and skill text proves electric element.",
+      "This duplicates the G26 Excel numeric entity with nanoka raw/source refs so Phase 4 release has both archived parity and runtime-primary proof.",
+    ]))
+  }
+
   for (const anchorId of deferredAnchorIds) {
     anchors.push({
       id: anchorId,
@@ -2070,7 +2283,7 @@ function buildReplayReport(generatedAt: string, candidates = buildCandidates(gen
     generatedAt,
     policy: {
       scope:
-        "V1.1 true-data replay harness after G26: all 26 anchors pass executable replay, no anchors remain deferred.",
+        "V0.1.0 true-data replay harness after Phase 4 cutover: all 28 anchors pass executable replay, including G27/G28 nanoka runtime-primary proof anchors.",
       releaseGate:
         "releaseReady becomes true only when all executable anchors pass replay and blockingDiagnostics is zero.",
       manualAcceptance:

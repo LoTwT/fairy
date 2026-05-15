@@ -1,7 +1,7 @@
 {
   "schemaVersion": "fairy-v1-agent-source-candidates-v1",
   "parserVersion": "golden-v1-replay-v0.1.0",
-  "generatedAt": "2026-05-05T18:20:00+08:00",
+  "generatedAt": "2026-05-15T18:46:10+08:00",
   "policy": {
     "scope": "Minimal reader output for executable V1/V1.1 replay. It extracts Yixuan/Nicole/Yanagi identity and calculation-relevant source text candidates plus Penguinboo/Sharkboo/Plugboo numeric Bangboo rows for G24-G26.",
     "formalDataPolicy": "Candidates are not trusted cleaned modifiers. Effects with trustStatus=requiresManualAcceptance must emit ERR-DAT-005 until an accepted record exists.",
