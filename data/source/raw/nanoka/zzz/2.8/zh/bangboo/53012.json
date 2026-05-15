@@ -1,0 +1,251 @@
+{
+  "id": 53012,
+  "code_name": "Booressure",
+  "name": "气压布",
+  "desc": "把握聊天的气氛是成为邦布社交达人的诀窍。",
+  "rarity": 3,
+  "icon": "UI/Sprite/A1DynamicLoad/BangbooModGarage/UnPacker/BangbooRole/BangbooGarageRole17.png",
+  "stats": {
+    "endurance": 180,
+    "hp_max": 436,
+    "hpupgrade": 518360,
+    "attack": 47,
+    "attack_upgrade": 236912,
+    "break_stun": 100,
+    "element_abnormal_power": 100,
+    "defence": 32,
+    "def_upgrade": 92587,
+    "crit": 500,
+    "pen_ratio": 0,
+    "crit_dmg": 5000
+  },
+  "level": {
+    "1": {
+      "hp_max": 0,
+      "attack": 0,
+      "defence": 0,
+      "level_max": 10,
+      "level_min": 0,
+      "materials": {
+        "10": 15000,
+        "102010": 4
+      },
+      "extra": {}
+    },
+    "2": {
+      "hp_max": 228,
+      "attack": 44,
+      "defence": 41,
+      "level_max": 20,
+      "level_min": 10,
+      "materials": {
+        "10": 35000,
+        "102020": 12
+      },
+      "extra": {}
+    },
+    "3": {
+      "hp_max": 455,
+      "attack": 219,
+      "defence": 81,
+      "level_max": 30,
+      "level_min": 20,
+      "materials": {
+        "10": 75000,
+        "102020": 20
+      },
+      "extra": {}
+    },
+    "4": {
+      "hp_max": 683,
+      "attack": 657,
+      "defence": 122,
+      "level_max": 40,
+      "level_min": 30,
+      "materials": {
+        "10": 125000,
+        "102030": 10
+      },
+      "extra": {}
+    },
+    "5": {
+      "hp_max": 910,
+      "attack": 1753,
+      "defence": 163,
+      "level_max": 50,
+      "level_min": 40,
+      "materials": {
+        "10": 250000,
+        "102030": 20
+      },
+      "extra": {}
+    },
+    "6": {
+      "hp_max": 1138,
+      "attack": 4381,
+      "defence": 203,
+      "level_max": 60,
+      "level_min": 50,
+      "materials": {},
+      "extra": {}
+    }
+  },
+  "skill": {
+    "a": {
+      "level": {
+        "1": {
+          "name": "以太空泡",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，吹出以太气泡，以太气泡接触角色时，可以为其回复能量值。",
+          "property": [
+            "能量回复",
+            "冷却时间"
+          ],
+          "param": "[2.5+自身等级*0.05]点|26秒"
+        },
+        "2": {
+          "name": "以太空泡",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，吹出以太气泡，以太气泡接触角色时，可以为其回复能量值。",
+          "property": [
+            "能量回复",
+            "冷却时间"
+          ],
+          "param": "[2.6+自身等级*0.05]点|26秒"
+        },
+        "3": {
+          "name": "以太空泡",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，吹出以太气泡，以太气泡接触角色时，可以为其回复能量值。",
+          "property": [
+            "能量回复",
+            "冷却时间"
+          ],
+          "param": "[2.7+自身等级*0.05]点|26秒"
+        },
+        "4": {
+          "name": "以太空泡",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，吹出以太气泡，以太气泡接触角色时，可以为其回复能量值。",
+          "property": [
+            "能量回复",
+            "冷却时间"
+          ],
+          "param": "[2.8+自身等级*0.05]点|26秒"
+        },
+        "5": {
+          "name": "以太空泡",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，吹出以太气泡，以太气泡接触角色时，可以为其回复能量值。",
+          "property": [
+            "能量回复",
+            "冷却时间"
+          ],
+          "param": "[2.9+自身等级*0.05]点|26秒"
+        },
+        "6": {
+          "name": "以太空泡",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，吹出以太气泡，以太气泡接触角色时，可以为其回复能量值。",
+          "property": [
+            "能量回复",
+            "冷却时间"
+          ],
+          "param": "[3+自身等级*0.05]点|26秒"
+        },
+        "7": {
+          "name": "以太空泡",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，吹出以太气泡，以太气泡接触角色时，可以为其回复能量值。",
+          "property": [
+            "能量回复",
+            "冷却时间"
+          ],
+          "param": "[3.1+自身等级*0.05]点|26秒"
+        },
+        "8": {
+          "name": "以太空泡",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，吹出以太气泡，以太气泡接触角色时，可以为其回复能量值。",
+          "property": [
+            "能量回复",
+            "冷却时间"
+          ],
+          "param": "[3.2+自身等级*0.05]点|26秒"
+        },
+        "9": {
+          "name": "以太空泡",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，吹出以太气泡，以太气泡接触角色时，可以为其回复能量值。",
+          "property": [
+            "能量回复",
+            "冷却时间"
+          ],
+          "param": "[3.3+自身等级*0.05]点|26秒"
+        },
+        "10": {
+          "name": "以太空泡",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，吹出以太气泡，以太气泡接触角色时，可以为其回复能量值。",
+          "property": [
+            "能量回复",
+            "冷却时间"
+          ],
+          "param": "[3.4+自身等级*0.05]点|26秒"
+        }
+      }
+    },
+    "b": {
+      "level": {
+        "1": {
+          "name": "气压平衡",
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在<color=#FFFFFF>[支援]</color>角色时触发：以太气泡接触角色时，额外为后场角色回复能量，回复量为原本的60%。",
+          "property": [
+            "后场角色能量回复比例"
+          ],
+          "param": "60%"
+        },
+        "2": {
+          "name": "气压平衡",
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在<color=#FFFFFF>[支援]</color>角色时触发：以太气泡接触角色时，额外为后场角色回复能量，回复量为原本的70%。",
+          "property": [
+            "后场角色能量回复比例"
+          ],
+          "param": "70%"
+        },
+        "3": {
+          "name": "气压平衡",
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在<color=#FFFFFF>[支援]</color>角色时触发：以太气泡接触角色时，额外为后场角色回复能量，回复量为原本的80%。",
+          "property": [
+            "后场角色能量回复比例"
+          ],
+          "param": "80%"
+        },
+        "4": {
+          "name": "气压平衡",
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在<color=#FFFFFF>[支援]</color>角色时触发：以太气泡接触角色时，额外为后场角色回复能量，回复量为原本的90%。",
+          "property": [
+            "后场角色能量回复比例"
+          ],
+          "param": "90%"
+        },
+        "5": {
+          "name": "气压平衡",
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在<color=#FFFFFF>[支援]</color>角色时触发：以太气泡接触角色时，额外为后场角色回复能量，回复量为原本的100%。",
+          "property": [
+            "后场角色能量回复比例"
+          ],
+          "param": "100%"
+        }
+      }
+    },
+    "c": {
+      "level": {}
+    }
+  },
+  "skill_prop": {
+    "5301201": {
+      "1001": {
+        "main": 0,
+        "growth": 0,
+        "format": "%"
+      },
+      "1002": {
+        "main": 0,
+        "growth": 0,
+        "format": "%"
+      },
+      "element_accumulation_value": 0
+    }
+  }
+}

@@ -1,0 +1,438 @@
+{
+  "id": 53017,
+  "code_name": "Knightboo",
+  "name": "骑士布",
+  "desc": "我和我的小马，都可以弹跳加速！",
+  "rarity": 3,
+  "icon": "UI/Sprite/A1DynamicLoad/BangbooModGarage/UnPacker/BangbooRole/BangbooGarageRole27.png",
+  "stats": {
+    "endurance": 180,
+    "hp_max": 436,
+    "hpupgrade": 518360,
+    "attack": 47,
+    "attack_upgrade": 236912,
+    "break_stun": 100,
+    "element_abnormal_power": 100,
+    "defence": 32,
+    "def_upgrade": 92587,
+    "crit": 500,
+    "pen_ratio": 0,
+    "crit_dmg": 5000
+  },
+  "level": {
+    "1": {
+      "hp_max": 0,
+      "attack": 0,
+      "defence": 0,
+      "level_max": 10,
+      "level_min": 0,
+      "materials": {
+        "10": 15000,
+        "102010": 4
+      },
+      "extra": {
+        "20101": {
+          "prop": 20101,
+          "name": "暴击率",
+          "format": "{0:0.#%}",
+          "value": 0
+        },
+        "21101": {
+          "prop": 21101,
+          "name": "暴击伤害",
+          "format": "{0:0.#%}",
+          "value": 0
+        }
+      }
+    },
+    "2": {
+      "hp_max": 228,
+      "attack": 44,
+      "defence": 41,
+      "level_max": 20,
+      "level_min": 10,
+      "materials": {
+        "10": 35000,
+        "102020": 12
+      },
+      "extra": {
+        "20101": {
+          "prop": 20101,
+          "name": "暴击率",
+          "format": "{0:0.#%}",
+          "value": 450
+        },
+        "21101": {
+          "prop": 21101,
+          "name": "暴击伤害",
+          "format": "{0:0.#%}",
+          "value": 0
+        }
+      }
+    },
+    "3": {
+      "hp_max": 455,
+      "attack": 219,
+      "defence": 81,
+      "level_max": 30,
+      "level_min": 20,
+      "materials": {
+        "10": 75000,
+        "102020": 20
+      },
+      "extra": {
+        "20101": {
+          "prop": 20101,
+          "name": "暴击率",
+          "format": "{0:0.#%}",
+          "value": 2250
+        },
+        "21101": {
+          "prop": 21101,
+          "name": "暴击伤害",
+          "format": "{0:0.#%}",
+          "value": 0
+        }
+      }
+    },
+    "4": {
+      "hp_max": 683,
+      "attack": 657,
+      "defence": 122,
+      "level_max": 40,
+      "level_min": 30,
+      "materials": {
+        "10": 125000,
+        "102030": 10
+      },
+      "extra": {
+        "20101": {
+          "prop": 20101,
+          "name": "暴击率",
+          "format": "{0:0.#%}",
+          "value": 2250
+        },
+        "21101": {
+          "prop": 21101,
+          "name": "暴击伤害",
+          "format": "{0:0.#%}",
+          "value": 2500
+        }
+      }
+    },
+    "5": {
+      "hp_max": 910,
+      "attack": 1753,
+      "defence": 163,
+      "level_max": 50,
+      "level_min": 40,
+      "materials": {
+        "10": 250000,
+        "102030": 20
+      },
+      "extra": {
+        "20101": {
+          "prop": 20101,
+          "name": "暴击率",
+          "format": "{0:0.#%}",
+          "value": 4500
+        },
+        "21101": {
+          "prop": 21101,
+          "name": "暴击伤害",
+          "format": "{0:0.#%}",
+          "value": 2500
+        }
+      }
+    },
+    "6": {
+      "hp_max": 1138,
+      "attack": 4381,
+      "defence": 203,
+      "level_max": 60,
+      "level_min": 50,
+      "materials": {},
+      "extra": {
+        "20101": {
+          "prop": 20101,
+          "name": "暴击率",
+          "format": "{0:0.#%}",
+          "value": 4500
+        },
+        "21101": {
+          "prop": 21101,
+          "name": "暴击伤害",
+          "format": "{0:0.#%}",
+          "value": 5000
+        }
+      }
+    }
+  },
+  "skill": {
+    "a": {
+      "level": {
+        "1": {
+          "name": "骑士，蓄力能量！",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，骑乘白蹦蹦连续跳跃，并在周围召唤出3枚<color=#FFFFFF>[骑士之星]</color>；角色接触<color=#FFFFFF>[骑士之星]</color>时，可以为自身回复能量值。",
+          "property": [
+            "能量回复",
+            "冷却时间"
+          ],
+          "param": "[0.5+自身等级*0.01]点|24秒"
+        },
+        "2": {
+          "name": "骑士，蓄力能量！",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，骑乘白蹦蹦连续跳跃，并在周围召唤出3枚<color=#FFFFFF>[骑士之星]</color>；角色接触<color=#FFFFFF>[骑士之星]</color>时，可以为自身回复能量值。",
+          "property": [
+            "能量回复",
+            "冷却时间"
+          ],
+          "param": "[0.6+自身等级*0.01]点|24秒"
+        },
+        "3": {
+          "name": "骑士，蓄力能量！",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，骑乘白蹦蹦连续跳跃，并在周围召唤出3枚<color=#FFFFFF>[骑士之星]</color>；角色接触<color=#FFFFFF>[骑士之星]</color>时，可以为自身回复能量值。",
+          "property": [
+            "能量回复",
+            "冷却时间"
+          ],
+          "param": "[0.7+自身等级*0.01]点|24秒"
+        },
+        "4": {
+          "name": "骑士，蓄力能量！",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，骑乘白蹦蹦连续跳跃，并在周围召唤出3枚<color=#FFFFFF>[骑士之星]</color>；角色接触<color=#FFFFFF>[骑士之星]</color>时，可以为自身回复能量值。",
+          "property": [
+            "能量回复",
+            "冷却时间"
+          ],
+          "param": "[0.8+自身等级*0.01]点|24秒"
+        },
+        "5": {
+          "name": "骑士，蓄力能量！",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，骑乘白蹦蹦连续跳跃，并在周围召唤出3枚<color=#FFFFFF>[骑士之星]</color>；角色接触<color=#FFFFFF>[骑士之星]</color>时，可以为自身回复能量值。",
+          "property": [
+            "能量回复",
+            "冷却时间"
+          ],
+          "param": "[0.9+自身等级*0.01]点|24秒"
+        },
+        "6": {
+          "name": "骑士，蓄力能量！",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，骑乘白蹦蹦连续跳跃，并在周围召唤出3枚<color=#FFFFFF>[骑士之星]</color>；角色接触<color=#FFFFFF>[骑士之星]</color>时，可以为自身回复能量值。",
+          "property": [
+            "能量回复",
+            "冷却时间"
+          ],
+          "param": "[1+自身等级*0.01]点|24秒"
+        },
+        "7": {
+          "name": "骑士，蓄力能量！",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，骑乘白蹦蹦连续跳跃，并在周围召唤出3枚<color=#FFFFFF>[骑士之星]</color>；角色接触<color=#FFFFFF>[骑士之星]</color>时，可以为自身回复能量值。",
+          "property": [
+            "能量回复",
+            "冷却时间"
+          ],
+          "param": "[1.1+自身等级*0.01]点|24秒"
+        },
+        "8": {
+          "name": "骑士，蓄力能量！",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，骑乘白蹦蹦连续跳跃，并在周围召唤出3枚<color=#FFFFFF>[骑士之星]</color>；角色接触<color=#FFFFFF>[骑士之星]</color>时，可以为自身回复能量值。",
+          "property": [
+            "能量回复",
+            "冷却时间"
+          ],
+          "param": "[1.2+自身等级*0.01]点|24秒"
+        },
+        "9": {
+          "name": "骑士，蓄力能量！",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，骑乘白蹦蹦连续跳跃，并在周围召唤出3枚<color=#FFFFFF>[骑士之星]</color>；角色接触<color=#FFFFFF>[骑士之星]</color>时，可以为自身回复能量值。",
+          "property": [
+            "能量回复",
+            "冷却时间"
+          ],
+          "param": "[1.3+自身等级*0.01]点|24秒"
+        },
+        "10": {
+          "name": "骑士，蓄力能量！",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，骑乘白蹦蹦连续跳跃，并在周围召唤出3枚<color=#FFFFFF>[骑士之星]</color>；角色接触<color=#FFFFFF>[骑士之星]</color>时，可以为自身回复能量值。",
+          "property": [
+            "能量回复",
+            "冷却时间"
+          ],
+          "param": "[1.4+自身等级*0.01]点|24秒"
+        }
+      }
+    },
+    "b": {
+      "level": {
+        "1": {
+          "name": "骑士精神",
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在<color=#FFFFFF>[支援]</color>角色时触发：角色接触到<color=#FFFFFF>[骑士之星]</color>时，攻击力提升20+自身等级*1.2点，持续10秒。",
+          "property": [
+            "攻击力提升",
+            "持续时间"
+          ],
+          "param": "[20+自身等级*1.2]点|10秒"
+        },
+        "2": {
+          "name": "骑士精神",
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在<color=#FFFFFF>[支援]</color>角色时触发：角色接触到<color=#FFFFFF>[骑士之星]</color>时，攻击力提升25+自身等级*1.4点，持续10秒。",
+          "property": [
+            "攻击力提升",
+            "持续时间"
+          ],
+          "param": "[25+自身等级*1.4]点|10秒"
+        },
+        "3": {
+          "name": "骑士精神",
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在<color=#FFFFFF>[支援]</color>角色时触发：角色接触到<color=#FFFFFF>[骑士之星]</color>时，攻击力提升30+自身等级*1.6点，持续10秒。",
+          "property": [
+            "攻击力提升",
+            "持续时间"
+          ],
+          "param": "[30+自身等级*1.6]点|10秒"
+        },
+        "4": {
+          "name": "骑士精神",
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在<color=#FFFFFF>[支援]</color>角色时触发：角色接触到<color=#FFFFFF>[骑士之星]</color>时，攻击力提升35+自身等级*1.8点，持续10秒。",
+          "property": [
+            "攻击力提升",
+            "持续时间"
+          ],
+          "param": "[35+自身等级*1.8]点|10秒"
+        },
+        "5": {
+          "name": "骑士精神",
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在<color=#FFFFFF>[支援]</color>角色时触发：角色接触到<color=#FFFFFF>[骑士之星]</color>时，攻击力提升40+自身等级*2点，持续10秒。",
+          "property": [
+            "攻击力提升",
+            "持续时间"
+          ],
+          "param": "[40+自身等级*2]点|10秒"
+        }
+      }
+    },
+    "c": {
+      "level": {
+        "1": {
+          "name": "骑士，蹦蹦冲击！",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n召唤3只白蹦蹦，在前方范围内进行最多10次踩踏，每次踩踏对范围内的敌人造成<color=#FE437E>以太伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5301702, Prop:1001}|{Skill:5301702, Prop:1002}"
+        },
+        "2": {
+          "name": "骑士，蹦蹦冲击！",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n召唤3只白蹦蹦，在前方范围内进行最多10次踩踏，每次踩踏对范围内的敌人造成<color=#FE437E>以太伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5301702, Prop:1001}|{Skill:5301702, Prop:1002}"
+        },
+        "3": {
+          "name": "骑士，蹦蹦冲击！",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n召唤3只白蹦蹦，在前方范围内进行最多10次踩踏，每次踩踏对范围内的敌人造成<color=#FE437E>以太伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5301702, Prop:1001}|{Skill:5301702, Prop:1002}"
+        },
+        "4": {
+          "name": "骑士，蹦蹦冲击！",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n召唤3只白蹦蹦，在前方范围内进行最多10次踩踏，每次踩踏对范围内的敌人造成<color=#FE437E>以太伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5301702, Prop:1001}|{Skill:5301702, Prop:1002}"
+        },
+        "5": {
+          "name": "骑士，蹦蹦冲击！",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n召唤3只白蹦蹦，在前方范围内进行最多10次踩踏，每次踩踏对范围内的敌人造成<color=#FE437E>以太伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5301702, Prop:1001}|{Skill:5301702, Prop:1002}"
+        },
+        "6": {
+          "name": "骑士，蹦蹦冲击！",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n召唤3只白蹦蹦，在前方范围内进行最多10次踩踏，每次踩踏对范围内的敌人造成<color=#FE437E>以太伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5301702, Prop:1001}|{Skill:5301702, Prop:1002}"
+        },
+        "7": {
+          "name": "骑士，蹦蹦冲击！",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n召唤3只白蹦蹦，在前方范围内进行最多10次踩踏，每次踩踏对范围内的敌人造成<color=#FE437E>以太伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5301702, Prop:1001}|{Skill:5301702, Prop:1002}"
+        },
+        "8": {
+          "name": "骑士，蹦蹦冲击！",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n召唤3只白蹦蹦，在前方范围内进行最多10次踩踏，每次踩踏对范围内的敌人造成<color=#FE437E>以太伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5301702, Prop:1001}|{Skill:5301702, Prop:1002}"
+        },
+        "9": {
+          "name": "骑士，蹦蹦冲击！",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n召唤3只白蹦蹦，在前方范围内进行最多10次踩踏，每次踩踏对范围内的敌人造成<color=#FE437E>以太伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5301702, Prop:1001}|{Skill:5301702, Prop:1002}"
+        },
+        "10": {
+          "name": "骑士，蹦蹦冲击！",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n召唤3只白蹦蹦，在前方范围内进行最多10次踩踏，每次踩踏对范围内的敌人造成<color=#FE437E>以太伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5301702, Prop:1001}|{Skill:5301702, Prop:1002}"
+        }
+      }
+    }
+  },
+  "skill_prop": {
+    "5301701": {
+      "1001": {
+        "main": 0,
+        "growth": 0,
+        "format": "%"
+      },
+      "1002": {
+        "main": 0,
+        "growth": 0,
+        "format": "%"
+      },
+      "element_accumulation_value": 0
+    },
+    "5301702": {
+      "1001": {
+        "main": 8600,
+        "growth": 860,
+        "format": "%"
+      },
+      "1002": {
+        "main": 1200,
+        "growth": 120,
+        "format": "%"
+      },
+      "element_accumulation_value": 3700
+    }
+  }
+}

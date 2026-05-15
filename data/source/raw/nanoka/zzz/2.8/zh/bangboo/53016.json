@@ -1,0 +1,476 @@
+{
+  "id": 53016,
+  "code_name": "Excaliboo",
+  "name": "圣剑布",
+  "desc": "真正的国王只需圣剑加冕。",
+  "rarity": 3,
+  "icon": "UI/Sprite/A1DynamicLoad/BangbooModGarage/UnPacker/BangbooRole/BangbooGarageRole39.png",
+  "stats": {
+    "endurance": 180,
+    "hp_max": 360,
+    "hpupgrade": 428397,
+    "attack": 53,
+    "attack_upgrade": 267156,
+    "break_stun": 94,
+    "element_abnormal_power": 100,
+    "defence": 32,
+    "def_upgrade": 92587,
+    "crit": 500,
+    "pen_ratio": 0,
+    "crit_dmg": 5000
+  },
+  "level": {
+    "1": {
+      "hp_max": 0,
+      "attack": 0,
+      "defence": 0,
+      "level_max": 10,
+      "level_min": 0,
+      "materials": {
+        "10": 15000,
+        "102010": 4
+      },
+      "extra": {
+        "20101": {
+          "prop": 20101,
+          "name": "暴击率",
+          "format": "{0:0.#%}",
+          "value": 0
+        },
+        "21101": {
+          "prop": 21101,
+          "name": "暴击伤害",
+          "format": "{0:0.#%}",
+          "value": 0
+        }
+      }
+    },
+    "2": {
+      "hp_max": 188,
+      "attack": 49,
+      "defence": 41,
+      "level_max": 20,
+      "level_min": 10,
+      "materials": {
+        "10": 35000,
+        "102020": 12
+      },
+      "extra": {
+        "20101": {
+          "prop": 20101,
+          "name": "暴击率",
+          "format": "{0:0.#%}",
+          "value": 450
+        },
+        "21101": {
+          "prop": 21101,
+          "name": "暴击伤害",
+          "format": "{0:0.#%}",
+          "value": 0
+        }
+      }
+    },
+    "3": {
+      "hp_max": 376,
+      "attack": 247,
+      "defence": 81,
+      "level_max": 30,
+      "level_min": 20,
+      "materials": {
+        "10": 75000,
+        "102020": 20
+      },
+      "extra": {
+        "20101": {
+          "prop": 20101,
+          "name": "暴击率",
+          "format": "{0:0.#%}",
+          "value": 2250
+        },
+        "21101": {
+          "prop": 21101,
+          "name": "暴击伤害",
+          "format": "{0:0.#%}",
+          "value": 0
+        }
+      }
+    },
+    "4": {
+      "hp_max": 564,
+      "attack": 741,
+      "defence": 122,
+      "level_max": 40,
+      "level_min": 30,
+      "materials": {
+        "10": 125000,
+        "102030": 10
+      },
+      "extra": {
+        "20101": {
+          "prop": 20101,
+          "name": "暴击率",
+          "format": "{0:0.#%}",
+          "value": 2250
+        },
+        "21101": {
+          "prop": 21101,
+          "name": "暴击伤害",
+          "format": "{0:0.#%}",
+          "value": 2500
+        }
+      }
+    },
+    "5": {
+      "hp_max": 752,
+      "attack": 1976,
+      "defence": 163,
+      "level_max": 50,
+      "level_min": 40,
+      "materials": {
+        "10": 250000,
+        "102030": 20
+      },
+      "extra": {
+        "20101": {
+          "prop": 20101,
+          "name": "暴击率",
+          "format": "{0:0.#%}",
+          "value": 4500
+        },
+        "21101": {
+          "prop": 21101,
+          "name": "暴击伤害",
+          "format": "{0:0.#%}",
+          "value": 2500
+        }
+      }
+    },
+    "6": {
+      "hp_max": 940,
+      "attack": 4941,
+      "defence": 203,
+      "level_max": 60,
+      "level_min": 50,
+      "materials": {},
+      "extra": {
+        "20101": {
+          "prop": 20101,
+          "name": "暴击率",
+          "format": "{0:0.#%}",
+          "value": 4500
+        },
+        "21101": {
+          "prop": 21101,
+          "name": "暴击伤害",
+          "format": "{0:0.#%}",
+          "value": 5000
+        }
+      }
+    }
+  },
+  "skill": {
+    "a": {
+      "level": {
+        "1": {
+          "name": "圣剑解放",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，圣剑布尝试拔剑：\n若拔剑失败，将使用三连锤击，造成<color=#F0D12B>物理伤害</color>；\n若拔剑成功，将使用剑斩击目标，造成大量<color=#F0D12B>物理伤害</color>。",
+          "property": [
+            "斩击伤害倍率",
+            "斩击失衡倍率",
+            "锤击伤害倍率",
+            "锤击失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5301601, Prop:1001}|{Skill:5301601, Prop:1002}|{Skill:5301602, Prop:1001}|{Skill:5301602, Prop:1002}|24秒"
+        },
+        "2": {
+          "name": "圣剑解放",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，圣剑布尝试拔剑：\n若拔剑失败，将使用三连锤击，造成<color=#F0D12B>物理伤害</color>；\n若拔剑成功，将使用剑斩击目标，造成大量<color=#F0D12B>物理伤害</color>。",
+          "property": [
+            "斩击伤害倍率",
+            "斩击失衡倍率",
+            "锤击伤害倍率",
+            "锤击失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5301601, Prop:1001}|{Skill:5301601, Prop:1002}|{Skill:5301602, Prop:1001}|{Skill:5301602, Prop:1002}|24秒"
+        },
+        "3": {
+          "name": "圣剑解放",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，圣剑布尝试拔剑：\n若拔剑失败，将使用三连锤击，造成<color=#F0D12B>物理伤害</color>；\n若拔剑成功，将使用剑斩击目标，造成大量<color=#F0D12B>物理伤害</color>。",
+          "property": [
+            "斩击伤害倍率",
+            "斩击失衡倍率",
+            "锤击伤害倍率",
+            "锤击失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5301601, Prop:1001}|{Skill:5301601, Prop:1002}|{Skill:5301602, Prop:1001}|{Skill:5301602, Prop:1002}|24秒"
+        },
+        "4": {
+          "name": "圣剑解放",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，圣剑布尝试拔剑：\n若拔剑失败，将使用三连锤击，造成<color=#F0D12B>物理伤害</color>；\n若拔剑成功，将使用剑斩击目标，造成大量<color=#F0D12B>物理伤害</color>。",
+          "property": [
+            "斩击伤害倍率",
+            "斩击失衡倍率",
+            "锤击伤害倍率",
+            "锤击失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5301601, Prop:1001}|{Skill:5301601, Prop:1002}|{Skill:5301602, Prop:1001}|{Skill:5301602, Prop:1002}|24秒"
+        },
+        "5": {
+          "name": "圣剑解放",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，圣剑布尝试拔剑：\n若拔剑失败，将使用三连锤击，造成<color=#F0D12B>物理伤害</color>；\n若拔剑成功，将使用剑斩击目标，造成大量<color=#F0D12B>物理伤害</color>。",
+          "property": [
+            "斩击伤害倍率",
+            "斩击失衡倍率",
+            "锤击伤害倍率",
+            "锤击失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5301601, Prop:1001}|{Skill:5301601, Prop:1002}|{Skill:5301602, Prop:1001}|{Skill:5301602, Prop:1002}|24秒"
+        },
+        "6": {
+          "name": "圣剑解放",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，圣剑布尝试拔剑：\n若拔剑失败，将使用三连锤击，造成<color=#F0D12B>物理伤害</color>；\n若拔剑成功，将使用剑斩击目标，造成大量<color=#F0D12B>物理伤害</color>。",
+          "property": [
+            "斩击伤害倍率",
+            "斩击失衡倍率",
+            "锤击伤害倍率",
+            "锤击失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5301601, Prop:1001}|{Skill:5301601, Prop:1002}|{Skill:5301602, Prop:1001}|{Skill:5301602, Prop:1002}|24秒"
+        },
+        "7": {
+          "name": "圣剑解放",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，圣剑布尝试拔剑：\n若拔剑失败，将使用三连锤击，造成<color=#F0D12B>物理伤害</color>；\n若拔剑成功，将使用剑斩击目标，造成大量<color=#F0D12B>物理伤害</color>。",
+          "property": [
+            "斩击伤害倍率",
+            "斩击失衡倍率",
+            "锤击伤害倍率",
+            "锤击失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5301601, Prop:1001}|{Skill:5301601, Prop:1002}|{Skill:5301602, Prop:1001}|{Skill:5301602, Prop:1002}|24秒"
+        },
+        "8": {
+          "name": "圣剑解放",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，圣剑布尝试拔剑：\n若拔剑失败，将使用三连锤击，造成<color=#F0D12B>物理伤害</color>；\n若拔剑成功，将使用剑斩击目标，造成大量<color=#F0D12B>物理伤害</color>。",
+          "property": [
+            "斩击伤害倍率",
+            "斩击失衡倍率",
+            "锤击伤害倍率",
+            "锤击失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5301601, Prop:1001}|{Skill:5301601, Prop:1002}|{Skill:5301602, Prop:1001}|{Skill:5301602, Prop:1002}|24秒"
+        },
+        "9": {
+          "name": "圣剑解放",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，圣剑布尝试拔剑：\n若拔剑失败，将使用三连锤击，造成<color=#F0D12B>物理伤害</color>；\n若拔剑成功，将使用剑斩击目标，造成大量<color=#F0D12B>物理伤害</color>。",
+          "property": [
+            "斩击伤害倍率",
+            "斩击失衡倍率",
+            "锤击伤害倍率",
+            "锤击失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5301601, Prop:1001}|{Skill:5301601, Prop:1002}|{Skill:5301602, Prop:1001}|{Skill:5301602, Prop:1002}|24秒"
+        },
+        "10": {
+          "name": "圣剑解放",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，圣剑布尝试拔剑：\n若拔剑失败，将使用三连锤击，造成<color=#F0D12B>物理伤害</color>；\n若拔剑成功，将使用剑斩击目标，造成大量<color=#F0D12B>物理伤害</color>。",
+          "property": [
+            "斩击伤害倍率",
+            "斩击失衡倍率",
+            "锤击伤害倍率",
+            "锤击失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5301601, Prop:1001}|{Skill:5301601, Prop:1002}|{Skill:5301602, Prop:1001}|{Skill:5301602, Prop:1002}|24秒"
+        }
+      }
+    },
+    "b": {
+      "level": {
+        "1": {
+          "name": "胜利之誓",
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在<color=#FFFFFF>[命破]</color>角色时触发：每次发动<color=#FFFFFF>[主动技]</color>必定拔剑成功，且造成的伤害提升30%。",
+          "property": [
+            "伤害提升"
+          ],
+          "param": "30%"
+        },
+        "2": {
+          "name": "胜利之誓",
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在<color=#FFFFFF>[命破]</color>角色时触发：每次发动<color=#FFFFFF>[主动技]</color>必定拔剑成功，且造成的伤害提升37.5%。",
+          "property": [
+            "伤害提升"
+          ],
+          "param": "37.5%"
+        },
+        "3": {
+          "name": "胜利之誓",
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在<color=#FFFFFF>[命破]</color>角色时触发：每次发动<color=#FFFFFF>[主动技]</color>必定拔剑成功，且造成的伤害提升45%。",
+          "property": [
+            "伤害提升"
+          ],
+          "param": "45%"
+        },
+        "4": {
+          "name": "胜利之誓",
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在<color=#FFFFFF>[命破]</color>角色时触发：每次发动<color=#FFFFFF>[主动技]</color>必定拔剑成功，且造成的伤害提升52.5%。",
+          "property": [
+            "伤害提升"
+          ],
+          "param": "52.5%"
+        },
+        "5": {
+          "name": "胜利之誓",
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在<color=#FFFFFF>[命破]</color>角色时触发：每次发动<color=#FFFFFF>[主动技]</color>必定拔剑成功，且造成的伤害提升60%。",
+          "property": [
+            "伤害提升"
+          ],
+          "param": "60%"
+        }
+      }
+    },
+    "c": {
+      "level": {
+        "1": {
+          "name": "破阵王威",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n使用圣剑猛烈锤击前方敌人，造成大量<color=#F0D12B>物理伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5301603, Prop:1001}|{Skill:5301603, Prop:1002}"
+        },
+        "2": {
+          "name": "破阵王威",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n使用圣剑猛烈锤击前方敌人，造成大量<color=#F0D12B>物理伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5301603, Prop:1001}|{Skill:5301603, Prop:1002}"
+        },
+        "3": {
+          "name": "破阵王威",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n使用圣剑猛烈锤击前方敌人，造成大量<color=#F0D12B>物理伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5301603, Prop:1001}|{Skill:5301603, Prop:1002}"
+        },
+        "4": {
+          "name": "破阵王威",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n使用圣剑猛烈锤击前方敌人，造成大量<color=#F0D12B>物理伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5301603, Prop:1001}|{Skill:5301603, Prop:1002}"
+        },
+        "5": {
+          "name": "破阵王威",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n使用圣剑猛烈锤击前方敌人，造成大量<color=#F0D12B>物理伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5301603, Prop:1001}|{Skill:5301603, Prop:1002}"
+        },
+        "6": {
+          "name": "破阵王威",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n使用圣剑猛烈锤击前方敌人，造成大量<color=#F0D12B>物理伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5301603, Prop:1001}|{Skill:5301603, Prop:1002}"
+        },
+        "7": {
+          "name": "破阵王威",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n使用圣剑猛烈锤击前方敌人，造成大量<color=#F0D12B>物理伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5301603, Prop:1001}|{Skill:5301603, Prop:1002}"
+        },
+        "8": {
+          "name": "破阵王威",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n使用圣剑猛烈锤击前方敌人，造成大量<color=#F0D12B>物理伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5301603, Prop:1001}|{Skill:5301603, Prop:1002}"
+        },
+        "9": {
+          "name": "破阵王威",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n使用圣剑猛烈锤击前方敌人，造成大量<color=#F0D12B>物理伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5301603, Prop:1001}|{Skill:5301603, Prop:1002}"
+        },
+        "10": {
+          "name": "破阵王威",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n使用圣剑猛烈锤击前方敌人，造成大量<color=#F0D12B>物理伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5301603, Prop:1001}|{Skill:5301603, Prop:1002}"
+        }
+      }
+    }
+  },
+  "skill_prop": {
+    "5301601": {
+      "1001": {
+        "main": 48000,
+        "growth": 4800,
+        "format": "%"
+      },
+      "1002": {
+        "main": 28100,
+        "growth": 2810,
+        "format": "%"
+      },
+      "element_accumulation_value": 36000
+    },
+    "5301602": {
+      "1001": {
+        "main": 38400,
+        "growth": 3840,
+        "format": "%"
+      },
+      "1002": {
+        "main": 28100,
+        "growth": 2810,
+        "format": "%"
+      },
+      "element_accumulation_value": 36000
+    },
+    "5301603": {
+      "1001": {
+        "main": 96300,
+        "growth": 9630,
+        "format": "%"
+      },
+      "1002": {
+        "main": 13800,
+        "growth": 1380,
+        "format": "%"
+      },
+      "element_accumulation_value": 41300
+    }
+  }
+}

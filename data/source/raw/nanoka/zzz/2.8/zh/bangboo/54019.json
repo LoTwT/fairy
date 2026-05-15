@@ -1,0 +1,448 @@
+{
+  "id": 54019,
+  "code_name": "「Mercury」",
+  "name": "「墨丘利」",
+  "desc": "不想拿下军功的邦布不是好士兵。",
+  "rarity": 4,
+  "icon": "UI/Sprite/A1DynamicLoad/BangbooModGarage/UnPacker/BangbooRole/BangbooGarageRole38.png",
+  "stats": {
+    "endurance": 180,
+    "hp_max": 396,
+    "hpupgrade": 471237,
+    "attack": 72,
+    "attack_upgrade": 360408,
+    "break_stun": 103,
+    "element_abnormal_power": 110,
+    "defence": 28,
+    "def_upgrade": 78871,
+    "crit": 500,
+    "pen_ratio": 0,
+    "crit_dmg": 5000
+  },
+  "level": {
+    "1": {
+      "hp_max": 0,
+      "attack": 0,
+      "defence": 0,
+      "level_max": 10,
+      "level_min": 0,
+      "materials": {
+        "10": 15000,
+        "102010": 4
+      },
+      "extra": {
+        "20101": {
+          "prop": 20101,
+          "name": "暴击率",
+          "format": "{0:0.#%}",
+          "value": 0
+        },
+        "21101": {
+          "prop": 21101,
+          "name": "暴击伤害",
+          "format": "{0:0.#%}",
+          "value": 0
+        }
+      }
+    },
+    "2": {
+      "hp_max": 207,
+      "attack": 67,
+      "defence": 35,
+      "level_max": 20,
+      "level_min": 10,
+      "materials": {
+        "10": 35000,
+        "102020": 12
+      },
+      "extra": {
+        "20101": {
+          "prop": 20101,
+          "name": "暴击率",
+          "format": "{0:0.#%}",
+          "value": 450
+        },
+        "21101": {
+          "prop": 21101,
+          "name": "暴击伤害",
+          "format": "{0:0.#%}",
+          "value": 0
+        }
+      }
+    },
+    "3": {
+      "hp_max": 414,
+      "attack": 333,
+      "defence": 69,
+      "level_max": 30,
+      "level_min": 20,
+      "materials": {
+        "10": 75000,
+        "102020": 20
+      },
+      "extra": {
+        "20101": {
+          "prop": 20101,
+          "name": "暴击率",
+          "format": "{0:0.#%}",
+          "value": 2250
+        },
+        "21101": {
+          "prop": 21101,
+          "name": "暴击伤害",
+          "format": "{0:0.#%}",
+          "value": 0
+        }
+      }
+    },
+    "4": {
+      "hp_max": 621,
+      "attack": 1000,
+      "defence": 104,
+      "level_max": 40,
+      "level_min": 30,
+      "materials": {
+        "10": 125000,
+        "102030": 10
+      },
+      "extra": {
+        "20101": {
+          "prop": 20101,
+          "name": "暴击率",
+          "format": "{0:0.#%}",
+          "value": 2250
+        },
+        "21101": {
+          "prop": 21101,
+          "name": "暴击伤害",
+          "format": "{0:0.#%}",
+          "value": 2500
+        }
+      }
+    },
+    "5": {
+      "hp_max": 828,
+      "attack": 2666,
+      "defence": 139,
+      "level_max": 50,
+      "level_min": 40,
+      "materials": {
+        "10": 250000,
+        "102030": 20
+      },
+      "extra": {
+        "20101": {
+          "prop": 20101,
+          "name": "暴击率",
+          "format": "{0:0.#%}",
+          "value": 4500
+        },
+        "21101": {
+          "prop": 21101,
+          "name": "暴击伤害",
+          "format": "{0:0.#%}",
+          "value": 2500
+        }
+      }
+    },
+    "6": {
+      "hp_max": 1034,
+      "attack": 6665,
+      "defence": 173,
+      "level_max": 60,
+      "level_min": 50,
+      "materials": {},
+      "extra": {
+        "20101": {
+          "prop": 20101,
+          "name": "暴击率",
+          "format": "{0:0.#%}",
+          "value": 4500
+        },
+        "21101": {
+          "prop": 21101,
+          "name": "暴击伤害",
+          "format": "{0:0.#%}",
+          "value": 5000
+        }
+      }
+    }
+  },
+  "skill": {
+    "a": {
+      "level": {
+        "1": {
+          "name": "战术对策一：火线遏制",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，「墨丘利」召唤载具进行驾驶，对敌人进行持续的火焰喷射，造成大量<color=#FF5521>火属性伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5401901, Prop:1001}|{Skill:5401901, Prop:1002}|25秒"
+        },
+        "2": {
+          "name": "战术对策一：火线遏制",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，「墨丘利」召唤载具进行驾驶，对敌人进行持续的火焰喷射，造成大量<color=#FF5521>火属性伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5401901, Prop:1001}|{Skill:5401901, Prop:1002}|25秒"
+        },
+        "3": {
+          "name": "战术对策一：火线遏制",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，「墨丘利」召唤载具进行驾驶，对敌人进行持续的火焰喷射，造成大量<color=#FF5521>火属性伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5401901, Prop:1001}|{Skill:5401901, Prop:1002}|25秒"
+        },
+        "4": {
+          "name": "战术对策一：火线遏制",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，「墨丘利」召唤载具进行驾驶，对敌人进行持续的火焰喷射，造成大量<color=#FF5521>火属性伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5401901, Prop:1001}|{Skill:5401901, Prop:1002}|25秒"
+        },
+        "5": {
+          "name": "战术对策一：火线遏制",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，「墨丘利」召唤载具进行驾驶，对敌人进行持续的火焰喷射，造成大量<color=#FF5521>火属性伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5401901, Prop:1001}|{Skill:5401901, Prop:1002}|25秒"
+        },
+        "6": {
+          "name": "战术对策一：火线遏制",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，「墨丘利」召唤载具进行驾驶，对敌人进行持续的火焰喷射，造成大量<color=#FF5521>火属性伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5401901, Prop:1001}|{Skill:5401901, Prop:1002}|25秒"
+        },
+        "7": {
+          "name": "战术对策一：火线遏制",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，「墨丘利」召唤载具进行驾驶，对敌人进行持续的火焰喷射，造成大量<color=#FF5521>火属性伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5401901, Prop:1001}|{Skill:5401901, Prop:1002}|25秒"
+        },
+        "8": {
+          "name": "战术对策一：火线遏制",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，「墨丘利」召唤载具进行驾驶，对敌人进行持续的火焰喷射，造成大量<color=#FF5521>火属性伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5401901, Prop:1001}|{Skill:5401901, Prop:1002}|25秒"
+        },
+        "9": {
+          "name": "战术对策一：火线遏制",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，「墨丘利」召唤载具进行驾驶，对敌人进行持续的火焰喷射，造成大量<color=#FF5521>火属性伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5401901, Prop:1001}|{Skill:5401901, Prop:1002}|25秒"
+        },
+        "10": {
+          "name": "战术对策一：火线遏制",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，「墨丘利」召唤载具进行驾驶，对敌人进行持续的火焰喷射，造成大量<color=#FF5521>火属性伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5401901, Prop:1001}|{Skill:5401901, Prop:1002}|25秒"
+        }
+      }
+    },
+    "b": {
+      "level": {
+        "1": {
+          "name": "战术对策二：临阵协同",
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在2名或以上<color=#FFFFFF>[防卫军]</color>阵营角色时触发：代理人造成<color=#FFFFFF>[追加攻击]</color>伤害时，使「墨丘利」下一次<color=#FFFFFF>[主动技]</color>伤害增加22.5%，每5秒最多叠加一次，最多叠加2层。",
+          "property": [
+            "所需[防卫军]角色数",
+            "伤害提升"
+          ],
+          "param": "2|22.5%"
+        },
+        "2": {
+          "name": "战术对策二：临阵协同",
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在2名或以上<color=#FFFFFF>[防卫军]</color>阵营角色时触发：代理人造成<color=#FFFFFF>[追加攻击]</color>伤害时，使「墨丘利」下一次<color=#FFFFFF>[主动技]</color>伤害增加28.1%，每5秒最多叠加一次，最多叠加2层。",
+          "property": [
+            "所需[防卫军]角色数",
+            "伤害提升"
+          ],
+          "param": "2|28.1%"
+        },
+        "3": {
+          "name": "战术对策二：临阵协同",
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在1名或以上<color=#FFFFFF>[防卫军]</color>阵营角色时触发：代理人造成<color=#FFFFFF>[追加攻击]</color>伤害时，使「墨丘利」下一次<color=#FFFFFF>[主动技]</color>伤害增加33.7%，每5秒最多叠加一次，最多叠加2层。",
+          "property": [
+            "所需[防卫军]角色数",
+            "伤害提升"
+          ],
+          "param": "1|33.7%"
+        },
+        "4": {
+          "name": "战术对策二：临阵协同",
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在1名或以上<color=#FFFFFF>[防卫军]</color>阵营角色时触发：代理人造成<color=#FFFFFF>[追加攻击]</color>伤害时，使「墨丘利」下一次<color=#FFFFFF>[主动技]</color>伤害增加39.3%，每5秒最多叠加一次，最多叠加2层。",
+          "property": [
+            "所需[防卫军]角色数",
+            "伤害提升"
+          ],
+          "param": "1|39.3%"
+        },
+        "5": {
+          "name": "战术对策二：临阵协同",
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在1名或以上<color=#FFFFFF>[防卫军]</color>阵营角色时触发：代理人造成<color=#FFFFFF>[追加攻击]</color>伤害时，使「墨丘利」下一次<color=#FFFFFF>[主动技]</color>伤害增加45%，每5秒最多叠加一次，最多叠加2层。",
+          "property": [
+            "所需[防卫军]角色数",
+            "伤害提升"
+          ],
+          "param": "1|45%"
+        }
+      }
+    },
+    "c": {
+      "level": {
+        "1": {
+          "name": "战术对策三：爆弹奇袭",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n将自身作为炮弹装入载具中向敌人发射，命中敌人后产生爆炸，对敌人造成大量<color=#FF5521>火属性伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5401902, Prop:1001}|{Skill:5401902, Prop:1002}"
+        },
+        "2": {
+          "name": "战术对策三：爆弹奇袭",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n将自身作为炮弹装入载具中向敌人发射，命中敌人后产生爆炸，对敌人造成大量<color=#FF5521>火属性伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5401902, Prop:1001}|{Skill:5401902, Prop:1002}"
+        },
+        "3": {
+          "name": "战术对策三：爆弹奇袭",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n将自身作为炮弹装入载具中向敌人发射，命中敌人后产生爆炸，对敌人造成大量<color=#FF5521>火属性伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5401902, Prop:1001}|{Skill:5401902, Prop:1002}"
+        },
+        "4": {
+          "name": "战术对策三：爆弹奇袭",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n将自身作为炮弹装入载具中向敌人发射，命中敌人后产生爆炸，对敌人造成大量<color=#FF5521>火属性伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5401902, Prop:1001}|{Skill:5401902, Prop:1002}"
+        },
+        "5": {
+          "name": "战术对策三：爆弹奇袭",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n将自身作为炮弹装入载具中向敌人发射，命中敌人后产生爆炸，对敌人造成大量<color=#FF5521>火属性伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5401902, Prop:1001}|{Skill:5401902, Prop:1002}"
+        },
+        "6": {
+          "name": "战术对策三：爆弹奇袭",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n将自身作为炮弹装入载具中向敌人发射，命中敌人后产生爆炸，对敌人造成大量<color=#FF5521>火属性伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5401902, Prop:1001}|{Skill:5401902, Prop:1002}"
+        },
+        "7": {
+          "name": "战术对策三：爆弹奇袭",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n将自身作为炮弹装入载具中向敌人发射，命中敌人后产生爆炸，对敌人造成大量<color=#FF5521>火属性伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5401902, Prop:1001}|{Skill:5401902, Prop:1002}"
+        },
+        "8": {
+          "name": "战术对策三：爆弹奇袭",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n将自身作为炮弹装入载具中向敌人发射，命中敌人后产生爆炸，对敌人造成大量<color=#FF5521>火属性伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5401902, Prop:1001}|{Skill:5401902, Prop:1002}"
+        },
+        "9": {
+          "name": "战术对策三：爆弹奇袭",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n将自身作为炮弹装入载具中向敌人发射，命中敌人后产生爆炸，对敌人造成大量<color=#FF5521>火属性伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5401902, Prop:1001}|{Skill:5401902, Prop:1002}"
+        },
+        "10": {
+          "name": "战术对策三：爆弹奇袭",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n将自身作为炮弹装入载具中向敌人发射，命中敌人后产生爆炸，对敌人造成大量<color=#FF5521>火属性伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5401902, Prop:1001}|{Skill:5401902, Prop:1002}"
+        }
+      }
+    }
+  },
+  "skill_prop": {
+    "5401901": {
+      "1001": {
+        "main": 80000,
+        "growth": 8000,
+        "format": "%"
+      },
+      "1002": {
+        "main": 29300,
+        "growth": 2930,
+        "format": "%"
+      },
+      "element_accumulation_value": 37500
+    },
+    "5401902": {
+      "1001": {
+        "main": 84600,
+        "growth": 8460,
+        "format": "%"
+      },
+      "1002": {
+        "main": 12100,
+        "growth": 1210,
+        "format": "%"
+      },
+      "element_accumulation_value": 36300
+    }
+  }
+}

@@ -1,0 +1,3531 @@
+{
+  "kind": "nanokaBangbooBatchAudit",
+  "schemaVersion": "nanoka-bangboo-batch-audit/v0.1",
+  "sourceId": "nanoka-zzz",
+  "sourceVersion": "2.8",
+  "generatedAt": "2026-05-15T20:56:00+08:00",
+  "runtimeCutoverReady": true,
+  "indexSource": {
+    "sourceId": "nanoka-zzz",
+    "sourceVersion": "2.8",
+    "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/bangboo.json",
+    "dataPath": "/"
+  },
+  "summary": {
+    "bangbooCount": 39,
+    "runtimeBangbooCount": 39,
+    "promotedSkillCount": 63,
+    "bangbooIds": [
+      "53001",
+      "53002",
+      "53003",
+      "53004",
+      "53005",
+      "53006",
+      "53007",
+      "53008",
+      "53009",
+      "53010",
+      "53011",
+      "53012",
+      "53013",
+      "53014",
+      "53015",
+      "53016",
+      "53017",
+      "53019",
+      "53021",
+      "54001",
+      "54002",
+      "54003",
+      "54004",
+      "54005",
+      "54006",
+      "54008",
+      "54009",
+      "54010",
+      "54011",
+      "54012",
+      "54013",
+      "54014",
+      "54015",
+      "54016",
+      "54017",
+      "54018",
+      "54019",
+      "54020",
+      "54021"
+    ],
+    "noRuntimeSkillBangbooIds": [
+      "53003",
+      "53008",
+      "53012"
+    ],
+    "elementDerivedCount": 26,
+    "elementNotPromotedCount": 13
+  },
+  "bangboos": [
+    {
+      "id": "53001",
+      "codeName": "Penguinboo",
+      "label": {
+        "zh": "企鹅布",
+        "en": "Penguinboo"
+      },
+      "source": {
+        "sourceId": "nanoka-zzz",
+        "sourceVersion": "2.8",
+        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53001.json",
+        "dataPath": "/"
+      },
+      "level60Panel": {
+        "maxHp": 3827.5423,
+        "attack": 6198.0006,
+        "defense": 723.8011,
+        "impact": 90,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 120
+      },
+      "rawSkillPropCount": 2,
+      "promotedSkillCount": 2,
+      "skillSections": [
+        {
+          "sectionKey": "a",
+          "sourceName": "冰刀舞",
+          "status": "promoted",
+          "runtimeSkillId": "5300101",
+          "referencedSkillPropIds": [
+            "5300101"
+          ],
+          "segmentCount": 1,
+          "segments": [
+            {
+              "damageExpression": "{Skill:5300101, Prop:1001}",
+              "dazeExpression": "{Skill:5300101, Prop:1002}",
+              "damageMultiplier": 4.62,
+              "dazeMultiplier": 2.7
+            }
+          ]
+        },
+        {
+          "sectionKey": "b",
+          "sourceName": "干冰场地",
+          "status": "not-promoted",
+          "reason": "no-damage-daze-pair-in-current-runtime-schema",
+          "properties": [
+            "属性异常积蓄值提升"
+          ]
+        },
+        {
+          "sectionKey": "c",
+          "sourceName": "冰暴回旋",
+          "status": "promoted",
+          "runtimeSkillId": "5300102",
+          "referencedSkillPropIds": [
+            "5300102"
+          ],
+          "segmentCount": 1,
+          "segments": [
+            {
+              "damageExpression": "{Skill:5300102, Prop:1001}",
+              "dazeExpression": "{Skill:5300102, Prop:1002}",
+              "damageMultiplier": 9.57,
+              "dazeMultiplier": 1.37
+            }
+          ]
+        }
+      ],
+      "element": {
+        "status": "derived",
+        "attribute": "ice",
+        "evidenceCount": 20,
+        "sourcePaths": [
+          "/skill/a/level/1/desc",
+          "/skill/a/level/2/desc",
+          "/skill/a/level/3/desc",
+          "/skill/a/level/4/desc",
+          "/skill/a/level/5/desc",
+          "/skill/a/level/6/desc",
+          "/skill/a/level/7/desc",
+          "/skill/a/level/8/desc",
+          "/skill/a/level/9/desc",
+          "/skill/a/level/10/desc",
+          "/skill/c/level/1/desc",
+          "/skill/c/level/2/desc",
+          "/skill/c/level/3/desc",
+          "/skill/c/level/4/desc",
+          "/skill/c/level/5/desc",
+          "/skill/c/level/6/desc",
+          "/skill/c/level/7/desc",
+          "/skill/c/level/8/desc",
+          "/skill/c/level/9/desc",
+          "/skill/c/level/10/desc"
+        ]
+      }
+    },
+    {
+      "id": "53002",
+      "codeName": "Luckyboo",
+      "label": {
+        "zh": "招财布",
+        "en": "Luckyboo"
+      },
+      "source": {
+        "sourceId": "nanoka-zzz",
+        "sourceVersion": "2.8",
+        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53002.json",
+        "dataPath": "/"
+      },
+      "level60Panel": {
+        "maxHp": 3827.5423,
+        "attack": 6198.0006,
+        "defense": 781.2633,
+        "impact": 94,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 112
+      },
+      "rawSkillPropCount": 2,
+      "promotedSkillCount": 1,
+      "skillSections": [
+        {
+          "sectionKey": "a",
+          "sourceName": "一掷千金",
+          "status": "promoted",
+          "runtimeSkillId": "5300201",
+          "referencedSkillPropIds": [
+            "5300201"
+          ],
+          "segmentCount": 1,
+          "segments": [
+            {
+              "damageExpression": "{{Skill:5300201, Prop:1001}/100}*140",
+              "dazeExpression": "{{Skill:5300201, Prop:1002}/100}*140",
+              "damageMultiplier": 6.16,
+              "dazeMultiplier": 3.598
+            }
+          ]
+        },
+        {
+          "sectionKey": "b",
+          "sourceName": "运气乃实力一环",
+          "status": "not-promoted",
+          "reason": "no-damage-daze-pair-in-current-runtime-schema",
+          "properties": [
+            "属性异常积蓄值提升",
+            "持续打击延长时间"
+          ]
+        },
+        {
+          "sectionKey": "c",
+          "status": "not-promoted",
+          "reason": "missing-level-1"
+        }
+      ],
+      "element": {
+        "status": "not-promoted",
+        "reason": "Missing nanoka Bangboo level entries skill.c.level"
+      }
+    },
+    {
+      "id": "53003",
+      "codeName": "Exploreboo",
+      "label": {
+        "zh": "寻宝布",
+        "en": "Exploreboo"
+      },
+      "source": {
+        "sourceId": "nanoka-zzz",
+        "sourceVersion": "2.8",
+        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53003.json",
+        "dataPath": "/"
+      },
+      "level60Panel": {
+        "maxHp": 4632.324,
+        "attack": 6074.2587,
+        "defense": 666.3389,
+        "impact": 100,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 100
+      },
+      "rawSkillPropCount": 1,
+      "promotedSkillCount": 0,
+      "skillSections": [
+        {
+          "sectionKey": "a",
+          "sourceName": "改型以太探测器",
+          "status": "not-promoted",
+          "reason": "no-damage-daze-pair-in-current-runtime-schema",
+          "properties": [
+            "增益1：回复的生命值",
+            "增益2：提供的护盾值",
+            "增益3：能量自动回复",
+            "增益持续时间",
+            "冷却时间"
+          ]
+        },
+        {
+          "sectionKey": "b",
+          "sourceName": "以太侦察专家",
+          "status": "not-promoted",
+          "reason": "no-damage-daze-pair-in-current-runtime-schema",
+          "properties": [
+            "增益1：回复的生命值提升",
+            "增益2：提供的护盾值提升",
+            "增益3：能量自动回复提升"
+          ]
+        },
+        {
+          "sectionKey": "c",
+          "status": "not-promoted",
+          "reason": "missing-level-1"
+        }
+      ],
+      "element": {
+        "status": "not-promoted",
+        "reason": "Missing nanoka Bangboo level entries skill.c.level"
+      }
+    },
+    {
+      "id": "53004",
+      "codeName": "Sumoboo",
+      "label": {
+        "zh": "扑击布",
+        "en": "Sumoboo"
+      },
+      "source": {
+        "sourceId": "nanoka-zzz",
+        "sourceVersion": "2.8",
+        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53004.json",
+        "dataPath": "/"
+      },
+      "level60Panel": {
+        "maxHp": 3827.5423,
+        "attack": 5825.7808,
+        "defense": 781.2633,
+        "impact": 112,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 88
+      },
+      "rawSkillPropCount": 1,
+      "promotedSkillCount": 1,
+      "skillSections": [
+        {
+          "sectionKey": "a",
+          "sourceName": "决胜技·岩崩",
+          "status": "promoted",
+          "runtimeSkillId": "5300401",
+          "referencedSkillPropIds": [
+            "5300401"
+          ],
+          "segmentCount": 1,
+          "segments": [
+            {
+              "damageExpression": "{Skill:5300401, Prop:1001}",
+              "dazeExpression": "{Skill:5300401, Prop:1002}",
+              "damageMultiplier": 3.23,
+              "dazeMultiplier": 1.89
+            }
+          ]
+        },
+        {
+          "sectionKey": "b",
+          "sourceName": "一力降十会",
+          "status": "not-promoted",
+          "reason": "no-damage-daze-pair-in-current-runtime-schema",
+          "properties": [
+            "失衡值提升"
+          ]
+        },
+        {
+          "sectionKey": "c",
+          "status": "not-promoted",
+          "reason": "missing-level-1"
+        }
+      ],
+      "element": {
+        "status": "not-promoted",
+        "reason": "Missing nanoka Bangboo level entries skill.c.level"
+      }
+    },
+    {
+      "id": "53005",
+      "codeName": "Paperboo",
+      "label": {
+        "zh": "纸壳布",
+        "en": "Paperboo"
+      },
+      "source": {
+        "sourceId": "nanoka-zzz",
+        "sourceVersion": "2.8",
+        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53005.json",
+        "dataPath": "/"
+      },
+      "level60Panel": {
+        "maxHp": 4632.324,
+        "attack": 5825.7808,
+        "defense": 781.2633,
+        "impact": 100,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 100
+      },
+      "rawSkillPropCount": 2,
+      "promotedSkillCount": 2,
+      "skillSections": [
+        {
+          "sectionKey": "a",
+          "sourceName": "诱饵纸装甲",
+          "status": "promoted",
+          "runtimeSkillId": "5300501",
+          "referencedSkillPropIds": [
+            "5300501"
+          ],
+          "segmentCount": 1,
+          "segments": [
+            {
+              "damageExpression": "{Skill:5300501, Prop:1001}",
+              "dazeExpression": "{Skill:5300501, Prop:1002}",
+              "damageMultiplier": 4.62,
+              "dazeMultiplier": 2.7
+            }
+          ]
+        },
+        {
+          "sectionKey": "b",
+          "sourceName": "纸壳护甲",
+          "status": "not-promoted",
+          "reason": "no-damage-daze-pair-in-current-runtime-schema",
+          "properties": [
+            "提供护盾（1名敌人时）",
+            "提供护盾（2名敌人时）",
+            "提供护盾（3名或以上敌人时）",
+            "护盾持续时间"
+          ]
+        },
+        {
+          "sectionKey": "c",
+          "sourceName": "纸装甲·冲击模式",
+          "status": "promoted",
+          "runtimeSkillId": "5300502",
+          "referencedSkillPropIds": [
+            "5300502"
+          ],
+          "segmentCount": 1,
+          "segments": [
+            {
+              "damageExpression": "{Skill:5300502, Prop:1001}",
+              "dazeExpression": "{Skill:5300502, Prop:1002}",
+              "damageMultiplier": 6.65,
+              "dazeMultiplier": 0.95
+            }
+          ]
+        }
+      ],
+      "element": {
+        "status": "derived",
+        "attribute": "physical",
+        "evidenceCount": 20,
+        "sourcePaths": [
+          "/skill/a/level/1/desc",
+          "/skill/a/level/2/desc",
+          "/skill/a/level/3/desc",
+          "/skill/a/level/4/desc",
+          "/skill/a/level/5/desc",
+          "/skill/a/level/6/desc",
+          "/skill/a/level/7/desc",
+          "/skill/a/level/8/desc",
+          "/skill/a/level/9/desc",
+          "/skill/a/level/10/desc",
+          "/skill/c/level/1/desc",
+          "/skill/c/level/2/desc",
+          "/skill/c/level/3/desc",
+          "/skill/c/level/4/desc",
+          "/skill/c/level/5/desc",
+          "/skill/c/level/6/desc",
+          "/skill/c/level/7/desc",
+          "/skill/c/level/8/desc",
+          "/skill/c/level/9/desc",
+          "/skill/c/level/10/desc"
+        ]
+      }
+    },
+    {
+      "id": "53006",
+      "codeName": "Bagboo",
+      "label": {
+        "zh": "纸袋布",
+        "en": "Bagboo"
+      },
+      "source": {
+        "sourceId": "nanoka-zzz",
+        "sourceVersion": "2.8",
+        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53006.json",
+        "dataPath": "/"
+      },
+      "level60Panel": {
+        "maxHp": 3827.5423,
+        "attack": 6570.2204,
+        "defense": 781.2633,
+        "impact": 94,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 100
+      },
+      "rawSkillPropCount": 2,
+      "promotedSkillCount": 2,
+      "skillSections": [
+        {
+          "sectionKey": "a",
+          "sourceName": "近一点，再近一点…",
+          "status": "promoted",
+          "runtimeSkillId": "5300601",
+          "referencedSkillPropIds": [
+            "5300601"
+          ],
+          "segmentCount": 1,
+          "segments": [
+            {
+              "damageExpression": "{Skill:5300601, Prop:1001}",
+              "dazeExpression": "{Skill:5300601, Prop:1002}",
+              "damageMultiplier": 3.6,
+              "dazeMultiplier": 2.11
+            }
+          ]
+        },
+        {
+          "sectionKey": "b",
+          "sourceName": "磨刀霍霍",
+          "status": "not-promoted",
+          "reason": "no-damage-daze-pair-in-current-runtime-schema",
+          "properties": [
+            "伤害提升"
+          ]
+        },
+        {
+          "sectionKey": "c",
+          "sourceName": "够近了！",
+          "status": "promoted",
+          "runtimeSkillId": "5300602",
+          "referencedSkillPropIds": [
+            "5300602"
+          ],
+          "segmentCount": 1,
+          "segments": [
+            {
+              "damageExpression": "{Skill:5300602, Prop:1001}",
+              "dazeExpression": "{Skill:5300602, Prop:1002}",
+              "damageMultiplier": 7.64,
+              "dazeMultiplier": 1.09
+            }
+          ]
+        }
+      ],
+      "element": {
+        "status": "derived",
+        "attribute": "physical",
+        "evidenceCount": 20,
+        "sourcePaths": [
+          "/skill/a/level/1/desc",
+          "/skill/a/level/2/desc",
+          "/skill/a/level/3/desc",
+          "/skill/a/level/4/desc",
+          "/skill/a/level/5/desc",
+          "/skill/a/level/6/desc",
+          "/skill/a/level/7/desc",
+          "/skill/a/level/8/desc",
+          "/skill/a/level/9/desc",
+          "/skill/a/level/10/desc",
+          "/skill/c/level/1/desc",
+          "/skill/c/level/2/desc",
+          "/skill/c/level/3/desc",
+          "/skill/c/level/4/desc",
+          "/skill/c/level/5/desc",
+          "/skill/c/level/6/desc",
+          "/skill/c/level/7/desc",
+          "/skill/c/level/8/desc",
+          "/skill/c/level/9/desc",
+          "/skill/c/level/10/desc"
+        ]
+      }
+    },
+    {
+      "id": "53007",
+      "codeName": "Cryboo",
+      "label": {
+        "zh": "泪眼布",
+        "en": "Cryboo"
+      },
+      "source": {
+        "sourceId": "nanoka-zzz",
+        "sourceVersion": "2.8",
+        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53007.json",
+        "dataPath": "/"
+      },
+      "level60Panel": {
+        "maxHp": 3827.5423,
+        "attack": 6198.0006,
+        "defense": 723.8011,
+        "impact": 90,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 120
+      },
+      "rawSkillPropCount": 2,
+      "promotedSkillCount": 2,
+      "skillSections": [
+        {
+          "sectionKey": "a",
+          "sourceName": "拉环爆弹",
+          "status": "promoted",
+          "runtimeSkillId": "5300701",
+          "referencedSkillPropIds": [
+            "5300701"
+          ],
+          "segmentCount": 1,
+          "segments": [
+            {
+              "damageExpression": "{Skill:5300701, Prop:1001}",
+              "dazeExpression": "{Skill:5300701, Prop:1002}",
+              "damageMultiplier": 2.8,
+              "dazeMultiplier": 1.64
+            }
+          ]
+        },
+        {
+          "sectionKey": "b",
+          "sourceName": "热量累积",
+          "status": "not-promoted",
+          "reason": "no-damage-daze-pair-in-current-runtime-schema",
+          "properties": [
+            "属性异常积蓄值提升"
+          ]
+        },
+        {
+          "sectionKey": "c",
+          "sourceName": "惊爆礼物",
+          "status": "promoted",
+          "runtimeSkillId": "5300702",
+          "referencedSkillPropIds": [
+            "5300702"
+          ],
+          "segmentCount": 1,
+          "segments": [
+            {
+              "damageExpression": "{Skill:5300702, Prop:1001}",
+              "dazeExpression": "{Skill:5300702, Prop:1002}",
+              "damageMultiplier": 6.94,
+              "dazeMultiplier": 0.99
+            }
+          ]
+        }
+      ],
+      "element": {
+        "status": "derived",
+        "attribute": "fire",
+        "evidenceCount": 20,
+        "sourcePaths": [
+          "/skill/a/level/1/desc",
+          "/skill/a/level/2/desc",
+          "/skill/a/level/3/desc",
+          "/skill/a/level/4/desc",
+          "/skill/a/level/5/desc",
+          "/skill/a/level/6/desc",
+          "/skill/a/level/7/desc",
+          "/skill/a/level/8/desc",
+          "/skill/a/level/9/desc",
+          "/skill/a/level/10/desc",
+          "/skill/c/level/1/desc",
+          "/skill/c/level/2/desc",
+          "/skill/c/level/3/desc",
+          "/skill/c/level/4/desc",
+          "/skill/c/level/5/desc",
+          "/skill/c/level/6/desc",
+          "/skill/c/level/7/desc",
+          "/skill/c/level/8/desc",
+          "/skill/c/level/9/desc",
+          "/skill/c/level/10/desc"
+        ]
+      }
+    },
+    {
+      "id": "53008",
+      "codeName": "Avocaboo",
+      "label": {
+        "zh": "果核布",
+        "en": "Avocaboo"
+      },
+      "source": {
+        "sourceId": "nanoka-zzz",
+        "sourceVersion": "2.8",
+        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53008.json",
+        "dataPath": "/"
+      },
+      "level60Panel": {
+        "maxHp": 4632.324,
+        "attack": 5825.7808,
+        "defense": 781.2633,
+        "impact": 100,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 100
+      },
+      "rawSkillPropCount": 1,
+      "promotedSkillCount": 0,
+      "skillSections": [
+        {
+          "sectionKey": "a",
+          "sourceName": "甜甜甘露",
+          "status": "not-promoted",
+          "reason": "no-damage-daze-pair-in-current-runtime-schema",
+          "properties": [
+            "生命值回复",
+            "冷却时间"
+          ]
+        },
+        {
+          "sectionKey": "b",
+          "sourceName": "糖分补充",
+          "status": "not-promoted",
+          "reason": "no-damage-daze-pair-in-current-runtime-schema",
+          "properties": [
+            "回复的生命值提升",
+            "可触发次数提升"
+          ]
+        },
+        {
+          "sectionKey": "c",
+          "status": "not-promoted",
+          "reason": "missing-level-1"
+        }
+      ],
+      "element": {
+        "status": "not-promoted",
+        "reason": "Missing nanoka Bangboo level entries skill.c.level"
+      }
+    },
+    {
+      "id": "53009",
+      "codeName": "Boollseye",
+      "label": {
+        "zh": "飞靶布",
+        "en": "Boollseye"
+      },
+      "source": {
+        "sourceId": "nanoka-zzz",
+        "sourceVersion": "2.8",
+        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53009.json",
+        "dataPath": "/"
+      },
+      "level60Panel": {
+        "maxHp": 3827.5423,
+        "attack": 6570.2204,
+        "defense": 781.2633,
+        "impact": 94,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 100
+      },
+      "rawSkillPropCount": 2,
+      "promotedSkillCount": 2,
+      "skillSections": [
+        {
+          "sectionKey": "a",
+          "sourceName": "正中红心",
+          "status": "promoted",
+          "runtimeSkillId": "5300901",
+          "referencedSkillPropIds": [
+            "5300901"
+          ],
+          "segmentCount": 1,
+          "segments": [
+            {
+              "damageExpression": "{Skill:5300901, Prop:1001}",
+              "dazeExpression": "{Skill:5300901, Prop:1002}",
+              "damageMultiplier": 3.2,
+              "dazeMultiplier": 1.87
+            }
+          ]
+        },
+        {
+          "sectionKey": "b",
+          "sourceName": "弹道交叠",
+          "status": "not-promoted",
+          "reason": "no-damage-daze-pair-in-current-runtime-schema",
+          "properties": [
+            "伤害提升"
+          ]
+        },
+        {
+          "sectionKey": "c",
+          "sourceName": "舍命狂镖",
+          "status": "promoted",
+          "runtimeSkillId": "5300902",
+          "referencedSkillPropIds": [
+            "5300902"
+          ],
+          "segmentCount": 1,
+          "segments": [
+            {
+              "damageExpression": "{Skill:5300902, Prop:1001}",
+              "dazeExpression": "{Skill:5300902, Prop:1002}",
+              "damageMultiplier": 8.75,
+              "dazeMultiplier": 1.25
+            }
+          ]
+        }
+      ],
+      "element": {
+        "status": "derived",
+        "attribute": "physical",
+        "evidenceCount": 20,
+        "sourcePaths": [
+          "/skill/a/level/1/desc",
+          "/skill/a/level/2/desc",
+          "/skill/a/level/3/desc",
+          "/skill/a/level/4/desc",
+          "/skill/a/level/5/desc",
+          "/skill/a/level/6/desc",
+          "/skill/a/level/7/desc",
+          "/skill/a/level/8/desc",
+          "/skill/a/level/9/desc",
+          "/skill/a/level/10/desc",
+          "/skill/c/level/1/desc",
+          "/skill/c/level/2/desc",
+          "/skill/c/level/3/desc",
+          "/skill/c/level/4/desc",
+          "/skill/c/level/5/desc",
+          "/skill/c/level/6/desc",
+          "/skill/c/level/7/desc",
+          "/skill/c/level/8/desc",
+          "/skill/c/level/9/desc",
+          "/skill/c/level/10/desc"
+        ]
+      }
+    },
+    {
+      "id": "53010",
+      "codeName": "Electroboo",
+      "label": {
+        "zh": "电击布",
+        "en": "Electroboo"
+      },
+      "source": {
+        "sourceId": "nanoka-zzz",
+        "sourceVersion": "2.8",
+        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53010.json",
+        "dataPath": "/"
+      },
+      "level60Panel": {
+        "maxHp": 3827.5423,
+        "attack": 6198.0006,
+        "defense": 723.8011,
+        "impact": 90,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 120
+      },
+      "rawSkillPropCount": 2,
+      "promotedSkillCount": 2,
+      "skillSections": [
+        {
+          "sectionKey": "a",
+          "sourceName": "百万伏特！",
+          "status": "promoted",
+          "runtimeSkillId": "5301001",
+          "referencedSkillPropIds": [
+            "5301001"
+          ],
+          "segmentCount": 1,
+          "segments": [
+            {
+              "damageExpression": "{Skill:5301001, Prop:1001}",
+              "dazeExpression": "{Skill:5301001, Prop:1002}",
+              "damageMultiplier": 3.6,
+              "dazeMultiplier": 2.11
+            }
+          ]
+        },
+        {
+          "sectionKey": "b",
+          "sourceName": "感应电流",
+          "status": "not-promoted",
+          "reason": "no-damage-daze-pair-in-current-runtime-schema",
+          "properties": [
+            "属性异常积蓄值提升"
+          ]
+        },
+        {
+          "sectionKey": "c",
+          "sourceName": "亿万伏特！",
+          "status": "promoted",
+          "runtimeSkillId": "5301002",
+          "referencedSkillPropIds": [
+            "5301002"
+          ],
+          "segmentCount": 1,
+          "segments": [
+            {
+              "damageExpression": "{Skill:5301002, Prop:1001}",
+              "dazeExpression": "{Skill:5301002, Prop:1002}",
+              "damageMultiplier": 7.12,
+              "dazeMultiplier": 1.02
+            }
+          ]
+        }
+      ],
+      "element": {
+        "status": "derived",
+        "attribute": "electric",
+        "evidenceCount": 20,
+        "sourcePaths": [
+          "/skill/a/level/1/desc",
+          "/skill/a/level/2/desc",
+          "/skill/a/level/3/desc",
+          "/skill/a/level/4/desc",
+          "/skill/a/level/5/desc",
+          "/skill/a/level/6/desc",
+          "/skill/a/level/7/desc",
+          "/skill/a/level/8/desc",
+          "/skill/a/level/9/desc",
+          "/skill/a/level/10/desc",
+          "/skill/c/level/1/desc",
+          "/skill/c/level/2/desc",
+          "/skill/c/level/3/desc",
+          "/skill/c/level/4/desc",
+          "/skill/c/level/5/desc",
+          "/skill/c/level/6/desc",
+          "/skill/c/level/7/desc",
+          "/skill/c/level/8/desc",
+          "/skill/c/level/9/desc",
+          "/skill/c/level/10/desc"
+        ]
+      }
+    },
+    {
+      "id": "53011",
+      "codeName": "Magnetiboo",
+      "label": {
+        "zh": "磁力布",
+        "en": "Magnetiboo"
+      },
+      "source": {
+        "sourceId": "nanoka-zzz",
+        "sourceVersion": "2.8",
+        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53011.json",
+        "dataPath": "/"
+      },
+      "level60Panel": {
+        "maxHp": 3827.5423,
+        "attack": 6570.2204,
+        "defense": 781.2633,
+        "impact": 94,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 100
+      },
+      "rawSkillPropCount": 1,
+      "promotedSkillCount": 1,
+      "skillSections": [
+        {
+          "sectionKey": "a",
+          "sourceName": "磁力锁定",
+          "status": "promoted",
+          "runtimeSkillId": "5301101",
+          "referencedSkillPropIds": [
+            "5301101"
+          ],
+          "segmentCount": 1,
+          "segments": [
+            {
+              "damageExpression": "{Skill:5301101, Prop:1001}",
+              "dazeExpression": "{Skill:5301101, Prop:1002}",
+              "damageMultiplier": 4.8,
+              "dazeMultiplier": 2.81
+            }
+          ]
+        },
+        {
+          "sectionKey": "b",
+          "sourceName": "磁极吸引",
+          "status": "not-promoted",
+          "reason": "no-damage-daze-pair-in-current-runtime-schema",
+          "properties": [
+            "伤害提升"
+          ]
+        },
+        {
+          "sectionKey": "c",
+          "status": "not-promoted",
+          "reason": "missing-level-1"
+        }
+      ],
+      "element": {
+        "status": "not-promoted",
+        "reason": "Missing nanoka Bangboo level entries skill.c.level"
+      }
+    },
+    {
+      "id": "53012",
+      "codeName": "Booressure",
+      "label": {
+        "zh": "气压布",
+        "en": "Booressure"
+      },
+      "source": {
+        "sourceId": "nanoka-zzz",
+        "sourceVersion": "2.8",
+        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53012.json",
+        "dataPath": "/"
+      },
+      "level60Panel": {
+        "maxHp": 4632.324,
+        "attack": 5825.7808,
+        "defense": 781.2633,
+        "impact": 100,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 100
+      },
+      "rawSkillPropCount": 1,
+      "promotedSkillCount": 0,
+      "skillSections": [
+        {
+          "sectionKey": "a",
+          "sourceName": "以太空泡",
+          "status": "not-promoted",
+          "reason": "no-damage-daze-pair-in-current-runtime-schema",
+          "properties": [
+            "能量回复",
+            "冷却时间"
+          ]
+        },
+        {
+          "sectionKey": "b",
+          "sourceName": "气压平衡",
+          "status": "not-promoted",
+          "reason": "no-damage-daze-pair-in-current-runtime-schema",
+          "properties": [
+            "后场角色能量回复比例"
+          ]
+        },
+        {
+          "sectionKey": "c",
+          "status": "not-promoted",
+          "reason": "missing-level-1"
+        }
+      ],
+      "element": {
+        "status": "not-promoted",
+        "reason": "Missing nanoka Bangboo level entries skill.c.level"
+      }
+    },
+    {
+      "id": "53013",
+      "codeName": "Baddieboo",
+      "label": {
+        "zh": "不良布",
+        "en": "Baddieboo"
+      },
+      "source": {
+        "sourceId": "nanoka-zzz",
+        "sourceVersion": "2.8",
+        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53013.json",
+        "dataPath": "/"
+      },
+      "level60Panel": {
+        "maxHp": 3827.5423,
+        "attack": 6570.2204,
+        "defense": 781.2633,
+        "impact": 94,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 100
+      },
+      "rawSkillPropCount": 2,
+      "promotedSkillCount": 2,
+      "skillSections": [
+        {
+          "sectionKey": "a",
+          "sourceName": "火箭炮轰",
+          "status": "promoted",
+          "runtimeSkillId": "5301301",
+          "referencedSkillPropIds": [
+            "5301301"
+          ],
+          "segmentCount": 1,
+          "segments": [
+            {
+              "damageExpression": "{Skill:5301301, Prop:1001}",
+              "dazeExpression": "{Skill:5301301, Prop:1002}",
+              "damageMultiplier": 4,
+              "dazeMultiplier": 2.34
+            }
+          ]
+        },
+        {
+          "sectionKey": "b",
+          "sourceName": "异常火爆",
+          "status": "not-promoted",
+          "reason": "no-damage-daze-pair-in-current-runtime-schema",
+          "properties": [
+            "伤害提升",
+            "伤害额外提升"
+          ]
+        },
+        {
+          "sectionKey": "c",
+          "sourceName": "火箭爆轰！",
+          "status": "promoted",
+          "runtimeSkillId": "5301302",
+          "referencedSkillPropIds": [
+            "5301302"
+          ],
+          "segmentCount": 1,
+          "segments": [
+            {
+              "damageExpression": "{Skill:5301302, Prop:1001}",
+              "dazeExpression": "{Skill:5301302, Prop:1002}",
+              "damageMultiplier": 6.83,
+              "dazeMultiplier": 0.98
+            }
+          ]
+        }
+      ],
+      "element": {
+        "status": "derived",
+        "attribute": "fire",
+        "evidenceCount": 20,
+        "sourcePaths": [
+          "/skill/a/level/1/desc",
+          "/skill/a/level/2/desc",
+          "/skill/a/level/3/desc",
+          "/skill/a/level/4/desc",
+          "/skill/a/level/5/desc",
+          "/skill/a/level/6/desc",
+          "/skill/a/level/7/desc",
+          "/skill/a/level/8/desc",
+          "/skill/a/level/9/desc",
+          "/skill/a/level/10/desc",
+          "/skill/c/level/1/desc",
+          "/skill/c/level/2/desc",
+          "/skill/c/level/3/desc",
+          "/skill/c/level/4/desc",
+          "/skill/c/level/5/desc",
+          "/skill/c/level/6/desc",
+          "/skill/c/level/7/desc",
+          "/skill/c/level/8/desc",
+          "/skill/c/level/9/desc",
+          "/skill/c/level/10/desc"
+        ]
+      }
+    },
+    {
+      "id": "53014",
+      "codeName": "Overtimeboo",
+      "label": {
+        "zh": "加班布",
+        "en": "Overtimeboo"
+      },
+      "source": {
+        "sourceId": "nanoka-zzz",
+        "sourceVersion": "2.8",
+        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53014.json",
+        "dataPath": "/"
+      },
+      "level60Panel": {
+        "maxHp": 3827.5423,
+        "attack": 6570.2204,
+        "defense": 781.2633,
+        "impact": 94,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 100
+      },
+      "rawSkillPropCount": 1,
+      "promotedSkillCount": 1,
+      "skillSections": [
+        {
+          "sectionKey": "a",
+          "sourceName": "班味全开！",
+          "status": "promoted",
+          "runtimeSkillId": "5301401",
+          "referencedSkillPropIds": [
+            "5301401"
+          ],
+          "segmentCount": 1,
+          "segments": [
+            {
+              "damageExpression": "{Skill:5301401, Prop:1001}",
+              "dazeExpression": "{Skill:5301401, Prop:1002}",
+              "damageMultiplier": 3.36,
+              "dazeMultiplier": 2.81
+            }
+          ]
+        },
+        {
+          "sectionKey": "b",
+          "sourceName": "键盘破坏者",
+          "status": "not-promoted",
+          "reason": "no-damage-daze-pair-in-current-runtime-schema",
+          "properties": [
+            "伤害提升",
+            "伤害最多提升"
+          ]
+        },
+        {
+          "sectionKey": "c",
+          "status": "not-promoted",
+          "reason": "missing-level-1"
+        }
+      ],
+      "element": {
+        "status": "not-promoted",
+        "reason": "Missing nanoka Bangboo level entries skill.c.level"
+      }
+    },
+    {
+      "id": "53015",
+      "codeName": "Brawlerboo",
+      "label": {
+        "zh": "格斗布",
+        "en": "Brawlerboo"
+      },
+      "source": {
+        "sourceId": "nanoka-zzz",
+        "sourceVersion": "2.8",
+        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53015.json",
+        "dataPath": "/"
+      },
+      "level60Panel": {
+        "maxHp": 3827.5423,
+        "attack": 6570.2204,
+        "defense": 781.2633,
+        "impact": 94,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 100
+      },
+      "rawSkillPropCount": 3,
+      "promotedSkillCount": 2,
+      "skillSections": [
+        {
+          "sectionKey": "a",
+          "sourceName": "邦布星陨击！",
+          "status": "promoted",
+          "runtimeSkillId": "5301501",
+          "referencedSkillPropIds": [
+            "5301501"
+          ],
+          "segmentCount": 1,
+          "segments": [
+            {
+              "damageExpression": "{Skill:5301501, Prop:1001}",
+              "dazeExpression": "{Skill:5301501, Prop:1002}",
+              "damageMultiplier": 5.6,
+              "dazeMultiplier": 3.28
+            }
+          ]
+        },
+        {
+          "sectionKey": "b",
+          "sourceName": "开幕刺拳",
+          "status": "not-promoted",
+          "reason": "no-damage-daze-pair-in-current-runtime-schema",
+          "properties": [
+            "伤害提升"
+          ]
+        },
+        {
+          "sectionKey": "c",
+          "sourceName": "烈风千击",
+          "status": "promoted",
+          "runtimeSkillId": "5301502",
+          "referencedSkillPropIds": [
+            "5301502"
+          ],
+          "segmentCount": 1,
+          "segments": [
+            {
+              "damageExpression": "{Skill:5301502, Prop:1001}",
+              "dazeExpression": "{Skill:5301502, Prop:1002}",
+              "damageMultiplier": 8.46,
+              "dazeMultiplier": 1.21
+            }
+          ]
+        }
+      ],
+      "element": {
+        "status": "derived",
+        "attribute": "fire",
+        "evidenceCount": 20,
+        "sourcePaths": [
+          "/skill/a/level/1/desc",
+          "/skill/a/level/2/desc",
+          "/skill/a/level/3/desc",
+          "/skill/a/level/4/desc",
+          "/skill/a/level/5/desc",
+          "/skill/a/level/6/desc",
+          "/skill/a/level/7/desc",
+          "/skill/a/level/8/desc",
+          "/skill/a/level/9/desc",
+          "/skill/a/level/10/desc",
+          "/skill/c/level/1/desc",
+          "/skill/c/level/2/desc",
+          "/skill/c/level/3/desc",
+          "/skill/c/level/4/desc",
+          "/skill/c/level/5/desc",
+          "/skill/c/level/6/desc",
+          "/skill/c/level/7/desc",
+          "/skill/c/level/8/desc",
+          "/skill/c/level/9/desc",
+          "/skill/c/level/10/desc"
+        ]
+      }
+    },
+    {
+      "id": "53016",
+      "codeName": "Excaliboo",
+      "label": {
+        "zh": "圣剑布",
+        "en": "Excaliboo"
+      },
+      "source": {
+        "sourceId": "nanoka-zzz",
+        "sourceVersion": "2.8",
+        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53016.json",
+        "dataPath": "/"
+      },
+      "level60Panel": {
+        "maxHp": 3827.5423,
+        "attack": 6570.2204,
+        "defense": 781.2633,
+        "impact": 94,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 100
+      },
+      "rawSkillPropCount": 3,
+      "promotedSkillCount": 2,
+      "skillSections": [
+        {
+          "sectionKey": "a",
+          "sourceName": "圣剑解放",
+          "status": "promoted",
+          "runtimeSkillId": "53016-a",
+          "referencedSkillPropIds": [
+            "5301601",
+            "5301602"
+          ],
+          "segmentCount": 2,
+          "segments": [
+            {
+              "labelSuffix": "斩击",
+              "damageExpression": "{Skill:5301601, Prop:1001}",
+              "dazeExpression": "{Skill:5301601, Prop:1002}",
+              "damageMultiplier": 4.8,
+              "dazeMultiplier": 2.81
+            },
+            {
+              "labelSuffix": "锤击",
+              "damageExpression": "{Skill:5301602, Prop:1001}",
+              "dazeExpression": "{Skill:5301602, Prop:1002}",
+              "damageMultiplier": 3.84,
+              "dazeMultiplier": 2.81
+            }
+          ]
+        },
+        {
+          "sectionKey": "b",
+          "sourceName": "胜利之誓",
+          "status": "not-promoted",
+          "reason": "no-damage-daze-pair-in-current-runtime-schema",
+          "properties": [
+            "伤害提升"
+          ]
+        },
+        {
+          "sectionKey": "c",
+          "sourceName": "破阵王威",
+          "status": "promoted",
+          "runtimeSkillId": "5301603",
+          "referencedSkillPropIds": [
+            "5301603"
+          ],
+          "segmentCount": 1,
+          "segments": [
+            {
+              "damageExpression": "{Skill:5301603, Prop:1001}",
+              "dazeExpression": "{Skill:5301603, Prop:1002}",
+              "damageMultiplier": 9.63,
+              "dazeMultiplier": 1.38
+            }
+          ]
+        }
+      ],
+      "element": {
+        "status": "derived",
+        "attribute": "physical",
+        "evidenceCount": 30,
+        "sourcePaths": [
+          "/skill/a/level/1/desc",
+          "/skill/a/level/2/desc",
+          "/skill/a/level/3/desc",
+          "/skill/a/level/4/desc",
+          "/skill/a/level/5/desc",
+          "/skill/a/level/6/desc",
+          "/skill/a/level/7/desc",
+          "/skill/a/level/8/desc",
+          "/skill/a/level/9/desc",
+          "/skill/a/level/10/desc",
+          "/skill/c/level/1/desc",
+          "/skill/c/level/2/desc",
+          "/skill/c/level/3/desc",
+          "/skill/c/level/4/desc",
+          "/skill/c/level/5/desc",
+          "/skill/c/level/6/desc",
+          "/skill/c/level/7/desc",
+          "/skill/c/level/8/desc",
+          "/skill/c/level/9/desc",
+          "/skill/c/level/10/desc"
+        ]
+      }
+    },
+    {
+      "id": "53017",
+      "codeName": "Knightboo",
+      "label": {
+        "zh": "骑士布",
+        "en": "Knightboo"
+      },
+      "source": {
+        "sourceId": "nanoka-zzz",
+        "sourceVersion": "2.8",
+        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53017.json",
+        "dataPath": "/"
+      },
+      "level60Panel": {
+        "maxHp": 4632.324,
+        "attack": 5825.7808,
+        "defense": 781.2633,
+        "impact": 100,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 100
+      },
+      "rawSkillPropCount": 2,
+      "promotedSkillCount": 1,
+      "skillSections": [
+        {
+          "sectionKey": "a",
+          "sourceName": "骑士，蓄力能量！",
+          "status": "not-promoted",
+          "reason": "no-damage-daze-pair-in-current-runtime-schema",
+          "properties": [
+            "能量回复",
+            "冷却时间"
+          ]
+        },
+        {
+          "sectionKey": "b",
+          "sourceName": "骑士精神",
+          "status": "not-promoted",
+          "reason": "no-damage-daze-pair-in-current-runtime-schema",
+          "properties": [
+            "攻击力提升",
+            "持续时间"
+          ]
+        },
+        {
+          "sectionKey": "c",
+          "sourceName": "骑士，蹦蹦冲击！",
+          "status": "promoted",
+          "runtimeSkillId": "5301702",
+          "referencedSkillPropIds": [
+            "5301702"
+          ],
+          "segmentCount": 1,
+          "segments": [
+            {
+              "damageExpression": "{Skill:5301702, Prop:1001}",
+              "dazeExpression": "{Skill:5301702, Prop:1002}",
+              "damageMultiplier": 0.86,
+              "dazeMultiplier": 0.12
+            }
+          ]
+        }
+      ],
+      "element": {
+        "status": "not-promoted",
+        "reason": "Missing nanoka Bangboo element damage text in skill descriptions"
+      }
+    },
+    {
+      "id": "53019",
+      "codeName": "Bild N. Boolok",
+      "label": {
+        "zh": "乐玩布",
+        "en": "Bild N. Boolok"
+      },
+      "source": {
+        "sourceId": "nanoka-zzz",
+        "sourceVersion": "2.8",
+        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53019.json",
+        "dataPath": "/"
+      },
+      "level60Panel": {
+        "maxHp": 3827.5423,
+        "attack": 6570.2204,
+        "defense": 781.2633,
+        "impact": 94,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 100
+      },
+      "rawSkillPropCount": 2,
+      "promotedSkillCount": 2,
+      "skillSections": [
+        {
+          "sectionKey": "a",
+          "sourceName": "积木跳房子",
+          "status": "promoted",
+          "runtimeSkillId": "5301901",
+          "referencedSkillPropIds": [
+            "5301901"
+          ],
+          "segmentCount": 1,
+          "segments": [
+            {
+              "damageExpression": "{Skill:5301901, Prop:1001}",
+              "dazeExpression": "{Skill:5301901, Prop:1002}",
+              "damageMultiplier": 4,
+              "dazeMultiplier": 2.34
+            }
+          ]
+        },
+        {
+          "sectionKey": "b",
+          "sourceName": "木头人不许动！",
+          "status": "not-promoted",
+          "reason": "no-damage-daze-pair-in-current-runtime-schema",
+          "properties": [
+            "伤害提升"
+          ]
+        },
+        {
+          "sectionKey": "c",
+          "sourceName": "城堡躲避球",
+          "status": "promoted",
+          "runtimeSkillId": "5301902",
+          "referencedSkillPropIds": [
+            "5301902"
+          ],
+          "segmentCount": 1,
+          "segments": [
+            {
+              "damageExpression": "{Skill:5301902, Prop:1001}",
+              "dazeExpression": "{Skill:5301902, Prop:1002}",
+              "damageMultiplier": 8.58,
+              "dazeMultiplier": 1.23
+            }
+          ]
+        }
+      ],
+      "element": {
+        "status": "derived",
+        "attribute": "physical",
+        "evidenceCount": 20,
+        "sourcePaths": [
+          "/skill/a/level/1/desc",
+          "/skill/a/level/2/desc",
+          "/skill/a/level/3/desc",
+          "/skill/a/level/4/desc",
+          "/skill/a/level/5/desc",
+          "/skill/a/level/6/desc",
+          "/skill/a/level/7/desc",
+          "/skill/a/level/8/desc",
+          "/skill/a/level/9/desc",
+          "/skill/a/level/10/desc",
+          "/skill/c/level/1/desc",
+          "/skill/c/level/2/desc",
+          "/skill/c/level/3/desc",
+          "/skill/c/level/4/desc",
+          "/skill/c/level/5/desc",
+          "/skill/c/level/6/desc",
+          "/skill/c/level/7/desc",
+          "/skill/c/level/8/desc",
+          "/skill/c/level/9/desc",
+          "/skill/c/level/10/desc"
+        ]
+      }
+    },
+    {
+      "id": "53021",
+      "codeName": "Booltergeist",
+      "label": {
+        "zh": "幽浮布",
+        "en": "Booltergeist"
+      },
+      "source": {
+        "sourceId": "nanoka-zzz",
+        "sourceVersion": "2.8",
+        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53021.json",
+        "dataPath": "/"
+      },
+      "level60Panel": {
+        "maxHp": 3827.5423,
+        "attack": 6570.2204,
+        "defense": 781.2633,
+        "impact": 94,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 100
+      },
+      "rawSkillPropCount": 2,
+      "promotedSkillCount": 2,
+      "skillSections": [
+        {
+          "sectionKey": "a",
+          "sourceName": "诅咒追光",
+          "status": "promoted",
+          "runtimeSkillId": "5302101",
+          "referencedSkillPropIds": [
+            "5302101"
+          ],
+          "segmentCount": 1,
+          "segments": [
+            {
+              "damageExpression": "{Skill:5302101, Prop:1001}",
+              "dazeExpression": "{Skill:5302101, Prop:1002}",
+              "damageMultiplier": 4.8,
+              "dazeMultiplier": 2.81
+            }
+          ]
+        },
+        {
+          "sectionKey": "b",
+          "sourceName": "特型惊吓演员",
+          "status": "not-promoted",
+          "reason": "no-damage-daze-pair-in-current-runtime-schema",
+          "properties": [
+            "伤害提升"
+          ]
+        },
+        {
+          "sectionKey": "c",
+          "sourceName": "捣蛋鬼出没",
+          "status": "promoted",
+          "runtimeSkillId": "5302102",
+          "referencedSkillPropIds": [
+            "5302102"
+          ],
+          "segmentCount": 1,
+          "segments": [
+            {
+              "damageExpression": "{Skill:5302102, Prop:1001}",
+              "dazeExpression": "{Skill:5302102, Prop:1002}",
+              "damageMultiplier": 8.34,
+              "dazeMultiplier": 1.19
+            }
+          ]
+        }
+      ],
+      "element": {
+        "status": "not-promoted",
+        "reason": "Missing nanoka Bangboo element damage text in skill descriptions"
+      }
+    },
+    {
+      "id": "54001",
+      "codeName": "Sharkboo",
+      "label": {
+        "zh": "鲨牙布",
+        "en": "Sharkboo"
+      },
+      "source": {
+        "sourceId": "nanoka-zzz",
+        "sourceVersion": "2.8",
+        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54001.json",
+        "dataPath": "/"
+      },
+      "level60Panel": {
+        "maxHp": 4210.2983,
+        "attack": 8057.0996,
+        "defense": 723.8011,
+        "impact": 99,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 132
+      },
+      "rawSkillPropCount": 3,
+      "promotedSkillCount": 2,
+      "skillSections": [
+        {
+          "sectionKey": "a",
+          "sourceName": "旱地猎鲨",
+          "status": "promoted",
+          "runtimeSkillId": "5400101",
+          "referencedSkillPropIds": [
+            "5400101"
+          ],
+          "segmentCount": 1,
+          "segments": [
+            {
+              "damageExpression": "{{Skill:5400101, Prop:1001}/3}+{{Skill:5400101, Prop:1001}*2/3}",
+              "dazeExpression": "{{Skill:5400101, Prop:1002}/3}+{{Skill:5400101, Prop:1002}*2/3}",
+              "damageMultiplier": 3.84,
+              "dazeMultiplier": 1.4
+            }
+          ]
+        },
+        {
+          "sectionKey": "b",
+          "sourceName": "寒流涌动",
+          "status": "not-promoted",
+          "reason": "no-damage-daze-pair-in-current-runtime-schema",
+          "properties": [
+            "属性异常积蓄值提升"
+          ]
+        },
+        {
+          "sectionKey": "c",
+          "sourceName": "追猎不休",
+          "status": "promoted",
+          "runtimeSkillId": "5400102",
+          "referencedSkillPropIds": [
+            "5400102"
+          ],
+          "segmentCount": 1,
+          "segments": [
+            {
+              "damageExpression": "{Skill:5400102, Prop:1001}",
+              "dazeExpression": "{Skill:5400102, Prop:1002}",
+              "damageMultiplier": 4.61,
+              "dazeMultiplier": 0.93
+            }
+          ]
+        }
+      ],
+      "element": {
+        "status": "derived",
+        "attribute": "ice",
+        "evidenceCount": 20,
+        "sourcePaths": [
+          "/skill/a/level/1/desc",
+          "/skill/a/level/2/desc",
+          "/skill/a/level/3/desc",
+          "/skill/a/level/4/desc",
+          "/skill/a/level/5/desc",
+          "/skill/a/level/6/desc",
+          "/skill/a/level/7/desc",
+          "/skill/a/level/8/desc",
+          "/skill/a/level/9/desc",
+          "/skill/a/level/10/desc",
+          "/skill/c/level/1/desc",
+          "/skill/c/level/2/desc",
+          "/skill/c/level/3/desc",
+          "/skill/c/level/4/desc",
+          "/skill/c/level/5/desc",
+          "/skill/c/level/6/desc",
+          "/skill/c/level/7/desc",
+          "/skill/c/level/8/desc",
+          "/skill/c/level/9/desc",
+          "/skill/c/level/10/desc"
+        ]
+      }
+    },
+    {
+      "id": "54002",
+      "codeName": "Safety",
+      "label": {
+        "zh": "阿全",
+        "en": "Safety"
+      },
+      "source": {
+        "sourceId": "nanoka-zzz",
+        "sourceVersion": "2.8",
+        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54002.json",
+        "dataPath": "/"
+      },
+      "level60Panel": {
+        "maxHp": 4210.2983,
+        "attack": 8863.4072,
+        "defense": 666.3389,
+        "impact": 103,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 110
+      },
+      "rawSkillPropCount": 2,
+      "promotedSkillCount": 2,
+      "skillSections": [
+        {
+          "sectionKey": "a",
+          "sourceName": "掘进冲刺",
+          "status": "promoted",
+          "runtimeSkillId": "5400201",
+          "referencedSkillPropIds": [
+            "5400201"
+          ],
+          "segmentCount": 1,
+          "segments": [
+            {
+              "damageExpression": "{Skill:5400201, Prop:1001}",
+              "dazeExpression": "{Skill:5400201, Prop:1002}",
+              "damageMultiplier": 5.76,
+              "dazeMultiplier": 2.11
+            }
+          ]
+        },
+        {
+          "sectionKey": "b",
+          "sourceName": "钻机组出动",
+          "status": "not-promoted",
+          "reason": "no-damage-daze-pair-in-current-runtime-schema",
+          "properties": [
+            "伤害提升",
+            "伤害额外提升"
+          ]
+        },
+        {
+          "sectionKey": "c",
+          "sourceName": "破拆钻击",
+          "status": "promoted",
+          "runtimeSkillId": "5400202",
+          "referencedSkillPropIds": [
+            "5400202"
+          ],
+          "segmentCount": 1,
+          "segments": [
+            {
+              "damageExpression": "{Skill:5400202, Prop:1001}",
+              "dazeExpression": "{Skill:5400202, Prop:1002}",
+              "damageMultiplier": 6.65,
+              "dazeMultiplier": 0.95
+            }
+          ]
+        }
+      ],
+      "element": {
+        "status": "derived",
+        "attribute": "physical",
+        "evidenceCount": 20,
+        "sourcePaths": [
+          "/skill/a/level/1/desc",
+          "/skill/a/level/2/desc",
+          "/skill/a/level/3/desc",
+          "/skill/a/level/4/desc",
+          "/skill/a/level/5/desc",
+          "/skill/a/level/6/desc",
+          "/skill/a/level/7/desc",
+          "/skill/a/level/8/desc",
+          "/skill/a/level/9/desc",
+          "/skill/a/level/10/desc",
+          "/skill/c/level/1/desc",
+          "/skill/c/level/2/desc",
+          "/skill/c/level/3/desc",
+          "/skill/c/level/4/desc",
+          "/skill/c/level/5/desc",
+          "/skill/c/level/6/desc",
+          "/skill/c/level/7/desc",
+          "/skill/c/level/8/desc",
+          "/skill/c/level/9/desc",
+          "/skill/c/level/10/desc"
+        ]
+      }
+    },
+    {
+      "id": "54003",
+      "codeName": "Devilboo",
+      "label": {
+        "zh": "恶魔布",
+        "en": "Devilboo"
+      },
+      "source": {
+        "sourceId": "nanoka-zzz",
+        "sourceVersion": "2.8",
+        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54003.json",
+        "dataPath": "/"
+      },
+      "level60Panel": {
+        "maxHp": 3827.5423,
+        "attack": 6570.2204,
+        "defense": 723.8011,
+        "impact": 90,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 108
+      },
+      "rawSkillPropCount": 3,
+      "promotedSkillCount": 2,
+      "skillSections": [
+        {
+          "sectionKey": "a",
+          "sourceName": "幻惑之吻",
+          "status": "promoted",
+          "runtimeSkillId": "5400301",
+          "referencedSkillPropIds": [
+            "5400301"
+          ],
+          "segmentCount": 1,
+          "segments": [
+            {
+              "damageExpression": "{{Skill:5400301, Prop:1001}/3}*3",
+              "dazeExpression": "{{Skill:5400301, Prop:1002}/3}*3",
+              "damageMultiplier": 2,
+              "dazeMultiplier": 1.17
+            }
+          ]
+        },
+        {
+          "sectionKey": "b",
+          "sourceName": "以太活性增幅",
+          "status": "not-promoted",
+          "reason": "no-damage-daze-pair-in-current-runtime-schema",
+          "properties": [
+            "属性异常积蓄值提升",
+            "持续时间提升",
+            "可触发次数提升"
+          ]
+        },
+        {
+          "sectionKey": "c",
+          "sourceName": "迷乱狂吻",
+          "status": "promoted",
+          "runtimeSkillId": "54003-c",
+          "referencedSkillPropIds": [
+            "5400302",
+            "5400303"
+          ],
+          "segmentCount": 2,
+          "segments": [
+            {
+              "labelSuffix": "主动攻击",
+              "damageExpression": "{Skill:5400302, Prop:1001}",
+              "dazeExpression": "{Skill:5400302, Prop:1002}",
+              "damageMultiplier": 3.27,
+              "dazeMultiplier": 0.47
+            },
+            {
+              "labelSuffix": "协同攻击",
+              "damageExpression": "{{Skill:5400303, Prop:1001}/2}*2",
+              "dazeExpression": "{{Skill:5400303, Prop:1002}/2}*2",
+              "damageMultiplier": 0.74,
+              "dazeMultiplier": 0.11
+            }
+          ]
+        }
+      ],
+      "element": {
+        "status": "not-promoted",
+        "reason": "Missing nanoka Bangboo element damage text in skill descriptions"
+      }
+    },
+    {
+      "id": "54004",
+      "codeName": "Butler",
+      "label": {
+        "zh": "巴特勒",
+        "en": "Butler"
+      },
+      "source": {
+        "sourceId": "nanoka-zzz",
+        "sourceVersion": "2.8",
+        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54004.json",
+        "dataPath": "/"
+      },
+      "level60Panel": {
+        "maxHp": 5095.1564,
+        "attack": 7896.4369,
+        "defense": 666.3389,
+        "impact": 110,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 110
+      },
+      "rawSkillPropCount": 2,
+      "promotedSkillCount": 1,
+      "skillSections": [
+        {
+          "sectionKey": "a",
+          "sourceName": "茶歇时间",
+          "status": "not-promoted",
+          "reason": "no-damage-daze-pair-in-current-runtime-schema",
+          "properties": [
+            "能量回复",
+            "冷却时间"
+          ]
+        },
+        {
+          "sectionKey": "b",
+          "sourceName": "贴身管家",
+          "status": "not-promoted",
+          "reason": "no-damage-daze-pair-in-current-runtime-schema",
+          "properties": [
+            "回复的能量值提升"
+          ]
+        },
+        {
+          "sectionKey": "c",
+          "sourceName": "午后甜点",
+          "status": "promoted",
+          "runtimeSkillId": "5400402",
+          "referencedSkillPropIds": [
+            "5400402"
+          ],
+          "segmentCount": 1,
+          "segments": [
+            {
+              "damageExpression": "{Skill:5400402, Prop:1001}",
+              "dazeExpression": "{Skill:5400402, Prop:1002}",
+              "damageMultiplier": 6.83,
+              "dazeMultiplier": 0.98
+            }
+          ]
+        }
+      ],
+      "element": {
+        "status": "derived",
+        "attribute": "physical",
+        "evidenceCount": 10,
+        "sourcePaths": [
+          "/skill/c/level/1/desc",
+          "/skill/c/level/2/desc",
+          "/skill/c/level/3/desc",
+          "/skill/c/level/4/desc",
+          "/skill/c/level/5/desc",
+          "/skill/c/level/6/desc",
+          "/skill/c/level/7/desc",
+          "/skill/c/level/8/desc",
+          "/skill/c/level/9/desc",
+          "/skill/c/level/10/desc"
+        ]
+      }
+    },
+    {
+      "id": "54005",
+      "codeName": "Amillion",
+      "label": {
+        "zh": "艾米莉安",
+        "en": "Amillion"
+      },
+      "source": {
+        "sourceId": "nanoka-zzz",
+        "sourceVersion": "2.8",
+        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54005.json",
+        "dataPath": "/"
+      },
+      "level60Panel": {
+        "maxHp": 4210.2983,
+        "attack": 8863.4072,
+        "defense": 666.3389,
+        "impact": 103,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 110
+      },
+      "rawSkillPropCount": 2,
+      "promotedSkillCount": 2,
+      "skillSections": [
+        {
+          "sectionKey": "a",
+          "sourceName": "便携机炮·扫债者",
+          "status": "promoted",
+          "runtimeSkillId": "5400501",
+          "referencedSkillPropIds": [
+            "5400501"
+          ],
+          "segmentCount": 1,
+          "segments": [
+            {
+              "damageExpression": "{Skill:5400501, Prop:1001}",
+              "dazeExpression": "{Skill:5400501, Prop:1002}",
+              "damageMultiplier": 8.1,
+              "dazeMultiplier": 0
+            }
+          ]
+        },
+        {
+          "sectionKey": "b",
+          "sourceName": "混迹街头守则",
+          "status": "not-promoted",
+          "reason": "no-damage-daze-pair-in-current-runtime-schema",
+          "properties": [
+            "伤害提升（1名敌人时）",
+            "伤害提升（2名敌人时）",
+            "伤害提升（3名或以上敌人时）"
+          ]
+        },
+        {
+          "sectionKey": "c",
+          "sourceName": "便携机炮·清债连射",
+          "status": "promoted",
+          "runtimeSkillId": "5400502",
+          "referencedSkillPropIds": [
+            "5400502"
+          ],
+          "segmentCount": 1,
+          "segments": [
+            {
+              "damageExpression": "{Skill:5400502, Prop:1001}",
+              "dazeExpression": "{Skill:5400502, Prop:1002}",
+              "damageMultiplier": 8.4,
+              "dazeMultiplier": 1.2
+            }
+          ]
+        }
+      ],
+      "element": {
+        "status": "derived",
+        "attribute": "physical",
+        "evidenceCount": 20,
+        "sourcePaths": [
+          "/skill/a/level/1/desc",
+          "/skill/a/level/2/desc",
+          "/skill/a/level/3/desc",
+          "/skill/a/level/4/desc",
+          "/skill/a/level/5/desc",
+          "/skill/a/level/6/desc",
+          "/skill/a/level/7/desc",
+          "/skill/a/level/8/desc",
+          "/skill/a/level/9/desc",
+          "/skill/a/level/10/desc",
+          "/skill/c/level/1/desc",
+          "/skill/c/level/2/desc",
+          "/skill/c/level/3/desc",
+          "/skill/c/level/4/desc",
+          "/skill/c/level/5/desc",
+          "/skill/c/level/6/desc",
+          "/skill/c/level/7/desc",
+          "/skill/c/level/8/desc",
+          "/skill/c/level/9/desc",
+          "/skill/c/level/10/desc"
+        ]
+      }
+    },
+    {
+      "id": "54006",
+      "codeName": "Rocketboo",
+      "label": {
+        "zh": "飚速布",
+        "en": "Rocketboo"
+      },
+      "source": {
+        "sourceId": "nanoka-zzz",
+        "sourceVersion": "2.8",
+        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54006.json",
+        "dataPath": "/"
+      },
+      "level60Panel": {
+        "maxHp": 4210.2983,
+        "attack": 8541.0877,
+        "defense": 723.8011,
+        "impact": 99,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 119
+      },
+      "rawSkillPropCount": 2,
+      "promotedSkillCount": 2,
+      "skillSections": [
+        {
+          "sectionKey": "a",
+          "sourceName": "Boom！",
+          "status": "promoted",
+          "runtimeSkillId": "5400601",
+          "referencedSkillPropIds": [
+            "5400601"
+          ],
+          "segmentCount": 1,
+          "segments": [
+            {
+              "damageExpression": "{Skill:5400601, Prop:1001}",
+              "dazeExpression": "{Skill:5400601, Prop:1002}",
+              "damageMultiplier": 5.76,
+              "dazeMultiplier": 2.11
+            }
+          ]
+        },
+        {
+          "sectionKey": "b",
+          "sourceName": "燃料注入",
+          "status": "not-promoted",
+          "reason": "no-damage-daze-pair-in-current-runtime-schema",
+          "properties": [
+            "属性异常积蓄值提升"
+          ]
+        },
+        {
+          "sectionKey": "c",
+          "sourceName": "爆轰速递",
+          "status": "promoted",
+          "runtimeSkillId": "5400602",
+          "referencedSkillPropIds": [
+            "5400602"
+          ],
+          "segmentCount": 1,
+          "segments": [
+            {
+              "damageExpression": "{Skill:5400602, Prop:1001}",
+              "dazeExpression": "{Skill:5400602, Prop:1002}",
+              "damageMultiplier": 5.43,
+              "dazeMultiplier": 0.78
+            }
+          ]
+        }
+      ],
+      "element": {
+        "status": "derived",
+        "attribute": "fire",
+        "evidenceCount": 20,
+        "sourcePaths": [
+          "/skill/a/level/1/desc",
+          "/skill/a/level/2/desc",
+          "/skill/a/level/3/desc",
+          "/skill/a/level/4/desc",
+          "/skill/a/level/5/desc",
+          "/skill/a/level/6/desc",
+          "/skill/a/level/7/desc",
+          "/skill/a/level/8/desc",
+          "/skill/a/level/9/desc",
+          "/skill/a/level/10/desc",
+          "/skill/c/level/1/desc",
+          "/skill/c/level/2/desc",
+          "/skill/c/level/3/desc",
+          "/skill/c/level/4/desc",
+          "/skill/c/level/5/desc",
+          "/skill/c/level/6/desc",
+          "/skill/c/level/7/desc",
+          "/skill/c/level/8/desc",
+          "/skill/c/level/9/desc",
+          "/skill/c/level/10/desc"
+        ]
+      }
+    },
+    {
+      "id": "54008",
+      "codeName": "Plugboo",
+      "label": {
+        "zh": "插头布",
+        "en": "Plugboo"
+      },
+      "source": {
+        "sourceId": "nanoka-zzz",
+        "sourceVersion": "2.8",
+        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json",
+        "dataPath": "/"
+      },
+      "level60Panel": {
+        "maxHp": 4210.2983,
+        "attack": 8057.0996,
+        "defense": 723.8011,
+        "impact": 99,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 132
+      },
+      "rawSkillPropCount": 4,
+      "promotedSkillCount": 2,
+      "skillSections": [
+        {
+          "sectionKey": "a",
+          "sourceName": "电流狙击",
+          "status": "promoted",
+          "runtimeSkillId": "5400801",
+          "referencedSkillPropIds": [
+            "5400801"
+          ],
+          "segmentCount": 1,
+          "segments": [
+            {
+              "damageExpression": "{Skill:5400801, Prop:1001}",
+              "dazeExpression": "{Skill:5400801, Prop:1002}",
+              "damageMultiplier": 5.12,
+              "dazeMultiplier": 1.87
+            }
+          ]
+        },
+        {
+          "sectionKey": "b",
+          "sourceName": "电波系选手",
+          "status": "not-promoted",
+          "reason": "no-damage-daze-pair-in-current-runtime-schema",
+          "properties": [
+            "属性异常积蓄值提升"
+          ]
+        },
+        {
+          "sectionKey": "c",
+          "sourceName": "高压电阻",
+          "status": "promoted",
+          "runtimeSkillId": "5400802",
+          "referencedSkillPropIds": [
+            "5400802"
+          ],
+          "segmentCount": 1,
+          "segments": [
+            {
+              "damageExpression": "{Skill:5400802, Prop:1001}",
+              "dazeExpression": "{Skill:5400802, Prop:1002}",
+              "damageMultiplier": 6.88,
+              "dazeMultiplier": 0.98
+            }
+          ]
+        }
+      ],
+      "element": {
+        "status": "derived",
+        "attribute": "electric",
+        "evidenceCount": 20,
+        "sourcePaths": [
+          "/skill/a/level/1/desc",
+          "/skill/a/level/2/desc",
+          "/skill/a/level/3/desc",
+          "/skill/a/level/4/desc",
+          "/skill/a/level/5/desc",
+          "/skill/a/level/6/desc",
+          "/skill/a/level/7/desc",
+          "/skill/a/level/8/desc",
+          "/skill/a/level/9/desc",
+          "/skill/a/level/10/desc",
+          "/skill/c/level/1/desc",
+          "/skill/c/level/2/desc",
+          "/skill/c/level/3/desc",
+          "/skill/c/level/4/desc",
+          "/skill/c/level/5/desc",
+          "/skill/c/level/6/desc",
+          "/skill/c/level/7/desc",
+          "/skill/c/level/8/desc",
+          "/skill/c/level/9/desc",
+          "/skill/c/level/10/desc"
+        ]
+      }
+    },
+    {
+      "id": "54009",
+      "codeName": "Resonaboo",
+      "label": {
+        "zh": "共鸣布",
+        "en": "Resonaboo"
+      },
+      "source": {
+        "sourceId": "nanoka-zzz",
+        "sourceVersion": "2.8",
+        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54009.json",
+        "dataPath": "/"
+      },
+      "level60Panel": {
+        "maxHp": 4210.2983,
+        "attack": 8057.0996,
+        "defense": 723.8011,
+        "impact": 99,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 132
+      },
+      "rawSkillPropCount": 3,
+      "promotedSkillCount": 2,
+      "skillSections": [
+        {
+          "sectionKey": "a",
+          "sourceName": "迷你黑洞",
+          "status": "promoted",
+          "runtimeSkillId": "5400901",
+          "referencedSkillPropIds": [
+            "5400901"
+          ],
+          "segmentCount": 1,
+          "segments": [
+            {
+              "damageExpression": "{Skill:5400901, Prop:1001}",
+              "dazeExpression": "{Skill:5400901, Prop:1002}",
+              "damageMultiplier": 8.96,
+              "dazeMultiplier": 3.28
+            }
+          ]
+        },
+        {
+          "sectionKey": "b",
+          "sourceName": "辐射效应",
+          "status": "not-promoted",
+          "reason": "no-damage-daze-pair-in-current-runtime-schema",
+          "properties": [
+            "属性异常积蓄值提升"
+          ]
+        },
+        {
+          "sectionKey": "c",
+          "sourceName": "原初黑洞",
+          "status": "promoted",
+          "runtimeSkillId": "5400902",
+          "referencedSkillPropIds": [
+            "5400902"
+          ],
+          "segmentCount": 1,
+          "segments": [
+            {
+              "damageExpression": "{Skill:5400902, Prop:1001}",
+              "dazeExpression": "{Skill:5400902, Prop:1002}",
+              "damageMultiplier": 6.53,
+              "dazeMultiplier": 0.93
+            }
+          ]
+        }
+      ],
+      "element": {
+        "status": "not-promoted",
+        "reason": "Missing nanoka Bangboo element damage text in skill descriptions"
+      }
+    },
+    {
+      "id": "54010",
+      "codeName": "BiggestFan",
+      "label": {
+        "zh": "阿饭",
+        "en": "Biggest Fan"
+      },
+      "source": {
+        "sourceId": "nanoka-zzz",
+        "sourceVersion": "2.8",
+        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54010.json",
+        "dataPath": "/"
+      },
+      "level60Panel": {
+        "maxHp": 5095.1564,
+        "attack": 7896.4369,
+        "defense": 666.3389,
+        "impact": 110,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 110
+      },
+      "rawSkillPropCount": 2,
+      "promotedSkillCount": 1,
+      "skillSections": [
+        {
+          "sectionKey": "a",
+          "sourceName": "我推的天使",
+          "status": "not-promoted",
+          "reason": "no-damage-daze-pair-in-current-runtime-schema",
+          "properties": [
+            "生命值回复",
+            "冷却时间"
+          ]
+        },
+        {
+          "sectionKey": "b",
+          "sourceName": "厨力爆发",
+          "status": "not-promoted",
+          "reason": "no-damage-daze-pair-in-current-runtime-schema",
+          "properties": [
+            "所需[妄想天使]角色数",
+            "攻击力提升",
+            "属性异常积蓄值提升"
+          ]
+        },
+        {
+          "sectionKey": "c",
+          "sourceName": "抢周边啦！",
+          "status": "promoted",
+          "runtimeSkillId": "5401002",
+          "referencedSkillPropIds": [
+            "5401002"
+          ],
+          "segmentCount": 1,
+          "segments": [
+            {
+              "damageExpression": "{Skill:5401002, Prop:1001}",
+              "dazeExpression": "{Skill:5401002, Prop:1002}",
+              "damageMultiplier": 10.79,
+              "dazeMultiplier": 1.54
+            }
+          ]
+        }
+      ],
+      "element": {
+        "status": "not-promoted",
+        "reason": "Missing nanoka Bangboo element damage text in skill descriptions"
+      }
+    },
+    {
+      "id": "54011",
+      "codeName": "Red Moccus",
+      "label": {
+        "zh": "赤红莫库斯",
+        "en": "Red Moccus"
+      },
+      "source": {
+        "sourceId": "nanoka-zzz",
+        "sourceVersion": "2.8",
+        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54011.json",
+        "dataPath": "/"
+      },
+      "level60Panel": {
+        "maxHp": 4210.2983,
+        "attack": 8863.4072,
+        "defense": 666.3389,
+        "impact": 103,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 110
+      },
+      "rawSkillPropCount": 2,
+      "promotedSkillCount": 2,
+      "skillSections": [
+        {
+          "sectionKey": "a",
+          "sourceName": "驱劲滚轮",
+          "status": "promoted",
+          "runtimeSkillId": "5401101",
+          "referencedSkillPropIds": [
+            "5401101"
+          ],
+          "segmentCount": 1,
+          "segments": [
+            {
+              "damageExpression": "{Skill:5401101, Prop:1001}",
+              "dazeExpression": "{Skill:5401101, Prop:1002}",
+              "damageMultiplier": 9.6,
+              "dazeMultiplier": 3.51
+            }
+          ]
+        },
+        {
+          "sectionKey": "b",
+          "sourceName": "漂移技巧",
+          "status": "not-promoted",
+          "reason": "no-damage-daze-pair-in-current-runtime-schema",
+          "properties": [
+            "伤害提升",
+            "冷却时间减少"
+          ]
+        },
+        {
+          "sectionKey": "c",
+          "sourceName": "狂飙突进",
+          "status": "promoted",
+          "runtimeSkillId": "5401102",
+          "referencedSkillPropIds": [
+            "5401102"
+          ],
+          "segmentCount": 1,
+          "segments": [
+            {
+              "damageExpression": "{Skill:5401102, Prop:1001}",
+              "dazeExpression": "{Skill:5401102, Prop:1002}",
+              "damageMultiplier": 7.53,
+              "dazeMultiplier": 1.08
+            }
+          ]
+        }
+      ],
+      "element": {
+        "status": "derived",
+        "attribute": "physical",
+        "evidenceCount": 20,
+        "sourcePaths": [
+          "/skill/a/level/1/desc",
+          "/skill/a/level/2/desc",
+          "/skill/a/level/3/desc",
+          "/skill/a/level/4/desc",
+          "/skill/a/level/5/desc",
+          "/skill/a/level/6/desc",
+          "/skill/a/level/7/desc",
+          "/skill/a/level/8/desc",
+          "/skill/a/level/9/desc",
+          "/skill/a/level/10/desc",
+          "/skill/c/level/1/desc",
+          "/skill/c/level/2/desc",
+          "/skill/c/level/3/desc",
+          "/skill/c/level/4/desc",
+          "/skill/c/level/5/desc",
+          "/skill/c/level/6/desc",
+          "/skill/c/level/7/desc",
+          "/skill/c/level/8/desc",
+          "/skill/c/level/9/desc",
+          "/skill/c/level/10/desc"
+        ]
+      }
+    },
+    {
+      "id": "54012",
+      "codeName": "Officer Cui",
+      "label": {
+        "zh": "阿崔巡查",
+        "en": "Officer Cui"
+      },
+      "source": {
+        "sourceId": "nanoka-zzz",
+        "sourceVersion": "2.8",
+        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54012.json",
+        "dataPath": "/"
+      },
+      "level60Panel": {
+        "maxHp": 4210.2983,
+        "attack": 8863.4072,
+        "defense": 666.3389,
+        "impact": 103,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 110
+      },
+      "rawSkillPropCount": 2,
+      "promotedSkillCount": 2,
+      "skillSections": [
+        {
+          "sectionKey": "a",
+          "sourceName": "呜！汪汪！",
+          "status": "promoted",
+          "runtimeSkillId": "5401201",
+          "referencedSkillPropIds": [
+            "5401201"
+          ],
+          "segmentCount": 1,
+          "segments": [
+            {
+              "damageExpression": "{Skill:5401201, Prop:1001}*2",
+              "dazeExpression": "{Skill:5401201, Prop:1002}*2",
+              "damageMultiplier": 5.54,
+              "dazeMultiplier": 2.02
+            }
+          ]
+        },
+        {
+          "sectionKey": "b",
+          "sourceName": "临时治安犬",
+          "status": "not-promoted",
+          "reason": "no-damage-daze-pair-in-current-runtime-schema",
+          "properties": [
+            "伤害提升"
+          ]
+        },
+        {
+          "sectionKey": "c",
+          "sourceName": "汪汪汪汪！",
+          "status": "promoted",
+          "runtimeSkillId": "5401202",
+          "referencedSkillPropIds": [
+            "5401202"
+          ],
+          "segmentCount": 1,
+          "segments": [
+            {
+              "damageExpression": "{Skill:5401202, Prop:1001}",
+              "dazeExpression": "{Skill:5401202, Prop:1002}",
+              "damageMultiplier": 8.34,
+              "dazeMultiplier": 1.19
+            }
+          ]
+        }
+      ],
+      "element": {
+        "status": "derived",
+        "attribute": "physical",
+        "evidenceCount": 20,
+        "sourcePaths": [
+          "/skill/a/level/1/desc",
+          "/skill/a/level/2/desc",
+          "/skill/a/level/3/desc",
+          "/skill/a/level/4/desc",
+          "/skill/a/level/5/desc",
+          "/skill/a/level/6/desc",
+          "/skill/a/level/7/desc",
+          "/skill/a/level/8/desc",
+          "/skill/a/level/9/desc",
+          "/skill/a/level/10/desc",
+          "/skill/c/level/1/desc",
+          "/skill/c/level/2/desc",
+          "/skill/c/level/3/desc",
+          "/skill/c/level/4/desc",
+          "/skill/c/level/5/desc",
+          "/skill/c/level/6/desc",
+          "/skill/c/level/7/desc",
+          "/skill/c/level/8/desc",
+          "/skill/c/level/9/desc",
+          "/skill/c/level/10/desc"
+        ]
+      }
+    },
+    {
+      "id": "54013",
+      "codeName": "Bangvolver",
+      "label": {
+        "zh": "左轮布",
+        "en": "Bangvolver"
+      },
+      "source": {
+        "sourceId": "nanoka-zzz",
+        "sourceVersion": "2.8",
+        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54013.json",
+        "dataPath": "/"
+      },
+      "level60Panel": {
+        "maxHp": 4210.2983,
+        "attack": 8057.0996,
+        "defense": 781.2633,
+        "impact": 103,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 123
+      },
+      "rawSkillPropCount": 3,
+      "promotedSkillCount": 2,
+      "skillSections": [
+        {
+          "sectionKey": "a",
+          "sourceName": "幸运左轮",
+          "status": "promoted",
+          "runtimeSkillId": "54013-a",
+          "referencedSkillPropIds": [
+            "5401303",
+            "5401301"
+          ],
+          "segmentCount": 2,
+          "segments": [
+            {
+              "labelSuffix": "强力射击",
+              "damageExpression": "{Skill:5401303, Prop:1001}",
+              "dazeExpression": "{Skill:5401303, Prop:1002}",
+              "damageMultiplier": 11.52,
+              "dazeMultiplier": 4.21
+            },
+            {
+              "labelSuffix": "射击",
+              "damageExpression": "{Skill:5401301, Prop:1001}",
+              "dazeExpression": "{Skill:5401301, Prop:1002}",
+              "damageMultiplier": 5.76,
+              "dazeMultiplier": 2.11
+            }
+          ]
+        },
+        {
+          "sectionKey": "b",
+          "sourceName": "运气也是实力",
+          "status": "not-promoted",
+          "reason": "no-damage-daze-pair-in-current-runtime-schema",
+          "properties": [
+            "属性异常积蓄值提升"
+          ]
+        },
+        {
+          "sectionKey": "c",
+          "sourceName": "幸运扳机",
+          "status": "promoted",
+          "runtimeSkillId": "5401302",
+          "referencedSkillPropIds": [
+            "5401302"
+          ],
+          "segmentCount": 1,
+          "segments": [
+            {
+              "damageExpression": "{Skill:5401302, Prop:1001}",
+              "dazeExpression": "{Skill:5401302, Prop:1002}",
+              "damageMultiplier": 7.76,
+              "dazeMultiplier": 1.11
+            }
+          ]
+        }
+      ],
+      "element": {
+        "status": "derived",
+        "attribute": "physical",
+        "evidenceCount": 30,
+        "sourcePaths": [
+          "/skill/a/level/1/desc",
+          "/skill/a/level/2/desc",
+          "/skill/a/level/3/desc",
+          "/skill/a/level/4/desc",
+          "/skill/a/level/5/desc",
+          "/skill/a/level/6/desc",
+          "/skill/a/level/7/desc",
+          "/skill/a/level/8/desc",
+          "/skill/a/level/9/desc",
+          "/skill/a/level/10/desc",
+          "/skill/c/level/1/desc",
+          "/skill/c/level/2/desc",
+          "/skill/c/level/3/desc",
+          "/skill/c/level/4/desc",
+          "/skill/c/level/5/desc",
+          "/skill/c/level/6/desc",
+          "/skill/c/level/7/desc",
+          "/skill/c/level/8/desc",
+          "/skill/c/level/9/desc",
+          "/skill/c/level/10/desc"
+        ]
+      }
+    },
+    {
+      "id": "54014",
+      "codeName": "Agent Gulliver",
+      "label": {
+        "zh": "格列佛探员",
+        "en": "Agent Gulliver"
+      },
+      "source": {
+        "sourceId": "nanoka-zzz",
+        "sourceVersion": "2.8",
+        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54014.json",
+        "dataPath": "/"
+      },
+      "level60Panel": {
+        "maxHp": 4210.2983,
+        "attack": 8380.425,
+        "defense": 666.3389,
+        "impact": 103,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 123
+      },
+      "rawSkillPropCount": 2,
+      "promotedSkillCount": 2,
+      "skillSections": [
+        {
+          "sectionKey": "a",
+          "sourceName": "紧急行动",
+          "status": "promoted",
+          "runtimeSkillId": "5401401",
+          "referencedSkillPropIds": [
+            "5401401"
+          ],
+          "segmentCount": 1,
+          "segments": [
+            {
+              "damageExpression": "{Skill:5401401, Prop:1001}",
+              "dazeExpression": "{Skill:5401401, Prop:1002}",
+              "damageMultiplier": 6.4,
+              "dazeMultiplier": 2.34
+            }
+          ]
+        },
+        {
+          "sectionKey": "b",
+          "sourceName": "邦布突击队",
+          "status": "not-promoted",
+          "reason": "no-damage-daze-pair-in-current-runtime-schema",
+          "properties": [
+            "伤害提升",
+            "属性异常积蓄值提升"
+          ]
+        },
+        {
+          "sectionKey": "c",
+          "sourceName": "突击时刻",
+          "status": "promoted",
+          "runtimeSkillId": "5401402",
+          "referencedSkillPropIds": [
+            "5401402"
+          ],
+          "segmentCount": 1,
+          "segments": [
+            {
+              "damageExpression": "{Skill:5401402, Prop:1001}",
+              "dazeExpression": "{Skill:5401402, Prop:1002}",
+              "damageMultiplier": 7.99,
+              "dazeMultiplier": 1.14
+            }
+          ]
+        }
+      ],
+      "element": {
+        "status": "derived",
+        "attribute": "electric",
+        "evidenceCount": 20,
+        "sourcePaths": [
+          "/skill/a/level/1/desc",
+          "/skill/a/level/2/desc",
+          "/skill/a/level/3/desc",
+          "/skill/a/level/4/desc",
+          "/skill/a/level/5/desc",
+          "/skill/a/level/6/desc",
+          "/skill/a/level/7/desc",
+          "/skill/a/level/8/desc",
+          "/skill/a/level/9/desc",
+          "/skill/a/level/10/desc",
+          "/skill/c/level/1/desc",
+          "/skill/c/level/2/desc",
+          "/skill/c/level/3/desc",
+          "/skill/c/level/4/desc",
+          "/skill/c/level/5/desc",
+          "/skill/c/level/6/desc",
+          "/skill/c/level/7/desc",
+          "/skill/c/level/8/desc",
+          "/skill/c/level/9/desc",
+          "/skill/c/level/10/desc"
+        ]
+      }
+    },
+    {
+      "id": "54015",
+      "codeName": "Snap",
+      "label": {
+        "zh": "咔嚓仔",
+        "en": "Snap"
+      },
+      "source": {
+        "sourceId": "nanoka-zzz",
+        "sourceVersion": "2.8",
+        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54015.json",
+        "dataPath": "/"
+      },
+      "level60Panel": {
+        "maxHp": 5095.1564,
+        "attack": 7896.4369,
+        "defense": 666.3389,
+        "impact": 110,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 110
+      },
+      "rawSkillPropCount": 2,
+      "promotedSkillCount": 1,
+      "skillSections": [
+        {
+          "sectionKey": "a",
+          "sourceName": "咔嚓！看镜头！",
+          "status": "not-promoted",
+          "reason": "no-damage-daze-pair-in-current-runtime-schema",
+          "properties": [
+            "代理人伤害提升",
+            "冷却时间"
+          ]
+        },
+        {
+          "sectionKey": "b",
+          "sourceName": "巨星时刻",
+          "status": "not-promoted",
+          "reason": "no-damage-daze-pair-in-current-runtime-schema",
+          "properties": [
+            "生命值回复"
+          ]
+        },
+        {
+          "sectionKey": "c",
+          "sourceName": "咔嚓！别眨眼！",
+          "status": "promoted",
+          "runtimeSkillId": "5401502",
+          "referencedSkillPropIds": [
+            "5401502"
+          ],
+          "segmentCount": 1,
+          "segments": [
+            {
+              "damageExpression": "{Skill:5401502, Prop:1001}",
+              "dazeExpression": "{Skill:5401502, Prop:1002}",
+              "damageMultiplier": 7.47,
+              "dazeMultiplier": 1.07
+            }
+          ]
+        }
+      ],
+      "element": {
+        "status": "not-promoted",
+        "reason": "Missing nanoka Bangboo element damage text in skill descriptions"
+      }
+    },
+    {
+      "id": "54016",
+      "codeName": "Robin",
+      "label": {
+        "zh": "罗宾",
+        "en": "Robin"
+      },
+      "source": {
+        "sourceId": "nanoka-zzz",
+        "sourceVersion": "2.8",
+        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54016.json",
+        "dataPath": "/"
+      },
+      "level60Panel": {
+        "maxHp": 4210.2983,
+        "attack": 8621.4161,
+        "defense": 666.3389,
+        "impact": 117,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 117
+      },
+      "rawSkillPropCount": 4,
+      "promotedSkillCount": 2,
+      "skillSections": [
+        {
+          "sectionKey": "a",
+          "sourceName": "绮幕终落",
+          "status": "promoted",
+          "runtimeSkillId": "54016-a",
+          "referencedSkillPropIds": [
+            "5401601",
+            "5401602",
+            "5401603"
+          ],
+          "segmentCount": 3,
+          "segments": [
+            {
+              "labelSuffix": "红心",
+              "damageExpression": "{Skill:5401601, Prop:1001}",
+              "dazeExpression": "{Skill:5401601, Prop:1002}",
+              "damageMultiplier": 8.55,
+              "dazeMultiplier": 2.13
+            },
+            {
+              "labelSuffix": "黑桃",
+              "damageExpression": "{Skill:5401602, Prop:1001}",
+              "dazeExpression": "{Skill:5401602, Prop:1002}",
+              "damageMultiplier": 5.82,
+              "dazeMultiplier": 3.22
+            },
+            {
+              "labelSuffix": "皇冠",
+              "damageExpression": "{Skill:5401603, Prop:1001}",
+              "dazeExpression": "{Skill:5401603, Prop:1002}",
+              "damageMultiplier": 6.66,
+              "dazeMultiplier": 2.13
+            }
+          ]
+        },
+        {
+          "sectionKey": "b",
+          "sourceName": "百变怪杰",
+          "status": "not-promoted",
+          "reason": "no-damage-daze-pair-in-current-runtime-schema",
+          "properties": [
+            "伤害提升",
+            "失衡值提升",
+            "属性异常积蓄值提升"
+          ]
+        },
+        {
+          "sectionKey": "c",
+          "sourceName": "幻幕拉开！",
+          "status": "promoted",
+          "runtimeSkillId": "5401604",
+          "referencedSkillPropIds": [
+            "5401604"
+          ],
+          "segmentCount": 1,
+          "segments": [
+            {
+              "damageExpression": "{Skill:5401604, Prop:1001}",
+              "dazeExpression": "{Skill:5401604, Prop:1002}",
+              "damageMultiplier": 6.88,
+              "dazeMultiplier": 0.98
+            }
+          ]
+        }
+      ],
+      "element": {
+        "status": "derived",
+        "attribute": "physical",
+        "evidenceCount": 20,
+        "sourcePaths": [
+          "/skill/a/level/1/desc",
+          "/skill/a/level/2/desc",
+          "/skill/a/level/3/desc",
+          "/skill/a/level/4/desc",
+          "/skill/a/level/5/desc",
+          "/skill/a/level/6/desc",
+          "/skill/a/level/7/desc",
+          "/skill/a/level/8/desc",
+          "/skill/a/level/9/desc",
+          "/skill/a/level/10/desc"
+        ]
+      }
+    },
+    {
+      "id": "54017",
+      "codeName": "Belion",
+      "label": {
+        "zh": "狮耶",
+        "en": "Belion"
+      },
+      "source": {
+        "sourceId": "nanoka-zzz",
+        "sourceVersion": "2.8",
+        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54017.json",
+        "dataPath": "/"
+      },
+      "level60Panel": {
+        "maxHp": 4210.2983,
+        "attack": 8863.4072,
+        "defense": 666.3389,
+        "impact": 103,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 110
+      },
+      "rawSkillPropCount": 2,
+      "promotedSkillCount": 2,
+      "skillSections": [
+        {
+          "sectionKey": "a",
+          "sourceName": "舞球摇凤",
+          "status": "promoted",
+          "runtimeSkillId": "5401701",
+          "referencedSkillPropIds": [
+            "5401701"
+          ],
+          "segmentCount": 1,
+          "segments": [
+            {
+              "damageExpression": "{Skill:5401701, Prop:1001}",
+              "dazeExpression": "{Skill:5401701, Prop:1002}",
+              "damageMultiplier": 9.6,
+              "dazeMultiplier": 3.51
+            }
+          ]
+        },
+        {
+          "sectionKey": "b",
+          "sourceName": "纵云之道",
+          "status": "not-promoted",
+          "reason": "no-damage-daze-pair-in-current-runtime-schema",
+          "properties": [
+            "所需[云岿山]角色数",
+            "伤害提升",
+            "冷却时间减少"
+          ]
+        },
+        {
+          "sectionKey": "c",
+          "sourceName": "银狮奔雷",
+          "status": "promoted",
+          "runtimeSkillId": "5401702",
+          "referencedSkillPropIds": [
+            "5401702"
+          ],
+          "segmentCount": 1,
+          "segments": [
+            {
+              "damageExpression": "{Skill:5401702, Prop:1001}",
+              "dazeExpression": "{Skill:5401702, Prop:1002}",
+              "damageMultiplier": 9.1,
+              "dazeMultiplier": 1.3
+            }
+          ]
+        }
+      ],
+      "element": {
+        "status": "derived",
+        "attribute": "physical",
+        "evidenceCount": 20,
+        "sourcePaths": [
+          "/skill/a/level/1/desc",
+          "/skill/a/level/2/desc",
+          "/skill/a/level/3/desc",
+          "/skill/a/level/4/desc",
+          "/skill/a/level/5/desc",
+          "/skill/a/level/6/desc",
+          "/skill/a/level/7/desc",
+          "/skill/a/level/8/desc",
+          "/skill/a/level/9/desc",
+          "/skill/a/level/10/desc",
+          "/skill/c/level/1/desc",
+          "/skill/c/level/2/desc",
+          "/skill/c/level/3/desc",
+          "/skill/c/level/4/desc",
+          "/skill/c/level/5/desc",
+          "/skill/c/level/6/desc",
+          "/skill/c/level/7/desc",
+          "/skill/c/level/8/desc",
+          "/skill/c/level/9/desc",
+          "/skill/c/level/10/desc"
+        ]
+      }
+    },
+    {
+      "id": "54018",
+      "codeName": "Miss Esme",
+      "label": {
+        "zh": "艾丝弥小姐",
+        "en": "Miss Esme"
+      },
+      "source": {
+        "sourceId": "nanoka-zzz",
+        "sourceVersion": "2.8",
+        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54018.json",
+        "dataPath": "/"
+      },
+      "level60Panel": {
+        "maxHp": 5095.1564,
+        "attack": 7896.4369,
+        "defense": 666.3389,
+        "impact": 110,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 110
+      },
+      "rawSkillPropCount": 2,
+      "promotedSkillCount": 1,
+      "skillSections": [
+        {
+          "sectionKey": "a",
+          "sourceName": "星光变身",
+          "status": "not-promoted",
+          "reason": "no-damage-daze-pair-in-current-runtime-schema",
+          "properties": [
+            "[幻泡]：生命值回复",
+            "[星莹]：能量回复",
+            "冷却时间"
+          ]
+        },
+        {
+          "sectionKey": "b",
+          "sourceName": "星耀切换",
+          "status": "not-promoted",
+          "reason": "no-damage-daze-pair-in-current-runtime-schema",
+          "properties": [
+            "所需[怪啖屋]角色数",
+            "[幻泡]：回复的生命值提升",
+            "[星莹]：回复的能量值提升"
+          ]
+        },
+        {
+          "sectionKey": "c",
+          "sourceName": "星辰弹",
+          "status": "promoted",
+          "runtimeSkillId": "5401802",
+          "referencedSkillPropIds": [
+            "5401802"
+          ],
+          "segmentCount": 1,
+          "segments": [
+            {
+              "damageExpression": "{Skill:5401802, Prop:1001}",
+              "dazeExpression": "{Skill:5401802, Prop:1002}",
+              "damageMultiplier": 8.63,
+              "dazeMultiplier": 1.23
+            }
+          ]
+        }
+      ],
+      "element": {
+        "status": "derived",
+        "attribute": "physical",
+        "evidenceCount": 10,
+        "sourcePaths": [
+          "/skill/c/level/1/desc",
+          "/skill/c/level/2/desc",
+          "/skill/c/level/3/desc",
+          "/skill/c/level/4/desc",
+          "/skill/c/level/5/desc",
+          "/skill/c/level/6/desc",
+          "/skill/c/level/7/desc",
+          "/skill/c/level/8/desc",
+          "/skill/c/level/9/desc",
+          "/skill/c/level/10/desc"
+        ]
+      }
+    },
+    {
+      "id": "54019",
+      "codeName": "「Mercury」",
+      "label": {
+        "zh": "「墨丘利」",
+        "en": "Mercury"
+      },
+      "source": {
+        "sourceId": "nanoka-zzz",
+        "sourceVersion": "2.8",
+        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54019.json",
+        "dataPath": "/"
+      },
+      "level60Panel": {
+        "maxHp": 4210.2983,
+        "attack": 8863.4072,
+        "defense": 666.3389,
+        "impact": 103,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 110
+      },
+      "rawSkillPropCount": 2,
+      "promotedSkillCount": 2,
+      "skillSections": [
+        {
+          "sectionKey": "a",
+          "sourceName": "战术对策一：火线遏制",
+          "status": "promoted",
+          "runtimeSkillId": "5401901",
+          "referencedSkillPropIds": [
+            "5401901"
+          ],
+          "segmentCount": 1,
+          "segments": [
+            {
+              "damageExpression": "{Skill:5401901, Prop:1001}",
+              "dazeExpression": "{Skill:5401901, Prop:1002}",
+              "damageMultiplier": 8,
+              "dazeMultiplier": 2.93
+            }
+          ]
+        },
+        {
+          "sectionKey": "b",
+          "sourceName": "战术对策二：临阵协同",
+          "status": "not-promoted",
+          "reason": "no-damage-daze-pair-in-current-runtime-schema",
+          "properties": [
+            "所需[防卫军]角色数",
+            "伤害提升"
+          ]
+        },
+        {
+          "sectionKey": "c",
+          "sourceName": "战术对策三：爆弹奇袭",
+          "status": "promoted",
+          "runtimeSkillId": "5401902",
+          "referencedSkillPropIds": [
+            "5401902"
+          ],
+          "segmentCount": 1,
+          "segments": [
+            {
+              "damageExpression": "{Skill:5401902, Prop:1001}",
+              "dazeExpression": "{Skill:5401902, Prop:1002}",
+              "damageMultiplier": 8.46,
+              "dazeMultiplier": 1.21
+            }
+          ]
+        }
+      ],
+      "element": {
+        "status": "derived",
+        "attribute": "fire",
+        "evidenceCount": 20,
+        "sourcePaths": [
+          "/skill/a/level/1/desc",
+          "/skill/a/level/2/desc",
+          "/skill/a/level/3/desc",
+          "/skill/a/level/4/desc",
+          "/skill/a/level/5/desc",
+          "/skill/a/level/6/desc",
+          "/skill/a/level/7/desc",
+          "/skill/a/level/8/desc",
+          "/skill/a/level/9/desc",
+          "/skill/a/level/10/desc",
+          "/skill/c/level/1/desc",
+          "/skill/c/level/2/desc",
+          "/skill/c/level/3/desc",
+          "/skill/c/level/4/desc",
+          "/skill/c/level/5/desc",
+          "/skill/c/level/6/desc",
+          "/skill/c/level/7/desc",
+          "/skill/c/level/8/desc",
+          "/skill/c/level/9/desc",
+          "/skill/c/level/10/desc"
+        ]
+      }
+    },
+    {
+      "id": "54020",
+      "codeName": "Birkblick",
+      "label": {
+        "zh": "比克布利克",
+        "en": "Birkblick"
+      },
+      "source": {
+        "sourceId": "nanoka-zzz",
+        "sourceVersion": "2.8",
+        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54020.json",
+        "dataPath": "/"
+      },
+      "level60Panel": {
+        "maxHp": 4210.2983,
+        "attack": 7896.4369,
+        "defense": 666.3389,
+        "impact": 123,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 97
+      },
+      "rawSkillPropCount": 3,
+      "promotedSkillCount": 2,
+      "skillSections": [
+        {
+          "sectionKey": "a",
+          "sourceName": "蒙太奇连击",
+          "status": "promoted",
+          "runtimeSkillId": "54020-a",
+          "referencedSkillPropIds": [
+            "5402001",
+            "5402002"
+          ],
+          "segmentCount": 1,
+          "segments": [
+            {
+              "damageExpression": "{Skill:5402001, Prop:1001}*2+{Skill:5402002, Prop:1001}",
+              "dazeExpression": "{Skill:5402001, Prop:1002}*2+{Skill:5402002, Prop:1002}",
+              "damageMultiplier": 8.96,
+              "dazeMultiplier": 3.27
+            }
+          ]
+        },
+        {
+          "sectionKey": "b",
+          "sourceName": "观测者效应",
+          "status": "not-promoted",
+          "reason": "no-damage-daze-pair-in-current-runtime-schema",
+          "properties": [
+            "所需[坎卜斯黑枝]角色数",
+            "每层失衡值提升"
+          ]
+        },
+        {
+          "sectionKey": "c",
+          "sourceName": "战地特写镜头",
+          "status": "promoted",
+          "runtimeSkillId": "5402003",
+          "referencedSkillPropIds": [
+            "5402003"
+          ],
+          "segmentCount": 1,
+          "segments": [
+            {
+              "damageExpression": "{Skill:5402003, Prop:1001}",
+              "dazeExpression": "{Skill:5402003, Prop:1002}",
+              "damageMultiplier": 9.45,
+              "dazeMultiplier": 1.35
+            }
+          ]
+        }
+      ],
+      "element": {
+        "status": "derived",
+        "attribute": "physical",
+        "evidenceCount": 20,
+        "sourcePaths": [
+          "/skill/a/level/1/desc",
+          "/skill/a/level/2/desc",
+          "/skill/a/level/3/desc",
+          "/skill/a/level/4/desc",
+          "/skill/a/level/5/desc",
+          "/skill/a/level/6/desc",
+          "/skill/a/level/7/desc",
+          "/skill/a/level/8/desc",
+          "/skill/a/level/9/desc",
+          "/skill/a/level/10/desc",
+          "/skill/c/level/1/desc",
+          "/skill/c/level/2/desc",
+          "/skill/c/level/3/desc",
+          "/skill/c/level/4/desc",
+          "/skill/c/level/5/desc",
+          "/skill/c/level/6/desc",
+          "/skill/c/level/7/desc",
+          "/skill/c/level/8/desc",
+          "/skill/c/level/9/desc",
+          "/skill/c/level/10/desc"
+        ]
+      }
+    },
+    {
+      "id": "54021",
+      "codeName": "Sprout",
+      "label": {
+        "zh": "芽芽",
+        "en": "Sprout"
+      },
+      "source": {
+        "sourceId": "nanoka-zzz",
+        "sourceVersion": "2.8",
+        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54021.json",
+        "dataPath": "/"
+      },
+      "level60Panel": {
+        "maxHp": 4210.2983,
+        "attack": 8863.4072,
+        "defense": 666.3389,
+        "impact": 103,
+        "critRate": 0.05,
+        "critDamage": 0.5,
+        "anomalyMastery": 110
+      },
+      "rawSkillPropCount": 3,
+      "promotedSkillCount": 2,
+      "skillSections": [
+        {
+          "sectionKey": "a",
+          "sourceName": "六合飞星",
+          "status": "promoted",
+          "runtimeSkillId": "54021-a",
+          "referencedSkillPropIds": [
+            "5402101",
+            "5402102"
+          ],
+          "segmentCount": 2,
+          "segments": [
+            {
+              "labelSuffix": "飞剑",
+              "damageExpression": "{Skill:5402101, Prop:1001}",
+              "dazeExpression": "{Skill:5402101, Prop:1002}",
+              "damageMultiplier": 7.17,
+              "dazeMultiplier": 3.28
+            },
+            {
+              "labelSuffix": "连斩",
+              "damageExpression": "{Skill:5402102, Prop:1001}",
+              "dazeExpression": "{Skill:5402102, Prop:1002}",
+              "damageMultiplier": 9.86,
+              "dazeMultiplier": 3.28
+            }
+          ]
+        },
+        {
+          "sectionKey": "b",
+          "sourceName": "同心之契",
+          "status": "not-promoted",
+          "reason": "no-damage-daze-pair-in-current-runtime-schema",
+          "properties": [
+            "伤害提升"
+          ]
+        },
+        {
+          "sectionKey": "c",
+          "sourceName": "归一之剑",
+          "status": "promoted",
+          "runtimeSkillId": "5402103",
+          "referencedSkillPropIds": [
+            "5402103"
+          ],
+          "segmentCount": 1,
+          "segments": [
+            {
+              "damageExpression": "{Skill:5402103, Prop:1001}",
+              "dazeExpression": "{Skill:5402103, Prop:1002}",
+              "damageMultiplier": 8.46,
+              "dazeMultiplier": 1.21
+            }
+          ]
+        }
+      ],
+      "element": {
+        "status": "derived",
+        "attribute": "physical",
+        "evidenceCount": 30,
+        "sourcePaths": [
+          "/skill/a/level/1/desc",
+          "/skill/a/level/2/desc",
+          "/skill/a/level/3/desc",
+          "/skill/a/level/4/desc",
+          "/skill/a/level/5/desc",
+          "/skill/a/level/6/desc",
+          "/skill/a/level/7/desc",
+          "/skill/a/level/8/desc",
+          "/skill/a/level/9/desc",
+          "/skill/a/level/10/desc",
+          "/skill/c/level/1/desc",
+          "/skill/c/level/2/desc",
+          "/skill/c/level/3/desc",
+          "/skill/c/level/4/desc",
+          "/skill/c/level/5/desc",
+          "/skill/c/level/6/desc",
+          "/skill/c/level/7/desc",
+          "/skill/c/level/8/desc",
+          "/skill/c/level/9/desc",
+          "/skill/c/level/10/desc"
+        ]
+      }
+    }
+  ]
+}

@@ -49,7 +49,7 @@ const attributeLabelMap: Record<string, NanokaBangbooAttribute> = {
   玄墨: "auricInk",
 }
 
-const damageAttributePattern = /造成[^。]*?(<color=[^>]+>(火|电|冰|物理|以太|烈霜|玄墨)属性伤害<\/color>)/g
+const damageAttributePattern = /造成[^。]*?(<color=[^>]+>((?:火|电|冰|以太|烈霜|玄墨)属性|物理)伤害<\/color>)/g
 
 export function deriveNanokaBangbooElement(
   source: NanokaBangbooElementSource,
@@ -74,7 +74,7 @@ export function deriveNanokaBangbooElement(
 
       for (const match of desc.matchAll(damageAttributePattern)) {
         const matchedText = match[1]
-        const rawLabel = match[2]
+        const rawLabel = match[2]?.replace(/属性$/, "")
         if (matchedText === undefined || rawLabel === undefined)
           continue
 

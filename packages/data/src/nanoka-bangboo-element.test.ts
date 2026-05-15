@@ -37,6 +37,22 @@ describe("nanoka Bangboo element source artifact gate", () => {
     })
   })
 
+  it("derives physical Bangboo attributes from colored physical damage text without the 属性 suffix", () => {
+    const birkblick = readJson<NanokaBangbooElementSource>("data/source/raw/nanoka/zzz/2.8/zh/bangboo/54020.json")
+    const artifact = deriveNanokaBangbooElement(birkblick, {
+      sourceVersion: "2.8",
+      bangbooId: 54020,
+    })
+
+    expect(artifact).toMatchObject({
+      sourceVersion: "2.8",
+      bangbooId: 54020,
+      attribute: "physical",
+      runtimeCutoverReady: false,
+    })
+    expect(new Set(artifact.evidence.map(item => item.rawLabel))).toEqual(new Set(["物理"]))
+  })
+
   it("fails loud when the source id, damage text, or element evidence is invalid", () => {
     const plugboo = readJson<NanokaBangbooElementSource>("data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json")
     const missingId = structuredClone(plugboo)

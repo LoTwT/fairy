@@ -18,8 +18,10 @@ type CoverageMatrix = {
   status: string
   sampleSources: Array<{
     id: string
+    entityType?: string
     version: string
     approvedForCleanedOutput: boolean
+    evidenceUse?: string
   }>
   rows: Array<{
     fieldId: string
@@ -33,6 +35,7 @@ type CoverageMatrix = {
     rawFieldPaths?: string[]
     transformRule?: string
     auditArtifact?: string
+    notes?: string
   }>
 }
 
@@ -75,6 +78,7 @@ describe("nanoka source gate", () => {
 
     expect(requirePattern(source.urlAllowlist, "manifestUrl").test("https://static.nanoka.cc/manifest.json")).toBe(true)
     expect(requirePattern(source.urlAllowlist, "versionedIndexUrls").test("https://static.nanoka.cc/zzz/2.8/boss.json")).toBe(true)
+    expect(requirePattern(source.urlAllowlist, "versionedIndexUrls").test("https://static.nanoka.cc/zzz/2.8/bangboo.json")).toBe(true)
     expect(requirePattern(source.urlAllowlist, "localizedDetailUrls").test("https://static.nanoka.cc/zzz/2.8/zh/character/1021.json")).toBe(true)
     expect(requirePattern(source.urlAllowlist, "localizedDetailUrls").test("https://static.nanoka.cc/zzz/2.8/zh/monster/30000.json")).toBe(true)
   })
@@ -221,6 +225,32 @@ describe("nanoka source gate", () => {
         "nanoka-bangboo-sharkboo-live-54001",
       ]))
     }
+  })
+
+  it("locks the V1.2.1 Bangboo batch to the full approved-live index", () => {
+    const matrix = readJson<CoverageMatrix>("data/cleaned/audit/nanoka-coverage-matrix.json")
+    const samples = new Map(matrix.sampleSources.map(sample => [sample.id, sample]))
+    const rows = new Map(matrix.rows.map(row => [row.fieldId, row]))
+    const bangbooSamples = matrix.sampleSources.filter(sample => sample.entityType === "bangboo" && sample.version === "2.8")
+
+    expect(samples.get("nanoka-bangboo-index-live-2.8")).toMatchObject({
+      version: "2.8",
+      approvedForCleanedOutput: true,
+      evidenceUse: "v1.2.1-bangboo-batch-source-gate",
+    })
+    expect(bangbooSamples).toHaveLength(39)
+
+    for (const fieldId of ["bangboos.identity", "bangboos.basePanel", "bangboos.skillSegments"]) {
+      expect(rows.get(fieldId)).toMatchObject({
+        sampleEntity: "nanoka-bangboo-index-live-2.8",
+        auditArtifact: "data/cleaned/audit/nanoka-bangboo-batch-audit.json",
+      })
+      expect(rows.get(fieldId)?.supportingSampleEntities).toHaveLength(39)
+      expect(rows.get(fieldId)?.notes).toContain("no new golden anchors")
+    }
+
+    expect(rows.get("bangboos.element")?.supportingSampleEntities).toHaveLength(39)
+    expect(rows.get("bangboos.element")?.auditArtifact).toBe("data/cleaned/audit/nanoka-bangboo-batch-audit.json")
   })
 
   it("locks enemy variant mapping to approved live monster detail samples", () => {
