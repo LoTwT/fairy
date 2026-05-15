@@ -214,9 +214,9 @@ describe("Phase 3 source migration drift report foundation", () => {
       counts: {
         same: 0,
         changed: 0,
-        missing: 4,
+        missing: 0,
         new: 0,
-        "semantic-mismatch": 22,
+        "semantic-mismatch": 26,
       },
       unresolvedCount: 26,
     })
@@ -228,27 +228,35 @@ describe("Phase 3 source migration drift report foundation", () => {
       && row.blockedBy.includes("phase3:ruling-required"),
     )).toBe(true)
     expect(report.rows.some(row => row.candidateSourceRef.sourceAnchor.startsWith("data/source/raw/nanoka/zzz/2.8/"))).toBe(true)
-    expect(report.rows.some(row => row.candidateSourceRef.sourceAnchor === "data/cleaned/audit/nanoka-coverage-matrix.json")).toBe(true)
+    expect(report.rows.some(row => row.candidateSourceRef.sourceAnchor.endsWith("nanoka-disorder-formula-audit.json"))).toBe(true)
     expect(report.rows.every(row => row.fieldId.endsWith(".nanokaCandidateCoverage"))).toBe(true)
     expect(report.rows.every(row => row.baselineValue !== "passed")).toBe(true)
     expect(report.rows.every(row => row.candidateValue.coverageStatus !== "passed")).toBe(true)
+    expect(report.rows.every(row => row.status === "semantic-mismatch")).toBe(true)
 
     const g22 = report.rows.find(row => row.entityId === "G22")
     const g24 = report.rows.find(row => row.entityId === "G24")
     const g26 = report.rows.find(row => row.entityId === "G26")
     expect(g22).toMatchObject({
-      status: "missing",
+      status: "semantic-mismatch",
       candidateValue: {
-        missingRequiredSampleEntities: ["nanoka-character-nicole-live-1031"],
+        missingRequiredSampleEntities: [],
+        requiredSampleEntities: ["nanoka-character-nicole-live-1031"],
       },
       candidateSourceRef: {
-        sourceAnchor: "data/cleaned/audit/nanoka-coverage-matrix.json",
+        sourceAnchor: "data/source/raw/nanoka/zzz/2.8/zh/character/1031.json",
+        dataPath: "/stats",
       },
     })
     expect(g24).toMatchObject({
-      status: "missing",
+      status: "semantic-mismatch",
       candidateValue: {
-        missingRequiredSampleEntities: ["nanoka-bangboo-penguinboo-live-53001"],
+        missingRequiredSampleEntities: [],
+        requiredSampleEntities: ["nanoka-bangboo-penguinboo-live-53001"],
+      },
+      candidateSourceRef: {
+        sourceAnchor: "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53001.json",
+        dataPath: "/stats",
       },
     })
     expect(g26).toMatchObject({

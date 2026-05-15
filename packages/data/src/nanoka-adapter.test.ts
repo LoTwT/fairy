@@ -73,7 +73,11 @@ describe("nanoka raw snapshot adapter skeleton", () => {
         "data/source/raw/nanoka/zzz/2.8/boss.json",
         "data/source/raw/nanoka/zzz/2.8/zh/character/1021.json",
         "data/source/raw/nanoka/zzz/2.8/zh/character/1371.json",
+        "data/source/raw/nanoka/zzz/2.8/zh/character/1031.json",
+        "data/source/raw/nanoka/zzz/2.8/zh/character/1221.json",
         "data/source/raw/nanoka/zzz/2.8/zh/boss/69036.json",
+        "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53001.json",
+        "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54001.json",
       ]),
     )
     expect(descriptor.compliance.notes.join("\n")).toContain("manifest.zzz.live")

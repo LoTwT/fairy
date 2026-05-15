@@ -16,6 +16,11 @@ type SourceRegistry = {
 
 type CoverageMatrix = {
   status: string
+  sampleSources: Array<{
+    id: string
+    version: string
+    approvedForCleanedOutput: boolean
+  }>
   rows: Array<{
     fieldId: string
     fieldClass?: string
@@ -185,6 +190,37 @@ describe("nanoka source gate", () => {
     ]))
     expect(row?.transformRule).toContain("colored damage phrase")
     expect(row?.transformRule).toContain("source /id to match the requested Bangboo id")
+  })
+
+  it("adds Phase 3 missing-anchor candidate samples without marking them exit-clean", () => {
+    const matrix = readJson<CoverageMatrix>("data/cleaned/audit/nanoka-coverage-matrix.json")
+    const samples = new Map(matrix.sampleSources.map(sample => [sample.id, sample]))
+    const rows = new Map(matrix.rows.map(row => [row.fieldId, row]))
+
+    for (const sampleId of [
+      "nanoka-character-nicole-live-1031",
+      "nanoka-character-yanagi-live-1221",
+      "nanoka-bangboo-penguinboo-live-53001",
+      "nanoka-bangboo-sharkboo-live-54001",
+    ]) {
+      expect(samples.get(sampleId)).toMatchObject({
+        version: "2.8",
+        approvedForCleanedOutput: true,
+      })
+    }
+
+    expect(rows.get("agents.passiveModifiers")?.supportingSampleEntities).toEqual(expect.arrayContaining([
+      "nanoka-character-nicole-live-1031",
+      "nanoka-character-yanagi-live-1221",
+    ]))
+    expect(rows.get("agents.passiveModifiers")?.blockedBy).toContain("typed-modifier-template-required")
+
+    for (const fieldId of ["bangboos.basePanel", "bangboos.skillSegments"]) {
+      expect(rows.get(fieldId)?.supportingSampleEntities).toEqual(expect.arrayContaining([
+        "nanoka-bangboo-penguinboo-live-53001",
+        "nanoka-bangboo-sharkboo-live-54001",
+      ]))
+    }
   })
 
   it("locks enemy variant mapping to approved live monster detail samples", () => {

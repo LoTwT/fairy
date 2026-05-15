@@ -1,7 +1,7 @@
 {
   "schemaVersion": "nanoka-drift-report/v0.1",
   "syncId": "phase3-sync-001-g01-g26",
-  "generatedAt": "2026-05-15T16:45:00+08:00",
+  "generatedAt": "2026-05-15T17:25:00+08:00",
   "candidate": {
     "sourceId": "nanoka-zzz",
     "sourceVersion": "2.8",
@@ -29,9 +29,9 @@
   "counts": {
     "same": 0,
     "changed": 0,
-    "missing": 4,
+    "missing": 0,
     "new": 0,
-    "semantic-mismatch": 22
+    "semantic-mismatch": 26
   },
   "rows": [
     {
@@ -2167,8 +2167,8 @@
       "candidateSourceRef": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/cleaned/audit/nanoka-coverage-matrix.json",
-        "dataPath": "/rows/13"
+        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1031.json",
+        "dataPath": "/stats"
       },
       "baselineValue": {
         "replayStatus": "passed",
@@ -2186,7 +2186,7 @@
         ]
       },
       "candidateValue": {
-        "coverageStatus": "missing-required-sample",
+        "coverageStatus": "candidate-covered-not-yet-ruled-equivalent",
         "expectedCandidate": "Nicole passive modifier source coverage.",
         "fieldIds": [
           "agents.passiveModifiers"
@@ -2200,7 +2200,9 @@
             "promotable": false,
             "rawAvailable": true,
             "sampleEntities": [
-              "nanoka-character-yixuan-1371"
+              "nanoka-character-nicole-live-1031",
+              "nanoka-character-yanagi-live-1221",
+              "nanoka-character-yixuan-live-1371"
             ],
             "auditArtifact": null,
             "blockedBy": [
@@ -2212,21 +2214,21 @@
           "nanoka-character-nicole-live-1031"
         ],
         "availableSampleEntities": [
-          "nanoka-character-yixuan-1371"
+          "nanoka-character-nicole-live-1031",
+          "nanoka-character-yanagi-live-1221",
+          "nanoka-character-yixuan-live-1371"
         ],
-        "missingRequiredSampleEntities": [
-          "nanoka-character-nicole-live-1031"
-        ]
+        "missingRequiredSampleEntities": []
       },
-      "status": "missing",
+      "status": "semantic-mismatch",
       "severity": "blocking",
       "rulingStatus": "pending",
       "blockedBy": [
         "phase3:ruling-required",
-        "phase3:candidate-source-missing",
+        "phase3:semantic-equivalence-ruling-required",
         "typed-modifier-template-required"
       ],
-      "notes": "First sync is missing required approved-live nanoka candidate sample(s): nanoka-character-nicole-live-1031."
+      "notes": "First sync has nanoka candidate coverage, but Phase 3 has not ruled semantic equivalence against the archived golden replay baseline."
     },
     {
       "entityType": "agent",
@@ -2243,8 +2245,8 @@
       "candidateSourceRef": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/cleaned/audit/nanoka-coverage-matrix.json",
-        "dataPath": "/rows/13"
+        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1221.json",
+        "dataPath": "/stats"
       },
       "baselineValue": {
         "replayStatus": "passed",
@@ -2275,7 +2277,7 @@
         ]
       },
       "candidateValue": {
-        "coverageStatus": "missing-required-sample",
+        "coverageStatus": "candidate-covered-not-yet-ruled-equivalent",
         "expectedCandidate": "Yanagi passive/disorder source coverage.",
         "fieldIds": [
           "agents.passiveModifiers",
@@ -2290,7 +2292,9 @@
             "promotable": false,
             "rawAvailable": true,
             "sampleEntities": [
-              "nanoka-character-yixuan-1371"
+              "nanoka-character-nicole-live-1031",
+              "nanoka-character-yanagi-live-1221",
+              "nanoka-character-yixuan-live-1371"
             ],
             "auditArtifact": null,
             "blockedBy": [
@@ -2315,22 +2319,22 @@
           "nanoka-character-yanagi-live-1221"
         ],
         "availableSampleEntities": [
-          "nanoka-character-yixuan-1371"
+          "nanoka-character-nicole-live-1031",
+          "nanoka-character-yanagi-live-1221",
+          "nanoka-character-yixuan-live-1371"
         ],
-        "missingRequiredSampleEntities": [
-          "nanoka-character-yanagi-live-1221"
-        ]
+        "missingRequiredSampleEntities": []
       },
-      "status": "missing",
+      "status": "semantic-mismatch",
       "severity": "blocking",
       "rulingStatus": "pending",
       "blockedBy": [
         "phase3:ruling-required",
-        "phase3:candidate-source-missing",
+        "phase3:semantic-equivalence-ruling-required",
         "typed-modifier-template-required",
         "implementation-owned-runtime-formula"
       ],
-      "notes": "First sync is missing required approved-live nanoka candidate sample(s): nanoka-character-yanagi-live-1221."
+      "notes": "First sync has nanoka candidate coverage, but Phase 3 has not ruled semantic equivalence against the archived golden replay baseline."
     },
     {
       "entityType": "bangboo",
@@ -2347,8 +2351,8 @@
       "candidateSourceRef": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/cleaned/audit/nanoka-coverage-matrix.json",
-        "dataPath": "/rows/19"
+        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53001.json",
+        "dataPath": "/stats"
       },
       "baselineValue": {
         "replayStatus": "passed",
@@ -2379,7 +2383,7 @@
         ]
       },
       "candidateValue": {
-        "coverageStatus": "missing-required-sample",
+        "coverageStatus": "candidate-covered-not-yet-ruled-equivalent",
         "expectedCandidate": "Penguinboo panel and skill numeric coverage.",
         "fieldIds": [
           "bangboos.basePanel",
@@ -2394,7 +2398,9 @@
             "promotable": true,
             "rawAvailable": true,
             "sampleEntities": [
-              "nanoka-bangboo-plugboo-live-54008"
+              "nanoka-bangboo-plugboo-live-54008",
+              "nanoka-bangboo-penguinboo-live-53001",
+              "nanoka-bangboo-sharkboo-live-54001"
             ],
             "auditArtifact": null,
             "blockedBy": []
@@ -2407,7 +2413,9 @@
             "promotable": true,
             "rawAvailable": true,
             "sampleEntities": [
-              "nanoka-bangboo-plugboo-live-54008"
+              "nanoka-bangboo-plugboo-live-54008",
+              "nanoka-bangboo-penguinboo-live-53001",
+              "nanoka-bangboo-sharkboo-live-54001"
             ],
             "auditArtifact": null,
             "blockedBy": []
@@ -2417,20 +2425,20 @@
           "nanoka-bangboo-penguinboo-live-53001"
         ],
         "availableSampleEntities": [
-          "nanoka-bangboo-plugboo-live-54008"
+          "nanoka-bangboo-plugboo-live-54008",
+          "nanoka-bangboo-penguinboo-live-53001",
+          "nanoka-bangboo-sharkboo-live-54001"
         ],
-        "missingRequiredSampleEntities": [
-          "nanoka-bangboo-penguinboo-live-53001"
-        ]
+        "missingRequiredSampleEntities": []
       },
-      "status": "missing",
+      "status": "semantic-mismatch",
       "severity": "blocking",
       "rulingStatus": "pending",
       "blockedBy": [
         "phase3:ruling-required",
-        "phase3:candidate-source-missing"
+        "phase3:semantic-equivalence-ruling-required"
       ],
-      "notes": "First sync is missing required approved-live nanoka candidate sample(s): nanoka-bangboo-penguinboo-live-53001."
+      "notes": "First sync has nanoka candidate coverage, but Phase 3 has not ruled semantic equivalence against the archived golden replay baseline."
     },
     {
       "entityType": "bangboo",
@@ -2447,8 +2455,8 @@
       "candidateSourceRef": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/cleaned/audit/nanoka-coverage-matrix.json",
-        "dataPath": "/rows/19"
+        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54001.json",
+        "dataPath": "/stats"
       },
       "baselineValue": {
         "replayStatus": "passed",
@@ -2479,7 +2487,7 @@
         ]
       },
       "candidateValue": {
-        "coverageStatus": "missing-required-sample",
+        "coverageStatus": "candidate-covered-not-yet-ruled-equivalent",
         "expectedCandidate": "Sharkboo panel and skill numeric coverage.",
         "fieldIds": [
           "bangboos.basePanel",
@@ -2494,7 +2502,9 @@
             "promotable": true,
             "rawAvailable": true,
             "sampleEntities": [
-              "nanoka-bangboo-plugboo-live-54008"
+              "nanoka-bangboo-plugboo-live-54008",
+              "nanoka-bangboo-penguinboo-live-53001",
+              "nanoka-bangboo-sharkboo-live-54001"
             ],
             "auditArtifact": null,
             "blockedBy": []
@@ -2507,7 +2517,9 @@
             "promotable": true,
             "rawAvailable": true,
             "sampleEntities": [
-              "nanoka-bangboo-plugboo-live-54008"
+              "nanoka-bangboo-plugboo-live-54008",
+              "nanoka-bangboo-penguinboo-live-53001",
+              "nanoka-bangboo-sharkboo-live-54001"
             ],
             "auditArtifact": null,
             "blockedBy": []
@@ -2517,20 +2529,20 @@
           "nanoka-bangboo-sharkboo-live-54001"
         ],
         "availableSampleEntities": [
-          "nanoka-bangboo-plugboo-live-54008"
-        ],
-        "missingRequiredSampleEntities": [
+          "nanoka-bangboo-plugboo-live-54008",
+          "nanoka-bangboo-penguinboo-live-53001",
           "nanoka-bangboo-sharkboo-live-54001"
-        ]
+        ],
+        "missingRequiredSampleEntities": []
       },
-      "status": "missing",
+      "status": "semantic-mismatch",
       "severity": "blocking",
       "rulingStatus": "pending",
       "blockedBy": [
         "phase3:ruling-required",
-        "phase3:candidate-source-missing"
+        "phase3:semantic-equivalence-ruling-required"
       ],
-      "notes": "First sync is missing required approved-live nanoka candidate sample(s): nanoka-bangboo-sharkboo-live-54001."
+      "notes": "First sync has nanoka candidate coverage, but Phase 3 has not ruled semantic equivalence against the archived golden replay baseline."
     },
     {
       "entityType": "bangboo",
@@ -2595,7 +2607,9 @@
             "promotable": true,
             "rawAvailable": true,
             "sampleEntities": [
-              "nanoka-bangboo-plugboo-live-54008"
+              "nanoka-bangboo-plugboo-live-54008",
+              "nanoka-bangboo-penguinboo-live-53001",
+              "nanoka-bangboo-sharkboo-live-54001"
             ],
             "auditArtifact": null,
             "blockedBy": []
@@ -2608,7 +2622,9 @@
             "promotable": true,
             "rawAvailable": true,
             "sampleEntities": [
-              "nanoka-bangboo-plugboo-live-54008"
+              "nanoka-bangboo-plugboo-live-54008",
+              "nanoka-bangboo-penguinboo-live-53001",
+              "nanoka-bangboo-sharkboo-live-54001"
             ],
             "auditArtifact": null,
             "blockedBy": []
@@ -2631,7 +2647,9 @@
           "nanoka-bangboo-plugboo-live-54008"
         ],
         "availableSampleEntities": [
-          "nanoka-bangboo-plugboo-live-54008"
+          "nanoka-bangboo-plugboo-live-54008",
+          "nanoka-bangboo-penguinboo-live-53001",
+          "nanoka-bangboo-sharkboo-live-54001"
         ],
         "missingRequiredSampleEntities": []
       },

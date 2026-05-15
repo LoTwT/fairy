@@ -1,7 +1,7 @@
 import { execFileSync } from "node:child_process"
 import { createHash } from "node:crypto"
-import { mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs"
-import { dirname, join } from "node:path"
+import { readFileSync } from "node:fs"
+import { join } from "node:path"
 import { describe, expect, it } from "vitest"
 import type { SourceManifest } from "./types/source-manifest"
 
@@ -54,37 +54,21 @@ describe("S5 data governance", () => {
   })
 
   it("packs synced cleaned JSON while excluding retained source files", () => {
-    const sourceProbePath = join(repoRoot, "data/cleaned/qa-pack-probe.json")
-    const packageProbePath = join(dataPackageRoot, "cleaned/qa-pack-probe.json")
-    mkdirSync(dirname(sourceProbePath), { recursive: true })
-    writeFileSync(
-      sourceProbePath,
-      `${JSON.stringify({
-        kind: "sourceManifest",
-        schemaVersion: "pack-probe-v1",
-        generatedAt: "2026-05-05T12:31:10+08:00",
-      })}\n`,
-    )
+    const syncOutput = execFileSync("node", ["scripts/sync-cleaned.mjs", "--check"], {
+      cwd: dataPackageRoot,
+      encoding: "utf8",
+      stdio: ["ignore", "pipe", "pipe"],
+    })
+    const files = npmPackFiles()
 
-    try {
-      execFileSync("node", ["scripts/sync-cleaned.mjs"], {
-        cwd: dataPackageRoot,
-        stdio: ["ignore", "pipe", "pipe"],
-      })
-
-      const files = npmPackFiles()
-
-      expect(files).toContain("cleaned/qa-pack-probe.json")
-      expect(files).toContain("source-registry.json")
-      expect(files.some(file => file.startsWith("data/source/"))).toBe(false)
-      expect(files.some(file => file.startsWith("docs/reference/"))).toBe(false)
-      expect(files.some(file => file.endsWith(".xlsx"))).toBe(false)
-      expect(files.some(file => file.endsWith(".test.ts"))).toBe(false)
-    }
-    finally {
-      rmSync(sourceProbePath, { force: true })
-      rmSync(packageProbePath, { force: true })
-    }
+    expect(syncOutput).toContain("cleaned mirror check passed")
+    expect(files).toContain("cleaned/golden/v1-replay-report.json")
+    expect(files).toContain("cleaned/audit/nanoka-coverage-matrix.json")
+    expect(files).toContain("source-registry.json")
+    expect(files.some(file => file.startsWith("data/source/"))).toBe(false)
+    expect(files.some(file => file.startsWith("docs/reference/"))).toBe(false)
+    expect(files.some(file => file.endsWith(".xlsx"))).toBe(false)
+    expect(files.some(file => file.endsWith(".test.ts"))).toBe(false)
   })
 
   it("keeps the guide as reference material instead of formal cleaned data", () => {

@@ -1,6 +1,6 @@
 {
   "schemaVersion": "nanoka-coverage-matrix/v0.1",
-  "generatedAt": "2026-05-15T16:20:00+08:00",
+  "generatedAt": "2026-05-15T17:15:00+08:00",
   "status": "phase-3-drift-foundation-gate",
   "sourceVersion": "manifest.zzz.live",
   "canonicalSchemas": [
@@ -309,6 +309,46 @@
       "server": "live",
       "approvedForCleanedOutput": true,
       "evidenceUse": "release-gate-evidence"
+    },
+    {
+      "id": "nanoka-character-nicole-live-1031",
+      "entityType": "agent",
+      "version": "2.8",
+      "releaseChannel": "live",
+      "server": "global",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/character/1031.json",
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "phase3-g22-passive-candidate-gate"
+    },
+    {
+      "id": "nanoka-character-yanagi-live-1221",
+      "entityType": "agent",
+      "version": "2.8",
+      "releaseChannel": "live",
+      "server": "global",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/character/1221.json",
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "phase3-g23-passive-candidate-gate"
+    },
+    {
+      "id": "nanoka-bangboo-penguinboo-live-53001",
+      "entityType": "bangboo",
+      "version": "2.8",
+      "releaseChannel": "live",
+      "server": "global",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/bangboo/53001.json",
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "phase3-g24-bangboo-candidate-gate"
+    },
+    {
+      "id": "nanoka-bangboo-sharkboo-live-54001",
+      "entityType": "bangboo",
+      "version": "2.8",
+      "releaseChannel": "live",
+      "server": "global",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/bangboo/54001.json",
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "phase3-g25-bangboo-candidate-gate"
     }
   ],
   "rows": [
@@ -604,12 +644,18 @@
         "/skill/*/description/*/desc"
       ],
       "transformRule": "passive/talent/skill text exists; formal corePassiveModifiers require deterministic typed modifier templates before promotion",
-      "sampleEntity": "nanoka-character-yixuan-1371",
+      "sampleEntity": "nanoka-character-nicole-live-1031",
       "rawAvailable": true,
       "promotable": false,
       "blockedBy": [
         "typed-modifier-template-required"
-      ]
+      ],
+      "supportingSampleEntities": [
+        "nanoka-character-nicole-live-1031",
+        "nanoka-character-yanagi-live-1221",
+        "nanoka-character-yixuan-live-1371"
+      ],
+      "notes": "Phase 3 Step 1 adds approved-live Nicole and Yanagi character detail samples for G22/G23 passive candidate coverage; typed modifier template remains unresolved before formal promotion."
     },
     {
       "fieldId": "adrenaline.maxAdrenaline",
@@ -715,7 +761,13 @@
       "sampleEntity": "nanoka-bangboo-plugboo-live-54008",
       "rawAvailable": true,
       "promotable": true,
-      "blockedBy": []
+      "blockedBy": [],
+      "supportingSampleEntities": [
+        "nanoka-bangboo-plugboo-live-54008",
+        "nanoka-bangboo-penguinboo-live-53001",
+        "nanoka-bangboo-sharkboo-live-54001"
+      ],
+      "notes": "Phase 3 Step 1 adds approved-live Penguinboo and Sharkboo samples for G24/G25 candidate coverage."
     },
     {
       "fieldId": "bangboos.skillSegments",
@@ -733,7 +785,13 @@
       "sampleEntity": "nanoka-bangboo-plugboo-live-54008",
       "rawAvailable": true,
       "promotable": true,
-      "blockedBy": []
+      "blockedBy": [],
+      "supportingSampleEntities": [
+        "nanoka-bangboo-plugboo-live-54008",
+        "nanoka-bangboo-penguinboo-live-53001",
+        "nanoka-bangboo-sharkboo-live-54001"
+      ],
+      "notes": "Phase 3 Step 1 adds approved-live Penguinboo and Sharkboo samples for G24/G25 candidate coverage."
     },
     {
       "fieldId": "bangboos.element",
