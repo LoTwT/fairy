@@ -1,8 +1,8 @@
 {
   "schemaVersion": "nanoka-coverage-matrix/v0.1",
-  "generatedAt": "2026-05-15T00:21:07+08:00",
-  "status": "phase-0-draft",
-  "sourceVersion": "3.0.2+15625449",
+  "generatedAt": "2026-05-15T02:55:00+08:00",
+  "status": "phase-0-r1-r6-locked",
+  "sourceVersion": "manifest.zzz.live",
   "canonicalSchemas": [
     "packages/core/src/schema/game-data.ts",
     "packages/core/src/schema/battle-snapshot.ts",
@@ -19,8 +19,9 @@
     "nanoka",
     "derived-from-source-registry",
     "implementation-owned",
-    "retained-non-nanoka",
-    "out-of-scope"
+    "archived-audit-baseline",
+    "out-of-scope",
+    "removed-out-of-product-scope"
   ],
   "sampleSources": [
     {
@@ -29,10 +30,12 @@
       "entityId": "1371",
       "url": "https://static.nanoka.cc/zzz/3.0.2+15625449/zh/character/1371.json",
       "version": "3.0.2+15625449",
-      "releaseChannel": "stable",
+      "releaseChannel": "research",
       "fetchedAt": "2026-05-15T00:21:07+08:00",
       "contentSha256": "6cb0a652f92d9daf0e6cd382d757c7755d543f9013defb61799b747aaf2b8868",
-      "server": "live"
+      "server": "latest-snapshot",
+      "approvedForCleanedOutput": false,
+      "evidenceUse": "research-only-until-owner-approval"
     },
     {
       "id": "nanoka-character-nekomata-1021",
@@ -40,10 +43,12 @@
       "entityId": "1021",
       "url": "https://static.nanoka.cc/zzz/3.0.2+15625449/zh/character/1021.json",
       "version": "3.0.2+15625449",
-      "releaseChannel": "stable",
+      "releaseChannel": "research",
       "fetchedAt": "2026-05-15T00:21:07+08:00",
       "contentSha256": "85186a7568c11ff9f56e2085bf561485f0548ff29fc70e686c8aa3dca2b0f961",
-      "server": "live"
+      "server": "latest-snapshot",
+      "approvedForCleanedOutput": false,
+      "evidenceUse": "research-only-until-owner-approval"
     },
     {
       "id": "nanoka-character-soldier11-1041",
@@ -51,10 +56,12 @@
       "entityId": "1041",
       "url": "https://static.nanoka.cc/zzz/3.0.2+15625449/zh/character/1041.json",
       "version": "3.0.2+15625449",
-      "releaseChannel": "stable",
+      "releaseChannel": "research",
       "fetchedAt": "2026-05-15T00:21:07+08:00",
       "contentSha256": "8acde3e5c3849a371c5a2fefe32bd38e2b96397067a73e27cd5a69296550fcc1",
-      "server": "live"
+      "server": "latest-snapshot",
+      "approvedForCleanedOutput": false,
+      "evidenceUse": "research-only-until-owner-approval"
     },
     {
       "id": "nanoka-bangboo-plugboo-54008",
@@ -62,10 +69,12 @@
       "entityId": "54008",
       "url": "https://static.nanoka.cc/zzz/3.0.2+15625449/zh/bangboo/54008.json",
       "version": "3.0.2+15625449",
-      "releaseChannel": "stable",
+      "releaseChannel": "research",
       "fetchedAt": "2026-05-15T00:21:07+08:00",
       "contentSha256": "2afc34c8b72b3a7dc6e18d945e83c12784a742817e4ce760ee8c4c17aa3b0261",
-      "server": "live"
+      "server": "latest-snapshot",
+      "approvedForCleanedOutput": false,
+      "evidenceUse": "research-only-until-owner-approval"
     },
     {
       "id": "nanoka-monster-dullahan-30000",
@@ -73,10 +82,12 @@
       "entityId": "30000",
       "url": "https://static.nanoka.cc/zzz/3.0.2+15625449/zh/monster/30000.json",
       "version": "3.0.2+15625449",
-      "releaseChannel": "stable",
+      "releaseChannel": "research",
       "fetchedAt": "2026-05-15T00:21:07+08:00",
       "contentSha256": "46eebea2270e748a6057d152a05a3296f2601efaccf299667318025f44bf492a",
-      "server": "live"
+      "server": "latest-snapshot",
+      "approvedForCleanedOutput": false,
+      "evidenceUse": "research-only-until-owner-approval"
     },
     {
       "id": "nanoka-weapon-yixuan-signature-14137",
@@ -84,10 +95,12 @@
       "entityId": "14137",
       "url": "https://static.nanoka.cc/zzz/3.0.2+15625449/zh/weapon/14137.json",
       "version": "3.0.2+15625449",
-      "releaseChannel": "stable",
+      "releaseChannel": "research",
       "fetchedAt": "2026-05-15T00:21:07+08:00",
       "contentSha256": "a0d7dfe24f24a5cfc623e750c33bbea7aead9952283d670861b9a67e814a667d",
-      "server": "live"
+      "server": "latest-snapshot",
+      "approvedForCleanedOutput": false,
+      "evidenceUse": "research-only-until-owner-approval"
     },
     {
       "id": "nanoka-equipment-woodpecker-31000",
@@ -95,10 +108,64 @@
       "entityId": "31000",
       "url": "https://static.nanoka.cc/zzz/3.0.2+15625449/zh/equipment/31000.json",
       "version": "3.0.2+15625449",
-      "releaseChannel": "stable",
+      "releaseChannel": "research",
       "fetchedAt": "2026-05-15T00:21:07+08:00",
       "contentSha256": "6af7dcce6a1863b1d801e54621056b2f92baab2c31672a4ed6c2cb1ff3fcf508",
-      "server": "live"
+      "server": "latest-snapshot",
+      "approvedForCleanedOutput": false,
+      "evidenceUse": "research-only-until-owner-approval"
+    },
+    {
+      "id": "nanoka-manifest",
+      "entityType": "sourceManifest",
+      "entityId": "zzz",
+      "url": "https://static.nanoka.cc/manifest.json",
+      "version": "manifest",
+      "releaseChannel": "source-registry",
+      "fetchedAt": "2026-05-15T02:21:00+08:00",
+      "contentSha256": "6213ac3b71f5827e850691c2f8547ec6657b7d8ab7e546c50b80252387e613b8",
+      "server": "source-registry",
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "live-version-gate"
+    },
+    {
+      "id": "nanoka-character-nekomata-live-1021",
+      "entityType": "agent",
+      "entityId": "1021",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/character/1021.json",
+      "version": "2.8",
+      "releaseChannel": "stable",
+      "fetchedAt": "2026-05-15T02:32:00+08:00",
+      "contentSha256": "85186a7568c11ff9f56e2085bf561485f0548ff29fc70e686c8aa3dca2b0f961",
+      "server": "live",
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "release-gate-evidence"
+    },
+    {
+      "id": "nanoka-boss-live-index-2.8",
+      "entityType": "deadlyAssaultIndex",
+      "entityId": "boss",
+      "url": "https://static.nanoka.cc/zzz/2.8/boss.json",
+      "version": "2.8",
+      "releaseChannel": "stable",
+      "fetchedAt": "2026-05-15T02:21:00+08:00",
+      "contentSha256": "3379eba07fe6c77e821dc403fc31a9f304148666ee5f5a51706ac5e203393ec0",
+      "server": "live",
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "release-gate-evidence"
+    },
+    {
+      "id": "nanoka-boss-live-69036",
+      "entityType": "deadlyAssaultPeriod",
+      "entityId": "69036",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/boss/69036.json",
+      "version": "2.8",
+      "releaseChannel": "stable",
+      "fetchedAt": "2026-05-15T02:21:00+08:00",
+      "contentSha256": "8f31e1f15918797e8e28c8a350fba6934077b73a35855778d8c0a660815d276b",
+      "server": "live",
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "release-gate-evidence"
     }
   ],
   "rows": [
@@ -108,15 +175,20 @@
       "fieldClass": "required",
       "sourcePolicy": "derived-from-source-registry",
       "status": "needs-tl-research",
-      "nanokaEndpoint": "https://static.nanoka.cc/zzz/{sourceVersion}/{locale}/{entityType}/{id}.json",
-      "rawFieldPaths": [],
-      "transformRule": "derive SourceDocument rows from source registry, parser version, source hash, and stable-version allowlist",
-      "sampleEntity": "nanoka-character-yixuan-1371",
+      "nanokaEndpoint": "https://static.nanoka.cc/manifest.json and https://static.nanoka.cc/zzz/{sourceVersion}/{locale}/{entityType}/{id}.json",
+      "rawFieldPaths": [
+        "/zzz/live",
+        "/zzz/latest",
+        "/zzz/available"
+      ],
+      "transformRule": "derive SourceDocument rows from source registry, parser version, source hash, liveVersionRef=manifest.zzz.live, approvedLiveVersions[], and stable-version allowlist",
+      "sampleEntity": "nanoka-manifest",
       "rawAvailable": true,
       "promotable": false,
       "blockedBy": [
         "source-registry-contract-required",
-        "content-hash-capture-required"
+        "content-hash-capture-required",
+        "live-version-policy-ci-required"
       ]
     },
     {
@@ -127,13 +199,36 @@
       "status": "needs-tl-research",
       "nanokaEndpoint": "all promoted nanoka rows",
       "rawFieldPaths": [],
-      "transformRule": "attach endpoint URL, JSON pointer, and sourceVersion to every promoted field",
+      "transformRule": "attach endpoint URL, JSON pointer, content hash, approved sourceVersion, and liveVersionRef to every promoted field",
       "sampleEntity": "nanoka-bangboo-plugboo-54008",
       "rawAvailable": true,
       "promotable": false,
       "blockedBy": [
-        "adapter-source-ref-emission-required"
+        "adapter-source-ref-emission-required",
+        "json-pointer-convention-required"
       ]
+    },
+    {
+      "fieldId": "metadata.snapshotDiffHistory",
+      "canonicalPath": "planned GameData.sources[].snapshotDiffHistory / package audit metadata",
+      "fieldClass": "derived",
+      "sourcePolicy": "derived-from-source-registry",
+      "status": "verified-from-nanoka",
+      "nanokaEndpoint": "https://static.nanoka.cc/manifest.json and approved versioned nanoka snapshots",
+      "rawFieldPaths": [
+        "/zzz/available",
+        "/zzz/live",
+        "/zzz/latest"
+      ],
+      "transformRule": "R4.a: derive numeric patch history by diffing approved-live snapshot hashes and raw JSON paths; latest/pre-release snapshots are research-only unless lo-user approves them",
+      "sampleEntity": "nanoka-manifest",
+      "rawAvailable": true,
+      "promotable": false,
+      "blockedBy": [
+        "snapshot-diff-tool-required",
+        "approved-live-version-allowlist-required"
+      ],
+      "notes": "No dedicated patch-note/changelog prose endpoint was found in PR #54. This row represents snapshot-derived numeric diff history only."
     },
     {
       "fieldId": "metadata.aliases",
@@ -362,6 +457,86 @@
       "promotable": false,
       "blockedBy": [
         "typed-modifier-template-required"
+      ]
+    },
+    {
+      "fieldId": "sentinel.rpMax",
+      "canonicalPath": "planned V0.1.0 GameData.agents.*.sentinel.rpMax / AgentSnapshot.panel",
+      "fieldClass": "required",
+      "sourcePolicy": "nanoka",
+      "status": "verified-from-nanoka",
+      "nanokaEndpoint": "/{locale}/character/{id}.json",
+      "rawFieldPaths": [
+        "/stats/rp_max"
+      ],
+      "transformRule": "live sample proves raw availability; lock canonical naming and unit normalization before typed promotion",
+      "sampleEntity": "nanoka-character-nekomata-live-1021",
+      "rawAvailable": true,
+      "promotable": false,
+      "blockedBy": [
+        "field:sentinel-naming-required",
+        "field:sentinel-unit-normalization-required"
+      ]
+    },
+    {
+      "fieldId": "sentinel.rpRecover",
+      "canonicalPath": "planned V0.1.0 GameData.agents.*.sentinel.rpRecover / AgentSnapshot.panel",
+      "fieldClass": "required",
+      "sourcePolicy": "nanoka",
+      "status": "verified-from-nanoka",
+      "nanokaEndpoint": "/{locale}/character/{id}.json",
+      "rawFieldPaths": [
+        "/stats/rp_recover"
+      ],
+      "transformRule": "live sample proves raw availability; lock canonical naming and unit normalization before typed promotion",
+      "sampleEntity": "nanoka-character-nekomata-live-1021",
+      "rawAvailable": true,
+      "promotable": false,
+      "blockedBy": [
+        "field:sentinel-naming-required",
+        "field:sentinel-unit-normalization-required"
+      ]
+    },
+    {
+      "fieldId": "sentinel.skillFeverRecovery",
+      "canonicalPath": "planned V0.1.0 GameData.skills.*.sentinel.feverRecovery",
+      "fieldClass": "required",
+      "sourcePolicy": "nanoka",
+      "status": "verified-from-nanoka",
+      "nanokaEndpoint": "/{locale}/character/{id}.json",
+      "rawFieldPaths": [
+        "/skill/*/description/*/param/*/param/*/fever_recovery",
+        "/skill/*/description/*/param/*/param/*/fever_recovery_growth"
+      ],
+      "transformRule": "live sample proves raw availability; lock canonical naming, level-growth handling, and unit normalization before typed promotion",
+      "sampleEntity": "nanoka-character-nekomata-live-1021",
+      "rawAvailable": true,
+      "promotable": false,
+      "blockedBy": [
+        "field:sentinel-naming-required",
+        "field:sentinel-unit-normalization-required",
+        "field:skill-level-growth-transform-required"
+      ]
+    },
+    {
+      "fieldId": "sentinel.skillRpRecovery",
+      "canonicalPath": "planned V0.1.0 GameData.skills.*.sentinel.rpRecovery",
+      "fieldClass": "required",
+      "sourcePolicy": "nanoka",
+      "status": "verified-from-nanoka",
+      "nanokaEndpoint": "/{locale}/character/{id}.json",
+      "rawFieldPaths": [
+        "/skill/*/description/*/param/*/param/*/rp_recovery",
+        "/skill/*/description/*/param/*/param/*/rp_recovery_growth"
+      ],
+      "transformRule": "live sample proves raw availability; lock canonical naming, level-growth handling, and unit normalization before typed promotion",
+      "sampleEntity": "nanoka-character-nekomata-live-1021",
+      "rawAvailable": true,
+      "promotable": false,
+      "blockedBy": [
+        "field:sentinel-naming-required",
+        "field:sentinel-unit-normalization-required",
+        "field:skill-level-growth-transform-required"
       ]
     },
     {
@@ -733,36 +908,38 @@
       ]
     },
     {
-      "fieldId": "resonium.lostVoid",
-      "canonicalPath": "GameData.resonium",
-      "fieldClass": "deferred",
-      "sourcePolicy": "out-of-scope",
-      "status": "deferred",
-      "nanokaEndpoint": null,
-      "rawFieldPaths": [],
-      "transformRule": "Lost Void / Resonium is deferred unless Product reopens V1.x scope",
-      "sampleEntity": null,
-      "rawAvailable": false,
-      "promotable": false,
-      "blockedBy": [
-        "scope:deferred-v1x"
-      ]
-    },
-    {
       "fieldId": "deadlyAssault.periodsBossesBuffs",
       "canonicalPath": "BattleContext gameMode=hollowZeroAssault / DA source artifacts",
-      "fieldClass": "retained-non-nanoka",
-      "sourcePolicy": "retained-non-nanoka",
-      "status": "deferred",
-      "nanokaEndpoint": null,
-      "rawFieldPaths": [],
-      "transformRule": "retain existing Mihoyo D-17 and buhflipexplode D-12 scope unless lo-user changes the decision",
-      "sampleEntity": null,
-      "rawAvailable": false,
+      "fieldClass": "required",
+      "sourcePolicy": "nanoka",
+      "status": "verified-from-nanoka",
+      "nanokaEndpoint": "/boss.json and /{locale}/boss/{id}.json",
+      "rawFieldPaths": [
+        "/begin_time",
+        "/end_time",
+        "/zone/*/name",
+        "/zone/*/monster_level",
+        "/zone/*/layer_buff/*/title",
+        "/zone/*/layer_buff/*/desc",
+        "/zone/*/selectable_buff/*/title",
+        "/zone/*/selectable_buff/*/desc",
+        "/zone/*/layer_room/*/monster_list",
+        "/zone/*/layer_room/*/monster_weakness",
+        "/boss_adjust/*"
+      ],
+      "transformRule": "derive Deadly Assault period, zone, buff, monster, weakness, and boss-adjust raw records from the approved nanoka live version; reject period rows with begin_time after configuredLiveSnapshotDate; runtime promotion requires boss_adjust and score/HP semantic mapping",
+      "sampleEntity": "nanoka-boss-live-69036",
+      "rawAvailable": true,
       "promotable": false,
       "blockedBy": [
-        "scope:explicit-da-exception-required"
-      ]
+        "field:boss-adjust-semantics-required",
+        "field:score-hp-semantics-required",
+        "field:period-live-filter-required"
+      ],
+      "supportingSamples": [
+        "nanoka-boss-live-index-2.8"
+      ],
+      "notes": "R1/R6 lock DA to nanoka. D-17/D-12 remain archived audit baselines and the runtime path is retained until Phase 4 cutover; this row does not authorize adapter/runtime removal."
     },
     {
       "fieldId": "modifiers.formalTemplateContract",
@@ -906,28 +1083,48 @@
     }
   ],
   "summary": {
-    "totalRows": 41,
-    "verifiedFromNanoka": 25,
+    "totalRows": 45,
+    "verifiedFromNanoka": 31,
     "needsTlResearch": 8,
     "needsOwnerResearch": 0,
-    "deferred": 8,
+    "deferred": 6,
     "promotableNow": 9,
-    "notPromotableYet": 32
+    "notPromotableYet": 36
   },
   "openResearchItems": [
-    "source registry contract and content hash capture",
+    "source registry contract, liveVersionRef policy, approvedLiveVersions[], and content hash capture",
     "adapter source-ref emission and JSON pointer convention",
     "agent promotion extra stats / final snapshot panel semantics",
     "agent stat unit mapping for crit/pen/anomaly/impact/adrenaline",
     "rupture rbl semantic mapping",
     "skill tag/damageType/hitCount mapping",
     "mindscape/potential semantic mapping",
-    "typed modifier templates for passives, W-Engines, Drive Discs, and enemy rules",
+    "typed modifier templates for passives, W-Engines, Drive Discs, enemy rules, DA buffs, and Sentinel rows",
     "Bangboo element/attribute source field",
     "enemy monster_info variant mapping for cleaned/golden rows",
     "enemy level formula, resistance units, anomaly threshold mapping, and daze recovery semantics",
     "W-Engine stat/refine mapping",
     "Drive Disc slot main stat and substat table source",
+    "DA boss_adjust, score/HP, field-rule, and period filter semantic mapping",
+    "Sentinel canonical naming and unit normalization",
+    "snapshot-derived patch history diff tool and approved-live-version allowlist",
     "disorder formula and disorder daze-level source/config endpoint"
-  ]
+  ],
+  "liveVersionRef": "manifest.zzz.live",
+  "sourceVersionResolved": "2.8",
+  "latestResearchVersion": "3.0.2+15625449",
+  "approvedLiveVersions": [
+    "2.8"
+  ],
+  "sourceVersionPolicy": {
+    "liveVersionRef": "manifest.zzz.live",
+    "defaultReleaseSourceVersion": "2.8",
+    "approvedLiveVersions": [
+      "2.8"
+    ],
+    "latestResearchVersion": "3.0.2+15625449",
+    "latestUsage": "research-and-drift-only",
+    "cleanedOutputRule": "cleaned output must use manifest.zzz.live or an explicitly owner-approved version",
+    "timeWindowRule": "time-windowed rows such as Deadly Assault periods must satisfy begin_time <= configuredLiveSnapshotDate"
+  }
 }
