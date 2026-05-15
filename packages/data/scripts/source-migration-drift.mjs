@@ -16,6 +16,7 @@ const goldenReplayReportPath = join(repoRoot, "data/cleaned/golden/v1-replay-rep
 const schemaVersion = "nanoka-drift-report/v0.1"
 const defaultSyncId = "phase3-sync-000-foundation"
 const firstSyncId = "phase3-sync-001-g01-g26"
+const secondSyncId = "phase3-sync-002-g27-g28"
 const defaultGeneratedAt = "2026-05-15T16:20:00+08:00"
 const rulingDecisionLogPath = "docs/product/decisions/data-source-rulings.md"
 const driftStatuses = ["same", "changed", "missing", "new", "semantic-mismatch"]
@@ -91,6 +92,13 @@ function zeroCounts() {
     new: 0,
     "semantic-mismatch": 0,
   }
+}
+
+function arrayEquals(left, right) {
+  return Array.isArray(left)
+    && Array.isArray(right)
+    && left.length === right.length
+    && left.every((value, index) => value === right[index])
 }
 
 function countsForRows(rows) {
@@ -294,6 +302,27 @@ const anchorCandidateSpecs = {
     requiredSampleEntities: ["nanoka-bangboo-plugboo-live-54008"],
     expectedCandidate: "Plugboo panel, skill numeric, and element source coverage.",
   },
+  G27: {
+    entityType: "agent",
+    fieldIds: [
+      "agents.basePanel",
+      "agents.combatPanelStats",
+      "agents.ruptureStats",
+      "agents.promotionExtraStats",
+      "adrenaline.maxAdrenaline",
+      "adrenaline.automaticAdrenalineAccumulation",
+      "skills.resonanceRecovery",
+      "skills.adrenalineRecovery",
+    ],
+    requiredSampleEntities: ["nanoka-character-yixuan-live-1371"],
+    expectedCandidate: "Yixuan approved-live character proof anchor with panel, Adrenaline/Resonance, rupture, and promotion-extra source coverage.",
+  },
+  G28: {
+    entityType: "bangboo",
+    fieldIds: ["bangboos.identity", "bangboos.basePanel", "bangboos.skillSegments", "bangboos.element"],
+    requiredSampleEntities: ["nanoka-bangboo-plugboo-live-54008"],
+    expectedCandidate: "Plugboo approved-live Bangboo proof anchor with identity, panel, skill numeric, and electric element source coverage.",
+  },
 }
 
 const phase3Rulings = {
@@ -401,6 +430,20 @@ const phase3Rulings = {
     rulingId: "phase3-r026",
     summary: "Accepted Plugboo numeric and element parity: nanoka live panel/skill raw values reproduce the archived Excel Path X values and approved-live skill text proves electric element evidence.",
   },
+  G27: {
+    rulingId: "phase3-r027",
+    summary: "Accepted new-source proof anchor: lo-user selected Yixuan 1371 for G27; approved-live nanoka evidence proves identity, panel/resource raw values, rupture fields, and promotion-extra source coverage without runtime cutover.",
+  },
+  G28: {
+    rulingId: "phase3-r028",
+    summary: "Accepted new-source proof anchor: lo-user selected Plugboo 54008 for G28; approved-live nanoka evidence proves Bangboo identity, level-60 panel, active-skill numeric values, and electric element text without runtime cutover.",
+  },
+}
+
+const proofAnchorOwnerDecision = {
+  sourceId: "lo-user-owner-decision",
+  sourceVersion: "2026-05-15T18:11:57+08:00",
+  sourceAnchor: "slock:#fairy/3d649e33",
 }
 
 function sourceRefWithDataPath(ref, anchorId, index) {
@@ -559,6 +602,131 @@ function candidateSourceRefForAnchor({ sourceVersion, matrixRows, requiredSample
   return coverageMatrixSourceRef({ sourceVersion, matrixRow: matrixRows[0]?.row })
 }
 
+function requiredNumber(value, label) {
+  assert(typeof value === "number" && Number.isFinite(value), `${label}: numeric value is required`)
+  return value
+}
+
+function panelValue(source, { baseKey, levelKey, growthKey, level = 60, promotionPhase = "6" }) {
+  const base = requiredNumber(source.stats?.[baseKey], `stats.${baseKey}`)
+  const levelBonus = requiredNumber(source.level?.[promotionPhase]?.[levelKey], `level.${promotionPhase}.${levelKey}`)
+  const growth = requiredNumber(source.stats?.[growthKey], `stats.${growthKey}`)
+  return Number((base + levelBonus + growth * (level - 1) / 10000).toFixed(8))
+}
+
+function yixuanProofValues() {
+  const yixuan = readJson(join(repoRoot, "data/source/raw/nanoka/zzz/2.8/zh/character/1371.json"))
+  assert(yixuan.id === 1371, "G27 Yixuan proof source id drifted")
+  const firstBasic = yixuan.skill?.basic?.description?.[4]?.param?.[0]?.param?.["1371001"]
+  assert(firstBasic !== undefined, "G27 Yixuan proof skill param 1371001 is missing")
+
+  return {
+    identity: {
+      id: yixuan.id,
+      codeName: yixuan.code_name,
+      name: yixuan.name,
+    },
+    level60Panel: {
+      maxHp: panelValue(yixuan, { baseKey: "hp_max", levelKey: "hp_max", growthKey: "hp_growth" }),
+      attack: panelValue(yixuan, { baseKey: "attack", levelKey: "attack", growthKey: "attack_growth" }),
+      defence: panelValue(yixuan, { baseKey: "defence", levelKey: "defence", growthKey: "defence_growth" }),
+      critRate: requiredNumber(yixuan.stats?.crit, "stats.crit") / 10000,
+      critDamage: requiredNumber(yixuan.stats?.crit_damage, "stats.crit_damage") / 10000,
+      anomalyMastery: requiredNumber(yixuan.stats?.element_abnormal_power, "stats.element_abnormal_power"),
+      anomalyProficiency: requiredNumber(yixuan.stats?.element_mystery, "stats.element_mystery"),
+      impact: requiredNumber(yixuan.stats?.break_stun, "stats.break_stun"),
+    },
+    resource: {
+      maxAdrenaline: requiredNumber(yixuan.stats?.rp_max, "stats.rp_max"),
+      automaticAdrenalineAccumulation: requiredNumber(yixuan.stats?.rp_recover, "stats.rp_recover") / 100,
+      resonanceRecovery: requiredNumber(firstBasic.fever_recovery, "skill.basic.description.4.param.0.param.1371001.fever_recovery") / 1000,
+      adrenalineRecovery: requiredNumber(firstBasic.rp_recovery, "skill.basic.description.4.param.0.param.1371001.rp_recovery") / 10000,
+    },
+    rupture: {
+      ruptureLevel: requiredNumber(yixuan.stats?.rbl, "stats.rbl"),
+      ruptureCorrectionFactor: requiredNumber(yixuan.stats?.rbl_correction_factor, "stats.rbl_correction_factor") / 10000,
+      ruptureProbability: requiredNumber(yixuan.stats?.rbl_probability, "stats.rbl_probability") / 10000,
+    },
+  }
+}
+
+function plugbooProofValues() {
+  const plugboo = readJson(join(repoRoot, "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json"))
+  assert(plugboo.id === 54008, "G28 Plugboo proof source id drifted")
+  const active = plugboo.skill_prop?.["5400801"]
+  assert(active !== undefined, "G28 Plugboo proof active skill prop 5400801 is missing")
+
+  return {
+    identity: {
+      id: plugboo.id,
+      codeName: plugboo.code_name,
+      name: plugboo.name,
+    },
+    level60Panel: {
+      maxHp: panelValue(plugboo, { baseKey: "hp_max", levelKey: "hp_max", growthKey: "hpupgrade" }),
+      attack: panelValue(plugboo, { baseKey: "attack", levelKey: "attack", growthKey: "attack_upgrade" }),
+      defence: panelValue(plugboo, { baseKey: "defence", levelKey: "defence", growthKey: "def_upgrade" }),
+      impact: requiredNumber(plugboo.stats?.break_stun, "stats.break_stun"),
+      anomalyMastery: requiredNumber(plugboo.stats?.element_abnormal_power, "stats.element_abnormal_power"),
+    },
+    activeSkill: {
+      damageMultiplier: requiredNumber(active["1001"]?.main, "skill_prop.5400801.1001.main") / 10000,
+      dazeMultiplier: requiredNumber(active["1002"]?.main, "skill_prop.5400801.1002.main") / 10000,
+      anomalyBuildup: requiredNumber(active.element_accumulation_value, "skill_prop.5400801.element_accumulation_value") / 100,
+      element: "electric",
+    },
+  }
+}
+
+function proofAnchorRow({ header, anchorId, values }) {
+  const spec = anchorCandidateSpecs[anchorId]
+  const ruling = phase3Rulings[anchorId]
+  assert(spec !== undefined, `${anchorId}: proof anchor spec is missing`)
+  assert(ruling !== undefined, `${anchorId}: proof anchor ruling is missing`)
+  const sampleEntity = spec.requiredSampleEntities[0]
+  const sourceAnchor = rawAnchorForSample(sampleEntity, header.candidate.sourceVersion)
+  assert(sourceAnchor !== null, `${anchorId}: proof anchor source fixture is missing for ${sampleEntity}`)
+
+  return {
+    entityType: spec.entityType,
+    entityId: anchorId,
+    fieldId: `goldenAnchors.${anchorId}.newSourceProof`,
+    canonicalPath: `data.cleaned.golden.v1Replay.anchors.${anchorId}.newSourceProof`,
+    fieldPath: `/anchors/${anchorId}/newSourceProof`,
+    baselineSourceRef: {
+      ...proofAnchorOwnerDecision,
+      dataPath: `/${anchorId}`,
+    },
+    candidateSourceRef: {
+      sourceId: "nanoka-zzz",
+      sourceVersion: header.candidate.sourceVersion,
+      sourceAnchor,
+      dataPath: dataPathForSample(sampleEntity),
+    },
+    baselineValue: {
+      ownerDecision: `${anchorId} = ${values.identity.name} (${values.identity.id})`,
+      priorArchivedBaseline: "not-applicable-new-proof-anchor",
+    },
+    candidateValue: {
+      coverageStatus: "new-source-proof-passed",
+      expectedCandidate: spec.expectedCandidate,
+      fieldIds: spec.fieldIds,
+      requiredSampleEntities: spec.requiredSampleEntities,
+      availableSampleEntities: spec.requiredSampleEntities,
+      missingRequiredSampleEntities: [],
+      normalizedValues: values,
+      rulingSummary: ruling.summary,
+    },
+    status: "new",
+    severity: "info",
+    rulingStatus: "accepted",
+    rulingId: ruling.rulingId,
+    rulingDecisionLog: `${rulingDecisionLogPath}#${ruling.rulingId}-${anchorId.toLowerCase()}`,
+    blockedBy: [],
+    notes: ruling.summary,
+  }
+}
+
 function buildG01G26Report({ syncId, generatedAt }) {
   const header = reportHeader({ syncId, generatedAt })
   const matrix = readJson(matrixPath)
@@ -653,11 +821,49 @@ function buildG01G26Report({ syncId, generatedAt }) {
   }
 }
 
+function buildG27G28Report({ syncId, generatedAt }) {
+  const header = reportHeader({ syncId, generatedAt })
+  const previousRows = buildG01G26Report({ syncId: firstSyncId, generatedAt }).rows
+  const rows = [
+    ...previousRows,
+    proofAnchorRow({ header, anchorId: "G27", values: yixuanProofValues() }),
+    proofAnchorRow({ header, anchorId: "G28", values: plugbooProofValues() }),
+  ]
+
+  return {
+    ...header,
+    exitCleanSyncEligible: true,
+    exitGateEvidence: {
+      cleanSyncIds: [firstSyncId, syncId],
+      anchorIds: Array.from({ length: 28 }, (_, index) => `G${String(index + 1).padStart(2, "0")}`),
+      goldenReplayStatus: "passed",
+      requiredNewProofAnchorIds: ["G27", "G28"],
+      previousCleanSyncId: firstSyncId,
+      currentSyncId: syncId,
+      notes: [
+        "G01-G26 are accepted in phase3-sync-001-g01-g26.",
+        "G27/G28 are lo-user-selected approved-live nanoka proof anchors.",
+        "Runtime cutover remains disabled until Phase 4.",
+      ],
+    },
+    counts: countsForRows(rows),
+    rows,
+    unresolvedCount: rows.filter(row => row.rulingStatus === "pending" || row.rulingStatus === "owner-required").length,
+    notes: [
+      "Phase 3 second sync carries forward accepted G01-G26 rulings and adds lo-user-selected G27/G28 approved-live nanoka proof anchors.",
+      "This sync is exit-clean eligible for Phase 3 only; runtime cleaned-data cutover remains disabled until Phase 4.",
+      "Archived Excel, D-17 Mihoyo, and D-12 buhflipexplode sources are audit baselines only; they are not runtime fallback inputs.",
+    ],
+  }
+}
+
 function buildReport({ syncId, generatedAt }) {
   if (syncId === defaultSyncId)
     return buildFoundationReport({ syncId, generatedAt })
   if (syncId === firstSyncId)
     return buildG01G26Report({ syncId, generatedAt })
+  if (syncId === secondSyncId)
+    return buildG27G28Report({ syncId, generatedAt })
   throw new Error(`Unsupported source migration drift syncId: ${syncId}`)
 }
 
@@ -669,8 +875,12 @@ function renderMarkdown(report) {
     .map(baseline => `| \`${baseline.sourceId}\` | \`${baseline.sourceVersion}\` | ${baseline.archived ? "yes" : "no"} |`)
     .join("\n")
   const hasRows = report.rows.length > 0
-  const statusLine = hasRows ? "Phase 3 drift audit first G01-G26 sync" : "Phase 3 drift audit foundation fixture"
-  const intro = hasRows
+  const statusLine = report.exitCleanSyncEligible
+    ? "Phase 3 drift audit second sync with G27/G28 proof anchors"
+    : hasRows ? "Phase 3 drift audit first G01-G26 sync" : "Phase 3 drift audit foundation fixture"
+  const intro = report.exitCleanSyncEligible
+    ? "This report carries forward accepted G01-G26 rulings, adds G27/G28 approved-live proof anchors, and records Phase 3 exit-clean evidence. Full runtime cutover remains disabled."
+    : hasRows
     ? "This report compares archived G01-G26 replay baselines against nanoka candidate coverage/status/source paths and records Product/TL rulings. Full runtime cutover remains disabled."
     : `This report is a schema/verifier fixture. It intentionally contains no field
 comparison rows; full G01-G26 comparison begins in the next Phase 3 slice.`
@@ -800,11 +1010,48 @@ function validateExitCleanEligibility(report, { syncId }) {
   assert(report.unresolvedCount === 0, "exit-clean drift sync cannot have unresolved rows")
 
   const evidence = report.exitGateEvidence
+  const expectedAnchorIds = Array.from({ length: 28 }, (_, index) => `G${String(index + 1).padStart(2, "0")}`)
+  const expectedProofAnchorIds = ["G27", "G28"]
   assert(evidence !== null && typeof evidence === "object" && !Array.isArray(evidence), "exitCleanSyncEligible requires exitGateEvidence")
-  assert(Array.isArray(evidence.cleanSyncIds) && evidence.cleanSyncIds.length >= 2, "exitGateEvidence.cleanSyncIds must include at least two clean syncs")
-  assert(evidence.cleanSyncIds.includes(syncId), "exitGateEvidence.cleanSyncIds must include the current syncId")
-  assert(Array.isArray(evidence.anchorIds) && evidence.anchorIds.includes("G27") && evidence.anchorIds.includes("G28"), "exitGateEvidence.anchorIds must include G27 and G28")
+  assert(typeof evidence.previousCleanSyncId === "string" && evidence.previousCleanSyncId.length > 0, "exitGateEvidence.previousCleanSyncId is required")
+  assert(typeof evidence.currentSyncId === "string" && evidence.currentSyncId.length > 0, "exitGateEvidence.currentSyncId is required")
+  assert(evidence.currentSyncId === syncId, "exitGateEvidence.currentSyncId must equal the verified syncId")
+  assert(evidence.previousCleanSyncId !== syncId, "exitGateEvidence.previousCleanSyncId must be distinct from the current syncId")
+  assert(evidence.previousCleanSyncId !== defaultSyncId, "foundation sync cannot count as clean sync evidence")
+  assert(Array.isArray(evidence.cleanSyncIds), "exitGateEvidence.cleanSyncIds must be an array")
+  assert(evidence.cleanSyncIds.length === new Set(evidence.cleanSyncIds).size, "exitGateEvidence.cleanSyncIds must be unique")
+  assert(arrayEquals(evidence.cleanSyncIds, [evidence.previousCleanSyncId, evidence.currentSyncId]), "exitGateEvidence.cleanSyncIds must equal previous/current clean sync ids")
+  assert(!evidence.cleanSyncIds.includes(defaultSyncId), "foundation sync cannot count as clean sync evidence")
+  assert(arrayEquals(evidence.anchorIds, expectedAnchorIds), "exitGateEvidence.anchorIds must equal the complete G01-G28 anchor set")
+  assert(arrayEquals(evidence.requiredNewProofAnchorIds, expectedProofAnchorIds), "exitGateEvidence.requiredNewProofAnchorIds must equal G27/G28")
   assert(evidence.goldenReplayStatus === "passed", "exitGateEvidence.goldenReplayStatus must be passed")
+  const rowByEntityId = new Map(report.rows.map(row => [row.entityId, row]))
+  for (const anchorId of expectedAnchorIds) {
+    const row = rowByEntityId.get(anchorId)
+    assert(row !== undefined, `exit-clean drift sync requires ${anchorId} row evidence`)
+    assert(row.rulingStatus === "accepted", `exit-clean drift sync requires ${anchorId} accepted ruling`)
+  }
+  for (const anchorId of ["G27", "G28"]) {
+    const row = rowByEntityId.get(anchorId)
+    assert(row.status === "new", `exit-clean drift sync requires ${anchorId} new-source proof row`)
+    assert(row.candidateValue?.coverageStatus === "new-source-proof-passed", `exit-clean drift sync requires ${anchorId} passed proof coverage`)
+  }
+  validateProofAnchorValues(rowByEntityId.get("G27"), yixuanProofValues(), "G27")
+  validateProofAnchorValues(rowByEntityId.get("G28"), plugbooProofValues(), "G28")
+  for (const cleanSyncId of evidence.cleanSyncIds) {
+    const cleanReport = cleanSyncId === syncId
+      ? report
+      : readJson(reportPaths(cleanSyncId).rootJson)
+    assert(cleanReport.unresolvedCount === 0, `${cleanSyncId}: clean sync evidence cannot have unresolved rows`)
+    assert(cleanReport.runtimeCutoverReady === false, `${cleanSyncId}: clean sync evidence must not cut runtime over`)
+  }
+}
+
+function validateProofAnchorValues(row, expectedValues, anchorId) {
+  assert(row !== undefined, `${anchorId}: proof anchor row is required`)
+  const actualValues = row.candidateValue?.normalizedValues
+  assert(actualValues !== undefined, `${anchorId}: normalizedValues are required`)
+  assert(JSON.stringify(actualValues) === JSON.stringify(expectedValues), `${anchorId}: proof anchor normalizedValues must match approved-live nanoka raw evidence`)
 }
 
 function validateReportShape(report, { registry, matrix, syncId }) {
