@@ -1,6 +1,6 @@
 {
   "schemaVersion": "nanoka-drive-disc-slot-stat-audit/v0.1",
-  "generatedAt": "2026-05-15T15:05:00+08:00",
+  "generatedAt": "2026-05-15T16:20:00+08:00",
   "sourceId": "nanoka-zzz",
   "sourceVersion": "2.8",
   "status": "not-found",
@@ -10,7 +10,7 @@
   "summary": {
     "checkedEndpointCount": 9,
     "foundSlotMainSubstatTable": false,
-    "ownerResearchRequired": true
+    "ownerResearchRequired": false
   },
   "checkedEndpoints": [
     {
@@ -76,10 +76,11 @@
     }
   ],
   "decision": {
-    "matrixStatus": "needs-owner-research",
+    "matrixStatus": "deferred",
+    "sourcePolicy": "out-of-scope",
     "blockedBy": [
-      "owner:drive-disc-slot-stat-source-required"
+      "scope:user-provided-snapshot-boundary"
     ],
-    "recommendedEscalation": "lo-user/Product should decide whether Drive Disc slot/main/substat tables are out of V0.1.0 formal-data scope or whether a non-nanoka source must be researched."
+    "ownerDecision": "2026-05-15 lo-user locks option (a): remove Drive Disc slot/main/substat tables from V0.1.0 formal-data scope. Runtime consumes user-provided final Agent panel plus nanoka-backed Drive Disc set effects; slot/main/substat tables are V1.x validation/recommendation scope."
   }
 }

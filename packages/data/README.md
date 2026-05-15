@@ -10,6 +10,8 @@ Current state:
   offline verification scripts;
 - D-20 source registry gates live under `source-registry.json` and are verified
   by `verify:source-registry`;
+- Phase 3 nanoka drift reports live under `cleaned/audit/nanoka-drift-report/`
+  and are verified by `verify:source-migration`;
 - V1 golden source candidates, manual acceptance records, and the replay report
   are generated under repo-level `data/cleaned/`;
 - `pnpm --filter @randomplay/data sync-cleaned` mirrors repo-level cleaned JSON into
@@ -28,3 +30,4 @@ Useful source checks:
 - `pnpm --filter @randomplay/data verify:mihoyo-da`
 - `pnpm --filter @randomplay/data verify:nanoka`
 - `pnpm --filter @randomplay/data verify:source-registry`
+- `pnpm --filter @randomplay/data verify:source-migration`

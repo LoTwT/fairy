@@ -50,14 +50,16 @@ describe("missing-fields fail-loud gate", () => {
     expect(unresolved).toEqual([])
   })
 
-  it("keeps owner-escalated rows machine-readable and non-promotable", () => {
+  it("has resolved owner-escalated rows into scoped decisions", () => {
     const matrix = readJson<CoverageMatrix>("data/cleaned/audit/nanoka-coverage-matrix.json")
     const ownerRows = matrix.rows.filter(row => row.status === "needs-owner-research")
-    const driveDiscRow = ownerRows.find(row => row.fieldId === "driveDiscs.slotAndSubstatTables")
+    const driveDiscRow = matrix.rows.find(row => row.fieldId === "driveDiscs.slotAndSubstatTables")
 
+    expect(ownerRows).toEqual([])
     expect(driveDiscRow).toBeDefined()
+    expect(driveDiscRow?.status).toBe("deferred")
     expect(driveDiscRow?.promotable).toBe(false)
-    expect(driveDiscRow?.blockedBy).toContain("owner:drive-disc-slot-stat-source-required")
+    expect(driveDiscRow?.blockedBy).toContain("scope:user-provided-snapshot-boundary")
     expect(driveDiscRow?.auditArtifact).toBe("data/cleaned/audit/nanoka-drive-disc-slot-stat-audit.json")
   })
 

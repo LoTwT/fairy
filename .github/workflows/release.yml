@@ -78,6 +78,7 @@ jobs:
       - run: pnpm --filter @randomplay/data verify:excel
       - run: pnpm --filter @randomplay/data verify:nanoka
       - run: pnpm --filter @randomplay/data verify:source-registry
+      - run: pnpm --filter @randomplay/data verify:source-migration
       - run: pnpm --silent fairy:s1 | jq empty
       - run: pnpm --silent fairy:s2 | jq empty
       - run: pnpm --silent fairy:s3 | jq empty

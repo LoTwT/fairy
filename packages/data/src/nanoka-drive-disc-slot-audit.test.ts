@@ -26,7 +26,9 @@ type DriveDiscSlotStatAudit = {
   }>
   decision: {
     matrixStatus: string
+    sourcePolicy: string
     blockedBy: string[]
+    ownerDecision: string
   }
 }
 
@@ -54,13 +56,15 @@ describe("nanoka Drive Disc slot/stat failed-evidence audit", () => {
       runtimeCutoverReady: false,
       summary: {
         foundSlotMainSubstatTable: false,
-        ownerResearchRequired: true,
+        ownerResearchRequired: false,
       },
       decision: {
-        matrixStatus: "needs-owner-research",
+        matrixStatus: "deferred",
+        sourcePolicy: "out-of-scope",
       },
     })
-    expect(audit.decision.blockedBy).toContain("owner:drive-disc-slot-stat-source-required")
+    expect(audit.decision.blockedBy).toContain("scope:user-provided-snapshot-boundary")
+    expect(audit.decision.ownerDecision).toContain("remove Drive Disc slot/main/substat tables from V0.1.0 formal-data scope")
     expect(audit.checkedEndpoints).toHaveLength(audit.summary.checkedEndpointCount)
     expect(audit.checkedEndpoints).toEqual(expect.arrayContaining([
       expect.objectContaining({

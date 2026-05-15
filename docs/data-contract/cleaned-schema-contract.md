@@ -88,7 +88,7 @@ published.
 | `GameData.bangboos` | required | nanoka-candidate | Bangboo identity and panel data. |
 | `GameData.bangbooSkills` | required | nanoka-candidate | Bangboo segment numbers and source refs. |
 | `GameData.wEngines` | optional | nanoka-candidate | W-Engine stats and passive modifiers. |
-| `GameData.driveDiscs` | optional | nanoka-candidate | Drive Disc set modifiers; text alone is not promotable. |
+| `GameData.driveDiscs` | optional | nanoka-candidate | Drive Disc identity and 2/4-piece set modifiers; slot/main/substat tables are out of V0.1.0 formal-data scope because snapshots provide the final agent panel. |
 | `GameData.enemies` | required | nanoka-candidate | Enemy variants, stats, resistances, anomaly thresholds, and daze recovery. |
 | `GameData.resonium` | removed-out-of-product-scope | removed-out-of-product-scope | Lost Void / Resonium formal data is removed from the V0.1.0 product scope by R4. Existing schema presence is compatibility-only until a breaking schema cleanup. |
 | `GameData.modifiers` | required | implementation-owned | Deterministic typed modifier templates with source refs. |
@@ -103,9 +103,16 @@ source data. Inventory rows that affect snapshots must therefore declare whether
 they populate:
 
 - `AgentSnapshot.panel`
+- `DriveDiscSnapshot` / final Drive Disc panel contribution
 - `BangbooSnapshot.panel`
 - `EnemySnapshot`
 - `AttackSegment`
 - `TypedModifier`
 - `ManualEvent`
 - `fieldProvenance` / `overrides`
+
+For V0.1.0, Drive Disc main-stat and substat values are not recomputed from
+slot/stat tables. Users provide the final `AgentSnapshot.panel` after equipped
+Drive Discs, while formal data only needs nanoka-backed Drive Disc identity and
+set-effect text for future typed modifier promotion. Slot/main/substat tables
+remain V1.x validation/recommendation scope.
