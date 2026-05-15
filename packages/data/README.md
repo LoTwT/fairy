@@ -24,6 +24,22 @@ Current state:
 Do not add hand-written formal game data to this package. Formal rows must be
 derived from source documents and preserve source metadata.
 
+## 数据来源声明 / Data Sources
+
+This package bundles cleaned ZZZ game-data artifacts for local damage
+calculation. V0.1.0 runtime data is derived from approved-live nanoka source
+snapshots (`manifest.zzz.live`) and preserves source metadata for audit.
+
+Source details are recorded in `source-registry.json` and the bundled cleaned
+JSON artifacts. Excel, Mihoyo D-17, and buhflipexplode D-12 snapshots remain
+archived audit references in the repository; they are not runtime sources and
+are not included as raw payloads in the npm package.
+
+This is not an official HoYoverse / miHoYo package. Game data, text, and images
+belong to their respective rights holders. If this package infringes your
+rights, contact the maintainers through a GitHub issue and we will respond
+within 24-72 hours.
+
 Useful source checks:
 
 - `pnpm --filter @randomplay/data verify:buhflipexplode-da`

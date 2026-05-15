@@ -2,6 +2,25 @@
 
 All notable changes to Fairy are documented in this file.
 
+## 0.1.0 - 2026-05-15
+
+### Added
+
+- Add nanoka-backed runtime cleaned `GameData` artifact and public data package runtime export.
+- Add G27 Yixuan and G28 Plugboo executable replay anchors, expanding the golden gate to 28 anchors.
+- Add Phase 3 drift reports, rulings, proof anchors, and fail-loud migration gates for nanoka cutover.
+- Add release-time nanoka runtime verification and archived-source runtime guard.
+
+### Changed
+
+- Cut over V0.1.0 source-backed runtime data to approved-live nanoka (`manifest.zzz.live` / `nanoka-zzz@2.8`).
+- Deprecate Excel, Mihoyo D-17, and buhflipexplode D-12 as runtime sources while retaining their raw snapshots as archived audit references.
+- Mark V0.1.0 as a schema-breaking minor release for data-source provenance and runtime data packaging.
+
+### Documentation
+
+- Document V0.1.0 schema migration, release notes, takedown response, and data-source disclaimer.
+
 ## 0.0.4 - 2026-05-14
 
 ### Changed

@@ -17,12 +17,12 @@ Fairy 是绝区零 1-3 代理人静态快照伤害计算器。V1 目标是 `@ran
 ## V1 release gate 当前重点
 
 1. lo-user 单人 dogfooding 已给出 4/5，B-Calc blocker 当前为 0；V1 仍未经过广泛社区 dogfooding。
-2. V1 golden fixture 真数据复算最初收窄到 19 个锚点；V1.x Track B 已补 G13 异常阈值规则组合、G18 部位破坏真实伤害、G19 凶心疯汉失衡恢复时间、G20 装甲哈提失衡恢复时间。
-3. `data/cleaned/audit/v1-agent-source-candidates.json`、`data/cleaned/audit/*.acceptance.json` 与 `data/cleaned/golden/v1-replay-report.json` 已生成；23 个 executable 锚点全部跑通，`releaseReady=true`，当前无 deferred golden anchor。
+2. V1 golden fixture 真数据复算最初收窄到 19 个锚点；V1.x Track B 已补 G13 异常阈值规则组合、G18 部位破坏真实伤害、G19 凶心疯汉失衡恢复时间、G20 装甲哈提失衡恢复时间、G24-G26 邦布 actor anchors。
+3. `data/cleaned/audit/v1-agent-source-candidates.json`、`data/cleaned/audit/*.acceptance.json` 与 `data/cleaned/golden/v1-replay-report.json` 已生成；V0.1.0 Phase 4 runtime cutover 后 28 个 executable 锚点全部跑通，`releaseReady=true`，当前无 deferred golden anchor。
 4. `fairy calc` 默认 `--view brief`，输出 summary-first 的 non-crit / crit lanes；完整 trace 通过 `--view verbose` 查看。
 5. 安比 dogfooding fixture `examples/snapshots/dogfood-anby-core-f-basic16-dullahan-9528.json` 已进入 `packages/cli/src/examples.test.ts`，因此由根命令 `pnpm test` 固定覆盖。
-6. v0.0.1 已发布；后续 release 流程跟随 canonical v3 runbook（见
-   [release/README.md](release/README.md)），由 tag-triggered OIDC CI 发布。
+6. v0.0.1-v0.0.4 已发布；V0.1.0 release 流程跟随 canonical v3 runbook（见
+   [release/README.md](release/README.md)），由 tag-triggered OIDC CI 发布并执行 registry smoke。
 
 ## 关键文档
 

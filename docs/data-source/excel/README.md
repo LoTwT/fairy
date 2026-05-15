@@ -38,8 +38,10 @@ acceptance.
 
 ## V1 Candidate Sheets
 
-V1 main scope is Deadly Assault. Excel remains the base-game source and fallback,
-but V1 does not require full `cleaned/enemies`.
+V1 main scope is Deadly Assault. After the V0.1.0 nanoka runtime cutover, Excel
+is retained as an archived audit reference only and is not a runtime fallback.
+The archived workbook still documents historical base-game rows used by earlier
+golden evidence.
 
 Candidate sheets for the narrowed V1 reader:
 

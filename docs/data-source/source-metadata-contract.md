@@ -1,6 +1,6 @@
 # Source Metadata Contract
 
-Status: S5 segment 1 baseline
+Status: V0.1.0 runtime metadata contract
 Owner: @TechLead
 Related contracts: `docs/data-contract/game-data.md`
 
@@ -83,13 +83,16 @@ inventing values.
 QA fixtures under `fixtures/golden/` are separate. They may be hand-authored and
 reviewed because they are test assertions, not published game data.
 
-## Segment 1 Implementation
+## Runtime Implementation
 
 `packages/data` currently exposes:
 
 - source descriptors with fetch/compliance policy;
 - helpers for building `SourceDocument` and `SourceRef`;
-- a discovery-only empty `GameData` generator that validates the metadata shape;
-- adapter interfaces for future Excel/crawler implementations.
+- nanoka source verification and runtime `GameData` generation scripts;
+- package-local cleaned JSON mirrors for npm distribution;
+- runtime policy guards that reject archived source ids in runtime cleaned data.
 
-This package intentionally contains no formal rows until S5 segment 2.
+V0.1.0 runtime formal data is generated from approved-live nanoka snapshots.
+Archived Excel, Mihoyo D-17, and buhflipexplode D-12 snapshots remain audit
+references only.

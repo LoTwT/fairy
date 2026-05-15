@@ -209,7 +209,9 @@ QA 验证 supply chain 完整性 + Formal-Live Gate 执行 + structured `missing
 - Release `v0.1.0`（**minor bump，schema breaking**，per R5）
 - Release notes 标 "Schema migration: nanoka-exclusive source-backed data"
 
-**Phase 4 exit gate**：QA 8 gates 全 PASS（见 §9）+ 28 executable anchors PASS + archived source IDs 不被 runtime 引用 + lo-user OK ship。
+**Phase 4 cutover gate**：QA 8 gates 全 PASS（见 §9）+ 28 executable anchors PASS + archived source IDs 不被 runtime 引用。
+
+**Phase 4 release gate**：release notes / CHANGELOG / README disclaimer 完成 + lo-user S2/S3 approve + registry smoke / provenance / GitHub Release 验证通过。
 
 ## 6. Matrix reference
 
@@ -267,7 +269,7 @@ lo-user 已 explicitly 接受以下残余风险（per msg `74b52454`）：
 - "如有侵权请联系删除" disclaimer 是 goodwill 不是 legal cure，不消除上游 copyright/ToS 违反责任
 - Per-source legal classification 仍存在 `@randomplay/data` payload 中（不混在一起）
 - 接收 takedown 通知后必须 24-72h 内实际响应
-- Phase 4 cutover 前必须先完成 takedown response runbook
+- Phase 4 release 前必须先完成 takedown response runbook（PR2 scope）
 
 ## 9. QA acceptance gates（per QA spec msg `78bf2ba3`）
 
@@ -365,9 +367,9 @@ lo-user 已 explicitly 接受以下残余风险（per msg `74b52454`）：
 | `docs/data-source/source-migration-candidates.md`（PR #51）| 三源 audit 历史记录 |
 | `docs/data-source/da-sentinel-patch-nanoka-feasibility.md`（PR #54）| DA/Sentinel/patch feasibility audit |
 | `docs/data-contract/source-adapter-contract.md`（PR #51）| Adapter contract |
-| `docs/qa/golden-source-coverage.md` | Phase 4 后新增 G27/G28 anchor entries |
+| `docs/qa/golden-source-coverage.md` | Phase 4 新增 G27/G28 anchor entries |
 | `data/source-registry.json`（Phase 2 NEW）| Supply chain audit trail 实现 |
-| `docs/data-source/takedown-rollback.md`（Phase 2 NEW）| Q4 takedown response runbook |
+| `docs/data-source/takedown-rollback.md`（Phase 4 PR2 NEW）| Q4 takedown response runbook |
 
 ## 12. Phase / Milestone
 
@@ -378,7 +380,7 @@ lo-user 已 explicitly 接受以下残余风险（per msg `74b52454`）：
 | **Phase 1.5** | D-20 v0.4 PR（本文档）| Product | ~1-2 小时 |
 | **Phase 2** | nanoka adapter + panel normalization + enemy variant mapping + DA semantic + Sentinel typed promote + patch diff tool + 9 deliverables | TL + QA validate | ~3-5 天 |
 | **Phase 3** | Parallel period drift audit（2 sync + rulings + G27/G28 proof anchors）| TL + Product + QA + lo-user 必要时 | done ✅ |
-| **Phase 4** | Runtime cutover + V0.1.0 release + G27/G28 executable replay + D-17/D-12 deprecate | TL + QA + lo-user release approve | in progress |
+| **Phase 4** | Runtime cutover + V0.1.0 release + G27/G28 executable replay + D-17/D-12 deprecate | TL + QA + lo-user release approve | cutover done ✅ / release prep in progress |
 
 **总估算**：**~3-4 周 sprint**（默认 Phase 3 短窗口 per Q2 紧急），最长 ~7-8 周（Phase 3 conservative fallback）。
 
@@ -399,13 +401,14 @@ lo-user 已 explicitly 接受以下残余风险（per msg `74b52454`）：
 
 ## 14. Doc state
 
-- Version: **v0.4 final**（2026-05-15）
+- Version: **v0.5 release-prep**（2026-05-15）
 - Owner: @Product
 - Cross-reviewer: @TechLead（Phase 2 实施）/ @QA（8 acceptance gates Phase 2-4 validation）
 - Last update: 2026-05-15
 
 ## Changelog
 
+- **v0.5** (2026-05-15) — Phase 4 release-prep fold-in：PR #75 runtime cutover 已合入 main（nanoka runtime `GameData` artifact/export、28 executable anchors、archived-source runtime guard、`runtimeCutoverReady=true`）。Phase 4 PR2 准备 V0.1.0 release notes / CHANGELOG / README disclaimer / takedown rollback runbook，并将 Phase 4 状态拆分为 cutover gate done 与 release gate pending。
 - **v0.4.2** (2026-05-15) — QA review precision fold-in per PR #56 comment 4456471475：(1) §3 Resonium row 措辞修正为 "不进 formal data / 不进 matrix；现有 canonical schema `GameData.resonium` 字段 presence 为 compatibility-only，until V0.1.0 schema cleanup 显式移除或重定义"（避免与 PR #55 compatibility-only 边界冲突）；(2) §11 cross-doc references `source-adapter-contract.md` attribution 修正 PR #54 → PR #51（实际起源）
 - **v0.4.1** (2026-05-15) — TL review precision fold-in per PR #56 comment 4453935202 / msg `547fbd05`：(1) §4.1 source-registry `urlPattern` → `urlAllowlist.{manifestUrl, versionedIndexUrls, localizedDetailUrls}`（覆盖 `manifest.json` + DA `/boss.json` index + localized detail 3 类）；(2) §4.2 / §4.4 Formal-Live Gate 分清 `current cleaned output` 与 `snapshot-diff historical input / archived audit fixture`：current cleaned 必须 == `configuredLiveVersion`，`approvedLiveVersions[]` 不放宽 current cleaned output；(3) §13 risk log "最新 DA period" → "当前 live DA period"；(4) §13 risk log panel normalization 引用 Gate 3 + Phase 2 panel-specific acceptance（替代 Gate 4 — Gate 4 是 DA-specific）
 - **v0.4** (2026-05-15) — Final lock per lo-user `4b7cb27b`：R1/R4/R6 final lock + nanoka-exclusive for ALL source-backed data（含 DA）+ 鸣徽 removed + Sentinel+patch history 进 V0.1.0 scope（R4.a snapshot-diff）+ Formal-Live Gate (`manifest.zzz.live`) 新增 + 8 QA gates spec fold-in + 45-row matrix (PR #55) reference + D-17/D-12 retained as archived audit baseline until Phase 4 cutover + Phase 2 实施 deliverables 完整化
@@ -415,7 +418,7 @@ lo-user 已 explicitly 接受以下残余风险（per msg `74b52454`）：
 
 ## Next action
 
-1. Product 起 PR #56（D-20 v0.4 + index.md D-20 entry）
-2. @TechLead + @QA review v0.4 PR
-3. PR merge 后 @TechLead claim Phase 2 实施 task
-4. @QA acceptance gate executable tests 在 Phase 2 PR 内落地
+1. @Product review V0.1.0 release notes and migration wording.
+2. @QA review Phase 4 PR2 release-prep docs and stale wording cleanup.
+3. @Lo丶 S2 final review after Product + QA PASS.
+4. @TechLead run PR3 `pnpm release:bump 0.1.0` and publish through CI after S2/S3 confirmation.

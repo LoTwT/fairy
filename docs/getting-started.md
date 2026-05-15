@@ -2,8 +2,9 @@
 
 Status: V1 release-gate candidate
 
-Fairy V1 is currently a repo-local CLI baseline. It is not published as a
-global npm package yet. Use this guide for dogfooding and pre-release review.
+Fairy V1 is available as repo-local commands and published npm packages. Use
+this guide for checkout-based dogfooding and pre-release review of the next
+tag.
 
 V1 dogfooding has passed lo-user single-person deep validation with an overall
 4/5 score and zero unresolved B-Calc blockers. QA regression and release notes
@@ -139,7 +140,7 @@ Feedback routing:
 - V1 is a static `BattleSnapshot` calculator, not a battle timeline simulator.
 - V1 does not yet provide a Web UI or automatic character/equipment resolver.
 - Users provide or edit explicit JSON snapshots.
-- The executable golden gate is 23 anchors passed with zero blocking diagnostics.
+- The executable golden gate is 28 anchors passed with zero blocking diagnostics.
 - The V1 dogfooding gate is lo-user single-person deep validation plus QA
   regression. It passed 4/5 with zero unresolved B-Calc blockers; broad
   community validation is deferred.
