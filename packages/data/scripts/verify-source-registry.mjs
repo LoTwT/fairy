@@ -18,6 +18,8 @@ const rootDisorderDazeLevelAuditPath = join(repoRoot, "data/cleaned/audit/nanoka
 const packageDisorderDazeLevelAuditPath = join(packageDir, "cleaned/audit/nanoka-disorder-daze-level-audit.json")
 const rootRuntimeGameDataPath = join(repoRoot, "data/cleaned/runtime/game-data.json")
 const packageRuntimeGameDataPath = join(packageDir, "cleaned/runtime/game-data.json")
+const rootCharacterBatchAuditPath = join(repoRoot, "data/cleaned/audit/nanoka-character-batch-audit.json")
+const packageCharacterBatchAuditPath = join(packageDir, "cleaned/audit/nanoka-character-batch-audit.json")
 const rootBangbooBatchAuditPath = join(repoRoot, "data/cleaned/audit/nanoka-bangboo-batch-audit.json")
 const packageBangbooBatchAuditPath = join(packageDir, "cleaned/audit/nanoka-bangboo-batch-audit.json")
 
@@ -123,6 +125,7 @@ function validateNanokaRegistry(source) {
 
   assert(manifestPattern.test("https://static.nanoka.cc/manifest.json"), "nanoka allowlist must accept manifest.json")
   assert(indexPattern.test(`https://static.nanoka.cc/zzz/${source.configuredLiveVersion}/boss.json`), "nanoka allowlist must accept versioned boss index")
+  assert(indexPattern.test(`https://static.nanoka.cc/zzz/${source.configuredLiveVersion}/character.json`), "nanoka allowlist must accept versioned character index")
   assert(indexPattern.test(`https://static.nanoka.cc/zzz/${source.configuredLiveVersion}/bangboo.json`), "nanoka allowlist must accept versioned Bangboo index")
   for (const forbiddenIndex of ["beta", "preview", "leak", "datamine"]) {
     assert(
@@ -268,6 +271,19 @@ function validateMatrixAgainstRegistry(matrix, registry) {
   }
   assert((bangbooElementRow.supportingSampleEntities ?? []).length === 39, "bangboos.element: V1.2.1 audit must cover all retained Bangboos")
   assert(bangbooElementRow.auditArtifact === "data/cleaned/audit/nanoka-bangboo-batch-audit.json", "bangboos.element: V1.2.1 row must point to the batch audit")
+
+  const characterIndexSample = sampleById.get("nanoka-character-index-live-2.8")
+  assert(characterIndexSample !== undefined, "Character batch: missing approved-live character index sample")
+  assert(characterIndexSample.approvedForCleanedOutput === true, "Character batch index must be approved live evidence")
+  assert(characterIndexSample.version === nanoka.configuredLiveVersion, "Character batch index must use configuredLiveVersion")
+  const liveCharacterSamples = [...sampleById.values()].filter(sample => sample.entityType === "agent" && sample.version === nanoka.configuredLiveVersion)
+  assert(liveCharacterSamples.length === 53, `Character batch must retain 53 approved-live detail samples, got ${liveCharacterSamples.length}`)
+  for (const fieldId of ["agents.identity", "agents.enums", "agents.basePanel"]) {
+    const row = resourceRows.get(fieldId)
+    assert(row?.sampleEntity === "nanoka-character-index-live-2.8", `${fieldId}: V1.2.x batch row must use the approved-live character index sample`)
+    assert(row?.auditArtifact === "data/cleaned/audit/nanoka-character-batch-audit.json", `${fieldId}: V1.2.x batch row must point to the character batch audit`)
+    assert((row?.supportingSampleEntities ?? []).length === 53, `${fieldId}: V1.2.x batch row must support all 53 characters`)
+  }
 
   const driveDiscSlotRow = resourceRows.get("driveDiscs.slotAndSubstatTables")
   assert(driveDiscSlotRow !== undefined, "driveDiscs.slotAndSubstatTables: missing Drive Disc slot/stat row")
@@ -446,6 +462,7 @@ function validateRuntimeGameData(registry) {
   assert(Array.isArray(data.sources) && data.sources.length === 1, "runtime GameData must expose exactly one runtime source document")
   assert(data.sources[0]?.id === "nanoka-zzz", "runtime GameData source document must be nanoka")
   assert(data.sources[0]?.sourceVersion === nanoka.configuredLiveVersion, "runtime GameData source document must use configured live")
+  assert(Object.keys(data.agents ?? {}).length === 53, "runtime GameData must include the full approved-live character batch")
   assert(Object.keys(data.bangboos ?? {}).length === 39, "runtime GameData must include the full approved-live Bangboo batch")
   assert(Object.keys(data.bangbooSkills ?? {}).length === 63, "runtime GameData Bangboo skill count drifted")
 
@@ -453,6 +470,40 @@ function validateRuntimeGameData(registry) {
     assert(!archivedRuntimeSourceIds.has(ref.sourceId), `runtime GameData must not reference archived source ${ref.sourceId}`)
     assert(ref.sourceId === "nanoka-zzz", `runtime GameData must not reference non-nanoka source ${ref.sourceId}`)
     assert(ref.sourceVersion === nanoka.configuredLiveVersion, `${ref.sourceAnchor ?? ref.sourceId}: runtime source refs must use configured live`)
+  }
+}
+
+function validateCharacterBatchAudit(registry) {
+  const { rootText } = readMirroredText(
+    rootCharacterBatchAuditPath,
+    packageCharacterBatchAuditPath,
+    "packages/data/cleaned/audit/nanoka-character-batch-audit.json",
+  )
+
+  const nanoka = sourceById(registry, "nanoka-zzz")
+  const audit = JSON.parse(rootText)
+  assert(audit.kind === "nanokaCharacterBatchAudit", "Character batch audit kind drifted")
+  assert(audit.schemaVersion === "nanoka-character-batch-audit/v0.1", "Character batch audit schemaVersion drifted")
+  assert(audit.sourceId === "nanoka-zzz", "Character batch audit sourceId drifted")
+  assert(audit.sourceVersion === nanoka.configuredLiveVersion, "Character batch audit must use configured live version")
+  assert(audit.runtimeCutoverReady === true, "Character batch audit must reflect runtime cutover state")
+  assert(audit.indexSource?.sourceId === "nanoka-zzz", "Character batch audit index source must be nanoka")
+  assert(audit.indexSource?.sourceVersion === nanoka.configuredLiveVersion, "Character batch audit index source must use configured live version")
+  assert(audit.indexSource?.sourceAnchor === "data/source/raw/nanoka/zzz/2.8/character.json", "Character batch audit index source anchor drifted")
+  assert(audit.summary?.characterCount === 53, "Character batch audit count drifted")
+  assert(audit.summary?.runtimeAgentCount === 53, "Character batch runtime agent count drifted")
+  assert(audit.summary?.promotedRuntimeSkillCount === 1, "Character batch promoted skill count drifted")
+  assert(audit.summary?.nonPromotedSkillAgentCount === 52, "Character batch non-promoted skill count drifted")
+  assert(JSON.stringify(audit.summary?.specialElementPromotedIds) === JSON.stringify(["1091", "1371"]), "Character special-element promoted list drifted")
+  assert(JSON.stringify(audit.summary?.specialElementNotPromotedIds) === JSON.stringify(["1431"]), "Character special-element not-promoted list drifted")
+  assert(Array.isArray(audit.characters) && audit.characters.length === 53, "Character batch audit rows must cover 53 characters")
+  for (const row of audit.characters) {
+    assert(row.source?.sourceId === "nanoka-zzz", `${row.id}: Character audit source must be nanoka`)
+    assert(row.source?.sourceVersion === nanoka.configuredLiveVersion, `${row.id}: Character audit source version drifted`)
+    assert(row.source?.sourceAnchor === `data/source/raw/nanoka/zzz/2.8/zh/character/${row.id}.json`, `${row.id}: Character audit source anchor drifted`)
+    assert(row.level60Panel?.maxHp !== undefined, `${row.id}: Character audit must include level-60 maxHp`)
+    assert(row.skillPromotion?.status === "sample-preserved" || row.skillPromotion?.status === "not-promoted", `${row.id}: Character skill promotion status drifted`)
+    assert(row.passiveModifiers?.status === "not-promoted", `${row.id}: Character passive modifier template must remain not-promoted`)
   }
 }
 
@@ -648,6 +699,7 @@ function validateCoveredSourceRefs(registry) {
   const sourceIds = new Set(registry.sources.map(source => source.sourceId))
   const files = [
     "data/cleaned/audit/mihoyo-buhflipexplode.source-conflicts.json",
+    "data/cleaned/audit/nanoka-character-batch-audit.json",
     "data/cleaned/audit/nanoka-bangboo-batch-audit.json",
     "data/cleaned/audit/source-migration-field-diff.json",
     "data/cleaned/golden/v1-replay-report.json",
@@ -678,6 +730,7 @@ function main() {
   validateDisorderFormulaAudit(registry)
   validateDisorderDazeLevelAudit(registry)
   validateRuntimeGameData(registry)
+  validateCharacterBatchAudit(registry)
   validateBangbooBatchAudit(registry)
   validateCoveredSourceRefs(registry)
 

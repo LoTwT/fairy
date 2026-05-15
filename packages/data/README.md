@@ -17,6 +17,9 @@ Current state:
 - V1.2.1 Bangboo batch audit lives under
   `cleaned/audit/nanoka-bangboo-batch-audit.json` and verifies all 39
   approved-live nanoka 2.8 Bangboos;
+- V1.2.x character batch audit lives under
+  `cleaned/audit/nanoka-character-batch-audit.json` and verifies all 53
+  approved-live nanoka 2.8 Agents;
 - V1.2.x full-data batch discovery lives under
   `cleaned/audit/nanoka-full-data-batch-discovery.json` and locks the domain
   counts, exclusions, historical DA boundary, and implementation PR sequence;
@@ -35,8 +38,8 @@ derived from source documents and preserve source metadata.
 This package bundles cleaned ZZZ game-data artifacts for local damage
 calculation. V0.1.0 runtime data is derived from approved-live nanoka source
 snapshots (`manifest.zzz.live`) and preserves source metadata for audit. The
-post-release V1.2.1 Bangboo batch adds the full approved-live nanoka 2.8
-Bangboo catalog without changing the package version.
+post-release V1.2.1/V1.2.x batches add the full approved-live nanoka 2.8
+Bangboo and Agent catalogs without changing the package version.
 
 Source details are recorded in `source-registry.json` and the bundled cleaned
 JSON artifacts. Excel, Mihoyo D-17, and buhflipexplode D-12 snapshots remain

@@ -56,6 +56,7 @@ export const dataSourceDescriptors = [
       "Adrenaline and Resonance recovery raw fields",
       "enemy monster_info variant mapping raw fields",
       "Phase 3 Nicole/Yanagi/Penguinboo/Sharkboo candidate coverage",
+      "V1.2.x approved-live character batch index and details",
       "approved-live snapshot diff inputs",
     ],
     sourceVersionStrategy:
@@ -64,6 +65,7 @@ export const dataSourceDescriptors = [
       "data/source/raw/nanoka/zzz/2.8/fetch-manifest.json",
       "data/source/raw/nanoka/zzz/2.8/manifest.json",
       "data/source/raw/nanoka/zzz/2.8/boss.json",
+      "data/source/raw/nanoka/zzz/2.8/character.json",
       "data/source/raw/nanoka/zzz/2.8/zh/character/1021.json",
       "data/source/raw/nanoka/zzz/2.8/zh/character/1371.json",
       "data/source/raw/nanoka/zzz/2.8/zh/character/1031.json",

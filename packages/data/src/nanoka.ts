@@ -6,6 +6,7 @@ export const NANOKA_PARSER_VERSION = "nanoka-source-v0.1.0"
 export type NanokaRawEntityType =
   | "sourceManifest"
   | "bossIndex"
+  | "characterIndex"
   | "bangbooIndex"
   | "character"
   | "boss"
@@ -53,6 +54,12 @@ export interface NanokaRawSnapshotManifest {
     manifestLiveVersion: string
     manifestLatestVersion: string
     bossIndexCount: number
+    characterBatch?: {
+      indexCount: number
+      retainedDetailCount: number
+      ids: number[]
+      approvedForCleanedOutputCount: number
+    }
     characterSample: {
       id: number
       codeName?: string
@@ -142,6 +149,8 @@ export function assertNanokaSnapshotManifest(
     throw new Error("nanoka snapshot must retain manifest.json")
   if (!assetIds.includes("boss-index"))
     throw new Error("nanoka snapshot must retain boss.json index")
+  if (!assetIds.includes("character-index"))
+    throw new Error("nanoka snapshot must retain character.json index")
   if (!assetIds.includes("bangboo-index"))
     throw new Error("nanoka snapshot must retain bangboo.json index")
 
@@ -159,6 +168,8 @@ function assertNanokaUrlPolicy(manifest: NanokaRawSnapshotManifest): void {
     throw new Error("nanoka urlPolicy manifestUrl must point to static.nanoka.cc manifest.json")
   if (!manifest.urlPolicy.approvedIndexUrls.includes(`https://static.nanoka.cc/zzz/${manifest.snapshotId}/boss.json`))
     throw new Error("nanoka urlPolicy must approve the live boss index")
+  if (!manifest.urlPolicy.approvedIndexUrls.includes(`https://static.nanoka.cc/zzz/${manifest.snapshotId}/character.json`))
+    throw new Error("nanoka urlPolicy must approve the live character index")
   if (!manifest.urlPolicy.approvedIndexUrls.includes(`https://static.nanoka.cc/zzz/${manifest.snapshotId}/bangboo.json`))
     throw new Error("nanoka urlPolicy must approve the live Bangboo index")
   for (const forbiddenIndexName of ["beta", "preview", "leak", "datamine"]) {
@@ -198,7 +209,7 @@ function assertNanokaAssetUrlAllowed(
   if (fileName !== undefined && manifest.urlPolicy.forbiddenIndexNames.includes(fileName.replace(/\.json$/, "")))
     throw new Error(`${asset.id}: forbidden nanoka route in snapshot`)
 
-  if (asset.entityType === "bossIndex" || asset.entityType === "bangbooIndex") {
+  if (asset.entityType === "bossIndex" || asset.entityType === "characterIndex" || asset.entityType === "bangbooIndex") {
     if (!manifest.urlPolicy.approvedIndexUrls.includes(asset.url))
       throw new Error(`${asset.id}: asset URL is not allowed by nanoka urlPolicy`)
     return
