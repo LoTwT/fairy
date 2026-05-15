@@ -1,7 +1,9 @@
 # Fairy v0.1.0 — Release Notes
 
-> Schema migration release. This document records the GitHub Release page body
-> used by v0.1.0.
+> Schema migration release. This document is the release-notes
+> draft/reference for v0.1.0. The release workflow still generates the final
+> GitHub Release body from `git-cliff`; Product/TL may copy this text into the
+> release body only as part of the PR3 release operation.
 
 ## TL;DR
 
@@ -91,9 +93,12 @@ The Phase 4 PR1 cutover passed:
 - `pnpm --filter @randomplay/data sync-cleaned -- --check`
 - data package pack dry-run inclusion/exclusion
 
-The release workflow also validates the published npm packages, SLSA
+PR3 release-readiness still needs to validate the published npm packages, SLSA
 provenance, GitHub Release, fresh `pnpm dlx @randomplay/cli`, and import smoke
-from a fresh temporary project.
+from a fresh temporary project. The workflow performs publish, GitHub Release
+creation, registry availability checks, package install/import smoke, golden
+report validation, and CLI smoke; SLSA provenance is a QA post-publish
+release-readiness check.
 
 ## Rollback
 
