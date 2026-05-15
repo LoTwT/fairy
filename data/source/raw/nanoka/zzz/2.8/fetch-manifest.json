@@ -2,8 +2,8 @@
   "schemaVersion": "nanoka-fetch-manifest-v1",
   "sourceId": "nanoka-zzz",
   "snapshotId": "2.8",
-  "fetchedAt": "2026-05-15T11:35:00+08:00",
-  "generatedAt": "2026-05-15T11:35:00+08:00",
+  "fetchedAt": "2026-05-15T11:55:00+08:00",
+  "generatedAt": "2026-05-15T11:55:00+08:00",
   "parserVersion": "nanoka-source-v0.1.0",
   "userAgent": "fairy-data-source-audit/0.1 (+https://github.com/LoTwT/fairy)",
   "formalLivePolicy": {
@@ -107,6 +107,69 @@
       },
       "bytes": 16843,
       "sha256": "781cb67799e6fb8c0438ab57ac5536507b85292161342f9870c18f42d890989f"
+    },
+    {
+      "id": "bangboo-plugboo-54008",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/bangboo/54008.json",
+      "path": "zh/bangboo/54008.json",
+      "entityType": "bangboo",
+      "language": "zh",
+      "entityId": 54008,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "bangboo-panel-skill-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b8-3e20\"",
+        "lastModified": "Wed, 06 May 2026 01:00:40 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 15905,
+      "sha256": "02a203d3bcdf5b6c1d756e0a5f2957658a13b889305da5dbd8ce27f9a8dbee60"
+    },
+    {
+      "id": "weapon-yixuan-signature-14137",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/weapon/14137.json",
+      "path": "zh/weapon/14137.json",
+      "entityType": "weapon",
+      "language": "zh",
+      "entityId": 14137,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "w-engine-identity-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/weapon/14137.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b9-2511\"",
+        "lastModified": "Wed, 06 May 2026 01:00:41 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 9490,
+      "sha256": "0f1c6fd4e391a2968d3d4246dc0b82abdb6e98c63b75dd31dc3a578d78ebaeab"
+    },
+    {
+      "id": "equipment-woodpecker-31000",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/equipment/31000.json",
+      "path": "zh/equipment/31000.json",
+      "entityType": "equipment",
+      "language": "zh",
+      "entityId": 31000,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "drive-disc-identity-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/equipment/31000.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b9-2dc\"",
+        "lastModified": "Wed, 06 May 2026 01:00:41 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 733,
+      "sha256": "4190f6084521aead931a28ada9a44e6d9cd26a7fdb2401ffd0ab4e00a257f1ec"
     }
   ],
   "summary": {
@@ -129,6 +192,23 @@
       "zoneCount": 3,
       "hasBossAdjust": true
     },
-    "retainedAssetCount": 4
+    "bangbooSample": {
+      "id": 54008,
+      "codeName": "Plugboo",
+      "hasStats": true,
+      "hasSkillProp": true
+    },
+    "wEngineSample": {
+      "id": 14137,
+      "codeName": "Weapon_S_1371",
+      "hasBaseProperty": true,
+      "hasRandProperty": true
+    },
+    "driveDiscSample": {
+      "id": 31000,
+      "name": "啄木鸟电音",
+      "hasSetDescriptions": true
+    },
+    "retainedAssetCount": 7
   }
 }

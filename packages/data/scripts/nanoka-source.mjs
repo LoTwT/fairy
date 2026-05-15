@@ -88,6 +88,36 @@ function snapshotAssets(snapshot) {
       approvedForCleanedOutput: true,
       evidenceUse: "deadly-assault-detail-source-gate",
     },
+    {
+      id: "bangboo-plugboo-54008",
+      url: `https://static.nanoka.cc/zzz/${snapshot}/zh/bangboo/54008.json`,
+      path: "zh/bangboo/54008.json",
+      entityType: "bangboo",
+      language: "zh",
+      entityId: 54008,
+      approvedForCleanedOutput: true,
+      evidenceUse: "bangboo-panel-skill-source-gate",
+    },
+    {
+      id: "weapon-yixuan-signature-14137",
+      url: `https://static.nanoka.cc/zzz/${snapshot}/zh/weapon/14137.json`,
+      path: "zh/weapon/14137.json",
+      entityType: "weapon",
+      language: "zh",
+      entityId: 14137,
+      approvedForCleanedOutput: true,
+      evidenceUse: "w-engine-identity-source-gate",
+    },
+    {
+      id: "equipment-woodpecker-31000",
+      url: `https://static.nanoka.cc/zzz/${snapshot}/zh/equipment/31000.json`,
+      path: "zh/equipment/31000.json",
+      entityType: "equipment",
+      language: "zh",
+      entityId: 31000,
+      approvedForCleanedOutput: true,
+      evidenceUse: "drive-disc-identity-source-gate",
+    },
   ]
 }
 
@@ -119,6 +149,9 @@ function summarizeSnapshot(snapshot, assets) {
   const bossIndex = readJson(join(sourceRoot, snapshot, "boss.json"))
   const character = readJson(join(sourceRoot, snapshot, "zh/character/1021.json"))
   const boss = readJson(join(sourceRoot, snapshot, "zh/boss/69036.json"))
+  const bangboo = readJson(join(sourceRoot, snapshot, "zh/bangboo/54008.json"))
+  const weapon = readJson(join(sourceRoot, snapshot, "zh/weapon/14137.json"))
+  const equipment = readJson(join(sourceRoot, snapshot, "zh/equipment/31000.json"))
 
   if (manifest.zzz?.live !== snapshot)
     throw new Error(`manifest.zzz.live=${manifest.zzz?.live} does not match snapshot ${snapshot}`)
@@ -130,6 +163,12 @@ function summarizeSnapshot(snapshot, assets) {
     throw new Error("character sample id drifted")
   if (boss.id !== 69036)
     throw new Error("boss sample id drifted")
+  if (bangboo.id !== 54008)
+    throw new Error("bangboo sample id drifted")
+  if (weapon.id !== 14137)
+    throw new Error("weapon sample id drifted")
+  if (equipment.id !== 31000)
+    throw new Error("equipment sample id drifted")
 
   return {
     manifestLiveVersion: manifest.zzz.live,
@@ -150,6 +189,23 @@ function summarizeSnapshot(snapshot, assets) {
       id: boss.id,
       zoneCount: Object.keys(boss.zone ?? {}).length,
       hasBossAdjust: boss.boss_adjust !== undefined,
+    },
+    bangbooSample: {
+      id: bangboo.id,
+      codeName: bangboo.code_name,
+      hasStats: bangboo.stats !== undefined,
+      hasSkillProp: bangboo.skill_prop !== undefined,
+    },
+    wEngineSample: {
+      id: weapon.id,
+      codeName: weapon.code_name,
+      hasBaseProperty: weapon.base_property !== undefined,
+      hasRandProperty: weapon.rand_property !== undefined,
+    },
+    driveDiscSample: {
+      id: equipment.id,
+      name: equipment.name,
+      hasSetDescriptions: typeof equipment.desc2 === "string" && typeof equipment.desc4 === "string",
     },
     retainedAssetCount: assets.length,
   }

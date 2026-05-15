@@ -24,8 +24,8 @@
         "versionedIndexUrls": "^https://static\\.nanoka\\.cc/zzz/(?:\\d[\\dA-Za-z.+-]*)/boss\\.json$",
         "localizedDetailUrls": "^https://static\\.nanoka\\.cc/zzz/(?:\\d[\\dA-Za-z.+-]*)/(?:zh|en|ja|ko)/[a-z]+/\\d+\\.json$"
       },
-      "fetchedAt": "2026-05-15T11:35:00+08:00",
-      "lastVerifiedAt": "2026-05-15T11:35:00+08:00",
+      "fetchedAt": "2026-05-15T11:55:00+08:00",
+      "lastVerifiedAt": "2026-05-15T11:55:00+08:00",
       "contentHash": "sha256:91494c2c3bfda6ec47beccbf71066506ab0a315513aa751cf30e4c3a1dc0817d",
       "takedownPath": "docs/data-source/takedown-rollback.md#nanoka",
       "fallbackPlan": "archived Excel V0.0.4 snapshot + D-17 Mihoyo archived + D-12 buhflipexplode archived",

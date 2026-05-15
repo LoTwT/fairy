@@ -44,21 +44,24 @@ The machine-readable version is
 
 | Entity | Endpoint | Evidence |
 |---|---|---|
-| Agent / Yixuan | `https://static.nanoka.cc/zzz/3.0.2+15625449/zh/character/1371.json` | `stats`, `level`, `extra_level`, `skill`, `skill_list`, `passive`, `talent`, `potential`, `potential_detail`. |
+| Agent / Yixuan research | `https://static.nanoka.cc/zzz/3.0.2+15625449/zh/character/1371.json` | Research-only future sample for `stats`, `level`, `extra_level`, `skill`, `skill_list`, `passive`, `talent`, `potential`, `potential_detail`; not approved for cleaned output. |
 | Agent / Nekomata | `https://static.nanoka.cc/zzz/3.0.2+15625449/zh/character/1021.json` | `talent` has six entries, while `potential` / `potential_detail` are empty. Used to avoid treating `extra_level` as Mindscape by default. |
 | Agent / Soldier 11 | `https://static.nanoka.cc/zzz/3.0.2+15625449/zh/character/1041.json` | `talent`, `potential`, and `potential_detail` all have six entries. Used to separate Mindscape-like text from potential activation semantics. |
-| Bangboo / Plugboo | `https://static.nanoka.cc/zzz/3.0.2+15625449/zh/bangboo/54008.json` | `stats`, `level`, `skill`, `skill_prop`; G26 skill values match shipped Excel/Gachabase samples. |
+| Live Agent / Nekomata | `https://static.nanoka.cc/zzz/2.8/zh/character/1021.json` | Approved live sample for promotable agent identity, enum, base panel, and skill-number rows; retained under `data/source/raw/nanoka/zzz/2.8/`. |
+| Live Bangboo / Plugboo | `https://static.nanoka.cc/zzz/2.8/zh/bangboo/54008.json` | Approved live sample for Bangboo identity, base panel, and skill segment rows; retained under `data/source/raw/nanoka/zzz/2.8/`. |
 | Enemy / Dullahan sample | `https://static.nanoka.cc/zzz/3.0.2+15625449/zh/monster/30000.json` | `monster_info.*.stats`, `curves`, `element`, `element_abnormal`. Variant mapping is still unresolved. |
-| W-Engine / Yixuan signature sample | `https://static.nanoka.cc/zzz/3.0.2+15625449/zh/weapon/14137.json` | `base_property`, `rand_property`, `level`, `stars`, `talents`; typed passive mapping is still unresolved. |
-| Drive Disc / Woodpecker Electro sample | `https://static.nanoka.cc/zzz/3.0.2+15625449/zh/equipment/31000.json` | `desc2` / `desc4` text exists, but typed modifiers are not promotable until deterministic parsing/templates exist. |
+| Live W-Engine / Yixuan signature sample | `https://static.nanoka.cc/zzz/2.8/zh/weapon/14137.json` | Approved live sample for W-Engine identity; `base_property`, `rand_property`, `level`, `stars`, and `talents` remain blocked for stat/passive promotion until mapping/templates are proven. |
+| Live Drive Disc / Woodpecker Electro sample | `https://static.nanoka.cc/zzz/2.8/zh/equipment/31000.json` | Approved live sample for Drive Disc identity; `desc2` / `desc4` text exists, but typed modifiers are not promotable until deterministic parsing/templates exist. |
 | Manifest / live gate | `https://static.nanoka.cc/manifest.json` | `zzz.live = 2.8`, `zzz.latest = 3.0.2+15625449`, `zzz.available[]` supports approved-live version allowlists and snapshot-derived patch diff history. |
 | Live Sentinel sample / Nekomata | `https://static.nanoka.cc/zzz/2.8/zh/character/1021.json` | `stats.rp_max`, `stats.rp_recover`, and skill `fever_recovery` / `rp_recovery` raw paths exist in the live version. |
 | Live Deadly Assault index | `https://static.nanoka.cc/zzz/2.8/boss.json` | 38 live DA entries; all sampled `zh/boss/{id}.json` details returned 200 in PR #54. |
 | Live Deadly Assault period / 69036 | `https://static.nanoka.cc/zzz/2.8/zh/boss/69036.json` | Current live period window, zones, layer/selectable buffs, room monster lists, weakness data, and `boss_adjust`. |
 
 The `3.0.2+15625449` samples are retained as phase-0 research evidence, not as
-release-ready source evidence. Phase 2 promotion must either re-sample the live
-version or receive explicit owner approval for a newer version.
+release-ready source evidence. Phase 2 slice 3 re-sampled all current
+`promotable=true` rows to approved live `2.8` samples; future promotions must
+continue to use approved live sample evidence or receive explicit owner
+approval for a newer version.
 
 ## Corrections To The Discussion Checklist
 
@@ -94,15 +97,15 @@ Machine summary after task #127: 45 rows total, 31 `verified-from-nanoka`, 8
 |---|---|---:|---|
 | Source metadata / registry | needs-tl-research | no | `liveVersionRef`, `approvedLiveVersions[]`, source hashes, and stable-version CI still need implementation. |
 | Snapshot-derived patch history | verified-from-nanoka | no | R4.a locks snapshot-derived numeric diff; diff tool and approved-live allowlist are still required. |
-| Agent identity / labels / enums | verified-from-nanoka | yes | Enum mapping table must be recorded. |
-| Agent base panel stats | verified-from-nanoka | yes | Formula proven for `baseStatsByLevel`: `stats[key] + level[promotionPhase][key] + stats[key_growth] * (level - 1) / 10000`. Promotion extra stats remain separate. |
+| Agent identity / labels / enums | verified-from-nanoka | yes | Current promotable rows point to approved live Nekomata evidence; enum mapping table must be recorded. |
+| Agent base panel stats | verified-from-nanoka | yes | Formula proven for `baseStatsByLevel`: `stats[key] + level[promotionPhase][key] + stats[key_growth] * (level - 1) / 10000`, with retained live Nekomata panel tests. Promotion extra stats remain separate. |
 | Agent promotion extra stats | needs-tl-research | no | `extra_level` raw fields exist, but final snapshot composition semantics are not locked. |
-| Agent skill numeric params | verified-from-nanoka | yes | Full level derivation needs transform tests, but sampled base/growth paths exist. |
+| Agent skill numeric params | verified-from-nanoka | yes | Current promotable row points to approved live Nekomata evidence; full level derivation needs transform tests, but sampled base/growth paths exist. |
 | Agent passive / talent / potential | verified-from-nanoka | no | Raw text/objects exist; typed modifier and potential semantics are unresolved. |
 | Rupture and adrenaline candidate fields | verified-from-nanoka | no | Raw fields exist; semantic mapping must be validated. |
 | Sentinel / decibel fields | verified-from-nanoka | no | Live raw fields exist; canonical naming and unit normalization are unresolved. |
-| Bangboo skill numeric params | verified-from-nanoka | yes | G26 sampled values are promotable. |
-| Bangboo panel stats | verified-from-nanoka | yes | Formula proven for G26 Plugboo: `stats[key] + level[promotionPhase][key] + stats[key_upgrade] * (level - 1) / 10000`. |
+| Bangboo skill numeric params | verified-from-nanoka | yes | G26 sampled values are promotable from approved live Plugboo evidence. |
+| Bangboo panel stats | verified-from-nanoka | yes | Formula proven for G26 Plugboo: `stats[key] + level[promotionPhase][key] + stats[key_upgrade] * (level - 1) / 10000`, with retained live Plugboo panel tests. |
 | Enemy stats/resistance/thresholds | verified-from-nanoka | no | Raw fields exist; variant mapping and formula mapping are unresolved. |
 | W-Engine stats | verified-from-nanoka | no | Detail endpoint exists; ID mapping and stat normalization are unresolved. |
 | W-Engine passive | verified-from-nanoka | no | Raw text/objects exist; typed modifier template is unresolved. |
