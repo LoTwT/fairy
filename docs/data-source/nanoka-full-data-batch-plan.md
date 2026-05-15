@@ -24,11 +24,11 @@ Configured live version remains `manifest.zzz.live = 2.8`.
 | Characters | 53 | 53 | 53 | complete in PR-A |
 | W-Engines | 89 | 89 | 89 | complete in PR-B |
 | Drive Disc sets | 26 | 26 | 26 | complete in PR-C |
-| Enemies | 269 | 269 | 0 | 269 runtime records |
+| Enemies | 269 | 269 | 269 | complete in PR-D |
 | Deadly Assault current periods | 38 | 38 | 0 | schema/runtime bucket required |
 | Bangboos | 39 | 39 | 39 | complete in PR #77 |
 
-Enemy details contain 573 `monster_info` variants. The first enemy batch should promote the selected `detail.monster_id -> monster_info[monster_id]` variant and audit skipped variants rather than silently dropping them.
+Enemy details contain 573 `monster_info` variants. PR-D promotes 269 runtime enemy identity/source/rank rows and retains variant data in audit: 201 rows have a selected `detail.monster_id -> monster_info[monster_id]` variant, 68 rows are marked `missing-selected-monster_info-variant`, and 372 non-selected variants are retained as skipped audit rows.
 
 ## Historical DA Boundary
 
@@ -65,7 +65,7 @@ The schema addition is release-significant. The version bump is deferred until t
 1. Characters: retain and batch-promote all current-live characters. Done in PR-A.
 2. W-Engines: retain and batch-promote all current-live W-Engines. Done in PR-B.
 3. Drive Disc sets: retain and batch-promote current-live set identity/effect text; keep slot/main/substat excluded. Done in PR-C.
-4. Enemies: retain all current-live monster details and batch-promote selected enemy variants with skipped-variant audit.
+4. Enemies: retain all current-live monster details and batch-promote enemy identity/source/rank with selected/missing/skipped variant audit. Done in PR-D.
 5. DA current: add a current DA period bucket if needed and retain/promote all 2.8 periods.
 6. DA historical: add `historicalDAPeriods` and retain/promote historical periods across `manifest.available`.
 

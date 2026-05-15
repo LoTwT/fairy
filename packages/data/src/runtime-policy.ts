@@ -99,6 +99,7 @@ export function assertNanokaRuntimeGameDataArtifact(
   assert(Object.keys(data.agents).length === 53, "runtime GameData must include the full approved-live character batch")
   assert(Object.keys(data.wEngines).length === 89, "runtime GameData must include the full approved-live W-Engine batch")
   assert(Object.keys(data.driveDiscs).length === 26, "runtime GameData must include the full approved-live Drive Disc set batch")
+  assert(Object.keys(data.enemies).length === 269, "runtime GameData must include the full approved-live enemy batch")
 
   const archivedSources = new Set<string>(ARCHIVED_RUNTIME_SOURCE_IDS)
   for (const ref of collectSourceRefs(data)) {

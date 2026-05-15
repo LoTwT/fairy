@@ -54,7 +54,8 @@ The machine-readable version is
 | Live Bangboo index | `https://static.nanoka.cc/zzz/2.8/bangboo.json` | Approved live index for the V1.2.1 Bangboo batch. The retained index lists 39 Bangboos and drives the runtime import. |
 | Live Bangboo details | `https://static.nanoka.cc/zzz/2.8/zh/bangboo/{id}.json` | V1.2.1 retains all 39 approved-live Bangboo details under `data/source/raw/nanoka/zzz/2.8/zh/bangboo/`; runtime generation verifies each detail against the index before emitting cleaned rows. |
 | Enemy / Dullahan research sample | `https://static.nanoka.cc/zzz/3.0.2+15625449/zh/monster/30000.json` | Research-only `monster_info.*.stats`, `curves`, `element`, `element_abnormal`; not approved for cleaned output. |
-| Live enemy variant mapping samples | `https://static.nanoka.cc/zzz/2.8/zh/monster/{id}.json` | Approved live samples for Dullahan `30000`, Greta `30004`, Ruthless Fiend `200141`, Notorious Hati `200014`, Notorious Armored Hati `200034`, Miasma Priest `30033`, and Notorious Pompey `300211`. Task #144 proves `detail.monster_id -> monster_info[monster_id]` for G13/G18/G19/G20 source artifacts. |
+| Live enemy index | `https://static.nanoka.cc/zzz/2.8/monster.json` | Approved live index for the V1.2.x Enemy batch. The retained index lists 269 enemies and drives the runtime identity/rank import. |
+| Live enemy details | `https://static.nanoka.cc/zzz/2.8/zh/monster/{id}.json` | V1.2.x PR-D retains all 269 approved-live enemy details under `data/source/raw/nanoka/zzz/2.8/zh/monster/`; runtime generation verifies each detail against the index before emitting cleaned identity/rank rows. Selected, missing, and skipped `monster_info` variants stay in audit until combat semantics are promoted. |
 | Live W-Engine index | `https://static.nanoka.cc/zzz/2.8/weapon.json` | Approved live index for the V1.2.x W-Engine batch. The retained index lists 89 W-Engines and drives the runtime import. |
 | Live W-Engine details | `https://static.nanoka.cc/zzz/2.8/zh/weapon/{id}.json` | V1.2.x PR-B retains all 89 approved-live W-Engine details under `data/source/raw/nanoka/zzz/2.8/zh/weapon/`; runtime generation verifies each detail against the index before emitting cleaned rows. |
 | Live Drive Disc index | `https://static.nanoka.cc/zzz/2.8/equipment.json` | Approved live index for the V1.2.x Drive Disc batch. The retained index lists 26 Drive Disc sets and drives the runtime identity import. |
@@ -94,10 +95,10 @@ an explicit cleaned-data loader consumes a row.
 - Bangboo `element_type` is not a top-level field in the sampled Plugboo detail
   row. Task #152 derives the Bangboo skill attribute from exact colored damage
   text in approved live skill descriptions instead.
-- Enemy endpoint availability is not the blocker. Task #144 proves live
-  `monster_info.*` variant selection for the sampled cleaned/golden rows; enemy
-  level formulas, resistance units, anomaly threshold mapping, daze recovery
-  semantics, and full enemy-catalog promotion remain separate blockers.
+- Enemy endpoint availability is not the blocker. V1.2.x PR-D retains all 269
+  current-live enemy details and promotes identity/rank rows; selected
+  `monster_info.*` stats, resistance units, anomaly threshold mapping, daze
+  recovery semantics, and typed special rules remain audit-only blockers.
 - `GameData.modifiers`, `GameData.rules`, `GameData.aliases`, and
   `GameData.sources` are top-level schema contract rows and must appear in the
   inventory even when they are not nanoka gameplay rows.
@@ -130,8 +131,8 @@ Machine summary after task #172 / Phase 4 runtime cutover: 45 rows total, 36
 | Bangboo skill numeric params | verified-from-nanoka | yes | V1.2.1 evaluates approved-live skill `param` arithmetic against typed `skill_prop` values and promotes 63 runtime damage/daze skill sections; support/heal/energy sections remain audited as not promoted by current schema. |
 | Bangboo element | verified-from-nanoka | yes | V1.2.1 audits all 39 Bangboos. Damage-type Bangboos derive one canonical element from exact colored damage text; support/heal/energy-only Bangboos stay not-promoted in the audit until a formal schema surface exists. |
 | Bangboo panel stats | verified-from-nanoka | yes | V1.2.1 verifies all 39 level-60 Bangboo panels with `stats[key] + level[promotionPhase][key] + stats[key_upgrade] * (level - 1) / 10000`. |
-| Enemy variant mapping | verified-from-nanoka | yes | Live Dullahan, Greta, Ruthless Fiend, Hati, Miasma Priest, and Pompey samples prove `detail.monster_id -> monster_info[monster_id]` mapping for G13/G18/G19/G20 source artifacts; Phase 3/4 cleared the runtime gate. |
-| Enemy stats/resistance/thresholds | verified-from-nanoka | no | Raw fields exist for mapped live variants; level formula, resistance units, anomaly threshold mapping, and daze recovery semantics remain unresolved. |
+| Enemy variant mapping | verified-from-nanoka | yes | V1.2.x PR-D verifies all 269 current-live enemy details. 201 rows have a selected `detail.monster_id -> monster_info[monster_id]` variant, 68 rows are marked `missing-selected-monster_info-variant`, and 372 non-selected variants are retained as skipped audit rows. |
+| Enemy stats/resistance/thresholds | verified-from-nanoka | no | Raw fields exist for selected and skipped variants in `nanoka-enemy-batch-audit.json`; level formula, resistance units, anomaly threshold mapping, and daze recovery semantics remain unresolved. |
 | W-Engine stats | verified-from-nanoka | yes | V1.2.x PR-B verifies all 89 level-60 W-Engine attack/substat rows with `base_property.value`, `rand_property.value`, `level.60.rate`, and `stars.5` formula proof. |
 | W-Engine passive | verified-from-nanoka | no | V1.2.x PR-B retains all `talents` text in the W-Engine audit; typed modifier template is unresolved. |
 | Drive Disc set effects | verified-from-nanoka | no | V1.2.x PR-C retains all 26 `desc2`/`desc4` text rows in `nanoka-drive-disc-batch-audit.json`; typed modifier template is unresolved. |
@@ -198,8 +199,9 @@ After the 2026-05-15 owner decision, no rows remain in `needs-owner-research`.
   row; task #142 maps period, zones, buffs, monsters, weakness, rank goals, and
   `boss_adjust`; Phase 3 rulings plus Phase 4 cutover clear the runtime gate.
 - `enemies.variantMapping` — nanoka live enemy structured source artifact row;
-  task #144 maps sampled `monster_info.*` variants to existing cleaned/golden
-  enemy identities; Phase 3 rulings plus Phase 4 cutover clear the runtime gate.
+  V1.2.x PR-D maps all current-live monster index/detail rows, retaining 201
+  selected variants, 68 missing selected variants, and 372 skipped variants in
+  `nanoka-enemy-batch-audit.json`.
 
 ## Removed Product Scope
 

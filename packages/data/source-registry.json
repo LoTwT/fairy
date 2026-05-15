@@ -1,6 +1,6 @@
 {
   "schemaVersion": "source-registry/v0.1.0",
-  "generatedAt": "2026-05-16T00:40:00+08:00",
+  "generatedAt": "2026-05-16T01:05:00+08:00",
   "sources": [
     {
       "sourceId": "nanoka-zzz",
@@ -22,12 +22,12 @@
       "approvedLiveVersionsScope": "runtime-primary | snapshot-diff-historical-input | archived-audit-fixture",
       "urlAllowlist": {
         "manifestUrl": "^https://static\\.nanoka\\.cc/manifest\\.json$",
-        "versionedIndexUrls": "^https://static\\.nanoka\\.cc/zzz/(?:\\d[\\dA-Za-z.+-]*)/(?:boss|character|bangboo|weapon|equipment)\\.json$",
+        "versionedIndexUrls": "^https://static\\.nanoka\\.cc/zzz/(?:\\d[\\dA-Za-z.+-]*)/(?:boss|character|bangboo|weapon|equipment|monster)\\.json$",
         "localizedDetailUrls": "^https://static\\.nanoka\\.cc/zzz/(?:\\d[\\dA-Za-z.+-]*)/(?:zh|en|ja|ko)/[a-z]+/\\d+\\.json$"
       },
-      "fetchedAt": "2026-05-16T00:40:00+08:00",
-      "lastVerifiedAt": "2026-05-16T00:40:00+08:00",
-      "contentHash": "sha256:91494c2c3bfda6ec47beccbf71066506ab0a315513aa751cf30e4c3a1dc0817d",
+      "fetchedAt": "2026-05-16T01:05:00+08:00",
+      "lastVerifiedAt": "2026-05-16T01:05:00+08:00",
+      "contentHash": "sha256:55571ec544ff0bbb994621d08d8b2ebbcea090109708c53b9bbd01202f6a7558",
       "takedownPath": "docs/data-source/takedown-rollback.md#nanoka",
       "fallbackPlan": "runtime rollback requires explicit lo-user hotfix approval; archived Excel/D-17/D-12 snapshots remain audit references only",
       "notes": [
@@ -37,6 +37,7 @@
         "V1.2.x PR-A extends the retained approved-live character fixture set to the full 2.8 character.json index and promotes 53 runtime Agent records.",
         "V1.2.x PR-B extends the retained approved-live W-Engine fixture set to the full 2.8 weapon.json index and promotes 89 runtime W-Engine records.",
         "V1.2.x PR-C extends the retained approved-live Drive Disc set fixture set to the full 2.8 equipment.json index and promotes 26 runtime Drive Disc identity records while retaining set-effect text in audit.",
+        "V1.2.x PR-D extends the retained approved-live enemy fixture set to the full 2.8 monster.json index and promotes 269 runtime enemy identity records with selected/skipped variant audit.",
         "Current cleaned output rows must use configuredLiveVersion; archived Excel/D-17/D-12 sources must not be runtime fallbacks.",
         "manifest.zzz.latest is research/drift input only unless lo-user approves a new configured live version."
       ]

@@ -82,6 +82,7 @@ describe("nanoka source gate", () => {
     expect(requirePattern(source.urlAllowlist, "versionedIndexUrls").test("https://static.nanoka.cc/zzz/2.8/bangboo.json")).toBe(true)
     expect(requirePattern(source.urlAllowlist, "versionedIndexUrls").test("https://static.nanoka.cc/zzz/2.8/weapon.json")).toBe(true)
     expect(requirePattern(source.urlAllowlist, "versionedIndexUrls").test("https://static.nanoka.cc/zzz/2.8/equipment.json")).toBe(true)
+    expect(requirePattern(source.urlAllowlist, "versionedIndexUrls").test("https://static.nanoka.cc/zzz/2.8/monster.json")).toBe(true)
     expect(requirePattern(source.urlAllowlist, "localizedDetailUrls").test("https://static.nanoka.cc/zzz/2.8/zh/character/1021.json")).toBe(true)
     expect(requirePattern(source.urlAllowlist, "localizedDetailUrls").test("https://static.nanoka.cc/zzz/2.8/zh/monster/30000.json")).toBe(true)
   })
@@ -95,7 +96,7 @@ describe("nanoka source gate", () => {
     expect(isAllowed("https://static.nanoka.cc/zzz/2.8/preview.json")).toBe(false)
     expect(isAllowed("https://static.nanoka.cc/zzz/2.8/leak.json")).toBe(false)
     expect(isAllowed("https://static.nanoka.cc/zzz/2.8/datamine.json")).toBe(false)
-    expect(isAllowed("https://static.nanoka.cc/zzz/2.8/monster.json")).toBe(false)
+    expect(isAllowed("https://static.nanoka.cc/zzz/2.8/item.json")).toBe(false)
     expect(isAllowed("https://static.nanoka.cc/zzz/beta/zh/character/1021.json")).toBe(false)
     expect(isAllowed("https://static.nanoka.cc/zzz/preview/zh/boss/69036.json")).toBe(false)
     expect(isAllowed("https://zzz.gachabase.net/beta/agents/1371/yixuan?lang=en")).toBe(false)
@@ -338,18 +339,32 @@ describe("nanoka source gate", () => {
     expect(rows.get("driveDiscs.setModifiers")?.blockedBy).toContain("typed-modifier-template-required")
   })
 
-  it("locks enemy variant mapping to approved live monster detail samples", () => {
+  it("locks the V1.2.x enemy batch to the full approved-live monster index", () => {
     const matrix = readJson<CoverageMatrix>("data/cleaned/audit/nanoka-coverage-matrix.json")
+    const samples = new Map(matrix.sampleSources.map(sample => [sample.id, sample]))
     const rows = new Map(matrix.rows.map(row => [row.fieldId, row]))
+    const enemySamples = matrix.sampleSources.filter(sample =>
+      sample.entityType === "enemy" && sample.version === "2.8",
+    )
+    const identityRow = rows.get("enemies.identity")
     const variantRow = rows.get("enemies.variantMapping")
 
-    expect(variantRow).toMatchObject({
+    expect(samples.get("nanoka-monster-index-live-2.8")).toMatchObject({
+      version: "2.8",
+      approvedForCleanedOutput: true,
+      evidenceUse: "v1.2.x-enemy-batch-source-gate",
+    })
+    expect(enemySamples).toHaveLength(269)
+
+    expect(identityRow).toMatchObject({
       status: "verified-from-nanoka",
       promotable: true,
-      sampleEntity: "nanoka-monster-dullahan-live-30000",
+      sampleEntity: "nanoka-monster-index-live-2.8",
+      auditArtifact: "data/cleaned/audit/nanoka-enemy-batch-audit.json",
     })
-    expect(variantRow?.blockedBy ?? []).not.toContain("field:runtime-cutover-drift-required")
-    expect(variantRow?.supportingSampleEntities).toEqual(expect.arrayContaining([
+    expect(identityRow?.blockedBy ?? []).toEqual([])
+    expect(identityRow?.supportingSampleEntities).toHaveLength(269)
+    expect(identityRow?.supportingSampleEntities).toEqual(expect.arrayContaining([
       "nanoka-monster-dullahan-live-30000",
       "nanoka-monster-greta-live-30004",
       "nanoka-monster-ruthless-fiend-live-200141",
@@ -358,6 +373,32 @@ describe("nanoka source gate", () => {
       "nanoka-monster-miasma-priest-live-30033",
       "nanoka-monster-notorious-pompey-live-300211",
     ]))
+
+    expect(variantRow).toMatchObject({
+      status: "verified-from-nanoka",
+      promotable: true,
+      sampleEntity: "nanoka-monster-index-live-2.8",
+      auditArtifact: "data/cleaned/audit/nanoka-enemy-batch-audit.json",
+    })
+    expect(variantRow?.blockedBy ?? []).not.toContain("field:runtime-cutover-drift-required")
+    expect(variantRow?.supportingSampleEntities).toHaveLength(269)
+    expect(variantRow?.transformRule).toContain("201 selected variants")
+    expect(variantRow?.transformRule).toContain("68 missing selected variants")
+
+    for (const fieldId of [
+      "enemies.levelDefaults",
+      "enemies.resistance",
+      "enemies.anomalyThresholds",
+      "enemies.dazeRecovery",
+      "enemies.specialRules",
+    ]) {
+      expect(rows.get(fieldId)).toMatchObject({
+        sampleEntity: "nanoka-monster-index-live-2.8",
+        auditArtifact: "data/cleaned/audit/nanoka-enemy-batch-audit.json",
+      })
+      expect(rows.get(fieldId)?.supportingSampleEntities).toHaveLength(269)
+    }
+
     for (const row of matrix.rows)
       expect(row.blockedBy ?? []).not.toContain("field:variant-mapping-required")
   })

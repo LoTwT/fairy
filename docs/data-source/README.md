@@ -1,6 +1,6 @@
 # Data Source Ingestion
 
-Status: V0.1.0 nanoka runtime cutover baseline + V1.2.1 Bangboo batch import + V1.2.x character/W-Engine/Drive Disc batch import
+Status: V0.1.0 nanoka runtime cutover baseline + V1.2.1 Bangboo batch import + V1.2.x character/W-Engine/Drive Disc/Enemy batch import
 Owner: @TechLead
 Inputs: CONFIRM-4, CONFIRM-11, D-20, Phase 2 nanoka adapter, Phase 3 drift audit, Phase 4 runtime cutover
 
@@ -13,8 +13,10 @@ nanoka 2.8 entries; V1.2.x PR-A extends runtime Agents to all 53 approved-live
 nanoka 2.8 entries; V1.2.x PR-B extends runtime W-Engines to all 89
 approved-live nanoka 2.8 entries; V1.2.x PR-C extends Drive Disc set identity
 to all 26 approved-live nanoka 2.8 sets and retains `desc2` / `desc4` text in
-audit while typed set modifiers remain template-pending. These batch imports do
-not add a package version bump.
+audit while typed set modifiers remain template-pending; V1.2.x PR-D extends
+runtime Enemies to all 269 approved-live nanoka 2.8 monster records and retains
+selected/missing/skipped `monster_info` variant data in audit. These batch
+imports do not add a package version bump.
 
 ## Segment 1 Scope
 
@@ -38,6 +40,8 @@ not add a package version bump.
   per-entry W-Engine identity/stat/passive-boundary audit.
 - `data/cleaned/audit/nanoka-drive-disc-batch-audit.json` records the V1.2.x
   per-entry Drive Disc identity/set-effect-text audit.
+- `data/cleaned/audit/nanoka-enemy-batch-audit.json` records the V1.2.x
+  per-entry Enemy identity/rank/variant audit.
 - `data/cleaned/audit/nanoka-full-data-batch-discovery.json` records the
   V1.2.x full-data batch counts, exclusions, historical DA boundary, and PR
   sequence.
@@ -53,7 +57,7 @@ runtime data.
 
 | Source ID | Kind | Current status | Formal data ready | Notes |
 |---|---|---:|---:|---|
-| `nanoka-zzz` | `thirdPartySite` | runtime-primary | yes | Approved-live `2.8` source for V0.1.0 runtime cleaned data, V1.2.1 Bangboo batch import, and V1.2.x character/W-Engine/Drive Disc batch import. |
+| `nanoka-zzz` | `thirdPartySite` | runtime-primary | yes | Approved-live `2.8` source for V0.1.0 runtime cleaned data, V1.2.1 Bangboo batch import, and V1.2.x character/W-Engine/Drive Disc/Enemy batch import. |
 | `lo-user-excel` | `excel` | deprecated runtime archive | audit only | Workbook committed under `data/source/excel/` with hash metadata. |
 | `mihoyo-zzz-critical-assault` | `mihoyoWiki` | deprecated runtime archive | audit only | Public API snapshot retained for DA detail text and zh/en source-text alignment. |
 | `buhflipexplode-zzz-da` | `thirdPartySite` | deprecated runtime archive | audit only | Live-only source snapshot retained; D-12 forbids copying GPL JS into Fairy runtime. |

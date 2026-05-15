@@ -10,7 +10,7 @@ comparison rows; full G01-G26 comparison begins in the next Phase 3 slice.
 
 | Source | Version | Content Hash |
 |---|---|---|
-| `nanoka-zzz` | `2.8` | `sha256:91494c2c3bfda6ec47beccbf71066506ab0a315513aa751cf30e4c3a1dc0817d` |
+| `nanoka-zzz` | `2.8` | `sha256:55571ec544ff0bbb994621d08d8b2ebbcea090109708c53b9bbd01202f6a7558` |
 
 ## Baselines
 

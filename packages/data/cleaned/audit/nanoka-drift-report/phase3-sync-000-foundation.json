@@ -5,7 +5,7 @@
   "candidate": {
     "sourceId": "nanoka-zzz",
     "sourceVersion": "2.8",
-    "contentHash": "sha256:91494c2c3bfda6ec47beccbf71066506ab0a315513aa751cf30e4c3a1dc0817d"
+    "contentHash": "sha256:55571ec544ff0bbb994621d08d8b2ebbcea090109708c53b9bbd01202f6a7558"
   },
   "baselines": [
     {
@@ -24,7 +24,7 @@
       "archived": true
     }
   ],
-  "matrixStatus": "phase-3-drift-foundation-gate",
+  "matrixStatus": "phase-4-runtime-cutover-gate",
   "runtimeCutoverReady": false,
   "exitCleanSyncEligible": false,
   "counts": {

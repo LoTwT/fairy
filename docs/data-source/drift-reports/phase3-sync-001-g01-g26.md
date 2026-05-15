@@ -1,7 +1,7 @@
 # Nanoka Drift Report: phase3-sync-001-g01-g26
 
 Status: Phase 3 drift audit first G01-G26 sync
-Generated: 2026-05-15T17:45:00+08:00
+Generated: 2026-05-15T16:20:00+08:00
 
 This report compares archived G01-G26 replay baselines against nanoka candidate coverage/status/source paths and records Product/TL rulings. Full runtime cutover remains disabled.
 
@@ -9,7 +9,7 @@ This report compares archived G01-G26 replay baselines against nanoka candidate 
 
 | Source | Version | Content Hash |
 |---|---|---|
-| `nanoka-zzz` | `2.8` | `sha256:91494c2c3bfda6ec47beccbf71066506ab0a315513aa751cf30e4c3a1dc0817d` |
+| `nanoka-zzz` | `2.8` | `sha256:55571ec544ff0bbb994621d08d8b2ebbcea090109708c53b9bbd01202f6a7558` |
 
 ## Baselines
 

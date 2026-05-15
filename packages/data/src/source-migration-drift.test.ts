@@ -69,6 +69,13 @@ function readJson<T>(path: string): T {
   return JSON.parse(readFileSync(join(repoRoot, path), "utf8")) as T
 }
 
+function nanokaContentHash(): string {
+  const registry = readJson<{ sources: Array<{ sourceId: string, contentHash: string }> }>("data/source-registry.json")
+  const source = registry.sources.find(item => item.sourceId === "nanoka-zzz")
+  expect(source, "missing nanoka source registry entry").toBeDefined()
+  return source!.contentHash
+}
+
 function npmPackFiles(): string[] {
   const output = execFileSync("npm", ["pack", "--dry-run", "--json"], {
     cwd: dataPackageRoot,
@@ -105,9 +112,9 @@ describe("Phase 3 source migration drift report foundation", () => {
       candidate: {
         sourceId: "nanoka-zzz",
         sourceVersion: "2.8",
-        contentHash: "sha256:91494c2c3bfda6ec47beccbf71066506ab0a315513aa751cf30e4c3a1dc0817d",
+        contentHash: nanokaContentHash(),
       },
-      matrixStatus: "phase-3-drift-foundation-gate",
+      matrixStatus: "phase-4-runtime-cutover-gate",
       runtimeCutoverReady: false,
       exitCleanSyncEligible: false,
       counts: {
