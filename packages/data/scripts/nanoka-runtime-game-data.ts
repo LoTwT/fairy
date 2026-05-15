@@ -1,14 +1,14 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs"
 import { dirname, join } from "node:path"
 import { fileURLToPath } from "node:url"
-import { parseGameData, type AgentData, type BangbooData, type BangbooSkillData, type DriveDiscData, type GameData, type SourceRef, type WEngineData } from "../../core/src/index"
+import { parseGameData, type AgentData, type BangbooData, type BangbooSkillData, type DriveDiscData, type EnemyData, type GameData, type SourceRef, type WEngineData } from "../../core/src/index"
 import { deriveNanokaBangbooElement } from "../src/nanoka-bangboo-element"
 import { assertNanokaRuntimeGameDataArtifact } from "../src/runtime-policy"
 
 const packageDir = fileURLToPath(new URL("..", import.meta.url))
 const repoRoot = join(packageDir, "../..")
 
-const generatedAt = "2026-05-16T00:40:00+08:00"
+const generatedAt = "2026-05-16T01:05:00+08:00"
 const sourceVersion = "2.8"
 const rootArtifactPath = join(repoRoot, "data/cleaned/runtime/game-data.json")
 const packageArtifactPath = join(packageDir, "cleaned/runtime/game-data.json")
@@ -20,6 +20,8 @@ const rootWEngineBatchAuditPath = join(repoRoot, "data/cleaned/audit/nanoka-weng
 const packageWEngineBatchAuditPath = join(packageDir, "cleaned/audit/nanoka-wengine-batch-audit.json")
 const rootDriveDiscBatchAuditPath = join(repoRoot, "data/cleaned/audit/nanoka-drive-disc-batch-audit.json")
 const packageDriveDiscBatchAuditPath = join(packageDir, "cleaned/audit/nanoka-drive-disc-batch-audit.json")
+const rootEnemyBatchAuditPath = join(repoRoot, "data/cleaned/audit/nanoka-enemy-batch-audit.json")
+const packageEnemyBatchAuditPath = join(packageDir, "cleaned/audit/nanoka-enemy-batch-audit.json")
 const characterIndexPath = join(repoRoot, "data/source/raw/nanoka/zzz/2.8/character.json")
 const characterSourceDir = join(repoRoot, "data/source/raw/nanoka/zzz/2.8/zh/character")
 const bangbooIndexPath = join(repoRoot, "data/source/raw/nanoka/zzz/2.8/bangboo.json")
@@ -28,6 +30,8 @@ const weaponIndexPath = join(repoRoot, "data/source/raw/nanoka/zzz/2.8/weapon.js
 const weaponSourceDir = join(repoRoot, "data/source/raw/nanoka/zzz/2.8/zh/weapon")
 const equipmentIndexPath = join(repoRoot, "data/source/raw/nanoka/zzz/2.8/equipment.json")
 const equipmentSourceDir = join(repoRoot, "data/source/raw/nanoka/zzz/2.8/zh/equipment")
+const monsterIndexPath = join(repoRoot, "data/source/raw/nanoka/zzz/2.8/monster.json")
+const monsterSourceDir = join(repoRoot, "data/source/raw/nanoka/zzz/2.8/zh/monster")
 
 function assert(condition: unknown, message: string): asserts condition {
   if (!condition)
@@ -449,6 +453,44 @@ type DriveDiscRuntimeBuild = {
   audit: unknown
 }
 
+type MonsterIndexEntry = {
+  icon?: string
+  rarity?: number
+  group?: number
+  en?: string
+  zh?: string
+  ja?: string
+  ko?: string
+  desc?: string
+}
+
+type MonsterInfoRaw = Record<string, any> & {
+  id?: number
+  code_name?: string
+  type?: string
+  tag?: string[]
+  element?: Record<string, number>
+  stats?: Record<string, number | boolean>
+  curves?: Record<string, unknown>
+}
+
+type MonsterRaw = Record<string, any> & {
+  id: number
+  name: string
+  monster_id?: number
+  group_id?: number
+  rarity?: number
+  desc?: string
+  card_skill_desc?: string
+  group_desc?: string
+  monster_info?: Record<string, MonsterInfoRaw>
+}
+
+type EnemyRuntimeBuild = {
+  enemies: Record<string, EnemyData>
+  audit: unknown
+}
+
 function uniqueStrings(values: Array<string | undefined>): string[] {
   return [...new Set(values.filter((value): value is string => typeof value === "string" && value.length > 0))]
 }
@@ -484,6 +526,14 @@ function driveDiscAnchor(entityId: string | number): string {
 
 function readEquipmentRaw(entityId: string): EquipmentRaw {
   return readJson<EquipmentRaw>(join(equipmentSourceDir, `${entityId}.json`))
+}
+
+function enemyAnchor(entityId: string | number): string {
+  return `data/source/raw/nanoka/zzz/2.8/zh/monster/${entityId}.json`
+}
+
+function readMonsterRaw(entityId: string): MonsterRaw {
+  return readJson<MonsterRaw>(join(monsterSourceDir, `${entityId}.json`))
 }
 
 function bangbooPanel(source: BangbooRaw) {
@@ -1020,12 +1070,193 @@ function buildDriveDiscRuntimeBatch(): DriveDiscRuntimeBuild {
   return { driveDiscs, audit }
 }
 
+function enemyRankFromRarity(rarity: number, enemyId: string): EnemyData["rank"] {
+  if (rarity === 1)
+    return "normal"
+  if (rarity === 2)
+    return "elite"
+  if (rarity === 3)
+    return "special"
+  if (rarity === 4)
+    return "boss"
+  throw new Error(`enemy ${enemyId}: unsupported nanoka rarity ${rarity}`)
+}
+
+function buildEnemyRuntimeBatch(): EnemyRuntimeBuild {
+  const index = readJson<Record<string, MonsterIndexEntry>>(monsterIndexPath)
+  const enemyIds = Object.keys(index).sort((left, right) => Number(left) - Number(right))
+  assert(enemyIds.length === 269, `enemy runtime batch expected 269 live monsters, got ${enemyIds.length}`)
+
+  const enemies: Record<string, EnemyData> = {}
+  const auditRows: any[] = []
+
+  for (const enemyId of enemyIds) {
+    const indexEntry = index[enemyId]!
+    const raw = readMonsterRaw(enemyId)
+    const numericId = Number(enemyId)
+    assert(raw.id === numericId, `enemy ${enemyId}: raw id drifted`)
+    assert(raw.name === indexEntry.zh, `enemy ${enemyId}: zh name drifted against index`)
+    assert(raw.group_id === indexEntry.group, `enemy ${enemyId}: group drifted against index`)
+    assert(raw.rarity === indexEntry.rarity, `enemy ${enemyId}: rarity drifted against index`)
+    const selectedVariantId = requiredNumber(raw.monster_id, `enemy.${enemyId}.monster_id`)
+    const selectedVariant = raw.monster_info?.[String(selectedVariantId)]
+    if (selectedVariant !== undefined) {
+      assert(selectedVariant.id === selectedVariantId, `enemy ${enemyId}: selected monster_info id drifted`)
+      assert(typeof selectedVariant.code_name === "string" && selectedVariant.code_name.length > 0, `enemy ${enemyId}: selected code_name is missing`)
+      assert(typeof selectedVariant.type === "string" && selectedVariant.type.length > 0, `enemy ${enemyId}: selected type is missing`)
+      assert(typeof selectedVariant.stats === "object" && selectedVariant.stats !== null, `enemy ${enemyId}: selected stats are missing`)
+    }
+
+    const rarity = requiredNumber(indexEntry.rarity, `enemy.${enemyId}.rarity`)
+    const anchor = enemyAnchor(enemyId)
+    const enemySource = sourceRef(anchor, "/")
+    const selectedVariantSource = sourceRef(anchor, `/monster_info/${selectedVariantId}`)
+    const skippedVariantIds = Object.keys(raw.monster_info ?? {})
+      .map(Number)
+      .filter(variantId => variantId !== selectedVariantId)
+      .sort((left, right) => left - right)
+
+    enemies[enemyId] = {
+      id: enemyId,
+      label: { zh: raw.name, en: indexEntry.en },
+      source: enemySource,
+      rank: enemyRankFromRarity(rarity, enemyId),
+      sourceAliases: uniqueStrings([
+        raw.name,
+        indexEntry.en,
+        indexEntry.ja,
+        indexEntry.ko,
+        selectedVariant?.code_name,
+        String(selectedVariantId),
+      ]),
+    }
+
+    auditRows.push({
+      id: enemyId,
+      label: {
+        zh: raw.name,
+        en: indexEntry.en,
+        ja: indexEntry.ja,
+        ko: indexEntry.ko,
+      },
+      source: enemySource,
+      icon: indexEntry.icon,
+      group: raw.group_id,
+      rarity,
+      rank: enemies[enemyId]!.rank,
+      rankMapping: {
+        status: "promoted",
+        rule: "nanoka monster index rarity 1/2/3/4 -> fairy normal/elite/special/boss",
+        source: sourceRef("data/source/raw/nanoka/zzz/2.8/monster.json", `/${enemyId}/rarity`),
+      },
+      selectedVariant: selectedVariant === undefined
+        ? {
+            status: "not-promoted",
+            reason: "missing-selected-monster_info-variant",
+            rule: "detail.monster_id -> monster_info[monster_id]",
+            monsterInfoId: selectedVariantId,
+            source: sourceRef(anchor, "/monster_id"),
+          }
+        : {
+            status: "promoted",
+            rule: "detail.monster_id -> monster_info[monster_id]",
+            monsterInfoId: selectedVariantId,
+            codeName: selectedVariant.code_name,
+            type: selectedVariant.type,
+            tags: Array.isArray(selectedVariant.tag) ? selectedVariant.tag : [],
+            source: selectedVariantSource,
+            statsRaw: selectedVariant.stats,
+            elementProfileRaw: selectedVariant.element ?? {},
+            curvesRawStatus: selectedVariant.curves === undefined ? "not-present" : "retained-in-raw-source",
+          },
+      skippedVariants: skippedVariantIds.map(variantId => ({
+        monsterInfoId: variantId,
+        status: "audit-only",
+        reason: "non-selected-monster_info-variant",
+        source: sourceRef(anchor, `/monster_info/${variantId}`),
+      })),
+      rawText: {
+        description: {
+          status: typeof raw.desc === "string" && raw.desc.length > 0 ? "retained-audit-only" : "not-present",
+          rawText: raw.desc,
+          source: sourceRef(anchor, "/desc"),
+        },
+        cardSkillDescription: {
+          status: typeof raw.card_skill_desc === "string" && raw.card_skill_desc.length > 0 ? "retained-audit-only" : "not-present",
+          rawText: raw.card_skill_desc,
+          source: sourceRef(anchor, "/card_skill_desc"),
+        },
+        groupDescription: {
+          status: typeof raw.group_desc === "string" && raw.group_desc.length > 0 ? "retained-audit-only" : "not-present",
+          rawText: raw.group_desc,
+          source: sourceRef(anchor, "/group_desc"),
+        },
+        indexDescription: {
+          status: typeof indexEntry.desc === "string" && indexEntry.desc.length > 0 ? "retained-audit-only" : "not-present",
+          rawText: indexEntry.desc,
+          source: sourceRef("data/source/raw/nanoka/zzz/2.8/monster.json", `/${enemyId}/desc`),
+        },
+      },
+      pendingPromotions: {
+        levelDefaults: {
+          status: "not-promoted",
+          reason: "field:enemy-level-formula-required",
+        },
+        resistance: {
+          status: "not-promoted",
+          reason: "field:resistance-unit-mapping-required",
+        },
+        anomalyThresholds: {
+          status: "not-promoted",
+          reason: "field:anomaly-threshold-mapping-required",
+        },
+        dazeRecovery: {
+          status: "not-promoted",
+          reason: "field:daze-recovery-semantic-mapping-required",
+        },
+        specialRules: {
+          status: "not-promoted",
+          reason: "typed-modifier-template-required",
+        },
+      },
+    })
+  }
+
+  const audit = {
+    kind: "nanokaEnemyBatchAudit",
+    schemaVersion: "nanoka-enemy-batch-audit/v0.1",
+    sourceId: "nanoka-zzz",
+    sourceVersion,
+    generatedAt,
+    runtimeCutoverReady: true,
+    indexSource: sourceRef("data/source/raw/nanoka/zzz/2.8/monster.json", "/"),
+    summary: {
+      enemyCount: enemyIds.length,
+      runtimeEnemyCount: Object.keys(enemies).length,
+      selectedVariantCount: auditRows.filter(row => row.selectedVariant.status === "promoted").length,
+      missingSelectedVariantCount: auditRows.filter(row => row.selectedVariant.status === "not-promoted").length,
+      skippedVariantCount: auditRows.reduce((total, row) => total + row.skippedVariants.length, 0),
+      retainedTextRowCount: auditRows.reduce((total, row) => {
+        return total + Object.values(row.rawText).filter((entry: any) => entry.status === "retained-audit-only").length
+      }, 0),
+      enemyIds,
+      rankCounts: countBy(auditRows, row => row.rank),
+      groupCounts: countBy(auditRows, row => String(row.group)),
+      selectedVariantTypeCounts: countBy(auditRows.filter(row => row.selectedVariant.status === "promoted"), row => String(row.selectedVariant.type)),
+    },
+    enemies: auditRows,
+  }
+
+  return { enemies, audit }
+}
+
 function buildArtifact() {
   const characterBatch = buildCharacterRuntimeBatch()
   const yixuan = characterBatch.yixuanProof
   const bangbooBatch = buildBangbooRuntimeBatch()
   const wEngineBatch = buildWEngineRuntimeBatch()
   const driveDiscBatch = buildDriveDiscRuntimeBatch()
+  const enemyBatch = buildEnemyRuntimeBatch()
   const yixuanAnchor = "data/source/raw/nanoka/zzz/2.8/zh/character/1371.json"
   const yixuanSkillSource = sourceRef(yixuanAnchor, "/skill/basic/description/4/param/0/param/1371001")
 
@@ -1044,7 +1275,7 @@ function buildArtifact() {
         sourceVersion,
         fetchedAt: generatedAt,
         parsedAt: generatedAt,
-        parserVersion: "nanoka-runtime-wengine-batch-v0.1.0",
+        parserVersion: "nanoka-runtime-enemy-batch-v0.1.0",
         licenseNote: "Runtime cleaned data uses lo-user-approved nanoka live 2.8 evidence; archived Excel/D-17/D-12 sources are retained for audit only.",
       },
     ],
@@ -1077,7 +1308,7 @@ function buildArtifact() {
     bangbooSkills: bangbooBatch.bangbooSkills,
     wEngines: wEngineBatch.wEngines,
     driveDiscs: driveDiscBatch.driveDiscs,
-    enemies: {},
+    enemies: enemyBatch.enemies,
     resonium: {},
     modifiers: {},
     rules: {
@@ -1142,6 +1373,7 @@ function buildArtifact() {
     bangbooBatchAudit: bangbooBatch.audit,
     wEngineBatchAudit: wEngineBatch.audit,
     driveDiscBatchAudit: driveDiscBatch.audit,
+    enemyBatchAudit: enemyBatch.audit,
   }
 }
 
@@ -1152,6 +1384,7 @@ function assertArtifactFresh(): void {
     bangbooBatchAudit: expectedBangbooBatchAudit,
     wEngineBatchAudit: expectedWEngineBatchAudit,
     driveDiscBatchAudit: expectedDriveDiscBatchAudit,
+    enemyBatchAudit: expectedEnemyBatchAudit,
   } = buildArtifact()
   const actualRoot = readJson<unknown>(rootArtifactPath)
   const actualPackage = readJson<unknown>(packageArtifactPath)
@@ -1163,6 +1396,8 @@ function assertArtifactFresh(): void {
   const actualPackageWEngineBatchAudit = readJson<unknown>(packageWEngineBatchAuditPath)
   const actualRootDriveDiscBatchAudit = readJson<unknown>(rootDriveDiscBatchAuditPath)
   const actualPackageDriveDiscBatchAudit = readJson<unknown>(packageDriveDiscBatchAuditPath)
+  const actualRootEnemyBatchAudit = readJson<unknown>(rootEnemyBatchAuditPath)
+  const actualPackageEnemyBatchAudit = readJson<unknown>(packageEnemyBatchAuditPath)
   if (JSON.stringify(actualRoot) !== JSON.stringify(expected))
     throw new Error("Runtime game data artifact is stale; rerun pnpm --filter @randomplay/data audit:nanoka-runtime")
   if (JSON.stringify(actualPackage) !== JSON.stringify(expected))
@@ -1183,12 +1418,16 @@ function assertArtifactFresh(): void {
     throw new Error("Drive Disc batch audit artifact is stale; rerun pnpm --filter @randomplay/data audit:nanoka-runtime")
   if (JSON.stringify(actualPackageDriveDiscBatchAudit) !== JSON.stringify(expectedDriveDiscBatchAudit))
     throw new Error("Package Drive Disc batch audit mirror is stale; rerun pnpm --filter @randomplay/data audit:nanoka-runtime")
+  if (JSON.stringify(actualRootEnemyBatchAudit) !== JSON.stringify(expectedEnemyBatchAudit))
+    throw new Error("Enemy batch audit artifact is stale; rerun pnpm --filter @randomplay/data audit:nanoka-runtime")
+  if (JSON.stringify(actualPackageEnemyBatchAudit) !== JSON.stringify(expectedEnemyBatchAudit))
+    throw new Error("Package Enemy batch audit mirror is stale; rerun pnpm --filter @randomplay/data audit:nanoka-runtime")
   assertNanokaRuntimeGameDataArtifact(actualRoot)
   assertNanokaRuntimeGameDataArtifact(actualPackage)
 }
 
 function auditCommand(): void {
-  const { artifact, characterBatchAudit, bangbooBatchAudit, wEngineBatchAudit, driveDiscBatchAudit } = buildArtifact()
+  const { artifact, characterBatchAudit, bangbooBatchAudit, wEngineBatchAudit, driveDiscBatchAudit, enemyBatchAudit } = buildArtifact()
   writeJson(rootArtifactPath, artifact)
   writeJson(packageArtifactPath, artifact)
   writeJson(rootCharacterBatchAuditPath, characterBatchAudit)
@@ -1199,6 +1438,8 @@ function auditCommand(): void {
   writeJson(packageWEngineBatchAuditPath, wEngineBatchAudit)
   writeJson(rootDriveDiscBatchAuditPath, driveDiscBatchAudit)
   writeJson(packageDriveDiscBatchAuditPath, driveDiscBatchAudit)
+  writeJson(rootEnemyBatchAuditPath, enemyBatchAudit)
+  writeJson(packageEnemyBatchAuditPath, enemyBatchAudit)
 }
 
 function verifyCommand(): void {
@@ -1222,6 +1463,10 @@ function verifyCommand(): void {
     throw new Error("Missing data/cleaned/audit/nanoka-drive-disc-batch-audit.json; run audit:nanoka-runtime first")
   if (!existsSync(packageDriveDiscBatchAuditPath))
     throw new Error("Missing packages/data/cleaned/audit/nanoka-drive-disc-batch-audit.json; run audit:nanoka-runtime first")
+  if (!existsSync(rootEnemyBatchAuditPath))
+    throw new Error("Missing data/cleaned/audit/nanoka-enemy-batch-audit.json; run audit:nanoka-runtime first")
+  if (!existsSync(packageEnemyBatchAuditPath))
+    throw new Error("Missing packages/data/cleaned/audit/nanoka-enemy-batch-audit.json; run audit:nanoka-runtime first")
   assertArtifactFresh()
 }
 

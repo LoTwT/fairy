@@ -1,6 +1,6 @@
 {
   "schemaVersion": "source-manifest-v1",
-  "generatedAt": "2026-05-16T00:40:00+08:00",
+  "generatedAt": "2026-05-16T01:05:00+08:00",
   "distributionPolicy": {
     "rawSourceArchive": "versioned-in-git-not-packaged",
     "publishedArtifacts": "cleaned-json-and-types-only"
@@ -59,12 +59,12 @@
       "id": "nanoka-zzz-2.8",
       "kind": "rawHttpSnapshot",
       "path": "data/source/raw/nanoka/zzz/2.8/fetch-manifest.json",
-      "sha256": "6923d91d5c1c36c98daccf9ab44492b9522b5fadc35dbaf3b4cf456c7df3935b",
-      "bytes": 177825,
-      "fetchedAt": "2026-05-16T00:40:00+08:00",
+      "sha256": "55571ec544ff0bbb994621d08d8b2ebbcea090109708c53b9bbd01202f6a7558",
+      "bytes": 382933,
+      "fetchedAt": "2026-05-16T01:05:00+08:00",
       "providedBy": "static.nanoka.cc public JSON",
       "distribution": "raw-retained-not-packaged",
-      "usage": "Nanoka live 2.8 raw snapshot fixture for Phase 2 source-gate, adapter-skeleton, Phase 3 first-sync candidate coverage, Phase 4 runtime cutover, V1.2.1 Bangboo batch import, V1.2.x character batch import, V1.2.x W-Engine batch import, V1.2.x Drive Disc set batch import, and enemy variant mapping tests"
+      "usage": "Nanoka live 2.8 raw snapshot fixture for Phase 2 source-gate, adapter-skeleton, Phase 3 first-sync candidate coverage, Phase 4 runtime cutover, V1.2.1 Bangboo batch import, V1.2.x character batch import, V1.2.x W-Engine batch import, V1.2.x Drive Disc set batch import, V1.2.x enemy batch import, and enemy variant mapping tests"
     }
   ]
 }

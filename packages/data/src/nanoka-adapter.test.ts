@@ -55,11 +55,9 @@ describe("nanoka raw snapshot adapter skeleton", () => {
 
   it("keeps the source registry hash aligned with the retained live manifest", () => {
     const registry = readJson<{ sources: Array<{ sourceId: string, contentHash: string }> }>("data/source-registry.json")
-    const snapshot = readJson<NanokaRawSnapshotManifest>(snapshotManifestPath)
     const registrySource = registry.sources.find(source => source.sourceId === "nanoka-zzz")
-    const retainedManifest = snapshot.assets.find(asset => asset.id === "manifest")
 
-    expect(registrySource?.contentHash).toBe(`sha256:${retainedManifest?.sha256}`)
+    expect(registrySource?.contentHash).toBe(`sha256:${sha256(snapshotManifestPath)}`)
   })
 
   it("documents nanoka as ready for adapter work without marking formal rows ready", () => {
@@ -281,8 +279,8 @@ describe("nanoka raw snapshot adapter skeleton", () => {
         ...manifest.assets,
         {
           ...manifest.assets.find(asset => asset.id === "boss-index")!,
-          id: "unapproved-monster-index",
-          url: "https://static.nanoka.cc/zzz/2.8/monster.json",
+          id: "unapproved-item-index",
+          url: "https://static.nanoka.cc/zzz/2.8/item.json",
         },
       ],
     }

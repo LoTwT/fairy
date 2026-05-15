@@ -26,6 +26,8 @@ const rootWEngineBatchAuditPath = join(repoRoot, "data/cleaned/audit/nanoka-weng
 const packageWEngineBatchAuditPath = join(packageDir, "cleaned/audit/nanoka-wengine-batch-audit.json")
 const rootDriveDiscBatchAuditPath = join(repoRoot, "data/cleaned/audit/nanoka-drive-disc-batch-audit.json")
 const packageDriveDiscBatchAuditPath = join(packageDir, "cleaned/audit/nanoka-drive-disc-batch-audit.json")
+const rootEnemyBatchAuditPath = join(repoRoot, "data/cleaned/audit/nanoka-enemy-batch-audit.json")
+const packageEnemyBatchAuditPath = join(packageDir, "cleaned/audit/nanoka-enemy-batch-audit.json")
 
 const archivedRuntimeSourceIds = new Set([
   "lo-user-excel",
@@ -133,6 +135,7 @@ function validateNanokaRegistry(source) {
   assert(indexPattern.test(`https://static.nanoka.cc/zzz/${source.configuredLiveVersion}/bangboo.json`), "nanoka allowlist must accept versioned Bangboo index")
   assert(indexPattern.test(`https://static.nanoka.cc/zzz/${source.configuredLiveVersion}/weapon.json`), "nanoka allowlist must accept versioned W-Engine index")
   assert(indexPattern.test(`https://static.nanoka.cc/zzz/${source.configuredLiveVersion}/equipment.json`), "nanoka allowlist must accept versioned Drive Disc index")
+  assert(indexPattern.test(`https://static.nanoka.cc/zzz/${source.configuredLiveVersion}/monster.json`), "nanoka allowlist must accept versioned monster index")
   for (const forbiddenIndex of ["beta", "preview", "leak", "datamine"]) {
     assert(
       !indexPattern.test(`https://static.nanoka.cc/zzz/${source.configuredLiveVersion}/${forbiddenIndex}.json`),
@@ -416,37 +419,46 @@ function validateMatrixAgainstRegistry(matrix, registry) {
   assert(daRow.sampleEntity === "nanoka-boss-live-69036", "deadlyAssault.periodsBossesBuffs: DA row must use live period detail evidence")
   assert(!daRow.blockedBy?.includes("field:runtime-cutover-drift-required"), "deadlyAssault.periodsBossesBuffs: DA runtime cutover blocker must be cleared after Phase 3/4")
 
+  const enemyIndexSample = sampleById.get("nanoka-monster-index-live-2.8")
+  assert(enemyIndexSample !== undefined, "enemy batch: missing approved-live monster index sample")
+  assert(enemyIndexSample.approvedForCleanedOutput === true, "enemy batch index must be approved live evidence")
+  assert(enemyIndexSample.version === nanoka.configuredLiveVersion, "enemy batch index must use configuredLiveVersion")
+  const liveEnemySamples = [...sampleById.values()].filter(sample => sample.entityType === "enemy" && sample.version === nanoka.configuredLiveVersion)
+  assert(liveEnemySamples.length === 269, `enemy batch must retain 269 approved-live detail samples, got ${liveEnemySamples.length}`)
+  const enemyIdentityRow = resourceRows.get("enemies.identity")
+  assert(enemyIdentityRow !== undefined, "enemies.identity: missing enemy identity row")
+  assert(enemyIdentityRow.sampleEntity === "nanoka-monster-index-live-2.8", "enemies.identity: V1.2.x batch row must use the approved-live monster index sample")
+  assert(enemyIdentityRow.promotable === true, "enemies.identity: runtime identity row must be promotable after PR-D")
+  assert((enemyIdentityRow.blockedBy ?? []).length === 0, "enemies.identity: full enemy catalog blocker must be cleared after PR-D")
+  assert(enemyIdentityRow.auditArtifact === "data/cleaned/audit/nanoka-enemy-batch-audit.json", "enemies.identity must point to the enemy batch audit")
+  assert((enemyIdentityRow.supportingSampleEntities ?? []).length === 269, "enemies.identity row must support all 269 enemies")
+
   const enemyVariantRow = resourceRows.get("enemies.variantMapping")
   assert(enemyVariantRow !== undefined, "enemies.variantMapping: missing enemy variant mapping row")
   assert(enemyVariantRow.status === "verified-from-nanoka", "enemies.variantMapping: row must be verified after live monster_info mapping")
   assert(enemyVariantRow.promotable === true, "enemies.variantMapping: structured source artifact must be promotable after live mapping gate")
-  assert(enemyVariantRow.sampleEntity === "nanoka-monster-dullahan-live-30000", "enemies.variantMapping: row must use live Dullahan sample evidence")
+  assert(enemyVariantRow.sampleEntity === "nanoka-monster-index-live-2.8", "enemies.variantMapping: row must use live monster index evidence after PR-D")
+  assert(enemyVariantRow.auditArtifact === "data/cleaned/audit/nanoka-enemy-batch-audit.json", "enemies.variantMapping must point to the enemy batch audit")
+  assert((enemyVariantRow.supportingSampleEntities ?? []).length === 269, "enemies.variantMapping row must support all 269 enemies")
   assert(!enemyVariantRow.blockedBy?.includes("field:runtime-cutover-drift-required"), "enemies.variantMapping: runtime cutover blocker must be cleared after Phase 3/4")
   for (const rawPath of [
-    "/id",
-    "/name",
     "/monster_id",
     "/monster_info/{monster_id}",
+    "/monster_info/{monster_id}/id",
     "/monster_info/{monster_id}/code_name",
     "/monster_info/{monster_id}/tag",
+    "/monster_info/{monster_id}/type",
     "/monster_info/{monster_id}/stats",
+    "/monster_info/*",
   ]) {
     assert(enemyVariantRow.rawFieldPaths?.includes(rawPath), `enemies.variantMapping: missing raw path ${rawPath}`)
   }
-  for (const sampleId of [
-    "nanoka-monster-dullahan-live-30000",
-    "nanoka-monster-greta-live-30004",
-    "nanoka-monster-ruthless-fiend-live-200141",
-    "nanoka-monster-notorious-hati-live-200014",
-    "nanoka-monster-notorious-armored-hati-live-200034",
-    "nanoka-monster-miasma-priest-live-30033",
-    "nanoka-monster-notorious-pompey-live-300211",
-  ]) {
-    const sample = sampleById.get(sampleId)
-    assert(sample !== undefined, `enemies.variantMapping: missing supporting live sample ${sampleId}`)
-    assert(sample.approvedForCleanedOutput === true, `${sampleId}: enemy supporting sample must be approved live evidence`)
-    assert(sample.version === nanoka.configuredLiveVersion, `${sampleId}: enemy supporting sample must use configuredLiveVersion`)
-    assert(enemyVariantRow.supportingSampleEntities?.includes(sampleId), `enemies.variantMapping: supporting samples must include ${sampleId}`)
+  for (const fieldId of ["enemies.levelDefaults", "enemies.resistance", "enemies.anomalyThresholds", "enemies.dazeRecovery", "enemies.specialRules"]) {
+    const row = resourceRows.get(fieldId)
+    assert(row !== undefined, `${fieldId}: missing enemy field row`)
+    assert(row.sampleEntity === "nanoka-monster-index-live-2.8", `${fieldId}: row must use the approved-live monster index sample after PR-D`)
+    assert(row.auditArtifact === "data/cleaned/audit/nanoka-enemy-batch-audit.json", `${fieldId}: row must point to the enemy batch audit`)
+    assert((row.supportingSampleEntities ?? []).length === 269, `${fieldId}: row must support all 269 enemies`)
   }
 
   const snapshotDiffRow = resourceRows.get("metadata.snapshotDiffHistory")
@@ -510,6 +522,7 @@ function validateRuntimeGameData(registry) {
   assert(Object.keys(data.wEngines ?? {}).length === 89, "runtime GameData must include the full approved-live W-Engine batch")
   assert(Object.keys(data.bangboos ?? {}).length === 39, "runtime GameData must include the full approved-live Bangboo batch")
   assert(Object.keys(data.bangbooSkills ?? {}).length === 63, "runtime GameData Bangboo skill count drifted")
+  assert(Object.keys(data.enemies ?? {}).length === 269, "runtime GameData must include the full approved-live enemy batch")
 
   for (const ref of collectSourceRefs(data)) {
     assert(!archivedRuntimeSourceIds.has(ref.sourceId), `runtime GameData must not reference archived source ${ref.sourceId}`)
@@ -661,6 +674,51 @@ function validateDriveDiscBatchAudit(registry) {
       assert(effect.source?.dataPath === (piece === "twoPiece" ? "/desc2" : "/desc4"), `${row.id}: Drive Disc ${piece} source dataPath drifted`)
     }
     assert(row.slotAndSubstatTables?.status === "out-of-scope", `${row.id}: Drive Disc slot/stat boundary must remain out-of-scope`)
+  }
+}
+
+function validateEnemyBatchAudit(registry) {
+  const { rootText } = readMirroredText(
+    rootEnemyBatchAuditPath,
+    packageEnemyBatchAuditPath,
+    "packages/data/cleaned/audit/nanoka-enemy-batch-audit.json",
+  )
+
+  const nanoka = sourceById(registry, "nanoka-zzz")
+  const audit = JSON.parse(rootText)
+  assert(audit.kind === "nanokaEnemyBatchAudit", "Enemy batch audit kind drifted")
+  assert(audit.schemaVersion === "nanoka-enemy-batch-audit/v0.1", "Enemy batch audit schemaVersion drifted")
+  assert(audit.sourceId === "nanoka-zzz", "Enemy batch audit sourceId drifted")
+  assert(audit.sourceVersion === nanoka.configuredLiveVersion, "Enemy batch audit must use configured live version")
+  assert(audit.runtimeCutoverReady === true, "Enemy batch audit must reflect runtime cutover state")
+  assert(audit.indexSource?.sourceId === "nanoka-zzz", "Enemy batch audit index source must be nanoka")
+  assert(audit.indexSource?.sourceVersion === nanoka.configuredLiveVersion, "Enemy batch audit index source must use configured live version")
+  assert(audit.indexSource?.sourceAnchor === "data/source/raw/nanoka/zzz/2.8/monster.json", "Enemy batch audit index source anchor drifted")
+  assert(audit.summary?.enemyCount === 269, "Enemy batch audit count drifted")
+  assert(audit.summary?.runtimeEnemyCount === 269, "Enemy batch runtime count drifted")
+  assert(audit.summary?.selectedVariantCount === 201, "Enemy selected variant count drifted")
+  assert(audit.summary?.missingSelectedVariantCount === 68, "Enemy missing selected variant count drifted")
+  assert(audit.summary?.skippedVariantCount === 372, "Enemy skipped variant count drifted")
+  assert(Array.isArray(audit.enemies) && audit.enemies.length === 269, "Enemy batch audit rows must cover 269 enemies")
+  for (const row of audit.enemies) {
+    assert(row.source?.sourceId === "nanoka-zzz", `${row.id}: Enemy audit source must be nanoka`)
+    assert(row.source?.sourceVersion === nanoka.configuredLiveVersion, `${row.id}: Enemy audit source version drifted`)
+    assert(row.source?.sourceAnchor === `data/source/raw/nanoka/zzz/2.8/zh/monster/${row.id}.json`, `${row.id}: Enemy audit source anchor drifted`)
+    assert(row.rankMapping?.status === "promoted", `${row.id}: Enemy rank mapping must be promoted from nanoka rarity`)
+    assert(row.rankMapping?.source?.sourceAnchor === "data/source/raw/nanoka/zzz/2.8/monster.json", `${row.id}: Enemy rank source anchor drifted`)
+    assert(row.selectedVariant?.status === "promoted" || row.selectedVariant?.status === "not-promoted", `${row.id}: Enemy selected variant status drifted`)
+    if (row.selectedVariant?.status === "promoted") {
+      assert(typeof row.selectedVariant.monsterInfoId === "number", `${row.id}: Enemy selected variant id must be numeric`)
+      assert(typeof row.selectedVariant.codeName === "string" && row.selectedVariant.codeName.length > 0, `${row.id}: Enemy selected codeName must be retained`)
+      assert(row.selectedVariant.source?.sourceAnchor === `data/source/raw/nanoka/zzz/2.8/zh/monster/${row.id}.json`, `${row.id}: Enemy selected variant source anchor drifted`)
+      assert(row.selectedVariant.statsRaw !== undefined, `${row.id}: Enemy selected raw stats must be retained`)
+    }
+    else {
+      assert(row.selectedVariant?.reason === "missing-selected-monster_info-variant", `${row.id}: Enemy missing selected variant reason drifted`)
+    }
+    for (const fieldId of ["levelDefaults", "resistance", "anomalyThresholds", "dazeRecovery", "specialRules"]) {
+      assert(row.pendingPromotions?.[fieldId]?.status === "not-promoted", `${row.id}: ${fieldId} must remain not-promoted`)
+    }
   }
 }
 
@@ -829,6 +887,7 @@ function validateCoveredSourceRefs(registry) {
     "data/cleaned/audit/nanoka-bangboo-batch-audit.json",
     "data/cleaned/audit/nanoka-wengine-batch-audit.json",
     "data/cleaned/audit/nanoka-drive-disc-batch-audit.json",
+    "data/cleaned/audit/nanoka-enemy-batch-audit.json",
     "data/cleaned/audit/source-migration-field-diff.json",
     "data/cleaned/golden/v1-replay-report.json",
     "data/cleaned/runtime/game-data.json",
@@ -861,6 +920,7 @@ function main() {
   validateCharacterBatchAudit(registry)
   validateWEngineBatchAudit(registry)
   validateDriveDiscBatchAudit(registry)
+  validateEnemyBatchAudit(registry)
   validateBangbooBatchAudit(registry)
   validateCoveredSourceRefs(registry)
 

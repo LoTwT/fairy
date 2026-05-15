@@ -42,6 +42,8 @@ describe("nanoka runtime game data cutover", () => {
     expect(Object.keys(data.wEngines)).toEqual(expect.arrayContaining(["12001", "13001", "14137", "14154"]))
     expect(Object.keys(data.driveDiscs)).toHaveLength(26)
     expect(Object.keys(data.driveDiscs)).toEqual(expect.arrayContaining(["31000", "31100", "33800"]))
+    expect(Object.keys(data.enemies)).toHaveLength(269)
+    expect(Object.keys(data.enemies)).toEqual(expect.arrayContaining(["10000", "10013", "30000", "990174"]))
     expect(Object.keys(data.bangboos)).toHaveLength(39)
     expect(Object.keys(data.bangbooSkills)).toHaveLength(63)
     expect(Object.keys(data.bangboos)).toEqual(expect.arrayContaining(["53001", "53002", "54001", "54008", "54020"]))
@@ -81,6 +83,26 @@ describe("nanoka runtime game data cutover", () => {
         sourceAnchor: "data/source/raw/nanoka/zzz/2.8/zh/equipment/31000.json",
       },
     })
+    expect(data.enemies["30000"]).toMatchObject({
+      label: { zh: "杜拉罕", en: "Dullahan" },
+      rank: "elite",
+      source: {
+        sourceId: "nanoka-zzz",
+        sourceVersion: "2.8",
+        sourceAnchor: "data/source/raw/nanoka/zzz/2.8/zh/monster/30000.json",
+      },
+    })
+    expect(data.enemies["10013"]).toMatchObject({
+      label: { zh: "OfficialName_", en: "OfficialName_" },
+      rank: "normal",
+      source: {
+        sourceId: "nanoka-zzz",
+        sourceVersion: "2.8",
+        sourceAnchor: "data/source/raw/nanoka/zzz/2.8/zh/monster/10013.json",
+      },
+    })
+    expect(data.enemies["30000"]?.resistance).toBeUndefined()
+    expect(data.enemies["30000"]?.specialRules).toBeUndefined()
     expect(data.bangboos["54008"]?.baseStatsByLevel?.["60"]).toMatchObject({
       maxHp: 4210.2983,
       attack: 8057.0996,
@@ -276,5 +298,120 @@ describe("nanoka runtime game data cutover", () => {
     })
     expect(woodpecker?.setEffects.fourPiece.rawText).toContain("攻击力提升9%")
     expect(woodpecker?.slotAndSubstatTables.status).toBe("out-of-scope")
+  })
+
+  it("records the full approved-live enemy batch audit without promoting unresolved combat semantics", () => {
+    const audit = readJson<{
+      summary: {
+        enemyCount: number
+        runtimeEnemyCount: number
+        selectedVariantCount: number
+        missingSelectedVariantCount: number
+        skippedVariantCount: number
+        retainedTextRowCount: number
+        rankCounts: Record<string, number>
+      }
+      enemies: Array<{
+        id: string
+        rank: string
+        selectedVariant: {
+          status: string
+          reason?: string
+          monsterInfoId?: number
+          codeName?: string
+          source?: {
+            sourceId: string
+            sourceVersion: string
+            sourceAnchor: string
+            dataPath: string
+          }
+          statsRaw?: {
+            hp?: number
+            stun?: number
+            ice_damage_res?: number
+            ether_damage_res?: number
+          }
+        }
+        skippedVariants: Array<{
+          status: string
+          reason: string
+        }>
+        pendingPromotions: Record<string, { status: string, reason: string }>
+      }>
+    }>(join(repoRoot, "data/cleaned/audit/nanoka-enemy-batch-audit.json"))
+
+    expect(audit.summary).toMatchObject({
+      enemyCount: 269,
+      runtimeEnemyCount: 269,
+      selectedVariantCount: 201,
+      missingSelectedVariantCount: 68,
+      skippedVariantCount: 372,
+      retainedTextRowCount: 1076,
+    })
+    expect(audit.summary.rankCounts).toMatchObject({
+      boss: 22,
+      elite: 77,
+      normal: 105,
+      special: 65,
+    })
+
+    const dullahan = audit.enemies.find(row => row.id === "30000")
+    expect(dullahan).toMatchObject({
+      rank: "elite",
+      selectedVariant: {
+        status: "promoted",
+        monsterInfoId: 11154,
+        codeName: "Monster_DurahanGrey",
+        source: {
+          sourceId: "nanoka-zzz",
+          sourceVersion: "2.8",
+          sourceAnchor: "data/source/raw/nanoka/zzz/2.8/zh/monster/30000.json",
+          dataPath: "/monster_info/11154",
+        },
+      },
+    })
+    expect(dullahan?.selectedVariant.statsRaw).toMatchObject({
+      hp: 7097,
+      stun: 3502,
+      ice_damage_res: -2000,
+      ether_damage_res: -2000,
+    })
+    expect(dullahan?.skippedVariants).toHaveLength(4)
+    expect(dullahan?.skippedVariants[0]).toMatchObject({
+      status: "audit-only",
+      reason: "non-selected-monster_info-variant",
+    })
+
+    const missingSelected = audit.enemies.find(row => row.id === "10013")
+    expect(missingSelected?.selectedVariant).toMatchObject({
+      status: "not-promoted",
+      reason: "missing-selected-monster_info-variant",
+      monsterInfoId: 0,
+    })
+
+    for (const row of [dullahan, missingSelected]) {
+      expect(row?.pendingPromotions).toMatchObject({
+        levelDefaults: {
+          status: "not-promoted",
+          reason: "field:enemy-level-formula-required",
+        },
+        resistance: {
+          status: "not-promoted",
+          reason: "field:resistance-unit-mapping-required",
+        },
+        anomalyThresholds: {
+          status: "not-promoted",
+          reason: "field:anomaly-threshold-mapping-required",
+        },
+        dazeRecovery: {
+          status: "not-promoted",
+          reason: "field:daze-recovery-semantic-mapping-required",
+        },
+        specialRules: {
+          status: "not-promoted",
+          reason: "typed-modifier-template-required",
+        },
+      })
+    }
   })
 })

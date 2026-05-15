@@ -59,6 +59,7 @@ export const dataSourceDescriptors = [
       "V1.2.x approved-live character batch index and details",
       "V1.2.x approved-live W-Engine batch index and details",
       "V1.2.x approved-live Drive Disc set index and details",
+      "V1.2.x approved-live enemy index and details",
       "approved-live snapshot diff inputs",
     ],
     sourceVersionStrategy:
@@ -70,6 +71,7 @@ export const dataSourceDescriptors = [
       "data/source/raw/nanoka/zzz/2.8/character.json",
       "data/source/raw/nanoka/zzz/2.8/weapon.json",
       "data/source/raw/nanoka/zzz/2.8/equipment.json",
+      "data/source/raw/nanoka/zzz/2.8/monster.json",
       "data/source/raw/nanoka/zzz/2.8/zh/character/1021.json",
       "data/source/raw/nanoka/zzz/2.8/zh/character/1371.json",
       "data/source/raw/nanoka/zzz/2.8/zh/character/1031.json",
@@ -104,6 +106,7 @@ export const dataSourceDescriptors = [
         "Phase 2 raw snapshot retention is for source-gate and adapter-skeleton verification only; runtime cutover waits for normalization, semantic mapping, and QA drift audit.",
         "V1.2.x PR-B promotes W-Engine identity and numeric level-60 attack/substat values; W-Engine passive talents remain typed-template pending.",
         "V1.2.x PR-C promotes Drive Disc set identity while retaining desc2/desc4 text in audit; typed set-effect modifiers remain template pending.",
+        "V1.2.x PR-D promotes enemy identity/rank for all current-live monster index records while retaining selected/skipped monster_info variants and combat semantics in audit.",
       ],
     },
   },

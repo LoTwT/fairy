@@ -3,7 +3,7 @@
   "schemaVersion": "nanoka-full-data-batch-discovery/v0.1",
   "sourceId": "nanoka-zzz",
   "configuredLiveVersion": "2.8",
-  "generatedAt": "2026-05-15T23:17:00+08:00",
+  "generatedAt": "2026-05-16T01:05:00+08:00",
   "runtimeCutoverReady": true,
   "decisionContext": {
     "task": "task #179",
@@ -109,12 +109,12 @@
       "currentLiveIndexCount": 269,
       "currentLiveDetailAccessibleCount": 269,
       "currentLiveMonsterInfoVariantCount": 573,
-      "retainedRawDetailCount": 7,
-      "runtimeRecordCount": 0,
-      "missingRawDetailCount": 262,
-      "missingRuntimeRecordCount": 269,
+      "retainedRawDetailCount": 269,
+      "runtimeRecordCount": 269,
+      "missingRawDetailCount": 0,
+      "missingRuntimeRecordCount": 0,
       "targetRuntimeBucket": "GameData.enemies",
-      "schemaFit": "existing-bucket-with-variant-selection-risk",
+      "schemaFit": "existing-bucket-batch-complete-pr-d",
       "promotableCurrentFields": [
         "identity",
         "rank",
@@ -123,10 +123,12 @@
         "element/resistance profile"
       ],
       "implementationNotes": [
-        "Each monster detail can contain multiple monster_info variants; current batch should retain all current-live details and explicitly document selection rules.",
-        "Runtime import should start from the detail.monster_id selected variant, with audit rows for skipped variants."
+        "All 269 current-live monster details are retained; runtime promotes identity/source/rank for every index record.",
+        "201 details have a selected detail.monster_id -> monster_info[monster_id] variant; 68 rows without a selected variant are marked missing-selected-monster_info-variant in audit.",
+        "Selected monster_info stats, element profile, raw text, and 372 skipped variants are retained in audit-only data until formula/unit semantics are promoted."
       ],
-      "recommendedPr": "PR-D enemies batch"
+      "recommendedPr": "PR-D enemies batch complete",
+      "implementationStatus": "complete-pr-d"
     },
     {
       "domain": "deadlyAssaultCurrent",

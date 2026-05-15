@@ -2,7 +2,7 @@
   "kind": "gameData",
   "schemaVersion": "cleaned-game-data-artifact/v0.1",
   "dataVersion": "fairy-v0.1.0-nanoka-runtime",
-  "generatedAt": "2026-05-16T00:40:00+08:00",
+  "generatedAt": "2026-05-16T01:05:00+08:00",
   "sourceManifestPath": "data/source/source-manifest.json",
   "runtimeCutoverReady": true,
   "runtimeSourcePolicy": {
@@ -22,7 +22,7 @@
     "gameVersion": "ZZZ-2.8",
     "dataVersion": "0.1.0",
     "sourceVersion": "nanoka-zzz@2.8",
-    "generatedAt": "2026-05-16T00:40:00+08:00",
+    "generatedAt": "2026-05-16T01:05:00+08:00",
     "sources": [
       {
         "id": "nanoka-zzz",
@@ -30,9 +30,9 @@
         "url": "https://static.nanoka.cc/manifest.json",
         "gameVersion": "ZZZ-2.8",
         "sourceVersion": "2.8",
-        "fetchedAt": "2026-05-16T00:40:00+08:00",
-        "parsedAt": "2026-05-16T00:40:00+08:00",
-        "parserVersion": "nanoka-runtime-wengine-batch-v0.1.0",
+        "fetchedAt": "2026-05-16T01:05:00+08:00",
+        "parsedAt": "2026-05-16T01:05:00+08:00",
+        "parserVersion": "nanoka-runtime-enemy-batch-v0.1.0",
         "licenseNote": "Runtime cleaned data uses lo-user-approved nanoka live 2.8 evidence; archived Excel/D-17/D-12 sources are retained for audit only."
       }
     ],
@@ -8245,7 +8245,5746 @@
         ]
       }
     },
-    "enemies": {},
+    "enemies": {
+      "10000": {
+        "id": "10000",
+        "label": {
+          "zh": "提尔锋",
+          "en": "Tyrfing"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/10000.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "提尔锋",
+          "Tyrfing",
+          "ティルヴィング",
+          "티르빙",
+          "Monster_ClaymoreGrey",
+          "11096"
+        ]
+      },
+      "10001": {
+        "id": "10001",
+        "label": {
+          "zh": "阿佩卡",
+          "en": "Alpeca"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/10001.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "阿佩卡",
+          "Alpeca",
+          "アルペカ",
+          "알페카",
+          "Monster_CyclopsGrey",
+          "11103"
+        ]
+      },
+      "10002": {
+        "id": "10002",
+        "label": {
+          "zh": "萨提尔",
+          "en": "Faun"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/10002.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "萨提尔",
+          "Faun",
+          "サテュロス",
+          "파우누스",
+          "Monster_Satyrus",
+          "11141"
+        ]
+      },
+      "10003": {
+        "id": "10003",
+        "label": {
+          "zh": "霍普利泰",
+          "en": "Hoplitai"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/10003.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "霍普利泰",
+          "Hoplitai",
+          "ホプリタイ",
+          "호플리타이",
+          "Monster_GolemGrey",
+          "11203"
+        ]
+      },
+      "10004": {
+        "id": "10004",
+        "label": {
+          "zh": "雷蛛",
+          "en": "Blastcrawler"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/10004.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "雷蛛",
+          "Blastcrawler",
+          "ブラストスパイダー",
+          "블라스트크롤러",
+          "Monster_SpiderGrey",
+          "11083"
+        ]
+      },
+      "10005": {
+        "id": "10005",
+        "label": {
+          "zh": "掠袭猎兵",
+          "en": "Strike Jaeger"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/10005.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "掠袭猎兵",
+          "Strike Jaeger",
+          "突撃猟兵",
+          "강습 엽병",
+          "Monster_StrikeJaegerCam",
+          "11163"
+        ]
+      },
+      "10006": {
+        "id": "10006",
+        "label": {
+          "zh": "轻装猎兵",
+          "en": "Light Jaeger"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/10006.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "轻装猎兵",
+          "Light Jaeger",
+          "軽装猟兵",
+          "경무장 엽병",
+          "Monster_LightJaegerCam",
+          "11253"
+        ]
+      },
+      "10007": {
+        "id": "10007",
+        "label": {
+          "zh": "新晋猎兵",
+          "en": "Rookie Jaeger"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/10007.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "新晋猎兵",
+          "Rookie Jaeger",
+          "新米猟兵",
+          "신입 엽병",
+          "Monster_MeleeJaegerCam",
+          "11273"
+        ]
+      },
+      "10008": {
+        "id": "10008",
+        "label": {
+          "zh": "戍卫猎兵",
+          "en": "Guard Jaeger"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/10008.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "戍卫猎兵",
+          "Guard Jaeger",
+          "守備猟兵",
+          "수비대 엽병",
+          "Monster_HeavyJaegerCam",
+          "11283"
+        ]
+      },
+      "10009": {
+        "id": "10009",
+        "label": {
+          "zh": "掷弹猎兵",
+          "en": "Grenadier Jaegers"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/10009.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "掷弹猎兵",
+          "Grenadier Jaegers",
+          "擲弾猟兵",
+          "투척 엽병",
+          "Monster_GrenadierJaegerCam",
+          "11763"
+        ]
+      },
+      "10010": {
+        "id": "10010",
+        "label": {
+          "zh": "未知单位",
+          "en": "Unknown Unit"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/10010.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "未知单位",
+          "Unknown Unit",
+          "未知のユニット",
+          "미지의 유닛",
+          "Monster_HeavySoldier",
+          "11031"
+        ]
+      },
+      "10011": {
+        "id": "10011",
+        "label": {
+          "zh": "未知单位",
+          "en": "Unknown Unit"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/10011.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "未知单位",
+          "Unknown Unit",
+          "未知のユニット",
+          "미지의 유닛",
+          "Monster_MeleeSoldier",
+          "11011"
+        ]
+      },
+      "10012": {
+        "id": "10012",
+        "label": {
+          "zh": "未知单位",
+          "en": "Unknown Unit"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/10012.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "未知单位",
+          "Unknown Unit",
+          "未知のユニット",
+          "미지의 유닛",
+          "Monster_RangeSoldier",
+          "11021"
+        ]
+      },
+      "10013": {
+        "id": "10013",
+        "label": {
+          "zh": "OfficialName_",
+          "en": "OfficialName_"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/10013.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "OfficialName_",
+          "0"
+        ]
+      },
+      "10014": {
+        "id": "10014",
+        "label": {
+          "zh": "曼德拉",
+          "en": "Mandrake"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/10014.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "曼德拉",
+          "Mandrake",
+          "マンドレイク",
+          "맨드레이크",
+          "Monster_Mandrake",
+          "11291"
+        ]
+      },
+      "10015": {
+        "id": "10015",
+        "label": {
+          "zh": "掠夺者",
+          "en": "Raider"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/10015.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "掠夺者",
+          "Raider",
+          "略奪者",
+          "약탈꾼",
+          "Monster_ThugRaiderVest",
+          "11343"
+        ]
+      },
+      "10016": {
+        "id": "10016",
+        "label": {
+          "zh": "纵火犯",
+          "en": "Pyromaniac"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/10016.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "纵火犯",
+          "Pyromaniac",
+          "放火魔",
+          "방화범",
+          "Monster_ThugPyromaniacVest",
+          "11333"
+        ]
+      },
+      "10017": {
+        "id": "10017",
+        "label": {
+          "zh": "秽蚀·雷蛛",
+          "en": "Miasmic - Blastcrawler"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/10017.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "秽蚀·雷蛛",
+          "Miasmic - Blastcrawler",
+          "ミアズミック・ブラストスパイダー",
+          "미아즈믹·블라스트크롤러",
+          "Monster_MiasmaSpider",
+          "31391"
+        ]
+      },
+      "10018": {
+        "id": "10018",
+        "label": {
+          "zh": "偷猎者",
+          "en": "Poacher"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/10018.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "偷猎者",
+          "Poacher",
+          "密猟者",
+          "밀렵꾼",
+          "Monster_ThugPoacherVest",
+          "11323"
+        ]
+      },
+      "10019": {
+        "id": "10019",
+        "label": {
+          "zh": "袭击者",
+          "en": "Assaulter"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/10019.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "袭击者",
+          "Assaulter",
+          "襲撃者",
+          "폭행범",
+          "Monster_ThugAssaulterVest",
+          "11313"
+        ]
+      },
+      "10020": {
+        "id": "10020",
+        "label": {
+          "zh": "OfficialName_",
+          "en": "OfficialName_"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/10020.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "OfficialName_",
+          "0"
+        ]
+      },
+      "10021": {
+        "id": "10021",
+        "label": {
+          "zh": "渡鸦无人机",
+          "en": "Raven UAV"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/10021.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "渡鸦无人机",
+          "Raven UAV",
+          "レイヴンドローン",
+          "레이븐 드론",
+          "0"
+        ]
+      },
+      "10023": {
+        "id": "10023",
+        "label": {
+          "zh": "黄金邦布",
+          "en": "Golden Bangboo"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/10023.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "黄金邦布",
+          "Golden Bangboo",
+          "ゴールドボンプ",
+          "황금 「Bangboo」",
+          "Monster_GoldenBomb",
+          "11241"
+        ]
+      },
+      "10025": {
+        "id": "10025",
+        "label": {
+          "zh": "恶灵",
+          "en": "Ahriman"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/10025.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "恶灵",
+          "Ahriman",
+          "アフリマン",
+          "악령",
+          "Monster_Ahriman",
+          "11461"
+        ]
+      },
+      "10026": {
+        "id": "10026",
+        "label": {
+          "zh": "游魂",
+          "en": "Specter"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/10026.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "游魂",
+          "Specter",
+          "スペクター",
+          "망령",
+          "Monster_Specter",
+          "11471"
+        ]
+      },
+      "10027": {
+        "id": "10027",
+        "label": {
+          "zh": "OfficialName_",
+          "en": "OfficialName_"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/10027.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "OfficialName_",
+          "0"
+        ]
+      },
+      "10028": {
+        "id": "10028",
+        "label": {
+          "zh": "OfficialName_",
+          "en": "OfficialName_"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/10028.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "OfficialName_",
+          "0"
+        ]
+      },
+      "10029": {
+        "id": "10029",
+        "label": {
+          "zh": "眼魔引擎",
+          "en": "Beholder Engine"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/10029.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "眼魔引擎",
+          "Beholder Engine",
+          "エンジンビホルダー",
+          "비홀더 엔진",
+          "Monster_BeholderEngine",
+          "11371"
+        ]
+      },
+      "10030": {
+        "id": "10030",
+        "label": {
+          "zh": "弗瑟尔",
+          "en": "Fossor"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/10030.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "弗瑟尔",
+          "Fossor",
+          "フォッソル",
+          "포소르",
+          "Monster_Fossor",
+          "11681"
+        ]
+      },
+      "10031": {
+        "id": "10031",
+        "label": {
+          "zh": "索迪代斯",
+          "en": "Sordidus"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/10031.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "索迪代斯",
+          "Sordidus",
+          "ソルデドゥス",
+          "소르디두스",
+          "Monster_Sordidus",
+          "11691"
+        ]
+      },
+      "10032": {
+        "id": "10032",
+        "label": {
+          "zh": "秽息原牲",
+          "en": "Miasma Spawn"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/10032.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "秽息原牲",
+          "Miasma Spawn",
+          "ミアズマのひな",
+          "미아즈마 스폰",
+          "Monster_MiasmaSpawn",
+          "31181"
+        ]
+      },
+      "10033": {
+        "id": "10033",
+        "label": {
+          "zh": "秽息残兵·盾卫",
+          "en": "Miasmic Trooper - Shieldguard"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/10033.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "秽息残兵·盾卫",
+          "Miasmic Trooper - Shieldguard",
+          "ミアズマ・レムナント・ディフェンダー",
+          "미아즈마 잔병·방패병",
+          "Monster_MiasmaWalkerGuardJaeger",
+          "31151"
+        ]
+      },
+      "10034": {
+        "id": "10034",
+        "label": {
+          "zh": "秽息残兵·炮手",
+          "en": "Miasmic Trooper - Cannoneer"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/10034.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "秽息残兵·炮手",
+          "Miasmic Trooper - Cannoneer",
+          "ミアズマ・レムナント・キャノニア",
+          "미아즈마 잔병·포수",
+          "Monster_MiasmaWalkerGrenadierJaeger",
+          "31161"
+        ]
+      },
+      "19999": {
+        "id": "19999",
+        "label": {
+          "zh": "随机怪物卡",
+          "en": "Random Enemy Card"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/19999.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "随机怪物卡",
+          "Random Enemy Card",
+          "ランダムエネミーカード",
+          "랜덤 몬스터 카드",
+          "11096"
+        ]
+      },
+      "20000": {
+        "id": "20000",
+        "label": {
+          "zh": "法布提",
+          "en": "Farbauti"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/20000.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "法布提",
+          "Farbauti",
+          "ファールバウティ",
+          "파르바우티",
+          "Monster_GiantGrey",
+          "11114"
+        ]
+      },
+      "20001": {
+        "id": "20001",
+        "label": {
+          "zh": "哈提",
+          "en": "Hati"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/20001.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "哈提",
+          "Hati",
+          "ハティ",
+          "하티",
+          "Monster_HatiGrey",
+          "11123"
+        ]
+      },
+      "20002": {
+        "id": "20002",
+        "label": {
+          "zh": "地精",
+          "en": "Goblin"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/20002.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "地精",
+          "Goblin",
+          "ゴブリン",
+          "고블린",
+          "Monster_GoblinGrey",
+          "11225"
+        ]
+      },
+      "20003": {
+        "id": "20003",
+        "label": {
+          "zh": "装甲哈提",
+          "en": "Armored Hati"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/20003.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "装甲哈提",
+          "Armored Hati",
+          "アーマーハティ",
+          "무장 하티",
+          "Monster_HatiArmoredGrey",
+          "11192"
+        ]
+      },
+      "20004": {
+        "id": "20004",
+        "label": {
+          "zh": "铁道地精",
+          "en": "Metro Goblin"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/20004.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "铁道地精",
+          "Metro Goblin",
+          "メトロゴブリン",
+          "철도 고블린",
+          "Monster_GoblinMetro",
+          "11222"
+        ]
+      },
+      "20005": {
+        "id": "20005",
+        "label": {
+          "zh": "阿劳恩",
+          "en": "Arlaune"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/20005.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "阿劳恩",
+          "Arlaune",
+          "アルラウネ",
+          "아라운",
+          "Monster_ArlauneGrey",
+          "11213"
+        ]
+      },
+      "20006": {
+        "id": "20006",
+        "label": {
+          "zh": "自律辅助单位·「清扫者」",
+          "en": "Autonomous Support Unit - Sweeper"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/20006.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "自律辅助单位·「清扫者」",
+          "Autonomous Support Unit - Sweeper",
+          "自律補助ユニット・「スイーパー」",
+          "자율 보조 유닛·「스위퍼」",
+          "Monster_LAAndroid",
+          "11041"
+        ]
+      },
+      "20007": {
+        "id": "20007",
+        "label": {
+          "zh": "「重装侵袭者」",
+          "en": "Heavy Striker"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/20007.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "「重装侵袭者」",
+          "Heavy Striker",
+          "「重装ストライカー」",
+          "「중무장 스트라이커」",
+          "Monster_HeavyStrikerCam",
+          "11454"
+        ]
+      },
+      "20008": {
+        "id": "20008",
+        "label": {
+          "zh": "「捷足巡游者」",
+          "en": "Lightfoot Rover"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/20008.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "「捷足巡游者」",
+          "Lightfoot Rover",
+          "「駿足ローバー」",
+          "「민첩한 방랑자」",
+          "Monster_LightfootRoverCam",
+          "11443"
+        ]
+      },
+      "20009": {
+        "id": "20009",
+        "label": {
+          "zh": "重装炮手",
+          "en": "Heavy Gunner"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/20009.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "重装炮手",
+          "Heavy Gunner",
+          "重装砲兵",
+          "중무장 사수",
+          "Monster_HeavyFirePowerCam",
+          "11263"
+        ]
+      },
+      "20010": {
+        "id": "20010",
+        "label": {
+          "zh": "泰拉斯奎祸车",
+          "en": "Tarasque Mixer"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/20010.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "泰拉斯奎祸车",
+          "Tarasque Mixer",
+          "タラスクミキサー",
+          "타라스크 화물차",
+          "Monster_TarasqueMixer",
+          "11381"
+        ]
+      },
+      "20011": {
+        "id": "20011",
+        "label": {
+          "zh": "秽蚀·赫斯克龙",
+          "en": "Miasmic - Huskron"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/20011.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "秽蚀·赫斯克龙",
+          "Miasmic - Huskron",
+          "ミアズミック・ハスクロン",
+          "미아즈믹·허스크론",
+          "Monster_Gloomaron",
+          "31381"
+        ]
+      },
+      "20012": {
+        "id": "20012",
+        "label": {
+          "zh": "OfficialName_",
+          "en": "OfficialName_"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/20012.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "OfficialName_",
+          "0"
+        ]
+      },
+      "20013": {
+        "id": "20013",
+        "label": {
+          "zh": "OfficialName_",
+          "en": "OfficialName_"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/20013.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "OfficialName_",
+          "0"
+        ]
+      },
+      "20014": {
+        "id": "20014",
+        "label": {
+          "zh": "OfficialName_",
+          "en": "OfficialName_"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/20014.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "OfficialName_",
+          "0"
+        ]
+      },
+      "20015": {
+        "id": "20015",
+        "label": {
+          "zh": "魁梧施虐者",
+          "en": "Bulky Intimidator"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/20015.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "魁梧施虐者",
+          "Bulky Intimidator",
+          "殴打暴虐者",
+          "덩치 협박자",
+          "Monster_ThugBulkyAbuserVest",
+          "11363"
+        ]
+      },
+      "20016": {
+        "id": "20016",
+        "label": {
+          "zh": "秽蚀·「捷足巡游者」",
+          "en": "Miasmic - Lightfoot Rover"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/20016.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "秽蚀·「捷足巡游者」",
+          "Miasmic - Lightfoot Rover",
+          "ミアズミック・「駿足ローバー」",
+          "미아즈믹·「민첩한 방랑자」",
+          "Monster_MiasmaLightfootRover",
+          "31271"
+        ]
+      },
+      "20017": {
+        "id": "20017",
+        "label": {
+          "zh": "魁梧打手",
+          "en": "Bulky Enforcer"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/20017.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "魁梧打手",
+          "Bulky Enforcer",
+          "殴り屋",
+          "덩치 행동대원",
+          "Monster_ThugBulkyEnforcerVest",
+          "11354"
+        ]
+      },
+      "20018": {
+        "id": "20018",
+        "label": {
+          "zh": "秽蚀·「重装侵袭者」",
+          "en": "Miasmic - Heavy Striker"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/20018.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "秽蚀·「重装侵袭者」",
+          "Miasmic - Heavy Striker",
+          "ミアズミック・「重装ストライカー」",
+          "미아즈믹·「중무장 스트라이커」",
+          "Monster_MiasmaHeavyStriker",
+          "31281"
+        ]
+      },
+      "20020": {
+        "id": "20020",
+        "label": {
+          "zh": "「怒汉」",
+          "en": "Enraged Sweeper"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/20020.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "「怒汉」",
+          "Enraged Sweeper",
+          "「怒れる男」",
+          "「성난 남자」",
+          "Monster_RagingGuy",
+          "11046"
+        ]
+      },
+      "20022": {
+        "id": "20022",
+        "label": {
+          "zh": "骸蜂",
+          "en": "Hornet"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/20022.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "骸蜂",
+          "Hornet",
+          "ホーネット",
+          "벌",
+          "Monster_NinevehBee",
+          "11561"
+        ]
+      },
+      "20023": {
+        "id": "20023",
+        "label": {
+          "zh": "莫尔斯",
+          "en": "Mors"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/20023.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "莫尔斯",
+          "Mors",
+          "モルス",
+          "모르스",
+          "Monster_Mors",
+          "11601"
+        ]
+      },
+      "20024": {
+        "id": "20024",
+        "label": {
+          "zh": "波可娜",
+          "en": "Pulchra"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/20024.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "波可娜",
+          "Pulchra",
+          "プルクラ",
+          "펄크라",
+          "Monster_Pulchra",
+          "11621"
+        ]
+      },
+      "20025": {
+        "id": "20025",
+        "label": {
+          "zh": "巴罗姆",
+          "en": "Bellum"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/20025.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "巴罗姆",
+          "Bellum",
+          "ベルラム",
+          "벨룸",
+          "Monster_Bellum",
+          "11611"
+        ]
+      },
+      "20026": {
+        "id": "20026",
+        "label": {
+          "zh": "秽蚀·狂乱暴徒",
+          "en": "Miasmic - Frenzied Maniac"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/20026.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "秽蚀·狂乱暴徒",
+          "Miasmic - Frenzied Maniac",
+          "ミアズミック・狂乱暴徒",
+          "미아즈믹·광분한 폭도",
+          "Monster_MiasmaFrenziedManiac",
+          "31301"
+        ]
+      },
+      "20027": {
+        "id": "20027",
+        "label": {
+          "zh": "秽蚀·特里诺斯",
+          "en": "Miasmic - Trinox"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/20027.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "秽蚀·特里诺斯",
+          "Miasmic - Trinox",
+          "ミアズミック・トリノックス",
+          "미아즈믹·트리녹스",
+          "Monster_MiasmaTrinox",
+          "31311"
+        ]
+      },
+      "20028": {
+        "id": "20028",
+        "label": {
+          "zh": "秩序护卫",
+          "en": "Security Enforcer"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/20028.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "秩序护卫",
+          "Security Enforcer",
+          "ルールキーパー",
+          "질서 수호자",
+          "Monster_SecurityUnitSoldier_MeleeSoldier",
+          "31221"
+        ]
+      },
+      "20029": {
+        "id": "20029",
+        "label": {
+          "zh": "巡逻者轻型",
+          "en": "Light Patroller"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/20029.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "巡逻者轻型",
+          "Light Patroller",
+          "パトローラー・ライト",
+          "소형 순찰원",
+          "Monster_SecurityUnitPatroller",
+          "31251"
+        ]
+      },
+      "20030": {
+        "id": "20030",
+        "label": {
+          "zh": "巡逻者中型",
+          "en": "Medium Patroller"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/20030.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "巡逻者中型",
+          "Medium Patroller",
+          "パトローラー・ミドル",
+          "중형 순찰원",
+          "Monster_SecurityUnitLAAndroid",
+          "31241"
+        ]
+      },
+      "20031": {
+        "id": "20031",
+        "label": {
+          "zh": "秽蚀·盛怒恶霸",
+          "en": "Miasmic - Wicked Wraith"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/20031.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "秽蚀·盛怒恶霸",
+          "Miasmic - Wicked Wraith",
+          "ミアズミック・憤怒悪鬼",
+          "미아즈믹·분노한 조폭",
+          "Monster_MiasmaWickedWrath",
+          "31321"
+        ]
+      },
+      "20032": {
+        "id": "20032",
+        "label": {
+          "zh": "离子体·普格努斯",
+          "en": "Ionized - Pugnus"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/20032.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "离子体·普格努斯",
+          "Ionized - Pugnus",
+          "電離体・プグヌス",
+          "플라스마·푸그누스",
+          "Monster_IonizedPugnus",
+          "31171"
+        ]
+      },
+      "29999": {
+        "id": "29999",
+        "label": {
+          "zh": "随机怪物卡",
+          "en": "Random Enemy Card"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/29999.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "随机怪物卡",
+          "Random Enemy Card",
+          "ランダムエネミーカード",
+          "랜덤 몬스터 카드",
+          "Monster_GiantGrey",
+          "11114"
+        ]
+      },
+      "30000": {
+        "id": "30000",
+        "label": {
+          "zh": "杜拉罕",
+          "en": "Dullahan"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/30000.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "杜拉罕",
+          "Dullahan",
+          "デュラハン",
+          "듀라한",
+          "Monster_DurahanGrey",
+          "11154"
+        ]
+      },
+      "30001": {
+        "id": "30001",
+        "label": {
+          "zh": "塔纳托斯",
+          "en": "Thanatos"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/30001.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "塔纳托斯",
+          "Thanatos",
+          "タナトス",
+          "타나토스",
+          "Monster_DeathXIIIGrey",
+          "11184"
+        ]
+      },
+      "30002": {
+        "id": "30002",
+        "label": {
+          "zh": "「卫士」",
+          "en": "Guardian"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/30002.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "「卫士」",
+          "Guardian",
+          "「ガーディアン」",
+          "「가디언」",
+          "Monster_GuardianCam",
+          "11058"
+        ]
+      },
+      "30003": {
+        "id": "30003",
+        "label": {
+          "zh": "缄枢",
+          "en": "Lockspring"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/30003.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "缄枢",
+          "Lockspring",
+          "ロックスプリング",
+          "록스프링",
+          "Monster_BlackMazingerGoldenBomb",
+          "31361"
+        ]
+      },
+      "30004": {
+        "id": "30004",
+        "label": {
+          "zh": "格莱特",
+          "en": "Greta"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/30004.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "格莱特",
+          "Greta",
+          "グレーテル",
+          "그레텔",
+          "Monster_BoringMachine",
+          "11301"
+        ]
+      },
+      "30005": {
+        "id": "30005",
+        "label": {
+          "zh": "汉斯",
+          "en": "Hans"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/30005.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "汉斯",
+          "Hans",
+          "ハンス",
+          "한스",
+          "Monster_MaterialHandler",
+          "11401"
+        ]
+      },
+      "30006": {
+        "id": "30006",
+        "label": {
+          "zh": "星期五",
+          "en": "Friday"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/30006.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "星期五",
+          "Friday",
+          "フライデー",
+          "프라이데이",
+          "Monster_PileDriver",
+          "11391"
+        ]
+      },
+      "30007": {
+        "id": "30007",
+        "label": {
+          "zh": "死路屠夫",
+          "en": "Dead End Butcher"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/30007.json",
+          "dataPath": "/"
+        },
+        "rank": "boss",
+        "sourceAliases": [
+          "死路屠夫",
+          "Dead End Butcher",
+          "デッドエンドブッチャー",
+          "죽음의 도살자",
+          "Monster_CottusGrey",
+          "11235"
+        ]
+      },
+      "30008": {
+        "id": "30008",
+        "label": {
+          "zh": "「提丰·挑战者型」",
+          "en": "Typhon Challenger"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/30008.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "「提丰·挑战者型」",
+          "Typhon Challenger",
+          "「テューポーン・チャレンジャー」",
+          "「티폰·챌린저」",
+          "Monster_MetalGorillaCam",
+          "11063"
+        ]
+      },
+      "30009": {
+        "id": "30009",
+        "label": {
+          "zh": "未知复合侵蚀体",
+          "en": "Unknown Corruption Complex"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/30009.json",
+          "dataPath": "/"
+        },
+        "rank": "boss",
+        "sourceAliases": [
+          "未知复合侵蚀体",
+          "Unknown Corruption Complex",
+          "未確認複合侵蝕体",
+          "미지의 복합 침식체",
+          "Monster_ComplexCorrupted",
+          "11411"
+        ]
+      },
+      "30010": {
+        "id": "30010",
+        "label": {
+          "zh": "冥宁芙·黑纱",
+          "en": "Black Veil Marionette"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/30010.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "冥宁芙·黑纱",
+          "Black Veil Marionette",
+          "マリオネット・ブラックベール",
+          "마리오네트·검은 베일",
+          "Monster_LampasBlackVeil",
+          "11421"
+        ]
+      },
+      "30011": {
+        "id": "30011",
+        "label": {
+          "zh": "冥宁芙·灰纱",
+          "en": "Gray Veil Marionette"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/30011.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "冥宁芙·灰纱",
+          "Gray Veil Marionette",
+          "マリオネット・グレイベール",
+          "마리오네트·회색 베일",
+          "Monster_LampasGreyVeil",
+          "11431"
+        ]
+      },
+      "30012": {
+        "id": "30012",
+        "label": {
+          "zh": "冥宁芙·双子",
+          "en": "Twin Marionettes"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/30012.json",
+          "dataPath": "/"
+        },
+        "rank": "boss",
+        "sourceAliases": [
+          "冥宁芙·双子",
+          "Twin Marionettes",
+          "マリオネット・ツインズ",
+          "마리오네트·쌍둥이",
+          "11421"
+        ]
+      },
+      "30013": {
+        "id": "30013",
+        "label": {
+          "zh": "秽息行者·蝎骸",
+          "en": "Miasma Walker - Scorpse"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/30013.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "秽息行者·蝎骸",
+          "Miasma Walker - Scorpse",
+          "ミアズマの歩者・ムクロサソリ",
+          "미아즈마 워커·스콥스",
+          "Monster_Chelonethid",
+          "31201"
+        ]
+      },
+      "30014": {
+        "id": "30014",
+        "label": {
+          "zh": "终曲之愿·爱芮",
+          "en": "Wishful Finale - Aria"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/30014.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "终曲之愿·爱芮",
+          "Wishful Finale - Aria",
+          "フィナーレの願い・アリア",
+          "염원의 피날레·아리아",
+          "Monster_ObsoleteAndroid",
+          "31441"
+        ]
+      },
+      "30015": {
+        "id": "30015",
+        "label": {
+          "zh": "幻矢单元",
+          "en": "Mirage Archer Unit"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/30015.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "幻矢单元",
+          "Mirage Archer Unit",
+          "ホログラフィックアロー",
+          "환영의 화살 유닛",
+          "Monster_ObsoleteAndroid",
+          "31442"
+        ]
+      },
+      "30016": {
+        "id": "30016",
+        "label": {
+          "zh": "OfficialName_",
+          "en": "OfficialName_"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/30016.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "OfficialName_",
+          "0"
+        ]
+      },
+      "30017": {
+        "id": "30017",
+        "label": {
+          "zh": "离子体·瑟托迪亚",
+          "en": "Ionized - Cyrtoidea"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/30017.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "离子体·瑟托迪亚",
+          "Ionized - Cyrtoidea",
+          "電離体・セトリア",
+          "플라스마·세토리아",
+          "Monster_Cyrtoidea",
+          "11771"
+        ]
+      },
+      "30018": {
+        "id": "30018",
+        "label": {
+          "zh": "离子体·纳塞勒亚",
+          "en": "Ionized - Nassellaria"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/30018.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "离子体·纳塞勒亚",
+          "Ionized - Nassellaria",
+          "電離体・ナセリア",
+          "플라스마·나실리아",
+          "Monster_Nassellaria",
+          "11781"
+        ]
+      },
+      "30019": {
+        "id": "30019",
+        "label": {
+          "zh": "蛮横力士",
+          "en": "Rampant Brute"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/30019.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "蛮横力士",
+          "Rampant Brute",
+          "剛力横暴者",
+          "횡포자",
+          "Monster_DubiousHero",
+          "11671"
+        ]
+      },
+      "30020": {
+        "id": "30020",
+        "label": {
+          "zh": "多佩冈亚·简",
+          "en": "Doppelganger - Jane"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/30020.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "多佩冈亚·简",
+          "Doppelganger - Jane",
+          "ドッペルゲンガー・ジェーン",
+          "도플갱어·제인",
+          "Monster_JaneDoeSlime",
+          "11642"
+        ]
+      },
+      "30021": {
+        "id": "30021",
+        "label": {
+          "zh": "「霸主侵蚀体·庞培」",
+          "en": "Corrupted Overlord - Pompey"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/30021.json",
+          "dataPath": "/"
+        },
+        "rank": "boss",
+        "sourceAliases": [
+          "「霸主侵蚀体·庞培」",
+          "Corrupted Overlord - Pompey",
+          "「覇者侵蝕体・ポンペイ」",
+          "「오버로드 침식체·폼페이」",
+          "Monster_TyrantPompey",
+          "11701"
+        ]
+      },
+      "30022": {
+        "id": "30022",
+        "label": {
+          "zh": "简·杜",
+          "en": "Jane Doe"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/30022.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "简·杜",
+          "Jane Doe",
+          "ジェーン・ドゥ",
+          "제인 도",
+          "Monster_JaneDoe",
+          "11641"
+        ]
+      },
+      "30023": {
+        "id": "30023",
+        "label": {
+          "zh": "色雷斯人",
+          "en": "Thracian"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/30023.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "色雷斯人",
+          "Thracian",
+          "トラキアン",
+          "트라키안",
+          "Monster_Thracian",
+          "11711"
+        ]
+      },
+      "30024": {
+        "id": "30024",
+        "label": {
+          "zh": "牲鬼·布林格",
+          "en": "Sacrifice - Bringer"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/30024.json",
+          "dataPath": "/"
+        },
+        "rank": "boss",
+        "sourceAliases": [
+          "牲鬼·布林格",
+          "Sacrifice - Bringer",
+          "サクリファイス・ブリンガー",
+          "새크리파이스·브랑그",
+          "Monster_SacrificeBringer",
+          "11811"
+        ]
+      },
+      "30025": {
+        "id": "30025",
+        "label": {
+          "zh": "刺椎原虫",
+          "en": "Hitchspiker"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/30025.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "刺椎原虫",
+          "Hitchspiker",
+          "ヒッチスパイカー",
+          "가시 원충",
+          "Monster_Hitchspiker",
+          "11851"
+        ]
+      },
+      "30026": {
+        "id": "30026",
+        "label": {
+          "zh": "骇鸟",
+          "en": "Terror Raptor"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/30026.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "骇鸟",
+          "Terror Raptor",
+          "テラー・ラプトル",
+          "테러 랩터",
+          "Monster_TerrorBird",
+          "11941"
+        ]
+      },
+      "30027": {
+        "id": "30027",
+        "label": {
+          "zh": "伐木机",
+          "en": "Lumberjack"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/30027.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "伐木机",
+          "Lumberjack",
+          "伐採機",
+          "벌목기",
+          "Monster_Harvester",
+          "11791"
+        ]
+      },
+      "30028": {
+        "id": "30028",
+        "label": {
+          "zh": "特勤护卫",
+          "en": "Security Operative"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/30028.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "特勤护卫",
+          "Security Operative",
+          "特務護衛",
+          "특수경비",
+          "Monster_Bodyguard",
+          "11911"
+        ]
+      },
+      "30029": {
+        "id": "30029",
+        "label": {
+          "zh": "离子体·多佩冈亚",
+          "en": "Ionized - Doppelganger"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/30029.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "离子体·多佩冈亚",
+          "Ionized - Doppelganger",
+          "電離体・ドッペルゲンガー",
+          "플라스마·도플갱어",
+          "Monster_Nineveh",
+          "11531"
+        ]
+      },
+      "30030": {
+        "id": "30030",
+        "label": {
+          "zh": "暗渊惩戒者",
+          "en": "Abyssal Enforcer"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/30030.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "暗渊惩戒者",
+          "Abyssal Enforcer",
+          "深淵の断罪者",
+          "암연 징벌자",
+          "Monster_HugoVlad",
+          "11981"
+        ]
+      },
+      "30031": {
+        "id": "30031",
+        "label": {
+          "zh": "帕里库斯",
+          "en": "Palicus"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/30031.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "帕里库斯",
+          "Palicus",
+          "パリクス",
+          "팔리쿠스",
+          "Monster_Palicus",
+          "11951"
+        ]
+      },
+      "30032": {
+        "id": "30032",
+        "label": {
+          "zh": "杰佩托",
+          "en": "Geppetto"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/30032.json",
+          "dataPath": "/"
+        },
+        "rank": "boss",
+        "sourceAliases": [
+          "杰佩托",
+          "Geppetto",
+          "ジェペット",
+          "제페토",
+          "Monster_Geppetto",
+          "11541"
+        ]
+      },
+      "30033": {
+        "id": "30033",
+        "label": {
+          "zh": "秽息司祭",
+          "en": "Miasma Priest"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/30033.json",
+          "dataPath": "/"
+        },
+        "rank": "boss",
+        "sourceAliases": [
+          "秽息司祭",
+          "Miasma Priest",
+          "ミアズマの司祭",
+          "미아즈마 프리스트",
+          "Monster_MentorMevorakh",
+          "31031"
+        ]
+      },
+      "30034": {
+        "id": "30034",
+        "label": {
+          "zh": "秽息妖鬼·名可名",
+          "en": "Miasmic Fiend - Unfathomable"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/30034.json",
+          "dataPath": "/"
+        },
+        "rank": "boss",
+        "sourceAliases": [
+          "秽息妖鬼·名可名",
+          "Miasmic Fiend - Unfathomable",
+          "ミアズマ・フィーンド・名は名なれど",
+          "미아즈마 핀드·네임리스",
+          "Monster_NamelessOne",
+          "31061"
+        ]
+      },
+      "30035": {
+        "id": "30035",
+        "label": {
+          "zh": "牲鬼·凶魁愚者",
+          "en": "Sacrifice - Heretic Jester"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/30035.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "牲鬼·凶魁愚者",
+          "Sacrifice - Heretic Jester",
+          "サクリファイス・ヘレティック・ジェスター",
+          "새크리파이스·사악한 어릿광대",
+          "Monster_HereticHunter",
+          "31111"
+        ]
+      },
+      "30036": {
+        "id": "30036",
+        "label": {
+          "zh": "秽蚀·「骇鸟」",
+          "en": "Miasmic - Terror Raptor"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/30036.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "秽蚀·「骇鸟」",
+          "Miasmic - Terror Raptor",
+          "ミアズミック・テラー・ラプトル",
+          "미아즈믹·「테러 랩터」",
+          "Monster_MiasmaTerrorBird",
+          "31261"
+        ]
+      },
+      "30037": {
+        "id": "30037",
+        "label": {
+          "zh": "「变节者」",
+          "en": "The Defector"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/30037.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "「变节者」",
+          "The Defector",
+          "「背信者」",
+          "「변절자」",
+          "Monster_Isolde",
+          "31211"
+        ]
+      },
+      "30038": {
+        "id": "30038",
+        "label": {
+          "zh": "「亵渎者」",
+          "en": "The Defiler"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/30038.json",
+          "dataPath": "/"
+        },
+        "rank": "boss",
+        "sourceAliases": [
+          "「亵渎者」",
+          "The Defiler",
+          "「冒涜者」",
+          "「모독자」",
+          "Monster_IsoldetheDefiler",
+          "31141"
+        ]
+      },
+      "30039": {
+        "id": "30039",
+        "label": {
+          "zh": "赫由托",
+          "en": "Haytor"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/30039.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "赫由托",
+          "Haytor",
+          "ハイヨト",
+          "헤이토",
+          "Monster_Hayyot",
+          "31191"
+        ]
+      },
+      "30040": {
+        "id": "30040",
+        "label": {
+          "zh": "溺想者·狛野真斗",
+          "en": "Drowned Ideal - Komano Manato"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/30040.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "溺想者·狛野真斗",
+          "Drowned Ideal - Komano Manato",
+          "夢縋り・狛野真斗",
+          "꿈잡이·코마노 마나토",
+          "Monster_Norano",
+          "31291"
+        ]
+      },
+      "30041": {
+        "id": "30041",
+        "label": {
+          "zh": "彷徨猎手",
+          "en": "Wandering Hunter"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/30041.json",
+          "dataPath": "/"
+        },
+        "rank": "boss",
+        "sourceAliases": [
+          "彷徨猎手",
+          "Wandering Hunter",
+          "ワンダリングハンター",
+          "방황하는 사냥꾼",
+          "Monster_WanderingHunter",
+          "11841"
+        ]
+      },
+      "30042": {
+        "id": "30042",
+        "label": {
+          "zh": "魇缚者·叶释渊",
+          "en": "Ye Shiyuan the Thrall"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/30042.json",
+          "dataPath": "/"
+        },
+        "rank": "boss",
+        "sourceAliases": [
+          "魇缚者·叶释渊",
+          "Ye Shiyuan the Thrall",
+          "悪夢に縛られし者・葉釈淵",
+          "악몽에 묶인 자·엽석연",
+          "Monster_Awakener",
+          "31351"
+        ]
+      },
+      "30044": {
+        "id": "30044",
+        "label": {
+          "zh": "牲鬼·卫律使者",
+          "en": "Sacrifice - Covenant Guardian"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/30044.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "牲鬼·卫律使者",
+          "Sacrifice - Covenant Guardian",
+          "サクリファイス・コヴェナント・ガーディアン",
+          "새크리파이스·약속의 수호자",
+          "Monster_CovenantGuardian",
+          "31331"
+        ]
+      },
+      "30045": {
+        "id": "30045",
+        "label": {
+          "zh": "秽蚀·蛮横力士",
+          "en": "Miasmic - Rampant Brute"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/30045.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "秽蚀·蛮横力士",
+          "Miasmic - Rampant Brute",
+          "ミアズミック・剛力横暴者",
+          "미아즈믹·횡포자",
+          "Monster_MiasmaDubiousHero",
+          "31421"
+        ]
+      },
+      "30046": {
+        "id": "30046",
+        "label": {
+          "zh": "遴命者·「骇鸟」",
+          "en": "The Decider - Terror Raptor"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/30046.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "遴命者·「骇鸟」",
+          "The Decider - Terror Raptor",
+          "テラー・ラプトル・「エグゼキューター」",
+          "명 받은 자·「테러 랩터」",
+          "Monster_PorcelumeTerrorBird",
+          "31471"
+        ]
+      },
+      "35001": {
+        "id": "35001",
+        "label": {
+          "zh": "尼尼微",
+          "en": "Nineveh"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/35001.json",
+          "dataPath": "/"
+        },
+        "rank": "boss",
+        "sourceAliases": [
+          "尼尼微",
+          "Nineveh",
+          "ニネヴェ",
+          "니네베",
+          "Monster_Nineveh",
+          "11531"
+        ]
+      },
+      "35002": {
+        "id": "35002",
+        "label": {
+          "zh": "OfficialName_",
+          "en": "OfficialName_"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/35002.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "OfficialName_",
+          "0"
+        ]
+      },
+      "40000": {
+        "id": "40000",
+        "label": {
+          "zh": "太初梦魇·「始主」",
+          "en": "Primordial Nightmare - \"The Creator\""
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/40000.json",
+          "dataPath": "/"
+        },
+        "rank": "boss",
+        "sourceAliases": [
+          "太初梦魇·「始主」",
+          "Primordial Nightmare - \"The Creator\"",
+          "原初の悪夢・「始まりの主」",
+          "태초의 악몽·「창조주」",
+          "Monster_Vessel",
+          "31411"
+        ]
+      },
+      "40001": {
+        "id": "40001",
+        "label": {
+          "zh": "叛律孤歌·薇斯珀",
+          "en": "Discordant Solo - Vesper"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/40001.json",
+          "dataPath": "/"
+        },
+        "rank": "boss",
+        "sourceAliases": [
+          "叛律孤歌·薇斯珀",
+          "Discordant Solo - Vesper",
+          "プリマ・イコノクラスト・ヴェスポ",
+          "고독한 불협의 노래·베스퍼",
+          "Monster_Vesper",
+          "31451"
+        ]
+      },
+      "40002": {
+        "id": "40002",
+        "label": {
+          "zh": "猎血清道夫",
+          "en": "Sanguine Sweeper"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/40002.json",
+          "dataPath": "/"
+        },
+        "rank": "boss",
+        "sourceAliases": [
+          "猎血清道夫",
+          "Sanguine Sweeper",
+          "血狩りの掃除屋",
+          "피의 청소부",
+          "Monster_GraymaneCenturion",
+          "11801"
+        ]
+      },
+      "40003": {
+        "id": "40003",
+        "label": {
+          "zh": "复写体·猎血清道夫",
+          "en": "Rewritten - Sanguine Sweeper"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/40003.json",
+          "dataPath": "/"
+        },
+        "rank": "boss",
+        "sourceAliases": [
+          "复写体·猎血清道夫",
+          "Rewritten - Sanguine Sweeper",
+          "レプリカ・血狩りの掃除屋",
+          "레플리카·피의 청소부",
+          "Monster_GraymaneCenturion_Cloned",
+          "11803"
+        ]
+      },
+      "40004": {
+        "id": "40004",
+        "label": {
+          "zh": "焚昼余火·法厄同",
+          "en": "Phaethon of the Scorched Horizon"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/40004.json",
+          "dataPath": "/"
+        },
+        "rank": "boss",
+        "sourceAliases": [
+          "焚昼余火·法厄同",
+          "Phaethon of the Scorched Horizon",
+          "焦天残火・パエトーン",
+          "태양의 잔불·파에톤",
+          "Monster_Pure",
+          "31432"
+        ]
+      },
+      "40005": {
+        "id": "40005",
+        "label": {
+          "zh": "焚昼余火·法厄同",
+          "en": "Phaethon of the Scorched Horizon"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/40005.json",
+          "dataPath": "/"
+        },
+        "rank": "boss",
+        "sourceAliases": [
+          "焚昼余火·法厄同",
+          "Phaethon of the Scorched Horizon",
+          "焦天残火・パエトーン",
+          "태양의 잔불·파에톤",
+          "Monster_Mutant",
+          "31431"
+        ]
+      },
+      "100001": {
+        "id": "100001",
+        "label": {
+          "zh": "提尔锋·蓄能型",
+          "en": "Tyrfing - Energized"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/100001.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "提尔锋·蓄能型",
+          "Tyrfing - Energized",
+          "ティルヴィング・蓄エネ型",
+          "티르빙·에너지형",
+          "Monster_ClaymoreRed",
+          "11098"
+        ]
+      },
+      "100002": {
+        "id": "100002",
+        "label": {
+          "zh": "OfficialName_",
+          "en": "OfficialName_"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/100002.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "OfficialName_",
+          "0"
+        ]
+      },
+      "100003": {
+        "id": "100003",
+        "label": {
+          "zh": "OfficialName_",
+          "en": "OfficialName_"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/100003.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "OfficialName_",
+          "0"
+        ]
+      },
+      "100004": {
+        "id": "100004",
+        "label": {
+          "zh": "提尔锋（寄生态）",
+          "en": "Tyrfing (Infested)"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/100004.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "提尔锋（寄生态）",
+          "Tyrfing (Infested)",
+          "ティルヴィング（寄主形態）",
+          "티르빙(감염 상태)",
+          "Monster_TyrfingInfested",
+          "11831"
+        ]
+      },
+      "100011": {
+        "id": "100011",
+        "label": {
+          "zh": "阿佩卡·蓄能型",
+          "en": "Alpeca - Energized"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/100011.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "阿佩卡·蓄能型",
+          "Alpeca - Energized",
+          "アルペカ・蓄エネ型",
+          "알페카·에너지형",
+          "Monster_CyclopsRed",
+          "11105"
+        ]
+      },
+      "100012": {
+        "id": "100012",
+        "label": {
+          "zh": "OfficialName_",
+          "en": "OfficialName_"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/100012.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "OfficialName_",
+          "0"
+        ]
+      },
+      "100013": {
+        "id": "100013",
+        "label": {
+          "zh": "OfficialName_",
+          "en": "OfficialName_"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/100013.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "OfficialName_",
+          "0"
+        ]
+      },
+      "100014": {
+        "id": "100014",
+        "label": {
+          "zh": "阿佩卡（寄生态）",
+          "en": "Alpeca (Infested)"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/100014.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "阿佩卡（寄生态）",
+          "Alpeca (Infested)",
+          "アルペカ（寄主形態）",
+          "알페카(감염 상태)",
+          "Monster_AlpecaInfested",
+          "11821"
+        ]
+      },
+      "100021": {
+        "id": "100021",
+        "label": {
+          "zh": "萨提尔·蓄能型",
+          "en": "Faun - Energized"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/100021.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "萨提尔·蓄能型",
+          "Faun - Energized",
+          "サテュロス・蓄エネ型",
+          "파우누스·에너지형",
+          "Monster_SatyrusRed",
+          "11143"
+        ]
+      },
+      "100031": {
+        "id": "100031",
+        "label": {
+          "zh": "霍普利泰·蓄能型",
+          "en": "Hoplitai - Energized"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/100031.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "霍普利泰·蓄能型",
+          "Hoplitai - Energized",
+          "ホプリタイ・蓄エネ型",
+          "호플리타이·에너지형",
+          "Monster_GolemRed",
+          "11205"
+        ]
+      },
+      "100032": {
+        "id": "100032",
+        "label": {
+          "zh": "OfficialName_",
+          "en": "OfficialName_"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/100032.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "OfficialName_",
+          "0"
+        ]
+      },
+      "100033": {
+        "id": "100033",
+        "label": {
+          "zh": "OfficialName_",
+          "en": "OfficialName_"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/100033.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "OfficialName_",
+          "0"
+        ]
+      },
+      "100041": {
+        "id": "100041",
+        "label": {
+          "zh": "雷蛛·蓄能型",
+          "en": "Blastcrawler - Energized"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/100041.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "雷蛛·蓄能型",
+          "Blastcrawler - Energized",
+          "ブラストスパイダー・蓄エネ型",
+          "블라스트크롤러·에너지형",
+          "Monster_SpiderRed",
+          "11085"
+        ]
+      },
+      "100042": {
+        "id": "100042",
+        "label": {
+          "zh": "OfficialName_",
+          "en": "OfficialName_"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/100042.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "OfficialName_",
+          "0"
+        ]
+      },
+      "100043": {
+        "id": "100043",
+        "label": {
+          "zh": "OfficialName_",
+          "en": "OfficialName_"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/100043.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "OfficialName_",
+          "0"
+        ]
+      },
+      "100044": {
+        "id": "100044",
+        "label": {
+          "zh": "绽壳虫",
+          "en": "Shatterbug"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/100044.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "绽壳虫",
+          "Shatterbug",
+          "爆裂虫",
+          "파갑충",
+          "Monster_Shatterbug",
+          "11814"
+        ]
+      },
+      "100051": {
+        "id": "100051",
+        "label": {
+          "zh": "袭扰猎兵",
+          "en": "Harrier Jaeger"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/100051.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "袭扰猎兵",
+          "Harrier Jaeger",
+          "牽制猟兵",
+          "교란 엽병",
+          "Monster_StrikeJaeger",
+          "11161"
+        ]
+      },
+      "100061": {
+        "id": "100061",
+        "label": {
+          "zh": "先锋猎兵",
+          "en": "Scout Jaeger"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/100061.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "先锋猎兵",
+          "Scout Jaeger",
+          "先鋒猟兵",
+          "선봉 엽병",
+          "Monster_LightJaeger",
+          "11251"
+        ]
+      },
+      "100071": {
+        "id": "100071",
+        "label": {
+          "zh": "整训猎兵",
+          "en": "Private Jaeger"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/100071.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "整训猎兵",
+          "Private Jaeger",
+          "練達猟兵",
+          "훈련 엽병",
+          "Monster_MeleeJaeger",
+          "11271"
+        ]
+      },
+      "100081": {
+        "id": "100081",
+        "label": {
+          "zh": "巡防猎兵",
+          "en": "Patrol Jaeger"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/100081.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "巡防猎兵",
+          "Patrol Jaeger",
+          "巡回猟兵",
+          "순찰 엽병",
+          "Monster_HeavyJaeger",
+          "11281"
+        ]
+      },
+      "100091": {
+        "id": "100091",
+        "label": {
+          "zh": "轰击猎兵",
+          "en": "Demolition Jaeger"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/100091.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "轰击猎兵",
+          "Demolition Jaeger",
+          "爆撃猟兵",
+          "포격 엽병",
+          "Monster_GrenadierJaeger",
+          "11761"
+        ]
+      },
+      "100101": {
+        "id": "100101",
+        "label": {
+          "zh": "OfficialName_",
+          "en": "OfficialName_"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/100101.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "OfficialName_",
+          "0"
+        ]
+      },
+      "100111": {
+        "id": "100111",
+        "label": {
+          "zh": "OfficialName_",
+          "en": "OfficialName_"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/100111.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "OfficialName_",
+          "0"
+        ]
+      },
+      "100121": {
+        "id": "100121",
+        "label": {
+          "zh": "OfficialName_",
+          "en": "OfficialName_"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/100121.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "OfficialName_",
+          "0"
+        ]
+      },
+      "100131": {
+        "id": "100131",
+        "label": {
+          "zh": "OfficialName_",
+          "en": "OfficialName_"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/100131.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "OfficialName_",
+          "0"
+        ]
+      },
+      "100132": {
+        "id": "100132",
+        "label": {
+          "zh": "「巡逻者轻型」",
+          "en": "Light Patroller"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/100132.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "「巡逻者轻型」",
+          "Light Patroller",
+          "「パトローラー・ライト」",
+          "「소형 순찰원」",
+          "0"
+        ]
+      },
+      "100141": {
+        "id": "100141",
+        "label": {
+          "zh": "曼德拉·蓄能型",
+          "en": "Mandrake - Energized"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/100141.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "曼德拉·蓄能型",
+          "Mandrake - Energized",
+          "マンドレイク・蓄エネ型",
+          "맨드레이크·에너지형",
+          "Monster_MandrakeRed",
+          "11295"
+        ]
+      },
+      "100151": {
+        "id": "100151",
+        "label": {
+          "zh": "劫掠者",
+          "en": "Looter"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/100151.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "劫掠者",
+          "Looter",
+          "強奪者",
+          "노략꾼",
+          "Monster_ThugRaider",
+          "11341"
+        ]
+      },
+      "100161": {
+        "id": "100161",
+        "label": {
+          "zh": "焚毁狂",
+          "en": "Arsonist"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/100161.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "焚毁狂",
+          "Arsonist",
+          "焼却狂",
+          "방화광",
+          "Monster_ThugPyromaniac",
+          "11331"
+        ]
+      },
+      "100181": {
+        "id": "100181",
+        "label": {
+          "zh": "盗猎客",
+          "en": "Rustler"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/100181.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "盗猎客",
+          "Rustler",
+          "盗猟犯",
+          "도적",
+          "Monster_ThugPoacher",
+          "11321"
+        ]
+      },
+      "100191": {
+        "id": "100191",
+        "label": {
+          "zh": "偷袭者",
+          "en": "Ambusher"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/100191.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "偷袭者",
+          "Ambusher",
+          "奇襲者",
+          "습격자",
+          "Monster_ThugAssaulter",
+          "11311"
+        ]
+      },
+      "100211": {
+        "id": "100211",
+        "label": {
+          "zh": "渡鸦无人机·活化型",
+          "en": "Raven UAV - Activated"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/100211.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "渡鸦无人机·活化型",
+          "Raven UAV - Activated",
+          "レイヴンドローン・活性型",
+          "레이븐 드론·활성형",
+          "0"
+        ]
+      },
+      "100231": {
+        "id": "100231",
+        "label": {
+          "zh": "白金邦布",
+          "en": "Platinum Bangboo"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/100231.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "白金邦布",
+          "Platinum Bangboo",
+          "プラチナボンプ",
+          "플래티넘 「Bangboo」",
+          "Monster_PlatinumBangboo",
+          "11245"
+        ]
+      },
+      "100251": {
+        "id": "100251",
+        "label": {
+          "zh": "恶灵·蓄能型",
+          "en": "Ahriman - Energized"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/100251.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "恶灵·蓄能型",
+          "Ahriman - Energized",
+          "アフリマン・蓄エネ型",
+          "악령·에너지형",
+          "Monster_AhrimanRed",
+          "11463"
+        ]
+      },
+      "100261": {
+        "id": "100261",
+        "label": {
+          "zh": "游魂·蓄能型",
+          "en": "Specter - Energized"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/100261.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "游魂·蓄能型",
+          "Specter - Energized",
+          "スペクター・蓄エネ型",
+          "망령·에너지형",
+          "Monster_SpecterRed",
+          "11473"
+        ]
+      },
+      "100271": {
+        "id": "100271",
+        "label": {
+          "zh": "恶毒打手",
+          "en": "Vicious Striker"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/100271.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "恶毒打手",
+          "Vicious Striker",
+          "悪辣討手",
+          "악독한 싸움꾼",
+          "Monster_ViciousStriker",
+          "11481"
+        ]
+      },
+      "100281": {
+        "id": "100281",
+        "label": {
+          "zh": "贪婪射手",
+          "en": "Greedy Ranger"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/100281.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "贪婪射手",
+          "Greedy Ranger",
+          "強欲射手",
+          "탐욕스러운 총잡이",
+          "Monster_GreedyGunner",
+          "11491"
+        ]
+      },
+      "100291": {
+        "id": "100291",
+        "label": {
+          "zh": "OfficialName_",
+          "en": "OfficialName_"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/100291.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "OfficialName_",
+          "0"
+        ]
+      },
+      "100301": {
+        "id": "100301",
+        "label": {
+          "zh": "弗瑟尔·蓄能型",
+          "en": "Fossor - Energized"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/100301.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "弗瑟尔·蓄能型",
+          "Fossor - Energized",
+          "フォッソル・蓄エネ型",
+          "포소르·에너지형",
+          "Monster_FossorRed",
+          "11683"
+        ]
+      },
+      "100311": {
+        "id": "100311",
+        "label": {
+          "zh": "索迪代斯·蓄能型",
+          "en": "Sordidus - Energized"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/100311.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "索迪代斯·蓄能型",
+          "Sordidus - Energized",
+          "ソルデドゥス・蓄エネ型",
+          "소르디두스·에너지형",
+          "Monster_SordidusRed",
+          "11693"
+        ]
+      },
+      "200001": {
+        "id": "200001",
+        "label": {
+          "zh": "法布提·蓄能型",
+          "en": "Farbauti - Energized"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/200001.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "法布提·蓄能型",
+          "Farbauti - Energized",
+          "ファールバウティ・蓄エネ型",
+          "파르바우티·에너지형",
+          "Monster_GiantRed",
+          "11116"
+        ]
+      },
+      "200002": {
+        "id": "200002",
+        "label": {
+          "zh": "OfficialName_",
+          "en": "OfficialName_"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/200002.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "OfficialName_",
+          "0"
+        ]
+      },
+      "200003": {
+        "id": "200003",
+        "label": {
+          "zh": "OfficialName_",
+          "en": "OfficialName_"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/200003.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "OfficialName_",
+          "0"
+        ]
+      },
+      "200004": {
+        "id": "200004",
+        "label": {
+          "zh": "离子体·法布提",
+          "en": "Ionized - Farbauti"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/200004.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "离子体·法布提",
+          "Ionized - Farbauti",
+          "電離体・ファールバウティ",
+          "플라스마·파르바우티",
+          "Monster_GiantEnergy",
+          "11731"
+        ]
+      },
+      "200011": {
+        "id": "200011",
+        "label": {
+          "zh": "哈提·蓄能型",
+          "en": "Hati - Energized"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/200011.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "哈提·蓄能型",
+          "Hati - Energized",
+          "ハティ・蓄エネ型",
+          "하티·에너지형",
+          "Monster_HatiRed",
+          "11125"
+        ]
+      },
+      "200012": {
+        "id": "200012",
+        "label": {
+          "zh": "OfficialName_",
+          "en": "OfficialName_"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/200012.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "OfficialName_",
+          "0"
+        ]
+      },
+      "200013": {
+        "id": "200013",
+        "label": {
+          "zh": "OfficialName_",
+          "en": "OfficialName_"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/200013.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "OfficialName_",
+          "0"
+        ]
+      },
+      "200014": {
+        "id": "200014",
+        "label": {
+          "zh": "恶名·哈提",
+          "en": "Notorious - Hati"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/200014.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "恶名·哈提",
+          "Notorious - Hati",
+          "要警戒・ハティ",
+          "노토리우스·하티",
+          "Monster_HatiArmoredBoss",
+          "11195"
+        ]
+      },
+      "200015": {
+        "id": "200015",
+        "label": {
+          "zh": "哈提头犬·蓄能型",
+          "en": "Hati Pack Leader — Energized"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/200015.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "哈提头犬·蓄能型",
+          "Hati Pack Leader — Energized",
+          "ハティアルファ・蓄エネ型",
+          "하티 리더·에너지형",
+          "Monster_HatiRedBoss",
+          "11127"
+        ]
+      },
+      "200021": {
+        "id": "200021",
+        "label": {
+          "zh": "地精·蓄能型",
+          "en": "Goblin - Energized"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/200021.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "地精·蓄能型",
+          "Goblin - Energized",
+          "ゴブリン・蓄エネ型",
+          "고블린·에너지형",
+          "Monster_GoblinRed",
+          "11721"
+        ]
+      },
+      "200022": {
+        "id": "200022",
+        "label": {
+          "zh": "OfficialName_",
+          "en": "OfficialName_"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/200022.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "OfficialName_",
+          "0"
+        ]
+      },
+      "200023": {
+        "id": "200023",
+        "label": {
+          "zh": "OfficialName_",
+          "en": "OfficialName_"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/200023.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "OfficialName_",
+          "0"
+        ]
+      },
+      "200031": {
+        "id": "200031",
+        "label": {
+          "zh": "装甲哈提·蓄能型",
+          "en": "Armored Hati - Energized"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/200031.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "装甲哈提·蓄能型",
+          "Armored Hati - Energized",
+          "アーマーハティ・蓄エネ型",
+          "무장 하티·에너지형",
+          "Monster_HatiArmoredRed",
+          "11196"
+        ]
+      },
+      "200032": {
+        "id": "200032",
+        "label": {
+          "zh": "OfficialName_",
+          "en": "OfficialName_"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/200032.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "OfficialName_",
+          "0"
+        ]
+      },
+      "200033": {
+        "id": "200033",
+        "label": {
+          "zh": "OfficialName_",
+          "en": "OfficialName_"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/200033.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "OfficialName_",
+          "0"
+        ]
+      },
+      "200034": {
+        "id": "200034",
+        "label": {
+          "zh": "恶名·装甲哈提",
+          "en": "Notorious - Armored Hati"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/200034.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "恶名·装甲哈提",
+          "Notorious - Armored Hati",
+          "要警戒・アーマーハティ",
+          "노토리우스·무장 하티",
+          "Monster_HatiArmoredBoss",
+          "11195"
+        ]
+      },
+      "200041": {
+        "id": "200041",
+        "label": {
+          "zh": "铁道地精·蓄能型",
+          "en": "Metro Goblin - Energized"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/200041.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "铁道地精·蓄能型",
+          "Metro Goblin - Energized",
+          "メトロゴブリン・蓄エネ型",
+          "철도 고블린·에너지형",
+          "Monster_GoblinMetroRed",
+          "11723"
+        ]
+      },
+      "200051": {
+        "id": "200051",
+        "label": {
+          "zh": "阿劳恩·蓄能型",
+          "en": "Arlaune - Energized"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/200051.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "阿劳恩·蓄能型",
+          "Arlaune - Energized",
+          "アルラウネ・蓄エネ型",
+          "아라운·에너지형",
+          "Monster_ArlauneRed",
+          "11215"
+        ]
+      },
+      "200052": {
+        "id": "200052",
+        "label": {
+          "zh": "OfficialName_",
+          "en": "OfficialName_"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/200052.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "OfficialName_",
+          "0"
+        ]
+      },
+      "200053": {
+        "id": "200053",
+        "label": {
+          "zh": "OfficialName_",
+          "en": "OfficialName_"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/200053.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "OfficialName_",
+          "0"
+        ]
+      },
+      "200061": {
+        "id": "200061",
+        "label": {
+          "zh": "OfficialName_",
+          "en": "OfficialName_"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/200061.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "OfficialName_",
+          "0"
+        ]
+      },
+      "200071": {
+        "id": "200071",
+        "label": {
+          "zh": "「重装侵袭者Ⅱ型」",
+          "en": "Heavy Striker MK II"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/200071.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "「重装侵袭者Ⅱ型」",
+          "Heavy Striker MK II",
+          "「重装ストライカーⅡ型」",
+          "「중무장 스트라이커 Ⅱ형」",
+          "Monster_HeavyStriker",
+          "11451"
+        ]
+      },
+      "200072": {
+        "id": "200072",
+        "label": {
+          "zh": "「护戍盾卫」",
+          "en": "Shielded Defender"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/200072.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "「护戍盾卫」",
+          "Shielded Defender",
+          "「シールドディフェンダー」",
+          "「실드 가드」",
+          "Monster_HeavyStrikerBossCam",
+          "11456"
+        ]
+      },
+      "200073": {
+        "id": "200073",
+        "label": {
+          "zh": "「护戍盾卫Ω型」",
+          "en": "Shielded Defender Omega"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/200073.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "「护戍盾卫Ω型」",
+          "Shielded Defender Omega",
+          "「シールドディフェンダー・Ω」",
+          "「실드 가드 Ω형」",
+          "Monster_HeavyStrikerBoss",
+          "11453"
+        ]
+      },
+      "200081": {
+        "id": "200081",
+        "label": {
+          "zh": "「捷足巡游者Ⅱ型」",
+          "en": "Lightfoot Rover MK II"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/200081.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "「捷足巡游者Ⅱ型」",
+          "Lightfoot Rover MK II",
+          "「駿足ローバーⅡ型」",
+          "「민첩한 방랑자 Ⅱ형」",
+          "Monster_LightfootRover",
+          "11441"
+        ]
+      },
+      "200091": {
+        "id": "200091",
+        "label": {
+          "zh": "突击炮手",
+          "en": "Assault Gunner"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/200091.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "突击炮手",
+          "Assault Gunner",
+          "突撃砲兵",
+          "돌격 사수",
+          "Monster_HeavyFirePower",
+          "11261"
+        ]
+      },
+      "200092": {
+        "id": "200092",
+        "label": {
+          "zh": "特战强袭轰击者",
+          "en": "Specialized Assault Bomber"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/200092.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "特战强袭轰击者",
+          "Specialized Assault Bomber",
+          "特戦強襲爆撃手",
+          "특전 강습 폭파범",
+          "Monster_TacticalAssaultGunner",
+          "11971"
+        ]
+      },
+      "200093": {
+        "id": "200093",
+        "label": {
+          "zh": "特战强袭轰击者",
+          "en": "Specialized Assault Bomber"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/200093.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "特战强袭轰击者",
+          "Specialized Assault Bomber",
+          "特戦強襲爆撃手",
+          "특전 강습 폭파범",
+          "Monster_TacticalAssaultGunner",
+          "11974"
+        ]
+      },
+      "200101": {
+        "id": "200101",
+        "label": {
+          "zh": "OfficialName_",
+          "en": "OfficialName_"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/200101.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "OfficialName_",
+          "0"
+        ]
+      },
+      "200121": {
+        "id": "200121",
+        "label": {
+          "zh": "狂乱暴徒",
+          "en": "Frenzied Maniac"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/200121.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "狂乱暴徒",
+          "Frenzied Maniac",
+          "광분한 폭도",
+          "Monster_FrenziedManiac",
+          "11501"
+        ]
+      },
+      "200131": {
+        "id": "200131",
+        "label": {
+          "zh": "盛怒恶霸",
+          "en": "Wicked Wraith"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/200131.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "盛怒恶霸",
+          "Wicked Wraith",
+          "憤怒悪鬼",
+          "분노한 조폭",
+          "Monster_WickedWrath",
+          "11511"
+        ]
+      },
+      "200141": {
+        "id": "200141",
+        "label": {
+          "zh": "凶心疯汉",
+          "en": "Ruthless Fiend"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/200141.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "凶心疯汉",
+          "Ruthless Fiend",
+          "凶悪狂人",
+          "흉악한 미치광이",
+          "Monster_RuthlessFiend",
+          "11521"
+        ]
+      },
+      "200151": {
+        "id": "200151",
+        "label": {
+          "zh": "通缉虐待狂",
+          "en": "Wanted Intimidator"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/200151.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "通缉虐待狂",
+          "Wanted Intimidator",
+          "札付き虐待狂",
+          "지명수배 협박자",
+          "Monster_ThugBulkyAbuser",
+          "11361"
+        ]
+      },
+      "200171": {
+        "id": "200171",
+        "label": {
+          "zh": "通缉打手",
+          "en": "Wanted Enforcer"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/200171.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "通缉打手",
+          "Wanted Enforcer",
+          "札付き殴り屋",
+          "지명수배 행동대원",
+          "Monster_ThugBulkyEnforcer",
+          "11351"
+        ]
+      },
+      "200172": {
+        "id": "200172",
+        "label": {
+          "zh": "祸首·通缉打手",
+          "en": "Troublemaker - Wanted Enforcer"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/200172.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "祸首·通缉打手",
+          "Troublemaker - Wanted Enforcer",
+          "元凶・札付き殴り屋",
+          "주모자·지명수배 행동대원",
+          "Monster_ThugBulkyEnforcerBoss",
+          "11353"
+        ]
+      },
+      "200231": {
+        "id": "200231",
+        "label": {
+          "zh": "多佩冈亚·莫尔斯",
+          "en": "Doppelganger - Mors"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/200231.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "多佩冈亚·莫尔斯",
+          "Doppelganger - Mors",
+          "ドッペルゲンガー・モルス",
+          "도플갱어·모르스",
+          "Monster_MorsSlime",
+          "11602"
+        ]
+      },
+      "200241": {
+        "id": "200241",
+        "label": {
+          "zh": "多佩冈亚·波可娜",
+          "en": "Doppelganger - Pulchra"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/200241.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "多佩冈亚·波可娜",
+          "Doppelganger - Pulchra",
+          "ドッペルゲンガー・プルクラ",
+          "도플갱어·펄크라",
+          "Monster_PulchraSlime",
+          "11622"
+        ]
+      },
+      "200251": {
+        "id": "200251",
+        "label": {
+          "zh": "多佩冈亚·巴罗姆",
+          "en": "Doppelganger - Bellum"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/200251.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "多佩冈亚·巴罗姆",
+          "Doppelganger - Bellum",
+          "ドッペルゲンガー・ベルラム",
+          "도플갱어·벨룸",
+          "Monster_BellumSlime",
+          "11612"
+        ]
+      },
+      "300001": {
+        "id": "300001",
+        "label": {
+          "zh": "杜拉罕·蓄能型",
+          "en": "Dullahan - Energized"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/300001.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "杜拉罕·蓄能型",
+          "Dullahan - Energized",
+          "デュラハン・蓄エネ型",
+          "듀라한·에너지형",
+          "Monster_DurahanRed",
+          "11157"
+        ]
+      },
+      "300002": {
+        "id": "300002",
+        "label": {
+          "zh": "初生杜拉罕",
+          "en": "Newborn Dullahan"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/300002.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "初生杜拉罕",
+          "Newborn Dullahan",
+          "初生のデュラハン",
+          "갓 태어난 듀라한",
+          "Monster_DurahanBlackBoss",
+          "11152"
+        ]
+      },
+      "300003": {
+        "id": "300003",
+        "label": {
+          "zh": "OfficialName_",
+          "en": "OfficialName_"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/300003.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "OfficialName_",
+          "0"
+        ]
+      },
+      "300004": {
+        "id": "300004",
+        "label": {
+          "zh": "离子体·杜拉罕",
+          "en": "Ionized - Dullahan"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/300004.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "离子体·杜拉罕",
+          "Ionized - Dullahan",
+          "電離体・デュラハン",
+          "플라스마·듀라한",
+          "Monster_DurahanEnergy",
+          "11751"
+        ]
+      },
+      "300005": {
+        "id": "300005",
+        "label": {
+          "zh": "恶名·杜拉罕",
+          "en": "Notorious - Dullahan"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/300005.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "恶名·杜拉罕",
+          "Notorious - Dullahan",
+          "要警戒・デュラハン",
+          "노토리우스·듀라한",
+          "Monster_DurahanBoss",
+          "11156"
+        ]
+      },
+      "300011": {
+        "id": "300011",
+        "label": {
+          "zh": "塔纳托斯·蓄能型",
+          "en": "Thanatos - Energized"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/300011.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "塔纳托斯·蓄能型",
+          "Thanatos - Energized",
+          "タナトス・蓄エネ型",
+          "타나토스·에너지형",
+          "Monster_DeathXIIIRed",
+          "11186"
+        ]
+      },
+      "300012": {
+        "id": "300012",
+        "label": {
+          "zh": "OfficialName_",
+          "en": "OfficialName_"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/300012.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "OfficialName_",
+          "0"
+        ]
+      },
+      "300013": {
+        "id": "300013",
+        "label": {
+          "zh": "OfficialName_",
+          "en": "OfficialName_"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/300013.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "OfficialName_",
+          "0"
+        ]
+      },
+      "300014": {
+        "id": "300014",
+        "label": {
+          "zh": "离子体·塔纳托斯",
+          "en": "Ionized - Thanatos"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/300014.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "离子体·塔纳托斯",
+          "Ionized - Thanatos",
+          "電離体・タナトス",
+          "플라스마·타나토스",
+          "Monster_DeathXIIIEnergy",
+          "11741"
+        ]
+      },
+      "300015": {
+        "id": "300015",
+        "label": {
+          "zh": "恶名·塔纳托斯",
+          "en": "Notorious - Thanatos"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/300015.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "恶名·塔纳托斯",
+          "Notorious - Thanatos",
+          "要警戒・タナトス",
+          "노토리우스·타나토스",
+          "Monster_DeathXIIIBoss",
+          "11181"
+        ]
+      },
+      "300021": {
+        "id": "300021",
+        "label": {
+          "zh": "「卫士Ⅱ型」",
+          "en": "Guardian MK II"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/300021.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "「卫士Ⅱ型」",
+          "Guardian MK II",
+          "「ガーディアンⅡ型」",
+          "「가디언 Ⅱ형」",
+          "Monster_Guardian",
+          "11051"
+        ]
+      },
+      "300022": {
+        "id": "300022",
+        "label": {
+          "zh": "「卫士Ⅲ型」",
+          "en": "Guardian MK III"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/300022.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "「卫士Ⅲ型」",
+          "Guardian MK III",
+          "「ガーディアンⅢ型」",
+          "「가디언 Ⅲ형」",
+          "Monster_GuardianMech",
+          "11057"
+        ]
+      },
+      "300041": {
+        "id": "300041",
+        "label": {
+          "zh": "格莱特·蓄能型",
+          "en": "Greta - Energized"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/300041.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "格莱特·蓄能型",
+          "Greta - Energized",
+          "グレーテル・蓄エネ型",
+          "그레텔·에너지형",
+          "Monster_BoringMachineRed",
+          "11302"
+        ]
+      },
+      "300042": {
+        "id": "300042",
+        "label": {
+          "zh": "格莱特·超频型",
+          "en": "Greta - Overclocked"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/300042.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "格莱特·超频型",
+          "Greta - Overclocked",
+          "グレーテル・高周波数型",
+          "그레텔·오버클럭형",
+          "Monster_BoringMachinePurple",
+          "11303"
+        ]
+      },
+      "300051": {
+        "id": "300051",
+        "label": {
+          "zh": "汉斯·蓄能型",
+          "en": "Hans - Energized"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/300051.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "汉斯·蓄能型",
+          "Hans - Energized",
+          "ハンス・蓄エネ型",
+          "한스·에너지형",
+          "Monster_MaterialHandlerRed",
+          "11402"
+        ]
+      },
+      "300052": {
+        "id": "300052",
+        "label": {
+          "zh": "汉斯·超频型",
+          "en": "Hans - Overclocked"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/300052.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "汉斯·超频型",
+          "Hans - Overclocked",
+          "ハンス・高周波数型",
+          "한스·오버클럭형",
+          "Monster_MaterialHandlerPurple",
+          "11403"
+        ]
+      },
+      "300061": {
+        "id": "300061",
+        "label": {
+          "zh": "星期五·蓄能型",
+          "en": "Friday - Energized"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/300061.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "星期五·蓄能型",
+          "Friday - Energized",
+          "フライデー・蓄エネ型",
+          "프라이데이·에너지형",
+          "Monster_PileDriverRed",
+          "11392"
+        ]
+      },
+      "300062": {
+        "id": "300062",
+        "label": {
+          "zh": "星期五·超频型",
+          "en": "Friday - Overclocked"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/300062.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "星期五·超频型",
+          "Friday - Overclocked",
+          "フライデー・高周波数型",
+          "프라이데이·오버클럭형",
+          "Monster_PileDriverPurple",
+          "11393"
+        ]
+      },
+      "300071": {
+        "id": "300071",
+        "label": {
+          "zh": "初生死路屠夫",
+          "en": "Newborn Dead End Butcher"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/300071.json",
+          "dataPath": "/"
+        },
+        "rank": "boss",
+        "sourceAliases": [
+          "初生死路屠夫",
+          "Newborn Dead End Butcher",
+          "初生のデッドエンドブッチャー",
+          "갓 태어난 죽음의 도살자",
+          "Monster_Cottus",
+          "11233"
+        ]
+      },
+      "300072": {
+        "id": "300072",
+        "label": {
+          "zh": "恶名·死路屠夫",
+          "en": "Notorious - Dead End Butcher"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/300072.json",
+          "dataPath": "/"
+        },
+        "rank": "boss",
+        "sourceAliases": [
+          "恶名·死路屠夫",
+          "Notorious - Dead End Butcher",
+          "要警戒・デッドエンドブッチャー",
+          "노토리우스·죽음의 도살자",
+          "Monster_NotoriousDeadEndButcher",
+          "11901"
+        ]
+      },
+      "300081": {
+        "id": "300081",
+        "label": {
+          "zh": "「提丰·重击者型」",
+          "en": "Typhon Slugger"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/300081.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "「提丰·重击者型」",
+          "Typhon Slugger",
+          "「テューポーン・スラッガー」",
+          "「티폰·슬러거」",
+          "Monster_MetalGorilla",
+          "11061"
+        ]
+      },
+      "300082": {
+        "id": "300082",
+        "label": {
+          "zh": "自律强袭单位·「提丰·破坏者型」",
+          "en": "Autonomous Assault Unit - Typhon Destroyer"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/300082.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "自律强袭单位·「提丰·破坏者型」",
+          "Autonomous Assault Unit - Typhon Destroyer",
+          "自律強襲ユニット・「テューポーン・デストロイヤー」",
+          "자율 강습 유닛·「티폰·디스트로이어」",
+          "Monster_TyphonDestroyer",
+          "11891"
+        ]
+      },
+      "300083": {
+        "id": "300083",
+        "label": {
+          "zh": "「提丰·挑战者型」",
+          "en": "Typhon Challenger"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/300083.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "「提丰·挑战者型」",
+          "Typhon Challenger",
+          "「テューポーン・チャレンジャー」",
+          "「티폰·챌린저」",
+          "Monster_MetalGorillaCam",
+          "11065"
+        ]
+      },
+      "300121": {
+        "id": "300121",
+        "label": {
+          "zh": "恶名·冥宁芙",
+          "en": "Notorious - Marionette"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/300121.json",
+          "dataPath": "/"
+        },
+        "rank": "boss",
+        "sourceAliases": [
+          "恶名·冥宁芙",
+          "Notorious - Marionette",
+          "要警戒・マリオネット",
+          "노토리우스·마리오네트",
+          "Monster_NotoriousMarionette",
+          "11861"
+        ]
+      },
+      "300191": {
+        "id": "300191",
+        "label": {
+          "zh": "蛮横力士",
+          "en": "Rampant Brute"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/300191.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "蛮横力士",
+          "Rampant Brute",
+          "剛力横暴者",
+          "횡포자",
+          "Monster_DubiousHero",
+          "11673"
+        ]
+      },
+      "300211": {
+        "id": "300211",
+        "label": {
+          "zh": "恶名·庞培",
+          "en": "Notorious - Pompey"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/300211.json",
+          "dataPath": "/"
+        },
+        "rank": "boss",
+        "sourceAliases": [
+          "恶名·庞培",
+          "Notorious - Pompey",
+          "要警戒・ポンペイ",
+          "노토리우스·폼페이",
+          "Monster_NotoriousPompey",
+          "11881"
+        ]
+      },
+      "300301": {
+        "id": "300301",
+        "label": {
+          "zh": "多佩冈亚·暗渊惩戒者",
+          "en": "Doppelganger - Abyssal Enforcer"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/300301.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "多佩冈亚·暗渊惩戒者",
+          "Doppelganger - Abyssal Enforcer",
+          "ドッペルゲンガー・深淵の断罪者",
+          "도플갱어·암연 징벌자",
+          "Monster_HugoVladSlime",
+          "11982"
+        ]
+      },
+      "300371": {
+        "id": "300371",
+        "label": {
+          "zh": "多佩冈亚·「变节者」",
+          "en": "Doppelganger - The Defector"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/300371.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "多佩冈亚·「变节者」",
+          "Doppelganger - The Defector",
+          "ドッペルゲンガー・「背信者」",
+          "도플갱어·「변절자」",
+          "Monster_IsoldeSlime",
+          "31212"
+        ]
+      },
+      "300372": {
+        "id": "300372",
+        "label": {
+          "zh": "秽蚀·多佩冈亚·「变节者」",
+          "en": "Miasmic - Doppelganger - The Defector"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/300372.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "秽蚀·多佩冈亚·「变节者」",
+          "Miasmic - Doppelganger - The Defector",
+          "ミアズミック・ドッペルゲンガー・「背信者」",
+          "미아즈믹·도플갱어·「변절자」",
+          "Monster_MiasmaIsoldeSlime",
+          "31213"
+        ]
+      },
+      "300391": {
+        "id": "300391",
+        "label": {
+          "zh": "赫由托",
+          "en": "Haytor"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/300391.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "赫由托",
+          "Haytor",
+          "ハイヨト",
+          "헤이토",
+          "Monster_Hayyot",
+          "31196"
+        ]
+      },
+      "300401": {
+        "id": "300401",
+        "label": {
+          "zh": "多佩冈亚·狛野真斗",
+          "en": "Doppelganger Komano Manato"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/300401.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "多佩冈亚·狛野真斗",
+          "Doppelganger Komano Manato",
+          "ドッペルゲンガー・狛野真斗",
+          "도플갱어·코마노 마나토",
+          "Monster_NoranoSlime",
+          "31292"
+        ]
+      },
+      "300402": {
+        "id": "300402",
+        "label": {
+          "zh": "秽蚀·狛野真斗",
+          "en": "Miasmic Komano Manato"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/300402.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "秽蚀·狛野真斗",
+          "Miasmic Komano Manato",
+          "ミアズミック・狛野真斗",
+          "미아즈믹·코마노 마나토",
+          "Monster_MiasmaNoranoSlime",
+          "31293"
+        ]
+      },
+      "930146": {
+        "id": "930146",
+        "label": {
+          "zh": "提尔锋",
+          "en": "Tyrfing"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/930146.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "提尔锋",
+          "Tyrfing",
+          "ティルヴィング",
+          "티르빙",
+          "11096"
+        ]
+      },
+      "930147": {
+        "id": "930147",
+        "label": {
+          "zh": "阿劳恩",
+          "en": "Arlaune"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/930147.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "阿劳恩",
+          "Arlaune",
+          "アルラウネ",
+          "아라운",
+          "11213"
+        ]
+      },
+      "930148": {
+        "id": "930148",
+        "label": {
+          "zh": "恶灵",
+          "en": "Ahriman"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/930148.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "恶灵",
+          "Ahriman",
+          "アフリマン",
+          "악령",
+          "11461"
+        ]
+      },
+      "930149": {
+        "id": "930149",
+        "label": {
+          "zh": "阿佩卡",
+          "en": "Alpeca"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/930149.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "阿佩卡",
+          "Alpeca",
+          "アルペカ",
+          "알페카",
+          "11103"
+        ]
+      },
+      "930150": {
+        "id": "930150",
+        "label": {
+          "zh": "杜拉罕",
+          "en": "Dullahan"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/930150.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "杜拉罕",
+          "Dullahan",
+          "デュラハン",
+          "듀라한",
+          "11154"
+        ]
+      },
+      "930151": {
+        "id": "930151",
+        "label": {
+          "zh": "黄金邦布",
+          "en": "Golden Bangboo"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/930151.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "黄金邦布",
+          "Golden Bangboo",
+          "ゴールドボンプ",
+          "황금 「Bangboo」",
+          "11241"
+        ]
+      },
+      "930152": {
+        "id": "930152",
+        "label": {
+          "zh": "霍普利泰",
+          "en": "Hoplitai"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/930152.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "霍普利泰",
+          "Hoplitai",
+          "ホプリタイ",
+          "호플리타이",
+          "11203"
+        ]
+      },
+      "930153": {
+        "id": "930153",
+        "label": {
+          "zh": "萨提尔",
+          "en": "Faun"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/930153.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "萨提尔",
+          "Faun",
+          "サテュロス",
+          "파우누스",
+          "11141"
+        ]
+      },
+      "930154": {
+        "id": "930154",
+        "label": {
+          "zh": "雷蛛",
+          "en": "Blastcrawler"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/930154.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "雷蛛",
+          "Blastcrawler",
+          "ブラストスパイダー",
+          "블라스트크롤러",
+          "11083"
+        ]
+      },
+      "930155": {
+        "id": "930155",
+        "label": {
+          "zh": "恶毒打手",
+          "en": "Vicious Striker"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/930155.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "恶毒打手",
+          "Vicious Striker",
+          "悪辣討手",
+          "악독한 싸움꾼",
+          "11481"
+        ]
+      },
+      "930156": {
+        "id": "930156",
+        "label": {
+          "zh": "恶毒打手",
+          "en": "Vicious Striker"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/930156.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "恶毒打手",
+          "Vicious Striker",
+          "悪辣討手",
+          "악독한 싸움꾼",
+          "11481"
+        ]
+      },
+      "930157": {
+        "id": "930157",
+        "label": {
+          "zh": "提尔锋",
+          "en": "Tyrfing"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/930157.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "提尔锋",
+          "Tyrfing",
+          "ティルヴィング",
+          "티르빙",
+          "11096"
+        ]
+      },
+      "930158": {
+        "id": "930158",
+        "label": {
+          "zh": "阿劳恩",
+          "en": "Arlaune"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/930158.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "阿劳恩",
+          "Arlaune",
+          "アルラウネ",
+          "아라운",
+          "11213"
+        ]
+      },
+      "930159": {
+        "id": "930159",
+        "label": {
+          "zh": "恶灵",
+          "en": "Ahriman"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/930159.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "恶灵",
+          "Ahriman",
+          "アフリマン",
+          "악령",
+          "11461"
+        ]
+      },
+      "930160": {
+        "id": "930160",
+        "label": {
+          "zh": "阿佩卡",
+          "en": "Alpeca"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/930160.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "阿佩卡",
+          "Alpeca",
+          "アルペカ",
+          "알페카",
+          "11103"
+        ]
+      },
+      "930161": {
+        "id": "930161",
+        "label": {
+          "zh": "杜拉罕",
+          "en": "Dullahan"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/930161.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "杜拉罕",
+          "Dullahan",
+          "デュラハン",
+          "듀라한",
+          "11154"
+        ]
+      },
+      "930162": {
+        "id": "930162",
+        "label": {
+          "zh": "霍普利泰",
+          "en": "Hoplitai"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/930162.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "霍普利泰",
+          "Hoplitai",
+          "ホプリタイ",
+          "호플리타이",
+          "11203"
+        ]
+      },
+      "930163": {
+        "id": "930163",
+        "label": {
+          "zh": "萨提尔",
+          "en": "Faun"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/930163.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "萨提尔",
+          "Faun",
+          "サテュロス",
+          "파우누스",
+          "11141"
+        ]
+      },
+      "930164": {
+        "id": "930164",
+        "label": {
+          "zh": "雷蛛",
+          "en": "Blastcrawler"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/930164.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "雷蛛",
+          "Blastcrawler",
+          "ブラストスパイダー",
+          "블라스트크롤러",
+          "11083"
+        ]
+      },
+      "930165": {
+        "id": "930165",
+        "label": {
+          "zh": "恶毒打手",
+          "en": "Vicious Striker"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/930165.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "恶毒打手",
+          "Vicious Striker",
+          "悪辣討手",
+          "악독한 싸움꾼",
+          "11481"
+        ]
+      },
+      "930166": {
+        "id": "930166",
+        "label": {
+          "zh": "特佩什",
+          "en": "Tepes"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/930166.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "特佩什",
+          "Tepes",
+          "ツェペシュ",
+          "체페슈",
+          "Monster_Tepes",
+          "11961"
+        ]
+      },
+      "930167": {
+        "id": "930167",
+        "label": {
+          "zh": "秉火领颂",
+          "en": "Flame Cantor"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/930167.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "秉火领颂",
+          "Flame Cantor",
+          "火を帯びし先導者",
+          "불꽃의 선창자",
+          "Monster_FlameCantor",
+          "31081"
+        ]
+      },
+      "930168": {
+        "id": "930168",
+        "label": {
+          "zh": "班尼雷克",
+          "en": "Banyrek"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/930168.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "班尼雷克",
+          "Banyrek",
+          "バニーレック",
+          "바니렉",
+          "Monster_Banyrek",
+          "31051"
+        ]
+      },
+      "930169": {
+        "id": "930169",
+        "label": {
+          "zh": "秽息蚀者·阿瓦鲁斯",
+          "en": "Miasma Ravager - Avarus"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/930169.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "秽息蚀者·阿瓦鲁斯",
+          "Miasma Ravager - Avarus",
+          "ミアズマラヴェジャー・アヴァルス",
+          "미아즈마 침식자·아바루스",
+          "Monster_Avarus",
+          "31011"
+        ]
+      },
+      "930170": {
+        "id": "930170",
+        "label": {
+          "zh": "魔神黄金邦布",
+          "en": "Mecha Golden Bangboo"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/930170.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "魔神黄金邦布",
+          "Mecha Golden Bangboo",
+          "黄金魔神ギアゴルド",
+          "마신 황금 「Bangboo」",
+          "Monster_MazingerGoldenBomb",
+          "11571"
+        ]
+      },
+      "930171": {
+        "id": "930171",
+        "label": {
+          "zh": "渔人蟹",
+          "en": "Fisher Crab"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/930171.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "渔人蟹",
+          "Fisher Crab",
+          "ミミック蟹",
+          "피셔 크랩",
+          "Monster_Anglercrab",
+          "31021"
+        ]
+      },
+      "930172": {
+        "id": "930172",
+        "label": {
+          "zh": "赫斯克龙",
+          "en": "Huskron"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/930172.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "赫斯克龙",
+          "Huskron",
+          "ハスクロン",
+          "허스크론",
+          "Monster_Huskron",
+          "31071"
+        ]
+      },
+      "930173": {
+        "id": "930173",
+        "label": {
+          "zh": "秽息行者· 阿卡沃尔",
+          "en": "Miasma Walker - Arcavor"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/930173.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "秽息行者· 阿卡沃尔",
+          "Miasma Walker - Arcavor",
+          "ミアズマの歩者・アカヴォル",
+          "미아즈마 워커·아카보르",
+          "Monster_Arcavor",
+          "31041"
+        ]
+      },
+      "930174": {
+        "id": "930174",
+        "label": {
+          "zh": "颂礼赞者",
+          "en": "Exalting Hymnist"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/930174.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "颂礼赞者",
+          "Exalting Hymnist",
+          "礼賛者",
+          "칭송회 예찬자",
+          "Monster_HymnistWar",
+          "31091"
+        ]
+      },
+      "930175": {
+        "id": "930175",
+        "label": {
+          "zh": "秽蚀·简",
+          "en": "Miasmic - Jane"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/930175.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "秽蚀·简",
+          "Miasmic - Jane",
+          "ミアズミック・ジェーン",
+          "미아즈믹·제인",
+          "Monster_MiasmaJaneDoeSlime",
+          "31121"
+        ]
+      },
+      "930176": {
+        "id": "930176",
+        "label": {
+          "zh": "秽蚀·暗渊惩戒者",
+          "en": "Miasmic - Abyssal Enforcer"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/930176.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "秽蚀·暗渊惩戒者",
+          "Miasmic - Abyssal Enforcer",
+          "ミアズミック・深淵の断罪者",
+          "미아즈믹·암연 징벌자",
+          "Monster_MiasmaHugoVladSlime",
+          "31131"
+        ]
+      },
+      "930177": {
+        "id": "930177",
+        "label": {
+          "zh": "秽蚀·多佩冈亚",
+          "en": "Miasmic - Doppelganger"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/930177.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "秽蚀·多佩冈亚",
+          "Miasmic - Doppelganger",
+          "ミアズミック・ドッペルゲンガー",
+          "미아즈믹·도플갱어",
+          "Monster_GiantGrey",
+          "11114"
+        ]
+      },
+      "930178": {
+        "id": "930178",
+        "label": {
+          "zh": "秽蚀·色雷斯人",
+          "en": "Miasmic - Thracian"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/930178.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "秽蚀·色雷斯人",
+          "Miasmic - Thracian",
+          "ミアズミック・トラキアン",
+          "미아즈믹·트라키안",
+          "Monster_MiasmaThracian",
+          "31101"
+        ]
+      },
+      "940001": {
+        "id": "940001",
+        "label": {
+          "zh": "赫斯克龙",
+          "en": "Huskron"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/940001.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "赫斯克龙",
+          "Huskron",
+          "ハスクロン",
+          "허스크론",
+          "31071"
+        ]
+      },
+      "940002": {
+        "id": "940002",
+        "label": {
+          "zh": "伐木机",
+          "en": "Lumberjack"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/940002.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "伐木机",
+          "Lumberjack",
+          "伐採機",
+          "벌목기",
+          "11791"
+        ]
+      },
+      "940003": {
+        "id": "940003",
+        "label": {
+          "zh": "蛮横力士",
+          "en": "Rampant Brute"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/940003.json",
+          "dataPath": "/"
+        },
+        "rank": "special",
+        "sourceAliases": [
+          "蛮横力士",
+          "Rampant Brute",
+          "剛力横暴者",
+          "횡포자",
+          "11671"
+        ]
+      },
+      "940004": {
+        "id": "940004",
+        "label": {
+          "zh": "秉火领颂",
+          "en": "Flame Cantor"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/940004.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "秉火领颂",
+          "Flame Cantor",
+          "火を帯びし先導者",
+          "불꽃의 선창자",
+          "31081"
+        ]
+      },
+      "990167": {
+        "id": "990167",
+        "label": {
+          "zh": "秉火梦徒",
+          "en": "Flame Dreamer"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/990167.json",
+          "dataPath": "/"
+        },
+        "rank": "elite",
+        "sourceAliases": [
+          "秉火梦徒",
+          "Flame Dreamer",
+          "火を帯びし夢見者",
+          "불꽃 환몽가",
+          "31081"
+        ]
+      },
+      "990174": {
+        "id": "990174",
+        "label": {
+          "zh": "幻梦赞者",
+          "en": "Dreaming Hymnist"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/990174.json",
+          "dataPath": "/"
+        },
+        "rank": "normal",
+        "sourceAliases": [
+          "幻梦赞者",
+          "Dreaming Hymnist",
+          "幻賛者",
+          "환몽 예찬자",
+          "31091"
+        ]
+      }
+    },
     "resonium": {},
     "modifiers": {},
     "rules": {

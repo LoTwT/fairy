@@ -1,7 +1,7 @@
 # Nanoka Drift Report: phase3-sync-002-g27-g28
 
 Status: Phase 3 drift audit second sync with G27/G28 proof anchors
-Generated: 2026-05-15T18:20:00+08:00
+Generated: 2026-05-15T16:20:00+08:00
 
 This report carries forward accepted G01-G26 rulings, adds G27/G28 approved-live proof anchors, and records Phase 3 exit-clean evidence. Full runtime cutover remains disabled.
 
@@ -9,7 +9,7 @@ This report carries forward accepted G01-G26 rulings, adds G27/G28 approved-live
 
 | Source | Version | Content Hash |
 |---|---|---|
-| `nanoka-zzz` | `2.8` | `sha256:91494c2c3bfda6ec47beccbf71066506ab0a315513aa751cf30e4c3a1dc0817d` |
+| `nanoka-zzz` | `2.8` | `sha256:55571ec544ff0bbb994621d08d8b2ebbcea090109708c53b9bbd01202f6a7558` |
 
 ## Baselines
 
