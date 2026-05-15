@@ -78,6 +78,7 @@ describe("nanoka source gate", () => {
 
     expect(requirePattern(source.urlAllowlist, "manifestUrl").test("https://static.nanoka.cc/manifest.json")).toBe(true)
     expect(requirePattern(source.urlAllowlist, "versionedIndexUrls").test("https://static.nanoka.cc/zzz/2.8/boss.json")).toBe(true)
+    expect(requirePattern(source.urlAllowlist, "versionedIndexUrls").test("https://static.nanoka.cc/zzz/2.8/character.json")).toBe(true)
     expect(requirePattern(source.urlAllowlist, "versionedIndexUrls").test("https://static.nanoka.cc/zzz/2.8/bangboo.json")).toBe(true)
     expect(requirePattern(source.urlAllowlist, "localizedDetailUrls").test("https://static.nanoka.cc/zzz/2.8/zh/character/1021.json")).toBe(true)
     expect(requirePattern(source.urlAllowlist, "localizedDetailUrls").test("https://static.nanoka.cc/zzz/2.8/zh/monster/30000.json")).toBe(true)
@@ -251,6 +252,31 @@ describe("nanoka source gate", () => {
 
     expect(rows.get("bangboos.element")?.supportingSampleEntities).toHaveLength(39)
     expect(rows.get("bangboos.element")?.auditArtifact).toBe("data/cleaned/audit/nanoka-bangboo-batch-audit.json")
+  })
+
+  it("locks the V1.2.x character batch to the full approved-live index", () => {
+    const matrix = readJson<CoverageMatrix>("data/cleaned/audit/nanoka-coverage-matrix.json")
+    const samples = new Map(matrix.sampleSources.map(sample => [sample.id, sample]))
+    const rows = new Map(matrix.rows.map(row => [row.fieldId, row]))
+    const characterSamples = matrix.sampleSources.filter(sample => sample.entityType === "agent" && sample.version === "2.8")
+
+    expect(samples.get("nanoka-character-index-live-2.8")).toMatchObject({
+      version: "2.8",
+      approvedForCleanedOutput: true,
+      evidenceUse: "v1.2.x-character-batch-source-gate",
+    })
+    expect(characterSamples).toHaveLength(53)
+
+    for (const fieldId of ["agents.identity", "agents.enums", "agents.basePanel"]) {
+      expect(rows.get(fieldId)).toMatchObject({
+        sampleEntity: "nanoka-character-index-live-2.8",
+        auditArtifact: "data/cleaned/audit/nanoka-character-batch-audit.json",
+      })
+      expect(rows.get(fieldId)?.supportingSampleEntities).toHaveLength(53)
+      expect(rows.get(fieldId)?.notes).toContain("no new golden anchors")
+    }
+
+    expect(rows.get("agents.passiveModifiers")?.blockedBy).toContain("typed-modifier-template-required")
   })
 
   it("locks enemy variant mapping to approved live monster detail samples", () => {

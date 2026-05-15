@@ -29,7 +29,7 @@ Fairy uses pnpm workspaces. See [docs/architecture/monorepo-development.md](docs
 
 ## 数据来源声明 / Data Sources
 
-`@randomplay/data` 汇总和清洗了来自 nanoka 等公开来源的 ZZZ 游戏内数值规则数据，用于本地伤害计算用途。V0.1.0 runtime 数据派生自正式服已发布内容，并锁定 `manifest.zzz.live` 对应的 nanoka 版本。
+`@randomplay/data` 汇总和清洗了来自 nanoka 等公开来源的 ZZZ 游戏内数值规则数据，用于本地伤害计算用途。V0.1.0 runtime 数据派生自正式服已发布内容，并锁定 `manifest.zzz.live` 对应的 nanoka 版本；当前 main 已累积全邦布与全角色 batch import，尚未额外发包。
 
 来源详情见 [data/source-registry.json](data/source-registry.json)。Runtime cleaned 数据保留 `sourceId`、`sourceVersion`、`sourceAnchor` 等追溯字段；Excel、米游社 D-17、buhflipexplode D-12 raw snapshots 仅作为 archived audit reference 保留，不再作为 runtime source。
 

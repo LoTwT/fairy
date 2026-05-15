@@ -2,7 +2,7 @@
   "kind": "gameData",
   "schemaVersion": "cleaned-game-data-artifact/v0.1",
   "dataVersion": "fairy-v0.1.0-nanoka-runtime",
-  "generatedAt": "2026-05-15T20:56:00+08:00",
+  "generatedAt": "2026-05-15T23:42:00+08:00",
   "sourceManifestPath": "data/source/source-manifest.json",
   "runtimeCutoverReady": true,
   "runtimeSourcePolicy": {
@@ -22,7 +22,7 @@
     "gameVersion": "ZZZ-2.8",
     "dataVersion": "0.1.0",
     "sourceVersion": "nanoka-zzz@2.8",
-    "generatedAt": "2026-05-15T20:56:00+08:00",
+    "generatedAt": "2026-05-15T23:42:00+08:00",
     "sources": [
       {
         "id": "nanoka-zzz",
@@ -30,13 +30,1135 @@
         "url": "https://static.nanoka.cc/manifest.json",
         "gameVersion": "ZZZ-2.8",
         "sourceVersion": "2.8",
-        "fetchedAt": "2026-05-15T20:56:00+08:00",
-        "parsedAt": "2026-05-15T20:56:00+08:00",
-        "parserVersion": "nanoka-runtime-bangboo-batch-v0.1.0",
+        "fetchedAt": "2026-05-15T23:42:00+08:00",
+        "parsedAt": "2026-05-15T23:42:00+08:00",
+        "parserVersion": "nanoka-runtime-character-batch-v0.1.0",
         "licenseNote": "Runtime cleaned data uses lo-user-approved nanoka live 2.8 evidence; archived Excel/D-17/D-12 sources are retained for audit only."
       }
     ],
     "agents": {
+      "1011": {
+        "id": "1011",
+        "label": {
+          "zh": "安比",
+          "en": "Anby"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1011.json",
+          "dataPath": "/"
+        },
+        "attribute": "electric",
+        "agentSpecialty": "stun",
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 7500.7134,
+            "attack": 583.957,
+            "defense": 612.6038,
+            "impact": 118,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 94,
+            "anomalyProficiency": 93
+          }
+        },
+        "skillIds": [],
+        "sourceAliases": [
+          "安比",
+          "Anby"
+        ]
+      },
+      "1021": {
+        "id": "1021",
+        "label": {
+          "zh": "猫又",
+          "en": "Nekomata"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1021.json",
+          "dataPath": "/"
+        },
+        "attribute": "physical",
+        "agentSpecialty": "attack",
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 7560.1902,
+            "attack": 835.5958,
+            "defense": 587.5794,
+            "impact": 92,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 97,
+            "anomalyProficiency": 96
+          }
+        },
+        "skillIds": [],
+        "sourceAliases": [
+          "猫又",
+          "Nekomata"
+        ]
+      },
+      "1031": {
+        "id": "1031",
+        "label": {
+          "zh": "妮可",
+          "en": "Nicole"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1031.json",
+          "dataPath": "/"
+        },
+        "attribute": "ether",
+        "agentSpecialty": "support",
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 8145.8433,
+            "attack": 574.1691,
+            "defense": 622.6159,
+            "impact": 88,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 90,
+            "anomalyProficiency": 93
+          }
+        },
+        "skillIds": [],
+        "sourceAliases": [
+          "妮可",
+          "Nicole"
+        ]
+      },
+      "1041": {
+        "id": "1041",
+        "label": {
+          "zh": "「11号」",
+          "en": "Soldier 11"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1041.json",
+          "dataPath": "/"
+        },
+        "attribute": "fire",
+        "agentSpecialty": "attack",
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 7673.7042,
+            "attack": 813.5686,
+            "defense": 612.6038,
+            "impact": 93,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 94,
+            "anomalyProficiency": 93
+          }
+        },
+        "skillIds": [],
+        "sourceAliases": [
+          "「11号」",
+          "Soldier 11"
+        ]
+      },
+      "1051": {
+        "id": "1051",
+        "label": {
+          "zh": "伊德海莉",
+          "en": "Yidhari"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1051.json",
+          "dataPath": "/"
+        },
+        "attribute": "ice",
+        "agentSpecialty": "rupture",
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 8497.1437,
+            "attack": 784.9099,
+            "defense": 448.4451,
+            "impact": 95,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 87,
+            "anomalyProficiency": 90
+          }
+        },
+        "skillIds": [],
+        "sourceAliases": [
+          "伊德海莉",
+          "Yidhari"
+        ]
+      },
+      "1061": {
+        "id": "1061",
+        "label": {
+          "zh": "可琳",
+          "en": "Corin"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1061.json",
+          "dataPath": "/"
+        },
+        "attribute": "physical",
+        "agentSpecialty": "attack",
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 6976.9443,
+            "attack": 732.1414,
+            "defense": 604.5976,
+            "impact": 93,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 93,
+            "anomalyProficiency": 96
+          }
+        },
+        "skillIds": [],
+        "sourceAliases": [
+          "可琳",
+          "Corin"
+        ]
+      },
+      "1071": {
+        "id": "1071",
+        "label": {
+          "zh": "凯撒",
+          "en": "Caesar"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1071.json",
+          "dataPath": "/"
+        },
+        "attribute": "physical",
+        "agentSpecialty": "defense",
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 9526.2299,
+            "attack": 636.6899,
+            "defense": 753.862,
+            "impact": 105,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 87,
+            "anomalyProficiency": 90
+          }
+        },
+        "skillIds": [],
+        "sourceAliases": [
+          "凯撒",
+          "Caesar"
+        ]
+      },
+      "1081": {
+        "id": "1081",
+        "label": {
+          "zh": "比利",
+          "en": "Billy"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1081.json",
+          "dataPath": "/"
+        },
+        "attribute": "physical",
+        "agentSpecialty": "attack",
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 6907.2636,
+            "attack": 712.2765,
+            "defense": 606.5977,
+            "impact": 91,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 92,
+            "anomalyProficiency": 91
+          }
+        },
+        "skillIds": [],
+        "sourceAliases": [
+          "比利",
+          "Billy"
+        ]
+      },
+      "1091": {
+        "id": "1091",
+        "label": {
+          "zh": "雅",
+          "en": "Miyabi"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1091.json",
+          "dataPath": "/"
+        },
+        "attribute": "frost",
+        "agentSpecialty": "anomaly",
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 7673.7042,
+            "attack": 805.6952,
+            "defense": 606.5977,
+            "impact": 86,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 116,
+            "anomalyProficiency": 148
+          }
+        },
+        "skillIds": [],
+        "sourceAliases": [
+          "雅",
+          "Miyabi"
+        ]
+      },
+      "1101": {
+        "id": "1101",
+        "label": {
+          "zh": "珂蕾妲",
+          "en": "Koleda"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1101.json",
+          "dataPath": "/"
+        },
+        "attribute": "fire",
+        "agentSpecialty": "stun",
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 8127.3088,
+            "attack": 660.8413,
+            "defense": 594.5855,
+            "impact": 116,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 97,
+            "anomalyProficiency": 96
+          }
+        },
+        "skillIds": [],
+        "sourceAliases": [
+          "珂蕾妲",
+          "Koleda"
+        ]
+      },
+      "1111": {
+        "id": "1111",
+        "label": {
+          "zh": "安东",
+          "en": "Anton"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1111.json",
+          "dataPath": "/"
+        },
+        "attribute": "electric",
+        "agentSpecialty": "attack",
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 7219.0996,
+            "attack": 716.6483,
+            "defense": 622.6159,
+            "impact": 95,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 86,
+            "anomalyProficiency": 90
+          }
+        },
+        "skillIds": [],
+        "sourceAliases": [
+          "安东",
+          "Anton"
+        ]
+      },
+      "1121": {
+        "id": "1121",
+        "label": {
+          "zh": "本",
+          "en": "Ben"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1121.json",
+          "dataPath": "/"
+        },
+        "attribute": "fire",
+        "agentSpecialty": "defense",
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 8577.5504,
+            "attack": 578.0866,
+            "defense": 724.0351,
+            "impact": 95,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 86,
+            "anomalyProficiency": 90
+          }
+        },
+        "skillIds": [],
+        "sourceAliases": [
+          "本",
+          "Ben"
+        ]
+      },
+      "1131": {
+        "id": "1131",
+        "label": {
+          "zh": "苍角",
+          "en": "Soukaku"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1131.json",
+          "dataPath": "/"
+        },
+        "attribute": "ice",
+        "agentSpecialty": "support",
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 8025.9663,
+            "attack": 590.8333,
+            "defense": 597.5915,
+            "impact": 86,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 93,
+            "anomalyProficiency": 96
+          }
+        },
+        "skillIds": [],
+        "sourceAliases": [
+          "苍角",
+          "Soukaku"
+        ]
+      },
+      "1141": {
+        "id": "1141",
+        "label": {
+          "zh": "莱卡恩",
+          "en": "Lycaon"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1141.json",
+          "dataPath": "/"
+        },
+        "attribute": "ice",
+        "agentSpecialty": "stun",
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 8416.2915,
+            "attack": 653.5933,
+            "defense": 606.5977,
+            "impact": 119,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 91,
+            "anomalyProficiency": 90
+          }
+        },
+        "skillIds": [],
+        "sourceAliases": [
+          "莱卡恩",
+          "Lycaon"
+        ]
+      },
+      "1151": {
+        "id": "1151",
+        "label": {
+          "zh": "露西",
+          "en": "Lucy"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1151.json",
+          "dataPath": "/"
+        },
+        "attribute": "fire",
+        "agentSpecialty": "support",
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 8025.9663,
+            "attack": 583.957,
+            "defense": 612.6038,
+            "impact": 86,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 94,
+            "anomalyProficiency": 93
+          }
+        },
+        "skillIds": [],
+        "sourceAliases": [
+          "露西",
+          "Lucy"
+        ]
+      },
+      "1161": {
+        "id": "1161",
+        "label": {
+          "zh": "莱特",
+          "en": "Lighter"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1161.json",
+          "dataPath": "/"
+        },
+        "attribute": "fire",
+        "agentSpecialty": "stun",
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 8253.2915,
+            "attack": 722.9569,
+            "defense": 612.6038,
+            "impact": 119,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 91,
+            "anomalyProficiency": 90
+          }
+        },
+        "skillIds": [],
+        "sourceAliases": [
+          "莱特",
+          "Lighter"
+        ]
+      },
+      "1171": {
+        "id": "1171",
+        "label": {
+          "zh": "柏妮思",
+          "en": "Burnice"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1171.json",
+          "dataPath": "/"
+        },
+        "attribute": "fire",
+        "agentSpecialty": "anomaly",
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 7368.1929,
+            "attack": 788.4528,
+            "defense": 600.5916,
+            "impact": 83,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 118,
+            "anomalyProficiency": 120
+          }
+        },
+        "skillIds": [],
+        "sourceAliases": [
+          "柏妮思",
+          "Burnice"
+        ]
+      },
+      "1181": {
+        "id": "1181",
+        "label": {
+          "zh": "格莉丝",
+          "en": "Grace"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1181.json",
+          "dataPath": "/"
+        },
+        "attribute": "electric",
+        "agentSpecialty": "anomaly",
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 7482.7069,
+            "attack": 750.9679,
+            "defense": 600.5916,
+            "impact": 83,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 115,
+            "anomalyProficiency": 116
+          }
+        },
+        "skillIds": [],
+        "sourceAliases": [
+          "格莉丝",
+          "Grace"
+        ]
+      },
+      "1191": {
+        "id": "1191",
+        "label": {
+          "zh": "艾莲",
+          "en": "Ellen"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1191.json",
+          "dataPath": "/"
+        },
+        "attribute": "ice",
+        "agentSpecialty": "attack",
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 7673.7042,
+            "attack": 863.2102,
+            "defense": 606.5977,
+            "impact": 93,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 94,
+            "anomalyProficiency": 93
+          }
+        },
+        "skillIds": [],
+        "sourceAliases": [
+          "艾莲",
+          "Ellen"
+        ]
+      },
+      "1201": {
+        "id": "1201",
+        "label": {
+          "zh": "悠真",
+          "en": "Harumasa"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1201.json",
+          "dataPath": "/"
+        },
+        "attribute": "electric",
+        "agentSpecialty": "attack",
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 7405.6956,
+            "attack": 840.593,
+            "defense": 600.5916,
+            "impact": 90,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 80,
+            "anomalyProficiency": 95
+          }
+        },
+        "skillIds": [],
+        "sourceAliases": [
+          "悠真",
+          "Harumasa"
+        ]
+      },
+      "1211": {
+        "id": "1211",
+        "label": {
+          "zh": "丽娜",
+          "en": "Rina"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1211.json",
+          "dataPath": "/"
+        },
+        "attribute": "electric",
+        "agentSpecialty": "support",
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 8609.2122,
+            "attack": 642.1859,
+            "defense": 600.5916,
+            "impact": 83,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 93,
+            "anomalyProficiency": 92
+          }
+        },
+        "skillIds": [],
+        "sourceAliases": [
+          "丽娜",
+          "Rina"
+        ]
+      },
+      "1221": {
+        "id": "1221",
+        "label": {
+          "zh": "柳",
+          "en": "Yanagi"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1221.json",
+          "dataPath": "/"
+        },
+        "attribute": "electric",
+        "agentSpecialty": "anomaly",
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 7788.6961,
+            "attack": 797.574,
+            "defense": 612.6038,
+            "impact": 86,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 112,
+            "anomalyProficiency": 114
+          }
+        },
+        "skillIds": [],
+        "sourceAliases": [
+          "柳",
+          "Yanagi"
+        ]
+      },
+      "1241": {
+        "id": "1241",
+        "label": {
+          "zh": "朱鸢",
+          "en": "Zhu Yuan"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1241.json",
+          "dataPath": "/"
+        },
+        "attribute": "ether",
+        "agentSpecialty": "attack",
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 7482.7069,
+            "attack": 844.3011,
+            "defense": 600.5916,
+            "impact": 90,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 93,
+            "anomalyProficiency": 92
+          }
+        },
+        "skillIds": [],
+        "sourceAliases": [
+          "朱鸢",
+          "Zhu Yuan"
+        ]
+      },
+      "1251": {
+        "id": "1251",
+        "label": {
+          "zh": "青衣",
+          "en": "Qingyi"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1251.json",
+          "dataPath": "/"
+        },
+        "attribute": "electric",
+        "agentSpecialty": "stun",
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 8250.5871,
+            "attack": 683.2048,
+            "defense": 612.6038,
+            "impact": 118,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 94,
+            "anomalyProficiency": 93
+          }
+        },
+        "skillIds": [],
+        "sourceAliases": [
+          "青衣",
+          "QingYi",
+          "Qingyi"
+        ]
+      },
+      "1261": {
+        "id": "1261",
+        "label": {
+          "zh": "简",
+          "en": "Jane"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1261.json",
+          "dataPath": "/"
+        },
+        "attribute": "physical",
+        "agentSpecialty": "anomaly",
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 7788.6961,
+            "attack": 805.6952,
+            "defense": 606.5977,
+            "impact": 86,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 112,
+            "anomalyProficiency": 114
+          }
+        },
+        "skillIds": [],
+        "sourceAliases": [
+          "简",
+          "Jane"
+        ]
+      },
+      "1271": {
+        "id": "1271",
+        "label": {
+          "zh": "赛斯",
+          "en": "Seth"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1271.json",
+          "dataPath": "/"
+        },
+        "attribute": "electric",
+        "agentSpecialty": "defense",
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 8701.3125,
+            "attack": 568.2987,
+            "defense": 746.1361,
+            "impact": 94,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 86,
+            "anomalyProficiency": 90
+          }
+        },
+        "skillIds": [],
+        "sourceAliases": [
+          "赛斯",
+          "Seth"
+        ]
+      },
+      "1281": {
+        "id": "1281",
+        "label": {
+          "zh": "派派",
+          "en": "Piper"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1281.json",
+          "dataPath": "/"
+        },
+        "attribute": "physical",
+        "agentSpecialty": "anomaly",
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 6976.9443,
+            "attack": 683.4172,
+            "defense": 612.6038,
+            "impact": 86,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 116,
+            "anomalyProficiency": 118
+          }
+        },
+        "skillIds": [],
+        "sourceAliases": [
+          "派派",
+          "Piper"
+        ]
+      },
+      "1291": {
+        "id": "1291",
+        "label": {
+          "zh": "雨果",
+          "en": "Hugo"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1291.json",
+          "dataPath": "/"
+        },
+        "attribute": "ice",
+        "agentSpecialty": "attack",
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 7940.7128,
+            "attack": 844.3011,
+            "defense": 616.6098,
+            "impact": 95,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 86,
+            "anomalyProficiency": 90
+          }
+        },
+        "skillIds": [],
+        "sourceAliases": [
+          "雨果",
+          "Hugo"
+        ]
+      },
+      "1301": {
+        "id": "1301",
+        "label": {
+          "zh": "奥菲丝&「鬼火」",
+          "en": "Orphie & Magus"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1301.json",
+          "dataPath": "/"
+        },
+        "attribute": "fire",
+        "agentSpecialty": "attack",
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 7788.6961,
+            "attack": 854.7586,
+            "defense": 612.6038,
+            "impact": 93,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 92,
+            "anomalyProficiency": 90
+          }
+        },
+        "skillIds": [],
+        "sourceAliases": [
+          "奥菲丝&「鬼火」",
+          "Orphie & Magus"
+        ]
+      },
+      "1311": {
+        "id": "1311",
+        "label": {
+          "zh": "耀嘉音",
+          "en": "Astra Yao"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1311.json",
+          "dataPath": "/"
+        },
+        "attribute": "ether",
+        "agentSpecialty": "support",
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 8609.2122,
+            "attack": 640.7699,
+            "defense": 600.5916,
+            "impact": 83,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 93,
+            "anomalyProficiency": 92
+          }
+        },
+        "skillIds": [],
+        "sourceAliases": [
+          "耀嘉音",
+          "Astra",
+          "Astra Yao"
+        ]
+      },
+      "1321": {
+        "id": "1321",
+        "label": {
+          "zh": "伊芙琳",
+          "en": "Evelyn"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1321.json",
+          "dataPath": "/"
+        },
+        "attribute": "fire",
+        "agentSpecialty": "attack",
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 7788.6961,
+            "attack": 854.7586,
+            "defense": 612.6038,
+            "impact": 93,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 92,
+            "anomalyProficiency": 90
+          }
+        },
+        "skillIds": [],
+        "sourceAliases": [
+          "伊芙琳",
+          "Evelyn"
+        ]
+      },
+      "1331": {
+        "id": "1331",
+        "label": {
+          "zh": "薇薇安",
+          "en": "Vivian"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1331.json",
+          "dataPath": "/"
+        },
+        "attribute": "ether",
+        "agentSpecialty": "anomaly",
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 7673.7042,
+            "attack": 805.6952,
+            "defense": 606.5977,
+            "impact": 86,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 108,
+            "anomalyProficiency": 118
+          }
+        },
+        "skillIds": [],
+        "sourceAliases": [
+          "薇薇安",
+          "Vivian"
+        ]
+      },
+      "1341": {
+        "id": "1341",
+        "label": {
+          "zh": "照",
+          "en": "Zhao"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1341.json",
+          "dataPath": "/"
+        },
+        "attribute": "ice",
+        "agentSpecialty": "defense",
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 9117.4144,
+            "attack": 690.6593,
+            "defense": 701.8928,
+            "impact": 93,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 93,
+            "anomalyProficiency": 96
+          }
+        },
+        "skillIds": [],
+        "sourceAliases": [
+          "照",
+          "Zhao"
+        ]
+      },
+      "1351": {
+        "id": "1351",
+        "label": {
+          "zh": "波可娜",
+          "en": "Pulchra"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1351.json",
+          "dataPath": "/"
+        },
+        "attribute": "physical",
+        "agentSpecialty": "stun",
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 7612.7878,
+            "attack": 590.8333,
+            "defense": 606.5977,
+            "impact": 118,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 92,
+            "anomalyProficiency": 90
+          }
+        },
+        "skillIds": [],
+        "sourceAliases": [
+          "波可娜",
+          "Pulchra"
+        ]
+      },
+      "1361": {
+        "id": "1361",
+        "label": {
+          "zh": "「扳机」",
+          "en": "Trigger"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1361.json",
+          "dataPath": "/"
+        },
+        "attribute": "electric",
+        "agentSpecialty": "stun",
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 7923.1783,
+            "attack": 675.7503,
+            "defense": 600.5916,
+            "impact": 113,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 96,
+            "anomalyProficiency": 95
+          }
+        },
+        "skillIds": [],
+        "sourceAliases": [
+          "「扳机」",
+          "Trigger"
+        ]
+      },
       "1371": {
         "id": "1371",
         "label": {
@@ -70,7 +1192,554 @@
         "sourceAliases": [
           "仪玄",
           "Yixuan",
-          "Yixuan"
+          "YiXuan"
+        ]
+      },
+      "1381": {
+        "id": "1381",
+        "label": {
+          "zh": "零号·安比",
+          "en": "Soldier 0 - Anby"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1381.json",
+          "dataPath": "/"
+        },
+        "attribute": "electric",
+        "agentSpecialty": "attack",
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 7673.7042,
+            "attack": 854.7586,
+            "defense": 612.6038,
+            "impact": 93,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 94,
+            "anomalyProficiency": 93
+          }
+        },
+        "skillIds": [],
+        "sourceAliases": [
+          "零号·安比",
+          "Soldier 0 - Anby"
+        ]
+      },
+      "1391": {
+        "id": "1391",
+        "label": {
+          "zh": "橘福福",
+          "en": "Ju Fufu"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1391.json",
+          "dataPath": "/"
+        },
+        "attribute": "fire",
+        "agentSpecialty": "stun",
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 8250.5871,
+            "attack": 690.6593,
+            "defense": 597.5915,
+            "impact": 118,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 93,
+            "anomalyProficiency": 96
+          }
+        },
+        "skillIds": [],
+        "sourceAliases": [
+          "橘福福",
+          "Ju Fufu"
+        ]
+      },
+      "1401": {
+        "id": "1401",
+        "label": {
+          "zh": "爱丽丝",
+          "en": "Alice"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1401.json",
+          "dataPath": "/"
+        },
+        "attribute": "physical",
+        "agentSpecialty": "anomaly",
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 7673.7042,
+            "attack": 805.6952,
+            "defense": 606.5977,
+            "impact": 86,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 106,
+            "anomalyProficiency": 118
+          }
+        },
+        "skillIds": [],
+        "sourceAliases": [
+          "爱丽丝",
+          "Alice"
+        ]
+      },
+      "1411": {
+        "id": "1411",
+        "label": {
+          "zh": "柚叶",
+          "en": "Yuzuha"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1411.json",
+          "dataPath": "/"
+        },
+        "attribute": "physical",
+        "agentSpecialty": "support",
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 8829.47,
+            "attack": 683.2048,
+            "defense": 612.6038,
+            "impact": 86,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 88,
+            "anomalyProficiency": 93
+          }
+        },
+        "skillIds": [],
+        "sourceAliases": [
+          "柚叶",
+          "Yuzuha"
+        ]
+      },
+      "1421": {
+        "id": "1421",
+        "label": {
+          "zh": "潘引壶",
+          "en": "Pan Yinhu"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1421.json",
+          "dataPath": "/"
+        },
+        "attribute": "physical",
+        "agentSpecialty": "defense",
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 8453.7942,
+            "attack": 586.9158,
+            "defense": 712.9433,
+            "impact": 94,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 91,
+            "anomalyProficiency": 90
+          }
+        },
+        "skillIds": [],
+        "sourceAliases": [
+          "潘引壶",
+          "Yinhu",
+          "Pan Yinhu"
+        ]
+      },
+      "1431": {
+        "id": "1431",
+        "label": {
+          "zh": "叶瞬光",
+          "en": "Ye Shunguang"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1431.json",
+          "dataPath": "/"
+        },
+        "attribute": "physical",
+        "agentSpecialty": "attack",
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 7673.7042,
+            "attack": 863.2102,
+            "defense": 606.5977,
+            "impact": 83,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 94,
+            "anomalyProficiency": 93
+          }
+        },
+        "skillIds": [],
+        "sourceAliases": [
+          "叶瞬光",
+          "Ye Shunguang"
+        ]
+      },
+      "1441": {
+        "id": "1441",
+        "label": {
+          "zh": "真斗",
+          "en": "Manato"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1441.json",
+          "dataPath": "/"
+        },
+        "attribute": "fire",
+        "agentSpecialty": "rupture",
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 7724.8563,
+            "attack": 680.2106,
+            "defense": 443.56,
+            "impact": 95,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 87,
+            "anomalyProficiency": 90
+          }
+        },
+        "skillIds": [],
+        "sourceAliases": [
+          "真斗",
+          "Manato"
+        ]
+      },
+      "1451": {
+        "id": "1451",
+        "label": {
+          "zh": "卢西娅",
+          "en": "Lucia"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1451.json",
+          "dataPath": "/"
+        },
+        "attribute": "ether",
+        "agentSpecialty": "support",
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 8477.1696,
+            "attack": 683.2048,
+            "defense": 594.5855,
+            "impact": 83,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 96,
+            "anomalyProficiency": 95
+          }
+        },
+        "skillIds": [],
+        "sourceAliases": [
+          "卢西娅",
+          "Lucia"
+        ]
+      },
+      "1461": {
+        "id": "1461",
+        "label": {
+          "zh": "「席德」",
+          "en": "Seed"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1461.json",
+          "dataPath": "/"
+        },
+        "attribute": "electric",
+        "agentSpecialty": "attack",
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 7673.7042,
+            "attack": 854.7586,
+            "defense": 612.6038,
+            "impact": 93,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 94,
+            "anomalyProficiency": 93
+          }
+        },
+        "skillIds": [],
+        "sourceAliases": [
+          "「席德」",
+          "Seed"
+        ]
+      },
+      "1471": {
+        "id": "1471",
+        "label": {
+          "zh": "般岳",
+          "en": "Banyue"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1471.json",
+          "dataPath": "/"
+        },
+        "attribute": "fire",
+        "agentSpecialty": "rupture",
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 8497.1437,
+            "attack": 784.9099,
+            "defense": 445.9996,
+            "impact": 95,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 90,
+            "anomalyProficiency": 89
+          }
+        },
+        "skillIds": [],
+        "sourceAliases": [
+          "般岳",
+          "BanYue",
+          "Banyue"
+        ]
+      },
+      "1481": {
+        "id": "1481",
+        "label": {
+          "zh": "琉音",
+          "en": "Dialyn"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1481.json",
+          "dataPath": "/"
+        },
+        "attribute": "physical",
+        "agentSpecialty": "stun",
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 8250.5871,
+            "attack": 683.2048,
+            "defense": 612.6038,
+            "impact": 110,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 94,
+            "anomalyProficiency": 93
+          }
+        },
+        "skillIds": [],
+        "sourceAliases": [
+          "琉音",
+          "Dialyn"
+        ]
+      },
+      "1491": {
+        "id": "1491",
+        "label": {
+          "zh": "千夏",
+          "en": "Sunna"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1491.json",
+          "dataPath": "/"
+        },
+        "attribute": "physical",
+        "agentSpecialty": "support",
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 8477.1696,
+            "attack": 675.7503,
+            "defense": 600.5916,
+            "impact": 98,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 96,
+            "anomalyProficiency": 95
+          }
+        },
+        "skillIds": [],
+        "sourceAliases": [
+          "千夏",
+          "Sunna"
+        ]
+      },
+      "1501": {
+        "id": "1501",
+        "label": {
+          "zh": "爱芮",
+          "en": "Aria"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1501.json",
+          "dataPath": "/"
+        },
+        "attribute": "ether",
+        "agentSpecialty": "anomaly",
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 7749.7096,
+            "attack": 788.4528,
+            "defense": 619.6099,
+            "impact": 87,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 115,
+            "anomalyProficiency": 116
+          }
+        },
+        "skillIds": [],
+        "sourceAliases": [
+          "爱芮",
+          "Aria"
+        ]
+      },
+      "1511": {
+        "id": "1511",
+        "label": {
+          "zh": "南宫羽",
+          "en": "Nangong Yu"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1511.json",
+          "dataPath": "/"
+        },
+        "attribute": "ether",
+        "agentSpecialty": "stun",
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 8373.8654,
+            "attack": 671.5024,
+            "defense": 622.6159,
+            "impact": 120,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 90,
+            "anomalyProficiency": 93
+          }
+        },
+        "skillIds": [],
+        "sourceAliases": [
+          "南宫羽",
+          "NangongYu",
+          "Nangong Yu"
+        ]
+      },
+      "1521": {
+        "id": "1521",
+        "label": {
+          "zh": "希希芙",
+          "en": "Cissia"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1521.json",
+          "dataPath": "/"
+        },
+        "attribute": "electric",
+        "agentSpecialty": "attack",
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 7673.7042,
+            "attack": 863.2102,
+            "defense": 606.5977,
+            "impact": 93,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 94,
+            "anomalyProficiency": 93
+          }
+        },
+        "skillIds": [],
+        "sourceAliases": [
+          "希希芙",
+          "Cissia"
+        ]
+      },
+      "1531": {
+        "id": "1531",
+        "label": {
+          "zh": "星徽·比利",
+          "en": "Starlight - Billy"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1531.json",
+          "dataPath": "/"
+        },
+        "attribute": "physical",
+        "agentSpecialty": "rupture",
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 8497.1437,
+            "attack": 784.9099,
+            "defense": 445.9996,
+            "impact": 95,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 90,
+            "anomalyProficiency": 89
+          }
+        },
+        "skillIds": [],
+        "sourceAliases": [
+          "星徽·比利",
+          "Starlight - Billy"
+        ]
+      },
+      "1541": {
+        "id": "1541",
+        "label": {
+          "zh": "普罗米娅",
+          "en": "Promeia"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1541.json",
+          "dataPath": "/"
+        },
+        "attribute": "ice",
+        "agentSpecialty": "anomaly",
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 7788.6961,
+            "attack": 797.574,
+            "defense": 612.6038,
+            "impact": 86,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 112,
+            "anomalyProficiency": 114
+          }
+        },
+        "skillIds": [],
+        "sourceAliases": [
+          "普罗米娅",
+          "Promeia"
         ]
       }
     },

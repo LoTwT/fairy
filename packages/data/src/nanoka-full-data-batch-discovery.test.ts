@@ -71,11 +71,12 @@ describe("nanoka full-data batch discovery", () => {
     expect(rows.get("characters")).toMatchObject({
       currentLiveIndexCount: 53,
       currentLiveDetailAccessibleCount: 53,
-      retainedRawDetailCount: 4,
-      runtimeRecordCount: 1,
-      missingRawDetailCount: 49,
-      missingRuntimeRecordCount: 52,
+      retainedRawDetailCount: 53,
+      runtimeRecordCount: 53,
+      missingRawDetailCount: 0,
+      missingRuntimeRecordCount: 0,
       targetRuntimeBucket: "GameData.agents",
+      schemaFit: "existing-bucket-batch-complete-pr-a",
     })
     expect(rows.get("wEngines")).toMatchObject({
       currentLiveIndexCount: 89,

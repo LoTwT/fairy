@@ -8,6 +8,7 @@ All notable changes to Fairy are documented in this file.
 
 - Batch import the approved-live nanoka 2.8 Bangboo catalog into runtime cleaned data without a package version bump.
 - Record the V1.2.x full-data batch import discovery and PR sequence without a package version bump.
+- Batch import the approved-live nanoka 2.8 character catalog into runtime cleaned data without a package version bump.
 
 ## 0.1.0 - 2026-05-15
 

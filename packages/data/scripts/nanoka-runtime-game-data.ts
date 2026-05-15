@@ -1,20 +1,23 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs"
 import { dirname, join } from "node:path"
 import { fileURLToPath } from "node:url"
-import { parseGameData, type BangbooData, type BangbooSkillData, type GameData, type SourceRef } from "../../core/src/index"
+import { parseGameData, type AgentData, type BangbooData, type BangbooSkillData, type GameData, type SourceRef } from "../../core/src/index"
 import { deriveNanokaBangbooElement } from "../src/nanoka-bangboo-element"
 import { assertNanokaRuntimeGameDataArtifact } from "../src/runtime-policy"
 
 const packageDir = fileURLToPath(new URL("..", import.meta.url))
 const repoRoot = join(packageDir, "../..")
 
-const generatedAt = "2026-05-15T20:56:00+08:00"
+const generatedAt = "2026-05-15T23:42:00+08:00"
 const sourceVersion = "2.8"
 const rootArtifactPath = join(repoRoot, "data/cleaned/runtime/game-data.json")
 const packageArtifactPath = join(packageDir, "cleaned/runtime/game-data.json")
+const rootCharacterBatchAuditPath = join(repoRoot, "data/cleaned/audit/nanoka-character-batch-audit.json")
+const packageCharacterBatchAuditPath = join(packageDir, "cleaned/audit/nanoka-character-batch-audit.json")
 const rootBangbooBatchAuditPath = join(repoRoot, "data/cleaned/audit/nanoka-bangboo-batch-audit.json")
 const packageBangbooBatchAuditPath = join(packageDir, "cleaned/audit/nanoka-bangboo-batch-audit.json")
-const yixuanPath = join(repoRoot, "data/source/raw/nanoka/zzz/2.8/zh/character/1371.json")
+const characterIndexPath = join(repoRoot, "data/source/raw/nanoka/zzz/2.8/character.json")
+const characterSourceDir = join(repoRoot, "data/source/raw/nanoka/zzz/2.8/zh/character")
 const bangbooIndexPath = join(repoRoot, "data/source/raw/nanoka/zzz/2.8/bangboo.json")
 const bangbooSourceDir = join(repoRoot, "data/source/raw/nanoka/zzz/2.8/zh/bangboo")
 
@@ -62,8 +65,43 @@ function sourceRef(sourceAnchor: string, dataPath: string): SourceRef {
   }
 }
 
-function yixuanProofValues() {
-  const yixuan = readJson<Record<string, any>>(yixuanPath)
+type CharacterIndexEntry = {
+  code?: string
+  en?: string
+  zh?: string
+  element?: number
+  type?: number
+  spelement?: string
+}
+
+type CharacterRaw = Record<string, any> & {
+  id: number
+  code_name: string
+  name: string
+  element_type?: Record<string, string>
+  weapon_type?: Record<string, string>
+  special_element_type?: {
+    name?: string
+    title?: string
+    desc?: string
+  }
+}
+
+type CharacterRuntimeBuild = {
+  agents: Record<string, AgentData>
+  yixuanProof: ReturnType<typeof yixuanProofValues>
+  audit: unknown
+}
+
+function characterAnchor(entityId: string | number): string {
+  return `data/source/raw/nanoka/zzz/2.8/zh/character/${entityId}.json`
+}
+
+function readCharacterRaw(entityId: string): CharacterRaw {
+  return readJson<CharacterRaw>(join(characterSourceDir, `${entityId}.json`))
+}
+
+function yixuanProofValues(yixuan: CharacterRaw) {
   assert(yixuan.id === 1371, "Yixuan runtime source id drifted")
   const firstBasic = yixuan.skill?.basic?.description?.[4]?.param?.[0]?.param?.["1371001"]
   assert(firstBasic !== undefined, "Yixuan first basic param 1371001 is missing")
@@ -99,6 +137,196 @@ function yixuanProofValues() {
   }
 }
 
+function characterPanel(source: CharacterRaw) {
+  const maxHp = panelValue(source, { baseKey: "hp_max", levelKey: "hp_max", growthKey: "hp_growth" })
+  const panel: Record<string, number> = {
+    maxHp,
+    attack: panelValue(source, { baseKey: "attack", levelKey: "attack", growthKey: "attack_growth" }),
+    defense: panelValue(source, { baseKey: "defence", levelKey: "defence", growthKey: "defence_growth" }),
+    impact: requiredNumber(source.stats?.break_stun, `character.${source.id}.stats.break_stun`),
+    critRate: requiredNumber(source.stats?.crit, `character.${source.id}.stats.crit`) / 10000,
+    critDamage: requiredNumber(source.stats?.crit_damage, `character.${source.id}.stats.crit_damage`) / 10000,
+    anomalyMastery: requiredNumber(source.stats?.element_abnormal_power, `character.${source.id}.stats.element_abnormal_power`),
+    anomalyProficiency: requiredNumber(source.stats?.element_mystery, `character.${source.id}.stats.element_mystery`),
+  }
+
+  if (source.id === 1371)
+    panel.sheerForce = Number((maxHp * 0.1).toFixed(8))
+
+  return panel
+}
+
+function characterSpecialty(source: CharacterRaw): AgentData["agentSpecialty"] {
+  const specialtyCode = Object.keys(source.weapon_type ?? {})[0]
+  if (specialtyCode === "1")
+    return "attack"
+  if (specialtyCode === "2")
+    return "stun"
+  if (specialtyCode === "3")
+    return "anomaly"
+  if (specialtyCode === "4")
+    return "support"
+  if (specialtyCode === "5")
+    return "defense"
+  if (specialtyCode === "6")
+    return "rupture"
+  throw new Error(`character ${source.id}: unsupported weapon_type ${specialtyCode}`)
+}
+
+function baseCharacterAttribute(source: CharacterRaw): AgentData["attribute"] {
+  const elementCode = Object.keys(source.element_type ?? {})[0]
+  if (elementCode === "200")
+    return "physical"
+  if (elementCode === "201")
+    return "fire"
+  if (elementCode === "202")
+    return "ice"
+  if (elementCode === "203")
+    return "electric"
+  if (elementCode === "205")
+    return "ether"
+  throw new Error(`character ${source.id}: unsupported element_type ${elementCode}`)
+}
+
+function characterAttribute(source: CharacterRaw): { attribute: AgentData["attribute"], specialElement: unknown } {
+  const specialName = source.special_element_type?.name
+  if (specialName === "玄墨") {
+    return {
+      attribute: "auricInk",
+      specialElement: {
+        status: "promoted",
+        sourceName: specialName,
+        attribute: "auricInk",
+        rawPath: "/special_element_type/name",
+      },
+    }
+  }
+  if (specialName === "烈霜") {
+    return {
+      attribute: "frost",
+      specialElement: {
+        status: "promoted",
+        sourceName: specialName,
+        attribute: "frost",
+        rawPath: "/special_element_type/name",
+      },
+    }
+  }
+  if (typeof specialName === "string" && specialName.length > 0) {
+    return {
+      attribute: baseCharacterAttribute(source),
+      specialElement: {
+        status: "not-promoted",
+        sourceName: specialName,
+        reason: "core-attribute-enum-does-not-yet-define-this-special-element",
+        fallbackAttribute: baseCharacterAttribute(source),
+        rawPath: "/special_element_type/name",
+      },
+    }
+  }
+  return {
+    attribute: baseCharacterAttribute(source),
+    specialElement: { status: "not-present" },
+  }
+}
+
+function buildCharacterRuntimeBatch(): CharacterRuntimeBuild {
+  const index = readJson<Record<string, CharacterIndexEntry>>(characterIndexPath)
+  const characterIds = Object.keys(index).sort((left, right) => Number(left) - Number(right))
+  assert(characterIds.length === 53, `character runtime batch expected 53 live characters, got ${characterIds.length}`)
+
+  const agents: Record<string, AgentData> = {}
+  const auditRows: any[] = []
+  let yixuanProof: ReturnType<typeof yixuanProofValues> | undefined
+
+  for (const characterId of characterIds) {
+    const indexEntry = index[characterId]!
+    const raw = readCharacterRaw(characterId)
+    const numericId = Number(characterId)
+    assert(raw.id === numericId, `character ${characterId}: raw id drifted`)
+    assert(String(raw.code_name).toLowerCase() === String(indexEntry.code).toLowerCase(), `character ${characterId}: code_name drifted against index`)
+    assert(raw.name === indexEntry.zh, `character ${characterId}: zh name drifted against index`)
+
+    const anchor = characterAnchor(characterId)
+    const characterSource = sourceRef(anchor, "/")
+    const attribute = characterAttribute(raw)
+    const specialty = characterSpecialty(raw)
+    const panel = characterPanel(raw)
+    const skillIds = characterId === "1371" ? ["1371001"] : []
+
+    if (characterId === "1371")
+      yixuanProof = yixuanProofValues(raw)
+
+    agents[characterId] = {
+      id: characterId,
+      label: { zh: raw.name, en: indexEntry.en },
+      source: characterSource,
+      attribute: attribute.attribute,
+      agentSpecialty: specialty,
+      baseStatsByLevel: {
+        "60": panel,
+      },
+      skillIds,
+      sourceAliases: uniqueStrings([raw.name, raw.code_name, indexEntry.en, indexEntry.code]),
+    }
+
+    auditRows.push({
+      id: characterId,
+      codeName: raw.code_name,
+      indexCode: indexEntry.code,
+      label: { zh: raw.name, en: indexEntry.en },
+      source: characterSource,
+      attribute: attribute.attribute,
+      agentSpecialty: specialty,
+      elementTypeRaw: raw.element_type,
+      specialElement: attribute.specialElement,
+      weaponTypeRaw: raw.weapon_type,
+      level60Panel: panel,
+      runtimeSkillIds: skillIds,
+      skillPromotion: characterId === "1371"
+        ? {
+            status: "sample-preserved",
+            runtimeSkillIds: skillIds,
+            reason: "existing G27/Yixuan Adrenaline and Resonance executable sample remains the only character skill promoted in PR-A",
+          }
+        : {
+            status: "not-promoted",
+            reason: "typed-skill-template-not-in-current-batch",
+          },
+      passiveModifiers: {
+        status: "not-promoted",
+        reason: "typed-modifier-template-required",
+      },
+    })
+  }
+
+  assert(yixuanProof !== undefined, "character batch must include Yixuan proof values")
+  const audit = {
+    kind: "nanokaCharacterBatchAudit",
+    schemaVersion: "nanoka-character-batch-audit/v0.1",
+    sourceId: "nanoka-zzz",
+    sourceVersion,
+    generatedAt,
+    runtimeCutoverReady: true,
+    indexSource: sourceRef("data/source/raw/nanoka/zzz/2.8/character.json", "/"),
+    summary: {
+      characterCount: characterIds.length,
+      runtimeAgentCount: Object.keys(agents).length,
+      promotedRuntimeSkillCount: 1,
+      nonPromotedSkillAgentCount: auditRows.filter(row => row.skillPromotion.status === "not-promoted").length,
+      typedModifierPendingCount: auditRows.filter(row => row.passiveModifiers.status === "not-promoted").length,
+      characterIds,
+      attributeCounts: countBy(auditRows, row => row.attribute),
+      specialtyCounts: countBy(auditRows, row => row.agentSpecialty),
+      specialElementPromotedIds: auditRows.filter(row => row.specialElement.status === "promoted").map(row => row.id),
+      specialElementNotPromotedIds: auditRows.filter(row => row.specialElement.status === "not-promoted").map(row => row.id),
+    },
+    characters: auditRows,
+  }
+
+  return { agents, yixuanProof, audit }
+}
+
 type BangbooIndexEntry = {
   codename?: string
   en?: string
@@ -130,6 +358,15 @@ type BangbooRuntimeBuild = {
 
 function uniqueStrings(values: Array<string | undefined>): string[] {
   return [...new Set(values.filter((value): value is string => typeof value === "string" && value.length > 0))]
+}
+
+function countBy<T>(values: T[], getKey: (value: T) => string): Record<string, number> {
+  const counts: Record<string, number> = {}
+  for (const value of values) {
+    const key = getKey(value)
+    counts[key] = (counts[key] ?? 0) + 1
+  }
+  return Object.fromEntries(Object.entries(counts).sort(([left], [right]) => left.localeCompare(right)))
 }
 
 function bangbooAnchor(entityId: string | number): string {
@@ -404,10 +641,10 @@ function buildBangbooRuntimeBatch(): BangbooRuntimeBuild {
 }
 
 function buildArtifact() {
-  const yixuan = yixuanProofValues()
+  const characterBatch = buildCharacterRuntimeBatch()
+  const yixuan = characterBatch.yixuanProof
   const bangbooBatch = buildBangbooRuntimeBatch()
   const yixuanAnchor = "data/source/raw/nanoka/zzz/2.8/zh/character/1371.json"
-  const yixuanSource = sourceRef(yixuanAnchor, "/")
   const yixuanSkillSource = sourceRef(yixuanAnchor, "/skill/basic/description/4/param/0/param/1371001")
 
   const data: GameData = {
@@ -423,26 +660,13 @@ function buildArtifact() {
         url: "https://static.nanoka.cc/manifest.json",
         gameVersion: "ZZZ-2.8",
         sourceVersion,
-        fetchedAt: "2026-05-15T20:56:00+08:00",
+        fetchedAt: "2026-05-15T23:42:00+08:00",
         parsedAt: generatedAt,
-        parserVersion: "nanoka-runtime-bangboo-batch-v0.1.0",
+        parserVersion: "nanoka-runtime-character-batch-v0.1.0",
         licenseNote: "Runtime cleaned data uses lo-user-approved nanoka live 2.8 evidence; archived Excel/D-17/D-12 sources are retained for audit only.",
       },
     ],
-    agents: {
-      "1371": {
-        id: "1371",
-        label: { zh: yixuan.identity.name, en: "Yixuan" },
-        source: yixuanSource,
-        attribute: "auricInk",
-        agentSpecialty: "rupture",
-        baseStatsByLevel: {
-          "60": yixuan.level60Panel,
-        },
-        skillIds: ["1371001"],
-        sourceAliases: [yixuan.identity.name, yixuan.identity.codeName, "Yixuan"],
-      },
-    },
+    agents: characterBatch.agents,
     skills: {
       "1371001": {
         id: "1371001",
@@ -532,20 +756,31 @@ function buildArtifact() {
   assertNanokaRuntimeGameDataArtifact(artifact)
   return {
     artifact,
+    characterBatchAudit: characterBatch.audit,
     bangbooBatchAudit: bangbooBatch.audit,
   }
 }
 
 function assertArtifactFresh(): void {
-  const { artifact: expected, bangbooBatchAudit: expectedBangbooBatchAudit } = buildArtifact()
+  const {
+    artifact: expected,
+    characterBatchAudit: expectedCharacterBatchAudit,
+    bangbooBatchAudit: expectedBangbooBatchAudit,
+  } = buildArtifact()
   const actualRoot = readJson<unknown>(rootArtifactPath)
   const actualPackage = readJson<unknown>(packageArtifactPath)
+  const actualRootCharacterBatchAudit = readJson<unknown>(rootCharacterBatchAuditPath)
+  const actualPackageCharacterBatchAudit = readJson<unknown>(packageCharacterBatchAuditPath)
   const actualRootBangbooBatchAudit = readJson<unknown>(rootBangbooBatchAuditPath)
   const actualPackageBangbooBatchAudit = readJson<unknown>(packageBangbooBatchAuditPath)
   if (JSON.stringify(actualRoot) !== JSON.stringify(expected))
     throw new Error("Runtime game data artifact is stale; rerun pnpm --filter @randomplay/data audit:nanoka-runtime")
   if (JSON.stringify(actualPackage) !== JSON.stringify(expected))
     throw new Error("Package runtime game data mirror is stale; rerun pnpm --filter @randomplay/data audit:nanoka-runtime")
+  if (JSON.stringify(actualRootCharacterBatchAudit) !== JSON.stringify(expectedCharacterBatchAudit))
+    throw new Error("Character batch audit artifact is stale; rerun pnpm --filter @randomplay/data audit:nanoka-runtime")
+  if (JSON.stringify(actualPackageCharacterBatchAudit) !== JSON.stringify(expectedCharacterBatchAudit))
+    throw new Error("Package Character batch audit mirror is stale; rerun pnpm --filter @randomplay/data audit:nanoka-runtime")
   if (JSON.stringify(actualRootBangbooBatchAudit) !== JSON.stringify(expectedBangbooBatchAudit))
     throw new Error("Bangboo batch audit artifact is stale; rerun pnpm --filter @randomplay/data audit:nanoka-runtime")
   if (JSON.stringify(actualPackageBangbooBatchAudit) !== JSON.stringify(expectedBangbooBatchAudit))
@@ -555,9 +790,11 @@ function assertArtifactFresh(): void {
 }
 
 function auditCommand(): void {
-  const { artifact, bangbooBatchAudit } = buildArtifact()
+  const { artifact, characterBatchAudit, bangbooBatchAudit } = buildArtifact()
   writeJson(rootArtifactPath, artifact)
   writeJson(packageArtifactPath, artifact)
+  writeJson(rootCharacterBatchAuditPath, characterBatchAudit)
+  writeJson(packageCharacterBatchAuditPath, characterBatchAudit)
   writeJson(rootBangbooBatchAuditPath, bangbooBatchAudit)
   writeJson(packageBangbooBatchAuditPath, bangbooBatchAudit)
 }
@@ -571,6 +808,10 @@ function verifyCommand(): void {
     throw new Error("Missing data/cleaned/audit/nanoka-bangboo-batch-audit.json; run audit:nanoka-runtime first")
   if (!existsSync(packageBangbooBatchAuditPath))
     throw new Error("Missing packages/data/cleaned/audit/nanoka-bangboo-batch-audit.json; run audit:nanoka-runtime first")
+  if (!existsSync(rootCharacterBatchAuditPath))
+    throw new Error("Missing data/cleaned/audit/nanoka-character-batch-audit.json; run audit:nanoka-runtime first")
+  if (!existsSync(packageCharacterBatchAuditPath))
+    throw new Error("Missing packages/data/cleaned/audit/nanoka-character-batch-audit.json; run audit:nanoka-runtime first")
   assertArtifactFresh()
 }
 

@@ -36,7 +36,8 @@ describe("nanoka runtime game data cutover", () => {
     expect(data.sourceVersion).toBe("nanoka-zzz@2.8")
     expect(data.sources.map(source => source.id)).toEqual([NANOKA_RUNTIME_SOURCE_ID])
     expect(data.sources[0]?.sourceVersion).toBe(NANOKA_RUNTIME_SOURCE_VERSION)
-    expect(Object.keys(data.agents)).toEqual(["1371"])
+    expect(Object.keys(data.agents)).toHaveLength(53)
+    expect(Object.keys(data.agents)).toEqual(expect.arrayContaining(["1011", "1021", "1031", "1371", "1431", "1541"]))
     expect(Object.keys(data.bangboos)).toHaveLength(39)
     expect(Object.keys(data.bangbooSkills)).toHaveLength(63)
     expect(Object.keys(data.bangboos)).toEqual(expect.arrayContaining(["53001", "53002", "54001", "54008", "54020"]))
@@ -44,6 +45,15 @@ describe("nanoka runtime game data cutover", () => {
       maxHp: 7953.8621,
       attack: 872.5748,
       defense: 441.1145,
+    })
+    expect(data.agents["1091"]).toMatchObject({
+      attribute: "frost",
+      agentSpecialty: "anomaly",
+    })
+    expect(data.agents["1431"]).toMatchObject({
+      attribute: "physical",
+      agentSpecialty: "attack",
+      skillIds: [],
     })
     expect(data.skills["1371001"]?.segments[0]).toMatchObject({
       multiplierByLevel: { "1": 0.458 },
@@ -104,6 +114,30 @@ describe("nanoka runtime game data cutover", () => {
       runtimeBangbooCount: 39,
       promotedSkillCount: 63,
       noRuntimeSkillBangbooIds: ["53003", "53008", "53012"],
+    })
+  })
+
+  it("records the full approved-live character batch audit without promoting unresolved skills or passives", () => {
+    const audit = readJson<{
+      summary: {
+        characterCount: number
+        runtimeAgentCount: number
+        promotedRuntimeSkillCount: number
+        nonPromotedSkillAgentCount: number
+        typedModifierPendingCount: number
+        specialElementPromotedIds: string[]
+        specialElementNotPromotedIds: string[]
+      }
+    }>(join(repoRoot, "data/cleaned/audit/nanoka-character-batch-audit.json"))
+
+    expect(audit.summary).toMatchObject({
+      characterCount: 53,
+      runtimeAgentCount: 53,
+      promotedRuntimeSkillCount: 1,
+      nonPromotedSkillAgentCount: 52,
+      typedModifierPendingCount: 53,
+      specialElementPromotedIds: ["1091", "1371"],
+      specialElementNotPromotedIds: ["1431"],
     })
   })
 })

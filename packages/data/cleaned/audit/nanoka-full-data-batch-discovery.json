@@ -37,12 +37,12 @@
       "index": "https://static.nanoka.cc/zzz/2.8/character.json",
       "currentLiveIndexCount": 53,
       "currentLiveDetailAccessibleCount": 53,
-      "retainedRawDetailCount": 4,
-      "runtimeRecordCount": 1,
-      "missingRawDetailCount": 49,
-      "missingRuntimeRecordCount": 52,
+      "retainedRawDetailCount": 53,
+      "runtimeRecordCount": 53,
+      "missingRawDetailCount": 0,
+      "missingRuntimeRecordCount": 0,
       "targetRuntimeBucket": "GameData.agents",
-      "schemaFit": "existing-bucket",
+      "schemaFit": "existing-bucket-batch-complete-pr-a",
       "promotableCurrentFields": [
         "identity",
         "attribute",
@@ -55,7 +55,8 @@
         "Character skill/passive typed modifiers require per-template promotion and should fail loud when text is not mapped.",
         "Sentinel/Adrenaline fields remain character-detail-derived and stay in current live runtime only."
       ],
-      "recommendedPr": "PR-A characters batch"
+      "recommendedPr": "PR-A characters batch",
+      "implementationStatus": "complete-pr-a"
     },
     {
       "domain": "wEngines",

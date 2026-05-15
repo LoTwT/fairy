@@ -15,6 +15,62 @@ const sourceId = "nanoka-zzz"
 const parserVersion = "nanoka-source-v0.1.0"
 const userAgent = "fairy-data-source-audit/0.1 (+https://github.com/LoTwT/fairy)"
 
+const characterEntityIds = [
+  1011,
+  1021,
+  1031,
+  1041,
+  1051,
+  1061,
+  1071,
+  1081,
+  1091,
+  1101,
+  1111,
+  1121,
+  1131,
+  1141,
+  1151,
+  1161,
+  1171,
+  1181,
+  1191,
+  1201,
+  1211,
+  1221,
+  1241,
+  1251,
+  1261,
+  1271,
+  1281,
+  1291,
+  1301,
+  1311,
+  1321,
+  1331,
+  1341,
+  1351,
+  1361,
+  1371,
+  1381,
+  1391,
+  1401,
+  1411,
+  1421,
+  1431,
+  1441,
+  1451,
+  1461,
+  1471,
+  1481,
+  1491,
+  1501,
+  1511,
+  1521,
+  1531,
+  1541,
+]
+
 const bangbooEntityIds = [
   53001,
   53002,
@@ -56,6 +112,18 @@ const bangbooEntityIds = [
   54020,
   54021,
 ]
+
+function characterEvidenceUse(entityId) {
+  if (entityId === 1021)
+    return "agent-panel-resonance-source-gate"
+  if (entityId === 1371)
+    return "adrenaline-resonance-source-gate"
+  if (entityId === 1031)
+    return "phase3-g22-passive-candidate-gate"
+  if (entityId === 1221)
+    return "phase3-g23-passive-candidate-gate"
+  return "v1.2.x-character-batch-source-gate"
+}
 
 function bangbooEvidenceUse(entityId) {
   if (entityId === 54008)
@@ -103,6 +171,27 @@ function writeJson(path, data) {
 }
 
 function snapshotAssets(snapshot) {
+  const characterAssets = [
+    {
+      id: "character-index",
+      url: `https://static.nanoka.cc/zzz/${snapshot}/character.json`,
+      path: "character.json",
+      entityType: "characterIndex",
+      approvedForCleanedOutput: true,
+      evidenceUse: "v1.2.x-character-batch-source-gate",
+    },
+    ...characterEntityIds.map(entityId => ({
+      id: `character-${entityId}`,
+      url: `https://static.nanoka.cc/zzz/${snapshot}/zh/character/${entityId}.json`,
+      path: `zh/character/${entityId}.json`,
+      entityType: "character",
+      language: "zh",
+      entityId,
+      approvedForCleanedOutput: true,
+      evidenceUse: characterEvidenceUse(entityId),
+    })),
+  ]
+
   const bangbooAssets = [
     {
       id: "bangboo-index",
@@ -141,46 +230,7 @@ function snapshotAssets(snapshot) {
       approvedForCleanedOutput: true,
       evidenceUse: "deadly-assault-source-gate",
     },
-    {
-      id: "character-nekomata-1021",
-      url: `https://static.nanoka.cc/zzz/${snapshot}/zh/character/1021.json`,
-      path: "zh/character/1021.json",
-      entityType: "character",
-      language: "zh",
-      entityId: 1021,
-      approvedForCleanedOutput: true,
-      evidenceUse: "agent-panel-resonance-source-gate",
-    },
-    {
-      id: "character-yixuan-1371",
-      url: `https://static.nanoka.cc/zzz/${snapshot}/zh/character/1371.json`,
-      path: "zh/character/1371.json",
-      entityType: "character",
-      language: "zh",
-      entityId: 1371,
-      approvedForCleanedOutput: true,
-      evidenceUse: "adrenaline-resonance-source-gate",
-    },
-    {
-      id: "character-nicole-1031",
-      url: `https://static.nanoka.cc/zzz/${snapshot}/zh/character/1031.json`,
-      path: "zh/character/1031.json",
-      entityType: "character",
-      language: "zh",
-      entityId: 1031,
-      approvedForCleanedOutput: true,
-      evidenceUse: "phase3-g22-passive-candidate-gate",
-    },
-    {
-      id: "character-yanagi-1221",
-      url: `https://static.nanoka.cc/zzz/${snapshot}/zh/character/1221.json`,
-      path: "zh/character/1221.json",
-      entityType: "character",
-      language: "zh",
-      entityId: 1221,
-      approvedForCleanedOutput: true,
-      evidenceUse: "phase3-g23-passive-candidate-gate",
-    },
+    ...characterAssets,
     {
       id: "boss-69036",
       url: `https://static.nanoka.cc/zzz/${snapshot}/zh/boss/69036.json`,
@@ -311,6 +361,7 @@ async function fetchJson(url) {
 function summarizeSnapshot(snapshot, assets) {
   const manifest = readJson(join(sourceRoot, snapshot, "manifest.json"))
   const bossIndex = readJson(join(sourceRoot, snapshot, "boss.json"))
+  const characterIndex = readJson(join(sourceRoot, snapshot, "character.json"))
   const character = readJson(join(sourceRoot, snapshot, "zh/character/1021.json"))
   const sentinelCharacter = readJson(join(sourceRoot, snapshot, "zh/character/1371.json"))
   const nicoleCharacter = readJson(join(sourceRoot, snapshot, "zh/character/1031.json"))
@@ -395,6 +446,19 @@ function summarizeSnapshot(snapshot, assets) {
   const bangboo = bangbooDetails.find(({ detail }) => detail.id === 54008)?.detail
   const penguinboo = bangbooDetails.find(({ detail }) => detail.id === 53001)?.detail
   const sharkboo = bangbooDetails.find(({ detail }) => detail.id === 54001)?.detail
+  const characterDetails = characterEntityIds.map((entityId) => {
+    const indexEntry = characterIndex[String(entityId)]
+    if (indexEntry === undefined)
+      throw new Error(`character index is missing ${entityId}`)
+    const detail = readJson(join(sourceRoot, snapshot, `zh/character/${entityId}.json`))
+    if (detail.id !== entityId)
+      throw new Error(`character ${entityId}: detail id drifted`)
+    if (String(detail.code_name).toLowerCase() !== String(indexEntry.code).toLowerCase())
+      throw new Error(`character ${entityId}: code_name drifted against index`)
+    if (detail.name !== indexEntry.zh)
+      throw new Error(`character ${entityId}: zh name drifted against index`)
+    return { indexEntry, detail }
+  })
   const weapon = readJson(join(sourceRoot, snapshot, "zh/weapon/14137.json"))
   const equipment = readJson(join(sourceRoot, snapshot, "zh/equipment/31000.json"))
 
@@ -404,6 +468,8 @@ function summarizeSnapshot(snapshot, assets) {
     throw new Error("nanoka live snapshot unexpectedly equals latest research snapshot")
   if (!Object.hasOwn(bossIndex, "69036"))
     throw new Error("boss index is missing sample DA boss 69036")
+  if (Object.keys(characterIndex).length !== characterEntityIds.length)
+    throw new Error(`character index count drifted: expected ${characterEntityIds.length}, got ${Object.keys(characterIndex).length}`)
   if (character.id !== 1021)
     throw new Error("character sample id drifted")
   if (sentinelCharacter.id !== 1371)
@@ -431,6 +497,12 @@ function summarizeSnapshot(snapshot, assets) {
     manifestLiveVersion: manifest.zzz.live,
     manifestLatestVersion: manifest.zzz.latest,
     bossIndexCount: Object.keys(bossIndex).length,
+    characterBatch: {
+      indexCount: Object.keys(characterIndex).length,
+      retainedDetailCount: characterDetails.length,
+      ids: characterDetails.map(({ detail }) => detail.id),
+      approvedForCleanedOutputCount: assets.filter(asset => asset.entityType === "character" && asset.approvedForCleanedOutput === true).length,
+    },
     characterSample: {
       id: character.id,
       codeName: character.code_name,
@@ -570,6 +642,7 @@ async function fetchSnapshot(snapshot, generatedAt) {
       manifestUrl: "https://static.nanoka.cc/manifest.json",
       approvedIndexUrls: [
         `https://static.nanoka.cc/zzz/${snapshot}/boss.json`,
+        `https://static.nanoka.cc/zzz/${snapshot}/character.json`,
         `https://static.nanoka.cc/zzz/${snapshot}/bangboo.json`,
       ],
       approvedLocalizedDetailUrlPatterns: [
@@ -619,6 +692,12 @@ function verifySnapshot(snapshot) {
     throw new Error("manifest live version summary drifted")
   if (summary.bossIndexCount !== manifest.summary?.bossIndexCount)
     throw new Error("boss index count summary drifted")
+  if (summary.characterBatch?.indexCount !== manifest.summary?.characterBatch?.indexCount)
+    throw new Error("character index count summary drifted")
+  if (summary.characterBatch?.retainedDetailCount !== manifest.summary?.characterBatch?.retainedDetailCount)
+    throw new Error("character retained detail count summary drifted")
+  if (JSON.stringify(summary.characterBatch?.ids) !== JSON.stringify(manifest.summary?.characterBatch?.ids))
+    throw new Error("character retained detail ids summary drifted")
   if (summary.deadlyAssaultSample.zoneCount !== manifest.summary?.deadlyAssaultSample?.zoneCount)
     throw new Error("DA sample zone count summary drifted")
   if (summary.sentinelSample?.rpMaxRaw !== manifest.summary?.sentinelSample?.rpMaxRaw)
