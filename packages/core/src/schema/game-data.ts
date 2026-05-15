@@ -244,6 +244,30 @@ export const deadlyAssaultPeriodDataSchema = z
   })
   .strict()
 
+export const historicalDeadlyAssaultZoneDataSchema = deadlyAssaultZoneDataSchema
+  .extend({
+    name: z.string(),
+  })
+  .strict()
+
+export const historicalDeadlyAssaultPeriodDataSchema = deadlyAssaultPeriodDataSchema
+  .omit({
+    beginAt: true,
+    endAt: true,
+    zones: true,
+  })
+  .extend({
+    historicalKey: z.string().min(1),
+    releaseVersion: z.string().min(1),
+    currentRuntime: z.literal(false),
+    scheduleStatus: z.enum(["source-known", "missing-in-historical-source"]),
+    beginAt: z.string().min(1).optional(),
+    endAt: z.string().min(1).optional(),
+    scheduleSource: sourceRefSchema.optional(),
+    zones: z.array(historicalDeadlyAssaultZoneDataSchema),
+  })
+  .strict()
+
 export const sourceAliasTableSchema = z
   .object({
     fields: z.record(z.string(), z.string()),
@@ -268,6 +292,7 @@ export const gameDataSchema = z
     driveDiscs: z.record(z.string(), driveDiscDataSchema),
     enemies: z.record(z.string(), enemyDataSchema),
     deadlyAssaultPeriods: z.record(z.string(), deadlyAssaultPeriodDataSchema),
+    historicalDAPeriods: z.record(z.string(), historicalDeadlyAssaultPeriodDataSchema),
     resonium: z.record(z.string(), resoniumDataSchema),
     modifiers: z.record(z.string(), formalModifierSchema),
     rules: z.record(z.string(), z.unknown()),
@@ -284,4 +309,5 @@ export type DriveDiscData = z.infer<typeof driveDiscDataSchema>
 export type ResoniumData = z.infer<typeof resoniumDataSchema>
 export type EnemyData = z.infer<typeof enemyDataSchema>
 export type DeadlyAssaultPeriodData = z.infer<typeof deadlyAssaultPeriodDataSchema>
+export type HistoricalDeadlyAssaultPeriodData = z.infer<typeof historicalDeadlyAssaultPeriodDataSchema>
 export type GameData = z.infer<typeof gameDataSchema>

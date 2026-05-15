@@ -91,6 +91,7 @@ export const dataSourceDescriptors = [
       "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54001.json",
       "data/source/raw/nanoka/zzz/2.8/zh/weapon/14137.json",
       "data/source/raw/nanoka/zzz/2.8/zh/equipment/31000.json",
+      "data/source/raw/nanoka/zzz/historical-da-fetch-manifest.json",
     ],
     fetchPolicy: {
       mode: "httpGet",
@@ -110,7 +111,8 @@ export const dataSourceDescriptors = [
         "V1.2.x PR-B promotes W-Engine identity and numeric level-60 attack/substat values; W-Engine passive talents remain typed-template pending.",
         "V1.2.x PR-C promotes Drive Disc set identity while retaining desc2/desc4 text in audit; typed set-effect modifiers remain template pending.",
         "V1.2.x PR-D promotes enemy identity/rank for all current-live monster index records while retaining selected/skipped monster_info variants and combat semantics in audit.",
-        "V1.2.x PR-E promotes all 38 configured-live DA period details into GameData.deadlyAssaultPeriods while historical DA remains in the future dedicated bucket.",
+        "V1.2.x PR-E promotes all 38 configured-live DA period details into GameData.deadlyAssaultPeriods.",
+        "V1.2.x PR-F promotes manifest-available historical DA periods into GameData.historicalDAPeriods without making them current-runtime fallbacks.",
       ],
     },
   },

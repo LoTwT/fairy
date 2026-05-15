@@ -88,4 +88,25 @@ describe("nanoka Deadly Assault source gate", () => {
       url: "https://static.nanoka.cc/zzz/2.8/zh/boss/69038.json",
     })
   })
+
+  it("keeps historical DA evidence in the dedicated non-current bucket", () => {
+    const matrix = readJson<CoverageMatrix>("data/cleaned/audit/nanoka-coverage-matrix.json")
+    const row = matrix.rows.find(item => item.fieldId === "deadlyAssault.historicalPeriods")
+    const samplesById = new Map(matrix.sampleSources.map(sample => [sample.id, sample]))
+
+    expect(row).toMatchObject({
+      status: "verified-from-nanoka",
+      sampleEntity: "nanoka-da-history-manifest",
+      promotable: true,
+      auditArtifact: "data/cleaned/audit/nanoka-da-historical-batch-audit.json",
+    })
+    expect(row?.transformRule).toContain("GameData.historicalDAPeriods")
+    expect(row?.transformRule).toContain("never use them as current-runtime fallback")
+    expect(samplesById.get("nanoka-da-history-manifest")).toMatchObject({
+      entityType: "sourceManifest",
+      version: "manifest.zzz.available",
+      approvedForCleanedOutput: true,
+      url: "https://static.nanoka.cc/manifest.json",
+    })
+  })
 })

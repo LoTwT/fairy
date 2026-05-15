@@ -37,9 +37,10 @@
         "V1.2.x PR-A extends the retained approved-live character fixture set to the full 2.8 character.json index and promotes 53 runtime Agent records.",
         "V1.2.x PR-B extends the retained approved-live W-Engine fixture set to the full 2.8 weapon.json index and promotes 89 runtime W-Engine records.",
         "V1.2.x PR-C extends the retained approved-live Drive Disc set fixture set to the full 2.8 equipment.json index and promotes 26 runtime Drive Disc identity records while retaining set-effect text in audit.",
-        "V1.2.x PR-D extends the retained approved-live enemy fixture set to the full 2.8 monster.json index and promotes 269 runtime enemy identity records with selected/skipped variant audit.",
-        "V1.2.x PR-E extends current-live DA retention from the sample period to all 38 configured-live 2.8 DA period details and promotes GameData.deadlyAssaultPeriods.",
-        "Current cleaned output rows must use configuredLiveVersion; archived Excel/D-17/D-12 sources must not be runtime fallbacks.",
+    "V1.2.x PR-D extends the retained approved-live enemy fixture set to the full 2.8 monster.json index and promotes 269 runtime enemy identity records with selected/skipped variant audit.",
+    "V1.2.x PR-E extends current-live DA retention from the sample period to all 38 configured-live 2.8 DA period details and promotes GameData.deadlyAssaultPeriods.",
+    "V1.2.x PR-F retains manifest-available historical DA snapshots in the dedicated historicalDAPeriods bucket; these versions are not current-runtime fallbacks and do not relax configuredLiveVersion.",
+    "Current cleaned output rows must use configuredLiveVersion; archived Excel/D-17/D-12 sources must not be runtime fallbacks.",
         "manifest.zzz.latest is research/drift input only unless lo-user approves a new configured live version."
       ]
     },
