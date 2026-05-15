@@ -28,6 +28,8 @@ const rootDriveDiscBatchAuditPath = join(repoRoot, "data/cleaned/audit/nanoka-dr
 const packageDriveDiscBatchAuditPath = join(packageDir, "cleaned/audit/nanoka-drive-disc-batch-audit.json")
 const rootEnemyBatchAuditPath = join(repoRoot, "data/cleaned/audit/nanoka-enemy-batch-audit.json")
 const packageEnemyBatchAuditPath = join(packageDir, "cleaned/audit/nanoka-enemy-batch-audit.json")
+const rootDeadlyAssaultCurrentBatchAuditPath = join(repoRoot, "data/cleaned/audit/nanoka-da-current-batch-audit.json")
+const packageDeadlyAssaultCurrentBatchAuditPath = join(packageDir, "cleaned/audit/nanoka-da-current-batch-audit.json")
 
 const archivedRuntimeSourceIds = new Set([
   "lo-user-excel",
@@ -418,6 +420,9 @@ function validateMatrixAgainstRegistry(matrix, registry) {
   assert(daRow.promotable === true, "deadlyAssault.periodsBossesBuffs: DA source artifact row must be promotable after semantic mapping gate")
   assert(daRow.sampleEntity === "nanoka-boss-live-69036", "deadlyAssault.periodsBossesBuffs: DA row must use live period detail evidence")
   assert(!daRow.blockedBy?.includes("field:runtime-cutover-drift-required"), "deadlyAssault.periodsBossesBuffs: DA runtime cutover blocker must be cleared after Phase 3/4")
+  assert(daRow.auditArtifact === "data/cleaned/audit/nanoka-da-current-batch-audit.json", "deadlyAssault.periodsBossesBuffs: PR-E row must point to current DA batch audit")
+  assert((daRow.supportingSampleEntities ?? []).length === 38, "deadlyAssault.periodsBossesBuffs: PR-E row must support all 38 current-live DA periods")
+  assert(daRow.supportingSampleEntities?.includes("nanoka-boss-live-69038"), "deadlyAssault.periodsBossesBuffs: PR-E row must retain scheduled configured-live period 69038")
 
   const enemyIndexSample = sampleById.get("nanoka-monster-index-live-2.8")
   assert(enemyIndexSample !== undefined, "enemy batch: missing approved-live monster index sample")
@@ -523,6 +528,7 @@ function validateRuntimeGameData(registry) {
   assert(Object.keys(data.bangboos ?? {}).length === 39, "runtime GameData must include the full approved-live Bangboo batch")
   assert(Object.keys(data.bangbooSkills ?? {}).length === 63, "runtime GameData Bangboo skill count drifted")
   assert(Object.keys(data.enemies ?? {}).length === 269, "runtime GameData must include the full approved-live enemy batch")
+  assert(Object.keys(data.deadlyAssaultPeriods ?? {}).length === 38, "runtime GameData must include the full approved-live current DA batch")
 
   for (const ref of collectSourceRefs(data)) {
     assert(!archivedRuntimeSourceIds.has(ref.sourceId), `runtime GameData must not reference archived source ${ref.sourceId}`)
@@ -719,6 +725,41 @@ function validateEnemyBatchAudit(registry) {
     for (const fieldId of ["levelDefaults", "resistance", "anomalyThresholds", "dazeRecovery", "specialRules"]) {
       assert(row.pendingPromotions?.[fieldId]?.status === "not-promoted", `${row.id}: ${fieldId} must remain not-promoted`)
     }
+  }
+}
+
+function validateDeadlyAssaultCurrentBatchAudit(registry) {
+  const { rootText } = readMirroredText(
+    rootDeadlyAssaultCurrentBatchAuditPath,
+    packageDeadlyAssaultCurrentBatchAuditPath,
+    "packages/data/cleaned/audit/nanoka-da-current-batch-audit.json",
+  )
+
+  const nanoka = sourceById(registry, "nanoka-zzz")
+  const audit = JSON.parse(rootText)
+  assert(audit.kind === "nanokaDeadlyAssaultCurrentBatchAudit", "DA current batch audit kind drifted")
+  assert(audit.schemaVersion === "nanoka-da-current-batch-audit/v0.1", "DA current batch audit schemaVersion drifted")
+  assert(audit.sourceId === "nanoka-zzz", "DA current batch audit sourceId drifted")
+  assert(audit.sourceVersion === nanoka.configuredLiveVersion, "DA current batch audit must use configured live version")
+  assert(audit.runtimeCutoverReady === true, "DA current batch audit must reflect runtime cutover state")
+  assert(audit.historicalPeriodsIncluded === false, "DA current batch audit must not include historical periods")
+  assert(audit.historicalBucketPlanned === "historicalDAPeriods", "DA current batch audit must reserve historical periods for the dedicated bucket")
+  assert(audit.indexSource?.sourceId === "nanoka-zzz", "DA current batch audit index source must be nanoka")
+  assert(audit.indexSource?.sourceVersion === nanoka.configuredLiveVersion, "DA current batch audit index source must use configured live version")
+  assert(audit.indexSource?.sourceAnchor === "data/source/raw/nanoka/zzz/2.8/boss.json", "DA current batch audit index source anchor drifted")
+  assert(audit.summary?.periodCount === 38, "DA current batch period count drifted")
+  assert(audit.summary?.runtimePeriodCount === 38, "DA current batch runtime count drifted")
+  assert(audit.summary?.zoneCount === 114, "DA current batch zone count drifted")
+  assert(audit.summary?.bossAdjustmentCount === 2242, "DA current batch boss adjustment count drifted")
+  assert(JSON.stringify(audit.summary?.scheduledFuturePeriodIds) === JSON.stringify(["69037", "69038"]), "DA current batch scheduled configured-live ids drifted")
+  assert(Array.isArray(audit.periods) && audit.periods.length === 38, "DA current batch audit rows must cover 38 periods")
+  for (const row of audit.periods) {
+    assert(row.source?.sourceId === "nanoka-zzz", `${row.id}: DA audit source must be nanoka`)
+    assert(row.source?.sourceVersion === nanoka.configuredLiveVersion, `${row.id}: DA audit source version drifted`)
+    assert(row.source?.sourceAnchor === `data/source/raw/nanoka/zzz/2.8/zh/boss/${row.id}.json`, `${row.id}: DA audit source anchor drifted`)
+    assert(row.zoneCount === 3, `${row.id}: DA period must retain three zones`)
+    assert(row.bossAdjustmentCount > 0, `${row.id}: DA period must retain boss_adjust rows`)
+    assert(row.promotionBoundary?.status === "structured-source-artifact", `${row.id}: DA promotion boundary drifted`)
   }
 }
 
@@ -921,6 +962,7 @@ function main() {
   validateWEngineBatchAudit(registry)
   validateDriveDiscBatchAudit(registry)
   validateEnemyBatchAudit(registry)
+  validateDeadlyAssaultCurrentBatchAudit(registry)
   validateBangbooBatchAudit(registry)
   validateCoveredSourceRefs(registry)
 

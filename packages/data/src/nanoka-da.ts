@@ -132,6 +132,7 @@ export interface DeadlyAssaultPeriod {
 export interface DeriveNanokaDeadlyAssaultOptions {
   sourceVersion: string
   configuredLiveSnapshotDate: string
+  allowConfiguredLiveScheduledPeriods?: boolean
 }
 
 const weaknessCodeMap: Record<string, NanokaDaAttribute> = {
@@ -156,7 +157,7 @@ export function deriveNanokaDeadlyAssaultPeriod(
   const beginAt = normalizeNanokaChinaDate(detail.begin_time, "begin_time")
   const endAt = normalizeNanokaChinaDate(detail.end_time, "end_time")
   const configuredLiveSnapshotDate = parseDate(options.configuredLiveSnapshotDate, "configuredLiveSnapshotDate")
-  if (Date.parse(beginAt) > configuredLiveSnapshotDate.getTime())
+  if (options.allowConfiguredLiveScheduledPeriods !== true && Date.parse(beginAt) > configuredLiveSnapshotDate.getTime())
     throw new Error(`Deadly Assault period ${periodId} begins after configured live snapshot date`)
   if (normalizeNanokaChinaDate(indexEntry.begin, "index.begin") !== beginAt)
     throw new Error(`Deadly Assault period ${periodId} begin_time does not match boss index`)

@@ -12,6 +12,7 @@ All notable changes to Fairy are documented in this file.
 - Batch import the approved-live nanoka 2.8 W-Engine catalog into runtime cleaned data without a package version bump.
 - Batch import the approved-live nanoka 2.8 Drive Disc set catalog into runtime cleaned data without a package version bump.
 - Batch import the approved-live nanoka 2.8 enemy catalog into runtime cleaned data without a package version bump.
+- Batch import the approved-live nanoka 2.8 current Deadly Assault period catalog into runtime cleaned data without a package version bump.
 
 ## 0.1.0 - 2026-05-15
 

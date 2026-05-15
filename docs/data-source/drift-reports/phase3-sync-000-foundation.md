@@ -1,7 +1,7 @@
 # Nanoka Drift Report: phase3-sync-000-foundation
 
 Status: Phase 3 drift audit foundation fixture
-Generated: 2026-05-15T16:20:00+08:00
+Generated: 2026-05-16T01:50:00+08:00
 
 This report is a schema/verifier fixture. It intentionally contains no field
 comparison rows; full G01-G26 comparison begins in the next Phase 3 slice.
@@ -10,7 +10,7 @@ comparison rows; full G01-G26 comparison begins in the next Phase 3 slice.
 
 | Source | Version | Content Hash |
 |---|---|---|
-| `nanoka-zzz` | `2.8` | `sha256:55571ec544ff0bbb994621d08d8b2ebbcea090109708c53b9bbd01202f6a7558` |
+| `nanoka-zzz` | `2.8` | `sha256:93d1241c3204109be06fcf801594bb3aebe40cca830973956c7dea26367b6882` |
 
 ## Baselines
 

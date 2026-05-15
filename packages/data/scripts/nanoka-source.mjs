@@ -15,6 +15,47 @@ const sourceId = "nanoka-zzz"
 const parserVersion = "nanoka-source-v0.1.0"
 const userAgent = "fairy-data-source-audit/0.1 (+https://github.com/LoTwT/fairy)"
 
+const bossEntityIds = [
+  69001,
+  69002,
+  69003,
+  69004,
+  69005,
+  69006,
+  69007,
+  69008,
+  69009,
+  69010,
+  69011,
+  69012,
+  69013,
+  69014,
+  69015,
+  69016,
+  69017,
+  69018,
+  69019,
+  69020,
+  69021,
+  69022,
+  69023,
+  69024,
+  69025,
+  69026,
+  69027,
+  69028,
+  69029,
+  69030,
+  69031,
+  69032,
+  69033,
+  69034,
+  69035,
+  69036,
+  69037,
+  69038,
+]
+
 const characterEntityIds = [
   1011,
   1021,
@@ -554,6 +595,13 @@ function sha256(bufferOrString) {
   return createHash("sha256").update(bufferOrString).digest("hex")
 }
 
+function normalizeNanokaChinaDate(value) {
+  const match = /^(\d{4}-\d{2}-\d{2}) (\d{2}:\d{2}:\d{2})$/.exec(value)
+  if (match === null)
+    throw new Error(`Invalid nanoka date: ${value}`)
+  return `${match[1]}T${match[2]}+08:00`
+}
+
 function readJson(path) {
   return JSON.parse(readFileSync(path, "utf8"))
 }
@@ -687,16 +735,16 @@ function snapshotAssets(snapshot) {
       evidenceUse: "deadly-assault-source-gate",
     },
     ...characterAssets,
-    {
-      id: "boss-69036",
-      url: `https://static.nanoka.cc/zzz/${snapshot}/zh/boss/69036.json`,
-      path: "zh/boss/69036.json",
+    ...bossEntityIds.map(entityId => ({
+      id: `boss-${entityId}`,
+      url: `https://static.nanoka.cc/zzz/${snapshot}/zh/boss/${entityId}.json`,
+      path: `zh/boss/${entityId}.json`,
       entityType: "boss",
       language: "zh",
-      entityId: 69036,
+      entityId,
       approvedForCleanedOutput: true,
-      evidenceUse: "deadly-assault-detail-source-gate",
-    },
+      evidenceUse: entityId === 69036 ? "deadly-assault-detail-source-gate" : "v1.2.x-da-current-batch-source-gate",
+    })),
     ...monsterAssets,
     ...bangbooAssets,
     ...weaponAssets,
@@ -736,6 +784,21 @@ function summarizeSnapshot(snapshot, assets) {
   const nicoleCharacter = readJson(join(sourceRoot, snapshot, "zh/character/1031.json"))
   const yanagiCharacter = readJson(join(sourceRoot, snapshot, "zh/character/1221.json"))
   const boss = readJson(join(sourceRoot, snapshot, "zh/boss/69036.json"))
+  const bossDetails = bossEntityIds.map((entityId) => {
+    const indexEntry = bossIndex[String(entityId)]
+    if (indexEntry === undefined)
+      throw new Error(`boss index is missing ${entityId}`)
+    const detail = readJson(join(sourceRoot, snapshot, `zh/boss/${entityId}.json`))
+    if (detail.id !== entityId)
+      throw new Error(`boss ${entityId}: detail id drifted`)
+    if (detail.name !== indexEntry.zh)
+      throw new Error(`boss ${entityId}: zh name drifted against index`)
+    if (detail.begin_time !== indexEntry.begin)
+      throw new Error(`boss ${entityId}: begin_time drifted against index`)
+    if (detail.end_time !== indexEntry.end)
+      throw new Error(`boss ${entityId}: end_time drifted against index`)
+    return { indexEntry, detail }
+  })
   const monsterIndex = readJson(join(sourceRoot, snapshot, "monster.json"))
   const monsterDetails = monsterEntityIds.map((entityId) => {
     const indexEntry = monsterIndex[String(entityId)]
@@ -879,6 +942,8 @@ function summarizeSnapshot(snapshot, assets) {
     throw new Error("boss index is missing sample DA boss 69036")
   if (Object.keys(characterIndex).length !== characterEntityIds.length)
     throw new Error(`character index count drifted: expected ${characterEntityIds.length}, got ${Object.keys(characterIndex).length}`)
+  if (Object.keys(bossIndex).length !== bossEntityIds.length)
+    throw new Error(`boss index count drifted: expected ${bossEntityIds.length}, got ${Object.keys(bossIndex).length}`)
   if (character.id !== 1021)
     throw new Error("character sample id drifted")
   if (sentinelCharacter.id !== 1371)
@@ -965,6 +1030,15 @@ function summarizeSnapshot(snapshot, assets) {
       id: boss.id,
       zoneCount: Object.keys(boss.zone ?? {}).length,
       hasBossAdjust: boss.boss_adjust !== undefined,
+    },
+    deadlyAssaultBatch: {
+      indexCount: Object.keys(bossIndex).length,
+      retainedDetailCount: bossDetails.length,
+      zoneCount: bossDetails.reduce((total, { detail }) => total + Object.keys(detail.zone ?? {}).length, 0),
+      bossAdjustmentCount: bossDetails.reduce((total, { detail }) => total + Object.keys(detail.boss_adjust ?? {}).length, 0),
+      scheduledFuturePeriodCount: bossDetails.filter(({ indexEntry }) => Date.parse(normalizeNanokaChinaDate(indexEntry.begin)) > Date.parse("2026-05-16T00:00:00+08:00")).length,
+      ids: bossDetails.map(({ detail }) => detail.id),
+      approvedForCleanedOutputCount: assets.filter(asset => asset.entityType === "boss" && asset.approvedForCleanedOutput === true).length,
     },
     enemySamples: {
       mappingCount: monsterSamples.length,
@@ -1142,6 +1216,18 @@ function verifySnapshot(snapshot) {
     throw new Error("character retained detail ids summary drifted")
   if (summary.deadlyAssaultSample.zoneCount !== manifest.summary?.deadlyAssaultSample?.zoneCount)
     throw new Error("DA sample zone count summary drifted")
+  if (summary.deadlyAssaultBatch?.indexCount !== manifest.summary?.deadlyAssaultBatch?.indexCount)
+    throw new Error("DA index count summary drifted")
+  if (summary.deadlyAssaultBatch?.retainedDetailCount !== manifest.summary?.deadlyAssaultBatch?.retainedDetailCount)
+    throw new Error("DA retained detail count summary drifted")
+  if (summary.deadlyAssaultBatch?.zoneCount !== manifest.summary?.deadlyAssaultBatch?.zoneCount)
+    throw new Error("DA zone count summary drifted")
+  if (summary.deadlyAssaultBatch?.bossAdjustmentCount !== manifest.summary?.deadlyAssaultBatch?.bossAdjustmentCount)
+    throw new Error("DA boss adjustment count summary drifted")
+  if (summary.deadlyAssaultBatch?.scheduledFuturePeriodCount !== manifest.summary?.deadlyAssaultBatch?.scheduledFuturePeriodCount)
+    throw new Error("DA scheduled future period count summary drifted")
+  if (JSON.stringify(summary.deadlyAssaultBatch?.ids) !== JSON.stringify(manifest.summary?.deadlyAssaultBatch?.ids))
+    throw new Error("DA retained detail ids summary drifted")
   if (summary.sentinelSample?.rpMaxRaw !== manifest.summary?.sentinelSample?.rpMaxRaw)
     throw new Error("sentinel sample rp_max summary drifted")
   if (summary.sentinelSample?.firstSkillParam?.rpRecoveryRaw !== manifest.summary?.sentinelSample?.firstSkillParam?.rpRecoveryRaw)
