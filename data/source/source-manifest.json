@@ -1,6 +1,6 @@
 {
   "schemaVersion": "source-manifest-v1",
-  "generatedAt": "2026-05-05T16:50:00+08:00",
+  "generatedAt": "2026-05-15T11:35:00+08:00",
   "distributionPolicy": {
     "rawSourceArchive": "versioned-in-git-not-packaged",
     "publishedArtifacts": "cleaned-json-and-types-only"
@@ -54,6 +54,17 @@
       "providedBy": "baike.mihoyo.com public API",
       "distribution": "raw-retained-not-packaged",
       "usage": "Deadly Assault Chinese detail text snapshot and Mihoyo/buhflipexplode zh/en source-text alignment baseline"
+    },
+    {
+      "id": "nanoka-zzz-2.8",
+      "kind": "rawHttpSnapshot",
+      "path": "data/source/raw/nanoka/zzz/2.8/fetch-manifest.json",
+      "sha256": "6e6e23890d3461c120a8994f434093c27225754ace8cb592c538d4aaf7e13a1c",
+      "bytes": 4382,
+      "fetchedAt": "2026-05-15T11:35:00+08:00",
+      "providedBy": "static.nanoka.cc public JSON",
+      "distribution": "raw-retained-not-packaged",
+      "usage": "Nanoka live 2.8 raw snapshot fixture for Phase 2 source-gate and adapter-skeleton tests; not a runtime cleaned-data cutover"
     }
   ]
 }

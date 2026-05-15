@@ -122,8 +122,8 @@
       "url": "https://static.nanoka.cc/manifest.json",
       "version": "manifest",
       "releaseChannel": "source-registry",
-      "fetchedAt": "2026-05-15T02:21:00+08:00",
-      "contentSha256": "6213ac3b71f5827e850691c2f8547ec6657b7d8ab7e546c50b80252387e613b8",
+      "fetchedAt": "2026-05-15T11:35:00+08:00",
+      "contentSha256": "91494c2c3bfda6ec47beccbf71066506ab0a315513aa751cf30e4c3a1dc0817d",
       "server": "source-registry",
       "approvedForCleanedOutput": true,
       "evidenceUse": "live-version-gate"
