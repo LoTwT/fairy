@@ -1,6 +1,6 @@
 # Data Source Ingestion
 
-Status: V0.1.0 nanoka runtime cutover baseline + V1.2.1 Bangboo batch import + V1.2.x character batch import
+Status: V0.1.0 nanoka runtime cutover baseline + V1.2.1 Bangboo batch import + V1.2.x character/W-Engine batch import
 Owner: @TechLead
 Inputs: CONFIRM-4, CONFIRM-11, D-20, Phase 2 nanoka adapter, Phase 3 drift audit, Phase 4 runtime cutover
 
@@ -10,7 +10,9 @@ and buhflipexplode D-12 snapshots remain retained audit references only; runtime
 cleaned data and package exports fail loud if they reference those archived
 source ids. V1.2.1 extends the runtime Bangboo catalog to all 39 approved-live
 nanoka 2.8 entries; V1.2.x PR-A extends runtime Agents to all 53 approved-live
-nanoka 2.8 entries. Neither change adds a package version bump.
+nanoka 2.8 entries; V1.2.x PR-B extends runtime W-Engines to all 89
+approved-live nanoka 2.8 entries. These batch imports do not add a package
+version bump.
 
 ## Segment 1 Scope
 
@@ -30,6 +32,8 @@ nanoka 2.8 entries. Neither change adds a package version bump.
   per-entry Bangboo panel/skill/element audit.
 - `data/cleaned/audit/nanoka-character-batch-audit.json` records the V1.2.x
   per-entry Agent identity/enum/panel audit.
+- `data/cleaned/audit/nanoka-wengine-batch-audit.json` records the V1.2.x
+  per-entry W-Engine identity/stat/passive-boundary audit.
 - `data/cleaned/audit/nanoka-full-data-batch-discovery.json` records the
   V1.2.x full-data batch counts, exclusions, historical DA boundary, and PR
   sequence.
@@ -45,7 +49,7 @@ runtime data.
 
 | Source ID | Kind | Current status | Formal data ready | Notes |
 |---|---|---:|---:|---|
-| `nanoka-zzz` | `thirdPartySite` | runtime-primary | yes | Approved-live `2.8` source for V0.1.0 runtime cleaned data, V1.2.1 Bangboo batch import, and V1.2.x character batch import. |
+| `nanoka-zzz` | `thirdPartySite` | runtime-primary | yes | Approved-live `2.8` source for V0.1.0 runtime cleaned data, V1.2.1 Bangboo batch import, and V1.2.x character/W-Engine batch import. |
 | `lo-user-excel` | `excel` | deprecated runtime archive | audit only | Workbook committed under `data/source/excel/` with hash metadata. |
 | `mihoyo-zzz-critical-assault` | `mihoyoWiki` | deprecated runtime archive | audit only | Public API snapshot retained for DA detail text and zh/en source-text alignment. |
 | `buhflipexplode-zzz-da` | `thirdPartySite` | deprecated runtime archive | audit only | Live-only source snapshot retained; D-12 forbids copying GPL JS into Fairy runtime. |

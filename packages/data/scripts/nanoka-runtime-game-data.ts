@@ -1,14 +1,14 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs"
 import { dirname, join } from "node:path"
 import { fileURLToPath } from "node:url"
-import { parseGameData, type AgentData, type BangbooData, type BangbooSkillData, type GameData, type SourceRef } from "../../core/src/index"
+import { parseGameData, type AgentData, type BangbooData, type BangbooSkillData, type GameData, type SourceRef, type WEngineData } from "../../core/src/index"
 import { deriveNanokaBangbooElement } from "../src/nanoka-bangboo-element"
 import { assertNanokaRuntimeGameDataArtifact } from "../src/runtime-policy"
 
 const packageDir = fileURLToPath(new URL("..", import.meta.url))
 const repoRoot = join(packageDir, "../..")
 
-const generatedAt = "2026-05-15T23:42:00+08:00"
+const generatedAt = "2026-05-16T00:08:00+08:00"
 const sourceVersion = "2.8"
 const rootArtifactPath = join(repoRoot, "data/cleaned/runtime/game-data.json")
 const packageArtifactPath = join(packageDir, "cleaned/runtime/game-data.json")
@@ -16,10 +16,14 @@ const rootCharacterBatchAuditPath = join(repoRoot, "data/cleaned/audit/nanoka-ch
 const packageCharacterBatchAuditPath = join(packageDir, "cleaned/audit/nanoka-character-batch-audit.json")
 const rootBangbooBatchAuditPath = join(repoRoot, "data/cleaned/audit/nanoka-bangboo-batch-audit.json")
 const packageBangbooBatchAuditPath = join(packageDir, "cleaned/audit/nanoka-bangboo-batch-audit.json")
+const rootWEngineBatchAuditPath = join(repoRoot, "data/cleaned/audit/nanoka-wengine-batch-audit.json")
+const packageWEngineBatchAuditPath = join(packageDir, "cleaned/audit/nanoka-wengine-batch-audit.json")
 const characterIndexPath = join(repoRoot, "data/source/raw/nanoka/zzz/2.8/character.json")
 const characterSourceDir = join(repoRoot, "data/source/raw/nanoka/zzz/2.8/zh/character")
 const bangbooIndexPath = join(repoRoot, "data/source/raw/nanoka/zzz/2.8/bangboo.json")
 const bangbooSourceDir = join(repoRoot, "data/source/raw/nanoka/zzz/2.8/zh/bangboo")
+const weaponIndexPath = join(repoRoot, "data/source/raw/nanoka/zzz/2.8/weapon.json")
+const weaponSourceDir = join(repoRoot, "data/source/raw/nanoka/zzz/2.8/zh/weapon")
 
 function assert(condition: unknown, message: string): asserts condition {
   if (!condition)
@@ -356,6 +360,52 @@ type BangbooRuntimeBuild = {
   audit: unknown
 }
 
+type WEngineIndexEntry = {
+  icon?: string
+  rank?: number
+  type?: number
+  en?: string
+  zh?: string
+  sub?: string
+  atk?: number
+}
+
+type WEngineRaw = Record<string, any> & {
+  id: number
+  code_name: string
+  name: string
+  weapon_type?: Record<string, string>
+  base_property?: {
+    name?: string
+    name2?: string
+    format?: string
+    value?: number
+  }
+  rand_property?: {
+    name?: string
+    name2?: string
+    format?: string
+    value?: number
+  }
+  level?: Record<string, {
+    rate?: number
+    rate2?: number
+  }>
+  stars?: Record<string, {
+    star_rate?: number
+    rand_rate?: number
+  }>
+  talents?: Record<string, {
+    name?: string
+    desc?: string
+  }>
+}
+
+type WEngineRuntimeBuild = {
+  wEngines: Record<string, WEngineData>
+  audit: unknown
+}
+
 function uniqueStrings(values: Array<string | undefined>): string[] {
   return [...new Set(values.filter((value): value is string => typeof value === "string" && value.length > 0))]
 }
@@ -375,6 +425,14 @@ function bangbooAnchor(entityId: string | number): string {
 
 function readBangbooRaw(entityId: string): BangbooRaw {
   return readJson<BangbooRaw>(join(bangbooSourceDir, `${entityId}.json`))
+}
+
+function wEngineAnchor(entityId: string | number): string {
+  return `data/source/raw/nanoka/zzz/2.8/zh/weapon/${entityId}.json`
+}
+
+function readWEngineRaw(entityId: string): WEngineRaw {
+  return readJson<WEngineRaw>(join(weaponSourceDir, `${entityId}.json`))
 }
 
 function bangbooPanel(source: BangbooRaw) {
@@ -640,10 +698,188 @@ function buildBangbooRuntimeBatch(): BangbooRuntimeBuild {
   return { bangboos, bangbooSkills, audit }
 }
 
+function wEngineSpecialty(raw: WEngineRaw): string {
+  const specialtyCode = Object.keys(raw.weapon_type ?? {})[0]
+  if (specialtyCode === "1")
+    return "attack"
+  if (specialtyCode === "2")
+    return "stun"
+  if (specialtyCode === "3")
+    return "anomaly"
+  if (specialtyCode === "4")
+    return "support"
+  if (specialtyCode === "5")
+    return "defense"
+  if (specialtyCode === "6")
+    return "rupture"
+  throw new Error(`W-Engine ${raw.id}: unsupported weapon_type ${specialtyCode}`)
+}
+
+function wEngineSubStatKey(name: string | undefined, entityId: string): string {
+  if (name === "攻击力百分比")
+    return "attackPercent"
+  if (name === "生命值百分比")
+    return "hpPercent"
+  if (name === "防御力百分比")
+    return "defensePercent"
+  if (name === "暴击率")
+    return "critRate"
+  if (name === "暴击伤害")
+    return "critDamage"
+  if (name === "穿透率")
+    return "penetrationRatio"
+  if (name === "异常精通")
+    return "anomalyProficiency"
+  if (name === "异常掌控")
+    return "anomalyMastery"
+  if (name === "能量自动回复")
+    return "energyRegen"
+  if (name === "冲击力")
+    return "impact"
+  throw new Error(`W-Engine ${entityId}: unsupported rand_property.name2 ${name}`)
+}
+
+function normalizeWEngineSubStat(rawValue: number, format: string | undefined): number {
+  if (format === "{0:0.#%}")
+    return Number((rawValue / 10000).toFixed(8))
+  if (format === "{0:0}")
+    return Number(rawValue.toFixed(8))
+  throw new Error(`unsupported W-Engine substat format ${format}`)
+}
+
+function wEnginePanel(raw: WEngineRaw, indexEntry: WEngineIndexEntry) {
+  const level60 = raw.level?.["60"]
+  const star5 = raw.stars?.["5"]
+  assert(level60 !== undefined, `W-Engine ${raw.id}: missing level.60`)
+  assert(star5 !== undefined, `W-Engine ${raw.id}: missing stars.5`)
+  assert(raw.base_property?.name2 === "基础攻击力", `W-Engine ${raw.id}: unsupported base_property ${raw.base_property?.name2}`)
+
+  const baseAttack = requiredNumber(raw.base_property?.value, `W-Engine ${raw.id}.base_property.value`)
+  const levelRate = requiredNumber(level60.rate, `W-Engine ${raw.id}.level.60.rate`)
+  const starRate = requiredNumber(star5.star_rate, `W-Engine ${raw.id}.stars.5.star_rate`)
+  const randBase = requiredNumber(raw.rand_property?.value, `W-Engine ${raw.id}.rand_property.value`)
+  const randRate = requiredNumber(star5.rand_rate, `W-Engine ${raw.id}.stars.5.rand_rate`)
+  const attack = Number((baseAttack * (1 + levelRate / 10000 + starRate / 10000)).toFixed(8))
+  const rawSubStat = Number((randBase * (1 + randRate / 10000)).toFixed(8))
+  const subStatKey = wEngineSubStatKey(raw.rand_property?.name2, String(raw.id))
+  const subStat = normalizeWEngineSubStat(rawSubStat, raw.rand_property?.format)
+
+  return {
+    panel: {
+      attack,
+      [subStatKey]: subStat,
+    },
+    proof: {
+      baseAttack,
+      level60Rate: levelRate,
+      star5AttackRate: starRate,
+      attack,
+      indexAttack: indexEntry.atk,
+      indexAttackFloorMatches: Math.floor(attack) === indexEntry.atk,
+      randBase,
+      star5RandRate: randRate,
+      rawSubStat,
+      subStatKey,
+      subStat,
+      subStatFormat: raw.rand_property?.format,
+    },
+  }
+}
+
+function buildWEngineRuntimeBatch(): WEngineRuntimeBuild {
+  const index = readJson<Record<string, WEngineIndexEntry>>(weaponIndexPath)
+  const wEngineIds = Object.keys(index).sort((left, right) => Number(left) - Number(right))
+  assert(wEngineIds.length === 89, `W-Engine runtime batch expected 89 live W-Engines, got ${wEngineIds.length}`)
+
+  const wEngines: Record<string, WEngineData> = {}
+  const auditRows: any[] = []
+
+  for (const wEngineId of wEngineIds) {
+    const indexEntry = index[wEngineId]!
+    const raw = readWEngineRaw(wEngineId)
+    const numericId = Number(wEngineId)
+    assert(raw.id === numericId, `W-Engine ${wEngineId}: raw id drifted`)
+    assert(raw.name === indexEntry.zh, `W-Engine ${wEngineId}: zh name drifted against index`)
+    assert(raw.base_property !== undefined, `W-Engine ${wEngineId}: missing base_property`)
+    assert(raw.rand_property !== undefined, `W-Engine ${wEngineId}: missing rand_property`)
+
+    const anchor = wEngineAnchor(wEngineId)
+    const wEngineSource = sourceRef(anchor, "/")
+    const specialty = wEngineSpecialty(raw)
+    const { panel, proof } = wEnginePanel(raw, indexEntry)
+    const talentLevels = Object.keys(raw.talents ?? {}).sort((left, right) => Number(left) - Number(right))
+    const talents = talentLevels.map((level) => {
+      const talent = raw.talents?.[level]
+      assert(typeof talent?.name === "string" && talent.name.length > 0, `W-Engine ${wEngineId}: missing talent ${level} name`)
+      assert(typeof talent?.desc === "string" && talent.desc.length > 0, `W-Engine ${wEngineId}: missing talent ${level} desc`)
+      return {
+        level,
+        name: talent.name,
+        desc: talent.desc,
+        source: sourceRef(anchor, `/talents/${level}`),
+      }
+    })
+    assert(talents.length === 5, `W-Engine ${wEngineId}: expected 5 retained talent levels, got ${talents.length}`)
+
+    wEngines[wEngineId] = {
+      id: wEngineId,
+      label: { zh: raw.name, en: indexEntry.en },
+      source: wEngineSource,
+      baseStatsByLevel: {
+        "60": panel,
+      },
+      sourceAliases: uniqueStrings([raw.name, raw.code_name, indexEntry.en, indexEntry.zh]),
+    }
+
+    auditRows.push({
+      id: wEngineId,
+      codeName: raw.code_name,
+      label: { zh: raw.name, en: indexEntry.en },
+      source: wEngineSource,
+      rarity: raw.rarity,
+      indexRank: indexEntry.rank,
+      weaponTypeRaw: raw.weapon_type,
+      compatibleSpecialty: specialty,
+      baseProperty: raw.base_property,
+      randProperty: raw.rand_property,
+      level60Panel: panel,
+      formulaProof: proof,
+      passiveModifiers: {
+        status: "not-promoted",
+        reason: "typed-modifier-template-required",
+        talents,
+      },
+    })
+  }
+
+  const audit = {
+    kind: "nanokaWEngineBatchAudit",
+    schemaVersion: "nanoka-wengine-batch-audit/v0.1",
+    sourceId: "nanoka-zzz",
+    sourceVersion,
+    generatedAt,
+    runtimeCutoverReady: true,
+    indexSource: sourceRef("data/source/raw/nanoka/zzz/2.8/weapon.json", "/"),
+    summary: {
+      wEngineCount: wEngineIds.length,
+      runtimeWEngineCount: Object.keys(wEngines).length,
+      passiveNotPromotedCount: auditRows.filter(row => row.passiveModifiers.status === "not-promoted").length,
+      wEngineIds,
+      rarityCounts: countBy(auditRows, row => String(row.rarity)),
+      compatibleSpecialtyCounts: countBy(auditRows, row => row.compatibleSpecialty),
+      subStatCounts: countBy(auditRows, row => row.formulaProof.subStatKey),
+    },
+    wEngines: auditRows,
+  }
+
+  return { wEngines, audit }
+}
+
 function buildArtifact() {
   const characterBatch = buildCharacterRuntimeBatch()
   const yixuan = characterBatch.yixuanProof
   const bangbooBatch = buildBangbooRuntimeBatch()
+  const wEngineBatch = buildWEngineRuntimeBatch()
   const yixuanAnchor = "data/source/raw/nanoka/zzz/2.8/zh/character/1371.json"
   const yixuanSkillSource = sourceRef(yixuanAnchor, "/skill/basic/description/4/param/0/param/1371001")
 
@@ -660,9 +896,9 @@ function buildArtifact() {
         url: "https://static.nanoka.cc/manifest.json",
         gameVersion: "ZZZ-2.8",
         sourceVersion,
-        fetchedAt: "2026-05-15T23:42:00+08:00",
+        fetchedAt: generatedAt,
         parsedAt: generatedAt,
-        parserVersion: "nanoka-runtime-character-batch-v0.1.0",
+        parserVersion: "nanoka-runtime-wengine-batch-v0.1.0",
         licenseNote: "Runtime cleaned data uses lo-user-approved nanoka live 2.8 evidence; archived Excel/D-17/D-12 sources are retained for audit only.",
       },
     ],
@@ -693,7 +929,7 @@ function buildArtifact() {
     },
     bangboos: bangbooBatch.bangboos,
     bangbooSkills: bangbooBatch.bangbooSkills,
-    wEngines: {},
+    wEngines: wEngineBatch.wEngines,
     driveDiscs: {},
     enemies: {},
     resonium: {},
@@ -758,6 +994,7 @@ function buildArtifact() {
     artifact,
     characterBatchAudit: characterBatch.audit,
     bangbooBatchAudit: bangbooBatch.audit,
+    wEngineBatchAudit: wEngineBatch.audit,
   }
 }
 
@@ -766,6 +1003,7 @@ function assertArtifactFresh(): void {
     artifact: expected,
     characterBatchAudit: expectedCharacterBatchAudit,
     bangbooBatchAudit: expectedBangbooBatchAudit,
+    wEngineBatchAudit: expectedWEngineBatchAudit,
   } = buildArtifact()
   const actualRoot = readJson<unknown>(rootArtifactPath)
   const actualPackage = readJson<unknown>(packageArtifactPath)
@@ -773,6 +1011,8 @@ function assertArtifactFresh(): void {
   const actualPackageCharacterBatchAudit = readJson<unknown>(packageCharacterBatchAuditPath)
   const actualRootBangbooBatchAudit = readJson<unknown>(rootBangbooBatchAuditPath)
   const actualPackageBangbooBatchAudit = readJson<unknown>(packageBangbooBatchAuditPath)
+  const actualRootWEngineBatchAudit = readJson<unknown>(rootWEngineBatchAuditPath)
+  const actualPackageWEngineBatchAudit = readJson<unknown>(packageWEngineBatchAuditPath)
   if (JSON.stringify(actualRoot) !== JSON.stringify(expected))
     throw new Error("Runtime game data artifact is stale; rerun pnpm --filter @randomplay/data audit:nanoka-runtime")
   if (JSON.stringify(actualPackage) !== JSON.stringify(expected))
@@ -785,18 +1025,24 @@ function assertArtifactFresh(): void {
     throw new Error("Bangboo batch audit artifact is stale; rerun pnpm --filter @randomplay/data audit:nanoka-runtime")
   if (JSON.stringify(actualPackageBangbooBatchAudit) !== JSON.stringify(expectedBangbooBatchAudit))
     throw new Error("Package Bangboo batch audit mirror is stale; rerun pnpm --filter @randomplay/data audit:nanoka-runtime")
+  if (JSON.stringify(actualRootWEngineBatchAudit) !== JSON.stringify(expectedWEngineBatchAudit))
+    throw new Error("W-Engine batch audit artifact is stale; rerun pnpm --filter @randomplay/data audit:nanoka-runtime")
+  if (JSON.stringify(actualPackageWEngineBatchAudit) !== JSON.stringify(expectedWEngineBatchAudit))
+    throw new Error("Package W-Engine batch audit mirror is stale; rerun pnpm --filter @randomplay/data audit:nanoka-runtime")
   assertNanokaRuntimeGameDataArtifact(actualRoot)
   assertNanokaRuntimeGameDataArtifact(actualPackage)
 }
 
 function auditCommand(): void {
-  const { artifact, characterBatchAudit, bangbooBatchAudit } = buildArtifact()
+  const { artifact, characterBatchAudit, bangbooBatchAudit, wEngineBatchAudit } = buildArtifact()
   writeJson(rootArtifactPath, artifact)
   writeJson(packageArtifactPath, artifact)
   writeJson(rootCharacterBatchAuditPath, characterBatchAudit)
   writeJson(packageCharacterBatchAuditPath, characterBatchAudit)
   writeJson(rootBangbooBatchAuditPath, bangbooBatchAudit)
   writeJson(packageBangbooBatchAuditPath, bangbooBatchAudit)
+  writeJson(rootWEngineBatchAuditPath, wEngineBatchAudit)
+  writeJson(packageWEngineBatchAuditPath, wEngineBatchAudit)
 }
 
 function verifyCommand(): void {
@@ -812,6 +1058,10 @@ function verifyCommand(): void {
     throw new Error("Missing data/cleaned/audit/nanoka-character-batch-audit.json; run audit:nanoka-runtime first")
   if (!existsSync(packageCharacterBatchAuditPath))
     throw new Error("Missing packages/data/cleaned/audit/nanoka-character-batch-audit.json; run audit:nanoka-runtime first")
+  if (!existsSync(rootWEngineBatchAuditPath))
+    throw new Error("Missing data/cleaned/audit/nanoka-wengine-batch-audit.json; run audit:nanoka-runtime first")
+  if (!existsSync(packageWEngineBatchAuditPath))
+    throw new Error("Missing packages/data/cleaned/audit/nanoka-wengine-batch-audit.json; run audit:nanoka-runtime first")
   assertArtifactFresh()
 }
 

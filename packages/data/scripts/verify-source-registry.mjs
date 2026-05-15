@@ -22,6 +22,8 @@ const rootCharacterBatchAuditPath = join(repoRoot, "data/cleaned/audit/nanoka-ch
 const packageCharacterBatchAuditPath = join(packageDir, "cleaned/audit/nanoka-character-batch-audit.json")
 const rootBangbooBatchAuditPath = join(repoRoot, "data/cleaned/audit/nanoka-bangboo-batch-audit.json")
 const packageBangbooBatchAuditPath = join(packageDir, "cleaned/audit/nanoka-bangboo-batch-audit.json")
+const rootWEngineBatchAuditPath = join(repoRoot, "data/cleaned/audit/nanoka-wengine-batch-audit.json")
+const packageWEngineBatchAuditPath = join(packageDir, "cleaned/audit/nanoka-wengine-batch-audit.json")
 
 const archivedRuntimeSourceIds = new Set([
   "lo-user-excel",
@@ -127,6 +129,7 @@ function validateNanokaRegistry(source) {
   assert(indexPattern.test(`https://static.nanoka.cc/zzz/${source.configuredLiveVersion}/boss.json`), "nanoka allowlist must accept versioned boss index")
   assert(indexPattern.test(`https://static.nanoka.cc/zzz/${source.configuredLiveVersion}/character.json`), "nanoka allowlist must accept versioned character index")
   assert(indexPattern.test(`https://static.nanoka.cc/zzz/${source.configuredLiveVersion}/bangboo.json`), "nanoka allowlist must accept versioned Bangboo index")
+  assert(indexPattern.test(`https://static.nanoka.cc/zzz/${source.configuredLiveVersion}/weapon.json`), "nanoka allowlist must accept versioned W-Engine index")
   for (const forbiddenIndex of ["beta", "preview", "leak", "datamine"]) {
     assert(
       !indexPattern.test(`https://static.nanoka.cc/zzz/${source.configuredLiveVersion}/${forbiddenIndex}.json`),
@@ -284,6 +287,25 @@ function validateMatrixAgainstRegistry(matrix, registry) {
     assert(row?.auditArtifact === "data/cleaned/audit/nanoka-character-batch-audit.json", `${fieldId}: V1.2.x batch row must point to the character batch audit`)
     assert((row?.supportingSampleEntities ?? []).length === 53, `${fieldId}: V1.2.x batch row must support all 53 characters`)
   }
+
+  const wEngineIndexSample = sampleById.get("nanoka-weapon-index-live-2.8")
+  assert(wEngineIndexSample !== undefined, "W-Engine batch: missing approved-live weapon index sample")
+  assert(wEngineIndexSample.approvedForCleanedOutput === true, "W-Engine batch index must be approved live evidence")
+  assert(wEngineIndexSample.version === nanoka.configuredLiveVersion, "W-Engine batch index must use configuredLiveVersion")
+  const liveWEngineSamples = [...sampleById.values()].filter(sample => sample.entityType === "wEngine" && sample.version === nanoka.configuredLiveVersion)
+  assert(liveWEngineSamples.length === 89, `W-Engine batch must retain 89 approved-live detail samples, got ${liveWEngineSamples.length}`)
+  for (const fieldId of ["wEngines.identity", "wEngines.baseStats"]) {
+    const row = resourceRows.get(fieldId)
+    assert(row?.sampleEntity === "nanoka-weapon-index-live-2.8", `${fieldId}: V1.2.x batch row must use the approved-live W-Engine index sample`)
+    assert(row?.auditArtifact === "data/cleaned/audit/nanoka-wengine-batch-audit.json", `${fieldId}: V1.2.x batch row must point to the W-Engine batch audit`)
+    assert((row?.supportingSampleEntities ?? []).length === 89, `${fieldId}: V1.2.x batch row must support all 89 W-Engines`)
+  }
+  const wEnginePassiveRow = resourceRows.get("wEngines.passiveModifiers")
+  assert(wEnginePassiveRow !== undefined, "wEngines.passiveModifiers: missing W-Engine passive modifier row")
+  assert(wEnginePassiveRow.promotable === false, "wEngines.passiveModifiers must stay not-promotable until typed modifier templates exist")
+  assert(wEnginePassiveRow.blockedBy?.includes("typed-modifier-template-required"), "wEngines.passiveModifiers must keep typed modifier blocker")
+  assert(wEnginePassiveRow.auditArtifact === "data/cleaned/audit/nanoka-wengine-batch-audit.json", "wEngines.passiveModifiers must point to the W-Engine batch audit")
+  assert((wEnginePassiveRow.supportingSampleEntities ?? []).length === 89, "wEngines.passiveModifiers row must support all 89 W-Engines")
 
   const driveDiscSlotRow = resourceRows.get("driveDiscs.slotAndSubstatTables")
   assert(driveDiscSlotRow !== undefined, "driveDiscs.slotAndSubstatTables: missing Drive Disc slot/stat row")
@@ -463,6 +485,7 @@ function validateRuntimeGameData(registry) {
   assert(data.sources[0]?.id === "nanoka-zzz", "runtime GameData source document must be nanoka")
   assert(data.sources[0]?.sourceVersion === nanoka.configuredLiveVersion, "runtime GameData source document must use configured live")
   assert(Object.keys(data.agents ?? {}).length === 53, "runtime GameData must include the full approved-live character batch")
+  assert(Object.keys(data.wEngines ?? {}).length === 89, "runtime GameData must include the full approved-live W-Engine batch")
   assert(Object.keys(data.bangboos ?? {}).length === 39, "runtime GameData must include the full approved-live Bangboo batch")
   assert(Object.keys(data.bangbooSkills ?? {}).length === 63, "runtime GameData Bangboo skill count drifted")
 
@@ -504,6 +527,47 @@ function validateCharacterBatchAudit(registry) {
     assert(row.level60Panel?.maxHp !== undefined, `${row.id}: Character audit must include level-60 maxHp`)
     assert(row.skillPromotion?.status === "sample-preserved" || row.skillPromotion?.status === "not-promoted", `${row.id}: Character skill promotion status drifted`)
     assert(row.passiveModifiers?.status === "not-promoted", `${row.id}: Character passive modifier template must remain not-promoted`)
+  }
+}
+
+function validateWEngineBatchAudit(registry) {
+  const { rootText } = readMirroredText(
+    rootWEngineBatchAuditPath,
+    packageWEngineBatchAuditPath,
+    "packages/data/cleaned/audit/nanoka-wengine-batch-audit.json",
+  )
+
+  const nanoka = sourceById(registry, "nanoka-zzz")
+  const audit = JSON.parse(rootText)
+  assert(audit.kind === "nanokaWEngineBatchAudit", "W-Engine batch audit kind drifted")
+  assert(audit.schemaVersion === "nanoka-wengine-batch-audit/v0.1", "W-Engine batch audit schemaVersion drifted")
+  assert(audit.sourceId === "nanoka-zzz", "W-Engine batch audit sourceId drifted")
+  assert(audit.sourceVersion === nanoka.configuredLiveVersion, "W-Engine batch audit must use configured live version")
+  assert(audit.runtimeCutoverReady === true, "W-Engine batch audit must reflect runtime cutover state")
+  assert(audit.indexSource?.sourceId === "nanoka-zzz", "W-Engine batch audit index source must be nanoka")
+  assert(audit.indexSource?.sourceVersion === nanoka.configuredLiveVersion, "W-Engine batch audit index source must use configured live version")
+  assert(audit.indexSource?.sourceAnchor === "data/source/raw/nanoka/zzz/2.8/weapon.json", "W-Engine batch audit index source anchor drifted")
+  assert(audit.summary?.wEngineCount === 89, "W-Engine batch audit count drifted")
+  assert(audit.summary?.runtimeWEngineCount === 89, "W-Engine batch runtime count drifted")
+  assert(audit.summary?.passiveNotPromotedCount === 89, "W-Engine passive promotion boundary drifted")
+  assert(Array.isArray(audit.wEngines) && audit.wEngines.length === 89, "W-Engine batch audit rows must cover 89 W-Engines")
+  for (const row of audit.wEngines) {
+    assert(row.source?.sourceId === "nanoka-zzz", `${row.id}: W-Engine audit source must be nanoka`)
+    assert(row.source?.sourceVersion === nanoka.configuredLiveVersion, `${row.id}: W-Engine audit source version drifted`)
+    assert(row.source?.sourceAnchor === `data/source/raw/nanoka/zzz/2.8/zh/weapon/${row.id}.json`, `${row.id}: W-Engine audit source anchor drifted`)
+    assert(row.level60Panel?.attack !== undefined, `${row.id}: W-Engine audit must include level-60 attack`)
+    assert(row.formulaProof?.indexAttackFloorMatches === true, `${row.id}: W-Engine attack formula must match index atk floor`)
+    assert(row.passiveModifiers?.status === "not-promoted", `${row.id}: W-Engine passive modifiers must remain not-promoted`)
+    assert(Array.isArray(row.passiveModifiers?.talents) && row.passiveModifiers.talents.length === 5, `${row.id}: W-Engine audit must retain all five passive talent text rows`)
+    for (const talent of row.passiveModifiers.talents) {
+      assert(/^[1-5]$/.test(talent.level), `${row.id}: W-Engine talent level drifted`)
+      assert(typeof talent.name === "string" && talent.name.length > 0, `${row.id}: W-Engine talent name must be retained`)
+      assert(typeof talent.desc === "string" && talent.desc.length > 0, `${row.id}: W-Engine talent desc must be retained`)
+      assert(talent.source?.sourceId === "nanoka-zzz", `${row.id}: W-Engine talent source must be nanoka`)
+      assert(talent.source?.sourceVersion === nanoka.configuredLiveVersion, `${row.id}: W-Engine talent source version drifted`)
+      assert(talent.source?.sourceAnchor === `data/source/raw/nanoka/zzz/2.8/zh/weapon/${row.id}.json`, `${row.id}: W-Engine talent source anchor drifted`)
+      assert(talent.source?.dataPath === `/talents/${talent.level}`, `${row.id}: W-Engine talent dataPath drifted`)
+    }
   }
 }
 
@@ -701,6 +765,7 @@ function validateCoveredSourceRefs(registry) {
     "data/cleaned/audit/mihoyo-buhflipexplode.source-conflicts.json",
     "data/cleaned/audit/nanoka-character-batch-audit.json",
     "data/cleaned/audit/nanoka-bangboo-batch-audit.json",
+    "data/cleaned/audit/nanoka-wengine-batch-audit.json",
     "data/cleaned/audit/source-migration-field-diff.json",
     "data/cleaned/golden/v1-replay-report.json",
     "data/cleaned/runtime/game-data.json",
@@ -731,6 +796,7 @@ function main() {
   validateDisorderDazeLevelAudit(registry)
   validateRuntimeGameData(registry)
   validateCharacterBatchAudit(registry)
+  validateWEngineBatchAudit(registry)
   validateBangbooBatchAudit(registry)
   validateCoveredSourceRefs(registry)
 

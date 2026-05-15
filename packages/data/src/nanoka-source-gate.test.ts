@@ -80,6 +80,7 @@ describe("nanoka source gate", () => {
     expect(requirePattern(source.urlAllowlist, "versionedIndexUrls").test("https://static.nanoka.cc/zzz/2.8/boss.json")).toBe(true)
     expect(requirePattern(source.urlAllowlist, "versionedIndexUrls").test("https://static.nanoka.cc/zzz/2.8/character.json")).toBe(true)
     expect(requirePattern(source.urlAllowlist, "versionedIndexUrls").test("https://static.nanoka.cc/zzz/2.8/bangboo.json")).toBe(true)
+    expect(requirePattern(source.urlAllowlist, "versionedIndexUrls").test("https://static.nanoka.cc/zzz/2.8/weapon.json")).toBe(true)
     expect(requirePattern(source.urlAllowlist, "localizedDetailUrls").test("https://static.nanoka.cc/zzz/2.8/zh/character/1021.json")).toBe(true)
     expect(requirePattern(source.urlAllowlist, "localizedDetailUrls").test("https://static.nanoka.cc/zzz/2.8/zh/monster/30000.json")).toBe(true)
   })
@@ -277,6 +278,34 @@ describe("nanoka source gate", () => {
     }
 
     expect(rows.get("agents.passiveModifiers")?.blockedBy).toContain("typed-modifier-template-required")
+  })
+
+  it("locks the V1.2.x W-Engine batch to the full approved-live index", () => {
+    const matrix = readJson<CoverageMatrix>("data/cleaned/audit/nanoka-coverage-matrix.json")
+    const samples = new Map(matrix.sampleSources.map(sample => [sample.id, sample]))
+    const rows = new Map(matrix.rows.map(row => [row.fieldId, row]))
+    const wEngineSamples = matrix.sampleSources.filter(sample => sample.entityType === "wEngine" && sample.version === "2.8")
+
+    expect(samples.get("nanoka-weapon-index-live-2.8")).toMatchObject({
+      version: "2.8",
+      approvedForCleanedOutput: true,
+      evidenceUse: "v1.2.x-wengine-batch-source-gate",
+    })
+    expect(wEngineSamples).toHaveLength(89)
+
+    for (const fieldId of ["wEngines.identity", "wEngines.baseStats"]) {
+      expect(rows.get(fieldId)).toMatchObject({
+        sampleEntity: "nanoka-weapon-index-live-2.8",
+        auditArtifact: "data/cleaned/audit/nanoka-wengine-batch-audit.json",
+      })
+      expect(rows.get(fieldId)?.supportingSampleEntities).toHaveLength(89)
+      expect(rows.get(fieldId)?.notes).toContain("no new golden anchors")
+    }
+
+    expect(rows.get("wEngines.baseStats")?.promotable).toBe(true)
+    expect(rows.get("wEngines.baseStats")?.blockedBy ?? []).toEqual([])
+    expect(rows.get("wEngines.passiveModifiers")?.supportingSampleEntities).toHaveLength(89)
+    expect(rows.get("wEngines.passiveModifiers")?.blockedBy).toContain("typed-modifier-template-required")
   })
 
   it("locks enemy variant mapping to approved live monster detail samples", () => {

@@ -97,6 +97,7 @@ export function assertNanokaRuntimeGameDataArtifact(
   assert(data.sources[0]?.id === NANOKA_RUNTIME_SOURCE_ID, "runtime GameData source document must be nanoka-zzz")
   assert(data.sources[0]?.sourceVersion === NANOKA_RUNTIME_SOURCE_VERSION, "runtime GameData source document must use configured live version")
   assert(Object.keys(data.agents).length === 53, "runtime GameData must include the full approved-live character batch")
+  assert(Object.keys(data.wEngines).length === 89, "runtime GameData must include the full approved-live W-Engine batch")
 
   const archivedSources = new Set<string>(ARCHIVED_RUNTIME_SOURCE_IDS)
   for (const ref of collectSourceRefs(data)) {

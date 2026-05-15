@@ -2,7 +2,7 @@
   "kind": "gameData",
   "schemaVersion": "cleaned-game-data-artifact/v0.1",
   "dataVersion": "fairy-v0.1.0-nanoka-runtime",
-  "generatedAt": "2026-05-15T23:42:00+08:00",
+  "generatedAt": "2026-05-16T00:08:00+08:00",
   "sourceManifestPath": "data/source/source-manifest.json",
   "runtimeCutoverReady": true,
   "runtimeSourcePolicy": {
@@ -22,7 +22,7 @@
     "gameVersion": "ZZZ-2.8",
     "dataVersion": "0.1.0",
     "sourceVersion": "nanoka-zzz@2.8",
-    "generatedAt": "2026-05-15T23:42:00+08:00",
+    "generatedAt": "2026-05-16T00:08:00+08:00",
     "sources": [
       {
         "id": "nanoka-zzz",
@@ -30,9 +30,9 @@
         "url": "https://static.nanoka.cc/manifest.json",
         "gameVersion": "ZZZ-2.8",
         "sourceVersion": "2.8",
-        "fetchedAt": "2026-05-15T23:42:00+08:00",
-        "parsedAt": "2026-05-15T23:42:00+08:00",
-        "parserVersion": "nanoka-runtime-character-batch-v0.1.0",
+        "fetchedAt": "2026-05-16T00:08:00+08:00",
+        "parsedAt": "2026-05-16T00:08:00+08:00",
+        "parserVersion": "nanoka-runtime-wengine-batch-v0.1.0",
         "licenseNote": "Runtime cleaned data uses lo-user-approved nanoka live 2.8 evidence; archived Excel/D-17/D-12 sources are retained for audit only."
       }
     ],
@@ -5611,7 +5611,2144 @@
         ]
       }
     },
-    "wEngines": {},
+    "wEngines": {
+      "12001": {
+        "id": "12001",
+        "label": {
+          "zh": "「月相」-望",
+          "en": "[Lunar] Pleniluna"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/12001.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 475.84,
+            "attackPercent": 0.2
+          }
+        },
+        "sourceAliases": [
+          "「月相」-望",
+          "Weapon_B_Common_01",
+          "[Lunar] Pleniluna"
+        ]
+      },
+      "12002": {
+        "id": "12002",
+        "label": {
+          "zh": "「月相」-晦",
+          "en": "[Lunar] Decrescent"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/12002.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 475.84,
+            "attackPercent": 0.2
+          }
+        },
+        "sourceAliases": [
+          "「月相」-晦",
+          "Weapon_B_Common_02",
+          "[Lunar] Decrescent"
+        ]
+      },
+      "12003": {
+        "id": "12003",
+        "label": {
+          "zh": "「月相」-朔",
+          "en": "[Lunar] Noviluna"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/12003.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 475.84,
+            "critRate": 0.16
+          }
+        },
+        "sourceAliases": [
+          "「月相」-朔",
+          "Weapon_B_Common_03",
+          "[Lunar] Noviluna"
+        ]
+      },
+      "12004": {
+        "id": "12004",
+        "label": {
+          "zh": "「残响」-Ⅰ型",
+          "en": "[Reverb] Mark I"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/12004.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 475.84,
+            "attackPercent": 0.2
+          }
+        },
+        "sourceAliases": [
+          "「残响」-Ⅰ型",
+          "Weapon_B_Common_04",
+          "[Reverb] Mark I"
+        ]
+      },
+      "12005": {
+        "id": "12005",
+        "label": {
+          "zh": "「残响」-Ⅱ型",
+          "en": "[Reverb] Mark II"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/12005.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 475.84,
+            "energyRegen": 0.4
+          }
+        },
+        "sourceAliases": [
+          "「残响」-Ⅱ型",
+          "Weapon_B_Common_05",
+          "[Reverb] Mark II"
+        ]
+      },
+      "12006": {
+        "id": "12006",
+        "label": {
+          "zh": "「残响」-Ⅲ型",
+          "en": "[Reverb] Mark III"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/12006.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 475.84,
+            "hpPercent": 0.2
+          }
+        },
+        "sourceAliases": [
+          "「残响」-Ⅲ型",
+          "Weapon_B_Common_06",
+          "[Reverb] Mark III"
+        ]
+      },
+      "12007": {
+        "id": "12007",
+        "label": {
+          "zh": "「湍流」-铳型",
+          "en": "[Vortex] Revolver"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/12007.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 475.84,
+            "attackPercent": 0.2
+          }
+        },
+        "sourceAliases": [
+          "「湍流」-铳型",
+          "Weapon_B_Common_07",
+          "[Vortex] Revolver"
+        ]
+      },
+      "12008": {
+        "id": "12008",
+        "label": {
+          "zh": "「湍流」-矢型",
+          "en": "[Vortex] Arrow"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/12008.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 475.84,
+            "impact": 0.12
+          }
+        },
+        "sourceAliases": [
+          "「湍流」-矢型",
+          "Weapon_B_Common_08",
+          "[Vortex] Arrow"
+        ]
+      },
+      "12009": {
+        "id": "12009",
+        "label": {
+          "zh": "「湍流」-斧型",
+          "en": "[Vortex] Hatchet"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/12009.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 475.84,
+            "energyRegen": 0.4
+          }
+        },
+        "sourceAliases": [
+          "「湍流」-斧型",
+          "Weapon_B_Common_09",
+          "[Vortex] Hatchet"
+        ]
+      },
+      "12010": {
+        "id": "12010",
+        "label": {
+          "zh": "「电磁暴」-壹式",
+          "en": "[Magnetic Storm] Alpha"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/12010.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 475.84,
+            "attackPercent": 0.2
+          }
+        },
+        "sourceAliases": [
+          "「电磁暴」-壹式",
+          "Weapon_B_Common_10",
+          "[Magnetic Storm] Alpha"
+        ]
+      },
+      "12011": {
+        "id": "12011",
+        "label": {
+          "zh": "「电磁暴」-贰式",
+          "en": "[Magnetic Storm] Bravo"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/12011.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 475.84,
+            "anomalyProficiency": 60
+          }
+        },
+        "sourceAliases": [
+          "「电磁暴」-贰式",
+          "Weapon_B_Common_11",
+          "[Magnetic Storm] Bravo"
+        ]
+      },
+      "12012": {
+        "id": "12012",
+        "label": {
+          "zh": "「电磁暴」-叁式",
+          "en": "[Magnetic Storm] Charlie"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/12012.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 475.84,
+            "penetrationRatio": 0.16
+          }
+        },
+        "sourceAliases": [
+          "「电磁暴」-叁式",
+          "Weapon_B_Common_12",
+          "[Magnetic Storm] Charlie"
+        ]
+      },
+      "12013": {
+        "id": "12013",
+        "label": {
+          "zh": "「恒等式」-本格",
+          "en": "[Identity] Base"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/12013.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 475.84,
+            "defensePercent": 0.32
+          }
+        },
+        "sourceAliases": [
+          "「恒等式」-本格",
+          "Weapon_B_Common_13",
+          "[Identity] Base"
+        ]
+      },
+      "12014": {
+        "id": "12014",
+        "label": {
+          "zh": "「恒等式」-变格",
+          "en": "[Identity] Inflection"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/12014.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 475.84,
+            "defensePercent": 0.32
+          }
+        },
+        "sourceAliases": [
+          "「恒等式」-变格",
+          "Weapon_B_Common_14",
+          "[Identity] Inflection"
+        ]
+      },
+      "12015": {
+        "id": "12015",
+        "label": {
+          "zh": "「灰烬」-钴蓝",
+          "en": "[Cinder] Cobalt"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/12015.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 475.84,
+            "hpPercent": 0.2
+          }
+        },
+        "sourceAliases": [
+          "「灰烬」-钴蓝",
+          "Weapon_B_Common_15",
+          "[Cinder] Cobalt"
+        ]
+      },
+      "13001": {
+        "id": "13001",
+        "label": {
+          "zh": "街头巨星",
+          "en": "Street Superstar"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/13001.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 594.8,
+            "attackPercent": 0.25
+          }
+        },
+        "sourceAliases": [
+          "街头巨星",
+          "Weapon_A_Common_01",
+          "Street Superstar"
+        ]
+      },
+      "13002": {
+        "id": "13002",
+        "label": {
+          "zh": "时光切片",
+          "en": "Slice of Time"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/13002.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 594.8,
+            "penetrationRatio": 0.2
+          }
+        },
+        "sourceAliases": [
+          "时光切片",
+          "Weapon_A_Common_02",
+          "Slice of Time"
+        ]
+      },
+      "13003": {
+        "id": "13003",
+        "label": {
+          "zh": "雨林饕客",
+          "en": "Rainforest Gourmet"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/13003.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 594.8,
+            "anomalyProficiency": 75
+          }
+        },
+        "sourceAliases": [
+          "雨林饕客",
+          "Weapon_A_Common_03",
+          "Rainforest Gourmet"
+        ]
+      },
+      "13004": {
+        "id": "13004",
+        "label": {
+          "zh": "星徽引擎",
+          "en": "Starlight Engine"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/13004.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 594.8,
+            "attackPercent": 0.25
+          }
+        },
+        "sourceAliases": [
+          "星徽引擎",
+          "Weapon_A_Common_04",
+          "Starlight Engine"
+        ]
+      },
+      "13005": {
+        "id": "13005",
+        "label": {
+          "zh": "人为刀俎",
+          "en": "Steam Oven"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/13005.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 594.8,
+            "energyRegen": 0.5
+          }
+        },
+        "sourceAliases": [
+          "人为刀俎",
+          "Weapon_A_Common_05",
+          "Steam Oven"
+        ]
+      },
+      "13006": {
+        "id": "13006",
+        "label": {
+          "zh": "贵重骨核",
+          "en": "Precious Fossilized Core"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/13006.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 594.8,
+            "impact": 0.15
+          }
+        },
+        "sourceAliases": [
+          "贵重骨核",
+          "Weapon_A_Common_06",
+          "Precious Fossilized Core"
+        ]
+      },
+      "13007": {
+        "id": "13007",
+        "label": {
+          "zh": "正版变身器",
+          "en": "Original Transmorpher"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/13007.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 594.8,
+            "hpPercent": 0.25
+          }
+        },
+        "sourceAliases": [
+          "正版变身器",
+          "Weapon_A_Common_07",
+          "Original Transmorpher"
+        ]
+      },
+      "13008": {
+        "id": "13008",
+        "label": {
+          "zh": "双生泣星",
+          "en": "Weeping Gemini"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/13008.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 594.8,
+            "attackPercent": 0.25
+          }
+        },
+        "sourceAliases": [
+          "双生泣星",
+          "Weapon_A_Common_08",
+          "Weeping Gemini"
+        ]
+      },
+      "13009": {
+        "id": "13009",
+        "label": {
+          "zh": "触电唇彩",
+          "en": "Electro-Lip Gloss"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/13009.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 594.8,
+            "anomalyProficiency": 75
+          }
+        },
+        "sourceAliases": [
+          "触电唇彩",
+          "Weapon_A_Common_09",
+          "Electro-Lip Gloss"
+        ]
+      },
+      "13010": {
+        "id": "13010",
+        "label": {
+          "zh": "兔能环",
+          "en": "Bunny Band"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/13010.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 594.8,
+            "defensePercent": 0.4
+          }
+        },
+        "sourceAliases": [
+          "兔能环",
+          "Weapon_A_Common_10",
+          "Bunny Band"
+        ]
+      },
+      "13011": {
+        "id": "13011",
+        "label": {
+          "zh": "春日融融",
+          "en": "Spring Embrace"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/13011.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 594.8,
+            "attackPercent": 0.25
+          }
+        },
+        "sourceAliases": [
+          "春日融融",
+          "Weapon_A_Common_11",
+          "Spring Embrace"
+        ]
+      },
+      "13012": {
+        "id": "13012",
+        "label": {
+          "zh": "幻变魔方",
+          "en": "Puzzle Sphere"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/13012.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 594.8,
+            "attackPercent": 0.25
+          }
+        },
+        "sourceAliases": [
+          "幻变魔方",
+          "Weapon_A_Common_12",
+          "Puzzle Sphere"
+        ]
+      },
+      "13013": {
+        "id": "13013",
+        "label": {
+          "zh": "鎏金花信",
+          "en": "Gilded Blossom"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/13013.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 594.8,
+            "attackPercent": 0.25
+          }
+        },
+        "sourceAliases": [
+          "鎏金花信",
+          "Weapon_A_Common_13",
+          "Gilded Blossom"
+        ]
+      },
+      "13014": {
+        "id": "13014",
+        "label": {
+          "zh": "电波漫步",
+          "en": "Radiowave Journey"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/13014.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 594.8,
+            "hpPercent": 0.25
+          }
+        },
+        "sourceAliases": [
+          "电波漫步",
+          "Weapon_A_Common_14",
+          "Radiowave Journey"
+        ]
+      },
+      "13015": {
+        "id": "13015",
+        "label": {
+          "zh": "强音热望",
+          "en": "Marcato Desire"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/13015.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 594.8,
+            "critRate": 0.2
+          }
+        },
+        "sourceAliases": [
+          "强音热望",
+          "Weapon_A_Common_15",
+          "Marcato Desire"
+        ]
+      },
+      "13016": {
+        "id": "13016",
+        "label": {
+          "zh": "光影刻刀",
+          "en": "Reel Projector"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/13016.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 594.8,
+            "impact": 0.15
+          }
+        },
+        "sourceAliases": [
+          "光影刻刀",
+          "Weapon_A_Common_16",
+          "Reel Projector"
+        ]
+      },
+      "13019": {
+        "id": "13019",
+        "label": {
+          "zh": "青漪灵鼎",
+          "en": "Cauldron of Clarity"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/13019.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 594.8,
+            "hpPercent": 0.25
+          }
+        },
+        "sourceAliases": [
+          "青漪灵鼎",
+          "Weapon_A_Common_19",
+          "Cauldron of Clarity"
+        ]
+      },
+      "13020": {
+        "id": "13020",
+        "label": {
+          "zh": "炎炙沸釜",
+          "en": "The Simmering Pot"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/13020.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 594.8,
+            "impact": 0.15
+          }
+        },
+        "sourceAliases": [
+          "炎炙沸釜",
+          "Weapon_A_Common_20",
+          "The Simmering Pot"
+        ]
+      },
+      "13101": {
+        "id": "13101",
+        "label": {
+          "zh": "德玛拉电池Ⅱ型",
+          "en": "Demara Battery Mark II"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/13101.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 624.54,
+            "impact": 0.15
+          }
+        },
+        "sourceAliases": [
+          "德玛拉电池Ⅱ型",
+          "Weapon_A_1011",
+          "Demara Battery Mark II"
+        ]
+      },
+      "13103": {
+        "id": "13103",
+        "label": {
+          "zh": "聚宝箱",
+          "en": "The Vault"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/13103.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 624.54,
+            "energyRegen": 0.5
+          }
+        },
+        "sourceAliases": [
+          "聚宝箱",
+          "Weapon_A_1031",
+          "The Vault"
+        ]
+      },
+      "13106": {
+        "id": "13106",
+        "label": {
+          "zh": "家政员",
+          "en": "Housekeeper"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/13106.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 624.54,
+            "attackPercent": 0.25
+          }
+        },
+        "sourceAliases": [
+          "家政员",
+          "Weapon_A_1061",
+          "Housekeeper"
+        ]
+      },
+      "13108": {
+        "id": "13108",
+        "label": {
+          "zh": "仿制星徽引擎",
+          "en": "Starlight Engine Replica"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/13108.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 624.54,
+            "attackPercent": 0.25
+          }
+        },
+        "sourceAliases": [
+          "仿制星徽引擎",
+          "Weapon_A_1081",
+          "Starlight Engine Replica"
+        ]
+      },
+      "13111": {
+        "id": "13111",
+        "label": {
+          "zh": "旋钻机-赤轴",
+          "en": "Drill Rig - Red Axis"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/13111.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 624.54,
+            "energyRegen": 0.5
+          }
+        },
+        "sourceAliases": [
+          "旋钻机-赤轴",
+          "Weapon_A_1111",
+          "Drill Rig - Red Axis"
+        ]
+      },
+      "13112": {
+        "id": "13112",
+        "label": {
+          "zh": "比格气缸",
+          "en": "Big Cylinder"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/13112.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 624.54,
+            "defensePercent": 0.4
+          }
+        },
+        "sourceAliases": [
+          "比格气缸",
+          "Weapon_A_1121",
+          "Big Cylinder"
+        ]
+      },
+      "13113": {
+        "id": "13113",
+        "label": {
+          "zh": "含羞恶面",
+          "en": "Bashful Demon"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/13113.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 624.54,
+            "attackPercent": 0.25
+          }
+        },
+        "sourceAliases": [
+          "含羞恶面",
+          "Weapon_A_1131",
+          "Bashful Demon"
+        ]
+      },
+      "13115": {
+        "id": "13115",
+        "label": {
+          "zh": "好斗的阿炮",
+          "en": "Kaboom the Cannon"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/13115.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 624.54,
+            "energyRegen": 0.5
+          }
+        },
+        "sourceAliases": [
+          "好斗的阿炮",
+          "Weapon_A_1151",
+          "Kaboom the Cannon"
+        ]
+      },
+      "13127": {
+        "id": "13127",
+        "label": {
+          "zh": "维序者-特化型",
+          "en": "Peacekeeper - Specialized"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/13127.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 624.54,
+            "attackPercent": 0.25
+          }
+        },
+        "sourceAliases": [
+          "维序者-特化型",
+          "Weapon_A_1271",
+          "Peacekeeper - Specialized"
+        ]
+      },
+      "13128": {
+        "id": "13128",
+        "label": {
+          "zh": "轰鸣座驾",
+          "en": "Roaring Ride"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/13128.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 624.54,
+            "attackPercent": 0.25
+          }
+        },
+        "sourceAliases": [
+          "轰鸣座驾",
+          "Weapon_A_1281",
+          "Roaring Ride"
+        ]
+      },
+      "13135": {
+        "id": "13135",
+        "label": {
+          "zh": "裁纸刀",
+          "en": "Box Cutter"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/13135.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 624.54,
+            "impact": 0.15
+          }
+        },
+        "sourceAliases": [
+          "裁纸刀",
+          "Weapon_A_1351",
+          "Box Cutter"
+        ]
+      },
+      "13142": {
+        "id": "13142",
+        "label": {
+          "zh": "震元奇枢",
+          "en": "Tremor Trigram Vessel"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/13142.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 624.54,
+            "attackPercent": 0.25
+          }
+        },
+        "sourceAliases": [
+          "震元奇枢",
+          "Weapon_A_1421",
+          "Tremor Trigram Vessel"
+        ]
+      },
+      "13144": {
+        "id": "13144",
+        "label": {
+          "zh": "燔火胧夜",
+          "en": "Grill O'Wisp"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/13144.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 624.54,
+            "hpPercent": 0.25
+          }
+        },
+        "sourceAliases": [
+          "燔火胧夜",
+          "Weapon_A_1441",
+          "Grill O'Wisp"
+        ]
+      },
+      "14001": {
+        "id": "14001",
+        "label": {
+          "zh": "加农转子",
+          "en": "Cannon Rotor"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/14001.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 594.8,
+            "critRate": 0.2
+          }
+        },
+        "sourceAliases": [
+          "加农转子",
+          "Weapon_S_Common_01",
+          "Cannon Rotor"
+        ]
+      },
+      "14002": {
+        "id": "14002",
+        "label": {
+          "zh": "逍遥游球",
+          "en": "Unfettered Game Ball"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/14002.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 594.8,
+            "energyRegen": 0.5
+          }
+        },
+        "sourceAliases": [
+          "逍遥游球",
+          "Weapon_S_Common_02",
+          "Unfettered Game Ball"
+        ]
+      },
+      "14003": {
+        "id": "14003",
+        "label": {
+          "zh": "左轮转子",
+          "en": "Six Shooter"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/14003.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 594.8,
+            "impact": 0.15
+          }
+        },
+        "sourceAliases": [
+          "左轮转子",
+          "Weapon_S_Common_03",
+          "Six Shooter"
+        ]
+      },
+      "14102": {
+        "id": "14102",
+        "label": {
+          "zh": "钢铁肉垫",
+          "en": "Steel Cushion"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/14102.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 684.02,
+            "critRate": 0.24
+          }
+        },
+        "sourceAliases": [
+          "钢铁肉垫",
+          "Weapon_S_1021",
+          "Steel Cushion"
+        ]
+      },
+      "14104": {
+        "id": "14104",
+        "label": {
+          "zh": "硫磺石",
+          "en": "The Brimstone"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/14104.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 684.02,
+            "attackPercent": 0.3
+          }
+        },
+        "sourceAliases": [
+          "硫磺石",
+          "Weapon_S_1041",
+          "The Brimstone"
+        ]
+      },
+      "14105": {
+        "id": "14105",
+        "label": {
+          "zh": "海妖摇篮",
+          "en": "Kraken's Cradle"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/14105.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 713.76,
+            "hpPercent": 0.3
+          }
+        },
+        "sourceAliases": [
+          "海妖摇篮",
+          "Weapon_S_1051",
+          "Kraken's Cradle"
+        ]
+      },
+      "14107": {
+        "id": "14107",
+        "label": {
+          "zh": "奔袭獠牙",
+          "en": "Tusks of Fury"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/14107.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 713.76,
+            "impact": 0.18
+          }
+        },
+        "sourceAliases": [
+          "奔袭獠牙",
+          "Weapon_S_1071",
+          "Tusks of Fury"
+        ]
+      },
+      "14109": {
+        "id": "14109",
+        "label": {
+          "zh": "霰落星殿",
+          "en": "Hailstorm Shrine"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/14109.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 743.5,
+            "critRate": 0.24
+          }
+        },
+        "sourceAliases": [
+          "霰落星殿",
+          "Weapon_S_1091",
+          "Hailstorm Shrine"
+        ]
+      },
+      "14110": {
+        "id": "14110",
+        "label": {
+          "zh": "燃狱齿轮",
+          "en": "Hellfire Gears"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/14110.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 684.02,
+            "impact": 0.18
+          }
+        },
+        "sourceAliases": [
+          "燃狱齿轮",
+          "Weapon_S_1101",
+          "Hellfire Gears"
+        ]
+      },
+      "14114": {
+        "id": "14114",
+        "label": {
+          "zh": "拘缚者",
+          "en": "The Restrained"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/14114.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 684.02,
+            "impact": 0.18
+          }
+        },
+        "sourceAliases": [
+          "拘缚者",
+          "Weapon_S_1141",
+          "The Restrained"
+        ]
+      },
+      "14116": {
+        "id": "14116",
+        "label": {
+          "zh": "焰心桂冠",
+          "en": "Blazing Laurel"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/14116.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 713.76,
+            "impact": 0.18
+          }
+        },
+        "sourceAliases": [
+          "焰心桂冠",
+          "Weapon_S_1161",
+          "Blazing Laurel"
+        ]
+      },
+      "14117": {
+        "id": "14117",
+        "label": {
+          "zh": "灼心摇壶",
+          "en": "Flamemaker Shaker"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/14117.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 713.76,
+            "attackPercent": 0.3
+          }
+        },
+        "sourceAliases": [
+          "灼心摇壶",
+          "Weapon_S_1171",
+          "Flamemaker Shaker"
+        ]
+      },
+      "14118": {
+        "id": "14118",
+        "label": {
+          "zh": "嵌合编译器",
+          "en": "Fusion Compiler"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/14118.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 684.02,
+            "penetrationRatio": 0.24
+          }
+        },
+        "sourceAliases": [
+          "嵌合编译器",
+          "Weapon_S_1181",
+          "Fusion Compiler"
+        ]
+      },
+      "14119": {
+        "id": "14119",
+        "label": {
+          "zh": "深海访客",
+          "en": "Deep Sea Visitor"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/14119.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 713.76,
+            "critRate": 0.24
+          }
+        },
+        "sourceAliases": [
+          "深海访客",
+          "Weapon_S_1191",
+          "Deep Sea Visitor"
+        ]
+      },
+      "14120": {
+        "id": "14120",
+        "label": {
+          "zh": "残心青囊",
+          "en": "Zanshin Herb Case"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/14120.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 713.76,
+            "critDamage": 0.48
+          }
+        },
+        "sourceAliases": [
+          "残心青囊",
+          "Weapon_S_1201",
+          "Zanshin Herb Case"
+        ]
+      },
+      "14121": {
+        "id": "14121",
+        "label": {
+          "zh": "啜泣摇篮",
+          "en": "Weeping Cradle"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/14121.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 684.02,
+            "penetrationRatio": 0.24
+          }
+        },
+        "sourceAliases": [
+          "啜泣摇篮",
+          "Weapon_S_1211",
+          "Weeping Cradle"
+        ]
+      },
+      "14122": {
+        "id": "14122",
+        "label": {
+          "zh": "时流贤者",
+          "en": "Timeweaver"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/14122.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 713.76,
+            "attackPercent": 0.3
+          }
+        },
+        "sourceAliases": [
+          "时流贤者",
+          "Weapon_S_1221",
+          "Timeweaver"
+        ]
+      },
+      "14124": {
+        "id": "14124",
+        "label": {
+          "zh": "防暴者Ⅵ型",
+          "en": "Riot Suppressor Mark VI"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/14124.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 713.76,
+            "critDamage": 0.48
+          }
+        },
+        "sourceAliases": [
+          "防暴者Ⅵ型",
+          "Weapon_S_1241",
+          "Riot Suppressor Mark VI"
+        ]
+      },
+      "14125": {
+        "id": "14125",
+        "label": {
+          "zh": "玉壶青冰",
+          "en": "Ice-Jade Teapot"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/14125.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 713.76,
+            "impact": 0.18
+          }
+        },
+        "sourceAliases": [
+          "玉壶青冰",
+          "Weapon_S_1251",
+          "Ice-Jade Teapot"
+        ]
+      },
+      "14126": {
+        "id": "14126",
+        "label": {
+          "zh": "淬锋钳刺",
+          "en": "Sharpened Stinger"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/14126.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 713.76,
+            "anomalyProficiency": 90
+          }
+        },
+        "sourceAliases": [
+          "淬锋钳刺",
+          "Weapon_S_1261",
+          "Sharpened Stinger"
+        ]
+      },
+      "14129": {
+        "id": "14129",
+        "label": {
+          "zh": "千面日陨",
+          "en": "Myriad Eclipse"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/14129.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 713.76,
+            "critRate": 0.24
+          }
+        },
+        "sourceAliases": [
+          "千面日陨",
+          "Weapon_S_1291",
+          "Myriad Eclipse"
+        ]
+      },
+      "14130": {
+        "id": "14130",
+        "label": {
+          "zh": "嚣枪喧焰",
+          "en": "Bellicose Blaze"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/14130.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 713.76,
+            "energyRegen": 0.6
+          }
+        },
+        "sourceAliases": [
+          "嚣枪喧焰",
+          "Weapon_S_1301",
+          "Bellicose Blaze"
+        ]
+      },
+      "14131": {
+        "id": "14131",
+        "label": {
+          "zh": "玲珑妆匣",
+          "en": "Elegant Vanity"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/14131.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 713.76,
+            "attackPercent": 0.3
+          }
+        },
+        "sourceAliases": [
+          "玲珑妆匣",
+          "Weapon_S_1311",
+          "Elegant Vanity"
+        ]
+      },
+      "14132": {
+        "id": "14132",
+        "label": {
+          "zh": "心弦夜响",
+          "en": "Heartstring Nocturne"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/14132.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 713.76,
+            "critRate": 0.24
+          }
+        },
+        "sourceAliases": [
+          "心弦夜响",
+          "Weapon_S_1321",
+          "Heartstring Nocturne"
+        ]
+      },
+      "14133": {
+        "id": "14133",
+        "label": {
+          "zh": "飞鸟星梦",
+          "en": "Flight of Fancy"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/14133.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 713.76,
+            "anomalyProficiency": 90
+          }
+        },
+        "sourceAliases": [
+          "飞鸟星梦",
+          "Weapon_S_1331",
+          "Flight of Fancy"
+        ]
+      },
+      "14134": {
+        "id": "14134",
+        "label": {
+          "zh": "半糖雪兔",
+          "en": "Half-Sugar Bunny"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/14134.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 713.76,
+            "hpPercent": 0.3
+          }
+        },
+        "sourceAliases": [
+          "半糖雪兔",
+          "Weapon_S_1341",
+          "Half-Sugar Bunny"
+        ]
+      },
+      "14136": {
+        "id": "14136",
+        "label": {
+          "zh": "索魂影眸",
+          "en": "Spectral Gaze"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/14136.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 713.76,
+            "critRate": 0.24
+          }
+        },
+        "sourceAliases": [
+          "索魂影眸",
+          "Weapon_S_1361",
+          "Spectral Gaze"
+        ]
+      },
+      "14137": {
+        "id": "14137",
+        "label": {
+          "zh": "青溟笼舍",
+          "en": "Qingming Birdcage"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/14137.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 743.5,
+            "hpPercent": 0.3
+          }
+        },
+        "sourceAliases": [
+          "青溟笼舍",
+          "Weapon_S_1371",
+          "Qingming Birdcage"
+        ]
+      },
+      "14138": {
+        "id": "14138",
+        "label": {
+          "zh": "牺牲洁纯",
+          "en": "Severed Innocence"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/14138.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 713.76,
+            "critDamage": 0.48
+          }
+        },
+        "sourceAliases": [
+          "牺牲洁纯",
+          "Weapon_S_1381",
+          "Severed Innocence"
+        ]
+      },
+      "14139": {
+        "id": "14139",
+        "label": {
+          "zh": "福虓炉炉",
+          "en": "Roaring Fur-nace"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/14139.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 713.76,
+            "attackPercent": 0.3
+          }
+        },
+        "sourceAliases": [
+          "福虓炉炉",
+          "Weapon_S_1391",
+          "Roaring Fur-nace"
+        ]
+      },
+      "14140": {
+        "id": "14140",
+        "label": {
+          "zh": "十方锻星",
+          "en": "Practiced Perfection"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/14140.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 713.76,
+            "attackPercent": 0.3
+          }
+        },
+        "sourceAliases": [
+          "十方锻星",
+          "Weapon_S_1401",
+          "Practiced Perfection"
+        ]
+      },
+      "14141": {
+        "id": "14141",
+        "label": {
+          "zh": "狸法七变化",
+          "en": "Metanukimorphosis"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/14141.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 713.76,
+            "energyRegen": 0.6
+          }
+        },
+        "sourceAliases": [
+          "狸法七变化",
+          "Weapon_S_1411",
+          "Metanukimorphosis"
+        ]
+      },
+      "14143": {
+        "id": "14143",
+        "label": {
+          "zh": "云霓孤光",
+          "en": "Cloudcleave Radiance"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/14143.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 743.5,
+            "critDamage": 0.48
+          }
+        },
+        "sourceAliases": [
+          "云霓孤光",
+          "Weapon_S_1431",
+          "Cloudcleave Radiance"
+        ]
+      },
+      "14145": {
+        "id": "14145",
+        "label": {
+          "zh": "铸梦炉歌",
+          "en": "Dreamlit Hearth"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/14145.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 713.76,
+            "hpPercent": 0.3
+          }
+        },
+        "sourceAliases": [
+          "铸梦炉歌",
+          "Weapon_S_1451",
+          "Dreamlit Hearth"
+        ]
+      },
+      "14146": {
+        "id": "14146",
+        "label": {
+          "zh": "机巧心种",
+          "en": "Cordis Germina"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/14146.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 713.76,
+            "critRate": 0.24
+          }
+        },
+        "sourceAliases": [
+          "机巧心种",
+          "Weapon_S_1461",
+          "Cordis Germina"
+        ]
+      },
+      "14147": {
+        "id": "14147",
+        "label": {
+          "zh": "怒目金刚",
+          "en": "Wrathful Vajra"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/14147.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 713.76,
+            "hpPercent": 0.3
+          }
+        },
+        "sourceAliases": [
+          "怒目金刚",
+          "Weapon_S_1471",
+          "Wrathful Vajra"
+        ]
+      },
+      "14148": {
+        "id": "14148",
+        "label": {
+          "zh": "昨夜来电",
+          "en": "Yesterday Calls"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/14148.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 713.76,
+            "critRate": 0.24
+          }
+        },
+        "sourceAliases": [
+          "昨夜来电",
+          "Weapon_S_1481",
+          "Yesterday Calls"
+        ]
+      },
+      "14149": {
+        "id": "14149",
+        "label": {
+          "zh": "思络成歌",
+          "en": "Thoughtbop"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/14149.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 713.76,
+            "energyRegen": 0.6
+          }
+        },
+        "sourceAliases": [
+          "思络成歌",
+          "Weapon_S_1491",
+          "Thoughtbop"
+        ]
+      },
+      "14150": {
+        "id": "14150",
+        "label": {
+          "zh": "壳中之灵",
+          "en": "Angel in the Shell"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/14150.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 713.76,
+            "anomalyMastery": 0.3
+          }
+        },
+        "sourceAliases": [
+          "壳中之灵",
+          "Weapon_S_1501",
+          "Angel in the Shell"
+        ]
+      },
+      "14151": {
+        "id": "14151",
+        "label": {
+          "zh": "霓虹妄想",
+          "en": "Neon Fantasies"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/14151.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 713.76,
+            "anomalyMastery": 0.3
+          }
+        },
+        "sourceAliases": [
+          "霓虹妄想",
+          "Weapon_S_1511",
+          "Neon Fantasies"
+        ]
+      },
+      "14152": {
+        "id": "14152",
+        "label": {
+          "zh": "鳞齿寻踪",
+          "en": "Serpentine Seeker"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/14152.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 713.76,
+            "energyRegen": 0.6
+          }
+        },
+        "sourceAliases": [
+          "鳞齿寻踪",
+          "Weapon_S_1521",
+          "Serpentine Seeker"
+        ]
+      },
+      "14153": {
+        "id": "14153",
+        "label": {
+          "zh": "辉骑面铠",
+          "en": "Starlight Rider Faceplate"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/14153.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 713.76,
+            "hpPercent": 0.3
+          }
+        },
+        "sourceAliases": [
+          "辉骑面铠",
+          "Weapon_S_1531",
+          "Starlight Rider Faceplate"
+        ]
+      },
+      "14154": {
+        "id": "14154",
+        "label": {
+          "zh": "朔月裁霜",
+          "en": "Frostfall Sickle"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/weapon/14154.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "attack": 713.76,
+            "anomalyMastery": 0.3
+          }
+        },
+        "sourceAliases": [
+          "朔月裁霜",
+          "Weapon_S_1541",
+          "Frostfall Sickle"
+        ]
+      }
+    },
     "driveDiscs": {},
     "enemies": {},
     "resonium": {},
