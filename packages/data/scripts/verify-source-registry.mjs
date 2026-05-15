@@ -109,6 +109,18 @@ function validateMatrixAgainstRegistry(matrix, registry) {
     if (sample.approvedForCleanedOutput === true && sample.entityType !== "sourceManifest")
       assert(sample.version === nanoka.configuredLiveVersion, `${sample.id}: current cleaned evidence must use configuredLiveVersion`)
   }
+
+  const sampleById = new Map((matrix.sampleSources ?? []).map(sample => [sample.id, sample]))
+  for (const row of matrix.rows ?? []) {
+    if (row.promotable !== true)
+      continue
+
+    const sample = sampleById.get(row.sampleEntity)
+    assert(sample !== undefined, `${row.fieldId}: promotable row sampleEntity is missing from sampleSources`)
+    assert(sample.approvedForCleanedOutput === true, `${row.fieldId}: promotable row must use approved live sample evidence`)
+    if (sample.entityType !== "sourceManifest")
+      assert(sample.version === nanoka.configuredLiveVersion, `${row.fieldId}: promotable row must use configuredLiveVersion sample evidence`)
+  }
 }
 
 function validateCoveredSourceRefs(registry) {

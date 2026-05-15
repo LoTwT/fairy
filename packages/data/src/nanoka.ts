@@ -8,6 +8,9 @@ export type NanokaRawEntityType =
   | "bossIndex"
   | "character"
   | "boss"
+  | "bangboo"
+  | "weapon"
+  | "equipment"
 
 export interface NanokaRawSnapshotAsset {
   id: string
@@ -58,6 +61,23 @@ export interface NanokaRawSnapshotManifest {
       id: number
       zoneCount: number
       hasBossAdjust: boolean
+    }
+    bangbooSample?: {
+      id: number
+      codeName?: string
+      hasStats: boolean
+      hasSkillProp: boolean
+    }
+    wEngineSample?: {
+      id: number
+      codeName?: string
+      hasBaseProperty: boolean
+      hasRandProperty: boolean
+    }
+    driveDiscSample?: {
+      id: number
+      name?: string
+      hasSetDescriptions: boolean
     }
     retainedAssetCount: number
   }

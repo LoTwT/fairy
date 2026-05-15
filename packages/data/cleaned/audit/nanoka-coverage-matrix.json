@@ -1,6 +1,6 @@
 {
   "schemaVersion": "nanoka-coverage-matrix/v0.1",
-  "generatedAt": "2026-05-15T02:55:00+08:00",
+  "generatedAt": "2026-05-15T11:55:00+08:00",
   "status": "phase-0-r1-r6-locked",
   "sourceVersion": "manifest.zzz.live",
   "canonicalSchemas": [
@@ -122,7 +122,7 @@
       "url": "https://static.nanoka.cc/manifest.json",
       "version": "manifest",
       "releaseChannel": "source-registry",
-      "fetchedAt": "2026-05-15T11:35:00+08:00",
+      "fetchedAt": "2026-05-15T11:55:00+08:00",
       "contentSha256": "91494c2c3bfda6ec47beccbf71066506ab0a315513aa751cf30e4c3a1dc0817d",
       "server": "source-registry",
       "approvedForCleanedOutput": true,
@@ -135,8 +135,47 @@
       "url": "https://static.nanoka.cc/zzz/2.8/zh/character/1021.json",
       "version": "2.8",
       "releaseChannel": "stable",
-      "fetchedAt": "2026-05-15T02:32:00+08:00",
-      "contentSha256": "85186a7568c11ff9f56e2085bf561485f0548ff29fc70e686c8aa3dca2b0f961",
+      "fetchedAt": "2026-05-15T11:55:00+08:00",
+      "contentSha256": "9d5a3226975802371089816df50a5cd1bfcdb2ccb75bdc4b2f50d4e756ba1375",
+      "server": "live",
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "release-gate-evidence"
+    },
+    {
+      "id": "nanoka-bangboo-plugboo-live-54008",
+      "entityType": "bangboo",
+      "entityId": "54008",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/bangboo/54008.json",
+      "version": "2.8",
+      "releaseChannel": "stable",
+      "fetchedAt": "2026-05-15T11:55:00+08:00",
+      "contentSha256": "02a203d3bcdf5b6c1d756e0a5f2957658a13b889305da5dbd8ce27f9a8dbee60",
+      "server": "live",
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "release-gate-evidence"
+    },
+    {
+      "id": "nanoka-weapon-yixuan-signature-live-14137",
+      "entityType": "wEngine",
+      "entityId": "14137",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/weapon/14137.json",
+      "version": "2.8",
+      "releaseChannel": "stable",
+      "fetchedAt": "2026-05-15T11:55:00+08:00",
+      "contentSha256": "0f1c6fd4e391a2968d3d4246dc0b82abdb6e98c63b75dd31dc3a578d78ebaeab",
+      "server": "live",
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "release-gate-evidence"
+    },
+    {
+      "id": "nanoka-equipment-woodpecker-live-31000",
+      "entityType": "driveDisc",
+      "entityId": "31000",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/equipment/31000.json",
+      "version": "2.8",
+      "releaseChannel": "stable",
+      "fetchedAt": "2026-05-15T11:55:00+08:00",
+      "contentSha256": "4190f6084521aead931a28ada9a44e6d9cd26a7fdb2401ffd0ab4e00a257f1ec",
       "server": "live",
       "approvedForCleanedOutput": true,
       "evidenceUse": "release-gate-evidence"
@@ -148,8 +187,8 @@
       "url": "https://static.nanoka.cc/zzz/2.8/boss.json",
       "version": "2.8",
       "releaseChannel": "stable",
-      "fetchedAt": "2026-05-15T02:21:00+08:00",
-      "contentSha256": "3379eba07fe6c77e821dc403fc31a9f304148666ee5f5a51706ac5e203393ec0",
+      "fetchedAt": "2026-05-15T11:55:00+08:00",
+      "contentSha256": "d9519738c6100082760f59bb92fd17fdba93afb853c845b1c90d0718788a79f9",
       "server": "live",
       "approvedForCleanedOutput": true,
       "evidenceUse": "release-gate-evidence"
@@ -161,8 +200,8 @@
       "url": "https://static.nanoka.cc/zzz/2.8/zh/boss/69036.json",
       "version": "2.8",
       "releaseChannel": "stable",
-      "fetchedAt": "2026-05-15T02:21:00+08:00",
-      "contentSha256": "8f31e1f15918797e8e28c8a350fba6934077b73a35855778d8c0a660815d276b",
+      "fetchedAt": "2026-05-15T11:55:00+08:00",
+      "contentSha256": "781cb67799e6fb8c0438ab57ac5536507b85292161342f9870c18f42d890989f",
       "server": "live",
       "approvedForCleanedOutput": true,
       "evidenceUse": "release-gate-evidence"
@@ -260,8 +299,8 @@
         "/icon",
         "/skin"
       ],
-      "transformRule": "map id/code_name/name into stable agent id and LocalizedLabel; current schema accepts zh/en labels",
-      "sampleEntity": "nanoka-character-yixuan-1371",
+      "transformRule": "map id/code_name/name from the approved live character detail into stable agent id and LocalizedLabel; current schema accepts zh/en labels",
+      "sampleEntity": "nanoka-character-nekomata-live-1021",
       "rawAvailable": true,
       "promotable": true,
       "blockedBy": []
@@ -280,8 +319,8 @@
         "/camp",
         "/hit_type"
       ],
-      "transformRule": "map source enum ids to fairy Attribute and AgentSpecialty enum values through aliases",
-      "sampleEntity": "nanoka-character-yixuan-1371",
+      "transformRule": "map approved-live source enum ids to fairy Attribute and AgentSpecialty enum values through aliases",
+      "sampleEntity": "nanoka-character-nekomata-live-1021",
       "rawAvailable": true,
       "promotable": true,
       "blockedBy": []
@@ -302,8 +341,8 @@
         "/stats/defence_growth",
         "/level/*"
       ],
-      "transformRule": "derive base panel as stats[key] + level[promotionPhase][key] + stats[key_growth] * (level - 1) / 10000; Yixuan level-60 HP and attack match shipped Excel base panel when extra_level is excluded",
-      "sampleEntity": "nanoka-character-yixuan-1371",
+      "transformRule": "derive base panel as stats[key] + level[promotionPhase][key] + stats[key_growth] * (level - 1) / 10000; retained live Nekomata level-60 panel sample is covered by nanoka-panel tests",
+      "sampleEntity": "nanoka-character-nekomata-live-1021",
       "rawAvailable": true,
       "promotable": true,
       "blockedBy": [],
@@ -388,8 +427,8 @@
         "/skill/*/description/*/param/*/param/{skillId}/stun_ratio_growth",
         "/skill/*/description/*/param/*/param/{skillId}/attribute_infliction"
       ],
-      "transformRule": "divide percentage-like integer fields by 10000; derive per-level table from base plus growth after formula verification",
-      "sampleEntity": "nanoka-character-yixuan-1371",
+      "transformRule": "divide approved-live percentage-like integer fields by 10000; derive per-level table from base plus growth after formula verification",
+      "sampleEntity": "nanoka-character-nekomata-live-1021",
       "rawAvailable": true,
       "promotable": true,
       "blockedBy": []
@@ -554,7 +593,7 @@
         "/skill"
       ],
       "transformRule": "map id/code_name/name and skill keys to cleaned Bangboo row and skill ids",
-      "sampleEntity": "nanoka-bangboo-plugboo-54008",
+      "sampleEntity": "nanoka-bangboo-plugboo-live-54008",
       "rawAvailable": true,
       "promotable": true,
       "blockedBy": []
@@ -577,8 +616,8 @@
         "/stats/element_abnormal_power",
         "/level/*"
       ],
-      "transformRule": "derive Bangboo base panel as stats[key] + level[promotionPhase][key] + stats[key_upgrade] * (level - 1) / 10000; Plugboo level-60 attack matches G26 shipped Excel value 8057.0996",
-      "sampleEntity": "nanoka-bangboo-plugboo-54008",
+      "transformRule": "derive Bangboo base panel as stats[key] + level[promotionPhase][key] + stats[key_upgrade] * (level - 1) / 10000; retained live Plugboo level-60 attack matches G26 shipped Excel value 8057.0996 and is covered by nanoka-panel tests",
+      "sampleEntity": "nanoka-bangboo-plugboo-live-54008",
       "rawAvailable": true,
       "promotable": true,
       "blockedBy": []
@@ -596,7 +635,7 @@
         "/skill_prop/{skillId}/element_accumulation_value"
       ],
       "transformRule": "divide multiplier-like integer fields by 10000; divide buildup fields by 100 when mapping to current golden notation",
-      "sampleEntity": "nanoka-bangboo-plugboo-54008",
+      "sampleEntity": "nanoka-bangboo-plugboo-live-54008",
       "rawAvailable": true,
       "promotable": true,
       "blockedBy": []
@@ -807,7 +846,7 @@
         "/weapon_type"
       ],
       "transformRule": "map weapon detail rows to W-Engine identity and compatible source aliases",
-      "sampleEntity": "nanoka-weapon-yixuan-signature-14137",
+      "sampleEntity": "nanoka-weapon-yixuan-signature-live-14137",
       "rawAvailable": true,
       "promotable": true,
       "blockedBy": []
@@ -867,7 +906,7 @@
         "/icon2"
       ],
       "transformRule": "map equipment detail rows to Drive Disc identity",
-      "sampleEntity": "nanoka-equipment-woodpecker-31000",
+      "sampleEntity": "nanoka-equipment-woodpecker-live-31000",
       "rawAvailable": true,
       "promotable": true,
       "blockedBy": []
