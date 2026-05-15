@@ -137,6 +137,12 @@ function validateMatrixAgainstRegistry(matrix, registry) {
     assert(row.promotable === true, `${fieldId}: resource row must be promotable after unit mapping lock`)
     assert(row.sampleEntity === "nanoka-character-yixuan-live-1371", `${fieldId}: resource row must use live Yixuan sample evidence`)
   }
+
+  const daRow = resourceRows.get("deadlyAssault.periodsBossesBuffs")
+  assert(daRow !== undefined, "deadlyAssault.periodsBossesBuffs: missing DA formal-live row")
+  assert(daRow.promotable === true, "deadlyAssault.periodsBossesBuffs: DA source artifact row must be promotable after semantic mapping gate")
+  assert(daRow.sampleEntity === "nanoka-boss-live-69036", "deadlyAssault.periodsBossesBuffs: DA row must use live period detail evidence")
+  assert(daRow.blockedBy?.includes("field:runtime-cutover-drift-required"), "deadlyAssault.periodsBossesBuffs: DA row must keep runtime cutover blocked until drift audit")
 }
 
 function validateCoveredSourceRefs(registry) {

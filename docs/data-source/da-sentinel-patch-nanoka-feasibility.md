@@ -21,7 +21,7 @@ cleaned schema, adapter code, or runtime data.
 
 | Area | Feasibility | Evidence | Remaining Blocker |
 |---|---|---|---|
-| Deadly Assault periods / bosses / buffs | Feasible from nanoka raw data | `boss.json` plus `zh/boss/{id}.json` expose period windows, 3 zones, layer buffs, selectable buffs, rooms, monster lists, weakness data, and `boss_adjust` | Adapter must map `boss_adjust`, scoring / HP semantics, and formal-live gating. |
+| Deadly Assault periods / bosses / buffs | Feasible from nanoka raw data and promotable as a structured source artifact | `boss.json` plus `zh/boss/{id}.json` expose period windows, 3 zones, layer buffs, selectable buffs, rooms, monster lists, weakness data, and `boss_adjust`; task #142 maps these with formal-live filtering | Runtime cutover still requires Phase 3 drift audit and Phase 4 approval. |
 | Sentinel / decibel data | Feasible as raw nanoka fields | Live sample `2.8/zh/character/1021.json` exposes `stats.rp_max`, `stats.rp_recover`, and skill-level `fever_recovery` / `rp_recovery`; latest-only `character/1371.json` is research evidence only | Unit and naming mapping must be locked before typed promotion. |
 | Patch history | Conditional | `manifest.json` exposes versioned snapshots; the app supports diffing versioned data; sampled Yixuan detail exists across multiple `3.0.2+...` snapshots | No dedicated patch-notes / changelog endpoint was found. Product must decide whether snapshot-derived numeric diff is the required "patch history". |
 | Resonium / Lost Void | Removed from scope per lo-user | Not re-audited here | Follow-up matrix/schema update must remove or mark the row as `removed/out-of-product-scope` and handle schema impact. |
@@ -110,12 +110,15 @@ Important raw paths observed:
 | Cleaned need | Nanoka raw path pattern |
 |---|---|
 | DA period window | `/begin_time`, `/end_time` |
+| DA title | `/name` |
 | Stage / zone list | `/zone/{zoneId}` |
+| Stage number / goal type | `/zone/{zoneId}/stage_num`, `/goal_type` |
 | Stage name | `/zone/{zoneId}/name` |
 | Monster level | `/zone/{zoneId}/monster_level` |
+| Rank score goals | `/zone/{zoneId}/s_rank_goal`, `/a_rank_goal`, `/b_rank_goal` |
 | Stage fixed buffs | `/zone/{zoneId}/layer_buff/{buffId}/title`, `/desc` |
 | Selectable buffs | `/zone/{zoneId}/selectable_buff/{buffId}/title`, `/desc` |
-| Room monster list | `/zone/{zoneId}/layer_room/{roomId}/monster_list` |
+| Room monster list | `/zone/{zoneId}/layer_room/{roomId}/monster_list`, `/waves_num` |
 | Weakness data | `/zone/{zoneId}/layer_room/{roomId}/monster_weakness` |
 | Boss adjustment data | `/boss_adjust/{adjustId}` |
 
@@ -123,13 +126,16 @@ Conclusion:
 
 - DA data is present in nanoka. The previous `retained-non-nanoka` row is no
   longer accurate under lo-user's revised R1/R6 decision.
-- The implementation risk is not endpoint availability. It is the semantic
-  mapping from nanoka `boss_adjust` / room / score data into Fairy's existing
-  Deadly Assault cleaned contract.
+- Endpoint availability is proven. Task #142 maps nanoka period windows, zones,
+  rank goals, layer/selectable buff text, rooms, monster lists, weakness data,
+  and `boss_adjust` into a structured source artifact. `boss_adjust` values are
+  kept explicit as raw HP adjustment, raw attack adjustment, and operation-score
+  point fields so later runtime semantics do not have to infer source meaning.
 - A follow-up matrix/schema update should move `deadlyAssault.periodsBossesBuffs` from
   `deferred` / `retained-non-nanoka` to a nanoka source-backed row with status
-  at least `verified-from-nanoka`, but not fully promotable until the
-  `boss_adjust` and scoring semantics are mapped.
+  at least `verified-from-nanoka`. After task #142 it can be marked promotable
+  as a structured source artifact, with `runtimeCutoverReady=false` until Phase
+  3 drift audit and Phase 4 cutover approval.
 
 ## Adrenaline / Resonance Evidence
 
@@ -261,8 +267,11 @@ contract based on this feasibility audit:
 1. Change `deadlyAssault.periodsBossesBuffs` from
    `deferred` / `retained-non-nanoka` to nanoka source-backed.
    - Raw status: `verified-from-nanoka`.
-   - Promotable status: false until `boss_adjust` / scoring semantics and
-     formal-live gate are implemented.
+   - Promotable status: true for the task #142 structured source artifact,
+     including `boss_adjust` raw adjustment fields and formal-live period
+     filtering.
+   - Runtime cutover status: false until Phase 3 drift audit and Phase 4
+     approval.
 2. Remove or explicitly mark `resonium.lostVoid` as
    `removed/out-of-product-scope`.
    - This is a product removal, not a technical inability to fetch data.
@@ -278,7 +287,7 @@ contract based on this feasibility audit:
 
 | Decision | Recommendation |
 |---|---|
-| DA from nanoka | Proceed. Nanoka has DA raw data. Keep implementation gated on `boss_adjust` / scoring semantic mapping and live-version filtering. |
+| DA from nanoka | Proceed. Nanoka has DA raw data, and task #142 maps it into a formal-live structured source artifact. Keep runtime implementation gated on Phase 3 drift audit and Phase 4 cutover. |
 | Formal-live version selection | Use `manifest.zzz.live` by default; allow `latest` only after explicit owner approval. |
 | Sentinel / decibel scope | Proceed as source-backed raw data; require a transform/naming decision before promotion. |
 | Patch history meaning | Prefer "snapshot-derived numeric diff history" for V0.1.0. Do not promise official patch-note prose from nanoka unless lo-user finds a separate endpoint. |

@@ -4,7 +4,7 @@ Status: Phase 0 R1-R6 locked update
 Owner: @TechLead
 Reviewers: @Product, @QA
 Related: D-20 data-source migration, task #121, task #122, task #125, task #127,
-task #138, task #140
+task #138, task #140, task #142
 
 This matrix is schema-first. It is derived from the canonical `GameData` and
 `BattleSnapshot` schemas, then checked against sampled nanoka detail endpoints.
@@ -92,8 +92,8 @@ or receive explicit owner approval for a newer version.
 
 ## Human-Readable Summary
 
-Machine summary after task #140: 45 rows total, 31 `verified-from-nanoka`, 8
-`needs-tl-research`, 0 `needs-owner-research`, 6 `deferred`, and 13
+Machine summary after task #142: 45 rows total, 31 `verified-from-nanoka`, 8
+`needs-tl-research`, 0 `needs-owner-research`, 6 `deferred`, and 14
 `promotableNow`.
 
 | Area | Status | Promote Now | Main Blocker |
@@ -115,7 +115,7 @@ Machine summary after task #140: 45 rows total, 31 `verified-from-nanoka`, 8
 | Drive Disc set effects | verified-from-nanoka | no | Raw text exists; typed modifier template is unresolved. |
 | Drive Disc slot/main/sub stats | needs-tl-research | no | Not found in sampled equipment detail endpoint. |
 | Resonium / Lost Void | removed | no | Removed from V0.1.0 product scope by R4; no formal data expected. |
-| Deadly Assault periods/buffs | verified-from-nanoka | no | Live raw data exists; `boss_adjust`, score/HP semantics, and period filtering block runtime cutover. |
+| Deadly Assault periods/buffs | verified-from-nanoka | yes | Structured source artifact mapping exists for period, zones, buffs, monsters, weakness, rank goals, and `boss_adjust`; runtime cutover still waits for Phase 3 drift audit. |
 | Formula rule tables | mixed | no | Must be split per rule: defense/rounding may be implementation-owned, while anomaly thresholds, daze recovery, disorder, and attribute mappings need row-level owner/source decisions. |
 
 ## Remaining TL Research Rows
@@ -143,8 +143,9 @@ Task #122 batch 1 leaves 8 rows in `needs-tl-research`:
   `skills.resonanceRecovery` / `skills.adrenalineRecovery` — resource fields
   verified from approved live Yixuan evidence and promoted with deterministic
   unit transforms.
-- `deadlyAssault.periodsBossesBuffs` — nanoka live DA raw source row; runtime
-  promotion waits on `boss_adjust`, score/HP semantics, and period filtering.
+- `deadlyAssault.periodsBossesBuffs` — nanoka live DA structured source artifact
+  row; task #142 maps period, zones, buffs, monsters, weakness, rank goals, and
+  `boss_adjust` with `runtimeCutoverReady=false` until Phase 3/4.
 
 ## Removed Product Scope
 
