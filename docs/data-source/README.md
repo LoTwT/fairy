@@ -1,14 +1,15 @@
 # Data Source Ingestion
 
-Status: V0.1.0 nanoka runtime cutover baseline
+Status: V0.1.0 nanoka runtime cutover baseline + V1.2.1 Bangboo batch import
 Owner: @TechLead
 Inputs: CONFIRM-4, CONFIRM-11, D-20, Phase 2 nanoka adapter, Phase 3 drift audit, Phase 4 runtime cutover
 
 This directory records the source-ingestion boundary for `@randomplay/data`.
-The current V0.1.0 runtime source is approved-live nanoka. Earlier Excel,
-Mihoyo D-17, and buhflipexplode D-12 snapshots remain retained audit references
-only; runtime cleaned data and package exports fail loud if they reference those
-archived source ids.
+The current runtime source is approved-live nanoka. Earlier Excel, Mihoyo D-17,
+and buhflipexplode D-12 snapshots remain retained audit references only; runtime
+cleaned data and package exports fail loud if they reference those archived
+source ids. V1.2.1 extends the runtime Bangboo catalog to all 39 approved-live
+nanoka 2.8 entries without adding a package version bump.
 
 ## Segment 1 Scope
 
@@ -24,6 +25,8 @@ archived source ids.
 - Runtime formal `GameData` is generated from reviewed source documents.
 - `data/cleaned/runtime/game-data.json` and the package mirror are the current
   runtime cleaned artifacts.
+- `data/cleaned/audit/nanoka-bangboo-batch-audit.json` records the V1.2.1
+  per-entry Bangboo panel/skill/element audit.
 - Raw source archives are retained for audit and are not distributed in npm
   package payloads.
 
@@ -36,7 +39,7 @@ runtime data.
 
 | Source ID | Kind | Current status | Formal data ready | Notes |
 |---|---|---:|---:|---|
-| `nanoka-zzz` | `thirdPartySite` | runtime-primary | yes | Approved-live `2.8` source for V0.1.0 runtime cleaned data. |
+| `nanoka-zzz` | `thirdPartySite` | runtime-primary | yes | Approved-live `2.8` source for V0.1.0 runtime cleaned data and V1.2.1 Bangboo batch import. |
 | `lo-user-excel` | `excel` | deprecated runtime archive | audit only | Workbook committed under `data/source/excel/` with hash metadata. |
 | `mihoyo-zzz-critical-assault` | `mihoyoWiki` | deprecated runtime archive | audit only | Public API snapshot retained for DA detail text and zh/en source-text alignment. |
 | `buhflipexplode-zzz-da` | `thirdPartySite` | deprecated runtime archive | audit only | Live-only source snapshot retained; D-12 forbids copying GPL JS into Fairy runtime. |

@@ -18,6 +18,8 @@ const rootDisorderDazeLevelAuditPath = join(repoRoot, "data/cleaned/audit/nanoka
 const packageDisorderDazeLevelAuditPath = join(packageDir, "cleaned/audit/nanoka-disorder-daze-level-audit.json")
 const rootRuntimeGameDataPath = join(repoRoot, "data/cleaned/runtime/game-data.json")
 const packageRuntimeGameDataPath = join(packageDir, "cleaned/runtime/game-data.json")
+const rootBangbooBatchAuditPath = join(repoRoot, "data/cleaned/audit/nanoka-bangboo-batch-audit.json")
+const packageBangbooBatchAuditPath = join(packageDir, "cleaned/audit/nanoka-bangboo-batch-audit.json")
 
 const archivedRuntimeSourceIds = new Set([
   "lo-user-excel",
@@ -121,6 +123,7 @@ function validateNanokaRegistry(source) {
 
   assert(manifestPattern.test("https://static.nanoka.cc/manifest.json"), "nanoka allowlist must accept manifest.json")
   assert(indexPattern.test(`https://static.nanoka.cc/zzz/${source.configuredLiveVersion}/boss.json`), "nanoka allowlist must accept versioned boss index")
+  assert(indexPattern.test(`https://static.nanoka.cc/zzz/${source.configuredLiveVersion}/bangboo.json`), "nanoka allowlist must accept versioned Bangboo index")
   for (const forbiddenIndex of ["beta", "preview", "leak", "datamine"]) {
     assert(
       !indexPattern.test(`https://static.nanoka.cc/zzz/${source.configuredLiveVersion}/${forbiddenIndex}.json`),
@@ -250,6 +253,21 @@ function validateMatrixAgainstRegistry(matrix, registry) {
       assert(row.supportingSampleEntities?.includes(sampleId), `${fieldId}: supporting samples must include ${sampleId}`)
     }
   }
+
+  const bangbooIndexSample = sampleById.get("nanoka-bangboo-index-live-2.8")
+  assert(bangbooIndexSample !== undefined, "Bangboo batch: missing approved-live bangboo index sample")
+  assert(bangbooIndexSample.approvedForCleanedOutput === true, "Bangboo batch index must be approved live evidence")
+  assert(bangbooIndexSample.version === nanoka.configuredLiveVersion, "Bangboo batch index must use configuredLiveVersion")
+  const liveBangbooSamples = [...sampleById.values()].filter(sample => sample.entityType === "bangboo" && sample.version === nanoka.configuredLiveVersion)
+  assert(liveBangbooSamples.length === 39, `Bangboo batch must retain 39 approved-live detail samples, got ${liveBangbooSamples.length}`)
+  for (const fieldId of ["bangboos.identity", "bangboos.basePanel", "bangboos.skillSegments"]) {
+    const row = resourceRows.get(fieldId)
+    assert(row?.sampleEntity === "nanoka-bangboo-index-live-2.8", `${fieldId}: V1.2.1 batch row must use the approved-live index sample`)
+    assert(row?.auditArtifact === "data/cleaned/audit/nanoka-bangboo-batch-audit.json", `${fieldId}: V1.2.1 batch row must point to the batch audit`)
+    assert((row?.supportingSampleEntities ?? []).length === 39, `${fieldId}: V1.2.1 batch row must support all 39 Bangboos`)
+  }
+  assert((bangbooElementRow.supportingSampleEntities ?? []).length === 39, "bangboos.element: V1.2.1 audit must cover all retained Bangboos")
+  assert(bangbooElementRow.auditArtifact === "data/cleaned/audit/nanoka-bangboo-batch-audit.json", "bangboos.element: V1.2.1 row must point to the batch audit")
 
   const driveDiscSlotRow = resourceRows.get("driveDiscs.slotAndSubstatTables")
   assert(driveDiscSlotRow !== undefined, "driveDiscs.slotAndSubstatTables: missing Drive Disc slot/stat row")
@@ -428,11 +446,44 @@ function validateRuntimeGameData(registry) {
   assert(Array.isArray(data.sources) && data.sources.length === 1, "runtime GameData must expose exactly one runtime source document")
   assert(data.sources[0]?.id === "nanoka-zzz", "runtime GameData source document must be nanoka")
   assert(data.sources[0]?.sourceVersion === nanoka.configuredLiveVersion, "runtime GameData source document must use configured live")
+  assert(Object.keys(data.bangboos ?? {}).length === 39, "runtime GameData must include the full approved-live Bangboo batch")
+  assert(Object.keys(data.bangbooSkills ?? {}).length === 63, "runtime GameData Bangboo skill count drifted")
 
   for (const ref of collectSourceRefs(data)) {
     assert(!archivedRuntimeSourceIds.has(ref.sourceId), `runtime GameData must not reference archived source ${ref.sourceId}`)
     assert(ref.sourceId === "nanoka-zzz", `runtime GameData must not reference non-nanoka source ${ref.sourceId}`)
     assert(ref.sourceVersion === nanoka.configuredLiveVersion, `${ref.sourceAnchor ?? ref.sourceId}: runtime source refs must use configured live`)
+  }
+}
+
+function validateBangbooBatchAudit(registry) {
+  const { rootText } = readMirroredText(
+    rootBangbooBatchAuditPath,
+    packageBangbooBatchAuditPath,
+    "packages/data/cleaned/audit/nanoka-bangboo-batch-audit.json",
+  )
+
+  const nanoka = sourceById(registry, "nanoka-zzz")
+  const audit = JSON.parse(rootText)
+  assert(audit.kind === "nanokaBangbooBatchAudit", "Bangboo batch audit kind drifted")
+  assert(audit.schemaVersion === "nanoka-bangboo-batch-audit/v0.1", "Bangboo batch audit schemaVersion drifted")
+  assert(audit.sourceId === "nanoka-zzz", "Bangboo batch audit sourceId drifted")
+  assert(audit.sourceVersion === nanoka.configuredLiveVersion, "Bangboo batch audit must use configured live version")
+  assert(audit.runtimeCutoverReady === true, "Bangboo batch audit must reflect runtime cutover state")
+  assert(audit.indexSource?.sourceId === "nanoka-zzz", "Bangboo batch audit index source must be nanoka")
+  assert(audit.indexSource?.sourceVersion === nanoka.configuredLiveVersion, "Bangboo batch audit index source must use configured live version")
+  assert(audit.indexSource?.sourceAnchor === "data/source/raw/nanoka/zzz/2.8/bangboo.json", "Bangboo batch audit index source anchor drifted")
+  assert(audit.summary?.bangbooCount === 39, "Bangboo batch audit count drifted")
+  assert(audit.summary?.runtimeBangbooCount === 39, "Bangboo batch runtime count drifted")
+  assert(audit.summary?.promotedSkillCount === 63, "Bangboo batch promoted skill count drifted")
+  assert(JSON.stringify(audit.summary?.noRuntimeSkillBangbooIds) === JSON.stringify(["53003", "53008", "53012"]), "Bangboo no-runtime-skill support list drifted")
+  assert(Array.isArray(audit.bangboos) && audit.bangboos.length === 39, "Bangboo batch audit rows must cover 39 Bangboos")
+  for (const row of audit.bangboos) {
+    assert(row.source?.sourceId === "nanoka-zzz", `${row.id}: Bangboo audit source must be nanoka`)
+    assert(row.source?.sourceVersion === nanoka.configuredLiveVersion, `${row.id}: Bangboo audit source version drifted`)
+    assert(row.source?.sourceAnchor === `data/source/raw/nanoka/zzz/2.8/zh/bangboo/${row.id}.json`, `${row.id}: Bangboo audit source anchor drifted`)
+    assert(row.level60Panel?.attack !== undefined, `${row.id}: Bangboo audit must include level-60 attack`)
+    assert(Array.isArray(row.skillSections), `${row.id}: Bangboo audit must include skill section rows`)
   }
 }
 
@@ -597,6 +648,7 @@ function validateCoveredSourceRefs(registry) {
   const sourceIds = new Set(registry.sources.map(source => source.sourceId))
   const files = [
     "data/cleaned/audit/mihoyo-buhflipexplode.source-conflicts.json",
+    "data/cleaned/audit/nanoka-bangboo-batch-audit.json",
     "data/cleaned/audit/source-migration-field-diff.json",
     "data/cleaned/golden/v1-replay-report.json",
     "data/cleaned/runtime/game-data.json",
@@ -626,6 +678,7 @@ function main() {
   validateDisorderFormulaAudit(registry)
   validateDisorderDazeLevelAudit(registry)
   validateRuntimeGameData(registry)
+  validateBangbooBatchAudit(registry)
   validateCoveredSourceRefs(registry)
 
   console.log("source registry verification passed")

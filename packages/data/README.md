@@ -14,6 +14,9 @@ Current state:
   and are verified by `verify:source-migration`;
 - Phase 4 nanoka runtime data lives under `cleaned/runtime/game-data.json` and
   is verified by `verify:nanoka-runtime`;
+- V1.2.1 Bangboo batch audit lives under
+  `cleaned/audit/nanoka-bangboo-batch-audit.json` and verifies all 39
+  approved-live nanoka 2.8 Bangboos;
 - V1 golden source candidates, manual acceptance records, and the replay report
   are generated under repo-level `data/cleaned/`;
 - `pnpm --filter @randomplay/data sync-cleaned` mirrors repo-level cleaned JSON into
@@ -28,7 +31,9 @@ derived from source documents and preserve source metadata.
 
 This package bundles cleaned ZZZ game-data artifacts for local damage
 calculation. V0.1.0 runtime data is derived from approved-live nanoka source
-snapshots (`manifest.zzz.live`) and preserves source metadata for audit.
+snapshots (`manifest.zzz.live`) and preserves source metadata for audit. The
+post-release V1.2.1 Bangboo batch adds the full approved-live nanoka 2.8
+Bangboo catalog without changing the package version.
 
 Source details are recorded in `source-registry.json` and the bundled cleaned
 JSON artifacts. Excel, Mihoyo D-17, and buhflipexplode D-12 snapshots remain

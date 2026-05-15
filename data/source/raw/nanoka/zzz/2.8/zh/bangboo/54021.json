@@ -1,0 +1,476 @@
+{
+  "id": 54021,
+  "code_name": "Sprout",
+  "name": "芽芽",
+  "desc": "别小看我们的羁绊啊！",
+  "rarity": 4,
+  "icon": "UI/Sprite/A1DynamicLoad/BangbooModGarage/UnPacker/BangbooRole/BangbooGarageRole43.png",
+  "stats": {
+    "endurance": 180,
+    "hp_max": 396,
+    "hpupgrade": 471237,
+    "attack": 72,
+    "attack_upgrade": 360408,
+    "break_stun": 103,
+    "element_abnormal_power": 110,
+    "defence": 28,
+    "def_upgrade": 78871,
+    "crit": 500,
+    "pen_ratio": 0,
+    "crit_dmg": 5000
+  },
+  "level": {
+    "1": {
+      "hp_max": 0,
+      "attack": 0,
+      "defence": 0,
+      "level_max": 10,
+      "level_min": 0,
+      "materials": {
+        "10": 15000,
+        "102010": 4
+      },
+      "extra": {
+        "20101": {
+          "prop": 20101,
+          "name": "暴击率",
+          "format": "{0:0.#%}",
+          "value": 0
+        },
+        "21101": {
+          "prop": 21101,
+          "name": "暴击伤害",
+          "format": "{0:0.#%}",
+          "value": 0
+        }
+      }
+    },
+    "2": {
+      "hp_max": 207,
+      "attack": 67,
+      "defence": 35,
+      "level_max": 20,
+      "level_min": 10,
+      "materials": {
+        "10": 35000,
+        "102020": 12
+      },
+      "extra": {
+        "20101": {
+          "prop": 20101,
+          "name": "暴击率",
+          "format": "{0:0.#%}",
+          "value": 450
+        },
+        "21101": {
+          "prop": 21101,
+          "name": "暴击伤害",
+          "format": "{0:0.#%}",
+          "value": 0
+        }
+      }
+    },
+    "3": {
+      "hp_max": 414,
+      "attack": 333,
+      "defence": 69,
+      "level_max": 30,
+      "level_min": 20,
+      "materials": {
+        "10": 75000,
+        "102020": 20
+      },
+      "extra": {
+        "20101": {
+          "prop": 20101,
+          "name": "暴击率",
+          "format": "{0:0.#%}",
+          "value": 2250
+        },
+        "21101": {
+          "prop": 21101,
+          "name": "暴击伤害",
+          "format": "{0:0.#%}",
+          "value": 0
+        }
+      }
+    },
+    "4": {
+      "hp_max": 621,
+      "attack": 1000,
+      "defence": 104,
+      "level_max": 40,
+      "level_min": 30,
+      "materials": {
+        "10": 125000,
+        "102030": 10
+      },
+      "extra": {
+        "20101": {
+          "prop": 20101,
+          "name": "暴击率",
+          "format": "{0:0.#%}",
+          "value": 2250
+        },
+        "21101": {
+          "prop": 21101,
+          "name": "暴击伤害",
+          "format": "{0:0.#%}",
+          "value": 2500
+        }
+      }
+    },
+    "5": {
+      "hp_max": 828,
+      "attack": 2666,
+      "defence": 139,
+      "level_max": 50,
+      "level_min": 40,
+      "materials": {
+        "10": 250000,
+        "102030": 20
+      },
+      "extra": {
+        "20101": {
+          "prop": 20101,
+          "name": "暴击率",
+          "format": "{0:0.#%}",
+          "value": 4500
+        },
+        "21101": {
+          "prop": 21101,
+          "name": "暴击伤害",
+          "format": "{0:0.#%}",
+          "value": 2500
+        }
+      }
+    },
+    "6": {
+      "hp_max": 1034,
+      "attack": 6665,
+      "defence": 173,
+      "level_max": 60,
+      "level_min": 50,
+      "materials": {},
+      "extra": {
+        "20101": {
+          "prop": 20101,
+          "name": "暴击率",
+          "format": "{0:0.#%}",
+          "value": 4500
+        },
+        "21101": {
+          "prop": 21101,
+          "name": "暴击伤害",
+          "format": "{0:0.#%}",
+          "value": 5000
+        }
+      }
+    }
+  },
+  "skill": {
+    "a": {
+      "level": {
+        "1": {
+          "name": "六合飞星",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，如果场上没有[剑]，芽芽会召唤六把飞剑攻击目标敌人，造成<color=#F0D12B>物理伤害</color>并累积<color=#F0D12B>物理异常积蓄值</color>；\n如果场上有[剑]，芽芽会进行踩剑蓄力，发动更为强力的连斩攻击，造成大量<color=#F0D12B>物理伤害</color>并累积<color=#F0D12B>物理异常积蓄值</color>。",
+          "property": [
+            "飞剑伤害倍率",
+            "飞剑失衡倍率",
+            "连斩伤害倍率",
+            "连斩失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5402101, Prop:1001}|{Skill:5402101, Prop:1002}|{Skill:5402102, Prop:1001}|{Skill:5402102, Prop:1002}|28秒"
+        },
+        "2": {
+          "name": "六合飞星",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，如果场上没有[剑]，芽芽会召唤六把飞剑攻击目标敌人，造成<color=#F0D12B>物理伤害</color>并累积<color=#F0D12B>物理异常积蓄值</color>；\n如果场上有[剑]，芽芽会进行踩剑蓄力，发动更为强力的连斩攻击，造成大量<color=#F0D12B>物理伤害</color>并累积<color=#F0D12B>物理异常积蓄值</color>。",
+          "property": [
+            "飞剑伤害倍率",
+            "飞剑失衡倍率",
+            "连斩伤害倍率",
+            "连斩失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5402101, Prop:1001}|{Skill:5402101, Prop:1002}|{Skill:5402102, Prop:1001}|{Skill:5402102, Prop:1002}|28秒"
+        },
+        "3": {
+          "name": "六合飞星",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，如果场上没有[剑]，芽芽会召唤六把飞剑攻击目标敌人，造成<color=#F0D12B>物理伤害</color>并累积<color=#F0D12B>物理异常积蓄值</color>；\n如果场上有[剑]，芽芽会进行踩剑蓄力，发动更为强力的连斩攻击，造成大量<color=#F0D12B>物理伤害</color>并累积<color=#F0D12B>物理异常积蓄值</color>。",
+          "property": [
+            "飞剑伤害倍率",
+            "飞剑失衡倍率",
+            "连斩伤害倍率",
+            "连斩失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5402101, Prop:1001}|{Skill:5402101, Prop:1002}|{Skill:5402102, Prop:1001}|{Skill:5402102, Prop:1002}|28秒"
+        },
+        "4": {
+          "name": "六合飞星",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，如果场上没有[剑]，芽芽会召唤六把飞剑攻击目标敌人，造成<color=#F0D12B>物理伤害</color>并累积<color=#F0D12B>物理异常积蓄值</color>；\n如果场上有[剑]，芽芽会进行踩剑蓄力，发动更为强力的连斩攻击，造成大量<color=#F0D12B>物理伤害</color>并累积<color=#F0D12B>物理异常积蓄值</color>。",
+          "property": [
+            "飞剑伤害倍率",
+            "飞剑失衡倍率",
+            "连斩伤害倍率",
+            "连斩失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5402101, Prop:1001}|{Skill:5402101, Prop:1002}|{Skill:5402102, Prop:1001}|{Skill:5402102, Prop:1002}|28秒"
+        },
+        "5": {
+          "name": "六合飞星",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，如果场上没有[剑]，芽芽会召唤六把飞剑攻击目标敌人，造成<color=#F0D12B>物理伤害</color>并累积<color=#F0D12B>物理异常积蓄值</color>；\n如果场上有[剑]，芽芽会进行踩剑蓄力，发动更为强力的连斩攻击，造成大量<color=#F0D12B>物理伤害</color>并累积<color=#F0D12B>物理异常积蓄值</color>。",
+          "property": [
+            "飞剑伤害倍率",
+            "飞剑失衡倍率",
+            "连斩伤害倍率",
+            "连斩失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5402101, Prop:1001}|{Skill:5402101, Prop:1002}|{Skill:5402102, Prop:1001}|{Skill:5402102, Prop:1002}|28秒"
+        },
+        "6": {
+          "name": "六合飞星",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，如果场上没有[剑]，芽芽会召唤六把飞剑攻击目标敌人，造成<color=#F0D12B>物理伤害</color>并累积<color=#F0D12B>物理异常积蓄值</color>；\n如果场上有[剑]，芽芽会进行踩剑蓄力，发动更为强力的连斩攻击，造成大量<color=#F0D12B>物理伤害</color>并累积<color=#F0D12B>物理异常积蓄值</color>。",
+          "property": [
+            "飞剑伤害倍率",
+            "飞剑失衡倍率",
+            "连斩伤害倍率",
+            "连斩失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5402101, Prop:1001}|{Skill:5402101, Prop:1002}|{Skill:5402102, Prop:1001}|{Skill:5402102, Prop:1002}|28秒"
+        },
+        "7": {
+          "name": "六合飞星",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，如果场上没有[剑]，芽芽会召唤六把飞剑攻击目标敌人，造成<color=#F0D12B>物理伤害</color>并累积<color=#F0D12B>物理异常积蓄值</color>；\n如果场上有[剑]，芽芽会进行踩剑蓄力，发动更为强力的连斩攻击，造成大量<color=#F0D12B>物理伤害</color>并累积<color=#F0D12B>物理异常积蓄值</color>。",
+          "property": [
+            "飞剑伤害倍率",
+            "飞剑失衡倍率",
+            "连斩伤害倍率",
+            "连斩失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5402101, Prop:1001}|{Skill:5402101, Prop:1002}|{Skill:5402102, Prop:1001}|{Skill:5402102, Prop:1002}|28秒"
+        },
+        "8": {
+          "name": "六合飞星",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，如果场上没有[剑]，芽芽会召唤六把飞剑攻击目标敌人，造成<color=#F0D12B>物理伤害</color>并累积<color=#F0D12B>物理异常积蓄值</color>；\n如果场上有[剑]，芽芽会进行踩剑蓄力，发动更为强力的连斩攻击，造成大量<color=#F0D12B>物理伤害</color>并累积<color=#F0D12B>物理异常积蓄值</color>。",
+          "property": [
+            "飞剑伤害倍率",
+            "飞剑失衡倍率",
+            "连斩伤害倍率",
+            "连斩失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5402101, Prop:1001}|{Skill:5402101, Prop:1002}|{Skill:5402102, Prop:1001}|{Skill:5402102, Prop:1002}|28秒"
+        },
+        "9": {
+          "name": "六合飞星",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，如果场上没有[剑]，芽芽会召唤六把飞剑攻击目标敌人，造成<color=#F0D12B>物理伤害</color>并累积<color=#F0D12B>物理异常积蓄值</color>；\n如果场上有[剑]，芽芽会进行踩剑蓄力，发动更为强力的连斩攻击，造成大量<color=#F0D12B>物理伤害</color>并累积<color=#F0D12B>物理异常积蓄值</color>。",
+          "property": [
+            "飞剑伤害倍率",
+            "飞剑失衡倍率",
+            "连斩伤害倍率",
+            "连斩失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5402101, Prop:1001}|{Skill:5402101, Prop:1002}|{Skill:5402102, Prop:1001}|{Skill:5402102, Prop:1002}|28秒"
+        },
+        "10": {
+          "name": "六合飞星",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，如果场上没有[剑]，芽芽会召唤六把飞剑攻击目标敌人，造成<color=#F0D12B>物理伤害</color>并累积<color=#F0D12B>物理异常积蓄值</color>；\n如果场上有[剑]，芽芽会进行踩剑蓄力，发动更为强力的连斩攻击，造成大量<color=#F0D12B>物理伤害</color>并累积<color=#F0D12B>物理异常积蓄值</color>。",
+          "property": [
+            "飞剑伤害倍率",
+            "飞剑失衡倍率",
+            "连斩伤害倍率",
+            "连斩失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5402101, Prop:1001}|{Skill:5402101, Prop:1002}|{Skill:5402102, Prop:1001}|{Skill:5402102, Prop:1002}|28秒"
+        }
+      }
+    },
+    "b": {
+      "level": {
+        "1": {
+          "name": "同心之契",
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在<color=#FFFFFF>[叶瞬光]</color>时触发：芽芽造成的伤害提升30%；发动主动技时，如果处于[以太帷幕·决裁]，会在场地中生成1把[剑]。",
+          "property": [
+            "伤害提升"
+          ],
+          "param": "30%"
+        },
+        "2": {
+          "name": "同心之契",
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在<color=#FFFFFF>[叶瞬光]</color>时触发：芽芽造成的伤害提升37.5%；发动主动技时，如果处于[以太帷幕·决裁]，会在场地中生成1把[剑]。",
+          "property": [
+            "伤害提升"
+          ],
+          "param": "37.5%"
+        },
+        "3": {
+          "name": "同心之契",
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在<color=#FFFFFF>[叶瞬光]</color>时触发：芽芽造成的伤害提升45%；发动主动技时，如果处于[以太帷幕·决裁]，会在场地中生成1把[剑]。",
+          "property": [
+            "伤害提升"
+          ],
+          "param": "45%"
+        },
+        "4": {
+          "name": "同心之契",
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在<color=#FFFFFF>[叶瞬光]</color>时触发：芽芽造成的伤害提升52.5%；发动主动技时，如果处于[以太帷幕·决裁]，会在场地中生成1把[剑]。",
+          "property": [
+            "伤害提升"
+          ],
+          "param": "52.5%"
+        },
+        "5": {
+          "name": "同心之契",
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在<color=#FFFFFF>[叶瞬光]</color>时触发：芽芽造成的伤害提升60%；发动主动技时，如果处于[以太帷幕·决裁]，会在场地中生成1把[剑]。",
+          "property": [
+            "伤害提升"
+          ],
+          "param": "60%"
+        }
+      }
+    },
+    "c": {
+      "level": {
+        "1": {
+          "name": "归一之剑",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n召唤巨大的归一之剑，刺向前方敌人，造成大量<color=#F0D12B>物理伤害</color>并累积<color=#F0D12B>物理异常积蓄值</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5402103, Prop:1001}|{Skill:5402103, Prop:1002}"
+        },
+        "2": {
+          "name": "归一之剑",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n召唤巨大的归一之剑，刺向前方敌人，造成大量<color=#F0D12B>物理伤害</color>并累积<color=#F0D12B>物理异常积蓄值</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5402103, Prop:1001}|{Skill:5402103, Prop:1002}"
+        },
+        "3": {
+          "name": "归一之剑",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n召唤巨大的归一之剑，刺向前方敌人，造成大量<color=#F0D12B>物理伤害</color>并累积<color=#F0D12B>物理异常积蓄值</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5402103, Prop:1001}|{Skill:5402103, Prop:1002}"
+        },
+        "4": {
+          "name": "归一之剑",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n召唤巨大的归一之剑，刺向前方敌人，造成大量<color=#F0D12B>物理伤害</color>并累积<color=#F0D12B>物理异常积蓄值</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5402103, Prop:1001}|{Skill:5402103, Prop:1002}"
+        },
+        "5": {
+          "name": "归一之剑",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n召唤巨大的归一之剑，刺向前方敌人，造成大量<color=#F0D12B>物理伤害</color>并累积<color=#F0D12B>物理异常积蓄值</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5402103, Prop:1001}|{Skill:5402103, Prop:1002}"
+        },
+        "6": {
+          "name": "归一之剑",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n召唤巨大的归一之剑，刺向前方敌人，造成大量<color=#F0D12B>物理伤害</color>并累积<color=#F0D12B>物理异常积蓄值</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5402103, Prop:1001}|{Skill:5402103, Prop:1002}"
+        },
+        "7": {
+          "name": "归一之剑",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n召唤巨大的归一之剑，刺向前方敌人，造成大量<color=#F0D12B>物理伤害</color>并累积<color=#F0D12B>物理异常积蓄值</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5402103, Prop:1001}|{Skill:5402103, Prop:1002}"
+        },
+        "8": {
+          "name": "归一之剑",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n召唤巨大的归一之剑，刺向前方敌人，造成大量<color=#F0D12B>物理伤害</color>并累积<color=#F0D12B>物理异常积蓄值</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5402103, Prop:1001}|{Skill:5402103, Prop:1002}"
+        },
+        "9": {
+          "name": "归一之剑",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n召唤巨大的归一之剑，刺向前方敌人，造成大量<color=#F0D12B>物理伤害</color>并累积<color=#F0D12B>物理异常积蓄值</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5402103, Prop:1001}|{Skill:5402103, Prop:1002}"
+        },
+        "10": {
+          "name": "归一之剑",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n召唤巨大的归一之剑，刺向前方敌人，造成大量<color=#F0D12B>物理伤害</color>并累积<color=#F0D12B>物理异常积蓄值</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5402103, Prop:1001}|{Skill:5402103, Prop:1002}"
+        }
+      }
+    }
+  },
+  "skill_prop": {
+    "5402101": {
+      "1001": {
+        "main": 71700,
+        "growth": 7170,
+        "format": "%"
+      },
+      "1002": {
+        "main": 32800,
+        "growth": 3280,
+        "format": "%"
+      },
+      "element_accumulation_value": 42000
+    },
+    "5402102": {
+      "1001": {
+        "main": 98600,
+        "growth": 9860,
+        "format": "%"
+      },
+      "1002": {
+        "main": 32800,
+        "growth": 3280,
+        "format": "%"
+      },
+      "element_accumulation_value": 42000
+    },
+    "5402103": {
+      "1001": {
+        "main": 84600,
+        "growth": 8460,
+        "format": "%"
+      },
+      "1002": {
+        "main": 12100,
+        "growth": 1210,
+        "format": "%"
+      },
+      "element_accumulation_value": 36300
+    }
+  }
+}

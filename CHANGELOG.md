@@ -2,6 +2,12 @@
 
 All notable changes to Fairy are documented in this file.
 
+## Unreleased
+
+### Added
+
+- Batch import the approved-live nanoka 2.8 Bangboo catalog into runtime cleaned data without a package version bump.
+
 ## 0.1.0 - 2026-05-15
 
 ### Added

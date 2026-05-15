@@ -1,0 +1,443 @@
+{
+  "id": 54012,
+  "code_name": "Officer Cui",
+  "name": "阿崔巡查",
+  "desc": "虽然本体是邦布，但比治安犬更具威慑力！",
+  "rarity": 4,
+  "icon": "UI/Sprite/A1DynamicLoad/BangbooModGarage/UnPacker/BangbooRole/BangbooGarageRole25.png",
+  "stats": {
+    "endurance": 180,
+    "hp_max": 396,
+    "hpupgrade": 471237,
+    "attack": 72,
+    "attack_upgrade": 360408,
+    "break_stun": 103,
+    "element_abnormal_power": 110,
+    "defence": 28,
+    "def_upgrade": 78871,
+    "crit": 500,
+    "pen_ratio": 0,
+    "crit_dmg": 5000
+  },
+  "level": {
+    "1": {
+      "hp_max": 0,
+      "attack": 0,
+      "defence": 0,
+      "level_max": 10,
+      "level_min": 0,
+      "materials": {
+        "10": 15000,
+        "102010": 4
+      },
+      "extra": {
+        "20101": {
+          "prop": 20101,
+          "name": "暴击率",
+          "format": "{0:0.#%}",
+          "value": 0
+        },
+        "21101": {
+          "prop": 21101,
+          "name": "暴击伤害",
+          "format": "{0:0.#%}",
+          "value": 0
+        }
+      }
+    },
+    "2": {
+      "hp_max": 207,
+      "attack": 67,
+      "defence": 35,
+      "level_max": 20,
+      "level_min": 10,
+      "materials": {
+        "10": 35000,
+        "102020": 12
+      },
+      "extra": {
+        "20101": {
+          "prop": 20101,
+          "name": "暴击率",
+          "format": "{0:0.#%}",
+          "value": 450
+        },
+        "21101": {
+          "prop": 21101,
+          "name": "暴击伤害",
+          "format": "{0:0.#%}",
+          "value": 0
+        }
+      }
+    },
+    "3": {
+      "hp_max": 414,
+      "attack": 333,
+      "defence": 69,
+      "level_max": 30,
+      "level_min": 20,
+      "materials": {
+        "10": 75000,
+        "102020": 20
+      },
+      "extra": {
+        "20101": {
+          "prop": 20101,
+          "name": "暴击率",
+          "format": "{0:0.#%}",
+          "value": 2250
+        },
+        "21101": {
+          "prop": 21101,
+          "name": "暴击伤害",
+          "format": "{0:0.#%}",
+          "value": 0
+        }
+      }
+    },
+    "4": {
+      "hp_max": 621,
+      "attack": 1000,
+      "defence": 104,
+      "level_max": 40,
+      "level_min": 30,
+      "materials": {
+        "10": 125000,
+        "102030": 10
+      },
+      "extra": {
+        "20101": {
+          "prop": 20101,
+          "name": "暴击率",
+          "format": "{0:0.#%}",
+          "value": 2250
+        },
+        "21101": {
+          "prop": 21101,
+          "name": "暴击伤害",
+          "format": "{0:0.#%}",
+          "value": 2500
+        }
+      }
+    },
+    "5": {
+      "hp_max": 828,
+      "attack": 2666,
+      "defence": 139,
+      "level_max": 50,
+      "level_min": 40,
+      "materials": {
+        "10": 250000,
+        "102030": 20
+      },
+      "extra": {
+        "20101": {
+          "prop": 20101,
+          "name": "暴击率",
+          "format": "{0:0.#%}",
+          "value": 4500
+        },
+        "21101": {
+          "prop": 21101,
+          "name": "暴击伤害",
+          "format": "{0:0.#%}",
+          "value": 2500
+        }
+      }
+    },
+    "6": {
+      "hp_max": 1034,
+      "attack": 6665,
+      "defence": 173,
+      "level_max": 60,
+      "level_min": 50,
+      "materials": {},
+      "extra": {
+        "20101": {
+          "prop": 20101,
+          "name": "暴击率",
+          "format": "{0:0.#%}",
+          "value": 4500
+        },
+        "21101": {
+          "prop": 21101,
+          "name": "暴击伤害",
+          "format": "{0:0.#%}",
+          "value": 5000
+        }
+      }
+    }
+  },
+  "skill": {
+    "a": {
+      "level": {
+        "1": {
+          "name": "呜！汪汪！",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，发动两段攻击，连续撕咬前方敌人，造成<color=#F0D12B>物理伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5401201, Prop:1001}*2|{Skill:5401201, Prop:1002}*2|26秒"
+        },
+        "2": {
+          "name": "呜！汪汪！",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，发动两段攻击，连续撕咬前方敌人，造成<color=#F0D12B>物理伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5401201, Prop:1001}*2|{Skill:5401201, Prop:1002}*2|26秒"
+        },
+        "3": {
+          "name": "呜！汪汪！",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，发动两段攻击，连续撕咬前方敌人，造成<color=#F0D12B>物理伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5401201, Prop:1001}*2|{Skill:5401201, Prop:1002}*2|26秒"
+        },
+        "4": {
+          "name": "呜！汪汪！",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，发动两段攻击，连续撕咬前方敌人，造成<color=#F0D12B>物理伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5401201, Prop:1001}*2|{Skill:5401201, Prop:1002}*2|26秒"
+        },
+        "5": {
+          "name": "呜！汪汪！",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，发动两段攻击，连续撕咬前方敌人，造成<color=#F0D12B>物理伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5401201, Prop:1001}*2|{Skill:5401201, Prop:1002}*2|26秒"
+        },
+        "6": {
+          "name": "呜！汪汪！",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，发动两段攻击，连续撕咬前方敌人，造成<color=#F0D12B>物理伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5401201, Prop:1001}*2|{Skill:5401201, Prop:1002}*2|26秒"
+        },
+        "7": {
+          "name": "呜！汪汪！",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，发动两段攻击，连续撕咬前方敌人，造成<color=#F0D12B>物理伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5401201, Prop:1001}*2|{Skill:5401201, Prop:1002}*2|26秒"
+        },
+        "8": {
+          "name": "呜！汪汪！",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，发动两段攻击，连续撕咬前方敌人，造成<color=#F0D12B>物理伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5401201, Prop:1001}*2|{Skill:5401201, Prop:1002}*2|26秒"
+        },
+        "9": {
+          "name": "呜！汪汪！",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，发动两段攻击，连续撕咬前方敌人，造成<color=#F0D12B>物理伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5401201, Prop:1001}*2|{Skill:5401201, Prop:1002}*2|26秒"
+        },
+        "10": {
+          "name": "呜！汪汪！",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，发动两段攻击，连续撕咬前方敌人，造成<color=#F0D12B>物理伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5401201, Prop:1001}*2|{Skill:5401201, Prop:1002}*2|26秒"
+        }
+      }
+    },
+    "b": {
+      "level": {
+        "1": {
+          "name": "临时治安犬",
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在2名或以上<color=#FFFFFF>[新艾利都治安局]</color>阵营的角色时触发：发动<color=#FFFFFF>[主动技]</color>时，有50%概率追加1段撕咬攻击，该效果最多连续触发3次；<color=#FFFFFF>[邦布连携技]</color>造成的伤害提升35%。",
+          "property": [
+            "伤害提升"
+          ],
+          "param": "35%"
+        },
+        "2": {
+          "name": "临时治安犬",
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在2名或以上<color=#FFFFFF>[新艾利都治安局]</color>阵营的角色时触发：发动<color=#FFFFFF>[主动技]</color>时，有50%概率追加1段撕咬攻击，该效果最多连续触发3次；<color=#FFFFFF>[邦布连携技]</color>造成的伤害提升43%。",
+          "property": [
+            "伤害提升"
+          ],
+          "param": "43%"
+        },
+        "3": {
+          "name": "临时治安犬",
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在2名或以上<color=#FFFFFF>[新艾利都治安局]</color>阵营的角色时触发：发动<color=#FFFFFF>[主动技]</color>时，有50%概率追加1段撕咬攻击，该效果最多连续触发3次；<color=#FFFFFF>[邦布连携技]</color>造成的伤害提升52%。",
+          "property": [
+            "伤害提升"
+          ],
+          "param": "52%"
+        },
+        "4": {
+          "name": "临时治安犬",
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在2名或以上<color=#FFFFFF>[新艾利都治安局]</color>阵营的角色时触发：发动<color=#FFFFFF>[主动技]</color>时，有50%概率追加1段撕咬攻击，该效果最多连续触发3次；<color=#FFFFFF>[邦布连携技]</color>造成的伤害提升60%。",
+          "property": [
+            "伤害提升"
+          ],
+          "param": "60%"
+        },
+        "5": {
+          "name": "临时治安犬",
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在2名或以上<color=#FFFFFF>[新艾利都治安局]</color>阵营的角色时触发：发动<color=#FFFFFF>[主动技]</color>时，有50%概率追加1段撕咬攻击，该效果最多连续触发3次；<color=#FFFFFF>[邦布连携技]</color>造成的伤害提升70%。",
+          "property": [
+            "伤害提升"
+          ],
+          "param": "70%"
+        }
+      }
+    },
+    "c": {
+      "level": {
+        "1": {
+          "name": "汪汪汪汪！",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n连续撕咬前方范围内的敌人，造成大量<color=#F0D12B>物理伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5401202, Prop:1001}|{Skill:5401202, Prop:1002}"
+        },
+        "2": {
+          "name": "汪汪汪汪！",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n连续撕咬前方范围内的敌人，造成大量<color=#F0D12B>物理伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5401202, Prop:1001}|{Skill:5401202, Prop:1002}"
+        },
+        "3": {
+          "name": "汪汪汪汪！",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n连续撕咬前方范围内的敌人，造成大量<color=#F0D12B>物理伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5401202, Prop:1001}|{Skill:5401202, Prop:1002}"
+        },
+        "4": {
+          "name": "汪汪汪汪！",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n连续撕咬前方范围内的敌人，造成大量<color=#F0D12B>物理伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5401202, Prop:1001}|{Skill:5401202, Prop:1002}"
+        },
+        "5": {
+          "name": "汪汪汪汪！",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n连续撕咬前方范围内的敌人，造成大量<color=#F0D12B>物理伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5401202, Prop:1001}|{Skill:5401202, Prop:1002}"
+        },
+        "6": {
+          "name": "汪汪汪汪！",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n连续撕咬前方范围内的敌人，造成大量<color=#F0D12B>物理伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5401202, Prop:1001}|{Skill:5401202, Prop:1002}"
+        },
+        "7": {
+          "name": "汪汪汪汪！",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n连续撕咬前方范围内的敌人，造成大量<color=#F0D12B>物理伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5401202, Prop:1001}|{Skill:5401202, Prop:1002}"
+        },
+        "8": {
+          "name": "汪汪汪汪！",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n连续撕咬前方范围内的敌人，造成大量<color=#F0D12B>物理伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5401202, Prop:1001}|{Skill:5401202, Prop:1002}"
+        },
+        "9": {
+          "name": "汪汪汪汪！",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n连续撕咬前方范围内的敌人，造成大量<color=#F0D12B>物理伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5401202, Prop:1001}|{Skill:5401202, Prop:1002}"
+        },
+        "10": {
+          "name": "汪汪汪汪！",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n连续撕咬前方范围内的敌人，造成大量<color=#F0D12B>物理伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5401202, Prop:1001}|{Skill:5401202, Prop:1002}"
+        }
+      }
+    }
+  },
+  "skill_prop": {
+    "5401201": {
+      "1001": {
+        "main": 27700,
+        "growth": 2770,
+        "format": "%"
+      },
+      "1002": {
+        "main": 10100,
+        "growth": 1010,
+        "format": "%"
+      },
+      "element_accumulation_value": 13000
+    },
+    "5401202": {
+      "1001": {
+        "main": 83400,
+        "growth": 8340,
+        "format": "%"
+      },
+      "1002": {
+        "main": 11900,
+        "growth": 1190,
+        "format": "%"
+      },
+      "element_accumulation_value": 35800
+    }
+  }
+}

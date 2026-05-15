@@ -15,6 +15,58 @@ const sourceId = "nanoka-zzz"
 const parserVersion = "nanoka-source-v0.1.0"
 const userAgent = "fairy-data-source-audit/0.1 (+https://github.com/LoTwT/fairy)"
 
+const bangbooEntityIds = [
+  53001,
+  53002,
+  53003,
+  53004,
+  53005,
+  53006,
+  53007,
+  53008,
+  53009,
+  53010,
+  53011,
+  53012,
+  53013,
+  53014,
+  53015,
+  53016,
+  53017,
+  53019,
+  53021,
+  54001,
+  54002,
+  54003,
+  54004,
+  54005,
+  54006,
+  54008,
+  54009,
+  54010,
+  54011,
+  54012,
+  54013,
+  54014,
+  54015,
+  54016,
+  54017,
+  54018,
+  54019,
+  54020,
+  54021,
+]
+
+function bangbooEvidenceUse(entityId) {
+  if (entityId === 54008)
+    return "bangboo-panel-skill-source-gate"
+  if (entityId === 53001)
+    return "phase3-g24-bangboo-candidate-gate"
+  if (entityId === 54001)
+    return "phase3-g25-bangboo-candidate-gate"
+  return "v1.2.1-bangboo-batch-source-gate"
+}
+
 function parseArgs(argv) {
   const [command, ...rest] = argv
   const flags = {}
@@ -51,6 +103,27 @@ function writeJson(path, data) {
 }
 
 function snapshotAssets(snapshot) {
+  const bangbooAssets = [
+    {
+      id: "bangboo-index",
+      url: `https://static.nanoka.cc/zzz/${snapshot}/bangboo.json`,
+      path: "bangboo.json",
+      entityType: "bangbooIndex",
+      approvedForCleanedOutput: true,
+      evidenceUse: "v1.2.1-bangboo-batch-source-gate",
+    },
+    ...bangbooEntityIds.map(entityId => ({
+      id: `bangboo-${entityId}`,
+      url: `https://static.nanoka.cc/zzz/${snapshot}/zh/bangboo/${entityId}.json`,
+      path: `zh/bangboo/${entityId}.json`,
+      entityType: "bangboo",
+      language: "zh",
+      entityId,
+      approvedForCleanedOutput: true,
+      evidenceUse: bangbooEvidenceUse(entityId),
+    })),
+  ]
+
   return [
     {
       id: "manifest",
@@ -188,36 +261,7 @@ function snapshotAssets(snapshot) {
       approvedForCleanedOutput: true,
       evidenceUse: "enemy-variant-mapping-source-gate",
     },
-    {
-      id: "bangboo-plugboo-54008",
-      url: `https://static.nanoka.cc/zzz/${snapshot}/zh/bangboo/54008.json`,
-      path: "zh/bangboo/54008.json",
-      entityType: "bangboo",
-      language: "zh",
-      entityId: 54008,
-      approvedForCleanedOutput: true,
-      evidenceUse: "bangboo-panel-skill-source-gate",
-    },
-    {
-      id: "bangboo-penguinboo-53001",
-      url: `https://static.nanoka.cc/zzz/${snapshot}/zh/bangboo/53001.json`,
-      path: "zh/bangboo/53001.json",
-      entityType: "bangboo",
-      language: "zh",
-      entityId: 53001,
-      approvedForCleanedOutput: true,
-      evidenceUse: "phase3-g24-bangboo-candidate-gate",
-    },
-    {
-      id: "bangboo-sharkboo-54001",
-      url: `https://static.nanoka.cc/zzz/${snapshot}/zh/bangboo/54001.json`,
-      path: "zh/bangboo/54001.json",
-      entityType: "bangboo",
-      language: "zh",
-      entityId: 54001,
-      approvedForCleanedOutput: true,
-      evidenceUse: "phase3-g25-bangboo-candidate-gate",
-    },
+    ...bangbooAssets,
     {
       id: "weapon-yixuan-signature-14137",
       url: `https://static.nanoka.cc/zzz/${snapshot}/zh/weapon/14137.json`,
@@ -334,9 +378,23 @@ function summarizeSnapshot(snapshot, assets) {
       hasStats: canonicalInfo.stats !== undefined,
     }
   })
-  const bangboo = readJson(join(sourceRoot, snapshot, "zh/bangboo/54008.json"))
-  const penguinboo = readJson(join(sourceRoot, snapshot, "zh/bangboo/53001.json"))
-  const sharkboo = readJson(join(sourceRoot, snapshot, "zh/bangboo/54001.json"))
+  const bangbooIndex = readJson(join(sourceRoot, snapshot, "bangboo.json"))
+  const bangbooDetails = bangbooEntityIds.map((entityId) => {
+    const indexEntry = bangbooIndex[String(entityId)]
+    if (indexEntry === undefined)
+      throw new Error(`bangboo index is missing ${entityId}`)
+    const detail = readJson(join(sourceRoot, snapshot, `zh/bangboo/${entityId}.json`))
+    if (detail.id !== entityId)
+      throw new Error(`bangboo ${entityId}: detail id drifted`)
+    if (detail.code_name !== indexEntry.codename)
+      throw new Error(`bangboo ${entityId}: code_name drifted against index`)
+    if (detail.name !== indexEntry.zh)
+      throw new Error(`bangboo ${entityId}: zh name drifted against index`)
+    return { indexEntry, detail }
+  })
+  const bangboo = bangbooDetails.find(({ detail }) => detail.id === 54008)?.detail
+  const penguinboo = bangbooDetails.find(({ detail }) => detail.id === 53001)?.detail
+  const sharkboo = bangbooDetails.find(({ detail }) => detail.id === 54001)?.detail
   const weapon = readJson(join(sourceRoot, snapshot, "zh/weapon/14137.json"))
   const equipment = readJson(join(sourceRoot, snapshot, "zh/equipment/31000.json"))
 
@@ -356,11 +414,13 @@ function summarizeSnapshot(snapshot, assets) {
     throw new Error("Yanagi character sample id drifted")
   if (boss.id !== 69036)
     throw new Error("boss sample id drifted")
-  if (bangboo.id !== 54008)
+  if (Object.keys(bangbooIndex).length !== bangbooEntityIds.length)
+    throw new Error(`bangboo index count drifted: expected ${bangbooEntityIds.length}, got ${Object.keys(bangbooIndex).length}`)
+  if (bangboo?.id !== 54008)
     throw new Error("bangboo sample id drifted")
-  if (penguinboo.id !== 53001)
+  if (penguinboo?.id !== 53001)
     throw new Error("Penguinboo sample id drifted")
-  if (sharkboo.id !== 54001)
+  if (sharkboo?.id !== 54001)
     throw new Error("Sharkboo sample id drifted")
   if (weapon.id !== 14137)
     throw new Error("weapon sample id drifted")
@@ -450,6 +510,12 @@ function summarizeSnapshot(snapshot, assets) {
         hasSkillProp: sharkboo.skill_prop !== undefined,
       },
     ],
+    bangbooBatch: {
+      indexCount: Object.keys(bangbooIndex).length,
+      retainedDetailCount: bangbooDetails.length,
+      ids: bangbooDetails.map(({ detail }) => detail.id),
+      approvedForCleanedOutputCount: assets.filter(asset => asset.entityType === "bangboo" && asset.approvedForCleanedOutput === true).length,
+    },
     wEngineSample: {
       id: weapon.id,
       codeName: weapon.code_name,
@@ -504,6 +570,7 @@ async function fetchSnapshot(snapshot, generatedAt) {
       manifestUrl: "https://static.nanoka.cc/manifest.json",
       approvedIndexUrls: [
         `https://static.nanoka.cc/zzz/${snapshot}/boss.json`,
+        `https://static.nanoka.cc/zzz/${snapshot}/bangboo.json`,
       ],
       approvedLocalizedDetailUrlPatterns: [
         `https://static.nanoka.cc/zzz/${snapshot}/{locale}/{entityType}/{id}.json`,
@@ -560,6 +627,12 @@ function verifySnapshot(snapshot) {
     throw new Error("sentinel sample rp_recovery summary drifted")
   if (summary.enemySamples?.mappingCount !== manifest.summary?.enemySamples?.mappingCount)
     throw new Error("enemy sample mapping count summary drifted")
+  if (summary.bangbooBatch?.indexCount !== manifest.summary?.bangbooBatch?.indexCount)
+    throw new Error("Bangboo index count summary drifted")
+  if (summary.bangbooBatch?.retainedDetailCount !== manifest.summary?.bangbooBatch?.retainedDetailCount)
+    throw new Error("Bangboo retained detail count summary drifted")
+  if (JSON.stringify(summary.bangbooBatch?.ids) !== JSON.stringify(manifest.summary?.bangbooBatch?.ids))
+    throw new Error("Bangboo retained detail ids summary drifted")
 
   console.log(`nanoka snapshot ${snapshot} verification passed`)
 }

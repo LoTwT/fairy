@@ -1,6 +1,6 @@
 {
   "schemaVersion": "source-manifest-v1",
-  "generatedAt": "2026-05-15T12:20:00+08:00",
+  "generatedAt": "2026-05-15T20:56:00+08:00",
   "distributionPolicy": {
     "rawSourceArchive": "versioned-in-git-not-packaged",
     "publishedArtifacts": "cleaned-json-and-types-only"
@@ -59,12 +59,12 @@
       "id": "nanoka-zzz-2.8",
       "kind": "rawHttpSnapshot",
       "path": "data/source/raw/nanoka/zzz/2.8/fetch-manifest.json",
-      "sha256": "a83e336feb3e052573eca826ba15b383114f97b303d64a528135f7cb13774384",
-      "bytes": 20048,
-      "fetchedAt": "2026-05-15T17:15:00+08:00",
+      "sha256": "81bb97e78f716dc2d2188152b3984d0282e044c81916643691e0c5151f397cac",
+      "bytes": 48969,
+      "fetchedAt": "2026-05-15T20:56:00+08:00",
       "providedBy": "static.nanoka.cc public JSON",
       "distribution": "raw-retained-not-packaged",
-      "usage": "Nanoka live 2.8 raw snapshot fixture for Phase 2 source-gate, adapter-skeleton, Phase 3 first-sync candidate coverage, and enemy variant mapping tests; not a runtime cleaned-data cutover"
+      "usage": "Nanoka live 2.8 raw snapshot fixture for Phase 2 source-gate, adapter-skeleton, Phase 3 first-sync candidate coverage, Phase 4 runtime cutover, V1.2.1 Bangboo batch import, and enemy variant mapping tests"
     }
   ]
 }

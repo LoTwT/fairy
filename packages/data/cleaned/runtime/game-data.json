@@ -2,7 +2,7 @@
   "kind": "gameData",
   "schemaVersion": "cleaned-game-data-artifact/v0.1",
   "dataVersion": "fairy-v0.1.0-nanoka-runtime",
-  "generatedAt": "2026-05-15T18:46:10+08:00",
+  "generatedAt": "2026-05-15T20:56:00+08:00",
   "sourceManifestPath": "data/source/source-manifest.json",
   "runtimeCutoverReady": true,
   "runtimeSourcePolicy": {
@@ -22,7 +22,7 @@
     "gameVersion": "ZZZ-2.8",
     "dataVersion": "0.1.0",
     "sourceVersion": "nanoka-zzz@2.8",
-    "generatedAt": "2026-05-15T18:46:10+08:00",
+    "generatedAt": "2026-05-15T20:56:00+08:00",
     "sources": [
       {
         "id": "nanoka-zzz",
@@ -30,9 +30,9 @@
         "url": "https://static.nanoka.cc/manifest.json",
         "gameVersion": "ZZZ-2.8",
         "sourceVersion": "2.8",
-        "fetchedAt": "2026-05-15T17:15:00+08:00",
-        "parsedAt": "2026-05-15T18:46:10+08:00",
-        "parserVersion": "nanoka-runtime-cutover-v0.1.0",
+        "fetchedAt": "2026-05-15T20:56:00+08:00",
+        "parsedAt": "2026-05-15T20:56:00+08:00",
+        "parserVersion": "nanoka-runtime-bangboo-batch-v0.1.0",
         "licenseNote": "Runtime cleaned data uses lo-user-approved nanoka live 2.8 evidence; archived Excel/D-17/D-12 sources are retained for audit only."
       }
     ],
@@ -124,6 +124,791 @@
       }
     },
     "bangboos": {
+      "53001": {
+        "id": "53001",
+        "label": {
+          "zh": "企鹅布",
+          "en": "Penguinboo"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53001.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 3827.5423,
+            "attack": 6198.0006,
+            "defense": 723.8011,
+            "impact": 90,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 120
+          }
+        },
+        "skillIds": [
+          "5300101",
+          "5300102"
+        ],
+        "sourceAliases": [
+          "企鹅布",
+          "Penguinboo"
+        ]
+      },
+      "53002": {
+        "id": "53002",
+        "label": {
+          "zh": "招财布",
+          "en": "Luckyboo"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53002.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 3827.5423,
+            "attack": 6198.0006,
+            "defense": 781.2633,
+            "impact": 94,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 112
+          }
+        },
+        "skillIds": [
+          "5300201"
+        ],
+        "sourceAliases": [
+          "招财布",
+          "Luckyboo"
+        ]
+      },
+      "53003": {
+        "id": "53003",
+        "label": {
+          "zh": "寻宝布",
+          "en": "Exploreboo"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53003.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 4632.324,
+            "attack": 6074.2587,
+            "defense": 666.3389,
+            "impact": 100,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 100
+          }
+        },
+        "skillIds": [],
+        "sourceAliases": [
+          "寻宝布",
+          "Exploreboo"
+        ]
+      },
+      "53004": {
+        "id": "53004",
+        "label": {
+          "zh": "扑击布",
+          "en": "Sumoboo"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53004.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 3827.5423,
+            "attack": 5825.7808,
+            "defense": 781.2633,
+            "impact": 112,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 88
+          }
+        },
+        "skillIds": [
+          "5300401"
+        ],
+        "sourceAliases": [
+          "扑击布",
+          "Sumoboo"
+        ]
+      },
+      "53005": {
+        "id": "53005",
+        "label": {
+          "zh": "纸壳布",
+          "en": "Paperboo"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53005.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 4632.324,
+            "attack": 5825.7808,
+            "defense": 781.2633,
+            "impact": 100,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 100
+          }
+        },
+        "skillIds": [
+          "5300501",
+          "5300502"
+        ],
+        "sourceAliases": [
+          "纸壳布",
+          "Paperboo"
+        ]
+      },
+      "53006": {
+        "id": "53006",
+        "label": {
+          "zh": "纸袋布",
+          "en": "Bagboo"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53006.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 3827.5423,
+            "attack": 6570.2204,
+            "defense": 781.2633,
+            "impact": 94,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 100
+          }
+        },
+        "skillIds": [
+          "5300601",
+          "5300602"
+        ],
+        "sourceAliases": [
+          "纸袋布",
+          "Bagboo"
+        ]
+      },
+      "53007": {
+        "id": "53007",
+        "label": {
+          "zh": "泪眼布",
+          "en": "Cryboo"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53007.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 3827.5423,
+            "attack": 6198.0006,
+            "defense": 723.8011,
+            "impact": 90,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 120
+          }
+        },
+        "skillIds": [
+          "5300701",
+          "5300702"
+        ],
+        "sourceAliases": [
+          "泪眼布",
+          "Cryboo"
+        ]
+      },
+      "53008": {
+        "id": "53008",
+        "label": {
+          "zh": "果核布",
+          "en": "Avocaboo"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53008.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 4632.324,
+            "attack": 5825.7808,
+            "defense": 781.2633,
+            "impact": 100,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 100
+          }
+        },
+        "skillIds": [],
+        "sourceAliases": [
+          "果核布",
+          "Avocaboo"
+        ]
+      },
+      "53009": {
+        "id": "53009",
+        "label": {
+          "zh": "飞靶布",
+          "en": "Boollseye"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53009.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 3827.5423,
+            "attack": 6570.2204,
+            "defense": 781.2633,
+            "impact": 94,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 100
+          }
+        },
+        "skillIds": [
+          "5300901",
+          "5300902"
+        ],
+        "sourceAliases": [
+          "飞靶布",
+          "Boollseye"
+        ]
+      },
+      "53010": {
+        "id": "53010",
+        "label": {
+          "zh": "电击布",
+          "en": "Electroboo"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53010.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 3827.5423,
+            "attack": 6198.0006,
+            "defense": 723.8011,
+            "impact": 90,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 120
+          }
+        },
+        "skillIds": [
+          "5301001",
+          "5301002"
+        ],
+        "sourceAliases": [
+          "电击布",
+          "Electroboo"
+        ]
+      },
+      "53011": {
+        "id": "53011",
+        "label": {
+          "zh": "磁力布",
+          "en": "Magnetiboo"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53011.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 3827.5423,
+            "attack": 6570.2204,
+            "defense": 781.2633,
+            "impact": 94,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 100
+          }
+        },
+        "skillIds": [
+          "5301101"
+        ],
+        "sourceAliases": [
+          "磁力布",
+          "Magnetiboo"
+        ]
+      },
+      "53012": {
+        "id": "53012",
+        "label": {
+          "zh": "气压布",
+          "en": "Booressure"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53012.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 4632.324,
+            "attack": 5825.7808,
+            "defense": 781.2633,
+            "impact": 100,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 100
+          }
+        },
+        "skillIds": [],
+        "sourceAliases": [
+          "气压布",
+          "Booressure"
+        ]
+      },
+      "53013": {
+        "id": "53013",
+        "label": {
+          "zh": "不良布",
+          "en": "Baddieboo"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53013.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 3827.5423,
+            "attack": 6570.2204,
+            "defense": 781.2633,
+            "impact": 94,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 100
+          }
+        },
+        "skillIds": [
+          "5301301",
+          "5301302"
+        ],
+        "sourceAliases": [
+          "不良布",
+          "Baddieboo"
+        ]
+      },
+      "53014": {
+        "id": "53014",
+        "label": {
+          "zh": "加班布",
+          "en": "Overtimeboo"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53014.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 3827.5423,
+            "attack": 6570.2204,
+            "defense": 781.2633,
+            "impact": 94,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 100
+          }
+        },
+        "skillIds": [
+          "5301401"
+        ],
+        "sourceAliases": [
+          "加班布",
+          "Overtimeboo"
+        ]
+      },
+      "53015": {
+        "id": "53015",
+        "label": {
+          "zh": "格斗布",
+          "en": "Brawlerboo"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53015.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 3827.5423,
+            "attack": 6570.2204,
+            "defense": 781.2633,
+            "impact": 94,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 100
+          }
+        },
+        "skillIds": [
+          "5301501",
+          "5301502"
+        ],
+        "sourceAliases": [
+          "格斗布",
+          "Brawlerboo"
+        ]
+      },
+      "53016": {
+        "id": "53016",
+        "label": {
+          "zh": "圣剑布",
+          "en": "Excaliboo"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53016.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 3827.5423,
+            "attack": 6570.2204,
+            "defense": 781.2633,
+            "impact": 94,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 100
+          }
+        },
+        "skillIds": [
+          "53016-a",
+          "5301603"
+        ],
+        "sourceAliases": [
+          "圣剑布",
+          "Excaliboo"
+        ]
+      },
+      "53017": {
+        "id": "53017",
+        "label": {
+          "zh": "骑士布",
+          "en": "Knightboo"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53017.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 4632.324,
+            "attack": 5825.7808,
+            "defense": 781.2633,
+            "impact": 100,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 100
+          }
+        },
+        "skillIds": [
+          "5301702"
+        ],
+        "sourceAliases": [
+          "骑士布",
+          "Knightboo"
+        ]
+      },
+      "53019": {
+        "id": "53019",
+        "label": {
+          "zh": "乐玩布",
+          "en": "Bild N. Boolok"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53019.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 3827.5423,
+            "attack": 6570.2204,
+            "defense": 781.2633,
+            "impact": 94,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 100
+          }
+        },
+        "skillIds": [
+          "5301901",
+          "5301902"
+        ],
+        "sourceAliases": [
+          "乐玩布",
+          "Bild N. Boolok"
+        ]
+      },
+      "53021": {
+        "id": "53021",
+        "label": {
+          "zh": "幽浮布",
+          "en": "Booltergeist"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53021.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 3827.5423,
+            "attack": 6570.2204,
+            "defense": 781.2633,
+            "impact": 94,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 100
+          }
+        },
+        "skillIds": [
+          "5302101",
+          "5302102"
+        ],
+        "sourceAliases": [
+          "幽浮布",
+          "Booltergeist"
+        ]
+      },
+      "54001": {
+        "id": "54001",
+        "label": {
+          "zh": "鲨牙布",
+          "en": "Sharkboo"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54001.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 4210.2983,
+            "attack": 8057.0996,
+            "defense": 723.8011,
+            "impact": 99,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 132
+          }
+        },
+        "skillIds": [
+          "5400101",
+          "5400102"
+        ],
+        "sourceAliases": [
+          "鲨牙布",
+          "Sharkboo"
+        ]
+      },
+      "54002": {
+        "id": "54002",
+        "label": {
+          "zh": "阿全",
+          "en": "Safety"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54002.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 4210.2983,
+            "attack": 8863.4072,
+            "defense": 666.3389,
+            "impact": 103,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 110
+          }
+        },
+        "skillIds": [
+          "5400201",
+          "5400202"
+        ],
+        "sourceAliases": [
+          "阿全",
+          "Safety"
+        ]
+      },
+      "54003": {
+        "id": "54003",
+        "label": {
+          "zh": "恶魔布",
+          "en": "Devilboo"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54003.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 3827.5423,
+            "attack": 6570.2204,
+            "defense": 723.8011,
+            "impact": 90,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 108
+          }
+        },
+        "skillIds": [
+          "5400301",
+          "54003-c"
+        ],
+        "sourceAliases": [
+          "恶魔布",
+          "Devilboo"
+        ]
+      },
+      "54004": {
+        "id": "54004",
+        "label": {
+          "zh": "巴特勒",
+          "en": "Butler"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54004.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 5095.1564,
+            "attack": 7896.4369,
+            "defense": 666.3389,
+            "impact": 110,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 110
+          }
+        },
+        "skillIds": [
+          "5400402"
+        ],
+        "sourceAliases": [
+          "巴特勒",
+          "Butler"
+        ]
+      },
+      "54005": {
+        "id": "54005",
+        "label": {
+          "zh": "艾米莉安",
+          "en": "Amillion"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54005.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 4210.2983,
+            "attack": 8863.4072,
+            "defense": 666.3389,
+            "impact": 103,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 110
+          }
+        },
+        "skillIds": [
+          "5400501",
+          "5400502"
+        ],
+        "sourceAliases": [
+          "艾米莉安",
+          "Amillion"
+        ]
+      },
+      "54006": {
+        "id": "54006",
+        "label": {
+          "zh": "飚速布",
+          "en": "Rocketboo"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54006.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 4210.2983,
+            "attack": 8541.0877,
+            "defense": 723.8011,
+            "impact": 99,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 119
+          }
+        },
+        "skillIds": [
+          "5400601",
+          "5400602"
+        ],
+        "sourceAliases": [
+          "飚速布",
+          "Rocketboo"
+        ]
+      },
       "54008": {
         "id": "54008",
         "label": {
@@ -148,28 +933,1846 @@
           }
         },
         "skillIds": [
-          "5400801"
+          "5400801",
+          "5400802"
         ],
         "sourceAliases": [
           "插头布",
-          "Plugboo",
           "Plugboo"
+        ]
+      },
+      "54009": {
+        "id": "54009",
+        "label": {
+          "zh": "共鸣布",
+          "en": "Resonaboo"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54009.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 4210.2983,
+            "attack": 8057.0996,
+            "defense": 723.8011,
+            "impact": 99,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 132
+          }
+        },
+        "skillIds": [
+          "5400901",
+          "5400902"
+        ],
+        "sourceAliases": [
+          "共鸣布",
+          "Resonaboo"
+        ]
+      },
+      "54010": {
+        "id": "54010",
+        "label": {
+          "zh": "阿饭",
+          "en": "Biggest Fan"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54010.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 5095.1564,
+            "attack": 7896.4369,
+            "defense": 666.3389,
+            "impact": 110,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 110
+          }
+        },
+        "skillIds": [
+          "5401002"
+        ],
+        "sourceAliases": [
+          "阿饭",
+          "BiggestFan",
+          "Biggest Fan"
+        ]
+      },
+      "54011": {
+        "id": "54011",
+        "label": {
+          "zh": "赤红莫库斯",
+          "en": "Red Moccus"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54011.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 4210.2983,
+            "attack": 8863.4072,
+            "defense": 666.3389,
+            "impact": 103,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 110
+          }
+        },
+        "skillIds": [
+          "5401101",
+          "5401102"
+        ],
+        "sourceAliases": [
+          "赤红莫库斯",
+          "Red Moccus"
+        ]
+      },
+      "54012": {
+        "id": "54012",
+        "label": {
+          "zh": "阿崔巡查",
+          "en": "Officer Cui"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54012.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 4210.2983,
+            "attack": 8863.4072,
+            "defense": 666.3389,
+            "impact": 103,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 110
+          }
+        },
+        "skillIds": [
+          "5401201",
+          "5401202"
+        ],
+        "sourceAliases": [
+          "阿崔巡查",
+          "Officer Cui"
+        ]
+      },
+      "54013": {
+        "id": "54013",
+        "label": {
+          "zh": "左轮布",
+          "en": "Bangvolver"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54013.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 4210.2983,
+            "attack": 8057.0996,
+            "defense": 781.2633,
+            "impact": 103,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 123
+          }
+        },
+        "skillIds": [
+          "54013-a",
+          "5401302"
+        ],
+        "sourceAliases": [
+          "左轮布",
+          "Bangvolver"
+        ]
+      },
+      "54014": {
+        "id": "54014",
+        "label": {
+          "zh": "格列佛探员",
+          "en": "Agent Gulliver"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54014.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 4210.2983,
+            "attack": 8380.425,
+            "defense": 666.3389,
+            "impact": 103,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 123
+          }
+        },
+        "skillIds": [
+          "5401401",
+          "5401402"
+        ],
+        "sourceAliases": [
+          "格列佛探员",
+          "Agent Gulliver"
+        ]
+      },
+      "54015": {
+        "id": "54015",
+        "label": {
+          "zh": "咔嚓仔",
+          "en": "Snap"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54015.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 5095.1564,
+            "attack": 7896.4369,
+            "defense": 666.3389,
+            "impact": 110,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 110
+          }
+        },
+        "skillIds": [
+          "5401502"
+        ],
+        "sourceAliases": [
+          "咔嚓仔",
+          "Snap"
+        ]
+      },
+      "54016": {
+        "id": "54016",
+        "label": {
+          "zh": "罗宾",
+          "en": "Robin"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54016.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 4210.2983,
+            "attack": 8621.4161,
+            "defense": 666.3389,
+            "impact": 117,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 117
+          }
+        },
+        "skillIds": [
+          "54016-a",
+          "5401604"
+        ],
+        "sourceAliases": [
+          "罗宾",
+          "Robin"
+        ]
+      },
+      "54017": {
+        "id": "54017",
+        "label": {
+          "zh": "狮耶",
+          "en": "Belion"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54017.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 4210.2983,
+            "attack": 8863.4072,
+            "defense": 666.3389,
+            "impact": 103,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 110
+          }
+        },
+        "skillIds": [
+          "5401701",
+          "5401702"
+        ],
+        "sourceAliases": [
+          "狮耶",
+          "Belion"
+        ]
+      },
+      "54018": {
+        "id": "54018",
+        "label": {
+          "zh": "艾丝弥小姐",
+          "en": "Miss Esme"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54018.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 5095.1564,
+            "attack": 7896.4369,
+            "defense": 666.3389,
+            "impact": 110,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 110
+          }
+        },
+        "skillIds": [
+          "5401802"
+        ],
+        "sourceAliases": [
+          "艾丝弥小姐",
+          "Miss Esme"
+        ]
+      },
+      "54019": {
+        "id": "54019",
+        "label": {
+          "zh": "「墨丘利」",
+          "en": "Mercury"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54019.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 4210.2983,
+            "attack": 8863.4072,
+            "defense": 666.3389,
+            "impact": 103,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 110
+          }
+        },
+        "skillIds": [
+          "5401901",
+          "5401902"
+        ],
+        "sourceAliases": [
+          "「墨丘利」",
+          "「Mercury」",
+          "Mercury"
+        ]
+      },
+      "54020": {
+        "id": "54020",
+        "label": {
+          "zh": "比克布利克",
+          "en": "Birkblick"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54020.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 4210.2983,
+            "attack": 7896.4369,
+            "defense": 666.3389,
+            "impact": 123,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 97
+          }
+        },
+        "skillIds": [
+          "54020-a",
+          "5402003"
+        ],
+        "sourceAliases": [
+          "比克布利克",
+          "Birkblick"
+        ]
+      },
+      "54021": {
+        "id": "54021",
+        "label": {
+          "zh": "芽芽",
+          "en": "Sprout"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54021.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 4210.2983,
+            "attack": 8863.4072,
+            "defense": 666.3389,
+            "impact": 103,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 110
+          }
+        },
+        "skillIds": [
+          "54021-a",
+          "5402103"
+        ],
+        "sourceAliases": [
+          "芽芽",
+          "Sprout"
         ]
       }
     },
     "bangbooSkills": {
+      "5300101": {
+        "id": "5300101",
+        "bangbooId": "53001",
+        "label": {
+          "zh": "冰刀舞"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53001.json",
+          "dataPath": "/skill/a/level/1"
+        },
+        "tags": [
+          "special"
+        ],
+        "segments": [
+          {
+            "id": "5300101-hit",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 4.62
+            },
+            "dazeMultiplierByLevel": {
+              "1": 2.7
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "special"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53001.json",
+              "dataPath": "/skill/a/level/1"
+            }
+          }
+        ]
+      },
+      "5300102": {
+        "id": "5300102",
+        "bangbooId": "53001",
+        "label": {
+          "zh": "冰暴回旋"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53001.json",
+          "dataPath": "/skill/c/level/1"
+        },
+        "tags": [
+          "chain"
+        ],
+        "segments": [
+          {
+            "id": "5300102-hit",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 9.57
+            },
+            "dazeMultiplierByLevel": {
+              "1": 1.37
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "chain"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53001.json",
+              "dataPath": "/skill/c/level/1"
+            }
+          }
+        ]
+      },
+      "5300201": {
+        "id": "5300201",
+        "bangbooId": "53002",
+        "label": {
+          "zh": "一掷千金"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53002.json",
+          "dataPath": "/skill/a/level/1"
+        },
+        "tags": [
+          "special"
+        ],
+        "segments": [
+          {
+            "id": "5300201-hit",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 6.16
+            },
+            "dazeMultiplierByLevel": {
+              "1": 3.598
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "special"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53002.json",
+              "dataPath": "/skill/a/level/1"
+            }
+          }
+        ]
+      },
+      "5300401": {
+        "id": "5300401",
+        "bangbooId": "53004",
+        "label": {
+          "zh": "决胜技·岩崩"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53004.json",
+          "dataPath": "/skill/a/level/1"
+        },
+        "tags": [
+          "special"
+        ],
+        "segments": [
+          {
+            "id": "5300401-hit",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 3.23
+            },
+            "dazeMultiplierByLevel": {
+              "1": 1.89
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "special"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53004.json",
+              "dataPath": "/skill/a/level/1"
+            }
+          }
+        ]
+      },
+      "5300501": {
+        "id": "5300501",
+        "bangbooId": "53005",
+        "label": {
+          "zh": "诱饵纸装甲"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53005.json",
+          "dataPath": "/skill/a/level/1"
+        },
+        "tags": [
+          "special"
+        ],
+        "segments": [
+          {
+            "id": "5300501-hit",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 4.62
+            },
+            "dazeMultiplierByLevel": {
+              "1": 2.7
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "special"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53005.json",
+              "dataPath": "/skill/a/level/1"
+            }
+          }
+        ]
+      },
+      "5300502": {
+        "id": "5300502",
+        "bangbooId": "53005",
+        "label": {
+          "zh": "纸装甲·冲击模式"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53005.json",
+          "dataPath": "/skill/c/level/1"
+        },
+        "tags": [
+          "chain"
+        ],
+        "segments": [
+          {
+            "id": "5300502-hit",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 6.65
+            },
+            "dazeMultiplierByLevel": {
+              "1": 0.95
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "chain"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53005.json",
+              "dataPath": "/skill/c/level/1"
+            }
+          }
+        ]
+      },
+      "5300601": {
+        "id": "5300601",
+        "bangbooId": "53006",
+        "label": {
+          "zh": "近一点，再近一点…"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53006.json",
+          "dataPath": "/skill/a/level/1"
+        },
+        "tags": [
+          "special"
+        ],
+        "segments": [
+          {
+            "id": "5300601-hit",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 3.6
+            },
+            "dazeMultiplierByLevel": {
+              "1": 2.11
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "special"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53006.json",
+              "dataPath": "/skill/a/level/1"
+            }
+          }
+        ]
+      },
+      "5300602": {
+        "id": "5300602",
+        "bangbooId": "53006",
+        "label": {
+          "zh": "够近了！"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53006.json",
+          "dataPath": "/skill/c/level/1"
+        },
+        "tags": [
+          "chain"
+        ],
+        "segments": [
+          {
+            "id": "5300602-hit",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 7.64
+            },
+            "dazeMultiplierByLevel": {
+              "1": 1.09
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "chain"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53006.json",
+              "dataPath": "/skill/c/level/1"
+            }
+          }
+        ]
+      },
+      "5300701": {
+        "id": "5300701",
+        "bangbooId": "53007",
+        "label": {
+          "zh": "拉环爆弹"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53007.json",
+          "dataPath": "/skill/a/level/1"
+        },
+        "tags": [
+          "special"
+        ],
+        "segments": [
+          {
+            "id": "5300701-hit",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 2.8
+            },
+            "dazeMultiplierByLevel": {
+              "1": 1.64
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "special"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53007.json",
+              "dataPath": "/skill/a/level/1"
+            }
+          }
+        ]
+      },
+      "5300702": {
+        "id": "5300702",
+        "bangbooId": "53007",
+        "label": {
+          "zh": "惊爆礼物"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53007.json",
+          "dataPath": "/skill/c/level/1"
+        },
+        "tags": [
+          "chain"
+        ],
+        "segments": [
+          {
+            "id": "5300702-hit",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 6.94
+            },
+            "dazeMultiplierByLevel": {
+              "1": 0.99
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "chain"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53007.json",
+              "dataPath": "/skill/c/level/1"
+            }
+          }
+        ]
+      },
+      "5300901": {
+        "id": "5300901",
+        "bangbooId": "53009",
+        "label": {
+          "zh": "正中红心"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53009.json",
+          "dataPath": "/skill/a/level/1"
+        },
+        "tags": [
+          "special"
+        ],
+        "segments": [
+          {
+            "id": "5300901-hit",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 3.2
+            },
+            "dazeMultiplierByLevel": {
+              "1": 1.87
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "special"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53009.json",
+              "dataPath": "/skill/a/level/1"
+            }
+          }
+        ]
+      },
+      "5300902": {
+        "id": "5300902",
+        "bangbooId": "53009",
+        "label": {
+          "zh": "舍命狂镖"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53009.json",
+          "dataPath": "/skill/c/level/1"
+        },
+        "tags": [
+          "chain"
+        ],
+        "segments": [
+          {
+            "id": "5300902-hit",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 8.75
+            },
+            "dazeMultiplierByLevel": {
+              "1": 1.25
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "chain"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53009.json",
+              "dataPath": "/skill/c/level/1"
+            }
+          }
+        ]
+      },
+      "5301001": {
+        "id": "5301001",
+        "bangbooId": "53010",
+        "label": {
+          "zh": "百万伏特！"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53010.json",
+          "dataPath": "/skill/a/level/1"
+        },
+        "tags": [
+          "special"
+        ],
+        "segments": [
+          {
+            "id": "5301001-hit",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 3.6
+            },
+            "dazeMultiplierByLevel": {
+              "1": 2.11
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "special"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53010.json",
+              "dataPath": "/skill/a/level/1"
+            }
+          }
+        ]
+      },
+      "5301002": {
+        "id": "5301002",
+        "bangbooId": "53010",
+        "label": {
+          "zh": "亿万伏特！"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53010.json",
+          "dataPath": "/skill/c/level/1"
+        },
+        "tags": [
+          "chain"
+        ],
+        "segments": [
+          {
+            "id": "5301002-hit",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 7.12
+            },
+            "dazeMultiplierByLevel": {
+              "1": 1.02
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "chain"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53010.json",
+              "dataPath": "/skill/c/level/1"
+            }
+          }
+        ]
+      },
+      "5301101": {
+        "id": "5301101",
+        "bangbooId": "53011",
+        "label": {
+          "zh": "磁力锁定"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53011.json",
+          "dataPath": "/skill/a/level/1"
+        },
+        "tags": [
+          "special"
+        ],
+        "segments": [
+          {
+            "id": "5301101-hit",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 4.8
+            },
+            "dazeMultiplierByLevel": {
+              "1": 2.81
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "special"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53011.json",
+              "dataPath": "/skill/a/level/1"
+            }
+          }
+        ]
+      },
+      "5301301": {
+        "id": "5301301",
+        "bangbooId": "53013",
+        "label": {
+          "zh": "火箭炮轰"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53013.json",
+          "dataPath": "/skill/a/level/1"
+        },
+        "tags": [
+          "special"
+        ],
+        "segments": [
+          {
+            "id": "5301301-hit",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 4
+            },
+            "dazeMultiplierByLevel": {
+              "1": 2.34
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "special"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53013.json",
+              "dataPath": "/skill/a/level/1"
+            }
+          }
+        ]
+      },
+      "5301302": {
+        "id": "5301302",
+        "bangbooId": "53013",
+        "label": {
+          "zh": "火箭爆轰！"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53013.json",
+          "dataPath": "/skill/c/level/1"
+        },
+        "tags": [
+          "chain"
+        ],
+        "segments": [
+          {
+            "id": "5301302-hit",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 6.83
+            },
+            "dazeMultiplierByLevel": {
+              "1": 0.98
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "chain"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53013.json",
+              "dataPath": "/skill/c/level/1"
+            }
+          }
+        ]
+      },
+      "5301401": {
+        "id": "5301401",
+        "bangbooId": "53014",
+        "label": {
+          "zh": "班味全开！"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53014.json",
+          "dataPath": "/skill/a/level/1"
+        },
+        "tags": [
+          "special"
+        ],
+        "segments": [
+          {
+            "id": "5301401-hit",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 3.36
+            },
+            "dazeMultiplierByLevel": {
+              "1": 2.81
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "special"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53014.json",
+              "dataPath": "/skill/a/level/1"
+            }
+          }
+        ]
+      },
+      "5301501": {
+        "id": "5301501",
+        "bangbooId": "53015",
+        "label": {
+          "zh": "邦布星陨击！"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53015.json",
+          "dataPath": "/skill/a/level/1"
+        },
+        "tags": [
+          "special"
+        ],
+        "segments": [
+          {
+            "id": "5301501-hit",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 5.6
+            },
+            "dazeMultiplierByLevel": {
+              "1": 3.28
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "special"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53015.json",
+              "dataPath": "/skill/a/level/1"
+            }
+          }
+        ]
+      },
+      "5301502": {
+        "id": "5301502",
+        "bangbooId": "53015",
+        "label": {
+          "zh": "烈风千击"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53015.json",
+          "dataPath": "/skill/c/level/1"
+        },
+        "tags": [
+          "chain"
+        ],
+        "segments": [
+          {
+            "id": "5301502-hit",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 8.46
+            },
+            "dazeMultiplierByLevel": {
+              "1": 1.21
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "chain"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53015.json",
+              "dataPath": "/skill/c/level/1"
+            }
+          }
+        ]
+      },
+      "5301603": {
+        "id": "5301603",
+        "bangbooId": "53016",
+        "label": {
+          "zh": "破阵王威"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53016.json",
+          "dataPath": "/skill/c/level/1"
+        },
+        "tags": [
+          "chain"
+        ],
+        "segments": [
+          {
+            "id": "5301603-hit",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 9.63
+            },
+            "dazeMultiplierByLevel": {
+              "1": 1.38
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "chain"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53016.json",
+              "dataPath": "/skill/c/level/1"
+            }
+          }
+        ]
+      },
+      "5301702": {
+        "id": "5301702",
+        "bangbooId": "53017",
+        "label": {
+          "zh": "骑士，蹦蹦冲击！"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53017.json",
+          "dataPath": "/skill/c/level/1"
+        },
+        "tags": [
+          "chain"
+        ],
+        "segments": [
+          {
+            "id": "5301702-hit",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 0.86
+            },
+            "dazeMultiplierByLevel": {
+              "1": 0.12
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "chain"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53017.json",
+              "dataPath": "/skill/c/level/1"
+            }
+          }
+        ]
+      },
+      "5301901": {
+        "id": "5301901",
+        "bangbooId": "53019",
+        "label": {
+          "zh": "积木跳房子"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53019.json",
+          "dataPath": "/skill/a/level/1"
+        },
+        "tags": [
+          "special"
+        ],
+        "segments": [
+          {
+            "id": "5301901-hit",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 4
+            },
+            "dazeMultiplierByLevel": {
+              "1": 2.34
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "special"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53019.json",
+              "dataPath": "/skill/a/level/1"
+            }
+          }
+        ]
+      },
+      "5301902": {
+        "id": "5301902",
+        "bangbooId": "53019",
+        "label": {
+          "zh": "城堡躲避球"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53019.json",
+          "dataPath": "/skill/c/level/1"
+        },
+        "tags": [
+          "chain"
+        ],
+        "segments": [
+          {
+            "id": "5301902-hit",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 8.58
+            },
+            "dazeMultiplierByLevel": {
+              "1": 1.23
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "chain"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53019.json",
+              "dataPath": "/skill/c/level/1"
+            }
+          }
+        ]
+      },
+      "5302101": {
+        "id": "5302101",
+        "bangbooId": "53021",
+        "label": {
+          "zh": "诅咒追光"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53021.json",
+          "dataPath": "/skill/a/level/1"
+        },
+        "tags": [
+          "special"
+        ],
+        "segments": [
+          {
+            "id": "5302101-hit",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 4.8
+            },
+            "dazeMultiplierByLevel": {
+              "1": 2.81
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "special"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53021.json",
+              "dataPath": "/skill/a/level/1"
+            }
+          }
+        ]
+      },
+      "5302102": {
+        "id": "5302102",
+        "bangbooId": "53021",
+        "label": {
+          "zh": "捣蛋鬼出没"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53021.json",
+          "dataPath": "/skill/c/level/1"
+        },
+        "tags": [
+          "chain"
+        ],
+        "segments": [
+          {
+            "id": "5302102-hit",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 8.34
+            },
+            "dazeMultiplierByLevel": {
+              "1": 1.19
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "chain"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53021.json",
+              "dataPath": "/skill/c/level/1"
+            }
+          }
+        ]
+      },
+      "5400101": {
+        "id": "5400101",
+        "bangbooId": "54001",
+        "label": {
+          "zh": "旱地猎鲨"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54001.json",
+          "dataPath": "/skill/a/level/1"
+        },
+        "tags": [
+          "special"
+        ],
+        "segments": [
+          {
+            "id": "5400101-hit",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 3.84
+            },
+            "dazeMultiplierByLevel": {
+              "1": 1.4
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "special"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54001.json",
+              "dataPath": "/skill/a/level/1"
+            }
+          }
+        ]
+      },
+      "5400102": {
+        "id": "5400102",
+        "bangbooId": "54001",
+        "label": {
+          "zh": "追猎不休"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54001.json",
+          "dataPath": "/skill/c/level/1"
+        },
+        "tags": [
+          "chain"
+        ],
+        "segments": [
+          {
+            "id": "5400102-hit",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 4.61
+            },
+            "dazeMultiplierByLevel": {
+              "1": 0.93
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "chain"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54001.json",
+              "dataPath": "/skill/c/level/1"
+            }
+          }
+        ]
+      },
+      "5400201": {
+        "id": "5400201",
+        "bangbooId": "54002",
+        "label": {
+          "zh": "掘进冲刺"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54002.json",
+          "dataPath": "/skill/a/level/1"
+        },
+        "tags": [
+          "special"
+        ],
+        "segments": [
+          {
+            "id": "5400201-hit",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 5.76
+            },
+            "dazeMultiplierByLevel": {
+              "1": 2.11
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "special"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54002.json",
+              "dataPath": "/skill/a/level/1"
+            }
+          }
+        ]
+      },
+      "5400202": {
+        "id": "5400202",
+        "bangbooId": "54002",
+        "label": {
+          "zh": "破拆钻击"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54002.json",
+          "dataPath": "/skill/c/level/1"
+        },
+        "tags": [
+          "chain"
+        ],
+        "segments": [
+          {
+            "id": "5400202-hit",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 6.65
+            },
+            "dazeMultiplierByLevel": {
+              "1": 0.95
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "chain"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54002.json",
+              "dataPath": "/skill/c/level/1"
+            }
+          }
+        ]
+      },
+      "5400301": {
+        "id": "5400301",
+        "bangbooId": "54003",
+        "label": {
+          "zh": "幻惑之吻"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54003.json",
+          "dataPath": "/skill/a/level/1"
+        },
+        "tags": [
+          "special"
+        ],
+        "segments": [
+          {
+            "id": "5400301-hit",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 2
+            },
+            "dazeMultiplierByLevel": {
+              "1": 1.17
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "special"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54003.json",
+              "dataPath": "/skill/a/level/1"
+            }
+          }
+        ]
+      },
+      "5400402": {
+        "id": "5400402",
+        "bangbooId": "54004",
+        "label": {
+          "zh": "午后甜点"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54004.json",
+          "dataPath": "/skill/c/level/1"
+        },
+        "tags": [
+          "chain"
+        ],
+        "segments": [
+          {
+            "id": "5400402-hit",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 6.83
+            },
+            "dazeMultiplierByLevel": {
+              "1": 0.98
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "chain"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54004.json",
+              "dataPath": "/skill/c/level/1"
+            }
+          }
+        ]
+      },
+      "5400501": {
+        "id": "5400501",
+        "bangbooId": "54005",
+        "label": {
+          "zh": "便携机炮·扫债者"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54005.json",
+          "dataPath": "/skill/a/level/1"
+        },
+        "tags": [
+          "special"
+        ],
+        "segments": [
+          {
+            "id": "5400501-hit",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 8.1
+            },
+            "dazeMultiplierByLevel": {
+              "1": 0
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "special"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54005.json",
+              "dataPath": "/skill/a/level/1"
+            }
+          }
+        ]
+      },
+      "5400502": {
+        "id": "5400502",
+        "bangbooId": "54005",
+        "label": {
+          "zh": "便携机炮·清债连射"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54005.json",
+          "dataPath": "/skill/c/level/1"
+        },
+        "tags": [
+          "chain"
+        ],
+        "segments": [
+          {
+            "id": "5400502-hit",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 8.4
+            },
+            "dazeMultiplierByLevel": {
+              "1": 1.2
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "chain"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54005.json",
+              "dataPath": "/skill/c/level/1"
+            }
+          }
+        ]
+      },
+      "5400601": {
+        "id": "5400601",
+        "bangbooId": "54006",
+        "label": {
+          "zh": "Boom！"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54006.json",
+          "dataPath": "/skill/a/level/1"
+        },
+        "tags": [
+          "special"
+        ],
+        "segments": [
+          {
+            "id": "5400601-hit",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 5.76
+            },
+            "dazeMultiplierByLevel": {
+              "1": 2.11
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "special"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54006.json",
+              "dataPath": "/skill/a/level/1"
+            }
+          }
+        ]
+      },
+      "5400602": {
+        "id": "5400602",
+        "bangbooId": "54006",
+        "label": {
+          "zh": "爆轰速递"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54006.json",
+          "dataPath": "/skill/c/level/1"
+        },
+        "tags": [
+          "chain"
+        ],
+        "segments": [
+          {
+            "id": "5400602-hit",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 5.43
+            },
+            "dazeMultiplierByLevel": {
+              "1": 0.78
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "chain"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54006.json",
+              "dataPath": "/skill/c/level/1"
+            }
+          }
+        ]
+      },
       "5400801": {
         "id": "5400801",
         "bangbooId": "54008",
         "label": {
-          "zh": "电流狙击",
-          "en": "Electric Current Snipe"
+          "zh": "电流狙击"
         },
         "source": {
           "sourceId": "nanoka-zzz",
           "sourceVersion": "2.8",
           "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json",
-          "dataPath": "/skill_prop/5400801"
+          "dataPath": "/skill/a/level/1"
         },
         "tags": [
           "special"
@@ -193,7 +2796,1147 @@
               "sourceId": "nanoka-zzz",
               "sourceVersion": "2.8",
               "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json",
-              "dataPath": "/skill_prop/5400801"
+              "dataPath": "/skill/a/level/1"
+            }
+          }
+        ]
+      },
+      "5400802": {
+        "id": "5400802",
+        "bangbooId": "54008",
+        "label": {
+          "zh": "高压电阻"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json",
+          "dataPath": "/skill/c/level/1"
+        },
+        "tags": [
+          "chain"
+        ],
+        "segments": [
+          {
+            "id": "5400802-hit",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 6.88
+            },
+            "dazeMultiplierByLevel": {
+              "1": 0.98
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "chain"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json",
+              "dataPath": "/skill/c/level/1"
+            }
+          }
+        ]
+      },
+      "5400901": {
+        "id": "5400901",
+        "bangbooId": "54009",
+        "label": {
+          "zh": "迷你黑洞"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54009.json",
+          "dataPath": "/skill/a/level/1"
+        },
+        "tags": [
+          "special"
+        ],
+        "segments": [
+          {
+            "id": "5400901-hit",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 8.96
+            },
+            "dazeMultiplierByLevel": {
+              "1": 3.28
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "special"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54009.json",
+              "dataPath": "/skill/a/level/1"
+            }
+          }
+        ]
+      },
+      "5400902": {
+        "id": "5400902",
+        "bangbooId": "54009",
+        "label": {
+          "zh": "原初黑洞"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54009.json",
+          "dataPath": "/skill/c/level/1"
+        },
+        "tags": [
+          "chain"
+        ],
+        "segments": [
+          {
+            "id": "5400902-hit",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 6.53
+            },
+            "dazeMultiplierByLevel": {
+              "1": 0.93
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "chain"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54009.json",
+              "dataPath": "/skill/c/level/1"
+            }
+          }
+        ]
+      },
+      "5401002": {
+        "id": "5401002",
+        "bangbooId": "54010",
+        "label": {
+          "zh": "抢周边啦！"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54010.json",
+          "dataPath": "/skill/c/level/1"
+        },
+        "tags": [
+          "chain"
+        ],
+        "segments": [
+          {
+            "id": "5401002-hit",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 10.79
+            },
+            "dazeMultiplierByLevel": {
+              "1": 1.54
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "chain"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54010.json",
+              "dataPath": "/skill/c/level/1"
+            }
+          }
+        ]
+      },
+      "5401101": {
+        "id": "5401101",
+        "bangbooId": "54011",
+        "label": {
+          "zh": "驱劲滚轮"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54011.json",
+          "dataPath": "/skill/a/level/1"
+        },
+        "tags": [
+          "special"
+        ],
+        "segments": [
+          {
+            "id": "5401101-hit",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 9.6
+            },
+            "dazeMultiplierByLevel": {
+              "1": 3.51
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "special"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54011.json",
+              "dataPath": "/skill/a/level/1"
+            }
+          }
+        ]
+      },
+      "5401102": {
+        "id": "5401102",
+        "bangbooId": "54011",
+        "label": {
+          "zh": "狂飙突进"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54011.json",
+          "dataPath": "/skill/c/level/1"
+        },
+        "tags": [
+          "chain"
+        ],
+        "segments": [
+          {
+            "id": "5401102-hit",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 7.53
+            },
+            "dazeMultiplierByLevel": {
+              "1": 1.08
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "chain"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54011.json",
+              "dataPath": "/skill/c/level/1"
+            }
+          }
+        ]
+      },
+      "5401201": {
+        "id": "5401201",
+        "bangbooId": "54012",
+        "label": {
+          "zh": "呜！汪汪！"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54012.json",
+          "dataPath": "/skill/a/level/1"
+        },
+        "tags": [
+          "special"
+        ],
+        "segments": [
+          {
+            "id": "5401201-hit",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 5.54
+            },
+            "dazeMultiplierByLevel": {
+              "1": 2.02
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "special"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54012.json",
+              "dataPath": "/skill/a/level/1"
+            }
+          }
+        ]
+      },
+      "5401202": {
+        "id": "5401202",
+        "bangbooId": "54012",
+        "label": {
+          "zh": "汪汪汪汪！"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54012.json",
+          "dataPath": "/skill/c/level/1"
+        },
+        "tags": [
+          "chain"
+        ],
+        "segments": [
+          {
+            "id": "5401202-hit",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 8.34
+            },
+            "dazeMultiplierByLevel": {
+              "1": 1.19
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "chain"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54012.json",
+              "dataPath": "/skill/c/level/1"
+            }
+          }
+        ]
+      },
+      "5401302": {
+        "id": "5401302",
+        "bangbooId": "54013",
+        "label": {
+          "zh": "幸运扳机"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54013.json",
+          "dataPath": "/skill/c/level/1"
+        },
+        "tags": [
+          "chain"
+        ],
+        "segments": [
+          {
+            "id": "5401302-hit",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 7.76
+            },
+            "dazeMultiplierByLevel": {
+              "1": 1.11
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "chain"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54013.json",
+              "dataPath": "/skill/c/level/1"
+            }
+          }
+        ]
+      },
+      "5401401": {
+        "id": "5401401",
+        "bangbooId": "54014",
+        "label": {
+          "zh": "紧急行动"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54014.json",
+          "dataPath": "/skill/a/level/1"
+        },
+        "tags": [
+          "special"
+        ],
+        "segments": [
+          {
+            "id": "5401401-hit",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 6.4
+            },
+            "dazeMultiplierByLevel": {
+              "1": 2.34
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "special"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54014.json",
+              "dataPath": "/skill/a/level/1"
+            }
+          }
+        ]
+      },
+      "5401402": {
+        "id": "5401402",
+        "bangbooId": "54014",
+        "label": {
+          "zh": "突击时刻"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54014.json",
+          "dataPath": "/skill/c/level/1"
+        },
+        "tags": [
+          "chain"
+        ],
+        "segments": [
+          {
+            "id": "5401402-hit",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 7.99
+            },
+            "dazeMultiplierByLevel": {
+              "1": 1.14
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "chain"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54014.json",
+              "dataPath": "/skill/c/level/1"
+            }
+          }
+        ]
+      },
+      "5401502": {
+        "id": "5401502",
+        "bangbooId": "54015",
+        "label": {
+          "zh": "咔嚓！别眨眼！"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54015.json",
+          "dataPath": "/skill/c/level/1"
+        },
+        "tags": [
+          "chain"
+        ],
+        "segments": [
+          {
+            "id": "5401502-hit",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 7.47
+            },
+            "dazeMultiplierByLevel": {
+              "1": 1.07
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "chain"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54015.json",
+              "dataPath": "/skill/c/level/1"
+            }
+          }
+        ]
+      },
+      "5401604": {
+        "id": "5401604",
+        "bangbooId": "54016",
+        "label": {
+          "zh": "幻幕拉开！"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54016.json",
+          "dataPath": "/skill/c/level/1"
+        },
+        "tags": [
+          "chain"
+        ],
+        "segments": [
+          {
+            "id": "5401604-hit",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 6.88
+            },
+            "dazeMultiplierByLevel": {
+              "1": 0.98
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "chain"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54016.json",
+              "dataPath": "/skill/c/level/1"
+            }
+          }
+        ]
+      },
+      "5401701": {
+        "id": "5401701",
+        "bangbooId": "54017",
+        "label": {
+          "zh": "舞球摇凤"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54017.json",
+          "dataPath": "/skill/a/level/1"
+        },
+        "tags": [
+          "special"
+        ],
+        "segments": [
+          {
+            "id": "5401701-hit",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 9.6
+            },
+            "dazeMultiplierByLevel": {
+              "1": 3.51
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "special"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54017.json",
+              "dataPath": "/skill/a/level/1"
+            }
+          }
+        ]
+      },
+      "5401702": {
+        "id": "5401702",
+        "bangbooId": "54017",
+        "label": {
+          "zh": "银狮奔雷"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54017.json",
+          "dataPath": "/skill/c/level/1"
+        },
+        "tags": [
+          "chain"
+        ],
+        "segments": [
+          {
+            "id": "5401702-hit",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 9.1
+            },
+            "dazeMultiplierByLevel": {
+              "1": 1.3
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "chain"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54017.json",
+              "dataPath": "/skill/c/level/1"
+            }
+          }
+        ]
+      },
+      "5401802": {
+        "id": "5401802",
+        "bangbooId": "54018",
+        "label": {
+          "zh": "星辰弹"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54018.json",
+          "dataPath": "/skill/c/level/1"
+        },
+        "tags": [
+          "chain"
+        ],
+        "segments": [
+          {
+            "id": "5401802-hit",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 8.63
+            },
+            "dazeMultiplierByLevel": {
+              "1": 1.23
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "chain"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54018.json",
+              "dataPath": "/skill/c/level/1"
+            }
+          }
+        ]
+      },
+      "5401901": {
+        "id": "5401901",
+        "bangbooId": "54019",
+        "label": {
+          "zh": "战术对策一：火线遏制"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54019.json",
+          "dataPath": "/skill/a/level/1"
+        },
+        "tags": [
+          "special"
+        ],
+        "segments": [
+          {
+            "id": "5401901-hit",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 8
+            },
+            "dazeMultiplierByLevel": {
+              "1": 2.93
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "special"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54019.json",
+              "dataPath": "/skill/a/level/1"
+            }
+          }
+        ]
+      },
+      "5401902": {
+        "id": "5401902",
+        "bangbooId": "54019",
+        "label": {
+          "zh": "战术对策三：爆弹奇袭"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54019.json",
+          "dataPath": "/skill/c/level/1"
+        },
+        "tags": [
+          "chain"
+        ],
+        "segments": [
+          {
+            "id": "5401902-hit",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 8.46
+            },
+            "dazeMultiplierByLevel": {
+              "1": 1.21
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "chain"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54019.json",
+              "dataPath": "/skill/c/level/1"
+            }
+          }
+        ]
+      },
+      "5402003": {
+        "id": "5402003",
+        "bangbooId": "54020",
+        "label": {
+          "zh": "战地特写镜头"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54020.json",
+          "dataPath": "/skill/c/level/1"
+        },
+        "tags": [
+          "chain"
+        ],
+        "segments": [
+          {
+            "id": "5402003-hit",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 9.45
+            },
+            "dazeMultiplierByLevel": {
+              "1": 1.35
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "chain"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54020.json",
+              "dataPath": "/skill/c/level/1"
+            }
+          }
+        ]
+      },
+      "5402103": {
+        "id": "5402103",
+        "bangbooId": "54021",
+        "label": {
+          "zh": "归一之剑"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54021.json",
+          "dataPath": "/skill/c/level/1"
+        },
+        "tags": [
+          "chain"
+        ],
+        "segments": [
+          {
+            "id": "5402103-hit",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 8.46
+            },
+            "dazeMultiplierByLevel": {
+              "1": 1.21
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "chain"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54021.json",
+              "dataPath": "/skill/c/level/1"
+            }
+          }
+        ]
+      },
+      "53016-a": {
+        "id": "53016-a",
+        "bangbooId": "53016",
+        "label": {
+          "zh": "圣剑解放"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53016.json",
+          "dataPath": "/skill/a/level/1"
+        },
+        "tags": [
+          "special"
+        ],
+        "segments": [
+          {
+            "id": "53016-a-hit-1",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 4.8
+            },
+            "dazeMultiplierByLevel": {
+              "1": 2.81
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "special"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53016.json",
+              "dataPath": "/skill/a/level/1"
+            }
+          },
+          {
+            "id": "53016-a-hit-2",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 3.84
+            },
+            "dazeMultiplierByLevel": {
+              "1": 2.81
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "special"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53016.json",
+              "dataPath": "/skill/a/level/1"
+            }
+          }
+        ]
+      },
+      "54003-c": {
+        "id": "54003-c",
+        "bangbooId": "54003",
+        "label": {
+          "zh": "迷乱狂吻"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54003.json",
+          "dataPath": "/skill/c/level/1"
+        },
+        "tags": [
+          "chain"
+        ],
+        "segments": [
+          {
+            "id": "54003-c-hit-1",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 3.27
+            },
+            "dazeMultiplierByLevel": {
+              "1": 0.47
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "chain"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54003.json",
+              "dataPath": "/skill/c/level/1"
+            }
+          },
+          {
+            "id": "54003-c-hit-2",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 0.74
+            },
+            "dazeMultiplierByLevel": {
+              "1": 0.11
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "chain"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54003.json",
+              "dataPath": "/skill/c/level/1"
+            }
+          }
+        ]
+      },
+      "54013-a": {
+        "id": "54013-a",
+        "bangbooId": "54013",
+        "label": {
+          "zh": "幸运左轮"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54013.json",
+          "dataPath": "/skill/a/level/1"
+        },
+        "tags": [
+          "special"
+        ],
+        "segments": [
+          {
+            "id": "54013-a-hit-1",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 11.52
+            },
+            "dazeMultiplierByLevel": {
+              "1": 4.21
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "special"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54013.json",
+              "dataPath": "/skill/a/level/1"
+            }
+          },
+          {
+            "id": "54013-a-hit-2",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 5.76
+            },
+            "dazeMultiplierByLevel": {
+              "1": 2.11
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "special"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54013.json",
+              "dataPath": "/skill/a/level/1"
+            }
+          }
+        ]
+      },
+      "54016-a": {
+        "id": "54016-a",
+        "bangbooId": "54016",
+        "label": {
+          "zh": "绮幕终落"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54016.json",
+          "dataPath": "/skill/a/level/1"
+        },
+        "tags": [
+          "special"
+        ],
+        "segments": [
+          {
+            "id": "54016-a-hit-1",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 8.55
+            },
+            "dazeMultiplierByLevel": {
+              "1": 2.13
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "special"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54016.json",
+              "dataPath": "/skill/a/level/1"
+            }
+          },
+          {
+            "id": "54016-a-hit-2",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 5.82
+            },
+            "dazeMultiplierByLevel": {
+              "1": 3.22
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "special"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54016.json",
+              "dataPath": "/skill/a/level/1"
+            }
+          },
+          {
+            "id": "54016-a-hit-3",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 6.66
+            },
+            "dazeMultiplierByLevel": {
+              "1": 2.13
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "special"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54016.json",
+              "dataPath": "/skill/a/level/1"
+            }
+          }
+        ]
+      },
+      "54020-a": {
+        "id": "54020-a",
+        "bangbooId": "54020",
+        "label": {
+          "zh": "蒙太奇连击"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54020.json",
+          "dataPath": "/skill/a/level/1"
+        },
+        "tags": [
+          "special"
+        ],
+        "segments": [
+          {
+            "id": "54020-a-hit",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 8.96
+            },
+            "dazeMultiplierByLevel": {
+              "1": 3.27
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "special"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54020.json",
+              "dataPath": "/skill/a/level/1"
+            }
+          }
+        ]
+      },
+      "54021-a": {
+        "id": "54021-a",
+        "bangbooId": "54021",
+        "label": {
+          "zh": "六合飞星"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54021.json",
+          "dataPath": "/skill/a/level/1"
+        },
+        "tags": [
+          "special"
+        ],
+        "segments": [
+          {
+            "id": "54021-a-hit-1",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 7.17
+            },
+            "dazeMultiplierByLevel": {
+              "1": 3.28
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "special"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54021.json",
+              "dataPath": "/skill/a/level/1"
+            }
+          },
+          {
+            "id": "54021-a-hit-2",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 9.86
+            },
+            "dazeMultiplierByLevel": {
+              "1": 3.28
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "special"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54021.json",
+              "dataPath": "/skill/a/level/1"
             }
           }
         ]
@@ -229,7 +3972,12 @@
         "玄墨": "auricInk",
         "闪能": "adrenaline",
         "喧响值": "resonance",
-        "电属性伤害": "electric"
+        "火属性伤害": "fire",
+        "电属性伤害": "electric",
+        "冰属性伤害": "ice",
+        "物理伤害": "physical",
+        "以太伤害": "ether",
+        "烈霜伤害": "frost"
       }
     }
   }

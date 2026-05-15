@@ -2,8 +2,8 @@
   "schemaVersion": "nanoka-fetch-manifest-v1",
   "sourceId": "nanoka-zzz",
   "snapshotId": "2.8",
-  "fetchedAt": "2026-05-15T17:15:00+08:00",
-  "generatedAt": "2026-05-15T17:15:00+08:00",
+  "fetchedAt": "2026-05-15T20:56:00+08:00",
+  "generatedAt": "2026-05-15T20:56:00+08:00",
   "parserVersion": "nanoka-source-v0.1.0",
   "userAgent": "fairy-data-source-audit/0.1 (+https://github.com/LoTwT/fairy)",
   "formalLivePolicy": {
@@ -15,7 +15,8 @@
   "urlPolicy": {
     "manifestUrl": "https://static.nanoka.cc/manifest.json",
     "approvedIndexUrls": [
-      "https://static.nanoka.cc/zzz/2.8/boss.json"
+      "https://static.nanoka.cc/zzz/2.8/boss.json",
+      "https://static.nanoka.cc/zzz/2.8/bangboo.json"
     ],
     "approvedLocalizedDetailUrlPatterns": [
       "https://static.nanoka.cc/zzz/2.8/{locale}/{entityType}/{id}.json"
@@ -319,28 +320,26 @@
       "sha256": "6cab369294b398403bb6d7710e00418231f94d1487ae092cc69854467ead60e0"
     },
     {
-      "id": "bangboo-plugboo-54008",
-      "url": "https://static.nanoka.cc/zzz/2.8/zh/bangboo/54008.json",
-      "path": "zh/bangboo/54008.json",
-      "entityType": "bangboo",
-      "language": "zh",
-      "entityId": 54008,
+      "id": "bangboo-index",
+      "url": "https://static.nanoka.cc/zzz/2.8/bangboo.json",
+      "path": "bangboo.json",
+      "entityType": "bangbooIndex",
       "approvedForCleanedOutput": true,
-      "evidenceUse": "bangboo-panel-skill-source-gate",
+      "evidenceUse": "v1.2.1-bangboo-batch-source-gate",
       "sourceVersion": "2.8",
-      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/bangboo.json",
       "status": 200,
       "headers": {
-        "etag": "\"69fa92b8-3e20\"",
+        "etag": "\"69fa92b8-3279\"",
         "lastModified": "Wed, 06 May 2026 01:00:40 GMT",
         "contentType": "application/json",
         "cacheControl": "max-age=120"
       },
-      "bytes": 15905,
-      "sha256": "02a203d3bcdf5b6c1d756e0a5f2957658a13b889305da5dbd8ce27f9a8dbee60"
+      "bytes": 12922,
+      "sha256": "6a54d2399a7f57cc3bafdc8776918a68b15913da2c141670b4dd29fff40e2873"
     },
     {
-      "id": "bangboo-penguinboo-53001",
+      "id": "bangboo-53001",
       "url": "https://static.nanoka.cc/zzz/2.8/zh/bangboo/53001.json",
       "path": "zh/bangboo/53001.json",
       "entityType": "bangboo",
@@ -361,7 +360,385 @@
       "sha256": "86fcf7cdb96f636c71568689f81c5bbe8bf94bd7ff26089787a42b7d521f1023"
     },
     {
-      "id": "bangboo-sharkboo-54001",
+      "id": "bangboo-53002",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/bangboo/53002.json",
+      "path": "zh/bangboo/53002.json",
+      "entityType": "bangboo",
+      "language": "zh",
+      "entityId": 53002,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.1-bangboo-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53002.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b8-2e10\"",
+        "lastModified": "Wed, 06 May 2026 01:00:40 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 11793,
+      "sha256": "9ac8626089c8d226011215db649fccf4bf7bf6d551761a08754447d8e7540059"
+    },
+    {
+      "id": "bangboo-53003",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/bangboo/53003.json",
+      "path": "zh/bangboo/53003.json",
+      "entityType": "bangboo",
+      "language": "zh",
+      "entityId": 53003,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.1-bangboo-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53003.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b8-2e82\"",
+        "lastModified": "Wed, 06 May 2026 01:00:40 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 11907,
+      "sha256": "fb30f9c9d1b7763703a2493a6412bc051d4d39198b99c7c25bc430aa85b62faf"
+    },
+    {
+      "id": "bangboo-53004",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/bangboo/53004.json",
+      "path": "zh/bangboo/53004.json",
+      "entityType": "bangboo",
+      "language": "zh",
+      "entityId": 53004,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.1-bangboo-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53004.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b8-28f6\"",
+        "lastModified": "Wed, 06 May 2026 01:00:40 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 10487,
+      "sha256": "93bedef27106ce43b6ad3c863b701ef937f07eb4dbd081b960fd8d3a5e81796b"
+    },
+    {
+      "id": "bangboo-53005",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/bangboo/53005.json",
+      "path": "zh/bangboo/53005.json",
+      "entityType": "bangboo",
+      "language": "zh",
+      "entityId": 53005,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.1-bangboo-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53005.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b8-4312\"",
+        "lastModified": "Wed, 06 May 2026 01:00:40 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 17171,
+      "sha256": "879c2ecbad6c9445a95d0db29f36506af3306fc26783fe0797c224e6010da4b8"
+    },
+    {
+      "id": "bangboo-53006",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/bangboo/53006.json",
+      "path": "zh/bangboo/53006.json",
+      "entityType": "bangboo",
+      "language": "zh",
+      "entityId": 53006,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.1-bangboo-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53006.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b8-36c0\"",
+        "lastModified": "Wed, 06 May 2026 01:00:40 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 14017,
+      "sha256": "4cc5df72ab3cf74630b05a2559d9105aaba8f71557bf622bdbe889fc41061e88"
+    },
+    {
+      "id": "bangboo-53007",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/bangboo/53007.json",
+      "path": "zh/bangboo/53007.json",
+      "entityType": "bangboo",
+      "language": "zh",
+      "entityId": 53007,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.1-bangboo-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53007.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b8-3ab6\"",
+        "lastModified": "Wed, 06 May 2026 01:00:40 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 15031,
+      "sha256": "c3cda20d19087ed7e62f94728c149d3a9119f3aaf61c895ace743377b8033369"
+    },
+    {
+      "id": "bangboo-53008",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/bangboo/53008.json",
+      "path": "zh/bangboo/53008.json",
+      "entityType": "bangboo",
+      "language": "zh",
+      "entityId": 53008,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.1-bangboo-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53008.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b8-238e\"",
+        "lastModified": "Wed, 06 May 2026 01:00:40 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 9103,
+      "sha256": "d65c2dab299aaa7b61adb0f87800da18cdd2dbd6bef27706c02bb758b5a61cf8"
+    },
+    {
+      "id": "bangboo-53009",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/bangboo/53009.json",
+      "path": "zh/bangboo/53009.json",
+      "entityType": "bangboo",
+      "language": "zh",
+      "entityId": 53009,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.1-bangboo-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53009.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b8-3714\"",
+        "lastModified": "Wed, 06 May 2026 01:00:40 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 14101,
+      "sha256": "412ea399aa76970f65d630ac70dda37b29242bc43b55100e67b9aff013e55553"
+    },
+    {
+      "id": "bangboo-53010",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/bangboo/53010.json",
+      "path": "zh/bangboo/53010.json",
+      "entityType": "bangboo",
+      "language": "zh",
+      "entityId": 53010,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.1-bangboo-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53010.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b8-3bd3\"",
+        "lastModified": "Wed, 06 May 2026 01:00:40 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 15316,
+      "sha256": "3735e123c20a6cfbb4df3849c40c2d5eaa2697f9a83f90c52d4b3c8b6f861062"
+    },
+    {
+      "id": "bangboo-53011",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/bangboo/53011.json",
+      "path": "zh/bangboo/53011.json",
+      "entityType": "bangboo",
+      "language": "zh",
+      "entityId": 53011,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.1-bangboo-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53011.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b8-278c\"",
+        "lastModified": "Wed, 06 May 2026 01:00:40 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 10125,
+      "sha256": "6fc083adfff4f3500bd31ffc29f8ab6c3bba66640a6b47f98ee6afcba8fc2d19"
+    },
+    {
+      "id": "bangboo-53012",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/bangboo/53012.json",
+      "path": "zh/bangboo/53012.json",
+      "entityType": "bangboo",
+      "language": "zh",
+      "entityId": 53012,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.1-bangboo-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53012.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b8-1e5b\"",
+        "lastModified": "Wed, 06 May 2026 01:00:40 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 7772,
+      "sha256": "872897536e35ae7362e3d514539a5ac3e7e4ff76a69dfcfde200d9f8d86b33af"
+    },
+    {
+      "id": "bangboo-53013",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/bangboo/53013.json",
+      "path": "zh/bangboo/53013.json",
+      "entityType": "bangboo",
+      "language": "zh",
+      "entityId": 53013,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.1-bangboo-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53013.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b8-3a0a\"",
+        "lastModified": "Wed, 06 May 2026 01:00:40 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 14859,
+      "sha256": "5c3a406fa3e434a45401ecfddb01e4cc6693cefae4fdb3d7b92ae3a87d407c4e"
+    },
+    {
+      "id": "bangboo-53014",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/bangboo/53014.json",
+      "path": "zh/bangboo/53014.json",
+      "entityType": "bangboo",
+      "language": "zh",
+      "entityId": 53014,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.1-bangboo-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53014.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b8-2950\"",
+        "lastModified": "Wed, 06 May 2026 01:00:40 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 10577,
+      "sha256": "2082beca2a1ed46d08231bc1475765856c25967505fe4456468a1c60ebd6ce1d"
+    },
+    {
+      "id": "bangboo-53015",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/bangboo/53015.json",
+      "path": "zh/bangboo/53015.json",
+      "entityType": "bangboo",
+      "language": "zh",
+      "entityId": 53015,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.1-bangboo-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53015.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b8-4020\"",
+        "lastModified": "Wed, 06 May 2026 01:00:40 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 16417,
+      "sha256": "7617c9c633a07fbd75565f563d6ed768cc1c50dca26d67c90755c850c9e90b5e"
+    },
+    {
+      "id": "bangboo-53016",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/bangboo/53016.json",
+      "path": "zh/bangboo/53016.json",
+      "entityType": "bangboo",
+      "language": "zh",
+      "entityId": 53016,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.1-bangboo-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53016.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b8-4222\"",
+        "lastModified": "Wed, 06 May 2026 01:00:40 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 16931,
+      "sha256": "55a3fbef06afc3ab8fc78cdd70ff900ae4d29f698c847f7df7a16ebf14f81ae5"
+    },
+    {
+      "id": "bangboo-53017",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/bangboo/53017.json",
+      "path": "zh/bangboo/53017.json",
+      "entityType": "bangboo",
+      "language": "zh",
+      "entityId": 53017,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.1-bangboo-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53017.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b8-3d1d\"",
+        "lastModified": "Wed, 06 May 2026 01:00:40 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 15646,
+      "sha256": "d5a0abc34ff111b85916a54e2ca5768b1f55662eed684269f67d6d87c071a2e5"
+    },
+    {
+      "id": "bangboo-53019",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/bangboo/53019.json",
+      "path": "zh/bangboo/53019.json",
+      "entityType": "bangboo",
+      "language": "zh",
+      "entityId": 53019,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.1-bangboo-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53019.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b8-410e\"",
+        "lastModified": "Wed, 06 May 2026 01:00:40 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 16655,
+      "sha256": "947720bd9d1b7dd6c4d4332dce0e8a83e36671aa897b2291a3d63c9581c86bc6"
+    },
+    {
+      "id": "bangboo-53021",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/bangboo/53021.json",
+      "path": "zh/bangboo/53021.json",
+      "entityType": "bangboo",
+      "language": "zh",
+      "entityId": 53021,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.1-bangboo-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53021.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b8-392d\"",
+        "lastModified": "Wed, 06 May 2026 01:00:40 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 14638,
+      "sha256": "1a2f28a918c765a5c977dc6e8ccd643e90cd7014b536855a14f9a6232caf73d9"
+    },
+    {
+      "id": "bangboo-54001",
       "url": "https://static.nanoka.cc/zzz/2.8/zh/bangboo/54001.json",
       "path": "zh/bangboo/54001.json",
       "entityType": "bangboo",
@@ -380,6 +757,405 @@
       },
       "bytes": 16909,
       "sha256": "c4c4f2685dd8913ad65658721b1acf96162a0f3203b2a7c1da070058b6361b2c"
+    },
+    {
+      "id": "bangboo-54002",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/bangboo/54002.json",
+      "path": "zh/bangboo/54002.json",
+      "entityType": "bangboo",
+      "language": "zh",
+      "entityId": 54002,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.1-bangboo-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54002.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b8-3d29\"",
+        "lastModified": "Wed, 06 May 2026 01:00:40 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 15658,
+      "sha256": "4bfcedc2c6fac95c768adaf3890d41368af3658220c9d3a732f8d2af2e14c60f"
+    },
+    {
+      "id": "bangboo-54003",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/bangboo/54003.json",
+      "path": "zh/bangboo/54003.json",
+      "entityType": "bangboo",
+      "language": "zh",
+      "entityId": 54003,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.1-bangboo-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54003.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b8-4fb2\"",
+        "lastModified": "Wed, 06 May 2026 01:00:40 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 20403,
+      "sha256": "60f7be56684c08f8dabe5758bc72f119bba510fe57072cdcc787421468a6b0cb"
+    },
+    {
+      "id": "bangboo-54004",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/bangboo/54004.json",
+      "path": "zh/bangboo/54004.json",
+      "entityType": "bangboo",
+      "language": "zh",
+      "entityId": 54004,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.1-bangboo-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54004.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b8-362a\"",
+        "lastModified": "Wed, 06 May 2026 01:00:40 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 13867,
+      "sha256": "1b0cd04354c4338dccba6c475ae12fe75d199b7f96d76afab7cd6042629c564b"
+    },
+    {
+      "id": "bangboo-54005",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/bangboo/54005.json",
+      "path": "zh/bangboo/54005.json",
+      "entityType": "bangboo",
+      "language": "zh",
+      "entityId": 54005,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.1-bangboo-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54005.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b8-3d36\"",
+        "lastModified": "Wed, 06 May 2026 01:00:40 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 15671,
+      "sha256": "510c9420113d92a3eb011ef5fccbe99b5625b0bedce2949e70c9e0bbcc3da42a"
+    },
+    {
+      "id": "bangboo-54006",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/bangboo/54006.json",
+      "path": "zh/bangboo/54006.json",
+      "entityType": "bangboo",
+      "language": "zh",
+      "entityId": 54006,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.1-bangboo-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54006.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b8-4061\"",
+        "lastModified": "Wed, 06 May 2026 01:00:40 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 16482,
+      "sha256": "af3be55542648ebe3775faab769b000f314b261925c309b8feeb3e7bacd5780e"
+    },
+    {
+      "id": "bangboo-54008",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/bangboo/54008.json",
+      "path": "zh/bangboo/54008.json",
+      "entityType": "bangboo",
+      "language": "zh",
+      "entityId": 54008,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "bangboo-panel-skill-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b8-3e20\"",
+        "lastModified": "Wed, 06 May 2026 01:00:40 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 15905,
+      "sha256": "02a203d3bcdf5b6c1d756e0a5f2957658a13b889305da5dbd8ce27f9a8dbee60"
+    },
+    {
+      "id": "bangboo-54009",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/bangboo/54009.json",
+      "path": "zh/bangboo/54009.json",
+      "entityType": "bangboo",
+      "language": "zh",
+      "entityId": 54009,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.1-bangboo-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54009.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b8-3d7f\"",
+        "lastModified": "Wed, 06 May 2026 01:00:40 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 15744,
+      "sha256": "90dd1471e73386b79ae7db6cd84b73df03ce54b18b1b80af68f006fbf4336535"
+    },
+    {
+      "id": "bangboo-54010",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/bangboo/54010.json",
+      "path": "zh/bangboo/54010.json",
+      "entityType": "bangboo",
+      "language": "zh",
+      "entityId": 54010,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.1-bangboo-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54010.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b8-3ba6\"",
+        "lastModified": "Wed, 06 May 2026 01:00:40 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 15271,
+      "sha256": "4350b796e45914b75168388f1bf6d399d4b3401e2eac1087fabb147f05ac30bf"
+    },
+    {
+      "id": "bangboo-54011",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/bangboo/54011.json",
+      "path": "zh/bangboo/54011.json",
+      "entityType": "bangboo",
+      "language": "zh",
+      "entityId": 54011,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.1-bangboo-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54011.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b8-3ae2\"",
+        "lastModified": "Wed, 06 May 2026 01:00:40 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 15075,
+      "sha256": "21a255dd9cd2978acee1882f65b11dd83a398a1369c258d966124d9a7df797e6"
+    },
+    {
+      "id": "bangboo-54012",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/bangboo/54012.json",
+      "path": "zh/bangboo/54012.json",
+      "entityType": "bangboo",
+      "language": "zh",
+      "entityId": 54012,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.1-bangboo-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54012.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b8-3a4a\"",
+        "lastModified": "Wed, 06 May 2026 01:00:40 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 14923,
+      "sha256": "f1694c60980fa68a6d6e5940be11b8f021551a0707c8dd1cbda0000bdf4b2e80"
+    },
+    {
+      "id": "bangboo-54013",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/bangboo/54013.json",
+      "path": "zh/bangboo/54013.json",
+      "entityType": "bangboo",
+      "language": "zh",
+      "entityId": 54013,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.1-bangboo-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54013.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b8-4c68\"",
+        "lastModified": "Wed, 06 May 2026 01:00:40 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 19561,
+      "sha256": "a7ee1035858af2a2189167f0c29100d3ccb87688fa5da89fd58f05bd45a0c810"
+    },
+    {
+      "id": "bangboo-54014",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/bangboo/54014.json",
+      "path": "zh/bangboo/54014.json",
+      "entityType": "bangboo",
+      "language": "zh",
+      "entityId": 54014,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.1-bangboo-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54014.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b8-40f9\"",
+        "lastModified": "Wed, 06 May 2026 01:00:40 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 16634,
+      "sha256": "431018ad45e6d07c125c0751df8574e2a1a146d46a13da32dc201d019a2716bc"
+    },
+    {
+      "id": "bangboo-54015",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/bangboo/54015.json",
+      "path": "zh/bangboo/54015.json",
+      "entityType": "bangboo",
+      "language": "zh",
+      "entityId": 54015,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.1-bangboo-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54015.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b8-45f0\"",
+        "lastModified": "Wed, 06 May 2026 01:00:40 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 17905,
+      "sha256": "95b45d4db7f7a6e0239555c800e8cd10f43e5cecbae3c4c7a970cceaaa257073"
+    },
+    {
+      "id": "bangboo-54016",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/bangboo/54016.json",
+      "path": "zh/bangboo/54016.json",
+      "entityType": "bangboo",
+      "language": "zh",
+      "entityId": 54016,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.1-bangboo-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54016.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b8-5b1c\"",
+        "lastModified": "Wed, 06 May 2026 01:00:40 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 23325,
+      "sha256": "a8cfb346bf8353ab95c5a3da41535e3d86e48bc098c85d1a52d488de6456688f"
+    },
+    {
+      "id": "bangboo-54017",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/bangboo/54017.json",
+      "path": "zh/bangboo/54017.json",
+      "entityType": "bangboo",
+      "language": "zh",
+      "entityId": 54017,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.1-bangboo-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54017.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b8-3d8c\"",
+        "lastModified": "Wed, 06 May 2026 01:00:40 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 15757,
+      "sha256": "91eda7a4082828767e3786259d3f7fce09cb054d6e339e44af79c693d02ba7f7"
+    },
+    {
+      "id": "bangboo-54018",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/bangboo/54018.json",
+      "path": "zh/bangboo/54018.json",
+      "entityType": "bangboo",
+      "language": "zh",
+      "entityId": 54018,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.1-bangboo-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54018.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b8-49b5\"",
+        "lastModified": "Wed, 06 May 2026 01:00:40 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 18870,
+      "sha256": "e7c668a63bde948b2bdb83ed6c93c52e85de4b9a6397fb410e5d7539c0a4f32b"
+    },
+    {
+      "id": "bangboo-54019",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/bangboo/54019.json",
+      "path": "zh/bangboo/54019.json",
+      "entityType": "bangboo",
+      "language": "zh",
+      "entityId": 54019,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.1-bangboo-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54019.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b8-402f\"",
+        "lastModified": "Wed, 06 May 2026 01:00:40 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 16432,
+      "sha256": "5bdafd7cd4a8cd30d83d3f9ea77e7b9ad6ea2d33699caa4e38c06d9ddf81be31"
+    },
+    {
+      "id": "bangboo-54020",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/bangboo/54020.json",
+      "path": "zh/bangboo/54020.json",
+      "entityType": "bangboo",
+      "language": "zh",
+      "entityId": 54020,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.1-bangboo-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54020.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b8-41e8\"",
+        "lastModified": "Wed, 06 May 2026 01:00:40 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 16873,
+      "sha256": "5e75435e1235c2faef88c067d77f48be1e36daecf137efd0568ff40c88d923be"
+    },
+    {
+      "id": "bangboo-54021",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/bangboo/54021.json",
+      "path": "zh/bangboo/54021.json",
+      "entityType": "bangboo",
+      "language": "zh",
+      "entityId": 54021,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.1-bangboo-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54021.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b8-4b33\"",
+        "lastModified": "Wed, 06 May 2026 01:00:40 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 19252,
+      "sha256": "c319f64a9943d5fba9211a962e76f8f191460d5e8f216830d8d6538f6fcb9aed"
     },
     {
       "id": "weapon-yixuan-signature-14137",
@@ -605,6 +1381,52 @@
         "hasSkillProp": true
       }
     ],
+    "bangbooBatch": {
+      "indexCount": 39,
+      "retainedDetailCount": 39,
+      "ids": [
+        53001,
+        53002,
+        53003,
+        53004,
+        53005,
+        53006,
+        53007,
+        53008,
+        53009,
+        53010,
+        53011,
+        53012,
+        53013,
+        53014,
+        53015,
+        53016,
+        53017,
+        53019,
+        53021,
+        54001,
+        54002,
+        54003,
+        54004,
+        54005,
+        54006,
+        54008,
+        54009,
+        54010,
+        54011,
+        54012,
+        54013,
+        54014,
+        54015,
+        54016,
+        54017,
+        54018,
+        54019,
+        54020,
+        54021
+      ],
+      "approvedForCleanedOutputCount": 39
+    },
     "wEngineSample": {
       "id": 14137,
       "codeName": "Weapon_S_1371",
@@ -616,6 +1438,6 @@
       "name": "啄木鸟电音",
       "hasSetDescriptions": true
     },
-    "retainedAssetCount": 19
+    "retainedAssetCount": 56
   }
 }
