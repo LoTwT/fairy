@@ -2,7 +2,7 @@
   "kind": "gameData",
   "schemaVersion": "cleaned-game-data-artifact/v0.1",
   "dataVersion": "fairy-v0.1.0-nanoka-runtime",
-  "generatedAt": "2026-05-16T00:08:00+08:00",
+  "generatedAt": "2026-05-16T00:40:00+08:00",
   "sourceManifestPath": "data/source/source-manifest.json",
   "runtimeCutoverReady": true,
   "runtimeSourcePolicy": {
@@ -22,7 +22,7 @@
     "gameVersion": "ZZZ-2.8",
     "dataVersion": "0.1.0",
     "sourceVersion": "nanoka-zzz@2.8",
-    "generatedAt": "2026-05-16T00:08:00+08:00",
+    "generatedAt": "2026-05-16T00:40:00+08:00",
     "sources": [
       {
         "id": "nanoka-zzz",
@@ -30,8 +30,8 @@
         "url": "https://static.nanoka.cc/manifest.json",
         "gameVersion": "ZZZ-2.8",
         "sourceVersion": "2.8",
-        "fetchedAt": "2026-05-16T00:08:00+08:00",
-        "parsedAt": "2026-05-16T00:08:00+08:00",
+        "fetchedAt": "2026-05-16T00:40:00+08:00",
+        "parsedAt": "2026-05-16T00:40:00+08:00",
         "parserVersion": "nanoka-runtime-wengine-batch-v0.1.0",
         "licenseNote": "Runtime cleaned data uses lo-user-approved nanoka live 2.8 evidence; archived Excel/D-17/D-12 sources are retained for audit only."
       }
@@ -7749,7 +7749,502 @@
         ]
       }
     },
-    "driveDiscs": {},
+    "driveDiscs": {
+      "31000": {
+        "id": "31000",
+        "label": {
+          "zh": "啄木鸟电音",
+          "en": "Woodpecker Electro"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/equipment/31000.json",
+          "dataPath": "/"
+        },
+        "sourceAliases": [
+          "啄木鸟电音",
+          "Woodpecker Electro",
+          "ウッドペッカー・エレクトロ",
+          "딱따구리 일렉트로"
+        ]
+      },
+      "31100": {
+        "id": "31100",
+        "label": {
+          "zh": "河豚电音",
+          "en": "Puffer Electro"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/equipment/31100.json",
+          "dataPath": "/"
+        },
+        "sourceAliases": [
+          "河豚电音",
+          "Puffer Electro",
+          "パファー・エレクトロ",
+          "복어 일렉트로"
+        ]
+      },
+      "31200": {
+        "id": "31200",
+        "label": {
+          "zh": "震星迪斯科",
+          "en": "Shockstar Disco"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/equipment/31200.json",
+          "dataPath": "/"
+        },
+        "sourceAliases": [
+          "震星迪斯科",
+          "Shockstar Disco",
+          "ショックスター・ディスコ",
+          "쇼크스타 디스코"
+        ]
+      },
+      "31300": {
+        "id": "31300",
+        "label": {
+          "zh": "自由蓝调",
+          "en": "Freedom Blues"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/equipment/31300.json",
+          "dataPath": "/"
+        },
+        "sourceAliases": [
+          "自由蓝调",
+          "Freedom Blues",
+          "フリーダム・ブルース",
+          "자유의 블루스"
+        ]
+      },
+      "31400": {
+        "id": "31400",
+        "label": {
+          "zh": "激素朋克",
+          "en": "Hormone Punk"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/equipment/31400.json",
+          "dataPath": "/"
+        },
+        "sourceAliases": [
+          "激素朋克",
+          "Hormone Punk",
+          "ホルモン・パンク",
+          "호르몬 펑크"
+        ]
+      },
+      "31500": {
+        "id": "31500",
+        "label": {
+          "zh": "灵魂摇滚",
+          "en": "Soul Rock"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/equipment/31500.json",
+          "dataPath": "/"
+        },
+        "sourceAliases": [
+          "灵魂摇滚",
+          "Soul Rock",
+          "ソウル・ロック",
+          "소울 록"
+        ]
+      },
+      "31600": {
+        "id": "31600",
+        "label": {
+          "zh": "摇摆爵士",
+          "en": "Swing Jazz"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/equipment/31600.json",
+          "dataPath": "/"
+        },
+        "sourceAliases": [
+          "摇摆爵士",
+          "Swing Jazz",
+          "スイング・ジャズ",
+          "스윙 재즈"
+        ]
+      },
+      "31800": {
+        "id": "31800",
+        "label": {
+          "zh": "混沌爵士",
+          "en": "Chaos Jazz"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/equipment/31800.json",
+          "dataPath": "/"
+        },
+        "sourceAliases": [
+          "混沌爵士",
+          "Chaos Jazz",
+          "ケイオス・ジャズ",
+          "카오스 재즈"
+        ]
+      },
+      "31900": {
+        "id": "31900",
+        "label": {
+          "zh": "原始朋克",
+          "en": "Proto Punk"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/equipment/31900.json",
+          "dataPath": "/"
+        },
+        "sourceAliases": [
+          "原始朋克",
+          "Proto Punk",
+          "プロト・パンク",
+          "원시 펑크"
+        ]
+      },
+      "32200": {
+        "id": "32200",
+        "label": {
+          "zh": "炎狱重金属",
+          "en": "Inferno Metal"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/equipment/32200.json",
+          "dataPath": "/"
+        },
+        "sourceAliases": [
+          "炎狱重金属",
+          "Inferno Metal",
+          "炎獄のヘヴィメタル",
+          "불지옥 메탈"
+        ]
+      },
+      "32300": {
+        "id": "32300",
+        "label": {
+          "zh": "混沌重金属",
+          "en": "Chaotic Metal"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/equipment/32300.json",
+          "dataPath": "/"
+        },
+        "sourceAliases": [
+          "混沌重金属",
+          "Chaotic Metal",
+          "混沌のヘヴィメタル",
+          "카오스 메탈"
+        ]
+      },
+      "32400": {
+        "id": "32400",
+        "label": {
+          "zh": "雷暴重金属",
+          "en": "Thunder Metal"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/equipment/32400.json",
+          "dataPath": "/"
+        },
+        "sourceAliases": [
+          "雷暴重金属",
+          "Thunder Metal",
+          "霹靂のヘヴィメタル",
+          "썬더 메탈"
+        ]
+      },
+      "32500": {
+        "id": "32500",
+        "label": {
+          "zh": "极地重金属",
+          "en": "Polar Metal"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/equipment/32500.json",
+          "dataPath": "/"
+        },
+        "sourceAliases": [
+          "极地重金属",
+          "Polar Metal",
+          "極地のヘヴィメタル",
+          "극지 메탈"
+        ]
+      },
+      "32600": {
+        "id": "32600",
+        "label": {
+          "zh": "獠牙重金属",
+          "en": "Fanged Metal"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/equipment/32600.json",
+          "dataPath": "/"
+        },
+        "sourceAliases": [
+          "獠牙重金属",
+          "Fanged Metal",
+          "獣牙のヘヴィメタル",
+          "송곳니 메탈"
+        ]
+      },
+      "32700": {
+        "id": "32700",
+        "label": {
+          "zh": "折枝剑歌",
+          "en": "Branch & Blade Song"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/equipment/32700.json",
+          "dataPath": "/"
+        },
+        "sourceAliases": [
+          "折枝剑歌",
+          "Branch & Blade Song",
+          "折枝の刀歌",
+          "나뭇가지 검의 노래"
+        ]
+      },
+      "32800": {
+        "id": "32800",
+        "label": {
+          "zh": "静听嘉音",
+          "en": "Astral Voice"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/equipment/32800.json",
+          "dataPath": "/"
+        },
+        "sourceAliases": [
+          "静听嘉音",
+          "Astral Voice",
+          "静寂のアストラ",
+          "고요 속의 별"
+        ]
+      },
+      "32900": {
+        "id": "32900",
+        "label": {
+          "zh": "如影相随",
+          "en": "Shadow Harmony"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/equipment/32900.json",
+          "dataPath": "/"
+        },
+        "sourceAliases": [
+          "如影相随",
+          "Shadow Harmony",
+          "シャドウハーモニー",
+          "그림자처럼 함께"
+        ]
+      },
+      "33000": {
+        "id": "33000",
+        "label": {
+          "zh": "法厄同之歌",
+          "en": "Phaethon's Melody"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/equipment/33000.json",
+          "dataPath": "/"
+        },
+        "sourceAliases": [
+          "法厄同之歌",
+          "Phaethon's Melody",
+          "「パエトーン」の歌",
+          "파에톤의 노래"
+        ]
+      },
+      "33100": {
+        "id": "33100",
+        "label": {
+          "zh": "云岿如我",
+          "en": "Yunkui Tales"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/equipment/33100.json",
+          "dataPath": "/"
+        },
+        "sourceAliases": [
+          "云岿如我",
+          "Yunkui Tales",
+          "雲嶽は我に似たり",
+          "운규 이야기"
+        ]
+      },
+      "33200": {
+        "id": "33200",
+        "label": {
+          "zh": "山大王",
+          "en": "King of the Summit"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/equipment/33200.json",
+          "dataPath": "/"
+        },
+        "sourceAliases": [
+          "山大王",
+          "King of the Summit",
+          "大山を統べる者",
+          "산림의 왕"
+        ]
+      },
+      "33300": {
+        "id": "33300",
+        "label": {
+          "zh": "拂晓生花",
+          "en": "Dawn's Bloom"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/equipment/33300.json",
+          "dataPath": "/"
+        },
+        "sourceAliases": [
+          "拂晓生花",
+          "Dawn's Bloom",
+          "暁に咲く花",
+          "여명의 꽃"
+        ]
+      },
+      "33400": {
+        "id": "33400",
+        "label": {
+          "zh": "月光骑士颂",
+          "en": "Moonlight Lullaby"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/equipment/33400.json",
+          "dataPath": "/"
+        },
+        "sourceAliases": [
+          "月光骑士颂",
+          "Moonlight Lullaby",
+          "月光騎士の讃歌",
+          "달빛 기사의 칭송"
+        ]
+      },
+      "33500": {
+        "id": "33500",
+        "label": {
+          "zh": "沧浪行歌",
+          "en": "White Water Ballad"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/equipment/33500.json",
+          "dataPath": "/"
+        },
+        "sourceAliases": [
+          "沧浪行歌",
+          "White Water Ballad",
+          "純白の行歌",
+          "물빛 노랫소리"
+        ]
+      },
+      "33600": {
+        "id": "33600",
+        "label": {
+          "zh": "流光咏叹",
+          "en": "Shining Aria"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/equipment/33600.json",
+          "dataPath": "/"
+        },
+        "sourceAliases": [
+          "流光咏叹",
+          "Shining Aria",
+          "流光のアリア",
+          "빛의 아리아"
+        ]
+      },
+      "33700": {
+        "id": "33700",
+        "label": {
+          "zh": "雪兔梦游仙境 ",
+          "en": "Bunny in Wonderland"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/equipment/33700.json",
+          "dataPath": "/"
+        },
+        "sourceAliases": [
+          "雪兔梦游仙境 ",
+          "Bunny in Wonderland",
+          "雪うさぎワンダーランド",
+          "이상한 나라의 눈토끼"
+        ]
+      },
+      "33800": {
+        "id": "33800",
+        "label": {
+          "zh": "囚徒手记",
+          "en": "Notes From the Chained"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/equipment/33800.json",
+          "dataPath": "/"
+        },
+        "sourceAliases": [
+          "囚徒手记",
+          "Notes From the Chained",
+          "獄中の手記",
+          "수감자 수기"
+        ]
+      }
+    },
     "enemies": {},
     "resonium": {},
     "modifiers": {},

@@ -2,8 +2,8 @@
   "schemaVersion": "nanoka-fetch-manifest-v1",
   "sourceId": "nanoka-zzz",
   "snapshotId": "2.8",
-  "fetchedAt": "2026-05-16T00:08:00+08:00",
-  "generatedAt": "2026-05-16T00:08:00+08:00",
+  "fetchedAt": "2026-05-16T00:40:00+08:00",
+  "generatedAt": "2026-05-16T00:40:00+08:00",
   "parserVersion": "nanoka-source-v0.1.0",
   "userAgent": "fairy-data-source-audit/0.1 (+https://github.com/LoTwT/fairy)",
   "formalLivePolicy": {
@@ -18,7 +18,8 @@
       "https://static.nanoka.cc/zzz/2.8/boss.json",
       "https://static.nanoka.cc/zzz/2.8/character.json",
       "https://static.nanoka.cc/zzz/2.8/bangboo.json",
-      "https://static.nanoka.cc/zzz/2.8/weapon.json"
+      "https://static.nanoka.cc/zzz/2.8/weapon.json",
+      "https://static.nanoka.cc/zzz/2.8/equipment.json"
     ],
     "approvedLocalizedDetailUrlPatterns": [
       "https://static.nanoka.cc/zzz/2.8/{locale}/{entityType}/{id}.json"
@@ -4096,7 +4097,26 @@
       "sha256": "b578c04460d619a3e86605497f953244d21afd9360030d3a48df3a2f1d1b4de8"
     },
     {
-      "id": "equipment-woodpecker-31000",
+      "id": "equipment-index",
+      "url": "https://static.nanoka.cc/zzz/2.8/equipment.json",
+      "path": "equipment.json",
+      "entityType": "equipmentIndex",
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.x-drive-disc-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/equipment.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b8-af8b\"",
+        "lastModified": "Wed, 06 May 2026 01:00:40 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 44940,
+      "sha256": "4a6680e7e6b5315b861ffe56c1e66d5b769d74a7d0950c0edfa42a01fcfc0a76"
+    },
+    {
+      "id": "equipment-31000",
       "url": "https://static.nanoka.cc/zzz/2.8/zh/equipment/31000.json",
       "path": "zh/equipment/31000.json",
       "entityType": "equipment",
@@ -4115,6 +4135,531 @@
       },
       "bytes": 733,
       "sha256": "4190f6084521aead931a28ada9a44e6d9cd26a7fdb2401ffd0ab4e00a257f1ec"
+    },
+    {
+      "id": "equipment-31100",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/equipment/31100.json",
+      "path": "zh/equipment/31100.json",
+      "entityType": "equipment",
+      "language": "zh",
+      "entityId": 31100,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.x-drive-disc-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/equipment/31100.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b9-256\"",
+        "lastModified": "Wed, 06 May 2026 01:00:41 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 599,
+      "sha256": "07be09852fd5decf8fcb901a58a989833c2787c3c218d242bded63259d89d1c2"
+    },
+    {
+      "id": "equipment-31200",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/equipment/31200.json",
+      "path": "zh/equipment/31200.json",
+      "entityType": "equipment",
+      "language": "zh",
+      "entityId": 31200,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.x-drive-disc-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/equipment/31200.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b9-215\"",
+        "lastModified": "Wed, 06 May 2026 01:00:41 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 534,
+      "sha256": "f9dbad5e73f9ff1cfce3ae730999f5435c6e5a6be3a74671580f81ab7951112d"
+    },
+    {
+      "id": "equipment-31300",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/equipment/31300.json",
+      "path": "zh/equipment/31300.json",
+      "entityType": "equipment",
+      "language": "zh",
+      "entityId": 31300,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.x-drive-disc-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/equipment/31300.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b9-228\"",
+        "lastModified": "Wed, 06 May 2026 01:00:41 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 553,
+      "sha256": "bd07f7a1c67c67950b1788fdb6d38a4420910fed9b08e586f89233eb10acdf2d"
+    },
+    {
+      "id": "equipment-31400",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/equipment/31400.json",
+      "path": "zh/equipment/31400.json",
+      "entityType": "equipment",
+      "language": "zh",
+      "entityId": 31400,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.x-drive-disc-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/equipment/31400.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b9-20b\"",
+        "lastModified": "Wed, 06 May 2026 01:00:41 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 524,
+      "sha256": "01e602b00bc827ce90989f4c966310af2b491a93a8cd5c409f0c6ee63527b826"
+    },
+    {
+      "id": "equipment-31500",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/equipment/31500.json",
+      "path": "zh/equipment/31500.json",
+      "entityType": "equipment",
+      "language": "zh",
+      "entityId": 31500,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.x-drive-disc-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/equipment/31500.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b9-21e\"",
+        "lastModified": "Wed, 06 May 2026 01:00:41 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 543,
+      "sha256": "6a57b02424d522452196d7d3dddd339d00cc896d805300fcc7ec248ebf99c2c4"
+    },
+    {
+      "id": "equipment-31600",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/equipment/31600.json",
+      "path": "zh/equipment/31600.json",
+      "entityType": "equipment",
+      "language": "zh",
+      "entityId": 31600,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.x-drive-disc-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/equipment/31600.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b9-225\"",
+        "lastModified": "Wed, 06 May 2026 01:00:41 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 550,
+      "sha256": "71b1d60b7a3f04ae3cd8da2cace6db391faf30431c8969558be8c9949a1bb7db"
+    },
+    {
+      "id": "equipment-31800",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/equipment/31800.json",
+      "path": "zh/equipment/31800.json",
+      "entityType": "equipment",
+      "language": "zh",
+      "entityId": 31800,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.x-drive-disc-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/equipment/31800.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b9-299\"",
+        "lastModified": "Wed, 06 May 2026 01:00:41 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 666,
+      "sha256": "42f859f6137e12818c2a9ead6b4a5afabefd1d714e8ee9413d00d6820e21ed37"
+    },
+    {
+      "id": "equipment-31900",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/equipment/31900.json",
+      "path": "zh/equipment/31900.json",
+      "entityType": "equipment",
+      "language": "zh",
+      "entityId": 31900,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.x-drive-disc-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/equipment/31900.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b9-254\"",
+        "lastModified": "Wed, 06 May 2026 01:00:41 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 597,
+      "sha256": "b45e93d1a5361cd3d097a87b7d1633b14cf5977c187b42150da4ccd8ebed5856"
+    },
+    {
+      "id": "equipment-32200",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/equipment/32200.json",
+      "path": "zh/equipment/32200.json",
+      "entityType": "equipment",
+      "language": "zh",
+      "entityId": 32200,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.x-drive-disc-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/equipment/32200.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b9-1fb\"",
+        "lastModified": "Wed, 06 May 2026 01:00:41 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 508,
+      "sha256": "a3f7d0a44192d40874c165502ecea3e16edefdef42fe9316769eaf56fa1a3ca4"
+    },
+    {
+      "id": "equipment-32300",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/equipment/32300.json",
+      "path": "zh/equipment/32300.json",
+      "entityType": "equipment",
+      "language": "zh",
+      "entityId": 32300,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.x-drive-disc-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/equipment/32300.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b9-24d\"",
+        "lastModified": "Wed, 06 May 2026 01:00:41 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 590,
+      "sha256": "aae4ca6fc3fa5be5629b918dfd61fbf72c2bb50d058c3a751900f9b3cc5e6c97"
+    },
+    {
+      "id": "equipment-32400",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/equipment/32400.json",
+      "path": "zh/equipment/32400.json",
+      "entityType": "equipment",
+      "language": "zh",
+      "entityId": 32400,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.x-drive-disc-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/equipment/32400.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b9-1f1\"",
+        "lastModified": "Wed, 06 May 2026 01:00:41 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 498,
+      "sha256": "124f3170afe8192ad02a1b5c8e1bb05b1e861760ff8a06fc3c6bba355e9dfc8d"
+    },
+    {
+      "id": "equipment-32500",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/equipment/32500.json",
+      "path": "zh/equipment/32500.json",
+      "entityType": "equipment",
+      "language": "zh",
+      "entityId": 32500,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.x-drive-disc-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/equipment/32500.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b9-28e\"",
+        "lastModified": "Wed, 06 May 2026 01:00:41 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 655,
+      "sha256": "8af337e512a0f3d5f5f2c16fa3f7e8e195603aaa65b9bb44b4b78216803011e1"
+    },
+    {
+      "id": "equipment-32600",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/equipment/32600.json",
+      "path": "zh/equipment/32600.json",
+      "entityType": "equipment",
+      "language": "zh",
+      "entityId": 32600,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.x-drive-disc-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/equipment/32600.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b9-209\"",
+        "lastModified": "Wed, 06 May 2026 01:00:41 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 522,
+      "sha256": "c0899134bbbb52ea0bbd44b4c6f58a122d63455e7e8c33dbc9e870307c105826"
+    },
+    {
+      "id": "equipment-32700",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/equipment/32700.json",
+      "path": "zh/equipment/32700.json",
+      "entityType": "equipment",
+      "language": "zh",
+      "entityId": 32700,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.x-drive-disc-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/equipment/32700.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b9-2b4\"",
+        "lastModified": "Wed, 06 May 2026 01:00:41 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 693,
+      "sha256": "5f3ca0154bb16317c8645a73f1757fe70c73f29a009612ebb38d65af72599fd9"
+    },
+    {
+      "id": "equipment-32800",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/equipment/32800.json",
+      "path": "zh/equipment/32800.json",
+      "entityType": "equipment",
+      "language": "zh",
+      "entityId": 32800,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.x-drive-disc-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/equipment/32800.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b9-324\"",
+        "lastModified": "Wed, 06 May 2026 01:00:41 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 805,
+      "sha256": "4554fa0bea74966ac759601a7cdfd9c1fce5f01ea3ba2cf0dd879795fc9d83d4"
+    },
+    {
+      "id": "equipment-32900",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/equipment/32900.json",
+      "path": "zh/equipment/32900.json",
+      "entityType": "equipment",
+      "language": "zh",
+      "entityId": 32900,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.x-drive-disc-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/equipment/32900.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b9-36e\"",
+        "lastModified": "Wed, 06 May 2026 01:00:41 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 879,
+      "sha256": "734fd7a91547f523ba0ecc4617458bf49bb15221adb3581fdc40ddadc0b31eef"
+    },
+    {
+      "id": "equipment-33000",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/equipment/33000.json",
+      "path": "zh/equipment/33000.json",
+      "entityType": "equipment",
+      "language": "zh",
+      "entityId": 33000,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.x-drive-disc-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/equipment/33000.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b9-2ba\"",
+        "lastModified": "Wed, 06 May 2026 01:00:41 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 699,
+      "sha256": "d0470defe952725bd3ca79b2aeeb8a31db5b30c9f0fb31fe0dbf23c2e6564b90"
+    },
+    {
+      "id": "equipment-33100",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/equipment/33100.json",
+      "path": "zh/equipment/33100.json",
+      "entityType": "equipment",
+      "language": "zh",
+      "entityId": 33100,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.x-drive-disc-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/equipment/33100.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b9-29d\"",
+        "lastModified": "Wed, 06 May 2026 01:00:41 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 670,
+      "sha256": "985f1d5b9382e4626f622c6846f75adce0a768dfe0acb79f0d53365e8b0c4fb2"
+    },
+    {
+      "id": "equipment-33200",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/equipment/33200.json",
+      "path": "zh/equipment/33200.json",
+      "entityType": "equipment",
+      "language": "zh",
+      "entityId": 33200,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.x-drive-disc-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/equipment/33200.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b9-2f7\"",
+        "lastModified": "Wed, 06 May 2026 01:00:41 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 760,
+      "sha256": "c32971138253fb66659e5c137a33c72321bebd583edd4ee7784dc09b33d12f85"
+    },
+    {
+      "id": "equipment-33300",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/equipment/33300.json",
+      "path": "zh/equipment/33300.json",
+      "entityType": "equipment",
+      "language": "zh",
+      "entityId": 33300,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.x-drive-disc-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/equipment/33300.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b9-35d\"",
+        "lastModified": "Wed, 06 May 2026 01:00:41 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 862,
+      "sha256": "035bc78a490f2ae98de588760b99f5d9a9cd46c4409c5b7524f8fd2440cbc08c"
+    },
+    {
+      "id": "equipment-33400",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/equipment/33400.json",
+      "path": "zh/equipment/33400.json",
+      "entityType": "equipment",
+      "language": "zh",
+      "entityId": 33400,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.x-drive-disc-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/equipment/33400.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b9-2a1\"",
+        "lastModified": "Wed, 06 May 2026 01:00:41 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 674,
+      "sha256": "c368d44f8a1c35dcf07107cb921500cf468645de372d5d532e7f07bd34360d68"
+    },
+    {
+      "id": "equipment-33500",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/equipment/33500.json",
+      "path": "zh/equipment/33500.json",
+      "entityType": "equipment",
+      "language": "zh",
+      "entityId": 33500,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.x-drive-disc-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/equipment/33500.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b9-3ae\"",
+        "lastModified": "Wed, 06 May 2026 01:00:41 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 943,
+      "sha256": "5e8d4265dd96a693e753dbe9d7ee0e6cee4a1d68d81aaedabd50da4cb6e16f77"
+    },
+    {
+      "id": "equipment-33600",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/equipment/33600.json",
+      "path": "zh/equipment/33600.json",
+      "entityType": "equipment",
+      "language": "zh",
+      "entityId": 33600,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.x-drive-disc-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/equipment/33600.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b9-2f6\"",
+        "lastModified": "Wed, 06 May 2026 01:00:41 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 759,
+      "sha256": "cad52d0fcb629f56d5148c6ab21a18666c201880b5f129b8c10cc1a2a86375ca"
+    },
+    {
+      "id": "equipment-33700",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/equipment/33700.json",
+      "path": "zh/equipment/33700.json",
+      "entityType": "equipment",
+      "language": "zh",
+      "entityId": 33700,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.x-drive-disc-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/equipment/33700.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b9-311\"",
+        "lastModified": "Wed, 06 May 2026 01:00:41 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 786,
+      "sha256": "9db0caf48e7dcf05df62b60797f0c799872899d93936102dc3adf313f2564aab"
+    },
+    {
+      "id": "equipment-33800",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/equipment/33800.json",
+      "path": "zh/equipment/33800.json",
+      "entityType": "equipment",
+      "language": "zh",
+      "entityId": 33800,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.x-drive-disc-batch-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/equipment/33800.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b9-478\"",
+        "lastModified": "Wed, 06 May 2026 01:00:41 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 1145,
+      "sha256": "fa1ead65cea6a37cbb8df03c2cf7c7cf3c1f3a234e7392a7375877248f583c8a"
     }
   ],
   "summary": {
@@ -4511,6 +5056,39 @@
       "name": "啄木鸟电音",
       "hasSetDescriptions": true
     },
-    "retainedAssetCount": 195
+    "driveDiscBatch": {
+      "indexCount": 26,
+      "retainedDetailCount": 26,
+      "ids": [
+        31000,
+        31100,
+        31200,
+        31300,
+        31400,
+        31500,
+        31600,
+        31800,
+        31900,
+        32200,
+        32300,
+        32400,
+        32500,
+        32600,
+        32700,
+        32800,
+        32900,
+        33000,
+        33100,
+        33200,
+        33300,
+        33400,
+        33500,
+        33600,
+        33700,
+        33800
+      ],
+      "approvedForCleanedOutputCount": 26
+    },
+    "retainedAssetCount": 221
   }
 }

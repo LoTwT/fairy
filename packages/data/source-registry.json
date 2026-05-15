@@ -1,6 +1,6 @@
 {
   "schemaVersion": "source-registry/v0.1.0",
-  "generatedAt": "2026-05-15T23:42:00+08:00",
+  "generatedAt": "2026-05-16T00:40:00+08:00",
   "sources": [
     {
       "sourceId": "nanoka-zzz",
@@ -22,11 +22,11 @@
       "approvedLiveVersionsScope": "runtime-primary | snapshot-diff-historical-input | archived-audit-fixture",
       "urlAllowlist": {
         "manifestUrl": "^https://static\\.nanoka\\.cc/manifest\\.json$",
-        "versionedIndexUrls": "^https://static\\.nanoka\\.cc/zzz/(?:\\d[\\dA-Za-z.+-]*)/(?:boss|character|bangboo|weapon)\\.json$",
+        "versionedIndexUrls": "^https://static\\.nanoka\\.cc/zzz/(?:\\d[\\dA-Za-z.+-]*)/(?:boss|character|bangboo|weapon|equipment)\\.json$",
         "localizedDetailUrls": "^https://static\\.nanoka\\.cc/zzz/(?:\\d[\\dA-Za-z.+-]*)/(?:zh|en|ja|ko)/[a-z]+/\\d+\\.json$"
       },
-      "fetchedAt": "2026-05-16T00:08:00+08:00",
-      "lastVerifiedAt": "2026-05-16T00:08:00+08:00",
+      "fetchedAt": "2026-05-16T00:40:00+08:00",
+      "lastVerifiedAt": "2026-05-16T00:40:00+08:00",
       "contentHash": "sha256:91494c2c3bfda6ec47beccbf71066506ab0a315513aa751cf30e4c3a1dc0817d",
       "takedownPath": "docs/data-source/takedown-rollback.md#nanoka",
       "fallbackPlan": "runtime rollback requires explicit lo-user hotfix approval; archived Excel/D-17/D-12 snapshots remain audit references only",
@@ -36,6 +36,7 @@
         "V1.2.1 extends the retained approved-live Bangboo fixture set from three detail samples to the full 2.8 bangboo.json index.",
         "V1.2.x PR-A extends the retained approved-live character fixture set to the full 2.8 character.json index and promotes 53 runtime Agent records.",
         "V1.2.x PR-B extends the retained approved-live W-Engine fixture set to the full 2.8 weapon.json index and promotes 89 runtime W-Engine records.",
+        "V1.2.x PR-C extends the retained approved-live Drive Disc set fixture set to the full 2.8 equipment.json index and promotes 26 runtime Drive Disc identity records while retaining set-effect text in audit.",
         "Current cleaned output rows must use configuredLiveVersion; archived Excel/D-17/D-12 sources must not be runtime fallbacks.",
         "manifest.zzz.latest is research/drift input only unless lo-user approves a new configured live version."
       ]

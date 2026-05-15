@@ -81,6 +81,7 @@ describe("nanoka source gate", () => {
     expect(requirePattern(source.urlAllowlist, "versionedIndexUrls").test("https://static.nanoka.cc/zzz/2.8/character.json")).toBe(true)
     expect(requirePattern(source.urlAllowlist, "versionedIndexUrls").test("https://static.nanoka.cc/zzz/2.8/bangboo.json")).toBe(true)
     expect(requirePattern(source.urlAllowlist, "versionedIndexUrls").test("https://static.nanoka.cc/zzz/2.8/weapon.json")).toBe(true)
+    expect(requirePattern(source.urlAllowlist, "versionedIndexUrls").test("https://static.nanoka.cc/zzz/2.8/equipment.json")).toBe(true)
     expect(requirePattern(source.urlAllowlist, "localizedDetailUrls").test("https://static.nanoka.cc/zzz/2.8/zh/character/1021.json")).toBe(true)
     expect(requirePattern(source.urlAllowlist, "localizedDetailUrls").test("https://static.nanoka.cc/zzz/2.8/zh/monster/30000.json")).toBe(true)
   })
@@ -306,6 +307,35 @@ describe("nanoka source gate", () => {
     expect(rows.get("wEngines.baseStats")?.blockedBy ?? []).toEqual([])
     expect(rows.get("wEngines.passiveModifiers")?.supportingSampleEntities).toHaveLength(89)
     expect(rows.get("wEngines.passiveModifiers")?.blockedBy).toContain("typed-modifier-template-required")
+  })
+
+  it("locks the V1.2.x Drive Disc set batch to the full approved-live index", () => {
+    const matrix = readJson<CoverageMatrix>("data/cleaned/audit/nanoka-coverage-matrix.json")
+    const samples = new Map(matrix.sampleSources.map(sample => [sample.id, sample]))
+    const rows = new Map(matrix.rows.map(row => [row.fieldId, row]))
+    const driveDiscSamples = matrix.sampleSources.filter(sample => sample.entityType === "driveDisc" && sample.version === "2.8")
+
+    expect(samples.get("nanoka-equipment-index-live-2.8")).toMatchObject({
+      version: "2.8",
+      approvedForCleanedOutput: true,
+      evidenceUse: "v1.2.x-drive-disc-batch-source-gate",
+    })
+    expect(driveDiscSamples).toHaveLength(26)
+
+    expect(rows.get("driveDiscs.identity")).toMatchObject({
+      sampleEntity: "nanoka-equipment-index-live-2.8",
+      auditArtifact: "data/cleaned/audit/nanoka-drive-disc-batch-audit.json",
+    })
+    expect(rows.get("driveDiscs.identity")?.supportingSampleEntities).toHaveLength(26)
+    expect(rows.get("driveDiscs.identity")?.notes).toContain("no new golden anchors")
+
+    expect(rows.get("driveDiscs.setModifiers")).toMatchObject({
+      sampleEntity: "nanoka-equipment-index-live-2.8",
+      auditArtifact: "data/cleaned/audit/nanoka-drive-disc-batch-audit.json",
+      promotable: false,
+    })
+    expect(rows.get("driveDiscs.setModifiers")?.supportingSampleEntities).toHaveLength(26)
+    expect(rows.get("driveDiscs.setModifiers")?.blockedBy).toContain("typed-modifier-template-required")
   })
 
   it("locks enemy variant mapping to approved live monster detail samples", () => {
