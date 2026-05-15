@@ -2,8 +2,8 @@
   "schemaVersion": "nanoka-fetch-manifest-v1",
   "sourceId": "nanoka-zzz",
   "snapshotId": "2.8",
-  "fetchedAt": "2026-05-15T11:55:00+08:00",
-  "generatedAt": "2026-05-15T11:55:00+08:00",
+  "fetchedAt": "2026-05-15T12:20:00+08:00",
+  "generatedAt": "2026-05-15T12:20:00+08:00",
   "parserVersion": "nanoka-source-v0.1.0",
   "userAgent": "fairy-data-source-audit/0.1 (+https://github.com/LoTwT/fairy)",
   "formalLivePolicy": {
@@ -74,7 +74,7 @@
       "language": "zh",
       "entityId": 1021,
       "approvedForCleanedOutput": true,
-      "evidenceUse": "agent-panel-sentinel-source-gate",
+      "evidenceUse": "agent-panel-resonance-source-gate",
       "sourceVersion": "2.8",
       "localPath": "data/source/raw/nanoka/zzz/2.8/zh/character/1021.json",
       "status": 200,
@@ -86,6 +86,27 @@
       },
       "bytes": 57974,
       "sha256": "9d5a3226975802371089816df50a5cd1bfcdb2ccb75bdc4b2f50d4e756ba1375"
+    },
+    {
+      "id": "character-yixuan-1371",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/character/1371.json",
+      "path": "zh/character/1371.json",
+      "entityType": "character",
+      "language": "zh",
+      "entityId": 1371,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "adrenaline-resonance-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/character/1371.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b9-17054\"",
+        "lastModified": "Wed, 06 May 2026 01:00:41 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 94293,
+      "sha256": "710c0e2fa5fca2779819b76c23a4abf8d445ba7e4a2f1cbfccd9145185143c94"
     },
     {
       "id": "boss-69036",
@@ -180,11 +201,29 @@
       "id": 1021,
       "codeName": "Nekomata",
       "hasStats": true,
-      "sentinelRawPaths": [
+      "resourceRawPaths": [
         "/stats/rp_max",
         "/stats/rp_recover",
         "/skill_list/*/level/*/fever_recovery",
         "/skill_list/*/level/*/rp_recovery"
+      ]
+    },
+    "sentinelSample": {
+      "id": 1371,
+      "codeName": "Yixuan",
+      "hasStats": true,
+      "rpMaxRaw": 120,
+      "rpRecoverRaw": 200,
+      "firstSkillParam": {
+        "id": 1371001,
+        "feverRecoveryRaw": 71500,
+        "rpRecoveryRaw": 5200
+      },
+      "rawPaths": [
+        "/stats/rp_max",
+        "/stats/rp_recover",
+        "/skill/basic/description/4/param/0/param/1371001/fever_recovery",
+        "/skill/basic/description/4/param/0/param/1371001/rp_recovery"
       ]
     },
     "deadlyAssaultSample": {
@@ -209,6 +248,6 @@
       "name": "啄木鸟电音",
       "hasSetDescriptions": true
     },
-    "retainedAssetCount": 7
+    "retainedAssetCount": 8
   }
 }

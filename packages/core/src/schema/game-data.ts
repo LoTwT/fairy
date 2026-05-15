@@ -46,6 +46,8 @@ export const skillSegmentDataSchema = z
     levelKey: z.string().min(1),
     multiplierByLevel: numberTableSchema.optional(),
     dazeMultiplierByLevel: numberTableSchema.optional(),
+    resonanceRecoveryByLevel: numberTableSchema.optional(),
+    adrenalineRecoveryByLevel: numberTableSchema.optional(),
     damageType: damageTypeSchema.optional(),
     hitCount: z.number().int().positive().optional(),
     defaultTags: z.array(attackTagSchema).optional(),

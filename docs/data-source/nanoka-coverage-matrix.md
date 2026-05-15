@@ -3,7 +3,8 @@
 Status: Phase 0 R1-R6 locked update
 Owner: @TechLead
 Reviewers: @Product, @QA
-Related: D-20 data-source migration, task #121, task #122, task #125, task #127
+Related: D-20 data-source migration, task #121, task #122, task #125, task #127,
+task #138, task #140
 
 This matrix is schema-first. It is derived from the canonical `GameData` and
 `BattleSnapshot` schemas, then checked against sampled nanoka detail endpoints.
@@ -48,20 +49,22 @@ The machine-readable version is
 | Agent / Nekomata | `https://static.nanoka.cc/zzz/3.0.2+15625449/zh/character/1021.json` | `talent` has six entries, while `potential` / `potential_detail` are empty. Used to avoid treating `extra_level` as Mindscape by default. |
 | Agent / Soldier 11 | `https://static.nanoka.cc/zzz/3.0.2+15625449/zh/character/1041.json` | `talent`, `potential`, and `potential_detail` all have six entries. Used to separate Mindscape-like text from potential activation semantics. |
 | Live Agent / Nekomata | `https://static.nanoka.cc/zzz/2.8/zh/character/1021.json` | Approved live sample for promotable agent identity, enum, base panel, and skill-number rows; retained under `data/source/raw/nanoka/zzz/2.8/`. |
+| Live Agent / Yixuan | `https://static.nanoka.cc/zzz/2.8/zh/character/1371.json` | Approved live sample for Adrenaline (`rp_*`) and Resonance (`fever_recovery`) resource fields; retained under `data/source/raw/nanoka/zzz/2.8/`. |
 | Live Bangboo / Plugboo | `https://static.nanoka.cc/zzz/2.8/zh/bangboo/54008.json` | Approved live sample for Bangboo identity, base panel, and skill segment rows; retained under `data/source/raw/nanoka/zzz/2.8/`. |
 | Enemy / Dullahan sample | `https://static.nanoka.cc/zzz/3.0.2+15625449/zh/monster/30000.json` | `monster_info.*.stats`, `curves`, `element`, `element_abnormal`. Variant mapping is still unresolved. |
 | Live W-Engine / Yixuan signature sample | `https://static.nanoka.cc/zzz/2.8/zh/weapon/14137.json` | Approved live sample for W-Engine identity; `base_property`, `rand_property`, `level`, `stars`, and `talents` remain blocked for stat/passive promotion until mapping/templates are proven. |
 | Live Drive Disc / Woodpecker Electro sample | `https://static.nanoka.cc/zzz/2.8/zh/equipment/31000.json` | Approved live sample for Drive Disc identity; `desc2` / `desc4` text exists, but typed modifiers are not promotable until deterministic parsing/templates exist. |
 | Manifest / live gate | `https://static.nanoka.cc/manifest.json` | `zzz.live = 2.8`, `zzz.latest = 3.0.2+15625449`, `zzz.available[]` supports approved-live version allowlists and snapshot-derived patch diff history. |
-| Live Sentinel sample / Nekomata | `https://static.nanoka.cc/zzz/2.8/zh/character/1021.json` | `stats.rp_max`, `stats.rp_recover`, and skill `fever_recovery` / `rp_recovery` raw paths exist in the live version. |
+| Live Adrenaline / Resonance sample / Yixuan | `https://static.nanoka.cc/zzz/2.8/zh/character/1371.json` | `stats.rp_max = 120`, `stats.rp_recover = 200`, `fever_recovery`, and `rp_recovery` raw paths exist in the configured live version. |
 | Live Deadly Assault index | `https://static.nanoka.cc/zzz/2.8/boss.json` | 38 live DA entries; all sampled `zh/boss/{id}.json` details returned 200 in PR #54. |
 | Live Deadly Assault period / 69036 | `https://static.nanoka.cc/zzz/2.8/zh/boss/69036.json` | Current live period window, zones, layer/selectable buffs, room monster lists, weakness data, and `boss_adjust`. |
 
 The `3.0.2+15625449` samples are retained as phase-0 research evidence, not as
-release-ready source evidence. Phase 2 slice 3 re-sampled all current
-`promotable=true` rows to approved live `2.8` samples; future promotions must
-continue to use approved live sample evidence or receive explicit owner
-approval for a newer version.
+release-ready source evidence. Phase 2 slice 3 re-sampled existing
+`promotable=true` rows to approved live `2.8` samples. Phase 2 slice 4 locks
+Adrenaline / Resonance resource naming and unit transforms from live Yixuan
+evidence. Future promotions must continue to use approved live sample evidence
+or receive explicit owner approval for a newer version.
 
 ## Corrections To The Discussion Checklist
 
@@ -89,8 +92,8 @@ approval for a newer version.
 
 ## Human-Readable Summary
 
-Machine summary after task #127: 45 rows total, 31 `verified-from-nanoka`, 8
-`needs-tl-research`, 0 `needs-owner-research`, 6 `deferred`, and 9
+Machine summary after task #140: 45 rows total, 31 `verified-from-nanoka`, 8
+`needs-tl-research`, 0 `needs-owner-research`, 6 `deferred`, and 13
 `promotableNow`.
 
 | Area | Status | Promote Now | Main Blocker |
@@ -102,8 +105,8 @@ Machine summary after task #127: 45 rows total, 31 `verified-from-nanoka`, 8
 | Agent promotion extra stats | needs-tl-research | no | `extra_level` raw fields exist, but final snapshot composition semantics are not locked. |
 | Agent skill numeric params | verified-from-nanoka | yes | Current promotable row points to approved live Nekomata evidence; full level derivation needs transform tests, but sampled base/growth paths exist. |
 | Agent passive / talent / potential | verified-from-nanoka | no | Raw text/objects exist; typed modifier and potential semantics are unresolved. |
-| Rupture and adrenaline candidate fields | verified-from-nanoka | no | Raw fields exist; semantic mapping must be validated. |
-| Sentinel / decibel fields | verified-from-nanoka | no | Live raw fields exist; canonical naming and unit normalization are unresolved. |
+| Adrenaline panel fields | verified-from-nanoka | yes | `rp_max -> maxAdrenaline`; `rp_recover / 100 -> automaticAdrenalineAccumulation`, proven from live Yixuan. |
+| Resonance / Adrenaline skill recovery | verified-from-nanoka | yes | `fever_recovery / 1000 -> resonanceRecovery`; `rp_recovery / 10000 -> adrenalineRecovery`, proven from live Yixuan and Nekomata. |
 | Bangboo skill numeric params | verified-from-nanoka | yes | G26 sampled values are promotable from approved live Plugboo evidence. |
 | Bangboo panel stats | verified-from-nanoka | yes | Formula proven for G26 Plugboo: `stats[key] + level[promotionPhase][key] + stats[key_upgrade] * (level - 1) / 10000`, with retained live Plugboo panel tests. |
 | Enemy stats/resistance/thresholds | verified-from-nanoka | no | Raw fields exist; variant mapping and formula mapping are unresolved. |
@@ -136,10 +139,10 @@ Task #122 batch 1 leaves 8 rows in `needs-tl-research`:
 
 - `metadata.snapshotDiffHistory` — R4.a snapshot-derived numeric patch history,
   derived from `manifest.zzz.available` and approved live snapshot hashes.
-- `sentinel.rpMax` / `sentinel.rpRecover` / `sentinel.skillFeverRecovery` /
-  `sentinel.skillRpRecovery` — raw Sentinel / decibel fields verified from the
-  live Nekomata sample; typed promotion waits on canonical naming and unit
-  normalization.
+- `adrenaline.maxAdrenaline` / `adrenaline.automaticAdrenalineAccumulation` /
+  `skills.resonanceRecovery` / `skills.adrenalineRecovery` — resource fields
+  verified from approved live Yixuan evidence and promoted with deterministic
+  unit transforms.
 - `deadlyAssault.periodsBossesBuffs` — nanoka live DA raw source row; runtime
   promotion waits on `boss_adjust`, score/HP semantics, and period filtering.
 

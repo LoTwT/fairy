@@ -112,6 +112,8 @@ function validateMatrixAgainstRegistry(matrix, registry) {
 
   const sampleById = new Map((matrix.sampleSources ?? []).map(sample => [sample.id, sample]))
   for (const row of matrix.rows ?? []) {
+    assert(!row.fieldId?.startsWith("sentinel."), `${row.fieldId}: provisional sentinel fieldId must use canonical Adrenaline/Resonance naming`)
+
     if (row.promotable !== true)
       continue
 
@@ -120,6 +122,20 @@ function validateMatrixAgainstRegistry(matrix, registry) {
     assert(sample.approvedForCleanedOutput === true, `${row.fieldId}: promotable row must use approved live sample evidence`)
     if (sample.entityType !== "sourceManifest")
       assert(sample.version === nanoka.configuredLiveVersion, `${row.fieldId}: promotable row must use configuredLiveVersion sample evidence`)
+  }
+
+  const resourceRows = new Map((matrix.rows ?? []).map(row => [row.fieldId, row]))
+  for (const fieldId of [
+    "adrenaline.maxAdrenaline",
+    "adrenaline.automaticAdrenalineAccumulation",
+    "skills.resonanceRecovery",
+    "skills.adrenalineRecovery",
+  ]) {
+    const row = resourceRows.get(fieldId)
+    assert(row !== undefined, `${fieldId}: missing Adrenaline/Resonance typed promote row`)
+    assert(row.status === "verified-from-nanoka", `${fieldId}: resource row must be verified-from-nanoka`)
+    assert(row.promotable === true, `${fieldId}: resource row must be promotable after unit mapping lock`)
+    assert(row.sampleEntity === "nanoka-character-yixuan-live-1371", `${fieldId}: resource row must use live Yixuan sample evidence`)
   }
 }
 

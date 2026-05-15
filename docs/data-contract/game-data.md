@@ -119,6 +119,8 @@ interface SkillSegmentData {
   levelKey: string
   multiplierByLevel?: LevelTable<number>
   dazeMultiplierByLevel?: LevelTable<number>
+  resonanceRecoveryByLevel?: LevelTable<number>
+  adrenalineRecoveryByLevel?: LevelTable<number>
   damageType?: DamageType
   hitCount?: number
   defaultTags?: AttackTag[]
@@ -129,6 +131,11 @@ interface SkillSegmentData {
 Skill data can provide default segments. `BattleSnapshot.attackSegments[]` still
 remains the executable calculation input because the user may override segment
 state, target, tags, distance decay, or manual scenario fields.
+
+`resonanceRecoveryByLevel` stores source-backed base Decibel / Resonance
+recovery for the segment. `adrenalineRecoveryByLevel` stores source-backed base
+Adrenaline recovery for rupture agents such as Yixuan. Both are static data
+fields; V1 does not simulate resource timelines.
 
 ## 6. Bangboos
 

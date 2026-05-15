@@ -76,7 +76,17 @@ function snapshotAssets(snapshot) {
       language: "zh",
       entityId: 1021,
       approvedForCleanedOutput: true,
-      evidenceUse: "agent-panel-sentinel-source-gate",
+      evidenceUse: "agent-panel-resonance-source-gate",
+    },
+    {
+      id: "character-yixuan-1371",
+      url: `https://static.nanoka.cc/zzz/${snapshot}/zh/character/1371.json`,
+      path: "zh/character/1371.json",
+      entityType: "character",
+      language: "zh",
+      entityId: 1371,
+      approvedForCleanedOutput: true,
+      evidenceUse: "adrenaline-resonance-source-gate",
     },
     {
       id: "boss-69036",
@@ -148,6 +158,7 @@ function summarizeSnapshot(snapshot, assets) {
   const manifest = readJson(join(sourceRoot, snapshot, "manifest.json"))
   const bossIndex = readJson(join(sourceRoot, snapshot, "boss.json"))
   const character = readJson(join(sourceRoot, snapshot, "zh/character/1021.json"))
+  const sentinelCharacter = readJson(join(sourceRoot, snapshot, "zh/character/1371.json"))
   const boss = readJson(join(sourceRoot, snapshot, "zh/boss/69036.json"))
   const bangboo = readJson(join(sourceRoot, snapshot, "zh/bangboo/54008.json"))
   const weapon = readJson(join(sourceRoot, snapshot, "zh/weapon/14137.json"))
@@ -161,6 +172,8 @@ function summarizeSnapshot(snapshot, assets) {
     throw new Error("boss index is missing sample DA boss 69036")
   if (character.id !== 1021)
     throw new Error("character sample id drifted")
+  if (sentinelCharacter.id !== 1371)
+    throw new Error("sentinel character sample id drifted")
   if (boss.id !== 69036)
     throw new Error("boss sample id drifted")
   if (bangboo.id !== 54008)
@@ -178,11 +191,29 @@ function summarizeSnapshot(snapshot, assets) {
       id: character.id,
       codeName: character.code_name,
       hasStats: character.stats !== undefined,
-      sentinelRawPaths: [
+      resourceRawPaths: [
         "/stats/rp_max",
         "/stats/rp_recover",
         "/skill_list/*/level/*/fever_recovery",
         "/skill_list/*/level/*/rp_recovery",
+      ],
+    },
+    sentinelSample: {
+      id: sentinelCharacter.id,
+      codeName: sentinelCharacter.code_name,
+      hasStats: sentinelCharacter.stats !== undefined,
+      rpMaxRaw: sentinelCharacter.stats?.rp_max,
+      rpRecoverRaw: sentinelCharacter.stats?.rp_recover,
+      firstSkillParam: {
+        id: 1371001,
+        feverRecoveryRaw: sentinelCharacter.skill?.basic?.description?.[4]?.param?.[0]?.param?.["1371001"]?.fever_recovery,
+        rpRecoveryRaw: sentinelCharacter.skill?.basic?.description?.[4]?.param?.[0]?.param?.["1371001"]?.rp_recovery,
+      },
+      rawPaths: [
+        "/stats/rp_max",
+        "/stats/rp_recover",
+        "/skill/basic/description/4/param/0/param/1371001/fever_recovery",
+        "/skill/basic/description/4/param/0/param/1371001/rp_recovery",
       ],
     },
     deadlyAssaultSample: {
@@ -300,6 +331,10 @@ function verifySnapshot(snapshot) {
     throw new Error("boss index count summary drifted")
   if (summary.deadlyAssaultSample.zoneCount !== manifest.summary?.deadlyAssaultSample?.zoneCount)
     throw new Error("DA sample zone count summary drifted")
+  if (summary.sentinelSample?.rpMaxRaw !== manifest.summary?.sentinelSample?.rpMaxRaw)
+    throw new Error("sentinel sample rp_max summary drifted")
+  if (summary.sentinelSample?.firstSkillParam?.rpRecoveryRaw !== manifest.summary?.sentinelSample?.firstSkillParam?.rpRecoveryRaw)
+    throw new Error("sentinel sample rp_recovery summary drifted")
 
   console.log(`nanoka snapshot ${snapshot} verification passed`)
 }

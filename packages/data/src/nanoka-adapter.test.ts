@@ -69,6 +69,7 @@ describe("nanoka raw snapshot adapter skeleton", () => {
         snapshotManifestPath,
         "data/source/raw/nanoka/zzz/2.8/boss.json",
         "data/source/raw/nanoka/zzz/2.8/zh/character/1021.json",
+        "data/source/raw/nanoka/zzz/2.8/zh/character/1371.json",
         "data/source/raw/nanoka/zzz/2.8/zh/boss/69036.json",
       ]),
     )
@@ -105,7 +106,7 @@ describe("nanoka raw snapshot adapter skeleton", () => {
     })
     expect(parsed.records).toHaveLength(manifest.assets.length)
     expect(parsed.records.map(record => record.id)).toEqual(
-      expect.arrayContaining(["manifest", "boss-index", "character-nekomata-1021", "boss-69036"]),
+      expect.arrayContaining(["manifest", "boss-index", "character-nekomata-1021", "character-yixuan-1371", "boss-69036"]),
     )
     expect(parsed.notes.join("\n")).toContain("source-gate only")
   })

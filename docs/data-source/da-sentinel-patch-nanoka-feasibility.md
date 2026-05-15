@@ -131,7 +131,29 @@ Conclusion:
   at least `verified-from-nanoka`, but not fully promotable until the
   `boss_adjust` and scoring semantics are mapped.
 
-## Sentinel / Decibel Evidence
+## Adrenaline / Resonance Evidence
+
+Phase 2 follow-up note: the initial audit below used Nekomata as the only live
+sample and treated Yixuan as latest-only research evidence. Later live
+re-sampling confirmed that
+`https://static.nanoka.cc/zzz/2.8/zh/character/1371.json` is available under the
+configured live snapshot. That live Yixuan detail is now the approved evidence
+for Adrenaline (`rp_*`) unit mapping, while Nekomata remains useful for ordinary
+Resonance (`fever_recovery`) recovery.
+
+Locked transform mapping:
+
+| Nanoka raw field | Canonical field | Transform |
+|---|---|---:|
+| `stats.rp_max` | `maxAdrenaline` | identity |
+| `stats.rp_recover` | `automaticAdrenalineAccumulation` | `/ 100` |
+| `fever_recovery` | `resonanceRecovery` | `/ 1000` |
+| `fever_recovery_growth` | `resonanceRecoveryGrowth` | `/ 1000` |
+| `rp_recovery` | `adrenalineRecovery` | `/ 10000` |
+| `rp_recovery_growth` | `adrenalineRecoveryGrowth` | `/ 10000` |
+
+The provisional `sentinel.*` wording below is superseded for typed data by the
+canonical D-11 names `adrenaline*` and `resonance*`.
 
 Nanoka character details expose raw fields for the current "喧响 / decibel /
 sentinel" concern.

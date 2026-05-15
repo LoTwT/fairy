@@ -619,6 +619,8 @@ describe("GameData schema", () => {
               levelKey: "default",
               multiplierByLevel: { "1": 4.62 },
               dazeMultiplierByLevel: { "1": 2.7 },
+              resonanceRecoveryByLevel: { "1": 47.025 },
+              adrenalineRecoveryByLevel: { "1": 0 },
               damageType: "regular",
               defaultTags: ["special"],
               source,
