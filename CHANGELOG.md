@@ -6,20 +6,35 @@ All notable changes to Fairy are documented in this file.
 
 ### Added
 
-- Add nanoka-backed runtime cleaned `GameData` artifact and public data package runtime export.
-- Add G27 Yixuan and G28 Plugboo executable replay anchors, expanding the golden gate to 28 anchors.
-- Add Phase 3 drift reports, rulings, proof anchors, and fail-loud migration gates for nanoka cutover.
-- Add release-time nanoka runtime verification and archived-source runtime guard.
-
-### Changed
-
-- Cut over V0.1.0 source-backed runtime data to approved-live nanoka (`manifest.zzz.live` / `nanoka-zzz@2.8`).
-- Deprecate Excel, Mihoyo D-17, and buhflipexplode D-12 as runtime sources while retaining their raw snapshots as archived audit references.
-- Mark V0.1.0 as a schema-breaking minor release for data-source provenance and runtime data packaging.
+- Add nanoka source gate foundation (#57)
+- Add nanoka adapter skeleton (#58)
+- Add nanoka live panel resampling gate (#59)
+- Add nanoka adrenaline resource promote gate (#60)
+- Add nanoka DA formal-live mapping gate
+- Add nanoka enemy variant mapping gate (#62)
+- Add nanoka snapshot diff history gate (#63)
+- Promote nanoka source metadata gates (#64)
+- Add nanoka promotion extra gate (#65)
+- Add nanoka bangboo element gate (#66)
+- Add nanoka drive disc slot audit (#67)
+- Add nanoka disorder formula audit (#68)
+- Add nanoka disorder daze-level audit (#69)
+- Add phase 3 drift foundation (#70)
+- Add first phase 3 drift sync
+- Add phase 3 missing anchor candidates
+- Add phase 3 semantic rulings
+- Add phase 3 G27 G28 sync
+- Cut over nanoka runtime data
 
 ### Documentation
 
-- Document V0.1.0 schema migration, release notes, takedown response, and data-source disclaimer.
+- Audit source migration candidates
+- Add nanoka schema inventory (#52)
+- Refine nanoka coverage research (#53)
+- Audit nanoka DA sentinel patch coverage (#54)
+- Update nanoka matrix for locked scope (#55)
+- D-20 v0.4 data source migration decision log (#56)
+- Prepare v0.1.0 release notes
 
 ## 0.0.4 - 2026-05-14
 
