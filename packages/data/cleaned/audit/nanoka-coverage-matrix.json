@@ -1,6 +1,6 @@
 {
   "schemaVersion": "nanoka-coverage-matrix/v0.1",
-  "generatedAt": "2026-05-15T13:20:00+08:00",
+  "generatedAt": "2026-05-15T13:40:00+08:00",
   "status": "phase-2-enemy-variant-mapping-gate",
   "sourceVersion": "manifest.zzz.live",
   "canonicalSchemas": [
@@ -363,15 +363,15 @@
         "/zzz/live",
         "/zzz/latest"
       ],
-      "transformRule": "R4.a: derive numeric patch history by diffing approved-live snapshot hashes and raw JSON paths; latest/pre-release snapshots are research-only unless lo-user approves them",
+      "transformRule": "R4.a: derive numeric patch history by diffing approved-live snapshot hashes and raw JSON numeric paths; latest/pre-release snapshots are research-only unless lo-user approves them",
       "sampleEntity": "nanoka-manifest",
       "rawAvailable": true,
-      "promotable": false,
+      "promotable": true,
       "blockedBy": [
-        "snapshot-diff-tool-required",
-        "approved-live-version-allowlist-required"
+        "field:additional-approved-live-version-required-for-non-empty-history"
       ],
-      "notes": "No dedicated patch-note/changelog prose endpoint was found in PR #54. This row represents snapshot-derived numeric diff history only."
+      "notes": "No dedicated patch-note/changelog prose endpoint was found in PR #54. This row represents snapshot-derived numeric diff history only; officialPatchNoteText stays not-found and prose changelog is not fabricated.",
+      "auditArtifact": "data/cleaned/audit/nanoka-snapshot-diff-history.json"
     },
     {
       "fieldId": "metadata.aliases",
@@ -1283,8 +1283,8 @@
     "needsTlResearch": 7,
     "needsOwnerResearch": 0,
     "deferred": 6,
-    "promotableNow": 15,
-    "notPromotableYet": 30
+    "promotableNow": 16,
+    "notPromotableYet": 29
   },
   "openResearchItems": [
     "source registry contract, liveVersionRef policy, approvedLiveVersions[], and content hash capture",
@@ -1301,7 +1301,6 @@
     "Drive Disc slot main stat and substat table source",
     "DA boss_adjust, score/HP, field-rule, and period filter semantic mapping",
     "Sentinel canonical naming and unit normalization",
-    "snapshot-derived patch history diff tool and approved-live-version allowlist",
     "disorder formula and disorder daze-level source/config endpoint"
   ],
   "liveVersionRef": "manifest.zzz.live",

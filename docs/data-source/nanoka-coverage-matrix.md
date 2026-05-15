@@ -4,7 +4,7 @@ Status: Phase 2 enemy variant mapping gate
 Owner: @TechLead
 Reviewers: @Product, @QA
 Related: D-20 data-source migration, task #121, task #122, task #125, task #127,
-task #138, task #140, task #142, task #144
+task #138, task #140, task #142, task #144, task #146
 
 This matrix is schema-first. It is derived from the canonical `GameData` and
 `BattleSnapshot` schemas, then checked against sampled nanoka detail endpoints.
@@ -95,14 +95,14 @@ or receive explicit owner approval for a newer version.
 
 ## Human-Readable Summary
 
-Machine summary after task #144: 45 rows total, 32 `verified-from-nanoka`, 7
-`needs-tl-research`, 0 `needs-owner-research`, 6 `deferred`, and 15
+Machine summary after task #146: 45 rows total, 32 `verified-from-nanoka`, 7
+`needs-tl-research`, 0 `needs-owner-research`, 6 `deferred`, and 16
 `promotableNow`.
 
 | Area | Status | Promote Now | Main Blocker |
 |---|---|---:|---|
 | Source metadata / registry | needs-tl-research | no | `liveVersionRef`, `approvedLiveVersions[]`, source hashes, and stable-version CI still need implementation. |
-| Snapshot-derived patch history | verified-from-nanoka | no | R4.a locks snapshot-derived numeric diff; diff tool and approved-live allowlist are still required. |
+| Snapshot-derived patch history | verified-from-nanoka | yes | R4.a snapshot-derived numeric diff tool exists and is gated by `approvedLiveVersions[]`; current artifact has one approved live snapshot (`2.8`) and therefore no compared pairs until another live version is approved. |
 | Agent identity / labels / enums | verified-from-nanoka | yes | Current promotable rows point to approved live Nekomata evidence; enum mapping table must be recorded. |
 | Agent base panel stats | verified-from-nanoka | yes | Formula proven for `baseStatsByLevel`: `stats[key] + level[promotionPhase][key] + stats[key_growth] * (level - 1) / 10000`, with retained live Nekomata panel tests. Promotion extra stats remain separate. |
 | Agent promotion extra stats | needs-tl-research | no | `extra_level` raw fields exist, but final snapshot composition semantics are not locked. |
@@ -139,8 +139,10 @@ After task #144, 7 rows remain in `needs-tl-research`:
 
 ## Current Scope Rows Added By R1/R4/R6
 
-- `metadata.snapshotDiffHistory` — R4.a snapshot-derived numeric patch history,
-  derived from `manifest.zzz.available` and approved live snapshot hashes.
+- `metadata.snapshotDiffHistory` — R4.a snapshot-derived numeric patch history;
+  task #146 emits `data/cleaned/audit/nanoka-snapshot-diff-history.json` from
+  approved live snapshot hashes and marks official patch-note prose as
+  `not-found`.
 - `adrenaline.maxAdrenaline` / `adrenaline.automaticAdrenalineAccumulation` /
   `skills.resonanceRecovery` / `skills.adrenalineRecovery` — resource fields
   verified from approved live Yixuan evidence and promoted with deterministic

@@ -53,14 +53,9 @@ describe("patch history allowlist gate", () => {
       fieldClass: "derived",
       sourcePolicy: "derived-from-source-registry",
       status: "verified-from-nanoka",
-      promotable: false,
+      promotable: true,
     })
-    expect(row?.blockedBy).toEqual(
-      expect.arrayContaining([
-        "snapshot-diff-tool-required",
-        "approved-live-version-allowlist-required",
-      ]),
-    )
+    expect(row?.blockedBy).toEqual(["field:additional-approved-live-version-required-for-non-empty-history"])
     expect(row?.transformRule).toContain("approved-live snapshot hashes")
   })
 
