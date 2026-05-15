@@ -18,9 +18,9 @@ Mihoyo is the V1 source for:
 - zh/en text alignment against the retained buhflipexplode live snapshot.
 
 Mihoyo is not the primary source for Deadly Assault numeric multipliers in V1.
-buhflipexplode remains the source for DA period slot ids, HP/daze/anomaly
-multipliers, and English source text. Excel remains the fallback/base-game
-source when a non-DA field is required.
+After the V0.1.0 nanoka runtime cutover, Mihoyo D-17, buhflipexplode D-12, and
+Excel are archived audit references only; runtime source-backed data is
+nanoka-exclusive.
 
 ## Endpoint Policy
 

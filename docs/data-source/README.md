@@ -1,13 +1,14 @@
 # Data Source Ingestion
 
-Status: S5 segment 2 source baseline
+Status: V0.1.0 nanoka runtime cutover baseline
 Owner: @TechLead
-Inputs: CONFIRM-4, CONFIRM-11, task #31, TL-4 scraper preparation
+Inputs: CONFIRM-4, CONFIRM-11, D-20, Phase 2 nanoka adapter, Phase 3 drift audit, Phase 4 runtime cutover
 
 This directory records the source-ingestion boundary for `@randomplay/data`.
-Segment 1 defined source descriptors, adapter interfaces, metadata rules, and
-crawler compliance notes. Segment 2 starts adding retained source snapshots and
-offline verification gates before formal cleaned game data is generated.
+The current V0.1.0 runtime source is approved-live nanoka. Earlier Excel,
+Mihoyo D-17, and buhflipexplode D-12 snapshots remain retained audit references
+only; runtime cleaned data and package exports fail loud if they reference those
+archived source ids.
 
 ## Segment 1 Scope
 
@@ -20,22 +21,25 @@ offline verification gates before formal cleaned game data is generated.
 
 ## Source Snapshot Scope
 
-- No formal `GameData` rows are hand-written.
-- No cleaned agent, skill, W-Engine, Drive Disc, enemy, or rule data is
-  published.
+- Runtime formal `GameData` is generated from reviewed source documents.
+- `data/cleaned/runtime/game-data.json` and the package mirror are the current
+  runtime cleaned artifacts.
+- Raw source archives are retained for audit and are not distributed in npm
+  package payloads.
 
-Formal V1 data must be generated from reviewed source documents and keep
-`sourceId`, `sourceVersion`, `parsedAt` / `fetchedAt`, `parserVersion`, and row
-anchors. Hand-written values may exist only in QA fixtures, not in
-`@randomplay/data` published data.
+Formal V0.1.0 data must be generated from reviewed source documents and keep
+`sourceId`, `sourceVersion`, `parsedAt` / `fetchedAt`, `parserVersion`, and
+anchors. Hand-written values may exist only in QA fixtures, not in published
+runtime data.
 
 ## Source Registry
 
 | Source ID | Kind | Current status | Formal data ready | Notes |
 |---|---|---:|---:|---|
-| `lo-user-excel` | `excel` | source retained | no | Workbook committed under `data/source/excel/` with hash metadata. |
-| `mihoyo-zzz-critical-assault` | `mihoyoWiki` | source retained / ready for adapter | no | Public API snapshot retained for DA detail text and zh/en source-text alignment. |
-| `buhflipexplode-zzz-da` | `thirdPartySite` | source retained / ready for adapter | no | Live-only source snapshot retained; D-12 forbids copying GPL JS into Fairy runtime. |
+| `nanoka-zzz` | `thirdPartySite` | runtime-primary | yes | Approved-live `2.8` source for V0.1.0 runtime cleaned data. |
+| `lo-user-excel` | `excel` | deprecated runtime archive | audit only | Workbook committed under `data/source/excel/` with hash metadata. |
+| `mihoyo-zzz-critical-assault` | `mihoyoWiki` | deprecated runtime archive | audit only | Public API snapshot retained for DA detail text and zh/en source-text alignment. |
+| `buhflipexplode-zzz-da` | `thirdPartySite` | deprecated runtime archive | audit only | Live-only source snapshot retained; D-12 forbids copying GPL JS into Fairy runtime. |
 
 Implementation entry: `packages/data/src/sources.ts`.
 
@@ -48,19 +52,14 @@ Source-specific notes:
 - [Source decision recommendation](source-decision-recommendation.md)
 - [Nanoka coverage matrix](nanoka-coverage-matrix.md)
 - [Nanoka DA / Sentinel / patch history feasibility](da-sentinel-patch-nanoka-feasibility.md)
+- [Takedown and rollback runbook](takedown-rollback.md)
 
-## Next Segment
+## Current Runtime Gates
 
-S5 segment 2 should continue with:
-
-- Excel reader with sheet/column discovery and workbook hash versioning. Current
-  baseline: `data/source/excel/workbook-audit.json`.
-- Mihoyo transforms from the retained detail snapshot into Deadly Assault
-  i18n/mapping resources and typed-modifier review queues.
-- buhflipexplode transforms from the retained live-only snapshot into cleaned
-  Deadly Assault data and parity fixtures.
-- Raw record schemas and transforms into `GameData`.
-- Golden-anchor source coverage for the current 23-anchor executable fixture
-  scope.
-- Negative validation that formal modifiers and formal rows cannot miss source
-  metadata.
+- `pnpm --filter @randomplay/data verify:nanoka`
+- `pnpm --filter @randomplay/data verify:nanoka-runtime`
+- `pnpm --filter @randomplay/data verify:source-registry`
+- `pnpm --filter @randomplay/data verify:source-migration -- --sync-id phase3-sync-002-g27-g28`
+- `pnpm --filter @randomplay/data verify:golden-v1`
+- data package pack dry-run: runtime/golden/audit artifacts included, raw
+  source archives excluded

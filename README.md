@@ -26,3 +26,11 @@ suite and remains part of the fixed `pnpm test` verification chain.
 ## Development
 
 Fairy uses pnpm workspaces. See [docs/architecture/monorepo-development.md](docs/architecture/monorepo-development.md) for package boundaries, dependency rules, verification commands, and PR workflow.
+
+## 数据来源声明 / Data Sources
+
+`@randomplay/data` 汇总和清洗了来自 nanoka 等公开来源的 ZZZ 游戏内数值规则数据，用于本地伤害计算用途。V0.1.0 runtime 数据派生自正式服已发布内容，并锁定 `manifest.zzz.live` 对应的 nanoka 版本。
+
+来源详情见 [data/source-registry.json](data/source-registry.json)。Runtime cleaned 数据保留 `sourceId`、`sourceVersion`、`sourceAnchor` 等追溯字段；Excel、米游社 D-17、buhflipexplode D-12 raw snapshots 仅作为 archived audit reference 保留，不再作为 runtime source。
+
+本项目不是 HoYoverse / miHoYo 官方项目。游戏数据、文本与图像等权利归其各自权利人所有。如有侵权，请通过 GitHub issue 联系维护者删除；我们会在收到请求后 24-72 小时内响应。

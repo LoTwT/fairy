@@ -11,6 +11,10 @@ Repo-specific implementation lives in:
 - `bump.config.ts` — version bump, release commit, tag push, and changelog hook
 - `cliff.toml` — CHANGELOG and GitHub Release note generation
 
+Release-note drafts:
+
+- [Fairy v0.1.0 — Release Notes](release-notes-v0.1.0.md)
+
 Repo-specific notes:
 
 - Fairy is a synchronized-version pnpm workspace. The private root and all
