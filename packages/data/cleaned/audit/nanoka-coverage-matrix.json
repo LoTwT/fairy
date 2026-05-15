@@ -1,7 +1,7 @@
 {
   "schemaVersion": "nanoka-coverage-matrix/v0.1",
-  "generatedAt": "2026-05-15T14:10:00+08:00",
-  "status": "phase-2-agent-promotion-extra-gate",
+  "generatedAt": "2026-05-15T14:40:00+08:00",
+  "status": "phase-2-bangboo-element-gate",
   "sourceVersion": "manifest.zzz.live",
   "canonicalSchemas": [
     "packages/core/src/schema/game-data.ts",
@@ -740,19 +740,18 @@
       "canonicalPath": "GameData.bangbooSkills.*.attribute / AttackSegment.attribute",
       "fieldClass": "required",
       "sourcePolicy": "nanoka",
-      "status": "needs-tl-research",
+      "status": "verified-from-nanoka",
       "nanokaEndpoint": "/{locale}/bangboo/{id}.json",
       "rawFieldPaths": [
-        "/skill",
-        "/skill_prop"
+        "/id",
+        "/skill/*/level/*/desc"
       ],
-      "transformRule": "find a structured Bangboo element field or explicit deterministic mapping; sampled Plugboo detail has no top-level element_type",
-      "sampleEntity": "nanoka-bangboo-plugboo-54008",
-      "rawAvailable": false,
-      "promotable": false,
-      "blockedBy": [
-        "field:bangboo-element-not-verified"
-      ]
+      "transformRule": "derive Bangboo skill attribute from exact colored damage phrase in approved live skill descriptions; require source /id to match the requested Bangboo id and all matched damage-text evidence to resolve to one canonical Attribute. Do not parse team passive modifiers in this gate.",
+      "sampleEntity": "nanoka-bangboo-plugboo-live-54008",
+      "rawAvailable": true,
+      "promotable": true,
+      "blockedBy": [],
+      "notes": "Task #152 promotes Bangboo element as a structured source artifact from live Plugboo skill damage text. Plugboo active and chain skill descriptions both resolve to electric; passive/team-buff text remains deferred under bangboos.teamPassiveModifiers."
     },
     {
       "fieldId": "bangboos.teamPassiveModifiers",
@@ -1288,12 +1287,12 @@
   ],
   "summary": {
     "totalRows": 45,
-    "verifiedFromNanoka": 35,
-    "needsTlResearch": 4,
+    "verifiedFromNanoka": 36,
+    "needsTlResearch": 3,
     "needsOwnerResearch": 0,
     "deferred": 6,
-    "promotableNow": 19,
-    "notPromotableYet": 26
+    "promotableNow": 20,
+    "notPromotableYet": 25
   },
   "openResearchItems": [
     "agent stat unit mapping for crit/pen/anomaly/impact/adrenaline",
@@ -1301,7 +1300,6 @@
     "skill tag/damageType/hitCount mapping",
     "mindscape/potential semantic mapping",
     "typed modifier templates for passives, W-Engines, Drive Discs, enemy rules, DA buffs, and Sentinel rows",
-    "Bangboo element/attribute source field",
     "enemy level formula, resistance units, anomaly threshold mapping, and daze recovery semantics after variant mapping",
     "W-Engine stat/refine mapping",
     "Drive Disc slot main stat and substat table source",

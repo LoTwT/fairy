@@ -50,15 +50,16 @@ describe("missing-fields fail-loud gate", () => {
     expect(unresolved.every(row => Array.isArray(row.blockedBy) && row.blockedBy.length > 0)).toBe(true)
     expect(unresolved.map(row => row.fieldId)).toEqual(
       expect.arrayContaining([
-        "bangboos.element",
         "driveDiscs.slotAndSubstatTables",
         "rules.disorderFormula",
+        "rules.disorderDazeLevelZone",
       ]),
     )
     expect(unresolved.map(row => row.fieldId)).not.toEqual(expect.arrayContaining([
       "metadata.sources",
       "metadata.sourceRefs",
       "agents.promotionExtraStats",
+      "bangboos.element",
     ]))
   })
 

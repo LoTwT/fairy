@@ -1,10 +1,11 @@
 # Nanoka Coverage Matrix
 
-Status: Phase 2 agent promotion extra gate
+Status: Phase 2 Bangboo element gate
 Owner: @TechLead
 Reviewers: @Product, @QA
 Related: D-20 data-source migration, task #121, task #122, task #125, task #127,
-task #138, task #140, task #142, task #144, task #146, task #148, task #150
+task #138, task #140, task #142, task #144, task #146, task #148, task #150,
+task #152
 
 This matrix is schema-first. It is derived from the canonical `GameData` and
 `BattleSnapshot` schemas, then checked against sampled nanoka detail endpoints.
@@ -50,7 +51,7 @@ The machine-readable version is
 | Agent / Soldier 11 | `https://static.nanoka.cc/zzz/3.0.2+15625449/zh/character/1041.json` | `talent`, `potential`, and `potential_detail` all have six entries. Used to separate Mindscape-like text from potential activation semantics. |
 | Live Agent / Nekomata | `https://static.nanoka.cc/zzz/2.8/zh/character/1021.json` | Approved live sample for promotable agent identity, enum, base panel, skill-number, and promotion-extra source artifact rows; retained under `data/source/raw/nanoka/zzz/2.8/`. |
 | Live Agent / Yixuan | `https://static.nanoka.cc/zzz/2.8/zh/character/1371.json` | Approved live sample for Adrenaline (`rp_*`) and Resonance (`fever_recovery`) resource fields; retained under `data/source/raw/nanoka/zzz/2.8/`. |
-| Live Bangboo / Plugboo | `https://static.nanoka.cc/zzz/2.8/zh/bangboo/54008.json` | Approved live sample for Bangboo identity, base panel, and skill segment rows; retained under `data/source/raw/nanoka/zzz/2.8/`. |
+| Live Bangboo / Plugboo | `https://static.nanoka.cc/zzz/2.8/zh/bangboo/54008.json` | Approved live sample for Bangboo identity, base panel, skill segment, and element source artifact rows; retained under `data/source/raw/nanoka/zzz/2.8/`. |
 | Enemy / Dullahan research sample | `https://static.nanoka.cc/zzz/3.0.2+15625449/zh/monster/30000.json` | Research-only `monster_info.*.stats`, `curves`, `element`, `element_abnormal`; not approved for cleaned output. |
 | Live enemy variant mapping samples | `https://static.nanoka.cc/zzz/2.8/zh/monster/{id}.json` | Approved live samples for Dullahan `30000`, Greta `30004`, Ruthless Fiend `200141`, Notorious Hati `200014`, Notorious Armored Hati `200034`, Miasma Priest `30033`, and Notorious Pompey `300211`. Task #144 proves `detail.monster_id -> monster_info[monster_id]` for G13/G18/G19/G20 source artifacts. |
 | Live W-Engine / Yixuan signature sample | `https://static.nanoka.cc/zzz/2.8/zh/weapon/14137.json` | Approved live sample for W-Engine identity; `base_property`, `rand_property`, `level`, `stars`, and `talents` remain blocked for stat/passive promotion until mapping/templates are proven. |
@@ -80,7 +81,9 @@ until Phase 3/4 drift/cutover.
   composition remain separate rows.
 - Drive Disc and W-Engine descriptions are raw text. They are not typed
   modifiers until a deterministic template emits handler/params/target/condition.
-- Bangboo `element_type` is not verified in the sampled Plugboo detail row.
+- Bangboo `element_type` is not a top-level field in the sampled Plugboo detail
+  row. Task #152 derives the Bangboo skill attribute from exact colored damage
+  text in approved live skill descriptions instead.
 - Enemy endpoint availability is not the blocker. Task #144 proves live
   `monster_info.*` variant selection for the sampled cleaned/golden rows; enemy
   level formulas, resistance units, anomaly threshold mapping, daze recovery
@@ -99,8 +102,8 @@ until Phase 3/4 drift/cutover.
 
 ## Human-Readable Summary
 
-Machine summary after task #150: 45 rows total, 35 `verified-from-nanoka`, 4
-`needs-tl-research`, 0 `needs-owner-research`, 6 `deferred`, and 19
+Machine summary after task #152: 45 rows total, 36 `verified-from-nanoka`, 3
+`needs-tl-research`, 0 `needs-owner-research`, 6 `deferred`, and 20
 `promotableNow`.
 
 | Area | Status | Promote Now | Main Blocker |
@@ -115,6 +118,7 @@ Machine summary after task #150: 45 rows total, 35 `verified-from-nanoka`, 4
 | Adrenaline panel fields | verified-from-nanoka | yes | `rp_max -> maxAdrenaline`; `rp_recover / 100 -> automaticAdrenalineAccumulation`, proven from live Yixuan. |
 | Resonance / Adrenaline skill recovery | verified-from-nanoka | yes | `fever_recovery / 1000 -> resonanceRecovery`; `rp_recovery / 10000 -> adrenalineRecovery`, proven from live Yixuan and Nekomata. |
 | Bangboo skill numeric params | verified-from-nanoka | yes | G26 sampled values are promotable from approved live Plugboo evidence. |
+| Bangboo element | verified-from-nanoka | yes | Plugboo active and chain skill descriptions contain exact colored electric damage text; task #152 maps the shared label to canonical `electric` and keeps passive/team modifier parsing deferred. |
 | Bangboo panel stats | verified-from-nanoka | yes | Formula proven for G26 Plugboo: `stats[key] + level[promotionPhase][key] + stats[key_upgrade] * (level - 1) / 10000`, with retained live Plugboo panel tests. |
 | Enemy variant mapping | verified-from-nanoka | yes | Live Dullahan, Greta, Ruthless Fiend, Hati, Miasma Priest, and Pompey samples prove `detail.monster_id -> monster_info[monster_id]` mapping for G13/G18/G19/G20 source artifacts; runtime cutover still waits for Phase 3 drift audit. |
 | Enemy stats/resistance/thresholds | verified-from-nanoka | no | Raw fields exist for mapped live variants; level formula, resistance units, anomaly threshold mapping, and daze recovery semantics remain unresolved. |
@@ -128,9 +132,8 @@ Machine summary after task #150: 45 rows total, 35 `verified-from-nanoka`, 4
 
 ## Remaining TL Research Rows
 
-After task #150, 4 rows remain in `needs-tl-research`:
+After task #152, 3 rows remain in `needs-tl-research`:
 
-- `bangboos.element` — Plugboo sampled detail did not verify Bangboo element.
 - `driveDiscs.slotAndSubstatTables` — sampled equipment detail did not expose
   slot/main/sub-stat tables.
 - `rules.disorderFormula` — source or implementation owner still unresolved.
@@ -154,6 +157,10 @@ After task #150, 4 rows remain in `needs-tl-research`:
   artifact row; task #150 binds source `/id` to the requested agent, maps
   approved live `extra_level` stat extras with deterministic units, and keeps
   `runtimeCutoverReady=false` until Phase 3/4.
+- `bangboos.element` — nanoka live Bangboo element source artifact row; task
+  #152 binds source `/id` to the requested Bangboo and maps exact colored skill
+  damage text to canonical `electric` for Plugboo while keeping passive/team
+  modifier parsing deferred.
 - `deadlyAssault.periodsBossesBuffs` — nanoka live DA structured source artifact
   row; task #142 maps period, zones, buffs, monsters, weakness, rank goals, and
   `boss_adjust` with `runtimeCutoverReady=false` until Phase 3/4.
