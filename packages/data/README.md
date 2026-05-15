@@ -29,6 +29,9 @@ Current state:
 - V1.2.x Enemy batch audit lives under
   `cleaned/audit/nanoka-enemy-batch-audit.json` and verifies all 269
   approved-live nanoka 2.8 Enemies;
+- V1.2.x current Deadly Assault batch audit lives under
+  `cleaned/audit/nanoka-da-current-batch-audit.json` and verifies all 38
+  approved-live nanoka 2.8 DA periods;
 - V1.2.x full-data batch discovery lives under
   `cleaned/audit/nanoka-full-data-batch-discovery.json` and locks the domain
   counts, exclusions, historical DA boundary, and implementation PR sequence;
@@ -48,8 +51,8 @@ This package bundles cleaned ZZZ game-data artifacts for local damage
 calculation. V0.1.0 runtime data is derived from approved-live nanoka source
 snapshots (`manifest.zzz.live`) and preserves source metadata for audit. The
 post-release V1.2.1/V1.2.x batches add the full approved-live nanoka 2.8
-Bangboo, Agent, W-Engine, Drive Disc set, and Enemy catalogs without changing
-the package version.
+Bangboo, Agent, W-Engine, Drive Disc set, Enemy, and current Deadly Assault
+period catalogs without changing the package version.
 
 Source details are recorded in `source-registry.json` and the bundled cleaned
 JSON artifacts. Excel, Mihoyo D-17, and buhflipexplode D-12 snapshots remain

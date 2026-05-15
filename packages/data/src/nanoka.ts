@@ -87,6 +87,15 @@ export interface NanokaRawSnapshotManifest {
       zoneCount: number
       hasBossAdjust: boolean
     }
+    deadlyAssaultBatch?: {
+      indexCount: number
+      retainedDetailCount: number
+      zoneCount: number
+      bossAdjustmentCount: number
+      scheduledFuturePeriodCount: number
+      ids: number[]
+      approvedForCleanedOutputCount: number
+    }
     enemySamples?: {
       mappingCount: number
       canonicalMappings: Array<{

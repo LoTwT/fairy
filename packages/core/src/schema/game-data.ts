@@ -152,6 +152,98 @@ export const enemyDataSchema = z
   })
   .strict()
 
+export const deadlyAssaultAttributeSchema = z.enum([
+  "physical",
+  "fire",
+  "ice",
+  "electric",
+  "ether",
+  "wind",
+])
+
+export const deadlyAssaultBuffDataSchema = z
+  .object({
+    id: z.string().min(1),
+    title: z.string(),
+    description: z.string(),
+    source: sourceRefSchema,
+  })
+  .strict()
+
+export const deadlyAssaultMonsterDataSchema = z
+  .object({
+    slotId: z.string().min(1),
+    monsterId: z.number().int().positive(),
+    name: z.string().min(1),
+    elementProfile: z.partialRecord(deadlyAssaultAttributeSchema, z.number().finite()),
+    weaknessAttributes: z.array(deadlyAssaultAttributeSchema),
+    stats: z
+      .object({
+        hp: z.number().finite(),
+        attack: z.number().finite(),
+        defense: z.number().finite(),
+        daze: z.number().finite(),
+        anomalyBuildupResistance: z.number().finite(),
+      })
+      .strict(),
+    source: sourceRefSchema,
+  })
+  .strict()
+
+export const deadlyAssaultRoomDataSchema = z
+  .object({
+    roomId: z.string().min(1),
+    waves: z.number().int().positive(),
+    monsters: z.array(deadlyAssaultMonsterDataSchema),
+    source: sourceRefSchema,
+  })
+  .strict()
+
+export const deadlyAssaultBossAdjustmentDataSchema = z
+  .object({
+    id: z.string().min(1),
+    hpAdjustmentRaw: z.number().finite(),
+    attackAdjustmentRaw: z.number().finite(),
+    operationScorePoints: z.number().finite(),
+    source: sourceRefSchema,
+  })
+  .strict()
+
+export const deadlyAssaultZoneDataSchema = z
+  .object({
+    zoneId: z.string().min(1),
+    stageNumber: z.number().int().positive(),
+    name: z.string().min(1),
+    monsterLevel: z.number().int().positive(),
+    goalType: z.number().int(),
+    rankGoals: z
+      .object({
+        s: z.number().finite(),
+        a: z.number().finite(),
+        b: z.number().finite(),
+      })
+      .strict(),
+    layerBuffs: z.array(deadlyAssaultBuffDataSchema),
+    selectableBuffs: z.array(deadlyAssaultBuffDataSchema),
+    rooms: z.array(deadlyAssaultRoomDataSchema),
+    source: sourceRefSchema,
+  })
+  .strict()
+
+export const deadlyAssaultPeriodDataSchema = z
+  .object({
+    id: z.string().min(1),
+    title: z.string().min(1),
+    sourceVersion: z.string().min(1),
+    beginAt: z.string().min(1),
+    endAt: z.string().min(1),
+    source: sourceRefSchema,
+    zones: z.array(deadlyAssaultZoneDataSchema),
+    bossAdjustments: z.array(deadlyAssaultBossAdjustmentDataSchema),
+    sourceAliases: z.array(z.string().min(1)).optional(),
+  })
+  .strict()
+
 export const sourceAliasTableSchema = z
   .object({
     fields: z.record(z.string(), z.string()),
@@ -175,6 +267,7 @@ export const gameDataSchema = z
     wEngines: z.record(z.string(), wEngineDataSchema),
     driveDiscs: z.record(z.string(), driveDiscDataSchema),
     enemies: z.record(z.string(), enemyDataSchema),
+    deadlyAssaultPeriods: z.record(z.string(), deadlyAssaultPeriodDataSchema),
     resonium: z.record(z.string(), resoniumDataSchema),
     modifiers: z.record(z.string(), formalModifierSchema),
     rules: z.record(z.string(), z.unknown()),
@@ -190,4 +283,5 @@ export type WEngineData = z.infer<typeof wEngineDataSchema>
 export type DriveDiscData = z.infer<typeof driveDiscDataSchema>
 export type ResoniumData = z.infer<typeof resoniumDataSchema>
 export type EnemyData = z.infer<typeof enemyDataSchema>
+export type DeadlyAssaultPeriodData = z.infer<typeof deadlyAssaultPeriodDataSchema>
 export type GameData = z.infer<typeof gameDataSchema>

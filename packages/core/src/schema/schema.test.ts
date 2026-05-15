@@ -631,6 +631,69 @@ describe("GameData schema", () => {
       wEngines: {},
       driveDiscs: {},
       enemies: {},
+      deadlyAssaultPeriods: {
+        "69036": {
+          id: "69036",
+          title: "危局强袭战",
+          sourceVersion: "source-v0.1.0",
+          beginAt: "2026-05-08T04:00:00+08:00",
+          endAt: "2026-05-22T03:59:59+08:00",
+          source,
+          zones: [
+            {
+              zoneId: "1",
+              stageNumber: 1,
+              name: "Deadly Assault Zone",
+              monsterLevel: 60,
+              goalType: 1,
+              rankGoals: { s: 20000, a: 10000, b: 5000 },
+              layerBuffs: [
+                {
+                  id: "buff-1",
+                  title: "Buff",
+                  description: "Damage increased.",
+                  source,
+                },
+              ],
+              selectableBuffs: [],
+              rooms: [
+                {
+                  roomId: "1",
+                  waves: 1,
+                  source,
+                  monsters: [
+                    {
+                      slotId: "1",
+                      monsterId: 11154,
+                      name: "Dullahan",
+                      elementProfile: { physical: 0, wind: 0 },
+                      weaknessAttributes: ["electric"],
+                      stats: {
+                        hp: 1000,
+                        attack: 100,
+                        defense: 50,
+                        daze: 100,
+                        anomalyBuildupResistance: 120,
+                      },
+                      source,
+                    },
+                  ],
+                },
+              ],
+              source,
+            },
+          ],
+          bossAdjustments: [
+            {
+              id: "1",
+              hpAdjustmentRaw: 10000,
+              attackAdjustmentRaw: 10000,
+              operationScorePoints: 3000,
+              source,
+            },
+          ],
+        },
+      },
       resonium: {},
       modifiers: {},
       rules: {},
@@ -668,6 +731,7 @@ describe("GameData schema", () => {
       wEngines: {},
       driveDiscs: {},
       enemies: {},
+      deadlyAssaultPeriods: {},
       resonium: {},
       modifiers: {
         unsourcedFormalModifier: {

@@ -1,11 +1,11 @@
 {
   "schemaVersion": "nanoka-drift-report/v0.1",
   "syncId": "phase3-sync-000-foundation",
-  "generatedAt": "2026-05-15T16:20:00+08:00",
+  "generatedAt": "2026-05-16T01:50:00+08:00",
   "candidate": {
     "sourceId": "nanoka-zzz",
     "sourceVersion": "2.8",
-    "contentHash": "sha256:55571ec544ff0bbb994621d08d8b2ebbcea090109708c53b9bbd01202f6a7558"
+    "contentHash": "sha256:93d1241c3204109be06fcf801594bb3aebe40cca830973956c7dea26367b6882"
   },
   "baselines": [
     {

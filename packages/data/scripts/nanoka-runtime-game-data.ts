@@ -1,8 +1,9 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs"
 import { dirname, join } from "node:path"
 import { fileURLToPath } from "node:url"
-import { parseGameData, type AgentData, type BangbooData, type BangbooSkillData, type DriveDiscData, type EnemyData, type GameData, type SourceRef, type WEngineData } from "../../core/src/index"
+import { parseGameData, type AgentData, type BangbooData, type BangbooSkillData, type DeadlyAssaultPeriodData, type DriveDiscData, type EnemyData, type GameData, type SourceRef, type WEngineData } from "../../core/src/index"
 import { deriveNanokaBangbooElement } from "../src/nanoka-bangboo-element"
+import { deriveNanokaDeadlyAssaultPeriod, type DeadlyAssaultPeriod, type NanokaDaDetail, type NanokaDaIndex } from "../src/nanoka-da"
 import { assertNanokaRuntimeGameDataArtifact } from "../src/runtime-policy"
 
 const packageDir = fileURLToPath(new URL("..", import.meta.url))
@@ -22,6 +23,8 @@ const rootDriveDiscBatchAuditPath = join(repoRoot, "data/cleaned/audit/nanoka-dr
 const packageDriveDiscBatchAuditPath = join(packageDir, "cleaned/audit/nanoka-drive-disc-batch-audit.json")
 const rootEnemyBatchAuditPath = join(repoRoot, "data/cleaned/audit/nanoka-enemy-batch-audit.json")
 const packageEnemyBatchAuditPath = join(packageDir, "cleaned/audit/nanoka-enemy-batch-audit.json")
+const rootDeadlyAssaultCurrentBatchAuditPath = join(repoRoot, "data/cleaned/audit/nanoka-da-current-batch-audit.json")
+const packageDeadlyAssaultCurrentBatchAuditPath = join(packageDir, "cleaned/audit/nanoka-da-current-batch-audit.json")
 const characterIndexPath = join(repoRoot, "data/source/raw/nanoka/zzz/2.8/character.json")
 const characterSourceDir = join(repoRoot, "data/source/raw/nanoka/zzz/2.8/zh/character")
 const bangbooIndexPath = join(repoRoot, "data/source/raw/nanoka/zzz/2.8/bangboo.json")
@@ -32,6 +35,8 @@ const equipmentIndexPath = join(repoRoot, "data/source/raw/nanoka/zzz/2.8/equipm
 const equipmentSourceDir = join(repoRoot, "data/source/raw/nanoka/zzz/2.8/zh/equipment")
 const monsterIndexPath = join(repoRoot, "data/source/raw/nanoka/zzz/2.8/monster.json")
 const monsterSourceDir = join(repoRoot, "data/source/raw/nanoka/zzz/2.8/zh/monster")
+const bossIndexPath = join(repoRoot, "data/source/raw/nanoka/zzz/2.8/boss.json")
+const bossSourceDir = join(repoRoot, "data/source/raw/nanoka/zzz/2.8/zh/boss")
 
 function assert(condition: unknown, message: string): asserts condition {
   if (!condition)
@@ -491,6 +496,11 @@ type EnemyRuntimeBuild = {
   audit: unknown
 }
 
+type DeadlyAssaultCurrentRuntimeBuild = {
+  deadlyAssaultPeriods: Record<string, DeadlyAssaultPeriodData>
+  audit: unknown
+}
+
 function uniqueStrings(values: Array<string | undefined>): string[] {
   return [...new Set(values.filter((value): value is string => typeof value === "string" && value.length > 0))]
 }
@@ -534,6 +544,14 @@ function enemyAnchor(entityId: string | number): string {
 
 function readMonsterRaw(entityId: string): MonsterRaw {
   return readJson<MonsterRaw>(join(monsterSourceDir, `${entityId}.json`))
+}
+
+function deadlyAssaultAnchor(entityId: string | number): string {
+  return `data/source/raw/nanoka/zzz/2.8/zh/boss/${entityId}.json`
+}
+
+function readDeadlyAssaultRaw(entityId: string): NanokaDaDetail {
+  return readJson<NanokaDaDetail>(join(bossSourceDir, `${entityId}.json`))
 }
 
 function bangbooPanel(source: BangbooRaw) {
@@ -1250,6 +1268,130 @@ function buildEnemyRuntimeBatch(): EnemyRuntimeBuild {
   return { enemies, audit }
 }
 
+function normalizeDeadlyAssaultRuntimePeriod(
+  normalized: DeadlyAssaultPeriod,
+  indexEntry: { en?: string, zh?: string },
+): DeadlyAssaultPeriodData {
+  const anchor = deadlyAssaultAnchor(normalized.id)
+  return {
+    id: normalized.id,
+    title: normalized.title,
+    sourceVersion: normalized.sourceVersion,
+    beginAt: normalized.beginAt,
+    endAt: normalized.endAt,
+    source: sourceRef(anchor, "/"),
+    zones: normalized.zones.map(zone => ({
+      zoneId: zone.zoneId,
+      stageNumber: zone.stageNumber,
+      name: zone.name,
+      monsterLevel: zone.monsterLevel,
+      goalType: zone.goalType,
+      rankGoals: zone.rankGoals,
+      layerBuffs: zone.layerBuffs.map(buff => ({
+        ...buff,
+        source: sourceRef(anchor, `/zone/${zone.zoneId}/layer_buff/${buff.id}`),
+      })),
+      selectableBuffs: zone.selectableBuffs.map(buff => ({
+        ...buff,
+        source: sourceRef(anchor, `/zone/${zone.zoneId}/selectable_buff/${buff.id}`),
+      })),
+      rooms: zone.rooms.map(room => ({
+        roomId: room.roomId,
+        waves: room.waves,
+        source: sourceRef(anchor, `/zone/${zone.zoneId}/layer_room/${room.roomId}`),
+        monsters: room.monsters.map(monster => ({
+          ...monster,
+          source: sourceRef(anchor, `/zone/${zone.zoneId}/layer_room/${room.roomId}/monster_list/${monster.slotId}`),
+        })),
+      })),
+      source: sourceRef(anchor, `/zone/${zone.zoneId}`),
+    })),
+    bossAdjustments: normalized.bossAdjustments.map(adjustment => ({
+      ...adjustment,
+      source: sourceRef(anchor, `/boss_adjust/${adjustment.id}`),
+    })),
+    sourceAliases: uniqueStrings([normalized.title, indexEntry.en, indexEntry.zh]),
+  }
+}
+
+function buildDeadlyAssaultCurrentRuntimeBatch(): DeadlyAssaultCurrentRuntimeBuild {
+  const index = readJson<NanokaDaIndex>(bossIndexPath)
+  const periodIds = Object.keys(index).sort((left, right) => Number(left) - Number(right))
+  assert(periodIds.length === 38, `current DA runtime batch expected 38 live periods, got ${periodIds.length}`)
+
+  const deadlyAssaultPeriods: Record<string, DeadlyAssaultPeriodData> = {}
+  const auditRows: any[] = []
+
+  for (const periodId of periodIds) {
+    const indexEntry = index[periodId]!
+    const raw = readDeadlyAssaultRaw(periodId)
+    const numericId = Number(periodId)
+    assert(raw.id === numericId, `DA period ${periodId}: raw id drifted`)
+    assert(raw.name === indexEntry.zh, `DA period ${periodId}: zh name drifted against index`)
+    const normalized = deriveNanokaDeadlyAssaultPeriod(index, raw, {
+      sourceVersion,
+      configuredLiveSnapshotDate: generatedAt,
+      allowConfiguredLiveScheduledPeriods: true,
+    })
+    const runtimePeriod = normalizeDeadlyAssaultRuntimePeriod(normalized, indexEntry)
+    deadlyAssaultPeriods[periodId] = runtimePeriod
+
+    auditRows.push({
+      id: periodId,
+      label: { zh: raw.name, en: indexEntry.en, ja: indexEntry.ja, ko: indexEntry.ko },
+      source: runtimePeriod.source,
+      beginAt: normalized.beginAt,
+      endAt: normalized.endAt,
+      status: Date.parse(normalized.beginAt) > Date.parse(generatedAt) ? "configured-live-scheduled" : "configured-live-observed",
+      zoneCount: normalized.zones.length,
+      layerBuffCount: normalized.zones.reduce((total, zone) => total + zone.layerBuffs.length, 0),
+      selectableBuffCount: normalized.zones.reduce((total, zone) => total + zone.selectableBuffs.length, 0),
+      roomCount: normalized.zones.reduce((total, zone) => total + zone.rooms.length, 0),
+      monsterSlotCount: normalized.zones.reduce((total, zone) => total + zone.rooms.reduce((roomTotal, room) => roomTotal + room.monsters.length, 0), 0),
+      bossAdjustmentCount: normalized.bossAdjustments.length,
+      runtimeSourcePaths: {
+        identity: "/",
+        zones: "/zone",
+        bossAdjustments: "/boss_adjust",
+      },
+      promotionBoundary: {
+        status: "structured-source-artifact",
+        notes: [
+          "DA zones, rank goals, buffs, rooms, monsters, weakness rows, and boss adjustments are normalized as source-backed runtime data.",
+          "Combat formula semantics remain owned by existing golden replay and core rules; this bucket does not introduce new golden anchors.",
+        ],
+      },
+    })
+  }
+
+  const audit = {
+    kind: "nanokaDeadlyAssaultCurrentBatchAudit",
+    schemaVersion: "nanoka-da-current-batch-audit/v0.1",
+    sourceId: "nanoka-zzz",
+    sourceVersion,
+    generatedAt,
+    runtimeCutoverReady: true,
+    historicalPeriodsIncluded: false,
+    historicalBucketPlanned: "historicalDAPeriods",
+    indexSource: sourceRef("data/source/raw/nanoka/zzz/2.8/boss.json", "/"),
+    summary: {
+      periodCount: periodIds.length,
+      runtimePeriodCount: Object.keys(deadlyAssaultPeriods).length,
+      zoneCount: auditRows.reduce((total, row) => total + row.zoneCount, 0),
+      layerBuffCount: auditRows.reduce((total, row) => total + row.layerBuffCount, 0),
+      selectableBuffCount: auditRows.reduce((total, row) => total + row.selectableBuffCount, 0),
+      roomCount: auditRows.reduce((total, row) => total + row.roomCount, 0),
+      monsterSlotCount: auditRows.reduce((total, row) => total + row.monsterSlotCount, 0),
+      bossAdjustmentCount: auditRows.reduce((total, row) => total + row.bossAdjustmentCount, 0),
+      scheduledFuturePeriodIds: auditRows.filter(row => row.status === "configured-live-scheduled").map(row => row.id),
+      periodIds,
+    },
+    periods: auditRows,
+  }
+
+  return { deadlyAssaultPeriods, audit }
+}
+
 function buildArtifact() {
   const characterBatch = buildCharacterRuntimeBatch()
   const yixuan = characterBatch.yixuanProof
@@ -1257,6 +1399,7 @@ function buildArtifact() {
   const wEngineBatch = buildWEngineRuntimeBatch()
   const driveDiscBatch = buildDriveDiscRuntimeBatch()
   const enemyBatch = buildEnemyRuntimeBatch()
+  const deadlyAssaultCurrentBatch = buildDeadlyAssaultCurrentRuntimeBatch()
   const yixuanAnchor = "data/source/raw/nanoka/zzz/2.8/zh/character/1371.json"
   const yixuanSkillSource = sourceRef(yixuanAnchor, "/skill/basic/description/4/param/0/param/1371001")
 
@@ -1275,7 +1418,7 @@ function buildArtifact() {
         sourceVersion,
         fetchedAt: generatedAt,
         parsedAt: generatedAt,
-        parserVersion: "nanoka-runtime-enemy-batch-v0.1.0",
+        parserVersion: "nanoka-runtime-da-current-batch-v0.1.0",
         licenseNote: "Runtime cleaned data uses lo-user-approved nanoka live 2.8 evidence; archived Excel/D-17/D-12 sources are retained for audit only.",
       },
     ],
@@ -1309,6 +1452,7 @@ function buildArtifact() {
     wEngines: wEngineBatch.wEngines,
     driveDiscs: driveDiscBatch.driveDiscs,
     enemies: enemyBatch.enemies,
+    deadlyAssaultPeriods: deadlyAssaultCurrentBatch.deadlyAssaultPeriods,
     resonium: {},
     modifiers: {},
     rules: {
@@ -1317,6 +1461,7 @@ function buildArtifact() {
       runtimeCutoverReady: true,
       archivedRuntimeSourcesAllowed: false,
       driveDiscSlotAndSubstatTables: "out-of-scope:user-provided-snapshot-final-panel",
+      historicalDAPeriods: "planned-dedicated-bucket:deferred-to-pr-f",
       implementationOwnedFormulaBoundary: ["rules.disorderFormula", "rules.disorderDazeLevelZone"],
     },
     aliases: {
@@ -1374,6 +1519,7 @@ function buildArtifact() {
     wEngineBatchAudit: wEngineBatch.audit,
     driveDiscBatchAudit: driveDiscBatch.audit,
     enemyBatchAudit: enemyBatch.audit,
+    deadlyAssaultCurrentBatchAudit: deadlyAssaultCurrentBatch.audit,
   }
 }
 
@@ -1385,6 +1531,7 @@ function assertArtifactFresh(): void {
     wEngineBatchAudit: expectedWEngineBatchAudit,
     driveDiscBatchAudit: expectedDriveDiscBatchAudit,
     enemyBatchAudit: expectedEnemyBatchAudit,
+    deadlyAssaultCurrentBatchAudit: expectedDeadlyAssaultCurrentBatchAudit,
   } = buildArtifact()
   const actualRoot = readJson<unknown>(rootArtifactPath)
   const actualPackage = readJson<unknown>(packageArtifactPath)
@@ -1398,6 +1545,8 @@ function assertArtifactFresh(): void {
   const actualPackageDriveDiscBatchAudit = readJson<unknown>(packageDriveDiscBatchAuditPath)
   const actualRootEnemyBatchAudit = readJson<unknown>(rootEnemyBatchAuditPath)
   const actualPackageEnemyBatchAudit = readJson<unknown>(packageEnemyBatchAuditPath)
+  const actualRootDeadlyAssaultCurrentBatchAudit = readJson<unknown>(rootDeadlyAssaultCurrentBatchAuditPath)
+  const actualPackageDeadlyAssaultCurrentBatchAudit = readJson<unknown>(packageDeadlyAssaultCurrentBatchAuditPath)
   if (JSON.stringify(actualRoot) !== JSON.stringify(expected))
     throw new Error("Runtime game data artifact is stale; rerun pnpm --filter @randomplay/data audit:nanoka-runtime")
   if (JSON.stringify(actualPackage) !== JSON.stringify(expected))
@@ -1422,12 +1571,16 @@ function assertArtifactFresh(): void {
     throw new Error("Enemy batch audit artifact is stale; rerun pnpm --filter @randomplay/data audit:nanoka-runtime")
   if (JSON.stringify(actualPackageEnemyBatchAudit) !== JSON.stringify(expectedEnemyBatchAudit))
     throw new Error("Package Enemy batch audit mirror is stale; rerun pnpm --filter @randomplay/data audit:nanoka-runtime")
+  if (JSON.stringify(actualRootDeadlyAssaultCurrentBatchAudit) !== JSON.stringify(expectedDeadlyAssaultCurrentBatchAudit))
+    throw new Error("DA current batch audit artifact is stale; rerun pnpm --filter @randomplay/data audit:nanoka-runtime")
+  if (JSON.stringify(actualPackageDeadlyAssaultCurrentBatchAudit) !== JSON.stringify(expectedDeadlyAssaultCurrentBatchAudit))
+    throw new Error("Package DA current batch audit mirror is stale; rerun pnpm --filter @randomplay/data audit:nanoka-runtime")
   assertNanokaRuntimeGameDataArtifact(actualRoot)
   assertNanokaRuntimeGameDataArtifact(actualPackage)
 }
 
 function auditCommand(): void {
-  const { artifact, characterBatchAudit, bangbooBatchAudit, wEngineBatchAudit, driveDiscBatchAudit, enemyBatchAudit } = buildArtifact()
+  const { artifact, characterBatchAudit, bangbooBatchAudit, wEngineBatchAudit, driveDiscBatchAudit, enemyBatchAudit, deadlyAssaultCurrentBatchAudit } = buildArtifact()
   writeJson(rootArtifactPath, artifact)
   writeJson(packageArtifactPath, artifact)
   writeJson(rootCharacterBatchAuditPath, characterBatchAudit)
@@ -1440,6 +1593,8 @@ function auditCommand(): void {
   writeJson(packageDriveDiscBatchAuditPath, driveDiscBatchAudit)
   writeJson(rootEnemyBatchAuditPath, enemyBatchAudit)
   writeJson(packageEnemyBatchAuditPath, enemyBatchAudit)
+  writeJson(rootDeadlyAssaultCurrentBatchAuditPath, deadlyAssaultCurrentBatchAudit)
+  writeJson(packageDeadlyAssaultCurrentBatchAuditPath, deadlyAssaultCurrentBatchAudit)
 }
 
 function verifyCommand(): void {
@@ -1467,6 +1622,10 @@ function verifyCommand(): void {
     throw new Error("Missing data/cleaned/audit/nanoka-enemy-batch-audit.json; run audit:nanoka-runtime first")
   if (!existsSync(packageEnemyBatchAuditPath))
     throw new Error("Missing packages/data/cleaned/audit/nanoka-enemy-batch-audit.json; run audit:nanoka-runtime first")
+  if (!existsSync(rootDeadlyAssaultCurrentBatchAuditPath))
+    throw new Error("Missing data/cleaned/audit/nanoka-da-current-batch-audit.json; run audit:nanoka-runtime first")
+  if (!existsSync(packageDeadlyAssaultCurrentBatchAuditPath))
+    throw new Error("Missing packages/data/cleaned/audit/nanoka-da-current-batch-audit.json; run audit:nanoka-runtime first")
   assertArtifactFresh()
 }
 

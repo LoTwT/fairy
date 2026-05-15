@@ -44,6 +44,8 @@ describe("nanoka runtime game data cutover", () => {
     expect(Object.keys(data.driveDiscs)).toEqual(expect.arrayContaining(["31000", "31100", "33800"]))
     expect(Object.keys(data.enemies)).toHaveLength(269)
     expect(Object.keys(data.enemies)).toEqual(expect.arrayContaining(["10000", "10013", "30000", "990174"]))
+    expect(Object.keys(data.deadlyAssaultPeriods)).toHaveLength(38)
+    expect(Object.keys(data.deadlyAssaultPeriods)).toEqual(expect.arrayContaining(["69001", "69036", "69038"]))
     expect(Object.keys(data.bangboos)).toHaveLength(39)
     expect(Object.keys(data.bangbooSkills)).toHaveLength(63)
     expect(Object.keys(data.bangboos)).toEqual(expect.arrayContaining(["53001", "53002", "54001", "54008", "54020"]))
@@ -103,6 +105,19 @@ describe("nanoka runtime game data cutover", () => {
     })
     expect(data.enemies["30000"]?.resistance).toBeUndefined()
     expect(data.enemies["30000"]?.specialRules).toBeUndefined()
+    expect(data.deadlyAssaultPeriods["69036"]).toMatchObject({
+      title: "危局强袭战",
+      beginAt: "2026-05-08T04:00:00+08:00",
+      endAt: "2026-05-22T03:59:59+08:00",
+      source: {
+        sourceId: "nanoka-zzz",
+        sourceVersion: "2.8",
+        sourceAnchor: "data/source/raw/nanoka/zzz/2.8/zh/boss/69036.json",
+      },
+    })
+    expect(data.deadlyAssaultPeriods["69036"]?.zones).toHaveLength(3)
+    expect(data.deadlyAssaultPeriods["69036"]?.bossAdjustments).toHaveLength(59)
+    expect(data.deadlyAssaultPeriods["69038"]?.beginAt).toBe("2026-06-05T04:00:00+08:00")
     expect(data.bangboos["54008"]?.baseStatsByLevel?.["60"]).toMatchObject({
       maxHp: 4210.2983,
       attack: 8057.0996,
@@ -413,5 +428,55 @@ describe("nanoka runtime game data cutover", () => {
         },
       })
     }
+  })
+
+  it("records the full approved-live current DA batch audit", () => {
+    const audit = readJson<{
+      summary: {
+        periodCount: number
+        runtimePeriodCount: number
+        zoneCount: number
+        bossAdjustmentCount: number
+        scheduledFuturePeriodIds: string[]
+      }
+      historicalPeriodsIncluded: boolean
+      historicalBucketPlanned: string
+      periods: Array<{
+        id: string
+        status: string
+        source: {
+          sourceId: string
+          sourceVersion: string
+          sourceAnchor: string
+          dataPath: string
+        }
+        zoneCount: number
+        bossAdjustmentCount: number
+      }>
+    }>(join(repoRoot, "data/cleaned/audit/nanoka-da-current-batch-audit.json"))
+
+    expect(audit.summary).toMatchObject({
+      periodCount: 38,
+      runtimePeriodCount: 38,
+      zoneCount: 114,
+      bossAdjustmentCount: 2242,
+      scheduledFuturePeriodIds: ["69037", "69038"],
+    })
+    expect(audit.historicalPeriodsIncluded).toBe(false)
+    expect(audit.historicalBucketPlanned).toBe("historicalDAPeriods")
+
+    const current = audit.periods.find(row => row.id === "69036")
+    expect(current).toMatchObject({
+      status: "configured-live-observed",
+      source: {
+        sourceId: "nanoka-zzz",
+        sourceVersion: "2.8",
+        sourceAnchor: "data/source/raw/nanoka/zzz/2.8/zh/boss/69036.json",
+        dataPath: "/",
+      },
+      zoneCount: 3,
+      bossAdjustmentCount: 59,
+    })
+    expect(audit.periods.find(row => row.id === "69038")?.status).toBe("configured-live-scheduled")
   })
 })

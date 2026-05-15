@@ -110,7 +110,13 @@ describe("nanoka full-data batch discovery", () => {
     expect(rows.get("deadlyAssaultCurrent")).toMatchObject({
       currentLiveIndexCount: 38,
       currentLiveDetailAccessibleCount: 38,
-      schemaFit: "schema-additive",
+      retainedRawDetailCount: 38,
+      runtimeRecordCount: 38,
+      missingRawDetailCount: 0,
+      missingRuntimeRecordCount: 0,
+      targetRuntimeBucket: "GameData.deadlyAssaultPeriods",
+      schemaFit: "schema-additive-complete-pr-e",
+      implementationStatus: "complete-pr-e",
     })
     expect(rows.get("bangboos")).toMatchObject({
       currentLiveIndexCount: 39,

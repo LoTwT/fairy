@@ -196,8 +196,9 @@ After the 2026-05-15 owner decision, no rows remain in `needs-owner-research`.
   damage text to canonical `electric` for Plugboo while keeping passive/team
   modifier parsing deferred.
 - `deadlyAssault.periodsBossesBuffs` — nanoka live DA structured source artifact
-  row; task #142 maps period, zones, buffs, monsters, weakness, rank goals, and
-  `boss_adjust`; Phase 3 rulings plus Phase 4 cutover clear the runtime gate.
+  row; V1.2.x PR-E retains all 38 current-live 2.8 period details and promotes
+  `GameData.deadlyAssaultPeriods`, while historical periods remain reserved for
+  the dedicated `historicalDAPeriods` bucket.
 - `enemies.variantMapping` — nanoka live enemy structured source artifact row;
   V1.2.x PR-D maps all current-live monster index/detail rows, retaining 201
   selected variants, 68 missing selected variants, and 372 skipped variants in

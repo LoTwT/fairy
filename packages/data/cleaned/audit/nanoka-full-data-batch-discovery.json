@@ -136,11 +136,11 @@
       "currentLiveIndexCount": 38,
       "currentLiveDetailAccessibleCount": 38,
       "currentLiveZoneCount": 114,
-      "retainedRawDetailCount": 1,
-      "runtimeRecordCount": 0,
-      "missingRawDetailCount": 37,
-      "targetRuntimeBucket": "GameData.deadlyAssaultPeriods or equivalent DA bucket",
-      "schemaFit": "schema-additive",
+      "retainedRawDetailCount": 38,
+      "runtimeRecordCount": 38,
+      "missingRawDetailCount": 0,
+      "targetRuntimeBucket": "GameData.deadlyAssaultPeriods",
+      "schemaFit": "schema-additive-complete-pr-e",
       "promotableCurrentFields": [
         "period identity",
         "begin/end",
@@ -151,10 +151,13 @@
         "boss adjustments"
       ],
       "implementationNotes": [
-        "Current-live DA periods can be modeled separately from historical DA periods while preserving nanoka-only runtime source refs.",
-        "Any new runtime DA bucket is schema-additive and must be treated as a release-boundary change before npm publication."
+        "PR-E retains all 38 configured-live 2.8 DA period details and promotes GameData.deadlyAssaultPeriods with 114 zones.",
+        "Scheduled rows already present in configuredLiveVersion are allowed in the current-live bucket; latest/pre-release snapshots remain excluded.",
+        "Historical DA periods remain separated for the future historicalDAPeriods bucket and must not be mixed into configured-live runtime records."
       ],
-      "recommendedPr": "PR-E DA current periods"
+      "recommendedPr": "PR-E DA current periods complete",
+      "missingRuntimeRecordCount": 0,
+      "implementationStatus": "complete-pr-e"
     },
     {
       "domain": "bangboos",

@@ -25,7 +25,7 @@ Configured live version remains `manifest.zzz.live = 2.8`.
 | W-Engines | 89 | 89 | 89 | complete in PR-B |
 | Drive Disc sets | 26 | 26 | 26 | complete in PR-C |
 | Enemies | 269 | 269 | 269 | complete in PR-D |
-| Deadly Assault current periods | 38 | 38 | 0 | schema/runtime bucket required |
+| Deadly Assault current periods | 38 | 38 | 38 | complete in PR-E |
 | Bangboos | 39 | 39 | 39 | complete in PR #77 |
 
 Enemy details contain 573 `monster_info` variants. PR-D promotes 269 runtime enemy identity/source/rank rows and retains variant data in audit: 201 rows have a selected `detail.monster_id -> monster_info[monster_id]` variant, 68 rows are marked `missing-selected-monster_info-variant`, and 372 non-selected variants are retained as skipped audit rows.
@@ -66,7 +66,7 @@ The schema addition is release-significant. The version bump is deferred until t
 2. W-Engines: retain and batch-promote all current-live W-Engines. Done in PR-B.
 3. Drive Disc sets: retain and batch-promote current-live set identity/effect text; keep slot/main/substat excluded. Done in PR-C.
 4. Enemies: retain all current-live monster details and batch-promote enemy identity/source/rank with selected/missing/skipped variant audit. Done in PR-D.
-5. DA current: add a current DA period bucket if needed and retain/promote all 2.8 periods.
+5. DA current: add a current DA period bucket and retain/promote all 2.8 periods. Done in PR-E.
 6. DA historical: add `historicalDAPeriods` and retain/promote historical periods across `manifest.available`.
 
 Each implementation PR should keep the existing 28-anchor golden replay passing, avoid version bumps, avoid new golden anchors, and add per-domain fail-loud source/audit checks.
