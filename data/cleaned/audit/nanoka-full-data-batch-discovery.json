@@ -1,0 +1,255 @@
+{
+  "kind": "nanokaFullDataBatchDiscovery",
+  "schemaVersion": "nanoka-full-data-batch-discovery/v0.1",
+  "sourceId": "nanoka-zzz",
+  "configuredLiveVersion": "2.8",
+  "generatedAt": "2026-05-15T23:17:00+08:00",
+  "runtimeCutoverReady": true,
+  "decisionContext": {
+    "task": "task #179",
+    "scope": "Batch import all nanoka-backed data used by fairy after V0.1.0 and V1.2.1",
+    "decisions": {
+      "batchOrder": "sequential-per-domain",
+      "enemyScope": "all-current-live-monster-index-records",
+      "deadlyAssaultScope": "current-live-plus-historical-periods-in-a-dedicated-historicalDAPeriods-bucket",
+      "versionBumpPolicy": "do-not-bump-until-batch-work-is-complete",
+      "goldenAnchorPolicy": "do-not-add-new-golden-anchors",
+      "sourceConsistencyPolicy": "nanoka-self-consistency"
+    },
+    "excludedOrDeferred": [
+      {
+        "field": "resonium",
+        "reason": "removed from cleaned scope by R4"
+      },
+      {
+        "field": "driveDiscs.slotAndSubstatTables",
+        "reason": "out-of-scope by prior lo-user decision; user snapshots provide final Agent panel"
+      },
+      {
+        "field": "formula-owned anomaly/disorder/daze constants",
+        "reason": "implementation-owned by Phase 3 rulings, not batch-imported source data"
+      }
+    ]
+  },
+  "domains": [
+    {
+      "domain": "characters",
+      "index": "https://static.nanoka.cc/zzz/2.8/character.json",
+      "currentLiveIndexCount": 53,
+      "currentLiveDetailAccessibleCount": 53,
+      "retainedRawDetailCount": 4,
+      "runtimeRecordCount": 1,
+      "missingRawDetailCount": 49,
+      "missingRuntimeRecordCount": 52,
+      "targetRuntimeBucket": "GameData.agents",
+      "schemaFit": "existing-bucket",
+      "promotableCurrentFields": [
+        "identity",
+        "attribute",
+        "agentSpecialty",
+        "baseStatsByLevel.60",
+        "resource stats embedded in Agent/Skill artifacts where present",
+        "promotion extra stat audit rows"
+      ],
+      "implementationNotes": [
+        "Character skill/passive typed modifiers require per-template promotion and should fail loud when text is not mapped.",
+        "Sentinel/Adrenaline fields remain character-detail-derived and stay in current live runtime only."
+      ],
+      "recommendedPr": "PR-A characters batch"
+    },
+    {
+      "domain": "wEngines",
+      "index": "https://static.nanoka.cc/zzz/2.8/weapon.json",
+      "currentLiveIndexCount": 89,
+      "currentLiveDetailAccessibleCount": 89,
+      "retainedRawDetailCount": 1,
+      "runtimeRecordCount": 0,
+      "missingRawDetailCount": 88,
+      "missingRuntimeRecordCount": 89,
+      "targetRuntimeBucket": "GameData.wEngines",
+      "schemaFit": "existing-bucket",
+      "promotableCurrentFields": [
+        "identity",
+        "baseStatsByLevel",
+        "base_property",
+        "rand_property"
+      ],
+      "implementationNotes": [
+        "Weapon passive text/talents must be audited before typed modifier promotion.",
+        "Numeric base/substat promotion can proceed with source refs and unit normalization first."
+      ],
+      "recommendedPr": "PR-B wEngines batch"
+    },
+    {
+      "domain": "driveDiscs",
+      "index": "https://static.nanoka.cc/zzz/2.8/equipment.json",
+      "currentLiveIndexCount": 26,
+      "currentLiveDetailAccessibleCount": 26,
+      "retainedRawDetailCount": 1,
+      "runtimeRecordCount": 0,
+      "missingRawDetailCount": 25,
+      "missingRuntimeRecordCount": 26,
+      "targetRuntimeBucket": "GameData.driveDiscs",
+      "schemaFit": "existing-bucket-for-set-effects-only",
+      "promotableCurrentFields": [
+        "identity",
+        "desc2",
+        "desc4"
+      ],
+      "implementationNotes": [
+        "Set-effect text can be retained and audited for typed promotion.",
+        "Slot/main/substat tables remain excluded and must not appear in runtime until a separate product decision changes that scope."
+      ],
+      "recommendedPr": "PR-C drive disc set batch"
+    },
+    {
+      "domain": "enemies",
+      "index": "https://static.nanoka.cc/zzz/2.8/monster.json",
+      "currentLiveIndexCount": 269,
+      "currentLiveDetailAccessibleCount": 269,
+      "currentLiveMonsterInfoVariantCount": 573,
+      "retainedRawDetailCount": 7,
+      "runtimeRecordCount": 0,
+      "missingRawDetailCount": 262,
+      "missingRuntimeRecordCount": 269,
+      "targetRuntimeBucket": "GameData.enemies",
+      "schemaFit": "existing-bucket-with-variant-selection-risk",
+      "promotableCurrentFields": [
+        "identity",
+        "rank",
+        "variant mapping",
+        "selected monster_info stats",
+        "element/resistance profile"
+      ],
+      "implementationNotes": [
+        "Each monster detail can contain multiple monster_info variants; current batch should retain all current-live details and explicitly document selection rules.",
+        "Runtime import should start from the detail.monster_id selected variant, with audit rows for skipped variants."
+      ],
+      "recommendedPr": "PR-D enemies batch"
+    },
+    {
+      "domain": "deadlyAssaultCurrent",
+      "index": "https://static.nanoka.cc/zzz/2.8/boss.json",
+      "currentLiveIndexCount": 38,
+      "currentLiveDetailAccessibleCount": 38,
+      "currentLiveZoneCount": 114,
+      "retainedRawDetailCount": 1,
+      "runtimeRecordCount": 0,
+      "missingRawDetailCount": 37,
+      "targetRuntimeBucket": "GameData.deadlyAssaultPeriods or equivalent DA bucket",
+      "schemaFit": "schema-additive",
+      "promotableCurrentFields": [
+        "period identity",
+        "begin/end",
+        "zones",
+        "layer/selectable buffs",
+        "rooms",
+        "monsters",
+        "boss adjustments"
+      ],
+      "implementationNotes": [
+        "Current-live DA periods can be modeled separately from historical DA periods while preserving nanoka-only runtime source refs.",
+        "Any new runtime DA bucket is schema-additive and must be treated as a release-boundary change before npm publication."
+      ],
+      "recommendedPr": "PR-E DA current periods"
+    },
+    {
+      "domain": "bangboos",
+      "index": "https://static.nanoka.cc/zzz/2.8/bangboo.json",
+      "currentLiveIndexCount": 39,
+      "currentLiveDetailAccessibleCount": 39,
+      "retainedRawDetailCount": 39,
+      "runtimeRecordCount": 39,
+      "runtimeSkillCount": 63,
+      "missingRawDetailCount": 0,
+      "missingRuntimeRecordCount": 0,
+      "targetRuntimeBucket": "GameData.bangboos and GameData.bangbooSkills",
+      "schemaFit": "completed-in-V1.2.1",
+      "implementationNotes": [
+        "No further V1.2.x batch work required unless configuredLiveVersion changes."
+      ],
+      "recommendedPr": "done-in-PR-77"
+    }
+  ],
+  "historicalDeadlyAssault": {
+    "targetBucket": "historicalDAPeriods",
+    "policy": "historical periods must not be mixed into configured-live runtime records",
+    "schemaImpact": "schema-additive; release version to be decided after V1.2.x batch completion",
+    "snapshots": [
+      {
+        "snapshot": "2.8",
+        "bossIndexCount": 38,
+        "firstPeriodId": "69001",
+        "lastPeriodId": "69038"
+      },
+      {
+        "snapshot": "2.8.12",
+        "bossIndexCount": 46,
+        "firstPeriodId": "69001",
+        "lastPeriodId": "690381"
+      },
+      {
+        "snapshot": "3.0.1+15348292",
+        "bossIndexCount": 53,
+        "firstPeriodId": "69001",
+        "lastPeriodId": "690421"
+      },
+      {
+        "snapshot": "3.0.1+15370273",
+        "bossIndexCount": 53,
+        "firstPeriodId": "69001",
+        "lastPeriodId": "690421"
+      },
+      {
+        "snapshot": "3.0.1+15377279",
+        "bossIndexCount": 53,
+        "firstPeriodId": "69001",
+        "lastPeriodId": "690421"
+      },
+      {
+        "snapshot": "3.0.1+15390262",
+        "bossIndexCount": 50,
+        "firstPeriodId": "69001",
+        "lastPeriodId": "690421"
+      },
+      {
+        "snapshot": "3.0.2+15596677",
+        "bossIndexCount": 50,
+        "firstPeriodId": "69001",
+        "lastPeriodId": "690421"
+      },
+      {
+        "snapshot": "3.0.2+15597809",
+        "bossIndexCount": 50,
+        "firstPeriodId": "69001",
+        "lastPeriodId": "690421"
+      },
+      {
+        "snapshot": "3.0.2+15599986",
+        "bossIndexCount": 50,
+        "firstPeriodId": "69001",
+        "lastPeriodId": "690421"
+      },
+      {
+        "snapshot": "3.0.2+15602810",
+        "bossIndexCount": 50,
+        "firstPeriodId": "69001",
+        "lastPeriodId": "690421"
+      },
+      {
+        "snapshot": "3.0.2+15625449",
+        "bossIndexCount": 50,
+        "firstPeriodId": "69001",
+        "lastPeriodId": "690421"
+      }
+    ]
+  },
+  "recommendedPrSequence": [
+    "PR-A: retain and batch-promote all current-live characters",
+    "PR-B: retain and batch-promote all current-live W-Engines",
+    "PR-C: retain and batch-promote current-live Drive Disc set identity/effect text; keep slot/main/substat excluded",
+    "PR-D: retain all current-live monster details and batch-promote selected enemy variants with skipped-variant audit",
+    "PR-E: add current DA period bucket if needed and retain/promote all 2.8 DA periods",
+    "PR-F: add historicalDAPeriods schema bucket and retain/promote historical DA periods across manifest.available snapshots"
+  ]
+}
