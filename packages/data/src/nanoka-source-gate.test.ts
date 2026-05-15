@@ -18,6 +18,7 @@ type CoverageMatrix = {
   status: string
   rows: Array<{
     fieldId: string
+    fieldClass?: string
     status: string
     promotable: boolean
     sampleEntity?: string
@@ -111,7 +112,7 @@ describe("nanoka source gate", () => {
     const matrix = readJson<CoverageMatrix>("data/cleaned/audit/nanoka-coverage-matrix.json")
     const rows = new Map(matrix.rows.map(row => [row.fieldId, row]))
 
-    expect(matrix.status).toBe("phase-2-drive-disc-slot-audit-gate")
+    expect(matrix.status).toBe("phase-2-disorder-formula-audit-gate")
     expect(rows.get("metadata.sources")).toMatchObject({
       status: "verified-from-nanoka",
       promotable: true,
@@ -144,7 +145,7 @@ describe("nanoka source gate", () => {
     const rows = new Map(matrix.rows.map(row => [row.fieldId, row]))
     const row = rows.get("agents.promotionExtraStats")
 
-    expect(matrix.status).toBe("phase-2-drive-disc-slot-audit-gate")
+    expect(matrix.status).toBe("phase-2-disorder-formula-audit-gate")
     expect(row).toMatchObject({
       status: "verified-from-nanoka",
       promotable: true,
@@ -171,7 +172,7 @@ describe("nanoka source gate", () => {
     const rows = new Map(matrix.rows.map(row => [row.fieldId, row]))
     const row = rows.get("bangboos.element")
 
-    expect(matrix.status).toBe("phase-2-drive-disc-slot-audit-gate")
+    expect(matrix.status).toBe("phase-2-disorder-formula-audit-gate")
     expect(row).toMatchObject({
       status: "verified-from-nanoka",
       promotable: true,
@@ -229,5 +230,23 @@ describe("nanoka source gate", () => {
       "/desc4",
     ]))
     expect(row?.transformRule).toContain("do not synthesize")
+  })
+
+  it("classifies the Disorder formula as implementation-owned after failed nanoka evidence", () => {
+    const matrix = readJson<CoverageMatrix>("data/cleaned/audit/nanoka-coverage-matrix.json")
+    const rows = new Map(matrix.rows.map(row => [row.fieldId, row]))
+    const row = rows.get("rules.disorderFormula")
+
+    expect(row).toMatchObject({
+      fieldClass: "implementation-owned",
+      sourcePolicy: "implementation-owned",
+      status: "deferred",
+      promotable: false,
+      auditArtifact: "data/cleaned/audit/nanoka-disorder-formula-audit.json",
+    })
+    expect(row?.sampleEntity).toBeNull()
+    expect(row?.blockedBy).toContain("implementation-owned-runtime-formula")
+    expect(row?.transformRule).toContain("guide-anchored golden replay G15")
+    expect(row?.transformRule).toContain("Do not synthesize")
   })
 })
