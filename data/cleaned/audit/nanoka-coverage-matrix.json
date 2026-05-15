@@ -1,7 +1,7 @@
 {
   "schemaVersion": "nanoka-coverage-matrix/v0.1",
-  "generatedAt": "2026-05-15T15:20:00+08:00",
-  "status": "phase-2-disorder-formula-audit-gate",
+  "generatedAt": "2026-05-15T15:35:00+08:00",
+  "status": "phase-2-disorder-daze-level-audit-gate",
   "sourceVersion": "manifest.zzz.live",
   "canonicalSchemas": [
     "packages/core/src/schema/game-data.ts",
@@ -1243,18 +1243,20 @@
     {
       "fieldId": "rules.disorderDazeLevelZone",
       "canonicalPath": "GameData.rules.dazeLevelZone / getDisorderDazeLevelMultiplier",
-      "fieldClass": "required",
-      "sourcePolicy": "nanoka",
-      "status": "needs-tl-research",
-      "nanokaEndpoint": "unknown nanoka config endpoint",
+      "fieldClass": "implementation-owned",
+      "sourcePolicy": "implementation-owned",
+      "status": "deferred",
+      "nanokaEndpoint": null,
       "rawFieldPaths": [],
-      "transformRule": "find source-backed daze level zone constants or classify per-row as implementation-owned with decision evidence",
+      "transformRule": "Fairy owns the runtime Disorder daze-level zone formula contract in core and verifies it through guide-anchored golden replay G16; approved live nanoka daze-level/level-zone/formula endpoints are absent and entity indexes/details do not expose a Disorder daze-level formula table. Do not synthesize source-backed daze-level rows from entity text.",
       "sampleEntity": null,
       "rawAvailable": false,
       "promotable": false,
       "blockedBy": [
-        "field:daze-level-zone-source-required"
-      ]
+        "implementation-owned-runtime-formula"
+      ],
+      "auditArtifact": "data/cleaned/audit/nanoka-disorder-daze-level-audit.json",
+      "notes": "Task #158 classifies this as implementation-owned after nanoka failed-evidence audit. Existing trace sourceAnchor remains guide-3.4.2 and executable replay remains G16."
     },
     {
       "fieldId": "rules.attributeMapping",
@@ -1299,9 +1301,9 @@
   "summary": {
     "totalRows": 45,
     "verifiedFromNanoka": 36,
-    "needsTlResearch": 1,
+    "needsTlResearch": 0,
     "needsOwnerResearch": 1,
-    "deferred": 7,
+    "deferred": 8,
     "promotableNow": 20,
     "notPromotableYet": 25
   },
@@ -1315,8 +1317,7 @@
     "W-Engine stat/refine mapping",
     "DA boss_adjust, score/HP, field-rule, and period filter semantic mapping",
     "Sentinel canonical naming and unit normalization",
-    "Drive Disc slot/main/substat owner decision: out-of-scope formal data or approved non-nanoka source research",
-    "disorder daze-level source/config endpoint"
+    "Drive Disc slot/main/substat owner decision: out-of-scope formal data or approved non-nanoka source research"
   ],
   "liveVersionRef": "manifest.zzz.live",
   "sourceVersionResolved": "2.8",

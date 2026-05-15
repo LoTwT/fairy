@@ -43,25 +43,11 @@ function assertReleaseGate(report: GateReport) {
 }
 
 describe("missing-fields fail-loud gate", () => {
-  it("keeps unresolved source-backed rows machine-readable with blockers", () => {
+  it("has resolved all TL research rows into verified, deferred, or owner-owned gates", () => {
     const matrix = readJson<CoverageMatrix>("data/cleaned/audit/nanoka-coverage-matrix.json")
     const unresolved = matrix.rows.filter(row => row.status === "needs-tl-research")
 
-    expect(unresolved).not.toHaveLength(0)
-    expect(unresolved.every(row => Array.isArray(row.blockedBy) && row.blockedBy.length > 0)).toBe(true)
-    expect(unresolved.map(row => row.fieldId)).toEqual(
-      expect.arrayContaining([
-        "rules.disorderDazeLevelZone",
-      ]),
-    )
-    expect(unresolved.map(row => row.fieldId)).not.toContain("driveDiscs.slotAndSubstatTables")
-    expect(unresolved.map(row => row.fieldId)).not.toContain("rules.disorderFormula")
-    expect(unresolved.map(row => row.fieldId)).not.toEqual(expect.arrayContaining([
-      "metadata.sources",
-      "metadata.sourceRefs",
-      "agents.promotionExtraStats",
-      "bangboos.element",
-    ]))
+    expect(unresolved).toEqual([])
   })
 
   it("keeps owner-escalated rows machine-readable and non-promotable", () => {
@@ -78,11 +64,17 @@ describe("missing-fields fail-loud gate", () => {
   it("keeps implementation-owned formulas out of TL research rows", () => {
     const matrix = readJson<CoverageMatrix>("data/cleaned/audit/nanoka-coverage-matrix.json")
     const disorderFormulaRow = matrix.rows.find(row => row.fieldId === "rules.disorderFormula")
+    const disorderDazeLevelRow = matrix.rows.find(row => row.fieldId === "rules.disorderDazeLevelZone")
 
     expect(disorderFormulaRow).toBeDefined()
     expect(disorderFormulaRow?.status).toBe("deferred")
     expect(disorderFormulaRow?.blockedBy).toContain("implementation-owned-runtime-formula")
     expect(disorderFormulaRow?.auditArtifact).toBe("data/cleaned/audit/nanoka-disorder-formula-audit.json")
+
+    expect(disorderDazeLevelRow).toBeDefined()
+    expect(disorderDazeLevelRow?.status).toBe("deferred")
+    expect(disorderDazeLevelRow?.blockedBy).toContain("implementation-owned-runtime-formula")
+    expect(disorderDazeLevelRow?.auditArtifact).toBe("data/cleaned/audit/nanoka-disorder-daze-level-audit.json")
   })
 
   it("fails loudly when missing, deferred, or forbidden rows are present in a release report", () => {
