@@ -92,6 +92,7 @@ function validateMatrixAgainstRegistry(matrix, registry) {
   const nanoka = sourceById(registry, "nanoka-zzz")
   validateNanokaRegistry(nanoka)
 
+  assert(matrix.status === "phase-2-source-metadata-contract-gate", "matrix status must match the latest source metadata contract gate")
   assert(matrix.sourceVersionPolicy?.liveVersionRef === nanoka.liveVersionRef, "matrix liveVersionRef must match nanoka registry")
   assert(matrix.sourceVersionPolicy?.defaultReleaseSourceVersion === nanoka.configuredLiveVersion, "matrix default release version must match configuredLiveVersion")
   assert(matrix.sourceVersionResolved === nanoka.configuredLiveVersion, "matrix resolved sourceVersion must match configuredLiveVersion")
@@ -128,6 +129,28 @@ function validateMatrixAgainstRegistry(matrix, registry) {
   }
 
   const resourceRows = new Map((matrix.rows ?? []).map(row => [row.fieldId, row]))
+  const metadataSourcesRow = resourceRows.get("metadata.sources")
+  assert(metadataSourcesRow !== undefined, "metadata.sources: missing source registry metadata row")
+  assert(metadataSourcesRow.status === "verified-from-nanoka", "metadata.sources: source registry row must be verified after executable source-registry gate")
+  assert(metadataSourcesRow.promotable === true, "metadata.sources: source registry metadata must be promotable after contract gate")
+  assert(metadataSourcesRow.sampleEntity === "nanoka-manifest", "metadata.sources: row must use nanoka manifest evidence")
+  assert(metadataSourcesRow.sourcePolicy === "derived-from-source-registry", "metadata.sources: row must derive from source registry")
+  assert((metadataSourcesRow.blockedBy ?? []).length === 0, "metadata.sources: resolved source registry blockers must be removed")
+  for (const rawPath of ["/zzz/live", "/zzz/latest", "/zzz/available"]) {
+    assert(metadataSourcesRow.rawFieldPaths?.includes(rawPath), `metadata.sources: missing raw path ${rawPath}`)
+  }
+
+  const metadataSourceRefsRow = resourceRows.get("metadata.sourceRefs")
+  assert(metadataSourceRefsRow !== undefined, "metadata.sourceRefs: missing SourceRef metadata row")
+  assert(metadataSourceRefsRow.status === "verified-from-nanoka", "metadata.sourceRefs: SourceRef row must be verified after adapter emission gate")
+  assert(metadataSourceRefsRow.promotable === true, "metadata.sourceRefs: SourceRef metadata must be promotable after emission gate")
+  assert(metadataSourceRefsRow.sampleEntity === "nanoka-bangboo-plugboo-live-54008", "metadata.sourceRefs: row must use approved live Plugboo metadata evidence")
+  assert(metadataSourceRefsRow.sourcePolicy === "derived-from-source-registry", "metadata.sourceRefs: row must derive from source registry")
+  assert((metadataSourceRefsRow.blockedBy ?? []).length === 0, "metadata.sourceRefs: resolved SourceRef blockers must be removed")
+  for (const rawPath of ["/assets/*/url", "/assets/*/localPath", "/assets/*/sourceVersion"]) {
+    assert(metadataSourceRefsRow.rawFieldPaths?.includes(rawPath), `metadata.sourceRefs: missing raw path ${rawPath}`)
+  }
+
   for (const fieldId of [
     "adrenaline.maxAdrenaline",
     "adrenaline.automaticAdrenalineAccumulation",
