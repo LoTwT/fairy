@@ -47,10 +47,10 @@ describe("S5 data governance", () => {
 
     expect(npmIgnore).toContain("data/source/")
     expect(packageJson.files).toEqual(
-      expect.arrayContaining(["dist", "cleaned"]),
+      expect.arrayContaining(["dist", "cleaned", "source-registry.json"]),
     )
     expect(packageJson.files).not.toContain("src")
-    expect(packageJson.files?.some(entry => entry.includes("source"))).toBe(false)
+    expect(packageJson.files?.some(entry => entry.startsWith("source/"))).toBe(false)
   })
 
   it("packs synced cleaned JSON while excluding retained source files", () => {
@@ -75,6 +75,7 @@ describe("S5 data governance", () => {
       const files = npmPackFiles()
 
       expect(files).toContain("cleaned/qa-pack-probe.json")
+      expect(files).toContain("source-registry.json")
       expect(files.some(file => file.startsWith("data/source/"))).toBe(false)
       expect(files.some(file => file.startsWith("docs/reference/"))).toBe(false)
       expect(files.some(file => file.endsWith(".xlsx"))).toBe(false)
