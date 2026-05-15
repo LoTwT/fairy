@@ -55,7 +55,20 @@ export interface NanokaRawSnapshotManifest {
       id: number
       codeName?: string
       hasStats: boolean
-      sentinelRawPaths: string[]
+      resourceRawPaths: string[]
+    }
+    sentinelSample?: {
+      id: number
+      codeName?: string
+      hasStats: boolean
+      rpMaxRaw?: number
+      rpRecoverRaw?: number
+      firstSkillParam?: {
+        id: number
+        feverRecoveryRaw?: number
+        rpRecoveryRaw?: number
+      }
+      rawPaths: string[]
     }
     deadlyAssaultSample: {
       id: number

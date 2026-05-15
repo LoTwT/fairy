@@ -14,6 +14,15 @@ type SourceRegistry = {
   }>
 }
 
+type CoverageMatrix = {
+  rows: Array<{
+    fieldId: string
+    status: string
+    promotable: boolean
+    sampleEntity?: string
+  }>
+}
+
 function readJson<T>(path: string): T {
   return JSON.parse(readFileSync(join(repoRoot, path), "utf8")) as T
 }
@@ -68,5 +77,24 @@ describe("nanoka source gate", () => {
     expect(isAllowed("https://static.nanoka.cc/zzz/beta/zh/character/1021.json")).toBe(false)
     expect(isAllowed("https://static.nanoka.cc/zzz/preview/zh/boss/69036.json")).toBe(false)
     expect(isAllowed("https://zzz.gachabase.net/beta/agents/1371/yixuan?lang=en")).toBe(false)
+  })
+
+  it("locks Adrenaline and Resonance resource rows to canonical promotable live evidence", () => {
+    const matrix = readJson<CoverageMatrix>("data/cleaned/audit/nanoka-coverage-matrix.json")
+    const rows = new Map(matrix.rows.map(row => [row.fieldId, row]))
+
+    expect([...rows.keys()].filter(fieldId => fieldId.startsWith("sentinel."))).toEqual([])
+    for (const fieldId of [
+      "adrenaline.maxAdrenaline",
+      "adrenaline.automaticAdrenalineAccumulation",
+      "skills.resonanceRecovery",
+      "skills.adrenalineRecovery",
+    ]) {
+      expect(rows.get(fieldId)).toMatchObject({
+        status: "verified-from-nanoka",
+        promotable: true,
+        sampleEntity: "nanoka-character-yixuan-live-1371",
+      })
+    }
   })
 })

@@ -53,7 +53,7 @@ export const dataSourceDescriptors = [
       "agent and Bangboo base panel raw fields",
       "skill parameter tables",
       "Deadly Assault period / zone / buff / boss detail raw fields",
-      "Sentinel / decibel raw fields",
+      "Adrenaline and Resonance recovery raw fields",
       "approved-live snapshot diff inputs",
     ],
     sourceVersionStrategy:
@@ -63,6 +63,7 @@ export const dataSourceDescriptors = [
       "data/source/raw/nanoka/zzz/2.8/manifest.json",
       "data/source/raw/nanoka/zzz/2.8/boss.json",
       "data/source/raw/nanoka/zzz/2.8/zh/character/1021.json",
+      "data/source/raw/nanoka/zzz/2.8/zh/character/1371.json",
       "data/source/raw/nanoka/zzz/2.8/zh/boss/69036.json",
     ],
     fetchPolicy: {
