@@ -24,10 +24,22 @@ type Discovery = {
   }>
   historicalDeadlyAssault: {
     targetBucket: string
+    currentLiveBucket: string
+    implementationStatus: string
+    summary: {
+      snapshotCount: number
+      historicalRuntimePeriodCount: number
+      zoneCount: number
+      bossAdjustmentCount: number
+      scheduleKnownCount: number
+      scheduleMissingCount: number
+    }
     policy: string
     snapshots: Array<{
       snapshot: string
       bossIndexCount: number
+      scheduleKnownCount: number
+      scheduleMissingCount: number
     }>
   }
   recommendedPrSequence: string[]
@@ -130,10 +142,20 @@ describe("nanoka full-data batch discovery", () => {
     const discovery = readJson<Discovery>("data/cleaned/audit/nanoka-full-data-batch-discovery.json")
 
     expect(discovery.historicalDeadlyAssault.targetBucket).toBe("historicalDAPeriods")
+    expect(discovery.historicalDeadlyAssault.currentLiveBucket).toBe("deadlyAssaultPeriods")
     expect(discovery.historicalDeadlyAssault.policy).toContain("must not be mixed into configured-live runtime records")
-    expect(discovery.historicalDeadlyAssault.snapshots).toHaveLength(11)
+    expect(discovery.historicalDeadlyAssault.policy).toContain("current-runtime fallback")
+    expect(discovery.historicalDeadlyAssault.implementationStatus).toBe("complete-pr-f")
+    expect(discovery.historicalDeadlyAssault.summary).toMatchObject({
+      snapshotCount: 10,
+      historicalRuntimePeriodCount: 505,
+      zoneCount: 1506,
+      bossAdjustmentCount: 58445,
+      scheduleKnownCount: 198,
+      scheduleMissingCount: 307,
+    })
+    expect(discovery.historicalDeadlyAssault.snapshots).toHaveLength(10)
     expect(discovery.historicalDeadlyAssault.snapshots.map(snapshot => snapshot.snapshot)).toEqual([
-      "2.8",
       "2.8.12",
       "3.0.1+15348292",
       "3.0.1+15370273",
@@ -145,7 +167,12 @@ describe("nanoka full-data batch discovery", () => {
       "3.0.2+15602810",
       "3.0.2+15625449",
     ])
-    expect(discovery.historicalDeadlyAssault.snapshots.at(0)).toMatchObject({ snapshot: "2.8", bossIndexCount: 38 })
+    expect(discovery.historicalDeadlyAssault.snapshots.at(0)).toMatchObject({
+      snapshot: "2.8.12",
+      bossIndexCount: 46,
+      scheduleKnownCount: 39,
+      scheduleMissingCount: 7,
+    })
     expect(discovery.historicalDeadlyAssault.snapshots.at(-1)).toMatchObject({ snapshot: "3.0.2+15625449", bossIndexCount: 50 })
   })
 
@@ -158,7 +185,7 @@ describe("nanoka full-data batch discovery", () => {
       "PR-C: retain and batch-promote current-live Drive Disc set identity/effect text; keep slot/main/substat excluded",
       "PR-D: retain all current-live monster details and batch-promote selected enemy variants with skipped-variant audit",
       "PR-E: add current DA period bucket if needed and retain/promote all 2.8 DA periods",
-      "PR-F: add historicalDAPeriods schema bucket and retain/promote historical DA periods across manifest.available snapshots",
+      "PR-F: add historicalDAPeriods schema bucket and retain/promote historical DA periods across manifest.available snapshots (complete)",
     ])
   })
 })

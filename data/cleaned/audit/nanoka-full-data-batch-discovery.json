@@ -3,7 +3,7 @@
   "schemaVersion": "nanoka-full-data-batch-discovery/v0.1",
   "sourceId": "nanoka-zzz",
   "configuredLiveVersion": "2.8",
-  "generatedAt": "2026-05-16T01:05:00+08:00",
+  "generatedAt": "2026-05-16T02:45:00+08:00",
   "runtimeCutoverReady": true,
   "decisionContext": {
     "task": "task #179",
@@ -152,8 +152,8 @@
       ],
       "implementationNotes": [
         "PR-E retains all 38 configured-live 2.8 DA period details and promotes GameData.deadlyAssaultPeriods with 114 zones.",
-        "Scheduled rows already present in configuredLiveVersion are allowed in the current-live bucket; latest/pre-release snapshots remain excluded.",
-        "Historical DA periods remain separated for the future historicalDAPeriods bucket and must not be mixed into configured-live runtime records."
+        "Scheduled rows already present in configuredLiveVersion are allowed in the current-live bucket; latest/pre-release snapshots remain excluded from that bucket.",
+        "PR-F separates manifest-available historical DA periods into GameData.historicalDAPeriods so current-live runtime policy stays strict."
       ],
       "recommendedPr": "PR-E DA current periods complete",
       "missingRuntimeRecordCount": 0,
@@ -179,74 +179,133 @@
   ],
   "historicalDeadlyAssault": {
     "targetBucket": "historicalDAPeriods",
-    "policy": "historical periods must not be mixed into configured-live runtime records",
+    "currentLiveBucket": "deadlyAssaultPeriods",
+    "currentLiveVersion": "2.8",
+    "policy": "historical periods must not be mixed into configured-live runtime records or used as current-runtime fallback",
     "schemaImpact": "schema-additive; release version to be decided after V1.2.x batch completion",
+    "manifestPath": "data/source/raw/nanoka/zzz/historical-da-fetch-manifest.json",
+    "auditArtifact": "data/cleaned/audit/nanoka-da-historical-batch-audit.json",
+    "implementationStatus": "complete-pr-f",
+    "summary": {
+      "snapshotCount": 10,
+      "historicalRuntimePeriodCount": 505,
+      "retainedDetailCount": 505,
+      "zoneCount": 1506,
+      "bossAdjustmentCount": 58445,
+      "uniquePeriodIdCount": 53,
+      "scheduleKnownCount": 198,
+      "scheduleMissingCount": 307
+    },
     "snapshots": [
-      {
-        "snapshot": "2.8",
-        "bossIndexCount": 38,
-        "firstPeriodId": "69001",
-        "lastPeriodId": "69038"
-      },
       {
         "snapshot": "2.8.12",
         "bossIndexCount": 46,
+        "retainedDetailCount": 46,
         "firstPeriodId": "69001",
-        "lastPeriodId": "690381"
+        "lastPeriodId": "690381",
+        "scheduleKnownCount": 39,
+        "scheduleMissingCount": 7,
+        "zoneCount": 138,
+        "bossAdjustmentCount": 4094
       },
       {
         "snapshot": "3.0.1+15348292",
         "bossIndexCount": 53,
+        "retainedDetailCount": 53,
         "firstPeriodId": "69001",
-        "lastPeriodId": "690421"
+        "lastPeriodId": "690421",
+        "scheduleKnownCount": 43,
+        "scheduleMissingCount": 10,
+        "zoneCount": 158,
+        "bossAdjustmentCount": 6217
       },
       {
         "snapshot": "3.0.1+15370273",
         "bossIndexCount": 53,
+        "retainedDetailCount": 53,
         "firstPeriodId": "69001",
-        "lastPeriodId": "690421"
+        "lastPeriodId": "690421",
+        "scheduleKnownCount": 43,
+        "scheduleMissingCount": 10,
+        "zoneCount": 158,
+        "bossAdjustmentCount": 6217
       },
       {
         "snapshot": "3.0.1+15377279",
         "bossIndexCount": 53,
+        "retainedDetailCount": 53,
         "firstPeriodId": "69001",
-        "lastPeriodId": "690421"
+        "lastPeriodId": "690421",
+        "scheduleKnownCount": 43,
+        "scheduleMissingCount": 10,
+        "zoneCount": 158,
+        "bossAdjustmentCount": 6217
       },
       {
         "snapshot": "3.0.1+15390262",
         "bossIndexCount": 50,
+        "retainedDetailCount": 50,
         "firstPeriodId": "69001",
-        "lastPeriodId": "690421"
+        "lastPeriodId": "690421",
+        "scheduleKnownCount": 5,
+        "scheduleMissingCount": 45,
+        "zoneCount": 149,
+        "bossAdjustmentCount": 5950
       },
       {
         "snapshot": "3.0.2+15596677",
         "bossIndexCount": 50,
+        "retainedDetailCount": 50,
         "firstPeriodId": "69001",
-        "lastPeriodId": "690421"
+        "lastPeriodId": "690421",
+        "scheduleKnownCount": 5,
+        "scheduleMissingCount": 45,
+        "zoneCount": 149,
+        "bossAdjustmentCount": 5950
       },
       {
         "snapshot": "3.0.2+15597809",
         "bossIndexCount": 50,
+        "retainedDetailCount": 50,
         "firstPeriodId": "69001",
-        "lastPeriodId": "690421"
+        "lastPeriodId": "690421",
+        "scheduleKnownCount": 5,
+        "scheduleMissingCount": 45,
+        "zoneCount": 149,
+        "bossAdjustmentCount": 5950
       },
       {
         "snapshot": "3.0.2+15599986",
         "bossIndexCount": 50,
+        "retainedDetailCount": 50,
         "firstPeriodId": "69001",
-        "lastPeriodId": "690421"
+        "lastPeriodId": "690421",
+        "scheduleKnownCount": 5,
+        "scheduleMissingCount": 45,
+        "zoneCount": 149,
+        "bossAdjustmentCount": 5950
       },
       {
         "snapshot": "3.0.2+15602810",
         "bossIndexCount": 50,
+        "retainedDetailCount": 50,
         "firstPeriodId": "69001",
-        "lastPeriodId": "690421"
+        "lastPeriodId": "690421",
+        "scheduleKnownCount": 5,
+        "scheduleMissingCount": 45,
+        "zoneCount": 149,
+        "bossAdjustmentCount": 5950
       },
       {
         "snapshot": "3.0.2+15625449",
         "bossIndexCount": 50,
+        "retainedDetailCount": 50,
         "firstPeriodId": "69001",
-        "lastPeriodId": "690421"
+        "lastPeriodId": "690421",
+        "scheduleKnownCount": 5,
+        "scheduleMissingCount": 45,
+        "zoneCount": 149,
+        "bossAdjustmentCount": 5950
       }
     ]
   },
@@ -256,6 +315,6 @@
     "PR-C: retain and batch-promote current-live Drive Disc set identity/effect text; keep slot/main/substat excluded",
     "PR-D: retain all current-live monster details and batch-promote selected enemy variants with skipped-variant audit",
     "PR-E: add current DA period bucket if needed and retain/promote all 2.8 DA periods",
-    "PR-F: add historicalDAPeriods schema bucket and retain/promote historical DA periods across manifest.available snapshots"
+    "PR-F: add historicalDAPeriods schema bucket and retain/promote historical DA periods across manifest.available snapshots (complete)"
   ]
 }

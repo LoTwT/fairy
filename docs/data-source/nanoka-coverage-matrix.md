@@ -1,6 +1,6 @@
 # Nanoka Coverage Matrix
 
-Status: Phase 4 runtime cutover gate + V1.2.1 Bangboo batch import
+Status: Phase 4 runtime cutover gate + V1.2.1 Bangboo batch import + V1.2.x full-data batch through PR-F
 Owner: @TechLead
 Reviewers: @Product, @QA
 Related: D-20 data-source migration, task #121, task #122, task #125, task #127,
@@ -61,10 +61,11 @@ The machine-readable version is
 | Live Drive Disc index | `https://static.nanoka.cc/zzz/2.8/equipment.json` | Approved live index for the V1.2.x Drive Disc batch. The retained index lists 26 Drive Disc sets and drives the runtime identity import. |
 | Live Drive Disc details | `https://static.nanoka.cc/zzz/2.8/zh/equipment/{id}.json` | V1.2.x PR-C retains all 26 approved-live Drive Disc details under `data/source/raw/nanoka/zzz/2.8/zh/equipment/`; runtime generation verifies each detail against the index before emitting cleaned identity rows. `desc2` / `desc4` text is retained in audit, while typed modifiers remain template-pending. |
 | Live Drive Disc slot/stat endpoint audit | `https://static.nanoka.cc/zzz/2.8/equipment*.json` | Failed-evidence audit only: candidate stat-table endpoints checked in `data/cleaned/audit/nanoka-drive-disc-slot-stat-audit.json` returned 404. Lo-user locks V0.1.0 scope to final user-provided panel + set effects, so slot/main/substat tables remain out of scope. |
-| Manifest / live gate | `https://static.nanoka.cc/manifest.json` | `zzz.live = 2.8`, `zzz.latest = 3.0.2+15625449`, `zzz.available[]` supports approved-live version allowlists and snapshot-derived patch diff history. |
+| Manifest / live gate | `https://static.nanoka.cc/manifest.json` | `zzz.live = 2.8`, `zzz.latest = 3.0.2+15625449`, `zzz.available[]` supports approved-live version allowlists, snapshot-derived patch diff history, and the PR-F historical DA manifest. |
 | Live Adrenaline / Resonance sample / Yixuan | `https://static.nanoka.cc/zzz/2.8/zh/character/1371.json` | `stats.rp_max = 120`, `stats.rp_recover = 200`, `fever_recovery`, and `rp_recovery` raw paths exist in the configured live version. |
 | Live Deadly Assault index | `https://static.nanoka.cc/zzz/2.8/boss.json` | 38 live DA entries; all sampled `zh/boss/{id}.json` details returned 200 in PR #54. |
 | Live Deadly Assault period / 69036 | `https://static.nanoka.cc/zzz/2.8/zh/boss/69036.json` | Current live period window, zones, layer/selectable buffs, room monster lists, weakness data, and `boss_adjust`. |
+| Historical Deadly Assault manifest | `data/source/raw/nanoka/zzz/historical-da-fetch-manifest.json` | PR-F retains 10 non-current manifest-available DA snapshots: 505 periods, 1506 zones, 58445 `boss_adjust` rows, with missing schedule fields explicitly marked as `missing-in-historical-source`. |
 | Live rules / formula candidate audit | `https://static.nanoka.cc/zzz/2.8/{formula,rules,disorder,anomaly_disorder,battle_formula,damage_formula,element_abnormal}.json` | Failed-evidence audit only: dedicated live formula/rule/disorder endpoints are absent. Existing entity indexes/details do not expose a global Disorder formula table, so task #156 classifies `rules.disorderFormula` as implementation-owned runtime formula evidence. |
 | Live daze-level / level-zone candidate audit | `https://static.nanoka.cc/zzz/2.8/{daze_level,daze_level_zone,disorder_daze_level,disorder_daze,disorder_daze_level_zone,level_zone,level_correction,level_suppression,damage_level,damage_level_zone}.json` | Failed-evidence audit only: dedicated live daze-level / level-zone endpoints are absent. Entity indexes do not expose Disorder daze-level constants, so task #158 classifies `rules.disorderDazeLevelZone` as implementation-owned runtime formula evidence. |
 
@@ -197,8 +198,11 @@ After the 2026-05-15 owner decision, no rows remain in `needs-owner-research`.
   modifier parsing deferred.
 - `deadlyAssault.periodsBossesBuffs` — nanoka live DA structured source artifact
   row; V1.2.x PR-E retains all 38 current-live 2.8 period details and promotes
-  `GameData.deadlyAssaultPeriods`, while historical periods remain reserved for
-  the dedicated `historicalDAPeriods` bucket.
+  `GameData.deadlyAssaultPeriods`.
+- `deadlyAssault.historicalPeriods` — nanoka manifest-available DA historical
+  source artifact row; V1.2.x PR-F retains 10 non-current snapshots and promotes
+  505 version-keyed rows into `GameData.historicalDAPeriods` without allowing
+  current-runtime fallback.
 - `enemies.variantMapping` — nanoka live enemy structured source artifact row;
   V1.2.x PR-D maps all current-live monster index/detail rows, retaining 201
   selected variants, 68 missing selected variants, and 372 skipped variants in

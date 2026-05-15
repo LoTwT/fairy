@@ -46,6 +46,13 @@ describe("nanoka runtime game data cutover", () => {
     expect(Object.keys(data.enemies)).toEqual(expect.arrayContaining(["10000", "10013", "30000", "990174"]))
     expect(Object.keys(data.deadlyAssaultPeriods)).toHaveLength(38)
     expect(Object.keys(data.deadlyAssaultPeriods)).toEqual(expect.arrayContaining(["69001", "69036", "69038"]))
+    expect(Object.keys(data.historicalDAPeriods)).toHaveLength(505)
+    expect(Object.keys(data.historicalDAPeriods)).toEqual(expect.arrayContaining([
+      "2.8.12#69036",
+      "2.8.12#69001",
+      "3.0.1+15348292#690421",
+      "3.0.2+15625449#69001",
+    ]))
     expect(Object.keys(data.bangboos)).toHaveLength(39)
     expect(Object.keys(data.bangbooSkills)).toHaveLength(63)
     expect(Object.keys(data.bangboos)).toEqual(expect.arrayContaining(["53001", "53002", "54001", "54008", "54020"]))
@@ -118,6 +125,29 @@ describe("nanoka runtime game data cutover", () => {
     expect(data.deadlyAssaultPeriods["69036"]?.zones).toHaveLength(3)
     expect(data.deadlyAssaultPeriods["69036"]?.bossAdjustments).toHaveLength(59)
     expect(data.deadlyAssaultPeriods["69038"]?.beginAt).toBe("2026-06-05T04:00:00+08:00")
+    expect(data.historicalDAPeriods["2.8.12#69001"]).toMatchObject({
+      historicalKey: "2.8.12#69001",
+      id: "69001",
+      sourceVersion: "2.8.12",
+      releaseVersion: "2.8.12",
+      currentRuntime: false,
+      scheduleStatus: "source-known",
+      source: {
+        sourceId: "nanoka-zzz",
+        sourceVersion: "2.8.12",
+        sourceAnchor: "data/source/raw/nanoka/zzz/2.8.12/zh/boss/69001.json",
+      },
+    })
+    expect(data.historicalDAPeriods["3.0.2+15625449#69001"]).toMatchObject({
+      historicalKey: "3.0.2+15625449#69001",
+      id: "69001",
+      sourceVersion: "3.0.2+15625449",
+      releaseVersion: "3.0.2+15625449",
+      currentRuntime: false,
+      scheduleStatus: "missing-in-historical-source",
+    })
+    expect(data.historicalDAPeriods["3.0.2+15625449#69001"]?.beginAt).toBeUndefined()
+    expect(data.historicalDAPeriods["3.0.2+15625449#69001"]?.endAt).toBeUndefined()
     expect(data.bangboos["54008"]?.baseStatsByLevel?.["60"]).toMatchObject({
       maxHp: 4210.2983,
       attack: 8057.0996,
@@ -478,5 +508,93 @@ describe("nanoka runtime game data cutover", () => {
       bossAdjustmentCount: 59,
     })
     expect(audit.periods.find(row => row.id === "69038")?.status).toBe("configured-live-scheduled")
+  })
+
+  it("records manifest-available historical DA periods in the dedicated non-current bucket", () => {
+    const audit = readJson<{
+      summary: {
+        snapshotCount: number
+        historicalRuntimePeriodCount: number
+        uniquePeriodIdCount: number
+        zoneCount: number
+        bossAdjustmentCount: number
+        scheduleKnownCount: number
+        scheduleMissingCount: number
+        sourceVersions: string[]
+      }
+      policy: {
+        currentBucketVersionMustRemain: string
+        historicalPeriodsAreNotCurrentRuntime: boolean
+        noRuntimeFallbackToHistorical: boolean
+        noVersionBumpInThisPr: boolean
+      }
+      snapshots: Array<{
+        sourceVersion: string
+        periodCount: number
+        scheduleKnownCount: number
+        scheduleMissingCount: number
+      }>
+      periods: Array<{
+        historicalKey: string
+        id: string
+        releaseVersion: string
+        currentRuntime: boolean
+        scheduleStatus: string
+      }>
+    }>(join(repoRoot, "data/cleaned/audit/nanoka-da-historical-batch-audit.json"))
+
+    expect(audit.summary).toMatchObject({
+      snapshotCount: 10,
+      historicalRuntimePeriodCount: 505,
+      uniquePeriodIdCount: 53,
+      zoneCount: 1506,
+      bossAdjustmentCount: 58445,
+      scheduleKnownCount: 198,
+      scheduleMissingCount: 307,
+    })
+    expect(audit.summary.sourceVersions).toEqual([
+      "2.8.12",
+      "3.0.1+15348292",
+      "3.0.1+15370273",
+      "3.0.1+15377279",
+      "3.0.1+15390262",
+      "3.0.2+15596677",
+      "3.0.2+15597809",
+      "3.0.2+15599986",
+      "3.0.2+15602810",
+      "3.0.2+15625449",
+    ])
+    expect(audit.policy).toMatchObject({
+      currentBucketVersionMustRemain: "2.8",
+      historicalPeriodsAreNotCurrentRuntime: true,
+      noRuntimeFallbackToHistorical: true,
+      noVersionBumpInThisPr: true,
+    })
+    expect(audit.snapshots).toHaveLength(10)
+    expect(audit.snapshots[0]).toMatchObject({
+      sourceVersion: "2.8.12",
+      periodCount: 46,
+      scheduleKnownCount: 39,
+      scheduleMissingCount: 7,
+    })
+    expect(audit.snapshots.at(-1)).toMatchObject({
+      sourceVersion: "3.0.2+15625449",
+      periodCount: 50,
+      scheduleKnownCount: 5,
+      scheduleMissingCount: 45,
+    })
+    expect(audit.periods).toHaveLength(505)
+    expect(audit.periods.find(row => row.historicalKey === "2.8.12#69001")).toMatchObject({
+      id: "69001",
+      releaseVersion: "2.8.12",
+      currentRuntime: false,
+      scheduleStatus: "source-known",
+    })
+    expect(audit.periods.find(row => row.historicalKey === "3.0.2+15625449#69001")).toMatchObject({
+      id: "69001",
+      releaseVersion: "3.0.2+15625449",
+      currentRuntime: false,
+      scheduleStatus: "missing-in-historical-source",
+    })
   })
 })

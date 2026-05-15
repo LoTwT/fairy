@@ -19,6 +19,7 @@ async function isCoreDistFresh() {
       driveDiscs: {},
       enemies: {},
       deadlyAssaultPeriods: {},
+      historicalDAPeriods: {},
       resonium: {},
       modifiers: {},
       rules: {},

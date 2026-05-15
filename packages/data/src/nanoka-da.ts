@@ -8,8 +8,10 @@ export type NanokaDaAttribute =
 
 export interface NanokaDaIndexEntry {
   sort: number
-  begin: string
-  end: string
+  begin?: string
+  end?: string
+  live_begin?: string
+  live_end?: string
   zh: string
   en?: string
   ja?: string
@@ -64,8 +66,8 @@ export interface NanokaDaBossAdjustRecord {
 export interface NanokaDaDetail {
   id: number
   name: string
-  begin_time: string
-  end_time: string
+  begin_time?: string
+  end_time?: string
   zone: Record<string, NanokaDaZoneRecord>
   boss_adjust: Record<string, NanokaDaBossAdjustRecord>
 }
@@ -129,6 +131,18 @@ export interface DeadlyAssaultPeriod {
   runtimeCutoverReady: false
 }
 
+export interface HistoricalDeadlyAssaultPeriod {
+  id: string
+  title: string
+  sourceVersion: string
+  beginAt?: string
+  endAt?: string
+  scheduleStatus: "source-known" | "missing-in-historical-source"
+  zones: DeadlyAssaultZone[]
+  bossAdjustments: DeadlyAssaultBossAdjustment[]
+  runtimeCutoverReady: false
+}
+
 export interface DeriveNanokaDeadlyAssaultOptions {
   sourceVersion: string
   configuredLiveSnapshotDate: string
@@ -154,14 +168,20 @@ export function deriveNanokaDeadlyAssaultPeriod(
   if (indexEntry === undefined)
     throw new Error(`Missing Deadly Assault period ${periodId} from nanoka boss index`)
 
-  const beginAt = normalizeNanokaChinaDate(detail.begin_time, "begin_time")
-  const endAt = normalizeNanokaChinaDate(detail.end_time, "end_time")
+  const beginAt = normalizeNanokaChinaDate(
+    detail.begin_time ?? indexEntry.begin ?? indexEntry.live_begin,
+    "begin_time",
+  )
+  const endAt = normalizeNanokaChinaDate(
+    detail.end_time ?? indexEntry.end ?? indexEntry.live_end,
+    "end_time",
+  )
   const configuredLiveSnapshotDate = parseDate(options.configuredLiveSnapshotDate, "configuredLiveSnapshotDate")
   if (options.allowConfiguredLiveScheduledPeriods !== true && Date.parse(beginAt) > configuredLiveSnapshotDate.getTime())
     throw new Error(`Deadly Assault period ${periodId} begins after configured live snapshot date`)
-  if (normalizeNanokaChinaDate(indexEntry.begin, "index.begin") !== beginAt)
+  if (normalizeNanokaChinaDate(indexEntry.begin ?? indexEntry.live_begin, "index.begin") !== beginAt)
     throw new Error(`Deadly Assault period ${periodId} begin_time does not match boss index`)
-  if (normalizeNanokaChinaDate(indexEntry.end, "index.end") !== endAt)
+  if (normalizeNanokaChinaDate(indexEntry.end ?? indexEntry.live_end, "index.end") !== endAt)
     throw new Error(`Deadly Assault period ${periodId} end_time does not match boss index`)
 
   return {
@@ -170,6 +190,40 @@ export function deriveNanokaDeadlyAssaultPeriod(
     sourceVersion: options.sourceVersion,
     beginAt,
     endAt,
+    zones: sortedEntries(detail.zone).map(([zoneId, zone]) => normalizeZone(zoneId, zone)),
+    bossAdjustments: sortedEntries(detail.boss_adjust).map(([id, adjustment]) => normalizeBossAdjustment(id, adjustment)),
+    runtimeCutoverReady: false,
+  }
+}
+
+export function deriveNanokaHistoricalDeadlyAssaultPeriod(
+  index: NanokaDaIndex,
+  detail: NanokaDaDetail,
+  options: Pick<DeriveNanokaDeadlyAssaultOptions, "sourceVersion">,
+): HistoricalDeadlyAssaultPeriod {
+  const periodId = String(detail.id)
+  const indexEntry = index[periodId]
+  if (indexEntry === undefined)
+    throw new Error(`Missing Deadly Assault period ${periodId} from nanoka boss index`)
+
+  const beginSource = detail.begin_time ?? indexEntry.begin ?? indexEntry.live_begin
+  const endSource = detail.end_time ?? indexEntry.end ?? indexEntry.live_end
+  const beginAt = beginSource === undefined ? undefined : normalizeNanokaChinaDate(beginSource, "begin_time")
+  const endAt = endSource === undefined ? undefined : normalizeNanokaChinaDate(endSource, "end_time")
+  const indexBegin = indexEntry.begin ?? indexEntry.live_begin
+  const indexEnd = indexEntry.end ?? indexEntry.live_end
+  if (indexBegin !== undefined && beginAt !== undefined && normalizeNanokaChinaDate(indexBegin, "index.begin") !== beginAt)
+    throw new Error(`Deadly Assault period ${periodId} begin_time does not match boss index`)
+  if (indexEnd !== undefined && endAt !== undefined && normalizeNanokaChinaDate(indexEnd, "index.end") !== endAt)
+    throw new Error(`Deadly Assault period ${periodId} end_time does not match boss index`)
+
+  return {
+    id: periodId,
+    title: requiredString(detail.name, "name"),
+    sourceVersion: options.sourceVersion,
+    ...(beginAt === undefined ? {} : { beginAt }),
+    ...(endAt === undefined ? {} : { endAt }),
+    scheduleStatus: beginAt === undefined || endAt === undefined ? "missing-in-historical-source" : "source-known",
     zones: sortedEntries(detail.zone).map(([zoneId, zone]) => normalizeZone(zoneId, zone)),
     bossAdjustments: sortedEntries(detail.boss_adjust).map(([id, adjustment]) => normalizeBossAdjustment(id, adjustment)),
     runtimeCutoverReady: false,
@@ -243,7 +297,9 @@ function normalizeBossAdjustment(
   }
 }
 
-function normalizeNanokaChinaDate(value: string, path: string): string {
+function normalizeNanokaChinaDate(value: string | undefined, path: string): string {
+  if (value === undefined)
+    throw new Error(`Missing nanoka date ${path}`)
   const match = /^(\d{4}-\d{2}-\d{2}) (\d{2}:\d{2}:\d{2})$/.exec(value)
   if (match === null)
     throw new Error(`Invalid nanoka date ${path}`)

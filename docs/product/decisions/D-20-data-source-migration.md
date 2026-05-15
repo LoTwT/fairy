@@ -124,6 +124,7 @@ V0.0.4 ship 后（2026-05-14），lo-user 通告 Excel 数据源（`data/source/
 4. **R4.a patch history 的 diff 输入** 可以从 `approvedLiveVersions[]` 取（历史 live snapshots，作 derived 输入）；**不能直接吃 latest/pre-release snapshots**
 5. **Archived audit fixtures** 可用 `approvedLiveVersions[]` 中的历史 live snapshots
 6. Version upgrade guard：如 `manifest.zzz.live` 从 `2.8` 升 `2.9`，adapter 检测 `fetchedLiveVersion != configuredLiveVersion` → fail-loud；lo-user approve 新 live → 更新 `configuredLiveVersion`，并把旧 `2.8` 加入 `approvedLiveVersions[]` 作 historical snapshot-diff 输入
+7. **V1.2.x historical DA exception**：lo-user 选择 dedicated `historicalDAPeriods` bucket 后，manifest-available 非当前版本 DA rows 可进入 `GameData.historicalDAPeriods`，但每行必须 `currentRuntime=false`、`releaseVersion != configuredLiveVersion`，并且不得作为 `GameData.deadlyAssaultPeriods` 或 current-runtime fallback。
 
 ### 4.3 Per-row metadata（cleaned data 内嵌）
 
@@ -401,13 +402,14 @@ lo-user 已 explicitly 接受以下残余风险（per msg `74b52454`）：
 
 ## 14. Doc state
 
-- Version: **v0.5 release-prep**（2026-05-15）
+- Version: **v0.6 V1.2.x historical DA addendum**（2026-05-16）
 - Owner: @Product
 - Cross-reviewer: @TechLead（Phase 2 实施）/ @QA（8 acceptance gates Phase 2-4 validation）
-- Last update: 2026-05-15
+- Last update: 2026-05-16
 
 ## Changelog
 
+- **v0.6** (2026-05-16) — V1.2.x historical DA addendum：lo-user 选择 D 方案，新增 dedicated `historicalDAPeriods` bucket；非当前 manifest-available DA snapshots 可进入历史查询 bucket，但必须标 `currentRuntime=false` / `releaseVersion != configuredLiveVersion`，不得放宽 current cleaned output Formal-Live Gate 或作为 runtime fallback。
 - **v0.5** (2026-05-15) — Phase 4 release-prep fold-in：PR #75 runtime cutover 已合入 main（nanoka runtime `GameData` artifact/export、28 executable anchors、archived-source runtime guard、`runtimeCutoverReady=true`）。Phase 4 PR2 准备 V0.1.0 release notes / CHANGELOG / README disclaimer / takedown rollback runbook，并将 Phase 4 状态拆分为 cutover gate done 与 release gate pending。
 - **v0.4.2** (2026-05-15) — QA review precision fold-in per PR #56 comment 4456471475：(1) §3 Resonium row 措辞修正为 "不进 formal data / 不进 matrix；现有 canonical schema `GameData.resonium` 字段 presence 为 compatibility-only，until V0.1.0 schema cleanup 显式移除或重定义"（避免与 PR #55 compatibility-only 边界冲突）；(2) §11 cross-doc references `source-adapter-contract.md` attribution 修正 PR #54 → PR #51（实际起源）
 - **v0.4.1** (2026-05-15) — TL review precision fold-in per PR #56 comment 4453935202 / msg `547fbd05`：(1) §4.1 source-registry `urlPattern` → `urlAllowlist.{manifestUrl, versionedIndexUrls, localizedDetailUrls}`（覆盖 `manifest.json` + DA `/boss.json` index + localized detail 3 类）；(2) §4.2 / §4.4 Formal-Live Gate 分清 `current cleaned output` 与 `snapshot-diff historical input / archived audit fixture`：current cleaned 必须 == `configuredLiveVersion`，`approvedLiveVersions[]` 不放宽 current cleaned output；(3) §13 risk log "最新 DA period" → "当前 live DA period"；(4) §13 risk log panel normalization 引用 Gate 3 + Phase 2 panel-specific acceptance（替代 Gate 4 — Gate 4 是 DA-specific）
@@ -418,7 +420,5 @@ lo-user 已 explicitly 接受以下残余风险（per msg `74b52454`）：
 
 ## Next action
 
-1. @Product review V0.1.0 release notes and migration wording.
-2. @QA review Phase 4 PR2 release-prep docs and stale wording cleanup.
-3. @Lo丶 S2 final review after Product + QA PASS.
-4. @TechLead run PR3 `pnpm release:bump 0.1.0` and publish through CI after S2/S3 confirmation.
+1. @QA review V1.2.x PR-F historical DA bucket gates.
+2. @Product / @Lo丶 decide the eventual version bump only after the full V1.2.x batch accumulation is ready to ship.

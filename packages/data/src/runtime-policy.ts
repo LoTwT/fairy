@@ -5,6 +5,19 @@ export const NANOKA_RUNTIME_SOURCE_ID = "nanoka-zzz"
 export const NANOKA_RUNTIME_SOURCE_VERSION = "2.8"
 export const NANOKA_RUNTIME_DATA_VERSION = "fairy-v0.1.0-nanoka-runtime"
 
+export const NANOKA_HISTORICAL_DA_SOURCE_VERSIONS = [
+  "2.8.12",
+  "3.0.1+15348292",
+  "3.0.1+15370273",
+  "3.0.1+15377279",
+  "3.0.1+15390262",
+  "3.0.2+15596677",
+  "3.0.2+15597809",
+  "3.0.2+15599986",
+  "3.0.2+15602810",
+  "3.0.2+15625449",
+] as const
+
 export const ARCHIVED_RUNTIME_SOURCE_IDS = [
   "lo-user-excel",
   "mihoyo-zzz-critical-assault",
@@ -101,11 +114,28 @@ export function assertNanokaRuntimeGameDataArtifact(
   assert(Object.keys(data.driveDiscs).length === 26, "runtime GameData must include the full approved-live Drive Disc set batch")
   assert(Object.keys(data.enemies).length === 269, "runtime GameData must include the full approved-live enemy batch")
   assert(Object.keys(data.deadlyAssaultPeriods).length === 38, "runtime GameData must include the full approved-live current DA period batch")
+  assert(Object.keys(data.historicalDAPeriods).length === 505, "runtime GameData must include the full manifest-available historical DA period batch")
 
   const archivedSources = new Set<string>(ARCHIVED_RUNTIME_SOURCE_IDS)
-  for (const ref of collectSourceRefs(data)) {
+  const { historicalDAPeriods, ...currentRuntimeData } = data
+  for (const ref of collectSourceRefs(currentRuntimeData)) {
     assert(!archivedSources.has(ref.sourceId), `runtime GameData must not reference archived source ${ref.sourceId}`)
     assert(ref.sourceId === NANOKA_RUNTIME_SOURCE_ID, `runtime GameData must not reference non-nanoka source ${ref.sourceId}`)
     assert(ref.sourceVersion === NANOKA_RUNTIME_SOURCE_VERSION, `${ref.sourceAnchor ?? ref.sourceId}: runtime source refs must use configured live version`)
+  }
+
+  const historicalVersions = new Set<string>(NANOKA_HISTORICAL_DA_SOURCE_VERSIONS)
+  for (const period of Object.values(historicalDAPeriods)) {
+    assert(period.currentRuntime === false, `${period.historicalKey}: historical DA period must not be current runtime`)
+    assert(period.releaseVersion !== NANOKA_RUNTIME_SOURCE_VERSION, `${period.historicalKey}: historical DA must not duplicate configured-live current version`)
+    assert(historicalVersions.has(period.releaseVersion), `${period.historicalKey}: historical DA releaseVersion is not manifest-available`)
+    assert(period.sourceVersion === period.releaseVersion, `${period.historicalKey}: historical DA sourceVersion/releaseVersion drifted`)
+    assert(period.historicalKey === `${period.releaseVersion}#${period.id}`, `${period.historicalKey}: historical DA key drifted`)
+  }
+  for (const ref of collectSourceRefs(historicalDAPeriods)) {
+    assert(!archivedSources.has(ref.sourceId), `historical DA must not reference archived source ${ref.sourceId}`)
+    assert(ref.sourceId === NANOKA_RUNTIME_SOURCE_ID, `historical DA must not reference non-nanoka source ${ref.sourceId}`)
+    assert(typeof ref.sourceVersion === "string" && historicalVersions.has(ref.sourceVersion), `${ref.sourceAnchor ?? ref.sourceId}: historical DA source refs must use manifest-available historical versions`)
+    assert(ref.sourceVersion !== NANOKA_RUNTIME_SOURCE_VERSION, `${ref.sourceAnchor ?? ref.sourceId}: historical DA source refs must not use configured-live current version`)
   }
 }

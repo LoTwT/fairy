@@ -30,6 +30,21 @@ const rootEnemyBatchAuditPath = join(repoRoot, "data/cleaned/audit/nanoka-enemy-
 const packageEnemyBatchAuditPath = join(packageDir, "cleaned/audit/nanoka-enemy-batch-audit.json")
 const rootDeadlyAssaultCurrentBatchAuditPath = join(repoRoot, "data/cleaned/audit/nanoka-da-current-batch-audit.json")
 const packageDeadlyAssaultCurrentBatchAuditPath = join(packageDir, "cleaned/audit/nanoka-da-current-batch-audit.json")
+const rootDeadlyAssaultHistoricalBatchAuditPath = join(repoRoot, "data/cleaned/audit/nanoka-da-historical-batch-audit.json")
+const packageDeadlyAssaultHistoricalBatchAuditPath = join(packageDir, "cleaned/audit/nanoka-da-historical-batch-audit.json")
+
+const historicalDeadlyAssaultSourceVersions = [
+  "2.8.12",
+  "3.0.1+15348292",
+  "3.0.1+15370273",
+  "3.0.1+15377279",
+  "3.0.1+15390262",
+  "3.0.2+15596677",
+  "3.0.2+15597809",
+  "3.0.2+15599986",
+  "3.0.2+15602810",
+  "3.0.2+15625449",
+]
 
 const archivedRuntimeSourceIds = new Set([
   "lo-user-excel",
@@ -424,6 +439,24 @@ function validateMatrixAgainstRegistry(matrix, registry) {
   assert((daRow.supportingSampleEntities ?? []).length === 38, "deadlyAssault.periodsBossesBuffs: PR-E row must support all 38 current-live DA periods")
   assert(daRow.supportingSampleEntities?.includes("nanoka-boss-live-69038"), "deadlyAssault.periodsBossesBuffs: PR-E row must retain scheduled configured-live period 69038")
 
+  const historicalDaRow = resourceRows.get("deadlyAssault.historicalPeriods")
+  assert(historicalDaRow !== undefined, "deadlyAssault.historicalPeriods: missing historical DA row")
+  assert(historicalDaRow.fieldClass === "historical", "deadlyAssault.historicalPeriods: row must be historical class")
+  assert(historicalDaRow.sourcePolicy === "nanoka-historical", "deadlyAssault.historicalPeriods: row must use historical nanoka policy")
+  assert(historicalDaRow.status === "verified-from-nanoka", "deadlyAssault.historicalPeriods: row must be verified after PR-F")
+  assert(historicalDaRow.promotable === true, "deadlyAssault.historicalPeriods: historical bucket must be promotable after PR-F")
+  assert(historicalDaRow.sampleEntity === "nanoka-da-history-manifest", "deadlyAssault.historicalPeriods: row must use historical DA manifest sample")
+  assert(historicalDaRow.auditArtifact === "data/cleaned/audit/nanoka-da-historical-batch-audit.json", "deadlyAssault.historicalPeriods: row must point to historical DA batch audit")
+  assert((historicalDaRow.blockedBy ?? []).length === 0, "deadlyAssault.historicalPeriods: resolved blockers must be removed after PR-F")
+  assert(historicalDaRow.transformRule?.includes("505 manifest-available non-current Deadly Assault period rows"), "deadlyAssault.historicalPeriods: transform must document historical row count")
+  assert(historicalDaRow.transformRule?.includes("never use them as current-runtime fallback"), "deadlyAssault.historicalPeriods: transform must preserve no-fallback policy")
+  const historicalDaSample = sampleById.get("nanoka-da-history-manifest")
+  assert(historicalDaSample !== undefined, "deadlyAssault.historicalPeriods: missing historical DA manifest sample")
+  assert(historicalDaSample.entityType === "sourceManifest", "deadlyAssault.historicalPeriods: historical sample must be sourceManifest")
+  assert(historicalDaSample.approvedForCleanedOutput === true, "deadlyAssault.historicalPeriods: historical sample must be approved for the dedicated historical bucket")
+  assert(historicalDaSample.version === "manifest.zzz.available", "deadlyAssault.historicalPeriods: historical sample version must identify manifest.available")
+  assert(historicalDaSample.evidenceUse === "v1.2.x-da-historical-batch-source-gate", "deadlyAssault.historicalPeriods: historical sample evidence use drifted")
+
   const enemyIndexSample = sampleById.get("nanoka-monster-index-live-2.8")
   assert(enemyIndexSample !== undefined, "enemy batch: missing approved-live monster index sample")
   assert(enemyIndexSample.approvedForCleanedOutput === true, "enemy batch index must be approved live evidence")
@@ -529,11 +562,28 @@ function validateRuntimeGameData(registry) {
   assert(Object.keys(data.bangbooSkills ?? {}).length === 63, "runtime GameData Bangboo skill count drifted")
   assert(Object.keys(data.enemies ?? {}).length === 269, "runtime GameData must include the full approved-live enemy batch")
   assert(Object.keys(data.deadlyAssaultPeriods ?? {}).length === 38, "runtime GameData must include the full approved-live current DA batch")
+  assert(Object.keys(data.historicalDAPeriods ?? {}).length === 505, "runtime GameData must include the manifest-available historical DA batch")
 
-  for (const ref of collectSourceRefs(data)) {
+  const { historicalDAPeriods = {}, ...currentRuntimeData } = data
+  for (const ref of collectSourceRefs(currentRuntimeData)) {
     assert(!archivedRuntimeSourceIds.has(ref.sourceId), `runtime GameData must not reference archived source ${ref.sourceId}`)
     assert(ref.sourceId === "nanoka-zzz", `runtime GameData must not reference non-nanoka source ${ref.sourceId}`)
     assert(ref.sourceVersion === nanoka.configuredLiveVersion, `${ref.sourceAnchor ?? ref.sourceId}: runtime source refs must use configured live`)
+  }
+
+  const historicalVersions = new Set(historicalDeadlyAssaultSourceVersions)
+  for (const period of Object.values(historicalDAPeriods)) {
+    assert(period.currentRuntime === false, `${period.historicalKey}: historical DA must not be marked current runtime`)
+    assert(period.releaseVersion !== nanoka.configuredLiveVersion, `${period.historicalKey}: historical DA must not duplicate configured-live current version`)
+    assert(historicalVersions.has(period.releaseVersion), `${period.historicalKey}: historical DA releaseVersion is not manifest-available`)
+    assert(period.sourceVersion === period.releaseVersion, `${period.historicalKey}: sourceVersion/releaseVersion drifted`)
+    assert(period.historicalKey === `${period.releaseVersion}#${period.id}`, `${period.historicalKey}: historical key drifted`)
+  }
+  for (const ref of collectSourceRefs(historicalDAPeriods)) {
+    assert(!archivedRuntimeSourceIds.has(ref.sourceId), `historical DA must not reference archived source ${ref.sourceId}`)
+    assert(ref.sourceId === "nanoka-zzz", `historical DA must not reference non-nanoka source ${ref.sourceId}`)
+    assert(historicalVersions.has(ref.sourceVersion), `${ref.sourceAnchor ?? ref.sourceId}: historical DA source refs must use manifest-available historical versions`)
+    assert(ref.sourceVersion !== nanoka.configuredLiveVersion, `${ref.sourceAnchor ?? ref.sourceId}: historical DA source refs must not use configured-live current version`)
   }
 }
 
@@ -763,6 +813,62 @@ function validateDeadlyAssaultCurrentBatchAudit(registry) {
   }
 }
 
+function validateDeadlyAssaultHistoricalBatchAudit(registry) {
+  const { rootText } = readMirroredText(
+    rootDeadlyAssaultHistoricalBatchAuditPath,
+    packageDeadlyAssaultHistoricalBatchAuditPath,
+    "packages/data/cleaned/audit/nanoka-da-historical-batch-audit.json",
+  )
+
+  const nanoka = sourceById(registry, "nanoka-zzz")
+  const audit = JSON.parse(rootText)
+  const historicalVersions = new Set(historicalDeadlyAssaultSourceVersions)
+  assert(audit.kind === "nanokaDeadlyAssaultHistoricalBatchAudit", "DA historical batch audit kind drifted")
+  assert(audit.schemaVersion === "nanoka-da-historical-batch-audit/v0.1", "DA historical batch audit schemaVersion drifted")
+  assert(audit.sourceId === "nanoka-zzz", "DA historical batch audit sourceId drifted")
+  assert(audit.runtimeCutoverReady === true, "DA historical batch audit must reflect runtime cutover state")
+  assert(audit.currentRuntimeBucket === "deadlyAssaultPeriods", "DA historical audit current bucket drifted")
+  assert(audit.historicalRuntimeBucket === "historicalDAPeriods", "DA historical audit bucket drifted")
+  assert(audit.configuredLiveVersion === nanoka.configuredLiveVersion, "DA historical audit configured live version drifted")
+  assert(audit.historicalManifest?.sourceAnchor === "data/source/raw/nanoka/zzz/historical-da-fetch-manifest.json", "DA historical audit manifest source anchor drifted")
+  assert(audit.summary?.snapshotCount === historicalDeadlyAssaultSourceVersions.length, "DA historical snapshot count drifted")
+  assert(audit.summary?.historicalRuntimePeriodCount === 505, "DA historical runtime period count drifted")
+  assert(audit.summary?.uniquePeriodIdCount === 53, "DA historical unique period count drifted")
+  assert(audit.summary?.zoneCount === 1506, "DA historical zone count drifted")
+  assert(audit.summary?.bossAdjustmentCount === 58445, "DA historical boss adjustment count drifted")
+  assert(audit.summary?.scheduleKnownCount === 198, "DA historical known-schedule count drifted")
+  assert(audit.summary?.scheduleMissingCount === 307, "DA historical missing-schedule count drifted")
+  assert(JSON.stringify(audit.summary?.sourceVersions) === JSON.stringify(historicalDeadlyAssaultSourceVersions), "DA historical source version list drifted")
+  assert(audit.policy?.currentBucketVersionMustRemain === nanoka.configuredLiveVersion, "DA historical policy must keep current bucket on configured live")
+  assert(audit.policy?.historicalPeriodsAreNotCurrentRuntime === true, "DA historical policy must forbid current-runtime classification")
+  assert(audit.policy?.noRuntimeFallbackToHistorical === true, "DA historical policy must forbid runtime fallback")
+  assert(audit.policy?.noVersionBumpInThisPr === true, "DA historical policy must record no version bump")
+  assert(Array.isArray(audit.snapshots) && audit.snapshots.length === historicalDeadlyAssaultSourceVersions.length, "DA historical snapshots must cover all manifest-available historical versions")
+  assert(Array.isArray(audit.periods) && audit.periods.length === 505, "DA historical period rows must cover all historical snapshot periods")
+  for (const snapshot of audit.snapshots) {
+    assert(historicalVersions.has(snapshot.sourceVersion), `${snapshot.sourceVersion}: DA historical snapshot version is not allowed`)
+    assert(snapshot.source?.sourceId === "nanoka-zzz", `${snapshot.sourceVersion}: DA historical snapshot source must be nanoka`)
+    assert(snapshot.source?.sourceVersion === snapshot.sourceVersion, `${snapshot.sourceVersion}: DA historical snapshot sourceVersion drifted`)
+    assert(snapshot.source?.sourceAnchor === `data/source/raw/nanoka/zzz/${snapshot.sourceVersion}/boss.json`, `${snapshot.sourceVersion}: DA historical snapshot source anchor drifted`)
+    assert(snapshot.periodCount > 0, `${snapshot.sourceVersion}: DA historical snapshot must retain period rows`)
+    assert(snapshot.scheduleKnownCount + snapshot.scheduleMissingCount === snapshot.periodCount, `${snapshot.sourceVersion}: DA historical schedule counts drifted`)
+    assert(snapshot.zoneCount > 0, `${snapshot.sourceVersion}: DA historical snapshot must retain zones`)
+    assert(snapshot.bossAdjustmentCount > 0, `${snapshot.sourceVersion}: DA historical snapshot must retain boss adjustments`)
+  }
+  for (const row of audit.periods) {
+    assert(row.currentRuntime === false, `${row.historicalKey}: DA historical row must not be current runtime`)
+    assert(row.historicalKey === `${row.releaseVersion}#${row.id}`, `${row.historicalKey}: DA historical key drifted`)
+    assert(historicalVersions.has(row.releaseVersion), `${row.historicalKey}: DA historical row releaseVersion is not allowed`)
+    assert(row.releaseVersion !== nanoka.configuredLiveVersion, `${row.historicalKey}: DA historical row must not duplicate configured live`)
+    assert(row.source?.sourceId === "nanoka-zzz", `${row.historicalKey}: DA historical row source must be nanoka`)
+    assert(row.source?.sourceVersion === row.releaseVersion, `${row.historicalKey}: DA historical row sourceVersion drifted`)
+    assert(row.source?.sourceAnchor === `data/source/raw/nanoka/zzz/${row.releaseVersion}/zh/boss/${row.id}.json`, `${row.historicalKey}: DA historical row source anchor drifted`)
+    assert(row.zoneCount > 0, `${row.historicalKey}: DA historical row must retain zones`)
+    assert(row.bossAdjustmentCount > 0, `${row.historicalKey}: DA historical row must retain boss adjustments`)
+    assert(row.scheduleStatus === "source-known" || row.scheduleStatus === "missing-in-historical-source", `${row.historicalKey}: DA historical schedule status drifted`)
+  }
+}
+
 function validateSnapshotDiffHistory(registry) {
   const { rootText } = readMirroredText(
     rootSnapshotDiffHistoryPath,
@@ -929,6 +1035,8 @@ function validateCoveredSourceRefs(registry) {
     "data/cleaned/audit/nanoka-wengine-batch-audit.json",
     "data/cleaned/audit/nanoka-drive-disc-batch-audit.json",
     "data/cleaned/audit/nanoka-enemy-batch-audit.json",
+    "data/cleaned/audit/nanoka-da-current-batch-audit.json",
+    "data/cleaned/audit/nanoka-da-historical-batch-audit.json",
     "data/cleaned/audit/source-migration-field-diff.json",
     "data/cleaned/golden/v1-replay-report.json",
     "data/cleaned/runtime/game-data.json",
@@ -963,6 +1071,7 @@ function main() {
   validateDriveDiscBatchAudit(registry)
   validateEnemyBatchAudit(registry)
   validateDeadlyAssaultCurrentBatchAudit(registry)
+  validateDeadlyAssaultHistoricalBatchAudit(registry)
   validateBangbooBatchAudit(registry)
   validateCoveredSourceRefs(registry)
 

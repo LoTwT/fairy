@@ -1,6 +1,6 @@
 {
   "schemaVersion": "nanoka-coverage-matrix/v0.1",
-  "generatedAt": "2026-05-16T01:05:00+08:00",
+  "generatedAt": "2026-05-16T02:45:00+08:00",
   "status": "phase-4-runtime-cutover-gate",
   "sourceVersion": "manifest.zzz.live",
   "canonicalSchemas": [
@@ -6884,6 +6884,18 @@
       "server": "configured-live",
       "approvedForCleanedOutput": true,
       "evidenceUse": "v1.2.x-enemy-batch-source-gate"
+    },
+    {
+      "id": "nanoka-da-history-manifest",
+      "entityType": "sourceManifest",
+      "url": "https://static.nanoka.cc/manifest.json",
+      "version": "manifest.zzz.available",
+      "releaseChannel": "historical",
+      "fetchedAt": "2026-05-16T02:45:00+08:00",
+      "contentSha256": "ccb946c5f8c0ada795222a39bf480313cae8852b871dc1956d96f7a0f0177fd0",
+      "server": "manifest-available",
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "v1.2.x-da-historical-batch-source-gate"
     }
   ],
   "rows": [
@@ -10336,6 +10348,34 @@
         "nanoka-boss-live-69038"
       ],
       "auditArtifact": "data/cleaned/audit/nanoka-da-current-batch-audit.json"
+    },
+    {
+      "fieldId": "deadlyAssault.historicalPeriods",
+      "canonicalPath": "GameData.historicalDAPeriods.* / historical DA query data",
+      "fieldClass": "historical",
+      "sourcePolicy": "nanoka-historical",
+      "status": "verified-from-nanoka",
+      "nanokaEndpoint": "manifest.available non-current /boss.json and /zh/boss/{id}.json",
+      "rawFieldPaths": [
+        "/begin_time",
+        "/end_time",
+        "/zone/*",
+        "/boss_adjust/*",
+        "manifest.zzz.available"
+      ],
+      "transformRule": "derive 505 manifest-available non-current Deadly Assault period rows into GameData.historicalDAPeriods with version-keyed historicalKey; never mix them into GameData.deadlyAssaultPeriods and never use them as current-runtime fallback.",
+      "sampleEntity": "nanoka-da-history-manifest",
+      "rawAvailable": true,
+      "promotable": true,
+      "blockedBy": [],
+      "supportingSamples": [
+        "nanoka-da-history-manifest"
+      ],
+      "notes": "PR-F promotes 10 non-current nanoka snapshots into historicalDAPeriods: 505 periods, 1506 zones, 58445 boss_adjust rows; 307 rows have missing historical begin/end fields and are marked missing-in-historical-source.",
+      "supportingSampleEntities": [
+        "nanoka-da-history-manifest"
+      ],
+      "auditArtifact": "data/cleaned/audit/nanoka-da-historical-batch-audit.json"
     },
     {
       "fieldId": "modifiers.formalTemplateContract",

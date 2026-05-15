@@ -1,6 +1,6 @@
 # Nanoka Full-Data Batch Plan
 
-Status: V1.2.x discovery locked for task #179.
+Status: V1.2.x full-data batch complete through PR-F for task #179.
 
 This plan extends the V1.2.1 Bangboo batch import into the rest of the nanoka-backed data that fairy can use. It records the implementation boundary before the larger domain PRs land.
 
@@ -34,21 +34,26 @@ Enemy details contain 573 `monster_info` variants. PR-D promotes 269 runtime ene
 
 Historical DA periods are intentionally not mixed into configured-live runtime records. Product and lo-user selected a dedicated `historicalDAPeriods` bucket so old DA periods can be queried without weakening the Formal-Live Gate for current cleaned output.
 
-The currently visible nanoka ZZZ snapshots are:
+PR-F imports all non-current manifest-available DA snapshots into the dedicated
+`historicalDAPeriods` bucket. Configured-live `2.8` remains in
+`deadlyAssaultPeriods` only.
 
-| Snapshot | Boss index count |
-|---|---:|
-| `2.8` | 38 |
-| `2.8.12` | 46 |
-| `3.0.1+15348292` | 53 |
-| `3.0.1+15370273` | 53 |
-| `3.0.1+15377279` | 53 |
-| `3.0.1+15390262` | 50 |
-| `3.0.2+15596677` | 50 |
-| `3.0.2+15597809` | 50 |
-| `3.0.2+15599986` | 50 |
-| `3.0.2+15602810` | 50 |
-| `3.0.2+15625449` | 50 |
+| Snapshot | Boss index count | Schedule known | Schedule missing |
+|---|---:|---:|---:|
+| `2.8.12` | 46 | 39 | 7 |
+| `3.0.1+15348292` | 53 | 43 | 10 |
+| `3.0.1+15370273` | 53 | 43 | 10 |
+| `3.0.1+15377279` | 53 | 43 | 10 |
+| `3.0.1+15390262` | 50 | 5 | 45 |
+| `3.0.2+15596677` | 50 | 5 | 45 |
+| `3.0.2+15597809` | 50 | 5 | 45 |
+| `3.0.2+15599986` | 50 | 5 | 45 |
+| `3.0.2+15602810` | 50 | 5 | 45 |
+| `3.0.2+15625449` | 50 | 5 | 45 |
+
+Totals: 10 historical snapshots, 505 period rows, 1506 zones, 58445
+`boss_adjust` rows, 198 source-known schedules, and 307 rows whose historical
+source files no longer carry begin/end schedule fields.
 
 The schema addition is release-significant. The version bump is deferred until the full V1.2.x batch is complete.
 
@@ -67,6 +72,6 @@ The schema addition is release-significant. The version bump is deferred until t
 3. Drive Disc sets: retain and batch-promote current-live set identity/effect text; keep slot/main/substat excluded. Done in PR-C.
 4. Enemies: retain all current-live monster details and batch-promote enemy identity/source/rank with selected/missing/skipped variant audit. Done in PR-D.
 5. DA current: add a current DA period bucket and retain/promote all 2.8 periods. Done in PR-E.
-6. DA historical: add `historicalDAPeriods` and retain/promote historical periods across `manifest.available`.
+6. DA historical: add `historicalDAPeriods` and retain/promote historical periods across `manifest.available`. Done in PR-F.
 
 Each implementation PR should keep the existing 28-anchor golden replay passing, avoid version bumps, avoid new golden anchors, and add per-domain fail-loud source/audit checks.

@@ -32,6 +32,9 @@ Current state:
 - V1.2.x current Deadly Assault batch audit lives under
   `cleaned/audit/nanoka-da-current-batch-audit.json` and verifies all 38
   approved-live nanoka 2.8 DA periods;
+- V1.2.x historical Deadly Assault batch audit lives under
+  `cleaned/audit/nanoka-da-historical-batch-audit.json` and verifies 505
+  manifest-available non-current DA period rows in `historicalDAPeriods`;
 - V1.2.x full-data batch discovery lives under
   `cleaned/audit/nanoka-full-data-batch-discovery.json` and locks the domain
   counts, exclusions, historical DA boundary, and implementation PR sequence;
@@ -52,7 +55,8 @@ calculation. V0.1.0 runtime data is derived from approved-live nanoka source
 snapshots (`manifest.zzz.live`) and preserves source metadata for audit. The
 post-release V1.2.1/V1.2.x batches add the full approved-live nanoka 2.8
 Bangboo, Agent, W-Engine, Drive Disc set, Enemy, and current Deadly Assault
-period catalogs without changing the package version.
+period catalogs, plus historical Deadly Assault periods in the dedicated
+non-current `historicalDAPeriods` bucket, without changing the package version.
 
 Source details are recorded in `source-registry.json` and the bundled cleaned
 JSON artifacts. Excel, Mihoyo D-17, and buhflipexplode D-12 snapshots remain
@@ -71,6 +75,7 @@ Useful source checks:
 - `pnpm --filter @randomplay/data verify:golden-v1`
 - `pnpm --filter @randomplay/data verify:mihoyo-da`
 - `pnpm --filter @randomplay/data verify:nanoka`
+- `pnpm --filter @randomplay/data verify:nanoka-da-history`
 - `pnpm --filter @randomplay/data verify:nanoka-runtime`
 - `pnpm --filter @randomplay/data verify:source-registry`
 - `pnpm --filter @randomplay/data verify:source-migration`
