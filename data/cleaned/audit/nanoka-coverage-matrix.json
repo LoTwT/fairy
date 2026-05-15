@@ -1,6 +1,6 @@
 {
   "schemaVersion": "nanoka-coverage-matrix/v0.1",
-  "generatedAt": "2026-05-15T12:20:00+08:00",
+  "generatedAt": "2026-05-15T12:45:00+08:00",
   "status": "phase-0-r1-r6-locked",
   "sourceVersion": "manifest.zzz.live",
   "canonicalSchemas": [
@@ -950,30 +950,35 @@
       "nanokaEndpoint": "/boss.json and /{locale}/boss/{id}.json",
       "rawFieldPaths": [
         "/begin_time",
+        "/name",
         "/end_time",
         "/zone/*/name",
+        "/zone/*/stage_num",
+        "/zone/*/goal_type",
         "/zone/*/monster_level",
+        "/zone/*/s_rank_goal",
+        "/zone/*/a_rank_goal",
+        "/zone/*/b_rank_goal",
         "/zone/*/layer_buff/*/title",
         "/zone/*/layer_buff/*/desc",
         "/zone/*/selectable_buff/*/title",
         "/zone/*/selectable_buff/*/desc",
         "/zone/*/layer_room/*/monster_list",
+        "/zone/*/layer_room/*/waves_num",
         "/zone/*/layer_room/*/monster_weakness",
         "/boss_adjust/*"
       ],
-      "transformRule": "derive Deadly Assault period, zone, buff, monster, weakness, and boss-adjust raw records from the approved nanoka live version; reject period rows with begin_time after configuredLiveSnapshotDate; runtime promotion requires boss_adjust and score/HP semantic mapping",
+      "transformRule": "derive structured Deadly Assault period, zone, rank-goal, buff, room, monster, weakness, and boss-adjustment source artifacts from the approved nanoka live version; reject period rows with begin_time after configuredLiveSnapshotDate; runtimeCutoverReady remains false until Phase 3 drift audit and Phase 4 cutover",
       "sampleEntity": "nanoka-boss-live-69036",
       "rawAvailable": true,
-      "promotable": false,
+      "promotable": true,
       "blockedBy": [
-        "field:boss-adjust-semantics-required",
-        "field:score-hp-semantics-required",
-        "field:period-live-filter-required"
+        "field:runtime-cutover-drift-required"
       ],
       "supportingSamples": [
         "nanoka-boss-live-index-2.8"
       ],
-      "notes": "R1/R6 lock DA to nanoka. D-17/D-12 remain archived audit baselines and the runtime path is retained until Phase 4 cutover; this row does not authorize adapter/runtime removal."
+      "notes": "R1/R6 lock DA to nanoka. This row is promotable as structured DA source artifact after task #142; D-17/D-12 remain archived audit baselines and the runtime path is retained until Phase 4 cutover."
     },
     {
       "fieldId": "modifiers.formalTemplateContract",
@@ -1122,8 +1127,8 @@
     "needsTlResearch": 8,
     "needsOwnerResearch": 0,
     "deferred": 6,
-    "promotableNow": 13,
-    "notPromotableYet": 32
+    "promotableNow": 14,
+    "notPromotableYet": 31
   },
   "openResearchItems": [
     "source registry contract, liveVersionRef policy, approvedLiveVersions[], and content hash capture",

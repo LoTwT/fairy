@@ -36,25 +36,28 @@ describe("nanoka Deadly Assault source gate", () => {
     expect(row).toMatchObject({
       status: "verified-from-nanoka",
       sampleEntity: "nanoka-boss-live-69036",
-      promotable: false,
+      promotable: true,
     })
     expect(row?.supportingSamples).toContain("nanoka-boss-live-index-2.8")
     expect(row?.rawFieldPaths).toEqual(
       expect.arrayContaining([
         "/begin_time",
+        "/name",
+        "/zone/*/goal_type",
+        "/zone/*/s_rank_goal",
         "/zone/*/layer_buff/*/desc",
+        "/zone/*/layer_room/*/waves_num",
         "/zone/*/layer_room/*/monster_list",
         "/boss_adjust/*",
       ]),
     )
     expect(row?.blockedBy).toEqual(
       expect.arrayContaining([
-        "field:boss-adjust-semantics-required",
-        "field:score-hp-semantics-required",
-        "field:period-live-filter-required",
+        "field:runtime-cutover-drift-required",
       ]),
     )
     expect(row?.transformRule).toContain("reject period rows with begin_time after configuredLiveSnapshotDate")
+    expect(row?.transformRule).toContain("runtimeCutoverReady remains false")
   })
 
   it("uses only live DA samples as release-gate evidence", () => {
