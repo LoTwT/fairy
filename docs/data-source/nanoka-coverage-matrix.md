@@ -1,11 +1,11 @@
 # Nanoka Coverage Matrix
 
-Status: Phase 2 Drive Disc slot/stat audit gate
+Status: Phase 2 Disorder formula audit gate
 Owner: @TechLead
 Reviewers: @Product, @QA
 Related: D-20 data-source migration, task #121, task #122, task #125, task #127,
 task #138, task #140, task #142, task #144, task #146, task #148, task #150,
-task #152, task #154
+task #152, task #154, task #156
 
 This matrix is schema-first. It is derived from the canonical `GameData` and
 `BattleSnapshot` schemas, then checked against sampled nanoka detail endpoints.
@@ -61,6 +61,7 @@ The machine-readable version is
 | Live Adrenaline / Resonance sample / Yixuan | `https://static.nanoka.cc/zzz/2.8/zh/character/1371.json` | `stats.rp_max = 120`, `stats.rp_recover = 200`, `fever_recovery`, and `rp_recovery` raw paths exist in the configured live version. |
 | Live Deadly Assault index | `https://static.nanoka.cc/zzz/2.8/boss.json` | 38 live DA entries; all sampled `zh/boss/{id}.json` details returned 200 in PR #54. |
 | Live Deadly Assault period / 69036 | `https://static.nanoka.cc/zzz/2.8/zh/boss/69036.json` | Current live period window, zones, layer/selectable buffs, room monster lists, weakness data, and `boss_adjust`. |
+| Live rules / formula candidate audit | `https://static.nanoka.cc/zzz/2.8/{formula,rules,disorder,anomaly_disorder,battle_formula,damage_formula,element_abnormal}.json` | Failed-evidence audit only: dedicated live formula/rule/disorder endpoints are absent. Existing entity indexes/details do not expose a global Disorder formula table, so task #156 classifies `rules.disorderFormula` as implementation-owned runtime formula evidence. |
 
 The `3.0.2+15625449` samples are retained as phase-0 research evidence, not as
 release-ready source evidence. Phase 2 slice 3 re-sampled existing
@@ -103,8 +104,8 @@ until Phase 3/4 drift/cutover.
 
 ## Human-Readable Summary
 
-Machine summary after task #154: 45 rows total, 36 `verified-from-nanoka`, 2
-`needs-tl-research`, 1 `needs-owner-research`, 6 `deferred`, and 20
+Machine summary after task #156: 45 rows total, 36 `verified-from-nanoka`, 1
+`needs-tl-research`, 1 `needs-owner-research`, 7 `deferred`, and 20
 `promotableNow`.
 
 | Area | Status | Promote Now | Main Blocker |
@@ -129,13 +130,12 @@ Machine summary after task #154: 45 rows total, 36 `verified-from-nanoka`, 2
 | Drive Disc slot/main/sub stats | needs-owner-research | no | Task #154 exhausted live nanoka equipment detail/index and candidate stat-table endpoints; no slot/main/substat table source was found, so lo-user/Product must decide out-of-scope vs approved non-nanoka source research. |
 | Resonium / Lost Void | removed | no | Removed from V0.1.0 product scope by R4; no formal data expected. |
 | Deadly Assault periods/buffs | verified-from-nanoka | yes | Structured source artifact mapping exists for period, zones, buffs, monsters, weakness, rank goals, and `boss_adjust`; runtime cutover still waits for Phase 3 drift audit. |
-| Formula rule tables | mixed | no | Must be split per rule: defense/rounding may be implementation-owned, while anomaly thresholds, daze recovery, disorder, and attribute mappings need row-level owner/source decisions. |
+| Formula rule tables | mixed | no | Base damage, rounding, and Disorder formula are implementation-owned runtime contracts; anomaly thresholds, daze recovery, disorder daze-level, and attribute mappings still need row-level source/owner decisions. |
 
 ## Remaining TL Research Rows
 
-After task #154, 2 rows remain in `needs-tl-research`:
+After task #156, 1 row remains in `needs-tl-research`:
 
-- `rules.disorderFormula` — source or implementation owner still unresolved.
 - `rules.disorderDazeLevelZone` — source or implementation owner still
   unresolved.
 
@@ -147,6 +147,15 @@ After task #154, 1 row is escalated to `needs-owner-research`:
   index expose only Drive Disc set identity/effect text; checked candidate
   stat-table endpoints are absent. Owner decision required: remove this from
   V0.1.0 formal-data scope or approve non-nanoka source research.
+
+## Implementation-Owned Rule Rows
+
+- `rules.disorderFormula` — task #156 found no approved live nanoka formula,
+  rules, Disorder, anomaly-Disorder, battle-formula, damage-formula, or
+  anomaly-status endpoint. Existing nanoka entity indexes/details do not expose
+  a global Disorder formula table. The row is therefore `deferred` /
+  `implementation-owned`, backed by core trace source anchor `guide-3.4.1` and
+  executable golden replay G15 rather than nanoka formal data.
 
 ## Current Scope Rows Added By R1/R4/R6
 

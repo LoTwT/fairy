@@ -12,6 +12,8 @@ const rootSnapshotDiffHistoryPath = join(repoRoot, "data/cleaned/audit/nanoka-sn
 const packageSnapshotDiffHistoryPath = join(packageDir, "cleaned/audit/nanoka-snapshot-diff-history.json")
 const rootDriveDiscSlotStatAuditPath = join(repoRoot, "data/cleaned/audit/nanoka-drive-disc-slot-stat-audit.json")
 const packageDriveDiscSlotStatAuditPath = join(packageDir, "cleaned/audit/nanoka-drive-disc-slot-stat-audit.json")
+const rootDisorderFormulaAuditPath = join(repoRoot, "data/cleaned/audit/nanoka-disorder-formula-audit.json")
+const packageDisorderFormulaAuditPath = join(packageDir, "cleaned/audit/nanoka-disorder-formula-audit.json")
 
 const redistributionRisks = new Set([
   "accepted-by-owner",
@@ -120,7 +122,7 @@ function validateMatrixAgainstRegistry(matrix, registry) {
   const nanoka = sourceById(registry, "nanoka-zzz")
   validateNanokaRegistry(nanoka)
 
-  assert(matrix.status === "phase-2-drive-disc-slot-audit-gate", "matrix status must match the latest Drive Disc slot/stat audit gate")
+  assert(matrix.status === "phase-2-disorder-formula-audit-gate", "matrix status must match the latest Disorder formula audit gate")
   assert(matrix.sourceVersionPolicy?.liveVersionRef === nanoka.liveVersionRef, "matrix liveVersionRef must match nanoka registry")
   assert(matrix.sourceVersionPolicy?.defaultReleaseSourceVersion === nanoka.configuredLiveVersion, "matrix default release version must match configuredLiveVersion")
   assert(matrix.sourceVersionResolved === nanoka.configuredLiveVersion, "matrix resolved sourceVersion must match configuredLiveVersion")
@@ -202,6 +204,18 @@ function validateMatrixAgainstRegistry(matrix, registry) {
   for (const rawPath of ["/id", "/name", "/desc2", "/desc4"]) {
     assert(driveDiscSlotRow.rawFieldPaths?.includes(rawPath), `driveDiscs.slotAndSubstatTables: missing observed raw path ${rawPath}`)
   }
+
+  const disorderFormulaRow = resourceRows.get("rules.disorderFormula")
+  assert(disorderFormulaRow !== undefined, "rules.disorderFormula: missing Disorder formula row")
+  assert(disorderFormulaRow.status === "deferred", "rules.disorderFormula: row must be deferred after implementation-owned classification")
+  assert(disorderFormulaRow.sourcePolicy === "implementation-owned", "rules.disorderFormula: row must be implementation-owned after failed nanoka audit")
+  assert(disorderFormulaRow.fieldClass === "implementation-owned", "rules.disorderFormula: fieldClass must be implementation-owned")
+  assert(disorderFormulaRow.promotable === false, "rules.disorderFormula: implementation-owned formula row must not be nanoka-promotable")
+  assert(disorderFormulaRow.sampleEntity === null, "rules.disorderFormula: implementation-owned row must not point to a nanoka sample entity")
+  assert(disorderFormulaRow.blockedBy?.includes("implementation-owned-runtime-formula"), "rules.disorderFormula: row must carry implementation-owned runtime blocker")
+  assert(disorderFormulaRow.auditArtifact === "data/cleaned/audit/nanoka-disorder-formula-audit.json", "rules.disorderFormula: row must point to failed-evidence audit artifact")
+  assert(disorderFormulaRow.transformRule?.includes("guide-anchored golden replay G15"), "rules.disorderFormula: transform must document guide/golden ownership")
+  assert(disorderFormulaRow.transformRule?.includes("Do not synthesize"), "rules.disorderFormula: transform must preserve no-fabrication boundary")
 
   const promotionExtraRow = resourceRows.get("agents.promotionExtraStats")
   assert(promotionExtraRow !== undefined, "agents.promotionExtraStats: missing promotion extra row")
@@ -359,6 +373,49 @@ function validateDriveDiscSlotStatAudit(registry) {
   assert(audit.decision?.blockedBy?.includes("owner:drive-disc-slot-stat-source-required"), "Drive Disc slot/stat audit decision must carry owner blocker")
 }
 
+function validateDisorderFormulaAudit(registry) {
+  const { rootText } = readMirroredText(
+    rootDisorderFormulaAuditPath,
+    packageDisorderFormulaAuditPath,
+    "packages/data/cleaned/audit/nanoka-disorder-formula-audit.json",
+  )
+
+  const nanoka = sourceById(registry, "nanoka-zzz")
+  const audit = JSON.parse(rootText)
+  assert(audit.schemaVersion === "nanoka-disorder-formula-audit/v0.1", "Disorder formula audit schemaVersion drifted")
+  assert(audit.sourceId === "nanoka-zzz", "Disorder formula audit sourceId drifted")
+  assert(audit.sourceVersion === nanoka.configuredLiveVersion, "Disorder formula audit must use configured live version")
+  assert(audit.status === "not-found", "Disorder formula audit must remain failed-evidence unless a nanoka source is proven")
+  assert(audit.fieldId === "rules.disorderFormula", "Disorder formula audit fieldId drifted")
+  assert(audit.runtimeCutoverReady === false, "Disorder formula audit must not imply runtime cutover")
+  assert(audit.summary?.foundDisorderFormulaTable === false, "Disorder formula audit must not claim a formula table was found")
+  assert(audit.summary?.implementationOwnedRuntimeFormula === true, "Disorder formula audit must classify the row as implementation-owned")
+  assert(audit.summary?.ownerResearchRequired === false, "Disorder formula audit must not require owner research")
+
+  const endpoints = audit.checkedEndpoints ?? []
+  assert(endpoints.some(endpoint => endpoint.url === "https://static.nanoka.cc/zzz/2.8/formula.json" && endpoint.status === 404), "Disorder formula audit must record missing formula endpoint")
+  assert(endpoints.some(endpoint => endpoint.url === "https://static.nanoka.cc/zzz/2.8/disorder.json" && endpoint.status === 404), "Disorder formula audit must record missing Disorder endpoint")
+  assert(endpoints.some(endpoint => endpoint.url === "https://static.nanoka.cc/zzz/2.8/anomaly_disorder.json" && endpoint.status === 404), "Disorder formula audit must record missing anomaly/Disorder endpoint")
+  assert(endpoints.some(endpoint => endpoint.url === "https://static.nanoka.cc/zzz/2.8/character.json" && endpoint.status === 200), "Disorder formula audit must record character index check")
+  assert(endpoints.some(endpoint => endpoint.url === "https://static.nanoka.cc/zzz/2.8/monster.json" && endpoint.status === 200), "Disorder formula audit must record monster index check")
+  assert(endpoints.some(endpoint => endpoint.url === "https://static.nanoka.cc/zzz/2.8/zh/monster/30000.json" && endpoint.status === 200), "Disorder formula audit must record retained monster detail check")
+  assert(audit.implementationContract?.sourceAnchors?.includes("guide-3.4.1"), "Disorder formula audit must keep guide source anchor")
+  assert(audit.implementationContract?.sourceAnchors?.includes("golden-v1:G15"), "Disorder formula audit must keep golden replay anchor")
+  for (const formulaId of [
+    "disorder-burn",
+    "disorder-shock",
+    "disorder-corruption",
+    "disorder-frost",
+    "disorder-physical-or-ice",
+    "disorder-polarity",
+  ]) {
+    assert(audit.implementationContract?.coreFormulaIds?.includes(formulaId), `Disorder formula audit missing core formula id ${formulaId}`)
+  }
+  assert(audit.decision?.matrixStatus === "deferred", "Disorder formula audit decision must match deferred matrix status")
+  assert(audit.decision?.sourcePolicy === "implementation-owned", "Disorder formula audit decision must classify source policy as implementation-owned")
+  assert(audit.decision?.blockedBy?.includes("implementation-owned-runtime-formula"), "Disorder formula audit decision must carry implementation-owned blocker")
+}
+
 function validateCoveredSourceRefs(registry) {
   const sourceIds = new Set(registry.sources.map(source => source.sourceId))
   const files = [
@@ -387,6 +444,7 @@ function main() {
   validateMatrixAgainstRegistry(matrix, registry)
   validateSnapshotDiffHistory(registry)
   validateDriveDiscSlotStatAudit(registry)
+  validateDisorderFormulaAudit(registry)
   validateCoveredSourceRefs(registry)
 
   console.log("source registry verification passed")

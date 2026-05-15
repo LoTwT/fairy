@@ -1,0 +1,106 @@
+{
+  "schemaVersion": "nanoka-disorder-formula-audit/v0.1",
+  "generatedAt": "2026-05-15T15:20:00+08:00",
+  "sourceId": "nanoka-zzz",
+  "sourceVersion": "2.8",
+  "status": "not-found",
+  "fieldId": "rules.disorderFormula",
+  "runtimeCutoverReady": false,
+  "summary": {
+    "checkedEndpointCount": 12,
+    "foundDisorderFormulaTable": false,
+    "implementationOwnedRuntimeFormula": true,
+    "ownerResearchRequired": false
+  },
+  "checkedEndpoints": [
+    {
+      "url": "https://static.nanoka.cc/zzz/2.8/formula.json",
+      "status": 404,
+      "finding": "Candidate formula/config endpoint not present."
+    },
+    {
+      "url": "https://static.nanoka.cc/zzz/2.8/rules.json",
+      "status": 404,
+      "finding": "Candidate formula/config endpoint not present."
+    },
+    {
+      "url": "https://static.nanoka.cc/zzz/2.8/disorder.json",
+      "status": 404,
+      "finding": "Candidate Disorder formula endpoint not present."
+    },
+    {
+      "url": "https://static.nanoka.cc/zzz/2.8/anomaly_disorder.json",
+      "status": 404,
+      "finding": "Candidate anomaly/Disorder formula endpoint not present."
+    },
+    {
+      "url": "https://static.nanoka.cc/zzz/2.8/battle_formula.json",
+      "status": 404,
+      "finding": "Candidate battle formula endpoint not present."
+    },
+    {
+      "url": "https://static.nanoka.cc/zzz/2.8/damage_formula.json",
+      "status": 404,
+      "finding": "Candidate damage formula endpoint not present."
+    },
+    {
+      "url": "https://static.nanoka.cc/zzz/2.8/element_abnormal.json",
+      "status": 404,
+      "finding": "Candidate anomaly-status endpoint not present."
+    },
+    {
+      "url": "https://static.nanoka.cc/zzz/2.8/character.json",
+      "status": 200,
+      "finding": "Entity index exists, but it is character metadata/text and does not provide a global Disorder formula table."
+    },
+    {
+      "url": "https://static.nanoka.cc/zzz/2.8/monster.json",
+      "status": 200,
+      "finding": "Entity index exists, but it is monster metadata and does not provide a global Disorder formula table."
+    },
+    {
+      "url": "https://static.nanoka.cc/zzz/2.8/boss.json",
+      "status": 200,
+      "localPath": "data/source/raw/nanoka/zzz/2.8/boss.json",
+      "contentSha256": "d9519738c6100082760f59bb92fd17fdba93afb853c845b1c90d0718788a79f9",
+      "finding": "Deadly Assault index exists, but it does not provide Disorder formula constants."
+    },
+    {
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/monster/30000.json",
+      "status": 200,
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/monster/30000.json",
+      "contentSha256": "99b2286a6a5a3847f067cfc06bd5c5c44b4a3eb2b1b5609df7af820eea55e855",
+      "finding": "Monster detail exposes variant stats and anomaly-related resistance/build-up fields, but no Disorder multiplier formula table."
+    },
+    {
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/boss/69036.json",
+      "status": 200,
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/boss/69036.json",
+      "contentSha256": "781cb67799e6fb8c0438ab57ac5536507b85292161342f9870c18f42d890989f",
+      "finding": "Deadly Assault period detail exposes buffs, rooms, weakness data, and boss_adjust, but no Disorder formula constants."
+    }
+  ],
+  "implementationContract": {
+    "sourceAnchors": [
+      "guide-3.4.1",
+      "golden-v1:G15"
+    ],
+    "coreFormulaIds": [
+      "disorder-burn",
+      "disorder-shock",
+      "disorder-corruption",
+      "disorder-frost",
+      "disorder-physical-or-ice",
+      "disorder-polarity"
+    ],
+    "formulaBoundary": "Fairy owns the runtime Disorder formula contract in core and verifies it through golden replay; nanoka is not expected to provide a source-backed formula table for this row."
+  },
+  "decision": {
+    "matrixStatus": "deferred",
+    "sourcePolicy": "implementation-owned",
+    "blockedBy": [
+      "implementation-owned-runtime-formula"
+    ],
+    "recommendedEscalation": "No owner escalation for this row. Keep the formula contract implementation-owned unless Product later requests source-backed formula-table extraction."
+  }
+}

@@ -51,11 +51,11 @@ describe("missing-fields fail-loud gate", () => {
     expect(unresolved.every(row => Array.isArray(row.blockedBy) && row.blockedBy.length > 0)).toBe(true)
     expect(unresolved.map(row => row.fieldId)).toEqual(
       expect.arrayContaining([
-        "rules.disorderFormula",
         "rules.disorderDazeLevelZone",
       ]),
     )
     expect(unresolved.map(row => row.fieldId)).not.toContain("driveDiscs.slotAndSubstatTables")
+    expect(unresolved.map(row => row.fieldId)).not.toContain("rules.disorderFormula")
     expect(unresolved.map(row => row.fieldId)).not.toEqual(expect.arrayContaining([
       "metadata.sources",
       "metadata.sourceRefs",
@@ -73,6 +73,16 @@ describe("missing-fields fail-loud gate", () => {
     expect(driveDiscRow?.promotable).toBe(false)
     expect(driveDiscRow?.blockedBy).toContain("owner:drive-disc-slot-stat-source-required")
     expect(driveDiscRow?.auditArtifact).toBe("data/cleaned/audit/nanoka-drive-disc-slot-stat-audit.json")
+  })
+
+  it("keeps implementation-owned formulas out of TL research rows", () => {
+    const matrix = readJson<CoverageMatrix>("data/cleaned/audit/nanoka-coverage-matrix.json")
+    const disorderFormulaRow = matrix.rows.find(row => row.fieldId === "rules.disorderFormula")
+
+    expect(disorderFormulaRow).toBeDefined()
+    expect(disorderFormulaRow?.status).toBe("deferred")
+    expect(disorderFormulaRow?.blockedBy).toContain("implementation-owned-runtime-formula")
+    expect(disorderFormulaRow?.auditArtifact).toBe("data/cleaned/audit/nanoka-disorder-formula-audit.json")
   })
 
   it("fails loudly when missing, deferred, or forbidden rows are present in a release report", () => {
