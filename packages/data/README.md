@@ -17,6 +17,9 @@ Current state:
 - V1.2.1 Bangboo batch audit lives under
   `cleaned/audit/nanoka-bangboo-batch-audit.json` and verifies all 39
   approved-live nanoka 2.8 Bangboos;
+- V1.2.x full-data batch discovery lives under
+  `cleaned/audit/nanoka-full-data-batch-discovery.json` and locks the domain
+  counts, exclusions, historical DA boundary, and implementation PR sequence;
 - V1 golden source candidates, manual acceptance records, and the replay report
   are generated under repo-level `data/cleaned/`;
 - `pnpm --filter @randomplay/data sync-cleaned` mirrors repo-level cleaned JSON into

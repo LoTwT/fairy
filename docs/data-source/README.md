@@ -1,6 +1,6 @@
 # Data Source Ingestion
 
-Status: V0.1.0 nanoka runtime cutover baseline + V1.2.1 Bangboo batch import
+Status: V0.1.0 nanoka runtime cutover baseline + V1.2.1 Bangboo batch import + V1.2.x full-data batch discovery
 Owner: @TechLead
 Inputs: CONFIRM-4, CONFIRM-11, D-20, Phase 2 nanoka adapter, Phase 3 drift audit, Phase 4 runtime cutover
 
@@ -27,6 +27,9 @@ nanoka 2.8 entries without adding a package version bump.
   runtime cleaned artifacts.
 - `data/cleaned/audit/nanoka-bangboo-batch-audit.json` records the V1.2.1
   per-entry Bangboo panel/skill/element audit.
+- `data/cleaned/audit/nanoka-full-data-batch-discovery.json` records the
+  V1.2.x full-data batch counts, exclusions, historical DA boundary, and PR
+  sequence.
 - Raw source archives are retained for audit and are not distributed in npm
   package payloads.
 
@@ -54,6 +57,7 @@ Source-specific notes:
 - [Source migration candidates](source-migration-candidates.md)
 - [Source decision recommendation](source-decision-recommendation.md)
 - [Nanoka coverage matrix](nanoka-coverage-matrix.md)
+- [Nanoka full-data batch plan](nanoka-full-data-batch-plan.md)
 - [Nanoka DA / Sentinel / patch history feasibility](da-sentinel-patch-nanoka-feasibility.md)
 - [Takedown and rollback runbook](takedown-rollback.md)
 
