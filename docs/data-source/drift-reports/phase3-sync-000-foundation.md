@@ -34,6 +34,10 @@ Unresolved blocking drift rows: **0**
 
 Runtime cutover ready: **false**
 
+Exit-clean sync eligible: **false**
+
+
+
 ## Boundary
 
 - This artifact does not compare production fields yet.
