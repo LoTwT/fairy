@@ -86,22 +86,22 @@
       "index": "https://static.nanoka.cc/zzz/2.8/equipment.json",
       "currentLiveIndexCount": 26,
       "currentLiveDetailAccessibleCount": 26,
-      "retainedRawDetailCount": 1,
-      "runtimeRecordCount": 0,
-      "missingRawDetailCount": 25,
-      "missingRuntimeRecordCount": 26,
+      "retainedRawDetailCount": 26,
+      "runtimeRecordCount": 26,
+      "missingRawDetailCount": 0,
+      "missingRuntimeRecordCount": 0,
       "targetRuntimeBucket": "GameData.driveDiscs",
-      "schemaFit": "existing-bucket-for-set-effects-only",
+      "schemaFit": "existing-bucket-batch-complete-pr-c",
       "promotableCurrentFields": [
         "identity",
         "desc2",
         "desc4"
       ],
       "implementationNotes": [
-        "Set-effect text can be retained and audited for typed promotion.",
+        "Set-effect text is retained in nanoka-drive-disc-batch-audit.json for typed promotion.",
         "Slot/main/substat tables remain excluded and must not appear in runtime until a separate product decision changes that scope."
       ],
-      "recommendedPr": "PR-C drive disc set batch"
+      "recommendedPr": "PR-C drive disc set batch complete"
     },
     {
       "domain": "enemies",

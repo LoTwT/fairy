@@ -91,7 +91,11 @@ describe("nanoka full-data batch discovery", () => {
     expect(rows.get("driveDiscs")).toMatchObject({
       currentLiveIndexCount: 26,
       currentLiveDetailAccessibleCount: 26,
-      schemaFit: "existing-bucket-for-set-effects-only",
+      retainedRawDetailCount: 26,
+      runtimeRecordCount: 26,
+      missingRawDetailCount: 0,
+      missingRuntimeRecordCount: 0,
+      schemaFit: "existing-bucket-batch-complete-pr-c",
     })
     expect(rows.get("enemies")).toMatchObject({
       currentLiveIndexCount: 269,

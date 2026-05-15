@@ -40,6 +40,8 @@ describe("nanoka runtime game data cutover", () => {
     expect(Object.keys(data.agents)).toEqual(expect.arrayContaining(["1011", "1021", "1031", "1371", "1431", "1541"]))
     expect(Object.keys(data.wEngines)).toHaveLength(89)
     expect(Object.keys(data.wEngines)).toEqual(expect.arrayContaining(["12001", "13001", "14137", "14154"]))
+    expect(Object.keys(data.driveDiscs)).toHaveLength(26)
+    expect(Object.keys(data.driveDiscs)).toEqual(expect.arrayContaining(["31000", "31100", "33800"]))
     expect(Object.keys(data.bangboos)).toHaveLength(39)
     expect(Object.keys(data.bangbooSkills)).toHaveLength(63)
     expect(Object.keys(data.bangboos)).toEqual(expect.arrayContaining(["53001", "53002", "54001", "54008", "54020"]))
@@ -70,6 +72,14 @@ describe("nanoka runtime game data cutover", () => {
     expect(data.wEngines["12011"]?.baseStatsByLevel?.["60"]).toMatchObject({
       attack: 475.84,
       anomalyProficiency: 60,
+    })
+    expect(data.driveDiscs["31000"]).toMatchObject({
+      label: { zh: "啄木鸟电音", en: "Woodpecker Electro" },
+      source: {
+        sourceId: "nanoka-zzz",
+        sourceVersion: "2.8",
+        sourceAnchor: "data/source/raw/nanoka/zzz/2.8/zh/equipment/31000.json",
+      },
     })
     expect(data.bangboos["54008"]?.baseStatsByLevel?.["60"]).toMatchObject({
       maxHp: 4210.2983,
@@ -206,5 +216,65 @@ describe("nanoka runtime game data cutover", () => {
       },
     })
     expect(qingming?.passiveModifiers.talents[0]?.desc).toContain("暴击率提升")
+  })
+
+  it("records the full approved-live Drive Disc batch audit without promoting unresolved set modifiers", () => {
+    const audit = readJson<{
+      summary: {
+        driveDiscCount: number
+        runtimeDriveDiscCount: number
+        retainedSetEffectTextCount: number
+        typedModifierPendingCount: number
+      }
+      driveDiscs: Array<{
+        id: string
+        setEffects: {
+          twoPiece: {
+            status: string
+            rawText: string
+            source: {
+              sourceId: string
+              sourceVersion: string
+              sourceAnchor: string
+              dataPath: string
+            }
+          }
+          fourPiece: {
+            status: string
+            rawText: string
+            source: {
+              sourceId: string
+              sourceVersion: string
+              sourceAnchor: string
+              dataPath: string
+            }
+          }
+        }
+        slotAndSubstatTables: {
+          status: string
+        }
+      }>
+    }>(join(repoRoot, "data/cleaned/audit/nanoka-drive-disc-batch-audit.json"))
+
+    expect(audit.summary).toMatchObject({
+      driveDiscCount: 26,
+      runtimeDriveDiscCount: 26,
+      retainedSetEffectTextCount: 52,
+      typedModifierPendingCount: 26,
+    })
+
+    const woodpecker = audit.driveDiscs.find(row => row.id === "31000")
+    expect(woodpecker?.setEffects.twoPiece).toMatchObject({
+      status: "not-promoted",
+      rawText: "暴击率+8%。",
+      source: {
+        sourceId: "nanoka-zzz",
+        sourceVersion: "2.8",
+        sourceAnchor: "data/source/raw/nanoka/zzz/2.8/zh/equipment/31000.json",
+        dataPath: "/desc2",
+      },
+    })
+    expect(woodpecker?.setEffects.fourPiece.rawText).toContain("攻击力提升9%")
+    expect(woodpecker?.slotAndSubstatTables.status).toBe("out-of-scope")
   })
 })

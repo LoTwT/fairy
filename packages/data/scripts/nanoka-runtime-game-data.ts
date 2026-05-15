@@ -1,14 +1,14 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs"
 import { dirname, join } from "node:path"
 import { fileURLToPath } from "node:url"
-import { parseGameData, type AgentData, type BangbooData, type BangbooSkillData, type GameData, type SourceRef, type WEngineData } from "../../core/src/index"
+import { parseGameData, type AgentData, type BangbooData, type BangbooSkillData, type DriveDiscData, type GameData, type SourceRef, type WEngineData } from "../../core/src/index"
 import { deriveNanokaBangbooElement } from "../src/nanoka-bangboo-element"
 import { assertNanokaRuntimeGameDataArtifact } from "../src/runtime-policy"
 
 const packageDir = fileURLToPath(new URL("..", import.meta.url))
 const repoRoot = join(packageDir, "../..")
 
-const generatedAt = "2026-05-16T00:08:00+08:00"
+const generatedAt = "2026-05-16T00:40:00+08:00"
 const sourceVersion = "2.8"
 const rootArtifactPath = join(repoRoot, "data/cleaned/runtime/game-data.json")
 const packageArtifactPath = join(packageDir, "cleaned/runtime/game-data.json")
@@ -18,12 +18,16 @@ const rootBangbooBatchAuditPath = join(repoRoot, "data/cleaned/audit/nanoka-bang
 const packageBangbooBatchAuditPath = join(packageDir, "cleaned/audit/nanoka-bangboo-batch-audit.json")
 const rootWEngineBatchAuditPath = join(repoRoot, "data/cleaned/audit/nanoka-wengine-batch-audit.json")
 const packageWEngineBatchAuditPath = join(packageDir, "cleaned/audit/nanoka-wengine-batch-audit.json")
+const rootDriveDiscBatchAuditPath = join(repoRoot, "data/cleaned/audit/nanoka-drive-disc-batch-audit.json")
+const packageDriveDiscBatchAuditPath = join(packageDir, "cleaned/audit/nanoka-drive-disc-batch-audit.json")
 const characterIndexPath = join(repoRoot, "data/source/raw/nanoka/zzz/2.8/character.json")
 const characterSourceDir = join(repoRoot, "data/source/raw/nanoka/zzz/2.8/zh/character")
 const bangbooIndexPath = join(repoRoot, "data/source/raw/nanoka/zzz/2.8/bangboo.json")
 const bangbooSourceDir = join(repoRoot, "data/source/raw/nanoka/zzz/2.8/zh/bangboo")
 const weaponIndexPath = join(repoRoot, "data/source/raw/nanoka/zzz/2.8/weapon.json")
 const weaponSourceDir = join(repoRoot, "data/source/raw/nanoka/zzz/2.8/zh/weapon")
+const equipmentIndexPath = join(repoRoot, "data/source/raw/nanoka/zzz/2.8/equipment.json")
+const equipmentSourceDir = join(repoRoot, "data/source/raw/nanoka/zzz/2.8/zh/equipment")
 
 function assert(condition: unknown, message: string): asserts condition {
   if (!condition)
@@ -406,6 +410,45 @@ type WEngineRuntimeBuild = {
   audit: unknown
 }
 
+type EquipmentIndexEntry = {
+  icon?: string
+  en?: {
+    name?: string
+    desc2?: string
+    desc4?: string
+  }
+  zh?: {
+    name?: string
+    desc2?: string
+    desc4?: string
+  }
+  ja?: {
+    name?: string
+    desc2?: string
+    desc4?: string
+  }
+  ko?: {
+    name?: string
+    desc2?: string
+    desc4?: string
+  }
+}
+
+type EquipmentRaw = Record<string, any> & {
+  id: number
+  name: string
+  desc2?: string
+  desc4?: string
+  story?: string
+  icon?: string
+  icon2?: string
+}
+
+type DriveDiscRuntimeBuild = {
+  driveDiscs: Record<string, DriveDiscData>
+  audit: unknown
+}
+
 function uniqueStrings(values: Array<string | undefined>): string[] {
   return [...new Set(values.filter((value): value is string => typeof value === "string" && value.length > 0))]
 }
@@ -433,6 +476,14 @@ function wEngineAnchor(entityId: string | number): string {
 
 function readWEngineRaw(entityId: string): WEngineRaw {
   return readJson<WEngineRaw>(join(weaponSourceDir, `${entityId}.json`))
+}
+
+function driveDiscAnchor(entityId: string | number): string {
+  return `data/source/raw/nanoka/zzz/2.8/zh/equipment/${entityId}.json`
+}
+
+function readEquipmentRaw(entityId: string): EquipmentRaw {
+  return readJson<EquipmentRaw>(join(equipmentSourceDir, `${entityId}.json`))
 }
 
 function bangbooPanel(source: BangbooRaw) {
@@ -875,11 +926,106 @@ function buildWEngineRuntimeBatch(): WEngineRuntimeBuild {
   return { wEngines, audit }
 }
 
+function buildDriveDiscRuntimeBatch(): DriveDiscRuntimeBuild {
+  const index = readJson<Record<string, EquipmentIndexEntry>>(equipmentIndexPath)
+  const driveDiscIds = Object.keys(index).sort((left, right) => Number(left) - Number(right))
+  assert(driveDiscIds.length === 26, `Drive Disc runtime batch expected 26 live sets, got ${driveDiscIds.length}`)
+
+  const driveDiscs: Record<string, DriveDiscData> = {}
+  const auditRows: any[] = []
+
+  for (const driveDiscId of driveDiscIds) {
+    const indexEntry = index[driveDiscId]!
+    const raw = readEquipmentRaw(driveDiscId)
+    const numericId = Number(driveDiscId)
+    assert(raw.id === numericId, `Drive Disc ${driveDiscId}: raw id drifted`)
+    assert(raw.name === indexEntry.zh?.name, `Drive Disc ${driveDiscId}: zh name drifted against index`)
+    assert(typeof raw.desc2 === "string" && raw.desc2.length > 0, `Drive Disc ${driveDiscId}: missing desc2`)
+    assert(typeof raw.desc4 === "string" && raw.desc4.length > 0, `Drive Disc ${driveDiscId}: missing desc4`)
+    assert(raw.desc2 === indexEntry.zh?.desc2, `Drive Disc ${driveDiscId}: desc2 drifted against index`)
+    assert(raw.desc4 === indexEntry.zh?.desc4, `Drive Disc ${driveDiscId}: desc4 drifted against index`)
+
+    const anchor = driveDiscAnchor(driveDiscId)
+    const driveDiscSource = sourceRef(anchor, "/")
+    driveDiscs[driveDiscId] = {
+      id: driveDiscId,
+      label: { zh: raw.name, en: indexEntry.en?.name },
+      source: driveDiscSource,
+      sourceAliases: uniqueStrings([raw.name, indexEntry.en?.name, indexEntry.ja?.name, indexEntry.ko?.name]),
+    }
+
+    auditRows.push({
+      id: driveDiscId,
+      label: {
+        zh: raw.name,
+        en: indexEntry.en?.name,
+        ja: indexEntry.ja?.name,
+        ko: indexEntry.ko?.name,
+      },
+      source: driveDiscSource,
+      icon: raw.icon,
+      icon2: raw.icon2,
+      setEffects: {
+        twoPiece: {
+          status: "not-promoted",
+          reason: "typed-modifier-template-required",
+          rawText: raw.desc2,
+          source: sourceRef(anchor, "/desc2"),
+          localizedIndexText: {
+            en: indexEntry.en?.desc2,
+            zh: indexEntry.zh?.desc2,
+            ja: indexEntry.ja?.desc2,
+            ko: indexEntry.ko?.desc2,
+          },
+        },
+        fourPiece: {
+          status: "not-promoted",
+          reason: "typed-modifier-template-required",
+          rawText: raw.desc4,
+          source: sourceRef(anchor, "/desc4"),
+          localizedIndexText: {
+            en: indexEntry.en?.desc4,
+            zh: indexEntry.zh?.desc4,
+            ja: indexEntry.ja?.desc4,
+            ko: indexEntry.ko?.desc4,
+          },
+        },
+      },
+      slotAndSubstatTables: {
+        status: "out-of-scope",
+        reason: "scope:user-provided-snapshot-boundary",
+        auditArtifact: "data/cleaned/audit/nanoka-drive-disc-slot-stat-audit.json",
+      },
+    })
+  }
+
+  const audit = {
+    kind: "nanokaDriveDiscBatchAudit",
+    schemaVersion: "nanoka-drive-disc-batch-audit/v0.1",
+    sourceId: "nanoka-zzz",
+    sourceVersion,
+    generatedAt,
+    runtimeCutoverReady: true,
+    indexSource: sourceRef("data/source/raw/nanoka/zzz/2.8/equipment.json", "/"),
+    summary: {
+      driveDiscCount: driveDiscIds.length,
+      runtimeDriveDiscCount: Object.keys(driveDiscs).length,
+      retainedSetEffectTextCount: auditRows.length * 2,
+      typedModifierPendingCount: auditRows.length,
+      driveDiscIds,
+    },
+    driveDiscs: auditRows,
+  }
+
+  return { driveDiscs, audit }
+}
+
 function buildArtifact() {
   const characterBatch = buildCharacterRuntimeBatch()
   const yixuan = characterBatch.yixuanProof
   const bangbooBatch = buildBangbooRuntimeBatch()
   const wEngineBatch = buildWEngineRuntimeBatch()
+  const driveDiscBatch = buildDriveDiscRuntimeBatch()
   const yixuanAnchor = "data/source/raw/nanoka/zzz/2.8/zh/character/1371.json"
   const yixuanSkillSource = sourceRef(yixuanAnchor, "/skill/basic/description/4/param/0/param/1371001")
 
@@ -930,7 +1076,7 @@ function buildArtifact() {
     bangboos: bangbooBatch.bangboos,
     bangbooSkills: bangbooBatch.bangbooSkills,
     wEngines: wEngineBatch.wEngines,
-    driveDiscs: {},
+    driveDiscs: driveDiscBatch.driveDiscs,
     enemies: {},
     resonium: {},
     modifiers: {},
@@ -995,6 +1141,7 @@ function buildArtifact() {
     characterBatchAudit: characterBatch.audit,
     bangbooBatchAudit: bangbooBatch.audit,
     wEngineBatchAudit: wEngineBatch.audit,
+    driveDiscBatchAudit: driveDiscBatch.audit,
   }
 }
 
@@ -1004,6 +1151,7 @@ function assertArtifactFresh(): void {
     characterBatchAudit: expectedCharacterBatchAudit,
     bangbooBatchAudit: expectedBangbooBatchAudit,
     wEngineBatchAudit: expectedWEngineBatchAudit,
+    driveDiscBatchAudit: expectedDriveDiscBatchAudit,
   } = buildArtifact()
   const actualRoot = readJson<unknown>(rootArtifactPath)
   const actualPackage = readJson<unknown>(packageArtifactPath)
@@ -1013,6 +1161,8 @@ function assertArtifactFresh(): void {
   const actualPackageBangbooBatchAudit = readJson<unknown>(packageBangbooBatchAuditPath)
   const actualRootWEngineBatchAudit = readJson<unknown>(rootWEngineBatchAuditPath)
   const actualPackageWEngineBatchAudit = readJson<unknown>(packageWEngineBatchAuditPath)
+  const actualRootDriveDiscBatchAudit = readJson<unknown>(rootDriveDiscBatchAuditPath)
+  const actualPackageDriveDiscBatchAudit = readJson<unknown>(packageDriveDiscBatchAuditPath)
   if (JSON.stringify(actualRoot) !== JSON.stringify(expected))
     throw new Error("Runtime game data artifact is stale; rerun pnpm --filter @randomplay/data audit:nanoka-runtime")
   if (JSON.stringify(actualPackage) !== JSON.stringify(expected))
@@ -1029,12 +1179,16 @@ function assertArtifactFresh(): void {
     throw new Error("W-Engine batch audit artifact is stale; rerun pnpm --filter @randomplay/data audit:nanoka-runtime")
   if (JSON.stringify(actualPackageWEngineBatchAudit) !== JSON.stringify(expectedWEngineBatchAudit))
     throw new Error("Package W-Engine batch audit mirror is stale; rerun pnpm --filter @randomplay/data audit:nanoka-runtime")
+  if (JSON.stringify(actualRootDriveDiscBatchAudit) !== JSON.stringify(expectedDriveDiscBatchAudit))
+    throw new Error("Drive Disc batch audit artifact is stale; rerun pnpm --filter @randomplay/data audit:nanoka-runtime")
+  if (JSON.stringify(actualPackageDriveDiscBatchAudit) !== JSON.stringify(expectedDriveDiscBatchAudit))
+    throw new Error("Package Drive Disc batch audit mirror is stale; rerun pnpm --filter @randomplay/data audit:nanoka-runtime")
   assertNanokaRuntimeGameDataArtifact(actualRoot)
   assertNanokaRuntimeGameDataArtifact(actualPackage)
 }
 
 function auditCommand(): void {
-  const { artifact, characterBatchAudit, bangbooBatchAudit, wEngineBatchAudit } = buildArtifact()
+  const { artifact, characterBatchAudit, bangbooBatchAudit, wEngineBatchAudit, driveDiscBatchAudit } = buildArtifact()
   writeJson(rootArtifactPath, artifact)
   writeJson(packageArtifactPath, artifact)
   writeJson(rootCharacterBatchAuditPath, characterBatchAudit)
@@ -1043,6 +1197,8 @@ function auditCommand(): void {
   writeJson(packageBangbooBatchAuditPath, bangbooBatchAudit)
   writeJson(rootWEngineBatchAuditPath, wEngineBatchAudit)
   writeJson(packageWEngineBatchAuditPath, wEngineBatchAudit)
+  writeJson(rootDriveDiscBatchAuditPath, driveDiscBatchAudit)
+  writeJson(packageDriveDiscBatchAuditPath, driveDiscBatchAudit)
 }
 
 function verifyCommand(): void {
@@ -1062,6 +1218,10 @@ function verifyCommand(): void {
     throw new Error("Missing data/cleaned/audit/nanoka-wengine-batch-audit.json; run audit:nanoka-runtime first")
   if (!existsSync(packageWEngineBatchAuditPath))
     throw new Error("Missing packages/data/cleaned/audit/nanoka-wengine-batch-audit.json; run audit:nanoka-runtime first")
+  if (!existsSync(rootDriveDiscBatchAuditPath))
+    throw new Error("Missing data/cleaned/audit/nanoka-drive-disc-batch-audit.json; run audit:nanoka-runtime first")
+  if (!existsSync(packageDriveDiscBatchAuditPath))
+    throw new Error("Missing packages/data/cleaned/audit/nanoka-drive-disc-batch-audit.json; run audit:nanoka-runtime first")
   assertArtifactFresh()
 }
 

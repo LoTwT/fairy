@@ -205,6 +205,35 @@ const bangbooEntityIds = [
   54021,
 ]
 
+const equipmentEntityIds = [
+  31000,
+  31100,
+  31200,
+  31300,
+  31400,
+  31500,
+  31600,
+  31800,
+  31900,
+  32200,
+  32300,
+  32400,
+  32500,
+  32600,
+  32700,
+  32800,
+  32900,
+  33000,
+  33100,
+  33200,
+  33300,
+  33400,
+  33500,
+  33600,
+  33700,
+  33800,
+]
+
 function characterEvidenceUse(entityId) {
   if (entityId === 1021)
     return "agent-panel-resonance-source-gate"
@@ -326,6 +355,27 @@ function snapshotAssets(snapshot) {
     })),
   ]
 
+  const equipmentAssets = [
+    {
+      id: "equipment-index",
+      url: `https://static.nanoka.cc/zzz/${snapshot}/equipment.json`,
+      path: "equipment.json",
+      entityType: "equipmentIndex",
+      approvedForCleanedOutput: true,
+      evidenceUse: "v1.2.x-drive-disc-batch-source-gate",
+    },
+    ...equipmentEntityIds.map(entityId => ({
+      id: `equipment-${entityId}`,
+      url: `https://static.nanoka.cc/zzz/${snapshot}/zh/equipment/${entityId}.json`,
+      path: `zh/equipment/${entityId}.json`,
+      entityType: "equipment",
+      language: "zh",
+      entityId,
+      approvedForCleanedOutput: true,
+      evidenceUse: entityId === 31000 ? "drive-disc-identity-source-gate" : "v1.2.x-drive-disc-batch-source-gate",
+    })),
+  ]
+
   return [
     {
       id: "manifest",
@@ -426,16 +476,7 @@ function snapshotAssets(snapshot) {
     },
     ...bangbooAssets,
     ...weaponAssets,
-    {
-      id: "equipment-woodpecker-31000",
-      url: `https://static.nanoka.cc/zzz/${snapshot}/zh/equipment/31000.json`,
-      path: "zh/equipment/31000.json",
-      entityType: "equipment",
-      language: "zh",
-      entityId: 31000,
-      approvedForCleanedOutput: true,
-      evidenceUse: "drive-disc-identity-source-gate",
-    },
+    ...equipmentAssets,
   ]
 }
 
@@ -576,7 +617,23 @@ function summarizeSnapshot(snapshot, assets) {
       throw new Error(`weapon ${entityId}: zh name drifted against index`)
     return { indexEntry, detail }
   })
-  const equipment = readJson(join(sourceRoot, snapshot, "zh/equipment/31000.json"))
+  const equipmentIndex = readJson(join(sourceRoot, snapshot, "equipment.json"))
+  const equipmentDetails = equipmentEntityIds.map((entityId) => {
+    const indexEntry = equipmentIndex[String(entityId)]
+    if (indexEntry === undefined)
+      throw new Error(`equipment index is missing ${entityId}`)
+    const detail = readJson(join(sourceRoot, snapshot, `zh/equipment/${entityId}.json`))
+    if (detail.id !== entityId)
+      throw new Error(`equipment ${entityId}: detail id drifted`)
+    if (detail.name !== indexEntry.zh?.name)
+      throw new Error(`equipment ${entityId}: zh name drifted against index`)
+    if (detail.desc2 !== indexEntry.zh?.desc2)
+      throw new Error(`equipment ${entityId}: zh desc2 drifted against index`)
+    if (detail.desc4 !== indexEntry.zh?.desc4)
+      throw new Error(`equipment ${entityId}: zh desc4 drifted against index`)
+    return { indexEntry, detail }
+  })
+  const equipment = equipmentDetails.find(({ detail }) => detail.id === 31000)?.detail
 
   if (manifest.zzz?.live !== snapshot)
     throw new Error(`manifest.zzz.live=${manifest.zzz?.live} does not match snapshot ${snapshot}`)
@@ -610,6 +667,8 @@ function summarizeSnapshot(snapshot, assets) {
     throw new Error(`weapon index count drifted: expected ${weaponEntityIds.length}, got ${Object.keys(weaponIndex).length}`)
   if (equipment.id !== 31000)
     throw new Error("equipment sample id drifted")
+  if (Object.keys(equipmentIndex).length !== equipmentEntityIds.length)
+    throw new Error(`equipment index count drifted: expected ${equipmentEntityIds.length}, got ${Object.keys(equipmentIndex).length}`)
 
   return {
     manifestLiveVersion: manifest.zzz.live,
@@ -723,6 +782,12 @@ function summarizeSnapshot(snapshot, assets) {
       name: equipment.name,
       hasSetDescriptions: typeof equipment.desc2 === "string" && typeof equipment.desc4 === "string",
     },
+    driveDiscBatch: {
+      indexCount: Object.keys(equipmentIndex).length,
+      retainedDetailCount: equipmentDetails.length,
+      ids: equipmentDetails.map(({ detail }) => detail.id),
+      approvedForCleanedOutputCount: assets.filter(asset => asset.entityType === "equipment" && asset.approvedForCleanedOutput === true).length,
+    },
     retainedAssetCount: assets.length,
   }
 }
@@ -769,6 +834,7 @@ async function fetchSnapshot(snapshot, generatedAt) {
         `https://static.nanoka.cc/zzz/${snapshot}/character.json`,
         `https://static.nanoka.cc/zzz/${snapshot}/bangboo.json`,
         `https://static.nanoka.cc/zzz/${snapshot}/weapon.json`,
+        `https://static.nanoka.cc/zzz/${snapshot}/equipment.json`,
       ],
       approvedLocalizedDetailUrlPatterns: [
         `https://static.nanoka.cc/zzz/${snapshot}/{locale}/{entityType}/{id}.json`,
@@ -843,6 +909,12 @@ function verifySnapshot(snapshot) {
     throw new Error("W-Engine retained detail count summary drifted")
   if (JSON.stringify(summary.wEngineBatch?.ids) !== JSON.stringify(manifest.summary?.wEngineBatch?.ids))
     throw new Error("W-Engine retained detail ids summary drifted")
+  if (summary.driveDiscBatch?.indexCount !== manifest.summary?.driveDiscBatch?.indexCount)
+    throw new Error("Drive Disc index count summary drifted")
+  if (summary.driveDiscBatch?.retainedDetailCount !== manifest.summary?.driveDiscBatch?.retainedDetailCount)
+    throw new Error("Drive Disc retained detail count summary drifted")
+  if (JSON.stringify(summary.driveDiscBatch?.ids) !== JSON.stringify(manifest.summary?.driveDiscBatch?.ids))
+    throw new Error("Drive Disc retained detail ids summary drifted")
 
   console.log(`nanoka snapshot ${snapshot} verification passed`)
 }

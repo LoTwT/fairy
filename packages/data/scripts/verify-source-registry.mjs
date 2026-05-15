@@ -24,6 +24,8 @@ const rootBangbooBatchAuditPath = join(repoRoot, "data/cleaned/audit/nanoka-bang
 const packageBangbooBatchAuditPath = join(packageDir, "cleaned/audit/nanoka-bangboo-batch-audit.json")
 const rootWEngineBatchAuditPath = join(repoRoot, "data/cleaned/audit/nanoka-wengine-batch-audit.json")
 const packageWEngineBatchAuditPath = join(packageDir, "cleaned/audit/nanoka-wengine-batch-audit.json")
+const rootDriveDiscBatchAuditPath = join(repoRoot, "data/cleaned/audit/nanoka-drive-disc-batch-audit.json")
+const packageDriveDiscBatchAuditPath = join(packageDir, "cleaned/audit/nanoka-drive-disc-batch-audit.json")
 
 const archivedRuntimeSourceIds = new Set([
   "lo-user-excel",
@@ -130,6 +132,7 @@ function validateNanokaRegistry(source) {
   assert(indexPattern.test(`https://static.nanoka.cc/zzz/${source.configuredLiveVersion}/character.json`), "nanoka allowlist must accept versioned character index")
   assert(indexPattern.test(`https://static.nanoka.cc/zzz/${source.configuredLiveVersion}/bangboo.json`), "nanoka allowlist must accept versioned Bangboo index")
   assert(indexPattern.test(`https://static.nanoka.cc/zzz/${source.configuredLiveVersion}/weapon.json`), "nanoka allowlist must accept versioned W-Engine index")
+  assert(indexPattern.test(`https://static.nanoka.cc/zzz/${source.configuredLiveVersion}/equipment.json`), "nanoka allowlist must accept versioned Drive Disc index")
   for (const forbiddenIndex of ["beta", "preview", "leak", "datamine"]) {
     assert(
       !indexPattern.test(`https://static.nanoka.cc/zzz/${source.configuredLiveVersion}/${forbiddenIndex}.json`),
@@ -306,6 +309,25 @@ function validateMatrixAgainstRegistry(matrix, registry) {
   assert(wEnginePassiveRow.blockedBy?.includes("typed-modifier-template-required"), "wEngines.passiveModifiers must keep typed modifier blocker")
   assert(wEnginePassiveRow.auditArtifact === "data/cleaned/audit/nanoka-wengine-batch-audit.json", "wEngines.passiveModifiers must point to the W-Engine batch audit")
   assert((wEnginePassiveRow.supportingSampleEntities ?? []).length === 89, "wEngines.passiveModifiers row must support all 89 W-Engines")
+
+  const driveDiscIndexSample = sampleById.get("nanoka-equipment-index-live-2.8")
+  assert(driveDiscIndexSample !== undefined, "Drive Disc batch: missing approved-live equipment index sample")
+  assert(driveDiscIndexSample.approvedForCleanedOutput === true, "Drive Disc batch index must be approved live evidence")
+  assert(driveDiscIndexSample.version === nanoka.configuredLiveVersion, "Drive Disc batch index must use configuredLiveVersion")
+  const liveDriveDiscSamples = [...sampleById.values()].filter(sample => sample.entityType === "driveDisc" && sample.version === nanoka.configuredLiveVersion)
+  assert(liveDriveDiscSamples.length === 26, `Drive Disc batch must retain 26 approved-live detail samples, got ${liveDriveDiscSamples.length}`)
+  const driveDiscIdentityRow = resourceRows.get("driveDiscs.identity")
+  assert(driveDiscIdentityRow !== undefined, "driveDiscs.identity: missing Drive Disc identity row")
+  assert(driveDiscIdentityRow.sampleEntity === "nanoka-equipment-index-live-2.8", "driveDiscs.identity: V1.2.x batch row must use the approved-live equipment index sample")
+  assert(driveDiscIdentityRow.auditArtifact === "data/cleaned/audit/nanoka-drive-disc-batch-audit.json", "driveDiscs.identity: V1.2.x batch row must point to the Drive Disc batch audit")
+  assert((driveDiscIdentityRow.supportingSampleEntities ?? []).length === 26, "driveDiscs.identity row must support all 26 Drive Disc sets")
+  const driveDiscSetRow = resourceRows.get("driveDiscs.setModifiers")
+  assert(driveDiscSetRow !== undefined, "driveDiscs.setModifiers: missing Drive Disc set modifier row")
+  assert(driveDiscSetRow.sampleEntity === "nanoka-equipment-index-live-2.8", "driveDiscs.setModifiers: V1.2.x batch row must use the approved-live equipment index sample")
+  assert(driveDiscSetRow.promotable === false, "driveDiscs.setModifiers must stay not-promotable until typed modifier templates exist")
+  assert(driveDiscSetRow.blockedBy?.includes("typed-modifier-template-required"), "driveDiscs.setModifiers must keep typed modifier blocker")
+  assert(driveDiscSetRow.auditArtifact === "data/cleaned/audit/nanoka-drive-disc-batch-audit.json", "driveDiscs.setModifiers must point to the Drive Disc batch audit")
+  assert((driveDiscSetRow.supportingSampleEntities ?? []).length === 26, "driveDiscs.setModifiers row must support all 26 Drive Disc sets")
 
   const driveDiscSlotRow = resourceRows.get("driveDiscs.slotAndSubstatTables")
   assert(driveDiscSlotRow !== undefined, "driveDiscs.slotAndSubstatTables: missing Drive Disc slot/stat row")
@@ -602,6 +624,46 @@ function validateBangbooBatchAudit(registry) {
   }
 }
 
+function validateDriveDiscBatchAudit(registry) {
+  const { rootText } = readMirroredText(
+    rootDriveDiscBatchAuditPath,
+    packageDriveDiscBatchAuditPath,
+    "packages/data/cleaned/audit/nanoka-drive-disc-batch-audit.json",
+  )
+
+  const nanoka = sourceById(registry, "nanoka-zzz")
+  const audit = JSON.parse(rootText)
+  assert(audit.kind === "nanokaDriveDiscBatchAudit", "Drive Disc batch audit kind drifted")
+  assert(audit.schemaVersion === "nanoka-drive-disc-batch-audit/v0.1", "Drive Disc batch audit schemaVersion drifted")
+  assert(audit.sourceId === "nanoka-zzz", "Drive Disc batch audit sourceId drifted")
+  assert(audit.sourceVersion === nanoka.configuredLiveVersion, "Drive Disc batch audit must use configured live version")
+  assert(audit.runtimeCutoverReady === true, "Drive Disc batch audit must reflect runtime cutover state")
+  assert(audit.indexSource?.sourceId === "nanoka-zzz", "Drive Disc batch audit index source must be nanoka")
+  assert(audit.indexSource?.sourceVersion === nanoka.configuredLiveVersion, "Drive Disc batch audit index source must use configured live version")
+  assert(audit.indexSource?.sourceAnchor === "data/source/raw/nanoka/zzz/2.8/equipment.json", "Drive Disc batch audit index source anchor drifted")
+  assert(audit.summary?.driveDiscCount === 26, "Drive Disc batch audit count drifted")
+  assert(audit.summary?.runtimeDriveDiscCount === 26, "Drive Disc batch runtime count drifted")
+  assert(audit.summary?.retainedSetEffectTextCount === 52, "Drive Disc retained set-effect text count drifted")
+  assert(audit.summary?.typedModifierPendingCount === 26, "Drive Disc typed modifier pending count drifted")
+  assert(Array.isArray(audit.driveDiscs) && audit.driveDiscs.length === 26, "Drive Disc batch audit rows must cover 26 sets")
+  for (const row of audit.driveDiscs) {
+    assert(row.source?.sourceId === "nanoka-zzz", `${row.id}: Drive Disc audit source must be nanoka`)
+    assert(row.source?.sourceVersion === nanoka.configuredLiveVersion, `${row.id}: Drive Disc audit source version drifted`)
+    assert(row.source?.sourceAnchor === `data/source/raw/nanoka/zzz/2.8/zh/equipment/${row.id}.json`, `${row.id}: Drive Disc audit source anchor drifted`)
+    for (const piece of ["twoPiece", "fourPiece"]) {
+      const effect = row.setEffects?.[piece]
+      assert(effect?.status === "not-promoted", `${row.id}: Drive Disc ${piece} set effect must remain not-promoted`)
+      assert(effect.reason === "typed-modifier-template-required", `${row.id}: Drive Disc ${piece} set effect must keep typed modifier blocker`)
+      assert(typeof effect.rawText === "string" && effect.rawText.length > 0, `${row.id}: Drive Disc ${piece} set effect raw text must be retained`)
+      assert(effect.source?.sourceId === "nanoka-zzz", `${row.id}: Drive Disc ${piece} source must be nanoka`)
+      assert(effect.source?.sourceVersion === nanoka.configuredLiveVersion, `${row.id}: Drive Disc ${piece} source version drifted`)
+      assert(effect.source?.sourceAnchor === `data/source/raw/nanoka/zzz/2.8/zh/equipment/${row.id}.json`, `${row.id}: Drive Disc ${piece} source anchor drifted`)
+      assert(effect.source?.dataPath === (piece === "twoPiece" ? "/desc2" : "/desc4"), `${row.id}: Drive Disc ${piece} source dataPath drifted`)
+    }
+    assert(row.slotAndSubstatTables?.status === "out-of-scope", `${row.id}: Drive Disc slot/stat boundary must remain out-of-scope`)
+  }
+}
+
 function validateSnapshotDiffHistory(registry) {
   const { rootText } = readMirroredText(
     rootSnapshotDiffHistoryPath,
@@ -766,6 +828,7 @@ function validateCoveredSourceRefs(registry) {
     "data/cleaned/audit/nanoka-character-batch-audit.json",
     "data/cleaned/audit/nanoka-bangboo-batch-audit.json",
     "data/cleaned/audit/nanoka-wengine-batch-audit.json",
+    "data/cleaned/audit/nanoka-drive-disc-batch-audit.json",
     "data/cleaned/audit/source-migration-field-diff.json",
     "data/cleaned/golden/v1-replay-report.json",
     "data/cleaned/runtime/game-data.json",
@@ -797,6 +860,7 @@ function main() {
   validateRuntimeGameData(registry)
   validateCharacterBatchAudit(registry)
   validateWEngineBatchAudit(registry)
+  validateDriveDiscBatchAudit(registry)
   validateBangbooBatchAudit(registry)
   validateCoveredSourceRefs(registry)
 
