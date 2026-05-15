@@ -1,10 +1,10 @@
 # Nanoka Coverage Matrix
 
-Status: Phase 2 source metadata contract gate
+Status: Phase 2 agent promotion extra gate
 Owner: @TechLead
 Reviewers: @Product, @QA
 Related: D-20 data-source migration, task #121, task #122, task #125, task #127,
-task #138, task #140, task #142, task #144, task #146, task #148
+task #138, task #140, task #142, task #144, task #146, task #148, task #150
 
 This matrix is schema-first. It is derived from the canonical `GameData` and
 `BattleSnapshot` schemas, then checked against sampled nanoka detail endpoints.
@@ -48,7 +48,7 @@ The machine-readable version is
 | Agent / Yixuan research | `https://static.nanoka.cc/zzz/3.0.2+15625449/zh/character/1371.json` | Research-only future sample for `stats`, `level`, `extra_level`, `skill`, `skill_list`, `passive`, `talent`, `potential`, `potential_detail`; not approved for cleaned output. |
 | Agent / Nekomata | `https://static.nanoka.cc/zzz/3.0.2+15625449/zh/character/1021.json` | `talent` has six entries, while `potential` / `potential_detail` are empty. Used to avoid treating `extra_level` as Mindscape by default. |
 | Agent / Soldier 11 | `https://static.nanoka.cc/zzz/3.0.2+15625449/zh/character/1041.json` | `talent`, `potential`, and `potential_detail` all have six entries. Used to separate Mindscape-like text from potential activation semantics. |
-| Live Agent / Nekomata | `https://static.nanoka.cc/zzz/2.8/zh/character/1021.json` | Approved live sample for promotable agent identity, enum, base panel, and skill-number rows; retained under `data/source/raw/nanoka/zzz/2.8/`. |
+| Live Agent / Nekomata | `https://static.nanoka.cc/zzz/2.8/zh/character/1021.json` | Approved live sample for promotable agent identity, enum, base panel, skill-number, and promotion-extra source artifact rows; retained under `data/source/raw/nanoka/zzz/2.8/`. |
 | Live Agent / Yixuan | `https://static.nanoka.cc/zzz/2.8/zh/character/1371.json` | Approved live sample for Adrenaline (`rp_*`) and Resonance (`fever_recovery`) resource fields; retained under `data/source/raw/nanoka/zzz/2.8/`. |
 | Live Bangboo / Plugboo | `https://static.nanoka.cc/zzz/2.8/zh/bangboo/54008.json` | Approved live sample for Bangboo identity, base panel, and skill segment rows; retained under `data/source/raw/nanoka/zzz/2.8/`. |
 | Enemy / Dullahan research sample | `https://static.nanoka.cc/zzz/3.0.2+15625449/zh/monster/30000.json` | Research-only `monster_info.*.stats`, `curves`, `element`, `element_abnormal`; not approved for cleaned output. |
@@ -66,6 +66,9 @@ release-ready source evidence. Phase 2 slice 3 re-sampled existing
 Adrenaline / Resonance resource naming and unit transforms from live Yixuan
 evidence. Future promotions must continue to use approved live sample evidence
 or receive explicit owner approval for a newer version.
+Phase 2 task #150 promotes promotion extra stats from approved live `extra_level`
+evidence as a structured source artifact only; final snapshot panel composition
+remains blocked by `runtimeCutoverReady=false` until Phase 3/4 drift/cutover.
 
 ## Corrections To The Discussion Checklist
 
@@ -95,8 +98,8 @@ or receive explicit owner approval for a newer version.
 
 ## Human-Readable Summary
 
-Machine summary after task #148: 45 rows total, 34 `verified-from-nanoka`, 5
-`needs-tl-research`, 0 `needs-owner-research`, 6 `deferred`, and 18
+Machine summary after task #150: 45 rows total, 35 `verified-from-nanoka`, 4
+`needs-tl-research`, 0 `needs-owner-research`, 6 `deferred`, and 19
 `promotableNow`.
 
 | Area | Status | Promote Now | Main Blocker |
@@ -105,7 +108,7 @@ Machine summary after task #148: 45 rows total, 34 `verified-from-nanoka`, 5
 | Snapshot-derived patch history | verified-from-nanoka | yes | R4.a snapshot-derived numeric diff tool exists and is gated by `approvedLiveVersions[]`; current artifact has one approved live snapshot (`2.8`) and therefore no compared pairs until another live version is approved. |
 | Agent identity / labels / enums | verified-from-nanoka | yes | Current promotable rows point to approved live Nekomata evidence; enum mapping table must be recorded. |
 | Agent base panel stats | verified-from-nanoka | yes | Formula proven for `baseStatsByLevel`: `stats[key] + level[promotionPhase][key] + stats[key_growth] * (level - 1) / 10000`, with retained live Nekomata panel tests. Promotion extra stats remain separate. |
-| Agent promotion extra stats | needs-tl-research | no | `extra_level` raw fields exist, but final snapshot composition semantics are not locked. |
+| Agent promotion extra stats | verified-from-nanoka | yes | Structured source artifact mapping exists from approved live `extra_level` rows; runtime cutover still waits for Phase 3/4 drift audit before folding extras into final AgentSnapshot panel composition. |
 | Agent skill numeric params | verified-from-nanoka | yes | Current promotable row points to approved live Nekomata evidence; full level derivation needs transform tests, but sampled base/growth paths exist. |
 | Agent passive / talent / potential | verified-from-nanoka | no | Raw text/objects exist; typed modifier and potential semantics are unresolved. |
 | Adrenaline panel fields | verified-from-nanoka | yes | `rp_max -> maxAdrenaline`; `rp_recover / 100 -> automaticAdrenalineAccumulation`, proven from live Yixuan. |
@@ -124,10 +127,8 @@ Machine summary after task #148: 45 rows total, 34 `verified-from-nanoka`, 5
 
 ## Remaining TL Research Rows
 
-After task #148, 5 rows remain in `needs-tl-research`:
+After task #150, 4 rows remain in `needs-tl-research`:
 
-- `agents.promotionExtraStats` — `extra_level` final snapshot composition
-  semantics.
 - `bangboos.element` — Plugboo sampled detail did not verify Bangboo element.
 - `driveDiscs.slotAndSubstatTables` — sampled equipment detail did not expose
   slot/main/sub-stat tables.
@@ -148,6 +149,9 @@ After task #148, 5 rows remain in `needs-tl-research`:
   `skills.resonanceRecovery` / `skills.adrenalineRecovery` — resource fields
   verified from approved live Yixuan evidence and promoted with deterministic
   unit transforms.
+- `agents.promotionExtraStats` — nanoka live promotion-extra structured source
+  artifact row; task #150 maps approved live `extra_level` stat extras with
+  deterministic units and keeps `runtimeCutoverReady=false` until Phase 3/4.
 - `deadlyAssault.periodsBossesBuffs` — nanoka live DA structured source artifact
   row; task #142 maps period, zones, buffs, monsters, weakness, rank goals, and
   `boss_adjust` with `runtimeCutoverReady=false` until Phase 3/4.
