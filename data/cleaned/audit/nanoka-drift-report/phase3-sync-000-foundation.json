@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "nanoka-drift-report/v0.1",
+  "syncId": "phase3-sync-000-foundation",
+  "generatedAt": "2026-05-15T16:20:00+08:00",
+  "candidate": {
+    "sourceId": "nanoka-zzz",
+    "sourceVersion": "2.8",
+    "contentHash": "sha256:91494c2c3bfda6ec47beccbf71066506ab0a315513aa751cf30e4c3a1dc0817d"
+  },
+  "baselines": [
+    {
+      "sourceId": "lo-user-excel",
+      "sourceVersion": "2.6.0_R14028417",
+      "archived": true
+    },
+    {
+      "sourceId": "mihoyo-zzz-critical-assault",
+      "sourceVersion": "2026-05-05T0850Z",
+      "archived": true
+    },
+    {
+      "sourceId": "buhflipexplode-zzz-da",
+      "sourceVersion": "2026-05-05T0445Z",
+      "archived": true
+    }
+  ],
+  "matrixStatus": "phase-3-drift-foundation-gate",
+  "runtimeCutoverReady": false,
+  "counts": {
+    "same": 0,
+    "changed": 0,
+    "missing": 0,
+    "new": 0,
+    "semantic-mismatch": 0
+  },
+  "rows": [],
+  "unresolvedCount": 0,
+  "notes": [
+    "Phase 3 foundation fixture only: this artifact locks the drift-report contract, mirror, verifier, and package inclusion before full field comparison lands.",
+    "Archived Excel, D-17 Mihoyo, and D-12 buhflipexplode sources are audit baselines only; they are not runtime fallback inputs."
+  ]
+}

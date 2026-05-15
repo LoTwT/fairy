@@ -124,7 +124,7 @@ function validateMatrixAgainstRegistry(matrix, registry) {
   const nanoka = sourceById(registry, "nanoka-zzz")
   validateNanokaRegistry(nanoka)
 
-  assert(matrix.status === "phase-2-disorder-daze-level-audit-gate", "matrix status must match the latest Disorder daze-level audit gate")
+  assert(matrix.status === "phase-3-drift-foundation-gate", "matrix status must match the Phase 3 drift foundation gate")
   assert(matrix.sourceVersionPolicy?.liveVersionRef === nanoka.liveVersionRef, "matrix liveVersionRef must match nanoka registry")
   assert(matrix.sourceVersionPolicy?.defaultReleaseSourceVersion === nanoka.configuredLiveVersion, "matrix default release version must match configuredLiveVersion")
   assert(matrix.sourceVersionResolved === nanoka.configuredLiveVersion, "matrix resolved sourceVersion must match configuredLiveVersion")
@@ -197,12 +197,16 @@ function validateMatrixAgainstRegistry(matrix, registry) {
 
   const driveDiscSlotRow = resourceRows.get("driveDiscs.slotAndSubstatTables")
   assert(driveDiscSlotRow !== undefined, "driveDiscs.slotAndSubstatTables: missing Drive Disc slot/stat row")
-  assert(driveDiscSlotRow.status === "needs-owner-research", "driveDiscs.slotAndSubstatTables: row must escalate after failed nanoka audit")
-  assert(driveDiscSlotRow.promotable === false, "driveDiscs.slotAndSubstatTables: failed-evidence row must not be promotable")
+  assert(driveDiscSlotRow.status === "deferred", "driveDiscs.slotAndSubstatTables: row must be deferred after owner scope decision")
+  assert(driveDiscSlotRow.sourcePolicy === "out-of-scope", "driveDiscs.slotAndSubstatTables: row must be out-of-scope for V0.1.0 formal data")
+  assert(driveDiscSlotRow.fieldClass === "removed-out-of-product-scope", "driveDiscs.slotAndSubstatTables: fieldClass must be removed-out-of-product-scope")
+  assert(driveDiscSlotRow.promotable === false, "driveDiscs.slotAndSubstatTables: out-of-scope row must not be promotable")
   assert(driveDiscSlotRow.sampleEntity === "nanoka-equipment-woodpecker-live-31000", "driveDiscs.slotAndSubstatTables: row must use approved live Woodpecker sample evidence")
-  assert(driveDiscSlotRow.blockedBy?.includes("owner:drive-disc-slot-stat-source-required"), "driveDiscs.slotAndSubstatTables: row must carry owner escalation blocker")
+  assert(driveDiscSlotRow.blockedBy?.includes("scope:user-provided-snapshot-boundary"), "driveDiscs.slotAndSubstatTables: row must carry user-provided snapshot boundary blocker")
   assert(driveDiscSlotRow.auditArtifact === "data/cleaned/audit/nanoka-drive-disc-slot-stat-audit.json", "driveDiscs.slotAndSubstatTables: row must point to failed-evidence audit artifact")
   assert(driveDiscSlotRow.transformRule?.includes("do not synthesize"), "driveDiscs.slotAndSubstatTables: transform must preserve no-fabrication boundary")
+  assert(driveDiscSlotRow.transformRule?.includes("user snapshot input supplies the final Agent panel"), "driveDiscs.slotAndSubstatTables: transform must document final panel snapshot boundary")
+  assert(driveDiscSlotRow.transformRule?.includes("do not reverse-engineer user panel values"), "driveDiscs.slotAndSubstatTables: transform must reject runtime reverse engineering")
   for (const rawPath of ["/id", "/name", "/desc2", "/desc4"]) {
     assert(driveDiscSlotRow.rawFieldPaths?.includes(rawPath), `driveDiscs.slotAndSubstatTables: missing observed raw path ${rawPath}`)
   }
@@ -368,7 +372,7 @@ function validateDriveDiscSlotStatAudit(registry) {
   assert(audit.sampleEntity === "nanoka-equipment-woodpecker-live-31000", "Drive Disc slot/stat audit sampleEntity drifted")
   assert(audit.runtimeCutoverReady === false, "Drive Disc slot/stat audit must not imply runtime cutover")
   assert(audit.summary?.foundSlotMainSubstatTable === false, "Drive Disc slot/stat audit must not claim slot/stat table found")
-  assert(audit.summary?.ownerResearchRequired === true, "Drive Disc slot/stat audit must require owner research")
+  assert(audit.summary?.ownerResearchRequired === false, "Drive Disc slot/stat audit owner research should be resolved by the V0.1.0 scope decision")
 
   const endpoints = audit.checkedEndpoints ?? []
   assert(endpoints.some(endpoint => endpoint.url === "https://static.nanoka.cc/zzz/2.8/equipment.json" && endpoint.status === 200), "Drive Disc slot/stat audit must record live equipment index check")
@@ -383,8 +387,10 @@ function validateDriveDiscSlotStatAudit(registry) {
   }
   assert(endpoints.some(endpoint => endpoint.status === 404 && endpoint.url.endsWith("/equipment_main_property.json")), "Drive Disc slot/stat audit must record missing main-property candidate endpoint")
   assert(endpoints.some(endpoint => endpoint.status === 404 && endpoint.url.endsWith("/equipment_rand_property.json")), "Drive Disc slot/stat audit must record missing substat candidate endpoint")
-  assert(audit.decision?.matrixStatus === "needs-owner-research", "Drive Disc slot/stat audit decision must match owner-research matrix status")
-  assert(audit.decision?.blockedBy?.includes("owner:drive-disc-slot-stat-source-required"), "Drive Disc slot/stat audit decision must carry owner blocker")
+  assert(audit.decision?.matrixStatus === "deferred", "Drive Disc slot/stat audit decision must match deferred matrix status")
+  assert(audit.decision?.sourcePolicy === "out-of-scope", "Drive Disc slot/stat audit decision must mark the row out-of-scope")
+  assert(audit.decision?.blockedBy?.includes("scope:user-provided-snapshot-boundary"), "Drive Disc slot/stat audit decision must carry user-provided snapshot boundary")
+  assert(audit.decision?.ownerDecision?.includes("remove Drive Disc slot/main/substat tables from V0.1.0 formal-data scope"), "Drive Disc slot/stat audit must record the owner scope decision")
 }
 
 function validateDisorderFormulaAudit(registry) {

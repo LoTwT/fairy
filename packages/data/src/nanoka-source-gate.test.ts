@@ -112,7 +112,7 @@ describe("nanoka source gate", () => {
     const matrix = readJson<CoverageMatrix>("data/cleaned/audit/nanoka-coverage-matrix.json")
     const rows = new Map(matrix.rows.map(row => [row.fieldId, row]))
 
-    expect(matrix.status).toBe("phase-2-disorder-daze-level-audit-gate")
+    expect(matrix.status).toBe("phase-3-drift-foundation-gate")
     expect(rows.get("metadata.sources")).toMatchObject({
       status: "verified-from-nanoka",
       promotable: true,
@@ -145,7 +145,7 @@ describe("nanoka source gate", () => {
     const rows = new Map(matrix.rows.map(row => [row.fieldId, row]))
     const row = rows.get("agents.promotionExtraStats")
 
-    expect(matrix.status).toBe("phase-2-disorder-daze-level-audit-gate")
+    expect(matrix.status).toBe("phase-3-drift-foundation-gate")
     expect(row).toMatchObject({
       status: "verified-from-nanoka",
       promotable: true,
@@ -172,7 +172,7 @@ describe("nanoka source gate", () => {
     const rows = new Map(matrix.rows.map(row => [row.fieldId, row]))
     const row = rows.get("bangboos.element")
 
-    expect(matrix.status).toBe("phase-2-disorder-daze-level-audit-gate")
+    expect(matrix.status).toBe("phase-3-drift-foundation-gate")
     expect(row).toMatchObject({
       status: "verified-from-nanoka",
       promotable: true,
@@ -211,18 +211,20 @@ describe("nanoka source gate", () => {
       expect(row.blockedBy ?? []).not.toContain("field:variant-mapping-required")
   })
 
-  it("escalates Drive Disc slot/stat tables with failed nanoka evidence", () => {
+  it("excludes Drive Disc slot/stat tables from V0.1.0 formal data after owner decision", () => {
     const matrix = readJson<CoverageMatrix>("data/cleaned/audit/nanoka-coverage-matrix.json")
     const rows = new Map(matrix.rows.map(row => [row.fieldId, row]))
     const row = rows.get("driveDiscs.slotAndSubstatTables")
 
     expect(row).toMatchObject({
-      status: "needs-owner-research",
+      fieldClass: "removed-out-of-product-scope",
+      sourcePolicy: "out-of-scope",
+      status: "deferred",
       promotable: false,
       sampleEntity: "nanoka-equipment-woodpecker-live-31000",
       auditArtifact: "data/cleaned/audit/nanoka-drive-disc-slot-stat-audit.json",
     })
-    expect(row?.blockedBy).toContain("owner:drive-disc-slot-stat-source-required")
+    expect(row?.blockedBy).toContain("scope:user-provided-snapshot-boundary")
     expect(row?.rawFieldPaths).toEqual(expect.arrayContaining([
       "/id",
       "/name",
@@ -230,6 +232,8 @@ describe("nanoka source gate", () => {
       "/desc4",
     ]))
     expect(row?.transformRule).toContain("do not synthesize")
+    expect(row?.transformRule).toContain("user snapshot input supplies the final Agent panel")
+    expect(row?.transformRule).toContain("do not reverse-engineer user panel values")
   })
 
   it("classifies the Disorder formula as implementation-owned after failed nanoka evidence", () => {

@@ -311,7 +311,21 @@ lo-user 已 explicitly 接受以下残余风险（per msg `74b52454`）：
 
 ### Gate 8 — Phase 3 drift audit
 - Phase 3 = nanoka output ↔ archived Excel / D-17 / D-12 evidence drift audit，**不是 runtime fallback**
-- Exit gate：连续 2 sync 无未 ruling drift + G01-G26 golden replay PASS + 新 G27/G28 source-backed anchors PASS
+- Drift report 必须产出 root/package mirrored JSON：
+  `data/cleaned/audit/nanoka-drift-report/<syncId>.json` 与
+  `packages/data/cleaned/audit/nanoka-drift-report/<syncId>.json`
+- 人读报告路径：`docs/data-source/drift-reports/<syncId>.md`
+- Drift status 枚举：`same` / `changed` / `missing` / `new` /
+  `semantic-mismatch`
+- `changed` / `missing` / `new` / `semantic-mismatch` 均进入 ruling queue；
+  `same` 为 `not-required`
+- 可执行命令：
+  - `pnpm --filter @randomplay/data audit:source-migration --sync-id <syncId>`
+  - `pnpm --filter @randomplay/data verify:source-migration --sync-id <syncId>`
+- Exit gate：连续 2 sync `unresolvedCount === 0` + G01-G26 golden replay PASS
+  + 新 G27/G28 source-backed anchors PASS
+- `runtimeCutoverReady` 必须保持 `false` 到 Phase 4；Phase 3 不允许接回
+  Excel/D-17/D-12 runtime fallback
 
 ### Phase 2 test files（5 个）
 

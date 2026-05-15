@@ -1,7 +1,7 @@
 {
   "schemaVersion": "nanoka-coverage-matrix/v0.1",
-  "generatedAt": "2026-05-15T15:35:00+08:00",
-  "status": "phase-2-disorder-daze-level-audit-gate",
+  "generatedAt": "2026-05-15T16:20:00+08:00",
+  "status": "phase-3-drift-foundation-gate",
   "sourceVersion": "manifest.zzz.live",
   "canonicalSchemas": [
     "packages/core/src/schema/game-data.ts",
@@ -1092,10 +1092,10 @@
     {
       "fieldId": "driveDiscs.slotAndSubstatTables",
       "canonicalPath": "DriveDiscSnapshot.slot/setId and future GameData drive disc stat tables",
-      "fieldClass": "optional",
-      "sourcePolicy": "nanoka",
-      "status": "needs-owner-research",
-      "nanokaEndpoint": "/equipment.json, /{locale}/equipment/{id}.json, and checked candidate stat-table endpoints",
+      "fieldClass": "removed-out-of-product-scope",
+      "sourcePolicy": "out-of-scope",
+      "status": "deferred",
+      "nanokaEndpoint": "/equipment.json and /{locale}/equipment/{id}.json for set identity/effect text; slot/main/substat tables are out of V0.1.0 formal-data scope",
       "rawFieldPaths": [
         "/equipment.json/{id}/{locale}/desc2",
         "/equipment.json/{id}/{locale}/desc4",
@@ -1104,15 +1104,15 @@
         "/desc2",
         "/desc4"
       ],
-      "transformRule": "nanoka live equipment index/detail only expose Drive Disc set identity and set-effect text; checked candidate slot/main/substat table endpoints are absent, so do not synthesize slot, main-stat, substat, level, or stat-roll tables. Escalate per R3 for owner decision: remove from V0.1.0 formal-data scope or approve research of a non-nanoka source.",
+      "transformRule": "Owner decision (2026-05-15) removes Drive Disc slot/main/substat tables from V0.1.0 formal-data scope because user snapshot input supplies the final Agent panel after main/substats. Fairy consumes Drive Disc set identity and set-effect text from nanoka; do not synthesize slot, main-stat, substat, level, or stat-roll tables, and do not reverse-engineer user panel values in runtime.",
       "sampleEntity": "nanoka-equipment-woodpecker-live-31000",
       "rawAvailable": false,
       "promotable": false,
       "blockedBy": [
-        "owner:drive-disc-slot-stat-source-required"
+        "scope:user-provided-snapshot-boundary"
       ],
       "auditArtifact": "data/cleaned/audit/nanoka-drive-disc-slot-stat-audit.json",
-      "notes": "Task #154 exhausted approved live nanoka equipment index/detail and candidate slot/stat-table endpoints. The row stays non-promotable and owner-research gated to preserve the no-fabrication/no-silent-fallback rule."
+      "notes": "Task #154 exhausted approved live nanoka equipment index/detail and candidate slot/stat-table endpoints. Lo-user decision on 2026-05-15 locks option (a): V0.1.0 only needs final user-provided panel plus Drive Disc set effects, so this row is excluded from Phase 3 blocking drift and deferred to V1.x validation/recommendation scope."
     },
     {
       "fieldId": "deadlyAssault.periodsBossesBuffs",
@@ -1302,8 +1302,8 @@
     "totalRows": 45,
     "verifiedFromNanoka": 36,
     "needsTlResearch": 0,
-    "needsOwnerResearch": 1,
-    "deferred": 8,
+    "needsOwnerResearch": 0,
+    "deferred": 9,
     "promotableNow": 20,
     "notPromotableYet": 25
   },
@@ -1316,8 +1316,7 @@
     "enemy level formula, resistance units, anomaly threshold mapping, and daze recovery semantics after variant mapping",
     "W-Engine stat/refine mapping",
     "DA boss_adjust, score/HP, field-rule, and period filter semantic mapping",
-    "Sentinel canonical naming and unit normalization",
-    "Drive Disc slot/main/substat owner decision: out-of-scope formal data or approved non-nanoka source research"
+    "Sentinel canonical naming and unit normalization"
   ],
   "liveVersionRef": "manifest.zzz.live",
   "sourceVersionResolved": "2.8",
