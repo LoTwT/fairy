@@ -99,6 +99,76 @@ function snapshotAssets(snapshot) {
       evidenceUse: "deadly-assault-detail-source-gate",
     },
     {
+      id: "monster-dullahan-30000",
+      url: `https://static.nanoka.cc/zzz/${snapshot}/zh/monster/30000.json`,
+      path: "zh/monster/30000.json",
+      entityType: "monster",
+      language: "zh",
+      entityId: 30000,
+      approvedForCleanedOutput: true,
+      evidenceUse: "enemy-variant-mapping-source-gate",
+    },
+    {
+      id: "monster-greta-30004",
+      url: `https://static.nanoka.cc/zzz/${snapshot}/zh/monster/30004.json`,
+      path: "zh/monster/30004.json",
+      entityType: "monster",
+      language: "zh",
+      entityId: 30004,
+      approvedForCleanedOutput: true,
+      evidenceUse: "enemy-variant-mapping-source-gate",
+    },
+    {
+      id: "monster-ruthless-fiend-200141",
+      url: `https://static.nanoka.cc/zzz/${snapshot}/zh/monster/200141.json`,
+      path: "zh/monster/200141.json",
+      entityType: "monster",
+      language: "zh",
+      entityId: 200141,
+      approvedForCleanedOutput: true,
+      evidenceUse: "enemy-variant-mapping-source-gate",
+    },
+    {
+      id: "monster-notorious-hati-200014",
+      url: `https://static.nanoka.cc/zzz/${snapshot}/zh/monster/200014.json`,
+      path: "zh/monster/200014.json",
+      entityType: "monster",
+      language: "zh",
+      entityId: 200014,
+      approvedForCleanedOutput: true,
+      evidenceUse: "enemy-variant-mapping-source-gate",
+    },
+    {
+      id: "monster-notorious-armored-hati-200034",
+      url: `https://static.nanoka.cc/zzz/${snapshot}/zh/monster/200034.json`,
+      path: "zh/monster/200034.json",
+      entityType: "monster",
+      language: "zh",
+      entityId: 200034,
+      approvedForCleanedOutput: true,
+      evidenceUse: "enemy-variant-mapping-source-gate",
+    },
+    {
+      id: "monster-miasma-priest-30033",
+      url: `https://static.nanoka.cc/zzz/${snapshot}/zh/monster/30033.json`,
+      path: "zh/monster/30033.json",
+      entityType: "monster",
+      language: "zh",
+      entityId: 30033,
+      approvedForCleanedOutput: true,
+      evidenceUse: "enemy-variant-mapping-source-gate",
+    },
+    {
+      id: "monster-notorious-pompey-300211",
+      url: `https://static.nanoka.cc/zzz/${snapshot}/zh/monster/300211.json`,
+      path: "zh/monster/300211.json",
+      entityType: "monster",
+      language: "zh",
+      entityId: 300211,
+      approvedForCleanedOutput: true,
+      evidenceUse: "enemy-variant-mapping-source-gate",
+    },
+    {
       id: "bangboo-plugboo-54008",
       url: `https://static.nanoka.cc/zzz/${snapshot}/zh/bangboo/54008.json`,
       path: "zh/bangboo/54008.json",
@@ -160,6 +230,68 @@ function summarizeSnapshot(snapshot, assets) {
   const character = readJson(join(sourceRoot, snapshot, "zh/character/1021.json"))
   const sentinelCharacter = readJson(join(sourceRoot, snapshot, "zh/character/1371.json"))
   const boss = readJson(join(sourceRoot, snapshot, "zh/boss/69036.json"))
+  const monsterSamples = [
+    {
+      id: "monster-dullahan-30000",
+      expectedDetailId: 30000,
+      expectedMonsterInfoId: 11154,
+      path: "zh/monster/30000.json",
+    },
+    {
+      id: "monster-greta-30004",
+      expectedDetailId: 30004,
+      expectedMonsterInfoId: 11301,
+      path: "zh/monster/30004.json",
+    },
+    {
+      id: "monster-ruthless-fiend-200141",
+      expectedDetailId: 200141,
+      expectedMonsterInfoId: 11521,
+      path: "zh/monster/200141.json",
+    },
+    {
+      id: "monster-notorious-hati-200014",
+      expectedDetailId: 200014,
+      expectedMonsterInfoId: 11195,
+      path: "zh/monster/200014.json",
+    },
+    {
+      id: "monster-notorious-armored-hati-200034",
+      expectedDetailId: 200034,
+      expectedMonsterInfoId: 11195,
+      path: "zh/monster/200034.json",
+    },
+    {
+      id: "monster-miasma-priest-30033",
+      expectedDetailId: 30033,
+      expectedMonsterInfoId: 31031,
+      path: "zh/monster/30033.json",
+    },
+    {
+      id: "monster-notorious-pompey-300211",
+      expectedDetailId: 300211,
+      expectedMonsterInfoId: 11881,
+      path: "zh/monster/300211.json",
+    },
+  ].map((sample) => {
+    const detail = readJson(join(sourceRoot, snapshot, sample.path))
+    if (detail.id !== sample.expectedDetailId)
+      throw new Error(`${sample.id}: monster detail id drifted`)
+    if (detail.monster_id !== sample.expectedMonsterInfoId)
+      throw new Error(`${sample.id}: monster_id drifted`)
+    const canonicalInfo = detail.monster_info?.[String(sample.expectedMonsterInfoId)]
+    if (canonicalInfo === undefined)
+      throw new Error(`${sample.id}: missing canonical monster_info ${sample.expectedMonsterInfoId}`)
+    return {
+      id: sample.id,
+      detailId: detail.id,
+      monsterInfoId: detail.monster_id,
+      name: detail.name,
+      codeName: canonicalInfo.code_name,
+      tag: canonicalInfo.tag,
+      hasStats: canonicalInfo.stats !== undefined,
+    }
+  })
   const bangboo = readJson(join(sourceRoot, snapshot, "zh/bangboo/54008.json"))
   const weapon = readJson(join(sourceRoot, snapshot, "zh/weapon/14137.json"))
   const equipment = readJson(join(sourceRoot, snapshot, "zh/equipment/31000.json"))
@@ -220,6 +352,17 @@ function summarizeSnapshot(snapshot, assets) {
       id: boss.id,
       zoneCount: Object.keys(boss.zone ?? {}).length,
       hasBossAdjust: boss.boss_adjust !== undefined,
+    },
+    enemySamples: {
+      mappingCount: monsterSamples.length,
+      canonicalMappings: monsterSamples.map(sample => ({
+        detailId: sample.detailId,
+        monsterInfoId: sample.monsterInfoId,
+        name: sample.name,
+        codeName: sample.codeName,
+        tag: sample.tag,
+        hasStats: sample.hasStats,
+      })),
     },
     bangbooSample: {
       id: bangboo.id,
@@ -335,6 +478,8 @@ function verifySnapshot(snapshot) {
     throw new Error("sentinel sample rp_max summary drifted")
   if (summary.sentinelSample?.firstSkillParam?.rpRecoveryRaw !== manifest.summary?.sentinelSample?.firstSkillParam?.rpRecoveryRaw)
     throw new Error("sentinel sample rp_recovery summary drifted")
+  if (summary.enemySamples?.mappingCount !== manifest.summary?.enemySamples?.mappingCount)
+    throw new Error("enemy sample mapping count summary drifted")
 
   console.log(`nanoka snapshot ${snapshot} verification passed`)
 }

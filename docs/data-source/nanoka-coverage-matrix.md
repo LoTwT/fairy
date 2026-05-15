@@ -1,10 +1,10 @@
 # Nanoka Coverage Matrix
 
-Status: Phase 0 R1-R6 locked update
+Status: Phase 2 enemy variant mapping gate
 Owner: @TechLead
 Reviewers: @Product, @QA
 Related: D-20 data-source migration, task #121, task #122, task #125, task #127,
-task #138, task #140, task #142
+task #138, task #140, task #142, task #144
 
 This matrix is schema-first. It is derived from the canonical `GameData` and
 `BattleSnapshot` schemas, then checked against sampled nanoka detail endpoints.
@@ -51,7 +51,8 @@ The machine-readable version is
 | Live Agent / Nekomata | `https://static.nanoka.cc/zzz/2.8/zh/character/1021.json` | Approved live sample for promotable agent identity, enum, base panel, and skill-number rows; retained under `data/source/raw/nanoka/zzz/2.8/`. |
 | Live Agent / Yixuan | `https://static.nanoka.cc/zzz/2.8/zh/character/1371.json` | Approved live sample for Adrenaline (`rp_*`) and Resonance (`fever_recovery`) resource fields; retained under `data/source/raw/nanoka/zzz/2.8/`. |
 | Live Bangboo / Plugboo | `https://static.nanoka.cc/zzz/2.8/zh/bangboo/54008.json` | Approved live sample for Bangboo identity, base panel, and skill segment rows; retained under `data/source/raw/nanoka/zzz/2.8/`. |
-| Enemy / Dullahan sample | `https://static.nanoka.cc/zzz/3.0.2+15625449/zh/monster/30000.json` | `monster_info.*.stats`, `curves`, `element`, `element_abnormal`. Variant mapping is still unresolved. |
+| Enemy / Dullahan research sample | `https://static.nanoka.cc/zzz/3.0.2+15625449/zh/monster/30000.json` | Research-only `monster_info.*.stats`, `curves`, `element`, `element_abnormal`; not approved for cleaned output. |
+| Live enemy variant mapping samples | `https://static.nanoka.cc/zzz/2.8/zh/monster/{id}.json` | Approved live samples for Dullahan `30000`, Greta `30004`, Ruthless Fiend `200141`, Notorious Hati `200014`, Notorious Armored Hati `200034`, Miasma Priest `30033`, and Notorious Pompey `300211`. Task #144 proves `detail.monster_id -> monster_info[monster_id]` for G13/G18/G19/G20 source artifacts. |
 | Live W-Engine / Yixuan signature sample | `https://static.nanoka.cc/zzz/2.8/zh/weapon/14137.json` | Approved live sample for W-Engine identity; `base_property`, `rand_property`, `level`, `stars`, and `talents` remain blocked for stat/passive promotion until mapping/templates are proven. |
 | Live Drive Disc / Woodpecker Electro sample | `https://static.nanoka.cc/zzz/2.8/zh/equipment/31000.json` | Approved live sample for Drive Disc identity; `desc2` / `desc4` text exists, but typed modifiers are not promotable until deterministic parsing/templates exist. |
 | Manifest / live gate | `https://static.nanoka.cc/manifest.json` | `zzz.live = 2.8`, `zzz.latest = 3.0.2+15625449`, `zzz.available[]` supports approved-live version allowlists and snapshot-derived patch diff history. |
@@ -76,8 +77,10 @@ or receive explicit owner approval for a newer version.
 - Drive Disc and W-Engine descriptions are raw text. They are not typed
   modifiers until a deterministic template emits handler/params/target/condition.
 - Bangboo `element_type` is not verified in the sampled Plugboo detail row.
-- Enemy endpoint availability is not the blocker. The blocker is mapping
-  `monster_info.*` variants to cleaned enemy/golden rows.
+- Enemy endpoint availability is not the blocker. Task #144 proves live
+  `monster_info.*` variant selection for the sampled cleaned/golden rows; enemy
+  level formulas, resistance units, anomaly threshold mapping, daze recovery
+  semantics, and full enemy-catalog promotion remain separate blockers.
 - `GameData.modifiers`, `GameData.rules`, `GameData.aliases`, and
   `GameData.sources` are top-level schema contract rows and must appear in the
   inventory even when they are not nanoka gameplay rows.
@@ -92,8 +95,8 @@ or receive explicit owner approval for a newer version.
 
 ## Human-Readable Summary
 
-Machine summary after task #142: 45 rows total, 31 `verified-from-nanoka`, 8
-`needs-tl-research`, 0 `needs-owner-research`, 6 `deferred`, and 14
+Machine summary after task #144: 45 rows total, 32 `verified-from-nanoka`, 7
+`needs-tl-research`, 0 `needs-owner-research`, 6 `deferred`, and 15
 `promotableNow`.
 
 | Area | Status | Promote Now | Main Blocker |
@@ -109,7 +112,8 @@ Machine summary after task #142: 45 rows total, 31 `verified-from-nanoka`, 8
 | Resonance / Adrenaline skill recovery | verified-from-nanoka | yes | `fever_recovery / 1000 -> resonanceRecovery`; `rp_recovery / 10000 -> adrenalineRecovery`, proven from live Yixuan and Nekomata. |
 | Bangboo skill numeric params | verified-from-nanoka | yes | G26 sampled values are promotable from approved live Plugboo evidence. |
 | Bangboo panel stats | verified-from-nanoka | yes | Formula proven for G26 Plugboo: `stats[key] + level[promotionPhase][key] + stats[key_upgrade] * (level - 1) / 10000`, with retained live Plugboo panel tests. |
-| Enemy stats/resistance/thresholds | verified-from-nanoka | no | Raw fields exist; variant mapping and formula mapping are unresolved. |
+| Enemy variant mapping | verified-from-nanoka | yes | Live Dullahan, Greta, Ruthless Fiend, Hati, Miasma Priest, and Pompey samples prove `detail.monster_id -> monster_info[monster_id]` mapping for G13/G18/G19/G20 source artifacts; runtime cutover still waits for Phase 3 drift audit. |
+| Enemy stats/resistance/thresholds | verified-from-nanoka | no | Raw fields exist for mapped live variants; level formula, resistance units, anomaly threshold mapping, and daze recovery semantics remain unresolved. |
 | W-Engine stats | verified-from-nanoka | no | Detail endpoint exists; ID mapping and stat normalization are unresolved. |
 | W-Engine passive | verified-from-nanoka | no | Raw text/objects exist; typed modifier template is unresolved. |
 | Drive Disc set effects | verified-from-nanoka | no | Raw text exists; typed modifier template is unresolved. |
@@ -120,15 +124,13 @@ Machine summary after task #142: 45 rows total, 31 `verified-from-nanoka`, 8
 
 ## Remaining TL Research Rows
 
-Task #122 batch 1 leaves 8 rows in `needs-tl-research`:
+After task #144, 7 rows remain in `needs-tl-research`:
 
 - `metadata.sources` — source registry contract and content-hash capture.
 - `metadata.sourceRefs` — adapter source-ref emission contract.
 - `agents.promotionExtraStats` — `extra_level` final snapshot composition
   semantics.
 - `bangboos.element` — Plugboo sampled detail did not verify Bangboo element.
-- `enemies.variantMapping` — map `monster_info.*` variants to cleaned enemies
-  and golden rows.
 - `driveDiscs.slotAndSubstatTables` — sampled equipment detail did not expose
   slot/main/sub-stat tables.
 - `rules.disorderFormula` — source or implementation owner still unresolved.
@@ -146,6 +148,9 @@ Task #122 batch 1 leaves 8 rows in `needs-tl-research`:
 - `deadlyAssault.periodsBossesBuffs` — nanoka live DA structured source artifact
   row; task #142 maps period, zones, buffs, monsters, weakness, rank goals, and
   `boss_adjust` with `runtimeCutoverReady=false` until Phase 3/4.
+- `enemies.variantMapping` — nanoka live enemy structured source artifact row;
+  task #144 maps sampled `monster_info.*` variants to existing cleaned/golden
+  enemy identities with `runtimeCutoverReady=false` until Phase 3/4.
 
 ## Removed Product Scope
 

@@ -52,7 +52,7 @@ describe("missing-fields fail-loud gate", () => {
       expect.arrayContaining([
         "metadata.sources",
         "metadata.sourceRefs",
-        "enemies.variantMapping",
+        "driveDiscs.slotAndSubstatTables",
       ]),
     )
   })
@@ -61,11 +61,11 @@ describe("missing-fields fail-loud gate", () => {
     expect(() =>
       assertReleaseGate({
         releaseReady: false,
-        missingFields: [{ fieldId: "enemies.variantMapping" }],
+        missingFields: [{ fieldId: "driveDiscs.slotAndSubstatTables" }],
         deferredRows: [],
         forbiddenRows: [],
       }),
-    ).toThrow("missing:enemies.variantMapping")
+    ).toThrow("missing:driveDiscs.slotAndSubstatTables")
 
     expect(() =>
       assertReleaseGate({

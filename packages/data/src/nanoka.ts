@@ -8,6 +8,7 @@ export type NanokaRawEntityType =
   | "bossIndex"
   | "character"
   | "boss"
+  | "monster"
   | "bangboo"
   | "weapon"
   | "equipment"
@@ -74,6 +75,17 @@ export interface NanokaRawSnapshotManifest {
       id: number
       zoneCount: number
       hasBossAdjust: boolean
+    }
+    enemySamples?: {
+      mappingCount: number
+      canonicalMappings: Array<{
+        detailId: number
+        monsterInfoId: number
+        name?: string
+        codeName?: string
+        tag?: string[]
+        hasStats: boolean
+      }>
     }
     bangbooSample?: {
       id: number
