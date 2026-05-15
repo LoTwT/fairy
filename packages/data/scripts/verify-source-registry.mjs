@@ -16,6 +16,15 @@ const rootDisorderFormulaAuditPath = join(repoRoot, "data/cleaned/audit/nanoka-d
 const packageDisorderFormulaAuditPath = join(packageDir, "cleaned/audit/nanoka-disorder-formula-audit.json")
 const rootDisorderDazeLevelAuditPath = join(repoRoot, "data/cleaned/audit/nanoka-disorder-daze-level-audit.json")
 const packageDisorderDazeLevelAuditPath = join(packageDir, "cleaned/audit/nanoka-disorder-daze-level-audit.json")
+const rootRuntimeGameDataPath = join(repoRoot, "data/cleaned/runtime/game-data.json")
+const packageRuntimeGameDataPath = join(packageDir, "cleaned/runtime/game-data.json")
+
+const archivedRuntimeSourceIds = new Set([
+  "lo-user-excel",
+  "mihoyo-zzz-critical-assault",
+  "buhflipexplode-zzz-da",
+  "nanoka-zzz-boss-manual-2026-05-07",
+])
 
 const redistributionRisks = new Set([
   "accepted-by-owner",
@@ -98,11 +107,13 @@ function validateRegistryShape(registry) {
 
 function validateNanokaRegistry(source) {
   assert(source.sourceId === "nanoka-zzz", "validateNanokaRegistry requires nanoka-zzz")
+  assert(source.runtimeRole === "runtime-primary", "nanoka runtimeRole must be runtime-primary after Phase 4 cutover")
   assert(source.liveVersionRef === "manifest.zzz.live", "nanoka liveVersionRef must be manifest.zzz.live")
   assert(source.server === "live", "nanoka server must be live")
   assert(source.releaseChannel === "stable", "nanoka releaseChannel must be stable")
   assert(source.approvedLiveVersions.includes(source.configuredLiveVersion), "nanoka approvedLiveVersions must include configuredLiveVersion")
-  assert(source.approvedLiveVersionsScope?.includes("snapshot-diff"), "nanoka approvedLiveVersionsScope must be restricted to snapshot-diff/archive usage")
+  assert(source.approvedLiveVersionsScope?.includes("runtime-primary"), "nanoka approvedLiveVersionsScope must include runtime-primary after Phase 4 cutover")
+  assert(source.approvedLiveVersionsScope?.includes("snapshot-diff"), "nanoka approvedLiveVersionsScope must preserve snapshot-diff/archive usage")
 
   const manifestPattern = compile(source.urlAllowlist?.manifestUrl, "nanoka manifestUrl allowlist")
   const indexPattern = compile(source.urlAllowlist?.versionedIndexUrls, "nanoka versionedIndexUrls allowlist")
@@ -120,11 +131,24 @@ function validateNanokaRegistry(source) {
   assert(!detailPattern.test("https://static.nanoka.cc/zzz/beta/zh/character/1021.json"), "nanoka detail allowlist must reject beta routes")
 }
 
+function validateArchivedRuntimeRegistry(registry) {
+  for (const sourceId of archivedRuntimeSourceIds) {
+    const source = sourceById(registry, sourceId)
+    assert(source.scope === "archived-audit-baseline" || source.scope === "historical-conflict-resolution", `${sourceId}: archived runtime source scope drifted`)
+    assert(source.runtimeRole === "deprecated-runtime-archive", `${sourceId}: runtimeRole must be deprecated-runtime-archive`)
+    assert(source.releaseChannel === "archived", `${sourceId}: deprecated runtime source must stay archived`)
+    assert(
+      source.notes?.some(note => /not (be )?referenced by runtime|must not reference|must not enter MIT runtime code|not part of the new nanoka adapter/i.test(note)),
+      `${sourceId}: notes must document no runtime use after Phase 4 cutover`,
+    )
+  }
+}
+
 function validateMatrixAgainstRegistry(matrix, registry) {
   const nanoka = sourceById(registry, "nanoka-zzz")
   validateNanokaRegistry(nanoka)
 
-  assert(matrix.status === "phase-3-drift-foundation-gate", "matrix status must match the Phase 3 drift foundation gate")
+  assert(matrix.status === "phase-4-runtime-cutover-gate", "matrix status must match the Phase 4 runtime cutover gate")
   assert(matrix.sourceVersionPolicy?.liveVersionRef === nanoka.liveVersionRef, "matrix liveVersionRef must match nanoka registry")
   assert(matrix.sourceVersionPolicy?.defaultReleaseSourceVersion === nanoka.configuredLiveVersion, "matrix default release version must match configuredLiveVersion")
   assert(matrix.sourceVersionResolved === nanoka.configuredLiveVersion, "matrix resolved sourceVersion must match configuredLiveVersion")
@@ -272,9 +296,9 @@ function validateMatrixAgainstRegistry(matrix, registry) {
   assert(promotionExtraRow.status === "verified-from-nanoka", "agents.promotionExtraStats: row must be verified after live extra_level mapping")
   assert(promotionExtraRow.promotable === true, "agents.promotionExtraStats: structured source artifact must be promotable after live mapping gate")
   assert(promotionExtraRow.sampleEntity === "nanoka-character-nekomata-live-1021", "agents.promotionExtraStats: row must use live Nekomata sample evidence")
-  assert(promotionExtraRow.blockedBy?.includes("field:runtime-cutover-drift-required"), "agents.promotionExtraStats: runtime cutover must remain blocked until drift audit")
+  assert(!promotionExtraRow.blockedBy?.includes("field:runtime-cutover-drift-required"), "agents.promotionExtraStats: runtime cutover blocker must be cleared after Phase 3/4")
   assert(promotionExtraRow.transformRule?.includes("/id matches the requested agent id"), "agents.promotionExtraStats: transform must bind source /id to requested agent id")
-  assert(promotionExtraRow.transformRule?.includes("runtimeCutoverReady remains false"), "agents.promotionExtraStats: transform must keep runtimeCutoverReady=false")
+  assert(promotionExtraRow.transformRule?.includes("Phase 3 drift rulings and Phase 4 cutover clear the runtime gate"), "agents.promotionExtraStats: transform must document runtime cutover clearance")
   for (const rawPath of [
     "/id",
     "/extra_level/*/max_level",
@@ -312,14 +336,14 @@ function validateMatrixAgainstRegistry(matrix, registry) {
   assert(daRow !== undefined, "deadlyAssault.periodsBossesBuffs: missing DA formal-live row")
   assert(daRow.promotable === true, "deadlyAssault.periodsBossesBuffs: DA source artifact row must be promotable after semantic mapping gate")
   assert(daRow.sampleEntity === "nanoka-boss-live-69036", "deadlyAssault.periodsBossesBuffs: DA row must use live period detail evidence")
-  assert(daRow.blockedBy?.includes("field:runtime-cutover-drift-required"), "deadlyAssault.periodsBossesBuffs: DA row must keep runtime cutover blocked until drift audit")
+  assert(!daRow.blockedBy?.includes("field:runtime-cutover-drift-required"), "deadlyAssault.periodsBossesBuffs: DA runtime cutover blocker must be cleared after Phase 3/4")
 
   const enemyVariantRow = resourceRows.get("enemies.variantMapping")
   assert(enemyVariantRow !== undefined, "enemies.variantMapping: missing enemy variant mapping row")
   assert(enemyVariantRow.status === "verified-from-nanoka", "enemies.variantMapping: row must be verified after live monster_info mapping")
   assert(enemyVariantRow.promotable === true, "enemies.variantMapping: structured source artifact must be promotable after live mapping gate")
   assert(enemyVariantRow.sampleEntity === "nanoka-monster-dullahan-live-30000", "enemies.variantMapping: row must use live Dullahan sample evidence")
-  assert(enemyVariantRow.blockedBy?.includes("field:runtime-cutover-drift-required"), "enemies.variantMapping: runtime cutover must remain blocked until drift audit")
+  assert(!enemyVariantRow.blockedBy?.includes("field:runtime-cutover-drift-required"), "enemies.variantMapping: runtime cutover blocker must be cleared after Phase 3/4")
   for (const rawPath of [
     "/id",
     "/name",
@@ -357,6 +381,59 @@ function validateMatrixAgainstRegistry(matrix, registry) {
   assert(!snapshotDiffRow.blockedBy?.includes("snapshot-diff-tool-required"), "metadata.snapshotDiffHistory: tool-required blocker must be removed after this gate")
   assert(!snapshotDiffRow.blockedBy?.includes("approved-live-version-allowlist-required"), "metadata.snapshotDiffHistory: allowlist-required blocker must be removed after this gate")
   assert(snapshotDiffRow.auditArtifact === "data/cleaned/audit/nanoka-snapshot-diff-history.json", "metadata.snapshotDiffHistory: row must point to snapshot diff artifact")
+}
+
+function collectSourceRefs(value, refs = []) {
+  if (Array.isArray(value)) {
+    for (const item of value)
+      collectSourceRefs(item, refs)
+    return refs
+  }
+
+  if (typeof value !== "object" || value === null)
+    return refs
+
+  if (typeof value.sourceId === "string")
+    refs.push(value)
+
+  for (const item of Object.values(value))
+    collectSourceRefs(item, refs)
+
+  return refs
+}
+
+function validateRuntimeGameData(registry) {
+  const { rootText } = readMirroredText(
+    rootRuntimeGameDataPath,
+    packageRuntimeGameDataPath,
+    "packages/data/cleaned/runtime/game-data.json",
+  )
+  const nanoka = sourceById(registry, "nanoka-zzz")
+  const artifact = JSON.parse(rootText)
+  assert(artifact.kind === "gameData", "runtime artifact kind must be gameData")
+  assert(artifact.schemaVersion === "cleaned-game-data-artifact/v0.1", "runtime artifact schemaVersion drifted")
+  assert(artifact.dataVersion === "fairy-v0.1.0-nanoka-runtime", "runtime artifact dataVersion drifted")
+  assert(artifact.runtimeCutoverReady === true, "runtimeCutoverReady must be true after Phase 4 cutover")
+  assert(artifact.runtimeSourcePolicy?.primarySourceId === "nanoka-zzz", "runtime policy primary source must be nanoka")
+  assert(artifact.runtimeSourcePolicy?.configuredLiveVersion === nanoka.configuredLiveVersion, "runtime policy source version must match configured live")
+  assert(artifact.runtimeSourcePolicy?.archivedSourcesRuntimeAllowed === false, "runtime policy must forbid archived runtime sources")
+  assert(artifact.runtimeSourcePolicy?.phase3ExitSyncId === "phase3-sync-002-g27-g28", "runtime cutover must cite Phase 3 exit sync")
+
+  const deprecatedIds = artifact.runtimeSourcePolicy?.deprecatedRuntimeSourceIds ?? []
+  assert(JSON.stringify(deprecatedIds) === JSON.stringify([...archivedRuntimeSourceIds]), "runtime policy deprecated source list drifted")
+
+  const data = artifact.data
+  assert(data?.schemaVersion === "fairy-game-data-v0.1.0", "runtime GameData schemaVersion drifted")
+  assert(data?.sourceVersion === `nanoka-zzz@${nanoka.configuredLiveVersion}`, "runtime GameData sourceVersion must match nanoka configured live")
+  assert(Array.isArray(data.sources) && data.sources.length === 1, "runtime GameData must expose exactly one runtime source document")
+  assert(data.sources[0]?.id === "nanoka-zzz", "runtime GameData source document must be nanoka")
+  assert(data.sources[0]?.sourceVersion === nanoka.configuredLiveVersion, "runtime GameData source document must use configured live")
+
+  for (const ref of collectSourceRefs(data)) {
+    assert(!archivedRuntimeSourceIds.has(ref.sourceId), `runtime GameData must not reference archived source ${ref.sourceId}`)
+    assert(ref.sourceId === "nanoka-zzz", `runtime GameData must not reference non-nanoka source ${ref.sourceId}`)
+    assert(ref.sourceVersion === nanoka.configuredLiveVersion, `${ref.sourceAnchor ?? ref.sourceId}: runtime source refs must use configured live`)
+  }
 }
 
 function validateSnapshotDiffHistory(registry) {
@@ -522,6 +599,7 @@ function validateCoveredSourceRefs(registry) {
     "data/cleaned/audit/mihoyo-buhflipexplode.source-conflicts.json",
     "data/cleaned/audit/source-migration-field-diff.json",
     "data/cleaned/golden/v1-replay-report.json",
+    "data/cleaned/runtime/game-data.json",
   ]
 
   for (const relativePath of files) {
@@ -542,10 +620,12 @@ function main() {
 
   validateRegistryShape(registry)
   validateMatrixAgainstRegistry(matrix, registry)
+  validateArchivedRuntimeRegistry(registry)
   validateSnapshotDiffHistory(registry)
   validateDriveDiscSlotStatAudit(registry)
   validateDisorderFormulaAudit(registry)
   validateDisorderDazeLevelAudit(registry)
+  validateRuntimeGameData(registry)
   validateCoveredSourceRefs(registry)
 
   console.log("source registry verification passed")

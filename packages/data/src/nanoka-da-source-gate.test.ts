@@ -51,13 +51,9 @@ describe("nanoka Deadly Assault source gate", () => {
         "/boss_adjust/*",
       ]),
     )
-    expect(row?.blockedBy).toEqual(
-      expect.arrayContaining([
-        "field:runtime-cutover-drift-required",
-      ]),
-    )
+    expect(row?.blockedBy ?? []).not.toContain("field:runtime-cutover-drift-required")
     expect(row?.transformRule).toContain("reject period rows with begin_time after configuredLiveSnapshotDate")
-    expect(row?.transformRule).toContain("runtimeCutoverReady remains false")
+    expect(row?.transformRule).toContain("Phase 3 drift rulings and Phase 4 cutover clear the runtime gate")
   })
 
   it("uses only live DA samples as release-gate evidence", () => {

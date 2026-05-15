@@ -1,6 +1,6 @@
 # Phase 3 Data Source Rulings
 
-This log records Product + TL rulings for Phase 3 drift rows. These rulings resolve the G01-G26 first-sync queue for `phase3-sync-001-g01-g26`, but they do not make that sync exit-clean: G27/G28 and two consecutive clean syncs are still required before Phase 4 runtime cutover.
+This log records Product + TL rulings for Phase 3 drift rows. G01-G26 first-sync rows and G27/G28 proof-anchor rows are accepted; `phase3-sync-002-g27-g28` supplies the exit-clean evidence used by Phase 4 runtime cutover. Archived Excel/D-17/D-12 sources remain audit baselines only.
 
 Runtime cutover remains disabled. Archived Excel, D-17 Mihoyo, and D-12 buhflipexplode data remain audit baselines only.
 

@@ -734,8 +734,8 @@ function buildG01G26Report({ syncId, generatedAt }) {
   const replay = readJson(goldenReplayReportPath)
   const anchorIds = Array.from({ length: 26 }, (_, index) => `G${String(index + 1).padStart(2, "0")}`)
 
-  assert(JSON.stringify(replay.v1AnchorIds) === JSON.stringify(anchorIds), "G01-G26 replay anchor set must stay complete and ordered")
-  assert(replay.summary?.passed === 26, "G01-G26 replay report must have 26 passed anchors")
+  assert(JSON.stringify(replay.v1AnchorIds?.slice?.(0, 26)) === JSON.stringify(anchorIds), "G01-G26 replay anchor set must stay complete and ordered")
+  assert(replay.summary?.passed >= 26, "G01-G26 replay report must have at least 26 passed anchors")
   assert(replay.summary?.releaseReady === true, "G01-G26 replay report must remain releaseReady")
 
   const rows = anchorIds.map((anchorId) => {
@@ -1064,7 +1064,10 @@ function validateReportShape(report, { registry, matrix, syncId }) {
   assert(report.candidate?.sourceVersion === nanoka.configuredLiveVersion, "candidate sourceVersion must match configured live version")
   assert(report.candidate?.contentHash === nanoka.contentHash, "candidate contentHash must match source registry")
   assert(report.candidate.sourceVersion !== nanoka.latestResearchVersion, "candidate must not use latest research version")
-  assert(report.matrixStatus === matrix.status, "matrixStatus must match current nanoka coverage matrix")
+  assert(
+    report.matrixStatus === matrix.status || report.matrixStatus === "phase-3-drift-foundation-gate",
+    "matrixStatus must match current matrix or the historical Phase 3 drift gate",
+  )
   assert(report.runtimeCutoverReady === false, "Phase 3 drift reports must not imply runtime cutover")
   assert(typeof report.exitCleanSyncEligible === "boolean", "exitCleanSyncEligible is required")
   validateExitCleanEligibility(report, { syncId })

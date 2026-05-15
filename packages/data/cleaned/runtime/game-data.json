@@ -1,0 +1,236 @@
+{
+  "kind": "gameData",
+  "schemaVersion": "cleaned-game-data-artifact/v0.1",
+  "dataVersion": "fairy-v0.1.0-nanoka-runtime",
+  "generatedAt": "2026-05-15T18:46:10+08:00",
+  "sourceManifestPath": "data/source/source-manifest.json",
+  "runtimeCutoverReady": true,
+  "runtimeSourcePolicy": {
+    "primarySourceId": "nanoka-zzz",
+    "configuredLiveVersion": "2.8",
+    "deprecatedRuntimeSourceIds": [
+      "lo-user-excel",
+      "mihoyo-zzz-critical-assault",
+      "buhflipexplode-zzz-da",
+      "nanoka-zzz-boss-manual-2026-05-07"
+    ],
+    "archivedSourcesRuntimeAllowed": false,
+    "phase3ExitSyncId": "phase3-sync-002-g27-g28"
+  },
+  "data": {
+    "schemaVersion": "fairy-game-data-v0.1.0",
+    "gameVersion": "ZZZ-2.8",
+    "dataVersion": "0.1.0",
+    "sourceVersion": "nanoka-zzz@2.8",
+    "generatedAt": "2026-05-15T18:46:10+08:00",
+    "sources": [
+      {
+        "id": "nanoka-zzz",
+        "kind": "thirdPartySite",
+        "url": "https://static.nanoka.cc/manifest.json",
+        "gameVersion": "ZZZ-2.8",
+        "sourceVersion": "2.8",
+        "fetchedAt": "2026-05-15T17:15:00+08:00",
+        "parsedAt": "2026-05-15T18:46:10+08:00",
+        "parserVersion": "nanoka-runtime-cutover-v0.1.0",
+        "licenseNote": "Runtime cleaned data uses lo-user-approved nanoka live 2.8 evidence; archived Excel/D-17/D-12 sources are retained for audit only."
+      }
+    ],
+    "agents": {
+      "1371": {
+        "id": "1371",
+        "label": {
+          "zh": "仪玄",
+          "en": "Yixuan"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1371.json",
+          "dataPath": "/"
+        },
+        "attribute": "auricInk",
+        "agentSpecialty": "rupture",
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 7953.8621,
+            "attack": 872.5748,
+            "defense": 441.1145,
+            "impact": 93,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 92,
+            "anomalyProficiency": 90,
+            "sheerForce": 795.38621
+          }
+        },
+        "skillIds": [
+          "1371001"
+        ],
+        "sourceAliases": [
+          "仪玄",
+          "Yixuan",
+          "Yixuan"
+        ]
+      }
+    },
+    "skills": {
+      "1371001": {
+        "id": "1371001",
+        "agentId": "1371",
+        "label": {
+          "zh": "普通攻击：霄云劲（一段）",
+          "en": "Basic Attack: Xiao Yun Jin (Hit 1)"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1371.json",
+          "dataPath": "/skill/basic/description/4/param/0/param/1371001"
+        },
+        "tags": [
+          "basic"
+        ],
+        "attribute": "auricInk",
+        "segments": [
+          {
+            "id": "1371001-hit-1",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 0.458
+            },
+            "dazeMultiplierByLevel": {
+              "1": 0.286
+            },
+            "resonanceRecoveryByLevel": {
+              "1": 71.5
+            },
+            "adrenalineRecoveryByLevel": {
+              "1": 0.52
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "basic"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1371.json",
+              "dataPath": "/skill/basic/description/4/param/0/param/1371001"
+            }
+          }
+        ]
+      }
+    },
+    "bangboos": {
+      "54008": {
+        "id": "54008",
+        "label": {
+          "zh": "插头布",
+          "en": "Plugboo"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json",
+          "dataPath": "/"
+        },
+        "baseStatsByLevel": {
+          "60": {
+            "maxHp": 4210.2983,
+            "attack": 8057.0996,
+            "defense": 723.8011,
+            "impact": 99,
+            "critRate": 0.05,
+            "critDamage": 0.5,
+            "anomalyMastery": 132
+          }
+        },
+        "skillIds": [
+          "5400801"
+        ],
+        "sourceAliases": [
+          "插头布",
+          "Plugboo",
+          "Plugboo"
+        ]
+      }
+    },
+    "bangbooSkills": {
+      "5400801": {
+        "id": "5400801",
+        "bangbooId": "54008",
+        "label": {
+          "zh": "电流狙击",
+          "en": "Electric Current Snipe"
+        },
+        "source": {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json",
+          "dataPath": "/skill_prop/5400801"
+        },
+        "tags": [
+          "special"
+        ],
+        "segments": [
+          {
+            "id": "5400801-hit",
+            "levelKey": "1",
+            "multiplierByLevel": {
+              "1": 5.12
+            },
+            "dazeMultiplierByLevel": {
+              "1": 1.87
+            },
+            "damageType": "regular",
+            "hitCount": 1,
+            "defaultTags": [
+              "special"
+            ],
+            "source": {
+              "sourceId": "nanoka-zzz",
+              "sourceVersion": "2.8",
+              "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json",
+              "dataPath": "/skill_prop/5400801"
+            }
+          }
+        ]
+      }
+    },
+    "wEngines": {},
+    "driveDiscs": {},
+    "enemies": {},
+    "resonium": {},
+    "modifiers": {},
+    "rules": {
+      "runtimePrimarySourceId": "nanoka-zzz",
+      "configuredLiveVersion": "2.8",
+      "runtimeCutoverReady": true,
+      "archivedRuntimeSourcesAllowed": false,
+      "driveDiscSlotAndSubstatTables": "out-of-scope:user-provided-snapshot-final-panel",
+      "implementationOwnedFormulaBoundary": [
+        "rules.disorderFormula",
+        "rules.disorderDazeLevelZone"
+      ]
+    },
+    "aliases": {
+      "fields": {
+        "defence": "defense",
+        "rp": "adrenaline",
+        "fever": "resonance"
+      },
+      "enumValues": {
+        "element_type.205": "auricInk",
+        "specialty.rupture": "rupture"
+      },
+      "sourceTerms": {
+        "玄墨": "auricInk",
+        "闪能": "adrenaline",
+        "喧响值": "resonance",
+        "电属性伤害": "electric"
+      }
+    }
+  }
+}

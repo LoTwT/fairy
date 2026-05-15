@@ -25,4 +25,9 @@ Current generated artifacts:
   buff source conflicts, preferring buhflipexplode after nanoka lookup while
   retaining Mihoyo source trace.
 - `golden/v1-replay-report.json` — source-backed V1 golden replay report.
-  The current report includes the V1.1 G24 Penguinboo, G25 Sharkboo, and G26 Plugboo numeric anchors.
+  The current report includes the V1.1 G24 Penguinboo, G25 Sharkboo, and G26
+  Plugboo numeric anchors plus G27/G28 nanoka runtime-primary proof anchors.
+- `runtime/game-data.json` — Phase 4 nanoka runtime cleaned artifact. It must
+  parse as `GameData`, set `runtimeCutoverReady=true`, use
+  `GameData.sourceVersion=nanoka-zzz@2.8`, and fail validation if it references
+  archived Excel/D-17/D-12 source IDs.

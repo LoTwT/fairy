@@ -117,7 +117,7 @@ describe("nanoka source gate", () => {
     const matrix = readJson<CoverageMatrix>("data/cleaned/audit/nanoka-coverage-matrix.json")
     const rows = new Map(matrix.rows.map(row => [row.fieldId, row]))
 
-    expect(matrix.status).toBe("phase-3-drift-foundation-gate")
+    expect(matrix.status).toBe("phase-4-runtime-cutover-gate")
     expect(rows.get("metadata.sources")).toMatchObject({
       status: "verified-from-nanoka",
       promotable: true,
@@ -150,7 +150,7 @@ describe("nanoka source gate", () => {
     const rows = new Map(matrix.rows.map(row => [row.fieldId, row]))
     const row = rows.get("agents.promotionExtraStats")
 
-    expect(matrix.status).toBe("phase-3-drift-foundation-gate")
+    expect(matrix.status).toBe("phase-4-runtime-cutover-gate")
     expect(row).toMatchObject({
       status: "verified-from-nanoka",
       promotable: true,
@@ -167,9 +167,9 @@ describe("nanoka source gate", () => {
       "/extra_level/*/extra/*/name",
       "/extra_level/*/extra/*/value",
     ]))
-    expect(row?.blockedBy).toContain("field:runtime-cutover-drift-required")
+    expect(row?.blockedBy ?? []).not.toContain("field:runtime-cutover-drift-required")
     expect(row?.transformRule).toContain("/id matches the requested agent id")
-    expect(row?.transformRule).toContain("runtimeCutoverReady remains false")
+    expect(row?.transformRule).toContain("Phase 3 drift rulings and Phase 4 cutover clear the runtime gate")
   })
 
   it("promotes Bangboo element only from deterministic live skill damage text", () => {
@@ -177,7 +177,7 @@ describe("nanoka source gate", () => {
     const rows = new Map(matrix.rows.map(row => [row.fieldId, row]))
     const row = rows.get("bangboos.element")
 
-    expect(matrix.status).toBe("phase-3-drift-foundation-gate")
+    expect(matrix.status).toBe("phase-4-runtime-cutover-gate")
     expect(row).toMatchObject({
       status: "verified-from-nanoka",
       promotable: true,
@@ -233,7 +233,7 @@ describe("nanoka source gate", () => {
       promotable: true,
       sampleEntity: "nanoka-monster-dullahan-live-30000",
     })
-    expect(variantRow?.blockedBy).toContain("field:runtime-cutover-drift-required")
+    expect(variantRow?.blockedBy ?? []).not.toContain("field:runtime-cutover-drift-required")
     expect(variantRow?.supportingSampleEntities).toEqual(expect.arrayContaining([
       "nanoka-monster-dullahan-live-30000",
       "nanoka-monster-greta-live-30004",

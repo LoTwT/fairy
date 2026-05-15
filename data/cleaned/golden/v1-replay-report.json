@@ -1,9 +1,9 @@
 {
   "schemaVersion": "fairy-v1-golden-replay-report-v1",
   "parserVersion": "golden-v1-replay-v0.1.0",
-  "generatedAt": "2026-05-05T18:20:00+08:00",
+  "generatedAt": "2026-05-15T18:46:10+08:00",
   "policy": {
-    "scope": "V1.1 true-data replay harness after G26: all 26 anchors pass executable replay, no anchors remain deferred.",
+    "scope": "V0.1.0 true-data replay harness after Phase 4 cutover: all 28 anchors pass executable replay, including G27/G28 nanoka runtime-primary proof anchors.",
     "releaseGate": "releaseReady becomes true only when all executable anchors pass replay and blockingDiagnostics is zero.",
     "manualAcceptance": "G22/G23 use lo-user manual acceptance records tied to the sourceTextHash values in v1-agent-source-candidates.json; A/B effects are replayed as explicit inactive/active snapshot states, and C is skill-level parameterized."
   },
@@ -33,12 +33,14 @@
     "G23",
     "G24",
     "G25",
-    "G26"
+    "G26",
+    "G27",
+    "G28"
   ],
   "deferredAnchorIds": [],
   "summary": {
-    "v1AnchorCount": 26,
-    "passed": 26,
+    "v1AnchorCount": 28,
+    "passed": 28,
     "pendingHarness": 0,
     "blocked": 0,
     "deferred": 0,
@@ -514,6 +516,82 @@
         "Plugboo active skill replays Excel-only numeric contribution: level-60 attack 8057.0996 × 5.12 = 41252.349952 base damage.",
         "Daze uses impact 99 × 1.87 = 185.13, and anomaly buildup uses 240 × floor(132)/100 = 316.8 before enemy resistance.",
         "Excel Path X has no element field; the fixture reuses an explicit neutral ice segment and zero ice resistance so the anchor asserts sourced panel/skill numerics, not inferred element semantics."
+      ]
+    },
+    {
+      "id": "G27",
+      "status": "passed",
+      "sourceRefs": [
+        {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1371.json",
+          "dataPath": "/id"
+        },
+        {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1371.json",
+          "dataPath": "/stats"
+        },
+        {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1371.json",
+          "dataPath": "/level/6"
+        },
+        {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1371.json",
+          "dataPath": "/skill/basic/description/4/param/0/param/1371001"
+        }
+      ],
+      "notes": [
+        "Yixuan new-source proof anchor now runs executable replay from approved-live nanoka: level-60 attack 872.5748 × first-basic 0.458 = 399.6392584 base damage.",
+        "Daze uses impact 93 × 0.286 = 26.598, while resource proof binds maxAdrenaline 120, automaticAdrenalineAccumulation 2, resonanceRecovery 71.5, and adrenalineRecovery 0.52.",
+        "Rupture fields are retained from nanoka raw evidence: level 1, correction 1, probability 0."
+      ]
+    },
+    {
+      "id": "G28",
+      "status": "passed",
+      "sourceRefs": [
+        {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json",
+          "dataPath": "/id"
+        },
+        {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json",
+          "dataPath": "/stats"
+        },
+        {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json",
+          "dataPath": "/level/6"
+        },
+        {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json",
+          "dataPath": "/skill/a"
+        },
+        {
+          "sourceId": "nanoka-zzz",
+          "sourceVersion": "2.8",
+          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json",
+          "dataPath": "/skill_prop/5400801"
+        }
+      ],
+      "notes": [
+        "Plugboo new-source proof anchor now runs executable replay from approved-live nanoka: level-60 attack 8057.0996 × active 5.12 = 41252.349952 base damage.",
+        "Daze uses impact 99 × 1.87 = 185.13, anomaly buildup uses 240 × floor(132)/100 = 316.8, and skill text proves electric element.",
+        "This duplicates the G26 Excel numeric entity with nanoka raw/source refs so Phase 4 release has both archived parity and runtime-primary proof."
       ]
     }
   ]
