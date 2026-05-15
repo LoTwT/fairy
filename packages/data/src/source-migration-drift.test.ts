@@ -8,6 +8,7 @@ const repoRoot = join(import.meta.dirname, "../../..")
 const dataPackageRoot = join(repoRoot, "packages/data")
 const syncId = "phase3-sync-000-foundation"
 const firstSyncId = "phase3-sync-001-g01-g26"
+const secondSyncId = "phase3-sync-002-g27-g28"
 
 type DriftReport = {
   schemaVersion: string
@@ -44,6 +45,7 @@ type DriftReport = {
       availableSampleEntities: string[]
       missingRequiredSampleEntities: string[]
       rulingSummary?: string
+      normalizedValues?: unknown
     }
     status: string
     severity: string
@@ -57,6 +59,9 @@ type DriftReport = {
     cleanSyncIds: string[]
     anchorIds: string[]
     goldenReplayStatus: string
+    requiredNewProofAnchorIds?: string[]
+    previousCleanSyncId?: string
+    currentSyncId?: string
   }
 }
 
@@ -363,11 +368,237 @@ describe("Phase 3 source migration drift report foundation", () => {
     expect(report).toContain("Runtime cutover ready: **false**")
   })
 
+  it("verifies the second G27/G28 sync report and exit-clean evidence", () => {
+    const output = execFileSync("node", ["scripts/source-migration-drift.mjs", "verify", "--sync-id", secondSyncId], {
+      cwd: dataPackageRoot,
+      encoding: "utf8",
+      stdio: ["ignore", "pipe", "pipe"],
+    })
+    const report = readJson<DriftReport>(`data/cleaned/audit/nanoka-drift-report/${secondSyncId}.json`)
+
+    expect(output).toContain(`source migration drift verification passed for ${secondSyncId}`)
+    expect(report).toMatchObject({
+      schemaVersion: "nanoka-drift-report/v0.1",
+      syncId: secondSyncId,
+      candidate: {
+        sourceId: "nanoka-zzz",
+        sourceVersion: "2.8",
+      },
+      runtimeCutoverReady: false,
+      exitCleanSyncEligible: true,
+      counts: {
+        same: 0,
+        changed: 0,
+        missing: 0,
+        new: 2,
+        "semantic-mismatch": 26,
+      },
+      unresolvedCount: 0,
+      exitGateEvidence: {
+        cleanSyncIds: [firstSyncId, secondSyncId],
+        requiredNewProofAnchorIds: ["G27", "G28"],
+        previousCleanSyncId: firstSyncId,
+        currentSyncId: secondSyncId,
+        goldenReplayStatus: "passed",
+      },
+    })
+    expect(report.exitGateEvidence?.anchorIds).toEqual(Array.from({ length: 28 }, (_, index) => `G${String(index + 1).padStart(2, "0")}`))
+    expect(report.rows).toHaveLength(28)
+    expect(report.rows.slice(0, 26).every(row => row.status === "semantic-mismatch" && row.rulingStatus === "accepted")).toBe(true)
+
+    const g27 = report.rows.find(row => row.entityId === "G27")
+    const g28 = report.rows.find(row => row.entityId === "G28")
+    expect(g27).toMatchObject({
+      status: "new",
+      rulingStatus: "accepted",
+      rulingId: "phase3-r027",
+      candidateSourceRef: {
+        sourceAnchor: "data/source/raw/nanoka/zzz/2.8/zh/character/1371.json",
+        dataPath: "/stats",
+      },
+      candidateValue: {
+        coverageStatus: "new-source-proof-passed",
+        requiredSampleEntities: ["nanoka-character-yixuan-live-1371"],
+        normalizedValues: {
+          identity: {
+            id: 1371,
+            codeName: "Yixuan",
+            name: "仪玄",
+          },
+          level60Panel: {
+            maxHp: 7953.8621,
+            attack: 872.5748,
+            defence: 441.1145,
+          },
+          resource: {
+            maxAdrenaline: 120,
+            automaticAdrenalineAccumulation: 2,
+            resonanceRecovery: 71.5,
+            adrenalineRecovery: 0.52,
+          },
+          rupture: {
+            ruptureLevel: 1,
+            ruptureCorrectionFactor: 1,
+            ruptureProbability: 0,
+          },
+        },
+      },
+    })
+    expect(g28).toMatchObject({
+      status: "new",
+      rulingStatus: "accepted",
+      rulingId: "phase3-r028",
+      candidateSourceRef: {
+        sourceAnchor: "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json",
+        dataPath: "/stats",
+      },
+      candidateValue: {
+        coverageStatus: "new-source-proof-passed",
+        requiredSampleEntities: ["nanoka-bangboo-plugboo-live-54008"],
+        normalizedValues: {
+          identity: {
+            id: 54008,
+            codeName: "Plugboo",
+            name: "插头布",
+          },
+          level60Panel: {
+            maxHp: 4210.2983,
+            attack: 8057.0996,
+            defence: 723.8011,
+          },
+          activeSkill: {
+            damageMultiplier: 5.12,
+            dazeMultiplier: 1.87,
+            anomalyBuildup: 240,
+            element: "electric",
+          },
+        },
+      },
+    })
+  })
+
+  it("rejects exit-clean reports without G27/G28 proof rows", () => {
+    const tempDir = mkdtempSync(join(tmpdir(), "fairy-drift-report-"))
+    const fixturePath = join(tempDir, "missing-g28-proof-report.json")
+    const report = readJson<DriftReport>(`data/cleaned/audit/nanoka-drift-report/${secondSyncId}.json`)
+    const missingG28Report = {
+      ...report,
+      rows: report.rows.filter(row => row.entityId !== "G28"),
+      counts: {
+        ...report.counts,
+        new: 1,
+      },
+    }
+
+    try {
+      writeFileSync(fixturePath, `${JSON.stringify(missingG28Report, null, 2)}\n`)
+
+      expect(() =>
+        execFileSync("node", ["scripts/source-migration-drift.mjs", "verify-fixture", "--sync-id", secondSyncId, "--report", fixturePath], {
+          cwd: dataPackageRoot,
+          encoding: "utf8",
+          stdio: ["ignore", "pipe", "pipe"],
+        }),
+      ).toThrow("exit-clean drift sync requires G28 row evidence")
+    }
+    finally {
+      rmSync(tempDir, { recursive: true, force: true })
+    }
+  })
+
+  it("rejects exit-clean reports whose G27/G28 proof values drift from approved-live raw evidence", () => {
+    const tempDir = mkdtempSync(join(tmpdir(), "fairy-drift-report-"))
+    const fixturePath = join(tempDir, "mutated-proof-values-report.json")
+    const report = readJson<DriftReport>(`data/cleaned/audit/nanoka-drift-report/${secondSyncId}.json`)
+    const mutatedReport = structuredClone(report)
+    const g27 = mutatedReport.rows.find(row => row.entityId === "G27")!
+    const g28 = mutatedReport.rows.find(row => row.entityId === "G28")!
+    const g27Values = g27.candidateValue.normalizedValues as { resource: { adrenalineRecovery: number } }
+    const g28Values = g28.candidateValue.normalizedValues as { activeSkill: { damageMultiplier: number, element: string } }
+    g27Values.resource.adrenalineRecovery = 0.53
+    g28Values.activeSkill.damageMultiplier = 5.13
+    g28Values.activeSkill.element = "fire"
+
+    try {
+      writeFileSync(fixturePath, `${JSON.stringify(mutatedReport, null, 2)}\n`)
+
+      expect(() =>
+        execFileSync("node", ["scripts/source-migration-drift.mjs", "verify-fixture", "--sync-id", secondSyncId, "--report", fixturePath], {
+          cwd: dataPackageRoot,
+          encoding: "utf8",
+          stdio: ["ignore", "pipe", "pipe"],
+        }),
+      ).toThrow("G27: proof anchor normalizedValues must match approved-live nanoka raw evidence")
+    }
+    finally {
+      rmSync(tempDir, { recursive: true, force: true })
+    }
+  })
+
+  it("rejects forged exit-clean evidence for the second sync", () => {
+    const tempDir = mkdtempSync(join(tmpdir(), "fairy-drift-report-"))
+    const baseReport = readJson<DriftReport>(`data/cleaned/audit/nanoka-drift-report/${secondSyncId}.json`)
+    const tamperedReports = [
+      {
+        name: "foundation-current-clean-syncs",
+        mutate(report: DriftReport) {
+          report.exitGateEvidence!.cleanSyncIds = [syncId, secondSyncId]
+        },
+      },
+      {
+        name: "duplicate-current-clean-syncs",
+        mutate(report: DriftReport) {
+          report.exitGateEvidence!.cleanSyncIds = [secondSyncId, secondSyncId]
+        },
+      },
+      {
+        name: "truncated-anchor-set",
+        mutate(report: DriftReport) {
+          report.exitGateEvidence!.anchorIds = ["G27", "G28"]
+        },
+      },
+      {
+        name: "mismatched-current-sync-id",
+        mutate(report: DriftReport) {
+          report.exitGateEvidence!.currentSyncId = firstSyncId
+        },
+      },
+      {
+        name: "foundation-previous-sync-id",
+        mutate(report: DriftReport) {
+          report.exitGateEvidence!.previousCleanSyncId = syncId
+          report.exitGateEvidence!.cleanSyncIds = [syncId, secondSyncId]
+        },
+      },
+    ]
+
+    try {
+      for (const tampered of tamperedReports) {
+        const fixturePath = join(tempDir, `${tampered.name}.json`)
+        const report = structuredClone(baseReport)
+        tampered.mutate(report)
+        writeFileSync(fixturePath, `${JSON.stringify(report, null, 2)}\n`)
+
+        expect(() =>
+          execFileSync("node", ["scripts/source-migration-drift.mjs", "verify-fixture", "--sync-id", secondSyncId, "--report", fixturePath], {
+            cwd: dataPackageRoot,
+            encoding: "utf8",
+            stdio: ["ignore", "pipe", "pipe"],
+          }),
+        ).toThrow(/exitGateEvidence|foundation sync/)
+      }
+    }
+    finally {
+      rmSync(tempDir, { recursive: true, force: true })
+    }
+  })
+
   it("packs the drift report artifact without raw source archives", () => {
     const files = npmPackFiles()
 
     expect(files).toContain(`cleaned/audit/nanoka-drift-report/${syncId}.json`)
     expect(files).toContain(`cleaned/audit/nanoka-drift-report/${firstSyncId}.json`)
+    expect(files).toContain(`cleaned/audit/nanoka-drift-report/${secondSyncId}.json`)
     expect(files.some(file => file.startsWith("source/raw/"))).toBe(false)
     expect(files.some(file => file.endsWith(".xlsx"))).toBe(false)
   })

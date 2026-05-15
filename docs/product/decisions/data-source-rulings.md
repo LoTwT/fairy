@@ -34,6 +34,8 @@ Runtime cutover remains disabled. Archived Excel, D-17 Mihoyo, and D-12 buhflipe
 | `phase3-r024` | G24 | accepted | Accept Penguinboo numeric parity from nanoka live panel and active skill raw values. |
 | `phase3-r025` | G25 | accepted | Accept Sharkboo numeric parity from nanoka live panel and active skill raw values. |
 | `phase3-r026` | G26 | accepted | Accept Plugboo numeric parity and electric element evidence from nanoka live panel, skill raw values, and skill text. |
+| `phase3-r027` | G27 | accepted | Accept lo-user-selected Yixuan approved-live proof anchor from nanoka character detail. |
+| `phase3-r028` | G28 | accepted | Accept lo-user-selected Plugboo approved-live proof anchor from nanoka Bangboo detail. |
 
 ## Rulings
 
@@ -140,3 +142,11 @@ Decision: accepted. Nanoka approved-live Sharkboo panel and active skill raw val
 ### phase3-r026-g26
 
 Decision: accepted. Nanoka approved-live Plugboo panel and active skill raw values reproduce the archived Excel Path X numbers after unit conversion: attack `8057.0996`, active multiplier `5.12`, daze multiplier `1.87`, and anomaly buildup `240`. Plugboo skill text also proves electric element evidence.
+
+### phase3-r027-g27
+
+Decision: accepted. Lo-user selected Yixuan `1371` as the G27 new-source proof anchor. Nanoka approved-live `zh/character/1371.json` proves identity plus calculation-relevant source coverage: level-60 panel `maxHp=7953.8621`, `attack=872.5748`, `defence=441.1145`; Adrenaline cap/recovery `120` / `2`; first basic Resonance/Adrenaline recovery `71.5` / `0.52`; rupture raw fields `rbl=1`, `rbl_correction_factor=1`, `rbl_probability=0`. This is a proof anchor only and does not cut runtime cleaned data over.
+
+### phase3-r028-g28
+
+Decision: accepted. Lo-user selected Plugboo `54008` as the G28 new-source proof anchor. Nanoka approved-live `zh/bangboo/54008.json` proves identity plus calculation-relevant source coverage: level-60 panel `maxHp=4210.2983`, `attack=8057.0996`, `defence=723.8011`; active skill `5400801` values `damageMultiplier=5.12`, `dazeMultiplier=1.87`, `anomalyBuildup=240`; approved-live skill text resolves element evidence to `electric`. This is a proof anchor only and does not cut runtime cleaned data over.
