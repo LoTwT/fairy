@@ -38,6 +38,8 @@ describe("nanoka runtime game data cutover", () => {
     expect(data.sources[0]?.sourceVersion).toBe(NANOKA_RUNTIME_SOURCE_VERSION)
     expect(Object.keys(data.agents)).toHaveLength(53)
     expect(Object.keys(data.agents)).toEqual(expect.arrayContaining(["1011", "1021", "1031", "1371", "1431", "1541"]))
+    expect(Object.keys(data.wEngines)).toHaveLength(89)
+    expect(Object.keys(data.wEngines)).toEqual(expect.arrayContaining(["12001", "13001", "14137", "14154"]))
     expect(Object.keys(data.bangboos)).toHaveLength(39)
     expect(Object.keys(data.bangbooSkills)).toHaveLength(63)
     expect(Object.keys(data.bangboos)).toEqual(expect.arrayContaining(["53001", "53002", "54001", "54008", "54020"]))
@@ -60,6 +62,14 @@ describe("nanoka runtime game data cutover", () => {
       dazeMultiplierByLevel: { "1": 0.286 },
       resonanceRecoveryByLevel: { "1": 71.5 },
       adrenalineRecoveryByLevel: { "1": 0.52 },
+    })
+    expect(data.wEngines["14137"]?.baseStatsByLevel?.["60"]).toMatchObject({
+      attack: 743.5,
+      hpPercent: 0.3,
+    })
+    expect(data.wEngines["12011"]?.baseStatsByLevel?.["60"]).toMatchObject({
+      attack: 475.84,
+      anomalyProficiency: 60,
     })
     expect(data.bangboos["54008"]?.baseStatsByLevel?.["60"]).toMatchObject({
       maxHp: 4210.2983,
@@ -139,5 +149,62 @@ describe("nanoka runtime game data cutover", () => {
       specialElementPromotedIds: ["1091", "1371"],
       specialElementNotPromotedIds: ["1431"],
     })
+  })
+
+  it("records the full approved-live W-Engine batch audit without promoting unresolved passives", () => {
+    const audit = readJson<{
+      summary: {
+        wEngineCount: number
+        runtimeWEngineCount: number
+        passiveNotPromotedCount: number
+        subStatCounts: Record<string, number>
+      }
+      wEngines: Array<{
+        id: string
+        passiveModifiers: {
+          status: string
+          talents: Array<{
+            level: string
+            name: string
+            desc: string
+            source: {
+              sourceId: string
+              sourceVersion: string
+              sourceAnchor: string
+              dataPath: string
+            }
+          }>
+        }
+      }>
+    }>(join(repoRoot, "data/cleaned/audit/nanoka-wengine-batch-audit.json"))
+
+    expect(audit.summary).toMatchObject({
+      wEngineCount: 89,
+      runtimeWEngineCount: 89,
+      passiveNotPromotedCount: 89,
+    })
+    expect(audit.summary.subStatCounts).toMatchObject({
+      attackPercent: 23,
+      hpPercent: 12,
+      impact: 12,
+      anomalyProficiency: 5,
+    })
+
+    const qingming = audit.wEngines.find(row => row.id === "14137")
+    expect(qingming?.passiveModifiers).toMatchObject({
+      status: "not-promoted",
+    })
+    expect(qingming?.passiveModifiers.talents).toHaveLength(5)
+    expect(qingming?.passiveModifiers.talents[0]).toMatchObject({
+      level: "1",
+      name: "云流运转",
+      source: {
+        sourceId: "nanoka-zzz",
+        sourceVersion: "2.8",
+        sourceAnchor: "data/source/raw/nanoka/zzz/2.8/zh/weapon/14137.json",
+        dataPath: "/talents/1",
+      },
+    })
+    expect(qingming?.passiveModifiers.talents[0]?.desc).toContain("暴击率提升")
   })
 })

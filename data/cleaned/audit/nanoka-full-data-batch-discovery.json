@@ -63,23 +63,23 @@
       "index": "https://static.nanoka.cc/zzz/2.8/weapon.json",
       "currentLiveIndexCount": 89,
       "currentLiveDetailAccessibleCount": 89,
-      "retainedRawDetailCount": 1,
-      "runtimeRecordCount": 0,
-      "missingRawDetailCount": 88,
-      "missingRuntimeRecordCount": 89,
+      "retainedRawDetailCount": 89,
+      "runtimeRecordCount": 89,
+      "missingRawDetailCount": 0,
+      "missingRuntimeRecordCount": 0,
       "targetRuntimeBucket": "GameData.wEngines",
-      "schemaFit": "existing-bucket",
+      "schemaFit": "existing-bucket-batch-complete-pr-b",
       "promotableCurrentFields": [
         "identity",
-        "baseStatsByLevel",
-        "base_property",
-        "rand_property"
+        "baseStatsByLevel.60.attack",
+        "baseStatsByLevel.60.substat"
       ],
       "implementationNotes": [
-        "Weapon passive text/talents must be audited before typed modifier promotion.",
-        "Numeric base/substat promotion can proceed with source refs and unit normalization first."
+        "W-Engine passive text/talents are retained in audit but not promoted until typed modifier templates exist.",
+        "Numeric base/substat promotion uses source refs and formula proof for base_property, rand_property, level.60, and stars.5."
       ],
-      "recommendedPr": "PR-B wEngines batch"
+      "recommendedPr": "PR-B wEngines batch",
+      "implementationStatus": "complete-pr-b"
     },
     {
       "domain": "driveDiscs",

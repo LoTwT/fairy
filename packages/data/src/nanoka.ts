@@ -8,6 +8,7 @@ export type NanokaRawEntityType =
   | "bossIndex"
   | "characterIndex"
   | "bangbooIndex"
+  | "weaponIndex"
   | "character"
   | "boss"
   | "monster"
@@ -107,6 +108,12 @@ export interface NanokaRawSnapshotManifest {
       ids: number[]
       approvedForCleanedOutputCount: number
     }
+    wEngineBatch?: {
+      indexCount: number
+      retainedDetailCount: number
+      ids: number[]
+      approvedForCleanedOutputCount: number
+    }
     wEngineSample?: {
       id: number
       codeName?: string
@@ -153,6 +160,8 @@ export function assertNanokaSnapshotManifest(
     throw new Error("nanoka snapshot must retain character.json index")
   if (!assetIds.includes("bangboo-index"))
     throw new Error("nanoka snapshot must retain bangboo.json index")
+  if (!assetIds.includes("weapon-index"))
+    throw new Error("nanoka snapshot must retain weapon.json index")
 
   for (const asset of manifest.assets) {
     if (asset.sourceVersion !== manifest.snapshotId)
@@ -172,6 +181,8 @@ function assertNanokaUrlPolicy(manifest: NanokaRawSnapshotManifest): void {
     throw new Error("nanoka urlPolicy must approve the live character index")
   if (!manifest.urlPolicy.approvedIndexUrls.includes(`https://static.nanoka.cc/zzz/${manifest.snapshotId}/bangboo.json`))
     throw new Error("nanoka urlPolicy must approve the live Bangboo index")
+  if (!manifest.urlPolicy.approvedIndexUrls.includes(`https://static.nanoka.cc/zzz/${manifest.snapshotId}/weapon.json`))
+    throw new Error("nanoka urlPolicy must approve the live W-Engine index")
   for (const forbiddenIndexName of ["beta", "preview", "leak", "datamine"]) {
     if (!manifest.urlPolicy.forbiddenIndexNames.includes(forbiddenIndexName))
       throw new Error(`nanoka urlPolicy must forbid ${forbiddenIndexName}.json indexes`)
@@ -209,7 +220,7 @@ function assertNanokaAssetUrlAllowed(
   if (fileName !== undefined && manifest.urlPolicy.forbiddenIndexNames.includes(fileName.replace(/\.json$/, "")))
     throw new Error(`${asset.id}: forbidden nanoka route in snapshot`)
 
-  if (asset.entityType === "bossIndex" || asset.entityType === "characterIndex" || asset.entityType === "bangbooIndex") {
+  if (asset.entityType === "bossIndex" || asset.entityType === "characterIndex" || asset.entityType === "bangbooIndex" || asset.entityType === "weaponIndex") {
     if (!manifest.urlPolicy.approvedIndexUrls.includes(asset.url))
       throw new Error(`${asset.id}: asset URL is not allowed by nanoka urlPolicy`)
     return

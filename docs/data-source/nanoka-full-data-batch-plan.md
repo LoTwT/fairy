@@ -22,7 +22,7 @@ Configured live version remains `manifest.zzz.live = 2.8`.
 | Domain | Current live index | Details accessible | Runtime today | Gap |
 |---|---:|---:|---:|---:|
 | Characters | 53 | 53 | 53 | complete in PR-A |
-| W-Engines | 89 | 89 | 0 | 89 runtime records |
+| W-Engines | 89 | 89 | 89 | complete in PR-B |
 | Drive Disc sets | 26 | 26 | 0 | 26 runtime records |
 | Enemies | 269 | 269 | 0 | 269 runtime records |
 | Deadly Assault current periods | 38 | 38 | 0 | schema/runtime bucket required |
@@ -63,7 +63,7 @@ The schema addition is release-significant. The version bump is deferred until t
 ## PR Sequence
 
 1. Characters: retain and batch-promote all current-live characters. Done in PR-A.
-2. W-Engines: retain and batch-promote all current-live W-Engines.
+2. W-Engines: retain and batch-promote all current-live W-Engines. Done in PR-B.
 3. Drive Disc sets: retain and batch-promote current-live set identity/effect text; keep slot/main/substat excluded.
 4. Enemies: retain all current-live monster details and batch-promote selected enemy variants with skipped-variant audit.
 5. DA current: add a current DA period bucket if needed and retain/promote all 2.8 periods.

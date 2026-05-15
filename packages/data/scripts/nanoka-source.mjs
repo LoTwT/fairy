@@ -71,6 +71,98 @@ const characterEntityIds = [
   1541,
 ]
 
+const weaponEntityIds = [
+  12001,
+  12002,
+  12003,
+  12004,
+  12005,
+  12006,
+  12007,
+  12008,
+  12009,
+  12010,
+  12011,
+  12012,
+  12013,
+  12014,
+  12015,
+  13001,
+  13002,
+  13003,
+  13004,
+  13005,
+  13006,
+  13007,
+  13008,
+  13009,
+  13010,
+  13011,
+  13012,
+  13013,
+  13014,
+  13015,
+  13016,
+  13019,
+  13020,
+  13101,
+  13103,
+  13106,
+  13108,
+  13111,
+  13112,
+  13113,
+  13115,
+  13127,
+  13128,
+  13135,
+  13142,
+  13144,
+  14001,
+  14002,
+  14003,
+  14102,
+  14104,
+  14105,
+  14107,
+  14109,
+  14110,
+  14114,
+  14116,
+  14117,
+  14118,
+  14119,
+  14120,
+  14121,
+  14122,
+  14124,
+  14125,
+  14126,
+  14129,
+  14130,
+  14131,
+  14132,
+  14133,
+  14134,
+  14136,
+  14137,
+  14138,
+  14139,
+  14140,
+  14141,
+  14143,
+  14145,
+  14146,
+  14147,
+  14148,
+  14149,
+  14150,
+  14151,
+  14152,
+  14153,
+  14154,
+]
+
 const bangbooEntityIds = [
   53001,
   53002,
@@ -213,6 +305,27 @@ function snapshotAssets(snapshot) {
     })),
   ]
 
+  const weaponAssets = [
+    {
+      id: "weapon-index",
+      url: `https://static.nanoka.cc/zzz/${snapshot}/weapon.json`,
+      path: "weapon.json",
+      entityType: "weaponIndex",
+      approvedForCleanedOutput: true,
+      evidenceUse: "v1.2.x-wengine-batch-source-gate",
+    },
+    ...weaponEntityIds.map(entityId => ({
+      id: `weapon-${entityId}`,
+      url: `https://static.nanoka.cc/zzz/${snapshot}/zh/weapon/${entityId}.json`,
+      path: `zh/weapon/${entityId}.json`,
+      entityType: "weapon",
+      language: "zh",
+      entityId,
+      approvedForCleanedOutput: true,
+      evidenceUse: entityId === 14137 ? "w-engine-identity-source-gate" : "v1.2.x-wengine-batch-source-gate",
+    })),
+  ]
+
   return [
     {
       id: "manifest",
@@ -312,16 +425,7 @@ function snapshotAssets(snapshot) {
       evidenceUse: "enemy-variant-mapping-source-gate",
     },
     ...bangbooAssets,
-    {
-      id: "weapon-yixuan-signature-14137",
-      url: `https://static.nanoka.cc/zzz/${snapshot}/zh/weapon/14137.json`,
-      path: "zh/weapon/14137.json",
-      entityType: "weapon",
-      language: "zh",
-      entityId: 14137,
-      approvedForCleanedOutput: true,
-      evidenceUse: "w-engine-identity-source-gate",
-    },
+    ...weaponAssets,
     {
       id: "equipment-woodpecker-31000",
       url: `https://static.nanoka.cc/zzz/${snapshot}/zh/equipment/31000.json`,
@@ -460,6 +564,18 @@ function summarizeSnapshot(snapshot, assets) {
     return { indexEntry, detail }
   })
   const weapon = readJson(join(sourceRoot, snapshot, "zh/weapon/14137.json"))
+  const weaponIndex = readJson(join(sourceRoot, snapshot, "weapon.json"))
+  const weaponDetails = weaponEntityIds.map((entityId) => {
+    const indexEntry = weaponIndex[String(entityId)]
+    if (indexEntry === undefined)
+      throw new Error(`weapon index is missing ${entityId}`)
+    const detail = readJson(join(sourceRoot, snapshot, `zh/weapon/${entityId}.json`))
+    if (detail.id !== entityId)
+      throw new Error(`weapon ${entityId}: detail id drifted`)
+    if (detail.name !== indexEntry.zh)
+      throw new Error(`weapon ${entityId}: zh name drifted against index`)
+    return { indexEntry, detail }
+  })
   const equipment = readJson(join(sourceRoot, snapshot, "zh/equipment/31000.json"))
 
   if (manifest.zzz?.live !== snapshot)
@@ -490,6 +606,8 @@ function summarizeSnapshot(snapshot, assets) {
     throw new Error("Sharkboo sample id drifted")
   if (weapon.id !== 14137)
     throw new Error("weapon sample id drifted")
+  if (Object.keys(weaponIndex).length !== weaponEntityIds.length)
+    throw new Error(`weapon index count drifted: expected ${weaponEntityIds.length}, got ${Object.keys(weaponIndex).length}`)
   if (equipment.id !== 31000)
     throw new Error("equipment sample id drifted")
 
@@ -594,6 +712,12 @@ function summarizeSnapshot(snapshot, assets) {
       hasBaseProperty: weapon.base_property !== undefined,
       hasRandProperty: weapon.rand_property !== undefined,
     },
+    wEngineBatch: {
+      indexCount: Object.keys(weaponIndex).length,
+      retainedDetailCount: weaponDetails.length,
+      ids: weaponDetails.map(({ detail }) => detail.id),
+      approvedForCleanedOutputCount: assets.filter(asset => asset.entityType === "weapon" && asset.approvedForCleanedOutput === true).length,
+    },
     driveDiscSample: {
       id: equipment.id,
       name: equipment.name,
@@ -644,6 +768,7 @@ async function fetchSnapshot(snapshot, generatedAt) {
         `https://static.nanoka.cc/zzz/${snapshot}/boss.json`,
         `https://static.nanoka.cc/zzz/${snapshot}/character.json`,
         `https://static.nanoka.cc/zzz/${snapshot}/bangboo.json`,
+        `https://static.nanoka.cc/zzz/${snapshot}/weapon.json`,
       ],
       approvedLocalizedDetailUrlPatterns: [
         `https://static.nanoka.cc/zzz/${snapshot}/{locale}/{entityType}/{id}.json`,
@@ -712,6 +837,12 @@ function verifySnapshot(snapshot) {
     throw new Error("Bangboo retained detail count summary drifted")
   if (JSON.stringify(summary.bangbooBatch?.ids) !== JSON.stringify(manifest.summary?.bangbooBatch?.ids))
     throw new Error("Bangboo retained detail ids summary drifted")
+  if (summary.wEngineBatch?.indexCount !== manifest.summary?.wEngineBatch?.indexCount)
+    throw new Error("W-Engine index count summary drifted")
+  if (summary.wEngineBatch?.retainedDetailCount !== manifest.summary?.wEngineBatch?.retainedDetailCount)
+    throw new Error("W-Engine retained detail count summary drifted")
+  if (JSON.stringify(summary.wEngineBatch?.ids) !== JSON.stringify(manifest.summary?.wEngineBatch?.ids))
+    throw new Error("W-Engine retained detail ids summary drifted")
 
   console.log(`nanoka snapshot ${snapshot} verification passed`)
 }
