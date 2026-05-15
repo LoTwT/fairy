@@ -46,6 +46,7 @@ Source-specific notes:
 - [Mihoyo Deadly Assault](mihoyo/)
 - [Source migration candidates](source-migration-candidates.md)
 - [Source decision recommendation](source-decision-recommendation.md)
+- [Nanoka coverage matrix](nanoka-coverage-matrix.md)
 
 ## Next Segment
 

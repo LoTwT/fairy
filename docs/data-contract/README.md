@@ -19,6 +19,8 @@ mirror these contracts after cross-role review.
 - [GameData](game-data.md): cleaned generated game data consumed by core.
 - [Cleaned schema spec](cleaned-schema-spec.md): S5 cleaned-data publication,
   Deadly Assault domain, typed modifier pipeline, and package export contract.
+- [Cleaned schema contract](cleaned-schema-contract.md): Phase 0 schema-first
+  contract and field-class rules for the nanoka migration inventory.
 - [CalcResult](calc-result.md): JSON-only calculation output.
 - [Trace](trace.md): explainability and golden-test evidence model.
 - [Handler spec](handler-spec.md): safe typed modifier and handler boundary.
