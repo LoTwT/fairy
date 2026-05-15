@@ -8,6 +8,8 @@ const repoRoot = join(packageDir, "../..")
 const rootRegistryPath = join(repoRoot, "data/source-registry.json")
 const packageRegistryPath = join(packageDir, "source-registry.json")
 const matrixPath = join(repoRoot, "data/cleaned/audit/nanoka-coverage-matrix.json")
+const rootSnapshotDiffHistoryPath = join(repoRoot, "data/cleaned/audit/nanoka-snapshot-diff-history.json")
+const packageSnapshotDiffHistoryPath = join(packageDir, "cleaned/audit/nanoka-snapshot-diff-history.json")
 
 const redistributionRisks = new Set([
   "accepted-by-owner",
@@ -177,6 +179,43 @@ function validateMatrixAgainstRegistry(matrix, registry) {
     assert(sample.version === nanoka.configuredLiveVersion, `${sampleId}: enemy supporting sample must use configuredLiveVersion`)
     assert(enemyVariantRow.supportingSampleEntities?.includes(sampleId), `enemies.variantMapping: supporting samples must include ${sampleId}`)
   }
+
+  const snapshotDiffRow = resourceRows.get("metadata.snapshotDiffHistory")
+  assert(snapshotDiffRow !== undefined, "metadata.snapshotDiffHistory: missing snapshot diff history row")
+  assert(snapshotDiffRow.fieldClass === "derived", "metadata.snapshotDiffHistory: row must stay derived")
+  assert(snapshotDiffRow.sourcePolicy === "derived-from-source-registry", "metadata.snapshotDiffHistory: row must derive from source registry")
+  assert(snapshotDiffRow.status === "verified-from-nanoka", "metadata.snapshotDiffHistory: row must be verified from nanoka manifest")
+  assert(snapshotDiffRow.promotable === true, "metadata.snapshotDiffHistory: row must be promotable after snapshot-diff tool gate")
+  assert(snapshotDiffRow.sampleEntity === "nanoka-manifest", "metadata.snapshotDiffHistory: row must use nanoka manifest sample")
+  assert(!snapshotDiffRow.blockedBy?.includes("snapshot-diff-tool-required"), "metadata.snapshotDiffHistory: tool-required blocker must be removed after this gate")
+  assert(!snapshotDiffRow.blockedBy?.includes("approved-live-version-allowlist-required"), "metadata.snapshotDiffHistory: allowlist-required blocker must be removed after this gate")
+  assert(snapshotDiffRow.auditArtifact === "data/cleaned/audit/nanoka-snapshot-diff-history.json", "metadata.snapshotDiffHistory: row must point to snapshot diff artifact")
+}
+
+function validateSnapshotDiffHistory(registry) {
+  const rootText = readFileSync(rootSnapshotDiffHistoryPath, "utf8")
+  const packageText = readFileSync(packageSnapshotDiffHistoryPath, "utf8")
+  assert(rootText === packageText, "packages/data/cleaned/audit/nanoka-snapshot-diff-history.json must mirror data artifact byte-for-byte")
+
+  const nanoka = sourceById(registry, "nanoka-zzz")
+  const history = JSON.parse(rootText)
+  assert(history.schemaVersion === "nanoka-snapshot-diff-history/v0.1", "snapshot diff history schemaVersion drifted")
+  assert(history.sourceId === "nanoka-zzz", "snapshot diff history sourceId drifted")
+  assert(history.diffKind === "snapshot-derived-numeric-diff", "snapshot diff history must stay numeric-diff derived")
+  assert(history.officialPatchNoteText?.status === "not-found", "official patch note prose must stay not-found unless a nanoka endpoint is proven")
+  assert(history.runtimeCutoverReady === false, "snapshot diff history must not imply runtime cutover")
+  assert(JSON.stringify(history.approvedLiveVersions) === JSON.stringify(nanoka.approvedLiveVersions), "snapshot diff approvedLiveVersions must match source registry")
+  assert(history.latestResearchVersion === nanoka.latestResearchVersion, "snapshot diff latestResearchVersion must match source registry")
+  for (const snapshot of history.approvedSnapshots ?? []) {
+    assert(nanoka.approvedLiveVersions.includes(snapshot.sourceVersion), `${snapshot.sourceVersion}: snapshot diff artifact uses unapproved version`)
+    assert(/^sha256:[a-f0-9]{64}$/.test(snapshot.contentHash), `${snapshot.sourceVersion}: snapshot diff artifact requires sha256 contentHash`)
+  }
+  for (const pair of history.comparedPairs ?? []) {
+    assert(nanoka.approvedLiveVersions.includes(pair.fromVersion), `${pair.fromVersion}: snapshot diff pair fromVersion is not approved`)
+    assert(nanoka.approvedLiveVersions.includes(pair.toVersion), `${pair.toVersion}: snapshot diff pair toVersion is not approved`)
+    assert(pair.fromVersion !== nanoka.latestResearchVersion, "snapshot diff pair must not use latest research fromVersion")
+    assert(pair.toVersion !== nanoka.latestResearchVersion, "snapshot diff pair must not use latest research toVersion")
+  }
 }
 
 function validateCoveredSourceRefs(registry) {
@@ -205,6 +244,7 @@ function main() {
 
   validateRegistryShape(registry)
   validateMatrixAgainstRegistry(matrix, registry)
+  validateSnapshotDiffHistory(registry)
   validateCoveredSourceRefs(registry)
 
   console.log("source registry verification passed")

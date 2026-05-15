@@ -37,6 +37,7 @@
     "fetch:buhflipexplode-da": "node scripts/buhflipexplode-da-source.mjs fetch",
     "fetch:mihoyo-da": "node scripts/mihoyo-da-source.mjs fetch",
     "fetch:nanoka": "node scripts/nanoka-source.mjs fetch",
+    "derive:patch-history": "tsx scripts/nanoka-patch-history.ts",
     "prepublishOnly": "pnpm build",
     "sync-cleaned": "node scripts/sync-cleaned.mjs",
     "test": "vitest run",

@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "nanoka-snapshot-diff-history/v0.1",
+  "sourceId": "nanoka-zzz",
+  "generatedAt": "2026-05-15T13:40:00+08:00",
+  "diffKind": "snapshot-derived-numeric-diff",
+  "latestResearchVersion": "3.0.2+15625449",
+  "approvedLiveVersions": [
+    "2.8"
+  ],
+  "comparedPairs": [],
+  "officialPatchNoteText": {
+    "status": "not-found",
+    "decision": "D-20 R4.a"
+  },
+  "runtimeCutoverReady": false,
+  "approvedSnapshots": [
+    {
+      "sourceVersion": "2.8",
+      "contentHash": "sha256:91494c2c3bfda6ec47beccbf71066506ab0a315513aa751cf30e4c3a1dc0817d"
+    }
+  ],
+  "summary": {
+    "approvedSnapshotCount": 1,
+    "comparedPairCount": 0,
+    "changed": 0,
+    "new": 0,
+    "missing": 0
+  }
+}
