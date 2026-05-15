@@ -1,0 +1,193 @@
+{
+  "schemaVersion": "source-registry/v0.1.0",
+  "generatedAt": "2026-05-15T11:20:00+08:00",
+  "sources": [
+    {
+      "sourceId": "nanoka-zzz",
+      "kind": "wiki-static-json",
+      "scope": "numeric-primary",
+      "license": "unknown",
+      "tosStatus": "audited-pending",
+      "redistributionRisk": "accepted-by-owner",
+      "redistributionRiskRef": "D-20#8",
+      "server": "live",
+      "releaseChannel": "stable",
+      "configuredLiveVersion": "2.8",
+      "liveVersionRef": "manifest.zzz.live",
+      "latestResearchVersion": "3.0.2+15625449",
+      "approvedLiveVersions": [
+        "2.8"
+      ],
+      "approvedLiveVersionsScope": "snapshot-diff-historical-input | archived-audit-fixture",
+      "urlAllowlist": {
+        "manifestUrl": "^https://static\\.nanoka\\.cc/manifest\\.json$",
+        "versionedIndexUrls": "^https://static\\.nanoka\\.cc/zzz/(?:\\d[\\dA-Za-z.+-]*)/boss\\.json$",
+        "localizedDetailUrls": "^https://static\\.nanoka\\.cc/zzz/(?:\\d[\\dA-Za-z.+-]*)/(?:zh|en|ja|ko)/[a-z]+/\\d+\\.json$"
+      },
+      "fetchedAt": "2026-05-15T02:21:00+08:00",
+      "lastVerifiedAt": "2026-05-15T10:56:36+08:00",
+      "contentHash": "sha256:6213ac3b71f5827e850691c2f8547ec6657b7d8ab7e546c50b80252387e613b8",
+      "takedownPath": "docs/data-source/takedown-rollback.md#nanoka",
+      "fallbackPlan": "archived Excel V0.0.4 snapshot + D-17 Mihoyo archived + D-12 buhflipexplode archived",
+      "notes": [
+        "D-20 R1/R6 locks nanoka as the exclusive source for source-backed cleaned data.",
+        "Current cleaned output rows must use configuredLiveVersion; approvedLiveVersions[] is only for R4.a snapshot-diff history and archived audit fixtures.",
+        "manifest.zzz.latest is research/drift input only unless lo-user approves a new configured live version."
+      ]
+    },
+    {
+      "sourceId": "lo-user-excel",
+      "kind": "excel-workbook",
+      "scope": "archived-audit-baseline",
+      "license": "unknown",
+      "tosStatus": "owner-provided-archive",
+      "redistributionRisk": "archived-audit-baseline",
+      "releaseChannel": "archived",
+      "configuredLiveVersion": "2.6.0_R14028417",
+      "approvedLiveVersions": [
+        "2.6.0_R14028417"
+      ],
+      "urlAllowlist": {},
+      "fetchedAt": "2026-05-05T17:40:00+08:00",
+      "lastVerifiedAt": "2026-05-15T10:56:36+08:00",
+      "contentHash": "sha256:see-data/source/excel/META.md",
+      "takedownPath": "docs/data-source/takedown-rollback.md#excel",
+      "fallbackPlan": "archive-only after Phase 4 cutover",
+      "notes": [
+        "Excel remains release evidence and drift-audit baseline until Phase 4 cutover.",
+        "Excel must not become a silent runtime fallback for nanoka candidate output."
+      ]
+    },
+    {
+      "sourceId": "mihoyo-zzz-critical-assault",
+      "kind": "official-wiki-json",
+      "scope": "archived-audit-baseline",
+      "license": "unknown",
+      "tosStatus": "requires-human-review",
+      "redistributionRisk": "archived-audit-baseline",
+      "releaseChannel": "archived",
+      "configuredLiveVersion": "2026-05-05T0850Z",
+      "approvedLiveVersions": [
+        "2026-05-05T0850Z"
+      ],
+      "urlAllowlist": {},
+      "fetchedAt": "2026-05-05T08:50:00+08:00",
+      "lastVerifiedAt": "2026-05-15T10:56:36+08:00",
+      "contentHash": "sha256:see-data/source/raw/mihoyo/zzz-da/2026-05-05T0850Z/fetch-manifest.json",
+      "takedownPath": "docs/data-source/takedown-rollback.md#mihoyo",
+      "fallbackPlan": "archive-only after Phase 4 cutover",
+      "notes": [
+        "D-17 runtime path is retained until Phase 4 cutover, then becomes archived audit baseline.",
+        "No new runtime values may be silently filled from this source under R1/R6."
+      ]
+    },
+    {
+      "sourceId": "buhflipexplode-zzz-da",
+      "kind": "third-party-site-json",
+      "scope": "archived-audit-baseline",
+      "license": "GPL-3.0-code-archive",
+      "tosStatus": "requires-human-review",
+      "redistributionRisk": "archived-audit-baseline",
+      "releaseChannel": "archived",
+      "configuredLiveVersion": "2026-05-05T0445Z",
+      "approvedLiveVersions": [
+        "2026-05-05T0445Z"
+      ],
+      "urlAllowlist": {},
+      "fetchedAt": "2026-05-05T04:45:00+08:00",
+      "lastVerifiedAt": "2026-05-15T10:56:36+08:00",
+      "contentHash": "sha256:see-data/source/raw/buhflipexplode/2026-05-05T0445Z/fetch-manifest.json",
+      "takedownPath": "docs/data-source/takedown-rollback.md#buhflipexplode",
+      "fallbackPlan": "archive-only after Phase 4 cutover",
+      "notes": [
+        "D-12 runtime path is retained until Phase 4 cutover, then becomes archived audit baseline.",
+        "GPL JavaScript remains audit-only and must not enter MIT runtime code."
+      ]
+    },
+    {
+      "sourceId": "zzz-data-introduction",
+      "kind": "guide-reference",
+      "scope": "implementation-evidence",
+      "license": "unknown",
+      "tosStatus": "owner-provided-reference",
+      "redistributionRisk": "accepted-by-owner",
+      "redistributionRiskRef": "D-20#8",
+      "releaseChannel": "archived",
+      "configuredLiveVersion": "2026-05-05",
+      "approvedLiveVersions": [
+        "2026-05-05"
+      ],
+      "urlAllowlist": {},
+      "fetchedAt": "2026-05-05T00:00:00+08:00",
+      "lastVerifiedAt": "2026-05-15T10:56:36+08:00",
+      "contentHash": "sha256:see-data/source/source-manifest.json",
+      "takedownPath": "docs/data-source/takedown-rollback.md#guide-reference",
+      "fallbackPlan": "manual owner review",
+      "notes": [
+        "Reference evidence for formulas and implementation-owned constants; not a nanoka substitute."
+      ]
+    },
+    {
+      "sourceId": "nanoka-zzz-boss-manual-2026-05-07",
+      "kind": "manual-cross-check",
+      "scope": "historical-conflict-resolution",
+      "license": "unknown",
+      "tosStatus": "manual-lookup-only",
+      "redistributionRisk": "archived-audit-baseline",
+      "releaseChannel": "archived",
+      "configuredLiveVersion": "3.0.1+15390262",
+      "approvedLiveVersions": [
+        "3.0.1+15390262"
+      ],
+      "urlAllowlist": {},
+      "fetchedAt": "2026-05-07T00:00:00+08:00",
+      "lastVerifiedAt": "2026-05-15T10:56:36+08:00",
+      "contentHash": "sha256:manual-lookup-not-redistributed",
+      "takedownPath": "docs/data-source/takedown-rollback.md#nanoka",
+      "fallbackPlan": "historical audit row only",
+      "notes": [
+        "Historical manual tie-breaker for D-12/D-17 source conflicts; not part of the new nanoka adapter."
+      ]
+    },
+    {
+      "sourceId": "gachabase-zzz",
+      "kind": "third-party-site",
+      "scope": "rejected-candidate",
+      "license": "unknown",
+      "tosStatus": "requires-human-review",
+      "redistributionRisk": "forbidden",
+      "releaseChannel": "beta-route",
+      "configuredLiveVersion": "rejected",
+      "approvedLiveVersions": [],
+      "urlAllowlist": {},
+      "fetchedAt": "2026-05-14T23:30:00+08:00",
+      "lastVerifiedAt": "2026-05-15T10:56:36+08:00",
+      "contentHash": "sha256:see-data/cleaned/audit/source-migration-field-diff.json",
+      "takedownPath": "docs/data-source/takedown-rollback.md#gachabase",
+      "fallbackPlan": "not eligible without owner decision",
+      "notes": [
+        "PR #51 rejected Gachabase as a source candidate because routes were beta-gated."
+      ]
+    },
+    {
+      "sourceId": "prydwen-zzz",
+      "kind": "third-party-site",
+      "scope": "cross-check-only",
+      "license": "unknown",
+      "tosStatus": "requires-human-review",
+      "redistributionRisk": "cross-check-only",
+      "releaseChannel": "public-web",
+      "configuredLiveVersion": "sampled-pages",
+      "approvedLiveVersions": [],
+      "urlAllowlist": {},
+      "fetchedAt": "2026-05-14T23:30:00+08:00",
+      "lastVerifiedAt": "2026-05-15T10:56:36+08:00",
+      "contentHash": "sha256:see-data/cleaned/audit/source-migration-field-diff.json",
+      "takedownPath": "docs/data-source/takedown-rollback.md#prydwen",
+      "fallbackPlan": "not eligible without owner decision",
+      "notes": [
+        "PR #51 kept Prydwen as a sampled cross-check only; DOM scrape is not a primary source."
+      ]
+    }
+  ]
+}
