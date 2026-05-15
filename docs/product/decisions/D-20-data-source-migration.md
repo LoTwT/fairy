@@ -1,6 +1,6 @@
-# D-20 数据源迁移：Excel 永久停更后的换源决策 (v0.4.1)
+# D-20 数据源迁移：Excel 永久停更后的换源决策 (v0.4.2)
 
-> 状态：v0.4.1 final draft（2026-05-15，含 TL review precision fold-in）
+> 状态：v0.4.2 final draft（2026-05-15，含 TL + QA review precision fold-in）
 > Owner: @Product
 > Cross-reviewer: @TechLead（artifacts + adapter contract + Phase 2 实施）/ @QA（8 acceptance gates + Phase 0-4 validation）
 > 触发：lo-user msg `89a85bb2`（2026-05-14 17:29）— Excel 数据源停止更新
@@ -54,7 +54,7 @@ V0.0.4 ship 后（2026-05-14），lo-user 通告 Excel 数据源（`data/source/
 | **Patch history (R4.a)** | 版本数值改动 history | nanoka `manifest.available` + 每版本 raw snapshot hash + fairy 内部 diff tool（snapshot-derived numeric diff，**不是 prose patch-notes**）| `derived` |
 | **Archived audit baseline（不 runtime）** | Phase 3 drift audit reference + Phase 4 cutover 前的 fallback 留档 | 米游社 entry_page detail JSON (D-17) + buhflipexplode (D-12) | `archived-audit-baseline` |
 | **排除** | beta/CBT/leaks/datamine/preview | — | `forbidden` |
-| **移除（R4）** | 鸣徽 (Resonium / Lost Void) | — | `removed/out-of-product-scope`（不进 cleaned schema 也不进 matrix）|
+| **移除（R4）** | 鸣徽 (Resonium / Lost Void) | — | `removed/out-of-product-scope`（不进 formal data / 不进 matrix；现有 canonical schema `GameData.resonium` 字段 presence 为 **compatibility-only**，直到 V0.1.0 schema cleanup 显式移除或重定义）|
 
 **关键 framing 调整**（vs v0.3）：
 - DA 从 "explicit retained-non-nanoka exception" → **nanoka-exclusive**（per R1+R6 final lock）
@@ -349,7 +349,7 @@ lo-user 已 explicitly 接受以下残余风险（per msg `74b52454`）：
 | `data/cleaned/audit/nanoka-coverage-matrix.json`（PR #55）| 45-row matrix 机器版 |
 | `docs/data-source/source-migration-candidates.md`（PR #51）| 三源 audit 历史记录 |
 | `docs/data-source/da-sentinel-patch-nanoka-feasibility.md`（PR #54）| DA/Sentinel/patch feasibility audit |
-| `docs/data-contract/source-adapter-contract.md`（PR #54）| Adapter contract |
+| `docs/data-contract/source-adapter-contract.md`（PR #51）| Adapter contract |
 | `docs/qa/golden-source-coverage.md` | Phase 4 后新增 G27/G28 anchor entries |
 | `data/source-registry.json`（Phase 2 NEW）| Supply chain audit trail 实现 |
 | `docs/data-source/takedown-rollback.md`（Phase 2 NEW）| Q4 takedown response runbook |
@@ -391,6 +391,7 @@ lo-user 已 explicitly 接受以下残余风险（per msg `74b52454`）：
 
 ## Changelog
 
+- **v0.4.2** (2026-05-15) — QA review precision fold-in per PR #56 comment 4456471475：(1) §3 Resonium row 措辞修正为 "不进 formal data / 不进 matrix；现有 canonical schema `GameData.resonium` 字段 presence 为 compatibility-only，until V0.1.0 schema cleanup 显式移除或重定义"（避免与 PR #55 compatibility-only 边界冲突）；(2) §11 cross-doc references `source-adapter-contract.md` attribution 修正 PR #54 → PR #51（实际起源）
 - **v0.4.1** (2026-05-15) — TL review precision fold-in per PR #56 comment 4453935202 / msg `547fbd05`：(1) §4.1 source-registry `urlPattern` → `urlAllowlist.{manifestUrl, versionedIndexUrls, localizedDetailUrls}`（覆盖 `manifest.json` + DA `/boss.json` index + localized detail 3 类）；(2) §4.2 / §4.4 Formal-Live Gate 分清 `current cleaned output` 与 `snapshot-diff historical input / archived audit fixture`：current cleaned 必须 == `configuredLiveVersion`，`approvedLiveVersions[]` 不放宽 current cleaned output；(3) §13 risk log "最新 DA period" → "当前 live DA period"；(4) §13 risk log panel normalization 引用 Gate 3 + Phase 2 panel-specific acceptance（替代 Gate 4 — Gate 4 是 DA-specific）
 - **v0.4** (2026-05-15) — Final lock per lo-user `4b7cb27b`：R1/R4/R6 final lock + nanoka-exclusive for ALL source-backed data（含 DA）+ 鸣徽 removed + Sentinel+patch history 进 V0.1.0 scope（R4.a snapshot-diff）+ Formal-Live Gate (`manifest.zzz.live`) 新增 + 8 QA gates spec fold-in + 45-row matrix (PR #55) reference + D-17/D-12 retained as archived audit baseline until Phase 4 cutover + Phase 2 实施 deliverables 完整化
 - **v0.3** (2026-05-14 18:08) — QA consistency fix msg `c9c49106`：§8 D-20.OQ.3 措辞与 §5/§10 对齐
