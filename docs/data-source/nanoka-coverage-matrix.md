@@ -1,11 +1,11 @@
 # Nanoka Coverage Matrix
 
-Status: Phase 2 Bangboo element gate
+Status: Phase 2 Drive Disc slot/stat audit gate
 Owner: @TechLead
 Reviewers: @Product, @QA
 Related: D-20 data-source migration, task #121, task #122, task #125, task #127,
 task #138, task #140, task #142, task #144, task #146, task #148, task #150,
-task #152
+task #152, task #154
 
 This matrix is schema-first. It is derived from the canonical `GameData` and
 `BattleSnapshot` schemas, then checked against sampled nanoka detail endpoints.
@@ -35,7 +35,7 @@ The release source version is no longer the provisional
 |---|---|
 | `verified-from-nanoka` | Sampled nanoka endpoint and raw path exist. The field is promotable only when `promotable=true`. |
 | `needs-tl-research` | Evidence is incomplete, semantic mapping is unresolved, or transform rules are not yet proven. |
-| `needs-owner-research` | TL exhausted nanoka research and the item must be escalated to lo-user. No current rows use this status yet. |
+| `needs-owner-research` | TL exhausted nanoka research and the item must be escalated to lo-user before promotion or scope removal. |
 | `deferred` | Explicitly not promotable in the current implementation step, or implementation-owned rather than a nanoka gameplay row. |
 
 The machine-readable version is
@@ -55,7 +55,8 @@ The machine-readable version is
 | Enemy / Dullahan research sample | `https://static.nanoka.cc/zzz/3.0.2+15625449/zh/monster/30000.json` | Research-only `monster_info.*.stats`, `curves`, `element`, `element_abnormal`; not approved for cleaned output. |
 | Live enemy variant mapping samples | `https://static.nanoka.cc/zzz/2.8/zh/monster/{id}.json` | Approved live samples for Dullahan `30000`, Greta `30004`, Ruthless Fiend `200141`, Notorious Hati `200014`, Notorious Armored Hati `200034`, Miasma Priest `30033`, and Notorious Pompey `300211`. Task #144 proves `detail.monster_id -> monster_info[monster_id]` for G13/G18/G19/G20 source artifacts. |
 | Live W-Engine / Yixuan signature sample | `https://static.nanoka.cc/zzz/2.8/zh/weapon/14137.json` | Approved live sample for W-Engine identity; `base_property`, `rand_property`, `level`, `stars`, and `talents` remain blocked for stat/passive promotion until mapping/templates are proven. |
-| Live Drive Disc / Woodpecker Electro sample | `https://static.nanoka.cc/zzz/2.8/zh/equipment/31000.json` | Approved live sample for Drive Disc identity; `desc2` / `desc4` text exists, but typed modifiers are not promotable until deterministic parsing/templates exist. |
+| Live Drive Disc / Woodpecker Electro sample | `https://static.nanoka.cc/zzz/2.8/zh/equipment/31000.json` | Approved live sample for Drive Disc identity; `desc2` / `desc4` text exists, but typed modifiers are not promotable until deterministic parsing/templates exist. Task #154 confirms this detail does not expose slot/main/substat tables. |
+| Live Drive Disc / equipment index audit | `https://static.nanoka.cc/zzz/2.8/equipment.json` | Failed-evidence audit only: live equipment index exposes set name/`desc2`/`desc4` text, not slot/main/substat tables. Candidate stat-table endpoints checked in `data/cleaned/audit/nanoka-drive-disc-slot-stat-audit.json` returned 404. |
 | Manifest / live gate | `https://static.nanoka.cc/manifest.json` | `zzz.live = 2.8`, `zzz.latest = 3.0.2+15625449`, `zzz.available[]` supports approved-live version allowlists and snapshot-derived patch diff history. |
 | Live Adrenaline / Resonance sample / Yixuan | `https://static.nanoka.cc/zzz/2.8/zh/character/1371.json` | `stats.rp_max = 120`, `stats.rp_recover = 200`, `fever_recovery`, and `rp_recovery` raw paths exist in the configured live version. |
 | Live Deadly Assault index | `https://static.nanoka.cc/zzz/2.8/boss.json` | 38 live DA entries; all sampled `zh/boss/{id}.json` details returned 200 in PR #54. |
@@ -102,8 +103,8 @@ until Phase 3/4 drift/cutover.
 
 ## Human-Readable Summary
 
-Machine summary after task #152: 45 rows total, 36 `verified-from-nanoka`, 3
-`needs-tl-research`, 0 `needs-owner-research`, 6 `deferred`, and 20
+Machine summary after task #154: 45 rows total, 36 `verified-from-nanoka`, 2
+`needs-tl-research`, 1 `needs-owner-research`, 6 `deferred`, and 20
 `promotableNow`.
 
 | Area | Status | Promote Now | Main Blocker |
@@ -125,20 +126,27 @@ Machine summary after task #152: 45 rows total, 36 `verified-from-nanoka`, 3
 | W-Engine stats | verified-from-nanoka | no | Detail endpoint exists; ID mapping and stat normalization are unresolved. |
 | W-Engine passive | verified-from-nanoka | no | Raw text/objects exist; typed modifier template is unresolved. |
 | Drive Disc set effects | verified-from-nanoka | no | Raw text exists; typed modifier template is unresolved. |
-| Drive Disc slot/main/sub stats | needs-tl-research | no | Not found in sampled equipment detail endpoint. |
+| Drive Disc slot/main/sub stats | needs-owner-research | no | Task #154 exhausted live nanoka equipment detail/index and candidate stat-table endpoints; no slot/main/substat table source was found, so lo-user/Product must decide out-of-scope vs approved non-nanoka source research. |
 | Resonium / Lost Void | removed | no | Removed from V0.1.0 product scope by R4; no formal data expected. |
 | Deadly Assault periods/buffs | verified-from-nanoka | yes | Structured source artifact mapping exists for period, zones, buffs, monsters, weakness, rank goals, and `boss_adjust`; runtime cutover still waits for Phase 3 drift audit. |
 | Formula rule tables | mixed | no | Must be split per rule: defense/rounding may be implementation-owned, while anomaly thresholds, daze recovery, disorder, and attribute mappings need row-level owner/source decisions. |
 
 ## Remaining TL Research Rows
 
-After task #152, 3 rows remain in `needs-tl-research`:
+After task #154, 2 rows remain in `needs-tl-research`:
 
-- `driveDiscs.slotAndSubstatTables` — sampled equipment detail did not expose
-  slot/main/sub-stat tables.
 - `rules.disorderFormula` — source or implementation owner still unresolved.
 - `rules.disorderDazeLevelZone` — source or implementation owner still
   unresolved.
+
+## Owner Research / Decision Rows
+
+After task #154, 1 row is escalated to `needs-owner-research`:
+
+- `driveDiscs.slotAndSubstatTables` — approved live nanoka equipment detail and
+  index expose only Drive Disc set identity/effect text; checked candidate
+  stat-table endpoints are absent. Owner decision required: remove this from
+  V0.1.0 formal-data scope or approve non-nanoka source research.
 
 ## Current Scope Rows Added By R1/R4/R6
 
