@@ -110,7 +110,7 @@ describe("nanoka source gate", () => {
     const matrix = readJson<CoverageMatrix>("data/cleaned/audit/nanoka-coverage-matrix.json")
     const rows = new Map(matrix.rows.map(row => [row.fieldId, row]))
 
-    expect(matrix.status).toBe("phase-2-agent-promotion-extra-gate")
+    expect(matrix.status).toBe("phase-2-bangboo-element-gate")
     expect(rows.get("metadata.sources")).toMatchObject({
       status: "verified-from-nanoka",
       promotable: true,
@@ -143,7 +143,7 @@ describe("nanoka source gate", () => {
     const rows = new Map(matrix.rows.map(row => [row.fieldId, row]))
     const row = rows.get("agents.promotionExtraStats")
 
-    expect(matrix.status).toBe("phase-2-agent-promotion-extra-gate")
+    expect(matrix.status).toBe("phase-2-bangboo-element-gate")
     expect(row).toMatchObject({
       status: "verified-from-nanoka",
       promotable: true,
@@ -163,6 +163,26 @@ describe("nanoka source gate", () => {
     expect(row?.blockedBy).toContain("field:runtime-cutover-drift-required")
     expect(row?.transformRule).toContain("/id matches the requested agent id")
     expect(row?.transformRule).toContain("runtimeCutoverReady remains false")
+  })
+
+  it("promotes Bangboo element only from deterministic live skill damage text", () => {
+    const matrix = readJson<CoverageMatrix>("data/cleaned/audit/nanoka-coverage-matrix.json")
+    const rows = new Map(matrix.rows.map(row => [row.fieldId, row]))
+    const row = rows.get("bangboos.element")
+
+    expect(matrix.status).toBe("phase-2-bangboo-element-gate")
+    expect(row).toMatchObject({
+      status: "verified-from-nanoka",
+      promotable: true,
+      sampleEntity: "nanoka-bangboo-plugboo-live-54008",
+    })
+    expect(row?.blockedBy ?? []).toEqual([])
+    expect(row?.rawFieldPaths).toEqual(expect.arrayContaining([
+      "/id",
+      "/skill/*/level/*/desc",
+    ]))
+    expect(row?.transformRule).toContain("colored damage phrase")
+    expect(row?.transformRule).toContain("source /id to match the requested Bangboo id")
   })
 
   it("locks enemy variant mapping to approved live monster detail samples", () => {

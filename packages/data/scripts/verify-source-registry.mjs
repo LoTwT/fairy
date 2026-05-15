@@ -118,7 +118,7 @@ function validateMatrixAgainstRegistry(matrix, registry) {
   const nanoka = sourceById(registry, "nanoka-zzz")
   validateNanokaRegistry(nanoka)
 
-  assert(matrix.status === "phase-2-agent-promotion-extra-gate", "matrix status must match the latest agent promotion extra gate")
+  assert(matrix.status === "phase-2-bangboo-element-gate", "matrix status must match the latest Bangboo element gate")
   assert(matrix.sourceVersionPolicy?.liveVersionRef === nanoka.liveVersionRef, "matrix liveVersionRef must match nanoka registry")
   assert(matrix.sourceVersionPolicy?.defaultReleaseSourceVersion === nanoka.configuredLiveVersion, "matrix default release version must match configuredLiveVersion")
   assert(matrix.sourceVersionResolved === nanoka.configuredLiveVersion, "matrix resolved sourceVersion must match configuredLiveVersion")
@@ -175,6 +175,18 @@ function validateMatrixAgainstRegistry(matrix, registry) {
   assert((metadataSourceRefsRow.blockedBy ?? []).length === 0, "metadata.sourceRefs: resolved SourceRef blockers must be removed")
   for (const rawPath of ["/assets/*/url", "/assets/*/localPath", "/assets/*/sourceVersion"]) {
     assert(metadataSourceRefsRow.rawFieldPaths?.includes(rawPath), `metadata.sourceRefs: missing raw path ${rawPath}`)
+  }
+
+  const bangbooElementRow = resourceRows.get("bangboos.element")
+  assert(bangbooElementRow !== undefined, "bangboos.element: missing Bangboo element row")
+  assert(bangbooElementRow.status === "verified-from-nanoka", "bangboos.element: row must be verified after live skill damage text mapping")
+  assert(bangbooElementRow.promotable === true, "bangboos.element: structured source artifact must be promotable after live mapping gate")
+  assert(bangbooElementRow.sampleEntity === "nanoka-bangboo-plugboo-live-54008", "bangboos.element: row must use live Plugboo sample evidence")
+  assert((bangbooElementRow.blockedBy ?? []).length === 0, "bangboos.element: resolved element blockers must be removed")
+  assert(bangbooElementRow.transformRule?.includes("colored damage phrase"), "bangboos.element: transform must bind to explicit colored damage text")
+  assert(bangbooElementRow.transformRule?.includes("source /id to match the requested Bangboo id"), "bangboos.element: transform must bind source /id to requested Bangboo id")
+  for (const rawPath of ["/id", "/skill/*/level/*/desc"]) {
+    assert(bangbooElementRow.rawFieldPaths?.includes(rawPath), `bangboos.element: missing raw path ${rawPath}`)
   }
 
   const promotionExtraRow = resourceRows.get("agents.promotionExtraStats")
