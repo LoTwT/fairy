@@ -26,6 +26,7 @@
   ],
   "matrixStatus": "phase-3-drift-foundation-gate",
   "runtimeCutoverReady": false,
+  "exitCleanSyncEligible": false,
   "counts": {
     "same": 0,
     "changed": 0,

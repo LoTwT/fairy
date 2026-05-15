@@ -33,6 +33,7 @@
 | **D-18** | V1 dogfooding gate（DD-003） | ✅ 锁定（2026-05-05） + 通过（2026-05-08 4/5） | V1 release gate 第 2 项从"3+ 社区试用"收窄为 lo-user 单人深度 dogfood + QA 回归；known limitations 显式标注未经社区广泛验证 + Day 3 跳过 | 高 |
 | **D-19** | V1 CLI 输出改革 | ✅ 锁定（2026-05-06） | `fairy calc` 默认 `--view brief` summary-first；完整 trace 通过 `--view verbose`；默认输出 `summary.lanes.nonCrit` / `summary.lanes.crit`，不使用期望伤害；`--result-mode expected` 保留为可选理论分析；其他二元输入差异通过 `fairy compare` | 中 |
 | **D-20** | 数据源迁移（Excel 永久停 → nanoka-exclusive）| ✅ 锁定（2026-05-15）| Path C nanoka-exclusive for ALL source-backed cleaned data（含 DA）；R1/R4/R6 final lock；Formal-Live Gate `manifest.zzz.live`（cleaned output 强制 live，latest 仅 research）；鸣徽 removed；Sentinel + patch history 进 V0.1.0 scope（R4.a snapshot-derived numeric diff）；D-17/D-12 archived audit baseline 保留到 Phase 4 cutover；V0.1.0 minor bump (schema breaking)；8 QA acceptance gates；45-row canonical-generated coverage matrix；Phase 0-4 plan ~3-4 周 sprint。详见 [`D-20-data-source-migration.md`](D-20-data-source-migration.md) | 中 |
+| **D-20-R** | Phase 3 drift rulings | 🟡 执行中 | G01-G26 first-sync rulings 记录在 [`data-source-rulings.md`](data-source-rulings.md)；ruling 只清除 pending queue，不代表 runtime cutover 或 exit-clean sync | 中 |
 | **D-1=D**（S2 节奏） | V1 推进顺序 | ✅ 锁定 | S2 双门槛：schema discovery + 并行 scraper 准备；S6 全量化最后；不允许 data 全量化阻塞 core 启动 | 中 |
 
 ---

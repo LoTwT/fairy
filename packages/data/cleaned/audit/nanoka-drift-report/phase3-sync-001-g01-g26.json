@@ -1,7 +1,7 @@
 {
   "schemaVersion": "nanoka-drift-report/v0.1",
   "syncId": "phase3-sync-001-g01-g26",
-  "generatedAt": "2026-05-15T17:25:00+08:00",
+  "generatedAt": "2026-05-15T17:45:00+08:00",
   "candidate": {
     "sourceId": "nanoka-zzz",
     "sourceVersion": "2.8",
@@ -26,6 +26,7 @@
   ],
   "matrixStatus": "phase-3-drift-foundation-gate",
   "runtimeCutoverReady": false,
+  "exitCleanSyncEligible": false,
   "counts": {
     "same": 0,
     "changed": 0,
@@ -152,18 +153,16 @@
           "nanoka-monster-miasma-priest-live-30033",
           "nanoka-monster-notorious-pompey-live-300211"
         ],
-        "missingRequiredSampleEntities": []
+        "missingRequiredSampleEntities": [],
+        "rulingSummary": "Accepted DA boss-context source replacement: nanoka approved-live period detail covers boss_adjust and period context used by the archived G01 default-defense replay; Phase 4 still owns runtime cutover."
       },
       "status": "semantic-mismatch",
-      "severity": "blocking",
-      "rulingStatus": "pending",
-      "blockedBy": [
-        "phase3:ruling-required",
-        "phase3:semantic-equivalence-ruling-required",
-        "field:runtime-cutover-drift-required",
-        "field:enemy-level-formula-required"
-      ],
-      "notes": "First sync has nanoka candidate coverage, but Phase 3 has not ruled semantic equivalence against the archived golden replay baseline."
+      "severity": "info",
+      "rulingStatus": "accepted",
+      "rulingId": "phase3-r001",
+      "rulingDecisionLog": "docs/product/decisions/data-source-rulings.md#phase3-r001-g01",
+      "blockedBy": [],
+      "notes": "Accepted DA boss-context source replacement: nanoka approved-live period detail covers boss_adjust and period context used by the archived G01 default-defense replay; Phase 4 still owns runtime cutover."
     },
     {
       "entityType": "enemy",
@@ -283,18 +282,16 @@
           "nanoka-monster-miasma-priest-live-30033",
           "nanoka-monster-notorious-pompey-live-300211"
         ],
-        "missingRequiredSampleEntities": []
+        "missingRequiredSampleEntities": [],
+        "rulingSummary": "Accepted DA boss-context source replacement for corrupted-shield defense replay; the shield formula remains implementation-owned and nanoka supplies the period/boss evidence only."
       },
       "status": "semantic-mismatch",
-      "severity": "blocking",
-      "rulingStatus": "pending",
-      "blockedBy": [
-        "phase3:ruling-required",
-        "phase3:semantic-equivalence-ruling-required",
-        "field:runtime-cutover-drift-required",
-        "field:enemy-level-formula-required"
-      ],
-      "notes": "First sync has nanoka candidate coverage, but Phase 3 has not ruled semantic equivalence against the archived golden replay baseline."
+      "severity": "info",
+      "rulingStatus": "accepted",
+      "rulingId": "phase3-r002",
+      "rulingDecisionLog": "docs/product/decisions/data-source-rulings.md#phase3-r002-g02",
+      "blockedBy": [],
+      "notes": "Accepted DA boss-context source replacement for corrupted-shield defense replay; the shield formula remains implementation-owned and nanoka supplies the period/boss evidence only."
     },
     {
       "entityType": "agent",
@@ -355,16 +352,16 @@
         "availableSampleEntities": [
           "nanoka-character-nekomata-live-1021"
         ],
-        "missingRequiredSampleEntities": []
+        "missingRequiredSampleEntities": [],
+        "rulingSummary": "Accepted agent panel normalization contract: nanoka live character stats/level rows deterministically derive base panel values; G03 crit expected-value behavior is formula-owned."
       },
       "status": "semantic-mismatch",
-      "severity": "blocking",
-      "rulingStatus": "pending",
-      "blockedBy": [
-        "phase3:ruling-required",
-        "phase3:semantic-equivalence-ruling-required"
-      ],
-      "notes": "First sync has nanoka candidate coverage, but Phase 3 has not ruled semantic equivalence against the archived golden replay baseline."
+      "severity": "info",
+      "rulingStatus": "accepted",
+      "rulingId": "phase3-r003",
+      "rulingDecisionLog": "docs/product/decisions/data-source-rulings.md#phase3-r003-g03",
+      "blockedBy": [],
+      "notes": "Accepted agent panel normalization contract: nanoka live character stats/level rows deterministically derive base panel values; G03 crit expected-value behavior is formula-owned."
     },
     {
       "entityType": "rules",
@@ -435,17 +432,16 @@
         ],
         "requiredSampleEntities": [],
         "availableSampleEntities": [],
-        "missingRequiredSampleEntities": []
+        "missingRequiredSampleEntities": [],
+        "rulingSummary": "Accepted implementation-owned penetration/damage formula boundary; nanoka has no formula table and the archived guide/golden replay remains the executable proof anchor."
       },
       "status": "semantic-mismatch",
-      "severity": "blocking",
-      "rulingStatus": "pending",
-      "blockedBy": [
-        "phase3:ruling-required",
-        "phase3:semantic-equivalence-ruling-required",
-        "implementation-owned-runtime-formula"
-      ],
-      "notes": "First sync has nanoka candidate coverage, but Phase 3 has not ruled semantic equivalence against the archived golden replay baseline."
+      "severity": "info",
+      "rulingStatus": "accepted",
+      "rulingId": "phase3-r004",
+      "rulingDecisionLog": "docs/product/decisions/data-source-rulings.md#phase3-r004-g04",
+      "blockedBy": [],
+      "notes": "Accepted implementation-owned penetration/damage formula boundary; nanoka has no formula table and the archived guide/golden replay remains the executable proof anchor."
     },
     {
       "entityType": "agent",
@@ -546,19 +542,16 @@
           "nanoka-character-yixuan-1371",
           "nanoka-boss-live-69036"
         ],
-        "missingRequiredSampleEntities": []
+        "missingRequiredSampleEntities": [],
+        "rulingSummary": "Accepted split responsibility: nanoka supplies Yixuan rupture raw fields and DA boss context, while sheer defense-skip semantics remain implementation-owned until the rupture semantic mapper lands."
       },
       "status": "semantic-mismatch",
-      "severity": "blocking",
-      "rulingStatus": "pending",
-      "blockedBy": [
-        "phase3:ruling-required",
-        "phase3:semantic-equivalence-ruling-required",
-        "field:rupture-semantic-mapping-required",
-        "implementation-owned-runtime-formula",
-        "field:runtime-cutover-drift-required"
-      ],
-      "notes": "First sync has nanoka candidate coverage, but Phase 3 has not ruled semantic equivalence against the archived golden replay baseline."
+      "severity": "info",
+      "rulingStatus": "accepted",
+      "rulingId": "phase3-r005",
+      "rulingDecisionLog": "docs/product/decisions/data-source-rulings.md#phase3-r005-g05",
+      "blockedBy": [],
+      "notes": "Accepted split responsibility: nanoka supplies Yixuan rupture raw fields and DA boss context, while sheer defense-skip semantics remain implementation-owned until the rupture semantic mapper lands."
     },
     {
       "entityType": "agent",
@@ -659,19 +652,16 @@
           "nanoka-character-yixuan-1371",
           "nanoka-boss-live-69036"
         ],
-        "missingRequiredSampleEntities": []
+        "missingRequiredSampleEntities": [],
+        "rulingSummary": "Accepted split responsibility for sheer-vs-default ratio replay: nanoka source coverage is present and the ratio formula remains implementation-owned."
       },
       "status": "semantic-mismatch",
-      "severity": "blocking",
-      "rulingStatus": "pending",
-      "blockedBy": [
-        "phase3:ruling-required",
-        "phase3:semantic-equivalence-ruling-required",
-        "field:rupture-semantic-mapping-required",
-        "implementation-owned-runtime-formula",
-        "field:runtime-cutover-drift-required"
-      ],
-      "notes": "First sync has nanoka candidate coverage, but Phase 3 has not ruled semantic equivalence against the archived golden replay baseline."
+      "severity": "info",
+      "rulingStatus": "accepted",
+      "rulingId": "phase3-r006",
+      "rulingDecisionLog": "docs/product/decisions/data-source-rulings.md#phase3-r006-g06",
+      "blockedBy": [],
+      "notes": "Accepted split responsibility for sheer-vs-default ratio replay: nanoka source coverage is present and the ratio formula remains implementation-owned."
     },
     {
       "entityType": "rules",
@@ -728,17 +718,16 @@
         ],
         "requiredSampleEntities": [],
         "availableSampleEntities": [],
-        "missingRequiredSampleEntities": []
+        "missingRequiredSampleEntities": [],
+        "rulingSummary": "Accepted implementation-owned rounding boundary; no nanoka source table is expected for per-segment ceil behavior."
       },
       "status": "semantic-mismatch",
-      "severity": "blocking",
-      "rulingStatus": "pending",
-      "blockedBy": [
-        "phase3:ruling-required",
-        "phase3:semantic-equivalence-ruling-required",
-        "implementation-owned-runtime-formula"
-      ],
-      "notes": "First sync has nanoka candidate coverage, but Phase 3 has not ruled semantic equivalence against the archived golden replay baseline."
+      "severity": "info",
+      "rulingStatus": "accepted",
+      "rulingId": "phase3-r007",
+      "rulingDecisionLog": "docs/product/decisions/data-source-rulings.md#phase3-r007-g07",
+      "blockedBy": [],
+      "notes": "Accepted implementation-owned rounding boundary; no nanoka source table is expected for per-segment ceil behavior."
     },
     {
       "entityType": "agent",
@@ -813,17 +802,16 @@
         "availableSampleEntities": [
           "nanoka-character-nekomata-live-1021"
         ],
-        "missingRequiredSampleEntities": []
+        "missingRequiredSampleEntities": [],
+        "rulingSummary": "Accepted agent combat-panel unit boundary for anomaly mastery flooring; nanoka provides raw panel fields and core owns the floor-before-buildup behavior."
       },
       "status": "semantic-mismatch",
-      "severity": "blocking",
-      "rulingStatus": "pending",
-      "blockedBy": [
-        "phase3:ruling-required",
-        "phase3:semantic-equivalence-ruling-required",
-        "implementation-owned-runtime-formula"
-      ],
-      "notes": "First sync has nanoka candidate coverage, but Phase 3 has not ruled semantic equivalence against the archived golden replay baseline."
+      "severity": "info",
+      "rulingStatus": "accepted",
+      "rulingId": "phase3-r008",
+      "rulingDecisionLog": "docs/product/decisions/data-source-rulings.md#phase3-r008-g08",
+      "blockedBy": [],
+      "notes": "Accepted agent combat-panel unit boundary for anomaly mastery flooring; nanoka provides raw panel fields and core owns the floor-before-buildup behavior."
     },
     {
       "entityType": "deadlyAssault",
@@ -921,18 +909,16 @@
           "nanoka-monster-miasma-priest-live-30033",
           "nanoka-monster-notorious-pompey-live-300211"
         ],
-        "missingRequiredSampleEntities": []
+        "missingRequiredSampleEntities": [],
+        "rulingSummary": "Accepted DA daze-context source replacement: nanoka period detail covers boss context and daze-related source evidence while display flooring remains implementation-owned."
       },
       "status": "semantic-mismatch",
-      "severity": "blocking",
-      "rulingStatus": "pending",
-      "blockedBy": [
-        "phase3:ruling-required",
-        "phase3:semantic-equivalence-ruling-required",
-        "field:runtime-cutover-drift-required",
-        "field:enemy-level-formula-required"
-      ],
-      "notes": "First sync has nanoka candidate coverage, but Phase 3 has not ruled semantic equivalence against the archived golden replay baseline."
+      "severity": "info",
+      "rulingStatus": "accepted",
+      "rulingId": "phase3-r009",
+      "rulingDecisionLog": "docs/product/decisions/data-source-rulings.md#phase3-r009-g09",
+      "blockedBy": [],
+      "notes": "Accepted DA daze-context source replacement: nanoka period detail covers boss context and daze-related source evidence while display flooring remains implementation-owned."
     },
     {
       "entityType": "agent",
@@ -1025,18 +1011,16 @@
           "nanoka-monster-miasma-priest-live-30033",
           "nanoka-monster-notorious-pompey-live-300211"
         ],
-        "missingRequiredSampleEntities": []
+        "missingRequiredSampleEntities": [],
+        "rulingSummary": "Accepted attribute-alias boundary: nanoka supplies Yixuan/monster raw coverage, while Frost->Ice and Auric Ink->Ether alias semantics stay implementation-owned."
       },
       "status": "semantic-mismatch",
-      "severity": "blocking",
-      "rulingStatus": "pending",
-      "blockedBy": [
-        "phase3:ruling-required",
-        "phase3:semantic-equivalence-ruling-required",
-        "field:attribute-mapping-source-required",
-        "field:resistance-unit-mapping-required"
-      ],
-      "notes": "First sync has nanoka candidate coverage, but Phase 3 has not ruled semantic equivalence against the archived golden replay baseline."
+      "severity": "info",
+      "rulingStatus": "accepted",
+      "rulingId": "phase3-r010",
+      "rulingDecisionLog": "docs/product/decisions/data-source-rulings.md#phase3-r010-g10",
+      "blockedBy": [],
+      "notes": "Accepted attribute-alias boundary: nanoka supplies Yixuan/monster raw coverage, while Frost->Ice and Auric Ink->Ether alias semantics stay implementation-owned."
     },
     {
       "entityType": "agent",
@@ -1115,18 +1099,16 @@
         "availableSampleEntities": [
           "nanoka-character-yixuan-1371"
         ],
-        "missingRequiredSampleEntities": []
+        "missingRequiredSampleEntities": [],
+        "rulingSummary": "Accepted damage-bonus alias boundary: nanoka supplies combat-panel raw fields and core owns alias routing to Ice/Ether damage-bonus fields."
       },
       "status": "semantic-mismatch",
-      "severity": "blocking",
-      "rulingStatus": "pending",
-      "blockedBy": [
-        "phase3:ruling-required",
-        "phase3:semantic-equivalence-ruling-required",
-        "field:attribute-mapping-source-required",
-        "field:stat-unit-mapping-required"
-      ],
-      "notes": "First sync has nanoka candidate coverage, but Phase 3 has not ruled semantic equivalence against the archived golden replay baseline."
+      "severity": "info",
+      "rulingStatus": "accepted",
+      "rulingId": "phase3-r011",
+      "rulingDecisionLog": "docs/product/decisions/data-source-rulings.md#phase3-r011-g11",
+      "blockedBy": [],
+      "notes": "Accepted damage-bonus alias boundary: nanoka supplies combat-panel raw fields and core owns alias routing to Ice/Ether damage-bonus fields."
     },
     {
       "entityType": "enemy",
@@ -1224,18 +1206,16 @@
           "nanoka-monster-miasma-priest-live-30033",
           "nanoka-monster-notorious-pompey-live-300211"
         ],
-        "missingRequiredSampleEntities": []
+        "missingRequiredSampleEntities": [],
+        "rulingSummary": "Accepted anomaly-threshold split responsibility: nanoka enemy threshold raw coverage exists, while trigger-count/rank threshold formula constants remain implementation-owned."
       },
       "status": "semantic-mismatch",
-      "severity": "blocking",
-      "rulingStatus": "pending",
-      "blockedBy": [
-        "phase3:ruling-required",
-        "phase3:semantic-equivalence-ruling-required",
-        "field:anomaly-threshold-rule-source-required",
-        "field:anomaly-threshold-mapping-required"
-      ],
-      "notes": "First sync has nanoka candidate coverage, but Phase 3 has not ruled semantic equivalence against the archived golden replay baseline."
+      "severity": "info",
+      "rulingStatus": "accepted",
+      "rulingId": "phase3-r012",
+      "rulingDecisionLog": "docs/product/decisions/data-source-rulings.md#phase3-r012-g12",
+      "blockedBy": [],
+      "notes": "Accepted anomaly-threshold split responsibility: nanoka enemy threshold raw coverage exists, while trigger-count/rank threshold formula constants remain implementation-owned."
     },
     {
       "entityType": "enemy",
@@ -1351,19 +1331,16 @@
           "nanoka-monster-miasma-priest-live-30033",
           "nanoka-monster-notorious-pompey-live-300211"
         ],
-        "missingRequiredSampleEntities": []
+        "missingRequiredSampleEntities": [],
+        "rulingSummary": "Accepted variant-mapping source replacement plus implementation-owned threshold modifiers; monster_info identity is source-backed and guide constants remain the formula proof anchor."
       },
       "status": "semantic-mismatch",
-      "severity": "blocking",
-      "rulingStatus": "pending",
-      "blockedBy": [
-        "phase3:ruling-required",
-        "phase3:semantic-equivalence-ruling-required",
-        "field:anomaly-threshold-rule-source-required",
-        "field:anomaly-threshold-mapping-required",
-        "field:runtime-cutover-drift-required"
-      ],
-      "notes": "First sync has nanoka candidate coverage, but Phase 3 has not ruled semantic equivalence against the archived golden replay baseline."
+      "severity": "info",
+      "rulingStatus": "accepted",
+      "rulingId": "phase3-r013",
+      "rulingDecisionLog": "docs/product/decisions/data-source-rulings.md#phase3-r013-g13",
+      "blockedBy": [],
+      "notes": "Accepted variant-mapping source replacement plus implementation-owned threshold modifiers; monster_info identity is source-backed and guide constants remain the formula proof anchor."
     },
     {
       "entityType": "agent",
@@ -1442,17 +1419,16 @@
         "availableSampleEntities": [
           "nanoka-bangboo-plugboo-live-54008"
         ],
-        "missingRequiredSampleEntities": []
+        "missingRequiredSampleEntities": [],
+        "rulingSummary": "Accepted SourceRef/virtual-contribution boundary: nanoka sourceRefs contract is promoted, while virtual-agent contribution behavior remains implementation-owned."
       },
       "status": "semantic-mismatch",
-      "severity": "blocking",
-      "rulingStatus": "pending",
-      "blockedBy": [
-        "phase3:ruling-required",
-        "phase3:semantic-equivalence-ruling-required",
-        "implementation-owned-runtime-formula"
-      ],
-      "notes": "First sync has nanoka candidate coverage, but Phase 3 has not ruled semantic equivalence against the archived golden replay baseline."
+      "severity": "info",
+      "rulingStatus": "accepted",
+      "rulingId": "phase3-r014",
+      "rulingDecisionLog": "docs/product/decisions/data-source-rulings.md#phase3-r014-g14",
+      "blockedBy": [],
+      "notes": "Accepted SourceRef/virtual-contribution boundary: nanoka sourceRefs contract is promoted, while virtual-agent contribution behavior remains implementation-owned."
     },
     {
       "entityType": "rules",
@@ -1509,17 +1485,16 @@
         ],
         "requiredSampleEntities": [],
         "availableSampleEntities": [],
-        "missingRequiredSampleEntities": []
+        "missingRequiredSampleEntities": [],
+        "rulingSummary": "Accepted failed-evidence ruling: nanoka has no Disorder formula endpoint/table, so the runtime formula remains implementation-owned with golden replay proof."
       },
       "status": "semantic-mismatch",
-      "severity": "blocking",
-      "rulingStatus": "pending",
-      "blockedBy": [
-        "phase3:ruling-required",
-        "phase3:semantic-equivalence-ruling-required",
-        "implementation-owned-runtime-formula"
-      ],
-      "notes": "First sync has nanoka candidate coverage, but Phase 3 has not ruled semantic equivalence against the archived golden replay baseline."
+      "severity": "info",
+      "rulingStatus": "accepted",
+      "rulingId": "phase3-r015",
+      "rulingDecisionLog": "docs/product/decisions/data-source-rulings.md#phase3-r015-g15",
+      "blockedBy": [],
+      "notes": "Accepted failed-evidence ruling: nanoka has no Disorder formula endpoint/table, so the runtime formula remains implementation-owned with golden replay proof."
     },
     {
       "entityType": "rules",
@@ -1576,17 +1551,16 @@
         ],
         "requiredSampleEntities": [],
         "availableSampleEntities": [],
-        "missingRequiredSampleEntities": []
+        "missingRequiredSampleEntities": [],
+        "rulingSummary": "Accepted failed-evidence ruling: nanoka has no Disorder daze-level zone endpoint/table, so the runtime formula remains implementation-owned with golden replay proof."
       },
       "status": "semantic-mismatch",
-      "severity": "blocking",
-      "rulingStatus": "pending",
-      "blockedBy": [
-        "phase3:ruling-required",
-        "phase3:semantic-equivalence-ruling-required",
-        "implementation-owned-runtime-formula"
-      ],
-      "notes": "First sync has nanoka candidate coverage, but Phase 3 has not ruled semantic equivalence against the archived golden replay baseline."
+      "severity": "info",
+      "rulingStatus": "accepted",
+      "rulingId": "phase3-r016",
+      "rulingDecisionLog": "docs/product/decisions/data-source-rulings.md#phase3-r016-g16",
+      "blockedBy": [],
+      "notes": "Accepted failed-evidence ruling: nanoka has no Disorder daze-level zone endpoint/table, so the runtime formula remains implementation-owned with golden replay proof."
     },
     {
       "entityType": "deadlyAssault",
@@ -1684,18 +1658,16 @@
           "nanoka-monster-miasma-priest-live-30033",
           "nanoka-monster-notorious-pompey-live-300211"
         ],
-        "missingRequiredSampleEntities": []
+        "missingRequiredSampleEntities": [],
+        "rulingSummary": "Accepted DA boss max-HP source replacement for corrupted-shield cleanse; nanoka supplies period/boss context and core owns the 15% true-damage rule."
       },
       "status": "semantic-mismatch",
-      "severity": "blocking",
-      "rulingStatus": "pending",
-      "blockedBy": [
-        "phase3:ruling-required",
-        "phase3:semantic-equivalence-ruling-required",
-        "field:runtime-cutover-drift-required",
-        "field:enemy-level-formula-required"
-      ],
-      "notes": "First sync has nanoka candidate coverage, but Phase 3 has not ruled semantic equivalence against the archived golden replay baseline."
+      "severity": "info",
+      "rulingStatus": "accepted",
+      "rulingId": "phase3-r017",
+      "rulingDecisionLog": "docs/product/decisions/data-source-rulings.md#phase3-r017-g17",
+      "blockedBy": [],
+      "notes": "Accepted DA boss max-HP source replacement for corrupted-shield cleanse; nanoka supplies period/boss context and core owns the 15% true-damage rule."
     },
     {
       "entityType": "enemy",
@@ -1820,19 +1792,16 @@
           "nanoka-monster-miasma-priest-live-30033",
           "nanoka-monster-notorious-pompey-live-300211"
         ],
-        "missingRequiredSampleEntities": []
+        "missingRequiredSampleEntities": [],
+        "rulingSummary": "Accepted enemy variant source replacement for Greta plus implementation-owned part-break rule; level-stat formula remains blocked from runtime cutover until Phase 4."
       },
       "status": "semantic-mismatch",
-      "severity": "blocking",
-      "rulingStatus": "pending",
-      "blockedBy": [
-        "phase3:ruling-required",
-        "phase3:semantic-equivalence-ruling-required",
-        "field:runtime-cutover-drift-required",
-        "field:enemy-level-formula-required",
-        "typed-modifier-template-required"
-      ],
-      "notes": "First sync has nanoka candidate coverage, but Phase 3 has not ruled semantic equivalence against the archived golden replay baseline."
+      "severity": "info",
+      "rulingStatus": "accepted",
+      "rulingId": "phase3-r018",
+      "rulingDecisionLog": "docs/product/decisions/data-source-rulings.md#phase3-r018-g18",
+      "blockedBy": [],
+      "notes": "Accepted enemy variant source replacement for Greta plus implementation-owned part-break rule; level-stat formula remains blocked from runtime cutover until Phase 4."
     },
     {
       "entityType": "enemy",
@@ -1935,18 +1904,16 @@
           "nanoka-monster-miasma-priest-live-30033",
           "nanoka-monster-notorious-pompey-live-300211"
         ],
-        "missingRequiredSampleEntities": []
+        "missingRequiredSampleEntities": [],
+        "rulingSummary": "Accepted Ruthless Fiend variant source replacement with daze-recovery semantic boundary; nanoka supplies raw enemy evidence and guide/core own the recovery formula."
       },
       "status": "semantic-mismatch",
-      "severity": "blocking",
-      "rulingStatus": "pending",
-      "blockedBy": [
-        "phase3:ruling-required",
-        "phase3:semantic-equivalence-ruling-required",
-        "field:runtime-cutover-drift-required",
-        "field:daze-recovery-semantic-mapping-required"
-      ],
-      "notes": "First sync has nanoka candidate coverage, but Phase 3 has not ruled semantic equivalence against the archived golden replay baseline."
+      "severity": "info",
+      "rulingStatus": "accepted",
+      "rulingId": "phase3-r019",
+      "rulingDecisionLog": "docs/product/decisions/data-source-rulings.md#phase3-r019-g19",
+      "blockedBy": [],
+      "notes": "Accepted Ruthless Fiend variant source replacement with daze-recovery semantic boundary; nanoka supplies raw enemy evidence and guide/core own the recovery formula."
     },
     {
       "entityType": "enemy",
@@ -2051,18 +2018,16 @@
           "nanoka-monster-miasma-priest-live-30033",
           "nanoka-monster-notorious-pompey-live-300211"
         ],
-        "missingRequiredSampleEntities": []
+        "missingRequiredSampleEntities": [],
+        "rulingSummary": "Accepted Hati/Armored Hati variant source replacement with daze-recovery semantic boundary; nanoka supplies raw enemy evidence and guide/core own the recovery formula."
       },
       "status": "semantic-mismatch",
-      "severity": "blocking",
-      "rulingStatus": "pending",
-      "blockedBy": [
-        "phase3:ruling-required",
-        "phase3:semantic-equivalence-ruling-required",
-        "field:runtime-cutover-drift-required",
-        "field:daze-recovery-semantic-mapping-required"
-      ],
-      "notes": "First sync has nanoka candidate coverage, but Phase 3 has not ruled semantic equivalence against the archived golden replay baseline."
+      "severity": "info",
+      "rulingStatus": "accepted",
+      "rulingId": "phase3-r020",
+      "rulingDecisionLog": "docs/product/decisions/data-source-rulings.md#phase3-r020-g20",
+      "blockedBy": [],
+      "notes": "Accepted Hati/Armored Hati variant source replacement with daze-recovery semantic boundary; nanoka supplies raw enemy evidence and guide/core own the recovery formula."
     },
     {
       "entityType": "agent",
@@ -2140,17 +2105,16 @@
           "nanoka-character-yixuan-1371",
           "nanoka-character-nekomata-live-1021"
         ],
-        "missingRequiredSampleEntities": []
+        "missingRequiredSampleEntities": [],
+        "rulingSummary": "Accepted Yixuan panel/rupture source coverage with implementation-owned sheer defense-skip semantics; no runtime cutover is implied."
       },
       "status": "semantic-mismatch",
-      "severity": "blocking",
-      "rulingStatus": "pending",
-      "blockedBy": [
-        "phase3:ruling-required",
-        "phase3:semantic-equivalence-ruling-required",
-        "field:rupture-semantic-mapping-required"
-      ],
-      "notes": "First sync has nanoka candidate coverage, but Phase 3 has not ruled semantic equivalence against the archived golden replay baseline."
+      "severity": "info",
+      "rulingStatus": "accepted",
+      "rulingId": "phase3-r021",
+      "rulingDecisionLog": "docs/product/decisions/data-source-rulings.md#phase3-r021-g21",
+      "blockedBy": [],
+      "notes": "Accepted Yixuan panel/rupture source coverage with implementation-owned sheer defense-skip semantics; no runtime cutover is implied."
     },
     {
       "entityType": "agent",
@@ -2218,17 +2182,16 @@
           "nanoka-character-yanagi-live-1221",
           "nanoka-character-yixuan-live-1371"
         ],
-        "missingRequiredSampleEntities": []
+        "missingRequiredSampleEntities": [],
+        "rulingSummary": "Accepted Nicole passive source coverage for the existing lo-user-approved defense-reduction replay; typed modifier template promotion remains a later source-backed transform task."
       },
       "status": "semantic-mismatch",
-      "severity": "blocking",
-      "rulingStatus": "pending",
-      "blockedBy": [
-        "phase3:ruling-required",
-        "phase3:semantic-equivalence-ruling-required",
-        "typed-modifier-template-required"
-      ],
-      "notes": "First sync has nanoka candidate coverage, but Phase 3 has not ruled semantic equivalence against the archived golden replay baseline."
+      "severity": "info",
+      "rulingStatus": "accepted",
+      "rulingId": "phase3-r022",
+      "rulingDecisionLog": "docs/product/decisions/data-source-rulings.md#phase3-r022-g22",
+      "blockedBy": [],
+      "notes": "Accepted Nicole passive source coverage for the existing lo-user-approved defense-reduction replay; typed modifier template promotion remains a later source-backed transform task."
     },
     {
       "entityType": "agent",
@@ -2323,18 +2286,16 @@
           "nanoka-character-yanagi-live-1221",
           "nanoka-character-yixuan-live-1371"
         ],
-        "missingRequiredSampleEntities": []
+        "missingRequiredSampleEntities": [],
+        "rulingSummary": "Accepted Yanagi passive/source-text coverage for the existing lo-user-approved disorder boost and polarity-disorder replay; typed modifier template promotion remains later."
       },
       "status": "semantic-mismatch",
-      "severity": "blocking",
-      "rulingStatus": "pending",
-      "blockedBy": [
-        "phase3:ruling-required",
-        "phase3:semantic-equivalence-ruling-required",
-        "typed-modifier-template-required",
-        "implementation-owned-runtime-formula"
-      ],
-      "notes": "First sync has nanoka candidate coverage, but Phase 3 has not ruled semantic equivalence against the archived golden replay baseline."
+      "severity": "info",
+      "rulingStatus": "accepted",
+      "rulingId": "phase3-r023",
+      "rulingDecisionLog": "docs/product/decisions/data-source-rulings.md#phase3-r023-g23",
+      "blockedBy": [],
+      "notes": "Accepted Yanagi passive/source-text coverage for the existing lo-user-approved disorder boost and polarity-disorder replay; typed modifier template promotion remains later."
     },
     {
       "entityType": "bangboo",
@@ -2429,16 +2390,16 @@
           "nanoka-bangboo-penguinboo-live-53001",
           "nanoka-bangboo-sharkboo-live-54001"
         ],
-        "missingRequiredSampleEntities": []
+        "missingRequiredSampleEntities": [],
+        "rulingSummary": "Accepted Penguinboo numeric parity: nanoka live panel and active skill raw values reproduce the archived Excel Path X attack, daze, and anomaly-buildup values after unit conversion."
       },
       "status": "semantic-mismatch",
-      "severity": "blocking",
-      "rulingStatus": "pending",
-      "blockedBy": [
-        "phase3:ruling-required",
-        "phase3:semantic-equivalence-ruling-required"
-      ],
-      "notes": "First sync has nanoka candidate coverage, but Phase 3 has not ruled semantic equivalence against the archived golden replay baseline."
+      "severity": "info",
+      "rulingStatus": "accepted",
+      "rulingId": "phase3-r024",
+      "rulingDecisionLog": "docs/product/decisions/data-source-rulings.md#phase3-r024-g24",
+      "blockedBy": [],
+      "notes": "Accepted Penguinboo numeric parity: nanoka live panel and active skill raw values reproduce the archived Excel Path X attack, daze, and anomaly-buildup values after unit conversion."
     },
     {
       "entityType": "bangboo",
@@ -2533,16 +2494,16 @@
           "nanoka-bangboo-penguinboo-live-53001",
           "nanoka-bangboo-sharkboo-live-54001"
         ],
-        "missingRequiredSampleEntities": []
+        "missingRequiredSampleEntities": [],
+        "rulingSummary": "Accepted Sharkboo numeric parity: nanoka live panel and active skill raw values reproduce the archived Excel Path X attack, daze, and anomaly-buildup values after unit conversion."
       },
       "status": "semantic-mismatch",
-      "severity": "blocking",
-      "rulingStatus": "pending",
-      "blockedBy": [
-        "phase3:ruling-required",
-        "phase3:semantic-equivalence-ruling-required"
-      ],
-      "notes": "First sync has nanoka candidate coverage, but Phase 3 has not ruled semantic equivalence against the archived golden replay baseline."
+      "severity": "info",
+      "rulingStatus": "accepted",
+      "rulingId": "phase3-r025",
+      "rulingDecisionLog": "docs/product/decisions/data-source-rulings.md#phase3-r025-g25",
+      "blockedBy": [],
+      "notes": "Accepted Sharkboo numeric parity: nanoka live panel and active skill raw values reproduce the archived Excel Path X attack, daze, and anomaly-buildup values after unit conversion."
     },
     {
       "entityType": "bangboo",
@@ -2651,22 +2612,22 @@
           "nanoka-bangboo-penguinboo-live-53001",
           "nanoka-bangboo-sharkboo-live-54001"
         ],
-        "missingRequiredSampleEntities": []
+        "missingRequiredSampleEntities": [],
+        "rulingSummary": "Accepted Plugboo numeric and element parity: nanoka live panel/skill raw values reproduce the archived Excel Path X values and approved-live skill text proves electric element evidence."
       },
       "status": "semantic-mismatch",
-      "severity": "blocking",
-      "rulingStatus": "pending",
-      "blockedBy": [
-        "phase3:ruling-required",
-        "phase3:semantic-equivalence-ruling-required"
-      ],
-      "notes": "First sync has nanoka candidate coverage, but Phase 3 has not ruled semantic equivalence against the archived golden replay baseline."
+      "severity": "info",
+      "rulingStatus": "accepted",
+      "rulingId": "phase3-r026",
+      "rulingDecisionLog": "docs/product/decisions/data-source-rulings.md#phase3-r026-g26",
+      "blockedBy": [],
+      "notes": "Accepted Plugboo numeric and element parity: nanoka live panel/skill raw values reproduce the archived Excel Path X values and approved-live skill text proves electric element evidence."
     }
   ],
-  "unresolvedCount": 26,
+  "unresolvedCount": 0,
   "notes": [
     "Phase 3 first sync compares G01-G26 archived golden replay baselines against real nanoka candidate coverage/status/source paths.",
-    "This sync intentionally exposes unresolved missing/semantic drift rows; it does not count as an exit-clean sync until Product/TL rulings clear the queue.",
+    "This sync has Product/TL rulings for G01-G26, but it does not count as an exit-clean sync because G27/G28 and the two-clean-sync exit condition are still pending.",
     "Archived Excel, D-17 Mihoyo, and D-12 buhflipexplode sources are audit baselines only; they are not runtime fallback inputs."
   ]
 }

@@ -17,6 +17,7 @@ const schemaVersion = "nanoka-drift-report/v0.1"
 const defaultSyncId = "phase3-sync-000-foundation"
 const firstSyncId = "phase3-sync-001-g01-g26"
 const defaultGeneratedAt = "2026-05-15T16:20:00+08:00"
+const rulingDecisionLogPath = "docs/product/decisions/data-source-rulings.md"
 const driftStatuses = ["same", "changed", "missing", "new", "semantic-mismatch"]
 const entityTypes = ["agent", "bangboo", "enemy", "wEngine", "driveDisc", "deadlyAssault", "metadata", "rules"]
 const severities = ["info", "blocking"]
@@ -124,6 +125,7 @@ function reportHeader({ syncId, generatedAt }) {
     baselines: requiredBaselineIds.map(sourceId => baselineFromRegistry(registry, sourceId)),
     matrixStatus: matrix.status,
     runtimeCutoverReady: false,
+    exitCleanSyncEligible: false,
   }
 }
 
@@ -291,6 +293,113 @@ const anchorCandidateSpecs = {
     fieldIds: ["bangboos.basePanel", "bangboos.skillSegments", "bangboos.element"],
     requiredSampleEntities: ["nanoka-bangboo-plugboo-live-54008"],
     expectedCandidate: "Plugboo panel, skill numeric, and element source coverage.",
+  },
+}
+
+const phase3Rulings = {
+  G01: {
+    rulingId: "phase3-r001",
+    summary: "Accepted DA boss-context source replacement: nanoka approved-live period detail covers boss_adjust and period context used by the archived G01 default-defense replay; Phase 4 still owns runtime cutover.",
+  },
+  G02: {
+    rulingId: "phase3-r002",
+    summary: "Accepted DA boss-context source replacement for corrupted-shield defense replay; the shield formula remains implementation-owned and nanoka supplies the period/boss evidence only.",
+  },
+  G03: {
+    rulingId: "phase3-r003",
+    summary: "Accepted agent panel normalization contract: nanoka live character stats/level rows deterministically derive base panel values; G03 crit expected-value behavior is formula-owned.",
+  },
+  G04: {
+    rulingId: "phase3-r004",
+    summary: "Accepted implementation-owned penetration/damage formula boundary; nanoka has no formula table and the archived guide/golden replay remains the executable proof anchor.",
+  },
+  G05: {
+    rulingId: "phase3-r005",
+    summary: "Accepted split responsibility: nanoka supplies Yixuan rupture raw fields and DA boss context, while sheer defense-skip semantics remain implementation-owned until the rupture semantic mapper lands.",
+  },
+  G06: {
+    rulingId: "phase3-r006",
+    summary: "Accepted split responsibility for sheer-vs-default ratio replay: nanoka source coverage is present and the ratio formula remains implementation-owned.",
+  },
+  G07: {
+    rulingId: "phase3-r007",
+    summary: "Accepted implementation-owned rounding boundary; no nanoka source table is expected for per-segment ceil behavior.",
+  },
+  G08: {
+    rulingId: "phase3-r008",
+    summary: "Accepted agent combat-panel unit boundary for anomaly mastery flooring; nanoka provides raw panel fields and core owns the floor-before-buildup behavior.",
+  },
+  G09: {
+    rulingId: "phase3-r009",
+    summary: "Accepted DA daze-context source replacement: nanoka period detail covers boss context and daze-related source evidence while display flooring remains implementation-owned.",
+  },
+  G10: {
+    rulingId: "phase3-r010",
+    summary: "Accepted attribute-alias boundary: nanoka supplies Yixuan/monster raw coverage, while Frost->Ice and Auric Ink->Ether alias semantics stay implementation-owned.",
+  },
+  G11: {
+    rulingId: "phase3-r011",
+    summary: "Accepted damage-bonus alias boundary: nanoka supplies combat-panel raw fields and core owns alias routing to Ice/Ether damage-bonus fields.",
+  },
+  G12: {
+    rulingId: "phase3-r012",
+    summary: "Accepted anomaly-threshold split responsibility: nanoka enemy threshold raw coverage exists, while trigger-count/rank threshold formula constants remain implementation-owned.",
+  },
+  G13: {
+    rulingId: "phase3-r013",
+    summary: "Accepted variant-mapping source replacement plus implementation-owned threshold modifiers; monster_info identity is source-backed and guide constants remain the formula proof anchor.",
+  },
+  G14: {
+    rulingId: "phase3-r014",
+    summary: "Accepted SourceRef/virtual-contribution boundary: nanoka sourceRefs contract is promoted, while virtual-agent contribution behavior remains implementation-owned.",
+  },
+  G15: {
+    rulingId: "phase3-r015",
+    summary: "Accepted failed-evidence ruling: nanoka has no Disorder formula endpoint/table, so the runtime formula remains implementation-owned with golden replay proof.",
+  },
+  G16: {
+    rulingId: "phase3-r016",
+    summary: "Accepted failed-evidence ruling: nanoka has no Disorder daze-level zone endpoint/table, so the runtime formula remains implementation-owned with golden replay proof.",
+  },
+  G17: {
+    rulingId: "phase3-r017",
+    summary: "Accepted DA boss max-HP source replacement for corrupted-shield cleanse; nanoka supplies period/boss context and core owns the 15% true-damage rule.",
+  },
+  G18: {
+    rulingId: "phase3-r018",
+    summary: "Accepted enemy variant source replacement for Greta plus implementation-owned part-break rule; level-stat formula remains blocked from runtime cutover until Phase 4.",
+  },
+  G19: {
+    rulingId: "phase3-r019",
+    summary: "Accepted Ruthless Fiend variant source replacement with daze-recovery semantic boundary; nanoka supplies raw enemy evidence and guide/core own the recovery formula.",
+  },
+  G20: {
+    rulingId: "phase3-r020",
+    summary: "Accepted Hati/Armored Hati variant source replacement with daze-recovery semantic boundary; nanoka supplies raw enemy evidence and guide/core own the recovery formula.",
+  },
+  G21: {
+    rulingId: "phase3-r021",
+    summary: "Accepted Yixuan panel/rupture source coverage with implementation-owned sheer defense-skip semantics; no runtime cutover is implied.",
+  },
+  G22: {
+    rulingId: "phase3-r022",
+    summary: "Accepted Nicole passive source coverage for the existing lo-user-approved defense-reduction replay; typed modifier template promotion remains a later source-backed transform task.",
+  },
+  G23: {
+    rulingId: "phase3-r023",
+    summary: "Accepted Yanagi passive/source-text coverage for the existing lo-user-approved disorder boost and polarity-disorder replay; typed modifier template promotion remains later.",
+  },
+  G24: {
+    rulingId: "phase3-r024",
+    summary: "Accepted Penguinboo numeric parity: nanoka live panel and active skill raw values reproduce the archived Excel Path X attack, daze, and anomaly-buildup values after unit conversion.",
+  },
+  G25: {
+    rulingId: "phase3-r025",
+    summary: "Accepted Sharkboo numeric parity: nanoka live panel and active skill raw values reproduce the archived Excel Path X attack, daze, and anomaly-buildup values after unit conversion.",
+  },
+  G26: {
+    rulingId: "phase3-r026",
+    summary: "Accepted Plugboo numeric and element parity: nanoka live panel/skill raw values reproduce the archived Excel Path X values and approved-live skill text proves electric element evidence.",
   },
 }
 
@@ -477,11 +586,15 @@ function buildG01G26Report({ syncId, generatedAt }) {
     const requiredSampleEntities = spec.requiredSampleEntities ?? []
     const missingRequiredSampleEntities = requiredSampleEntities.filter(sample => !availableSampleEntities.includes(sample))
     const status = missingRequiredSampleEntities.length > 0 ? "missing" : "semantic-mismatch"
-    const blockedBy = unique([
-      "phase3:ruling-required",
-      status === "missing" ? "phase3:candidate-source-missing" : "phase3:semantic-equivalence-ruling-required",
-      ...matrixRows.flatMap(({ row }) => rowBlockers(row)),
-    ])
+    const ruling = status === "semantic-mismatch" ? phase3Rulings[anchorId] : undefined
+    const rulingStatus = ruling === undefined ? "pending" : "accepted"
+    const blockedBy = rulingStatus === "pending"
+      ? unique([
+          "phase3:ruling-required",
+          status === "missing" ? "phase3:candidate-source-missing" : "phase3:semantic-equivalence-ruling-required",
+          ...matrixRows.flatMap(({ row }) => rowBlockers(row)),
+        ])
+      : []
 
     return {
       entityType: spec.entityType,
@@ -509,14 +622,21 @@ function buildG01G26Report({ syncId, generatedAt }) {
         requiredSampleEntities,
         availableSampleEntities,
         missingRequiredSampleEntities,
+        rulingSummary: ruling?.summary,
       },
       status,
-      severity: "blocking",
-      rulingStatus: "pending",
+      severity: rulingStatus === "pending" ? "blocking" : "info",
+      rulingStatus,
+      ...(ruling === undefined
+        ? {}
+        : {
+            rulingId: ruling.rulingId,
+            rulingDecisionLog: `${rulingDecisionLogPath}#${ruling.rulingId}-${anchorId.toLowerCase()}`,
+          }),
       blockedBy,
       notes: status === "missing"
         ? `First sync is missing required approved-live nanoka candidate sample(s): ${missingRequiredSampleEntities.join(", ")}.`
-        : "First sync has nanoka candidate coverage, but Phase 3 has not ruled semantic equivalence against the archived golden replay baseline.",
+        : ruling?.summary ?? "First sync has nanoka candidate coverage, but Phase 3 has not ruled semantic equivalence against the archived golden replay baseline.",
     }
   })
 
@@ -524,10 +644,10 @@ function buildG01G26Report({ syncId, generatedAt }) {
     ...header,
     counts: countsForRows(rows),
     rows,
-    unresolvedCount: rows.length,
+    unresolvedCount: rows.filter(row => row.rulingStatus === "pending" || row.rulingStatus === "owner-required").length,
     notes: [
       "Phase 3 first sync compares G01-G26 archived golden replay baselines against real nanoka candidate coverage/status/source paths.",
-      "This sync intentionally exposes unresolved missing/semantic drift rows; it does not count as an exit-clean sync until Product/TL rulings clear the queue.",
+      "This sync has Product/TL rulings for G01-G26, but it does not count as an exit-clean sync because G27/G28 and the two-clean-sync exit condition are still pending.",
       "Archived Excel, D-17 Mihoyo, and D-12 buhflipexplode sources are audit baselines only; they are not runtime fallback inputs.",
     ],
   }
@@ -551,12 +671,12 @@ function renderMarkdown(report) {
   const hasRows = report.rows.length > 0
   const statusLine = hasRows ? "Phase 3 drift audit first G01-G26 sync" : "Phase 3 drift audit foundation fixture"
   const intro = hasRows
-    ? "This report compares archived G01-G26 replay baselines against nanoka candidate coverage/status/source paths. Full runtime cutover remains disabled."
+    ? "This report compares archived G01-G26 replay baselines against nanoka candidate coverage/status/source paths and records Product/TL rulings. Full runtime cutover remains disabled."
     : `This report is a schema/verifier fixture. It intentionally contains no field
 comparison rows; full G01-G26 comparison begins in the next Phase 3 slice.`
   const driftRows = hasRows
     ? report.rows
-        .map(row => `| \`${row.entityId}\` | \`${row.fieldId}\` | \`${row.status}\` | \`${row.rulingStatus}\` | ${row.notes} |`)
+        .map(row => `| \`${row.entityId}\` | \`${row.fieldId}\` | \`${row.status}\` | \`${row.rulingStatus}\` | ${row.rulingId === undefined ? "" : `\`${row.rulingId}\``} | ${row.notes} |`)
         .join("\n")
     : ""
 
@@ -589,11 +709,13 @@ Unresolved blocking drift rows: **${report.unresolvedCount}**
 
 Runtime cutover ready: **${report.runtimeCutoverReady}**
 
+Exit-clean sync eligible: **${report.exitCleanSyncEligible}**
+
 ${hasRows
   ? `## Drift Rows
 
-| Entity | Field | Status | Ruling | Notes |
-|---|---|---|---|---|
+| Entity | Field | Status | Ruling | Ruling ID | Notes |
+|---|---|---|---|---|---|
 ${driftRows}
 `
   : ""}
@@ -645,19 +767,44 @@ function validateRows(report) {
       assert(JSON.stringify(row.baselineValue) === JSON.stringify(row.candidateValue), `${label}: same rows must have equal normalized values`)
     }
     else {
-      assert(row.severity === "blocking", `${label}: non-same drift rows are blocking until ruled`)
       assert(row.rulingStatus !== "not-required", `${label}: non-same rows require explicit ruling queue status`)
       if (row.rulingStatus === "pending" || row.rulingStatus === "owner-required") {
+        assert(row.severity === "blocking", `${label}: unresolved non-same rows must be blocking`)
+        assert(row.blockedBy.length > 0, `${label}: unresolved non-same rows must carry blockers`)
         unresolvedCount += 1
       }
       else {
+        assert(row.severity === "info", `${label}: resolved non-same rows must be informational`)
+        assert(row.blockedBy.length === 0, `${label}: resolved non-same rows must not carry blockers`)
         assert(typeof row.rulingId === "string" && row.rulingId.length > 0, `${label}: resolved non-same rows require rulingId`)
+        assert(typeof row.rulingDecisionLog === "string" && row.rulingDecisionLog.length > 0, `${label}: resolved non-same rows require rulingDecisionLog`)
+        const [decisionLogPath] = row.rulingDecisionLog.split("#")
+        assert(decisionLogPath === rulingDecisionLogPath, `${label}: rulingDecisionLog must point to ${rulingDecisionLogPath}`)
+        const decisionLogText = readFileSync(join(repoRoot, decisionLogPath), "utf8")
+        assert(decisionLogText.includes(row.rulingId), `${label}: rulingDecisionLog must contain ${row.rulingId}`)
       }
     }
   }
 
   assert(JSON.stringify(report.counts) === JSON.stringify(actualCounts), "counts must equal row status totals")
   assert(report.unresolvedCount === unresolvedCount, "unresolvedCount must equal pending/owner-required blocking rows")
+}
+
+function validateExitCleanEligibility(report, { syncId }) {
+  if (!report.exitCleanSyncEligible)
+    return
+
+  assert(syncId !== defaultSyncId, `${syncId}: foundation sync cannot be exit-clean eligible`)
+  assert(syncId !== firstSyncId, `${syncId}: first G01-G26 sync cannot be exit-clean eligible before G27/G28 and two clean sync evidence`)
+  assert(report.runtimeCutoverReady === false, "exit-clean drift sync must still not cut runtime over")
+  assert(report.unresolvedCount === 0, "exit-clean drift sync cannot have unresolved rows")
+
+  const evidence = report.exitGateEvidence
+  assert(evidence !== null && typeof evidence === "object" && !Array.isArray(evidence), "exitCleanSyncEligible requires exitGateEvidence")
+  assert(Array.isArray(evidence.cleanSyncIds) && evidence.cleanSyncIds.length >= 2, "exitGateEvidence.cleanSyncIds must include at least two clean syncs")
+  assert(evidence.cleanSyncIds.includes(syncId), "exitGateEvidence.cleanSyncIds must include the current syncId")
+  assert(Array.isArray(evidence.anchorIds) && evidence.anchorIds.includes("G27") && evidence.anchorIds.includes("G28"), "exitGateEvidence.anchorIds must include G27 and G28")
+  assert(evidence.goldenReplayStatus === "passed", "exitGateEvidence.goldenReplayStatus must be passed")
 }
 
 function validateReportShape(report, { registry, matrix, syncId }) {
@@ -672,6 +819,8 @@ function validateReportShape(report, { registry, matrix, syncId }) {
   assert(report.candidate.sourceVersion !== nanoka.latestResearchVersion, "candidate must not use latest research version")
   assert(report.matrixStatus === matrix.status, "matrixStatus must match current nanoka coverage matrix")
   assert(report.runtimeCutoverReady === false, "Phase 3 drift reports must not imply runtime cutover")
+  assert(typeof report.exitCleanSyncEligible === "boolean", "exitCleanSyncEligible is required")
+  validateExitCleanEligibility(report, { syncId })
 
   assert(Array.isArray(report.baselines), "baselines must be an array")
   for (const sourceId of requiredBaselineIds) {
