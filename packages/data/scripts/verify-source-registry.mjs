@@ -14,6 +14,8 @@ const rootDriveDiscSlotStatAuditPath = join(repoRoot, "data/cleaned/audit/nanoka
 const packageDriveDiscSlotStatAuditPath = join(packageDir, "cleaned/audit/nanoka-drive-disc-slot-stat-audit.json")
 const rootDisorderFormulaAuditPath = join(repoRoot, "data/cleaned/audit/nanoka-disorder-formula-audit.json")
 const packageDisorderFormulaAuditPath = join(packageDir, "cleaned/audit/nanoka-disorder-formula-audit.json")
+const rootDisorderDazeLevelAuditPath = join(repoRoot, "data/cleaned/audit/nanoka-disorder-daze-level-audit.json")
+const packageDisorderDazeLevelAuditPath = join(packageDir, "cleaned/audit/nanoka-disorder-daze-level-audit.json")
 
 const redistributionRisks = new Set([
   "accepted-by-owner",
@@ -122,7 +124,7 @@ function validateMatrixAgainstRegistry(matrix, registry) {
   const nanoka = sourceById(registry, "nanoka-zzz")
   validateNanokaRegistry(nanoka)
 
-  assert(matrix.status === "phase-2-disorder-formula-audit-gate", "matrix status must match the latest Disorder formula audit gate")
+  assert(matrix.status === "phase-2-disorder-daze-level-audit-gate", "matrix status must match the latest Disorder daze-level audit gate")
   assert(matrix.sourceVersionPolicy?.liveVersionRef === nanoka.liveVersionRef, "matrix liveVersionRef must match nanoka registry")
   assert(matrix.sourceVersionPolicy?.defaultReleaseSourceVersion === nanoka.configuredLiveVersion, "matrix default release version must match configuredLiveVersion")
   assert(matrix.sourceVersionResolved === nanoka.configuredLiveVersion, "matrix resolved sourceVersion must match configuredLiveVersion")
@@ -216,6 +218,18 @@ function validateMatrixAgainstRegistry(matrix, registry) {
   assert(disorderFormulaRow.auditArtifact === "data/cleaned/audit/nanoka-disorder-formula-audit.json", "rules.disorderFormula: row must point to failed-evidence audit artifact")
   assert(disorderFormulaRow.transformRule?.includes("guide-anchored golden replay G15"), "rules.disorderFormula: transform must document guide/golden ownership")
   assert(disorderFormulaRow.transformRule?.includes("Do not synthesize"), "rules.disorderFormula: transform must preserve no-fabrication boundary")
+
+  const disorderDazeLevelRow = resourceRows.get("rules.disorderDazeLevelZone")
+  assert(disorderDazeLevelRow !== undefined, "rules.disorderDazeLevelZone: missing Disorder daze-level row")
+  assert(disorderDazeLevelRow.status === "deferred", "rules.disorderDazeLevelZone: row must be deferred after implementation-owned classification")
+  assert(disorderDazeLevelRow.sourcePolicy === "implementation-owned", "rules.disorderDazeLevelZone: row must be implementation-owned after failed nanoka audit")
+  assert(disorderDazeLevelRow.fieldClass === "implementation-owned", "rules.disorderDazeLevelZone: fieldClass must be implementation-owned")
+  assert(disorderDazeLevelRow.promotable === false, "rules.disorderDazeLevelZone: implementation-owned formula row must not be nanoka-promotable")
+  assert(disorderDazeLevelRow.sampleEntity === null, "rules.disorderDazeLevelZone: implementation-owned row must not point to a nanoka sample entity")
+  assert(disorderDazeLevelRow.blockedBy?.includes("implementation-owned-runtime-formula"), "rules.disorderDazeLevelZone: row must carry implementation-owned runtime blocker")
+  assert(disorderDazeLevelRow.auditArtifact === "data/cleaned/audit/nanoka-disorder-daze-level-audit.json", "rules.disorderDazeLevelZone: row must point to failed-evidence audit artifact")
+  assert(disorderDazeLevelRow.transformRule?.includes("guide-anchored golden replay G16"), "rules.disorderDazeLevelZone: transform must document guide/golden ownership")
+  assert(disorderDazeLevelRow.transformRule?.includes("Do not synthesize"), "rules.disorderDazeLevelZone: transform must preserve no-fabrication boundary")
 
   const promotionExtraRow = resourceRows.get("agents.promotionExtraStats")
   assert(promotionExtraRow !== undefined, "agents.promotionExtraStats: missing promotion extra row")
@@ -416,6 +430,54 @@ function validateDisorderFormulaAudit(registry) {
   assert(audit.decision?.blockedBy?.includes("implementation-owned-runtime-formula"), "Disorder formula audit decision must carry implementation-owned blocker")
 }
 
+function validateDisorderDazeLevelAudit(registry) {
+  const { rootText } = readMirroredText(
+    rootDisorderDazeLevelAuditPath,
+    packageDisorderDazeLevelAuditPath,
+    "packages/data/cleaned/audit/nanoka-disorder-daze-level-audit.json",
+  )
+
+  const nanoka = sourceById(registry, "nanoka-zzz")
+  const audit = JSON.parse(rootText)
+  assert(audit.schemaVersion === "nanoka-disorder-daze-level-audit/v0.1", "Disorder daze-level audit schemaVersion drifted")
+  assert(audit.sourceId === "nanoka-zzz", "Disorder daze-level audit sourceId drifted")
+  assert(audit.sourceVersion === nanoka.configuredLiveVersion, "Disorder daze-level audit must use configured live version")
+  assert(audit.status === "not-found", "Disorder daze-level audit must remain failed-evidence unless a nanoka source is proven")
+  assert(audit.fieldId === "rules.disorderDazeLevelZone", "Disorder daze-level audit fieldId drifted")
+  assert(audit.runtimeCutoverReady === false, "Disorder daze-level audit must not imply runtime cutover")
+  assert(audit.summary?.foundDisorderDazeLevelTable === false, "Disorder daze-level audit must not claim a daze-level formula table was found")
+  assert(audit.summary?.implementationOwnedRuntimeFormula === true, "Disorder daze-level audit must classify the row as implementation-owned")
+  assert(audit.summary?.ownerResearchRequired === false, "Disorder daze-level audit must not require owner research")
+
+  const endpoints = audit.checkedEndpoints ?? []
+  for (const endpointName of [
+    "daze_level.json",
+    "disorder_daze_level.json",
+    "disorder_daze_level_zone.json",
+    "level_zone.json",
+    "formula.json",
+    "rules.json",
+  ]) {
+    assert(
+      endpoints.some(endpoint => endpoint.url === `https://static.nanoka.cc/zzz/2.8/${endpointName}` && endpoint.status === 404),
+      `Disorder daze-level audit must record missing ${endpointName}`,
+    )
+  }
+  assert(endpoints.some(endpoint => endpoint.url === "https://static.nanoka.cc/zzz/2.8/character.json" && endpoint.status === 200), "Disorder daze-level audit must record character index check")
+  assert(endpoints.some(endpoint => endpoint.url === "https://static.nanoka.cc/zzz/2.8/monster.json" && endpoint.status === 200), "Disorder daze-level audit must record monster index check")
+  const bossIndex = endpoints.find(endpoint => endpoint.url === "https://static.nanoka.cc/zzz/2.8/boss.json")
+  assert(bossIndex?.status === 200, "Disorder daze-level audit must record boss index check")
+  assert(bossIndex.contentSha256 === "d9519738c6100082760f59bb92fd17fdba93afb853c845b1c90d0718788a79f9", "Disorder daze-level boss index hash drifted")
+  assert(audit.implementationContract?.sourceAnchors?.includes("guide-3.4.2"), "Disorder daze-level audit must keep guide source anchor")
+  assert(audit.implementationContract?.sourceAnchors?.includes("golden-v1:G16"), "Disorder daze-level audit must keep golden replay anchor")
+  assert(audit.implementationContract?.coreFormula === "disorderDazeLevelZone = 1 + 0.0075 * level", "Disorder daze-level audit core formula drifted")
+  assert(audit.implementationContract?.sampleExpectation?.level === 60, "Disorder daze-level audit sample level drifted")
+  assert(audit.implementationContract?.sampleExpectation?.multiplier === 1.45, "Disorder daze-level audit sample multiplier drifted")
+  assert(audit.decision?.matrixStatus === "deferred", "Disorder daze-level audit decision must match deferred matrix status")
+  assert(audit.decision?.sourcePolicy === "implementation-owned", "Disorder daze-level audit decision must classify source policy as implementation-owned")
+  assert(audit.decision?.blockedBy?.includes("implementation-owned-runtime-formula"), "Disorder daze-level audit decision must carry implementation-owned blocker")
+}
+
 function validateCoveredSourceRefs(registry) {
   const sourceIds = new Set(registry.sources.map(source => source.sourceId))
   const files = [
@@ -445,6 +507,7 @@ function main() {
   validateSnapshotDiffHistory(registry)
   validateDriveDiscSlotStatAudit(registry)
   validateDisorderFormulaAudit(registry)
+  validateDisorderDazeLevelAudit(registry)
   validateCoveredSourceRefs(registry)
 
   console.log("source registry verification passed")
