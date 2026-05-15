@@ -1,0 +1,134 @@
+{
+  "schemaVersion": "nanoka-fetch-manifest-v1",
+  "sourceId": "nanoka-zzz",
+  "snapshotId": "2.8",
+  "fetchedAt": "2026-05-15T11:35:00+08:00",
+  "generatedAt": "2026-05-15T11:35:00+08:00",
+  "parserVersion": "nanoka-source-v0.1.0",
+  "userAgent": "fairy-data-source-audit/0.1 (+https://github.com/LoTwT/fairy)",
+  "formalLivePolicy": {
+    "liveVersionRef": "manifest.zzz.live",
+    "configuredLiveVersion": "2.8",
+    "latestPolicy": "research-and-drift-only",
+    "rawSnapshotPurpose": "Phase 2 adapter fixture; not runtime cleaned data cutover"
+  },
+  "urlPolicy": {
+    "manifestUrl": "https://static.nanoka.cc/manifest.json",
+    "approvedIndexUrls": [
+      "https://static.nanoka.cc/zzz/2.8/boss.json"
+    ],
+    "approvedLocalizedDetailUrlPatterns": [
+      "https://static.nanoka.cc/zzz/2.8/{locale}/{entityType}/{id}.json"
+    ],
+    "forbiddenIndexNames": [
+      "beta",
+      "preview",
+      "leak",
+      "datamine"
+    ]
+  },
+  "assets": [
+    {
+      "id": "manifest",
+      "url": "https://static.nanoka.cc/manifest.json",
+      "path": "manifest.json",
+      "entityType": "sourceManifest",
+      "approvedForCleanedOutput": false,
+      "evidenceUse": "formal-live-version-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/manifest.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"6a068450-3dd6\"",
+        "lastModified": "Fri, 15 May 2026 02:26:24 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 15830,
+      "sha256": "91494c2c3bfda6ec47beccbf71066506ab0a315513aa751cf30e4c3a1dc0817d"
+    },
+    {
+      "id": "boss-index",
+      "url": "https://static.nanoka.cc/zzz/2.8/boss.json",
+      "path": "boss.json",
+      "entityType": "bossIndex",
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "deadly-assault-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/boss.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b8-2bc0\"",
+        "lastModified": "Wed, 06 May 2026 01:00:40 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 11201,
+      "sha256": "d9519738c6100082760f59bb92fd17fdba93afb853c845b1c90d0718788a79f9"
+    },
+    {
+      "id": "character-nekomata-1021",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/character/1021.json",
+      "path": "zh/character/1021.json",
+      "entityType": "character",
+      "language": "zh",
+      "entityId": 1021,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "agent-panel-sentinel-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/character/1021.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b8-e275\"",
+        "lastModified": "Wed, 06 May 2026 01:00:40 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 57974,
+      "sha256": "9d5a3226975802371089816df50a5cd1bfcdb2ccb75bdc4b2f50d4e756ba1375"
+    },
+    {
+      "id": "boss-69036",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/boss/69036.json",
+      "path": "zh/boss/69036.json",
+      "entityType": "boss",
+      "language": "zh",
+      "entityId": 69036,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "deadly-assault-detail-source-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/boss/69036.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b8-41d2\"",
+        "lastModified": "Wed, 06 May 2026 01:00:40 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 16843,
+      "sha256": "781cb67799e6fb8c0438ab57ac5536507b85292161342f9870c18f42d890989f"
+    }
+  ],
+  "summary": {
+    "manifestLiveVersion": "2.8",
+    "manifestLatestVersion": "3.0.2+15625449",
+    "bossIndexCount": 38,
+    "characterSample": {
+      "id": 1021,
+      "codeName": "Nekomata",
+      "hasStats": true,
+      "sentinelRawPaths": [
+        "/stats/rp_max",
+        "/stats/rp_recover",
+        "/skill_list/*/level/*/fever_recovery",
+        "/skill_list/*/level/*/rp_recovery"
+      ]
+    },
+    "deadlyAssaultSample": {
+      "id": 69036,
+      "zoneCount": 3,
+      "hasBossAdjust": true
+    },
+    "retainedAssetCount": 4
+  }
+}

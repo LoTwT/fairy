@@ -43,6 +43,47 @@ export interface DataSourceDescriptor {
 
 export const dataSourceDescriptors = [
   {
+    id: "nanoka-zzz",
+    kind: "thirdPartySite",
+    label: "nanoka ZZZ static JSON",
+    url: "https://static.nanoka.cc/manifest.json",
+    status: "readyForAdapter",
+    formalDataReady: false,
+    parserTargets: [
+      "agent and Bangboo base panel raw fields",
+      "skill parameter tables",
+      "Deadly Assault period / zone / buff / boss detail raw fields",
+      "Sentinel / decibel raw fields",
+      "approved-live snapshot diff inputs",
+    ],
+    sourceVersionStrategy:
+      "Resolve manifest.zzz.live, retain the configured live snapshot, and treat manifest.zzz.latest as research/drift only unless lo-user approves a version upgrade.",
+    discoveredAssets: [
+      "data/source/raw/nanoka/zzz/2.8/fetch-manifest.json",
+      "data/source/raw/nanoka/zzz/2.8/manifest.json",
+      "data/source/raw/nanoka/zzz/2.8/boss.json",
+      "data/source/raw/nanoka/zzz/2.8/zh/character/1021.json",
+      "data/source/raw/nanoka/zzz/2.8/zh/boss/69036.json",
+    ],
+    fetchPolicy: {
+      mode: "httpGet",
+      maxRequestsPerMinute: 30,
+      cacheRequired: true,
+      conditionalRequestsPreferred: true,
+      requiresUserAgent: true,
+    },
+    compliance: {
+      robotsTxt: "notChecked",
+      termsStatus: "requiresHumanReview",
+      redistribution: "cleanedDataOnly",
+      notes: [
+        "D-20 R1/R6 locks nanoka as the exclusive source for source-backed cleaned data.",
+        "Release artifacts default to manifest.zzz.live; latest/pre-release snapshots are research-only unless lo-user approves a version upgrade.",
+        "Phase 2 raw snapshot retention is for source-gate and adapter-skeleton verification only; runtime cutover waits for normalization, semantic mapping, and QA drift audit.",
+      ],
+    },
+  },
+  {
     id: "lo-user-excel",
     kind: "excel",
     label: "lo-user provided ZZZ data workbook",
