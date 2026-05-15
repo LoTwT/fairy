@@ -1,7 +1,7 @@
 # Nanoka Drift Report: phase3-sync-001-g01-g26
 
 Status: Phase 3 drift audit first G01-G26 sync
-Generated: 2026-05-15T16:45:00+08:00
+Generated: 2026-05-15T17:25:00+08:00
 
 This report compares archived G01-G26 replay baselines against nanoka candidate coverage/status/source paths. Full runtime cutover remains disabled.
 
@@ -25,9 +25,9 @@ This report compares archived G01-G26 replay baselines against nanoka candidate 
 |---|---:|
 | `same` | 0 |
 | `changed` | 0 |
-| `missing` | 4 |
+| `missing` | 0 |
 | `new` | 0 |
-| `semantic-mismatch` | 22 |
+| `semantic-mismatch` | 26 |
 
 Unresolved blocking drift rows: **26**
 
@@ -58,10 +58,10 @@ Runtime cutover ready: **false**
 | `G19` | `goldenAnchors.G19.nanokaCandidateCoverage` | `semantic-mismatch` | `pending` | First sync has nanoka candidate coverage, but Phase 3 has not ruled semantic equivalence against the archived golden replay baseline. |
 | `G20` | `goldenAnchors.G20.nanokaCandidateCoverage` | `semantic-mismatch` | `pending` | First sync has nanoka candidate coverage, but Phase 3 has not ruled semantic equivalence against the archived golden replay baseline. |
 | `G21` | `goldenAnchors.G21.nanokaCandidateCoverage` | `semantic-mismatch` | `pending` | First sync has nanoka candidate coverage, but Phase 3 has not ruled semantic equivalence against the archived golden replay baseline. |
-| `G22` | `goldenAnchors.G22.nanokaCandidateCoverage` | `missing` | `pending` | First sync is missing required approved-live nanoka candidate sample(s): nanoka-character-nicole-live-1031. |
-| `G23` | `goldenAnchors.G23.nanokaCandidateCoverage` | `missing` | `pending` | First sync is missing required approved-live nanoka candidate sample(s): nanoka-character-yanagi-live-1221. |
-| `G24` | `goldenAnchors.G24.nanokaCandidateCoverage` | `missing` | `pending` | First sync is missing required approved-live nanoka candidate sample(s): nanoka-bangboo-penguinboo-live-53001. |
-| `G25` | `goldenAnchors.G25.nanokaCandidateCoverage` | `missing` | `pending` | First sync is missing required approved-live nanoka candidate sample(s): nanoka-bangboo-sharkboo-live-54001. |
+| `G22` | `goldenAnchors.G22.nanokaCandidateCoverage` | `semantic-mismatch` | `pending` | First sync has nanoka candidate coverage, but Phase 3 has not ruled semantic equivalence against the archived golden replay baseline. |
+| `G23` | `goldenAnchors.G23.nanokaCandidateCoverage` | `semantic-mismatch` | `pending` | First sync has nanoka candidate coverage, but Phase 3 has not ruled semantic equivalence against the archived golden replay baseline. |
+| `G24` | `goldenAnchors.G24.nanokaCandidateCoverage` | `semantic-mismatch` | `pending` | First sync has nanoka candidate coverage, but Phase 3 has not ruled semantic equivalence against the archived golden replay baseline. |
+| `G25` | `goldenAnchors.G25.nanokaCandidateCoverage` | `semantic-mismatch` | `pending` | First sync has nanoka candidate coverage, but Phase 3 has not ruled semantic equivalence against the archived golden replay baseline. |
 | `G26` | `goldenAnchors.G26.nanokaCandidateCoverage` | `semantic-mismatch` | `pending` | First sync has nanoka candidate coverage, but Phase 3 has not ruled semantic equivalence against the archived golden replay baseline. |
 
 

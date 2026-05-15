@@ -55,6 +55,7 @@ export const dataSourceDescriptors = [
       "Deadly Assault period / zone / buff / boss detail raw fields",
       "Adrenaline and Resonance recovery raw fields",
       "enemy monster_info variant mapping raw fields",
+      "Phase 3 Nicole/Yanagi/Penguinboo/Sharkboo candidate coverage",
       "approved-live snapshot diff inputs",
     ],
     sourceVersionStrategy:
@@ -65,6 +66,8 @@ export const dataSourceDescriptors = [
       "data/source/raw/nanoka/zzz/2.8/boss.json",
       "data/source/raw/nanoka/zzz/2.8/zh/character/1021.json",
       "data/source/raw/nanoka/zzz/2.8/zh/character/1371.json",
+      "data/source/raw/nanoka/zzz/2.8/zh/character/1031.json",
+      "data/source/raw/nanoka/zzz/2.8/zh/character/1221.json",
       "data/source/raw/nanoka/zzz/2.8/zh/boss/69036.json",
       "data/source/raw/nanoka/zzz/2.8/zh/monster/30000.json",
       "data/source/raw/nanoka/zzz/2.8/zh/monster/30004.json",
@@ -73,6 +76,8 @@ export const dataSourceDescriptors = [
       "data/source/raw/nanoka/zzz/2.8/zh/monster/200034.json",
       "data/source/raw/nanoka/zzz/2.8/zh/monster/30033.json",
       "data/source/raw/nanoka/zzz/2.8/zh/monster/300211.json",
+      "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53001.json",
+      "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54001.json",
     ],
     fetchPolicy: {
       mode: "httpGet",

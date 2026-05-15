@@ -89,6 +89,26 @@ function snapshotAssets(snapshot) {
       evidenceUse: "adrenaline-resonance-source-gate",
     },
     {
+      id: "character-nicole-1031",
+      url: `https://static.nanoka.cc/zzz/${snapshot}/zh/character/1031.json`,
+      path: "zh/character/1031.json",
+      entityType: "character",
+      language: "zh",
+      entityId: 1031,
+      approvedForCleanedOutput: true,
+      evidenceUse: "phase3-g22-passive-candidate-gate",
+    },
+    {
+      id: "character-yanagi-1221",
+      url: `https://static.nanoka.cc/zzz/${snapshot}/zh/character/1221.json`,
+      path: "zh/character/1221.json",
+      entityType: "character",
+      language: "zh",
+      entityId: 1221,
+      approvedForCleanedOutput: true,
+      evidenceUse: "phase3-g23-passive-candidate-gate",
+    },
+    {
       id: "boss-69036",
       url: `https://static.nanoka.cc/zzz/${snapshot}/zh/boss/69036.json`,
       path: "zh/boss/69036.json",
@@ -179,6 +199,26 @@ function snapshotAssets(snapshot) {
       evidenceUse: "bangboo-panel-skill-source-gate",
     },
     {
+      id: "bangboo-penguinboo-53001",
+      url: `https://static.nanoka.cc/zzz/${snapshot}/zh/bangboo/53001.json`,
+      path: "zh/bangboo/53001.json",
+      entityType: "bangboo",
+      language: "zh",
+      entityId: 53001,
+      approvedForCleanedOutput: true,
+      evidenceUse: "phase3-g24-bangboo-candidate-gate",
+    },
+    {
+      id: "bangboo-sharkboo-54001",
+      url: `https://static.nanoka.cc/zzz/${snapshot}/zh/bangboo/54001.json`,
+      path: "zh/bangboo/54001.json",
+      entityType: "bangboo",
+      language: "zh",
+      entityId: 54001,
+      approvedForCleanedOutput: true,
+      evidenceUse: "phase3-g25-bangboo-candidate-gate",
+    },
+    {
       id: "weapon-yixuan-signature-14137",
       url: `https://static.nanoka.cc/zzz/${snapshot}/zh/weapon/14137.json`,
       path: "zh/weapon/14137.json",
@@ -229,6 +269,8 @@ function summarizeSnapshot(snapshot, assets) {
   const bossIndex = readJson(join(sourceRoot, snapshot, "boss.json"))
   const character = readJson(join(sourceRoot, snapshot, "zh/character/1021.json"))
   const sentinelCharacter = readJson(join(sourceRoot, snapshot, "zh/character/1371.json"))
+  const nicoleCharacter = readJson(join(sourceRoot, snapshot, "zh/character/1031.json"))
+  const yanagiCharacter = readJson(join(sourceRoot, snapshot, "zh/character/1221.json"))
   const boss = readJson(join(sourceRoot, snapshot, "zh/boss/69036.json"))
   const monsterSamples = [
     {
@@ -293,6 +335,8 @@ function summarizeSnapshot(snapshot, assets) {
     }
   })
   const bangboo = readJson(join(sourceRoot, snapshot, "zh/bangboo/54008.json"))
+  const penguinboo = readJson(join(sourceRoot, snapshot, "zh/bangboo/53001.json"))
+  const sharkboo = readJson(join(sourceRoot, snapshot, "zh/bangboo/54001.json"))
   const weapon = readJson(join(sourceRoot, snapshot, "zh/weapon/14137.json"))
   const equipment = readJson(join(sourceRoot, snapshot, "zh/equipment/31000.json"))
 
@@ -306,10 +350,18 @@ function summarizeSnapshot(snapshot, assets) {
     throw new Error("character sample id drifted")
   if (sentinelCharacter.id !== 1371)
     throw new Error("sentinel character sample id drifted")
+  if (nicoleCharacter.id !== 1031)
+    throw new Error("Nicole character sample id drifted")
+  if (yanagiCharacter.id !== 1221)
+    throw new Error("Yanagi character sample id drifted")
   if (boss.id !== 69036)
     throw new Error("boss sample id drifted")
   if (bangboo.id !== 54008)
     throw new Error("bangboo sample id drifted")
+  if (penguinboo.id !== 53001)
+    throw new Error("Penguinboo sample id drifted")
+  if (sharkboo.id !== 54001)
+    throw new Error("Sharkboo sample id drifted")
   if (weapon.id !== 14137)
     throw new Error("weapon sample id drifted")
   if (equipment.id !== 31000)
@@ -348,6 +400,20 @@ function summarizeSnapshot(snapshot, assets) {
         "/skill/basic/description/4/param/0/param/1371001/rp_recovery",
       ],
     },
+    passiveCharacterSamples: [
+      {
+        id: nicoleCharacter.id,
+        codeName: nicoleCharacter.code_name,
+        hasStats: nicoleCharacter.stats !== undefined,
+        skillKeys: Object.keys(nicoleCharacter.skill ?? {}),
+      },
+      {
+        id: yanagiCharacter.id,
+        codeName: yanagiCharacter.code_name,
+        hasStats: yanagiCharacter.stats !== undefined,
+        skillKeys: Object.keys(yanagiCharacter.skill ?? {}),
+      },
+    ],
     deadlyAssaultSample: {
       id: boss.id,
       zoneCount: Object.keys(boss.zone ?? {}).length,
@@ -370,6 +436,20 @@ function summarizeSnapshot(snapshot, assets) {
       hasStats: bangboo.stats !== undefined,
       hasSkillProp: bangboo.skill_prop !== undefined,
     },
+    bangbooCandidateSamples: [
+      {
+        id: penguinboo.id,
+        codeName: penguinboo.code_name,
+        hasStats: penguinboo.stats !== undefined,
+        hasSkillProp: penguinboo.skill_prop !== undefined,
+      },
+      {
+        id: sharkboo.id,
+        codeName: sharkboo.code_name,
+        hasStats: sharkboo.stats !== undefined,
+        hasSkillProp: sharkboo.skill_prop !== undefined,
+      },
+    ],
     wEngineSample: {
       id: weapon.id,
       codeName: weapon.code_name,

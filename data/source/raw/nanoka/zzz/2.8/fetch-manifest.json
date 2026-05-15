@@ -2,8 +2,8 @@
   "schemaVersion": "nanoka-fetch-manifest-v1",
   "sourceId": "nanoka-zzz",
   "snapshotId": "2.8",
-  "fetchedAt": "2026-05-15T13:20:00+08:00",
-  "generatedAt": "2026-05-15T13:20:00+08:00",
+  "fetchedAt": "2026-05-15T17:15:00+08:00",
+  "generatedAt": "2026-05-15T17:15:00+08:00",
   "parserVersion": "nanoka-source-v0.1.0",
   "userAgent": "fairy-data-source-audit/0.1 (+https://github.com/LoTwT/fairy)",
   "formalLivePolicy": {
@@ -107,6 +107,48 @@
       },
       "bytes": 94293,
       "sha256": "710c0e2fa5fca2779819b76c23a4abf8d445ba7e4a2f1cbfccd9145185143c94"
+    },
+    {
+      "id": "character-nicole-1031",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/character/1031.json",
+      "path": "zh/character/1031.json",
+      "entityType": "character",
+      "language": "zh",
+      "entityId": 1031,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "phase3-g22-passive-candidate-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/character/1031.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b8-16dda\"",
+        "lastModified": "Wed, 06 May 2026 01:00:40 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 93659,
+      "sha256": "559d3c5959867b26d41581777d9235de4f17d671a12b68944e3422f07696dcbf"
+    },
+    {
+      "id": "character-yanagi-1221",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/character/1221.json",
+      "path": "zh/character/1221.json",
+      "entityType": "character",
+      "language": "zh",
+      "entityId": 1221,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "phase3-g23-passive-candidate-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/character/1221.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b9-12142\"",
+        "lastModified": "Wed, 06 May 2026 01:00:41 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 74051,
+      "sha256": "028108dc56d4f4daf3219de3e46c16a015a8163136c6d6f25f5a5ab400a812f0"
     },
     {
       "id": "boss-69036",
@@ -298,6 +340,48 @@
       "sha256": "02a203d3bcdf5b6c1d756e0a5f2957658a13b889305da5dbd8ce27f9a8dbee60"
     },
     {
+      "id": "bangboo-penguinboo-53001",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/bangboo/53001.json",
+      "path": "zh/bangboo/53001.json",
+      "entityType": "bangboo",
+      "language": "zh",
+      "entityId": 53001,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "phase3-g24-bangboo-candidate-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53001.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b8-3b8b\"",
+        "lastModified": "Wed, 06 May 2026 01:00:40 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 15244,
+      "sha256": "86fcf7cdb96f636c71568689f81c5bbe8bf94bd7ff26089787a42b7d521f1023"
+    },
+    {
+      "id": "bangboo-sharkboo-54001",
+      "url": "https://static.nanoka.cc/zzz/2.8/zh/bangboo/54001.json",
+      "path": "zh/bangboo/54001.json",
+      "entityType": "bangboo",
+      "language": "zh",
+      "entityId": 54001,
+      "approvedForCleanedOutput": true,
+      "evidenceUse": "phase3-g25-bangboo-candidate-gate",
+      "sourceVersion": "2.8",
+      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54001.json",
+      "status": 200,
+      "headers": {
+        "etag": "\"69fa92b8-420c\"",
+        "lastModified": "Wed, 06 May 2026 01:00:40 GMT",
+        "contentType": "application/json",
+        "cacheControl": "max-age=120"
+      },
+      "bytes": 16909,
+      "sha256": "c4c4f2685dd8913ad65658721b1acf96162a0f3203b2a7c1da070058b6361b2c"
+    },
+    {
       "id": "weapon-yixuan-signature-14137",
       "url": "https://static.nanoka.cc/zzz/2.8/zh/weapon/14137.json",
       "path": "zh/weapon/14137.json",
@@ -373,6 +457,32 @@
         "/skill/basic/description/4/param/0/param/1371001/rp_recovery"
       ]
     },
+    "passiveCharacterSamples": [
+      {
+        "id": 1031,
+        "codeName": "Nicole",
+        "hasStats": true,
+        "skillKeys": [
+          "basic",
+          "dodge",
+          "special",
+          "chain",
+          "assist"
+        ]
+      },
+      {
+        "id": 1221,
+        "codeName": "Yanagi",
+        "hasStats": true,
+        "skillKeys": [
+          "basic",
+          "dodge",
+          "special",
+          "chain",
+          "assist"
+        ]
+      }
+    ],
     "deadlyAssaultSample": {
       "id": 69036,
       "zoneCount": 3,
@@ -481,6 +591,20 @@
       "hasStats": true,
       "hasSkillProp": true
     },
+    "bangbooCandidateSamples": [
+      {
+        "id": 53001,
+        "codeName": "Penguinboo",
+        "hasStats": true,
+        "hasSkillProp": true
+      },
+      {
+        "id": 54001,
+        "codeName": "Sharkboo",
+        "hasStats": true,
+        "hasSkillProp": true
+      }
+    ],
     "wEngineSample": {
       "id": 14137,
       "codeName": "Weapon_S_1371",
@@ -492,6 +616,6 @@
       "name": "啄木鸟电音",
       "hasSetDescriptions": true
     },
-    "retainedAssetCount": 15
+    "retainedAssetCount": 19
   }
 }

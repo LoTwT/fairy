@@ -195,6 +195,38 @@ function validateMatrixAgainstRegistry(matrix, registry) {
     assert(bangbooElementRow.rawFieldPaths?.includes(rawPath), `bangboos.element: missing raw path ${rawPath}`)
   }
 
+  const passiveModifierRow = resourceRows.get("agents.passiveModifiers")
+  assert(passiveModifierRow !== undefined, "agents.passiveModifiers: missing passive modifier row")
+  assert(passiveModifierRow.status === "verified-from-nanoka", "agents.passiveModifiers: row must stay verified after passive candidate fetch")
+  assert(passiveModifierRow.promotable === false, "agents.passiveModifiers: row must not become promotable before typed modifier template")
+  assert(passiveModifierRow.blockedBy?.includes("typed-modifier-template-required"), "agents.passiveModifiers: typed modifier blocker must remain until ruling/template work")
+  for (const sampleId of [
+    "nanoka-character-nicole-live-1031",
+    "nanoka-character-yanagi-live-1221",
+  ]) {
+    const sample = sampleById.get(sampleId)
+    assert(sample !== undefined, `agents.passiveModifiers: missing Phase 3 live sample ${sampleId}`)
+    assert(sample.approvedForCleanedOutput === true, `${sampleId}: passive supporting sample must be approved live evidence`)
+    assert(sample.version === nanoka.configuredLiveVersion, `${sampleId}: passive supporting sample must use configuredLiveVersion`)
+    assert(passiveModifierRow.supportingSampleEntities?.includes(sampleId), `agents.passiveModifiers: supporting samples must include ${sampleId}`)
+  }
+
+  for (const fieldId of ["bangboos.basePanel", "bangboos.skillSegments"]) {
+    const row = resourceRows.get(fieldId)
+    assert(row !== undefined, `${fieldId}: missing Bangboo candidate row`)
+    assert(row.status === "verified-from-nanoka", `${fieldId}: row must stay verified after Phase 3 candidate fetch`)
+    for (const sampleId of [
+      "nanoka-bangboo-penguinboo-live-53001",
+      "nanoka-bangboo-sharkboo-live-54001",
+    ]) {
+      const sample = sampleById.get(sampleId)
+      assert(sample !== undefined, `${fieldId}: missing Phase 3 live sample ${sampleId}`)
+      assert(sample.approvedForCleanedOutput === true, `${sampleId}: Bangboo supporting sample must be approved live evidence`)
+      assert(sample.version === nanoka.configuredLiveVersion, `${sampleId}: Bangboo supporting sample must use configuredLiveVersion`)
+      assert(row.supportingSampleEntities?.includes(sampleId), `${fieldId}: supporting samples must include ${sampleId}`)
+    }
+  }
+
   const driveDiscSlotRow = resourceRows.get("driveDiscs.slotAndSubstatTables")
   assert(driveDiscSlotRow !== undefined, "driveDiscs.slotAndSubstatTables: missing Drive Disc slot/stat row")
   assert(driveDiscSlotRow.status === "deferred", "driveDiscs.slotAndSubstatTables: row must be deferred after owner scope decision")
