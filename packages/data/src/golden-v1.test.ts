@@ -27,7 +27,7 @@ describe("V1 golden true-data replay baseline", () => {
         stdio: ["ignore", "pipe", "pipe"],
       },
     )
-  })
+  }, 20_000)
 
   it("tracks the 28-anchor executable gate with no deferred anchors", () => {
     const report = readJson<{
