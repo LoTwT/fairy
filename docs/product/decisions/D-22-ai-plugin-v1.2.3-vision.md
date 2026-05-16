@@ -113,28 +113,22 @@ V1.2.3 不破 D-21 §5 tri-layer 设计：
 | Sample screenshot 提供 + 字段标注 baseline | @lo-user → @TechLead + @QA fixture | — |
 | V1.2.x patch hand-off (in-game / 多工具 / OCR / multi-image) | @Product → 后续 owner TBD | — |
 
-## 7. Acceptance Gates（V-G1..V-G5 vision-specific + G1-G10 vision 扩展）
+## 7. Acceptance Gates
 
-详见 QA `acceptance.md`。Vision-specific 新增 5 gates：
+V1.2.3 vision-specific acceptance gates 由 QA owned，详见
+`docs/ai-plugin/v1.2.3-vision/acceptance.md` canonical taxonomy。
 
-| Gate | 主题 | V1.2.3 状态 |
-|---|---|---|
-| V-G1 | Source detect 正确性（工坊 / 米游社 → correct layout map） | required |
-| V-G2 | Vision parse 字段精度（agent / panel / W-Engine / Drive Disc 各字段 vs golden） | required |
-| V-G3 | CLI-only 契约保留（vision 不算数 / 不补全未见值） | required |
-| V-G4 | Schema 边界（strict BattleSnapshot 仅 totals；base/bonus → draftMetadata） | required |
-| V-G5 | NL fallback 触发（低置信度 / unknown source → fairy-snapshot 3-tier dialog） | required |
+Vision-specific gates V-G1..V-G5 涵盖：
 
-G1-G10 vision 扩展：
+- Source detection & layout routing
+- Schema boundary（panel = totals / base+bonus → draftMetadata）
+- Review/edit uncertainty & confidence surface
+- PII exclusion（vision extract 但不进 strict BattleSnapshot）
+- End-to-end CLI calc validation（vision draft → review → fairy calc）
 
-- G1 (plugin install)：vision skill discovery + trigger phrase update
-- G3 (snapshot correctness)：vision path 输出与 NL 路径相同 BattleSnapshot
-  schema
-- G5 (explain field consumption)：vision draft metadata 不被 explain
-  错误消费
-
-G6 compare：仍 deferred（per D-21 §3.2 + V0.1.3 ship 已含 compare CLI
-但 plugin G6 gate 仍未启用，待 V1.2.x patch）。
+G1-G10 vision 扩展 + G6 compare deferred 状态详见 acceptance.md。具体 gate
+命名 / 验证脚本 / fixture coverage 全部以 `acceptance.md` 为 source of
+truth；本 D-22 仅承载决策 lock，不重复 gate 命名定义。
 
 ## 8. Open Risks 与 follow-up
 
