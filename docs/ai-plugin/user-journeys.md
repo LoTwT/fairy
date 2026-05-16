@@ -189,7 +189,8 @@ Rationale: P1 users get confused by long sequential dialogs; batching with a num
 
 ```
 User: "算一下..."
-AI invokes fairy-snapshot ... validation step calls `fairy calc`.
+AI routes through fairy-snapshot, asks for review/confirm, then fairy-calc calls
+`fairy calc`.
 CLI returns: not-found / version-too-old.
 
 AI response (zh):
@@ -200,7 +201,7 @@ AI response (zh):
 
 Do not attempt to compute anything without the CLI. Do not partially proceed.
 
-### Snapshot validation failure (CLI parse error)
+### Snapshot validation failure in fairy-calc (CLI parse error)
 
 ```
 fairy CLI returns parse error: "actor.weapon.id is required"
@@ -329,7 +330,7 @@ V1.2.2 deliberately does **not** ship screenshot recognition / OCR. V1.2.3 will 
 
 1. **Output shape**: vision/OCR pipeline must produce a `BattleSnapshot` draft conforming to the same schema as `fairy-snapshot`. No parallel schema is introduced.
 2. **Review/edit gate**: the user must be presented with the recognized snapshot draft and given the opportunity to edit before any calc invocation. Vision recognition has non-zero error rate; silent calc on wrong data is the worst UX outcome.
-3. **Validation**: after user edits, the snapshot must pass `fairy calc <snapshot> --view verbose --lang <lang>` validation (same gate as `fairy-snapshot`).
+3. **Validation**: after user edits and review/confirm, the snapshot must pass `fairy calc <snapshot> --view verbose --lang <lang>` validation in the `fairy-calc` gate.
 4. **Fallback**: if vision recognition confidence is below threshold or user is unhappy with the result, the system must fall back to NL dialog (`fairy-snapshot` standard flow).
 5. **Confidence surface**: AI must indicate per-field confidence (e.g., "我从截图认出仪玄 60 级 (高置信度), 但 Drive Disc 副词条数值置信度低，请你 review") and ask user to confirm low-confidence fields.
 

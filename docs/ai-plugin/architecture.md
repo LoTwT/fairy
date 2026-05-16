@@ -140,7 +140,7 @@ Outputs:
 - candidate `BattleSnapshot` JSON;
 - missing-field questions grouped by the field-tier policy;
 - draft metadata for optional defaults/omissions and unknowns;
-- validation result from `fairy calc`.
+- review/confirm handoff state for `fairy-calc`.
 
 Rules:
 
@@ -220,12 +220,12 @@ V1.2.2 has two user-facing entries:
 
 | Entry | Internal skills | User-facing behavior |
 | --- | --- | --- |
-| Build and calculate | `fairy-snapshot` -> `fairy-calc` | User describes a build, AI drafts a snapshot, asks for critical fields, validates with CLI, then summarizes the result. |
+| Build and calculate | `fairy-snapshot` -> `fairy-calc` | User describes a build, AI drafts a snapshot, asks for critical fields, asks for review/confirm, then `fairy-calc` validates with CLI and summarizes the result. |
 | Explain existing result | `fairy-explain` | User pastes or references a `CalcResult`; AI explains the trusted output without recalculation. |
 
 The first entry may be autonomous inside one conversation, but the snapshot draft
-must be reviewable. Critical uncertainty blocks calculation until the user
-answers or explicitly accepts a reduced path that the CLI can validate.
+must be reviewable. Critical uncertainty blocks handoff to `fairy-calc` until
+the user answers or explicitly accepts a reduced path that the CLI can validate.
 
 ## Language Contract
 

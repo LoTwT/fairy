@@ -180,16 +180,16 @@ buff 数值计算。所有计算必须：
 
 | Gate | 主题 | V1.2.2 状态 |
 |---|---|---|
-| G1 | Plugin 安装 / discovery / fresh install smoke | required |
-| G2 | `fairy-calc` 必须调 CLI（AI 不自算） | required |
-| G3 | `fairy-snapshot` NL → BattleSnapshot 正确性 + ask-user dialog | required |
-| G4 | CLI fail-loud（错误透传 + 不编造） | required |
-| G5 | `fairy-explain` 字段消费正确性（不解释不存在字段） | required |
-| G6 | `fairy compare` 集成 + 多 snapshot 对比 | **deferred** |
-| G7 | Tri-layer i18n / lang detect / override sticky / 4 edge case | required |
-| G8 | Entity normalization（zh ↔ en alias） | required |
-| G9 | Chaining 模型 A（critical step review/confirm） | required |
-| G10 | Fixture 3-tier 策略覆盖 + release smoke | required |
+| G1 | Skill discovery and metadata | required |
+| G2 | CLI binding and no-model-calculation | required |
+| G3 | Snapshot generation and validation | required |
+| G4 | Calc correctness | required |
+| G5 | Explain correctness | required |
+| G6 | Compare workflow | **deferred** |
+| G7 | Version sync | required |
+| G8 | Privacy and local-data boundary | required |
+| G9 | Distribution smoke | required |
+| G10 | Docs and onboarding | required |
 
 ## 9. Open Risks 与 follow-up
 

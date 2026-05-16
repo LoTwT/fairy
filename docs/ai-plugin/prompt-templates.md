@@ -63,8 +63,8 @@ displayName:
 description: >
   Turn a natural-language build description into a valid fairy BattleSnapshot
   JSON. Asks the user about missing critical fields, defaults optional fields
-  with a warning, and validates the result by running `fairy calc --view verbose`
-  before returning.
+  with a warning, and returns a reviewable draft. Validation/calculation happens
+  in `fairy-calc` after user review/confirm.
 trigger:
   phrases:
     - "build snapshot"
@@ -82,7 +82,7 @@ inputs:
   - userBuildDescription: string (NL, zh or en)
   - partialSnapshot: BattleSnapshot (optional; for V1.2.3 vision fallback)
 outputs:
-  - snapshot: BattleSnapshot (validated against parseBattleSnapshot)
+  - snapshot: BattleSnapshot draft (reviewable; CLI validation happens in fairy-calc)
   - draftMetadata.defaultedFields: string[] (optional defaults/omissions surfaced to the user; not written as ad hoc snapshot fields)
   - draftMetadata.unknownFields: string[] (unknowns surfaced to the user; not written as ad hoc snapshot fields)
 calls:

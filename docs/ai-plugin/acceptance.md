@@ -128,7 +128,8 @@ Required behavior:
 - `fairy-calc` checks for a compatible `fairy` / `@randomplay/cli` before use;
 - version mismatch fails loud with an install/upgrade instruction;
 - `fairy-calc` invokes `fairy calc <snapshot> --view verbose --lang <lang>`;
-- `fairy-snapshot` validates generated snapshots by running the same `fairy calc`
+- `fairy-snapshot` emits a reviewable draft and draft metadata only; after user
+  review/confirm, `fairy-calc` validates/calculates through the same `fairy calc`
   path, because no dedicated `--preflight` flag exists in V1.2.2;
 - `fairy-explain` consumes an existing `CalcResult` and does not calculate.
 
