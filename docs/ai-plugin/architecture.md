@@ -103,8 +103,8 @@ Claude Code Plugin / Codex instructions
       |
       v
 Skills
-  fairy-snapshot  -> BattleSnapshot draft -> review/confirm -> CLI validation
-  fairy-calc      -> fairy calc CLI       -> CalcResult JSON + brief summary
+  fairy-snapshot  -> BattleSnapshot draft -> review/confirm handoff
+  fairy-calc      -> CLI validation/calculation -> CalcResult JSON + brief summary
   fairy-explain   -> existing CalcResult  -> explanation over actual fields
       |
       v
