@@ -2,6 +2,19 @@
 
 All notable changes to Fairy are documented in this file.
 
+## 0.1.3 - 2026-05-16
+
+### Added
+
+- Scaffold V1.2.2 plugin skeleton
+- Add V1.2.2 example fixtures
+- Formalize compare output (#95)
+
+### Documentation
+
+- Plan V1.2.2 AI plugin skills
+- Prepare v0.1.3 patch notes
+
 ## 0.1.2 - 2026-05-16
 
 ### Changed
