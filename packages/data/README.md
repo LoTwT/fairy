@@ -44,6 +44,9 @@ Current state:
   package-local `packages/data/cleaned/` for npm packaging;
 - package exports include TypeScript source/types plus package-local cleaned
   JSON, and exclude raw source archives.
+- package-size release guard is enforced by
+  `pnpm --filter @randomplay/data verify:package-size`; the root export loads
+  the packaged runtime JSON at runtime instead of bundling it into `dist`.
 
 Do not add hand-written formal game data to this package. Formal rows must be
 derived from source documents and preserve source metadata.
@@ -77,5 +80,6 @@ Useful source checks:
 - `pnpm --filter @randomplay/data verify:nanoka`
 - `pnpm --filter @randomplay/data verify:nanoka-da-history`
 - `pnpm --filter @randomplay/data verify:nanoka-runtime`
+- `pnpm --filter @randomplay/data verify:package-size`
 - `pnpm --filter @randomplay/data verify:source-registry`
 - `pnpm --filter @randomplay/data verify:source-migration`
