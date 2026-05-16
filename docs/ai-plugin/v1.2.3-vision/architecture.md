@@ -363,4 +363,3 @@ unchanged.
 | Base+bonus data pressures schema expansion | Keep split in extraction evidence; strict snapshot remains total-only for MVP. |
 | Host tool lacks image input | Fail loud and route to NL `fairy-snapshot`; do not claim vision support on that host. |
 | Vision result differs from community-tool score | Community scores are evidence only; Fairy result always comes from CLI. |
-
