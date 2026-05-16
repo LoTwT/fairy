@@ -45,7 +45,9 @@ tri-layer 契约改动须同时改 plugin 仓与 ai-plugin 文档；CLI-only 计
 - 3 内部 skill：`fairy-snapshot` / `fairy-calc` / `fairy-explain`（详见 §4）
 - 工具适配：Claude Code Plugin (`.claude-plugin/plugins/<name>/skills`) +
   Codex (`.codex/`)
-- ask-user 3-tier dialog（critical 必问 / optional 默认空 / unknown 标注）
+- ask-user 3-tier dialog（critical 必问 / optional 有记录的默认或省略 +
+  warning / unknown 作为 draft metadata 标注；不得写入 schema 不支持的
+  ad hoc snapshot 字段）
 - entity normalization layer（zh ↔ en alias → canonical key）
 - CLI 强约束：所有数值计算必须经 `fairy calc`，AI 不得自行求值
 - fail-loud：CLI 错误、schema 校验失败、unresolved entity 等必须显式上抛
@@ -103,7 +105,8 @@ draft 完成时、calc 输出 fail 时）必须给用户 review/confirm 机会�
 
 ### 4.5 Skill 内部协作
 
-- `fairy-snapshot` 输出 BattleSnapshot.json → `fairy-calc` 消费
+- `fairy-snapshot` 输出 BattleSnapshot.json draft + draft metadata →
+  `fairy-calc` 消费并执行 CLI validation/calculation
 - `fairy-calc` 输出 CalcResult.json → `fairy-explain` 消费（也可
   standalone 由用户提供）
 - 每 skill 独立 SKILL.md + 独立 few-shot fixture；canonical EN 一致

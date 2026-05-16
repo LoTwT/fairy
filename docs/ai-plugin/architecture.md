@@ -139,7 +139,7 @@ Outputs:
 
 - candidate `BattleSnapshot` JSON;
 - missing-field questions grouped by the field-tier policy;
-- warnings for optional unknowns;
+- draft metadata for optional defaults/omissions and unknowns;
 - validation result from `fairy calc`.
 
 Rules:
@@ -147,8 +147,10 @@ Rules:
 - map user-facing aliases to canonical IDs through packaged cleaned data and
   published aliases, not raw source files;
 - ask for critical missing fields before calculation;
-- allow optional fields to remain unknown only when the snapshot schema and
-  calculation path can handle the omission;
+- allow optional fields to remain omitted or unknown only when the existing
+  strict snapshot schema and calculation path can handle the omission;
+- keep default/unknown notes outside `BattleSnapshot` unless the schema already
+  defines a supported field for that information;
 - do not invent key values such as level, W-Engine, Drive Disc set, enemy, or
   attack segment;
 - do not calculate damage.
