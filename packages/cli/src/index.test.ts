@@ -1,5 +1,7 @@
+import type { BattleSnapshot } from "@randomplay/core"
 import { describe, expect, it } from "vitest"
 import { spawnSync } from "node:child_process"
+import { readFileSync } from "node:fs"
 import { tmpdir } from "node:os"
 import { dirname, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
@@ -11,7 +13,7 @@ const source = {
   sourceAnchor: "golden",
 }
 
-const baseSnapshot = {
+const baseSnapshot: BattleSnapshot = {
   schemaVersion: "1.0.0",
   gameVersion: "ZZZ-2.2",
   ruleSetVersion: "rules-v0.1",
@@ -57,6 +59,7 @@ const messages = {
   "ERR-CLI-JSON": "Localized JSON problem: {input}",
   "ERR-CLI-SCHEMA": "Localized schema problem.",
   "ERR-CLI-UNCAUGHT": "Localized uncaught problem: {message}",
+  "ERR-CMP-001": "Compare warning for {field}: {left} -> {right}",
   "ERR-SRC-001": "Modifier at {path} has no source.",
 }
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), "../../..")
@@ -203,14 +206,83 @@ describe("fairy cli", () => {
     })
     const code = await runCli(["compare", "left.json", "right.json"], io)
     const result = JSON.parse(io.output.stdout) as {
-      delta: { rawTotalDamage: number }
-      left: { summary: { rawTotalDamage: number } }
-      right: { summary: { rawTotalDamage: number } }
+      view: string
+      delta: { rawTotalDamage: { delta: number } }
+      left: { rawTotalDamage: number; attackSegments?: unknown[] }
+      right: { rawTotalDamage: number; attackSegments?: unknown[] }
+      diff: {
+        lanes: Array<{ laneId: string; rawDamage: { delta: number } }>
+        buckets: Array<{ bucketId: string; effectiveMultiplier: { delta: number } }>
+      }
     }
 
     expect(code).toBe(0)
-    expect(result.right.summary.rawTotalDamage).toBeGreaterThan(result.left.summary.rawTotalDamage)
-    expect(result.delta.rawTotalDamage).toBeCloseTo(90.909, 3)
+    expect(result.view).toBe("brief")
+    expect(result.left.attackSegments).toBeUndefined()
+    expect(result.right.rawTotalDamage).toBeGreaterThan(result.left.rawTotalDamage)
+    expect(result.delta.rawTotalDamage.delta).toBeCloseTo(90.909, 3)
+    expect(result.diff.lanes.some(lane => lane.laneId === "nonCrit" && lane.rawDamage.delta > 0)).toBe(true)
+    expect(result.diff.buckets.some(bucket => bucket.bucketId === "baseDamageZone" && bucket.effectiveMultiplier.delta > 0)).toBe(true)
+  })
+
+  it("writes verbose compare output with unchanged buckets included", async () => {
+    const io = fakeIo({
+      files: {
+        "/repo/left.json": JSON.stringify(baseSnapshot),
+        "/repo/right.json": JSON.stringify(baseSnapshot),
+      },
+    })
+    const code = await runCli(["compare", "left.json", "right.json", "--view", "verbose"], io)
+    const result = JSON.parse(io.output.stdout) as {
+      view: string
+      left: { trace: unknown[] }
+      right: { trace: unknown[] }
+      diff: { buckets: Array<{ status: string }> }
+    }
+
+    expect(code).toBe(0)
+    expect(result.view).toBe("verbose")
+    expect(result.left.trace.length).toBeGreaterThan(0)
+    expect(result.right.trace.length).toBeGreaterThan(0)
+    expect(result.diff.buckets.some(bucket => bucket.status === "unchanged")).toBe(true)
+  })
+
+  it("warns when compare inputs are apples-to-oranges", async () => {
+    const different = structuredClone(baseSnapshot)
+    different.team[0]!.agentId = "anby"
+    different.activeActor.agentId = "anby"
+    different.team[0]!.wEngine = { id: "starlight-engine" }
+    different.enemy.enemyId = "different-enemy"
+    const io = fakeIo({
+      files: {
+        "/repo/left.json": JSON.stringify(baseSnapshot),
+        "/repo/right.json": JSON.stringify(different),
+      },
+    })
+    const code = await runCli(["compare", "left.json", "right.json", "--lang", "en"], io)
+    const result = JSON.parse(io.output.stdout) as { warnings: Array<{ key: string; path: string }> }
+
+    expect(code).toBe(0)
+    expect(result.warnings.some(warning => warning.key === "ERR-CMP-001" && warning.path === "activeActor.agentId")).toBe(true)
+    expect(result.warnings.some(warning => warning.key === "ERR-CMP-001" && warning.path === "enemy")).toBe(true)
+    expect(result.warnings.some(warning => warning.key === "ERR-CMP-001" && warning.path === "team[active].wEngine.id")).toBe(true)
+    expect(io.output.stderr).toContain("WARNING ERR-CMP-001 activeActor.agentId")
+    expect(io.output.stderr).toContain("Compare warning for activeActor")
+  })
+
+  it("keeps the compare example fixture in sync", async () => {
+    const io = fakeIo({
+      files: {
+        "/repo/left.json": readFileSync(resolve(repoRoot, "examples/snapshots/s1-yixuan-sheer.json"), "utf8"),
+        "/repo/right.json": readFileSync(resolve(repoRoot, "examples/compare/yixuan-sheer-stronger.snapshot.json"), "utf8"),
+      },
+    })
+    const code = await runCli(["compare", "left.json", "right.json", "--view", "brief", "--lang", "zh", "--pretty"], io)
+    const expected = JSON.parse(readFileSync(resolve(repoRoot, "examples/compare/yixuan-sheer-stronger.brief.json"), "utf8"))
+
+    expect(code).toBe(0)
+    expect(JSON.parse(io.output.stdout)).toEqual(expected)
+    expect(io.output.stderr).toBe("")
   })
 
   it("passes result mode through to core calculation", async () => {

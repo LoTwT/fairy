@@ -364,7 +364,8 @@ QA fixture strategy: per `acceptance.md` 3-tier (skill-spec EN canonical + entit
 
 ## 9. Open questions & V1.2.x backlog
 
-- **fairy-compare skill** (V1.2.2.x): requires CLI `fairy compare` command first; deferred per D-21.
+- **fairy-compare skill** (V1.2.2.x): deferred per D-21; it should be scoped
+  as a separate plugin patch after the CLI compare contract is stable.
 - **Plugin marketplace distribution** (V1.2.2.x+): after skill API stabilizes through V1.2.2 dogfooding.
 - **Cursor support** (V1.2.x patch): not in V1.2.2; documented in V1.2.x candidates.
 - **Per-user plugin settings (lang preference, default --view)** (V1.2.x): currently relies on session-level lang detect; future settings system can override.

@@ -25,7 +25,7 @@ model reasoning as calculation evidence.
 | --- | --- |
 | AI.0 | V1.2.2 is a plan PR followed by an implementation PR; plugin files stay inside this repo. |
 | AI.1 | V1.2.2 supports Claude Code Plugin and Codex only; Cursor is deferred. |
-| AI.2 | `fairy-compare` is deferred until a CLI compare command and delta schema exist. |
+| AI.2 | `fairy-compare` is deferred to a follow-up plugin patch; CLI compare may exist independently first. |
 | U1 | Primary persona is a ZZZ player using natural language. |
 | U2 | MVP has three internal skills and two user-facing entries. |
 | U3 | i18n uses a tri-layer contract: English canonical layer, zh/en user-facing layer, and zh/en data/query layer where source data supports it. |
@@ -38,7 +38,8 @@ V1.2.2 does not include:
 
 - a standalone npm package for the plugin;
 - Cursor implementation beyond documented deferral;
-- `fairy compare`, compare deltas, or compare skill behavior;
+- `fairy-compare` skill behavior or direct `fairy compare` binding in the AI
+  plugin;
 - screenshot recognition, OCR, or vision model integration;
 - a new calculation API, formula implementation, or raw source reader;
 - a new `fairy calc --preflight` flag.

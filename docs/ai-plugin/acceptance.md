@@ -29,7 +29,8 @@ V1.2.2 covers:
 
 Out of scope for V1.2.2:
 
-- `fairy-compare`; the CLI compare command and delta schema do not exist yet.
+- `fairy-compare`; the AI plugin compare workflow remains deferred even if the
+  CLI `fairy compare` command exists independently.
 - Screenshot/OCR/vision ingestion; V1.2.2 may document the V1.2.3 interface only.
 - Cursor parity implementation.
 - A standalone npm plugin package or marketplace distribution.
@@ -67,7 +68,7 @@ CLI JSON, not translated prose.
 | G3 | Snapshot generation and validation | Required | NL-to-`BattleSnapshot` fixtures, ask-user fixtures, calc validation |
 | G4 | Calc correctness | Required | Golden prompt -> snapshot -> CLI JSON baseline |
 | G5 | Explain correctness | Required | `CalcResult` -> prose fixture, no invented trace/sourceRef |
-| G6 | Compare workflow | Deferred | Explicitly documented as out of scope until CLI compare exists |
+| G6 | Compare workflow | Deferred | Explicitly documented as out of scope until a follow-up AI plugin compare scope is approved |
 | G7 | Version sync | Required | `minFairyCliVersion` and mismatch/fail-loud tests |
 | G8 | Privacy and local-data boundary | Required | Docs + scan for network/OCR/source reads outside scope |
 | G9 | Distribution smoke | Required | Clean checkout/install discovery + skill smoke |
@@ -140,7 +141,9 @@ Forbidden behavior:
 - importing package internals or reading `packages/data/source/**` as a substitute
   for the published CLI/API;
 - continuing with a plausible-looking answer after CLI failure;
-- inventing a `fairy calc --preflight` or `fairy compare` command.
+- inventing a `fairy calc --preflight` command;
+- advertising or invoking `fairy compare` through the AI plugin before a
+  `fairy-compare` skill is explicitly scoped and shipped.
 
 Acceptance checks:
 
@@ -235,8 +238,8 @@ V1.2.2 must explicitly mark compare out of scope.
 Acceptance checks:
 
 - no `fairy-compare` skill is shipped;
-- docs state compare requires a future CLI `fairy compare` command and delta
-  schema;
+- docs state the AI plugin compare workflow requires a future Product-approved
+  plugin patch even after CLI compare exists;
 - metadata verifier fails if a compare skill appears without an explicit Product
   decision and CLI prerequisite.
 

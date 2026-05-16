@@ -24,7 +24,7 @@ V0.1.2 ship 后，lo-user 在 #fairy 启动 AI plugin V1.2.2 设计讨论，4 �
 |---|------|------|
 | AI.0 | 核心原则 | "薄 layer"：AI 负责结构化与解释，计算只信 fairy CLI；AI 不算数 |
 | AI.1 | 支持的 AI 工具 | V1.2.2 仅 Claude Code Plugin + Codex (`.codex/`)；Cursor 延后 |
-| AI.2 | G6 compare gate | 延后到 V1.2.x 后续 patch，与 `fairy compare` 配套到位时再启 |
+| AI.2 | G6 compare gate | 延后到 V1.2.x 后续 plugin patch；CLI `fairy compare` 可先独立落地，但 V1.2.2 不暴露 AI plugin compare workflow |
 | AI.3 | 截图识别 | V1.2.3 forward-spec：多模态模型优先，OCR 备选；同一 BattleSnapshot schema + review/edit + calc validation + NL fallback |
 | AI.4 | QA 接受门 | G1-G10（G6 defer）；3-tier fixture strategy（critical / optional / unknown） |
 | U1 | Primary persona | P1 ZZZ player（非开发者也能用） |
@@ -57,7 +57,7 @@ tri-layer 契约改动须同时改 plugin 仓与 ai-plugin 文档；CLI-only 计
 
 - Cursor 适配（→ V1.2.x 后续 patch）
 - 截图识别 / OCR / 视觉输入（→ V1.2.3）
-- `fairy compare` 集成 + G6 compare gate（→ V1.2.x 后续 patch）
+- `fairy compare` 的 AI plugin 集成 + G6 compare gate（→ V1.2.x 后续 patch；CLI compare 可独立提前落地）
 - Meta-skill `/help fairy`（trigger phrases + SKILL.md 自描述已足够）
 - AI 直接读 raw source（破坏 fairy CLI 唯一计算源原则）
 - AI 自主修改 CalcResult / snapshot 已 confirm 字段（破坏 fail-loud）
