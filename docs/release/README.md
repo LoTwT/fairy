@@ -31,5 +31,11 @@ Repo-specific notes:
   workflow red, but the publish and GitHub Release may already be complete; use
   the QA release-readiness checklist to distinguish npm propagation lag from a
   real package/install/runtime defect.
+- Test timeouts intentionally distinguish unit tests from verifier-heavy suites.
+  `@randomplay/core` stays on Vitest's short default timeout. `@randomplay/data`
+  and `@randomplay/cli` set a 30s Vitest timeout because their tests shell out to
+  `pnpm`, `npm pack`, `tsx`, or the CLI and can vary on cold GitHub runners. This
+  is only an interruption buffer; source gates, schema checks, package-size
+  limits, and runtime assertions remain strict.
 - The `npm-publish` environment, Trusted Publisher bindings, and `v*.*.*`
   tag-protection ruleset are repository settings, not source files.
