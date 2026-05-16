@@ -86,7 +86,7 @@ outputs:
   - draftMetadata.defaultedFields: string[] (optional defaults/omissions surfaced to the user; not written as ad hoc snapshot fields)
   - draftMetadata.unknownFields: string[] (unknowns surfaced to the user; not written as ad hoc snapshot fields)
 calls:
-  - "fairy calc <snapshot> --view verbose --lang <lang>" (for validation only; result discarded)
+  - none directly; validation/calculation happens in `fairy-calc` after user review/confirm
 boundary:
   - never invent critical field values
   - never compute damage
