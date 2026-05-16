@@ -582,9 +582,9 @@ Few-shot prompt fixtures are EN-canonical (per QA `39ce78c9` G4 strategy): same 
 
 - `examples/ai-plugin/prompts/build-yixuan-basic.md` — minimal NL build description → snapshot
 - `examples/ai-plugin/prompts/build-yixuan-full.md` — full NL build with all critical fields filled
-- `examples/ai-plugin/prompts/build-yixuan-ambiguous.md` — NL with ambiguous entity → disambiguation flow
-- `examples/ai-plugin/snapshots/yixuan-basic.json` — expected snapshot output
-- `examples/ai-plugin/expected/yixuan-basic-calc.json` — expected CalcResult shape (for explain skill fixture input)
+- `examples/ai-plugin/prompts/build-anby-ambiguous.md` — NL with ambiguous entity → disambiguation flow
+- `examples/ai-plugin/snapshots/yixuan-basic.snapshot.json` — expected snapshot output
+- `examples/ai-plugin/expected/yixuan-basic.calc.json` — expected CalcResult shape (for explain skill fixture input)
 
 QA fixture coverage matrix (per `acceptance.md`):
 - Skill spec discovery (G1/G2/G7/G9): EN canonical only.

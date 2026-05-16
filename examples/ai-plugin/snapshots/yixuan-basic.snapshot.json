@@ -1,0 +1,109 @@
+{
+  "schemaVersion": "1.0.0",
+  "gameVersion": "ZZZ-2.2",
+  "ruleSetVersion": "rules-v0.1",
+  "dataVersion": "nanoka@2.8",
+  "sourceVersion": "nanoka@2.8",
+  "locale": "zh",
+  "context": {
+    "gameMode": "hollowZeroAssault",
+    "activeRuleIds": ["current-live"]
+  },
+  "team": [
+    {
+      "agentId": "1371",
+      "level": 60,
+      "agentSpecialty": "rupture",
+      "attribute": "auricInk",
+      "skillLevels": {
+        "basic": 12
+      },
+      "mindscapeCinema": {
+        "level": 0
+      },
+      "wEngine": {
+        "id": "14137",
+        "level": 60,
+        "phase": 1
+      },
+      "driveDiscs": [
+        {
+          "id": "drive-slot-1",
+          "slot": 1,
+          "setId": "31000"
+        },
+        {
+          "id": "drive-slot-2",
+          "slot": 2,
+          "setId": "31000"
+        },
+        {
+          "id": "drive-slot-3",
+          "slot": 3,
+          "setId": "31000"
+        },
+        {
+          "id": "drive-slot-4",
+          "slot": 4,
+          "setId": "31000"
+        },
+        {
+          "id": "drive-slot-5",
+          "slot": 5,
+          "setId": "32004"
+        },
+        {
+          "id": "drive-slot-6",
+          "slot": 6,
+          "setId": "32004"
+        }
+      ],
+      "panel": {
+        "attack": 2200,
+        "maxHp": 12000,
+        "defense": 800,
+        "impact": 100,
+        "critRate": 0.35,
+        "critDamage": 0.8,
+        "etherDamageBonus": 0.3,
+        "sheerForce": 900
+      }
+    }
+  ],
+  "activeActor": {
+    "agentId": "1371"
+  },
+  "attackSegments": [
+    {
+      "id": "yixuan-basic-1",
+      "actor": {
+        "kind": "agent",
+        "agentId": "1371"
+      },
+      "skillId": "basic",
+      "levelKey": "basic",
+      "multiplier": 4.58,
+      "attribute": "auricInk",
+      "tags": ["basic"],
+      "damageType": "regular",
+      "source": {
+        "sourceId": "examples.ai-plugin",
+        "sourceVersion": "v1.2.2",
+        "dataPath": "character.1371.skill.basic"
+      }
+    }
+  ],
+  "enemy": {
+    "enemyId": "monster_info.current_da_boss",
+    "level": 60,
+    "rank": "boss",
+    "maxHp": 1000000,
+    "resistance": {
+      "ether": 0
+    }
+  },
+  "options": {
+    "includeTrace": true,
+    "lang": "zh"
+  }
+}
