@@ -11,7 +11,7 @@ All notable changes to Fairy are documented in this file.
 ### Documentation
 
 - Plan data package ownership refactor
-- Prepare v0.1.2 patch notes
+- Prepare v0.1.2 patch notes (#90)
 
 ## 0.1.1 - 2026-05-16
 
