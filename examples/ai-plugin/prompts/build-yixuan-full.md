@@ -11,16 +11,16 @@ This fixture demonstrates the **happy fast path**: AI has zero critical question
 ## User input
 
 ```
-算仪玄 60 级、武器命破之刃精炼 1、Drive Disc 啄木鸟电音 4 件套（slot 1-4）+ 钢铁躯壳 2 件套（slot 5-6），
+算仪玄 60 级、武器青溟笼舍精炼 1、Drive Disc 啄木鸟电音 4 件套（slot 1-4）+ 激素朋克 2 件套（slot 5-6），
 slot 4 主词条暴击率，slot 5 主词条攻击力%，slot 6 主词条电属性伤害加成，
 面板值按 5★ 满级默认即可。
-本期 DA boss，60 级。一段普通攻击伤害。
+格莱特，60 级。一段普通攻击伤害。
 ```
 
 ## Expected AI behavior
 
 1. **Lang detect**: zh → session lang = zh.
-2. **Entity normalization**: same as build-yixuan-basic (仪玄/命破之刃/啄木鸟电音/钢铁躯壳/危局强袭战 → canonical ids).
+2. **Entity normalization**: same as build-yixuan-basic (仪玄/青溟笼舍/啄木鸟电音/激素朋克/危局强袭战 → canonical ids).
 3. **Field tier check**:
    - All critical fields **resolved from input**: agent level 60, refinement 1, full Drive Disc setIds + main stats, enemy id resolved.
    - Optional: panel stats explicitly said "5★ 满级默认即可" → user opts into Tier 2 default.
@@ -33,11 +33,11 @@ slot 4 主词条暴击率，slot 5 主词条攻击力%，slot 6 主词条电属�
 6. **Review/confirm gate** (short, since input was already detailed):
    ```
    AI: "snapshot 已组好:
-     - 仪玄 lv60, 命破之刃 R1
-     - 啄木鸟电音 4pc (slots 1-4) + 钢铁躯壳 2pc (slots 5-6)
+     - 仪玄 lv60, 青溟笼舍 R1
+     - 啄木鸟电音 4pc (slots 1-4) + 激素朋克 2pc (slots 5-6)
      - 主词条: slot 4 暴击率 / slot 5 攻击力% / slot 6 电属性增伤
      - 面板值: 5★ 满级 midpoint 推导面板默认 (用户已确认)
-     - 敌人: 本期 DA boss 60 级
+     - 敌人: 格莱特 60 级
      - 攻击段: 普通攻击一段
 
      直接算吗?"

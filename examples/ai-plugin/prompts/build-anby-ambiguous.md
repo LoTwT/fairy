@@ -11,7 +11,7 @@ This fixture covers the **ambiguity** path of the ask-user dialog (per `prompt-t
 ## User input
 
 ```
-帮我算 Anby 50 级，5★ S11 工业制式精炼 3，配啄木鸟电音 4 套。
+帮我算 Anby 50 级，5★ Street Superstar精炼 3，配啄木鸟电音 4 套。
 ```
 
 ## Expected AI behavior
@@ -19,7 +19,7 @@ This fixture covers the **ambiguity** path of the ask-user dialog (per `prompt-t
 1. **Lang detect**: input majority zh (mixed lang OK; zh dominant by token count) → session lang = zh.
 2. **Entity normalization**:
    - "Anby" → ambiguity: in V1.2.2 nanoka data only `character.id=1011` (Anby Demara) matches. Single candidate, but AI surfaces context per `prompt-templates.md` §4.4 to confirm with user (good UX practice for ambiguous-looking inputs).
-   - "S11" / "S11 工业制式" → `weapon.id=14041`
+   - "S11" / "Street Superstar" → `weapon.id=13001`
    - "啄木鸟电音" → `equipment.setId=31000`
 3. **Disambiguation surface** (Anby example):
    ```
@@ -44,15 +44,15 @@ This fixture covers the **ambiguity** path of the ask-user dialog (per `prompt-t
    ```
 7. **User reply**:
    ```
-   "另外 2 套钢铁躯壳"
+   "另外 2 套激素朋克"
    ```
 8. **Snapshot generation**: produce `BattleSnapshot` JSON.
 9. **Review/confirm gate**:
    ```
    AI: "snapshot 已组好:
      - Anby Demara lv50 (id 1011)
-     - S11 工业制式 R3 (id 14041)
-     - 啄木鸟电音 4pc + 钢铁躯壳 2pc
+     - Street Superstar R3 (id 13001)
+     - 啄木鸟电音 4pc + 激素朋克 2pc
      - 默认填: panel values from 5★ midpoint assumptions, mindscapeCinema level 0
 
      还要补充什么吗? 比如敌人是什么? 算哪一段攻击?"
@@ -60,7 +60,7 @@ This fixture covers the **ambiguity** path of the ask-user dialog (per `prompt-t
    **Note**: AI proactively asks user for context still missing for a useful calc (enemy / attack segment) since this prompt didn't specify. This is per UX guideline: never silently produce snapshot with no attack target.
 10. **User reply**:
     ```
-    "本期 DA boss, 算一段普攻"
+    "格莱特, 算一段普攻"
     ```
 11. **Final snapshot + confirm** → invoke fairy-calc skill.
 
@@ -69,9 +69,9 @@ This fixture covers the **ambiguity** path of the ask-user dialog (per `prompt-t
 Snapshot JSON shape similar to `snapshots/yixuan-basic.snapshot.json` with appropriate field substitutions:
 - `team[0].agentId = "1011"` (Anby Demara)
 - `team[0].level = 50`
-- `team[0].wEngine.id = "14041"` (S11), `refinement = 3`
-- Drive Disc setIds: slots 1-4 = `31000` (Woodpecker), slots 5-6 = `32004` (Hormone Punk)
-- `attackSegments[0].skill = "basic"`, `step = 1`
+- `team[0].wEngine.id = "13001"` (Street Superstar), `phase = 3`
+- Drive Disc setIds: slots 1-4 = `31000` (Woodpecker), slots 5-6 = `31400` (Hormone Punk)
+- `attackSegments[0].skillId = "basic"`, `tags = ["basic"]`
 
 ## Acceptance assertions (QA G3)
 

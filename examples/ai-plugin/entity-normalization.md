@@ -24,10 +24,10 @@ The "user input variants" column lists all the natural-language strings (zh, en,
 | 11号 / Soldier 11 / S11 / soldier11 | `1041` | character |
 | 柳 / Yanagi | `1221` | character |
 | 苍角 / Soukaku | `1131` | character |
-| 妮娅 / Nia / Nia Lina (V1.2 sample) | `1071` | character |
-| 朱鸢 / Zhu Yuan / zhuyuan | `1191` | character |
-| 凯撒 / Caesar | `1241` | character |
-| 班尼斯 / Burnice / Burnice White | `1051` | character |
+| 凯撒 / Caesar | `1071` | character |
+| 艾莲 / Ellen | `1191` | character |
+| 朱鸢 / Zhu Yuan / zhuyuan | `1241` | character |
+| 柏妮思 / Burnice | `1171` | character |
 
 **Notes**:
 - "安比" alone is ambiguous in casual usage (might be referring to Anby Demara across multiple versions); per `prompt-templates.md` §8.3 ambiguity policy, AI surfaces disambiguation candidates with id + version.
@@ -38,10 +38,10 @@ The "user input variants" column lists all the natural-language strings (zh, en,
 
 | User input variants | Canonical id | GameData type |
 |---|---|---|
-| 命破之刃 / Doom Blade / doomblade | `14137` | weapon |
+| 青溟笼舍 / Qingming Birdcage / qingming birdcage | `14137` | weapon |
 | 啄木鸟电音 (as weapon, not Drive Disc) — N/A | — | (Woodpecker is a Drive Disc set, see below) |
-| 棘羽折剑 / Brokenfeather Spike | `14041` | weapon |
-| 街头狂迷 / Street Madness | `14049` | weapon |
+| 钢铁肉垫 / Steel Cushion | `14102` | weapon |
+| 街头巨星 / Street Superstar | `13001` | weapon |
 
 **Notes**:
 - W-Engine names often share Chinese theme keywords with Drive Disc sets ("啄木鸟", "钢铁"); AI must disambiguate by GameData type (Weapon vs Equipment).
@@ -52,10 +52,9 @@ The "user input variants" column lists all the natural-language strings (zh, en,
 | User input variants | Canonical id | GameData type |
 |---|---|---|
 | 啄木鸟电音 / Woodpecker Electro / woodpecker | `31000` | equipment (set) |
-| 钢铁躯壳 / Hormone Punk / Steel Cushion (alias) | `32004` | equipment (set) |
-| 摇摆爵士 / Swing Jazz | `31001` | equipment (set) |
-| 折叠刀锋 / Folding Blade (sample) | `31002` | equipment (set) |
-| 极地重金属 / Polar Metal | `31003` | equipment (set) |
+| 激素朋克 / Hormone Punk | `31400` | equipment (set) |
+| 摇摆爵士 / Swing Jazz | `31600` | equipment (set) |
+| 极地重金属 / Polar Metal | `32500` | equipment (set) |
 
 **Notes**:
 - Drive Disc set has 2pc + 4pc effect; AI must clarify which combination ("4套" vs "2 套 + 2 套" mix).
@@ -65,9 +64,9 @@ The "user input variants" column lists all the natural-language strings (zh, en,
 
 | User input variants | Canonical id | GameData type |
 |---|---|---|
-| 企鹅布 / Penguinboo / penguinboo | `54001` | bangboo |
-| 鲨牙布 / Sharkboo / sharkboo | `54002` | bangboo |
-| 插头布 / Plugboo / plugboo | `54003` | bangboo |
+| 企鹅布 / Penguinboo / penguinboo | `53001` | bangboo |
+| 鲨牙布 / Sharkboo / sharkboo | `54001` | bangboo |
+| 插头布 / Plugboo / plugboo | `54008` | bangboo |
 
 **Notes**:
 - Bangboo "skill_prop" data covers active and chain damage multipliers + daze + anomaly buildup per V1.1.
@@ -76,20 +75,20 @@ The "user input variants" column lists all the natural-language strings (zh, en,
 
 | User input variants | Canonical id | GameData type |
 |---|---|---|
-| 格莱特 / Grete (G18 anchor) | `monster_info.greta_*` (variant-resolved) | monster |
-| 凶心疯汉 / Ruthless Fiend (G19 anchor) | `monster_info.ruthless_fiend_*` | monster |
-| 装甲哈提 / Armored Hati (G20 anchor) | `monster_info.armored_hati_*` | monster |
+| 格莱特 / Greta | `30004` | monster |
+| 凶心疯汉 / Ruthless Fiend | `200141` | monster |
+| 装甲哈提 / Armored Hati | `20003` | monster |
 
 **Notes**:
-- Enemy id resolution often requires variant mapping (per V1.2.x impl).
-- DA enemies: prefer explicit "current DA boss" → AI resolves to nanoka current live period boss list.
+- Enemy id resolution may require variant mapping in future V1.2.x patches.
+- V1.2.2 examples use explicit runtime ids from `packages/data/cleaned/runtime/game-data.json`.
 
 ## DA scope markers
 
 | User input | Resolved scope |
 |---|---|
-| 危局强袭战 / Deadly Assault / DA | DA scope; AI fetches current live period from nanoka `boss.json` |
-| "本期 DA" / "current DA" | Same; resolves to live period |
+| 危局强袭战 / Deadly Assault / DA | DA scope marker; this fixture uses Greta `enemy.id=30004` |
+| "本期 DA" / "current DA" | Same; this fixture resolves to Greta `enemy.id=30004` |
 | "上期 DA" / "previous DA" | Historical DA scope; resolves to `historicalDAPeriods` bucket |
 
 ---
@@ -148,11 +147,11 @@ Both cases must produce identical canonical id; only the AI response lang differ
 
 This fixture covers the entities used in V1.2.2 MVP prompts:
 - ✅ Agents: 仪玄 / 安比 / 妮可 / S11 / 柳 (used in build-* prompts)
-- ✅ W-Engines: 命破之刃 (yixuan basic build)
-- ✅ Drive Disc sets: 啄木鸟电音 / 钢铁躯壳 (yixuan build)
+- ✅ W-Engines: 青溟笼舍 (yixuan basic build)
+- ✅ Drive Disc sets: 啄木鸟电音 / 激素朋克 (yixuan build)
 - ✅ Bangboos: 企鹅布 / 鲨牙布 / 插头布 (3 anchor coverage)
 - ✅ Enemies: G18-G20 anchors (basic only; V1.2.2 doesn't expand enemy scenarios)
-- ✅ DA scope marker (resolved to current live period)
+- ✅ DA scope marker (resolved to live sample fixture)
 
 **Out of MVP scope** (per D-21):
 - Full character / W-Engine / Drive Disc / enemy variant coverage — supported in fixture data via nanoka, not enumerated here.

@@ -13,7 +13,7 @@ This is the **canonical baseline** fixture per `acceptance.md` G4. Snapshot outp
 ### User input
 
 ```
-我想算仪玄带命破之刃，啄木鸟电音 4 件套 + 钢铁躯壳 2 件套，
+我想算仪玄带青溟笼舍，啄木鸟电音 4 件套 + 激素朋克 2 件套，
 打 60 级危局强袭战 boss，单段普通攻击一段伤害。
 ```
 
@@ -22,10 +22,10 @@ This is the **canonical baseline** fixture per `acceptance.md` G4. Snapshot outp
 1. **Lang detect**: input majority zh → session lang = zh.
 2. **Entity normalization**:
    - "仪玄" → `character.id=1371` ✓
-   - "命破之刃" → `weapon.id=14137` ✓
+   - "青溟笼舍" → `weapon.id=14137` ✓
    - "啄木鸟电音" → `equipment.setId=31000` (Drive Disc set) ✓
-   - "钢铁躯壳" → `equipment.setId=32004` (Drive Disc set) ✓
-   - "危局强袭战" → DA scope marker, resolves to current live period boss ✓
+   - "激素朋克" → `equipment.setId=31400` (Drive Disc set) ✓
+   - "危局强袭战" → DA scope marker, resolves to Greta ✓
 3. **Field tier check** (per 3-tier policy):
    - Critical missing: **agent level** (Yixuan 是几级?)
    - Optional with default: panel values (用 5★ 满级 midpoint 推导面板默认)
@@ -34,13 +34,13 @@ This is the **canonical baseline** fixture per `acceptance.md` G4. Snapshot outp
    ```
    AI: "我帮你查到了:
      - 角色: 仪玄 (id 1371)
-     - W-Engine: 命破之刃 (id 14137)
-     - Drive Disc: 啄木鸟电音 4套 + 钢铁躯壳 2 套
-     - 敌人: 本期 DA boss
+     - W-Engine: 青溟笼舍 (id 14137)
+     - Drive Disc: 啄木鸟电音 4套 + 激素朋克 2 套
+     - 敌人: 格莱特
 
      还需要 2 个关键字段:
      1. 仪玄的等级? (例: 60)
-     2. 命破之刃的精炼? (1-5)
+     2. 青溟笼舍的精炼? (1-5)
 
      回答完我就能算了。"
    ```
@@ -55,9 +55,9 @@ This is the **canonical baseline** fixture per `acceptance.md` G4. Snapshot outp
 8. **Review/confirm gate**: AI presents snapshot summary to user before invoking calc.
    ```
    AI: "snapshot 已组好:
-     - 仪玄 lv60, 命破之刃 R1
-     - 啄木鸟电音 4pc + 钢铁躯壳 2pc
-     - 敌人: 本期 DA boss
+     - 仪玄 lv60, 青溟笼舍 R1
+     - 啄木鸟电音 4pc + 激素朋克 2pc
+     - 敌人: 格莱特
      - 默认填: panel values from 5★ midpoint assumptions, mindscapeCinema level 0
 
      继续算伤害吗?"
@@ -80,26 +80,26 @@ Snapshot JSON itself is canonical English schema (per tri-layer i18n Layer 1).
 ### User input
 
 ```
-I want to calculate Yixuan with Doom Blade, Woodpecker Electro 4pc + Hormone Punk 2pc,
-fighting current DA boss, single basic attack first hit damage.
+I want to calculate Yixuan with Qingming Birdcage, Woodpecker Electro 4pc + Hormone Punk 2pc,
+fighting Greta, single basic attack first hit damage.
 ```
 
 ### Expected AI behavior
 
-Identical entity normalization (Yixuan → 1371, Doom Blade → 14137, Woodpecker Electro → 31000, Hormone Punk → 32004).
+Identical entity normalization (Yixuan → 1371, Qingming Birdcage → 14137, Woodpecker Electro → 31000, Hormone Punk → 31400).
 
 Dialog in en:
 
 ```
 AI: "Got it, found:
   - Agent: Yixuan (id 1371)
-  - W-Engine: Doom Blade (id 14137)
+  - W-Engine: Qingming Birdcage (id 14137)
   - Drive Discs: Woodpecker Electro 4pc + Hormone Punk 2pc
-  - Enemy: current DA boss
+  - Enemy: Greta
 
   I still need 2 critical fields:
   1. Yixuan's level? (e.g., 60)
-  2. Doom Blade refinement? (1-5)
+  2. Qingming Birdcage refinement? (1-5)
 
   Tell me both and I'll run the calc."
 ```
@@ -110,9 +110,9 @@ Review gate:
 
 ```
 AI: "Snapshot ready:
-  - Yixuan lv60, Doom Blade R1
+  - Yixuan lv60, Qingming Birdcage R1
   - Woodpecker Electro 4pc + Hormone Punk 2pc
-  - Enemy: current DA boss
+  - Enemy: Greta
   - Defaulted: panel values from 5★ midpoint assumptions, mindscapeCinema level 0
 
   Run the calc?"

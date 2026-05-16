@@ -32,10 +32,10 @@
   ],
   "entityNormalization": [
     { "input": "仪玄", "canonical": "character.id=1371", "lang": "zh" },
-    { "input": "命破之刃", "canonical": "weapon.id=14137", "lang": "zh" },
+    { "input": "青溟笼舍", "canonical": "weapon.id=14137", "lang": "zh" },
     { "input": "啄木鸟电音", "canonical": "equipment.setId=31000", "lang": "zh" },
-    { "input": "钢铁躯壳", "canonical": "equipment.setId=32004", "lang": "zh" },
-    { "input": "危局强袭战", "canonical": "scope=deadly_assault, period=current_live", "lang": "zh" }
+    { "input": "激素朋克", "canonical": "equipment.setId=31400", "lang": "zh" },
+    { "input": "危局强袭战", "canonical": "enemy.id=30004", "lang": "zh" }
   ],
   "sessionLang": "zh",
   "langDetectSource": "user-input-majority"

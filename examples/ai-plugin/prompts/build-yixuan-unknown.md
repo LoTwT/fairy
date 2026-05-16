@@ -29,8 +29,8 @@ This fixture covers the **critical-field unknown** path (per `prompt-templates.m
    AI: "需要 2 个关键字段:
      1. 仪玄是几级?
      2. 武器具体是哪把? 候选:
-        - 命破之刃 (S 级特征攻击) — Yixuan signature
-        - 街头狂迷
+        - 青溟笼舍 (S 级特征攻击) — Yixuan signature
+        - 街头巨星
         - 其他?
      或者你可以告诉我武器是什么类型 (打击 / 异常 / 支援)，我帮你推断常见配的。"
    ```
@@ -41,7 +41,7 @@ This fixture covers the **critical-field unknown** path (per `prompt-templates.m
 6. **Critical-unknown surface** (per §4.1 "User says 'unknown' for critical"):
    ```
    AI: "武器是关键字段，没指定的话:
-     - 选项 A: 帮你用 Yixuan 推荐武器 命破之刃 R1 (signature weapon, 与角色配套设计) — 结果会接近最大伤害预估
+     - 选项 A: 帮你用 Yixuan 推荐武器 青溟笼舍 R1 (signature weapon, 与角色配套设计) — 结果会接近最大伤害预估
      - 选项 B: 选个常见 4★ 武器，结果会显著偏低
      - 选项 C: 跳过武器，snapshot 标 'weapon-unknown' warning，calc 仍能跑但结果可信度低
 
@@ -53,7 +53,7 @@ This fixture covers the **critical-field unknown** path (per `prompt-templates.m
    ```
 8. **AI proceeds with recommended weapon**:
    ```
-   AI: "OK, 用命破之刃 R1 (Yixuan signature) 替代。如果你之后确认武器是别的，把 snapshot.json 改一下重新算就行。"
+   AI: "OK, 用青溟笼舍 R1 (Yixuan signature) 替代。如果你之后确认武器是别的，把 snapshot.json 改一下重新算就行。"
    ```
 9. **Continue 2pc clarification + review/confirm gate** (similar to build-anby-ambiguous flow).
 10. **Snapshot generation**: produce strict BattleSnapshot with chosen weapon. **No `"unknown"` value in snapshot JSON** (per TL constraint `4a3b7196`).
@@ -84,7 +84,7 @@ draftMetadata:
   "defaultedFields": [
     {
       "path": "team[0].wEngine.id",
-      "default": "14137 (Doom Blade, Yixuan signature)",
+      "default": "14137 (Qingming Birdcage, Yixuan signature)",
       "rationale": "User chose option A 'AI recommends Yixuan signature weapon' when asked about unknown weapon.",
       "expectedDeviationPct": "low (signature pairing is near-optimal)"
     },

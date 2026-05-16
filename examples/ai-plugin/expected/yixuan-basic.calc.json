@@ -8,7 +8,7 @@
   "locale": "zh",
   "summary": {
     "activeActorId": "1371",
-    "enemyId": "monster_info.current_da_boss",
+    "enemyId": "30004",
     "damageType": "regular",
     "lanes": {
       "nonCrit": {

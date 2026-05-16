@@ -50,12 +50,12 @@
         {
           "id": "drive-slot-5",
           "slot": 5,
-          "setId": "32004"
+          "setId": "31400"
         },
         {
           "id": "drive-slot-6",
           "slot": 6,
-          "setId": "32004"
+          "setId": "31400"
         }
       ],
       "panel": {
@@ -94,7 +94,7 @@
     }
   ],
   "enemy": {
-    "enemyId": "monster_info.current_da_boss",
+    "enemyId": "30004",
     "level": 60,
     "rank": "boss",
     "maxHp": 1000000,
