@@ -13,6 +13,7 @@ Repo-specific implementation lives in:
 
 Release-note drafts:
 
+- [Fairy v0.1.3 — Release Notes](release-notes-v0.1.3.md)
 - [Fairy v0.1.2 — Release Notes](release-notes-v0.1.2.md)
 - [Fairy v0.1.1 — Release Notes](release-notes-v0.1.1.md)
 - [Fairy v0.1.0 — Release Notes](release-notes-v0.1.0.md)
