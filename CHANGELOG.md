@@ -6,18 +6,22 @@ All notable changes to Fairy are documented in this file.
 
 ### Added
 
-- Batch import the approved-live nanoka 2.8 Bangboo catalog into runtime cleaned data.
-- Record the V1.2.x full-data batch import discovery and PR sequence.
-- Batch import the approved-live nanoka 2.8 character catalog into runtime cleaned data.
-- Batch import the approved-live nanoka 2.8 W-Engine catalog into runtime cleaned data.
-- Batch import the approved-live nanoka 2.8 Drive Disc set catalog into runtime cleaned data.
-- Batch import the approved-live nanoka 2.8 enemy catalog into runtime cleaned data.
-- Batch import the approved-live nanoka 2.8 current Deadly Assault period catalog into runtime cleaned data.
-- Batch import manifest-available historical Deadly Assault periods into the dedicated `historicalDAPeriods` bucket.
+- Batch import nanoka bangboos
+- Batch import nanoka characters
+- Batch import nanoka W-Engines
+- Batch import nanoka Drive Discs (#81)
+- Batch import nanoka enemies
+- Batch import current DA periods
+- Batch import historical DA periods
 
-### Changed
+### Documentation
 
-- Keep the packaged runtime JSON out of `@randomplay/data`'s `dist` bundle and add a release package-size guard.
+- Plan nanoka full data batch
+- Prepare v0.1.1 patch notes
+
+### Fixed
+
+- Keep runtime JSON out of dist bundle
 
 ## 0.1.0 - 2026-05-15
 
