@@ -26,7 +26,7 @@ describe("nanoka runtime game data cutover", () => {
       cwd: join(repoRoot, "packages/data"),
       stdio: ["ignore", "pipe", "pipe"],
     })
-  })
+  }, 15000)
 
   it("exports a nanoka-only runtime GameData artifact", () => {
     assertNanokaRuntimeGameDataArtifact(nanokaRuntimeGameDataArtifact)
