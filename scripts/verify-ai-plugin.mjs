@@ -7,13 +7,14 @@ const repoRoot = path.resolve(fileURLToPath(new URL("..", import.meta.url)))
 const pluginRoot = path.join(repoRoot, ".claude-plugin/plugins/fairy")
 const pluginJsonPath = path.join(pluginRoot, "plugin.json")
 const skillNames = ["fairy-snapshot", "fairy-calc", "fairy-explain"]
-const requiredDocs = [
-  "docs/ai-plugin/architecture.md",
-  "docs/ai-plugin/user-journeys.md",
-  "docs/ai-plugin/prompt-templates.md",
-  "docs/ai-plugin/acceptance.md",
-  "docs/product/decisions/D-21-ai-plugin.md",
-]
+const requiredDocsByKey = {
+  architecture: "docs/ai-plugin/architecture.md",
+  userJourneys: "docs/ai-plugin/user-journeys.md",
+  promptTemplates: "docs/ai-plugin/prompt-templates.md",
+  acceptance: "docs/ai-plugin/acceptance.md",
+  decision: "docs/product/decisions/D-21-ai-plugin.md",
+}
+const requiredDocs = Object.values(requiredDocsByKey)
 const exampleDirs = [
   "examples/ai-plugin/prompts",
   "examples/ai-plugin/snapshots",
@@ -74,6 +75,10 @@ assert(JSON.stringify(plugin.skills) === JSON.stringify(skillNames), "plugin.jso
 for (const doc of requiredDocs)
   assert(existsSync(path.join(repoRoot, doc)), `required doc is missing: ${doc}`)
 
+assert(plugin.docs && typeof plugin.docs === "object" && !Array.isArray(plugin.docs), "plugin.json docs object is required")
+for (const [key, doc] of Object.entries(requiredDocsByKey))
+  assert(plugin.docs?.[key] === doc, `plugin.json docs.${key} must be ${doc}`)
+
 for (const [key, doc] of Object.entries(plugin.docs ?? {}))
   assert(existsSync(path.join(repoRoot, doc)), `plugin.json docs.${key} points to a missing file: ${doc}`)
 
@@ -81,6 +86,20 @@ for (const dir of exampleDirs)
   assert(existsSync(path.join(repoRoot, dir)), `example directory is missing: ${dir}`)
 
 assert(existsSync(path.join(repoRoot, ".codex/README.md")), ".codex/README.md is missing")
+
+const skillsRoot = path.join(pluginRoot, "skills")
+assert(existsSync(skillsRoot), ".claude-plugin/plugins/fairy/skills is missing")
+if (existsSync(skillsRoot)) {
+  const actualSkillDirs = readdirSync(skillsRoot, { withFileTypes: true })
+    .filter(entry => entry.isDirectory())
+    .map(entry => entry.name)
+    .sort()
+  const expectedSkillDirs = [...skillNames].sort()
+  assert(
+    JSON.stringify(actualSkillDirs) === JSON.stringify(expectedSkillDirs),
+    `skills directory set must be exactly ${expectedSkillDirs.join(", ")}; got ${actualSkillDirs.join(", ")}`,
+  )
+}
 
 for (const skillName of skillNames) {
   const skillRelativePath = `.claude-plugin/plugins/fairy/skills/${skillName}/SKILL.md`
