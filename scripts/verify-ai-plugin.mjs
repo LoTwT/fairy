@@ -197,7 +197,7 @@ const pluginForbiddenPatterns = [
   { pattern: /--preflight/g, reason: "must not depend on nonexistent --preflight" },
   { pattern: /--dry-run/g, reason: "must not depend on nonexistent --dry-run" },
   { pattern: /fairy-compare/g, reason: "compare skill is deferred" },
-  { pattern: /fairy compare/g, reason: "fairy compare command is deferred" },
+  { pattern: /fairy compare/g, reason: "AI plugin compare workflow is deferred" },
   { pattern: /\.cursor/g, reason: "Cursor is deferred from V1.2.2" },
   { pattern: /packages\/data\/source/g, reason: "plugin must not read raw source" },
 ]

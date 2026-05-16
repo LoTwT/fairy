@@ -5,8 +5,8 @@
     "ruleSetVersion": "rules-v0.1-attached-2026-05-04",
     "schemaVersion": "v1",
     "generatedBy": "@UX",
-    "totalEntries": 35,
-    "scope": "P0 必填 — 伤害计算器实际触发的错误文案；v0.4 扩展 ERR-VER-* / ERR-EVENT-* 系列；UX-S3-1 扩展 ERR-CALC-PENDING-* 系列；UX-S4-1 扩展 ERR-CLI-* 系列（CLI 参数 / schema 错误，Product 决策选 A 双语化 2026-05-05）；UX-S5-2 扩展 ERR-DAT-005 / ERR-DAT-006（cleaned data pipeline 诊断 — D-16 锁定）"
+    "totalEntries": 36,
+    "scope": "P0 必填 — 伤害计算器实际触发的错误文案；v0.4 扩展 ERR-VER-* / ERR-EVENT-* 系列；UX-S3-1 扩展 ERR-CALC-PENDING-* 系列；UX-S4-1 扩展 ERR-CLI-* 系列（CLI 参数 / schema 错误，Product 决策选 A 双语化 2026-05-05）；UX-S5-2 扩展 ERR-DAT-005 / ERR-DAT-006（cleaned data pipeline 诊断 — D-16 锁定）；fairy compare CLI 新增 ERR-CMP-001 非同类对比 warning"
   },
   "ERR-RNG-001": "增伤区已超过攻略上限 600%（PART 01.2）。已截断展示，原始累加值为 {raw}%。",
   "ERR-RNG-002": "暴击率有效范围 0~100%（攻略 PART 01.3）。已自动 clamp 为 {clamped}%。",
@@ -41,6 +41,7 @@
   "ERR-CLI-JSON": "输入 JSON 解析失败：{input}。请检查文件格式或使用 `fairy explain` 查看示例。",
   "ERR-CLI-SCHEMA": "输入不符合 BattleSnapshot schema。详情见 JSON `error.details` 字段；请参考 docs/data-contract/battle-snapshot.md。",
   "ERR-CLI-UNCAUGHT": "未捕获错误：{message}。请提交 issue 附上输入与命令。",
+  "ERR-CMP-001": "Compare 输入的 {field} 不一致：left={left}，right={right}。仍会计算数值差异，但这是非同类对比。",
   "ERR-DAT-005": "⚠ cleaned data 检测到阻断发布的未解析效果（reason: {reason}，effectId: {effectId}）。原文片段：「{sourceText}」。该效果影响计算 / 匹配 / 来源追溯，需人工 audit 后注册 handler / template 或更新 data 包再发布。详见 docs/data-contract/cleaned-schema-spec.md §6.5。",
   "ERR-DAT-006": "⚠ {language} 本地化映射未解析（path: {path}）。data 包未能在源之间（米游社 / Excel / buhflipexplode）建立稳定 zh/en 对应；展示侧已 fallback 到 sourceText 原文层。请在下次 data audit 阶段补 mapping。"
 }

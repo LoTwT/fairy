@@ -1,4 +1,11 @@
-import type { CalcResult, Diagnostic } from "@randomplay/core"
+import type {
+  BattleSnapshot,
+  BucketContributor,
+  BucketResult,
+  CalcResult,
+  Diagnostic,
+  ModifierResult,
+} from "@randomplay/core"
 import { calculate, parseBattleSnapshot } from "@randomplay/core"
 import { defineCommand, parseArgs as parseCittyArgs, type ArgsDef } from "citty"
 import { readFile } from "node:fs/promises"
@@ -11,6 +18,8 @@ import { cliErrorFallbackMessages, isCliErrorCode, type CliErrorCode } from "./e
 type Lang = "zh" | "en"
 type ResultMode = "expected" | "crit" | "nonCrit"
 type View = "brief" | "verbose"
+type ChangeStatus = "added" | "removed" | "changed" | "unchanged"
+type LaneId = "nonCrit" | "crit" | "fixed"
 
 interface CliIo {
   cwd: string
@@ -111,6 +120,11 @@ const commandDefinitions = {
         type: "positional",
         description: "Right snapshot JSON path.",
         required: false,
+      },
+      view: {
+        type: "string",
+        description: "Output brief delta or verbose inputs plus full CalcResults.",
+        valueHint: "brief|verbose",
       },
       ...resultModeArg,
       ...commonArgs,
@@ -244,26 +258,41 @@ async function runCompare(parsed: ParsedArgs, io: CliIo, lang: Lang): Promise<nu
   if (parsed.inputs.length < 2)
     throw cliError("ERR-CLI-ARG", { message: "compare requires two snapshot inputs" })
 
-  const leftInput = await readSnapshotInput(parsed, io, 0)
-  const rightInput = await readSnapshotInput(parsed, io, 1)
+  const leftInput = parseBattleSnapshot(await readSnapshotInput(parsed, io, 0))
+  const rightInput = parseBattleSnapshot(await readSnapshotInput(parsed, io, 1))
+  const view = parseView(parsed.flags.get("view"))
   const resultMode = parseResultMode(parsed.flags.get("result-mode") ?? parsed.flags.get("resultMode"))
   const left = calculate(withResultMode(leftInput, resultMode), { calculationId: "left" })
   const right = calculate(withResultMode(rightInput, resultMode), { calculationId: "right" })
   await writeDiagnostics(io, left, lang)
   await writeDiagnostics(io, right, lang)
-  writeJson(io, {
+  const warnings = getCompareWarnings(leftInput, rightInput, left, right)
+  if (warnings.length > 0)
+    writeDiagnosticLines(io, warnings, await io.loadMessages(lang))
+
+  const diff = buildCompareDiff(left, right, view === "verbose")
+  const result = {
     schemaVersion: "fairy-cli-compare-v1",
+    view,
     resultMode: resultMode ?? "expected",
-    left,
-    right,
-    delta: {
-      rawTotalDamage: right.summary.rawTotalDamage - left.summary.rawTotalDamage,
-      displayTotalDamage: right.summary.displayTotalDamage - left.summary.displayTotalDamage,
-      expectedDamage: (right.summary.expectedDamage ?? right.summary.rawTotalDamage)
-        - (left.summary.expectedDamage ?? left.summary.rawTotalDamage),
-      damageTypeChanged: left.summary.damageType !== right.summary.damageType,
+    left: view === "verbose" ? left : toCompareSideSummary(left),
+    right: view === "verbose" ? right : toCompareSideSummary(right),
+    delta: diff.summary,
+    diff,
+    diagnostics: {
+      left: {
+        warnings: left.warnings.length,
+        errors: left.errors.length,
+      },
+      right: {
+        warnings: right.warnings.length,
+        errors: right.errors.length,
+      },
     },
-  }, parsed.flags.has("pretty"))
+    warnings,
+    errors: [],
+  }
+  writeJson(io, result, parsed.flags.has("pretty"))
   return left.errors.length > 0 || right.errors.length > 0 ? 1 : 0
 }
 
@@ -489,6 +518,337 @@ function toBriefCalcResult(result: CalcResult, resultMode: ResultMode | undefine
     warnings: result.warnings,
     errors: result.errors,
   }
+}
+
+function toCompareSideSummary(result: CalcResult) {
+  const summary = result.summary
+  return {
+    calculationId: result.calculationId,
+    activeActorId: summary.activeActorId,
+    ...(summary.enemyId === undefined ? {} : { enemyId: summary.enemyId }),
+    damageType: summary.damageType,
+    lanes: summary.lanes,
+    ...(summary.daze === undefined ? {} : { daze: summary.daze }),
+    rawTotalDamage: summary.rawTotalDamage,
+    displayTotalDamage: summary.displayTotalDamage,
+    expectedDamage: summary.expectedDamage ?? summary.rawTotalDamage,
+    critDamage: summary.critDamage,
+    nonCritDamage: summary.nonCritDamage,
+    dazeValue: summary.dazeValue,
+    anomalyBuildup: summary.anomalyBuildup,
+    disorderDamage: summary.disorderDamage,
+    trueDamage: summary.trueDamage,
+    warnings: result.warnings.length,
+    errors: result.errors.length,
+  }
+}
+
+function buildCompareDiff(left: CalcResult, right: CalcResult, includeUnchanged: boolean) {
+  return {
+    summary: buildSummaryDelta(left, right),
+    lanes: buildLaneDiffs(left, right, includeUnchanged),
+    buckets: buildBucketDiffs(left, right, includeUnchanged),
+    modifiers: buildModifierDiffs(left, right, includeUnchanged),
+  }
+}
+
+function buildSummaryDelta(left: CalcResult, right: CalcResult) {
+  return {
+    rawTotalDamage: numericDelta(left.summary.rawTotalDamage, right.summary.rawTotalDamage),
+    displayTotalDamage: numericDelta(left.summary.displayTotalDamage, right.summary.displayTotalDamage),
+    expectedDamage: numericDelta(
+      left.summary.expectedDamage ?? left.summary.rawTotalDamage,
+      right.summary.expectedDamage ?? right.summary.rawTotalDamage,
+    ),
+    critDamage: numericDelta(left.summary.critDamage ?? left.summary.rawTotalDamage, right.summary.critDamage ?? right.summary.rawTotalDamage),
+    nonCritDamage: numericDelta(left.summary.nonCritDamage ?? left.summary.rawTotalDamage, right.summary.nonCritDamage ?? right.summary.rawTotalDamage),
+    dazeValue: numericDelta(left.summary.dazeValue ?? 0, right.summary.dazeValue ?? 0),
+    anomalyBuildup: numericDelta(left.summary.anomalyBuildup ?? 0, right.summary.anomalyBuildup ?? 0),
+    disorderDamage: numericDelta(left.summary.disorderDamage ?? 0, right.summary.disorderDamage ?? 0),
+    trueDamage: numericDelta(left.summary.trueDamage ?? 0, right.summary.trueDamage ?? 0),
+    activeActorChanged: left.summary.activeActorId !== right.summary.activeActorId,
+    enemyChanged: (left.summary.enemyId ?? "") !== (right.summary.enemyId ?? ""),
+    damageTypeChanged: left.summary.damageType !== right.summary.damageType,
+  }
+}
+
+function buildLaneDiffs(left: CalcResult, right: CalcResult, includeUnchanged: boolean) {
+  const laneIds: LaneId[] = ["nonCrit", "crit", "fixed"]
+  return laneIds.flatMap((laneId) => {
+    const leftLane = left.summary.lanes[laneId]
+    const rightLane = right.summary.lanes[laneId]
+    if (leftLane === undefined && rightLane === undefined)
+      return []
+
+    const status = getStatus(leftLane !== undefined, rightLane !== undefined, !sameJson(leftLane, rightLane))
+    if (status === "unchanged" && !includeUnchanged)
+      return []
+
+    return [{
+      laneId,
+      status,
+      rawDamage: numericDelta(leftLane?.rawDamage ?? 0, rightLane?.rawDamage ?? 0),
+      displayDamage: numericDelta(leftLane?.displayDamage ?? 0, rightLane?.displayDamage ?? 0),
+    }]
+  })
+}
+
+function buildBucketDiffs(left: CalcResult, right: CalcResult, includeUnchanged: boolean) {
+  const leftBuckets = indexBuckets(left.buckets)
+  const rightBuckets = indexBuckets(right.buckets)
+  const keys = sortedUnion(leftBuckets, rightBuckets)
+
+  return keys.flatMap((key) => {
+    const leftEntry = leftBuckets.get(key)
+    const rightEntry = rightBuckets.get(key)
+    const contributorDiffs = buildContributorDiffs(leftEntry?.contributors, rightEntry?.contributors, includeUnchanged)
+    const bucketChanged = !sameBucket(leftEntry?.bucket, rightEntry?.bucket) || contributorDiffs.some(diff => diff.status !== "unchanged")
+    const status = getStatus(leftEntry !== undefined, rightEntry !== undefined, bucketChanged)
+    if (status === "unchanged" && !includeUnchanged)
+      return []
+
+    const bucket = rightEntry?.bucket ?? leftEntry?.bucket
+    if (bucket === undefined)
+      return []
+
+    return [{
+      key,
+      bucketId: bucket.bucketId,
+      status,
+      before: numericDelta(leftEntry?.bucket.before ?? 0, rightEntry?.bucket.before ?? 0),
+      after: numericDelta(leftEntry?.bucket.after ?? 0, rightEntry?.bucket.after ?? 0),
+      effectiveMultiplier: numericDelta(leftEntry?.bucket.effectiveMultiplier ?? 0, rightEntry?.bucket.effectiveMultiplier ?? 0),
+      contributors: contributorDiffs,
+    }]
+  })
+}
+
+function buildContributorDiffs(
+  leftContributors: Map<string, BucketContributor> | undefined,
+  rightContributors: Map<string, BucketContributor> | undefined,
+  includeUnchanged: boolean,
+) {
+  const keys = sortedUnion(leftContributors ?? new Map(), rightContributors ?? new Map())
+  return keys.flatMap((key) => {
+    const left = leftContributors?.get(key)
+    const right = rightContributors?.get(key)
+    const changed = !sameContributor(left, right)
+    const status = getStatus(left !== undefined, right !== undefined, changed)
+    if (status === "unchanged" && !includeUnchanged)
+      return []
+
+    const contributor = right ?? left
+    if (contributor === undefined)
+      return []
+
+    return [{
+      key,
+      id: contributor.id,
+      status,
+      value: numericDelta(left?.value ?? 0, right?.value ?? 0),
+      active: {
+        left: left?.active ?? false,
+        right: right?.active ?? false,
+      },
+      operation: {
+        left: left?.operation,
+        right: right?.operation,
+      },
+      sourceChanged: !sameJson(left?.source, right?.source),
+    }]
+  })
+}
+
+function buildModifierDiffs(left: CalcResult, right: CalcResult, includeUnchanged: boolean) {
+  const leftModifiers = indexModifiers(left.modifiers)
+  const rightModifiers = indexModifiers(right.modifiers)
+  const keys = sortedUnion(leftModifiers, rightModifiers)
+
+  return keys.flatMap((key) => {
+    const leftEntry = leftModifiers.get(key)
+    const rightEntry = rightModifiers.get(key)
+    const changed = !sameModifier(leftEntry?.modifier, rightEntry?.modifier)
+    const status = getStatus(leftEntry !== undefined, rightEntry !== undefined, changed)
+    if (status === "unchanged" && !includeUnchanged)
+      return []
+
+    const modifier = rightEntry?.modifier ?? leftEntry?.modifier
+    if (modifier === undefined)
+      return []
+
+    return [{
+      key,
+      id: modifier.id,
+      status,
+      handlerId: {
+        left: leftEntry?.modifier.handlerId,
+        right: rightEntry?.modifier.handlerId,
+      },
+      active: {
+        left: leftEntry?.modifier.active ?? false,
+        right: rightEntry?.modifier.active ?? false,
+      },
+      bucket: {
+        left: leftEntry?.modifier.bucket,
+        right: rightEntry?.modifier.bucket,
+      },
+      sourceChanged: !sameJson(leftEntry?.modifier.source, rightEntry?.modifier.source),
+      inactiveReason: {
+        left: leftEntry?.modifier.inactiveReason,
+        right: rightEntry?.modifier.inactiveReason,
+      },
+    }]
+  })
+}
+
+function indexBuckets(buckets: BucketResult[]) {
+  const seen = new Map<string, number>()
+  const indexed = new Map<string, { bucket: BucketResult; contributors: Map<string, BucketContributor> }>()
+  for (const bucket of buckets) {
+    indexed.set(uniqueKey(bucket.bucketId, seen), {
+      bucket,
+      contributors: indexByUniqueKey(bucket.contributors, contributor => contributor.id),
+    })
+  }
+  return indexed
+}
+
+function indexModifiers(modifiers: ModifierResult[]) {
+  const seen = new Map<string, number>()
+  const indexed = new Map<string, { modifier: ModifierResult }>()
+  for (const modifier of modifiers)
+    indexed.set(uniqueKey(modifier.id, seen), { modifier })
+  return indexed
+}
+
+function indexByUniqueKey<T>(items: T[], getBaseKey: (item: T) => string): Map<string, T> {
+  const seen = new Map<string, number>()
+  const indexed = new Map<string, T>()
+  for (const item of items)
+    indexed.set(uniqueKey(getBaseKey(item), seen), item)
+  return indexed
+}
+
+function uniqueKey(baseKey: string, seen: Map<string, number>): string {
+  const count = seen.get(baseKey) ?? 0
+  seen.set(baseKey, count + 1)
+  return count === 0 ? baseKey : `${baseKey}#${count + 1}`
+}
+
+function sortedUnion<TLeft, TRight>(left: Map<string, TLeft>, right: Map<string, TRight>): string[] {
+  return [...new Set([...left.keys(), ...right.keys()])].sort((a, b) => a.localeCompare(b))
+}
+
+function sameBucket(left: BucketResult | undefined, right: BucketResult | undefined): boolean {
+  if (left === undefined || right === undefined)
+    return left === right
+
+  return left.bucketId === right.bucketId
+    && left.before === right.before
+    && left.after === right.after
+    && left.effectiveMultiplier === right.effectiveMultiplier
+}
+
+function sameContributor(left: BucketContributor | undefined, right: BucketContributor | undefined): boolean {
+  if (left === undefined || right === undefined)
+    return left === right
+
+  return left.id === right.id
+    && left.value === right.value
+    && left.operation === right.operation
+    && left.active === right.active
+    && sameJson(left.source, right.source)
+}
+
+function sameModifier(left: ModifierResult | undefined, right: ModifierResult | undefined): boolean {
+  if (left === undefined || right === undefined)
+    return left === right
+
+  return left.id === right.id
+    && left.handlerId === right.handlerId
+    && left.active === right.active
+    && left.bucket === right.bucket
+    && left.inactiveReason === right.inactiveReason
+    && sameJson(left.appliesTo, right.appliesTo)
+    && sameJson(left.source, right.source)
+}
+
+function getStatus(leftExists: boolean, rightExists: boolean, changed: boolean): ChangeStatus {
+  if (!leftExists && rightExists)
+    return "added"
+  if (leftExists && !rightExists)
+    return "removed"
+  return changed ? "changed" : "unchanged"
+}
+
+function numericDelta(left: number, right: number) {
+  const delta = normalizeNumber(right - left)
+  const ratio = left === 0 ? undefined : normalizeNumber(delta / Math.abs(left))
+  return {
+    left: normalizeNumber(left),
+    right: normalizeNumber(right),
+    delta,
+    ...(ratio === undefined ? {} : { deltaRatio: ratio }),
+  }
+}
+
+function normalizeNumber(value: number): number {
+  return Number(value.toFixed(12))
+}
+
+function sameJson(left: unknown, right: unknown): boolean {
+  return JSON.stringify(left) === JSON.stringify(right)
+}
+
+function getCompareWarnings(
+  leftSnapshot: BattleSnapshot,
+  rightSnapshot: BattleSnapshot,
+  left: CalcResult,
+  right: CalcResult,
+): Diagnostic[] {
+  const warnings: Diagnostic[] = []
+  pushCompareWarning(warnings, "activeActor", leftSnapshot.activeActor.agentId, rightSnapshot.activeActor.agentId, "activeActor.agentId")
+  pushCompareWarning(warnings, "enemy", getEnemyIdentity(leftSnapshot), getEnemyIdentity(rightSnapshot), "enemy")
+  pushCompareWarning(warnings, "damageType", left.summary.damageType, right.summary.damageType, "summary.damageType")
+
+  const leftActor = getActiveActorSnapshot(leftSnapshot)
+  const rightActor = getActiveActorSnapshot(rightSnapshot)
+  pushCompareWarning(warnings, "wEngine", leftActor?.wEngine?.id ?? "none", rightActor?.wEngine?.id ?? "none", "team[active].wEngine.id")
+  pushCompareWarning(warnings, "driveDiscs", getDriveDiscSignature(leftActor), getDriveDiscSignature(rightActor), "team[active].driveDiscs")
+  return warnings
+}
+
+function pushCompareWarning(
+  warnings: Diagnostic[],
+  field: string,
+  left: string,
+  right: string,
+  path: string,
+): void {
+  if (left === right)
+    return
+
+  warnings.push({
+    key: "ERR-CMP-001",
+    severity: "warning",
+    path,
+    messageParams: { field, left, right },
+  })
+}
+
+function getActiveActorSnapshot(snapshot: BattleSnapshot): BattleSnapshot["team"][number] | undefined {
+  return snapshot.team.find(actor => actor.agentId === snapshot.activeActor.agentId)
+}
+
+function getEnemyIdentity(snapshot: BattleSnapshot): string {
+  return snapshot.enemy.enemyId ?? `${snapshot.enemy.rank}@${snapshot.enemy.level}`
+}
+
+function getDriveDiscSignature(actor: BattleSnapshot["team"][number] | undefined): string {
+  return (actor?.driveDiscs ?? [])
+    .map(disc => `${disc.slot ?? "?"}:${disc.id}:${disc.setId ?? ""}`)
+    .sort((a, b) => a.localeCompare(b))
+    .join("|") || "none"
 }
 
 function readStringFlag(parsed: ParsedArgs, name: string): string {

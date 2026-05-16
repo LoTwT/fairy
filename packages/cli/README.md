@@ -11,7 +11,8 @@ for AI/plugin consumers. Help output is therefore JSON (`fairy help` or
 ```bash
 pnpm --silent --filter @randomplay/cli run cli -- calc snapshot.json --lang zh --pretty
 pnpm --silent --filter @randomplay/cli run cli -- calc snapshot.json --view verbose --lang zh --pretty
-pnpm --silent --filter @randomplay/cli run cli -- compare left.json right.json --lang en
+pnpm --silent --filter @randomplay/cli run cli -- compare left.json right.json --view brief --lang en --pretty
+pnpm --silent --filter @randomplay/cli run cli -- compare left.json right.json --view verbose --lang en --pretty
 pnpm --silent --filter @randomplay/cli run cli -- scan snapshot.json --path team[0].panel.attack --from 1000 --to 2000 --step 100
 pnpm --silent --filter @randomplay/cli run cli -- explain snapshot.json
 pnpm --silent --filter @randomplay/cli run cli -- migrate snapshot.json
@@ -58,6 +59,30 @@ unchanged and language-independent.
 calculation. The default brief view shows non-crit and crit lanes rather than a
 crit-rate expectation. `--result-mode expected` remains available for
 statistical/theory checks and adds `summary.expectedDamage` to brief output.
+
+`compare` runs `calc` for two `BattleSnapshot` files and returns
+`schemaVersion: "fairy-cli-compare-v1"`. It is for deterministic binary A/B
+comparison such as build, buff, enemy-state, or equipment changes; RNG lane
+analysis remains part of `calc`.
+
+`compare --view brief` returns:
+
+- `view: "brief"`
+- `resultMode`
+- `left` and `right` side summaries, not full `CalcResult` objects
+- `delta`, a summary-level damage/daze/anomaly diff
+- `diff.lanes`, `diff.buckets`, `diff.modifiers`, and nested contributor diffs
+  containing changed, added, and removed entries
+- `diagnostics`, `warnings`, and `errors`
+
+`compare --view verbose` keeps the same top-level contract but includes the full
+left and right `CalcResult` objects and includes unchanged bucket/modifier
+entries in `diff` for audit workflows.
+
+When the two snapshots differ on identity-defining fields such as active actor,
+enemy, W-Engine, Drive Disc signature, or damage type, compare still emits the
+numeric diff but also reports localized `ERR-CMP-001` warnings so callers can
+flag apples-to-oranges comparisons.
 
 Invalid arguments, invalid JSON, and schema validation failures are reported as
 JSON error objects on stderr. Their stable `error.code` stays language-independent,
