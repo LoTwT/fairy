@@ -269,6 +269,7 @@ Implementation is complete only when all of these pass:
 - `pnpm build`
 - `pnpm test`
 - `pnpm --filter @randomplay/data verify:nanoka`
+- `pnpm --filter @randomplay/data verify:nanoka-da-history`
 - `pnpm --filter @randomplay/data verify:nanoka-runtime`
 - `pnpm --filter @randomplay/data verify:golden-v1`
 - `pnpm --filter @randomplay/data verify:source-registry`
