@@ -52,14 +52,14 @@ input:
 output:
   battleSnapshot: BattleSnapshot draft (strict schema; no defaultedFields/unknownFields in snapshot)
   draftMetadata:
-    extractedPII: session-ephemeral; UID/username; dropped at confirm
+    piiDetection: session-ephemeral; PII kinds + redaction status only; raw UID/username discarded
     evidence: base/bonus stat split + source detection trace
-    sourceDetection: { source: "工坊" | "米游社" | "unknown", confidence: 0..1 }
+    sourceDetection: { sourceId: "zzz-workshop" | "miyoushe-record" | "unknown", sourceLabel: string, confidence: 0..1 }
     perFieldConfidence: map of field path → confidence bucket (high|medium|low|missing)
 chains:
   next: fairy-snapshot ask-user policy (for any tier-1 missing fields) → fairy-calc
 fallback:
-  trigger: source=unknown OR perFieldConfidence majority low OR user-request
+  trigger: sourceId=unknown OR perFieldConfidence majority low OR user-request
   destination: fairy-snapshot NL flow
 ---
 ```
@@ -93,14 +93,15 @@ Source B — 米游社 (Mihoyo community):
   - Bottom-right: 米游社绝区零战绩 watermark
 
 Decision:
-  - If branding/watermark cue is clearly visible and matches A → source=工坊
-  - If branding/watermark cue is clearly visible and matches B → source=米游社
+  - If branding/watermark cue is clearly visible and matches A → sourceId=zzz-workshop, sourceLabel=绝区零工坊
+  - If branding/watermark cue is clearly visible and matches B → sourceId=miyoushe-record, sourceLabel=米游社
   - If no branding visible, fall back to layout signature (orientation + element placement)
-  - If still uncertain after layout check → source=unknown
+  - If still uncertain after layout check → sourceId=unknown
 
 Output:
   {
-    "source": "工坊" | "米游社" | "unknown",
+    "sourceId": "zzz-workshop" | "miyoushe-record" | "unknown",
+    "sourceLabel": "绝区零工坊" | "米游社" | "unknown",
     "confidence": 0.0–1.0,
     "cues": ["branding:工坊-footer", "layout:vertical-roster-row", ...]
   }
@@ -125,7 +126,7 @@ Layout regions (vertical orientation, top → bottom):
   Region 2 — Agent roster row (horizontal scroll)
     Multiple agent portraits. Identify the SELECTED one by the highlighted
     border / larger portrait below.
-    Output: actor.id (resolved via entity normalization from zh agent name)
+    Strict output: BattleSnapshot.team[0].agentId (resolved via entity normalization from zh agent name)
 
   Region 3 — Agent panel
     Large agent portrait + name + level badge (e.g., "LV.60 零号·安比")
@@ -134,20 +135,24 @@ Layout regions (vertical orientation, top → bottom):
       异常掌控 / 异常精通 / 穿透率 / 能量回复
     Each stat shows "total / base + bonus" format.
     Output:
-      actor.id, actor.level, actor.mindscape (影画 N badge)
+      BattleSnapshot.team[0].agentId
+      BattleSnapshot.team[0].level
+      BattleSnapshot.team[0].mindscapeCinema.level (影画 N badge)
       → BattleSnapshot.team[].panel: stat totals (per TL schema map)
       → draftMetadata.evidence.statSplits: base + bonus map
     Element + specialty icons next to name → medium confidence:
-      Output: actor.element, actor.specialty (icon→id map)
+      Strict output: BattleSnapshot.team[0].attribute, BattleSnapshot.team[0].agentSpecialty (icon→id map)
 
   Region 4 — Skill levels strip
     5 icons + small numbers: 普攻 / 闪避 / 支援 / 特殊技 / 连携技
-    Output: actor.skillLevels (map)
+    Strict output: BattleSnapshot.team[0].skillLevels (map)
     Confidence: medium (small font; sanity-check against 12-max)
 
   Region 5 — Weapon card
     Weapon icon + name + level + "精炼 N 星" text
-    Output: weapon.id (zh name → id), weapon.level, weapon.refinement
+    Strict output: BattleSnapshot.team[0].wEngine.id (zh name → id),
+      BattleSnapshot.team[0].wEngine.level,
+      BattleSnapshot.team[0].wEngine.phase
 
   Region 6 — Driver score header
     "驱动评分: X.XX ACE / 驱动评级: ACE"
@@ -160,11 +165,13 @@ Layout regions (vertical orientation, top → bottom):
       Main stat (label + value)
       4 substats (label + roll count "+N" + total value)
     Output for each slot i in 1..6:
-      drive[i].setId (zh set name → id)
-      drive[i].slot (= i)
-      drive[i].level
-      drive[i].mainStat: { stat, value }
-      drive[i].substats[]: { stat, rollCount, value }
+      Strict snapshot:
+        BattleSnapshot.team[0].driveDiscs[i].setId (zh set name → id)
+        BattleSnapshot.team[0].driveDiscs[i].slot (= i)
+      Evidence only:
+        draftMetadata.evidence.driveDiscs[i].level
+        draftMetadata.evidence.driveDiscs[i].mainStat: { stat, value }
+        draftMetadata.evidence.driveDiscs[i].substats[]: { stat, rollCount, value }
     Substat values are EXACT — no Tier 2 midpoint default.
 
   Region 8 — Footer
@@ -172,7 +179,8 @@ Layout regions (vertical orientation, top → bottom):
 
 PII region:
   UID is visible on the agent portrait card ("UID:NNNNNNN"). Username may or
-  may not be visible. Extract to draftMetadata.extractedPII; never persist.
+  may not be visible. Record only `draftMetadata.piiDetection.detectedKinds`;
+  discard raw values and never persist them.
 ```
 
 ### 4.2 Source = 米游社
@@ -183,7 +191,7 @@ Layout regions (landscape composite, top → bottom, left/right):
   Region 1 — Top bar
     Left: username + UID
     Right: ZZ 绝区·零 wordmark
-    Output: draftMetadata.extractedPII (username, UID)
+    Output: draftMetadata.piiDetection.detectedKinds (username, UID detected; raw values discarded)
 
   Region 2 — AGENT INFO band (top section)
     Left half: large agent portrait + S/A/B rank badge + mindscape "N" badge +
@@ -193,18 +201,23 @@ Layout regions (landscape composite, top → bottom, left/right):
       异常掌控 / 异常精通 / 穿透率 / 能量自动回复 / 穿透值 / 电属性伤害加成
     Each cell shows "total" with base+bonus annotation in smaller text.
     Output:
-      actor.id, actor.level, actor.mindscape, actor.rank
+      BattleSnapshot.team[0].agentId
+      BattleSnapshot.team[0].level
+      BattleSnapshot.team[0].mindscapeCinema.level
+      rank badge to draftMetadata.evidence only
       → panel + draftMetadata.evidence.statSplits
 
   Region 3 — Skill levels strip (5-6 icons with small numbers)
-    Output: actor.skillLevels
+    Strict output: BattleSnapshot.team[0].skillLevels
     Confidence: medium; sanity-check vs. 12-max; the sample image shows
     one slot rendering as "07" which may indicate a sub-skill (e.g., core
     passive). Resolve via skill icon ↔ name map, not by position alone.
 
   Region 4 — Weapon strip (below AGENT INFO band)
     Weapon icon + name + LV.NN + visual star count for refinement
-    Output: weapon.id, weapon.level, weapon.refinement
+    Strict output: BattleSnapshot.team[0].wEngine.id,
+      BattleSnapshot.team[0].wEngine.level,
+      BattleSnapshot.team[0].wEngine.phase
     Note: refinement is RENDERED as star icons (count them); on 工坊 it is
     "精炼 N 星" text. Different parse strategy per source.
 
@@ -298,7 +311,10 @@ I read the following from this {source} screenshot:
 
 ### 5.4 PII display rule
 
-PII appears once in the evidence block, marked explicitly as audit-only. Never repeat PII outside this block. PII never reappears in subsequent AI turns or persisted artifacts.
+The evidence block may show a PII detection/redaction notice once, but it must
+not display raw UID, username, QR payload, or account identifiers. The notice is
+only "recognized and hidden"; PII never reappears in subsequent AI turns or
+persisted artifacts.
 
 ---
 
@@ -439,21 +455,21 @@ Field-label normalization tables map source-visible zh labels to canonical Battl
 
 ### 10.1 Stat labels (panel & substats)
 
-| zh label | canonical id | notes |
-|---|---|---|
-| 生命值 | hp | total or substat |
-| 攻击力 | attack | total or substat |
-| 防御力 | defense | total or substat |
-| 冲击力 | impact | total |
-| 暴击率 | critRate | percent; substat values are % |
-| 暴击伤害 | critDmg | percent; substat values are % |
-| 异常掌控 | anomalyMastery | flat |
-| 异常精通 | anomalyProficiency | flat |
-| 穿透率 | pen | percent |
-| 穿透值 | penFlat | flat substat or panel field |
-| 能量回复 / 能量自动回复 | energyRegen | rate; per-second |
-| 电属性伤害加成 | elemDmgElectric | percent; element-specific |
-| (any other elem) | elemDmg{ElementName} | percent; element-specific |
+| zh label | strict panel path | evidence path for disc main/substat rows | notes |
+|---|---|---|---|
+| 生命值 | `team[0].panel.maxHp` | `draftMetadata.evidence.driveDiscs[].mainStat/substats[].stat = "maxHp"` | panel total; disc evidence only |
+| 攻击力 | `team[0].panel.attack` | `draftMetadata.evidence.driveDiscs[].mainStat/substats[].stat = "attack"` | panel total; disc evidence only |
+| 防御力 | `team[0].panel.defense` | `draftMetadata.evidence.driveDiscs[].mainStat/substats[].stat = "defense"` | panel total; disc evidence only |
+| 冲击力 | `team[0].panel.impact` | same evidence stat id | panel total |
+| 暴击率 | `team[0].panel.critRate` | same evidence stat id | convert percent to decimal in strict snapshot |
+| 暴击伤害 | `team[0].panel.critDamage` | same evidence stat id | convert percent to decimal in strict snapshot |
+| 异常掌控 | `team[0].panel.anomalyMastery` | same evidence stat id | flat value |
+| 异常精通 | `team[0].panel.anomalyProficiency` | same evidence stat id | flat value |
+| 穿透率 | `team[0].panel.penetrationRate` | same evidence stat id | convert percent to decimal in strict snapshot |
+| 穿透值 | `team[0].panel.flatPenetration` | same evidence stat id | flat value |
+| 能量回复 / 能量自动回复 | `team[0].panel.energyRegen` or `team[0].panel.energyGenerationRate` | evidence only if label semantics are ambiguous | implementation must choose existing schema semantics or ask user |
+| 电属性伤害加成 | `team[0].panel.electricDamageBonus` | same evidence stat id | convert percent to decimal in strict snapshot |
+| 火 / 冰 / 以太 / 物理属性伤害加成 | `team[0].panel.fireDamageBonus` / `iceDamageBonus` / `etherDamageBonus` / `physicalDamageBonus` | same evidence stat id | convert percent to decimal in strict snapshot |
 
 ### 10.2 Set names (Drive Disc 4pc / 2pc)
 
@@ -467,7 +483,7 @@ Reuse V1.2.2 entity-alias map (`packages/data/...`). No V1.2.3-specific table.
 
 ## 11. Few-shot fixtures
 
-Reference: `examples/ai-plugin/v1.2.3-vision/` (TL + UX co-owned in T2; QA validates).
+Reference: `examples/ai-plugin/vision/` (TL + UX co-owned in T2; QA validates).
 
 Expected fixture set:
 

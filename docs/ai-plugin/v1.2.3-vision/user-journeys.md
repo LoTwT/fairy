@@ -7,7 +7,7 @@
 - Scope lock per Product D-22:
   - **Q1 = A**: community-tool screenshots only (in-game raw screenshots → V1.2.x+).
   - **Q2 = A1.a**: 2 supported sources at MVP — 绝区零工坊 (WeChat mini-app) + 米游社 (Mihoyo community).
-  - **Q3 = A2.a**: vision pipeline may read PII (UID / username) from image for audit/display, but `BattleSnapshot` never persists PII.
+  - **Q3 = A2.a**: vision pipeline may detect PII (UID / username) from image for redaction/audit, but `BattleSnapshot` never persists PII.
 
 ## How to read this document
 
@@ -68,7 +68,7 @@ AI (auto-detect lang → zh; auto-detect source from image):
     ↓ layout-specific field extraction (panel total, weapon, drive disc set + main + substats with roll counts)
     ↓ per-field confidence scoring
     ↓ base/bonus split captured in draftMetadata.evidence (TL schema)
-    ↓ PII (UID, username) captured in draftMetadata only — never written to BattleSnapshot
+    ↓ PII kinds detected and redacted in draftMetadata only — never written to BattleSnapshot
     ↓ produce BattleSnapshot draft + draftMetadata
   ⇒ snapshot.json + draftMetadata.json
 
@@ -110,7 +110,7 @@ AI (auto-detect lang → zh; auto-detect source from image):
 - AI never proceeds to calc without showing the review/edit gate, even when all fields parsed with high confidence. Vision is non-zero error; user must visually confirm.
 - AI surfaces source detection result explicitly ("我从这张「绝区零工坊」截图里…") so the user knows the layout mapping that was applied.
 - AI presents low-confidence fields with a clear marker (per §4), giving the user one place to correct them in review/edit before calc.
-- AI never persists UID / username into `BattleSnapshot`; PII appears only in the review/edit display for audit and is dropped at confirm time.
+- AI never persists UID / username into `BattleSnapshot`; the review/edit gate shows a PII detection/redaction notice, not raw PII values.
 - AI never re-asks for fields already extracted with high confidence (no "你的角色是几级？" after a clear LV60 read).
 - AI degrades gracefully to V1.2.2 NL flow if vision recognition cannot proceed (see §7).
 
@@ -158,10 +158,10 @@ V1.2.x+ patches may add support for: hoyo-pad in-app screenshots, NGA build card
 
 Both supported sources include PII (UID, username). Source detection therefore implicitly always captures PII into the extraction step. Per Q3 = A2.a, the contract is:
 
-- Vision extractor records PII into `draftMetadata.extractedPII` (audit field, ephemeral).
-- Review/edit gate may surface PII once as part of the "extracted from screenshot" display (so the user can confirm "yes that's my account, the build it picked up is mine").
-- On user confirm, PII is **dropped** before the final `BattleSnapshot` is constructed. `BattleSnapshot` contains no UID / username field.
-- `draftMetadata.extractedPII` is not persisted beyond the session.
+- Vision extractor records only `draftMetadata.piiDetection` (detected kinds + redaction status); raw UID / username values are discarded.
+- Review/edit gate may surface a PII detection/redaction notice once as part of the "extracted from screenshot" display, without echoing the raw value.
+- On user confirm, `piiDetection` is **dropped** before the final `BattleSnapshot` is constructed. `BattleSnapshot` contains no UID / username field.
+- `draftMetadata.piiDetection` is not persisted beyond the session.
 
 ---
 
@@ -299,9 +299,9 @@ Cross-cutting per Q3 = A2.a. This section consolidates the PII contract for QA's
 
 | Stage | PII state |
 |---|---|
-| Vision extraction | UID + username read into `draftMetadata.extractedPII` (session-ephemeral) |
-| Review/edit gate display | PII shown once in the "extracted from screenshot" panel, marked "audit-only, not stored" |
-| User confirm | `draftMetadata.extractedPII` dropped before `BattleSnapshot` construction |
+| Vision extraction | UID + username kinds detected into `draftMetadata.piiDetection`; raw values discarded |
+| Review/edit gate display | PII detection/redaction notice shown once; raw values are not displayed |
+| User confirm | `draftMetadata.piiDetection` dropped before `BattleSnapshot` construction |
 | `BattleSnapshot` schema | Contains no PII field; vision-derived BattleSnapshot is indistinguishable from NL-derived |
 | `draftMetadata.evidence` | Base/bonus stat splits retained for audit, but no PII |
 | Session end | All PII cleared |
@@ -309,17 +309,17 @@ Cross-cutting per Q3 = A2.a. This section consolidates the PII contract for QA's
 
 ### Why this contract
 
-- Allows the user to recognize "yes that's my account" at review time (helps spot wrong screenshot pasted by mistake).
+- Gives the user a visible privacy signal ("PII recognized and hidden") without echoing the sensitive value.
 - Prevents PII from leaking into any downstream artifact (saved snapshot, calc result, shared snippet, plugin telemetry, fixture).
 - Keeps schema unchanged — vision and NL paths produce identical `BattleSnapshot` shape.
 
 ### QA assertion handoff
 
 QA V-G4 (Privacy and PII Exclusion) must include:
-1. Vision pipeline reads UID/username from sample fixtures.
-2. Review/edit gate display includes PII (marked audit-only).
+1. Vision pipeline detects UID/username kinds from sample fixtures without retaining raw values.
+2. Review/edit gate display includes a PII detection/redaction notice, not the raw PII.
 3. Post-confirm `BattleSnapshot` JSON contains no UID/username.
-4. Post-confirm `draftMetadata` may contain `evidence` (base/bonus) but no `extractedPII`.
+4. Post-confirm `draftMetadata` may contain `evidence` (base/bonus) but no `piiDetection`.
 5. Persisted snapshot.json (if user saves) and shared CalcResult contain no PII.
 
 ---
@@ -359,7 +359,7 @@ QA validates the user journey through `acceptance.md` V-G1..V-G5 (new V1.2.3 gat
 | Visual ambiguity surfaces 2-3 candidates, never auto-picks | V-G3 |
 | Fallback to NL flow on source-unknown / low-confidence-everywhere / user-request | V-G3 |
 | Review/edit gate gates `fairy-calc` — calc not invoked before user confirmation | V-G3 (review/edit precondition) + V-G5 (calc validation) |
-| PII extracted into `draftMetadata.extractedPII` but never persisted to `BattleSnapshot` | V-G4 (Privacy & PII Exclusion) |
+| PII kinds detected into `draftMetadata.piiDetection`; raw values are redacted and never persisted to `BattleSnapshot` | V-G4 (Privacy & PII Exclusion) |
 | Public fixtures redacted / synthetic — no real PII committed | V-G4 |
 | Confirmed vision snapshot runs through `fairy calc <snapshot> --view verbose --lang <lang>` | V-G5 (End-to-End Calc Validation) |
 | AI summary uses only CLI-emitted CalcResult fields; no fabrication on vision path | V-G5 |
@@ -390,6 +390,6 @@ QA validates the user journey through `acceptance.md` V-G1..V-G5 (new V1.2.3 gat
 ## Appendix B · Glossary additions
 
 - **fairy-snapshot image entry** — V1.2.3 extension to the existing `fairy-snapshot` skill. It reads a supported screenshot and produces a `BattleSnapshot` draft + `draftMetadata`, then uses the same ask-user and `fairy-calc` handoff as the V1.2.2 text flow.
-- **draftMetadata.extractedPII** — session-ephemeral audit field carrying UID / username from vision extraction. Dropped at confirm.
+- **draftMetadata.piiDetection** — session-ephemeral audit field carrying detected PII kinds and redaction status, never raw UID / username values. Dropped at confirm.
 - **draftMetadata.evidence** — audit field carrying base/bonus stat split (and other vision-only-visible facts) for user review. Not consumed by calc engine.
 - **Source detection** — vision pipeline's first step: identify which community tool produced the screenshot. Gates layout-specific field extraction.
