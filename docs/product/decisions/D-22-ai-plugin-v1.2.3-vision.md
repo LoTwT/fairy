@@ -16,7 +16,8 @@ holds — 不 dogfood / 不 release。D-21 §3.2 把 **screenshot recognition**
 schema / review/edit gate / calc validation / NL fallback）。
 
 2026-05-17 lo-user `e1ad99dc` 触发 V1.2.3 实施讨论，提供 2 张样例截图
-（同一 build：零号·安比 Lv60 / 影画 2 / UID 11553939）来自不同社区工具
+（同一 build：零号·安比 Lv60 / 影画 2；UID present but intentionally omitted
+from this public decision record）来自不同社区工具
 （绝区零工坊 + 米游社）。4 方（Product/TL/UX/QA）就 8 项关键决策达成
 align（per `e7c8a696` lo-user 全按推荐）。
 
@@ -145,7 +146,7 @@ truth；本 D-22 仅承载决策 lock，不重复 gate 命名定义。
     路径
 - **R-V13-4**：PII 隐私 — vision extract UID / 用户名后即使不存 schema，
   仍存在于 vision raw output / debug log
-  - 缓解：QA V-G3 fixture 验证 raw output 不持久化；debug log 自动 mask
+  - 缓解：QA V-G4 fixture 验证 raw output 不持久化；debug log 自动 mask
     PII pattern
 - **R-V13-5**：字段精度 — 社区工具显示 vs in-game 实际可能有微小差异（如
   取整 / 不同口径），但 V1.2.3 仅以社区工具为输入源，与 in-game 不直接对账

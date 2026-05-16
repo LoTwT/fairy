@@ -254,7 +254,7 @@ The review/edit gate is the primary vision-specific UX. Inline confidence marker
   证据 (audit-only，不进 calc):
     - ATK {atk} = {base} base + {bonus} bonus
     - HP {hp} = {base} base + {bonus} bonus
-    - 截图来源: {source}（UID {uid} 已识别，不入 snapshot）
+    - 截图来源: {source}（UID 已识别并隐藏，不入 snapshot）
 
   {if missing fields}
   还要补一项: {missing-field-prompt}
@@ -278,7 +278,7 @@ I read the following from this {source} screenshot:
   Evidence (audit-only, not used in calc):
     - ATK {atk} = {base} base + {bonus} bonus
     - HP {hp} = {base} base + {bonus} bonus
-    - Source: {source} (UID {uid} recognized, not persisted)
+    - Source: {source} (UID recognized and hidden, not persisted)
 
   {if missing fields}
   One more thing: {missing-field-prompt}

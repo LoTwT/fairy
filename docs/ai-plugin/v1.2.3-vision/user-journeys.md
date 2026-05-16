@@ -83,7 +83,7 @@ AI (auto-detect lang → zh; auto-detect source from image):
        证据 (audit-only，不进 calc):
          - ATK 3523 = 1642 base + 1881 bonus
          - HP 10215 = 7673 base + 2542 bonus
-         - 截图来源: 绝区零工坊 (UID 11553939 已识别，不入 snapshot)
+         - 截图来源: 绝区零工坊 (UID 已识别并隐藏，不入 snapshot)
 
        还要补一项: 敌人是「本期 DA boss 60 级」我帮你补到 enemy.id。
        直接算吗？要改哪里告诉我。"   ← review/edit gate
