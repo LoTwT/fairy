@@ -244,9 +244,10 @@ function assertRuntimeEntity(domain, id, context) {
 function assertEntityLabelInVariants(entity, variants, context) {
   const zh = entity?.label?.zh
   const en = entity?.label?.en
+  const variantTokens = variants.split("/").map(variant => variant.trim()).filter(Boolean)
   if (zh || en) {
     assert(
-      (zh !== undefined && variants.includes(zh)) || (en !== undefined && variants.includes(en)),
+      (zh !== undefined && variantTokens.includes(zh)) || (en !== undefined && variantTokens.includes(en)),
       `${context}: variants must include current runtime label (${zh ?? "no zh"} / ${en ?? "no en"})`,
     )
   }
