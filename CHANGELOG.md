@@ -2,6 +2,17 @@
 
 All notable changes to Fairy are documented in this file.
 
+## 0.1.2 - 2026-05-16
+
+### Changed
+
+- Move data ownership into package
+
+### Documentation
+
+- Plan data package ownership refactor
+- Prepare v0.1.2 patch notes
+
 ## 0.1.1 - 2026-05-16
 
 ### Added
