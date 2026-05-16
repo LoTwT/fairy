@@ -497,8 +497,8 @@ Per `acceptance.md` G1-G3 fixture strategy and `user-journeys.md` §2 entity rec
 | 仪玄 | `character.id=1371` | "我想算仪玄..." |
 | 妮可 | `character.id=1031` (Nicole Demara) | "妮可的伤害..." |
 | 啄木鸟电音 | `equipment.setId=31000` | "啄木鸟电音 4 套..." |
-| 钢铁躯壳 | `equipment.setId=32004` | "...加钢铁躯壳 2 件套" |
-| 企鹅布 | `bangboo.id=54001` | "...邦布带企鹅布" |
+| 激素朋克 | `equipment.setId=31400` | "...加激素朋克 2 件套" |
+| 企鹅布 | `bangboo.id=53001` | "...邦布带企鹅布" |
 | 危局强袭战 | DA scope marker | "危局强袭战本期 boss" |
 
 ### 8.2 en → canonical (sample, 2-3 each domain)
@@ -508,9 +508,9 @@ Per `acceptance.md` G1-G3 fixture strategy and `user-journeys.md` §2 entity rec
 | Yixuan | `character.id=1371` | "I want to calc Yixuan..." |
 | Nicole | `character.id=1031` | "Nicole's damage..." |
 | Woodpecker Electro | `equipment.setId=31000` | "Woodpecker Electro 4pc" |
-| Hormone Punk | `equipment.setId=32004` (Steel Cushion alias check needed) | "...with Hormone Punk 2pc" |
-| Penguinboo | `bangboo.id=54001` | "...with Penguinboo" |
-| Deadly Assault | DA scope marker | "current DA boss" |
+| Hormone Punk | `equipment.setId=31400` | "...with Hormone Punk 2pc" |
+| Penguinboo | `bangboo.id=53001` | "...with Penguinboo" |
+| Deadly Assault | DA scope marker | "Greta" |
 
 ### 8.3 Ambiguity disambiguation fixtures
 
@@ -518,7 +518,7 @@ Per `acceptance.md` G1-G3 fixture strategy and `user-journeys.md` §2 entity rec
 |---|---|
 | "Anby" | (1) Anby Demara `character.id=1011` |
 | "S11" | (1) Soldier 11 `character.id=1041` |
-| "Burnice" / "Burnis" / "本子" | (1) Burnice `character.id=1051` |
+| "Burnice" / "Burnis" / "本子" | (1) Burnice `character.id=1171` |
 | "Drive 4" | clarify: "你是说位置 4 的 Drive Disc 还是 4 件套？" |
 
 ### 8.4 Cross-lang ambiguity (entity name lang ≠ dialog lang)
@@ -582,9 +582,9 @@ Few-shot prompt fixtures are EN-canonical (per QA `39ce78c9` G4 strategy): same 
 
 - `examples/ai-plugin/prompts/build-yixuan-basic.md` — minimal NL build description → snapshot
 - `examples/ai-plugin/prompts/build-yixuan-full.md` — full NL build with all critical fields filled
-- `examples/ai-plugin/prompts/build-yixuan-ambiguous.md` — NL with ambiguous entity → disambiguation flow
-- `examples/ai-plugin/snapshots/yixuan-basic.json` — expected snapshot output
-- `examples/ai-plugin/expected/yixuan-basic-calc.json` — expected CalcResult shape (for explain skill fixture input)
+- `examples/ai-plugin/prompts/build-anby-ambiguous.md` — NL with ambiguous entity → disambiguation flow
+- `examples/ai-plugin/snapshots/yixuan-basic.snapshot.json` — expected snapshot output
+- `examples/ai-plugin/expected/yixuan-basic.calc.json` — expected CalcResult shape (for explain skill fixture input)
 
 QA fixture coverage matrix (per `acceptance.md`):
 - Skill spec discovery (G1/G2/G7/G9): EN canonical only.
