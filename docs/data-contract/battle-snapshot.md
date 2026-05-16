@@ -137,8 +137,8 @@ interface BangbooPanelSnapshot {
 ```
 
 V1.1 Path X models Bangboo as an explicit attack-segment actor. It does not
-model Bangboo as a passive/team buff source, because the retained Excel Path X
-data has numeric panel and skill values but no source-backed passive text,
+model Bangboo as a passive/team buff source, because the retired Excel-derived
+Path X evidence has numeric panel and skill values but no source-backed passive text,
 element, or activation wording.
 
 ### Equipment Naming Decisions

@@ -101,19 +101,19 @@ package-size optimization:
 - `pnpm check`
 - `pnpm build`
 - `pnpm test` (core 53 / data 145 / cli 27)
-- `pnpm --filter @randomplay/data verify:buhflipexplode-da`
-- `pnpm --filter @randomplay/data verify:excel`
 - `pnpm --filter @randomplay/data verify:golden-v1`
-- `pnpm --filter @randomplay/data verify:mihoyo-da`
 - `pnpm --filter @randomplay/data verify:nanoka`
 - `pnpm --filter @randomplay/data verify:nanoka-da-history`
 - `pnpm --filter @randomplay/data verify:nanoka-runtime`
 - `pnpm --filter @randomplay/data verify:package-size`
 - `pnpm --filter @randomplay/data verify:source-registry`
 - `pnpm --filter @randomplay/data verify:source-migration`
-- `pnpm --filter @randomplay/data sync-cleaned -- --check`
 - npm pack dry-run payload checks
 - root import and direct JSON import smoke from the built package
+
+The V0.1.1 pre-release also included legacy Excel, Mihoyo D-17,
+buhflipexplode D-12, and cleaned mirror checks that were retired in V0.1.2 when
+their raw archives and the cleaned mirror command were removed.
 
 Release-readiness still needs to validate the published npm packages, matching
 `@randomplay/core`, `@randomplay/data`, and `@randomplay/cli` versions, SLSA
@@ -135,7 +135,7 @@ See `docs/data-source/takedown-rollback.md` for the detailed runbook.
 ## Links
 
 - Repository — https://github.com/LoTwT/fairy
-- Runtime source registry — `data/source-registry.json`
+- Runtime source registry — `packages/data/source-registry.json`
 - D-20 migration decision — `docs/product/decisions/D-20-data-source-migration.md`
 - Golden source coverage — `docs/qa/golden-source-coverage.md`
 - Release workflow — `docs/release/README.md`

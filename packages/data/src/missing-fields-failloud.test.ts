@@ -44,14 +44,14 @@ function assertReleaseGate(report: GateReport) {
 
 describe("missing-fields fail-loud gate", () => {
   it("has resolved all TL research rows into verified, deferred, or owner-owned gates", () => {
-    const matrix = readJson<CoverageMatrix>("data/cleaned/audit/nanoka-coverage-matrix.json")
+    const matrix = readJson<CoverageMatrix>("packages/data/cleaned/audit/nanoka-coverage-matrix.json")
     const unresolved = matrix.rows.filter(row => row.status === "needs-tl-research")
 
     expect(unresolved).toEqual([])
   })
 
   it("has resolved owner-escalated rows into scoped decisions", () => {
-    const matrix = readJson<CoverageMatrix>("data/cleaned/audit/nanoka-coverage-matrix.json")
+    const matrix = readJson<CoverageMatrix>("packages/data/cleaned/audit/nanoka-coverage-matrix.json")
     const ownerRows = matrix.rows.filter(row => row.status === "needs-owner-research")
     const driveDiscRow = matrix.rows.find(row => row.fieldId === "driveDiscs.slotAndSubstatTables")
 
@@ -60,23 +60,23 @@ describe("missing-fields fail-loud gate", () => {
     expect(driveDiscRow?.status).toBe("deferred")
     expect(driveDiscRow?.promotable).toBe(false)
     expect(driveDiscRow?.blockedBy).toContain("scope:user-provided-snapshot-boundary")
-    expect(driveDiscRow?.auditArtifact).toBe("data/cleaned/audit/nanoka-drive-disc-slot-stat-audit.json")
+    expect(driveDiscRow?.auditArtifact).toBe("packages/data/cleaned/audit/nanoka-drive-disc-slot-stat-audit.json")
   })
 
   it("keeps implementation-owned formulas out of TL research rows", () => {
-    const matrix = readJson<CoverageMatrix>("data/cleaned/audit/nanoka-coverage-matrix.json")
+    const matrix = readJson<CoverageMatrix>("packages/data/cleaned/audit/nanoka-coverage-matrix.json")
     const disorderFormulaRow = matrix.rows.find(row => row.fieldId === "rules.disorderFormula")
     const disorderDazeLevelRow = matrix.rows.find(row => row.fieldId === "rules.disorderDazeLevelZone")
 
     expect(disorderFormulaRow).toBeDefined()
     expect(disorderFormulaRow?.status).toBe("deferred")
     expect(disorderFormulaRow?.blockedBy).toContain("implementation-owned-runtime-formula")
-    expect(disorderFormulaRow?.auditArtifact).toBe("data/cleaned/audit/nanoka-disorder-formula-audit.json")
+    expect(disorderFormulaRow?.auditArtifact).toBe("packages/data/cleaned/audit/nanoka-disorder-formula-audit.json")
 
     expect(disorderDazeLevelRow).toBeDefined()
     expect(disorderDazeLevelRow?.status).toBe("deferred")
     expect(disorderDazeLevelRow?.blockedBy).toContain("implementation-owned-runtime-formula")
-    expect(disorderDazeLevelRow?.auditArtifact).toBe("data/cleaned/audit/nanoka-disorder-daze-level-audit.json")
+    expect(disorderDazeLevelRow?.auditArtifact).toBe("packages/data/cleaned/audit/nanoka-disorder-daze-level-audit.json")
   })
 
   it("fails loudly when missing, deferred, or forbidden rows are present in a release report", () => {

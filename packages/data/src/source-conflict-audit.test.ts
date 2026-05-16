@@ -3,12 +3,7 @@ import { join } from "node:path"
 import { describe, expect, it } from "vitest"
 
 const repoRoot = join(import.meta.dirname, "../../..")
-const auditPath = join(repoRoot, "data/cleaned/audit/mihoyo-buhflipexplode.source-conflicts.json")
-const packageAuditPath = join(repoRoot, "packages/data/cleaned/audit/mihoyo-buhflipexplode.source-conflicts.json")
-const rawAlignmentPath = join(
-  repoRoot,
-  "data/source/raw/mihoyo/zzz-da/2026-05-05T0850Z/alignment/mihoyo-buhflipexplode.json",
-)
+const auditPath = join(repoRoot, "packages/data/cleaned/audit/mihoyo-buhflipexplode.source-conflicts.json")
 
 type AuditRecord = {
   auditId: string
@@ -157,15 +152,10 @@ describe("Mihoyo/buhflipexplode source-conflict audit", () => {
     expect(interrupt.normalizedComparison.nanoka).toMatchObject(interrupt.normalizedComparison.buhflipexplode)
   })
 
-  it("keeps the raw source-conflict trace while adding cleaned release resolution", () => {
-    const raw = readJson<{ unresolved: Array<{ reason: string }> }>(rawAlignmentPath)
+  it("keeps the source-conflict trace while adding cleaned release resolution", () => {
     const audit = readJson<SourceConflictAudit>(auditPath)
 
-    expect(raw.unresolved.filter(issue => issue.reason === "sourceConflict")).toHaveLength(3)
+    expect(audit.records).toHaveLength(3)
     expect(audit.records.every(record => record.status === "resolved-prefer-buhflipexplode")).toBe(true)
-  })
-
-  it("keeps the synced package copy byte-identical to cleaned staging", () => {
-    expect(readFileSync(packageAuditPath, "utf8")).toBe(readFileSync(auditPath, "utf8"))
   })
 })

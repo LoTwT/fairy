@@ -1,8 +1,8 @@
 # buhflipexplode Algorithm Snapshot 2026-05-05
 
 Status: accepted baseline
-Source snapshot: `data/source/raw/buhflipexplode/2026-05-05T0445Z/`
-Manifest: `data/source/raw/buhflipexplode/2026-05-05T0445Z/algorithm-manifest.json`
+Source snapshot: `git-history:data/source/raw/buhflipexplode/2026-05-05T0445Z/`
+Manifest: `git-history:data/source/raw/buhflipexplode/2026-05-05T0445Z/algorithm-manifest.json`
 
 This document summarizes observed behavior for Fairy's independent
 implementation. It intentionally does not copy GPL JavaScript source into Fairy

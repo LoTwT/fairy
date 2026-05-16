@@ -1,0 +1,456 @@
+{
+  "id": 54001,
+  "code_name": "Sharkboo",
+  "name": "鲨牙布",
+  "desc": "出没于远洋及生鲜超市海产区。",
+  "rarity": 4,
+  "icon": "UI/Sprite/A1DynamicLoad/BangbooModGarage/UnPacker/BangbooRole/BangbooGarageRole07.png",
+  "stats": {
+    "endurance": 180,
+    "hp_max": 396,
+    "hpupgrade": 471237,
+    "attack": 65,
+    "attack_upgrade": 327644,
+    "break_stun": 99,
+    "element_abnormal_power": 132,
+    "defence": 30,
+    "def_upgrade": 85729,
+    "crit": 500,
+    "pen_ratio": 0,
+    "crit_dmg": 5000
+  },
+  "level": {
+    "1": {
+      "hp_max": 0,
+      "attack": 0,
+      "defence": 0,
+      "level_max": 10,
+      "level_min": 0,
+      "materials": {
+        "10": 15000,
+        "102010": 4
+      },
+      "extra": {
+        "20101": {
+          "prop": 20101,
+          "name": "暴击率",
+          "format": "{0:0.#%}",
+          "value": 0
+        },
+        "21101": {
+          "prop": 21101,
+          "name": "暴击伤害",
+          "format": "{0:0.#%}",
+          "value": 0
+        }
+      }
+    },
+    "2": {
+      "hp_max": 207,
+      "attack": 61,
+      "defence": 38,
+      "level_max": 20,
+      "level_min": 10,
+      "materials": {
+        "10": 35000,
+        "102020": 12
+      },
+      "extra": {
+        "20101": {
+          "prop": 20101,
+          "name": "暴击率",
+          "format": "{0:0.#%}",
+          "value": 450
+        },
+        "21101": {
+          "prop": 21101,
+          "name": "暴击伤害",
+          "format": "{0:0.#%}",
+          "value": 0
+        }
+      }
+    },
+    "3": {
+      "hp_max": 414,
+      "attack": 303,
+      "defence": 75,
+      "level_max": 30,
+      "level_min": 20,
+      "materials": {
+        "10": 75000,
+        "102020": 20
+      },
+      "extra": {
+        "20101": {
+          "prop": 20101,
+          "name": "暴击率",
+          "format": "{0:0.#%}",
+          "value": 2250
+        },
+        "21101": {
+          "prop": 21101,
+          "name": "暴击伤害",
+          "format": "{0:0.#%}",
+          "value": 0
+        }
+      }
+    },
+    "4": {
+      "hp_max": 621,
+      "attack": 909,
+      "defence": 113,
+      "level_max": 40,
+      "level_min": 30,
+      "materials": {
+        "10": 125000,
+        "102030": 10
+      },
+      "extra": {
+        "20101": {
+          "prop": 20101,
+          "name": "暴击率",
+          "format": "{0:0.#%}",
+          "value": 2250
+        },
+        "21101": {
+          "prop": 21101,
+          "name": "暴击伤害",
+          "format": "{0:0.#%}",
+          "value": 2500
+        }
+      }
+    },
+    "5": {
+      "hp_max": 828,
+      "attack": 2424,
+      "defence": 151,
+      "level_max": 50,
+      "level_min": 40,
+      "materials": {
+        "10": 250000,
+        "102030": 20
+      },
+      "extra": {
+        "20101": {
+          "prop": 20101,
+          "name": "暴击率",
+          "format": "{0:0.#%}",
+          "value": 4500
+        },
+        "21101": {
+          "prop": 21101,
+          "name": "暴击伤害",
+          "format": "{0:0.#%}",
+          "value": 2500
+        }
+      }
+    },
+    "6": {
+      "hp_max": 1034,
+      "attack": 6059,
+      "defence": 188,
+      "level_max": 60,
+      "level_min": 50,
+      "materials": {},
+      "extra": {
+        "20101": {
+          "prop": 20101,
+          "name": "暴击率",
+          "format": "{0:0.#%}",
+          "value": 4500
+        },
+        "21101": {
+          "prop": 21101,
+          "name": "暴击伤害",
+          "format": "{0:0.#%}",
+          "value": 5000
+        }
+      }
+    }
+  },
+  "skill": {
+    "a": {
+      "level": {
+        "1": {
+          "name": "旱地猎鲨",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，在原地设置追踪陷阱，触发时撕咬敌人并召唤鱼雷打击，造成<color=#98EFF0>冰属性伤害</color>并累积<color=#98EFF0>冰属性异常积蓄值</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{{Skill:5400101, Prop:1001}/3}+{{Skill:5400101, Prop:1001}*2/3}|{{Skill:5400101, Prop:1002}/3}+{{Skill:5400101, Prop:1002}*2/3}|12秒"
+        },
+        "2": {
+          "name": "旱地猎鲨",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，在原地设置追踪陷阱，触发时撕咬敌人并召唤鱼雷打击，造成<color=#98EFF0>冰属性伤害</color>并累积<color=#98EFF0>冰属性异常积蓄值</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{{Skill:5400101, Prop:1001}/3}+{{Skill:5400101, Prop:1001}*2/3}|{{Skill:5400101, Prop:1002}/3}+{{Skill:5400101, Prop:1002}*2/3}|12秒"
+        },
+        "3": {
+          "name": "旱地猎鲨",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，在原地设置追踪陷阱，触发时撕咬敌人并召唤鱼雷打击，造成<color=#98EFF0>冰属性伤害</color>并累积<color=#98EFF0>冰属性异常积蓄值</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{{Skill:5400101, Prop:1001}/3}+{{Skill:5400101, Prop:1001}*2/3}|{{Skill:5400101, Prop:1002}/3}+{{Skill:5400101, Prop:1002}*2/3}|12秒"
+        },
+        "4": {
+          "name": "旱地猎鲨",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，在原地设置追踪陷阱，触发时撕咬敌人并召唤鱼雷打击，造成<color=#98EFF0>冰属性伤害</color>并累积<color=#98EFF0>冰属性异常积蓄值</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{{Skill:5400101, Prop:1001}/3}+{{Skill:5400101, Prop:1001}*2/3}|{{Skill:5400101, Prop:1002}/3}+{{Skill:5400101, Prop:1002}*2/3}|12秒"
+        },
+        "5": {
+          "name": "旱地猎鲨",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，在原地设置追踪陷阱，触发时撕咬敌人并召唤鱼雷打击，造成<color=#98EFF0>冰属性伤害</color>并累积<color=#98EFF0>冰属性异常积蓄值</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{{Skill:5400101, Prop:1001}/3}+{{Skill:5400101, Prop:1001}*2/3}|{{Skill:5400101, Prop:1002}/3}+{{Skill:5400101, Prop:1002}*2/3}|12秒"
+        },
+        "6": {
+          "name": "旱地猎鲨",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，在原地设置追踪陷阱，触发时撕咬敌人并召唤鱼雷打击，造成<color=#98EFF0>冰属性伤害</color>并累积<color=#98EFF0>冰属性异常积蓄值</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{{Skill:5400101, Prop:1001}/3}+{{Skill:5400101, Prop:1001}*2/3}|{{Skill:5400101, Prop:1002}/3}+{{Skill:5400101, Prop:1002}*2/3}|12秒"
+        },
+        "7": {
+          "name": "旱地猎鲨",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，在原地设置追踪陷阱，触发时撕咬敌人并召唤鱼雷打击，造成<color=#98EFF0>冰属性伤害</color>并累积<color=#98EFF0>冰属性异常积蓄值</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{{Skill:5400101, Prop:1001}/3}+{{Skill:5400101, Prop:1001}*2/3}|{{Skill:5400101, Prop:1002}/3}+{{Skill:5400101, Prop:1002}*2/3}|12秒"
+        },
+        "8": {
+          "name": "旱地猎鲨",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，在原地设置追踪陷阱，触发时撕咬敌人并召唤鱼雷打击，造成<color=#98EFF0>冰属性伤害</color>并累积<color=#98EFF0>冰属性异常积蓄值</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{{Skill:5400101, Prop:1001}/3}+{{Skill:5400101, Prop:1001}*2/3}|{{Skill:5400101, Prop:1002}/3}+{{Skill:5400101, Prop:1002}*2/3}|12秒"
+        },
+        "9": {
+          "name": "旱地猎鲨",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，在原地设置追踪陷阱，触发时撕咬敌人并召唤鱼雷打击，造成<color=#98EFF0>冰属性伤害</color>并累积<color=#98EFF0>冰属性异常积蓄值</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{{Skill:5400101, Prop:1001}/3}+{{Skill:5400101, Prop:1001}*2/3}|{{Skill:5400101, Prop:1002}/3}+{{Skill:5400101, Prop:1002}*2/3}|12秒"
+        },
+        "10": {
+          "name": "旱地猎鲨",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，在原地设置追踪陷阱，触发时撕咬敌人并召唤鱼雷打击，造成<color=#98EFF0>冰属性伤害</color>并累积<color=#98EFF0>冰属性异常积蓄值</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{{Skill:5400101, Prop:1001}/3}+{{Skill:5400101, Prop:1001}*2/3}|{{Skill:5400101, Prop:1002}/3}+{{Skill:5400101, Prop:1002}*2/3}|12秒"
+        }
+      }
+    },
+    "b": {
+      "level": {
+        "1": {
+          "name": "寒流涌动",
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在2名或以上<color=#98EFF0>[冰属性]</color>角色时触发：<color=#FFFFFF>[邦布连携技]</color>累积的属性异常积蓄值提升100%。",
+          "property": [
+            "属性异常积蓄值提升"
+          ],
+          "param": "100%"
+        },
+        "2": {
+          "name": "寒流涌动",
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在2名或以上<color=#98EFF0>[冰属性]</color>角色时触发：<color=#FFFFFF>[邦布连携技]</color>累积的属性异常积蓄值提升125%。",
+          "property": [
+            "属性异常积蓄值提升"
+          ],
+          "param": "125%"
+        },
+        "3": {
+          "name": "寒流涌动",
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在2名或以上<color=#98EFF0>[冰属性]</color>角色时触发：<color=#FFFFFF>[邦布连携技]</color>累积的属性异常积蓄值提升150%。",
+          "property": [
+            "属性异常积蓄值提升"
+          ],
+          "param": "150%"
+        },
+        "4": {
+          "name": "寒流涌动",
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在2名或以上<color=#98EFF0>[冰属性]</color>角色时触发：<color=#FFFFFF>[邦布连携技]</color>累积的属性异常积蓄值提升175%。",
+          "property": [
+            "属性异常积蓄值提升"
+          ],
+          "param": "175%"
+        },
+        "5": {
+          "name": "寒流涌动",
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在2名或以上<color=#98EFF0>[冰属性]</color>角色时触发：<color=#FFFFFF>[邦布连携技]</color>累积的属性异常积蓄值提升200%。",
+          "property": [
+            "属性异常积蓄值提升"
+          ],
+          "param": "200%"
+        }
+      }
+    },
+    "c": {
+      "level": {
+        "1": {
+          "name": "追猎不休",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n召唤追踪陷阱并跳向目标，落地时引发爆炸，造成<color=#98EFF0>冰属性伤害</color>并累积大量<color=#98EFF0>冰属性异常积蓄值</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5400102, Prop:1001}|{Skill:5400102, Prop:1002}"
+        },
+        "2": {
+          "name": "追猎不休",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n召唤追踪陷阱并跳向目标，落地时引发爆炸，造成<color=#98EFF0>冰属性伤害</color>并累积大量<color=#98EFF0>冰属性异常积蓄值</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5400102, Prop:1001}|{Skill:5400102, Prop:1002}"
+        },
+        "3": {
+          "name": "追猎不休",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n召唤追踪陷阱并跳向目标，落地时引发爆炸，造成<color=#98EFF0>冰属性伤害</color>并累积大量<color=#98EFF0>冰属性异常积蓄值</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5400102, Prop:1001}|{Skill:5400102, Prop:1002}"
+        },
+        "4": {
+          "name": "追猎不休",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n召唤追踪陷阱并跳向目标，落地时引发爆炸，造成<color=#98EFF0>冰属性伤害</color>并累积大量<color=#98EFF0>冰属性异常积蓄值</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5400102, Prop:1001}|{Skill:5400102, Prop:1002}"
+        },
+        "5": {
+          "name": "追猎不休",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n召唤追踪陷阱并跳向目标，落地时引发爆炸，造成<color=#98EFF0>冰属性伤害</color>并累积大量<color=#98EFF0>冰属性异常积蓄值</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5400102, Prop:1001}|{Skill:5400102, Prop:1002}"
+        },
+        "6": {
+          "name": "追猎不休",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n召唤追踪陷阱并跳向目标，落地时引发爆炸，造成<color=#98EFF0>冰属性伤害</color>并累积大量<color=#98EFF0>冰属性异常积蓄值</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5400102, Prop:1001}|{Skill:5400102, Prop:1002}"
+        },
+        "7": {
+          "name": "追猎不休",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n召唤追踪陷阱并跳向目标，落地时引发爆炸，造成<color=#98EFF0>冰属性伤害</color>并累积大量<color=#98EFF0>冰属性异常积蓄值</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5400102, Prop:1001}|{Skill:5400102, Prop:1002}"
+        },
+        "8": {
+          "name": "追猎不休",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n召唤追踪陷阱并跳向目标，落地时引发爆炸，造成<color=#98EFF0>冰属性伤害</color>并累积大量<color=#98EFF0>冰属性异常积蓄值</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5400102, Prop:1001}|{Skill:5400102, Prop:1002}"
+        },
+        "9": {
+          "name": "追猎不休",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n召唤追踪陷阱并跳向目标，落地时引发爆炸，造成<color=#98EFF0>冰属性伤害</color>并累积大量<color=#98EFF0>冰属性异常积蓄值</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5400102, Prop:1001}|{Skill:5400102, Prop:1002}"
+        },
+        "10": {
+          "name": "追猎不休",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n召唤追踪陷阱并跳向目标，落地时引发爆炸，造成<color=#98EFF0>冰属性伤害</color>并累积大量<color=#98EFF0>冰属性异常积蓄值</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5400102, Prop:1001}|{Skill:5400102, Prop:1002}"
+        }
+      }
+    }
+  },
+  "skill_prop": {
+    "5400101": {
+      "1001": {
+        "main": 38400,
+        "growth": 3840,
+        "format": "%"
+      },
+      "1002": {
+        "main": 14000,
+        "growth": 1400,
+        "format": "%"
+      },
+      "element_accumulation_value": 18000
+    },
+    "5400102": {
+      "1001": {
+        "main": 46100,
+        "growth": 4610,
+        "format": "%"
+      },
+      "1002": {
+        "main": 9300,
+        "growth": 930,
+        "format": "%"
+      },
+      "element_accumulation_value": 19000
+    },
+    "5400103": {
+      "1001": {
+        "main": 120000,
+        "growth": 12000,
+        "format": "%"
+      },
+      "1002": {
+        "main": 35100,
+        "growth": 3510,
+        "format": "%"
+      },
+      "element_accumulation_value": 45000
+    }
+  }
+}

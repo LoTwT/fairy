@@ -1,11 +1,11 @@
 {
   "schemaVersion": "nanoka-drift-report/v0.1",
   "syncId": "phase3-sync-001-g01-g26",
-  "generatedAt": "2026-05-16T01:50:00+08:00",
+  "generatedAt": "2026-05-15T16:20:00+08:00",
   "candidate": {
     "sourceId": "nanoka-zzz",
     "sourceVersion": "2.8",
-    "contentHash": "sha256:93d1241c3204109be06fcf801594bb3aebe40cca830973956c7dea26367b6882"
+    "contentHash": "sha256:4374b550b86b4af029e1903b838ce8906d6e389a8a6566eb35f3b7cac97761ba"
   },
   "baselines": [
     {
@@ -50,7 +50,7 @@
       "candidateSourceRef": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/boss/69036.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/boss/69036.json",
         "dataPath": "/boss_adjust"
       },
       "baselineValue": {
@@ -129,7 +129,7 @@
               "nanoka-boss-live-69037",
               "nanoka-boss-live-69038"
             ],
-            "auditArtifact": "data/cleaned/audit/nanoka-da-current-batch-audit.json",
+            "auditArtifact": "packages/data/cleaned/audit/nanoka-da-current-batch-audit.json",
             "blockedBy": []
           },
           {
@@ -411,7 +411,7 @@
               "nanoka-monster-live-990167",
               "nanoka-monster-live-990174"
             ],
-            "auditArtifact": "data/cleaned/audit/nanoka-enemy-batch-audit.json",
+            "auditArtifact": "packages/data/cleaned/audit/nanoka-enemy-batch-audit.json",
             "blockedBy": [
               "field:enemy-level-formula-required"
             ]
@@ -695,7 +695,7 @@
               "nanoka-monster-live-990167",
               "nanoka-monster-live-990174"
             ],
-            "auditArtifact": "data/cleaned/audit/nanoka-enemy-batch-audit.json",
+            "auditArtifact": "packages/data/cleaned/audit/nanoka-enemy-batch-audit.json",
             "blockedBy": []
           }
         ],
@@ -1038,7 +1038,7 @@
       "candidateSourceRef": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/boss/69036.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/boss/69036.json",
         "dataPath": "/boss_adjust"
       },
       "baselineValue": {
@@ -1117,7 +1117,7 @@
               "nanoka-boss-live-69037",
               "nanoka-boss-live-69038"
             ],
-            "auditArtifact": "data/cleaned/audit/nanoka-da-current-batch-audit.json",
+            "auditArtifact": "packages/data/cleaned/audit/nanoka-da-current-batch-audit.json",
             "blockedBy": []
           },
           {
@@ -1399,7 +1399,7 @@
               "nanoka-monster-live-990167",
               "nanoka-monster-live-990174"
             ],
-            "auditArtifact": "data/cleaned/audit/nanoka-enemy-batch-audit.json",
+            "auditArtifact": "packages/data/cleaned/audit/nanoka-enemy-batch-audit.json",
             "blockedBy": [
               "field:enemy-level-formula-required"
             ]
@@ -1683,7 +1683,7 @@
               "nanoka-monster-live-990167",
               "nanoka-monster-live-990174"
             ],
-            "auditArtifact": "data/cleaned/audit/nanoka-enemy-batch-audit.json",
+            "auditArtifact": "packages/data/cleaned/audit/nanoka-enemy-batch-audit.json",
             "blockedBy": []
           }
         ],
@@ -2026,7 +2026,7 @@
       "candidateSourceRef": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1021.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1021.json",
         "dataPath": "/stats"
       },
       "baselineValue": {
@@ -2113,7 +2113,7 @@
               "nanoka-character-starlight-billy-live-1531",
               "nanoka-character-promeia-live-1541"
             ],
-            "auditArtifact": "data/cleaned/audit/nanoka-character-batch-audit.json",
+            "auditArtifact": "packages/data/cleaned/audit/nanoka-character-batch-audit.json",
             "blockedBy": []
           }
         ],
@@ -2202,8 +2202,8 @@
       "candidateSourceRef": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/cleaned/audit/nanoka-coverage-matrix.json",
-        "dataPath": "/rows/38"
+        "sourceAnchor": "packages/data/cleaned/audit/nanoka-coverage-matrix.json",
+        "dataPath": "/rows/39"
       },
       "baselineValue": {
         "replayStatus": "passed",
@@ -2282,7 +2282,7 @@
       "candidateSourceRef": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1371.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1371.json",
         "dataPath": "/stats"
       },
       "baselineValue": {
@@ -2389,7 +2389,7 @@
               "nanoka-boss-live-69037",
               "nanoka-boss-live-69038"
             ],
-            "auditArtifact": "data/cleaned/audit/nanoka-da-current-batch-audit.json",
+            "auditArtifact": "packages/data/cleaned/audit/nanoka-da-current-batch-audit.json",
             "blockedBy": []
           }
         ],
@@ -2464,7 +2464,7 @@
       "candidateSourceRef": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1371.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1371.json",
         "dataPath": "/stats"
       },
       "baselineValue": {
@@ -2571,7 +2571,7 @@
               "nanoka-boss-live-69037",
               "nanoka-boss-live-69038"
             ],
-            "auditArtifact": "data/cleaned/audit/nanoka-da-current-batch-audit.json",
+            "auditArtifact": "packages/data/cleaned/audit/nanoka-da-current-batch-audit.json",
             "blockedBy": []
           }
         ],
@@ -2646,8 +2646,8 @@
       "candidateSourceRef": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/cleaned/audit/nanoka-coverage-matrix.json",
-        "dataPath": "/rows/39"
+        "sourceAnchor": "packages/data/cleaned/audit/nanoka-coverage-matrix.json",
+        "dataPath": "/rows/40"
       },
       "baselineValue": {
         "replayStatus": "passed",
@@ -2712,7 +2712,7 @@
       "candidateSourceRef": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1021.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1021.json",
         "dataPath": "/stats"
       },
       "baselineValue": {
@@ -2800,7 +2800,7 @@
               "nanoka-character-starlight-billy-live-1531",
               "nanoka-character-promeia-live-1541"
             ],
-            "auditArtifact": "data/cleaned/audit/nanoka-character-batch-audit.json",
+            "auditArtifact": "packages/data/cleaned/audit/nanoka-character-batch-audit.json",
             "blockedBy": []
           },
           {
@@ -2902,7 +2902,7 @@
       "candidateSourceRef": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/boss/69036.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/boss/69036.json",
         "dataPath": "/boss_adjust"
       },
       "baselineValue": {
@@ -2980,7 +2980,7 @@
               "nanoka-boss-live-69037",
               "nanoka-boss-live-69038"
             ],
-            "auditArtifact": "data/cleaned/audit/nanoka-da-current-batch-audit.json",
+            "auditArtifact": "packages/data/cleaned/audit/nanoka-da-current-batch-audit.json",
             "blockedBy": []
           },
           {
@@ -3262,7 +3262,7 @@
               "nanoka-monster-live-990167",
               "nanoka-monster-live-990174"
             ],
-            "auditArtifact": "data/cleaned/audit/nanoka-enemy-batch-audit.json",
+            "auditArtifact": "packages/data/cleaned/audit/nanoka-enemy-batch-audit.json",
             "blockedBy": [
               "field:enemy-level-formula-required"
             ]
@@ -3607,7 +3607,7 @@
       "candidateSourceRef": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1371.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1371.json",
         "dataPath": "/stats"
       },
       "baselineValue": {
@@ -3926,7 +3926,7 @@
               "nanoka-monster-live-990167",
               "nanoka-monster-live-990174"
             ],
-            "auditArtifact": "data/cleaned/audit/nanoka-enemy-batch-audit.json",
+            "auditArtifact": "packages/data/cleaned/audit/nanoka-enemy-batch-audit.json",
             "blockedBy": [
               "field:resistance-unit-mapping-required"
             ]
@@ -4235,7 +4235,7 @@
       "candidateSourceRef": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1371.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1371.json",
         "dataPath": "/stats"
       },
       "baselineValue": {
@@ -4323,7 +4323,7 @@
       "candidateSourceRef": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/30000.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/monster/30000.json",
         "dataPath": "/monster_info"
       },
       "baselineValue": {
@@ -4648,7 +4648,7 @@
               "nanoka-monster-live-990167",
               "nanoka-monster-live-990174"
             ],
-            "auditArtifact": "data/cleaned/audit/nanoka-enemy-batch-audit.json",
+            "auditArtifact": "packages/data/cleaned/audit/nanoka-enemy-batch-audit.json",
             "blockedBy": [
               "field:anomaly-threshold-mapping-required"
             ]
@@ -4956,7 +4956,7 @@
       "candidateSourceRef": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/30000.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/monster/30000.json",
         "dataPath": "/monster_info"
       },
       "baselineValue": {
@@ -5277,7 +5277,7 @@
               "nanoka-monster-live-990167",
               "nanoka-monster-live-990174"
             ],
-            "auditArtifact": "data/cleaned/audit/nanoka-enemy-batch-audit.json",
+            "auditArtifact": "packages/data/cleaned/audit/nanoka-enemy-batch-audit.json",
             "blockedBy": [
               "field:anomaly-threshold-mapping-required"
             ]
@@ -5561,7 +5561,7 @@
               "nanoka-monster-live-990167",
               "nanoka-monster-live-990174"
             ],
-            "auditArtifact": "data/cleaned/audit/nanoka-enemy-batch-audit.json",
+            "auditArtifact": "packages/data/cleaned/audit/nanoka-enemy-batch-audit.json",
             "blockedBy": []
           }
         ],
@@ -5868,7 +5868,7 @@
       "candidateSourceRef": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json",
         "dataPath": "/stats"
       },
       "baselineValue": {
@@ -5956,7 +5956,7 @@
       "candidateSourceRef": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/cleaned/audit/nanoka-disorder-formula-audit.json",
+        "sourceAnchor": "packages/data/cleaned/audit/nanoka-disorder-formula-audit.json",
         "dataPath": "/summary"
       },
       "baselineValue": {
@@ -5988,7 +5988,7 @@
             "promotable": false,
             "rawAvailable": false,
             "sampleEntities": [],
-            "auditArtifact": "data/cleaned/audit/nanoka-disorder-formula-audit.json",
+            "auditArtifact": "packages/data/cleaned/audit/nanoka-disorder-formula-audit.json",
             "blockedBy": [
               "implementation-owned-runtime-formula"
             ]
@@ -6022,7 +6022,7 @@
       "candidateSourceRef": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/cleaned/audit/nanoka-disorder-daze-level-audit.json",
+        "sourceAnchor": "packages/data/cleaned/audit/nanoka-disorder-daze-level-audit.json",
         "dataPath": "/summary"
       },
       "baselineValue": {
@@ -6054,7 +6054,7 @@
             "promotable": false,
             "rawAvailable": false,
             "sampleEntities": [],
-            "auditArtifact": "data/cleaned/audit/nanoka-disorder-daze-level-audit.json",
+            "auditArtifact": "packages/data/cleaned/audit/nanoka-disorder-daze-level-audit.json",
             "blockedBy": [
               "implementation-owned-runtime-formula"
             ]
@@ -6088,7 +6088,7 @@
       "candidateSourceRef": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/boss/69036.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/boss/69036.json",
         "dataPath": "/boss_adjust"
       },
       "baselineValue": {
@@ -6166,7 +6166,7 @@
               "nanoka-boss-live-69037",
               "nanoka-boss-live-69038"
             ],
-            "auditArtifact": "data/cleaned/audit/nanoka-da-current-batch-audit.json",
+            "auditArtifact": "packages/data/cleaned/audit/nanoka-da-current-batch-audit.json",
             "blockedBy": []
           },
           {
@@ -6448,7 +6448,7 @@
               "nanoka-monster-live-990167",
               "nanoka-monster-live-990174"
             ],
-            "auditArtifact": "data/cleaned/audit/nanoka-enemy-batch-audit.json",
+            "auditArtifact": "packages/data/cleaned/audit/nanoka-enemy-batch-audit.json",
             "blockedBy": [
               "field:enemy-level-formula-required"
             ]
@@ -6793,7 +6793,7 @@
       "candidateSourceRef": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/30004.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/monster/30004.json",
         "dataPath": "/monster_info"
       },
       "baselineValue": {
@@ -7104,7 +7104,7 @@
               "nanoka-monster-live-990167",
               "nanoka-monster-live-990174"
             ],
-            "auditArtifact": "data/cleaned/audit/nanoka-enemy-batch-audit.json",
+            "auditArtifact": "packages/data/cleaned/audit/nanoka-enemy-batch-audit.json",
             "blockedBy": []
           },
           {
@@ -7386,7 +7386,7 @@
               "nanoka-monster-live-990167",
               "nanoka-monster-live-990174"
             ],
-            "auditArtifact": "data/cleaned/audit/nanoka-enemy-batch-audit.json",
+            "auditArtifact": "packages/data/cleaned/audit/nanoka-enemy-batch-audit.json",
             "blockedBy": [
               "field:enemy-level-formula-required"
             ]
@@ -7670,7 +7670,7 @@
               "nanoka-monster-live-990167",
               "nanoka-monster-live-990174"
             ],
-            "auditArtifact": "data/cleaned/audit/nanoka-enemy-batch-audit.json",
+            "auditArtifact": "packages/data/cleaned/audit/nanoka-enemy-batch-audit.json",
             "blockedBy": [
               "typed-modifier-template-required"
             ]
@@ -7977,7 +7977,7 @@
       "candidateSourceRef": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/200141.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/monster/200141.json",
         "dataPath": "/monster_info"
       },
       "baselineValue": {
@@ -8287,7 +8287,7 @@
               "nanoka-monster-live-990167",
               "nanoka-monster-live-990174"
             ],
-            "auditArtifact": "data/cleaned/audit/nanoka-enemy-batch-audit.json",
+            "auditArtifact": "packages/data/cleaned/audit/nanoka-enemy-batch-audit.json",
             "blockedBy": []
           },
           {
@@ -8569,7 +8569,7 @@
               "nanoka-monster-live-990167",
               "nanoka-monster-live-990174"
             ],
-            "auditArtifact": "data/cleaned/audit/nanoka-enemy-batch-audit.json",
+            "auditArtifact": "packages/data/cleaned/audit/nanoka-enemy-batch-audit.json",
             "blockedBy": [
               "field:daze-recovery-semantic-mapping-required"
             ]
@@ -8876,7 +8876,7 @@
       "candidateSourceRef": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/monster/200014.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/monster/200014.json",
         "dataPath": "/monster_info"
       },
       "baselineValue": {
@@ -9187,7 +9187,7 @@
               "nanoka-monster-live-990167",
               "nanoka-monster-live-990174"
             ],
-            "auditArtifact": "data/cleaned/audit/nanoka-enemy-batch-audit.json",
+            "auditArtifact": "packages/data/cleaned/audit/nanoka-enemy-batch-audit.json",
             "blockedBy": []
           },
           {
@@ -9469,7 +9469,7 @@
               "nanoka-monster-live-990167",
               "nanoka-monster-live-990174"
             ],
-            "auditArtifact": "data/cleaned/audit/nanoka-enemy-batch-audit.json",
+            "auditArtifact": "packages/data/cleaned/audit/nanoka-enemy-batch-audit.json",
             "blockedBy": [
               "field:daze-recovery-semantic-mapping-required"
             ]
@@ -9777,7 +9777,7 @@
       "candidateSourceRef": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1371.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1371.json",
         "dataPath": "/stats"
       },
       "baselineValue": {
@@ -9880,7 +9880,7 @@
               "nanoka-character-starlight-billy-live-1531",
               "nanoka-character-promeia-live-1541"
             ],
-            "auditArtifact": "data/cleaned/audit/nanoka-character-batch-audit.json",
+            "auditArtifact": "packages/data/cleaned/audit/nanoka-character-batch-audit.json",
             "blockedBy": []
           }
         ],
@@ -9970,7 +9970,7 @@
       "candidateSourceRef": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1031.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1031.json",
         "dataPath": "/stats"
       },
       "baselineValue": {
@@ -10007,7 +10007,7 @@
               "nanoka-character-yanagi-live-1221",
               "nanoka-character-yixuan-live-1371"
             ],
-            "auditArtifact": "data/cleaned/audit/nanoka-character-batch-audit.json",
+            "auditArtifact": "packages/data/cleaned/audit/nanoka-character-batch-audit.json",
             "blockedBy": [
               "typed-modifier-template-required"
             ]
@@ -10047,7 +10047,7 @@
       "candidateSourceRef": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1221.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1221.json",
         "dataPath": "/stats"
       },
       "baselineValue": {
@@ -10098,7 +10098,7 @@
               "nanoka-character-yanagi-live-1221",
               "nanoka-character-yixuan-live-1371"
             ],
-            "auditArtifact": "data/cleaned/audit/nanoka-character-batch-audit.json",
+            "auditArtifact": "packages/data/cleaned/audit/nanoka-character-batch-audit.json",
             "blockedBy": [
               "typed-modifier-template-required"
             ]
@@ -10111,7 +10111,7 @@
             "promotable": false,
             "rawAvailable": false,
             "sampleEntities": [],
-            "auditArtifact": "data/cleaned/audit/nanoka-disorder-formula-audit.json",
+            "auditArtifact": "packages/data/cleaned/audit/nanoka-disorder-formula-audit.json",
             "blockedBy": [
               "implementation-owned-runtime-formula"
             ]
@@ -10151,7 +10151,7 @@
       "candidateSourceRef": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53001.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/53001.json",
         "dataPath": "/stats"
       },
       "baselineValue": {
@@ -10239,7 +10239,7 @@
               "nanoka-bangboo-birkblick-live-54020",
               "nanoka-bangboo-sprout-live-54021"
             ],
-            "auditArtifact": "data/cleaned/audit/nanoka-bangboo-batch-audit.json",
+            "auditArtifact": "packages/data/cleaned/audit/nanoka-bangboo-batch-audit.json",
             "blockedBy": []
           },
           {
@@ -10291,7 +10291,7 @@
               "nanoka-bangboo-birkblick-live-54020",
               "nanoka-bangboo-sprout-live-54021"
             ],
-            "auditArtifact": "data/cleaned/audit/nanoka-bangboo-batch-audit.json",
+            "auditArtifact": "packages/data/cleaned/audit/nanoka-bangboo-batch-audit.json",
             "blockedBy": []
           }
         ],
@@ -10366,7 +10366,7 @@
       "candidateSourceRef": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54001.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/54001.json",
         "dataPath": "/stats"
       },
       "baselineValue": {
@@ -10454,7 +10454,7 @@
               "nanoka-bangboo-birkblick-live-54020",
               "nanoka-bangboo-sprout-live-54021"
             ],
-            "auditArtifact": "data/cleaned/audit/nanoka-bangboo-batch-audit.json",
+            "auditArtifact": "packages/data/cleaned/audit/nanoka-bangboo-batch-audit.json",
             "blockedBy": []
           },
           {
@@ -10506,7 +10506,7 @@
               "nanoka-bangboo-birkblick-live-54020",
               "nanoka-bangboo-sprout-live-54021"
             ],
-            "auditArtifact": "data/cleaned/audit/nanoka-bangboo-batch-audit.json",
+            "auditArtifact": "packages/data/cleaned/audit/nanoka-bangboo-batch-audit.json",
             "blockedBy": []
           }
         ],
@@ -10581,7 +10581,7 @@
       "candidateSourceRef": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json",
         "dataPath": "/stats"
       },
       "baselineValue": {
@@ -10670,7 +10670,7 @@
               "nanoka-bangboo-birkblick-live-54020",
               "nanoka-bangboo-sprout-live-54021"
             ],
-            "auditArtifact": "data/cleaned/audit/nanoka-bangboo-batch-audit.json",
+            "auditArtifact": "packages/data/cleaned/audit/nanoka-bangboo-batch-audit.json",
             "blockedBy": []
           },
           {
@@ -10722,7 +10722,7 @@
               "nanoka-bangboo-birkblick-live-54020",
               "nanoka-bangboo-sprout-live-54021"
             ],
-            "auditArtifact": "data/cleaned/audit/nanoka-bangboo-batch-audit.json",
+            "auditArtifact": "packages/data/cleaned/audit/nanoka-bangboo-batch-audit.json",
             "blockedBy": []
           },
           {
@@ -10773,7 +10773,7 @@
               "nanoka-bangboo-birkblick-live-54020",
               "nanoka-bangboo-sprout-live-54021"
             ],
-            "auditArtifact": "data/cleaned/audit/nanoka-bangboo-batch-audit.json",
+            "auditArtifact": "packages/data/cleaned/audit/nanoka-bangboo-batch-audit.json",
             "blockedBy": []
           }
         ],
@@ -10838,6 +10838,6 @@
   "notes": [
     "Phase 3 first sync compares G01-G26 archived golden replay baselines against real nanoka candidate coverage/status/source paths.",
     "This sync has Product/TL rulings for G01-G26, but it does not count as an exit-clean sync because G27/G28 and the two-clean-sync exit condition are still pending.",
-    "Archived Excel, D-17 Mihoyo, and D-12 buhflipexplode sources are audit baselines only; they are not runtime fallback inputs."
+    "Retired Excel, D-17 Mihoyo, and D-12 buhflipexplode source ids remain audit baselines only; their raw archives are recoverable from git history and are not runtime fallback inputs."
   ]
 }

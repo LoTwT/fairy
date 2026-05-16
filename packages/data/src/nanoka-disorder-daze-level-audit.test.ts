@@ -42,14 +42,14 @@ function readJson<T>(path: string): T {
 }
 
 describe("nanoka Disorder daze-level failed-evidence audit", () => {
-  it("keeps the package audit artifact mirror byte-identical", () => {
-    expect(readFileSync(join(repoRoot, "packages/data/cleaned/audit/nanoka-disorder-daze-level-audit.json"), "utf8")).toBe(
-      readFileSync(join(repoRoot, "data/cleaned/audit/nanoka-disorder-daze-level-audit.json"), "utf8"),
-    )
+  it("keeps the canonical audit artifact readable from the data package", () => {
+    const audit = readJson<DisorderDazeLevelAudit>("packages/data/cleaned/audit/nanoka-disorder-daze-level-audit.json")
+
+    expect(audit.schemaVersion).toBe("nanoka-disorder-daze-level-audit/v0.1")
   })
 
   it("records missing daze-level endpoints and implementation-owned classification", () => {
-    const audit = readJson<DisorderDazeLevelAudit>("data/cleaned/audit/nanoka-disorder-daze-level-audit.json")
+    const audit = readJson<DisorderDazeLevelAudit>("packages/data/cleaned/audit/nanoka-disorder-daze-level-audit.json")
 
     expect(audit).toMatchObject({
       schemaVersion: "nanoka-disorder-daze-level-audit/v0.1",
@@ -104,7 +104,7 @@ describe("nanoka Disorder daze-level failed-evidence audit", () => {
   })
 
   it("locks the guide/golden-backed daze-level formula contract", () => {
-    const audit = readJson<DisorderDazeLevelAudit>("data/cleaned/audit/nanoka-disorder-daze-level-audit.json")
+    const audit = readJson<DisorderDazeLevelAudit>("packages/data/cleaned/audit/nanoka-disorder-daze-level-audit.json")
 
     expect(audit.implementationContract.sourceAnchors).toEqual(expect.arrayContaining([
       "guide-3.4.2",

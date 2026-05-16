@@ -106,15 +106,13 @@ describe("nanoka snapshot-derived patch history gate", () => {
     })).toThrow("sha256 contentHash")
   })
 
-  it("publishes a package-mirrored baseline artifact for the current approved live allowlist", () => {
-    const rootArtifact = readJson<NanokaSnapshotDiffHistory & {
+  it("publishes a canonical baseline artifact for the current approved live allowlist", () => {
+    const artifact = readJson<NanokaSnapshotDiffHistory & {
       approvedSnapshots: Array<{ sourceVersion: string, contentHash: string }>
       summary: { approvedSnapshotCount: number, comparedPairCount: number }
-    }>("data/cleaned/audit/nanoka-snapshot-diff-history.json")
-    const packageText = readFileSync(join(repoRoot, "packages/data/cleaned/audit/nanoka-snapshot-diff-history.json"), "utf8")
+    }>("packages/data/cleaned/audit/nanoka-snapshot-diff-history.json")
 
-    expect(packageText).toBe(readFileSync(join(repoRoot, "data/cleaned/audit/nanoka-snapshot-diff-history.json"), "utf8"))
-    expect(rootArtifact).toMatchObject({
+    expect(artifact).toMatchObject({
       schemaVersion: "nanoka-snapshot-diff-history/v0.1",
       approvedLiveVersions: ["2.8"],
       latestResearchVersion: "3.0.2+15625449",

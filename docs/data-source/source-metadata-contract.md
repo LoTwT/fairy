@@ -90,9 +90,9 @@ reviewed because they are test assertions, not published game data.
 - source descriptors with fetch/compliance policy;
 - helpers for building `SourceDocument` and `SourceRef`;
 - nanoka source verification and runtime `GameData` generation scripts;
-- package-local cleaned JSON mirrors for npm distribution;
+- package-owned cleaned JSON artifacts for npm distribution;
 - runtime policy guards that reject archived source ids in runtime cleaned data.
 
 V0.1.0 runtime formal data is generated from approved-live nanoka snapshots.
-Archived Excel, Mihoyo D-17, and buhflipexplode D-12 snapshots remain audit
-references only.
+Retired Excel, Mihoyo D-17, and buhflipexplode D-12 source ids remain audit
+references only; their raw archives are recoverable from git history.

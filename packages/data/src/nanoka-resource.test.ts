@@ -44,7 +44,7 @@ describe("nanoka adrenaline and resonance normalization gate", () => {
   })
 
   it("derives live Yixuan Adrenaline panel fields from retained nanoka stats", () => {
-    const yixuan = readJson<NanokaCharacter>("data/source/raw/nanoka/zzz/2.8/zh/character/1371.json")
+    const yixuan = readJson<NanokaCharacter>("packages/data/source/raw/nanoka/zzz/2.8/zh/character/1371.json")
 
     expect(deriveNanokaAdrenalinePanel(yixuan)).toEqual({
       maxAdrenaline: 120,
@@ -53,7 +53,7 @@ describe("nanoka adrenaline and resonance normalization gate", () => {
   })
 
   it("derives live Yixuan skill Resonance and Adrenaline recovery values", () => {
-    const yixuan = readJson<NanokaCharacter>("data/source/raw/nanoka/zzz/2.8/zh/character/1371.json")
+    const yixuan = readJson<NanokaCharacter>("packages/data/source/raw/nanoka/zzz/2.8/zh/character/1371.json")
     const firstBasic = skillParam(yixuan, ["basic", 4, 0, "1371001"])
 
     expect(deriveNanokaSkillResourceRecovery(firstBasic)).toEqual({
@@ -65,7 +65,7 @@ describe("nanoka adrenaline and resonance normalization gate", () => {
   })
 
   it("keeps non-Adrenaline agents promotable for Resonance recovery while Adrenaline recovery is zero", () => {
-    const nekomata = readJson<NanokaCharacter>("data/source/raw/nanoka/zzz/2.8/zh/character/1021.json")
+    const nekomata = readJson<NanokaCharacter>("packages/data/source/raw/nanoka/zzz/2.8/zh/character/1021.json")
     const firstBasic = skillParam(nekomata, ["basic", 2, 0, "1021001"])
 
     expect(deriveNanokaSkillResourceRecovery(firstBasic)).toMatchObject({

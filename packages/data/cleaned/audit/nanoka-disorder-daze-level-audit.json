@@ -106,7 +106,7 @@
     {
       "url": "https://static.nanoka.cc/zzz/2.8/boss.json",
       "status": 200,
-      "localPath": "data/source/raw/nanoka/zzz/2.8/boss.json",
+      "localPath": "packages/data/source/raw/nanoka/zzz/2.8/boss.json",
       "contentSha256": "d9519738c6100082760f59bb92fd17fdba93afb853c845b1c90d0718788a79f9",
       "finding": "Deadly Assault index exists, but it does not provide Disorder daze-level constants."
     }

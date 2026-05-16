@@ -10,7 +10,7 @@
   "indexSource": {
     "sourceId": "nanoka-zzz",
     "sourceVersion": "2.8",
-    "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/boss.json",
+    "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/boss.json",
     "dataPath": "/"
   },
   "summary": {
@@ -79,7 +79,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/boss/69001.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/boss/69001.json",
         "dataPath": "/"
       },
       "beginAt": "2024-12-20T04:00:00+08:00",
@@ -115,7 +115,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/boss/69002.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/boss/69002.json",
         "dataPath": "/"
       },
       "beginAt": "2025-01-10T04:00:00+08:00",
@@ -151,7 +151,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/boss/69003.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/boss/69003.json",
         "dataPath": "/"
       },
       "beginAt": "2025-01-24T04:00:00+08:00",
@@ -187,7 +187,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/boss/69004.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/boss/69004.json",
         "dataPath": "/"
       },
       "beginAt": "2025-02-07T04:00:00+08:00",
@@ -223,7 +223,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/boss/69005.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/boss/69005.json",
         "dataPath": "/"
       },
       "beginAt": "2025-02-21T04:00:00+08:00",
@@ -259,7 +259,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/boss/69006.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/boss/69006.json",
         "dataPath": "/"
       },
       "beginAt": "2025-03-07T04:00:00+08:00",
@@ -295,7 +295,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/boss/69007.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/boss/69007.json",
         "dataPath": "/"
       },
       "beginAt": "2025-03-21T04:00:00+08:00",
@@ -331,7 +331,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/boss/69008.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/boss/69008.json",
         "dataPath": "/"
       },
       "beginAt": "2025-04-04T04:00:00+08:00",
@@ -367,7 +367,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/boss/69009.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/boss/69009.json",
         "dataPath": "/"
       },
       "beginAt": "2025-04-18T04:00:00+08:00",
@@ -403,7 +403,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/boss/69010.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/boss/69010.json",
         "dataPath": "/"
       },
       "beginAt": "2025-05-02T04:00:00+08:00",
@@ -439,7 +439,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/boss/69011.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/boss/69011.json",
         "dataPath": "/"
       },
       "beginAt": "2025-05-16T04:00:00+08:00",
@@ -475,7 +475,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/boss/69012.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/boss/69012.json",
         "dataPath": "/"
       },
       "beginAt": "2025-05-30T04:00:00+08:00",
@@ -511,7 +511,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/boss/69013.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/boss/69013.json",
         "dataPath": "/"
       },
       "beginAt": "2025-06-13T04:00:00+08:00",
@@ -547,7 +547,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/boss/69014.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/boss/69014.json",
         "dataPath": "/"
       },
       "beginAt": "2025-06-27T04:00:00+08:00",
@@ -583,7 +583,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/boss/69015.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/boss/69015.json",
         "dataPath": "/"
       },
       "beginAt": "2025-07-11T04:00:00+08:00",
@@ -619,7 +619,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/boss/69016.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/boss/69016.json",
         "dataPath": "/"
       },
       "beginAt": "2025-07-25T04:00:00+08:00",
@@ -655,7 +655,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/boss/69017.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/boss/69017.json",
         "dataPath": "/"
       },
       "beginAt": "2025-08-08T04:00:00+08:00",
@@ -691,7 +691,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/boss/69018.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/boss/69018.json",
         "dataPath": "/"
       },
       "beginAt": "2025-08-22T04:00:00+08:00",
@@ -727,7 +727,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/boss/69019.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/boss/69019.json",
         "dataPath": "/"
       },
       "beginAt": "2025-09-05T04:00:00+08:00",
@@ -763,7 +763,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/boss/69020.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/boss/69020.json",
         "dataPath": "/"
       },
       "beginAt": "2025-09-19T04:00:00+08:00",
@@ -799,7 +799,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/boss/69021.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/boss/69021.json",
         "dataPath": "/"
       },
       "beginAt": "2025-10-03T04:00:00+08:00",
@@ -835,7 +835,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/boss/69022.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/boss/69022.json",
         "dataPath": "/"
       },
       "beginAt": "2025-10-17T04:00:00+08:00",
@@ -871,7 +871,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/boss/69023.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/boss/69023.json",
         "dataPath": "/"
       },
       "beginAt": "2025-10-31T04:00:00+08:00",
@@ -907,7 +907,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/boss/69024.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/boss/69024.json",
         "dataPath": "/"
       },
       "beginAt": "2025-11-14T04:00:00+08:00",
@@ -943,7 +943,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/boss/69025.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/boss/69025.json",
         "dataPath": "/"
       },
       "beginAt": "2025-11-28T04:00:00+08:00",
@@ -979,7 +979,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/boss/69026.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/boss/69026.json",
         "dataPath": "/"
       },
       "beginAt": "2025-12-12T04:00:00+08:00",
@@ -1015,7 +1015,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/boss/69027.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/boss/69027.json",
         "dataPath": "/"
       },
       "beginAt": "2026-01-02T04:00:00+08:00",
@@ -1051,7 +1051,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/boss/69028.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/boss/69028.json",
         "dataPath": "/"
       },
       "beginAt": "2026-01-16T04:00:00+08:00",
@@ -1087,7 +1087,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/boss/69029.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/boss/69029.json",
         "dataPath": "/"
       },
       "beginAt": "2026-01-30T04:00:00+08:00",
@@ -1123,7 +1123,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/boss/69030.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/boss/69030.json",
         "dataPath": "/"
       },
       "beginAt": "2026-02-13T04:00:00+08:00",
@@ -1159,7 +1159,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/boss/69031.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/boss/69031.json",
         "dataPath": "/"
       },
       "beginAt": "2026-02-27T04:00:00+08:00",
@@ -1195,7 +1195,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/boss/69032.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/boss/69032.json",
         "dataPath": "/"
       },
       "beginAt": "2026-03-13T04:00:00+08:00",
@@ -1231,7 +1231,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/boss/69033.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/boss/69033.json",
         "dataPath": "/"
       },
       "beginAt": "2026-03-27T04:00:00+08:00",
@@ -1267,7 +1267,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/boss/69034.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/boss/69034.json",
         "dataPath": "/"
       },
       "beginAt": "2026-04-10T04:00:00+08:00",
@@ -1303,7 +1303,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/boss/69035.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/boss/69035.json",
         "dataPath": "/"
       },
       "beginAt": "2026-04-24T04:00:00+08:00",
@@ -1339,7 +1339,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/boss/69036.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/boss/69036.json",
         "dataPath": "/"
       },
       "beginAt": "2026-05-08T04:00:00+08:00",
@@ -1375,7 +1375,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/boss/69037.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/boss/69037.json",
         "dataPath": "/"
       },
       "beginAt": "2026-05-22T04:00:00+08:00",
@@ -1411,7 +1411,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/boss/69038.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/boss/69038.json",
         "dataPath": "/"
       },
       "beginAt": "2026-06-05T04:00:00+08:00",

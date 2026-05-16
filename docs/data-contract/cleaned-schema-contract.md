@@ -121,7 +121,7 @@ remain V1.x validation/recommendation scope.
 
 Phase 4 introduces the nanoka runtime artifact:
 
-- `data/cleaned/runtime/game-data.json`
+- `packages/data/cleaned/runtime/game-data.json`
 - `packages/data/cleaned/runtime/game-data.json`
 
 The artifact must parse as `CleanedGameDataArtifact<GameData>` and carry:

@@ -37,7 +37,7 @@
       "entityType": "agent",
       "entityId": "yixuan",
       "excelSourceRefs": [
-        "data/source/excel/data.xlsx#代理人属性!A37:AF37"
+        "git-history:data/source/excel/data.xlsx#代理人属性!A37:AF37"
       ],
       "fields": [
         {
@@ -174,8 +174,8 @@
       "entityType": "bangboo",
       "entityId": "plugboo",
       "excelSourceRefs": [
-        "data/source/excel/data.xlsx#邦布属性!A18:T18",
-        "data/source/excel/data.xlsx#邦布技能!A29:H30"
+        "git-history:data/source/excel/data.xlsx#邦布属性!A18:T18",
+        "git-history:data/source/excel/data.xlsx#邦布技能!A29:H30"
       ],
       "fields": [
         {
@@ -322,7 +322,7 @@
       "entityType": "enemy",
       "entityId": "dullahan",
       "excelSourceRefs": [
-        "data/source/excel/data.xlsx#敌人属性"
+        "git-history:data/source/excel/data.xlsx#敌人属性"
       ],
       "fields": [
         {

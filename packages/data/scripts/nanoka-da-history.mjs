@@ -10,7 +10,7 @@ import { fileURLToPath } from "node:url"
 
 const packageDir = fileURLToPath(new URL("..", import.meta.url))
 const repoRoot = join(packageDir, "../..")
-const sourceRoot = join(repoRoot, "data/source/raw/nanoka/zzz")
+const sourceRoot = join(repoRoot, "packages/data/source/raw/nanoka/zzz")
 const aggregateManifestPath = join(sourceRoot, "historical-da-fetch-manifest.json")
 const sourceId = "nanoka-zzz"
 const parserVersion = "nanoka-da-history-source-v0.1.0"

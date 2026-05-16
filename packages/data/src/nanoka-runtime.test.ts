@@ -13,8 +13,7 @@ import {
 } from "./runtime"
 
 const repoRoot = join(import.meta.dirname, "../../..")
-const rootRuntimePath = join(repoRoot, "data/cleaned/runtime/game-data.json")
-const packageRuntimePath = join(repoRoot, "packages/data/cleaned/runtime/game-data.json")
+const runtimeArtifactPath = join(repoRoot, "packages/data/cleaned/runtime/game-data.json")
 
 function readJson<T>(path: string): T {
   return JSON.parse(readFileSync(path, "utf8")) as T
@@ -89,7 +88,7 @@ describe("nanoka runtime game data cutover", () => {
       source: {
         sourceId: "nanoka-zzz",
         sourceVersion: "2.8",
-        sourceAnchor: "data/source/raw/nanoka/zzz/2.8/zh/equipment/31000.json",
+        sourceAnchor: "packages/data/source/raw/nanoka/zzz/2.8/zh/equipment/31000.json",
       },
     })
     expect(data.enemies["30000"]).toMatchObject({
@@ -98,7 +97,7 @@ describe("nanoka runtime game data cutover", () => {
       source: {
         sourceId: "nanoka-zzz",
         sourceVersion: "2.8",
-        sourceAnchor: "data/source/raw/nanoka/zzz/2.8/zh/monster/30000.json",
+        sourceAnchor: "packages/data/source/raw/nanoka/zzz/2.8/zh/monster/30000.json",
       },
     })
     expect(data.enemies["10013"]).toMatchObject({
@@ -107,7 +106,7 @@ describe("nanoka runtime game data cutover", () => {
       source: {
         sourceId: "nanoka-zzz",
         sourceVersion: "2.8",
-        sourceAnchor: "data/source/raw/nanoka/zzz/2.8/zh/monster/10013.json",
+        sourceAnchor: "packages/data/source/raw/nanoka/zzz/2.8/zh/monster/10013.json",
       },
     })
     expect(data.enemies["30000"]?.resistance).toBeUndefined()
@@ -119,7 +118,7 @@ describe("nanoka runtime game data cutover", () => {
       source: {
         sourceId: "nanoka-zzz",
         sourceVersion: "2.8",
-        sourceAnchor: "data/source/raw/nanoka/zzz/2.8/zh/boss/69036.json",
+        sourceAnchor: "packages/data/source/raw/nanoka/zzz/2.8/zh/boss/69036.json",
       },
     })
     expect(data.deadlyAssaultPeriods["69036"]?.zones).toHaveLength(3)
@@ -135,7 +134,7 @@ describe("nanoka runtime game data cutover", () => {
       source: {
         sourceId: "nanoka-zzz",
         sourceVersion: "2.8.12",
-        sourceAnchor: "data/source/raw/nanoka/zzz/2.8.12/zh/boss/69001.json",
+        sourceAnchor: "packages/data/source/raw/nanoka/zzz/2.8.12/zh/boss/69001.json",
       },
     })
     expect(data.historicalDAPeriods["3.0.2+15625449#69001"]).toMatchObject({
@@ -176,14 +175,13 @@ describe("nanoka runtime game data cutover", () => {
     expect(() => assertNanokaRuntimeGameDataArtifact(mutated)).toThrow(/archived source lo-user-excel/)
   })
 
-  it("keeps the runtime source policy strict and mirrored", () => {
+  it("keeps the runtime source policy strict", () => {
     const policy = getNanokaRuntimeSourcePolicy()
     expect(policy.archivedSourcesRuntimeAllowed).toBe(false)
     expect(policy.deprecatedRuntimeSourceIds).toEqual(ARCHIVED_RUNTIME_SOURCE_IDS)
-    expect(readFileSync(rootRuntimePath, "utf8")).toBe(readFileSync(packageRuntimePath, "utf8"))
 
-    const rootArtifact = readJson<unknown>(rootRuntimePath)
-    assertNanokaRuntimeGameDataArtifact(rootArtifact)
+    const artifact = readJson<unknown>(runtimeArtifactPath)
+    assertNanokaRuntimeGameDataArtifact(artifact)
   })
 
   it("records the full approved-live Bangboo batch audit", () => {
@@ -194,7 +192,7 @@ describe("nanoka runtime game data cutover", () => {
         promotedSkillCount: number
         noRuntimeSkillBangbooIds: string[]
       }
-    }>(join(repoRoot, "data/cleaned/audit/nanoka-bangboo-batch-audit.json"))
+    }>(join(repoRoot, "packages/data/cleaned/audit/nanoka-bangboo-batch-audit.json"))
 
     expect(audit.summary).toMatchObject({
       bangbooCount: 39,
@@ -215,7 +213,7 @@ describe("nanoka runtime game data cutover", () => {
         specialElementPromotedIds: string[]
         specialElementNotPromotedIds: string[]
       }
-    }>(join(repoRoot, "data/cleaned/audit/nanoka-character-batch-audit.json"))
+    }>(join(repoRoot, "packages/data/cleaned/audit/nanoka-character-batch-audit.json"))
 
     expect(audit.summary).toMatchObject({
       characterCount: 53,
@@ -253,7 +251,7 @@ describe("nanoka runtime game data cutover", () => {
           }>
         }
       }>
-    }>(join(repoRoot, "data/cleaned/audit/nanoka-wengine-batch-audit.json"))
+    }>(join(repoRoot, "packages/data/cleaned/audit/nanoka-wengine-batch-audit.json"))
 
     expect(audit.summary).toMatchObject({
       wEngineCount: 89,
@@ -278,7 +276,7 @@ describe("nanoka runtime game data cutover", () => {
       source: {
         sourceId: "nanoka-zzz",
         sourceVersion: "2.8",
-        sourceAnchor: "data/source/raw/nanoka/zzz/2.8/zh/weapon/14137.json",
+        sourceAnchor: "packages/data/source/raw/nanoka/zzz/2.8/zh/weapon/14137.json",
         dataPath: "/talents/1",
       },
     })
@@ -321,7 +319,7 @@ describe("nanoka runtime game data cutover", () => {
           status: string
         }
       }>
-    }>(join(repoRoot, "data/cleaned/audit/nanoka-drive-disc-batch-audit.json"))
+    }>(join(repoRoot, "packages/data/cleaned/audit/nanoka-drive-disc-batch-audit.json"))
 
     expect(audit.summary).toMatchObject({
       driveDiscCount: 26,
@@ -337,7 +335,7 @@ describe("nanoka runtime game data cutover", () => {
       source: {
         sourceId: "nanoka-zzz",
         sourceVersion: "2.8",
-        sourceAnchor: "data/source/raw/nanoka/zzz/2.8/zh/equipment/31000.json",
+        sourceAnchor: "packages/data/source/raw/nanoka/zzz/2.8/zh/equipment/31000.json",
         dataPath: "/desc2",
       },
     })
@@ -383,7 +381,7 @@ describe("nanoka runtime game data cutover", () => {
         }>
         pendingPromotions: Record<string, { status: string, reason: string }>
       }>
-    }>(join(repoRoot, "data/cleaned/audit/nanoka-enemy-batch-audit.json"))
+    }>(join(repoRoot, "packages/data/cleaned/audit/nanoka-enemy-batch-audit.json"))
 
     expect(audit.summary).toMatchObject({
       enemyCount: 269,
@@ -410,7 +408,7 @@ describe("nanoka runtime game data cutover", () => {
         source: {
           sourceId: "nanoka-zzz",
           sourceVersion: "2.8",
-          sourceAnchor: "data/source/raw/nanoka/zzz/2.8/zh/monster/30000.json",
+          sourceAnchor: "packages/data/source/raw/nanoka/zzz/2.8/zh/monster/30000.json",
           dataPath: "/monster_info/11154",
         },
       },
@@ -483,7 +481,7 @@ describe("nanoka runtime game data cutover", () => {
         zoneCount: number
         bossAdjustmentCount: number
       }>
-    }>(join(repoRoot, "data/cleaned/audit/nanoka-da-current-batch-audit.json"))
+    }>(join(repoRoot, "packages/data/cleaned/audit/nanoka-da-current-batch-audit.json"))
 
     expect(audit.summary).toMatchObject({
       periodCount: 38,
@@ -501,7 +499,7 @@ describe("nanoka runtime game data cutover", () => {
       source: {
         sourceId: "nanoka-zzz",
         sourceVersion: "2.8",
-        sourceAnchor: "data/source/raw/nanoka/zzz/2.8/zh/boss/69036.json",
+        sourceAnchor: "packages/data/source/raw/nanoka/zzz/2.8/zh/boss/69036.json",
         dataPath: "/",
       },
       zoneCount: 3,
@@ -541,7 +539,7 @@ describe("nanoka runtime game data cutover", () => {
         currentRuntime: boolean
         scheduleStatus: string
       }>
-    }>(join(repoRoot, "data/cleaned/audit/nanoka-da-historical-batch-audit.json"))
+    }>(join(repoRoot, "packages/data/cleaned/audit/nanoka-da-historical-batch-audit.json"))
 
     expect(audit.summary).toMatchObject({
       snapshotCount: 10,

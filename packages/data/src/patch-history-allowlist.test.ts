@@ -33,7 +33,7 @@ function readJson<T>(path: string): T {
 }
 
 function nanokaSource() {
-  const registry = readJson<SourceRegistry>("data/source-registry.json")
+  const registry = readJson<SourceRegistry>("packages/data/source-registry.json")
   const source = registry.sources.find(item => item.sourceId === "nanoka-zzz")
   expect(source).toBeDefined()
   return source!
@@ -46,7 +46,7 @@ function assertSnapshotDiffInput(version: string, source: RegistrySource) {
 
 describe("patch history allowlist gate", () => {
   it("models patch history as derived snapshot diff data, not prose patch notes", () => {
-    const matrix = readJson<CoverageMatrix>("data/cleaned/audit/nanoka-coverage-matrix.json")
+    const matrix = readJson<CoverageMatrix>("packages/data/cleaned/audit/nanoka-coverage-matrix.json")
     const row = matrix.rows.find(item => item.fieldId === "metadata.snapshotDiffHistory")
 
     expect(row).toMatchObject({

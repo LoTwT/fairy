@@ -21,7 +21,7 @@
     {
       "url": "https://static.nanoka.cc/zzz/2.8/zh/equipment/31000.json",
       "status": 200,
-      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/equipment/31000.json",
+      "localPath": "packages/data/source/raw/nanoka/zzz/2.8/zh/equipment/31000.json",
       "contentSha256": "4190f6084521aead931a28ada9a44e6d9cd26a7fdb2401ffd0ab4e00a257f1ec",
       "presentRawFieldPaths": [
         "/id",

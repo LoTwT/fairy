@@ -1,6 +1,6 @@
 import { execFileSync } from "node:child_process"
 import { createHash } from "node:crypto"
-import { readFileSync } from "node:fs"
+import { existsSync, readFileSync } from "node:fs"
 import { join } from "node:path"
 import { describe, expect, it } from "vitest"
 import type { SourceManifest } from "./types/source-manifest"
@@ -30,7 +30,7 @@ function npmPackFiles(): string[] {
 
 describe("S5 data governance", () => {
   it("records source files with matching SHA-256 hashes", () => {
-    const manifest = readJson<SourceManifest>("data/source/source-manifest.json")
+    const manifest = readJson<SourceManifest>("packages/data/source/source-manifest.json")
 
     expect(manifest.distributionPolicy).toEqual({
       rawSourceArchive: "versioned-in-git-not-packaged",
@@ -45,7 +45,7 @@ describe("S5 data governance", () => {
     const npmIgnore = readFileSync(join(repoRoot, ".npmignore"), "utf8")
     const packageJson = readJson<{ files?: string[] }>("packages/data/package.json")
 
-    expect(npmIgnore).toContain("data/source/")
+    expect(npmIgnore).toContain("packages/data/source/")
     expect(packageJson.files).toEqual(
       expect.arrayContaining(["dist", "cleaned", "source-registry.json"]),
     )
@@ -53,27 +53,25 @@ describe("S5 data governance", () => {
     expect(packageJson.files?.some(entry => entry.startsWith("source/"))).toBe(false)
   })
 
-  it("packs synced cleaned JSON while excluding retained source files", () => {
-    const syncOutput = execFileSync("node", ["scripts/sync-cleaned.mjs", "--check"], {
-      cwd: dataPackageRoot,
-      encoding: "utf8",
-      stdio: ["ignore", "pipe", "pipe"],
-    })
+  it("packs canonical cleaned JSON while excluding retained source files", () => {
     const files = npmPackFiles()
 
-    expect(syncOutput).toContain("cleaned mirror check passed")
     expect(files).toContain("cleaned/golden/v1-replay-report.json")
     expect(files).toContain("cleaned/runtime/game-data.json")
     expect(files).toContain("cleaned/audit/nanoka-coverage-matrix.json")
     expect(files).toContain("source-registry.json")
-    expect(files.some(file => file.startsWith("data/source/"))).toBe(false)
+    expect(files.some(file => file.startsWith("source/"))).toBe(false)
     expect(files.some(file => file.startsWith("docs/reference/"))).toBe(false)
     expect(files.some(file => file.endsWith(".xlsx"))).toBe(false)
     expect(files.some(file => file.endsWith(".test.ts"))).toBe(false)
   })
 
+  it("keeps root data ownership removed", () => {
+    expect(existsSync(join(repoRoot, "data"))).toBe(false)
+  })
+
   it("keeps the guide as reference material instead of formal cleaned data", () => {
-    const manifest = readJson<SourceManifest>("data/source/source-manifest.json")
+    const manifest = readJson<SourceManifest>("packages/data/source/source-manifest.json")
     const guide = manifest.sources.find(source => source.id === "zzz-data-introduction")
 
     expect(guide).toMatchObject({

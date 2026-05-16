@@ -39,7 +39,6 @@ The release source version is no longer the provisional
 | `deferred` | Explicitly not promotable in the current implementation step, or implementation-owned rather than a nanoka gameplay row. |
 
 The machine-readable version is
-`data/cleaned/audit/nanoka-coverage-matrix.json`, mirrored to
 `packages/data/cleaned/audit/nanoka-coverage-matrix.json`.
 
 ## Sampled Nanoka Sources
@@ -49,23 +48,23 @@ The machine-readable version is
 | Agent / Yixuan research | `https://static.nanoka.cc/zzz/3.0.2+15625449/zh/character/1371.json` | Research-only future sample for `stats`, `level`, `extra_level`, `skill`, `skill_list`, `passive`, `talent`, `potential`, `potential_detail`; not approved for cleaned output. |
 | Agent / Nekomata | `https://static.nanoka.cc/zzz/3.0.2+15625449/zh/character/1021.json` | `talent` has six entries, while `potential` / `potential_detail` are empty. Used to avoid treating `extra_level` as Mindscape by default. |
 | Agent / Soldier 11 | `https://static.nanoka.cc/zzz/3.0.2+15625449/zh/character/1041.json` | `talent`, `potential`, and `potential_detail` all have six entries. Used to separate Mindscape-like text from potential activation semantics. |
-| Live Agent / Nekomata | `https://static.nanoka.cc/zzz/2.8/zh/character/1021.json` | Approved live sample for promotable agent identity, enum, base panel, skill-number, and promotion-extra source artifact rows; retained under `data/source/raw/nanoka/zzz/2.8/`. |
-| Live Agent / Yixuan | `https://static.nanoka.cc/zzz/2.8/zh/character/1371.json` | Approved live sample for Adrenaline (`rp_*`) and Resonance (`fever_recovery`) resource fields; retained under `data/source/raw/nanoka/zzz/2.8/`. |
+| Live Agent / Nekomata | `https://static.nanoka.cc/zzz/2.8/zh/character/1021.json` | Approved live sample for promotable agent identity, enum, base panel, skill-number, and promotion-extra source artifact rows; retained under `packages/data/source/raw/nanoka/zzz/2.8/`. |
+| Live Agent / Yixuan | `https://static.nanoka.cc/zzz/2.8/zh/character/1371.json` | Approved live sample for Adrenaline (`rp_*`) and Resonance (`fever_recovery`) resource fields; retained under `packages/data/source/raw/nanoka/zzz/2.8/`. |
 | Live Bangboo index | `https://static.nanoka.cc/zzz/2.8/bangboo.json` | Approved live index for the V1.2.1 Bangboo batch. The retained index lists 39 Bangboos and drives the runtime import. |
-| Live Bangboo details | `https://static.nanoka.cc/zzz/2.8/zh/bangboo/{id}.json` | V1.2.1 retains all 39 approved-live Bangboo details under `data/source/raw/nanoka/zzz/2.8/zh/bangboo/`; runtime generation verifies each detail against the index before emitting cleaned rows. |
+| Live Bangboo details | `https://static.nanoka.cc/zzz/2.8/zh/bangboo/{id}.json` | V1.2.1 retains all 39 approved-live Bangboo details under `packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/`; runtime generation verifies each detail against the index before emitting cleaned rows. |
 | Enemy / Dullahan research sample | `https://static.nanoka.cc/zzz/3.0.2+15625449/zh/monster/30000.json` | Research-only `monster_info.*.stats`, `curves`, `element`, `element_abnormal`; not approved for cleaned output. |
 | Live enemy index | `https://static.nanoka.cc/zzz/2.8/monster.json` | Approved live index for the V1.2.x Enemy batch. The retained index lists 269 enemies and drives the runtime identity/rank import. |
-| Live enemy details | `https://static.nanoka.cc/zzz/2.8/zh/monster/{id}.json` | V1.2.x PR-D retains all 269 approved-live enemy details under `data/source/raw/nanoka/zzz/2.8/zh/monster/`; runtime generation verifies each detail against the index before emitting cleaned identity/rank rows. Selected, missing, and skipped `monster_info` variants stay in audit until combat semantics are promoted. |
+| Live enemy details | `https://static.nanoka.cc/zzz/2.8/zh/monster/{id}.json` | V1.2.x PR-D retains all 269 approved-live enemy details under `packages/data/source/raw/nanoka/zzz/2.8/zh/monster/`; runtime generation verifies each detail against the index before emitting cleaned identity/rank rows. Selected, missing, and skipped `monster_info` variants stay in audit until combat semantics are promoted. |
 | Live W-Engine index | `https://static.nanoka.cc/zzz/2.8/weapon.json` | Approved live index for the V1.2.x W-Engine batch. The retained index lists 89 W-Engines and drives the runtime import. |
-| Live W-Engine details | `https://static.nanoka.cc/zzz/2.8/zh/weapon/{id}.json` | V1.2.x PR-B retains all 89 approved-live W-Engine details under `data/source/raw/nanoka/zzz/2.8/zh/weapon/`; runtime generation verifies each detail against the index before emitting cleaned rows. |
+| Live W-Engine details | `https://static.nanoka.cc/zzz/2.8/zh/weapon/{id}.json` | V1.2.x PR-B retains all 89 approved-live W-Engine details under `packages/data/source/raw/nanoka/zzz/2.8/zh/weapon/`; runtime generation verifies each detail against the index before emitting cleaned rows. |
 | Live Drive Disc index | `https://static.nanoka.cc/zzz/2.8/equipment.json` | Approved live index for the V1.2.x Drive Disc batch. The retained index lists 26 Drive Disc sets and drives the runtime identity import. |
-| Live Drive Disc details | `https://static.nanoka.cc/zzz/2.8/zh/equipment/{id}.json` | V1.2.x PR-C retains all 26 approved-live Drive Disc details under `data/source/raw/nanoka/zzz/2.8/zh/equipment/`; runtime generation verifies each detail against the index before emitting cleaned identity rows. `desc2` / `desc4` text is retained in audit, while typed modifiers remain template-pending. |
-| Live Drive Disc slot/stat endpoint audit | `https://static.nanoka.cc/zzz/2.8/equipment*.json` | Failed-evidence audit only: candidate stat-table endpoints checked in `data/cleaned/audit/nanoka-drive-disc-slot-stat-audit.json` returned 404. Lo-user locks V0.1.0 scope to final user-provided panel + set effects, so slot/main/substat tables remain out of scope. |
+| Live Drive Disc details | `https://static.nanoka.cc/zzz/2.8/zh/equipment/{id}.json` | V1.2.x PR-C retains all 26 approved-live Drive Disc details under `packages/data/source/raw/nanoka/zzz/2.8/zh/equipment/`; runtime generation verifies each detail against the index before emitting cleaned identity rows. `desc2` / `desc4` text is retained in audit, while typed modifiers remain template-pending. |
+| Live Drive Disc slot/stat endpoint audit | `https://static.nanoka.cc/zzz/2.8/equipment*.json` | Failed-evidence audit only: candidate stat-table endpoints checked in `packages/data/cleaned/audit/nanoka-drive-disc-slot-stat-audit.json` returned 404. Lo-user locks V0.1.0 scope to final user-provided panel + set effects, so slot/main/substat tables remain out of scope. |
 | Manifest / live gate | `https://static.nanoka.cc/manifest.json` | `zzz.live = 2.8`, `zzz.latest = 3.0.2+15625449`, `zzz.available[]` supports approved-live version allowlists, snapshot-derived patch diff history, and the PR-F historical DA manifest. |
 | Live Adrenaline / Resonance sample / Yixuan | `https://static.nanoka.cc/zzz/2.8/zh/character/1371.json` | `stats.rp_max = 120`, `stats.rp_recover = 200`, `fever_recovery`, and `rp_recovery` raw paths exist in the configured live version. |
 | Live Deadly Assault index | `https://static.nanoka.cc/zzz/2.8/boss.json` | 38 live DA entries; all sampled `zh/boss/{id}.json` details returned 200 in PR #54. |
 | Live Deadly Assault period / 69036 | `https://static.nanoka.cc/zzz/2.8/zh/boss/69036.json` | Current live period window, zones, layer/selectable buffs, room monster lists, weakness data, and `boss_adjust`. |
-| Historical Deadly Assault manifest | `data/source/raw/nanoka/zzz/historical-da-fetch-manifest.json` | PR-F retains 10 non-current manifest-available DA snapshots: 505 periods, 1506 zones, 58445 `boss_adjust` rows, with missing schedule fields explicitly marked as `missing-in-historical-source`. |
+| Historical Deadly Assault manifest | `packages/data/source/raw/nanoka/zzz/historical-da-fetch-manifest.json` | PR-F retains 10 non-current manifest-available DA snapshots: 505 periods, 1506 zones, 58445 `boss_adjust` rows, with missing schedule fields explicitly marked as `missing-in-historical-source`. |
 | Live rules / formula candidate audit | `https://static.nanoka.cc/zzz/2.8/{formula,rules,disorder,anomaly_disorder,battle_formula,damage_formula,element_abnormal}.json` | Failed-evidence audit only: dedicated live formula/rule/disorder endpoints are absent. Existing entity indexes/details do not expose a global Disorder formula table, so task #156 classifies `rules.disorderFormula` as implementation-owned runtime formula evidence. |
 | Live daze-level / level-zone candidate audit | `https://static.nanoka.cc/zzz/2.8/{daze_level,daze_level_zone,disorder_daze_level,disorder_daze,disorder_daze_level_zone,level_zone,level_correction,level_suppression,damage_level,damage_level_zone}.json` | Failed-evidence audit only: dedicated live daze-level / level-zone endpoints are absent. Entity indexes do not expose Disorder daze-level constants, so task #158 classifies `rules.disorderDazeLevelZone` as implementation-owned runtime formula evidence. |
 
@@ -120,7 +119,7 @@ Machine summary after task #172 / Phase 4 runtime cutover: 45 rows total, 36
 
 | Area | Status | Promote Now | Main Blocker |
 |---|---|---:|---|
-| Source metadata / registry | verified-from-nanoka | yes | Task #148 gates source registry mirror parity, `liveVersionRef`, `approvedLiveVersions[]`, source hashes, stable-version CI, and SourceRef emission from parsed adapter records. |
+| Source metadata / registry | verified-from-nanoka | yes | Task #148 gates source registry integrity, `liveVersionRef`, `approvedLiveVersions[]`, source hashes, stable-version CI, and SourceRef emission from parsed adapter records. |
 | Snapshot-derived patch history | verified-from-nanoka | yes | R4.a snapshot-derived numeric diff tool exists and is gated by `approvedLiveVersions[]`; current artifact has one approved live snapshot (`2.8`) and therefore no compared pairs until another live version is approved. |
 | Agent identity / labels / enums | verified-from-nanoka | yes | Current promotable rows point to approved live Nekomata evidence; enum mapping table must be recorded. |
 | Agent base panel stats | verified-from-nanoka | yes | Formula proven for `baseStatsByLevel`: `stats[key] + level[promotionPhase][key] + stats[key_growth] * (level - 1) / 10000`, with retained live Nekomata panel tests. Promotion extra stats remain separate. |
@@ -181,7 +180,7 @@ After the 2026-05-15 owner decision, no rows remain in `needs-owner-research`.
   contract rows; task #148 promotes them after executable registry mirror,
   content-hash, live-version, and parsed-record SourceRef emission gates.
 - `metadata.snapshotDiffHistory` — R4.a snapshot-derived numeric patch history;
-  task #146 emits `data/cleaned/audit/nanoka-snapshot-diff-history.json` from
+  task #146 emits `packages/data/cleaned/audit/nanoka-snapshot-diff-history.json` from
   approved live snapshot hashes and marks official patch-note prose as
   `not-found`.
 - `adrenaline.maxAdrenaline` / `adrenaline.automaticAdrenalineAccumulation` /
@@ -225,10 +224,10 @@ future, forbidden, or changed field must be represented in `missingFields` /
 
 ## Phase 4 Runtime Cutover Boundary
 
-Phase 4 does not move raw snapshots. Excel, D-17 Mihoyo, and D-12
-buhflipexplode files stay in their existing `data/source/...` locations as
-archived audit evidence. Runtime cleaned data now has an explicit nanoka-only
-artifact at `data/cleaned/runtime/game-data.json`, mirrored to
+Phase 4 did not move raw snapshots. V0.1.2 later retired the Excel, D-17
+Mihoyo, and D-12 buhflipexplode raw archives from the current tree while
+preserving git-history recovery pointers. Runtime cleaned data now has an
+explicit nanoka-only artifact at
 `packages/data/cleaned/runtime/game-data.json`, with:
 
 - `runtimeCutoverReady: true`;

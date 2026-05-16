@@ -103,7 +103,7 @@ can be added only after source stability is proven.
 
 ## Source Registry
 
-Add `data/source-registry.json` before any new source can enter npm payload.
+Add `packages/data/source-registry.json` before any new source can enter npm payload.
 
 Required source-level fields:
 

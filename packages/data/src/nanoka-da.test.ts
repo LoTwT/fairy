@@ -15,8 +15,8 @@ function readJson<T>(path: string): T {
 
 function livePeriod() {
   return deriveNanokaDeadlyAssaultPeriod(
-    readJson<NanokaDaIndex>("data/source/raw/nanoka/zzz/2.8/boss.json"),
-    readJson<NanokaDaDetail>("data/source/raw/nanoka/zzz/2.8/zh/boss/69036.json"),
+    readJson<NanokaDaIndex>("packages/data/source/raw/nanoka/zzz/2.8/boss.json"),
+    readJson<NanokaDaDetail>("packages/data/source/raw/nanoka/zzz/2.8/zh/boss/69036.json"),
     {
       sourceVersion: "2.8",
       configuredLiveSnapshotDate: "2026-05-15T12:30:00+08:00",
@@ -81,8 +81,8 @@ describe("nanoka Deadly Assault formal-live semantic mapping gate", () => {
   })
 
   it("rejects future periods before they can enter cleaned output", () => {
-    const index = readJson<NanokaDaIndex>("data/source/raw/nanoka/zzz/2.8/boss.json")
-    const detail = readJson<NanokaDaDetail>("data/source/raw/nanoka/zzz/2.8/zh/boss/69036.json")
+    const index = readJson<NanokaDaIndex>("packages/data/source/raw/nanoka/zzz/2.8/boss.json")
+    const detail = readJson<NanokaDaDetail>("packages/data/source/raw/nanoka/zzz/2.8/zh/boss/69036.json")
 
     expect(() => deriveNanokaDeadlyAssaultPeriod(index, detail, {
       sourceVersion: "2.8",
@@ -91,8 +91,8 @@ describe("nanoka Deadly Assault formal-live semantic mapping gate", () => {
   })
 
   it("fails loud when detail period windows drift from the live index", () => {
-    const index = readJson<NanokaDaIndex>("data/source/raw/nanoka/zzz/2.8/boss.json")
-    const detail = readJson<NanokaDaDetail>("data/source/raw/nanoka/zzz/2.8/zh/boss/69036.json")
+    const index = readJson<NanokaDaIndex>("packages/data/source/raw/nanoka/zzz/2.8/boss.json")
+    const detail = readJson<NanokaDaDetail>("packages/data/source/raw/nanoka/zzz/2.8/zh/boss/69036.json")
     const driftedIndex = structuredClone(index)
     driftedIndex["69036"]!.end = "2026-05-23 03:59:59"
 
@@ -103,8 +103,8 @@ describe("nanoka Deadly Assault formal-live semantic mapping gate", () => {
   })
 
   it("fails loud when required title, score, HP, or monster stat fields are missing", () => {
-    const index = readJson<NanokaDaIndex>("data/source/raw/nanoka/zzz/2.8/boss.json")
-    const detail = readJson<NanokaDaDetail>("data/source/raw/nanoka/zzz/2.8/zh/boss/69036.json")
+    const index = readJson<NanokaDaIndex>("packages/data/source/raw/nanoka/zzz/2.8/boss.json")
+    const detail = readJson<NanokaDaDetail>("packages/data/source/raw/nanoka/zzz/2.8/zh/boss/69036.json")
     const brokenTitle = structuredClone(detail)
     const brokenAdjust = structuredClone(detail)
     const brokenMonster = structuredClone(detail)

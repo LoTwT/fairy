@@ -62,7 +62,7 @@
 - **期望**：人工 audit + 决议
 - **解决**：lo-user 用 nanoka (`https://zzz.nanoka.cc/boss/`) 作为人工查询源（不接管线），三方比对结果 nanoka 与 buhflipexplode 一致（2:1 vs Mihoyo）；lo-user 决策 `Q1，按 buhflipexplode`，cleaned release evidence 记录为 `resolved-prefer-buhflipexplode`，Mihoyo 原值与 sourceRefs 保留作为审计线索
 - **修复 PR**：#33 commit `04e7077`（task #72）
-- **状态**：✅ 已决议，audit 文件入仓 `data/cleaned/audit/mihoyo-buhflipexplode.source-conflicts.json`
+- **状态**：✅ 已决议，audit 文件入仓 `packages/data/cleaned/audit/mihoyo-buhflipexplode.source-conflicts.json`
 
 ### F-2026-05-08-06：CLI framework 切 citty
 - **类别**：U-Scenario（dogfooding 期间触发的 CLI baseline 收敛，非 calc bug）

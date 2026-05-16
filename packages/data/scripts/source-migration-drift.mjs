@@ -5,13 +5,11 @@ import { fileURLToPath } from "node:url"
 const packageDir = fileURLToPath(new URL("..", import.meta.url))
 const repoRoot = join(packageDir, "../..")
 
-const rootRegistryPath = join(repoRoot, "data/source-registry.json")
-const packageRegistryPath = join(packageDir, "source-registry.json")
-const matrixPath = join(repoRoot, "data/cleaned/audit/nanoka-coverage-matrix.json")
-const rootReportDir = join(repoRoot, "data/cleaned/audit/nanoka-drift-report")
-const packageReportDir = join(packageDir, "cleaned/audit/nanoka-drift-report")
+const sourceRegistryPath = join(packageDir, "source-registry.json")
+const matrixPath = join(repoRoot, "packages/data/cleaned/audit/nanoka-coverage-matrix.json")
+const reportDir = join(packageDir, "cleaned/audit/nanoka-drift-report")
 const docsReportDir = join(repoRoot, "docs/data-source/drift-reports")
-const goldenReplayReportPath = join(repoRoot, "data/cleaned/golden/v1-replay-report.json")
+const goldenReplayReportPath = join(repoRoot, "packages/data/cleaned/golden/v1-replay-report.json")
 
 const schemaVersion = "nanoka-drift-report/v0.1"
 const defaultSyncId = "phase3-sync-000-foundation"
@@ -110,14 +108,13 @@ function countsForRows(rows) {
 
 function reportPaths(syncId) {
   return {
-    rootJson: join(rootReportDir, `${syncId}.json`),
-    packageJson: join(packageReportDir, `${syncId}.json`),
+    json: join(reportDir, `${syncId}.json`),
     markdown: join(docsReportDir, `${syncId}.md`),
   }
 }
 
 function reportHeader({ syncId, generatedAt }) {
-  const registry = readJson(rootRegistryPath)
+  const registry = readJson(sourceRegistryPath)
   const matrix = readJson(matrixPath)
   const nanoka = sourceById(registry, "nanoka-zzz")
 
@@ -144,8 +141,8 @@ function buildFoundationReport({ syncId, generatedAt }) {
     rows: [],
     unresolvedCount: 0,
     notes: [
-      "Phase 3 foundation fixture only: this artifact locks the drift-report contract, mirror, verifier, and package inclusion before full field comparison lands.",
-      "Archived Excel, D-17 Mihoyo, and D-12 buhflipexplode sources are audit baselines only; they are not runtime fallback inputs.",
+      "Phase 3 foundation fixture only: this artifact locks the drift-report contract, verifier, and package inclusion before full field comparison lands.",
+      "Retired Excel, D-17 Mihoyo, and D-12 buhflipexplode source ids remain audit baselines only; their raw archives are recoverable from git history and are not runtime fallback inputs.",
     ],
   }
 }
@@ -480,7 +477,7 @@ function rowSamples(row) {
 
 function rawAnchorForSample(sampleEntity, sourceVersion) {
   if (sampleEntity === "nanoka-manifest")
-    return `data/source/raw/nanoka/zzz/${sourceVersion}/manifest.json`
+    return `packages/data/source/raw/nanoka/zzz/${sourceVersion}/manifest.json`
 
   const idMatch = sampleEntity.match(/-(\d+)$/)
   if (idMatch === null)
@@ -504,7 +501,7 @@ function rawAnchorForSample(sampleEntity, sourceVersion) {
   if (kind === null)
     return null
 
-  const sourceAnchor = `data/source/raw/nanoka/zzz/${sourceVersion}/zh/${kind}/${id}.json`
+  const sourceAnchor = `packages/data/source/raw/nanoka/zzz/${sourceVersion}/zh/${kind}/${id}.json`
   return existsSync(join(repoRoot, sourceAnchor)) ? sourceAnchor : null
 }
 
@@ -530,7 +527,7 @@ function coverageMatrixSourceRef({ sourceVersion, matrixRow }) {
   return {
     sourceId: "nanoka-zzz",
     sourceVersion,
-    sourceAnchor: "data/cleaned/audit/nanoka-coverage-matrix.json",
+    sourceAnchor: "packages/data/cleaned/audit/nanoka-coverage-matrix.json",
     dataPath: `/rows/${matrixRow?.matrixRowIndex ?? "unmapped"}`,
   }
 }
@@ -615,7 +612,7 @@ function panelValue(source, { baseKey, levelKey, growthKey, level = 60, promotio
 }
 
 function yixuanProofValues() {
-  const yixuan = readJson(join(repoRoot, "data/source/raw/nanoka/zzz/2.8/zh/character/1371.json"))
+  const yixuan = readJson(join(repoRoot, "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1371.json"))
   assert(yixuan.id === 1371, "G27 Yixuan proof source id drifted")
   const firstBasic = yixuan.skill?.basic?.description?.[4]?.param?.[0]?.param?.["1371001"]
   assert(firstBasic !== undefined, "G27 Yixuan proof skill param 1371001 is missing")
@@ -651,7 +648,7 @@ function yixuanProofValues() {
 }
 
 function plugbooProofValues() {
-  const plugboo = readJson(join(repoRoot, "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json"))
+  const plugboo = readJson(join(repoRoot, "packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json"))
   assert(plugboo.id === 54008, "G28 Plugboo proof source id drifted")
   const active = plugboo.skill_prop?.["5400801"]
   assert(active !== undefined, "G28 Plugboo proof active skill prop 5400801 is missing")
@@ -816,7 +813,7 @@ function buildG01G26Report({ syncId, generatedAt }) {
     notes: [
       "Phase 3 first sync compares G01-G26 archived golden replay baselines against real nanoka candidate coverage/status/source paths.",
       "This sync has Product/TL rulings for G01-G26, but it does not count as an exit-clean sync because G27/G28 and the two-clean-sync exit condition are still pending.",
-      "Archived Excel, D-17 Mihoyo, and D-12 buhflipexplode sources are audit baselines only; they are not runtime fallback inputs.",
+      "Retired Excel, D-17 Mihoyo, and D-12 buhflipexplode source ids remain audit baselines only; their raw archives are recoverable from git history and are not runtime fallback inputs.",
     ],
   }
 }
@@ -852,7 +849,7 @@ function buildG27G28Report({ syncId, generatedAt }) {
     notes: [
       "Phase 3 second sync carries forward accepted G01-G26 rulings and adds lo-user-selected G27/G28 approved-live nanoka proof anchors.",
       "This sync is exit-clean eligible for Phase 3 only; runtime cleaned-data cutover remains disabled until Phase 4.",
-      "Archived Excel, D-17 Mihoyo, and D-12 buhflipexplode sources are audit baselines only; they are not runtime fallback inputs.",
+      "Retired Excel, D-17 Mihoyo, and D-12 buhflipexplode source ids remain audit baselines only; their raw archives are recoverable from git history and are not runtime fallback inputs.",
     ],
   }
 }
@@ -933,8 +930,8 @@ ${driftRows}
 ## Boundary
 
 - ${hasRows ? "This sync does not promote nanoka to runtime cleaned data." : "This artifact does not compare production fields yet."}
-- Archived Excel / D-17 / D-12 sources remain audit baselines, not runtime
-  fallback.
+- Retired Excel / D-17 / D-12 source ids remain audit baselines, not runtime
+  fallback. Their raw archives are recoverable from git history only.
 - Any future \`changed\`, \`missing\`, \`new\`, or \`semantic-mismatch\` row must
   carry source refs and a ruling before Phase 3 exit.
 `
@@ -1041,7 +1038,7 @@ function validateExitCleanEligibility(report, { syncId }) {
   for (const cleanSyncId of evidence.cleanSyncIds) {
     const cleanReport = cleanSyncId === syncId
       ? report
-      : readJson(reportPaths(cleanSyncId).rootJson)
+      : readJson(reportPaths(cleanSyncId).json)
     assert(cleanReport.unresolvedCount === 0, `${cleanSyncId}: clean sync evidence cannot have unresolved rows`)
     assert(cleanReport.runtimeCutoverReady === false, `${cleanSyncId}: clean sync evidence must not cut runtime over`)
   }
@@ -1085,18 +1082,14 @@ function validateReportShape(report, { registry, matrix, syncId }) {
 }
 
 function validateReport({ syncId }) {
-  const { rootJson, packageJson, markdown } = reportPaths(syncId)
-  assert(existsSync(rootJson), `Missing root drift report ${rootJson}`)
-  assert(existsSync(packageJson), `Missing package drift report ${packageJson}`)
-  assert(readFileSync(rootJson, "utf8") === readFileSync(packageJson, "utf8"), "package drift report must mirror root report byte-for-byte")
+  const { json, markdown } = reportPaths(syncId)
+  assert(existsSync(json), `Missing drift report ${json}`)
 
-  const rootRegistryText = readFileSync(rootRegistryPath, "utf8")
-  const packageRegistryText = readFileSync(packageRegistryPath, "utf8")
-  assert(rootRegistryText === packageRegistryText, "package source-registry must mirror root source-registry byte-for-byte")
+  const registryText = readFileSync(sourceRegistryPath, "utf8")
 
-  const report = JSON.parse(readFileSync(rootJson, "utf8"))
+  const report = JSON.parse(readFileSync(json, "utf8"))
   validateReportShape(report, {
-    registry: JSON.parse(rootRegistryText),
+    registry: JSON.parse(registryText),
     matrix: readJson(matrixPath),
     syncId,
   })
@@ -1104,15 +1097,15 @@ function validateReport({ syncId }) {
   assert(existsSync(markdown), `Missing human drift report ${markdown}`)
   const markdownText = readFileSync(markdown, "utf8")
   assert(markdownText.includes(`# Nanoka Drift Report: ${syncId}`), "human report must include sync heading")
-  assert(markdownText.includes("Archived Excel / D-17 / D-12 sources remain audit baselines"), "human report must document no runtime fallback boundary")
+  assert(markdownText.includes("Retired Excel / D-17 / D-12 source ids remain audit baselines"), "human report must document no runtime fallback boundary")
 }
 
 function validateReportFixture({ reportPath, syncId }) {
   assert(typeof reportPath === "string" && reportPath.length > 0, "verify-fixture requires --report <path>")
-  const rootRegistryText = readFileSync(rootRegistryPath, "utf8")
+  const registryText = readFileSync(sourceRegistryPath, "utf8")
   const report = readJson(reportPath)
   validateReportShape(report, {
-    registry: JSON.parse(rootRegistryText),
+    registry: JSON.parse(registryText),
     matrix: readJson(matrixPath),
     syncId,
   })
@@ -1120,9 +1113,8 @@ function validateReportFixture({ reportPath, syncId }) {
 
 function audit({ syncId, generatedAt }) {
   const report = buildReport({ syncId, generatedAt })
-  const { rootJson, packageJson, markdown } = reportPaths(syncId)
-  writeJson(rootJson, report)
-  writeJson(packageJson, report)
+  const { json, markdown } = reportPaths(syncId)
+  writeJson(json, report)
   writeText(markdown, renderMarkdown(report))
   validateReport({ syncId })
   console.log(`source migration drift audit wrote ${syncId}`)

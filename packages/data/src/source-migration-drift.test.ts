@@ -70,7 +70,7 @@ function readJson<T>(path: string): T {
 }
 
 function nanokaContentHash(): string {
-  const registry = readJson<{ sources: Array<{ sourceId: string, contentHash: string }> }>("data/source-registry.json")
+  const registry = readJson<{ sources: Array<{ sourceId: string, contentHash: string }> }>("packages/data/source-registry.json")
   const source = registry.sources.find(item => item.sourceId === "nanoka-zzz")
   expect(source, "missing nanoka source registry entry").toBeDefined()
   return source!.contentHash
@@ -97,14 +97,9 @@ describe("Phase 3 source migration drift report foundation", () => {
     expect(output).toContain(`source migration drift verification passed for ${syncId}`)
   })
 
-  it("keeps the package drift report mirror byte-identical", () => {
-    expect(readFileSync(join(repoRoot, `packages/data/cleaned/audit/nanoka-drift-report/${syncId}.json`), "utf8")).toBe(
-      readFileSync(join(repoRoot, `data/cleaned/audit/nanoka-drift-report/${syncId}.json`), "utf8"),
-    )
-  })
 
   it("locks the minimal report contract without runtime cutover", () => {
-    const report = readJson<DriftReport>(`data/cleaned/audit/nanoka-drift-report/${syncId}.json`)
+    const report = readJson<DriftReport>(`packages/data/cleaned/audit/nanoka-drift-report/${syncId}.json`)
 
     expect(report).toMatchObject({
       schemaVersion: "nanoka-drift-report/v0.1",
@@ -149,7 +144,7 @@ describe("Phase 3 source migration drift report foundation", () => {
   it("rejects non-same drift rows that try to bypass the ruling queue", () => {
     const tempDir = mkdtempSync(join(tmpdir(), "fairy-drift-report-"))
     const fixturePath = join(tempDir, "bypassing-report.json")
-    const report = readJson<DriftReport>(`data/cleaned/audit/nanoka-drift-report/${syncId}.json`)
+    const report = readJson<DriftReport>(`packages/data/cleaned/audit/nanoka-drift-report/${syncId}.json`)
     const bypassingReport = {
       ...report,
       counts: {
@@ -169,7 +164,7 @@ describe("Phase 3 source migration drift report foundation", () => {
           baselineSourceRef: {
             sourceId: "lo-user-excel",
             sourceVersion: "2.6.0_R14028417",
-            sourceAnchor: "data/source/excel/data.xlsx",
+            sourceAnchor: "git-history:data/source/excel/data.xlsx",
             dataPath: "/agents/1021/baseStats",
           },
           candidateSourceRef: {
@@ -210,7 +205,7 @@ describe("Phase 3 source migration drift report foundation", () => {
   it("rejects resolved non-same drift rows without decision-log backlinks", () => {
     const tempDir = mkdtempSync(join(tmpdir(), "fairy-drift-report-"))
     const fixturePath = join(tempDir, "missing-ruling-log-report.json")
-    const report = readJson<DriftReport>(`data/cleaned/audit/nanoka-drift-report/${firstSyncId}.json`)
+    const report = readJson<DriftReport>(`packages/data/cleaned/audit/nanoka-drift-report/${firstSyncId}.json`)
     const missingBacklinkReport = {
       ...report,
       rows: report.rows.map((row, index) => {
@@ -241,7 +236,7 @@ describe("Phase 3 source migration drift report foundation", () => {
   it("rejects first-sync reports that claim exit-clean eligibility before G27/G28 and two clean syncs", () => {
     const tempDir = mkdtempSync(join(tmpdir(), "fairy-drift-report-"))
     const fixturePath = join(tempDir, "premature-exit-clean-report.json")
-    const report = readJson<DriftReport>(`data/cleaned/audit/nanoka-drift-report/${firstSyncId}.json`)
+    const report = readJson<DriftReport>(`packages/data/cleaned/audit/nanoka-drift-report/${firstSyncId}.json`)
     const prematureExitCleanReport = {
       ...report,
       exitCleanSyncEligible: true,
@@ -268,7 +263,7 @@ describe("Phase 3 source migration drift report foundation", () => {
 
     expect(report).toContain(`# Nanoka Drift Report: ${syncId}`)
     expect(report).toContain("full G01-G26 comparison begins in the next Phase 3 slice")
-    expect(report).toContain("Archived Excel / D-17 / D-12 sources remain audit baselines")
+    expect(report).toContain("Retired Excel / D-17 / D-12 source ids remain audit baselines")
     expect(report).toContain("Runtime cutover ready: **false**")
   })
 
@@ -278,7 +273,7 @@ describe("Phase 3 source migration drift report foundation", () => {
       encoding: "utf8",
       stdio: ["ignore", "pipe", "pipe"],
     })
-    const report = readJson<DriftReport>(`data/cleaned/audit/nanoka-drift-report/${firstSyncId}.json`)
+    const report = readJson<DriftReport>(`packages/data/cleaned/audit/nanoka-drift-report/${firstSyncId}.json`)
 
     expect(output).toContain(`source migration drift verification passed for ${firstSyncId}`)
     expect(report).toMatchObject({
@@ -308,7 +303,7 @@ describe("Phase 3 source migration drift report foundation", () => {
       && row.rulingDecisionLog?.startsWith("docs/product/decisions/data-source-rulings.md#phase3-r")
       && row.blockedBy.length === 0,
     )).toBe(true)
-    expect(report.rows.some(row => row.candidateSourceRef.sourceAnchor.startsWith("data/source/raw/nanoka/zzz/2.8/"))).toBe(true)
+    expect(report.rows.some(row => row.candidateSourceRef.sourceAnchor.startsWith("packages/data/source/raw/nanoka/zzz/2.8/"))).toBe(true)
     expect(report.rows.some(row => row.candidateSourceRef.sourceAnchor.endsWith("nanoka-disorder-formula-audit.json"))).toBe(true)
     expect(report.rows.every(row => row.fieldId.endsWith(".nanokaCandidateCoverage"))).toBe(true)
     expect(report.rows.every(row => row.baselineValue !== "passed")).toBe(true)
@@ -328,7 +323,7 @@ describe("Phase 3 source migration drift report foundation", () => {
         requiredSampleEntities: ["nanoka-character-nicole-live-1031"],
       },
       candidateSourceRef: {
-        sourceAnchor: "data/source/raw/nanoka/zzz/2.8/zh/character/1031.json",
+        sourceAnchor: "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1031.json",
         dataPath: "/stats",
       },
     })
@@ -341,7 +336,7 @@ describe("Phase 3 source migration drift report foundation", () => {
         requiredSampleEntities: ["nanoka-bangboo-penguinboo-live-53001"],
       },
       candidateSourceRef: {
-        sourceAnchor: "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53001.json",
+        sourceAnchor: "packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/53001.json",
         dataPath: "/stats",
       },
     })
@@ -350,7 +345,7 @@ describe("Phase 3 source migration drift report foundation", () => {
       rulingStatus: "accepted",
       rulingId: "phase3-r026",
       candidateSourceRef: {
-        sourceAnchor: "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json",
+        sourceAnchor: "packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json",
         dataPath: "/stats",
       },
       candidateValue: {
@@ -360,11 +355,7 @@ describe("Phase 3 source migration drift report foundation", () => {
     })
   })
 
-  it("keeps the first sync report mirror and human report in sync", () => {
-    expect(readFileSync(join(repoRoot, `packages/data/cleaned/audit/nanoka-drift-report/${firstSyncId}.json`), "utf8")).toBe(
-      readFileSync(join(repoRoot, `data/cleaned/audit/nanoka-drift-report/${firstSyncId}.json`), "utf8"),
-    )
-
+  it("keeps the first sync human report in sync", () => {
     const report = readFileSync(join(repoRoot, `docs/data-source/drift-reports/${firstSyncId}.md`), "utf8")
     expect(report).toContain(`# Nanoka Drift Report: ${firstSyncId}`)
     expect(report).toContain("Phase 3 drift audit first G01-G26 sync")
@@ -381,7 +372,7 @@ describe("Phase 3 source migration drift report foundation", () => {
       encoding: "utf8",
       stdio: ["ignore", "pipe", "pipe"],
     })
-    const report = readJson<DriftReport>(`data/cleaned/audit/nanoka-drift-report/${secondSyncId}.json`)
+    const report = readJson<DriftReport>(`packages/data/cleaned/audit/nanoka-drift-report/${secondSyncId}.json`)
 
     expect(output).toContain(`source migration drift verification passed for ${secondSyncId}`)
     expect(report).toMatchObject({
@@ -420,7 +411,7 @@ describe("Phase 3 source migration drift report foundation", () => {
       rulingStatus: "accepted",
       rulingId: "phase3-r027",
       candidateSourceRef: {
-        sourceAnchor: "data/source/raw/nanoka/zzz/2.8/zh/character/1371.json",
+        sourceAnchor: "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1371.json",
         dataPath: "/stats",
       },
       candidateValue: {
@@ -456,7 +447,7 @@ describe("Phase 3 source migration drift report foundation", () => {
       rulingStatus: "accepted",
       rulingId: "phase3-r028",
       candidateSourceRef: {
-        sourceAnchor: "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json",
+        sourceAnchor: "packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json",
         dataPath: "/stats",
       },
       candidateValue: {
@@ -487,7 +478,7 @@ describe("Phase 3 source migration drift report foundation", () => {
   it("rejects exit-clean reports without G27/G28 proof rows", () => {
     const tempDir = mkdtempSync(join(tmpdir(), "fairy-drift-report-"))
     const fixturePath = join(tempDir, "missing-g28-proof-report.json")
-    const report = readJson<DriftReport>(`data/cleaned/audit/nanoka-drift-report/${secondSyncId}.json`)
+    const report = readJson<DriftReport>(`packages/data/cleaned/audit/nanoka-drift-report/${secondSyncId}.json`)
     const missingG28Report = {
       ...report,
       rows: report.rows.filter(row => row.entityId !== "G28"),
@@ -516,7 +507,7 @@ describe("Phase 3 source migration drift report foundation", () => {
   it("rejects exit-clean reports whose G27/G28 proof values drift from approved-live raw evidence", () => {
     const tempDir = mkdtempSync(join(tmpdir(), "fairy-drift-report-"))
     const fixturePath = join(tempDir, "mutated-proof-values-report.json")
-    const report = readJson<DriftReport>(`data/cleaned/audit/nanoka-drift-report/${secondSyncId}.json`)
+    const report = readJson<DriftReport>(`packages/data/cleaned/audit/nanoka-drift-report/${secondSyncId}.json`)
     const mutatedReport = structuredClone(report)
     const g27 = mutatedReport.rows.find(row => row.entityId === "G27")!
     const g28 = mutatedReport.rows.find(row => row.entityId === "G28")!
@@ -544,7 +535,7 @@ describe("Phase 3 source migration drift report foundation", () => {
 
   it("rejects forged exit-clean evidence for the second sync", () => {
     const tempDir = mkdtempSync(join(tmpdir(), "fairy-drift-report-"))
-    const baseReport = readJson<DriftReport>(`data/cleaned/audit/nanoka-drift-report/${secondSyncId}.json`)
+    const baseReport = readJson<DriftReport>(`packages/data/cleaned/audit/nanoka-drift-report/${secondSyncId}.json`)
     const tamperedReports = [
       {
         name: "foundation-current-clean-syncs",

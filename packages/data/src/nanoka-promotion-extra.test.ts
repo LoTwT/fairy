@@ -14,7 +14,7 @@ function readJson<T>(path: string): T {
 
 describe("nanoka agent promotion extra source artifact gate", () => {
   it("derives live Nekomata promotion extra stats with deterministic unit mapping", () => {
-    const nekomata = readJson<NanokaPromotionExtraSource>("data/source/raw/nanoka/zzz/2.8/zh/character/1021.json")
+    const nekomata = readJson<NanokaPromotionExtraSource>("packages/data/source/raw/nanoka/zzz/2.8/zh/character/1021.json")
     const artifact = deriveNanokaPromotionExtraStats(nekomata, {
       sourceVersion: "2.8",
       agentId: 1021,
@@ -47,7 +47,7 @@ describe("nanoka agent promotion extra source artifact gate", () => {
   })
 
   it("derives live Yixuan promotion extra stats without treating them as final panel cutover", () => {
-    const yixuan = readJson<NanokaPromotionExtraSource>("data/source/raw/nanoka/zzz/2.8/zh/character/1371.json")
+    const yixuan = readJson<NanokaPromotionExtraSource>("packages/data/source/raw/nanoka/zzz/2.8/zh/character/1371.json")
     const artifact = deriveNanokaPromotionExtraStats(yixuan, {
       sourceVersion: "2.8",
       agentId: 1371,
@@ -73,11 +73,11 @@ describe("nanoka agent promotion extra source artifact gate", () => {
   })
 
   it("fails loud when promotion extra raw fields are missing or unmapped", () => {
-    const nekomata = readJson<NanokaPromotionExtraSource>("data/source/raw/nanoka/zzz/2.8/zh/character/1021.json")
+    const nekomata = readJson<NanokaPromotionExtraSource>("packages/data/source/raw/nanoka/zzz/2.8/zh/character/1021.json")
     const missingExtra = structuredClone(nekomata)
     const missingValue = structuredClone(nekomata)
     const unmappedProp = structuredClone(nekomata)
-    const idMismatch = readJson<NanokaPromotionExtraSource>("data/source/raw/nanoka/zzz/2.8/zh/character/1371.json")
+    const idMismatch = readJson<NanokaPromotionExtraSource>("packages/data/source/raw/nanoka/zzz/2.8/zh/character/1371.json")
 
     delete missingExtra.extra_level?.["1"]?.extra
     delete missingValue.extra_level?.["1"]?.extra?.["12101"]?.value

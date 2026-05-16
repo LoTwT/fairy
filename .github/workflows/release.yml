@@ -73,10 +73,8 @@ jobs:
       - run: pnpm check
       - run: pnpm test
       - run: pnpm --filter @randomplay/data verify:golden-v1
-      - run: pnpm --filter @randomplay/data verify:mihoyo-da
-      - run: pnpm --filter @randomplay/data verify:buhflipexplode-da
-      - run: pnpm --filter @randomplay/data verify:excel
       - run: pnpm --filter @randomplay/data verify:nanoka
+      - run: pnpm --filter @randomplay/data verify:nanoka-da-history
       - run: pnpm --filter @randomplay/data verify:nanoka-runtime
       - run: pnpm --filter @randomplay/data verify:package-size
       - run: pnpm --filter @randomplay/data verify:source-registry

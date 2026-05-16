@@ -8,7 +8,7 @@
   "indexSource": {
     "sourceId": "nanoka-zzz",
     "sourceVersion": "2.8",
-    "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/bangboo.json",
+    "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/bangboo.json",
     "dataPath": "/"
   },
   "summary": {
@@ -75,7 +75,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53001.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/53001.json",
         "dataPath": "/"
       },
       "level60Panel": {
@@ -174,7 +174,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53002.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/53002.json",
         "dataPath": "/"
       },
       "level60Panel": {
@@ -238,7 +238,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53003.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/53003.json",
         "dataPath": "/"
       },
       "level60Panel": {
@@ -298,7 +298,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53004.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/53004.json",
         "dataPath": "/"
       },
       "level60Panel": {
@@ -361,7 +361,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53005.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/53005.json",
         "dataPath": "/"
       },
       "level60Panel": {
@@ -463,7 +463,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53006.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/53006.json",
         "dataPath": "/"
       },
       "level60Panel": {
@@ -562,7 +562,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53007.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/53007.json",
         "dataPath": "/"
       },
       "level60Panel": {
@@ -661,7 +661,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53008.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/53008.json",
         "dataPath": "/"
       },
       "level60Panel": {
@@ -717,7 +717,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53009.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/53009.json",
         "dataPath": "/"
       },
       "level60Panel": {
@@ -816,7 +816,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53010.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/53010.json",
         "dataPath": "/"
       },
       "level60Panel": {
@@ -915,7 +915,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53011.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/53011.json",
         "dataPath": "/"
       },
       "level60Panel": {
@@ -978,7 +978,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53012.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/53012.json",
         "dataPath": "/"
       },
       "level60Panel": {
@@ -1033,7 +1033,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53013.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/53013.json",
         "dataPath": "/"
       },
       "level60Panel": {
@@ -1133,7 +1133,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53014.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/53014.json",
         "dataPath": "/"
       },
       "level60Panel": {
@@ -1197,7 +1197,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53015.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/53015.json",
         "dataPath": "/"
       },
       "level60Panel": {
@@ -1296,7 +1296,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53016.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/53016.json",
         "dataPath": "/"
       },
       "level60Panel": {
@@ -1404,7 +1404,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53017.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/53017.json",
         "dataPath": "/"
       },
       "level60Panel": {
@@ -1473,7 +1473,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53019.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/53019.json",
         "dataPath": "/"
       },
       "level60Panel": {
@@ -1572,7 +1572,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53021.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/53021.json",
         "dataPath": "/"
       },
       "level60Panel": {
@@ -1648,7 +1648,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54001.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/54001.json",
         "dataPath": "/"
       },
       "level60Panel": {
@@ -1747,7 +1747,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54002.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/54002.json",
         "dataPath": "/"
       },
       "level60Panel": {
@@ -1847,7 +1847,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54003.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/54003.json",
         "dataPath": "/"
       },
       "level60Panel": {
@@ -1934,7 +1934,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54004.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/54004.json",
         "dataPath": "/"
       },
       "level60Panel": {
@@ -2015,7 +2015,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54005.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/54005.json",
         "dataPath": "/"
       },
       "level60Panel": {
@@ -2116,7 +2116,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54006.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/54006.json",
         "dataPath": "/"
       },
       "level60Panel": {
@@ -2215,7 +2215,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json",
         "dataPath": "/"
       },
       "level60Panel": {
@@ -2314,7 +2314,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54009.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/54009.json",
         "dataPath": "/"
       },
       "level60Panel": {
@@ -2390,7 +2390,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54010.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/54010.json",
         "dataPath": "/"
       },
       "level60Panel": {
@@ -2460,7 +2460,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54011.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/54011.json",
         "dataPath": "/"
       },
       "level60Panel": {
@@ -2560,7 +2560,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54012.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/54012.json",
         "dataPath": "/"
       },
       "level60Panel": {
@@ -2659,7 +2659,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54013.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/54013.json",
         "dataPath": "/"
       },
       "level60Panel": {
@@ -2767,7 +2767,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54014.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/54014.json",
         "dataPath": "/"
       },
       "level60Panel": {
@@ -2867,7 +2867,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54015.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/54015.json",
         "dataPath": "/"
       },
       "level60Panel": {
@@ -2935,7 +2935,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54016.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/54016.json",
         "dataPath": "/"
       },
       "level60Panel": {
@@ -3043,7 +3043,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54017.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/54017.json",
         "dataPath": "/"
       },
       "level60Panel": {
@@ -3144,7 +3144,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54018.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/54018.json",
         "dataPath": "/"
       },
       "level60Panel": {
@@ -3228,7 +3228,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54019.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/54019.json",
         "dataPath": "/"
       },
       "level60Panel": {
@@ -3328,7 +3328,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54020.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/54020.json",
         "dataPath": "/"
       },
       "level60Panel": {
@@ -3429,7 +3429,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54021.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/54021.json",
         "dataPath": "/"
       },
       "level60Panel": {

@@ -1,7 +1,7 @@
 # Nanoka Drift Report: phase3-sync-000-foundation
 
 Status: Phase 3 drift audit foundation fixture
-Generated: 2026-05-16T01:50:00+08:00
+Generated: 2026-05-15T16:20:00+08:00
 
 This report is a schema/verifier fixture. It intentionally contains no field
 comparison rows; full G01-G26 comparison begins in the next Phase 3 slice.
@@ -10,7 +10,7 @@ comparison rows; full G01-G26 comparison begins in the next Phase 3 slice.
 
 | Source | Version | Content Hash |
 |---|---|---|
-| `nanoka-zzz` | `2.8` | `sha256:93d1241c3204109be06fcf801594bb3aebe40cca830973956c7dea26367b6882` |
+| `nanoka-zzz` | `2.8` | `sha256:4374b550b86b4af029e1903b838ce8906d6e389a8a6566eb35f3b7cac97761ba` |
 
 ## Baselines
 
@@ -41,7 +41,7 @@ Exit-clean sync eligible: **false**
 ## Boundary
 
 - This artifact does not compare production fields yet.
-- Archived Excel / D-17 / D-12 sources remain audit baselines, not runtime
-  fallback.
+- Retired Excel / D-17 / D-12 source ids remain audit baselines, not runtime
+  fallback. Their raw archives are recoverable from git history only.
 - Any future `changed`, `missing`, `new`, or `semantic-mismatch` row must
   carry source refs and a ruling before Phase 3 exit.

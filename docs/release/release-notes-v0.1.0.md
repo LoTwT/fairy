@@ -90,8 +90,11 @@ The Phase 4 PR1 cutover passed:
 - `pnpm --filter @randomplay/data verify:source-registry`
 - `pnpm --filter @randomplay/data verify:source-migration`
 - `pnpm --filter @randomplay/data verify:golden-v1`
-- `pnpm --filter @randomplay/data sync-cleaned -- --check`
 - data package pack dry-run inclusion/exclusion
+
+The V0.1.0 release also used the then-existing cleaned mirror check; that
+command was retired in V0.1.2 when `packages/data/cleaned/` became the
+canonical artifact tree.
 
 PR3 release-readiness still needs to validate the published npm packages, SLSA
 provenance, GitHub Release, fresh `pnpm dlx @randomplay/cli`, and import smoke
@@ -115,7 +118,7 @@ See `docs/data-source/takedown-rollback.md` for the detailed runbook.
 ## Links
 
 - Repository — https://github.com/LoTwT/fairy
-- Runtime source registry — `data/source-registry.json`
+- Runtime source registry — `packages/data/source-registry.json`
 - D-20 migration decision — `docs/product/decisions/D-20-data-source-migration.md`
 - Golden source coverage — `docs/qa/golden-source-coverage.md`
 - Release workflow — `docs/release/README.md`

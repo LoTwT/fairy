@@ -525,25 +525,25 @@
         {
           "sourceId": "nanoka-zzz",
           "sourceVersion": "2.8",
-          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1371.json",
+          "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1371.json",
           "dataPath": "/id"
         },
         {
           "sourceId": "nanoka-zzz",
           "sourceVersion": "2.8",
-          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1371.json",
+          "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1371.json",
           "dataPath": "/stats"
         },
         {
           "sourceId": "nanoka-zzz",
           "sourceVersion": "2.8",
-          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1371.json",
+          "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1371.json",
           "dataPath": "/level/6"
         },
         {
           "sourceId": "nanoka-zzz",
           "sourceVersion": "2.8",
-          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1371.json",
+          "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1371.json",
           "dataPath": "/skill/basic/description/4/param/0/param/1371001"
         }
       ],
@@ -560,31 +560,31 @@
         {
           "sourceId": "nanoka-zzz",
           "sourceVersion": "2.8",
-          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json",
+          "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json",
           "dataPath": "/id"
         },
         {
           "sourceId": "nanoka-zzz",
           "sourceVersion": "2.8",
-          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json",
+          "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json",
           "dataPath": "/stats"
         },
         {
           "sourceId": "nanoka-zzz",
           "sourceVersion": "2.8",
-          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json",
+          "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json",
           "dataPath": "/level/6"
         },
         {
           "sourceId": "nanoka-zzz",
           "sourceVersion": "2.8",
-          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json",
+          "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json",
           "dataPath": "/skill/a"
         },
         {
           "sourceId": "nanoka-zzz",
           "sourceVersion": "2.8",
-          "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json",
+          "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json",
           "dataPath": "/skill_prop/5400801"
         }
       ],

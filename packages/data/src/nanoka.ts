@@ -304,7 +304,7 @@ export function createNanokaSnapshotAdapter(
         sourceVersion: options.manifest.snapshotId,
         fetchedAt: context.now,
         payload: options.manifest,
-        fileName: `data/source/raw/nanoka/zzz/${options.manifest.snapshotId}/fetch-manifest.json`,
+        fileName: `packages/data/source/raw/nanoka/zzz/${options.manifest.snapshotId}/fetch-manifest.json`,
         contentType: "application/json",
       }
     },

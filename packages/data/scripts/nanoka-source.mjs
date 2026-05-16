@@ -10,7 +10,7 @@ import { fileURLToPath } from "node:url"
 
 const packageDir = fileURLToPath(new URL("..", import.meta.url))
 const repoRoot = join(packageDir, "../..")
-const sourceRoot = join(repoRoot, "data/source/raw/nanoka/zzz")
+const sourceRoot = join(repoRoot, "packages/data/source/raw/nanoka/zzz")
 const sourceId = "nanoka-zzz"
 const parserVersion = "nanoka-source-v0.1.0"
 const userAgent = "fairy-data-source-audit/0.1 (+https://github.com/LoTwT/fairy)"

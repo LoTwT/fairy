@@ -4,14 +4,10 @@ import { join } from "node:path"
 import { describe, expect, it } from "vitest"
 
 const repoRoot = join(import.meta.dirname, "../../..")
-const candidatePath = join(repoRoot, "data/cleaned/audit/v1-agent-source-candidates.json")
-const packageCandidatePath = join(repoRoot, "packages/data/cleaned/audit/v1-agent-source-candidates.json")
-const nicoleAcceptancePath = join(repoRoot, "data/cleaned/audit/nicole.acceptance.json")
-const packageNicoleAcceptancePath = join(repoRoot, "packages/data/cleaned/audit/nicole.acceptance.json")
-const yanagiAcceptancePath = join(repoRoot, "data/cleaned/audit/yanagi.acceptance.json")
-const packageYanagiAcceptancePath = join(repoRoot, "packages/data/cleaned/audit/yanagi.acceptance.json")
-const replayReportPath = join(repoRoot, "data/cleaned/golden/v1-replay-report.json")
-const packageReplayReportPath = join(repoRoot, "packages/data/cleaned/golden/v1-replay-report.json")
+const candidatePath = join(repoRoot, "packages/data/cleaned/audit/v1-agent-source-candidates.json")
+const nicoleAcceptancePath = join(repoRoot, "packages/data/cleaned/audit/nicole.acceptance.json")
+const yanagiAcceptancePath = join(repoRoot, "packages/data/cleaned/audit/yanagi.acceptance.json")
+const replayReportPath = join(repoRoot, "packages/data/cleaned/golden/v1-replay-report.json")
 
 function readJson<T>(path: string): T {
   return JSON.parse(readFileSync(path, "utf8")) as T
@@ -283,12 +279,5 @@ describe("V1 golden true-data replay baseline", () => {
       yanagi.records.find(record => record.effectId === "yanagi-polarity-disorder-ex-special")
         ?.acceptedMapping.supportedSkillLevels,
     ).toEqual(Array.from({ length: 16 }, (_, index) => index + 1))
-  })
-
-  it("keeps the synced package copy byte-identical to cleaned staging", () => {
-    expect(readFileSync(packageCandidatePath, "utf8")).toBe(readFileSync(candidatePath, "utf8"))
-    expect(readFileSync(packageNicoleAcceptancePath, "utf8")).toBe(readFileSync(nicoleAcceptancePath, "utf8"))
-    expect(readFileSync(packageYanagiAcceptancePath, "utf8")).toBe(readFileSync(yanagiAcceptancePath, "utf8"))
-    expect(readFileSync(packageReplayReportPath, "utf8")).toBe(readFileSync(replayReportPath, "utf8"))
   })
 })

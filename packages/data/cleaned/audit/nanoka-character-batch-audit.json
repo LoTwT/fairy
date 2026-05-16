@@ -8,7 +8,7 @@
   "indexSource": {
     "sourceId": "nanoka-zzz",
     "sourceVersion": "2.8",
-    "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/character.json",
+    "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/character.json",
     "dataPath": "/"
   },
   "summary": {
@@ -109,7 +109,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1011.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1011.json",
         "dataPath": "/"
       },
       "attribute": "electric",
@@ -154,7 +154,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1021.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1021.json",
         "dataPath": "/"
       },
       "attribute": "physical",
@@ -199,7 +199,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1031.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1031.json",
         "dataPath": "/"
       },
       "attribute": "ether",
@@ -244,7 +244,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1041.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1041.json",
         "dataPath": "/"
       },
       "attribute": "fire",
@@ -289,7 +289,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1051.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1051.json",
         "dataPath": "/"
       },
       "attribute": "ice",
@@ -334,7 +334,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1061.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1061.json",
         "dataPath": "/"
       },
       "attribute": "physical",
@@ -379,7 +379,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1071.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1071.json",
         "dataPath": "/"
       },
       "attribute": "physical",
@@ -424,7 +424,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1081.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1081.json",
         "dataPath": "/"
       },
       "attribute": "physical",
@@ -469,7 +469,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1091.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1091.json",
         "dataPath": "/"
       },
       "attribute": "frost",
@@ -517,7 +517,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1101.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1101.json",
         "dataPath": "/"
       },
       "attribute": "fire",
@@ -562,7 +562,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1111.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1111.json",
         "dataPath": "/"
       },
       "attribute": "electric",
@@ -607,7 +607,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1121.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1121.json",
         "dataPath": "/"
       },
       "attribute": "fire",
@@ -652,7 +652,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1131.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1131.json",
         "dataPath": "/"
       },
       "attribute": "ice",
@@ -697,7 +697,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1141.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1141.json",
         "dataPath": "/"
       },
       "attribute": "ice",
@@ -742,7 +742,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1151.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1151.json",
         "dataPath": "/"
       },
       "attribute": "fire",
@@ -787,7 +787,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1161.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1161.json",
         "dataPath": "/"
       },
       "attribute": "fire",
@@ -832,7 +832,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1171.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1171.json",
         "dataPath": "/"
       },
       "attribute": "fire",
@@ -877,7 +877,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1181.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1181.json",
         "dataPath": "/"
       },
       "attribute": "electric",
@@ -922,7 +922,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1191.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1191.json",
         "dataPath": "/"
       },
       "attribute": "ice",
@@ -967,7 +967,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1201.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1201.json",
         "dataPath": "/"
       },
       "attribute": "electric",
@@ -1012,7 +1012,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1211.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1211.json",
         "dataPath": "/"
       },
       "attribute": "electric",
@@ -1057,7 +1057,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1221.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1221.json",
         "dataPath": "/"
       },
       "attribute": "electric",
@@ -1102,7 +1102,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1241.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1241.json",
         "dataPath": "/"
       },
       "attribute": "ether",
@@ -1147,7 +1147,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1251.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1251.json",
         "dataPath": "/"
       },
       "attribute": "electric",
@@ -1192,7 +1192,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1261.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1261.json",
         "dataPath": "/"
       },
       "attribute": "physical",
@@ -1237,7 +1237,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1271.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1271.json",
         "dataPath": "/"
       },
       "attribute": "electric",
@@ -1282,7 +1282,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1281.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1281.json",
         "dataPath": "/"
       },
       "attribute": "physical",
@@ -1327,7 +1327,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1291.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1291.json",
         "dataPath": "/"
       },
       "attribute": "ice",
@@ -1372,7 +1372,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1301.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1301.json",
         "dataPath": "/"
       },
       "attribute": "fire",
@@ -1417,7 +1417,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1311.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1311.json",
         "dataPath": "/"
       },
       "attribute": "ether",
@@ -1462,7 +1462,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1321.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1321.json",
         "dataPath": "/"
       },
       "attribute": "fire",
@@ -1507,7 +1507,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1331.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1331.json",
         "dataPath": "/"
       },
       "attribute": "ether",
@@ -1552,7 +1552,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1341.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1341.json",
         "dataPath": "/"
       },
       "attribute": "ice",
@@ -1597,7 +1597,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1351.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1351.json",
         "dataPath": "/"
       },
       "attribute": "physical",
@@ -1642,7 +1642,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1361.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1361.json",
         "dataPath": "/"
       },
       "attribute": "electric",
@@ -1687,7 +1687,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1371.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1371.json",
         "dataPath": "/"
       },
       "attribute": "auricInk",
@@ -1741,7 +1741,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1381.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1381.json",
         "dataPath": "/"
       },
       "attribute": "electric",
@@ -1786,7 +1786,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1391.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1391.json",
         "dataPath": "/"
       },
       "attribute": "fire",
@@ -1831,7 +1831,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1401.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1401.json",
         "dataPath": "/"
       },
       "attribute": "physical",
@@ -1876,7 +1876,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1411.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1411.json",
         "dataPath": "/"
       },
       "attribute": "physical",
@@ -1921,7 +1921,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1421.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1421.json",
         "dataPath": "/"
       },
       "attribute": "physical",
@@ -1966,7 +1966,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1431.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1431.json",
         "dataPath": "/"
       },
       "attribute": "physical",
@@ -2015,7 +2015,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1441.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1441.json",
         "dataPath": "/"
       },
       "attribute": "fire",
@@ -2060,7 +2060,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1451.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1451.json",
         "dataPath": "/"
       },
       "attribute": "ether",
@@ -2105,7 +2105,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1461.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1461.json",
         "dataPath": "/"
       },
       "attribute": "electric",
@@ -2150,7 +2150,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1471.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1471.json",
         "dataPath": "/"
       },
       "attribute": "fire",
@@ -2195,7 +2195,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1481.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1481.json",
         "dataPath": "/"
       },
       "attribute": "physical",
@@ -2240,7 +2240,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1491.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1491.json",
         "dataPath": "/"
       },
       "attribute": "physical",
@@ -2285,7 +2285,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1501.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1501.json",
         "dataPath": "/"
       },
       "attribute": "ether",
@@ -2330,7 +2330,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1511.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1511.json",
         "dataPath": "/"
       },
       "attribute": "ether",
@@ -2375,7 +2375,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1521.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1521.json",
         "dataPath": "/"
       },
       "attribute": "electric",
@@ -2420,7 +2420,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1531.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1531.json",
         "dataPath": "/"
       },
       "attribute": "physical",
@@ -2465,7 +2465,7 @@
       "source": {
         "sourceId": "nanoka-zzz",
         "sourceVersion": "2.8",
-        "sourceAnchor": "data/source/raw/nanoka/zzz/2.8/zh/character/1541.json",
+        "sourceAnchor": "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1541.json",
         "dataPath": "/"
       },
       "attribute": "ice",

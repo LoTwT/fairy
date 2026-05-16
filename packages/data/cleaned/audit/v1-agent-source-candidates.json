@@ -11,7 +11,7 @@
     "sourceId": "lo-user-excel",
     "parserVersion": "golden-v1-replay-v0.1.0",
     "workbook": {
-      "path": "data/source/excel/data.xlsx",
+      "path": "git-history:data/source/excel/data.xlsx",
       "sha256": "9f42ecf734f45908c18bedf7ae937479f9f1563e4b3314a50d76cb99233a260b",
       "version": "2.6.0_R14028417"
     }

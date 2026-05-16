@@ -31,14 +31,14 @@ function readJson<T>(path: string): T {
 
 describe("nanoka Deadly Assault source gate", () => {
   it("records live DA raw availability but blocks runtime promotion", () => {
-    const matrix = readJson<CoverageMatrix>("data/cleaned/audit/nanoka-coverage-matrix.json")
+    const matrix = readJson<CoverageMatrix>("packages/data/cleaned/audit/nanoka-coverage-matrix.json")
     const row = matrix.rows.find(item => item.fieldId === "deadlyAssault.periodsBossesBuffs")
 
     expect(row).toMatchObject({
       status: "verified-from-nanoka",
       sampleEntity: "nanoka-boss-live-69036",
       promotable: true,
-      auditArtifact: "data/cleaned/audit/nanoka-da-current-batch-audit.json",
+      auditArtifact: "packages/data/cleaned/audit/nanoka-da-current-batch-audit.json",
     })
     expect(row?.supportingSamples).toContain("nanoka-boss-live-index-2.8")
     expect(row?.supportingSampleEntities).toHaveLength(38)
@@ -65,7 +65,7 @@ describe("nanoka Deadly Assault source gate", () => {
   })
 
   it("uses only live DA samples as release-gate evidence", () => {
-    const matrix = readJson<CoverageMatrix>("data/cleaned/audit/nanoka-coverage-matrix.json")
+    const matrix = readJson<CoverageMatrix>("packages/data/cleaned/audit/nanoka-coverage-matrix.json")
     const samplesById = new Map(matrix.sampleSources.map(sample => [sample.id, sample]))
 
     expect(samplesById.get("nanoka-boss-live-index-2.8")).toMatchObject({
@@ -90,7 +90,7 @@ describe("nanoka Deadly Assault source gate", () => {
   })
 
   it("keeps historical DA evidence in the dedicated non-current bucket", () => {
-    const matrix = readJson<CoverageMatrix>("data/cleaned/audit/nanoka-coverage-matrix.json")
+    const matrix = readJson<CoverageMatrix>("packages/data/cleaned/audit/nanoka-coverage-matrix.json")
     const row = matrix.rows.find(item => item.fieldId === "deadlyAssault.historicalPeriods")
     const samplesById = new Map(matrix.sampleSources.map(sample => [sample.id, sample]))
 
@@ -98,7 +98,7 @@ describe("nanoka Deadly Assault source gate", () => {
       status: "verified-from-nanoka",
       sampleEntity: "nanoka-da-history-manifest",
       promotable: true,
-      auditArtifact: "data/cleaned/audit/nanoka-da-historical-batch-audit.json",
+      auditArtifact: "packages/data/cleaned/audit/nanoka-da-historical-batch-audit.json",
     })
     expect(row?.transformRule).toContain("GameData.historicalDAPeriods")
     expect(row?.transformRule).toContain("never use them as current-runtime fallback")

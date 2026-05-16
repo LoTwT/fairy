@@ -61,21 +61,21 @@
     {
       "url": "https://static.nanoka.cc/zzz/2.8/boss.json",
       "status": 200,
-      "localPath": "data/source/raw/nanoka/zzz/2.8/boss.json",
+      "localPath": "packages/data/source/raw/nanoka/zzz/2.8/boss.json",
       "contentSha256": "d9519738c6100082760f59bb92fd17fdba93afb853c845b1c90d0718788a79f9",
       "finding": "Deadly Assault index exists, but it does not provide Disorder formula constants."
     },
     {
       "url": "https://static.nanoka.cc/zzz/2.8/zh/monster/30000.json",
       "status": 200,
-      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/monster/30000.json",
+      "localPath": "packages/data/source/raw/nanoka/zzz/2.8/zh/monster/30000.json",
       "contentSha256": "99b2286a6a5a3847f067cfc06bd5c5c44b4a3eb2b1b5609df7af820eea55e855",
       "finding": "Monster detail exposes variant stats and anomaly-related resistance/build-up fields, but no Disorder multiplier formula table."
     },
     {
       "url": "https://static.nanoka.cc/zzz/2.8/zh/boss/69036.json",
       "status": 200,
-      "localPath": "data/source/raw/nanoka/zzz/2.8/zh/boss/69036.json",
+      "localPath": "packages/data/source/raw/nanoka/zzz/2.8/zh/boss/69036.json",
       "contentSha256": "781cb67799e6fb8c0438ab57ac5536507b85292161342f9870c18f42d890989f",
       "finding": "Deadly Assault period detail exposes buffs, rooms, weakness data, and boss_adjust, but no Disorder formula constants."
     }

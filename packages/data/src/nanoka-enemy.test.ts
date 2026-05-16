@@ -88,7 +88,7 @@ function readJson<T>(path: string): T {
 }
 
 function liveMonster(detailId: number) {
-  return readJson<NanokaMonsterDetail>(`data/source/raw/nanoka/zzz/2.8/zh/monster/${detailId}.json`)
+  return readJson<NanokaMonsterDetail>(`packages/data/source/raw/nanoka/zzz/2.8/zh/monster/${detailId}.json`)
 }
 
 function liveMonsters() {

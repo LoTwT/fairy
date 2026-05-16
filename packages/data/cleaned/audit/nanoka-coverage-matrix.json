@@ -6911,12 +6911,12 @@
         "/zzz/latest",
         "/zzz/available"
       ],
-      "transformRule": "derive SourceDocument rows from source registry entries: sourceVersion=configuredLiveVersion and fetchedAt from registry; contentHash, liveVersionRef, approvedLiveVersions[], and URL allowlist remain in data/source-registry.json and are verified by CI",
+      "transformRule": "derive SourceDocument rows from source registry entries: sourceVersion=configuredLiveVersion and fetchedAt from registry; contentHash, liveVersionRef, approvedLiveVersions[], and URL allowlist remain in packages/data/source-registry.json and are verified by CI",
       "sampleEntity": "nanoka-manifest",
       "rawAvailable": true,
       "promotable": true,
       "blockedBy": [],
-      "notes": "Task #148 closes the source-registry contract: data/source-registry.json and package mirror are byte-identical, contentHash is sha256-prefixed, configuredLiveVersion is approved, and verify:source-registry gates the live-version policy."
+      "notes": "Task #148 closes the source-registry contract: packages/data/source-registry.json and package mirror are byte-identical, contentHash is sha256-prefixed, configuredLiveVersion is approved, and verify:source-registry gates the live-version policy."
     },
     {
       "fieldId": "metadata.sourceRefs",
@@ -6958,7 +6958,7 @@
         "field:additional-approved-live-version-required-for-non-empty-history"
       ],
       "notes": "No dedicated patch-note/changelog prose endpoint was found in PR #54. This row represents snapshot-derived numeric diff history only; officialPatchNoteText stays not-found and prose changelog is not fabricated.",
-      "auditArtifact": "data/cleaned/audit/nanoka-snapshot-diff-history.json"
+      "auditArtifact": "packages/data/cleaned/audit/nanoka-snapshot-diff-history.json"
     },
     {
       "fieldId": "metadata.aliases",
@@ -7050,7 +7050,7 @@
         "nanoka-character-starlight-billy-live-1531",
         "nanoka-character-promeia-live-1541"
       ],
-      "auditArtifact": "data/cleaned/audit/nanoka-character-batch-audit.json",
+      "auditArtifact": "packages/data/cleaned/audit/nanoka-character-batch-audit.json",
       "notes": "V1.2.x PR-A batch covers all 53 current-live characters in runtime GameData.agents; no new golden anchors."
     },
     {
@@ -7127,7 +7127,7 @@
         "nanoka-character-starlight-billy-live-1531",
         "nanoka-character-promeia-live-1541"
       ],
-      "auditArtifact": "data/cleaned/audit/nanoka-character-batch-audit.json",
+      "auditArtifact": "packages/data/cleaned/audit/nanoka-character-batch-audit.json",
       "notes": "V1.2.x PR-A batch covers all 53 current-live characters in runtime GameData.agents; no new golden anchors."
     },
     {
@@ -7207,7 +7207,7 @@
         "nanoka-character-starlight-billy-live-1531",
         "nanoka-character-promeia-live-1541"
       ],
-      "auditArtifact": "data/cleaned/audit/nanoka-character-batch-audit.json"
+      "auditArtifact": "packages/data/cleaned/audit/nanoka-character-batch-audit.json"
     },
     {
       "fieldId": "agents.promotionExtraStats",
@@ -7371,7 +7371,7 @@
         "nanoka-character-yixuan-live-1371"
       ],
       "notes": "Phase 3 Step 1 adds approved-live Nicole and Yanagi character detail samples for G22/G23 passive candidate coverage; typed modifier template remains unresolved before formal promotion.",
-      "auditArtifact": "data/cleaned/audit/nanoka-character-batch-audit.json"
+      "auditArtifact": "packages/data/cleaned/audit/nanoka-character-batch-audit.json"
     },
     {
       "fieldId": "adrenaline.maxAdrenaline",
@@ -7497,7 +7497,7 @@
         "nanoka-bangboo-birkblick-live-54020",
         "nanoka-bangboo-sprout-live-54021"
       ],
-      "auditArtifact": "data/cleaned/audit/nanoka-bangboo-batch-audit.json",
+      "auditArtifact": "packages/data/cleaned/audit/nanoka-bangboo-batch-audit.json",
       "notes": "V1.2.1 batch import retains every approved-live Bangboo detail from bangboo.json and verifies runtime panel/skill promotion with nanoka-bangboo-batch-audit.json; no new golden anchors are added by owner decision."
     },
     {
@@ -7565,7 +7565,7 @@
         "nanoka-bangboo-sprout-live-54021"
       ],
       "notes": "V1.2.1 batch import retains every approved-live Bangboo detail from bangboo.json and verifies runtime panel/skill promotion with nanoka-bangboo-batch-audit.json; no new golden anchors are added by owner decision.",
-      "auditArtifact": "data/cleaned/audit/nanoka-bangboo-batch-audit.json"
+      "auditArtifact": "packages/data/cleaned/audit/nanoka-bangboo-batch-audit.json"
     },
     {
       "fieldId": "bangboos.skillSegments",
@@ -7628,7 +7628,7 @@
         "nanoka-bangboo-sprout-live-54021"
       ],
       "notes": "V1.2.1 batch import retains every approved-live Bangboo detail from bangboo.json and verifies runtime panel/skill promotion with nanoka-bangboo-batch-audit.json; no new golden anchors are added by owner decision.",
-      "auditArtifact": "data/cleaned/audit/nanoka-bangboo-batch-audit.json"
+      "auditArtifact": "packages/data/cleaned/audit/nanoka-bangboo-batch-audit.json"
     },
     {
       "fieldId": "bangboos.element",
@@ -7688,7 +7688,7 @@
         "nanoka-bangboo-birkblick-live-54020",
         "nanoka-bangboo-sprout-live-54021"
       ],
-      "auditArtifact": "data/cleaned/audit/nanoka-bangboo-batch-audit.json"
+      "auditArtifact": "packages/data/cleaned/audit/nanoka-bangboo-batch-audit.json"
     },
     {
       "fieldId": "bangboos.teamPassiveModifiers",
@@ -8002,7 +8002,7 @@
         "nanoka-monster-live-990167",
         "nanoka-monster-live-990174"
       ],
-      "auditArtifact": "data/cleaned/audit/nanoka-enemy-batch-audit.json",
+      "auditArtifact": "packages/data/cleaned/audit/nanoka-enemy-batch-audit.json",
       "notes": "V1.2.x PR-D imports all configured-live enemies; no version bump and no new golden anchors."
     },
     {
@@ -8298,7 +8298,7 @@
         "nanoka-monster-live-990167",
         "nanoka-monster-live-990174"
       ],
-      "auditArtifact": "data/cleaned/audit/nanoka-enemy-batch-audit.json",
+      "auditArtifact": "packages/data/cleaned/audit/nanoka-enemy-batch-audit.json",
       "notes": "Runtime promotes enemy identity/rank only; selected stats and skipped variants are retained in nanoka-enemy-batch-audit.json."
     },
     {
@@ -8592,7 +8592,7 @@
         "nanoka-monster-live-990167",
         "nanoka-monster-live-990174"
       ],
-      "auditArtifact": "data/cleaned/audit/nanoka-enemy-batch-audit.json"
+      "auditArtifact": "packages/data/cleaned/audit/nanoka-enemy-batch-audit.json"
     },
     {
       "fieldId": "enemies.resistance",
@@ -8886,7 +8886,7 @@
         "nanoka-monster-live-990167",
         "nanoka-monster-live-990174"
       ],
-      "auditArtifact": "data/cleaned/audit/nanoka-enemy-batch-audit.json"
+      "auditArtifact": "packages/data/cleaned/audit/nanoka-enemy-batch-audit.json"
     },
     {
       "fieldId": "enemies.anomalyThresholds",
@@ -9179,7 +9179,7 @@
         "nanoka-monster-live-990167",
         "nanoka-monster-live-990174"
       ],
-      "auditArtifact": "data/cleaned/audit/nanoka-enemy-batch-audit.json"
+      "auditArtifact": "packages/data/cleaned/audit/nanoka-enemy-batch-audit.json"
     },
     {
       "fieldId": "enemies.dazeRecovery",
@@ -9474,7 +9474,7 @@
         "nanoka-monster-live-990167",
         "nanoka-monster-live-990174"
       ],
-      "auditArtifact": "data/cleaned/audit/nanoka-enemy-batch-audit.json"
+      "auditArtifact": "packages/data/cleaned/audit/nanoka-enemy-batch-audit.json"
     },
     {
       "fieldId": "enemies.specialRules",
@@ -9767,7 +9767,7 @@
         "nanoka-monster-live-990167",
         "nanoka-monster-live-990174"
       ],
-      "auditArtifact": "data/cleaned/audit/nanoka-enemy-batch-audit.json"
+      "auditArtifact": "packages/data/cleaned/audit/nanoka-enemy-batch-audit.json"
     },
     {
       "fieldId": "wEngines.identity",
@@ -9879,7 +9879,7 @@
         "nanoka-weapon-live-14153",
         "nanoka-weapon-live-14154"
       ],
-      "auditArtifact": "data/cleaned/audit/nanoka-wengine-batch-audit.json",
+      "auditArtifact": "packages/data/cleaned/audit/nanoka-wengine-batch-audit.json",
       "notes": "V1.2.x PR-B covers all 89 current-live W-Engines with no version bump and no new golden anchors."
     },
     {
@@ -9991,7 +9991,7 @@
         "nanoka-weapon-live-14153",
         "nanoka-weapon-live-14154"
       ],
-      "auditArtifact": "data/cleaned/audit/nanoka-wengine-batch-audit.json",
+      "auditArtifact": "packages/data/cleaned/audit/nanoka-wengine-batch-audit.json",
       "notes": "V1.2.x PR-B promotes numeric attack/substat values only; passive talents remain typed-template pending; no new golden anchors."
     },
     {
@@ -10104,7 +10104,7 @@
         "nanoka-weapon-live-14153",
         "nanoka-weapon-live-14154"
       ],
-      "auditArtifact": "data/cleaned/audit/nanoka-wengine-batch-audit.json",
+      "auditArtifact": "packages/data/cleaned/audit/nanoka-wengine-batch-audit.json",
       "notes": "V1.2.x PR-B retains talents for all 89 W-Engines but does not promote passive modifiers without deterministic typed templates; no new golden anchors."
     },
     {
@@ -10126,7 +10126,7 @@
       "rawAvailable": true,
       "promotable": true,
       "blockedBy": [],
-      "auditArtifact": "data/cleaned/audit/nanoka-drive-disc-batch-audit.json",
+      "auditArtifact": "packages/data/cleaned/audit/nanoka-drive-disc-batch-audit.json",
       "supportingSampleEntities": [
         "nanoka-equipment-woodpecker-live-31000",
         "nanoka-equipment-live-31100",
@@ -10177,7 +10177,7 @@
       "blockedBy": [
         "typed-modifier-template-required"
       ],
-      "auditArtifact": "data/cleaned/audit/nanoka-drive-disc-batch-audit.json",
+      "auditArtifact": "packages/data/cleaned/audit/nanoka-drive-disc-batch-audit.json",
       "supportingSampleEntities": [
         "nanoka-equipment-woodpecker-live-31000",
         "nanoka-equipment-live-31100",
@@ -10230,7 +10230,7 @@
       "blockedBy": [
         "scope:user-provided-snapshot-boundary"
       ],
-      "auditArtifact": "data/cleaned/audit/nanoka-drive-disc-slot-stat-audit.json",
+      "auditArtifact": "packages/data/cleaned/audit/nanoka-drive-disc-slot-stat-audit.json",
       "notes": "Task #154 exhausted approved live nanoka equipment index/detail and candidate slot/stat-table endpoints. Lo-user decision on 2026-05-15 locks option (a): V0.1.0 only needs final user-provided panel plus Drive Disc set effects, so this row is excluded from Phase 3 blocking drift and deferred to V1.x validation/recommendation scope."
     },
     {
@@ -10347,7 +10347,7 @@
         "nanoka-boss-live-69037",
         "nanoka-boss-live-69038"
       ],
-      "auditArtifact": "data/cleaned/audit/nanoka-da-current-batch-audit.json"
+      "auditArtifact": "packages/data/cleaned/audit/nanoka-da-current-batch-audit.json"
     },
     {
       "fieldId": "deadlyAssault.historicalPeriods",
@@ -10375,7 +10375,7 @@
       "supportingSampleEntities": [
         "nanoka-da-history-manifest"
       ],
-      "auditArtifact": "data/cleaned/audit/nanoka-da-historical-batch-audit.json"
+      "auditArtifact": "packages/data/cleaned/audit/nanoka-da-historical-batch-audit.json"
     },
     {
       "fieldId": "modifiers.formalTemplateContract",
@@ -10461,7 +10461,7 @@
       "blockedBy": [
         "implementation-owned-runtime-formula"
       ],
-      "auditArtifact": "data/cleaned/audit/nanoka-disorder-formula-audit.json",
+      "auditArtifact": "packages/data/cleaned/audit/nanoka-disorder-formula-audit.json",
       "notes": "Task #156 classifies this as implementation-owned after nanoka failed-evidence audit. Existing trace sourceAnchor remains guide-3.4.1 and executable replay remains G15."
     },
     {
@@ -10479,7 +10479,7 @@
       "blockedBy": [
         "implementation-owned-runtime-formula"
       ],
-      "auditArtifact": "data/cleaned/audit/nanoka-disorder-daze-level-audit.json",
+      "auditArtifact": "packages/data/cleaned/audit/nanoka-disorder-daze-level-audit.json",
       "notes": "Task #158 classifies this as implementation-owned after nanoka failed-evidence audit. Existing trace sourceAnchor remains guide-3.4.2 and executable replay remains G16."
     },
     {
