@@ -10,6 +10,7 @@ Fairy 是绝区零 1-3 代理人静态快照伤害计算器。V1 目标是 `@ran
 - 数据契约：[data-contract/](data-contract/)
 - 架构与工程：[architecture/](architecture/)
 - 数据来源：[data-source/](data-source/)
+- AI plugin V1.2.2 plan：[ai-plugin/architecture.md](ai-plugin/architecture.md)
 - 发布流程：[release/README.md](release/README.md)
 - QA 策略：[qa/](qa/)
 - UX 文案与场景：[ux/](ux/)

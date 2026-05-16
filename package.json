@@ -7,7 +7,7 @@
   "type": "module",
   "scripts": {
     "build": "pnpm -r --if-present build",
-    "check": "node scripts/ensure-core-build.mjs && pnpm -r --if-present check",
+    "check": "node scripts/ensure-core-build.mjs && pnpm verify:ai-plugin && pnpm -r --if-present check",
     "fairy": "node packages/cli/bin/fairy.js",
     "fairy:s1": "node packages/cli/bin/fairy.js calc examples/snapshots/s1-yixuan-sheer.json --lang zh --pretty",
     "fairy:s2": "node packages/cli/bin/fairy.js calc examples/snapshots/s2-yanagi-disorder.json --lang zh --pretty",
@@ -15,7 +15,8 @@
     "changelog": "node scripts/update-changelog.mjs",
     "prepare": "simple-git-hooks",
     "release:bump": "bumpp",
-    "test": "node scripts/ensure-core-build.mjs && pnpm -r --if-present test"
+    "test": "node scripts/ensure-core-build.mjs && pnpm -r --if-present test",
+    "verify:ai-plugin": "node scripts/verify-ai-plugin.mjs"
   },
   "simple-git-hooks": {
     "commit-msg": "pnpm exec commitlint --edit \"$1\""
