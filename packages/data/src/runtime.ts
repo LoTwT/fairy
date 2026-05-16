@@ -1,19 +1,28 @@
-import runtimeGameDataJson from "../cleaned/runtime/game-data.json" with { type: "json" }
+import { readFileSync } from "node:fs"
+import { fileURLToPath } from "node:url"
 import {
   assertNanokaRuntimeGameDataArtifact,
   type NanokaRuntimeGameDataArtifact,
 } from "./runtime-policy"
 
-export const nanokaRuntimeGameDataArtifact = runtimeGameDataJson as unknown as NanokaRuntimeGameDataArtifact
+const runtimeGameDataPath = fileURLToPath(new URL("../cleaned/runtime/game-data.json", import.meta.url))
+
+let cachedNanokaRuntimeGameDataArtifact: NanokaRuntimeGameDataArtifact | undefined
+
+export function loadNanokaRuntimeGameDataArtifact() {
+  cachedNanokaRuntimeGameDataArtifact ??= JSON.parse(readFileSync(runtimeGameDataPath, "utf8")) as NanokaRuntimeGameDataArtifact
+  assertNanokaRuntimeGameDataArtifact(cachedNanokaRuntimeGameDataArtifact)
+  return cachedNanokaRuntimeGameDataArtifact
+}
+
+export const nanokaRuntimeGameDataArtifact = loadNanokaRuntimeGameDataArtifact()
 
 export function getNanokaRuntimeGameData() {
-  assertNanokaRuntimeGameDataArtifact(nanokaRuntimeGameDataArtifact)
-  return nanokaRuntimeGameDataArtifact.data
+  return loadNanokaRuntimeGameDataArtifact().data
 }
 
 export function getNanokaRuntimeSourcePolicy() {
-  assertNanokaRuntimeGameDataArtifact(nanokaRuntimeGameDataArtifact)
-  return nanokaRuntimeGameDataArtifact.runtimeSourcePolicy
+  return loadNanokaRuntimeGameDataArtifact().runtimeSourcePolicy
 }
 
 export {

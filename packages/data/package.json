@@ -52,6 +52,7 @@
     "verify:nanoka": "node scripts/nanoka-source.mjs verify --snapshot 2.8",
     "verify:nanoka-da-history": "node scripts/nanoka-da-history.mjs verify",
     "verify:nanoka-runtime": "node ../../scripts/ensure-core-build.mjs && tsx scripts/nanoka-runtime-game-data.ts verify",
+    "verify:package-size": "node scripts/verify-package-size.mjs",
     "verify:source-migration": "node scripts/source-migration-drift.mjs verify",
     "verify:source-registry": "node scripts/verify-source-registry.mjs"
   },
