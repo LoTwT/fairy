@@ -11,7 +11,7 @@ V1.2.3 inherits the V1.2.2 tri-layer i18n contract (`docs/ai-plugin/prompt-templ
 
 | Layer | Lang | V1.2.3 contents |
 |---|---|---|
-| Layer 1 — Canonical | EN | `fairy-vision` SKILL.md, source-detection prompt, per-source field maps, confidence threshold metadata |
+| Layer 1 — Canonical | EN | `fairy-snapshot` image-entry contract, source-detection prompt, per-source field maps, confidence threshold metadata |
 | Layer 2 — User-facing | zh + en mirror | Review/edit gate display, partial-extraction asks, visual ambiguity dialogs, NL fallback copy |
 | Layer 3 — Data/query | zh only at MVP (per Q1=A / Q2=A1.a) | Field-label normalization tables for 工坊 + 米游社 zh labels → canonical BattleSnapshot field ids |
 
@@ -19,20 +19,25 @@ zh-only Layer 3 at MVP is by design — both supported sources are Chinese-only 
 
 ---
 
-## 2. Canonical — fairy-vision SKILL.md
+## 2. Canonical — fairy-snapshot image entry
 
-`fairy-vision` is a new internal skill introduced in V1.2.3. It is invoked by the vision input trigger and converges back into `fairy-snapshot` for ask-user dialog on missing fields.
+V1.2.3 extends the existing `fairy-snapshot` skill with an image input entry. It is invoked by a vision input trigger and then uses the same ask-user dialog and `fairy-calc` handoff as the V1.2.2 text flow.
 
 ```yaml
 ---
-name: fairy-vision
+name: fairy-snapshot
 displayName:
-  en: Read screenshot
-  zh: 识别截图
+  en: Build snapshot
+  zh: 生成快照
 description: >
   Read a community-tool ZZZ build screenshot (绝区零工坊 or 米游社) and produce
-  a BattleSnapshot draft + draftMetadata. Hands off to fairy-snapshot for any
-  remaining missing fields, then fairy-calc for validation/calculation.
+  a BattleSnapshot draft + draftMetadata. Uses the existing fairy-snapshot
+  ask-user policy for any remaining missing fields, then fairy-calc for
+  validation/calculation.
+imageEntry:
+  displayName:
+    en: Read screenshot
+    zh: 识别截图
 trigger:
   phrases:
     - "read this screenshot"
@@ -52,7 +57,7 @@ output:
     sourceDetection: { source: "工坊" | "米游社" | "unknown", confidence: 0..1 }
     perFieldConfidence: map of field path → confidence bucket (high|medium|low|missing)
 chains:
-  next: fairy-snapshot (for any tier-1 missing fields) → fairy-calc
+  next: fairy-snapshot ask-user policy (for any tier-1 missing fields) → fairy-calc
 fallback:
   trigger: source=unknown OR perFieldConfidence majority low OR user-request
   destination: fairy-snapshot NL flow
@@ -63,7 +68,7 @@ fallback:
 
 ## 3. Canonical — source detection prompt
 
-This is the prompt that runs first inside `fairy-vision`. It does **only** source identification, not field extraction.
+This is the prompt that runs first inside the `fairy-snapshot` image entry. It does **only** source identification, not field extraction.
 
 ```
 You are looking at one screenshot. Your task is to identify which of these two

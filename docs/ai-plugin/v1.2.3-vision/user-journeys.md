@@ -63,7 +63,7 @@ User (NL or empty + image attachment):
   "帮我算这个的伤害，敌人是本期 DA boss 60 级"
 
 AI (auto-detect lang → zh; auto-detect source from image):
-  invokes fairy-vision (new internal skill, V1.2.3)
+  invokes the fairy-snapshot image entry
     ↓ source detection (工坊 / 米游社 / unknown)
     ↓ layout-specific field extraction (panel total, weapon, drive disc set + main + substats with roll counts)
     ↓ per-field confidence scoring
@@ -152,7 +152,7 @@ AI must not attempt to parse fields from an unidentified source layout — false
 
 ### Future sources
 
-V1.2.x+ patches may add support for: hoyo-pad in-app screenshots, NGA build cards, 米哈游通行证 web panel, raw in-game screenshots (requires OCR). Each new source is a separate patch with its own layout map fixture; no source goes live until it has a golden screenshot fixture and a V-G3 acceptance pass.
+V1.2.x+ patches may add support for: hoyo-pad in-app screenshots, NGA build cards, 米哈游通行证 web panel, raw in-game screenshots (requires OCR). Each new source is a separate patch with its own layout map fixture; no source goes live until it has a golden screenshot fixture and a V-G1 / V-G2 / V-G3 acceptance pass.
 
 ### PII recognition is non-conditional
 
@@ -315,7 +315,7 @@ Cross-cutting per Q3 = A2.a. This section consolidates the PII contract for QA's
 
 ### QA assertion handoff
 
-QA V-G3 (vision-data-integrity gate) must include:
+QA V-G4 (Privacy and PII Exclusion) must include:
 1. Vision pipeline reads UID/username from sample fixtures.
 2. Review/edit gate display includes PII (marked audit-only).
 3. Post-confirm `BattleSnapshot` JSON contains no UID/username.
@@ -389,7 +389,7 @@ QA validates the user journey through `acceptance.md` V-G1..V-G5 (new V1.2.3 gat
 
 ## Appendix B · Glossary additions
 
-- **fairy-vision** — V1.2.3 internal skill that reads a screenshot and produces a `BattleSnapshot` draft + `draftMetadata`. Converges back into V1.2.2 `fairy-snapshot` for ask-user and `fairy-calc` for validation.
+- **fairy-snapshot image entry** — V1.2.3 extension to the existing `fairy-snapshot` skill. It reads a supported screenshot and produces a `BattleSnapshot` draft + `draftMetadata`, then uses the same ask-user and `fairy-calc` handoff as the V1.2.2 text flow.
 - **draftMetadata.extractedPII** — session-ephemeral audit field carrying UID / username from vision extraction. Dropped at confirm.
 - **draftMetadata.evidence** — audit field carrying base/bonus stat split (and other vision-only-visible facts) for user review. Not consumed by calc engine.
 - **Source detection** — vision pipeline's first step: identify which community tool produced the screenshot. Gates layout-specific field extraction.
