@@ -6,9 +6,8 @@ import { deriveNanokaSnapshotDiffHistory, type NanokaSnapshotDiffInput } from ".
 
 const packageDir = fileURLToPath(new URL("..", import.meta.url))
 const repoRoot = join(packageDir, "../..")
-const rootRegistryPath = join(repoRoot, "data/source-registry.json")
-const rootArtifactPath = join(repoRoot, "data/cleaned/audit/nanoka-snapshot-diff-history.json")
-const packageArtifactPath = join(packageDir, "cleaned/audit/nanoka-snapshot-diff-history.json")
+const sourceRegistryPath = join(repoRoot, "packages/data/source-registry.json")
+const artifactPath = join(repoRoot, "packages/data/cleaned/audit/nanoka-snapshot-diff-history.json")
 
 function readJson<T>(path: string): T {
   return JSON.parse(readFileSync(path, "utf8")) as T
@@ -53,7 +52,7 @@ function nanokaRegistrySource() {
       approvedLiveVersions: string[]
       contentHash: string
     }>
-  }>(rootRegistryPath)
+  }>(sourceRegistryPath)
   const source = registry.sources.find(item => item.sourceId === "nanoka-zzz")
   if (source === undefined)
     throw new Error("Missing nanoka-zzz source registry entry")
@@ -61,7 +60,7 @@ function nanokaRegistrySource() {
 }
 
 function buildApprovedSnapshotInput(version: string, contentHash: string): NanokaSnapshotDiffInput {
-  const snapshotRoot = join(repoRoot, "data/source/raw/nanoka/zzz", version)
+  const snapshotRoot = join(repoRoot, "packages/data/source/raw/nanoka/zzz", version)
   const manifest = readJson<{
     zzz: {
       live: string
@@ -136,9 +135,8 @@ function main() {
     },
   }
 
-  writeJson(rootArtifactPath, artifact)
-  writeJson(packageArtifactPath, artifact)
-  console.log(`wrote ${rootArtifactPath}`)
+  writeJson(artifactPath, artifact)
+  console.log(`wrote ${artifactPath}`)
 }
 
 main()

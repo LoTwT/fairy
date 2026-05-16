@@ -5,33 +5,20 @@ import { fileURLToPath } from "node:url"
 const packageDir = fileURLToPath(new URL("..", import.meta.url))
 const repoRoot = join(packageDir, "../..")
 
-const rootRegistryPath = join(repoRoot, "data/source-registry.json")
-const packageRegistryPath = join(packageDir, "source-registry.json")
-const matrixPath = join(repoRoot, "data/cleaned/audit/nanoka-coverage-matrix.json")
-const rootSnapshotDiffHistoryPath = join(repoRoot, "data/cleaned/audit/nanoka-snapshot-diff-history.json")
-const packageSnapshotDiffHistoryPath = join(packageDir, "cleaned/audit/nanoka-snapshot-diff-history.json")
-const rootDriveDiscSlotStatAuditPath = join(repoRoot, "data/cleaned/audit/nanoka-drive-disc-slot-stat-audit.json")
-const packageDriveDiscSlotStatAuditPath = join(packageDir, "cleaned/audit/nanoka-drive-disc-slot-stat-audit.json")
-const rootDisorderFormulaAuditPath = join(repoRoot, "data/cleaned/audit/nanoka-disorder-formula-audit.json")
-const packageDisorderFormulaAuditPath = join(packageDir, "cleaned/audit/nanoka-disorder-formula-audit.json")
-const rootDisorderDazeLevelAuditPath = join(repoRoot, "data/cleaned/audit/nanoka-disorder-daze-level-audit.json")
-const packageDisorderDazeLevelAuditPath = join(packageDir, "cleaned/audit/nanoka-disorder-daze-level-audit.json")
-const rootRuntimeGameDataPath = join(repoRoot, "data/cleaned/runtime/game-data.json")
-const packageRuntimeGameDataPath = join(packageDir, "cleaned/runtime/game-data.json")
-const rootCharacterBatchAuditPath = join(repoRoot, "data/cleaned/audit/nanoka-character-batch-audit.json")
-const packageCharacterBatchAuditPath = join(packageDir, "cleaned/audit/nanoka-character-batch-audit.json")
-const rootBangbooBatchAuditPath = join(repoRoot, "data/cleaned/audit/nanoka-bangboo-batch-audit.json")
-const packageBangbooBatchAuditPath = join(packageDir, "cleaned/audit/nanoka-bangboo-batch-audit.json")
-const rootWEngineBatchAuditPath = join(repoRoot, "data/cleaned/audit/nanoka-wengine-batch-audit.json")
-const packageWEngineBatchAuditPath = join(packageDir, "cleaned/audit/nanoka-wengine-batch-audit.json")
-const rootDriveDiscBatchAuditPath = join(repoRoot, "data/cleaned/audit/nanoka-drive-disc-batch-audit.json")
-const packageDriveDiscBatchAuditPath = join(packageDir, "cleaned/audit/nanoka-drive-disc-batch-audit.json")
-const rootEnemyBatchAuditPath = join(repoRoot, "data/cleaned/audit/nanoka-enemy-batch-audit.json")
-const packageEnemyBatchAuditPath = join(packageDir, "cleaned/audit/nanoka-enemy-batch-audit.json")
-const rootDeadlyAssaultCurrentBatchAuditPath = join(repoRoot, "data/cleaned/audit/nanoka-da-current-batch-audit.json")
-const packageDeadlyAssaultCurrentBatchAuditPath = join(packageDir, "cleaned/audit/nanoka-da-current-batch-audit.json")
-const rootDeadlyAssaultHistoricalBatchAuditPath = join(repoRoot, "data/cleaned/audit/nanoka-da-historical-batch-audit.json")
-const packageDeadlyAssaultHistoricalBatchAuditPath = join(packageDir, "cleaned/audit/nanoka-da-historical-batch-audit.json")
+const sourceRegistryPath = join(repoRoot, "packages/data/source-registry.json")
+const matrixPath = join(repoRoot, "packages/data/cleaned/audit/nanoka-coverage-matrix.json")
+const snapshotDiffHistoryPath = join(repoRoot, "packages/data/cleaned/audit/nanoka-snapshot-diff-history.json")
+const driveDiscSlotStatAuditPath = join(repoRoot, "packages/data/cleaned/audit/nanoka-drive-disc-slot-stat-audit.json")
+const disorderFormulaAuditPath = join(repoRoot, "packages/data/cleaned/audit/nanoka-disorder-formula-audit.json")
+const disorderDazeLevelAuditPath = join(repoRoot, "packages/data/cleaned/audit/nanoka-disorder-daze-level-audit.json")
+const runtimeGameDataPath = join(repoRoot, "packages/data/cleaned/runtime/game-data.json")
+const characterBatchAuditPath = join(repoRoot, "packages/data/cleaned/audit/nanoka-character-batch-audit.json")
+const bangbooBatchAuditPath = join(repoRoot, "packages/data/cleaned/audit/nanoka-bangboo-batch-audit.json")
+const wEngineBatchAuditPath = join(repoRoot, "packages/data/cleaned/audit/nanoka-wengine-batch-audit.json")
+const driveDiscBatchAuditPath = join(repoRoot, "packages/data/cleaned/audit/nanoka-drive-disc-batch-audit.json")
+const enemyBatchAuditPath = join(repoRoot, "packages/data/cleaned/audit/nanoka-enemy-batch-audit.json")
+const deadlyAssaultCurrentBatchAuditPath = join(repoRoot, "packages/data/cleaned/audit/nanoka-da-current-batch-audit.json")
+const deadlyAssaultHistoricalBatchAuditPath = join(repoRoot, "packages/data/cleaned/audit/nanoka-da-historical-batch-audit.json")
 
 const historicalDeadlyAssaultSourceVersions = [
   "2.8.12",
@@ -69,17 +56,12 @@ function sleep(ms) {
   Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms)
 }
 
-function readMirroredText(rootPath, packagePath, label) {
+function readArtifactText(path, label) {
   let lastError
 
   for (let attempt = 0; attempt < 5; attempt += 1) {
     try {
-      const rootText = readFileSync(rootPath, "utf8")
-      const packageText = readFileSync(packagePath, "utf8")
-      if (rootText === packageText)
-        return { rootText, packageText }
-
-      lastError = new Error(`${label} contents differ`)
+      return readFileSync(path, "utf8")
     }
     catch (error) {
       lastError = error
@@ -88,7 +70,7 @@ function readMirroredText(rootPath, packagePath, label) {
     sleep(25)
   }
 
-  throw new Error(`${label} must mirror data artifact byte-for-byte${lastError instanceof Error ? `: ${lastError.message}` : ""}`)
+  throw new Error(`${label} must be readable from packages/data${lastError instanceof Error ? `: ${lastError.message}` : ""}`)
 }
 
 function assert(condition, message) {
@@ -292,11 +274,11 @@ function validateMatrixAgainstRegistry(matrix, registry) {
   for (const fieldId of ["bangboos.identity", "bangboos.basePanel", "bangboos.skillSegments"]) {
     const row = resourceRows.get(fieldId)
     assert(row?.sampleEntity === "nanoka-bangboo-index-live-2.8", `${fieldId}: V1.2.1 batch row must use the approved-live index sample`)
-    assert(row?.auditArtifact === "data/cleaned/audit/nanoka-bangboo-batch-audit.json", `${fieldId}: V1.2.1 batch row must point to the batch audit`)
+    assert(row?.auditArtifact === "packages/data/cleaned/audit/nanoka-bangboo-batch-audit.json", `${fieldId}: V1.2.1 batch row must point to the batch audit`)
     assert((row?.supportingSampleEntities ?? []).length === 39, `${fieldId}: V1.2.1 batch row must support all 39 Bangboos`)
   }
   assert((bangbooElementRow.supportingSampleEntities ?? []).length === 39, "bangboos.element: V1.2.1 audit must cover all retained Bangboos")
-  assert(bangbooElementRow.auditArtifact === "data/cleaned/audit/nanoka-bangboo-batch-audit.json", "bangboos.element: V1.2.1 row must point to the batch audit")
+  assert(bangbooElementRow.auditArtifact === "packages/data/cleaned/audit/nanoka-bangboo-batch-audit.json", "bangboos.element: V1.2.1 row must point to the batch audit")
 
   const characterIndexSample = sampleById.get("nanoka-character-index-live-2.8")
   assert(characterIndexSample !== undefined, "Character batch: missing approved-live character index sample")
@@ -307,7 +289,7 @@ function validateMatrixAgainstRegistry(matrix, registry) {
   for (const fieldId of ["agents.identity", "agents.enums", "agents.basePanel"]) {
     const row = resourceRows.get(fieldId)
     assert(row?.sampleEntity === "nanoka-character-index-live-2.8", `${fieldId}: V1.2.x batch row must use the approved-live character index sample`)
-    assert(row?.auditArtifact === "data/cleaned/audit/nanoka-character-batch-audit.json", `${fieldId}: V1.2.x batch row must point to the character batch audit`)
+    assert(row?.auditArtifact === "packages/data/cleaned/audit/nanoka-character-batch-audit.json", `${fieldId}: V1.2.x batch row must point to the character batch audit`)
     assert((row?.supportingSampleEntities ?? []).length === 53, `${fieldId}: V1.2.x batch row must support all 53 characters`)
   }
 
@@ -320,14 +302,14 @@ function validateMatrixAgainstRegistry(matrix, registry) {
   for (const fieldId of ["wEngines.identity", "wEngines.baseStats"]) {
     const row = resourceRows.get(fieldId)
     assert(row?.sampleEntity === "nanoka-weapon-index-live-2.8", `${fieldId}: V1.2.x batch row must use the approved-live W-Engine index sample`)
-    assert(row?.auditArtifact === "data/cleaned/audit/nanoka-wengine-batch-audit.json", `${fieldId}: V1.2.x batch row must point to the W-Engine batch audit`)
+    assert(row?.auditArtifact === "packages/data/cleaned/audit/nanoka-wengine-batch-audit.json", `${fieldId}: V1.2.x batch row must point to the W-Engine batch audit`)
     assert((row?.supportingSampleEntities ?? []).length === 89, `${fieldId}: V1.2.x batch row must support all 89 W-Engines`)
   }
   const wEnginePassiveRow = resourceRows.get("wEngines.passiveModifiers")
   assert(wEnginePassiveRow !== undefined, "wEngines.passiveModifiers: missing W-Engine passive modifier row")
   assert(wEnginePassiveRow.promotable === false, "wEngines.passiveModifiers must stay not-promotable until typed modifier templates exist")
   assert(wEnginePassiveRow.blockedBy?.includes("typed-modifier-template-required"), "wEngines.passiveModifiers must keep typed modifier blocker")
-  assert(wEnginePassiveRow.auditArtifact === "data/cleaned/audit/nanoka-wengine-batch-audit.json", "wEngines.passiveModifiers must point to the W-Engine batch audit")
+  assert(wEnginePassiveRow.auditArtifact === "packages/data/cleaned/audit/nanoka-wengine-batch-audit.json", "wEngines.passiveModifiers must point to the W-Engine batch audit")
   assert((wEnginePassiveRow.supportingSampleEntities ?? []).length === 89, "wEngines.passiveModifiers row must support all 89 W-Engines")
 
   const driveDiscIndexSample = sampleById.get("nanoka-equipment-index-live-2.8")
@@ -339,14 +321,14 @@ function validateMatrixAgainstRegistry(matrix, registry) {
   const driveDiscIdentityRow = resourceRows.get("driveDiscs.identity")
   assert(driveDiscIdentityRow !== undefined, "driveDiscs.identity: missing Drive Disc identity row")
   assert(driveDiscIdentityRow.sampleEntity === "nanoka-equipment-index-live-2.8", "driveDiscs.identity: V1.2.x batch row must use the approved-live equipment index sample")
-  assert(driveDiscIdentityRow.auditArtifact === "data/cleaned/audit/nanoka-drive-disc-batch-audit.json", "driveDiscs.identity: V1.2.x batch row must point to the Drive Disc batch audit")
+  assert(driveDiscIdentityRow.auditArtifact === "packages/data/cleaned/audit/nanoka-drive-disc-batch-audit.json", "driveDiscs.identity: V1.2.x batch row must point to the Drive Disc batch audit")
   assert((driveDiscIdentityRow.supportingSampleEntities ?? []).length === 26, "driveDiscs.identity row must support all 26 Drive Disc sets")
   const driveDiscSetRow = resourceRows.get("driveDiscs.setModifiers")
   assert(driveDiscSetRow !== undefined, "driveDiscs.setModifiers: missing Drive Disc set modifier row")
   assert(driveDiscSetRow.sampleEntity === "nanoka-equipment-index-live-2.8", "driveDiscs.setModifiers: V1.2.x batch row must use the approved-live equipment index sample")
   assert(driveDiscSetRow.promotable === false, "driveDiscs.setModifiers must stay not-promotable until typed modifier templates exist")
   assert(driveDiscSetRow.blockedBy?.includes("typed-modifier-template-required"), "driveDiscs.setModifiers must keep typed modifier blocker")
-  assert(driveDiscSetRow.auditArtifact === "data/cleaned/audit/nanoka-drive-disc-batch-audit.json", "driveDiscs.setModifiers must point to the Drive Disc batch audit")
+  assert(driveDiscSetRow.auditArtifact === "packages/data/cleaned/audit/nanoka-drive-disc-batch-audit.json", "driveDiscs.setModifiers must point to the Drive Disc batch audit")
   assert((driveDiscSetRow.supportingSampleEntities ?? []).length === 26, "driveDiscs.setModifiers row must support all 26 Drive Disc sets")
 
   const driveDiscSlotRow = resourceRows.get("driveDiscs.slotAndSubstatTables")
@@ -357,7 +339,7 @@ function validateMatrixAgainstRegistry(matrix, registry) {
   assert(driveDiscSlotRow.promotable === false, "driveDiscs.slotAndSubstatTables: out-of-scope row must not be promotable")
   assert(driveDiscSlotRow.sampleEntity === "nanoka-equipment-woodpecker-live-31000", "driveDiscs.slotAndSubstatTables: row must use approved live Woodpecker sample evidence")
   assert(driveDiscSlotRow.blockedBy?.includes("scope:user-provided-snapshot-boundary"), "driveDiscs.slotAndSubstatTables: row must carry user-provided snapshot boundary blocker")
-  assert(driveDiscSlotRow.auditArtifact === "data/cleaned/audit/nanoka-drive-disc-slot-stat-audit.json", "driveDiscs.slotAndSubstatTables: row must point to failed-evidence audit artifact")
+  assert(driveDiscSlotRow.auditArtifact === "packages/data/cleaned/audit/nanoka-drive-disc-slot-stat-audit.json", "driveDiscs.slotAndSubstatTables: row must point to failed-evidence audit artifact")
   assert(driveDiscSlotRow.transformRule?.includes("do not synthesize"), "driveDiscs.slotAndSubstatTables: transform must preserve no-fabrication boundary")
   assert(driveDiscSlotRow.transformRule?.includes("user snapshot input supplies the final Agent panel"), "driveDiscs.slotAndSubstatTables: transform must document final panel snapshot boundary")
   assert(driveDiscSlotRow.transformRule?.includes("do not reverse-engineer user panel values"), "driveDiscs.slotAndSubstatTables: transform must reject runtime reverse engineering")
@@ -373,7 +355,7 @@ function validateMatrixAgainstRegistry(matrix, registry) {
   assert(disorderFormulaRow.promotable === false, "rules.disorderFormula: implementation-owned formula row must not be nanoka-promotable")
   assert(disorderFormulaRow.sampleEntity === null, "rules.disorderFormula: implementation-owned row must not point to a nanoka sample entity")
   assert(disorderFormulaRow.blockedBy?.includes("implementation-owned-runtime-formula"), "rules.disorderFormula: row must carry implementation-owned runtime blocker")
-  assert(disorderFormulaRow.auditArtifact === "data/cleaned/audit/nanoka-disorder-formula-audit.json", "rules.disorderFormula: row must point to failed-evidence audit artifact")
+  assert(disorderFormulaRow.auditArtifact === "packages/data/cleaned/audit/nanoka-disorder-formula-audit.json", "rules.disorderFormula: row must point to failed-evidence audit artifact")
   assert(disorderFormulaRow.transformRule?.includes("guide-anchored golden replay G15"), "rules.disorderFormula: transform must document guide/golden ownership")
   assert(disorderFormulaRow.transformRule?.includes("Do not synthesize"), "rules.disorderFormula: transform must preserve no-fabrication boundary")
 
@@ -385,7 +367,7 @@ function validateMatrixAgainstRegistry(matrix, registry) {
   assert(disorderDazeLevelRow.promotable === false, "rules.disorderDazeLevelZone: implementation-owned formula row must not be nanoka-promotable")
   assert(disorderDazeLevelRow.sampleEntity === null, "rules.disorderDazeLevelZone: implementation-owned row must not point to a nanoka sample entity")
   assert(disorderDazeLevelRow.blockedBy?.includes("implementation-owned-runtime-formula"), "rules.disorderDazeLevelZone: row must carry implementation-owned runtime blocker")
-  assert(disorderDazeLevelRow.auditArtifact === "data/cleaned/audit/nanoka-disorder-daze-level-audit.json", "rules.disorderDazeLevelZone: row must point to failed-evidence audit artifact")
+  assert(disorderDazeLevelRow.auditArtifact === "packages/data/cleaned/audit/nanoka-disorder-daze-level-audit.json", "rules.disorderDazeLevelZone: row must point to failed-evidence audit artifact")
   assert(disorderDazeLevelRow.transformRule?.includes("guide-anchored golden replay G16"), "rules.disorderDazeLevelZone: transform must document guide/golden ownership")
   assert(disorderDazeLevelRow.transformRule?.includes("Do not synthesize"), "rules.disorderDazeLevelZone: transform must preserve no-fabrication boundary")
 
@@ -435,7 +417,7 @@ function validateMatrixAgainstRegistry(matrix, registry) {
   assert(daRow.promotable === true, "deadlyAssault.periodsBossesBuffs: DA source artifact row must be promotable after semantic mapping gate")
   assert(daRow.sampleEntity === "nanoka-boss-live-69036", "deadlyAssault.periodsBossesBuffs: DA row must use live period detail evidence")
   assert(!daRow.blockedBy?.includes("field:runtime-cutover-drift-required"), "deadlyAssault.periodsBossesBuffs: DA runtime cutover blocker must be cleared after Phase 3/4")
-  assert(daRow.auditArtifact === "data/cleaned/audit/nanoka-da-current-batch-audit.json", "deadlyAssault.periodsBossesBuffs: PR-E row must point to current DA batch audit")
+  assert(daRow.auditArtifact === "packages/data/cleaned/audit/nanoka-da-current-batch-audit.json", "deadlyAssault.periodsBossesBuffs: PR-E row must point to current DA batch audit")
   assert((daRow.supportingSampleEntities ?? []).length === 38, "deadlyAssault.periodsBossesBuffs: PR-E row must support all 38 current-live DA periods")
   assert(daRow.supportingSampleEntities?.includes("nanoka-boss-live-69038"), "deadlyAssault.periodsBossesBuffs: PR-E row must retain scheduled configured-live period 69038")
 
@@ -446,7 +428,7 @@ function validateMatrixAgainstRegistry(matrix, registry) {
   assert(historicalDaRow.status === "verified-from-nanoka", "deadlyAssault.historicalPeriods: row must be verified after PR-F")
   assert(historicalDaRow.promotable === true, "deadlyAssault.historicalPeriods: historical bucket must be promotable after PR-F")
   assert(historicalDaRow.sampleEntity === "nanoka-da-history-manifest", "deadlyAssault.historicalPeriods: row must use historical DA manifest sample")
-  assert(historicalDaRow.auditArtifact === "data/cleaned/audit/nanoka-da-historical-batch-audit.json", "deadlyAssault.historicalPeriods: row must point to historical DA batch audit")
+  assert(historicalDaRow.auditArtifact === "packages/data/cleaned/audit/nanoka-da-historical-batch-audit.json", "deadlyAssault.historicalPeriods: row must point to historical DA batch audit")
   assert((historicalDaRow.blockedBy ?? []).length === 0, "deadlyAssault.historicalPeriods: resolved blockers must be removed after PR-F")
   assert(historicalDaRow.transformRule?.includes("505 manifest-available non-current Deadly Assault period rows"), "deadlyAssault.historicalPeriods: transform must document historical row count")
   assert(historicalDaRow.transformRule?.includes("never use them as current-runtime fallback"), "deadlyAssault.historicalPeriods: transform must preserve no-fallback policy")
@@ -468,7 +450,7 @@ function validateMatrixAgainstRegistry(matrix, registry) {
   assert(enemyIdentityRow.sampleEntity === "nanoka-monster-index-live-2.8", "enemies.identity: V1.2.x batch row must use the approved-live monster index sample")
   assert(enemyIdentityRow.promotable === true, "enemies.identity: runtime identity row must be promotable after PR-D")
   assert((enemyIdentityRow.blockedBy ?? []).length === 0, "enemies.identity: full enemy catalog blocker must be cleared after PR-D")
-  assert(enemyIdentityRow.auditArtifact === "data/cleaned/audit/nanoka-enemy-batch-audit.json", "enemies.identity must point to the enemy batch audit")
+  assert(enemyIdentityRow.auditArtifact === "packages/data/cleaned/audit/nanoka-enemy-batch-audit.json", "enemies.identity must point to the enemy batch audit")
   assert((enemyIdentityRow.supportingSampleEntities ?? []).length === 269, "enemies.identity row must support all 269 enemies")
 
   const enemyVariantRow = resourceRows.get("enemies.variantMapping")
@@ -476,7 +458,7 @@ function validateMatrixAgainstRegistry(matrix, registry) {
   assert(enemyVariantRow.status === "verified-from-nanoka", "enemies.variantMapping: row must be verified after live monster_info mapping")
   assert(enemyVariantRow.promotable === true, "enemies.variantMapping: structured source artifact must be promotable after live mapping gate")
   assert(enemyVariantRow.sampleEntity === "nanoka-monster-index-live-2.8", "enemies.variantMapping: row must use live monster index evidence after PR-D")
-  assert(enemyVariantRow.auditArtifact === "data/cleaned/audit/nanoka-enemy-batch-audit.json", "enemies.variantMapping must point to the enemy batch audit")
+  assert(enemyVariantRow.auditArtifact === "packages/data/cleaned/audit/nanoka-enemy-batch-audit.json", "enemies.variantMapping must point to the enemy batch audit")
   assert((enemyVariantRow.supportingSampleEntities ?? []).length === 269, "enemies.variantMapping row must support all 269 enemies")
   assert(!enemyVariantRow.blockedBy?.includes("field:runtime-cutover-drift-required"), "enemies.variantMapping: runtime cutover blocker must be cleared after Phase 3/4")
   for (const rawPath of [
@@ -495,7 +477,7 @@ function validateMatrixAgainstRegistry(matrix, registry) {
     const row = resourceRows.get(fieldId)
     assert(row !== undefined, `${fieldId}: missing enemy field row`)
     assert(row.sampleEntity === "nanoka-monster-index-live-2.8", `${fieldId}: row must use the approved-live monster index sample after PR-D`)
-    assert(row.auditArtifact === "data/cleaned/audit/nanoka-enemy-batch-audit.json", `${fieldId}: row must point to the enemy batch audit`)
+    assert(row.auditArtifact === "packages/data/cleaned/audit/nanoka-enemy-batch-audit.json", `${fieldId}: row must point to the enemy batch audit`)
     assert((row.supportingSampleEntities ?? []).length === 269, `${fieldId}: row must support all 269 enemies`)
   }
 
@@ -508,7 +490,7 @@ function validateMatrixAgainstRegistry(matrix, registry) {
   assert(snapshotDiffRow.sampleEntity === "nanoka-manifest", "metadata.snapshotDiffHistory: row must use nanoka manifest sample")
   assert(!snapshotDiffRow.blockedBy?.includes("snapshot-diff-tool-required"), "metadata.snapshotDiffHistory: tool-required blocker must be removed after this gate")
   assert(!snapshotDiffRow.blockedBy?.includes("approved-live-version-allowlist-required"), "metadata.snapshotDiffHistory: allowlist-required blocker must be removed after this gate")
-  assert(snapshotDiffRow.auditArtifact === "data/cleaned/audit/nanoka-snapshot-diff-history.json", "metadata.snapshotDiffHistory: row must point to snapshot diff artifact")
+  assert(snapshotDiffRow.auditArtifact === "packages/data/cleaned/audit/nanoka-snapshot-diff-history.json", "metadata.snapshotDiffHistory: row must point to snapshot diff artifact")
 }
 
 function collectSourceRefs(value, refs = []) {
@@ -531,9 +513,8 @@ function collectSourceRefs(value, refs = []) {
 }
 
 function validateRuntimeGameData(registry) {
-  const { rootText } = readMirroredText(
-    rootRuntimeGameDataPath,
-    packageRuntimeGameDataPath,
+  const rootText = readArtifactText(
+    runtimeGameDataPath,
     "packages/data/cleaned/runtime/game-data.json",
   )
   const nanoka = sourceById(registry, "nanoka-zzz")
@@ -588,9 +569,8 @@ function validateRuntimeGameData(registry) {
 }
 
 function validateCharacterBatchAudit(registry) {
-  const { rootText } = readMirroredText(
-    rootCharacterBatchAuditPath,
-    packageCharacterBatchAuditPath,
+  const rootText = readArtifactText(
+    characterBatchAuditPath,
     "packages/data/cleaned/audit/nanoka-character-batch-audit.json",
   )
 
@@ -603,7 +583,7 @@ function validateCharacterBatchAudit(registry) {
   assert(audit.runtimeCutoverReady === true, "Character batch audit must reflect runtime cutover state")
   assert(audit.indexSource?.sourceId === "nanoka-zzz", "Character batch audit index source must be nanoka")
   assert(audit.indexSource?.sourceVersion === nanoka.configuredLiveVersion, "Character batch audit index source must use configured live version")
-  assert(audit.indexSource?.sourceAnchor === "data/source/raw/nanoka/zzz/2.8/character.json", "Character batch audit index source anchor drifted")
+  assert(audit.indexSource?.sourceAnchor === "packages/data/source/raw/nanoka/zzz/2.8/character.json", "Character batch audit index source anchor drifted")
   assert(audit.summary?.characterCount === 53, "Character batch audit count drifted")
   assert(audit.summary?.runtimeAgentCount === 53, "Character batch runtime agent count drifted")
   assert(audit.summary?.promotedRuntimeSkillCount === 1, "Character batch promoted skill count drifted")
@@ -614,7 +594,7 @@ function validateCharacterBatchAudit(registry) {
   for (const row of audit.characters) {
     assert(row.source?.sourceId === "nanoka-zzz", `${row.id}: Character audit source must be nanoka`)
     assert(row.source?.sourceVersion === nanoka.configuredLiveVersion, `${row.id}: Character audit source version drifted`)
-    assert(row.source?.sourceAnchor === `data/source/raw/nanoka/zzz/2.8/zh/character/${row.id}.json`, `${row.id}: Character audit source anchor drifted`)
+    assert(row.source?.sourceAnchor === `packages/data/source/raw/nanoka/zzz/2.8/zh/character/${row.id}.json`, `${row.id}: Character audit source anchor drifted`)
     assert(row.level60Panel?.maxHp !== undefined, `${row.id}: Character audit must include level-60 maxHp`)
     assert(row.skillPromotion?.status === "sample-preserved" || row.skillPromotion?.status === "not-promoted", `${row.id}: Character skill promotion status drifted`)
     assert(row.passiveModifiers?.status === "not-promoted", `${row.id}: Character passive modifier template must remain not-promoted`)
@@ -622,9 +602,8 @@ function validateCharacterBatchAudit(registry) {
 }
 
 function validateWEngineBatchAudit(registry) {
-  const { rootText } = readMirroredText(
-    rootWEngineBatchAuditPath,
-    packageWEngineBatchAuditPath,
+  const rootText = readArtifactText(
+    wEngineBatchAuditPath,
     "packages/data/cleaned/audit/nanoka-wengine-batch-audit.json",
   )
 
@@ -637,7 +616,7 @@ function validateWEngineBatchAudit(registry) {
   assert(audit.runtimeCutoverReady === true, "W-Engine batch audit must reflect runtime cutover state")
   assert(audit.indexSource?.sourceId === "nanoka-zzz", "W-Engine batch audit index source must be nanoka")
   assert(audit.indexSource?.sourceVersion === nanoka.configuredLiveVersion, "W-Engine batch audit index source must use configured live version")
-  assert(audit.indexSource?.sourceAnchor === "data/source/raw/nanoka/zzz/2.8/weapon.json", "W-Engine batch audit index source anchor drifted")
+  assert(audit.indexSource?.sourceAnchor === "packages/data/source/raw/nanoka/zzz/2.8/weapon.json", "W-Engine batch audit index source anchor drifted")
   assert(audit.summary?.wEngineCount === 89, "W-Engine batch audit count drifted")
   assert(audit.summary?.runtimeWEngineCount === 89, "W-Engine batch runtime count drifted")
   assert(audit.summary?.passiveNotPromotedCount === 89, "W-Engine passive promotion boundary drifted")
@@ -645,7 +624,7 @@ function validateWEngineBatchAudit(registry) {
   for (const row of audit.wEngines) {
     assert(row.source?.sourceId === "nanoka-zzz", `${row.id}: W-Engine audit source must be nanoka`)
     assert(row.source?.sourceVersion === nanoka.configuredLiveVersion, `${row.id}: W-Engine audit source version drifted`)
-    assert(row.source?.sourceAnchor === `data/source/raw/nanoka/zzz/2.8/zh/weapon/${row.id}.json`, `${row.id}: W-Engine audit source anchor drifted`)
+    assert(row.source?.sourceAnchor === `packages/data/source/raw/nanoka/zzz/2.8/zh/weapon/${row.id}.json`, `${row.id}: W-Engine audit source anchor drifted`)
     assert(row.level60Panel?.attack !== undefined, `${row.id}: W-Engine audit must include level-60 attack`)
     assert(row.formulaProof?.indexAttackFloorMatches === true, `${row.id}: W-Engine attack formula must match index atk floor`)
     assert(row.passiveModifiers?.status === "not-promoted", `${row.id}: W-Engine passive modifiers must remain not-promoted`)
@@ -656,16 +635,15 @@ function validateWEngineBatchAudit(registry) {
       assert(typeof talent.desc === "string" && talent.desc.length > 0, `${row.id}: W-Engine talent desc must be retained`)
       assert(talent.source?.sourceId === "nanoka-zzz", `${row.id}: W-Engine talent source must be nanoka`)
       assert(talent.source?.sourceVersion === nanoka.configuredLiveVersion, `${row.id}: W-Engine talent source version drifted`)
-      assert(talent.source?.sourceAnchor === `data/source/raw/nanoka/zzz/2.8/zh/weapon/${row.id}.json`, `${row.id}: W-Engine talent source anchor drifted`)
+      assert(talent.source?.sourceAnchor === `packages/data/source/raw/nanoka/zzz/2.8/zh/weapon/${row.id}.json`, `${row.id}: W-Engine talent source anchor drifted`)
       assert(talent.source?.dataPath === `/talents/${talent.level}`, `${row.id}: W-Engine talent dataPath drifted`)
     }
   }
 }
 
 function validateBangbooBatchAudit(registry) {
-  const { rootText } = readMirroredText(
-    rootBangbooBatchAuditPath,
-    packageBangbooBatchAuditPath,
+  const rootText = readArtifactText(
+    bangbooBatchAuditPath,
     "packages/data/cleaned/audit/nanoka-bangboo-batch-audit.json",
   )
 
@@ -678,7 +656,7 @@ function validateBangbooBatchAudit(registry) {
   assert(audit.runtimeCutoverReady === true, "Bangboo batch audit must reflect runtime cutover state")
   assert(audit.indexSource?.sourceId === "nanoka-zzz", "Bangboo batch audit index source must be nanoka")
   assert(audit.indexSource?.sourceVersion === nanoka.configuredLiveVersion, "Bangboo batch audit index source must use configured live version")
-  assert(audit.indexSource?.sourceAnchor === "data/source/raw/nanoka/zzz/2.8/bangboo.json", "Bangboo batch audit index source anchor drifted")
+  assert(audit.indexSource?.sourceAnchor === "packages/data/source/raw/nanoka/zzz/2.8/bangboo.json", "Bangboo batch audit index source anchor drifted")
   assert(audit.summary?.bangbooCount === 39, "Bangboo batch audit count drifted")
   assert(audit.summary?.runtimeBangbooCount === 39, "Bangboo batch runtime count drifted")
   assert(audit.summary?.promotedSkillCount === 63, "Bangboo batch promoted skill count drifted")
@@ -687,16 +665,15 @@ function validateBangbooBatchAudit(registry) {
   for (const row of audit.bangboos) {
     assert(row.source?.sourceId === "nanoka-zzz", `${row.id}: Bangboo audit source must be nanoka`)
     assert(row.source?.sourceVersion === nanoka.configuredLiveVersion, `${row.id}: Bangboo audit source version drifted`)
-    assert(row.source?.sourceAnchor === `data/source/raw/nanoka/zzz/2.8/zh/bangboo/${row.id}.json`, `${row.id}: Bangboo audit source anchor drifted`)
+    assert(row.source?.sourceAnchor === `packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/${row.id}.json`, `${row.id}: Bangboo audit source anchor drifted`)
     assert(row.level60Panel?.attack !== undefined, `${row.id}: Bangboo audit must include level-60 attack`)
     assert(Array.isArray(row.skillSections), `${row.id}: Bangboo audit must include skill section rows`)
   }
 }
 
 function validateDriveDiscBatchAudit(registry) {
-  const { rootText } = readMirroredText(
-    rootDriveDiscBatchAuditPath,
-    packageDriveDiscBatchAuditPath,
+  const rootText = readArtifactText(
+    driveDiscBatchAuditPath,
     "packages/data/cleaned/audit/nanoka-drive-disc-batch-audit.json",
   )
 
@@ -709,7 +686,7 @@ function validateDriveDiscBatchAudit(registry) {
   assert(audit.runtimeCutoverReady === true, "Drive Disc batch audit must reflect runtime cutover state")
   assert(audit.indexSource?.sourceId === "nanoka-zzz", "Drive Disc batch audit index source must be nanoka")
   assert(audit.indexSource?.sourceVersion === nanoka.configuredLiveVersion, "Drive Disc batch audit index source must use configured live version")
-  assert(audit.indexSource?.sourceAnchor === "data/source/raw/nanoka/zzz/2.8/equipment.json", "Drive Disc batch audit index source anchor drifted")
+  assert(audit.indexSource?.sourceAnchor === "packages/data/source/raw/nanoka/zzz/2.8/equipment.json", "Drive Disc batch audit index source anchor drifted")
   assert(audit.summary?.driveDiscCount === 26, "Drive Disc batch audit count drifted")
   assert(audit.summary?.runtimeDriveDiscCount === 26, "Drive Disc batch runtime count drifted")
   assert(audit.summary?.retainedSetEffectTextCount === 52, "Drive Disc retained set-effect text count drifted")
@@ -718,7 +695,7 @@ function validateDriveDiscBatchAudit(registry) {
   for (const row of audit.driveDiscs) {
     assert(row.source?.sourceId === "nanoka-zzz", `${row.id}: Drive Disc audit source must be nanoka`)
     assert(row.source?.sourceVersion === nanoka.configuredLiveVersion, `${row.id}: Drive Disc audit source version drifted`)
-    assert(row.source?.sourceAnchor === `data/source/raw/nanoka/zzz/2.8/zh/equipment/${row.id}.json`, `${row.id}: Drive Disc audit source anchor drifted`)
+    assert(row.source?.sourceAnchor === `packages/data/source/raw/nanoka/zzz/2.8/zh/equipment/${row.id}.json`, `${row.id}: Drive Disc audit source anchor drifted`)
     for (const piece of ["twoPiece", "fourPiece"]) {
       const effect = row.setEffects?.[piece]
       assert(effect?.status === "not-promoted", `${row.id}: Drive Disc ${piece} set effect must remain not-promoted`)
@@ -726,7 +703,7 @@ function validateDriveDiscBatchAudit(registry) {
       assert(typeof effect.rawText === "string" && effect.rawText.length > 0, `${row.id}: Drive Disc ${piece} set effect raw text must be retained`)
       assert(effect.source?.sourceId === "nanoka-zzz", `${row.id}: Drive Disc ${piece} source must be nanoka`)
       assert(effect.source?.sourceVersion === nanoka.configuredLiveVersion, `${row.id}: Drive Disc ${piece} source version drifted`)
-      assert(effect.source?.sourceAnchor === `data/source/raw/nanoka/zzz/2.8/zh/equipment/${row.id}.json`, `${row.id}: Drive Disc ${piece} source anchor drifted`)
+      assert(effect.source?.sourceAnchor === `packages/data/source/raw/nanoka/zzz/2.8/zh/equipment/${row.id}.json`, `${row.id}: Drive Disc ${piece} source anchor drifted`)
       assert(effect.source?.dataPath === (piece === "twoPiece" ? "/desc2" : "/desc4"), `${row.id}: Drive Disc ${piece} source dataPath drifted`)
     }
     assert(row.slotAndSubstatTables?.status === "out-of-scope", `${row.id}: Drive Disc slot/stat boundary must remain out-of-scope`)
@@ -734,9 +711,8 @@ function validateDriveDiscBatchAudit(registry) {
 }
 
 function validateEnemyBatchAudit(registry) {
-  const { rootText } = readMirroredText(
-    rootEnemyBatchAuditPath,
-    packageEnemyBatchAuditPath,
+  const rootText = readArtifactText(
+    enemyBatchAuditPath,
     "packages/data/cleaned/audit/nanoka-enemy-batch-audit.json",
   )
 
@@ -749,7 +725,7 @@ function validateEnemyBatchAudit(registry) {
   assert(audit.runtimeCutoverReady === true, "Enemy batch audit must reflect runtime cutover state")
   assert(audit.indexSource?.sourceId === "nanoka-zzz", "Enemy batch audit index source must be nanoka")
   assert(audit.indexSource?.sourceVersion === nanoka.configuredLiveVersion, "Enemy batch audit index source must use configured live version")
-  assert(audit.indexSource?.sourceAnchor === "data/source/raw/nanoka/zzz/2.8/monster.json", "Enemy batch audit index source anchor drifted")
+  assert(audit.indexSource?.sourceAnchor === "packages/data/source/raw/nanoka/zzz/2.8/monster.json", "Enemy batch audit index source anchor drifted")
   assert(audit.summary?.enemyCount === 269, "Enemy batch audit count drifted")
   assert(audit.summary?.runtimeEnemyCount === 269, "Enemy batch runtime count drifted")
   assert(audit.summary?.selectedVariantCount === 201, "Enemy selected variant count drifted")
@@ -759,14 +735,14 @@ function validateEnemyBatchAudit(registry) {
   for (const row of audit.enemies) {
     assert(row.source?.sourceId === "nanoka-zzz", `${row.id}: Enemy audit source must be nanoka`)
     assert(row.source?.sourceVersion === nanoka.configuredLiveVersion, `${row.id}: Enemy audit source version drifted`)
-    assert(row.source?.sourceAnchor === `data/source/raw/nanoka/zzz/2.8/zh/monster/${row.id}.json`, `${row.id}: Enemy audit source anchor drifted`)
+    assert(row.source?.sourceAnchor === `packages/data/source/raw/nanoka/zzz/2.8/zh/monster/${row.id}.json`, `${row.id}: Enemy audit source anchor drifted`)
     assert(row.rankMapping?.status === "promoted", `${row.id}: Enemy rank mapping must be promoted from nanoka rarity`)
-    assert(row.rankMapping?.source?.sourceAnchor === "data/source/raw/nanoka/zzz/2.8/monster.json", `${row.id}: Enemy rank source anchor drifted`)
+    assert(row.rankMapping?.source?.sourceAnchor === "packages/data/source/raw/nanoka/zzz/2.8/monster.json", `${row.id}: Enemy rank source anchor drifted`)
     assert(row.selectedVariant?.status === "promoted" || row.selectedVariant?.status === "not-promoted", `${row.id}: Enemy selected variant status drifted`)
     if (row.selectedVariant?.status === "promoted") {
       assert(typeof row.selectedVariant.monsterInfoId === "number", `${row.id}: Enemy selected variant id must be numeric`)
       assert(typeof row.selectedVariant.codeName === "string" && row.selectedVariant.codeName.length > 0, `${row.id}: Enemy selected codeName must be retained`)
-      assert(row.selectedVariant.source?.sourceAnchor === `data/source/raw/nanoka/zzz/2.8/zh/monster/${row.id}.json`, `${row.id}: Enemy selected variant source anchor drifted`)
+      assert(row.selectedVariant.source?.sourceAnchor === `packages/data/source/raw/nanoka/zzz/2.8/zh/monster/${row.id}.json`, `${row.id}: Enemy selected variant source anchor drifted`)
       assert(row.selectedVariant.statsRaw !== undefined, `${row.id}: Enemy selected raw stats must be retained`)
     }
     else {
@@ -779,9 +755,8 @@ function validateEnemyBatchAudit(registry) {
 }
 
 function validateDeadlyAssaultCurrentBatchAudit(registry) {
-  const { rootText } = readMirroredText(
-    rootDeadlyAssaultCurrentBatchAuditPath,
-    packageDeadlyAssaultCurrentBatchAuditPath,
+  const rootText = readArtifactText(
+    deadlyAssaultCurrentBatchAuditPath,
     "packages/data/cleaned/audit/nanoka-da-current-batch-audit.json",
   )
 
@@ -796,7 +771,7 @@ function validateDeadlyAssaultCurrentBatchAudit(registry) {
   assert(audit.historicalBucketPlanned === "historicalDAPeriods", "DA current batch audit must reserve historical periods for the dedicated bucket")
   assert(audit.indexSource?.sourceId === "nanoka-zzz", "DA current batch audit index source must be nanoka")
   assert(audit.indexSource?.sourceVersion === nanoka.configuredLiveVersion, "DA current batch audit index source must use configured live version")
-  assert(audit.indexSource?.sourceAnchor === "data/source/raw/nanoka/zzz/2.8/boss.json", "DA current batch audit index source anchor drifted")
+  assert(audit.indexSource?.sourceAnchor === "packages/data/source/raw/nanoka/zzz/2.8/boss.json", "DA current batch audit index source anchor drifted")
   assert(audit.summary?.periodCount === 38, "DA current batch period count drifted")
   assert(audit.summary?.runtimePeriodCount === 38, "DA current batch runtime count drifted")
   assert(audit.summary?.zoneCount === 114, "DA current batch zone count drifted")
@@ -806,7 +781,7 @@ function validateDeadlyAssaultCurrentBatchAudit(registry) {
   for (const row of audit.periods) {
     assert(row.source?.sourceId === "nanoka-zzz", `${row.id}: DA audit source must be nanoka`)
     assert(row.source?.sourceVersion === nanoka.configuredLiveVersion, `${row.id}: DA audit source version drifted`)
-    assert(row.source?.sourceAnchor === `data/source/raw/nanoka/zzz/2.8/zh/boss/${row.id}.json`, `${row.id}: DA audit source anchor drifted`)
+    assert(row.source?.sourceAnchor === `packages/data/source/raw/nanoka/zzz/2.8/zh/boss/${row.id}.json`, `${row.id}: DA audit source anchor drifted`)
     assert(row.zoneCount === 3, `${row.id}: DA period must retain three zones`)
     assert(row.bossAdjustmentCount > 0, `${row.id}: DA period must retain boss_adjust rows`)
     assert(row.promotionBoundary?.status === "structured-source-artifact", `${row.id}: DA promotion boundary drifted`)
@@ -814,9 +789,8 @@ function validateDeadlyAssaultCurrentBatchAudit(registry) {
 }
 
 function validateDeadlyAssaultHistoricalBatchAudit(registry) {
-  const { rootText } = readMirroredText(
-    rootDeadlyAssaultHistoricalBatchAuditPath,
-    packageDeadlyAssaultHistoricalBatchAuditPath,
+  const rootText = readArtifactText(
+    deadlyAssaultHistoricalBatchAuditPath,
     "packages/data/cleaned/audit/nanoka-da-historical-batch-audit.json",
   )
 
@@ -830,7 +804,7 @@ function validateDeadlyAssaultHistoricalBatchAudit(registry) {
   assert(audit.currentRuntimeBucket === "deadlyAssaultPeriods", "DA historical audit current bucket drifted")
   assert(audit.historicalRuntimeBucket === "historicalDAPeriods", "DA historical audit bucket drifted")
   assert(audit.configuredLiveVersion === nanoka.configuredLiveVersion, "DA historical audit configured live version drifted")
-  assert(audit.historicalManifest?.sourceAnchor === "data/source/raw/nanoka/zzz/historical-da-fetch-manifest.json", "DA historical audit manifest source anchor drifted")
+  assert(audit.historicalManifest?.sourceAnchor === "packages/data/source/raw/nanoka/zzz/historical-da-fetch-manifest.json", "DA historical audit manifest source anchor drifted")
   assert(audit.summary?.snapshotCount === historicalDeadlyAssaultSourceVersions.length, "DA historical snapshot count drifted")
   assert(audit.summary?.historicalRuntimePeriodCount === 505, "DA historical runtime period count drifted")
   assert(audit.summary?.uniquePeriodIdCount === 53, "DA historical unique period count drifted")
@@ -849,7 +823,7 @@ function validateDeadlyAssaultHistoricalBatchAudit(registry) {
     assert(historicalVersions.has(snapshot.sourceVersion), `${snapshot.sourceVersion}: DA historical snapshot version is not allowed`)
     assert(snapshot.source?.sourceId === "nanoka-zzz", `${snapshot.sourceVersion}: DA historical snapshot source must be nanoka`)
     assert(snapshot.source?.sourceVersion === snapshot.sourceVersion, `${snapshot.sourceVersion}: DA historical snapshot sourceVersion drifted`)
-    assert(snapshot.source?.sourceAnchor === `data/source/raw/nanoka/zzz/${snapshot.sourceVersion}/boss.json`, `${snapshot.sourceVersion}: DA historical snapshot source anchor drifted`)
+    assert(snapshot.source?.sourceAnchor === `packages/data/source/raw/nanoka/zzz/${snapshot.sourceVersion}/boss.json`, `${snapshot.sourceVersion}: DA historical snapshot source anchor drifted`)
     assert(snapshot.periodCount > 0, `${snapshot.sourceVersion}: DA historical snapshot must retain period rows`)
     assert(snapshot.scheduleKnownCount + snapshot.scheduleMissingCount === snapshot.periodCount, `${snapshot.sourceVersion}: DA historical schedule counts drifted`)
     assert(snapshot.zoneCount > 0, `${snapshot.sourceVersion}: DA historical snapshot must retain zones`)
@@ -862,7 +836,7 @@ function validateDeadlyAssaultHistoricalBatchAudit(registry) {
     assert(row.releaseVersion !== nanoka.configuredLiveVersion, `${row.historicalKey}: DA historical row must not duplicate configured live`)
     assert(row.source?.sourceId === "nanoka-zzz", `${row.historicalKey}: DA historical row source must be nanoka`)
     assert(row.source?.sourceVersion === row.releaseVersion, `${row.historicalKey}: DA historical row sourceVersion drifted`)
-    assert(row.source?.sourceAnchor === `data/source/raw/nanoka/zzz/${row.releaseVersion}/zh/boss/${row.id}.json`, `${row.historicalKey}: DA historical row source anchor drifted`)
+    assert(row.source?.sourceAnchor === `packages/data/source/raw/nanoka/zzz/${row.releaseVersion}/zh/boss/${row.id}.json`, `${row.historicalKey}: DA historical row source anchor drifted`)
     assert(row.zoneCount > 0, `${row.historicalKey}: DA historical row must retain zones`)
     assert(row.bossAdjustmentCount > 0, `${row.historicalKey}: DA historical row must retain boss adjustments`)
     assert(row.scheduleStatus === "source-known" || row.scheduleStatus === "missing-in-historical-source", `${row.historicalKey}: DA historical schedule status drifted`)
@@ -870,9 +844,8 @@ function validateDeadlyAssaultHistoricalBatchAudit(registry) {
 }
 
 function validateSnapshotDiffHistory(registry) {
-  const { rootText } = readMirroredText(
-    rootSnapshotDiffHistoryPath,
-    packageSnapshotDiffHistoryPath,
+  const rootText = readArtifactText(
+    snapshotDiffHistoryPath,
     "packages/data/cleaned/audit/nanoka-snapshot-diff-history.json",
   )
 
@@ -898,9 +871,8 @@ function validateSnapshotDiffHistory(registry) {
 }
 
 function validateDriveDiscSlotStatAudit(registry) {
-  const { rootText } = readMirroredText(
-    rootDriveDiscSlotStatAuditPath,
-    packageDriveDiscSlotStatAuditPath,
+  const rootText = readArtifactText(
+    driveDiscSlotStatAuditPath,
     "packages/data/cleaned/audit/nanoka-drive-disc-slot-stat-audit.json",
   )
 
@@ -936,9 +908,8 @@ function validateDriveDiscSlotStatAudit(registry) {
 }
 
 function validateDisorderFormulaAudit(registry) {
-  const { rootText } = readMirroredText(
-    rootDisorderFormulaAuditPath,
-    packageDisorderFormulaAuditPath,
+  const rootText = readArtifactText(
+    disorderFormulaAuditPath,
     "packages/data/cleaned/audit/nanoka-disorder-formula-audit.json",
   )
 
@@ -979,9 +950,8 @@ function validateDisorderFormulaAudit(registry) {
 }
 
 function validateDisorderDazeLevelAudit(registry) {
-  const { rootText } = readMirroredText(
-    rootDisorderDazeLevelAuditPath,
-    packageDisorderDazeLevelAuditPath,
+  const rootText = readArtifactText(
+    disorderDazeLevelAuditPath,
     "packages/data/cleaned/audit/nanoka-disorder-daze-level-audit.json",
   )
 
@@ -1029,17 +999,17 @@ function validateDisorderDazeLevelAudit(registry) {
 function validateCoveredSourceRefs(registry) {
   const sourceIds = new Set(registry.sources.map(source => source.sourceId))
   const files = [
-    "data/cleaned/audit/mihoyo-buhflipexplode.source-conflicts.json",
-    "data/cleaned/audit/nanoka-character-batch-audit.json",
-    "data/cleaned/audit/nanoka-bangboo-batch-audit.json",
-    "data/cleaned/audit/nanoka-wengine-batch-audit.json",
-    "data/cleaned/audit/nanoka-drive-disc-batch-audit.json",
-    "data/cleaned/audit/nanoka-enemy-batch-audit.json",
-    "data/cleaned/audit/nanoka-da-current-batch-audit.json",
-    "data/cleaned/audit/nanoka-da-historical-batch-audit.json",
-    "data/cleaned/audit/source-migration-field-diff.json",
-    "data/cleaned/golden/v1-replay-report.json",
-    "data/cleaned/runtime/game-data.json",
+    "packages/data/cleaned/audit/mihoyo-buhflipexplode.source-conflicts.json",
+    "packages/data/cleaned/audit/nanoka-character-batch-audit.json",
+    "packages/data/cleaned/audit/nanoka-bangboo-batch-audit.json",
+    "packages/data/cleaned/audit/nanoka-wengine-batch-audit.json",
+    "packages/data/cleaned/audit/nanoka-drive-disc-batch-audit.json",
+    "packages/data/cleaned/audit/nanoka-enemy-batch-audit.json",
+    "packages/data/cleaned/audit/nanoka-da-current-batch-audit.json",
+    "packages/data/cleaned/audit/nanoka-da-historical-batch-audit.json",
+    "packages/data/cleaned/audit/source-migration-field-diff.json",
+    "packages/data/cleaned/golden/v1-replay-report.json",
+    "packages/data/cleaned/runtime/game-data.json",
   ]
 
   for (const relativePath of files) {
@@ -1051,11 +1021,7 @@ function validateCoveredSourceRefs(registry) {
 }
 
 function main() {
-  const rootText = readFileSync(rootRegistryPath, "utf8")
-  const packageText = readFileSync(packageRegistryPath, "utf8")
-  assert(rootText === packageText, "packages/data/source-registry.json must mirror data/source-registry.json byte-for-byte")
-
-  const registry = JSON.parse(rootText)
+  const registry = readJson(sourceRegistryPath)
   const matrix = readJson(matrixPath)
 
   validateRegistryShape(registry)

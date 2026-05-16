@@ -13,9 +13,10 @@ Fairy keeps the repository and runtime packages under MIT. buhflipexplode source
 code is GPL-3.0, so Fairy does not copy its JavaScript into `@randomplay/core`,
 `@randomplay/data`, or `@randomplay/cli` runtime implementation.
 
-Allowed:
+Historical V0.1.0 boundary:
 
-- retain raw/source snapshots under `data/source/raw/buhflipexplode/`;
+- the raw/source snapshot formerly lived under
+  `git-history:data/source/raw/buhflipexplode/`;
 - record attribution, URL, fetched time, HTTP metadata, and hashes;
 - summarize algorithm behavior in documentation;
 - independently implement equivalent Fairy logic and validate it with parity
@@ -42,13 +43,13 @@ The data pipeline uses three layers:
 3. Parity: later cleaning tasks must compare Fairy's independent implementation
    against archived source inputs and expected outputs before V1 release.
 
-`packages/data/scripts/buhflipexplode-da-source.mjs` intentionally has separate
-`fetch` and `verify` commands so normal CI does not depend on live network
-availability.
+The historical fetch/verify script was removed in V0.1.2 with the raw archive.
+Current CI keeps the retired source ids fail-loud through the source registry
+and runtime-policy gates instead of re-verifying the removed archive.
 
 ## Current Snapshot
 
-- Snapshot: `data/source/raw/buhflipexplode/2026-05-05T0445Z/`
+- Snapshot: `git-history:data/source/raw/buhflipexplode/2026-05-05T0445Z/`
 - Fetched at: `2026-05-05T12:45:00+08:00`
 - `da.js` runtime config: `vLive=35`, `vBeta=36`
 - Retained live versions: `1.4.1` through `2.7.3`

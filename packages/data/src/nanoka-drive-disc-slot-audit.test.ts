@@ -37,14 +37,14 @@ function readJson<T>(path: string): T {
 }
 
 describe("nanoka Drive Disc slot/stat failed-evidence audit", () => {
-  it("keeps the package audit artifact mirror byte-identical", () => {
-    expect(readFileSync(join(repoRoot, "packages/data/cleaned/audit/nanoka-drive-disc-slot-stat-audit.json"), "utf8")).toBe(
-      readFileSync(join(repoRoot, "data/cleaned/audit/nanoka-drive-disc-slot-stat-audit.json"), "utf8"),
-    )
+  it("keeps the canonical audit artifact readable from the data package", () => {
+    const audit = readJson<DriveDiscSlotStatAudit>("packages/data/cleaned/audit/nanoka-drive-disc-slot-stat-audit.json")
+
+    expect(audit.schemaVersion).toBe("nanoka-drive-disc-slot-stat-audit/v0.1")
   })
 
   it("records failed nanoka evidence without promoting or fabricating stat tables", () => {
-    const audit = readJson<DriveDiscSlotStatAudit>("data/cleaned/audit/nanoka-drive-disc-slot-stat-audit.json")
+    const audit = readJson<DriveDiscSlotStatAudit>("packages/data/cleaned/audit/nanoka-drive-disc-slot-stat-audit.json")
 
     expect(audit).toMatchObject({
       schemaVersion: "nanoka-drive-disc-slot-stat-audit/v0.1",
@@ -83,7 +83,7 @@ describe("nanoka Drive Disc slot/stat failed-evidence audit", () => {
   })
 
   it("locks the observed live equipment detail shape", () => {
-    const audit = readJson<DriveDiscSlotStatAudit>("data/cleaned/audit/nanoka-drive-disc-slot-stat-audit.json")
+    const audit = readJson<DriveDiscSlotStatAudit>("packages/data/cleaned/audit/nanoka-drive-disc-slot-stat-audit.json")
     const detail = audit.checkedEndpoints.find(endpoint => endpoint.url === "https://static.nanoka.cc/zzz/2.8/zh/equipment/31000.json")
 
     expect(detail).toBeDefined()

@@ -50,14 +50,14 @@ function readJson<T>(path: string): T {
 }
 
 describe("nanoka full-data batch discovery", () => {
-  it("keeps the root and package discovery mirrors byte-identical", () => {
-    expect(readFileSync(join(repoRoot, "packages/data/cleaned/audit/nanoka-full-data-batch-discovery.json"), "utf8")).toBe(
-      readFileSync(join(repoRoot, "data/cleaned/audit/nanoka-full-data-batch-discovery.json"), "utf8"),
-    )
+  it("keeps the canonical discovery artifact readable from the data package", () => {
+    const discovery = readJson<Discovery>("packages/data/cleaned/audit/nanoka-full-data-batch-discovery.json")
+
+    expect(discovery.kind).toBe("nanokaFullDataBatchDiscovery")
   })
 
   it("locks the lo-user/Product batch decisions before implementation PRs", () => {
-    const discovery = readJson<Discovery>("data/cleaned/audit/nanoka-full-data-batch-discovery.json")
+    const discovery = readJson<Discovery>("packages/data/cleaned/audit/nanoka-full-data-batch-discovery.json")
 
     expect(discovery.kind).toBe("nanokaFullDataBatchDiscovery")
     expect(discovery.configuredLiveVersion).toBe("2.8")
@@ -77,7 +77,7 @@ describe("nanoka full-data batch discovery", () => {
   })
 
   it("records current-live domain counts and batch gaps", () => {
-    const discovery = readJson<Discovery>("data/cleaned/audit/nanoka-full-data-batch-discovery.json")
+    const discovery = readJson<Discovery>("packages/data/cleaned/audit/nanoka-full-data-batch-discovery.json")
     const rows = new Map(discovery.domains.map(row => [row.domain, row]))
 
     expect(rows.get("characters")).toMatchObject({
@@ -139,7 +139,7 @@ describe("nanoka full-data batch discovery", () => {
   })
 
   it("keeps historical Deadly Assault separated from configured-live runtime data", () => {
-    const discovery = readJson<Discovery>("data/cleaned/audit/nanoka-full-data-batch-discovery.json")
+    const discovery = readJson<Discovery>("packages/data/cleaned/audit/nanoka-full-data-batch-discovery.json")
 
     expect(discovery.historicalDeadlyAssault.targetBucket).toBe("historicalDAPeriods")
     expect(discovery.historicalDeadlyAssault.currentLiveBucket).toBe("deadlyAssaultPeriods")
@@ -177,7 +177,7 @@ describe("nanoka full-data batch discovery", () => {
   })
 
   it("locks an implementation PR sequence that does not add golden anchors or release versions", () => {
-    const discovery = readJson<Discovery>("data/cleaned/audit/nanoka-full-data-batch-discovery.json")
+    const discovery = readJson<Discovery>("packages/data/cleaned/audit/nanoka-full-data-batch-discovery.json")
 
     expect(discovery.recommendedPrSequence).toEqual([
       "PR-A: retain and batch-promote all current-live characters",

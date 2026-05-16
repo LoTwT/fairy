@@ -36,7 +36,7 @@ function readJson<T>(path: string): T {
 }
 
 function nanokaSource() {
-  const registry = readJson<SourceRegistry>("data/source-registry.json")
+  const registry = readJson<SourceRegistry>("packages/data/source-registry.json")
   const source = registry.sources.find(item => item.sourceId === "nanoka-zzz")
   expect(source).toBeDefined()
   return source!
@@ -50,7 +50,7 @@ function assertCurrentCleanedSourceVersion(sourceVersion: string, configuredLive
 describe("formal-live version gate", () => {
   it("matches registry configuredLiveVersion with the coverage matrix live version", () => {
     const source = nanokaSource()
-    const matrix = readJson<CoverageMatrix>("data/cleaned/audit/nanoka-coverage-matrix.json")
+    const matrix = readJson<CoverageMatrix>("packages/data/cleaned/audit/nanoka-coverage-matrix.json")
 
     expect(source.configuredLiveVersion).toBe(matrix.sourceVersionPolicy.defaultReleaseSourceVersion)
     expect(source.configuredLiveVersion).toBe(matrix.sourceVersionResolved)
@@ -70,7 +70,7 @@ describe("formal-live version gate", () => {
 
   it("keeps latest research samples out of cleaned output", () => {
     const source = nanokaSource()
-    const matrix = readJson<CoverageMatrix>("data/cleaned/audit/nanoka-coverage-matrix.json")
+    const matrix = readJson<CoverageMatrix>("packages/data/cleaned/audit/nanoka-coverage-matrix.json")
 
     const latestSamples = matrix.sampleSources.filter(sample => sample.version === source.latestResearchVersion)
     expect(latestSamples).not.toHaveLength(0)

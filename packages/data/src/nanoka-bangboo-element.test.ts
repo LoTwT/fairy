@@ -14,7 +14,7 @@ function readJson<T>(path: string): T {
 
 describe("nanoka Bangboo element source artifact gate", () => {
   it("derives Plugboo electric attribute from approved live skill damage text", () => {
-    const plugboo = readJson<NanokaBangbooElementSource>("data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json")
+    const plugboo = readJson<NanokaBangbooElementSource>("packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json")
     const artifact = deriveNanokaBangbooElement(plugboo, {
       sourceVersion: "2.8",
       bangbooId: 54008,
@@ -38,7 +38,7 @@ describe("nanoka Bangboo element source artifact gate", () => {
   })
 
   it("derives physical Bangboo attributes from colored physical damage text without the 属性 suffix", () => {
-    const birkblick = readJson<NanokaBangbooElementSource>("data/source/raw/nanoka/zzz/2.8/zh/bangboo/54020.json")
+    const birkblick = readJson<NanokaBangbooElementSource>("packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/54020.json")
     const artifact = deriveNanokaBangbooElement(birkblick, {
       sourceVersion: "2.8",
       bangbooId: 54020,
@@ -54,7 +54,7 @@ describe("nanoka Bangboo element source artifact gate", () => {
   })
 
   it("fails loud when the source id, damage text, or element evidence is invalid", () => {
-    const plugboo = readJson<NanokaBangbooElementSource>("data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json")
+    const plugboo = readJson<NanokaBangbooElementSource>("packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json")
     const missingId = structuredClone(plugboo)
     const missingDamageText = structuredClone(plugboo)
     const conflictingElement = structuredClone(plugboo)

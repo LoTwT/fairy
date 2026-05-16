@@ -11,35 +11,27 @@ const repoRoot = join(packageDir, "../..")
 
 const generatedAt = "2026-05-16T01:05:00+08:00"
 const sourceVersion = "2.8"
-const rootArtifactPath = join(repoRoot, "data/cleaned/runtime/game-data.json")
-const packageArtifactPath = join(packageDir, "cleaned/runtime/game-data.json")
-const rootCharacterBatchAuditPath = join(repoRoot, "data/cleaned/audit/nanoka-character-batch-audit.json")
-const packageCharacterBatchAuditPath = join(packageDir, "cleaned/audit/nanoka-character-batch-audit.json")
-const rootBangbooBatchAuditPath = join(repoRoot, "data/cleaned/audit/nanoka-bangboo-batch-audit.json")
-const packageBangbooBatchAuditPath = join(packageDir, "cleaned/audit/nanoka-bangboo-batch-audit.json")
-const rootWEngineBatchAuditPath = join(repoRoot, "data/cleaned/audit/nanoka-wengine-batch-audit.json")
-const packageWEngineBatchAuditPath = join(packageDir, "cleaned/audit/nanoka-wengine-batch-audit.json")
-const rootDriveDiscBatchAuditPath = join(repoRoot, "data/cleaned/audit/nanoka-drive-disc-batch-audit.json")
-const packageDriveDiscBatchAuditPath = join(packageDir, "cleaned/audit/nanoka-drive-disc-batch-audit.json")
-const rootEnemyBatchAuditPath = join(repoRoot, "data/cleaned/audit/nanoka-enemy-batch-audit.json")
-const packageEnemyBatchAuditPath = join(packageDir, "cleaned/audit/nanoka-enemy-batch-audit.json")
-const rootDeadlyAssaultCurrentBatchAuditPath = join(repoRoot, "data/cleaned/audit/nanoka-da-current-batch-audit.json")
-const packageDeadlyAssaultCurrentBatchAuditPath = join(packageDir, "cleaned/audit/nanoka-da-current-batch-audit.json")
-const rootDeadlyAssaultHistoricalBatchAuditPath = join(repoRoot, "data/cleaned/audit/nanoka-da-historical-batch-audit.json")
-const packageDeadlyAssaultHistoricalBatchAuditPath = join(packageDir, "cleaned/audit/nanoka-da-historical-batch-audit.json")
-const characterIndexPath = join(repoRoot, "data/source/raw/nanoka/zzz/2.8/character.json")
-const characterSourceDir = join(repoRoot, "data/source/raw/nanoka/zzz/2.8/zh/character")
-const bangbooIndexPath = join(repoRoot, "data/source/raw/nanoka/zzz/2.8/bangboo.json")
-const bangbooSourceDir = join(repoRoot, "data/source/raw/nanoka/zzz/2.8/zh/bangboo")
-const weaponIndexPath = join(repoRoot, "data/source/raw/nanoka/zzz/2.8/weapon.json")
-const weaponSourceDir = join(repoRoot, "data/source/raw/nanoka/zzz/2.8/zh/weapon")
-const equipmentIndexPath = join(repoRoot, "data/source/raw/nanoka/zzz/2.8/equipment.json")
-const equipmentSourceDir = join(repoRoot, "data/source/raw/nanoka/zzz/2.8/zh/equipment")
-const monsterIndexPath = join(repoRoot, "data/source/raw/nanoka/zzz/2.8/monster.json")
-const monsterSourceDir = join(repoRoot, "data/source/raw/nanoka/zzz/2.8/zh/monster")
-const bossIndexPath = join(repoRoot, "data/source/raw/nanoka/zzz/2.8/boss.json")
-const bossSourceDir = join(repoRoot, "data/source/raw/nanoka/zzz/2.8/zh/boss")
-const historicalDeadlyAssaultManifestPath = join(repoRoot, "data/source/raw/nanoka/zzz/historical-da-fetch-manifest.json")
+const artifactPath = join(packageDir, "cleaned/runtime/game-data.json")
+const characterBatchAuditPath = join(packageDir, "cleaned/audit/nanoka-character-batch-audit.json")
+const bangbooBatchAuditPath = join(packageDir, "cleaned/audit/nanoka-bangboo-batch-audit.json")
+const wEngineBatchAuditPath = join(packageDir, "cleaned/audit/nanoka-wengine-batch-audit.json")
+const driveDiscBatchAuditPath = join(packageDir, "cleaned/audit/nanoka-drive-disc-batch-audit.json")
+const enemyBatchAuditPath = join(packageDir, "cleaned/audit/nanoka-enemy-batch-audit.json")
+const deadlyAssaultCurrentBatchAuditPath = join(packageDir, "cleaned/audit/nanoka-da-current-batch-audit.json")
+const deadlyAssaultHistoricalBatchAuditPath = join(packageDir, "cleaned/audit/nanoka-da-historical-batch-audit.json")
+const characterIndexPath = join(repoRoot, "packages/data/source/raw/nanoka/zzz/2.8/character.json")
+const characterSourceDir = join(repoRoot, "packages/data/source/raw/nanoka/zzz/2.8/zh/character")
+const bangbooIndexPath = join(repoRoot, "packages/data/source/raw/nanoka/zzz/2.8/bangboo.json")
+const bangbooSourceDir = join(repoRoot, "packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo")
+const weaponIndexPath = join(repoRoot, "packages/data/source/raw/nanoka/zzz/2.8/weapon.json")
+const weaponSourceDir = join(repoRoot, "packages/data/source/raw/nanoka/zzz/2.8/zh/weapon")
+const equipmentIndexPath = join(repoRoot, "packages/data/source/raw/nanoka/zzz/2.8/equipment.json")
+const equipmentSourceDir = join(repoRoot, "packages/data/source/raw/nanoka/zzz/2.8/zh/equipment")
+const monsterIndexPath = join(repoRoot, "packages/data/source/raw/nanoka/zzz/2.8/monster.json")
+const monsterSourceDir = join(repoRoot, "packages/data/source/raw/nanoka/zzz/2.8/zh/monster")
+const bossIndexPath = join(repoRoot, "packages/data/source/raw/nanoka/zzz/2.8/boss.json")
+const bossSourceDir = join(repoRoot, "packages/data/source/raw/nanoka/zzz/2.8/zh/boss")
+const historicalDeadlyAssaultManifestPath = join(repoRoot, "packages/data/source/raw/nanoka/zzz/historical-da-fetch-manifest.json")
 
 function assert(condition: unknown, message: string): asserts condition {
   if (!condition)
@@ -114,7 +106,7 @@ type CharacterRuntimeBuild = {
 }
 
 function characterAnchor(entityId: string | number): string {
-  return `data/source/raw/nanoka/zzz/2.8/zh/character/${entityId}.json`
+  return `packages/data/source/raw/nanoka/zzz/2.8/zh/character/${entityId}.json`
 }
 
 function readCharacterRaw(entityId: string): CharacterRaw {
@@ -328,7 +320,7 @@ function buildCharacterRuntimeBatch(): CharacterRuntimeBuild {
     sourceVersion,
     generatedAt,
     runtimeCutoverReady: true,
-    indexSource: sourceRef("data/source/raw/nanoka/zzz/2.8/character.json", "/"),
+    indexSource: sourceRef("packages/data/source/raw/nanoka/zzz/2.8/character.json", "/"),
     summary: {
       characterCount: characterIds.length,
       runtimeAgentCount: Object.keys(agents).length,
@@ -523,7 +515,7 @@ function countBy<T>(values: T[], getKey: (value: T) => string): Record<string, n
 }
 
 function bangbooAnchor(entityId: string | number): string {
-  return `data/source/raw/nanoka/zzz/2.8/zh/bangboo/${entityId}.json`
+  return `packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/${entityId}.json`
 }
 
 function readBangbooRaw(entityId: string): BangbooRaw {
@@ -531,7 +523,7 @@ function readBangbooRaw(entityId: string): BangbooRaw {
 }
 
 function wEngineAnchor(entityId: string | number): string {
-  return `data/source/raw/nanoka/zzz/2.8/zh/weapon/${entityId}.json`
+  return `packages/data/source/raw/nanoka/zzz/2.8/zh/weapon/${entityId}.json`
 }
 
 function readWEngineRaw(entityId: string): WEngineRaw {
@@ -539,7 +531,7 @@ function readWEngineRaw(entityId: string): WEngineRaw {
 }
 
 function driveDiscAnchor(entityId: string | number): string {
-  return `data/source/raw/nanoka/zzz/2.8/zh/equipment/${entityId}.json`
+  return `packages/data/source/raw/nanoka/zzz/2.8/zh/equipment/${entityId}.json`
 }
 
 function readEquipmentRaw(entityId: string): EquipmentRaw {
@@ -547,7 +539,7 @@ function readEquipmentRaw(entityId: string): EquipmentRaw {
 }
 
 function enemyAnchor(entityId: string | number): string {
-  return `data/source/raw/nanoka/zzz/2.8/zh/monster/${entityId}.json`
+  return `packages/data/source/raw/nanoka/zzz/2.8/zh/monster/${entityId}.json`
 }
 
 function readMonsterRaw(entityId: string): MonsterRaw {
@@ -555,7 +547,7 @@ function readMonsterRaw(entityId: string): MonsterRaw {
 }
 
 function deadlyAssaultAnchor(entityId: string | number): string {
-  return `data/source/raw/nanoka/zzz/2.8/zh/boss/${entityId}.json`
+  return `packages/data/source/raw/nanoka/zzz/2.8/zh/boss/${entityId}.json`
 }
 
 function readDeadlyAssaultRaw(entityId: string): NanokaDaDetail {
@@ -809,7 +801,7 @@ function buildBangbooRuntimeBatch(): BangbooRuntimeBuild {
     sourceVersion,
     generatedAt,
     runtimeCutoverReady: true,
-    indexSource: sourceRef("data/source/raw/nanoka/zzz/2.8/bangboo.json", "/"),
+    indexSource: sourceRef("packages/data/source/raw/nanoka/zzz/2.8/bangboo.json", "/"),
     summary: {
       bangbooCount: bangbooIds.length,
       runtimeBangbooCount: Object.keys(bangboos).length,
@@ -986,7 +978,7 @@ function buildWEngineRuntimeBatch(): WEngineRuntimeBuild {
     sourceVersion,
     generatedAt,
     runtimeCutoverReady: true,
-    indexSource: sourceRef("data/source/raw/nanoka/zzz/2.8/weapon.json", "/"),
+    indexSource: sourceRef("packages/data/source/raw/nanoka/zzz/2.8/weapon.json", "/"),
     summary: {
       wEngineCount: wEngineIds.length,
       runtimeWEngineCount: Object.keys(wEngines).length,
@@ -1070,7 +1062,7 @@ function buildDriveDiscRuntimeBatch(): DriveDiscRuntimeBuild {
       slotAndSubstatTables: {
         status: "out-of-scope",
         reason: "scope:user-provided-snapshot-boundary",
-        auditArtifact: "data/cleaned/audit/nanoka-drive-disc-slot-stat-audit.json",
+        auditArtifact: "packages/data/cleaned/audit/nanoka-drive-disc-slot-stat-audit.json",
       },
     })
   }
@@ -1082,7 +1074,7 @@ function buildDriveDiscRuntimeBatch(): DriveDiscRuntimeBuild {
     sourceVersion,
     generatedAt,
     runtimeCutoverReady: true,
-    indexSource: sourceRef("data/source/raw/nanoka/zzz/2.8/equipment.json", "/"),
+    indexSource: sourceRef("packages/data/source/raw/nanoka/zzz/2.8/equipment.json", "/"),
     summary: {
       driveDiscCount: driveDiscIds.length,
       runtimeDriveDiscCount: Object.keys(driveDiscs).length,
@@ -1173,7 +1165,7 @@ function buildEnemyRuntimeBatch(): EnemyRuntimeBuild {
       rankMapping: {
         status: "promoted",
         rule: "nanoka monster index rarity 1/2/3/4 -> fairy normal/elite/special/boss",
-        source: sourceRef("data/source/raw/nanoka/zzz/2.8/monster.json", `/${enemyId}/rarity`),
+        source: sourceRef("packages/data/source/raw/nanoka/zzz/2.8/monster.json", `/${enemyId}/rarity`),
       },
       selectedVariant: selectedVariant === undefined
         ? {
@@ -1220,7 +1212,7 @@ function buildEnemyRuntimeBatch(): EnemyRuntimeBuild {
         indexDescription: {
           status: typeof indexEntry.desc === "string" && indexEntry.desc.length > 0 ? "retained-audit-only" : "not-present",
           rawText: indexEntry.desc,
-          source: sourceRef("data/source/raw/nanoka/zzz/2.8/monster.json", `/${enemyId}/desc`),
+          source: sourceRef("packages/data/source/raw/nanoka/zzz/2.8/monster.json", `/${enemyId}/desc`),
         },
       },
       pendingPromotions: {
@@ -1255,7 +1247,7 @@ function buildEnemyRuntimeBatch(): EnemyRuntimeBuild {
     sourceVersion,
     generatedAt,
     runtimeCutoverReady: true,
-    indexSource: sourceRef("data/source/raw/nanoka/zzz/2.8/monster.json", "/"),
+    indexSource: sourceRef("packages/data/source/raw/nanoka/zzz/2.8/monster.json", "/"),
     summary: {
       enemyCount: enemyIds.length,
       runtimeEnemyCount: Object.keys(enemies).length,
@@ -1381,7 +1373,7 @@ function buildDeadlyAssaultCurrentRuntimeBatch(): DeadlyAssaultCurrentRuntimeBui
     runtimeCutoverReady: true,
     historicalPeriodsIncluded: false,
     historicalBucketPlanned: "historicalDAPeriods",
-    indexSource: sourceRef("data/source/raw/nanoka/zzz/2.8/boss.json", "/"),
+    indexSource: sourceRef("packages/data/source/raw/nanoka/zzz/2.8/boss.json", "/"),
     summary: {
       periodCount: periodIds.length,
       runtimePeriodCount: Object.keys(deadlyAssaultPeriods).length,
@@ -1401,7 +1393,7 @@ function buildDeadlyAssaultCurrentRuntimeBatch(): DeadlyAssaultCurrentRuntimeBui
 }
 
 function historicalDeadlyAssaultAnchor(sourceVersion: string, entityId: string | number): string {
-  return `data/source/raw/nanoka/zzz/${sourceVersion}/zh/boss/${entityId}.json`
+  return `packages/data/source/raw/nanoka/zzz/${sourceVersion}/zh/boss/${entityId}.json`
 }
 
 function historicalDeadlyAssaultKey(sourceVersion: string, periodId: string): string {
@@ -1409,7 +1401,7 @@ function historicalDeadlyAssaultKey(sourceVersion: string, periodId: string): st
 }
 
 function readHistoricalDeadlyAssaultRaw(sourceVersion: string, entityId: string): NanokaDaDetail {
-  return readJson<NanokaDaDetail>(join(repoRoot, `data/source/raw/nanoka/zzz/${sourceVersion}/zh/boss/${entityId}.json`))
+  return readJson<NanokaDaDetail>(join(repoRoot, `packages/data/source/raw/nanoka/zzz/${sourceVersion}/zh/boss/${entityId}.json`))
 }
 
 function normalizeHistoricalDeadlyAssaultRuntimePeriod(
@@ -1489,7 +1481,7 @@ function buildDeadlyAssaultHistoricalRuntimeBatch(): DeadlyAssaultHistoricalRunt
 
   for (const historicalSourceVersion of manifest.sourceVersions) {
     assert(historicalSourceVersion !== sourceVersion, "historical DA bucket must not duplicate configured-live current periods")
-    const indexPath = join(repoRoot, `data/source/raw/nanoka/zzz/${historicalSourceVersion}/boss.json`)
+    const indexPath = join(repoRoot, `packages/data/source/raw/nanoka/zzz/${historicalSourceVersion}/boss.json`)
     const index = readJson<NanokaDaIndex>(indexPath)
     const periodIds = Object.keys(index).sort((left, right) => Number(left) - Number(right))
     let scheduleKnownCount = 0
@@ -1530,7 +1522,7 @@ function buildDeadlyAssaultHistoricalRuntimeBatch(): DeadlyAssaultHistoricalRunt
 
     auditSnapshots.push({
       sourceVersion: historicalSourceVersion,
-      source: sourceRef(`data/source/raw/nanoka/zzz/${historicalSourceVersion}/boss.json`, "/", historicalSourceVersion),
+      source: sourceRef(`packages/data/source/raw/nanoka/zzz/${historicalSourceVersion}/boss.json`, "/", historicalSourceVersion),
       periodCount: periodIds.length,
       scheduleKnownCount,
       scheduleMissingCount,
@@ -1550,7 +1542,7 @@ function buildDeadlyAssaultHistoricalRuntimeBatch(): DeadlyAssaultHistoricalRunt
     historicalRuntimeBucket: "historicalDAPeriods",
     configuredLiveVersion: sourceVersion,
     latestResearchVersion: manifest.latestResearchVersion,
-    historicalManifest: sourceRef("data/source/raw/nanoka/zzz/historical-da-fetch-manifest.json", "/", "manifest-available-history"),
+    historicalManifest: sourceRef("packages/data/source/raw/nanoka/zzz/historical-da-fetch-manifest.json", "/", "manifest-available-history"),
     summary: {
       snapshotCount: auditSnapshots.length,
       historicalRuntimePeriodCount: Object.keys(historicalDAPeriods).length,
@@ -1587,7 +1579,7 @@ function buildArtifact() {
   const enemyBatch = buildEnemyRuntimeBatch()
   const deadlyAssaultCurrentBatch = buildDeadlyAssaultCurrentRuntimeBatch()
   const deadlyAssaultHistoricalBatch = buildDeadlyAssaultHistoricalRuntimeBatch()
-  const yixuanAnchor = "data/source/raw/nanoka/zzz/2.8/zh/character/1371.json"
+  const yixuanAnchor = "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1371.json"
   const yixuanSkillSource = sourceRef(yixuanAnchor, "/skill/basic/description/4/param/0/param/1371001")
 
   const data: GameData = {
@@ -1683,7 +1675,7 @@ function buildArtifact() {
     schemaVersion: "cleaned-game-data-artifact/v0.1",
     dataVersion: "fairy-v0.1.0-nanoka-runtime",
     generatedAt,
-    sourceManifestPath: "data/source/source-manifest.json",
+    sourceManifestPath: "packages/data/source/source-manifest.json",
     runtimeCutoverReady: true,
     runtimeSourcePolicy: {
       primarySourceId: "nanoka-zzz",
@@ -1723,110 +1715,61 @@ function assertArtifactFresh(): void {
     deadlyAssaultCurrentBatchAudit: expectedDeadlyAssaultCurrentBatchAudit,
     deadlyAssaultHistoricalBatchAudit: expectedDeadlyAssaultHistoricalBatchAudit,
   } = buildArtifact()
-  const actualRoot = readJson<unknown>(rootArtifactPath)
-  const actualPackage = readJson<unknown>(packageArtifactPath)
-  const actualRootCharacterBatchAudit = readJson<unknown>(rootCharacterBatchAuditPath)
-  const actualPackageCharacterBatchAudit = readJson<unknown>(packageCharacterBatchAuditPath)
-  const actualRootBangbooBatchAudit = readJson<unknown>(rootBangbooBatchAuditPath)
-  const actualPackageBangbooBatchAudit = readJson<unknown>(packageBangbooBatchAuditPath)
-  const actualRootWEngineBatchAudit = readJson<unknown>(rootWEngineBatchAuditPath)
-  const actualPackageWEngineBatchAudit = readJson<unknown>(packageWEngineBatchAuditPath)
-  const actualRootDriveDiscBatchAudit = readJson<unknown>(rootDriveDiscBatchAuditPath)
-  const actualPackageDriveDiscBatchAudit = readJson<unknown>(packageDriveDiscBatchAuditPath)
-  const actualRootEnemyBatchAudit = readJson<unknown>(rootEnemyBatchAuditPath)
-  const actualPackageEnemyBatchAudit = readJson<unknown>(packageEnemyBatchAuditPath)
-  const actualRootDeadlyAssaultCurrentBatchAudit = readJson<unknown>(rootDeadlyAssaultCurrentBatchAuditPath)
-  const actualPackageDeadlyAssaultCurrentBatchAudit = readJson<unknown>(packageDeadlyAssaultCurrentBatchAuditPath)
-  const actualRootDeadlyAssaultHistoricalBatchAudit = readJson<unknown>(rootDeadlyAssaultHistoricalBatchAuditPath)
-  const actualPackageDeadlyAssaultHistoricalBatchAudit = readJson<unknown>(packageDeadlyAssaultHistoricalBatchAuditPath)
-  if (JSON.stringify(actualRoot) !== JSON.stringify(expected))
+  const actual = readJson<unknown>(artifactPath)
+  const actualCharacterBatchAudit = readJson<unknown>(characterBatchAuditPath)
+  const actualBangbooBatchAudit = readJson<unknown>(bangbooBatchAuditPath)
+  const actualWEngineBatchAudit = readJson<unknown>(wEngineBatchAuditPath)
+  const actualDriveDiscBatchAudit = readJson<unknown>(driveDiscBatchAuditPath)
+  const actualEnemyBatchAudit = readJson<unknown>(enemyBatchAuditPath)
+  const actualDeadlyAssaultCurrentBatchAudit = readJson<unknown>(deadlyAssaultCurrentBatchAuditPath)
+  const actualDeadlyAssaultHistoricalBatchAudit = readJson<unknown>(deadlyAssaultHistoricalBatchAuditPath)
+  if (JSON.stringify(actual) !== JSON.stringify(expected))
     throw new Error("Runtime game data artifact is stale; rerun pnpm --filter @randomplay/data audit:nanoka-runtime")
-  if (JSON.stringify(actualPackage) !== JSON.stringify(expected))
-    throw new Error("Package runtime game data mirror is stale; rerun pnpm --filter @randomplay/data audit:nanoka-runtime")
-  if (JSON.stringify(actualRootCharacterBatchAudit) !== JSON.stringify(expectedCharacterBatchAudit))
+  if (JSON.stringify(actualCharacterBatchAudit) !== JSON.stringify(expectedCharacterBatchAudit))
     throw new Error("Character batch audit artifact is stale; rerun pnpm --filter @randomplay/data audit:nanoka-runtime")
-  if (JSON.stringify(actualPackageCharacterBatchAudit) !== JSON.stringify(expectedCharacterBatchAudit))
-    throw new Error("Package Character batch audit mirror is stale; rerun pnpm --filter @randomplay/data audit:nanoka-runtime")
-  if (JSON.stringify(actualRootBangbooBatchAudit) !== JSON.stringify(expectedBangbooBatchAudit))
+  if (JSON.stringify(actualBangbooBatchAudit) !== JSON.stringify(expectedBangbooBatchAudit))
     throw new Error("Bangboo batch audit artifact is stale; rerun pnpm --filter @randomplay/data audit:nanoka-runtime")
-  if (JSON.stringify(actualPackageBangbooBatchAudit) !== JSON.stringify(expectedBangbooBatchAudit))
-    throw new Error("Package Bangboo batch audit mirror is stale; rerun pnpm --filter @randomplay/data audit:nanoka-runtime")
-  if (JSON.stringify(actualRootWEngineBatchAudit) !== JSON.stringify(expectedWEngineBatchAudit))
+  if (JSON.stringify(actualWEngineBatchAudit) !== JSON.stringify(expectedWEngineBatchAudit))
     throw new Error("W-Engine batch audit artifact is stale; rerun pnpm --filter @randomplay/data audit:nanoka-runtime")
-  if (JSON.stringify(actualPackageWEngineBatchAudit) !== JSON.stringify(expectedWEngineBatchAudit))
-    throw new Error("Package W-Engine batch audit mirror is stale; rerun pnpm --filter @randomplay/data audit:nanoka-runtime")
-  if (JSON.stringify(actualRootDriveDiscBatchAudit) !== JSON.stringify(expectedDriveDiscBatchAudit))
+  if (JSON.stringify(actualDriveDiscBatchAudit) !== JSON.stringify(expectedDriveDiscBatchAudit))
     throw new Error("Drive Disc batch audit artifact is stale; rerun pnpm --filter @randomplay/data audit:nanoka-runtime")
-  if (JSON.stringify(actualPackageDriveDiscBatchAudit) !== JSON.stringify(expectedDriveDiscBatchAudit))
-    throw new Error("Package Drive Disc batch audit mirror is stale; rerun pnpm --filter @randomplay/data audit:nanoka-runtime")
-  if (JSON.stringify(actualRootEnemyBatchAudit) !== JSON.stringify(expectedEnemyBatchAudit))
+  if (JSON.stringify(actualEnemyBatchAudit) !== JSON.stringify(expectedEnemyBatchAudit))
     throw new Error("Enemy batch audit artifact is stale; rerun pnpm --filter @randomplay/data audit:nanoka-runtime")
-  if (JSON.stringify(actualPackageEnemyBatchAudit) !== JSON.stringify(expectedEnemyBatchAudit))
-    throw new Error("Package Enemy batch audit mirror is stale; rerun pnpm --filter @randomplay/data audit:nanoka-runtime")
-  if (JSON.stringify(actualRootDeadlyAssaultCurrentBatchAudit) !== JSON.stringify(expectedDeadlyAssaultCurrentBatchAudit))
+  if (JSON.stringify(actualDeadlyAssaultCurrentBatchAudit) !== JSON.stringify(expectedDeadlyAssaultCurrentBatchAudit))
     throw new Error("DA current batch audit artifact is stale; rerun pnpm --filter @randomplay/data audit:nanoka-runtime")
-  if (JSON.stringify(actualPackageDeadlyAssaultCurrentBatchAudit) !== JSON.stringify(expectedDeadlyAssaultCurrentBatchAudit))
-    throw new Error("Package DA current batch audit mirror is stale; rerun pnpm --filter @randomplay/data audit:nanoka-runtime")
-  if (JSON.stringify(actualRootDeadlyAssaultHistoricalBatchAudit) !== JSON.stringify(expectedDeadlyAssaultHistoricalBatchAudit))
+  if (JSON.stringify(actualDeadlyAssaultHistoricalBatchAudit) !== JSON.stringify(expectedDeadlyAssaultHistoricalBatchAudit))
     throw new Error("DA historical batch audit artifact is stale; rerun pnpm --filter @randomplay/data audit:nanoka-runtime")
-  if (JSON.stringify(actualPackageDeadlyAssaultHistoricalBatchAudit) !== JSON.stringify(expectedDeadlyAssaultHistoricalBatchAudit))
-    throw new Error("Package DA historical batch audit mirror is stale; rerun pnpm --filter @randomplay/data audit:nanoka-runtime")
-  assertNanokaRuntimeGameDataArtifact(actualRoot)
-  assertNanokaRuntimeGameDataArtifact(actualPackage)
+  assertNanokaRuntimeGameDataArtifact(actual)
 }
 
 function auditCommand(): void {
   const { artifact, characterBatchAudit, bangbooBatchAudit, wEngineBatchAudit, driveDiscBatchAudit, enemyBatchAudit, deadlyAssaultCurrentBatchAudit, deadlyAssaultHistoricalBatchAudit } = buildArtifact()
-  writeJson(rootArtifactPath, artifact)
-  writeJson(packageArtifactPath, artifact)
-  writeJson(rootCharacterBatchAuditPath, characterBatchAudit)
-  writeJson(packageCharacterBatchAuditPath, characterBatchAudit)
-  writeJson(rootBangbooBatchAuditPath, bangbooBatchAudit)
-  writeJson(packageBangbooBatchAuditPath, bangbooBatchAudit)
-  writeJson(rootWEngineBatchAuditPath, wEngineBatchAudit)
-  writeJson(packageWEngineBatchAuditPath, wEngineBatchAudit)
-  writeJson(rootDriveDiscBatchAuditPath, driveDiscBatchAudit)
-  writeJson(packageDriveDiscBatchAuditPath, driveDiscBatchAudit)
-  writeJson(rootEnemyBatchAuditPath, enemyBatchAudit)
-  writeJson(packageEnemyBatchAuditPath, enemyBatchAudit)
-  writeJson(rootDeadlyAssaultCurrentBatchAuditPath, deadlyAssaultCurrentBatchAudit)
-  writeJson(packageDeadlyAssaultCurrentBatchAuditPath, deadlyAssaultCurrentBatchAudit)
-  writeJson(rootDeadlyAssaultHistoricalBatchAuditPath, deadlyAssaultHistoricalBatchAudit)
-  writeJson(packageDeadlyAssaultHistoricalBatchAuditPath, deadlyAssaultHistoricalBatchAudit)
+  writeJson(artifactPath, artifact)
+  writeJson(characterBatchAuditPath, characterBatchAudit)
+  writeJson(bangbooBatchAuditPath, bangbooBatchAudit)
+  writeJson(wEngineBatchAuditPath, wEngineBatchAudit)
+  writeJson(driveDiscBatchAuditPath, driveDiscBatchAudit)
+  writeJson(enemyBatchAuditPath, enemyBatchAudit)
+  writeJson(deadlyAssaultCurrentBatchAuditPath, deadlyAssaultCurrentBatchAudit)
+  writeJson(deadlyAssaultHistoricalBatchAuditPath, deadlyAssaultHistoricalBatchAudit)
 }
 
 function verifyCommand(): void {
-  if (!existsSync(rootArtifactPath))
-    throw new Error("Missing data/cleaned/runtime/game-data.json; run audit:nanoka-runtime first")
-  if (!existsSync(packageArtifactPath))
+  if (!existsSync(artifactPath))
     throw new Error("Missing packages/data/cleaned/runtime/game-data.json; run audit:nanoka-runtime first")
-  if (!existsSync(rootBangbooBatchAuditPath))
-    throw new Error("Missing data/cleaned/audit/nanoka-bangboo-batch-audit.json; run audit:nanoka-runtime first")
-  if (!existsSync(packageBangbooBatchAuditPath))
+  if (!existsSync(bangbooBatchAuditPath))
     throw new Error("Missing packages/data/cleaned/audit/nanoka-bangboo-batch-audit.json; run audit:nanoka-runtime first")
-  if (!existsSync(rootCharacterBatchAuditPath))
-    throw new Error("Missing data/cleaned/audit/nanoka-character-batch-audit.json; run audit:nanoka-runtime first")
-  if (!existsSync(packageCharacterBatchAuditPath))
+  if (!existsSync(characterBatchAuditPath))
     throw new Error("Missing packages/data/cleaned/audit/nanoka-character-batch-audit.json; run audit:nanoka-runtime first")
-  if (!existsSync(rootWEngineBatchAuditPath))
-    throw new Error("Missing data/cleaned/audit/nanoka-wengine-batch-audit.json; run audit:nanoka-runtime first")
-  if (!existsSync(packageWEngineBatchAuditPath))
+  if (!existsSync(wEngineBatchAuditPath))
     throw new Error("Missing packages/data/cleaned/audit/nanoka-wengine-batch-audit.json; run audit:nanoka-runtime first")
-  if (!existsSync(rootDriveDiscBatchAuditPath))
-    throw new Error("Missing data/cleaned/audit/nanoka-drive-disc-batch-audit.json; run audit:nanoka-runtime first")
-  if (!existsSync(packageDriveDiscBatchAuditPath))
+  if (!existsSync(driveDiscBatchAuditPath))
     throw new Error("Missing packages/data/cleaned/audit/nanoka-drive-disc-batch-audit.json; run audit:nanoka-runtime first")
-  if (!existsSync(rootEnemyBatchAuditPath))
-    throw new Error("Missing data/cleaned/audit/nanoka-enemy-batch-audit.json; run audit:nanoka-runtime first")
-  if (!existsSync(packageEnemyBatchAuditPath))
+  if (!existsSync(enemyBatchAuditPath))
     throw new Error("Missing packages/data/cleaned/audit/nanoka-enemy-batch-audit.json; run audit:nanoka-runtime first")
-  if (!existsSync(rootDeadlyAssaultCurrentBatchAuditPath))
-    throw new Error("Missing data/cleaned/audit/nanoka-da-current-batch-audit.json; run audit:nanoka-runtime first")
-  if (!existsSync(packageDeadlyAssaultCurrentBatchAuditPath))
+  if (!existsSync(deadlyAssaultCurrentBatchAuditPath))
     throw new Error("Missing packages/data/cleaned/audit/nanoka-da-current-batch-audit.json; run audit:nanoka-runtime first")
-  if (!existsSync(rootDeadlyAssaultHistoricalBatchAuditPath))
-    throw new Error("Missing data/cleaned/audit/nanoka-da-historical-batch-audit.json; run audit:nanoka-runtime first")
-  if (!existsSync(packageDeadlyAssaultHistoricalBatchAuditPath))
+  if (!existsSync(deadlyAssaultHistoricalBatchAuditPath))
     throw new Error("Missing packages/data/cleaned/audit/nanoka-da-historical-batch-audit.json; run audit:nanoka-runtime first")
   assertArtifactFresh()
 }

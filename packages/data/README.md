@@ -5,9 +5,9 @@ Source ingestion and cleaned data package for Fairy.
 Current state:
 
 - source descriptors and metadata helpers are implemented;
-- raw source archives are retained under the repo-level `data/source/`;
-- buhflipexplode, Mihoyo Deadly Assault, and nanoka live source snapshots have
-  offline verification scripts;
+- nanoka raw source archives are retained under `packages/data/source/`;
+- Excel, Mihoyo D-17, and buhflipexplode D-12 source archives were retired
+  from the working tree in V0.1.2 and remain recoverable from git history;
 - D-20 source registry gates live under `source-registry.json` and are verified
   by `verify:source-registry`;
 - Phase 3 nanoka drift reports live under `cleaned/audit/nanoka-drift-report/`
@@ -39,9 +39,7 @@ Current state:
   `cleaned/audit/nanoka-full-data-batch-discovery.json` and locks the domain
   counts, exclusions, historical DA boundary, and implementation PR sequence;
 - V1 golden source candidates, manual acceptance records, and the replay report
-  are generated under repo-level `data/cleaned/`;
-- `pnpm --filter @randomplay/data sync-cleaned` mirrors repo-level cleaned JSON into
-  package-local `packages/data/cleaned/` for npm packaging;
+  are generated under package-owned `packages/data/cleaned/`;
 - package exports include TypeScript source/types plus package-local cleaned
   JSON, and exclude raw source archives.
 - package-size release guard is enforced by
@@ -63,8 +61,10 @@ non-current `historicalDAPeriods` bucket, without changing the package version.
 
 Source details are recorded in `source-registry.json` and the bundled cleaned
 JSON artifacts. Excel, Mihoyo D-17, and buhflipexplode D-12 snapshots remain
-archived audit references in the repository; they are not runtime sources and
-are not included as raw payloads in the npm package.
+retired audit references only; their raw archives were physically removed from
+the current tree in V0.1.2 and are recoverable from git history when needed.
+They are not runtime sources and are not included as raw payloads in the npm
+package.
 
 This is not an official HoYoverse / miHoYo package. Game data, text, and images
 belong to their respective rights holders. If this package infringes your
@@ -73,10 +73,7 @@ within 24-72 hours.
 
 Useful source checks:
 
-- `pnpm --filter @randomplay/data verify:buhflipexplode-da`
-- `pnpm --filter @randomplay/data verify:excel`
 - `pnpm --filter @randomplay/data verify:golden-v1`
-- `pnpm --filter @randomplay/data verify:mihoyo-da`
 - `pnpm --filter @randomplay/data verify:nanoka`
 - `pnpm --filter @randomplay/data verify:nanoka-da-history`
 - `pnpm --filter @randomplay/data verify:nanoka-runtime`

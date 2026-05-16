@@ -29,9 +29,9 @@ needed before true-data replay. It does not change QA's fixture assertions.
 | Source | Current state | V1 replay use |
 |---|---|---|
 | Core rules / guide reference | Implemented in `@randomplay/core`, reference retained in `docs/reference/`. | Formula-only anchors such as defense, crit, rounding, anomaly/disorder constants. |
-| buhflipexplode DA snapshot | PR #19 retained 35 live periods, boss data, buffs, multipliers, and algorithm drift gate. | DA boss base HP/DEF/daze/anomaly data, period multipliers, English buff/boss text. |
-| Mihoyo DA snapshot | PR #24 retained 35 details and zh/en alignment. | Chinese buff/boss/room text and source anchors for later typed-modifier review. |
-| Excel workbook | Raw workbook retained; `workbook-audit.json` records sheet/column shape. | Minimal agent kit data for Yixuan / Nicole / Yanagi team-modifier anchors, if V1 replay uses formal sourced modifiers. |
+| buhflipexplode DA snapshot | Retired D-12 audit baseline; raw archive removed from the current tree in V0.1.2 and recoverable from git history only. | Historical audit evidence only; current runtime uses nanoka-backed artifacts. |
+| Mihoyo DA snapshot | Retired D-17 audit baseline; raw archive removed from the current tree in V0.1.2 and recoverable from git history only. | Historical audit evidence only; current runtime uses nanoka-backed artifacts. |
+| Excel workbook | Retired workbook baseline; raw archive removed from the current tree in V0.1.2 and recoverable from git history only. | Historical golden evidence only; current replay verifies generated artifacts without the workbook. |
 
 ## 28-Anchor Matrix
 
@@ -63,12 +63,13 @@ needed before true-data replay. It does not change QA's fixture assertions.
 | G24 | Penguinboo active skill numeric contribution | Excel has Penguinboo `邦布属性!A42:T42` and skill rows `邦布技能!A2:H3`; Path X uses numeric panel and skill multipliers only. | Passed with explicit Bangboo actor segment: attack `6198.0006 * 4.62 = 28634.762772`, daze `90 * 2.7 = 243`, and buildup `346 * floor(120)/100 = 415.2`. |
 | G25 | Sharkboo active skill numeric contribution | Excel has Sharkboo `邦布属性!A24:T24` and skill rows `邦布技能!A17:H18`; Path X uses numeric panel and skill multipliers only. | Passed with explicit Bangboo actor segment: attack `8057.0996 * 3.84 = 30939.262464`, daze `99 * 1.4 = 138.6`, and buildup `180 * floor(132)/100 = 237.6`. |
 | G26 | Plugboo active skill numeric contribution | Excel has Plugboo `邦布属性!A18:T18` and skill rows `邦布技能!A29:H30`; Path X uses numeric panel and skill multipliers only. | Passed with explicit Bangboo actor segment: attack `8057.0996 * 5.12 = 41252.349952`, daze `99 * 1.87 = 185.13`, and buildup `240 * floor(132)/100 = 316.8`. |
-| G27 | Yixuan approved-live nanoka proof | Nanoka `data/source/raw/nanoka/zzz/2.8/zh/character/1371.json` provides identity, level-60 panel, resource values, rupture fields, and first-basic skill params. | Passed with executable replay: attack `872.5748 * 0.458 = 399.6392584`, daze `93 * 0.286 = 26.598`, maxAdrenaline `120`, automaticAdrenalineAccumulation `2`, resonanceRecovery `71.5`, adrenalineRecovery `0.52`. |
-| G28 | Plugboo approved-live nanoka proof | Nanoka `data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json` provides identity, level-60 panel, active skill numeric values, buildup, and electric element text. | Passed with executable replay: attack `8057.0996 * 5.12 = 41252.349952`, daze `99 * 1.87 = 185.13`, buildup `240 * floor(132)/100 = 316.8`, element `electric`. |
+| G27 | Yixuan approved-live nanoka proof | Nanoka `packages/data/source/raw/nanoka/zzz/2.8/zh/character/1371.json` provides identity, level-60 panel, resource values, rupture fields, and first-basic skill params. | Passed with executable replay: attack `872.5748 * 0.458 = 399.6392584`, daze `93 * 0.286 = 26.598`, maxAdrenaline `120`, automaticAdrenalineAccumulation `2`, resonanceRecovery `71.5`, adrenalineRecovery `0.52`. |
+| G28 | Plugboo approved-live nanoka proof | Nanoka `packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json` provides identity, level-60 panel, active skill numeric values, buildup, and electric element text. | Passed with executable replay: attack `8057.0996 * 5.12 = 41252.349952`, daze `99 * 1.87 = 185.13`, buildup `240 * floor(132)/100 = 316.8`, element `electric`. |
 
 ## Agent Source Evidence For G21-G23
 
-`data.xlsx` already has the three V1 team agents in `代理人属性`:
+The retired `data.xlsx` baseline recorded the three V1 team agents in
+`代理人属性`:
 
 | Agent | Row | Excel id / EN name | V1 use |
 |---|---:|---|---|
@@ -116,8 +117,8 @@ nanoka runtime-primary proof anchors:
 
 | Anchor | Entity | Source anchor | Runtime proof |
 |---|---|---|---|
-| G27 | 仪玄 / Yixuan | `data/source/raw/nanoka/zzz/2.8/zh/character/1371.json` | Level-60 panel, first-basic damage/daze params, `rp_*` Adrenaline values, `fever_recovery`, and rupture fields. |
-| G28 | 插头布 / Plugboo | `data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json` | Level-60 Bangboo panel, active skill `5400801` multiplier/daze/buildup, and electric element text. |
+| G27 | 仪玄 / Yixuan | `packages/data/source/raw/nanoka/zzz/2.8/zh/character/1371.json` | Level-60 panel, first-basic damage/daze params, `rp_*` Adrenaline values, `fever_recovery`, and rupture fields. |
+| G28 | 插头布 / Plugboo | `packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json` | Level-60 Bangboo panel, active skill `5400801` multiplier/daze/buildup, and electric element text. |
 
 ## Manual Acceptance Gate
 
@@ -127,8 +128,8 @@ source text can enter replay, it needs an acceptance record.
 
 Storage path:
 
-- `data/cleaned/audit/nicole.acceptance.json`
-- `data/cleaned/audit/yanagi.acceptance.json`
+- `packages/data/cleaned/audit/nicole.acceptance.json`
+- `packages/data/cleaned/audit/yanagi.acceptance.json`
 
 Minimum acceptance record fields:
 
@@ -180,13 +181,13 @@ Minimum Excel reader work for #43:
 `pnpm --filter @randomplay/data audit:golden-v1` generates two machine-readable
 cleaned artifacts:
 
-- `data/cleaned/audit/v1-agent-source-candidates.json` — minimal #40 reader
+- `packages/data/cleaned/audit/v1-agent-source-candidates.json` — minimal #40 reader
   output for Yixuan / Nicole / Yanagi identity rows plus calculation-relevant
   source text candidates and `sourceTextHash` values.
-- `data/cleaned/audit/nicole.acceptance.json` and
-  `data/cleaned/audit/yanagi.acceptance.json` — lo-user manual acceptance
+- `packages/data/cleaned/audit/nicole.acceptance.json` and
+  `packages/data/cleaned/audit/yanagi.acceptance.json` — lo-user manual acceptance
   records for G22/G23 source-text mappings.
-- `data/cleaned/golden/v1-replay-report.json` — executable replay baseline for
+- `packages/data/cleaned/golden/v1-replay-report.json` — executable replay baseline for
   the 28-anchor scope after G13, G18, G19, G20, G24-G26, and G27/G28.
 
 The current replay report intentionally reports:
@@ -231,7 +232,7 @@ TL recommendation:
 - **G24-G26**: implement the first Bangboo V1.1 Path X anchors with Penguinboo,
   Sharkboo, and Plugboo Excel numeric rows only. They intentionally do not claim
   source-backed Bangboo element or passive/team-buff behavior because those
-  fields are absent from the retained Excel Path X data.
+  fields are absent from the retired Excel-derived Path X evidence.
 
 The current replay baseline covers the original 19 V1 anchors, V1.x Track B
 added G13/G18/G19/G20, and V1.1 Bangboo B1/B2/B3 added G24/G25/G26.

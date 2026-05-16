@@ -183,8 +183,8 @@
     "currentLiveVersion": "2.8",
     "policy": "historical periods must not be mixed into configured-live runtime records or used as current-runtime fallback",
     "schemaImpact": "schema-additive; release version to be decided after V1.2.x batch completion",
-    "manifestPath": "data/source/raw/nanoka/zzz/historical-da-fetch-manifest.json",
-    "auditArtifact": "data/cleaned/audit/nanoka-da-historical-batch-audit.json",
+    "manifestPath": "packages/data/source/raw/nanoka/zzz/historical-da-fetch-manifest.json",
+    "auditArtifact": "packages/data/cleaned/audit/nanoka-da-historical-batch-audit.json",
     "implementationStatus": "complete-pr-f",
     "summary": {
       "snapshotCount": 10,

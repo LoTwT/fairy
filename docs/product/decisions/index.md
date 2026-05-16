@@ -17,7 +17,7 @@
 | **D-03** | 内置敌人范围 | ✅ 锁定（v2.0 修订） | DoD = "data 实际范围 = V1 覆盖范围"；缺数据时 fail loud；不预设固定数量 | 中 |
 | **D-04** | 分享形式 | ✅ 锁定（v2.0 修订） | V1 仅 JSON 文件导入导出；压缩构筑代码 / URL 编码 → V1.1+；真正短链 → V2 | 高 |
 | **D-05** | 开源协议 | ✅ 锁定（已修订） | 见 D-05-rev | 中 |
-| **D-05-rev** | 开源协议 / 源数据留档 | ✅ 锁定 | 代码保持 MIT；`data/source/` 与 `docs/reference/` 保留源格式留档并版本控制；npm/package 仅分发清洗后的 JSON + TypeScript 类型；攻略原文入 `docs/reference/` 仅供参考，不作为 formal data | 中 |
+| **D-05-rev** | 开源协议 / 源数据留档 | ✅ 锁定（2026-05-16 errata） | 代码保持 MIT；当前可用 raw source 归属 `packages/data/source/`；Excel / 米游社 D-17 / buhflipexplode D-12 raw archives 在 V0.1.2 重构中物理删除，仅保留 git-history recovery pointer；npm/package 仅分发清洗后的 JSON + TypeScript 类型；攻略原文入 `docs/reference/` 仅供参考，不作为 formal data | 中 |
 | **D-06** | V1 第一目标用户 | ✅ 锁定 | P2 配队与对比（v2.0 后改为 CLI / AI surface 服务此画像） | 中 |
 | **D-07** | 数据规则源 | ✅ 锁定 | 攻略 NGA 44468012 快照（rules-v0.1-attached-2026-05-04） + 数据来源（lo-user 提供 Excel + 米游社危局强袭战 + buhflipexplode.org/zzz/da/） | 高 |
 | **D-08** | 视觉调性 | ⏳ 推迟 | V1 无 Web UI，调性决策推迟到 V2 阶段 | — |
@@ -93,13 +93,15 @@
 
 ### D-05-rev 开源协议 / 源数据留档
 
-**v2.0 修订状态**：代码仓库仍按 MIT。源格式数据需要入仓留档以保证数据清洗可审计，但发布产物只包含清洗后的 JSON 与 TypeScript 类型。
+**v2.0 修订状态**：代码仓库仍按 MIT。当前仍使用的源格式数据归属
+`packages/data/source/`，发布产物只包含清洗后的 JSON 与 TypeScript 类型。
+V0.1.2 errata：Excel / 米游社 D-17 / buhflipexplode D-12 raw archives 物理
+删除，仅保留 source registry 中的 git-history recovery pointer。
 
 **目录边界**：
-- `data/source/`：Excel、raw crawler payload、source manifest；版本控制保留，不进入 npm/package 发布物
+- `packages/data/source/`：当前 nanoka raw source 与 source manifest；版本控制保留，不进入 npm/package 发布物
 - `docs/reference/`：攻略原文等参考材料；版本控制保留，不进入 npm/package 发布物
-- `data/cleaned/`：清洗后的派生 JSON staging 目录；发布前同步到 `packages/data/cleaned/`
-- `packages/data/cleaned/`：`@randomplay/data` npm/package 内实际分发的清洗 JSON mirror
+- `packages/data/cleaned/`：清洗后的派生 JSON canonical 目录，也是 `@randomplay/data` npm/package 内实际分发的清洗 JSON 来源
 - `packages/data/src/types/`：清洗数据与 source manifest 的 TypeScript 类型
 
 **确认来源**：@lo-user 2026-05-05 要求 `data.xlsx` 与 `zzz-data-introduction.txt` 入仓，并要求 raw source format 留档但不分发。
@@ -222,7 +224,7 @@ buhflipexplode 危局强袭战 buff `sourceConflict` 已做人工 audit。lo-use
 `Q1，按 buhflipexplode`；nanoka (`https://zzz.nanoka.cc/boss/`) 仅作为人工查询源，
 且 3 条均与 buhflipexplode 一致。因此 cleaned release evidence 记录为
 `resolved-prefer-buhflipexplode`，Mihoyo 原值和 source refs 继续保留为审计线索。
-详见 `data/cleaned/audit/mihoyo-buhflipexplode.source-conflicts.json`。
+详见 `packages/data/cleaned/audit/mihoyo-buhflipexplode.source-conflicts.json`。
 
 **Multi-source metadata**：
 - entity-level `sources[]`
@@ -287,7 +289,7 @@ buhflipexplode 危局强袭战 buff `sourceConflict` 已做人工 audit。lo-use
 
 **实施 PR**：#24（commit `4b9ac2a`）— TL 自带 docs 同步（`docs/data-source/mihoyo/*` / `docs/data-contract/cleaned-schema-spec.md` DA domain / `docs/index.md` / `CLAUDE.md` / `robots.txt` / source registry / package README）。
 
-**2026-05-08 sourceConflict audit 决议**（与 D-16 同步）：PR #24 留存的 3 条米游社 vs buhflipexplode 数值冲突（21 澄意 / 8 灼冽 / 1 破招）已人工 audit。lo-user 用 nanoka (`https://zzz.nanoka.cc/boss/`) 作为人工查询源（不接管线），三方比对 nanoka 与 buhflipexplode 一致（2:1 vs Mihoyo），lo-user 决策 `Q1，按 buhflipexplode`。cleaned release evidence 记录为 `resolved-prefer-buhflipexplode`，Mihoyo 原值与 sourceRefs 保留为审计线索。详见 `data/cleaned/audit/mihoyo-buhflipexplode.source-conflicts.json`（PR #33 commit `04e7077`）。
+**2026-05-08 sourceConflict audit 决议**（与 D-16 同步）：PR #24 留存的 3 条米游社 vs buhflipexplode 数值冲突（21 澄意 / 8 灼冽 / 1 破招）已人工 audit。lo-user 用 nanoka (`https://zzz.nanoka.cc/boss/`) 作为人工查询源（不接管线），三方比对 nanoka 与 buhflipexplode 一致（2:1 vs Mihoyo），lo-user 决策 `Q1，按 buhflipexplode`。cleaned release evidence 记录为 `resolved-prefer-buhflipexplode`，Mihoyo 原值与 sourceRefs 保留为审计线索。详见 `packages/data/cleaned/audit/mihoyo-buhflipexplode.source-conflicts.json`（PR #33 commit `04e7077`）。
 
 **可逆性**：中（API 形态变更需要重抓 + parity 重核）
 
@@ -324,7 +326,7 @@ buhflipexplode 危局强袭战 buff `sourceConflict` 已做人工 audit。lo-use
 **锁定状态**：@lo-user 2026-05-05 选择选项 B。Fairy 保持 MIT，不复制 / 改写 buhflipexplode GPL-3.0 JavaScript 到 MIT runtime 包。
 
 **处理边界**：
-- raw JSON / JS / HTML 可入 `data/source/raw/buhflipexplode/` 留档；不进入 npm/package 发布物
+- raw JSON / JS / HTML 曾作为 D-12 audit baseline 留档；V0.1.2 起 raw archive 从当前树移除，仅通过 git history recovery pointer 保留审计可追溯性；不进入 npm/package 发布物
 - README / metadata 需声明数据版权归 miHoYo 或各自权利方；如有侵权联系删除
 - buhflipexplode 算法逻辑仅作为参考；Fairy 在 `@randomplay/core` / `@randomplay/data` 中独立实现等价逻辑
 - 如未来需要直接运行原 JS，必须另开 GPL adapter/package 决策，不进入默认 MIT runtime

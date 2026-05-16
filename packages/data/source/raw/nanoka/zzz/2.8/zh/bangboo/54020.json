@@ -1,0 +1,461 @@
+{
+  "id": 54020,
+  "code_name": "Birkblick",
+  "name": "比克布利克",
+  "desc": "你我皆在镜头之下。",
+  "rarity": 4,
+  "icon": "UI/Sprite/A1DynamicLoad/BangbooModGarage/UnPacker/BangbooRole/BangbooGarageRole42.png",
+  "stats": {
+    "endurance": 180,
+    "hp_max": 396,
+    "hpupgrade": 471237,
+    "attack": 64,
+    "attack_upgrade": 321091,
+    "break_stun": 123,
+    "element_abnormal_power": 97,
+    "defence": 28,
+    "def_upgrade": 78871,
+    "crit": 500,
+    "pen_ratio": 0,
+    "crit_dmg": 5000
+  },
+  "level": {
+    "1": {
+      "hp_max": 0,
+      "attack": 0,
+      "defence": 0,
+      "level_max": 10,
+      "level_min": 0,
+      "materials": {
+        "10": 15000,
+        "102010": 4
+      },
+      "extra": {
+        "20101": {
+          "prop": 20101,
+          "name": "暴击率",
+          "format": "{0:0.#%}",
+          "value": 0
+        },
+        "21101": {
+          "prop": 21101,
+          "name": "暴击伤害",
+          "format": "{0:0.#%}",
+          "value": 0
+        }
+      }
+    },
+    "2": {
+      "hp_max": 207,
+      "attack": 59,
+      "defence": 35,
+      "level_max": 20,
+      "level_min": 10,
+      "materials": {
+        "10": 35000,
+        "102020": 12
+      },
+      "extra": {
+        "20101": {
+          "prop": 20101,
+          "name": "暴击率",
+          "format": "{0:0.#%}",
+          "value": 450
+        },
+        "21101": {
+          "prop": 21101,
+          "name": "暴击伤害",
+          "format": "{0:0.#%}",
+          "value": 0
+        }
+      }
+    },
+    "3": {
+      "hp_max": 414,
+      "attack": 297,
+      "defence": 69,
+      "level_max": 30,
+      "level_min": 20,
+      "materials": {
+        "10": 75000,
+        "102020": 20
+      },
+      "extra": {
+        "20101": {
+          "prop": 20101,
+          "name": "暴击率",
+          "format": "{0:0.#%}",
+          "value": 2250
+        },
+        "21101": {
+          "prop": 21101,
+          "name": "暴击伤害",
+          "format": "{0:0.#%}",
+          "value": 0
+        }
+      }
+    },
+    "4": {
+      "hp_max": 621,
+      "attack": 891,
+      "defence": 104,
+      "level_max": 40,
+      "level_min": 30,
+      "materials": {
+        "10": 125000,
+        "102030": 10
+      },
+      "extra": {
+        "20101": {
+          "prop": 20101,
+          "name": "暴击率",
+          "format": "{0:0.#%}",
+          "value": 2250
+        },
+        "21101": {
+          "prop": 21101,
+          "name": "暴击伤害",
+          "format": "{0:0.#%}",
+          "value": 2500
+        }
+      }
+    },
+    "5": {
+      "hp_max": 828,
+      "attack": 2375,
+      "defence": 139,
+      "level_max": 50,
+      "level_min": 40,
+      "materials": {
+        "10": 250000,
+        "102030": 20
+      },
+      "extra": {
+        "20101": {
+          "prop": 20101,
+          "name": "暴击率",
+          "format": "{0:0.#%}",
+          "value": 4500
+        },
+        "21101": {
+          "prop": 21101,
+          "name": "暴击伤害",
+          "format": "{0:0.#%}",
+          "value": 2500
+        }
+      }
+    },
+    "6": {
+      "hp_max": 1034,
+      "attack": 5938,
+      "defence": 173,
+      "level_max": 60,
+      "level_min": 50,
+      "materials": {},
+      "extra": {
+        "20101": {
+          "prop": 20101,
+          "name": "暴击率",
+          "format": "{0:0.#%}",
+          "value": 4500
+        },
+        "21101": {
+          "prop": 21101,
+          "name": "暴击伤害",
+          "format": "{0:0.#%}",
+          "value": 5000
+        }
+      }
+    }
+  },
+  "skill": {
+    "a": {
+      "level": {
+        "1": {
+          "name": "蒙太奇连击",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，投掷出浮游炮，浮游炮可以发射最多3段激光，攻击目标敌人，造成<color=#F0D12B>物理伤害</color>并累计大量失衡值。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5402001, Prop:1001}*2+{Skill:5402002, Prop:1001}|{Skill:5402001, Prop:1002}*2+{Skill:5402002, Prop:1002}|28秒"
+        },
+        "2": {
+          "name": "蒙太奇连击",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，投掷出浮游炮，浮游炮可以发射最多3段激光，攻击目标敌人，造成<color=#F0D12B>物理伤害</color>并累计大量失衡值。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5402001, Prop:1001}*2+{Skill:5402002, Prop:1001}|{Skill:5402001, Prop:1002}*2+{Skill:5402002, Prop:1002}|28秒"
+        },
+        "3": {
+          "name": "蒙太奇连击",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，投掷出浮游炮，浮游炮可以发射最多3段激光，攻击目标敌人，造成<color=#F0D12B>物理伤害</color>并累计大量失衡值。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5402001, Prop:1001}*2+{Skill:5402002, Prop:1001}|{Skill:5402001, Prop:1002}*2+{Skill:5402002, Prop:1002}|28秒"
+        },
+        "4": {
+          "name": "蒙太奇连击",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，投掷出浮游炮，浮游炮可以发射最多3段激光，攻击目标敌人，造成<color=#F0D12B>物理伤害</color>并累计大量失衡值。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5402001, Prop:1001}*2+{Skill:5402002, Prop:1001}|{Skill:5402001, Prop:1002}*2+{Skill:5402002, Prop:1002}|28秒"
+        },
+        "5": {
+          "name": "蒙太奇连击",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，投掷出浮游炮，浮游炮可以发射最多3段激光，攻击目标敌人，造成<color=#F0D12B>物理伤害</color>并累计大量失衡值。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5402001, Prop:1001}*2+{Skill:5402002, Prop:1001}|{Skill:5402001, Prop:1002}*2+{Skill:5402002, Prop:1002}|28秒"
+        },
+        "6": {
+          "name": "蒙太奇连击",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，投掷出浮游炮，浮游炮可以发射最多3段激光，攻击目标敌人，造成<color=#F0D12B>物理伤害</color>并累计大量失衡值。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5402001, Prop:1001}*2+{Skill:5402002, Prop:1001}|{Skill:5402001, Prop:1002}*2+{Skill:5402002, Prop:1002}|28秒"
+        },
+        "7": {
+          "name": "蒙太奇连击",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，投掷出浮游炮，浮游炮可以发射最多3段激光，攻击目标敌人，造成<color=#F0D12B>物理伤害</color>并累计大量失衡值。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5402001, Prop:1001}*2+{Skill:5402002, Prop:1001}|{Skill:5402001, Prop:1002}*2+{Skill:5402002, Prop:1002}|28秒"
+        },
+        "8": {
+          "name": "蒙太奇连击",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，投掷出浮游炮，浮游炮可以发射最多3段激光，攻击目标敌人，造成<color=#F0D12B>物理伤害</color>并累计大量失衡值。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5402001, Prop:1001}*2+{Skill:5402002, Prop:1001}|{Skill:5402001, Prop:1002}*2+{Skill:5402002, Prop:1002}|28秒"
+        },
+        "9": {
+          "name": "蒙太奇连击",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，投掷出浮游炮，浮游炮可以发射最多3段激光，攻击目标敌人，造成<color=#F0D12B>物理伤害</color>并累计大量失衡值。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5402001, Prop:1001}*2+{Skill:5402002, Prop:1001}|{Skill:5402001, Prop:1002}*2+{Skill:5402002, Prop:1002}|28秒"
+        },
+        "10": {
+          "name": "蒙太奇连击",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，投掷出浮游炮，浮游炮可以发射最多3段激光，攻击目标敌人，造成<color=#F0D12B>物理伤害</color>并累计大量失衡值。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5402001, Prop:1001}*2+{Skill:5402002, Prop:1001}|{Skill:5402001, Prop:1002}*2+{Skill:5402002, Prop:1002}|28秒"
+        }
+      }
+    },
+    "b": {
+      "level": {
+        "1": {
+          "name": "观测者效应",
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在2名或以上<color=#FFFFFF>[坎卜斯黑枝]</color>阵营的角色时触发：代理人发动<color=#FFFFFF>[强化特殊技]</color>时，比克布利克造成的失衡值提升4%，最多叠加3层，持续15秒，重复触发时刷新持续时间，拥有3层效果时，造成的伤害提升10%。",
+          "property": [
+            "所需[坎卜斯黑枝]角色数",
+            "每层失衡值提升"
+          ],
+          "param": "2|4%"
+        },
+        "2": {
+          "name": "观测者效应",
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在2名或以上<color=#FFFFFF>[坎卜斯黑枝]</color>阵营的角色时触发：代理人发动<color=#FFFFFF>[强化特殊技]</color>时，比克布利克造成的失衡值提升5%，最多叠加3层，持续15秒，重复触发时刷新持续时间，拥有3层效果时，造成的伤害提升12.5%。",
+          "property": [
+            "所需[坎卜斯黑枝]角色数",
+            "每层失衡值提升"
+          ],
+          "param": "2|5%"
+        },
+        "3": {
+          "name": "观测者效应",
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在1名或以上<color=#FFFFFF>[坎卜斯黑枝]</color>阵营的角色时触发：代理人发动<color=#FFFFFF>[强化特殊技]</color>时，比克布利克造成的失衡值提升6%，最多叠加3层，持续15秒，重复触发时刷新持续时间，拥有3层效果时，造成的伤害提升15%。",
+          "property": [
+            "所需[坎卜斯黑枝]角色数",
+            "每层失衡值提升"
+          ],
+          "param": "1|6%"
+        },
+        "4": {
+          "name": "观测者效应",
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在1名或以上<color=#FFFFFF>[坎卜斯黑枝]</color>阵营的角色时触发：代理人发动<color=#FFFFFF>[强化特殊技]</color>时，比克布利克造成的失衡值提升7%，最多叠加3层，持续15秒，重复触发时刷新持续时间，拥有3层效果时，造成的伤害提升17.5%。",
+          "property": [
+            "所需[坎卜斯黑枝]角色数",
+            "每层失衡值提升"
+          ],
+          "param": "1|7%"
+        },
+        "5": {
+          "name": "观测者效应",
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在1名或以上<color=#FFFFFF>[坎卜斯黑枝]</color>阵营的角色时触发：代理人发动<color=#FFFFFF>[强化特殊技]</color>时，比克布利克造成的失衡值提升8%，最多叠加3层，持续15秒，重复触发时刷新持续时间，拥有3层效果时，造成的伤害提升20%。",
+          "property": [
+            "所需[坎卜斯黑枝]角色数",
+            "每层失衡值提升"
+          ],
+          "param": "1|8%"
+        }
+      }
+    },
+    "c": {
+      "level": {
+        "1": {
+          "name": "战地特写镜头",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n使用浮游炮发射强力激光，对前方敌人造成大量<color=#F0D12B>物理伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5402003, Prop:1001}|{Skill:5402003, Prop:1002}"
+        },
+        "2": {
+          "name": "战地特写镜头",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n使用浮游炮发射强力激光，对前方敌人造成大量<color=#F0D12B>物理伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5402003, Prop:1001}|{Skill:5402003, Prop:1002}"
+        },
+        "3": {
+          "name": "战地特写镜头",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n使用浮游炮发射强力激光，对前方敌人造成大量<color=#F0D12B>物理伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5402003, Prop:1001}|{Skill:5402003, Prop:1002}"
+        },
+        "4": {
+          "name": "战地特写镜头",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n使用浮游炮发射强力激光，对前方敌人造成大量<color=#F0D12B>物理伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5402003, Prop:1001}|{Skill:5402003, Prop:1002}"
+        },
+        "5": {
+          "name": "战地特写镜头",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n使用浮游炮发射强力激光，对前方敌人造成大量<color=#F0D12B>物理伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5402003, Prop:1001}|{Skill:5402003, Prop:1002}"
+        },
+        "6": {
+          "name": "战地特写镜头",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n使用浮游炮发射强力激光，对前方敌人造成大量<color=#F0D12B>物理伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5402003, Prop:1001}|{Skill:5402003, Prop:1002}"
+        },
+        "7": {
+          "name": "战地特写镜头",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n使用浮游炮发射强力激光，对前方敌人造成大量<color=#F0D12B>物理伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5402003, Prop:1001}|{Skill:5402003, Prop:1002}"
+        },
+        "8": {
+          "name": "战地特写镜头",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n使用浮游炮发射强力激光，对前方敌人造成大量<color=#F0D12B>物理伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5402003, Prop:1001}|{Skill:5402003, Prop:1002}"
+        },
+        "9": {
+          "name": "战地特写镜头",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n使用浮游炮发射强力激光，对前方敌人造成大量<color=#F0D12B>物理伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5402003, Prop:1001}|{Skill:5402003, Prop:1002}"
+        },
+        "10": {
+          "name": "战地特写镜头",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n使用浮游炮发射强力激光，对前方敌人造成大量<color=#F0D12B>物理伤害</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5402003, Prop:1001}|{Skill:5402003, Prop:1002}"
+        }
+      }
+    }
+  },
+  "skill_prop": {
+    "5402001": {
+      "1001": {
+        "main": 26900,
+        "growth": 2690,
+        "format": "%"
+      },
+      "1002": {
+        "main": 9800,
+        "growth": 980,
+        "format": "%"
+      },
+      "element_accumulation_value": 12600
+    },
+    "5402002": {
+      "1001": {
+        "main": 35800,
+        "growth": 3580,
+        "format": "%"
+      },
+      "1002": {
+        "main": 13100,
+        "growth": 1310,
+        "format": "%"
+      },
+      "element_accumulation_value": 16800
+    },
+    "5402003": {
+      "1001": {
+        "main": 94500,
+        "growth": 9450,
+        "format": "%"
+      },
+      "1002": {
+        "main": 13500,
+        "growth": 1350,
+        "format": "%"
+      },
+      "element_accumulation_value": 40500
+    }
+  }
+}

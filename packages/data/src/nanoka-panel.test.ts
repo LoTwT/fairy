@@ -11,7 +11,7 @@ function readJson<T>(path: string): T {
 
 describe("nanoka panel normalization gate", () => {
   it("derives live agent base panel fields from retained nanoka stats and level rows", () => {
-    const nekomata = readJson<NanokaPanelSource>("data/source/raw/nanoka/zzz/2.8/zh/character/1021.json")
+    const nekomata = readJson<NanokaPanelSource>("packages/data/source/raw/nanoka/zzz/2.8/zh/character/1021.json")
 
     expect(deriveNanokaPanelValue(nekomata, {
       baseKey: "hp_max",
@@ -31,7 +31,7 @@ describe("nanoka panel normalization gate", () => {
   })
 
   it("derives live Bangboo base panel fields from retained nanoka stats and level rows", () => {
-    const plugboo = readJson<NanokaPanelSource>("data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json")
+    const plugboo = readJson<NanokaPanelSource>("packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/54008.json")
 
     expect(deriveNanokaPanelValue(plugboo, {
       baseKey: "attack",
@@ -51,7 +51,7 @@ describe("nanoka panel normalization gate", () => {
   })
 
   it("fails loud when a required panel field is missing", () => {
-    const nekomata = readJson<NanokaPanelSource>("data/source/raw/nanoka/zzz/2.8/zh/character/1021.json")
+    const nekomata = readJson<NanokaPanelSource>("packages/data/source/raw/nanoka/zzz/2.8/zh/character/1021.json")
 
     expect(() => deriveNanokaPanelValue(nekomata, {
       baseKey: "missing",

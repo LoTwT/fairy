@@ -1,6 +1,6 @@
 # Raw source archives are versioned in git for auditability, but they must not
 # enter package tarballs.
-data/source/
+packages/data/source/
 docs/reference/
 
 # Local / agent workspace artifacts.

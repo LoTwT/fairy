@@ -44,7 +44,7 @@ function readJson<T>(path: string): T {
 }
 
 function nanokaSource() {
-  const registry = readJson<SourceRegistry>("data/source-registry.json")
+  const registry = readJson<SourceRegistry>("packages/data/source-registry.json")
   const source = registry.sources.find(item => item.sourceId === "nanoka-zzz")
   expect(source, "missing nanoka registry entry").toBeDefined()
   return source!
@@ -67,10 +67,10 @@ describe("nanoka source gate", () => {
     expect(output).toContain("source registry verification passed")
   })
 
-  it("keeps the package source-registry mirror byte-identical", () => {
-    expect(readFileSync(join(repoRoot, "packages/data/source-registry.json"), "utf8")).toBe(
-      readFileSync(join(repoRoot, "data/source-registry.json"), "utf8"),
-    )
+  it("keeps the canonical source-registry artifact readable from the data package", () => {
+    const registry = readJson<SourceRegistry>("packages/data/source-registry.json")
+
+    expect(registry.sources.some(source => source.sourceId === "nanoka-zzz")).toBe(true)
   })
 
   it("allowlists manifest, approved versioned indexes, and localized detail URLs separately", () => {
@@ -103,7 +103,7 @@ describe("nanoka source gate", () => {
   })
 
   it("locks Adrenaline and Resonance resource rows to canonical promotable live evidence", () => {
-    const matrix = readJson<CoverageMatrix>("data/cleaned/audit/nanoka-coverage-matrix.json")
+    const matrix = readJson<CoverageMatrix>("packages/data/cleaned/audit/nanoka-coverage-matrix.json")
     const rows = new Map(matrix.rows.map(row => [row.fieldId, row]))
 
     expect([...rows.keys()].filter(fieldId => fieldId.startsWith("sentinel."))).toEqual([])
@@ -122,7 +122,7 @@ describe("nanoka source gate", () => {
   })
 
   it("promotes metadata source registry and SourceRef rows only after executable gates exist", () => {
-    const matrix = readJson<CoverageMatrix>("data/cleaned/audit/nanoka-coverage-matrix.json")
+    const matrix = readJson<CoverageMatrix>("packages/data/cleaned/audit/nanoka-coverage-matrix.json")
     const rows = new Map(matrix.rows.map(row => [row.fieldId, row]))
 
     expect(matrix.status).toBe("phase-4-runtime-cutover-gate")
@@ -154,7 +154,7 @@ describe("nanoka source gate", () => {
   })
 
   it("promotes agent promotion extra stats only as a structured source artifact", () => {
-    const matrix = readJson<CoverageMatrix>("data/cleaned/audit/nanoka-coverage-matrix.json")
+    const matrix = readJson<CoverageMatrix>("packages/data/cleaned/audit/nanoka-coverage-matrix.json")
     const rows = new Map(matrix.rows.map(row => [row.fieldId, row]))
     const row = rows.get("agents.promotionExtraStats")
 
@@ -181,7 +181,7 @@ describe("nanoka source gate", () => {
   })
 
   it("promotes Bangboo element only from deterministic live skill damage text", () => {
-    const matrix = readJson<CoverageMatrix>("data/cleaned/audit/nanoka-coverage-matrix.json")
+    const matrix = readJson<CoverageMatrix>("packages/data/cleaned/audit/nanoka-coverage-matrix.json")
     const rows = new Map(matrix.rows.map(row => [row.fieldId, row]))
     const row = rows.get("bangboos.element")
 
@@ -201,7 +201,7 @@ describe("nanoka source gate", () => {
   })
 
   it("adds Phase 3 missing-anchor candidate samples without marking them exit-clean", () => {
-    const matrix = readJson<CoverageMatrix>("data/cleaned/audit/nanoka-coverage-matrix.json")
+    const matrix = readJson<CoverageMatrix>("packages/data/cleaned/audit/nanoka-coverage-matrix.json")
     const samples = new Map(matrix.sampleSources.map(sample => [sample.id, sample]))
     const rows = new Map(matrix.rows.map(row => [row.fieldId, row]))
 
@@ -232,7 +232,7 @@ describe("nanoka source gate", () => {
   })
 
   it("locks the V1.2.1 Bangboo batch to the full approved-live index", () => {
-    const matrix = readJson<CoverageMatrix>("data/cleaned/audit/nanoka-coverage-matrix.json")
+    const matrix = readJson<CoverageMatrix>("packages/data/cleaned/audit/nanoka-coverage-matrix.json")
     const samples = new Map(matrix.sampleSources.map(sample => [sample.id, sample]))
     const rows = new Map(matrix.rows.map(row => [row.fieldId, row]))
     const bangbooSamples = matrix.sampleSources.filter(sample => sample.entityType === "bangboo" && sample.version === "2.8")
@@ -247,18 +247,18 @@ describe("nanoka source gate", () => {
     for (const fieldId of ["bangboos.identity", "bangboos.basePanel", "bangboos.skillSegments"]) {
       expect(rows.get(fieldId)).toMatchObject({
         sampleEntity: "nanoka-bangboo-index-live-2.8",
-        auditArtifact: "data/cleaned/audit/nanoka-bangboo-batch-audit.json",
+        auditArtifact: "packages/data/cleaned/audit/nanoka-bangboo-batch-audit.json",
       })
       expect(rows.get(fieldId)?.supportingSampleEntities).toHaveLength(39)
       expect(rows.get(fieldId)?.notes).toContain("no new golden anchors")
     }
 
     expect(rows.get("bangboos.element")?.supportingSampleEntities).toHaveLength(39)
-    expect(rows.get("bangboos.element")?.auditArtifact).toBe("data/cleaned/audit/nanoka-bangboo-batch-audit.json")
+    expect(rows.get("bangboos.element")?.auditArtifact).toBe("packages/data/cleaned/audit/nanoka-bangboo-batch-audit.json")
   })
 
   it("locks the V1.2.x character batch to the full approved-live index", () => {
-    const matrix = readJson<CoverageMatrix>("data/cleaned/audit/nanoka-coverage-matrix.json")
+    const matrix = readJson<CoverageMatrix>("packages/data/cleaned/audit/nanoka-coverage-matrix.json")
     const samples = new Map(matrix.sampleSources.map(sample => [sample.id, sample]))
     const rows = new Map(matrix.rows.map(row => [row.fieldId, row]))
     const characterSamples = matrix.sampleSources.filter(sample => sample.entityType === "agent" && sample.version === "2.8")
@@ -273,7 +273,7 @@ describe("nanoka source gate", () => {
     for (const fieldId of ["agents.identity", "agents.enums", "agents.basePanel"]) {
       expect(rows.get(fieldId)).toMatchObject({
         sampleEntity: "nanoka-character-index-live-2.8",
-        auditArtifact: "data/cleaned/audit/nanoka-character-batch-audit.json",
+        auditArtifact: "packages/data/cleaned/audit/nanoka-character-batch-audit.json",
       })
       expect(rows.get(fieldId)?.supportingSampleEntities).toHaveLength(53)
       expect(rows.get(fieldId)?.notes).toContain("no new golden anchors")
@@ -283,7 +283,7 @@ describe("nanoka source gate", () => {
   })
 
   it("locks the V1.2.x W-Engine batch to the full approved-live index", () => {
-    const matrix = readJson<CoverageMatrix>("data/cleaned/audit/nanoka-coverage-matrix.json")
+    const matrix = readJson<CoverageMatrix>("packages/data/cleaned/audit/nanoka-coverage-matrix.json")
     const samples = new Map(matrix.sampleSources.map(sample => [sample.id, sample]))
     const rows = new Map(matrix.rows.map(row => [row.fieldId, row]))
     const wEngineSamples = matrix.sampleSources.filter(sample => sample.entityType === "wEngine" && sample.version === "2.8")
@@ -298,7 +298,7 @@ describe("nanoka source gate", () => {
     for (const fieldId of ["wEngines.identity", "wEngines.baseStats"]) {
       expect(rows.get(fieldId)).toMatchObject({
         sampleEntity: "nanoka-weapon-index-live-2.8",
-        auditArtifact: "data/cleaned/audit/nanoka-wengine-batch-audit.json",
+        auditArtifact: "packages/data/cleaned/audit/nanoka-wengine-batch-audit.json",
       })
       expect(rows.get(fieldId)?.supportingSampleEntities).toHaveLength(89)
       expect(rows.get(fieldId)?.notes).toContain("no new golden anchors")
@@ -311,7 +311,7 @@ describe("nanoka source gate", () => {
   })
 
   it("locks the V1.2.x Drive Disc set batch to the full approved-live index", () => {
-    const matrix = readJson<CoverageMatrix>("data/cleaned/audit/nanoka-coverage-matrix.json")
+    const matrix = readJson<CoverageMatrix>("packages/data/cleaned/audit/nanoka-coverage-matrix.json")
     const samples = new Map(matrix.sampleSources.map(sample => [sample.id, sample]))
     const rows = new Map(matrix.rows.map(row => [row.fieldId, row]))
     const driveDiscSamples = matrix.sampleSources.filter(sample => sample.entityType === "driveDisc" && sample.version === "2.8")
@@ -325,14 +325,14 @@ describe("nanoka source gate", () => {
 
     expect(rows.get("driveDiscs.identity")).toMatchObject({
       sampleEntity: "nanoka-equipment-index-live-2.8",
-      auditArtifact: "data/cleaned/audit/nanoka-drive-disc-batch-audit.json",
+      auditArtifact: "packages/data/cleaned/audit/nanoka-drive-disc-batch-audit.json",
     })
     expect(rows.get("driveDiscs.identity")?.supportingSampleEntities).toHaveLength(26)
     expect(rows.get("driveDiscs.identity")?.notes).toContain("no new golden anchors")
 
     expect(rows.get("driveDiscs.setModifiers")).toMatchObject({
       sampleEntity: "nanoka-equipment-index-live-2.8",
-      auditArtifact: "data/cleaned/audit/nanoka-drive-disc-batch-audit.json",
+      auditArtifact: "packages/data/cleaned/audit/nanoka-drive-disc-batch-audit.json",
       promotable: false,
     })
     expect(rows.get("driveDiscs.setModifiers")?.supportingSampleEntities).toHaveLength(26)
@@ -340,7 +340,7 @@ describe("nanoka source gate", () => {
   })
 
   it("locks the V1.2.x enemy batch to the full approved-live monster index", () => {
-    const matrix = readJson<CoverageMatrix>("data/cleaned/audit/nanoka-coverage-matrix.json")
+    const matrix = readJson<CoverageMatrix>("packages/data/cleaned/audit/nanoka-coverage-matrix.json")
     const samples = new Map(matrix.sampleSources.map(sample => [sample.id, sample]))
     const rows = new Map(matrix.rows.map(row => [row.fieldId, row]))
     const enemySamples = matrix.sampleSources.filter(sample =>
@@ -360,7 +360,7 @@ describe("nanoka source gate", () => {
       status: "verified-from-nanoka",
       promotable: true,
       sampleEntity: "nanoka-monster-index-live-2.8",
-      auditArtifact: "data/cleaned/audit/nanoka-enemy-batch-audit.json",
+      auditArtifact: "packages/data/cleaned/audit/nanoka-enemy-batch-audit.json",
     })
     expect(identityRow?.blockedBy ?? []).toEqual([])
     expect(identityRow?.supportingSampleEntities).toHaveLength(269)
@@ -378,7 +378,7 @@ describe("nanoka source gate", () => {
       status: "verified-from-nanoka",
       promotable: true,
       sampleEntity: "nanoka-monster-index-live-2.8",
-      auditArtifact: "data/cleaned/audit/nanoka-enemy-batch-audit.json",
+      auditArtifact: "packages/data/cleaned/audit/nanoka-enemy-batch-audit.json",
     })
     expect(variantRow?.blockedBy ?? []).not.toContain("field:runtime-cutover-drift-required")
     expect(variantRow?.supportingSampleEntities).toHaveLength(269)
@@ -394,7 +394,7 @@ describe("nanoka source gate", () => {
     ]) {
       expect(rows.get(fieldId)).toMatchObject({
         sampleEntity: "nanoka-monster-index-live-2.8",
-        auditArtifact: "data/cleaned/audit/nanoka-enemy-batch-audit.json",
+        auditArtifact: "packages/data/cleaned/audit/nanoka-enemy-batch-audit.json",
       })
       expect(rows.get(fieldId)?.supportingSampleEntities).toHaveLength(269)
     }
@@ -404,7 +404,7 @@ describe("nanoka source gate", () => {
   })
 
   it("excludes Drive Disc slot/stat tables from V0.1.0 formal data after owner decision", () => {
-    const matrix = readJson<CoverageMatrix>("data/cleaned/audit/nanoka-coverage-matrix.json")
+    const matrix = readJson<CoverageMatrix>("packages/data/cleaned/audit/nanoka-coverage-matrix.json")
     const rows = new Map(matrix.rows.map(row => [row.fieldId, row]))
     const row = rows.get("driveDiscs.slotAndSubstatTables")
 
@@ -414,7 +414,7 @@ describe("nanoka source gate", () => {
       status: "deferred",
       promotable: false,
       sampleEntity: "nanoka-equipment-woodpecker-live-31000",
-      auditArtifact: "data/cleaned/audit/nanoka-drive-disc-slot-stat-audit.json",
+      auditArtifact: "packages/data/cleaned/audit/nanoka-drive-disc-slot-stat-audit.json",
     })
     expect(row?.blockedBy).toContain("scope:user-provided-snapshot-boundary")
     expect(row?.rawFieldPaths).toEqual(expect.arrayContaining([
@@ -429,7 +429,7 @@ describe("nanoka source gate", () => {
   })
 
   it("classifies the Disorder formula as implementation-owned after failed nanoka evidence", () => {
-    const matrix = readJson<CoverageMatrix>("data/cleaned/audit/nanoka-coverage-matrix.json")
+    const matrix = readJson<CoverageMatrix>("packages/data/cleaned/audit/nanoka-coverage-matrix.json")
     const rows = new Map(matrix.rows.map(row => [row.fieldId, row]))
     const row = rows.get("rules.disorderFormula")
 
@@ -438,7 +438,7 @@ describe("nanoka source gate", () => {
       sourcePolicy: "implementation-owned",
       status: "deferred",
       promotable: false,
-      auditArtifact: "data/cleaned/audit/nanoka-disorder-formula-audit.json",
+      auditArtifact: "packages/data/cleaned/audit/nanoka-disorder-formula-audit.json",
     })
     expect(row?.sampleEntity).toBeNull()
     expect(row?.blockedBy).toContain("implementation-owned-runtime-formula")
@@ -447,7 +447,7 @@ describe("nanoka source gate", () => {
   })
 
   it("classifies the Disorder daze-level formula as implementation-owned after failed nanoka evidence", () => {
-    const matrix = readJson<CoverageMatrix>("data/cleaned/audit/nanoka-coverage-matrix.json")
+    const matrix = readJson<CoverageMatrix>("packages/data/cleaned/audit/nanoka-coverage-matrix.json")
     const rows = new Map(matrix.rows.map(row => [row.fieldId, row]))
     const row = rows.get("rules.disorderDazeLevelZone")
 
@@ -456,7 +456,7 @@ describe("nanoka source gate", () => {
       sourcePolicy: "implementation-owned",
       status: "deferred",
       promotable: false,
-      auditArtifact: "data/cleaned/audit/nanoka-disorder-daze-level-audit.json",
+      auditArtifact: "packages/data/cleaned/audit/nanoka-disorder-daze-level-audit.json",
     })
     expect(row?.sampleEntity).toBeNull()
     expect(row?.blockedBy).toContain("implementation-owned-runtime-formula")

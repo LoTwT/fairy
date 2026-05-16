@@ -18,7 +18,7 @@ import {
 
 const repoRoot = join(import.meta.dirname, "../../..")
 const dataPackageRoot = join(repoRoot, "packages/data")
-const snapshotManifestPath = "data/source/raw/nanoka/zzz/2.8/fetch-manifest.json"
+const snapshotManifestPath = "packages/data/source/raw/nanoka/zzz/2.8/fetch-manifest.json"
 
 function readJson<T>(path: string): T {
   return JSON.parse(readFileSync(join(repoRoot, path), "utf8")) as T
@@ -42,7 +42,7 @@ describe("nanoka raw snapshot adapter skeleton", () => {
   })
 
   it("records the nanoka raw snapshot in the source manifest with a matching hash", () => {
-    const manifest = readJson<SourceManifest>("data/source/source-manifest.json")
+    const manifest = readJson<SourceManifest>("packages/data/source/source-manifest.json")
     const entry = manifest.sources.find(source => source.id === "nanoka-zzz-2.8")
 
     expect(entry).toMatchObject({
@@ -54,7 +54,7 @@ describe("nanoka raw snapshot adapter skeleton", () => {
   })
 
   it("keeps the source registry hash aligned with the retained live manifest", () => {
-    const registry = readJson<{ sources: Array<{ sourceId: string, contentHash: string }> }>("data/source-registry.json")
+    const registry = readJson<{ sources: Array<{ sourceId: string, contentHash: string }> }>("packages/data/source-registry.json")
     const registrySource = registry.sources.find(source => source.sourceId === "nanoka-zzz")
 
     expect(registrySource?.contentHash).toBe(`sha256:${sha256(snapshotManifestPath)}`)
@@ -68,17 +68,17 @@ describe("nanoka raw snapshot adapter skeleton", () => {
     expect(descriptor.discoveredAssets).toEqual(
       expect.arrayContaining([
         snapshotManifestPath,
-        "data/source/raw/nanoka/zzz/2.8/boss.json",
-        "data/source/raw/nanoka/zzz/2.8/character.json",
-        "data/source/raw/nanoka/zzz/2.8/equipment.json",
-        "data/source/raw/nanoka/zzz/2.8/zh/character/1021.json",
-        "data/source/raw/nanoka/zzz/2.8/zh/character/1371.json",
-        "data/source/raw/nanoka/zzz/2.8/zh/character/1031.json",
-        "data/source/raw/nanoka/zzz/2.8/zh/character/1221.json",
-        "data/source/raw/nanoka/zzz/2.8/zh/boss/69036.json",
-        "data/source/raw/nanoka/zzz/2.8/zh/bangboo/53001.json",
-        "data/source/raw/nanoka/zzz/2.8/zh/bangboo/54001.json",
-        "data/source/raw/nanoka/zzz/2.8/zh/equipment/31000.json",
+        "packages/data/source/raw/nanoka/zzz/2.8/boss.json",
+        "packages/data/source/raw/nanoka/zzz/2.8/character.json",
+        "packages/data/source/raw/nanoka/zzz/2.8/equipment.json",
+        "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1021.json",
+        "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1371.json",
+        "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1031.json",
+        "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1221.json",
+        "packages/data/source/raw/nanoka/zzz/2.8/zh/boss/69036.json",
+        "packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/53001.json",
+        "packages/data/source/raw/nanoka/zzz/2.8/zh/bangboo/54001.json",
+        "packages/data/source/raw/nanoka/zzz/2.8/zh/equipment/31000.json",
       ]),
     )
     expect(descriptor.compliance.notes.join("\n")).toContain("manifest.zzz.live")
@@ -111,7 +111,7 @@ describe("nanoka raw snapshot adapter skeleton", () => {
         liveVersionRef?: string
         approvedLiveVersions?: string[]
       }>
-    }>("data/source-registry.json")
+    }>("packages/data/source-registry.json")
     const registryEntry = registry.sources.find(source => source.sourceId === "nanoka-zzz")
 
     expect(registryEntry, "missing nanoka source registry entry").toBeDefined()
@@ -193,19 +193,19 @@ describe("nanoka raw snapshot adapter skeleton", () => {
         sourceId: "nanoka-zzz",
         sourceVersion: "2.8",
         sourceAnchor: "https://static.nanoka.cc/manifest.json",
-        dataPath: "data/source/raw/nanoka/zzz/2.8/manifest.json",
+        dataPath: "packages/data/source/raw/nanoka/zzz/2.8/manifest.json",
       },
       {
         sourceId: "nanoka-zzz",
         sourceVersion: "2.8",
         sourceAnchor: "https://static.nanoka.cc/zzz/2.8/boss.json",
-        dataPath: "data/source/raw/nanoka/zzz/2.8/boss.json",
+        dataPath: "packages/data/source/raw/nanoka/zzz/2.8/boss.json",
       },
       {
         sourceId: "nanoka-zzz",
         sourceVersion: "2.8",
         sourceAnchor: "https://static.nanoka.cc/zzz/2.8/zh/character/1021.json",
-        dataPath: "data/source/raw/nanoka/zzz/2.8/zh/character/1021.json",
+        dataPath: "packages/data/source/raw/nanoka/zzz/2.8/zh/character/1021.json",
       },
     ]))
   })

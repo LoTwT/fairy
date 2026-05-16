@@ -45,7 +45,7 @@ Classify the affected material:
    npm deprecate @randomplay/cli@<version> "<reason + tracking issue>"
    ```
 3. Open an emergency PR that removes or replaces the affected runtime cleaned
-   data and updates `data/source-registry.json`.
+   data and updates `packages/data/source-registry.json`.
 4. If runtime data must be restored quickly, reactivate an archived baseline only
    through an explicit hotfix PR with Product + lo-user approval.
 5. Run the full release-readiness gate before publishing a replacement version.
@@ -64,6 +64,6 @@ Classify the affected material:
 Every takedown or rollback must update:
 
 - `docs/product/decisions/data-source-rulings.md` or a new linked decision note;
-- `data/source-registry.json` source status / notes;
+- `packages/data/source-registry.json` source status / notes;
 - release notes or changelog for any replacement package;
 - the tracking issue with verification evidence and publication outcome.

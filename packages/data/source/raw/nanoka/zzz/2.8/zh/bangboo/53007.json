@@ -1,0 +1,443 @@
+{
+  "id": 53007,
+  "code_name": "Cryboo",
+  "name": "泪眼布",
+  "desc": "谁人知晓，少年邦布之烦恼。",
+  "rarity": 3,
+  "icon": "UI/Sprite/A1DynamicLoad/BangbooModGarage/UnPacker/BangbooRole/BangbooGarageRole02.png",
+  "stats": {
+    "endurance": 180,
+    "hp_max": 360,
+    "hpupgrade": 428397,
+    "attack": 50,
+    "attack_upgrade": 252034,
+    "break_stun": 90,
+    "element_abnormal_power": 120,
+    "defence": 30,
+    "def_upgrade": 85729,
+    "crit": 500,
+    "pen_ratio": 0,
+    "crit_dmg": 5000
+  },
+  "level": {
+    "1": {
+      "hp_max": 0,
+      "attack": 0,
+      "defence": 0,
+      "level_max": 10,
+      "level_min": 0,
+      "materials": {
+        "10": 15000,
+        "102010": 4
+      },
+      "extra": {
+        "20101": {
+          "prop": 20101,
+          "name": "暴击率",
+          "format": "{0:0.#%}",
+          "value": 0
+        },
+        "21101": {
+          "prop": 21101,
+          "name": "暴击伤害",
+          "format": "{0:0.#%}",
+          "value": 0
+        }
+      }
+    },
+    "2": {
+      "hp_max": 188,
+      "attack": 47,
+      "defence": 38,
+      "level_max": 20,
+      "level_min": 10,
+      "materials": {
+        "10": 35000,
+        "102020": 12
+      },
+      "extra": {
+        "20101": {
+          "prop": 20101,
+          "name": "暴击率",
+          "format": "{0:0.#%}",
+          "value": 450
+        },
+        "21101": {
+          "prop": 21101,
+          "name": "暴击伤害",
+          "format": "{0:0.#%}",
+          "value": 0
+        }
+      }
+    },
+    "3": {
+      "hp_max": 376,
+      "attack": 233,
+      "defence": 75,
+      "level_max": 30,
+      "level_min": 20,
+      "materials": {
+        "10": 75000,
+        "102020": 20
+      },
+      "extra": {
+        "20101": {
+          "prop": 20101,
+          "name": "暴击率",
+          "format": "{0:0.#%}",
+          "value": 2250
+        },
+        "21101": {
+          "prop": 21101,
+          "name": "暴击伤害",
+          "format": "{0:0.#%}",
+          "value": 0
+        }
+      }
+    },
+    "4": {
+      "hp_max": 564,
+      "attack": 699,
+      "defence": 113,
+      "level_max": 40,
+      "level_min": 30,
+      "materials": {
+        "10": 125000,
+        "102030": 10
+      },
+      "extra": {
+        "20101": {
+          "prop": 20101,
+          "name": "暴击率",
+          "format": "{0:0.#%}",
+          "value": 2250
+        },
+        "21101": {
+          "prop": 21101,
+          "name": "暴击伤害",
+          "format": "{0:0.#%}",
+          "value": 2500
+        }
+      }
+    },
+    "5": {
+      "hp_max": 752,
+      "attack": 1864,
+      "defence": 151,
+      "level_max": 50,
+      "level_min": 40,
+      "materials": {
+        "10": 250000,
+        "102030": 20
+      },
+      "extra": {
+        "20101": {
+          "prop": 20101,
+          "name": "暴击率",
+          "format": "{0:0.#%}",
+          "value": 4500
+        },
+        "21101": {
+          "prop": 21101,
+          "name": "暴击伤害",
+          "format": "{0:0.#%}",
+          "value": 2500
+        }
+      }
+    },
+    "6": {
+      "hp_max": 940,
+      "attack": 4661,
+      "defence": 188,
+      "level_max": 60,
+      "level_min": 50,
+      "materials": {},
+      "extra": {
+        "20101": {
+          "prop": 20101,
+          "name": "暴击率",
+          "format": "{0:0.#%}",
+          "value": 4500
+        },
+        "21101": {
+          "prop": 21101,
+          "name": "暴击伤害",
+          "format": "{0:0.#%}",
+          "value": 5000
+        }
+      }
+    }
+  },
+  "skill": {
+    "a": {
+      "level": {
+        "1": {
+          "name": "拉环爆弹",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，向敌人投掷炸弹，造成<color=#FF5521>火属性伤害</color>并累积<color=#FF5521>火属性异常积蓄值</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5300701, Prop:1001}|{Skill:5300701, Prop:1002}|14秒"
+        },
+        "2": {
+          "name": "拉环爆弹",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，向敌人投掷炸弹，造成<color=#FF5521>火属性伤害</color>并累积<color=#FF5521>火属性异常积蓄值</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5300701, Prop:1001}|{Skill:5300701, Prop:1002}|14秒"
+        },
+        "3": {
+          "name": "拉环爆弹",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，向敌人投掷炸弹，造成<color=#FF5521>火属性伤害</color>并累积<color=#FF5521>火属性异常积蓄值</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5300701, Prop:1001}|{Skill:5300701, Prop:1002}|14秒"
+        },
+        "4": {
+          "name": "拉环爆弹",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，向敌人投掷炸弹，造成<color=#FF5521>火属性伤害</color>并累积<color=#FF5521>火属性异常积蓄值</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5300701, Prop:1001}|{Skill:5300701, Prop:1002}|14秒"
+        },
+        "5": {
+          "name": "拉环爆弹",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，向敌人投掷炸弹，造成<color=#FF5521>火属性伤害</color>并累积<color=#FF5521>火属性异常积蓄值</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5300701, Prop:1001}|{Skill:5300701, Prop:1002}|14秒"
+        },
+        "6": {
+          "name": "拉环爆弹",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，向敌人投掷炸弹，造成<color=#FF5521>火属性伤害</color>并累积<color=#FF5521>火属性异常积蓄值</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5300701, Prop:1001}|{Skill:5300701, Prop:1002}|14秒"
+        },
+        "7": {
+          "name": "拉环爆弹",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，向敌人投掷炸弹，造成<color=#FF5521>火属性伤害</color>并累积<color=#FF5521>火属性异常积蓄值</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5300701, Prop:1001}|{Skill:5300701, Prop:1002}|14秒"
+        },
+        "8": {
+          "name": "拉环爆弹",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，向敌人投掷炸弹，造成<color=#FF5521>火属性伤害</color>并累积<color=#FF5521>火属性异常积蓄值</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5300701, Prop:1001}|{Skill:5300701, Prop:1002}|14秒"
+        },
+        "9": {
+          "name": "拉环爆弹",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，向敌人投掷炸弹，造成<color=#FF5521>火属性伤害</color>并累积<color=#FF5521>火属性异常积蓄值</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5300701, Prop:1001}|{Skill:5300701, Prop:1002}|14秒"
+        },
+        "10": {
+          "name": "拉环爆弹",
+          "desc": "<color=#FFFFFF>[主动技]</color>\n招式发动时，向敌人投掷炸弹，造成<color=#FF5521>火属性伤害</color>并累积<color=#FF5521>火属性异常积蓄值</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率",
+            "冷却时间"
+          ],
+          "param": "{Skill:5300701, Prop:1001}|{Skill:5300701, Prop:1002}|14秒"
+        }
+      }
+    },
+    "b": {
+      "level": {
+        "1": {
+          "name": "热量累积",
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在2名或以上<color=#FF5521>[火属性]</color>角色时触发：<color=#FFFFFF>[邦布连携技]</color>累积的属性异常积蓄值提升60%。",
+          "property": [
+            "属性异常积蓄值提升"
+          ],
+          "param": "60%"
+        },
+        "2": {
+          "name": "热量累积",
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在2名或以上<color=#FF5521>[火属性]</color>角色时触发：<color=#FFFFFF>[邦布连携技]</color>累积的属性异常积蓄值提升75%。",
+          "property": [
+            "属性异常积蓄值提升"
+          ],
+          "param": "75%"
+        },
+        "3": {
+          "name": "热量累积",
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在2名或以上<color=#FF5521>[火属性]</color>角色时触发：<color=#FFFFFF>[邦布连携技]</color>累积的属性异常积蓄值提升90%。",
+          "property": [
+            "属性异常积蓄值提升"
+          ],
+          "param": "90%"
+        },
+        "4": {
+          "name": "热量累积",
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在2名或以上<color=#FF5521>[火属性]</color>角色时触发：<color=#FFFFFF>[邦布连携技]</color>累积的属性异常积蓄值提升105%。",
+          "property": [
+            "属性异常积蓄值提升"
+          ],
+          "param": "105%"
+        },
+        "5": {
+          "name": "热量累积",
+          "desc": "<color=#FFFFFF>[额外能力]</color>\n队伍中存在2名或以上<color=#FF5521>[火属性]</color>角色时触发：<color=#FFFFFF>[邦布连携技]</color>累积的属性异常积蓄值提升120%。",
+          "property": [
+            "属性异常积蓄值提升"
+          ],
+          "param": "120%"
+        }
+      }
+    },
+    "c": {
+      "level": {
+        "1": {
+          "name": "惊爆礼物",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n对目标投掷炸弹，造成<color=#FF5521>火属性伤害</color>并累积大量<color=#FF5521>火属性异常积蓄值</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5300702, Prop:1001}|{Skill:5300702, Prop:1002}"
+        },
+        "2": {
+          "name": "惊爆礼物",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n对目标投掷炸弹，造成<color=#FF5521>火属性伤害</color>并累积大量<color=#FF5521>火属性异常积蓄值</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5300702, Prop:1001}|{Skill:5300702, Prop:1002}"
+        },
+        "3": {
+          "name": "惊爆礼物",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n对目标投掷炸弹，造成<color=#FF5521>火属性伤害</color>并累积大量<color=#FF5521>火属性异常积蓄值</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5300702, Prop:1001}|{Skill:5300702, Prop:1002}"
+        },
+        "4": {
+          "name": "惊爆礼物",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n对目标投掷炸弹，造成<color=#FF5521>火属性伤害</color>并累积大量<color=#FF5521>火属性异常积蓄值</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5300702, Prop:1001}|{Skill:5300702, Prop:1002}"
+        },
+        "5": {
+          "name": "惊爆礼物",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n对目标投掷炸弹，造成<color=#FF5521>火属性伤害</color>并累积大量<color=#FF5521>火属性异常积蓄值</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5300702, Prop:1001}|{Skill:5300702, Prop:1002}"
+        },
+        "6": {
+          "name": "惊爆礼物",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n对目标投掷炸弹，造成<color=#FF5521>火属性伤害</color>并累积大量<color=#FF5521>火属性异常积蓄值</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5300702, Prop:1001}|{Skill:5300702, Prop:1002}"
+        },
+        "7": {
+          "name": "惊爆礼物",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n对目标投掷炸弹，造成<color=#FF5521>火属性伤害</color>并累积大量<color=#FF5521>火属性异常积蓄值</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5300702, Prop:1001}|{Skill:5300702, Prop:1002}"
+        },
+        "8": {
+          "name": "惊爆礼物",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n对目标投掷炸弹，造成<color=#FF5521>火属性伤害</color>并累积大量<color=#FF5521>火属性异常积蓄值</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5300702, Prop:1001}|{Skill:5300702, Prop:1002}"
+        },
+        "9": {
+          "name": "惊爆礼物",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n对目标投掷炸弹，造成<color=#FF5521>火属性伤害</color>并累积大量<color=#FF5521>火属性异常积蓄值</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5300702, Prop:1001}|{Skill:5300702, Prop:1002}"
+        },
+        "10": {
+          "name": "惊爆礼物",
+          "desc": "<color=#FFFFFF>[邦布连携技]</color>\n对目标投掷炸弹，造成<color=#FF5521>火属性伤害</color>并累积大量<color=#FF5521>火属性异常积蓄值</color>。",
+          "property": [
+            "伤害倍率",
+            "失衡倍率"
+          ],
+          "param": "{Skill:5300702, Prop:1001}|{Skill:5300702, Prop:1002}"
+        }
+      }
+    }
+  },
+  "skill_prop": {
+    "5300701": {
+      "1001": {
+        "main": 28000,
+        "growth": 2800,
+        "format": "%"
+      },
+      "1002": {
+        "main": 16400,
+        "growth": 1640,
+        "format": "%"
+      },
+      "element_accumulation_value": 21000
+    },
+    "5300702": {
+      "1001": {
+        "main": 69400,
+        "growth": 6940,
+        "format": "%"
+      },
+      "1002": {
+        "main": 9900,
+        "growth": 990,
+        "format": "%"
+      },
+      "element_accumulation_value": 29800
+    }
+  }
+}

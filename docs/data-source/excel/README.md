@@ -1,21 +1,23 @@
 # Excel Workbook Source
 
-Status: S5-2b source-shape audit baseline
+Status: retired audit baseline (raw archive removed in V0.1.2)
 Owner: @TechLead
 Related task: task #40
 
-`data/source/excel/data.xlsx` is the lo-user-provided workbook source for
-base-game data. The workbook is retained in git as raw/source archive and is not
+`git-history:data/source/excel/data.xlsx` is the former lo-user-provided
+workbook source for base-game data. The workbook raw archive was physically
+removed from the current tree in V0.1.2 after nanoka became the runtime-primary
+source; it remains recoverable from git history for audit only and is not
 published in the `@randomplay/data` package.
 
 ## Current Audit
 
-- Workbook: `data/source/excel/data.xlsx`
+- Workbook: `git-history:data/source/excel/data.xlsx`
 - Workbook version marker: `2.6.0_R14028417`
 - Workbook hash:
   `9f42ecf734f45908c18bedf7ae937479f9f1563e4b3314a50d76cb99233a260b`
 - Sheet count: 31
-- Audit artifact: `data/source/excel/workbook-audit.json`
+- Audit artifact: `git-history:data/source/excel/workbook-audit.json`
 
 The audit records sheet visibility, ranges, range row/column counts, non-empty
 row counts, first header row, and V1 scope classification. It does not publish
@@ -23,18 +25,17 @@ cleaned game data and does not infer typed modifiers from text.
 
 The V1 replay baseline uses a narrower generated artifact:
 
-- `data/cleaned/audit/v1-agent-source-candidates.json`
-- `data/cleaned/audit/nicole.acceptance.json`
-- `data/cleaned/audit/yanagi.acceptance.json`
+- `packages/data/cleaned/audit/v1-agent-source-candidates.json`
+- `packages/data/cleaned/audit/nicole.acceptance.json`
+- `packages/data/cleaned/audit/yanagi.acceptance.json`
 
 That artifact extracts only Yixuan / Nicole / Yanagi identity rows and
 calculation-relevant source text candidates needed by the DD-002 19-anchor
 golden scope. The acceptance artifacts record lo-user-approved G22/G23 mappings.
-The replay harness reads minimal Excel enemy rows only when V1.x golden anchors
-require them (currently Greta for G18, 匪祸侵蚀体·凶心疯汉 for G19, and
-恶名·哈提 for G20). It does not
-publish trusted typed modifiers without deterministic template support or manual
-acceptance.
+The replay harness now reads the generated golden audit artifacts directly; it
+does not require the physical workbook in the current tree. Historical anchors
+that were originally sourced from Excel keep git-history source references for
+audit traceability.
 
 ## V1 Candidate Sheets
 
@@ -64,21 +65,18 @@ Historical/archive-only:
 
 ## Parser Policy
 
-The workbook audit uses `xlsx` as a repository devDependency. It is only used for
-source verification and generation scripts. It must not become a runtime
-dependency of the published `@randomplay/data` package.
+The retired workbook audit used `xlsx` before V0.1.2. The parser scripts and
+dependency were removed with the raw archive; runtime and current verification
+must use nanoka-backed artifacts instead.
 
 Useful commands:
 
-- `pnpm --filter @randomplay/data audit:excel`
 - `pnpm --filter @randomplay/data audit:golden-v1`
-- `pnpm --filter @randomplay/data verify:excel`
 - `pnpm --filter @randomplay/data verify:golden-v1`
 
-The verify gate checks:
+The current verify gate checks:
 
-- workbook SHA-256 matches `data/source/source-manifest.json`;
-- workbook version marker remains `2.6.0_R14028417`;
-- workbook has 31 sheets;
-- all V1 candidate sheets are present;
-- `workbook-audit.json` is not stale against the current workbook and parser.
+- golden replay artifacts remain release-ready;
+- retired Excel source ids stay fail-loud and never become current runtime
+  sources;
+- npm pack payload excludes raw source files and `.xlsx` files.

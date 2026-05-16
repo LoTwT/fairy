@@ -27,7 +27,7 @@
       },
       "fetchedAt": "2026-05-16T01:50:00+08:00",
       "lastVerifiedAt": "2026-05-16T01:05:00+08:00",
-      "contentHash": "sha256:93d1241c3204109be06fcf801594bb3aebe40cca830973956c7dea26367b6882",
+      "contentHash": "sha256:4374b550b86b4af029e1903b838ce8906d6e389a8a6566eb35f3b7cac97761ba",
       "takedownPath": "docs/data-source/takedown-rollback.md#nanoka",
       "fallbackPlan": "runtime rollback requires explicit lo-user hotfix approval; archived Excel/D-17/D-12 snapshots remain audit references only",
       "notes": [
@@ -37,10 +37,10 @@
         "V1.2.x PR-A extends the retained approved-live character fixture set to the full 2.8 character.json index and promotes 53 runtime Agent records.",
         "V1.2.x PR-B extends the retained approved-live W-Engine fixture set to the full 2.8 weapon.json index and promotes 89 runtime W-Engine records.",
         "V1.2.x PR-C extends the retained approved-live Drive Disc set fixture set to the full 2.8 equipment.json index and promotes 26 runtime Drive Disc identity records while retaining set-effect text in audit.",
-    "V1.2.x PR-D extends the retained approved-live enemy fixture set to the full 2.8 monster.json index and promotes 269 runtime enemy identity records with selected/skipped variant audit.",
-    "V1.2.x PR-E extends current-live DA retention from the sample period to all 38 configured-live 2.8 DA period details and promotes GameData.deadlyAssaultPeriods.",
-    "V1.2.x PR-F retains manifest-available historical DA snapshots in the dedicated historicalDAPeriods bucket; these versions are not current-runtime fallbacks and do not relax configuredLiveVersion.",
-    "Current cleaned output rows must use configuredLiveVersion; archived Excel/D-17/D-12 sources must not be runtime fallbacks.",
+        "V1.2.x PR-D extends the retained approved-live enemy fixture set to the full 2.8 monster.json index and promotes 269 runtime enemy identity records with selected/skipped variant audit.",
+        "V1.2.x PR-E extends current-live DA retention from the sample period to all 38 configured-live 2.8 DA period details and promotes GameData.deadlyAssaultPeriods.",
+        "V1.2.x PR-F retains manifest-available historical DA snapshots in the dedicated historicalDAPeriods bucket; these versions are not current-runtime fallbacks and do not relax configuredLiveVersion.",
+        "Current cleaned output rows must use configuredLiveVersion; archived Excel/D-17/D-12 sources must not be runtime fallbacks.",
         "manifest.zzz.latest is research/drift input only unless lo-user approves a new configured live version."
       ]
     },
@@ -60,13 +60,18 @@
       "urlAllowlist": {},
       "fetchedAt": "2026-05-05T17:40:00+08:00",
       "lastVerifiedAt": "2026-05-15T10:56:36+08:00",
-      "contentHash": "sha256:see-data/source/excel/META.md",
+      "contentHash": "sha256:retired-source-git-history:data/source/excel/META.md",
       "takedownPath": "docs/data-source/takedown-rollback.md#excel",
       "fallbackPlan": "archive-only after Phase 4 cutover",
       "notes": [
-        "Excel remains release evidence and drift-audit baseline after Phase 4 cutover.",
+        "Excel remains release evidence and drift-audit baseline after Phase 4 cutover, with the raw archive recoverable from git history only after V0.1.2.",
         "Excel must not be referenced by runtime cleaned data after Phase 4 cutover."
-      ]
+      ],
+      "retiredSourceArchive": {
+        "retiredAt": "2026-05-16",
+        "reason": "V0.1.2 data package ownership refactor removes legacy raw archives after nanoka-exclusive cutover.",
+        "recovery": "git history before task #197 contains data/source/excel/META.md"
+      }
     },
     {
       "sourceId": "mihoyo-zzz-critical-assault",
@@ -84,13 +89,18 @@
       "urlAllowlist": {},
       "fetchedAt": "2026-05-05T08:50:00+08:00",
       "lastVerifiedAt": "2026-05-15T10:56:36+08:00",
-      "contentHash": "sha256:see-data/source/raw/mihoyo/zzz-da/2026-05-05T0850Z/fetch-manifest.json",
+      "contentHash": "sha256:retired-source-git-history:data/source/raw/mihoyo/zzz-da/2026-05-05T0850Z/fetch-manifest.json",
       "takedownPath": "docs/data-source/takedown-rollback.md#mihoyo",
       "fallbackPlan": "archive-only after Phase 4 cutover",
       "notes": [
-        "D-17 runtime path is formally deprecated by Phase 4 and retained as archived audit baseline.",
+        "D-17 runtime path is formally deprecated by Phase 4; the raw archive is recoverable from git history only after V0.1.2.",
         "Runtime cleaned data must not reference this source under R1/R6."
-      ]
+      ],
+      "retiredSourceArchive": {
+        "retiredAt": "2026-05-16",
+        "reason": "V0.1.2 data package ownership refactor removes legacy raw archives after nanoka-exclusive cutover.",
+        "recovery": "git history before task #197 contains data/source/raw/mihoyo/zzz-da/2026-05-05T0850Z/fetch-manifest.json"
+      }
     },
     {
       "sourceId": "buhflipexplode-zzz-da",
@@ -108,13 +118,18 @@
       "urlAllowlist": {},
       "fetchedAt": "2026-05-05T04:45:00+08:00",
       "lastVerifiedAt": "2026-05-15T10:56:36+08:00",
-      "contentHash": "sha256:see-data/source/raw/buhflipexplode/2026-05-05T0445Z/fetch-manifest.json",
+      "contentHash": "sha256:retired-source-git-history:data/source/raw/buhflipexplode/2026-05-05T0445Z/fetch-manifest.json",
       "takedownPath": "docs/data-source/takedown-rollback.md#buhflipexplode",
       "fallbackPlan": "archive-only after Phase 4 cutover",
       "notes": [
-        "D-12 runtime path is formally deprecated by Phase 4 and retained as archived audit baseline.",
+        "D-12 runtime path is formally deprecated by Phase 4; the raw archive is recoverable from git history only after V0.1.2.",
         "GPL JavaScript remains audit-only and must not enter MIT runtime code or cleaned runtime data."
-      ]
+      ],
+      "retiredSourceArchive": {
+        "retiredAt": "2026-05-16",
+        "reason": "V0.1.2 data package ownership refactor removes legacy raw archives after nanoka-exclusive cutover.",
+        "recovery": "git history before task #197 contains data/source/raw/buhflipexplode/2026-05-05T0445Z/fetch-manifest.json"
+      }
     },
     {
       "sourceId": "zzz-data-introduction",
@@ -132,7 +147,7 @@
       "urlAllowlist": {},
       "fetchedAt": "2026-05-05T00:00:00+08:00",
       "lastVerifiedAt": "2026-05-15T10:56:36+08:00",
-      "contentHash": "sha256:see-data/source/source-manifest.json",
+      "contentHash": "sha256:see-packages/data/source/source-manifest.json",
       "takedownPath": "docs/data-source/takedown-rollback.md#guide-reference",
       "fallbackPlan": "manual owner review",
       "notes": [
@@ -175,7 +190,7 @@
       "urlAllowlist": {},
       "fetchedAt": "2026-05-14T23:30:00+08:00",
       "lastVerifiedAt": "2026-05-15T10:56:36+08:00",
-      "contentHash": "sha256:see-data/cleaned/audit/source-migration-field-diff.json",
+      "contentHash": "sha256:see-packages/data/cleaned/audit/source-migration-field-diff.json",
       "takedownPath": "docs/data-source/takedown-rollback.md#gachabase",
       "fallbackPlan": "not eligible without owner decision",
       "notes": [
@@ -195,7 +210,7 @@
       "urlAllowlist": {},
       "fetchedAt": "2026-05-14T23:30:00+08:00",
       "lastVerifiedAt": "2026-05-15T10:56:36+08:00",
-      "contentHash": "sha256:see-data/cleaned/audit/source-migration-field-diff.json",
+      "contentHash": "sha256:see-packages/data/cleaned/audit/source-migration-field-diff.json",
       "takedownPath": "docs/data-source/takedown-rollback.md#prydwen",
       "fallbackPlan": "not eligible without owner decision",
       "notes": [

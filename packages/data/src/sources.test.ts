@@ -22,7 +22,7 @@ function createDiscoveryGameData() {
 
     return buildSourceDocument(descriptor, {
       ...options,
-      fileName: "data/source/excel/data.xlsx",
+      fileName: "git-history:data/source/excel/data.xlsx",
     })
   })
 
@@ -147,29 +147,31 @@ describe("@randomplay/data source discovery skeleton", () => {
     expect(() => assertDiscoveryOnlyGameData(gameData)).toThrow(detail)
   })
 
-  it("documents buhflipexplode retained live source assets for the next adapter", () => {
+  it("documents buhflipexplode as a retired audit baseline", () => {
     const descriptor = getDataSourceDescriptor("buhflipexplode-zzz-da")
 
+    expect(descriptor.status).toBe("retired")
     expect(descriptor.discoveredAssets).toEqual(
       expect.arrayContaining([
-        "data/source/raw/buhflipexplode/2026-05-05T0445Z/da/da-versions.live.json",
-        "data/source/raw/buhflipexplode/2026-05-05T0445Z/assets/zzz/enemies.live.json",
-        "data/source/raw/buhflipexplode/2026-05-05T0445Z/assets/zzz/buffs.live.json",
-        "data/source/raw/buhflipexplode/2026-05-05T0445Z/algorithm-manifest.json",
+        "git-history:data/source/raw/buhflipexplode/2026-05-05T0445Z/da/da-versions.live.json",
+        "git-history:data/source/raw/buhflipexplode/2026-05-05T0445Z/assets/zzz/enemies.live.json",
+        "git-history:data/source/raw/buhflipexplode/2026-05-05T0445Z/assets/zzz/buffs.live.json",
+        "git-history:data/source/raw/buhflipexplode/2026-05-05T0445Z/algorithm-manifest.json",
       ]),
     )
     expect(descriptor.compliance.redistribution).toBe("cleanedDataOnly")
+    expect(descriptor.compliance.notes.join("\n")).toContain("recoverable from git history only")
   })
 
-  it("documents Mihoyo retained Deadly Assault detail assets for the next adapter", () => {
+  it("documents Mihoyo as a retired audit baseline", () => {
     const descriptor = getDataSourceDescriptor("mihoyo-zzz-critical-assault")
 
-    expect(descriptor.status).toBe("readyForAdapter")
+    expect(descriptor.status).toBe("retired")
     expect(descriptor.discoveredAssets).toEqual(
       expect.arrayContaining([
-        "data/source/raw/mihoyo/zzz-da/2026-05-05T0850Z/channel-108/periods.json",
-        "data/source/raw/mihoyo/zzz-da/2026-05-05T0850Z/parsed/period-details.json",
-        "data/source/raw/mihoyo/zzz-da/2026-05-05T0850Z/alignment/mihoyo-buhflipexplode.json",
+        "git-history:data/source/raw/mihoyo/zzz-da/2026-05-05T0850Z/channel-108/periods.json",
+        "git-history:data/source/raw/mihoyo/zzz-da/2026-05-05T0850Z/parsed/period-details.json",
+        "git-history:data/source/raw/mihoyo/zzz-da/2026-05-05T0850Z/alignment/mihoyo-buhflipexplode.json",
       ]),
     )
     expect(descriptor.compliance.notes.join("\n")).toContain(
@@ -177,20 +179,20 @@ describe("@randomplay/data source discovery skeleton", () => {
     )
   })
 
-  it("documents the retained Excel workbook audit without marking formal rows ready", () => {
+  it("documents the retired Excel workbook audit without marking formal rows ready", () => {
     const descriptor = getDataSourceDescriptor("lo-user-excel")
 
-    expect(descriptor.status).toBe("readyForAdapter")
+    expect(descriptor.status).toBe("retired")
     expect(descriptor.formalDataReady).toBe(false)
     expect(descriptor.discoveredAssets).toEqual(
       expect.arrayContaining([
-        "data/source/excel/data.xlsx",
-        "data/source/excel/workbook-audit.json",
+        "git-history:data/source/excel/data.xlsx",
+        "git-history:data/source/excel/workbook-audit.json",
       ]),
     )
     expect(descriptor.compliance.redistribution).toBe("cleanedDataOnly")
     expect(descriptor.compliance.notes.join("\n")).toContain(
-      "do not infer typed modifiers",
+      "recoverable from git history only",
     )
   })
 })

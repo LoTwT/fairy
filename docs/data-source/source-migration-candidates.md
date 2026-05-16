@@ -3,7 +3,7 @@
 Status: Phase 1 initial sample audit draft
 Owner: @TechLead
 Related task: task #117
-Decision context: D-20 data-source migration after `data/source/excel/data.xlsx`
+Decision context: D-20 data-source migration after `git-history:data/source/excel/data.xlsx`
 stopped updating.
 Checked: 2026-05-14
 

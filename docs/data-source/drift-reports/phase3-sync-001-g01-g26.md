@@ -1,7 +1,7 @@
 # Nanoka Drift Report: phase3-sync-001-g01-g26
 
 Status: Phase 3 drift audit first G01-G26 sync
-Generated: 2026-05-16T01:50:00+08:00
+Generated: 2026-05-15T16:20:00+08:00
 
 This report compares archived G01-G26 replay baselines against nanoka candidate coverage/status/source paths and records Product/TL rulings. Full runtime cutover remains disabled.
 
@@ -9,7 +9,7 @@ This report compares archived G01-G26 replay baselines against nanoka candidate 
 
 | Source | Version | Content Hash |
 |---|---|---|
-| `nanoka-zzz` | `2.8` | `sha256:93d1241c3204109be06fcf801594bb3aebe40cca830973956c7dea26367b6882` |
+| `nanoka-zzz` | `2.8` | `sha256:4374b550b86b4af029e1903b838ce8906d6e389a8a6566eb35f3b7cac97761ba` |
 
 ## Baselines
 
@@ -70,7 +70,7 @@ Exit-clean sync eligible: **false**
 ## Boundary
 
 - This sync does not promote nanoka to runtime cleaned data.
-- Archived Excel / D-17 / D-12 sources remain audit baselines, not runtime
-  fallback.
+- Retired Excel / D-17 / D-12 source ids remain audit baselines, not runtime
+  fallback. Their raw archives are recoverable from git history only.
 - Any future `changed`, `missing`, `new`, or `semantic-mismatch` row must
   carry source refs and a ruling before Phase 3 exit.

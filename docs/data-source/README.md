@@ -6,9 +6,10 @@ Inputs: CONFIRM-4, CONFIRM-11, D-20, Phase 2 nanoka adapter, Phase 3 drift audit
 
 This directory records the source-ingestion boundary for `@randomplay/data`.
 The current runtime source is approved-live nanoka. Earlier Excel, Mihoyo D-17,
-and buhflipexplode D-12 snapshots remain retained audit references only; runtime
-cleaned data and package exports fail loud if they reference those archived
-source ids. V1.2.1 extends the runtime Bangboo catalog to all 39 approved-live
+and buhflipexplode D-12 snapshots are retired audit references only; their raw
+archives were removed from the current tree in V0.1.2 and are recoverable from
+git history. Runtime cleaned data and package exports fail loud if they
+reference those retired source ids. V1.2.1 extends the runtime Bangboo catalog to all 39 approved-live
 nanoka 2.8 entries; V1.2.x PR-A extends runtime Agents to all 53 approved-live
 nanoka 2.8 entries; V1.2.x PR-B extends runtime W-Engines to all 89
 approved-live nanoka 2.8 entries; V1.2.x PR-C extends Drive Disc set identity
@@ -34,29 +35,29 @@ imports do not add a package version bump.
 ## Source Snapshot Scope
 
 - Runtime formal `GameData` is generated from reviewed source documents.
-- `data/cleaned/runtime/game-data.json` and the package mirror are the current
-  runtime cleaned artifacts.
-- `data/cleaned/audit/nanoka-bangboo-batch-audit.json` records the V1.2.1
+- `packages/data/cleaned/runtime/game-data.json` is the package-owned runtime
+  cleaned artifact.
+- `packages/data/cleaned/audit/nanoka-bangboo-batch-audit.json` records the V1.2.1
   per-entry Bangboo panel/skill/element audit.
-- `data/cleaned/audit/nanoka-character-batch-audit.json` records the V1.2.x
+- `packages/data/cleaned/audit/nanoka-character-batch-audit.json` records the V1.2.x
   per-entry Agent identity/enum/panel audit.
-- `data/cleaned/audit/nanoka-wengine-batch-audit.json` records the V1.2.x
+- `packages/data/cleaned/audit/nanoka-wengine-batch-audit.json` records the V1.2.x
   per-entry W-Engine identity/stat/passive-boundary audit.
-- `data/cleaned/audit/nanoka-drive-disc-batch-audit.json` records the V1.2.x
+- `packages/data/cleaned/audit/nanoka-drive-disc-batch-audit.json` records the V1.2.x
   per-entry Drive Disc identity/set-effect-text audit.
-- `data/cleaned/audit/nanoka-enemy-batch-audit.json` records the V1.2.x
+- `packages/data/cleaned/audit/nanoka-enemy-batch-audit.json` records the V1.2.x
   per-entry Enemy identity/rank/variant audit.
-- `data/cleaned/audit/nanoka-da-current-batch-audit.json` records the V1.2.x
+- `packages/data/cleaned/audit/nanoka-da-current-batch-audit.json` records the V1.2.x
   current-live Deadly Assault period/zone/buff/room/monster/boss-adjustment
   audit.
-- `data/cleaned/audit/nanoka-da-historical-batch-audit.json` records the V1.2.x
+- `packages/data/cleaned/audit/nanoka-da-historical-batch-audit.json` records the V1.2.x
   historical Deadly Assault period/zone/buff/room/monster/boss-adjustment audit
   for the dedicated `historicalDAPeriods` bucket.
-- `data/cleaned/audit/nanoka-full-data-batch-discovery.json` records the
+- `packages/data/cleaned/audit/nanoka-full-data-batch-discovery.json` records the
   V1.2.x full-data batch counts, exclusions, historical DA boundary, and PR
   sequence.
-- Raw source archives are retained for audit and are not distributed in npm
-  package payloads.
+- Nanoka raw source archives are retained under `packages/data/source/` for
+  audit and are not distributed in npm package payloads.
 
 Formal V0.1.0 data must be generated from reviewed source documents and keep
 `sourceId`, `sourceVersion`, `parsedAt` / `fetchedAt`, `parserVersion`, and
@@ -68,9 +69,9 @@ runtime data.
 | Source ID | Kind | Current status | Formal data ready | Notes |
 |---|---|---:|---:|---|
 | `nanoka-zzz` | `thirdPartySite` | runtime-primary | yes | Approved-live `2.8` source for V0.1.0 runtime cleaned data, V1.2.1 Bangboo batch import, and V1.2.x character/W-Engine/Drive Disc/Enemy/current DA batch import; manifest-available historical DA snapshots feed only `historicalDAPeriods`. |
-| `lo-user-excel` | `excel` | deprecated runtime archive | audit only | Workbook committed under `data/source/excel/` with hash metadata. |
-| `mihoyo-zzz-critical-assault` | `mihoyoWiki` | deprecated runtime archive | audit only | Public API snapshot retained for DA detail text and zh/en source-text alignment. |
-| `buhflipexplode-zzz-da` | `thirdPartySite` | deprecated runtime archive | audit only | Live-only source snapshot retained; D-12 forbids copying GPL JS into Fairy runtime. |
+| `lo-user-excel` | `excel` | retired runtime archive | audit only | Workbook raw archive removed from current tree; registry keeps a git-history recovery pointer. |
+| `mihoyo-zzz-critical-assault` | `mihoyoWiki` | retired runtime archive | audit only | Public API raw archive removed from current tree; historical conflict evidence remains in cleaned audit. |
+| `buhflipexplode-zzz-da` | `thirdPartySite` | retired runtime archive | audit only | Live-only raw archive removed from current tree; D-12 still forbids copying GPL JS into Fairy runtime. |
 
 Implementation entry: `packages/data/src/sources.ts`.
 

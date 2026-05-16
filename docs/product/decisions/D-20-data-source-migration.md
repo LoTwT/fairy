@@ -12,7 +12,7 @@
 
 ## 1. Background
 
-V0.0.4 ship 后（2026-05-14），lo-user 通告 Excel 数据源（`data/source/excel/data.xlsx`）上游永久停更。Excel 是 fairy V0.0.4 的：
+V0.0.4 ship 后（2026-05-14），lo-user 通告 Excel 数据源（`git-history:data/source/excel/data.xlsx`）上游永久停更。该 raw archive 已在 V0.1.2 后从当前树移除，仅可从 git history 恢复。Excel 是 fairy V0.0.4 的：
 
 - 角色 panel + skill multipliers + 失衡倍率 + 异常积蓄主源
 - 邦布属性 + 邦布技能数据源（V1.1 26 anchors 中 G24/G25/G26 强依赖）
@@ -64,7 +64,7 @@ V0.0.4 ship 后（2026-05-14），lo-user 通告 Excel 数据源（`data/source/
 
 ## 4. Supply chain audit trail（per-source registry + Formal-Live Gate）
 
-### 4.1 Per-source registry（`data/source-registry.json`）
+### 4.1 Per-source registry（`packages/data/source-registry.json`）
 
 ```jsonc
 {
@@ -151,7 +151,7 @@ QA 验证 supply chain 完整性 + Formal-Live Gate 执行 + structured `missing
 ### Phase 0 — Schema-first inventory（done via PR #52）
 
 - Canonical schema (`packages/core/src/schema/*`) 反推 → 41-row matrix（PR #52 baseline）
-- Schema contract + nanoka coverage matrix（机器 + 人读）+ package mirror
+- Schema contract + nanoka coverage matrix（机器 + 人读）
 - **status：✅ QA PASS（PR #52 task #121/#123 done）**
 
 ### Phase 1 — needs-tl-research 收敛（done via PR #53 + #55）
@@ -167,7 +167,7 @@ QA 验证 supply chain 完整性 + Formal-Live Gate 执行 + structured `missing
 
 1. nanoka adapter（`raw snapshot → normalized → cleaned` 三层 pipeline）
 2. `data/raw/nanoka/<version>/` raw snapshot 入仓 + content hash + offline snapshotability
-3. `data/cleaned/candidate/nanoka/` 输出 candidate cleaned shape（不替换 runtime cleaned data）
+3. `packages/data/cleaned/candidate/nanoka/` 输出 candidate cleaned shape（不替换 runtime cleaned data）
 4. **panel normalization formula**（raw `stats + level growth + extra_level` → cleaned final panel）
 5. **enemy `monster_info.*` variant mapping**（Hati / Dullahan / Greta variants ↔ cleaned enemy）
 6. **DA `boss_adjust` + score/HP + period filter semantic mapping**
@@ -178,7 +178,7 @@ QA 验证 supply chain 完整性 + Formal-Live Gate 执行 + structured `missing
 **关键边界**：
 - **不动 runtime cleaned data** — D-17/D-12 仍是 runtime 主路径
 - Excel adapter 仍 runtime（archived，但保留）
-- 现有 `data/cleaned/` 不替换
+- 现有 `packages/data/cleaned/` 不替换
 
 **QA Gates 4-6 acceptance**：见 §9。
 
@@ -201,12 +201,12 @@ QA 验证 supply chain 完整性 + Formal-Live Gate 执行 + structured `missing
 ### Phase 4 — Cutover + V0.1.0 ship
 
 - 入选源（nanoka）promote 为 runtime 主源，新增/切换 runtime cleaned artifact + loader/export
-- Excel / D-17 米游社 / D-12 buhflipexplode raw snapshots **不物理移动**，保留在 `data/source/...` 作 archived audit reference
+- Excel / D-17 米游社 / D-12 buhflipexplode raw snapshots 在 V0.1.2 data ownership cleanup 中物理删除，仅保留 source-registry git-history recovery pointer 作 retired audit reference
 - D-17 米游社 + D-12 buhflipexplode runtime path **正式 deprecate**（runtime/export fail-loud if 引用 archived source ids）
 - G01-G26 历史 source refs **保留作 release evidence**（per R6 渐进）+ 同时加 new-source parallel refs
 - 新增 **G27 / G28**（new-source proof anchors）：1 个最新角色 + 1 个最新邦布
 - `v1-replay-report.json` 扩展到 28 anchors，`releaseReady=true` 保持
-- `data/cleaned/runtime/game-data.json` / package mirror 标 `runtimeCutoverReady=true`，`GameData.sourceVersion=nanoka-zzz@2.8`
+- `packages/data/cleaned/runtime/game-data.json` 标 `runtimeCutoverReady=true`，`GameData.sourceVersion=nanoka-zzz@2.8`
 - Release `v0.1.0`（**minor bump，schema breaking**，per R5）
 - Release notes 标 "Schema migration: nanoka-exclusive source-backed data"
 
@@ -218,8 +218,7 @@ QA 验证 supply chain 完整性 + Formal-Live Gate 执行 + structured `missing
 
 **45-row canonical-generated matrix**（PR #55 task #127）权威基线，存于：
 - `docs/data-source/nanoka-coverage-matrix.md`（人读版）
-- `data/cleaned/audit/nanoka-coverage-matrix.json`（机器版，root）
-- `packages/data/cleaned/audit/nanoka-coverage-matrix.json`（机器版 package mirror）
+- `packages/data/cleaned/audit/nanoka-coverage-matrix.json`（机器版）
 
 **Matrix status counts (PR #55)**：见 PR 文档。每字段含 `nanoka endpoint` + `raw field path` + `transform rule` + `sample entity` + `status` + `failed-research evidence`（如 needs-owner-research）。
 
@@ -248,7 +247,7 @@ QA 验证 supply chain 完整性 + Formal-Live Gate 执行 + structured `missing
 本项目（@randomplay/data）汇总和清洗了来自 nanoka 等公开来源的 ZZZ 游戏内数值规则数据，
 用于本地伤害计算用途。所有数据均派生自正式服已发布的游戏内容（per nanoka manifest.zzz.live）。
 
-来源详情见 [`data/source-registry.json`](data/source-registry.json)，每条 cleaned 数据
+来源详情见 [`packages/data/source-registry.json`](packages/data/source-registry.json)，每条 cleaned 数据
 均带 `sourceId` + `sourceVersion` + `sourceAnchor` 追溯字段。
 
 **如有侵权，请联系作者删除：[联系方式]**
@@ -315,8 +314,7 @@ lo-user 已 explicitly 接受以下残余风险（per msg `74b52454`）：
 
 ### Gate 8 — Phase 3 drift audit
 - Phase 3 = nanoka output ↔ archived Excel / D-17 / D-12 evidence drift audit，**不是 runtime fallback**
-- Drift report 必须产出 root/package mirrored JSON：
-  `data/cleaned/audit/nanoka-drift-report/<syncId>.json` 与
+- Drift report 必须产出 package-owned JSON：
   `packages/data/cleaned/audit/nanoka-drift-report/<syncId>.json`
 - 人读报告路径：`docs/data-source/drift-reports/<syncId>.md`
 - Drift status 枚举：`same` / `changed` / `missing` / `new` /
@@ -364,12 +362,12 @@ lo-user 已 explicitly 接受以下残余风险（per msg `74b52454`）：
 | `docs/product/decisions/index.md` CONFIRM-11 数据源 | D-20 supersedes；「仅正式服」边界强化为 Formal-Live Gate (`manifest.zzz.live`) |
 | `docs/data-contract/cleaned-schema-contract.md`（PR #52）| Schema contract，canonical = `packages/core/src/schema/*` |
 | `docs/data-source/nanoka-coverage-matrix.md`（PR #55 latest）| 45-row coverage matrix 人读版 |
-| `data/cleaned/audit/nanoka-coverage-matrix.json`（PR #55）| 45-row matrix 机器版 |
+| `packages/data/cleaned/audit/nanoka-coverage-matrix.json`（PR #55）| 45-row matrix 机器版 |
 | `docs/data-source/source-migration-candidates.md`（PR #51）| 三源 audit 历史记录 |
 | `docs/data-source/da-sentinel-patch-nanoka-feasibility.md`（PR #54）| DA/Sentinel/patch feasibility audit |
 | `docs/data-contract/source-adapter-contract.md`（PR #51）| Adapter contract |
 | `docs/qa/golden-source-coverage.md` | Phase 4 新增 G27/G28 anchor entries |
-| `data/source-registry.json`（Phase 2 NEW）| Supply chain audit trail 实现 |
+| `packages/data/source-registry.json`（Phase 2 NEW）| Supply chain audit trail 实现 |
 | `docs/data-source/takedown-rollback.md`（Phase 4 PR2 NEW）| Q4 takedown response runbook |
 
 ## 12. Phase / Milestone

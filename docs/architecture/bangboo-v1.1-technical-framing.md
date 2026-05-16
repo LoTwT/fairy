@@ -19,9 +19,9 @@ Locked decisions:
   Users, CLI, AI adapters, or future UI must provide explicit Bangboo action
   segments in the snapshot. Core does not schedule triggered or periodic
   effects;
-- data sources: mixed strategy, consistent with V1: retained Excel source,
-  buhflipexplode/Mihoyo source text when available, and manual audit only as
-  reviewed evidence;
+- data sources: mixed strategy, consistent with V1 at the time: Excel-derived
+  audit evidence, buhflipexplode/Mihoyo source text when available, and manual
+  audit only as reviewed evidence;
 - golden coverage: 1-3 G24+ anchors using the `feat(golden):` convention;
 - release target: V0.0.4.
 
@@ -54,7 +54,7 @@ Current `GameData` has agents, skills, W-Engines, Drive Discs, enemies,
 Resonium, generic modifiers, rules, and aliases. It does not yet publish
 Bangboo data.
 
-The retained Excel audit already identifies deferred Bangboo sheets:
+The retired Excel-derived audit already identifies deferred Bangboo sheets:
 
 | Sheet | Range | Cleaned target | Useful fields |
 |---|---:|---|---|
@@ -172,7 +172,7 @@ does not need to break existing result summaries or team-buff resolution.
 ### 3.3 Deferred Bangboo-Sourced Modifiers
 
 V1.1 Path X does not implement Bangboo passive/team buff modifiers because the
-retained Excel source only has panel and skill numeric rows. Bangboo
+retired Excel-derived evidence only has panel and skill numeric rows. Bangboo
 passive/support effects are V1.2+ work unless a reviewed text source is added.
 
 When that scope is reopened, Bangboo passive/support effects should compile to
@@ -318,10 +318,10 @@ cooldown, or automatic trigger scheduling, it is not a V1.1 anchor.
 
 ## 7. Data Source Plan
 
-1. Reuse retained Excel as the first source for numeric Bangboo stats and skill
-   segment values.
-2. Use buhflipexplode/Mihoyo only for source text, labels, activation wording,
-   and cross-checks where available.
+1. Reuse the generated Excel-derived audit artifacts for numeric Bangboo stats
+   and skill segment values.
+2. Treat buhflipexplode/Mihoyo as retired audit baselines; current source
+   promotion should use nanoka or another approved source.
 3. Record source anchors in the cleaned artifact and replay report.
 4. Treat manually reviewed interpretations as `manualAcceptance`, not as a
    primary source for invented values.
@@ -341,7 +341,7 @@ Recommended PR split:
 3. Data foundation:
    - `GameData.bangboos` and optional `bangbooSkills`;
    - selected 1-3 cleaned Bangboo rows;
-   - source refs and sync-cleaned mirrors.
+   - source refs and package-owned cleaned artifacts.
 4. Golden anchors:
    - G24+ replay functions;
    - generated report 23 -> 24-26 passed;

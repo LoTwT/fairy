@@ -37,14 +37,14 @@ function readJson<T>(path: string): T {
 }
 
 describe("nanoka Disorder formula failed-evidence audit", () => {
-  it("keeps the package audit artifact mirror byte-identical", () => {
-    expect(readFileSync(join(repoRoot, "packages/data/cleaned/audit/nanoka-disorder-formula-audit.json"), "utf8")).toBe(
-      readFileSync(join(repoRoot, "data/cleaned/audit/nanoka-disorder-formula-audit.json"), "utf8"),
-    )
+  it("keeps the canonical audit artifact readable from the data package", () => {
+    const audit = readJson<DisorderFormulaAudit>("packages/data/cleaned/audit/nanoka-disorder-formula-audit.json")
+
+    expect(audit.schemaVersion).toBe("nanoka-disorder-formula-audit/v0.1")
   })
 
   it("records missing formula endpoints and implementation-owned classification", () => {
-    const audit = readJson<DisorderFormulaAudit>("data/cleaned/audit/nanoka-disorder-formula-audit.json")
+    const audit = readJson<DisorderFormulaAudit>("packages/data/cleaned/audit/nanoka-disorder-formula-audit.json")
 
     expect(audit).toMatchObject({
       schemaVersion: "nanoka-disorder-formula-audit/v0.1",
@@ -90,7 +90,7 @@ describe("nanoka Disorder formula failed-evidence audit", () => {
   })
 
   it("locks the guide/golden-backed core formula ids", () => {
-    const audit = readJson<DisorderFormulaAudit>("data/cleaned/audit/nanoka-disorder-formula-audit.json")
+    const audit = readJson<DisorderFormulaAudit>("packages/data/cleaned/audit/nanoka-disorder-formula-audit.json")
 
     expect(audit.implementationContract.sourceAnchors).toEqual(expect.arrayContaining([
       "guide-3.4.1",

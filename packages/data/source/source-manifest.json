@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "source-manifest-v1",
+  "generatedAt": "2026-05-16T02:45:00+08:00",
+  "distributionPolicy": {
+    "rawSourceArchive": "versioned-in-git-not-packaged",
+    "publishedArtifacts": "cleaned-json-and-types-only"
+  },
+  "sources": [
+    {
+      "id": "zzz-data-introduction",
+      "kind": "referenceGuide",
+      "path": "docs/reference/zzz-data-introduction.txt",
+      "sha256": "4275c1f475e067985f9827fc9501ffd3b3b6a0c8ef319fe234b23236032cc87f",
+      "bytes": 95719,
+      "receivedAt": "2026-05-05T12:16:24+08:00",
+      "providedBy": "@lo-user",
+      "attachmentId": "a9012315-c0be-440a-9b82-a9c4ef603e12",
+      "distribution": "reference-retained-not-packaged",
+      "usage": "formula and terminology reference; not a formal data source"
+    },
+    {
+      "id": "nanoka-zzz-2.8",
+      "kind": "rawHttpSnapshot",
+      "path": "packages/data/source/raw/nanoka/zzz/2.8/fetch-manifest.json",
+      "sha256": "4374b550b86b4af029e1903b838ce8906d6e389a8a6566eb35f3b7cac97761ba",
+      "bytes": 416234,
+      "fetchedAt": "2026-05-16T01:50:00+08:00",
+      "providedBy": "static.nanoka.cc public JSON",
+      "distribution": "raw-retained-not-packaged",
+      "usage": "Nanoka live 2.8 raw snapshot fixture for Phase 2 source-gate, adapter-skeleton, Phase 3 first-sync candidate coverage, Phase 4 runtime cutover, V1.2.1 Bangboo batch import, V1.2.x character batch import, V1.2.x W-Engine batch import, V1.2.x Drive Disc set batch import, V1.2.x enemy batch import, current-live DA period batch import, and enemy variant mapping tests"
+    },
+    {
+      "id": "nanoka-zzz-historical-da",
+      "kind": "rawHttpSnapshot",
+      "path": "packages/data/source/raw/nanoka/zzz/historical-da-fetch-manifest.json",
+      "sha256": "934ec964d825e3f90889e58589aee9ef33e870b424d982c16e26e5110b86b16b",
+      "bytes": 393761,
+      "fetchedAt": "2026-05-16T02:45:00+08:00",
+      "providedBy": "static.nanoka.cc public JSON",
+      "distribution": "raw-retained-not-packaged",
+      "usage": "Nanoka manifest-available historical Deadly Assault snapshots for V1.2.x PR-F historicalDAPeriods; not a current-runtime fallback and not packaged as raw source"
+    }
+  ]
+}
