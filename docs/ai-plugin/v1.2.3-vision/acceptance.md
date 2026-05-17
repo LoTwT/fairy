@@ -15,10 +15,11 @@ and passing.
 
 ## Scope
 
-V1.2.3 adds a vision entry to the existing `fairy-snapshot` -> `fairy-calc`
-workflow. The vision entry reads one supported community-tool screenshot,
-extracts a reviewable snapshot draft, asks the user to confirm or edit it, then
-hands the confirmed strict `BattleSnapshot` to `fairy-calc`.
+V1.2.3 adds `fairy-vision` as an approved fourth skill in the existing AI plugin
+workflow. The vision skill reads one supported community-tool screenshot,
+extracts a reviewable snapshot draft plus draft metadata, then hands off to
+`fairy-snapshot` for review/edit and missing-field policy before the confirmed
+strict `BattleSnapshot` goes to `fairy-calc`.
 
 Locked MVP decisions:
 
@@ -32,6 +33,8 @@ Locked MVP decisions:
   text, and PII detection belongs in draft metadata / extraction evidence.
 - Field policy: `team[].panel` receives calculation-ready total panel values,
   not an audit model for base + bonus.
+- Skill structure: approved skill list is `fairy-vision`, `fairy-snapshot`,
+  `fairy-calc`, and `fairy-explain`.
 - Language MVP: current source fixtures are zh; zh user-facing copy is required
   for MVP. en copy remains part of the existing V1.2.2 user-facing contract, but
   image UI language detection beyond zh is forward-spec.
@@ -45,6 +48,7 @@ Out of scope for V1.2.3 MVP:
 - multi-screenshot batch ingestion;
 - OCR-only fallback as a shipped requirement;
 - storing UID / user name in `BattleSnapshot`;
+- unapproved `fairy-ocr` skill enablement;
 - AI plugin compare / `fairy-compare` skill enablement;
 - any model-side calculation.
 
@@ -52,7 +56,8 @@ Out of scope for V1.2.3 MVP:
 
 Vision is an input structuring path, not a calculation path:
 
-> AI reads screenshots and drafts. `fairy` CLI validates and calculates.
+> `fairy-vision` reads screenshots and drafts. `fairy-snapshot` reviews.
+> `fairy` CLI validates and calculates.
 
 Any path that lets the model invent damage, fill unsupported schema fields,
 persist PII, or proceed to calculation without a reviewable strict snapshot is a
@@ -104,7 +109,7 @@ they must stay outside the public fixture tree.
 
 ## V-G1: Source Detection and Layout Routing
 
-The vision prompt must detect the source before extracting fields.
+`fairy-vision` must detect the source before extracting fields.
 
 Required behavior:
 
@@ -224,15 +229,17 @@ Acceptance checks:
 
 ### G1: Skill Discovery and Metadata
 
-V1.2.3 should extend `fairy-snapshot` rather than add a new required skill unless
-Product explicitly scopes a new skill. The metadata verifier must fail if an
-unapproved `fairy-vision` / `fairy-ocr` / `fairy-compare` skill appears.
+V1.2.3 intentionally adds `fairy-vision` as the Product-approved screenshot
+skill. The metadata verifier must require the four approved skills and fail if an
+unapproved `fairy-ocr` / `fairy-compare` skill appears.
 
 Acceptance additions:
 
-- `fairy-snapshot` documents image input as a supported entry;
+- `fairy-vision` is present and documents screenshot input as the supported entry;
+- `fairy-snapshot` remains the review/edit and missing-field handoff skill;
 - trigger examples include zh screenshot phrases, for example `帮我从这张图生成快照`;
 - supported source names are documented in user-facing copy;
+- `fairy-vision` metadata states that a multimodal-capable host is required;
 - docs do not imply official HoYoverse support.
 
 ### G2: CLI Binding and No-Model-Calculation
@@ -241,7 +248,10 @@ Vision does not change the CLI-only calculation contract.
 
 Acceptance additions:
 
-- vision flow emits a snapshot draft and draft metadata only;
+- `fairy-vision` emits a snapshot draft and draft metadata only;
+- `fairy-vision` does not call the CLI, calculate damage, explain results, or
+  emit a confirmed snapshot;
+- `fairy-snapshot` owns the review/edit handoff before `fairy-calc`;
 - `fairy-calc` remains the only calculation step;
 - static scan catches model-side damage/math instructions and fake preflight
   commands;
@@ -360,7 +370,8 @@ The implementation PR is not QA-passable until the following evidence is present
 12. Unsupported-source or low-confidence fallback smoke
 13. zh user-facing review/edit copy smoke
 14. AI plugin deferred-scope scan: no `fairy-compare`, no in-game screenshot
-    support claim, no OCR-only shipped claim unless separately scoped
+    support claim, no `fairy-ocr`, no OCR-only shipped claim unless separately
+    scoped
 15. Manual host-tool smoke checklist for one `绝区零工坊` image and one `米游社`
     image, if runtime automation cannot attach images deterministically
 
