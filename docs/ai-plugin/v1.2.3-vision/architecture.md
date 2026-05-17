@@ -17,8 +17,9 @@ trusted calculation boundary:
 > asks the user to review/edit, then Fairy CLI validates and calculates.
 
 Vision is an input-structuring layer only. It must not calculate damage, invent
-scenario fields, bypass `fairy-snapshot` review, or introduce a parallel
-snapshot schema.
+scenario fields, bypass `fairy-snapshot` review/edit, or introduce a parallel
+snapshot schema. V1.2.3 introduces a Product-approved `fairy-vision` skill for
+this input modality.
 
 ## Locked Scope
 
@@ -56,7 +57,7 @@ User image
 Host AI model vision support
   |
   v
-fairy-snapshot image entry
+fairy-vision
   |
   +--> source detection: zzz-workshop | miyoushe-record | unknown
   |
@@ -65,6 +66,9 @@ fairy-snapshot image entry
   +--> VisionExtraction JSON
   |
   +--> partial BattleSnapshot draft + draftMetadata.extractionEvidence
+  |
+  v
+fairy-snapshot
   |
   +--> review/edit gate
   |
@@ -86,21 +90,43 @@ fields just because the build image parsed successfully.
 
 ## Skill Boundary
 
-V1.2.3 should extend `fairy-snapshot` with an image input entry. Do not add a
-required `fairy-vision`, `fairy-ocr`, or `fairy-compare` skill in the MVP unless
-Product reopens scope.
+V1.2.3 adds one Product-approved skill: `fairy-vision`.
 
-`fairy-snapshot` image entry:
+Approved V1.2.3 skill set:
+
+- `fairy-vision`
+- `fairy-snapshot`
+- `fairy-calc`
+- `fairy-explain`
+
+`fairy-vision`:
 
 - accepts one supported image plus optional user text;
+- declares a multimodal-capable host requirement in skill metadata;
+- fails loud and routes to `fairy-snapshot` NL flow when the host cannot read
+  images;
 - detects the source and extracts fields;
 - resolves entities through packaged cleaned runtime data and aliases;
 - emits a reviewable build draft and `draftMetadata`;
-- asks about missing critical fields before handoff;
-- hands the confirmed strict snapshot to `fairy-calc`.
+- records PII detection/redaction status only; raw PII is discarded;
+- hands the draft to `fairy-snapshot` for review/edit and remaining
+  missing-field policy;
+- does **not** call Fairy CLI;
+- does **not** calculate, explain, compare, or produce a confirmed snapshot.
 
-`fairy-calc` remains the only calculation step. `fairy-explain` remains a
-consumer of CLI-produced `CalcResult`.
+`fairy-snapshot` remains the owner of review/edit, entity confirmation, and
+missing-field policy. `fairy-calc` remains the only calculation step.
+`fairy-explain` remains a consumer of CLI-produced `CalcResult`.
+
+Do not add `fairy-ocr`, `fairy-compare`, or any additional vision skill in
+V1.2.3 without a separate Product decision.
+
+The `fairy-vision` -> `fairy-snapshot` -> `fairy-calc` chain is a prompt
+contract, not a runtime orchestration layer. `fairy-vision` emits a structured
+draft and next-step instruction; the host then presents the review/edit gate and
+continues the existing skill flow. User-facing copy must not expose internal
+skill handoff language such as "invoking fairy-vision" or "transferring to
+fairy-snapshot".
 
 ## Source Detection
 
@@ -313,10 +339,13 @@ manual smoke checklist.
 
 Required verifier checks:
 
-- plugin scope still exposes only Product-approved skills;
-- `fairy-snapshot` documents image input and supported source names;
-- no `fairy-vision`, `fairy-ocr`, or `fairy-compare` skill appears without a new
-  Product decision;
+- plugin scope exposes exactly the Product-approved V1.2.3 skill set:
+  `fairy-vision`, `fairy-snapshot`, `fairy-calc`, and `fairy-explain`;
+- `fairy-vision` documents image input, supported source names, multimodal host
+  requirement, and handoff to `fairy-snapshot`;
+- `fairy-vision` does not document CLI execution, damage calculation, compare,
+  explanation generation, or confirmed snapshot bypass;
+- no `fairy-ocr`, `fairy-compare`, or other unapproved skill appears;
 - each expected `*.snapshot.json` parses with `parseBattleSnapshot`;
 - strict snapshots do not contain evidence-only keys such as `uid`, `username`,
   `baseAttack`, `bonusAttack`, `rollCount`, `sourceImage`, or `confidence`;
@@ -330,17 +359,19 @@ Required verifier checks:
 
 Manual host-tool smoke checklist:
 
-- Claude Code can see an attached supported image and reach a reviewable draft;
-- Codex can use the same contract where image input is available;
+- Claude Code can invoke `fairy-vision` on an attached supported image and reach
+  a reviewable draft;
+- Codex can use the same `fairy-vision` contract where image input is available;
 - unsupported image produces a fallback question, not a confident snapshot;
-- confirmed snapshot calculation goes through `fairy-calc`.
+- confirmed snapshot calculation goes through `fairy-snapshot` review/edit and
+  then `fairy-calc`.
 
 ## Implementation Cut
 
 Recommended PR sequence after this plan PR:
 
-1. Metadata and prompt/docs update: extend `fairy-snapshot` input contract and
-   verifier static checks.
+1. Metadata and prompt/docs update: add `fairy-vision` to plugin metadata,
+   create its `SKILL.md`, and extend verifier static checks.
 2. Fixture scaffolding: add redacted/synthetic image fixtures and expected
    extraction/snapshot metadata.
 3. Vision prompt and extraction contract: source detection plus per-source field
@@ -349,9 +380,9 @@ Recommended PR sequence after this plan PR:
 5. End-to-end smoke: confirmed fixture snapshot -> `fairy calc --view verbose`.
 
 Rollback is simple for V1.2.3 MVP because no public schema or package data model
-changes are required. If vision prompts prove unreliable during dogfood, disable
-image trigger wording in `fairy-snapshot` and keep the V1.2.2 text-only workflow
-unchanged.
+changes are required. If vision prompts prove unreliable during dogfood, remove
+or disable `fairy-vision` from plugin metadata and keep the V1.2.2 text-only
+workflow unchanged.
 
 ## Risks
 
