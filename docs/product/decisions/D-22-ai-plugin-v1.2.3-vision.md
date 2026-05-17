@@ -33,15 +33,21 @@ align（per `e7c8a696` lo-user 全按推荐）。
 | L1 | Source detect + per-source layout map | Vision prompt 先 detect source (工坊 / 米游社 / unknown) → 走对应 layout map；unknown source fallback 走 generic OCR + ambiguity-heavy ask-user |
 | C1 | Confidence model | 社区工具截图 → 几乎全 high confidence（structured text + clean numerical values）；NL 路径 Tier 2 "5★ midpoint default" 不在 vision 路径触发（per UX `417b40f5` finding #3） |
 | F1 | NL fallback | Vision 低置信度 / 解析失败 / unknown source → fall through 到 fairy-snapshot NL 对话，复用现有 ask-user 3-tier dialog |
+| **K1** | **Skill 结构** | **独立 `fairy-vision` skill**（per lo-user `772666b5` + 4 方 align）；V1.2.3 approved skill set = 4：`fairy-vision` / `fairy-snapshot` / `fairy-calc` / `fairy-explain`。仍 fail-loud 禁止：`fairy-ocr` / `fairy-compare`（V1.2.x+ 视真实需求再 lock） |
+| **K2** | **fairy-vision contract（收紧）** | Scope = image input → source detect + per-source extraction + per-field confidence + PII detection/redaction + draftMetadata.evidence 组装 + NL fallback decision。**不得做**：调 CLI / 算伤害 / 直接产 confirmed snapshot / 跳 schema validation / 持久化 PII raw values |
+| **K3** | **Chain 模型** | `fairy-vision` → `fairy-snapshot` (ask-user + draft review/edit) → `fairy-calc` (CLI validate + compute) → `fairy-explain` (consume CalcResult)。Chain 是 prompt contract（输出 next-step instruction）而非 runtime orchestration（per TL `3b90d21b`）|
+| **K4** | **Chain transition invisibility (UX 契约)** | AI host 在 chain 时**不**输出 "transferring to fairy-snapshot..." / "invoking fairy-vision..." 等技术 phrasing；用户视角整段对话感觉是同一 bot 完成任务（per UX `a189930d`）。Acceptance V-G3 / V-G5 assertion 验证 no skill-name leakage in user-facing text |
+| **K5** | **Multimodal host check** | `fairy-vision` SKILL.md 标 multimodal-capable host required；host 不支持 image 时直接 fallback 到 `fairy-snapshot` NL path，不让 NL skill 承担 vision 要求（per TL `3b90d21b`）|
 
 可逆性：中。Q1 / Q2 / Q3 / I1 可在 V1.2.x patch 中扩展；S1 是与 fairy
 core 契约边界（不可破，扩展走 schema expansion 单独评审）；C1 / F1 可调
-prompt 优化。
+prompt 优化；**K1 (skill 结构) 调整需 4 方 re-align + plan PR re-draft**（V1.2.3 已 lock 独立 skill）；K2-K5 是 K1 派生收紧契约，仅在 K1 不变前提下微调。
 
 ## 3. Scope 与 Out-of-Scope（V1.2.3 MVP）
 
 ### 3.1 In-Scope
 
+- **新增 1 个 approved skill：`fairy-vision`**（V1.2.3 plugin skill set = 4：fairy-vision / fairy-snapshot / fairy-calc / fairy-explain，per K1）
 - 单图 vision input（社区工具截图）
 - 2 种 source 支持：绝区零工坊（微信公众号 / 小程序）+ 米游社（official BBS）
 - Vision 字段 extraction：
@@ -103,14 +109,15 @@ V1.2.3 不破 D-21 §5 tri-layer 设计：
 
 | Concern | Owner | 验证人 |
 |---|---|---|
+| `fairy-vision` skill SKILL.md spec + chain handoff contract + multimodal host check | @TechLead | @QA |
 | Vision architecture / source detect / per-source layout map | @TechLead | @QA |
 | Schema mapping (panel total vs draftMetadata.evidence) | @TechLead | @QA |
 | Vision fixture contract + golden screenshot 标注规范 | @TechLead + @Product (sample 来源) | @QA |
-| Vision verifier extension (`verify-ai-plugin` G6 类增 V-G1..V-G5) | @TechLead | @QA |
-| Vision user journey / review/edit gate flow / per-source UX 差异 | @UX | @QA |
-| Vision prompt template / ask-user vision-specific / confidence surface | @UX | @QA |
-| Acceptance gates V-G1..V-G5 + G1-G10 vision 扩展 | @QA | @lo-user |
-| 8 决策 lock / Scope / CLI-only 契约 / Tri-layer i18n 继承 | @Product | @lo-user |
+| Verifier extension (approved skill set = 4: vision + snapshot + calc + explain；fail-loud on `fairy-ocr` / `fairy-compare`) | @TechLead | @QA |
+| Vision user journey / review/edit gate flow / per-source UX 差异 / chain transition invisibility | @UX | @QA |
+| Vision prompt template / `fairy-vision` SKILL.md user-facing copy / confidence surface | @UX | @QA |
+| Acceptance gates V-G1..V-G5 + G1-G10 vision 扩展 + chain invisibility assertion (per K4) | @QA | @lo-user |
+| 决策 lock (含 K1-K5) / Scope / CLI-only 契约 / Tri-layer i18n 继承 | @Product | @lo-user |
 | Sample screenshot 提供 + 字段标注 baseline | @lo-user → @TechLead + @QA fixture | — |
 | V1.2.x patch hand-off (in-game / 多工具 / OCR / multi-image) | @Product → 后续 owner TBD | — |
 
@@ -167,6 +174,14 @@ truth；本 D-22 仅承载决策 lock，不重复 gate 命名定义。
 - 2026-05-17 01:21：Product `52c69589` 完整描述待确认项
 - 2026-05-17 01:24：lo-user `e7c8a696` 全按推荐 lock (Q1=A / Q2=A1.a /
   Q3=A2.a) → T2 plan PR sprint 启动
+- 2026-05-17 01:31~01:56：plan PR #96 4-way drafting → cross-review →
+  QA blocked 4 项 → TL focused patch `787381b` → QA re-check PASS（initial
+  fold = "fairy-snapshot image entry extension"）
+- 2026-05-17 18:47~18:51：lo-user `772666b5` 提议"截图识别做一个 skill"
+  → 4 方 align 独立 `fairy-vision` skill（TL `f3ed0865` + `3b90d21b` /
+  UX `6c0f8c05` + `a189930d` (含 chain invisibility risk pin) /
+  QA `9a148e06` (含 V-G1 reverse + chain contract 写死)）→ K1-K5 加入
+  D-22 lock → PR #96 plan delta sprint 启动
 
 ## 10. 相关文档
 
