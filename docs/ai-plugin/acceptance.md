@@ -1,25 +1,28 @@
 # AI Plugin Acceptance Gates
 
-Status: V1.2.2 plan draft
+Status: V1.2.3 implementation baseline
 Owner: @QA
 Reviewers: @Product, @TechLead, @UX, @lo-user
 Related docs: `docs/ai-plugin/architecture.md`, `docs/ai-plugin/user-journeys.md`, `docs/ai-plugin/prompt-templates.md`, Product AI plugin decision log
 
-This document defines the QA acceptance gates for the V1.2.2 Fairy AI plugin MVP.
+This document defines the QA acceptance gates for the V1.2.3 Fairy AI plugin MVP.
 It is intentionally implementation-facing: the later implementation PR is only
 shippable when these gates are executable, documented, and passing.
 
 ## Scope
 
-V1.2.2 covers:
+V1.2.3 covers:
 
 - Claude Code plugin as the primary implementation.
 - Codex support through repository docs or a thin compatibility shim.
-- Three canonical skills:
+- Four canonical skills:
+  - `fairy-vision` / display label `识别截图`
   - `fairy-snapshot` / display label `生成快照`
   - `fairy-calc` / display label `计算伤害`
   - `fairy-explain` / display label `解释结果`
-- Two user entries:
+- Three user entries:
+  - user provides a supported community-tool screenshot, the agent chains
+    `fairy-vision`, `fairy-snapshot`, then `fairy-calc`;
   - user describes a build, the agent chains `fairy-snapshot` then `fairy-calc`;
   - user provides an existing `CalcResult`, the agent invokes `fairy-explain`.
 - The tri-layer i18n contract:
@@ -27,11 +30,12 @@ V1.2.2 covers:
   - user-facing copy supports zh/en;
   - data/query normalization supports zh/en where current `@randomplay/data` source data supports it.
 
-Out of scope for V1.2.2:
+Out of scope for V1.2.3:
 
 - `fairy-compare`; the AI plugin compare workflow remains deferred even if the
   CLI `fairy compare` command exists independently.
-- Screenshot/OCR/vision ingestion; V1.2.2 may document the V1.2.3 interface only.
+- In-game screenshots, OCR fallback, other source tools, and multi-image vision
+  ingestion.
 - Cursor parity implementation.
 - A standalone npm plugin package or marketplace distribution.
 
@@ -47,7 +51,7 @@ steps is a release blocker.
 
 ## Fixture Strategy
 
-V1.2.2 uses three fixture layers. Do not mirror every fixture in every language;
+V1.2.3 uses three fixture layers. Do not mirror every fixture in every language;
 instead, test the language boundary at the layer where it matters.
 
 | Fixture layer | Purpose | Language coverage |
@@ -82,13 +86,14 @@ The implementation PR must provide a discoverable Claude Code plugin tree:
 .claude-plugin/plugins/fairy/
   plugin.json
   skills/
+    fairy-vision/SKILL.md
     fairy-snapshot/SKILL.md
     fairy-calc/SKILL.md
     fairy-explain/SKILL.md
 ```
 
 Codex support must exist as repository documentation or a thin shim under
-`.codex/`. Cursor files must not be required for V1.2.2 acceptance.
+`.codex/`. Cursor files must not be required for V1.2.3 acceptance.
 
 Required `plugin.json` evidence:
 
@@ -102,13 +107,24 @@ Required `plugin.json` evidence:
 
 Required per-skill evidence:
 
-- canonical skill name: `fairy-snapshot`, `fairy-calc`, `fairy-explain`;
-- zh display label: `生成快照`, `计算伤害`, `解释结果`;
+- canonical skill name: `fairy-vision`, `fairy-snapshot`, `fairy-calc`,
+  `fairy-explain`;
+- zh display label: `识别截图`, `生成快照`, `计算伤害`, `解释结果`;
 - English canonical description;
 - trigger phrases, including zh/en user phrases;
 - inputs and outputs;
 - failure policy;
 - CLI binding policy where applicable.
+
+Required `fairy-vision` evidence:
+
+- multimodal-capable host requirement;
+- supported source ids `zzz-workshop` and `miyoushe-record`;
+- source detection, per-field confidence, PII redaction status, and
+  `draftMetadata.evidence` outputs;
+- handoff to `fairy-snapshot` for review/edit and missing critical fields;
+- no CLI call, no model-side calculation, no confirmed snapshot, and no raw PII
+  persistence.
 
 Acceptance checks:
 
@@ -117,7 +133,9 @@ Acceptance checks:
 - trigger phrases do not conflict in a way that routes the same prompt to the
   wrong skill without a deterministic priority;
 - all linked docs exist;
-- no V1.2.2 requirement references `.cursor/` as mandatory.
+- no V1.2.3 requirement references `.cursor/` as mandatory;
+- no unapproved skill directory exists; the approved set is exactly the four
+  canonical skills above.
 
 ## G2: CLI Binding and No-Model-Calculation
 
@@ -129,9 +147,11 @@ Required behavior:
 - `fairy-calc` checks for a compatible `fairy` / `@randomplay/cli` before use;
 - version mismatch fails loud with an install/upgrade instruction;
 - `fairy-calc` invokes `fairy calc <snapshot> --view verbose --lang <lang>`;
+- `fairy-vision` emits a reviewable screenshot-derived draft and draft metadata
+  only; it does not invoke the CLI, calculate, or produce a confirmed snapshot;
 - `fairy-snapshot` emits a reviewable draft and draft metadata only; after user
   review/confirm, `fairy-calc` validates/calculates through the same `fairy calc`
-  path, because no dedicated `--preflight` flag exists in V1.2.2;
+  path, because no dedicated `--preflight` flag exists in V1.2.3;
 - `fairy-explain` consumes an existing `CalcResult` and does not calculate.
 
 Forbidden behavior:
@@ -233,7 +253,7 @@ Acceptance checks:
 
 ## G6: Compare Workflow (Deferred)
 
-V1.2.2 must explicitly mark compare out of scope.
+V1.2.3 must explicitly mark AI-plugin compare workflow out of scope.
 
 Acceptance checks:
 
@@ -243,7 +263,7 @@ Acceptance checks:
 - metadata verifier fails if a compare skill appears without an explicit Product
   decision and CLI prerequisite.
 
-G6 is not a release blocker for V1.2.2 if it is documented as deferred.
+G6 is not a release blocker for V1.2.3 if it is documented as deferred.
 
 ## G7: Version Sync
 
@@ -255,12 +275,13 @@ Acceptance checks:
 - skill docs state supported `@randomplay/cli` range;
 - runtime preflight reports the discovered CLI version;
 - too-old or missing CLI fails loud with exact install/upgrade commands;
-- V1.2.2 docs do not claim support for unreleased CLI commands.
+- V1.2.3 docs do not claim support for unreleased CLI commands.
 
 ## G8: Privacy and Local-Data Boundary
 
-V1.2.2 must be local-first and text-only. It must not add OCR, vision, remote
-upload, or raw-source processing behavior.
+V1.2.3 must remain local-first except for the host tool's normal model
+transport. It adds supported screenshot input, but must not add OCR fallback,
+arbitrary remote upload behavior, or raw-source processing behavior.
 
 Acceptance checks:
 
@@ -268,14 +289,17 @@ Acceptance checks:
   context unless the host AI tool itself sends prompts to its provider;
 - no implementation reads `packages/data/source/**` or deleted retired raw source
   archives;
-- no V1.2.2 flow requires screenshot upload, OCR, or external vision service;
-- if future V1.2.3 vision/OCR is described, it must route through review/edit,
-  snapshot validation, and calc validation before calculation;
+- `fairy-vision` records PII kind/status only and does not persist raw UID,
+  username, or account identifiers in artifacts;
+- screenshot input routes through review/edit, snapshot validation, and calc
+  validation before calculation;
+- OCR fallback, in-game screenshots, other source tools, and multi-image input
+  remain explicitly deferred;
 - user-facing disclaimers do not imply official HoYoverse/miHoYo support.
 
 ## G9: Distribution Smoke
 
-V1.2.2 ships repo-internal plugin files, not a standalone npm plugin package.
+V1.2.3 ships repo-internal plugin files, not a standalone npm plugin package.
 
 Required smoke:
 
@@ -283,9 +307,10 @@ Required smoke:
 - Codex documentation/shim is present and references the same canonical skill
   names;
 - metadata verifier passes;
-- a scripted fixture can execute the three MVP skill workflows or their closest
+- a scripted fixture can execute the four MVP skill workflows or their closest
   deterministic stand-ins:
   - discovery;
+  - vision metadata/source-detection fixture;
   - snapshot generation fixture;
   - CLI calc fixture;
   - explain fixture.
@@ -305,13 +330,13 @@ Required docs:
 - minimum Fairy CLI version;
 - install/setup steps for Claude Code;
 - Codex usage notes;
-- three skill descriptions with canonical names and zh display labels;
+- four skill descriptions with canonical names and zh display labels;
 - at least one complete zh user journey and one complete en user journey;
 - ask-user examples for critical and optional fields;
 - error recovery examples for missing CLI, version mismatch, invalid snapshot,
   and unsupported compare request;
 - data-source/disclaimer copy in zh/en;
-- V1.2.3 screenshot/vision forward-spec marked as future work.
+- V1.2.3 screenshot/vision source scope and unsupported future-work boundaries.
 
 Acceptance checks:
 
@@ -335,8 +360,9 @@ The implementation PR is not QA-passable until the following evidence is present
 8. `fairy-snapshot` fixture smoke
 9. `fairy-calc` fixture smoke
 10. `fairy-explain` fixture smoke
-11. zh/en user-facing output smoke
-12. package/release gates already used by Fairy when release prep begins
+11. `fairy-vision` metadata/source-detection fixture smoke
+12. zh/en user-facing output smoke
+13. package/release gates already used by Fairy when release prep begins
 
 The exact command names may be finalized by @TechLead in the plan PR, but each
 gate above needs an executable command or a documented manual check before
@@ -344,11 +370,12 @@ implementation can ship.
 
 ## Release-Readiness Addendum
 
-When V1.2.2 ships, release-readiness must verify:
+When V1.2.3 ships, release-readiness must verify:
 
 - published package versions remain synchronized;
 - CLI version satisfies plugin `minFairyCliVersion`;
 - plugin docs in the tag match the released package versions;
 - metadata and fixture verifiers pass on the release tag;
 - fresh install of `@randomplay/cli` can run the plugin fixture commands;
-- no deferred compare or screenshot behavior is advertised as shipped.
+- no deferred compare, OCR, in-game screenshot, or multi-image behavior is
+  advertised as shipped.

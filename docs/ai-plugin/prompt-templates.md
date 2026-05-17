@@ -1,6 +1,6 @@
 # fairy AI plugin · Prompt templates & i18n
 
-- Status: V1.2.2 plan draft (Phase B)
+- Status: V1.2.3 implementation baseline
 - Owner: @UX
 - Drafted: 2026-05-16
 - Companion: `docs/ai-plugin/user-journeys.md` (UX) · `docs/ai-plugin/architecture.md` (TL) · `docs/ai-plugin/acceptance.md` (QA) · `docs/product/decisions/D-21-ai-plugin.md` (Product)
@@ -22,18 +22,19 @@ This doc is structured to mirror the contract: §2-§3 are Layer 1 (EN only); §
 ```jsonc
 {
   "name": "fairy",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "displayName": {
     "en": "fairy — ZZZ damage calculator",
     "zh": "fairy — 绝区零伤害计算器"
   },
-  "description": "AI-driven damage calculator for Zenless Zone Zero. Build snapshots from natural language, run fairy CLI, and explain the math.",
+  "description": "AI-driven damage calculator for Zenless Zone Zero. Read supported build screenshots, build snapshots from natural language, run fairy CLI, and explain the math.",
   "author": "LoTwT",
   "license": "MIT",
   "homepage": "https://github.com/LoTwT/fairy",
   "minFairyCliVersion": "0.1.2",
   "supportedTools": ["claude-code", "codex"],
   "skills": [
+    "fairy-vision",
     "fairy-snapshot",
     "fairy-calc",
     "fairy-explain"
@@ -44,7 +45,7 @@ This doc is structured to mirror the contract: §2-§3 are Layer 1 (EN only); §
 **Notes**:
 - `displayName` is the only field with embedded localization; rendered by tool host based on user lang preference. Everything else is English canonical.
 - `minFairyCliVersion` is enforced by skill preflight; mismatch → fail-loud with install hint (see §6).
-- `supportedTools` declares V1.2.2 scope; Cursor explicitly not in list.
+- `supportedTools` declares V1.2.3 scope; Cursor explicitly not in list.
 
 ---
 
@@ -52,7 +53,56 @@ This doc is structured to mirror the contract: §2-§3 are Layer 1 (EN only); §
 
 Each skill ships with a `SKILL.md` file under `.claude-plugin/plugins/fairy/skills/<skill>/`. The skill's spec is English-canonical.
 
-### 3.1 fairy-snapshot
+### 3.1 fairy-vision
+
+```yaml
+---
+name: fairy-vision
+displayName:
+  en: Read screenshot
+  zh: 识别截图
+description: >
+  Read a supported community-tool ZZZ build screenshot (绝区零工坊 or 米游社)
+  and produce a reviewable BattleSnapshot draft plus draftMetadata.evidence.
+  Hands off to fairy-snapshot for ask-user dialog and review/edit before any
+  CLI calculation.
+hostRequirement:
+  multimodal: required
+  fallbackOnUnsupportedHost: fairy-snapshot
+trigger:
+  phrases:
+    - "read this screenshot"
+    - "read my build screenshot"
+    - "recognize screenshot"
+    - "screenshot to snapshot"
+    - "识别截图"
+    - "从截图识别"
+    - "帮我读这张图"
+    - "看这张配装图"
+  patterns:
+    - input contains a single image attachment plus optional user text
+inputs:
+  - image: required single screenshot; multi-image flows are deferred
+  - text: optional context not visible in the screenshot
+outputs:
+  - battleSnapshotDraft: strict BattleSnapshot draft with total panel values only
+  - draftMetadata.sourceDetection: "zzz-workshop" | "miyoushe-record" | "unknown"
+  - draftMetadata.perFieldConfidence: field path -> high | medium | low | missing
+  - draftMetadata.evidence: source cues, visible base/bonus split, roll counts, field evidence
+  - draftMetadata.piiDetection: PII kind/status only; raw UID or username discarded
+calls:
+  - none directly; review/edit happens in fairy-snapshot and validation/calculation happens in fairy-calc
+boundary:
+  - requires a multimodal-capable host
+  - never invoke the CLI
+  - never compute damage
+  - never produce a confirmed BattleSnapshot
+  - never persist raw PII
+  - never write confidence/source/base/bonus metadata into strict BattleSnapshot fields
+---
+```
+
+### 3.2 fairy-snapshot
 
 ```yaml
 ---
@@ -94,7 +144,7 @@ boundary:
 ---
 ```
 
-### 3.2 fairy-calc
+### 3.3 fairy-calc
 
 ```yaml
 ---
@@ -134,7 +184,7 @@ boundary:
 ---
 ```
 
-### 3.3 fairy-explain
+### 3.4 fairy-explain
 
 ```yaml
 ---

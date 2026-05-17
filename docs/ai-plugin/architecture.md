@@ -1,15 +1,15 @@
-# AI Plugin V1.2.2 Architecture
+# AI Plugin V1.2.3 Architecture
 
-Status: proposed for V1.2.2 plan review
+Status: implementation baseline after V1.2.3 vision plan approval
 Owner: TechLead
 Reviewers: Product, UX, QA, lo-user
 Scope: Claude Code Plugin and Codex compatibility plan for Fairy AI skills
 
 ## Goal
 
-Build a thin AI plugin layer that lets a ZZZ player describe a build, produce a
-reviewable `BattleSnapshot`, run the trusted Fairy CLI, and explain the trusted
-CLI output.
+Build a thin AI plugin layer that lets a ZZZ player read a supported
+community-tool screenshot or describe a build, produce a reviewable
+`BattleSnapshot`, run the trusted Fairy CLI, and explain the trusted CLI output.
 
 The core rule is:
 
@@ -23,24 +23,28 @@ model reasoning as calculation evidence.
 
 | Item | Decision |
 | --- | --- |
-| AI.0 | V1.2.2 is a plan PR followed by an implementation PR; plugin files stay inside this repo. |
-| AI.1 | V1.2.2 supports Claude Code Plugin and Codex only; Cursor is deferred. |
+| AI.0 | AI plugin files stay inside this repo; no standalone plugin package is shipped in V1.2.3. |
+| AI.1 | V1.2.3 supports Claude Code Plugin and Codex only; Cursor is deferred. |
 | AI.2 | `fairy-compare` is deferred to a follow-up plugin patch; CLI compare may exist independently first. |
 | U1 | Primary persona is a ZZZ player using natural language. |
-| U2 | MVP has three internal skills and two user-facing entries. |
+| U2 | V1.2.3 has four approved internal skills and three user-facing entries. |
 | U3 | i18n uses a tri-layer contract: English canonical layer, zh/en user-facing layer, and zh/en data/query layer where source data supports it. |
-| AI.3 | Screenshot/OCR is deferred to V1.2.3 and must enter through the same snapshot draft contract. |
-| AI.4 | V1.2.2 ships MVP only; marketplace/package distribution and extra skills are later patches. |
+| AI.3 | V1.2.3 adds supported community-tool screenshot input through `fairy-vision`; OCR, in-game screenshots, and multi-image flows remain deferred. |
+| AI.4 | V1.2.3 ships MVP vision support only; marketplace/package distribution and extra skills are later patches. |
+| D22.K1 | `fairy-vision` is a separate approved skill; the approved set is `fairy-vision`, `fairy-snapshot`, `fairy-calc`, `fairy-explain`. |
+| D22.K2 | `fairy-vision` emits a draft and evidence only; it does not call the CLI, calculate, bypass schema validation, or persist raw PII. |
+| D22.K4 | Cross-skill handoff is invisible to users; user-facing copy must not expose internal skill names or orchestration phrasing. |
+| D22.K5 | `fairy-vision` requires a multimodal-capable host and falls back to the natural-language path when image input is unavailable. |
 
 ## Non-Goals
 
-V1.2.2 does not include:
+V1.2.3 does not include:
 
 - a standalone npm package for the plugin;
 - Cursor implementation beyond documented deferral;
 - `fairy-compare` skill behavior or direct `fairy compare` binding in the AI
   plugin;
-- screenshot recognition, OCR, or vision model integration;
+- in-game screenshot recognition, OCR fallback, or multi-image vision flows;
 - a new calculation API, formula implementation, or raw source reader;
 - a new `fairy calc --preflight` flag.
 
@@ -61,6 +65,8 @@ before any skill depends on it.
     fairy/
       plugin.json
       skills/
+        fairy-vision/
+          SKILL.md
         fairy-snapshot/
           SKILL.md
         fairy-calc/
@@ -87,12 +93,12 @@ examples/
 
 `.claude-plugin/plugins/fairy/` is the primary implementation target.
 `.codex/README.md` documents how Codex should use the same skill contract. It is
-not a second full implementation in V1.2.2.
+not a second full implementation in V1.2.3.
 
 ## Component Model
 
 ```text
-User text / files
+User text / files / supported screenshot
       |
       v
 Claude Code Plugin / Codex instructions
@@ -104,6 +110,7 @@ Claude Code Plugin / Codex instructions
       |
       v
 Skills
+  fairy-vision    -> BattleSnapshot draft + draftMetadata.evidence -> review handoff
   fairy-snapshot  -> BattleSnapshot draft -> review/confirm handoff
   fairy-calc      -> CLI validation/calculation -> CalcResult JSON + brief summary
   fairy-explain   -> existing CalcResult  -> explanation over actual fields
@@ -119,6 +126,45 @@ The plugin may orchestrate skills in one conversation, but each skill keeps a
 separate contract so fixtures and QA gates can validate behavior independently.
 
 ## Skills
+
+### `fairy-vision`
+
+Display labels:
+
+- zh: `识别截图`
+- en: `Read Screenshot`
+
+Purpose: read one supported community-tool screenshot and produce a reviewable
+`BattleSnapshot` draft plus `draftMetadata.evidence`.
+
+Inputs:
+
+- one image attachment from a multimodal-capable host;
+- optional user text for context not visible in the screenshot;
+- optional language override.
+
+Outputs:
+
+- candidate `BattleSnapshot` draft using total resolved panel values only;
+- `draftMetadata.sourceDetection` with `zzz-workshop`, `miyoushe-record`, or
+  `unknown`;
+- `draftMetadata.perFieldConfidence` and `draftMetadata.evidence`;
+- `draftMetadata.piiDetection` with kind/status only, never raw UID or username;
+- handoff instruction to `fairy-snapshot` for review/edit and ask-user policy.
+
+Rules:
+
+- declare the multimodal host requirement in skill metadata;
+- detect the source before field extraction;
+- use source-specific layout maps for 绝区零工坊 and 米游社 screenshots;
+- resolve entities through packaged cleaned data and public aliases, not raw
+  source files;
+- keep source detection, base/bonus split, roll counts, confidence, and PII
+  status in `draftMetadata`, not in strict `BattleSnapshot`;
+- do not call the CLI, calculate, explain, compare builds, or produce a
+  confirmed snapshot;
+- if the host cannot read images, source confidence is low, or source is
+  unsupported, fall back to `fairy-snapshot` natural-language flow.
 
 ### `fairy-snapshot`
 
@@ -217,10 +263,11 @@ Rules:
 
 ## Skill Orchestration
 
-V1.2.2 has two user-facing entries:
+V1.2.3 has three user-facing entries:
 
 | Entry | Internal skills | User-facing behavior |
 | --- | --- | --- |
+| Read screenshot, then calculate | `fairy-vision` -> `fairy-snapshot` -> `fairy-calc` | User attaches one supported community-tool screenshot, AI extracts a draft and evidence, asks for review/edit or missing critical fields, then `fairy-calc` validates with CLI and summarizes the result. |
 | Build and calculate | `fairy-snapshot` -> `fairy-calc` | User describes a build, AI drafts a snapshot, asks for critical fields, asks for review/confirm, then `fairy-calc` validates with CLI and summarizes the result. |
 | Explain existing result | `fairy-explain` | User pastes or references a `CalcResult`; AI explains the trusted output without recalculation. |
 
@@ -228,9 +275,15 @@ The first entry may be autonomous inside one conversation, but the snapshot draf
 must be reviewable. Critical uncertainty blocks handoff to `fairy-calc` until
 the user answers or explicitly accepts a reduced path that the CLI can validate.
 
+The `fairy-vision` chain is a prompt contract, not a runtime orchestration
+layer. The skill emits `{ battleSnapshotDraft, draftMetadata, nextStep }`; the
+host then presents the review/edit gate and continues the existing
+`fairy-snapshot` -> `fairy-calc` flow. User-facing copy must not say
+"invoking", "transferring to", "handing off to", or expose skill names.
+
 ## Language Contract
 
-V1.2.2 uses three language layers.
+V1.2.3 uses three language layers.
 
 | Layer | Language | Examples |
 | --- | --- | --- |
@@ -259,9 +312,10 @@ pnpm dlx @randomplay/cli@latest --help
 pnpm dlx @randomplay/cli@latest calc <snapshot.json> --view verbose --lang zh
 ```
 
-The plugin contract declares a minimum CLI version. V1.2.2 should start at
-`@randomplay/cli >= 0.1.2`, because V0.1.2 is the first release after data
-ownership cleanup and package payload stabilization.
+The plugin contract declares a minimum CLI version. V1.2.3 keeps
+`@randomplay/cli >= 0.1.2` for this skeleton because `fairy-vision` does not add
+new CLI behavior; later harness or release-prep patches may raise it if a new
+CLI capability becomes required.
 
 The implementation must not:
 
@@ -275,7 +329,7 @@ The implementation must not:
 `plugin.json` should declare:
 
 - plugin name and version;
-- supported tool surfaces (`claude-code`, `codex-docs`);
+- supported tool surfaces (`claude-code`, `codex`);
 - minimum Fairy CLI version;
 - canonical skills and their display labels;
 - documentation entry points.
@@ -316,31 +370,33 @@ Disallowed inputs:
 
 ## Privacy And External Models
 
-V1.2.2 is text-only. The plugin should treat snapshots, user descriptions, and
+The plugin should treat screenshots, snapshots, user descriptions, and
 calculation outputs as user-provided local context. If a host tool sends prompts
-to an external model, that is the host tool's normal behavior and should be
-documented in user-facing onboarding.
+or images to an external model, that is the host tool's normal behavior and
+should be documented in user-facing onboarding.
 
-V1.2.2 does not add new network calls beyond package installation commands the
-user explicitly runs.
+V1.2.3 does not add new network calls beyond package installation commands the
+user explicitly runs. `fairy-vision` records PII detection/redaction status only
+and discards raw account identifiers before any artifact handoff.
 
-## V1.2.3 Screenshot Forward Contract
+## V1.2.3 Screenshot Contract
 
-Screenshot recognition is deferred. The future V1.2.3 pipeline must still enter
-through the same snapshot contract:
+Supported community-tool screenshot recognition enters through the same snapshot
+draft contract:
 
 ```text
 screenshot
-  -> vision/OCR extraction
+  -> fairy-vision extraction
   -> BattleSnapshot draft
+  -> draftMetadata.evidence
   -> user review/edit
   -> fairy calc validation
   -> result/explanation
 ```
 
 The screenshot path must not introduce a parallel snapshot schema. Low
-confidence or failed extraction should fall back to the `fairy-snapshot` natural
-language dialog.
+confidence, failed extraction, unsupported sources, or unavailable multimodal
+host capability fall back to the `fairy-snapshot` natural-language dialog.
 
 ## Release And Verification Plan
 
@@ -356,7 +412,7 @@ Implementation PR deliverables:
 
 - Claude Code plugin skeleton;
 - Codex usage docs;
-- three skills;
+- four skills;
 - metadata verifier;
 - 3-5 prompt/snapshot/expected fixtures;
 - smoke tests for discovery, CLI binding, snapshot validation, calc output, and

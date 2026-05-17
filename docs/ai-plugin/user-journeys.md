@@ -1,14 +1,14 @@
 # fairy AI plugin · User Journeys
 
-- Status: V1.2.2 plan draft (Phase B)
+- Status: V1.2.3 implementation baseline
 - Owner: @UX
 - Drafted: 2026-05-16
 - Companion: `docs/ai-plugin/prompt-templates.md` (UX) · `docs/ai-plugin/architecture.md` (TL) · `docs/ai-plugin/acceptance.md` (QA) · `docs/product/decisions/D-21-ai-plugin.md` (Product)
-- Scope lock per Product D-21: 8 decisions locked 4-way; tri-layer i18n; 3 skills; 2 user entries; Claude Code + Codex only; V1.2.3 OCR forward-spec.
+- Scope lock per Product D-21 + D-22: tri-layer i18n; 4 approved skills; 3 user entries; Claude Code + Codex only; community-tool screenshot input via `fairy-vision`; in-game/OCR/multi-image deferred.
 
 ## How to read this document
 
-This is the **user-journey contract** for V1.2.2 AI plugin. It defines who uses the plugin, how they reach it, what each skill does for them, and how the plugin handles missing data / errors / language preference. The contract that QA validates is in `acceptance.md`; the implementation contract is in `architecture.md`; the prompt strings are in `prompt-templates.md`.
+This is the **user-journey contract** for the V1.2.3 AI plugin. It defines who uses the plugin, how they reach it, what each skill does for them, and how the plugin handles missing data / errors / language preference. The contract that QA validates is in `acceptance.md`; the implementation contract is in `architecture.md`; the prompt strings are in `prompt-templates.md`.
 
 Reading order:
 - @TechLead implementing skills → §2 user flows + §3 ask-user policy + §4 error recovery + §7 V1.2.3 forward-spec
@@ -19,7 +19,7 @@ Reading order:
 
 ## 1. Personas
 
-V1.2.2 primary persona is **P1**; P2 / P3 are secondary and not optimization targets. Persona priority is decision input for every UX choice in this doc.
+V1.2.3 primary persona is **P1**; P2 / P3 are secondary and not optimization targets. Persona priority is decision input for every UX choice in this doc.
 
 ### P1 — ZZZ player (primary)
 
@@ -39,13 +39,46 @@ V1.2.2 primary persona is **P1**; P2 / P3 are secondary and not optimization tar
 
 - Another agent in a higher-level workflow (e.g., a build optimizer) needs to invoke fairy.
 - Reaches the plugin as a callable contract — needs stable trigger metadata, deterministic JSON I/O, and version-pinned behavior.
-- Not a V1.2.2 optimization target; covered as a side-effect of P2 contracts being clean.
+- Not a V1.2.3 optimization target; covered as a side-effect of P2 contracts being clean.
 
 ---
 
 ## 2. User entries & skill flows
 
-V1.2.2 ships **2 user entries** backed by **3 internal skills**. The chaining model is **A — AI-autonomous chain** with explicit review/confirm at critical steps; alternative B (user manually triggers each skill) is not implemented.
+V1.2.3 ships **3 user entries** backed by **4 internal skills**. The chaining model is **A — AI-autonomous chain** with explicit review/confirm at critical steps; alternative B (user manually triggers each skill) is not implemented.
+
+### Entry 0 — Screenshot read & calc (P1 primary)
+
+```
+User attaches one supported community-tool screenshot (绝区零工坊 or 米游社):
+  "帮我读这张图，然后算一下"
+
+AI (host is multimodal-capable):
+  invokes fairy-vision
+    ↓ source detection (zzz-workshop / miyoushe-record / unknown)
+    ↓ per-source field extraction
+    ↓ per-field confidence + draftMetadata.evidence
+    ↓ raw PII discarded; piiDetection records kind/status only
+  ⇒ BattleSnapshot draft + draftMetadata
+
+  AI presents one continuous review/edit gate to the user:
+    "我从截图里读到了这些内容，请确认是否正确..."
+
+  User confirms or corrects fields.
+
+  AI continues through fairy-snapshot review/confirm policy, then fairy-calc CLI
+  validation/calculation.
+```
+
+**Critical UX guarantees**:
+- AI never exposes internal handoff phrasing such as "invoking", "transferring
+  to", or skill-name routing in user-facing copy.
+- AI never calc-runs directly from screenshot extraction. The user sees and can
+  correct the draft first.
+- Low source confidence, unsupported source, or unavailable image input falls
+  back to the `fairy-snapshot` natural-language path.
+- Source detection, base/bonus split, roll-counts, confidence, and PII status
+  remain in `draftMetadata`; strict `BattleSnapshot` keeps only schema fields.
 
 ### Entry 1 — Build & calc (P1 primary)
 
@@ -122,11 +155,12 @@ The user does not pick a skill name. The AI agent routes based on trigger phrase
 
 | User input shape | Route |
 |---|---|
+| One image attachment from supported source | `fairy-vision` → `fairy-snapshot` → `fairy-calc` |
 | NL build description (no JSON) | `fairy-snapshot` → auto-chain → `fairy-calc` |
 | Pasted snapshot JSON | `fairy-calc` (skip snapshot-builder if input passes parseBattleSnapshot) |
 | Pasted CalcResult JSON | `fairy-explain` (standalone) |
 | "explain this" / "trace breakdown" + JSON | `fairy-explain` (trace alias) |
-| Ambiguous | Ask user which workflow they want |
+| Ambiguous or unsupported image | Ask user which workflow they want, or fall back to `fairy-snapshot` text flow |
 
 Trigger phrases per skill: see `prompt-templates.md` §Trigger phrases.
 
@@ -247,7 +281,7 @@ Never invent a trace; never explain "what it probably should have been".
 
 ## 5. Lang detection & override
 
-V1.2.2 uses **(ii) auto-detect from input** as the default, with explicit override patterns sticky per session.
+V1.2.3 uses **(ii) auto-detect from input** as the default, with explicit override patterns sticky per session.
 
 ### Detection rules
 
@@ -283,21 +317,23 @@ When the user first invokes any fairy skill (or asks `/help fairy`), AI emits:
 ```
 zh:
   "fairy 是 Zenless Zone Zero 的伤害计算器。
-   我能帮你做三件事：
-   1. 用自然语言描述你的构筑，我帮你组 snapshot 并算伤害（生成快照 + 计算伤害）
-   2. 解释 fairy 算出来的结果，让你看懂每一步（解释结果）
-   3. 校验你的 snapshot.json 是否符合 fairy schema
+   我能帮你做四件事：
+   1. 读绝区零工坊 / 米游社配装截图，先给你确认，再算伤害（识别截图）
+   2. 用自然语言描述你的构筑，我帮你组 snapshot 并算伤害（生成快照 + 计算伤害）
+   3. 解释 fairy 算出来的结果，让你看懂每一步（解释结果）
+   4. 校验你的 snapshot.json 是否符合 fairy schema
 
-   现在告诉我你想算什么？或者直接贴一个 CalcResult JSON 给我解释。"
+   现在发截图、告诉我你想算什么，或者直接贴一个 CalcResult JSON 给我解释。"
 
 en:
   "fairy is a Zenless Zone Zero damage calculator.
-   I can help you with three things:
-   1. Describe your build in natural language — I'll build the snapshot and run the calc.
-   2. Explain a fairy CalcResult — walk through each multiplier and source.
-   3. Validate your snapshot.json against the fairy schema.
+   I can help you with four things:
+   1. Read a supported community-tool build screenshot, ask you to confirm it, then run the calc.
+   2. Describe your build in natural language — I'll build the snapshot and run the calc.
+   3. Explain a fairy CalcResult — walk through each multiplier and source.
+   4. Validate your snapshot.json against the fairy schema.
 
-   What do you want to calculate? Or paste a CalcResult JSON and I'll explain it."
+   Send a screenshot, describe what you want to calculate, or paste a CalcResult JSON and I'll explain it."
 ```
 
 ### Disclaimer surface (per Q4 + D-20 § README disclaimer policy)
@@ -322,26 +358,32 @@ Disclaimer is shown **once per session** in the first AI response that uses live
 
 ---
 
-## 7. V1.2.3 forward-spec (screenshot recognition)
+## 7. V1.2.3 screenshot recognition
 
-V1.2.2 deliberately does **not** ship screenshot recognition / OCR. V1.2.3 will add a multimodal input path. This forward-spec defines the contract V1.2.3 must satisfy so V1.2.2 design decisions stay forward-compatible.
+V1.2.3 ships a multimodal input path for supported community-tool screenshots
+through `fairy-vision`. In-game screenshots, OCR fallback, other source tools,
+and multi-image flows remain V1.2.x+ candidates.
 
 ### V1.2.3 forward-contract
 
-1. **Output shape**: vision/OCR pipeline must produce a `BattleSnapshot` draft conforming to the same schema as `fairy-snapshot`. No parallel schema is introduced.
+1. **Output shape**: `fairy-vision` must produce a `BattleSnapshot` draft conforming to the same schema as `fairy-snapshot`. No parallel schema is introduced.
 2. **Review/edit gate**: the user must be presented with the recognized snapshot draft and given the opportunity to edit before any calc invocation. Vision recognition has non-zero error rate; silent calc on wrong data is the worst UX outcome.
 3. **Validation**: after user edits and review/confirm, the snapshot must pass `fairy calc <snapshot> --view verbose --lang <lang>` validation in the `fairy-calc` gate.
-4. **Fallback**: if vision recognition confidence is below threshold or user is unhappy with the result, the system must fall back to NL dialog (`fairy-snapshot` standard flow).
+4. **Fallback**: if vision recognition confidence is below threshold, the source is unsupported, the host cannot read images, or the user is unhappy with the result, the system must fall back to NL dialog (`fairy-snapshot` standard flow).
 5. **Confidence surface**: AI must indicate per-field confidence (e.g., "我从截图认出仪玄 60 级 (高置信度), 但 Drive Disc 副词条数值置信度低，请你 review") and ask user to confirm low-confidence fields.
 
-### V1.2.3 skill name candidate
+### V1.2.3 approved skill
 
-Likely `fairy-vision` or `fairy-scan` (TBD V1.2.3). Will not be introduced in V1.2.2.
+`fairy-vision` is the approved screenshot skill. Do not add alternate vision
+skill names in this patch.
 
-### V1.2.2 implementation constraints to keep V1.2.3 viable
+### V1.2.3 implementation constraints
 
-- `fairy-snapshot` must accept an optional `partial-snapshot` input shape (alongside NL), so V1.2.3 vision-extracted snapshot can be fed back through the same skill for ask-user dialog on missing/low-confidence fields.
-- Snapshot validation must report per-field validity (not just pass/fail), so V1.2.3 can identify which vision-extracted fields failed and ask user to correct them.
+- `fairy-snapshot` must accept an optional `partial-snapshot` input shape
+  alongside NL, so the `fairy-vision` draft can be fed through the same ask-user
+  dialog on missing/low-confidence fields.
+- Snapshot validation must report actionable field validity where possible, so
+  screenshot-extracted fields that fail validation can be corrected by the user.
 
 ---
 
@@ -356,7 +398,7 @@ QA validates the user journey behavior through `acceptance.md` G3 / G4 / G5 / G8
 | Critical-field unknown does not proceed to calc without explicit user acceptance | G3 |
 | Lang detection (ii) auto-detect + override sticky | G8 (user-facing behavior) |
 | Disclaimer surfaced once per session | G8 |
-| Onboarding copy covers 3 skills + how to start | G10 |
+| Onboarding copy covers 4 skills + how to start | G10 |
 
 QA fixture strategy: per `acceptance.md` 3-tier (skill-spec EN canonical + entity normalization zh/en + user-facing output zh/en smoke).
 
@@ -364,10 +406,10 @@ QA fixture strategy: per `acceptance.md` 3-tier (skill-spec EN canonical + entit
 
 ## 9. Open questions & V1.2.x backlog
 
-- **fairy-compare skill** (V1.2.2.x): deferred per D-21; it should be scoped
+- **fairy-compare skill** (V1.2.x): deferred per D-21; it should be scoped
   as a separate plugin patch after the CLI compare contract is stable.
-- **Plugin marketplace distribution** (V1.2.2.x+): after skill API stabilizes through V1.2.2 dogfooding.
-- **Cursor support** (V1.2.x patch): not in V1.2.2; documented in V1.2.x candidates.
+- **Plugin marketplace distribution** (V1.2.x+): after skill API stabilizes through V1.2.3 dogfooding.
+- **Cursor support** (V1.2.x patch): not in V1.2.3; documented in V1.2.x candidates.
 - **Per-user plugin settings (lang preference, default --view)** (V1.2.x): currently relies on session-level lang detect; future settings system can override.
 - **User-saved snapshot library** (V1.2.x+): allow user to name and reuse common snapshots; would change `fairy-snapshot` to also support load-by-name.
 

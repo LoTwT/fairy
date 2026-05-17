@@ -1,11 +1,11 @@
 {
   "name": "fairy",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "displayName": {
     "en": "fairy — ZZZ damage calculator",
     "zh": "fairy — 绝区零伤害计算器"
   },
-  "description": "AI-driven assistant for Zenless Zone Zero damage calculation. Build reviewable BattleSnapshot drafts from natural language, run the trusted fairy CLI, and explain trusted CalcResult JSON.",
+  "description": "AI-driven assistant for Zenless Zone Zero damage calculation. Read supported build screenshots, build reviewable BattleSnapshot drafts, run the trusted fairy CLI, and explain trusted CalcResult JSON.",
   "author": "LoTwT",
   "license": "MIT",
   "homepage": "https://github.com/LoTwT/fairy",
@@ -15,6 +15,7 @@
     "codex"
   ],
   "skills": [
+    "fairy-vision",
     "fairy-snapshot",
     "fairy-calc",
     "fairy-explain"
@@ -24,6 +25,7 @@
     "userJourneys": "docs/ai-plugin/user-journeys.md",
     "promptTemplates": "docs/ai-plugin/prompt-templates.md",
     "acceptance": "docs/ai-plugin/acceptance.md",
-    "decision": "docs/product/decisions/D-21-ai-plugin.md"
+    "decision": "docs/product/decisions/D-21-ai-plugin.md",
+    "visionDecision": "docs/product/decisions/D-22-ai-plugin-v1.2.3-vision.md"
   }
 }

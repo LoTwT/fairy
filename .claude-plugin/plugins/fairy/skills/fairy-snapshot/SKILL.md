@@ -28,8 +28,8 @@ fairy. This skill structures input; it does not calculate damage.
 ## Inputs
 
 - `userBuildDescription`: natural language in zh, en, or mixed language.
-- `partialSnapshot`: optional `BattleSnapshot` draft, including future
-  V1.2.3 vision/OCR output.
+- `partialSnapshot`: optional `BattleSnapshot` draft, including V1.2.3
+  `fairy-vision` output.
 - `lang`: optional session language override, `zh` or `en`.
 
 ## Outputs
@@ -80,3 +80,4 @@ fairy. This skill structures input; it does not calculate damage.
 - `docs/ai-plugin/prompt-templates.md`
 - `docs/ai-plugin/acceptance.md`
 - `docs/product/decisions/D-21-ai-plugin.md`
+- `docs/product/decisions/D-22-ai-plugin-v1.2.3-vision.md`

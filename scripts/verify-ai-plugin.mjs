@@ -8,13 +8,14 @@ const repoRoot = path.resolve(fileURLToPath(new URL("..", import.meta.url)))
 
 const pluginRoot = path.join(repoRoot, ".claude-plugin/plugins/fairy")
 const pluginJsonPath = path.join(pluginRoot, "plugin.json")
-const skillNames = ["fairy-snapshot", "fairy-calc", "fairy-explain"]
+const skillNames = ["fairy-vision", "fairy-snapshot", "fairy-calc", "fairy-explain"]
 const requiredDocsByKey = {
   architecture: "docs/ai-plugin/architecture.md",
   userJourneys: "docs/ai-plugin/user-journeys.md",
   promptTemplates: "docs/ai-plugin/prompt-templates.md",
   acceptance: "docs/ai-plugin/acceptance.md",
   decision: "docs/product/decisions/D-21-ai-plugin.md",
+  visionDecision: "docs/product/decisions/D-22-ai-plugin-v1.2.3-vision.md",
 }
 const requiredDocs = Object.values(requiredDocsByKey)
 const exampleDirs = [
@@ -111,13 +112,13 @@ assert(existsSync(pluginJsonPath), ".claude-plugin/plugins/fairy/plugin.json is 
 const plugin = readJsonPath(pluginJsonPath)
 
 assert(plugin.name === "fairy", "plugin.json name must be fairy")
-assert(typeof plugin.version === "string" && plugin.version.length > 0, "plugin.json version is required")
+assert(plugin.version === "1.2.3", "plugin.json version must be 1.2.3")
 assert(plugin.minFairyCliVersion === "0.1.2", "plugin.json minFairyCliVersion must be 0.1.2")
 assert(plugin.displayName?.en && plugin.displayName?.zh, "plugin.json displayName.en and displayName.zh are required")
 assert(Array.isArray(plugin.supportedTools), "plugin.json supportedTools must be an array")
 assert(plugin.supportedTools?.includes("claude-code"), "plugin.json supportedTools must include claude-code")
 assert(plugin.supportedTools?.includes("codex"), "plugin.json supportedTools must include codex")
-assert(!plugin.supportedTools?.includes("cursor"), "plugin.json must not include cursor for V1.2.2")
+assert(!plugin.supportedTools?.includes("cursor"), "plugin.json must not include cursor for V1.2.3")
 assert(JSON.stringify(plugin.skills) === JSON.stringify(skillNames), "plugin.json skills must match canonical skill names")
 
 for (const doc of requiredDocs)
@@ -183,6 +184,23 @@ const snapshotSkill = readText(".claude-plugin/plugins/fairy/skills/fairy-snapsh
 assert(!snapshotSkill.includes("fairy calc <snapshot>"), "fairy-snapshot must not call fairy calc directly")
 assert(snapshotSkill.includes("review/confirm"), "fairy-snapshot must document review/confirm handoff")
 
+const visionSkill = readText(".claude-plugin/plugins/fairy/skills/fairy-vision/SKILL.md")
+includesAll(visionSkill, ".claude-plugin/plugins/fairy/skills/fairy-vision/SKILL.md", [
+  "hostRequirement:",
+  "multimodal: required",
+  "zzz-workshop",
+  "miyoushe-record",
+  "draftMetadata.evidence",
+  "draftMetadata.piiDetection",
+  "perFieldConfidence",
+  "fairy-snapshot",
+  "docs/product/decisions/D-22-ai-plugin-v1.2.3-vision.md",
+])
+assert(visionSkill.includes("Do not call `fairy calc`"), "fairy-vision must forbid direct CLI calculation")
+assert(visionSkill.includes("Do not compute damage"), "fairy-vision must forbid model-side calculation")
+assert(visionSkill.includes("Do not produce a confirmed `BattleSnapshot`"), "fairy-vision must only produce reviewable drafts")
+assert(visionSkill.includes("Do not persist raw PII"), "fairy-vision must forbid raw PII persistence")
+
 const calcSkill = readText(".claude-plugin/plugins/fairy/skills/fairy-calc/SKILL.md")
 assert(
   calcSkill.includes("fairy calc <snapshot> --view verbose --lang <zh|en>"),
@@ -198,7 +216,7 @@ const pluginForbiddenPatterns = [
   { pattern: /--dry-run/g, reason: "must not depend on nonexistent --dry-run" },
   { pattern: /fairy-compare/g, reason: "compare skill is deferred" },
   { pattern: /fairy compare/g, reason: "AI plugin compare workflow is deferred" },
-  { pattern: /\.cursor/g, reason: "Cursor is deferred from V1.2.2" },
+  { pattern: /\.cursor/g, reason: "Cursor is deferred from V1.2.3" },
   { pattern: /packages\/data\/source/g, reason: "plugin must not read raw source" },
 ]
 
