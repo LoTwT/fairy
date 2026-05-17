@@ -11,7 +11,7 @@ V1.2.3 inherits the V1.2.2 tri-layer i18n contract (`docs/ai-plugin/prompt-templ
 
 | Layer | Lang | V1.2.3 contents |
 |---|---|---|
-| Layer 1 — Canonical | EN | `fairy-snapshot` image-entry contract, source-detection prompt, per-source field maps, confidence threshold metadata |
+| Layer 1 — Canonical | EN | `fairy-vision` SKILL.md, source-detection prompt, per-source field maps, confidence threshold metadata |
 | Layer 2 — User-facing | zh + en mirror | Review/edit gate display, partial-extraction asks, visual ambiguity dialogs, NL fallback copy |
 | Layer 3 — Data/query | zh only at MVP (per Q1=A / Q2=A1.a) | Field-label normalization tables for 工坊 + 米游社 zh labels → canonical BattleSnapshot field ids |
 
@@ -19,29 +19,29 @@ zh-only Layer 3 at MVP is by design — both supported sources are Chinese-only 
 
 ---
 
-## 2. Canonical — fairy-snapshot image entry
+## 2. Canonical — fairy-vision SKILL.md
 
-V1.2.3 extends the existing `fairy-snapshot` skill with an image input entry. It is invoked by a vision input trigger and then uses the same ask-user dialog and `fairy-calc` handoff as the V1.2.2 text flow.
+V1.2.3 introduces `fairy-vision` as the 4th approved skill (per D-22 lock per lo-user `772666b5`). Scope is intentionally narrow: source detection + per-source extraction + per-field confidence + `draftMetadata.evidence` assembly + handoff. `fairy-vision` does NOT call `fairy-calc`, does NOT compute damage, and does NOT produce a confirmed snapshot — it produces a reviewable draft and hands off via a documented chain contract.
 
 ```yaml
 ---
-name: fairy-snapshot
+name: fairy-vision
 displayName:
-  en: Build snapshot
-  zh: 生成快照
+  en: Read screenshot
+  zh: 识别截图
 description: >
   Read a community-tool ZZZ build screenshot (绝区零工坊 or 米游社) and produce
-  a BattleSnapshot draft + draftMetadata. Uses the existing fairy-snapshot
-  ask-user policy for any remaining missing fields, then fairy-calc for
-  validation/calculation.
-imageEntry:
-  displayName:
-    en: Read screenshot
-    zh: 识别截图
+  a reviewable BattleSnapshot draft plus draftMetadata.evidence. Hands off
+  to fairy-snapshot for ask-user dialog on any missing fields and for the
+  review/edit gate, then to fairy-calc for CLI validation and calculation.
+hostRequirement:
+  multimodal: required
+  fallbackOnUnsupportedHost: fairy-snapshot (NL flow)
 trigger:
   phrases:
     - "read this screenshot"
     - "识别截图"
+    - "从截图识别"
     - "帮我读这张图"
     - "this is my build"
   patterns:
@@ -50,25 +50,44 @@ input:
   image: required (single image; multi-image deferred to V1.2.x+)
   text: optional (additional context, e.g., enemy info not in screenshot)
 output:
-  battleSnapshot: BattleSnapshot draft (strict schema; no defaultedFields/unknownFields in snapshot)
+  battleSnapshotDraft: BattleSnapshot draft (strict schema; no defaultedFields/unknownFields in snapshot)
   draftMetadata:
     piiDetection: session-ephemeral; PII kinds + redaction status only; raw UID/username discarded
-    evidence: base/bonus stat split + source detection trace
+    evidence: base/bonus stat split + visible roll counts + source detection trace
     sourceDetection: { sourceId: "zzz-workshop" | "miyoushe-record" | "unknown", sourceLabel: string, confidence: 0..1 }
     perFieldConfidence: map of field path → confidence bucket (high|medium|low|missing)
+  nextStep: handoff instruction string (canonical EN), e.g. "Hand off to fairy-snapshot for review/edit and any missing critical fields."
+mustNot:
+  - invoke fairy-calc directly
+  - compute damage numbers
+  - produce a confirmed BattleSnapshot
+  - bypass schema validation downstream
+  - persist PII into any artifact (snapshot, calc result, fixture, log)
 chains:
-  next: fairy-snapshot ask-user policy (for any tier-1 missing fields) → fairy-calc
+  next: fairy-snapshot (review/edit + ask-user for tier-1 missing) → fairy-calc → fairy-explain
 fallback:
-  trigger: sourceId=unknown OR perFieldConfidence majority low OR user-request
+  trigger: sourceId=unknown OR perFieldConfidence majority low OR user-request OR host lacks multimodal
   destination: fairy-snapshot NL flow
 ---
 ```
+
+### Chain handoff contract
+
+`fairy-vision` does not orchestrate other skills at runtime; it emits a structured output that the AI host consumes as instruction. The chain is therefore a prompt-contract chain, not a runtime orchestration:
+
+1. `fairy-vision` emits `{ battleSnapshotDraft, draftMetadata, nextStep }`.
+2. AI host presents the review/edit gate (defined by `fairy-snapshot`'s review/edit policy, per §5 user-journeys).
+3. User edits / supplements missing critical fields; the resulting confirmed snapshot is produced by `fairy-snapshot`.
+4. AI host invokes `fairy-calc` with the confirmed snapshot.
+5. Optional: user asks for explanation → AI host invokes `fairy-explain` on the resulting CalcResult.
+
+The chain is invisible to the user as a sequence of skill names — the user sees one continuous AI conversation (see UX invisibility-of-handoff guarantee in `user-journeys.md` §2).
 
 ---
 
 ## 3. Canonical — source detection prompt
 
-This is the prompt that runs first inside the `fairy-snapshot` image entry. It does **only** source identification, not field extraction.
+This is the prompt that runs first inside `fairy-vision`. It does **only** source identification, not field extraction.
 
 ```
 You are looking at one screenshot. Your task is to identify which of these two

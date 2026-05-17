@@ -11,7 +11,7 @@
 
 ## How to read this document
 
-This document extends `docs/ai-plugin/user-journeys.md` (V1.2.2) with the V1.2.3 vision input path. V1.2.2 NL-input flow remains unchanged; vision is an **additional entry point** that converges back into the same `fairy-snapshot` → `fairy-calc` chain after a vision-specific review/edit gate.
+This document extends `docs/ai-plugin/user-journeys.md` (V1.2.2) with the V1.2.3 vision input path. V1.2.2 NL-input flow remains unchanged; vision is a new approved skill (`fairy-vision`, the 4th in the plugin) that produces a reviewable draft and hands off into the existing `fairy-snapshot` → `fairy-calc` chain.
 
 The 7 vision-specific UX sections (§A–§G in the T2 brief) map onto the section numbering used here:
 
@@ -63,14 +63,14 @@ User (NL or empty + image attachment):
   "帮我算这个的伤害，敌人是本期 DA boss 60 级"
 
 AI (auto-detect lang → zh; auto-detect source from image):
-  invokes the fairy-snapshot image entry
+  invokes fairy-vision
     ↓ source detection (工坊 / 米游社 / unknown)
     ↓ layout-specific field extraction (panel total, weapon, drive disc set + main + substats with roll counts)
     ↓ per-field confidence scoring
     ↓ base/bonus split captured in draftMetadata.evidence (TL schema)
     ↓ PII kinds detected and redacted in draftMetadata only — never written to BattleSnapshot
-    ↓ produce BattleSnapshot draft + draftMetadata
-  ⇒ snapshot.json + draftMetadata.json
+    ↓ produce BattleSnapshot draft + draftMetadata + nextStep handoff instruction
+  ⇒ draft.json + draftMetadata.json (fairy-vision DOES NOT call fairy-calc; DOES NOT compute damage)
 
   ⇒ presents review/edit gate to user:
      "我从这张「绝区零工坊」截图里读到:
@@ -90,13 +90,13 @@ AI (auto-detect lang → zh; auto-detect source from image):
 
   User: "嗯，算"
 
-  AI invokes fairy-snapshot
-    ↓ accept partial-snapshot input shape (per V1.2.2 forward-spec hook)
+  AI hands off to fairy-snapshot (per fairy-vision nextStep)
+    ↓ consume vision draft + draftMetadata
     ↓ enemy.id resolution (DA boss canonical lookup)
     ↓ field tier check on remaining fields
     ↓ no ask-user dialog needed (vision filled all critical fields)
-    ↓ produce final BattleSnapshot
-  ⇒ snapshot.json
+    ↓ review/edit gate already passed above; produce final confirmed BattleSnapshot
+  ⇒ snapshot.json (strict; no PII; no base/bonus; totals only)
 
   AI invokes fairy-calc
     ↓ preflight CLI version
@@ -112,7 +112,24 @@ AI (auto-detect lang → zh; auto-detect source from image):
 - AI presents low-confidence fields with a clear marker (per §4), giving the user one place to correct them in review/edit before calc.
 - AI never persists UID / username into `BattleSnapshot`; the review/edit gate shows a PII detection/redaction notice, not raw PII values.
 - AI never re-asks for fields already extracted with high confidence (no "你的角色是几级？" after a clear LV60 read).
-- AI degrades gracefully to V1.2.2 NL flow if vision recognition cannot proceed (see §7).
+- AI degrades gracefully to V1.2.2 NL flow if vision recognition cannot proceed (see §7), including when the AI host lacks multimodal capability (see §2 below for host-capability fallback).
+- **Invisible-handoff guarantee (cross-skill chain)**: even though V1.2.3 introduces 4 internal skills (`fairy-vision` → `fairy-snapshot` → `fairy-calc` → `fairy-explain`), the user must NOT see skill names, "transferring to ...", "invoking ...", or any other internal orchestration phrasing in user-facing copy. The conversation reads as one continuous AI assistant: "I read your screenshot → here is what I found → confirm? → calculating → here is the result". Skill boundaries are an implementation detail, not a UX surface.
+
+### Host-capability fallback (multimodal not available)
+
+If the AI host does not support image input (per `fairy-vision` `hostRequirement.multimodal`), the host falls back to `fairy-snapshot` NL flow on its own — `fairy-vision` is never invoked. UX copy at fallback entry:
+
+```
+zh:
+  "你的 AI 工具好像不支持读图。我们换文字来吧 —
+   你描述一下角色 + 武器 + Drive Disc + 敌人，我帮你组 snapshot。"
+
+en:
+  "Your AI tool doesn't seem to support image input. Let's switch to text —
+   describe the agent + weapon + Drive Disc + enemy and I'll build the snapshot."
+```
+
+Like the source-unknown fallback in §7, this transition is surfaced explicitly to the user — never silent.
 
 ---
 
@@ -389,7 +406,7 @@ QA validates the user journey through `acceptance.md` V-G1..V-G5 (new V1.2.3 gat
 
 ## Appendix B · Glossary additions
 
-- **fairy-snapshot image entry** — V1.2.3 extension to the existing `fairy-snapshot` skill. It reads a supported screenshot and produces a `BattleSnapshot` draft + `draftMetadata`, then uses the same ask-user and `fairy-calc` handoff as the V1.2.2 text flow.
+- **fairy-vision** — V1.2.3 new approved skill (4th in plugin per D-22 lock). Reads a supported community-tool screenshot (绝区零工坊 / 米游社) and produces a reviewable `BattleSnapshot` draft + `draftMetadata.evidence` + a `nextStep` handoff instruction. Scope is intentionally narrow: source detect + extraction + confidence + evidence + handoff. Does NOT call `fairy-calc`, does NOT compute damage, does NOT produce a confirmed snapshot. Chains: `fairy-vision` → `fairy-snapshot` (review/edit + ask-user) → `fairy-calc` (CLI validate + compute) → `fairy-explain` (optional). Requires multimodal-capable AI host; falls back to `fairy-snapshot` NL flow when the host doesn't support image input.
 - **draftMetadata.piiDetection** — session-ephemeral audit field carrying detected PII kinds and redaction status, never raw UID / username values. Dropped at confirm.
 - **draftMetadata.evidence** — audit field carrying base/bonus stat split (and other vision-only-visible facts) for user review. Not consumed by calc engine.
 - **Source detection** — vision pipeline's first step: identify which community tool produced the screenshot. Gates layout-specific field extraction.
