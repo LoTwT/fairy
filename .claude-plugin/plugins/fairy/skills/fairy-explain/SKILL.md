@@ -69,3 +69,4 @@ Explain an existing fairy `CalcResult` JSON without rerunning calculation.
 - `docs/ai-plugin/prompt-templates.md`
 - `docs/ai-plugin/acceptance.md`
 - `docs/product/decisions/D-21-ai-plugin.md`
+- `docs/product/decisions/D-22-ai-plugin-v1.2.3-vision.md`

@@ -72,3 +72,4 @@ a brief user-facing summary from the returned `CalcResult`.
 - `docs/ai-plugin/prompt-templates.md`
 - `docs/ai-plugin/acceptance.md`
 - `docs/product/decisions/D-21-ai-plugin.md`
+- `docs/product/decisions/D-22-ai-plugin-v1.2.3-vision.md`
