@@ -39,6 +39,39 @@ const requiredExampleFiles = [
   "examples/ai-plugin/expected/yixuan-basic.explain.zh.md",
   "examples/ai-plugin/expected/yixuan-basic.explain.en.md",
 ]
+const visionExampleDirs = [
+  "examples/ai-plugin/vision/prompts",
+  "examples/ai-plugin/vision/snapshots",
+  "examples/ai-plugin/vision/expected",
+]
+const visionFixtures = [
+  {
+    name: "yixuan-workshop",
+    sourceId: "zzz-workshop",
+    sourceLabel: "绝区零工坊",
+    prompt: "examples/ai-plugin/vision/prompts/vision-workshop-yixuan.md",
+    snapshot: "examples/ai-plugin/vision/snapshots/yixuan-workshop.snapshot.json",
+    metadata: "examples/ai-plugin/vision/expected/yixuan-workshop.draft-metadata.json",
+    calc: "examples/ai-plugin/vision/expected/yixuan-workshop.calc.json",
+    piiKinds: ["uid"],
+    userCopyIncludes: ["截图来源: 绝区零工坊", "UID 已识别并隐藏"],
+  },
+  {
+    name: "yixuan-miyoushe",
+    sourceId: "miyoushe-record",
+    sourceLabel: "米游社",
+    prompt: "examples/ai-plugin/vision/prompts/vision-miyoushe-yixuan.md",
+    snapshot: "examples/ai-plugin/vision/snapshots/yixuan-miyoushe.snapshot.json",
+    metadata: "examples/ai-plugin/vision/expected/yixuan-miyoushe.draft-metadata.json",
+    calc: "examples/ai-plugin/vision/expected/yixuan-miyoushe.calc.json",
+    piiKinds: ["uid", "username"],
+    userCopyIncludes: ["截图来源: 米游社", "UID + 用户名 已识别并隐藏"],
+  },
+]
+const requiredVisionExampleFiles = [
+  "examples/ai-plugin/vision/README.md",
+  ...visionFixtures.flatMap(fixture => [fixture.prompt, fixture.snapshot, fixture.metadata, fixture.calc]),
+]
 const entitySectionDomains = [
   { heading: "Agents (characters)", domain: "agents", type: "character" },
   { heading: "W-Engines (weapons)", domain: "wEngines", type: "weapon" },
@@ -134,8 +167,14 @@ for (const [key, doc] of Object.entries(plugin.docs ?? {}))
 for (const dir of exampleDirs)
   assert(existsSync(path.join(repoRoot, dir)), `example directory is missing: ${dir}`)
 
+for (const dir of visionExampleDirs)
+  assert(existsSync(path.join(repoRoot, dir)), `vision example directory is missing: ${dir}`)
+
 for (const file of requiredExampleFiles)
   assert(existsSync(path.join(repoRoot, file)), `required AI plugin example fixture is missing: ${file}`)
+
+for (const file of requiredVisionExampleFiles)
+  assert(existsSync(path.join(repoRoot, file)), `required AI plugin vision fixture is missing: ${file}`)
 
 assert(existsSync(path.join(repoRoot, ".codex/README.md")), ".codex/README.md is missing")
 
@@ -419,6 +458,285 @@ function verifyCalcFixture(snapshot) {
   return expected
 }
 
+function verifyNoVisionImageInputsCommitted() {
+  const imageFiles = listFilesRecursive(path.join(repoRoot, "examples/ai-plugin/vision"))
+    .filter(file => /\.(?:png|jpe?g|webp|gif|heic)$/i.test(file))
+    .map(file => path.relative(repoRoot, file))
+  assert(imageFiles.length === 0, `vision fixtures must not commit raw image files: ${imageFiles.join(", ")}`)
+}
+
+function jsonPathJoin(parentPath, key) {
+  return `${parentPath}.${String(key)}`
+}
+
+function walkJson(value, visitor, currentPath = "$") {
+  if (Array.isArray(value)) {
+    value.forEach((item, index) => walkJson(item, visitor, `${currentPath}[${index}]`))
+    return
+  }
+
+  if (value !== null && typeof value === "object") {
+    for (const [key, child] of Object.entries(value)) {
+      const childPath = jsonPathJoin(currentPath, key)
+      visitor(key, child, childPath)
+      walkJson(child, visitor, childPath)
+    }
+  }
+}
+
+function assertNoPiiKeys(value, relativePath) {
+  const forbiddenKeys = new Set(["uid", "userId", "username", "nickname", "accountId", "sourceImage"])
+  walkJson(value, (key, child, childPath) => {
+    assert(!forbiddenKeys.has(key), `${relativePath}: PII/evidence-only key is not allowed at ${childPath}`)
+    if (typeof child === "string") {
+      assert(!/11553939/.test(child), `${relativePath}: raw sample UID must not be persisted at ${childPath}`)
+      assert(child !== "Lo", `${relativePath}: raw sample username must not be persisted at ${childPath}`)
+    }
+  })
+}
+
+function assertNoEvidenceOnlySnapshotKeys(snapshot, relativePath) {
+  const forbiddenKeys = new Set([
+    "uid",
+    "userId",
+    "username",
+    "nickname",
+    "accountId",
+    "sourceImage",
+    "baseAttack",
+    "bonusAttack",
+    "baseHp",
+    "bonusHp",
+    "baseDefense",
+    "bonusDefense",
+    "rollCount",
+    "confidence",
+    "sourceDetection",
+    "piiDetection",
+    "draftMetadata",
+    "rawValues",
+  ])
+  walkJson(snapshot, (key, child, childPath) => {
+    assert(!forbiddenKeys.has(key), `${relativePath}: evidence-only key is not allowed in BattleSnapshot at ${childPath}`)
+    if (typeof child === "string")
+      assert(child !== "unknown", `${relativePath}: strict BattleSnapshot must not use unknown as a value at ${childPath}`)
+  })
+}
+
+function assertExactStringArray(actual, expected, context) {
+  assert(
+    JSON.stringify(actual) === JSON.stringify(expected),
+    `${context}: expected ${JSON.stringify(expected)}, got ${JSON.stringify(actual)}`,
+  )
+}
+
+function extractReviewEditCopy(relativePath) {
+  const text = readText(relativePath)
+  const match = text.match(/## Review\/edit gate copy[^\n]*\n\n```(?:[a-z]+)?\n([\s\S]*?)\n```/)
+  assert(match !== null, `${relativePath}: missing Review/edit gate fenced copy block`)
+  return match?.[1] ?? ""
+}
+
+function assertNoUserFacingChainLeak(copy, relativePath) {
+  const forbidden = [
+    /fairy-vision/g,
+    /fairy-snapshot/g,
+    /fairy-calc/g,
+    /fairy-explain/g,
+    /\binvok(?:e|ing)\b/gi,
+    /\btransferr?ing to\b/gi,
+    /\bhand(?:ing)? off\b/gi,
+    /调用/g,
+    /移交/g,
+    /转交/g,
+    /链路/g,
+    /编排/g,
+  ]
+  for (const pattern of forbidden) {
+    const matches = copy.match(pattern)
+    assert(!matches, `${relativePath}: user-facing review/edit copy leaks chain implementation phrase ${pattern}`)
+  }
+}
+
+function runVisionCliCalc(relativeSnapshotPath) {
+  const output = execFileSync(
+    "pnpm",
+    [
+      "--silent",
+      "--filter",
+      "@randomplay/cli",
+      "exec",
+      "tsx",
+      "src/index.ts",
+      "calc",
+      `../../${relativeSnapshotPath}`,
+      "--view",
+      "verbose",
+      "--lang",
+      "zh",
+      "--pretty",
+    ],
+    { cwd: repoRoot, encoding: "utf8" },
+  )
+  return JSON.parse(output)
+}
+
+function verifyVisionSnapshot(fixture) {
+  const snapshot = readJson(fixture.snapshot)
+  if (core?.parseBattleSnapshot !== undefined) {
+    try {
+      core.parseBattleSnapshot(snapshot)
+    }
+    catch (error) {
+      errors.push(`${fixture.snapshot} does not parse as BattleSnapshot: ${error.message}`)
+      return snapshot
+    }
+  }
+
+  assertNoPiiKeys(snapshot, fixture.snapshot)
+  assertNoEvidenceOnlySnapshotKeys(snapshot, fixture.snapshot)
+
+  const actor = snapshot.team?.[0]
+  assert(actor?.agentId === "1371", `${fixture.snapshot}: expected agentId 1371`)
+  assert(actor?.wEngine?.id === "14137", `${fixture.snapshot}: expected W-Engine id 14137`)
+  assert(snapshot.activeActor?.agentId === "1371", `${fixture.snapshot}: activeActor must be 仪玄`)
+  assert(snapshot.enemy?.enemyId === "30004", `${fixture.snapshot}: expected enemy id 30004`)
+  assert(snapshot.enemy?.rank === "special", `${fixture.snapshot}: expected enemy rank special`)
+  assert(snapshot.enemy?.resistance?.ether === 0, `${fixture.snapshot}: auric ink fixture must map resistance through ether`)
+
+  assertRuntimeEntity("agents", actor?.agentId, `${fixture.snapshot}: team agent`)
+  assertRuntimeEntity("wEngines", actor?.wEngine?.id, `${fixture.snapshot}: W-Engine`)
+  assertRuntimeEntity("enemies", snapshot.enemy?.enemyId, `${fixture.snapshot}: enemy`)
+
+  const setIds = (actor?.driveDiscs ?? []).map(disc => disc.setId).filter(Boolean)
+  assert(setIds.length === 6, `${fixture.snapshot}: expected six Drive Disc slots`)
+  assert(setIds.filter(id => id === "33100").length === 4, `${fixture.snapshot}: expected 云岿如我 4pc`)
+  assert(setIds.filter(id => id === "32700").length === 2, `${fixture.snapshot}: expected 折枝剑歌 2pc`)
+  for (const id of setIds)
+    assertRuntimeEntity("driveDiscs", id, `${fixture.snapshot}: Drive Disc set`)
+
+  return snapshot
+}
+
+function verifyVisionDraftMetadata(fixture) {
+  const metadata = readJson(fixture.metadata)
+  assertNoPiiKeys(metadata, fixture.metadata)
+  assert(metadata.schemaVersion === "v1.2.3-vision-draft-metadata-v1", `${fixture.metadata}: unexpected schemaVersion`)
+  assert(metadata.fixtureName === `vision-${fixture.name.replace("yixuan-", "")}-yixuan`, `${fixture.metadata}: fixtureName must match fixture`)
+  assert(metadata.sourceDetection?.sourceId === fixture.sourceId, `${fixture.metadata}: sourceDetection.sourceId mismatch`)
+  assert(metadata.sourceDetection?.sourceLabel === fixture.sourceLabel, `${fixture.metadata}: sourceDetection.sourceLabel mismatch`)
+  assert(metadata.sourceDetection?.confidence >= 0.9, `${fixture.metadata}: sourceDetection confidence must be high`)
+  assert(Array.isArray(metadata.sourceDetection?.cues) && metadata.sourceDetection.cues.length >= 3, `${fixture.metadata}: sourceDetection.cues must include source evidence`)
+
+  assertExactStringArray(metadata.piiDetection?.kinds, fixture.piiKinds, `${fixture.metadata}: piiDetection.kinds`)
+  assert(metadata.piiDetection?.redactionStatus === "redacted", `${fixture.metadata}: piiDetection.redactionStatus must be redacted`)
+  assert(metadata.piiDetection?.rawValuesDiscarded === true, `${fixture.metadata}: raw PII values must be discarded`)
+
+  const confidenceValues = Object.values(metadata.perFieldConfidence ?? {})
+  assert(confidenceValues.length > 0, `${fixture.metadata}: perFieldConfidence is required`)
+  for (const value of confidenceValues)
+    assert(["high", "medium", "low"].includes(value), `${fixture.metadata}: invalid confidence value ${value}`)
+
+  const statSplits = metadata.evidence?.statSplits ?? []
+  assert(Array.isArray(statSplits) && statSplits.length >= 3, `${fixture.metadata}: evidence.statSplits must include HP/ATK/DEF audit evidence`)
+  for (const split of statSplits) {
+    assert(typeof split.stat === "string", `${fixture.metadata}: stat split requires stat`)
+    assert(typeof split.base === "number", `${fixture.metadata}: stat split ${split.stat} requires numeric base`)
+    assert(typeof split.bonus === "number", `${fixture.metadata}: stat split ${split.stat} requires numeric bonus`)
+    assert(split.base + split.bonus === split.total, `${fixture.metadata}: stat split ${split.stat} total must equal base + bonus`)
+  }
+
+  const substatRolls = metadata.evidence?.substatRollsSample ?? []
+  assert(Array.isArray(substatRolls) && substatRolls.length > 0, `${fixture.metadata}: evidence.substatRollsSample is required`)
+  assert(
+    substatRolls.some(slot => (slot.substats ?? []).some(substat => typeof substat.rollCount === "number")),
+    `${fixture.metadata}: substat roll-count evidence is required`,
+  )
+  return metadata
+}
+
+function verifyVisionPrompt(fixture) {
+  const text = readText(fixture.prompt)
+  includesAll(text, fixture.prompt, [
+    `**Skill**: fairy-vision`,
+    `**Source**: ${fixture.sourceId}`,
+    `sourceDetection.sourceId === "${fixture.sourceId}"`,
+    "parseBattleSnapshot",
+    "fairy calc <snapshot> --view verbose --lang zh",
+    "substatRollsSample",
+  ])
+  for (const snippet of fixture.userCopyIncludes)
+    assert(text.includes(snippet), `${fixture.prompt}: missing review/edit copy snippet ${snippet}`)
+
+  const copy = extractReviewEditCopy(fixture.prompt)
+  assertNoUserFacingChainLeak(copy, fixture.prompt)
+  assert(!copy.includes("5★ midpoint default"), `${fixture.prompt}: source-tool review copy must not use midpoint default language`)
+}
+
+function verifyVisionCalcFixture(fixture, snapshot) {
+  const expected = readJson(fixture.calc)
+  if (core?.parseCalcResult !== undefined) {
+    try {
+      core.parseCalcResult(expected)
+    }
+    catch (error) {
+      errors.push(`${fixture.calc} does not parse as CalcResult: ${error.message}`)
+    }
+  }
+
+  let actual
+  try {
+    actual = runVisionCliCalc(fixture.snapshot)
+  }
+  catch (error) {
+    errors.push(`${fixture.calc}: fairy calc baseline command failed: ${error.message}`)
+    return expected
+  }
+
+  assert(isDeepStrictEqual(actual, expected), `${fixture.calc} must match freshly generated fairy CLI verbose output`)
+  assert(expected.locale === "zh", `${fixture.calc}: baseline locale must be zh`)
+  assert(expected.summary?.activeActorId === snapshot.activeActor?.agentId, `${fixture.calc}: activeActorId must match snapshot`)
+  assert(expected.summary?.enemyId === snapshot.enemy?.enemyId, `${fixture.calc}: enemyId must match snapshot`)
+  assert(Array.isArray(expected.trace) && expected.trace.length > 0, `${fixture.calc}: verbose baseline must include trace`)
+  assert(Array.isArray(expected.warnings) && expected.warnings.length === 0, `${fixture.calc}: vision happy-path baseline must have no warnings`)
+  assert(Array.isArray(expected.errors) && expected.errors.length === 0, `${fixture.calc}: vision happy-path baseline must have no errors`)
+  const serialized = JSON.stringify(expected)
+  assert(!/fairy-(?:vision|snapshot|calc|explain)|invok|transferr?ing|hand(?:ing)? off/i.test(serialized), `${fixture.calc}: CalcResult baseline must not leak AI chain implementation`)
+  return expected
+}
+
+function verifyVisionFixtures() {
+  verifyNoVisionImageInputsCommitted()
+  const visionReadme = readText("examples/ai-plugin/vision/README.md")
+  includesAll(visionReadme, "examples/ai-plugin/vision/README.md", [
+    "yixuan-workshop.calc.json",
+    "yixuan-miyoushe.calc.json",
+    "Cross-source identity contract",
+    "panel.etherDamageBonus: 0.3",
+    "Actual digits never reach committed fixture JSON",
+  ])
+
+  const calcResults = []
+  for (const fixture of visionFixtures) {
+    verifyVisionPrompt(fixture)
+    const snapshot = verifyVisionSnapshot(fixture)
+    verifyVisionDraftMetadata(fixture)
+    calcResults.push(verifyVisionCalcFixture(fixture, snapshot))
+  }
+
+  const [workshop, miyoushe] = calcResults
+  if (workshop !== undefined && miyoushe !== undefined) {
+    assert(
+      workshop.summary?.lanes?.nonCrit?.displayDamage === miyoushe.summary?.lanes?.nonCrit?.displayDamage,
+      "vision cross-source calc baselines must match nonCrit displayDamage for the selected segment",
+    )
+    assert(
+      workshop.summary?.lanes?.crit?.displayDamage === miyoushe.summary?.lanes?.crit?.displayDamage,
+      "vision cross-source calc baselines must match crit displayDamage for the selected segment",
+    )
+  }
+}
+
 function verifyPromptFixtures(calcResult) {
   const yixuanPrompt = readText("examples/ai-plugin/prompts/build-yixuan-basic.md")
   includesAll(yixuanPrompt, "examples/ai-plugin/prompts/build-yixuan-basic.md", [
@@ -488,6 +806,7 @@ function verifyAiPluginExamples() {
   const calcResult = verifyCalcFixture(basicSnapshot)
   verifyPromptFixtures(calcResult)
   verifyExplainFixture(calcResult)
+  verifyVisionFixtures()
 }
 
 verifyAiPluginExamples()
