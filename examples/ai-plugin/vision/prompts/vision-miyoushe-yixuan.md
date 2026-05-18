@@ -2,10 +2,10 @@
 
 **Skill**: fairy-vision
 **Source**: miyoushe-record (米游社绝区零战绩)
-**Scenario**: P1 user pastes a 米游社 build screenshot of 仪玄 Lv60 + 青溟笼舍 R1 + 云岿如我 4pc + 折枝剑歌 2pc (same build as `vision-workshop-yixuan` cross-source pair); vision pipeline detects 米游社 source, applies its layout map, produces a strict BattleSnapshot with the same agent / wEngine / driveDiscs identity. Source-displayed derived stats (`corePassive`, `etherDamageBonus`, `energyRegen`, `sheerForce`) intentionally differ from the workshop variant where 米游社 surfaces them and 工坊 does not; differences are documented in `draftMetadata.evidence.crossSourceNotes`.
+**Scenario**: P1 user pastes a 米游社 build screenshot of 仪玄 Lv60 + 青溟笼舍 R1 + 云岿如我 4pc + 折枝剑歌 2pc (same build as `vision-workshop-yixuan` cross-source pair); vision pipeline detects 米游社 source, applies its layout map, produces a strict BattleSnapshot with the same agent / wEngine / driveDiscs identity. Source-displayed derived stats intentionally differ from the workshop variant: 米游社 surfaces a `corePassive` skill slot that 工坊 omits, and renders `energyRegen` with a different unit convention; `sheerForce` differs by 1 unit from display rounding. `etherDamageBonus` is included in both variants (matching the slot-5 main stat). Differences are documented in `draftMetadata.evidence.crossSourceNotes`.
 **Lang**: zh
 
-This fixture pairs with `vision-workshop-yixuan.md` to demonstrate **cross-source identity**: same build screenshot from a different community tool produces a `BattleSnapshot` with the same agentId / wEngine / driveDiscs composition. Source-displayed derived stats differ — 米游社 surfaces `corePassive` and `etherDamageBonus` panel fields; `energyRegen` is rendered with a different unit convention; `sheerForce` differs by 1 unit from rounding. Each variant captures what its source actually shows; cross-source differences are documented in `draftMetadata.evidence.crossSourceNotes`.
+This fixture pairs with `vision-workshop-yixuan.md` to demonstrate **cross-source identity**: same build screenshot from a different community tool produces a `BattleSnapshot` with the same agentId / wEngine / driveDiscs composition. Source-displayed derived stats differ — 米游社 surfaces a `corePassive` skill slot that 工坊 omits; `energyRegen` is rendered with a different unit convention; `sheerForce` differs by 1 unit from rounding. `etherDamageBonus` is captured in both variants (matching the slot-5 main stat). Each variant captures what its source actually shows; cross-source differences are documented in `draftMetadata.evidence.crossSourceNotes`.
 
 It also exercises the 米游社-specific layout features: SSS+ rating badge, AGENT INFO band, 驱动盘有效副属性共中 framing, 6-card Drive Disc grid, and the skill-strip "07" slot that may render slightly differently (per `user-journeys.md` §6 visual-ambiguity note — verified as a documented stable value in this fixture, no ambiguity escalation needed).
 
@@ -87,7 +87,7 @@ User (zh, with image attachment):
 - Same as workshop fixture for `BattleSnapshot.panel` strict-totals contract
 - `draftMetadata.evidence.statSplits` records 3 minimum stat splits (HP/ATK/DEF)
 - `draftMetadata.evidence.substatRollsSample` records visible roll counts
-- 以太伤害加成 30% appears in panel (miyoushe surfaces this where workshop does not — verify field captured)
+- 以太伤害加成 30% appears in panel (both source variants include this field, matching the slot-5 main stat — verify captured per-source)
 
 ### V-G3 — Review/edit & uncertainty handling
 
