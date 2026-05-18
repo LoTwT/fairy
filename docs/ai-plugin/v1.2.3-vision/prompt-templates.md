@@ -492,7 +492,7 @@ Field-label normalization tables map source-visible zh labels to canonical Battl
 
 ### 10.2 Set names (Drive Disc 4pc / 2pc)
 
-Entity normalization layer (per V1.2.2) handles `啄木鸟电音 → 31000`, `钢铁躯壳 → 32004`, `折枝剑歌 → 31002` (illustrative — actual ids resolved against nanoka data registry).
+Entity normalization layer (per V1.2.2) handles `啄木鸟电音 → 31000`, `云岿如我 → 33100`, `折枝剑歌 → 32700`; implementations must verify ids against the current nanoka runtime data registry before accepting a draft.
 
 ### 10.3 Agent + weapon names
 
