@@ -261,7 +261,11 @@ const pluginForbiddenPatterns = [
 
 const exampleForbiddenPatterns = [
   ...pluginForbiddenPatterns,
-  { pattern: /命破之刃|Doom Blade|钢铁躯壳|Steel Cushion \(alias\)|\b32004\b/g, reason: "example fixtures must use current runtime GameData ids/names" },
+  { pattern: /命破之刃|Doom Blade|钢铁躯壳|Steel Cushion \(alias\)|\b31002\b|\b32004\b/g, reason: "example fixtures must use current runtime GameData ids/names" },
+]
+
+const staleRuntimeEntityPatterns = [
+  { pattern: /命破之刃|钢铁躯壳|\b31002\b|\b32004\b/g, reason: "AI plugin docs must not use stale runtime entity names or ids" },
 ]
 
 assertNoForbiddenPatterns(
@@ -272,6 +276,15 @@ assertNoForbiddenPatterns(
   listFilesRecursive(path.join(repoRoot, "examples/ai-plugin"))
     .concat([path.join(repoRoot, "docs/ai-plugin/prompt-templates.md")]),
   exampleForbiddenPatterns,
+)
+assertNoForbiddenPatterns(
+  listFilesRecursive(path.join(repoRoot, "examples/ai-plugin"))
+    .concat([
+      path.join(repoRoot, "docs/ai-plugin/user-journeys.md"),
+      path.join(repoRoot, "docs/ai-plugin/prompt-templates.md"),
+      path.join(repoRoot, "docs/ai-plugin/v1.2.3-vision/prompt-templates.md"),
+    ]),
+  staleRuntimeEntityPatterns,
 )
 
 try {
