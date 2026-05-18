@@ -2,7 +2,7 @@
 
 **Skill**: fairy-vision
 **Source**: zzz-workshop (绝区零工坊 WeChat mini-app)
-**Scenario**: P1 user pastes a 工坊 build screenshot of 仪玄 Lv60 + 青溟笼舍 R1 + 云霄如我 4pc + 折枝剑歌 2pc; vision pipeline detects source, extracts full build, produces reviewable BattleSnapshot draft + draftMetadata, hands off to fairy-snapshot for review/edit.
+**Scenario**: P1 user pastes a 工坊 build screenshot of 仪玄 Lv60 + 青溟笼舍 R1 + 云岿如我 4pc + 折枝剑歌 2pc; vision pipeline detects source, extracts full build, produces reviewable BattleSnapshot draft + draftMetadata, hands off to fairy-snapshot for review/edit.
 **Lang**: zh
 
 This fixture demonstrates the **happy-path 工坊** flow: high-confidence source detection, complete field extraction including substat roll counts, no missing fields, PII (UID) detected and redacted at the draftMetadata level, review/edit gate uses generic source description (no skill-name leakage per K4).
@@ -42,7 +42,7 @@ User (zh, with image attachment):
    - Element icon / specialty icon / mindscape badge: medium confidence (icon-based)
    - Skill levels: medium confidence (small font)
    - All critical fields high or medium → no field-tier escalation needed
-7. **Substat capture precision**: roll counts visible on every substat → substat values populated exactly (no Tier 2 midpoint default needed); recorded in `draftMetadata.evidence.substatRolls`
+7. **Substat capture precision**: roll counts visible on every substat → substat values populated exactly (no Tier 2 midpoint default needed); recorded in `draftMetadata.evidence.substatRollsSample`
 8. **Output**: `battleSnapshotDraft` (strict schema, total panel values only) + `draftMetadata` + `nextStep: "Hand off to fairy-snapshot for review/edit and any missing critical fields."`
 9. **Chain handoff**: AI host consumes `nextStep`, presents review/edit gate, then user confirm → fairy-snapshot → fairy-calc.
 
@@ -58,7 +58,7 @@ User (zh, with image attachment):
 
   角色: 仪玄 Lv60 (影画 2，玄墨·命破)
   武器: 青溟笼舍 Lv60 R1
-  6 件套: 云霄如我 4pc (slot 1+3+4+6) + 折枝剑歌 2pc (slot 2+5)
+  6 件套: 云岿如我 4pc (slot 1+3+4+6) + 折枝剑歌 2pc (slot 2+5)
   主词条: slot 4 暴击伤害 48% / slot 5 以太伤害加成 30% / slot 6 生命值 30%
   副词条: 全部读到（含 roll 次数，无需默认填值）
   面板: HP 18305, ATK 1979, DEF 718, 冲击力 93, 暴击率 55.4%, 暴击伤害 200.4%, 异常掌控 92, 异常精通 117, 贯穿力 2424
@@ -87,7 +87,7 @@ User (zh, with image attachment):
 
 - `BattleSnapshot.team[*].panel` contains total panel values only (no base/bonus split)
 - `draftMetadata.evidence.statSplits` records base+bonus pairs (3 stat splits at minimum: HP / ATK / DEF)
-- `draftMetadata.evidence.substatRolls` records visible roll counts for at least one Drive Disc substat
+- `draftMetadata.evidence.substatRollsSample` records visible roll counts for at least one Drive Disc substat
 - `BattleSnapshot` parses through `parseBattleSnapshot` without ad hoc field keys (no `uid`, `username`, `sourceImage`, `baseAttack`, `bonusAttack` etc.)
 
 ### V-G3 — Review/edit & uncertainty handling

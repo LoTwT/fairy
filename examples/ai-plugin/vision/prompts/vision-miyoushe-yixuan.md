@@ -2,7 +2,7 @@
 
 **Skill**: fairy-vision
 **Source**: miyoushe-record (米游社绝区零战绩)
-**Scenario**: P1 user pastes a 米游社 build screenshot of 仪玄 Lv60 + 青溟笼舍 R1 + 云霄如我 4pc + 折枝剑歌 2pc (same build as `vision-workshop-yixuan` cross-source pair); vision pipeline detects 米游社 source, applies its layout map, produces the same canonical strict BattleSnapshot.
+**Scenario**: P1 user pastes a 米游社 build screenshot of 仪玄 Lv60 + 青溟笼舍 R1 + 云岿如我 4pc + 折枝剑歌 2pc (same build as `vision-workshop-yixuan` cross-source pair); vision pipeline detects 米游社 source, applies its layout map, produces a strict BattleSnapshot with the same agent / wEngine / driveDiscs identity. Source-displayed derived stats (`corePassive`, `etherDamageBonus`, `energyRegen`, `sheerForce`) intentionally differ from the workshop variant where 米游社 surfaces them and 工坊 does not; differences are documented in `draftMetadata.evidence.crossSourceNotes`.
 **Lang**: zh
 
 This fixture pairs with `vision-workshop-yixuan.md` to demonstrate **cross-source identity**: same build screenshot from a different community tool produces a `BattleSnapshot` with the same agentId / wEngine / driveDiscs composition. Source-displayed derived stats differ — 米游社 surfaces `corePassive` and `etherDamageBonus` panel fields; `energyRegen` is rendered with a different unit convention; `sheerForce` differs by 1 unit from rounding. Each variant captures what its source actually shows; cross-source differences are documented in `draftMetadata.evidence.crossSourceNotes`.
@@ -58,7 +58,7 @@ User (zh, with image attachment):
 
   角色: 仪玄 Lv60 (影画 2，S 评级)
   武器: 青溟笼舍 Lv60 R1
-  6 件套: 云霄如我 4pc (slot 1+3+4+6) + 折枝剑歌 2pc (slot 2+5)
+  6 件套: 云岿如我 4pc (slot 1+3+4+6) + 折枝剑歌 2pc (slot 2+5)
   主词条: slot 4 暴击伤害 48% / slot 5 以太伤害加成 30% / slot 6 生命值 30%
   副词条: 全部读到
   面板: HP 18305, ATK 1979, DEF 718, 冲击力 93, 暴击率 55.4%, 暴击伤害 200.4%, 异常掌控 92, 异常精通 117, 贯穿力 2423, 以太伤害加成 30%
@@ -86,7 +86,7 @@ User (zh, with image attachment):
 
 - Same as workshop fixture for `BattleSnapshot.panel` strict-totals contract
 - `draftMetadata.evidence.statSplits` records 3 minimum stat splits (HP/ATK/DEF)
-- `draftMetadata.evidence.substatRolls` records visible roll counts
+- `draftMetadata.evidence.substatRollsSample` records visible roll counts
 - 以太伤害加成 30% appears in panel (miyoushe surfaces this where workshop does not — verify field captured)
 
 ### V-G3 — Review/edit & uncertainty handling

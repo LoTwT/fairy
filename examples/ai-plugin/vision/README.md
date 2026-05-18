@@ -31,10 +31,10 @@ V1.2.3 P2 ships the **happy-path** cross-source pair for 仪玄 to demonstrate:
 | Source | 绝区零工坊 (WeChat mini-app) | 米游社 (Mihoyo community) |
 | Agent | 仪玄 Lv60 (mindscape 2) | 仪玄 Lv60 (mindscape 2) |
 | Weapon | 青溟笼舍 R1 | 青溟笼舍 R1 |
-| Drive Disc | 云霄如我 4pc + 折枝剑歌 2pc | 云霄如我 4pc + 折枝剑歌 2pc |
-| Panel | identical (within source rounding) | identical |
+| Drive Disc | 云岿如我 4pc + 折枝剑歌 2pc | 云岿如我 4pc + 折枝剑歌 2pc |
+| Panel | source-displayed; differences documented | source-displayed; differences documented |
 
-**Cross-source identity contract**: V-G1 source detection routes each screenshot through its source-specific layout map. Both fixtures yield the same canonical **identity + build composition** (agent `1371`, weapon `14137` R1, drive disc setIds, slot layout, mindscape level). Source-displayed derived stats may differ (e.g., 米游社 surfaces `corePassive` skill slot and `etherDamageBonus`; 工坊 omits both; `energyRegen` units differ; `sheerForce` rounds 1 unit) — each variant's strict `BattleSnapshot` captures what the source actually displays, with per-source differences documented in `draftMetadata.evidence`. The vision pipeline is source-agnostic at the **identity** boundary; it does not falsify a single canonical numeric panel.
+**Cross-source identity contract**: V-G1 source detection routes each screenshot through its source-specific layout map. Both fixtures yield the same canonical **identity + build composition** (agent `1371`, weapon `14137` R1, drive disc setIds `33100` + `32700`, slot layout, mindscape level 2). Source-displayed derived stats intentionally differ: 米游社 surfaces a `corePassive` skill slot that 工坊 does not show; both variants include `panel.etherDamageBonus: 0.3` (matching the slot-5 main stat), but `energyRegen` is rendered with different unit conventions (`1.2` 工坊 vs `2.0` 米游社) and `sheerForce` differs by 1 unit between sources from display rounding. Each variant's strict `BattleSnapshot` captures what the source actually displays, with per-source differences documented in `draftMetadata.evidence.crossSourceNotes`. The vision pipeline is source-agnostic at the **identity** boundary; it does not falsify a single canonical numeric panel.
 
 Future P2.x batches will add:
 - Additional agents (耀佳音 / 琉音 / 星见雅) per source — sample images already provided by lo-user
