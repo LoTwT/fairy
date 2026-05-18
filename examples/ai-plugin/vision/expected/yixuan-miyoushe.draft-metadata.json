@@ -1,0 +1,88 @@
+{
+  "schemaVersion": "v1.2.3-vision-draft-metadata-v1",
+  "fixtureName": "vision-miyoushe-yixuan",
+  "sourceDetection": {
+    "sourceId": "miyoushe-record",
+    "sourceLabel": "米游社",
+    "confidence": 0.95,
+    "cues": [
+      "branding:top-right-zzz-wordmark",
+      "branding:bottom-left-miyoushe-logo",
+      "branding:bottom-right-watermark",
+      "layout:landscape-composite",
+      "layout:agent-info-band",
+      "layout:driver-substat-count-band"
+    ]
+  },
+  "piiDetection": {
+    "kinds": ["uid", "username"],
+    "redactionStatus": "redacted",
+    "rawValuesDiscarded": true
+  },
+  "perFieldConfidence": {
+    "actor.id": "high",
+    "actor.level": "high",
+    "actor.mindscape.level": "high",
+    "actor.rank": "high",
+    "actor.skillLevels.basic": "medium",
+    "actor.skillLevels.dodge": "medium",
+    "actor.skillLevels.assist": "medium",
+    "actor.skillLevels.special": "medium",
+    "actor.skillLevels.ultimate": "medium",
+    "actor.skillLevels.corePassive": "medium",
+    "wEngine.id": "high",
+    "wEngine.level": "high",
+    "wEngine.phase": "medium",
+    "driveDiscs[*].setId": "high",
+    "driveDiscs[*].slot": "high",
+    "driveDiscs[*].level": "high",
+    "driveDiscs[*].mainStat": "high",
+    "driveDiscs[*].substats[*].value": "high",
+    "driveDiscs[*].substats[*].rollCount": "high",
+    "panel.attack": "high",
+    "panel.maxHp": "high",
+    "panel.defense": "high",
+    "panel.impact": "high",
+    "panel.critRate": "high",
+    "panel.critDamage": "high",
+    "panel.anomalyMastery": "high",
+    "panel.anomalyProficiency": "high",
+    "panel.sheerForce": "high",
+    "panel.etherDamageBonus": "high"
+  },
+  "evidence": {
+    "statSplits": [
+      { "stat": "maxHp", "base": 8373, "bonus": 9932, "total": 18305 },
+      { "stat": "attack", "base": 1615, "bonus": 364, "total": 1979 },
+      { "stat": "defense", "base": 441, "bonus": 277, "total": 718 }
+    ],
+    "substatRollsSample": [
+      {
+        "slot": 1,
+        "setId": "33100",
+        "substats": [
+          { "stat": "attack", "rollCount": 4, "valuePercent": 24 },
+          { "stat": "anomalyProficiency", "rollCount": 1, "valueFlat": 9 },
+          { "stat": "defense", "rollCount": 1, "valueFlat": 15 },
+          { "stat": "critRate", "rollCount": 1, "valuePercent": 4.8 }
+        ]
+      }
+    ],
+    "skillLevelsObserved": [12, 11, 12, 12, 12, 7],
+    "driverScoreObserved": {
+      "effectiveSubstatCount": 40,
+      "rating": "SS+",
+      "note": "community-tool metadata; not consumed by BattleSnapshot"
+    },
+    "crossSourceNotes": [
+      "panel.sheerForce: 米游社 displays 2423, workshop displays 2424; explained by source-side rounding; vision parse records the source-reported value verbatim."
+    ]
+  },
+  "nextStep": "Hand off to fairy-snapshot for review/edit and any missing critical fields; user has already supplied enemy + attack segment context in the NL portion.",
+  "fallbackTrigger": null,
+  "notes": [
+    "Sample image: miyoushe-record variant of 仪玄 build; PII (UID + username kinds) redacted at extraction; raw values never persisted.",
+    "Cross-source pair: see expected/yixuan-workshop.draft-metadata.json for same build via 绝区零工坊 source.",
+    "Skill strip includes a 6th 'core passive' slot at value 07; documented stable value per fixture, not an ambiguity escalation case."
+  ]
+}
