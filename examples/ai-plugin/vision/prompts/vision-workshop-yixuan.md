@@ -102,13 +102,13 @@ User (zh, with image attachment):
 - `BattleSnapshot` contains no `uid` / `username` / other account identifier keys
 - `draftMetadata.piiDetection.kinds === ["uid"]` (no raw digits)
 - `draftMetadata.piiDetection.redactionStatus === "redacted"`
-- Public fixture display copy does not contain the raw UID `11553939`; only "UID 已识别并隐藏" or similar
+- Public fixture display copy contains no raw UID digits; only the redacted-status notice ("UID 已识别并隐藏") or equivalent
 
 ### V-G5 — End-to-end CLI calc validation
 
 - Confirmed `BattleSnapshot` is structurally valid input for `fairy calc <snapshot> --view verbose --lang zh`
 - Calc output (when generated downstream) contains no skill names / orchestration phrasing
-- No `fairy compare` invocation appears in this fixture path
+- The deferred binary-comparison skill (per D-19) is not invoked anywhere in this fixture path
 
 ### K4 — Chain transition invisibility
 

@@ -34,7 +34,7 @@ V1.2.3 P2 ships the **happy-path** cross-source pair for 仪玄 to demonstrate:
 | Drive Disc | 云霄如我 4pc + 折枝剑歌 2pc | 云霄如我 4pc + 折枝剑歌 2pc |
 | Panel | identical (within source rounding) | identical |
 
-**Cross-source consistency contract**: V-G1 source detection routes each screenshot through its source-specific layout map; both produce **the same canonical strict `BattleSnapshot`** (modulo minor rounding tolerance documented in evidence). This is the core proof that the vision pipeline is source-agnostic at the `BattleSnapshot` boundary.
+**Cross-source identity contract**: V-G1 source detection routes each screenshot through its source-specific layout map. Both fixtures yield the same canonical **identity + build composition** (agent `1371`, weapon `14137` R1, drive disc setIds, slot layout, mindscape level). Source-displayed derived stats may differ (e.g., 米游社 surfaces `corePassive` skill slot and `etherDamageBonus`; 工坊 omits both; `energyRegen` units differ; `sheerForce` rounds 1 unit) — each variant's strict `BattleSnapshot` captures what the source actually displays, with per-source differences documented in `draftMetadata.evidence`. The vision pipeline is source-agnostic at the **identity** boundary; it does not falsify a single canonical numeric panel.
 
 Future P2.x batches will add:
 - Additional agents (耀佳音 / 琉音 / 星见雅) per source — sample images already provided by lo-user
@@ -79,7 +79,7 @@ QA V-G1 / V-G2 / V-G3 / V-G4 / V-G5 + K4 invisibility — specific per-fixture c
 
 Per `docs/ai-plugin/v1.2.3-vision/user-journeys.md` §8 + acceptance V-G4, all public fixtures redact PII:
 
-- **UID** in source screenshots: real UID `11553939` is replaced with `REDACTED` placeholder in fixture display copy and reduced to `piiDetection.kinds: ["uid"]` + `piiDetection.redactionStatus: "redacted"` in `draftMetadata`. Actual digits never reach committed fixture JSON.
+- **UID** in source screenshots: any UID seen during extraction is replaced with `REDACTED_UID` placeholder in fixture display copy and reduced to `piiDetection.kinds: ["uid"]` + `piiDetection.redactionStatus: "redacted"` in `draftMetadata`. Actual digits never reach committed fixture JSON.
 - **Username**: similarly redacted. Even when visible in source screenshot, treated as `piiDetection.kinds: ["username"]` only.
 - **Screenshot files themselves**: not committed to repo (avoid raw PII in version control). Fixture references screenshot via canonical placeholder filename (e.g., `[zzz-workshop-yixuan-build.png]`); real images stay outside public fixture tree per acceptance V-G4.
 

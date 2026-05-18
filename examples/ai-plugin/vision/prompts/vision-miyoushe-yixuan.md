@@ -5,7 +5,7 @@
 **Scenario**: P1 user pastes a 米游社 build screenshot of 仪玄 Lv60 + 青溟笼舍 R1 + 云霄如我 4pc + 折枝剑歌 2pc (same build as `vision-workshop-yixuan` cross-source pair); vision pipeline detects 米游社 source, applies its layout map, produces the same canonical strict BattleSnapshot.
 **Lang**: zh
 
-This fixture pairs with `vision-workshop-yixuan.md` to demonstrate **cross-source consistency**: same build screenshot from a different community tool produces an equivalent strict `BattleSnapshot` (within documented rounding tolerance). The vision pipeline is source-agnostic at the snapshot boundary.
+This fixture pairs with `vision-workshop-yixuan.md` to demonstrate **cross-source identity**: same build screenshot from a different community tool produces a `BattleSnapshot` with the same agentId / wEngine / driveDiscs composition. Source-displayed derived stats differ — 米游社 surfaces `corePassive` and `etherDamageBonus` panel fields; `energyRegen` is rendered with a different unit convention; `sheerForce` differs by 1 unit from rounding. Each variant captures what its source actually shows; cross-source differences are documented in `draftMetadata.evidence.crossSourceNotes`.
 
 It also exercises the 米游社-specific layout features: SSS+ rating badge, AGENT INFO band, 驱动盘有效副属性共中 framing, 6-card Drive Disc grid, and the skill-strip "07" slot that may render slightly differently (per `user-journeys.md` §6 visual-ambiguity note — verified as a documented stable value in this fixture, no ambiguity escalation needed).
 
@@ -27,7 +27,7 @@ User (zh, with image attachment):
    - Branding cues found: top-right "ZZ 绝区·零 zen.less zone zero" wordmark + bottom-left 米游社 logo + bottom-right "米游社绝区零战绩" watermark + landscape composite orientation
    - Result: `sourceDetection: { sourceId: "miyoushe-record", sourceLabel: "米游社", confidence: 0.95 }`
 4. **Per-source layout map** (per `prompt-templates.md` §4.2 米游社 regions):
-   - Region 1 top bar: PII (username "Lo" + UID) → captured as `piiDetection`
+   - Region 1 top bar: PII (username + UID) → captured as `piiDetection`
    - Region 2 AGENT INFO band: agent rank/portrait card (S-rank) + mindscape "2" + agent name + LV.60; right-half 2-column stats table (含 以太伤害加成 30.0%)
    - Region 3 skill levels strip: 12/11/12/12/12/07 (6 visible categories; `07` is the core-passive slot, not an ambiguity)
    - Region 4 weapon strip: 青溟笼舍 Lv.60 (1-star icon = R1)
@@ -35,7 +35,7 @@ User (zh, with image attachment):
    - Region 6 Drive Disc cards (6 in 2-row × 3-col grid)
    - Region 7 footer: SKIPPED (branding + QR)
 5. **PII detection** (per V-G4):
-   - UID + username "Lo" detected in Region 1
+   - UID + username detected in Region 1
    - `piiDetection: { kinds: ["uid", "username"], redactionStatus: "redacted" }`
    - Raw digits / username never reach `BattleSnapshot` or persisted `draftMetadata`
 6. **Confidence scoring**:
@@ -104,7 +104,7 @@ User (zh, with image attachment):
 ### V-G5 — End-to-end CLI calc validation
 
 - Confirmed `BattleSnapshot` is valid input for `fairy calc <snapshot> --view verbose --lang zh`
-- Cross-source consistency check (optional): when both `yixuan-workshop.snapshot.json` and `yixuan-miyoushe.snapshot.json` feed into the same calc command, the calculated total damage should match within ~0.1% tolerance (justified by 1-unit rounding on 贯穿力 between sources)
+- Cross-source identity check (optional): both fixtures share the same agentId / wEngine / driveDiscs composition; calc on each variant may produce slightly different totals because each captures the source-displayed derived panel (per `crossSourceNotes`), not a unified canonical numeric panel
 
 ### K4 — Chain transition invisibility
 

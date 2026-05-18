@@ -26,17 +26,17 @@
         "level": 2
       },
       "wEngine": {
-        "id": "14140",
+        "id": "14137",
         "level": 60,
         "phase": 1
       },
       "driveDiscs": [
-        { "id": "drive-slot-1", "slot": 1, "setId": "31002" },
-        { "id": "drive-slot-2", "slot": 2, "setId": "31003" },
-        { "id": "drive-slot-3", "slot": 3, "setId": "31002" },
-        { "id": "drive-slot-4", "slot": 4, "setId": "31002" },
-        { "id": "drive-slot-5", "slot": 5, "setId": "31003" },
-        { "id": "drive-slot-6", "slot": 6, "setId": "31002" }
+        { "id": "drive-slot-1", "slot": 1, "setId": "33100" },
+        { "id": "drive-slot-2", "slot": 2, "setId": "32700" },
+        { "id": "drive-slot-3", "slot": 3, "setId": "33100" },
+        { "id": "drive-slot-4", "slot": 4, "setId": "33100" },
+        { "id": "drive-slot-5", "slot": 5, "setId": "32700" },
+        { "id": "drive-slot-6", "slot": 6, "setId": "33100" }
       ],
       "panel": {
         "attack": 1979,
@@ -47,9 +47,9 @@
         "critDamage": 2.004,
         "anomalyMastery": 92,
         "anomalyProficiency": 117,
-        "penetration": 0,
         "energyRegen": 1.2,
-        "sheerForce": 2424
+        "sheerForce": 2424,
+        "etherDamageBonus": 0.3
       }
     }
   ],
@@ -79,10 +79,10 @@
   "enemy": {
     "enemyId": "30004",
     "level": 60,
-    "rank": "boss",
+    "rank": "special",
     "maxHp": 1000000,
     "resistance": {
-      "auricInk": 0
+      "ether": 0
     }
   },
   "options": {

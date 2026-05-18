@@ -59,7 +59,7 @@
     "substatRollsSample": [
       {
         "slot": 1,
-        "setId": "31002",
+        "setId": "33100",
         "substats": [
           { "stat": "attack", "rollCount": 4, "valuePercent": 24 },
           { "stat": "anomalyProficiency", "rollCount": 1, "valueFlat": 9 },
@@ -81,7 +81,7 @@
   "nextStep": "Hand off to fairy-snapshot for review/edit and any missing critical fields; user has already supplied enemy + attack segment context in the NL portion.",
   "fallbackTrigger": null,
   "notes": [
-    "Sample image: miyoushe-record variant of 仪玄 build; PII (UID 11553939 + username 'Lo') redacted at extraction; raw values never persisted.",
+    "Sample image: miyoushe-record variant of 仪玄 build; PII (UID + username kinds) redacted at extraction; raw values never persisted.",
     "Cross-source pair: see expected/yixuan-workshop.draft-metadata.json for same build via 绝区零工坊 source.",
     "Skill strip includes a 6th 'core passive' slot at value 07; documented stable value per fixture, not an ambiguity escalation case."
   ]
