@@ -109,7 +109,7 @@ AI (auto-detect lang → zh):
   ⇒ NL summary:
      "总伤害 14,500
       - 普通攻击一段: 9,200 (64%)
-      - 主要增伤来源: 啄木鸟电音 4pc, W-Engine 主动技 +18%
+      - 主要增伤来源: 云岿如我 4pc, W-Engine 主动技 +18%
       Warning: Drive Disc 主词条数值缺失，已按 5★ 满级默认填，结果可能偏差 ±2%"
 ```
 
