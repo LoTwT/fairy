@@ -103,7 +103,7 @@ User (zh, with image attachment):
 
 ### V-G5 — End-to-end CLI calc validation
 
-- Confirmed `BattleSnapshot` is valid input for `fairy calc <snapshot> --view verbose --lang zh`
+- Confirmed `BattleSnapshot` parses through `parseBattleSnapshot` and is valid input for `fairy calc <snapshot> --view verbose --lang zh`
 - Cross-source identity check (optional): both fixtures share the same agentId / wEngine / driveDiscs composition; calc on each variant may produce slightly different totals because each captures the source-displayed derived panel (per `crossSourceNotes`), not a unified canonical numeric panel
 
 ### K4 — Chain transition invisibility

@@ -20,6 +20,8 @@ examples/ai-plugin/vision/
   expected/
     yixuan-workshop.draft-metadata.json   # draftMetadata: sourceDetection / piiDetection status / evidence
     yixuan-miyoushe.draft-metadata.json   # draftMetadata for miyoushe variant
+    yixuan-workshop.calc.json             # CLI verbose CalcResult baseline from confirmed workshop snapshot
+    yixuan-miyoushe.calc.json             # CLI verbose CalcResult baseline from confirmed miyoushe snapshot
 ```
 
 ## Scope (P2 starter — happy-path coverage)
