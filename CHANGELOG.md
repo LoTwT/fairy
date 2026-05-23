@@ -2,6 +2,25 @@
 
 All notable changes to Fairy are documented in this file.
 
+## 0.1.4 - 2026-05-23
+
+### Added
+
+- Scaffold V1.2.3 fairy-vision skill (#97)
+- Add V1.2.3 vision examples P2 (#98)
+
+### Documentation
+
+- Plan V1.2.3 vision input
+
+### Fixed
+
+- Align vision docs with runtime entities
+
+### Golden Anchors
+
+- Add V1.2.3 vision fixture harness (#99)
+
 ## 0.1.3 - 2026-05-16
 
 ### Added
