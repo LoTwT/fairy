@@ -47,25 +47,189 @@ const visionExampleDirs = [
 const visionFixtures = [
   {
     name: "yixuan-workshop",
+    mode: "calc",
+    fixtureName: "vision-workshop-yixuan",
     sourceId: "zzz-workshop",
     sourceLabel: "绝区零工坊",
     prompt: "examples/ai-plugin/vision/prompts/vision-workshop-yixuan.md",
     snapshot: "examples/ai-plugin/vision/snapshots/yixuan-workshop.snapshot.json",
     metadata: "examples/ai-plugin/vision/expected/yixuan-workshop.draft-metadata.json",
     calc: "examples/ai-plugin/vision/expected/yixuan-workshop.calc.json",
-    piiKinds: ["uid"],
+    expected: {
+      agentId: "1371",
+      wEngineId: "14137",
+      activeActorId: "1371",
+      enemyId: "30004",
+      enemyRank: "special",
+      resistance: { ether: 0 },
+      driveDiscSetCounts: { "33100": 4, "32700": 2 },
+      piiKinds: ["uid"],
+      sourceConfidenceMin: 0.9,
+    },
+    parityGroup: "yixuan-build",
     userCopyIncludes: ["截图来源: 绝区零工坊", "UID 已识别并隐藏"],
   },
   {
     name: "yixuan-miyoushe",
+    mode: "calc",
+    fixtureName: "vision-miyoushe-yixuan",
     sourceId: "miyoushe-record",
     sourceLabel: "米游社",
     prompt: "examples/ai-plugin/vision/prompts/vision-miyoushe-yixuan.md",
     snapshot: "examples/ai-plugin/vision/snapshots/yixuan-miyoushe.snapshot.json",
     metadata: "examples/ai-plugin/vision/expected/yixuan-miyoushe.draft-metadata.json",
     calc: "examples/ai-plugin/vision/expected/yixuan-miyoushe.calc.json",
-    piiKinds: ["uid", "username"],
+    expected: {
+      agentId: "1371",
+      wEngineId: "14137",
+      activeActorId: "1371",
+      enemyId: "30004",
+      enemyRank: "special",
+      resistance: { ether: 0 },
+      driveDiscSetCounts: { "33100": 4, "32700": 2 },
+      piiKinds: ["uid", "username"],
+      sourceConfidenceMin: 0.9,
+    },
+    parityGroup: "yixuan-build",
     userCopyIncludes: ["截图来源: 米游社", "UID + 用户名 已识别并隐藏"],
+  },
+  {
+    name: "miyabi-miyoushe",
+    mode: "calc",
+    fixtureName: "vision-miyoushe-miyabi",
+    sourceId: "miyoushe-record",
+    sourceLabel: "米游社",
+    prompt: "examples/ai-plugin/vision/prompts/vision-miyoushe-miyabi.md",
+    snapshot: "examples/ai-plugin/vision/snapshots/miyabi-miyoushe.snapshot.json",
+    metadata: "examples/ai-plugin/vision/expected/miyabi-miyoushe.draft-metadata.json",
+    calc: "examples/ai-plugin/vision/expected/miyabi-miyoushe.calc.json",
+    expected: {
+      agentId: "1091",
+      wEngineId: "14109",
+      activeActorId: "1091",
+      enemyId: "30004",
+      enemyRank: "special",
+      resistance: { ice: 0 },
+      driveDiscSetCounts: { "32700": 4, "32800": 2 },
+      piiKinds: ["uid", "username"],
+      sourceConfidenceMin: 0.9,
+    },
+    userCopyIncludes: ["截图来源: 米游社", "UID + 用户名 已识别并隐藏"],
+  },
+  {
+    name: "astra-miyoushe",
+    mode: "calc",
+    fixtureName: "vision-miyoushe-astra",
+    sourceId: "miyoushe-record",
+    sourceLabel: "米游社",
+    prompt: "examples/ai-plugin/vision/prompts/vision-miyoushe-astra.md",
+    snapshot: "examples/ai-plugin/vision/snapshots/astra-miyoushe.snapshot.json",
+    metadata: "examples/ai-plugin/vision/expected/astra-miyoushe.draft-metadata.json",
+    calc: "examples/ai-plugin/vision/expected/astra-miyoushe.calc.json",
+    expected: {
+      agentId: "1311",
+      wEngineId: "13115",
+      activeActorId: "1311",
+      enemyId: "30004",
+      enemyRank: "special",
+      resistance: { ether: 0 },
+      driveDiscSetCounts: { "33400": 4, "32800": 2 },
+      piiKinds: ["uid", "username"],
+      sourceConfidenceMin: 0.9,
+    },
+    userCopyIncludes: ["截图来源: 米游社", "UID + 用户名 已识别并隐藏"],
+  },
+  {
+    name: "dialyn-miyoushe",
+    mode: "calc",
+    fixtureName: "vision-miyoushe-dialyn",
+    sourceId: "miyoushe-record",
+    sourceLabel: "米游社",
+    prompt: "examples/ai-plugin/vision/prompts/vision-miyoushe-dialyn.md",
+    snapshot: "examples/ai-plugin/vision/snapshots/dialyn-miyoushe.snapshot.json",
+    metadata: "examples/ai-plugin/vision/expected/dialyn-miyoushe.draft-metadata.json",
+    calc: "examples/ai-plugin/vision/expected/dialyn-miyoushe.calc.json",
+    expected: {
+      agentId: "1481",
+      wEngineId: "14148",
+      activeActorId: "1481",
+      enemyId: "30004",
+      enemyRank: "special",
+      resistance: { physical: 0 },
+      driveDiscSetCounts: { "33200": 4, "33400": 2 },
+      piiKinds: ["uid", "username"],
+      sourceConfidenceMin: 0.9,
+    },
+    userCopyIncludes: ["截图来源: 米游社", "UID + 用户名 已识别并隐藏"],
+  },
+  {
+    name: "dialyn-workshop",
+    mode: "calc",
+    fixtureName: "vision-workshop-dialyn",
+    sourceId: "zzz-workshop",
+    sourceLabel: "绝区零工坊",
+    prompt: "examples/ai-plugin/vision/prompts/vision-workshop-dialyn.md",
+    snapshot: "examples/ai-plugin/vision/snapshots/dialyn-workshop.snapshot.json",
+    metadata: "examples/ai-plugin/vision/expected/dialyn-workshop.draft-metadata.json",
+    calc: "examples/ai-plugin/vision/expected/dialyn-workshop.calc.json",
+    expected: {
+      agentId: "1481",
+      wEngineId: "14148",
+      activeActorId: "1481",
+      enemyId: "30004",
+      enemyRank: "special",
+      resistance: { physical: 0 },
+      driveDiscSetCounts: { "33200": 4, "33400": 2 },
+      piiKinds: ["uid"],
+      sourceConfidenceMin: 0.9,
+    },
+    userCopyIncludes: ["截图来源: 绝区零工坊", "UID 已识别并隐藏"],
+  },
+  {
+    name: "miyabi-workshop",
+    mode: "calc",
+    fixtureName: "vision-workshop-miyabi",
+    sourceId: "zzz-workshop",
+    sourceLabel: "绝区零工坊",
+    prompt: "examples/ai-plugin/vision/prompts/vision-workshop-miyabi.md",
+    snapshot: "examples/ai-plugin/vision/snapshots/miyabi-workshop.snapshot.json",
+    metadata: "examples/ai-plugin/vision/expected/miyabi-workshop.draft-metadata.json",
+    calc: "examples/ai-plugin/vision/expected/miyabi-workshop.calc.json",
+    expected: {
+      agentId: "1091",
+      wEngineId: "14109",
+      activeActorId: "1091",
+      enemyId: "30004",
+      enemyRank: "special",
+      resistance: { ice: 0 },
+      driveDiscSetCounts: { "32700": 4, "31100": 2 },
+      piiKinds: ["uid"],
+      sourceConfidenceMin: 0.9,
+    },
+    userCopyIncludes: ["截图来源: 绝区零工坊", "UID 已识别并隐藏"],
+  },
+  {
+    name: "astra-workshop",
+    mode: "calc",
+    fixtureName: "vision-workshop-astra",
+    sourceId: "zzz-workshop",
+    sourceLabel: "绝区零工坊",
+    prompt: "examples/ai-plugin/vision/prompts/vision-workshop-astra.md",
+    snapshot: "examples/ai-plugin/vision/snapshots/astra-workshop.snapshot.json",
+    metadata: "examples/ai-plugin/vision/expected/astra-workshop.draft-metadata.json",
+    calc: "examples/ai-plugin/vision/expected/astra-workshop.calc.json",
+    expected: {
+      agentId: "1311",
+      wEngineId: "13115",
+      activeActorId: "1311",
+      enemyId: "30004",
+      enemyRank: "special",
+      resistance: { ether: 0 },
+      driveDiscSetCounts: { "33400": 4, "32800": 2 },
+      piiKinds: ["uid"],
+      sourceConfidenceMin: 0.9,
+    },
+    userCopyIncludes: ["截图来源: 绝区零工坊", "UID 已识别并隐藏"],
   },
 ]
 const requiredVisionExampleFiles = [
@@ -594,6 +758,18 @@ function runVisionCliCalc(relativeSnapshotPath) {
   return JSON.parse(output)
 }
 
+function countBy(values) {
+  return values.reduce((counts, value) => {
+    counts[value] = (counts[value] ?? 0) + 1
+    return counts
+  }, {})
+}
+
+function assertJsonObjectIncludes(actual, expected, context) {
+  for (const [key, value] of Object.entries(expected ?? {}))
+    assert(actual?.[key] === value, `${context}: expected ${key}=${value}, got ${actual?.[key]}`)
+}
+
 function verifyVisionSnapshot(fixture) {
   const snapshot = readJson(fixture.snapshot)
   if (core?.parseBattleSnapshot !== undefined) {
@@ -610,12 +786,13 @@ function verifyVisionSnapshot(fixture) {
   assertNoEvidenceOnlySnapshotKeys(snapshot, fixture.snapshot)
 
   const actor = snapshot.team?.[0]
-  assert(actor?.agentId === "1371", `${fixture.snapshot}: expected agentId 1371`)
-  assert(actor?.wEngine?.id === "14137", `${fixture.snapshot}: expected W-Engine id 14137`)
-  assert(snapshot.activeActor?.agentId === "1371", `${fixture.snapshot}: activeActor must be 仪玄`)
-  assert(snapshot.enemy?.enemyId === "30004", `${fixture.snapshot}: expected enemy id 30004`)
-  assert(snapshot.enemy?.rank === "special", `${fixture.snapshot}: expected enemy rank special`)
-  assert(snapshot.enemy?.resistance?.ether === 0, `${fixture.snapshot}: auric ink fixture must map resistance through ether`)
+  const expected = fixture.expected ?? {}
+  assert(actor?.agentId === expected.agentId, `${fixture.snapshot}: expected agentId ${expected.agentId}`)
+  assert(actor?.wEngine?.id === expected.wEngineId, `${fixture.snapshot}: expected W-Engine id ${expected.wEngineId}`)
+  assert(snapshot.activeActor?.agentId === expected.activeActorId, `${fixture.snapshot}: activeActor mismatch`)
+  assert(snapshot.enemy?.enemyId === expected.enemyId, `${fixture.snapshot}: expected enemy id ${expected.enemyId}`)
+  assert(snapshot.enemy?.rank === expected.enemyRank, `${fixture.snapshot}: expected enemy rank ${expected.enemyRank}`)
+  assertJsonObjectIncludes(snapshot.enemy?.resistance, expected.resistance, `${fixture.snapshot}: enemy.resistance`)
 
   assertRuntimeEntity("agents", actor?.agentId, `${fixture.snapshot}: team agent`)
   assertRuntimeEntity("wEngines", actor?.wEngine?.id, `${fixture.snapshot}: W-Engine`)
@@ -623,8 +800,10 @@ function verifyVisionSnapshot(fixture) {
 
   const setIds = (actor?.driveDiscs ?? []).map(disc => disc.setId).filter(Boolean)
   assert(setIds.length === 6, `${fixture.snapshot}: expected six Drive Disc slots`)
-  assert(setIds.filter(id => id === "33100").length === 4, `${fixture.snapshot}: expected 云岿如我 4pc`)
-  assert(setIds.filter(id => id === "32700").length === 2, `${fixture.snapshot}: expected 折枝剑歌 2pc`)
+  assert(
+    isDeepStrictEqual(countBy(setIds), expected.driveDiscSetCounts),
+    `${fixture.snapshot}: expected Drive Disc set counts ${JSON.stringify(expected.driveDiscSetCounts)}, got ${JSON.stringify(countBy(setIds))}`,
+  )
   for (const id of setIds)
     assertRuntimeEntity("driveDiscs", id, `${fixture.snapshot}: Drive Disc set`)
 
@@ -635,13 +814,13 @@ function verifyVisionDraftMetadata(fixture) {
   const metadata = readJson(fixture.metadata)
   assertNoPiiKeys(metadata, fixture.metadata)
   assert(metadata.schemaVersion === "v1.2.3-vision-draft-metadata-v1", `${fixture.metadata}: unexpected schemaVersion`)
-  assert(metadata.fixtureName === `vision-${fixture.name.replace("yixuan-", "")}-yixuan`, `${fixture.metadata}: fixtureName must match fixture`)
+  assert(metadata.fixtureName === fixture.fixtureName, `${fixture.metadata}: fixtureName must match fixture`)
   assert(metadata.sourceDetection?.sourceId === fixture.sourceId, `${fixture.metadata}: sourceDetection.sourceId mismatch`)
   assert(metadata.sourceDetection?.sourceLabel === fixture.sourceLabel, `${fixture.metadata}: sourceDetection.sourceLabel mismatch`)
-  assert(metadata.sourceDetection?.confidence >= 0.9, `${fixture.metadata}: sourceDetection confidence must be high`)
+  assert(metadata.sourceDetection?.confidence >= fixture.expected.sourceConfidenceMin, `${fixture.metadata}: sourceDetection confidence must be high`)
   assert(Array.isArray(metadata.sourceDetection?.cues) && metadata.sourceDetection.cues.length >= 3, `${fixture.metadata}: sourceDetection.cues must include source evidence`)
 
-  assertExactStringArray(metadata.piiDetection?.kinds, fixture.piiKinds, `${fixture.metadata}: piiDetection.kinds`)
+  assertExactStringArray(metadata.piiDetection?.kinds, fixture.expected.piiKinds, `${fixture.metadata}: piiDetection.kinds`)
   assert(metadata.piiDetection?.redactionStatus === "redacted", `${fixture.metadata}: piiDetection.redactionStatus must be redacted`)
   assert(metadata.piiDetection?.rawValuesDiscarded === true, `${fixture.metadata}: raw PII values must be discarded`)
 
@@ -724,29 +903,42 @@ function verifyVisionFixtures() {
   includesAll(visionReadme, "examples/ai-plugin/vision/README.md", [
     "yixuan-workshop.calc.json",
     "yixuan-miyoushe.calc.json",
+    "miyabi-miyoushe.calc.json",
+    "astra-workshop.calc.json",
+    "dialyn-workshop.calc.json",
     "Cross-source identity contract",
     "panel.etherDamageBonus: 0.3",
     "Actual digits never reach committed fixture JSON",
   ])
 
-  const calcResults = []
+  const calcResultsByName = new Map()
   for (const fixture of visionFixtures) {
     verifyVisionPrompt(fixture)
     const snapshot = verifyVisionSnapshot(fixture)
     verifyVisionDraftMetadata(fixture)
-    calcResults.push(verifyVisionCalcFixture(fixture, snapshot))
+    if (fixture.mode === "calc")
+      calcResultsByName.set(fixture.name, verifyVisionCalcFixture(fixture, snapshot))
   }
 
-  const [workshop, miyoushe] = calcResults
-  if (workshop !== undefined && miyoushe !== undefined) {
-    assert(
-      workshop.summary?.lanes?.nonCrit?.displayDamage === miyoushe.summary?.lanes?.nonCrit?.displayDamage,
-      "vision cross-source calc baselines must match nonCrit displayDamage for the selected segment",
-    )
-    assert(
-      workshop.summary?.lanes?.crit?.displayDamage === miyoushe.summary?.lanes?.crit?.displayDamage,
-      "vision cross-source calc baselines must match crit displayDamage for the selected segment",
-    )
+  const parityGroups = new Map()
+  for (const fixture of visionFixtures.filter(f => f.parityGroup !== undefined)) {
+    const group = parityGroups.get(fixture.parityGroup) ?? []
+    group.push(fixture)
+    parityGroups.set(fixture.parityGroup, group)
+  }
+  for (const [group, fixtures] of parityGroups) {
+    const baselines = fixtures.map(fixture => calcResultsByName.get(fixture.name)).filter(Boolean)
+    const [first] = baselines
+    for (const baseline of baselines.slice(1)) {
+      assert(
+        first.summary?.lanes?.nonCrit?.displayDamage === baseline.summary?.lanes?.nonCrit?.displayDamage,
+        `vision parity group ${group} must match nonCrit displayDamage for the selected segment`,
+      )
+      assert(
+        first.summary?.lanes?.crit?.displayDamage === baseline.summary?.lanes?.crit?.displayDamage,
+        `vision parity group ${group} must match crit displayDamage for the selected segment`,
+      )
+    }
   }
 }
 

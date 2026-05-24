@@ -1,0 +1,435 @@
+{
+  "schemaVersion": "1.0.0",
+  "gameVersion": "ZZZ-2.8",
+  "ruleSetVersion": "rules-v0.1",
+  "dataVersion": "nanoka@2.8",
+  "sourceVersion": "nanoka@2.8",
+  "calculationId": "calc-1",
+  "locale": "zh",
+  "summary": {
+    "activeActorId": "1091",
+    "enemyId": "30004",
+    "damageType": "regular",
+    "lanes": {
+      "nonCrit": {
+        "rawDamage": 1615.55278956602,
+        "displayDamage": 1616
+      },
+      "crit": {
+        "rawDamage": 4387.841376461311,
+        "displayDamage": 4388
+      }
+    },
+    "rawTotalDamage": 3617.145149304419,
+    "displayTotalDamage": 3618,
+    "expectedDamage": 3617.145149304419,
+    "critDamage": 4387.841376461311,
+    "nonCritDamage": 1615.55278956602,
+    "dazeValue": 0,
+    "anomalyBuildup": 0,
+    "disorderDamage": 0,
+    "trueDamage": 0
+  },
+  "attackSegments": [
+    {
+      "id": "miyabi-miyoushe-vision-smoke-1",
+      "actorId": "1091",
+      "attribute": "frost",
+      "tags": [
+        "basic"
+      ],
+      "damageType": "regular",
+      "rawDamage": 3617.145149304419,
+      "segmentDisplayDamage": 3618,
+      "roundingMode": "ceilPerSegment",
+      "baseDamage": 3034,
+      "expectedDamage": 3617.145149304419,
+      "critDamage": 4387.841376461311,
+      "nonCritDamage": 1615.55278956602,
+      "traceRefs": [
+        "trace-1",
+        "trace-2",
+        "trace-3",
+        "trace-4",
+        "trace-5",
+        "trace-6",
+        "trace-7",
+        "trace-8",
+        "trace-9",
+        "trace-10"
+      ]
+    }
+  ],
+  "buckets": [
+    {
+      "bucketId": "baseDamageZone",
+      "before": 0,
+      "after": 3034,
+      "effectiveMultiplier": 3034,
+      "contributors": [
+        {
+          "id": "miyabi-miyoushe-vision-smoke-1:base-regular",
+          "source": {
+            "sourceId": "examples.ai-plugin.vision",
+            "sourceVersion": "v1.2.3",
+            "dataPath": "visionFixtures.miyabi-miyoushe.smokeSegment"
+          },
+          "value": 3034,
+          "operation": "add",
+          "active": true
+        }
+      ],
+      "traceRefs": [
+        "trace-1"
+      ]
+    },
+    {
+      "bucketId": "damageBonusZone",
+      "before": 1,
+      "after": 1,
+      "effectiveMultiplier": 1,
+      "contributors": [
+        {
+          "id": "miyabi-miyoushe-vision-smoke-1:attribute-damage-bonus",
+          "source": {
+            "sourceId": "examples.ai-plugin.vision",
+            "sourceVersion": "v1.2.3",
+            "dataPath": "visionFixtures.miyabi-miyoushe.smokeSegment"
+          },
+          "value": 0,
+          "operation": "add",
+          "active": true
+        }
+      ],
+      "traceRefs": [
+        "trace-2"
+      ]
+    },
+    {
+      "bucketId": "critZone",
+      "before": 1,
+      "after": 2.238952,
+      "effectiveMultiplier": 2.238952,
+      "contributors": [
+        {
+          "id": "miyabi-miyoushe-vision-smoke-1:crit-expected",
+          "source": {
+            "sourceId": "examples.ai-plugin.vision",
+            "sourceVersion": "v1.2.3",
+            "dataPath": "visionFixtures.miyabi-miyoushe.smokeSegment"
+          },
+          "value": 2.238952,
+          "operation": "multiply",
+          "active": true
+        }
+      ],
+      "traceRefs": [
+        "trace-3"
+      ]
+    },
+    {
+      "bucketId": "defenseZone",
+      "before": 1,
+      "after": 0.5324827915510942,
+      "effectiveMultiplier": 0.5324827915510942,
+      "contributors": [
+        {
+          "id": "miyabi-miyoushe-vision-smoke-1:base-defense",
+          "source": {
+            "sourceId": "examples.ai-plugin.vision",
+            "sourceVersion": "v1.2.3",
+            "dataPath": "visionFixtures.miyabi-miyoushe.smokeSegment"
+          },
+          "value": 952.8,
+          "operation": "add",
+          "active": true
+        }
+      ],
+      "traceRefs": [
+        "trace-4"
+      ]
+    },
+    {
+      "bucketId": "resistanceZone",
+      "before": 1,
+      "after": 1,
+      "effectiveMultiplier": 1,
+      "contributors": [
+        {
+          "id": "miyabi-miyoushe-vision-smoke-1:resistance",
+          "source": {
+            "sourceId": "examples.ai-plugin.vision",
+            "sourceVersion": "v1.2.3",
+            "dataPath": "visionFixtures.miyabi-miyoushe.smokeSegment"
+          },
+          "value": 0,
+          "operation": "add",
+          "active": true
+        }
+      ],
+      "traceRefs": [
+        "trace-5"
+      ]
+    },
+    {
+      "bucketId": "vulnerabilityZone",
+      "before": 1,
+      "after": 1,
+      "effectiveMultiplier": 1,
+      "contributors": [
+        {
+          "id": "miyabi-miyoushe-vision-smoke-1:corrupted-shield-damage-reduction",
+          "source": {
+            "sourceId": "examples.ai-plugin.vision",
+            "sourceVersion": "v1.2.3",
+            "dataPath": "visionFixtures.miyabi-miyoushe.smokeSegment"
+          },
+          "value": 0,
+          "operation": "add",
+          "active": false
+        }
+      ],
+      "traceRefs": [
+        "trace-6"
+      ]
+    },
+    {
+      "bucketId": "dazeVulnerabilityZone",
+      "before": 1,
+      "after": 1,
+      "effectiveMultiplier": 1,
+      "contributors": [
+        {
+          "id": "miyabi-miyoushe-vision-smoke-1:daze-vulnerability",
+          "source": {
+            "sourceId": "examples.ai-plugin.vision",
+            "sourceVersion": "v1.2.3",
+            "dataPath": "visionFixtures.miyabi-miyoushe.smokeSegment"
+          },
+          "value": 1,
+          "operation": "multiply",
+          "active": true
+        }
+      ],
+      "traceRefs": [
+        "trace-7"
+      ]
+    },
+    {
+      "bucketId": "specialZone",
+      "before": 1,
+      "after": 1,
+      "effectiveMultiplier": 1,
+      "contributors": [
+        {
+          "id": "miyabi-miyoushe-vision-smoke-1:distance-decay",
+          "source": {
+            "sourceId": "examples.ai-plugin.vision",
+            "sourceVersion": "v1.2.3",
+            "dataPath": "visionFixtures.miyabi-miyoushe.smokeSegment"
+          },
+          "value": 1,
+          "operation": "multiply",
+          "active": true
+        }
+      ],
+      "traceRefs": [
+        "trace-8"
+      ]
+    }
+  ],
+  "modifiers": [],
+  "trace": [
+    {
+      "id": "trace-1",
+      "kind": "bucketContribution",
+      "path": "buckets[?bucketId=baseDamageZone].contributors[0]",
+      "inputs": {
+        "bucketId": "baseDamageZone",
+        "contributorId": "miyabi-miyoushe-vision-smoke-1:base-regular",
+        "operation": "add",
+        "active": true
+      },
+      "rawValue": 3034,
+      "displayValue": 3034,
+      "source": {
+        "sourceId": "examples.ai-plugin.vision",
+        "sourceVersion": "v1.2.3",
+        "dataPath": "visionFixtures.miyabi-miyoushe.smokeSegment"
+      }
+    },
+    {
+      "id": "trace-2",
+      "kind": "bucketContribution",
+      "path": "buckets[?bucketId=damageBonusZone].contributors[0]",
+      "inputs": {
+        "bucketId": "damageBonusZone",
+        "contributorId": "miyabi-miyoushe-vision-smoke-1:attribute-damage-bonus",
+        "operation": "add",
+        "active": true
+      },
+      "rawValue": 0,
+      "displayValue": 1,
+      "source": {
+        "sourceId": "examples.ai-plugin.vision",
+        "sourceVersion": "v1.2.3",
+        "dataPath": "visionFixtures.miyabi-miyoushe.smokeSegment"
+      }
+    },
+    {
+      "id": "trace-3",
+      "kind": "bucketContribution",
+      "path": "buckets[?bucketId=critZone].contributors[0]",
+      "inputs": {
+        "bucketId": "critZone",
+        "contributorId": "miyabi-miyoushe-vision-smoke-1:crit-expected",
+        "operation": "multiply",
+        "active": true
+      },
+      "rawValue": 2.238952,
+      "displayValue": 2.238952,
+      "source": {
+        "sourceId": "examples.ai-plugin.vision",
+        "sourceVersion": "v1.2.3",
+        "dataPath": "visionFixtures.miyabi-miyoushe.smokeSegment"
+      }
+    },
+    {
+      "id": "trace-4",
+      "kind": "bucketContribution",
+      "path": "buckets[?bucketId=defenseZone].contributors[0]",
+      "inputs": {
+        "bucketId": "defenseZone",
+        "contributorId": "miyabi-miyoushe-vision-smoke-1:base-defense",
+        "operation": "add",
+        "active": true
+      },
+      "rawValue": 952.8,
+      "displayValue": 0.5324827915510942,
+      "source": {
+        "sourceId": "examples.ai-plugin.vision",
+        "sourceVersion": "v1.2.3",
+        "dataPath": "visionFixtures.miyabi-miyoushe.smokeSegment"
+      }
+    },
+    {
+      "id": "trace-5",
+      "kind": "bucketContribution",
+      "path": "buckets[?bucketId=resistanceZone].contributors[0]",
+      "inputs": {
+        "bucketId": "resistanceZone",
+        "contributorId": "miyabi-miyoushe-vision-smoke-1:resistance",
+        "operation": "add",
+        "active": true
+      },
+      "rawValue": 0,
+      "displayValue": 1,
+      "source": {
+        "sourceId": "examples.ai-plugin.vision",
+        "sourceVersion": "v1.2.3",
+        "dataPath": "visionFixtures.miyabi-miyoushe.smokeSegment"
+      }
+    },
+    {
+      "id": "trace-6",
+      "kind": "bucketContribution",
+      "path": "buckets[?bucketId=vulnerabilityZone].contributors[0]",
+      "inputs": {
+        "bucketId": "vulnerabilityZone",
+        "contributorId": "miyabi-miyoushe-vision-smoke-1:corrupted-shield-damage-reduction",
+        "operation": "add",
+        "active": false
+      },
+      "rawValue": 0,
+      "displayValue": 1,
+      "source": {
+        "sourceId": "examples.ai-plugin.vision",
+        "sourceVersion": "v1.2.3",
+        "dataPath": "visionFixtures.miyabi-miyoushe.smokeSegment"
+      }
+    },
+    {
+      "id": "trace-7",
+      "kind": "bucketContribution",
+      "path": "buckets[?bucketId=dazeVulnerabilityZone].contributors[0]",
+      "inputs": {
+        "bucketId": "dazeVulnerabilityZone",
+        "contributorId": "miyabi-miyoushe-vision-smoke-1:daze-vulnerability",
+        "operation": "multiply",
+        "active": true
+      },
+      "rawValue": 1,
+      "displayValue": 1,
+      "source": {
+        "sourceId": "examples.ai-plugin.vision",
+        "sourceVersion": "v1.2.3",
+        "dataPath": "visionFixtures.miyabi-miyoushe.smokeSegment"
+      }
+    },
+    {
+      "id": "trace-8",
+      "kind": "bucketContribution",
+      "path": "buckets[?bucketId=specialZone].contributors[0]",
+      "inputs": {
+        "bucketId": "specialZone",
+        "contributorId": "miyabi-miyoushe-vision-smoke-1:distance-decay",
+        "operation": "multiply",
+        "active": true
+      },
+      "rawValue": 1,
+      "displayValue": 1,
+      "source": {
+        "sourceId": "examples.ai-plugin.vision",
+        "sourceVersion": "v1.2.3",
+        "dataPath": "visionFixtures.miyabi-miyoushe.smokeSegment"
+      }
+    },
+    {
+      "id": "trace-9",
+      "kind": "formula",
+      "path": "attackSegments[0].rawDamage",
+      "inputs": {
+        "baseDamage": 3034,
+        "damageType": "regular",
+        "multiplier": 1,
+        "bucketIds": [
+          "baseDamageZone",
+          "damageBonusZone",
+          "critZone",
+          "defenseZone",
+          "resistanceZone",
+          "vulnerabilityZone",
+          "dazeVulnerabilityZone",
+          "specialZone"
+        ]
+      },
+      "formula": "baseDamageZone * damageBonusZone * critZone * defenseZone * resistanceZone * vulnerabilityZone * dazeVulnerabilityZone * specialZone",
+      "rawValue": 3617.145149304419,
+      "refs": [
+        "trace-1",
+        "trace-2",
+        "trace-3",
+        "trace-4",
+        "trace-5",
+        "trace-6",
+        "trace-7",
+        "trace-8"
+      ]
+    },
+    {
+      "id": "trace-10",
+      "kind": "rounding",
+      "path": "attackSegments[0].segmentDisplayDamage",
+      "rawValue": 3617.145149304419,
+      "displayValue": 3618,
+      "rounding": {
+        "mode": "ceilPerSegment",
+        "input": 3617.145149304419,
+        "output": 3618,
+        "reason": "Game display rounds each attack segment up before summing."
+      }
+    }
+  ],
+  "warnings": [],
+  "errors": []
+}

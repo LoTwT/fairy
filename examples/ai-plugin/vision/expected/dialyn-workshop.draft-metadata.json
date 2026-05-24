@@ -1,0 +1,117 @@
+{
+  "schemaVersion": "v1.2.3-vision-draft-metadata-v1",
+  "fixtureName": "vision-workshop-dialyn",
+  "sourceDetection": {
+    "sourceId": "zzz-workshop",
+    "sourceLabel": "绝区零工坊",
+    "confidence": 0.95,
+    "cues": [
+      "branding:workshop-header",
+      "layout:phone-status-bar",
+      "layout:agent-roster-row-top",
+      "layout:ace-rating-text"
+    ]
+  },
+  "piiDetection": {
+    "kinds": [
+      "uid"
+    ],
+    "redactionStatus": "redacted",
+    "rawValuesDiscarded": true
+  },
+  "perFieldConfidence": {
+    "actor.id": "high",
+    "actor.level": "high",
+    "actor.mindscape.level": "high",
+    "actor.attribute": "medium",
+    "actor.agentSpecialty": "medium",
+    "actor.skillLevels.basic": "medium",
+    "actor.skillLevels.dodge": "medium",
+    "actor.skillLevels.assist": "medium",
+    "actor.skillLevels.special": "medium",
+    "actor.skillLevels.ultimate": "medium",
+    "wEngine.id": "high",
+    "wEngine.level": "high",
+    "wEngine.phase": "high",
+    "driveDiscs[*].setId": "high",
+    "driveDiscs[*].slot": "high",
+    "driveDiscs[*].level": "high",
+    "driveDiscs[*].mainStat": "high",
+    "driveDiscs[*].substats[*].value": "high",
+    "driveDiscs[*].substats[*].rollCount": "high",
+    "panel.attack": "high",
+    "panel.maxHp": "high",
+    "panel.defense": "high",
+    "panel.impact": "high",
+    "panel.critRate": "high",
+    "panel.critDamage": "high",
+    "panel.anomalyMastery": "high",
+    "panel.anomalyProficiency": "high"
+  },
+  "evidence": {
+    "statSplits": [
+      {
+        "stat": "maxHp",
+        "base": 8250,
+        "bonus": 3414,
+        "total": 11664
+      },
+      {
+        "stat": "attack",
+        "base": 1471,
+        "bonus": 952,
+        "total": 2423
+      },
+      {
+        "stat": "defense",
+        "base": 612,
+        "bonus": 184,
+        "total": 796
+      }
+    ],
+    "substatRollsSample": [
+      {
+        "slot": 1,
+        "setId": "33400",
+        "substats": [
+          {
+            "stat": "critDamage",
+            "rollCount": 2,
+            "valuePercent": 14.4
+          },
+          {
+            "stat": "attack",
+            "rollCount": 1,
+            "valuePercent": 6
+          },
+          {
+            "stat": "critRate",
+            "rollCount": 1,
+            "valuePercent": 4.8
+          }
+        ]
+      }
+    ],
+    "skillLevelsObserved": [
+      12,
+      11,
+      12,
+      12,
+      12
+    ],
+    "driveDiscSetCounts": {
+      "33200": 4,
+      "33400": 2
+    },
+    "localRecoveryReference": {
+      "note": "local-only recovered screenshot; raw image is not committed",
+      "file": "workshop-1-6701bde2.jpg"
+    }
+  },
+  "nextStep": "Hand off to fairy-snapshot for review/edit and any missing critical fields; user will likely supply enemy + attack segment context.",
+  "fallbackTrigger": null,
+  "notes": [
+    "F2 happy-path 绝区零工坊 fixture for 琉音; raw account values discarded.",
+    "Calc baseline is an individual fixture smoke and is not part of a cross-source parity group unless explicitly configured."
+  ]
+}
