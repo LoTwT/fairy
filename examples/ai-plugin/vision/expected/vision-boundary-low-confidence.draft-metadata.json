@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "v1.2.3-vision-draft-metadata-v1",
+  "fixtureName": "vision-boundary-low-confidence",
+  "shouldNotCalc": true,
+  "snapshotStatus": "blocked",
+  "calcStatus": "not-run",
+  "fallbackTrigger": "low-confidence",
+  "sourceDetection": {
+    "sourceId": "zzz-workshop",
+    "sourceLabel": "绝区零工坊",
+    "confidence": 0.88,
+    "cues": [
+      "branding:zzz-workshop-header",
+      "layout:workshop-stat-grid",
+      "layout:workshop-drive-disc-cards"
+    ]
+  },
+  "piiDetection": {
+    "kinds": ["uid"],
+    "redactionStatus": "redacted",
+    "rawValuesDiscarded": true
+  },
+  "perFieldConfidence": {
+    "actor.id": "high",
+    "wEngine.id": "high",
+    "driveDiscs[*].setId": "medium",
+    "panel.attack": "low",
+    "panel.critRate": "low",
+    "driveDiscs[5].mainStat": "low"
+  },
+  "evidence": {
+    "blockingReasons": [
+      "Glare and compression artifacts make attack and crit-rate values unreliable.",
+      "The slot-6 main-stat label is partly obscured."
+    ],
+    "uncertainFields": ["panel.attack", "panel.critRate", "driveDiscs[5].mainStat"]
+  },
+  "nextStep": "请确认攻击力、暴击率和 6 号位主词条；这些字段确认前不应进入计算。",
+  "notes": [
+    "Synthetic low-confidence fixture derived from the supported workshop layout.",
+    "PII is reduced to kind/status only; raw values are discarded."
+  ]
+}

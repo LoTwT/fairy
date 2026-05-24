@@ -16,6 +16,7 @@ examples/ai-plugin/vision/
     vision-miyoushe-yixuan.md         # fairy-vision: 米游社 happy-path (zh)
     vision-workshop-{dialyn,miyabi,astra}.md
     vision-miyoushe-{dialyn,miyabi,astra}.md
+    vision-boundary-*.md              # fairy-vision: ask-don't-guess boundary cases
   snapshots/
     yixuan-workshop.snapshot.json     # strict BattleSnapshot draft from workshop screenshot
     yixuan-miyoushe.snapshot.json     # strict BattleSnapshot draft from miyoushe screenshot
@@ -26,6 +27,7 @@ examples/ai-plugin/vision/
     yixuan-workshop.calc.json             # CLI verbose CalcResult baseline from confirmed workshop snapshot
     yixuan-miyoushe.calc.json             # CLI verbose CalcResult baseline from confirmed miyoushe snapshot
     {dialyn,miyabi,astra}-{workshop,miyoushe}.{draft-metadata,calc}.json
+    vision-boundary-*.draft-metadata.json # blocked drafts; no strict snapshot/calc output
 ```
 
 ## Scope (P2 starter + F2 happy-path coverage)
@@ -57,12 +59,17 @@ These F2 fixtures are **individual extraction + calc baselines**, not cross-sour
 
 The F2 calc baselines use a deterministic `vision-smoke-hit` attack segment to prove that the extracted `BattleSnapshot` is schema-valid and CLI-calculable. They are regression fixtures for vision extraction, entity normalization, and privacy boundaries, not character-rotation modeling claims.
 
-Future P2.x / F2 boundary batches will add:
-- Partial-extraction fixtures (per `docs/ai-plugin/v1.2.3-vision/user-journeys.md` §5)
-- Visual ambiguity fixtures (per §6 — e.g., 米游社 "07" skill slot)
-- Source-unknown / NL fallback fixtures (per §3 + §7)
-- Low-confidence majority fixtures (per §7)
-- PII redaction edge cases (per §8 + V-G4)
+F2 also adds **boundary fixtures** that regression-test the failure policy from the dogfood plan:
+
+| Fixture | Boundary | Required behavior |
+|---|---|---|
+| `vision-boundary-unknown-source` | unsupported / unknown source | low-confidence `sourceId=unknown`; ask for manual entry or supported screenshot; no snapshot/calc |
+| `vision-boundary-low-confidence` | blurry supported source | name low-confidence fields; ask for confirmation; no snapshot/calc |
+| `vision-boundary-missing-critical` | cropped critical fields | ask for exact missing fields; no defaulting; no snapshot/calc |
+| `vision-boundary-ambiguous-field` | multiple plausible readings | record candidates; ask the user to choose; no silent selection |
+| `vision-boundary-pii-overlap` | redaction overlaps critical fields | preserve redaction, discard raw values, ask for blocked fields; no snapshot/calc |
+
+Boundary fixtures intentionally have `draftMetadata` only. They must set `shouldNotCalc: true`, a specific `fallbackTrigger`, and a concrete `nextStep`; no strict `BattleSnapshot` or `CalcResult` file is committed for them.
 
 ## How to read each fixture file
 

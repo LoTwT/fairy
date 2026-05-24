@@ -1,0 +1,46 @@
+{
+  "schemaVersion": "v1.2.3-vision-draft-metadata-v1",
+  "fixtureName": "vision-boundary-ambiguous-field",
+  "shouldNotCalc": true,
+  "snapshotStatus": "blocked",
+  "calcStatus": "not-run",
+  "fallbackTrigger": "ambiguous-field",
+  "sourceDetection": {
+    "sourceId": "miyoushe-record",
+    "sourceLabel": "米游社",
+    "confidence": 0.9,
+    "cues": [
+      "branding:miyoushe-watermark",
+      "layout:landscape-composite",
+      "layout:skill-strip"
+    ]
+  },
+  "piiDetection": {
+    "kinds": ["uid", "username"],
+    "redactionStatus": "redacted",
+    "rawValuesDiscarded": true
+  },
+  "perFieldConfidence": {
+    "actor.id": "low",
+    "actor.level": "high",
+    "skillLevels.corePassive": "low",
+    "wEngine.id": "medium",
+    "driveDiscs[*].setId": "medium"
+  },
+  "ambiguityCandidates": {
+    "skillLevels.corePassive": ["07", "01"],
+    "actor.id": ["1091", "1311"]
+  },
+  "evidence": {
+    "blockingReasons": [
+      "The core-passive skill slot has two plausible OCR readings.",
+      "Two adjacent agent portraits create an ambiguous active actor."
+    ],
+    "askUserFields": ["skillLevels.corePassive", "actor.id"]
+  },
+  "nextStep": "请确认核心技等级是 07 还是 01，并确认角色是雅还是耀嘉音。",
+  "notes": [
+    "Synthetic ambiguity fixture; candidates are stored without choosing one.",
+    "Ask-don't-guess behavior is required before any strict snapshot is produced."
+  ]
+}
