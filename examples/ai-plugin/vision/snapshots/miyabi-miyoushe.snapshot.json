@@ -1,0 +1,121 @@
+{
+  "schemaVersion": "1.0.0",
+  "gameVersion": "ZZZ-2.8",
+  "ruleSetVersion": "rules-v0.1",
+  "dataVersion": "nanoka@2.8",
+  "sourceVersion": "nanoka@2.8",
+  "locale": "zh",
+  "context": {
+    "gameMode": "hollowZeroAssault",
+    "activeRuleIds": [
+      "current-live"
+    ]
+  },
+  "team": [
+    {
+      "agentId": "1091",
+      "level": 60,
+      "agentSpecialty": "anomaly",
+      "attribute": "frost",
+      "skillLevels": {
+        "basic": 16,
+        "dodge": 16,
+        "assist": 16,
+        "special": 16,
+        "ultimate": 16
+      },
+      "mindscapeCinema": {
+        "level": 6
+      },
+      "wEngine": {
+        "id": "14109",
+        "level": 60,
+        "phase": 1
+      },
+      "driveDiscs": [
+        {
+          "id": "drive-slot-1",
+          "slot": 1,
+          "setId": "32700"
+        },
+        {
+          "id": "drive-slot-2",
+          "slot": 2,
+          "setId": "32800"
+        },
+        {
+          "id": "drive-slot-3",
+          "slot": 3,
+          "setId": "32700"
+        },
+        {
+          "id": "drive-slot-4",
+          "slot": 4,
+          "setId": "32700"
+        },
+        {
+          "id": "drive-slot-5",
+          "slot": 5,
+          "setId": "32800"
+        },
+        {
+          "id": "drive-slot-6",
+          "slot": 6,
+          "setId": "32700"
+        }
+      ],
+      "panel": {
+        "attack": 3034,
+        "maxHp": 10782,
+        "defense": 805,
+        "impact": 86,
+        "critRate": 0.722,
+        "critDamage": 1.716,
+        "anomalyMastery": 116,
+        "anomalyProficiency": 247,
+        "penetrationRate": 0.24,
+        "flatPenetration": 27,
+        "energyRegen": 1.2,
+        "iceDamageBonus": 0
+      }
+    }
+  ],
+  "activeActor": {
+    "agentId": "1091"
+  },
+  "attackSegments": [
+    {
+      "id": "miyabi-miyoushe-vision-smoke-1",
+      "actor": {
+        "kind": "agent",
+        "agentId": "1091"
+      },
+      "skillId": "vision-smoke-hit",
+      "levelKey": "basic",
+      "multiplier": 1,
+      "attribute": "frost",
+      "tags": [
+        "basic"
+      ],
+      "damageType": "regular",
+      "source": {
+        "sourceId": "examples.ai-plugin.vision",
+        "sourceVersion": "v1.2.3",
+        "dataPath": "visionFixtures.miyabi-miyoushe.smokeSegment"
+      }
+    }
+  ],
+  "enemy": {
+    "enemyId": "30004",
+    "level": 60,
+    "rank": "special",
+    "maxHp": 1000000,
+    "resistance": {
+      "ice": 0
+    }
+  },
+  "options": {
+    "includeTrace": true,
+    "lang": "zh"
+  }
+}

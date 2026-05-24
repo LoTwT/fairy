@@ -1,0 +1,435 @@
+{
+  "schemaVersion": "1.0.0",
+  "gameVersion": "ZZZ-2.8",
+  "ruleSetVersion": "rules-v0.1",
+  "dataVersion": "nanoka@2.8",
+  "sourceVersion": "nanoka@2.8",
+  "calculationId": "calc-1",
+  "locale": "zh",
+  "summary": {
+    "activeActorId": "1311",
+    "enemyId": "30004",
+    "damageType": "regular",
+    "lanes": {
+      "nonCrit": {
+        "rawDamage": 1376.6382782828864,
+        "displayDamage": 1377
+      },
+      "crit": {
+        "rawDamage": 2791.8224283576938,
+        "displayDamage": 2792
+      }
+    },
+    "rawTotalDamage": 1990.828199415353,
+    "displayTotalDamage": 1991,
+    "expectedDamage": 1990.828199415353,
+    "critDamage": 2791.8224283576938,
+    "nonCritDamage": 1376.6382782828864,
+    "dazeValue": 0,
+    "anomalyBuildup": 0,
+    "disorderDamage": 0,
+    "trueDamage": 0
+  },
+  "attackSegments": [
+    {
+      "id": "astra-miyoushe-vision-smoke-1",
+      "actorId": "1311",
+      "attribute": "ether",
+      "tags": [
+        "basic"
+      ],
+      "damageType": "regular",
+      "rawDamage": 1990.828199415353,
+      "segmentDisplayDamage": 1991,
+      "roundingMode": "ceilPerSegment",
+      "baseDamage": 3013,
+      "expectedDamage": 1990.828199415353,
+      "critDamage": 2791.8224283576938,
+      "nonCritDamage": 1376.6382782828864,
+      "traceRefs": [
+        "trace-1",
+        "trace-2",
+        "trace-3",
+        "trace-4",
+        "trace-5",
+        "trace-6",
+        "trace-7",
+        "trace-8",
+        "trace-9",
+        "trace-10"
+      ]
+    }
+  ],
+  "buckets": [
+    {
+      "bucketId": "baseDamageZone",
+      "before": 0,
+      "after": 3013,
+      "effectiveMultiplier": 3013,
+      "contributors": [
+        {
+          "id": "astra-miyoushe-vision-smoke-1:base-regular",
+          "source": {
+            "sourceId": "examples.ai-plugin.vision",
+            "sourceVersion": "v1.2.3",
+            "dataPath": "visionFixtures.astra-miyoushe.smokeSegment"
+          },
+          "value": 3013,
+          "operation": "add",
+          "active": true
+        }
+      ],
+      "traceRefs": [
+        "trace-1"
+      ]
+    },
+    {
+      "bucketId": "damageBonusZone",
+      "before": 1,
+      "after": 1,
+      "effectiveMultiplier": 1,
+      "contributors": [
+        {
+          "id": "astra-miyoushe-vision-smoke-1:attribute-damage-bonus",
+          "source": {
+            "sourceId": "examples.ai-plugin.vision",
+            "sourceVersion": "v1.2.3",
+            "dataPath": "visionFixtures.astra-miyoushe.smokeSegment"
+          },
+          "value": 0,
+          "operation": "add",
+          "active": true
+        }
+      ],
+      "traceRefs": [
+        "trace-2"
+      ]
+    },
+    {
+      "bucketId": "critZone",
+      "before": 1,
+      "after": 1.446152,
+      "effectiveMultiplier": 1.446152,
+      "contributors": [
+        {
+          "id": "astra-miyoushe-vision-smoke-1:crit-expected",
+          "source": {
+            "sourceId": "examples.ai-plugin.vision",
+            "sourceVersion": "v1.2.3",
+            "dataPath": "visionFixtures.astra-miyoushe.smokeSegment"
+          },
+          "value": 1.446152,
+          "operation": "multiply",
+          "active": true
+        }
+      ],
+      "traceRefs": [
+        "trace-3"
+      ]
+    },
+    {
+      "bucketId": "defenseZone",
+      "before": 1,
+      "after": 0.45689952813902635,
+      "effectiveMultiplier": 0.45689952813902635,
+      "contributors": [
+        {
+          "id": "astra-miyoushe-vision-smoke-1:base-defense",
+          "source": {
+            "sourceId": "examples.ai-plugin.vision",
+            "sourceVersion": "v1.2.3",
+            "dataPath": "visionFixtures.astra-miyoushe.smokeSegment"
+          },
+          "value": 952.8,
+          "operation": "add",
+          "active": true
+        }
+      ],
+      "traceRefs": [
+        "trace-4"
+      ]
+    },
+    {
+      "bucketId": "resistanceZone",
+      "before": 1,
+      "after": 1,
+      "effectiveMultiplier": 1,
+      "contributors": [
+        {
+          "id": "astra-miyoushe-vision-smoke-1:resistance",
+          "source": {
+            "sourceId": "examples.ai-plugin.vision",
+            "sourceVersion": "v1.2.3",
+            "dataPath": "visionFixtures.astra-miyoushe.smokeSegment"
+          },
+          "value": 0,
+          "operation": "add",
+          "active": true
+        }
+      ],
+      "traceRefs": [
+        "trace-5"
+      ]
+    },
+    {
+      "bucketId": "vulnerabilityZone",
+      "before": 1,
+      "after": 1,
+      "effectiveMultiplier": 1,
+      "contributors": [
+        {
+          "id": "astra-miyoushe-vision-smoke-1:corrupted-shield-damage-reduction",
+          "source": {
+            "sourceId": "examples.ai-plugin.vision",
+            "sourceVersion": "v1.2.3",
+            "dataPath": "visionFixtures.astra-miyoushe.smokeSegment"
+          },
+          "value": 0,
+          "operation": "add",
+          "active": false
+        }
+      ],
+      "traceRefs": [
+        "trace-6"
+      ]
+    },
+    {
+      "bucketId": "dazeVulnerabilityZone",
+      "before": 1,
+      "after": 1,
+      "effectiveMultiplier": 1,
+      "contributors": [
+        {
+          "id": "astra-miyoushe-vision-smoke-1:daze-vulnerability",
+          "source": {
+            "sourceId": "examples.ai-plugin.vision",
+            "sourceVersion": "v1.2.3",
+            "dataPath": "visionFixtures.astra-miyoushe.smokeSegment"
+          },
+          "value": 1,
+          "operation": "multiply",
+          "active": true
+        }
+      ],
+      "traceRefs": [
+        "trace-7"
+      ]
+    },
+    {
+      "bucketId": "specialZone",
+      "before": 1,
+      "after": 1,
+      "effectiveMultiplier": 1,
+      "contributors": [
+        {
+          "id": "astra-miyoushe-vision-smoke-1:distance-decay",
+          "source": {
+            "sourceId": "examples.ai-plugin.vision",
+            "sourceVersion": "v1.2.3",
+            "dataPath": "visionFixtures.astra-miyoushe.smokeSegment"
+          },
+          "value": 1,
+          "operation": "multiply",
+          "active": true
+        }
+      ],
+      "traceRefs": [
+        "trace-8"
+      ]
+    }
+  ],
+  "modifiers": [],
+  "trace": [
+    {
+      "id": "trace-1",
+      "kind": "bucketContribution",
+      "path": "buckets[?bucketId=baseDamageZone].contributors[0]",
+      "inputs": {
+        "bucketId": "baseDamageZone",
+        "contributorId": "astra-miyoushe-vision-smoke-1:base-regular",
+        "operation": "add",
+        "active": true
+      },
+      "rawValue": 3013,
+      "displayValue": 3013,
+      "source": {
+        "sourceId": "examples.ai-plugin.vision",
+        "sourceVersion": "v1.2.3",
+        "dataPath": "visionFixtures.astra-miyoushe.smokeSegment"
+      }
+    },
+    {
+      "id": "trace-2",
+      "kind": "bucketContribution",
+      "path": "buckets[?bucketId=damageBonusZone].contributors[0]",
+      "inputs": {
+        "bucketId": "damageBonusZone",
+        "contributorId": "astra-miyoushe-vision-smoke-1:attribute-damage-bonus",
+        "operation": "add",
+        "active": true
+      },
+      "rawValue": 0,
+      "displayValue": 1,
+      "source": {
+        "sourceId": "examples.ai-plugin.vision",
+        "sourceVersion": "v1.2.3",
+        "dataPath": "visionFixtures.astra-miyoushe.smokeSegment"
+      }
+    },
+    {
+      "id": "trace-3",
+      "kind": "bucketContribution",
+      "path": "buckets[?bucketId=critZone].contributors[0]",
+      "inputs": {
+        "bucketId": "critZone",
+        "contributorId": "astra-miyoushe-vision-smoke-1:crit-expected",
+        "operation": "multiply",
+        "active": true
+      },
+      "rawValue": 1.446152,
+      "displayValue": 1.446152,
+      "source": {
+        "sourceId": "examples.ai-plugin.vision",
+        "sourceVersion": "v1.2.3",
+        "dataPath": "visionFixtures.astra-miyoushe.smokeSegment"
+      }
+    },
+    {
+      "id": "trace-4",
+      "kind": "bucketContribution",
+      "path": "buckets[?bucketId=defenseZone].contributors[0]",
+      "inputs": {
+        "bucketId": "defenseZone",
+        "contributorId": "astra-miyoushe-vision-smoke-1:base-defense",
+        "operation": "add",
+        "active": true
+      },
+      "rawValue": 952.8,
+      "displayValue": 0.45689952813902635,
+      "source": {
+        "sourceId": "examples.ai-plugin.vision",
+        "sourceVersion": "v1.2.3",
+        "dataPath": "visionFixtures.astra-miyoushe.smokeSegment"
+      }
+    },
+    {
+      "id": "trace-5",
+      "kind": "bucketContribution",
+      "path": "buckets[?bucketId=resistanceZone].contributors[0]",
+      "inputs": {
+        "bucketId": "resistanceZone",
+        "contributorId": "astra-miyoushe-vision-smoke-1:resistance",
+        "operation": "add",
+        "active": true
+      },
+      "rawValue": 0,
+      "displayValue": 1,
+      "source": {
+        "sourceId": "examples.ai-plugin.vision",
+        "sourceVersion": "v1.2.3",
+        "dataPath": "visionFixtures.astra-miyoushe.smokeSegment"
+      }
+    },
+    {
+      "id": "trace-6",
+      "kind": "bucketContribution",
+      "path": "buckets[?bucketId=vulnerabilityZone].contributors[0]",
+      "inputs": {
+        "bucketId": "vulnerabilityZone",
+        "contributorId": "astra-miyoushe-vision-smoke-1:corrupted-shield-damage-reduction",
+        "operation": "add",
+        "active": false
+      },
+      "rawValue": 0,
+      "displayValue": 1,
+      "source": {
+        "sourceId": "examples.ai-plugin.vision",
+        "sourceVersion": "v1.2.3",
+        "dataPath": "visionFixtures.astra-miyoushe.smokeSegment"
+      }
+    },
+    {
+      "id": "trace-7",
+      "kind": "bucketContribution",
+      "path": "buckets[?bucketId=dazeVulnerabilityZone].contributors[0]",
+      "inputs": {
+        "bucketId": "dazeVulnerabilityZone",
+        "contributorId": "astra-miyoushe-vision-smoke-1:daze-vulnerability",
+        "operation": "multiply",
+        "active": true
+      },
+      "rawValue": 1,
+      "displayValue": 1,
+      "source": {
+        "sourceId": "examples.ai-plugin.vision",
+        "sourceVersion": "v1.2.3",
+        "dataPath": "visionFixtures.astra-miyoushe.smokeSegment"
+      }
+    },
+    {
+      "id": "trace-8",
+      "kind": "bucketContribution",
+      "path": "buckets[?bucketId=specialZone].contributors[0]",
+      "inputs": {
+        "bucketId": "specialZone",
+        "contributorId": "astra-miyoushe-vision-smoke-1:distance-decay",
+        "operation": "multiply",
+        "active": true
+      },
+      "rawValue": 1,
+      "displayValue": 1,
+      "source": {
+        "sourceId": "examples.ai-plugin.vision",
+        "sourceVersion": "v1.2.3",
+        "dataPath": "visionFixtures.astra-miyoushe.smokeSegment"
+      }
+    },
+    {
+      "id": "trace-9",
+      "kind": "formula",
+      "path": "attackSegments[0].rawDamage",
+      "inputs": {
+        "baseDamage": 3013,
+        "damageType": "regular",
+        "multiplier": 1,
+        "bucketIds": [
+          "baseDamageZone",
+          "damageBonusZone",
+          "critZone",
+          "defenseZone",
+          "resistanceZone",
+          "vulnerabilityZone",
+          "dazeVulnerabilityZone",
+          "specialZone"
+        ]
+      },
+      "formula": "baseDamageZone * damageBonusZone * critZone * defenseZone * resistanceZone * vulnerabilityZone * dazeVulnerabilityZone * specialZone",
+      "rawValue": 1990.828199415353,
+      "refs": [
+        "trace-1",
+        "trace-2",
+        "trace-3",
+        "trace-4",
+        "trace-5",
+        "trace-6",
+        "trace-7",
+        "trace-8"
+      ]
+    },
+    {
+      "id": "trace-10",
+      "kind": "rounding",
+      "path": "attackSegments[0].segmentDisplayDamage",
+      "rawValue": 1990.828199415353,
+      "displayValue": 1991,
+      "rounding": {
+        "mode": "ceilPerSegment",
+        "input": 1990.828199415353,
+        "output": 1991,
+        "reason": "Game display rounds each attack segment up before summing."
+      }
+    }
+  ],
+  "warnings": [],
+  "errors": []
+}

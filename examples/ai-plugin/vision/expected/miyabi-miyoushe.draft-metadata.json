@@ -1,0 +1,118 @@
+{
+  "schemaVersion": "v1.2.3-vision-draft-metadata-v1",
+  "fixtureName": "vision-miyoushe-miyabi",
+  "sourceDetection": {
+    "sourceId": "miyoushe-record",
+    "sourceLabel": "米游社",
+    "confidence": 0.95,
+    "cues": [
+      "branding:miyoushe-footer",
+      "layout:full-card-portrait",
+      "layout:agent-info-card-left",
+      "layout:disc-grid-2x3"
+    ]
+  },
+  "piiDetection": {
+    "kinds": [
+      "uid",
+      "username"
+    ],
+    "redactionStatus": "redacted",
+    "rawValuesDiscarded": true
+  },
+  "perFieldConfidence": {
+    "actor.id": "high",
+    "actor.level": "high",
+    "actor.mindscape.level": "high",
+    "actor.attribute": "medium",
+    "actor.agentSpecialty": "medium",
+    "actor.skillLevels.basic": "medium",
+    "actor.skillLevels.dodge": "medium",
+    "actor.skillLevels.assist": "medium",
+    "actor.skillLevels.special": "medium",
+    "actor.skillLevels.ultimate": "medium",
+    "wEngine.id": "high",
+    "wEngine.level": "high",
+    "wEngine.phase": "high",
+    "driveDiscs[*].setId": "high",
+    "driveDiscs[*].slot": "high",
+    "driveDiscs[*].level": "high",
+    "driveDiscs[*].mainStat": "high",
+    "driveDiscs[*].substats[*].value": "high",
+    "driveDiscs[*].substats[*].rollCount": "high",
+    "panel.attack": "high",
+    "panel.maxHp": "high",
+    "panel.defense": "high",
+    "panel.impact": "high",
+    "panel.critRate": "high",
+    "panel.critDamage": "high",
+    "panel.anomalyMastery": "high",
+    "panel.anomalyProficiency": "high"
+  },
+  "evidence": {
+    "statSplits": [
+      {
+        "stat": "maxHp",
+        "base": 7673,
+        "bonus": 3109,
+        "total": 10782
+      },
+      {
+        "stat": "attack",
+        "base": 1623,
+        "bonus": 1411,
+        "total": 3034
+      },
+      {
+        "stat": "defense",
+        "base": 606,
+        "bonus": 199,
+        "total": 805
+      }
+    ],
+    "substatRollsSample": [
+      {
+        "slot": 1,
+        "setId": "32700",
+        "substats": [
+          {
+            "stat": "critDamage",
+            "rollCount": 2,
+            "valuePercent": 14.4
+          },
+          {
+            "stat": "attack",
+            "rollCount": 1,
+            "valuePercent": 6
+          },
+          {
+            "stat": "critRate",
+            "rollCount": 1,
+            "valuePercent": 4.8
+          }
+        ]
+      }
+    ],
+    "skillLevelsObserved": [
+      16,
+      16,
+      16,
+      16,
+      16
+    ],
+    "driveDiscSetCounts": {
+      "32700": 4,
+      "32800": 2
+    },
+    "localRecoveryReference": {
+      "note": "local-only recovered screenshot; raw image is not committed",
+      "file": "miyoushe-1-883a2666.jpg"
+    }
+  },
+  "nextStep": "Hand off to fairy-snapshot for review/edit and any missing critical fields; user will likely supply enemy + attack segment context.",
+  "fallbackTrigger": null,
+  "notes": [
+    "F2 happy-path 米游社 fixture for 雅; raw account values discarded.",
+    "Calc baseline is an individual fixture smoke and is not part of a cross-source parity group unless explicitly configured."
+  ]
+}

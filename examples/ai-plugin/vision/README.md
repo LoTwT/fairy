@@ -14,19 +14,23 @@ examples/ai-plugin/vision/
   prompts/
     vision-workshop-yixuan.md         # fairy-vision: 绝区零工坊 happy-path (zh)
     vision-miyoushe-yixuan.md         # fairy-vision: 米游社 happy-path (zh)
+    vision-workshop-{dialyn,miyabi,astra}.md
+    vision-miyoushe-{dialyn,miyabi,astra}.md
   snapshots/
     yixuan-workshop.snapshot.json     # strict BattleSnapshot draft from workshop screenshot
     yixuan-miyoushe.snapshot.json     # strict BattleSnapshot draft from miyoushe screenshot
+    {dialyn,miyabi,astra}-{workshop,miyoushe}.snapshot.json
   expected/
     yixuan-workshop.draft-metadata.json   # draftMetadata: sourceDetection / piiDetection status / evidence
     yixuan-miyoushe.draft-metadata.json   # draftMetadata for miyoushe variant
     yixuan-workshop.calc.json             # CLI verbose CalcResult baseline from confirmed workshop snapshot
     yixuan-miyoushe.calc.json             # CLI verbose CalcResult baseline from confirmed miyoushe snapshot
+    {dialyn,miyabi,astra}-{workshop,miyoushe}.{draft-metadata,calc}.json
 ```
 
-## Scope (P2 starter — happy-path coverage)
+## Scope (P2 starter + F2 happy-path coverage)
 
-V1.2.3 P2 ships the **happy-path** cross-source pair for 仪玄 to demonstrate:
+V1.2.3 P2 shipped the **happy-path** cross-source pair for 仪玄 to demonstrate:
 
 | Property | Workshop variant | Miyoushe variant |
 |---|---|---|
@@ -38,8 +42,22 @@ V1.2.3 P2 ships the **happy-path** cross-source pair for 仪玄 to demonstrate:
 
 **Cross-source identity contract**: V-G1 source detection routes each screenshot through its source-specific layout map. Both fixtures yield the same canonical **identity + build composition** (agent `1371`, weapon `14137` R1, drive disc setIds `33100` + `32700`, slot layout, mindscape level 2). Source-displayed derived stats intentionally differ: 米游社 surfaces a `corePassive` skill slot that 工坊 does not show; both variants include `panel.etherDamageBonus: 0.3` (matching the slot-5 main stat), but `energyRegen` is rendered with different unit conventions (`1.2` 工坊 vs `2.0` 米游社) and `sheerForce` differs by 1 unit between sources from display rounding. Each variant's strict `BattleSnapshot` captures what the source actually displays, with per-source differences documented in `draftMetadata.evidence.crossSourceNotes`. The vision pipeline is source-agnostic at the **identity** boundary; it does not falsify a single canonical numeric panel.
 
-Future P2.x batches will add:
-- Additional agents (耀佳音 / 琉音 / 星见雅) per source — sample images already provided by lo-user
+F2 adds happy-path source/layout coverage for additional agents using the same no-raw-image fixture contract:
+
+| Fixture | Source | Agent | W-Engine | Drive Disc | Baseline |
+|---|---|---|---|---|---|
+| `miyabi-miyoushe` | 米游社 | 雅 / Miyabi (`1091`) | 霰落星殿 (`14109`) | 折枝剑歌 4pc + 静听嘉音 2pc | `miyabi-miyoushe.calc.json` |
+| `miyabi-workshop` | 绝区零工坊 | 雅 / Miyabi (`1091`) | 霰落星殿 (`14109`) | 折枝剑歌 4pc + 河豚电音 2pc | `miyabi-workshop.calc.json` |
+| `astra-miyoushe` | 米游社 | 耀嘉音 / Astra Yao (`1311`) | 好斗的阿炮 (`13115`) | 月光骑士颂 4pc + 静听嘉音 2pc | `astra-miyoushe.calc.json` |
+| `astra-workshop` | 绝区零工坊 | 耀嘉音 / Astra Yao (`1311`) | 好斗的阿炮 (`13115`) | 月光骑士颂 4pc + 静听嘉音 2pc | `astra-workshop.calc.json` |
+| `dialyn-miyoushe` | 米游社 | 琉音 / Dialyn (`1481`) | 昨夜来电 (`14148`) | 山大王 4pc + 月光骑士颂 2pc | `dialyn-miyoushe.calc.json` |
+| `dialyn-workshop` | 绝区零工坊 | 琉音 / Dialyn (`1481`) | 昨夜来电 (`14148`) | 山大王 4pc + 月光骑士颂 2pc | `dialyn-workshop.calc.json` |
+
+These F2 fixtures are **individual extraction + calc baselines**, not cross-source parity pairs. The recovered same-agent source screenshots are not guaranteed to be the same build, so `verify:ai-plugin` only applies cross-source parity to the original Yixuan pair.
+
+The F2 calc baselines use a deterministic `vision-smoke-hit` attack segment to prove that the extracted `BattleSnapshot` is schema-valid and CLI-calculable. They are regression fixtures for vision extraction, entity normalization, and privacy boundaries, not character-rotation modeling claims.
+
+Future P2.x / F2 boundary batches will add:
 - Partial-extraction fixtures (per `docs/ai-plugin/v1.2.3-vision/user-journeys.md` §5)
 - Visual ambiguity fixtures (per §6 — e.g., 米游社 "07" skill slot)
 - Source-unknown / NL fallback fixtures (per §3 + §7)

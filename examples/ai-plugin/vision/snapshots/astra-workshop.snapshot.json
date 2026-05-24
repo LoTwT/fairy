@@ -1,0 +1,120 @@
+{
+  "schemaVersion": "1.0.0",
+  "gameVersion": "ZZZ-2.8",
+  "ruleSetVersion": "rules-v0.1",
+  "dataVersion": "nanoka@2.8",
+  "sourceVersion": "nanoka@2.8",
+  "locale": "zh",
+  "context": {
+    "gameMode": "hollowZeroAssault",
+    "activeRuleIds": [
+      "current-live"
+    ]
+  },
+  "team": [
+    {
+      "agentId": "1311",
+      "level": 60,
+      "agentSpecialty": "support",
+      "attribute": "ether",
+      "skillLevels": {
+        "basic": 11,
+        "dodge": 3,
+        "assist": 3,
+        "special": 12,
+        "ultimate": 12
+      },
+      "mindscapeCinema": {
+        "level": 1
+      },
+      "wEngine": {
+        "id": "13115",
+        "level": 60,
+        "phase": 5
+      },
+      "driveDiscs": [
+        {
+          "id": "drive-slot-1",
+          "slot": 1,
+          "setId": "33400"
+        },
+        {
+          "id": "drive-slot-2",
+          "slot": 2,
+          "setId": "33400"
+        },
+        {
+          "id": "drive-slot-3",
+          "slot": 3,
+          "setId": "32800"
+        },
+        {
+          "id": "drive-slot-4",
+          "slot": 4,
+          "setId": "33400"
+        },
+        {
+          "id": "drive-slot-5",
+          "slot": 5,
+          "setId": "33400"
+        },
+        {
+          "id": "drive-slot-6",
+          "slot": 6,
+          "setId": "32800"
+        }
+      ],
+      "panel": {
+        "attack": 3425,
+        "maxHp": 11067,
+        "defense": 1030,
+        "impact": 83,
+        "critRate": 0.146,
+        "critDamage": 0.644,
+        "anomalyMastery": 93,
+        "anomalyProficiency": 110,
+        "penetrationRate": 0,
+        "energyRegen": 3.59,
+        "etherDamageBonus": 0
+      }
+    }
+  ],
+  "activeActor": {
+    "agentId": "1311"
+  },
+  "attackSegments": [
+    {
+      "id": "astra-workshop-vision-smoke-1",
+      "actor": {
+        "kind": "agent",
+        "agentId": "1311"
+      },
+      "skillId": "vision-smoke-hit",
+      "levelKey": "basic",
+      "multiplier": 1,
+      "attribute": "ether",
+      "tags": [
+        "basic"
+      ],
+      "damageType": "regular",
+      "source": {
+        "sourceId": "examples.ai-plugin.vision",
+        "sourceVersion": "v1.2.3",
+        "dataPath": "visionFixtures.astra-workshop.smokeSegment"
+      }
+    }
+  ],
+  "enemy": {
+    "enemyId": "30004",
+    "level": 60,
+    "rank": "special",
+    "maxHp": 1000000,
+    "resistance": {
+      "ether": 0
+    }
+  },
+  "options": {
+    "includeTrace": true,
+    "lang": "zh"
+  }
+}
