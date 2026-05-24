@@ -85,8 +85,9 @@ as kind / status only (no raw UID or username).
 The Fairy AI plugin (including the `fairy-vision` skill) remains source-level
 Claude-plugin work in the repository; it is not published as a standalone npm
 plugin package. v0.1.4 delivers the V1.2.3 vision stage scaffold, examples,
-fixture harness, and docs alignment, validated by the dogfood above. Word- or
-phoneme-level vision refinements and any later plugin patch remain forward work.
+fixture harness, and docs alignment, validated by the dogfood above. Additional
+source layouts, field-confidence and evidence refinements, and any later plugin
+patch remain forward work.
 
 ## Rollback
 
@@ -103,5 +104,4 @@ runbook.
 
 - Repository — https://github.com/LoTwT/fairy
 - Vision plan / docs — `docs/ai-plugin/v1.2.3-vision/`
-- Dogfooding — `docs/product/dogfooding-v1.md`, `docs/product/dogfooding-report-v1.md`
 - Release workflow — `docs/release/README.md`
