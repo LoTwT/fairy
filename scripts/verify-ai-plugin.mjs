@@ -231,10 +231,101 @@ const visionFixtures = [
     },
     userCopyIncludes: ["截图来源: 绝区零工坊", "UID 已识别并隐藏"],
   },
+  {
+    name: "boundary-unknown-source",
+    mode: "boundary",
+    fixtureName: "vision-boundary-unknown-source",
+    sourceId: "unknown",
+    sourceLabel: "未知来源",
+    prompt: "examples/ai-plugin/vision/prompts/vision-boundary-unknown-source.md",
+    metadata: "examples/ai-plugin/vision/expected/vision-boundary-unknown-source.draft-metadata.json",
+    expected: {
+      fallbackTrigger: "unsupported-source",
+      sourceConfidenceMax: 0.4,
+      piiKinds: [],
+      nextStepIncludes: ["手动录入", "清晰的角色面板截图"],
+    },
+    userCopyIncludes: ["暂时无法识别这张图来自支持的面板来源", "我不会根据这张图直接计算"],
+  },
+  {
+    name: "boundary-low-confidence",
+    mode: "boundary",
+    fixtureName: "vision-boundary-low-confidence",
+    sourceId: "zzz-workshop",
+    sourceLabel: "绝区零工坊",
+    prompt: "examples/ai-plugin/vision/prompts/vision-boundary-low-confidence.md",
+    metadata: "examples/ai-plugin/vision/expected/vision-boundary-low-confidence.draft-metadata.json",
+    expected: {
+      fallbackTrigger: "low-confidence",
+      sourceConfidenceMin: 0.8,
+      piiKinds: ["uid"],
+      lowConfidenceFields: ["panel.attack", "panel.critRate", "driveDiscs[5].mainStat"],
+      nextStepIncludes: ["攻击力", "暴击率", "6 号位主词条"],
+    },
+    userCopyIncludes: ["截图来源看起来是绝区零工坊", "攻击力、暴击率和 6 号位主词条读数不够可靠"],
+  },
+  {
+    name: "boundary-missing-critical",
+    mode: "boundary",
+    fixtureName: "vision-boundary-missing-critical",
+    sourceId: "miyoushe-record",
+    sourceLabel: "米游社",
+    prompt: "examples/ai-plugin/vision/prompts/vision-boundary-missing-critical.md",
+    metadata: "examples/ai-plugin/vision/expected/vision-boundary-missing-critical.draft-metadata.json",
+    expected: {
+      fallbackTrigger: "missing-critical",
+      sourceConfidenceMin: 0.8,
+      piiKinds: ["uid", "username"],
+      missingCriticalFields: ["wEngine.id", "driveDiscs[4].mainStat", "driveDiscs[5].mainStat"],
+      nextStepIncludes: ["音擎名称", "5 号位主词条", "6 号位主词条"],
+    },
+    userCopyIncludes: ["音擎名称、5 号位主词条和 6 号位主词条被裁掉", "请补充这些字段"],
+  },
+  {
+    name: "boundary-ambiguous-field",
+    mode: "boundary",
+    fixtureName: "vision-boundary-ambiguous-field",
+    sourceId: "miyoushe-record",
+    sourceLabel: "米游社",
+    prompt: "examples/ai-plugin/vision/prompts/vision-boundary-ambiguous-field.md",
+    metadata: "examples/ai-plugin/vision/expected/vision-boundary-ambiguous-field.draft-metadata.json",
+    expected: {
+      fallbackTrigger: "ambiguous-field",
+      sourceConfidenceMin: 0.8,
+      piiKinds: ["uid", "username"],
+      ambiguityCandidates: {
+        "skillLevels.corePassive": ["07", "01"],
+        "actor.id": ["1091", "1311"],
+      },
+      nextStepIncludes: ["核心技等级是 07 还是 01", "角色是雅还是耀嘉音"],
+    },
+    userCopyIncludes: ["我看到两处不确定信息", "请先确认后我再继续"],
+  },
+  {
+    name: "boundary-pii-overlap",
+    mode: "boundary",
+    fixtureName: "vision-boundary-pii-overlap",
+    sourceId: "zzz-workshop",
+    sourceLabel: "绝区零工坊",
+    prompt: "examples/ai-plugin/vision/prompts/vision-boundary-pii-overlap.md",
+    metadata: "examples/ai-plugin/vision/expected/vision-boundary-pii-overlap.draft-metadata.json",
+    expected: {
+      fallbackTrigger: "pii-overlap",
+      sourceConfidenceMin: 0.8,
+      piiKinds: ["uid", "username"],
+      missingCriticalFields: ["driveDiscs[3].substats", "driveDiscs[4].mainStat"],
+      nextStepIncludes: ["个人信息区域已隐藏", "4 号位副词条", "5 号位主词条"],
+    },
+    userCopyIncludes: ["个人信息区域已隐藏", "挡住了 4 号位副词条和 5 号位主词条"],
+  },
 ]
 const requiredVisionExampleFiles = [
   "examples/ai-plugin/vision/README.md",
-  ...visionFixtures.flatMap(fixture => [fixture.prompt, fixture.snapshot, fixture.metadata, fixture.calc]),
+  ...visionFixtures.flatMap(fixture => [
+    fixture.prompt,
+    fixture.metadata,
+    ...(fixture.mode === "calc" ? [fixture.snapshot, fixture.calc] : []),
+  ]),
 ]
 const entitySectionDomains = [
   { heading: "Agents (characters)", domain: "agents", type: "character" },
@@ -852,17 +943,89 @@ function verifyVisionPrompt(fixture) {
   includesAll(text, fixture.prompt, [
     `**Skill**: fairy-vision`,
     `**Source**: ${fixture.sourceId}`,
-    `sourceDetection.sourceId === "${fixture.sourceId}"`,
-    "parseBattleSnapshot",
-    "fairy calc <snapshot> --view verbose --lang zh",
-    "substatRollsSample",
   ])
+  if (fixture.mode === "calc") {
+    includesAll(text, fixture.prompt, [
+      `sourceDetection.sourceId === "${fixture.sourceId}"`,
+      "parseBattleSnapshot",
+      "fairy calc <snapshot> --view verbose --lang zh",
+      "substatRollsSample",
+    ])
+  }
+  else if (fixture.mode === "boundary") {
+    includesAll(text, fixture.prompt, [
+      "shouldNotCalc === true",
+      `fallbackTrigger === "${fixture.expected.fallbackTrigger}"`,
+      "No confirmed BattleSnapshot",
+      "No CalcResult",
+    ])
+  }
+  else {
+    assert(false, `${fixture.name}: unknown vision fixture mode ${fixture.mode}`)
+  }
   for (const snippet of fixture.userCopyIncludes)
     assert(text.includes(snippet), `${fixture.prompt}: missing review/edit copy snippet ${snippet}`)
 
   const copy = extractReviewEditCopy(fixture.prompt)
   assertNoUserFacingChainLeak(copy, fixture.prompt)
   assert(!copy.includes("5★ midpoint default"), `${fixture.prompt}: source-tool review copy must not use midpoint default language`)
+}
+
+function verifyVisionBoundaryMetadata(fixture) {
+  const metadata = readJson(fixture.metadata)
+  assertNoPiiKeys(metadata, fixture.metadata)
+  assert(metadata.schemaVersion === "v1.2.3-vision-draft-metadata-v1", `${fixture.metadata}: unexpected schemaVersion`)
+  assert(metadata.fixtureName === fixture.fixtureName, `${fixture.metadata}: fixtureName must match fixture`)
+  assert(metadata.shouldNotCalc === true, `${fixture.metadata}: shouldNotCalc must be true`)
+  assert(metadata.snapshotStatus === "blocked", `${fixture.metadata}: snapshotStatus must be blocked`)
+  assert(metadata.calcStatus === "not-run", `${fixture.metadata}: calcStatus must be not-run`)
+  assert(metadata.fallbackTrigger === fixture.expected.fallbackTrigger, `${fixture.metadata}: fallbackTrigger mismatch`)
+  assert(metadata.sourceDetection?.sourceId === fixture.sourceId, `${fixture.metadata}: sourceDetection.sourceId mismatch`)
+  assert(metadata.sourceDetection?.sourceLabel === fixture.sourceLabel, `${fixture.metadata}: sourceDetection.sourceLabel mismatch`)
+
+  if (fixture.expected.sourceConfidenceMin !== undefined)
+    assert(metadata.sourceDetection?.confidence >= fixture.expected.sourceConfidenceMin, `${fixture.metadata}: sourceDetection confidence must meet supported-source floor`)
+  if (fixture.expected.sourceConfidenceMax !== undefined)
+    assert(metadata.sourceDetection?.confidence <= fixture.expected.sourceConfidenceMax, `${fixture.metadata}: sourceDetection confidence must stay below unsupported-source ceiling`)
+
+  assertExactStringArray(metadata.piiDetection?.kinds, fixture.expected.piiKinds, `${fixture.metadata}: piiDetection.kinds`)
+  if ((fixture.expected.piiKinds ?? []).length > 0) {
+    assert(metadata.piiDetection?.redactionStatus === "redacted", `${fixture.metadata}: piiDetection.redactionStatus must be redacted`)
+    assert(metadata.piiDetection?.rawValuesDiscarded === true, `${fixture.metadata}: raw PII values must be discarded`)
+  }
+  else {
+    assert(metadata.piiDetection?.redactionStatus === "not-present", `${fixture.metadata}: piiDetection.redactionStatus must be not-present`)
+    assert(metadata.piiDetection?.rawValuesDiscarded === true, `${fixture.metadata}: raw PII discard flag must remain true`)
+  }
+
+  const confidenceValues = Object.values(metadata.perFieldConfidence ?? {})
+  assert(confidenceValues.length > 0, `${fixture.metadata}: perFieldConfidence is required`)
+  for (const value of confidenceValues)
+    assert(["high", "medium", "low"].includes(value), `${fixture.metadata}: invalid confidence value ${value}`)
+
+  for (const field of fixture.expected.lowConfidenceFields ?? [])
+    assert(metadata.perFieldConfidence?.[field] === "low", `${fixture.metadata}: ${field} must be low confidence`)
+
+  if (fixture.expected.missingCriticalFields !== undefined)
+    assertExactStringArray(metadata.missingCriticalFields, fixture.expected.missingCriticalFields, `${fixture.metadata}: missingCriticalFields`)
+
+  if (fixture.expected.ambiguityCandidates !== undefined) {
+    for (const [field, candidates] of Object.entries(fixture.expected.ambiguityCandidates)) {
+      const actual = metadata.ambiguityCandidates?.[field]
+      assertExactStringArray(actual, candidates, `${fixture.metadata}: ambiguityCandidates.${field}`)
+    }
+  }
+
+  assert(typeof metadata.nextStep === "string" && metadata.nextStep.length > 0, `${fixture.metadata}: nextStep is required`)
+  for (const snippet of fixture.expected.nextStepIncludes ?? [])
+    assert(metadata.nextStep.includes(snippet), `${fixture.metadata}: nextStep must mention ${snippet}`)
+
+  const blockingReasons = metadata.evidence?.blockingReasons ?? []
+  assert(Array.isArray(blockingReasons) && blockingReasons.length > 0, `${fixture.metadata}: evidence.blockingReasons is required`)
+
+  const serialized = JSON.stringify(metadata)
+  assert(!/displayTotalDamage|CalcResult|confirmedSnapshot|battleSnapshotDraft|trace-\d+/i.test(serialized), `${fixture.metadata}: boundary fixture must not embed calc or confirmed snapshot output`)
+  return metadata
 }
 
 function verifyVisionCalcFixture(fixture, snapshot) {
@@ -914,10 +1077,14 @@ function verifyVisionFixtures() {
   const calcResultsByName = new Map()
   for (const fixture of visionFixtures) {
     verifyVisionPrompt(fixture)
-    const snapshot = verifyVisionSnapshot(fixture)
-    verifyVisionDraftMetadata(fixture)
-    if (fixture.mode === "calc")
+    if (fixture.mode === "calc") {
+      const snapshot = verifyVisionSnapshot(fixture)
+      verifyVisionDraftMetadata(fixture)
       calcResultsByName.set(fixture.name, verifyVisionCalcFixture(fixture, snapshot))
+    }
+    else if (fixture.mode === "boundary") {
+      verifyVisionBoundaryMetadata(fixture)
+    }
   }
 
   const parityGroups = new Map()
