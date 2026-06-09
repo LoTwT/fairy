@@ -1,41 +1,38 @@
-# Fairy 文档导航
+# Fairy — documentation map
 
-Fairy 是绝区零 1-3 代理人静态快照伤害计算器。V1 目标是 `@randomplay/data`、`@randomplay/core`、`@randomplay/cli`，Web UI 与 AI plugin 后置。
+This is the single routing source. It says where things live; it does not hold
+the content itself. Other entry points point here and do not duplicate this map.
 
-## 快速入口
+## Where to look
 
-- V1 dogfooding 上手：[getting-started.md](getting-started.md)
-- 项目范围与里程碑：[product/v2.0.md](product/v2.0.md)
-- 术语权威：[glossary/glossary.md](glossary/glossary.md)
-- 数据契约：[data-contract/](data-contract/)
-- 架构与工程：[architecture/](architecture/)
-- 数据来源：[data-source/](data-source/)
-- AI plugin V1.2.2 plan：[ai-plugin/architecture.md](ai-plugin/architecture.md)
-- 发布流程：[release/README.md](release/README.md)
-- QA 策略：[qa/](qa/)
-- UX 文案与场景：[ux/](ux/)
+| You want | Go to | Holds |
+| --- | --- | --- |
+| Why a change was made / how to do it / how to verify it | `docs/rfcs/` | Decision records (one per change: decision + implementation design + execution plan + acceptance gates + rollout) |
+| What the old fairy was / which npm versions shipped | `docs/history/` | Read-only history. Never a source for new work. |
+| The iron rules for working here | [../AGENTS.md](../AGENTS.md) | Clean-slate, human-in-the-loop, npm version monotonicity |
 
-## V1 release gate 当前重点
+## Current state
 
-1. lo-user 单人 dogfooding 已给出 4/5，B-Calc blocker 当前为 0；V1 仍未经过广泛社区 dogfooding。
-2. V1 golden fixture 真数据复算最初收窄到 19 个锚点；V1.x Track B 已补 G13 异常阈值规则组合、G18 部位破坏真实伤害、G19 凶心疯汉失衡恢复时间、G20 装甲哈提失衡恢复时间、G24-G26 邦布 actor anchors。
-3. `packages/data/cleaned/audit/v1-agent-source-candidates.json`、`packages/data/cleaned/audit/*.acceptance.json` 与 `packages/data/cleaned/golden/v1-replay-report.json` 已生成；V0.1.0 Phase 4 runtime cutover 后 28 个 executable 锚点全部跑通，`releaseReady=true`，当前无 deferred golden anchor。
-4. `fairy calc` 默认 `--view brief`，输出 summary-first 的 non-crit / crit lanes；完整 trace 通过 `--view verbose` 查看。
-5. 安比 dogfooding fixture `examples/snapshots/dogfood-anby-core-f-basic16-dullahan-9528.json` 已进入 `packages/cli/src/examples.test.ts`，因此由根命令 `pnpm test` 固定覆盖。
-6. v0.0.1-v0.0.4 已发布；V0.1.0 release 流程跟随 canonical v3 runbook（见
-   [release/README.md](release/README.md)），由 tag-triggered OIDC CI 发布并执行 registry smoke。
+The project is resetting (see [rfcs/0001-clean-slate-reset.md](rfcs/0001-clean-slate-reset.md)).
+The new product direction and architecture come in a later RFC. There is no
+current build yet.
 
-## 关键文档
+## Conventions
 
-- 命名策略：[architecture/naming-policy.md](architecture/naming-policy.md)
-- Monorepo 开发指南：[architecture/monorepo-development.md](architecture/monorepo-development.md)
-- Pending 术语表：[data-contract/pending-term-resolution-table.md](data-contract/pending-term-resolution-table.md)
-- Cleaned schema spec：[data-contract/cleaned-schema-spec.md](data-contract/cleaned-schema-spec.md)
-- Source metadata contract：[data-source/source-metadata-contract.md](data-source/source-metadata-contract.md)
-- Robots / ToS check：[data-source/robots-tos-check.md](data-source/robots-tos-check.md)
-- Excel workbook source audit：[data-source/excel/](data-source/excel/)
-- 米游社危局强袭战 source snapshot：[data-source/mihoyo/](data-source/mihoyo/)
-- buhflipexplode 危局强袭战 source snapshot：[data-source/buhflipexplode/](data-source/buhflipexplode/)
-- V1 golden source coverage：[qa/golden-source-coverage.md](qa/golden-source-coverage.md)
-- Release workflow：[release/README.md](release/README.md)
-- Starter scenarios narrative：[ux/starter-scenarios.md](ux/starter-scenarios.md)
+- **One doc type for changes: `rfcs/`.** A change is one document. RFC ≠ spec:
+  an RFC is a point-in-time decision record (with its implementation design),
+  not a living contract. Status lives in each RFC's front matter
+  (`proposal` / `accepted` / `archived`).
+- **Execution lives in the RFC + Slock, not in a `plans/` folder.** Each RFC has
+  an Execution Plan section; live progress is tracked in Slock tasks and PRs.
+  An unusually large implementation design may use a sibling
+  `rfcs/{NNNN}-{slug}.impl.md`, still part of that RFC.
+- **Folders are created on demand, not pre-built empty.** Today only
+  `index.md`, `history/`, and `rfcs/` exist. Two future homes are defined here
+  so they are turnkey when needed:
+  - `specs/` — created only if a stable contract (schema / API / behavior)
+    becomes scattered across several RFCs or needs a single doc that code and
+    tests reference. Until then, accepted RFCs are the current truth.
+  - `runbooks/` — created when a repeatable operational process (release,
+    rollback, cleanup, QA gate, smoke) is reused a second time; it is then
+    distilled out of its RFC. One-off processes stay in their RFC.
