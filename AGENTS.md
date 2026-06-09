@@ -11,17 +11,20 @@ This file holds the durable rules. It does not duplicate the documentation map.
 
 These are non-negotiable for every change.
 
-1. **Clean-slate.** Do not reference or copy any pre-reset code. The previous
-   implementation exists only as history (git tags `v0.0.1`–`v0.1.4`, the
-   published npm versions, and `docs/history/`). Treat it as a record, never as
-   a source. Any logic copied from the old implementation violates the reset.
+1. **Clean-slate.** The pre-reset implementation is still in the tree
+   (`packages/`, `examples/`, `fixtures/`, the old `docs/` content) until the
+   clearing PR (RFC 0001, PR 2). Treat it strictly as legacy: never build on it,
+   reference it, or copy its logic. It is also preserved as history (git tags
+   `v0.0.1`–`v0.1.4`, the published npm versions, `docs/history/`). Any logic
+   copied from the old implementation violates the reset.
 2. **Human-in-the-loop.** Work in small, reviewable PRs — one concern per PR.
    Nothing merges without the maintainer's explicit review and approval. Write
    PR descriptions that state the exact diff scope and what to look at.
 3. **npm versions are monotonic.** Published versions of `@randomplay/core`,
-   `@randomplay/data`, and `@randomplay/cli` cannot be deleted, overwritten, or
-   re-published. The highest published version is `0.1.4`; the next publish must
-   be strictly greater. Never republish a `0.1.x`.
+   `@randomplay/data`, and `@randomplay/cli` are immutable: never delete,
+   overwrite, or re-publish any already-published version (`0.0.1`–`0.1.4`). The
+   highest published version is `0.1.4`; every future publish must be a new
+   version strictly greater than `0.1.4`.
 
 ## Progressive disclosure
 

@@ -14,8 +14,9 @@ the content itself. Other entry points point here and do not duplicate this map.
 ## Current state
 
 The project is resetting (see [rfcs/0001-clean-slate-reset.md](rfcs/0001-clean-slate-reset.md)).
-The new product direction and architecture come in a later RFC. There is no
-current build yet.
+The pre-reset code is still in the tree until the clearing PR (RFC 0001, PR 2)
+and is legacy only — not a source for new work. The new product direction and
+architecture come in a later RFC (0002).
 
 ## Conventions
 
