@@ -28,9 +28,12 @@ architecture come in a later RFC (0002).
   an Execution Plan section; live progress is tracked in Slock tasks and PRs.
   An unusually large implementation design may use a sibling
   `rfcs/{NNNN}-{slug}.impl.md`, still part of that RFC.
-- **Folders are created on demand, not pre-built empty.** Today only
-  `index.md`, `history/`, and `rfcs/` exist. Two future homes are defined here
-  so they are turnkey when needed:
+- **Folders are created on demand, not pre-built empty.** This documentation
+  model has only `index.md`, `history/`, and `rfcs/`. (Pre-reset docs subfolders
+  — `ai-plugin/`, `architecture/`, `data-contract/`, `data-source/`, `product/`,
+  `qa/`, `release/`, `ux/`, etc. — are still in `docs/` until the clearing PR
+  (RFC 0001, PR 2); they are legacy and are not part of this map.) Two future
+  homes are defined here so they are turnkey when needed:
   - `specs/` — created only if a stable contract (schema / API / behavior)
     becomes scattered across several RFCs or needs a single doc that code and
     tests reference. Until then, accepted RFCs are the current truth.
