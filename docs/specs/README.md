@@ -27,4 +27,4 @@ tracker (GitHub Issues / Slock task board) and in PRs.
 - [0001-clean-slate.md](0001-clean-slate.md) — the clean-slate reset: the working
   rules and the repository-reset contract.
 - [0002-project-initialization.md](0002-project-initialization.md) — the
-  Node/pnpm workspace root and initialization acceptance gates.
+  root workspace setup plan and initialization acceptance gates.

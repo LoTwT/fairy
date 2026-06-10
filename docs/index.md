@@ -19,7 +19,8 @@ The project has been reset to a clean slate (see
 docs have been removed; they survive only as history (git tags, npm, and
 [references/history.md](references/history.md)). The first post-reset
 implementation spec is [specs/0002-project-initialization.md](specs/0002-project-initialization.md):
-the Node/pnpm workspace root. Packages and the damage model come in later specs.
+the root workspace setup plan. The actual root config, packages, and damage
+model come in later PRs.
 
 ## Conventions
 
