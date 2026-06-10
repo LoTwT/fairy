@@ -5,20 +5,22 @@ the content itself. Other entry points point here and do not duplicate this map.
 
 ## Where to look
 
-| You want | Go to | Holds |
-| --- | --- | --- |
-| Requirements, conventions, standards, or interface design | `docs/specs/` | Specs: what something is and should remain true, plus lightweight design (function signatures, module boundaries) — no detailed code |
-| Supporting facts and background (incl. the pre-reset record) | `docs/references/` | Reference material: external docs, data, glossaries, history. Read-only; never a source |
-| The iron rules for working here | [../AGENTS.md](../AGENTS.md) | Clean-slate, human-in-the-loop, npm version monotonicity |
-| A task, chore, bug — or its owner / status | GitHub Issues (or the Slock task board) | Execution tracking. Not in docs |
+| You want                                                     | Go to                                   | Holds                                                                                                                                |
+| ------------------------------------------------------------ | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| Requirements, conventions, standards, or interface design    | `docs/specs/`                           | Specs: what something is and should remain true, plus lightweight design (function signatures, module boundaries) — no detailed code |
+| Supporting facts and background (incl. the pre-reset record) | `docs/references/`                      | Reference material: external docs, data, glossaries, history. Read-only; never a source                                              |
+| The iron rules for working here                              | [../AGENTS.md](../AGENTS.md)            | Clean-slate, human-in-the-loop, npm version monotonicity                                                                             |
+| A task, chore, bug — or its owner / status                   | GitHub Issues (or the Slock task board) | Execution tracking. Not in docs                                                                                                      |
 
 ## Current state
 
 The project has been reset to a clean slate (see
 [specs/0001-clean-slate.md](specs/0001-clean-slate.md)). The pre-reset code and
 docs have been removed; they survive only as history (git tags, npm, and
-[references/history.md](references/history.md)). The new product direction and
-architecture come in a later spec.
+[references/history.md](references/history.md)). The first post-reset
+implementation spec is [specs/0002-project-initialization.md](specs/0002-project-initialization.md):
+the root workspace setup plan. Package code and the damage model come in later
+PRs.
 
 ## Conventions
 
