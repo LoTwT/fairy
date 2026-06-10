@@ -29,5 +29,6 @@ tracker (GitHub Issues / Slock task board) and in PRs.
 - [0002-project-initialization.md](0002-project-initialization.md) — the
   root workspace setup plan and initialization acceptance gates.
 - [0003-damage-calculation.md](0003-damage-calculation.md) — core damage
-  calculation: the multiplier-zone formula, stat model, and package boundaries
-  (PART 01 of the data introduction; stagger/anomaly/etc. are later specs).
+  calculation: PART 01 (regular/sheer) + PART 03 (anomaly + disorder) formulas,
+  the stat model, and the data-driven zone pipeline (buildup/state/data tables
+  are later specs).
