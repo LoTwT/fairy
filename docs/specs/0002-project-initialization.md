@@ -10,10 +10,10 @@ This PR uses a spec-first flow: review this spec before adding execution commits
 Until that review completes, the PR remains docs-only. After approval, the root
 configuration can land in the same PR.
 
-It also does **not** define packages, the damage formula, TypeScript config, data
-ingestion, CLI behavior, runtime schemas, tests, bundling, release workflow, or
-deploy surface. Those come in later specs and PRs when there is code that needs
-them.
+It also does **not** define packages, the damage formula, project `tsconfig`
+setup, data ingestion, CLI behavior, runtime schemas, tests, bundling, release
+workflow, or deploy surface. Those come in later specs and PRs when there is code
+that needs them.
 
 ## Rationale
 
@@ -72,13 +72,18 @@ package.json
 pnpm-lock.yaml
 pnpm-workspace.yaml
 .node-version
-.oxlintrc.json
-.oxfmtrc.json
+oxlint.config.ts
+oxfmt.config.ts
 .gitignore
 ```
 
 `pnpm-workspace.yaml` may name `packages/*` before the folder exists, so the next
 package PR can add `packages/<name>` without reshaping workspace config.
+
+Use TypeScript config files for OXC tools (`oxlint.config.ts` and
+`oxfmt.config.ts`) because the Node-based `oxlint` and `oxfmt` packages support
+them and Node 24 can execute them. The execution phase must not add a separate TS
+loader, build step, or project `tsconfig` just to read these tool configs.
 
 `.gitignore` should cover at least `node_modules/`, `dist/`, `coverage/`,
 `.DS_Store`, and `*.log`.
@@ -114,6 +119,8 @@ The execution phase:
 - `pnpm lint` succeeds.
 - `pnpm format:check` succeeds.
 - `pnpm check` succeeds.
+- `oxlint.config.ts` and `oxfmt.config.ts` are read by the actual commands under
+  Node 24 without an extra TS loader, build step, or project `tsconfig`.
 - `simple-git-hooks` and `lint-staged` are configured for pre-commit staged-file
   lint and format checks.
 - `git diff --check origin/main...HEAD` succeeds.
@@ -121,5 +128,5 @@ The execution phase:
 - The root package is `private: true`.
 - The diff adds only the AGENTS coordination rule, root workspace initialization,
   and this spec/docs; it does not add packages, damage-formula implementation,
-  TypeScript config, data ingestion, runtime schemas, tests, bundling, release
+  project `tsconfig`, data ingestion, runtime schemas, tests, bundling, release
   workflows, or deploy config.
