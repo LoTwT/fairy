@@ -8,16 +8,19 @@ spec after the reset and defines the monorepo package boundaries.
 
 It covers PART 01 (伤害乘区) of the data introduction. It does **not** cover
 stagger (失衡), attribute anomalies (属性异常), energy, decay (秽息), part-break
-(部位破坏), or interrupt (打断) — those come in later specs (0003+).
+(部位破坏), or interrupt (打断) — those come in later specs (0004+).
 
-Source of truth for game numbers and edge cases:
+The authoritative reference for the game's formula facts and edge-case numbers is
 [../references/zzz-data-introduction.txt](../references/zzz-data-introduction.txt).
+This spec is Fairy's implementation contract for the damage model, derived from
+those facts.
 
 ## Rationale
 
 Core-first. Get the damage engine and its traceable zone breakdown right before
-layering stagger/anomaly/etc. The data introduction is the authoritative spec for
-the formula; this document structures it into an implementable contract. Small,
+layering stagger/anomaly/etc. The data introduction is the authoritative
+reference for the game's formula; this spec structures those facts into Fairy's
+implementable contract. Small,
 reviewable increments suit the human-in-the-loop rebuild.
 
 ## Contract

@@ -18,9 +18,10 @@ The project has been reset to a clean slate (see
 [specs/0001-clean-slate.md](specs/0001-clean-slate.md)). The pre-reset code and
 docs have been removed; they survive only as history (git tags, npm, and
 [references/history.md](references/history.md)). The first post-reset
-implementation spec is [specs/0002-project-initialization.md](specs/0002-project-initialization.md):
-the root workspace setup plan. Package code and the damage model come in later
-PRs.
+implementation spec is [specs/0002-project-initialization.md](specs/0002-project-initialization.md)
+(the root workspace setup); the core damage model is
+[specs/0003-damage-calculation.md](specs/0003-damage-calculation.md). Stagger,
+attribute anomalies, and the rest come in later specs.
 
 ## Conventions
 
