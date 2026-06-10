@@ -1,0 +1,77 @@
+# Spec 0001 — Clean-slate reset
+
+## Scope
+
+This spec governs the reset of fairy to a clean slate and the working rules for
+the rebuild. It covers the documentation skeleton, the iron rules, and how the
+old implementation is retired.
+
+It does **not** define the product or its architecture — what the new fairy is
+and how it is built comes in a later spec, once that direction is decided.
+
+## Rationale
+
+The maintainer chose a complete fresh start with full human-in-the-loop review,
+rather than refactoring the old code in place. Treating the old implementation as
+a baseline would constrain the rebuild and invite copy-forward. Archiving it
+cleanly removes that pull while keeping every published version recoverable
+(see [references/history.md](../references/history.md)).
+
+## Contract
+
+The stable rules for working in this repository:
+
+1. **Clean-slate.** The pre-reset implementation is legacy. Never build on it,
+   reference it, or copy its logic. It survives only as history (git tags
+   `v0.0.1`–`v0.1.4`, the published npm versions, and `references/history.md`).
+   Any logic copied from it violates the reset.
+2. **Human-in-the-loop.** Work in small, reviewable PRs — one concern each.
+   Nothing merges without the maintainer's explicit review. PR descriptions state
+   the exact diff scope and what to look at.
+3. **npm versions are monotonic.** Published versions of `@randomplay/core`,
+   `@randomplay/data`, and `@randomplay/cli` are immutable: never delete,
+   overwrite, or re-publish any already-published version (`0.0.1`–`0.1.4`). The
+   highest published version is `0.1.4`; every future publish must be a new
+   version strictly greater than `0.1.4`.
+
+Documentation conventions:
+
+- `docs/index.md` is the single routing source; `AGENTS.md` and `CLAUDE.md` point
+  to it and do not duplicate the map. Chain: `CLAUDE.md` → `AGENTS.md` →
+  `docs/index.md` → subfolders.
+- `docs/specs/` holds requirements / conventions / standards + lightweight design
+  (this folder). `docs/references/` holds supporting facts and background.
+- Folders are created on demand, not pre-built empty.
+
+## Implementation Notes
+
+The reset is staged so the maintainer reviews each step:
+
+1. **Skeleton PR (this one), additive.** Add the new agent docs (`AGENTS.md` as
+   the canonical real file, replacing the old `AGENTS.md → CLAUDE.md` symlink;
+   `CLAUDE.md` as a pointer; `README.md`), the routing source `docs/index.md`,
+   `docs/specs/` (this spec + its README), and `docs/references/history.md`. No
+   source code is deleted.
+2. **Clearing PR.** Remove the old code, old docs, and old build/release config
+   listed in [references/history.md](../references/history.md), leaving the
+   skeleton. The repository emerges clean.
+3. **Product spec.** Decide what the new fairy is and how it is built. New
+   implementation starts from the empty skeleton.
+
+## Acceptance
+
+**Skeleton PR**
+
+- Docs only; no source code deleted.
+- The `CLAUDE.md` → `AGENTS.md` → `docs/index.md` chain resolves; no duplicated
+  routing table; all intra-doc links resolve.
+- `references/history.md` matches the npm registry and git tags; highest is
+  `0.1.4`.
+- `AGENTS.md` is a real canonical file (no longer a symlink).
+
+**Clearing PR**
+
+- Only the inventory in `references/history.md` is removed; nothing new is added.
+- The pre-reset tree is recoverable at tag `v0.1.4` (tags `v0.0.1`–`v0.1.4`
+  already exist; no extra safety tag needed).
+- No remaining file references old code as a source.
