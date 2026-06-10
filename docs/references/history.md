@@ -44,20 +44,22 @@ The pre-reset tree is preserved by git and npm:
 
 Nothing is copied into this file beyond the records above; the code stays in git.
 
-## What the reset removes
+## What the reset removed
 
-The clearing PR removes the old implementation and its old documentation so the
-new build starts from an empty skeleton. At reset time the repository contained,
-among other things:
+The reset removed the old implementation, old docs, and old tooling so the new
+build starts from a clean skeleton. The repository contained, among other things:
 
 - **Code:** `packages/` (`@randomplay/core` / `data` / `cli`), `examples/`,
   `fixtures/`, `scripts/`.
 - **Old docs:** `docs/getting-started.md`, `docs/ai-plugin/`, `docs/product/`,
   `docs/qa/`, `docs/release/`, `docs/data-contract/`, `docs/data-source/`,
-  `docs/architecture/`, `docs/glossary/`, `docs/changelog/`, etc.
+  `docs/architecture/`, `docs/glossary/`, `docs/changelog/`, `docs/overview/`,
+  `docs/reference/`, `docs/ux/`.
 - **Old build/release config:** `package.json`, `pnpm-workspace.yaml`,
-  `tsconfig.base.json`, `bump.config.ts`, `cliff.toml`, `commitlint.config.js`,
-  `CHANGELOG.md`, `CONTRIBUTING.md`, and related tooling.
+  `pnpm-lock.yaml`, `tsconfig.base.json`, `bump.config.ts`, `cliff.toml`,
+  `commitlint.config.js`, `.npmignore`, `CHANGELOG.md`, `CONTRIBUTING.md`.
+- **Old tooling:** `.github/` (old CI workflows), `.claude-plugin/`, `.codex/`.
 
-The removal is executed as a separate, reviewable PR. The skeleton PR does not
-delete code.
+What remains is the skeleton: `AGENTS.md`, `CLAUDE.md`, `README.md`, `LICENSE`,
+`.gitignore`, and `docs/{index.md, specs/, references/}`. Everything removed is
+recoverable at tag `v0.1.4` (see Recovery above).

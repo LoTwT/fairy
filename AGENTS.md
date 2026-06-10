@@ -11,12 +11,10 @@ This file holds the durable rules. It does not duplicate the documentation map.
 
 These are non-negotiable for every change.
 
-1. **Clean-slate.** The pre-reset implementation is still in the tree
-   (`packages/`, `examples/`, `fixtures/`, the old `docs/` content) until the
-   clearing PR (see [docs/specs/0001-clean-slate.md](docs/specs/0001-clean-slate.md)).
-   Treat it strictly as legacy: never build on it, reference it, or copy its
-   logic. It is also preserved as history (git tags `v0.0.1`–`v0.1.4`, the
-   published npm versions, `docs/references/history.md`). Any logic copied from
+1. **Clean-slate.** The pre-reset implementation has been removed from the tree.
+   It survives only as history (git tags `v0.0.1`–`v0.1.4`, the published npm
+   versions, and [docs/references/history.md](docs/references/history.md)). Never
+   restore it as a source, build on it, or copy its logic. Any logic copied from
    the old implementation violates the reset.
 2. **Human-in-the-loop.** Work in small, reviewable PRs — one concern per PR.
    Nothing merges without the maintainer's explicit review and approval. Write

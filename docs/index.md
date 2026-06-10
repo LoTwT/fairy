@@ -14,10 +14,11 @@ the content itself. Other entry points point here and do not duplicate this map.
 
 ## Current state
 
-The project is resetting (see [specs/0001-clean-slate.md](specs/0001-clean-slate.md)).
-The pre-reset code is still in the tree until the clearing PR and is legacy only —
-not a source for new work. The new product direction and architecture come in a
-later spec.
+The project has been reset to a clean slate (see
+[specs/0001-clean-slate.md](specs/0001-clean-slate.md)). The pre-reset code and
+docs have been removed; they survive only as history (git tags, npm, and
+[references/history.md](references/history.md)). The new product direction and
+architecture come in a later spec.
 
 ## Conventions
 
@@ -29,9 +30,6 @@ later spec.
   live there, flat by default. See [references/README.md](references/README.md).
 - **Tasks and status never live in docs.** Small tasks, chores, and bugs — with
   owner and status — go to GitHub Issues (or the Slock task board), not docs.
-- **Folders are created on demand, not pre-built empty.** This documentation
-  model has only `specs/` and `references/` (plus this `index.md`). (Pre-reset
-  docs subfolders — `ai-plugin/`, `architecture/`, `data-contract/`,
-  `data-source/`, `product/`, `qa/`, `release/`, `ux/`, etc. — are still in
-  `docs/` until the clearing PR; they are legacy and not part of this map.) Add
-  another folder only when it has real content to hold.
+- **Folders are created on demand, not pre-built empty.** `docs/` has only
+  `specs/` and `references/` (plus this `index.md`). Add another folder only when
+  it has real content to hold.

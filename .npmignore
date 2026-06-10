@@ -1,9 +1,0 @@
-# Raw source archives are versioned in git for auditability, but they must not
-# enter package tarballs.
-packages/data/source/
-docs/reference/
-
-# Local / agent workspace artifacts.
-artifacts/
-notes/
-MEMORY.md

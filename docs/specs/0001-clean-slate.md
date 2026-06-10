@@ -21,12 +21,10 @@ cleanly removes that pull while keeping every published version recoverable
 
 The stable rules for working in this repository:
 
-1. **Clean-slate.** The pre-reset implementation is still in the tree
-   (`packages/`, `examples/`, `fixtures/`, the old `docs/` content) until the
-   clearing PR. Treat it strictly as legacy: never build on it, reference it, or
-   copy its logic. It is also preserved as history (git tags `v0.0.1`–`v0.1.4`,
-   the published npm versions, and `references/history.md`). Any logic copied from
-   it violates the reset.
+1. **Clean-slate.** The pre-reset implementation has been removed from the tree.
+   It survives only as history (git tags `v0.0.1`–`v0.1.4`, the published npm
+   versions, and `references/history.md`). Never restore it as a source, build on
+   it, or copy its logic. Any logic copied from it violates the reset.
 2. **Human-in-the-loop.** Work in small, reviewable PRs — one concern each.
    Nothing merges without the maintainer's explicit review. PR descriptions state
    the exact diff scope and what to look at.
@@ -47,33 +45,31 @@ Documentation conventions:
 
 ## Implementation Notes
 
-The reset is staged so the maintainer reviews each step:
+The reset happens in this PR, then product work follows:
 
-1. **Skeleton PR (this one), additive.** Add the new agent docs (`AGENTS.md` as
+1. **This PR — skeleton + clearing.** Establish the new skeleton (`AGENTS.md` as
    the canonical real file, replacing the old `AGENTS.md → CLAUDE.md` symlink;
-   `CLAUDE.md` as a pointer; `README.md`), the routing source `docs/index.md`,
-   `docs/specs/` (this spec + its README), and `docs/references/history.md`. No
-   source code is deleted.
-2. **Clearing PR.** Remove the old code, old docs, and old build/release config
-   listed in [references/history.md](../references/history.md), leaving the
-   skeleton. The repository emerges clean.
-3. **Product spec.** Decide what the new fairy is and how it is built. New
+   `CLAUDE.md` as a pointer; a minimal `README.md`; the routing source
+   `docs/index.md`; `docs/specs/`; `docs/references/`), and remove the old
+   implementation, old docs, old build/release config, and old tooling listed in
+   [references/history.md](../references/history.md). The repository emerges as a
+   clean skeleton.
+2. **Product spec (next).** Decide what the new fairy is and how it is built. New
    implementation starts from the empty skeleton.
 
 ## Acceptance
 
-**Skeleton PR**
+This PR:
 
-- Docs only; no source code deleted.
-- The `CLAUDE.md` → `AGENTS.md` → `docs/index.md` chain resolves; no duplicated
-  routing table; all intra-doc links resolve.
-- `references/history.md` matches the npm registry and git tags; highest is
-  `0.1.4`.
-- `AGENTS.md` is a real canonical file (no longer a symlink).
-
-**Clearing PR**
-
-- Only the inventory in `references/history.md` is removed; nothing new is added.
+- The new skeleton is present and only the skeleton remains: `AGENTS.md`,
+  `CLAUDE.md`, `README.md`, `LICENSE`, `.gitignore`, and `docs/{index.md, specs/,
+  references/}`.
+- Everything in the `references/history.md` removal inventory is gone; nothing
+  from the old implementation is copied into the new tree as a source.
 - The pre-reset tree is recoverable at tag `v0.1.4` (tags `v0.0.1`–`v0.1.4`
   already exist; no extra safety tag needed).
-- No remaining file references old code as a source.
+- The `CLAUDE.md` → `AGENTS.md` → `docs/index.md` chain resolves; no duplicated
+  routing table; all intra-doc links resolve.
+- `AGENTS.md` is a real canonical file (no longer a symlink).
+- `references/history.md` matches the npm registry and git tags; highest is
+  `0.1.4`.
