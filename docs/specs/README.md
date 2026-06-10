@@ -28,3 +28,6 @@ tracker (GitHub Issues / Slock task board) and in PRs.
   rules and the repository-reset contract.
 - [0002-project-initialization.md](0002-project-initialization.md) — the
   root workspace setup plan and initialization acceptance gates.
+- [0003-damage-calculation.md](0003-damage-calculation.md) — core damage
+  calculation: the multiplier-zone formula, stat model, and package boundaries
+  (PART 01 of the data introduction; stagger/anomaly/etc. are later specs).

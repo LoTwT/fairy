@@ -13,3 +13,6 @@ References hold facts and background — never task status, owners, or decisions
 
 - [history.md](history.md) — the pre-reset record: published npm versions, tags,
   recovery, and what the reset removed. Read-only; never a source.
+- [zzz-data-introduction.txt](zzz-data-introduction.txt) — ZZZ damage-mechanics
+  data introduction 2.0 (multiplier zones, stagger, attribute anomalies, energy,
+  part-break, interrupt). Source: NGA. The reference the calc specs are built on.
