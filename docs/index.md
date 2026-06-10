@@ -29,6 +29,9 @@ later spec.
   live there, flat by default. See [references/README.md](references/README.md).
 - **Tasks and status never live in docs.** Small tasks, chores, and bugs — with
   owner and status — go to GitHub Issues (or the Slock task board), not docs.
-- **Folders are created on demand, not pre-built empty.** Today `docs/` has only
-  `specs/` and `references/` (plus this `index.md`). Add another folder only when
-  it has real content to hold.
+- **Folders are created on demand, not pre-built empty.** This documentation
+  model has only `specs/` and `references/` (plus this `index.md`). (Pre-reset
+  docs subfolders — `ai-plugin/`, `architecture/`, `data-contract/`,
+  `data-source/`, `product/`, `qa/`, `release/`, `ux/`, etc. — are still in
+  `docs/` until the clearing PR; they are legacy and not part of this map.) Add
+  another folder only when it has real content to hold.

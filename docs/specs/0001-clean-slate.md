@@ -21,10 +21,12 @@ cleanly removes that pull while keeping every published version recoverable
 
 The stable rules for working in this repository:
 
-1. **Clean-slate.** The pre-reset implementation is legacy. Never build on it,
-   reference it, or copy its logic. It survives only as history (git tags
-   `v0.0.1`–`v0.1.4`, the published npm versions, and `references/history.md`).
-   Any logic copied from it violates the reset.
+1. **Clean-slate.** The pre-reset implementation is still in the tree
+   (`packages/`, `examples/`, `fixtures/`, the old `docs/` content) until the
+   clearing PR. Treat it strictly as legacy: never build on it, reference it, or
+   copy its logic. It is also preserved as history (git tags `v0.0.1`–`v0.1.4`,
+   the published npm versions, and `references/history.md`). Any logic copied from
+   it violates the reset.
 2. **Human-in-the-loop.** Work in small, reviewable PRs — one concern each.
    Nothing merges without the maintainer's explicit review. PR descriptions state
    the exact diff scope and what to look at.
