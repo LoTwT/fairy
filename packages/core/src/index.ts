@@ -137,6 +137,7 @@ export interface CompiledZone {
   readonly key: string
   readonly order: number
   readonly clamp?: ClampRange
+  readonly clampFor?: (ctx: DamageContext) => ClampRange | undefined
   readonly evaluate: (ctx: DamageContext) => number
 }
 
@@ -253,20 +254,14 @@ export function disorderMultiplier(
 
 export function compile(spec: ZoneSpec): CompiledZone {
   validateZoneSpec(spec)
-
-  const compiled: Omit<CompiledZone, "clamp"> = {
-    key: spec.key,
-    order: spec.order,
-    evaluate: (ctx) => evaluateZoneSpec(spec, ctx),
-  }
-
-  if (!spec.clamp) {
-    return compiled
-  }
+  const clampFor = dynamicClampFor(spec)
 
   return {
-    ...compiled,
-    clamp: spec.clamp,
+    key: spec.key,
+    order: spec.order,
+    ...(spec.clamp ? { clamp: spec.clamp } : {}),
+    ...(clampFor ? { clampFor } : {}),
+    evaluate: (ctx) => evaluateZoneSpec(spec, ctx),
   }
 }
 
@@ -288,7 +283,7 @@ export function computeDamage(
 
   for (const { zone } of compiledZones) {
     const raw = finite(zone.evaluate(ctx), `${zone.key}.raw`)
-    const clamped = clamp(raw, zone.clamp)
+    const clamped = clamp(raw, zone.clampFor?.(ctx) ?? zone.clamp)
 
     breakdown[zone.key] = {
       raw,
@@ -558,7 +553,6 @@ function stunVulnerabilityZone(): ZoneSpec {
       stunVulnMult: { path: "stun.vulnerability" },
       unstaggeredStunVulnMult: { path: "stun.unstaggeredVulnerability" },
     },
-    clamp: [0.2, 5],
   }
 }
 
@@ -696,6 +690,32 @@ function evaluateZoneSpec(spec: ZoneSpec, ctx: DamageContext): number {
     }
     default:
       return unreachable(spec.mode)
+  }
+}
+
+function dynamicClampFor(
+  spec: ZoneSpec,
+): ((ctx: DamageContext) => ClampRange | undefined) | undefined {
+  if (spec.mode !== "stun-vulnerability") {
+    return undefined
+  }
+
+  return (ctx) => {
+    const params = spec.params as StunVulnerabilityParams
+    const targetHasStaggerBar = resolveOptionalBoolean(
+      params.targetHasStaggerBar,
+      ctx,
+      "targetHasStaggerBar",
+      true,
+    )
+
+    if (!targetHasStaggerBar) {
+      return undefined
+    }
+
+    return resolveBoolean(params.staggered, ctx, "staggered")
+      ? [0.2, 5]
+      : [1, 3]
   }
 }
 
