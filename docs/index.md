@@ -21,7 +21,8 @@ docs have been removed; they survive only as history (git tags, npm, and
 implementation spec is [specs/0002-project-initialization.md](specs/0002-project-initialization.md)
 (the root workspace setup); the core damage model is
 [specs/0003-damage-calculation.md](specs/0003-damage-calculation.md). Stagger,
-attribute anomalies, and the rest come in later specs.
+anomaly buildup/state, 3.4.2 disorder stagger gain, and the rest come in later
+specs.
 
 ## Conventions
 
