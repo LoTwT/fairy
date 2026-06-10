@@ -20,9 +20,10 @@ docs have been removed; they survive only as history (git tags, npm, and
 [references/history.md](references/history.md)). The first post-reset
 implementation spec is [specs/0002-project-initialization.md](specs/0002-project-initialization.md)
 (the root workspace setup); the core damage model is
-[specs/0003-damage-calculation.md](specs/0003-damage-calculation.md). Stagger,
-anomaly buildup/state, 3.4.2 disorder stagger gain, and the rest come in later
-specs.
+[specs/0003-damage-calculation.md](specs/0003-damage-calculation.md) (PART 01
+regular/sheer damage + PART 03 anomaly/disorder damage). Stagger (PART 02),
+anomaly buildup/state/cooldown (3.2), 3.4.2 disorder stagger gain, and
+energy/decay/part-break/interrupt come in later specs.
 
 ## Conventions
 
