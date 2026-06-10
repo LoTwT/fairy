@@ -19,6 +19,9 @@ These are non-negotiable for every change.
 2. **Human-in-the-loop.** Work in small, reviewable PRs — one concern per PR.
    Nothing merges without the maintainer's explicit review and approval. Write
    PR descriptions that state the exact diff scope and what to look at.
+   If a concern needs a spec, keep the spec and its execution in the same PR by
+   default. Split a spec into a separate PR only when it is large enough to need
+   review before execution, or when the maintainer explicitly asks for a split.
 3. **npm versions are monotonic.** Published versions of `@randomplay/core`,
    `@randomplay/data`, and `@randomplay/cli` are immutable: never delete,
    overwrite, or re-publish any already-published version (`0.0.1`–`0.1.4`). The

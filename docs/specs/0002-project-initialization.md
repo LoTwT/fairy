@@ -6,8 +6,9 @@ This spec defines the planned Fairy project-root initialization: the Node
 version baseline, pnpm workspace root, and the minimal repository-quality tooling
 needed before any package code exists.
 
-It does **not** execute the initialization. This PR is spec-only; the root
-configuration lands in a later implementation PR after this spec is reviewed.
+This PR uses a spec-first flow: review this spec before adding execution commits.
+Until that review completes, the PR remains docs-only. After approval, the root
+configuration can land in the same PR.
 
 It also does **not** define packages, the damage formula, TypeScript config, data
 ingestion, CLI behavior, runtime schemas, tests, bundling, release workflow, or
@@ -17,8 +18,8 @@ them.
 ## Rationale
 
 Project initialization is only the root tooling needed to start cleanly. Planning
-it before executing it keeps the first implementation PR small and prevents
-tooling defaults from becoming hidden decisions.
+it before executing it keeps the execution changes small and prevents tooling
+defaults from becoming hidden decisions.
 
 Keeping initialization separate from packages and the damage model keeps
 reviewable concerns small: root package-manager setup is one concern, package
@@ -32,7 +33,7 @@ publishes must be strictly greater than `0.1.4`.
 
 ## Contract
 
-The implementation PR that follows this spec should add only root-level
+The execution phase that follows this spec review should add only root-level
 configuration.
 
 - The repository root package is private.
@@ -41,7 +42,9 @@ configuration.
 - The Node baseline is Node 24. The local version file pins the major line as
   `24`.
 - The root package declares `engines.node` as `>=24`.
-- The root package declares `packageManager` as `pnpm@11.5.3`.
+- The root package declares `packageManager` using Corepack's current pnpm
+  release at execution time: run `corepack use pnpm@latest` rather than choosing
+  a pinned pnpm version manually.
 - The root quality-tooling surface is OXC-based:
   - `oxlint` for linting.
   - `oxfmt` for formatting.
@@ -62,7 +65,7 @@ configuration.
 
 ## Implementation Notes
 
-Expected execution PR file shape:
+Expected execution-phase file shape:
 
 ```text
 package.json
@@ -80,7 +83,7 @@ package PR can add `packages/<name>` without reshaping workspace config.
 `.gitignore` should cover at least `node_modules/`, `dist/`, `coverage/`,
 `.DS_Store`, and `*.log`.
 
-Suggested root scripts for the execution PR:
+Suggested root scripts for the execution phase:
 
 - `lint` — run `oxlint`.
 - `lint:fix` — run `oxlint --fix`.
@@ -97,24 +100,26 @@ Not planned unless reviewed separately:
 
 ## Acceptance
 
-This spec-only PR:
+This spec-only review phase:
 
-- Adds or updates docs only.
+- Adds or updates docs and the AGENTS coordination rule only.
 - `git diff --check origin/main...HEAD` succeeds.
 - Markdown links resolve.
 
-The later execution PR:
+The execution phase:
 
-- `corepack pnpm@11.5.3 install --frozen-lockfile` succeeds from a clean
-  checkout under Node 24.
-- `corepack pnpm@11.5.3 lint` succeeds.
-- `corepack pnpm@11.5.3 format:check` succeeds.
-- `corepack pnpm@11.5.3 check` succeeds.
+- `corepack use pnpm@latest` has been run so `packageManager` records the current
+  pnpm release.
+- `pnpm install --frozen-lockfile` succeeds from a clean checkout under Node 24.
+- `pnpm lint` succeeds.
+- `pnpm format:check` succeeds.
+- `pnpm check` succeeds.
 - `simple-git-hooks` and `lint-staged` are configured for pre-commit staged-file
   lint and format checks.
 - `git diff --check origin/main...HEAD` succeeds.
 - Markdown links resolve.
 - The root package is `private: true`.
-- The diff adds only root workspace initialization and this spec; it does not add
-  packages, damage-formula implementation, TypeScript config, data ingestion,
-  runtime schemas, tests, bundling, release workflows, or deploy config.
+- The diff adds only the AGENTS coordination rule, root workspace initialization,
+  and this spec/docs; it does not add packages, damage-formula implementation,
+  TypeScript config, data ingestion, runtime schemas, tests, bundling, release
+  workflows, or deploy config.
