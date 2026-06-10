@@ -9,6 +9,7 @@
     "lint:fix": "oxlint --fix .",
     "format": "oxfmt --write .",
     "format:check": "oxfmt --check .",
+    "test": "pnpm -r --if-present test",
     "typecheck": "pnpm -r --if-present typecheck",
     "check": "pnpm lint && pnpm format:check && pnpm typecheck",
     "prepare": "simple-git-hooks"
@@ -18,7 +19,9 @@
     "oxfmt": "^0.54.0",
     "oxlint": "^1.69.0",
     "simple-git-hooks": "^2.13.1",
-    "typescript": "^6.0.3"
+    "tsdown": "^0.22.2",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.8"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged"
