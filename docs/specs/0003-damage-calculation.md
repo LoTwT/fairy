@@ -161,8 +161,12 @@ A damage calc is an ordered, named set of zones. Zones are **data** publicly and
   `compile(spec)` produces it; the function exists only after compilation.
 - **Pipeline** = ordered `ZoneSpec[]` with unique keys. `computeDamage(pipeline,
 ctx)` compiles each spec, evaluates against `ctx`, clamps, multiplies in
-  `order`, and returns `{ total, breakdown }` where `breakdown` maps each zone
-  `key` to its clamped value (custom keys included).
+  `order`, and returns `{ rawTotal, total, breakdown }`. `rawTotal` is the raw
+  product of clamped zone values (pre-ceil); `total` is the per-hit ceil of
+  `rawTotal` (multi-hit: the sum of per-hit ceils). `breakdown` maps each zone
+  `key` to `{ raw, clamped, clampApplied }` (custom keys included) — so clamp,
+  custom zones, and remove/replace are each provable from the breakdown without
+  reverse-engineering the total.
 - **Presets** are factory functions returning a `ZoneSpec[]`:
   `regularPipeline()`, `sheerPipeline()`, `anomalyPipeline()`,
   `disorderPipeline(anomalyType, T)`.
@@ -218,8 +222,9 @@ disorderPipeline(anomalyType, T): ZoneSpec[]
 
 // compute
 computeDamage(pipeline: ZoneSpec[], ctx): {
-  total: number                      // product of clamped zones, per-hit ceil
-  breakdown: Record<string, number>  // key -> clamped zone value (custom keys included)
+  rawTotal: number   // raw product of clamped zone values (pre-ceil)
+  total: number      // per-hit ceil of rawTotal
+  breakdown: Record<string, { raw: number; clamped: number; clampApplied: boolean }>
 }
 // multi-hit: ceil each hit, then sum (helper sums per-hit ceiled totals).
 ```
@@ -241,11 +246,14 @@ PART 01:
 Zone pipeline / custom zones:
 
 - Every built-in zone clamps at its boundary (Boost, Crit, Defence, Resist, Vuln,
-  StunVuln, SheerBoost, AnomalyMastery, DamageLevel, AnomalyBoost, AnomalyCrit).
-- `removeZone` result equals the old total divided by that zone's value.
+  StunVuln, SheerBoost, AnomalyMastery, DamageLevel, AnomalyBoost, AnomalyCrit);
+  at the boundary the zone's `breakdown` entry shows `raw` ≠ `clamped` and
+  `clampApplied: true`.
+- `removeZone` divides out exactly: the new `rawTotal` equals the old `rawTotal` /
+  the removed zone's `clamped` value (compare `rawTotal`, not the ceiled `total`).
 - `replaceZone` affects only its key; the original preset is not mutated.
-- A custom zone `custom:test` (≈1.25) multiplies the total by 1.25 and its key is
-  kept in `breakdown`.
+- A custom zone `custom:test` (≈1.25) multiplies `rawTotal` by 1.25 and its
+  `breakdown` entry (`raw`/`clamped` = 1.25) is kept.
 - `add` on a duplicate key and `replace`/`remove` on an unknown key both
   **fail loud**; `upsert` creates or replaces.
 
@@ -269,7 +277,8 @@ PART 03 disorder (3.4.1):
 
 General:
 
-- `core` is pure/stateless and returns a traceable per-zone breakdown; total
+- `core` is pure/stateless and returns a traceable per-zone breakdown
+  (`{ raw, clamped, clampApplied }` per key) plus `rawTotal` and `total`; a total
   without a breakdown is a fail.
 - None of the out-of-scope items (buildup/threshold, virtual-agent weighting,
   state overlay/cooldown, 3.4.2 disorder stagger, full data tables, 极性紊乱/异放
