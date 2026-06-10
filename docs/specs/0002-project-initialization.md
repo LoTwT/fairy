@@ -36,6 +36,7 @@ The implementation PR that follows this spec should add only root-level
 configuration.
 
 - The repository root package is private.
+- The repository root package uses ESM (`type: "module"`).
 - The repository is a pnpm workspace using `packages/*`.
 - The Node baseline is Node 24. The local version file pins the major line as
   `24`.
@@ -44,11 +45,18 @@ configuration.
 - The root quality-tooling surface is OXC-based:
   - `oxlint` for linting.
   - `oxfmt` for formatting.
-  - `lint-staged` plus `simple-git-hooks` for pre-commit staged-file checks.
+  - `lint-staged` plus `simple-git-hooks` for pre-commit staged-file lint and
+    format checks.
 - The root package does not define build/test scripts yet; there is no package
   code to build or test.
 - No package directories are created in the initialization PR.
 - Future package PRs use the `@randomplay` scope.
+- Future package PRs preserve these dependency directions:
+  - `@randomplay/core` is pure calculation code and does not depend on data or
+    CLI packages.
+  - `@randomplay/data` is independent data ownership and does not depend on
+    core or CLI packages.
+  - `@randomplay/cli` may depend on core and data packages.
 - No publish, release workflow, npm token, or registry action is part of
   initialization.
 
@@ -63,10 +71,14 @@ pnpm-workspace.yaml
 .node-version
 .oxlintrc.json
 .oxfmtrc.json
+.gitignore
 ```
 
 `pnpm-workspace.yaml` may name `packages/*` before the folder exists, so the next
 package PR can add `packages/<name>` without reshaping workspace config.
+
+`.gitignore` should cover at least `node_modules/`, `dist/`, `coverage/`,
+`.DS_Store`, and `*.log`.
 
 Suggested root scripts for the execution PR:
 
@@ -76,6 +88,12 @@ Suggested root scripts for the execution PR:
 - `format:check` — run `oxfmt --check`.
 - `check` — run lint and format-check.
 - `prepare` — install `simple-git-hooks`.
+
+Not planned unless reviewed separately:
+
+- `commitlint` or a commit-message hook.
+- `.editorconfig`.
+- `.npmrc` with `engine-strict`.
 
 ## Acceptance
 
@@ -89,7 +107,11 @@ The later execution PR:
 
 - `corepack pnpm@11.5.3 install --frozen-lockfile` succeeds from a clean
   checkout under Node 24.
+- `corepack pnpm@11.5.3 lint` succeeds.
+- `corepack pnpm@11.5.3 format:check` succeeds.
 - `corepack pnpm@11.5.3 check` succeeds.
+- `simple-git-hooks` and `lint-staged` are configured for pre-commit staged-file
+  lint and format checks.
 - `git diff --check origin/main...HEAD` succeeds.
 - Markdown links resolve.
 - The root package is `private: true`.
