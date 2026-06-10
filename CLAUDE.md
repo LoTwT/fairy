@@ -1,55 +1,5 @@
-# Fairy · Agent Entry
+# Fairy — Claude Code entry
 
-Fairy is a ZZZ static snapshot damage calculator for 1-3 agents.
+Canonical project instructions live in [AGENTS.md](AGENTS.md). Read it first.
 
-## Read First
-
-1. Project map: [docs/index.md](docs/index.md)
-2. V1 dogfooding quick start: [docs/getting-started.md](docs/getting-started.md)
-3. Product scope: [docs/product/v2.0.md](docs/product/v2.0.md)
-4. Terminology: [docs/glossary/glossary.md](docs/glossary/glossary.md)
-5. Data contracts: [docs/data-contract/](docs/data-contract/)
-
-## Current Rules
-
-- Use glossary terms for public schema, API, trace, and docs names.
-- D-11 is official-first naming: prefer ZZZ official English semantic camelCase.
-- Keep JSON schema keys and enum values language-independent English.
-- Default human-facing language is `zh`; `en` is optional where V1 needs it.
-- Do not add runtime script injection for handlers.
-- Formal `@randomplay/data` data must come from Excel/crawler pipelines, not hand-written values.
-- Test fixtures may be hand-written and reviewed; they do not ship as formal data.
-- Current Mihoyo DA ingestion uses public JSON APIs plus Cheerio for embedded
-  rich-text fragments; Playwright/browser rendering is discovery-only unless a
-  new decision explicitly approves it.
-- Release workflow A3: npm publish success creates GitHub Release before
-  registry install smoke. Registry smoke remains a red post-publish consumer
-  check with 20 x 60s retry; if it fails, do not blindly rerun the same tag.
-  Verify npm versions, provenance, and fresh install/import/CLI smoke before
-  declaring release-ready.
-- Commit messages use Conventional Commits with release-visible semantics.
-  Ordinary test-only work stays `test:` and is skipped from release notes.
-  Golden-anchor or release-readiness contract additions use `feat(golden):` so
-  they enter CHANGELOG and GitHub Release notes.
-
-## Current Phase
-
-V0.0.3 is shipped. V1.x golden consolidation is complete with 23 passed / 0
-deferred anchors and `releaseReady=true`. Current engineering entry points:
-
-- `docs/architecture/naming-policy.md`
-- `docs/architecture/monorepo-development.md`
-- `docs/data-contract/`
-- `docs/data-source/`
-- `docs/data-source/mihoyo/`
-- `packages/core/src/engine/`
-- `packages/cli/`
-- `packages/data/`
-- `examples/snapshots/`
-
-Release-gate notes:
-
-- `fairy calc` defaults to `--view brief`; use `--view verbose` for full trace.
-- The Anby dogfooding fixture
-  `examples/snapshots/dogfood-anby-core-f-basic16-dullahan-9528.json` is covered
-  by `packages/cli/src/examples.test.ts` and therefore by root `pnpm test`.
+@AGENTS.md
