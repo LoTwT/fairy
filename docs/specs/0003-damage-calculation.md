@@ -57,22 +57,22 @@ ratios). Initial stats convert to initial sheer force, final to final.
 
 Each zone returns a number, clamped to the range shown.
 
-| Zone | Formula | Range |
-| --- | --- | --- |
-| BasicZone 基础伤害区 | `Σ(skillMultiplier × stat)` — `stat` is ATK for regular, sheer force for sheer | ≥ 0 |
-| BoostZone 增伤区 | `1 + Σboost` (attribute / skill-type / attack-type dmg bonuses; **not** sheer or anomaly boost) | [0, 6] |
-| CritZone 暴击区 | crit: `1 + critDmg`; non-crit: `1`. Expectation: `1 + critRate × critDmg` | [1, 6] |
-| DefenceZone 防御区 | `attackerLevelBase / (effectiveDef + attackerLevelBase)` | (0, 1] |
-| ResistZone 抗性区 | `1 − resist + resistDown + ignoreResist` | [0, 2] |
-| VulnZone 减易伤区 | `1 + vulnerability − damageReduction` | [0.2, 2] |
-| StunVulnZone 失衡易伤区 | staggered: `1 + stunVulnMult`; not: `1 + unstaggeredStunVulnMult`. Not applied to damage dealt to agents/bangboo (no stagger bar) | staggered [0.2, 5]; not [1, 3] |
-| SheerBoostZone 贯穿增伤区 | `1 + sheerBoost` (sheer damage only) | [0.2, 9] |
-| SpecialZone 特殊乘区 | distance decay (mechanism partly unknown; default 1). Affects damage, stagger, and anomaly buildup | — |
+| Zone                      | Formula                                                                                                                           | Range                          |
+| ------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | ------------------------------ |
+| BasicZone 基础伤害区      | `Σ(skillMultiplier × stat)` — `stat` is ATK for regular, sheer force for sheer                                                    | ≥ 0                            |
+| BoostZone 增伤区          | `1 + Σboost` (attribute / skill-type / attack-type dmg bonuses; **not** sheer or anomaly boost)                                   | [0, 6]                         |
+| CritZone 暴击区           | crit: `1 + critDmg`; non-crit: `1`. Expectation: `1 + critRate × critDmg`                                                         | [1, 6]                         |
+| DefenceZone 防御区        | `attackerLevelBase / (effectiveDef + attackerLevelBase)`                                                                          | (0, 1]                         |
+| ResistZone 抗性区         | `1 − resist + resistDown + ignoreResist`                                                                                          | [0, 2]                         |
+| VulnZone 减易伤区         | `1 + vulnerability − damageReduction`                                                                                             | [0.2, 2]                       |
+| StunVulnZone 失衡易伤区   | staggered: `1 + stunVulnMult`; not: `1 + unstaggeredStunVulnMult`. Not applied to damage dealt to agents/bangboo (no stagger bar) | staggered [0.2, 5]; not [1, 3] |
+| SheerBoostZone 贯穿增伤区 | `1 + sheerBoost` (sheer damage only)                                                                                              | [0.2, 9]                       |
+| SpecialZone 特殊乘区      | distance decay (mechanism partly unknown; default 1). Affects damage, stagger, and anomaly buildup                                | —                              |
 
 Supporting detail (in the `data` package / the reference):
 
 - **Effective defence** (against enemies): `effectiveDef = baseDef × (1 + defBonus
-  − defDown − ignoreDef) × (1 − penRatio) − penValue`, floored at 0. Ignore-def
+− defDown − ignoreDef) × (1 − penRatio) − penValue`, floored at 0. Ignore-def
   and def-down add; pen-ratio and def-down multiply.
 - **Attacker level base** (等级基数): a per-level table (level 1 = 50 … level 60+
   = 794). Enemy base defence at a level = `level1BaseDef / 50 × levelBase`; capped
@@ -133,7 +133,7 @@ just a number.
   force is derived per agent.
 - A worked example from the reference computes correctly — e.g. a level-60 agent
   vs a level-60+ boss with no pen/def-down: `DefenceZone = 794 / (952.8 + 794) =
-  0.4545`.
+0.4545`.
 - `core` is pure and stateless and returns a traceable per-zone breakdown; `data`
   holds the game numbers; `cli` is JSON-only.
 - No stagger / anomaly / energy / decay / part-break / interrupt logic is included
