@@ -5,12 +5,12 @@ the content itself. Other entry points point here and do not duplicate this map.
 
 ## Where to look
 
-| You want | Go to | Holds |
-| --- | --- | --- |
-| Requirements, conventions, standards, or interface design | `docs/specs/` | Specs: what something is and should remain true, plus lightweight design (function signatures, module boundaries) — no detailed code |
-| Supporting facts and background (incl. the pre-reset record) | `docs/references/` | Reference material: external docs, data, glossaries, history. Read-only; never a source |
-| The iron rules for working here | [../AGENTS.md](../AGENTS.md) | Clean-slate, human-in-the-loop, npm version monotonicity |
-| A task, chore, bug — or its owner / status | GitHub Issues (or the Slock task board) | Execution tracking. Not in docs |
+| You want                                                     | Go to                                   | Holds                                                                                                                                |
+| ------------------------------------------------------------ | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| Requirements, conventions, standards, or interface design    | `docs/specs/`                           | Specs: what something is and should remain true, plus lightweight design (function signatures, module boundaries) — no detailed code |
+| Supporting facts and background (incl. the pre-reset record) | `docs/references/`                      | Reference material: external docs, data, glossaries, history. Read-only; never a source                                              |
+| The iron rules for working here                              | [../AGENTS.md](../AGENTS.md)            | Clean-slate, human-in-the-loop, npm version monotonicity                                                                             |
+| A task, chore, bug — or its owner / status                   | GitHub Issues (or the Slock task board) | Execution tracking. Not in docs                                                                                                      |
 
 ## Current state
 

@@ -38,13 +38,15 @@ configuration.
 
 - The repository root package is private.
 - The repository root package uses ESM (`type: "module"`).
+- The repository root package records the current pre-reset package version
+  (`0.1.4`) until a future release spec bumps it.
 - The repository is a pnpm workspace using `packages/*`.
 - The Node baseline is Node 24. The local version file pins the major line as
   `24`.
 - The root package declares `engines.node` as `>=24`.
-- The root package declares `packageManager` using Corepack's current pnpm
-  release at execution time: run `corepack use pnpm@latest` rather than choosing
-  a pinned pnpm version manually.
+- The root package declares `packageManager` as the bare Corepack pnpm version
+  selected at execution time: run `corepack use pnpm@latest`, record the resolved
+  `pnpm@<version>`, and omit Corepack's integrity suffix.
 - The root quality-tooling surface is OXC-based:
   - `oxlint` for linting.
   - `oxfmt` for formatting.
@@ -80,10 +82,21 @@ oxfmt.config.ts
 `pnpm-workspace.yaml` may name `packages/*` before the folder exists, so the next
 package PR can add `packages/<name>` without reshaping workspace config.
 
+It may also record pnpm's build-script approval for `simple-git-hooks`, so
+frozen installs do not require an interactive approval step before installing the
+pre-commit hook package.
+
 Use TypeScript config files for OXC tools (`oxlint.config.ts` and
 `oxfmt.config.ts`) because the Node-based `oxlint` and `oxfmt` packages support
 them and Node 24 can execute them. The execution phase must not add a separate TS
 loader, build step, or project `tsconfig` just to read these tool configs.
+
+The formatter config should mirror the core formatting policy from
+`@lotwt/prettier-config` where Oxfmt supports equivalent options: two-space
+indentation, no tabs, print width 80, double quotes, trailing commas, no
+semicolons, LF line endings, preserved prose wrapping, bracket spacing, and
+consistent quoted object properties. Prettier plugins and Prettier-specific
+overrides are not part of this initialization.
 
 `.gitignore` should cover at least `node_modules/`, `dist/`, `coverage/`,
 `.DS_Store`, and `*.log`.
@@ -114,7 +127,7 @@ This spec-only review phase:
 The execution phase:
 
 - `corepack use pnpm@latest` has been run so `packageManager` records the current
-  pnpm release.
+  pnpm release as a bare `pnpm@<version>` value.
 - `pnpm install --frozen-lockfile` succeeds from a clean checkout under Node 24.
 - `pnpm lint` succeeds.
 - `pnpm format:check` succeeds.

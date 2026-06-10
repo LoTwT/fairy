@@ -63,7 +63,7 @@ This PR:
 
 - The new skeleton is present and only the skeleton remains: `AGENTS.md`,
   `CLAUDE.md`, `README.md`, `LICENSE`, `.gitignore`, and `docs/{index.md, specs/,
-  references/}`.
+references/}`.
 - Everything in the `references/history.md` removal inventory is gone; nothing
   from the old implementation is copied into the new tree as a source.
 - The pre-reset tree is recoverable at tag `v0.1.4` (tags `v0.0.1`–`v0.1.4`
