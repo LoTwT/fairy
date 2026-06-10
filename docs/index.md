@@ -17,8 +17,9 @@ the content itself. Other entry points point here and do not duplicate this map.
 The project has been reset to a clean slate (see
 [specs/0001-clean-slate.md](specs/0001-clean-slate.md)). The pre-reset code and
 docs have been removed; they survive only as history (git tags, npm, and
-[references/history.md](references/history.md)). The new product direction and
-architecture come in a later spec.
+[references/history.md](references/history.md)). The first post-reset
+implementation spec is [specs/0002-project-initialization.md](specs/0002-project-initialization.md):
+the Node/pnpm workspace root. Packages and the damage model come in later specs.
 
 ## Conventions
 
