@@ -12,11 +12,14 @@ If a public name has no row, the name is undefined — do not publish it.
    marked **convention** in Source.
 2. **American spelling** for any British/American difference (HoYo localization),
    e.g. `defense` not `defence`.
-3. **`DMG` in official names → `damage` in code.** Official UI abbreviates to
-   "DMG" (DMG Bonus, CRIT DMG, Sheer DMG); code identifiers spell the full word
-   `damage` so there is one consistent form — never mix `dmg` and `damage`.
+3. **One consistent form per concept; expand ambiguous abbreviations.** Where
+   official mixes a short form and the full word (DMG / Damage), code uses the
+   full word `damage` (e.g. `damageBonus`) — never mix `dmg` and `damage`.
+   Established, unambiguous short forms may stay canonical (`atk`, `hp`, `crit`,
+   `pen`).
 4. **One Chinese term → one canonical code identifier.** No coexisting synonyms
-   (`boost`/`damageBonus`, `stun`/`daze`, `defence`/`defense`).
+   (`boost`/`damageBonus`, `stun`/`daze`, `defence`/`defense`). Aliases live only
+   in Notes, never as a public API name.
 5. **Every row cites a Source**: `official` (in-game EN), `数据导论` (the data
    introduction reference / formula), or `convention` (ours — never disguised as
    official).
@@ -34,7 +37,8 @@ This glossary is a living contract and must be kept in sync with the code:
 - **One concept, one identifier.** If you need a new word for an existing concept,
   reuse its row; do not introduce a synonym.
 - **Renames are glossary-first.** Change the row, then rename in code + tests in
-  the same PR.
+  the same PR. Renaming an **already-published** API is a breaking change — mark
+  it breaking and add a migration note.
 - The working rule that enforces this lives in
   [../../AGENTS.md](../../AGENTS.md).
 
