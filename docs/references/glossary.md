@@ -20,9 +20,11 @@ If a public name has no row, the name is undefined — do not publish it.
 4. **One Chinese term → one canonical code identifier.** No coexisting synonyms
    (`boost`/`damageBonus`, `stun`/`daze`, `defence`/`defense`). Aliases live only
    in Notes, never as a public API name.
-5. **Every row cites a Source**: `official` (in-game EN), `数据导论` (the data
-   introduction reference / formula), or `convention` (ours — never disguised as
-   official).
+5. **Every row cites a Source**: `official` (in-game EN/CN), `数据导论` (the data
+   introduction reference / formula), `needs-verify` (official EN not yet
+   confirmed), or `convention` (ours — never disguised as official). 米游社 /
+   community usage goes in Notes as an alias and never overrides the official
+   canonical. The 官方中文 and 官方 English columns are both canonical sources.
 
 Sources for the official English: ZZZ Fandom Wiki, Prydwen, Game8, ScreenRant
 (see PR description for links).
@@ -112,6 +114,58 @@ Note: the v1 `DisorderAnomalyType` enum (`burn` / `shock` / `etherCorruption` /
 `iceFrostbite` / `physicalFlinch` / `auricInkCorruption` / `frostFrostbite`) keys
 on the lingering disorder-source state and is already aligned with the official
 element/anomaly names above.
+
+## Attributes / elements (属性)
+
+| 官方中文 | 官方 English | code identifier | Source   | Notes                             |
+| -------- | ------------ | --------------- | -------- | --------------------------------- |
+| 物理     | Physical     | `physical`      | official |                                   |
+| 火       | Fire         | `fire`          | official |                                   |
+| 冰       | Ice          | `ice`           | official |                                   |
+| 电       | Electric     | `electric`      | official |                                   |
+| 以太     | Ether        | `ether`         | official |                                   |
+| 烈霜     | Frost        | `frost`         | official | sub-attribute; resolves via Ice   |
+| 玄墨     | Auric Ink    | `auricInk`      | official | sub-attribute; resolves via Ether |
+
+## Skill types (技能类型) — for `skillMultiplier` context
+
+| 官方中文   | 官方 English      | code identifier | Source   | Notes             |
+| ---------- | ----------------- | --------------- | -------- | ----------------- |
+| 普通攻击   | Basic Attack      | `basicAttack`   | official |                   |
+| 闪避       | Dodge             | `dodge`         | official |                   |
+| 闪避反击   | Dodge Counter     | `dodgeCounter`  | official |                   |
+| 特殊技     | Special Attack    | `special`       | official |                   |
+| 强化特殊技 | EX Special Attack | `exSpecial`     | official | consumes Energy   |
+| 连携技     | Chain Attack      | `chain`         | official |                   |
+| 终结技     | Ultimate          | `ultimate`      | official | needs max Decibel |
+| 快速支援   | Quick Assist      | `quickAssist`   | official |                   |
+
+## Other ZZZ mechanics (reference; mostly out-of-v1)
+
+These appear in the data introduction's later PARTs (失衡 / 能量 / 秽息 /
+部位破坏 / 打断) and are not implemented in v1; listed for naming consistency.
+
+| 官方中文 | 官方 English   | code identifier | Source       | Notes                                          |
+| -------- | -------------- | --------------- | ------------ | ---------------------------------------------- |
+| 失衡     | Daze           | `daze`          | official     | the Daze meter (PART02)                        |
+| 眩晕     | Stun (stunned) | `stunned`       | official     | state when Daze fills; distinct from 失衡      |
+| 能量     | Energy         | `energy`        | official     | PART04                                         |
+| 喧响     | Decibel(s)     | `decibel`       | official     | Decibel Rating → Ultimate                      |
+| 弱点     | Weakness       | `weakness`      | official     | element the enemy is weak to                   |
+| 打断     | Interrupt      | `interrupt`     | official     | PART07; 打断等级 = Interrupt Level             |
+| 部位破坏 | Part Break     | `partBreak`     | needs-verify | PART06; confirm official EN before code use    |
+| 秽息     | (秽息)         | —               | needs-verify | PART05 (2.0 mechanic); official EN unconfirmed |
+
+## High-risk near-synonyms (disambiguate)
+
+These pairs are easy to confuse — keep them distinct in code and review:
+
+- **damage / DMG** → code always `damage` (DMG is display only).
+- **daze / stun** → `daze` = 失衡 (meter); `stunned` = 眩晕 (state).
+- **Anomaly Proficiency / Anomaly Mastery** → `anomalyProficiency` = 异常精通 (DMG,
+  v1); `anomalyMastery` = 异常掌控 (buildup, reserved).
+- **defense / DEF** → spelled `defense`; DEF is the official short form.
+- **damageBonus / bonus** → `damageBonus` = 增伤; never bare `bonus`.
 
 ## Damage zones (乘区) — #105 public surface
 
