@@ -7,5 +7,4 @@ export default defineConfig({
   clean: true,
   sourcemap: true,
   target: "es2024",
-  outExtensions: () => ({ js: ".js" }),
 })
