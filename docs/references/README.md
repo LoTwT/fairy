@@ -13,3 +13,5 @@ References hold facts and background — never task status, owners, or decisions
 
 - [history.md](history.md) — the pre-reset record: published npm versions, tags,
   recovery, and what the reset removed. Read-only; never a source.
+- [glossary.md](glossary.md) — the naming contract: ZZZ terms ↔ official English ↔
+  code identifiers. Every public name traces to a row here.
