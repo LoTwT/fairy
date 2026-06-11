@@ -78,20 +78,32 @@ This glossary is a living contract and must be kept in sync with the code:
 
 ## Damage & combat mechanics
 
-| 中文     | English (official)        | code identifier     | Source        | Notes                        |
-| -------- | ------------------------- | ------------------- | ------------- | ---------------------------- |
-| 伤害     | DMG                       | `damage`            | official      |                              |
-| 常规伤害 | regular DMG               | `regular`           | convention    | non-sheer path               |
-| 贯穿伤害 | Sheer DMG                 | `sheer`             | official      | 贯穿 = Sheer                 |
-| 增伤     | DMG Bonus                 | `damageBonus`       | official      | #105 was `boost`             |
-| 抗性     | RES                       | `resist`            | official      |                              |
-| 易伤     | Vulnerability (DMG taken) | `vulnerability`     | 数据导论      | no single official stat word |
-| 减伤     | DMG Reduction             | `damageReduction`   | official      |                              |
-| 失衡     | **Daze**                  | `daze`              | official      | mechanic; #105 was `stun`    |
-| 失衡易伤 | Daze Vulnerability        | `dazeVulnerability` | official+conv | the Daze-vuln zone           |
-| 暴击     | CRIT                      | `crit`              | official      |                              |
-| 有效防御 | effective defense         | `effectiveDefense`  | convention    | derived                      |
-| 等级基数 | level base                | `levelBase`         | 数据导论      | per-level table              |
+| 中文     | English (official)        | code identifier     | Source        | Notes                                               |
+| -------- | ------------------------- | ------------------- | ------------- | --------------------------------------------------- |
+| 伤害     | DMG                       | `damage`            | official      |                                                     |
+| 常规伤害 | regular DMG               | `regular`           | convention    | non-sheer path                                      |
+| 贯穿伤害 | Sheer DMG                 | `sheer`             | official      | 贯穿 = Sheer                                        |
+| 增伤     | DMG Bonus                 | `damageBonus`       | official      | #105 was `boost`                                    |
+| 抗性     | RES                       | `resist`            | official      |                                                     |
+| 易伤     | Vulnerability (DMG taken) | `vulnerability`     | 数据导论      | no single official stat word                        |
+| 减伤     | DMG Reduction             | `damageReduction`   | official      |                                                     |
+| 失衡易伤 | Daze Vulnerability        | `dazeVulnerability` | official+conv | the Daze-vuln zone (失衡 itself in Other mechanics) |
+| 暴击     | CRIT                      | `crit`              | official      |                                                     |
+| 有效防御 | effective defense         | `effectiveDefense`  | convention    | derived                                             |
+| 等级基数 | level base                | `levelBase`         | 数据导论      | per-level table                                     |
+
+## Multipliers (倍率)
+
+Multiplier terms used in the formulas — distinct from the bonus / vulnerability
+stats above (增伤 `damageBonus`, 减伤 `damageReduction`, 易伤 `vulnerability`).
+
+| 中文                | English                       | code identifier         | Source   | Notes                                                                         |
+| ------------------- | ----------------------------- | ----------------------- | -------- | ----------------------------------------------------------------------------- |
+| 伤害倍率 / 技能倍率 | damage / skill multiplier     | `skillMultiplier`       | 数据导论 | the skill's DMG %, the per-term multiplier in BasicZone; ≠ 增伤 `damageBonus` |
+| 伤害等级倍率        | DMG level multiplier          | `damageLevelMultiplier` | 数据导论 | the DamageLevelZone factor `trunc(1+(lvl-1)/59,4)` (v1)                       |
+| 紊乱倍率            | disorder multiplier           | `disorderMultiplier`    | 数据导论 | per source-anomaly, by remaining duration T (v1)                              |
+| 失衡易伤倍率        | Daze vulnerability multiplier | `dazeVulnerability`     | 数据导论 | the Daze-Vuln zone value (v1); staggered vs not branches                      |
+| 失衡倍率            | Daze multiplier               | `dazeMultiplier`        | 数据导论 | the skill's Daze %, PART02 stagger — out-of-v1                                |
 
 ## Attribute anomalies & disorder (属性异常 / 紊乱)
 
@@ -145,23 +157,26 @@ element/anomaly names above.
 These appear in the data introduction's later PARTs (失衡 / 能量 / 秽息 /
 部位破坏 / 打断) and are not implemented in v1; listed for naming consistency.
 
-| 官方中文 | 官方 English   | code identifier | Source       | Notes                                          |
-| -------- | -------------- | --------------- | ------------ | ---------------------------------------------- |
-| 失衡     | Daze           | `daze`          | official     | the Daze meter (PART02)                        |
-| 眩晕     | Stun (stunned) | `stunned`       | official     | state when Daze fills; distinct from 失衡      |
-| 能量     | Energy         | `energy`        | official     | PART04                                         |
-| 喧响     | Decibel(s)     | `decibel`       | official     | Decibel Rating → Ultimate                      |
-| 弱点     | Weakness       | `weakness`      | official     | element the enemy is weak to                   |
-| 打断     | Interrupt      | `interrupt`     | official     | PART07; 打断等级 = Interrupt Level             |
-| 部位破坏 | Part Break     | `partBreak`     | needs-verify | PART06; confirm official EN before code use    |
-| 秽息     | (秽息)         | —               | needs-verify | PART05 (2.0 mechanic); official EN unconfirmed |
+| 官方中文 | 官方 English | code identifier | Source       | Notes                                                                        |
+| -------- | ------------ | --------------- | ------------ | ---------------------------------------------------------------------------- |
+| 失衡     | Daze         | `daze`          | official     | the Daze meter (PART02)                                                      |
+| 眩晕     | Stunned      | —               | official     | the _state_ when Daze fills; **source term only — not a v1 code identifier** |
+| 能量     | Energy       | `energy`        | official     | PART04                                                                       |
+| 喧响     | Decibel(s)   | `decibel`       | official     | Decibel Rating → Ultimate                                                    |
+| 弱点     | Weakness     | `weakness`      | official     | element the enemy is weak to                                                 |
+| 打断     | Interrupt    | `interrupt`     | official     | PART07; 打断等级 = Interrupt Level                                           |
+| 部位破坏 | Part Break   | `partBreak`     | needs-verify | PART06; confirm official EN before code use                                  |
+| 秽息     | (秽息)       | —               | needs-verify | PART05 (2.0 mechanic); official EN unconfirmed                               |
 
 ## High-risk near-synonyms (disambiguate)
 
 These pairs are easy to confuse — keep them distinct in code and review:
 
 - **damage / DMG** → code always `damage` (DMG is display only).
-- **daze / stun** → `daze` = 失衡 (meter); `stunned` = 眩晕 (state).
+- **Daze / Stun** → canonical is **`daze` = 失衡** (the Daze meter + `dazeVulnerability`).
+  眩晕 (Stunned) is the _state_ when Daze fills — a source term only, **not a v1
+  code identifier**. The old #105 `stun` / `stunVulnerability` / `staggered` →
+  `daze` / `dazeVulnerability` / `dazed`. Never use bare `stun` in code.
 - **Anomaly Proficiency / Anomaly Mastery** → `anomalyProficiency` = 异常精通 (DMG,
   v1); `anomalyMastery` = 异常掌控 (buildup, reserved).
 - **defense / DEF** → spelled `defense`; DEF is the official short form.
