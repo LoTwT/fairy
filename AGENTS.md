@@ -27,6 +27,12 @@ These are non-negotiable for every change.
    overwrite, or re-publish any already-published version (`0.0.1`–`0.1.4`). The
    highest published version is `0.1.4`; every future publish must be a new
    version strictly greater than `0.1.4`.
+4. **Glossary-first naming.** Domain names follow
+   [docs/references/glossary.md](docs/references/glossary.md) — the single naming
+   contract (中文 ↔ official ZZZ English ↔ code identifier). Before publishing a
+   new public type / function / parameter / zone / `mode` / enum value, add its
+   row first; a public name with no glossary row must not ship. Renames are
+   glossary-first: change the row, then rename in code + tests in the same PR.
 
 ## Progressive disclosure
 

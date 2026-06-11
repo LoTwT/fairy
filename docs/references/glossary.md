@@ -6,69 +6,86 @@ If a public name has no row, the name is undefined — do not publish it.
 
 ## Naming convention
 
-1. **Official ZZZ English is canonical.** Code identifiers follow the official
-   in-game English term (camelCase). Where a term is our own (architecture, not a
-   game concept), it is marked **convention** in Source.
-2. **One Chinese term → one canonical code identifier.** No coexisting synonyms
-   (`boost`/`dmgBonus`, `stun`/`daze`, `defence`/`defense`).
-3. **Every row cites a Source**: `official` (in-game EN), `数据导论` (the data
+1. **Official ZZZ English is canonical for word choice.** The English term follows
+   official in-game usage (e.g. "DMG Bonus", "Daze"); code identifiers are the
+   camelCase form. Terms that are our own (architecture, not a game concept) are
+   marked **convention** in Source.
+2. **American spelling** for any British/American difference (HoYo localization),
+   e.g. `defense` not `defence`.
+3. **`DMG` in official names → `damage` in code.** Official UI abbreviates to
+   "DMG" (DMG Bonus, CRIT DMG, Sheer DMG); code identifiers spell the full word
+   `damage` so there is one consistent form — never mix `dmg` and `damage`.
+4. **One Chinese term → one canonical code identifier.** No coexisting synonyms
+   (`boost`/`damageBonus`, `stun`/`daze`, `defence`/`defense`).
+5. **Every row cites a Source**: `official` (in-game EN), `数据导论` (the data
    introduction reference / formula), or `convention` (ours — never disguised as
    official).
-4. **Spelling**: American English (HoYo localization), e.g. `defense`.
 
 Sources for the official English: ZZZ Fandom Wiki, Prydwen, Game8, ScreenRant
 (see PR description for links).
 
-## ⚠️ Corrections this glossary locks in (vs the current #105 draft)
+## Maintenance
+
+This glossary is a living contract and must be kept in sync with the code:
+
+- **Add the term here first.** Before a new public type / function / parameter /
+  zone / `mode` / enum value ships, add its row (中文 / official English / code
+  identifier / Source). A public name with no glossary row must not be published.
+- **One concept, one identifier.** If you need a new word for an existing concept,
+  reuse its row; do not introduce a synonym.
+- **Renames are glossary-first.** Change the row, then rename in code + tests in
+  the same PR.
+- The working rule that enforces this lives in
+  [../../AGENTS.md](../../AGENTS.md).
+
+## Decided conventions (per maintainer: official usage + American spelling)
+
+| 中文 | English (official) | code identifier | was (#105 draft) |
+| ---- | ------------------ | --------------- | ---------------- |
+| 失衡 | Daze               | `daze`          | `stun`           |
+| 增伤 | DMG Bonus          | `damageBonus`   | `boost`          |
+| 防御 | DEF / Defense      | `defense`       | `defence`        |
+
+## ⚠️ Correctness fix this glossary locks in (vs the current #105 draft)
 
 - **异常精通 = Anomaly Proficiency** (boosts anomaly **damage**) — the #105 engine
   currently calls this `anomalyMastery`, which is **wrong**. Official **Anomaly
   Mastery = 异常掌控** (boosts **buildup** speed), a _different_ stat that is
   out-of-scope for v1. This is a correctness fix, not a style choice.
-- **失衡 = Daze** (not "Stun"). Recommend renaming `stun*`/`staggered` →
-  `daze*`/`dazed` while it is still pre-publish.
-
-## Open style picks for review (lo-user decides on this table)
-
-| 中文 | option A (recommended)            | option B (current code) | note                |
-| ---- | --------------------------------- | ----------------------- | ------------------- |
-| 失衡 | `daze` (official)                 | `stun`                  | official EN is Daze |
-| 增伤 | `dmgBonus` (official "DMG Bonus") | `boost`                 |                     |
-| 防御 | `defense` (American)              | `defence` (British)     | HoYo uses American  |
 
 ## Core stats (角色属性)
 
 | 中文     | English (official)      | code identifier      | Source   | Notes                                                            |
 | -------- | ----------------------- | -------------------- | -------- | ---------------------------------------------------------------- |
-| 攻击力   | ATK / Attack            | `atk`                | official |                                                                  |
+| 攻击力   | ATK                     | `atk`                | official |                                                                  |
 | 生命值   | HP                      | `hp`                 | official |                                                                  |
-| 防御力   | DEF / Defense           | `defense`            | official | spelling: American; #105 currently `defence`                     |
+| 防御力   | DEF / Defense           | `defense`            | official | American spelling; #105 was `defence`                            |
 | 冲击力   | Impact                  | `impact`             | official | Daze-buildup stat                                                |
 | 贯穿力   | Sheer Force             | `sheerForce`         | official | break agents                                                     |
 | 异常精通 | **Anomaly Proficiency** | `anomalyProficiency` | official | boosts anomaly DMG; **#105 mislabels as `anomalyMastery` → fix** |
 | 异常掌控 | **Anomaly Mastery**     | `anomalyMastery`     | official | boosts buildup; **v1 out-of-scope / reserved**                   |
 | 暴击率   | CRIT Rate               | `critRate`           | official |                                                                  |
-| 暴击伤害 | CRIT DMG                | `critDmg`            | official |                                                                  |
+| 暴击伤害 | CRIT DMG                | `critDamage`         | official |                                                                  |
 | 穿透率   | PEN Ratio               | `penRatio`           | official |                                                                  |
 | 穿透值   | PEN (flat)              | `penValue`           | official |                                                                  |
 | 等级     | Level                   | `level`              | official |                                                                  |
 
 ## Damage & combat mechanics
 
-| 中文     | English (official)        | code identifier     | Source        | Notes                                        |
-| -------- | ------------------------- | ------------------- | ------------- | -------------------------------------------- |
-| 伤害     | DMG / Damage              | `damage`            | official      |                                              |
-| 常规伤害 | regular damage            | `regular`           | convention    | non-sheer path                               |
-| 贯穿伤害 | Sheer DMG                 | `sheer`             | official      | 贯穿 = Sheer                                 |
-| 增伤     | DMG Bonus                 | `dmgBonus`          | official      | #105 currently `boost` (style pick)          |
-| 抗性     | RES / Resistance          | `resist`            | official      |                                              |
-| 易伤     | Vulnerability (DMG taken) | `vulnerability`     | 数据导论      | no single official stat word                 |
-| 减伤     | DMG Reduction             | `damageReduction`   | official      |                                              |
-| 失衡     | **Daze**                  | `daze`              | official      | mechanic; #105 currently `stun` (style pick) |
-| 失衡易伤 | Daze Vulnerability        | `dazeVulnerability` | official+conv | the StunVuln zone                            |
-| 暴击     | CRIT                      | `crit`              | official      |                                              |
-| 有效防御 | effective defense         | `effectiveDefense`  | convention    | derived                                      |
-| 等级基数 | level base                | `levelBase`         | 数据导论      | per-level table                              |
+| 中文     | English (official)        | code identifier     | Source        | Notes                        |
+| -------- | ------------------------- | ------------------- | ------------- | ---------------------------- |
+| 伤害     | DMG                       | `damage`            | official      |                              |
+| 常规伤害 | regular DMG               | `regular`           | convention    | non-sheer path               |
+| 贯穿伤害 | Sheer DMG                 | `sheer`             | official      | 贯穿 = Sheer                 |
+| 增伤     | DMG Bonus                 | `damageBonus`       | official      | #105 was `boost`             |
+| 抗性     | RES                       | `resist`            | official      |                              |
+| 易伤     | Vulnerability (DMG taken) | `vulnerability`     | 数据导论      | no single official stat word |
+| 减伤     | DMG Reduction             | `damageReduction`   | official      |                              |
+| 失衡     | **Daze**                  | `daze`              | official      | mechanic; #105 was `stun`    |
+| 失衡易伤 | Daze Vulnerability        | `dazeVulnerability` | official+conv | the Daze-vuln zone           |
+| 暴击     | CRIT                      | `crit`              | official      |                              |
+| 有效防御 | effective defense         | `effectiveDefense`  | convention    | derived                      |
+| 等级基数 | level base                | `levelBase`         | 数据导论      | per-level table              |
 
 ## Attribute anomalies & disorder (属性异常 / 紊乱)
 
@@ -99,17 +116,17 @@ element/anomaly names above.
 | 中文       | English                  | code identifier      | Source   | Notes                                         |
 | ---------- | ------------------------ | -------------------- | -------- | --------------------------------------------- |
 | 基础伤害区 | Basic Zone               | `basic`              | 数据导论 |                                               |
-| 增伤区     | DMG Bonus Zone           | `dmgBonus`           | official | #105 `boost` → rename (style pick)            |
+| 增伤区     | DMG Bonus Zone           | `damageBonus`        | official | #105 `boost` → rename                         |
 | 暴击区     | CRIT Zone                | `crit`               | official |                                               |
-| 防御区     | DEF Zone                 | `defense`            | official | spelling pick                                 |
+| 防御区     | DEF Zone                 | `defense`            | official | #105 `defence` → rename                       |
 | 抗性区     | RES Zone                 | `resist`             | official |                                               |
 | 减易伤区   | Vulnerability Zone       | `vulnerability`      | 数据导论 |                                               |
 | 失衡易伤区 | Daze Vulnerability Zone  | `dazeVulnerability`  | official | #105 `stunVulnerability` → rename             |
-| 贯穿增伤区 | Sheer DMG Bonus Zone     | `sheerBoost`         | official | (or `sheerDmgBonus` if 增伤=dmgBonus)         |
+| 贯穿增伤区 | Sheer DMG Bonus Zone     | `sheerDamageBonus`   | official | #105 `sheerBoost` → rename                    |
 | 特殊乘区   | Special Zone             | `special`            | 数据导论 | distance decay                                |
 | 异常精通区 | Anomaly Proficiency Zone | `anomalyProficiency` | official | **#105 `anomalyMastery` → fix (correctness)** |
 | 伤害等级区 | DMG Level Zone           | `damageLevel`        | 数据导论 | trunc(1+(lvl-1)/59,4)                         |
-| 异常增伤区 | Anomaly DMG Bonus Zone   | `anomalyDmgBonus`    | official | #105 `anomalyBoost` → rename (style pick)     |
+| 异常增伤区 | Anomaly DMG Bonus Zone   | `anomalyDamageBonus` | official | #105 `anomalyBoost` → rename                  |
 | 异常暴击区 | Anomaly CRIT Zone        | `anomalyCrit`        | official |                                               |
 
 ## Pipeline & engine API (our convention)
