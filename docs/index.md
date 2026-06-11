@@ -27,9 +27,9 @@ PRs.
 - **One doc type for the project: `specs/`.** A spec describes what something is
   (requirements, conventions, standards, interface design) and keeps its own
   reasoning in a `Rationale` section, so there is no separate decision log. See
-  [specs/README.md](specs/README.md) for the template.
+  [specs/index.md](specs/index.md) for the template.
 - **`references/` holds facts, not decisions.** Background and historical records
-  live there, flat by default. See [references/README.md](references/README.md).
+  live there, flat by default. See [references/index.md](references/index.md).
 - **Tasks and status never live in docs.** Small tasks, chores, and bugs — with
   owner and status — go to GitHub Issues (or the Slock task board), not docs.
 - **Folders are created on demand, not pre-built empty.** `docs/` has only
