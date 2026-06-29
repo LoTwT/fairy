@@ -5,6 +5,10 @@ published, how to recover it, and what the reset removes. **It is never a source
 for new work** (see the clean-slate rule in
 [../specs/0001-clean-slate.md](../specs/0001-clean-slate.md)).
 
+**Naming.** "Fairy" is the repository / product name; its packages are published
+under the **`@randomplay/*`** npm scope. The scope is kept across the clean-slate
+reset so published versions stay continuous and monotonic (below).
+
 ## Published npm versions
 
 Three packages were published together as a monorepo, sharing the same version

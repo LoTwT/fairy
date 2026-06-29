@@ -45,21 +45,20 @@ Documentation conventions:
 
 ## Implementation Notes
 
-The reset happens in this PR, then product work follows:
+The reset established the repository baseline; product work follows from this
+empty skeleton:
 
-1. **This PR — skeleton + clearing.** Establish the new skeleton (`AGENTS.md` as
-   the canonical real file, replacing the old `AGENTS.md → CLAUDE.md` symlink;
-   `CLAUDE.md` as a pointer; a minimal `README.md`; the routing source
-   `docs/index.md`; `docs/specs/`; `docs/references/`), and remove the old
+1. **Skeleton + clearing.** The current baseline keeps `AGENTS.md` as the
+   canonical real file, `CLAUDE.md` as a pointer, a minimal `README.md`, the
+   routing source `docs/index.md`, `docs/specs/`, and `docs/references/`. The old
    implementation, old docs, old build/release config, and old tooling listed in
-   [references/history.md](../references/history.md). The repository emerges as a
-   clean skeleton.
-2. **Product spec (next).** Decide what the new fairy is and how it is built. New
-   implementation starts from the empty skeleton.
+   [references/history.md](../references/history.md) remain removed.
+2. **Product spec (future).** Decide what the new fairy is and how it is built.
+   New implementation starts from the empty skeleton.
 
 ## Acceptance
 
-This PR:
+Current baseline:
 
 - The new skeleton is present and only the skeleton remains: `AGENTS.md`,
   `CLAUDE.md`, `README.md`, `LICENSE`, `.gitignore`, and `docs/{index.md, specs/,

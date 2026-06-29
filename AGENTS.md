@@ -41,3 +41,16 @@ Keep entry points thin and push detail into referenced files, loaded as needed.
 Do not restate rules across files. There is one source per concern: iron rules
 here, navigation in `docs/index.md`, requirements and conventions in
 `docs/specs/`.
+
+## Verification
+
+Before proposing a change, run the default gates and confirm they pass; state in
+the PR which you ran.
+
+- `pnpm check` — lint + format check.
+- `git diff --check` — no whitespace errors.
+- Tracked-Markdown relative-link check — no broken links.
+
+For dependency or package-manager changes, also run a frozen install and
+re-verify after the lockfile updates: `pnpm install --frozen-lockfile`, then
+re-run the gates above.
