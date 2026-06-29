@@ -2,13 +2,12 @@
 
 ## Scope
 
-This spec defines the planned Fairy project-root initialization: the Node
-version baseline, pnpm workspace root, and the minimal repository-quality tooling
-needed before any package code exists.
+This spec defines the Fairy project-root initialization: the Node version
+baseline, pnpm workspace root, and the minimal repository-quality tooling needed
+before any package code exists.
 
-This PR uses a spec-first flow: review this spec before adding execution commits.
-Until that review completes, the PR remains docs-only. After approval, the root
-configuration can land in the same PR.
+It records the root configuration that exists before package code lands. Later
+package or product PRs extend this baseline through their own specs.
 
 It also does **not** define packages, the damage formula, project `tsconfig`
 setup, data ingestion, CLI behavior, runtime schemas, tests, bundling, release
@@ -17,9 +16,9 @@ that needs them.
 
 ## Rationale
 
-Project initialization is only the root tooling needed to start cleanly. Planning
-it before executing it keeps the execution changes small and prevents tooling
-defaults from becoming hidden decisions.
+Project initialization is only the root tooling needed to start cleanly. Keeping
+it documented makes the setup reviewable and prevents tooling defaults from
+becoming hidden decisions.
 
 Keeping initialization separate from packages and the damage model keeps
 reviewable concerns small: root package-manager setup is one concern, package
@@ -33,8 +32,7 @@ publishes must be strictly greater than `0.1.4`.
 
 ## Contract
 
-The execution phase that follows this spec review should add only root-level
-configuration.
+The initialized repository root contains only root-level configuration.
 
 - The repository root package is private.
 - The repository root package uses ESM (`type: "module"`).
@@ -45,8 +43,9 @@ configuration.
   `24`.
 - The root package declares `engines.node` as `>=24`.
 - The root package declares `packageManager` as the bare Corepack pnpm version
-  selected at execution time: run `corepack use pnpm@latest`, record the resolved
-  `pnpm@<version>`, and omit Corepack's integrity suffix.
+  selected for the current baseline: run `corepack use pnpm@latest` when updating
+  pnpm, record the resolved `pnpm@<version>`, and omit Corepack's integrity
+  suffix.
 - The root quality-tooling surface is OXC-based:
   - `oxlint` for linting.
   - `oxfmt` for formatting.
@@ -67,7 +66,7 @@ configuration.
 
 ## Implementation Notes
 
-Expected execution-phase file shape:
+Current root file shape:
 
 ```text
 package.json
@@ -79,29 +78,29 @@ oxfmt.config.ts
 .gitignore
 ```
 
-`pnpm-workspace.yaml` may name `packages/*` before the folder exists, so the next
+`pnpm-workspace.yaml` names `packages/*` before the folder exists, so the next
 package PR can add `packages/<name>` without reshaping workspace config.
 
-It may also record pnpm's build-script approval for `simple-git-hooks`, so
+It also records pnpm's build-script approval for `simple-git-hooks`, so
 frozen installs do not require an interactive approval step before installing the
 pre-commit hook package.
 
-Use TypeScript config files for OXC tools (`oxlint.config.ts` and
+The project uses TypeScript config files for OXC tools (`oxlint.config.ts` and
 `oxfmt.config.ts`) because the Node-based `oxlint` and `oxfmt` packages support
-them and Node 24 can execute them. The execution phase must not add a separate TS
+them and Node 24 can execute them. The root setup must not add a separate TS
 loader, build step, or project `tsconfig` just to read these tool configs.
 
-The formatter config should mirror the core formatting policy from
+The formatter config mirrors the core formatting policy from
 `@lotwt/prettier-config` where Oxfmt supports equivalent options: two-space
 indentation, no tabs, print width 80, double quotes, trailing commas, no
 semicolons, LF line endings, preserved prose wrapping, bracket spacing, and
 consistent quoted object properties. Prettier plugins and Prettier-specific
 overrides are not part of this initialization.
 
-`.gitignore` should cover at least `node_modules/`, `dist/`, `coverage/`,
+`.gitignore` covers at least `node_modules/`, `dist/`, `coverage/`,
 `.DS_Store`, and `*.log`.
 
-Suggested root scripts for the execution phase:
+Root scripts:
 
 - `lint` — run `oxlint`.
 - `lint:fix` — run `oxlint --fix`.
@@ -118,16 +117,11 @@ Not planned unless reviewed separately:
 
 ## Acceptance
 
-This spec-only review phase:
+Current root setup:
 
-- Adds or updates docs and the AGENTS coordination rule only.
-- `git diff --check origin/main...HEAD` succeeds.
-- Markdown links resolve.
-
-The execution phase:
-
-- `corepack use pnpm@latest` has been run so `packageManager` records the current
-  pnpm release as a bare `pnpm@<version>` value.
+- `corepack use pnpm@latest` has been run for the current baseline so
+  `packageManager` records the selected pnpm release as a bare `pnpm@<version>`
+  value.
 - `pnpm install --frozen-lockfile` succeeds from a clean checkout under Node 24.
 - `pnpm lint` succeeds.
 - `pnpm format:check` succeeds.
@@ -139,7 +133,7 @@ The execution phase:
 - `git diff --check origin/main...HEAD` succeeds.
 - Markdown links resolve.
 - The root package is `private: true`.
-- The diff adds only the AGENTS coordination rule, root workspace initialization,
-  and this spec/docs; it does not add packages, damage-formula implementation,
-  project `tsconfig`, data ingestion, runtime schemas, tests, bundling, release
-  workflows, or deploy config.
+- The root setup contains only AGENTS coordination rules, root workspace
+  initialization, and this spec/docs; it does not add packages, damage-formula
+  implementation, project `tsconfig`, data ingestion, runtime schemas, tests,
+  bundling, release workflows, or deploy config.
