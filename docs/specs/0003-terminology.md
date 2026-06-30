@@ -28,10 +28,10 @@ rather than headings so a readable glossary does not accidentally decide formula
 or enum eligibility.
 
 Chinese and English naming must be conservative. A Simplified-Chinese name is
-only written into `zh_cn_official` when official or visible in-game/official-site
-text confirms it. If the English term or mechanic is sourced but the official
-Chinese display name is not stable, the glossary uses `待核验` in
-`zh_cn_official`; it must not invent a Chinese name that only looks official.
+only written into `zh` when official or visible in-game/official-site text
+confirms it. If the English term or mechanic is sourced but the official Chinese
+display name is not stable, the glossary uses `待核验` in `zh`; it must not
+invent a Chinese name that only looks official.
 
 Deprecated aliases live in the glossary, not duplicated across specs, so future
 scan rules have one data source.
@@ -40,8 +40,8 @@ scan rules have one data source.
 
 ### Source Priority
 
-Chinese (`zh_cn_official`) and English (`en_official`) names are resolved in this
-order, highest first:
+Chinese (`zh`) and English (`en`) names are resolved in this order, highest
+first:
 
 1. **HoYo official announcements / visible in-game or official-site text** —
    authoritative for Simplified-Chinese names and version timing.
@@ -137,13 +137,13 @@ are kept, but their formula/config eligibility is controlled by `domain`,
 
 - `source_status` is `official`, `official-wiki`, or both. It describes the
   source class for the term/mechanic itself.
-- `待核验` (needs-verify) is a value of the `zh_cn_official` column, **not** of
+- `待核验` (needs-verify) is a value of the `zh` column, **not** of
   `source_status`. It means no stable official Chinese name is confirmed yet
   even though the term/mechanic has an English or mechanic source.
-- A `zh_cn_official = 待核验` entry must never be exported as official Chinese
-  display text. Treat it as internal reference / placeholder only.
-- When official Chinese text is later confirmed, update `zh_cn_official` and
-  update `source_status` only if the source class actually changed.
+- A `zh = 待核验` entry must never be exported as official Chinese display text.
+  Treat it as internal reference / placeholder only.
+- When official Chinese text is later confirmed, update `zh` and update
+  `source_status` only if the source class actually changed.
 
 ### Deprecated Aliases
 
@@ -189,8 +189,8 @@ The manual terminology checks are:
   `character-mechanic` terms never appear in global enums without an explicit
   reuse reason; subject-area headings never override `domain`, `code_surface`,
   or `export_policy`.
-- **needs-verify check** — no `zh_cn_official = 待核验` entry is exported as
-  official Chinese text.
+- **needs-verify check** — no `zh = 待核验` entry is exported as official Chinese
+  text.
 - **Wind-chain consistency** — if `windswept` triggers `vortex` somewhere, that
   settlement is not also written as `disorder`; a `contamination` reference is
   stated as the Windswept link.
