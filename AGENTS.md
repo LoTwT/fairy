@@ -37,6 +37,10 @@ Keep entry points thin and push detail into referenced files, loaded as needed.
 - Requirements, conventions, standards, and lightweight design live as specs
   under `docs/specs/` (each spec keeps its own reasoning in a `Rationale`
   section). Supporting facts and history live under `docs/references/`.
+- ZZZ terminology, code identifiers, config keys, data fields, and log labels use
+  [docs/references/glossary.md](docs/references/glossary.md) as the canonical
+  naming source; [docs/specs/0003-terminology.md](docs/specs/0003-terminology.md)
+  defines the rules around it.
 
 Do not restate rules across files. There is one source per concern: iron rules
 here, navigation in `docs/index.md`, requirements and conventions in

@@ -28,3 +28,6 @@ tracker (GitHub Issues / Slock task board) and in PRs.
   rules and the repository-reset contract.
 - [0002-project-initialization.md](0002-project-initialization.md) — the
   root workspace setup plan and initialization acceptance gates.
+- [0003-terminology.md](0003-terminology.md) — the terminology glossary system:
+  naming rules, boundary columns, source status, deprecated aliases, and
+  verification expectations.
