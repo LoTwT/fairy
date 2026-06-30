@@ -5,22 +5,27 @@ the content itself. Other entry points point here and do not duplicate this map.
 
 ## Where to look
 
-| You want                                                     | Go to                                   | Holds                                                                                                                                |
-| ------------------------------------------------------------ | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| Requirements, conventions, standards, or interface design    | `docs/specs/`                           | Specs: what something is and should remain true, plus lightweight design (function signatures, module boundaries) — no detailed code |
-| Supporting facts and background (incl. the pre-reset record) | `docs/references/`                      | Reference material: external docs, data, glossaries, history. Read-only; never a source                                              |
-| The iron rules for working here                              | [../AGENTS.md](../AGENTS.md)            | Clean-slate, human-in-the-loop, npm version monotonicity                                                                             |
-| A task, chore, bug — or its owner / status                   | GitHub Issues (or the Slock task board) | Execution tracking. Not in docs                                                                                                      |
+| You want                                                     | Go to                                                  | Holds                                                                                                                                |
+| ------------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
+| Requirements, conventions, standards, or interface design    | `docs/specs/`                                          | Specs: what something is and should remain true, plus lightweight design (function signatures, module boundaries) — no detailed code |
+| ZZZ terminology naming rules                                 | [specs/0003-terminology.md](specs/0003-terminology.md) | The source-priority, naming, boundary, deprecated-alias, and verification rules for ZZZ terms                                        |
+| Supporting facts and background (incl. the pre-reset record) | `docs/references/`                                     | Reference material: external docs, data, glossaries, history. Read-only; never a source                                              |
+| Canonical ZZZ term data                                      | [references/glossary.md](references/glossary.md)       | The canonical glossary for code identifiers, config keys, data fields, log labels, and docs                                          |
+| The iron rules for working here                              | [../AGENTS.md](../AGENTS.md)                           | Clean-slate, human-in-the-loop, npm version monotonicity                                                                             |
+| A task, chore, bug — or its owner / status                   | GitHub Issues (or the Slock task board)                | Execution tracking. Not in docs                                                                                                      |
 
 ## Current state
 
 The project has been reset to a clean slate (see
 [specs/0001-clean-slate.md](specs/0001-clean-slate.md)). The pre-reset code and
 docs have been removed; they survive only as history (git tags, npm, and
-[references/history.md](references/history.md)). The first post-reset
-implementation spec is [specs/0002-project-initialization.md](specs/0002-project-initialization.md):
-the root workspace setup plan. Package code and the damage model come in later
-PRs.
+[references/history.md](references/history.md)).
+[specs/0002-project-initialization.md](specs/0002-project-initialization.md)
+defines the root workspace setup plan and implementation baseline.
+[specs/0003-terminology.md](specs/0003-terminology.md) defines the ZZZ
+terminology naming contract, backed by canonical term data in
+[references/glossary.md](references/glossary.md). Package code and the damage
+model come in later PRs.
 
 ## Conventions
 
