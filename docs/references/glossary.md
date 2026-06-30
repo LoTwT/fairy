@@ -26,7 +26,7 @@ The primary reading path is by **game/config subject area**:
 Each row also carries machine-checkable boundary columns:
 
 - **domain** — the mechanic layer: `damage-formula`, `attribute-anomaly`,
-  `character-mechanic`, `content`, or `engineering-convention`.
+  `agent-specialty`, `character-mechanic`, `content`, or `engineering-convention`.
 - **code_surface** — where the identifier may appear: `formula-key`, `config-key`,
   `enum-value`, `doc-only`, or `reserved`.
 - **export_policy** — how public the term is: `exported`, `internal`, `doc-only`, or
@@ -62,7 +62,6 @@ safe to reference from shared formula/config/data panels only when `code_surface
 | ------------ | ----------------- | ------------ | ------------- | -------------- | --------------------------------- | --------------------------------- | -------------------------- | ------------------------ | ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | common       | damage-formula    | formula-key  | exported      | 失衡           | Daze                              | `daze`                            | base                       | official-wiki            | `stun` (deprecated for this sense) | Daze is the meter/mechanic; an enemy enters Stunned only at 100% Daze. Official zh has long used 失衡状态/失衡值. `stun` is reserved for the specialty — do not use it for Daze.   |
 | common       | damage-formula    | enum-value   | exported      | 待核验         | Stunned                           | `stunnedState`                    | base                       | official-wiki            | `dazed`, `staggered`               | The _state_, not the specialty and not Daze itself. Use `stunnedState` to avoid clashing with specialty `stun`.                                                                    |
-| common       | damage-formula    | enum-value   | exported      | 击破           | Stun                              | `stun`                            | 0.3.0                      | official-wiki            | —                                  | `Stun` is used **only** for the agent-specialty (e.g. 击破·电, 物理·击破).                                                                                                         |
 | common       | damage-formula    | formula-key  | exported      | 待核验         | DMG Bonus                         | `damageBonus`                     | base                       | official-wiki            | `boost`, `dmgBonus`                | Formula page has a DMG Bonus Multiplier; surface zh text varies (造成的伤害提升 / X属性伤害加成), so zh stays needs-verify. Standardize on `damageBonus`; never `boost`.           |
 | common       | damage-formula    | formula-key  | exported      | 防御力         | DEF / Defense                     | `defense`                         | base                       | official                 | `defence`                          | Formula page uses a DEF Multiplier; official zh is 防御力. Use American spelling `defense`.                                                                                        |
 | common       | damage-formula    | formula-key  | exported      | 异常精通       | Anomaly Proficiency               | `anomalyProficiency`              | 0.2.0                      | official                 | misused `anomalyMastery`           | Scales attribute-anomaly **damage**. Strictly distinct from Anomaly Mastery. Official zh: 异常精通.                                                                                |
@@ -104,15 +103,16 @@ safe to reference from shared formula/config/data panels only when `code_surface
 
 ## Agents
 
-Playable agent names, agent metadata, and agent-only mechanics. Agent-only mechanics may
-be referenced by logs and skill parsing, but must not enter global formula tables or global
-enums unless a later spec explicitly promotes them.
+Playable agent names, agent metadata, agent specialties, and agent-only mechanics.
+Agent-only mechanics may be referenced by logs and skill parsing, but must not enter
+global formula tables or global enums unless a later spec explicitly promotes them.
 
 | subject_area | domain             | code_surface | export_policy | zh_cn_official | en_official       | code_identifier    | introduced_in | source_status | aliases / deprecated | notes                                                                                                                             |
 | ------------ | ------------------ | ------------ | ------------- | -------------- | ----------------- | ------------------ | ------------- | ------------- | -------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
 | agents       | content            | config-key   | exported      | 维琳娜·艾嘉德  | Velina Airgid     | `velinaAirgid`     | 3.0           | official      | —                    | S-rank Wind / Anomaly agent.                                                                                                      |
 | agents       | content            | config-key   | exported      | 诺姆·霍洛维尔  | Norma Hollowell   | `normaHollowell`   | 3.0           | official      | —                    | 3.0 version page: S-rank Fire / Stun.                                                                                             |
 | agents       | content            | config-key   | exported      | 佩洛伊斯       | Pyrois            | `pyrois`           | 3.0           | official      | —                    | 3.0 version page: A-rank Ether / Attack.                                                                                          |
+| agents       | agent-specialty    | enum-value   | exported      | 击破           | Stun              | `stun`             | 0.3.0         | official-wiki | —                    | Agent-specialty enum only (e.g. 击破·电, 物理·击破); not the Daze mechanic, not the Stunned state, and not a damage-formula term. |
 | agents       | character-mechanic | doc-only     | internal      | 待核验         | Windbloom         | `windbloom`        | 3.0           | official-wiki | —                    | Velina-only resource; gained on entry and from specific EX skills; max 135.                                                       |
 | agents       | character-mechanic | doc-only     | internal      | 待核验         | Windbite          | `windbite`         | 3.0           | official-wiki | —                    | Gained after Velina triggers Vortex; also the name of a skill-upgrade chip material.                                              |
 | agents       | character-mechanic | doc-only     | internal      | 待核验         | Condensed Cyclone | `condensedCyclone` | 3.0           | official-wiki | —                    | The cyclone Velina summons when triggering Vortex; do not place into the global damage-formula base table.                        |
@@ -179,16 +179,20 @@ leak into formula fields.
 ## Deprecated aliases (do-not-use)
 
 These forms must **not** be used as canonical names anywhere — code, config, exported
-fields, tests, or docs. They appear here (and in the `aliases / deprecated` columns above)
-precisely so they are recognizable and avoidable; their presence in this table is the
-reference, not a usage.
+fields, tests, or docs. This table is the future scan source for globally banned aliases.
+The `aliases / deprecated` cells above may also record weak aliases, source wording, or
+contextual shorthands; only table entries are global scan targets.
 
 | deprecated                       | replace_with         | reason                                                                                |
 | -------------------------------- | -------------------- | ------------------------------------------------------------------------------------- |
 | `boost`                          | `damageBonus`        | DMG Bonus is the canonical that matches the formula/data pages; `boost` is too vague. |
+| `dmgBonus`                       | `damageBonus`        | Display text may keep DMG; identifiers spell out `damage`.                            |
 | `defence`                        | `defense`            | One American spelling, no synonyms.                                                   |
 | `stun` (for the Daze mechanic)   | `daze`               | `stun` is reserved for the specialty; the mechanic itself is `daze`.                  |
+| `dazed`                          | `stunnedState`       | Avoid extra state synonyms; the state identifier is `stunnedState`.                   |
 | `staggered`                      | `stunnedState`       | Avoid extra community synonyms; the official context is Daze → Stunned.               |
+| `stunVulnerability`              | `dazeVulnerability`  | The vulnerability comes from the Daze → Stunned mechanic, not the Stun specialty.     |
 | `anomalyMastery` (for 异常精通)  | `anomalyProficiency` | Different stats — Mastery scales buildup, Proficiency scales anomaly damage.          |
+| `sheerBoost`                     | `sheerDamageBonus`   | Use the explicit Sheer DMG Bonus identifier, not a generic boost.                     |
 | `disorder` (for the Wind chain)  | `vortex`             | With Windswept active, normal Disorder does not trigger; Vortex does.                 |
 | `corruption` (for the Wind link) | `contamination`      | Corruption is an Ether anomaly; Contamination is the Windswept cross-attribute link.  |

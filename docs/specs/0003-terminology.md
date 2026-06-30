@@ -1,150 +1,213 @@
-# 0003 — Terminology Glossary
+# Spec 0003 — Terminology Glossary
 
-Fairy models Zenless Zone Zero (ZZZ) combat. Its public surface — code identifiers,
-config keys, data fields, log labels, and docs — must name game concepts the same way
-every time. This spec defines the **terminology glossary** as the single source of truth
-for that naming, and the rules that keep it consistent. The glossary data lives in
-`docs/references/glossary.md`; this spec defines the system around it.
+## Scope
 
-## Status
+This spec governs Fairy's terminology glossary for Zenless Zone Zero (ZZZ)
+concepts. Code identifiers, config keys, data fields, log labels, and docs must
+use the glossary as the canonical naming source.
 
-Current baseline. The glossary and these rules are documentation-level: they govern how
-future product code, config, and docs name ZZZ concepts. They add no package code, build,
-test, or runtime behavior. Automated enforcement (QA scripts) is intentionally deferred
-(see Verification), because there is no product code or generated artifact to scan yet.
+The glossary data lives in
+[docs/references/glossary.md](../references/glossary.md). This spec defines the
+rules around that data: source priority, subject areas, boundary columns, naming
+conventions, source status, deprecated aliases, verification, and maintenance.
 
-## Source priority
+This spec does **not** add package code, build steps, tests, runtime behavior, or
+QA scripts. Automated enforcement is deferred until product code or generated
+configuration exists to scan.
 
-Chinese (`zh_cn_official`) and English (`en_official`) names are resolved in this order,
-highest first:
+## Rationale
 
-1. **HoYo official announcements / visible in-game or official-site text** — authoritative
-   for Simplified-Chinese names and version timing.
-2. **Zenless Zone Zero Fandom official wiki** — stable English terms, change history,
-   version-introduced timing, and mechanic chains.
-3. **Prydwen** — cross-check for mechanic semantics, especially stats whose boundaries the
-   community confuses (e.g. Anomaly Proficiency vs Anomaly Mastery).
-4. **Engineering convention** — `code_identifier` recommendations (camelCase, etc.). These
-   are maintenance rules for interface consistency, not official game text.
+Fairy models ZZZ combat and related game data. The same game concept can appear
+in multiple places — formula terms, config schemas, agent metadata, equipment
+data, logs, and prose — so names need one shared source of truth.
 
-A name is only written into `zh_cn_official` when an official or visible in-game/official-site
-source confirms it. If only English can be confirmed (wiki / Prydwen / English material) with
-no stable official Chinese text, `zh_cn_official` is `待核验` (needs-verify); never invent a
-Chinese name that merely looks official.
+The glossary is organized by game/development subject area because developers
+usually look up terms by object type: common combat concepts, agents, W-Engines,
+Drive Discs, Bangboo, or content/proper nouns. Boundary rules stay in columns
+rather than headings so a readable glossary does not accidentally decide formula
+or enum eligibility.
 
-## Glossary organization & boundaries
+Chinese and English naming must be conservative. A Simplified-Chinese name is
+only written into `zh_cn_official` when official or visible in-game/official-site
+text confirms it. If the English term or mechanic is sourced but the official
+Chinese display name is not stable, the glossary uses `待核验` in
+`zh_cn_official`; it must not invent a Chinese name that only looks official.
 
-The glossary is organized first by `subject_area`, then constrained by boundary columns.
-`subject_area` is the human reading path: `common`, `agents`, `w-engines`, `drive-discs`,
-`bangboo`, and `content`. These sections match the game/config objects developers look up
-when naming fields.
+Deprecated aliases live in the glossary, not duplicated across specs, so future
+scan rules have one data source.
 
-Every term also has a `domain`, `code_surface`, and `export_policy`. These columns are the
-core rule surface: **terms that are specific to one character, one equipment object, or one
-version's content must never leak into the global combat/formula vocabulary.** Do not infer
-formula/global-enum eligibility from a subject-area heading alone.
+## Contract
+
+### Source Priority
+
+Chinese (`zh_cn_official`) and English (`en_official`) names are resolved in this
+order, highest first:
+
+1. **HoYo official announcements / visible in-game or official-site text** —
+   authoritative for Simplified-Chinese names and version timing.
+2. **Zenless Zone Zero Fandom official wiki** — stable English terms, change
+   history, version-introduced timing, and mechanic chains.
+3. **Prydwen** — cross-check for mechanic semantics, especially stats whose
+   boundaries the community confuses (e.g. Anomaly Proficiency vs Anomaly
+   Mastery).
+4. **Engineering convention** — `code_identifier` recommendations (camelCase,
+   etc.). These are maintenance rules for interface consistency, not official
+   game text.
+
+### Glossary Organization And Boundaries
+
+The glossary is organized first by `subject_area`, then constrained by boundary
+columns. `subject_area` is the human reading path:
+
+- `common`
+- `agents`
+- `w-engines`
+- `drive-discs`
+- `bangboo`
+- `content`
+
+Every term also has a `domain`, `code_surface`, and `export_policy`. These
+columns are the core rule surface: terms that are specific to one character, one
+equipment object, one agent specialty, or one version's content must not leak
+into the global combat/formula vocabulary.
 
 `domain` values:
 
-- **damage-formula** — multipliers, resistances, defense, Daze/Impact, anomaly stats, Sheer
-  Force/DMG — concepts with stable meaning for general damage calculation
-  (e.g. `daze`, `damageBonus`, `defense`, `anomalyProficiency`, `anomalyMastery`, `impact`,
-  `penRatio`, `penValue`, `sheerForce`, `sheerDamageBonus`).
+- **damage-formula** — multipliers, resistances, defense, Daze/Impact, anomaly
+  stats, Sheer Force/DMG, and concepts with stable meaning for general damage
+  calculation (e.g. `daze`, `damageBonus`, `defense`,
+  `anomalyProficiency`, `anomalyMastery`, `impact`, `penRatio`, `penValue`,
+  `sheerForce`, `sheerDamageBonus`).
 - **attribute-anomaly** — attributes and anomaly mechanics themselves
-  (e.g. `wind`, `windDamage`, `windswept`, `tempestCoefficient`, `contamination`, `vortex`,
-  `disorder`, `abloom`). Globally referenceable.
-- **character-mechanic** — resources, summons, and derived effects that hold only for a
-  specific character (e.g. Velina's `windbloom`, `windbite`, `condensedCyclone`,
-  `sweepingCyclone`, `chromaticTint`). May be referenced by logs/skill parsing, but must NOT
-  enter the global formula table or global enums.
+  (e.g. `wind`, `windDamage`, `windswept`, `tempestCoefficient`,
+  `contamination`, `vortex`, `disorder`, `abloom`). Globally referenceable.
+- **agent-specialty** — playable-agent specialty metadata such as `stun`. These
+  terms may be exported as agent metadata enums, but they are not damage-formula
+  concepts.
+- **character-mechanic** — resources, summons, and derived effects that hold
+  only for a specific character (e.g. Velina's `windbloom`, `windbite`,
+  `condensedCyclone`, `sweepingCyclone`, `chromaticTint`). They may be
+  referenced by logs/skill parsing, but must not enter global formula tables or
+  global enums without an explicit reuse reason.
 - **content** — character, faction, map, system, gear, and Bangboo names
-  (e.g. `velinaAirgid`, `roscaelifer`, `externalStrategyDepartment`, `wutheringSalon`).
-  Recorded, but kept out of the formula layer.
-- **engineering-convention** — naming rules that exist purely for code clarity (below).
+  (e.g. `velinaAirgid`, `roscaelifer`, `externalStrategyDepartment`,
+  `wutheringSalon`). Recorded, but kept out of the formula layer.
+- **engineering-convention** — naming rules that exist purely for code clarity.
 
-Worked example: `vortex` is a global anomaly mechanic (attribute-anomaly); `sweepingCyclone`
-is Velina-only (character-mechanic); `roscaelifer` is a 3.0 city (content). All three are
-kept, but their formula/config eligibility is controlled by `domain`, `code_surface`, and
-`export_policy`, not by their section heading alone.
+Worked example: `vortex` is a global anomaly mechanic
+(`attribute-anomaly`); `stun` is an agent-specialty enum; `sweepingCyclone` is
+Velina-only (`character-mechanic`); `roscaelifer` is a 3.0 city (`content`). All
+are kept, but their formula/config eligibility is controlled by `domain`,
+`code_surface`, and `export_policy`, not by their section heading alone.
 
-`code_surface` values describe where an identifier may appear: `formula-key`, `config-key`,
-`enum-value`, `doc-only`, or `reserved`.
+`code_surface` values describe where an identifier may appear:
 
-`export_policy` values describe how public the term may be: `exported`, `internal`,
-`doc-only`, or `do-not-use`.
+- `formula-key`
+- `config-key`
+- `enum-value`
+- `doc-only`
+- `reserved`
 
-## Naming conventions (engineering-convention)
+`export_policy` values describe how public the term may be:
+
+- `exported`
+- `internal`
+- `doc-only`
+- `do-not-use`
+
+### Naming Conventions
 
 - `code_identifier` is **camelCase**.
-- `DMG` stays abbreviated in display text, but expands to `damage` in identifiers
-  (`damageBonus`, not `dmgBonus`).
-- State names are decoupled from specialties: use `stunnedState`, not `stun`, for the
-  Stunned state. `stun` is reserved for the agent-specialty only.
-- Resource fields follow consistent shapes: `maxXxx`, `xxxGenerationRate`, `xxxBuildup`.
+- `DMG` stays abbreviated in display text, but expands to `damage` in
+  identifiers (`damageBonus`, not `dmgBonus`).
+- State names are decoupled from specialties: use `stunnedState`, not `stun`,
+  for the Stunned state. `stun` is reserved for the agent-specialty only.
+- Resource fields follow consistent shapes: `maxXxx`, `xxxGenerationRate`,
+  `xxxBuildup`.
 - Spelling is American English: `defense`, not `defence`.
-- Three hard distinctions that recur across formula, config, and character text:
-  - **Daze** (mechanic / meter, `daze`) → **Stunned** (state, `stunnedState`) → **Stun**
-    (agent-specialty, `stun`). Three different things.
-  - **Anomaly Proficiency** (`anomalyProficiency`, scales anomaly damage) ≠ **Anomaly Mastery**
-    (`anomalyMastery`, scales buildup efficiency).
-  - `damageBonus` (on the attacker) ≠ `damageTaken` (on the target).
+- Three hard distinctions recur across formula, config, and character text:
+  - **Daze** (mechanic / meter, `daze`) -> **Stunned** (state,
+    `stunnedState`) -> **Stun** (agent-specialty, `stun`). Three different
+    things.
+  - **Anomaly Proficiency** (`anomalyProficiency`, scales anomaly damage) is not
+    **Anomaly Mastery** (`anomalyMastery`, scales buildup efficiency).
+  - `damageBonus` (on the attacker) is not `damageTaken` (on the target).
 
-## Source status & needs-verify
+### Source Status And Needs-Verify
 
-- `source_status` is `official`, `official-wiki`, or both — the term/mechanic itself always
-  has a source.
-- `待核验` (needs-verify) is a value of the `zh_cn_official` column, **not** of `source_status`:
-  it means no stable official Chinese name is confirmed yet (the mechanic still has an English
-  source). Such an entry must **never** be exported as official Chinese display text — internal
-  reference / placeholder only.
-- When official Chinese text is later confirmed, the entry's `zh_cn_official` is updated (and
-  `source_status` only if its source actually changed).
+- `source_status` is `official`, `official-wiki`, or both. It describes the
+  source class for the term/mechanic itself.
+- `待核验` (needs-verify) is a value of the `zh_cn_official` column, **not** of
+  `source_status`. It means no stable official Chinese name is confirmed yet
+  even though the term/mechanic has an English or mechanic source.
+- A `zh_cn_official = 待核验` entry must never be exported as official Chinese
+  display text. Treat it as internal reference / placeholder only.
+- When official Chinese text is later confirmed, update `zh_cn_official` and
+  update `source_status` only if the source class actually changed.
 
-## Deprecated aliases (do-not-use)
+### Deprecated Aliases
 
-Deprecated aliases must not be used as canonical names anywhere — code, config, exported
-fields, tests, or docs. The **canonical list lives in `docs/references/glossary.md`**
-(§Deprecated aliases), kept there as data so it grows with the terms; this spec defines only
-the policy. For orientation, the current set replaces: `boost` → `damageBonus`,
-`defence` → `defense`, `stun`-for-Daze → `daze`, `staggered` → `stunnedState`,
-`anomalyMastery`-for-异常精通 → `anomalyProficiency`, `disorder`-for-Wind → `vortex`,
-`corruption`-for-Wind → `contamination`.
+Deprecated aliases must not be used as canonical names anywhere — code, config,
+exported fields, tests, or docs. The canonical deprecated-alias table lives in
+[docs/references/glossary.md](../references/glossary.md#deprecated-aliases-do-not-use)
+so it grows with the term data.
 
-## Verification
+That deprecated-alias table is the future scan source. Any code-shaped alias
+that is globally do-not-use belongs in the table. Row-level `aliases /
+deprecated` cells may also describe weak aliases, source wording, or contextual
+shorthands, but contextual shorthands with allowed local use do not automatically
+become global scan targets.
 
-These five checks define how the glossary stays correct. This round documents them as
-enforcement rules; scripting is deferred until a consumer (product code / generated config)
-exists to scan. Until then they are applied by manual review at the change gate.
+The current deprecated scan set includes aliases such as `boost` and `dmgBonus`
+for `damageBonus`; `defence` for `defense`; `stun` for the Daze mechanic;
+`dazed` and `staggered` for `stunnedState`; `stunVulnerability` for
+`dazeVulnerability`; `anomalyMastery` for 异常精通; `sheerBoost` for
+`sheerDamageBonus`; `disorder` for the Wind chain; and `corruption` for the Wind
+link.
 
-- **Identifier uniqueness** — each public `code_identifier` appears once; one English canonical
-  yields one public identifier.
-- **Deprecated-alias scan** — no deprecated alias used as canonical in docs/config/fields/tests,
-  excluding the deprecated-aliases table and explanatory examples; flag canonical/exported use only.
-- **Boundary check** — `content` terms never use formula-key/global-enum surfaces;
-  `character-mechanic` terms never appear in global enums without an explicit reuse reason;
-  subject-area headings never override `domain`, `code_surface`, or `export_policy`.
-- **needs-verify check** — no `zh_cn_official = 待核验` entry is exported as official Chinese text.
-- **Wind-chain consistency** — if `windswept` triggers `vortex` somewhere, that settlement is
-  not also written as `disorder`; a `contamination` reference is stated as the Windswept link.
+## Implementation Notes
 
-## Maintenance & versioning
+The glossary is documentation data for now. Manual review applies the
+terminology checks until a consumer exists for automated QA. A consumer can be
+product code, generated config, exported schema data, or log/test fixtures.
 
-- `introduced_in` records the game version a term entered (e.g. `base`, `0.2.0`, `2.0`,
-  `2.8`/`3.0`). New game versions add terms; entries are not removed when a version ages.
-- Term additions/renames follow the normal docs flow (a spec/docs PR under the GitHub
-  contribution policy). Renames update the glossary plus the deprecated-aliases section.
-- `AGENTS.md` carries a one-line pointer naming this glossary as the canonical source for
-  ZZZ terminology.
+The manual terminology checks are:
 
-## Acceptance (this round)
+- **Identifier uniqueness** — each public `code_identifier` appears once; one
+  English canonical yields one public identifier.
+- **Deprecated-alias scan** — no deprecated alias from the canonical deprecated
+  table is used as canonical in docs/config/fields/tests, excluding the
+  deprecated-aliases table and explanatory examples; flag canonical/exported use
+  only.
+- **Boundary check** — `content` terms never use formula-key/global-enum
+  surfaces; `agent-specialty` terms never appear as formula keys;
+  `character-mechanic` terms never appear in global enums without an explicit
+  reuse reason; subject-area headings never override `domain`, `code_surface`,
+  or `export_policy`.
+- **needs-verify check** — no `zh_cn_official = 待核验` entry is exported as
+  official Chinese text.
+- **Wind-chain consistency** — if `windswept` triggers `vortex` somewhere, that
+  settlement is not also written as `disorder`; a `contamination` reference is
+  stated as the Windswept link.
 
-- `docs/references/glossary.md` exists: all researched terms, cleaned of research-citation
-  artifacts, organized by subject area (`common`, `agents`, `w-engines`, `drive-discs`,
-  `bangboo`, `content`) with boundary columns (`domain`, `code_surface`, `export_policy`) and
-  a deprecated-aliases section.
-- This spec (`docs/specs/0003-terminology.md`) defines subject areas, boundary columns, naming
-  conventions, source status / needs-verify, deprecated-alias policy, the five verification
-  rules, and maintenance.
+`introduced_in` records the game version a term entered (e.g. `base`, `0.2.0`,
+`2.0`, `2.8`/`3.0`). New game versions add terms; entries are not removed when a
+version ages.
+
+Term additions and renames follow the normal docs flow under the GitHub
+contribution policy. Renames update the glossary plus the deprecated-alias table.
+`AGENTS.md` carries a one-line pointer naming this glossary as the canonical
+source for ZZZ terminology.
+
+## Acceptance
+
+- [docs/references/glossary.md](../references/glossary.md) contains the canonical
+  term data, organized by subject area with boundary columns (`domain`,
+  `code_surface`, `export_policy`) and a canonical deprecated-aliases section.
+- This spec defines source priority, subject areas, boundary columns, naming
+  conventions, source status / needs-verify, deprecated-alias policy, manual
+  verification rules, and maintenance.
 - `AGENTS.md` points to the glossary as the canonical terminology source.
-- No package code, build, test, runtime behavior, or QA scripts are added.
-- `git diff --check` succeeds; tracked Markdown links resolve.
+- No package code, build, test, runtime behavior, or QA script is required by
+  this spec.
+- `git diff --check` succeeds and tracked Markdown links resolve.
