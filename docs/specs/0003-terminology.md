@@ -147,23 +147,27 @@ are kept, but their formula/config eligibility is controlled by `domain`,
 
 ### Deprecated Aliases
 
-Deprecated aliases must not be used as canonical names anywhere — code, config,
-exported fields, tests, or docs. The canonical deprecated-alias table lives in
+Deprecated aliases must not be used as canonical names in the context named by
+the glossary table's `forbidden_when` field. Rows marked `always` are
+unconditional do-not-use aliases across code, config, exported fields, tests,
+and docs. Contextual rows are forbidden only in their stated scope, so they can
+coexist with a valid canonical term elsewhere.
+
+The canonical deprecated-alias table lives in
 [docs/references/glossary.md](../references/glossary.md#deprecated-aliases-do-not-use)
-so it grows with the term data.
+so it grows with the term data. That table is the future context-aware scan
+source. Row-level `aliases / deprecated` cells may also describe weak aliases,
+source wording, or contextual shorthands, but only the deprecated-alias table
+defines scan targets and scopes.
 
-That deprecated-alias table is the future scan source. Any code-shaped alias
-that is globally do-not-use belongs in the table. Row-level `aliases /
-deprecated` cells may also describe weak aliases, source wording, or contextual
-shorthands, but contextual shorthands with allowed local use do not automatically
-become global scan targets.
-
-The current deprecated scan set includes aliases such as `boost` and `dmgBonus`
-for `damageBonus`; `defence` for `defense`; `stun` for the Daze mechanic;
-`dazed` and `staggered` for `stunnedState`; `stunVulnerability` for
-`dazeVulnerability`; `anomalyMastery` for 异常精通; `sheerBoost` for
-`sheerDamageBonus`; `disorder` for the Wind chain; and `corruption` for the Wind
-link.
+The current deprecated scan set includes unconditional aliases such as `boost`
+and `dmgBonus` for `damageBonus`, `defence` for `defense`, `stunVulnerability`
+for `dazeVulnerability`, and `sheerBoost` for `sheerDamageBonus`. It also
+includes contextual aliases such as `stun` when used for the Daze mechanic,
+`dazed` and `staggered` when used as canonical Stunned-state identifiers,
+`anomalyMastery` when used for Anomaly Proficiency / 异常精通, `disorder` when
+used for the Windswept settlement, and `corruption` when used for the Windswept
+cross-attribute link.
 
 ## Implementation Notes
 
@@ -176,7 +180,8 @@ The manual terminology checks are:
 - **Identifier uniqueness** — each public `code_identifier` appears once; one
   English canonical yields one public identifier.
 - **Deprecated-alias scan** — no deprecated alias from the canonical deprecated
-  table is used as canonical in docs/config/fields/tests, excluding the
+  table is used as canonical in docs/config/fields/tests within its
+  `forbidden_when` context; rows marked `always` are global. Exclude the
   deprecated-aliases table and explanatory examples; flag canonical/exported use
   only.
 - **Boundary check** — `content` terms never use formula-key/global-enum

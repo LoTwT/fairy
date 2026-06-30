@@ -178,21 +178,22 @@ leak into formula fields.
 
 ## Deprecated aliases (do-not-use)
 
-These forms must **not** be used as canonical names anywhere — code, config, exported
-fields, tests, or docs. This table is the future scan source for globally banned aliases.
-The `aliases / deprecated` cells above may also record weak aliases, source wording, or
-contextual shorthands; only table entries are global scan targets.
+These forms must **not** be used as canonical names in the context named by
+`forbidden_when`. This table is the future scan source for deprecated aliases; rows
+marked `always` are unconditional scan targets, while contextual rows only apply in
+their stated scope. The `aliases / deprecated` cells above may also record weak aliases,
+source wording, or contextual shorthands; only this table defines scan targets.
 
-| deprecated                       | replace_with         | reason                                                                                |
-| -------------------------------- | -------------------- | ------------------------------------------------------------------------------------- |
-| `boost`                          | `damageBonus`        | DMG Bonus is the canonical that matches the formula/data pages; `boost` is too vague. |
-| `dmgBonus`                       | `damageBonus`        | Display text may keep DMG; identifiers spell out `damage`.                            |
-| `defence`                        | `defense`            | One American spelling, no synonyms.                                                   |
-| `stun` (for the Daze mechanic)   | `daze`               | `stun` is reserved for the specialty; the mechanic itself is `daze`.                  |
-| `dazed`                          | `stunnedState`       | Avoid extra state synonyms; the state identifier is `stunnedState`.                   |
-| `staggered`                      | `stunnedState`       | Avoid extra community synonyms; the official context is Daze → Stunned.               |
-| `stunVulnerability`              | `dazeVulnerability`  | The vulnerability comes from the Daze → Stunned mechanic, not the Stun specialty.     |
-| `anomalyMastery` (for 异常精通)  | `anomalyProficiency` | Different stats — Mastery scales buildup, Proficiency scales anomaly damage.          |
-| `sheerBoost`                     | `sheerDamageBonus`   | Use the explicit Sheer DMG Bonus identifier, not a generic boost.                     |
-| `disorder` (for the Wind chain)  | `vortex`             | With Windswept active, normal Disorder does not trigger; Vortex does.                 |
-| `corruption` (for the Wind link) | `contamination`      | Corruption is an Ether anomaly; Contamination is the Windswept cross-attribute link.  |
+| deprecated          | forbidden_when                                 | replace_with         | reason                                                                                |
+| ------------------- | ---------------------------------------------- | -------------------- | ------------------------------------------------------------------------------------- |
+| `boost`             | always                                         | `damageBonus`        | DMG Bonus is the canonical that matches the formula/data pages; `boost` is too vague. |
+| `dmgBonus`          | always                                         | `damageBonus`        | Display text may keep DMG; identifiers spell out `damage`.                            |
+| `defence`           | always                                         | `defense`            | One American spelling, no synonyms.                                                   |
+| `stun`              | used for the Daze mechanic                     | `daze`               | `stun` is reserved for the specialty; the mechanic itself is `daze`.                  |
+| `dazed`             | used as the canonical Stunned state identifier | `stunnedState`       | Avoid extra state synonyms; the state identifier is `stunnedState`.                   |
+| `staggered`         | used as the canonical Stunned state identifier | `stunnedState`       | Avoid extra community synonyms; the official context is Daze -> Stunned.              |
+| `stunVulnerability` | always                                         | `dazeVulnerability`  | The vulnerability comes from the Daze -> Stunned mechanic, not the Stun specialty.    |
+| `anomalyMastery`    | used for Anomaly Proficiency / 异常精通        | `anomalyProficiency` | Different stats — Mastery scales buildup, Proficiency scales anomaly damage.          |
+| `sheerBoost`        | always                                         | `sheerDamageBonus`   | Use the explicit Sheer DMG Bonus identifier, not a generic boost.                     |
+| `disorder`          | used for the Windswept settlement              | `vortex`             | With Windswept active, normal Disorder does not trigger; Vortex does.                 |
+| `corruption`        | used for the Windswept cross-attribute link    | `contamination`      | Corruption is an Ether anomaly; Contamination is the Windswept cross-attribute link.  |
