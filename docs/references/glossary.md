@@ -38,8 +38,8 @@ eligibility from the section heading alone.
 
 **Columns**
 
-- **code_identifier** — the one canonical name to use in code (camelCase). This is the
-  column that becomes variable/field/key names. Rendered in `code` font.
+- **identifier** — the canonical camelCase code identifier used for keys, variables,
+  config keys, enum values, data fields, and log labels. Rendered in `code` font.
 - **zh / en** — official names. `待核验` (needs-verify) means no stable official Chinese
   text is confirmed yet; per the spec it must **never** be exported as official Chinese
   display text — internal reference / placeholder only.
@@ -60,7 +60,7 @@ Core combat, formula, stat, attribute, anomaly, and global enum vocabulary. This
 safe to reference from shared formula/config/data panels only when `code_surface` and
 `export_policy` allow it.
 
-| code_identifier                   | zh             | en                                | subject_area | domain            | code_surface | export_policy | introduced_in              | source_status            | aliases / deprecated               | notes                                                                                                                                                                              |
+| identifier                        | zh             | en                                | subject_area | domain            | code_surface | export_policy | introduced_in              | source_status            | aliases / deprecated               | notes                                                                                                                                                                              |
 | --------------------------------- | -------------- | --------------------------------- | ------------ | ----------------- | ------------ | ------------- | -------------------------- | ------------------------ | ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `daze`                            | 失衡           | Daze                              | common       | damage-formula    | formula-key  | exported      | base                       | official-wiki            | `stun` (deprecated for this sense) | Daze is the meter/mechanic; an enemy enters Stunned only at 100% Daze. Official zh has long used 失衡状态/失衡值. `stun` is reserved for the specialty — do not use it for Daze.   |
 | `stunnedState`                    | 待核验         | Stunned                           | common       | damage-formula    | enum-value   | exported      | base                       | official-wiki            | `dazed`, `staggered`               | The _state_, not the specialty and not Daze itself. Use `stunnedState` to avoid clashing with specialty `stun`.                                                                    |
@@ -109,7 +109,7 @@ Playable agent names, agent metadata, agent specialties, and agent-only mechanic
 Agent-only mechanics may be referenced by logs and skill parsing, but must not enter
 global formula tables or global enums unless a later spec explicitly promotes them.
 
-| code_identifier    | zh            | en                | subject_area | domain             | code_surface | export_policy | introduced_in | source_status | aliases / deprecated | notes                                                                                                                             |
+| identifier         | zh            | en                | subject_area | domain             | code_surface | export_policy | introduced_in | source_status | aliases / deprecated | notes                                                                                                                             |
 | ------------------ | ------------- | ----------------- | ------------ | ------------------ | ------------ | ------------- | ------------- | ------------- | -------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
 | `velinaAirgid`     | 维琳娜·艾嘉德 | Velina Airgid     | agents       | content            | config-key   | exported      | 3.0           | official      | —                    | S-rank Wind / Anomaly agent.                                                                                                      |
 | `normaHollowell`   | 诺姆·霍洛维尔 | Norma Hollowell   | agents       | content            | config-key   | exported      | 3.0           | official      | —                    | 3.0 version page: S-rank Fire / Stun.                                                                                             |
@@ -133,7 +133,7 @@ W-Engine names, specialty requirements, effects, and equipment metadata. These a
 or config terms; they are not formula vocabulary unless a future equipment schema gives
 their effects dedicated fields.
 
-| code_identifier | zh       | en             | subject_area | domain  | code_surface | export_policy | introduced_in | source_status | aliases / deprecated | notes                                                              |
+| identifier      | zh       | en             | subject_area | domain  | code_surface | export_policy | introduced_in | source_status | aliases / deprecated | notes                                                              |
 | --------------- | -------- | -------------- | ------------ | ------- | ------------ | ------------- | ------------- | ------------- | -------------------- | ------------------------------------------------------------------ |
 | `joyauDore`     | 琳琅鎏心 | Joyau Dore     | w-engines    | content | config-key   | exported      | 3.0           | official      | —                    | 3.0 content lineup: 琳琅鎏心(异常).                                |
 | `chiefSidekick` | 待核验   | Chief Sidekick | w-engines    | content | config-key   | exported      | 3.0           | official-wiki | —                    | Version page confirms English name and specialty; zh needs-verify. |
@@ -145,7 +145,7 @@ their effects dedicated fields.
 
 Drive Disc set names, stat slots, set effects, and equipment metadata.
 
-| code_identifier  | zh     | en              | subject_area | domain  | code_surface | export_policy | introduced_in | source_status | aliases / deprecated | notes                               |
+| identifier       | zh     | en              | subject_area | domain  | code_surface | export_policy | introduced_in | source_status | aliases / deprecated | notes                               |
 | ---------------- | ------ | --------------- | ------------ | ------- | ------------ | ------------- | ------------- | ------------- | -------------------- | ----------------------------------- |
 | `wutheringSalon` | 待核验 | Wuthering Salon | drive-discs  | content | config-key   | exported      | 3.0           | official-wiki | —                    | One of the Wind-system drive disks. |
 | `theSkyAblaze`   | 待核验 | The Sky Ablaze  | drive-discs  | content | config-key   | exported      | 3.0           | official-wiki | —                    | A new 3.0 drive disk.               |
@@ -156,9 +156,9 @@ Drive Disc set names, stat slots, set effects, and equipment metadata.
 
 Bangboo names, skills, attributes, faction/team conditions, and Bangboo-only effects.
 
-| code_identifier | zh       | en         | subject_area | domain  | code_surface | export_policy | introduced_in | source_status | aliases / deprecated | notes              |
-| --------------- | -------- | ---------- | ------------ | ------- | ------------ | ------------- | ------------- | ------------- | -------------------- | ------------------ |
-| `ultraJake`     | 超极杰克 | Ultra Jake | bangboo      | content | config-key   | exported      | 3.0           | official-wiki | —                    | A new 3.0 Bangboo. |
+| identifier  | zh       | en         | subject_area | domain  | code_surface | export_policy | introduced_in | source_status | aliases / deprecated | notes              |
+| ----------- | -------- | ---------- | ------------ | ------- | ------------ | ------------- | ------------- | ------------- | -------------------- | ------------------ |
+| `ultraJake` | 超极杰克 | Ultra Jake | bangboo      | content | config-key   | exported      | 3.0           | official-wiki | —                    | A new 3.0 Bangboo. |
 
 ---
 
@@ -167,7 +167,7 @@ Bangboo names, skills, attributes, faction/team conditions, and Bangboo-only eff
 Locations, factions, systems, and proper nouns that need stable metadata names but must not
 leak into formula fields.
 
-| code_identifier              | zh         | en                           | subject_area | domain  | code_surface | export_policy | introduced_in | source_status | aliases / deprecated | notes                                                              |
+| identifier                   | zh         | en                           | subject_area | domain  | code_surface | export_policy | introduced_in | source_status | aliases / deprecated | notes                                                              |
 | ---------------------------- | ---------- | ---------------------------- | ------------ | ------- | ------------ | ------------- | ------------- | ------------- | -------------------- | ------------------------------------------------------------------ |
 | `externalStrategyDepartment` | 外务筹策局 | External Strategy Department | content      | content | config-key   | exported      | 3.0           | official      | —                    | Velina and Norma belong to this faction; agent-metadata / content. |
 | `roscaelifer`                | 罗斯凯利法 | Roscaelifer                  | content      | content | config-key   | exported      | 3.0           | official      | —                    | The new Season-3 hub city; scene/content layer.                    |

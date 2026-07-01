@@ -50,9 +50,9 @@ first:
 3. **Prydwen** — cross-check for mechanic semantics, especially stats whose
    boundaries the community confuses (e.g. Anomaly Proficiency vs Anomaly
    Mastery).
-4. **Engineering convention** — `code_identifier` recommendations (camelCase,
-   etc.). These are maintenance rules for interface consistency, not official
-   game text.
+4. **Engineering convention** — `identifier` recommendations (canonical
+   camelCase code identifiers, etc.). These are maintenance rules for interface
+   consistency, not official game text.
 
 ### Glossary Organization And Boundaries
 
@@ -117,7 +117,8 @@ are kept, but their formula/config eligibility is controlled by `domain`,
 
 ### Naming Conventions
 
-- `code_identifier` is **camelCase**.
+- `identifier` is the canonical camelCase code identifier used for keys,
+  variables, config keys, enum values, data fields, and log labels.
 - `DMG` stays abbreviated in display text, but expands to `damage` in
   identifiers (`damageBonus`, not `dmgBonus`).
 - State names are decoupled from specialties: use `stunnedState`, not `stun`,
@@ -177,7 +178,7 @@ product code, generated config, exported schema data, or log/test fixtures.
 
 The manual terminology checks are:
 
-- **Identifier uniqueness** — each public `code_identifier` appears once; one
+- **Identifier uniqueness** — each public `identifier` appears once; one
   English canonical yields one public identifier.
 - **Deprecated-alias scan** — no deprecated alias from the canonical deprecated
   table is used as canonical in docs/config/fields/tests within its
