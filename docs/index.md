@@ -2,14 +2,14 @@
 
 这是唯一的文档路由来源。它只说明内容放在哪里，不承载具体内容本身。其他入口只指向这里，不重复维护这份地图。
 
-## Where to look
+## 去哪里看
 
-| You want                                                     | Go to                                   | Holds                                                                                       |
-| ------------------------------------------------------------ | --------------------------------------- | ------------------------------------------------------------------------------------------- |
-| Requirements, conventions, standards, or interface design    | `docs/specs/`                           | Specs：定义某个事项是什么、应保持什么不变，以及轻量设计（函数签名、模块边界）——不写详细代码 |
-| Supporting facts and background (incl. the pre-reset record) | `docs/references/`                      | Reference material：外部资料、数据、术语表、历史记录。只作为事实背景；永远不是实现来源      |
-| The iron rules for working here                              | [../AGENTS.md](../AGENTS.md)            | Clean-slate、human-in-the-loop、npm version monotonicity                                    |
-| A task, chore, bug — or its owner / status                   | GitHub Issues (or the Slock task board) | 执行跟踪。不放在 docs 里                                                                    |
+| 你要找的内容                                             | 去哪里                                  | 放什么                                                                                      |
+| -------------------------------------------------------- | --------------------------------------- | ------------------------------------------------------------------------------------------- |
+| requirements、conventions、standards 或 interface design | `docs/specs/`                           | Specs：定义某个事项是什么、应保持什么不变，以及轻量设计（函数签名、模块边界）——不写详细代码 |
+| supporting facts 和 background（含 pre-reset 记录）      | `docs/references/`                      | Reference material：外部资料、数据、术语表、历史记录。只作为事实背景；永远不是实现来源      |
+| 本仓库工作 iron rules                                    | [../AGENTS.md](../AGENTS.md)            | Clean-slate、human-in-the-loop、npm version monotonicity                                    |
+| task、chore、bug，或它的 owner / status                  | GitHub Issues (or the Slock task board) | 执行跟踪。不放在 docs 里                                                                    |
 
 ## Current state
 
