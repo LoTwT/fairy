@@ -16,7 +16,9 @@
 项目已经按 clean-slate 重置（见
 [specs/0001-clean-slate.md](specs/0001-clean-slate.md)）。重置前的代码和文档已从工作树移除，只作为历史保留（git tags、npm，以及
 [references/history.md](references/history.md)）。重置后的第一份实现 spec 是
-[specs/0002-project-initialization.md](specs/0002-project-initialization.md)：根工作区初始化计划。包代码和伤害模型会在后续 PR 中进入。
+[specs/0002-project-initialization.md](specs/0002-project-initialization.md)：根工作区初始化计划。Source / data 工作从
+[specs/0003-source-data-inventory.md](specs/0003-source-data-inventory.md)
+开始：Phase 1 acquisition and inventory plan。包代码和伤害模型会在后续 PR 中进入。
 
 ## Conventions
 
