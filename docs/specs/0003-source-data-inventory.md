@@ -52,6 +52,59 @@ Trust levels 保守使用：
 
 pre-reset Fairy implementation 和旧 published package contents 只作为 historical records。它们不能注册为 data sources。
 
+### Candidate source registry draft
+
+Phase 1 可以记录 initial candidate sources，帮助 reviewer 判断 source registry 与 trust policy 是否能落地。这个 draft 不是 approved source registry；Phase 2 开始时，仍必须把每个 candidate source 转成正式 registry entry 并重新 review。
+
+#### `zzz_nanoka` source family
+
+`https://zzz.nanoka.cc/` 和 `https://static.nanoka.cc/` 是当前主要工作候选来源，用于发现和整理 ZZZ structured data。它的 source role 是 `main_working_candidate_source`，但 trust policy 上只能先按 third-party `secondary` / `context` 处理，不能写成 authoritative `primary`。
+
+候选 registry draft：
+
+| Field                | Draft value                                                                                                                          |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `source_id`          | `zzz_nanoka`                                                                                                                         |
+| `source_class`       | `community` / third-party data site                                                                                                  |
+| `trust_level`        | expected `secondary` for structured data discovery; `context` for explanatory material; never authoritative by source family alone。 |
+| `acquisition_method` | public page review 或 public static-data review；Phase 1 不执行 automated collection。                                               |
+| `version_marker`     | Nanoka version directory selected through the accepted live-release filter；row-level evidence 仍必须保留具体 `version_marker`。     |
+| `evidence_format`    | page URL、versioned static path、capture date、archived page / screenshot / attachment，以及后续 raw artifact 的 `evidence_ref`。    |
+| `raw_retention`      | Phase 1 只定义 retention requirement；Phase 2 再决定 raw snapshot 位置。                                                             |
+| `usage_note`         | 主要用于数据发现与整理入口；官方 wiki、游戏内 evidence、公告或 maintainer judgment 用于 cross-check。                                |
+| `known_limits`       | 同一站点可能混有 live、latest、new、future、test、placeholder 或 unknown-live-status 内容；不能整体接受站点默认数据。                |
+
+#### Live-release filter for `zzz_nanoka`
+
+`manifest.zzz.live` 是 Nanoka manifest 内的 **candidate live-release selector**。它只用于选择 Nanoka 候选 live 版本目录，防止误用 `manifest.zzz.latest`、`manifest.zzz.new`、homepage default data，或其他可能包含未发布内容的入口。
+
+它不是官方证明，也不能单独证明某条 row 属于正式服。接受 `manifest.zzz.live` 后，Phase 2 也只能把它指向的 `zzz_nanoka_live_release_subset` 送入 source review；每条 row 仍必须保留：
+
+- `version_marker`；
+- `evidence_ref`；
+- capture evidence；
+- source context；
+- 必要时的 official wiki、游戏内、官方公告或 maintainer cross-check notes。
+
+以下内容属于 `zzz_nanoka_unreleased_or_test_entries`，默认 `rejected` 或 excluded，不能进入 raw inventory：
+
+- `manifest.zzz.latest` 中未被证明属于正式服的内容；
+- `manifest.zzz.new`；
+- future、beta、test、placeholder、`(Test*)`、unreleased 或 unknown-live-status entries；
+- 与 official announcement、game client actual version 或 maintainer knowledge 冲突的条目。
+
+如果 `manifest.zzz.live` 与 official announcement、game client actual version 或 maintainer knowledge 冲突，必须 hard stop 并返回 maintainer decision，不能自动相信 Nanoka。
+
+#### Additional candidate sources
+
+这些来源可以辅助 Phase 2 source review，但都不会在 Phase 1 变成 approved registry entries。
+
+| `source_id`                    | Role                                            | Expected `trust_level`                                               | Evidence / boundary                                                                               | Known limits                                                                                               |
+| ------------------------------ | ----------------------------------------------- | -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `zzz_official_wiki`            | official cross-check source                     | `primary` where direct official evidence exists; otherwise `context` | 用于名称、公开信息、版本存在性和部分机制说明的对照；覆盖到的字段可作为更强 evidence。             | coverage 不完整；没有具体数据的字段不能强行补。                                                            |
+| `zzz_gachabase_beta_changelog` | beta / change-awareness source                  | `context`                                                            | 用于识别 future、beta 或 change-risk 条目；只可作为 exclusion / awareness evidence。              | URL 和页面语义明确偏 beta changelog；不得进入正式服 raw inventory。                                        |
+| `zzz_buhflipexplode_da`        | Deadly Assault domain-specific candidate source | `secondary` / `context`                                              | 只限定危局强袭战 / Deadly Assault 领域；可辅助 DA boss、HP、score 或 version history 的候选理解。 | 页面存在 leaks / unreleased / STC 内容控制；此类内容默认 excluded，且该 source 不可扩展为全局 ZZZ 数据源。 |
+
 ### Acquisition boundaries
 
 Acquisition 必须保持在经过 review、可复现、且 permission-aware 的方法内。
@@ -116,6 +169,8 @@ Raw inventory 必须在每一行保留 provenance columns。缺少 `source`、`c
 
 Sample slice 的目的是验证 evidence chain。它不应尝试覆盖完整 game content。
 
+如果 sample slice 使用 Nanoka，它只能从 `zzz_nanoka_live_release_subset` 中挑选，并且必须能说明 `manifest.zzz.live` 选择的 version directory、row-level `version_marker`、`evidence_ref` 和 capture evidence。官方 wiki 或其他 sources 覆盖到的字段，应作为 cross-check evidence；未覆盖字段不得因此补成 `primary`。
+
 ### Hard stops
 
 如果发生以下任何情况，停止并返回 review：
@@ -125,6 +180,8 @@ Sample slice 的目的是验证 evidence chain。它不应尝试覆盖完整 gam
 - source trust levels 混用但没有 row-level notes；
 - raw artifacts 无法 retained 或 referenced；
 - inventory rows 缺少 `evidence_ref`；
+- source data 来自 `zzz_nanoka` 的 `latest`、`new`、future、beta、test、placeholder、unreleased 或 unknown-live-status 内容，且没有 maintainer 明确批准的 live-release evidence；
+- `manifest.zzz.live` 与 official announcement、game client actual version 或 maintainer knowledge 冲突；
 - Phase 2+ content 在前置 gates 通过前，开始定义 canonical field boundaries、glossary identifiers、formulas 或 package APIs。
 
 ## Implementation Notes
@@ -151,6 +208,8 @@ Future phases 可以在各自 specs 或 tasks 授权后，新增 concrete regist
 - acquisition boundaries 和 hard stops；
 - raw artifact retention plan；
 - raw inventory row shape，包括 required provenance fields；
+- candidate source registry draft，至少包含 `zzz_nanoka`、`zzz_official_wiki`、`zzz_gachabase_beta_changelog` 和 `zzz_buhflipexplode_da` 的 source role、expected `trust_level`、evidence boundary 与 known limits；
+- `zzz_nanoka` live-release filter，明确 `manifest.zzz.live` 只是 candidate live-release selector，不是官方证明，并明确 `latest` / `new` / future / test / placeholder / unknown-live-status exclusions；
 - sample-slice selection criteria；
 - 明确的 non-goals，阻止 raw data、cleaning、glossary、formula 和 package implementation 进入本 phase。
 
