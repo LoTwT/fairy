@@ -20,7 +20,7 @@
 [specs/0002-project-initialization.md](specs/0002-project-initialization.md)：根工作区初始化计划。Source / data 工作从
 [specs/0003-source-data-inventory.md](specs/0003-source-data-inventory.md)
 开始：Phase 1 acquisition and inventory plan。Phase 2 的 sample workspace 从
-[data/README.md](data/README.md) 进入，只记录 candidate source、minimum evidence reference 和 raw observed inventory sample。包代码和伤害模型会在后续 PR 中进入。
+[docs/data/README.md](data/README.md) 进入，只记录 candidate source、minimum evidence reference 和 raw observed inventory sample。包代码和伤害模型会在后续 PR 中进入。
 
 ## Conventions
 
