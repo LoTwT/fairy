@@ -209,7 +209,7 @@ Future phases 可以在各自 specs 或 tasks 授权后，新增 concrete regist
 - raw artifact retention plan；
 - raw inventory row shape，包括 required provenance fields；
 - candidate source registry draft，至少包含 `zzz_nanoka`、`zzz_official_wiki`、`zzz_gachabase_beta_changelog` 和 `zzz_buhflipexplode_da` 的 source role、expected `trust_level`、evidence boundary 与 known limits；
-- `zzz_nanoka` live-release filter，明确 `manifest.zzz.live` 只是 candidate live-release selector，不是官方证明，并明确 `latest` / `new` / future / test / placeholder / unknown-live-status exclusions；
+- `zzz_nanoka` live-release filter，明确 `manifest.zzz.live` 只是 candidate live-release selector，不是官方证明，并明确 `latest` / `new` / future / beta / test / placeholder / unreleased / unknown-live-status exclusions；
 - sample-slice selection criteria；
 - 明确的 non-goals，阻止 raw data、cleaning、glossary、formula 和 package implementation 进入本 phase。
 
