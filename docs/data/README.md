@@ -13,6 +13,9 @@
   slice 的 minimum evidence note。
 - [phase-2-sample.md](../../data/raw-inventory/phase-2-sample.md)：raw
   observed inventory sample rows。
+- [phase-3-sample.md](../../data/field-map/phase-3-sample.md)：Phase 3 sample
+  field map rows 和 unresolved queue；它只映射 Phase 2 sample，不是 package data
+  source。
 
 ## Storage boundary（存储边界）
 
