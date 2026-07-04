@@ -28,6 +28,19 @@
 future、beta、test、placeholder、unreleased 或 unknown-live-status scope 的条目
 不进入 sample inventory。
 
+## 版本选择与接收边界
+
+后续 source acquisition 可以支持 explicit version selector，用来指定读取哪个
+versioned source path。Version selector 只决定 acquisition target，不决定这些
+data 是否可以进入项目。
+
+只有已接受的 live / released data 可以进入 shared tracked artifacts，包括 source
+registry、raw inventory、field map、fixtures、formula tests、package API 或
+package data。future、beta、test、placeholder、unreleased 或
+unknown-live-status data 即使能通过 explicit version selector 读取，也默认只能作为
+local / experimental / non-canonical / excluded material；除非后续有单独 source
+policy 或 task 明确接受相关 workflow，否则不得进入项目正式 data chain。
+
 ## Scaling rule（扩展规则）
 
 这个 registry 不授权 full source collection。任何超出 sample slice 的扩展，都需要
