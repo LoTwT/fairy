@@ -26,6 +26,7 @@
 
 - **项目只有一种决策文档类型：`specs/`。** spec 描述某个事项是什么（requirements、conventions、standards、interface design），并在自己的 `Rationale` 章节保留理由，因此不另设 decision log。模板见
   [specs/README.md](specs/README.md)。
+- **文档语言默认以中文承载 human-facing prose。** 面向人阅读的叙述、理由、边界说明和验收说明默认用中文；术语、identifier、field name、schema key、source_id、evidence_ref、raw_key、context、URL、命令、API/package/code surface 保持英文。英文更准确或属于稳定技术表达时保留英文。
 - **spec 使用中文 canonical prose，contract surface 保持英文。** 叙述、理由、验收说明用中文作为权威正文；schema key、field name、enum value、CLI/API/package surface、命令和代码标识符保持英文。每个 concern 只保留一份 canonical source。
 - **`references/` 保存事实，不保存决策。** 背景和历史记录放在这里，默认保持扁平结构。见
   [references/README.md](references/README.md)。
