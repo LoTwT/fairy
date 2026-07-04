@@ -1,26 +1,25 @@
-# Data review workspace
+# Data review workspace（数据 review 工作区）
 
-> Boundary: this directory is only the Phase 2 source-review workspace for
-> candidate sources, minimum evidence references, and a small raw inventory
-> sample. It is not a canonical glossary, final field map, formula model,
-> fixture set, package API, or implementation source.
+> Boundary：这个目录只是 Phase 2 的 source review workspace，用来记录候选
+> source、minimum evidence reference 和小范围 raw inventory sample。它不是
+> canonical glossary、final field map、formula model、fixture set、package API
+> 或实现来源。
 
-## Files
+## 文件
 
-- [source-registry.md](source-registry.md): draft candidate source registry and
-  acquisition boundaries.
-- [evidence.md](../../data/raw/phase-2-sample/evidence.md): minimum evidence
-  notes for the Phase 2 sample slice.
-- [phase-2-sample.md](../../data/raw-inventory/phase-2-sample.md): raw observed
-  inventory sample rows.
+- [source-registry.md](source-registry.md)：draft candidate source registry 和
+  acquisition boundary。
+- [evidence.md](../../data/raw/phase-2-sample/evidence.md)：Phase 2 sample
+  slice 的 minimum evidence note。
+- [phase-2-sample.md](../../data/raw-inventory/phase-2-sample.md)：raw
+  observed inventory sample rows。
 
-## Storage boundary
+## Storage boundary（存储边界）
 
-The sample uses lightweight evidence notes by default: URL or static path,
-capture time, version marker, source id, observation summary, and live/excluded
-judgment. Screenshots, archived pages, attachments, raw JSON snapshots, or other
-heavy artifacts are exception-only for unstable URLs, unreproducible pages,
-disputed version state, unique attachments, or explicit reviewer request.
+这个 sample 默认只使用轻量 evidence note：URL 或 static path、capture time、
+version marker、source id、observation summary，以及 live/excluded judgment。
+截图、归档页面、附件、raw JSON snapshot 或其他重型 artifact 只在 URL 不稳定、
+页面不可复现、version state 有争议、存在唯一附件，或 reviewer 明确要求时例外使用。
 
-Expanding beyond this sample requires a separate storage and retention review
-before collecting broader raw data.
+如果要扩展到这个 sample 之外，必须先单独 review storage / retention 策略，再开始
+收集更大范围的 raw data。

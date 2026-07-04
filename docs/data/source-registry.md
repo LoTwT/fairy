@@ -1,11 +1,11 @@
-# Source registry draft
+# Source registry draft（source registry 草案）
 
-> Boundary: this is a draft candidate source registry for source review and raw
-> evidence planning. It does not approve any source as authoritative by itself,
-> does not define canonical glossary terms, and does not create final field maps,
-> formulas, fixtures, package APIs, or cleaning scripts.
+> Boundary：这是供 source review 和 raw evidence planning 使用的 draft candidate
+> source registry。它本身不批准任何 source 成为 authoritative source，不定义
+> canonical glossary term，也不创建 final field map、formula、fixture、package
+> API 或 cleaning script。
 
-## Candidate registry
+## Candidate registry（候选 registry）
 
 | source_id                      | source_role           | source_class          | expected_trust_level                                                               | evidence_format                                                                                                                 | acquisition_boundary                                                                   | known_limits                                                                                                                                  | phase_2_sample_use                                                   |
 | ------------------------------ | --------------------- | --------------------- | ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
@@ -14,22 +14,22 @@
 | `zzz_gachabase_beta_changelog` | change-risk awareness | third-party community | `context` only                                                                     | page URL plus minimum note                                                                                                      | public page review only                                                                | beta and future-version content is explicitly excluded from raw inventory; use only to detect exclusion risk                                  | no inventory rows; exclusion awareness only                          |
 | `zzz_buhflipexplode_da`        | DA domain candidate   | third-party community | `secondary/context` for Deadly Assault scope only                                  | page URL plus minimum note                                                                                                      | public page review only; DA data requires separate acceptance before numeric sampling  | page exposes leak, unreleased, and STC controls; restrict to DA scope and exclude leaks/unreleased/STC unless a later source policy says else | registered only; no DA numeric rows in this first sample             |
 
-## Nanoka live selector note
+## Nanoka live selector note（Nanoka live selector 观察记录）
 
-Observed from `https://static.nanoka.cc/manifest.json` at
-`2026-07-04T00:04:26+08:00`:
+在 `2026-07-04T00:04:26+08:00` 从
+`https://static.nanoka.cc/manifest.json` 观察到：
 
 - `manifest.zzz.live = 3.0`
 - `manifest.zzz.latest = 3.1.3+17077339`
-- `manifest.zzz.live` is only a candidate live-release selector for this sample.
-  It is not official proof of release status.
+- `manifest.zzz.live` 在这个 sample 中只作为 candidate live-release selector，不是
+  release status 的 official proof。
 
-This PR samples only versioned static paths under `zzz/3.0/`. Entries from
-`latest`, `new`, future, beta, test, placeholder, unreleased, or
-unknown-live-status scopes are excluded from the sample inventory.
+这个 PR 只采样 `zzz/3.0/` 下的 versioned static path。来自 `latest`、`new`、
+future、beta、test、placeholder、unreleased 或 unknown-live-status scope 的条目
+不进入 sample inventory。
 
-## Scaling rule
+## Scaling rule（扩展规则）
 
-This registry does not authorize full source collection. Any expansion beyond
-the sample slice needs a separate review of source scope, storage, retention,
-licensing risk, and reviewer expectations.
+这个 registry 不授权 full source collection。任何超出 sample slice 的扩展，都需要
+单独 review source scope、storage、retention、licensing risk 和 reviewer
+expectation。
