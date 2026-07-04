@@ -11,5 +11,7 @@ References hold facts and background — never task status, owners, or decisions
 
 ## Index
 
+- [glossary.md](glossary.md) — Phase 4 sample-backed terminology glossary seed；
+  not complete coverage, not formula or package schema.
 - [history.md](history.md) — the pre-reset record: published npm versions, tags,
   recovery, and what the reset removed. Read-only; never a source.
