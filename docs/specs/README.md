@@ -21,3 +21,4 @@ Specs 使用中文 canonical prose。schema key、field name、enum value、CLI/
 - [0001-clean-slate.md](0001-clean-slate.md) — clean-slate reset：工作规则和仓库重置契约。
 - [0002-project-initialization.md](0002-project-initialization.md) — 根工作区初始化计划和初始化验收 gate。
 - [0003-source-data-inventory.md](0003-source-data-inventory.md) — Phase 1 source / data acquisition plan、source registry shape、raw artifact retention plan 和 raw inventory schema。
+- [0004-domain-field-map.md](0004-domain-field-map.md) — Phase 3 domain field map：traceability、sample mapping shape、object/use classification 和 unresolved queue。
