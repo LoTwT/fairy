@@ -11,13 +11,18 @@ expectation seed 见
 
 ## Source baseline
 
-| Field                  | Value                                                  |
-| ---------------------- | ------------------------------------------------------ |
-| `source_id`            | `zzz_2_0_guide_nga`                                    |
-| `source_url`           | `https://ngabbs.com/read.php?tid=44468012`             |
-| `source_attachment_id` | `07e196c7-5b75-4412-b4ad-6e367e5f05e8`                 |
-| `document_status`      | `2.0 formula baseline`                                 |
-| `source_ref_shape`     | `NGA 2.0 guide / Part xx / section / formula_or_table` |
+| Field                       | Value                                                                                                              |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `source_id`                 | `zzz_2_0_guide_nga`                                                                                                |
+| `source_url`                | `https://ngabbs.com/read.php?tid=44468012`                                                                         |
+| `source_attachment_id`      | `07e196c7-5b75-4412-b4ad-6e367e5f05e8`                                                                             |
+| `source_snapshot`           | [source-snapshots/zzz-data-introduction-2-0.txt](source-snapshots/zzz-data-introduction-2-0.txt)                   |
+| `source_snapshot_date`      | `2026-07-05`                                                                                                       |
+| `source_snapshot_sha256`    | `4275c1f475e067985f9827fc9501ffd3b3b6a0c8ef319fe234b23236032cc87f`                                                 |
+| `redistribution_permission` | `lo-user msg 1ae33f4e`                                                                                             |
+| `source_snapshot_boundary`  | Provenance only；not package data, runtime input, scraper input, resolver input, or Phase 6 implementation source. |
+| `document_status`           | `2.0 formula baseline`                                                                                             |
+| `source_ref_shape`          | `NGA 2.0 guide / Part xx / section / formula_or_table`                                                             |
 
 ## Formula registry
 

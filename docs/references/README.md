@@ -14,6 +14,9 @@ References hold facts and background — never task status, owners, or decisions
 - [formula-baseline-2-0.md](formula-baseline-2-0.md) — Phase 5A formula baseline
   reference；not 3.0 final truth, package schema, runtime API, or calculation
   runtime.
+- [source-snapshots/](source-snapshots/README.md) — raw external source snapshots
+  preserved for provenance only；not package data, runtime input, scraper input,
+  resolver input, or implementation source.
 - [glossary.md](glossary.md) — Phase 4 sample-backed terminology glossary seed；
   not complete coverage, not formula or package schema.
 - [history.md](history.md) — the pre-reset record: published npm versions, tags,
