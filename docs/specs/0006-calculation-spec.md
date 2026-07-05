@@ -62,10 +62,11 @@ Phase 5A artifacts 是：
 
 `baseline_scope` 只允许：
 
-| baseline_scope        | Meaning                                                         |
-| --------------------- | --------------------------------------------------------------- |
-| `core_formula`        | Phase 5A 核心 formula registry row。                            |
-| `future_formula_area` | 来源中存在，但本 PR 不接受为 Phase 5A core formula 或 fixture。 |
+| baseline_scope               | Meaning                                                                                                                |
+| ---------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `core_formula`               | Phase 5A 核心 formula registry row；必须只配合 `accepted_baseline_shape` 作为 implementation-ready 候选。              |
+| `detail_review_formula_area` | 来源中存在并登记在 formula registry，但本 PR 只保留形态，仍需 detail review；不可进入 Phase 6 implementation handoff。 |
+| `future_formula_area`        | 来源中存在，但本 PR 不接受为 Phase 5A core formula 或 fixture。                                                        |
 
 `verification_status` 只允许：
 
@@ -90,18 +91,18 @@ Phase 5A artifacts 是：
 
 Formula registry rows 必须包含：
 
-| Field                 | Requirement                                                                                            |
-| --------------------- | ------------------------------------------------------------------------------------------------------ |
-| `formula_id`          | stable formula id；不是 package API key。                                                              |
-| `zh_name`             | readable formula name。                                                                                |
-| `baseline_scope`      | `core_formula` 或 `future_formula_area`。                                                              |
-| `verification_status` | 使用本 spec status enum。                                                                              |
-| `source_ref`          | `NGA 2.0 guide / Part xx / section / formula_or_table` locator。                                       |
-| `source_relation`     | `quoted_formula` / `derived_from_formula` / `modeling_boundary`。                                      |
-| `expression`          | baseline expression 或 `needs_detail_review`。                                                         |
-| `bucket_sequence`     | formula 消费的 bucket / formula input 顺序。                                                           |
-| `rounding_or_clamp`   | source-backed rule；如果只是工程假设，必须标 `source_relation=modeling_boundary` 或留待后续确认。      |
-| `downstream_boundary` | 是否可进入 Phase 6；`needs_formula_detail_review` 和 `future_formula_area` 不能 implementation-ready。 |
+| Field                 | Requirement                                                                                                                               |
+| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `formula_id`          | stable formula id；不是 package API key。                                                                                                 |
+| `zh_name`             | readable formula name。                                                                                                                   |
+| `baseline_scope`      | `core_formula`、`detail_review_formula_area` 或 `future_formula_area`。                                                                   |
+| `verification_status` | 使用本 spec status enum。                                                                                                                 |
+| `source_ref`          | `NGA 2.0 guide / Part xx / section / formula_or_table` locator。                                                                          |
+| `source_relation`     | `quoted_formula` / `derived_from_formula` / `modeling_boundary`。                                                                         |
+| `expression`          | baseline expression 或 `needs_detail_review`。                                                                                            |
+| `bucket_sequence`     | formula 消费的 bucket / formula input 顺序。                                                                                              |
+| `rounding_or_clamp`   | source-backed rule；如果只是工程假设，必须标 `source_relation=modeling_boundary` 或留待后续确认。                                         |
+| `downstream_boundary` | 是否可进入 Phase 6；只有 `baseline_scope=core_formula` + `verification_status=accepted_baseline_shape` 可作为 implementation-ready 候选。 |
 
 Phase 5A core formulas 只接受：
 
@@ -112,7 +113,9 @@ Phase 5A core formulas 只接受：
 
 `anomaly_damage`、`disorder_damage`、`disorder_daze` 可以出现在 registry 中，但如果本 PR
 不完整解决倍率、虚拟代理人 snapshot、实时结算和属性异常差异，必须标
-`verification_status=needs_formula_detail_review`，且 downstream 不可 implementation-ready。
+`baseline_scope=detail_review_formula_area` +
+`verification_status=needs_formula_detail_review`，且 downstream 不可
+implementation-ready。
 
 Part 04-07 只能放入 `Future formula areas（not accepted Phase 5A formulas）`，不能有
 Phase 5A fixture seed。
@@ -229,7 +232,9 @@ Phase 5A PR 应保持 documentation / review artifact only：
 - core accepted baseline shape 只包含 `regular_damage`、`penetrating_damage`、
   `daze_buildup`、`anomaly_buildup`；
 - `anomaly_damage`、`disorder_damage`、`disorder_daze` 如出现，必须标
-  `needs_formula_detail_review`，且 downstream 不 implementation-ready；
+  `baseline_scope=detail_review_formula_area` +
+  `verification_status=needs_formula_detail_review`，且 downstream 不
+  implementation-ready；
 - `defense_reduction`、`defense_ignore`、`penetration_rate`、`penetration_value` 是
   `defense` formula inputs，不是 ordinary buckets；
 - mapping examples 不伪造 Phase 2/3 evidence；
@@ -248,6 +253,7 @@ PR verification：
 - `git diff --check upstream/main...HEAD` 成功。
 - tracked Markdown relative links 可解析。
 - calculation docs structured smoke 通过：formula rows、bucket rows、effect example
-  rows、fixture rows 都有 source/status/downstream boundary fields；future formula areas 不在
-  accepted core formula list；fixture rows 都有 `non_coverage_note`；没有 Phase 6
+  rows、fixture rows 都有 source/status/downstream boundary fields；只有
+  `baseline_scope=core_formula` + `verification_status=accepted_baseline_shape` 的 formula
+  rows 可进入 accepted core formula list；fixture rows 都有 `non_coverage_note`；没有 Phase 6
   implementation artifacts。
