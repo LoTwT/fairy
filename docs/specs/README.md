@@ -23,3 +23,4 @@ Specs 使用中文 canonical prose。schema key、field name、enum value、CLI/
 - [0003-source-data-inventory.md](0003-source-data-inventory.md) — Phase 1 source / data acquisition plan、source registry shape、raw artifact retention plan 和 raw inventory schema。
 - [0004-domain-field-map.md](0004-domain-field-map.md) — Phase 3 domain field map：traceability、sample mapping shape、object/use classification 和 unresolved queue。
 - [0005-terminology-glossary.md](0005-terminology-glossary.md) — Phase 4 terminology glossary：traceability、seed glossary shape、verification status、alias/deprecated gate 和 unresolved naming queue。
+- [0006-calculation-spec.md](0006-calculation-spec.md) — Phase 5 calculation spec：2.0 formula baseline、formula registry、bucket registry、`calculation_effect` contract、mapping examples 和 fixture expectation seed boundary。

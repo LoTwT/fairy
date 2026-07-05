@@ -4,13 +4,14 @@
 
 ## 去哪里看
 
-| 你要找的内容                                                           | 去哪里                                  | 放什么                                                                                                                                                                                 |
-| ---------------------------------------------------------------------- | --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| requirements、conventions、standards 或 interface design               | `docs/specs/`                           | Specs：定义某个事项是什么、应保持什么不变，以及轻量设计（函数签名、模块边界）——不写详细代码                                                                                            |
-| supporting facts 和 background（含 glossary seed 和 pre-reset 记录）   | `docs/references/`                      | Reference material：外部资料、数据、sample-backed 术语表 seed、历史记录。只作为事实背景；永远不是实现来源或 package schema                                                             |
-| source review、evidence note、raw inventory sample 或 field map sample | `docs/data/` 和 `data/`                 | Data review workspace：记录候选 source registry、minimum evidence reference、raw observed sample 和 evidence-traced field map sample；不放 canonical glossary / formula / package code |
-| 本仓库工作 iron rules                                                  | [../AGENTS.md](../AGENTS.md)            | Clean-slate、human-in-the-loop、npm version monotonicity                                                                                                                               |
-| task、chore、bug，或它的 owner / status                                | GitHub Issues (or the Slock task board) | 执行跟踪。不放在 docs 里                                                                                                                                                               |
+| 你要找的内容                                                                                     | 去哪里                                                            | 放什么                                                                                                                                                                                                                           |
+| ------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| requirements、conventions、standards 或 interface design                                         | `docs/specs/`                                                     | Specs：定义某个事项是什么、应保持什么不变，以及轻量设计（函数签名、模块边界）——不写详细代码                                                                                                                                      |
+| supporting facts 和 background（含 glossary seed 和 pre-reset 记录）                             | `docs/references/`                                                | Reference material：外部资料、数据、sample-backed 术语表 seed、历史记录。只作为事实背景；永远不是实现来源或 package schema                                                                                                       |
+| source review、evidence note、raw inventory sample、field map sample 或 fixture expectation seed | `docs/data/` 和 `data/`                                           | Data review workspace：记录候选 source registry、minimum evidence reference、raw observed sample、evidence-traced field map sample 和 Phase 5 fixture expectation seed；不放 canonical glossary / formula runtime / package code |
+| calculation spec、formula baseline 或 calculation fixture expectation                            | `docs/specs/`、`docs/references/` 和 `data/calculation-fixtures/` | Phase 5 calculation review artifacts：定义 2.0 formula baseline、formula / bucket / effect contract 和 fixture expectation seed；不是 3.0 final truth、package schema、runtime API 或 calculation runtime                        |
+| 本仓库工作 iron rules                                                                            | [../AGENTS.md](../AGENTS.md)                                      | Clean-slate、human-in-the-loop、npm version monotonicity                                                                                                                                                                         |
+| task、chore、bug，或它的 owner / status                                                          | GitHub Issues (or the Slock task board)                           | 执行跟踪。不放在 docs 里                                                                                                                                                                                                         |
 
 ## Current state
 
@@ -26,7 +27,13 @@
 [../data/field-map/phase-3-sample.md](../data/field-map/phase-3-sample.md)。Phase 4 terminology glossary 从
 [specs/0005-terminology-glossary.md](specs/0005-terminology-glossary.md)
 开始；第一版 sample-backed seed glossary 位于
-[references/glossary.md](references/glossary.md)。包代码和伤害模型会在后续 PR 中进入。
+[references/glossary.md](references/glossary.md)。Phase 5 calculation spec 从
+[specs/0006-calculation-spec.md](specs/0006-calculation-spec.md)
+开始；2.0 formula baseline reference 位于
+[references/formula-baseline-2-0.md](references/formula-baseline-2-0.md)，Phase 5 fixture
+expectation seed / review artifact 位于
+[../data/calculation-fixtures/phase-5-seed.md](../data/calculation-fixtures/phase-5-seed.md)。
+包代码和伤害模型实现会在后续 PR 中进入。
 
 ## Conventions
 
@@ -37,4 +44,4 @@
 - **`references/` 保存事实，不保存决策。** 背景和历史记录放在这里，默认保持扁平结构。见
   [references/README.md](references/README.md)。
 - **任务和状态永远不放进 docs。** 小任务、chore、bug 以及 owner/status 放在 GitHub Issues（或 Slock task board），不放进 docs。
-- **按需创建文件夹，不预建空目录。** `docs/` 当前只有 `specs/`、`references/`、`data/` 和这个 `index.md`；仓库根的 `data/` 当前只保存 Phase 2 sample evidence / raw inventory，不是 package data source。只有出现真实内容时才新增其他文件夹。
+- **按需创建文件夹，不预建空目录。** `docs/` 当前只有 `specs/`、`references/`、`data/` 和这个 `index.md`；仓库根的 `data/` 当前只保存 reviewed data / fixture expectation artifacts（Phase 2 sample evidence / raw inventory、Phase 3 field map sample、Phase 5 fixture expectation seed），不是 package data source。只有出现真实内容时才新增其他文件夹。
