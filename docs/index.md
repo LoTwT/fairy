@@ -7,7 +7,7 @@
 | 你要找的内容                                                           | 去哪里                                  | 放什么                                                                                                                                                                                 |
 | ---------------------------------------------------------------------- | --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | requirements、conventions、standards 或 interface design               | `docs/specs/`                           | Specs：定义某个事项是什么、应保持什么不变，以及轻量设计（函数签名、模块边界）——不写详细代码                                                                                            |
-| supporting facts 和 background（含 pre-reset 记录）                    | `docs/references/`                      | Reference material：外部资料、数据、术语表、历史记录。只作为事实背景；永远不是实现来源                                                                                                 |
+| supporting facts 和 background（含 glossary seed 和 pre-reset 记录）   | `docs/references/`                      | Reference material：外部资料、数据、sample-backed 术语表 seed、历史记录。只作为事实背景；永远不是实现来源或 package schema                                                             |
 | source review、evidence note、raw inventory sample 或 field map sample | `docs/data/` 和 `data/`                 | Data review workspace：记录候选 source registry、minimum evidence reference、raw observed sample 和 evidence-traced field map sample；不放 canonical glossary / formula / package code |
 | 本仓库工作 iron rules                                                  | [../AGENTS.md](../AGENTS.md)            | Clean-slate、human-in-the-loop、npm version monotonicity                                                                                                                               |
 | task、chore、bug，或它的 owner / status                                | GitHub Issues (or the Slock task board) | 执行跟踪。不放在 docs 里                                                                                                                                                               |
@@ -23,7 +23,10 @@
 [docs/data/README.md](data/README.md) 进入，只记录候选 source、minimum evidence reference 和 raw observed inventory sample。Phase 3 field map 从
 [specs/0004-domain-field-map.md](specs/0004-domain-field-map.md)
 开始；sample artifact 位于
-[../data/field-map/phase-3-sample.md](../data/field-map/phase-3-sample.md)。包代码和伤害模型会在后续 PR 中进入。
+[../data/field-map/phase-3-sample.md](../data/field-map/phase-3-sample.md)。Phase 4 terminology glossary 从
+[specs/0005-terminology-glossary.md](specs/0005-terminology-glossary.md)
+开始；第一版 sample-backed seed glossary 位于
+[references/glossary.md](references/glossary.md)。包代码和伤害模型会在后续 PR 中进入。
 
 ## Conventions
 
