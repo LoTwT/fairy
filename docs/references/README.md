@@ -6,6 +6,8 @@ external docs, data sources, glossaries, and historical records.
 **Keep this folder flat.** Use descriptive file names. Create a subfolder only
 when one category has accumulated enough files that the flat list is hard to
 scan, and then only for that category. Do not pre-create empty subfolders.
+`source-snapshots/` is the explicit exception for raw provenance snapshots;
+ordinary reference files should still stay flat.
 
 References hold facts and background — never task status, owners, or decisions.
 
