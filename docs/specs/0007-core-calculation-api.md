@@ -88,17 +88,17 @@ type BucketId =
   | "special"
 ```
 
-| 中文名称   | bucket id            | 用于                | 说明                                            |
-| ---------- | -------------------- | ------------------- | ----------------------------------------------- |
-| 基础伤害区 | `base_damage`        | 两者                | 基础值区，不是倍率；缺失时不能默认。            |
-| 增伤区     | `damage_bonus`       | 两者                | `1 + sum(contributions)`。                      |
-| 暴击区     | `crit`               | 两者                | 非暴击、暴击或期望值由调用方归一化后传入。      |
-| 防御区     | `defense`            | 仅 `regular_damage` | 可由 thin helper 从防御参数派生。               |
-| 贯穿增伤区 | `sheer_damage_bonus` | 仅 `sheer_damage`   | `1 + sum(contributions)` 或调用方直接传最终值。 |
-| 抗性区     | `resistance`         | 两者                | 默认中性值 `1`。                                |
-| 减易伤区   | `damage_taken`       | 两者                | 对应 `DMG Taken Multiplier`。                   |
-| 失衡易伤区 | `stun_damage_taken`  | 两者                | 对应 `Stun DMG Multiplier`。                    |
-| 特殊乘区   | `special`            | 两者                | Phase 6A 可选兜底乘区，默认 `1`。               |
+| 中文名称   | bucket id            | 用于                | 说明                                                           |
+| ---------- | -------------------- | ------------------- | -------------------------------------------------------------- |
+| 基础伤害区 | `base_damage`        | 两者                | 基础值区，不是倍率；缺失时不能默认。                           |
+| 增伤区     | `damage_bonus`       | 两者                | `1 + sum(contributions)`。                                     |
+| 暴击区     | `crit`               | 两者                | 非暴击、暴击或期望值由调用方归一化后传入；只接受直接 `value`。 |
+| 防御区     | `defense`            | 仅 `regular_damage` | 可由 thin helper 从防御参数派生。                              |
+| 贯穿增伤区 | `sheer_damage_bonus` | 仅 `sheer_damage`   | `1 + sum(contributions)` 或调用方直接传最终值。                |
+| 抗性区     | `resistance`         | 两者                | 默认中性值 `1`；只接受直接 `value`。                           |
+| 减易伤区   | `damage_taken`       | 两者                | 对应 `DMG Taken Multiplier`。                                  |
+| 失衡易伤区 | `stun_damage_taken`  | 两者                | 对应 `Stun DMG Multiplier`。                                   |
+| 特殊乘区   | `special`            | 两者                | Phase 6A 可选兜底乘区，默认 `1`；只接受直接 `value`。          |
 
 ### Formula definitions
 
@@ -168,6 +168,8 @@ interface BucketProvenance {
   number；`NaN`、`Infinity` 和 `-Infinity` 返回 `{ ok: false }`。
 - `contributions` 存在时不能为空；空数组返回 `{ ok: false }`，不能被 reducer 当作默认值或 `0`
   自行解释。
+- 如果 bucket 没有 Phase 6A contribution reducer，调用方不能提供 `contributions`；必须先在外部或 thin
+  helper 中归一化成直接 `value`，否则返回 `{ ok: false }` + `unsupported_contributions`。
 - `provenance` 只描述 bucket 值来源，不改变计算规则。没有 `provenance` 时，输出可按
   `kind: "manual"` 处理。
 
@@ -214,6 +216,11 @@ resolver rules。只接受 bucket-level 最小 reducer：
 - `defense`
 - `resistance`
 - `special`
+
+如果这些 bucket 显式提供 `contributions`，core 必须返回 `{ ok: false }` +
+`unsupported_contributions`，不能尝试用通用 sum、乘法或 implicit reducer 解释。这个规则同样适用于
+`ignoredBuckets`：例如 `sheer_damage` 中显式传入 `defense` 且使用 `contributions` 时，不能因为该
+bucket 会被 ignored 就跳过 reducer 可用性检查。
 
 ### Defaults and errors
 
@@ -274,6 +281,7 @@ interface CalculationWarning {
     | "duplicate_bucket"
     | "invalid_number"
     | "empty_contributions"
+    | "unsupported_contributions"
     | "unsupported_formula"
     | "unsupported_bucket"
     | "ignored_bucket"
@@ -315,9 +323,11 @@ type CalculationResult =
    `invalid_number`。
 5. 对显式 `contributions` 做 non-empty validation；空数组返回 `{ ok: false }` +
    `empty_contributions`。
-6. 将 ignored buckets 写入 `BucketBreakdown` 和 warnings，但不写入 `ResolvedBucket[]`。
-7. 对缺失但属于公式的 factor buckets 应用默认值；缺失 `base_damage` 返回 `{ ok: false }`。
-8. 最终只用 `ResolvedBucket.value` 按 `FormulaSpec.buckets` 顺序计算。
+6. 对显式 `contributions` 检查 bucket 是否有 Phase 6A reducer；没有 reducer 返回 `{ ok: false }` +
+   `unsupported_contributions`。
+7. 将 ignored buckets 写入 `BucketBreakdown` 和 warnings，但不写入 `ResolvedBucket[]`。
+8. 对缺失但属于公式的 factor buckets 应用默认值；缺失 `base_damage` 返回 `{ ok: false }`。
+9. 最终只用 `ResolvedBucket.value` 按 `FormulaSpec.buckets` 顺序计算。
 
 ### Formula spec
 
@@ -452,6 +462,11 @@ interface FormulaBuilder {
 
 declare function createFormula(formulaId: FormulaId): FormulaBuilder
 ```
+
+`BucketBuilder.fromContributions(...)` 只构造统一 `Bucket` shape；它不保证该 `bucketId` 支持
+`contributions`。是否可计算由 normalization 校验决定：只有 contribution reducer table 中列出的
+bucket 可以使用 `contributions`，其他 bucket 必须返回 `{ ok: false }` +
+`unsupported_contributions`。
 
 Object literal 和 fluent helper 都必须产生同一个 `Bucket` shape：
 
@@ -780,6 +795,21 @@ Empty contributions：
     code: 'empty_contributions',
     bucketId: 'damage_bonus',
     message: 'Bucket contributions cannot be empty.',
+  },
+  warnings: [],
+}
+```
+
+Unsupported contributions：
+
+```ts
+{
+  ok: false,
+  formulaId: 'regular_damage',
+  error: {
+    code: 'unsupported_contributions',
+    bucketId: 'crit',
+    message: 'crit does not support contributions in Phase 6A; pass a normalized value.',
   },
   warnings: [],
 }
