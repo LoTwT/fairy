@@ -141,10 +141,18 @@ interface Bucket {
   readonly value?: number
 
   readonly contributions?: readonly BucketContribution[]
+
+  readonly provenance?: BucketProvenance
 }
 
 interface BucketContribution {
   readonly value: number
+  readonly source?: string
+  readonly note?: string
+}
+
+interface BucketProvenance {
+  readonly kind: "manual" | "derived"
   readonly source?: string
   readonly note?: string
 }
@@ -156,6 +164,36 @@ interface BucketContribution {
 - 只有 `contributions`：按 bucket 内置 reducer 合成最终值。
 - 两者都没有：按默认值规则处理。
 - 两者同时出现：返回 `{ ok: false }`，避免隐式 override。
+- `value`、`contributions[].value` 和 helper-derived numeric value 都必须是 finite
+  number；`NaN`、`Infinity` 和 `-Infinity` 返回 `{ ok: false }`。
+- `contributions` 存在时不能为空；空数组返回 `{ ok: false }`，不能被 reducer 当作默认值或 `0`
+  自行解释。
+- `provenance` 只描述 bucket 值来源，不改变计算规则。没有 `provenance` 时，输出可按
+  `kind: "manual"` 处理。
+
+### Bucket cardinality and formula applicability
+
+`Formula.buckets` 是以 `bucketId` 为 key 的集合语义，不是 ordered override list。
+
+- 同一个 `Formula` 中同一 `bucketId` 最多出现一次。
+- 如果重复出现，core 不做 first wins、last wins、merge 或 replace，必须返回 `{ ok: false }` +
+  `duplicate_bucket`。
+- 多来源相加或解释必须放在同一个 `Bucket` 的 `contributions` 内。
+- bucket 顺序不改变计算结果；公式乘法顺序由 `FormulaSpec.buckets` 决定。
+
+Formula applicability 分两类：
+
+- `FormulaSpec.ignoredBuckets` 中明确列出的 bucket 返回 `{ ok: true }` +
+  `ignored_bucket` warning，并进入 `BucketBreakdown`；它不进入 `ResolvedBucket[]`，也不参与最终乘法。
+  例如 `sheer_damage` 中的 `defense`。
+- 不在 `FormulaSpec.buckets` 或 `FormulaSpec.ignoredBuckets` 中的 bucket 返回 `{ ok: false }` +
+  `unsupported_bucket`。例如 `regular_damage` 中的 `sheer_damage_bonus`。
+
+即使 bucket 最终被 ignored，只要调用方显式提供了 `value` 或 `contributions`，这些数字仍必须通过
+finite-number validation；ignored bucket 不能成为 `NaN` / `Infinity` 的绕行入口。
+ignored bucket 的 `BucketBreakdown.value` 只用于解释：如果调用方提供了 `value` 或
+`contributions`，先按普通 bucket 规则归一化后写入 breakdown；如果两者都没有，则写入中性值 `1`，
+并标记 `defaulted: true`。无论哪种情况，它都不进入 `ResolvedBucket[]`。
 
 ### Contribution reducers
 
@@ -225,6 +263,7 @@ interface BucketBreakdown {
   readonly source: BucketBreakdownSource
   readonly defaulted?: boolean
   readonly contributions?: readonly BucketContribution[]
+  readonly provenance?: BucketProvenance
   readonly warnings?: readonly CalculationWarning[]
 }
 
@@ -232,6 +271,9 @@ interface CalculationWarning {
   readonly code:
     | "missing_required_bucket"
     | "conflicting_bucket_input"
+    | "duplicate_bucket"
+    | "invalid_number"
+    | "empty_contributions"
     | "unsupported_formula"
     | "unsupported_bucket"
     | "ignored_bucket"
@@ -261,6 +303,21 @@ type CalculationResult =
 
 `BucketContribution` 只在归一化和解释阶段使用；最终公式计算只使用
 `ResolvedBucket.value`。
+
+归一化顺序固定为：
+
+1. 读取 `FormulaSpec`；不支持的 `formulaId` 返回 `{ ok: false }` + `unsupported_formula`。
+2. 检查 `Formula.buckets` 中是否存在重复 `bucketId`；重复返回 `{ ok: false }` +
+   `duplicate_bucket`。
+3. 检查每个显式 bucket 是否属于 `FormulaSpec.buckets` 或 `FormulaSpec.ignoredBuckets`；
+   不属于两者返回 `{ ok: false }` + `unsupported_bucket`。
+4. 对所有显式 numeric inputs 做 finite-number validation；失败返回 `{ ok: false }` +
+   `invalid_number`。
+5. 对显式 `contributions` 做 non-empty validation；空数组返回 `{ ok: false }` +
+   `empty_contributions`。
+6. 将 ignored buckets 写入 `BucketBreakdown` 和 warnings，但不写入 `ResolvedBucket[]`。
+7. 对缺失但属于公式的 factor buckets 应用默认值；缺失 `base_damage` 返回 `{ ok: false }`。
+8. 最终只用 `ResolvedBucket.value` 按 `FormulaSpec.buckets` 顺序计算。
 
 ### Formula spec
 
@@ -356,9 +413,9 @@ optimizer / loadout builder：
 thin helper 派生 bucket：
 
 1. 调用方已经知道防御降低、无视防御、穿透率、穿透值、等级基数等数字。
-2. 调用方调用 `deriveDefenseBucket(...)` 得到一个 `Bucket`。
+2. 调用方调用 `deriveDefenseBucket(...)` 得到一个带 `provenance.kind = "derived"` 的 `Bucket`。
 3. 该 `Bucket` 和其他 buckets 一起组合成 `Formula`。
-4. `BucketBreakdown` 标记该 bucket 的 `source: 'derived'`。
+4. `BucketBreakdown` 透传 provenance，并标记该 bucket 的 `source: 'derived'`。
 
 debug / review / 错误处理：
 
@@ -459,6 +516,22 @@ declare function deriveDefenseBucket(params: DefenseBucketParams): Bucket
 ```
 
 这个 helper 只处理调用方已提供的数字参数，不从 raw text、角色、装备或 guide snapshot 中推断规则。
+返回的 bucket 必须携带最小 provenance：
+
+```ts
+{
+  bucketId: "defense",
+  value: 0.5,
+  provenance: {
+    kind: "derived",
+    source: "deriveDefenseBucket",
+  },
+} satisfies Bucket
+```
+
+`calculateFormula` 只有在看到 `provenance.kind === "derived"` 时，才能把对应
+`BucketBreakdown.source` 标记为 `"derived"`；否则 direct `value` 输入应保持
+`source: "input_value"`。
 
 ### Example: regular_damage
 
@@ -652,6 +725,66 @@ Same bucket has both `value` and `contributions`：
 }
 ```
 
+Duplicate bucket：
+
+```ts
+{
+  ok: false,
+  formulaId: 'regular_damage',
+  error: {
+    code: 'duplicate_bucket',
+    bucketId: 'damage_bonus',
+    message: 'Formula cannot contain duplicate bucketId damage_bonus.',
+  },
+  warnings: [],
+}
+```
+
+Unsupported bucket for formula：
+
+```ts
+{
+  ok: false,
+  formulaId: 'regular_damage',
+  error: {
+    code: 'unsupported_bucket',
+    bucketId: 'sheer_damage_bonus',
+    message: 'sheer_damage_bonus is not supported by regular_damage.',
+  },
+  warnings: [],
+}
+```
+
+Invalid numeric input：
+
+```ts
+{
+  ok: false,
+  formulaId: 'regular_damage',
+  error: {
+    code: 'invalid_number',
+    bucketId: 'base_damage',
+    message: 'Bucket value must be a finite number.',
+  },
+  warnings: [],
+}
+```
+
+Empty contributions：
+
+```ts
+{
+  ok: false,
+  formulaId: 'regular_damage',
+  error: {
+    code: 'empty_contributions',
+    bucketId: 'damage_bonus',
+    message: 'Bucket contributions cannot be empty.',
+  },
+  warnings: [],
+}
+```
+
 ## Acceptance
 
 符合这份 spec 的 PR 必须满足：
@@ -665,6 +798,11 @@ Same bucket has both `value` and `contributions`：
 - `base_damage` 缺失时返回 `{ ok: false }`；factor buckets 缺失时默认中性值 `1`，且必须进入
   `BucketBreakdown`。
 - `sheer_damage` 明确忽略 `defense`，并通过 warning 表达。
+- 同一 formula 中重复 bucket 返回 `{ ok: false }`；不属于 formula 且不在 ignored list 的 bucket
+  返回 `{ ok: false }`；ignored bucket 只能通过 warning 和 breakdown 表达。
+- 所有 numeric inputs 都必须是 finite number；空 `contributions` 必须返回 `{ ok: false }`。
+- `deriveDefenseBucket(...)` 到 `BucketBreakdown.source = 'derived'` 必须有 explicit
+  `provenance` 链路。
 - Contribution reducer 只覆盖 Phase 6A 允许的最小 bucket 集；没有通用 operation system。
 - 文档中没有遗留的 obsolete API identifiers；旧 source baseline 记录留在 Phase 5A reference，不在本 API spec 中复写。
 
