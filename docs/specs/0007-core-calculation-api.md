@@ -25,7 +25,7 @@ dependency。
 - `anomaly_buildup`
 - `anomaly_damage`
 - `disorder_damage`
-- `disorder_daze_buildup`
+- `disorder_daze`
 
 ## Rationale
 
