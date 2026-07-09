@@ -1,0 +1,29 @@
+{
+  "name": "@randomplay/core",
+  "version": "0.1.5",
+  "description": "Core calculation primitives for Fairy.",
+  "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "sideEffects": false,
+  "types": "./dist/index.d.mts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "scripts": {
+    "build": "tsdown",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "tsdown": "^0.22.4",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.10"
+  }
+}
