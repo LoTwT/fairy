@@ -10,10 +10,12 @@ accepted calculation contract 收窄成第一版可实现的 TypeScript API shap
 
 Phase 6A 的核心链路固定为：
 
-`Bucket[] -> Formula -> calculateFormula(Formula) -> CalculationResult`
+`CalculationInput -> FormulaSpec / BucketSpec normalization -> CalculationResult`
 
-`Bucket` 是可组合的公式乘区积木；`Formula` 是由 `formulaId + Bucket[]` 组合出的公式对象；
-`calculateFormula` 只消费 `Formula`，并最终只使用每个 bucket 的一个归一化 `value` 参与计算。
+`CalculationInput` 是调用方提交的一次计算请求；`FormulaSpec` 是 core 内置 registry 管理的固定规则；
+`BucketSpec` 是每个 bucket 的内置归一化策略。`Bucket` 本身只是纯输入数据，不持有 reducer 或计算行为。
+`calculate` 只接收 `CalculationInput`，并最终只使用每个 bucket 的一个归一化 `ResolvedBucket.value`
+参与计算。
 
 这份 spec **不**启动实现，也不定义 package data、resolver、raw text parsing、角色 /
 装备 / 敌人数据库、UI、CLI、npm publish、benchmark、decimal dependency 或 runtime schema
@@ -35,7 +37,9 @@ Phase 5A 已经提供 source-backed formula baseline、bucket registry、fixture
 
 设计目标：
 
-- 调用方先组合 buckets，再得到一个 formula；计算入口只接收 formula。
+- 调用方用 object literal 提交 `CalculationInput`，计算入口只接收这一次请求。
+- 固定公式规则由 `FormulaSpec` 表达；调用方不能拼装或注册新的公式规则。
+- bucket 内部归一化由 `BucketSpec` 表达；`Bucket` 是纯数据，不包含 reducer / 计算方法。
 - API 保留 `BucketContribution` 和 `BucketBreakdown`，让 UI / optimizer 能解释来源和默认值。
 - 最终公式计算保持简单：每个 bucket 归一化为一个 `ResolvedBucket.value` 后再相乘。
 - 错误返回 `{ ok: false }`，不依赖 exception control flow，也避免 `undefined` / `NaN` 静默进入结果。
@@ -43,8 +47,11 @@ Phase 5A 已经提供 source-backed formula baseline、bucket registry、fixture
 
 Naming rationale：
 
-- 使用 `Bucket` 作为主类型名，避免把乘区输入模型做得比实际 Phase 6A 范围更重。
-- 使用 `calculateFormula` 作为主入口，强调输入已经是一个可计算的 formula。
+- 使用 `CalculationInput` 作为 public request type，避免把固定规则层暴露成调用方可组合对象。
+- 使用 `FormulaSpec` 表示 core 内置固定规则；文档中的“公式”概念都落到这个 spec 层。
+- 使用 `Bucket` 作为纯输入数据类型；bucket 的 reducer、default、validation 和 breakdown trace 都属于
+  `BucketSpec` / normalization 层。
+- 使用 `calculate` 作为唯一主入口，强调调用方传入的是一次计算请求，不是自定义公式对象。
 - `damage_taken` 表示减易伤区，`stun_damage_taken` 表示失衡易伤区；后者对应游戏文本
   `Stun DMG Multiplier`，并保持 target-side taken 语义。
 - `sheer_damage` 表示贯穿伤害公式；Phase 6A API 使用这组命名，不改变 Phase 5A source baseline
@@ -56,14 +63,14 @@ Naming rationale：
 
 Phase 6A API 草案必须能追溯到这些已入库资料：
 
-| Reference                                                                                                                     | Role                                                                                   |
-| ----------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| [Spec 0006 - Calculation spec](0006-calculation-spec.md)                                                                      | Phase 5A calculation contract、formula / bucket registry 和 Phase 6 handoff boundary。 |
-| [formula-baseline-2-0.md](../references/formula-baseline-2-0.md)                                                              | 2.0 guide source-backed formula baseline。                                             |
-| [zzz-data-introduction-2-0.txt](../references/source-snapshots/zzz-data-introduction-2-0.txt)                                 | 原始攻略 source snapshot；provenance only，不是 runtime input。                        |
-| [Zenless Zone Zero Wiki / Damage](https://zenless-zone-zero.fandom.com/wiki/Damage)                                           | 英文命名参考；不改变 Phase 5A accepted formula boundary。                              |
-| [Stun DMG Multiplier Increase Skills](https://zenless-zone-zero.fandom.com/wiki/Category:Stun_DMG_Multiplier_Increase_Skills) | `stun_damage_taken` 英文命名参考。                                                     |
-| [Enemy DMG Taken Increase Skills](https://zenless-zone-zero.fandom.com/wiki/Category:Enemy_DMG_Taken_Increase_Skills)         | `damage_taken` 英文命名参考。                                                          |
+| Reference                                                                                                                     | Role                                                                                              |
+| ----------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| [Spec 0006 - Calculation spec](0006-calculation-spec.md)                                                                      | Phase 5A calculation contract、fixed formula / bucket spec registry 和 Phase 6 handoff boundary。 |
+| [formula-baseline-2-0.md](../references/formula-baseline-2-0.md)                                                              | 2.0 guide source-backed formula baseline。                                                        |
+| [zzz-data-introduction-2-0.txt](../references/source-snapshots/zzz-data-introduction-2-0.txt)                                 | 原始攻略 source snapshot；provenance only，不是 runtime input。                                   |
+| [Zenless Zone Zero Wiki / Damage](https://zenless-zone-zero.fandom.com/wiki/Damage)                                           | 英文命名参考；不改变 Phase 5A accepted formula boundary。                                         |
+| [Stun DMG Multiplier Increase Skills](https://zenless-zone-zero.fandom.com/wiki/Category:Stun_DMG_Multiplier_Increase_Skills) | `stun_damage_taken` 英文命名参考。                                                                |
+| [Enemy DMG Taken Increase Skills](https://zenless-zone-zero.fandom.com/wiki/Category:Enemy_DMG_Taken_Increase_Skills)         | `damage_taken` 英文命名参考。                                                                     |
 
 External references 只用于 naming sanity，不作为 package data、runtime input 或新增公式来源。
 
@@ -100,7 +107,7 @@ type BucketId =
 | 失衡易伤区 | `stun_damage_taken`  | 两者                | 对应 `Stun DMG Multiplier`。                                   |
 | 特殊乘区   | `special`            | 两者                | Phase 6A 可选兜底乘区，默认 `1`；只接受直接 `value`。          |
 
-### Formula definitions
+### Built-in FormulaSpec definitions
 
 ```text
 regular_damage =
@@ -131,10 +138,20 @@ sheer_damage =
 
 ### Input model
 
-调用方可以传最终 bucket 值，也可以传来源贡献项。Phase 6A 严格要求同一个 `Bucket` 中
-`value` 和 `contributions` 二选一。
+调用方提交 `CalculationInput`。调用方可以传最终 bucket 值，也可以传来源贡献项。Phase 6A
+严格要求同一个 `Bucket` 中 `value` 和 `contributions` 二选一。
 
 ```ts
+interface CalculationInput {
+  readonly formulaId: FormulaId
+  readonly buckets: readonly Bucket[]
+  readonly options?: CalculationOptions
+}
+
+interface CalculationOptions {
+  readonly trace?: boolean
+}
+
 interface Bucket {
   readonly bucketId: BucketId
 
@@ -158,6 +175,9 @@ interface BucketProvenance {
 }
 ```
 
+`Bucket` 是纯输入数据。它不提供 reducer、validation、default、breakdown 或 calculation method；
+这些行为都由 core 内置 `BucketSpec` 在 normalization 阶段执行。
+
 规则：
 
 - 只有 `value`：直接使用该值。
@@ -175,15 +195,15 @@ interface BucketProvenance {
 
 ### Bucket cardinality and formula applicability
 
-`Formula.buckets` 是以 `bucketId` 为 key 的集合语义，不是 ordered override list。
+`CalculationInput.buckets` 是以 `bucketId` 为 key 的集合语义，不是 ordered override list。
 
-- 同一个 `Formula` 中同一 `bucketId` 最多出现一次。
+- 同一个 `CalculationInput` 中同一 `bucketId` 最多出现一次。
 - 如果重复出现，core 不做 first wins、last wins、merge 或 replace，必须返回 `{ ok: false }` +
   `duplicate_bucket`。
 - 多来源相加或解释必须放在同一个 `Bucket` 的 `contributions` 内。
 - bucket 顺序不改变计算结果；公式乘法顺序由 `FormulaSpec.buckets` 决定。
 
-Formula applicability 分两类：
+Applicability 分两类，由内置 `FormulaSpec` 决定：
 
 - `FormulaSpec.ignoredBuckets` 中明确列出的 bucket 返回 `{ ok: true }` +
   `ignored_bucket` warning，并进入 `BucketBreakdown`；它不进入 `ResolvedBucket[]`，也不参与最终乘法。
@@ -197,10 +217,11 @@ ignored bucket 的 `BucketBreakdown.value` 只用于解释：如果调用方提�
 `contributions`，先按普通 bucket 规则归一化后写入 breakdown；如果两者都没有，则写入中性值 `1`，
 并标记 `defaulted: true`。无论哪种情况，它都不进入 `ResolvedBucket[]`。
 
-### Contribution reducers
+### Bucket specs and reducers
 
 Phase 6A 不提供通用 operation 框架，不引入 dynamic `replace`、`clamp`、enable/disable 或
-resolver rules。只接受 bucket-level 最小 reducer：
+resolver rules。乘区内部“也有计算”的部分由内置 `BucketSpec` / normalization 表达，不是 `Bucket`
+实例方法。Phase 6A 只接受 bucket-level 最小 reducer：
 
 | bucket id            | contribution reducer     |
 | -------------------- | ------------------------ |
@@ -209,6 +230,10 @@ resolver rules。只接受 bucket-level 最小 reducer：
 | `sheer_damage_bonus` | `1 + sum(contributions)` |
 | `damage_taken`       | `1 + sum(contributions)` |
 | `stun_damage_taken`  | `1 + sum(contributions)` |
+
+`damage_bonus` 和 `sheer_damage_bonus` 的攻略语义是 `1 + sum(contributions)`。`damage_taken`
+的攻略语义是 `1 + increase - reduction`；Phase 6A 中调用方需要先把 reduction 归一化成负向
+contribution，core reducer 仍只执行 `1 + sum(contributions)`。
 
 这些 bucket 在 Phase 6A 只接受调用方直接传最终 `value`：
 
@@ -221,6 +246,31 @@ resolver rules。只接受 bucket-level 最小 reducer：
 `unsupported_contributions`，不能尝试用通用 sum、乘法或 implicit reducer 解释。这个规则同样适用于
 `ignoredBuckets`：例如 `sheer_damage` 中显式传入 `defense` 且使用 `contributions` 时，不能因为该
 bucket 会被 ignored 就跳过 reducer 可用性检查。
+
+`BucketSpec` 是内部固定策略，不是 public extension API：
+
+```ts
+type BucketContributionReducer = "sum" | "one_plus_sum"
+
+interface BucketSpec {
+  readonly bucketId: BucketId
+  readonly acceptsDirectValue: true
+  readonly acceptsDerivedValue?: boolean
+  readonly contributionReducer?: BucketContributionReducer
+  readonly defaultValue?: number
+  readonly required?: boolean
+}
+```
+
+Phase 6A 的 `BucketSpec` 责任包括：
+
+- direct `value`、`contributions` 和 helper-derived value 的支持矩阵。
+- contribution reducer、default value 和 required bucket 规则。
+- duplicate、empty contributions、unsupported contributions 和 invalid finite number validation。
+- `BucketBreakdown.source`、`defaulted`、`provenance`、`warnings` 和 trace 所需的信息。
+
+`defense` 同时支持 direct normalized value 和 helper-derived value；`crit`、`resistance` 和
+`special` 在 Phase 6A 只支持 direct normalized value。
 
 ### Defaults and errors
 
@@ -242,16 +292,6 @@ bucket 会被 ignored 就跳过 reducer 可用性检查。
 ### Output and trace model
 
 ```ts
-interface Formula {
-  readonly formulaId: FormulaId
-  readonly buckets: readonly Bucket[]
-  readonly options?: EvaluationOptions
-}
-
-interface EvaluationOptions {
-  readonly trace?: boolean
-}
-
 interface ResolvedBucket {
   readonly bucketId: BucketId
   readonly value: number
@@ -315,19 +355,21 @@ type CalculationResult =
 归一化顺序固定为：
 
 1. 读取 `FormulaSpec`；不支持的 `formulaId` 返回 `{ ok: false }` + `unsupported_formula`。
-2. 检查 `Formula.buckets` 中是否存在重复 `bucketId`；重复返回 `{ ok: false }` +
+2. 检查 `CalculationInput.buckets` 中是否存在重复 `bucketId`；重复返回 `{ ok: false }` +
    `duplicate_bucket`。
 3. 检查每个显式 bucket 是否属于 `FormulaSpec.buckets` 或 `FormulaSpec.ignoredBuckets`；
    不属于两者返回 `{ ok: false }` + `unsupported_bucket`。
-4. 对所有显式 numeric inputs 做 finite-number validation；失败返回 `{ ok: false }` +
+4. 读取对应 `BucketSpec`，确认 direct value、contributions 或 helper-derived value 是否被支持。
+5. 对所有显式 numeric inputs 做 finite-number validation；失败返回 `{ ok: false }` +
    `invalid_number`。
-5. 对显式 `contributions` 做 non-empty validation；空数组返回 `{ ok: false }` +
+6. 对显式 `contributions` 做 non-empty validation；空数组返回 `{ ok: false }` +
    `empty_contributions`。
-6. 对显式 `contributions` 检查 bucket 是否有 Phase 6A reducer；没有 reducer 返回 `{ ok: false }` +
+7. 对显式 `contributions` 检查 bucket 是否有 Phase 6A reducer；没有 reducer 返回 `{ ok: false }` +
    `unsupported_contributions`。
-7. 将 ignored buckets 写入 `BucketBreakdown` 和 warnings，但不写入 `ResolvedBucket[]`。
-8. 对缺失但属于公式的 factor buckets 应用默认值；缺失 `base_damage` 返回 `{ ok: false }`。
-9. 最终只用 `ResolvedBucket.value` 按 `FormulaSpec.buckets` 顺序计算。
+8. 用 `BucketSpec` 将每个 accepted bucket 归一化成 `ResolvedBucket.value`。
+9. 将 ignored buckets 写入 `BucketBreakdown` 和 warnings，但不写入 `ResolvedBucket[]`。
+10. 对缺失但属于公式的 factor buckets 应用默认值；缺失 `base_damage` 返回 `{ ok: false }`。
+11. `FormulaSpec` 最终只用 `ResolvedBucket.value` 按 `FormulaSpec.buckets` 顺序计算。
 
 ### Formula spec
 
@@ -335,6 +377,8 @@ type CalculationResult =
 interface FormulaSpec {
   readonly formulaId: FormulaId
   readonly buckets: readonly BucketId[]
+  readonly requiredBuckets: readonly BucketId[]
+  readonly optionalBuckets: readonly BucketId[]
   readonly ignoredBuckets?: readonly BucketId[]
 }
 ```
@@ -344,6 +388,16 @@ const regularDamageSpec = {
   formulaId: "regular_damage",
   buckets: [
     "base_damage",
+    "damage_bonus",
+    "crit",
+    "defense",
+    "resistance",
+    "damage_taken",
+    "stun_damage_taken",
+    "special",
+  ],
+  requiredBuckets: ["base_damage"],
+  optionalBuckets: [
     "damage_bonus",
     "crit",
     "defense",
@@ -366,6 +420,16 @@ const sheerDamageSpec = {
     "stun_damage_taken",
     "special",
   ],
+  requiredBuckets: ["base_damage"],
+  optionalBuckets: [
+    "damage_bonus",
+    "crit",
+    "sheer_damage_bonus",
+    "resistance",
+    "damage_taken",
+    "stun_damage_taken",
+    "special",
+  ],
   ignoredBuckets: ["defense"],
 } satisfies FormulaSpec
 ```
@@ -373,18 +437,22 @@ const sheerDamageSpec = {
 ### Public API draft
 
 ```ts
-declare function calculateFormula(formula: Formula): CalculationResult
+declare function calculate(input: CalculationInput): CalculationResult
 
 declare function getFormulaSpec(formulaId: FormulaId): FormulaSpec
 
 declare function listBuckets(formulaId: FormulaId): readonly BucketId[]
 ```
 
-`calculateFormula` 是唯一主计算入口。`resolveBuckets` 可以作为内部 helper；如果后续为了 debug /
-tests 暴露，也必须保持与本 spec 相同的归一化边界：
+`calculate` 是唯一主计算入口。Phase 6A 不提供 calculation input builder，不提供调用方拼装固定规则的 API，
+也不提供 default registry 的注册 / 注入 API。未来如果需要 custom formula 或 custom bucket，应设计
+scoped extension，而不是污染 default registry。
+
+`resolveBuckets` 可以作为内部 helper；它不是 Phase 6A public API。如果后续为了 debug / tests 暴露，
+也必须保持与本 spec 相同的归一化边界：
 
 ```ts
-declare function resolveBuckets(formula: Formula):
+declare function resolveBuckets(input: CalculationInput):
   | {
       readonly ok: true
       readonly buckets: readonly ResolvedBucket[]
@@ -407,25 +475,26 @@ declare function resolveBuckets(formula: Formula):
 
 1. 用户选择 `regular_damage` 或 `sheer_damage`。
 2. UI 将表单值整理成 `Bucket[]`。
-3. UI 将 `formulaId + Bucket[]` 组合成 `Formula`。
-4. UI 调用 `calculateFormula(formula)`。
+3. UI 用 object literal 组合出 `CalculationInput`。
+4. UI 调用 `calculate(input)`。
 5. core 返回最终 `value`、`BucketBreakdown[]`、`warnings` 和可选 `trace`。
 6. UI 展示最终伤害，并展开每个 bucket 的来源、默认值和警告。
 
 optimizer / loadout builder：
 
 1. optimizer 根据候选装备、buff、状态构造 `BucketContribution[]`。
-2. optimizer 把这些 bucket 组合成 `Formula`，代表一个候选方案。
-3. core 把 contributions 合成为 bucket 的最终 `value`。
-4. `calculateFormula` 只使用归一化后的 `ResolvedBucket.value`。
+2. optimizer 把这些 bucket 放入 `CalculationInput`，代表一个候选方案。
+3. core 根据 `BucketSpec` 把 contributions 合成为 bucket 的最终 `value`。
+4. `calculate` 只使用归一化后的 `ResolvedBucket.value`。
 5. `BucketBreakdown` 保留 contribution 明细，供 UI 或 optimizer 解释结果。
 
 thin helper 派生 bucket：
 
 1. 调用方已经知道防御降低、无视防御、穿透率、穿透值、等级基数等数字。
 2. 调用方调用 `deriveDefenseBucket(...)` 得到一个带 `provenance.kind = "derived"` 的 `Bucket`。
-3. 该 `Bucket` 和其他 buckets 一起组合成 `Formula`。
-4. `BucketBreakdown` 透传 provenance，并标记该 bucket 的 `source: 'derived'`。
+3. 该 `Bucket` 和其他 buckets 一起放入 `CalculationInput`。
+4. `BucketSpec` normalization 透传 provenance，并让 `BucketBreakdown` 标记该 bucket 的
+   `source: 'derived'`。
 
 debug / review / 错误处理：
 
@@ -434,13 +503,13 @@ debug / review / 错误处理：
 3. 可计算但有默认值或 ignored bucket 时返回 `{ ok: true }` 与 warnings。
 4. reviewer 可以通过 `BucketBreakdown` 和 `trace` 检查每个 bucket 的最终值。
 
-### Composable construction layer
+### Bucket construction helper
 
-Phase 6A 可以提供一层可选 fluent helper。它不引入第二套公式模型；最终只生成标准 `Bucket`
-和 `Formula` shape。
+Phase 6A 可以提供一层可选 bucket helper。它不引入第二套 bucket 模型；最终只生成标准 `Bucket`
+shape，并且不负责 formula / calculation input 的构建。
 
 ```ts
-interface BucketBuilder {
+interface BucketInputHelper {
   readonly bucketId: BucketId
 
   value(value: number): Bucket
@@ -448,27 +517,15 @@ interface BucketBuilder {
   fromContributions(contributions: readonly BucketContribution[]): Bucket
 }
 
-declare function bucket(bucketId: BucketId): BucketBuilder
-
-interface FormulaBuilder {
-  readonly formulaId: FormulaId
-
-  use(bucket: Bucket): FormulaBuilder
-
-  useAll(buckets: readonly Bucket[]): FormulaBuilder
-
-  build(): Formula
-}
-
-declare function createFormula(formulaId: FormulaId): FormulaBuilder
+declare function bucket(bucketId: BucketId): BucketInputHelper
 ```
 
-`BucketBuilder.fromContributions(...)` 只构造统一 `Bucket` shape；它不保证该 `bucketId` 支持
+`BucketInputHelper.fromContributions(...)` 只构造统一 `Bucket` shape；它不保证该 `bucketId` 支持
 `contributions`。是否可计算由 normalization 校验决定：只有 contribution reducer table 中列出的
 bucket 可以使用 `contributions`，其他 bucket 必须返回 `{ ok: false }` +
 `unsupported_contributions`。
 
-Object literal 和 fluent helper 都必须产生同一个 `Bucket` shape：
+Object literal 和 bucket helper 都必须产生同一个 `Bucket` shape：
 
 ```ts
 const byObjectLiteral = {
@@ -485,36 +542,37 @@ const byComposableHelper = bucket("damage_bonus").fromContributions([
 ])
 ```
 
-`Bucket` 继续组合成 `Formula`：
+调用方仍直接提交 `CalculationInput`：
 
 ```ts
-const formula = createFormula("regular_damage")
-  .use(bucket("base_damage").value(1000))
-  .use(
+const input = {
+  formulaId: "regular_damage",
+  buckets: [
+    bucket("base_damage").value(1000),
     bucket("damage_bonus").fromContributions([
       { value: 0.3, source: "skill_buff" },
       { value: 0.15, source: "drive_disc" },
     ]),
-  )
-  .use(bucket("crit").value(2))
-  .use(bucket("defense").value(0.5))
-  .use(bucket("resistance").value(0.9))
-  .use(bucket("stun_damage_taken").value(1.5))
-  .build()
+    bucket("crit").value(2),
+    bucket("defense").value(0.5),
+    bucket("resistance").value(0.9),
+    bucket("stun_damage_taken").value(1.5),
+  ],
+} satisfies CalculationInput
 
-const result = calculateFormula(formula)
+const result = calculate(input)
 ```
 
-Composable helper boundary：
+Bucket helper boundary：
 
 - 不读取角色、装备、敌人或 raw text。
 - 不做公式计算。
 - 不绕过 `FormulaSpec`；公式需要哪些 buckets 仍由 `FormulaSpec` 校验。
-- 只让调用方更自然地把 `Bucket[]` 组合成 `Formula`。
+- 不构造 `CalculationInput`；调用方仍使用 object literal 表达一次计算请求。
 
 ### Defense helper boundary
 
-`calculateFormula` 只消费最终 `defense` bucket value。可以提供一个很薄的 helper，把明确数值参数归一化成
+`calculate` 只消费最终 `defense` bucket value。可以提供一个很薄的 helper，把明确数值参数归一化成
 `defense` bucket。
 
 ```ts
@@ -544,31 +602,33 @@ declare function deriveDefenseBucket(params: DefenseBucketParams): Bucket
 } satisfies Bucket
 ```
 
-`calculateFormula` 只有在看到 `provenance.kind === "derived"` 时，才能把对应
+`calculate` 只有在看到 `provenance.kind === "derived"` 时，才能把对应
 `BucketBreakdown.source` 标记为 `"derived"`；否则 direct `value` 输入应保持
 `source: "input_value"`。
 
 ### Example: regular_damage
 
 ```ts
-const formula = {
-  ...createFormula("regular_damage")
-    .use(bucket("base_damage").value(1000))
-    .use(
-      bucket("damage_bonus").fromContributions([
+const input = {
+  formulaId: "regular_damage",
+  buckets: [
+    { bucketId: "base_damage", value: 1000 },
+    {
+      bucketId: "damage_bonus",
+      contributions: [
         { value: 0.3, source: "skill_buff" },
         { value: 0.15, source: "drive_disc" },
-      ]),
-    )
-    .use(bucket("crit").value(2))
-    .use(bucket("defense").value(0.5))
-    .use(bucket("resistance").value(0.9))
-    .use(bucket("stun_damage_taken").value(1.5))
-    .build(),
+      ],
+    },
+    { bucketId: "crit", value: 2 },
+    { bucketId: "defense", value: 0.5 },
+    { bucketId: "resistance", value: 0.9 },
+    { bucketId: "stun_damage_taken", value: 1.5 },
+  ],
   options: { trace: true },
-} satisfies Formula
+} satisfies CalculationInput
 
-calculateFormula(formula)
+calculate(input)
 ```
 
 参与计算的归一化值：
@@ -631,24 +691,26 @@ special = 1 (default)
 ### Example: sheer_damage
 
 ```ts
-const formula = {
-  ...createFormula("sheer_damage")
-    .use(bucket("base_damage").value(1000))
-    .use(
-      bucket("damage_bonus").fromContributions([
+const input = {
+  formulaId: "sheer_damage",
+  buckets: [
+    { bucketId: "base_damage", value: 1000 },
+    {
+      bucketId: "damage_bonus",
+      contributions: [
         { value: 0.3, source: "skill_buff" },
         { value: 0.15, source: "drive_disc" },
-      ]),
-    )
-    .use(bucket("crit").value(2))
-    .use(bucket("sheer_damage_bonus").value(1.25))
-    .use(bucket("resistance").value(0.9))
-    .use(bucket("damage_taken").value(1.2))
-    .build(),
+      ],
+    },
+    { bucketId: "crit", value: 2 },
+    { bucketId: "sheer_damage_bonus", value: 1.25 },
+    { bucketId: "resistance", value: 0.9 },
+    { bucketId: "damage_taken", value: 1.2 },
+  ],
   options: { trace: true },
-} satisfies Formula
+} satisfies CalculationInput
 
-calculateFormula(formula)
+calculate(input)
 ```
 
 参与计算的归一化值：
@@ -749,7 +811,7 @@ Duplicate bucket：
   error: {
     code: 'duplicate_bucket',
     bucketId: 'damage_bonus',
-    message: 'Formula cannot contain duplicate bucketId damage_bonus.',
+    message: 'CalculationInput cannot contain duplicate bucketId damage_bonus.',
   },
   warnings: [],
 }
@@ -822,7 +884,10 @@ Unsupported contributions：
 - 只新增或更新 docs/spec references；没有 `packages/core`、runtime implementation、dependency、
   lockfile、fixture database、resolver、UI 或 CLI 变更。
 - API 草案只覆盖 `regular_damage` 和 `sheer_damage`。
-- 文档中的 main calculation journey 使用 `Bucket[] -> Formula -> calculateFormula(Formula) -> CalculationResult`。
+- 文档中的 main calculation journey 使用
+  `CalculationInput -> FormulaSpec / BucketSpec normalization -> CalculationResult`。
+- Public API 只有 `calculate(input: CalculationInput): CalculationResult` 作为主计算入口；Phase 6A
+  不提供 calculation input builder、调用方公式规则构造 API 或 default registry 注册 / 注入 API。
 - `BucketBreakdown` 是 required output concept，并能记录 input value、contributions、defaults、derived
   values、ignored bucket 和 warnings。
 - `base_damage` 缺失时返回 `{ ok: false }`；factor buckets 缺失时默认中性值 `1`，且必须进入
