@@ -24,4 +24,4 @@ Specs 使用中文 canonical prose。schema key、field name、enum value、CLI/
 - [0004-domain-field-map.md](0004-domain-field-map.md) — Phase 3 domain field map：traceability、sample mapping shape、object/use classification 和 unresolved queue。
 - [0005-terminology-glossary.md](0005-terminology-glossary.md) — Phase 4 terminology glossary：traceability、seed glossary shape、verification status、alias/deprecated gate 和 unresolved naming queue。
 - [0006-calculation-spec.md](0006-calculation-spec.md) — Phase 5 calculation spec：2.0 formula baseline、formula registry、bucket registry、`calculation_effect` contract、mapping examples 和 fixture expectation seed boundary。
-- [0007-core-calculation-api.md](0007-core-calculation-api.md) — Phase 6A core calculation API：`Bucket[] -> Formula -> calculateFormula(Formula)`、`regular_damage` / `sheer_damage`、`BucketBreakdown`、默认值和错误边界。
+- [0007-core-calculation-api.md](0007-core-calculation-api.md) — Phase 6A core calculation API：`CalculationInput -> FormulaSpec / BucketSpec normalization -> CalculationResult`、`calculate(input)`、`regular_damage` / `sheer_damage`、`BucketBreakdown`、默认值和错误边界。

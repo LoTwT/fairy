@@ -36,7 +36,8 @@ snapshot 位于
 expectation seed / review artifact 位于
 [../data/calculation-fixtures/phase-5-seed.md](../data/calculation-fixtures/phase-5-seed.md)。Phase 6A core calculation API draft 从
 [specs/0007-core-calculation-api.md](specs/0007-core-calculation-api.md)
-开始，只定义 `Bucket[] -> Formula -> calculateFormula(Formula)` 的第一版 API shape；包代码和伤害模型实现会在后续 PR 中进入。
+开始，只定义 `CalculationInput -> FormulaSpec / BucketSpec normalization -> CalculationResult` 与
+`calculate(input)` 的第一版 API shape；包代码和伤害模型实现会在后续 PR 中进入。
 
 ## Conventions
 
