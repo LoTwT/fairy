@@ -145,6 +145,81 @@ describe("calculate", () => {
     })
   })
 
+  it("returns result snapshots that do not alias caller input", () => {
+    const directProvenance = {
+      kind: "derived" as const,
+      source: "deriveBaseDamage",
+      note: "before",
+    }
+    const contribution = {
+      value: 0.2,
+      source: "skill_buff",
+      note: "before",
+    }
+    const contributions = [contribution]
+    const contributionProvenance = {
+      kind: "manual" as const,
+      source: "manual_input",
+      note: "before",
+    }
+
+    const result = calculate({
+      formulaId: "regular_damage",
+      buckets: [
+        {
+          bucketId: "base_damage",
+          value: 100,
+          provenance: directProvenance,
+        },
+        {
+          bucketId: "damage_bonus",
+          contributions,
+          provenance: contributionProvenance,
+        },
+        { bucketId: "defense", value: 1 },
+      ],
+    })
+
+    expect(result).toMatchObject({
+      ok: true,
+      value: 120,
+    })
+
+    directProvenance.source = "mutated_base"
+    directProvenance.note = "after"
+    contribution.value = 999
+    contribution.source = "mutated_contribution"
+    contribution.note = "after"
+    contributions.push({ value: 1, source: "late_contribution", note: "late" })
+    contributionProvenance.source = "mutated_provenance"
+    contributionProvenance.note = "after"
+
+    if (!result.ok) {
+      throw new Error("expected regular_damage calculation to succeed")
+    }
+
+    expect(
+      result.buckets.find((bucket) => bucket.bucketId === "base_damage"),
+    ).toMatchObject({
+      provenance: {
+        kind: "derived",
+        source: "deriveBaseDamage",
+        note: "before",
+      },
+    })
+
+    expect(
+      result.buckets.find((bucket) => bucket.bucketId === "damage_bonus"),
+    ).toMatchObject({
+      contributions: [{ value: 0.2, source: "skill_buff", note: "before" }],
+      provenance: {
+        kind: "manual",
+        source: "manual_input",
+        note: "before",
+      },
+    })
+  })
+
   it("returns unsupported_formula before bucket validation", () => {
     const result = calculate({
       formulaId: "daze_buildup",

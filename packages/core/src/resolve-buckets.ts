@@ -213,7 +213,7 @@ function normalizeExplicitBucket(
           bucketId: bucket.bucketId,
           value: bucket.value,
           source: ignored ? "ignored" : source,
-          provenance: bucket.provenance,
+          provenance: copyProvenance(bucket.provenance),
           warnings: ignoredWarning === undefined ? undefined : [ignoredWarning],
         },
         warnings: ignoredWarning === undefined ? [] : [ignoredWarning],
@@ -255,8 +255,8 @@ function normalizeExplicitBucket(
           bucketId: bucket.bucketId,
           value,
           source: ignored ? "ignored" : "contributions",
-          contributions,
-          provenance: bucket.provenance,
+          contributions: copyContributions(contributions),
+          provenance: copyProvenance(bucket.provenance),
           warnings: ignoredWarning === undefined ? undefined : [ignoredWarning],
         },
         warnings: ignoredWarning === undefined ? [] : [ignoredWarning],
@@ -292,7 +292,7 @@ function normalizeExplicitBucket(
         value: bucketSpec.defaultValue,
         source: ignored ? "ignored" : "default",
         defaulted: true,
-        provenance: bucket.provenance,
+        provenance: copyProvenance(bucket.provenance),
         warnings: bucketWarnings,
       },
       warnings: bucketWarnings,
@@ -337,6 +337,32 @@ function reduceContributions(
   }
 
   return sum
+}
+
+function copyContributions(
+  contributions: readonly BucketContribution[],
+): BucketContribution[] {
+  return contributions.map((contribution) => ({
+    value: contribution.value,
+    ...(contribution.source === undefined
+      ? {}
+      : { source: contribution.source }),
+    ...(contribution.note === undefined ? {} : { note: contribution.note }),
+  }))
+}
+
+function copyProvenance(
+  provenance: Bucket["provenance"],
+): Bucket["provenance"] {
+  if (provenance === undefined) {
+    return undefined
+  }
+
+  return {
+    kind: provenance.kind,
+    ...(provenance.source === undefined ? {} : { source: provenance.source }),
+    ...(provenance.note === undefined ? {} : { note: provenance.note }),
+  }
 }
 
 function getDirectValueSource(
