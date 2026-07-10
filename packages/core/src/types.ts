@@ -78,6 +78,7 @@ export type CalculationWarningCode =
   | "invalid_number"
   | "empty_contributions"
   | "unsupported_contributions"
+  | "unsupported_derived_value"
   | "unsupported_formula"
   | "unsupported_bucket"
   | "ignored_bucket"

@@ -10,6 +10,7 @@ import {
   missingRequiredBucket,
   unsupportedBucket,
   unsupportedContributions,
+  unsupportedDerivedValue,
   unsupportedFormula,
 } from "./warnings"
 import type {
@@ -194,6 +195,14 @@ function normalizeExplicitBucket(
   }
 
   if (hasValue) {
+    const bucketSpec = getBucketSpec(bucket.bucketId)
+    if (
+      bucket.provenance?.kind === "derived" &&
+      bucketSpec.acceptsDerivedValue !== true
+    ) {
+      return { ok: false, error: unsupportedDerivedValue(bucket.bucketId) }
+    }
+
     if (!isFiniteNumber(bucket.value)) {
       return { ok: false, error: invalidNumber(bucket.bucketId) }
     }
@@ -243,6 +252,10 @@ function normalizeExplicitBucket(
       contributions,
       bucketSpec.contributionReducer,
     )
+    if (!isFiniteNumber(value)) {
+      return { ok: false, error: invalidNumber(bucket.bucketId) }
+    }
+
     const ignoredWarning = ignored
       ? ignoredBucket(bucket.bucketId, formulaId)
       : undefined

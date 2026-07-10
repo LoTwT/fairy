@@ -145,10 +145,53 @@ describe("calculate", () => {
     })
   })
 
+  it.each([
+    ["regular_damage", "base_damage"],
+    ["regular_damage", "damage_bonus"],
+    ["regular_damage", "crit"],
+    ["sheer_damage", "sheer_damage_bonus"],
+    ["regular_damage", "resistance"],
+    ["regular_damage", "damage_taken"],
+    ["regular_damage", "stun_damage_taken"],
+    ["regular_damage", "special"],
+  ] as const)(
+    "rejects derived direct values for %s/%s",
+    (formulaId, bucketId) => {
+      const buckets: Bucket[] =
+        bucketId === "base_damage"
+          ? [
+              {
+                bucketId,
+                value: 100,
+                provenance: { kind: "derived", source: "unsupportedHelper" },
+              },
+            ]
+          : [
+              { bucketId: "base_damage", value: 100 },
+              {
+                bucketId,
+                value: 1,
+                provenance: { kind: "derived", source: "unsupportedHelper" },
+              },
+            ]
+
+      expect(calculate({ formulaId, buckets })).toMatchObject({
+        ok: false,
+        formulaId,
+        error: {
+          code: "unsupported_derived_value",
+          bucketId,
+          message: `${bucketId} does not support derived values in Phase 6A; pass a manual normalized value.`,
+        },
+        warnings: [],
+      })
+    },
+  )
+
   it("returns result snapshots that do not alias caller input", () => {
     const directProvenance = {
-      kind: "derived" as const,
-      source: "deriveBaseDamage",
+      kind: "manual" as const,
+      source: "manualBaseDamage",
       note: "before",
     }
     const contribution = {
@@ -202,8 +245,8 @@ describe("calculate", () => {
       result.buckets.find((bucket) => bucket.bucketId === "base_damage"),
     ).toMatchObject({
       provenance: {
-        kind: "derived",
-        source: "deriveBaseDamage",
+        kind: "manual",
+        source: "manualBaseDamage",
         note: "before",
       },
     })
@@ -324,6 +367,92 @@ describe("calculate", () => {
       error: { code: "invalid_number", bucketId: "crit" },
       warnings: [],
     })
+  })
+
+  it("returns bucket-level invalid_number when finite contributions overflow", () => {
+    const result = calculate({
+      formulaId: "regular_damage",
+      buckets: [
+        {
+          bucketId: "base_damage",
+          contributions: [
+            { value: Number.MAX_VALUE },
+            { value: Number.MAX_VALUE },
+          ],
+        },
+      ],
+    })
+
+    expect(result).toMatchObject({
+      ok: false,
+      formulaId: "regular_damage",
+      error: { code: "invalid_number", bucketId: "base_damage" },
+      warnings: [],
+    })
+  })
+
+  it("rejects an overflowed contribution bucket before it can multiply by zero", () => {
+    const result = calculate({
+      formulaId: "regular_damage",
+      buckets: [
+        { bucketId: "base_damage", value: 0 },
+        {
+          bucketId: "damage_bonus",
+          contributions: [
+            { value: Number.MAX_VALUE },
+            { value: Number.MAX_VALUE },
+          ],
+        },
+      ],
+    })
+
+    expect(result).toMatchObject({
+      ok: false,
+      formulaId: "regular_damage",
+      error: { code: "invalid_number", bucketId: "damage_bonus" },
+      warnings: [],
+    })
+  })
+
+  it("returns formula-level invalid_number when finite factors overflow", () => {
+    const result = calculate({
+      formulaId: "regular_damage",
+      buckets: [
+        { bucketId: "base_damage", value: Number.MAX_VALUE },
+        { bucketId: "crit", value: 2 },
+      ],
+    })
+
+    expect(result).toMatchObject({
+      ok: false,
+      formulaId: "regular_damage",
+      error: {
+        code: "invalid_number",
+        message: "Calculation result must be a finite number.",
+      },
+    })
+    expect(result.ok || result.error).not.toHaveProperty("bucketId")
+  })
+
+  it("returns formula-level invalid_number when finite factors become NaN", () => {
+    const result = calculate({
+      formulaId: "regular_damage",
+      buckets: [
+        { bucketId: "base_damage", value: Number.MAX_VALUE },
+        { bucketId: "damage_bonus", value: 2 },
+        { bucketId: "crit", value: 0 },
+      ],
+    })
+
+    expect(result).toMatchObject({
+      ok: false,
+      formulaId: "regular_damage",
+      error: {
+        code: "invalid_number",
+        message: "Calculation result must be a finite number.",
+      },
+    })
+    expect(result.ok || result.error).not.toHaveProperty("bucketId")
   })
 
   it("returns empty_contributions before unsupported_contributions", () => {

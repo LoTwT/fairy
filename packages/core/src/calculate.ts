@@ -1,4 +1,5 @@
 import { resolveBuckets } from "./resolve-buckets"
+import { invalidCalculationResult } from "./warnings"
 import type { CalculationInput, CalculationResult } from "./types"
 
 export function calculate(input: CalculationInput): CalculationResult {
@@ -19,6 +20,17 @@ export function calculate(input: CalculationInput): CalculationResult {
     (total, bucket) => total * bucket.value,
     1,
   )
+
+  if (!Number.isFinite(value)) {
+    return {
+      ok: false,
+      formulaId: resolved.formulaSpec.formulaId,
+      error: invalidCalculationResult(),
+      warnings: resolved.warnings,
+      buckets: resolved.breakdown,
+      trace: resolved.trace,
+    }
+  }
 
   return {
     ok: true,

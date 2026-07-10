@@ -59,6 +59,13 @@ export function invalidNumber(bucketId: BucketId): CalculationWarning {
   )
 }
 
+export function invalidCalculationResult(): CalculationWarning {
+  return warning(
+    "invalid_number",
+    "Calculation result must be a finite number.",
+  )
+}
+
 export function emptyContributions(bucketId: BucketId): CalculationWarning {
   return warning(
     "empty_contributions",
@@ -73,6 +80,16 @@ export function unsupportedContributions(
   return warning(
     "unsupported_contributions",
     `${bucketId} does not support contributions in Phase 6A; pass a normalized value.`,
+    bucketId,
+  )
+}
+
+export function unsupportedDerivedValue(
+  bucketId: BucketId,
+): CalculationWarning {
+  return warning(
+    "unsupported_derived_value",
+    `${bucketId} does not support derived values in Phase 6A; pass a manual normalized value.`,
     bucketId,
   )
 }

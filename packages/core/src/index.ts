@@ -5,10 +5,8 @@ export type {
   BucketBreakdown,
   BucketBreakdownSource,
   BucketContribution,
-  BucketContributionReducer,
   BucketId,
   BucketProvenance,
-  BucketSpec,
   CalculationInput,
   CalculationOptions,
   CalculationResult,
@@ -16,5 +14,4 @@ export type {
   CalculationWarningCode,
   FormulaId,
   FormulaSpec,
-  ResolvedBucket,
 } from "./types"

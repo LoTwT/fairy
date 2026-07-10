@@ -186,12 +186,17 @@ interface BucketProvenance {
 - 两者同时出现：返回 `{ ok: false }`，避免隐式 override。
 - `value`、`contributions[].value` 和 helper-derived numeric value 都必须是 finite
   number；`NaN`、`Infinity` 和 `-Infinity` 返回 `{ ok: false }`。
+- contribution reducer 的归一化结果和最终公式结果也必须是 finite number。Bucket-level overflow
+  返回 `{ ok: false }` + `invalid_number` 与对应 `bucketId`；formula-level overflow 或 `NaN`
+  返回 `{ ok: false }` + `invalid_number`，但不伪造 `bucketId`。
 - `contributions` 存在时不能为空；空数组返回 `{ ok: false }`，不能被 reducer 当作默认值或 `0`
   自行解释。
 - 如果 bucket 没有 Phase 6A contribution reducer，调用方不能提供 `contributions`；必须先在外部或 thin
   helper 中归一化成直接 `value`，否则返回 `{ ok: false }` + `unsupported_contributions`。
 - `provenance` 只描述 bucket 值来源，不改变计算规则。没有 `provenance` 时，输出可按
   `kind: "manual"` 处理。
+- `provenance.kind = "derived"` 的直接 `value` 只有在 `BucketSpec.acceptsDerivedValue = true`
+  时才允许；否则返回 `{ ok: false }` + `unsupported_derived_value`。
 
 ### Bucket cardinality and formula applicability
 
@@ -322,6 +327,7 @@ interface CalculationWarning {
     | "invalid_number"
     | "empty_contributions"
     | "unsupported_contributions"
+    | "unsupported_derived_value"
     | "unsupported_formula"
     | "unsupported_bucket"
     | "ignored_bucket"
@@ -359,17 +365,20 @@ type CalculationResult =
    `duplicate_bucket`。
 3. 检查每个显式 bucket 是否属于 `FormulaSpec.buckets` 或 `FormulaSpec.ignoredBuckets`；
    不属于两者返回 `{ ok: false }` + `unsupported_bucket`。
-4. 读取对应 `BucketSpec`，确认 direct value、contributions 或 helper-derived value 是否被支持。
+4. 读取对应 `BucketSpec`，确认 direct value、contributions 或 helper-derived value 是否被支持；
+   不支持的 derived direct value 返回 `{ ok: false }` + `unsupported_derived_value`。
 5. 对所有显式 numeric inputs 做 finite-number validation；失败返回 `{ ok: false }` +
    `invalid_number`。
 6. 对显式 `contributions` 做 non-empty validation；空数组返回 `{ ok: false }` +
    `empty_contributions`。
 7. 对显式 `contributions` 检查 bucket 是否有 Phase 6A reducer；没有 reducer 返回 `{ ok: false }` +
    `unsupported_contributions`。
-8. 用 `BucketSpec` 将每个 accepted bucket 归一化成 `ResolvedBucket.value`。
+8. 用 `BucketSpec` 将每个 accepted bucket 归一化成 `ResolvedBucket.value`，并复检 reducer 输出为
+   finite number。
 9. 将 ignored buckets 写入 `BucketBreakdown` 和 warnings，但不写入 `ResolvedBucket[]`。
 10. 对缺失但属于公式的 factor buckets 应用默认值；缺失 `base_damage` 返回 `{ ok: false }`。
-11. `FormulaSpec` 最终只用 `ResolvedBucket.value` 按 `FormulaSpec.buckets` 顺序计算。
+11. `FormulaSpec` 最终只用 `ResolvedBucket.value` 按 `FormulaSpec.buckets` 顺序计算，并复检最终结果为
+    finite number。
 
 ### Formula spec
 
