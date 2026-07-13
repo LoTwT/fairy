@@ -188,6 +188,114 @@ describe("calculate", () => {
     },
   )
 
+  it("uses global validation priority regardless of bucket order", () => {
+    const buckets: Bucket[] = [
+      { bucketId: "base_damage", value: Number.NaN },
+      {
+        bucketId: "crit",
+        value: 1,
+        provenance: { kind: "derived", source: "unsupportedHelper" },
+      },
+    ]
+    const expected = {
+      ok: false,
+      formulaId: "regular_damage",
+      error: {
+        code: "unsupported_derived_value",
+        bucketId: "crit",
+      },
+      warnings: [],
+    }
+
+    const forward = calculate({ formulaId: "regular_damage", buckets })
+    const reverse = calculate({
+      formulaId: "regular_damage",
+      buckets: [buckets[1], buckets[0]],
+    })
+
+    expect(forward).toMatchObject(expected)
+    expect(reverse).toEqual(forward)
+  })
+
+  it("uses canonical bucket order to break same-class validation ties", () => {
+    const buckets: Bucket[] = [
+      { bucketId: "crit", value: Number.POSITIVE_INFINITY },
+      { bucketId: "base_damage", value: Number.NaN },
+    ]
+    const expected = {
+      ok: false,
+      formulaId: "regular_damage",
+      error: { code: "invalid_number", bucketId: "base_damage" },
+      warnings: [],
+    }
+
+    const forward = calculate({ formulaId: "regular_damage", buckets })
+    const reverse = calculate({
+      formulaId: "regular_damage",
+      buckets: [buckets[1], buckets[0]],
+    })
+
+    expect(forward).toMatchObject(expected)
+    expect(reverse).toEqual(forward)
+  })
+
+  it("uses canonical bucket order to break derived-value ties", () => {
+    const buckets: Bucket[] = [
+      {
+        bucketId: "crit",
+        value: 1,
+        provenance: { kind: "derived", source: "derivedCrit" },
+      },
+      {
+        bucketId: "base_damage",
+        value: 100,
+        provenance: { kind: "derived", source: "derivedBaseDamage" },
+      },
+    ]
+    const expected = {
+      ok: false,
+      formulaId: "regular_damage",
+      error: {
+        code: "unsupported_derived_value",
+        bucketId: "base_damage",
+      },
+      warnings: [],
+    }
+
+    const forward = calculate({ formulaId: "regular_damage", buckets })
+    const reverse = calculate({
+      formulaId: "regular_damage",
+      buckets: [buckets[1], buckets[0]],
+    })
+
+    expect(forward).toMatchObject(expected)
+    expect(reverse).toEqual(forward)
+  })
+
+  it("uses canonical bucket order to break duplicate bucket ties", () => {
+    const buckets: Bucket[] = [
+      { bucketId: "crit", value: 1 },
+      { bucketId: "crit", value: 2 },
+      { bucketId: "base_damage", value: 100 },
+      { bucketId: "base_damage", value: 200 },
+    ]
+    const expected = {
+      ok: false,
+      formulaId: "regular_damage",
+      error: { code: "duplicate_bucket", bucketId: "base_damage" },
+      warnings: [],
+    }
+
+    const forward = calculate({ formulaId: "regular_damage", buckets })
+    const reverse = calculate({
+      formulaId: "regular_damage",
+      buckets: [buckets[3], buckets[2], buckets[1], buckets[0]],
+    })
+
+    expect(forward).toMatchObject(expected)
+    expect(reverse).toEqual(forward)
+  })
+
   it("returns result snapshots that do not alias caller input", () => {
     const directProvenance = {
       kind: "manual" as const,

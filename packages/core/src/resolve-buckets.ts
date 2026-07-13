@@ -64,7 +64,8 @@ export function resolveBuckets(input: CalculationInput): ResolveBucketsResult {
     )
   }
 
-  const duplicate = findDuplicateBucket(input.buckets)
+  const buckets = sortBucketsForValidation(formulaSpec, input.buckets)
+  const duplicate = findDuplicateBucket(buckets)
   if (duplicate !== undefined) {
     return fail(
       duplicateBucket(duplicate),
@@ -75,7 +76,7 @@ export function resolveBuckets(input: CalculationInput): ResolveBucketsResult {
     )
   }
 
-  for (const bucket of input.buckets) {
+  for (const bucket of buckets) {
     if (!isApplicableBucket(formulaSpec, bucket.bucketId)) {
       return fail(
         unsupportedBucket(bucket.bucketId, formulaSpec.formulaId),
@@ -87,10 +88,26 @@ export function resolveBuckets(input: CalculationInput): ResolveBucketsResult {
     }
   }
 
+  const explicitError = findExplicitBucketError(buckets)
+  if (explicitError !== undefined) {
+    return fail(explicitError, [], [], formulaSpec.formulaId, trace)
+  }
+
+  const missingRequired = findMissingRequiredBucket(formulaSpec, buckets)
+  if (missingRequired !== undefined) {
+    return fail(
+      missingRequiredBucket(missingRequired),
+      [],
+      [],
+      formulaSpec.formulaId,
+      trace,
+    )
+  }
+
   const explicitBuckets = new Map<BucketId, NormalizedBucket>()
   const warnings: CalculationWarning[] = []
 
-  for (const bucket of input.buckets) {
+  for (const bucket of buckets) {
     const ignored =
       formulaSpec.ignoredBuckets?.includes(bucket.bucketId) ?? false
     const normalized = normalizeExplicitBucket(
@@ -99,18 +116,8 @@ export function resolveBuckets(input: CalculationInput): ResolveBucketsResult {
       formulaSpec.formulaId,
     )
 
-    if (!normalized.ok) {
-      return fail(
-        normalized.error,
-        [...explicitBuckets.values()].map(({ breakdown }) => breakdown),
-        warnings,
-        formulaSpec.formulaId,
-        trace,
-      )
-    }
-
-    explicitBuckets.set(bucket.bucketId, normalized.bucket)
-    warnings.push(...normalized.bucket.warnings)
+    explicitBuckets.set(bucket.bucketId, normalized)
+    warnings.push(...normalized.warnings)
   }
 
   const resolvedBuckets: ResolvedBucket[] = []
@@ -154,12 +161,10 @@ export function resolveBuckets(input: CalculationInput): ResolveBucketsResult {
     warnings.push(defaultWarning)
   }
 
-  for (const bucket of input.buckets) {
-    if (formulaSpec.ignoredBuckets?.includes(bucket.bucketId) === true) {
-      const ignored = explicitBuckets.get(bucket.bucketId)
-      if (ignored !== undefined) {
-        breakdown.push(ignored.breakdown)
-      }
+  for (const bucketId of formulaSpec.ignoredBuckets ?? []) {
+    const ignored = explicitBuckets.get(bucketId)
+    if (ignored !== undefined) {
+      breakdown.push(ignored.breakdown)
     }
   }
 
@@ -184,108 +189,59 @@ function normalizeExplicitBucket(
   bucket: Bucket,
   ignored: boolean,
   formulaId: string,
-):
-  | { readonly ok: true; readonly bucket: NormalizedBucket }
-  | { readonly ok: false; readonly error: CalculationWarning } {
+): NormalizedBucket {
+  // Collection-wide validation has already established these input invariants.
   const hasValue = hasOwn(bucket, "value")
   const hasContributions = hasOwn(bucket, "contributions")
 
-  if (hasValue && hasContributions) {
-    return { ok: false, error: conflictingBucketInput(bucket.bucketId) }
-  }
-
   if (hasValue) {
-    const bucketSpec = getBucketSpec(bucket.bucketId)
-    if (
-      bucket.provenance?.kind === "derived" &&
-      bucketSpec.acceptsDerivedValue !== true
-    ) {
-      return { ok: false, error: unsupportedDerivedValue(bucket.bucketId) }
-    }
-
-    if (!isFiniteNumber(bucket.value)) {
-      return { ok: false, error: invalidNumber(bucket.bucketId) }
-    }
-
+    const value = bucket.value as number
     const source = getDirectValueSource(bucket)
     const ignoredWarning = ignored
       ? ignoredBucket(bucket.bucketId, formulaId)
       : undefined
 
     return {
-      ok: true,
-      bucket: {
-        resolved: ignored
-          ? undefined
-          : { bucketId: bucket.bucketId, value: bucket.value },
-        breakdown: {
-          bucketId: bucket.bucketId,
-          value: bucket.value,
-          source: ignored ? "ignored" : source,
-          provenance: copyProvenance(bucket.provenance),
-          warnings: ignoredWarning === undefined ? undefined : [ignoredWarning],
-        },
-        warnings: ignoredWarning === undefined ? [] : [ignoredWarning],
+      resolved: ignored ? undefined : { bucketId: bucket.bucketId, value },
+      breakdown: {
+        bucketId: bucket.bucketId,
+        value,
+        source: ignored ? "ignored" : source,
+        provenance: copyProvenance(bucket.provenance),
+        warnings: ignoredWarning === undefined ? undefined : [ignoredWarning],
       },
+      warnings: ignoredWarning === undefined ? [] : [ignoredWarning],
     }
   }
 
   if (hasContributions) {
     const contributions = bucket.contributions ?? []
-
-    for (const contribution of contributions) {
-      if (!isFiniteNumber(contribution.value)) {
-        return { ok: false, error: invalidNumber(bucket.bucketId) }
-      }
-    }
-
-    if (contributions.length === 0) {
-      return { ok: false, error: emptyContributions(bucket.bucketId) }
-    }
-
     const bucketSpec = getBucketSpec(bucket.bucketId)
-    if (bucketSpec.contributionReducer === undefined) {
-      return { ok: false, error: unsupportedContributions(bucket.bucketId) }
-    }
-
     const value = reduceContributions(
       contributions,
-      bucketSpec.contributionReducer,
+      bucketSpec.contributionReducer!,
     )
-    if (!isFiniteNumber(value)) {
-      return { ok: false, error: invalidNumber(bucket.bucketId) }
-    }
-
     const ignoredWarning = ignored
       ? ignoredBucket(bucket.bucketId, formulaId)
       : undefined
 
     return {
-      ok: true,
-      bucket: {
-        resolved: ignored ? undefined : { bucketId: bucket.bucketId, value },
-        breakdown: {
-          bucketId: bucket.bucketId,
-          value,
-          source: ignored ? "ignored" : "contributions",
-          contributions: copyContributions(contributions),
-          provenance: copyProvenance(bucket.provenance),
-          warnings: ignoredWarning === undefined ? undefined : [ignoredWarning],
-        },
-        warnings: ignoredWarning === undefined ? [] : [ignoredWarning],
+      resolved: ignored ? undefined : { bucketId: bucket.bucketId, value },
+      breakdown: {
+        bucketId: bucket.bucketId,
+        value,
+        source: ignored ? "ignored" : "contributions",
+        contributions: copyContributions(contributions),
+        provenance: copyProvenance(bucket.provenance),
+        warnings: ignoredWarning === undefined ? undefined : [ignoredWarning],
       },
+      warnings: ignoredWarning === undefined ? [] : [ignoredWarning],
     }
   }
 
   const bucketSpec = getBucketSpec(bucket.bucketId)
-  if (bucketSpec.required === true || bucketSpec.defaultValue === undefined) {
-    return { ok: false, error: missingRequiredBucket(bucket.bucketId) }
-  }
-
-  const defaultWarning = defaultedBucket(
-    bucket.bucketId,
-    bucketSpec.defaultValue,
-  )
+  const defaultValue = bucketSpec.defaultValue!
+  const defaultWarning = defaultedBucket(bucket.bucketId, defaultValue)
   const ignoredWarning = ignored
     ? ignoredBucket(bucket.bucketId, formulaId)
     : undefined
@@ -295,21 +251,18 @@ function normalizeExplicitBucket(
       : [defaultWarning, ignoredWarning]
 
   return {
-    ok: true,
-    bucket: {
-      resolved: ignored
-        ? undefined
-        : { bucketId: bucket.bucketId, value: bucketSpec.defaultValue },
-      breakdown: {
-        bucketId: bucket.bucketId,
-        value: bucketSpec.defaultValue,
-        source: ignored ? "ignored" : "default",
-        defaulted: true,
-        provenance: copyProvenance(bucket.provenance),
-        warnings: bucketWarnings,
-      },
+    resolved: ignored
+      ? undefined
+      : { bucketId: bucket.bucketId, value: defaultValue },
+    breakdown: {
+      bucketId: bucket.bucketId,
+      value: defaultValue,
+      source: ignored ? "ignored" : "default",
+      defaulted: true,
+      provenance: copyProvenance(bucket.provenance),
       warnings: bucketWarnings,
     },
+    warnings: bucketWarnings,
   }
 }
 
@@ -325,6 +278,128 @@ function findDuplicateBucket(buckets: readonly Bucket[]): BucketId | undefined {
   }
 
   return undefined
+}
+
+function findExplicitBucketError(
+  buckets: readonly Bucket[],
+): CalculationWarning | undefined {
+  for (const bucket of buckets) {
+    if (hasOwn(bucket, "value") && hasOwn(bucket, "contributions")) {
+      return conflictingBucketInput(bucket.bucketId)
+    }
+  }
+
+  for (const bucket of buckets) {
+    if (
+      hasOwn(bucket, "value") &&
+      bucket.provenance?.kind === "derived" &&
+      getBucketSpec(bucket.bucketId).acceptsDerivedValue !== true
+    ) {
+      return unsupportedDerivedValue(bucket.bucketId)
+    }
+  }
+
+  for (const bucket of buckets) {
+    if (
+      (hasOwn(bucket, "value") && !isFiniteNumber(bucket.value)) ||
+      bucket.contributions?.some(
+        (contribution) => !isFiniteNumber(contribution.value),
+      ) === true
+    ) {
+      return invalidNumber(bucket.bucketId)
+    }
+  }
+
+  for (const bucket of buckets) {
+    if (
+      hasOwn(bucket, "contributions") &&
+      (bucket.contributions?.length ?? 0) === 0
+    ) {
+      return emptyContributions(bucket.bucketId)
+    }
+  }
+
+  for (const bucket of buckets) {
+    if (
+      hasOwn(bucket, "contributions") &&
+      getBucketSpec(bucket.bucketId).contributionReducer === undefined
+    ) {
+      return unsupportedContributions(bucket.bucketId)
+    }
+  }
+
+  for (const bucket of buckets) {
+    if (!hasOwn(bucket, "contributions")) {
+      continue
+    }
+
+    const bucketSpec = getBucketSpec(bucket.bucketId)
+    const contributions = bucket.contributions ?? []
+    const reducer = bucketSpec.contributionReducer
+    if (
+      reducer !== undefined &&
+      !isFiniteNumber(reduceContributions(contributions, reducer))
+    ) {
+      return invalidNumber(bucket.bucketId)
+    }
+  }
+
+  return undefined
+}
+
+function findMissingRequiredBucket(
+  formulaSpec: FormulaSpec,
+  buckets: readonly Bucket[],
+): BucketId | undefined {
+  const explicitBuckets = new Map(
+    buckets.map((bucket) => [bucket.bucketId, bucket]),
+  )
+
+  for (const bucketId of formulaSpec.requiredBuckets) {
+    const bucket = explicitBuckets.get(bucketId)
+    if (
+      bucket === undefined ||
+      (!hasOwn(bucket, "value") && !hasOwn(bucket, "contributions"))
+    ) {
+      return bucketId
+    }
+  }
+
+  return undefined
+}
+
+function sortBucketsForValidation(
+  formulaSpec: FormulaSpec,
+  buckets: readonly Bucket[],
+): Bucket[] {
+  const bucketOrder = new Map<BucketId, number>()
+  const orderedBucketIds = [
+    ...formulaSpec.buckets,
+    ...(formulaSpec.ignoredBuckets ?? []),
+  ]
+
+  for (const [index, bucketId] of orderedBucketIds.entries()) {
+    bucketOrder.set(bucketId, index)
+  }
+
+  // Sorting a defensive copy makes error selection independent of caller order.
+  // oxlint-disable-next-line unicorn/no-array-sort
+  return [...buckets].sort((left, right) => {
+    const leftOrder = bucketOrder.get(left.bucketId)
+    const rightOrder = bucketOrder.get(right.bucketId)
+
+    if (leftOrder !== undefined && rightOrder !== undefined) {
+      return leftOrder - rightOrder
+    }
+    if (leftOrder !== undefined) {
+      return -1
+    }
+    if (rightOrder !== undefined) {
+      return 1
+    }
+
+    return left.bucketId.localeCompare(right.bucketId)
+  })
 }
 
 function isApplicableBucket(

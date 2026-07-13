@@ -4,14 +4,14 @@
 
 ## 去哪里看
 
-| 你要找的内容                                                                                      | 去哪里                                                            | 放什么                                                                                                                                                                                                                           |
-| ------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| requirements、conventions、standards 或 interface design                                          | `docs/specs/`                                                     | Specs：定义某个事项是什么、应保持什么不变，以及轻量设计（函数签名、模块边界）——不写详细代码                                                                                                                                      |
-| supporting facts 和 background（含 source snapshot、glossary seed 和 pre-reset 记录）             | `docs/references/`                                                | Reference material：外部资料、source snapshot、数据、sample-backed 术语表 seed、历史记录。只作为事实背景；永远不是实现来源、runtime input、scraper input、resolver input 或 package schema                                       |
-| source review、evidence note、raw inventory sample、field map sample 或 fixture expectation seed  | `docs/data/` 和 `data/`                                           | Data review workspace：记录候选 source registry、minimum evidence reference、raw observed sample、evidence-traced field map sample 和 Phase 5 fixture expectation seed；不放 canonical glossary / formula runtime / package code |
-| calculation spec、formula baseline、calculation fixture expectation 或 core calculation API draft | `docs/specs/`、`docs/references/` 和 `data/calculation-fixtures/` | Phase 5/6 calculation review artifacts：定义 2.0 formula baseline、formula / bucket / effect contract、fixture expectation seed，以及 Phase 6A core API draft；不是 3.0 final truth、package data、resolver 或 finished runtime  |
-| 本仓库工作 iron rules                                                                             | [../AGENTS.md](../AGENTS.md)                                      | Clean-slate、human-in-the-loop、npm version monotonicity                                                                                                                                                                         |
-| task、chore、bug，或它的 owner / status                                                           | GitHub Issues (or the Slock task board)                           | 执行跟踪。不放在 docs 里                                                                                                                                                                                                         |
+| 你要找的内容                                                                                         | 去哪里                                                            | 放什么                                                                                                                                                                                                                                         |
+| ---------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| requirements、conventions、standards 或 interface design                                             | `docs/specs/`                                                     | Specs：定义某个事项是什么、应保持什么不变，以及轻量设计（函数签名、模块边界）——不写详细代码                                                                                                                                                    |
+| supporting facts 和 background（含 source snapshot、glossary seed 和 pre-reset 记录）                | `docs/references/`                                                | Reference material：外部资料、source snapshot、数据、sample-backed 术语表 seed、历史记录。只作为事实背景；永远不是实现来源、runtime input、scraper input、resolver input 或 package schema                                                     |
+| source review、evidence note、raw inventory sample、field map sample 或 fixture expectation seed     | `docs/data/` 和 `data/`                                           | Data review workspace：记录候选 source registry、minimum evidence reference、raw observed sample、evidence-traced field map sample 和 Phase 5 fixture expectation seed；不放 canonical glossary / formula runtime / package code               |
+| calculation spec、formula baseline、calculation fixture expectation 或 core calculation API contract | `docs/specs/`、`docs/references/` 和 `data/calculation-fixtures/` | Phase 5/6 calculation artifacts：定义 2.0 formula baseline、formula / bucket / effect contract、fixture expectation seed、Phase 6A core API contract 和 Phase 6B first implementation boundary；不是 3.0 final truth、package data 或 resolver |
+| 本仓库工作 iron rules                                                                                | [../AGENTS.md](../AGENTS.md)                                      | Clean-slate、human-in-the-loop、npm version monotonicity                                                                                                                                                                                       |
+| task、chore、bug，或它的 owner / status                                                              | GitHub Issues (or the Slock task board)                           | 执行跟踪。不放在 docs 里                                                                                                                                                                                                                       |
 
 ## Current state
 
@@ -34,10 +34,12 @@
 snapshot 位于
 [references/source-snapshots/](references/source-snapshots/README.md)，Phase 5 fixture
 expectation seed / review artifact 位于
-[../data/calculation-fixtures/phase-5-seed.md](../data/calculation-fixtures/phase-5-seed.md)。Phase 6A core calculation API draft 从
+[../data/calculation-fixtures/phase-5-seed.md](../data/calculation-fixtures/phase-5-seed.md)。Phase 6A core calculation API contract 从
 [specs/0007-core-calculation-api.md](specs/0007-core-calculation-api.md)
-开始，只定义 `CalculationInput -> FormulaSpec / BucketSpec normalization -> CalculationResult` 与
-`calculate(input)` 的第一版 API shape；包代码和伤害模型实现会在后续 PR 中进入。
+开始；Phase 6B first implementation slice 已在 `packages/core` 实现第一版
+`CalculationInput -> FormulaSpec / BucketSpec normalization -> CalculationResult` 链路与
+`calculate(input)` public API，当前只覆盖 `regular_damage` 和 `sheer_damage`。Package data、resolver、
+raw text parsing、角色 / 装备 / 敌人数据库、optimizer、custom registry、UI 和 CLI 仍不在当前实现范围内。
 
 ## Conventions
 

@@ -1,9 +1,16 @@
 # Spec 0007 - Core calculation API
 
+## Status
+
+Phase 6A API contract 已由 Phase 6B first implementation slice 落入 `packages/core`。当前 public
+surface、formula / bucket registry、normalization、warnings、tests 和 package build 均以本 spec 为准；
+后续新增 formula family、resolver、package data 或 public API 必须先更新相应 spec boundary。
+
 ## Scope
 
-这份 spec 定义 Fairy Phase 6A 的 core calculation API 草案。它把 Phase 5A
-accepted calculation contract 收窄成第一版可实现的 TypeScript API shape，覆盖：
+这份 spec 定义并约束 Fairy Phase 6A 的第一版 core calculation API，以及 Phase 6B
+`packages/core` first implementation slice。它把 Phase 5A accepted calculation contract 收窄成
+TypeScript API，覆盖：
 
 - `regular_damage`
 - `sheer_damage`
@@ -17,9 +24,10 @@ Phase 6A 的核心链路固定为：
 `calculate` 只接收 `CalculationInput`，并最终只使用每个 bucket 的一个归一化 `ResolvedBucket.value`
 参与计算。
 
-这份 spec **不**启动实现，也不定义 package data、resolver、raw text parsing、角色 /
-装备 / 敌人数据库、UI、CLI、npm publish、benchmark、decimal dependency 或 runtime schema
-dependency。
+Phase 6B first implementation slice 新增 `packages/core` implementation、package build / test 配置、
+所需 dev dependencies，并同步 workspace lockfile。它不定义 package data、resolver、raw text parsing、
+角色 / 装备 / 敌人数据库、optimizer、custom registry、UI、CLI、npm publish、benchmark、decimal
+dependency 或 runtime schema dependency。
 
 暂不进入 Phase 6A 的公式：
 
@@ -61,7 +69,7 @@ Naming rationale：
 
 ### Source references
 
-Phase 6A API 草案必须能追溯到这些已入库资料：
+Phase 6A API contract 与 implementation 必须能追溯到这些已入库资料：
 
 | Reference                                                                                                                     | Role                                                                                              |
 | ----------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
@@ -365,8 +373,9 @@ type CalculationResult =
    `duplicate_bucket`。
 3. 检查每个显式 bucket 是否属于 `FormulaSpec.buckets` 或 `FormulaSpec.ignoredBuckets`；
    不属于两者返回 `{ ok: false }` + `unsupported_bucket`。
-4. 读取对应 `BucketSpec`，确认 direct value、contributions 或 helper-derived value 是否被支持；
-   不支持的 derived direct value 返回 `{ ok: false }` + `unsupported_derived_value`。
+4. 对所有显式 bucket 做 input-shape / support validation：同一 bucket 同时包含 `value` 和
+   `contributions` 时返回 `{ ok: false }` + `conflicting_bucket_input`；不支持的 derived direct
+   value 返回 `{ ok: false }` + `unsupported_derived_value`。
 5. 对所有显式 numeric inputs 做 finite-number validation；失败返回 `{ ok: false }` +
    `invalid_number`。
 6. 对显式 `contributions` 做 non-empty validation；空数组返回 `{ ok: false }` +
@@ -379,6 +388,10 @@ type CalculationResult =
 10. 对缺失但属于公式的 factor buckets 应用默认值；缺失 `base_damage` 返回 `{ ok: false }`。
 11. `FormulaSpec` 最终只用 `ResolvedBucket.value` 按 `FormulaSpec.buckets` 顺序计算，并复检最终结果为
     finite number。
+
+这些步骤是整个 bucket 集合的全局阶段，不是对单个 bucket 逐一跑完全部步骤。输入 bucket 的排列不能改变
+错误优先级；同一阶段多个 bucket 失败时，适用 bucket 按 `FormulaSpec.buckets` /
+`FormulaSpec.ignoredBuckets` 的 canonical 顺序选择，其他 bucket 按 `bucketId` lexical order 选择。
 
 ### Formula spec
 
@@ -890,9 +903,10 @@ Unsupported contributions：
 
 符合这份 spec 的 PR 必须满足：
 
-- 只新增或更新 docs/spec references；没有 `packages/core`、runtime implementation、dependency、
-  lockfile、fixture database、resolver、UI 或 CLI 变更。
-- API 草案只覆盖 `regular_damage` 和 `sheer_damage`。
+- Phase 6B first implementation slice 新增 `packages/core` implementation、package build / test 配置、
+  所需 dev dependencies，并同步 workspace lockfile；不新增 fixture database、package data、resolver、
+  optimizer、custom registry、UI、CLI 或 npm publish flow。
+- API 与 implementation 只覆盖 `regular_damage` 和 `sheer_damage`。
 - 文档中的 main calculation journey 使用
   `CalculationInput -> FormulaSpec / BucketSpec normalization -> CalculationResult`。
 - Public API 只有 `calculate(input: CalculationInput): CalculationResult` 作为主计算入口；Phase 6A
@@ -905,6 +919,8 @@ Unsupported contributions：
 - 同一 formula 中重复 bucket 返回 `{ ok: false }`；不属于 formula 且不在 ignored list 的 bucket
   返回 `{ ok: false }`；ignored bucket 只能通过 warning 和 breakdown 表达。
 - 所有 numeric inputs 都必须是 finite number；空 `contributions` 必须返回 `{ ok: false }`。
+- 固定 validation priority 必须按整个 bucket 集合分阶段执行；反转同一 bucket 集合的输入顺序不能改变
+  error code 或 error bucket。
 - `deriveDefenseBucket(...)` 到 `BucketBreakdown.source = 'derived'` 必须有 explicit
   `provenance` 链路。
 - Contribution reducer 只覆盖 Phase 6A 允许的最小 bucket 集；没有通用 operation system。
@@ -913,6 +929,8 @@ Unsupported contributions：
 PR verification：
 
 - `pnpm check` 成功。
+- `pnpm --filter @randomplay/core test`、`typecheck` 和 `build` 成功。
+- 对真实 `pnpm pack` tarball 的全新 consumer install / import / calculation smoke 成功。
 - `git diff --check upstream/main...HEAD` 成功。
 - tracked Markdown relative links 可解析。
 - 新 API spec 的 obsolete identifier grep 无匹配。
