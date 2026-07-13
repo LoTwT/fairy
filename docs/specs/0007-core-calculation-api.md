@@ -456,7 +456,7 @@ const sheerDamageSpec = {
 } satisfies FormulaSpec
 ```
 
-### Public API draft
+### Public API
 
 ```ts
 declare function calculate(input: CalculationInput): CalculationResult
