@@ -128,7 +128,10 @@ type IgnoredBucketBreakdown =
   | (BucketBreakdownBase & {
       readonly source: "ignored"
       readonly defaulted?: never
-      readonly contributions: readonly BucketContribution[]
+      readonly contributions: readonly [
+        BucketContribution,
+        ...BucketContribution[],
+      ]
       readonly provenance?: BucketProvenance
       readonly warnings: readonly [IgnoredBucketWarning]
     })
@@ -151,7 +154,10 @@ export type BucketBreakdown =
   | (BucketBreakdownBase & {
       readonly source: "contributions"
       readonly defaulted?: never
-      readonly contributions: readonly BucketContribution[]
+      readonly contributions: readonly [
+        BucketContribution,
+        ...BucketContribution[],
+      ]
       readonly provenance?: BucketProvenance
       readonly warnings?: never
     })

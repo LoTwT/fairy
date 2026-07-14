@@ -20,6 +20,8 @@ describe("formula specs", () => {
 
     expect(isFormulaId("constructor")).toBe(false)
     expect(isFormulaId("toString")).toBe(false)
+    expect(isFormulaId(["regular_damage"])).toBe(false)
+    expect(isFormulaId(Symbol("regular_damage"))).toBe(false)
     expect(getFormulaSpecById("__proto__")).toBeUndefined()
   })
 
@@ -72,6 +74,21 @@ describe("formula specs", () => {
         optionalBuckets: ["crit"],
       }),
     ).toThrow("crit is classified but absent from buckets")
+
+    const sheerDamageSpec = getFormulaSpec("sheer_damage")
+    expect(() =>
+      validateFormulaSpec({
+        ...sheerDamageSpec,
+        buckets: sheerDamageSpec.buckets.filter(
+          (bucketId) => bucketId !== "base_damage",
+        ),
+        requiredBuckets: [],
+        ignoredBuckets: [
+          ...(sheerDamageSpec.ignoredBuckets ?? []),
+          "base_damage",
+        ],
+      }),
+    ).toThrow("ignored bucket base_damage must define a default value")
   })
 
   it("rejects formula registry key and entry identity drift", () => {

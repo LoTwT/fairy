@@ -154,12 +154,12 @@ const impossibleInputValueBreakdown: BucketBreakdown = {
   provenance: { kind: "derived" },
 }
 
-// @ts-expect-error ignored defaults and contributions are mutually exclusive
 const impossibleIgnoredBreakdown: BucketBreakdown = {
   bucketId: "defense",
   value: 1,
   source: "ignored",
   defaulted: true,
+  // @ts-expect-error ignored defaults and contributions are mutually exclusive
   contributions: [{ value: 1 }],
   warnings: [
     {
@@ -167,6 +167,29 @@ const impossibleIgnoredBreakdown: BucketBreakdown = {
       bucketId: "defense",
       message: "defense defaulted.",
     },
+    {
+      code: "ignored_bucket",
+      bucketId: "defense",
+      message: "defense ignored.",
+    },
+  ],
+}
+
+const impossibleEmptyContributionsBreakdown: BucketBreakdown = {
+  bucketId: "damage_bonus",
+  value: 1,
+  source: "contributions",
+  // @ts-expect-error contribution breakdowns require at least one contribution
+  contributions: [],
+}
+
+const impossibleEmptyIgnoredContributionsBreakdown: BucketBreakdown = {
+  bucketId: "defense",
+  value: 1,
+  source: "ignored",
+  // @ts-expect-error ignored contribution breakdowns require at least one contribution
+  contributions: [],
+  warnings: [
     {
       code: "ignored_bucket",
       bucketId: "defense",
@@ -190,4 +213,6 @@ void [
   impossibleDerivedBreakdown,
   impossibleInputValueBreakdown,
   impossibleIgnoredBreakdown,
+  impossibleEmptyContributionsBreakdown,
+  impossibleEmptyIgnoredContributionsBreakdown,
 ]

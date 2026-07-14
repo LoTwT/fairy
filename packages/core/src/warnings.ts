@@ -122,9 +122,11 @@ export function ignoredBucket(
   )
 }
 
-export function unsupportedFormula(formulaId: string): CalculationError {
+export function unsupportedFormula(formulaId?: string): CalculationError {
   return issue(
     "unsupported_formula",
-    `${formulaId} is not a supported Phase 6A formula.`,
+    formulaId === undefined
+      ? "Formula ID must be a supported Phase 6A string."
+      : `${formulaId} is not a supported Phase 6A formula.`,
   )
 }

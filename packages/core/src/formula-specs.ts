@@ -62,7 +62,9 @@ export function listBuckets(formulaId: FormulaId): readonly BucketId[] {
   return [...formulaSpecs[formulaId].buckets]
 }
 
-export function getFormulaSpecById(formulaId: string): FormulaSpec | undefined {
+export function getFormulaSpecById(
+  formulaId: unknown,
+): FormulaSpec | undefined {
   if (isFormulaId(formulaId)) {
     return formulaSpecs[formulaId]
   }
@@ -70,8 +72,8 @@ export function getFormulaSpecById(formulaId: string): FormulaSpec | undefined {
   return undefined
 }
 
-export function isFormulaId(formulaId: string): formulaId is FormulaId {
-  return Object.hasOwn(formulaSpecs, formulaId)
+export function isFormulaId(formulaId: unknown): formulaId is FormulaId {
+  return typeof formulaId === "string" && Object.hasOwn(formulaSpecs, formulaId)
 }
 
 export function listRegisteredFormulaIds(): readonly FormulaId[] {
@@ -130,6 +132,12 @@ export function validateFormulaSpec(formulaSpec: FormulaSpec): void {
     if (buckets.has(bucketId)) {
       throw new Error(
         `${formulaSpec.formulaId}: ${bucketId} cannot be both calculated and ignored`,
+      )
+    }
+
+    if (getBucketSpec(bucketId).defaultValue === undefined) {
+      throw new Error(
+        `${formulaSpec.formulaId}: ignored bucket ${bucketId} must define a default value`,
       )
     }
   }

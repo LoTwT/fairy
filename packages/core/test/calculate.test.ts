@@ -429,6 +429,38 @@ describe("calculate", () => {
     })
   })
 
+  it("rejects non-string formula ids without property-key coercion", () => {
+    let coercions = 0
+    const statefulFormulaId = {
+      [Symbol.toPrimitive]() {
+        coercions += 1
+        return coercions === 1 ? "regular_damage" : "constructor"
+      },
+    }
+    const invalidFormulaIds: unknown[] = [
+      ["regular_damage"],
+      { toString: () => "regular_damage" },
+      Symbol("regular_damage"),
+      statefulFormulaId,
+    ]
+
+    for (const formulaId of invalidFormulaIds) {
+      const result = calculate({
+        formulaId,
+        buckets: [{ bucketId: "base_damage", value: 100 }],
+      } as unknown as CalculationInput)
+
+      expect(result).toMatchObject({
+        ok: false,
+        error: { code: "unsupported_formula" },
+        warnings: [],
+      })
+      expect(!result.ok && result.formulaId).toBeUndefined()
+    }
+
+    expect(coercions).toBe(0)
+  })
+
   it("returns duplicate_bucket before unsupported bucket validation", () => {
     const result = calculate({
       formulaId: "regular_damage",

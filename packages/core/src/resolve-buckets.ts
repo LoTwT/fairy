@@ -50,16 +50,19 @@ interface NormalizedBucket {
 }
 
 export function resolveBuckets(input: CalculationInput): ResolveBucketsResult {
-  const formulaSpec = getFormulaSpecById(input.formulaId)
+  const inputFormulaId: unknown = input.formulaId
+  const formulaSpec = getFormulaSpecById(inputFormulaId)
   const trace: string[] | undefined =
     input.options?.trace === true ? [] : undefined
 
   if (formulaSpec === undefined) {
+    const rejectedFormulaId =
+      typeof inputFormulaId === "string" ? inputFormulaId : undefined
     return fail(
-      unsupportedFormula(input.formulaId),
+      unsupportedFormula(rejectedFormulaId),
       [],
       [],
-      input.formulaId,
+      rejectedFormulaId,
       trace,
     )
   }
@@ -445,14 +448,25 @@ function reduceContributions(
 
 function copyContributions(
   contributions: readonly BucketContribution[],
-): BucketContribution[] {
-  return contributions.map((contribution) => ({
+): [BucketContribution, ...BucketContribution[]] {
+  const [first, ...rest] = contributions
+  if (first === undefined) {
+    throw new Error("non-empty contributions invariant violated")
+  }
+
+  return [copyContribution(first), ...rest.map(copyContribution)]
+}
+
+function copyContribution(
+  contribution: BucketContribution,
+): BucketContribution {
+  return {
     value: contribution.value,
     ...(contribution.source === undefined
       ? {}
       : { source: contribution.source }),
     ...(contribution.note === undefined ? {} : { note: contribution.note }),
-  }))
+  }
 }
 
 function copyProvenance(

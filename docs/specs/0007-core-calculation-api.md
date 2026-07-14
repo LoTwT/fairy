@@ -287,7 +287,7 @@ interface BucketSpec {
 Phase 6A 的 `BucketSpec` 责任包括：
 
 - direct `value`、`contributions` 和 helper-derived value 的支持矩阵。
-- contribution reducer、default value 和 required bucket 规则。
+- contribution reducer 和 default value；requiredness 由 `FormulaSpec` 独占定义。
 - duplicate、empty contributions、unsupported contributions 和 invalid finite number validation。
 - `BucketBreakdown.source`、`defaulted`、`provenance`、`warnings` 和 trace 所需的信息。
 
@@ -345,7 +345,10 @@ type IgnoredBucketBreakdown =
   | (BucketBreakdownBase & {
       readonly source: "ignored"
       readonly defaulted?: never
-      readonly contributions: readonly BucketContribution[]
+      readonly contributions: readonly [
+        BucketContribution,
+        ...BucketContribution[],
+      ]
       readonly provenance?: BucketProvenance
       readonly warnings: readonly [IgnoredBucketWarning]
     })
@@ -368,7 +371,10 @@ type BucketBreakdown =
   | (BucketBreakdownBase & {
       readonly source: "contributions"
       readonly defaulted?: never
-      readonly contributions: readonly BucketContribution[]
+      readonly contributions: readonly [
+        BucketContribution,
+        ...BucketContribution[],
+      ]
       readonly provenance?: BucketProvenance
       readonly warnings?: never
     })
@@ -537,9 +543,11 @@ const sheerDamageSpec = {
 ```
 
 registry 初始化必须验证 `requiredBuckets` / `optionalBuckets` 对 `buckets` 形成无重复、无重叠、无遗漏的
-完整 partition，且每个 optional bucket 都有 `BucketSpec.defaultValue`。`BucketSpec` 不重复声明 requiredness。
+完整 partition，且每个 optional 或 ignored bucket 都有 `BucketSpec.defaultValue`。`BucketSpec` 不重复声明
+requiredness。
 支持的 `FormulaId` lookup 必须直接使用 formula registry 的 own properties，不维护第二份手写 key list；
-registry 初始化还必须验证每个 key 与 entry 内的 `formulaId` 一致。
+lookup 必须先拒绝 non-string runtime input，不能触发 property-key coercion；registry 初始化还必须验证每个
+key 与 entry 内的 `formulaId` 一致。
 
 ### Public API
 
@@ -1001,15 +1009,17 @@ Unsupported contributions：
 - `BucketBreakdown` 是 required output concept，并能记录 input value、contributions、defaults、derived
   values、ignored bucket 和 warnings。
 - `BucketBreakdown` 必须按 `source` 建模为 public discriminated union：`default` 必须带
-  `defaulted: true`，`contributions` 必须带 contribution 明细，`derived` 必须带 derived provenance。
+  `defaulted: true`，`contributions` 必须带至少一项 contribution 明细，`derived` 必须带 derived
+  provenance。
 - Fatal `CalculationError` codes 与 recoverable `CalculationWarning` codes 必须是互不相交的 public
   discriminated unions；fatal codes 只进入 `CalculationResult.error`，`ignored_bucket` /
   `defaulted_bucket` 只进入 warnings。
 - `base_damage` 缺失时返回 `{ ok: false }`；factor buckets 缺失时默认中性值 `1`，且必须进入
   `BucketBreakdown`。
 - `FormulaSpec.requiredBuckets` / `optionalBuckets` 是 requiredness 的唯一权威，并在 registry 初始化时
-  验证完整 partition 与 optional defaults；formula-id support 从 registry own properties 派生，并验证
-  registry key 与 entry identity 一致。
+  验证完整 partition 与 optional / ignored defaults；formula-id support 从 registry own properties 派生，
+  并验证 registry key 与 entry identity 一致。runtime formula-id lookup 必须先拒绝 non-string input，不能
+  依赖或重复触发 property-key coercion。
 - `sheer_damage` 明确忽略 `defense`，并通过 warning 表达。
 - 同一 formula 中重复 bucket 返回 `{ ok: false }`；不属于 formula 且不在 ignored list 的 bucket
   返回 `{ ok: false }`；ignored bucket 只能通过 warning 和 breakdown 表达。
