@@ -688,6 +688,39 @@ describe("calculate", () => {
     }
   })
 
+  it("snapshots a stateful contributions getter exactly once", () => {
+    for (const laterContributions of ["not-an-array", undefined]) {
+      let reads = 0
+      const damageBonusBucket = { bucketId: "damage_bonus" } as Bucket
+      Object.defineProperty(damageBonusBucket, "contributions", {
+        enumerable: true,
+        get(): unknown {
+          reads += 1
+          return reads === 1 ? [{ value: 0.2 }] : laterContributions
+        },
+      })
+
+      const result = calculate({
+        formulaId: "regular_damage",
+        buckets: [{ bucketId: "base_damage", value: 100 }, damageBonusBucket],
+      })
+
+      expect(reads).toBe(1)
+      expect(result).toMatchObject({
+        ok: true,
+        formulaId: "regular_damage",
+        value: 120,
+      })
+      expect(
+        result.ok &&
+          result.buckets.find(({ bucketId }) => bucketId === "damage_bonus"),
+      ).toMatchObject({
+        source: "contributions",
+        contributions: [{ value: 0.2 }],
+      })
+    }
+  })
+
   it("returns unsupported_contributions for direct-value-only buckets", () => {
     const result = calculate({
       formulaId: "regular_damage",

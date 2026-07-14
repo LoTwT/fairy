@@ -49,6 +49,15 @@ interface NormalizedBucket {
   readonly warnings: readonly CalculationWarning[]
 }
 
+interface BucketSnapshot {
+  readonly bucketId: BucketId
+  readonly hasValue: boolean
+  readonly value: unknown
+  readonly hasContributions: boolean
+  readonly contributions: unknown
+  readonly provenance: Bucket["provenance"]
+}
+
 export function resolveBuckets(input: CalculationInput): ResolveBucketsResult {
   const inputFormulaId: unknown = input.formulaId
   const formulaSpec = getFormulaSpecById(inputFormulaId)
@@ -67,7 +76,10 @@ export function resolveBuckets(input: CalculationInput): ResolveBucketsResult {
     )
   }
 
-  const buckets = sortBucketsForValidation(formulaSpec, input.buckets)
+  const buckets = sortBucketsForValidation(
+    formulaSpec,
+    snapshotBuckets(input.buckets),
+  )
   const duplicate = findDuplicateBucket(buckets)
   if (duplicate !== undefined) {
     return fail(
@@ -189,13 +201,12 @@ export function resolveBuckets(input: CalculationInput): ResolveBucketsResult {
 }
 
 function normalizeExplicitBucket(
-  bucket: Bucket,
+  bucket: BucketSnapshot,
   ignored: boolean,
   formulaId: string,
 ): NormalizedBucket {
   // Collection-wide validation has already established these input invariants.
-  const hasValue = hasOwn(bucket, "value")
-  const hasContributions = hasOwn(bucket, "contributions")
+  const { hasValue, hasContributions } = bucket
 
   if (hasValue) {
     const value = bucket.value as number
@@ -211,7 +222,7 @@ function normalizeExplicitBucket(
   }
 
   if (hasContributions) {
-    const contributions = bucket.contributions ?? []
+    const contributions = bucket.contributions as readonly BucketContribution[]
     const bucketSpec = getBucketSpec(bucket.bucketId)
     const value = reduceContributions(
       contributions,
@@ -285,7 +296,25 @@ function normalizeExplicitBucket(
   }
 }
 
-function findDuplicateBucket(buckets: readonly Bucket[]): BucketId | undefined {
+function snapshotBuckets(buckets: readonly Bucket[]): BucketSnapshot[] {
+  return buckets.map((bucket) => {
+    const hasValue = hasOwn(bucket, "value")
+    const hasContributions = hasOwn(bucket, "contributions")
+
+    return {
+      bucketId: bucket.bucketId,
+      hasValue,
+      value: hasValue ? bucket.value : undefined,
+      hasContributions,
+      contributions: hasContributions ? bucket.contributions : undefined,
+      provenance: copyProvenance(bucket.provenance),
+    }
+  })
+}
+
+function findDuplicateBucket(
+  buckets: readonly BucketSnapshot[],
+): BucketId | undefined {
   const seen = new Set<BucketId>()
 
   for (const bucket of buckets) {
@@ -300,17 +329,17 @@ function findDuplicateBucket(buckets: readonly Bucket[]): BucketId | undefined {
 }
 
 function findExplicitBucketError(
-  buckets: readonly Bucket[],
+  buckets: readonly BucketSnapshot[],
 ): CalculationError | undefined {
   for (const bucket of buckets) {
-    if (hasOwn(bucket, "value") && hasOwn(bucket, "contributions")) {
+    if (bucket.hasValue && bucket.hasContributions) {
       return conflictingBucketInput(bucket.bucketId)
     }
   }
 
   for (const bucket of buckets) {
     if (
-      hasOwn(bucket, "value") &&
+      bucket.hasValue &&
       bucket.provenance?.kind === "derived" &&
       getBucketSpec(bucket.bucketId).acceptsDerivedValue !== true
     ) {
@@ -320,8 +349,8 @@ function findExplicitBucketError(
 
   for (const bucket of buckets) {
     if (
-      (hasOwn(bucket, "value") && !isFiniteNumber(bucket.value)) ||
-      (bucket.contributions !== undefined &&
+      (bucket.hasValue && !isFiniteNumber(bucket.value)) ||
+      (bucket.hasContributions &&
         hasInvalidContributionEntries(bucket.contributions))
     ) {
       return invalidNumber(bucket.bucketId)
@@ -330,8 +359,9 @@ function findExplicitBucketError(
 
   for (const bucket of buckets) {
     if (
-      hasOwn(bucket, "contributions") &&
-      (bucket.contributions?.length ?? 0) === 0
+      bucket.hasContributions &&
+      Array.isArray(bucket.contributions) &&
+      bucket.contributions.length === 0
     ) {
       return emptyContributions(bucket.bucketId)
     }
@@ -339,7 +369,7 @@ function findExplicitBucketError(
 
   for (const bucket of buckets) {
     if (
-      hasOwn(bucket, "contributions") &&
+      bucket.hasContributions &&
       getBucketSpec(bucket.bucketId).contributionReducer === undefined
     ) {
       return unsupportedContributions(bucket.bucketId)
@@ -347,12 +377,12 @@ function findExplicitBucketError(
   }
 
   for (const bucket of buckets) {
-    if (!hasOwn(bucket, "contributions")) {
+    if (!bucket.hasContributions) {
       continue
     }
 
     const bucketSpec = getBucketSpec(bucket.bucketId)
-    const contributions = bucket.contributions ?? []
+    const contributions = bucket.contributions as readonly BucketContribution[]
     const reducer = bucketSpec.contributionReducer
     if (
       reducer !== undefined &&
@@ -367,7 +397,7 @@ function findExplicitBucketError(
 
 function findMissingRequiredBucket(
   formulaSpec: FormulaSpec,
-  buckets: readonly Bucket[],
+  buckets: readonly BucketSnapshot[],
 ): BucketId | undefined {
   const explicitBuckets = new Map(
     buckets.map((bucket) => [bucket.bucketId, bucket]),
@@ -377,7 +407,7 @@ function findMissingRequiredBucket(
     const bucket = explicitBuckets.get(bucketId)
     if (
       bucket === undefined ||
-      (!hasOwn(bucket, "value") && !hasOwn(bucket, "contributions"))
+      (!bucket.hasValue && !bucket.hasContributions)
     ) {
       return bucketId
     }
@@ -388,8 +418,8 @@ function findMissingRequiredBucket(
 
 function sortBucketsForValidation(
   formulaSpec: FormulaSpec,
-  buckets: readonly Bucket[],
-): Bucket[] {
+  buckets: readonly BucketSnapshot[],
+): BucketSnapshot[] {
   const bucketOrder = new Map<BucketId, number>()
   const orderedBucketIds = [
     ...formulaSpec.buckets,
@@ -481,7 +511,7 @@ function copyProvenance(
 }
 
 function createDirectBreakdown(
-  bucket: Bucket,
+  bucket: BucketSnapshot,
   value: number,
   ignoredWarning:
     | Extract<CalculationWarning, { readonly code: "ignored_bucket" }>

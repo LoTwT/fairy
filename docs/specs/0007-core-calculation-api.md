@@ -461,8 +461,9 @@ type CalculationResult =
 4. 对所有显式 bucket 做 input-shape / support validation：同一 bucket 同时包含 `value` 和
    `contributions` 时返回 `{ ok: false }` + `conflicting_bucket_input`；不支持的 derived direct
    value 返回 `{ ok: false }` + `unsupported_derived_value`。
-5. 对所有显式 numeric inputs 做 finite-number validation；`contributions` 还必须是 dense array，且每项
-   都是包含 finite `value` 的实际 object。失败返回 `{ ok: false }` + `invalid_number`。
+5. 对所有显式 numeric inputs 做 finite-number validation；`contributions` 在首次读取时锁定内部
+   snapshot，validation / normalize 全程只消费该 snapshot。它还必须是 dense array，且每项都是包含
+   finite `value` 的实际 object。失败返回 `{ ok: false }` + `invalid_number`。
 6. 对显式 `contributions` 做 non-empty validation；空数组返回 `{ ok: false }` +
    `empty_contributions`。
 7. 对显式 `contributions` 检查 bucket 是否有 Phase 6A reducer；没有 reducer 返回 `{ ok: false }` +
