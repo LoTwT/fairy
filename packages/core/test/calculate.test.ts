@@ -1,6 +1,12 @@
 import { describe, expect, it } from "vitest"
 import { calculate } from "../src/index"
-import type { Bucket, BucketId, CalculationInput } from "../src/index"
+import type {
+  Bucket,
+  BucketContribution,
+  BucketId,
+  BucketProvenance,
+  CalculationInput,
+} from "../src/index"
 
 describe("calculate", () => {
   it("calculates regular_damage with contribution reducers, defaults, and trace", () => {
@@ -1232,6 +1238,334 @@ describe("calculate", () => {
         contributions: [{ value: 0.2 }],
       })
     }
+  })
+
+  it("accepts public structural fields from class prototypes", () => {
+    const reads = {
+      bucketId: 0,
+      value: 0,
+      contributions: 0,
+      provenance: 0,
+      kind: 0,
+      source: 0,
+      contributionValue: 0,
+      contributionSource: 0,
+    }
+
+    class PrototypeProvenance {
+      get kind(): "manual" {
+        reads.kind += 1
+        return "manual"
+      }
+
+      get source(): string {
+        reads.source += 1
+        return "prototype"
+      }
+    }
+
+    class PrototypeContribution implements BucketContribution {
+      get value(): number {
+        reads.contributionValue += 1
+        return 0.2
+      }
+
+      get source(): string {
+        reads.contributionSource += 1
+        return "class_contribution"
+      }
+    }
+
+    class PrototypeValueBucket implements Bucket {
+      get bucketId(): BucketId {
+        reads.bucketId += 1
+        return "base_damage"
+      }
+
+      get value(): number {
+        reads.value += 1
+        return 100
+      }
+
+      get provenance(): BucketProvenance {
+        reads.provenance += 1
+        return new PrototypeProvenance()
+      }
+    }
+
+    class PrototypeContributionsBucket implements Bucket {
+      get bucketId(): BucketId {
+        reads.bucketId += 1
+        return "damage_bonus"
+      }
+
+      get contributions(): readonly BucketContribution[] {
+        reads.contributions += 1
+        return [new PrototypeContribution()]
+      }
+    }
+
+    const valueBucket = new PrototypeValueBucket()
+    const contributionsBucket = new PrototypeContributionsBucket()
+    expect(Object.hasOwn(valueBucket, "value")).toBe(false)
+    expect(Object.hasOwn(contributionsBucket, "contributions")).toBe(false)
+
+    const result = calculate({
+      formulaId: "regular_damage",
+      buckets: [valueBucket, contributionsBucket],
+      options: { trace: true },
+    })
+
+    expect(result).toMatchObject({
+      ok: true,
+      formulaId: "regular_damage",
+      value: 120,
+      trace: expect.any(Array),
+    })
+    expect(
+      result.ok &&
+        result.buckets.find(({ bucketId }) => bucketId === "base_damage"),
+    ).toMatchObject({
+      value: 100,
+      source: "input_value",
+      provenance: { kind: "manual", source: "prototype" },
+    })
+    expect(
+      result.ok &&
+        result.buckets.find(({ bucketId }) => bucketId === "damage_bonus"),
+    ).toMatchObject({
+      value: 1.2,
+      source: "contributions",
+      contributions: [{ value: 0.2, source: "class_contribution" }],
+    })
+    expect(reads).toEqual({
+      bucketId: 2,
+      value: 1,
+      contributions: 1,
+      provenance: 1,
+      kind: 1,
+      source: 1,
+      contributionValue: 1,
+      contributionSource: 1,
+    })
+  })
+
+  it("detects conflicts across own and inherited bucket payloads", () => {
+    const prototype = {
+      get contributions(): readonly BucketContribution[] {
+        return [{ value: 100 }]
+      },
+    }
+    const bucket = Object.assign(Object.create(prototype), {
+      bucketId: "base_damage" as const,
+      value: 100,
+    }) as Bucket
+
+    expect(
+      calculate({ formulaId: "regular_damage", buckets: [bucket] }),
+    ).toMatchObject({
+      ok: false,
+      error: { code: "conflicting_bucket_input", bucketId: "base_damage" },
+    })
+  })
+
+  it("locks the structural prototype chain once for both payload fields", () => {
+    let prototypeReads = 0
+    const prototype = {
+      get value(): number {
+        return 100
+      },
+    }
+    const target = Object.assign(Object.create(prototype), {
+      bucketId: "base_damage" as const,
+    })
+    const bucket = new Proxy(target, {
+      getPrototypeOf(): object {
+        prototypeReads += 1
+        return prototypeReads === 1 ? prototype : Object.prototype
+      },
+    }) as Bucket
+
+    expect(
+      calculate({ formulaId: "regular_damage", buckets: [bucket] }),
+    ).toMatchObject({ ok: true, value: 100 })
+    expect(prototypeReads).toBe(1)
+  })
+
+  it("ignores Object.prototype input pollution", () => {
+    const keys = ["value", "contributions"] as const
+    const previous = new Map(
+      keys.map((key) => [
+        key,
+        Object.getOwnPropertyDescriptor(Object.prototype, key),
+      ]),
+    )
+    let missingPayload: ReturnType<typeof calculate>
+
+    try {
+      // oxlint-disable-next-line no-extend-native -- Exercise the pollution boundary.
+      Object.defineProperties(Object.prototype, {
+        value: { configurable: true, value: 100 },
+        contributions: { configurable: true, value: [{ value: 100 }] },
+      })
+
+      missingPayload = calculate({
+        formulaId: "regular_damage",
+        buckets: [{ bucketId: "base_damage" }],
+      })
+    } finally {
+      for (const key of keys) {
+        const descriptor = previous.get(key)
+        if (descriptor === undefined) {
+          Reflect.deleteProperty(Object.prototype, key)
+        } else {
+          // oxlint-disable-next-line no-extend-native -- Restore the prior state.
+          Object.defineProperty(Object.prototype, key, descriptor)
+        }
+      }
+    }
+
+    expect(missingPayload).toMatchObject({
+      ok: false,
+      error: { code: "missing_required_bucket", bucketId: "base_damage" },
+    })
+  })
+
+  it("fails closed for invalid structural prototype chains", () => {
+    class ThrowingValueBucket implements Bucket {
+      get bucketId(): BucketId {
+        return "base_damage"
+      }
+
+      get value(): never {
+        throw new Error("inherited payload getter must not escape")
+      }
+    }
+
+    const throwingDescriptor = new Proxy(
+      { bucketId: "base_damage", value: 100 },
+      {
+        getOwnPropertyDescriptor(): never {
+          throw new Error("property inspection must not escape")
+        },
+      },
+    )
+    const throwingPrototype = new Proxy(
+      { bucketId: "base_damage", value: 100 },
+      {
+        getPrototypeOf(): never {
+          throw new Error("prototype inspection must not escape")
+        },
+      },
+    )
+    const revocable = Proxy.revocable(
+      { bucketId: "base_damage", value: 100 },
+      {},
+    )
+    revocable.revoke()
+
+    let cyclic: Bucket
+    cyclic = new Proxy(
+      { bucketId: "base_damage", value: 100 },
+      {
+        getPrototypeOf(): object {
+          return cyclic
+        },
+      },
+    )
+
+    let deepPrototype: object | null = null
+    for (let depth = 0; depth < 33; depth += 1) {
+      deepPrototype = Object.create(deepPrototype)
+    }
+    const overDeep = Object.assign(Object.create(deepPrototype), {
+      bucketId: "base_damage" as const,
+      value: 100,
+    })
+
+    for (const bucket of [
+      throwingDescriptor,
+      throwingPrototype,
+      revocable.proxy,
+      cyclic,
+      overDeep,
+      new ThrowingValueBucket(),
+    ]) {
+      const result = calculate({
+        formulaId: "regular_damage",
+        buckets: [bucket],
+      } as CalculationInput)
+
+      expect(result).toMatchObject({
+        ok: false,
+        error: { code: "invalid_calculation_input" },
+      })
+      expect(result.ok || result.error).not.toHaveProperty("bucketId")
+    }
+
+    let boundaryPrototype: object | null = null
+    for (let depth = 0; depth < 32; depth += 1) {
+      boundaryPrototype = Object.create(boundaryPrototype)
+    }
+    const boundaryDepth = Object.assign(Object.create(boundaryPrototype), {
+      bucketId: "base_damage" as const,
+      value: 100,
+    })
+    expect(
+      calculate({ formulaId: "regular_damage", buckets: [boundaryDepth] }),
+    ).toMatchObject({ ok: true, value: 100 })
+  })
+
+  it("enforces contribution limits for inherited payloads before entry reads", () => {
+    const boundary = Array.from({ length: 10_000 }, () => ({ value: 0 }))
+    let boundaryReads = 0
+    const boundaryBucket = Object.create({
+      get contributions(): readonly BucketContribution[] {
+        boundaryReads += 1
+        return boundary
+      },
+    }) as Bucket
+    Object.assign(boundaryBucket, { bucketId: "base_damage" as const })
+
+    expect(
+      calculate({ formulaId: "regular_damage", buckets: [boundaryBucket] }),
+    ).toMatchObject({ ok: true, value: 0 })
+    expect(boundaryReads).toBe(1)
+
+    let oversizedGetterReads = 0
+    let oversizedEntryReads = 0
+    const oversizedContributions = new Proxy([], {
+      get(target, property, receiver): unknown {
+        if (property === "length") return 10_001
+        oversizedEntryReads += 1
+        return Reflect.get(target, property, receiver)
+      },
+      getOwnPropertyDescriptor(target, property) {
+        oversizedEntryReads += 1
+        return Reflect.getOwnPropertyDescriptor(target, property)
+      },
+    })
+    const oversizedBucket = Object.create({
+      get contributions(): readonly BucketContribution[] {
+        oversizedGetterReads += 1
+        return oversizedContributions
+      },
+    }) as Bucket
+    Object.assign(oversizedBucket, { bucketId: "base_damage" as const })
+
+    const oversizedResult = calculate({
+      formulaId: "regular_damage",
+      buckets: [oversizedBucket],
+    })
+    expect(oversizedResult).toMatchObject({
+      ok: false,
+      error: { code: "invalid_calculation_input" },
+    })
+    expect(oversizedResult.ok || oversizedResult.error).not.toHaveProperty(
+      "bucketId",
+    )
+    expect(oversizedGetterReads).toBe(1)
+    expect(oversizedEntryReads).toBe(0)
   })
 
   it("materializes contribution fields exactly once", () => {

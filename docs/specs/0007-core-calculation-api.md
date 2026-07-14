@@ -210,6 +210,10 @@ type BucketProvenance =
 - `CalculationInput` 必须是可读取的实际 object；`options` 缺省合法，存在时必须是可读取的实际
   object，且 `trace` 只能是 boolean 或 `undefined`。无法安全读取或物化顶层 input metadata 时返回
   formula-level `invalid_calculation_input`。
+- `Bucket.value` / `Bucket.contributions` 可以是 object 自身属性，也可以由 class / custom prototype
+  提供；presence 检测必须先锁定最多 `32` 层的 custom prototype chain，记录 visited object，并跳过
+  `Object.prototype`。cycle、超深 chain、descriptor / prototype / getter 无法安全读取时返回 formula-level
+  `invalid_calculation_input`，每个 payload getter 仍只读取一次。
 - `buckets` 必须是 dense array，且每项必须是可读取的实际 bucket object；collection / entry shape
   无法建立可信 `bucketId` 时也返回 formula-level `invalid_calculation_input`，不伪造 `bucketId`。
 - 每个 `bucketId` 必须是 primitive string，并且是内置 `BucketSpec` registry 的 own property；未注册
@@ -488,9 +492,10 @@ type CalculationResult =
    `FormulaSpec.ignoredBuckets`；
    不属于两者返回 `{ ok: false }` + `unsupported_bucket`。
 6. 只对 unique + applicable identities 做 guarded deep snapshot：bucket / provenance / contribution
-   fields 各只读取一次并物化为 internal plain data。每个 contributions array 的 primitive integer
-   `length` 在读取或复制 entry 前只读一次，并计入整个 request 的 `10,000` total budget；超限返回
-   formula-level `invalid_calculation_input`。
+   fields 各只读取一次并物化为 internal plain data。`value` / `contributions` 的 presence 共用一次最多
+   `32` 层、带 visited 检查且跳过 `Object.prototype` 的 prototype-chain snapshot；每个 contributions array
+   的 primitive integer `length` 在读取或复制 entry 前只读一次，并计入整个 request 的 `10,000` total
+   budget；超限返回 formula-level `invalid_calculation_input`。
 7. 对所有显式 bucket 做 input-shape / support validation：同一 bucket 同时包含 `value` 和
    `contributions` 时返回 `{ ok: false }` + `conflicting_bucket_input`；不支持的 derived direct
    value 返回 `{ ok: false }` + `unsupported_derived_value`。
@@ -1059,6 +1064,9 @@ Unsupported contributions：
   返回 `{ ok: false }`；ignored bucket 只能通过 warning 和 breakdown 表达。
 - runtime bucket identity 必须由 registry own-property guard 收窄；未注册 / prototype bucket id 返回
   formula-level `invalid_calculation_input`，不能泄漏到任何携带 public `BucketId` 的 error variant。
+- `Bucket.value` / `Bucket.contributions` presence 必须一致支持 own 与 class / custom-prototype properties，
+  同时忽略 `Object.prototype` 污染；prototype chain 最多 `32` 层并检查 cycle，presence inspection 或 getter
+  抛错必须 fail-close，不能忽略有效 inherited payload。
 - `buckets` 数量上限必须由 bucket registry cardinality 派生（当前 `9`）；单个 request 的
   `contributions` 总数上限为 `10,000`。两类 caller-owned array length 都必须在 loop / allocation 前按
   primitive non-negative safe integer 校验，超限返回 formula-level `invalid_calculation_input`。

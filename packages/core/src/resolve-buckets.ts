@@ -121,8 +121,15 @@ type SnapshotProvenanceResult =
   | { readonly ok: true; readonly provenance: Bucket["provenance"] }
   | { readonly ok: false }
 
+type SnapshotPrototypeChainResult =
+  | { readonly ok: true; readonly chain: readonly object[] }
+  | { readonly ok: false }
+
+type StructuralPropertyPresence = "present" | "absent" | "invalid"
+
 const INVALID_CONTRIBUTIONS = Symbol("invalid contributions")
 const MAX_CONTRIBUTIONS_PER_CALCULATION = 10_000
+const MAX_STRUCTURAL_PROTOTYPE_DEPTH = 32
 
 export function resolveBuckets(input: CalculationInput): ResolveBucketsResult {
   const inputSnapshotResult = snapshotCalculationInput(input)
@@ -516,8 +523,25 @@ function snapshotBucketPayload(
   try {
     const { bucket: bucketRecord, bucketId } = identity
 
-    const hasValue = hasOwn(bucketRecord, "value")
-    const hasContributions = hasOwn(bucketRecord, "contributions")
+    const prototypeChainResult = snapshotStructuralPrototypeChain(bucketRecord)
+    if (!prototypeChainResult.ok) {
+      return { ok: false }
+    }
+
+    const valuePresence = inspectStructuralProperty(
+      prototypeChainResult.chain,
+      "value",
+    )
+    const contributionsPresence = inspectStructuralProperty(
+      prototypeChainResult.chain,
+      "contributions",
+    )
+    if (valuePresence === "invalid" || contributionsPresence === "invalid") {
+      return { ok: false }
+    }
+
+    const hasValue = valuePresence === "present"
+    const hasContributions = contributionsPresence === "present"
     const provenanceResult = snapshotProvenance(bucketRecord.provenance)
     if (!provenanceResult.ok) {
       return { ok: false }
@@ -917,6 +941,56 @@ function hasInvalidContributionEntries(contributions: unknown): boolean {
 
 function hasOwn(object: object, key: PropertyKey): boolean {
   return Object.prototype.hasOwnProperty.call(object, key)
+}
+
+function snapshotStructuralPrototypeChain(
+  object: object,
+): SnapshotPrototypeChainResult {
+  if (object === Object.prototype) {
+    return { ok: true, chain: [] }
+  }
+
+  const visited = new Set<object>()
+  const chain: object[] = [object]
+  let current = object
+  let prototypeDepth = 0
+  visited.add(object)
+
+  try {
+    while (true) {
+      const prototype = Object.getPrototypeOf(current)
+      if (prototype === null || prototype === Object.prototype) {
+        return { ok: true, chain }
+      }
+
+      prototypeDepth += 1
+      if (
+        prototypeDepth > MAX_STRUCTURAL_PROTOTYPE_DEPTH ||
+        visited.has(prototype)
+      ) {
+        return { ok: false }
+      }
+
+      visited.add(prototype)
+      chain.push(prototype)
+      current = prototype
+    }
+  } catch {
+    return { ok: false }
+  }
+}
+
+function inspectStructuralProperty(
+  prototypeChain: readonly object[],
+  key: PropertyKey,
+): StructuralPropertyPresence {
+  try {
+    return prototypeChain.some((object) => hasOwn(object, key))
+      ? "present"
+      : "absent"
+  } catch {
+    return "invalid"
+  }
 }
 
 function fail(
