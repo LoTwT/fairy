@@ -130,6 +130,40 @@ type StructuralPropertyPresence = "present" | "absent" | "invalid"
 const INVALID_CONTRIBUTIONS = Symbol("invalid contributions")
 const MAX_CONTRIBUTIONS_PER_CALCULATION = 10_000
 const MAX_STRUCTURAL_PROTOTYPE_DEPTH = 32
+const FUNCTION_TO_STRING = Function.prototype.toString
+const NATIVE_OBJECT_CONSTRUCTOR_SOURCE = Reflect.apply(
+  FUNCTION_TO_STRING,
+  Object,
+  [],
+)
+const INTRINSIC_OBJECT_PROTOTYPE_MARKERS = [
+  ["constructor", NATIVE_OBJECT_CONSTRUCTOR_SOURCE],
+  [
+    "hasOwnProperty",
+    Reflect.apply(FUNCTION_TO_STRING, Object.prototype.hasOwnProperty, []),
+  ],
+  [
+    "isPrototypeOf",
+    Reflect.apply(FUNCTION_TO_STRING, Object.prototype.isPrototypeOf, []),
+  ],
+  [
+    "propertyIsEnumerable",
+    Reflect.apply(
+      FUNCTION_TO_STRING,
+      Object.prototype.propertyIsEnumerable,
+      [],
+    ),
+  ],
+  [
+    "toLocaleString",
+    Reflect.apply(FUNCTION_TO_STRING, Object.prototype.toLocaleString, []),
+  ],
+  [
+    "toString",
+    Reflect.apply(FUNCTION_TO_STRING, Object.prototype.toString, []),
+  ],
+  ["valueOf", Reflect.apply(FUNCTION_TO_STRING, Object.prototype.valueOf, [])],
+] as const
 
 export function resolveBuckets(input: CalculationInput): ResolveBucketsResult {
   const inputSnapshotResult = snapshotCalculationInput(input)
@@ -959,13 +993,26 @@ function snapshotStructuralPrototypeChain(
   try {
     while (true) {
       const prototype = Object.getPrototypeOf(current)
-      if (prototype === null || prototype === Object.prototype) {
+      if (prototype === null) {
+        const isIntrinsicTerminal = isIntrinsicObjectPrototype(current)
+        const customPrototypeDepth =
+          prototypeDepth - (isIntrinsicTerminal ? 1 : 0)
+        if (customPrototypeDepth > MAX_STRUCTURAL_PROTOTYPE_DEPTH) {
+          return { ok: false }
+        }
+
+        return {
+          ok: true,
+          chain: isIntrinsicTerminal ? chain.slice(0, -1) : chain,
+        }
+      }
+      if (prototype === Object.prototype) {
         return { ok: true, chain }
       }
 
       prototypeDepth += 1
       if (
-        prototypeDepth > MAX_STRUCTURAL_PROTOTYPE_DEPTH ||
+        prototypeDepth > MAX_STRUCTURAL_PROTOTYPE_DEPTH + 1 ||
         visited.has(prototype)
       ) {
         return { ok: false }
@@ -978,6 +1025,27 @@ function snapshotStructuralPrototypeChain(
   } catch {
     return { ok: false }
   }
+}
+
+function isIntrinsicObjectPrototype(object: object): boolean {
+  return INTRINSIC_OBJECT_PROTOTYPE_MARKERS.some(([key, expectedSource]) => {
+    const descriptor = Object.getOwnPropertyDescriptor(object, key)
+    if (
+      descriptor === undefined ||
+      !("value" in descriptor) ||
+      typeof descriptor.value !== "function"
+    ) {
+      return false
+    }
+
+    const marker = descriptor.value
+    const functionPrototype = Object.getPrototypeOf(marker)
+    return (
+      functionPrototype !== null &&
+      Object.getPrototypeOf(functionPrototype) === object &&
+      Reflect.apply(FUNCTION_TO_STRING, marker, []) === expectedSource
+    )
+  })
 }
 
 function inspectStructuralProperty(

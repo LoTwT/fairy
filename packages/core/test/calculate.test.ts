@@ -1,3 +1,5 @@
+// @ts-expect-error -- The runtime test uses node:vm without adding @types/node to the package.
+import { runInNewContext } from "node:vm"
 import { describe, expect, it } from "vitest"
 import { calculate } from "../src/index"
 import type {
@@ -1429,6 +1431,123 @@ describe("calculate", () => {
       ok: false,
       error: { code: "missing_required_bucket", bucketId: "base_damage" },
     })
+  })
+
+  it("supports cross-realm payloads without accepting intrinsic pollution", () => {
+    const foreign = runInNewContext(`
+      (() => {
+        class ValueBucket {
+          get bucketId() { return "base_damage" }
+          get value() { return 100 }
+        }
+        class ContributionsBucket {
+          get bucketId() { return "damage_bonus" }
+          get contributions() { return [{ value: 0.2 }] }
+        }
+
+        const nullPrototype = Object.create(null)
+        Object.defineProperty(nullPrototype, "value", {
+          configurable: true,
+          get() { return 130 },
+        })
+
+        let depthBoundaryPrototype = Object.prototype
+        for (let depth = 0; depth < 32; depth += 1) {
+          depthBoundaryPrototype = Object.create(depthBoundaryPrototype)
+        }
+
+        let overDepthPrototype = Object.prototype
+        for (let depth = 0; depth < 33; depth += 1) {
+          overDepthPrototype = Object.create(overDepthPrototype)
+        }
+
+        return {
+          plain: { bucketId: "base_damage", value: 140 },
+          classValue: new ValueBucket(),
+          classContributions: new ContributionsBucket(),
+          nullPrototypeCustom: Object.assign(Object.create(nullPrototype), {
+            bucketId: "base_damage",
+          }),
+          depthBoundary: Object.assign(
+            Object.create(depthBoundaryPrototype),
+            { bucketId: "base_damage", value: 150 },
+          ),
+          overDepth: Object.assign(Object.create(overDepthPrototype), {
+            bucketId: "base_damage",
+            value: 160,
+          }),
+        }
+      })()
+    `) as {
+      plain: Bucket
+      classValue: Bucket
+      classContributions: Bucket
+      nullPrototypeCustom: Bucket
+      depthBoundary: Bucket
+      overDepth: Bucket
+    }
+    const pollutedValue = runInNewContext(`
+      Object.defineProperty(Object.prototype, "constructor", {
+        configurable: true,
+        value: null,
+      })
+      Object.defineProperty(Object.prototype, "value", {
+        configurable: true,
+        value: 100,
+      })
+      ;({ bucketId: "base_damage" })
+    `) as Bucket
+    const pollutedContributions = runInNewContext(`
+      Object.defineProperty(Object.prototype, "contributions", {
+        configurable: true,
+        value: [{ value: 100 }],
+      })
+      ;({ bucketId: "base_damage" })
+    `) as Bucket
+
+    expect(Object.getPrototypeOf(foreign.plain)).not.toBe(Object.prototype)
+    expect(
+      Object.getPrototypeOf(Object.getPrototypeOf(foreign.plain)),
+    ).toBeNull()
+    expect(
+      calculate({ formulaId: "regular_damage", buckets: [foreign.plain] }),
+    ).toMatchObject({ ok: true, value: 140 })
+    expect(
+      calculate({
+        formulaId: "regular_damage",
+        buckets: [foreign.classValue, foreign.classContributions],
+      }),
+    ).toMatchObject({ ok: true, value: 120 })
+    expect(
+      calculate({
+        formulaId: "regular_damage",
+        buckets: [foreign.nullPrototypeCustom],
+      }),
+    ).toMatchObject({ ok: true, value: 130 })
+    expect(
+      calculate({
+        formulaId: "regular_damage",
+        buckets: [foreign.depthBoundary],
+      }),
+    ).toMatchObject({ ok: true, value: 150 })
+    expect(
+      calculate({
+        formulaId: "regular_damage",
+        buckets: [foreign.overDepth],
+      }),
+    ).toMatchObject({
+      ok: false,
+      error: { code: "invalid_calculation_input" },
+    })
+
+    for (const polluted of [pollutedValue, pollutedContributions]) {
+      expect(
+        calculate({ formulaId: "regular_damage", buckets: [polluted] }),
+      ).toMatchObject({
+        ok: false,
+        error: { code: "missing_required_bucket", bucketId: "base_damage" },
+      })
+    }
   })
 
   it("fails closed for invalid structural prototype chains", () => {
