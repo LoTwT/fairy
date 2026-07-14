@@ -7,6 +7,7 @@ import type {
 } from "../src/index"
 
 const errorCodes = [
+  "invalid_bucket_input",
   "missing_required_bucket",
   "conflicting_bucket_input",
   "duplicate_bucket",
@@ -46,6 +47,18 @@ const impossibleError: CalculationError = {
   // @ts-expect-error recoverable codes cannot appear as fatal errors
   code: "defaulted_bucket",
   message: "Bucket defaulted.",
+  bucketId: "crit",
+}
+
+const validInvalidBucketInput: CalculationError = {
+  code: "invalid_bucket_input",
+  message: "Malformed bucket input.",
+}
+
+const impossibleInvalidBucketInput: CalculationError = {
+  code: "invalid_bucket_input",
+  message: "Malformed bucket input.",
+  // @ts-expect-error formula-level invalid_bucket_input cannot claim a bucket identity
   bucketId: "crit",
 }
 
@@ -204,6 +217,8 @@ void [
   overlappingCodes,
   impossibleWarning,
   impossibleError,
+  validInvalidBucketInput,
+  impossibleInvalidBucketInput,
   validDefaultBreakdown,
   validContributionsBreakdown,
   validDerivedBreakdown,

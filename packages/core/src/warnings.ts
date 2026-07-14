@@ -76,6 +76,13 @@ export function invalidCalculationResult(): CalculationError {
   return issue("invalid_number", "Calculation result must be a finite number.")
 }
 
+export function invalidBucketInput(): CalculationError {
+  return issue(
+    "invalid_bucket_input",
+    "CalculationInput buckets must be a dense array of readable bucket objects.",
+  )
+}
+
 export function emptyContributions(bucketId: BucketId): CalculationError {
   return bucketIssue(
     "empty_contributions",

@@ -653,6 +653,151 @@ describe("calculate", () => {
     })
   })
 
+  it("rejects malformed bucket collections without throwing", () => {
+    const fullHole: unknown[] = []
+    fullHole.length = 1
+    const leadingHole: unknown[] = []
+    leadingHole.length = 2
+    leadingHole[1] = { bucketId: "base_damage", value: 100 }
+    const trailingHole: unknown[] = [{ bucketId: "base_damage", value: 100 }]
+    trailingHole.length = 2
+
+    for (const buckets of [
+      fullHole,
+      leadingHole,
+      trailingHole,
+      [null],
+      [undefined],
+      "not-an-array",
+      {},
+    ]) {
+      const result = calculate({
+        formulaId: "regular_damage",
+        buckets,
+      } as unknown as CalculationInput)
+
+      expect(result).toMatchObject({
+        ok: false,
+        formulaId: "regular_damage",
+        error: { code: "invalid_bucket_input" },
+        warnings: [],
+      })
+      expect(result.ok || result.error).not.toHaveProperty("bucketId")
+    }
+  })
+
+  it("returns invalid_bucket_input when the buckets property cannot be read", () => {
+    const input = { formulaId: "regular_damage" } as CalculationInput
+    Object.defineProperty(input, "buckets", {
+      get(): never {
+        throw new Error("buckets getter must not escape")
+      },
+    })
+
+    expect(calculate(input)).toMatchObject({
+      ok: false,
+      formulaId: "regular_damage",
+      error: { code: "invalid_bucket_input" },
+      warnings: [],
+    })
+  })
+
+  it("snapshots the buckets property exactly once", () => {
+    let reads = 0
+    const input = { formulaId: "regular_damage" } as CalculationInput
+    Object.defineProperty(input, "buckets", {
+      get(): readonly Bucket[] {
+        reads += 1
+        if (reads > 1) throw new Error("buckets read more than once")
+        return [{ bucketId: "base_damage", value: 100 }]
+      },
+    })
+
+    expect(calculate(input)).toMatchObject({
+      ok: true,
+      formulaId: "regular_damage",
+      value: 100,
+    })
+    expect(reads).toBe(1)
+  })
+
+  it("materializes bucket and provenance fields exactly once", () => {
+    const reads = {
+      bucketId: 0,
+      value: 0,
+      provenance: 0,
+      kind: 0,
+      source: 0,
+      note: 0,
+    }
+    const provenance = {}
+    Object.defineProperties(provenance, {
+      kind: {
+        get(): "manual" {
+          reads.kind += 1
+          if (reads.kind > 1) throw new Error("kind read more than once")
+          return "manual"
+        },
+      },
+      source: {
+        get(): string {
+          reads.source += 1
+          if (reads.source > 1) throw new Error("source read more than once")
+          return "manual_input"
+        },
+      },
+      note: {
+        get(): string {
+          reads.note += 1
+          if (reads.note > 1) throw new Error("note read more than once")
+          return "snapshotted"
+        },
+      },
+    })
+    const bucket = {}
+    Object.defineProperties(bucket, {
+      bucketId: {
+        get(): "base_damage" {
+          reads.bucketId += 1
+          if (reads.bucketId > 1)
+            throw new Error("bucketId read more than once")
+          return "base_damage"
+        },
+      },
+      value: {
+        get(): number {
+          reads.value += 1
+          if (reads.value > 1) throw new Error("value read more than once")
+          return 100
+        },
+      },
+      provenance: {
+        get(): object {
+          reads.provenance += 1
+          if (reads.provenance > 1) {
+            throw new Error("provenance read more than once")
+          }
+          return provenance
+        },
+      },
+    })
+
+    const result = calculate({
+      formulaId: "regular_damage",
+      buckets: [bucket],
+    } as unknown as CalculationInput)
+
+    expect(result).toMatchObject({ ok: true, value: 100 })
+    expect(reads).toEqual({
+      bucketId: 1,
+      value: 1,
+      provenance: 1,
+      kind: 1,
+      source: 1,
+      note: 1,
+    })
+  })
+
   it("rejects sparse, non-object, and non-array contributions without throwing", () => {
     const fullHole: unknown[] = []
     fullHole.length = 1
@@ -719,6 +864,83 @@ describe("calculate", () => {
         contributions: [{ value: 0.2 }],
       })
     }
+  })
+
+  it("materializes contribution fields exactly once", () => {
+    const reads = { value: 0, source: 0, note: 0 }
+    const contribution = {}
+    Object.defineProperties(contribution, {
+      value: {
+        enumerable: true,
+        get(): number {
+          reads.value += 1
+          if (reads.value > 1) throw new Error("value read more than once")
+          return 0.2
+        },
+      },
+      source: {
+        enumerable: true,
+        get(): string {
+          reads.source += 1
+          if (reads.source > 1) throw new Error("source read more than once")
+          return "skill_buff"
+        },
+      },
+      note: {
+        enumerable: true,
+        get(): string {
+          reads.note += 1
+          if (reads.note > 1) throw new Error("note read more than once")
+          return "snapshotted"
+        },
+      },
+    })
+
+    const result = calculate({
+      formulaId: "regular_damage",
+      buckets: [
+        { bucketId: "base_damage", value: 100 },
+        {
+          bucketId: "damage_bonus",
+          contributions: [contribution],
+        },
+      ],
+    } as unknown as CalculationInput)
+
+    expect(reads).toEqual({ value: 1, source: 1, note: 1 })
+    expect(
+      result.ok &&
+        result.buckets.find(({ bucketId }) => bucketId === "damage_bonus"),
+    ).toMatchObject({
+      source: "contributions",
+      contributions: [
+        { value: 0.2, source: "skill_buff", note: "snapshotted" },
+      ],
+    })
+  })
+
+  it("returns bucket-level invalid_number when a contribution cannot be read", () => {
+    const contribution = {}
+    Object.defineProperty(contribution, "value", {
+      get(): never {
+        throw new Error("contribution getter must not escape")
+      },
+    })
+
+    const result = calculate({
+      formulaId: "regular_damage",
+      buckets: [
+        { bucketId: "base_damage", value: 100 },
+        { bucketId: "damage_bonus", contributions: [contribution] },
+      ],
+    } as unknown as CalculationInput)
+
+    expect(result).toMatchObject({
+      ok: false,
+      formulaId: "regular_damage",
+      error: { code: "invalid_number", bucketId: "damage_bonus" },
+      warnings: [],
+    })
   })
 
   it("returns unsupported_contributions for direct-value-only buckets", () => {

@@ -6,6 +6,7 @@ import {
   duplicateBucket,
   emptyContributions,
   ignoredBucket,
+  invalidBucketInput,
   invalidNumber,
   missingRequiredBucket,
   unsupportedBucket,
@@ -54,9 +55,22 @@ interface BucketSnapshot {
   readonly hasValue: boolean
   readonly value: unknown
   readonly hasContributions: boolean
-  readonly contributions: unknown
+  readonly contributions:
+    | readonly BucketContribution[]
+    | typeof INVALID_CONTRIBUTIONS
+    | undefined
   readonly provenance: Bucket["provenance"]
 }
+
+type SnapshotBucketsResult =
+  | { readonly ok: true; readonly buckets: readonly BucketSnapshot[] }
+  | { readonly ok: false }
+
+type SnapshotProvenanceResult =
+  | { readonly ok: true; readonly provenance: Bucket["provenance"] }
+  | { readonly ok: false }
+
+const INVALID_CONTRIBUTIONS = Symbol("invalid contributions")
 
 export function resolveBuckets(input: CalculationInput): ResolveBucketsResult {
   const inputFormulaId: unknown = input.formulaId
@@ -76,10 +90,12 @@ export function resolveBuckets(input: CalculationInput): ResolveBucketsResult {
     )
   }
 
-  const buckets = sortBucketsForValidation(
-    formulaSpec,
-    snapshotBuckets(input.buckets),
-  )
+  const snapshotResult = snapshotBuckets(input)
+  if (!snapshotResult.ok) {
+    return fail(invalidBucketInput(), [], [], formulaSpec.formulaId, trace)
+  }
+
+  const buckets = sortBucketsForValidation(formulaSpec, snapshotResult.buckets)
   const duplicate = findDuplicateBucket(buckets)
   if (duplicate !== undefined) {
     return fail(
@@ -296,20 +312,149 @@ function normalizeExplicitBucket(
   }
 }
 
-function snapshotBuckets(buckets: readonly Bucket[]): BucketSnapshot[] {
-  return buckets.map((bucket) => {
+function snapshotBuckets(input: CalculationInput): SnapshotBucketsResult {
+  try {
+    const buckets: unknown = input.buckets
+    if (!Array.isArray(buckets)) {
+      return { ok: false }
+    }
+
+    const length = buckets.length
+    const snapshots: BucketSnapshot[] = []
+    for (let index = 0; index < length; index += 1) {
+      if (!hasOwn(buckets, index)) {
+        return { ok: false }
+      }
+
+      const snapshot = snapshotBucket(buckets[index])
+      if (snapshot === undefined) {
+        return { ok: false }
+      }
+
+      snapshots.push(snapshot)
+    }
+
+    return { ok: true, buckets: snapshots }
+  } catch {
+    return { ok: false }
+  }
+}
+
+function snapshotBucket(bucket: unknown): BucketSnapshot | undefined {
+  if (typeof bucket !== "object" || bucket === null || Array.isArray(bucket)) {
+    return undefined
+  }
+
+  try {
+    const bucketRecord = bucket as Record<PropertyKey, unknown>
+    const bucketId = bucketRecord.bucketId
+    if (typeof bucketId !== "string") {
+      return undefined
+    }
+
     const hasValue = hasOwn(bucket, "value")
     const hasContributions = hasOwn(bucket, "contributions")
+    const provenanceResult = snapshotProvenance(bucketRecord.provenance)
+    if (!provenanceResult.ok) {
+      return undefined
+    }
 
     return {
-      bucketId: bucket.bucketId,
+      bucketId: bucketId as BucketId,
       hasValue,
-      value: hasValue ? bucket.value : undefined,
+      value: hasValue ? bucketRecord.value : undefined,
       hasContributions,
-      contributions: hasContributions ? bucket.contributions : undefined,
-      provenance: copyProvenance(bucket.provenance),
+      contributions: hasContributions
+        ? snapshotContributions(bucketRecord.contributions)
+        : undefined,
+      provenance: provenanceResult.provenance,
     }
-  })
+  } catch {
+    return undefined
+  }
+}
+
+function snapshotProvenance(provenance: unknown): SnapshotProvenanceResult {
+  if (provenance === undefined) {
+    return { ok: true, provenance: undefined }
+  }
+  if (
+    typeof provenance !== "object" ||
+    provenance === null ||
+    Array.isArray(provenance)
+  ) {
+    return { ok: false }
+  }
+
+  const provenanceRecord = provenance as Record<PropertyKey, unknown>
+  const kind = provenanceRecord.kind
+  const source = provenanceRecord.source
+  const note = provenanceRecord.note
+  if (
+    (kind !== "manual" && kind !== "derived") ||
+    (source !== undefined && typeof source !== "string") ||
+    (note !== undefined && typeof note !== "string")
+  ) {
+    return { ok: false }
+  }
+
+  return {
+    ok: true,
+    provenance: {
+      kind,
+      ...(source === undefined ? {} : { source }),
+      ...(note === undefined ? {} : { note }),
+    },
+  }
+}
+
+function snapshotContributions(
+  contributions: unknown,
+): readonly BucketContribution[] | typeof INVALID_CONTRIBUTIONS {
+  try {
+    if (!Array.isArray(contributions)) {
+      return INVALID_CONTRIBUTIONS
+    }
+
+    const length = contributions.length
+    const snapshots: BucketContribution[] = []
+    for (let index = 0; index < length; index += 1) {
+      if (!hasOwn(contributions, index)) {
+        return INVALID_CONTRIBUTIONS
+      }
+
+      const contribution: unknown = contributions[index]
+      if (
+        typeof contribution !== "object" ||
+        contribution === null ||
+        Array.isArray(contribution)
+      ) {
+        return INVALID_CONTRIBUTIONS
+      }
+
+      const contributionRecord = contribution as Record<PropertyKey, unknown>
+      const value = contributionRecord.value
+      const source = contributionRecord.source
+      const note = contributionRecord.note
+      if (
+        !isFiniteNumber(value) ||
+        (source !== undefined && typeof source !== "string") ||
+        (note !== undefined && typeof note !== "string")
+      ) {
+        return INVALID_CONTRIBUTIONS
+      }
+
+      snapshots.push({
+        value,
+        ...(source === undefined ? {} : { source }),
+        ...(note === undefined ? {} : { note }),
+      })
+    }
+
+    return snapshots
+  } catch {
+    return INVALID_CONTRIBUTIONS
+  }
 }
 
 function findDuplicateBucket(
@@ -550,27 +695,7 @@ function isFiniteNumber(value: unknown): value is number {
 }
 
 function hasInvalidContributionEntries(contributions: unknown): boolean {
-  if (!Array.isArray(contributions)) {
-    return true
-  }
-
-  for (let index = 0; index < contributions.length; index += 1) {
-    if (!hasOwn(contributions, index)) {
-      return true
-    }
-
-    const contribution: unknown = contributions[index]
-    if (
-      typeof contribution !== "object" ||
-      contribution === null ||
-      Array.isArray(contribution) ||
-      !isFiniteNumber((contribution as { readonly value?: unknown }).value)
-    ) {
-      return true
-    }
-  }
-
-  return false
+  return contributions === INVALID_CONTRIBUTIONS
 }
 
 function hasOwn(object: object, key: PropertyKey): boolean {

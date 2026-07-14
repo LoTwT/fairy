@@ -55,6 +55,7 @@ try {
   )
 
   assert.match(runtime, /\/\/# sourceMappingURL=index\.mjs\.map\s*$/)
+  assert.match(declaration, /invalid_bucket_input/)
   assert.doesNotMatch(declaration, /sourceMappingURL|\.\.\/src/)
   assert.equal(
     files.some((file) => file.endsWith(".d.mts.map")),
