@@ -5,4 +5,6 @@ export default defineConfig({
   dts: true,
   entry: ["src/index.ts"],
   format: ["esm"],
+  onSuccess: "node scripts/finalize-build.mjs",
+  sourcemap: true,
 })

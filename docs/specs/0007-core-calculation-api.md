@@ -949,7 +949,8 @@ Unsupported contributions：
 - `deriveDefenseBucket(...)` 到 `BucketBreakdown.source = 'derived'` 必须有 explicit
   `provenance` 链路。
 - Contribution reducer 只覆盖 Phase 6A 允许的最小 bucket 集；没有通用 operation system。
-- Package 不发布 `src` 时，declaration output 不能包含指向缺失源码的 declaration map。
+- Package 不发布 `src` 时，declaration output 不能包含指向缺失源码的 declaration map；packed runtime
+  `.mjs.map` 必须保留且为每个 source 提供完整 `sourcesContent`。
 - 文档中没有遗留的 obsolete API identifiers；旧 source baseline 记录留在 Phase 5A reference，不在本 API spec 中复写。
 
 PR verification：
