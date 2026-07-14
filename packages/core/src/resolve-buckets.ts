@@ -19,6 +19,7 @@ import type {
   BucketBreakdownSource,
   BucketContribution,
   BucketId,
+  CalculationError,
   CalculationInput,
   CalculationWarning,
   FormulaSpec,
@@ -37,7 +38,7 @@ type ResolveBucketsResult =
   | {
       readonly ok: false
       readonly formulaId?: string
-      readonly error: CalculationWarning
+      readonly error: CalculationError
       readonly warnings: readonly CalculationWarning[]
       readonly buckets?: readonly BucketBreakdown[]
       readonly trace?: readonly string[]
@@ -282,7 +283,7 @@ function findDuplicateBucket(buckets: readonly Bucket[]): BucketId | undefined {
 
 function findExplicitBucketError(
   buckets: readonly Bucket[],
-): CalculationWarning | undefined {
+): CalculationError | undefined {
   for (const bucket of buckets) {
     if (hasOwn(bucket, "value") && hasOwn(bucket, "contributions")) {
       return conflictingBucketInput(bucket.bucketId)
@@ -472,7 +473,7 @@ function hasOwn(object: object, key: PropertyKey): boolean {
 }
 
 function fail(
-  error: CalculationWarning,
+  error: CalculationError,
   breakdown: readonly BucketBreakdown[],
   warnings: readonly CalculationWarning[],
   formulaId?: string,

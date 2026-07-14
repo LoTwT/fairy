@@ -71,7 +71,7 @@ export type BucketBreakdownSource =
   | "derived"
   | "ignored"
 
-export type CalculationWarningCode =
+export type CalculationErrorCode =
   | "missing_required_bucket"
   | "conflicting_bucket_input"
   | "duplicate_bucket"
@@ -81,14 +81,28 @@ export type CalculationWarningCode =
   | "unsupported_derived_value"
   | "unsupported_formula"
   | "unsupported_bucket"
-  | "ignored_bucket"
-  | "defaulted_bucket"
 
-export interface CalculationWarning {
-  readonly code: CalculationWarningCode
+export type CalculationWarningCode = "ignored_bucket" | "defaulted_bucket"
+
+interface CalculationIssue<Code extends string> {
+  readonly code: Code
   readonly message: string
-  readonly bucketId?: BucketId
 }
+
+type BucketCalculationIssue<Code extends string> = Code extends string
+  ? CalculationIssue<Code> & { readonly bucketId: BucketId }
+  : never
+
+export type CalculationError =
+  | CalculationIssue<"unsupported_formula">
+  | (CalculationIssue<"invalid_number"> & {
+      readonly bucketId?: BucketId
+    })
+  | BucketCalculationIssue<
+      Exclude<CalculationErrorCode, "unsupported_formula" | "invalid_number">
+    >
+
+export type CalculationWarning = BucketCalculationIssue<CalculationWarningCode>
 
 export interface BucketBreakdown {
   readonly bucketId: BucketId
@@ -112,7 +126,7 @@ export type CalculationResult =
   | {
       readonly ok: false
       readonly formulaId?: string
-      readonly error: CalculationWarning
+      readonly error: CalculationError
       readonly warnings: readonly CalculationWarning[]
       readonly buckets?: readonly BucketBreakdown[]
       readonly trace?: readonly string[]

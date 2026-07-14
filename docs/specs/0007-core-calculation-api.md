@@ -6,6 +6,10 @@ Phase 6A API contract 已由 Phase 6B first implementation slice 落入 `package
 surface、formula / bucket registry、normalization、warnings、tests 和 package build 均以本 spec 为准；
 后续新增 formula family、resolver、package data 或 public API 必须先更新相应 spec boundary。
 
+`@randomplay/core@0.2.0` 是 clean-slate reset 后的第一条 core package line。它不是已发布
+`0.1.x` API 的向后兼容 patch：`0.1.x` 只作为历史和迁移边界保留，现有消费者必须迁移到本 spec
+定义的 `CalculationInput` / `CalculationResult` surface。本阶段仍不包含 npm publish flow。
+
 ## Scope
 
 这份 spec 定义并约束 Fairy Phase 6A 的第一版 core calculation API，以及 Phase 6B
@@ -327,22 +331,38 @@ interface BucketBreakdown {
   readonly warnings?: readonly CalculationWarning[]
 }
 
-interface CalculationWarning {
-  readonly code:
-    | "missing_required_bucket"
-    | "conflicting_bucket_input"
-    | "duplicate_bucket"
-    | "invalid_number"
-    | "empty_contributions"
-    | "unsupported_contributions"
-    | "unsupported_derived_value"
-    | "unsupported_formula"
-    | "unsupported_bucket"
-    | "ignored_bucket"
-    | "defaulted_bucket"
+type CalculationErrorCode =
+  | "missing_required_bucket"
+  | "conflicting_bucket_input"
+  | "duplicate_bucket"
+  | "invalid_number"
+  | "empty_contributions"
+  | "unsupported_contributions"
+  | "unsupported_derived_value"
+  | "unsupported_formula"
+  | "unsupported_bucket"
+
+type CalculationWarningCode = "ignored_bucket" | "defaulted_bucket"
+
+interface CalculationIssue<Code extends string> {
+  readonly code: Code
   readonly message: string
-  readonly bucketId?: BucketId
 }
+
+type BucketCalculationIssue<Code extends string> = Code extends string
+  ? CalculationIssue<Code> & { readonly bucketId: BucketId }
+  : never
+
+type CalculationError =
+  | CalculationIssue<"unsupported_formula">
+  | (CalculationIssue<"invalid_number"> & {
+      readonly bucketId?: BucketId
+    })
+  | BucketCalculationIssue<
+      Exclude<CalculationErrorCode, "unsupported_formula" | "invalid_number">
+    >
+
+type CalculationWarning = BucketCalculationIssue<CalculationWarningCode>
 
 type CalculationResult =
   | {
@@ -356,7 +376,7 @@ type CalculationResult =
   | {
       readonly ok: false
       readonly formulaId?: string
-      readonly error: CalculationWarning
+      readonly error: CalculationError
       readonly warnings: readonly CalculationWarning[]
       readonly buckets?: readonly BucketBreakdown[]
       readonly trace?: readonly string[]
@@ -483,7 +503,7 @@ declare function resolveBuckets(input: CalculationInput):
     }
   | {
       readonly ok: false
-      readonly error: CalculationWarning
+      readonly error: CalculationError
       readonly breakdown: readonly BucketBreakdown[]
       readonly warnings: readonly CalculationWarning[]
     }
@@ -906,6 +926,8 @@ Unsupported contributions：
 - Phase 6B first implementation slice 新增 `packages/core` implementation、package build / test 配置、
   所需 dev dependencies，并同步 workspace lockfile；不新增 fixture database、package data、resolver、
   optimizer、custom registry、UI、CLI 或 npm publish flow。
+- `@randomplay/core` package version 是 `0.2.0`；这是与已发布 `0.1.x` public API 明确不兼容的
+  clean-slate migration boundary，不能作为 `^0.1.4` 可自动升级到的 patch 发布。
 - API 与 implementation 只覆盖 `regular_damage` 和 `sheer_damage`。
 - 文档中的 main calculation journey 使用
   `CalculationInput -> FormulaSpec / BucketSpec normalization -> CalculationResult`。
@@ -913,6 +935,9 @@ Unsupported contributions：
   不提供 calculation input builder、调用方公式规则构造 API 或 default registry 注册 / 注入 API。
 - `BucketBreakdown` 是 required output concept，并能记录 input value、contributions、defaults、derived
   values、ignored bucket 和 warnings。
+- Fatal `CalculationError` codes 与 recoverable `CalculationWarning` codes 必须是互不相交的 public
+  discriminated unions；fatal codes 只进入 `CalculationResult.error`，`ignored_bucket` /
+  `defaulted_bucket` 只进入 warnings。
 - `base_damage` 缺失时返回 `{ ok: false }`；factor buckets 缺失时默认中性值 `1`，且必须进入
   `BucketBreakdown`。
 - `sheer_damage` 明确忽略 `defense`，并通过 warning 表达。
@@ -924,6 +949,7 @@ Unsupported contributions：
 - `deriveDefenseBucket(...)` 到 `BucketBreakdown.source = 'derived'` 必须有 explicit
   `provenance` 链路。
 - Contribution reducer 只覆盖 Phase 6A 允许的最小 bucket 集；没有通用 operation system。
+- Package 不发布 `src` 时，declaration output 不能包含指向缺失源码的 declaration map。
 - 文档中没有遗留的 obsolete API identifiers；旧 source baseline 记录留在 Phase 5A reference，不在本 API spec 中复写。
 
 PR verification：

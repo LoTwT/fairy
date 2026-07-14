@@ -9,6 +9,8 @@ export type {
   BucketProvenance,
   CalculationInput,
   CalculationOptions,
+  CalculationError,
+  CalculationErrorCode,
   CalculationResult,
   CalculationWarning,
   CalculationWarningCode,
