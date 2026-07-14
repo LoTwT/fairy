@@ -207,8 +207,11 @@ type BucketProvenance =
 - contribution reducer 的归一化结果和最终公式结果也必须是 finite number。Bucket-level overflow
   返回 `{ ok: false }` + `invalid_number` 与对应 `bucketId`；formula-level overflow 或 `NaN`
   返回 `{ ok: false }` + `invalid_number`，但不伪造 `bucketId`。
+- `CalculationInput` 必须是可读取的实际 object；`options` 缺省合法，存在时必须是可读取的实际
+  object，且 `trace` 只能是 boolean 或 `undefined`。无法安全读取或物化顶层 input metadata 时返回
+  formula-level `invalid_calculation_input`。
 - `buckets` 必须是 dense array，且每项必须是可读取的实际 bucket object；collection / entry shape
-  无法建立可信 `bucketId` 时返回 formula-level `invalid_bucket_input`，不伪造 `bucketId`。
+  无法建立可信 `bucketId` 时也返回 formula-level `invalid_calculation_input`，不伪造 `bucketId`。
 - `contributions` 存在时不能为空；空数组返回 `{ ok: false }`，不能被 reducer 当作默认值或 `0`
   自行解释。
 - 如果 bucket 没有 Phase 6A contribution reducer，调用方不能提供 `contributions`；必须先在外部或 thin
@@ -399,7 +402,7 @@ type BucketBreakdown =
 type BucketBreakdownSource = BucketBreakdown["source"]
 
 type CalculationErrorCode =
-  | "invalid_bucket_input"
+  | "invalid_calculation_input"
   | "missing_required_bucket"
   | "conflicting_bucket_input"
   | "duplicate_bucket"
@@ -423,14 +426,14 @@ type BucketCalculationIssue<Code extends string> = Code extends string
 
 type CalculationError =
   | CalculationIssue<"unsupported_formula">
-  | CalculationIssue<"invalid_bucket_input">
+  | CalculationIssue<"invalid_calculation_input">
   | (CalculationIssue<"invalid_number"> & {
       readonly bucketId?: BucketId
     })
   | BucketCalculationIssue<
       Exclude<
         CalculationErrorCode,
-        "unsupported_formula" | "invalid_bucket_input" | "invalid_number"
+        "unsupported_formula" | "invalid_calculation_input" | "invalid_number"
       >
     >
 
@@ -460,30 +463,34 @@ type CalculationResult =
 
 归一化顺序固定为：
 
-1. 读取 `FormulaSpec`；不支持的 `formulaId` 返回 `{ ok: false }` + `unsupported_formula`。
-2. 对 `CalculationInput.buckets` 做 guarded deep snapshot：collection 必须是 dense array，每项必须是
+1. 对 `CalculationInput` 做 guarded top-level snapshot：input / options 必须是可读取的实际 object，
+   `formulaId`、`options`、`options.trace` 和 `buckets` reference 各只读取一次。无法安全物化时返回
+   formula-level `invalid_calculation_input`。
+2. 读取 `FormulaSpec`；已成功读取但不支持的 `formulaId` 返回 `{ ok: false }` +
+   `unsupported_formula`。
+3. 对已锁定的 `CalculationInput.buckets` reference 做 guarded deep snapshot：collection 必须是 dense array，每项必须是
    可读取的实际 bucket object；bucket / provenance / contribution fields 各只读取一次并物化为内部
-   plain data。无法建立可信 bucket identity 时返回 formula-level `invalid_bucket_input`。
-3. 检查 snapshotted buckets 中是否存在重复 `bucketId`；重复返回 `{ ok: false }` +
+   plain data。无法建立可信 bucket identity 时返回 formula-level `invalid_calculation_input`。
+4. 检查 snapshotted buckets 中是否存在重复 `bucketId`；重复返回 `{ ok: false }` +
    `duplicate_bucket`。
-4. 检查每个显式 bucket 是否属于 `FormulaSpec.buckets` 或 `FormulaSpec.ignoredBuckets`；
+5. 检查每个显式 bucket 是否属于 `FormulaSpec.buckets` 或 `FormulaSpec.ignoredBuckets`；
    不属于两者返回 `{ ok: false }` + `unsupported_bucket`。
-5. 对所有显式 bucket 做 input-shape / support validation：同一 bucket 同时包含 `value` 和
+6. 对所有显式 bucket 做 input-shape / support validation：同一 bucket 同时包含 `value` 和
    `contributions` 时返回 `{ ok: false }` + `conflicting_bucket_input`；不支持的 derived direct
    value 返回 `{ ok: false }` + `unsupported_derived_value`。
-6. 对所有显式 numeric inputs 做 finite-number validation；`contributions` 在首次读取时锁定内部
+7. 对所有显式 numeric inputs 做 finite-number validation；`contributions` 在首次读取时锁定内部
    snapshot，validation / normalize 全程只消费该 snapshot。它还必须是 dense array，且每项都是包含
    finite `value` 的实际 object。失败返回 `{ ok: false }` + `invalid_number`。
-7. 对显式 `contributions` 做 non-empty validation；空数组返回 `{ ok: false }` +
+8. 对显式 `contributions` 做 non-empty validation；空数组返回 `{ ok: false }` +
    `empty_contributions`。
-8. 对显式 `contributions` 检查 bucket 是否有 Phase 6A reducer；没有 reducer 返回 `{ ok: false }` +
+9. 对显式 `contributions` 检查 bucket 是否有 Phase 6A reducer；没有 reducer 返回 `{ ok: false }` +
    `unsupported_contributions`。
-9. 用 `BucketSpec` 将每个 accepted bucket 归一化成 `ResolvedBucket.value`，并复检 reducer 输出为
-   finite number。
-10. 将 ignored buckets 写入 `BucketBreakdown` 和 warnings，但不写入 `ResolvedBucket[]`。
-11. `FormulaSpec.requiredBuckets` 是 requiredness 的唯一权威；缺失 required bucket 返回
+10. 用 `BucketSpec` 将每个 accepted bucket 归一化成 `ResolvedBucket.value`，并复检 reducer 输出为
+    finite number。
+11. 将 ignored buckets 写入 `BucketBreakdown` 和 warnings，但不写入 `ResolvedBucket[]`。
+12. `FormulaSpec.requiredBuckets` 是 requiredness 的唯一权威；缺失 required bucket 返回
     `{ ok: false }`，缺失 optional factor bucket 应用 `BucketSpec.defaultValue`。
-12. `FormulaSpec` 最终只用 `ResolvedBucket.value` 按 `FormulaSpec.buckets` 顺序计算，并复检最终结果为
+13. `FormulaSpec` 最终只用 `ResolvedBucket.value` 按 `FormulaSpec.buckets` 顺序计算，并复检最终结果为
     finite number。
 
 这些步骤是整个 bucket 集合的全局阶段，不是对单个 bucket 逐一跑完全部步骤。输入 bucket 的排列不能改变

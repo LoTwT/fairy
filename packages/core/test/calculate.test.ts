@@ -461,6 +461,133 @@ describe("calculate", () => {
     expect(coercions).toBe(0)
   })
 
+  it("rejects unreadable top-level calculation metadata without throwing", () => {
+    const unreadableFormulaId = { buckets: [] }
+    Object.defineProperty(unreadableFormulaId, "formulaId", {
+      get(): never {
+        throw new Error("formulaId getter must not escape")
+      },
+    })
+
+    const unreadableOptions = {
+      formulaId: "regular_damage",
+      buckets: [],
+    }
+    Object.defineProperty(unreadableOptions, "options", {
+      get(): never {
+        throw new Error("options getter must not escape")
+      },
+    })
+
+    const unreadableTrace = {
+      formulaId: "regular_damage",
+      buckets: [],
+      options: {},
+    }
+    Object.defineProperty(unreadableTrace.options, "trace", {
+      get(): never {
+        throw new Error("trace getter must not escape")
+      },
+    })
+
+    const results = [
+      calculate(unreadableFormulaId as unknown as CalculationInput),
+      calculate(unreadableOptions as CalculationInput),
+      calculate(unreadableTrace as CalculationInput),
+    ]
+
+    for (const result of results) {
+      expect(result).toMatchObject({
+        ok: false,
+        error: { code: "invalid_calculation_input" },
+        warnings: [],
+      })
+      expect(result.ok || result.error).not.toHaveProperty("bucketId")
+    }
+    expect(results[0]?.ok || results[0]?.formulaId).toBeUndefined()
+    expect(results[1]).toMatchObject({ formulaId: "regular_damage" })
+    expect(results[2]).toMatchObject({ formulaId: "regular_damage" })
+  })
+
+  it("rejects malformed calculation options", () => {
+    for (const options of [null, [], "trace", { trace: "yes" }]) {
+      const result = calculate({
+        formulaId: "regular_damage",
+        buckets: [],
+        options,
+      } as unknown as CalculationInput)
+
+      expect(result).toMatchObject({
+        ok: false,
+        formulaId: "regular_damage",
+        error: { code: "invalid_calculation_input" },
+        warnings: [],
+      })
+      expect(result.ok || result.error).not.toHaveProperty("bucketId")
+    }
+  })
+
+  it("accepts optional boolean trace options", () => {
+    for (const options of [
+      {},
+      { trace: undefined },
+      { trace: false },
+      { trace: true },
+    ]) {
+      const result = calculate({
+        formulaId: "regular_damage",
+        buckets: [{ bucketId: "base_damage", value: 100 }],
+        options,
+      })
+
+      expect(result).toMatchObject({
+        ok: true,
+        formulaId: "regular_damage",
+        value: 100,
+      })
+      expect(result.trace === undefined).toBe(options.trace !== true)
+    }
+  })
+
+  it("snapshots top-level calculation metadata exactly once", () => {
+    const reads = { formulaId: 0, options: 0, trace: 0 }
+    const options = {}
+    Object.defineProperty(options, "trace", {
+      get(): true {
+        reads.trace += 1
+        if (reads.trace > 1) throw new Error("trace read more than once")
+        return true
+      },
+    })
+    const input = { buckets: [{ bucketId: "base_damage", value: 100 }] }
+    Object.defineProperties(input, {
+      formulaId: {
+        get(): "regular_damage" {
+          reads.formulaId += 1
+          if (reads.formulaId > 1) {
+            throw new Error("formulaId read more than once")
+          }
+          return "regular_damage"
+        },
+      },
+      options: {
+        get(): object {
+          reads.options += 1
+          if (reads.options > 1) throw new Error("options read more than once")
+          return options
+        },
+      },
+    })
+
+    expect(calculate(input as unknown as CalculationInput)).toMatchObject({
+      ok: true,
+      formulaId: "regular_damage",
+      value: 100,
+      trace: expect.any(Array),
+    })
+    expect(reads).toEqual({ formulaId: 1, options: 1, trace: 1 })
+  })
+
   it("returns duplicate_bucket before unsupported bucket validation", () => {
     const result = calculate({
       formulaId: "regular_damage",
@@ -679,14 +806,14 @@ describe("calculate", () => {
       expect(result).toMatchObject({
         ok: false,
         formulaId: "regular_damage",
-        error: { code: "invalid_bucket_input" },
+        error: { code: "invalid_calculation_input" },
         warnings: [],
       })
       expect(result.ok || result.error).not.toHaveProperty("bucketId")
     }
   })
 
-  it("returns invalid_bucket_input when the buckets property cannot be read", () => {
+  it("returns invalid_calculation_input when the buckets property cannot be read", () => {
     const input = { formulaId: "regular_damage" } as CalculationInput
     Object.defineProperty(input, "buckets", {
       get(): never {
@@ -697,7 +824,7 @@ describe("calculate", () => {
     expect(calculate(input)).toMatchObject({
       ok: false,
       formulaId: "regular_damage",
-      error: { code: "invalid_bucket_input" },
+      error: { code: "invalid_calculation_input" },
       warnings: [],
     })
   })

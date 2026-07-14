@@ -6,7 +6,7 @@ import {
   duplicateBucket,
   emptyContributions,
   ignoredBucket,
-  invalidBucketInput,
+  invalidCalculationInput,
   invalidNumber,
   missingRequiredBucket,
   unsupportedBucket,
@@ -62,6 +62,16 @@ interface BucketSnapshot {
   readonly provenance: Bucket["provenance"]
 }
 
+interface CalculationInputSnapshot {
+  readonly formulaId: unknown
+  readonly buckets: unknown
+  readonly traceEnabled: boolean
+}
+
+type SnapshotCalculationInputResult =
+  | { readonly ok: true; readonly input: CalculationInputSnapshot }
+  | { readonly ok: false; readonly formulaId?: string }
+
 type SnapshotBucketsResult =
   | { readonly ok: true; readonly buckets: readonly BucketSnapshot[] }
   | { readonly ok: false }
@@ -73,10 +83,21 @@ type SnapshotProvenanceResult =
 const INVALID_CONTRIBUTIONS = Symbol("invalid contributions")
 
 export function resolveBuckets(input: CalculationInput): ResolveBucketsResult {
-  const inputFormulaId: unknown = input.formulaId
+  const inputSnapshotResult = snapshotCalculationInput(input)
+  if (!inputSnapshotResult.ok) {
+    return fail(
+      invalidCalculationInput(),
+      [],
+      [],
+      inputSnapshotResult.formulaId,
+    )
+  }
+
+  const inputFormulaId = inputSnapshotResult.input.formulaId
   const formulaSpec = getFormulaSpecById(inputFormulaId)
-  const trace: string[] | undefined =
-    input.options?.trace === true ? [] : undefined
+  const trace: string[] | undefined = inputSnapshotResult.input.traceEnabled
+    ? []
+    : undefined
 
   if (formulaSpec === undefined) {
     const rejectedFormulaId =
@@ -90,9 +111,9 @@ export function resolveBuckets(input: CalculationInput): ResolveBucketsResult {
     )
   }
 
-  const snapshotResult = snapshotBuckets(input)
+  const snapshotResult = snapshotBuckets(inputSnapshotResult.input.buckets)
   if (!snapshotResult.ok) {
-    return fail(invalidBucketInput(), [], [], formulaSpec.formulaId, trace)
+    return fail(invalidCalculationInput(), [], [], formulaSpec.formulaId, trace)
   }
 
   const buckets = sortBucketsForValidation(formulaSpec, snapshotResult.buckets)
@@ -312,9 +333,61 @@ function normalizeExplicitBucket(
   }
 }
 
-function snapshotBuckets(input: CalculationInput): SnapshotBucketsResult {
+function snapshotCalculationInput(
+  input: unknown,
+): SnapshotCalculationInputResult {
+  let formulaId: unknown
+
   try {
-    const buckets: unknown = input.buckets
+    if (typeof input !== "object" || input === null || Array.isArray(input)) {
+      return { ok: false }
+    }
+
+    const inputRecord = input as Record<PropertyKey, unknown>
+    formulaId = inputRecord.formulaId
+    const options = inputRecord.options
+    let traceEnabled = false
+
+    if (options !== undefined) {
+      if (
+        typeof options !== "object" ||
+        options === null ||
+        Array.isArray(options)
+      ) {
+        return invalidCalculationInputSnapshot(formulaId)
+      }
+
+      const trace = (options as Record<PropertyKey, unknown>).trace
+      if (trace !== undefined && typeof trace !== "boolean") {
+        return invalidCalculationInputSnapshot(formulaId)
+      }
+      traceEnabled = trace === true
+    }
+
+    return {
+      ok: true,
+      input: {
+        formulaId,
+        buckets: inputRecord.buckets,
+        traceEnabled,
+      },
+    }
+  } catch {
+    return invalidCalculationInputSnapshot(formulaId)
+  }
+}
+
+function invalidCalculationInputSnapshot(
+  formulaId: unknown,
+): SnapshotCalculationInputResult {
+  return {
+    ok: false,
+    formulaId: typeof formulaId === "string" ? formulaId : undefined,
+  }
+}
+
+function snapshotBuckets(buckets: unknown): SnapshotBucketsResult {
+  try {
     if (!Array.isArray(buckets)) {
       return { ok: false }
     }

@@ -70,7 +70,7 @@ export interface ResolvedBucket {
 }
 
 export type CalculationErrorCode =
-  | "invalid_bucket_input"
+  | "invalid_calculation_input"
   | "missing_required_bucket"
   | "conflicting_bucket_input"
   | "duplicate_bucket"
@@ -94,14 +94,14 @@ type BucketCalculationIssue<Code extends string> = Code extends string
 
 export type CalculationError =
   | CalculationIssue<"unsupported_formula">
-  | CalculationIssue<"invalid_bucket_input">
+  | CalculationIssue<"invalid_calculation_input">
   | (CalculationIssue<"invalid_number"> & {
       readonly bucketId?: BucketId
     })
   | BucketCalculationIssue<
       Exclude<
         CalculationErrorCode,
-        "unsupported_formula" | "invalid_bucket_input" | "invalid_number"
+        "unsupported_formula" | "invalid_calculation_input" | "invalid_number"
       >
     >
 
