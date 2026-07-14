@@ -1,8 +1,118 @@
 import { describe, expect, it } from "vitest"
+import {
+  getFormulaSpecById,
+  isFormulaId,
+  listRegisteredFormulaIds,
+  validateFormulaRegistry,
+  validateFormulaSpec,
+} from "../src/formula-specs"
 import { calculate, getFormulaSpec, listBuckets } from "../src/index"
 import type { BucketId, FormulaSpec } from "../src/index"
 
 describe("formula specs", () => {
+  it("derives supported formula ids from registry own properties", () => {
+    const formulaIds = listRegisteredFormulaIds()
+    expect(formulaIds).toEqual(["regular_damage", "sheer_damage"])
+    for (const formulaId of formulaIds) {
+      expect(isFormulaId(formulaId)).toBe(true)
+      expect(getFormulaSpecById(formulaId)?.formulaId).toBe(formulaId)
+    }
+
+    expect(isFormulaId("constructor")).toBe(false)
+    expect(isFormulaId("toString")).toBe(false)
+    expect(getFormulaSpecById("__proto__")).toBeUndefined()
+  })
+
+  it("rejects inconsistent required and optional bucket partitions", () => {
+    expect(() =>
+      validateFormulaSpec({
+        formulaId: "regular_damage",
+        buckets: ["base_damage"],
+        requiredBuckets: [],
+        optionalBuckets: ["base_damage"],
+      }),
+    ).toThrow("optional bucket base_damage must define a default value")
+
+    expect(() =>
+      validateFormulaSpec({
+        formulaId: "regular_damage",
+        buckets: ["base_damage"],
+        requiredBuckets: [],
+        optionalBuckets: [],
+      }),
+    ).toThrow(
+      "base_damage must appear in exactly one of requiredBuckets or optionalBuckets",
+    )
+
+    expect(() =>
+      validateFormulaSpec({
+        formulaId: "regular_damage",
+        buckets: ["base_damage"],
+        requiredBuckets: ["base_damage"],
+        optionalBuckets: ["base_damage"],
+      }),
+    ).toThrow(
+      "base_damage must appear in exactly one of requiredBuckets or optionalBuckets",
+    )
+
+    expect(() =>
+      validateFormulaSpec({
+        formulaId: "regular_damage",
+        buckets: ["base_damage", "crit"],
+        requiredBuckets: ["base_damage"],
+        optionalBuckets: ["crit", "crit"],
+      }),
+    ).toThrow("optionalBuckets contains duplicates")
+
+    expect(() =>
+      validateFormulaSpec({
+        formulaId: "regular_damage",
+        buckets: ["base_damage"],
+        requiredBuckets: ["base_damage"],
+        optionalBuckets: ["crit"],
+      }),
+    ).toThrow("crit is classified but absent from buckets")
+  })
+
+  it("rejects formula registry key and entry identity drift", () => {
+    expect(() =>
+      validateFormulaRegistry({
+        regular_damage: {
+          ...getFormulaSpec("regular_damage"),
+          formulaId: "sheer_damage",
+        },
+        sheer_damage: getFormulaSpec("sheer_damage"),
+      }),
+    ).toThrow(
+      "formula registry key regular_damage does not match entry identity sheer_damage",
+    )
+  })
+
+  it("uses each formula partition as the requiredness authority", () => {
+    for (const formulaId of listRegisteredFormulaIds()) {
+      const missingRequired = calculate({ formulaId, buckets: [] })
+      expect(missingRequired).toMatchObject({
+        ok: false,
+        error: {
+          code: "missing_required_bucket",
+          bucketId: "base_damage",
+        },
+      })
+
+      const defaultedOptional = calculate({
+        formulaId,
+        buckets: [{ bucketId: "base_damage", value: 100 }],
+      })
+      expect(defaultedOptional.ok).toBe(true)
+      expect(
+        defaultedOptional.ok &&
+          defaultedOptional.buckets.filter(
+            (bucket) => bucket.source === "default",
+          ),
+      ).not.toHaveLength(0)
+    }
+  })
+
   it("lists regular_damage buckets in calculation order", () => {
     expect(listBuckets("regular_damage")).toEqual([
       "base_damage",

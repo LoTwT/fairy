@@ -16,7 +16,6 @@ import {
 import type {
   Bucket,
   BucketBreakdown,
-  BucketBreakdownSource,
   BucketContribution,
   BucketId,
   CalculationError,
@@ -135,7 +134,7 @@ export function resolveBuckets(input: CalculationInput): ResolveBucketsResult {
     }
 
     const bucketSpec = getBucketSpec(bucketId)
-    if (bucketSpec.required === true || bucketSpec.defaultValue === undefined) {
+    if (bucketSpec.defaultValue === undefined) {
       return fail(
         missingRequiredBucket(bucketId),
         breakdown,
@@ -197,20 +196,13 @@ function normalizeExplicitBucket(
 
   if (hasValue) {
     const value = bucket.value as number
-    const source = getDirectValueSource(bucket)
     const ignoredWarning = ignored
       ? ignoredBucket(bucket.bucketId, formulaId)
       : undefined
 
     return {
       resolved: ignored ? undefined : { bucketId: bucket.bucketId, value },
-      breakdown: {
-        bucketId: bucket.bucketId,
-        value,
-        source: ignored ? "ignored" : source,
-        provenance: copyProvenance(bucket.provenance),
-        warnings: ignoredWarning === undefined ? undefined : [ignoredWarning],
-      },
+      breakdown: createDirectBreakdown(bucket, value, ignoredWarning),
       warnings: ignoredWarning === undefined ? [] : [ignoredWarning],
     }
   }
@@ -226,16 +218,29 @@ function normalizeExplicitBucket(
       ? ignoredBucket(bucket.bucketId, formulaId)
       : undefined
 
+    const copiedContributions = copyContributions(contributions)
+    const copiedProvenance = copyProvenance(bucket.provenance)
+    const breakdown: BucketBreakdown =
+      ignoredWarning !== undefined
+        ? {
+            bucketId: bucket.bucketId,
+            value,
+            source: "ignored",
+            contributions: copiedContributions,
+            provenance: copiedProvenance,
+            warnings: [ignoredWarning],
+          }
+        : {
+            bucketId: bucket.bucketId,
+            value,
+            source: "contributions",
+            contributions: copiedContributions,
+            provenance: copiedProvenance,
+          }
+
     return {
       resolved: ignored ? undefined : { bucketId: bucket.bucketId, value },
-      breakdown: {
-        bucketId: bucket.bucketId,
-        value,
-        source: ignored ? "ignored" : "contributions",
-        contributions: copyContributions(contributions),
-        provenance: copyProvenance(bucket.provenance),
-        warnings: ignoredWarning === undefined ? undefined : [ignoredWarning],
-      },
+      breakdown,
       warnings: ignoredWarning === undefined ? [] : [ignoredWarning],
     }
   }
@@ -246,23 +251,33 @@ function normalizeExplicitBucket(
   const ignoredWarning = ignored
     ? ignoredBucket(bucket.bucketId, formulaId)
     : undefined
-  const bucketWarnings =
+  const bucketWarnings: CalculationWarning[] =
     ignoredWarning === undefined
       ? [defaultWarning]
       : [defaultWarning, ignoredWarning]
+
+  const breakdown: BucketBreakdown =
+    ignoredWarning !== undefined
+      ? {
+          bucketId: bucket.bucketId,
+          value: defaultValue,
+          source: "ignored",
+          defaulted: true,
+          warnings: [defaultWarning, ignoredWarning],
+        }
+      : {
+          bucketId: bucket.bucketId,
+          value: defaultValue,
+          source: "default",
+          defaulted: true,
+          warnings: [defaultWarning],
+        }
 
   return {
     resolved: ignored
       ? undefined
       : { bucketId: bucket.bucketId, value: defaultValue },
-    breakdown: {
-      bucketId: bucket.bucketId,
-      value: defaultValue,
-      source: ignored ? "ignored" : "default",
-      defaulted: true,
-      provenance: copyProvenance(bucket.provenance),
-      warnings: bucketWarnings,
-    },
+    breakdown,
     warnings: bucketWarnings,
   }
 }
@@ -454,14 +469,39 @@ function copyProvenance(
   }
 }
 
-function getDirectValueSource(
+function createDirectBreakdown(
   bucket: Bucket,
-): Exclude<BucketBreakdownSource, "ignored"> {
-  if (bucket.provenance?.kind === "derived") {
-    return "derived"
+  value: number,
+  ignoredWarning:
+    | Extract<CalculationWarning, { readonly code: "ignored_bucket" }>
+    | undefined,
+): BucketBreakdown {
+  const provenance = copyProvenance(bucket.provenance)
+  if (ignoredWarning !== undefined) {
+    return {
+      bucketId: bucket.bucketId,
+      value,
+      source: "ignored",
+      provenance,
+      warnings: [ignoredWarning],
+    }
   }
 
-  return "input_value"
+  if (provenance?.kind === "derived") {
+    return {
+      bucketId: bucket.bucketId,
+      value,
+      source: "derived",
+      provenance,
+    }
+  }
+
+  return {
+    bucketId: bucket.bucketId,
+    value,
+    source: "input_value",
+    provenance,
+  }
 }
 
 function isFiniteNumber(value: unknown): value is number {

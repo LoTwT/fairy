@@ -180,11 +180,17 @@ interface BucketContribution {
   readonly note?: string
 }
 
-interface BucketProvenance {
-  readonly kind: "manual" | "derived"
-  readonly source?: string
-  readonly note?: string
-}
+type BucketProvenance =
+  | {
+      readonly kind: "manual"
+      readonly source?: string
+      readonly note?: string
+    }
+  | {
+      readonly kind: "derived"
+      readonly source?: string
+      readonly note?: string
+    }
 ```
 
 `Bucket` 是纯输入数据。它不提供 reducer、validation、default、breakdown 或 calculation method；
@@ -275,7 +281,6 @@ interface BucketSpec {
   readonly acceptsDerivedValue?: boolean
   readonly contributionReducer?: BucketContributionReducer
   readonly defaultValue?: number
-  readonly required?: boolean
 }
 ```
 
@@ -314,22 +319,76 @@ interface ResolvedBucket {
   readonly value: number
 }
 
-type BucketBreakdownSource =
-  | "input_value"
-  | "contributions"
-  | "default"
-  | "derived"
-  | "ignored"
-
-interface BucketBreakdown {
+interface BucketBreakdownBase {
   readonly bucketId: BucketId
   readonly value: number
-  readonly source: BucketBreakdownSource
-  readonly defaulted?: boolean
-  readonly contributions?: readonly BucketContribution[]
-  readonly provenance?: BucketProvenance
-  readonly warnings?: readonly CalculationWarning[]
 }
+
+type DefaultedBucketWarning = Extract<
+  CalculationWarning,
+  { readonly code: "defaulted_bucket" }
+>
+
+type IgnoredBucketWarning = Extract<
+  CalculationWarning,
+  { readonly code: "ignored_bucket" }
+>
+
+type IgnoredBucketBreakdown =
+  | (BucketBreakdownBase & {
+      readonly source: "ignored"
+      readonly defaulted: true
+      readonly contributions?: never
+      readonly provenance?: never
+      readonly warnings: readonly [DefaultedBucketWarning, IgnoredBucketWarning]
+    })
+  | (BucketBreakdownBase & {
+      readonly source: "ignored"
+      readonly defaulted?: never
+      readonly contributions: readonly BucketContribution[]
+      readonly provenance?: BucketProvenance
+      readonly warnings: readonly [IgnoredBucketWarning]
+    })
+  | (BucketBreakdownBase & {
+      readonly source: "ignored"
+      readonly defaulted?: never
+      readonly contributions?: never
+      readonly provenance?: BucketProvenance
+      readonly warnings: readonly [IgnoredBucketWarning]
+    })
+
+type BucketBreakdown =
+  | (BucketBreakdownBase & {
+      readonly source: "input_value"
+      readonly defaulted?: never
+      readonly contributions?: never
+      readonly provenance?: BucketProvenance & { readonly kind: "manual" }
+      readonly warnings?: never
+    })
+  | (BucketBreakdownBase & {
+      readonly source: "contributions"
+      readonly defaulted?: never
+      readonly contributions: readonly BucketContribution[]
+      readonly provenance?: BucketProvenance
+      readonly warnings?: never
+    })
+  | (BucketBreakdownBase & {
+      readonly source: "default"
+      readonly defaulted: true
+      readonly contributions?: never
+      readonly provenance?: never
+      readonly warnings: readonly [DefaultedBucketWarning]
+    })
+  | (BucketBreakdownBase & {
+      readonly source: "derived"
+      readonly defaulted?: never
+      readonly contributions?: never
+      readonly provenance: BucketProvenance & { readonly kind: "derived" }
+      readonly warnings?: never
+    })
+  | IgnoredBucketBreakdown
+
+type BucketBreakdownSource = BucketBreakdown["source"]
 
 type CalculationErrorCode =
   | "missing_required_bucket"
@@ -405,7 +464,8 @@ type CalculationResult =
 8. 用 `BucketSpec` 将每个 accepted bucket 归一化成 `ResolvedBucket.value`，并复检 reducer 输出为
    finite number。
 9. 将 ignored buckets 写入 `BucketBreakdown` 和 warnings，但不写入 `ResolvedBucket[]`。
-10. 对缺失但属于公式的 factor buckets 应用默认值；缺失 `base_damage` 返回 `{ ok: false }`。
+10. `FormulaSpec.requiredBuckets` 是 requiredness 的唯一权威；缺失 required bucket 返回
+    `{ ok: false }`，缺失 optional factor bucket 应用 `BucketSpec.defaultValue`。
 11. `FormulaSpec` 最终只用 `ResolvedBucket.value` 按 `FormulaSpec.buckets` 顺序计算，并复检最终结果为
     finite number。
 
@@ -475,6 +535,11 @@ const sheerDamageSpec = {
   ignoredBuckets: ["defense"],
 } satisfies FormulaSpec
 ```
+
+registry 初始化必须验证 `requiredBuckets` / `optionalBuckets` 对 `buckets` 形成无重复、无重叠、无遗漏的
+完整 partition，且每个 optional bucket 都有 `BucketSpec.defaultValue`。`BucketSpec` 不重复声明 requiredness。
+支持的 `FormulaId` lookup 必须直接使用 formula registry 的 own properties，不维护第二份手写 key list；
+registry 初始化还必须验证每个 key 与 entry 内的 `formulaId` 一致。
 
 ### Public API
 
@@ -935,11 +1000,16 @@ Unsupported contributions：
   不提供 calculation input builder、调用方公式规则构造 API 或 default registry 注册 / 注入 API。
 - `BucketBreakdown` 是 required output concept，并能记录 input value、contributions、defaults、derived
   values、ignored bucket 和 warnings。
+- `BucketBreakdown` 必须按 `source` 建模为 public discriminated union：`default` 必须带
+  `defaulted: true`，`contributions` 必须带 contribution 明细，`derived` 必须带 derived provenance。
 - Fatal `CalculationError` codes 与 recoverable `CalculationWarning` codes 必须是互不相交的 public
   discriminated unions；fatal codes 只进入 `CalculationResult.error`，`ignored_bucket` /
   `defaulted_bucket` 只进入 warnings。
 - `base_damage` 缺失时返回 `{ ok: false }`；factor buckets 缺失时默认中性值 `1`，且必须进入
   `BucketBreakdown`。
+- `FormulaSpec.requiredBuckets` / `optionalBuckets` 是 requiredness 的唯一权威，并在 registry 初始化时
+  验证完整 partition 与 optional defaults；formula-id support 从 registry own properties 派生，并验证
+  registry key 与 entry identity 一致。
 - `sheer_damage` 明确忽略 `defense`，并通过 warning 表达。
 - 同一 formula 中重复 bucket 返回 `{ ok: false }`；不属于 formula 且不在 ignored list 的 bucket
   返回 `{ ok: false }`；ignored bucket 只能通过 warning 和 breakdown 表达。

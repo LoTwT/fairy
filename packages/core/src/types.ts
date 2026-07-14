@@ -23,11 +23,17 @@ export interface BucketContribution {
   readonly note?: string
 }
 
-export interface BucketProvenance {
-  readonly kind: "manual" | "derived"
-  readonly source?: string
-  readonly note?: string
-}
+export type BucketProvenance =
+  | {
+      readonly kind: "manual"
+      readonly source?: string
+      readonly note?: string
+    }
+  | {
+      readonly kind: "derived"
+      readonly source?: string
+      readonly note?: string
+    }
 
 export interface Bucket {
   readonly bucketId: BucketId
@@ -56,20 +62,12 @@ export interface BucketSpec {
   readonly acceptsDerivedValue?: boolean
   readonly contributionReducer?: BucketContributionReducer
   readonly defaultValue?: number
-  readonly required?: boolean
 }
 
 export interface ResolvedBucket {
   readonly bucketId: BucketId
   readonly value: number
 }
-
-export type BucketBreakdownSource =
-  | "input_value"
-  | "contributions"
-  | "default"
-  | "derived"
-  | "ignored"
 
 export type CalculationErrorCode =
   | "missing_required_bucket"
@@ -104,15 +102,76 @@ export type CalculationError =
 
 export type CalculationWarning = BucketCalculationIssue<CalculationWarningCode>
 
-export interface BucketBreakdown {
+interface BucketBreakdownBase {
   readonly bucketId: BucketId
   readonly value: number
-  readonly source: BucketBreakdownSource
-  readonly defaulted?: boolean
-  readonly contributions?: readonly BucketContribution[]
-  readonly provenance?: BucketProvenance
-  readonly warnings?: readonly CalculationWarning[]
 }
+
+type DefaultedBucketWarning = Extract<
+  CalculationWarning,
+  { readonly code: "defaulted_bucket" }
+>
+
+type IgnoredBucketWarning = Extract<
+  CalculationWarning,
+  { readonly code: "ignored_bucket" }
+>
+
+type IgnoredBucketBreakdown =
+  | (BucketBreakdownBase & {
+      readonly source: "ignored"
+      readonly defaulted: true
+      readonly contributions?: never
+      readonly provenance?: never
+      readonly warnings: readonly [DefaultedBucketWarning, IgnoredBucketWarning]
+    })
+  | (BucketBreakdownBase & {
+      readonly source: "ignored"
+      readonly defaulted?: never
+      readonly contributions: readonly BucketContribution[]
+      readonly provenance?: BucketProvenance
+      readonly warnings: readonly [IgnoredBucketWarning]
+    })
+  | (BucketBreakdownBase & {
+      readonly source: "ignored"
+      readonly defaulted?: never
+      readonly contributions?: never
+      readonly provenance?: BucketProvenance
+      readonly warnings: readonly [IgnoredBucketWarning]
+    })
+
+export type BucketBreakdown =
+  | (BucketBreakdownBase & {
+      readonly source: "input_value"
+      readonly defaulted?: never
+      readonly contributions?: never
+      readonly provenance?: BucketProvenance & { readonly kind: "manual" }
+      readonly warnings?: never
+    })
+  | (BucketBreakdownBase & {
+      readonly source: "contributions"
+      readonly defaulted?: never
+      readonly contributions: readonly BucketContribution[]
+      readonly provenance?: BucketProvenance
+      readonly warnings?: never
+    })
+  | (BucketBreakdownBase & {
+      readonly source: "default"
+      readonly defaulted: true
+      readonly contributions?: never
+      readonly provenance?: never
+      readonly warnings: readonly [DefaultedBucketWarning]
+    })
+  | (BucketBreakdownBase & {
+      readonly source: "derived"
+      readonly defaulted?: never
+      readonly contributions?: never
+      readonly provenance: BucketProvenance & { readonly kind: "derived" }
+      readonly warnings?: never
+    })
+  | IgnoredBucketBreakdown
+
+export type BucketBreakdownSource = BucketBreakdown["source"]
 
 export type CalculationResult =
   | {

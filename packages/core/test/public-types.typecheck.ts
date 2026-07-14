@@ -1,4 +1,5 @@
 import type {
+  BucketBreakdown,
   CalculationError,
   CalculationErrorCode,
   CalculationWarning,
@@ -48,10 +49,145 @@ const impossibleError: CalculationError = {
   bucketId: "crit",
 }
 
+const validDefaultBreakdown: BucketBreakdown = {
+  bucketId: "crit",
+  value: 1,
+  source: "default",
+  defaulted: true,
+  warnings: [
+    {
+      code: "defaulted_bucket",
+      bucketId: "crit",
+      message: "crit defaulted to neutral value 1.",
+    },
+  ],
+}
+
+const validContributionsBreakdown: BucketBreakdown = {
+  bucketId: "damage_bonus",
+  value: 1.5,
+  source: "contributions",
+  contributions: [{ value: 0.5 }],
+}
+
+const validDerivedBreakdown: BucketBreakdown = {
+  bucketId: "defense",
+  value: 0.5,
+  source: "derived",
+  provenance: { kind: "derived", source: "enemy_stats" },
+}
+
+const validIgnoredBreakdowns = [
+  {
+    bucketId: "defense",
+    value: 0.5,
+    source: "ignored",
+    provenance: { kind: "derived", source: "enemy_stats" },
+    warnings: [
+      {
+        code: "ignored_bucket",
+        bucketId: "defense",
+        message: "defense is ignored.",
+      },
+    ],
+  },
+  {
+    bucketId: "defense",
+    value: 0.5,
+    source: "ignored",
+    contributions: [{ value: 0.5 }],
+    warnings: [
+      {
+        code: "ignored_bucket",
+        bucketId: "defense",
+        message: "defense is ignored.",
+      },
+    ],
+  },
+  {
+    bucketId: "defense",
+    value: 1,
+    source: "ignored",
+    defaulted: true,
+    warnings: [
+      {
+        code: "defaulted_bucket",
+        bucketId: "defense",
+        message: "defense defaulted to neutral value 1.",
+      },
+      {
+        code: "ignored_bucket",
+        bucketId: "defense",
+        message: "defense is ignored.",
+      },
+    ],
+  },
+] as const satisfies readonly BucketBreakdown[]
+
+// @ts-expect-error default breakdowns require defaulted: true
+const impossibleDefaultBreakdown: BucketBreakdown = {
+  bucketId: "crit",
+  value: 1,
+  source: "default",
+}
+
+// @ts-expect-error contribution breakdowns require contributions
+const impossibleContributionsBreakdown: BucketBreakdown = {
+  bucketId: "damage_bonus",
+  value: 1.5,
+  source: "contributions",
+}
+
+// @ts-expect-error derived breakdowns require derived provenance
+const impossibleDerivedBreakdown: BucketBreakdown = {
+  bucketId: "defense",
+  value: 0.5,
+  source: "derived",
+  provenance: { kind: "manual" },
+}
+
+// @ts-expect-error input-value breakdowns cannot carry derived provenance
+const impossibleInputValueBreakdown: BucketBreakdown = {
+  bucketId: "defense",
+  value: 0.5,
+  source: "input_value",
+  provenance: { kind: "derived" },
+}
+
+// @ts-expect-error ignored defaults and contributions are mutually exclusive
+const impossibleIgnoredBreakdown: BucketBreakdown = {
+  bucketId: "defense",
+  value: 1,
+  source: "ignored",
+  defaulted: true,
+  contributions: [{ value: 1 }],
+  warnings: [
+    {
+      code: "defaulted_bucket",
+      bucketId: "defense",
+      message: "defense defaulted.",
+    },
+    {
+      code: "ignored_bucket",
+      bucketId: "defense",
+      message: "defense ignored.",
+    },
+  ],
+}
+
 void [
   missingErrorCodes,
   missingWarningCodes,
   overlappingCodes,
   impossibleWarning,
   impossibleError,
+  validDefaultBreakdown,
+  validContributionsBreakdown,
+  validDerivedBreakdown,
+  validIgnoredBreakdowns,
+  impossibleDefaultBreakdown,
+  impossibleContributionsBreakdown,
+  impossibleDerivedBreakdown,
+  impossibleInputValueBreakdown,
+  impossibleIgnoredBreakdown,
 ]

@@ -1,5 +1,15 @@
 import type { BucketId, CalculationError, CalculationWarning } from "./types"
 
+type DefaultedBucketWarning = Extract<
+  CalculationWarning,
+  { readonly code: "defaulted_bucket" }
+>
+
+type IgnoredBucketWarning = Extract<
+  CalculationWarning,
+  { readonly code: "ignored_bucket" }
+>
+
 function issue<Code extends string>(
   code: Code,
   message: string,
@@ -30,7 +40,7 @@ export function missingRequiredBucket(bucketId: BucketId): CalculationError {
 export function defaultedBucket(
   bucketId: BucketId,
   value: number,
-): CalculationWarning {
+): DefaultedBucketWarning {
   return bucketIssue(
     "defaulted_bucket",
     `${bucketId} defaulted to neutral value ${value}.`,
@@ -104,7 +114,7 @@ export function unsupportedBucket(
 export function ignoredBucket(
   bucketId: BucketId,
   formulaId: string,
-): CalculationWarning {
+): IgnoredBucketWarning {
   return bucketIssue(
     "ignored_bucket",
     `${bucketId} is ignored by ${formulaId}.`,

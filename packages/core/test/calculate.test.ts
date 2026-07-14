@@ -121,6 +121,47 @@ describe("calculate", () => {
     })
   })
 
+  it("preserves ignored default and derived breakdown shapes", () => {
+    const defaulted = calculate({
+      formulaId: "sheer_damage",
+      buckets: [
+        { bucketId: "base_damage", value: 100 },
+        { bucketId: "defense" },
+      ],
+    })
+
+    expect(defaulted.ok && defaulted.buckets.at(-1)).toMatchObject({
+      bucketId: "defense",
+      value: 1,
+      source: "ignored",
+      defaulted: true,
+      warnings: [
+        { code: "defaulted_bucket", bucketId: "defense" },
+        { code: "ignored_bucket", bucketId: "defense" },
+      ],
+    })
+
+    const derived = calculate({
+      formulaId: "sheer_damage",
+      buckets: [
+        { bucketId: "base_damage", value: 100 },
+        {
+          bucketId: "defense",
+          value: 0.5,
+          provenance: { kind: "derived", source: "deriveDefenseBucket" },
+        },
+      ],
+    })
+
+    expect(derived.ok && derived.buckets.at(-1)).toMatchObject({
+      bucketId: "defense",
+      value: 0.5,
+      source: "ignored",
+      provenance: { kind: "derived", source: "deriveDefenseBucket" },
+      warnings: [{ code: "ignored_bucket", bucketId: "defense" }],
+    })
+  })
+
   it("marks derived direct values in breakdown provenance", () => {
     const result = calculate({
       formulaId: "regular_damage",

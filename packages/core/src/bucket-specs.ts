@@ -5,7 +5,6 @@ const bucketSpecs = {
     bucketId: "base_damage",
     acceptsDirectValue: true,
     contributionReducer: "sum",
-    required: true,
   },
   damage_bonus: {
     bucketId: "damage_bonus",
