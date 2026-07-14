@@ -1,4 +1,4 @@
-import { getBucketSpec } from "./bucket-specs"
+import { getBucketSpec, getBucketSpecCount, isBucketId } from "./bucket-specs"
 import { getFormulaSpecById } from "./formula-specs"
 import {
   conflictingBucketInput,
@@ -62,6 +62,28 @@ interface BucketSnapshot {
   readonly provenance: Bucket["provenance"]
 }
 
+interface BucketIdentitySnapshot {
+  readonly bucketId: BucketId
+  readonly bucket: Record<PropertyKey, unknown>
+}
+
+interface BucketPayloadSnapshot {
+  readonly bucketId: BucketId
+  readonly hasValue: boolean
+  readonly value: unknown
+  readonly hasContributions: boolean
+  readonly contributions:
+    | ContributionCollectionSnapshot
+    | typeof INVALID_CONTRIBUTIONS
+    | undefined
+  readonly provenance: Bucket["provenance"]
+}
+
+interface ContributionCollectionSnapshot {
+  readonly contributions: readonly unknown[]
+  readonly length: number
+}
+
 interface CalculationInputSnapshot {
   readonly formulaId: unknown
   readonly buckets: unknown
@@ -72,15 +94,35 @@ type SnapshotCalculationInputResult =
   | { readonly ok: true; readonly input: CalculationInputSnapshot }
   | { readonly ok: false; readonly formulaId?: string }
 
+type SnapshotBucketIdentitiesResult =
+  | { readonly ok: true; readonly buckets: readonly BucketIdentitySnapshot[] }
+  | { readonly ok: false }
+
 type SnapshotBucketsResult =
   | { readonly ok: true; readonly buckets: readonly BucketSnapshot[] }
   | { readonly ok: false }
+
+type SnapshotBucketPayloadResult =
+  | {
+      readonly ok: true
+      readonly bucket: BucketPayloadSnapshot
+      readonly contributionCount: number
+    }
+  | { readonly ok: false }
+
+interface SnapshotContributionCollectionResult {
+  readonly contributions:
+    | ContributionCollectionSnapshot
+    | typeof INVALID_CONTRIBUTIONS
+  readonly contributionCount: number
+}
 
 type SnapshotProvenanceResult =
   | { readonly ok: true; readonly provenance: Bucket["provenance"] }
   | { readonly ok: false }
 
 const INVALID_CONTRIBUTIONS = Symbol("invalid contributions")
+const MAX_CONTRIBUTIONS_PER_CALCULATION = 10_000
 
 export function resolveBuckets(input: CalculationInput): ResolveBucketsResult {
   const inputSnapshotResult = snapshotCalculationInput(input)
@@ -111,13 +153,18 @@ export function resolveBuckets(input: CalculationInput): ResolveBucketsResult {
     )
   }
 
-  const snapshotResult = snapshotBuckets(inputSnapshotResult.input.buckets)
-  if (!snapshotResult.ok) {
+  const identityResult = snapshotBucketIdentities(
+    inputSnapshotResult.input.buckets,
+  )
+  if (!identityResult.ok) {
     return fail(invalidCalculationInput(), [], [], formulaSpec.formulaId, trace)
   }
 
-  const buckets = sortBucketsForValidation(formulaSpec, snapshotResult.buckets)
-  const duplicate = findDuplicateBucket(buckets)
+  const bucketIdentities = sortBucketsForValidation(
+    formulaSpec,
+    identityResult.buckets,
+  )
+  const duplicate = findDuplicateBucket(bucketIdentities)
   if (duplicate !== undefined) {
     return fail(
       duplicateBucket(duplicate),
@@ -128,7 +175,7 @@ export function resolveBuckets(input: CalculationInput): ResolveBucketsResult {
     )
   }
 
-  for (const bucket of buckets) {
+  for (const bucket of bucketIdentities) {
     if (!isApplicableBucket(formulaSpec, bucket.bucketId)) {
       return fail(
         unsupportedBucket(bucket.bucketId, formulaSpec.formulaId),
@@ -139,6 +186,13 @@ export function resolveBuckets(input: CalculationInput): ResolveBucketsResult {
       )
     }
   }
+
+  const snapshotResult = snapshotBuckets(bucketIdentities)
+  if (!snapshotResult.ok) {
+    return fail(invalidCalculationInput(), [], [], formulaSpec.formulaId, trace)
+  }
+
+  const buckets = snapshotResult.buckets
 
   const explicitError = findExplicitBucketError(buckets)
   if (explicitError !== undefined) {
@@ -386,25 +440,41 @@ function invalidCalculationInputSnapshot(
   }
 }
 
-function snapshotBuckets(buckets: unknown): SnapshotBucketsResult {
+function snapshotBucketIdentities(
+  buckets: unknown,
+): SnapshotBucketIdentitiesResult {
   try {
     if (!Array.isArray(buckets)) {
       return { ok: false }
     }
 
     const length = buckets.length
-    const snapshots: BucketSnapshot[] = []
+    if (!isPrimitiveArrayLength(length) || length > getBucketSpecCount()) {
+      return { ok: false }
+    }
+
+    const snapshots: BucketIdentitySnapshot[] = []
     for (let index = 0; index < length; index += 1) {
       if (!hasOwn(buckets, index)) {
         return { ok: false }
       }
 
-      const snapshot = snapshotBucket(buckets[index])
-      if (snapshot === undefined) {
+      const bucket: unknown = buckets[index]
+      if (
+        typeof bucket !== "object" ||
+        bucket === null ||
+        Array.isArray(bucket)
+      ) {
         return { ok: false }
       }
 
-      snapshots.push(snapshot)
+      const bucketRecord = bucket as Record<PropertyKey, unknown>
+      const bucketId = bucketRecord.bucketId
+      if (!isBucketId(bucketId)) {
+        return { ok: false }
+      }
+
+      snapshots.push({ bucketId, bucket: bucketRecord })
     }
 
     return { ok: true, buckets: snapshots }
@@ -413,37 +483,77 @@ function snapshotBuckets(buckets: unknown): SnapshotBucketsResult {
   }
 }
 
-function snapshotBucket(bucket: unknown): BucketSnapshot | undefined {
-  if (typeof bucket !== "object" || bucket === null || Array.isArray(bucket)) {
-    return undefined
+function snapshotBuckets(
+  buckets: readonly BucketIdentitySnapshot[],
+): SnapshotBucketsResult {
+  let contributionCount = 0
+  const payloads: BucketPayloadSnapshot[] = []
+
+  // Lock every collection length and the total budget before copying entries.
+  for (const identity of buckets) {
+    const snapshotResult = snapshotBucketPayload(identity)
+    if (!snapshotResult.ok) {
+      return { ok: false }
+    }
+
+    if (
+      snapshotResult.contributionCount >
+      MAX_CONTRIBUTIONS_PER_CALCULATION - contributionCount
+    ) {
+      return { ok: false }
+    }
+
+    contributionCount += snapshotResult.contributionCount
+    payloads.push(snapshotResult.bucket)
   }
 
-  try {
-    const bucketRecord = bucket as Record<PropertyKey, unknown>
-    const bucketId = bucketRecord.bucketId
-    if (typeof bucketId !== "string") {
-      return undefined
-    }
+  return { ok: true, buckets: payloads.map(snapshotBucket) }
+}
 
-    const hasValue = hasOwn(bucket, "value")
-    const hasContributions = hasOwn(bucket, "contributions")
+function snapshotBucketPayload(
+  identity: BucketIdentitySnapshot,
+): SnapshotBucketPayloadResult {
+  try {
+    const { bucket: bucketRecord, bucketId } = identity
+
+    const hasValue = hasOwn(bucketRecord, "value")
+    const hasContributions = hasOwn(bucketRecord, "contributions")
     const provenanceResult = snapshotProvenance(bucketRecord.provenance)
     if (!provenanceResult.ok) {
-      return undefined
+      return { ok: false }
     }
 
+    const contributionsResult = hasContributions
+      ? snapshotContributionCollection(bucketRecord.contributions)
+      : {
+          contributions: undefined,
+          contributionCount: 0,
+        }
+
     return {
-      bucketId: bucketId as BucketId,
-      hasValue,
-      value: hasValue ? bucketRecord.value : undefined,
-      hasContributions,
-      contributions: hasContributions
-        ? snapshotContributions(bucketRecord.contributions)
-        : undefined,
-      provenance: provenanceResult.provenance,
+      ok: true,
+      bucket: {
+        bucketId,
+        hasValue,
+        value: hasValue ? bucketRecord.value : undefined,
+        hasContributions,
+        contributions: contributionsResult.contributions,
+        provenance: provenanceResult.provenance,
+      },
+      contributionCount: contributionsResult.contributionCount,
     }
   } catch {
-    return undefined
+    return { ok: false }
+  }
+}
+
+function snapshotBucket(bucket: BucketPayloadSnapshot): BucketSnapshot {
+  return {
+    ...bucket,
+    contributions:
+      typeof bucket.contributions === "object"
+        ? snapshotContributions(bucket.contributions)
+        : bucket.contributions,
   }
 }
 
@@ -481,22 +591,50 @@ function snapshotProvenance(provenance: unknown): SnapshotProvenanceResult {
   }
 }
 
-function snapshotContributions(
+function snapshotContributionCollection(
   contributions: unknown,
-): readonly BucketContribution[] | typeof INVALID_CONTRIBUTIONS {
+): SnapshotContributionCollectionResult {
+  let contributionCount = 0
+
   try {
     if (!Array.isArray(contributions)) {
-      return INVALID_CONTRIBUTIONS
+      return {
+        contributions: INVALID_CONTRIBUTIONS,
+        contributionCount,
+      }
     }
 
     const length = contributions.length
+    if (!isPrimitiveArrayLength(length)) {
+      return {
+        contributions: INVALID_CONTRIBUTIONS,
+        contributionCount,
+      }
+    }
+    contributionCount = length
+    return {
+      contributions: { contributions, length },
+      contributionCount,
+    }
+  } catch {
+    return {
+      contributions: INVALID_CONTRIBUTIONS,
+      contributionCount,
+    }
+  }
+}
+
+function snapshotContributions(
+  collection: ContributionCollectionSnapshot,
+): readonly BucketContribution[] | typeof INVALID_CONTRIBUTIONS {
+  try {
     const snapshots: BucketContribution[] = []
-    for (let index = 0; index < length; index += 1) {
-      if (!hasOwn(contributions, index)) {
+    for (let index = 0; index < collection.length; index += 1) {
+      if (!hasOwn(collection.contributions, index)) {
         return INVALID_CONTRIBUTIONS
       }
 
-      const contribution: unknown = contributions[index]
+      const contribution: unknown = collection.contributions[index]
       if (
         typeof contribution !== "object" ||
         contribution === null ||
@@ -531,7 +669,7 @@ function snapshotContributions(
 }
 
 function findDuplicateBucket(
-  buckets: readonly BucketSnapshot[],
+  buckets: readonly { readonly bucketId: BucketId }[],
 ): BucketId | undefined {
   const seen = new Set<BucketId>()
 
@@ -634,10 +772,12 @@ function findMissingRequiredBucket(
   return undefined
 }
 
-function sortBucketsForValidation(
+function sortBucketsForValidation<
+  BucketWithIdentity extends { readonly bucketId: BucketId },
+>(
   formulaSpec: FormulaSpec,
-  buckets: readonly BucketSnapshot[],
-): BucketSnapshot[] {
+  buckets: readonly BucketWithIdentity[],
+): BucketWithIdentity[] {
   const bucketOrder = new Map<BucketId, number>()
   const orderedBucketIds = [
     ...formulaSpec.buckets,
@@ -765,6 +905,10 @@ function createDirectBreakdown(
 
 function isFiniteNumber(value: unknown): value is number {
   return typeof value === "number" && Number.isFinite(value)
+}
+
+function isPrimitiveArrayLength(value: unknown): value is number {
+  return typeof value === "number" && Number.isSafeInteger(value) && value >= 0
 }
 
 function hasInvalidContributionEntries(contributions: unknown): boolean {

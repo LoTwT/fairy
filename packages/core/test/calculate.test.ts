@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest"
 import { calculate } from "../src/index"
-import type { Bucket, CalculationInput } from "../src/index"
+import type { Bucket, BucketId, CalculationInput } from "../src/index"
 
 describe("calculate", () => {
   it("calculates regular_damage with contribution reducers, defaults, and trace", () => {
@@ -605,6 +605,135 @@ describe("calculate", () => {
     })
   })
 
+  it("rejects unregistered bucket ids before typed bucket errors", () => {
+    for (const bucketId of [
+      "not_a_bucket",
+      "constructor",
+      "toString",
+      "__proto__",
+    ]) {
+      const result = calculate({
+        formulaId: "regular_damage",
+        buckets: [{ bucketId, value: 100 }],
+      } as unknown as CalculationInput)
+
+      expect(result).toMatchObject({
+        ok: false,
+        formulaId: "regular_damage",
+        error: { code: "invalid_calculation_input" },
+        warnings: [],
+      })
+      expect(result.ok || result.error).not.toHaveProperty("bucketId")
+    }
+
+    const duplicateUnknown = calculate({
+      formulaId: "regular_damage",
+      buckets: [
+        { bucketId: "not_a_bucket", value: 100 },
+        { bucketId: "not_a_bucket", value: 200 },
+      ],
+    } as unknown as CalculationInput)
+    expect(duplicateUnknown).toMatchObject({
+      ok: false,
+      error: { code: "invalid_calculation_input" },
+    })
+    expect(duplicateUnknown.ok || duplicateUnknown.error).not.toHaveProperty(
+      "bucketId",
+    )
+  })
+
+  it("reads bucket identity once and rejects it before deep fields", () => {
+    let bucketIdReads = 0
+    let deepReads = 0
+    const bucket = {}
+    Object.defineProperties(bucket, {
+      bucketId: {
+        get(): string {
+          bucketIdReads += 1
+          return bucketIdReads === 1 ? "not_a_bucket" : "base_damage"
+        },
+      },
+      value: {
+        get(): never {
+          deepReads += 1
+          throw new Error("invalid identity must not read value")
+        },
+      },
+      provenance: {
+        get(): never {
+          deepReads += 1
+          throw new Error("invalid identity must not read provenance")
+        },
+      },
+      contributions: {
+        get(): never {
+          deepReads += 1
+          throw new Error("invalid identity must not read contributions")
+        },
+      },
+    })
+
+    expect(
+      calculate({
+        formulaId: "regular_damage",
+        buckets: [bucket],
+      } as unknown as CalculationInput),
+    ).toMatchObject({
+      ok: false,
+      error: { code: "invalid_calculation_input" },
+    })
+    expect(bucketIdReads).toBe(1)
+    expect(deepReads).toBe(0)
+  })
+
+  it("checks duplicate and applicability before reading deep fields", () => {
+    let duplicateDeepReads = 0
+    const duplicateBuckets = [0, 1].map(() => {
+      const bucket = { bucketId: "base_damage" }
+      Object.defineProperty(bucket, "contributions", {
+        get(): never {
+          duplicateDeepReads += 1
+          throw new Error("duplicate bucket must not read contributions")
+        },
+      })
+      return bucket
+    })
+
+    expect(
+      calculate({
+        formulaId: "regular_damage",
+        buckets: duplicateBuckets,
+      } as unknown as CalculationInput),
+    ).toMatchObject({
+      ok: false,
+      error: { code: "duplicate_bucket", bucketId: "base_damage" },
+    })
+    expect(duplicateDeepReads).toBe(0)
+
+    let unsupportedDeepReads = 0
+    const unsupportedBucket = { bucketId: "sheer_damage_bonus" }
+    Object.defineProperty(unsupportedBucket, "contributions", {
+      get(): never {
+        unsupportedDeepReads += 1
+        throw new Error("unsupported bucket must not read contributions")
+      },
+    })
+
+    expect(
+      calculate({
+        formulaId: "regular_damage",
+        buckets: [unsupportedBucket],
+      } as unknown as CalculationInput),
+    ).toMatchObject({
+      ok: false,
+      error: {
+        code: "unsupported_bucket",
+        bucketId: "sheer_damage_bonus",
+      },
+    })
+    expect(unsupportedDeepReads).toBe(0)
+  })
+
   it("returns unsupported_bucket before bucket input validation", () => {
     const result = calculate({
       formulaId: "regular_damage",
@@ -811,6 +940,118 @@ describe("calculate", () => {
       })
       expect(result.ok || result.error).not.toHaveProperty("bucketId")
     }
+  })
+
+  it("enforces the registry-derived bucket limit before visiting entries", () => {
+    const allBucketIds: readonly BucketId[] = [
+      "base_damage",
+      "damage_bonus",
+      "crit",
+      "defense",
+      "sheer_damage_bonus",
+      "resistance",
+      "damage_taken",
+      "stun_damage_taken",
+      "special",
+    ]
+    const boundaryResult = calculate({
+      formulaId: "sheer_damage",
+      buckets: allBucketIds.map((bucketId) =>
+        bucketId === "base_damage" ? { bucketId, value: 100 } : { bucketId },
+      ),
+    })
+    expect(boundaryResult).toMatchObject({ ok: true, value: 100 })
+
+    const overBoundaryResult = calculate({
+      formulaId: "sheer_damage",
+      buckets: [
+        ...allBucketIds.map((bucketId) =>
+          bucketId === "base_damage" ? { bucketId, value: 100 } : { bucketId },
+        ),
+        { bucketId: "base_damage", value: 200 },
+      ],
+    })
+    expect(overBoundaryResult).toMatchObject({
+      ok: false,
+      error: { code: "invalid_calculation_input" },
+    })
+
+    let entryReads = 0
+    const virtualBuckets = new Proxy([], {
+      get(target, property, receiver): unknown {
+        if (property === "length") return 1_000_000
+        entryReads += 1
+        return Reflect.get(target, property, receiver)
+      },
+      getOwnPropertyDescriptor(target, property) {
+        entryReads += 1
+        return Reflect.getOwnPropertyDescriptor(target, property)
+      },
+    })
+    expect(
+      calculate({
+        formulaId: "regular_damage",
+        buckets: virtualBuckets,
+      } as unknown as CalculationInput),
+    ).toMatchObject({
+      ok: false,
+      error: { code: "invalid_calculation_input" },
+    })
+    expect(entryReads).toBe(0)
+  })
+
+  it("does not coerce caller-owned array lengths", () => {
+    let bucketLengthReads = 0
+    let contributionLengthReads = 0
+    let coercions = 0
+    const lengthValue = {
+      [Symbol.toPrimitive](): number {
+        coercions += 1
+        return 1
+      },
+    }
+
+    const buckets = new Proxy([], {
+      get(target, property, receiver): unknown {
+        if (property === "length") {
+          bucketLengthReads += 1
+          return lengthValue
+        }
+        return Reflect.get(target, property, receiver)
+      },
+    })
+    expect(
+      calculate({
+        formulaId: "regular_damage",
+        buckets,
+      } as unknown as CalculationInput),
+    ).toMatchObject({
+      ok: false,
+      error: { code: "invalid_calculation_input" },
+    })
+
+    const contributions = new Proxy([], {
+      get(target, property, receiver): unknown {
+        if (property === "length") {
+          contributionLengthReads += 1
+          return lengthValue
+        }
+        return Reflect.get(target, property, receiver)
+      },
+    })
+    expect(
+      calculate({
+        formulaId: "regular_damage",
+        buckets: [{ bucketId: "base_damage", contributions }],
+      } as unknown as CalculationInput),
+    ).toMatchObject({
+      ok: false,
+      error: { code: "invalid_number", bucketId: "base_damage" },
+    })
+
+    expect(bucketLengthReads).toBe(1)
+    expect(contributionLengthReads).toBe(1)
+    expect(coercions).toBe(0)
   })
 
   it("returns invalid_calculation_input when the buckets property cannot be read", () => {
@@ -1044,6 +1285,86 @@ describe("calculate", () => {
         { value: 0.2, source: "skill_buff", note: "snapshotted" },
       ],
     })
+  })
+
+  it("enforces the total contribution limit before copying entries", () => {
+    const boundaryContributions = Array.from({ length: 10_000 }, () => ({
+      value: 0,
+    }))
+    expect(
+      calculate({
+        formulaId: "regular_damage",
+        buckets: [
+          { bucketId: "base_damage", contributions: boundaryContributions },
+        ],
+      }),
+    ).toMatchObject({ ok: true, value: 0 })
+
+    let oversizedEntryReads = 0
+    const oversizedContributions = new Proxy([], {
+      get(target, property, receiver): unknown {
+        if (property === "length") return 10_001
+        oversizedEntryReads += 1
+        return Reflect.get(target, property, receiver)
+      },
+      getOwnPropertyDescriptor(target, property) {
+        oversizedEntryReads += 1
+        return Reflect.getOwnPropertyDescriptor(target, property)
+      },
+    })
+    const oversizedResult = calculate({
+      formulaId: "regular_damage",
+      buckets: [
+        { bucketId: "base_damage", contributions: oversizedContributions },
+      ],
+    } as unknown as CalculationInput)
+    expect(oversizedResult).toMatchObject({
+      ok: false,
+      error: { code: "invalid_calculation_input" },
+    })
+    expect(oversizedResult.ok || oversizedResult.error).not.toHaveProperty(
+      "bucketId",
+    )
+    expect(oversizedEntryReads).toBe(0)
+
+    let firstEntryReads = 0
+    const firstContributions = new Proxy([], {
+      get(target, property, receiver): unknown {
+        if (property === "length") return 5_000
+        firstEntryReads += 1
+        return Reflect.get(target, property, receiver)
+      },
+      getOwnPropertyDescriptor(target, property) {
+        firstEntryReads += 1
+        return Reflect.getOwnPropertyDescriptor(target, property)
+      },
+    })
+    let secondEntryReads = 0
+    const secondContributions = new Proxy([], {
+      get(target, property, receiver): unknown {
+        if (property === "length") return 5_001
+        secondEntryReads += 1
+        return Reflect.get(target, property, receiver)
+      },
+      getOwnPropertyDescriptor(target, property) {
+        secondEntryReads += 1
+        return Reflect.getOwnPropertyDescriptor(target, property)
+      },
+    })
+    expect(
+      calculate({
+        formulaId: "regular_damage",
+        buckets: [
+          { bucketId: "base_damage", contributions: firstContributions },
+          { bucketId: "damage_bonus", contributions: secondContributions },
+        ],
+      } as unknown as CalculationInput),
+    ).toMatchObject({
+      ok: false,
+      error: { code: "invalid_calculation_input" },
+    })
+    expect(firstEntryReads).toBe(0)
+    expect(secondEntryReads).toBe(0)
   })
 
   it("returns bucket-level invalid_number when a contribution cannot be read", () => {

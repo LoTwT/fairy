@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest"
+import { getBucketSpecCount, isBucketId } from "../src/bucket-specs"
 import {
   getFormulaSpecById,
   isFormulaId,
@@ -10,6 +11,32 @@ import { calculate, getFormulaSpec, listBuckets } from "../src/index"
 import type { BucketId, FormulaSpec } from "../src/index"
 
 describe("formula specs", () => {
+  it("derives trusted bucket ids from registry own properties", () => {
+    const bucketIds = [
+      "base_damage",
+      "damage_bonus",
+      "crit",
+      "defense",
+      "sheer_damage_bonus",
+      "resistance",
+      "damage_taken",
+      "stun_damage_taken",
+      "special",
+    ] as const satisfies readonly BucketId[]
+
+    expect(getBucketSpecCount()).toBe(bucketIds.length)
+    for (const bucketId of bucketIds) {
+      expect(isBucketId(bucketId)).toBe(true)
+    }
+
+    expect(isBucketId("not_a_bucket")).toBe(false)
+    expect(isBucketId("constructor")).toBe(false)
+    expect(isBucketId("toString")).toBe(false)
+    expect(isBucketId("__proto__")).toBe(false)
+    expect(isBucketId(["base_damage"])).toBe(false)
+    expect(isBucketId(Symbol("base_damage"))).toBe(false)
+  })
+
   it("derives supported formula ids from registry own properties", () => {
     const formulaIds = listRegisteredFormulaIds()
     expect(formulaIds).toEqual(["regular_damage", "sheer_damage"])

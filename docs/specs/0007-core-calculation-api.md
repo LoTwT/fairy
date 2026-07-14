@@ -212,6 +212,12 @@ type BucketProvenance =
   formula-level `invalid_calculation_input`。
 - `buckets` 必须是 dense array，且每项必须是可读取的实际 bucket object；collection / entry shape
   无法建立可信 `bucketId` 时也返回 formula-level `invalid_calculation_input`，不伪造 `bucketId`。
+- 每个 `bucketId` 必须是 primitive string，并且是内置 `BucketSpec` registry 的 own property；未注册
+  string、prototype key 或需要 coercion 的值都返回 formula-level `invalid_calculation_input`。
+- `buckets.length` 不能超过内置 bucket registry cardinality（Phase 6A 当前为 `9`），整个
+  `CalculationInput` 的 `contributions` 总数不能超过 `10,000`。caller-owned array 的 `length` 必须在
+  任何 loop / allocation 前只读一次，并且已经是 non-negative safe integer；core 不做隐式 coercion。
+  任一 budget 超限返回 formula-level `invalid_calculation_input`。
 - `contributions` 存在时不能为空；空数组返回 `{ ok: false }`，不能被 reducer 当作默认值或 `0`
   自行解释。
 - 如果 bucket 没有 Phase 6A contribution reducer，调用方不能提供 `contributions`；必须先在外部或 thin
@@ -225,6 +231,8 @@ type BucketProvenance =
 
 `CalculationInput.buckets` 是以 `bucketId` 为 key 的集合语义，不是 ordered override list。
 
+- 只有内置 `BucketSpec` registry 的 own-property key 才能成为可信 `BucketId`；未注册 identity 在
+  duplicate / applicability 检查前返回 formula-level `invalid_calculation_input`。
 - 同一个 `CalculationInput` 中同一 `bucketId` 最多出现一次。
 - 如果重复出现，core 不做 first wins、last wins、merge 或 replace，必须返回 `{ ok: false }` +
   `duplicate_bucket`。
@@ -236,8 +244,9 @@ Applicability 分两类，由内置 `FormulaSpec` 决定：
 - `FormulaSpec.ignoredBuckets` 中明确列出的 bucket 返回 `{ ok: true }` +
   `ignored_bucket` warning，并进入 `BucketBreakdown`；它不进入 `ResolvedBucket[]`，也不参与最终乘法。
   例如 `sheer_damage` 中的 `defense`。
-- 不在 `FormulaSpec.buckets` 或 `FormulaSpec.ignoredBuckets` 中的 bucket 返回 `{ ok: false }` +
-  `unsupported_bucket`。例如 `regular_damage` 中的 `sheer_damage_bonus`。
+- 已注册、但不在 `FormulaSpec.buckets` 或 `FormulaSpec.ignoredBuckets` 中的 bucket 返回
+  `{ ok: false }` + `unsupported_bucket`。例如 `regular_damage` 中的
+  `sheer_damage_bonus`。`unsupported_bucket.bucketId` 因此始终是可信的 public `BucketId`。
 
 即使 bucket 最终被 ignored，只要调用方显式提供了 `value` 或 `contributions`，这些数字仍必须通过
 finite-number validation；ignored bucket 不能成为 `NaN` / `Infinity` 的绕行入口。
@@ -468,29 +477,36 @@ type CalculationResult =
    formula-level `invalid_calculation_input`。
 2. 读取 `FormulaSpec`；已成功读取但不支持的 `formulaId` 返回 `{ ok: false }` +
    `unsupported_formula`。
-3. 对已锁定的 `CalculationInput.buckets` reference 做 guarded deep snapshot：collection 必须是 dense array，每项必须是
-   可读取的实际 bucket object；bucket / provenance / contribution fields 各只读取一次并物化为内部
-   plain data。无法建立可信 bucket identity 时返回 formula-level `invalid_calculation_input`。
-4. 检查 snapshotted buckets 中是否存在重复 `bucketId`；重复返回 `{ ok: false }` +
+3. 对已锁定的 `CalculationInput.buckets` reference 做 guarded shallow identity snapshot：先只读一次
+   primitive integer `length`，并在 loop / allocation 前检查它不超过 bucket registry cardinality（当前
+   `9`）；collection 必须是 dense array，每项必须是可读取的实际 bucket object。每项只读取
+   `bucketId`，并通过 `BucketSpec` registry own-property guard 收窄；无法建立可信 identity 或超出
+   budget 时返回 formula-level `invalid_calculation_input`。
+4. 检查 trusted bucket identities 中是否存在重复 `bucketId`；重复返回 `{ ok: false }` +
    `duplicate_bucket`。
-5. 检查每个显式 bucket 是否属于 `FormulaSpec.buckets` 或 `FormulaSpec.ignoredBuckets`；
+5. 检查每个已注册的显式 bucket 是否属于 `FormulaSpec.buckets` 或
+   `FormulaSpec.ignoredBuckets`；
    不属于两者返回 `{ ok: false }` + `unsupported_bucket`。
-6. 对所有显式 bucket 做 input-shape / support validation：同一 bucket 同时包含 `value` 和
+6. 只对 unique + applicable identities 做 guarded deep snapshot：bucket / provenance / contribution
+   fields 各只读取一次并物化为 internal plain data。每个 contributions array 的 primitive integer
+   `length` 在读取或复制 entry 前只读一次，并计入整个 request 的 `10,000` total budget；超限返回
+   formula-level `invalid_calculation_input`。
+7. 对所有显式 bucket 做 input-shape / support validation：同一 bucket 同时包含 `value` 和
    `contributions` 时返回 `{ ok: false }` + `conflicting_bucket_input`；不支持的 derived direct
    value 返回 `{ ok: false }` + `unsupported_derived_value`。
-7. 对所有显式 numeric inputs 做 finite-number validation；`contributions` 在首次读取时锁定内部
+8. 对所有显式 numeric inputs 做 finite-number validation；`contributions` 在首次读取时锁定内部
    snapshot，validation / normalize 全程只消费该 snapshot。它还必须是 dense array，且每项都是包含
    finite `value` 的实际 object。失败返回 `{ ok: false }` + `invalid_number`。
-8. 对显式 `contributions` 做 non-empty validation；空数组返回 `{ ok: false }` +
+9. 对显式 `contributions` 做 non-empty validation；空数组返回 `{ ok: false }` +
    `empty_contributions`。
-9. 对显式 `contributions` 检查 bucket 是否有 Phase 6A reducer；没有 reducer 返回 `{ ok: false }` +
-   `unsupported_contributions`。
-10. 用 `BucketSpec` 将每个 accepted bucket 归一化成 `ResolvedBucket.value`，并复检 reducer 输出为
+10. 对显式 `contributions` 检查 bucket 是否有 Phase 6A reducer；没有 reducer 返回 `{ ok: false }` +
+    `unsupported_contributions`。
+11. 用 `BucketSpec` 将每个 accepted bucket 归一化成 `ResolvedBucket.value`，并复检 reducer 输出为
     finite number。
-11. 将 ignored buckets 写入 `BucketBreakdown` 和 warnings，但不写入 `ResolvedBucket[]`。
-12. `FormulaSpec.requiredBuckets` 是 requiredness 的唯一权威；缺失 required bucket 返回
+12. 将 ignored buckets 写入 `BucketBreakdown` 和 warnings，但不写入 `ResolvedBucket[]`。
+13. `FormulaSpec.requiredBuckets` 是 requiredness 的唯一权威；缺失 required bucket 返回
     `{ ok: false }`，缺失 optional factor bucket 应用 `BucketSpec.defaultValue`。
-13. `FormulaSpec` 最终只用 `ResolvedBucket.value` 按 `FormulaSpec.buckets` 顺序计算，并复检最终结果为
+14. `FormulaSpec` 最终只用 `ResolvedBucket.value` 按 `FormulaSpec.buckets` 顺序计算，并复检最终结果为
     finite number。
 
 这些步骤是整个 bucket 集合的全局阶段，不是对单个 bucket 逐一跑完全部步骤。输入 bucket 的排列不能改变
@@ -1041,6 +1057,11 @@ Unsupported contributions：
 - `sheer_damage` 明确忽略 `defense`，并通过 warning 表达。
 - 同一 formula 中重复 bucket 返回 `{ ok: false }`；不属于 formula 且不在 ignored list 的 bucket
   返回 `{ ok: false }`；ignored bucket 只能通过 warning 和 breakdown 表达。
+- runtime bucket identity 必须由 registry own-property guard 收窄；未注册 / prototype bucket id 返回
+  formula-level `invalid_calculation_input`，不能泄漏到任何携带 public `BucketId` 的 error variant。
+- `buckets` 数量上限必须由 bucket registry cardinality 派生（当前 `9`）；单个 request 的
+  `contributions` 总数上限为 `10,000`。两类 caller-owned array length 都必须在 loop / allocation 前按
+  primitive non-negative safe integer 校验，超限返回 formula-level `invalid_calculation_input`。
 - 所有 numeric inputs 都必须是 finite number；空 `contributions` 必须返回 `{ ok: false }`。
 - 固定 validation priority 必须按整个 bucket 集合分阶段执行；反转同一 bucket 集合的输入顺序不能改变
   error code 或 error bucket。

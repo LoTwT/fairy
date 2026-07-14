@@ -53,6 +53,16 @@ const bucketSpecs = {
   },
 } satisfies Record<BucketId, BucketSpec>
 
+const bucketSpecCount = Object.keys(bucketSpecs).length
+
 export function getBucketSpec(bucketId: BucketId): BucketSpec {
   return bucketSpecs[bucketId]
+}
+
+export function getBucketSpecCount(): number {
+  return bucketSpecCount
+}
+
+export function isBucketId(bucketId: unknown): bucketId is BucketId {
+  return typeof bucketId === "string" && Object.hasOwn(bucketSpecs, bucketId)
 }
