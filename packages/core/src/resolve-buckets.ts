@@ -321,9 +321,8 @@ function findExplicitBucketError(
   for (const bucket of buckets) {
     if (
       (hasOwn(bucket, "value") && !isFiniteNumber(bucket.value)) ||
-      bucket.contributions?.some(
-        (contribution) => !isFiniteNumber(contribution.value),
-      ) === true
+      (bucket.contributions !== undefined &&
+        hasInvalidContributionEntries(bucket.contributions))
     ) {
       return invalidNumber(bucket.bucketId)
     }
@@ -449,12 +448,10 @@ function reduceContributions(
 function copyContributions(
   contributions: readonly BucketContribution[],
 ): [BucketContribution, ...BucketContribution[]] {
-  const [first, ...rest] = contributions
-  if (first === undefined) {
-    throw new Error("non-empty contributions invariant violated")
-  }
-
-  return [copyContribution(first), ...rest.map(copyContribution)]
+  return contributions.map(copyContribution) as [
+    BucketContribution,
+    ...BucketContribution[],
+  ]
 }
 
 function copyContribution(
@@ -520,6 +517,30 @@ function createDirectBreakdown(
 
 function isFiniteNumber(value: unknown): value is number {
   return typeof value === "number" && Number.isFinite(value)
+}
+
+function hasInvalidContributionEntries(contributions: unknown): boolean {
+  if (!Array.isArray(contributions)) {
+    return true
+  }
+
+  for (let index = 0; index < contributions.length; index += 1) {
+    if (!hasOwn(contributions, index)) {
+      return true
+    }
+
+    const contribution: unknown = contributions[index]
+    if (
+      typeof contribution !== "object" ||
+      contribution === null ||
+      Array.isArray(contribution) ||
+      !isFiniteNumber((contribution as { readonly value?: unknown }).value)
+    ) {
+      return true
+    }
+  }
+
+  return false
 }
 
 function hasOwn(object: object, key: PropertyKey): boolean {

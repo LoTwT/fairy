@@ -653,6 +653,41 @@ describe("calculate", () => {
     })
   })
 
+  it("rejects sparse, non-object, and non-array contributions without throwing", () => {
+    const fullHole: unknown[] = []
+    fullHole.length = 1
+    const leadingHole: unknown[] = []
+    leadingHole.length = 2
+    leadingHole[1] = { value: 0.2 }
+    const trailingHole: unknown[] = [{ value: 0.2 }]
+    trailingHole.length = 2
+
+    for (const contributions of [
+      fullHole,
+      leadingHole,
+      trailingHole,
+      [null],
+      [undefined],
+      "not-an-array",
+      {},
+    ]) {
+      const result = calculate({
+        formulaId: "regular_damage",
+        buckets: [
+          { bucketId: "base_damage", value: 100 },
+          { bucketId: "damage_bonus", contributions },
+        ],
+      } as unknown as CalculationInput)
+
+      expect(result).toMatchObject({
+        ok: false,
+        formulaId: "regular_damage",
+        error: { code: "invalid_number", bucketId: "damage_bonus" },
+        warnings: [],
+      })
+    }
+  })
+
   it("returns unsupported_contributions for direct-value-only buckets", () => {
     const result = calculate({
       formulaId: "regular_damage",
