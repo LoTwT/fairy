@@ -2,8 +2,10 @@ const REFLECT_APPLY = Reflect.apply
 const ARRAY_IS_ARRAY = Array.isArray
 const NUMBER_IS_FINITE = Number.isFinite
 const NUMBER_IS_SAFE_INTEGER = Number.isSafeInteger
+const OBJECT_DEFINE_PROPERTY = Object.defineProperty
 const OBJECT_GET_OWN_PROPERTY_DESCRIPTOR = Object.getOwnPropertyDescriptor
 const OBJECT_GET_PROTOTYPE_OF = Object.getPrototypeOf
+const OBJECT_KEYS = Object.keys
 const OBJECT_PROTOTYPE_HAS_OWN_PROPERTY = Object.prototype.hasOwnProperty
 
 export function trustedHasOwn(object: object, key: PropertyKey): boolean {
@@ -20,8 +22,30 @@ export function trustedGetOwnPropertyDescriptor(
   ])
 }
 
+export function trustedSetArrayItem<T>(
+  array: T[],
+  index: number,
+  value: T,
+): void {
+  // Own data properties bypass inherited numeric setters on polluted arrays.
+  REFLECT_APPLY(OBJECT_DEFINE_PROPERTY, Object, [
+    array,
+    index,
+    {
+      configurable: true,
+      enumerable: true,
+      value,
+      writable: true,
+    },
+  ])
+}
+
 export function trustedGetPrototypeOf(object: object): object | null {
   return REFLECT_APPLY(OBJECT_GET_PROTOTYPE_OF, Object, [object])
+}
+
+export function trustedObjectKeys(object: object): string[] {
+  return REFLECT_APPLY(OBJECT_KEYS, Object, [object])
 }
 
 export function trustedReadDescriptor(

@@ -10,6 +10,19 @@ import type {
   CalculationInput,
 } from "../src/index"
 
+function throwOnCollectionDispatch(): never {
+  throw new Error("mutable collection prototype method was dispatched")
+}
+
+function createEmptyIterator() {
+  return {
+    next: () => ({ done: true, value: undefined }),
+    [Symbol.iterator]() {
+      return this
+    },
+  }
+}
+
 describe("calculate", () => {
   it("calculates regular_damage with contribution reducers, defaults, and trace", () => {
     const result = calculate({
@@ -1544,6 +1557,231 @@ describe("calculate", () => {
       error: {
         code: "invalid_number",
         message: "Calculation result must be a finite number.",
+      },
+    })
+  })
+
+  it("avoids mutable collection prototype dispatch after import", () => {
+    const reduceDescriptor = Object.getOwnPropertyDescriptor(
+      Array.prototype,
+      "reduce",
+    )!
+    const includesDescriptor = Object.getOwnPropertyDescriptor(
+      Array.prototype,
+      "includes",
+    )!
+    const entriesDescriptor = Object.getOwnPropertyDescriptor(
+      Array.prototype,
+      "entries",
+    )!
+    const iteratorDescriptor = Object.getOwnPropertyDescriptor(
+      Array.prototype,
+      Symbol.iterator,
+    )!
+    const pushDescriptor = Object.getOwnPropertyDescriptor(
+      Array.prototype,
+      "push",
+    )!
+    const mapDescriptor = Object.getOwnPropertyDescriptor(
+      Array.prototype,
+      "map",
+    )!
+    const joinDescriptor = Object.getOwnPropertyDescriptor(
+      Array.prototype,
+      "join",
+    )!
+    const sortDescriptor = Object.getOwnPropertyDescriptor(
+      Array.prototype,
+      "sort",
+    )!
+    const sliceDescriptor = Object.getOwnPropertyDescriptor(
+      Array.prototype,
+      "slice",
+    )!
+    const setHasDescriptor = Object.getOwnPropertyDescriptor(
+      Set.prototype,
+      "has",
+    )!
+    const setAddDescriptor = Object.getOwnPropertyDescriptor(
+      Set.prototype,
+      "add",
+    )!
+    const mapGetDescriptor = Object.getOwnPropertyDescriptor(
+      Map.prototype,
+      "get",
+    )!
+    const mapSetDescriptor = Object.getOwnPropertyDescriptor(
+      Map.prototype,
+      "set",
+    )!
+    const localeCompareDescriptor = Object.getOwnPropertyDescriptor(
+      String.prototype,
+      "localeCompare",
+    )!
+    let productResult: ReturnType<typeof calculate>
+    let unsupportedResult: ReturnType<typeof calculate>
+    let duplicateResult: ReturnType<typeof calculate>
+    let canonicalResult: ReturnType<typeof calculate>
+
+    try {
+      // oxlint-disable-next-line no-extend-native -- Exercise the collection dispatch boundary.
+      Object.defineProperty(Array.prototype, "reduce", {
+        ...reduceDescriptor,
+        value: () => 777,
+      })
+      // oxlint-disable-next-line no-extend-native -- Exercise the collection dispatch boundary.
+      Object.defineProperty(Array.prototype, "includes", {
+        ...includesDescriptor,
+        value: () => true,
+      })
+      // oxlint-disable-next-line no-extend-native -- Exercise the collection dispatch boundary.
+      Object.defineProperty(Array.prototype, "entries", {
+        ...entriesDescriptor,
+        value: createEmptyIterator,
+      })
+      // oxlint-disable-next-line no-extend-native -- Exercise the collection dispatch boundary.
+      Object.defineProperty(Array.prototype, Symbol.iterator, {
+        ...iteratorDescriptor,
+        value: createEmptyIterator,
+      })
+      // oxlint-disable-next-line no-extend-native -- Exercise the collection dispatch boundary.
+      Object.defineProperty(Array.prototype, "push", {
+        ...pushDescriptor,
+        value: throwOnCollectionDispatch,
+      })
+      // oxlint-disable-next-line no-extend-native -- Exercise the collection dispatch boundary.
+      Object.defineProperty(Array.prototype, "map", {
+        ...mapDescriptor,
+        value: throwOnCollectionDispatch,
+      })
+      // oxlint-disable-next-line no-extend-native -- Exercise the collection dispatch boundary.
+      Object.defineProperty(Array.prototype, "join", {
+        ...joinDescriptor,
+        value: throwOnCollectionDispatch,
+      })
+      // oxlint-disable-next-line no-extend-native -- Exercise the collection dispatch boundary.
+      Object.defineProperty(Array.prototype, "sort", {
+        ...sortDescriptor,
+        value: throwOnCollectionDispatch,
+      })
+      // oxlint-disable-next-line no-extend-native -- Exercise the collection dispatch boundary.
+      Object.defineProperty(Array.prototype, "slice", {
+        ...sliceDescriptor,
+        value: throwOnCollectionDispatch,
+      })
+      // oxlint-disable-next-line no-extend-native -- Exercise the collection dispatch boundary.
+      Object.defineProperty(Set.prototype, "has", {
+        ...setHasDescriptor,
+        value: () => false,
+      })
+      // oxlint-disable-next-line no-extend-native -- Exercise the collection dispatch boundary.
+      Object.defineProperty(Set.prototype, "add", {
+        ...setAddDescriptor,
+        value: throwOnCollectionDispatch,
+      })
+      // oxlint-disable-next-line no-extend-native -- Exercise the collection dispatch boundary.
+      Object.defineProperty(Map.prototype, "get", {
+        ...mapGetDescriptor,
+        value: throwOnCollectionDispatch,
+      })
+      // oxlint-disable-next-line no-extend-native -- Exercise the collection dispatch boundary.
+      Object.defineProperty(Map.prototype, "set", {
+        ...mapSetDescriptor,
+        value: throwOnCollectionDispatch,
+      })
+      // oxlint-disable-next-line no-extend-native -- Exercise the collection dispatch boundary.
+      Object.defineProperty(String.prototype, "localeCompare", {
+        ...localeCompareDescriptor,
+        value: throwOnCollectionDispatch,
+      })
+
+      productResult = calculate({
+        formulaId: "regular_damage",
+        buckets: [{ bucketId: "base_damage", value: 100 }],
+        options: { trace: true },
+      })
+      unsupportedResult = calculate({
+        formulaId: "regular_damage",
+        buckets: [
+          { bucketId: "base_damage", value: 100 },
+          { bucketId: "sheer_damage_bonus", value: 2 },
+        ],
+      })
+      duplicateResult = calculate({
+        formulaId: "regular_damage",
+        buckets: [
+          { bucketId: "base_damage", value: 100 },
+          { bucketId: "base_damage", value: 200 },
+        ],
+      })
+      canonicalResult = calculate({
+        formulaId: "regular_damage",
+        buckets: [
+          { bucketId: "base_damage", value: 100 },
+          { bucketId: "crit", value: 2, contributions: [{ value: 1 }] },
+          {
+            bucketId: "damage_bonus",
+            value: 2,
+            contributions: [{ value: 0.5 }],
+          },
+        ],
+      })
+    } finally {
+      // oxlint-disable-next-line no-extend-native -- Restore the prior state.
+      Object.defineProperty(Array.prototype, "reduce", reduceDescriptor)
+      // oxlint-disable-next-line no-extend-native -- Restore the prior state.
+      Object.defineProperty(Array.prototype, "includes", includesDescriptor)
+      // oxlint-disable-next-line no-extend-native -- Restore the prior state.
+      Object.defineProperty(Array.prototype, "entries", entriesDescriptor)
+      // oxlint-disable-next-line no-extend-native -- Restore the prior state.
+      Object.defineProperty(
+        Array.prototype,
+        Symbol.iterator,
+        iteratorDescriptor,
+      )
+      // oxlint-disable-next-line no-extend-native -- Restore the prior state.
+      Object.defineProperty(Array.prototype, "push", pushDescriptor)
+      // oxlint-disable-next-line no-extend-native -- Restore the prior state.
+      Object.defineProperty(Array.prototype, "map", mapDescriptor)
+      // oxlint-disable-next-line no-extend-native -- Restore the prior state.
+      Object.defineProperty(Array.prototype, "join", joinDescriptor)
+      // oxlint-disable-next-line no-extend-native -- Restore the prior state.
+      Object.defineProperty(Array.prototype, "sort", sortDescriptor)
+      // oxlint-disable-next-line no-extend-native -- Restore the prior state.
+      Object.defineProperty(Array.prototype, "slice", sliceDescriptor)
+      // oxlint-disable-next-line no-extend-native -- Restore the prior state.
+      Object.defineProperty(Set.prototype, "has", setHasDescriptor)
+      // oxlint-disable-next-line no-extend-native -- Restore the prior state.
+      Object.defineProperty(Set.prototype, "add", setAddDescriptor)
+      // oxlint-disable-next-line no-extend-native -- Restore the prior state.
+      Object.defineProperty(Map.prototype, "get", mapGetDescriptor)
+      // oxlint-disable-next-line no-extend-native -- Restore the prior state.
+      Object.defineProperty(Map.prototype, "set", mapSetDescriptor)
+      // oxlint-disable-next-line no-extend-native -- Restore the prior state.
+      Object.defineProperty(
+        String.prototype,
+        "localeCompare",
+        localeCompareDescriptor,
+      )
+    }
+
+    expect(productResult!).toMatchObject({ ok: true, value: 100 })
+    expect(unsupportedResult!).toMatchObject({
+      ok: false,
+      error: {
+        code: "unsupported_bucket",
+        bucketId: "sheer_damage_bonus",
+      },
+    })
+    expect(duplicateResult!).toMatchObject({
+      ok: false,
+      error: { code: "duplicate_bucket", bucketId: "base_damage" },
+    })
+    expect(canonicalResult!).toMatchObject({
+      ok: false,
+      error: {
+        code: "conflicting_bucket_input",
+        bucketId: "damage_bonus",
       },
     })
   })

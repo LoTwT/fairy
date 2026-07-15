@@ -109,6 +109,103 @@ const result = calculate({
 })
 assert.equal(result.ok, true)
 assert.equal(result.value, 100)
+
+const reduced = withMutableProperty(
+  Array.prototype,
+  "reduce",
+  () => 777,
+  () =>
+    calculate({
+      formulaId: "regular_damage",
+      buckets: [{ bucketId: "base_damage", value: 100 }],
+    }),
+)
+assert.deepEqual([reduced.ok, reduced.value], [true, 100])
+
+const applicable = withMutableProperty(
+  Array.prototype,
+  "includes",
+  () => true,
+  () =>
+    calculate({
+      formulaId: "regular_damage",
+      buckets: [
+        { bucketId: "base_damage", value: 100 },
+        { bucketId: "sheer_damage_bonus", value: 2 },
+      ],
+    }),
+)
+assert.equal(applicable.error.code, "unsupported_bucket")
+assert.equal(applicable.error.bucketId, "sheer_damage_bonus")
+
+const duplicate = withMutableProperty(
+  Set.prototype,
+  "has",
+  () => false,
+  () =>
+    calculate({
+      formulaId: "regular_damage",
+      buckets: [
+        { bucketId: "base_damage", value: 100 },
+        { bucketId: "base_damage", value: 200 },
+      ],
+    }),
+)
+assert.equal(duplicate.error.code, "duplicate_bucket")
+assert.equal(duplicate.error.bucketId, "base_damage")
+
+const iterable = withMutableProperty(
+  Array.prototype,
+  Symbol.iterator,
+  emptyIterator,
+  () =>
+    calculate({
+      formulaId: "regular_damage",
+      buckets: [{ bucketId: "base_damage", value: 100 }],
+    }),
+)
+assert.deepEqual([iterable.ok, iterable.value], [true, 100])
+
+const canonical = withMutableProperty(
+  Array.prototype,
+  "entries",
+  emptyIterator,
+  () =>
+    calculate({
+      formulaId: "regular_damage",
+      buckets: [
+        { bucketId: "base_damage", value: 100 },
+        { bucketId: "crit", value: 2, contributions: [{ value: 1 }] },
+        {
+          bucketId: "damage_bonus",
+          value: 2,
+          contributions: [{ value: 0.5 }],
+        },
+      ],
+    }),
+)
+assert.equal(canonical.error.code, "conflicting_bucket_input")
+assert.equal(canonical.error.bucketId, "damage_bonus")
+
+function withMutableProperty(object, key, value, operation) {
+  const descriptor = Object.getOwnPropertyDescriptor(object, key)
+  assert.ok(descriptor)
+  Object.defineProperty(object, key, { ...descriptor, value })
+  try {
+    return operation()
+  } finally {
+    Object.defineProperty(object, key, descriptor)
+  }
+}
+
+function emptyIterator() {
+  return {
+    next: () => ({ done: true, value: undefined }),
+    [Symbol.iterator]() {
+      return this
+    },
+  }
+}
 `,
   )
   execFileSync(process.execPath, ["smoke.mjs"], {
@@ -117,7 +214,7 @@ assert.equal(result.value, 100)
   })
 
   console.log(
-    `Verified installed package import/calculation and packed runtime sourcemap with ${runtimeMap.sources.length} embedded sources and no declaration map.`,
+    `Verified installed package import/calculation, hostile collection prototypes, and packed runtime sourcemap with ${runtimeMap.sources.length} embedded sources and no declaration map.`,
   )
 } finally {
   rmSync(temporaryDirectory, { force: true, recursive: true })

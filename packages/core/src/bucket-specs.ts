@@ -1,4 +1,4 @@
-import { trustedHasOwn } from "./trusted-intrinsics"
+import { trustedHasOwn, trustedObjectKeys } from "./trusted-intrinsics"
 import type { BucketId, BucketSpec } from "./types"
 
 const bucketSpecs = {
@@ -54,7 +54,7 @@ const bucketSpecs = {
   },
 } satisfies Record<BucketId, BucketSpec>
 
-const bucketSpecCount = Object.keys(bucketSpecs).length
+const bucketSpecCount = trustedObjectKeys(bucketSpecs).length
 
 export function getBucketSpec(bucketId: BucketId): BucketSpec {
   return bucketSpecs[bucketId]

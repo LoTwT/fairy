@@ -8,6 +8,7 @@ import {
   trustedIsFiniteNumber,
   trustedIsSafeInteger,
   trustedReadDescriptor,
+  trustedSetArrayItem,
 } from "./trusted-intrinsics"
 import {
   conflictingBucketInput,
@@ -57,6 +58,11 @@ interface NormalizedBucket {
   readonly resolved?: ResolvedBucket
   readonly breakdown: BucketBreakdown
   readonly warnings: readonly CalculationWarning[]
+}
+
+interface NormalizedBucketEntry {
+  readonly bucketId: BucketId
+  readonly bucket: NormalizedBucket
 }
 
 interface BucketSnapshot {
@@ -203,7 +209,8 @@ export function resolveBuckets(input: CalculationInput): ResolveBucketsResult {
     )
   }
 
-  for (const bucket of bucketIdentities) {
+  for (let index = 0; index < bucketIdentities.length; index += 1) {
+    const bucket = bucketIdentities[index]!
     if (!isApplicableBucket(formulaSpec, bucket.bucketId)) {
       return fail(
         unsupportedBucket(bucket.bucketId, formulaSpec.formulaId),
@@ -238,32 +245,38 @@ export function resolveBuckets(input: CalculationInput): ResolveBucketsResult {
     )
   }
 
-  const explicitBuckets = new Map<BucketId, NormalizedBucket>()
+  const explicitBuckets: NormalizedBucketEntry[] = []
   const warnings: CalculationWarning[] = []
 
-  for (const bucket of buckets) {
+  for (let index = 0; index < buckets.length; index += 1) {
+    const bucket = buckets[index]!
     const ignored =
-      formulaSpec.ignoredBuckets?.includes(bucket.bucketId) ?? false
+      formulaSpec.ignoredBuckets !== undefined &&
+      includesBucketId(formulaSpec.ignoredBuckets, bucket.bucketId)
     const normalized = normalizeExplicitBucket(
       bucket,
       ignored,
       formulaSpec.formulaId,
     )
 
-    explicitBuckets.set(bucket.bucketId, normalized)
-    warnings.push(...normalized.warnings)
+    appendArrayItem(explicitBuckets, {
+      bucketId: bucket.bucketId,
+      bucket: normalized,
+    })
+    appendArrayItems(warnings, normalized.warnings)
   }
 
   const resolvedBuckets: ResolvedBucket[] = []
   const breakdown: BucketBreakdown[] = []
 
-  for (const bucketId of formulaSpec.buckets) {
-    const explicit = explicitBuckets.get(bucketId)
+  for (let index = 0; index < formulaSpec.buckets.length; index += 1) {
+    const bucketId = formulaSpec.buckets[index]!
+    const explicit = findNormalizedBucket(explicitBuckets, bucketId)
     if (explicit !== undefined) {
       if (explicit.resolved !== undefined) {
-        resolvedBuckets.push(explicit.resolved)
+        appendArrayItem(resolvedBuckets, explicit.resolved)
       }
-      breakdown.push(explicit.breakdown)
+      appendArrayItem(breakdown, explicit.breakdown)
       continue
     }
 
@@ -284,28 +297,38 @@ export function resolveBuckets(input: CalculationInput): ResolveBucketsResult {
       value: bucketSpec.defaultValue,
     } satisfies ResolvedBucket
 
-    resolvedBuckets.push(resolved)
-    breakdown.push({
+    appendArrayItem(resolvedBuckets, resolved)
+    appendArrayItem(breakdown, {
       bucketId,
       value: bucketSpec.defaultValue,
       source: "default",
       defaulted: true,
       warnings: [defaultWarning],
     })
-    warnings.push(defaultWarning)
+    appendArrayItem(warnings, defaultWarning)
   }
 
-  for (const bucketId of formulaSpec.ignoredBuckets ?? []) {
-    const ignored = explicitBuckets.get(bucketId)
-    if (ignored !== undefined) {
-      breakdown.push(ignored.breakdown)
+  const ignoredBucketIds = formulaSpec.ignoredBuckets
+  if (ignoredBucketIds !== undefined) {
+    for (let index = 0; index < ignoredBucketIds.length; index += 1) {
+      const ignored = findNormalizedBucket(
+        explicitBuckets,
+        ignoredBucketIds[index]!,
+      )
+      if (ignored !== undefined) {
+        appendArrayItem(breakdown, ignored.breakdown)
+      }
     }
   }
 
   if (trace !== undefined) {
-    trace.push(`${formulaSpec.formulaId} = ${formulaSpec.buckets.join(" * ")}`)
-    trace.push(
-      `${formulaSpec.formulaId} = ${resolvedBuckets.map(({ value }) => value).join(" * ")}`,
+    appendArrayItem(
+      trace,
+      `${formulaSpec.formulaId} = ${joinBucketIds(formulaSpec.buckets)}`,
+    )
+    appendArrayItem(
+      trace,
+      `${formulaSpec.formulaId} = ${joinResolvedBucketValues(resolvedBuckets)}`,
     )
   }
 
@@ -531,7 +554,7 @@ function snapshotBucketIdentities(
         return { ok: false }
       }
 
-      snapshots.push({
+      appendArrayItem(snapshots, {
         bucketId: bucketIdResult.value,
         bucket: bucketResult.object,
       })
@@ -550,7 +573,8 @@ function snapshotBuckets(
   const payloads: BucketPayloadSnapshot[] = []
 
   // Lock every collection length and the total budget before copying entries.
-  for (const identity of buckets) {
+  for (let index = 0; index < buckets.length; index += 1) {
+    const identity = buckets[index]!
     const snapshotResult = snapshotBucketPayload(identity)
     if (!snapshotResult.ok) {
       return { ok: false }
@@ -564,10 +588,14 @@ function snapshotBuckets(
     }
 
     contributionCount += snapshotResult.contributionCount
-    payloads.push(snapshotResult.bucket)
+    appendArrayItem(payloads, snapshotResult.bucket)
   }
 
-  return { ok: true, buckets: payloads.map(snapshotBucket) }
+  const snapshots: BucketSnapshot[] = []
+  for (let index = 0; index < payloads.length; index += 1) {
+    appendArrayItem(snapshots, snapshotBucket(payloads[index]!))
+  }
+  return { ok: true, buckets: snapshots }
 }
 
 function snapshotBucketPayload(
@@ -769,7 +797,7 @@ function snapshotContributions(
         return INVALID_CONTRIBUTIONS
       }
 
-      snapshots.push({
+      appendArrayItem(snapshots, {
         value,
         ...(source === undefined ? {} : { source }),
         ...(note === undefined ? {} : { note }),
@@ -785,14 +813,13 @@ function snapshotContributions(
 function findDuplicateBucket(
   buckets: readonly { readonly bucketId: BucketId }[],
 ): BucketId | undefined {
-  const seen = new Set<BucketId>()
-
-  for (const bucket of buckets) {
-    if (seen.has(bucket.bucketId)) {
-      return bucket.bucketId
+  for (let index = 0; index < buckets.length; index += 1) {
+    const bucketId = buckets[index]!.bucketId
+    for (let seenIndex = 0; seenIndex < index; seenIndex += 1) {
+      if (buckets[seenIndex]!.bucketId === bucketId) {
+        return bucketId
+      }
     }
-
-    seen.add(bucket.bucketId)
   }
 
   return undefined
@@ -801,13 +828,15 @@ function findDuplicateBucket(
 function findExplicitBucketError(
   buckets: readonly BucketSnapshot[],
 ): CalculationError | undefined {
-  for (const bucket of buckets) {
+  for (let index = 0; index < buckets.length; index += 1) {
+    const bucket = buckets[index]!
     if (bucket.hasValue && bucket.hasContributions) {
       return conflictingBucketInput(bucket.bucketId)
     }
   }
 
-  for (const bucket of buckets) {
+  for (let index = 0; index < buckets.length; index += 1) {
+    const bucket = buckets[index]!
     if (
       bucket.hasValue &&
       bucket.provenance?.kind === "derived" &&
@@ -817,7 +846,8 @@ function findExplicitBucketError(
     }
   }
 
-  for (const bucket of buckets) {
+  for (let index = 0; index < buckets.length; index += 1) {
+    const bucket = buckets[index]!
     if (
       (bucket.hasValue && !isFiniteNumber(bucket.value)) ||
       (bucket.hasContributions &&
@@ -827,7 +857,8 @@ function findExplicitBucketError(
     }
   }
 
-  for (const bucket of buckets) {
+  for (let index = 0; index < buckets.length; index += 1) {
+    const bucket = buckets[index]!
     if (
       bucket.hasContributions &&
       trustedIsArray(bucket.contributions) &&
@@ -837,7 +868,8 @@ function findExplicitBucketError(
     }
   }
 
-  for (const bucket of buckets) {
+  for (let index = 0; index < buckets.length; index += 1) {
+    const bucket = buckets[index]!
     if (
       bucket.hasContributions &&
       getBucketSpec(bucket.bucketId).contributionReducer === undefined
@@ -846,7 +878,8 @@ function findExplicitBucketError(
     }
   }
 
-  for (const bucket of buckets) {
+  for (let index = 0; index < buckets.length; index += 1) {
+    const bucket = buckets[index]!
     if (!bucket.hasContributions) {
       continue
     }
@@ -869,12 +902,13 @@ function findMissingRequiredBucket(
   formulaSpec: FormulaSpec,
   buckets: readonly BucketSnapshot[],
 ): BucketId | undefined {
-  const explicitBuckets = new Map(
-    buckets.map((bucket) => [bucket.bucketId, bucket]),
-  )
-
-  for (const bucketId of formulaSpec.requiredBuckets) {
-    const bucket = explicitBuckets.get(bucketId)
+  for (
+    let requiredIndex = 0;
+    requiredIndex < formulaSpec.requiredBuckets.length;
+    requiredIndex += 1
+  ) {
+    const bucketId = formulaSpec.requiredBuckets[requiredIndex]!
+    const bucket = findBucketSnapshot(buckets, bucketId)
     if (
       bucket === undefined ||
       (!bucket.hasValue && !bucket.hasContributions)
@@ -892,34 +926,74 @@ function sortBucketsForValidation<
   formulaSpec: FormulaSpec,
   buckets: readonly BucketWithIdentity[],
 ): BucketWithIdentity[] {
-  const bucketOrder = new Map<BucketId, number>()
-  const orderedBucketIds = [
-    ...formulaSpec.buckets,
-    ...(formulaSpec.ignoredBuckets ?? []),
-  ]
+  const sorted: BucketWithIdentity[] = []
+  appendArrayItems(sorted, buckets)
 
-  for (const [index, bucketId] of orderedBucketIds.entries()) {
-    bucketOrder.set(bucketId, index)
+  for (let index = 1; index < sorted.length; index += 1) {
+    const current = sorted[index]!
+    let insertionIndex = index
+    while (
+      insertionIndex > 0 &&
+      compareBucketValidationOrder(
+        formulaSpec,
+        current.bucketId,
+        sorted[insertionIndex - 1]!.bucketId,
+      ) < 0
+    ) {
+      trustedSetArrayItem(sorted, insertionIndex, sorted[insertionIndex - 1]!)
+      insertionIndex -= 1
+    }
+    trustedSetArrayItem(sorted, insertionIndex, current)
   }
 
-  // Sorting a defensive copy makes error selection independent of caller order.
-  // oxlint-disable-next-line unicorn/no-array-sort
-  return [...buckets].sort((left, right) => {
-    const leftOrder = bucketOrder.get(left.bucketId)
-    const rightOrder = bucketOrder.get(right.bucketId)
+  return sorted
+}
 
-    if (leftOrder !== undefined && rightOrder !== undefined) {
-      return leftOrder - rightOrder
-    }
-    if (leftOrder !== undefined) {
-      return -1
-    }
-    if (rightOrder !== undefined) {
-      return 1
-    }
+function compareBucketValidationOrder(
+  formulaSpec: FormulaSpec,
+  leftBucketId: BucketId,
+  rightBucketId: BucketId,
+): number {
+  const leftOrder = getBucketValidationOrder(formulaSpec, leftBucketId)
+  const rightOrder = getBucketValidationOrder(formulaSpec, rightBucketId)
 
-    return left.bucketId.localeCompare(right.bucketId)
-  })
+  if (leftOrder !== undefined && rightOrder !== undefined) {
+    return leftOrder - rightOrder
+  }
+  if (leftOrder !== undefined) {
+    return -1
+  }
+  if (rightOrder !== undefined) {
+    return 1
+  }
+
+  return leftBucketId < rightBucketId
+    ? -1
+    : leftBucketId === rightBucketId
+      ? 0
+      : 1
+}
+
+function getBucketValidationOrder(
+  formulaSpec: FormulaSpec,
+  bucketId: BucketId,
+): number | undefined {
+  for (let index = 0; index < formulaSpec.buckets.length; index += 1) {
+    if (formulaSpec.buckets[index] === bucketId) {
+      return index
+    }
+  }
+
+  const ignoredBuckets = formulaSpec.ignoredBuckets
+  if (ignoredBuckets !== undefined) {
+    for (let index = 0; index < ignoredBuckets.length; index += 1) {
+      if (ignoredBuckets[index] === bucketId) {
+        return formulaSpec.buckets.length + index
+      }
+    }
+  }
+
+  return undefined
 }
 
 function isApplicableBucket(
@@ -927,8 +1001,9 @@ function isApplicableBucket(
   bucketId: BucketId,
 ): boolean {
   return (
-    formulaSpec.buckets.includes(bucketId) ||
-    formulaSpec.ignoredBuckets?.includes(bucketId) === true
+    includesBucketId(formulaSpec.buckets, bucketId) ||
+    (formulaSpec.ignoredBuckets !== undefined &&
+      includesBucketId(formulaSpec.ignoredBuckets, bucketId))
   )
 }
 
@@ -936,9 +1011,10 @@ function reduceContributions(
   contributions: readonly BucketContribution[],
   reducer: "sum" | "one_plus_sum",
 ): number {
-  const sum = contributions.reduce((total, contribution) => {
-    return total + contribution.value
-  }, 0)
+  let sum = 0
+  for (let index = 0; index < contributions.length; index += 1) {
+    sum += contributions[index]!.value
+  }
 
   if (reducer === "one_plus_sum") {
     return 1 + sum
@@ -950,10 +1026,11 @@ function reduceContributions(
 function copyContributions(
   contributions: readonly BucketContribution[],
 ): [BucketContribution, ...BucketContribution[]] {
-  return contributions.map(copyContribution) as [
-    BucketContribution,
-    ...BucketContribution[],
-  ]
+  const copy: BucketContribution[] = []
+  for (let index = 0; index < contributions.length; index += 1) {
+    appendArrayItem(copy, copyContribution(contributions[index]!))
+  }
+  return copy as [BucketContribution, ...BucketContribution[]]
 }
 
 function copyContribution(
@@ -1029,31 +1106,113 @@ function hasInvalidContributionEntries(contributions: unknown): boolean {
   return contributions === INVALID_CONTRIBUTIONS
 }
 
+function appendArrayItem<T>(array: T[], value: T): void {
+  trustedSetArrayItem(array, array.length, value)
+}
+
+function appendArrayItems<T>(target: T[], source: readonly T[]): void {
+  for (let index = 0; index < source.length; index += 1) {
+    appendArrayItem(target, source[index]!)
+  }
+}
+
+function includesBucketId(
+  bucketIds: readonly BucketId[],
+  bucketId: BucketId,
+): boolean {
+  for (let index = 0; index < bucketIds.length; index += 1) {
+    if (bucketIds[index] === bucketId) {
+      return true
+    }
+  }
+
+  return false
+}
+
+function findNormalizedBucket(
+  buckets: readonly NormalizedBucketEntry[],
+  bucketId: BucketId,
+): NormalizedBucket | undefined {
+  for (let index = 0; index < buckets.length; index += 1) {
+    if (buckets[index]!.bucketId === bucketId) {
+      return buckets[index]!.bucket
+    }
+  }
+
+  return undefined
+}
+
+function findBucketSnapshot(
+  buckets: readonly BucketSnapshot[],
+  bucketId: BucketId,
+): BucketSnapshot | undefined {
+  for (let index = 0; index < buckets.length; index += 1) {
+    if (buckets[index]!.bucketId === bucketId) {
+      return buckets[index]
+    }
+  }
+
+  return undefined
+}
+
+function joinBucketIds(bucketIds: readonly BucketId[]): string {
+  let joined = ""
+  for (let index = 0; index < bucketIds.length; index += 1) {
+    joined += `${index === 0 ? "" : " * "}${bucketIds[index]!}`
+  }
+  return joined
+}
+
+function joinResolvedBucketValues(buckets: readonly ResolvedBucket[]): string {
+  let joined = ""
+  for (let index = 0; index < buckets.length; index += 1) {
+    joined += `${index === 0 ? "" : " * "}${buckets[index]!.value}`
+  }
+  return joined
+}
+
+function includesObject(objects: readonly object[], object: object): boolean {
+  for (let index = 0; index < objects.length; index += 1) {
+    if (objects[index] === object) {
+      return true
+    }
+  }
+
+  return false
+}
+
+function copyArrayExcludingLast<T>(values: readonly T[]): T[] {
+  const copy: T[] = []
+  for (let index = 0; index + 1 < values.length; index += 1) {
+    appendArrayItem(copy, values[index]!)
+  }
+  return copy
+}
+
 function snapshotStructuralPrototypeChain(
   object: object,
 ): SnapshotPrototypeChainResult {
-  const visited = new Set<object>()
-  const chain: object[] = [object]
+  const chain: object[] = []
+  appendArrayItem(chain, object)
   let current = object
-  visited.add(object)
 
   try {
     while (true) {
       const prototype = trustedGetPrototypeOf(current)
       if (prototype === null) {
-        const readableChain = current === object ? chain : chain.slice(0, -1)
+        const readableChain =
+          current === object ? chain : copyArrayExcludingLast(chain)
         return finalizeStructuralPrototypeChain(readableChain)
       }
       if (prototype === Object.prototype) {
         return finalizeStructuralPrototypeChain(chain)
       }
 
-      if (visited.has(prototype)) {
+      if (includesObject(chain, prototype)) {
         return { ok: false }
       }
 
-      visited.add(prototype)
-      chain.push(prototype)
+      appendArrayItem(chain, prototype)
       if (chain.length > MAX_STRUCTURAL_PROTOTYPE_DEPTH + 2) {
         return { ok: false }
       }
@@ -1100,7 +1259,8 @@ function snapshotStructuralProperty(
   key: PropertyKey,
 ): SnapshotStructuralPropertyResult {
   try {
-    for (const owner of object.chain) {
+    for (let index = 0; index < object.chain.length; index += 1) {
+      const owner = object.chain[index]!
       const descriptor = trustedGetOwnPropertyDescriptor(owner, key)
       if (descriptor !== undefined) {
         return {

@@ -17,10 +17,10 @@ export function calculate(input: CalculationInput): CalculationResult {
     }
   }
 
-  const value = resolved.buckets.reduce(
-    (total, bucket) => total * bucket.value,
-    1,
-  )
+  let value = 1
+  for (let index = 0; index < resolved.buckets.length; index += 1) {
+    value *= resolved.buckets[index]!.value
+  }
 
   if (!trustedIsFiniteNumber(value)) {
     return {

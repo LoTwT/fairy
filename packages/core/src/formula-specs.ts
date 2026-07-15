@@ -1,5 +1,9 @@
 import { getBucketSpec } from "./bucket-specs"
-import { trustedHasOwn } from "./trusted-intrinsics"
+import {
+  trustedHasOwn,
+  trustedObjectKeys,
+  trustedSetArrayItem,
+} from "./trusted-intrinsics"
 import type { BucketId, FormulaId, FormulaSpec } from "./types"
 
 const formulaSpecs = {
@@ -52,6 +56,8 @@ const formulaSpecs = {
   },
 } satisfies Record<FormulaId, FormulaSpec>
 
+const registeredFormulaIds = trustedObjectKeys(formulaSpecs) as FormulaId[]
+
 validateFormulaRegistry(formulaSpecs)
 freezeFormulaSpecs(formulaSpecs)
 
@@ -60,7 +66,7 @@ export function getFormulaSpec(formulaId: FormulaId): FormulaSpec {
 }
 
 export function listBuckets(formulaId: FormulaId): readonly BucketId[] {
-  return [...formulaSpecs[formulaId].buckets]
+  return copyArray(formulaSpecs[formulaId].buckets)
 }
 
 export function getFormulaSpecById(
@@ -78,7 +84,7 @@ export function isFormulaId(formulaId: unknown): formulaId is FormulaId {
 }
 
 export function listRegisteredFormulaIds(): readonly FormulaId[] {
-  return Object.keys(formulaSpecs) as FormulaId[]
+  return copyArray(registeredFormulaIds)
 }
 
 export function validateFormulaSpec(formulaSpec: FormulaSpec): void {
@@ -94,13 +100,10 @@ export function validateFormulaSpec(formulaSpec: FormulaSpec): void {
     formulaSpec.optionalBuckets,
   )
 
-  const buckets = new Set(formulaSpec.buckets)
-  const requiredBuckets = new Set(formulaSpec.requiredBuckets)
-  const optionalBuckets = new Set(formulaSpec.optionalBuckets)
-
-  for (const bucketId of formulaSpec.buckets) {
-    const isRequired = requiredBuckets.has(bucketId)
-    const isOptional = optionalBuckets.has(bucketId)
+  for (let index = 0; index < formulaSpec.buckets.length; index += 1) {
+    const bucketId = formulaSpec.buckets[index]!
+    const isRequired = includesBucketId(formulaSpec.requiredBuckets, bucketId)
+    const isOptional = includesBucketId(formulaSpec.optionalBuckets, bucketId)
     if (isRequired === isOptional) {
       throw new Error(
         `${formulaSpec.formulaId}: ${bucketId} must appear in exactly one of requiredBuckets or optionalBuckets`,
@@ -108,18 +111,11 @@ export function validateFormulaSpec(formulaSpec: FormulaSpec): void {
     }
   }
 
-  for (const bucketId of [
-    ...formulaSpec.requiredBuckets,
-    ...formulaSpec.optionalBuckets,
-  ]) {
-    if (!buckets.has(bucketId)) {
-      throw new Error(
-        `${formulaSpec.formulaId}: ${bucketId} is classified but absent from buckets`,
-      )
-    }
-  }
+  assertClassifiedBucketsPresent(formulaSpec, formulaSpec.requiredBuckets)
+  assertClassifiedBucketsPresent(formulaSpec, formulaSpec.optionalBuckets)
 
-  for (const bucketId of formulaSpec.optionalBuckets) {
+  for (let index = 0; index < formulaSpec.optionalBuckets.length; index += 1) {
+    const bucketId = formulaSpec.optionalBuckets[index]!
     if (getBucketSpec(bucketId).defaultValue === undefined) {
       throw new Error(
         `${formulaSpec.formulaId}: optional bucket ${bucketId} must define a default value`,
@@ -129,8 +125,9 @@ export function validateFormulaSpec(formulaSpec: FormulaSpec): void {
 
   const ignoredBuckets = formulaSpec.ignoredBuckets ?? []
   assertUniqueBucketIds(formulaSpec, "ignoredBuckets", ignoredBuckets)
-  for (const bucketId of ignoredBuckets) {
-    if (buckets.has(bucketId)) {
+  for (let index = 0; index < ignoredBuckets.length; index += 1) {
+    const bucketId = ignoredBuckets[index]!
+    if (includesBucketId(formulaSpec.buckets, bucketId)) {
       throw new Error(
         `${formulaSpec.formulaId}: ${bucketId} cannot be both calculated and ignored`,
       )
@@ -147,10 +144,10 @@ export function validateFormulaSpec(formulaSpec: FormulaSpec): void {
 export function validateFormulaRegistry(
   specs: Record<FormulaId, FormulaSpec>,
 ): void {
-  for (const [formulaId, formulaSpec] of Object.entries(specs) as [
-    FormulaId,
-    FormulaSpec,
-  ][]) {
+  const formulaIds = trustedObjectKeys(specs) as FormulaId[]
+  for (let index = 0; index < formulaIds.length; index += 1) {
+    const formulaId = formulaIds[index]!
+    const formulaSpec = specs[formulaId]
     if (formulaId !== formulaSpec.formulaId) {
       throw new Error(
         `formula registry key ${formulaId} does not match entry identity ${formulaSpec.formulaId}`,
@@ -164,18 +161,28 @@ export function validateFormulaRegistry(
 function copyFormulaSpec(formulaSpec: FormulaSpec): FormulaSpec {
   return {
     formulaId: formulaSpec.formulaId,
-    buckets: [...formulaSpec.buckets],
-    requiredBuckets: [...formulaSpec.requiredBuckets],
-    optionalBuckets: [...formulaSpec.optionalBuckets],
+    buckets: copyArray(formulaSpec.buckets),
+    requiredBuckets: copyArray(formulaSpec.requiredBuckets),
+    optionalBuckets: copyArray(formulaSpec.optionalBuckets),
     ignoredBuckets:
       formulaSpec.ignoredBuckets === undefined
         ? undefined
-        : [...formulaSpec.ignoredBuckets],
+        : copyArray(formulaSpec.ignoredBuckets),
   }
 }
 
+function copyArray<T>(values: readonly T[]): T[] {
+  const copy: T[] = []
+  for (let index = 0; index < values.length; index += 1) {
+    trustedSetArrayItem(copy, index, values[index]!)
+  }
+  return copy
+}
+
 function freezeFormulaSpecs(specs: Record<FormulaId, FormulaSpec>): void {
-  for (const formulaSpec of Object.values(specs)) {
+  const formulaIds = trustedObjectKeys(specs) as FormulaId[]
+  for (let index = 0; index < formulaIds.length; index += 1) {
+    const formulaSpec = specs[formulaIds[index]!]
     Object.freeze(formulaSpec.buckets)
     Object.freeze(formulaSpec.requiredBuckets)
     Object.freeze(formulaSpec.optionalBuckets)
@@ -195,7 +202,40 @@ function assertUniqueBucketIds(
   field: string,
   bucketIds: readonly BucketId[],
 ): void {
-  if (new Set(bucketIds).size !== bucketIds.length) {
-    throw new Error(`${formulaSpec.formulaId}: ${field} contains duplicates`)
+  for (let index = 0; index < bucketIds.length; index += 1) {
+    for (let seenIndex = 0; seenIndex < index; seenIndex += 1) {
+      if (bucketIds[index] === bucketIds[seenIndex]) {
+        throw new Error(
+          `${formulaSpec.formulaId}: ${field} contains duplicates`,
+        )
+      }
+    }
   }
+}
+
+function assertClassifiedBucketsPresent(
+  formulaSpec: FormulaSpec,
+  classifiedBucketIds: readonly BucketId[],
+): void {
+  for (let index = 0; index < classifiedBucketIds.length; index += 1) {
+    const bucketId = classifiedBucketIds[index]!
+    if (!includesBucketId(formulaSpec.buckets, bucketId)) {
+      throw new Error(
+        `${formulaSpec.formulaId}: ${bucketId} is classified but absent from buckets`,
+      )
+    }
+  }
+}
+
+function includesBucketId(
+  bucketIds: readonly BucketId[],
+  bucketId: BucketId,
+): boolean {
+  for (let index = 0; index < bucketIds.length; index += 1) {
+    if (bucketIds[index] === bucketId) {
+      return true
+    }
+  }
+
+  return false
 }
