@@ -1433,6 +1433,256 @@ describe("calculate", () => {
     })
   })
 
+  it("uses captured intrinsic guards after mutation", () => {
+    const hasOwnDescriptor = Object.getOwnPropertyDescriptor(
+      Object.prototype,
+      "hasOwnProperty",
+    )!
+    const valueDescriptor = Object.getOwnPropertyDescriptor(
+      Object.prototype,
+      "value",
+    )
+    const objectHasOwnDescriptor = Object.getOwnPropertyDescriptor(
+      Object,
+      "hasOwn",
+    )!
+    const arrayIsArrayDescriptor = Object.getOwnPropertyDescriptor(
+      Array,
+      "isArray",
+    )!
+    const numberIsFiniteDescriptor = Object.getOwnPropertyDescriptor(
+      Number,
+      "isFinite",
+    )!
+    let result: ReturnType<typeof calculate>
+    let registryResult: ReturnType<typeof calculate>
+    let emptyContributionsResult: ReturnType<typeof calculate>
+    let overflowResult: ReturnType<typeof calculate>
+
+    try {
+      // oxlint-disable-next-line no-extend-native -- Exercise the intrinsic boundary.
+      Object.defineProperty(Object.prototype, "hasOwnProperty", {
+        configurable: true,
+        value(this: object, key: PropertyKey): boolean {
+          return key === "value"
+            ? true
+            : Reflect.apply(hasOwnDescriptor.value, this, [key])
+        },
+      })
+      // oxlint-disable-next-line no-extend-native -- Exercise the pollution boundary.
+      Object.defineProperty(Object.prototype, "value", {
+        configurable: true,
+        value: 999,
+      })
+      Object.defineProperty(Object, "hasOwn", {
+        configurable: true,
+        value: () => true,
+      })
+      Object.defineProperty(Array, "isArray", {
+        configurable: true,
+        value: () => false,
+      })
+      Object.defineProperty(Number, "isFinite", {
+        configurable: true,
+        value: () => true,
+      })
+
+      result = calculate({
+        formulaId: "regular_damage",
+        buckets: [{ bucketId: "base_damage" } as Bucket],
+      })
+      registryResult = calculate({
+        formulaId: "constructor",
+        buckets: [{ bucketId: "base_damage", value: 100 }],
+      } as unknown as CalculationInput)
+      emptyContributionsResult = calculate({
+        formulaId: "regular_damage",
+        buckets: [
+          { bucketId: "base_damage", value: 100 },
+          { bucketId: "crit", contributions: [] },
+        ],
+      })
+      overflowResult = calculate({
+        formulaId: "regular_damage",
+        buckets: [
+          { bucketId: "base_damage", value: Number.MAX_VALUE },
+          { bucketId: "crit", value: 2 },
+        ],
+      })
+    } finally {
+      // oxlint-disable-next-line no-extend-native -- Restore the prior state.
+      Object.defineProperty(
+        Object.prototype,
+        "hasOwnProperty",
+        hasOwnDescriptor,
+      )
+      if (valueDescriptor === undefined) {
+        Reflect.deleteProperty(Object.prototype, "value")
+      } else {
+        // oxlint-disable-next-line no-extend-native -- Restore the prior state.
+        Object.defineProperty(Object.prototype, "value", valueDescriptor)
+      }
+      Object.defineProperty(Object, "hasOwn", objectHasOwnDescriptor)
+      Object.defineProperty(Array, "isArray", arrayIsArrayDescriptor)
+      Object.defineProperty(Number, "isFinite", numberIsFiniteDescriptor)
+    }
+
+    expect(result!).toMatchObject({
+      ok: false,
+      error: { code: "missing_required_bucket", bucketId: "base_damage" },
+    })
+    expect(registryResult!).toMatchObject({
+      ok: false,
+      error: { code: "unsupported_formula" },
+    })
+    expect(emptyContributionsResult!).toMatchObject({
+      ok: false,
+      error: { code: "empty_contributions", bucketId: "crit" },
+    })
+    expect(overflowResult!).toMatchObject({
+      ok: false,
+      error: {
+        code: "invalid_number",
+        message: "Calculation result must be a finite number.",
+      },
+    })
+  })
+
+  it("ignores intrinsic pollution across structural object layers", () => {
+    const keys = [
+      "formulaId",
+      "bucketId",
+      "value",
+      "kind",
+      "source",
+      "note",
+    ] as const
+    const previous = new Map(
+      keys.map((key) => [
+        key,
+        Object.getOwnPropertyDescriptor(Object.prototype, key),
+      ]),
+    )
+    let inheritedFormulaId: ReturnType<typeof calculate>
+    let inheritedBucketId: ReturnType<typeof calculate>
+    let inheritedContribution: ReturnType<typeof calculate>
+    let inheritedProvenance: ReturnType<typeof calculate>
+
+    try {
+      // oxlint-disable-next-line no-extend-native -- Exercise every structural layer.
+      Object.defineProperties(Object.prototype, {
+        formulaId: { configurable: true, value: "regular_damage" },
+        bucketId: { configurable: true, value: "base_damage" },
+        value: { configurable: true, value: 0.5 },
+        kind: { configurable: true, value: "manual" },
+        source: { configurable: true, value: "polluted" },
+        note: { configurable: true, value: "polluted" },
+      })
+
+      inheritedFormulaId = calculate({
+        buckets: [{ bucketId: "base_damage", value: 100 }],
+      } as unknown as CalculationInput)
+      inheritedBucketId = calculate({
+        formulaId: "regular_damage",
+        buckets: [{ value: 100 } as Bucket],
+      })
+      inheritedContribution = calculate({
+        formulaId: "regular_damage",
+        buckets: [
+          { bucketId: "base_damage", value: 100 },
+          { bucketId: "damage_bonus", contributions: [{}] },
+        ],
+      } as unknown as CalculationInput)
+      inheritedProvenance = calculate({
+        formulaId: "regular_damage",
+        buckets: [{ bucketId: "base_damage", value: 100, provenance: {} }],
+      } as unknown as CalculationInput)
+    } finally {
+      for (const key of keys) {
+        const descriptor = previous.get(key)
+        if (descriptor === undefined) {
+          Reflect.deleteProperty(Object.prototype, key)
+        } else {
+          // oxlint-disable-next-line no-extend-native -- Restore the prior state.
+          Object.defineProperty(Object.prototype, key, descriptor)
+        }
+      }
+    }
+
+    expect(inheritedFormulaId!).toMatchObject({
+      ok: false,
+      error: { code: "unsupported_formula" },
+    })
+    expect(inheritedBucketId!).toMatchObject({
+      ok: false,
+      error: { code: "invalid_calculation_input" },
+    })
+    expect(inheritedContribution!).toMatchObject({
+      ok: false,
+      error: { code: "invalid_number", bucketId: "damage_bonus" },
+    })
+    expect(inheritedProvenance!).toMatchObject({
+      ok: false,
+      error: { code: "invalid_calculation_input" },
+    })
+  })
+
+  it("treats non-root null terminals as unread structural boundaries", () => {
+    let terminalReads = 0
+    const terminal = Object.create(null) as Record<PropertyKey, unknown>
+    Object.defineProperty(terminal, "value", {
+      get(): number {
+        terminalReads += 1
+        return 130
+      },
+    })
+
+    const inheritedRequired = Object.assign(Object.create(terminal), {
+      bucketId: "base_damage" as const,
+    })
+    const inheritedOptional = Object.assign(Object.create(terminal), {
+      bucketId: "crit" as const,
+    })
+    const directNullRoot = Object.assign(Object.create(null), {
+      bucketId: "base_damage" as const,
+      value: 140,
+    })
+
+    expect(
+      calculate({
+        formulaId: "regular_damage",
+        buckets: [inheritedRequired],
+      }),
+    ).toMatchObject({
+      ok: false,
+      error: { code: "missing_required_bucket", bucketId: "base_damage" },
+    })
+    const optionalResult = calculate({
+      formulaId: "regular_damage",
+      buckets: [{ bucketId: "base_damage", value: 100 }, inheritedOptional],
+    })
+    expect(optionalResult).toMatchObject({
+      ok: true,
+      value: 100,
+    })
+    expect(
+      optionalResult.ok &&
+        optionalResult.buckets.find(({ bucketId }) => bucketId === "crit"),
+    ).toMatchObject({
+      bucketId: "crit",
+      value: 1,
+      source: "default",
+      defaulted: true,
+    })
+    expect(
+      calculate({
+        formulaId: "regular_damage",
+        buckets: [directNullRoot],
+      }),
+    ).toMatchObject({ ok: true, value: 140 })
+    expect(terminalReads).toBe(0)
+  })
+
   it("supports cross-realm payloads without accepting intrinsic pollution", () => {
     const foreign = runInNewContext(`
       (() => {
@@ -1487,10 +1737,20 @@ describe("calculate", () => {
       overDepth: Bucket
     }
     const pollutedValue = runInNewContext(`
-      Object.defineProperty(Object.prototype, "constructor", {
-        configurable: true,
-        value: null,
-      })
+      for (const key of [
+        "constructor",
+        "hasOwnProperty",
+        "isPrototypeOf",
+        "propertyIsEnumerable",
+        "toLocaleString",
+        "toString",
+        "valueOf",
+      ]) {
+        Object.defineProperty(Object.prototype, key, {
+          configurable: true,
+          value: function replacedMarker() {},
+        })
+      }
       Object.defineProperty(Object.prototype, "value", {
         configurable: true,
         value: 100,
@@ -1523,7 +1783,10 @@ describe("calculate", () => {
         formulaId: "regular_damage",
         buckets: [foreign.nullPrototypeCustom],
       }),
-    ).toMatchObject({ ok: true, value: 130 })
+    ).toMatchObject({
+      ok: false,
+      error: { code: "missing_required_bucket", bucketId: "base_damage" },
+    })
     expect(
       calculate({
         formulaId: "regular_damage",
@@ -1593,7 +1856,7 @@ describe("calculate", () => {
       },
     )
 
-    let deepPrototype: object | null = null
+    let deepPrototype: object = Object.prototype
     for (let depth = 0; depth < 33; depth += 1) {
       deepPrototype = Object.create(deepPrototype)
     }
@@ -1622,7 +1885,7 @@ describe("calculate", () => {
       expect(result.ok || result.error).not.toHaveProperty("bucketId")
     }
 
-    let boundaryPrototype: object | null = null
+    let boundaryPrototype: object = Object.prototype
     for (let depth = 0; depth < 32; depth += 1) {
       boundaryPrototype = Object.create(boundaryPrototype)
     }

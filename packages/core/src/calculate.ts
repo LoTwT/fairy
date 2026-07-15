@@ -1,4 +1,5 @@
 import { resolveBuckets } from "./resolve-buckets"
+import { trustedIsFiniteNumber } from "./trusted-intrinsics"
 import { invalidCalculationResult } from "./warnings"
 import type { CalculationInput, CalculationResult } from "./types"
 
@@ -21,7 +22,7 @@ export function calculate(input: CalculationInput): CalculationResult {
     1,
   )
 
-  if (!Number.isFinite(value)) {
+  if (!trustedIsFiniteNumber(value)) {
     return {
       ok: false,
       formulaId: resolved.formulaSpec.formulaId,

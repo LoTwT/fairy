@@ -210,11 +210,13 @@ type BucketProvenance =
 - `CalculationInput` 必须是可读取的实际 object；`options` 缺省合法，存在时必须是可读取的实际
   object，且 `trace` 只能是 boolean 或 `undefined`。无法安全读取或物化顶层 input metadata 时返回
   formula-level `invalid_calculation_input`。
-- `Bucket.value` / `Bucket.contributions` 可以是 object 自身属性，也可以由 class / custom prototype
-  提供；presence 检测必须先锁定最多 `32` 层的 custom prototype chain，记录 visited object，并以
-  realm-neutral 方式跳过输入所属 realm 的 intrinsic `Object.prototype`。cycle、超深 chain、descriptor /
-  prototype / getter 无法安全读取时返回 formula-level
-  `invalid_calculation_input`，每个 payload getter 仍只读取一次。
+- `Bucket` identity / payload、`BucketProvenance` 与 `BucketContribution` 的 public structural fields 可以是
+  object 自身属性，也可以由 class / custom prototype 提供；reader 必须先锁定最多 `32` 层可读的
+  non-terminal custom prototype chain，并记录 visited object。direct null-prototype root 的 own payload 仍可
+  读取；任何 non-root `[[Prototype]] = null` terminal 一律是不可读 structural boundary，不以 marker 或
+  native source 猜测其 realm identity，也不调用 terminal getter。cycle、超深 chain、descriptor /
+  prototype / getter 无法安全读取时返回 formula-level `invalid_calculation_input`，每个 structural getter
+  仍只读取一次。
 - `buckets` 必须是 dense array，且每项必须是可读取的实际 bucket object；collection / entry shape
   无法建立可信 `bucketId` 时也返回 formula-level `invalid_calculation_input`，不伪造 `bucketId`。
 - 每个 `bucketId` 必须是 primitive string，并且是内置 `BucketSpec` registry 的 own property；未注册
@@ -231,6 +233,12 @@ type BucketProvenance =
   `kind: "manual"` 处理。
 - `provenance.kind = "derived"` 的直接 `value` 只有在 `BucketSpec.acceptsDerivedValue = true`
   时才允许；否则返回 `{ ok: false }` + `unsupported_derived_value`。
+
+**0.2.0 migration note — prototype terminal boundary:** 旧 draft 曾允许从 non-root null-prototype
+terminal 继承 payload。该行为无法以 realm-neutral、fail-closed 的方式与被完整重写的 foreign intrinsic
+`Object.prototype` 区分，因此 `0.2.0` 明确把这类 terminal 改为不可读边界：required payload 视为缺失，
+optional payload 使用默认值。需要读取 null-prototype 数据时，调用方必须把字段放在直接传入的 root own
+properties 上；class 与 non-terminal custom prototype payload 仍受支持。
 
 ### Bucket cardinality and formula applicability
 
@@ -493,10 +501,11 @@ type CalculationResult =
    `FormulaSpec.ignoredBuckets`；
    不属于两者返回 `{ ok: false }` + `unsupported_bucket`。
 6. 只对 unique + applicable identities 做 guarded deep snapshot：bucket / provenance / contribution
-   fields 各只读取一次并物化为 internal plain data。`value` / `contributions` 的 presence 共用一次最多
-   `32` 层、带 visited 检查且跳过任意 realm intrinsic `Object.prototype` 的 prototype-chain snapshot；每个 contributions array
-   的 primitive integer `length` 在读取或复制 entry 前只读一次，并计入整个 request 的 `10,000` total
-   budget；超限返回 formula-level `invalid_calculation_input`。
+   fields 各只读取一次并物化为 internal plain data。所有 structural fields 共用 realm-neutral chain reader：
+   direct null-prototype root own fields 可读，non-root null terminal 不可读，最多接受 `32` 层可读
+   non-terminal custom prototypes，并检查 visited；每个 contributions array 的 primitive integer `length` 在
+   读取或复制 entry 前只读一次，并计入整个 request 的 `10,000` total budget；超限返回 formula-level
+   `invalid_calculation_input`。
 7. 对所有显式 bucket 做 input-shape / support validation：同一 bucket 同时包含 `value` 和
    `contributions` 时返回 `{ ok: false }` + `conflicting_bucket_input`；不支持的 derived direct
    value 返回 `{ ok: false }` + `unsupported_derived_value`。
@@ -820,9 +829,29 @@ special = 1 (default)
     { bucketId: 'crit', value: 2, source: 'input_value' },
     { bucketId: 'defense', value: 0.5, source: 'input_value' },
     { bucketId: 'resistance', value: 0.9, source: 'input_value' },
-    { bucketId: 'damage_taken', value: 1, source: 'default', defaulted: true },
+    {
+      bucketId: 'damage_taken',
+      value: 1,
+      source: 'default',
+      defaulted: true,
+      warnings: [{
+        code: 'defaulted_bucket',
+        bucketId: 'damage_taken',
+        message: 'damage_taken defaulted to neutral value 1.',
+      }],
+    },
     { bucketId: 'stun_damage_taken', value: 1.5, source: 'input_value' },
-    { bucketId: 'special', value: 1, source: 'default', defaulted: true },
+    {
+      bucketId: 'special',
+      value: 1,
+      source: 'default',
+      defaulted: true,
+      warnings: [{
+        code: 'defaulted_bucket',
+        bucketId: 'special',
+        message: 'special defaulted to neutral value 1.',
+      }],
+    },
   ],
   warnings: [
     {
@@ -903,8 +932,28 @@ special = 1 (default)
     { bucketId: 'sheer_damage_bonus', value: 1.25, source: 'input_value' },
     { bucketId: 'resistance', value: 0.9, source: 'input_value' },
     { bucketId: 'damage_taken', value: 1.2, source: 'input_value' },
-    { bucketId: 'stun_damage_taken', value: 1, source: 'default', defaulted: true },
-    { bucketId: 'special', value: 1, source: 'default', defaulted: true },
+    {
+      bucketId: 'stun_damage_taken',
+      value: 1,
+      source: 'default',
+      defaulted: true,
+      warnings: [{
+        code: 'defaulted_bucket',
+        bucketId: 'stun_damage_taken',
+        message: 'stun_damage_taken defaulted to neutral value 1.',
+      }],
+    },
+    {
+      bucketId: 'special',
+      value: 1,
+      source: 'default',
+      defaulted: true,
+      warnings: [{
+        code: 'defaulted_bucket',
+        bucketId: 'special',
+        message: 'special defaulted to neutral value 1.',
+      }],
+    },
   ],
   warnings: [
     {
@@ -1065,9 +1114,10 @@ Unsupported contributions：
   返回 `{ ok: false }`；ignored bucket 只能通过 warning 和 breakdown 表达。
 - runtime bucket identity 必须由 registry own-property guard 收窄；未注册 / prototype bucket id 返回
   formula-level `invalid_calculation_input`，不能泄漏到任何携带 public `BucketId` 的 error variant。
-- `Bucket.value` / `Bucket.contributions` presence 必须一致支持 own 与 class / custom-prototype properties，
-  同时忽略 current / foreign realm intrinsic `Object.prototype` 污染；prototype chain 最多 `32` 层并检查 cycle，presence inspection 或 getter
-  抛错必须 fail-close，不能忽略有效 inherited payload。
+- structural fields 必须一致支持 direct root own 与 class / non-terminal custom-prototype properties；任何
+  non-root null terminal（包括 current / foreign intrinsic `Object.prototype`）均不可读，direct null-prototype
+  root own payload 仍可读。prototype chain 最多 `32` 层可读 non-terminal prototypes并检查 cycle；presence
+  inspection 或 getter 抛错必须 fail-close，不能忽略有效的 non-terminal inherited payload。
 - `buckets` 数量上限必须由 bucket registry cardinality 派生（当前 `9`）；单个 request 的
   `contributions` 总数上限为 `10,000`。两类 caller-owned array length 都必须在 loop / allocation 前按
   primitive non-negative safe integer 校验，超限返回 formula-level `invalid_calculation_input`。

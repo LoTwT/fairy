@@ -6,6 +6,7 @@ import {
   readFileSync,
   readdirSync,
   rmSync,
+  writeFileSync,
 } from "node:fs"
 import { tmpdir } from "node:os"
 import { dirname, join, relative } from "node:path"
@@ -15,6 +16,7 @@ const testDirectory = dirname(fileURLToPath(import.meta.url))
 const packageDirectory = join(testDirectory, "..")
 const temporaryDirectory = mkdtempSync(join(tmpdir(), "randomplay-core-pack-"))
 const unpackedDirectory = join(temporaryDirectory, "unpacked")
+const consumerDirectory = join(temporaryDirectory, "consumer")
 
 try {
   execFileSync("pnpm", ["build"], {
@@ -30,13 +32,12 @@ try {
     file.endsWith(".tgz"),
   )
   assert.ok(tarball, "pnpm pack must produce a tarball")
+  const tarballPath = join(temporaryDirectory, tarball)
 
   mkdirSync(unpackedDirectory)
-  execFileSync(
-    "tar",
-    ["-xzf", join(temporaryDirectory, tarball), "-C", unpackedDirectory],
-    { stdio: "inherit" },
-  )
+  execFileSync("tar", ["-xzf", tarballPath, "-C", unpackedDirectory], {
+    stdio: "inherit",
+  })
 
   const packedRoot = join(unpackedDirectory, "package")
   const files = listFiles(packedRoot)
@@ -71,8 +72,52 @@ try {
     ),
   )
 
+  mkdirSync(consumerDirectory)
+  writeFileSync(
+    join(consumerDirectory, "package.json"),
+    `${JSON.stringify(
+      {
+        name: "randomplay-core-packed-consumer",
+        private: true,
+        type: "module",
+        dependencies: {
+          "@randomplay/core": `file:${relative(consumerDirectory, tarballPath)}`,
+        },
+      },
+      undefined,
+      2,
+    )}\n`,
+  )
+  execFileSync(
+    "pnpm",
+    ["install", "--offline", "--lockfile-only", "--ignore-workspace"],
+    { cwd: consumerDirectory, stdio: "inherit" },
+  )
+  execFileSync(
+    "pnpm",
+    ["install", "--offline", "--frozen-lockfile", "--ignore-workspace"],
+    { cwd: consumerDirectory, stdio: "inherit" },
+  )
+  writeFileSync(
+    join(consumerDirectory, "smoke.mjs"),
+    `import assert from "node:assert/strict"
+import { calculate } from "@randomplay/core"
+
+const result = calculate({
+  formulaId: "regular_damage",
+  buckets: [{ bucketId: "base_damage", value: 100 }],
+})
+assert.equal(result.ok, true)
+assert.equal(result.value, 100)
+`,
+  )
+  execFileSync(process.execPath, ["smoke.mjs"], {
+    cwd: consumerDirectory,
+    stdio: "inherit",
+  })
+
   console.log(
-    `Verified packed runtime sourcemap with ${runtimeMap.sources.length} embedded sources and no declaration map.`,
+    `Verified installed package import/calculation and packed runtime sourcemap with ${runtimeMap.sources.length} embedded sources and no declaration map.`,
   )
 } finally {
   rmSync(temporaryDirectory, { force: true, recursive: true })

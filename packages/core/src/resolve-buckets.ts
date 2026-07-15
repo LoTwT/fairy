@@ -1,6 +1,15 @@
 import { getBucketSpec, getBucketSpecCount, isBucketId } from "./bucket-specs"
 import { getFormulaSpecById } from "./formula-specs"
 import {
+  trustedGetOwnPropertyDescriptor,
+  trustedGetPrototypeOf,
+  trustedHasOwn,
+  trustedIsArray,
+  trustedIsFiniteNumber,
+  trustedIsSafeInteger,
+  trustedReadDescriptor,
+} from "./trusted-intrinsics"
+import {
   conflictingBucketInput,
   defaultedBucket,
   duplicateBucket,
@@ -64,7 +73,7 @@ interface BucketSnapshot {
 
 interface BucketIdentitySnapshot {
   readonly bucketId: BucketId
-  readonly bucket: Record<PropertyKey, unknown>
+  readonly bucket: StructuralObjectSnapshot
 }
 
 interface BucketPayloadSnapshot {
@@ -125,45 +134,23 @@ type SnapshotPrototypeChainResult =
   | { readonly ok: true; readonly chain: readonly object[] }
   | { readonly ok: false }
 
-type StructuralPropertyPresence = "present" | "absent" | "invalid"
+interface StructuralObjectSnapshot {
+  readonly root: Record<PropertyKey, unknown>
+  readonly chain: readonly object[]
+}
+
+type SnapshotStructuralObjectResult =
+  | { readonly ok: true; readonly object: StructuralObjectSnapshot }
+  | { readonly ok: false }
+
+type SnapshotStructuralPropertyResult =
+  | { readonly ok: true; readonly present: true; readonly value: unknown }
+  | { readonly ok: true; readonly present: false; readonly value: undefined }
+  | { readonly ok: false }
 
 const INVALID_CONTRIBUTIONS = Symbol("invalid contributions")
 const MAX_CONTRIBUTIONS_PER_CALCULATION = 10_000
 const MAX_STRUCTURAL_PROTOTYPE_DEPTH = 32
-const FUNCTION_TO_STRING = Function.prototype.toString
-const NATIVE_OBJECT_CONSTRUCTOR_SOURCE = Reflect.apply(
-  FUNCTION_TO_STRING,
-  Object,
-  [],
-)
-const INTRINSIC_OBJECT_PROTOTYPE_MARKERS = [
-  ["constructor", NATIVE_OBJECT_CONSTRUCTOR_SOURCE],
-  [
-    "hasOwnProperty",
-    Reflect.apply(FUNCTION_TO_STRING, Object.prototype.hasOwnProperty, []),
-  ],
-  [
-    "isPrototypeOf",
-    Reflect.apply(FUNCTION_TO_STRING, Object.prototype.isPrototypeOf, []),
-  ],
-  [
-    "propertyIsEnumerable",
-    Reflect.apply(
-      FUNCTION_TO_STRING,
-      Object.prototype.propertyIsEnumerable,
-      [],
-    ),
-  ],
-  [
-    "toLocaleString",
-    Reflect.apply(FUNCTION_TO_STRING, Object.prototype.toLocaleString, []),
-  ],
-  [
-    "toString",
-    Reflect.apply(FUNCTION_TO_STRING, Object.prototype.toString, []),
-  ],
-  ["valueOf", Reflect.apply(FUNCTION_TO_STRING, Object.prototype.valueOf, [])],
-] as const
 
 export function resolveBuckets(input: CalculationInput): ResolveBucketsResult {
   const inputSnapshotResult = snapshotCalculationInput(input)
@@ -433,42 +420,64 @@ function snapshotCalculationInput(
 ): SnapshotCalculationInputResult {
   let formulaId: unknown
 
-  try {
-    if (typeof input !== "object" || input === null || Array.isArray(input)) {
-      return { ok: false }
-    }
+  const inputResult = snapshotStructuralObject(input)
+  if (!inputResult.ok) {
+    return { ok: false }
+  }
 
-    const inputRecord = input as Record<PropertyKey, unknown>
-    formulaId = inputRecord.formulaId
-    const options = inputRecord.options
-    let traceEnabled = false
+  const formulaIdResult = snapshotStructuralProperty(
+    inputResult.object,
+    "formulaId",
+  )
+  if (!formulaIdResult.ok) {
+    return { ok: false }
+  }
+  formulaId = formulaIdResult.value
 
-    if (options !== undefined) {
-      if (
-        typeof options !== "object" ||
-        options === null ||
-        Array.isArray(options)
-      ) {
-        return invalidCalculationInputSnapshot(formulaId)
-      }
-
-      const trace = (options as Record<PropertyKey, unknown>).trace
-      if (trace !== undefined && typeof trace !== "boolean") {
-        return invalidCalculationInputSnapshot(formulaId)
-      }
-      traceEnabled = trace === true
-    }
-
-    return {
-      ok: true,
-      input: {
-        formulaId,
-        buckets: inputRecord.buckets,
-        traceEnabled,
-      },
-    }
-  } catch {
+  const optionsResult = snapshotStructuralProperty(
+    inputResult.object,
+    "options",
+  )
+  if (!optionsResult.ok) {
     return invalidCalculationInputSnapshot(formulaId)
+  }
+
+  let traceEnabled = false
+  if (optionsResult.value !== undefined) {
+    const optionsSnapshotResult = snapshotStructuralObject(optionsResult.value)
+    if (!optionsSnapshotResult.ok) {
+      return invalidCalculationInputSnapshot(formulaId)
+    }
+
+    const traceResult = snapshotStructuralProperty(
+      optionsSnapshotResult.object,
+      "trace",
+    )
+    if (
+      !traceResult.ok ||
+      (traceResult.value !== undefined &&
+        typeof traceResult.value !== "boolean")
+    ) {
+      return invalidCalculationInputSnapshot(formulaId)
+    }
+    traceEnabled = traceResult.value === true
+  }
+
+  const bucketsResult = snapshotStructuralProperty(
+    inputResult.object,
+    "buckets",
+  )
+  if (!bucketsResult.ok) {
+    return invalidCalculationInputSnapshot(formulaId)
+  }
+
+  return {
+    ok: true,
+    input: {
+      formulaId,
+      buckets: bucketsResult.value,
+      traceEnabled,
+    },
   }
 }
 
@@ -485,7 +494,7 @@ function snapshotBucketIdentities(
   buckets: unknown,
 ): SnapshotBucketIdentitiesResult {
   try {
-    if (!Array.isArray(buckets)) {
+    if (!trustedIsArray(buckets)) {
       return { ok: false }
     }
 
@@ -496,7 +505,7 @@ function snapshotBucketIdentities(
 
     const snapshots: BucketIdentitySnapshot[] = []
     for (let index = 0; index < length; index += 1) {
-      if (!hasOwn(buckets, index)) {
+      if (!trustedHasOwn(buckets, index)) {
         return { ok: false }
       }
 
@@ -504,18 +513,28 @@ function snapshotBucketIdentities(
       if (
         typeof bucket !== "object" ||
         bucket === null ||
-        Array.isArray(bucket)
+        trustedIsArray(bucket)
       ) {
         return { ok: false }
       }
 
-      const bucketRecord = bucket as Record<PropertyKey, unknown>
-      const bucketId = bucketRecord.bucketId
-      if (!isBucketId(bucketId)) {
+      const bucketResult = snapshotStructuralObject(bucket)
+      if (!bucketResult.ok) {
         return { ok: false }
       }
 
-      snapshots.push({ bucketId, bucket: bucketRecord })
+      const bucketIdResult = snapshotStructuralProperty(
+        bucketResult.object,
+        "bucketId",
+      )
+      if (!bucketIdResult.ok || !isBucketId(bucketIdResult.value)) {
+        return { ok: false }
+      }
+
+      snapshots.push({
+        bucketId: bucketIdResult.value,
+        bucket: bucketResult.object,
+      })
     }
 
     return { ok: true, buckets: snapshots }
@@ -555,34 +574,31 @@ function snapshotBucketPayload(
   identity: BucketIdentitySnapshot,
 ): SnapshotBucketPayloadResult {
   try {
-    const { bucket: bucketRecord, bucketId } = identity
-
-    const prototypeChainResult = snapshotStructuralPrototypeChain(bucketRecord)
-    if (!prototypeChainResult.ok) {
-      return { ok: false }
-    }
-
-    const valuePresence = inspectStructuralProperty(
-      prototypeChainResult.chain,
-      "value",
-    )
-    const contributionsPresence = inspectStructuralProperty(
-      prototypeChainResult.chain,
+    const { bucket, bucketId } = identity
+    const valueResult = snapshotStructuralProperty(bucket, "value")
+    const contributionsPropertyResult = snapshotStructuralProperty(
+      bucket,
       "contributions",
     )
-    if (valuePresence === "invalid" || contributionsPresence === "invalid") {
+    const provenancePropertyResult = snapshotStructuralProperty(
+      bucket,
+      "provenance",
+    )
+    if (
+      !valueResult.ok ||
+      !contributionsPropertyResult.ok ||
+      !provenancePropertyResult.ok
+    ) {
       return { ok: false }
     }
 
-    const hasValue = valuePresence === "present"
-    const hasContributions = contributionsPresence === "present"
-    const provenanceResult = snapshotProvenance(bucketRecord.provenance)
+    const provenanceResult = snapshotProvenance(provenancePropertyResult.value)
     if (!provenanceResult.ok) {
       return { ok: false }
     }
 
-    const contributionsResult = hasContributions
-      ? snapshotContributionCollection(bucketRecord.contributions)
+    const contributionsResult = contributionsPropertyResult.present
+      ? snapshotContributionCollection(contributionsPropertyResult.value)
       : {
           contributions: undefined,
           contributionCount: 0,
@@ -592,9 +608,9 @@ function snapshotBucketPayload(
       ok: true,
       bucket: {
         bucketId,
-        hasValue,
-        value: hasValue ? bucketRecord.value : undefined,
-        hasContributions,
+        hasValue: valueResult.present,
+        value: valueResult.value,
+        hasContributions: contributionsPropertyResult.present,
         contributions: contributionsResult.contributions,
         provenance: provenanceResult.provenance,
       },
@@ -622,15 +638,35 @@ function snapshotProvenance(provenance: unknown): SnapshotProvenanceResult {
   if (
     typeof provenance !== "object" ||
     provenance === null ||
-    Array.isArray(provenance)
+    trustedIsArray(provenance)
   ) {
     return { ok: false }
   }
 
-  const provenanceRecord = provenance as Record<PropertyKey, unknown>
-  const kind = provenanceRecord.kind
-  const source = provenanceRecord.source
-  const note = provenanceRecord.note
+  const provenanceSnapshotResult = snapshotStructuralObject(provenance)
+  if (!provenanceSnapshotResult.ok) {
+    return { ok: false }
+  }
+
+  const kindResult = snapshotStructuralProperty(
+    provenanceSnapshotResult.object,
+    "kind",
+  )
+  const sourceResult = snapshotStructuralProperty(
+    provenanceSnapshotResult.object,
+    "source",
+  )
+  const noteResult = snapshotStructuralProperty(
+    provenanceSnapshotResult.object,
+    "note",
+  )
+  if (!kindResult.ok || !sourceResult.ok || !noteResult.ok) {
+    return { ok: false }
+  }
+
+  const kind = kindResult.value
+  const source = sourceResult.value
+  const note = noteResult.value
   if (
     (kind !== "manual" && kind !== "derived") ||
     (source !== undefined && typeof source !== "string") ||
@@ -655,7 +691,7 @@ function snapshotContributionCollection(
   let contributionCount = 0
 
   try {
-    if (!Array.isArray(contributions)) {
+    if (!trustedIsArray(contributions)) {
       return {
         contributions: INVALID_CONTRIBUTIONS,
         contributionCount,
@@ -688,7 +724,7 @@ function snapshotContributions(
   try {
     const snapshots: BucketContribution[] = []
     for (let index = 0; index < collection.length; index += 1) {
-      if (!hasOwn(collection.contributions, index)) {
+      if (!trustedHasOwn(collection.contributions, index)) {
         return INVALID_CONTRIBUTIONS
       }
 
@@ -696,15 +732,35 @@ function snapshotContributions(
       if (
         typeof contribution !== "object" ||
         contribution === null ||
-        Array.isArray(contribution)
+        trustedIsArray(contribution)
       ) {
         return INVALID_CONTRIBUTIONS
       }
 
-      const contributionRecord = contribution as Record<PropertyKey, unknown>
-      const value = contributionRecord.value
-      const source = contributionRecord.source
-      const note = contributionRecord.note
+      const contributionSnapshotResult = snapshotStructuralObject(contribution)
+      if (!contributionSnapshotResult.ok) {
+        return INVALID_CONTRIBUTIONS
+      }
+
+      const valueResult = snapshotStructuralProperty(
+        contributionSnapshotResult.object,
+        "value",
+      )
+      const sourceResult = snapshotStructuralProperty(
+        contributionSnapshotResult.object,
+        "source",
+      )
+      const noteResult = snapshotStructuralProperty(
+        contributionSnapshotResult.object,
+        "note",
+      )
+      if (!valueResult.ok || !sourceResult.ok || !noteResult.ok) {
+        return INVALID_CONTRIBUTIONS
+      }
+
+      const value = valueResult.value
+      const source = sourceResult.value
+      const note = noteResult.value
       if (
         !isFiniteNumber(value) ||
         (source !== undefined && typeof source !== "string") ||
@@ -774,7 +830,7 @@ function findExplicitBucketError(
   for (const bucket of buckets) {
     if (
       bucket.hasContributions &&
-      Array.isArray(bucket.contributions) &&
+      trustedIsArray(bucket.contributions) &&
       bucket.contributions.length === 0
     ) {
       return emptyContributions(bucket.bucketId)
@@ -962,64 +1018,45 @@ function createDirectBreakdown(
 }
 
 function isFiniteNumber(value: unknown): value is number {
-  return typeof value === "number" && Number.isFinite(value)
+  return trustedIsFiniteNumber(value)
 }
 
 function isPrimitiveArrayLength(value: unknown): value is number {
-  return typeof value === "number" && Number.isSafeInteger(value) && value >= 0
+  return trustedIsSafeInteger(value) && value >= 0
 }
 
 function hasInvalidContributionEntries(contributions: unknown): boolean {
   return contributions === INVALID_CONTRIBUTIONS
 }
 
-function hasOwn(object: object, key: PropertyKey): boolean {
-  return Object.prototype.hasOwnProperty.call(object, key)
-}
-
 function snapshotStructuralPrototypeChain(
   object: object,
 ): SnapshotPrototypeChainResult {
-  if (object === Object.prototype) {
-    return { ok: true, chain: [] }
-  }
-
   const visited = new Set<object>()
   const chain: object[] = [object]
   let current = object
-  let prototypeDepth = 0
   visited.add(object)
 
   try {
     while (true) {
-      const prototype = Object.getPrototypeOf(current)
+      const prototype = trustedGetPrototypeOf(current)
       if (prototype === null) {
-        const isIntrinsicTerminal = isIntrinsicObjectPrototype(current)
-        const customPrototypeDepth =
-          prototypeDepth - (isIntrinsicTerminal ? 1 : 0)
-        if (customPrototypeDepth > MAX_STRUCTURAL_PROTOTYPE_DEPTH) {
-          return { ok: false }
-        }
-
-        return {
-          ok: true,
-          chain: isIntrinsicTerminal ? chain.slice(0, -1) : chain,
-        }
+        const readableChain = current === object ? chain : chain.slice(0, -1)
+        return finalizeStructuralPrototypeChain(readableChain)
       }
       if (prototype === Object.prototype) {
-        return { ok: true, chain }
+        return finalizeStructuralPrototypeChain(chain)
       }
 
-      prototypeDepth += 1
-      if (
-        prototypeDepth > MAX_STRUCTURAL_PROTOTYPE_DEPTH + 1 ||
-        visited.has(prototype)
-      ) {
+      if (visited.has(prototype)) {
         return { ok: false }
       }
 
       visited.add(prototype)
       chain.push(prototype)
+      if (chain.length > MAX_STRUCTURAL_PROTOTYPE_DEPTH + 2) {
+        return { ok: false }
+      }
       current = prototype
     }
   } catch {
@@ -1027,37 +1064,56 @@ function snapshotStructuralPrototypeChain(
   }
 }
 
-function isIntrinsicObjectPrototype(object: object): boolean {
-  return INTRINSIC_OBJECT_PROTOTYPE_MARKERS.some(([key, expectedSource]) => {
-    const descriptor = Object.getOwnPropertyDescriptor(object, key)
-    if (
-      descriptor === undefined ||
-      !("value" in descriptor) ||
-      typeof descriptor.value !== "function"
-    ) {
-      return false
-    }
-
-    const marker = descriptor.value
-    const functionPrototype = Object.getPrototypeOf(marker)
-    return (
-      functionPrototype !== null &&
-      Object.getPrototypeOf(functionPrototype) === object &&
-      Reflect.apply(FUNCTION_TO_STRING, marker, []) === expectedSource
-    )
-  })
+function finalizeStructuralPrototypeChain(
+  chain: readonly object[],
+): SnapshotPrototypeChainResult {
+  return chain.length - 1 > MAX_STRUCTURAL_PROTOTYPE_DEPTH
+    ? { ok: false }
+    : { ok: true, chain }
 }
 
-function inspectStructuralProperty(
-  prototypeChain: readonly object[],
-  key: PropertyKey,
-): StructuralPropertyPresence {
+function snapshotStructuralObject(
+  value: unknown,
+): SnapshotStructuralObjectResult {
   try {
-    return prototypeChain.some((object) => hasOwn(object, key))
-      ? "present"
-      : "absent"
+    if (typeof value !== "object" || value === null || trustedIsArray(value)) {
+      return { ok: false }
+    }
+
+    const prototypeChainResult = snapshotStructuralPrototypeChain(value)
+    return prototypeChainResult.ok
+      ? {
+          ok: true,
+          object: {
+            root: value as Record<PropertyKey, unknown>,
+            chain: prototypeChainResult.chain,
+          },
+        }
+      : prototypeChainResult
   } catch {
-    return "invalid"
+    return { ok: false }
+  }
+}
+
+function snapshotStructuralProperty(
+  object: StructuralObjectSnapshot,
+  key: PropertyKey,
+): SnapshotStructuralPropertyResult {
+  try {
+    for (const owner of object.chain) {
+      const descriptor = trustedGetOwnPropertyDescriptor(owner, key)
+      if (descriptor !== undefined) {
+        return {
+          ok: true,
+          present: true,
+          value: trustedReadDescriptor(descriptor, object.root),
+        }
+      }
+    }
+
+    return { ok: true, present: false, value: undefined }
+  } catch {
+    return { ok: false }
   }
 }
 

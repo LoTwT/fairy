@@ -1,3 +1,4 @@
+import { trustedHasOwn } from "./trusted-intrinsics"
 import type { BucketId, BucketSpec } from "./types"
 
 const bucketSpecs = {
@@ -64,5 +65,5 @@ export function getBucketSpecCount(): number {
 }
 
 export function isBucketId(bucketId: unknown): bucketId is BucketId {
-  return typeof bucketId === "string" && Object.hasOwn(bucketSpecs, bucketId)
+  return typeof bucketId === "string" && trustedHasOwn(bucketSpecs, bucketId)
 }

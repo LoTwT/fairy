@@ -76,6 +76,48 @@ const validDefaultBreakdown: BucketBreakdown = {
   ],
 }
 
+const specDefaultBreakdownRows = [
+  {
+    bucketId: "damage_taken",
+    value: 1,
+    source: "default",
+    defaulted: true,
+    warnings: [
+      {
+        code: "defaulted_bucket",
+        bucketId: "damage_taken",
+        message: "damage_taken defaulted to neutral value 1.",
+      },
+    ],
+  },
+  {
+    bucketId: "stun_damage_taken",
+    value: 1,
+    source: "default",
+    defaulted: true,
+    warnings: [
+      {
+        code: "defaulted_bucket",
+        bucketId: "stun_damage_taken",
+        message: "stun_damage_taken defaulted to neutral value 1.",
+      },
+    ],
+  },
+  {
+    bucketId: "special",
+    value: 1,
+    source: "default",
+    defaulted: true,
+    warnings: [
+      {
+        code: "defaulted_bucket",
+        bucketId: "special",
+        message: "special defaulted to neutral value 1.",
+      },
+    ],
+  },
+] as const satisfies readonly BucketBreakdown[]
+
 const validContributionsBreakdown: BucketBreakdown = {
   bucketId: "damage_bonus",
   value: 1.5,
@@ -220,6 +262,7 @@ void [
   validInvalidCalculationInput,
   impossibleInvalidCalculationInput,
   validDefaultBreakdown,
+  specDefaultBreakdownRows,
   validContributionsBreakdown,
   validDerivedBreakdown,
   validIgnoredBreakdowns,

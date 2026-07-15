@@ -1,4 +1,5 @@
 import { getBucketSpec } from "./bucket-specs"
+import { trustedHasOwn } from "./trusted-intrinsics"
 import type { BucketId, FormulaId, FormulaSpec } from "./types"
 
 const formulaSpecs = {
@@ -73,7 +74,7 @@ export function getFormulaSpecById(
 }
 
 export function isFormulaId(formulaId: unknown): formulaId is FormulaId {
-  return typeof formulaId === "string" && Object.hasOwn(formulaSpecs, formulaId)
+  return typeof formulaId === "string" && trustedHasOwn(formulaSpecs, formulaId)
 }
 
 export function listRegisteredFormulaIds(): readonly FormulaId[] {
