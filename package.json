@@ -13,8 +13,8 @@
   },
   "devDependencies": {
     "lint-staged": "^17.0.8",
-    "oxfmt": "^0.56.0",
-    "oxlint": "^1.71.0",
+    "oxfmt": "^0.59.0",
+    "oxlint": "^1.74.0",
     "simple-git-hooks": "^2.13.1"
   },
   "simple-git-hooks": {
@@ -30,5 +30,5 @@
   "engines": {
     "node": ">=24"
   },
-  "packageManager": "pnpm@11.9.0"
+  "packageManager": "pnpm@11.13.1"
 }
