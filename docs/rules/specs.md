@@ -25,7 +25,11 @@
 - 完整的 required core；
 - replacement 时可选的 `supersedes`。
 
+`version` 的 canonical form 是从 `1` 开始的十进制正整数；同一 `id` 的后续 version 必须按数值单调递增。不得使用前导零、SemVer、tag 或字符串排序表达 spec version。
+
 `(id, version)` 是 spec 的语义身份。spec 文件不得重复 `status: current`；current membership 只由 registry 持有。spec 也不得记录 owner、task、PR、commit、head、review status、progress、reminder 或其他进行中工作状态。
+
+本文中的 `decision owner` 和 `bounded task contract` 分别使用[仓库工作与停止规则](agent-work.md#decision-owner)中的角色定义和[可复核记录要求](agent-work.md#bounded-task-contract)；spec 或 registry 不记录具体 owner 或 active task state。
 
 canonical `scope` 必须说明可观察的 capability、domain 或 surface，以及 supported boundary。可选的 `paths` 只能帮助定位当前实现，不能授予、缩小或扩大 authority：
 
@@ -84,19 +88,23 @@ replacement 必须在同一原子 diff 中完成：
 
 Git history 保留旧 bytes。不得在 `docs/specs/` 中保留第二套历史材料。若未来需要解释性历史材料，必须另行批准并放入 non-normative reference surface。
 
+replacement 合并后，`supersedes` target 不再需要留在 active tree；它的真实存在由变更前 current main/tree 中的 current identity 和合并后的 Git ancestry 证明。只有在该原子变更前确实为 current 的 identity 才能成为 target；仅出现在无关 history 或 reference 中的 identity 不合格。
+
 ### Withdrawal
 
 withdrawal 必须在同一原子 diff 中从 registry 移除 identity，并删除对应 active spec。Git history 保留历史。
+
+withdrawal 后不得有 current spec 通过 `supersedes` 指向被撤回 identity；同一 `id` 最多一个 current，跨 `id` `supersedes` 仍然无效。历史 identity 和链只保留在 Git ancestry 中。
 
 ### Invalid transitions
 
 以下情况均无效：
 
 - version 复用、倒退，或 normative change 未递增 version；
-- `supersedes` 指向自身、不存在的 identity、非变更前 current identity，或形成 cycle；
+- `supersedes` 指向自身、无法从变更前 current main/tree 证明为真实 current 的 identity、非变更前 current identity，或形成 cycle；
 - registry 指向不存在的文件；
 - active spec 未登记、同一 `id` 有两个 current，或重复 `(id, version)`；
-- 用 `supersedes` 隐式完成跨 `id` rename。跨 `id` rename 需要独立、明确的规则与 owner 决定。
+- 用 `supersedes` 隐式完成跨 `id` rename。跨 `id` rename 需要独立、明确的规则与 decision owner 决定。
 
 ## Monotonic refinement
 
@@ -108,4 +116,4 @@ withdrawal 必须在同一原子 diff 中从 registry 移除 identity，并删�
 - 用 conditional module 规避 project rule；
 - 把 unsupported、unknown 或 missing authority 变成 silent default。
 
-human-approved bounded task contract 只能补 current spec 未覆盖的选择，不能覆盖 current spec。两者冲突时，必须先由 owner 判断并更新 canonical authority，不能把 task 指令静默当成 spec replacement。
+human-approved bounded task contract 只能补 current spec 未覆盖的选择，不能覆盖 current spec。两者冲突时，必须先由 decision owner 判断并更新 canonical authority，不能把 task 指令静默当成 spec replacement。

@@ -4,9 +4,9 @@
 
 ## Current specs
 
-Current specs: none
+下表的数据行是 current membership 的唯一事实源；没有数据行表示当前没有 current spec。
 
-当前没有 registered current spec；不代表任意行为已获批准。需要 current behavior authority 的工作必须停止并请求 owner 决定，不得制造 placeholder spec 或选择 silent default。
+空表不代表任意行为已获批准。需要 current behavior authority 的工作必须停止并请求 [decision owner](../rules/agent-work.md#decision-owner) 决定，不得制造 placeholder spec 或选择 silent default。
 
 | id  | version | path | scope summary |
 | --- | ------- | ---- | ------------- |
