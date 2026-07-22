@@ -8,8 +8,8 @@
 
 1. 固定 fresh current main，并指认适用的 bounded task contract 和 affected scope。
 2. 从文档索引按任务选择路线，只读取适用规则与权威。
-3. 判断 proposed change 是 research、rule/spec/docs、behavior、data/content、UI/UX、tooling/maintenance、bug，还是 external effect。
-4. 确认 applicable authority 完整、没有冲突，并确认 verifier 会经过真实路径。
+3. 判断 proposed change 命中哪些工作分类：research、rule/spec/docs、behavior、data/content、UI/UX、tooling/maintenance、bug 或 external effect；分类不互斥。
+4. 读取全部适用路线，确认每条路线的 authority 都完整且没有冲突，并确认 verifier 会经过真实路径。
 
 不要默认恢复 Git history、reference 或旧实现中的设计。
 
@@ -19,6 +19,8 @@
 
 它不进入 current spec 或 registry，也不能从普通聊天、history、observed implementation、tests 或 artifacts 中推断。
 
+bounded task contract 不能让 proposed spec 提前成为 current authority。唯一可以构造与 current spec 不一致候选的情况，是 decision owner 明确批准[实现迁移](specs.md#implementation-migration)中的 exact atomic candidate；该批准只允许准备和评审同一原子候选，不允许拆分合并、提前部署或把 proposed spec 当作当前已生效行为。
+
 ## Decision owner
 
 `decision owner` 是对 affected canonical authority 拥有明确 decision right 的 human repository maintainer，或由其明确委托的 human。agent、task assignee、reviewer 或 code author 不会仅因承担工作而自动成为 decision owner。
@@ -27,14 +29,16 @@
 
 ## 条件读取
 
+工作分类不是单选分支。一个 change 同时命中多个分类时，必须读取并满足全部适用路线；任一路线要求停止，整体工作就必须停止。不得选择较宽松的分类绕过 current spec、trust、compatibility、migration、verifier 或 external-effect 要求。
+
 - **Research or exploration**：只有在明确 non-normative、不会改变 contract 时，才可在没有 current spec 的情况下继续；结论不能自动成为 authority。
 - **Rule or spec work**：读取[规格定义与演进规则](specs.md)，并按 canonical source 与 lifecycle 处理。
 - **Behavior, data, content, or UI work**：读取[当前有效规格](../specs/index.md)并定位 applicable spec。没有 applicable spec 且 bounded task contract 也不足时，必须停止。
-- **Tooling or maintenance**：不强制创建 business spec，但必须保持所有 applicable contract，执行真实 verifier，并避免改变未授权 behavior。
+- **Tooling or maintenance**：只有不改变 shipped、runtime 或 user-visible behavior 的 repo-internal 工作才是 `tooling-only`。它不强制创建 business spec，但仍须保持全部 applicable contract 并执行真实 verifier；一旦改变上述 behavior，就必须同时应用 behavior、UI 或其他命中的路线。
 - **Bug work**：先查 applicable current spec。实现与 spec 冲突时，由 decision owner 先判断 spec 错误还是 implementation 错误；不得把 bug fix 自动当成 spec change。
 - **History question**：只查询 `docs/HISTORY.md` 或 Git history；历史事实不能被提升为 current behavior authority。
 
-按此分支读取，不要求任何任务先读完全部规则与 spec。
+按全部命中的路线读取，不要求任何任务先读完全部规则与 spec。
 
 ## Authority and refinement
 
@@ -45,6 +49,8 @@ authority 按以下边界协作，而不是互相覆盖：
 3. human-approved bounded task contract 只能补 current spec 未覆盖的选择；
 4. code、tests、fixtures、artifacts 和 live readback 只证明 observed behavior；
 5. references、HISTORY 和 Git history 没有 current behavior authority。
+
+获批的 atomic migration contract 是构造和评审 exact candidate 的过程授权，不是 proposed spec 的 current behavior authority；current main 在原子 merge 完成前仍受原 current spec 约束。
 
 窄层必须 monotonic refinement：只能增加具体约束或解析上层明确留出的选择，不能削弱上层要求、扩大 scope、跳过 required core，或把 unsupported、unknown、missing authority 变成默认行为。
 
@@ -95,11 +101,11 @@ authority 按以下边界协作，而不是互相覆盖：
 
 从 `AGENTS.md` 出发，每个场景必须在最多三次文档路由选择内到达 applicable authority 或明确停止，且不要求全量读取五个协议文件。
 
-| 场景                    | 条件路线                             | 预期结果                                                                               |
-| ----------------------- | ------------------------------------ | -------------------------------------------------------------------------------------- |
-| data update             | 文档索引 → 本规则 → current registry | provenance 缺失时停止；不得用默认来源继续                                              |
-| UI change               | 文档索引 → 本规则 → current registry | required states 或 accessibility 缺失时停止                                            |
-| tooling-only dependency | 文档索引 → 本规则                    | 可无 business spec，但必须保持 applicable contract 并执行真实 verifier                 |
-| behavior bug            | 文档索引 → 本规则 → current registry | 与 current spec 冲突时由 decision owner 先判断 spec 或 implementation，不能自动改 spec |
+| 场景                    | 条件路线                             | 预期结果                                                                                                  |
+| ----------------------- | ------------------------------------ | --------------------------------------------------------------------------------------------------------- |
+| data update             | 文档索引 → 本规则 → current registry | provenance 缺失时停止；不得用默认来源继续                                                                 |
+| UI change               | 文档索引 → 本规则 → current registry | required states 或 accessibility 缺失时停止                                                               |
+| tooling-only dependency | 文档索引 → 本规则                    | 不改变 shipped/runtime/user-visible behavior；可无 business spec，但仍须保持 contract 并执行真实 verifier |
+| behavior bug            | 文档索引 → 本规则 → current registry | 与 current spec 冲突时由 decision owner 先判断 spec 或 implementation，不能自动改 spec                    |
 
 registry 为空是合法 positive case：需要 current behavior authority 的工作明确停止，不得为通过流程而创建 placeholder spec。

@@ -9,6 +9,7 @@
 - project rules 规定工作过程和跨领域 invariant。
 - 只有同时存在于 current main 的 active tree 且登记在 current registry 中的 spec，才能在自身 declared scope 内规定 intended behavior。
 - branch、task 或 PR 中尚未进入 current registry 的 proposed spec 没有 current authority。
+- proposed spec 可以按 [Implementation migration](#implementation-migration) 与实现组成一个获批的 exact atomic candidate，但它的 authority 只在该候选原子合并后生效；合并前不得据此改变 current main、已发布行为或其他 external effect。
 - code、tests、fixtures、artifacts 和 live readback 只能证明 observed behavior，不能反向创造规范。
 - references、`docs/HISTORY.md` 和 Git history 只提供背景、已发布事实或审计记录，没有 current behavior authority。
 - 同一 concern 必须只有一个 canonical normative source；其他位置只能链接到它，不得复制并独立演进同一合同。
@@ -27,7 +28,9 @@
 
 `version` 的 canonical form 是从 `1` 开始的十进制正整数；同一 `id` 的后续 version 必须按数值单调递增。不得使用前导零、SemVer、tag 或字符串排序表达 spec version。
 
-`(id, version)` 是 spec 的语义身份。spec 文件不得重复 `status: current`；current membership 只由 registry 持有。spec 也不得记录 owner、task、PR、commit、head、review status、progress、reminder 或其他进行中工作状态。
+`(id, version)` 是 spec 的语义身份。spec 文件不得重复 `status: current`；current membership 只由 registry 持有。spec 也不得记录 owner、task、PR、本仓库 active-work commit/head、review status、progress、reminder 或其他进行中工作状态。
+
+上述限制不禁止 `Authority and provenance` 记录外部来源的 immutable identity。外部 Git 来源可以记录 source repository、完整 commit SHA、path 与 evidence context；mutable branch、branch HEAD 或无法证明不可变的 ref 不能作为 provenance identity。
 
 本文中的 `decision owner` 和 `bounded task contract` 分别使用[仓库工作与停止规则](agent-work.md#decision-owner)中的角色定义和[可复核记录要求](agent-work.md#bounded-task-contract)；spec 或 registry 不记录具体 owner 或 active task state。
 
@@ -77,6 +80,16 @@ normative contract、scope、invariant、acceptance、failure 或 trust boundary
 
 每个 `id` 同时最多有一个 current identity。
 
+### Introduction
+
+首次引入一个从未作为 current identity 出现过的 `id`，必须在同一原子 diff 中：
+
+1. 写入 `version: 1` 的 active spec；
+2. 将该 identity 加入 registry；
+3. 不写 `supersedes`。
+
+曾被 withdrawal 的 `id` 不再属于首次引入；它受 [Reactivation](#reactivation) 规则约束。
+
 ### Replacement
 
 replacement 必须在同一原子 diff 中完成：
@@ -90,11 +103,24 @@ Git history 保留旧 bytes。不得在 `docs/specs/` 中保留第二套历史�
 
 replacement 合并后，`supersedes` target 不再需要留在 active tree；它的真实存在由变更前 current main/tree 中的 current identity 和合并后的 Git ancestry 证明。只有在该原子变更前确实为 current 的 identity 才能成为 target；仅出现在无关 history 或 reference 中的 identity 不合格。
 
+### Implementation migration
+
+如果 replacement 改变 intended behavior，且 current implementation 不满足新 spec，必须选择以下一种完整模式；不得让 proposed spec 或 implementation 单独提前生效。
+
+1. **Atomic migration**：decision owner 在 active work surface 明确批准 prior current identity、target identity、affected implementation surface 与 exact atomic boundary。同一候选必须同时完成新 spec、registry 切换、旧 active spec 删除，以及全部适用的 implementation、tests、fixtures 与真实 verifier；它只能作为一个 exact object 评审和合并，不得拆分 merge、提前 deploy 或产生部分 external effect。
+2. **Staged migration**：先原子合并一个 transitional current spec。该 spec 必须把现有实现与目标实现都明确列为暂时 supported behavior，分别定义 observable acceptance、compatibility、failure boundary 与不依赖 task/PR/head 的 completion criteria。后续 implementation change 必须始终落在该 current spec 的 supported boundary 内；完成后再通过新的 replacement 移除 transitional allowance。
+
+仅合并一个已经排除 current implementation 的新 spec，或仅合并一个与 current spec 冲突的 implementation，都不是合法迁移。
+
 ### Withdrawal
 
 withdrawal 必须在同一原子 diff 中从 registry 移除 identity，并删除对应 active spec。Git history 保留历史。
 
 withdrawal 后不得有 current spec 通过 `supersedes` 指向被撤回 identity；同一 `id` 最多一个 current，跨 `id` `supersedes` 仍然无效。历史 identity 和链只保留在 Git ancestry 中。
+
+### Reactivation
+
+withdrawal 后不得重新启用同一 `id`。这种变化既不是 Introduction，也不是 Replacement，不得通过更高 version 或 `supersedes` 绕过。若未来确有 same-id reactivation 需求，必须先由 decision owner 批准独立 lifecycle 规则与 lineage identity；在该规则成为 current project rule 前必须停止。
 
 ### Invalid transitions
 
@@ -104,6 +130,7 @@ withdrawal 后不得有 current spec 通过 `supersedes` 指向被撤回 identit
 - `supersedes` 指向自身、无法从变更前 current main/tree 证明为真实 current 的 identity、非变更前 current identity，或形成 cycle；
 - registry 指向不存在的文件；
 - active spec 未登记、同一 `id` 有两个 current，或重复 `(id, version)`；
+- 将曾被 withdrawal 的 `id` 当作 Introduction 或 Replacement 重新启用；
 - 用 `supersedes` 隐式完成跨 `id` rename。跨 `id` rename 需要独立、明确的规则与 decision owner 决定。
 
 ## Monotonic refinement
@@ -116,4 +143,4 @@ withdrawal 后不得有 current spec 通过 `supersedes` 指向被撤回 identit
 - 用 conditional module 规避 project rule；
 - 把 unsupported、unknown 或 missing authority 变成 silent default。
 
-human-approved bounded task contract 只能补 current spec 未覆盖的选择，不能覆盖 current spec。两者冲突时，必须先由 decision owner 判断并更新 canonical authority，不能把 task 指令静默当成 spec replacement。
+human-approved bounded task contract 通常只能补 current spec 未覆盖的选择，不能覆盖 current spec。两者冲突时，必须先由 decision owner 判断并更新 canonical authority，不能把 task 指令静默当成 spec replacement。唯一例外是按 [Implementation migration](#implementation-migration) 获批并保持原子性的 migration contract；它只授权构造和评审 exact candidate，不会让 proposed spec 在 merge 前获得 current authority。
