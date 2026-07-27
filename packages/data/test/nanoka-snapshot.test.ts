@@ -34,6 +34,12 @@ import {
   discoverWeaponIds,
   validateWeaponDetail,
 } from "../scripts/nanoka/weapon.ts"
+import {
+  createCrossEntityValidationRecords,
+  type CrossEntityValidator,
+  type EntityName,
+  type EntityValidationData,
+} from "../scripts/nanoka/entities.ts"
 import type { FetchedHttpAsset } from "../scripts/nanoka/http.ts"
 import { NanokaHttpClient } from "../scripts/nanoka/http.ts"
 import { loadSourcePolicy, validateManifest } from "../scripts/nanoka/policy.ts"
@@ -54,6 +60,154 @@ afterEach(async () => {
       .splice(0)
       .map((directory) => rm(directory, { force: true, recursive: true })),
   )
+})
+
+describe("Nanoka cross-entity validators", () => {
+  const currentEpoch: readonly EntityName[] = [
+    "character",
+    "equipment",
+    "weapon",
+    "bangboo",
+    "monster",
+  ]
+  const validationData = new Map<EntityName, EntityValidationData>(
+    currentEpoch.map((entity) => [
+      entity,
+      {
+        indexValue: {},
+        ids: [],
+        detailsByLanguage: { zh: new Map(), en: new Map() },
+      },
+    ]),
+  )
+
+  function validator(
+    checkId: string,
+    fromEntity: EntityName,
+    toEntity: EntityName,
+    validate: CrossEntityValidator["validate"] = () => ({
+      checkedReferenceCount: 1,
+      unresolvedReferenceCount: 0,
+    }),
+  ): CrossEntityValidator {
+    return {
+      checkId,
+      fromEntity,
+      toEntity,
+      introducedInEntityEpoch: currentEpoch,
+      validate,
+    }
+  }
+
+  it("creates passed records in stable registry order", () => {
+    const validators = [
+      validator("second/v1", "equipment", "monster"),
+      validator("first/v1", "character", "monster"),
+    ]
+    expect(
+      createCrossEntityValidationRecords(
+        currentEpoch,
+        new Map([...validationData].toReversed()),
+        validators,
+      ),
+    ).toEqual([
+      {
+        checkId: "second/v1",
+        fromEntity: "equipment",
+        toEntity: "monster",
+        status: "passed",
+        checkedReferenceCount: 1,
+        unresolvedReferenceCount: 0,
+        reason: null,
+      },
+      {
+        checkId: "first/v1",
+        fromEntity: "character",
+        toEntity: "monster",
+        status: "passed",
+        checkedReferenceCount: 1,
+        unresolvedReferenceCount: 0,
+        reason: null,
+      },
+    ])
+  })
+
+  it("records historical epoch applicability without running validators", () => {
+    let calls = 0
+    const validators = [
+      {
+        ...validator("source-absent/v1", "weapon", "character", () => {
+          calls += 1
+          return { checkedReferenceCount: 1, unresolvedReferenceCount: 0 }
+        }),
+        introducedInEntityEpoch: ["character", "equipment"] as const,
+      },
+      {
+        ...validator("target-absent/v1", "character", "weapon", () => {
+          calls += 1
+          return { checkedReferenceCount: 1, unresolvedReferenceCount: 0 }
+        }),
+        introducedInEntityEpoch: ["character", "equipment"] as const,
+      },
+    ]
+    expect(
+      createCrossEntityValidationRecords(
+        ["character", "equipment"],
+        validationData,
+        validators,
+      ),
+    ).toEqual([
+      expect.objectContaining({
+        checkId: "source-absent/v1",
+        status: "not-applicable",
+        checkedReferenceCount: 0,
+        reason: expect.any(String),
+      }),
+      expect.objectContaining({
+        checkId: "target-absent/v1",
+        status: "not-run",
+        checkedReferenceCount: 0,
+        reason: expect.any(String),
+      }),
+    ])
+    expect(calls).toBe(0)
+  })
+
+  it("does not require validators introduced after a historical epoch", () => {
+    expect(
+      createCrossEntityValidationRecords(
+        ["character", "equipment"],
+        validationData,
+        [validator("future/v1", "character", "monster")],
+      ),
+    ).toEqual([])
+  })
+
+  it("rejects invalid registries, results, and unresolved references", () => {
+    const duplicate = validator("duplicate/v1", "character", "monster")
+    expect(() =>
+      createCrossEntityValidationRecords(currentEpoch, validationData, [
+        duplicate,
+        duplicate,
+      ]),
+    ).toThrow("重复跨实体 validator checkId")
+    expect(() =>
+      createCrossEntityValidationRecords(currentEpoch, validationData, [
+        validator("invalid-count/v1", "character", "monster", () => ({
+          checkedReferenceCount: 0.5,
+          unresolvedReferenceCount: 0,
+        })),
+      ]),
+    ).toThrow("返回了无效引用计数")
+    expect(() =>
+      createCrossEntityValidationRecords(currentEpoch, validationData, [
+        validator("unresolved/v1", "character", "monster", () => ({
+          checkedReferenceCount: 2,
+          unresolvedReferenceCount: 1,
+        })),
+      ]),
+    ).toThrow("unresolved/v1 存在 1 个未解析引用")
+  })
 })
 
 describe("Nanoka character resources", () => {
@@ -368,6 +522,230 @@ describe("Nanoka snapshots", () => {
       rawDirectory: directory,
     })
     expect(verification).toEqual([{ snapshotVersion: "3.0", errors: [] }])
+  })
+
+  it("writes and offline-recomputes nonempty cross-entity records", async () => {
+    const directory = await temporaryDirectory()
+    const validators: readonly CrossEntityValidator[] = [
+      {
+        checkId: "character-monster-test/v1",
+        fromEntity: "character",
+        toEntity: "monster",
+        introducedInEntityEpoch: [
+          "character",
+          "equipment",
+          "weapon",
+          "bangboo",
+          "monster",
+        ],
+        validate({ entities }) {
+          return {
+            checkedReferenceCount:
+              entities.get("character")!.ids.length +
+              entities.get("monster")!.ids.length,
+            unresolvedReferenceCount: 0,
+          }
+        },
+      },
+    ]
+    const result = await createSnapshot(
+      directory,
+      false,
+      {},
+      {
+        crossEntityValidators: validators,
+      },
+    )
+    expect(result.manifest.validation.crossEntityReferences).toEqual([
+      {
+        checkId: "character-monster-test/v1",
+        fromEntity: "character",
+        toEntity: "monster",
+        status: "passed",
+        checkedReferenceCount: 3,
+        unresolvedReferenceCount: 0,
+        reason: null,
+      },
+    ])
+    expect(
+      await verifyNanokaSnapshots({
+        policy: await loadSourcePolicy(),
+        rawDirectory: directory,
+        crossEntityValidators: validators,
+      }),
+    ).toEqual([{ snapshotVersion: "3.0", errors: [] }])
+
+    const manifestPath = join(directory, "3.0", "fetch-manifest.json")
+    const manifest = JSON.parse(await readFile(manifestPath, "utf8"))
+    manifest.validation.crossEntityReferences[0].checkedReferenceCount = 2
+    await writeFile(manifestPath, `${JSON.stringify(manifest)}\n`)
+    const verification = await verifyNanokaSnapshots({
+      policy: await loadSourcePolicy(),
+      rawDirectory: directory,
+      crossEntityValidators: validators,
+    })
+    expect(verification[0]?.errors.join("\n")).toContain("离线重算结果不匹配")
+  })
+
+  it("rejects malformed cross-entity registry records", async () => {
+    const directory = await temporaryDirectory()
+    const validators: readonly CrossEntityValidator[] = [
+      {
+        checkId: "first-test/v1",
+        fromEntity: "character",
+        toEntity: "monster",
+        introducedInEntityEpoch: [
+          "character",
+          "equipment",
+          "weapon",
+          "bangboo",
+          "monster",
+        ],
+        validate: () => ({
+          checkedReferenceCount: 1,
+          unresolvedReferenceCount: 0,
+        }),
+      },
+      {
+        checkId: "second-test/v1",
+        fromEntity: "equipment",
+        toEntity: "monster",
+        introducedInEntityEpoch: [
+          "character",
+          "equipment",
+          "weapon",
+          "bangboo",
+          "monster",
+        ],
+        validate: () => ({
+          checkedReferenceCount: 1,
+          unresolvedReferenceCount: 0,
+        }),
+      },
+    ]
+    await createSnapshot(
+      directory,
+      false,
+      {},
+      {
+        crossEntityValidators: validators,
+      },
+    )
+    const manifestPath = join(directory, "3.0", "fetch-manifest.json")
+    const original = JSON.parse(await readFile(manifestPath, "utf8"))
+    const mutations: Array<{
+      mutate(manifest: typeof original): void
+      expected: string
+    }> = [
+      {
+        mutate: (manifest) => {
+          manifest.validation.crossEntityReferences[0].checkId = "unknown/v1"
+        },
+        expected: "未知跨实体 validator 记录",
+      },
+      {
+        mutate: (manifest) => {
+          manifest.validation.crossEntityReferences.pop()
+        },
+        expected: "记录数量不匹配",
+      },
+      {
+        mutate: (manifest) => {
+          manifest.validation.crossEntityReferences.push(
+            manifest.validation.crossEntityReferences[0],
+          )
+        },
+        expected: "重复跨实体 validator 记录",
+      },
+      {
+        mutate: (manifest) => {
+          manifest.validation.crossEntityReferences.reverse()
+        },
+        expected: "记录顺序错误",
+      },
+      {
+        mutate: (manifest) => {
+          manifest.validation.crossEntityReferences[0].fromEntity = "equipment"
+        },
+        expected: "实体边界不匹配",
+      },
+      {
+        mutate: (manifest) => {
+          manifest.validation.crossEntityReferences[0].status = "not-run"
+          manifest.validation.crossEntityReferences[0].reason = "missing"
+        },
+        expected: "status 与当前 epoch 适用性不匹配",
+      },
+      {
+        mutate: (manifest) => {
+          manifest.validation.crossEntityReferences[0].reason = "unexpected"
+        },
+        expected: "passed 记录语义无效",
+      },
+    ]
+    for (const { mutate, expected } of mutations) {
+      const manifest = structuredClone(original)
+      mutate(manifest)
+      await writeFile(manifestPath, `${JSON.stringify(manifest)}\n`)
+      const verification = await verifyNanokaSnapshots({
+        policy: await loadSourcePolicy(),
+        rawDirectory: directory,
+        crossEntityValidators: validators,
+      })
+      expect(verification[0]?.errors.join("\n")).toContain(expected)
+    }
+  })
+
+  it("validates carried-forward entities and preserves the old snapshot on relation failure", async () => {
+    const directory = await temporaryDirectory()
+    let rejectReferences = false
+    let observedCarriedEntities = false
+    const validator: CrossEntityValidator = {
+      checkId: "carried-test/v1",
+      fromEntity: "character",
+      toEntity: "monster",
+      introducedInEntityEpoch: [
+        "character",
+        "equipment",
+        "weapon",
+        "bangboo",
+        "monster",
+      ],
+      validate({ entities }) {
+        observedCarriedEntities =
+          entities.get("character")?.ids.length === 2 &&
+          entities.get("monster")?.ids.length === 1
+        return {
+          checkedReferenceCount: 1,
+          unresolvedReferenceCount: rejectReferences ? 1 : 0,
+        }
+      },
+    }
+    await createSnapshot(
+      directory,
+      false,
+      {},
+      {
+        crossEntityValidators: [validator],
+      },
+    )
+    const manifestPath = join(directory, "3.0", "fetch-manifest.json")
+    const before = await readFile(manifestPath)
+    observedCarriedEntities = false
+    rejectReferences = true
+    await expect(
+      createSnapshot(
+        directory,
+        false,
+        {},
+        {
+          entities: ["equipment"],
+          crossEntityValidators: [validator],
+        },
+      ),
+    ).rejects.toThrow("carried-test/v1 存在 1 个未解析引用")
+    expect(observedCarriedEntities).toBe(true)
+    expect(await readFile(manifestPath)).toEqual(before)
   })
 
   it("reports structured fetch progress", async () => {
@@ -1474,6 +1852,7 @@ async function createSnapshot(
     selectedBy?: "live" | "latest" | "version" | "interactive"
     upstreamManifestResponse?: FetchedHttpAsset
     entities?: string[]
+    crossEntityValidators?: readonly CrossEntityValidator[]
     onProgress?: (progress: SnapshotFetchProgress) => void
   } = {},
 ) {
@@ -1561,6 +1940,9 @@ async function createSnapshot(
     selectedBy: options.selectedBy ?? "live",
     rawDirectory,
     ...(options.entities === undefined ? {} : { entities: options.entities }),
+    ...(options.crossEntityValidators === undefined
+      ? {}
+      : { crossEntityValidators: options.crossEntityValidators }),
     ...(options.onProgress === undefined
       ? {}
       : { onProgress: options.onProgress }),

@@ -14,13 +14,18 @@ import {
 } from "node:fs/promises"
 import { dirname, join, relative, sep } from "node:path"
 import {
+  createCrossEntityValidationRecords,
+  crossEntityValidatorRegistry,
   entityRegistry,
   getEntityAdapter,
   historicalV2EntityEpochs,
   isEntityName,
   normalizeSelectedEntities,
   supportedEntityNames,
+  type CrossEntityValidationRecord,
+  type CrossEntityValidator,
   type EntityName,
+  type EntityValidationData,
 } from "./entities.ts"
 import type { FetchedHttpAsset, NanokaHttpClient } from "./http.ts"
 import {
@@ -100,7 +105,7 @@ export interface FetchManifestV2 {
   }
   validation: {
     entities: Record<EntityName, "passed">
-    crossEntityReferences: []
+    crossEntityReferences: CrossEntityValidationRecord[]
   }
 }
 
@@ -199,6 +204,7 @@ export async function fetchNanokaSnapshot(options: {
   version: string
   selectedBy: VersionSelection
   entities?: readonly string[]
+  crossEntityValidators?: readonly CrossEntityValidator[]
   rawDirectory?: string
   onProgress?: (progress: SnapshotFetchProgress) => void
 }): Promise<SnapshotFetchResult> {
@@ -250,6 +256,7 @@ export async function fetchNanokaSnapshot(options: {
         targetDirectory,
         version,
         false,
+        options.crossEntityValidators,
       )
       if (oldVerification.errors.length > 0)
         throw new Error(
@@ -415,6 +422,16 @@ export async function fetchNanokaSnapshot(options: {
       const validationEntities = Object.fromEntries(
         allEntities.map((entity) => [entity, "passed"]),
       ) as Record<EntityName, "passed">
+      const crossEntityValidationData = await loadEntityValidationData(
+        stagingDirectory,
+        allEntities,
+        policy.languages,
+      )
+      const crossEntityReferences = createCrossEntityValidationRecords(
+        allEntities,
+        crossEntityValidationData,
+        options.crossEntityValidators,
+      )
       const fetchManifest: FetchManifestV2 = {
         schemaVersion: "nanoka-fetch-manifest/v2",
         sourceId: policy.sourceId,
@@ -432,7 +449,7 @@ export async function fetchNanokaSnapshot(options: {
         fetchScope: { mode, requestedEntities },
         assets,
         summary,
-        validation: { entities: validationEntities, crossEntityReferences: [] },
+        validation: { entities: validationEntities, crossEntityReferences },
       }
       await writeFile(
         join(stagingDirectory, "fetch-manifest.json"),
@@ -450,6 +467,7 @@ export async function fetchNanokaSnapshot(options: {
         stagingDirectory,
         version,
         true,
+        options.crossEntityValidators,
       )
       if (verification.errors.length > 0)
         throw new Error(
@@ -506,6 +524,7 @@ export async function verifyNanokaSnapshots(options: {
   policy: SourcePolicy
   version?: string
   rawDirectory?: string
+  crossEntityValidators?: readonly CrossEntityValidator[]
 }): Promise<VerificationResult[]> {
   const rawDirectory = options.rawDirectory ?? rawNanokaDirectory
   if (options.version !== undefined) {
@@ -517,6 +536,8 @@ export async function verifyNanokaSnapshots(options: {
         options.policy,
         join(rawDirectory, version),
         version,
+        false,
+        options.crossEntityValidators,
       ),
     ]
     return [...results, ...(await artifactResults(rawDirectory, version))]
@@ -540,6 +561,8 @@ export async function verifyNanokaSnapshots(options: {
           options.policy,
           join(rawDirectory, version),
           version,
+          false,
+          options.crossEntityValidators,
         ),
       )
     } catch (error) {
@@ -559,6 +582,7 @@ async function verifySnapshotDirectory(
   directory: string,
   expectedVersion: string,
   requireCurrentEntityEpoch = false,
+  crossEntityValidators: readonly CrossEntityValidator[] = crossEntityValidatorRegistry,
 ): Promise<VerificationResult> {
   const errors: string[] = []
   let stored: StoredFetchManifest
@@ -584,7 +608,12 @@ async function verifySnapshotDirectory(
   const assets = adaptAssets(stored)
   const entities = entitiesForManifest(stored)
   if (stored.schemaVersion === "nanoka-fetch-manifest/v2")
-    validateV2ManifestShape(stored, errors, requireCurrentEntityEpoch)
+    validateV2ManifestShape(
+      stored,
+      errors,
+      requireCurrentEntityEpoch,
+      crossEntityValidators,
+    )
   const expectedPaths = new Set(["fetch-manifest.json"])
   const assetIds = new Set<string>()
   const paths = new Set<string>()
@@ -638,6 +667,7 @@ async function verifySnapshotDirectory(
     errors.push(String(error))
   }
   const recomputed: Partial<Record<EntityName, EntitySummary>> = {}
+  const crossEntityValidationData = new Map<EntityName, EntityValidationData>()
   for (const entityName of entities) {
     if (!isEntityName(entityName)) {
       errors.push(`未知实体：${entityName}`)
@@ -695,6 +725,11 @@ async function verifySnapshotDirectory(
         detailsByLanguage[asset.language].set(asset.entityId, detailValue)
       }
       adapter.validateEntityDetails?.(detailsByLanguage)
+      crossEntityValidationData.set(entityName, {
+        indexValue,
+        ids,
+        detailsByLanguage,
+      })
       const entityAssets = assets.filter((asset) => asset.entity === entityName)
       recomputed[entityName] = {
         recordCount: ids.length,
@@ -738,6 +773,23 @@ async function verifySnapshotDirectory(
         assets.reduce((sum, asset) => sum + asset.bytes, 0)
     )
       errors.push("summary 全局计数不匹配")
+    try {
+      const recomputedCrossEntityReferences =
+        createCrossEntityValidationRecords(
+          stored.entities,
+          crossEntityValidationData,
+          crossEntityValidators,
+        )
+      if (
+        JSON.stringify(stored.validation.crossEntityReferences) !==
+        JSON.stringify(recomputedCrossEntityReferences)
+      )
+        errors.push("validation.crossEntityReferences 与离线重算结果不匹配")
+    } catch (error) {
+      errors.push(
+        `跨实体验证失败：${error instanceof Error ? error.message : String(error)}`,
+      )
+    }
   }
   return { snapshotVersion: expectedVersion, errors }
 }
@@ -746,6 +798,7 @@ function validateV2ManifestShape(
   manifest: FetchManifestV2,
   errors: string[],
   requireCurrentEntityEpoch: boolean,
+  crossEntityValidators: readonly CrossEntityValidator[],
 ): void {
   const enabledEntities = entityRegistry.map(({ name }) => name)
   const isHistoricalEpoch = historicalV2EntityEpochs.some((epoch) =>
@@ -795,8 +848,12 @@ function validateV2ManifestShape(
     )
   )
     errors.push("validation.entities 无效")
-  if (manifest.validation.crossEntityReferences.length !== 0)
-    errors.push("存在未知跨实体 validator 记录")
+  validateStoredCrossEntityRecords(
+    manifest.entities,
+    manifest.validation.crossEntityReferences,
+    crossEntityValidators,
+    errors,
+  )
   for (const entity of manifest.entities) {
     const indexCount = manifest.assets.filter(
       (asset) => asset.kind === "entity-index" && asset.entity === entity,
@@ -819,6 +876,66 @@ function validateV2ManifestShape(
       asset.result !== "carried-forward"
     )
       errors.push(`${asset.assetId} 未选实体资源必须为 carried-forward`)
+  }
+}
+
+function validateStoredCrossEntityRecords(
+  entities: readonly EntityName[],
+  records: readonly CrossEntityValidationRecord[],
+  validators: readonly CrossEntityValidator[],
+  errors: string[],
+): void {
+  const presentEntities = new Set(entities)
+  const expectedValidators = validators.filter((validator) =>
+    validator.introducedInEntityEpoch.every((entity) =>
+      presentEntities.has(entity),
+    ),
+  )
+  const knownCheckIds = new Set(validators.map(({ checkId }) => checkId))
+  const seenCheckIds = new Set<string>()
+  for (const record of records) {
+    if (!knownCheckIds.has(record.checkId))
+      errors.push(`未知跨实体 validator 记录：${record.checkId}`)
+    if (seenCheckIds.has(record.checkId))
+      errors.push(`重复跨实体 validator 记录：${record.checkId}`)
+    seenCheckIds.add(record.checkId)
+  }
+  if (records.length !== expectedValidators.length)
+    errors.push("跨实体 validator 记录数量不匹配")
+  for (const [index, validator] of expectedValidators.entries()) {
+    const record = records[index]
+    if (record === undefined) {
+      errors.push(`缺少跨实体 validator 记录：${validator.checkId}`)
+      continue
+    }
+    if (record.checkId !== validator.checkId) {
+      errors.push(
+        `跨实体 validator 记录顺序错误：期望 ${validator.checkId}，实际 ${record.checkId}`,
+      )
+      continue
+    }
+    if (
+      record.fromEntity !== validator.fromEntity ||
+      record.toEntity !== validator.toEntity
+    )
+      errors.push(`${record.checkId} 实体边界不匹配`)
+    const expectedStatus = !presentEntities.has(validator.fromEntity)
+      ? "not-applicable"
+      : !presentEntities.has(validator.toEntity)
+        ? "not-run"
+        : "passed"
+    if (record.status !== expectedStatus)
+      errors.push(`${record.checkId} status 与当前 epoch 适用性不匹配`)
+    if (record.status === "passed") {
+      if (record.unresolvedReferenceCount !== 0 || record.reason !== null)
+        errors.push(`${record.checkId} passed 记录语义无效`)
+    } else if (
+      record.checkedReferenceCount !== 0 ||
+      record.unresolvedReferenceCount !== 0 ||
+      record.reason === null ||
+      record.reason.length === 0
+    )
+      errors.push(`${record.checkId} ${record.status} 记录语义无效`)
   }
 }
 
@@ -879,11 +996,29 @@ function parseFetchManifest(value: unknown): StoredFetchManifest {
       !isPlainObject(value.summary.entities) ||
       !isPlainObject(value.validation) ||
       !isPlainObject(value.validation.entities) ||
-      !Array.isArray(value.validation.crossEntityReferences)
+      !Array.isArray(value.validation.crossEntityReferences) ||
+      !value.validation.crossEntityReferences.every(
+        isCrossEntityValidationRecord,
+      )
     )
       throw invalidFetchManifest()
   }
   return value as unknown as StoredFetchManifest
+}
+
+function isCrossEntityValidationRecord(
+  value: unknown,
+): value is CrossEntityValidationRecord {
+  return (
+    isPlainObject(value) &&
+    typeof value.checkId === "string" &&
+    isEntityName(value.fromEntity) &&
+    isEntityName(value.toEntity) &&
+    ["passed", "not-run", "not-applicable"].includes(String(value.status)) &&
+    isNonNegativeInteger(value.checkedReferenceCount) &&
+    isNonNegativeInteger(value.unresolvedReferenceCount) &&
+    (value.reason === null || typeof value.reason === "string")
+  )
 }
 
 function isBaseAsset(value: Record<string, unknown>): boolean {
@@ -987,6 +1122,37 @@ function entitiesForManifest(manifest: StoredFetchManifest): string[] {
   return manifest.schemaVersion === "nanoka-fetch-manifest/v1"
     ? ["character"]
     : manifest.entities
+}
+
+async function loadEntityValidationData(
+  directory: string,
+  entities: readonly EntityName[],
+  languages: readonly SupportedLanguage[],
+): Promise<Map<EntityName, EntityValidationData>> {
+  const validationData = new Map<EntityName, EntityValidationData>()
+  for (const entity of entities) {
+    const adapter = getEntityAdapter(entity)
+    const indexPath = `${entity}.json`
+    const indexValue = decodeUtf8Json(
+      new Uint8Array(await readFile(join(directory, indexPath))),
+      indexPath,
+    )
+    const ids = adapter.discoverIds(indexValue)
+    const detailsByLanguage = Object.fromEntries(
+      languages.map((language) => [language, new Map<string, unknown>()]),
+    ) as Record<SupportedLanguage, Map<string, unknown>>
+    for (const entityId of ids)
+      for (const language of languages) {
+        const resource = adapter.createDetailResource(entityId, language)
+        const detailValue = decodeUtf8Json(
+          new Uint8Array(await readFile(join(directory, resource.localPath))),
+          resource.localPath,
+        )
+        detailsByLanguage[language].set(entityId, detailValue)
+      }
+    validationData.set(entity, { indexValue, ids, detailsByLanguage })
+  }
+  return validationData
 }
 
 async function createSummary(
