@@ -160,7 +160,7 @@ Drive Discs 是首个实体闭环，而不是绕过共享契约的独立局部�
 4. Monsters（monster）
 ```
 
-每个实体都必须执行第 4 节的标准流程，前一个实体完成“规范、实现、在线抓取、离线验证和独立变更单元”闭环后，才能进入下一个实体。Monsters 完成后阶段四结束，随后进入阶段五的 End Game 领域调研与建模，不在普通实体之间穿插 End Game 子域实施。
+每个实体都必须执行第 4 节的标准流程，前一个实体完成“规范、实现、在线抓取、离线验证和独立变更单元”闭环后，才能进入下一个实体。阶段四的四个普通实体已全部完成闭环，下一步进入阶段五的 End Game 领域调研与建模，不在普通实体之间穿插 End Game 子域实施。
 
 ### 阶段五：End Game 领域调研与建模
 
@@ -284,8 +284,8 @@ Drive Discs 是首个实体闭环，而不是绕过共享契约的独立局部�
 - Drive Discs 已完成全量上游验证、正式规范、实现、自动化检查和在线组合快照验收，长期契约见 [Drive Discs 数据规范](../specs/nanoka/equipment.md)；
 - W-Engines 已完成三版本全量 `zh/en` 覆盖验证、正式规范、历史 v2 epoch 兼容、实现、自动化检查和在线三实体组合快照验收，长期契约见 [W-Engines 数据规范](../specs/nanoka/weapon.md)；
 - Bangboos 已完成三版本全量 `zh/en` 覆盖验证、合法空值与内部技能引用建模、多个历史 v2 epoch 兼容、实现、自动化检查和在线四实体组合快照验收，长期契约见 [Bangboos 数据规范](../specs/nanoka/bangboo.md)；
-- Monster 内部 `monster_info`、主 `monster_id` 和战斗单位 ID 的全量一致性规则；
-- `monster_list` 外层 key 的业务语义；在确认前只能使用中性名称，不能把它当成 Monster ID；
+- Monsters 已完成三版本全量 `zh/en` 覆盖验证、多层 ID 与内部战斗单位建模、四实体历史 v2 epoch 兼容、实现、自动化检查和在线五实体组合快照验收，长期契约见 [Monsters 数据规范](../specs/nanoka/monster.md)；
+- End Game 的 `monster_list` 外层 key 已确认不是规范 Monster ID，但其确切业务语义仍未证明；子域规范必须使用中性名称，Monster 外键只取嵌套记录的 `id`；
 - End Game 的 Monster 引用缺失在何种历史快照范围内允许记录 `not-run`；正常新完整发布中，已支持依赖的缺失必须阻止发布；
 - Boss `zone`/`modes` 分支、mode ID 和 `zone_type` 的完整规则；
 - Simul 的 node、battle、record 解锁引用是否都限制在单个详情文件内；

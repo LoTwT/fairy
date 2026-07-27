@@ -151,6 +151,12 @@ describe("Nanoka URL policy", () => {
     expect(
       buildEntityDetailUrl(policy, "3.0", "zh", "bangboo", "13001").href,
     ).toBe("https://static.nanoka.cc/zzz/3.0/zh/bangboo/13001.json")
+    expect(buildEntityIndexUrl(policy, "3.0", "monster").href).toBe(
+      "https://static.nanoka.cc/zzz/3.0/monster.json",
+    )
+    expect(
+      buildEntityDetailUrl(policy, "3.0", "en", "monster", "1001").href,
+    ).toBe("https://static.nanoka.cc/zzz/3.0/en/monster/1001.json")
     expect(() =>
       validateAllowedUrl(
         policy,
@@ -171,6 +177,27 @@ describe("Nanoka URL policy", () => {
     expect(() =>
       buildCharacterDetailUrl(policy, "3.0", "ja" as "zh", "1011"),
     ).toThrow("不支持的语言")
+    expect(() =>
+      validateAllowedUrl(
+        policy,
+        new URL("https://static.nanoka.cc/zzz/3.0/Monster.json"),
+        "data",
+      ),
+    ).toThrow("URL 路径")
+    expect(() =>
+      validateAllowedUrl(
+        policy,
+        new URL("https://static.nanoka.cc/zzz/3.0/en/Monster/1001.json"),
+        "data",
+      ),
+    ).toThrow("URL 路径")
+    expect(() =>
+      validateAllowedUrl(
+        policy,
+        new URL("https://static.nanoka.cc/zzz/3.0/unknown.json"),
+        "data",
+      ),
+    ).toThrow("URL 路径")
   })
 
   it("rejects malformed manifests", () => {

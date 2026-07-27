@@ -17,6 +17,12 @@ import {
 } from "./equipment.ts"
 
 import {
+  createMonsterDetailResource,
+  discoverMonsterIds,
+  validateMonsterDetail,
+  validateMonsterEntityDetails,
+} from "./monster.ts"
+import {
   createWeaponDetailResource,
   discoverWeaponIds,
   validateWeaponDetail,
@@ -26,12 +32,14 @@ import {
 export const historicalV2EntityEpochs = [
   ["character", "equipment"],
   ["character", "equipment", "weapon"],
+  ["character", "equipment", "weapon", "bangboo"],
 ] as const
 export const supportedEntityNames = [
   "character",
   "equipment",
   "weapon",
   "bangboo",
+  "monster",
 ] as const
 export type EntityName = (typeof supportedEntityNames)[number]
 
@@ -106,6 +114,16 @@ export const entityRegistry: readonly EntityAdapter[] = [
       validateBangbooDetail(value, expectedEntityId, indexValue, language)
     },
     validateEntityDetails: validateBangbooEntityDetails,
+  },
+  {
+    name: "monster",
+    displayName: "Monsters",
+    discoverIds: discoverMonsterIds,
+    createDetailResource: createMonsterDetailResource,
+    validateDetail(value, expectedEntityId, indexValue, language) {
+      validateMonsterDetail(value, expectedEntityId, indexValue, language)
+    },
+    validateEntityDetails: validateMonsterEntityDetails,
   },
 ]
 

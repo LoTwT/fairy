@@ -26,6 +26,11 @@ import {
   validateEquipmentDetail,
 } from "../scripts/nanoka/equipment.ts"
 import {
+  discoverMonsterIds,
+  validateMonsterDetail,
+  validateMonsterEntityDetails,
+} from "../scripts/nanoka/monster.ts"
+import {
   discoverWeaponIds,
   validateWeaponDetail,
 } from "../scripts/nanoka/weapon.ts"
@@ -240,13 +245,94 @@ describe("Nanoka bangboo resources", () => {
   })
 })
 
+describe("Nanoka monster resources", () => {
+  it("validates multi-unit details and confirmed empty monster_info", () => {
+    const index = monsterIndex()
+    const detail = monsterDetail("zh")
+    expect(
+      discoverMonsterIds({
+        "5001": { ...index["1001"], zh: "五", en: "Five" },
+        "1001": index["1001"],
+      }),
+    ).toEqual(["1001", "5001"])
+    expect(() =>
+      validateMonsterDetail(detail, "1001", index, "zh"),
+    ).not.toThrow()
+
+    const emptyIndex = monsterIndex(true)
+    expect(() =>
+      validateMonsterDetail(
+        monsterDetail("zh", true),
+        "1001",
+        emptyIndex,
+        "zh",
+      ),
+    ).not.toThrow()
+  })
+
+  it("rejects invalid IDs, inconsistent empty info, and malformed types", () => {
+    const index = monsterIndex()
+    expect(() => discoverMonsterIds({ "01001": index["1001"] })).toThrow(
+      "非法 Monster ID",
+    )
+
+    const mismatchedUnit = monsterDetail("zh")
+    mismatchedUnit.monster_info["2001"]!.id = 2999
+    expect(() =>
+      validateMonsterDetail(mismatchedUnit, "1001", index, "zh"),
+    ).toThrow("key 与 id 不一致")
+
+    const unresolvedMain = monsterDetail("zh")
+    unresolvedMain.monster_id = 2999
+    expect(() =>
+      validateMonsterDetail(unresolvedMain, "1001", index, "zh"),
+    ).not.toThrow()
+
+    const inconsistentEmpty = monsterDetail("zh", true)
+    inconsistentEmpty.monster_id = 2999
+    expect(() =>
+      validateMonsterDetail(
+        inconsistentEmpty,
+        "1001",
+        monsterIndex(true),
+        "zh",
+      ),
+    ).toThrow("空 monster_info 必须使用 monster_id=0")
+
+    const malformed = monsterDetail("zh")
+    malformed.monster_info["2001"]!.element.fire = "1" as unknown as number
+    expect(() => validateMonsterDetail(malformed, "1001", index, "zh")).toThrow(
+      "element.fire 必须是整数",
+    )
+  })
+
+  it("rejects zh/en numeric mismatches while allowing localized text", () => {
+    const zh = monsterDetail("zh")
+    const en = monsterDetail("en")
+    expect(() =>
+      validateMonsterEntityDetails({
+        zh: new Map([["1001", zh]]),
+        en: new Map([["1001", en]]),
+      }),
+    ).not.toThrow()
+
+    en.monster_info["2002"]!.curves.hp.curve[1] = 999
+    expect(() =>
+      validateMonsterEntityDetails({
+        zh: new Map([["1001", zh]]),
+        en: new Map([["1001", en]]),
+      }),
+    ).toThrow("zh/en 数值不一致")
+  })
+})
+
 describe("Nanoka snapshots", () => {
   it("writes a complete raw-byte snapshot and verifies it offline", async () => {
     const directory = await temporaryDirectory()
     const result = await createSnapshot(directory, false)
     expect(result.manifest.summary).toMatchObject({
-      entityTypeCount: 4,
-      assetCount: 17,
+      entityTypeCount: 5,
+      assetCount: 20,
       entities: {
         character: {
           recordCount: 2,
@@ -264,6 +350,11 @@ describe("Nanoka snapshots", () => {
           assetCount: 3,
         },
         bangboo: {
+          recordCount: 1,
+          detailCountByLanguage: { zh: 1, en: 1 },
+          assetCount: 3,
+        },
+        monster: {
           recordCount: 1,
           detailCountByLanguage: { zh: 1, en: 1 },
           assetCount: 3,
@@ -313,13 +404,16 @@ describe("Nanoka snapshots", () => {
       "entity-discovered",
       "entity-details",
       "entity-details",
+      "entity-discovered",
+      "entity-details",
+      "entity-details",
       "verifying",
       "verifying",
       "verifying",
       "verifying",
       "publishing",
     ])
-    expect(detailProgress).toHaveLength(12)
+    expect(detailProgress).toHaveLength(14)
     expect(detailProgress.at(-1)).toMatchObject({ completed: 2, total: 2 })
   })
 
@@ -338,7 +432,7 @@ describe("Nanoka snapshots", () => {
       mode: "selected",
       requestedEntities: ["equipment"],
     })
-    expect(result.carriedForwardAssetCount).toBe(11)
+    expect(result.carriedForwardAssetCount).toBe(14)
     expect(
       result.manifest.assets
         .filter((asset) => asset.result === "carried-forward")
@@ -346,43 +440,15 @@ describe("Nanoka snapshots", () => {
     ).toBe(true)
   })
 
-  it("upgrades a legal three-entity v2 snapshot by fetching selected bangboo", async () => {
+  it("upgrades a legal four-entity v2 snapshot by fetching only monster", async () => {
     const directory = await temporaryDirectory()
     await createSnapshot(directory, false)
-    const snapshotDirectory = join(directory, "3.0")
-    const manifestPath = join(snapshotDirectory, "fetch-manifest.json")
-    const manifest = JSON.parse(await readFile(manifestPath, "utf8")) as {
-      entities: string[]
-      fetchScope: { mode: string; requestedEntities: string[] }
-      assets: Array<{ entity?: string; bytes: number }>
-      summary: {
-        entityTypeCount: number
-        assetCount: number
-        totalBytes: number
-        entities: Record<string, unknown>
-      }
-      validation: { entities: Record<string, string> }
-    }
-    manifest.entities = ["character", "equipment", "weapon"]
-    manifest.fetchScope = {
-      mode: "all",
-      requestedEntities: ["character", "equipment", "weapon"],
-    }
-    manifest.assets = manifest.assets.filter(
-      (asset) => asset.entity !== "bangboo",
-    )
-    manifest.summary.entityTypeCount = 3
-    manifest.summary.assetCount = manifest.assets.length
-    manifest.summary.totalBytes = manifest.assets.reduce(
-      (sum, asset) => sum + asset.bytes,
-      0,
-    )
-    delete manifest.summary.entities.bangboo
-    delete manifest.validation.entities.bangboo
-    await rm(join(snapshotDirectory, "bangboo.json"))
-    await rm(join(snapshotDirectory, "zh", "bangboo"), { recursive: true })
-    await rm(join(snapshotDirectory, "en", "bangboo"), { recursive: true })
-    await writeFile(manifestPath, `${JSON.stringify(manifest)}\n`)
+    await retainSnapshotEntities(directory, [
+      "character",
+      "equipment",
+      "weapon",
+      "bangboo",
+    ])
 
     expect(
       await verifyNanokaSnapshots({
@@ -394,18 +460,58 @@ describe("Nanoka snapshots", () => {
       directory,
       false,
       {},
-      { entities: ["bangboo"] },
+      { entities: ["monster"] },
     )
     expect(upgraded.manifest.entities).toEqual([
       "character",
       "equipment",
       "weapon",
       "bangboo",
+      "monster",
+    ])
+    expect(upgraded.carriedForwardAssetCount).toBe(16)
+  })
+
+  it("requires bangboo and monster migration from the three-entity epoch", async () => {
+    const directory = await temporaryDirectory()
+    await createSnapshot(directory, false)
+    await retainSnapshotEntities(directory, [
+      "character",
+      "equipment",
+      "weapon",
+    ])
+
+    expect(
+      await verifyNanokaSnapshots({
+        policy: await loadSourcePolicy(),
+        rawDirectory: directory,
+      }),
+    ).toEqual([{ snapshotVersion: "3.0", errors: [] }])
+    const before = await readFile(join(directory, "3.0", "fetch-manifest.json"))
+    await expect(
+      createSnapshot(directory, false, {}, { entities: ["monster"] }),
+    ).rejects.toThrow("缺少未选实体 bangboo")
+    expect(
+      await readFile(join(directory, "3.0", "fetch-manifest.json")),
+    ).toEqual(before)
+
+    const upgraded = await createSnapshot(
+      directory,
+      false,
+      {},
+      { entities: ["bangboo", "monster"] },
+    )
+    expect(upgraded.manifest.entities).toEqual([
+      "character",
+      "equipment",
+      "weapon",
+      "bangboo",
+      "monster",
     ])
     expect(upgraded.carriedForwardAssetCount).toBe(13)
   })
 
-  it("requires joint weapon and bangboo migration from the two-entity epoch", async () => {
+  it("requires weapon, bangboo, and monster migration from the two-entity epoch", async () => {
     const directory = await temporaryDirectory()
     await createSnapshot(directory, false)
     await retainSnapshotEntities(directory, ["character", "equipment"])
@@ -418,7 +524,12 @@ describe("Nanoka snapshots", () => {
 
     const before = await readFile(join(directory, "3.0", "fetch-manifest.json"))
     await expect(
-      createSnapshot(directory, false, {}, { entities: ["bangboo"] }),
+      createSnapshot(
+        directory,
+        false,
+        {},
+        { entities: ["bangboo", "monster"] },
+      ),
     ).rejects.toThrow("缺少未选实体 weapon")
     expect(
       await readFile(join(directory, "3.0", "fetch-manifest.json")),
@@ -428,13 +539,14 @@ describe("Nanoka snapshots", () => {
       directory,
       false,
       {},
-      { entities: ["weapon", "bangboo"] },
+      { entities: ["weapon", "bangboo", "monster"] },
     )
     expect(migrated.manifest.entities).toEqual([
       "character",
       "equipment",
       "weapon",
       "bangboo",
+      "monster",
     ])
     expect(migrated.carriedForwardAssetCount).toBe(10)
   })
@@ -511,6 +623,9 @@ describe("Nanoka snapshots", () => {
     await rm(join(snapshotDirectory, "bangboo.json"))
     await rm(join(snapshotDirectory, "zh", "bangboo"), { recursive: true })
     await rm(join(snapshotDirectory, "en", "bangboo"), { recursive: true })
+    await rm(join(snapshotDirectory, "monster.json"))
+    await rm(join(snapshotDirectory, "zh", "monster"), { recursive: true })
+    await rm(join(snapshotDirectory, "en", "monster"), { recursive: true })
     await writeFile(manifestPath, `${JSON.stringify(v1)}\n`)
 
     expect(
@@ -523,7 +638,7 @@ describe("Nanoka snapshots", () => {
       directory,
       false,
       {},
-      { entities: ["equipment", "weapon", "bangboo"] },
+      { entities: ["equipment", "weapon", "bangboo", "monster"] },
     )
     expect(migrated.manifest.schemaVersion).toBe("nanoka-fetch-manifest/v2")
     expect(migrated.manifest.entities).toEqual([
@@ -531,6 +646,7 @@ describe("Nanoka snapshots", () => {
       "equipment",
       "weapon",
       "bangboo",
+      "monster",
     ])
   })
 
@@ -538,7 +654,7 @@ describe("Nanoka snapshots", () => {
     const directory = await temporaryDirectory()
     await createSnapshot(directory, false)
     const reused = await createSnapshot(directory, true)
-    expect(reused.reusedAssetCount).toBe(16)
+    expect(reused.reusedAssetCount).toBe(19)
     expect(reused.driftedAssetIds).toEqual([])
 
     const drifted = await createSnapshot(directory, false, {
@@ -1398,6 +1514,13 @@ async function createSnapshot(
     [`/zzz/${version}/en/bangboo/13001.json`]: JSON.stringify(
       bangbooDetail("en"),
     ),
+    [`/zzz/${version}/monster.json`]: JSON.stringify(monsterIndex()),
+    [`/zzz/${version}/zh/monster/1001.json`]: JSON.stringify(
+      monsterDetail("zh"),
+    ),
+    [`/zzz/${version}/en/monster/1001.json`]: JSON.stringify(
+      monsterDetail("en"),
+    ),
     ...overrides,
   }
   const httpClient = new NanokaHttpClient(
@@ -1442,6 +1565,74 @@ async function createSnapshot(
       ? {}
       : { onProgress: options.onProgress }),
   })
+}
+
+function monsterIndex(empty = false): Record<string, Record<string, unknown>> {
+  return {
+    "1001": {
+      zh: empty ? "空壳" : "装甲哈提",
+      en: empty ? "Empty Husk" : "Armored Hati",
+      group: 7,
+      rarity: 4,
+      icon: empty ? "" : "UI/Monster/1001.png",
+      desc: empty ? "" : "Monster summary",
+      tag: null,
+      tag2: null,
+    },
+  }
+}
+
+function monsterDetail(language: "zh" | "en", empty = false) {
+  const battleUnit = (id: number, icon: string) => ({
+    id,
+    code_name: `monster_${id}`,
+    type: language === "zh" ? "普通" : "Normal",
+    icon,
+    tag: [language === "zh" ? "机械" : "Machine", ""],
+    element: {
+      physical: 10,
+      fire: 20,
+      ice: 30,
+      electric: 40,
+      ether: 50,
+      wind: 60,
+    },
+    curves: {
+      hp: { ratio: 100, curve: [1000, 1100] },
+      attack: { ratio: 100, curve: [100, 110] },
+      defence: { ratio: 100, curve: [50, 55] },
+      stun: { ratio: 100, curve: [20, 22] },
+    },
+    stats: id === 2001 ? { hp: 1000, attack: 100 } : {},
+  })
+  const monster_info = empty
+    ? {}
+    : {
+        "2001": battleUnit(2001, "UI/Monster/Unit/2001.png"),
+        "2002": battleUnit(2002, ""),
+      }
+  return {
+    id: 1001,
+    monster_id: empty ? 0 : 2001,
+    name:
+      language === "zh"
+        ? empty
+          ? "空壳"
+          : "装甲哈提"
+        : empty
+          ? "Empty Husk"
+          : "Armored Hati",
+    desc: empty ? "" : language === "zh" ? "中文描述" : "English description",
+    rarity: 4,
+    group_id: 7,
+    group_desc: language === "zh" ? "机械敌人" : "Machine enemies",
+    image_path: empty ? "" : "UI/Monster/1001.png",
+    card_obtain: language === "zh" ? "获得方式" : "How to obtain",
+    card_quote: "",
+    card_skill_desc: "",
+    element_abnormal: empty ? {} : { "1": 10, "2": 20 },
+    monster_info,
+  }
 }
 
 function bangbooIndex(empty = false): Record<string, Record<string, unknown>> {
