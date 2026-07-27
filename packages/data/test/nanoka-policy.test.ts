@@ -8,6 +8,8 @@ import {
 import {
   buildCharacterDetailUrl,
   buildCharacterIndexUrl,
+  buildEntityDetailUrl,
+  buildEntityIndexUrl,
   loadSourcePolicy,
   selectVersion,
   validateAllowedUrl,
@@ -137,6 +139,12 @@ describe("Nanoka URL policy", () => {
     expect(buildCharacterDetailUrl(policy, "3.0", "zh", "1011").href).toBe(
       "https://static.nanoka.cc/zzz/3.0/zh/character/1011.json",
     )
+    expect(buildEntityIndexUrl(policy, "3.0", "weapon").href).toBe(
+      "https://static.nanoka.cc/zzz/3.0/weapon.json",
+    )
+    expect(
+      buildEntityDetailUrl(policy, "3.0", "en", "weapon", "12002").href,
+    ).toBe("https://static.nanoka.cc/zzz/3.0/en/weapon/12002.json")
     expect(() =>
       validateAllowedUrl(
         policy,

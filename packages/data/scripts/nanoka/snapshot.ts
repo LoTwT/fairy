@@ -16,6 +16,7 @@ import { dirname, join, relative, sep } from "node:path"
 import {
   entityRegistry,
   getEntityAdapter,
+  historicalV2EntityEpoch,
   isEntityName,
   normalizeSelectedEntities,
   supportedEntityNames,
@@ -248,6 +249,7 @@ export async function fetchNanokaSnapshot(options: {
         policy,
         targetDirectory,
         version,
+        false,
       )
       if (oldVerification.errors.length > 0)
         throw new Error(
@@ -447,6 +449,7 @@ export async function fetchNanokaSnapshot(options: {
         policy,
         stagingDirectory,
         version,
+        true,
       )
       if (verification.errors.length > 0)
         throw new Error(
@@ -555,6 +558,7 @@ async function verifySnapshotDirectory(
   policy: SourcePolicy,
   directory: string,
   expectedVersion: string,
+  requireCurrentEntityEpoch = false,
 ): Promise<VerificationResult> {
   const errors: string[] = []
   let stored: StoredFetchManifest
@@ -580,7 +584,7 @@ async function verifySnapshotDirectory(
   const assets = adaptAssets(stored)
   const entities = entitiesForManifest(stored)
   if (stored.schemaVersion === "nanoka-fetch-manifest/v2")
-    validateV2ManifestShape(stored, errors)
+    validateV2ManifestShape(stored, errors, requireCurrentEntityEpoch)
   const expectedPaths = new Set(["fetch-manifest.json"])
   const assetIds = new Set<string>()
   const paths = new Set<string>()
@@ -661,6 +665,12 @@ async function verifySnapshotDirectory(
       for (const path of expectedDetails)
         if (!registeredDetails.some((asset) => asset.localPath === path))
           errors.push(`缺少详情登记：${path}`)
+      const detailsByLanguage = Object.fromEntries(
+        policy.languages.map((language) => [
+          language,
+          new Map<string, unknown>(),
+        ]),
+      ) as Record<SupportedLanguage, Map<string, unknown>>
       for (const asset of registeredDetails) {
         if (!expectedDetails.has(asset.localPath))
           errors.push(`多余详情登记：${asset.localPath}`)
@@ -668,20 +678,23 @@ async function verifySnapshotDirectory(
           errors.push(`${asset.assetId} 缺少 entityId 或 language`)
           continue
         }
-        adapter.validateDetail(
-          decodeUtf8Json(
-            new Uint8Array(
-              await readFile(
-                resolveSnapshotAssetPath(directory, asset.localPath),
-              ),
+        const detailValue = decodeUtf8Json(
+          new Uint8Array(
+            await readFile(
+              resolveSnapshotAssetPath(directory, asset.localPath),
             ),
-            asset.localPath,
           ),
+          asset.localPath,
+        )
+        adapter.validateDetail(
+          detailValue,
           asset.entityId,
           indexValue,
           asset.language,
         )
+        detailsByLanguage[asset.language].set(asset.entityId, detailValue)
       }
+      adapter.validateEntityDetails?.(detailsByLanguage)
       const entityAssets = assets.filter((asset) => asset.entity === entityName)
       recomputed[entityName] = {
         recordCount: ids.length,
@@ -732,10 +745,24 @@ async function verifySnapshotDirectory(
 function validateV2ManifestShape(
   manifest: FetchManifestV2,
   errors: string[],
+  requireCurrentEntityEpoch: boolean,
 ): void {
   const enabledEntities = entityRegistry.map(({ name }) => name)
-  if (!sameStringArray(manifest.entities, enabledEntities))
-    errors.push("entities 必须恰好包含全部启用实体并按注册表顺序排列")
+  const isHistoricalEpoch = sameStringArray(
+    manifest.entities,
+    historicalV2EntityEpoch,
+  )
+  const isCurrentEpoch = sameStringArray(manifest.entities, enabledEntities)
+  if (
+    requireCurrentEntityEpoch
+      ? !isCurrentEpoch
+      : !isHistoricalEpoch && !isCurrentEpoch
+  )
+    errors.push(
+      requireCurrentEntityEpoch
+        ? "entities 必须恰好包含当前全部启用实体并按注册表顺序排列"
+        : "entities 必须恰好匹配合法历史 epoch 或当前全部启用实体",
+    )
   const assetEntities = [
     ...new Set(
       manifest.assets.flatMap((asset) =>

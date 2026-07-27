@@ -20,6 +20,10 @@ import {
   discoverEquipmentIds,
   validateEquipmentDetail,
 } from "../scripts/nanoka/equipment.ts"
+import {
+  discoverWeaponIds,
+  validateWeaponDetail,
+} from "../scripts/nanoka/weapon.ts"
 import type { FetchedHttpAsset } from "../scripts/nanoka/http.ts"
 import { NanokaHttpClient } from "../scripts/nanoka/http.ts"
 import { loadSourcePolicy, validateManifest } from "../scripts/nanoka/policy.ts"
@@ -122,13 +126,49 @@ describe("Nanoka equipment resources", () => {
   })
 })
 
+describe("Nanoka weapon resources", () => {
+  it("discovers canonical W-Engine IDs and validates the complete contract", () => {
+    const detail = weaponDetail("zh")
+    const index = weaponIndex()
+    const second = { ...index["12002"], icon: "weapon_2" }
+    expect(discoverWeaponIds({ "12002": index["12002"], "2": second })).toEqual(
+      ["2", "12002"],
+    )
+    expect(() => discoverWeaponIds({ "012002": index["12002"] })).toThrow(
+      "非法 W-Engine ID",
+    )
+    expect(() =>
+      validateWeaponDetail(detail, "12002", index, "zh"),
+    ).not.toThrow()
+    expect(() =>
+      validateWeaponDetail(
+        {
+          ...detail,
+          level: { ...detail.level, "60": { exp: 1, rate: 6000, rate2: 0 } },
+        },
+        "12002",
+        index,
+        "zh",
+      ),
+    ).toThrow("level.60.exp")
+    expect(() =>
+      validateWeaponDetail(
+        { ...detail, materials: "01:2,2:3|3:4,4:5|5:6,6:7|7:8,8:9|9:10,10:11" },
+        "12002",
+        index,
+        "zh",
+      ),
+    ).toThrow("正整数 itemId:amount")
+  })
+})
+
 describe("Nanoka snapshots", () => {
   it("writes a complete raw-byte snapshot and verifies it offline", async () => {
     const directory = await temporaryDirectory()
     const result = await createSnapshot(directory, false)
     expect(result.manifest.summary).toMatchObject({
-      entityTypeCount: 2,
-      assetCount: 11,
+      entityTypeCount: 3,
+      assetCount: 14,
       entities: {
         character: {
           recordCount: 2,
@@ -139,6 +179,11 @@ describe("Nanoka snapshots", () => {
           recordCount: 2,
           detailCountByLanguage: { zh: 2, en: 2 },
           assetCount: 5,
+        },
+        weapon: {
+          recordCount: 1,
+          detailCountByLanguage: { zh: 1, en: 1 },
+          assetCount: 3,
         },
       },
     })
@@ -179,17 +224,20 @@ describe("Nanoka snapshots", () => {
       "entity-details",
       "entity-details",
       "entity-details",
+      "entity-discovered",
+      "entity-details",
+      "entity-details",
       "verifying",
       "verifying",
       "verifying",
       "verifying",
       "publishing",
     ])
-    expect(detailProgress).toHaveLength(8)
-    expect(detailProgress.at(-1)).toMatchObject({ completed: 4, total: 4 })
+    expect(detailProgress).toHaveLength(10)
+    expect(detailProgress.at(-1)).toMatchObject({ completed: 2, total: 2 })
   })
 
-  it("rebuilds selected equipment while carrying validated character assets", async () => {
+  it("rebuilds selected equipment while carrying validated other entity assets", async () => {
     const directory = await temporaryDirectory()
     await createSnapshot(directory, false)
 
@@ -204,15 +252,73 @@ describe("Nanoka snapshots", () => {
       mode: "selected",
       requestedEntities: ["equipment"],
     })
-    expect(result.carriedForwardAssetCount).toBe(5)
+    expect(result.carriedForwardAssetCount).toBe(8)
     expect(
       result.manifest.assets
         .filter((asset) => asset.result === "carried-forward")
-        .every((asset) => asset.entity === "character"),
+        .every((asset) => asset.entity !== "equipment"),
     ).toBe(true)
   })
 
-  it("migrates a strict v1 character snapshot only after selected equipment succeeds", async () => {
+  it("upgrades a legal two-entity v2 snapshot by fetching selected weapon", async () => {
+    const directory = await temporaryDirectory()
+    await createSnapshot(directory, false)
+    const snapshotDirectory = join(directory, "3.0")
+    const manifestPath = join(snapshotDirectory, "fetch-manifest.json")
+    const manifest = JSON.parse(await readFile(manifestPath, "utf8")) as {
+      entities: string[]
+      fetchScope: { mode: string; requestedEntities: string[] }
+      assets: Array<{ entity?: string; bytes: number }>
+      summary: {
+        entityTypeCount: number
+        assetCount: number
+        totalBytes: number
+        entities: Record<string, unknown>
+      }
+      validation: { entities: Record<string, string> }
+    }
+    manifest.entities = ["character", "equipment"]
+    manifest.fetchScope = {
+      mode: "all",
+      requestedEntities: ["character", "equipment"],
+    }
+    manifest.assets = manifest.assets.filter(
+      (asset) => asset.entity !== "weapon",
+    )
+    manifest.summary.entityTypeCount = 2
+    manifest.summary.assetCount = manifest.assets.length
+    manifest.summary.totalBytes = manifest.assets.reduce(
+      (sum, asset) => sum + asset.bytes,
+      0,
+    )
+    delete manifest.summary.entities.weapon
+    delete manifest.validation.entities.weapon
+    await rm(join(snapshotDirectory, "weapon.json"))
+    await rm(join(snapshotDirectory, "zh", "weapon"), { recursive: true })
+    await rm(join(snapshotDirectory, "en", "weapon"), { recursive: true })
+    await writeFile(manifestPath, `${JSON.stringify(manifest)}\n`)
+
+    expect(
+      await verifyNanokaSnapshots({
+        policy: await loadSourcePolicy(),
+        rawDirectory: directory,
+      }),
+    ).toEqual([{ snapshotVersion: "3.0", errors: [] }])
+    const upgraded = await createSnapshot(
+      directory,
+      false,
+      {},
+      { entities: ["weapon"] },
+    )
+    expect(upgraded.manifest.entities).toEqual([
+      "character",
+      "equipment",
+      "weapon",
+    ])
+    expect(upgraded.carriedForwardAssetCount).toBe(10)
+  })
+
+  it("migrates a strict v1 character snapshot only after selected entities succeed", async () => {
     const directory = await temporaryDirectory()
     await createSnapshot(directory, false)
     const snapshotDirectory = join(directory, "3.0")
@@ -278,6 +384,9 @@ describe("Nanoka snapshots", () => {
     await rm(join(snapshotDirectory, "equipment.json"))
     await rm(join(snapshotDirectory, "zh", "equipment"), { recursive: true })
     await rm(join(snapshotDirectory, "en", "equipment"), { recursive: true })
+    await rm(join(snapshotDirectory, "weapon.json"))
+    await rm(join(snapshotDirectory, "zh", "weapon"), { recursive: true })
+    await rm(join(snapshotDirectory, "en", "weapon"), { recursive: true })
     await writeFile(manifestPath, `${JSON.stringify(v1)}\n`)
 
     expect(
@@ -290,17 +399,21 @@ describe("Nanoka snapshots", () => {
       directory,
       false,
       {},
-      { entities: ["equipment"] },
+      { entities: ["equipment", "weapon"] },
     )
     expect(migrated.manifest.schemaVersion).toBe("nanoka-fetch-manifest/v2")
-    expect(migrated.manifest.entities).toEqual(["character", "equipment"])
+    expect(migrated.manifest.entities).toEqual([
+      "character",
+      "equipment",
+      "weapon",
+    ])
   })
 
   it("reuses validated files on 304 and reports drift", async () => {
     const directory = await temporaryDirectory()
     await createSnapshot(directory, false)
     const reused = await createSnapshot(directory, true)
-    expect(reused.reusedAssetCount).toBe(10)
+    expect(reused.reusedAssetCount).toBe(13)
     expect(reused.driftedAssetIds).toEqual([])
 
     const drifted = await createSnapshot(directory, false, {
@@ -998,6 +1111,56 @@ describe("Nanoka snapshots", () => {
     ).toEqual(before)
   })
 
+  it("detects weapon cross-language, summary, and validation tampering", async () => {
+    const directory = await temporaryDirectory()
+    await createSnapshot(directory, false)
+    const snapshotDirectory = join(directory, "3.0")
+    const enWeaponPath = join(snapshotDirectory, "en", "weapon", "12002.json")
+    const enWeapon = JSON.parse(await readFile(enWeaponPath, "utf8")) as {
+      materials: string
+    }
+    enWeapon.materials = "1:2,2:3|3:4,4:5|5:6,6:7|7:8,8:9|9:10,10:12"
+    await writeFile(enWeaponPath, JSON.stringify(enWeapon))
+    const manifestPath = join(snapshotDirectory, "fetch-manifest.json")
+    const manifest = JSON.parse(await readFile(manifestPath, "utf8")) as {
+      summary: { entities: { weapon: { recordCount: number } } }
+      validation: { entities: { weapon: string } }
+    }
+    manifest.summary.entities.weapon.recordCount = 99
+    manifest.validation.entities.weapon = "failed"
+    await writeFile(manifestPath, `${JSON.stringify(manifest)}\n`)
+
+    const [verification] = await verifyNanokaSnapshots({
+      policy: await loadSourcePolicy(),
+      rawDirectory: directory,
+    })
+    const errors = verification?.errors.join("\n") ?? ""
+    expect(errors).toContain("zh/en materials 不一致")
+    expect(errors).toContain("summary.entities 不匹配")
+    expect(errors).toContain("validation.entities 无效")
+  })
+
+  it("rejects non-epoch v2 entity subsets", async () => {
+    const directory = await temporaryDirectory()
+    await createSnapshot(directory, false)
+    const manifestPath = join(directory, "3.0", "fetch-manifest.json")
+    const manifest = JSON.parse(await readFile(manifestPath, "utf8")) as {
+      entities: string[]
+      fetchScope: { mode: string; requestedEntities: string[] }
+    }
+    manifest.entities = ["character", "weapon"]
+    manifest.fetchScope = {
+      mode: "all",
+      requestedEntities: ["character", "weapon"],
+    }
+    await writeFile(manifestPath, `${JSON.stringify(manifest)}\n`)
+    const [verification] = await verifyNanokaSnapshots({
+      policy: await loadSourcePolicy(),
+      rawDirectory: directory,
+    })
+    expect(verification?.errors.join("\n")).toContain("合法历史 epoch")
+  })
+
   it("reports tampering, missing files, and unregistered files", async () => {
     const directory = await temporaryDirectory()
     await createSnapshot(directory, false)
@@ -1054,6 +1217,13 @@ async function createSnapshot(
       '{"id":31100,"name":"河豚电音","desc2":"二件套","desc4":"四件套","story":"...","icon":"UI/31100.png","icon2":"UI/31100.png"}',
     [`/zzz/${version}/en/equipment/31100.json`]:
       '{"id":31100,"name":"Puffer Electro","desc2":"2-piece","desc4":"4-piece","story":"...","icon":"UI/31100.png","icon2":"UI/31100.png"}',
+    [`/zzz/${version}/weapon.json`]: JSON.stringify(weaponIndex()),
+    [`/zzz/${version}/zh/weapon/12002.json`]: JSON.stringify(
+      weaponDetail("zh"),
+    ),
+    [`/zzz/${version}/en/weapon/12002.json`]: JSON.stringify(
+      weaponDetail("en"),
+    ),
     ...overrides,
   }
   const httpClient = new NanokaHttpClient(
@@ -1098,6 +1268,65 @@ async function createSnapshot(
       ? {}
       : { onProgress: options.onProgress }),
   })
+}
+
+function weaponIndex(): Record<string, Record<string, unknown>> {
+  return {
+    "12002": {
+      icon: "weapon_12002",
+      en: "The Vault",
+      zh: "逍遥游球",
+      ja: "ザ・ボールト",
+      ko: "더 볼트",
+      desc: "English description <color=#fff>...</color>",
+      sub: "ATK",
+      rank: 4,
+      type: 1,
+      atk: 210,
+    },
+  }
+}
+
+function weaponDetail(language: "zh" | "en") {
+  const level = Object.fromEntries(
+    Array.from({ length: 61 }, (_, levelNumber) => [
+      String(levelNumber),
+      {
+        exp: levelNumber === 60 ? 0 : 100 + levelNumber,
+        rate: levelNumber * 100,
+        rate2: 0,
+      },
+    ]),
+  )
+  const stars = Object.fromEntries(
+    Array.from({ length: 6 }, (_, star) => [
+      String(star),
+      { star_rate: star * 1_000, rand_rate: star * 100 },
+    ]),
+  )
+  const talents = Object.fromEntries(
+    Array.from({ length: 5 }, (_, index) => [
+      String(index + 1),
+      { name: `Talent ${index + 1}`, desc: "... <color=#fff>rich</color>" },
+    ]),
+  )
+  return {
+    id: 12002,
+    code_name: "weapon_12002",
+    name: language === "zh" ? "逍遥游球" : "The Vault",
+    desc: "...",
+    desc2: "...",
+    desc3: "English description <color=#fff>...</color>",
+    icon: "UI/Weapon/weapon_12002.png",
+    rarity: 4,
+    weapon_type: { "1": language === "zh" ? "支援" : "Support" },
+    base_property: { name: "ATK", name2: "攻击力", format: "{0}", value: 100 },
+    rand_property: { name: "ATK", name2: "攻击力", format: "{0}%", value: 10 },
+    level,
+    stars,
+    talents,
+    materials: "1:2,2:3|3:4,4:5|5:6,6:7|7:8,8:9|9:10,10:11",
+  }
 }
 
 function fetched(content: string): FetchedHttpAsset {

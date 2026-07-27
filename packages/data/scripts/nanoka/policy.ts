@@ -165,7 +165,7 @@ export function buildManifestUrl(policy: SourcePolicy): URL {
 export function buildEntityIndexUrl(
   policy: SourcePolicy,
   version: string,
-  entity: "character" | "equipment",
+  entity: "character" | "equipment" | "weapon",
 ): URL {
   validateVersion(version)
   return validateAllowedUrl(
@@ -189,7 +189,7 @@ export function buildEntityDetailUrl(
   policy: SourcePolicy,
   version: string,
   language: SupportedLanguage,
-  entity: "character" | "equipment",
+  entity: "character" | "equipment" | "weapon",
   entityId: string,
 ): URL {
   validateVersion(version)
@@ -263,7 +263,9 @@ function isAllowedDataPath(policy: SourcePolicy, pathname: string): boolean {
       version !== undefined &&
       isValidVersion(version) &&
       file !== undefined &&
-      (file === "character.json" || file === "equipment.json")
+      (file === "character.json" ||
+        file === "equipment.json" ||
+        file === "weapon.json")
     )
   }
   if (decodedSegments.length === 4) {
@@ -273,7 +275,9 @@ function isAllowedDataPath(policy: SourcePolicy, pathname: string): boolean {
       isValidVersion(version) &&
       language !== undefined &&
       policy.languages.includes(language as SupportedLanguage) &&
-      (entity === "character" || entity === "equipment") &&
+      (entity === "character" ||
+        entity === "equipment" ||
+        entity === "weapon") &&
       file !== undefined &&
       file.endsWith(".json") &&
       isValidEntityId(file.slice(0, -".json".length))

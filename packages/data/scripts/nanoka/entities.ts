@@ -10,7 +10,18 @@ import {
   validateEquipmentDetail,
 } from "./equipment.ts"
 
-export const supportedEntityNames = ["character", "equipment"] as const
+import {
+  createWeaponDetailResource,
+  discoverWeaponIds,
+  validateWeaponDetail,
+  validateWeaponEntityDetails,
+} from "./weapon.ts"
+
+export const historicalV2EntityEpoch = ["character", "equipment"] as const
+export const supportedEntityNames = [
+  ...historicalV2EntityEpoch,
+  "weapon",
+] as const
 export type EntityName = (typeof supportedEntityNames)[number]
 
 export interface EntityDetailResource {
@@ -33,6 +44,9 @@ export interface EntityAdapter {
     expectedEntityId: string,
     indexValue: unknown,
     language: SupportedLanguage,
+  ): void
+  validateEntityDetails?(
+    detailsByLanguage: Record<SupportedLanguage, Map<string, unknown>>,
   ): void
 }
 
@@ -61,6 +75,16 @@ export const entityRegistry: readonly EntityAdapter[] = [
     validateDetail(value, expectedEntityId, indexValue, language) {
       validateEquipmentDetail(value, expectedEntityId, indexValue, language)
     },
+  },
+  {
+    name: "weapon",
+    displayName: "W-Engines",
+    discoverIds: discoverWeaponIds,
+    createDetailResource: createWeaponDetailResource,
+    validateDetail(value, expectedEntityId, indexValue, language) {
+      validateWeaponDetail(value, expectedEntityId, indexValue, language)
+    },
+    validateEntityDetails: validateWeaponEntityDetails,
   },
 ]
 

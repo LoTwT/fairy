@@ -172,7 +172,7 @@ Equipment 实体级 validation 必须为 `passed`。当前适用的跨实体 val
 - 校验摘要与详情的字段一致性；
 - 计算并验证 Equipment 实体级 summary。
 
-共享实体注册表负责稳定登记 `character`、`equipment`。共享 `policy.ts` 负责注册实体 URL 和路径安全；共享 `snapshot.ts` 负责 v1/v2 清单、组合 staging、carried-forward、分层验证、原子发布和恢复。Equipment 字段规则不得移入共享层。
+共享实体注册表负责按稳定顺序登记当前支持实体，并显式冻结合法历史实体集合 epoch。共享 `policy.ts` 负责注册实体 URL 和路径安全；共享 `snapshot.ts` 负责 v1/v2 清单、组合 staging、carried-forward、分层验证、原子发布和恢复。Equipment 字段规则不得移入共享层。
 
 ## 10. 自动化测试矩阵
 
