@@ -2,9 +2,10 @@
 
 ## 状态
 
-- 状态：已实现并验证
-- 实现范围：版本发现与选择、HTTP、条件请求、本地快照、离线校验、原子发布、版本锁和终端进度
-- 验证状态：自动化检查通过，实际在线抓取流程已由用户确认
+- 状态：共享来源基线已实现并验证；多实体契约已完成设计、尚未实现
+- 当前实现范围：版本发现与选择、HTTP、条件请求、Agents `nanoka-fetch-manifest/v1` 快照、离线校验、原子发布、版本锁和终端进度
+- 下一实现范围：`nanoka-fetch-manifest/v2`、实体注册表、多实体组合快照、定向实体重跑和分层验证
+- 验证状态：现有自动化检查通过，Agents 实际在线抓取流程已由用户确认；v2 契约尚待实现和在线验收
 - 适用包：`@randomplay/data`
 - 数据来源：Nanoka ZZZ 静态数据
 - 实体规范入口：[Nanoka 数据源规范索引](index.md)
@@ -143,7 +144,18 @@ CLI 支持：
 packages/data/raw/nanoka/{version}/
 ```
 
-实体在该目录中的具体文件布局由实体规范定义。所有远端 JSON 应保存为响应原始字节，不应先经过 `JSON.parse` 和重新格式化后再写入。
+一个版本目录是一份多实体组合快照，也是锁、staging、验证、失败保护和原子发布的最小边界。实体是抓取选择和验证模块的边界，不是独立发布边界。
+
+已登记实体的一般资源布局为：
+
+```text
+{entity}.json
+{language}/{entity}/{entityId}.json
+```
+
+只有代码实体注册表和正式实体规范共同声明的实体才能使用该模板；路径相似不表示字段结构、内部关系或验证规则相同。实体规范可以在共享安全路径规则内定义额外资源布局。
+
+所有远端 JSON 应保存为响应原始字节，不应先经过 `JSON.parse` 和重新格式化后再写入。
 
 根 `.gitignore` 中精确忽略：
 
@@ -164,7 +176,11 @@ packages/data/raw/
 
 ## 7. 抓取清单通用规则
 
-每个版本快照必须包含 `fetch-manifest.json`，并使用显式 schema 标识：
+每个版本快照只包含一份版本级 `fetch-manifest.json`。该清单登记整个版本目录中的全部实体资产、全局计数和验证结果；不得为各实体建立相互独立的正式清单。
+
+### 7.1 schema 兼容策略
+
+现有 Agents 快照使用：
 
 ```json
 {
@@ -172,7 +188,21 @@ packages/data/raw/
 }
 ```
 
-清单顶层至少记录：
+`v1` 冻结为 Agents 历史格式。读取器和离线验证必须继续严格支持其既有 asset kind、`characterId`、扁平 summary 和完整 `zh/en` Character 覆盖语义，不得将它放宽为多实体格式。
+
+多实体快照使用：
+
+```json
+{
+  "schemaVersion": "nanoka-fetch-manifest/v2"
+}
+```
+
+实现必须读取和验证 `v1`、`v2`，但新增抓取成功发布时只写 `v2`。`verify:nanoka` 不迁移或改写旧快照；`v1` 到 `v2` 的转换只允许发生在一次完整 staging 校验成功后的原子发布中，失败时旧 `v1` 快照保持不变。未知 schema 必须明确拒绝。
+
+### 7.2 v2 顶层字段
+
+`v2` 顶层至少记录：
 
 - `schemaVersion`；
 - `sourceId`；
@@ -186,18 +216,51 @@ packages/data/raw/
 - `completedAt`；
 - `userAgent`；
 - `languages`；
+- `entities`；
+- `fetchScope`；
 - `assets`；
-- `summary`。
+- `summary`；
+- `validation`。
+
+`entities` 是发布后快照实际包含且声明完整的实体集合，必须非空、不重复，并按代码实体注册表的稳定顺序排列。正常新发布的快照必须包含当前实现并启用的全部实体；旧 `v1` 快照在内存中的实体集合视为仅包含 `character`。
+
+`fetchScope` 记录本轮网络更新范围，而不是降低快照完整度：
+
+```json
+{
+  "mode": "selected",
+  "requestedEntities": ["equipment"]
+}
+```
+
+- `mode` 为 `all` 或 `selected`；
+- `all` 时 `requestedEntities` 必须等于 `entities`；
+- `selected` 时 `requestedEntities` 必须是 `entities` 的非空真子集；去重后的请求集合等于全部启用实体时统一规范化为 `all`；
+- 未选实体必须来自经过完整验证的旧快照，且旧快照必须包含全部未选的当前启用实体；缺少任一实体时拒绝定向重跑并提示执行全量抓取；
+- 上游 manifest 每轮都参与处理，不列入 `requestedEntities`。
+
+顶层 `startedAt` 和 `completedAt` 描述本次组合快照构建与发布，不表示所有 carried-forward 资产都在该时间重新访问过网络；单个资产的实际获取和检查时间只以其自身时间字段为准。
+
+### 7.3 v2 asset
+
+`v2` 的通用 asset kind 为：
+
+```text
+upstream-manifest
+entity-index
+entity-detail
+```
 
 每个 asset 至少记录：
 
-- `assetId`：跨多次运行保持稳定的唯一标识；
+- `assetId`：跨多次运行保持稳定的全局唯一标识；
 - `kind`；
-- 实体需要时记录 `language` 和实体 ID；
+- 实体资产的 `entity`；
+- 详情资产的 `language` 和 `entityId`；
 - `url`；
 - `localPath`：相对版本快照根目录的 POSIX 风格安全相对路径；
 - `httpStatus`；
-- `result`：`fetched` 或 `not-modified`；
+- `result`：`fetched`、`not-modified` 或 `carried-forward`；
 - `etag`；
 - `lastModified`；
 - `contentType`；
@@ -207,9 +270,109 @@ packages/data/raw/
 - `contentFetchedAt`；
 - `lastCheckedAt`。
 
-实体规范定义可选实体 ID 的字段名、asset kind、稳定 asset ID、语言范围和 `summary` 计数字段。未来实体扩展不得静默改变既有字段的语义；需要不兼容变更时应升级 `schemaVersion`。
+字段组合和稳定 ID 必须满足：
+
+| kind                | 必需实体字段                          | 稳定 `assetId`                                 | `localPath`                           |
+| ------------------- | ------------------------------------- | ---------------------------------------------- | ------------------------------------- |
+| `upstream-manifest` | 不含 `entity`、`language`、`entityId` | `upstream-manifest`                            | `manifest.json`                       |
+| `entity-index`      | `entity`                              | `entity-index:{entity}`                        | `{entity}.json`                       |
+| `entity-detail`     | `entity`、`language`、`entityId`      | `entity-detail:{entity}:{language}:{entityId}` | `{language}/{entity}/{entityId}.json` |
+
+实体名必须来自代码注册表；`entityId` 的资源路径规则由对应实体规范确认，不能因为现有实体使用规范十进制 ID 就推断所有未来内部业务 ID 都相同。
+
+`carried-forward` 表示定向重跑时该资产未发出 HTTP 请求，而是从旧快照复制到新 staging：
+
+- 只允许出现在 `selected` 模式中未被请求的实体资产；
+- 上游 manifest 和被请求实体的资产不得标记为 `carried-forward`；
+- 复制前必须重新验证旧清单、预期路径、文件存在性、字节数和 SHA-256；
+- 保留旧 `contentFetchedAt`、`lastCheckedAt` 和 HTTP 元数据；
+- `carried-forward` 与实际收到 HTTP 304 的 `not-modified` 必须分别统计和报告。
 
 缺失的可选 HTTP 响应头应记录为 `null`，不能用空字符串混淆“缺失”和“存在但为空”。
+
+### 7.4 v2 summary
+
+`summary` 使用全局计数和按实体分组的计数：
+
+```json
+{
+  "entityTypeCount": 2,
+  "assetCount": 11,
+  "totalBytes": 48291,
+  "entities": {
+    "character": {
+      "recordCount": 2,
+      "detailCountByLanguage": { "zh": 2, "en": 2 },
+      "assetCount": 5,
+      "totalBytes": 30120
+    },
+    "equipment": {
+      "recordCount": 2,
+      "detailCountByLanguage": { "zh": 2, "en": 2 },
+      "assetCount": 5,
+      "totalBytes": 17991
+    }
+  }
+}
+```
+
+计数规则：
+
+- `entityTypeCount` 等于 `entities.length`；
+- `recordCount` 来自实体索引动态发现的资源 ID 数量；
+- `detailCountByLanguage` 记录该实体每种受支持语言的详情数量；
+- 实体级 `assetCount` 包含该实体的一份索引和全部详情，不含上游 manifest；
+- 实体级 `totalBytes` 是该实体全部资产的字节总和；
+- 全局 `assetCount` 等于 `assets.length`，包含上游 manifest；
+- 全局 `totalBytes` 是全部登记资产的字节总和，包含上游 manifest；
+- 所有计数和字节数必须从最终合并资产集合重新计算，不得在旧 summary 上做未经重验的增量相加。
+
+`v2` 不保留 `characterCount`、`zhDetailCount` 等实体专用顶层别名。旧 `v1` reader 在内存中将这些字段映射到 Character 实体 summary，以保持既有 Agents 验证和 CLI 行为。
+
+### 7.5 v2 validation
+
+`validation` 使用以下结构：
+
+```json
+{
+  "entities": {
+    "character": "passed",
+    "equipment": "passed"
+  },
+  "crossEntityReferences": [
+    {
+      "checkId": "shiyu-monster-reference/v1",
+      "fromEntity": "shiyu",
+      "toEntity": "monster",
+      "status": "passed",
+      "checkedReferenceCount": 84,
+      "unresolvedReferenceCount": 0,
+      "reason": null
+    }
+  ]
+}
+```
+
+`validation.entities` 必须恰好覆盖 `entities`，每个值只能是 `passed`。失败结果不得写入已发布清单；任何实体失败都必须阻止发布。
+
+`validation.crossEntityReferences` 是数组，记录由实体或领域规范登记的跨实体检查，并满足：
+
+- `checkId` 是稳定、全局唯一的 validator 标识；
+- 记录按 validator 注册表的稳定顺序排列；
+- 当前工具认识且对该快照适用的每个 validator 必须恰好登记一条记录，不得遗漏或重复；
+- `fromEntity` 和 `toEntity` 必须与 `checkId` 注册定义一致；
+- 未登记、未知或字段不一致的检查明确失败。
+
+状态语义：
+
+- `passed`：来源和目标实体存在，检查已执行，`checkedReferenceCount` 为非负整数，`unresolvedReferenceCount` 必须为 0，`reason` 必须为 `null`；
+- `not-run`：来源实体存在但目标实体不在可验证快照中，两个计数必须为 0，并提供非空 `reason`；
+- `not-applicable`：来源实体不存在或该版本没有适用结构，两个计数必须为 0，并提供非空 `reason`；
+- `failed` 不得进入已发布 manifest，只能作为 staging 校验错误报告。
+
+正常新发布中，如果当前支持的来源实体依赖当前支持的目标实体，`not-run` 必须阻止发布。共享清单只表达检查身份、实体边界、状态和计数；`zone`、`modes`、node、battle、Monster 内部结构等规则保留在实体或领域规范中。
+
+### 7.6 哈希和登记闭合
 
 哈希规则：
 
@@ -217,6 +380,8 @@ packages/data/raw/
 - `bytes` 必须是同一字节序列的长度；
 - 离线验证必须重新读取文件并计算字节数和 SHA-256；
 - 任何不一致都应视为快照被修改或清单过期。
+
+`assetId` 和 `localPath` 必须分别全局唯一。版本目录中的实际受管文件必须恰好等于 `fetch-manifest.json` 加全部 `assets[].localPath`；缺失文件和未登记文件都必须失败。
 
 ## 8. HTTP 与缓存策略
 
@@ -297,15 +462,33 @@ fairy-data-source/0.2 (+https://github.com/LoTwT/fairy)
 
 ## 9. 原子写入、版本锁与失败恢复
 
-抓取过程中不得直接逐个覆盖正式快照目录。流程必须为：
+抓取过程中不得直接逐个覆盖正式快照目录。全量抓取和定向实体重跑都必须使用同一个版本级锁，并构建完整版本 staging。
 
-1. 在目标版本目录旁创建 staging 目录；
-2. 抓取新内容，或复制经验证的 304 旧内容；
-3. 完成实体最低结构和一致性校验；
-4. 计算并写入抓取清单；
-5. 离线重验 staging 中全部文件的字节数和 SHA-256；
+全量抓取流程必须为：
+
+1. 在目标版本目录旁创建空 staging 目录；
+2. 抓取全部当前支持实体，或复用经验证的 304 旧内容；
+3. 完成各实体最低结构和一致性校验；
+4. 计算并写入完整版本抓取清单；
+5. 对 staging 执行文件完整性、实体内部和适用跨实体关系验证；
 6. 全部成功后替换目标版本目录；
 7. 任一步骤失败时不得破坏旧快照；清理 staging 和释放版本锁之前，必须等待本次运行启动的全部并发任务停止。
+
+定向实体重跑必须为：
+
+1. 取得版本级锁并恢复可恢复的 staging/backup 残留；
+2. 按其原始 schema 完整验证旧 `v1` 或 `v2` 快照；
+3. 如果旧快照包含当前工具不认识的实体，明确失败，不得盲目保留或静默删除；
+4. 确认旧快照包含全部未选的当前启用实体；缺少任一实体时拒绝定向重跑并提示执行全量抓取；
+5. 创建空 staging；
+6. 只按旧清单复制未选实体已登记且重新通过路径、字节数和哈希验证的资产，不得递归复制旧目录，也不得使用随后可能被写入的共享硬链接；
+7. 完全排除所选实体的旧资产，并根据新索引重建该实体的完整资产集合，避免保留已被上游删除的详情；
+8. 重新获取并登记上游 manifest；
+9. 从最终资产集合重新生成 `v2` 清单和 summary；
+10. 对完整 staging 重新执行所有实体内部验证和适用的跨实体关系验证；
+11. 全部成功后整目录交换。
+
+目标版本不存在时，只有请求实体集合等于当前全部支持实体时才能创建新快照；不得从空目录发布一份任意局部快照。
 
 同一版本的抓取、恢复和交换必须由单持有者版本锁串行化：
 
@@ -332,7 +515,7 @@ POSIX 上无法用单个 rename 原子替换非空目录，发布使用可恢复
 
 ## 10. 来源配置与模块边界
 
-实现使用：
+当前 v1 实现使用 `policy.ts`、`http.ts`、`characters.ts` 和 `snapshot.ts`，职责仍以现有 Agents 代码为准。v2 目标结构为：
 
 ```text
 packages/data/
@@ -342,32 +525,38 @@ packages/data/
 │   └── nanoka/
 │       ├── policy.ts
 │       ├── http.ts
+│       ├── entities.ts
 │       ├── characters.ts
 │       └── snapshot.ts
 └── raw/
 ```
 
-共享职责：
+v2 实现后的共享职责：
 
-- `source-registry.json`：来源 ID、URL、allowlist、语言、请求策略、User-Agent、robots/content-signal、本地缓存和再分发政策的单一事实来源；
+- `source-registry.json`：来源 ID、URL、host/path 根 allowlist、语言、请求策略、User-Agent、robots/content-signal、本地缓存和再分发政策的单一事实来源；
 - `nanoka-source.ts`：CLI 参数、交互选择、fetch/verify 调用、进度与结果输出、退出码；
-- `policy.ts`：配置与 manifest 校验、版本选择、安全版本号、大小写冲突、URL allowlist、host/path traversal 和未知路径拒绝；
+- `policy.ts`：配置与上游 manifest 校验、版本选择、安全版本号、大小写冲突、注册实体 URL、host/path traversal 和未知路径拒绝；
 - `http.ts`：原生 fetch、超时、节流、有限重试、手动重定向、条件请求、原始字节和 HTTP 元数据；
-- `snapshot.ts`：staging、原始字节、SHA-256、抓取清单、离线验证、原子替换和失败恢复。
+- `entities.ts`：代码实际支持实体的有序注册表、实体 adapter 接口和跨实体 validator 注册；
+- 各实体模块：资源发现、资源 ID 排序、最低结构、实体内部一致性和实体级 summary；
+- `snapshot.ts`：v1/v2 清单解析与适配、组合 staging、原始字节、SHA-256、分层离线验证、原子替换和失败恢复。
 
-实体模块职责由实体规范定义。抓取基础设施属于数据包维护工具，不从 `packages/data/src/index.ts` 导出。
+来源配置不等同于实现能力。仅在 `source-registry.json` 出现路径或实体名称不能启用实体；实体必须同时具有代码 adapter 和正式实体规范。实体 adapter 不得把 End Game 的 `zone`、`modes` 或图结构等特有模型提升为所有实体的共享要求。
 
 ## 11. 命令契约
 
-当前提供：
+当前和多实体实现完成后提供：
 
 ```bash
 pnpm --filter @randomplay/data fetch:nanoka
 pnpm --filter @randomplay/data fetch:nanoka --channel latest
 pnpm --filter @randomplay/data fetch:nanoka --version <version>
+pnpm --filter @randomplay/data fetch:nanoka --entity <entity>
 pnpm --filter @randomplay/data verify:nanoka
 pnpm --filter @randomplay/data verify:nanoka --version <version>
 ```
+
+`--entity` 属于已完成设计、尚待实现的 v2 命令扩展。
 
 ### `fetch:nanoka`
 
@@ -376,20 +565,30 @@ pnpm --filter @randomplay/data verify:nanoka --version <version>
 - 版本选择前不抓取实体资源，也不创建正式快照；
 - 每次无参数运行都重新询问；非 TTY 默认使用 live；
 - 显式 channel/version 参数跳过交互提示；
-- 输出 manifest 获取、已选版本、快照准备、实体与资源数量、处理进度、离线校验和发布阶段；
-- 进度事件由抓取流程以结构化回调提供，终端文案由 CLI 层负责，基础模块不直接依赖 `console`；
-- 成功后输出版本、实体数量、资源数、总字节数、缓存复用数和漂移数；
+- 未提供 `--entity` 时抓取代码注册表中当前实现并启用的全部实体；
+- `--entity` 可以重复，使用上游实体名；重复值去重，未知、未实现和大小写不匹配的值明确失败；
+- 实体执行顺序使用代码注册表的稳定顺序，不依赖参数顺序；
+- 提供 `--entity` 时只重新获取所选实体，但最终仍基于完整旧快照构建并发布包含全部支持实体的版本级组合快照；
+- 目标版本不存在时，局部实体选择明确失败并提示执行全量抓取；
+- `--entity character` 是多实体实现后的 Agents-only 定向重跑方式；
+- 输出 manifest 获取、已选版本、本轮更新实体、沿用实体、快照准备、各实体资源数量、处理进度、分层离线校验和发布阶段；
+- 进度事件由抓取流程以实体无关的结构化回调提供，终端文案由 CLI 层负责，基础模块不直接依赖 `console`；
+- 每个实体的详情进度使用有界频率输出且最终数量必须输出，不为每个文件单独刷屏；
+- 成功后输出版本、快照实体和各实体记录数、资源数、总字节数、HTTP 304 数、carried-forward 数和漂移数；
 - 成功退出码为 0，参数、版本、抓取或校验失败时非 0。
 
-具体实体进度粒度由实体规范定义。
+具体实体显示名称和必要的额外进度信息由实体 adapter 与实体规范定义。
 
 ### `verify:nanoka`
 
-- 不访问网络且不修改快照；
-- 校验来源配置、路径、文件存在性、字节数、SHA-256 和实体一致性；
+- 不访问网络且不修改、迁移或重写快照；
+- 同时支持严格的历史 `v1` Agents 快照和 `v2` 多实体快照；
+- 校验来源配置、schema、实体集合、asset 字段组合、安全路径、文件存在性、字节数、SHA-256、JSON、登记闭合、summary、实体内部一致性和适用跨实体关系；
+- 验证按清单与路径、文件完整性、实体内部、跨实体关系分层执行，并尽可能累计不依赖损坏字段的独立错误；
 - 清单中的 `localPath` 必须先完成安全相对路径、containment 和预期路径校验；
 - 单个文件或版本的错误不得中止其他可独立检查；
 - `--version` 只校验指定版本，无参数时校验全部本地快照；
+- 不提供 `--entity`，避免局部成功掩盖版本目录中的其他实体错误；
 - 指定版本不存在时明确失败；任一校验失败时退出码非 0 并列出错误；
 - 只有存在明确的受管 fixture 或快照策略后才接入默认 `check`。
 
@@ -431,15 +630,25 @@ ai-train=no
 
 自动化测试至少覆盖：
 
-- 交互和非交互版本策略、channel/version 参数与无效 manifest；
-- URL allowlist、host、路径穿越、未知语言和未知实体目录；
+- 交互和非交互版本策略、channel/version/entity 参数与无效上游 manifest；
+- 注册实体 URL allowlist、host、路径穿越、未知语言和未知实体目录；
 - 200、304、普通 4xx、有限重试、Retry-After、超时、重定向、空响应、非法 JSON 和响应大小上限；
 - 原始字节 SHA-256 与字节数；
 - 304 缓存完整性验证及一次无条件重抓；
-- staging 失败不替换旧快照，完整成功后原子发布；
+- 严格 `v1` 验证、`v2` 解析、未知 schema 拒绝和同一 verify 运行中的 v1/v2 混合版本；
+- `v1` 到 `v2` 只在成功发布时迁移，迁移失败时旧 v1 文件和清单不变；
+- v2 asset 字段组合、全局 asset ID/localPath 唯一性、实体集合、fetch scope、summary 和 validation 可离线重算；
+- 默认全实体抓取、定向实体重跑、无旧快照时局部抓取拒绝和未知实体拒绝；
+- 未选实体不发 HTTP 请求，只复制旧清单登记且重新通过路径、字节数和哈希验证的资产；
+- 选中实体整体重建，旧索引已删除的详情不会残留；
+- `not-modified` 与 `carried-forward` 的元数据、时间和统计语义；
+- 旧快照含未登记文件、缺失文件、篡改文件或当前工具不认识的实体时拒绝合并；
+- staging 失败和跨实体关系失败不替换旧快照，完整成功后原子发布；
+- 不同实体的同版本抓取仍由同一版本锁互斥；
 - 锁的完整发布、并发拒绝、残留锁人工处理和 owner token 校验；
 - 并发任务失败后的停止领取与 settle；
 - 漂移报告、残留 artifact、损坏清单及逐版本错误隔离；
+- 实体无关进度、每实体有界输出、最终进度、沿用实体报告和成功摘要；
 - raw cache、脚本和来源配置不进入 npm tarball；
 - `@randomplay/data` 不增加 core 依赖，公开 API 保持不变。
 

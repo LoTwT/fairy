@@ -83,13 +83,13 @@ Agent ID 必须从 `character.json` 的 key 动态发现，不维护硬编码 ID
 
 ## 4. 抓取范围与一致性
 
-指定版本的一次完整 Agents 抓取包括：
+指定版本的一次完整 Agents 实体抓取包括：
 
-1. 共享来源规范要求的上游 manifest；
-2. 一份 `character.json` 摘要；
-3. 摘要中每个 ID 对应的一份中文详情；
-4. 摘要中每个 ID 对应的一份英文详情；
-5. 一份包含 Agents 资源的本地 `fetch-manifest.json`。
+1. 一份 `character.json` 摘要；
+2. 摘要中每个 ID 对应的一份中文详情；
+3. 摘要中每个 ID 对应的一份英文详情。
+
+共享来源规范定义上游 manifest、版本级 `fetch-manifest.json` 和多实体组合快照。多实体实现完成后，无 `--entity` 的共享抓取命令会处理全部当前支持实体；`--entity character` 用于仅重新获取 Agents，但最终仍发布完整版本级组合快照。
 
 结果必须满足：
 
@@ -126,7 +126,7 @@ packages/data/raw/nanoka/{version}/
 
 ## 6. Agents 抓取清单
 
-当前 `nanoka-fetch-manifest/v1` 的 Agents 快照顶层额外记录：
+历史 Agents 快照使用冻结的 `nanoka-fetch-manifest/v1`，顶层额外记录：
 
 - `languages`：`zh`、`en`；
 - `summary.characterCount`；
@@ -135,40 +135,46 @@ packages/data/raw/nanoka/{version}/
 - `summary.assetCount`；
 - `summary.totalBytes`。
 
-Agents 资源类型：
+`v1` Agents kind 与稳定 asset ID 为：
 
-- `upstream-manifest`；
-- `character-index`；
-- `character-detail`。
+| kind                | 稳定 asset ID                                                                |
+| ------------------- | ---------------------------------------------------------------------------- |
+| `upstream-manifest` | `upstream-manifest`                                                          |
+| `character-index`   | `character-index`                                                            |
+| `character-detail`  | `character-detail:{language}:{characterId}`，例如 `character-detail:zh:1011` |
 
-稳定 asset ID：
+多实体实现后的新抓取使用共享来源规范定义的 `nanoka-fetch-manifest/v2`。Agents 对应关系为：
 
-- `upstream-manifest`；
-- `character-index`；
-- `character-detail:{language}:{characterId}`，例如 `character-detail:zh:1011`。
+- 实体：`character`；
+- 摘要 kind：`entity-index`；
+- 详情 kind：`entity-detail`；
+- 摘要 asset ID：`entity-index:character`；
+- 详情 asset ID：`entity-detail:character:{language}:{characterId}`；
+- 实体资源 ID：`entityId`；
+- 计数：`summary.entities.character.recordCount` 和 `detailCountByLanguage`。
 
-本地路径：
+本地路径在两个 schema 中均保持：
 
 - manifest：`manifest.json`；
 - 摘要：`character.json`；
 - 详情：`{language}/character/{characterId}.json`。
 
-每个 asset 的通用 HTTP、字节数、SHA-256 和时间字段遵循共享来源规范。
+离线验证必须继续严格支持旧 `v1` Agents 快照。读取适配器可以在内存中将旧字段映射为 v2 通用语义，但不得修改磁盘；新抓取只在完整 staging 成功发布时写出 v2。每个 asset 的通用 HTTP、字节数、SHA-256、时间及 carried-forward 规则遵循共享来源规范。
 
 ## 7. Agents 模块职责
 
-`packages/data/scripts/nanoka/characters.ts` 负责：
+当前 `packages/data/scripts/nanoka/characters.ts` 负责：
 
 - 校验 `character.json` 的最低结构；
 - 从摘要动态发现 Agent ID，并按数值升序排序；
 - 为 zh/en 构造详情资源；
 - 校验详情 ID 与摘要 ID 的对应关系。
 
-共享 `policy.ts` 负责接受 `character.json` 与 `{lang}/character/{id}.json` 路径，并拒绝未知语言、路径穿越和未知实体目录。共享 `snapshot.ts` 负责将 Agents 资源写入 staging、生成清单并执行覆盖关系和离线验证。
+v2 实现后，`character` adapter 还将提供 Agents 实体级 summary 和内部一致性验证，并由共享实体注册表登记。共享 `policy.ts` 将只接受注册实体的索引和详情路径；共享 `snapshot.ts` 将负责版本级组合 staging、v1/v2 清单、分层离线验证和发布。Agents 特有字段规则不得移入共享层。
 
 ## 8. 命令与进度
 
-Agents 当前复用共享命令：
+Agents 复用共享命令。当前实现支持：
 
 ```bash
 pnpm --filter @randomplay/data fetch:nanoka
@@ -177,6 +183,14 @@ pnpm --filter @randomplay/data fetch:nanoka --version <version>
 pnpm --filter @randomplay/data verify:nanoka
 pnpm --filter @randomplay/data verify:nanoka --version <version>
 ```
+
+多实体 v2 实现完成后增加 Agents-only 定向重跑：
+
+```bash
+pnpm --filter @randomplay/data fetch:nanoka --entity character
+```
+
+无 `--entity` 的 fetch 将处理全部当前支持实体；verify 始终校验整个版本组合快照，不提供 Agents-only 模式。
 
 抓取期间：
 
@@ -205,7 +219,12 @@ pnpm --filter @randomplay/data verify:nanoka --version <version>
 ### 9.2 快照和进度
 
 - 摘要和详情均按原始字节保存；
-- `summary` 中的 Agent、zh/en 详情、资源和字节数与磁盘一致；
+- v1 扁平 summary 和 v2 `summary.entities.character` 均与磁盘一致；
+- 旧 v1 Agents fixture 和实际快照在 v2 reader 引入后继续通过严格验证；
+- v1 到 v2 迁移只发生在成功发布中，迁移失败时旧快照保持不变；
+- v2 通用 asset 的 `entity`、`entityId`、kind、asset ID、URL 和路径保持一致；
+- 定向重跑其他实体时，Agents 资产经完整性验证后 carried-forward，原始字节和实际 HTTP 检查时间保持不变；
+- 定向重跑 Agents 时，旧索引已移除的 Agent 详情不会残留；
 - 同版本内容变化产生明确漂移报告；摘要变化报告记录数变化，空摘要无条件拒绝；
 - 详情进度每 10 份输出一次并始终输出最终完成数量；
 - 缓存复用、失败保护、锁、原子发布和离线验证满足共享来源规范。
