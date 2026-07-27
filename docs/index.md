@@ -8,6 +8,10 @@
 
 - [Nanoka 数据源规范](specs/nanoka/index.md)：Nanoka 共享抓取契约与各实体规范的统一入口。
 
+### 实施计划
+
+- [Nanoka 后续实体实施计划](plans/nanoka-entities.md)：实施期间使用的临时路线与检查清单，全部实体完成后删除。
+
 ### 历史
 
-- [历史记录](HISTORY.md)：已发布软件包的版本事实与历史边界。
+- [历史记录](HISTORY.md)：冻结的既有发布历史档案，不得用于记录当前或未来工作。
