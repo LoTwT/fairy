@@ -281,7 +281,7 @@ Drive Discs 是首个实体闭环，而不是绕过共享契约的独立局部�
 进入后续实体闭环时仍需解决：
 
 - 为所选实体执行全量 `zh/en` 详情覆盖验证，并确认可选或缺失资源；
-- Drive Discs 的正式最低结构、漂移检测、拒绝条件和自动化测试矩阵；
+- Drive Discs 已完成全量上游验证、正式规范、实现、自动化检查和在线组合快照验收，长期契约见 [Drive Discs 数据规范](../specs/nanoka/equipment.md)；
 - Monster 内部 `monster_info`、主 `monster_id` 和战斗单位 ID 的全量一致性规则；
 - `monster_list` 外层 key 的业务语义；在确认前只能使用中性名称，不能把它当成 Monster ID；
 - End Game 的 Monster 引用缺失在何种历史快照范围内允许记录 `not-run`；正常新完整发布中，已支持依赖的缺失必须阻止发布；

@@ -89,7 +89,7 @@ Agent ID 必须从 `character.json` 的 key 动态发现，不维护硬编码 ID
 2. 摘要中每个 ID 对应的一份中文详情；
 3. 摘要中每个 ID 对应的一份英文详情。
 
-共享来源规范定义上游 manifest、版本级 `fetch-manifest.json` 和多实体组合快照。多实体实现完成后，无 `--entity` 的共享抓取命令会处理全部当前支持实体；`--entity character` 用于仅重新获取 Agents，但最终仍发布完整版本级组合快照。
+共享来源规范定义上游 manifest、版本级 `fetch-manifest.json` 和多实体组合快照。无 `--entity` 的共享抓取命令处理全部当前支持实体；`--entity character` 用于仅重新获取 Agents，但最终仍发布完整版本级组合快照。
 
 结果必须满足：
 
@@ -143,7 +143,7 @@ packages/data/raw/nanoka/{version}/
 | `character-index`   | `character-index`                                                            |
 | `character-detail`  | `character-detail:{language}:{characterId}`，例如 `character-detail:zh:1011` |
 
-多实体实现后的新抓取使用共享来源规范定义的 `nanoka-fetch-manifest/v2`。Agents 对应关系为：
+新抓取使用共享来源规范定义的 `nanoka-fetch-manifest/v2`。Agents 对应关系为：
 
 - 实体：`character`；
 - 摘要 kind：`entity-index`；
@@ -170,7 +170,7 @@ packages/data/raw/nanoka/{version}/
 - 为 zh/en 构造详情资源；
 - 校验详情 ID 与摘要 ID 的对应关系。
 
-v2 实现后，`character` adapter 还将提供 Agents 实体级 summary 和内部一致性验证，并由共享实体注册表登记。共享 `policy.ts` 将只接受注册实体的索引和详情路径；共享 `snapshot.ts` 将负责版本级组合 staging、v1/v2 清单、分层离线验证和发布。Agents 特有字段规则不得移入共享层。
+`character` adapter 还提供 Agents 实体级 summary 和内部一致性验证，并由共享实体注册表登记。共享 `policy.ts` 只接受注册实体的索引和详情路径；共享 `snapshot.ts` 负责版本级组合 staging、v1/v2 清单、分层离线验证和发布。Agents 特有字段规则不得移入共享层。
 
 ## 8. 命令与进度
 
@@ -180,17 +180,12 @@ Agents 复用共享命令。当前实现支持：
 pnpm --filter @randomplay/data fetch:nanoka
 pnpm --filter @randomplay/data fetch:nanoka --channel latest
 pnpm --filter @randomplay/data fetch:nanoka --version <version>
+pnpm --filter @randomplay/data fetch:nanoka --entity character
 pnpm --filter @randomplay/data verify:nanoka
 pnpm --filter @randomplay/data verify:nanoka --version <version>
 ```
 
-多实体 v2 实现完成后增加 Agents-only 定向重跑：
-
-```bash
-pnpm --filter @randomplay/data fetch:nanoka --entity character
-```
-
-无 `--entity` 的 fetch 将处理全部当前支持实体；verify 始终校验整个版本组合快照，不提供 Agents-only 模式。
+`--entity character` 用于 Agents-only 定向重跑。无 `--entity` 的 fetch 处理全部当前支持实体；verify 始终校验整个版本组合快照，不提供 Agents-only 模式。
 
 抓取期间：
 

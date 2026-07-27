@@ -42,11 +42,25 @@ describe("Nanoka version policy", () => {
   it("parses mutually exclusive CLI arguments", () => {
     expect(parseArguments(["fetch", "--channel", "latest"])).toEqual({
       command: "fetch",
+      entities: [],
       channel: "latest",
     })
     expect(parseArguments(["verify", "--version", "3.0"])).toEqual({
       command: "verify",
+      entities: [],
       version: "3.0",
+    })
+    expect(
+      parseArguments([
+        "fetch",
+        "--entity",
+        "equipment",
+        "--entity",
+        "character",
+      ]),
+    ).toEqual({
+      command: "fetch",
+      entities: ["equipment", "character"],
     })
     expect(() =>
       parseArguments(["fetch", "--channel", "live", "--version", "3.0"]),
@@ -73,24 +87,43 @@ describe("Nanoka version policy", () => {
   })
 
   it("formats concise fetch progress", () => {
-    expect(formatFetchProgress({ stage: "preparing" })).toContain("准备")
     expect(
       formatFetchProgress({
-        stage: "characters-discovered",
-        characterCount: 57,
+        stage: "preparing",
+        requestedEntities: ["character", "equipment"],
+        carriedEntities: [],
+      }),
+    ).toContain("准备")
+    expect(
+      formatFetchProgress({
+        stage: "entity-discovered",
+        entity: "character",
+        displayName: "Agents",
+        recordCount: 57,
         detailCount: 114,
       }),
-    ).toContain("57 名 Agent")
+    ).toContain("57 条记录")
     expect(
-      formatFetchProgress({ stage: "details", completed: 9, total: 114 }),
+      formatFetchProgress({
+        stage: "entity-details",
+        entity: "character",
+        displayName: "Agents",
+        completed: 9,
+        total: 114,
+      }),
     ).toBeUndefined()
     expect(
-      formatFetchProgress({ stage: "details", completed: 10, total: 114 }),
-    ).toBe("Agent 详情进度：10/114")
+      formatFetchProgress({
+        stage: "entity-details",
+        entity: "character",
+        displayName: "Agents",
+        completed: 10,
+        total: 114,
+      }),
+    ).toBe("Agents 详情进度：10/114")
     expect(
-      formatFetchProgress({ stage: "details", completed: 114, total: 114 }),
-    ).toBe("Agent 详情进度：114/114")
-    expect(formatFetchProgress({ stage: "verifying" })).toContain("离线校验")
+      formatFetchProgress({ stage: "verifying", layer: "files" }),
+    ).toContain("files")
     expect(formatFetchProgress({ stage: "publishing" })).toContain("发布")
   })
 })

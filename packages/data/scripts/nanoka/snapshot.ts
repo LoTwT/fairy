@@ -1,9 +1,12 @@
 import { createHash, randomUUID } from "node:crypto"
 import {
+  copyFile,
   link,
+  lstat,
   mkdir,
   readFile,
   readdir,
+  realpath,
   rename,
   rm,
   stat,
@@ -11,15 +14,17 @@ import {
 } from "node:fs/promises"
 import { dirname, join, relative, sep } from "node:path"
 import {
-  createCharacterDetailResource,
-  createCharacterDetailResources,
-  discoverCharacterIds,
-  validateCharacterDetail,
-} from "./characters.ts"
+  entityRegistry,
+  getEntityAdapter,
+  isEntityName,
+  normalizeSelectedEntities,
+  supportedEntityNames,
+  type EntityName,
+} from "./entities.ts"
 import type { FetchedHttpAsset, NanokaHttpClient } from "./http.ts"
 import {
-  buildCharacterDetailUrl,
-  buildCharacterIndexUrl,
+  buildEntityDetailUrl,
+  buildEntityIndexUrl,
   buildManifestUrl,
   decodeUtf8Json,
   isNonNegativeInteger,
@@ -36,13 +41,14 @@ import {
 
 export interface FetchAssetRecord {
   assetId: string
-  kind: "upstream-manifest" | "character-index" | "character-detail"
+  kind: "upstream-manifest" | "entity-index" | "entity-detail"
+  entity?: EntityName
   language?: SupportedLanguage
-  characterId?: string
+  entityId?: string
   url: string
   localPath: string
   httpStatus: number
-  result: "fetched" | "not-modified"
+  result: "fetched" | "not-modified" | "carried-forward"
   etag: string | null
   lastModified: string | null
   contentType: string | null
@@ -53,7 +59,51 @@ export interface FetchAssetRecord {
   lastCheckedAt: string
 }
 
-export interface FetchManifest {
+interface V1AssetRecord extends Omit<
+  FetchAssetRecord,
+  "kind" | "result" | "entity" | "entityId"
+> {
+  kind: "upstream-manifest" | "character-index" | "character-detail"
+  result: "fetched" | "not-modified"
+  characterId?: string
+}
+
+export interface EntitySummary {
+  recordCount: number
+  detailCountByLanguage: Record<SupportedLanguage, number>
+  assetCount: number
+  totalBytes: number
+}
+
+export interface FetchManifestV2 {
+  schemaVersion: "nanoka-fetch-manifest/v2"
+  sourceId: string
+  game: "zzz"
+  snapshotVersion: string
+  selectedBy: VersionSelection
+  observedLiveVersion: string
+  observedLatestVersion: string
+  observedAvailableVersions: string[]
+  startedAt: string
+  completedAt: string
+  userAgent: string
+  languages: SupportedLanguage[]
+  entities: EntityName[]
+  fetchScope: { mode: "all" | "selected"; requestedEntities: EntityName[] }
+  assets: FetchAssetRecord[]
+  summary: {
+    entityTypeCount: number
+    assetCount: number
+    totalBytes: number
+    entities: Record<EntityName, EntitySummary>
+  }
+  validation: {
+    entities: Record<EntityName, "passed">
+    crossEntityReferences: []
+  }
+}
+
+interface FetchManifestV1 {
   schemaVersion: "nanoka-fetch-manifest/v1"
   sourceId: string
   game: "zzz"
@@ -66,7 +116,7 @@ export interface FetchManifest {
   completedAt: string
   userAgent: string
   languages: SupportedLanguage[]
-  assets: FetchAssetRecord[]
+  assets: V1AssetRecord[]
   summary: {
     characterCount: number
     zhDetailCount: number
@@ -76,73 +126,48 @@ export interface FetchManifest {
   }
 }
 
+type StoredFetchManifest = FetchManifestV1 | FetchManifestV2
+export type FetchManifest = FetchManifestV2
 export interface SnapshotFetchResult {
-  manifest: FetchManifest
+  manifest: FetchManifestV2
+  notModifiedAssetCount: number
+  carriedForwardAssetCount: number
   reusedAssetCount: number
   driftedAssetIds: string[]
   cleanupWarnings: string[]
 }
-
 export interface VerificationResult {
   snapshotVersion: string
   errors: string[]
 }
-
 export type SnapshotFetchProgress =
-  | { stage: "preparing" }
   | {
-      stage: "characters-discovered"
-      characterCount: number
+      stage: "preparing"
+      requestedEntities: EntityName[]
+      carriedEntities: EntityName[]
+    }
+  | {
+      stage: "entity-discovered"
+      entity: EntityName
+      displayName: string
+      recordCount: number
       detailCount: number
     }
-  | { stage: "details"; completed: number; total: number }
-  | { stage: "verifying" }
+  | {
+      stage: "entity-details"
+      entity: EntityName
+      displayName: string
+      completed: number
+      total: number
+    }
+  | {
+      stage: "verifying"
+      layer: "manifest" | "files" | "entities" | "cross-entity"
+    }
   | { stage: "publishing" }
 
 export const rawNanokaDirectory = join(packageDirectory, "raw", "nanoka")
-
 const artifactNamespacePrefix = ".nanoka-artifact-"
-
-function artifactVersionLabel(name: string): string {
-  const match =
-    /^\.nanoka-artifact-([A-Za-z0-9_-]+)-(?:lock|staging|backup)(?:-.+)?$/u.exec(
-      name,
-    )
-  if (match?.[1] === undefined) return name
-  return versionFromNamespace(match[1]) ?? name
-}
-
-function versionNamespace(version: string): string {
-  return Buffer.from(version, "utf8").toString("base64url")
-}
-
-function versionFromNamespace(namespace: string): string | undefined {
-  try {
-    const bytes = Buffer.from(namespace, "base64url")
-    const version = new TextDecoder("utf-8", { fatal: true }).decode(bytes)
-    if (versionNamespace(version) !== namespace) return undefined
-    return validateVersion(version)
-  } catch {
-    return undefined
-  }
-}
-
-function artifactName(
-  version: string,
-  kind: "lock" | "staging" | "backup",
-  runIdentifier?: string,
-): string {
-  const base = `${artifactNamespacePrefix}${versionNamespace(version)}-${kind}`
-  return runIdentifier === undefined ? base : `${base}-${runIdentifier}`
-}
-
-export function nanokaArtifactNameForTest(
-  version: string,
-  kind: "lock" | "staging" | "backup",
-  runIdentifier?: string,
-): string {
-  return artifactName(validateVersion(version), kind, runIdentifier)
-}
 
 export async function fetchUpstreamManifest(
   policy: SourcePolicy,
@@ -156,51 +181,12 @@ export async function fetchUpstreamManifest(
     url: buildManifestUrl(policy),
     cachedAsset,
   })
-  if (response.result === "not-modified") {
-    if (cachedAsset === undefined || response.bytes === null) {
-      throw new Error("manifest 返回 304，但没有可验证的本地缓存")
-    }
-    return {
-      response,
-      manifest: validateManifest(
-        decodeUtf8Json(response.bytes, "Nanoka manifest"),
-      ),
-    }
-  }
   if (response.bytes === null) throw new Error("manifest 成功响应缺少字节内容")
-  const manifest = validateManifest(
-    decodeUtf8Json(response.bytes, "Nanoka manifest"),
-  )
-  return { response, manifest }
-}
-
-export async function recoverNanokaRawDirectory(
-  rawDirectory = rawNanokaDirectory,
-): Promise<void> {
-  if (!(await pathExists(rawDirectory))) return
-  const entries = await readdir(rawDirectory, { withFileTypes: true })
-  const interruptedVersions = new Set<string>()
-  for (const entry of entries) {
-    if (!entry.isDirectory()) continue
-    const match =
-      /^\.nanoka-artifact-([A-Za-z0-9_-]+)-(?:staging|backup)-.+$/u.exec(
-        entry.name,
-      )
-    if (match?.[1] === undefined) continue
-    const version = versionFromNamespace(match[1])
-    if (version !== undefined) interruptedVersions.add(version)
-  }
-  for (const version of interruptedVersions) {
-    const releaseVersionLock = await tryAcquireVersionLock(
-      rawDirectory,
-      version,
-    )
-    if (releaseVersionLock === undefined) continue
-    try {
-      await recoverVersionArtifacts(rawDirectory, version)
-    } finally {
-      await releaseVersionLock()
-    }
+  return {
+    response,
+    manifest: validateManifest(
+      decodeUtf8Json(response.bytes, "Nanoka manifest"),
+    ),
   }
 }
 
@@ -211,6 +197,7 @@ export async function fetchNanokaSnapshot(options: {
   upstreamManifest: NanokaManifest
   version: string
   selectedBy: VersionSelection
+  entities?: readonly string[]
   rawDirectory?: string
   onProgress?: (progress: SnapshotFetchProgress) => void
 }): Promise<SnapshotFetchResult> {
@@ -222,6 +209,13 @@ export async function fetchNanokaSnapshot(options: {
     selectedBy,
   } = options
   const version = validateVersion(options.version)
+  const requestedEntities = normalizeSelectedEntities(options.entities)
+  const allEntities = entityRegistry.map(({ name }) => name)
+  const mode =
+    requestedEntities.length === allEntities.length ? "all" : "selected"
+  const carriedEntities = allEntities.filter(
+    (entity) => !requestedEntities.includes(entity),
+  )
   const rawDirectory = options.rawDirectory ?? rawNanokaDirectory
   const targetDirectory = join(rawDirectory, version)
   const runIdentifier = `${process.pid}-${Date.now()}-${randomUUID()}`
@@ -234,25 +228,56 @@ export async function fetchNanokaSnapshot(options: {
     artifactName(version, "backup", runIdentifier),
   )
   const startedAt = new Date().toISOString()
-
   await mkdir(rawDirectory, { recursive: true })
-  const releaseVersionLock = await acquireVersionLock(rawDirectory, version)
-  let publicationCommitted = false
+  const releaseLock = await acquireVersionLock(rawDirectory, version)
+  let committed = false
   let result: SnapshotFetchResult | undefined
   let operationError: unknown
   try {
-    options.onProgress?.({ stage: "preparing" })
+    options.onProgress?.({
+      stage: "preparing",
+      requestedEntities,
+      carriedEntities,
+    })
     await recoverVersionArtifacts(rawDirectory, version)
-    const existingManifest = await readExistingFetchManifest(targetDirectory)
-    const existingAssets = new Map(
-      (existingManifest?.assets ?? []).map((asset) => [asset.assetId, asset]),
-    )
-    const assets: FetchAssetRecord[] = []
-    const driftedAssetIds: string[] = []
-
+    const existing = await readExistingFetchManifest(targetDirectory)
+    if (mode === "selected") {
+      if (existing === undefined)
+        throw new Error("定向实体重跑需要完整旧快照；请执行全量抓取")
+      const oldVerification = await verifySnapshotDirectory(
+        policy,
+        targetDirectory,
+        version,
+      )
+      if (oldVerification.errors.length > 0)
+        throw new Error(
+          `旧快照校验失败，不能定向重跑：\n${oldVerification.errors.join("\n")}`,
+        )
+      const oldEntities = entitiesForManifest(existing)
+      const unknownEntities = oldEntities.filter(
+        (entity) => !supportedEntityNames.includes(entity as EntityName),
+      )
+      if (unknownEntities.length > 0)
+        throw new Error(`旧快照包含未知实体：${unknownEntities.join(", ")}`)
+      const missing = carriedEntities.filter(
+        (entity) => !oldEntities.includes(entity),
+      )
+      if (missing.length > 0)
+        throw new Error(
+          `旧快照缺少未选实体 ${missing.join(", ")}；请执行全量抓取`,
+        )
+    }
+    await mkdir(stagingDirectory, { recursive: true })
     try {
-      await mkdir(stagingDirectory, { recursive: true })
-      const manifestAsset = await saveFetchedAsset({
+      const existingAssets = new Map(
+        (existing === undefined ? [] : adaptAssets(existing)).map((asset) => [
+          asset.assetId,
+          asset,
+        ]),
+      )
+      const assets: FetchAssetRecord[] = []
+      const driftedAssetIds: string[] = []
+      const manifestSaved = await saveFetchedAsset({
         response: upstreamManifestResponse,
         assetId: "upstream-manifest",
         kind: "upstream-manifest",
@@ -262,101 +287,134 @@ export async function fetchNanokaSnapshot(options: {
         existingDirectory: targetDirectory,
         existing: existingAssets.get("upstream-manifest"),
       })
-      assets.push(manifestAsset.record)
-      if (manifestAsset.drifted)
-        driftedAssetIds.push(manifestAsset.record.assetId)
+      assets.push(manifestSaved.record)
+      if (manifestSaved.drifted)
+        driftedAssetIds.push(manifestSaved.record.assetId)
 
-      const indexAssetId = "character-index"
-      const indexUrl = buildCharacterIndexUrl(policy, version)
-      const indexResponse = await fetchAssetWithValidatedCacheFallback({
-        httpClient,
-        url: indexUrl,
-        cachedAsset: cachedAssetFor(
-          targetDirectory,
-          existingAssets.get(indexAssetId),
-          "character.json",
-        ),
-      })
-      const indexAsset = await saveFetchedAsset({
-        response: indexResponse,
-        assetId: indexAssetId,
-        kind: "character-index",
-        url: indexUrl.href,
-        localPath: "character.json",
-        stagingDirectory,
-        existingDirectory: targetDirectory,
-        existing: existingAssets.get(indexAssetId),
-      })
-      assets.push(indexAsset.record)
-      if (indexAsset.drifted) driftedAssetIds.push(indexAssetId)
-      const characterIndex = decodeUtf8Json(indexAsset.bytes, "character.json")
-      const characterIds = discoverCharacterIds(characterIndex)
+      for (const entity of carriedEntities) {
+        const records = [...existingAssets.values()].filter(
+          (asset) => asset.entity === entity,
+        )
+        if (records.length === 0)
+          throw new Error(`旧快照没有可沿用的 ${entity} 资产`)
+        for (const asset of records)
+          assets.push(
+            await carryForwardAsset(targetDirectory, stagingDirectory, asset),
+          )
+      }
 
-      const detailResources = createCharacterDetailResources(
-        characterIds,
-        policy.languages,
-      )
-      options.onProgress?.({
-        stage: "characters-discovered",
-        characterCount: characterIds.length,
-        detailCount: detailResources.length,
-      })
-      let completedDetailCount = 0
-      const detailAssets = await mapConcurrent(
-        detailResources,
-        policy.requestPolicy.maxConcurrency,
-        async (resource) => {
-          const existing = existingAssets.get(resource.assetId)
-          const url = buildCharacterDetailUrl(
-            policy,
-            version,
-            resource.language,
-            resource.characterId,
-          )
-          const response = await fetchAssetWithValidatedCacheFallback({
-            httpClient,
-            url,
-            cachedAsset: cachedAssetFor(
-              targetDirectory,
-              existing,
-              resource.localPath,
-            ),
-          })
-          const saved = await saveFetchedAsset({
-            response,
-            assetId: resource.assetId,
-            kind: "character-detail",
-            language: resource.language,
-            characterId: resource.characterId,
-            url: url.href,
-            localPath: resource.localPath,
-            stagingDirectory,
-            existingDirectory: targetDirectory,
-            existing,
-          })
-          validateCharacterDetail(
-            decodeUtf8Json(saved.bytes, resource.localPath),
-            resource.characterId,
-          )
-          completedDetailCount += 1
-          options.onProgress?.({
-            stage: "details",
-            completed: completedDetailCount,
-            total: detailResources.length,
-          })
-          return { record: saved.record, drifted: saved.drifted }
-        },
-      )
-      for (const detailAsset of detailAssets) {
-        assets.push(detailAsset.record)
-        if (detailAsset.drifted) {
-          driftedAssetIds.push(detailAsset.record.assetId)
+      for (const entity of requestedEntities) {
+        const adapter = getEntityAdapter(entity)
+        const indexAssetId = `entity-index:${entity}`
+        const indexPath = `${entity}.json`
+        const indexUrl = buildEntityIndexUrl(policy, version, entity)
+        const indexResponse = await fetchAssetWithValidatedCacheFallback({
+          httpClient,
+          url: indexUrl,
+          cachedAsset: cachedAssetFor(
+            targetDirectory,
+            existingAssets.get(indexAssetId),
+            indexPath,
+          ),
+        })
+        const indexSaved = await saveFetchedAsset({
+          response: indexResponse,
+          assetId: indexAssetId,
+          kind: "entity-index",
+          entity,
+          url: indexUrl.href,
+          localPath: indexPath,
+          stagingDirectory,
+          existingDirectory: targetDirectory,
+          existing: existingAssets.get(indexAssetId),
+        })
+        assets.push(indexSaved.record)
+        if (indexSaved.drifted) driftedAssetIds.push(indexAssetId)
+        const ids = adapter.discoverIds(
+          decodeUtf8Json(indexSaved.bytes, indexPath),
+        )
+        const resources = ids.flatMap((entityId) =>
+          policy.languages.map((language) =>
+            adapter.createDetailResource(entityId, language),
+          ),
+        )
+        options.onProgress?.({
+          stage: "entity-discovered",
+          entity,
+          displayName: adapter.displayName,
+          recordCount: ids.length,
+          detailCount: resources.length,
+        })
+        let completed = 0
+        const details = await mapConcurrent(
+          resources,
+          policy.requestPolicy.maxConcurrency,
+          async (resource) => {
+            const existingAsset = existingAssets.get(resource.assetId)
+            const url = buildEntityDetailUrl(
+              policy,
+              version,
+              resource.language,
+              entity,
+              resource.entityId,
+            )
+            const response = await fetchAssetWithValidatedCacheFallback({
+              httpClient,
+              url,
+              cachedAsset: cachedAssetFor(
+                targetDirectory,
+                existingAsset,
+                resource.localPath,
+              ),
+            })
+            const saved = await saveFetchedAsset({
+              response,
+              assetId: resource.assetId,
+              kind: "entity-detail",
+              entity,
+              language: resource.language,
+              entityId: resource.entityId,
+              url: url.href,
+              localPath: resource.localPath,
+              stagingDirectory,
+              existingDirectory: targetDirectory,
+              existing: existingAsset,
+            })
+            adapter.validateDetail(
+              decodeUtf8Json(saved.bytes, resource.localPath),
+              resource.entityId,
+              decodeUtf8Json(indexSaved.bytes, indexPath),
+              resource.language,
+            )
+            completed += 1
+            options.onProgress?.({
+              stage: "entity-details",
+              entity,
+              displayName: adapter.displayName,
+              completed,
+              total: resources.length,
+            })
+            return saved
+          },
+        )
+        for (const detail of details) {
+          assets.push(detail.record)
+          if (detail.drifted) driftedAssetIds.push(detail.record.assetId)
         }
       }
 
-      assets.sort((left, right) => left.assetId.localeCompare(right.assetId))
-      const fetchManifest: FetchManifest = {
-        schemaVersion: "nanoka-fetch-manifest/v1",
+      assets.sort(compareAssets)
+      const summary = await createSummary(
+        stagingDirectory,
+        assets,
+        allEntities,
+        policy.languages,
+      )
+      const validationEntities = Object.fromEntries(
+        allEntities.map((entity) => [entity, "passed"]),
+      ) as Record<EntityName, "passed">
+      const fetchManifest: FetchManifestV2 = {
+        schemaVersion: "nanoka-fetch-manifest/v2",
         sourceId: policy.sourceId,
         game: "zzz",
         snapshotVersion: version,
@@ -368,48 +426,50 @@ export async function fetchNanokaSnapshot(options: {
         completedAt: new Date().toISOString(),
         userAgent: policy.userAgent,
         languages: [...policy.languages],
+        entities: allEntities,
+        fetchScope: { mode, requestedEntities },
         assets,
-        summary: {
-          characterCount: characterIds.length,
-          zhDetailCount: detailAssets.filter(
-            (asset) => asset.record.language === "zh",
-          ).length,
-          enDetailCount: detailAssets.filter(
-            (asset) => asset.record.language === "en",
-          ).length,
-          assetCount: assets.length,
-          totalBytes: assets.reduce((total, asset) => total + asset.bytes, 0),
-        },
+        summary,
+        validation: { entities: validationEntities, crossEntityReferences: [] },
       }
       await writeFile(
         join(stagingDirectory, "fetch-manifest.json"),
         `${JSON.stringify(fetchManifest, undefined, 2)}\n`,
       )
-
-      options.onProgress?.({ stage: "verifying" })
+      for (const layer of [
+        "manifest",
+        "files",
+        "entities",
+        "cross-entity",
+      ] as const)
+        options.onProgress?.({ stage: "verifying", layer })
       const verification = await verifySnapshotDirectory(
         policy,
         stagingDirectory,
         version,
       )
-      if (verification.errors.length > 0) {
+      if (verification.errors.length > 0)
         throw new Error(
           `staging 快照校验失败：\n${verification.errors.join("\n")}`,
         )
-      }
       options.onProgress?.({ stage: "publishing" })
       const exchange = await exchangeSnapshot(
         targetDirectory,
         stagingDirectory,
         backupDirectory,
       )
-      publicationCommitted = true
-
+      committed = true
+      const notModifiedAssetCount = assets.filter(
+        (asset) => asset.result === "not-modified",
+      ).length
+      const carriedForwardAssetCount = assets.filter(
+        (asset) => asset.result === "carried-forward",
+      ).length
       result = {
         manifest: fetchManifest,
-        reusedAssetCount: assets.filter(
-          (asset) => asset.result === "not-modified",
-        ).length,
+        notModifiedAssetCount,
+        carriedForwardAssetCount,
+        reusedAssetCount: notModifiedAssetCount,
         driftedAssetIds,
         cleanupWarnings:
           exchange.cleanupWarning === undefined
@@ -424,19 +484,15 @@ export async function fetchNanokaSnapshot(options: {
     operationError = error
   }
   try {
-    await releaseVersionLock()
+    await releaseLock()
   } catch (error) {
-    const message = `版本 ${version} 已发布，但版本锁清理失败：${error instanceof Error ? error.message : String(error)}`
-    if (publicationCommitted && result !== undefined) {
-      result.cleanupWarnings.push(message)
-    } else if (operationError === undefined) {
-      operationError = error
-    } else {
-      operationError = new AggregateError(
-        [operationError, error],
-        `版本 ${version} 处理失败，且版本锁清理失败`,
-      )
-    }
+    const message = `版本 ${version} ${committed ? "已发布，但" : "处理失败，且"}版本锁清理失败：${error instanceof Error ? error.message : String(error)}`
+    if (committed && result !== undefined) result.cleanupWarnings.push(message)
+    else
+      operationError =
+        operationError === undefined
+          ? error
+          : new AggregateError([operationError, error], message)
   }
   if (operationError !== undefined) throw operationError
   if (result === undefined) throw new Error(`版本 ${version} 抓取未生成结果`)
@@ -451,35 +507,20 @@ export async function verifyNanokaSnapshots(options: {
   const rawDirectory = options.rawDirectory ?? rawNanokaDirectory
   if (options.version !== undefined) {
     const version = validateVersion(options.version)
-    const directory = join(rawDirectory, version)
-    if (!(await pathExists(directory))) {
+    if (!(await pathExists(join(rawDirectory, version))))
       throw new Error(`本地快照不存在：${version}`)
-    }
     const results = [
-      await verifySnapshotDirectory(options.policy, directory, version),
+      await verifySnapshotDirectory(
+        options.policy,
+        join(rawDirectory, version),
+        version,
+      ),
     ]
-    if (await pathExists(rawDirectory)) {
-      const entries = await readdir(rawDirectory, { withFileTypes: true })
-      for (const entry of entries) {
-        if (
-          !entry.name.startsWith(artifactNamespacePrefix) ||
-          artifactVersionLabel(entry.name) !== version
-        ) {
-          continue
-        }
-        results.push({
-          snapshotVersion: version,
-          errors: [`存在未恢复的 Nanoka artifact：${entry.name}`],
-        })
-      }
-    }
-    return results
+    return [...results, ...(await artifactResults(rawDirectory, version))]
   }
-
   if (!(await pathExists(rawDirectory))) return []
   const entries = await readdir(rawDirectory, { withFileTypes: true })
   const results: VerificationResult[] = []
-  const versions: string[] = []
   for (const entry of entries) {
     if (entry.name.startsWith(artifactNamespacePrefix)) {
       results.push({
@@ -490,7 +531,14 @@ export async function verifyNanokaSnapshots(options: {
     }
     if (!entry.isDirectory() || entry.name.startsWith(".")) continue
     try {
-      versions.push(validateVersion(entry.name))
+      const version = validateVersion(entry.name)
+      results.push(
+        await verifySnapshotDirectory(
+          options.policy,
+          join(rawDirectory, version),
+          version,
+        ),
+      )
     } catch (error) {
       results.push({
         snapshotVersion: entry.name,
@@ -498,18 +546,7 @@ export async function verifyNanokaSnapshots(options: {
       })
     }
   }
-  const verified = await Promise.all(
-    versions
-      .toSorted()
-      .map((version) =>
-        verifySnapshotDirectory(
-          options.policy,
-          join(rawDirectory, version),
-          version,
-        ),
-      ),
-  )
-  return [...results, ...verified].toSorted((left, right) =>
+  return results.toSorted((left, right) =>
     left.snapshotVersion.localeCompare(right.snapshotVersion),
   )
 }
@@ -520,9 +557,9 @@ async function verifySnapshotDirectory(
   expectedVersion: string,
 ): Promise<VerificationResult> {
   const errors: string[] = []
-  let manifest: FetchManifest
+  let stored: StoredFetchManifest
   try {
-    manifest = parseFetchManifest(
+    stored = parseFetchManifest(
       decodeUtf8Json(
         new Uint8Array(await readFile(join(directory, "fetch-manifest.json"))),
         "fetch-manifest.json",
@@ -534,123 +571,104 @@ async function verifySnapshotDirectory(
       errors: [error instanceof Error ? error.message : String(error)],
     }
   }
-
-  if (manifest.sourceId !== policy.sourceId)
-    errors.push(`sourceId 不匹配：${manifest.sourceId}`)
-  if (manifest.game !== policy.game)
-    errors.push(`game 不匹配：${manifest.game}`)
-  if (manifest.snapshotVersion !== expectedVersion)
-    errors.push(`snapshotVersion 不匹配：${manifest.snapshotVersion}`)
-  if (
-    manifest.languages.length !== policy.languages.length ||
-    !policy.languages.every((language) => manifest.languages.includes(language))
-  ) {
+  if (stored.sourceId !== policy.sourceId)
+    errors.push(`sourceId 不匹配：${stored.sourceId}`)
+  if (stored.snapshotVersion !== expectedVersion)
+    errors.push(`snapshotVersion 不匹配：${stored.snapshotVersion}`)
+  if (!sameStringArray(stored.languages, policy.languages))
     errors.push("languages 与来源配置不匹配")
-  }
-  try {
-    const savedUpstreamManifest = validateManifest(
-      decodeUtf8Json(
-        new Uint8Array(await readFile(join(directory, "manifest.json"))),
-        "manifest.json",
-      ),
-    )
-    if (
-      savedUpstreamManifest.zzz.live !== manifest.observedLiveVersion ||
-      savedUpstreamManifest.zzz.latest !== manifest.observedLatestVersion ||
-      !sameStringArray(
-        savedUpstreamManifest.zzz.available,
-        manifest.observedAvailableVersions,
-      )
-    ) {
-      errors.push("保存的 manifest 内容与 observed 字段不匹配")
-    }
-  } catch (error) {
-    errors.push(error instanceof Error ? error.message : String(error))
-  }
-
+  const assets = adaptAssets(stored)
+  const entities = entitiesForManifest(stored)
+  if (stored.schemaVersion === "nanoka-fetch-manifest/v2")
+    validateV2ManifestShape(stored, errors)
   const expectedPaths = new Set(["fetch-manifest.json"])
-  const manifestAssets = manifest.assets.filter(
-    (asset) => asset.kind === "upstream-manifest",
-  )
-  const indexAssets = manifest.assets.filter(
-    (asset) => asset.kind === "character-index",
-  )
-  if (manifestAssets.length !== 1) {
-    errors.push(`upstream-manifest 资源数量必须为 1：${manifestAssets.length}`)
-  }
-  if (indexAssets.length !== 1) {
-    errors.push(`character-index 资源数量必须为 1：${indexAssets.length}`)
-  }
   const assetIds = new Set<string>()
-  const assetPaths = new Set<string>()
-  for (const asset of manifest.assets) {
+  const paths = new Set<string>()
+  for (const asset of assets) {
     if (assetIds.has(asset.assetId))
       errors.push(`重复 assetId：${asset.assetId}`)
     assetIds.add(asset.assetId)
-    if (assetPaths.has(asset.localPath))
+    if (paths.has(asset.localPath))
       errors.push(`重复 localPath：${asset.localPath}`)
-    assetPaths.add(asset.localPath)
+    paths.add(asset.localPath)
     try {
       validateAssetRecord(policy, expectedVersion, asset)
       expectedPaths.add(asset.localPath)
-      const bytes = new Uint8Array(
-        await readFile(resolveSnapshotAssetPath(directory, asset.localPath)),
-      )
-      const hash = sha256(bytes)
-      if (bytes.byteLength !== asset.bytes) {
+      const assetPath = resolveSnapshotAssetPath(directory, asset.localPath)
+      await validateRegularSnapshotFile(directory, assetPath, asset.localPath)
+      const bytes = new Uint8Array(await readFile(assetPath))
+      if (bytes.byteLength !== asset.bytes)
         errors.push(`${asset.localPath} 字节数不匹配`)
-      }
-      if (hash !== asset.sha256) {
+      if (sha256(bytes) !== asset.sha256)
         errors.push(`${asset.localPath} SHA-256 不匹配`)
-      }
+      decodeUtf8Json(bytes, asset.localPath)
     } catch (error) {
       errors.push(
         `${asset.localPath} 无法验证：${error instanceof Error ? error.message : String(error)}`,
       )
     }
   }
-
-  const actualPaths = new Set(await listRelativeFiles(directory))
-  for (const expectedPath of expectedPaths) {
-    if (!actualPaths.has(expectedPath)) errors.push(`缺少文件：${expectedPath}`)
-  }
-  for (const actualPath of actualPaths) {
-    if (!expectedPaths.has(actualPath))
-      errors.push(`存在未登记文件：${actualPath}`)
-  }
-
   try {
-    const indexValue = decodeUtf8Json(
-      new Uint8Array(await readFile(join(directory, "character.json"))),
-      "character.json",
-    )
-    const ids = discoverCharacterIds(indexValue)
-    const expectedDetailPaths = new Set(
-      createCharacterDetailResources(ids, policy.languages).map(
-        (resource) => resource.localPath,
+    const saved = validateManifest(
+      decodeUtf8Json(
+        new Uint8Array(await readFile(join(directory, "manifest.json"))),
+        "manifest.json",
       ),
     )
-    const registeredDetailPaths = new Set(
-      manifest.assets
-        .filter((asset) => asset.kind === "character-detail")
-        .map((asset) => asset.localPath),
+    if (
+      saved.zzz.live !== stored.observedLiveVersion ||
+      saved.zzz.latest !== stored.observedLatestVersion ||
+      !sameStringArray(saved.zzz.available, stored.observedAvailableVersions)
     )
-    for (const path of expectedDetailPaths) {
-      if (!registeredDetailPaths.has(path)) errors.push(`缺少详情登记：${path}`)
+      errors.push("保存的 manifest 内容与 observed 字段不匹配")
+  } catch (error) {
+    errors.push(error instanceof Error ? error.message : String(error))
+  }
+  try {
+    const actual = new Set(await listRelativeFiles(directory))
+    for (const path of expectedPaths)
+      if (!actual.has(path)) errors.push(`缺少文件：${path}`)
+    for (const path of actual)
+      if (!expectedPaths.has(path)) errors.push(`存在未登记文件：${path}`)
+  } catch (error) {
+    errors.push(String(error))
+  }
+  const recomputed: Partial<Record<EntityName, EntitySummary>> = {}
+  for (const entityName of entities) {
+    if (!isEntityName(entityName)) {
+      errors.push(`未知实体：${entityName}`)
+      continue
     }
-    for (const path of registeredDetailPaths) {
-      if (!expectedDetailPaths.has(path)) errors.push(`多余详情登记：${path}`)
-    }
-    for (const asset of manifest.assets.filter(
-      (candidate) => candidate.kind === "character-detail",
-    )) {
-      if (asset.characterId === undefined || asset.language === undefined) {
-        errors.push(`${asset.assetId} 缺少 language 或 characterId`)
-        continue
-      }
-      try {
-        validateAssetRecord(policy, expectedVersion, asset)
-        validateCharacterDetail(
+    const adapter = getEntityAdapter(entityName)
+    try {
+      const indexPath = `${entityName}.json`
+      const indexValue = decodeUtf8Json(
+        new Uint8Array(await readFile(join(directory, indexPath))),
+        indexPath,
+      )
+      const ids = adapter.discoverIds(indexValue)
+      const expectedDetails = new Set(
+        ids.flatMap((id) =>
+          policy.languages.map(
+            (language) => adapter.createDetailResource(id, language).localPath,
+          ),
+        ),
+      )
+      const registeredDetails = assets.filter(
+        (asset) =>
+          asset.kind === "entity-detail" && asset.entity === entityName,
+      )
+      for (const path of expectedDetails)
+        if (!registeredDetails.some((asset) => asset.localPath === path))
+          errors.push(`缺少详情登记：${path}`)
+      for (const asset of registeredDetails) {
+        if (!expectedDetails.has(asset.localPath))
+          errors.push(`多余详情登记：${asset.localPath}`)
+        if (asset.entityId === undefined || asset.language === undefined) {
+          errors.push(`${asset.assetId} 缺少 entityId 或 language`)
+          continue
+        }
+        adapter.validateDetail(
           decodeUtf8Json(
             new Uint8Array(
               await readFile(
@@ -659,46 +677,358 @@ async function verifySnapshotDirectory(
             ),
             asset.localPath,
           ),
-          asset.characterId,
-        )
-      } catch (error) {
-        errors.push(
-          `${asset.localPath} 内容无效：${error instanceof Error ? error.message : String(error)}`,
+          asset.entityId,
+          indexValue,
+          asset.language,
         )
       }
+      const entityAssets = assets.filter((asset) => asset.entity === entityName)
+      recomputed[entityName] = {
+        recordCount: ids.length,
+        detailCountByLanguage: {
+          zh: registeredDetails.filter((asset) => asset.language === "zh")
+            .length,
+          en: registeredDetails.filter((asset) => asset.language === "en")
+            .length,
+        },
+        assetCount: entityAssets.length,
+        totalBytes: entityAssets.reduce((sum, asset) => sum + asset.bytes, 0),
+      }
+    } catch (error) {
+      errors.push(
+        `${entityName} 实体验证失败：${error instanceof Error ? error.message : String(error)}`,
+      )
     }
-    const zhCount = manifest.assets.filter(
-      (asset) => asset.kind === "character-detail" && asset.language === "zh",
-    ).length
-    const enCount = manifest.assets.filter(
-      (asset) => asset.kind === "character-detail" && asset.language === "en",
-    ).length
-    if (manifest.summary.characterCount !== ids.length)
-      errors.push("summary.characterCount 不匹配")
-    if (manifest.summary.zhDetailCount !== zhCount)
-      errors.push("summary.zhDetailCount 不匹配")
-    if (manifest.summary.enDetailCount !== enCount)
-      errors.push("summary.enDetailCount 不匹配")
-    if (manifest.summary.assetCount !== manifest.assets.length)
-      errors.push("summary.assetCount 不匹配")
-    if (
-      manifest.summary.totalBytes !==
-      manifest.assets.reduce((total, asset) => total + asset.bytes, 0)
-    )
-      errors.push("summary.totalBytes 不匹配")
-  } catch (error) {
-    errors.push(error instanceof Error ? error.message : String(error))
   }
-
+  if (stored.schemaVersion === "nanoka-fetch-manifest/v1") {
+    const character = recomputed.character
+    if (
+      character !== undefined &&
+      (stored.summary.characterCount !== character.recordCount ||
+        stored.summary.zhDetailCount !== character.detailCountByLanguage.zh ||
+        stored.summary.enDetailCount !== character.detailCountByLanguage.en)
+    )
+      errors.push("v1 summary 实体计数不匹配")
+    if (
+      stored.summary.assetCount !== assets.length ||
+      stored.summary.totalBytes !==
+        assets.reduce((sum, asset) => sum + asset.bytes, 0)
+    )
+      errors.push("v1 summary 全局计数不匹配")
+  } else {
+    if (JSON.stringify(stored.summary.entities) !== JSON.stringify(recomputed))
+      errors.push("summary.entities 不匹配")
+    if (
+      stored.summary.entityTypeCount !== entities.length ||
+      stored.summary.assetCount !== assets.length ||
+      stored.summary.totalBytes !==
+        assets.reduce((sum, asset) => sum + asset.bytes, 0)
+    )
+      errors.push("summary 全局计数不匹配")
+  }
   return { snapshotVersion: expectedVersion, errors }
+}
+
+function validateV2ManifestShape(
+  manifest: FetchManifestV2,
+  errors: string[],
+): void {
+  const enabledEntities = entityRegistry.map(({ name }) => name)
+  if (!sameStringArray(manifest.entities, enabledEntities))
+    errors.push("entities 必须恰好包含全部启用实体并按注册表顺序排列")
+  const assetEntities = [
+    ...new Set(
+      manifest.assets.flatMap((asset) =>
+        asset.entity === undefined ? [] : [asset.entity],
+      ),
+    ),
+  ].toSorted(
+    (left, right) =>
+      supportedEntityNames.indexOf(left) - supportedEntityNames.indexOf(right),
+  )
+  if (!sameStringArray(assetEntities, manifest.entities))
+    errors.push("assets 的实体集合与 entities 不匹配")
+  const requested = manifest.fetchScope.requestedEntities
+  if (
+    requested.length === 0 ||
+    !requested.every((entity) => manifest.entities.includes(entity))
+  )
+    errors.push("fetchScope.requestedEntities 无效")
+  if (
+    (manifest.fetchScope.mode === "all") !==
+    sameStringArray(requested, manifest.entities)
+  )
+    errors.push("fetchScope.mode 与 requestedEntities 不匹配")
+  if (
+    !sameStringArray(
+      Object.keys(manifest.validation.entities),
+      manifest.entities,
+    ) ||
+    Object.values(manifest.validation.entities).some(
+      (status) => status !== "passed",
+    )
+  )
+    errors.push("validation.entities 无效")
+  if (manifest.validation.crossEntityReferences.length !== 0)
+    errors.push("存在未知跨实体 validator 记录")
+  for (const entity of manifest.entities) {
+    const indexCount = manifest.assets.filter(
+      (asset) => asset.kind === "entity-index" && asset.entity === entity,
+    ).length
+    if (indexCount !== 1)
+      errors.push(`${entity} entity-index 资源数量必须为 1：${indexCount}`)
+  }
+  for (const asset of manifest.assets) {
+    if (
+      asset.result === "carried-forward" &&
+      (manifest.fetchScope.mode !== "selected" ||
+        asset.entity === undefined ||
+        requested.includes(asset.entity))
+    )
+      errors.push(`${asset.assetId} carried-forward 语义无效`)
+    if (
+      manifest.fetchScope.mode === "selected" &&
+      asset.entity !== undefined &&
+      !requested.includes(asset.entity) &&
+      asset.result !== "carried-forward"
+    )
+      errors.push(`${asset.assetId} 未选实体资源必须为 carried-forward`)
+  }
+}
+
+function parseFetchManifest(value: unknown): StoredFetchManifest {
+  if (!isPlainObject(value)) throw invalidFetchManifest()
+  if (
+    value.schemaVersion !== "nanoka-fetch-manifest/v1" &&
+    value.schemaVersion !== "nanoka-fetch-manifest/v2"
+  )
+    throw new Error(
+      `不支持的 fetch manifest schema：${String(value.schemaVersion)}`,
+    )
+  if (
+    typeof value.sourceId !== "string" ||
+    value.game !== "zzz" ||
+    typeof value.snapshotVersion !== "string" ||
+    !["live", "latest", "version", "interactive"].includes(
+      String(value.selectedBy),
+    ) ||
+    typeof value.observedLiveVersion !== "string" ||
+    typeof value.observedLatestVersion !== "string" ||
+    !isStringArray(value.observedAvailableVersions) ||
+    typeof value.startedAt !== "string" ||
+    typeof value.completedAt !== "string" ||
+    typeof value.userAgent !== "string" ||
+    !isSupportedLanguageArray(value.languages) ||
+    !Array.isArray(value.assets)
+  )
+    throw invalidFetchManifest()
+  validateVersion(value.snapshotVersion)
+  validateVersion(value.observedLiveVersion)
+  validateVersion(value.observedLatestVersion)
+  value.observedAvailableVersions.forEach(validateVersion)
+  if (value.schemaVersion === "nanoka-fetch-manifest/v1") {
+    if (
+      !value.assets.every(isV1Asset) ||
+      !isPlainObject(value.summary) ||
+      ![
+        value.summary.characterCount,
+        value.summary.zhDetailCount,
+        value.summary.enDetailCount,
+        value.summary.assetCount,
+        value.summary.totalBytes,
+      ].every(isNonNegativeInteger)
+    )
+      throw invalidFetchManifest()
+  } else {
+    if (
+      !value.assets.every(isV2Asset) ||
+      !Array.isArray(value.entities) ||
+      !value.entities.every(isEntityName) ||
+      !isPlainObject(value.fetchScope) ||
+      (value.fetchScope.mode !== "all" &&
+        value.fetchScope.mode !== "selected") ||
+      !Array.isArray(value.fetchScope.requestedEntities) ||
+      !value.fetchScope.requestedEntities.every(isEntityName) ||
+      !isPlainObject(value.summary) ||
+      !isPlainObject(value.summary.entities) ||
+      !isPlainObject(value.validation) ||
+      !isPlainObject(value.validation.entities) ||
+      !Array.isArray(value.validation.crossEntityReferences)
+    )
+      throw invalidFetchManifest()
+  }
+  return value as unknown as StoredFetchManifest
+}
+
+function isBaseAsset(value: Record<string, unknown>): boolean {
+  const validResultStatus =
+    (value.result === "fetched" &&
+      isNonNegativeInteger(value.httpStatus) &&
+      value.httpStatus >= 200 &&
+      value.httpStatus < 300) ||
+    (value.result === "not-modified" && value.httpStatus === 304) ||
+    (value.result === "carried-forward" &&
+      isNonNegativeInteger(value.httpStatus) &&
+      (value.httpStatus === 304 ||
+        (value.httpStatus >= 200 && value.httpStatus < 300)))
+  return (
+    typeof value.assetId === "string" &&
+    typeof value.url === "string" &&
+    typeof value.localPath === "string" &&
+    validResultStatus &&
+    isNullableString(value.etag) &&
+    isNullableString(value.lastModified) &&
+    isNullableString(value.contentType) &&
+    isNullableString(value.cacheControl) &&
+    isNonNegativeInteger(value.bytes) &&
+    typeof value.sha256 === "string" &&
+    /^[a-f0-9]{64}$/u.test(value.sha256) &&
+    typeof value.contentFetchedAt === "string" &&
+    typeof value.lastCheckedAt === "string"
+  )
+}
+function isV1Asset(value: unknown): value is V1AssetRecord {
+  if (
+    !isPlainObject(value) ||
+    !isBaseAsset(value) ||
+    (value.result !== "fetched" && value.result !== "not-modified")
+  )
+    return false
+  if (value.kind === "upstream-manifest")
+    return (
+      value.assetId === "upstream-manifest" &&
+      value.language === undefined &&
+      value.characterId === undefined
+    )
+  if (value.kind === "character-index")
+    return (
+      value.assetId === "character-index" &&
+      value.language === undefined &&
+      value.characterId === undefined
+    )
+  if (value.kind !== "character-detail") return false
+  if (
+    !supportedLanguages.includes(value.language as SupportedLanguage) ||
+    typeof value.characterId !== "string" ||
+    !/^(0|[1-9]\d*)$/u.test(value.characterId)
+  )
+    return false
+  return (
+    value.assetId ===
+    `character-detail:${String(value.language)}:${value.characterId}`
+  )
+}
+function isV2Asset(value: unknown): value is FetchAssetRecord {
+  return (
+    isPlainObject(value) &&
+    isBaseAsset(value) &&
+    ["upstream-manifest", "entity-index", "entity-detail"].includes(
+      String(value.kind),
+    ) &&
+    ["fetched", "not-modified", "carried-forward"].includes(
+      String(value.result),
+    ) &&
+    (value.entity === undefined || isEntityName(value.entity)) &&
+    (value.language === undefined ||
+      supportedLanguages.includes(value.language as SupportedLanguage)) &&
+    (value.entityId === undefined || typeof value.entityId === "string")
+  )
+}
+
+function adaptAssets(manifest: StoredFetchManifest): FetchAssetRecord[] {
+  if (manifest.schemaVersion === "nanoka-fetch-manifest/v2")
+    return manifest.assets
+  return manifest.assets.map((asset) =>
+    asset.kind === "upstream-manifest"
+      ? { ...asset, kind: "upstream-manifest" }
+      : asset.kind === "character-index"
+        ? {
+            ...asset,
+            assetId: "entity-index:character",
+            kind: "entity-index",
+            entity: "character",
+          }
+        : {
+            ...asset,
+            assetId: `entity-detail:character:${asset.language}:${asset.characterId}`,
+            kind: "entity-detail",
+            entity: "character",
+            entityId: asset.characterId,
+          },
+  )
+}
+function entitiesForManifest(manifest: StoredFetchManifest): string[] {
+  return manifest.schemaVersion === "nanoka-fetch-manifest/v1"
+    ? ["character"]
+    : manifest.entities
+}
+
+async function createSummary(
+  directory: string,
+  assets: FetchAssetRecord[],
+  entities: EntityName[],
+  languages: SupportedLanguage[],
+): Promise<FetchManifestV2["summary"]> {
+  const summaries = {} as Record<EntityName, EntitySummary>
+  for (const entity of entities) {
+    const adapter = getEntityAdapter(entity)
+    const ids = adapter.discoverIds(
+      decodeUtf8Json(
+        new Uint8Array(await readFile(join(directory, `${entity}.json`))),
+        `${entity}.json`,
+      ),
+    )
+    const entityAssets = assets.filter((asset) => asset.entity === entity)
+    summaries[entity] = {
+      recordCount: ids.length,
+      detailCountByLanguage: Object.fromEntries(
+        languages.map((language) => [
+          language,
+          entityAssets.filter(
+            (asset) =>
+              asset.kind === "entity-detail" && asset.language === language,
+          ).length,
+        ]),
+      ) as Record<SupportedLanguage, number>,
+      assetCount: entityAssets.length,
+      totalBytes: entityAssets.reduce((sum, asset) => sum + asset.bytes, 0),
+    }
+  }
+  return {
+    entityTypeCount: entities.length,
+    assetCount: assets.length,
+    totalBytes: assets.reduce((sum, asset) => sum + asset.bytes, 0),
+    entities: summaries,
+  }
+}
+
+async function carryForwardAsset(
+  existingDirectory: string,
+  stagingDirectory: string,
+  asset: FetchAssetRecord,
+): Promise<FetchAssetRecord> {
+  validateAssetPath(asset.localPath)
+  const source = resolveSnapshotAssetPath(existingDirectory, asset.localPath)
+  await validateRegularSnapshotFile(existingDirectory, source, asset.localPath)
+  const bytes = new Uint8Array(await readFile(source))
+  if (bytes.byteLength !== asset.bytes || sha256(bytes) !== asset.sha256)
+    throw new Error(`${asset.assetId} 沿用前完整性校验失败`)
+  const destination = resolveSnapshotAssetPath(
+    stagingDirectory,
+    asset.localPath,
+  )
+  await mkdir(dirname(destination), { recursive: true })
+  await copyFile(source, destination)
+  return { ...asset, result: "carried-forward" }
 }
 
 async function saveFetchedAsset(options: {
   response: FetchedHttpAsset
   assetId: string
   kind: FetchAssetRecord["kind"]
+  entity?: EntityName
   language?: SupportedLanguage
-  characterId?: string
+  entityId?: string
   url: string
   localPath: string
   stagingDirectory: string
@@ -709,91 +1039,42 @@ async function saveFetchedAsset(options: {
   let bytes: Uint8Array
   let record: FetchAssetRecord
   if (options.response.result === "not-modified") {
-    if (options.existing === undefined) {
-      if (options.response.bytes === null) {
-        throw new Error(`${options.assetId} 返回 304，但没有已有资源记录`)
-      }
-      bytes = options.response.bytes
-      record = {
-        assetId: options.assetId,
-        kind: options.kind,
-        ...(options.language === undefined
-          ? {}
-          : { language: options.language }),
-        ...(options.characterId === undefined
-          ? {}
-          : { characterId: options.characterId }),
-        url: options.url,
-        localPath: options.localPath,
-        httpStatus: 304,
-        result: "not-modified",
-        etag: options.response.etag,
-        lastModified: options.response.lastModified,
-        contentType: options.response.contentType,
-        cacheControl: options.response.cacheControl,
-        bytes: bytes.byteLength,
-        sha256: sha256(bytes),
-        contentFetchedAt:
-          options.response.contentFetchedAt ?? options.response.checkedAt,
-        lastCheckedAt: options.response.checkedAt,
-      }
-    } else if (options.response.bytes !== null) {
-      bytes = options.response.bytes
-      const hash = sha256(bytes)
-      record = {
-        ...options.existing,
-        httpStatus: 304,
-        result: "not-modified",
-        etag: options.response.etag ?? options.existing.etag,
-        lastModified:
-          options.response.lastModified ?? options.existing.lastModified,
-        contentType:
-          options.response.contentType ?? options.existing.contentType,
-        cacheControl:
-          options.response.cacheControl ?? options.existing.cacheControl,
-        bytes: bytes.byteLength,
-        sha256: hash,
-        contentFetchedAt:
-          options.response.contentFetchedAt ??
-          options.existing.contentFetchedAt,
-        lastCheckedAt: options.response.checkedAt,
-      }
-    } else {
-      const existingPath = cachedAssetFor(
-        options.existingDirectory,
-        options.existing,
-        options.localPath,
-      )?.path
-      if (existingPath === undefined) {
-        throw new Error(`${options.assetId} 返回 304，但没有已有资源文件`)
-      }
-      bytes = new Uint8Array(await readFile(existingPath))
-      if (
-        bytes.byteLength !== options.existing.bytes ||
-        sha256(bytes) !== options.existing.sha256
-      ) {
-        throw new Error(`${options.assetId} 返回 304，但已有文件完整性校验失败`)
-      }
-      record = {
-        ...options.existing,
-        httpStatus: 304,
-        result: "not-modified",
-        lastCheckedAt: options.response.checkedAt,
-      }
+    if (options.existing === undefined || options.response.bytes === null)
+      throw new Error(`${options.assetId} 返回 304，但没有可验证的已有资源`)
+    bytes = options.response.bytes
+    record = {
+      ...options.existing,
+      assetId: options.assetId,
+      kind: options.kind,
+      ...(options.entity === undefined ? {} : { entity: options.entity }),
+      ...(options.language === undefined ? {} : { language: options.language }),
+      ...(options.entityId === undefined ? {} : { entityId: options.entityId }),
+      url: options.url,
+      localPath: options.localPath,
+      httpStatus: 304,
+      result: "not-modified",
+      etag: options.response.etag ?? options.existing.etag,
+      lastModified:
+        options.response.lastModified ?? options.existing.lastModified,
+      contentType: options.response.contentType ?? options.existing.contentType,
+      cacheControl:
+        options.response.cacheControl ?? options.existing.cacheControl,
+      bytes: bytes.byteLength,
+      sha256: sha256(bytes),
+      contentFetchedAt:
+        options.response.contentFetchedAt ?? options.existing.contentFetchedAt,
+      lastCheckedAt: options.response.checkedAt,
     }
   } else {
-    if (options.response.bytes === null) {
+    if (options.response.bytes === null)
       throw new Error(`${options.assetId} 成功响应缺少字节内容`)
-    }
     bytes = options.response.bytes
-    const hash = sha256(bytes)
     record = {
       assetId: options.assetId,
       kind: options.kind,
+      ...(options.entity === undefined ? {} : { entity: options.entity }),
       ...(options.language === undefined ? {} : { language: options.language }),
-      ...(options.characterId === undefined
-        ? {}
-        : { characterId: options.characterId }),
+      ...(options.entityId === undefined ? {} : { entityId: options.entityId }),
       url: options.url,
       localPath: options.localPath,
       httpStatus: options.response.status,
@@ -803,14 +1084,16 @@ async function saveFetchedAsset(options: {
       contentType: options.response.contentType,
       cacheControl: options.response.cacheControl,
       bytes: bytes.byteLength,
-      sha256: hash,
+      sha256: sha256(bytes),
       contentFetchedAt:
         options.response.contentFetchedAt ?? options.response.checkedAt,
       lastCheckedAt: options.response.checkedAt,
     }
   }
-
-  const destination = join(options.stagingDirectory, options.localPath)
+  const destination = resolveSnapshotAssetPath(
+    options.stagingDirectory,
+    options.localPath,
+  )
   await mkdir(dirname(destination), { recursive: true })
   await writeFile(destination, bytes)
   const drifted =
@@ -828,14 +1111,12 @@ function cachedAssetFor(
 ): { record: FetchAssetRecord; path: string } | undefined {
   if (record === undefined) return undefined
   validateAssetPath(record.localPath)
-  if (record.localPath !== expectedLocalPath) {
+  if (record.localPath !== expectedLocalPath)
     throw new Error(
       `${record.assetId} 的已有 localPath 不匹配：${record.localPath}`,
     )
-  }
   return { record, path: resolveSnapshotAssetPath(directory, record.localPath) }
 }
-
 async function fetchAssetWithValidatedCacheFallback(options: {
   httpClient: NanokaHttpClient
   url: URL
@@ -843,11 +1124,15 @@ async function fetchAssetWithValidatedCacheFallback(options: {
 }): Promise<FetchedHttpAsset> {
   const response = await options.httpClient.fetchAsset(
     options.url,
-    validatorsFor(options.cachedAsset?.record),
+    options.cachedAsset === undefined
+      ? undefined
+      : {
+          etag: options.cachedAsset.record.etag,
+          lastModified: options.cachedAsset.record.lastModified,
+        },
   )
-  if (response.result !== "not-modified") return response
-  if (options.cachedAsset === undefined) return response
-
+  if (response.result !== "not-modified" || options.cachedAsset === undefined)
+    return response
   let bytes: Uint8Array | undefined
   try {
     bytes = new Uint8Array(await readFile(options.cachedAsset.path))
@@ -858,9 +1143,8 @@ async function fetchAssetWithValidatedCacheFallback(options: {
     bytes === undefined ||
     bytes.byteLength !== options.cachedAsset.record.bytes ||
     sha256(bytes) !== options.cachedAsset.record.sha256
-  ) {
+  )
     return options.httpClient.fetchAsset(options.url)
-  }
   return {
     ...response,
     bytes,
@@ -872,215 +1156,9 @@ async function fetchAssetWithValidatedCacheFallback(options: {
   }
 }
 
-function validatorsFor(
-  existing: FetchAssetRecord | undefined,
-): { etag: string | null; lastModified: string | null } | undefined {
-  return existing === undefined
-    ? undefined
-    : { etag: existing.etag, lastModified: existing.lastModified }
-}
-
-async function recoverVersionArtifacts(
-  rawDirectory: string,
-  version: string,
-): Promise<void> {
-  const entries = await readdir(rawDirectory, { withFileTypes: true })
-  const namespace = versionNamespace(version)
-  const stagingPattern = new RegExp(
-    `^${escapeRegularExpression(artifactNamespacePrefix)}${escapeRegularExpression(namespace)}-staging-.+$`,
-    "u",
-  )
-  const backupPattern = new RegExp(
-    `^${escapeRegularExpression(artifactNamespacePrefix)}${escapeRegularExpression(namespace)}-backup-.+$`,
-    "u",
-  )
-  const stagingDirectories = entries
-    .filter((entry) => entry.isDirectory() && stagingPattern.test(entry.name))
-    .map((entry) => join(rawDirectory, entry.name))
-  const backupDirectories = entries
-    .filter((entry) => entry.isDirectory() && backupPattern.test(entry.name))
-    .map((entry) => join(rawDirectory, entry.name))
-  const target = join(rawDirectory, version)
-  if (!(await pathExists(target)) && backupDirectories.length > 0) {
-    const [restore, ...discard] = backupDirectories.toSorted()
-    if (restore !== undefined) await rename(restore, target)
-    await Promise.all(
-      discard.map((directory) => rm(directory, { recursive: true })),
-    )
-  } else {
-    await Promise.all(
-      backupDirectories.map((directory) => rm(directory, { recursive: true })),
-    )
-  }
-  await Promise.all(
-    stagingDirectories.map((directory) => rm(directory, { recursive: true })),
-  )
-}
-
-async function acquireVersionLock(
-  rawDirectory: string,
-  version: string,
-): Promise<() => Promise<void>> {
-  const release = await tryAcquireVersionLock(rawDirectory, version)
-  if (release === undefined) {
-    throw new Error(
-      `版本锁已存在：${version}；请确认没有抓取进程正在运行，再手动删除残留锁`,
-    )
-  }
-  return release
-}
-
-async function tryAcquireVersionLock(
-  rawDirectory: string,
-  version: string,
-): Promise<(() => Promise<void>) | undefined> {
-  const lockPath = join(rawDirectory, artifactName(version, "lock"))
-  const ownerToken = randomUUID()
-  const temporaryLockPath = `${lockPath}-${ownerToken}.pending`
-  const lockData = JSON.stringify({
-    schemaVersion: "nanoka-version-lock/v1",
-    version,
-    pid: process.pid,
-    ownerToken,
-    createdAt: new Date().toISOString(),
-  })
-  await writeFile(temporaryLockPath, `${lockData}\n`, { flag: "wx" })
-  try {
-    try {
-      await link(temporaryLockPath, lockPath)
-    } catch (error) {
-      if ((error as NodeJS.ErrnoException).code === "EEXIST") return undefined
-      throw error
-    }
-    return async () => {
-      const current = await readLockFile(lockPath)
-      if (current === undefined) return
-      if (parseLockData(current)?.ownerToken !== ownerToken) {
-        throw new Error(`版本锁所有权已变化，拒绝删除：${version}`)
-      }
-      await rm(lockPath)
-    }
-  } finally {
-    await rm(temporaryLockPath, { force: true })
-  }
-}
-
-interface VersionLockData {
-  version: string
-  pid: number
-  ownerToken: string
-}
-
-async function readLockFile(lockPath: string): Promise<Buffer | undefined> {
-  try {
-    return await readFile(lockPath)
-  } catch (error) {
-    if ((error as NodeJS.ErrnoException).code === "ENOENT") return undefined
-    throw error
-  }
-}
-
-function parseLockData(bytes: Buffer): VersionLockData | undefined {
-  let value: unknown
-  try {
-    value = decodeUtf8Json(new Uint8Array(bytes), "Nanoka version lock")
-  } catch {
-    return undefined
-  }
-  if (
-    !isPlainObject(value) ||
-    value.schemaVersion !== "nanoka-version-lock/v1" ||
-    typeof value.version !== "string" ||
-    !Number.isSafeInteger(value.pid) ||
-    Number(value.pid) <= 0 ||
-    typeof value.ownerToken !== "string" ||
-    value.ownerToken.length === 0 ||
-    typeof value.createdAt !== "string"
-  ) {
-    return undefined
-  }
-  if (Number.isNaN(Date.parse(value.createdAt))) return undefined
-  return {
-    version: value.version,
-    pid: Number(value.pid),
-    ownerToken: value.ownerToken,
-  }
-}
-
-async function exchangeSnapshot(
-  target: string,
-  staging: string,
-  backup: string,
-): Promise<{ cleanupWarning?: string }> {
-  const hasTarget = await pathExists(target)
-  if (!hasTarget) {
-    await rename(staging, target)
-    return {}
-  }
-  await rename(target, backup)
-  try {
-    await rename(staging, target)
-  } catch (publicationError) {
-    try {
-      await rename(backup, target)
-    } catch (rollbackError) {
-      const recoveryError = new Error(
-        `快照发布失败且回滚失败；可恢复 backup 保留在：${backup}`,
-        { cause: publicationError },
-      )
-      Object.defineProperty(recoveryError, "errors", {
-        value: [publicationError, rollbackError],
-      })
-      throw recoveryError
-    }
-    throw publicationError
-  }
-  try {
-    await rm(backup, { recursive: true })
-    return {}
-  } catch (error) {
-    return {
-      cleanupWarning: `快照发布成功，但 backup 清理失败：${backup}（${error instanceof Error ? error.message : String(error)}）`,
-    }
-  }
-}
-
-async function findCachedUpstreamManifest(rawDirectory: string): Promise<
-  | {
-      record: FetchAssetRecord
-      path: string
-    }
-  | undefined
-> {
-  if (!(await pathExists(rawDirectory))) return undefined
-  const candidates: Array<{
-    record: FetchAssetRecord
-    path: string
-  }> = []
-  const versions = await readdir(rawDirectory, { withFileTypes: true })
-  for (const entry of versions) {
-    if (!entry.isDirectory() || entry.name.startsWith(".")) continue
-    try {
-      validateVersion(entry.name)
-      const directory = join(rawDirectory, entry.name)
-      const manifest = await readExistingFetchManifest(directory)
-      const record = manifest?.assets.find(
-        (asset) => asset.assetId === "upstream-manifest",
-      )
-      const cachedAsset = cachedAssetFor(directory, record, "manifest.json")
-      if (cachedAsset !== undefined) candidates.push(cachedAsset)
-    } catch {
-      continue
-    }
-  }
-  return candidates.toSorted((left, right) =>
-    right.record.lastCheckedAt.localeCompare(left.record.lastCheckedAt),
-  )[0]
-}
-
 async function readExistingFetchManifest(
   directory: string,
-): Promise<FetchManifest | undefined> {
+): Promise<StoredFetchManifest | undefined> {
   try {
     return parseFetchManifest(
       decodeUtf8Json(
@@ -1093,111 +1171,211 @@ async function readExistingFetchManifest(
     throw error
   }
 }
-
-function parseFetchManifest(value: unknown): FetchManifest {
-  if (!isPlainObject(value)) throw invalidFetchManifest()
-  const selectedByValues: VersionSelection[] = [
-    "live",
-    "latest",
-    "version",
-    "interactive",
-  ]
-  if (
-    value.schemaVersion !== "nanoka-fetch-manifest/v1" ||
-    typeof value.sourceId !== "string" ||
-    value.game !== "zzz" ||
-    typeof value.snapshotVersion !== "string" ||
-    !selectedByValues.includes(value.selectedBy as VersionSelection) ||
-    typeof value.observedLiveVersion !== "string" ||
-    typeof value.observedLatestVersion !== "string" ||
-    !isStringArray(value.observedAvailableVersions) ||
-    typeof value.startedAt !== "string" ||
-    typeof value.completedAt !== "string" ||
-    typeof value.userAgent !== "string" ||
-    !isSupportedLanguageArray(value.languages) ||
-    !Array.isArray(value.assets) ||
-    !value.assets.every(isFetchAssetRecord) ||
-    !isFetchSummary(value.summary)
-  ) {
-    throw invalidFetchManifest()
+async function findCachedUpstreamManifest(
+  rawDirectory: string,
+): Promise<{ record: FetchAssetRecord; path: string } | undefined> {
+  if (!(await pathExists(rawDirectory))) return undefined
+  const candidates: Array<{ record: FetchAssetRecord; path: string }> = []
+  for (const entry of await readdir(rawDirectory, { withFileTypes: true })) {
+    if (!entry.isDirectory() || entry.name.startsWith(".")) continue
+    try {
+      validateVersion(entry.name)
+      const directory = join(rawDirectory, entry.name)
+      const manifest = await readExistingFetchManifest(directory)
+      const record =
+        manifest === undefined
+          ? undefined
+          : adaptAssets(manifest).find(
+              (asset) => asset.assetId === "upstream-manifest",
+            )
+      const cached = cachedAssetFor(directory, record, "manifest.json")
+      if (cached !== undefined) candidates.push(cached)
+    } catch {
+      continue
+    }
   }
-  validateVersion(value.snapshotVersion)
-  validateVersion(value.observedLiveVersion)
-  validateVersion(value.observedLatestVersion)
-  value.observedAvailableVersions.forEach(validateVersion)
-  return value as unknown as FetchManifest
+  return candidates.toSorted((left, right) =>
+    right.record.lastCheckedAt.localeCompare(left.record.lastCheckedAt),
+  )[0]
 }
 
-function isFetchAssetRecord(value: unknown): value is FetchAssetRecord {
-  if (!isPlainObject(value)) return false
-  const kinds: FetchAssetRecord["kind"][] = [
-    "upstream-manifest",
-    "character-index",
-    "character-detail",
-  ]
-  const results: FetchAssetRecord["result"][] = ["fetched", "not-modified"]
-  return (
-    typeof value.assetId === "string" &&
-    kinds.includes(value.kind as FetchAssetRecord["kind"]) &&
-    (value.language === undefined ||
-      value.language === "zh" ||
-      value.language === "en") &&
-    (value.characterId === undefined ||
-      typeof value.characterId === "string") &&
-    typeof value.url === "string" &&
-    typeof value.localPath === "string" &&
-    isNonNegativeInteger(value.httpStatus) &&
-    results.includes(value.result as FetchAssetRecord["result"]) &&
-    isNullableString(value.etag) &&
-    isNullableString(value.lastModified) &&
-    isNullableString(value.contentType) &&
-    isNullableString(value.cacheControl) &&
-    isNonNegativeInteger(value.bytes) &&
-    typeof value.sha256 === "string" &&
-    /^[a-f0-9]{64}$/u.test(value.sha256) &&
-    typeof value.contentFetchedAt === "string" &&
-    typeof value.lastCheckedAt === "string"
-  )
+export async function recoverNanokaRawDirectory(
+  rawDirectory = rawNanokaDirectory,
+): Promise<void> {
+  if (!(await pathExists(rawDirectory))) return
+  const versions = new Set<string>()
+  for (const entry of await readdir(rawDirectory, { withFileTypes: true })) {
+    const match =
+      /^\.nanoka-artifact-([A-Za-z0-9_-]+)-(?:staging|backup)-.+$/u.exec(
+        entry.name,
+      )
+    const version =
+      match?.[1] === undefined ? undefined : versionFromNamespace(match[1])
+    if (entry.isDirectory() && version !== undefined) versions.add(version)
+  }
+  for (const version of versions) {
+    const release = await tryAcquireVersionLock(rawDirectory, version)
+    if (release === undefined) continue
+    try {
+      await recoverVersionArtifacts(rawDirectory, version)
+    } finally {
+      await release()
+    }
+  }
 }
-
-function isFetchSummary(value: unknown): boolean {
-  return (
-    isPlainObject(value) &&
-    isNonNegativeInteger(value.characterCount) &&
-    isNonNegativeInteger(value.zhDetailCount) &&
-    isNonNegativeInteger(value.enDetailCount) &&
-    isNonNegativeInteger(value.assetCount) &&
-    isNonNegativeInteger(value.totalBytes)
-  )
-}
-
-function isSupportedLanguageArray(
-  value: unknown,
-): value is SupportedLanguage[] {
-  return (
-    Array.isArray(value) &&
-    value.every(
-      (language): language is SupportedLanguage =>
-        typeof language === "string" &&
-        supportedLanguages.includes(language as SupportedLanguage),
+async function recoverVersionArtifacts(
+  rawDirectory: string,
+  version: string,
+): Promise<void> {
+  const namespace = versionNamespace(version)
+  const entries = await readdir(rawDirectory, { withFileTypes: true })
+  const staging = entries
+    .filter(
+      (entry) =>
+        entry.isDirectory() &&
+        entry.name.startsWith(
+          `${artifactNamespacePrefix}${namespace}-staging-`,
+        ),
     )
+    .map((entry) => join(rawDirectory, entry.name))
+  const backups = entries
+    .filter(
+      (entry) =>
+        entry.isDirectory() &&
+        entry.name.startsWith(`${artifactNamespacePrefix}${namespace}-backup-`),
+    )
+    .map((entry) => join(rawDirectory, entry.name))
+    .toSorted()
+  const target = join(rawDirectory, version)
+  if (!(await pathExists(target)) && backups[0] !== undefined)
+    await rename(backups.shift()!, target)
+  await Promise.all(
+    [...staging, ...backups].map((path) => rm(path, { recursive: true })),
   )
 }
-
-function isStringArray(value: unknown): value is string[] {
-  return (
-    Array.isArray(value) && value.every((entry) => typeof entry === "string")
+async function acquireVersionLock(
+  rawDirectory: string,
+  version: string,
+): Promise<() => Promise<void>> {
+  const release = await tryAcquireVersionLock(rawDirectory, version)
+  if (release === undefined)
+    throw new Error(
+      `版本锁已存在：${version}；请确认没有抓取进程正在运行，再手动删除残留锁`,
+    )
+  return release
+}
+async function tryAcquireVersionLock(
+  rawDirectory: string,
+  version: string,
+): Promise<(() => Promise<void>) | undefined> {
+  const lockPath = join(rawDirectory, artifactName(version, "lock"))
+  const ownerToken = randomUUID()
+  const pending = `${lockPath}-${ownerToken}.pending`
+  await writeFile(
+    pending,
+    `${JSON.stringify({ schemaVersion: "nanoka-version-lock/v1", version, pid: process.pid, ownerToken, createdAt: new Date().toISOString() })}\n`,
+    { flag: "wx" },
   )
+  try {
+    try {
+      await link(pending, lockPath)
+    } catch (error) {
+      if ((error as NodeJS.ErrnoException).code === "EEXIST") return undefined
+      throw error
+    }
+    return async () => {
+      const value = decodeUtf8Json(
+        new Uint8Array(await readFile(lockPath)),
+        "Nanoka version lock",
+      )
+      if (!isPlainObject(value) || value.ownerToken !== ownerToken)
+        throw new Error(`版本锁所有权已变化，拒绝删除：${version}`)
+      await rm(lockPath)
+    }
+  } finally {
+    await rm(pending, { force: true })
+  }
 }
-
-function isNullableString(value: unknown): value is string | null {
-  return value === null || typeof value === "string"
+async function exchangeSnapshot(
+  target: string,
+  staging: string,
+  backup: string,
+): Promise<{ cleanupWarning?: string }> {
+  if (!(await pathExists(target))) {
+    await rename(staging, target)
+    return {}
+  }
+  await rename(target, backup)
+  try {
+    await rename(staging, target)
+  } catch (error) {
+    await rename(backup, target)
+    throw error
+  }
+  try {
+    await rm(backup, { recursive: true })
+    return {}
+  } catch (error) {
+    return {
+      cleanupWarning: `快照发布成功，但 backup 清理失败：${backup}（${error instanceof Error ? error.message : String(error)}）`,
+    }
+  }
 }
-
-function invalidFetchManifest(): Error {
-  return new Error("fetch-manifest.json 结构无效")
+async function artifactResults(
+  rawDirectory: string,
+  version: string,
+): Promise<VerificationResult[]> {
+  if (!(await pathExists(rawDirectory))) return []
+  return (await readdir(rawDirectory, { withFileTypes: true }))
+    .filter(
+      (entry) =>
+        entry.name.startsWith(artifactNamespacePrefix) &&
+        artifactVersionLabel(entry.name) === version,
+    )
+    .map((entry) => ({
+      snapshotVersion: version,
+      errors: [`存在未恢复的 Nanoka artifact：${entry.name}`],
+    }))
 }
-
+function artifactName(
+  version: string,
+  kind: "lock" | "staging" | "backup",
+  runIdentifier?: string,
+): string {
+  const base = `${artifactNamespacePrefix}${versionNamespace(version)}-${kind}`
+  return runIdentifier === undefined ? base : `${base}-${runIdentifier}`
+}
+export function nanokaArtifactNameForTest(
+  version: string,
+  kind: "lock" | "staging" | "backup",
+  runIdentifier?: string,
+): string {
+  return artifactName(validateVersion(version), kind, runIdentifier)
+}
+function artifactVersionLabel(name: string): string {
+  const match =
+    /^\.nanoka-artifact-([A-Za-z0-9_-]+)-(?:lock|staging|backup)(?:-.+)?$/u.exec(
+      name,
+    )
+  return match?.[1] === undefined
+    ? name
+    : (versionFromNamespace(match[1]) ?? name)
+}
+function versionNamespace(version: string): string {
+  return Buffer.from(version, "utf8").toString("base64url")
+}
+function versionFromNamespace(namespace: string): string | undefined {
+  try {
+    const version = new TextDecoder("utf-8", { fatal: true }).decode(
+      Buffer.from(namespace, "base64url"),
+    )
+    return versionNamespace(version) === namespace
+      ? validateVersion(version)
+      : undefined
+  } catch {
+    return undefined
+  }
+}
 function validateAssetRecord(
   policy: SourcePolicy,
   version: string,
@@ -1205,103 +1383,127 @@ function validateAssetRecord(
 ): void {
   let expectedUrl: string
   let expectedPath: string
+  let expectedId: string
   if (asset.kind === "upstream-manifest") {
-    if (asset.assetId !== "upstream-manifest") {
-      throw new Error(`manifest assetId 无效：${asset.assetId}`)
-    }
+    if (
+      asset.entity !== undefined ||
+      asset.language !== undefined ||
+      asset.entityId !== undefined
+    )
+      throw new Error("manifest 不得包含实体字段")
+    expectedId = "upstream-manifest"
     expectedUrl = buildManifestUrl(policy).href
     expectedPath = "manifest.json"
-  } else if (asset.kind === "character-index") {
-    if (asset.assetId !== "character-index") {
-      throw new Error(`index assetId 无效：${asset.assetId}`)
-    }
-    expectedUrl = buildCharacterIndexUrl(policy, version).href
-    expectedPath = "character.json"
   } else {
-    if (asset.language === undefined || asset.characterId === undefined) {
-      throw new Error(`${asset.assetId} 缺少 language 或 characterId`)
+    if (asset.entity === undefined)
+      throw new Error(`${asset.assetId} 缺少 entity`)
+    if (asset.kind === "entity-index") {
+      if (asset.language !== undefined || asset.entityId !== undefined)
+        throw new Error(`${asset.assetId} index 字段组合无效`)
+      expectedId = `entity-index:${asset.entity}`
+      expectedUrl = buildEntityIndexUrl(policy, version, asset.entity).href
+      expectedPath = `${asset.entity}.json`
+    } else {
+      if (asset.language === undefined || asset.entityId === undefined)
+        throw new Error(`${asset.assetId} 缺少 language 或 entityId`)
+      const resource = getEntityAdapter(asset.entity).createDetailResource(
+        asset.entityId,
+        asset.language,
+      )
+      expectedId = resource.assetId
+      expectedUrl = buildEntityDetailUrl(
+        policy,
+        version,
+        asset.language,
+        asset.entity,
+        asset.entityId,
+      ).href
+      expectedPath = resource.localPath
     }
-    const expectedResource = createCharacterDetailResource(
-      asset.characterId,
-      asset.language,
-    )
-    if (asset.assetId !== expectedResource.assetId) {
-      throw new Error(`详情 assetId 无效：${asset.assetId}`)
-    }
-    expectedUrl = buildCharacterDetailUrl(
-      policy,
-      version,
-      asset.language,
-      asset.characterId,
-    ).href
-    expectedPath = expectedResource.localPath
   }
+  if (asset.assetId !== expectedId)
+    throw new Error(`${asset.assetId} assetId 无效`)
   if (asset.url !== expectedUrl) throw new Error(`${asset.assetId} URL 不匹配`)
-  if (asset.localPath !== expectedPath) {
+  if (asset.localPath !== expectedPath)
     throw new Error(`${asset.assetId} localPath 不匹配`)
-  }
 }
-
-function sameStringArray(left: string[], right: string[]): boolean {
+function compareAssets(
+  left: FetchAssetRecord,
+  right: FetchAssetRecord,
+): number {
+  if (left.kind === "upstream-manifest") return -1
+  if (right.kind === "upstream-manifest") return 1
+  const leftEntity = supportedEntityNames.indexOf(left.entity!)
+  const rightEntity = supportedEntityNames.indexOf(right.entity!)
   return (
-    left.length === right.length &&
-    left.every((entry, index) => entry === right[index])
+    leftEntity - rightEntity ||
+    (left.kind === "entity-index"
+      ? -1
+      : right.kind === "entity-index"
+        ? 1
+        : left.assetId.localeCompare(right.assetId))
   )
 }
-
-function escapeRegularExpression(value: string): string {
-  return value.replace(/[.*+?^${}()|[\]\\]/gu, "\\$&")
-}
-
-function sha256(bytes: Uint8Array): string {
-  return createHash("sha256").update(bytes).digest("hex")
-}
-
 function validateAssetPath(path: string): void {
   if (
     path.length === 0 ||
     path.startsWith("/") ||
     path.includes("\\") ||
     path.split("/").some((part) => part === "" || part === "." || part === "..")
-  ) {
+  )
     throw new Error(`资源本地路径不安全：${path}`)
-  }
 }
-
 function resolveSnapshotAssetPath(
   directory: string,
   localPath: string,
 ): string {
   validateAssetPath(localPath)
   const path = join(directory, localPath)
-  const relativePath = relative(directory, path)
+  const rel = relative(directory, path)
+  if (
+    rel === "" ||
+    rel === ".." ||
+    rel.startsWith(`..${sep}`) ||
+    rel.startsWith(sep)
+  )
+    throw new Error(`资源本地路径超出快照目录：${localPath}`)
+  return path
+}
+async function validateRegularSnapshotFile(
+  directory: string,
+  path: string,
+  localPath: string,
+): Promise<void> {
+  const metadata = await lstat(path)
+  if (!metadata.isFile() || metadata.isSymbolicLink())
+    throw new Error(`资源不是普通文件：${localPath}`)
+  const [directoryPath, filePath] = await Promise.all([
+    realpath(directory),
+    realpath(path),
+  ])
+  const relativePath = relative(directoryPath, filePath)
   if (
     relativePath === "" ||
     relativePath === ".." ||
     relativePath.startsWith(`..${sep}`) ||
     relativePath.startsWith(sep)
-  ) {
-    throw new Error(`资源本地路径超出快照目录：${localPath}`)
-  }
-  return path
+  )
+    throw new Error(`资源真实路径超出快照目录：${localPath}`)
 }
 
 async function listRelativeFiles(directory: string): Promise<string[]> {
-  const entries = await readdir(directory, { withFileTypes: true })
-  const files = await Promise.all(
-    entries.map(async (entry): Promise<string[]> => {
-      const path = join(directory, entry.name)
-      if (entry.isDirectory()) {
-        return (await listRelativeFiles(path)).map((child) =>
-          join(entry.name, child).split(sep).join("/"),
-        )
-      }
-      return [relative(directory, path).split(sep).join("/")]
-    }),
+  const groups = await Promise.all(
+    (await readdir(directory, { withFileTypes: true })).map(
+      async (entry): Promise<string[]> =>
+        entry.isDirectory()
+          ? (await listRelativeFiles(join(directory, entry.name))).map(
+              (child) => `${entry.name}/${child}`,
+            )
+          : [entry.name],
+    ),
   )
-  return files.flat().toSorted()
+  return groups.flat().toSorted()
 }
-
 async function pathExists(path: string): Promise<boolean> {
   try {
     await stat(path)
@@ -1311,21 +1513,19 @@ async function pathExists(path: string): Promise<boolean> {
     throw error
   }
 }
-
-async function mapConcurrent<Input, Output>(
-  inputs: Input[],
+async function mapConcurrent<I, O>(
+  inputs: I[],
   concurrency: number,
-  operation: (input: Input) => Promise<Output>,
-): Promise<Output[]> {
-  const results = Array.from<Output>({ length: inputs.length })
-  let nextIndex = 0
+  operation: (input: I) => Promise<O>,
+): Promise<O[]> {
+  const results = Array.from<O>({ length: inputs.length })
+  let next = 0
   let firstError: unknown
   const workers = Array.from(
     { length: Math.min(concurrency, inputs.length) },
     async () => {
-      while (firstError === undefined && nextIndex < inputs.length) {
-        const index = nextIndex
-        nextIndex += 1
+      while (firstError === undefined && next < inputs.length) {
+        const index = next++
         try {
           results[index] = await operation(inputs[index]!)
         } catch (error) {
@@ -1337,4 +1537,37 @@ async function mapConcurrent<Input, Output>(
   await Promise.all(workers)
   if (firstError !== undefined) throw firstError
   return results
+}
+function sha256(bytes: Uint8Array): string {
+  return createHash("sha256").update(bytes).digest("hex")
+}
+function sameStringArray(
+  left: readonly string[],
+  right: readonly string[],
+): boolean {
+  return (
+    left.length === right.length &&
+    left.every((entry, index) => entry === right[index])
+  )
+}
+function isStringArray(value: unknown): value is string[] {
+  return (
+    Array.isArray(value) && value.every((entry) => typeof entry === "string")
+  )
+}
+function isSupportedLanguageArray(
+  value: unknown,
+): value is SupportedLanguage[] {
+  return (
+    Array.isArray(value) &&
+    value.every((entry) =>
+      supportedLanguages.includes(entry as SupportedLanguage),
+    )
+  )
+}
+function isNullableString(value: unknown): value is string | null {
+  return value === null || typeof value === "string"
+}
+function invalidFetchManifest(): Error {
+  return new Error("fetch-manifest.json 结构无效")
 }

@@ -6,6 +6,7 @@ import {
   readdir,
   rename,
   rm,
+  symlink,
   writeFile,
 } from "node:fs/promises"
 import { tmpdir } from "node:os"
@@ -15,6 +16,10 @@ import {
   discoverCharacterIds,
   validateCharacterDetail,
 } from "../scripts/nanoka/characters.ts"
+import {
+  discoverEquipmentIds,
+  validateEquipmentDetail,
+} from "../scripts/nanoka/equipment.ts"
 import type { FetchedHttpAsset } from "../scripts/nanoka/http.ts"
 import { NanokaHttpClient } from "../scripts/nanoka/http.ts"
 import { loadSourcePolicy, validateManifest } from "../scripts/nanoka/policy.ts"
@@ -60,16 +65,82 @@ describe("Nanoka character resources", () => {
   })
 })
 
+describe("Nanoka equipment resources", () => {
+  it("discovers canonical Drive Disc IDs and validates details", () => {
+    const index = {
+      "31100": {
+        icon: "UI/31100.png",
+        zh: { name: "河豚电音", desc2: "二件套", desc4: "四件套" },
+        en: { name: "Puffer Electro", desc2: "2-piece", desc4: "4-piece" },
+      },
+      "31000": {
+        icon: "UI/31000.png",
+        zh: { name: "啄木鸟电音", desc2: "二件套", desc4: "四件套" },
+        en: {
+          name: "Woodpecker Electro",
+          desc2: "2-piece",
+          desc4: "4-piece",
+        },
+      },
+    }
+    expect(discoverEquipmentIds(index)).toEqual(["31000", "31100"])
+    expect(() => discoverEquipmentIds({ "031000": {} })).toThrow(
+      "非法 Drive Disc ID",
+    )
+    expect(() =>
+      validateEquipmentDetail(
+        {
+          id: 31000,
+          name: "啄木鸟电音",
+          desc2: "二件套",
+          desc4: "四件套",
+          story: "...",
+          icon: "UI/31000.png",
+          icon2: "UI/31000.png",
+        },
+        "31000",
+        index,
+        "zh",
+      ),
+    ).not.toThrow()
+    expect(() =>
+      validateEquipmentDetail(
+        {
+          id: 31100,
+          name: "啄木鸟电音",
+          desc2: "二件套",
+          desc4: "四件套",
+          story: "...",
+          icon: "UI/31000.png",
+          icon2: "UI/31000.png",
+        },
+        "31000",
+        index,
+        "zh",
+      ),
+    ).toThrow("ID 与路径不一致")
+  })
+})
+
 describe("Nanoka snapshots", () => {
   it("writes a complete raw-byte snapshot and verifies it offline", async () => {
     const directory = await temporaryDirectory()
     const result = await createSnapshot(directory, false)
-    expect(result.manifest.summary).toEqual({
-      characterCount: 2,
-      zhDetailCount: 2,
-      enDetailCount: 2,
-      assetCount: 6,
-      totalBytes: expect.any(Number),
+    expect(result.manifest.summary).toMatchObject({
+      entityTypeCount: 2,
+      assetCount: 11,
+      entities: {
+        character: {
+          recordCount: 2,
+          detailCountByLanguage: { zh: 2, en: 2 },
+          assetCount: 5,
+        },
+        equipment: {
+          recordCount: 2,
+          detailCountByLanguage: { zh: 2, en: 2 },
+          assetCount: 5,
+        },
+      },
     })
     const rawIndex = await readFile(join(directory, "3.0", "character.json"))
     expect(rawIndex.toString()).toBe('{"1011":{},"2":{}}')
@@ -91,40 +162,151 @@ describe("Nanoka snapshots", () => {
       {
         onProgress: (progress) => {
           stages.push(progress.stage)
-          if (progress.stage === "details") detailProgress.push(progress)
+          if (progress.stage === "entity-details") detailProgress.push(progress)
         },
       },
     )
 
     expect(stages).toEqual([
       "preparing",
-      "characters-discovered",
-      "details",
-      "details",
-      "details",
-      "details",
+      "entity-discovered",
+      "entity-details",
+      "entity-details",
+      "entity-details",
+      "entity-details",
+      "entity-discovered",
+      "entity-details",
+      "entity-details",
+      "entity-details",
+      "entity-details",
+      "verifying",
+      "verifying",
+      "verifying",
       "verifying",
       "publishing",
     ])
-    expect(detailProgress).toEqual([
-      { stage: "details", completed: 1, total: 4 },
-      { stage: "details", completed: 2, total: 4 },
-      { stage: "details", completed: 3, total: 4 },
-      { stage: "details", completed: 4, total: 4 },
-    ])
+    expect(detailProgress).toHaveLength(8)
+    expect(detailProgress.at(-1)).toMatchObject({ completed: 4, total: 4 })
+  })
+
+  it("rebuilds selected equipment while carrying validated character assets", async () => {
+    const directory = await temporaryDirectory()
+    await createSnapshot(directory, false)
+
+    const result = await createSnapshot(
+      directory,
+      false,
+      {},
+      { entities: ["equipment"] },
+    )
+
+    expect(result.manifest.fetchScope).toEqual({
+      mode: "selected",
+      requestedEntities: ["equipment"],
+    })
+    expect(result.carriedForwardAssetCount).toBe(5)
+    expect(
+      result.manifest.assets
+        .filter((asset) => asset.result === "carried-forward")
+        .every((asset) => asset.entity === "character"),
+    ).toBe(true)
+  })
+
+  it("migrates a strict v1 character snapshot only after selected equipment succeeds", async () => {
+    const directory = await temporaryDirectory()
+    await createSnapshot(directory, false)
+    const snapshotDirectory = join(directory, "3.0")
+    const manifestPath = join(snapshotDirectory, "fetch-manifest.json")
+    const v2 = JSON.parse(await readFile(manifestPath, "utf8")) as {
+      schemaVersion: string
+      entities: string[]
+      fetchScope: unknown
+      validation: unknown
+      assets: Array<Record<string, unknown>>
+      summary: {
+        assetCount: number
+        totalBytes: number
+        entities: {
+          character: {
+            recordCount: number
+            detailCountByLanguage: { zh: number; en: number }
+          }
+        }
+      }
+    }
+    const characterAssets = v2.assets
+      .filter(
+        (asset) =>
+          asset.entity === "character" || asset.kind === "upstream-manifest",
+      )
+      .map((asset) => {
+        if (asset.kind === "upstream-manifest") return asset
+        if (asset.kind === "entity-index")
+          return {
+            ...asset,
+            assetId: "character-index",
+            kind: "character-index",
+            entity: undefined,
+          }
+        return {
+          ...asset,
+          assetId: `character-detail:${String(asset.language)}:${String(asset.entityId)}`,
+          kind: "character-detail",
+          characterId: asset.entityId,
+          entity: undefined,
+          entityId: undefined,
+        }
+      })
+    const v1 = {
+      ...v2,
+      schemaVersion: "nanoka-fetch-manifest/v1",
+      assets: characterAssets,
+      summary: {
+        characterCount: v2.summary.entities.character.recordCount,
+        zhDetailCount: v2.summary.entities.character.detailCountByLanguage.zh,
+        enDetailCount: v2.summary.entities.character.detailCountByLanguage.en,
+        assetCount: characterAssets.length,
+        totalBytes: characterAssets.reduce(
+          (sum, asset) => sum + Number(asset.bytes),
+          0,
+        ),
+      },
+    } as Record<string, unknown>
+    delete v1.entities
+    delete v1.fetchScope
+    delete v1.validation
+    await rm(join(snapshotDirectory, "equipment.json"))
+    await rm(join(snapshotDirectory, "zh", "equipment"), { recursive: true })
+    await rm(join(snapshotDirectory, "en", "equipment"), { recursive: true })
+    await writeFile(manifestPath, `${JSON.stringify(v1)}\n`)
+
+    expect(
+      await verifyNanokaSnapshots({
+        policy: await loadSourcePolicy(),
+        rawDirectory: directory,
+      }),
+    ).toEqual([{ snapshotVersion: "3.0", errors: [] }])
+    const migrated = await createSnapshot(
+      directory,
+      false,
+      {},
+      { entities: ["equipment"] },
+    )
+    expect(migrated.manifest.schemaVersion).toBe("nanoka-fetch-manifest/v2")
+    expect(migrated.manifest.entities).toEqual(["character", "equipment"])
   })
 
   it("reuses validated files on 304 and reports drift", async () => {
     const directory = await temporaryDirectory()
     await createSnapshot(directory, false)
     const reused = await createSnapshot(directory, true)
-    expect(reused.reusedAssetCount).toBe(5)
+    expect(reused.reusedAssetCount).toBe(10)
     expect(reused.driftedAssetIds).toEqual([])
 
     const drifted = await createSnapshot(directory, false, {
       "/zzz/3.0/en/character/1011.json": '{"id":1011,"name":"changed"}',
     })
-    expect(drifted.driftedAssetIds).toContain("character-detail:en:1011")
+    expect(drifted.driftedAssetIds).toContain("entity-detail:character:en:1011")
   })
 
   it("refetches unconditionally after a 304 finds damaged cached bytes", async () => {
@@ -134,7 +316,7 @@ describe("Nanoka snapshots", () => {
     await writeFile(indexPath, "damaged")
 
     const refreshed = await createSnapshot(directory, true)
-    expect(refreshed.manifest.summary.characterCount).toBe(2)
+    expect(refreshed.manifest.summary.entities.character.recordCount).toBe(2)
     expect(await readFile(indexPath, "utf8")).toBe('{"1011":{},"2":{}}')
   })
 
@@ -146,7 +328,7 @@ describe("Nanoka snapshots", () => {
       assets: Array<{ assetId: string; localPath: string }>
     }
     const index = manifest.assets.find(
-      (asset) => asset.assetId === "character-index",
+      (asset) => asset.assetId === "entity-index:character",
     )
     if (index === undefined) throw new Error("missing fixture asset")
     index.localPath = "../outside.json"
@@ -620,11 +802,11 @@ describe("Nanoka snapshots", () => {
     const duplicateManifest = JSON.parse(
       await readFile(manifestPath, "utf8"),
     ) as {
-      assets: Array<{ kind: string }>
+      assets: Array<{ kind: string; entity?: string }>
       summary: { assetCount: number }
     }
     duplicateManifest.assets = duplicateManifest.assets.filter(
-      (asset) => asset.kind !== "character-index",
+      (asset) => asset.kind !== "entity-index" || asset.entity !== "character",
     )
     duplicateManifest.summary.assetCount = duplicateManifest.assets.length
     await writeFile(manifestPath, `${JSON.stringify(duplicateManifest)}\n`)
@@ -633,8 +815,158 @@ describe("Nanoka snapshots", () => {
       rawDirectory: directory,
     })
     expect(verification?.errors.join("\n")).toContain(
-      "character-index 资源数量必须为 1",
+      "存在未登记文件：character.json",
     )
+  })
+
+  it("rejects malformed v2 scope, entity closure, and result semantics", async () => {
+    const directory = await temporaryDirectory()
+    const policy = await loadSourcePolicy()
+    await createSnapshot(directory, false)
+    const manifestPath = join(directory, "3.0", "fetch-manifest.json")
+
+    const partial = JSON.parse(await readFile(manifestPath, "utf8")) as {
+      entities: string[]
+      fetchScope: { mode: string; requestedEntities: string[] }
+    }
+    partial.entities = ["character"]
+    partial.fetchScope = { mode: "all", requestedEntities: ["character"] }
+    await writeFile(manifestPath, `${JSON.stringify(partial)}\n`)
+    let [verification] = await verifyNanokaSnapshots({
+      policy,
+      rawDirectory: directory,
+    })
+    expect(verification?.errors.join("\n")).toContain("全部启用实体")
+    expect(verification?.errors.join("\n")).toContain(
+      "实体集合与 entities 不匹配",
+    )
+
+    await rm(join(directory, "3.0"), { recursive: true })
+    await createSnapshot(directory, false)
+    await createSnapshot(directory, false, {}, { entities: ["equipment"] })
+    const selected = JSON.parse(await readFile(manifestPath, "utf8")) as {
+      assets: Array<{
+        entity?: string
+        result: string
+        httpStatus: number
+      }>
+    }
+    const carried = selected.assets.find(
+      (asset) => asset.entity === "character",
+    )
+    if (carried === undefined) throw new Error("missing carried fixture asset")
+    carried.result = "fetched"
+    carried.httpStatus = 200
+    await writeFile(manifestPath, `${JSON.stringify(selected)}\n`)
+    ;[verification] = await verifyNanokaSnapshots({
+      policy,
+      rawDirectory: directory,
+    })
+    expect(verification?.errors.join("\n")).toContain(
+      "未选实体资源必须为 carried-forward",
+    )
+
+    carried.result = "not-modified"
+    carried.httpStatus = 200
+    await writeFile(manifestPath, `${JSON.stringify(selected)}\n`)
+    ;[verification] = await verifyNanokaSnapshots({
+      policy,
+      rawDirectory: directory,
+    })
+    expect(verification?.errors.join("\n")).toContain("结构无效")
+  })
+
+  it("strictly rejects malformed v1 asset fields and stable IDs", async () => {
+    const directory = await temporaryDirectory()
+    await createSnapshot(directory, false)
+    const snapshotDirectory = join(directory, "3.0")
+    const manifestPath = join(snapshotDirectory, "fetch-manifest.json")
+    const manifest = JSON.parse(await readFile(manifestPath, "utf8")) as {
+      assets: Array<Record<string, unknown>>
+      summary: {
+        entities: {
+          character: {
+            recordCount: number
+            detailCountByLanguage: { zh: number; en: number }
+          }
+        }
+      }
+    } & Record<string, unknown>
+    const characterAssets = manifest.assets
+      .filter(
+        (asset) =>
+          asset.entity === "character" || asset.kind === "upstream-manifest",
+      )
+      .map((asset) => {
+        if (asset.kind === "upstream-manifest") return asset
+        if (asset.kind === "entity-index")
+          return {
+            ...asset,
+            assetId: "character-index",
+            kind: "character-index",
+            entity: undefined,
+          }
+        return {
+          ...asset,
+          assetId: `character-detail:${String(asset.language)}:${String(asset.entityId)}`,
+          kind: "character-detail",
+          characterId: asset.entityId,
+          entity: undefined,
+          entityId: undefined,
+        }
+      })
+    const v1 = {
+      ...manifest,
+      schemaVersion: "nanoka-fetch-manifest/v1",
+      assets: characterAssets,
+      summary: {
+        characterCount: manifest.summary.entities.character.recordCount,
+        zhDetailCount:
+          manifest.summary.entities.character.detailCountByLanguage.zh,
+        enDetailCount:
+          manifest.summary.entities.character.detailCountByLanguage.en,
+        assetCount: characterAssets.length,
+        totalBytes: characterAssets.reduce(
+          (sum, asset) => sum + Number(asset.bytes),
+          0,
+        ),
+      },
+    } as Record<string, unknown>
+    delete v1.entities
+    delete v1.fetchScope
+    delete v1.validation
+    const v1Assets = v1.assets as Array<Record<string, unknown>>
+    const index = v1Assets.find((asset) => asset.kind === "character-index")
+    if (index === undefined) throw new Error("missing v1 index fixture")
+    index.characterId = "1011"
+    index.assetId = "wrong-index"
+    await rm(join(snapshotDirectory, "equipment.json"))
+    await rm(join(snapshotDirectory, "zh", "equipment"), { recursive: true })
+    await rm(join(snapshotDirectory, "en", "equipment"), { recursive: true })
+    await writeFile(manifestPath, `${JSON.stringify(v1)}\n`)
+
+    const [verification] = await verifyNanokaSnapshots({
+      policy: await loadSourcePolicy(),
+      rawDirectory: directory,
+    })
+    expect(verification?.errors.join("\n")).toContain("结构无效")
+  })
+
+  it("rejects symbolic links in managed snapshot files", async () => {
+    const directory = await temporaryDirectory()
+    await createSnapshot(directory, false)
+    const target = join(directory, "outside.json")
+    const asset = join(directory, "3.0", "zh", "character", "1011.json")
+    await writeFile(target, '{"id":1011,"name":"outside"}')
+    await rm(asset)
+    await symlink(target, asset)
+
+    const [verification] = await verifyNanokaSnapshots({
+      policy: await loadSourcePolicy(),
+      rawDirectory: directory,
+      version: "3.0",
+    })
+    expect(verification?.errors.join("\n")).toContain("资源不是普通文件")
   })
 
   it("rejects empty character indexes without replacing an existing snapshot", async () => {
@@ -695,6 +1027,7 @@ async function createSnapshot(
     version?: string
     selectedBy?: "live" | "latest" | "version" | "interactive"
     upstreamManifestResponse?: FetchedHttpAsset
+    entities?: string[]
     onProgress?: (progress: SnapshotFetchProgress) => void
   } = {},
 ) {
@@ -711,6 +1044,16 @@ async function createSnapshot(
     [`/zzz/${version}/en/character/2.json`]: '{"id":2,"name":"Two"}',
     [`/zzz/${version}/zh/character/1011.json`]: '{"id":1011,"name":"安比"}',
     [`/zzz/${version}/en/character/1011.json`]: '{"id":1011,"name":"Anby"}',
+    [`/zzz/${version}/equipment.json`]:
+      '{"31000":{"icon":"UI/31000.png","zh":{"name":"啄木鸟电音","desc2":"二件套","desc4":"四件套"},"en":{"name":"Woodpecker Electro","desc2":"2-piece","desc4":"4-piece"}},"31100":{"icon":"UI/31100.png","zh":{"name":"河豚电音","desc2":"二件套","desc4":"四件套"},"en":{"name":"Puffer Electro","desc2":"2-piece","desc4":"4-piece"}}}',
+    [`/zzz/${version}/zh/equipment/31000.json`]:
+      '{"id":31000,"name":"啄木鸟电音","desc2":"二件套","desc4":"四件套","story":"...","icon":"UI/31000.png","icon2":"UI/31000.png"}',
+    [`/zzz/${version}/en/equipment/31000.json`]:
+      '{"id":31000,"name":"Woodpecker Electro","desc2":"2-piece","desc4":"4-piece","story":"...","icon":"UI/31000.png","icon2":"UI/31000.png"}',
+    [`/zzz/${version}/zh/equipment/31100.json`]:
+      '{"id":31100,"name":"河豚电音","desc2":"二件套","desc4":"四件套","story":"...","icon":"UI/31100.png","icon2":"UI/31100.png"}',
+    [`/zzz/${version}/en/equipment/31100.json`]:
+      '{"id":31100,"name":"Puffer Electro","desc2":"2-piece","desc4":"4-piece","story":"...","icon":"UI/31100.png","icon2":"UI/31100.png"}',
     ...overrides,
   }
   const httpClient = new NanokaHttpClient(
@@ -750,6 +1093,7 @@ async function createSnapshot(
     version,
     selectedBy: options.selectedBy ?? "live",
     rawDirectory,
+    ...(options.entities === undefined ? {} : { entities: options.entities }),
     ...(options.onProgress === undefined
       ? {}
       : { onProgress: options.onProgress }),

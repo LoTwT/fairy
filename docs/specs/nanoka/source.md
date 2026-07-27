@@ -515,7 +515,7 @@ POSIX 上无法用单个 rename 原子替换非空目录，发布使用可恢复
 
 ## 10. 来源配置与模块边界
 
-当前 v1 实现使用 `policy.ts`、`http.ts`、`characters.ts` 和 `snapshot.ts`，职责仍以现有 Agents 代码为准。v2 目标结构为：
+当前实现使用 `policy.ts`、`http.ts`、`entities.ts`、各实体模块和 `snapshot.ts`，结构为：
 
 ```text
 packages/data/
@@ -527,11 +527,12 @@ packages/data/
 │       ├── http.ts
 │       ├── entities.ts
 │       ├── characters.ts
+│       ├── equipment.ts
 │       └── snapshot.ts
 └── raw/
 ```
 
-v2 实现后的共享职责：
+实现后的共享职责：
 
 - `source-registry.json`：来源 ID、URL、host/path 根 allowlist、语言、请求策略、User-Agent、robots/content-signal、本地缓存和再分发政策的单一事实来源；
 - `nanoka-source.ts`：CLI 参数、交互选择、fetch/verify 调用、进度与结果输出、退出码；
@@ -556,7 +557,7 @@ pnpm --filter @randomplay/data verify:nanoka
 pnpm --filter @randomplay/data verify:nanoka --version <version>
 ```
 
-`--entity` 属于已完成设计、尚待实现的 v2 命令扩展。
+`--entity` 是已实现的 v2 命令扩展。
 
 ### `fetch:nanoka`
 

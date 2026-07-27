@@ -19,6 +19,7 @@ interface ParsedArguments {
   command: "fetch" | "verify"
   channel?: "live" | "latest"
   version?: string
+  entities: string[]
 }
 
 export function parseArguments(arguments_: string[]): ParsedArguments {
@@ -29,6 +30,7 @@ export function parseArguments(arguments_: string[]): ParsedArguments {
 
   let channel: "live" | "latest" | undefined
   let version: string | undefined
+  const entities: string[] = []
   while (arguments_.length > 0) {
     const argument = arguments_.shift()
     if (argument === "--channel") {
@@ -45,6 +47,11 @@ export function parseArguments(arguments_: string[]): ParsedArguments {
       }
       if (version !== undefined) throw new Error("--version 不能重复")
       version = value
+    } else if (argument === "--entity") {
+      const value = arguments_.shift()
+      if (value === undefined || value.startsWith("--"))
+        throw new Error("--entity 需要实体名")
+      entities.push(value)
     } else {
       throw new Error(`未知参数：${argument}`)
     }
@@ -55,8 +62,11 @@ export function parseArguments(arguments_: string[]): ParsedArguments {
   if (command === "verify" && channel !== undefined) {
     throw new Error("verify 不支持 --channel")
   }
+  if (command === "verify" && entities.length > 0)
+    throw new Error("verify 不支持 --entity")
   return {
     command,
+    entities,
     ...(channel === undefined ? {} : { channel }),
     ...(version === undefined ? {} : { version }),
   }
@@ -119,16 +129,16 @@ export function formatFetchProgress(
 ): string | undefined {
   switch (progress.stage) {
     case "preparing":
-      return "正在准备本地快照和缓存…"
-    case "characters-discovered":
-      return `已发现 ${progress.characterCount} 名 Agent，准备处理 ${progress.detailCount} 份语言详情…`
-    case "details":
+      return `正在准备组合快照；更新实体：${progress.requestedEntities.join(", ")}；沿用实体：${progress.carriedEntities.join(", ") || "无"}`
+    case "entity-discovered":
+      return `${progress.displayName}：已发现 ${progress.recordCount} 条记录，准备处理 ${progress.detailCount} 份语言详情…`
+    case "entity-details":
       return progress.completed === progress.total ||
         progress.completed % 10 === 0
-        ? `Agent 详情进度：${progress.completed}/${progress.total}`
+        ? `${progress.displayName} 详情进度：${progress.completed}/${progress.total}`
         : undefined
     case "verifying":
-      return "正在离线校验新快照…"
+      return `正在执行 ${progress.layer} 分层校验…`
     case "publishing":
       return "校验通过，正在发布新快照…"
   }
@@ -188,6 +198,7 @@ export async function run(
     upstreamManifest: manifest,
     version,
     selectedBy,
+    ...(parsed.entities.length === 0 ? {} : { entities: parsed.entities }),
     onProgress: (progress) => {
       const message = formatFetchProgress(progress)
       if (message !== undefined) process.stdout.write(`${message}\n`)
@@ -197,10 +208,13 @@ export async function run(
   process.stdout.write(
     [
       `Nanoka 快照完成：${version}`,
-      `Agents: ${summary.characterCount}`,
+      ...result.manifest.entities.map(
+        (entity) => `${entity}: ${summary.entities[entity].recordCount} 条记录`,
+      ),
       `资源: ${summary.assetCount}`,
       `字节: ${summary.totalBytes}`,
-      `缓存复用: ${result.reusedAssetCount}`,
+      `HTTP 304: ${result.notModifiedAssetCount}`,
+      `沿用资源: ${result.carriedForwardAssetCount}`,
       `内容漂移: ${result.driftedAssetIds.length}`,
       ...(result.driftedAssetIds.length === 0
         ? []

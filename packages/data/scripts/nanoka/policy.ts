@@ -86,9 +86,11 @@ export async function loadSourcePolicy(): Promise<SourcePolicy> {
   return source
 }
 
-export function isValidCharacterId(value: string): boolean {
+export function isValidEntityId(value: string): boolean {
   return /^(0|[1-9]\d*)$/u.test(value)
 }
+
+export const isValidCharacterId = isValidEntityId
 
 export function validateManifest(value: unknown): NanokaManifest {
   if (!isPlainObject(value) || !isPlainObject(value.zzz)) {
@@ -160,15 +162,45 @@ export function buildManifestUrl(policy: SourcePolicy): URL {
   return validateAllowedUrl(policy, new URL(policy.manifestUrl), "manifest")
 }
 
-export function buildCharacterIndexUrl(
+export function buildEntityIndexUrl(
   policy: SourcePolicy,
   version: string,
+  entity: "character" | "equipment",
 ): URL {
   validateVersion(version)
   return validateAllowedUrl(
     policy,
     new URL(
-      `${encodeURIComponent(version)}/character.json`,
+      `${encodeURIComponent(version)}/${entity}.json`,
+      policy.staticDataBaseUrl,
+    ),
+    "data",
+  )
+}
+
+export function buildCharacterIndexUrl(
+  policy: SourcePolicy,
+  version: string,
+): URL {
+  return buildEntityIndexUrl(policy, version, "character")
+}
+
+export function buildEntityDetailUrl(
+  policy: SourcePolicy,
+  version: string,
+  language: SupportedLanguage,
+  entity: "character" | "equipment",
+  entityId: string,
+): URL {
+  validateVersion(version)
+  if (!policy.languages.includes(language))
+    throw new Error(`不支持的语言：${language}`)
+  if (!isValidEntityId(entityId))
+    throw new Error(`${entity} ID 无效：${entityId}`)
+  return validateAllowedUrl(
+    policy,
+    new URL(
+      `${encodeURIComponent(version)}/${language}/${entity}/${entityId}.json`,
       policy.staticDataBaseUrl,
     ),
     "data",
@@ -181,20 +213,12 @@ export function buildCharacterDetailUrl(
   language: SupportedLanguage,
   characterId: string,
 ): URL {
-  validateVersion(version)
-  if (!policy.languages.includes(language)) {
-    throw new Error(`不支持的语言：${language}`)
-  }
-  if (!isValidCharacterId(characterId)) {
-    throw new Error(`Agent ID 无效：${characterId}`)
-  }
-  return validateAllowedUrl(
+  return buildEntityDetailUrl(
     policy,
-    new URL(
-      `${encodeURIComponent(version)}/${language}/character/${characterId}.json`,
-      policy.staticDataBaseUrl,
-    ),
-    "data",
+    version,
+    language,
+    "character",
+    characterId,
   )
 }
 
@@ -238,7 +262,8 @@ function isAllowedDataPath(policy: SourcePolicy, pathname: string): boolean {
     return (
       version !== undefined &&
       isValidVersion(version) &&
-      file === "character.json"
+      file !== undefined &&
+      (file === "character.json" || file === "equipment.json")
     )
   }
   if (decodedSegments.length === 4) {
@@ -248,10 +273,10 @@ function isAllowedDataPath(policy: SourcePolicy, pathname: string): boolean {
       isValidVersion(version) &&
       language !== undefined &&
       policy.languages.includes(language as SupportedLanguage) &&
-      entity === "character" &&
+      (entity === "character" || entity === "equipment") &&
       file !== undefined &&
       file.endsWith(".json") &&
-      isValidCharacterId(file.slice(0, -".json".length))
+      isValidEntityId(file.slice(0, -".json".length))
     )
   }
   return false
