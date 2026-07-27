@@ -4,8 +4,8 @@
 
 - 状态：共享来源基线和多实体 v2 契约已实现并验证
 - 当前实现范围：版本发现与选择、HTTP、条件请求、严格 v1/v2 清单、实体注册表、多实体组合快照、定向实体重跑、分层离线校验、原子发布、版本锁和终端进度
-- 下一实现范围：End Game 领域建模、子域 adapter 和跨实体 validator
-- 验证状态：自动化检查通过，Agents、Drive Discs、W-Engines、Bangboos 与 Monsters 已完成实际在线组合快照验收
+- 下一实现范围：跨实体 validator 基础设施和 Shiyu adapter
+- 验证状态：自动化检查通过，Agents、Drive Discs、W-Engines、Bangboos 与 Monsters 已完成实际在线组合快照验收；End Game 已完成三版本全量结构调研和正式建模，尚未实现
 - 适用包：`@randomplay/data`
 - 数据来源：Nanoka ZZZ 静态数据
 - 实体规范入口：[Nanoka 数据源规范索引](index.md)

@@ -160,7 +160,7 @@ Drive Discs 是首个实体闭环，而不是绕过共享契约的独立局部�
 4. Monsters（monster）
 ```
 
-每个实体都必须执行第 4 节的标准流程，前一个实体完成“规范、实现、在线抓取、离线验证和独立变更单元”闭环后，才能进入下一个实体。阶段四的四个普通实体已全部完成闭环，下一步进入阶段五的 End Game 领域调研与建模，不在普通实体之间穿插 End Game 子域实施。
+每个实体都必须执行第 4 节的标准流程，前一个实体完成“规范、实现、在线抓取、离线验证和独立变更单元”闭环后，才能进入下一个实体。阶段四的四个普通实体已全部完成闭环，阶段五 End Game 领域调研与建模也已完成，下一步进入阶段六的跨实体 validator 基础设施与 Shiyu 闭环。
 
 ### 阶段五：End Game 领域调研与建模
 
@@ -179,9 +179,28 @@ Drive Discs 是首个实体闭环，而不是绕过共享契约的独立局部�
 - 正式规范的拆分方式已确定；
 - 子域实施顺序及整体一致性要求已明确。
 
+#### 阶段五结果（2026-07-27）
+
+阶段五已完成。调研对 `3.0`、`3.1.5+17516165` 和 `3.1.12+17625891` 的全部 End Game 摘要及 `zh/en` 详情进行了低频、只读的完整结构普查，共覆盖 312 条摘要记录和 624 份详情。正式领域契约见 [End Game 领域数据规范](../specs/nanoka/end-game.md)，子域结构分别见 [Shiyu](../specs/nanoka/shiyu.md)、[Simul](../specs/nanoka/simul.md) 和 [Boss](../specs/nanoka/boss.md) 规范。
+
+阶段五结论：
+
+- 三个子域拥有独立摘要和详情资源，可以独立选择网络更新，但继续共用版本级锁、staging、manifest、验证和原子发布边界；
+- 未发现三个子域共享的 season、stage、zone、room、node、battle 或顶层实体 ID，也未发现子域间顶层实体直接引用；
+- 三个子域都引用同版本 Monster，外键只取 `monster_list` 嵌套记录的 `id`；完整样本中的 9,197 个引用全部闭合，外层 key 全部不等于嵌套 Monster ID；
+- encounter 内嵌的名称、图片、弱点和关卡数值必须保留，不能缩减为纯 Monster 外键；
+- Shiyu 固定使用顶层 `zone`，zone 从对象 key 发现，child 引用在单详情内闭合，`stage_num` 不唯一，时间字段存在多种合法组合；
+- Simul 是 node、story event、battle、layer、room 和 record 构成的图状结构，`next_node_unlock` 与 `next_record_unlock` 使用不同目标集合，非零 `prev_node` 的命名空间仍保持 opaque；
+- Boss `3.0` 使用顶层 `zone`，两个 `3.1` 版本全部使用 `modes`；alternate mode ID 不是顶层实体或独立资源，顶层和 mode `zone_type` 不保证相等；
+- Boss 与 Simul 共享同版本 `boss_adjust`，并对相同类别的 buff ID 交集保持同语言记录一致，但允许一侧存在独有 buff；
+- 不要求三个子域每轮同时发起网络请求；定向更新后必须在完整 staging 中执行所有适用的 Monster 和 Boss/Simul 配置 validator；
+- 正式实施顺序保持为先实现跨实体 validator 基础设施，再依次闭环 Shiyu、Simul、Boss，最后执行 End Game 整体一致性验收。
+
+阶段五只完成经过实际数据支持的规范和实施边界，不表示三个子域已加入实体注册表或完成快照验收。
+
 ### 阶段六：End Game 子域逐个闭环
 
-按领域调研确定的依赖顺序逐个实施子域，并在全部子域完成后增加 End Game 整体一致性验证。
+先实现共享规范已定义但代码尚未具备的跨实体 validator 注册、执行和 manifest 严格验证，再按 Shiyu、Simul、Boss 顺序逐个实施子域。每个子域仍执行第 4 节标准流程；全部子域完成后增加 End Game 整体一致性验证。
 
 ### 阶段七：全实体综合验证与计划清理
 
@@ -241,11 +260,11 @@ Drive Discs 是首个实体闭环，而不是绕过共享契约的独立局部�
   3. Bangboos（bangboo）
   4. Monsters（monster）
 
-阶段五：End Game 领域调研与建模
-  5. 确认领域共享边界并建立领域规范
+阶段五：End Game 领域调研与建模（已完成）
+  5. 完成三版本全量调研，确认领域共享边界并建立领域及三份子域规范
 
 阶段六：End Game 子域逐个闭环
-  6. Shiyu（shiyu）
+  6. 实现跨实体 validator 基础设施并闭环 Shiyu（shiyu）
   7. Simul（simul）
   8. Boss（boss）
 
@@ -270,26 +289,30 @@ Drive Discs 是首个实体闭环，而不是绕过共享契约的独立局部�
 
 ## 7. 未决问题
 
-阶段一已经解决：
+阶段一至阶段五已经解决：
 
 - 所有目标实体和子域都存在可用的摘要索引；
 - 所有目标实体和子域都观察到语言详情资源；
-- End Game 三个子域均明确引用 Monsters；
+- End Game 三个子域均明确引用 Monsters，正式外键为 `monster_list` 嵌套记录的 `id`；
 - 普通实体的建议实施顺序已经确定；
-- End Game 正式规范采用领域规范加三份子域规范的拆分方式。
+- End Game 正式规范已建立为一份 [领域规范](../specs/nanoka/end-game.md) 加 [Shiyu](../specs/nanoka/shiyu.md)、[Simul](../specs/nanoka/simul.md)、[Boss](../specs/nanoka/boss.md) 三份子域规范；
+- 三个子域之间不存在已证明的共享顶层 ID 或直接引用，可以独立选择网络更新；
+- Boss/Simul 的 `boss_adjust` 和 buff 交集一致性边界已经确定；
+- 子域实施顺序和 End Game 整体验证边界已经确定。
 
-进入后续实体闭环时仍需解决：
+进入阶段六子域闭环时仍需解决：
 
-- 为所选实体执行全量 `zh/en` 详情覆盖验证，并确认可选或缺失资源；
 - Drive Discs 已完成全量上游验证、正式规范、实现、自动化检查和在线组合快照验收，长期契约见 [Drive Discs 数据规范](../specs/nanoka/equipment.md)；
 - W-Engines 已完成三版本全量 `zh/en` 覆盖验证、正式规范、历史 v2 epoch 兼容、实现、自动化检查和在线三实体组合快照验收，长期契约见 [W-Engines 数据规范](../specs/nanoka/weapon.md)；
 - Bangboos 已完成三版本全量 `zh/en` 覆盖验证、合法空值与内部技能引用建模、多个历史 v2 epoch 兼容、实现、自动化检查和在线四实体组合快照验收，长期契约见 [Bangboos 数据规范](../specs/nanoka/bangboo.md)；
 - Monsters 已完成三版本全量 `zh/en` 覆盖验证、多层 ID 与内部战斗单位建模、四实体历史 v2 epoch 兼容、实现、自动化检查和在线五实体组合快照验收，长期契约见 [Monsters 数据规范](../specs/nanoka/monster.md)；
-- End Game 的 `monster_list` 外层 key 已确认不是规范 Monster ID，但其确切业务语义仍未证明；子域规范必须使用中性名称，Monster 外键只取嵌套记录的 `id`；
-- End Game 的 Monster 引用缺失在何种历史快照范围内允许记录 `not-run`；正常新完整发布中，已支持依赖的缺失必须阻止发布；
-- Boss `zone`/`modes` 分支、mode ID 和 `zone_type` 的完整规则；
-- Simul 的 node、battle、record 解锁引用是否都限制在单个详情文件内；
-- 是否存在本次最小样本未发现的额外资源端点、可选详情或跨子域直接引用。
+- 实现 `validation.crossEntityReferences` 的非空记录、稳定 validator 注册表、在线执行和严格离线重算；
+- Shiyu、Simul、Boss 尚需按各自正式规范实现 adapter、自动化测试和在线组合快照验收；
+- 各子域加入注册表时，逐步冻结五实体、六实体和七实体历史 v2 epoch，并验证定向升级路径；
+- 正常新完整发布中，已支持来源对已支持 Monster 的缺失引用必须阻止发布；合法历史 epoch 的 `not-run`/`not-applicable` 按领域和共享规范记录；
+- Simul 非零 `prev_node` 的目标命名空间尚未证明，当前按 opaque positive ID 保留；
+- Boss `zone_type` 的业务枚举、顶层与 mode 值关系的业务含义尚未证明；
+- 是否存在本次标准资源家族和代表性内部 ID 探测未发现的可选独立端点。
 
 问题一旦形成长期契约，应迁入正式规范并从本节删除。
 

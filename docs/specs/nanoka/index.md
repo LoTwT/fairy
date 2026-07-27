@@ -10,6 +10,10 @@ Nanoka 数据源规范分为共享来源契约和实体契约。共享机制只�
 - [W-Engines 数据规范](weapon.md)：`weapon` 摘要与详情、成长结构、材料语法、攻击力关系和验收标准。
 - [Bangboos 数据规范](bangboo.md)：`bangboo` 摘要与详情、合法空值、技能内部引用、一致性和验收标准。
 - [Monsters 数据规范](monster.md)：`monster` 摘要与详情、多层 ID、内部战斗单位、合法空值、一致性和验收标准。
+- [End Game 领域数据规范](end-game.md)：三个子域的公共资源边界、Monster 外键、Boss/Simul 共享配置、跨实体 validator 和整体发布要求。
+- [Shiyu 数据规范](shiyu.md)：`shiyu` 时间变体、zone 发现、parent/child 闭合、room 和验收标准。
+- [Simul 数据规范](simul.md)：`simul` 图结构、合法空值、内部引用、共享配置和验收标准。
+- [Boss 数据规范](boss.md)：`boss` 的 legacy `zone`、current `modes`、mode ID、`zone_type` 和验收标准。
 
 ## 实体范围与状态
 
@@ -20,16 +24,16 @@ Nanoka 数据源规范分为共享来源契约和实体契约。共享机制只�
 | Bangboos    | `bangboo`   | 已实现并验证   | [bangboo.md](bangboo.md)     |
 | Drive Discs | `equipment` | 已实现并验证   | [equipment.md](equipment.md) |
 | Monsters    | `monster`   | 已实现并验证   | [monster.md](monster.md)     |
-| End Game    | 见下方子域  | 已完成轻量调研 | 尚未创建                     |
+| End Game    | 见下方子域  | 已完成领域建模 | [end-game.md](end-game.md)   |
 
 End Game 是一个实体域，至少包含以下需要分别调研和建模的子域：
 
-| End Game 子域 | 上游名称 | 状态           | 规范     |
-| ------------- | -------- | -------------- | -------- |
-| Shiyu         | `shiyu`  | 已完成轻量调研 | 尚未创建 |
-| Boss          | `boss`   | 已完成轻量调研 | 尚未创建 |
-| Simul         | `simul`  | 已完成轻量调研 | 尚未创建 |
+| End Game 子域 | 上游名称 | 状态               | 规范                 |
+| ------------- | -------- | ------------------ | -------------------- |
+| Shiyu         | `shiyu`  | 已完成结构建模     | [shiyu.md](shiyu.md) |
+| Simul         | `simul`  | 已完成结构建模     | [simul.md](simul.md) |
+| Boss          | `boss`   | 已完成版本分支建模 | [boss.md](boss.md)   |
 
-当前已实现 Agents、Drive Discs、W-Engines、Bangboos 与 Monsters，并已落地 v2 清单、实体注册表、组合 staging、定向重跑、多个历史实体集合 epoch 和分层验证。阶段四普通实体闭环已完成；End Game 领域和子域尚未完成正式设计、实现或全量验证。轻量调研、共享设计决策及当前实施队列见 [Nanoka 后续实体实施计划](../../plans/nanoka-entities.md)。
+当前已实现 Agents、Drive Discs、W-Engines、Bangboos 与 Monsters，并已落地 v2 清单、实体注册表、组合 staging、定向重跑、多个历史实体集合 epoch 和分层验证。阶段四普通实体闭环和阶段五 End Game 全量调研与领域建模已完成；三个 End Game 子域尚未实现或在线验收。实施证据、共享设计决策及当前队列见 [Nanoka 后续实体实施计划](../../plans/nanoka-entities.md)。
 
-未来实体开始实施前再创建对应规范，不建立没有经过上游结构验证的空文件。End Game 正式建模采用一份领域规范加 Shiyu、Boss、Simul 三份子域规范；领域规范负责共享 Monster 引用和整体一致性边界。路径模板相似不代表字段结构或实体关系相同。
+End Game 正式建模采用一份领域规范加 Shiyu、Simul、Boss 三份子域规范；领域规范负责共享 Monster 引用、Boss/Simul 配置一致性和整体发布边界，子域规范负责各自结构。路径模板相似不代表字段结构或实体关系相同。后续未调研实体仍应在开始实施前再创建对应规范，不建立没有经过上游结构验证的空文件。
