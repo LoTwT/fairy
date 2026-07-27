@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "fairy-source-registry/v1",
+  "sources": {
+    "nanoka-zzz": {
+      "sourceId": "nanoka-zzz",
+      "game": "zzz",
+      "manifestUrl": "https://static.nanoka.cc/manifest.json",
+      "staticDataBaseUrl": "https://static.nanoka.cc/zzz/",
+      "allowlist": {
+        "host": "static.nanoka.cc",
+        "manifestPath": "/manifest.json",
+        "dataPathPrefix": "/zzz/"
+      },
+      "languages": ["zh", "en"],
+      "requestPolicy": {
+        "maxConcurrency": 2,
+        "minimumStartIntervalMs": 250,
+        "timeoutMs": 30000,
+        "maximumAttempts": 3,
+        "retryableStatuses": [429, 502, 503, 504],
+        "initialRetryDelayMs": 250,
+        "maximumRetryDelayMs": 30000,
+        "maximumResponseBytes": 16777216
+      },
+      "userAgent": "fairy-data-source/0.2 (+https://github.com/LoTwT/fairy)",
+      "contentSignals": {
+        "observedAt": "2026-07-26",
+        "search": "yes",
+        "use": "reference",
+        "aiTrain": "no"
+      },
+      "policy": {
+        "localCache": true,
+        "commitRawSnapshots": false,
+        "publishRawSnapshots": false,
+        "redistributionRequiresReview": true
+      }
+    }
+  }
+}
