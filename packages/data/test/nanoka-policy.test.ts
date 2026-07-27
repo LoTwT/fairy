@@ -145,6 +145,12 @@ describe("Nanoka URL policy", () => {
     expect(
       buildEntityDetailUrl(policy, "3.0", "en", "weapon", "12002").href,
     ).toBe("https://static.nanoka.cc/zzz/3.0/en/weapon/12002.json")
+    expect(buildEntityIndexUrl(policy, "3.0", "bangboo").href).toBe(
+      "https://static.nanoka.cc/zzz/3.0/bangboo.json",
+    )
+    expect(
+      buildEntityDetailUrl(policy, "3.0", "zh", "bangboo", "13001").href,
+    ).toBe("https://static.nanoka.cc/zzz/3.0/zh/bangboo/13001.json")
     expect(() =>
       validateAllowedUrl(
         policy,

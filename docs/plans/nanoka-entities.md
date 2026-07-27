@@ -283,6 +283,7 @@ Drive Discs 是首个实体闭环，而不是绕过共享契约的独立局部�
 - 为所选实体执行全量 `zh/en` 详情覆盖验证，并确认可选或缺失资源；
 - Drive Discs 已完成全量上游验证、正式规范、实现、自动化检查和在线组合快照验收，长期契约见 [Drive Discs 数据规范](../specs/nanoka/equipment.md)；
 - W-Engines 已完成三版本全量 `zh/en` 覆盖验证、正式规范、历史 v2 epoch 兼容、实现、自动化检查和在线三实体组合快照验收，长期契约见 [W-Engines 数据规范](../specs/nanoka/weapon.md)；
+- Bangboos 已完成三版本全量 `zh/en` 覆盖验证、合法空值与内部技能引用建模、多个历史 v2 epoch 兼容、实现、自动化检查和在线四实体组合快照验收，长期契约见 [Bangboos 数据规范](../specs/nanoka/bangboo.md)；
 - Monster 内部 `monster_info`、主 `monster_id` 和战斗单位 ID 的全量一致性规则；
 - `monster_list` 外层 key 的业务语义；在确认前只能使用中性名称，不能把它当成 Monster ID；
 - End Game 的 Monster 引用缺失在何种历史快照范围内允许记录 `not-run`；正常新完整发布中，已支持依赖的缺失必须阻止发布；

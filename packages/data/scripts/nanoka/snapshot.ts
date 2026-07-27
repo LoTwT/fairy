@@ -16,7 +16,7 @@ import { dirname, join, relative, sep } from "node:path"
 import {
   entityRegistry,
   getEntityAdapter,
-  historicalV2EntityEpoch,
+  historicalV2EntityEpochs,
   isEntityName,
   normalizeSelectedEntities,
   supportedEntityNames,
@@ -748,9 +748,8 @@ function validateV2ManifestShape(
   requireCurrentEntityEpoch: boolean,
 ): void {
   const enabledEntities = entityRegistry.map(({ name }) => name)
-  const isHistoricalEpoch = sameStringArray(
-    manifest.entities,
-    historicalV2EntityEpoch,
+  const isHistoricalEpoch = historicalV2EntityEpochs.some((epoch) =>
+    sameStringArray(manifest.entities, epoch),
   )
   const isCurrentEpoch = sameStringArray(manifest.entities, enabledEntities)
   if (

@@ -13,6 +13,11 @@ import { tmpdir } from "node:os"
 import { join } from "node:path"
 import { afterEach, describe, expect, it } from "vitest"
 import {
+  discoverBangbooIds,
+  validateBangbooDetail,
+  validateBangbooEntityDetails,
+} from "../scripts/nanoka/bangboo.ts"
+import {
   discoverCharacterIds,
   validateCharacterDetail,
 } from "../scripts/nanoka/characters.ts"
@@ -162,13 +167,86 @@ describe("Nanoka weapon resources", () => {
   })
 })
 
+describe("Nanoka bangboo resources", () => {
+  it("validates regular and confirmed empty structures", () => {
+    const index = bangbooIndex()
+    const detail = bangbooDetail("zh")
+    expect(
+      discoverBangbooIds({
+        "13001": index["13001"],
+        "2": { ...index["13001"], zh: "二", en: "Two" },
+      }),
+    ).toEqual(["2", "13001"])
+    expect(() => discoverBangbooIds({ "013001": index["13001"] })).toThrow(
+      "非法 Bangboo ID",
+    )
+    expect(() =>
+      validateBangbooDetail(detail, "13001", index, "zh"),
+    ).not.toThrow()
+    const emptyIndex = bangbooIndex(true)
+    expect(() =>
+      validateBangbooDetail(
+        bangbooDetail("zh", true),
+        "13001",
+        emptyIndex,
+        "zh",
+      ),
+    ).not.toThrow()
+  })
+
+  it("rejects invalid types and unresolved internal references", () => {
+    const index = bangbooIndex()
+    expect(() =>
+      validateBangbooDetail(
+        {
+          ...bangbooDetail("zh"),
+          stats: { ...bangbooDetail("zh").stats, attack: "1" },
+        },
+        "13001",
+        index,
+        "zh",
+      ),
+    ).toThrow("attack 必须是整数")
+    const detail = bangbooDetail("zh")
+    detail.skill.a.level["1"]!.param = "Skill:9999, Prop:1001"
+    expect(() => validateBangbooDetail(detail, "13001", index, "zh")).toThrow(
+      "技能引用未闭合",
+    )
+  })
+
+  it("compares only cross-language non-localized structures", () => {
+    const zh = bangbooDetail("zh")
+    const en = bangbooDetail("en")
+    expect(() =>
+      validateBangbooEntityDetails({
+        zh: new Map([["13001", zh]]),
+        en: new Map([["13001", en]]),
+      }),
+    ).not.toThrow()
+    en.level["1"]!.extra["201"]!.name = "Localized Name"
+    expect(() =>
+      validateBangbooEntityDetails({
+        zh: new Map([["13001", zh]]),
+        en: new Map([["13001", en]]),
+      }),
+    ).not.toThrow()
+    en.stats.attack = 999
+    expect(() =>
+      validateBangbooEntityDetails({
+        zh: new Map([["13001", zh]]),
+        en: new Map([["13001", en]]),
+      }),
+    ).toThrow("非本地化结构不一致")
+  })
+})
+
 describe("Nanoka snapshots", () => {
   it("writes a complete raw-byte snapshot and verifies it offline", async () => {
     const directory = await temporaryDirectory()
     const result = await createSnapshot(directory, false)
     expect(result.manifest.summary).toMatchObject({
-      entityTypeCount: 3,
-      assetCount: 14,
+      entityTypeCount: 4,
+      assetCount: 17,
       entities: {
         character: {
           recordCount: 2,
@@ -181,6 +259,11 @@ describe("Nanoka snapshots", () => {
           assetCount: 5,
         },
         weapon: {
+          recordCount: 1,
+          detailCountByLanguage: { zh: 1, en: 1 },
+          assetCount: 3,
+        },
+        bangboo: {
           recordCount: 1,
           detailCountByLanguage: { zh: 1, en: 1 },
           assetCount: 3,
@@ -227,13 +310,16 @@ describe("Nanoka snapshots", () => {
       "entity-discovered",
       "entity-details",
       "entity-details",
+      "entity-discovered",
+      "entity-details",
+      "entity-details",
       "verifying",
       "verifying",
       "verifying",
       "verifying",
       "publishing",
     ])
-    expect(detailProgress).toHaveLength(10)
+    expect(detailProgress).toHaveLength(12)
     expect(detailProgress.at(-1)).toMatchObject({ completed: 2, total: 2 })
   })
 
@@ -252,7 +338,7 @@ describe("Nanoka snapshots", () => {
       mode: "selected",
       requestedEntities: ["equipment"],
     })
-    expect(result.carriedForwardAssetCount).toBe(8)
+    expect(result.carriedForwardAssetCount).toBe(11)
     expect(
       result.manifest.assets
         .filter((asset) => asset.result === "carried-forward")
@@ -260,7 +346,7 @@ describe("Nanoka snapshots", () => {
     ).toBe(true)
   })
 
-  it("upgrades a legal two-entity v2 snapshot by fetching selected weapon", async () => {
+  it("upgrades a legal three-entity v2 snapshot by fetching selected bangboo", async () => {
     const directory = await temporaryDirectory()
     await createSnapshot(directory, false)
     const snapshotDirectory = join(directory, "3.0")
@@ -277,25 +363,25 @@ describe("Nanoka snapshots", () => {
       }
       validation: { entities: Record<string, string> }
     }
-    manifest.entities = ["character", "equipment"]
+    manifest.entities = ["character", "equipment", "weapon"]
     manifest.fetchScope = {
       mode: "all",
-      requestedEntities: ["character", "equipment"],
+      requestedEntities: ["character", "equipment", "weapon"],
     }
     manifest.assets = manifest.assets.filter(
-      (asset) => asset.entity !== "weapon",
+      (asset) => asset.entity !== "bangboo",
     )
-    manifest.summary.entityTypeCount = 2
+    manifest.summary.entityTypeCount = 3
     manifest.summary.assetCount = manifest.assets.length
     manifest.summary.totalBytes = manifest.assets.reduce(
       (sum, asset) => sum + asset.bytes,
       0,
     )
-    delete manifest.summary.entities.weapon
-    delete manifest.validation.entities.weapon
-    await rm(join(snapshotDirectory, "weapon.json"))
-    await rm(join(snapshotDirectory, "zh", "weapon"), { recursive: true })
-    await rm(join(snapshotDirectory, "en", "weapon"), { recursive: true })
+    delete manifest.summary.entities.bangboo
+    delete manifest.validation.entities.bangboo
+    await rm(join(snapshotDirectory, "bangboo.json"))
+    await rm(join(snapshotDirectory, "zh", "bangboo"), { recursive: true })
+    await rm(join(snapshotDirectory, "en", "bangboo"), { recursive: true })
     await writeFile(manifestPath, `${JSON.stringify(manifest)}\n`)
 
     expect(
@@ -308,14 +394,49 @@ describe("Nanoka snapshots", () => {
       directory,
       false,
       {},
-      { entities: ["weapon"] },
+      { entities: ["bangboo"] },
     )
     expect(upgraded.manifest.entities).toEqual([
       "character",
       "equipment",
       "weapon",
+      "bangboo",
     ])
-    expect(upgraded.carriedForwardAssetCount).toBe(10)
+    expect(upgraded.carriedForwardAssetCount).toBe(13)
+  })
+
+  it("requires joint weapon and bangboo migration from the two-entity epoch", async () => {
+    const directory = await temporaryDirectory()
+    await createSnapshot(directory, false)
+    await retainSnapshotEntities(directory, ["character", "equipment"])
+    expect(
+      await verifyNanokaSnapshots({
+        policy: await loadSourcePolicy(),
+        rawDirectory: directory,
+      }),
+    ).toEqual([{ snapshotVersion: "3.0", errors: [] }])
+
+    const before = await readFile(join(directory, "3.0", "fetch-manifest.json"))
+    await expect(
+      createSnapshot(directory, false, {}, { entities: ["bangboo"] }),
+    ).rejects.toThrow("缺少未选实体 weapon")
+    expect(
+      await readFile(join(directory, "3.0", "fetch-manifest.json")),
+    ).toEqual(before)
+
+    const migrated = await createSnapshot(
+      directory,
+      false,
+      {},
+      { entities: ["weapon", "bangboo"] },
+    )
+    expect(migrated.manifest.entities).toEqual([
+      "character",
+      "equipment",
+      "weapon",
+      "bangboo",
+    ])
+    expect(migrated.carriedForwardAssetCount).toBe(10)
   })
 
   it("migrates a strict v1 character snapshot only after selected entities succeed", async () => {
@@ -387,6 +508,9 @@ describe("Nanoka snapshots", () => {
     await rm(join(snapshotDirectory, "weapon.json"))
     await rm(join(snapshotDirectory, "zh", "weapon"), { recursive: true })
     await rm(join(snapshotDirectory, "en", "weapon"), { recursive: true })
+    await rm(join(snapshotDirectory, "bangboo.json"))
+    await rm(join(snapshotDirectory, "zh", "bangboo"), { recursive: true })
+    await rm(join(snapshotDirectory, "en", "bangboo"), { recursive: true })
     await writeFile(manifestPath, `${JSON.stringify(v1)}\n`)
 
     expect(
@@ -399,13 +523,14 @@ describe("Nanoka snapshots", () => {
       directory,
       false,
       {},
-      { entities: ["equipment", "weapon"] },
+      { entities: ["equipment", "weapon", "bangboo"] },
     )
     expect(migrated.manifest.schemaVersion).toBe("nanoka-fetch-manifest/v2")
     expect(migrated.manifest.entities).toEqual([
       "character",
       "equipment",
       "weapon",
+      "bangboo",
     ])
   })
 
@@ -413,7 +538,7 @@ describe("Nanoka snapshots", () => {
     const directory = await temporaryDirectory()
     await createSnapshot(directory, false)
     const reused = await createSnapshot(directory, true)
-    expect(reused.reusedAssetCount).toBe(13)
+    expect(reused.reusedAssetCount).toBe(16)
     expect(reused.driftedAssetIds).toEqual([])
 
     const drifted = await createSnapshot(directory, false, {
@@ -1181,6 +1306,48 @@ describe("Nanoka snapshots", () => {
   })
 })
 
+async function retainSnapshotEntities(
+  rawDirectory: string,
+  entities: string[],
+): Promise<void> {
+  const snapshotDirectory = join(rawDirectory, "3.0")
+  const manifestPath = join(snapshotDirectory, "fetch-manifest.json")
+  const manifest = JSON.parse(await readFile(manifestPath, "utf8")) as {
+    entities: string[]
+    fetchScope: { mode: string; requestedEntities: string[] }
+    assets: Array<{ entity?: string; bytes: number }>
+    summary: {
+      entityTypeCount: number
+      assetCount: number
+      totalBytes: number
+      entities: Record<string, unknown>
+    }
+    validation: { entities: Record<string, string> }
+  }
+  const removed = manifest.entities.filter(
+    (entity) => !entities.includes(entity),
+  )
+  manifest.entities = entities
+  manifest.fetchScope = { mode: "all", requestedEntities: entities }
+  manifest.assets = manifest.assets.filter(
+    (asset) => asset.entity === undefined || entities.includes(asset.entity),
+  )
+  manifest.summary.entityTypeCount = entities.length
+  manifest.summary.assetCount = manifest.assets.length
+  manifest.summary.totalBytes = manifest.assets.reduce(
+    (sum, asset) => sum + asset.bytes,
+    0,
+  )
+  for (const entity of removed) {
+    delete manifest.summary.entities[entity]
+    delete manifest.validation.entities[entity]
+    await rm(join(snapshotDirectory, `${entity}.json`))
+    await rm(join(snapshotDirectory, "zh", entity), { recursive: true })
+    await rm(join(snapshotDirectory, "en", entity), { recursive: true })
+  }
+  await writeFile(manifestPath, `${JSON.stringify(manifest)}\n`)
+}
+
 async function createSnapshot(
   rawDirectory: string,
   notModified: boolean,
@@ -1223,6 +1390,13 @@ async function createSnapshot(
     ),
     [`/zzz/${version}/en/weapon/12002.json`]: JSON.stringify(
       weaponDetail("en"),
+    ),
+    [`/zzz/${version}/bangboo.json`]: JSON.stringify(bangbooIndex()),
+    [`/zzz/${version}/zh/bangboo/13001.json`]: JSON.stringify(
+      bangbooDetail("zh"),
+    ),
+    [`/zzz/${version}/en/bangboo/13001.json`]: JSON.stringify(
+      bangbooDetail("en"),
     ),
     ...overrides,
   }
@@ -1268,6 +1442,94 @@ async function createSnapshot(
       ? {}
       : { onProgress: options.onProgress }),
   })
+}
+
+function bangbooIndex(empty = false): Record<string, Record<string, unknown>> {
+  return {
+    "13001": {
+      icon: empty ? "" : "UI/Bangboo/13001.png",
+      codename: "bangboo_13001",
+      en: "Safety",
+      desc: "English description",
+      ko: "세이프티",
+      zh: "阿全",
+      ja: "セーフティ",
+      rank: 4,
+    },
+  }
+}
+
+function bangbooDetail(language: "zh" | "en", empty = false) {
+  const icon = empty ? "" : "UI/Bangboo/13001.png"
+  const stats = {
+    endurance: 1,
+    hp_max: 100,
+    hpupgrade: 10,
+    attack: 20,
+    attack_upgrade: 2,
+    break_stun: 3,
+    element_abnormal_power: 4,
+    defence: 5,
+    def_upgrade: 1,
+    crit: 6,
+    pen_ratio: 7,
+    crit_dmg: 8,
+  }
+  const level = empty
+    ? {}
+    : {
+        "1": {
+          hp_max: 100,
+          attack: 20,
+          defence: 5,
+          level_max: 10,
+          level_min: 1,
+          materials: { "5001": 2 },
+          extra: {
+            "201": {
+              prop: 201,
+              value: 10,
+              name: language === "zh" ? "生命值" : "HP",
+              format: "{0}",
+            },
+          },
+        },
+      }
+  const skillLevel = empty
+    ? {}
+    : {
+        "1": {
+          name: language === "zh" ? "技能" : "Skill",
+          desc: language === "zh" ? "描述" : "Description",
+          param: "Skill:2001, Prop:1001",
+          property: [language === "zh" ? "物理" : "Physical"],
+        },
+      }
+  const skill_prop = empty
+    ? {}
+    : {
+        "2001": {
+          "1001": { main: 100, growth: 10, format: "{0}%" },
+          "1002": { main: 200, growth: 20, format: "{0}" },
+          "element_accumulation_value": 30,
+        },
+      }
+  return {
+    id: 13001,
+    code_name: "different-code-name-is-allowed",
+    name: language === "zh" ? "阿全" : "Safety",
+    desc: language === "en" ? "English description" : "中文描述",
+    rarity: 4,
+    icon,
+    stats,
+    level,
+    skill: {
+      a: { level: structuredClone(skillLevel) },
+      b: { level: structuredClone(skillLevel) },
+      c: { level: structuredClone(skillLevel) },
+    },
+    skill_prop,
+  }
 }
 
 function weaponIndex(): Record<string, Record<string, unknown>> {

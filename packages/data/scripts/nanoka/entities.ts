@@ -1,5 +1,11 @@
 import type { SupportedLanguage } from "./policy.ts"
 import {
+  createBangbooDetailResource,
+  discoverBangbooIds,
+  validateBangbooDetail,
+  validateBangbooEntityDetails,
+} from "./bangboo.ts"
+import {
   createCharacterDetailResource,
   discoverCharacterIds,
   validateCharacterDetail,
@@ -17,10 +23,15 @@ import {
   validateWeaponEntityDetails,
 } from "./weapon.ts"
 
-export const historicalV2EntityEpoch = ["character", "equipment"] as const
+export const historicalV2EntityEpochs = [
+  ["character", "equipment"],
+  ["character", "equipment", "weapon"],
+] as const
 export const supportedEntityNames = [
-  ...historicalV2EntityEpoch,
+  "character",
+  "equipment",
   "weapon",
+  "bangboo",
 ] as const
 export type EntityName = (typeof supportedEntityNames)[number]
 
@@ -85,6 +96,16 @@ export const entityRegistry: readonly EntityAdapter[] = [
       validateWeaponDetail(value, expectedEntityId, indexValue, language)
     },
     validateEntityDetails: validateWeaponEntityDetails,
+  },
+  {
+    name: "bangboo",
+    displayName: "Bangboos",
+    discoverIds: discoverBangbooIds,
+    createDetailResource: createBangbooDetailResource,
+    validateDetail(value, expectedEntityId, indexValue, language) {
+      validateBangbooDetail(value, expectedEntityId, indexValue, language)
+    },
+    validateEntityDetails: validateBangbooEntityDetails,
   },
 ]
 
