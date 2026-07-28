@@ -2,7 +2,7 @@
 
 Fairy 的版本化游戏数据包。
 
-Nanoka 是当前已登记的数据来源，现已支持 Agents、Drive Discs、W-Engines、Bangboos、Monsters、Shiyu、Simul 和 Boss 的原始多实体快照、条件请求与离线完整性验证。原始数据默认只保存在 ignored 本地缓存中，包的公共导出仍保持为空。
+Nanoka 是当前已登记的数据来源。开发者可以把已支持实体的原始 JSON 抓取到 ignored 本地缓存；缓存不是权威快照，不提供离线完整性验证，也不进入 npm 包。当前公开导出仍保持为空。
 
 ## 约束
 

@@ -22,6 +22,11 @@
         "maximumRetryDelayMs": 30000,
         "maximumResponseBytes": 16777216
       },
+      "fetchLimits": {
+        "maximumRecordsPerEntity": 10000,
+        "maximumAssetsPerRun": 25000,
+        "maximumBytesPerRun": 268435456
+      },
       "userAgent": "fairy-data-source/0.2 (+https://github.com/LoTwT/fairy)",
       "contentSignals": {
         "observedAt": "2026-07-26",
@@ -31,8 +36,8 @@
       },
       "policy": {
         "localCache": true,
-        "commitRawSnapshots": false,
-        "publishRawSnapshots": false,
+        "commitCachedResponses": false,
+        "publishCachedResponses": false,
         "redistributionRequiresReview": true
       }
     }

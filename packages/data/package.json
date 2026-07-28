@@ -32,7 +32,6 @@
     "test:watch": "vitest --passWithNoTests --exclude test/verify-package.test.ts",
     "test:coverage": "vitest run --passWithNoTests --coverage --exclude test/verify-package.test.ts",
     "typecheck": "tsc --noEmit",
-    "verify:nanoka": "node scripts/nanoka-source.ts verify",
     "verify:pack": "vitest run test/verify-package.test.ts"
   },
   "dependencies": {},

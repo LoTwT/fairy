@@ -1,23 +1,6 @@
 import { setTimeout as delay } from "node:timers/promises"
 import type { SourcePolicy } from "./policy.ts"
 
-export interface ExistingAssetValidators {
-  etag: string | null
-  lastModified: string | null
-}
-
-export interface FetchedHttpAsset {
-  status: number
-  result: "fetched" | "not-modified"
-  bytes: Uint8Array | null
-  etag: string | null
-  lastModified: string | null
-  contentType: string | null
-  cacheControl: string | null
-  contentFetchedAt?: string
-  checkedAt: string
-}
-
 export type FetchImplementation = typeof fetch
 
 export class NanokaHttpClient {
@@ -44,20 +27,8 @@ export class NanokaHttpClient {
     this.#now = options.now ?? Date.now
   }
 
-  async fetchAsset(
-    url: URL,
-    validators?: ExistingAssetValidators,
-  ): Promise<FetchedHttpAsset> {
+  async fetchAsset(url: URL): Promise<Uint8Array> {
     const headers = new Headers({ "User-Agent": this.#policy.userAgent })
-    if (validators?.etag !== null && validators?.etag !== undefined) {
-      headers.set("If-None-Match", validators.etag)
-    }
-    if (
-      validators?.lastModified !== null &&
-      validators?.lastModified !== undefined
-    ) {
-      headers.set("If-Modified-Since", validators.lastModified)
-    }
 
     let lastStatus: number | undefined
     let attemptsPerformed = 0
@@ -88,20 +59,6 @@ export class NanokaHttpClient {
         if (response !== undefined) {
           lastStatus = response.status
           redirectLocation = response.headers.get("location")
-          const checkedAt = new Date().toISOString()
-          if (response.status === 304) {
-            await disposeResponseBody(response)
-            return {
-              status: response.status,
-              result: "not-modified",
-              bytes: null,
-              etag: null,
-              lastModified: null,
-              contentType: null,
-              cacheControl: null,
-              checkedAt,
-            }
-          }
           if (response.status >= 200 && response.status < 300) {
             let bytes: Uint8Array | undefined
             try {
@@ -124,16 +81,7 @@ export class NanokaHttpClient {
               if (bytes.byteLength === 0) {
                 throw new Error(`响应体为空：${url.href}`)
               }
-              return {
-                status: response.status,
-                result: "fetched",
-                bytes,
-                etag: response.headers.get("etag"),
-                lastModified: response.headers.get("last-modified"),
-                contentType: response.headers.get("content-type"),
-                cacheControl: response.headers.get("cache-control"),
-                checkedAt,
-              }
+              return bytes
             }
           } else if (response.status >= 300 && response.status < 400) {
             await disposeResponseBody(response)
@@ -222,7 +170,7 @@ export class NanokaHttpClient {
     const seconds = Number(retryAfter)
     const parsedDate = Date.parse(retryAfter)
     const milliseconds = Number.isFinite(seconds)
-      ? seconds * 1000
+      ? Math.max(0, seconds * 1000)
       : Number.isNaN(parsedDate)
         ? configuredMaximum + 1
         : Math.max(0, parsedDate - this.#now())
@@ -253,15 +201,6 @@ async function readResponseBytes(
         `响应体超过大小上限：${url.href}（${declaredBytes} > ${maximumBytes} 字节）`,
       )
     }
-  }
-  if (response.body === undefined) {
-    const bytes = new Uint8Array(await response.arrayBuffer())
-    if (bytes.byteLength > maximumBytes) {
-      throw new ResponseSizeLimitError(
-        `响应体超过大小上限：${url.href}（${bytes.byteLength} > ${maximumBytes} 字节）`,
-      )
-    }
-    return bytes
   }
   if (response.body === null) return new Uint8Array()
 

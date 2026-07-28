@@ -1,13 +1,13 @@
 import { describe, expect, it } from "vitest"
 import {
+  escapeTerminalText,
+  formatCommandFailure,
   formatFetchProgress,
   formatVersionMenu,
   parseArguments,
   parseInteractiveSelection,
 } from "../scripts/nanoka-source.ts"
 import {
-  buildCharacterDetailUrl,
-  buildCharacterIndexUrl,
   buildEntityDetailUrl,
   buildEntityIndexUrl,
   loadSourcePolicy,
@@ -47,11 +47,6 @@ describe("Nanoka version policy", () => {
       entities: [],
       channel: "latest",
     })
-    expect(parseArguments(["verify", "--version", "3.0"])).toEqual({
-      command: "verify",
-      entities: [],
-      version: "3.0",
-    })
     expect(
       parseArguments([
         "fetch",
@@ -67,8 +62,8 @@ describe("Nanoka version policy", () => {
     expect(() =>
       parseArguments(["fetch", "--channel", "live", "--version", "3.0"]),
     ).toThrow("互斥")
-    expect(() => parseArguments(["verify", "--channel", "live"])).toThrow(
-      "verify 不支持",
+    expect(() => parseArguments(["verify", "--version", "3.0"])).toThrow(
+      "命令必须是 fetch",
     )
   })
 
@@ -93,14 +88,12 @@ describe("Nanoka version policy", () => {
       formatFetchProgress({
         stage: "preparing",
         requestedEntities: ["character", "equipment"],
-        carriedEntities: [],
       }),
-    ).toContain("准备")
+    ).toContain("抓取")
     expect(
       formatFetchProgress({
         stage: "entity-discovered",
         entity: "character",
-        displayName: "Agents",
         recordCount: 57,
         detailCount: 114,
       }),
@@ -109,7 +102,6 @@ describe("Nanoka version policy", () => {
       formatFetchProgress({
         stage: "entity-details",
         entity: "character",
-        displayName: "Agents",
         completed: 9,
         total: 114,
       }),
@@ -118,27 +110,39 @@ describe("Nanoka version policy", () => {
       formatFetchProgress({
         stage: "entity-details",
         entity: "character",
-        displayName: "Agents",
         completed: 10,
         total: 114,
       }),
-    ).toBe("Agents 详情进度：10/114")
+    ).toBe("character 详情进度：10/114")
+  })
+
+  it("escapes terminal controls and bidirectional overrides", () => {
+    const escaped = escapeTerminalText(
+      "unsafe\u001B]52;c;payload\u0007\n\u202Etext",
+    )
+    expect(escaped).toBe(
+      "unsafe\\u{001b}]52;c;payload\\u{0007}\\u{000a}\\u{202e}text",
+    )
     expect(
-      formatFetchProgress({ stage: "verifying", layer: "files" }),
-    ).toContain("files")
-    expect(formatFetchProgress({ stage: "publishing" })).toContain("发布")
+      formatCommandFailure(
+        new Error("Location: \u001B]52;c;payload\u0007\nspoofed"),
+      ),
+    ).toBe(
+      "Nanoka 数据源命令失败：Location: \\u{001b}]52;c;payload\\u{0007}\\u{000a}spoofed\n",
+    )
+    expect(escapeTerminalText("x".repeat(5000))).toBe(`${"x".repeat(4096)}…`)
   })
 })
 
 describe("Nanoka URL policy", () => {
   it("accepts only configured manifest, index, and detail URLs", async () => {
     const policy = await loadSourcePolicy()
-    expect(buildCharacterIndexUrl(policy, "3.0").href).toBe(
+    expect(buildEntityIndexUrl(policy, "3.0", "character").href).toBe(
       "https://static.nanoka.cc/zzz/3.0/character.json",
     )
-    expect(buildCharacterDetailUrl(policy, "3.0", "zh", "1011").href).toBe(
-      "https://static.nanoka.cc/zzz/3.0/zh/character/1011.json",
-    )
+    expect(
+      buildEntityDetailUrl(policy, "3.0", "zh", "character", "1011").href,
+    ).toBe("https://static.nanoka.cc/zzz/3.0/zh/character/1011.json")
     expect(buildEntityIndexUrl(policy, "3.0", "weapon").href).toBe(
       "https://static.nanoka.cc/zzz/3.0/weapon.json",
     )
@@ -183,11 +187,11 @@ describe("Nanoka URL policy", () => {
         "data",
       ),
     ).toThrow("URL 路径")
-    expect(() => buildCharacterIndexUrl(policy, "../3.0")).toThrow(
+    expect(() => buildEntityIndexUrl(policy, "../3.0", "character")).toThrow(
       "版本号不安全",
     )
     expect(() =>
-      buildCharacterDetailUrl(policy, "3.0", "ja" as "zh", "1011"),
+      buildEntityDetailUrl(policy, "3.0", "ja" as "zh", "character", "1011"),
     ).toThrow("不支持的语言")
     expect(() =>
       validateAllowedUrl(
@@ -254,5 +258,14 @@ describe("Nanoka URL policy", () => {
         },
       }).zzz.available,
     ).toEqual(["3.0.staging", "3.0.backup", "3.0.lock"])
+    expect(() =>
+      validateManifest({
+        zzz: {
+          live: "v0",
+          latest: "v0",
+          available: Array.from({ length: 1001 }, (_, index) => `v${index}`),
+        },
+      }),
+    ).toThrow("available 超过上限")
   })
 })

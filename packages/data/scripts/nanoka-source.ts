@@ -9,24 +9,57 @@ import {
   type VersionSelection,
 } from "./nanoka/policy.ts"
 import {
-  fetchNanokaSnapshot,
+  fetchNanokaData,
   fetchUpstreamManifest,
-  type SnapshotFetchProgress,
-  verifyNanokaSnapshots,
-} from "./nanoka/snapshot.ts"
+  type FetchProgress,
+} from "./nanoka/fetch.ts"
 
 interface ParsedArguments {
-  command: "fetch" | "verify"
+  command: "fetch"
   channel?: "live" | "latest"
   version?: string
   entities: string[]
 }
 
+export function escapeTerminalText(value: string): string {
+  const maximumInputCodePoints = 4096
+  let escaped = ""
+  let codePointCount = 0
+  for (const character of value) {
+    if (codePointCount === maximumInputCodePoints) {
+      escaped += "…"
+      break
+    }
+    codePointCount += 1
+    const codePoint = character.codePointAt(0)
+    escaped +=
+      codePoint === undefined || !isUnsafeTerminalCodePoint(codePoint)
+        ? character
+        : `\\u{${codePoint.toString(16).padStart(4, "0")}}`
+  }
+  return escaped
+}
+
+function isUnsafeTerminalCodePoint(codePoint: number): boolean {
+  return (
+    codePoint <= 0x1f ||
+    (codePoint >= 0x7f && codePoint <= 0x9f) ||
+    codePoint === 0x61c ||
+    codePoint === 0x200e ||
+    codePoint === 0x200f ||
+    (codePoint >= 0x2028 && codePoint <= 0x202e) ||
+    (codePoint >= 0x2066 && codePoint <= 0x2069)
+  )
+}
+
+export function formatCommandFailure(error: unknown): string {
+  const message = error instanceof Error ? error.message : String(error)
+  return `Nanoka 数据源命令失败：${escapeTerminalText(message)}\n`
+}
+
 export function parseArguments(arguments_: string[]): ParsedArguments {
   const command = arguments_.shift()
-  if (command !== "fetch" && command !== "verify") {
-    throw new Error("命令必须是 fetch 或 verify")
-  }
+  if (command !== "fetch") throw new Error("命令必须是 fetch")
 
   let channel: "live" | "latest" | undefined
   let version: string | undefined
@@ -59,11 +92,6 @@ export function parseArguments(arguments_: string[]): ParsedArguments {
   if (channel !== undefined && version !== undefined) {
     throw new Error("--channel 和 --version 互斥")
   }
-  if (command === "verify" && channel !== undefined) {
-    throw new Error("verify 不支持 --channel")
-  }
-  if (command === "verify" && entities.length > 0)
-    throw new Error("verify 不支持 --entity")
   return {
     command,
     entities,
@@ -125,22 +153,18 @@ export async function chooseVersionInteractively(
 }
 
 export function formatFetchProgress(
-  progress: SnapshotFetchProgress,
+  progress: FetchProgress,
 ): string | undefined {
   switch (progress.stage) {
     case "preparing":
-      return `正在准备组合快照；更新实体：${progress.requestedEntities.join(", ")}；沿用实体：${progress.carriedEntities.join(", ") || "无"}`
+      return `正在抓取实体：${progress.requestedEntities.join(", ")}`
     case "entity-discovered":
-      return `${progress.displayName}：已发现 ${progress.recordCount} 条记录，准备处理 ${progress.detailCount} 份语言详情…`
+      return `${progress.entity}：已发现 ${progress.recordCount} 条记录，准备处理 ${progress.detailCount} 份语言详情…`
     case "entity-details":
       return progress.completed === progress.total ||
         progress.completed % 10 === 0
-        ? `${progress.displayName} 详情进度：${progress.completed}/${progress.total}`
+        ? `${progress.entity} 详情进度：${progress.completed}/${progress.total}`
         : undefined
-    case "verifying":
-      return `正在执行 ${progress.layer} 分层校验…`
-    case "publishing":
-      return "校验通过，正在发布新快照…"
   }
 }
 
@@ -153,30 +177,13 @@ export async function run(
 ): Promise<void> {
   const parsed = parseArguments([...arguments_])
   const policy = await loadSourcePolicy()
-  if (parsed.command === "verify") {
-    const results = await verifyNanokaSnapshots({
-      policy,
-      ...(parsed.version === undefined ? {} : { version: parsed.version }),
-    })
-    if (results.length === 0) {
-      process.stdout.write("没有本地 Nanoka 快照需要校验。\n")
-      return
-    }
-    const failures = results.flatMap((result) =>
-      result.errors.map((error) => `${result.snapshotVersion}: ${error}`),
-    )
-    if (failures.length > 0) {
-      throw new Error(`离线校验失败：\n${failures.join("\n")}`)
-    }
-    process.stdout.write(
-      `离线校验通过：${results.map((result) => result.snapshotVersion).join(", ")}\n`,
-    )
-    return
-  }
 
   const httpClient = new NanokaHttpClient(policy)
   process.stdout.write("正在获取 Nanoka 版本 manifest…\n")
-  const { response, manifest } = await fetchUpstreamManifest(policy, httpClient)
+  const { bytes: manifestBytes, manifest } = await fetchUpstreamManifest(
+    policy,
+    httpClient,
+  )
   const selection: { version: string; selectedBy: VersionSelection } =
     parsed.channel !== undefined
       ? selectVersion(manifest, { channel: parsed.channel })
@@ -191,35 +198,27 @@ export async function run(
   const { version, selectedBy } = selection
   process.stdout.write(`已选择版本：${version}（${selectedBy}）\n`)
 
-  const result = await fetchNanokaSnapshot({
+  const result = await fetchNanokaData({
     policy,
     httpClient,
-    upstreamManifestResponse: response,
+    upstreamManifestBytes: manifestBytes,
     upstreamManifest: manifest,
     version,
-    selectedBy,
     ...(parsed.entities.length === 0 ? {} : { entities: parsed.entities }),
     onProgress: (progress) => {
       const message = formatFetchProgress(progress)
       if (message !== undefined) process.stdout.write(`${message}\n`)
     },
   })
-  const { summary } = result.manifest
   process.stdout.write(
     [
-      `Nanoka 快照完成：${version}`,
-      ...result.manifest.entities.map(
-        (entity) => `${entity}: ${summary.entities[entity].recordCount} 条记录`,
+      `Nanoka 本地缓存更新完成：${version}`,
+      ...result.entities.map(
+        (entity) => `${entity}: ${result.recordCounts[entity]} 条记录`,
       ),
-      `资源: ${summary.assetCount}`,
-      `字节: ${summary.totalBytes}`,
-      `HTTP 304: ${result.notModifiedAssetCount}`,
-      `沿用资源: ${result.carriedForwardAssetCount}`,
-      `内容漂移: ${result.driftedAssetIds.length}`,
-      ...(result.driftedAssetIds.length === 0
-        ? []
-        : [`漂移资源: ${result.driftedAssetIds.join(", ")}`]),
-      ...result.cleanupWarnings.map((warning) => `清理警告: ${warning}`),
+      `本次资源: ${result.fetchedAssetCount}`,
+      `本次字节: ${result.fetchedBytes}`,
+      `缓存目录: ${result.cacheDirectory}`,
     ].join("\n") + "\n",
   )
 }
@@ -229,8 +228,7 @@ const isMain =
   import.meta.url === pathToFileURL(process.argv[1]).href
 if (isMain) {
   run(process.argv.slice(2)).catch((error: unknown) => {
-    const message = error instanceof Error ? error.message : String(error)
-    process.stderr.write(`Nanoka 数据源命令失败：${message}\n`)
+    process.stderr.write(formatCommandFailure(error))
     process.exitCode = 1
   })
 }

@@ -4,6 +4,17 @@ import { fileURLToPath } from "node:url"
 
 export const supportedLanguages = ["zh", "en"] as const
 export type SupportedLanguage = (typeof supportedLanguages)[number]
+export const supportedEntityNames = [
+  "character",
+  "equipment",
+  "weapon",
+  "bangboo",
+  "monster",
+  "shiyu",
+  "simul",
+  "boss",
+] as const
+export type EntityName = (typeof supportedEntityNames)[number]
 export type VersionSelection = "live" | "latest" | "version" | "interactive"
 
 export interface SourcePolicy {
@@ -27,6 +38,11 @@ export interface SourcePolicy {
     maximumRetryDelayMs: number
     maximumResponseBytes: number
   }
+  fetchLimits: {
+    maximumRecordsPerEntity: number
+    maximumAssetsPerRun: number
+    maximumBytesPerRun: number
+  }
   userAgent: string
 }
 
@@ -43,6 +59,8 @@ interface RegistryDocument {
   sources: Record<string, unknown>
 }
 
+const maximumVersionLength = 128
+const maximumAvailableVersions = 1000
 const versionPattern = /^[A-Za-z0-9_][A-Za-z0-9_.+-]*$/u
 const scriptDirectory = dirname(fileURLToPath(import.meta.url))
 export const packageDirectory = join(scriptDirectory, "..", "..")
@@ -77,6 +95,9 @@ export async function loadSourcePolicy(): Promise<SourcePolicy> {
     !isPositiveInteger(source.requestPolicy.initialRetryDelayMs) ||
     !isPositiveInteger(source.requestPolicy.maximumRetryDelayMs) ||
     !isPositiveInteger(source.requestPolicy.maximumResponseBytes) ||
+    !isPositiveInteger(source.fetchLimits?.maximumRecordsPerEntity) ||
+    !isPositiveInteger(source.fetchLimits.maximumAssetsPerRun) ||
+    !isPositiveInteger(source.fetchLimits.maximumBytesPerRun) ||
     typeof source.userAgent !== "string" ||
     source.userAgent.length === 0
   ) {
@@ -87,10 +108,8 @@ export async function loadSourcePolicy(): Promise<SourcePolicy> {
 }
 
 export function isValidEntityId(value: string): boolean {
-  return /^(0|[1-9]\d*)$/u.test(value)
+  return value.length <= 32 && /^(0|[1-9]\d*)$/u.test(value)
 }
-
-export const isValidCharacterId = isValidEntityId
 
 export function validateManifest(value: unknown): NanokaManifest {
   if (!isPlainObject(value) || !isPlainObject(value.zzz)) {
@@ -108,6 +127,11 @@ export function validateManifest(value: unknown): NanokaManifest {
   }
 
   const versions = available as string[]
+  if (versions.length > maximumAvailableVersions) {
+    throw new Error(
+      `Nanoka manifest 的 available 超过上限 ${maximumAvailableVersions}`,
+    )
+  }
   for (const version of [live, latest, ...versions]) {
     validateVersion(version)
   }
@@ -129,8 +153,8 @@ export function validateManifest(value: unknown): NanokaManifest {
 }
 
 export function validateVersion(version: string): string {
-  if (!versionPattern.test(version)) {
-    throw new Error(`版本号不安全：${version}`)
+  if (version.length > maximumVersionLength || !versionPattern.test(version)) {
+    throw new Error("版本号不安全")
   }
   return version
 }
@@ -165,15 +189,7 @@ export function buildManifestUrl(policy: SourcePolicy): URL {
 export function buildEntityIndexUrl(
   policy: SourcePolicy,
   version: string,
-  entity:
-    | "character"
-    | "equipment"
-    | "weapon"
-    | "bangboo"
-    | "monster"
-    | "shiyu"
-    | "simul"
-    | "boss",
+  entity: EntityName,
 ): URL {
   validateVersion(version)
   return validateAllowedUrl(
@@ -186,33 +202,17 @@ export function buildEntityIndexUrl(
   )
 }
 
-export function buildCharacterIndexUrl(
-  policy: SourcePolicy,
-  version: string,
-): URL {
-  return buildEntityIndexUrl(policy, version, "character")
-}
-
 export function buildEntityDetailUrl(
   policy: SourcePolicy,
   version: string,
   language: SupportedLanguage,
-  entity:
-    | "character"
-    | "equipment"
-    | "weapon"
-    | "bangboo"
-    | "monster"
-    | "shiyu"
-    | "simul"
-    | "boss",
+  entity: EntityName,
   entityId: string,
 ): URL {
   validateVersion(version)
   if (!policy.languages.includes(language))
     throw new Error(`不支持的语言：${language}`)
-  if (!isValidEntityId(entityId))
-    throw new Error(`${entity} ID 无效：${entityId}`)
+  if (!isValidEntityId(entityId)) throw new Error(`${entity} ID 无效`)
   return validateAllowedUrl(
     policy,
     new URL(
@@ -220,21 +220,6 @@ export function buildEntityDetailUrl(
       policy.staticDataBaseUrl,
     ),
     "data",
-  )
-}
-
-export function buildCharacterDetailUrl(
-  policy: SourcePolicy,
-  version: string,
-  language: SupportedLanguage,
-  characterId: string,
-): URL {
-  return buildEntityDetailUrl(
-    policy,
-    version,
-    language,
-    "character",
-    characterId,
   )
 }
 
@@ -279,14 +264,7 @@ function isAllowedDataPath(policy: SourcePolicy, pathname: string): boolean {
       version !== undefined &&
       isValidVersion(version) &&
       file !== undefined &&
-      (file === "character.json" ||
-        file === "equipment.json" ||
-        file === "weapon.json" ||
-        file === "bangboo.json" ||
-        file === "monster.json" ||
-        file === "shiyu.json" ||
-        file === "simul.json" ||
-        file === "boss.json")
+      supportedEntityNames.some((entity) => file === `${entity}.json`)
     )
   }
   if (decodedSegments.length === 4) {
@@ -296,14 +274,7 @@ function isAllowedDataPath(policy: SourcePolicy, pathname: string): boolean {
       isValidVersion(version) &&
       language !== undefined &&
       policy.languages.includes(language as SupportedLanguage) &&
-      (entity === "character" ||
-        entity === "equipment" ||
-        entity === "weapon" ||
-        entity === "bangboo" ||
-        entity === "monster" ||
-        entity === "shiyu" ||
-        entity === "simul" ||
-        entity === "boss") &&
+      supportedEntityNames.includes(entity as EntityName) &&
       file !== undefined &&
       file.endsWith(".json") &&
       isValidEntityId(file.slice(0, -".json".length))
@@ -313,7 +284,7 @@ function isAllowedDataPath(policy: SourcePolicy, pathname: string): boolean {
 }
 
 function isValidVersion(version: string): boolean {
-  return versionPattern.test(version)
+  return version.length <= maximumVersionLength && versionPattern.test(version)
 }
 
 export function decodeUtf8Json(
@@ -350,9 +321,9 @@ export function isPlainObject(
 }
 
 function isPositiveInteger(value: unknown): value is number {
-  return Number.isInteger(value) && Number(value) > 0
+  return Number.isSafeInteger(value) && Number(value) > 0
 }
 
-export function isNonNegativeInteger(value: unknown): value is number {
-  return Number.isInteger(value) && Number(value) >= 0
+function isNonNegativeInteger(value: unknown): value is number {
+  return Number.isSafeInteger(value) && Number(value) >= 0
 }

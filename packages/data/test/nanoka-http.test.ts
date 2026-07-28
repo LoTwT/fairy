@@ -9,8 +9,6 @@ describe("Nanoka HTTP client", () => {
       expect(options?.redirect).toBe("manual")
       const headers = new Headers(options?.headers)
       expect(headers.get("User-Agent")).toBe(policy.userAgent)
-      expect(headers.get("If-None-Match")).toBe('W/"abc"')
-      expect(headers.get("If-Modified-Since")).toBe("yesterday")
       return new Response(new Uint8Array([0, 1, 2]), {
         status: 200,
         headers: {
@@ -23,26 +21,10 @@ describe("Nanoka HTTP client", () => {
       fetchImplementation,
       sleep: async () => {},
     })
-    const response = await client.fetchAsset(
+    const responseBytes = await client.fetchAsset(
       new URL("https://static.nanoka.cc/manifest.json"),
-      { etag: 'W/"abc"', lastModified: "yesterday" },
     )
-    expect(response.result).toBe("fetched")
-    expect(response.bytes).toEqual(new Uint8Array([0, 1, 2]))
-    expect(response.etag).toBe('W/"def"')
-  })
-
-  it("returns 304 without replacing stored metadata", async () => {
-    const policy = await testPolicy()
-    const client = new NanokaHttpClient(policy, {
-      fetchImplementation: async () => new Response(null, { status: 304 }),
-      sleep: async () => {},
-    })
-    expect(
-      await client.fetchAsset(
-        new URL("https://static.nanoka.cc/manifest.json"),
-      ),
-    ).toMatchObject({ result: "not-modified", bytes: null, etag: null })
+    expect(responseBytes).toEqual(new Uint8Array([0, 1, 2]))
   })
 
   it("cancels open error bodies before releasing concurrency slots", async () => {
@@ -92,7 +74,7 @@ describe("Nanoka HTTP client", () => {
     expect(events.filter((event) => event === "request-start")).toHaveLength(1)
     releaseCancellation()
     await expect(first).rejects.toThrow("返回 404")
-    await expect(second).resolves.toMatchObject({ result: "fetched" })
+    await expect(second).resolves.toEqual(new TextEncoder().encode("{}"))
     expect(events).toEqual([
       "request-start",
       "cancel-start",
@@ -280,16 +262,20 @@ describe("Nanoka HTTP client", () => {
         fetchImplementation: async (input) => {
           const url = String(input)
           starts.push(url)
-          if (starts.length === 1) {
-            return {
-              status: 200,
-              headers: new Headers(),
-              arrayBuffer: async () => {
-                await firstBodyBarrier
-                return new TextEncoder().encode("first").buffer
-              },
-            } as unknown as Response
-          }
+          if (starts.length === 1)
+            return new Response(
+              new ReadableStream<Uint8Array>(
+                {
+                  async pull(controller) {
+                    await firstBodyBarrier
+                    controller.enqueue(new TextEncoder().encode("first"))
+                    controller.close()
+                  },
+                },
+                { highWaterMark: 0 },
+              ),
+              { status: 200 },
+            )
           return new Response("second", { status: 200 })
         },
         sleep: async () => {},
@@ -314,14 +300,18 @@ describe("Nanoka HTTP client", () => {
   it("retries response-body transport failures after releasing the slot", async () => {
     const policy = await testPolicy()
     const events: string[] = []
-    const brokenBody = {
-      status: 200,
-      headers: new Headers(),
-      arrayBuffer: async () => {
-        events.push("body-failed")
-        throw new Error("socket closed")
-      },
-    } as unknown as Response
+    const brokenBody = new Response(
+      new ReadableStream<Uint8Array>(
+        {
+          pull(controller) {
+            events.push("body-failed")
+            controller.error(new Error("socket closed"))
+          },
+        },
+        { highWaterMark: 0 },
+      ),
+      { status: 200 },
+    )
     const fetchImplementation = vi
       .fn<typeof fetch>()
       .mockImplementationOnce(async () => {
@@ -343,7 +333,7 @@ describe("Nanoka HTTP client", () => {
       await client.fetchAsset(
         new URL("https://static.nanoka.cc/manifest.json"),
       ),
-    ).toMatchObject({ result: "fetched" })
+    ).toEqual(new TextEncoder().encode("{}"))
     expect(fetchImplementation).toHaveBeenCalledTimes(2)
     expect(events).toEqual([
       "first-start",
