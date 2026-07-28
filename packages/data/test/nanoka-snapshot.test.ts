@@ -2300,6 +2300,96 @@ describe("Nanoka snapshots", () => {
     expect(errors).toContain("validation.entities 无效")
   })
 
+  it("rejects semantic End Game tampering after asset metadata is updated", async () => {
+    const mutations: Array<{
+      localPaths: string[]
+      mutate(value: Record<string, any>): void
+      expected: string
+    }> = [
+      {
+        localPaths: ["zh/shiyu/620541.json", "en/shiyu/620541.json"],
+        mutate(value) {
+          value.zone["62054051"].layer_room["62054051"].monster_list[
+            "11114"
+          ].id = 9999
+        },
+        expected: "shiyu-monster-reference/v1",
+      },
+      {
+        localPaths: ["zh/simul/101.json", "en/simul/101.json"],
+        mutate(value) {
+          value.boss_adjust["1"].points = 6
+        },
+        expected: "boss-simul-boss-adjust-consistency/v1",
+      },
+      {
+        localPaths: ["zh/simul/101.json", "en/simul/101.json"],
+        mutate(value) {
+          value.node["10101"].battle["1010801"].layer.layer_buff["4002"].desc =
+            "共享配置漂移"
+        },
+        expected: "boss-simul-buff-consistency/v1",
+      },
+      {
+        localPaths: ["zh/simul/101.json", "en/simul/101.json"],
+        mutate(value) {
+          value.node["10101"].battle["1010801"].selectable_buff["5002"].desc =
+            "共享配置漂移"
+        },
+        expected: "boss-simul-buff-consistency/v1",
+      },
+    ]
+
+    for (const mutation of mutations) {
+      const directory = await temporaryDirectory()
+      await createSnapshot(directory, false)
+      const snapshotDirectory = join(directory, "3.0")
+      const manifestPath = join(snapshotDirectory, "fetch-manifest.json")
+      const manifest = JSON.parse(await readFile(manifestPath, "utf8")) as {
+        assets: Array<{
+          localPath: string
+          bytes: number
+          sha256: string
+        }>
+        summary: {
+          totalBytes: number
+          entities: Record<string, { totalBytes: number }>
+        }
+      }
+      for (const localPath of mutation.localPaths) {
+        const assetPath = join(snapshotDirectory, localPath)
+        const value = JSON.parse(await readFile(assetPath, "utf8"))
+        mutation.mutate(value)
+        const bytes = Buffer.from(JSON.stringify(value))
+        await writeFile(assetPath, bytes)
+
+        const asset = manifest.assets.find(
+          (candidate) => candidate.localPath === localPath,
+        )
+        if (asset === undefined)
+          throw new Error("missing End Game fixture asset")
+        const entity = localPath.split("/")[1]!
+        const byteDelta = bytes.byteLength - asset.bytes
+        asset.bytes = bytes.byteLength
+        asset.sha256 = sha(bytes)
+        manifest.summary.totalBytes += byteDelta
+        manifest.summary.entities[entity]!.totalBytes += byteDelta
+      }
+      await writeFile(manifestPath, `${JSON.stringify(manifest)}\n`)
+
+      const [verification] = await verifyNanokaSnapshots({
+        policy: await loadSourcePolicy(),
+        rawDirectory: directory,
+      })
+      const errors = verification?.errors.join("\n") ?? ""
+      expect(errors).toContain(mutation.expected)
+      for (const localPath of mutation.localPaths) {
+        expect(errors).not.toContain(`${localPath} SHA-256 不匹配`)
+        expect(errors).not.toContain(`${localPath} 字节数不匹配`)
+      }
+    }
+  })
+
   it("rejects non-epoch v2 entity subsets", async () => {
     const directory = await temporaryDirectory()
     await createSnapshot(directory, false)

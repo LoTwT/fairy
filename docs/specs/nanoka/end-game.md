@@ -2,7 +2,7 @@
 
 ## 状态
 
-- 状态：三份子域规范和 adapter 均已实现并完成各自在线验收；阶段七第 9 项 End Game 综合验收尚未完成
+- 状态：已实现并验证；三份子域及 End Game 整体已完成三版本八实体完整快照综合验收
 - 领域实体：Shiyu（`shiyu`）、Simul（`simul`）、Boss（`boss`）
 - 语言：简体中文（`zh`）和英文（`en`）
 - 验证范围：`3.0`、`3.1.5+17516165`、`3.1.12+17625891`
@@ -271,7 +271,17 @@ End Game 实现使用共享 `validation.crossEntityReferences` 结构，不升�
 | `boss-simul-boss-adjust-consistency/v1` |    86 |               92 |                92 |
 | `boss-simul-buff-consistency/v1`        |   112 |              112 |               112 |
 
-三版本离线 verify 通过。自动化测试覆盖关系失败阻止原子发布和 validator 严格重算；完整 End Game 综合验收仍留给阶段七第 9 项。
+三版本离线 verify 通过。自动化测试覆盖关系失败阻止原子发布和 validator 严格重算。
+
+2026-07-28 进一步完成阶段七第 9 项综合验收。三个版本均执行不带 `--entity` 的八实体完整在线抓取，最终 manifest 的 `fetchScope.mode` 为 `all`，`requestedEntities` 按注册表包含全部八个实体；全部实体资源使用条件请求复用，`3.0` 有 1,220 个资源返回 304，两个 `3.1` 版本各有 1,257 个资源返回 304，均无 carried-forward 资源。上游 manifest 在三次运行中被报告为同版本内容漂移，完整 staging 仍经分层验证后原子发布。
+
+| 版本              | 实体记录数（character/equipment/weapon/bangboo/monster/shiyu/simul/boss） | 资源数 |
+| ----------------- | ------------------------------------------------------------------------- | -----: |
+| `3.0`             | `57/28/93/40/288/56/3/41`                                                 |  1,221 |
+| `3.1.5+17516165`  | `58/30/95/42/293/59/3/44`                                                 |  1,257 |
+| `3.1.12+17625891` | `58/30/95/42/293/59/3/44`                                                 |  1,257 |
+
+三个完整快照的五个 validator 计数与前述 validator 表一致，状态全部为 `passed`，`unresolvedReferenceCount` 全部为 0；对全部本地版本执行离线 verify 通过。测试副本还在同步更新资产字节数、SHA-256 和 summary 后，分别篡改 Shiyu Monster ID、Simul `boss_adjust`、相交 `layer_buff` 和 `selectable_buff`，确认离线 verify 由对应跨实体 validator 检出语义漂移，而不是只依赖文件哈希失败。完整范围的历史 epoch、定向重跑、carried-forward 参与验证、关系失败保留旧快照、原子发布和版本锁由自动化测试覆盖；raw cache 仍被 Git 忽略，npm 包仍只包含 `dist`，运行时公共导出仍为空。
 
 ## 13. 已知不确定性
 
@@ -298,9 +308,9 @@ End Game 实现使用共享 `validation.crossEntityReferences` 结构，不升�
 5. End Game 整体一致性与完整版本快照验收
 ```
 
-该顺序已完成前四步。Boss 在第八实体 epoch 启用全部五个共享 validator；下一步是第 5 步 End Game 整体一致性与完整版本快照验收。
+该顺序五步均已完成。Boss 在第八实体 epoch 启用全部五个共享 validator；阶段七第 9 项已完成 End Game 整体一致性与三版本八实体完整快照综合验收。
 
-本领域完成状态将在阶段七第 9 项同时满足以下条件后更新为“已实现并验证”：
+本领域状态为“已实现并验证”，验收证据满足：
 
 1. 三个子域 adapter 和规范均完成各自验收；
 2. 五个跨实体 validator 已登记、执行并可离线重算；
