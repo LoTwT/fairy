@@ -330,12 +330,12 @@ Simul 可以拥有 Boss 中没有的 buff ID。只刷新 Simul 时，可以 carr
 
 Simul 已满足以下验收条件：
 
-1. 正式 adapter、URL allowlist、注册表和六实体历史 epoch 已实现，当前正常发布使用七实体 epoch；
+1. 正式 adapter、URL allowlist、注册表和六实体历史 epoch 已实现，七实体 Simul epoch 已冻结，当前正常发布使用八实体 epoch；
 2. 自动化测试覆盖图结构、合法空值、两个 `layer_room`、story event `next_page` 数组和三类既有引用契约；
 3. `simul-monster-reference/v1` 可在线及离线执行；
-4. Boss/Simul 两个共享配置 validator 按领域实施顺序保留到 Boss 可用时，在计划第 8 项统一启用；
+4. Boss/Simul 两个共享配置 validator 已随 Boss 加入八实体 epoch 时统一启用；
 5. `zh/en` 全量覆盖与实体内部一致性通过；
-6. 定向抓取发布当前完整版本级七实体组合快照；
+6. Simul 加入注册表时，定向抓取发布了当时完整的版本级七实体组合快照；
 7. 实际在线抓取、缓存复用、离线 verify 和失败保护通过；
 8. raw cache、公共 API 和包边界保持不变；
 9. 规范索引和本文状态已更新为实际验证结果。

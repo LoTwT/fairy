@@ -130,7 +130,7 @@ boss-simul-boss-adjust-consistency/v1
 boss-simul-buff-consistency/v1
 ```
 
-前三个 Monster validator 分别从其来源实体进入当前 epoch 时开始登记；两个 Boss/Simul 共享配置 validator 与 Boss 一同从八实体 epoch 开始登记。第 7 项已发布的合法七实体 epoch 只有前两个 Monster validator，不得用八实体要求追溯拒绝或改写历史 manifest。八实体及后续 epoch 中，每个适用 validator 必须遍历来源实体的全部详情和适用结构分支；Monster validator 提取所有 `monster_list.*.id`，并在同版本 Monster 摘要 ID 集合中闭合。错误至少报告来源实体、顶层详情 ID、完整 JSON 路径、`monsterListEntryKey` 和未解析 Monster ID。
+前三个 Monster validator 分别从其来源实体进入当前 epoch 时开始登记；两个 Boss/Simul 共享配置 validator 与 Boss 一同从八实体 epoch 开始登记。已发布的合法七实体 Simul epoch 只有前两个 Monster validator，不得用八实体要求追溯拒绝或改写历史 manifest。八实体及后续 epoch 中，每个适用 validator 必须遍历来源实体的全部详情和适用结构分支；Monster validator 提取所有 `monster_list.*.id`，并在同版本 Monster 摘要 ID 集合中闭合。错误至少报告来源实体、顶层详情 ID、完整 JSON 路径、`monsterListEntryKey` 和未解析 Monster ID。
 
 正常新发布中，来源子域与 Monster 都属于当前支持实体集合时，检查必须为 `passed`；不得以 `not-run` 掩盖缺失引用。
 
@@ -216,7 +216,7 @@ End Game 实现使用共享 `validation.crossEntityReferences` 结构，不升�
 - `failed` 只作为运行时错误，不得进入成功发布的 manifest；
 - 未知、遗漏、重复、顺序错误或实体边界不一致的 validator 记录必须由离线 verify 拒绝。
 
-七实体历史 epoch 冻结为 item 7 实际发布格式，不包含上述五条共享 validator 记录。共享 validator 的引入 epoch 是八实体，不为七实体补写 `not-run` 或 `not-applicable`。
+七实体 Simul epoch 按实际发布格式冻结，不包含上述五条共享 validator 记录。共享 validator 的引入 epoch 是八实体，不为七实体补写 `not-run` 或 `not-applicable`。
 
 ## 11. 领域测试矩阵
 
@@ -273,7 +273,7 @@ End Game 实现使用共享 `validation.crossEntityReferences` 结构，不升�
 
 三版本离线 verify 通过。自动化测试覆盖关系失败阻止原子发布和 validator 严格重算。
 
-2026-07-28 进一步完成阶段七第 9 项综合验收。三个版本均执行不带 `--entity` 的八实体完整在线抓取，最终 manifest 的 `fetchScope.mode` 为 `all`，`requestedEntities` 按注册表包含全部八个实体；全部实体资源使用条件请求复用，`3.0` 有 1,220 个资源返回 304，两个 `3.1` 版本各有 1,257 个资源返回 304，均无 carried-forward 资源。上游 manifest 在三次运行中被报告为同版本内容漂移，完整 staging 仍经分层验证后原子发布。
+2026-07-28 进一步完成三版本八实体综合验收。三个版本均执行不带 `--entity` 的八实体完整在线抓取，最终 manifest 的 `fetchScope.mode` 为 `all`，`requestedEntities` 按注册表包含全部八个实体；全部实体资源使用条件请求复用，`3.0` 有 1,220 个资源返回 304，两个 `3.1` 版本各有 1,257 个资源返回 304，均无 carried-forward 资源。上游 manifest 在三次运行中被报告为同版本内容漂移，完整 staging 仍经分层验证后原子发布。
 
 | 版本              | 实体记录数（character/equipment/weapon/bangboo/monster/shiyu/simul/boss） | 资源数 |
 | ----------------- | ------------------------------------------------------------------------- | -----: |
@@ -308,7 +308,7 @@ End Game 实现使用共享 `validation.crossEntityReferences` 结构，不升�
 5. End Game 整体一致性与完整版本快照验收
 ```
 
-该顺序五步均已完成。Boss 在第八实体 epoch 启用全部五个共享 validator；阶段七第 9 项已完成 End Game 整体一致性与三版本八实体完整快照综合验收。
+该顺序五步均已完成。Boss 在第八实体 epoch 启用全部五个共享 validator；End Game 整体一致性与三版本八实体完整快照综合验收均已完成。
 
 本领域状态为“已实现并验证”，验收证据满足：
 

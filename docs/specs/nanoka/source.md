@@ -4,7 +4,6 @@
 
 - 状态：共享来源基线和多实体 v2 契约已实现并验证
 - 当前实现范围：版本发现与选择、HTTP、条件请求、严格 v1/v2 清单、实体注册表、多实体组合快照、定向实体重跑、分层离线校验、原子发布、版本锁和终端进度
-- 下一实现范围：阶段七第 10 项长期契约收尾与临时计划清理
 - 验证状态：自动化检查和三版本八实体完整在线抓取、离线校验均通过；七实体 epoch 已冻结，当前正常发布使用八实体 epoch；End Game 综合验收已完成
 - 适用包：`@randomplay/data`
 - 数据来源：Nanoka ZZZ 静态数据
@@ -224,7 +223,7 @@ packages/data/raw/
 
 `entities` 是发布后快照实际包含且声明完整的实体集合，必须非空、不重复，并按代码实体注册表的稳定顺序排列。正常新发布的快照必须包含当前实现并启用的全部实体；旧 `v1` 快照在内存中的实体集合视为仅包含 `character`。
 
-随着实体注册表扩展，历史 `v2` 快照可以使用代码中显式冻结登记的历史实体集合 epoch。当前冻结的历史 epoch 为 `character, equipment`、`character, equipment, weapon`、`character, equipment, weapon, bangboo`、`character, equipment, weapon, bangboo, monster`、`character, equipment, weapon, bangboo, monster, shiyu` 和 `character, equipment, weapon, bangboo, monster, shiyu, simul`。历史 epoch 必须是曾由本工具发布的完整实体集合，不得接受当前注册表的任意子集；清单声明、资产集合、summary 和 validation 必须按其引入时的契约严格闭合。七实体 epoch 已由 item 7 冻结，未包含 item 8 才引入的五个共享 validator 记录，不得用八实体要求追溯拒绝或改写。正常新发布必须包含当前八个启用实体，即在七实体 epoch 基础上加入 `boss`。定向新增实体时，可以从包含全部未选实体的合法历史 epoch 构建当前完整 staging，并且只有完整 staging 验证成功后才升级磁盘快照。
+随着实体注册表扩展，历史 `v2` 快照可以使用代码中显式冻结登记的历史实体集合 epoch。当前冻结的历史 epoch 为 `character, equipment`、`character, equipment, weapon`、`character, equipment, weapon, bangboo`、`character, equipment, weapon, bangboo, monster`、`character, equipment, weapon, bangboo, monster, shiyu` 和 `character, equipment, weapon, bangboo, monster, shiyu, simul`。历史 epoch 必须是曾由本工具发布的完整实体集合，不得接受当前注册表的任意子集；清单声明、资产集合、summary 和 validation 必须按其引入时的契约严格闭合。七实体 Simul epoch 按实际发布格式冻结，未包含随 Boss 八实体 epoch 才引入的五个共享 validator 记录，不得用八实体要求追溯拒绝或改写。正常新发布必须包含当前八个启用实体，即在七实体 epoch 基础上加入 `boss`。定向新增实体时，可以从包含全部未选实体的合法历史 epoch 构建当前完整 staging，并且只有完整 staging 验证成功后才升级磁盘快照。
 
 `fetchScope` 记录本轮网络更新范围，而不是降低快照完整度：
 

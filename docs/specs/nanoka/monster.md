@@ -240,7 +240,7 @@ type BattleUnitCurve = {
 
 ## 8. End Game 引用边界
 
-三版本全量样本确认 Shiyu、Boss 和 Simul 的 `monster_list` 嵌套记录都包含可解析到同版本 Monster 摘要的 `id`。后续跨实体 validator 应将该嵌套 `id` 作为 Monster 实体外键。
+三版本全量样本确认 Shiyu、Boss 和 Simul 的 `monster_list` 嵌套记录都包含可解析到同版本 Monster 摘要的 `id`。End Game 领域规范将该嵌套 `id` 定义为 Monster 实体外键，并登记对应的跨实体 validator。
 
 `monster_list` 的外层 key：
 
@@ -249,7 +249,7 @@ type BattleUnitCurve = {
 - 当前也没有足够证据将其正式命名为战斗单位 ID；
 - 在 End Game 正式规范中应继续使用中性名称，例如 `monsterListEntryKey`。
 
-本次 Monsters 闭环只建立可被引用的目标实体，不登记尚未实现来源实体的跨实体 validator。End Game 子域实现时再按照共享来源规范登记同版本引用闭合检查。
+跨实体 validator 的稳定 ID、适用 epoch 和检查规则由 [End Game 领域数据规范](end-game.md) 统一定义。
 
 ## 9. 本地文件与清单
 
@@ -390,13 +390,13 @@ character, equipment, weapon, bangboo, monster
 - 单份详情最大约 247 KiB，现有共享响应大小限制足够；
 - 全部响应都观察到 ETag、Last-Modified、`Content-Type: application/json` 和 `Cache-Control: max-age=120`。
 
-为确认未来引用边界，还只读检查了三版本全部中文 End Game 详情：
+为确认引用边界，还只读检查了三版本全部中文 End Game 详情：
 
 - Shiyu 的 8,441 个 `monster_list` 嵌套记录；
 - Boss 的 393 个嵌套记录；
 - Simul 的 363 个嵌套记录。
 
-全部嵌套 `id` 都可解析到同版本 Monster 摘要，所有外层 key 都不等于嵌套 `id`。这些结果证明后续外键来源，但本次不提前登记尚未实现 End Game 来源实体的 validator。
+全部嵌套 `id` 都可解析到同版本 Monster 摘要，所有外层 key 都不等于嵌套 `id`。这些结果构成 End Game 领域 Monster 外键契约的证据。
 
 这些计数和观测用于说明契约依据，不是实现中的硬编码阈值。
 
@@ -425,6 +425,6 @@ Monsters 实现只有同时满足以下条件才算完成：
 8. 离线 verify 对最终快照通过，并能在测试副本中检测篡改和内部关系错误；
 9. package check 和仓库检查通过；
 10. raw cache、公共 API 和 core 依赖边界保持不变；
-11. 规范索引、包 README 和临时实施计划更新为实际验证后的状态。
+11. 规范索引、包 README 和本文状态更新为实际验证结果。
 
 以上条件均已完成，Monsters 状态更新为“已实现并验证”。
