@@ -18,6 +18,14 @@ import {
   validateBangbooEntityDetails,
 } from "../scripts/nanoka/bangboo.ts"
 import {
+  bossMonsterReferenceValidator,
+  bossSimulBossAdjustConsistencyValidator,
+  bossSimulBuffConsistencyValidator,
+  discoverBossIds,
+  validateBossDetail,
+  validateBossEntityDetails,
+} from "../scripts/nanoka/boss.ts"
+import {
   discoverCharacterIds,
   validateCharacterDetail,
 } from "../scripts/nanoka/characters.ts"
@@ -48,6 +56,7 @@ import {
 } from "../scripts/nanoka/weapon.ts"
 import {
   createCrossEntityValidationRecords,
+  crossEntityValidatorRegistry,
   type CrossEntityValidator,
   type EntityName,
   type EntityValidationData,
@@ -83,6 +92,7 @@ describe("Nanoka cross-entity validators", () => {
     "monster",
     "shiyu",
     "simul",
+    "boss",
   ]
   const validationData = new Map<EntityName, EntityValidationData>(
     currentEpoch.map((entity) => [
@@ -718,13 +728,195 @@ describe("Nanoka simul resources", () => {
   })
 })
 
+describe("Nanoka boss resources", () => {
+  it("validates summary time variants and both structural branches", () => {
+    const base = bossIndex()["690421"]!
+    expect(
+      discoverBossIds({
+        "690421": base,
+        "2": { ...base, zh: "二", en: "Two" },
+      }),
+    ).toEqual(["2", "690421"])
+    expect(() => discoverBossIds({ "0690421": base })).toThrow("非法 Boss ID")
+    for (const times of [
+      {},
+      { begin: "start", end: "end" },
+      { live_begin: "live-start", live_end: "live-end" },
+      {
+        begin: "start",
+        end: "end",
+        live_begin: "live-start",
+        live_end: "live-end",
+      },
+    ])
+      expect(() =>
+        discoverBossIds({ "690421": { ...base, ...times } }),
+      ).not.toThrow()
+
+    expect(() =>
+      validateBossDetail(bossLegacyDetail("zh"), "690421", bossIndex()),
+    ).not.toThrow()
+    expect(() =>
+      validateBossDetail(bossModesDetail("zh"), "690421", bossIndex()),
+    ).not.toThrow()
+
+    const both = { ...bossLegacyDetail("zh"), modes: [] }
+    expect(() => validateBossDetail(both, "690421", bossIndex())).toThrow(
+      "恰好包含 zone 或 modes",
+    )
+    const neither = { ...bossLegacyDetail("zh") }
+    delete (neither as { zone?: unknown }).zone
+    expect(() => validateBossDetail(neither, "690421", bossIndex())).toThrow(
+      "恰好包含 zone 或 modes",
+    )
+  })
+
+  it("preserves mode order and validates uniqueness and same-ID mode", () => {
+    const detail = bossModesDetail("zh")
+    expect(detail.modes[0]!.id).toBe(690422)
+    expect(detail.modes[1]!.id).toBe(690421)
+    expect(detail.zone_type).toBe(1002)
+    expect(detail.modes[1]!.zone_type).toBe(1001)
+    expect(() =>
+      validateBossDetail(detail, "690421", bossIndex()),
+    ).not.toThrow()
+
+    const duplicate = bossModesDetail("zh")
+    duplicate.modes[1]!.id = 690422
+    expect(() => validateBossDetail(duplicate, "690421", bossIndex())).toThrow(
+      "重复 mode ID",
+    )
+    const noSameId = bossModesDetail("zh")
+    noSameId.modes[1]!.id = 690423
+    expect(() => validateBossDetail(noSameId, "690421", bossIndex())).toThrow(
+      "至少一个 mode ID",
+    )
+  })
+
+  it("enforces recursive machine equality and allows only localized text", () => {
+    const zh = bossModesDetail("zh")
+    const en = bossModesDetail("en")
+    expect(() =>
+      validateBossEntityDetails({
+        zh: new Map([["690421", zh]]),
+        en: new Map([["690421", en]]),
+      }),
+    ).not.toThrow()
+    en.modes.reverse()
+    expect(() =>
+      validateBossEntityDetails({
+        zh: new Map([["690421", zh]]),
+        en: new Map([["690421", en]]),
+      }),
+    ).toThrow("机器值不一致")
+    en.modes.reverse()
+    en.modes[0]!.zone["6904221"]!.layer_room["1"]!.monster_list["9001"]!.image =
+      "UI/Changed.png"
+    expect(() =>
+      validateBossEntityDetails({
+        zh: new Map([["690421", zh]]),
+        en: new Map([["690421", en]]),
+      }),
+    ).toThrow("机器字符串不一致")
+  })
+
+  it("validates Monster references and Boss-Simul shared configuration", () => {
+    const data = bossValidationData()
+    expect(bossMonsterReferenceValidator.validate({ entities: data })).toEqual({
+      checkedReferenceCount: 4,
+      unresolvedReferenceCount: 0,
+    })
+    expect(
+      bossSimulBossAdjustConsistencyValidator.validate({ entities: data }),
+    ).toEqual({ checkedReferenceCount: 2, unresolvedReferenceCount: 0 })
+    expect(
+      bossSimulBuffConsistencyValidator.validate({ entities: data }),
+    ).toEqual({ checkedReferenceCount: 4, unresolvedReferenceCount: 0 })
+
+    const brokenMonster = bossModesDetail("en")
+    brokenMonster.modes[0]!.zone["6904221"]!.layer_room["1"]!.monster_list[
+      "9001"
+    ]!.id = 9999
+    data.get("boss")!.detailsByLanguage.en.set("690421", brokenMonster)
+    expect(() =>
+      bossMonsterReferenceValidator.validate({ entities: data }),
+    ).toThrow("monsterListEntryKey=9001")
+
+    for (const invalidId of [0, -1]) {
+      const invalidMonster = bossModesDetail("en")
+      invalidMonster.modes[0]!.zone["6904221"]!.layer_room["1"]!.monster_list[
+        "9001"
+      ]!.id = invalidId
+      data.get("boss")!.detailsByLanguage.en.set("690421", invalidMonster)
+      expect(() =>
+        bossMonsterReferenceValidator.validate({ entities: data }),
+      ).toThrow(`正安全整数 Monster ID，实际为 ${invalidId}`)
+    }
+  })
+
+  it("rejects inconsistent shared adjustments and intersecting buffs", () => {
+    const bossMismatch = bossValidationData()
+    const secondBoss = bossModesDetail("zh")
+    secondBoss.id = 690431
+    secondBoss.boss_adjust["1"]!.points = 6
+    bossMismatch.get("boss")!.ids.push("690431")
+    bossMismatch.get("boss")!.detailsByLanguage.zh.set("690431", secondBoss)
+    expect(() =>
+      bossSimulBossAdjustConsistencyValidator.validate({
+        entities: bossMismatch,
+      }),
+    ).toThrow("Boss zh 详情")
+
+    const buffMismatch = bossValidationData()
+    const mismatchedSimul = buffMismatch
+      .get("simul")!
+      .detailsByLanguage.en.get("101") as ReturnType<typeof simulDetail>
+    mismatchedSimul.node["10101"]!.battle["1010801"]!.layer.layer_buff[
+      "4002"
+    ]!.desc = "drift"
+    expect(() =>
+      bossSimulBuffConsistencyValidator.validate({ entities: buffMismatch }),
+    ).toThrow(
+      "en.layer_buff.4002 不一致：Boss 690421 en.modes[0].zone.6904221.layer_buff.4002 与 Simul 101 en.node.10101.battle.1010801.layer.layer_buff.4002",
+    )
+
+    const internalDuplicate = bossValidationData()
+    const duplicatedBoss = internalDuplicate
+      .get("boss")!
+      .detailsByLanguage.zh.get("690421") as ReturnType<typeof bossModesDetail>
+    duplicatedBoss.modes[1]!.zone["6904211"]!.layer_buff["4002"]!.desc =
+      "内部漂移"
+    expect(() =>
+      bossSimulBuffConsistencyValidator.validate({
+        entities: internalDuplicate,
+      }),
+    ).toThrow(
+      "Boss 690421 zh.modes[1].zone.6904211.layer_buff.4002 的内部重复副本与 Boss 690421 zh.modes[0].zone.6904221.layer_buff.4002 不一致",
+    )
+
+    const extraOnly = bossValidationData()
+    const extraSimul = extraOnly
+      .get("simul")!
+      .detailsByLanguage.zh.get("101") as ReturnType<typeof simulDetail>
+    const selectableBuffs = extraSimul.node["10101"]!.battle["1010801"]!
+      .selectable_buff as Record<string, { title: string; desc: string }>
+    selectableBuffs["9999"] = {
+      title: "仅 Simul",
+      desc: "合法额外配置",
+    }
+    expect(() =>
+      bossSimulBuffConsistencyValidator.validate({ entities: extraOnly }),
+    ).not.toThrow()
+  })
+})
+
 describe("Nanoka snapshots", () => {
   it("writes a complete raw-byte snapshot and verifies it offline", async () => {
     const directory = await temporaryDirectory()
     const result = await createSnapshot(directory, false)
     expect(result.manifest.summary).toMatchObject({
-      entityTypeCount: 7,
-      assetCount: 26,
+      entityTypeCount: 8,
+      assetCount: 29,
       entities: {
         character: {
           recordCount: 2,
@@ -761,6 +953,11 @@ describe("Nanoka snapshots", () => {
           detailCountByLanguage: { zh: 1, en: 1 },
           assetCount: 3,
         },
+        boss: {
+          recordCount: 1,
+          detailCountByLanguage: { zh: 1, en: 1 },
+          assetCount: 3,
+        },
       },
     })
     const rawIndex = await readFile(join(directory, "3.0", "character.json"))
@@ -770,6 +967,20 @@ describe("Nanoka snapshots", () => {
       rawDirectory: directory,
     })
     expect(verification).toEqual([{ snapshotVersion: "3.0", errors: [] }])
+    expect(
+      result.manifest.validation.crossEntityReferences.map(
+        ({ checkId, status }) => ({ checkId, status }),
+      ),
+    ).toEqual([
+      { checkId: "shiyu-monster-reference/v1", status: "passed" },
+      { checkId: "simul-monster-reference/v1", status: "passed" },
+      { checkId: "boss-monster-reference/v1", status: "passed" },
+      {
+        checkId: "boss-simul-boss-adjust-consistency/v1",
+        status: "passed",
+      },
+      { checkId: "boss-simul-buff-consistency/v1", status: "passed" },
+    ])
   })
 
   it("writes and offline-recomputes nonempty cross-entity records", async () => {
@@ -1039,13 +1250,16 @@ describe("Nanoka snapshots", () => {
       "entity-discovered",
       "entity-details",
       "entity-details",
+      "entity-discovered",
+      "entity-details",
+      "entity-details",
       "verifying",
       "verifying",
       "verifying",
       "verifying",
       "publishing",
     ])
-    expect(detailProgress).toHaveLength(18)
+    expect(detailProgress).toHaveLength(20)
     expect(detailProgress.at(-1)).toMatchObject({ completed: 2, total: 2 })
   })
 
@@ -1064,7 +1278,7 @@ describe("Nanoka snapshots", () => {
       mode: "selected",
       requestedEntities: ["equipment"],
     })
-    expect(result.carriedForwardAssetCount).toBe(20)
+    expect(result.carriedForwardAssetCount).toBe(23)
     expect(
       result.manifest.assets
         .filter((asset) => asset.result === "carried-forward")
@@ -1072,7 +1286,7 @@ describe("Nanoka snapshots", () => {
     ).toBe(true)
   })
 
-  it("upgrades a legal six-entity v2 snapshot by fetching only simul", async () => {
+  it("upgrades a legal six-entity v2 snapshot by fetching simul and boss", async () => {
     const directory = await temporaryDirectory()
     await createSnapshot(directory, false)
     await retainSnapshotEntities(directory, [
@@ -1094,7 +1308,7 @@ describe("Nanoka snapshots", () => {
       directory,
       false,
       {},
-      { entities: ["simul"] },
+      { entities: ["simul", "boss"] },
     )
     expect(upgraded.manifest.entities).toEqual([
       "character",
@@ -1104,8 +1318,47 @@ describe("Nanoka snapshots", () => {
       "monster",
       "shiyu",
       "simul",
+      "boss",
     ])
     expect(upgraded.carriedForwardAssetCount).toBe(22)
+  })
+
+  it("upgrades a legal seven-entity v2 snapshot by fetching only boss", async () => {
+    const directory = await temporaryDirectory()
+    await createSnapshot(directory, false)
+    await retainSnapshotEntities(directory, [
+      "character",
+      "equipment",
+      "weapon",
+      "bangboo",
+      "monster",
+      "shiyu",
+      "simul",
+    ])
+
+    expect(
+      await verifyNanokaSnapshots({
+        policy: await loadSourcePolicy(),
+        rawDirectory: directory,
+      }),
+    ).toEqual([{ snapshotVersion: "3.0", errors: [] }])
+    const upgraded = await createSnapshot(
+      directory,
+      false,
+      {},
+      { entities: ["boss"] },
+    )
+    expect(upgraded.manifest.entities).toEqual([
+      "character",
+      "equipment",
+      "weapon",
+      "bangboo",
+      "monster",
+      "shiyu",
+      "simul",
+      "boss",
+    ])
+    expect(upgraded.carriedForwardAssetCount).toBe(25)
   })
 
   it("requires bangboo and monster migration from the three-entity epoch", async () => {
@@ -1135,7 +1388,7 @@ describe("Nanoka snapshots", () => {
       directory,
       false,
       {},
-      { entities: ["bangboo", "monster", "shiyu", "simul"] },
+      { entities: ["bangboo", "monster", "shiyu", "simul", "boss"] },
     )
     expect(upgraded.manifest.entities).toEqual([
       "character",
@@ -1145,6 +1398,7 @@ describe("Nanoka snapshots", () => {
       "monster",
       "shiyu",
       "simul",
+      "boss",
     ])
     expect(upgraded.carriedForwardAssetCount).toBe(13)
   })
@@ -1177,7 +1431,9 @@ describe("Nanoka snapshots", () => {
       directory,
       false,
       {},
-      { entities: ["weapon", "bangboo", "monster", "shiyu", "simul"] },
+      {
+        entities: ["weapon", "bangboo", "monster", "shiyu", "simul", "boss"],
+      },
     )
     expect(migrated.manifest.entities).toEqual([
       "character",
@@ -1187,6 +1443,7 @@ describe("Nanoka snapshots", () => {
       "monster",
       "shiyu",
       "simul",
+      "boss",
     ])
     expect(migrated.carriedForwardAssetCount).toBe(10)
   })
@@ -1272,6 +1529,9 @@ describe("Nanoka snapshots", () => {
     await rm(join(snapshotDirectory, "simul.json"))
     await rm(join(snapshotDirectory, "zh", "simul"), { recursive: true })
     await rm(join(snapshotDirectory, "en", "simul"), { recursive: true })
+    await rm(join(snapshotDirectory, "boss.json"))
+    await rm(join(snapshotDirectory, "zh", "boss"), { recursive: true })
+    await rm(join(snapshotDirectory, "en", "boss"), { recursive: true })
     await writeFile(manifestPath, `${JSON.stringify(v1)}\n`)
 
     expect(
@@ -1292,6 +1552,7 @@ describe("Nanoka snapshots", () => {
           "monster",
           "shiyu",
           "simul",
+          "boss",
         ],
       },
     )
@@ -1304,6 +1565,7 @@ describe("Nanoka snapshots", () => {
       "monster",
       "shiyu",
       "simul",
+      "boss",
     ])
   })
 
@@ -1311,7 +1573,7 @@ describe("Nanoka snapshots", () => {
     const directory = await temporaryDirectory()
     await createSnapshot(directory, false)
     const reused = await createSnapshot(directory, true)
-    expect(reused.reusedAssetCount).toBe(25)
+    expect(reused.reusedAssetCount).toBe(28)
     expect(reused.driftedAssetIds).toEqual([])
 
     const drifted = await createSnapshot(directory, false, {
@@ -2097,7 +2359,11 @@ async function retainSnapshotEntities(
     }
     validation: {
       entities: Record<string, string>
-      crossEntityReferences: Array<{ fromEntity: string; toEntity: string }>
+      crossEntityReferences: Array<{
+        checkId: string
+        fromEntity: string
+        toEntity: string
+      }>
     }
   }
   const removed = manifest.entities.filter(
@@ -2118,7 +2384,14 @@ async function retainSnapshotEntities(
     manifest.validation.crossEntityReferences.filter(
       (record) =>
         entities.includes(record.fromEntity) &&
-        entities.includes(record.toEntity),
+        entities.includes(record.toEntity) &&
+        crossEntityValidatorRegistry.some(
+          (validator) =>
+            validator.checkId === record.checkId &&
+            validator.introducedInEntityEpoch.every((entity) =>
+              entities.includes(entity),
+            ),
+        ),
     )
   for (const entity of removed) {
     delete manifest.summary.entities[entity]
@@ -2194,6 +2467,13 @@ async function createSnapshot(
     [`/zzz/${version}/simul.json`]: JSON.stringify(simulIndex()),
     [`/zzz/${version}/zh/simul/101.json`]: JSON.stringify(simulDetail("zh")),
     [`/zzz/${version}/en/simul/101.json`]: JSON.stringify(simulDetail("en")),
+    [`/zzz/${version}/boss.json`]: JSON.stringify(bossIndex()),
+    [`/zzz/${version}/zh/boss/690421.json`]: JSON.stringify(
+      bossModesDetail("zh"),
+    ),
+    [`/zzz/${version}/en/boss/690421.json`]: JSON.stringify(
+      bossModesDetail("en"),
+    ),
     ...overrides,
   }
   const httpClient = new NanokaHttpClient(
@@ -2368,8 +2648,8 @@ function simulDetail(language: "zh" | "en", empty = false) {
         ? {}
         : {
             "4002": {
-              title: localized("层增益", "Layer Buff"),
-              desc: localized("描述", "Description"),
+              title: localized("共享层增益", "Shared Layer Buff"),
+              desc: localized("共享描述", "Shared description"),
             },
           },
       layer_room: {},
@@ -2382,8 +2662,8 @@ function simulDetail(language: "zh" | "en", empty = false) {
       ? {}
       : {
           "5002": {
-            title: localized("可选增益", "Selectable Buff"),
-            desc: localized("描述", "Description"),
+            title: localized("共享可选增益", "Shared Selectable Buff"),
+            desc: localized("共享描述", "Shared description"),
           },
         },
     layer_room: empty ? {} : { "8101": simulRoom(language) },
@@ -2433,6 +2713,123 @@ function simulDetail(language: "zh" | "en", empty = false) {
       },
     },
   }
+}
+
+function bossIndex(): Record<string, Record<string, unknown>> {
+  return {
+    "690421": {
+      zh: "危局强袭战",
+      en: "Deadly Assault",
+      ja: "危局強襲戦",
+      ko: "위기 강습전",
+      sort: 1,
+      zone_type: 1002,
+      begin: "2026-01-01 04:00:00",
+      end: "2026-01-15 03:59:59",
+    },
+  }
+}
+
+function bossZone(language: "zh" | "en", zoneId: number) {
+  const localized = (zh: string, en: string) => (language === "zh" ? zh : en)
+  return {
+    name: localized(`区域 ${zoneId}`, `Zone ${zoneId}`),
+    stage_num: 1,
+    monster_level: 70,
+    goal_type: 2,
+    s_rank_goal: 100,
+    a_rank_goal: 80,
+    b_rank_goal: 60,
+    layer_buff: {
+      "4002": {
+        title: localized("共享层增益", "Shared Layer Buff"),
+        desc: localized("共享描述", "Shared description"),
+      },
+      "4003": {
+        title: localized("Boss 专属", "Boss Only"),
+        desc: localized("额外描述", "Extra description"),
+      },
+    },
+    selectable_buff: {
+      "5002": {
+        title: localized("共享可选增益", "Shared Selectable Buff"),
+        desc: localized("共享描述", "Shared description"),
+      },
+    },
+    layer_room: { "1": simulRoom(language) },
+  }
+}
+
+function bossLegacyDetail(language: "zh" | "en") {
+  return {
+    id: 690421,
+    name: language === "zh" ? "危局强袭战" : "Deadly Assault",
+    priority: 1,
+    zone_type: 1002,
+    boss_adjust: { "1": { hp: 100, atk: 20, points: 5 } },
+    begin_time: "2026-01-01 04:00:00",
+    end_time: "2026-01-15 03:59:59",
+    zone: { "6904211": bossZone(language, 6904211) },
+  }
+}
+
+function bossModesDetail(language: "zh" | "en") {
+  return {
+    id: 690421,
+    name: language === "zh" ? "危局强袭战" : "Deadly Assault",
+    priority: 1,
+    zone_type: 1002,
+    boss_adjust: { "1": { points: 5, atk: 20, hp: 100 } },
+    begin_time: "2026-01-01 04:00:00",
+    end_time: "2026-01-15 03:59:59",
+    modes: [
+      {
+        id: 690422,
+        zone_type: 1002,
+        zone: { "6904221": bossZone(language, 6904221) },
+      },
+      {
+        id: 690421,
+        zone_type: 1001,
+        zone: { "6904211": bossZone(language, 6904211) },
+      },
+    ],
+  }
+}
+
+function bossValidationData(): Map<EntityName, EntityValidationData> {
+  return new Map([
+    [
+      "boss",
+      {
+        indexValue: bossIndex(),
+        ids: ["690421"],
+        detailsByLanguage: {
+          zh: new Map([["690421", bossModesDetail("zh")]]),
+          en: new Map([["690421", bossModesDetail("en")]]),
+        },
+      },
+    ],
+    [
+      "simul",
+      {
+        indexValue: simulIndex(),
+        ids: ["101"],
+        detailsByLanguage: {
+          zh: new Map([["101", simulDetail("zh")]]),
+          en: new Map([["101", simulDetail("en")]]),
+        },
+      },
+    ],
+    [
+      "monster",
+      {
+        indexValue: monsterIndex(),
+        ids: ["1001"],
+        detailsByLanguage: { zh: new Map(), en: new Map() },
+      },
+    ],
+  ] as Array<[EntityName, EntityValidationData]>)
 }
 
 function monsterIndex(empty = false): Record<string, Record<string, unknown>> {

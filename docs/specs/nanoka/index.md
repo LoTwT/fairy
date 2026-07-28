@@ -6,7 +6,7 @@ Nanoka 数据源规范分为共享来源契约和实体契约。共享机制只�
 
 - [共享来源规范](source.md)：版本选择、HTTP、缓存、v1 Agents 兼容、v2 多实体快照契约、原子发布、版本锁、CLI、包边界和合规要求。
 - [Agents 数据规范](agents.md)：`character` 摘要与详情、Agent ID 发现、zh/en 覆盖关系、测试和验收标准。
-- [Drive Discs 数据规范](equipment.md)：`equipment` 摘要与详情、最低结构、摘要—详情一致性、漂移和验收标准。
+- [Drive Discs 数据规范](equipment.md)：`equipment` 摘要与详情、最低结构、摘要与详情一致性、漂移和验收标准。
 - [W-Engines 数据规范](weapon.md)：`weapon` 摘要与详情、成长结构、材料语法、攻击力关系和验收标准。
 - [Bangboos 数据规范](bangboo.md)：`bangboo` 摘要与详情、合法空值、技能内部引用、一致性和验收标准。
 - [Monsters 数据规范](monster.md)：`monster` 摘要与详情、多层 ID、内部战斗单位、合法空值、一致性和验收标准。
@@ -17,23 +17,23 @@ Nanoka 数据源规范分为共享来源契约和实体契约。共享机制只�
 
 ## 实体范围与状态
 
-| 实体        | 上游名称    | 状态           | 规范                         |
-| ----------- | ----------- | -------------- | ---------------------------- |
-| Agents      | `character` | 已实现并验证   | [agents.md](agents.md)       |
-| W-Engines   | `weapon`    | 已实现并验证   | [weapon.md](weapon.md)       |
-| Bangboos    | `bangboo`   | 已实现并验证   | [bangboo.md](bangboo.md)     |
-| Drive Discs | `equipment` | 已实现并验证   | [equipment.md](equipment.md) |
-| Monsters    | `monster`   | 已实现并验证   | [monster.md](monster.md)     |
-| End Game    | 见下方子域  | 已完成领域建模 | [end-game.md](end-game.md)   |
+| 实体        | 上游名称    | 状态                     | 规范                         |
+| ----------- | ----------- | ------------------------ | ---------------------------- |
+| Agents      | `character` | 已实现并验证             | [agents.md](agents.md)       |
+| W-Engines   | `weapon`    | 已实现并验证             | [weapon.md](weapon.md)       |
+| Bangboos    | `bangboo`   | 已实现并验证             | [bangboo.md](bangboo.md)     |
+| Drive Discs | `equipment` | 已实现并验证             | [equipment.md](equipment.md) |
+| Monsters    | `monster`   | 已实现并验证             | [monster.md](monster.md)     |
+| End Game    | 见下方子域  | 三子域已实现，待综合验收 | [end-game.md](end-game.md)   |
 
 End Game 是一个实体域，至少包含以下需要分别调研和建模的子域：
 
-| End Game 子域 | 上游名称 | 状态               | 规范                 |
-| ------------- | -------- | ------------------ | -------------------- |
-| Shiyu         | `shiyu`  | 已实现并验证       | [shiyu.md](shiyu.md) |
-| Simul         | `simul`  | 已实现并验证       | [simul.md](simul.md) |
-| Boss          | `boss`   | 已完成版本分支建模 | [boss.md](boss.md)   |
+| End Game 子域 | 上游名称 | 状态         | 规范                 |
+| ------------- | -------- | ------------ | -------------------- |
+| Shiyu         | `shiyu`  | 已实现并验证 | [shiyu.md](shiyu.md) |
+| Simul         | `simul`  | 已实现并验证 | [simul.md](simul.md) |
+| Boss          | `boss`   | 已实现并验证 | [boss.md](boss.md)   |
 
-当前已实现并验证 Agents、Drive Discs、W-Engines、Bangboos、Monsters、Shiyu 与 Simul，并已落地 v2 清单、实体注册表、组合 staging、定向重跑、多个历史实体集合 epoch、分层验证及 Shiyu/Simul Monster 外键 validator。六实体 epoch 已冻结，当前正常发布使用七实体 epoch；Boss 尚未实现。阶段四普通实体闭环、阶段五 End Game 全量调研与领域建模及阶段六 Shiyu、Simul 闭环已完成；下一步是 Boss，当前实施队列见 [Nanoka 后续实体实施计划](../../plans/nanoka-entities.md)。
+当前八个实体均已实现并完成各自验收。七实体 epoch 已冻结；当前正常发布使用加入 Boss 的八实体 epoch，五个共享 validator 也从该 epoch 开始进入 manifest，不追溯要求已合法发布的七实体历史记录。阶段六 Boss 闭环已完成，下一步是阶段七第 9 项 End Game 整体引用验证及完整版本快照综合验收，当前实施队列见 [Nanoka 后续实体实施计划](../../plans/nanoka-entities.md)。
 
 End Game 正式建模采用一份领域规范加 Shiyu、Simul、Boss 三份子域规范；领域规范负责共享 Monster 引用、Boss/Simul 配置一致性和整体发布边界，子域规范负责各自结构。路径模板相似不代表字段结构或实体关系相同。后续未调研实体仍应在开始实施前再创建对应规范，不建立没有经过上游结构验证的空文件。

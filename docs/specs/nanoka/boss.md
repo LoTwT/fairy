@@ -2,10 +2,10 @@
 
 ## 状态
 
-- 状态：已完成全量上游调研与版本分支建模，尚未实现
+- 状态：已作为第八个实体实现并验证，legacy `zone` 与 current `modes` 分支均已完成在线及离线验收
 - 实体：Boss
 - 上游名称：`boss`
-- 语言：简体中文（`zh`）和英文（`en`）
+- 详情语言：简体中文（`zh`）和英文（`en`）；摘要必须同时包含 `zh/en/ja/ko` 名称
 - 验证范围：`3.0`、`3.1.5+17516165`、`3.1.12+17625891`
 - 领域契约：[Nanoka End Game 领域数据规范](end-game.md)
 - 共享契约：[Nanoka 共享来源规范](source.md)
@@ -63,14 +63,21 @@ GET https://static.nanoka.cc/zzz/{version}/{language}/boss/{bossId}.json
 
 ## 4. 摘要最低结构与时间字段
 
-摘要记录包含用于发现和一致性检查的本地化名称、时间及类型信息；首次实现必须以真实 fixture 固化准确最低字段和类型。已观察字段包括：
+摘要记录的准确最低结构已由三版本 fixture 和实现固定为：
 
-```text
-begin
-end
-live_begin
-live_end
-zone_type
+```ts
+{
+  zh: string
+  en: string
+  ja: string
+  ko: string
+  sort: integer
+  zone_type: integer
+  begin?: string
+  end?: string
+  live_begin?: string
+  live_end?: string
+}
 ```
 
 契约为：
@@ -90,8 +97,16 @@ zone_type
 ```ts
 {
   id: integer
+  name: string
+  priority: integer
   zone_type: integer
-  boss_adjust: Record<string, unknown>
+  boss_adjust: {
+    [id: string]: {
+      hp: nonNegativeInteger
+      atk: integer
+      points: nonNegativeInteger
+    }
+  }
   begin_time?: string
   end_time?: string
   // 恰好一个结构分支：zone 或 modes
@@ -101,8 +116,9 @@ zone_type
 最低约束：
 
 - `id` 等于摘要 key 和路径 ID；
+- `name` 是本地化文本，`priority` 是机器整数；
 - `zone_type` 是机器值，并在 `zh/en` 间相等；
-- `boss_adjust` 是普通对象；
+- `boss_adjust` 是普通对象，其 key 为正整数 ID，`hp/points` 为非负整数，`atk` 为整数且允许负值；
 - `begin_time/end_time` 同时存在或同时缺失；
 - `zone` 与 `modes` 必须恰好存在一个；
 - 同时存在、同时缺失或出现未经规范确认的第三分支均拒绝。
@@ -184,13 +200,53 @@ detail.modes
 
 ## 9. Zone 身份与 encounter
 
-无论 legacy 还是 modes 分支：
+无论 legacy 还是 modes 分支，zone 最低字段为：
+
+```ts
+{
+  name: string
+  stage_num: integer
+  monster_level: integer
+  goal_type: integer
+  s_rank_goal: integer
+  a_rank_goal: integer
+  b_rank_goal: integer
+  layer_buff: Record<positiveIntegerId, { title: string; desc: string }>
+  selectable_buff: Record<positiveIntegerId, { title: string; desc: string }>
+  layer_room: Record<positiveIntegerId, EncounterRoom>
+}
+```
+
+每个 encounter room 必须包含 `monster_icon: string`、`waves_num: integer`、`monster_weakness` 普通对象和 `monster_list` 普通对象。`monster_weakness` 的 key 为正整数 ID，值为本地化字符串。每条 `monster_list` 记录必须包含正整数 `id`、本地化 `name`、机器字符串 `image`，以及以下准确字段：
+
+```ts
+{
+  element: {
+    physical: integer
+    fire: integer
+    ice: integer
+    electric: integer
+    ether: integer
+    wind: integer
+  }
+  stats: {
+    hp: number
+    attack: number
+    defence: number
+    stun: number
+    attribute_infliction: number
+  }
+}
+```
+
+身份与本地化契约为：
 
 - zone 对象 key 是 canonical zone ID；
 - `stage_num` 不是身份；
 - zone 必须保留所属 mode 边界；
 - 不从顶层 ID、mode ID、数字前缀或 `stage_num` 拼接生成 zone ID；
-- 如果上游没有成员 `id`，实现不得将派生 ID 写成原始字段。
+- 如果上游没有成员 `id`，实现不得将派生 ID 写成原始字段；
+- 只有 `name`、buff `title/desc` 和 `monster_weakness` 值允许跨语言不同；`monster_icon`、Monster `image` 等资产路径是机器字符串，必须跨语言相等。
 
 所有适用 zone/room 中的 `monster_list.*.id` 由：
 
@@ -224,7 +280,7 @@ boss-simul-buff-consistency/v1
 - legacy 分支的 zone key 集合一致；
 - `stage_num`、room key、Monster ID、配置 ID、时间和机器数值一致；
 - 对象 key、容器类型、数组长度和标量 JSON 类型递归一致；
-- 名称、描述、buff 文本、属性标签和 encounter 展示文本允许不同。
+- 名称、buff 标题与描述及弱点文本允许不同；资产路径等其他字符串是机器值，必须相等。
 
 一个语言使用 `zone`、另一个使用 `modes` 必须明确失败。
 
@@ -233,7 +289,7 @@ boss-simul-buff-consistency/v1
 以下情况必须拒绝发布：
 
 - 摘要、详情覆盖或顶层 ID 不闭合；
-- 时间字段只出现成对字段之一，或摘要—详情普通时间不一致；
+- 时间字段只出现成对字段之一，或摘要与详情普通时间不一致；
 - `zone` 与 `modes` 同时存在或同时缺失；
 - legacy `zone` 结构不成立；
 - `modes` 为空、mode ID 重复或 mode 最低结构不成立；
@@ -258,14 +314,14 @@ boss-simul-buff-consistency/v1
 - 顶层值不得覆盖 mode 值；
 - 不同 mode 可拥有不同 zone 数量；
 - zone 只从对象 key 发现；
-- 时间字段变体和摘要—详情一致性；
+- 时间字段变体和摘要与详情一致性；
 - `zh/en` 分支、mode 顺序、zone 和机器字段一致；
 - Monster、Boss 内部配置及 Boss/Simul validator；
 - 定向重跑、历史 epoch 升级、carried-forward 和原子失败保护。
 
-## 14. 上游验证证据
+## 14. 上游与实现验收证据
 
-2026-07-27 完整检查三个版本的 129 条摘要记录和 258 份 `zh/en` 详情：
+2026-07-27 完整检查三个版本的 129 条摘要记录和 258 份 `zh/en` 详情；2026-07-28 完成第八实体实现、定向升级、缓存复用和离线验收：
 
 | 版本              | 顶层详情 | `zone` 详情 | `modes` 详情 | mode 总数 |
 | ----------------- | -------: | ----------: | -----------: | --------: |
@@ -282,6 +338,28 @@ boss-simul-buff-consistency/v1
 - alternate mode 详情请求返回 404；
 - 三版本分别检查 123、135、135 个 Monster 引用，全部解析到同版本 Monster 摘要；
 - 中英文详情的结构分支、mode 和递归 JSON 结构一致。
+
+定向执行 `--entity boss`，从合法七实体快照升级后的结果为：
+
+| 版本              | Boss 记录 | 完整资源 | carried-forward | 首轮 Boss 获取 | 首轮 HTTP 304 |
+| ----------------- | --------: | -------: | --------------: | -------------: | ------------: |
+| `3.0`             |        41 |     1221 |            1137 |             83 |             1 |
+| `3.1.5+17516165`  |        44 |     1257 |            1167 |             89 |             1 |
+| `3.1.12+17625891` |        44 |     1257 |            1167 |             89 |             1 |
+
+再次定向抓取 `3.0` 时，Boss 的 84 个资源全部收到 HTTP 304。三个版本的离线 verify 均通过。
+
+自动化 `pnpm check` 通过，共 76 项测试，并完成包验证。测试覆盖关系失败阻止原子替换、严格离线重算，以及 raw cache、空公共 API 和 npm 包边界不变。
+
+最终跨实体 validator 按稳定顺序执行并全部通过，未解析数均为 0：
+
+| 顺序 | validator                               | `3.0` | `3.1.5+17516165` | `3.1.12+17625891` |
+| ---: | --------------------------------------- | ----: | ---------------: | ----------------: |
+|    1 | `shiyu-monster-reference/v1`            |  5462 |             5710 |              5710 |
+|    2 | `simul-monster-reference/v1`            |   242 |              242 |               242 |
+|    3 | `boss-monster-reference/v1`             |   246 |              270 |               270 |
+|    4 | `boss-simul-boss-adjust-consistency/v1` |    86 |               92 |                92 |
+|    5 | `boss-simul-buff-consistency/v1`        |   112 |              112 |               112 |
 
 历史 Git 中只假设 `detail.zone` 的实现只能作为旧版本证据，不能作为当前 adapter 基础。
 
@@ -303,7 +381,7 @@ boss-simul-buff-consistency/v1
 
 ## 16. 实现验收
 
-Boss 只有同时满足以下条件才算完成：
+Boss 已满足以下验收条件：
 
 1. 正式 adapter、URL allowlist、注册表和历史 epoch 已实现；
 2. 自动化测试覆盖 legacy/current 分支、two-mode、alternate mode 和 `zone_type` 层级；

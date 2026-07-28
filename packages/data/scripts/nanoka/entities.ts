@@ -6,6 +6,15 @@ import {
   validateBangbooEntityDetails,
 } from "./bangboo.ts"
 import {
+  bossMonsterReferenceValidator,
+  bossSimulBossAdjustConsistencyValidator,
+  bossSimulBuffConsistencyValidator,
+  createBossDetailResource,
+  discoverBossIds,
+  validateBossDetail,
+  validateBossEntityDetails,
+} from "./boss.ts"
+import {
   createCharacterDetailResource,
   discoverCharacterIds,
   validateCharacterDetail,
@@ -49,6 +58,17 @@ export const historicalV2EntityEpochs = [
   ["character", "equipment", "weapon", "bangboo"],
   ["character", "equipment", "weapon", "bangboo", "monster"],
   ["character", "equipment", "weapon", "bangboo", "monster", "shiyu"],
+  ["character", "equipment", "weapon", "bangboo", "monster", "shiyu", "simul"],
+  [
+    "character",
+    "equipment",
+    "weapon",
+    "bangboo",
+    "monster",
+    "shiyu",
+    "simul",
+    "boss",
+  ],
 ] as const
 export const supportedEntityNames = [
   "character",
@@ -58,6 +78,7 @@ export const supportedEntityNames = [
   "monster",
   "shiyu",
   "simul",
+  "boss",
 ] as const
 export type EntityName = (typeof supportedEntityNames)[number]
 
@@ -194,11 +215,24 @@ export const entityRegistry: readonly EntityAdapter[] = [
     },
     validateEntityDetails: validateSimulEntityDetails,
   },
+  {
+    name: "boss",
+    displayName: "Deadly Assault",
+    discoverIds: discoverBossIds,
+    createDetailResource: createBossDetailResource,
+    validateDetail(value, expectedEntityId, indexValue) {
+      validateBossDetail(value, expectedEntityId, indexValue)
+    },
+    validateEntityDetails: validateBossEntityDetails,
+  },
 ]
 
 export const crossEntityValidatorRegistry: readonly CrossEntityValidator[] = [
   shiyuMonsterReferenceValidator,
   simulMonsterReferenceValidator,
+  bossMonsterReferenceValidator,
+  bossSimulBossAdjustConsistencyValidator,
+  bossSimulBuffConsistencyValidator,
 ]
 
 export function createCrossEntityValidationRecords(

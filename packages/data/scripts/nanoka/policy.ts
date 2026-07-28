@@ -172,7 +172,8 @@ export function buildEntityIndexUrl(
     | "bangboo"
     | "monster"
     | "shiyu"
-    | "simul",
+    | "simul"
+    | "boss",
 ): URL {
   validateVersion(version)
   return validateAllowedUrl(
@@ -203,7 +204,8 @@ export function buildEntityDetailUrl(
     | "bangboo"
     | "monster"
     | "shiyu"
-    | "simul",
+    | "simul"
+    | "boss",
   entityId: string,
 ): URL {
   validateVersion(version)
@@ -283,7 +285,8 @@ function isAllowedDataPath(policy: SourcePolicy, pathname: string): boolean {
         file === "bangboo.json" ||
         file === "monster.json" ||
         file === "shiyu.json" ||
-        file === "simul.json")
+        file === "simul.json" ||
+        file === "boss.json")
     )
   }
   if (decodedSegments.length === 4) {
@@ -299,7 +302,8 @@ function isAllowedDataPath(policy: SourcePolicy, pathname: string): boolean {
         entity === "bangboo" ||
         entity === "monster" ||
         entity === "shiyu" ||
-        entity === "simul") &&
+        entity === "simul" ||
+        entity === "boss") &&
       file !== undefined &&
       file.endsWith(".json") &&
       isValidEntityId(file.slice(0, -".json".length))

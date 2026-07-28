@@ -95,7 +95,7 @@
 - 当前实现中的 `nanoka-fetch-manifest/v1` 实际要求恰好一个 Character 索引及其 `zh/en` 详情，不能直接登记新实体 asset kind；
 - 原始字节、HTTP 元数据、条件请求、哈希、路径安全、版本锁、staging、失败保护和原子目录交换可继续作为共享基线；
 - 多实体加入同一版本目录后，必须先确定 manifest 表达、单实体重跑、版本级锁和原子发布边界；
-- Monster 和 End Game 需要实体内部及跨实体关系验证，不能只复用 Agents 的摘要—详情覆盖检查。
+- Monster 和 End Game 需要实体内部及跨实体关系验证，不能只复用 Agents 的摘要与详情覆盖检查。
 
 阶段一只确认端点、代表性结构和实施依赖。全量语言覆盖、全部内部引用和所有可选资源仍须在对应实体闭环中验证。
 
@@ -160,7 +160,7 @@ Drive Discs 是首个实体闭环，而不是绕过共享契约的独立局部�
 4. Monsters（monster）
 ```
 
-每个实体都必须执行第 4 节的标准流程，前一个实体完成“规范、实现、在线抓取、离线验证和独立变更单元”闭环后，才能进入下一个实体。阶段四的四个普通实体和阶段五 End Game 领域调研与建模已完成。阶段六第 6 项的跨实体 validator 基础设施与 Shiyu 闭环、第 7 项 Simul 闭环已完成，下一步进入 Boss 闭环。
+每个实体都必须执行第 4 节的标准流程，前一个实体完成“规范、实现、在线抓取、离线验证和独立变更单元”闭环后，才能进入下一个实体。阶段四的四个普通实体、阶段五 End Game 领域调研与建模及阶段六第 6 至第 8 项均已完成。下一步进入阶段七第 9 项综合验收。
 
 ### 阶段五：End Game 领域调研与建模
 
@@ -266,7 +266,7 @@ Drive Discs 是首个实体闭环，而不是绕过共享契约的独立局部�
 阶段六：End Game 子域逐个闭环
   6. 实现跨实体 validator 基础设施并闭环 Shiyu（shiyu）（已完成）
   7. Simul（simul）（已完成）
-  8. Boss（boss）
+  8. Boss（boss）（已完成）
 
 阶段七：全实体综合验证与计划清理
   9. 执行 End Game 整体引用验证及完整版本快照综合验收
@@ -278,7 +278,7 @@ Drive Discs 是首个实体闭环，而不是绕过共享契约的独立局部�
 排序依据：
 
 - Drive Discs 数量少、详情结构最小且暂无明确跨实体引用，适合作为首个实体验证多实体 manifest、布局和离线覆盖机制；
-- W-Engines 与 Agents 的摘要—详情模型最接近，可在基础机制稳定后验证较大的嵌套详情；
+- W-Engines 与 Agents 的摘要和详情模型最接近，可在基础机制稳定后验证较大的嵌套详情；
 - Bangboos 需要确保最低结构不会错误拒绝合法的空等级、空技能参数和空图标；
 - Monsters 数量和详情规模最大，并包含外层实体与内部战斗单位的多层 ID，应在普通机制稳定后独立闭环；
 - Monsters 是三个 End Game 子域共同引用的基础实体，必须先于 End Game 子域；
@@ -309,9 +309,11 @@ Drive Discs 是首个实体闭环，而不是绕过共享契约的独立局部�
 - `validation.crossEntityReferences` 的注册、在线执行和严格离线重算基础设施已实现；`shiyu-monster-reference/v1` 与 `simul-monster-reference/v1` 已完成三版本在线及离线验收；
 - Shiyu 已完成 adapter、自动化测试、三版本在线组合快照、定向升级、缓存复用、Monster 外键及离线篡改检测验收，长期契约见 [Shiyu 数据规范](../specs/nanoka/shiyu.md)；
 - Simul 已完成 adapter、自动化测试、三版本定向在线升级、缓存复用、Monster 外键、图引用及离线篡改检测验收，六实体 epoch 已冻结，当前正常发布使用七实体 epoch，长期契约见 [Simul 数据规范](../specs/nanoka/simul.md)；
-- Boss 尚需按正式规范实现 adapter、自动化测试和在线组合快照验收；Boss/Simul 共享配置 validator 按 Simul 验收标准第 4 项，在 Boss 可用的第 8 项统一启用；
+- Boss 已完成 adapter、legacy `zone` 与 current `modes` 分支、三版本定向升级、缓存复用、五个共享 validator、离线验证和关系失败原子保护验收；七实体 epoch 已冻结，当前正常发布使用八实体 epoch，长期契约见 [Boss 数据规范](../specs/nanoka/boss.md)；
+- 下一步是第 9 项 End Game 整体引用验证及完整版本快照综合验收，不在第 8 项中宣告领域最终完成；
+- 七实体历史 manifest 按 item 7 的已发布格式冻结，不要求补写 item 8 才在八实体 epoch 引入的共享 validator；
 - 各子域加入注册表时继续逐步冻结历史 v2 epoch，并验证定向升级路径；
-- 正常新完整发布中，已支持来源对已支持 Monster 的缺失引用必须阻止发布；合法历史 epoch 的 `not-run`/`not-applicable` 按领域和共享规范记录；
+- 正常新完整发布中，已支持来源对已支持 Monster 的缺失引用必须阻止发布；历史 epoch 只按对应引入时契约验证；
 - Simul 非零 `prev_node` 的目标命名空间尚未证明，当前按 opaque positive ID 保留；
 - Boss `zone_type` 的业务枚举、顶层与 mode 值关系的业务含义尚未证明；
 - 是否存在本次标准资源家族和代表性内部 ID 探测未发现的可选独立端点。

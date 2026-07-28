@@ -2,7 +2,7 @@
 
 ## 状态
 
-- 状态：已完成全量上游调研与领域建模；Shiyu 与 Simul 已实现并完成在线验收，Boss 尚未实现
+- 状态：三份子域规范和 adapter 均已实现并完成各自在线验收；阶段七第 9 项 End Game 综合验收尚未完成
 - 领域实体：Shiyu（`shiyu`）、Simul（`simul`）、Boss（`boss`）
 - 语言：简体中文（`zh`）和英文（`en`）
 - 验证范围：`3.0`、`3.1.5+17516165`、`3.1.12+17625891`
@@ -120,15 +120,17 @@ monster_list: {
 - 同一 Monster 可在多个详情、阶段或房间重复出现；
 - 不要求 encounter 记录与 Monster 详情或其他子域 encounter 记录相等。
 
-应按稳定顺序登记三个 validator：
+应按以下稳定顺序登记五个 validator：
 
 ```text
 shiyu-monster-reference/v1
 simul-monster-reference/v1
 boss-monster-reference/v1
+boss-simul-boss-adjust-consistency/v1
+boss-simul-buff-consistency/v1
 ```
 
-每个 validator 必须遍历来源实体的全部详情和适用结构分支，提取所有 `monster_list.*.id`，并在同版本 Monster 摘要 ID 集合中闭合。错误至少报告来源实体、顶层详情 ID、完整 JSON 路径、`monsterListEntryKey` 和未解析 Monster ID。
+前三个 Monster validator 分别从其来源实体进入当前 epoch 时开始登记；两个 Boss/Simul 共享配置 validator 与 Boss 一同从八实体 epoch 开始登记。第 7 项已发布的合法七实体 epoch 只有前两个 Monster validator，不得用八实体要求追溯拒绝或改写历史 manifest。八实体及后续 epoch 中，每个适用 validator 必须遍历来源实体的全部详情和适用结构分支；Monster validator 提取所有 `monster_list.*.id`，并在同版本 Monster 摘要 ID 集合中闭合。错误至少报告来源实体、顶层详情 ID、完整 JSON 路径、`monsterListEntryKey` 和未解析 Monster ID。
 
 正常新发布中，来源子域与 Monster 都属于当前支持实体集合时，检查必须为 `passed`；不得以 `not-run` 掩盖缺失引用。
 
@@ -178,7 +180,7 @@ boss-simul-buff-consistency/v1
 - 已证明为非本地化的 ID、引用、类型码、计数和数值相等；
 - 可选字段同时存在或同时缺失；
 - 子域规范定义的结构分支一致；
-- 名称、描述、故事、buff 文本、弱点标签和其他本地化文本不要求逐值相等。
+- 只有子域规范明确列出的本地化字符串允许不同；资产路径和其他机器字符串必须相等。
 
 实现不得通过比较完整原始对象错误拒绝合法翻译差异。结构错误应报告可定位的 JSON 路径。
 
@@ -207,16 +209,14 @@ boss-simul-buff-consistency/v1
 
 End Game 实现使用共享 `validation.crossEntityReferences` 结构，不升级 `nanoka-fetch-manifest/v2` schema。
 
-validator 记录遵循以下适用规则：
+八实体 epoch 中 validator 记录遵循以下适用规则：
 
 - 来源与目标实体都存在：执行检查，成功记录 `passed`；
-- 来源实体存在、目标实体不在合法历史 epoch：记录 `not-run`；
-- 来源实体不在该 epoch：记录 `not-applicable`；
-- 当前正常发布中支持的来源依赖当前支持目标时，`not-run` 阻止发布；
+- 当前正常发布中支持的来源依赖当前支持目标时，缺少任一实体或 `not-run` 都阻止发布；
 - `failed` 只作为运行时错误，不得进入成功发布的 manifest；
 - 未知、遗漏、重复、顺序错误或实体边界不一致的 validator 记录必须由离线 verify 拒绝。
 
-Boss/Simul 对称一致性检查统一登记为 `boss → simul`，因此历史 epoch 中没有 Boss 时为 `not-applicable`；Boss 已存在但 Simul 缺失时为 `not-run`。
+七实体历史 epoch 冻结为 item 7 实际发布格式，不包含上述五条共享 validator 记录。共享 validator 的引入 epoch 是八实体，不为七实体补写 `not-run` 或 `not-applicable`。
 
 ## 11. 领域测试矩阵
 
@@ -230,7 +230,7 @@ Boss/Simul 对称一致性检查统一登记为 `boss → simul`，因此历史 
 - Boss/Simul buff ID 交集一致而全集可不同；
 - validator 稳定顺序、manifest 解析、未知检查拒绝和状态语义；
 - 当前发布中 applicable validator 不得为 `not-run`；
-- 合法历史 epoch 的 `not-run`/`not-applicable` 记录；
+- 七实体历史 epoch 不含共享 validator 记录，八实体及后续 epoch 严格要求五条记录；
 - 定向重跑只访问所选实体，最终仍验证并发布完整快照；
 - carried-forward 目标参与关系验证；
 - 任一关系错误阻止原子发布并保留旧快照；
@@ -261,6 +261,18 @@ Boss/Simul 对称一致性检查统一登记为 `boss → simul`，因此历史 
 
 上述计数用于说明契约依据，不是实现中的固定阈值。
 
+2026-07-28 完成 Boss 作为第八实体的定向升级验收。三版本最终 manifest 中，五个 validator 均按第 6 节顺序记录为 `passed`，`unresolvedReferenceCount` 均为 0：
+
+| validator                               | `3.0` | `3.1.5+17516165` | `3.1.12+17625891` |
+| --------------------------------------- | ----: | ---------------: | ----------------: |
+| `shiyu-monster-reference/v1`            |  5462 |             5710 |              5710 |
+| `simul-monster-reference/v1`            |   242 |              242 |               242 |
+| `boss-monster-reference/v1`             |   246 |              270 |               270 |
+| `boss-simul-boss-adjust-consistency/v1` |    86 |               92 |                92 |
+| `boss-simul-buff-consistency/v1`        |   112 |              112 |               112 |
+
+三版本离线 verify 通过。自动化测试覆盖关系失败阻止原子发布和 validator 严格重算；完整 End Game 综合验收仍留给阶段七第 9 项。
+
 ## 13. 已知不确定性
 
 尚未证明：
@@ -286,9 +298,9 @@ Boss/Simul 对称一致性检查统一登记为 `boss → simul`，因此历史 
 5. End Game 整体一致性与完整版本快照验收
 ```
 
-该顺序允许 Shiyu 首先验证 Monster 外键，Simul 再验证独立图结构，Boss 最后处理 `zone`/`modes` 多形态并启用 Boss/Simul 共享配置检查。
+该顺序已完成前四步。Boss 在第八实体 epoch 启用全部五个共享 validator；下一步是第 5 步 End Game 整体一致性与完整版本快照验收。
 
-本领域只有在以下条件全部满足后才能更新为“已实现并验证”：
+本领域完成状态将在阶段七第 9 项同时满足以下条件后更新为“已实现并验证”：
 
 1. 三个子域 adapter 和规范均完成各自验收；
 2. 五个跨实体 validator 已登记、执行并可离线重算；
