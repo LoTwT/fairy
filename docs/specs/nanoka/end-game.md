@@ -130,7 +130,7 @@ boss-simul-boss-adjust-consistency/v1
 boss-simul-buff-consistency/v1
 ```
 
-前三个 Monster validator 分别从其来源实体进入当前 epoch 时开始登记；两个 Boss/Simul 共享配置 validator 与 Boss 一同从八实体 epoch 开始登记。已发布的合法七实体 Simul epoch 只有前两个 Monster validator，不得用八实体要求追溯拒绝或改写历史 manifest。八实体及后续 epoch 中，每个适用 validator 必须遍历来源实体的全部详情和适用结构分支；Monster validator 提取所有 `monster_list.*.id`，并在同版本 Monster 摘要 ID 集合中闭合。错误至少报告来源实体、顶层详情 ID、完整 JSON 路径、`monsterListEntryKey` 和未解析 Monster ID。
+三个 Monster validator 分别在其来源实体加入注册表时开始登记：Shiyu 对应六实体 epoch，Simul 对应七实体 epoch，Boss 对应八实体 epoch。两个 Boss/Simul 共享配置 validator 与 Boss 一同从八实体 epoch 开始登记。因此六实体 epoch 有一条记录，七实体 epoch 有两条记录，八实体及后续 epoch 有五条记录。不得用后续 epoch 的要求追溯拒绝或改写合法历史 manifest。每个适用 validator 必须遍历来源实体的全部详情和适用结构分支；Monster validator 提取所有 `monster_list.*.id`，并在同版本 Monster 摘要 ID 集合中闭合。错误至少报告来源实体、顶层详情 ID、完整 JSON 路径、`monsterListEntryKey` 和未解析 Monster ID。
 
 正常新发布中，来源子域与 Monster 都属于当前支持实体集合时，检查必须为 `passed`；不得以 `not-run` 掩盖缺失引用。
 
@@ -216,7 +216,7 @@ End Game 实现使用共享 `validation.crossEntityReferences` 结构，不升�
 - `failed` 只作为运行时错误，不得进入成功发布的 manifest；
 - 未知、遗漏、重复、顺序错误或实体边界不一致的 validator 记录必须由离线 verify 拒绝。
 
-七实体 Simul epoch 按实际发布格式冻结，不包含上述五条共享 validator 记录。共享 validator 的引入 epoch 是八实体，不为七实体补写 `not-run` 或 `not-applicable`。
+七实体 Simul epoch 按实际发布格式冻结，包含 Shiyu 和 Simul 的两条 Monster validator 记录，不包含八实体 Boss epoch 才引入的 Boss Monster validator 和两条 Boss/Simul 共享配置 validator。不为七实体 epoch 补写后三条记录的 `not-run` 或 `not-applicable`。
 
 ## 11. 领域测试矩阵
 
@@ -230,7 +230,7 @@ End Game 实现使用共享 `validation.crossEntityReferences` 结构，不升�
 - Boss/Simul buff ID 交集一致而全集可不同；
 - validator 稳定顺序、manifest 解析、未知检查拒绝和状态语义；
 - 当前发布中 applicable validator 不得为 `not-run`；
-- 七实体历史 epoch 不含共享 validator 记录，八实体及后续 epoch 严格要求五条记录；
+- 六实体历史 epoch 严格要求一条记录，七实体历史 epoch 严格要求两条记录，八实体及后续 epoch 严格要求五条记录；
 - 定向重跑只访问所选实体，最终仍验证并发布完整快照；
 - carried-forward 目标参与关系验证；
 - 任一关系错误阻止原子发布并保留旧快照；

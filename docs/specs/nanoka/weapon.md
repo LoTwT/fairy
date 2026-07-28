@@ -272,7 +272,7 @@ W-Engines 使用 `nanoka-fetch-manifest/v2` 的通用实体资产：
 - `summary.entities.weapon.assetCount`；
 - `summary.entities.weapon.totalBytes`。
 
-W-Engines 加入注册表时，已有 Character + Equipment 的合法历史 v2 快照按共享规范中显式冻结的历史实体集合 epoch 继续严格可读。新发布快照必须包含当前注册表中的完整实体集合；`--entity weapon` 可以从合法历史 epoch 构建完整 staging，成功后升级为当前集合，失败时旧快照保持不变。
+W-Engines 加入注册表时，已有 Character + Equipment 的合法历史 v2 快照按共享规范中显式冻结的历史实体集合 epoch 继续严格可读。该阶段的新发布快照必须包含 Character、Equipment 和 Weapon；`--entity weapon` 可以从合法两实体历史 epoch 构建三实体完整 staging，成功后升级磁盘快照，失败时旧快照保持不变。当前注册表和定向重跑规则由共享来源规范维护。
 
 ## 8. 漂移与拒绝条件
 
@@ -337,10 +337,10 @@ W-Engines 加入注册表时，已有 Character + Equipment 的合法历史 v2 �
 
 ### 10.3 多实体快照
 
-- 当前全量抓取生成 `character`、`equipment`、`weapon` 的稳定注册顺序；
+- Weapon 引入阶段的全量抓取生成 `character`、`equipment`、`weapon` 的稳定注册顺序；
 - 合法 Character + Equipment 历史 v2 epoch 继续通过只读验证；
 - 任意其他实体子集仍被拒绝；
-- `--entity weapon` 从合法历史 epoch 升级为当前完整快照；
+- `--entity weapon` 从合法两实体历史 epoch 升级为当时的三实体完整快照；
 - 升级时 Character 和 Equipment 不发 HTTP 请求，只复制重新验证通过的资产并登记为 `carried-forward`；
 - 缺失、篡改、未登记文件或未知实体阻止升级；
 - Weapon 定向重跑整体重建其索引和详情，不保留已从新索引删除的旧详情；
@@ -370,15 +370,15 @@ W-Engines 加入注册表时，已有 Character + Equipment 的合法历史 v2 �
 
 - 全部响应可解析为 JSON；
 - 全部详情 ID 覆盖与摘要一致，无缺失或额外 ID；
-- 全部记录满足本文定义的最低字段类型、固定 key 集合、材料语法和摘要—详情关系；
+- 全部记录满足本文定义的最低字段类型、固定 key 集合、材料语法和摘要与详情关系；
 - 全部响应都观察到 ETag 和 Last-Modified；
-- 每个版本的 W-Engines 摘要与中英文详情合计约 1.53–1.57 MiB；
+- 每个版本的 W-Engines 摘要与中英文详情合计约 1.53 至 1.57 MiB；
 - 最大单份详情约 10.7 KiB，现有共享响应大小限制足够；
 - 未发现 Character 或 Equipment 引用；材料 ID 不能在当前已支持实体中闭合。
 
 这些计数和观测用于说明契约依据，不是实现中的硬编码阈值。
 
-随后使用本地 `3.0` Character + Equipment 历史 v2 快照完成了 `--entity weapon` 到当前三实体 v2 快照的原子迁移，并验证了：
+随后使用本地 `3.0` Character + Equipment 历史 v2 快照完成了 `--entity weapon` 到三实体 v2 快照的原子迁移，并验证了：
 
 - 最终快照包含 57 条 Character、28 条 Equipment 和 93 条 Weapon；
 - Weapon 的 93 份中文详情和 93 份英文详情完整；
@@ -397,7 +397,7 @@ W-Engines 实现只有同时满足以下条件才算完成：
 2. Weapon adapter、路径政策、历史 v2 epoch 和当前注册表顺序已实现；
 3. 自动化测试覆盖最低结构、关系验证、历史 epoch 升级和失败保护；
 4. 合法两实体历史 v2 快照仍可只读验证，任意子集仍被拒绝；
-5. 对实际快照执行 `--entity weapon` 后发布当前完整多实体组合快照；
+5. 对 Weapon 引入阶段的实际快照执行 `--entity weapon` 后发布三实体完整组合快照；
 6. 定向迁移中未选实体没有发起 HTTP 请求，且其资产按共享规则 carried-forward；
 7. 重复抓取验证条件请求、304 复用、漂移报告和原子失败保护；
 8. 离线 verify 对最终快照通过，并能在测试副本中检测篡改和关系错误；

@@ -280,13 +280,13 @@ character, equipment
 character, equipment, weapon
 ```
 
-新发布快照必须包含当前完整集合：
+Bangboo 引入阶段的新发布快照必须包含当时的完整集合：
 
 ```text
 character, equipment, weapon, bangboo
 ```
 
-`--entity bangboo` 可以从合法三实体历史 epoch 构建当前完整 staging。两实体历史 epoch 缺少未选的 Weapon，只有同时请求 `weapon` 和 `bangboo` 才能升级；任意未登记子集仍必须拒绝。
+在该阶段，`--entity bangboo` 可以从合法三实体历史 epoch 构建四实体完整 staging。两实体历史 epoch 缺少未选的 Weapon，只有同时请求 `weapon` 和 `bangboo` 才能升级；任意未登记子集仍必须拒绝。当前注册表和定向重跑规则由共享来源规范维护。
 
 ## 9. 漂移与拒绝条件
 
@@ -297,7 +297,7 @@ character, equipment, weapon, bangboo
 - 摘要为空或最低字段结构不成立；
 - ID、详情覆盖或路径不闭合；
 - 详情最低结构或字段类型不成立；
-- 已确认的摘要—详情或跨语言非本地化关系不成立；
+- 已确认的摘要与详情关系或跨语言非本地化关系不成立；
 - 已识别的文件内部技能引用不能闭合；
 - 合法空值被替换为缺失、`null` 或错误类型；
 - 组合快照中的任一其他实体或适用 validator 验证失败。
@@ -349,10 +349,10 @@ character, equipment, weapon, bangboo
 
 ### 11.3 多实体快照
 
-- 当前全量抓取生成四实体稳定注册顺序；
+- Bangboo 引入阶段的全量抓取生成四实体稳定注册顺序；
 - 合法两实体和三实体历史 v2 epoch 继续通过只读验证；
 - 任意其他实体子集仍被拒绝；
-- `--entity bangboo` 从合法三实体 epoch 升级为当前完整快照；
+- `--entity bangboo` 从合法三实体 epoch 升级为当时的四实体完整快照；
 - 两实体 epoch 仅请求 Bangboo 时拒绝，联合请求 Weapon 与 Bangboo 时允许升级；
 - 升级时未选实体不发 HTTP 请求，只复制重新验证通过的资产；
 - Bangboo 定向重跑整体重建其索引和详情；
@@ -382,7 +382,7 @@ character, equipment, weapon, bangboo
 
 - 全部必需响应为 HTTP 200 且可解析为 JSON；
 - 全部详情 ID 覆盖与摘要一致，无缺失或额外 ID；
-- 全部记录满足本文定义的最低字段类型和摘要—详情关系；
+- 全部记录满足本文定义的最低字段类型和摘要与详情关系；
 - 已确认合法空值的精确 JSON 形态均为空字符串或空对象，没有观察到对应字段缺失、`null` 或空数组；
 - 在最新版本中文详情中检查了 1,500 次明确的 `Skill/Prop` 内部引用，全部在同一详情闭合；
 - 全部响应都观察到 ETag、Last-Modified 和 `Cache-Control: max-age=120`；
@@ -391,7 +391,7 @@ character, equipment, weapon, bangboo
 
 这些计数和观测用于说明契约依据，不是实现中的硬编码阈值。
 
-随后使用本地 `3.0` Character + Equipment + Weapon 历史 v2 快照完成了 `--entity bangboo` 到当前四实体 v2 快照的原子迁移，并验证了：
+随后使用本地 `3.0` Character + Equipment + Weapon 历史 v2 快照完成了 `--entity bangboo` 到四实体 v2 快照的原子迁移，并验证了：
 
 - 最终快照包含 57 条 Character、28 条 Equipment、93 条 Weapon 和 40 条 Bangboo；
 - Bangboo 的 40 份中文详情和 40 份英文详情完整；
@@ -410,7 +410,7 @@ Bangboos 实现只有同时满足以下条件才算完成：
 2. Bangboo adapter、路径政策、多个历史 v2 epoch 和当前注册表顺序已实现；
 3. 自动化测试覆盖最低结构、空值、内部引用、历史 epoch 升级和失败保护；
 4. 合法两实体和三实体历史 v2 快照仍可只读验证，任意子集仍被拒绝；
-5. 对实际三实体快照执行 `--entity bangboo` 后发布当前完整四实体组合快照；
+5. 对 Bangboo 引入阶段的实际三实体快照执行 `--entity bangboo` 后发布四实体完整组合快照；
 6. 定向迁移中未选实体没有发起 HTTP 请求，且其资产按共享规则 carried-forward；
 7. 重复抓取验证条件请求、304 复用、漂移报告和原子失败保护；
 8. 离线 verify 对最终快照通过，并能在测试副本中检测篡改和关系错误；

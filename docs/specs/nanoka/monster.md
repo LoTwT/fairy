@@ -20,9 +20,9 @@ Monsters 实现必须：
 3. 获取每个 Monster 的中文和英文详情；
 4. 保留摘要与详情的远端原始字节和所有未识别字段；
 5. 明确区分 Monster 实体 ID、主战斗单位 ID 和详情内部战斗单位 ID；
-6. 验证摘要—详情覆盖、详情内部战斗单位关系以及中英文非本地化结构；
+6. 验证摘要与详情覆盖、详情内部战斗单位关系以及中英文非本地化结构；
 7. 正确接受已确认的空文本、空图标、空标签内容、空属性对象和空 `monster_info`；
-8. 为后续 End Game → Monster 跨实体引用验证提供稳定的 Monster 实体 ID 集合，但不提前实现 End Game 领域规则。
+8. 为 End Game → Monster 跨实体引用验证提供稳定的 Monster 实体 ID 集合，跨实体规则由 End Game 领域规范维护。
 
 ## 2. 非目标
 
@@ -127,7 +127,7 @@ monster.json 外层 key
 = 详情顶层 id 的十进制字符串
 ```
 
-这是共享快照中的 `entityId`，也是后续 End Game Monster 外键的目标 ID。
+这是共享快照中的 `entityId`，也是 End Game Monster 外键的目标 ID。
 
 ### 5.2 主战斗单位 ID
 
@@ -285,13 +285,13 @@ character, equipment, weapon
 character, equipment, weapon, bangboo
 ```
 
-新发布快照必须包含当前完整集合：
+Monster 引入阶段的新发布快照必须包含当时的完整集合：
 
 ```text
 character, equipment, weapon, bangboo, monster
 ```
 
-`--entity monster` 可以从合法四实体历史 epoch 构建当前完整 staging。较早 epoch 必须同时请求全部缺失实体；任意未登记子集仍必须拒绝。
+在该阶段，`--entity monster` 可以从合法四实体历史 epoch 构建五实体完整 staging。较早 epoch 必须同时请求全部缺失实体；任意未登记子集仍必须拒绝。当前注册表和定向重跑规则由共享来源规范维护。
 
 ## 10. 漂移与拒绝条件
 
@@ -304,7 +304,7 @@ character, equipment, weapon, bangboo, monster
 - 详情最低结构或字段类型不成立；
 - `monster_info` key 与成员 `id` 不一致；
 - 空 `monster_info` 使用了非零 `monster_id`；
-- 摘要—详情或跨语言非本地化关系不成立；
+- 摘要与详情关系或跨语言非本地化关系不成立；
 - 组合快照中的任一其他实体或适用 validator 验证失败。
 
 非空摘要数量变化、内部战斗单位增删、文本变化、空文本位置变化、完整 stats 字段集合变化和曲线长度变化应明确报告或由最低结构重新评审；只要当前最低结构和一致性仍成立，不因历史具体 ID、计数或长度不同而自动拒绝。
@@ -348,10 +348,10 @@ character, equipment, weapon, bangboo, monster
 
 ### 12.3 多实体快照
 
-- 当前全量抓取生成五实体稳定注册顺序；
+- Monster 引入阶段的全量抓取生成五实体稳定注册顺序；
 - 合法两实体、三实体和四实体历史 v2 epoch 继续通过只读验证；
 - 任意其他实体子集仍被拒绝；
-- `--entity monster` 从合法四实体 epoch 升级为当前完整快照；
+- `--entity monster` 从合法四实体 epoch 升级为当时的五实体完整快照；
 - 更早 epoch 只有同时请求全部缺失实体时才能升级；
 - 升级时未选实体不发 HTTP 请求，只复制重新验证通过的资产；
 - Monster 定向重跑整体重建其索引和详情；
@@ -400,7 +400,7 @@ character, equipment, weapon, bangboo, monster
 
 这些计数和观测用于说明契约依据，不是实现中的硬编码阈值。
 
-随后使用本地 `3.0` 四实体历史 v2 快照完成了 `--entity monster` 到当前五实体 v2 快照的原子迁移，并验证了：
+随后使用本地 `3.0` 四实体历史 v2 快照完成了 `--entity monster` 到五实体 v2 快照的原子迁移，并验证了：
 
 - 最终快照包含 57 条 Character、28 条 Equipment、93 条 Weapon、40 条 Bangboo 和 288 条 Monster；
 - Monster 的 288 份中文详情和 288 份英文详情完整；
@@ -419,7 +419,7 @@ Monsters 实现只有同时满足以下条件才算完成：
 2. Monster adapter、路径政策、四实体历史 v2 epoch 和当前注册表顺序已实现；
 3. 自动化测试覆盖最低结构、三层 ID、一对多战斗单位、合法空值、跨语言一致性、历史 epoch 升级和失败保护；
 4. 合法两实体、三实体和四实体历史 v2 快照仍可只读验证，任意子集仍被拒绝；
-5. 对实际四实体快照执行 `--entity monster` 后发布当前完整五实体组合快照；
+5. 对 Monster 引入阶段的实际四实体快照执行 `--entity monster` 后发布五实体完整组合快照；
 6. 定向迁移中未选实体没有发起 HTTP 请求，且其资产按共享规则 carried-forward；
 7. 重复抓取验证条件请求、304 复用、漂移报告和原子失败保护；
 8. 离线 verify 对最终快照通过，并能在测试副本中检测篡改和内部关系错误；
