@@ -1,0 +1,47 @@
+{
+  "name": "@randomplay/core",
+  "version": "0.2.0",
+  "description": "Pure ZZZ damage calculation core for Fairy.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LoTwT/fairy.git",
+    "directory": "packages/core"
+  },
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "sideEffects": false,
+  "types": "./dist/index.d.mts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsdown",
+    "check": "pnpm typecheck && pnpm test && pnpm verify:pack",
+    "prepack": "pnpm build",
+    "test": "vitest run --passWithNoTests --exclude test/verify-package.test.ts",
+    "test:watch": "vitest --passWithNoTests --exclude test/verify-package.test.ts",
+    "test:coverage": "vitest run --passWithNoTests --coverage --exclude test/verify-package.test.ts",
+    "typecheck": "tsc --noEmit",
+    "verify:pack": "vitest run test/verify-package.test.ts"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "@vitest/coverage-v8": "^4.1.10",
+    "tsdown": "^0.22.4",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.10"
+  },
+  "engines": {
+    "node": ">=24.11.0"
+  }
+}
