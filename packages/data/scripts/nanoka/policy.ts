@@ -171,7 +171,8 @@ export function buildEntityIndexUrl(
     | "weapon"
     | "bangboo"
     | "monster"
-    | "shiyu",
+    | "shiyu"
+    | "simul",
 ): URL {
   validateVersion(version)
   return validateAllowedUrl(
@@ -201,7 +202,8 @@ export function buildEntityDetailUrl(
     | "weapon"
     | "bangboo"
     | "monster"
-    | "shiyu",
+    | "shiyu"
+    | "simul",
   entityId: string,
 ): URL {
   validateVersion(version)
@@ -280,7 +282,8 @@ function isAllowedDataPath(policy: SourcePolicy, pathname: string): boolean {
         file === "weapon.json" ||
         file === "bangboo.json" ||
         file === "monster.json" ||
-        file === "shiyu.json")
+        file === "shiyu.json" ||
+        file === "simul.json")
     )
   }
   if (decodedSegments.length === 4) {
@@ -295,7 +298,8 @@ function isAllowedDataPath(policy: SourcePolicy, pathname: string): boolean {
         entity === "weapon" ||
         entity === "bangboo" ||
         entity === "monster" ||
-        entity === "shiyu") &&
+        entity === "shiyu" ||
+        entity === "simul") &&
       file !== undefined &&
       file.endsWith(".json") &&
       isValidEntityId(file.slice(0, -".json".length))

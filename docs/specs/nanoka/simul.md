@@ -2,7 +2,7 @@
 
 ## 状态
 
-- 状态：已完成全量上游调研与结构建模，尚未实现
+- 状态：已实现并完成三版本在线及离线验收
 - 实体：Simul
 - 上游名称：`simul`
 - 语言：简体中文（`zh`）和英文（`en`）
@@ -107,19 +107,22 @@ battle
 - `name`、`icon` 和其他展示文本可本地化；
 - 不根据 node ID 前缀推导所属顶层详情或相邻节点。
 
-## 6. Story event 与 `next_node_unlock`
+## 6. Story event、`next_page` 与 `next_node_unlock`
 
-`story_event` 是 node 内部的分组对象，其外层 group key 属于独立命名空间。
+`story_event` 是 node 内部的分组对象，其外层 group key 属于独立命名空间。每个 group 的成员拥有 story-event member ID。
+
+`next_page` 的真实结构是数组，三版本观察值为空数组或 story-event member ID。它不是未知标量。实现必须保留数组容器，要求其中每个 ID 在当前详情全部 story-event member ID 集合中闭合，并在 `zh/en` 间保持相同数组长度、顺序和值。
 
 三版本样本中，全部非空 `next_node_unlock` 都解析到同一详情中的 story-event group key，而不是顶层 node key。
 
 实现必须：
 
-- 收集当前详情所有 story-event group key；
-- 接受空 unlock 集合；
+- 收集当前详情所有 story-event group key 和 story-event member ID；
+- 接受空 `next_page` 和空 unlock 集合；
+- 要求每个 `next_page` ID 在 story-event member ID 集合中闭合；
 - 将每个非空 `next_node_unlock` 验证为合法 ID；
 - 要求其在 story-event group key 集合中闭合；
-- 不将其与 node ID 集合比较；
+- 不将 `next_page`、`next_node_unlock` 与 node ID 集合比较；
 - 在未来出现新合法目标命名空间时先修正规范和 fixture，而不是静默放宽。
 
 ## 7. Battle 模型
@@ -226,9 +229,9 @@ unlock or choice array: []
 
 - 摘要 ID、中文详情 `id` 和英文详情 `id` 相同；
 - 摘要 `end` 与对应详情 `end_time` 相等；
-- 中英文详情具有相同 node、story-event group、battle 和 record 结构；
+- 中英文详情具有相同 node、story-event group、story-event member、battle 和 record 结构；
 - node/battle key 与成员 ID 关系一致；
-- `prev_node`、unlock 引用、两个 `layer_room` 路径、Monster ID、配置 ID 和机器数值一致；
+- `prev_node`、`next_page`、unlock 引用、两个 `layer_room` 路径、Monster ID、配置 ID 和机器数值一致；
 - 对象 key、数组长度、容器类型和标量 JSON 类型递归一致；
 - node、battle、tag、故事、buff 和 encounter 展示文本允许不同。
 
@@ -259,6 +262,7 @@ Simul 可以拥有 Boss 中没有的 buff ID。只刷新 Simul 时，可以 carr
 - 摘要 `end` 与详情 `end_time` 不一致；
 - node 或 battle key 与成员 `id` 不一致；
 - mandatory container 缺失、为 `null` 或类型错误；
+- `next_page` 不是数组、包含未在 story-event member ID 集合闭合的 ID，或跨语言值不一致；
 - `next_node_unlock` 未在 story-event group key 闭合；
 - `next_record_unlock` 未在 record/battle ID 并集闭合；
 - 两个 `layer_room` 被错误合并或结构不成立；
@@ -273,6 +277,7 @@ Simul 可以拥有 Boss 中没有的 buff ID。只刷新 Simul 时，可以 carr
 
 - 摘要发现，不硬编码当前三个 ID；
 - 空 `end/end_time`、空 `record`、空 `story_event`、空 `battle`、空 buff 和空数组；
+- story event `next_page` 数组类型、空数组、member ID 闭合及跨语言一致性；
 - node/battle key 与成员 ID 一致及失败；
 - `next_node_unlock` 对 story-event group key 闭合；
 - `next_record_unlock` 对 record ID 和 battle ID 两种成功路径；
@@ -300,6 +305,7 @@ Simul 可以拥有 Boss 中没有的 buff ID。只刷新 Simul 时，可以 carr
 
 - 363 个 Monster 引用全部解析到同版本 Monster 摘要；
 - 6 个 `next_node_unlock` 全部解析到 story-event group key；
+- `next_page` 在全部样本中均为数组，取值为空或 story-event member ID，所有非空引用都在当前详情中闭合；
 - 11 个 `next_record_unlock` 中 10 个解析到 record ID，1 个 `1010801` 解析到 battle ID；
 - 非零 `prev_node` `10001001` 至 `10001004` 未在已知内部 ID 集合中闭合；
 - `101` 的空结束时间和空 `record` 合法；
@@ -322,14 +328,25 @@ Simul 可以拥有 Boss 中没有的 buff ID。只刷新 Simul 时，可以 carr
 
 ## 18. 实现验收
 
-Simul 只有同时满足以下条件才算完成：
+Simul 已满足以下验收条件：
 
-1. 正式 adapter、URL allowlist、注册表和历史 epoch 已实现；
-2. 自动化测试覆盖图结构、合法空值、两个 `layer_room` 和三类引用契约；
+1. 正式 adapter、URL allowlist、注册表和六实体历史 epoch 已实现，当前正常发布使用七实体 epoch；
+2. 自动化测试覆盖图结构、合法空值、两个 `layer_room`、story event `next_page` 数组和三类既有引用契约；
 3. `simul-monster-reference/v1` 可在线及离线执行；
-4. Boss 可用后两个共享配置 validator 启用；
+4. Boss/Simul 两个共享配置 validator 按领域实施顺序保留到 Boss 可用时，在计划第 8 项统一启用；
 5. `zh/en` 全量覆盖与实体内部一致性通过；
-6. 定向抓取仍发布当前完整版本级组合快照；
+6. 定向抓取发布当前完整版本级七实体组合快照；
 7. 实际在线抓取、缓存复用、离线 verify 和失败保护通过；
 8. raw cache、公共 API 和包边界保持不变；
-9. 规范索引和本文状态更新为实际验证结果。
+9. 规范索引和本文状态已更新为实际验证结果。
+
+2026-07-28 验收证据：
+
+- `pnpm check` 通过，共 70 项测试，并通过包验证；
+- 从合法六实体快照分别使用 `--entity simul` 升级 `3.0`、`3.1.5+17516165` 和 `3.1.12+17625891`，均成功发布七实体快照；
+- 三版本资源总数依次为 1138、1168、1168，carried-forward 资源数依次为 1130、1160、1160；
+- 三次首次定向升级均为上游 manifest 收到 1 个 HTTP 304，并新获取 7 个 Simul 资产；重复执行 `3.0` 定向升级时，8 个网络资源均收到 HTTP 304，1130 个未选实体资源继续 carried-forward；
+- 三版本离线 verify 均通过；
+- `shiyu-monster-reference/v1` 检查计数依次为 5462、5710、5710，`simul-monster-reference/v1` 均为 242，所有版本未解析引用数均为 0；
+- 在 disposable 副本中篡改 `en/simul/101` 的嵌套 Monster ID 后，离线验证同时报告字节数与 SHA-256、跨语言机器字段、Simul 实体验证与 summary、跨实体引用验证错误，正式快照保持不变；
+- ignored raw cache、公共 API 与 npm 包边界未改变。

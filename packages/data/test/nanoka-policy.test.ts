@@ -163,6 +163,12 @@ describe("Nanoka URL policy", () => {
     expect(
       buildEntityDetailUrl(policy, "3.0", "en", "shiyu", "620541").href,
     ).toBe("https://static.nanoka.cc/zzz/3.0/en/shiyu/620541.json")
+    expect(buildEntityIndexUrl(policy, "3.0", "simul").href).toBe(
+      "https://static.nanoka.cc/zzz/3.0/simul.json",
+    )
+    expect(buildEntityDetailUrl(policy, "3.0", "zh", "simul", "101").href).toBe(
+      "https://static.nanoka.cc/zzz/3.0/zh/simul/101.json",
+    )
     expect(() =>
       validateAllowedUrl(
         policy,

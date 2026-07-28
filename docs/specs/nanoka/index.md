@@ -31,9 +31,9 @@ End Game 是一个实体域，至少包含以下需要分别调研和建模的�
 | End Game 子域 | 上游名称 | 状态               | 规范                 |
 | ------------- | -------- | ------------------ | -------------------- |
 | Shiyu         | `shiyu`  | 已实现并验证       | [shiyu.md](shiyu.md) |
-| Simul         | `simul`  | 已完成结构建模     | [simul.md](simul.md) |
+| Simul         | `simul`  | 已实现并验证       | [simul.md](simul.md) |
 | Boss          | `boss`   | 已完成版本分支建模 | [boss.md](boss.md)   |
 
-当前已实现并验证 Agents、Drive Discs、W-Engines、Bangboos、Monsters 与 Shiyu，并已落地 v2 清单、实体注册表、组合 staging、定向重跑、多个历史实体集合 epoch、分层验证和首个 End Game Monster 外键 validator。Simul、Boss 尚未实现。阶段四普通实体闭环、阶段五 End Game 全量调研与领域建模及阶段六 Shiyu 闭环已完成；当前实施队列见 [Nanoka 后续实体实施计划](../../plans/nanoka-entities.md)。
+当前已实现并验证 Agents、Drive Discs、W-Engines、Bangboos、Monsters、Shiyu 与 Simul，并已落地 v2 清单、实体注册表、组合 staging、定向重跑、多个历史实体集合 epoch、分层验证及 Shiyu/Simul Monster 外键 validator。六实体 epoch 已冻结，当前正常发布使用七实体 epoch；Boss 尚未实现。阶段四普通实体闭环、阶段五 End Game 全量调研与领域建模及阶段六 Shiyu、Simul 闭环已完成；下一步是 Boss，当前实施队列见 [Nanoka 后续实体实施计划](../../plans/nanoka-entities.md)。
 
 End Game 正式建模采用一份领域规范加 Shiyu、Simul、Boss 三份子域规范；领域规范负责共享 Monster 引用、Boss/Simul 配置一致性和整体发布边界，子域规范负责各自结构。路径模板相似不代表字段结构或实体关系相同。后续未调研实体仍应在开始实施前再创建对应规范，不建立没有经过上游结构验证的空文件。

@@ -30,6 +30,13 @@ import {
   validateShiyuEntityDetails,
 } from "./shiyu.ts"
 import {
+  createSimulDetailResource,
+  discoverSimulIds,
+  simulMonsterReferenceValidator,
+  validateSimulDetail,
+  validateSimulEntityDetails,
+} from "./simul.ts"
+import {
   createWeaponDetailResource,
   discoverWeaponIds,
   validateWeaponDetail,
@@ -41,6 +48,7 @@ export const historicalV2EntityEpochs = [
   ["character", "equipment", "weapon"],
   ["character", "equipment", "weapon", "bangboo"],
   ["character", "equipment", "weapon", "bangboo", "monster"],
+  ["character", "equipment", "weapon", "bangboo", "monster", "shiyu"],
 ] as const
 export const supportedEntityNames = [
   "character",
@@ -49,6 +57,7 @@ export const supportedEntityNames = [
   "bangboo",
   "monster",
   "shiyu",
+  "simul",
 ] as const
 export type EntityName = (typeof supportedEntityNames)[number]
 
@@ -175,10 +184,21 @@ export const entityRegistry: readonly EntityAdapter[] = [
     },
     validateEntityDetails: validateShiyuEntityDetails,
   },
+  {
+    name: "simul",
+    displayName: "Hollow Zero",
+    discoverIds: discoverSimulIds,
+    createDetailResource: createSimulDetailResource,
+    validateDetail(value, expectedEntityId, indexValue) {
+      validateSimulDetail(value, expectedEntityId, indexValue)
+    },
+    validateEntityDetails: validateSimulEntityDetails,
+  },
 ]
 
 export const crossEntityValidatorRegistry: readonly CrossEntityValidator[] = [
   shiyuMonsterReferenceValidator,
+  simulMonsterReferenceValidator,
 ]
 
 export function createCrossEntityValidationRecords(

@@ -37,6 +37,12 @@ import {
   validateShiyuEntityDetails,
 } from "../scripts/nanoka/shiyu.ts"
 import {
+  discoverSimulIds,
+  simulMonsterReferenceValidator,
+  validateSimulDetail,
+  validateSimulEntityDetails,
+} from "../scripts/nanoka/simul.ts"
+import {
   discoverWeaponIds,
   validateWeaponDetail,
 } from "../scripts/nanoka/weapon.ts"
@@ -76,6 +82,7 @@ describe("Nanoka cross-entity validators", () => {
     "bangboo",
     "monster",
     "shiyu",
+    "simul",
   ]
   const validationData = new Map<EntityName, EntityValidationData>(
     currentEpoch.map((entity) => [
@@ -586,13 +593,138 @@ describe("Nanoka shiyu resources", () => {
   })
 })
 
+describe("Nanoka simul resources", () => {
+  it("validates graph structure, legal empties, and internal closures", () => {
+    const index = simulIndex()
+    expect(
+      discoverSimulIds({
+        "101": index["101"],
+        "2": { end: "later" },
+      }),
+    ).toEqual(["2", "101"])
+    expect(() => discoverSimulIds({ "0101": { end: "" } })).toThrow(
+      "非法 Simul ID",
+    )
+    expect(() =>
+      validateSimulDetail(simulDetail("zh"), "101", index),
+    ).not.toThrow()
+
+    const empty = simulDetail("zh", true)
+    expect(() => validateSimulDetail(empty, "101", index)).not.toThrow()
+
+    const brokenNode = simulDetail("zh")
+    brokenNode.node["10101"]!.id = 10102
+    expect(() => validateSimulDetail(brokenNode, "101", index)).toThrow(
+      "key 与 id 不一致",
+    )
+
+    const brokenNextPage = simulDetail("zh")
+    brokenNextPage.node["10101"]!.story_event["5001"]!["7001"]!.next_page = [
+      9999,
+    ]
+    expect(() => validateSimulDetail(brokenNextPage, "101", index)).toThrow(
+      "story-event ID",
+    )
+
+    const brokenNodeUnlock = simulDetail("zh")
+    brokenNodeUnlock.node["10101"]!.story_event["5001"]![
+      "7001"
+    ]!.next_node_unlock = [10101]
+    expect(() => validateSimulDetail(brokenNodeUnlock, "101", index)).toThrow(
+      "story-event group key",
+    )
+
+    const brokenRecordUnlock = simulDetail("zh")
+    brokenRecordUnlock.node["10101"]!.story_event["5001"]![
+      "7001"
+    ]!.next_record_unlock = [9999]
+    expect(() => validateSimulDetail(brokenRecordUnlock, "101", index)).toThrow(
+      "record 成员 ID 与 battle ID 两个目标命名空间",
+    )
+
+    const driftedLayerRoom = simulDetail("zh")
+    driftedLayerRoom.node["10101"]!.battle["1010801"]!.layer.layer_room = {
+      "1": simulRoom("zh"),
+    }
+    expect(() => validateSimulDetail(driftedLayerRoom, "101", index)).toThrow(
+      "当前必须为空对象",
+    )
+  })
+
+  it("allows localized text while enforcing recursive machine consistency", () => {
+    const zh = simulDetail("zh")
+    const en = simulDetail("en")
+    expect(() =>
+      validateSimulEntityDetails({
+        zh: new Map([["101", zh]]),
+        en: new Map([["101", en]]),
+      }),
+    ).not.toThrow()
+    en.node["10101"]!.battle["1010801"]!.layer.monster_level = 99
+    expect(() =>
+      validateSimulEntityDetails({
+        zh: new Map([["101", zh]]),
+        en: new Map([["101", en]]),
+      }),
+    ).toThrow("zh/en 机器值不一致")
+    en.node["10101"]!.battle["1010801"]!.layer.monster_level = 70
+    en.end_time = "changed"
+    expect(() =>
+      validateSimulEntityDetails({
+        zh: new Map([["101", zh]]),
+        en: new Map([["101", en]]),
+      }),
+    ).toThrow("zh/en 机器字符串不一致")
+  })
+
+  it("validates battle-level nested Monster IDs rather than outer keys", () => {
+    const data = new Map<EntityName, EntityValidationData>([
+      [
+        "simul",
+        {
+          indexValue: simulIndex(),
+          ids: ["101"],
+          detailsByLanguage: {
+            zh: new Map([["101", simulDetail("zh")]]),
+            en: new Map([["101", simulDetail("en")]]),
+          },
+        },
+      ],
+      [
+        "monster",
+        {
+          indexValue: monsterIndex(),
+          ids: ["1001"],
+          detailsByLanguage: { zh: new Map(), en: new Map() },
+        },
+      ],
+    ])
+    expect(simulMonsterReferenceValidator.validate({ entities: data })).toEqual(
+      {
+        checkedReferenceCount: 2,
+        unresolvedReferenceCount: 0,
+      },
+    )
+    const broken = simulDetail("en")
+    broken.node["10101"]!.battle["1010801"]!.layer_room["8101"]!.monster_list[
+      "9001"
+    ]!.id = 9999
+    data.get("simul")!.detailsByLanguage.en.set("101", broken)
+    expect(() =>
+      simulMonsterReferenceValidator.validate({ entities: data }),
+    ).toThrow(
+      "en.node.10101.battle.1010801.layer_room.8101.monster_list.9001.id（monsterListEntryKey=9001）引用了未解析 Monster ID 9999",
+    )
+  })
+})
+
 describe("Nanoka snapshots", () => {
   it("writes a complete raw-byte snapshot and verifies it offline", async () => {
     const directory = await temporaryDirectory()
     const result = await createSnapshot(directory, false)
     expect(result.manifest.summary).toMatchObject({
-      entityTypeCount: 6,
-      assetCount: 23,
+      entityTypeCount: 7,
+      assetCount: 26,
       entities: {
         character: {
           recordCount: 2,
@@ -620,6 +752,11 @@ describe("Nanoka snapshots", () => {
           assetCount: 3,
         },
         shiyu: {
+          recordCount: 1,
+          detailCountByLanguage: { zh: 1, en: 1 },
+          assetCount: 3,
+        },
+        simul: {
           recordCount: 1,
           detailCountByLanguage: { zh: 1, en: 1 },
           assetCount: 3,
@@ -899,13 +1036,16 @@ describe("Nanoka snapshots", () => {
       "entity-discovered",
       "entity-details",
       "entity-details",
+      "entity-discovered",
+      "entity-details",
+      "entity-details",
       "verifying",
       "verifying",
       "verifying",
       "verifying",
       "publishing",
     ])
-    expect(detailProgress).toHaveLength(16)
+    expect(detailProgress).toHaveLength(18)
     expect(detailProgress.at(-1)).toMatchObject({ completed: 2, total: 2 })
   })
 
@@ -924,7 +1064,7 @@ describe("Nanoka snapshots", () => {
       mode: "selected",
       requestedEntities: ["equipment"],
     })
-    expect(result.carriedForwardAssetCount).toBe(17)
+    expect(result.carriedForwardAssetCount).toBe(20)
     expect(
       result.manifest.assets
         .filter((asset) => asset.result === "carried-forward")
@@ -932,7 +1072,7 @@ describe("Nanoka snapshots", () => {
     ).toBe(true)
   })
 
-  it("upgrades a legal five-entity v2 snapshot by fetching only shiyu", async () => {
+  it("upgrades a legal six-entity v2 snapshot by fetching only simul", async () => {
     const directory = await temporaryDirectory()
     await createSnapshot(directory, false)
     await retainSnapshotEntities(directory, [
@@ -941,6 +1081,7 @@ describe("Nanoka snapshots", () => {
       "weapon",
       "bangboo",
       "monster",
+      "shiyu",
     ])
 
     expect(
@@ -953,7 +1094,7 @@ describe("Nanoka snapshots", () => {
       directory,
       false,
       {},
-      { entities: ["shiyu"] },
+      { entities: ["simul"] },
     )
     expect(upgraded.manifest.entities).toEqual([
       "character",
@@ -962,8 +1103,9 @@ describe("Nanoka snapshots", () => {
       "bangboo",
       "monster",
       "shiyu",
+      "simul",
     ])
-    expect(upgraded.carriedForwardAssetCount).toBe(19)
+    expect(upgraded.carriedForwardAssetCount).toBe(22)
   })
 
   it("requires bangboo and monster migration from the three-entity epoch", async () => {
@@ -993,7 +1135,7 @@ describe("Nanoka snapshots", () => {
       directory,
       false,
       {},
-      { entities: ["bangboo", "monster", "shiyu"] },
+      { entities: ["bangboo", "monster", "shiyu", "simul"] },
     )
     expect(upgraded.manifest.entities).toEqual([
       "character",
@@ -1002,6 +1144,7 @@ describe("Nanoka snapshots", () => {
       "bangboo",
       "monster",
       "shiyu",
+      "simul",
     ])
     expect(upgraded.carriedForwardAssetCount).toBe(13)
   })
@@ -1034,7 +1177,7 @@ describe("Nanoka snapshots", () => {
       directory,
       false,
       {},
-      { entities: ["weapon", "bangboo", "monster", "shiyu"] },
+      { entities: ["weapon", "bangboo", "monster", "shiyu", "simul"] },
     )
     expect(migrated.manifest.entities).toEqual([
       "character",
@@ -1043,6 +1186,7 @@ describe("Nanoka snapshots", () => {
       "bangboo",
       "monster",
       "shiyu",
+      "simul",
     ])
     expect(migrated.carriedForwardAssetCount).toBe(10)
   })
@@ -1125,6 +1269,9 @@ describe("Nanoka snapshots", () => {
     await rm(join(snapshotDirectory, "shiyu.json"))
     await rm(join(snapshotDirectory, "zh", "shiyu"), { recursive: true })
     await rm(join(snapshotDirectory, "en", "shiyu"), { recursive: true })
+    await rm(join(snapshotDirectory, "simul.json"))
+    await rm(join(snapshotDirectory, "zh", "simul"), { recursive: true })
+    await rm(join(snapshotDirectory, "en", "simul"), { recursive: true })
     await writeFile(manifestPath, `${JSON.stringify(v1)}\n`)
 
     expect(
@@ -1137,7 +1284,16 @@ describe("Nanoka snapshots", () => {
       directory,
       false,
       {},
-      { entities: ["equipment", "weapon", "bangboo", "monster", "shiyu"] },
+      {
+        entities: [
+          "equipment",
+          "weapon",
+          "bangboo",
+          "monster",
+          "shiyu",
+          "simul",
+        ],
+      },
     )
     expect(migrated.manifest.schemaVersion).toBe("nanoka-fetch-manifest/v2")
     expect(migrated.manifest.entities).toEqual([
@@ -1147,6 +1303,7 @@ describe("Nanoka snapshots", () => {
       "bangboo",
       "monster",
       "shiyu",
+      "simul",
     ])
   })
 
@@ -1154,7 +1311,7 @@ describe("Nanoka snapshots", () => {
     const directory = await temporaryDirectory()
     await createSnapshot(directory, false)
     const reused = await createSnapshot(directory, true)
-    expect(reused.reusedAssetCount).toBe(22)
+    expect(reused.reusedAssetCount).toBe(25)
     expect(reused.driftedAssetIds).toEqual([])
 
     const drifted = await createSnapshot(directory, false, {
@@ -2034,6 +2191,9 @@ async function createSnapshot(
     [`/zzz/${version}/shiyu.json`]: JSON.stringify(shiyuIndex()),
     [`/zzz/${version}/zh/shiyu/620541.json`]: JSON.stringify(shiyuDetail("zh")),
     [`/zzz/${version}/en/shiyu/620541.json`]: JSON.stringify(shiyuDetail("en")),
+    [`/zzz/${version}/simul.json`]: JSON.stringify(simulIndex()),
+    [`/zzz/${version}/zh/simul/101.json`]: JSON.stringify(simulDetail("zh")),
+    [`/zzz/${version}/en/simul/101.json`]: JSON.stringify(simulDetail("en")),
     ...overrides,
   }
   const httpClient = new NanokaHttpClient(
@@ -2147,6 +2307,131 @@ function shiyuDetail(language: "zh" | "en") {
     },
     begin_time: "2026-01-01 04:00:00",
     end_time: "2026-01-15 03:59:59",
+  }
+}
+
+function simulIndex(): Record<string, Record<string, unknown>> {
+  return { "101": { end: "" } }
+}
+
+function simulRoom(language: "zh" | "en") {
+  return {
+    monster_icon: "UI/Monster.png",
+    monster_list: {
+      "9001": {
+        id: 1001,
+        name: language === "zh" ? "装甲哈提" : "Armored Hati",
+        image: "UI/Monster/1001.png",
+        element: {
+          physical: 1,
+          fire: 2,
+          ice: 3,
+          electric: 4,
+          ether: 5,
+          wind: 6,
+        },
+        stats: {
+          hp: 1000.5,
+          attack: 100,
+          defence: 50,
+          stun: 20,
+          attribute_infliction: 10.5,
+        },
+      },
+    },
+    monster_weakness: { "202": language === "zh" ? "冰" : "Ice" },
+    waves_num: 2,
+  }
+}
+
+function simulDetail(language: "zh" | "en", empty = false) {
+  const localized = (zh: string, en: string) => (language === "zh" ? zh : en)
+  const battle = {
+    id: 1010801,
+    name: localized("战斗", "Battle"),
+    tag: localized("标签", "Tag"),
+    tag_type: 1,
+    a_rank_score_layer_buff: empty
+      ? {}
+      : {
+          "3001": {
+            title: localized("A级", "A Rank"),
+            desc: localized("效果", "Effect"),
+          },
+        },
+    b_rank_score_layer_buff: {},
+    s_rank_score_layer_buff: {},
+    layer: {
+      id: 4001,
+      monster_level: 70,
+      layer_buff: empty
+        ? {}
+        : {
+            "4002": {
+              title: localized("层增益", "Layer Buff"),
+              desc: localized("描述", "Description"),
+            },
+          },
+      layer_room: {},
+      goal_type: 2,
+      s_rank_goal: 100,
+      a_rank_goal: 80,
+      b_rank_goal: 60,
+    },
+    selectable_buff: empty
+      ? {}
+      : {
+          "5002": {
+            title: localized("可选增益", "Selectable Buff"),
+            desc: localized("描述", "Description"),
+          },
+        },
+    layer_room: empty ? {} : { "8101": simulRoom(language) },
+  }
+  const event = {
+    id: 7001,
+    name: localized("事件", "Event"),
+    desc: localized("事件描述", "Event description"),
+    icon: "UI/Event.png",
+    choice: empty
+      ? []
+      : [
+          {
+            id: 1,
+            name: localized("选择", "Choice"),
+            desc: localized("选择描述", "Choice description"),
+          },
+        ],
+    next_page: empty ? [] : [7001],
+    next_node_unlock: empty ? [] : [5001],
+    next_record_unlock: empty ? [] : [6001, 1010801],
+  }
+  return {
+    id: 101,
+    end_time: "",
+    boss_adjust: empty ? {} : { "1": { hp: 100, atk: 20, points: 5 } },
+    record: empty
+      ? {}
+      : {
+          slot_a: {
+            id: 6001,
+            name: localized("记录", "Record"),
+            desc: localized("描述", "Description"),
+            text: localized("文本", "Text"),
+            icon: "UI/Record.png",
+          },
+        },
+    node: {
+      "10101": {
+        id: 10101,
+        name: localized("节点", "Node"),
+        icon: "UI/Node.png",
+        type: 1,
+        prev_node: empty ? 0 : 10001001,
+        story_event: empty ? {} : { "5001": { "7001": event } },
+        battle: empty ? {} : { "1010801": battle },
+      },
+    },
   }
 }
 
