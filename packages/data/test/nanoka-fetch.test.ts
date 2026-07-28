@@ -181,6 +181,87 @@ describe("Nanoka fetch cache", () => {
     ).rejects.toThrow("未知或未实现")
   })
 
+  it("rejects runs whose discovered assets exceed the configured budget", async () => {
+    const basePolicy = await testPolicy()
+    const policy: SourcePolicy = {
+      ...basePolicy,
+      fetchLimits: {
+        ...basePolicy.fetchLimits,
+        maximumAssetsPerRun: 3,
+      },
+    }
+    const cacheRoot = await temporaryDirectory()
+    const fetchImplementation = vi.fn<typeof fetch>(async () =>
+      jsonResponse(bytes('{"3":{"name":"Anby"}}')),
+    )
+
+    await expect(
+      fetchNanokaData({
+        policy,
+        httpClient: new NanokaHttpClient(policy, {
+          fetchImplementation,
+          sleep: async () => {},
+        }),
+        upstreamManifestBytes: bytes(JSON.stringify(manifest)),
+        upstreamManifest: manifest,
+        version: "3.0",
+        entities: ["character"],
+        cacheRoot,
+      }),
+    ).rejects.toThrow("本次抓取资源数量超过上限 3")
+    expect(fetchImplementation).toHaveBeenCalledTimes(1)
+    await expect(
+      stat(join(cacheRoot, "3.0", "character.json")),
+    ).rejects.toMatchObject({ code: "ENOENT" })
+  })
+
+  it("rejects runs whose cumulative bytes exceed the configured budget", async () => {
+    const upstreamManifestBytes = bytes(JSON.stringify(manifest))
+    const indexBytes = bytes('{"3":{"name":"Anby"}}')
+    const detailBytes = bytes('{"id":3}')
+    const basePolicy = await testPolicy()
+    const policy: SourcePolicy = {
+      ...basePolicy,
+      requestPolicy: {
+        ...basePolicy.requestPolicy,
+        maxConcurrency: 1,
+      },
+      fetchLimits: {
+        ...basePolicy.fetchLimits,
+        maximumBytesPerRun:
+          upstreamManifestBytes.byteLength + indexBytes.byteLength,
+      },
+    }
+    const cacheRoot = await temporaryDirectory()
+    const fetchImplementation = vi.fn<typeof fetch>(async (input) =>
+      new URL(String(input)).pathname.endsWith("/character.json")
+        ? jsonResponse(indexBytes)
+        : jsonResponse(detailBytes),
+    )
+
+    await expect(
+      fetchNanokaData({
+        policy,
+        httpClient: new NanokaHttpClient(policy, {
+          fetchImplementation,
+          sleep: async () => {},
+        }),
+        upstreamManifestBytes,
+        upstreamManifest: manifest,
+        version: "3.0",
+        entities: ["character"],
+        cacheRoot,
+      }),
+    ).rejects.toThrow("本次抓取总字节数超过上限")
+    expect(fetchImplementation).toHaveBeenCalledTimes(2)
+    await expect(
+      stat(join(cacheRoot, "3.0", "character.json")),
+    ).rejects.toMatchObject({ code: "ENOENT" })
+    await expect(
+      stat(join(cacheRoot, "3.0", "zh", "character", "3.json")),
+    ).rejects.toMatchObject({ code: "ENOENT" })
+  })
+
   it("rejects non-object indexes and detail documents", async () => {
     const policy = await testPolicy()
     const cacheRoot = await temporaryDirectory()

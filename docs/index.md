@@ -6,7 +6,7 @@
 
 ### 规范
 
-- [Nanoka 数据源规范](specs/nanoka/index.md)：Nanoka 共享抓取契约与各实体规范的统一入口。
+- [Nanoka 数据源规范](specs/nanoka/index.md)：Nanoka 共享抓取契约、验证边界与各实体规范的统一入口。
 
 ### 历史
 

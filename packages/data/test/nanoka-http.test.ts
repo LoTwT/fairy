@@ -27,6 +27,58 @@ describe("Nanoka HTTP client", () => {
     expect(responseBytes).toEqual(new Uint8Array([0, 1, 2]))
   })
 
+  it("aborts requests with the configured timeout signal", async () => {
+    const basePolicy = await testPolicy()
+    const policy = {
+      ...basePolicy,
+      requestPolicy: {
+        ...basePolicy.requestPolicy,
+        maximumAttempts: 1,
+        timeoutMs: 37,
+      },
+    }
+    const timeoutController = new AbortController()
+    const timeoutError = new DOMException("request timed out", "TimeoutError")
+    const timeout = vi
+      .spyOn(AbortSignal, "timeout")
+      .mockReturnValue(timeoutController.signal)
+    let receivedSignal: AbortSignal | null | undefined
+    const fetchImplementation = vi.fn<typeof fetch>(async (_input, options) => {
+      receivedSignal = options?.signal
+      return await new Promise<Response>((_resolve, reject) => {
+        timeoutController.signal.addEventListener(
+          "abort",
+          () => reject(timeoutController.signal.reason),
+          { once: true },
+        )
+      })
+    })
+    const client = new NanokaHttpClient(policy, {
+      fetchImplementation,
+      sleep: async () => {},
+    })
+
+    try {
+      const request = client.fetchAsset(
+        new URL("https://static.nanoka.cc/manifest.json"),
+      )
+      await vi.waitFor(() =>
+        expect(fetchImplementation).toHaveBeenCalledTimes(1),
+      )
+      expect(receivedSignal).toBe(timeoutController.signal)
+      expect(timeout).toHaveBeenCalledWith(37)
+
+      timeoutController.abort(timeoutError)
+      await expect(request).rejects.toMatchObject({
+        message: expect.stringMatching(/请求失败.*尝试 1\/1/u),
+        cause: timeoutError,
+      })
+    } finally {
+      timeoutController.abort(timeoutError)
+      timeout.mockRestore()
+    }
+  })
+
   it("cancels open error bodies before releasing concurrency slots", async () => {
     const policy = await loadSourcePolicy()
     const events: string[] = []

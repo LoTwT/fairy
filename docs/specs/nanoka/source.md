@@ -191,6 +191,8 @@ packages/data/
 
 ## 11. CLI
 
+以下命令只供 Fairy 源码工作区使用，应在仓库根目录运行。`@randomplay/data` 不向 npm 消费者导出 CLI。
+
 ```bash
 pnpm --filter @randomplay/data fetch:nanoka
 pnpm --filter @randomplay/data fetch:nanoka --channel latest
@@ -214,9 +216,9 @@ pnpm --filter @randomplay/data fetch:nanoka --entity <entity>
 
 - manifest 和版本选择；
 - URL allowlist 与路径安全；
-- HTTP 并发、节流、超时、重试、重定向和响应大小；
+- HTTP 并发、节流、超时、重试、重定向和响应大小，其中超时测试确认配置值用于生成中止信号，并验证中止错误进入请求失败链路；
 - 通用索引发现与基础 JSON/object 检查；
-- 单次抓取记录、资源和字节预算；
+- 单次抓取记录、资源和字节预算，资源数或累计字节超限时不得发布实体索引；
 - 原始字节写入及实体索引延后写入；
 - raw 缓存不进入 npm tarball；
 - `@randomplay/data` 公开 API 保持不变。
