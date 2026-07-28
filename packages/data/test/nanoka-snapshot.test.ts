@@ -31,6 +31,12 @@ import {
   validateMonsterEntityDetails,
 } from "../scripts/nanoka/monster.ts"
 import {
+  discoverShiyuIds,
+  shiyuMonsterReferenceValidator,
+  validateShiyuDetail,
+  validateShiyuEntityDetails,
+} from "../scripts/nanoka/shiyu.ts"
+import {
   discoverWeaponIds,
   validateWeaponDetail,
 } from "../scripts/nanoka/weapon.ts"
@@ -69,6 +75,7 @@ describe("Nanoka cross-entity validators", () => {
     "weapon",
     "bangboo",
     "monster",
+    "shiyu",
   ]
   const validationData = new Map<EntityName, EntityValidationData>(
     currentEpoch.map((entity) => [
@@ -480,13 +487,112 @@ describe("Nanoka monster resources", () => {
   })
 })
 
+describe("Nanoka shiyu resources", () => {
+  it("discovers IDs, accepts time variants, zones, duplicate stages, and empty parent rooms", () => {
+    const base = shiyuIndex()["620541"]!
+    expect(
+      discoverShiyuIds({
+        "620541": base,
+        "2": { ...base, zh: "二", en: "Two" },
+      }),
+    ).toEqual(["2", "620541"])
+    expect(() => discoverShiyuIds({ "0620541": base })).toThrow("非法 Shiyu ID")
+    for (const times of [
+      {},
+      { live_begin: "live-start", live_end: "live-end" },
+      { begin: "start", end: "end" },
+      {
+        begin: "start",
+        end: "end",
+        live_begin: "live-start",
+        live_end: "live-end",
+      },
+    ])
+      expect(() =>
+        discoverShiyuIds({ "620541": { ...base, ...times } }),
+      ).not.toThrow()
+
+    expect(() =>
+      validateShiyuDetail(shiyuDetail("zh"), "620541", shiyuIndex()),
+    ).not.toThrow()
+    const brokenChild = shiyuDetail("zh")
+    brokenChild.zone["6205405"]!.child = [999999]
+    expect(() =>
+      validateShiyuDetail(brokenChild, "620541", shiyuIndex()),
+    ).toThrow("child[0] 引用未闭合")
+    const { end: _end, ...missingEnd } = base
+    expect(() =>
+      discoverShiyuIds({
+        "620541": { ...missingEnd, begin: "start" },
+      }),
+    ).toThrow("begin/end 必须同时存在或缺失")
+  })
+
+  it("allows localized text but rejects cross-language machine drift", () => {
+    const zh = shiyuDetail("zh")
+    const en = shiyuDetail("en")
+    expect(() =>
+      validateShiyuEntityDetails({
+        zh: new Map([["620541", zh]]),
+        en: new Map([["620541", en]]),
+      }),
+    ).not.toThrow()
+    en.zone["62054051"]!.stage_num = 6
+    expect(() =>
+      validateShiyuEntityDetails({
+        zh: new Map([["620541", zh]]),
+        en: new Map([["620541", en]]),
+      }),
+    ).toThrow("zh/en 机器值不一致")
+  })
+
+  it("validates nested Monster IDs rather than outer entry keys", () => {
+    const data = new Map<EntityName, EntityValidationData>([
+      [
+        "shiyu",
+        {
+          indexValue: shiyuIndex(),
+          ids: ["620541"],
+          detailsByLanguage: {
+            zh: new Map([["620541", shiyuDetail("zh")]]),
+            en: new Map([["620541", shiyuDetail("en")]]),
+          },
+        },
+      ],
+      [
+        "monster",
+        {
+          indexValue: monsterIndex(),
+          ids: ["1001"],
+          detailsByLanguage: { zh: new Map(), en: new Map() },
+        },
+      ],
+    ])
+    expect(shiyuMonsterReferenceValidator.validate({ entities: data })).toEqual(
+      {
+        checkedReferenceCount: 2,
+        unresolvedReferenceCount: 0,
+      },
+    )
+    const broken = shiyuDetail("en")
+    broken.zone["62054051"]!.layer_room["62054051"]!.monster_list["11114"]!.id =
+      9999
+    data.get("shiyu")!.detailsByLanguage.en.set("620541", broken)
+    expect(() =>
+      shiyuMonsterReferenceValidator.validate({ entities: data }),
+    ).toThrow(
+      "shiyu 620541 的 en.zone.62054051.layer_room.62054051.monster_list.11114.id（monsterListEntryKey=11114）引用了未解析 Monster ID 9999",
+    )
+  })
+})
+
 describe("Nanoka snapshots", () => {
   it("writes a complete raw-byte snapshot and verifies it offline", async () => {
     const directory = await temporaryDirectory()
     const result = await createSnapshot(directory, false)
     expect(result.manifest.summary).toMatchObject({
-      entityTypeCount: 5,
-      assetCount: 20,
+      entityTypeCount: 6,
+      assetCount: 23,
       entities: {
         character: {
           recordCount: 2,
@@ -509,6 +615,11 @@ describe("Nanoka snapshots", () => {
           assetCount: 3,
         },
         monster: {
+          recordCount: 1,
+          detailCountByLanguage: { zh: 1, en: 1 },
+          assetCount: 3,
+        },
+        shiyu: {
           recordCount: 1,
           detailCountByLanguage: { zh: 1, en: 1 },
           assetCount: 3,
@@ -785,13 +896,16 @@ describe("Nanoka snapshots", () => {
       "entity-discovered",
       "entity-details",
       "entity-details",
+      "entity-discovered",
+      "entity-details",
+      "entity-details",
       "verifying",
       "verifying",
       "verifying",
       "verifying",
       "publishing",
     ])
-    expect(detailProgress).toHaveLength(14)
+    expect(detailProgress).toHaveLength(16)
     expect(detailProgress.at(-1)).toMatchObject({ completed: 2, total: 2 })
   })
 
@@ -810,7 +924,7 @@ describe("Nanoka snapshots", () => {
       mode: "selected",
       requestedEntities: ["equipment"],
     })
-    expect(result.carriedForwardAssetCount).toBe(14)
+    expect(result.carriedForwardAssetCount).toBe(17)
     expect(
       result.manifest.assets
         .filter((asset) => asset.result === "carried-forward")
@@ -818,7 +932,7 @@ describe("Nanoka snapshots", () => {
     ).toBe(true)
   })
 
-  it("upgrades a legal four-entity v2 snapshot by fetching only monster", async () => {
+  it("upgrades a legal five-entity v2 snapshot by fetching only shiyu", async () => {
     const directory = await temporaryDirectory()
     await createSnapshot(directory, false)
     await retainSnapshotEntities(directory, [
@@ -826,6 +940,7 @@ describe("Nanoka snapshots", () => {
       "equipment",
       "weapon",
       "bangboo",
+      "monster",
     ])
 
     expect(
@@ -838,7 +953,7 @@ describe("Nanoka snapshots", () => {
       directory,
       false,
       {},
-      { entities: ["monster"] },
+      { entities: ["shiyu"] },
     )
     expect(upgraded.manifest.entities).toEqual([
       "character",
@@ -846,8 +961,9 @@ describe("Nanoka snapshots", () => {
       "weapon",
       "bangboo",
       "monster",
+      "shiyu",
     ])
-    expect(upgraded.carriedForwardAssetCount).toBe(16)
+    expect(upgraded.carriedForwardAssetCount).toBe(19)
   })
 
   it("requires bangboo and monster migration from the three-entity epoch", async () => {
@@ -877,7 +993,7 @@ describe("Nanoka snapshots", () => {
       directory,
       false,
       {},
-      { entities: ["bangboo", "monster"] },
+      { entities: ["bangboo", "monster", "shiyu"] },
     )
     expect(upgraded.manifest.entities).toEqual([
       "character",
@@ -885,6 +1001,7 @@ describe("Nanoka snapshots", () => {
       "weapon",
       "bangboo",
       "monster",
+      "shiyu",
     ])
     expect(upgraded.carriedForwardAssetCount).toBe(13)
   })
@@ -917,7 +1034,7 @@ describe("Nanoka snapshots", () => {
       directory,
       false,
       {},
-      { entities: ["weapon", "bangboo", "monster"] },
+      { entities: ["weapon", "bangboo", "monster", "shiyu"] },
     )
     expect(migrated.manifest.entities).toEqual([
       "character",
@@ -925,6 +1042,7 @@ describe("Nanoka snapshots", () => {
       "weapon",
       "bangboo",
       "monster",
+      "shiyu",
     ])
     expect(migrated.carriedForwardAssetCount).toBe(10)
   })
@@ -1004,6 +1122,9 @@ describe("Nanoka snapshots", () => {
     await rm(join(snapshotDirectory, "monster.json"))
     await rm(join(snapshotDirectory, "zh", "monster"), { recursive: true })
     await rm(join(snapshotDirectory, "en", "monster"), { recursive: true })
+    await rm(join(snapshotDirectory, "shiyu.json"))
+    await rm(join(snapshotDirectory, "zh", "shiyu"), { recursive: true })
+    await rm(join(snapshotDirectory, "en", "shiyu"), { recursive: true })
     await writeFile(manifestPath, `${JSON.stringify(v1)}\n`)
 
     expect(
@@ -1016,7 +1137,7 @@ describe("Nanoka snapshots", () => {
       directory,
       false,
       {},
-      { entities: ["equipment", "weapon", "bangboo", "monster"] },
+      { entities: ["equipment", "weapon", "bangboo", "monster", "shiyu"] },
     )
     expect(migrated.manifest.schemaVersion).toBe("nanoka-fetch-manifest/v2")
     expect(migrated.manifest.entities).toEqual([
@@ -1025,6 +1146,7 @@ describe("Nanoka snapshots", () => {
       "weapon",
       "bangboo",
       "monster",
+      "shiyu",
     ])
   })
 
@@ -1032,7 +1154,7 @@ describe("Nanoka snapshots", () => {
     const directory = await temporaryDirectory()
     await createSnapshot(directory, false)
     const reused = await createSnapshot(directory, true)
-    expect(reused.reusedAssetCount).toBe(19)
+    expect(reused.reusedAssetCount).toBe(22)
     expect(reused.driftedAssetIds).toEqual([])
 
     const drifted = await createSnapshot(directory, false, {
@@ -1816,7 +1938,10 @@ async function retainSnapshotEntities(
       totalBytes: number
       entities: Record<string, unknown>
     }
-    validation: { entities: Record<string, string> }
+    validation: {
+      entities: Record<string, string>
+      crossEntityReferences: Array<{ fromEntity: string; toEntity: string }>
+    }
   }
   const removed = manifest.entities.filter(
     (entity) => !entities.includes(entity),
@@ -1832,6 +1957,12 @@ async function retainSnapshotEntities(
     (sum, asset) => sum + asset.bytes,
     0,
   )
+  manifest.validation.crossEntityReferences =
+    manifest.validation.crossEntityReferences.filter(
+      (record) =>
+        entities.includes(record.fromEntity) &&
+        entities.includes(record.toEntity),
+    )
   for (const entity of removed) {
     delete manifest.summary.entities[entity]
     delete manifest.validation.entities[entity]
@@ -1900,6 +2031,9 @@ async function createSnapshot(
     [`/zzz/${version}/en/monster/1001.json`]: JSON.stringify(
       monsterDetail("en"),
     ),
+    [`/zzz/${version}/shiyu.json`]: JSON.stringify(shiyuIndex()),
+    [`/zzz/${version}/zh/shiyu/620541.json`]: JSON.stringify(shiyuDetail("zh")),
+    [`/zzz/${version}/en/shiyu/620541.json`]: JSON.stringify(shiyuDetail("en")),
     ...overrides,
   }
   const httpClient = new NanokaHttpClient(
@@ -1947,6 +2081,73 @@ async function createSnapshot(
       ? {}
       : { onProgress: options.onProgress }),
   })
+}
+
+function shiyuIndex(): Record<string, Record<string, unknown>> {
+  return {
+    "620541": {
+      sort: 1,
+      en: "Critical Node",
+      ko: "격변 구간",
+      zh: "剧变节点",
+      ja: "激変ノード",
+      begin: "2026-01-01 04:00:00",
+      end: "2026-01-15 03:59:59",
+      live_begin: "2026-01-01 04:00:00",
+      live_end: "2026-01-15 03:59:59",
+    },
+  }
+}
+
+function shiyuDetail(language: "zh" | "en") {
+  const zone = (name: string, child: number[], withRoom: boolean) => ({
+    name,
+    stage_num: 5,
+    monster_level: withRoom ? 70 : 0,
+    layer_buff: {
+      "62001541": {
+        title: language === "zh" ? "增益" : "Buff",
+        desc: language === "zh" ? "中文效果" : "English effect",
+      },
+    },
+    child,
+    layer_room: withRoom
+      ? {
+          "62054051": {
+            monster_icon: "",
+            monster_list: {
+              "11114": {
+                id: 1001,
+                name: language === "zh" ? "装甲哈提" : "Armored Hati",
+                image: "UI/Monster.png",
+                element: { ice: 1, fire: 0 },
+                stats: { hp: 1000.5, attack: 100 },
+              },
+            },
+            monster_weakness: {
+              "202": language === "zh" ? "冰" : "Ice",
+            },
+            waves_num: 2,
+          },
+        }
+      : {},
+    goal_type: withRoom ? 2 : 3,
+    ss_rank_goal: 0,
+    s_rank_goal: withRoom ? 25000 : 1270001003,
+    a_rank_goal: withRoom ? 16000 : 1270001002,
+    b_rank_goal: withRoom ? 8000 : 1270001001,
+  })
+  return {
+    id: 620541,
+    name: language === "zh" ? "剧变节点" : "Critical Node",
+    priority: 1,
+    zone: {
+      "6205405": zone("", [62054051], false),
+      "62054051": zone(language === "zh" ? "房间 1" : "Room 1", [], true),
+    },
+    begin_time: "2026-01-01 04:00:00",
+    end_time: "2026-01-15 03:59:59",
+  }
 }
 
 function monsterIndex(empty = false): Record<string, Record<string, unknown>> {

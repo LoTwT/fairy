@@ -160,7 +160,7 @@ Drive Discs 是首个实体闭环，而不是绕过共享契约的独立局部�
 4. Monsters（monster）
 ```
 
-每个实体都必须执行第 4 节的标准流程，前一个实体完成“规范、实现、在线抓取、离线验证和独立变更单元”闭环后，才能进入下一个实体。阶段四的四个普通实体已全部完成闭环，阶段五 End Game 领域调研与建模也已完成，下一步进入阶段六的跨实体 validator 基础设施与 Shiyu 闭环。
+每个实体都必须执行第 4 节的标准流程，前一个实体完成“规范、实现、在线抓取、离线验证和独立变更单元”闭环后，才能进入下一个实体。阶段四的四个普通实体和阶段五 End Game 领域调研与建模已完成。阶段六第 6 项的跨实体 validator 基础设施与 Shiyu 闭环已完成，下一步进入 Simul 闭环。
 
 ### 阶段五：End Game 领域调研与建模
 
@@ -264,7 +264,7 @@ Drive Discs 是首个实体闭环，而不是绕过共享契约的独立局部�
   5. 完成三版本全量调研，确认领域共享边界并建立领域及三份子域规范
 
 阶段六：End Game 子域逐个闭环
-  6. 实现跨实体 validator 基础设施并闭环 Shiyu（shiyu）
+  6. 实现跨实体 validator 基础设施并闭环 Shiyu（shiyu）（已完成）
   7. Simul（simul）
   8. Boss（boss）
 
@@ -306,8 +306,8 @@ Drive Discs 是首个实体闭环，而不是绕过共享契约的独立局部�
 - W-Engines 已完成三版本全量 `zh/en` 覆盖验证、正式规范、历史 v2 epoch 兼容、实现、自动化检查和在线三实体组合快照验收，长期契约见 [W-Engines 数据规范](../specs/nanoka/weapon.md)；
 - Bangboos 已完成三版本全量 `zh/en` 覆盖验证、合法空值与内部技能引用建模、多个历史 v2 epoch 兼容、实现、自动化检查和在线四实体组合快照验收，长期契约见 [Bangboos 数据规范](../specs/nanoka/bangboo.md)；
 - Monsters 已完成三版本全量 `zh/en` 覆盖验证、多层 ID 与内部战斗单位建模、四实体历史 v2 epoch 兼容、实现、自动化检查和在线五实体组合快照验收，长期契约见 [Monsters 数据规范](../specs/nanoka/monster.md)；
-- 实现 `validation.crossEntityReferences` 的非空记录、稳定 validator 注册表、在线执行和严格离线重算；
-- Shiyu、Simul、Boss 尚需按各自正式规范实现 adapter、自动化测试和在线组合快照验收；
+- `validation.crossEntityReferences` 的注册、在线执行和严格离线重算基础设施已实现；首个正式检查 `shiyu-monster-reference/v1` 已完成三版本在线及离线验收；
+- Shiyu 已完成 adapter、自动化测试、三版本在线组合快照、定向升级、缓存复用、Monster 外键及离线篡改检测验收，长期契约见 [Shiyu 数据规范](../specs/nanoka/shiyu.md)；Simul、Boss 尚需按各自正式规范实现 adapter、自动化测试和在线组合快照验收；
 - 各子域加入注册表时，逐步冻结五实体、六实体和七实体历史 v2 epoch，并验证定向升级路径；
 - 正常新完整发布中，已支持来源对已支持 Monster 的缺失引用必须阻止发布；合法历史 epoch 的 `not-run`/`not-applicable` 按领域和共享规范记录；
 - Simul 非零 `prev_node` 的目标命名空间尚未证明，当前按 opaque positive ID 保留；

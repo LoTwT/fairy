@@ -23,6 +23,13 @@ import {
   validateMonsterEntityDetails,
 } from "./monster.ts"
 import {
+  createShiyuDetailResource,
+  discoverShiyuIds,
+  shiyuMonsterReferenceValidator,
+  validateShiyuDetail,
+  validateShiyuEntityDetails,
+} from "./shiyu.ts"
+import {
   createWeaponDetailResource,
   discoverWeaponIds,
   validateWeaponDetail,
@@ -33,6 +40,7 @@ export const historicalV2EntityEpochs = [
   ["character", "equipment"],
   ["character", "equipment", "weapon"],
   ["character", "equipment", "weapon", "bangboo"],
+  ["character", "equipment", "weapon", "bangboo", "monster"],
 ] as const
 export const supportedEntityNames = [
   "character",
@@ -40,6 +48,7 @@ export const supportedEntityNames = [
   "weapon",
   "bangboo",
   "monster",
+  "shiyu",
 ] as const
 export type EntityName = (typeof supportedEntityNames)[number]
 
@@ -156,9 +165,21 @@ export const entityRegistry: readonly EntityAdapter[] = [
     },
     validateEntityDetails: validateMonsterEntityDetails,
   },
+  {
+    name: "shiyu",
+    displayName: "Shiyu Defense",
+    discoverIds: discoverShiyuIds,
+    createDetailResource: createShiyuDetailResource,
+    validateDetail(value, expectedEntityId, indexValue) {
+      validateShiyuDetail(value, expectedEntityId, indexValue)
+    },
+    validateEntityDetails: validateShiyuEntityDetails,
+  },
 ]
 
-export const crossEntityValidatorRegistry: readonly CrossEntityValidator[] = []
+export const crossEntityValidatorRegistry: readonly CrossEntityValidator[] = [
+  shiyuMonsterReferenceValidator,
+]
 
 export function createCrossEntityValidationRecords(
   entities: readonly EntityName[],
