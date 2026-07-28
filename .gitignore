@@ -1,5 +1,6 @@
 node_modules/
 dist/
 coverage/
+packages/data/raw/
 .DS_Store
 *.log
