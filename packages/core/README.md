@@ -2,8 +2,13 @@
 
 Fairy 的确定性计算核心包。
 
-当前包提供乘区定义基建和内置增伤区 `damageBonusFactor`；公式组合能力尚未实现。公共契约记录在
-[Core 计算规范](../../docs/specs/core/index.md)。
+当前包提供乘区定义基建和以下内置乘区：
+
+- 增伤区：`damageBonusFactor`
+- 暴击区：`criticalFactor`
+
+公式组合能力尚未实现。公共契约记录在
+[Core 计算规范](https://github.com/LoTwT/fairy/blob/main/docs/specs/core/index.md)。
 
 ## 使用
 

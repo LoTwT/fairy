@@ -26,6 +26,10 @@ export function defineFactor<FactorInput>(
   const factor: Factor<FactorInput> = {
     factorId,
     calculate: (inputs) => {
+      if (!Array.isArray(inputs)) {
+        throw new TypeError("Factor inputs must be an array")
+      }
+
       const result = calculate(inputs)
 
       if (!Number.isFinite(result)) {

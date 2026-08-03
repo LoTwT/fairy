@@ -92,6 +92,27 @@ describe("defineFactor", () => {
     },
   )
 
+  it.each([
+    ["empty string", ""],
+    ["null", null],
+    ["plain object", {}],
+    ["set", new Set<ValueInput>()],
+  ])("rejects a non-array input: %s", (_name, input) => {
+    let calculationCalled = false
+    const factor = defineFactor<ValueInput>({
+      factorId: "array-input",
+      calculate: () => {
+        calculationCalled = true
+        return 1
+      },
+    })
+
+    expect(() =>
+      factor.calculate(input as unknown as readonly ValueInput[]),
+    ).toThrow(TypeError)
+    expect(calculationCalled).toBe(false)
+  })
+
   it("propagates errors from the provided calculation function", () => {
     const expectedError = new Error("invalid input")
     const factor = defineFactor<ValueInput>({

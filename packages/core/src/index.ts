@@ -5,3 +5,5 @@ export {
   damageBonusFactor,
 } from "./factors/damage-bonus.ts"
 export type { DamageBonusFactorInput } from "./factors/damage-bonus.ts"
+export { CRITICAL_FACTOR_ID, criticalFactor } from "./factors/critical.ts"
+export type { CriticalFactorInput } from "./factors/critical.ts"
