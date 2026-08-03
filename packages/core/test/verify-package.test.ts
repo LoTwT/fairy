@@ -102,7 +102,11 @@ describe("packed package", () => {
     writeFileSync(
       join(consumerDirectory, "smoke.mjs"),
       `import assert from "node:assert/strict"
-import { defineFactor } from "@randomplay/core"
+import {
+  DAMAGE_BONUS_FACTOR_ID,
+  damageBonusFactor,
+  defineFactor,
+} from "@randomplay/core"
 
 const factor = defineFactor({
   factorId: "sum",
@@ -111,12 +115,21 @@ const factor = defineFactor({
 
 assert.equal(factor.calculate([2, 3]), 5)
 assert.equal(Object.isFrozen(factor), true)
+assert.throws(
+  () => defineFactor({ factorId: "invalid", calculate: null }),
+  TypeError,
+)
+assert.equal(DAMAGE_BONUS_FACTOR_ID, "damage_bonus")
+assert.equal(damageBonusFactor.factorId, DAMAGE_BONUS_FACTOR_ID)
+assert.equal(damageBonusFactor.calculate([0.25]), 1.25)
 `,
     )
     writeFileSync(
       join(consumerDirectory, "smoke.ts"),
       `import {
+  damageBonusFactor,
   defineFactor,
+  type DamageBonusFactorInput,
   type Factor,
   type FactorParams,
 } from "@randomplay/core"
@@ -128,8 +141,10 @@ const params: FactorParams<number> = {
 params.factorId = "sum"
 
 const factor: Factor<number> = defineFactor(params)
+const damageBonusInputs: readonly DamageBonusFactorInput[] = [0.25, -0.125]
 
 factor.calculate([2, 3])
+damageBonusFactor.calculate(damageBonusInputs)
 `,
     )
 

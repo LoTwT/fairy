@@ -6,7 +6,7 @@
 
 ### 规范
 
-- [Core 计算规范](specs/core/index.md)：`@randomplay/core` 的核心术语与乘区定义契约。
+- [Core 计算规范](specs/core/index.md)：`@randomplay/core` 的核心术语、乘区定义契约与具体乘区规范。
 - [Nanoka 数据源规范](specs/nanoka/index.md)：Nanoka 共享抓取契约、验证边界与各实体规范的统一入口。
 
 ### 历史

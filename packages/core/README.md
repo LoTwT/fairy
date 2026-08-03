@@ -2,7 +2,7 @@
 
 Fairy 的确定性计算核心包。
 
-当前包提供乘区定义基建；公式组合能力尚未实现。公共契约记录在
+当前包提供乘区定义基建和内置增伤区 `damageBonusFactor`；公式组合能力尚未实现。公共契约记录在
 [Core 计算规范](../../docs/specs/core/index.md)。
 
 ## 使用
@@ -10,13 +10,13 @@ Fairy 的确定性计算核心包。
 ```ts
 import { defineFactor } from "@randomplay/core"
 
-const bonusFactor = defineFactor<{ readonly multiplier: number }>({
+const bonusFactor = defineFactor<{ readonly damageBonus: number }>({
   factorId: "bonus",
   calculate: (inputs) =>
-    1 + inputs.reduce((sum, input) => sum + input.multiplier, 0),
+    1 + inputs.reduce((sum, input) => sum + input.damageBonus, 0),
 })
 
-bonusFactor.calculate([{ multiplier: 0.2 }, { multiplier: 0.3 }])
+bonusFactor.calculate([{ damageBonus: 0.2 }, { damageBonus: 0.3 }])
 // 1.5
 ```
 

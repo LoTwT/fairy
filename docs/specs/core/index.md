@@ -72,6 +72,7 @@ export function defineFactor<FactorInput>(
 
 ### `calculate`
 
+- `calculate` 必须是函数，否则 `defineFactor` 在建立 `Factor` 前抛出 `TypeError`。
 - `defineFactor` 返回的 `calculate` 调用传入的计算函数，然后使用 `Number.isFinite` 检查结果。
 - `NaN`、`Infinity` 和 `-Infinity` 均为无效结果，必须抛出 `RangeError`。
 - `defineFactor` 不为 `inputs` 建立副本，也不在运行时冻结 `inputs`；只读约束由公共类型和具体乘区实现
@@ -92,5 +93,10 @@ export function defineFactor<FactorInput>(
 | 条件                            | 行为                                 |
 | ------------------------------- | ------------------------------------ |
 | `factorId` 为空或只包含空白字符 | `defineFactor` 抛出 `TypeError`      |
+| `calculate` 不是函数            | `defineFactor` 抛出 `TypeError`      |
 | `calculate` 返回非有限数值      | `Factor.calculate` 抛出 `RangeError` |
 | 具体乘区判定输入无效            | 传播具体乘区抛出的错误               |
+
+## 具体乘区
+
+- [增伤区](factors/damage-bonus.md)

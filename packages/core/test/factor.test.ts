@@ -56,6 +56,18 @@ describe("defineFactor", () => {
     ).toThrow(TypeError)
   })
 
+  it.each([undefined, null, 0, "calculate", {}])(
+    "rejects a non-function calculate value %#",
+    (calculate) => {
+      expect(() =>
+        defineFactor({
+          factorId: "invalid-calculation",
+          calculate,
+        } as unknown as FactorParams<ValueInput>),
+      ).toThrow(TypeError)
+    },
+  )
+
   it.each([NaN, Infinity, -Infinity])(
     "rejects the non-finite result %s",
     (result) => {

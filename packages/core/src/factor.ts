@@ -19,6 +19,10 @@ export function defineFactor<FactorInput>(
     throw new TypeError("factorId must be a non-empty string")
   }
 
+  if (typeof calculate !== "function") {
+    throw new TypeError("calculate must be a function")
+  }
+
   const factor: Factor<FactorInput> = {
     factorId,
     calculate: (inputs) => {
