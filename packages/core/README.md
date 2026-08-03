@@ -2,8 +2,23 @@
 
 Fairy 的确定性计算核心包。
 
-当前包只包含最小初始化结构，公开 API 暂时为空。公式优先的公共设计、当前公式和 Roadmap 记录在
-[Core 计算规范](../../docs/specs/core/index.md)，尚未实现。
+当前包提供乘区定义基建；公式组合能力尚未实现。公共契约记录在
+[Core 计算规范](../../docs/specs/core/index.md)。
+
+## 使用
+
+```ts
+import { defineFactor } from "@randomplay/core"
+
+const bonusFactor = defineFactor<{ readonly multiplier: number }>({
+  factorId: "bonus",
+  calculate: (inputs) =>
+    1 + inputs.reduce((sum, input) => sum + input.multiplier, 0),
+})
+
+bonusFactor.calculate([{ multiplier: 0.2 }, { multiplier: 0.3 }])
+// 1.5
+```
 
 ## 约束
 

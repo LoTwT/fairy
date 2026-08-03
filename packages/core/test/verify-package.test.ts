@@ -58,6 +58,7 @@ describe("packed package", () => {
       "README.md",
       "dist/index.d.mts",
       "dist/index.mjs",
+      "dist/index.mjs.map",
       "package.json",
     ])
 
@@ -101,16 +102,34 @@ describe("packed package", () => {
     writeFileSync(
       join(consumerDirectory, "smoke.mjs"),
       `import assert from "node:assert/strict"
-import * as corePackage from "@randomplay/core"
+import { defineFactor } from "@randomplay/core"
 
-assert.deepEqual(Object.keys(corePackage), [])
+const factor = defineFactor({
+  factorId: "sum",
+  calculate: (inputs) => inputs.reduce((sum, input) => sum + input, 0),
+})
+
+assert.equal(factor.calculate([2, 3]), 5)
+assert.equal(Object.isFrozen(factor), true)
 `,
     )
     writeFileSync(
       join(consumerDirectory, "smoke.ts"),
-      `import * as corePackage from "@randomplay/core"
+      `import {
+  defineFactor,
+  type Factor,
+  type FactorParams,
+} from "@randomplay/core"
 
-void corePackage
+const params: FactorParams<number> = {
+  factorId: "draft-sum",
+  calculate: (inputs) => inputs.reduce((sum, input) => sum + input, 0),
+}
+params.factorId = "sum"
+
+const factor: Factor<number> = defineFactor(params)
+
+factor.calculate([2, 3])
 `,
     )
 
