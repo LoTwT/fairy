@@ -103,8 +103,12 @@ describe("packed package", () => {
       join(consumerDirectory, "smoke.mjs"),
       `import assert from "node:assert/strict"
 import {
+  BASE_DAMAGE_FACTOR_ID,
   CRITICAL_FACTOR_ID,
   DAMAGE_BONUS_FACTOR_ID,
+  baseDamageFactor,
+  calculateFinalStat,
+  calculateInitialStat,
   criticalFactor,
   damageBonusFactor,
   defineFactor,
@@ -122,6 +126,24 @@ assert.throws(
   () => defineFactor({ factorId: "invalid", calculate: null }),
   TypeError,
 )
+const initialStat = calculateInitialStat({
+  baseStat: 80,
+  initialStatPercentageAdjustments: [0.25, -0.125],
+  initialStatFixedValueAdjustments: [10, -5],
+})
+const finalStat = calculateFinalStat({
+  initialStat,
+  finalStatPercentageAdjustments: [0.5, -0.25],
+  finalStatFixedValueAdjustments: [5, -0.75],
+})
+assert.equal(initialStat, 95)
+assert.equal(finalStat, 123)
+assert.equal(BASE_DAMAGE_FACTOR_ID, "base_damage")
+assert.equal(baseDamageFactor.factorId, BASE_DAMAGE_FACTOR_ID)
+assert.equal(
+  baseDamageFactor.calculate([{ damageMultiplier: 2, finalStat }]),
+  246,
+)
 assert.equal(DAMAGE_BONUS_FACTOR_ID, "damage_bonus")
 assert.equal(damageBonusFactor.factorId, DAMAGE_BONUS_FACTOR_ID)
 assert.equal(damageBonusFactor.calculate([0.25]), 1.25)
@@ -133,9 +155,15 @@ assert.equal(criticalFactor.calculate([0.5, 0.25]), 1.75)
     writeFileSync(
       join(consumerDirectory, "smoke.ts"),
       `import {
+  baseDamageFactor,
+  calculateFinalStat,
+  calculateInitialStat,
   criticalFactor,
   damageBonusFactor,
   defineFactor,
+  type BaseDamageFactorInput,
+  type CalculateFinalStatParams,
+  type CalculateInitialStatParams,
   type CriticalFactorInput,
   type DamageBonusFactorInput,
   type Factor,
@@ -149,10 +177,26 @@ const params: FactorParams<number> = {
 params.factorId = "sum"
 
 const factor: Factor<number> = defineFactor(params)
+const initialStatParams: CalculateInitialStatParams = {
+  baseStat: 80,
+  initialStatPercentageAdjustments: [0.25, -0.125],
+  initialStatFixedValueAdjustments: [10, -5],
+}
+const initialStat = calculateInitialStat(initialStatParams)
+const finalStatParams: CalculateFinalStatParams = {
+  initialStat,
+  finalStatPercentageAdjustments: [0.5, -0.25],
+  finalStatFixedValueAdjustments: [5, -0.75],
+}
+const finalStat = calculateFinalStat(finalStatParams)
+const baseDamageInputs: readonly BaseDamageFactorInput[] = [
+  { damageMultiplier: 2, finalStat },
+]
 const criticalInputs: readonly CriticalFactorInput[] = [0.5, 0.25]
 const damageBonusInputs: readonly DamageBonusFactorInput[] = [0.25, -0.125]
 
 factor.calculate([2, 3])
+baseDamageFactor.calculate(baseDamageInputs)
 criticalFactor.calculate(criticalInputs)
 damageBonusFactor.calculate(damageBonusInputs)
 `,

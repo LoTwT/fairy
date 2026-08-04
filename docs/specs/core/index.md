@@ -102,5 +102,6 @@ export function defineFactor<FactorInput>(
 
 ## 具体乘区
 
+- [基础伤害区](factors/base-damage.md)
 - [增伤区](factors/damage-bonus.md)
 - [暴击区](factors/critical.md)

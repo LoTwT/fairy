@@ -4,8 +4,12 @@ Fairy 的确定性计算核心包。
 
 当前包提供乘区定义基建和以下内置乘区：
 
+- 基础伤害区：`baseDamageFactor`
 - 增伤区：`damageBonusFactor`
 - 暴击区：`criticalFactor`
+
+此外提供 `calculateInitialStat` 和 `calculateFinalStat`，用于计算遵循通用属性公式的初始属性和最终
+属性。
 
 公式组合能力尚未实现。公共契约记录在
 [Core 计算规范](https://github.com/LoTwT/fairy/blob/main/docs/specs/core/index.md)。
