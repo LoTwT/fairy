@@ -1,3 +1,5 @@
+import { assertArray, assertFiniteResult } from "./internal/assert.ts"
+
 export type FactorResult = number
 
 export interface FactorParams<FactorInput> {
@@ -26,15 +28,11 @@ export function defineFactor<FactorInput>(
   const factor: Factor<FactorInput> = {
     factorId,
     calculate: (inputs) => {
-      if (!Array.isArray(inputs)) {
-        throw new TypeError("Factor inputs must be an array")
-      }
+      assertArray(inputs, "Factor inputs")
 
       const result = calculate(inputs)
 
-      if (!Number.isFinite(result)) {
-        throw new RangeError(`Factor "${factorId}" must return a finite number`)
-      }
+      assertFiniteResult(result, `Factor "${factorId}" result`)
 
       return result
     },

@@ -1,4 +1,8 @@
 import { defineFactor, type Factor } from "../factor.ts"
+import {
+  assertNonArrayObject,
+  assertNonNegativeFiniteNumber,
+} from "../internal/assert.ts"
 
 export interface BaseDamageFactorInput {
   readonly damageMultiplier: number
@@ -17,17 +21,7 @@ export const baseDamageFactor: Factor<BaseDamageFactorInput> =
         const { damageMultiplier, finalStat } =
           getValidatedBaseDamageFactorInput(input)
 
-        const baseDamage = damageMultiplier * finalStat
-
-        if (!Number.isFinite(baseDamage)) {
-          throw new RangeError("Base damage input product must be finite")
-        }
-
-        totalBaseDamage += baseDamage
-
-        if (!Number.isFinite(totalBaseDamage)) {
-          throw new RangeError("Base damage input sum must be finite")
-        }
+        totalBaseDamage += damageMultiplier * finalStat
       }
 
       return totalBaseDamage
@@ -37,9 +31,7 @@ export const baseDamageFactor: Factor<BaseDamageFactorInput> =
 function getValidatedBaseDamageFactorInput(
   input: unknown,
 ): BaseDamageFactorInput {
-  if (typeof input !== "object" || input === null) {
-    throw new TypeError("Base damage factor inputs must be objects")
-  }
+  assertNonArrayObject(input, "Base damage factor input")
 
   const { damageMultiplier, finalStat } = input as BaseDamageFactorInput
 
@@ -47,21 +39,4 @@ function getValidatedBaseDamageFactorInput(
   assertNonNegativeFiniteNumber(finalStat, "Base damage final stat")
 
   return { damageMultiplier, finalStat }
-}
-
-function assertNonNegativeFiniteNumber(
-  value: unknown,
-  name: string,
-): asserts value is number {
-  if (typeof value !== "number") {
-    throw new TypeError(`${name} must be a number`)
-  }
-
-  if (!Number.isFinite(value)) {
-    throw new RangeError(`${name} must be finite`)
-  }
-
-  if (value < 0) {
-    throw new RangeError(`${name} must be non-negative`)
-  }
 }

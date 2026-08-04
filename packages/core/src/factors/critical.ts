@@ -1,4 +1,5 @@
 import { defineFactor, type Factor } from "../factor.ts"
+import { assertFiniteNumber, assertFiniteResult } from "../internal/assert.ts"
 
 const BASE_CRITICAL_MULTIPLIER = 1
 const MIN_CRITICAL_DAMAGE = 0
@@ -15,14 +16,12 @@ export const criticalFactor: Factor<CriticalFactorInput> =
       let totalCriticalDamage = 0
 
       for (const input of inputs) {
-        assertValidCriticalFactorInput(input)
+        assertFiniteNumber(input, "Critical factor input")
 
         totalCriticalDamage += input
-
-        if (!Number.isFinite(totalCriticalDamage)) {
-          throw new RangeError("Critical damage input sum must be finite")
-        }
       }
+
+      assertFiniteResult(totalCriticalDamage, "Critical damage input sum")
 
       const effectiveCriticalDamage = Math.min(
         MAX_CRITICAL_DAMAGE,
@@ -32,15 +31,3 @@ export const criticalFactor: Factor<CriticalFactorInput> =
       return BASE_CRITICAL_MULTIPLIER + effectiveCriticalDamage
     },
   })
-
-function assertValidCriticalFactorInput(
-  input: unknown,
-): asserts input is CriticalFactorInput {
-  if (typeof input !== "number") {
-    throw new TypeError("Critical factor inputs must be numbers")
-  }
-
-  if (!Number.isFinite(input)) {
-    throw new RangeError("Critical factor inputs must be finite")
-  }
-}

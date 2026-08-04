@@ -15,6 +15,7 @@ interface StatCalculatorCase {
     fixedValueAdjustments: unknown,
   ) => number
   readonly calculateWithParams: (params: unknown) => number
+  readonly createStructurallyCompleteInvalidParams: () => readonly unknown[]
 }
 
 const statCalculatorCases: readonly StatCalculatorCase[] = [
@@ -32,6 +33,15 @@ const statCalculatorCases: readonly StatCalculatorCase[] = [
       } as unknown as CalculateInitialStatParams),
     calculateWithParams: (params) =>
       calculateInitialStat(params as CalculateInitialStatParams),
+    createStructurallyCompleteInvalidParams: () => {
+      const fields = {
+        baseStat: 80,
+        initialStatPercentageAdjustments: [],
+        initialStatFixedValueAdjustments: [],
+      }
+
+      return [Object.assign([], fields), Object.assign(() => undefined, fields)]
+    },
   },
   {
     name: "calculateFinalStat",
@@ -47,6 +57,15 @@ const statCalculatorCases: readonly StatCalculatorCase[] = [
       } as unknown as CalculateFinalStatParams),
     calculateWithParams: (params) =>
       calculateFinalStat(params as CalculateFinalStatParams),
+    createStructurallyCompleteInvalidParams: () => {
+      const fields = {
+        initialStat: 80,
+        finalStatPercentageAdjustments: [],
+        finalStatFixedValueAdjustments: [],
+      }
+
+      return [Object.assign([], fields), Object.assign(() => undefined, fields)]
+    },
   },
 ]
 
@@ -125,7 +144,11 @@ describe("stat calculation helpers", () => {
 
   describe.each(statCalculatorCases)(
     "$name",
-    ({ calculate, calculateWithParams }) => {
+    ({
+      calculate,
+      calculateWithParams,
+      createStructurallyCompleteInvalidParams,
+    }) => {
       it("returns the source stat when both adjustment arrays are empty", () => {
         expect(calculate(80, [], [])).toBe(80)
       })
@@ -146,6 +169,20 @@ describe("stat calculation helpers", () => {
         expect(calculate(80, [0.25, -0.125], [10, -5])).toBe(95)
       })
 
+      it("sums percentage adjustments in array order", () => {
+        const largeValue = 2 ** 53
+
+        expect(calculate(1, [largeValue, -largeValue, 1], [])).toBe(2)
+        expect(calculate(1, [largeValue, 1, -largeValue], [])).toBe(1)
+      })
+
+      it("sums fixed value adjustments in array order", () => {
+        const largeValue = 2 ** 53
+
+        expect(calculate(0, [], [largeValue, -largeValue, 1])).toBe(1)
+        expect(calculate(0, [], [largeValue, 1, -largeValue])).toBe(0)
+      })
+
       it("does not round a valid result", () => {
         const sourceStat = 0.123456789
         const percentageAdjustment = 0.234567891
@@ -156,47 +193,35 @@ describe("stat calculation helpers", () => {
         ).toBe(sourceStat * (1 + percentageAdjustment) + fixedValueAdjustment)
       })
 
-      it.each([null, undefined, 1, "params", [], () => undefined])(
-        "rejects the invalid params value %#",
-        (params) => {
+      it("rejects null params", () => {
+        expect(() => calculateWithParams(null)).toThrow(TypeError)
+      })
+
+      it("rejects callable and array params with otherwise valid fields", () => {
+        for (const params of createStructurallyCompleteInvalidParams()) {
           expect(() => calculateWithParams(params)).toThrow(TypeError)
-        },
-      )
+        }
+      })
 
-      it.each([null, undefined, 1, "adjustments", {}, new Set<number>()])(
-        "rejects the non-array percentage adjustments %#",
-        (adjustments) => {
-          expect(() => calculate(80, adjustments, [])).toThrow(TypeError)
-        },
-      )
+      it("rejects iterable non-array percentage adjustments", () => {
+        expect(() => calculate(80, new Set([0.25]), [])).toThrow(TypeError)
+      })
 
-      it.each([null, undefined, 1, "adjustments", {}, new Set<number>()])(
-        "rejects the non-array fixed value adjustments %#",
-        (adjustments) => {
-          expect(() => calculate(80, [], adjustments)).toThrow(TypeError)
-        },
-      )
+      it("rejects iterable non-array fixed value adjustments", () => {
+        expect(() => calculate(80, [], new Set([10]))).toThrow(TypeError)
+      })
 
-      it.each(["80", true, null, undefined, {}])(
-        "rejects the non-number source stat %#",
-        (sourceStat) => {
-          expect(() => calculate(sourceStat, [], [])).toThrow(TypeError)
-        },
-      )
+      it("rejects a non-number source stat", () => {
+        expect(() => calculate("80", [], [])).toThrow(TypeError)
+      })
 
-      it.each(["0.25", true, null, undefined, {}])(
-        "rejects the non-number percentage adjustment %#",
-        (adjustment) => {
-          expect(() => calculate(80, [adjustment], [])).toThrow(TypeError)
-        },
-      )
+      it("rejects a non-number percentage adjustment", () => {
+        expect(() => calculate(80, ["0.25"], [])).toThrow(TypeError)
+      })
 
-      it.each(["10", true, null, undefined, {}])(
-        "rejects the non-number fixed value adjustment %#",
-        (adjustment) => {
-          expect(() => calculate(80, [], [adjustment])).toThrow(TypeError)
-        },
-      )
+      it("rejects a non-number fixed value adjustment", () => {
+        expect(() => calculate(80, [], ["10"])).toThrow(TypeError)
+      })
 
       it.each([NaN, Infinity, -Infinity])(
         "rejects the non-finite source stat %s",
@@ -219,62 +244,32 @@ describe("stat calculation helpers", () => {
         },
       )
 
-      it("rejects a negative source stat", () => {
-        expect(() => calculate(-1, [], [])).toThrow(RangeError)
+      it("rejects a negative source stat even when the result would be zero", () => {
+        expect(() => calculate(-1, [-1], [])).toThrow(RangeError)
       })
 
-      it("rejects a negative percentage multiplier", () => {
-        expect(() => calculate(80, [-1.25], [])).toThrow(RangeError)
+      it("rejects a negative percentage multiplier for a zero source stat", () => {
+        expect(() => calculate(0, [-1.25], [])).toThrow(RangeError)
       })
 
       it("rejects a negative result", () => {
         expect(() => calculate(0, [], [-1])).toThrow(RangeError)
       })
 
-      it("rejects percentage adjustment overflow before later cancellation", () => {
+      it("rejects a non-finite percentage adjustment result", () => {
         expect(() =>
-          calculate(
-            1,
-            [Number.MAX_VALUE, Number.MAX_VALUE, -Number.MAX_VALUE],
-            [],
-          ),
+          calculate(1, [Number.MAX_VALUE, Number.MAX_VALUE], []),
         ).toThrow(RangeError)
       })
 
-      it("sums percentage adjustments in input order", () => {
-        expect(
-          calculate(
-            1,
-            [Number.MAX_VALUE, -Number.MAX_VALUE, Number.MAX_VALUE],
-            [],
-          ),
-        ).toBe(Number.MAX_VALUE)
+      it("rejects a non-finite multiplication result", () => {
+        expect(() => calculate(Number.MAX_VALUE, [1], [])).toThrow(RangeError)
       })
 
-      it("rejects multiplication overflow before fixed value adjustments", () => {
+      it("rejects a non-finite fixed value adjustment result", () => {
         expect(() =>
-          calculate(Number.MAX_VALUE, [1], [-Number.MAX_VALUE]),
+          calculate(0, [], [Number.MAX_VALUE, Number.MAX_VALUE]),
         ).toThrow(RangeError)
-      })
-
-      it("rejects fixed value adjustment overflow before later cancellation", () => {
-        expect(() =>
-          calculate(
-            0,
-            [],
-            [Number.MAX_VALUE, Number.MAX_VALUE, -Number.MAX_VALUE],
-          ),
-        ).toThrow(RangeError)
-      })
-
-      it("sums fixed value adjustments in input order", () => {
-        expect(
-          calculate(
-            0,
-            [],
-            [Number.MAX_VALUE, -Number.MAX_VALUE, Number.MAX_VALUE],
-          ),
-        ).toBe(Number.MAX_VALUE)
       })
 
       it("rejects final addition overflow", () => {

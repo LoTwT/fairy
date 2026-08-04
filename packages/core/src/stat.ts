@@ -1,3 +1,11 @@
+import {
+  assertArray,
+  assertFiniteNumber,
+  assertFiniteResult,
+  assertNonArrayObject,
+  assertNonNegativeFiniteNumber,
+} from "./internal/assert.ts"
+
 export interface CalculateInitialStatParams {
   readonly baseStat: number
   readonly initialStatPercentageAdjustments: readonly number[]
@@ -22,11 +30,11 @@ export function calculateInitialStat(
     initialStatFixedValueAdjustments,
   } = params
 
-  assertAdjustmentArray(
+  assertArray(
     initialStatPercentageAdjustments,
     "initialStatPercentageAdjustments",
   )
-  assertAdjustmentArray(
+  assertArray(
     initialStatFixedValueAdjustments,
     "initialStatFixedValueAdjustments",
   )
@@ -51,14 +59,8 @@ export function calculateFinalStat(params: CalculateFinalStatParams): number {
     finalStatFixedValueAdjustments,
   } = params
 
-  assertAdjustmentArray(
-    finalStatPercentageAdjustments,
-    "finalStatPercentageAdjustments",
-  )
-  assertAdjustmentArray(
-    finalStatFixedValueAdjustments,
-    "finalStatFixedValueAdjustments",
-  )
+  assertArray(finalStatPercentageAdjustments, "finalStatPercentageAdjustments")
+  assertArray(finalStatFixedValueAdjustments, "finalStatFixedValueAdjustments")
 
   return calculateStat(
     initialStat,
@@ -86,11 +88,6 @@ function calculateStat(
   )
   const percentageMultiplier = 1 + percentageAdjustment
 
-  assertFiniteCalculationResult(
-    percentageMultiplier,
-    `${percentageAdjustmentsName} multiplier`,
-  )
-
   if (percentageMultiplier < 0) {
     throw new RangeError(
       `${percentageAdjustmentsName} multiplier must be non-negative`,
@@ -99,15 +96,13 @@ function calculateStat(
 
   const adjustedStat = sourceStat * percentageMultiplier
 
-  assertFiniteCalculationResult(adjustedStat, `${sourceStatName} product`)
-
   const fixedValueAdjustment = sumFiniteAdjustments(
     fixedValueAdjustments,
     fixedValueAdjustmentsName,
   )
   const result = adjustedStat + fixedValueAdjustment
 
-  assertFiniteCalculationResult(result, "Calculated stat")
+  assertFiniteResult(result, "Calculated stat")
 
   if (result < 0) {
     throw new RangeError("Calculated stat must be non-negative")
@@ -126,59 +121,7 @@ function sumFiniteAdjustments(
     assertFiniteNumber(adjustment, `${name} entries`)
 
     total += adjustment
-
-    if (!Number.isFinite(total)) {
-      throw new RangeError(`${name} sum must be finite`)
-    }
   }
 
   return total
-}
-
-function assertNonArrayObject(
-  value: unknown,
-  name: string,
-): asserts value is object {
-  if (typeof value !== "object" || value === null || Array.isArray(value)) {
-    throw new TypeError(`${name} must be a non-array object`)
-  }
-}
-
-function assertAdjustmentArray(
-  value: unknown,
-  name: string,
-): asserts value is readonly unknown[] {
-  if (!Array.isArray(value)) {
-    throw new TypeError(`${name} must be an array`)
-  }
-}
-
-function assertNonNegativeFiniteNumber(
-  value: unknown,
-  name: string,
-): asserts value is number {
-  assertFiniteNumber(value, name)
-
-  if (value < 0) {
-    throw new RangeError(`${name} must be non-negative`)
-  }
-}
-
-function assertFiniteNumber(
-  value: unknown,
-  name: string,
-): asserts value is number {
-  if (typeof value !== "number") {
-    throw new TypeError(`${name} must be a number`)
-  }
-
-  if (!Number.isFinite(value)) {
-    throw new RangeError(`${name} must be finite`)
-  }
-}
-
-function assertFiniteCalculationResult(value: number, name: string): void {
-  if (!Number.isFinite(value)) {
-    throw new RangeError(`${name} must be finite`)
-  }
 }

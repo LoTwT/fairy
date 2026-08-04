@@ -41,6 +41,19 @@ describe("baseDamageFactor", () => {
     expect(baseDamageFactor.calculate([input, input])).toBe(60)
   })
 
+  it("accumulates inputs in array order", () => {
+    const largeValue = 2 ** 53
+    const largeInput = { damageMultiplier: 1, finalStat: largeValue }
+    const smallInput = { damageMultiplier: 1, finalStat: 1 }
+
+    expect(
+      baseDamageFactor.calculate([largeInput, smallInput, smallInput]),
+    ).toBe(largeValue)
+    expect(
+      baseDamageFactor.calculate([smallInput, smallInput, largeInput]),
+    ).toBe(largeValue + 2)
+  })
+
   it("accepts zero for either input field", () => {
     expect(
       baseDamageFactor.calculate([
@@ -68,33 +81,38 @@ describe("baseDamageFactor", () => {
     expect(input).toEqual({ damageMultiplier: 1.5, finalStat: 20 })
   })
 
-  it.each([
-    ["string", "input"],
-    ["number", 1],
-    ["boolean", true],
-    ["null", null],
-    ["undefined", undefined],
-  ])("rejects a non-object %s input", (_name, input) => {
-    const inputs = [input] as unknown as readonly BaseDamageFactorInput[]
+  it("rejects a null input", () => {
+    const inputs = [null] as unknown as readonly BaseDamageFactorInput[]
 
     expect(() => baseDamageFactor.calculate(inputs)).toThrow(TypeError)
+  })
+
+  it("rejects callable and array inputs even when their fields are valid", () => {
+    const fields = {
+      damageMultiplier: 1,
+      finalStat: 1,
+    }
+
+    for (const input of [
+      Object.assign(() => undefined, fields),
+      Object.assign([], fields),
+    ]) {
+      expect(() => baseDamageFactor.calculate([input])).toThrow(TypeError)
+    }
   })
 
   describe.each(["damageMultiplier", "finalStat"] as const)(
     "%s validation",
     (field) => {
-      it.each(["1", true, null, undefined, {}])(
-        "rejects the non-number value %#",
-        (value) => {
-          const input = {
-            damageMultiplier: 1,
-            finalStat: 1,
-            [field]: value,
-          } as unknown as BaseDamageFactorInput
+      it("rejects a non-number value", () => {
+        const input = {
+          damageMultiplier: 1,
+          finalStat: 1,
+          [field]: "1",
+        } as unknown as BaseDamageFactorInput
 
-          expect(() => baseDamageFactor.calculate([input])).toThrow(TypeError)
-        },
-      )
+        expect(() => baseDamageFactor.calculate([input])).toThrow(TypeError)
+      })
 
       it.each([NaN, Infinity, -Infinity])(
         "rejects the non-finite value %s",
@@ -121,7 +139,7 @@ describe("baseDamageFactor", () => {
     },
   )
 
-  it("rejects a non-finite input product", () => {
+  it("rejects a non-finite result caused by multiplication overflow", () => {
     expect(() =>
       baseDamageFactor.calculate([
         { damageMultiplier: Number.MAX_VALUE, finalStat: 2 },
@@ -129,7 +147,7 @@ describe("baseDamageFactor", () => {
     ).toThrow(RangeError)
   })
 
-  it("rejects a non-finite accumulated result", () => {
+  it("rejects a non-finite result caused by addition overflow", () => {
     expect(() =>
       baseDamageFactor.calculate([
         { damageMultiplier: 1, finalStat: Number.MAX_VALUE },

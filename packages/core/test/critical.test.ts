@@ -28,6 +28,13 @@ describe("criticalFactor", () => {
     expect(criticalFactor.calculate([0.25, 0.25])).toBe(1.5)
   })
 
+  it("sums inputs in array order", () => {
+    const largeValue = 2 ** 53
+
+    expect(criticalFactor.calculate([largeValue, -largeValue, 1])).toBe(2)
+    expect(criticalFactor.calculate([largeValue, 1, -largeValue])).toBe(1)
+  })
+
   it("does not round a valid result", () => {
     const input = 0.123456789
 
@@ -72,23 +79,5 @@ describe("criticalFactor", () => {
     [-Number.MAX_VALUE, -Number.MAX_VALUE],
   ])("rejects an input sum that overflows", (...inputs) => {
     expect(() => criticalFactor.calculate(inputs)).toThrow(RangeError)
-  })
-
-  it("checks overflow in input order", () => {
-    expect(() =>
-      criticalFactor.calculate([
-        Number.MAX_VALUE,
-        Number.MAX_VALUE,
-        -Number.MAX_VALUE,
-      ]),
-    ).toThrow(RangeError)
-
-    expect(
-      criticalFactor.calculate([
-        Number.MAX_VALUE,
-        -Number.MAX_VALUE,
-        Number.MAX_VALUE,
-      ]),
-    ).toBe(6)
   })
 })

@@ -80,14 +80,13 @@ export declare const criticalFactor: Factor<CriticalFactorInput>
 | --------------------------------------- | ----------------- |
 | 输入不是 `number`                       | 抛出 `TypeError`  |
 | 输入是 `NaN`、`Infinity` 或 `-Infinity` | 抛出 `RangeError` |
-| 输入求和产生非有限数值                  | 抛出 `RangeError` |
+| 钳制前的暴击伤害总和不是有限数值        | 抛出 `RangeError` |
 
-数值溢出属于计算失败，不能作为超出有效范围的普通结果进行钳制。
+钳制可能把 `Infinity` 或 `-Infinity` 转换为有限边界值，因此必须先检查暴击伤害总和，再执行钳制。
 
 ## 代码组织
 
 暴击区的生产代码统一放在 `packages/core/src/factors/critical.ts`。该文件包含身份常量、输入类型、
-`Factor` 定义、范围常量及仅供暴击区使用的校验和钳制逻辑。范围常量和私有辅助函数不对外导出。
+`Factor` 定义、范围常量及暴击区的求和和钳制逻辑。范围常量和私有辅助函数不对外导出。
 
-`packages/core/src/index.ts` 只负责重新导出公开 API，测试保存在独立测试文件中。只有某项逻辑出现第二个
-语义相同的实际使用者时，才从暴击区文件提取为公共实现。
+`packages/core/src/index.ts` 只负责重新导出公开 API，测试保存在独立测试文件中。

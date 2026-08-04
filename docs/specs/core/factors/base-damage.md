@@ -99,8 +99,9 @@ export declare function calculateFinalStat(
 最终属性 = initialStat × 最终百分比倍率 + Σ finalStatFixedValueAdjustments
 ```
 
-每个函数依次执行百分比调整求和、加上常量 `1`、乘以来源属性值、固定值调整求和和最终加法，并在
-每一步检查结果是否有限。结果不取整或截断。
+每个函数依次执行百分比调整求和、加上常量 `1`、乘以来源属性值、固定值调整求和和最终加法。加法、
+乘法和顺序归约属于普通连续算术，不承诺逐步检查中间结果。结果不额外取整或截断，公开返回前必须
+检查最终结果是否有限。
 
 `baseStat` 和 `initialStat` 必须是非负数，`0` 有效。调整数组成员允许任意有限有符号数值，
 不设置未经来源确认的单项上限。百分比倍率和计算结果也必须是非负数；负数属于无效结果并抛出
@@ -126,10 +127,8 @@ export declare function calculateFinalStat(
 | 属性值或调整数组成员不是 `number`    | 抛出 `TypeError`  |
 | 属性值或调整数组成员是非有限数值     | 抛出 `RangeError` |
 | `baseStat` 或 `initialStat` 小于 `0` | 抛出 `RangeError` |
-| 调整求和或后续任一步产生非有限数值   | 抛出 `RangeError` |
+| 最终计算结果不是有限数值             | 抛出 `RangeError` |
 | 百分比倍率或计算结果小于 `0`         | 抛出 `RangeError` |
-
-数值溢出必须在发生的步骤立即失败，不能由后续负调整抵消，也不能作为普通结果钳制。
 
 ## 适用边界
 
@@ -178,14 +177,14 @@ export declare function calculateFinalStat(
 
 | 失败条件                                        | 行为              |
 | ----------------------------------------------- | ----------------- |
-| 输入项不是对象或为 `null`                       | 抛出 `TypeError`  |
+| 输入项不是非数组对象或为 `null`                 | 抛出 `TypeError`  |
 | `damageMultiplier` 或 `finalStat` 不是 `number` | 抛出 `TypeError`  |
 | 任一字段是 `NaN`、`Infinity` 或 `-Infinity`     | 抛出 `RangeError` |
 | `damageMultiplier` 或 `finalStat` 小于 `0`      | 抛出 `RangeError` |
-| 单项乘积产生非有限数值                          | 抛出 `RangeError` |
-| 累加产生非有限数值                              | 抛出 `RangeError` |
+| 基础伤害区最终结果不是有限数值                  | 抛出 `RangeError` |
 
-每个输入项必须先完成字段校验，再执行乘法和累加。数值溢出属于计算失败，不能作为普通结果进行钳制。
+每个输入项必须先完成字段校验，再参与计算。乘法和累加属于普通连续算术，不承诺逐步检查中间结果；
+公开返回前由 `Factor` 公共契约检查最终结果是否有限。
 
 ## 代码组织
 

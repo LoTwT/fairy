@@ -29,6 +29,13 @@ describe("damageBonusFactor", () => {
     expect(damageBonusFactor.calculate([0.25, 0.25])).toBe(1.5)
   })
 
+  it("sums inputs in array order", () => {
+    const largeValue = 2 ** 53
+
+    expect(damageBonusFactor.calculate([largeValue, -largeValue, 1])).toBe(2)
+    expect(damageBonusFactor.calculate([largeValue, 1, -largeValue])).toBe(1)
+  })
+
   it("does not round a valid result", () => {
     const input = 0.123456789
 
@@ -73,23 +80,5 @@ describe("damageBonusFactor", () => {
     [-Number.MAX_VALUE, -Number.MAX_VALUE],
   ])("rejects an input sum that overflows", (...inputs) => {
     expect(() => damageBonusFactor.calculate(inputs)).toThrow(RangeError)
-  })
-
-  it("checks overflow in input order", () => {
-    expect(() =>
-      damageBonusFactor.calculate([
-        Number.MAX_VALUE,
-        Number.MAX_VALUE,
-        -Number.MAX_VALUE,
-      ]),
-    ).toThrow(RangeError)
-
-    expect(
-      damageBonusFactor.calculate([
-        Number.MAX_VALUE,
-        -Number.MAX_VALUE,
-        Number.MAX_VALUE,
-      ]),
-    ).toBe(6)
   })
 })

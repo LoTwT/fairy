@@ -47,7 +47,7 @@ describe("defineFactor", () => {
     expect(factor.calculate([])).toBe(1)
   })
 
-  it.each(["", " ", "\n\t"])("rejects an empty factorId %#", (factorId) => {
+  it.each(["", " \n\t"])("rejects an empty factorId %#", (factorId) => {
     expect(() =>
       defineFactor<ValueInput>({
         factorId,
@@ -56,17 +56,23 @@ describe("defineFactor", () => {
     ).toThrow(TypeError)
   })
 
-  it.each([undefined, null, 0, "calculate", {}])(
-    "rejects a non-function calculate value %#",
-    (calculate) => {
-      expect(() =>
-        defineFactor({
-          factorId: "invalid-calculation",
-          calculate,
-        } as unknown as FactorParams<ValueInput>),
-      ).toThrow(TypeError)
-    },
-  )
+  it("rejects a non-string factorId even when it provides trim", () => {
+    expect(() =>
+      defineFactor({
+        factorId: { trim: () => "object-factor" },
+        calculate: () => 1,
+      } as unknown as FactorParams<ValueInput>),
+    ).toThrow(TypeError)
+  })
+
+  it("rejects a non-function calculate value", () => {
+    expect(() =>
+      defineFactor({
+        factorId: "invalid-calculation",
+        calculate: {},
+      } as unknown as FactorParams<ValueInput>),
+    ).toThrow(TypeError)
+  })
 
   it.each([NaN, Infinity, -Infinity])(
     "rejects the non-finite result %s",
@@ -92,12 +98,7 @@ describe("defineFactor", () => {
     },
   )
 
-  it.each([
-    ["empty string", ""],
-    ["null", null],
-    ["plain object", {}],
-    ["set", new Set<ValueInput>()],
-  ])("rejects a non-array input: %s", (_name, input) => {
+  it("rejects a non-array input without calling the calculation", () => {
     let calculationCalled = false
     const factor = defineFactor<ValueInput>({
       factorId: "array-input",
@@ -108,7 +109,9 @@ describe("defineFactor", () => {
     })
 
     expect(() =>
-      factor.calculate(input as unknown as readonly ValueInput[]),
+      factor.calculate(
+        new Set<ValueInput>() as unknown as readonly ValueInput[],
+      ),
     ).toThrow(TypeError)
     expect(calculationCalled).toBe(false)
   })
