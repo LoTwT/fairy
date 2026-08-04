@@ -5,9 +5,9 @@
 | 中文术语 | 英文标识       | 规范定义                                                                       | 类别      |
 | -------- | -------------- | ------------------------------------------------------------------------------ | --------- |
 | 公式     | `Formula`      | 由有序乘区组成的不可变顶层业务定义，只组合各乘区产生的数值                     | core 模型 |
-| 乘区     | `Factor`       | 将自身的只读输入数组归约为一个有限数值的不可变计算定义，是 core 的核心计算单元 | 攻略原词  |
+| 乘区     | `Factor`       | 将一次完整运行时输入计算为一个有限数值的不可变计算定义，是 core 的核心计算单元 | 攻略原词  |
 | 倍率     | `Multiplier`   | 用于乘法缩放的无量纲数值；它是数值，不是乘区                                   | core 模型 |
-| 乘区输入 | `FactorInput`  | 调用方在一次乘区计算中提供的一项运行时输入；具体结构由对应乘区自行定义         | core 输入 |
+| 乘区输入 | `FactorInput`  | 调用方提供的一次乘区计算所需的完整运行时输入；具体结构由对应乘区自行定义       | core 输入 |
 | 乘区结果 | `FactorResult` | 乘区一次计算产生的有限数值                                                     | core 结果 |
 
 ### 术语边界
@@ -15,9 +15,11 @@
 - “公式”只表示常规伤害、贯穿伤害、异常伤害、异常积蓄值等由乘区组成的顶层业务计算。乘区内部的
   `calculate` 不因包含等式而成为独立公式。
 - `Factor` 是完整且可复用的计算定义，不保存某次计算使用的 `FactorInput`。
-- `FactorInput` 是泛型参数的统一名称，不存在所有乘区共同继承的输入类型。每个乘区自行定义输入结构、
-  空数组行为、重复项与顺序语义、合法值域及错误条件。
-- 固定常量、查表规则和派生算法属于 `Factor` 定义，不是调用方必须提供的 `FactorInput`。
+- `FactorInput` 是泛型参数的统一名称，不存在所有乘区共同继承的输入类型。它可以是数值数组、结构化
+  对象或其他由具体乘区明确声明的只读类型；公共契约不额外包裹数组。
+- `FactorInput` 只包含乘区主公式直接使用的参数。参数自身具有独立、稳定业务语义和计算规则时，可以
+  由 core 公开 helper 计算后再传入乘区；原始数据解析和效果适用性判断仍不属于 helper。
+- 固定常量、查表规则和派生算法必须由对应乘区或其配套 helper 统一维护，不得要求调用方重复实现。
 - `FactorResult` 是供 `Formula` 组合的数值，不包含乘区身份、输入副本、原始值、处理记录或分析结果。
 - 来源分析和输入贡献分析属于独立分析能力，不改变 `Factor.calculate` 的基础返回类型。
 - “倍率”表示 `Multiplier` 数值；产出倍率的乘区仍使用统一的 `Factor` 模型。
@@ -30,12 +32,12 @@ export type FactorResult = number
 
 export interface FactorParams<FactorInput> {
   factorId: string
-  calculate: (inputs: readonly FactorInput[]) => FactorResult
+  calculate: (input: FactorInput) => FactorResult
 }
 
 export interface Factor<FactorInput> {
   readonly factorId: string
-  readonly calculate: (inputs: readonly FactorInput[]) => FactorResult
+  readonly calculate: (input: FactorInput) => FactorResult
 }
 ```
 
@@ -46,8 +48,8 @@ export interface Factor<FactorInput> {
 - `FactorInput` 没有默认类型，也没有统一的上界约束。
 - `FactorResult` 统一为数值，不增加 `FactorOutput` 泛型。所有 `Factor` 产生单一数值是 `Formula`
   能够一致组合不同乘区的公共契约。
-- `calculate` 必须同步、确定性地完成计算，不得修改 `inputs` 或其中的成员。
-- 相同 `Factor` 和内容相同的 `inputs` 必须产生相同结果或抛出相同错误。
+- `calculate` 必须同步、确定性地完成计算，不得修改 `input` 或其嵌套成员。
+- 相同 `Factor` 和内容相同的 `input` 必须产生相同结果或抛出相同错误。
 - `calculate` 产生的负数、零及具体有效范围由对应乘区定义；公共契约只要求结果是有限数值。
 
 ## 运行时校验原则
@@ -86,11 +88,11 @@ export function defineFactor<FactorInput>(
 ### `calculate`
 
 - `calculate` 必须是函数，否则 `defineFactor` 在建立 `Factor` 前抛出 `TypeError`。
-- `Factor.calculate` 必须先使用 `Array.isArray` 检查 `inputs`；非数组输入必须抛出 `TypeError`，且不得
-  调用传入的计算函数。
-- `defineFactor` 返回的 `calculate` 调用传入的计算函数，然后使用 `Number.isFinite` 检查结果。
+- `defineFactor` 不对 `input` 建立统一的运行时形态约束；具体乘区必须按照自身规范校验完整输入。
+- `defineFactor` 返回的 `calculate` 将 `input` 原样传给构造参数中的计算函数，然后使用
+  `Number.isFinite` 检查结果。
 - `NaN`、`Infinity` 和 `-Infinity` 均为无效结果，必须抛出 `RangeError`。
-- `defineFactor` 不为 `inputs` 建立副本，也不在运行时冻结 `inputs`；只读约束由公共类型和具体乘区实现
+- `defineFactor` 不为 `input` 建立副本，也不在运行时冻结 `input`；只读约束由具体输入类型和乘区实现
   共同保证。
 - 传入的计算函数抛出的错误必须原样向调用方传播。
 
@@ -109,12 +111,25 @@ export function defineFactor<FactorInput>(
 | ------------------------------- | ------------------------------------ |
 | `factorId` 为空或只包含空白字符 | `defineFactor` 抛出 `TypeError`      |
 | `calculate` 不是函数            | `defineFactor` 抛出 `TypeError`      |
-| `inputs` 不是数组               | `Factor.calculate` 抛出 `TypeError`  |
 | `calculate` 返回非有限数值      | `Factor.calculate` 抛出 `RangeError` |
 | 具体乘区判定输入无效            | 传播具体乘区抛出的错误               |
 
 ## 具体乘区
 
+### 规范已更新，现有实现待同步
+
 - [基础伤害区](factors/base-damage.md)
 - [增伤区](factors/damage-bonus.md)
 - [暴击区](factors/critical.md)
+
+### 已规范，待实现
+
+- [防御区](factors/defense.md)
+- [抗性区](factors/resistance.md)
+- [减易伤区](factors/damage-taken.md)
+- [失衡易伤区](factors/stun-damage.md)
+- [贯穿增伤区](factors/sheer-damage-bonus.md)
+
+### 规则边界
+
+- [特殊乘区边界](factors/special.md)

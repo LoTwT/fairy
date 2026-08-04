@@ -17,7 +17,7 @@
 公开类型形态如下。该代码块描述公开契约，不限定内部实现方式。
 
 ```ts
-export type CriticalFactorInput = number
+export type CriticalFactorInput = readonly number[]
 
 export declare const CRITICAL_FACTOR_ID: "critical"
 
@@ -25,11 +25,12 @@ export declare const criticalFactor: Factor<CriticalFactorInput>
 ```
 
 由 `Factor<CriticalFactorInput>` 的通用契约可得，`criticalFactor.calculate` 接收
-`readonly CriticalFactorInput[]`，返回 `FactorResult`。
+`CriticalFactorInput`，返回 `FactorResult`。
 
-`CriticalFactorInput` 是 `number` 的语义别名，表示一项已经转换为小数且本次伤害实际适用的暴击伤害
-贡献。游戏文本中的 `50%` 以 `0.5` 传入。暴击伤害提升使用正数，暴击伤害降低使用负数，`0` 表示
-没有贡献。输入项不表示最终倍率，已经包含基础值 `1` 的暴击倍率不能作为暴击伤害贡献传入。
+`CriticalFactorInput` 是一次暴击区计算的完整贡献数组。每个成员表示一项已经转换为小数且本次伤害
+实际适用的暴击伤害贡献。游戏文本中的 `50%` 以 `0.5` 传入。暴击伤害提升使用正数，暴击伤害降低
+使用负数，`0` 表示没有贡献。数组成员不表示最终倍率，已经包含基础值 `1` 的暴击倍率不能作为暴击
+伤害贡献传入。
 
 基础暴击伤害属于进攻方属性，不是暴击区固定常量。调用方必须在暴击时将基础暴击伤害与本次实际
 适用的其他暴击伤害贡献一并传入；暴击区只负责汇总收到的数值，不补充代理人或敌人的默认属性。
@@ -68,7 +69,7 @@ export declare const criticalFactor: Factor<CriticalFactorInput>
 ## 暴击期望边界
 
 暴击区只计算一次已经确定结算结果的伤害，不计算暴击期望。暴击率不是
-`CriticalFactorInput`，不得将暴击率混入暴击伤害贡献数组。
+`CriticalFactorInput` 的成员，不得将暴击率混入暴击伤害贡献数组。
 
 `1 + 暴击率 × 暴击伤害` 是对多次伤害结果进行概率加权的期望计算，不是单次暴击区的归约规则。
 需要暴击期望时必须使用独立的期望计算能力，不得通过改变 `criticalFactor.calculate` 的输入语义或返回
@@ -76,11 +77,12 @@ export declare const criticalFactor: Factor<CriticalFactorInput>
 
 ## 有效性与失败行为
 
-| 失败条件                                | 行为              |
-| --------------------------------------- | ----------------- |
-| 输入不是 `number`                       | 抛出 `TypeError`  |
-| 输入是 `NaN`、`Infinity` 或 `-Infinity` | 抛出 `RangeError` |
-| 钳制前的暴击伤害总和不是有限数值        | 抛出 `RangeError` |
+| 失败条件                                    | 行为              |
+| ------------------------------------------- | ----------------- |
+| 输入不是数组                                | 抛出 `TypeError`  |
+| 数组成员不是 `number`                       | 抛出 `TypeError`  |
+| 数组成员是 `NaN`、`Infinity` 或 `-Infinity` | 抛出 `RangeError` |
+| 钳制前的暴击伤害总和不是有限数值            | 抛出 `RangeError` |
 
 钳制可能把 `Infinity` 或 `-Infinity` 转换为有限边界值，因此必须先检查暴击伤害总和，再执行钳制。
 

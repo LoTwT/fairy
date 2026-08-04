@@ -17,10 +17,12 @@
 公开类型形态如下。该代码块描述公开契约，不限定内部实现方式。
 
 ```ts
-export interface BaseDamageFactorInput {
+export interface BaseDamageFactorInputItem {
   readonly damageMultiplier: number
   readonly finalStat: number
 }
+
+export type BaseDamageFactorInput = readonly BaseDamageFactorInputItem[]
 
 export declare const BASE_DAMAGE_FACTOR_ID: "base_damage"
 
@@ -28,9 +30,10 @@ export declare const baseDamageFactor: Factor<BaseDamageFactorInput>
 ```
 
 由 `Factor<BaseDamageFactorInput>` 的通用契约可得，`baseDamageFactor.calculate` 接收
-`readonly BaseDamageFactorInput[]`，返回 `FactorResult`。
+`BaseDamageFactorInput`，返回 `FactorResult`。
 
-每个 `BaseDamageFactorInput` 表示基础伤害区中的一个独立计算项：
+`BaseDamageFactorInput` 是一次基础伤害区计算的完整输入，其中每个
+`BaseDamageFactorInputItem` 表示一个独立计算项：
 
 - `damageMultiplier` 是该项已经转换为小数的伤害倍率。游戏数据中的 `120%` 以 `1.2` 传入，不额外
   加上基础值 `1`。
@@ -116,7 +119,7 @@ export declare function calculateFinalStat(
 通用函数不提供固定比例的贯穿力转换，也不决定贯穿力转换与其他效果的计算顺序。
 
 调用方可以先调用 `calculateInitialStat`，再将其结果传给 `calculateFinalStat`，最后将最终属性作为
-`BaseDamageFactorInput.finalStat`。`baseDamageFactor` 本身不隐式调用这两个函数。
+`BaseDamageFactorInputItem.finalStat`。`baseDamageFactor` 本身不隐式调用这两个函数。
 
 ### 有效性与失败行为
 
@@ -177,6 +180,7 @@ export declare function calculateFinalStat(
 
 | 失败条件                                        | 行为              |
 | ----------------------------------------------- | ----------------- |
+| 输入不是数组                                    | 抛出 `TypeError`  |
 | 输入项不是非数组对象或为 `null`                 | 抛出 `TypeError`  |
 | `damageMultiplier` 或 `finalStat` 不是 `number` | 抛出 `TypeError`  |
 | 任一字段是 `NaN`、`Infinity` 或 `-Infinity`     | 抛出 `RangeError` |
