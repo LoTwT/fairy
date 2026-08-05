@@ -1,15 +1,15 @@
-import { assertArray, assertFiniteResult } from "./internal/assert.ts"
+import { assertFiniteResult } from "./internal/assert.ts"
 
 export type FactorResult = number
 
 export interface FactorParams<FactorInput> {
   factorId: string
-  calculate: (inputs: readonly FactorInput[]) => FactorResult
+  calculate: (input: FactorInput) => FactorResult
 }
 
 export interface Factor<FactorInput> {
   readonly factorId: string
-  readonly calculate: (inputs: readonly FactorInput[]) => FactorResult
+  readonly calculate: (input: FactorInput) => FactorResult
 }
 
 export function defineFactor<FactorInput>(
@@ -27,10 +27,8 @@ export function defineFactor<FactorInput>(
 
   const factor: Factor<FactorInput> = {
     factorId,
-    calculate: (inputs) => {
-      assertArray(inputs, "Factor inputs")
-
-      const result = calculate(inputs)
+    calculate: (input) => {
+      const result = calculate(input)
 
       assertFiniteResult(result, `Factor "${factorId}" result`)
 

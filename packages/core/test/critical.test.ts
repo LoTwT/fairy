@@ -8,7 +8,7 @@ import {
 
 describe("criticalFactor", () => {
   it("exposes its public identity and types", () => {
-    expectTypeOf<CriticalFactorInput>().toEqualTypeOf<number>()
+    expectTypeOf<CriticalFactorInput>().toEqualTypeOf<readonly number[]>()
     expectTypeOf(CRITICAL_FACTOR_ID).toEqualTypeOf<"critical">()
     expectTypeOf(criticalFactor).toEqualTypeOf<Factor<CriticalFactorInput>>()
 
@@ -55,6 +55,12 @@ describe("criticalFactor", () => {
     expect(inputs).toEqual([0.5, -0.125])
   })
 
+  it("rejects a non-array input", () => {
+    const input = new Set([0.5]) as unknown as CriticalFactorInput
+
+    expect(() => criticalFactor.calculate(input)).toThrow(TypeError)
+  })
+
   it.each([
     ["string", "0.5"],
     ["boolean", true],
@@ -62,7 +68,7 @@ describe("criticalFactor", () => {
     ["undefined", undefined],
     ["object", { value: 0.5 }],
   ])("rejects a non-number %s input", (_name, input) => {
-    const inputs = [input] as unknown as readonly CriticalFactorInput[]
+    const inputs = [input] as unknown as CriticalFactorInput
 
     expect(() => criticalFactor.calculate(inputs)).toThrow(TypeError)
   })

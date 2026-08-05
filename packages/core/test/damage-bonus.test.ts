@@ -8,7 +8,7 @@ import {
 
 describe("damageBonusFactor", () => {
   it("exposes its public identity and types", () => {
-    expectTypeOf<DamageBonusFactorInput>().toEqualTypeOf<number>()
+    expectTypeOf<DamageBonusFactorInput>().toEqualTypeOf<readonly number[]>()
     expectTypeOf(DAMAGE_BONUS_FACTOR_ID).toEqualTypeOf<"damage_bonus">()
     expectTypeOf(damageBonusFactor).toEqualTypeOf<
       Factor<DamageBonusFactorInput>
@@ -56,6 +56,12 @@ describe("damageBonusFactor", () => {
     expect(inputs).toEqual([0.25, -0.125])
   })
 
+  it("rejects a non-array input", () => {
+    const input = new Set([0.25]) as unknown as DamageBonusFactorInput
+
+    expect(() => damageBonusFactor.calculate(input)).toThrow(TypeError)
+  })
+
   it.each([
     ["string", "0.25"],
     ["boolean", true],
@@ -63,7 +69,7 @@ describe("damageBonusFactor", () => {
     ["undefined", undefined],
     ["object", { value: 0.25 }],
   ])("rejects a non-number %s input", (_name, input) => {
-    const inputs = [input] as unknown as readonly DamageBonusFactorInput[]
+    const inputs = [input] as unknown as DamageBonusFactorInput
 
     expect(() => damageBonusFactor.calculate(inputs)).toThrow(TypeError)
   })

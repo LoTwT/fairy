@@ -19,13 +19,17 @@ Fairy 的确定性计算核心包。
 ```ts
 import { defineFactor } from "@randomplay/core"
 
-const bonusFactor = defineFactor<{ readonly damageBonus: number }>({
+interface BonusFactorInput {
+  readonly damageBonuses: readonly number[]
+}
+
+const bonusFactor = defineFactor<BonusFactorInput>({
   factorId: "bonus",
-  calculate: (inputs) =>
-    1 + inputs.reduce((sum, input) => sum + input.damageBonus, 0),
+  calculate: (input) =>
+    1 + input.damageBonuses.reduce((sum, damageBonus) => sum + damageBonus, 0),
 })
 
-bonusFactor.calculate([{ damageBonus: 0.2 }, { damageBonus: 0.3 }])
+bonusFactor.calculate({ damageBonuses: [0.2, 0.3] })
 // 1.5
 ```
 

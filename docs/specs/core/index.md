@@ -116,7 +116,7 @@ export function defineFactor<FactorInput>(
 
 ## 具体乘区
 
-### 规范已更新，现有实现待同步
+### 已实现
 
 - [基础伤害区](factors/base-damage.md)
 - [增伤区](factors/damage-bonus.md)

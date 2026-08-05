@@ -116,12 +116,11 @@ import {
 
 const factor = defineFactor({
   factorId: "sum",
-  calculate: (inputs) => inputs.reduce((sum, input) => sum + input, 0),
+  calculate: (input) => input.values.reduce((sum, value) => sum + value, 0),
 })
 
-assert.equal(factor.calculate([2, 3]), 5)
+assert.equal(factor.calculate({ values: [2, 3] }), 5)
 assert.equal(Object.isFrozen(factor), true)
-assert.throws(() => factor.calculate(""), TypeError)
 assert.throws(
   () => defineFactor({ factorId: "invalid", calculate: null }),
   TypeError,
@@ -162,6 +161,7 @@ assert.equal(criticalFactor.calculate([0.5, 0.25]), 1.75)
   damageBonusFactor,
   defineFactor,
   type BaseDamageFactorInput,
+  type BaseDamageFactorInputItem,
   type CalculateFinalStatParams,
   type CalculateInitialStatParams,
   type CriticalFactorInput,
@@ -170,13 +170,18 @@ assert.equal(criticalFactor.calculate([0.5, 0.25]), 1.75)
   type FactorParams,
 } from "@randomplay/core"
 
-const params: FactorParams<number> = {
+interface SumFactorInput {
+  readonly values: readonly number[]
+}
+
+const params: FactorParams<SumFactorInput> = {
   factorId: "draft-sum",
-  calculate: (inputs) => inputs.reduce((sum, input) => sum + input, 0),
+  calculate: (input) =>
+    input.values.reduce((sum, value) => sum + value, 0),
 }
 params.factorId = "sum"
 
-const factor: Factor<number> = defineFactor(params)
+const factor: Factor<SumFactorInput> = defineFactor(params)
 const initialStatParams: CalculateInitialStatParams = {
   baseStat: 80,
   initialStatPercentageAdjustments: [0.25, -0.125],
@@ -189,13 +194,15 @@ const finalStatParams: CalculateFinalStatParams = {
   finalStatFixedValueAdjustments: [5, -0.75],
 }
 const finalStat = calculateFinalStat(finalStatParams)
-const baseDamageInputs: readonly BaseDamageFactorInput[] = [
-  { damageMultiplier: 2, finalStat },
-]
-const criticalInputs: readonly CriticalFactorInput[] = [0.5, 0.25]
-const damageBonusInputs: readonly DamageBonusFactorInput[] = [0.25, -0.125]
+const baseDamageInputItem: BaseDamageFactorInputItem = {
+  damageMultiplier: 2,
+  finalStat,
+}
+const baseDamageInputs: BaseDamageFactorInput = [baseDamageInputItem]
+const criticalInputs: CriticalFactorInput = [0.5, 0.25]
+const damageBonusInputs: DamageBonusFactorInput = [0.25, -0.125]
 
-factor.calculate([2, 3])
+factor.calculate({ values: [2, 3] })
 baseDamageFactor.calculate(baseDamageInputs)
 criticalFactor.calculate(criticalInputs)
 damageBonusFactor.calculate(damageBonusInputs)

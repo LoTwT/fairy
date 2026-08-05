@@ -4,7 +4,10 @@ export {
   BASE_DAMAGE_FACTOR_ID,
   baseDamageFactor,
 } from "./factors/base-damage.ts"
-export type { BaseDamageFactorInput } from "./factors/base-damage.ts"
+export type {
+  BaseDamageFactorInput,
+  BaseDamageFactorInputItem,
+} from "./factors/base-damage.ts"
 export {
   DAMAGE_BONUS_FACTOR_ID,
   damageBonusFactor,

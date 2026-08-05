@@ -8,15 +8,14 @@ interface ValueInput {
 describe("defineFactor", () => {
   it("defines a typed factor and calculates a finite result", () => {
     const params: FactorParams<ValueInput> = {
-      factorId: "value-sum",
-      calculate: (inputs) =>
-        inputs.reduce((sum, input) => sum + input.value, 0),
+      factorId: "value",
+      calculate: (input) => input.value,
     }
     const factor = defineFactor(params)
 
     expectTypeOf(factor).toEqualTypeOf<Factor<ValueInput>>()
-    expect(factor.factorId).toBe("value-sum")
-    expect(factor.calculate([{ value: 2 }, { value: 3 }])).toBe(5)
+    expect(factor.factorId).toBe("value")
+    expect(factor.calculate({ value: 5 })).toBe(5)
   })
 
   it("freezes the returned Factor", () => {
@@ -44,7 +43,7 @@ describe("defineFactor", () => {
 
     expect(Object.isFrozen(params)).toBe(false)
     expect(factor.factorId).toBe("original-factor")
-    expect(factor.calculate([])).toBe(1)
+    expect(factor.calculate({ value: 0 })).toBe(1)
   })
 
   it.each(["", " \n\t"])("rejects an empty factorId %#", (factorId) => {
@@ -82,7 +81,7 @@ describe("defineFactor", () => {
         calculate: () => result,
       })
 
-      expect(() => factor.calculate([])).toThrow(RangeError)
+      expect(() => factor.calculate({ value: 0 })).toThrow(RangeError)
     },
   )
 
@@ -94,26 +93,17 @@ describe("defineFactor", () => {
         calculate: () => result,
       })
 
-      expect(factor.calculate([])).toBe(result)
+      expect(factor.calculate({ value: 0 })).toBe(result)
     },
   )
 
-  it("rejects a non-array input without calling the calculation", () => {
-    let calculationCalled = false
-    const factor = defineFactor<ValueInput>({
-      factorId: "array-input",
-      calculate: () => {
-        calculationCalled = true
-        return 1
-      },
+  it("does not impose a common runtime shape on FactorInput", () => {
+    const factor = defineFactor<ReadonlySet<number>>({
+      factorId: "set-size",
+      calculate: (input) => input.size,
     })
 
-    expect(() =>
-      factor.calculate(
-        new Set<ValueInput>() as unknown as readonly ValueInput[],
-      ),
-    ).toThrow(TypeError)
-    expect(calculationCalled).toBe(false)
+    expect(factor.calculate(new Set([1, 2]))).toBe(2)
   })
 
   it("propagates errors from the provided calculation function", () => {
@@ -127,7 +117,7 @@ describe("defineFactor", () => {
     let actualError: unknown
 
     try {
-      factor.calculate([])
+      factor.calculate({ value: 0 })
     } catch (error) {
       actualError = error
     }
@@ -135,19 +125,19 @@ describe("defineFactor", () => {
     expect(actualError).toBe(expectedError)
   })
 
-  it("passes the input array through without copying or freezing it", () => {
-    const inputs: ValueInput[] = [{ value: 1 }]
-    let receivedInputs: readonly ValueInput[] | undefined
+  it("passes the input through without copying or freezing it", () => {
+    const input: ValueInput = { value: 1 }
+    let receivedInput: ValueInput | undefined
     const factor = defineFactor<ValueInput>({
       factorId: "input-identity",
-      calculate: (currentInputs) => {
-        receivedInputs = currentInputs
-        return currentInputs.length
+      calculate: (currentInput) => {
+        receivedInput = currentInput
+        return currentInput.value
       },
     })
 
-    expect(factor.calculate(inputs)).toBe(1)
-    expect(receivedInputs).toBe(inputs)
-    expect(Object.isFrozen(inputs)).toBe(false)
+    expect(factor.calculate(input)).toBe(1)
+    expect(receivedInput).toBe(input)
+    expect(Object.isFrozen(input)).toBe(false)
   })
 })

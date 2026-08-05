@@ -3,15 +3,19 @@ import {
   BASE_DAMAGE_FACTOR_ID,
   baseDamageFactor,
   type BaseDamageFactorInput,
+  type BaseDamageFactorInputItem,
   type Factor,
 } from "../src/index.ts"
 
 describe("baseDamageFactor", () => {
   it("exposes its public identity and types", () => {
-    expectTypeOf<BaseDamageFactorInput>().toEqualTypeOf<{
+    expectTypeOf<BaseDamageFactorInputItem>().toEqualTypeOf<{
       readonly damageMultiplier: number
       readonly finalStat: number
     }>()
+    expectTypeOf<BaseDamageFactorInput>().toEqualTypeOf<
+      readonly BaseDamageFactorInputItem[]
+    >()
     expectTypeOf(BASE_DAMAGE_FACTOR_ID).toEqualTypeOf<"base_damage">()
     expectTypeOf(baseDamageFactor).toEqualTypeOf<
       Factor<BaseDamageFactorInput>
@@ -81,8 +85,16 @@ describe("baseDamageFactor", () => {
     expect(input).toEqual({ damageMultiplier: 1.5, finalStat: 20 })
   })
 
+  it("rejects a non-array input", () => {
+    const input = new Set([
+      { damageMultiplier: 1, finalStat: 1 },
+    ]) as unknown as BaseDamageFactorInput
+
+    expect(() => baseDamageFactor.calculate(input)).toThrow(TypeError)
+  })
+
   it("rejects a null input", () => {
-    const inputs = [null] as unknown as readonly BaseDamageFactorInput[]
+    const inputs = [null] as unknown as BaseDamageFactorInput
 
     expect(() => baseDamageFactor.calculate(inputs)).toThrow(TypeError)
   })
@@ -109,7 +121,7 @@ describe("baseDamageFactor", () => {
           damageMultiplier: 1,
           finalStat: 1,
           [field]: "1",
-        } as unknown as BaseDamageFactorInput
+        } as unknown as BaseDamageFactorInputItem
 
         expect(() => baseDamageFactor.calculate([input])).toThrow(TypeError)
       })
