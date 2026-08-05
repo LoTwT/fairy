@@ -109,6 +109,7 @@ import {
   DAMAGE_TAKEN_FACTOR_ID,
   DEFENSE_FACTOR_ID,
   RESISTANCE_FACTOR_ID,
+  SHEER_DAMAGE_BONUS_FACTOR_ID,
   STUN_DAMAGE_FACTOR_ID,
   baseDamageFactor,
   calculateFinalStat,
@@ -122,6 +123,7 @@ import {
   defenseFactor,
   defineFactor,
   resistanceFactor,
+  sheerDamageBonusFactor,
   stunDamageFactor,
 } from "@randomplay/core"
 
@@ -200,6 +202,12 @@ assert.equal(
   }),
   1 - 0.2 + 0.1 + 0.05,
 )
+assert.equal(SHEER_DAMAGE_BONUS_FACTOR_ID, "sheer_damage_bonus")
+assert.equal(
+  sheerDamageBonusFactor.factorId,
+  SHEER_DAMAGE_BONUS_FACTOR_ID,
+)
+assert.equal(sheerDamageBonusFactor.calculate([0.25]), 1.25)
 assert.equal(STUN_DAMAGE_FACTOR_ID, "stun_damage")
 assert.equal(stunDamageFactor.factorId, STUN_DAMAGE_FACTOR_ID)
 assert.equal(
@@ -227,6 +235,7 @@ assert.equal(
   defenseFactor,
   defineFactor,
   resistanceFactor,
+  sheerDamageBonusFactor,
   stunDamageFactor,
   type BaseDamageFactorInput,
   type BaseDamageFactorInputItem,
@@ -241,6 +250,7 @@ assert.equal(
   type Factor,
   type FactorParams,
   type ResistanceFactorInput,
+  type SheerDamageBonusFactorInput,
   type StunDamageFactorInput,
 } from "@randomplay/core"
 
@@ -302,6 +312,7 @@ const resistanceInput: ResistanceFactorInput = {
   targetResistanceReductions: [0.1],
   attackerResistanceIgnoreValues: [0.05],
 }
+const sheerDamageBonusInputs: SheerDamageBonusFactorInput = [0.25, -0.125]
 const stunDamageInput: StunDamageFactorInput = {
   isTargetStunned: true,
   targetBaseStunDamageMultiplier: 1.5,
@@ -315,6 +326,7 @@ damageBonusFactor.calculate(damageBonusInputs)
 damageTakenFactor.calculate(damageTakenInput)
 defenseFactor.calculate(defenseInput)
 resistanceFactor.calculate(resistanceInput)
+sheerDamageBonusFactor.calculate(sheerDamageBonusInputs)
 stunDamageFactor.calculate(stunDamageInput)
 `,
     )

@@ -125,9 +125,6 @@ export function defineFactor<FactorInput>(
 - [抗性区](factors/resistance.md)
 - [减易伤区](factors/damage-taken.md)
 - [失衡易伤区](factors/stun-damage.md)
-
-### 已规范，待实现
-
 - [贯穿增伤区](factors/sheer-damage-bonus.md)
 
 ### 规则边界
