@@ -27,6 +27,8 @@ export type {
   CalculateTargetEffectiveDefenseParams,
   DefenseFactorInput,
 } from "./factors/defense.ts"
+export { RESISTANCE_FACTOR_ID, resistanceFactor } from "./factors/resistance.ts"
+export type { ResistanceFactorInput } from "./factors/resistance.ts"
 export { calculateFinalStat, calculateInitialStat } from "./stat.ts"
 export type {
   CalculateFinalStatParams,

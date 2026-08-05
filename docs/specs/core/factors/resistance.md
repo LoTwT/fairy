@@ -19,8 +19,8 @@
 ```ts
 export interface ResistanceFactorInput {
   readonly targetResistance: number
-  readonly resistanceReductions: readonly number[]
-  readonly resistanceIgnores: readonly number[]
+  readonly targetResistanceReductions: readonly number[]
+  readonly attackerResistanceIgnoreValues: readonly number[]
 }
 
 export declare const RESISTANCE_FACTOR_ID: "resistance"
@@ -32,8 +32,8 @@ export declare const resistanceFactor: Factor<ResistanceFactorInput>
 `ResistanceFactorInput`，返回 `FactorResult`。
 
 - `targetResistance` 表示本次计算采用的受击方抗性快照。
-- `resistanceReductions` 保存本次计算适用的受击方抗性降低贡献。
-- `resistanceIgnores` 保存本次计算适用的攻击方无视抗性贡献。
+- `targetResistanceReductions` 保存本次计算适用的受击方抗性降低贡献。
+- `attackerResistanceIgnoreValues` 保存本次计算适用的攻击方无视抗性贡献。
 
 输入只保存抗性区主公式直接使用的参数，不保存属性种类或数值来源。
 
@@ -54,7 +54,7 @@ export declare const resistanceFactor: Factor<ResistanceFactorInput>
 
 ## 数组语义
 
-- `resistanceReductions` 和 `resistanceIgnores` 为空数组时，对应总和为 `0`。
+- `targetResistanceReductions` 和 `attackerResistanceIgnoreValues` 为空数组时，对应总和为 `0`。
 - 每个数组成员独立参与求和，内容相同的成员不会合并或去重。
 - 成员按各自数组中的顺序求和，顺序不表示业务优先级。
 - 计算不得修改输入对象或其中的数组。
@@ -65,8 +65,8 @@ export declare const resistanceFactor: Factor<ResistanceFactorInput>
 未钳制值
 = 1
   - targetResistance
-  + Σ resistanceReductions
-  + Σ resistanceIgnores
+  + Σ targetResistanceReductions
+  + Σ attackerResistanceIgnoreValues
 
 抗性区结果 = clamp(未钳制值, 0, 2)
 ```
@@ -87,7 +87,8 @@ export declare const resistanceFactor: Factor<ResistanceFactorInput>
 ## 输入值域
 
 - `targetResistance` 允许任意有限有符号数值，因为弱点抗性可以小于 `0`。
-- `resistanceReductions` 和 `resistanceIgnores` 的成员必须是非负有限数，方向由字段语义表达。
+- `targetResistanceReductions` 和 `attackerResistanceIgnoreValues` 的成员必须是非负有限数，方向由字段
+  语义表达。
 - 三类数值均使用已经转换为小数的无量纲值；游戏文本中的 `20%` 以 `0.2` 传入。
 - 不设置未经来源确认的单项上限，最终统一按抗性区范围钳制。
 

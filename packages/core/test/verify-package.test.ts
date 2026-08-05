@@ -107,6 +107,7 @@ import {
   CRITICAL_FACTOR_ID,
   DAMAGE_BONUS_FACTOR_ID,
   DEFENSE_FACTOR_ID,
+  RESISTANCE_FACTOR_ID,
   baseDamageFactor,
   calculateFinalStat,
   calculateInitialStat,
@@ -117,6 +118,7 @@ import {
   damageBonusFactor,
   defenseFactor,
   defineFactor,
+  resistanceFactor,
 } from "@randomplay/core"
 
 const factor = defineFactor({
@@ -175,6 +177,16 @@ assert.equal(
   defenseFactor.calculate({ attackerLevelBase, targetEffectiveDefense }),
   attackerLevelBase / (targetEffectiveDefense + attackerLevelBase),
 )
+assert.equal(RESISTANCE_FACTOR_ID, "resistance")
+assert.equal(resistanceFactor.factorId, RESISTANCE_FACTOR_ID)
+assert.equal(
+  resistanceFactor.calculate({
+    targetResistance: 0.2,
+    targetResistanceReductions: [0.1],
+    attackerResistanceIgnoreValues: [0.05],
+  }),
+  1 - 0.2 + 0.1 + 0.05,
+)
 `,
     )
     writeFileSync(
@@ -190,6 +202,7 @@ assert.equal(
   damageBonusFactor,
   defenseFactor,
   defineFactor,
+  resistanceFactor,
   type BaseDamageFactorInput,
   type BaseDamageFactorInputItem,
   type CalculateFinalStatParams,
@@ -201,6 +214,7 @@ assert.equal(
   type DefenseFactorInput,
   type Factor,
   type FactorParams,
+  type ResistanceFactorInput,
 } from "@randomplay/core"
 
 interface SumFactorInput {
@@ -252,12 +266,18 @@ const defenseInput: DefenseFactorInput = {
     targetEffectiveDefenseParams,
   ),
 }
+const resistanceInput: ResistanceFactorInput = {
+  targetResistance: 0.2,
+  targetResistanceReductions: [0.1],
+  attackerResistanceIgnoreValues: [0.05],
+}
 
 factor.calculate({ values: [2, 3] })
 baseDamageFactor.calculate(baseDamageInputs)
 criticalFactor.calculate(criticalInputs)
 damageBonusFactor.calculate(damageBonusInputs)
 defenseFactor.calculate(defenseInput)
+resistanceFactor.calculate(resistanceInput)
 `,
     )
 
