@@ -121,10 +121,10 @@ export function defineFactor<FactorInput>(
 - [基础伤害区](factors/base-damage.md)
 - [增伤区](factors/damage-bonus.md)
 - [暴击区](factors/critical.md)
+- [防御区](factors/defense.md)
 
 ### 已规范，待实现
 
-- [防御区](factors/defense.md)
 - [抗性区](factors/resistance.md)
 - [减易伤区](factors/damage-taken.md)
 - [失衡易伤区](factors/stun-damage.md)

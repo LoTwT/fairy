@@ -40,6 +40,17 @@ export function assertNonNegativeFiniteNumber(
   }
 }
 
+export function assertPositiveFiniteNumber(
+  value: unknown,
+  name: string,
+): asserts value is number {
+  assertFiniteNumber(value, name)
+
+  if (value <= 0) {
+    throw new RangeError(`${name} must be positive`)
+  }
+}
+
 export function assertFiniteResult(value: number, name: string): void {
   if (!Number.isFinite(value)) {
     throw new RangeError(`${name} must be finite`)

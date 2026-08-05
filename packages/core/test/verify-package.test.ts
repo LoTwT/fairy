@@ -106,11 +106,16 @@ import {
   BASE_DAMAGE_FACTOR_ID,
   CRITICAL_FACTOR_ID,
   DAMAGE_BONUS_FACTOR_ID,
+  DEFENSE_FACTOR_ID,
   baseDamageFactor,
   calculateFinalStat,
   calculateInitialStat,
+  calculateDefenseLevelBase,
+  calculateTargetBaseDefense,
+  calculateTargetEffectiveDefense,
   criticalFactor,
   damageBonusFactor,
+  defenseFactor,
   defineFactor,
 } from "@randomplay/core"
 
@@ -149,6 +154,27 @@ assert.equal(damageBonusFactor.calculate([0.25]), 1.25)
 assert.equal(CRITICAL_FACTOR_ID, "critical")
 assert.equal(criticalFactor.factorId, CRITICAL_FACTOR_ID)
 assert.equal(criticalFactor.calculate([0.5, 0.25]), 1.75)
+const attackerLevelBase = calculateDefenseLevelBase(60)
+const targetLevelBase = calculateDefenseLevelBase(60)
+const targetBaseDefense = calculateTargetBaseDefense({
+  targetLevelBase,
+  targetLevelOneBaseDefense: 60,
+})
+const targetEffectiveDefense = calculateTargetEffectiveDefense({
+  targetBaseDefense,
+  defensePercentageAdjustments: [],
+  penetrationRatios: [0.24],
+  penetrationValues: [],
+})
+assert.equal(attackerLevelBase, 794)
+assert.equal(targetBaseDefense, 952.8)
+assert.equal(targetEffectiveDefense, 952.8 * 0.76)
+assert.equal(DEFENSE_FACTOR_ID, "defense")
+assert.equal(defenseFactor.factorId, DEFENSE_FACTOR_ID)
+assert.equal(
+  defenseFactor.calculate({ attackerLevelBase, targetEffectiveDefense }),
+  attackerLevelBase / (targetEffectiveDefense + attackerLevelBase),
+)
 `,
     )
     writeFileSync(
@@ -157,15 +183,22 @@ assert.equal(criticalFactor.calculate([0.5, 0.25]), 1.75)
   baseDamageFactor,
   calculateFinalStat,
   calculateInitialStat,
+  calculateDefenseLevelBase,
+  calculateTargetBaseDefense,
+  calculateTargetEffectiveDefense,
   criticalFactor,
   damageBonusFactor,
+  defenseFactor,
   defineFactor,
   type BaseDamageFactorInput,
   type BaseDamageFactorInputItem,
   type CalculateFinalStatParams,
   type CalculateInitialStatParams,
+  type CalculateTargetBaseDefenseParams,
+  type CalculateTargetEffectiveDefenseParams,
   type CriticalFactorInput,
   type DamageBonusFactorInput,
+  type DefenseFactorInput,
   type Factor,
   type FactorParams,
 } from "@randomplay/core"
@@ -201,11 +234,30 @@ const baseDamageInputItem: BaseDamageFactorInputItem = {
 const baseDamageInputs: BaseDamageFactorInput = [baseDamageInputItem]
 const criticalInputs: CriticalFactorInput = [0.5, 0.25]
 const damageBonusInputs: DamageBonusFactorInput = [0.25, -0.125]
+const targetLevelBase = calculateDefenseLevelBase(60)
+const targetBaseDefenseParams: CalculateTargetBaseDefenseParams = {
+  targetLevelBase,
+  targetLevelOneBaseDefense: 60,
+}
+const targetBaseDefense = calculateTargetBaseDefense(targetBaseDefenseParams)
+const targetEffectiveDefenseParams: CalculateTargetEffectiveDefenseParams = {
+  targetBaseDefense,
+  defensePercentageAdjustments: [],
+  penetrationRatios: [0.24],
+  penetrationValues: [],
+}
+const defenseInput: DefenseFactorInput = {
+  attackerLevelBase: calculateDefenseLevelBase(60),
+  targetEffectiveDefense: calculateTargetEffectiveDefense(
+    targetEffectiveDefenseParams,
+  ),
+}
 
 factor.calculate({ values: [2, 3] })
 baseDamageFactor.calculate(baseDamageInputs)
 criticalFactor.calculate(criticalInputs)
 damageBonusFactor.calculate(damageBonusInputs)
+defenseFactor.calculate(defenseInput)
 `,
     )
 

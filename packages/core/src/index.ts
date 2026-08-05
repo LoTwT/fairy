@@ -15,6 +15,18 @@ export {
 export type { DamageBonusFactorInput } from "./factors/damage-bonus.ts"
 export { CRITICAL_FACTOR_ID, criticalFactor } from "./factors/critical.ts"
 export type { CriticalFactorInput } from "./factors/critical.ts"
+export {
+  calculateDefenseLevelBase,
+  calculateTargetBaseDefense,
+  calculateTargetEffectiveDefense,
+  DEFENSE_FACTOR_ID,
+  defenseFactor,
+} from "./factors/defense.ts"
+export type {
+  CalculateTargetBaseDefenseParams,
+  CalculateTargetEffectiveDefenseParams,
+  DefenseFactorInput,
+} from "./factors/defense.ts"
 export { calculateFinalStat, calculateInitialStat } from "./stat.ts"
 export type {
   CalculateFinalStatParams,

@@ -36,7 +36,7 @@ export interface CalculateTargetEffectiveDefenseParams {
 
 export declare const DEFENSE_FACTOR_ID: "defense"
 
-export declare function calculateLevelBase(level: number): number
+export declare function calculateDefenseLevelBase(level: number): number
 
 export declare function calculateTargetBaseDefense(
   params: CalculateTargetBaseDefenseParams,
@@ -86,7 +86,8 @@ export declare const defenseFactor: Factor<DefenseFactorInput>
 
 ### 等级基数
 
-`calculateLevelBase` 根据等级查询等级基数。等级必须是正整数；`1` 至 `59` 级使用下表，`60` 级及
+`calculateDefenseLevelBase` 根据等级查询防御计算使用的等级基数。等级必须是正整数；`1` 至 `59`
+级使用下表，`60` 级及
 以上固定使用 `794`，不得插值或继续外推。
 
 | 等级 | 基数 | 等级 | 基数 | 等级   | 基数 |
@@ -112,7 +113,8 @@ export declare const defenseFactor: Factor<DefenseFactorInput>
 |   19 |  162 |   39 |  405 | 59     |  772 |
 |   20 |  172 |   40 |  421 | `>=60` |  794 |
 
-该表是 `calculateLevelBase` 的固定规则，不由调用方作为可替换配置提供。攻击方和目标使用同一张表。
+该表是 `calculateDefenseLevelBase` 的固定规则，不由调用方作为可替换配置提供。攻击方和目标使用
+同一张表。
 
 ### 目标基础防御
 
@@ -121,8 +123,8 @@ export declare const defenseFactor: Factor<DefenseFactorInput>
 = targetLevelOneBaseDefense / 50 * targetLevelBase
 ```
 
-`targetLevelBase` 可以采用 `calculateLevelBase` 的结果；`targetLevelOneBaseDefense` 是目标的 1 级基础
-防御。`50` 是 1 级等级基数，是目标基础防御换算中的固定常量。
+`targetLevelBase` 可以采用 `calculateDefenseLevelBase` 的结果；`targetLevelOneBaseDefense` 是目标的
+1 级基础防御。`50` 是 1 级等级基数，是目标基础防御换算中的固定常量。
 
 两个参数必须分别为正有限数和非负有限数。结果必须是非负有限数，不执行取整、截断或钳制。
 
@@ -191,8 +193,8 @@ export declare const defenseFactor: Factor<DefenseFactorInput>
 | `defenseFactor.calculate`         | 攻击方等级基数不大于 `0`                       | 抛出 `RangeError` |
 | `defenseFactor.calculate`         | 目标有效防御小于 `0`                           | 抛出 `RangeError` |
 | `defenseFactor.calculate`         | 最终结果不在 `(0, 1]`                          | 抛出 `RangeError` |
-| `calculateLevelBase`              | 等级不是 `number`                              | 抛出 `TypeError`  |
-| `calculateLevelBase`              | 等级不是有限整数或小于 `1`                     | 抛出 `RangeError` |
+| `calculateDefenseLevelBase`       | 等级不是 `number`                              | 抛出 `TypeError`  |
+| `calculateDefenseLevelBase`       | 等级不是有限整数或小于 `1`                     | 抛出 `RangeError` |
 | `calculateTargetBaseDefense`      | 参数不是非数组对象或为 `null`                  | 抛出 `TypeError`  |
 | `calculateTargetBaseDefense`      | 任一字段不是 `number`                          | 抛出 `TypeError`  |
 | `calculateTargetBaseDefense`      | 任一字段不是有限数值                           | 抛出 `RangeError` |
