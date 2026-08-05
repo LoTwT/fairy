@@ -109,6 +109,7 @@ import {
   DAMAGE_TAKEN_FACTOR_ID,
   DEFENSE_FACTOR_ID,
   RESISTANCE_FACTOR_ID,
+  STUN_DAMAGE_FACTOR_ID,
   baseDamageFactor,
   calculateFinalStat,
   calculateInitialStat,
@@ -121,6 +122,7 @@ import {
   defenseFactor,
   defineFactor,
   resistanceFactor,
+  stunDamageFactor,
 } from "@randomplay/core"
 
 const factor = defineFactor({
@@ -198,6 +200,16 @@ assert.equal(
   }),
   1 - 0.2 + 0.1 + 0.05,
 )
+assert.equal(STUN_DAMAGE_FACTOR_ID, "stun_damage")
+assert.equal(stunDamageFactor.factorId, STUN_DAMAGE_FACTOR_ID)
+assert.equal(
+  stunDamageFactor.calculate({
+    isTargetStunned: true,
+    targetBaseStunDamageMultiplier: 1.5,
+    targetStunDamageMultiplierAdjustments: [0.25],
+  }),
+  1.75,
+)
 `,
     )
     writeFileSync(
@@ -215,6 +227,7 @@ assert.equal(
   defenseFactor,
   defineFactor,
   resistanceFactor,
+  stunDamageFactor,
   type BaseDamageFactorInput,
   type BaseDamageFactorInputItem,
   type CalculateFinalStatParams,
@@ -228,6 +241,7 @@ assert.equal(
   type Factor,
   type FactorParams,
   type ResistanceFactorInput,
+  type StunDamageFactorInput,
 } from "@randomplay/core"
 
 interface SumFactorInput {
@@ -288,6 +302,11 @@ const resistanceInput: ResistanceFactorInput = {
   targetResistanceReductions: [0.1],
   attackerResistanceIgnoreValues: [0.05],
 }
+const stunDamageInput: StunDamageFactorInput = {
+  isTargetStunned: true,
+  targetBaseStunDamageMultiplier: 1.5,
+  targetStunDamageMultiplierAdjustments: [0.25],
+}
 
 factor.calculate({ values: [2, 3] })
 baseDamageFactor.calculate(baseDamageInputs)
@@ -296,6 +315,7 @@ damageBonusFactor.calculate(damageBonusInputs)
 damageTakenFactor.calculate(damageTakenInput)
 defenseFactor.calculate(defenseInput)
 resistanceFactor.calculate(resistanceInput)
+stunDamageFactor.calculate(stunDamageInput)
 `,
     )
 

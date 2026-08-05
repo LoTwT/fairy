@@ -10,6 +10,7 @@ Fairy 的确定性计算核心包。
 - 防御区：`defenseFactor`
 - 抗性区：`resistanceFactor`
 - 减易伤区：`damageTakenFactor`
+- 失衡易伤区：`stunDamageFactor`
 
 此外提供 `calculateInitialStat` 和 `calculateFinalStat`，用于计算遵循通用属性公式的初始属性和最终
 属性。

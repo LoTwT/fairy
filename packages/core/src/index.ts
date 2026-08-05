@@ -34,6 +34,11 @@ export {
   damageTakenFactor,
 } from "./factors/damage-taken.ts"
 export type { DamageTakenFactorInput } from "./factors/damage-taken.ts"
+export {
+  STUN_DAMAGE_FACTOR_ID,
+  stunDamageFactor,
+} from "./factors/stun-damage.ts"
+export type { StunDamageFactorInput } from "./factors/stun-damage.ts"
 export { calculateFinalStat, calculateInitialStat } from "./stat.ts"
 export type {
   CalculateFinalStatParams,
