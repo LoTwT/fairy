@@ -29,6 +29,11 @@ export type {
 } from "./factors/defense.ts"
 export { RESISTANCE_FACTOR_ID, resistanceFactor } from "./factors/resistance.ts"
 export type { ResistanceFactorInput } from "./factors/resistance.ts"
+export {
+  DAMAGE_TAKEN_FACTOR_ID,
+  damageTakenFactor,
+} from "./factors/damage-taken.ts"
+export type { DamageTakenFactorInput } from "./factors/damage-taken.ts"
 export { calculateFinalStat, calculateInitialStat } from "./stat.ts"
 export type {
   CalculateFinalStatParams,

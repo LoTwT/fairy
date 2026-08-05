@@ -106,6 +106,7 @@ import {
   BASE_DAMAGE_FACTOR_ID,
   CRITICAL_FACTOR_ID,
   DAMAGE_BONUS_FACTOR_ID,
+  DAMAGE_TAKEN_FACTOR_ID,
   DEFENSE_FACTOR_ID,
   RESISTANCE_FACTOR_ID,
   baseDamageFactor,
@@ -116,6 +117,7 @@ import {
   calculateTargetEffectiveDefense,
   criticalFactor,
   damageBonusFactor,
+  damageTakenFactor,
   defenseFactor,
   defineFactor,
   resistanceFactor,
@@ -153,6 +155,15 @@ assert.equal(
 assert.equal(DAMAGE_BONUS_FACTOR_ID, "damage_bonus")
 assert.equal(damageBonusFactor.factorId, DAMAGE_BONUS_FACTOR_ID)
 assert.equal(damageBonusFactor.calculate([0.25]), 1.25)
+assert.equal(DAMAGE_TAKEN_FACTOR_ID, "damage_taken")
+assert.equal(damageTakenFactor.factorId, DAMAGE_TAKEN_FACTOR_ID)
+assert.equal(
+  damageTakenFactor.calculate({
+    targetDamageTakenIncreases: [0.25],
+    targetDamageTakenReductions: [0.125],
+  }),
+  1.125,
+)
 assert.equal(CRITICAL_FACTOR_ID, "critical")
 assert.equal(criticalFactor.factorId, CRITICAL_FACTOR_ID)
 assert.equal(criticalFactor.calculate([0.5, 0.25]), 1.75)
@@ -200,6 +211,7 @@ assert.equal(
   calculateTargetEffectiveDefense,
   criticalFactor,
   damageBonusFactor,
+  damageTakenFactor,
   defenseFactor,
   defineFactor,
   resistanceFactor,
@@ -211,6 +223,7 @@ assert.equal(
   type CalculateTargetEffectiveDefenseParams,
   type CriticalFactorInput,
   type DamageBonusFactorInput,
+  type DamageTakenFactorInput,
   type DefenseFactorInput,
   type Factor,
   type FactorParams,
@@ -248,6 +261,10 @@ const baseDamageInputItem: BaseDamageFactorInputItem = {
 const baseDamageInputs: BaseDamageFactorInput = [baseDamageInputItem]
 const criticalInputs: CriticalFactorInput = [0.5, 0.25]
 const damageBonusInputs: DamageBonusFactorInput = [0.25, -0.125]
+const damageTakenInput: DamageTakenFactorInput = {
+  targetDamageTakenIncreases: [0.25],
+  targetDamageTakenReductions: [0.125],
+}
 const targetLevelBase = calculateDefenseLevelBase(60)
 const targetBaseDefenseParams: CalculateTargetBaseDefenseParams = {
   targetLevelBase,
@@ -276,6 +293,7 @@ factor.calculate({ values: [2, 3] })
 baseDamageFactor.calculate(baseDamageInputs)
 criticalFactor.calculate(criticalInputs)
 damageBonusFactor.calculate(damageBonusInputs)
+damageTakenFactor.calculate(damageTakenInput)
 defenseFactor.calculate(defenseInput)
 resistanceFactor.calculate(resistanceInput)
 `,
