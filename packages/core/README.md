@@ -12,6 +12,10 @@ Fairy 的确定性计算核心包。
 - 减易伤区：`damageTakenFactor`
 - 失衡易伤区：`stunDamageFactor`
 - 贯穿增伤区：`sheerDamageBonusFactor`
+- 异常精通区：`anomalyProficiencyFactor`
+- 异常伤害等级区：`anomalyDamageLevelFactor`
+- 异常增伤区：`anomalyDamageBonusFactor`
+- 异常暴击区：`anomalyCriticalFactor`
 
 当前内置公式：
 

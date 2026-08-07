@@ -65,6 +65,30 @@ export {
 } from "./factors/stun-damage.ts"
 export type { StunDamageFactorInput } from "./factors/stun-damage.ts"
 export {
+  ANOMALY_PROFICIENCY_FACTOR_ID,
+  DEFAULT_ANOMALY_PROFICIENCY_FACTOR_INPUT,
+  anomalyProficiencyFactor,
+} from "./factors/anomaly-proficiency.ts"
+export type { AnomalyProficiencyFactorInput } from "./factors/anomaly-proficiency.ts"
+export {
+  ANOMALY_DAMAGE_LEVEL_FACTOR_ID,
+  DEFAULT_ANOMALY_DAMAGE_LEVEL_FACTOR_INPUT,
+  anomalyDamageLevelFactor,
+} from "./factors/anomaly-damage-level.ts"
+export type { AnomalyDamageLevelFactorInput } from "./factors/anomaly-damage-level.ts"
+export {
+  ANOMALY_DAMAGE_BONUS_FACTOR_ID,
+  DEFAULT_ANOMALY_DAMAGE_BONUS_FACTOR_INPUT,
+  anomalyDamageBonusFactor,
+} from "./factors/anomaly-damage-bonus.ts"
+export type { AnomalyDamageBonusFactorInput } from "./factors/anomaly-damage-bonus.ts"
+export {
+  ANOMALY_CRITICAL_FACTOR_ID,
+  DEFAULT_ANOMALY_CRITICAL_FACTOR_INPUT,
+  anomalyCriticalFactor,
+} from "./factors/anomaly-critical.ts"
+export type { AnomalyCriticalFactorInput } from "./factors/anomaly-critical.ts"
+export {
   REGULAR_DAMAGE_FORMULA_ID,
   regularDamageFormula,
 } from "./formulas/regular-damage.ts"

@@ -103,10 +103,18 @@ describe("packed package", () => {
       join(consumerDirectory, "smoke.mjs"),
       `import assert from "node:assert/strict"
 import {
+  ANOMALY_CRITICAL_FACTOR_ID,
+  ANOMALY_DAMAGE_BONUS_FACTOR_ID,
+  ANOMALY_DAMAGE_LEVEL_FACTOR_ID,
+  ANOMALY_PROFICIENCY_FACTOR_ID,
   BASE_DAMAGE_FACTOR_ID,
   CRITICAL_FACTOR_ID,
   DAMAGE_BONUS_FACTOR_ID,
   DAMAGE_TAKEN_FACTOR_ID,
+  DEFAULT_ANOMALY_CRITICAL_FACTOR_INPUT,
+  DEFAULT_ANOMALY_DAMAGE_BONUS_FACTOR_INPUT,
+  DEFAULT_ANOMALY_DAMAGE_LEVEL_FACTOR_INPUT,
+  DEFAULT_ANOMALY_PROFICIENCY_FACTOR_INPUT,
   DEFAULT_CRITICAL_FACTOR_INPUT,
   DEFAULT_DAMAGE_BONUS_FACTOR_INPUT,
   DEFAULT_DAMAGE_TAKEN_FACTOR_INPUT,
@@ -120,6 +128,10 @@ import {
   SHEER_DAMAGE_BONUS_FACTOR_ID,
   SHEER_DAMAGE_FORMULA_ID,
   STUN_DAMAGE_FACTOR_ID,
+  anomalyCriticalFactor,
+  anomalyDamageBonusFactor,
+  anomalyDamageLevelFactor,
+  anomalyProficiencyFactor,
   baseDamageFactor,
   calculateFinalStat,
   calculateInitialStat,
@@ -177,6 +189,59 @@ const finalStat = calculateFinalStat({
 })
 assert.equal(initialStat, 95)
 assert.equal(finalStat, 123)
+assert.equal(ANOMALY_PROFICIENCY_FACTOR_ID, "anomaly_proficiency")
+assert.equal(
+  anomalyProficiencyFactor.factorId,
+  ANOMALY_PROFICIENCY_FACTOR_ID,
+)
+assert.equal(anomalyProficiencyFactor.calculate(125), 1.25)
+assert.equal(
+  anomalyProficiencyFactor.calculate(
+    DEFAULT_ANOMALY_PROFICIENCY_FACTOR_INPUT,
+  ),
+  1,
+)
+assert.equal(ANOMALY_DAMAGE_LEVEL_FACTOR_ID, "anomaly_damage_level")
+assert.equal(
+  anomalyDamageLevelFactor.factorId,
+  ANOMALY_DAMAGE_LEVEL_FACTOR_ID,
+)
+assert.equal(anomalyDamageLevelFactor.calculate(60), 2)
+assert.equal(
+  anomalyDamageLevelFactor.calculate(DEFAULT_ANOMALY_DAMAGE_LEVEL_FACTOR_INPUT),
+  1,
+)
+assert.equal(ANOMALY_DAMAGE_BONUS_FACTOR_ID, "anomaly_damage_bonus")
+assert.equal(
+  anomalyDamageBonusFactor.factorId,
+  ANOMALY_DAMAGE_BONUS_FACTOR_ID,
+)
+assert.equal(anomalyDamageBonusFactor.calculate([0.25]), 1.25)
+assert.equal(
+  anomalyDamageBonusFactor.calculate(DEFAULT_ANOMALY_DAMAGE_BONUS_FACTOR_INPUT),
+  1,
+)
+assert.equal(Object.isFrozen(DEFAULT_ANOMALY_DAMAGE_BONUS_FACTOR_INPUT), true)
+assert.equal(ANOMALY_CRITICAL_FACTOR_ID, "anomaly_critical")
+assert.equal(anomalyCriticalFactor.factorId, ANOMALY_CRITICAL_FACTOR_ID)
+assert.equal(
+  anomalyCriticalFactor.calculate({
+    isAnomalyCritical: true,
+    anomalyCriticalDamageContributions: [0.5],
+  }),
+  1.5,
+)
+assert.equal(
+  anomalyCriticalFactor.calculate(DEFAULT_ANOMALY_CRITICAL_FACTOR_INPUT),
+  1,
+)
+assert.equal(Object.isFrozen(DEFAULT_ANOMALY_CRITICAL_FACTOR_INPUT), true)
+assert.equal(
+  Object.isFrozen(
+    DEFAULT_ANOMALY_CRITICAL_FACTOR_INPUT.anomalyCriticalDamageContributions,
+  ),
+  true,
+)
 assert.equal(BASE_DAMAGE_FACTOR_ID, "base_damage")
 assert.equal(baseDamageFactor.factorId, BASE_DAMAGE_FACTOR_ID)
 assert.equal(
@@ -345,6 +410,14 @@ assert.equal(Object.isFrozen(sheerDamageResult.factorResults), true)
     writeFileSync(
       join(consumerDirectory, "smoke.ts"),
       `import {
+  ANOMALY_CRITICAL_FACTOR_ID,
+  ANOMALY_DAMAGE_BONUS_FACTOR_ID,
+  ANOMALY_DAMAGE_LEVEL_FACTOR_ID,
+  ANOMALY_PROFICIENCY_FACTOR_ID,
+  DEFAULT_ANOMALY_CRITICAL_FACTOR_INPUT,
+  DEFAULT_ANOMALY_DAMAGE_BONUS_FACTOR_INPUT,
+  DEFAULT_ANOMALY_DAMAGE_LEVEL_FACTOR_INPUT,
+  DEFAULT_ANOMALY_PROFICIENCY_FACTOR_INPUT,
   DEFAULT_CRITICAL_FACTOR_INPUT,
   DEFAULT_DAMAGE_BONUS_FACTOR_INPUT,
   DEFAULT_DAMAGE_TAKEN_FACTOR_INPUT,
@@ -352,6 +425,10 @@ assert.equal(Object.isFrozen(sheerDamageResult.factorResults), true)
   DEFAULT_RESISTANCE_FACTOR_INPUT,
   DEFAULT_SHEER_DAMAGE_BONUS_FACTOR_INPUT,
   DEFAULT_STUN_DAMAGE_FACTOR_INPUT,
+  anomalyCriticalFactor,
+  anomalyDamageBonusFactor,
+  anomalyDamageLevelFactor,
+  anomalyProficiencyFactor,
   baseDamageFactor,
   calculateFinalStat,
   calculateInitialStat,
@@ -369,6 +446,10 @@ assert.equal(Object.isFrozen(sheerDamageResult.factorResults), true)
   sheerDamageBonusFactor,
   sheerDamageFormula,
   stunDamageFactor,
+  type AnomalyCriticalFactorInput,
+  type AnomalyDamageBonusFactorInput,
+  type AnomalyDamageLevelFactorInput,
+  type AnomalyProficiencyFactorInput,
   type BaseDamageFactorInput,
   type BaseDamageFactorInputItem,
   type CalculateFinalStatParams,
@@ -401,6 +482,13 @@ interface ProductFormulaInput {
   readonly right: number
 }
 
+const anomalyCriticalFactorId: "anomaly_critical" = ANOMALY_CRITICAL_FACTOR_ID
+const anomalyDamageBonusFactorId: "anomaly_damage_bonus" =
+  ANOMALY_DAMAGE_BONUS_FACTOR_ID
+const anomalyDamageLevelFactorId: "anomaly_damage_level" =
+  ANOMALY_DAMAGE_LEVEL_FACTOR_ID
+const anomalyProficiencyFactorId: "anomaly_proficiency" =
+  ANOMALY_PROFICIENCY_FACTOR_ID
 const params: FactorParams<SumFactorInput> = {
   factorId: "draft-sum",
   calculate: (input) =>
@@ -441,6 +529,13 @@ const baseDamageInputItem: BaseDamageFactorInputItem = {
   finalStat,
 }
 const baseDamageInputs: BaseDamageFactorInput = [baseDamageInputItem]
+const anomalyCriticalInput: AnomalyCriticalFactorInput = {
+  isAnomalyCritical: true,
+  anomalyCriticalDamageContributions: [0.5],
+}
+const anomalyDamageBonusInputs: AnomalyDamageBonusFactorInput = [0.25, -0.125]
+const anomalyDamageLevelInput: AnomalyDamageLevelFactorInput = 60
+const anomalyProficiencyInput: AnomalyProficiencyFactorInput = 125
 const criticalInputs: CriticalFactorInput = {
   isCritical: true,
   criticalDamageContributions: [0.5, 0.25],
@@ -500,6 +595,18 @@ const sheerDamageInput: SheerDamageFormulaInput = {
 
 factor.calculate({ values: [2, 3] })
 formulaFactorResults.left
+anomalyCriticalFactorId
+anomalyDamageBonusFactorId
+anomalyDamageLevelFactorId
+anomalyProficiencyFactorId
+anomalyCriticalFactor.calculate(anomalyCriticalInput)
+anomalyCriticalFactor.calculate(DEFAULT_ANOMALY_CRITICAL_FACTOR_INPUT)
+anomalyDamageBonusFactor.calculate(anomalyDamageBonusInputs)
+anomalyDamageBonusFactor.calculate(DEFAULT_ANOMALY_DAMAGE_BONUS_FACTOR_INPUT)
+anomalyDamageLevelFactor.calculate(anomalyDamageLevelInput)
+anomalyDamageLevelFactor.calculate(DEFAULT_ANOMALY_DAMAGE_LEVEL_FACTOR_INPUT)
+anomalyProficiencyFactor.calculate(anomalyProficiencyInput)
+anomalyProficiencyFactor.calculate(DEFAULT_ANOMALY_PROFICIENCY_FACTOR_INPUT)
 baseDamageFactor.calculate(baseDamageInputs)
 criticalFactor.calculate(criticalInputs)
 damageBonusFactor.calculate(damageBonusInputs)
