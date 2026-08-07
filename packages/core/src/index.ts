@@ -69,6 +69,11 @@ export {
   regularDamageFormula,
 } from "./formulas/regular-damage.ts"
 export type { RegularDamageFormulaInput } from "./formulas/regular-damage.ts"
+export {
+  SHEER_DAMAGE_FORMULA_ID,
+  sheerDamageFormula,
+} from "./formulas/sheer-damage.ts"
+export type { SheerDamageFormulaInput } from "./formulas/sheer-damage.ts"
 export { calculateFinalStat, calculateInitialStat } from "./stat.ts"
 export type {
   CalculateFinalStatParams,

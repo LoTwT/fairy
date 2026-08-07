@@ -16,6 +16,7 @@ Fairy 的确定性计算核心包。
 当前内置公式：
 
 - 常规伤害：`regularDamageFormula`
+- 贯穿伤害：`sheerDamageFormula`
 
 调用方也可以分别使用 `defineFactor` 和 `defineFormula` 建立自定义乘区与公式。
 
