@@ -1,6 +1,7 @@
 import { describe, expect, expectTypeOf, it } from "vitest"
 import {
   DAMAGE_BONUS_FACTOR_ID,
+  DEFAULT_DAMAGE_BONUS_FACTOR_INPUT,
   damageBonusFactor,
   type DamageBonusFactorInput,
   type Factor,
@@ -10,6 +11,9 @@ describe("damageBonusFactor", () => {
   it("exposes its public identity and types", () => {
     expectTypeOf<DamageBonusFactorInput>().toEqualTypeOf<readonly number[]>()
     expectTypeOf(DAMAGE_BONUS_FACTOR_ID).toEqualTypeOf<"damage_bonus">()
+    expectTypeOf(
+      DEFAULT_DAMAGE_BONUS_FACTOR_INPUT,
+    ).toEqualTypeOf<DamageBonusFactorInput>()
     expectTypeOf(damageBonusFactor).toEqualTypeOf<
       Factor<DamageBonusFactorInput>
     >()
@@ -17,6 +21,14 @@ describe("damageBonusFactor", () => {
     expect(DAMAGE_BONUS_FACTOR_ID).toBe("damage_bonus")
     expect(damageBonusFactor.factorId).toBe(DAMAGE_BONUS_FACTOR_ID)
     expect(Object.isFrozen(damageBonusFactor)).toBe(true)
+  })
+
+  it("provides a frozen default input with an identity result", () => {
+    expect(DEFAULT_DAMAGE_BONUS_FACTOR_INPUT).toEqual([])
+    expect(Object.isFrozen(DEFAULT_DAMAGE_BONUS_FACTOR_INPUT)).toBe(true)
+    expect(damageBonusFactor.calculate(DEFAULT_DAMAGE_BONUS_FACTOR_INPUT)).toBe(
+      1,
+    )
   })
 
   it("returns the base multiplier for an empty input array", () => {

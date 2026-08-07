@@ -21,6 +21,8 @@ export type DamageBonusFactorInput = readonly number[]
 
 export declare const DAMAGE_BONUS_FACTOR_ID: "damage_bonus"
 
+export declare const DEFAULT_DAMAGE_BONUS_FACTOR_INPUT: DamageBonusFactorInput
+
 export declare const damageBonusFactor: Factor<DamageBonusFactorInput>
 ```
 
@@ -33,6 +35,13 @@ export declare const damageBonusFactor: Factor<DamageBonusFactorInput>
 
 调用方只传入本次伤害实际适用的贡献。技能标签、属性、攻击类型、触发条件和持续时间是否匹配，不由
 增伤区判断。
+
+## 默认输入
+
+`DEFAULT_DAMAGE_BONUS_FACTOR_INPUT` 遵循[公共默认输入规则](../index.md#乘区默认输入)，具体是冻结的
+空数组。将其传给 `damageBonusFactor.calculate` 时结果为恒等倍率 `1`。
+
+该常量只表示公式组合中的“没有增伤贡献”，不代表游戏内默认增伤。
 
 ## 数组语义
 
@@ -64,7 +73,7 @@ export declare const damageBonusFactor: Factor<DamageBonusFactorInput>
 
 ## 代码组织
 
-增伤区的生产代码统一放在 `packages/core/src/factors/damage-bonus.ts`。该文件包含身份常量、输入类型、
-`Factor` 定义、范围常量及增伤区的求和和钳制逻辑。范围常量和私有辅助函数不对外导出。
+增伤区的生产代码统一放在 `packages/core/src/factors/damage-bonus.ts`。该文件包含身份常量、默认输入、
+输入类型、`Factor` 定义、范围常量及增伤区的求和和钳制逻辑。范围常量和私有辅助函数不对外导出。
 
 `packages/core/src/index.ts` 只负责重新导出公开 API，测试保存在独立测试文件中。

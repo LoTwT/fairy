@@ -1,5 +1,6 @@
 import { describe, expect, expectTypeOf, it } from "vitest"
 import {
+  DEFAULT_RESISTANCE_FACTOR_INPUT,
   RESISTANCE_FACTOR_ID,
   resistanceFactor,
   type Factor,
@@ -14,6 +15,9 @@ describe("resistanceFactor", () => {
       readonly attackerResistanceIgnoreValues: readonly number[]
     }>()
     expectTypeOf(RESISTANCE_FACTOR_ID).toEqualTypeOf<"resistance">()
+    expectTypeOf(
+      DEFAULT_RESISTANCE_FACTOR_INPUT,
+    ).toEqualTypeOf<ResistanceFactorInput>()
     expectTypeOf(resistanceFactor).toEqualTypeOf<
       Factor<ResistanceFactorInput>
     >()
@@ -21,6 +25,26 @@ describe("resistanceFactor", () => {
     expect(RESISTANCE_FACTOR_ID).toBe("resistance")
     expect(resistanceFactor.factorId).toBe(RESISTANCE_FACTOR_ID)
     expect(Object.isFrozen(resistanceFactor)).toBe(true)
+  })
+
+  it("provides a deeply frozen default input with an identity result", () => {
+    expect(DEFAULT_RESISTANCE_FACTOR_INPUT).toEqual({
+      targetResistance: 0,
+      targetResistanceReductions: [],
+      attackerResistanceIgnoreValues: [],
+    })
+    expect(Object.isFrozen(DEFAULT_RESISTANCE_FACTOR_INPUT)).toBe(true)
+    expect(
+      Object.isFrozen(
+        DEFAULT_RESISTANCE_FACTOR_INPUT.targetResistanceReductions,
+      ),
+    ).toBe(true)
+    expect(
+      Object.isFrozen(
+        DEFAULT_RESISTANCE_FACTOR_INPUT.attackerResistanceIgnoreValues,
+      ),
+    ).toBe(true)
+    expect(resistanceFactor.calculate(DEFAULT_RESISTANCE_FACTOR_INPUT)).toBe(1)
   })
 
   it.each([-0.2, 0.2, 0.4])(

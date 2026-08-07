@@ -107,7 +107,14 @@ import {
   CRITICAL_FACTOR_ID,
   DAMAGE_BONUS_FACTOR_ID,
   DAMAGE_TAKEN_FACTOR_ID,
+  DEFAULT_CRITICAL_FACTOR_INPUT,
+  DEFAULT_DAMAGE_BONUS_FACTOR_INPUT,
+  DEFAULT_DAMAGE_TAKEN_FACTOR_INPUT,
+  DEFAULT_DEFENSE_FACTOR_INPUT,
+  DEFAULT_RESISTANCE_FACTOR_INPUT,
+  DEFAULT_STUN_DAMAGE_FACTOR_INPUT,
   DEFENSE_FACTOR_ID,
+  REGULAR_DAMAGE_FORMULA_ID,
   RESISTANCE_FACTOR_ID,
   SHEER_DAMAGE_BONUS_FACTOR_ID,
   STUN_DAMAGE_FACTOR_ID,
@@ -122,6 +129,8 @@ import {
   damageTakenFactor,
   defenseFactor,
   defineFactor,
+  defineFormula,
+  regularDamageFormula,
   resistanceFactor,
   sheerDamageBonusFactor,
   stunDamageFactor,
@@ -138,6 +147,21 @@ assert.throws(
   () => defineFactor({ factorId: "invalid", calculate: null }),
   TypeError,
 )
+const formula = defineFormula({
+  formulaId: "product",
+  calculate: (input) => ({
+    value: input.left * input.right,
+    factorResults: { left: input.left, right: input.right },
+  }),
+})
+const formulaResult = formula.calculate({ left: 2, right: 3 })
+assert.deepEqual(formulaResult, {
+  value: 6,
+  factorResults: { left: 2, right: 3 },
+})
+assert.equal(Object.isFrozen(formula), true)
+assert.equal(Object.isFrozen(formulaResult), true)
+assert.equal(Object.isFrozen(formulaResult.factorResults), true)
 const initialStat = calculateInitialStat({
   baseStat: 80,
   initialStatPercentageAdjustments: [0.25, -0.125],
@@ -159,6 +183,8 @@ assert.equal(
 assert.equal(DAMAGE_BONUS_FACTOR_ID, "damage_bonus")
 assert.equal(damageBonusFactor.factorId, DAMAGE_BONUS_FACTOR_ID)
 assert.equal(damageBonusFactor.calculate([0.25]), 1.25)
+assert.equal(damageBonusFactor.calculate(DEFAULT_DAMAGE_BONUS_FACTOR_INPUT), 1)
+assert.equal(Object.isFrozen(DEFAULT_DAMAGE_BONUS_FACTOR_INPUT), true)
 assert.equal(DAMAGE_TAKEN_FACTOR_ID, "damage_taken")
 assert.equal(damageTakenFactor.factorId, DAMAGE_TAKEN_FACTOR_ID)
 assert.equal(
@@ -168,9 +194,31 @@ assert.equal(
   }),
   1.125,
 )
+assert.equal(damageTakenFactor.calculate(DEFAULT_DAMAGE_TAKEN_FACTOR_INPUT), 1)
+assert.equal(Object.isFrozen(DEFAULT_DAMAGE_TAKEN_FACTOR_INPUT), true)
+assert.equal(
+  Object.isFrozen(DEFAULT_DAMAGE_TAKEN_FACTOR_INPUT.targetDamageTakenIncreases),
+  true,
+)
+assert.equal(
+  Object.isFrozen(DEFAULT_DAMAGE_TAKEN_FACTOR_INPUT.targetDamageTakenReductions),
+  true,
+)
 assert.equal(CRITICAL_FACTOR_ID, "critical")
 assert.equal(criticalFactor.factorId, CRITICAL_FACTOR_ID)
-assert.equal(criticalFactor.calculate([0.5, 0.25]), 1.75)
+assert.equal(
+  criticalFactor.calculate({
+    isCritical: true,
+    criticalDamageContributions: [0.5, 0.25],
+  }),
+  1.75,
+)
+assert.equal(criticalFactor.calculate(DEFAULT_CRITICAL_FACTOR_INPUT), 1)
+assert.equal(Object.isFrozen(DEFAULT_CRITICAL_FACTOR_INPUT), true)
+assert.equal(
+  Object.isFrozen(DEFAULT_CRITICAL_FACTOR_INPUT.criticalDamageContributions),
+  true,
+)
 const attackerLevelBase = calculateDefenseLevelBase(60)
 const targetLevelBase = calculateDefenseLevelBase(60)
 const targetBaseDefense = calculateTargetBaseDefense({
@@ -192,6 +240,8 @@ assert.equal(
   defenseFactor.calculate({ attackerLevelBase, targetEffectiveDefense }),
   attackerLevelBase / (targetEffectiveDefense + attackerLevelBase),
 )
+assert.equal(defenseFactor.calculate(DEFAULT_DEFENSE_FACTOR_INPUT), 1)
+assert.equal(Object.isFrozen(DEFAULT_DEFENSE_FACTOR_INPUT), true)
 assert.equal(RESISTANCE_FACTOR_ID, "resistance")
 assert.equal(resistanceFactor.factorId, RESISTANCE_FACTOR_ID)
 assert.equal(
@@ -201,6 +251,16 @@ assert.equal(
     attackerResistanceIgnoreValues: [0.05],
   }),
   1 - 0.2 + 0.1 + 0.05,
+)
+assert.equal(resistanceFactor.calculate(DEFAULT_RESISTANCE_FACTOR_INPUT), 1)
+assert.equal(Object.isFrozen(DEFAULT_RESISTANCE_FACTOR_INPUT), true)
+assert.equal(
+  Object.isFrozen(DEFAULT_RESISTANCE_FACTOR_INPUT.targetResistanceReductions),
+  true,
+)
+assert.equal(
+  Object.isFrozen(DEFAULT_RESISTANCE_FACTOR_INPUT.attackerResistanceIgnoreValues),
+  true,
 )
 assert.equal(SHEER_DAMAGE_BONUS_FACTOR_ID, "sheer_damage_bonus")
 assert.equal(
@@ -218,11 +278,48 @@ assert.equal(
   }),
   1.75,
 )
+assert.equal(stunDamageFactor.calculate(DEFAULT_STUN_DAMAGE_FACTOR_INPUT), 1)
+assert.equal(Object.isFrozen(DEFAULT_STUN_DAMAGE_FACTOR_INPUT), true)
+assert.equal(
+  Object.isFrozen(
+    DEFAULT_STUN_DAMAGE_FACTOR_INPUT.targetStunDamageMultiplierAdjustments,
+  ),
+  true,
+)
+assert.equal(REGULAR_DAMAGE_FORMULA_ID, "regular_damage")
+assert.equal(regularDamageFormula.formulaId, REGULAR_DAMAGE_FORMULA_ID)
+const regularDamageResult = regularDamageFormula.calculate({
+  baseDamage: [{ damageMultiplier: 2, finalStat }],
+  damageBonus: DEFAULT_DAMAGE_BONUS_FACTOR_INPUT,
+  critical: DEFAULT_CRITICAL_FACTOR_INPUT,
+  defense: DEFAULT_DEFENSE_FACTOR_INPUT,
+  resistance: DEFAULT_RESISTANCE_FACTOR_INPUT,
+  damageTaken: DEFAULT_DAMAGE_TAKEN_FACTOR_INPUT,
+  stunDamage: DEFAULT_STUN_DAMAGE_FACTOR_INPUT,
+})
+assert.equal(regularDamageResult.value, 246)
+assert.deepEqual(regularDamageResult.factorResults, {
+  baseDamage: 246,
+  damageBonus: 1,
+  critical: 1,
+  defense: 1,
+  resistance: 1,
+  damageTaken: 1,
+  stunDamage: 1,
+})
+assert.equal(Object.isFrozen(regularDamageResult), true)
+assert.equal(Object.isFrozen(regularDamageResult.factorResults), true)
 `,
     )
     writeFileSync(
       join(consumerDirectory, "smoke.ts"),
       `import {
+  DEFAULT_CRITICAL_FACTOR_INPUT,
+  DEFAULT_DAMAGE_BONUS_FACTOR_INPUT,
+  DEFAULT_DAMAGE_TAKEN_FACTOR_INPUT,
+  DEFAULT_DEFENSE_FACTOR_INPUT,
+  DEFAULT_RESISTANCE_FACTOR_INPUT,
+  DEFAULT_STUN_DAMAGE_FACTOR_INPUT,
   baseDamageFactor,
   calculateFinalStat,
   calculateInitialStat,
@@ -234,6 +331,8 @@ assert.equal(
   damageTakenFactor,
   defenseFactor,
   defineFactor,
+  defineFormula,
+  regularDamageFormula,
   resistanceFactor,
   sheerDamageBonusFactor,
   stunDamageFactor,
@@ -249,6 +348,11 @@ assert.equal(
   type DefenseFactorInput,
   type Factor,
   type FactorParams,
+  type Formula,
+  type FormulaFactorResults,
+  type FormulaParams,
+  type FormulaResult,
+  type RegularDamageFormulaInput,
   type ResistanceFactorInput,
   type SheerDamageBonusFactorInput,
   type StunDamageFactorInput,
@@ -256,6 +360,11 @@ assert.equal(
 
 interface SumFactorInput {
   readonly values: readonly number[]
+}
+
+interface ProductFormulaInput {
+  readonly left: number
+  readonly right: number
 }
 
 const params: FactorParams<SumFactorInput> = {
@@ -266,6 +375,21 @@ const params: FactorParams<SumFactorInput> = {
 params.factorId = "sum"
 
 const factor: Factor<SumFactorInput> = defineFactor(params)
+const formulaParams: FormulaParams<ProductFormulaInput> = {
+  formulaId: "draft-product",
+  calculate: (input) => ({
+    value: input.left * input.right,
+    factorResults: { left: input.left, right: input.right },
+  }),
+}
+formulaParams.formulaId = "product"
+const formula: Formula<ProductFormulaInput> = defineFormula(formulaParams)
+const formulaResult: FormulaResult<ProductFormulaInput> = formula.calculate({
+  left: 2,
+  right: 3,
+})
+const formulaFactorResults: FormulaFactorResults<ProductFormulaInput> =
+  formulaResult.factorResults
 const initialStatParams: CalculateInitialStatParams = {
   baseStat: 80,
   initialStatPercentageAdjustments: [0.25, -0.125],
@@ -283,7 +407,10 @@ const baseDamageInputItem: BaseDamageFactorInputItem = {
   finalStat,
 }
 const baseDamageInputs: BaseDamageFactorInput = [baseDamageInputItem]
-const criticalInputs: CriticalFactorInput = [0.5, 0.25]
+const criticalInputs: CriticalFactorInput = {
+  isCritical: true,
+  criticalDamageContributions: [0.5, 0.25],
+}
 const damageBonusInputs: DamageBonusFactorInput = [0.25, -0.125]
 const damageTakenInput: DamageTakenFactorInput = {
   targetDamageTakenIncreases: [0.25],
@@ -318,8 +445,18 @@ const stunDamageInput: StunDamageFactorInput = {
   targetBaseStunDamageMultiplier: 1.5,
   targetStunDamageMultiplierAdjustments: [0.25],
 }
+const regularDamageInput: RegularDamageFormulaInput = {
+  baseDamage: baseDamageInputs,
+  damageBonus: DEFAULT_DAMAGE_BONUS_FACTOR_INPUT,
+  critical: DEFAULT_CRITICAL_FACTOR_INPUT,
+  defense: DEFAULT_DEFENSE_FACTOR_INPUT,
+  resistance: DEFAULT_RESISTANCE_FACTOR_INPUT,
+  damageTaken: DEFAULT_DAMAGE_TAKEN_FACTOR_INPUT,
+  stunDamage: DEFAULT_STUN_DAMAGE_FACTOR_INPUT,
+}
 
 factor.calculate({ values: [2, 3] })
+formulaFactorResults.left
 baseDamageFactor.calculate(baseDamageInputs)
 criticalFactor.calculate(criticalInputs)
 damageBonusFactor.calculate(damageBonusInputs)
@@ -328,6 +465,7 @@ defenseFactor.calculate(defenseInput)
 resistanceFactor.calculate(resistanceInput)
 sheerDamageBonusFactor.calculate(sheerDamageBonusInputs)
 stunDamageFactor.calculate(stunDamageInput)
+regularDamageFormula.calculate(regularDamageInput)
 `,
     )
 

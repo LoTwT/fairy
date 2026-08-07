@@ -1,5 +1,6 @@
 import { describe, expect, expectTypeOf, it } from "vitest"
 import {
+  DEFAULT_STUN_DAMAGE_FACTOR_INPUT,
   STUN_DAMAGE_FACTOR_ID,
   stunDamageFactor,
   type Factor,
@@ -14,6 +15,9 @@ describe("stunDamageFactor", () => {
       readonly targetStunDamageMultiplierAdjustments: readonly number[]
     }>()
     expectTypeOf(STUN_DAMAGE_FACTOR_ID).toEqualTypeOf<"stun_damage">()
+    expectTypeOf(
+      DEFAULT_STUN_DAMAGE_FACTOR_INPUT,
+    ).toEqualTypeOf<StunDamageFactorInput>()
     expectTypeOf(stunDamageFactor).toEqualTypeOf<
       Factor<StunDamageFactorInput>
     >()
@@ -21,6 +25,21 @@ describe("stunDamageFactor", () => {
     expect(STUN_DAMAGE_FACTOR_ID).toBe("stun_damage")
     expect(stunDamageFactor.factorId).toBe(STUN_DAMAGE_FACTOR_ID)
     expect(Object.isFrozen(stunDamageFactor)).toBe(true)
+  })
+
+  it("provides a deeply frozen default input with an identity result", () => {
+    expect(DEFAULT_STUN_DAMAGE_FACTOR_INPUT).toEqual({
+      isTargetStunned: false,
+      targetBaseStunDamageMultiplier: 1,
+      targetStunDamageMultiplierAdjustments: [],
+    })
+    expect(Object.isFrozen(DEFAULT_STUN_DAMAGE_FACTOR_INPUT)).toBe(true)
+    expect(
+      Object.isFrozen(
+        DEFAULT_STUN_DAMAGE_FACTOR_INPUT.targetStunDamageMultiplierAdjustments,
+      ),
+    ).toBe(true)
+    expect(stunDamageFactor.calculate(DEFAULT_STUN_DAMAGE_FACTOR_INPUT)).toBe(1)
   })
 
   it.each([true, false])(

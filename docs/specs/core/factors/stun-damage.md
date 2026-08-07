@@ -26,6 +26,8 @@ export interface StunDamageFactorInput {
 
 export declare const STUN_DAMAGE_FACTOR_ID: "stun_damage"
 
+export declare const DEFAULT_STUN_DAMAGE_FACTOR_INPUT: StunDamageFactorInput
+
 export declare const stunDamageFactor: Factor<StunDamageFactorInput>
 ```
 
@@ -44,6 +46,21 @@ export declare const stunDamageFactor: Factor<StunDamageFactorInput>
 这种边界使 core 接收语义明确且可直接计算的数值，不负责把 Nanoka 字段、游戏面板或其他原始数据
 解释为基础倍率。
 
+## 默认输入
+
+`DEFAULT_STUN_DAMAGE_FACTOR_INPUT` 遵循[公共默认输入规则](../index.md#乘区默认输入)，精确内容为：
+
+```ts
+{
+  isTargetStunned: false,
+  targetBaseStunDamageMultiplier: 1,
+  targetStunDamageMultiplierAdjustments: [],
+}
+```
+
+外层对象和嵌套空数组都必须冻结。将该常量传给 `stunDamageFactor.calculate` 时结果为恒等倍率 `1`。
+该常量表示公式组合中的“目标未失衡且没有失衡易伤调整”，不代表游戏内敌人的默认失衡易伤倍率。
+
 ## 适用边界
 
 调用方必须先确定受击方当前是否失衡，并选择该状态对应的基础倍率和动态调整。失衡易伤区不负责：
@@ -52,10 +69,11 @@ export declare const stunDamageFactor: Factor<StunDamageFactorInput>
 - 从敌人类型推断默认失衡易伤倍率；
 - 判断某个调整只在失衡或未失衡状态下生效；
 - 处理持续时间、叠层、触发条件或效果来源；
-- 决定伤害公式是否采用本乘区。
+- 判断调用方是否应采用默认输入。
 
-代理人和邦布不具有失衡条。敌人对代理人或邦布造成伤害时，顶层公式应不采用失衡易伤区，而不是向
-本乘区传入伪造的未失衡状态。
+采用失衡易伤区的公式始终调用本乘区。代理人和邦布不具有失衡条，敌人对代理人或邦布造成伤害时，
+调用方应显式传入 `DEFAULT_STUN_DAMAGE_FACTOR_INPUT`，由本乘区产生恒等倍率 `1`。这只是统一公式组合
+使用的计算输入，不用于声称代理人或邦布具有未失衡状态。
 
 Nanoka 3.0 的中英文游戏文本均使用 `Stun DMG Multiplier` 表示失衡易伤倍率。未失衡场景只说明该
 倍率提升在目标未失衡时仍可生效，没有提供独立术语。本规范不另设公开英文名称，通过
@@ -103,8 +121,8 @@ Nanoka 3.0 的中英文游戏文本均使用 `Stun DMG Multiplier` 表示失衡�
 
 ## 代码组织
 
-失衡易伤区的生产代码统一放在 `packages/core/src/factors/stun-damage.ts`。该文件包含身份常量、输入类型、
-`Factor` 定义、范围常量及失衡易伤区独有的求和和钳制逻辑。范围常量和私有辅助函数不对外
-导出。
+失衡易伤区的生产代码统一放在 `packages/core/src/factors/stun-damage.ts`。该文件包含身份常量、默认
+输入、输入类型、`Factor` 定义、范围常量及失衡易伤区独有的求和和钳制逻辑。范围常量和私有辅助
+函数不对外导出。
 
 `packages/core/src/index.ts` 只负责重新导出公开 API，测试保存在独立测试文件中。

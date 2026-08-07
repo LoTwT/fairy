@@ -1,4 +1,8 @@
-import { assertFiniteResult } from "./internal/assert.ts"
+import {
+  assertFiniteResult,
+  assertFunction,
+  assertNonEmptyString,
+} from "./internal/assert.ts"
 
 export type FactorResult = number
 
@@ -17,13 +21,8 @@ export function defineFactor<FactorInput>(
 ): Factor<FactorInput> {
   const { factorId, calculate } = params
 
-  if (typeof factorId !== "string" || factorId.trim().length === 0) {
-    throw new TypeError("factorId must be a non-empty string")
-  }
-
-  if (typeof calculate !== "function") {
-    throw new TypeError("calculate must be a function")
-  }
+  assertNonEmptyString(factorId, "factorId")
+  assertFunction(calculate, "calculate")
 
   const factor: Factor<FactorInput> = {
     factorId,

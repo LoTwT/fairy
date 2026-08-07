@@ -16,6 +16,11 @@ export interface DamageTakenFactorInput {
 }
 
 export const DAMAGE_TAKEN_FACTOR_ID = "damage_taken" as const
+export const DEFAULT_DAMAGE_TAKEN_FACTOR_INPUT: DamageTakenFactorInput =
+  Object.freeze({
+    targetDamageTakenIncreases: Object.freeze([]),
+    targetDamageTakenReductions: Object.freeze([]),
+  })
 
 export const damageTakenFactor: Factor<DamageTakenFactorInput> =
   defineFactor<DamageTakenFactorInput>({

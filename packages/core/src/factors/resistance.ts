@@ -18,6 +18,12 @@ export interface ResistanceFactorInput {
 }
 
 export const RESISTANCE_FACTOR_ID = "resistance" as const
+export const DEFAULT_RESISTANCE_FACTOR_INPUT: ResistanceFactorInput =
+  Object.freeze({
+    targetResistance: 0,
+    targetResistanceReductions: Object.freeze([]),
+    attackerResistanceIgnoreValues: Object.freeze([]),
+  })
 
 export const resistanceFactor: Factor<ResistanceFactorInput> =
   defineFactor<ResistanceFactorInput>({

@@ -24,6 +24,8 @@ export interface DamageTakenFactorInput {
 
 export declare const DAMAGE_TAKEN_FACTOR_ID: "damage_taken"
 
+export declare const DEFAULT_DAMAGE_TAKEN_FACTOR_INPUT: DamageTakenFactorInput
+
 export declare const damageTakenFactor: Factor<DamageTakenFactorInput>
 ```
 
@@ -41,6 +43,20 @@ export declare const damageTakenFactor: Factor<DamageTakenFactorInput>
 
 调用方只传入本次伤害实际适用的贡献。效果目标、伤害类型、触发条件和持续时间是否匹配，不由减易伤区
 判断。
+
+## 默认输入
+
+`DEFAULT_DAMAGE_TAKEN_FACTOR_INPUT` 遵循[公共默认输入规则](../index.md#乘区默认输入)，精确内容为：
+
+```ts
+{
+  targetDamageTakenIncreases: [],
+  targetDamageTakenReductions: [],
+}
+```
+
+外层对象和两个嵌套空数组都必须冻结。将该常量传给 `damageTakenFactor.calculate` 时结果为恒等倍率
+`1`。该常量表示公式组合中的“没有受到伤害提升或降低”，不代表游戏内受击方的默认状态。
 
 ## 适用边界
 
@@ -95,7 +111,7 @@ export declare const damageTakenFactor: Factor<DamageTakenFactorInput>
 
 ## 代码组织
 
-减易伤区的生产代码统一放在 `packages/core/src/factors/damage-taken.ts`。该文件包含身份常量、输入类型、
-`Factor` 定义、范围常量及减易伤区的求和和钳制逻辑。范围常量和私有辅助函数不对外导出。
+减易伤区的生产代码统一放在 `packages/core/src/factors/damage-taken.ts`。该文件包含身份常量、默认输入、
+输入类型、`Factor` 定义、范围常量及减易伤区的求和和钳制逻辑。范围常量和私有辅助函数不对外导出。
 
 `packages/core/src/index.ts` 只负责重新导出公开 API，测试保存在独立测试文件中。

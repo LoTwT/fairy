@@ -36,6 +36,8 @@ export interface CalculateTargetEffectiveDefenseParams {
 
 export declare const DEFENSE_FACTOR_ID: "defense"
 
+export declare const DEFAULT_DEFENSE_FACTOR_INPUT: DefenseFactorInput
+
 export declare function calculateDefenseLevelBase(level: number): number
 
 export declare function calculateTargetBaseDefense(
@@ -59,6 +61,22 @@ export declare const defenseFactor: Factor<DefenseFactorInput>
 
 两个值都必须是可以直接进入防御区主公式的计算结果，不保存等级、原始数据、调整来源或其他结算
 上下文。调用方已有合法计算结果时可以直接传入；需要从更早阶段计算时使用本规范定义的配套 helper。
+
+## 默认输入
+
+`DEFAULT_DEFENSE_FACTOR_INPUT` 遵循[公共默认输入规则](../index.md#乘区默认输入)，精确内容为：
+
+```ts
+{
+  attackerLevelBase: 50,
+  targetEffectiveDefense: 0,
+}
+```
+
+该对象必须冻结。将其传给 `defenseFactor.calculate` 时结果为恒等倍率 `1`。其中 `50` 是等级基数表中的
+有效正数，用于满足防御区主公式的输入约束；该常量不表示调用方、角色或敌人的默认等级与防御。
+
+常规伤害存在实际防御数据时，不得用默认输入替代该数据。
 
 ## 主公式
 
@@ -212,9 +230,9 @@ export declare const defenseFactor: Factor<DefenseFactorInput>
 
 ## 代码组织
 
-防御区的生产代码统一放在 `packages/core/src/factors/defense.ts`。该文件包含身份常量、公开输入与参数
-类型、`Factor` 定义、三个配套 helper、等级基数表、范围常量及防御区独有的校验和计算逻辑。等级基数
-表、固定常量和私有辅助函数不对外导出。
+防御区的生产代码统一放在 `packages/core/src/factors/defense.ts`。该文件包含身份常量、默认输入、公开
+输入与参数类型、`Factor` 定义、三个配套 helper、等级基数表、范围常量及防御区独有的校验和计算
+逻辑。等级基数表、内部计算常量和私有辅助函数不对外导出。
 
 `packages/core/src/index.ts` 只负责重新导出公开 API，测试统一保存在
 `packages/core/test/defense.test.ts`。

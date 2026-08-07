@@ -3,6 +3,7 @@ import {
   calculateDefenseLevelBase,
   calculateTargetBaseDefense,
   calculateTargetEffectiveDefense,
+  DEFAULT_DEFENSE_FACTOR_INPUT,
   DEFENSE_FACTOR_ID,
   defenseFactor,
   type CalculateTargetBaseDefenseParams,
@@ -25,11 +26,23 @@ describe("defenseFactor", () => {
       readonly targetEffectiveDefense: number
     }>()
     expectTypeOf(DEFENSE_FACTOR_ID).toEqualTypeOf<"defense">()
+    expectTypeOf(
+      DEFAULT_DEFENSE_FACTOR_INPUT,
+    ).toEqualTypeOf<DefenseFactorInput>()
     expectTypeOf(defenseFactor).toEqualTypeOf<Factor<DefenseFactorInput>>()
 
     expect(DEFENSE_FACTOR_ID).toBe("defense")
     expect(defenseFactor.factorId).toBe(DEFENSE_FACTOR_ID)
     expect(Object.isFrozen(defenseFactor)).toBe(true)
+  })
+
+  it("provides a frozen default input with an identity result", () => {
+    expect(DEFAULT_DEFENSE_FACTOR_INPUT).toEqual({
+      attackerLevelBase: 50,
+      targetEffectiveDefense: 0,
+    })
+    expect(Object.isFrozen(DEFAULT_DEFENSE_FACTOR_INPUT)).toBe(true)
+    expect(defenseFactor.calculate(DEFAULT_DEFENSE_FACTOR_INPUT)).toBe(1)
   })
 
   it("calculates the defense multiplier without rounding", () => {

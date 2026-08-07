@@ -7,6 +7,30 @@ export function assertArray(
   }
 }
 
+export function assertBoolean(
+  value: unknown,
+  name: string,
+): asserts value is boolean {
+  if (typeof value !== "boolean") {
+    throw new TypeError(`${name} must be a boolean`)
+  }
+}
+
+export function assertFunction(value: unknown, name: string): void {
+  if (typeof value !== "function") {
+    throw new TypeError(`${name} must be a function`)
+  }
+}
+
+export function assertNonEmptyString(
+  value: unknown,
+  name: string,
+): asserts value is string {
+  if (typeof value !== "string" || value.trim().length === 0) {
+    throw new TypeError(`${name} must be a non-empty string`)
+  }
+}
+
 export function assertNonArrayObject(
   value: unknown,
   name: string,

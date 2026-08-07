@@ -1,6 +1,7 @@
 import { describe, expect, expectTypeOf, it } from "vitest"
 import {
   DAMAGE_TAKEN_FACTOR_ID,
+  DEFAULT_DAMAGE_TAKEN_FACTOR_INPUT,
   damageTakenFactor,
   type DamageTakenFactorInput,
   type Factor,
@@ -13,6 +14,9 @@ describe("damageTakenFactor", () => {
       readonly targetDamageTakenReductions: readonly number[]
     }>()
     expectTypeOf(DAMAGE_TAKEN_FACTOR_ID).toEqualTypeOf<"damage_taken">()
+    expectTypeOf(
+      DEFAULT_DAMAGE_TAKEN_FACTOR_INPUT,
+    ).toEqualTypeOf<DamageTakenFactorInput>()
     expectTypeOf(damageTakenFactor).toEqualTypeOf<
       Factor<DamageTakenFactorInput>
     >()
@@ -20,6 +24,27 @@ describe("damageTakenFactor", () => {
     expect(DAMAGE_TAKEN_FACTOR_ID).toBe("damage_taken")
     expect(damageTakenFactor.factorId).toBe(DAMAGE_TAKEN_FACTOR_ID)
     expect(Object.isFrozen(damageTakenFactor)).toBe(true)
+  })
+
+  it("provides a deeply frozen default input with an identity result", () => {
+    expect(DEFAULT_DAMAGE_TAKEN_FACTOR_INPUT).toEqual({
+      targetDamageTakenIncreases: [],
+      targetDamageTakenReductions: [],
+    })
+    expect(Object.isFrozen(DEFAULT_DAMAGE_TAKEN_FACTOR_INPUT)).toBe(true)
+    expect(
+      Object.isFrozen(
+        DEFAULT_DAMAGE_TAKEN_FACTOR_INPUT.targetDamageTakenIncreases,
+      ),
+    ).toBe(true)
+    expect(
+      Object.isFrozen(
+        DEFAULT_DAMAGE_TAKEN_FACTOR_INPUT.targetDamageTakenReductions,
+      ),
+    ).toBe(true)
+    expect(damageTakenFactor.calculate(DEFAULT_DAMAGE_TAKEN_FACTOR_INPUT)).toBe(
+      1,
+    )
   })
 
   it("returns the base multiplier when both contribution arrays are empty", () => {

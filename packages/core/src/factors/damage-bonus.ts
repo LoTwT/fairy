@@ -12,6 +12,8 @@ const MAX_DAMAGE_BONUS_MULTIPLIER = 6
 export type DamageBonusFactorInput = readonly number[]
 
 export const DAMAGE_BONUS_FACTOR_ID = "damage_bonus" as const
+export const DEFAULT_DAMAGE_BONUS_FACTOR_INPUT: DamageBonusFactorInput =
+  Object.freeze([])
 
 export const damageBonusFactor: Factor<DamageBonusFactorInput> =
   defineFactor<DamageBonusFactorInput>({

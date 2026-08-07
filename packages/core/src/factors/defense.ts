@@ -35,6 +35,10 @@ export interface CalculateTargetEffectiveDefenseParams {
 }
 
 export const DEFENSE_FACTOR_ID = "defense" as const
+export const DEFAULT_DEFENSE_FACTOR_INPUT: DefenseFactorInput = Object.freeze({
+  attackerLevelBase: LEVEL_ONE_LEVEL_BASE,
+  targetEffectiveDefense: 0,
+})
 
 export function calculateDefenseLevelBase(level: number): number {
   assertFiniteNumber(level, "Level")

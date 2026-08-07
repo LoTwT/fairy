@@ -25,6 +25,8 @@ export interface ResistanceFactorInput {
 
 export declare const RESISTANCE_FACTOR_ID: "resistance"
 
+export declare const DEFAULT_RESISTANCE_FACTOR_INPUT: ResistanceFactorInput
+
 export declare const resistanceFactor: Factor<ResistanceFactorInput>
 ```
 
@@ -51,6 +53,21 @@ export declare const resistanceFactor: Factor<ResistanceFactorInput>
 
 `targetResistance` 是应用本次输入中抗性降低和无视抗性之前的快照。同一项调整不能已经包含在该快照
 中后再次放入调整数组。
+
+## 默认输入
+
+`DEFAULT_RESISTANCE_FACTOR_INPUT` 遵循[公共默认输入规则](../index.md#乘区默认输入)，精确内容为：
+
+```ts
+{
+  targetResistance: 0,
+  targetResistanceReductions: [],
+  attackerResistanceIgnoreValues: [],
+}
+```
+
+外层对象和两个嵌套空数组都必须冻结。将该常量传给 `resistanceFactor.calculate` 时结果为恒等倍率
+`1`。该常量表示公式组合中的“没有抗性影响”，不代表游戏内目标的默认抗性。
 
 ## 数组语义
 
@@ -82,7 +99,8 @@ export declare const resistanceFactor: Factor<ResistanceFactorInput>
 |              `0.2` |                `0.8` | 抗性属性     |
 |              `0.4` |                `0.6` | 特殊高抗性   |
 
-这些值只是来源已观察到的示例，不是缺少目标抗性时可以采用的默认值。
+这些值只是来源已观察到的示例，不能在缺少目标抗性数据时作为数据默认值。公开的
+`DEFAULT_RESISTANCE_FACTOR_INPUT` 也只是恒等计算输入，不能用来推断目标实际抗性。
 
 ## 输入值域
 
@@ -105,7 +123,8 @@ export declare const resistanceFactor: Factor<ResistanceFactorInput>
 
 ## 代码组织
 
-抗性区的生产代码统一放在 `packages/core/src/factors/resistance.ts`。该文件包含身份常量、输入类型、
-`Factor` 定义、范围常量及抗性区独有的求和和钳制逻辑。范围常量和私有辅助函数不对外导出。
+抗性区的生产代码统一放在 `packages/core/src/factors/resistance.ts`。该文件包含身份常量、默认输入、
+输入类型、`Factor` 定义、范围常量及抗性区独有的求和和钳制逻辑。范围常量和私有辅助函数不对外
+导出。
 
 `packages/core/src/index.ts` 只负责重新导出公开 API，测试保存在独立测试文件中。

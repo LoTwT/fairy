@@ -1,6 +1,7 @@
 import { defineFactor, type Factor } from "../factor.ts"
 import {
   assertArray,
+  assertBoolean,
   assertFiniteNumber,
   assertFiniteResult,
   assertNonArrayObject,
@@ -19,6 +20,12 @@ export interface StunDamageFactorInput {
 }
 
 export const STUN_DAMAGE_FACTOR_ID = "stun_damage" as const
+export const DEFAULT_STUN_DAMAGE_FACTOR_INPUT: StunDamageFactorInput =
+  Object.freeze({
+    isTargetStunned: false,
+    targetBaseStunDamageMultiplier: 1,
+    targetStunDamageMultiplierAdjustments: Object.freeze([]),
+  })
 
 export const stunDamageFactor: Factor<StunDamageFactorInput> =
   defineFactor<StunDamageFactorInput>({
@@ -32,9 +39,7 @@ export const stunDamageFactor: Factor<StunDamageFactorInput> =
         targetStunDamageMultiplierAdjustments,
       } = input
 
-      if (typeof isTargetStunned !== "boolean") {
-        throw new TypeError("isTargetStunned must be a boolean")
-      }
+      assertBoolean(isTargetStunned, "isTargetStunned")
 
       assertNonNegativeFiniteNumber(
         targetBaseStunDamageMultiplier,
