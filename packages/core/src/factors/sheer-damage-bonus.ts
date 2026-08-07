@@ -12,6 +12,8 @@ const MAX_SHEER_DAMAGE_BONUS_MULTIPLIER = 9
 export type SheerDamageBonusFactorInput = readonly number[]
 
 export const SHEER_DAMAGE_BONUS_FACTOR_ID = "sheer_damage_bonus" as const
+export const DEFAULT_SHEER_DAMAGE_BONUS_FACTOR_INPUT: SheerDamageBonusFactorInput =
+  Object.freeze([])
 
 export const sheerDamageBonusFactor: Factor<SheerDamageBonusFactorInput> =
   defineFactor<SheerDamageBonusFactorInput>({

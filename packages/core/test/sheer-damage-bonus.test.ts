@@ -1,5 +1,6 @@
 import { describe, expect, expectTypeOf, it } from "vitest"
 import {
+  DEFAULT_SHEER_DAMAGE_BONUS_FACTOR_INPUT,
   SHEER_DAMAGE_BONUS_FACTOR_ID,
   sheerDamageBonusFactor,
   type Factor,
@@ -14,6 +15,9 @@ describe("sheerDamageBonusFactor", () => {
     expectTypeOf(
       SHEER_DAMAGE_BONUS_FACTOR_ID,
     ).toEqualTypeOf<"sheer_damage_bonus">()
+    expectTypeOf(
+      DEFAULT_SHEER_DAMAGE_BONUS_FACTOR_INPUT,
+    ).toEqualTypeOf<SheerDamageBonusFactorInput>()
     expectTypeOf(sheerDamageBonusFactor).toEqualTypeOf<
       Factor<SheerDamageBonusFactorInput>
     >()
@@ -21,6 +25,14 @@ describe("sheerDamageBonusFactor", () => {
     expect(SHEER_DAMAGE_BONUS_FACTOR_ID).toBe("sheer_damage_bonus")
     expect(sheerDamageBonusFactor.factorId).toBe(SHEER_DAMAGE_BONUS_FACTOR_ID)
     expect(Object.isFrozen(sheerDamageBonusFactor)).toBe(true)
+  })
+
+  it("provides a frozen default input with an identity result", () => {
+    expect(DEFAULT_SHEER_DAMAGE_BONUS_FACTOR_INPUT).toEqual([])
+    expect(Object.isFrozen(DEFAULT_SHEER_DAMAGE_BONUS_FACTOR_INPUT)).toBe(true)
+    expect(
+      sheerDamageBonusFactor.calculate(DEFAULT_SHEER_DAMAGE_BONUS_FACTOR_INPUT),
+    ).toBe(1)
   })
 
   it("returns the base multiplier for an empty input array", () => {

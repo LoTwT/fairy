@@ -112,11 +112,13 @@ import {
   DEFAULT_DAMAGE_TAKEN_FACTOR_INPUT,
   DEFAULT_DEFENSE_FACTOR_INPUT,
   DEFAULT_RESISTANCE_FACTOR_INPUT,
+  DEFAULT_SHEER_DAMAGE_BONUS_FACTOR_INPUT,
   DEFAULT_STUN_DAMAGE_FACTOR_INPUT,
   DEFENSE_FACTOR_ID,
   REGULAR_DAMAGE_FORMULA_ID,
   RESISTANCE_FACTOR_ID,
   SHEER_DAMAGE_BONUS_FACTOR_ID,
+  SHEER_DAMAGE_FORMULA_ID,
   STUN_DAMAGE_FACTOR_ID,
   baseDamageFactor,
   calculateFinalStat,
@@ -133,6 +135,7 @@ import {
   regularDamageFormula,
   resistanceFactor,
   sheerDamageBonusFactor,
+  sheerDamageFormula,
   stunDamageFactor,
 } from "@randomplay/core"
 
@@ -268,6 +271,11 @@ assert.equal(
   SHEER_DAMAGE_BONUS_FACTOR_ID,
 )
 assert.equal(sheerDamageBonusFactor.calculate([0.25]), 1.25)
+assert.equal(
+  sheerDamageBonusFactor.calculate(DEFAULT_SHEER_DAMAGE_BONUS_FACTOR_INPUT),
+  1,
+)
+assert.equal(Object.isFrozen(DEFAULT_SHEER_DAMAGE_BONUS_FACTOR_INPUT), true)
 assert.equal(STUN_DAMAGE_FACTOR_ID, "stun_damage")
 assert.equal(stunDamageFactor.factorId, STUN_DAMAGE_FACTOR_ID)
 assert.equal(
@@ -309,6 +317,29 @@ assert.deepEqual(regularDamageResult.factorResults, {
 })
 assert.equal(Object.isFrozen(regularDamageResult), true)
 assert.equal(Object.isFrozen(regularDamageResult.factorResults), true)
+assert.equal(SHEER_DAMAGE_FORMULA_ID, "sheer_damage")
+assert.equal(sheerDamageFormula.formulaId, SHEER_DAMAGE_FORMULA_ID)
+const sheerDamageResult = sheerDamageFormula.calculate({
+  baseDamage: [{ damageMultiplier: 2, finalStat }],
+  damageBonus: DEFAULT_DAMAGE_BONUS_FACTOR_INPUT,
+  critical: DEFAULT_CRITICAL_FACTOR_INPUT,
+  sheerDamageBonus: DEFAULT_SHEER_DAMAGE_BONUS_FACTOR_INPUT,
+  resistance: DEFAULT_RESISTANCE_FACTOR_INPUT,
+  damageTaken: DEFAULT_DAMAGE_TAKEN_FACTOR_INPUT,
+  stunDamage: DEFAULT_STUN_DAMAGE_FACTOR_INPUT,
+})
+assert.equal(sheerDamageResult.value, 246)
+assert.deepEqual(sheerDamageResult.factorResults, {
+  baseDamage: 246,
+  damageBonus: 1,
+  critical: 1,
+  sheerDamageBonus: 1,
+  resistance: 1,
+  damageTaken: 1,
+  stunDamage: 1,
+})
+assert.equal(Object.isFrozen(sheerDamageResult), true)
+assert.equal(Object.isFrozen(sheerDamageResult.factorResults), true)
 `,
     )
     writeFileSync(
@@ -319,6 +350,7 @@ assert.equal(Object.isFrozen(regularDamageResult.factorResults), true)
   DEFAULT_DAMAGE_TAKEN_FACTOR_INPUT,
   DEFAULT_DEFENSE_FACTOR_INPUT,
   DEFAULT_RESISTANCE_FACTOR_INPUT,
+  DEFAULT_SHEER_DAMAGE_BONUS_FACTOR_INPUT,
   DEFAULT_STUN_DAMAGE_FACTOR_INPUT,
   baseDamageFactor,
   calculateFinalStat,
@@ -335,6 +367,7 @@ assert.equal(Object.isFrozen(regularDamageResult.factorResults), true)
   regularDamageFormula,
   resistanceFactor,
   sheerDamageBonusFactor,
+  sheerDamageFormula,
   stunDamageFactor,
   type BaseDamageFactorInput,
   type BaseDamageFactorInputItem,
@@ -355,6 +388,7 @@ assert.equal(Object.isFrozen(regularDamageResult.factorResults), true)
   type RegularDamageFormulaInput,
   type ResistanceFactorInput,
   type SheerDamageBonusFactorInput,
+  type SheerDamageFormulaInput,
   type StunDamageFactorInput,
 } from "@randomplay/core"
 
@@ -454,6 +488,15 @@ const regularDamageInput: RegularDamageFormulaInput = {
   damageTaken: DEFAULT_DAMAGE_TAKEN_FACTOR_INPUT,
   stunDamage: DEFAULT_STUN_DAMAGE_FACTOR_INPUT,
 }
+const sheerDamageInput: SheerDamageFormulaInput = {
+  baseDamage: baseDamageInputs,
+  damageBonus: DEFAULT_DAMAGE_BONUS_FACTOR_INPUT,
+  critical: DEFAULT_CRITICAL_FACTOR_INPUT,
+  sheerDamageBonus: DEFAULT_SHEER_DAMAGE_BONUS_FACTOR_INPUT,
+  resistance: DEFAULT_RESISTANCE_FACTOR_INPUT,
+  damageTaken: DEFAULT_DAMAGE_TAKEN_FACTOR_INPUT,
+  stunDamage: DEFAULT_STUN_DAMAGE_FACTOR_INPUT,
+}
 
 factor.calculate({ values: [2, 3] })
 formulaFactorResults.left
@@ -464,8 +507,10 @@ damageTakenFactor.calculate(damageTakenInput)
 defenseFactor.calculate(defenseInput)
 resistanceFactor.calculate(resistanceInput)
 sheerDamageBonusFactor.calculate(sheerDamageBonusInputs)
+sheerDamageBonusFactor.calculate(DEFAULT_SHEER_DAMAGE_BONUS_FACTOR_INPUT)
 stunDamageFactor.calculate(stunDamageInput)
 regularDamageFormula.calculate(regularDamageInput)
+sheerDamageFormula.calculate(sheerDamageInput)
 `,
     )
 

@@ -143,8 +143,8 @@ export declare function calculateFinalStat(
 - 不接收 `damageType`、`isPenetrating` 或 `isTrueDamage` 等模式字段。
 
 常规伤害可以将最终攻击力作为 `finalStat`；贯穿伤害可以将最终贯穿力作为 `finalStat`。二者使用同一个
-基础伤害区。贯穿伤害跳过防御区并改用贯穿增伤区，属于顶层公式
-如何组合乘区的规则。
+基础伤害区。贯穿伤害不采用防御区，并采用贯穿增伤区，具体乘区组合由
+[贯穿伤害公式](../formulas/sheer-damage.md)维护。
 
 真实伤害不属于当前基础伤害区规范的适用范围。当前不得通过将目标最大生命值作为
 `finalStat` 来表达真实伤害；真实伤害及其基础伤害计算在后续独立设计。
