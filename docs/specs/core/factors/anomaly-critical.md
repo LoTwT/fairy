@@ -3,9 +3,8 @@
 异常暴击区根据本次异常伤害是否已经确定为暴击，产生异常暴击倍率，规则来源为
 [原始攻略中的异常暴击区](../../../references/zzz-data-introduction.txt#L262)。异常暴击区是攻略对异常伤害
 暴击机制的统一建模；Nanoka 3.0 游戏文本会在具体异常效果中使用 `CRIT Rate`、`CRIT DMG` 和
-“触发暴击”等表达，未提供统一的 `Anomaly Critical` 标签。
-
-> 待确认：最终 review 时人工确认是否继续使用 `AnomalyCritical` 作为统一的 core 标识。
+“触发暴击”等表达，未提供统一的 `Anomaly Critical` 标签。core 使用 `AnomalyCritical` 作为覆盖该机制
+的统一标识。
 
 ## 身份与公开契约
 
