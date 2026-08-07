@@ -53,6 +53,7 @@ export {
 } from "./factors/damage-taken.ts"
 export type { DamageTakenFactorInput } from "./factors/damage-taken.ts"
 export {
+  DEFAULT_SHEER_DAMAGE_BONUS_FACTOR_INPUT,
   SHEER_DAMAGE_BONUS_FACTOR_ID,
   sheerDamageBonusFactor,
 } from "./factors/sheer-damage-bonus.ts"

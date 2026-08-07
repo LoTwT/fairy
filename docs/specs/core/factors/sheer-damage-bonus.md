@@ -21,6 +21,7 @@
 export type SheerDamageBonusFactorInput = readonly number[]
 
 export declare const SHEER_DAMAGE_BONUS_FACTOR_ID: "sheer_damage_bonus"
+export declare const DEFAULT_SHEER_DAMAGE_BONUS_FACTOR_INPUT: SheerDamageBonusFactorInput
 
 export declare const sheerDamageBonusFactor: Factor<SheerDamageBonusFactorInput>
 ```
@@ -35,6 +36,18 @@ export declare const sheerDamageBonusFactor: Factor<SheerDamageBonusFactorInput>
 
 调用方只传入本次贯穿伤害实际适用的贡献。角色特性、技能标签、触发条件和持续时间是否匹配，不由
 贯穿增伤区判断。
+
+## 默认输入
+
+`DEFAULT_SHEER_DAMAGE_BONUS_FACTOR_INPUT` 遵循[公共默认输入规则](../index.md#乘区默认输入)，具体是
+冻结的空数组：
+
+```ts
+Object.freeze([])
+```
+
+它表示没有贯穿增伤贡献，`sheerDamageBonusFactor.calculate` 对其返回恒等倍率 `1`。它不表示任何
+代理人的面板贯穿增伤或游戏内默认值。
 
 ## 适用边界
 
@@ -77,6 +90,7 @@ export declare const sheerDamageBonusFactor: Factor<SheerDamageBonusFactorInput>
 ## 代码组织
 
 贯穿增伤区的生产代码统一放在 `packages/core/src/factors/sheer-damage-bonus.ts`。该文件包含身份常量、
-输入类型、`Factor` 定义、范围常量及贯穿增伤区的求和和钳制逻辑。范围常量和私有辅助函数不对外导出。
+默认输入、输入类型、`Factor` 定义、范围常量及贯穿增伤区的求和和钳制逻辑。范围常量和私有辅助函数
+不对外导出。
 
 `packages/core/src/index.ts` 只负责重新导出公开 API，测试保存在独立测试文件中。

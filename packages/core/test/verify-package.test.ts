@@ -112,6 +112,7 @@ import {
   DEFAULT_DAMAGE_TAKEN_FACTOR_INPUT,
   DEFAULT_DEFENSE_FACTOR_INPUT,
   DEFAULT_RESISTANCE_FACTOR_INPUT,
+  DEFAULT_SHEER_DAMAGE_BONUS_FACTOR_INPUT,
   DEFAULT_STUN_DAMAGE_FACTOR_INPUT,
   DEFENSE_FACTOR_ID,
   REGULAR_DAMAGE_FORMULA_ID,
@@ -268,6 +269,11 @@ assert.equal(
   SHEER_DAMAGE_BONUS_FACTOR_ID,
 )
 assert.equal(sheerDamageBonusFactor.calculate([0.25]), 1.25)
+assert.equal(
+  sheerDamageBonusFactor.calculate(DEFAULT_SHEER_DAMAGE_BONUS_FACTOR_INPUT),
+  1,
+)
+assert.equal(Object.isFrozen(DEFAULT_SHEER_DAMAGE_BONUS_FACTOR_INPUT), true)
 assert.equal(STUN_DAMAGE_FACTOR_ID, "stun_damage")
 assert.equal(stunDamageFactor.factorId, STUN_DAMAGE_FACTOR_ID)
 assert.equal(
@@ -319,6 +325,7 @@ assert.equal(Object.isFrozen(regularDamageResult.factorResults), true)
   DEFAULT_DAMAGE_TAKEN_FACTOR_INPUT,
   DEFAULT_DEFENSE_FACTOR_INPUT,
   DEFAULT_RESISTANCE_FACTOR_INPUT,
+  DEFAULT_SHEER_DAMAGE_BONUS_FACTOR_INPUT,
   DEFAULT_STUN_DAMAGE_FACTOR_INPUT,
   baseDamageFactor,
   calculateFinalStat,
@@ -464,6 +471,7 @@ damageTakenFactor.calculate(damageTakenInput)
 defenseFactor.calculate(defenseInput)
 resistanceFactor.calculate(resistanceInput)
 sheerDamageBonusFactor.calculate(sheerDamageBonusInputs)
+sheerDamageBonusFactor.calculate(DEFAULT_SHEER_DAMAGE_BONUS_FACTOR_INPUT)
 stunDamageFactor.calculate(stunDamageInput)
 regularDamageFormula.calculate(regularDamageInput)
 `,
