@@ -103,18 +103,24 @@ describe("packed package", () => {
       join(consumerDirectory, "smoke.mjs"),
       `import assert from "node:assert/strict"
 import {
+  ANOMALY_BUILDUP_FORMULA_ID,
+  ANOMALY_BUILDUP_RATE_FACTOR_ID,
   ANOMALY_CRITICAL_FACTOR_ID,
   ANOMALY_DAMAGE_BONUS_FACTOR_ID,
   ANOMALY_DAMAGE_FORMULA_ID,
   ANOMALY_DAMAGE_LEVEL_FACTOR_ID,
+  ANOMALY_MASTERY_FACTOR_ID,
   ANOMALY_PROFICIENCY_FACTOR_ID,
+  BASE_ANOMALY_BUILDUP_FACTOR_ID,
   BASE_DAMAGE_FACTOR_ID,
   CRITICAL_FACTOR_ID,
   DAMAGE_BONUS_FACTOR_ID,
   DAMAGE_TAKEN_FACTOR_ID,
+  DEFAULT_ANOMALY_BUILDUP_RATE_FACTOR_INPUT,
   DEFAULT_ANOMALY_CRITICAL_FACTOR_INPUT,
   DEFAULT_ANOMALY_DAMAGE_BONUS_FACTOR_INPUT,
   DEFAULT_ANOMALY_DAMAGE_LEVEL_FACTOR_INPUT,
+  DEFAULT_ANOMALY_MASTERY_FACTOR_INPUT,
   DEFAULT_ANOMALY_PROFICIENCY_FACTOR_INPUT,
   DEFAULT_CRITICAL_FACTOR_INPUT,
   DEFAULT_DAMAGE_BONUS_FACTOR_INPUT,
@@ -129,11 +135,15 @@ import {
   SHEER_DAMAGE_BONUS_FACTOR_ID,
   SHEER_DAMAGE_FORMULA_ID,
   STUN_DAMAGE_FACTOR_ID,
+  anomalyBuildupFormula,
+  anomalyBuildupRateFactor,
   anomalyCriticalFactor,
   anomalyDamageBonusFactor,
   anomalyDamageFormula,
   anomalyDamageLevelFactor,
+  anomalyMasteryFactor,
   anomalyProficiencyFactor,
+  baseAnomalyBuildupFactor,
   baseDamageFactor,
   calculateFinalStat,
   calculateInitialStat,
@@ -191,6 +201,32 @@ const finalStat = calculateFinalStat({
 })
 assert.equal(initialStat, 95)
 assert.equal(finalStat, 123)
+assert.equal(BASE_ANOMALY_BUILDUP_FACTOR_ID, "base_anomaly_buildup")
+assert.equal(
+  baseAnomalyBuildupFactor.factorId,
+  BASE_ANOMALY_BUILDUP_FACTOR_ID,
+)
+assert.equal(baseAnomalyBuildupFactor.calculate(123), 123)
+assert.equal(ANOMALY_MASTERY_FACTOR_ID, "anomaly_mastery")
+assert.equal(anomalyMasteryFactor.factorId, ANOMALY_MASTERY_FACTOR_ID)
+assert.equal(anomalyMasteryFactor.calculate(125.9), 1.25)
+assert.equal(
+  anomalyMasteryFactor.calculate(DEFAULT_ANOMALY_MASTERY_FACTOR_INPUT),
+  1,
+)
+assert.equal(ANOMALY_BUILDUP_RATE_FACTOR_ID, "anomaly_buildup_rate")
+assert.equal(
+  anomalyBuildupRateFactor.factorId,
+  ANOMALY_BUILDUP_RATE_FACTOR_ID,
+)
+assert.equal(anomalyBuildupRateFactor.calculate([0.25, -0.125]), 1.125)
+assert.equal(
+  anomalyBuildupRateFactor.calculate(
+    DEFAULT_ANOMALY_BUILDUP_RATE_FACTOR_INPUT,
+  ),
+  1,
+)
+assert.equal(Object.isFrozen(DEFAULT_ANOMALY_BUILDUP_RATE_FACTOR_INPUT), true)
 assert.equal(ANOMALY_PROFICIENCY_FACTOR_ID, "anomaly_proficiency")
 assert.equal(
   anomalyProficiencyFactor.factorId,
@@ -407,6 +443,23 @@ assert.deepEqual(sheerDamageResult.factorResults, {
 })
 assert.equal(Object.isFrozen(sheerDamageResult), true)
 assert.equal(Object.isFrozen(sheerDamageResult.factorResults), true)
+assert.equal(ANOMALY_BUILDUP_FORMULA_ID, "anomaly_buildup")
+assert.equal(anomalyBuildupFormula.formulaId, ANOMALY_BUILDUP_FORMULA_ID)
+const anomalyBuildupResult = anomalyBuildupFormula.calculate({
+  baseAnomalyBuildup: 123,
+  anomalyMastery: DEFAULT_ANOMALY_MASTERY_FACTOR_INPUT,
+  anomalyBuildupRate: DEFAULT_ANOMALY_BUILDUP_RATE_FACTOR_INPUT,
+  resistance: DEFAULT_RESISTANCE_FACTOR_INPUT,
+})
+assert.equal(anomalyBuildupResult.value, 123)
+assert.deepEqual(anomalyBuildupResult.factorResults, {
+  baseAnomalyBuildup: 123,
+  anomalyMastery: 1,
+  anomalyBuildupRate: 1,
+  resistance: 1,
+})
+assert.equal(Object.isFrozen(anomalyBuildupResult), true)
+assert.equal(Object.isFrozen(anomalyBuildupResult.factorResults), true)
 assert.equal(ANOMALY_DAMAGE_FORMULA_ID, "anomaly_damage")
 assert.equal(anomalyDamageFormula.formulaId, ANOMALY_DAMAGE_FORMULA_ID)
 const anomalyDamageResult = anomalyDamageFormula.calculate({
@@ -441,14 +494,20 @@ assert.equal(Object.isFrozen(anomalyDamageResult.factorResults), true)
     writeFileSync(
       join(consumerDirectory, "smoke.ts"),
       `import {
+  ANOMALY_BUILDUP_FORMULA_ID,
+  ANOMALY_BUILDUP_RATE_FACTOR_ID,
   ANOMALY_CRITICAL_FACTOR_ID,
   ANOMALY_DAMAGE_BONUS_FACTOR_ID,
   ANOMALY_DAMAGE_FORMULA_ID,
   ANOMALY_DAMAGE_LEVEL_FACTOR_ID,
+  ANOMALY_MASTERY_FACTOR_ID,
   ANOMALY_PROFICIENCY_FACTOR_ID,
+  BASE_ANOMALY_BUILDUP_FACTOR_ID,
+  DEFAULT_ANOMALY_BUILDUP_RATE_FACTOR_INPUT,
   DEFAULT_ANOMALY_CRITICAL_FACTOR_INPUT,
   DEFAULT_ANOMALY_DAMAGE_BONUS_FACTOR_INPUT,
   DEFAULT_ANOMALY_DAMAGE_LEVEL_FACTOR_INPUT,
+  DEFAULT_ANOMALY_MASTERY_FACTOR_INPUT,
   DEFAULT_ANOMALY_PROFICIENCY_FACTOR_INPUT,
   DEFAULT_CRITICAL_FACTOR_INPUT,
   DEFAULT_DAMAGE_BONUS_FACTOR_INPUT,
@@ -457,11 +516,15 @@ assert.equal(Object.isFrozen(anomalyDamageResult.factorResults), true)
   DEFAULT_RESISTANCE_FACTOR_INPUT,
   DEFAULT_SHEER_DAMAGE_BONUS_FACTOR_INPUT,
   DEFAULT_STUN_DAMAGE_FACTOR_INPUT,
+  anomalyBuildupFormula,
+  anomalyBuildupRateFactor,
   anomalyCriticalFactor,
   anomalyDamageBonusFactor,
   anomalyDamageFormula,
   anomalyDamageLevelFactor,
+  anomalyMasteryFactor,
   anomalyProficiencyFactor,
+  baseAnomalyBuildupFactor,
   baseDamageFactor,
   calculateFinalStat,
   calculateInitialStat,
@@ -479,11 +542,15 @@ assert.equal(Object.isFrozen(anomalyDamageResult.factorResults), true)
   sheerDamageBonusFactor,
   sheerDamageFormula,
   stunDamageFactor,
+  type AnomalyBuildupFormulaInput,
+  type AnomalyBuildupRateFactorInput,
   type AnomalyCriticalFactorInput,
   type AnomalyDamageBonusFactorInput,
   type AnomalyDamageFormulaInput,
   type AnomalyDamageLevelFactorInput,
+  type AnomalyMasteryFactorInput,
   type AnomalyProficiencyFactorInput,
+  type BaseAnomalyBuildupFactorInput,
   type BaseDamageFactorInput,
   type BaseDamageFactorInputItem,
   type CalculateFinalStatParams,
@@ -516,14 +583,20 @@ interface ProductFormulaInput {
   readonly right: number
 }
 
+const anomalyBuildupFormulaId: "anomaly_buildup" = ANOMALY_BUILDUP_FORMULA_ID
+const anomalyBuildupRateFactorId: "anomaly_buildup_rate" =
+  ANOMALY_BUILDUP_RATE_FACTOR_ID
 const anomalyCriticalFactorId: "anomaly_critical" = ANOMALY_CRITICAL_FACTOR_ID
 const anomalyDamageBonusFactorId: "anomaly_damage_bonus" =
   ANOMALY_DAMAGE_BONUS_FACTOR_ID
 const anomalyDamageFormulaId: "anomaly_damage" = ANOMALY_DAMAGE_FORMULA_ID
 const anomalyDamageLevelFactorId: "anomaly_damage_level" =
   ANOMALY_DAMAGE_LEVEL_FACTOR_ID
+const anomalyMasteryFactorId: "anomaly_mastery" = ANOMALY_MASTERY_FACTOR_ID
 const anomalyProficiencyFactorId: "anomaly_proficiency" =
   ANOMALY_PROFICIENCY_FACTOR_ID
+const baseAnomalyBuildupFactorId: "base_anomaly_buildup" =
+  BASE_ANOMALY_BUILDUP_FACTOR_ID
 const params: FactorParams<SumFactorInput> = {
   factorId: "draft-sum",
   calculate: (input) =>
@@ -564,12 +637,15 @@ const baseDamageInputItem: BaseDamageFactorInputItem = {
   finalStat,
 }
 const baseDamageInputs: BaseDamageFactorInput = [baseDamageInputItem]
+const baseAnomalyBuildupInput: BaseAnomalyBuildupFactorInput = 123
+const anomalyBuildupRateInputs: AnomalyBuildupRateFactorInput = [0.25, -0.125]
 const anomalyCriticalInput: AnomalyCriticalFactorInput = {
   isAnomalyCritical: true,
   anomalyCriticalDamageContributions: [0.5],
 }
 const anomalyDamageBonusInputs: AnomalyDamageBonusFactorInput = [0.25, -0.125]
 const anomalyDamageLevelInput: AnomalyDamageLevelFactorInput = 60
+const anomalyMasteryInput: AnomalyMasteryFactorInput = 125.9
 const anomalyProficiencyInput: AnomalyProficiencyFactorInput = 125
 const criticalInputs: CriticalFactorInput = {
   isCritical: true,
@@ -627,6 +703,12 @@ const sheerDamageInput: SheerDamageFormulaInput = {
   damageTaken: DEFAULT_DAMAGE_TAKEN_FACTOR_INPUT,
   stunDamage: DEFAULT_STUN_DAMAGE_FACTOR_INPUT,
 }
+const anomalyBuildupInput: AnomalyBuildupFormulaInput = {
+  baseAnomalyBuildup: baseAnomalyBuildupInput,
+  anomalyMastery: DEFAULT_ANOMALY_MASTERY_FACTOR_INPUT,
+  anomalyBuildupRate: DEFAULT_ANOMALY_BUILDUP_RATE_FACTOR_INPUT,
+  resistance: DEFAULT_RESISTANCE_FACTOR_INPUT,
+}
 const anomalyDamageInput: AnomalyDamageFormulaInput = {
   baseDamage: baseDamageInputs,
   damageBonus: DEFAULT_DAMAGE_BONUS_FACTOR_INPUT,
@@ -642,17 +724,26 @@ const anomalyDamageInput: AnomalyDamageFormulaInput = {
 
 factor.calculate({ values: [2, 3] })
 formulaFactorResults.left
+anomalyBuildupFormulaId
+anomalyBuildupRateFactorId
 anomalyCriticalFactorId
 anomalyDamageBonusFactorId
 anomalyDamageFormulaId
 anomalyDamageLevelFactorId
+anomalyMasteryFactorId
 anomalyProficiencyFactorId
+baseAnomalyBuildupFactorId
+baseAnomalyBuildupFactor.calculate(baseAnomalyBuildupInput)
+anomalyBuildupRateFactor.calculate(anomalyBuildupRateInputs)
+anomalyBuildupRateFactor.calculate(DEFAULT_ANOMALY_BUILDUP_RATE_FACTOR_INPUT)
 anomalyCriticalFactor.calculate(anomalyCriticalInput)
 anomalyCriticalFactor.calculate(DEFAULT_ANOMALY_CRITICAL_FACTOR_INPUT)
 anomalyDamageBonusFactor.calculate(anomalyDamageBonusInputs)
 anomalyDamageBonusFactor.calculate(DEFAULT_ANOMALY_DAMAGE_BONUS_FACTOR_INPUT)
 anomalyDamageLevelFactor.calculate(anomalyDamageLevelInput)
 anomalyDamageLevelFactor.calculate(DEFAULT_ANOMALY_DAMAGE_LEVEL_FACTOR_INPUT)
+anomalyMasteryFactor.calculate(anomalyMasteryInput)
+anomalyMasteryFactor.calculate(DEFAULT_ANOMALY_MASTERY_FACTOR_INPUT)
 anomalyProficiencyFactor.calculate(anomalyProficiencyInput)
 anomalyProficiencyFactor.calculate(DEFAULT_ANOMALY_PROFICIENCY_FACTOR_INPUT)
 baseDamageFactor.calculate(baseDamageInputs)
@@ -666,6 +757,7 @@ sheerDamageBonusFactor.calculate(DEFAULT_SHEER_DAMAGE_BONUS_FACTOR_INPUT)
 stunDamageFactor.calculate(stunDamageInput)
 regularDamageFormula.calculate(regularDamageInput)
 sheerDamageFormula.calculate(sheerDamageInput)
+anomalyBuildupFormula.calculate(anomalyBuildupInput)
 anomalyDamageFormula.calculate(anomalyDamageInput)
 `,
     )

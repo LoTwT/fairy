@@ -1,7 +1,7 @@
 {
   "name": "@randomplay/core",
   "version": "0.2.0",
-  "description": "Pure ZZZ damage calculation core for Fairy.",
+  "description": "Pure ZZZ calculation core for Fairy.",
   "license": "MIT",
   "repository": {
     "type": "git",

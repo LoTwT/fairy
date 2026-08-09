@@ -12,6 +12,9 @@ Fairy 的确定性计算核心包。
 - 减易伤区：`damageTakenFactor`
 - 失衡易伤区：`stunDamageFactor`
 - 贯穿增伤区：`sheerDamageBonusFactor`
+- 基础异常积蓄值：`baseAnomalyBuildupFactor`
+- 异常掌控区：`anomalyMasteryFactor`
+- 异常积蓄效率区：`anomalyBuildupRateFactor`
 - 异常精通区：`anomalyProficiencyFactor`
 - 异常伤害等级区：`anomalyDamageLevelFactor`
 - 异常增伤区：`anomalyDamageBonusFactor`
@@ -22,6 +25,7 @@ Fairy 的确定性计算核心包。
 - 常规伤害：`regularDamageFormula`
 - 贯穿伤害：`sheerDamageFormula`
 - 异常伤害：`anomalyDamageFormula`
+- 异常积蓄值：`anomalyBuildupFormula`
 
 调用方也可以分别使用 `defineFactor` 和 `defineFormula` 建立自定义乘区与公式。
 
