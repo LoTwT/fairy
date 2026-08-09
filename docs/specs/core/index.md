@@ -261,3 +261,4 @@ export function defineFormula<FormulaInput extends object>(
 
 - [常规伤害](formulas/regular-damage.md)
 - [贯穿伤害](formulas/sheer-damage.md)
+- [异常伤害](formulas/anomaly-damage.md)

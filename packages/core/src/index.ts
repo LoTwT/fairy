@@ -98,6 +98,11 @@ export {
   sheerDamageFormula,
 } from "./formulas/sheer-damage.ts"
 export type { SheerDamageFormulaInput } from "./formulas/sheer-damage.ts"
+export {
+  ANOMALY_DAMAGE_FORMULA_ID,
+  anomalyDamageFormula,
+} from "./formulas/anomaly-damage.ts"
+export type { AnomalyDamageFormulaInput } from "./formulas/anomaly-damage.ts"
 export { calculateFinalStat, calculateInitialStat } from "./stat.ts"
 export type {
   CalculateFinalStatParams,
