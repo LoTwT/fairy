@@ -12,6 +12,36 @@
 | 公式结果 | `FormulaResult` | 公式一次计算产生的最终数值及各乘区结果                                         | core 结果 |
 | 乘区结果 | `FactorResult`  | 乘区一次计算产生的有限数值                                                     | core 结果 |
 
+### 失衡相关术语
+
+失衡相关中英文术语以 Nanoka 3.1 中同一数据路径的中英文游戏文本为依据。例如雨果的同一段技能文本同时
+使用了 `Stun`、`Stunned`、`Stun time`、`Daze` 和 `maximum Daze`，对应中文中的击破特性、失衡状态、
+失衡时间、失衡值和失衡值上限。代表性文本见
+[英文数据](../../../packages/data/raw/nanoka/3.1/en/character/1291.json#L2067)与
+[中文数据](../../../packages/data/raw/nanoka/3.1/zh/character/1291.json#L2067)。
+
+| 中文术语     | 英文标识                 | 规范定义                                                                                                               | 类别     |
+| ------------ | ------------------------ | ---------------------------------------------------------------------------------------------------------------------- | -------- |
+| 冲击力       | `Impact`                 | 与失衡倍率共同参与基础失衡区计算的属性                                                                                 | 游戏文本 |
+| 失衡值       | `Daze`                   | 用于表示失衡量，以及受击方失衡条中的累积量、上限与变化量；可以由攻击或直接机制累积、回复，不表示受击方已经进入失衡状态 | 游戏文本 |
+| 失衡倍率     | `Daze Multiplier`        | 与冲击力共同计算基础失衡值的倍率，可以由招式、攻击段或紊乱等失衡值机制提供                                             | 游戏文本 |
+| 失衡状态     | `Stunned` / `Stun state` | 受击方满足失衡条件后进入的状态；布尔命名使用 `Stunned` 形态                                                            | 游戏文本 |
+| 失衡易伤倍率 | `Stun DMG Multiplier`    | 根据受击方失衡状态参与伤害计算的倍率，不参与失衡值本身的计算                                                           | 游戏文本 |
+
+裸词 `Stun` 在游戏文本中依上下文可以表示击破特性、使目标进入失衡状态的动作、失衡状态本身，或固定
+复合术语的一部分，不能单独作为失衡状态或失衡值的 core 标识。`Stun Specialty` 表示代理人的“击破特性”，
+当前 core 不对代理人特性建模，因此不把它增加为公开计算术语或公式输入。`Stun DMG Multiplier` 等已经
+确认的完整复合术语不受该限制。
+
+特佩什图鉴的[英文文本](../../../packages/data/raw/nanoka/3.1/en/monster/930166.json#L508)使用
+`Daze Vulnerability`，同路径[中文文本](../../../packages/data/raw/nanoka/3.1/zh/monster/930166.json#L508)
+称为“失衡易伤效果”。结合[攻略对该机制的说明](../../references/zzz-data-introduction.txt#L140)，该处表示
+`Stun DMG Multiplier` 提高，不表示 `Daze taken`。这项特殊文本只用于数据解释，不增加为 core 公开标识。
+
+Nanoka 原始数据中的 `stun`、`stun_ratio`、`is_stun`、`stun_damage_taken_ratio` 和 `*_stun_res` 等内部
+字段覆盖了多个不同概念，而且在中英文数据中保持相同名称。这些字段只由后续数据清洗层解释，不能作为
+core 公开命名的依据，也不能不经语义转换直接作为 core 输入。
+
 ### 术语边界
 
 - “公式”只表示常规伤害、贯穿伤害、异常伤害、异常积蓄值等由乘区组成的顶层业务计算。乘区内部的
@@ -110,6 +140,8 @@ export interface Formula<FormulaInput extends object> {
   `BaseDamageFactorInput`；显式空数组仍按照基础伤害区规范产生 `0`。
 - 基础异常积蓄值也没有恒等倍率语义，不公开 `DEFAULT_BASE_ANOMALY_BUILDUP_FACTOR_INPUT`。
   调用方必须提供本次计算的 `BaseAnomalyBuildupFactorInput`；显式传入 `0` 时结果为 `0`。
+- 基础失衡区没有恒等倍率语义，不公开 `DEFAULT_BASE_DAZE_FACTOR_INPUT`。调用方必须提供本次计算的
+  `BaseDazeFactorInput`；显式传入空数组时结果为 `0`。
 
 ## 运行时校验原则
 
@@ -256,6 +288,12 @@ export function defineFormula<FormulaInput extends object>(
 - [异常增伤区](factors/anomaly-damage-bonus.md)
 - [异常暴击区](factors/anomaly-critical.md)
 
+### 待实现
+
+- [基础失衡区](factors/base-daze.md)
+- [失衡值提升区](factors/daze-dealt.md)
+- [受到失衡值提升区](factors/daze-taken.md)
+
 ### 规则边界
 
 - [特殊乘区边界](factors/special.md)
@@ -268,3 +306,7 @@ export function defineFormula<FormulaInput extends object>(
 - [贯穿伤害](formulas/sheer-damage.md)
 - [异常伤害](formulas/anomaly-damage.md)
 - [异常积蓄值](formulas/anomaly-buildup.md)
+
+### 待实现
+
+- [常规失衡值](formulas/regular-daze.md)
