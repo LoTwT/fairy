@@ -105,6 +105,7 @@ describe("packed package", () => {
 import {
   ANOMALY_CRITICAL_FACTOR_ID,
   ANOMALY_DAMAGE_BONUS_FACTOR_ID,
+  ANOMALY_DAMAGE_FORMULA_ID,
   ANOMALY_DAMAGE_LEVEL_FACTOR_ID,
   ANOMALY_PROFICIENCY_FACTOR_ID,
   BASE_DAMAGE_FACTOR_ID,
@@ -130,6 +131,7 @@ import {
   STUN_DAMAGE_FACTOR_ID,
   anomalyCriticalFactor,
   anomalyDamageBonusFactor,
+  anomalyDamageFormula,
   anomalyDamageLevelFactor,
   anomalyProficiencyFactor,
   baseDamageFactor,
@@ -405,6 +407,35 @@ assert.deepEqual(sheerDamageResult.factorResults, {
 })
 assert.equal(Object.isFrozen(sheerDamageResult), true)
 assert.equal(Object.isFrozen(sheerDamageResult.factorResults), true)
+assert.equal(ANOMALY_DAMAGE_FORMULA_ID, "anomaly_damage")
+assert.equal(anomalyDamageFormula.formulaId, ANOMALY_DAMAGE_FORMULA_ID)
+const anomalyDamageResult = anomalyDamageFormula.calculate({
+  baseDamage: [{ damageMultiplier: 2, finalStat }],
+  damageBonus: DEFAULT_DAMAGE_BONUS_FACTOR_INPUT,
+  anomalyProficiency: DEFAULT_ANOMALY_PROFICIENCY_FACTOR_INPUT,
+  defense: DEFAULT_DEFENSE_FACTOR_INPUT,
+  resistance: DEFAULT_RESISTANCE_FACTOR_INPUT,
+  damageTaken: DEFAULT_DAMAGE_TAKEN_FACTOR_INPUT,
+  stunDamage: DEFAULT_STUN_DAMAGE_FACTOR_INPUT,
+  anomalyDamageLevel: DEFAULT_ANOMALY_DAMAGE_LEVEL_FACTOR_INPUT,
+  anomalyDamageBonus: DEFAULT_ANOMALY_DAMAGE_BONUS_FACTOR_INPUT,
+  anomalyCritical: DEFAULT_ANOMALY_CRITICAL_FACTOR_INPUT,
+})
+assert.equal(anomalyDamageResult.value, 246)
+assert.deepEqual(anomalyDamageResult.factorResults, {
+  baseDamage: 246,
+  damageBonus: 1,
+  anomalyProficiency: 1,
+  defense: 1,
+  resistance: 1,
+  damageTaken: 1,
+  stunDamage: 1,
+  anomalyDamageLevel: 1,
+  anomalyDamageBonus: 1,
+  anomalyCritical: 1,
+})
+assert.equal(Object.isFrozen(anomalyDamageResult), true)
+assert.equal(Object.isFrozen(anomalyDamageResult.factorResults), true)
 `,
     )
     writeFileSync(
@@ -412,6 +443,7 @@ assert.equal(Object.isFrozen(sheerDamageResult.factorResults), true)
       `import {
   ANOMALY_CRITICAL_FACTOR_ID,
   ANOMALY_DAMAGE_BONUS_FACTOR_ID,
+  ANOMALY_DAMAGE_FORMULA_ID,
   ANOMALY_DAMAGE_LEVEL_FACTOR_ID,
   ANOMALY_PROFICIENCY_FACTOR_ID,
   DEFAULT_ANOMALY_CRITICAL_FACTOR_INPUT,
@@ -427,6 +459,7 @@ assert.equal(Object.isFrozen(sheerDamageResult.factorResults), true)
   DEFAULT_STUN_DAMAGE_FACTOR_INPUT,
   anomalyCriticalFactor,
   anomalyDamageBonusFactor,
+  anomalyDamageFormula,
   anomalyDamageLevelFactor,
   anomalyProficiencyFactor,
   baseDamageFactor,
@@ -448,6 +481,7 @@ assert.equal(Object.isFrozen(sheerDamageResult.factorResults), true)
   stunDamageFactor,
   type AnomalyCriticalFactorInput,
   type AnomalyDamageBonusFactorInput,
+  type AnomalyDamageFormulaInput,
   type AnomalyDamageLevelFactorInput,
   type AnomalyProficiencyFactorInput,
   type BaseDamageFactorInput,
@@ -485,6 +519,7 @@ interface ProductFormulaInput {
 const anomalyCriticalFactorId: "anomaly_critical" = ANOMALY_CRITICAL_FACTOR_ID
 const anomalyDamageBonusFactorId: "anomaly_damage_bonus" =
   ANOMALY_DAMAGE_BONUS_FACTOR_ID
+const anomalyDamageFormulaId: "anomaly_damage" = ANOMALY_DAMAGE_FORMULA_ID
 const anomalyDamageLevelFactorId: "anomaly_damage_level" =
   ANOMALY_DAMAGE_LEVEL_FACTOR_ID
 const anomalyProficiencyFactorId: "anomaly_proficiency" =
@@ -592,11 +627,24 @@ const sheerDamageInput: SheerDamageFormulaInput = {
   damageTaken: DEFAULT_DAMAGE_TAKEN_FACTOR_INPUT,
   stunDamage: DEFAULT_STUN_DAMAGE_FACTOR_INPUT,
 }
+const anomalyDamageInput: AnomalyDamageFormulaInput = {
+  baseDamage: baseDamageInputs,
+  damageBonus: DEFAULT_DAMAGE_BONUS_FACTOR_INPUT,
+  anomalyProficiency: DEFAULT_ANOMALY_PROFICIENCY_FACTOR_INPUT,
+  defense: DEFAULT_DEFENSE_FACTOR_INPUT,
+  resistance: DEFAULT_RESISTANCE_FACTOR_INPUT,
+  damageTaken: DEFAULT_DAMAGE_TAKEN_FACTOR_INPUT,
+  stunDamage: DEFAULT_STUN_DAMAGE_FACTOR_INPUT,
+  anomalyDamageLevel: DEFAULT_ANOMALY_DAMAGE_LEVEL_FACTOR_INPUT,
+  anomalyDamageBonus: DEFAULT_ANOMALY_DAMAGE_BONUS_FACTOR_INPUT,
+  anomalyCritical: DEFAULT_ANOMALY_CRITICAL_FACTOR_INPUT,
+}
 
 factor.calculate({ values: [2, 3] })
 formulaFactorResults.left
 anomalyCriticalFactorId
 anomalyDamageBonusFactorId
+anomalyDamageFormulaId
 anomalyDamageLevelFactorId
 anomalyProficiencyFactorId
 anomalyCriticalFactor.calculate(anomalyCriticalInput)
@@ -618,6 +666,7 @@ sheerDamageBonusFactor.calculate(DEFAULT_SHEER_DAMAGE_BONUS_FACTOR_INPUT)
 stunDamageFactor.calculate(stunDamageInput)
 regularDamageFormula.calculate(regularDamageInput)
 sheerDamageFormula.calculate(sheerDamageInput)
+anomalyDamageFormula.calculate(anomalyDamageInput)
 `,
     )
 
