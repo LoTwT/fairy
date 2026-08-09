@@ -65,6 +65,23 @@ export {
 } from "./factors/stun-damage.ts"
 export type { StunDamageFactorInput } from "./factors/stun-damage.ts"
 export {
+  BASE_ANOMALY_BUILDUP_FACTOR_ID,
+  baseAnomalyBuildupFactor,
+} from "./factors/base-anomaly-buildup.ts"
+export type { BaseAnomalyBuildupFactorInput } from "./factors/base-anomaly-buildup.ts"
+export {
+  ANOMALY_MASTERY_FACTOR_ID,
+  DEFAULT_ANOMALY_MASTERY_FACTOR_INPUT,
+  anomalyMasteryFactor,
+} from "./factors/anomaly-mastery.ts"
+export type { AnomalyMasteryFactorInput } from "./factors/anomaly-mastery.ts"
+export {
+  ANOMALY_BUILDUP_RATE_FACTOR_ID,
+  DEFAULT_ANOMALY_BUILDUP_RATE_FACTOR_INPUT,
+  anomalyBuildupRateFactor,
+} from "./factors/anomaly-buildup-rate.ts"
+export type { AnomalyBuildupRateFactorInput } from "./factors/anomaly-buildup-rate.ts"
+export {
   ANOMALY_PROFICIENCY_FACTOR_ID,
   DEFAULT_ANOMALY_PROFICIENCY_FACTOR_INPUT,
   anomalyProficiencyFactor,
@@ -103,6 +120,11 @@ export {
   anomalyDamageFormula,
 } from "./formulas/anomaly-damage.ts"
 export type { AnomalyDamageFormulaInput } from "./formulas/anomaly-damage.ts"
+export {
+  ANOMALY_BUILDUP_FORMULA_ID,
+  anomalyBuildupFormula,
+} from "./formulas/anomaly-buildup.ts"
+export type { AnomalyBuildupFormulaInput } from "./formulas/anomaly-buildup.ts"
 export { calculateFinalStat, calculateInitialStat } from "./stat.ts"
 export type {
   CalculateFinalStatParams,
