@@ -108,6 +108,8 @@ export interface Formula<FormulaInput extends object> {
 - 对象和数组形式的默认输入必须在运行时冻结；存在嵌套数组时，外层对象和嵌套数组都必须冻结。
 - 基础伤害区没有恒等倍率语义，不公开 `DEFAULT_BASE_DAMAGE_FACTOR_INPUT`。调用方必须提供本次计算的
   `BaseDamageFactorInput`；显式空数组仍按照基础伤害区规范产生 `0`。
+- 基础异常积蓄值也没有恒等倍率语义，不公开 `DEFAULT_BASE_ANOMALY_BUILDUP_FACTOR_INPUT`。
+  调用方必须提供本次计算的 `BaseAnomalyBuildupFactorInput`；显式传入 `0` 时结果为 `0`。
 
 ## 运行时校验原则
 
@@ -251,6 +253,12 @@ export function defineFormula<FormulaInput extends object>(
 - [异常增伤区](factors/anomaly-damage-bonus.md)
 - [异常暴击区](factors/anomaly-critical.md)
 
+### 待实现
+
+- [基础异常积蓄值](factors/base-anomaly-buildup.md)
+- [异常掌控区](factors/anomaly-mastery.md)
+- [异常积蓄效率区](factors/anomaly-buildup-rate.md)
+
 ### 规则边界
 
 - [特殊乘区边界](factors/special.md)
@@ -262,3 +270,7 @@ export function defineFormula<FormulaInput extends object>(
 - [常规伤害](formulas/regular-damage.md)
 - [贯穿伤害](formulas/sheer-damage.md)
 - [异常伤害](formulas/anomaly-damage.md)
+
+### 待实现
+
+- [异常积蓄值](formulas/anomaly-buildup.md)
