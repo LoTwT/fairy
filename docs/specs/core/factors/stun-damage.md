@@ -1,8 +1,8 @@
 # 失衡易伤区
 
 失衡易伤区根据受击方当前是否失衡，汇总对应的失衡易伤倍率并产生伤害倍率，规则来源为
-[原始攻略中的失衡易伤区](../../../references/zzz-data-introduction.txt#L134)。游戏中文文本中的“失衡易伤
-倍率”对应英文文本 `Stun DMG Multiplier`。
+[原始攻略中的失衡易伤区](../../../references/zzz-data-introduction.txt#L134)。本规范使用的
+`Stun DMG Multiplier` 遵循[失衡相关术语](../index.md#失衡相关术语)。
 
 ## 身份与公开契约
 
@@ -75,8 +75,8 @@ export declare const stunDamageFactor: Factor<StunDamageFactorInput>
 调用方应显式传入 `DEFAULT_STUN_DAMAGE_FACTOR_INPUT`，由本乘区产生恒等倍率 `1`。这只是统一公式组合
 使用的计算输入，不用于声称代理人或邦布具有未失衡状态。
 
-Nanoka 3.0 的中英文游戏文本均使用 `Stun DMG Multiplier` 表示失衡易伤倍率。未失衡场景只说明该
-倍率提升在目标未失衡时仍可生效，没有提供独立术语。本规范不另设公开英文名称，通过
+游戏文本没有为未失衡场景提供独立的倍率术语，只说明失衡易伤倍率提升在目标未失衡时仍可生效。
+本规范不另设公开英文名称，通过
 `isTargetStunned` 区分结算分支。
 
 ## 数组语义

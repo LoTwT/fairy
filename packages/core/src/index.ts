@@ -15,6 +15,11 @@ export type {
   BaseDamageFactorInput,
   BaseDamageFactorInputItem,
 } from "./factors/base-damage.ts"
+export { BASE_DAZE_FACTOR_ID, baseDazeFactor } from "./factors/base-daze.ts"
+export type {
+  BaseDazeFactorInput,
+  BaseDazeFactorInputItem,
+} from "./factors/base-daze.ts"
 export {
   DAMAGE_BONUS_FACTOR_ID,
   DEFAULT_DAMAGE_BONUS_FACTOR_INPUT,
@@ -52,6 +57,18 @@ export {
   damageTakenFactor,
 } from "./factors/damage-taken.ts"
 export type { DamageTakenFactorInput } from "./factors/damage-taken.ts"
+export {
+  DAZE_DEALT_FACTOR_ID,
+  DEFAULT_DAZE_DEALT_FACTOR_INPUT,
+  dazeDealtFactor,
+} from "./factors/daze-dealt.ts"
+export type { DazeDealtFactorInput } from "./factors/daze-dealt.ts"
+export {
+  DAZE_TAKEN_FACTOR_ID,
+  DEFAULT_DAZE_TAKEN_FACTOR_INPUT,
+  dazeTakenFactor,
+} from "./factors/daze-taken.ts"
+export type { DazeTakenFactorInput } from "./factors/daze-taken.ts"
 export {
   DEFAULT_SHEER_DAMAGE_BONUS_FACTOR_INPUT,
   SHEER_DAMAGE_BONUS_FACTOR_ID,
@@ -125,6 +142,11 @@ export {
   anomalyBuildupFormula,
 } from "./formulas/anomaly-buildup.ts"
 export type { AnomalyBuildupFormulaInput } from "./formulas/anomaly-buildup.ts"
+export {
+  REGULAR_DAZE_FORMULA_ID,
+  regularDazeFormula,
+} from "./formulas/regular-daze.ts"
+export type { RegularDazeFormulaInput } from "./formulas/regular-daze.ts"
 export { calculateFinalStat, calculateInitialStat } from "./stat.ts"
 export type {
   CalculateFinalStatParams,
