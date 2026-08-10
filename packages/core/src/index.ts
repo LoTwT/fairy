@@ -70,6 +70,17 @@ export {
 } from "./factors/daze-taken.ts"
 export type { DazeTakenFactorInput } from "./factors/daze-taken.ts"
 export {
+  DEFAULT_DISORDER_DAZE_DEALT_FACTOR_INPUT,
+  DISORDER_DAZE_DEALT_FACTOR_ID,
+  disorderDazeDealtFactor,
+} from "./factors/disorder-daze-dealt.ts"
+export type { DisorderDazeDealtFactorInput } from "./factors/disorder-daze-dealt.ts"
+export {
+  DISORDER_DAZE_LEVEL_FACTOR_ID,
+  disorderDazeLevelFactor,
+} from "./factors/disorder-daze-level.ts"
+export type { DisorderDazeLevelFactorInput } from "./factors/disorder-daze-level.ts"
+export {
   DEFAULT_SHEER_DAMAGE_BONUS_FACTOR_INPUT,
   SHEER_DAMAGE_BONUS_FACTOR_ID,
   sheerDamageBonusFactor,
@@ -147,6 +158,12 @@ export {
   regularDazeFormula,
 } from "./formulas/regular-daze.ts"
 export type { RegularDazeFormulaInput } from "./formulas/regular-daze.ts"
+export {
+  DEFAULT_DISORDER_DAZE_MULTIPLIER,
+  DISORDER_DAZE_FORMULA_ID,
+  disorderDazeFormula,
+} from "./formulas/disorder-daze.ts"
+export type { DisorderDazeFormulaInput } from "./formulas/disorder-daze.ts"
 export { calculateFinalStat, calculateInitialStat } from "./stat.ts"
 export type {
   CalculateFinalStatParams,
