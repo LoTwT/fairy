@@ -287,9 +287,6 @@ export function defineFormula<FormulaInput extends object>(
 - [异常伤害等级区](factors/anomaly-damage-level.md)
 - [异常增伤区](factors/anomaly-damage-bonus.md)
 - [异常暴击区](factors/anomaly-critical.md)
-
-### 待实现
-
 - [基础失衡区](factors/base-daze.md)
 - [失衡值提升区](factors/daze-dealt.md)
 - [受到失衡值提升区](factors/daze-taken.md)
@@ -306,7 +303,4 @@ export function defineFormula<FormulaInput extends object>(
 - [贯穿伤害](formulas/sheer-damage.md)
 - [异常伤害](formulas/anomaly-damage.md)
 - [异常积蓄值](formulas/anomaly-buildup.md)
-
-### 待实现
-
 - [常规失衡值](formulas/regular-daze.md)

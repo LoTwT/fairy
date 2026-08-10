@@ -11,6 +11,9 @@ Fairy 的确定性计算核心包。
 - 抗性区：`resistanceFactor`
 - 减易伤区：`damageTakenFactor`
 - 失衡易伤区：`stunDamageFactor`
+- 基础失衡区：`baseDazeFactor`
+- 失衡值提升区：`dazeDealtFactor`
+- 受到失衡值提升区：`dazeTakenFactor`
 - 贯穿增伤区：`sheerDamageBonusFactor`
 - 基础异常积蓄值：`baseAnomalyBuildupFactor`
 - 异常掌控区：`anomalyMasteryFactor`
@@ -26,6 +29,7 @@ Fairy 的确定性计算核心包。
 - 贯穿伤害：`sheerDamageFormula`
 - 异常伤害：`anomalyDamageFormula`
 - 异常积蓄值：`anomalyBuildupFormula`
+- 常规失衡值：`regularDazeFormula`
 
 调用方也可以分别使用 `defineFactor` 和 `defineFormula` 建立自定义乘区与公式。
 

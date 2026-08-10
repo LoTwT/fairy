@@ -113,9 +113,12 @@ import {
   ANOMALY_PROFICIENCY_FACTOR_ID,
   BASE_ANOMALY_BUILDUP_FACTOR_ID,
   BASE_DAMAGE_FACTOR_ID,
+  BASE_DAZE_FACTOR_ID,
   CRITICAL_FACTOR_ID,
   DAMAGE_BONUS_FACTOR_ID,
   DAMAGE_TAKEN_FACTOR_ID,
+  DAZE_DEALT_FACTOR_ID,
+  DAZE_TAKEN_FACTOR_ID,
   DEFAULT_ANOMALY_BUILDUP_RATE_FACTOR_INPUT,
   DEFAULT_ANOMALY_CRITICAL_FACTOR_INPUT,
   DEFAULT_ANOMALY_DAMAGE_BONUS_FACTOR_INPUT,
@@ -125,12 +128,15 @@ import {
   DEFAULT_CRITICAL_FACTOR_INPUT,
   DEFAULT_DAMAGE_BONUS_FACTOR_INPUT,
   DEFAULT_DAMAGE_TAKEN_FACTOR_INPUT,
+  DEFAULT_DAZE_DEALT_FACTOR_INPUT,
+  DEFAULT_DAZE_TAKEN_FACTOR_INPUT,
   DEFAULT_DEFENSE_FACTOR_INPUT,
   DEFAULT_RESISTANCE_FACTOR_INPUT,
   DEFAULT_SHEER_DAMAGE_BONUS_FACTOR_INPUT,
   DEFAULT_STUN_DAMAGE_FACTOR_INPUT,
   DEFENSE_FACTOR_ID,
   REGULAR_DAMAGE_FORMULA_ID,
+  REGULAR_DAZE_FORMULA_ID,
   RESISTANCE_FACTOR_ID,
   SHEER_DAMAGE_BONUS_FACTOR_ID,
   SHEER_DAMAGE_FORMULA_ID,
@@ -145,6 +151,7 @@ import {
   anomalyProficiencyFactor,
   baseAnomalyBuildupFactor,
   baseDamageFactor,
+  baseDazeFactor,
   calculateFinalStat,
   calculateInitialStat,
   calculateDefenseLevelBase,
@@ -153,10 +160,13 @@ import {
   criticalFactor,
   damageBonusFactor,
   damageTakenFactor,
+  dazeDealtFactor,
+  dazeTakenFactor,
   defenseFactor,
   defineFactor,
   defineFormula,
   regularDamageFormula,
+  regularDazeFormula,
   resistanceFactor,
   sheerDamageBonusFactor,
   sheerDamageFormula,
@@ -286,6 +296,12 @@ assert.equal(
   baseDamageFactor.calculate([{ damageMultiplier: 2, finalStat }]),
   246,
 )
+assert.equal(BASE_DAZE_FACTOR_ID, "base_daze")
+assert.equal(baseDazeFactor.factorId, BASE_DAZE_FACTOR_ID)
+assert.equal(
+  baseDazeFactor.calculate([{ finalImpact: 123, dazeMultiplier: 2 }]),
+  246,
+)
 assert.equal(DAMAGE_BONUS_FACTOR_ID, "damage_bonus")
 assert.equal(damageBonusFactor.factorId, DAMAGE_BONUS_FACTOR_ID)
 assert.equal(damageBonusFactor.calculate([0.25]), 1.25)
@@ -308,6 +324,44 @@ assert.equal(
 )
 assert.equal(
   Object.isFrozen(DEFAULT_DAMAGE_TAKEN_FACTOR_INPUT.targetDamageTakenReductions),
+  true,
+)
+assert.equal(DAZE_DEALT_FACTOR_ID, "daze_dealt")
+assert.equal(dazeDealtFactor.factorId, DAZE_DEALT_FACTOR_ID)
+assert.equal(
+  dazeDealtFactor.calculate({
+    dazeDealtIncreases: [0.25],
+    dazeDealtReductions: [0.125],
+  }),
+  1.125,
+)
+assert.equal(dazeDealtFactor.calculate(DEFAULT_DAZE_DEALT_FACTOR_INPUT), 1)
+assert.equal(Object.isFrozen(DEFAULT_DAZE_DEALT_FACTOR_INPUT), true)
+assert.equal(
+  Object.isFrozen(DEFAULT_DAZE_DEALT_FACTOR_INPUT.dazeDealtIncreases),
+  true,
+)
+assert.equal(
+  Object.isFrozen(DEFAULT_DAZE_DEALT_FACTOR_INPUT.dazeDealtReductions),
+  true,
+)
+assert.equal(DAZE_TAKEN_FACTOR_ID, "daze_taken")
+assert.equal(dazeTakenFactor.factorId, DAZE_TAKEN_FACTOR_ID)
+assert.equal(
+  dazeTakenFactor.calculate({
+    targetDazeTakenIncreases: [0.25],
+    targetDazeTakenReductions: [0.125],
+  }),
+  1.125,
+)
+assert.equal(dazeTakenFactor.calculate(DEFAULT_DAZE_TAKEN_FACTOR_INPUT), 1)
+assert.equal(Object.isFrozen(DEFAULT_DAZE_TAKEN_FACTOR_INPUT), true)
+assert.equal(
+  Object.isFrozen(DEFAULT_DAZE_TAKEN_FACTOR_INPUT.targetDazeTakenIncreases),
+  true,
+)
+assert.equal(
+  Object.isFrozen(DEFAULT_DAZE_TAKEN_FACTOR_INPUT.targetDazeTakenReductions),
   true,
 )
 assert.equal(CRITICAL_FACTOR_ID, "critical")
@@ -420,6 +474,23 @@ assert.deepEqual(regularDamageResult.factorResults, {
 })
 assert.equal(Object.isFrozen(regularDamageResult), true)
 assert.equal(Object.isFrozen(regularDamageResult.factorResults), true)
+assert.equal(REGULAR_DAZE_FORMULA_ID, "regular_daze")
+assert.equal(regularDazeFormula.formulaId, REGULAR_DAZE_FORMULA_ID)
+const regularDazeResult = regularDazeFormula.calculate({
+  baseDaze: [{ finalImpact: 123, dazeMultiplier: 2 }],
+  resistance: DEFAULT_RESISTANCE_FACTOR_INPUT,
+  dazeDealt: DEFAULT_DAZE_DEALT_FACTOR_INPUT,
+  dazeTaken: DEFAULT_DAZE_TAKEN_FACTOR_INPUT,
+})
+assert.equal(regularDazeResult.value, 246)
+assert.deepEqual(regularDazeResult.factorResults, {
+  baseDaze: 246,
+  resistance: 1,
+  dazeDealt: 1,
+  dazeTaken: 1,
+})
+assert.equal(Object.isFrozen(regularDazeResult), true)
+assert.equal(Object.isFrozen(regularDazeResult.factorResults), true)
 assert.equal(SHEER_DAMAGE_FORMULA_ID, "sheer_damage")
 assert.equal(sheerDamageFormula.formulaId, SHEER_DAMAGE_FORMULA_ID)
 const sheerDamageResult = sheerDamageFormula.calculate({
@@ -503,6 +574,9 @@ assert.equal(Object.isFrozen(anomalyDamageResult.factorResults), true)
   ANOMALY_MASTERY_FACTOR_ID,
   ANOMALY_PROFICIENCY_FACTOR_ID,
   BASE_ANOMALY_BUILDUP_FACTOR_ID,
+  BASE_DAZE_FACTOR_ID,
+  DAZE_DEALT_FACTOR_ID,
+  DAZE_TAKEN_FACTOR_ID,
   DEFAULT_ANOMALY_BUILDUP_RATE_FACTOR_INPUT,
   DEFAULT_ANOMALY_CRITICAL_FACTOR_INPUT,
   DEFAULT_ANOMALY_DAMAGE_BONUS_FACTOR_INPUT,
@@ -512,10 +586,13 @@ assert.equal(Object.isFrozen(anomalyDamageResult.factorResults), true)
   DEFAULT_CRITICAL_FACTOR_INPUT,
   DEFAULT_DAMAGE_BONUS_FACTOR_INPUT,
   DEFAULT_DAMAGE_TAKEN_FACTOR_INPUT,
+  DEFAULT_DAZE_DEALT_FACTOR_INPUT,
+  DEFAULT_DAZE_TAKEN_FACTOR_INPUT,
   DEFAULT_DEFENSE_FACTOR_INPUT,
   DEFAULT_RESISTANCE_FACTOR_INPUT,
   DEFAULT_SHEER_DAMAGE_BONUS_FACTOR_INPUT,
   DEFAULT_STUN_DAMAGE_FACTOR_INPUT,
+  REGULAR_DAZE_FORMULA_ID,
   anomalyBuildupFormula,
   anomalyBuildupRateFactor,
   anomalyCriticalFactor,
@@ -526,6 +603,7 @@ assert.equal(Object.isFrozen(anomalyDamageResult.factorResults), true)
   anomalyProficiencyFactor,
   baseAnomalyBuildupFactor,
   baseDamageFactor,
+  baseDazeFactor,
   calculateFinalStat,
   calculateInitialStat,
   calculateDefenseLevelBase,
@@ -534,10 +612,13 @@ assert.equal(Object.isFrozen(anomalyDamageResult.factorResults), true)
   criticalFactor,
   damageBonusFactor,
   damageTakenFactor,
+  dazeDealtFactor,
+  dazeTakenFactor,
   defenseFactor,
   defineFactor,
   defineFormula,
   regularDamageFormula,
+  regularDazeFormula,
   resistanceFactor,
   sheerDamageBonusFactor,
   sheerDamageFormula,
@@ -553,6 +634,8 @@ assert.equal(Object.isFrozen(anomalyDamageResult.factorResults), true)
   type BaseAnomalyBuildupFactorInput,
   type BaseDamageFactorInput,
   type BaseDamageFactorInputItem,
+  type BaseDazeFactorInput,
+  type BaseDazeFactorInputItem,
   type CalculateFinalStatParams,
   type CalculateInitialStatParams,
   type CalculateTargetBaseDefenseParams,
@@ -560,6 +643,8 @@ assert.equal(Object.isFrozen(anomalyDamageResult.factorResults), true)
   type CriticalFactorInput,
   type DamageBonusFactorInput,
   type DamageTakenFactorInput,
+  type DazeDealtFactorInput,
+  type DazeTakenFactorInput,
   type DefenseFactorInput,
   type Factor,
   type FactorParams,
@@ -568,6 +653,7 @@ assert.equal(Object.isFrozen(anomalyDamageResult.factorResults), true)
   type FormulaParams,
   type FormulaResult,
   type RegularDamageFormulaInput,
+  type RegularDazeFormulaInput,
   type ResistanceFactorInput,
   type SheerDamageBonusFactorInput,
   type SheerDamageFormulaInput,
@@ -597,6 +683,10 @@ const anomalyProficiencyFactorId: "anomaly_proficiency" =
   ANOMALY_PROFICIENCY_FACTOR_ID
 const baseAnomalyBuildupFactorId: "base_anomaly_buildup" =
   BASE_ANOMALY_BUILDUP_FACTOR_ID
+const baseDazeFactorId: "base_daze" = BASE_DAZE_FACTOR_ID
+const dazeDealtFactorId: "daze_dealt" = DAZE_DEALT_FACTOR_ID
+const dazeTakenFactorId: "daze_taken" = DAZE_TAKEN_FACTOR_ID
+const regularDazeFormulaId: "regular_daze" = REGULAR_DAZE_FORMULA_ID
 const params: FactorParams<SumFactorInput> = {
   factorId: "draft-sum",
   calculate: (input) =>
@@ -637,6 +727,11 @@ const baseDamageInputItem: BaseDamageFactorInputItem = {
   finalStat,
 }
 const baseDamageInputs: BaseDamageFactorInput = [baseDamageInputItem]
+const baseDazeInputItem: BaseDazeFactorInputItem = {
+  finalImpact: finalStat,
+  dazeMultiplier: 2,
+}
+const baseDazeInputs: BaseDazeFactorInput = [baseDazeInputItem]
 const baseAnomalyBuildupInput: BaseAnomalyBuildupFactorInput = 123
 const anomalyBuildupRateInputs: AnomalyBuildupRateFactorInput = [0.25, -0.125]
 const anomalyCriticalInput: AnomalyCriticalFactorInput = {
@@ -655,6 +750,14 @@ const damageBonusInputs: DamageBonusFactorInput = [0.25, -0.125]
 const damageTakenInput: DamageTakenFactorInput = {
   targetDamageTakenIncreases: [0.25],
   targetDamageTakenReductions: [0.125],
+}
+const dazeDealtInput: DazeDealtFactorInput = {
+  dazeDealtIncreases: [0.25],
+  dazeDealtReductions: [0.125],
+}
+const dazeTakenInput: DazeTakenFactorInput = {
+  targetDazeTakenIncreases: [0.25],
+  targetDazeTakenReductions: [0.125],
 }
 const targetLevelBase = calculateDefenseLevelBase(60)
 const targetBaseDefenseParams: CalculateTargetBaseDefenseParams = {
@@ -693,6 +796,12 @@ const regularDamageInput: RegularDamageFormulaInput = {
   resistance: DEFAULT_RESISTANCE_FACTOR_INPUT,
   damageTaken: DEFAULT_DAMAGE_TAKEN_FACTOR_INPUT,
   stunDamage: DEFAULT_STUN_DAMAGE_FACTOR_INPUT,
+}
+const regularDazeInput: RegularDazeFormulaInput = {
+  baseDaze: baseDazeInputs,
+  resistance: DEFAULT_RESISTANCE_FACTOR_INPUT,
+  dazeDealt: DEFAULT_DAZE_DEALT_FACTOR_INPUT,
+  dazeTaken: DEFAULT_DAZE_TAKEN_FACTOR_INPUT,
 }
 const sheerDamageInput: SheerDamageFormulaInput = {
   baseDamage: baseDamageInputs,
@@ -733,6 +842,10 @@ anomalyDamageLevelFactorId
 anomalyMasteryFactorId
 anomalyProficiencyFactorId
 baseAnomalyBuildupFactorId
+baseDazeFactorId
+dazeDealtFactorId
+dazeTakenFactorId
+regularDazeFormulaId
 baseAnomalyBuildupFactor.calculate(baseAnomalyBuildupInput)
 anomalyBuildupRateFactor.calculate(anomalyBuildupRateInputs)
 anomalyBuildupRateFactor.calculate(DEFAULT_ANOMALY_BUILDUP_RATE_FACTOR_INPUT)
@@ -747,15 +860,21 @@ anomalyMasteryFactor.calculate(DEFAULT_ANOMALY_MASTERY_FACTOR_INPUT)
 anomalyProficiencyFactor.calculate(anomalyProficiencyInput)
 anomalyProficiencyFactor.calculate(DEFAULT_ANOMALY_PROFICIENCY_FACTOR_INPUT)
 baseDamageFactor.calculate(baseDamageInputs)
+baseDazeFactor.calculate(baseDazeInputs)
 criticalFactor.calculate(criticalInputs)
 damageBonusFactor.calculate(damageBonusInputs)
 damageTakenFactor.calculate(damageTakenInput)
+dazeDealtFactor.calculate(dazeDealtInput)
+dazeDealtFactor.calculate(DEFAULT_DAZE_DEALT_FACTOR_INPUT)
+dazeTakenFactor.calculate(dazeTakenInput)
+dazeTakenFactor.calculate(DEFAULT_DAZE_TAKEN_FACTOR_INPUT)
 defenseFactor.calculate(defenseInput)
 resistanceFactor.calculate(resistanceInput)
 sheerDamageBonusFactor.calculate(sheerDamageBonusInputs)
 sheerDamageBonusFactor.calculate(DEFAULT_SHEER_DAMAGE_BONUS_FACTOR_INPUT)
 stunDamageFactor.calculate(stunDamageInput)
 regularDamageFormula.calculate(regularDamageInput)
+regularDazeFormula.calculate(regularDazeInput)
 sheerDamageFormula.calculate(sheerDamageInput)
 anomalyBuildupFormula.calculate(anomalyBuildupInput)
 anomalyDamageFormula.calculate(anomalyDamageInput)
