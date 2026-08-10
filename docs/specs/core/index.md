@@ -142,6 +142,9 @@ export interface Formula<FormulaInput extends object> {
   调用方必须提供本次计算的 `BaseAnomalyBuildupFactorInput`；显式传入 `0` 时结果为 `0`。
 - 基础失衡区没有恒等倍率语义，不公开 `DEFAULT_BASE_DAZE_FACTOR_INPUT`。调用方必须提供本次计算的
   `BaseDazeFactorInput`；显式传入空数组时结果为 `0`。
+- 紊乱失衡等级区在合法等级范围内不能产生恒等倍率 `1`，不公开
+  `DEFAULT_DISORDER_DAZE_LEVEL_FACTOR_INPUT`。调用方必须提供已经完成加权和向下取整的实际虚拟
+  代理人等级。
 
 ## 运行时校验原则
 
@@ -291,6 +294,11 @@ export function defineFormula<FormulaInput extends object>(
 - [失衡值提升区](factors/daze-dealt.md)
 - [受到失衡值提升区](factors/daze-taken.md)
 
+### 待实现
+
+- [紊乱失衡值提升区](factors/disorder-daze-dealt.md)
+- [紊乱失衡等级区](factors/disorder-daze-level.md)
+
 ### 规则边界
 
 - [特殊乘区边界](factors/special.md)
@@ -304,3 +312,7 @@ export function defineFormula<FormulaInput extends object>(
 - [异常伤害](formulas/anomaly-damage.md)
 - [异常积蓄值](formulas/anomaly-buildup.md)
 - [常规失衡值](formulas/regular-daze.md)
+
+### 待实现
+
+- [紊乱失衡值](formulas/disorder-daze.md)
