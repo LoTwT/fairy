@@ -16,6 +16,8 @@ Fairy 的确定性计算核心包。
 - 受到失衡值提升区：`dazeTakenFactor`
 - 紊乱失衡值提升区：`disorderDazeDealtFactor`
 - 紊乱失衡等级区：`disorderDazeLevelFactor`
+- 能量回复基础区：`baseEnergyGenerationFactor`
+- 能量获得效率区：`energyGenerationRateFactor`
 - 贯穿增伤区：`sheerDamageBonusFactor`
 - 基础异常积蓄值：`baseAnomalyBuildupFactor`
 - 异常掌控区：`anomalyMasteryFactor`
@@ -33,6 +35,7 @@ Fairy 的确定性计算核心包。
 - 异常积蓄值：`anomalyBuildupFormula`
 - 常规失衡值：`regularDazeFormula`
 - 紊乱失衡值：`disorderDazeFormula`
+- 能量回复值：`energyGenerationFormula`
 
 调用方也可以分别使用 `defineFactor` 和 `defineFormula` 建立自定义乘区与公式。
 

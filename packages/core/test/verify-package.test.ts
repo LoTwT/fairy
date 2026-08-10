@@ -114,6 +114,7 @@ import {
   BASE_ANOMALY_BUILDUP_FACTOR_ID,
   BASE_DAMAGE_FACTOR_ID,
   BASE_DAZE_FACTOR_ID,
+  BASE_ENERGY_GENERATION_FACTOR_ID,
   CRITICAL_FACTOR_ID,
   DAMAGE_BONUS_FACTOR_ID,
   DAMAGE_TAKEN_FACTOR_ID,
@@ -133,6 +134,7 @@ import {
   DEFAULT_DEFENSE_FACTOR_INPUT,
   DEFAULT_DISORDER_DAZE_DEALT_FACTOR_INPUT,
   DEFAULT_DISORDER_DAZE_MULTIPLIER,
+  DEFAULT_ENERGY_GENERATION_RATE_FACTOR_INPUT,
   DEFAULT_RESISTANCE_FACTOR_INPUT,
   DEFAULT_SHEER_DAMAGE_BONUS_FACTOR_INPUT,
   DEFAULT_STUN_DAMAGE_FACTOR_INPUT,
@@ -140,6 +142,8 @@ import {
   DISORDER_DAZE_DEALT_FACTOR_ID,
   DISORDER_DAZE_FORMULA_ID,
   DISORDER_DAZE_LEVEL_FACTOR_ID,
+  ENERGY_GENERATION_FORMULA_ID,
+  ENERGY_GENERATION_RATE_FACTOR_ID,
   REGULAR_DAMAGE_FORMULA_ID,
   REGULAR_DAZE_FORMULA_ID,
   RESISTANCE_FACTOR_ID,
@@ -157,6 +161,7 @@ import {
   baseAnomalyBuildupFactor,
   baseDamageFactor,
   baseDazeFactor,
+  baseEnergyGenerationFactor,
   calculateFinalStat,
   calculateInitialStat,
   calculateDefenseLevelBase,
@@ -173,6 +178,8 @@ import {
   disorderDazeDealtFactor,
   disorderDazeFormula,
   disorderDazeLevelFactor,
+  energyGenerationFormula,
+  energyGenerationRateFactor,
   regularDamageFormula,
   regularDazeFormula,
   resistanceFactor,
@@ -309,6 +316,35 @@ assert.equal(baseDazeFactor.factorId, BASE_DAZE_FACTOR_ID)
 assert.equal(
   baseDazeFactor.calculate([{ finalImpact: 123, dazeMultiplier: 2 }]),
   246,
+)
+assert.equal(BASE_ENERGY_GENERATION_FACTOR_ID, "base_energy_generation")
+assert.equal(
+  baseEnergyGenerationFactor.factorId,
+  BASE_ENERGY_GENERATION_FACTOR_ID,
+)
+assert.equal(
+  baseEnergyGenerationFactor.calculate({
+    baseEnergyGenerationValues: [2, 3],
+    finalEnergyRegen: 4,
+    effectiveEnergyRegenDurationInSeconds: 5,
+  }),
+  25,
+)
+assert.equal(ENERGY_GENERATION_RATE_FACTOR_ID, "energy_generation_rate")
+assert.equal(
+  energyGenerationRateFactor.factorId,
+  ENERGY_GENERATION_RATE_FACTOR_ID,
+)
+assert.equal(energyGenerationRateFactor.calculate([0.25, -0.125]), 1.125)
+assert.equal(
+  energyGenerationRateFactor.calculate(
+    DEFAULT_ENERGY_GENERATION_RATE_FACTOR_INPUT,
+  ),
+  1,
+)
+assert.equal(
+  Object.isFrozen(DEFAULT_ENERGY_GENERATION_RATE_FACTOR_INPUT),
+  true,
 )
 assert.equal(DAMAGE_BONUS_FACTOR_ID, "damage_bonus")
 assert.equal(damageBonusFactor.factorId, DAMAGE_BONUS_FACTOR_ID)
@@ -542,6 +578,26 @@ assert.deepEqual(disorderDazeResult.factorResults, {
 })
 assert.equal(Object.isFrozen(disorderDazeResult), true)
 assert.equal(Object.isFrozen(disorderDazeResult.factorResults), true)
+assert.equal(ENERGY_GENERATION_FORMULA_ID, "energy_generation")
+assert.equal(
+  energyGenerationFormula.formulaId,
+  ENERGY_GENERATION_FORMULA_ID,
+)
+const energyGenerationResult = energyGenerationFormula.calculate({
+  baseEnergyGeneration: {
+    baseEnergyGenerationValues: [2, 3],
+    finalEnergyRegen: 4,
+    effectiveEnergyRegenDurationInSeconds: 5,
+  },
+  energyGenerationRate: [0.25],
+})
+assert.equal(energyGenerationResult.value, 31.25)
+assert.deepEqual(energyGenerationResult.factorResults, {
+  baseEnergyGeneration: 25,
+  energyGenerationRate: 1.25,
+})
+assert.equal(Object.isFrozen(energyGenerationResult), true)
+assert.equal(Object.isFrozen(energyGenerationResult.factorResults), true)
 assert.equal(SHEER_DAMAGE_FORMULA_ID, "sheer_damage")
 assert.equal(sheerDamageFormula.formulaId, SHEER_DAMAGE_FORMULA_ID)
 const sheerDamageResult = sheerDamageFormula.calculate({
@@ -626,6 +682,7 @@ assert.equal(Object.isFrozen(anomalyDamageResult.factorResults), true)
   ANOMALY_PROFICIENCY_FACTOR_ID,
   BASE_ANOMALY_BUILDUP_FACTOR_ID,
   BASE_DAZE_FACTOR_ID,
+  BASE_ENERGY_GENERATION_FACTOR_ID,
   DAZE_DEALT_FACTOR_ID,
   DAZE_TAKEN_FACTOR_ID,
   DEFAULT_ANOMALY_BUILDUP_RATE_FACTOR_INPUT,
@@ -642,12 +699,15 @@ assert.equal(Object.isFrozen(anomalyDamageResult.factorResults), true)
   DEFAULT_DEFENSE_FACTOR_INPUT,
   DEFAULT_DISORDER_DAZE_DEALT_FACTOR_INPUT,
   DEFAULT_DISORDER_DAZE_MULTIPLIER,
+  DEFAULT_ENERGY_GENERATION_RATE_FACTOR_INPUT,
   DEFAULT_RESISTANCE_FACTOR_INPUT,
   DEFAULT_SHEER_DAMAGE_BONUS_FACTOR_INPUT,
   DEFAULT_STUN_DAMAGE_FACTOR_INPUT,
   DISORDER_DAZE_DEALT_FACTOR_ID,
   DISORDER_DAZE_FORMULA_ID,
   DISORDER_DAZE_LEVEL_FACTOR_ID,
+  ENERGY_GENERATION_FORMULA_ID,
+  ENERGY_GENERATION_RATE_FACTOR_ID,
   REGULAR_DAZE_FORMULA_ID,
   anomalyBuildupFormula,
   anomalyBuildupRateFactor,
@@ -660,6 +720,7 @@ assert.equal(Object.isFrozen(anomalyDamageResult.factorResults), true)
   baseAnomalyBuildupFactor,
   baseDamageFactor,
   baseDazeFactor,
+  baseEnergyGenerationFactor,
   calculateFinalStat,
   calculateInitialStat,
   calculateDefenseLevelBase,
@@ -676,6 +737,8 @@ assert.equal(Object.isFrozen(anomalyDamageResult.factorResults), true)
   disorderDazeDealtFactor,
   disorderDazeFormula,
   disorderDazeLevelFactor,
+  energyGenerationFormula,
+  energyGenerationRateFactor,
   regularDamageFormula,
   regularDazeFormula,
   resistanceFactor,
@@ -695,6 +758,7 @@ assert.equal(Object.isFrozen(anomalyDamageResult.factorResults), true)
   type BaseDamageFactorInputItem,
   type BaseDazeFactorInput,
   type BaseDazeFactorInputItem,
+  type BaseEnergyGenerationFactorInput,
   type CalculateFinalStatParams,
   type CalculateInitialStatParams,
   type CalculateTargetBaseDefenseParams,
@@ -708,6 +772,8 @@ assert.equal(Object.isFrozen(anomalyDamageResult.factorResults), true)
   type DisorderDazeDealtFactorInput,
   type DisorderDazeFormulaInput,
   type DisorderDazeLevelFactorInput,
+  type EnergyGenerationFormulaInput,
+  type EnergyGenerationRateFactorInput,
   type Factor,
   type FactorParams,
   type Formula,
@@ -746,6 +812,8 @@ const anomalyProficiencyFactorId: "anomaly_proficiency" =
 const baseAnomalyBuildupFactorId: "base_anomaly_buildup" =
   BASE_ANOMALY_BUILDUP_FACTOR_ID
 const baseDazeFactorId: "base_daze" = BASE_DAZE_FACTOR_ID
+const baseEnergyGenerationFactorId: "base_energy_generation" =
+  BASE_ENERGY_GENERATION_FACTOR_ID
 const dazeDealtFactorId: "daze_dealt" = DAZE_DEALT_FACTOR_ID
 const dazeTakenFactorId: "daze_taken" = DAZE_TAKEN_FACTOR_ID
 const disorderDazeDealtFactorId: "disorder_daze_dealt" =
@@ -754,6 +822,10 @@ const disorderDazeFormulaId: "disorder_daze" = DISORDER_DAZE_FORMULA_ID
 const disorderDazeLevelFactorId: "disorder_daze_level" =
   DISORDER_DAZE_LEVEL_FACTOR_ID
 const defaultDisorderDazeMultiplier: 2 = DEFAULT_DISORDER_DAZE_MULTIPLIER
+const energyGenerationFormulaId: "energy_generation" =
+  ENERGY_GENERATION_FORMULA_ID
+const energyGenerationRateFactorId: "energy_generation_rate" =
+  ENERGY_GENERATION_RATE_FACTOR_ID
 const regularDazeFormulaId: "regular_daze" = REGULAR_DAZE_FORMULA_ID
 const params: FactorParams<SumFactorInput> = {
   factorId: "draft-sum",
@@ -800,6 +872,12 @@ const baseDazeInputItem: BaseDazeFactorInputItem = {
   dazeMultiplier: 2,
 }
 const baseDazeInputs: BaseDazeFactorInput = [baseDazeInputItem]
+const baseEnergyGenerationInput: BaseEnergyGenerationFactorInput = {
+  baseEnergyGenerationValues: [2, 3],
+  finalEnergyRegen: 4,
+  effectiveEnergyRegenDurationInSeconds: 5,
+}
+const energyGenerationRateInput: EnergyGenerationRateFactorInput = [0.25]
 const baseAnomalyBuildupInput: BaseAnomalyBuildupFactorInput = 123
 const anomalyBuildupRateInputs: AnomalyBuildupRateFactorInput = [0.25, -0.125]
 const anomalyCriticalInput: AnomalyCriticalFactorInput = {
@@ -885,6 +963,10 @@ const disorderDazeInput: DisorderDazeFormulaInput = {
   dazeTaken: DEFAULT_DAZE_TAKEN_FACTOR_INPUT,
   disorderDazeLevel: disorderDazeLevelInput,
 }
+const energyGenerationInput: EnergyGenerationFormulaInput = {
+  baseEnergyGeneration: baseEnergyGenerationInput,
+  energyGenerationRate: energyGenerationRateInput,
+}
 const sheerDamageInput: SheerDamageFormulaInput = {
   baseDamage: baseDamageInputs,
   damageBonus: DEFAULT_DAMAGE_BONUS_FACTOR_INPUT,
@@ -925,12 +1007,15 @@ anomalyMasteryFactorId
 anomalyProficiencyFactorId
 baseAnomalyBuildupFactorId
 baseDazeFactorId
+baseEnergyGenerationFactorId
 dazeDealtFactorId
 dazeTakenFactorId
 disorderDazeDealtFactorId
 disorderDazeFormulaId
 disorderDazeLevelFactorId
 defaultDisorderDazeMultiplier
+energyGenerationFormulaId
+energyGenerationRateFactorId
 regularDazeFormulaId
 baseAnomalyBuildupFactor.calculate(baseAnomalyBuildupInput)
 anomalyBuildupRateFactor.calculate(anomalyBuildupRateInputs)
@@ -947,6 +1032,11 @@ anomalyProficiencyFactor.calculate(anomalyProficiencyInput)
 anomalyProficiencyFactor.calculate(DEFAULT_ANOMALY_PROFICIENCY_FACTOR_INPUT)
 baseDamageFactor.calculate(baseDamageInputs)
 baseDazeFactor.calculate(baseDazeInputs)
+baseEnergyGenerationFactor.calculate(baseEnergyGenerationInput)
+energyGenerationRateFactor.calculate(energyGenerationRateInput)
+energyGenerationRateFactor.calculate(
+  DEFAULT_ENERGY_GENERATION_RATE_FACTOR_INPUT,
+)
 criticalFactor.calculate(criticalInputs)
 damageBonusFactor.calculate(damageBonusInputs)
 damageTakenFactor.calculate(damageTakenInput)
@@ -965,6 +1055,7 @@ stunDamageFactor.calculate(stunDamageInput)
 regularDamageFormula.calculate(regularDamageInput)
 regularDazeFormula.calculate(regularDazeInput)
 disorderDazeFormula.calculate(disorderDazeInput)
+energyGenerationFormula.calculate(energyGenerationInput)
 sheerDamageFormula.calculate(sheerDamageInput)
 anomalyBuildupFormula.calculate(anomalyBuildupInput)
 anomalyDamageFormula.calculate(anomalyDamageInput)
