@@ -21,6 +21,17 @@ export type {
   BaseDazeFactorInputItem,
 } from "./factors/base-daze.ts"
 export {
+  BASE_ENERGY_GENERATION_FACTOR_ID,
+  baseEnergyGenerationFactor,
+} from "./factors/base-energy-generation.ts"
+export type { BaseEnergyGenerationFactorInput } from "./factors/base-energy-generation.ts"
+export {
+  DEFAULT_ENERGY_GENERATION_RATE_FACTOR_INPUT,
+  ENERGY_GENERATION_RATE_FACTOR_ID,
+  energyGenerationRateFactor,
+} from "./factors/energy-generation-rate.ts"
+export type { EnergyGenerationRateFactorInput } from "./factors/energy-generation-rate.ts"
+export {
   DAMAGE_BONUS_FACTOR_ID,
   DEFAULT_DAMAGE_BONUS_FACTOR_INPUT,
   damageBonusFactor,
@@ -164,6 +175,11 @@ export {
   disorderDazeFormula,
 } from "./formulas/disorder-daze.ts"
 export type { DisorderDazeFormulaInput } from "./formulas/disorder-daze.ts"
+export {
+  ENERGY_GENERATION_FORMULA_ID,
+  energyGenerationFormula,
+} from "./formulas/energy-generation.ts"
+export type { EnergyGenerationFormulaInput } from "./formulas/energy-generation.ts"
 export { calculateFinalStat, calculateInitialStat } from "./stat.ts"
 export type {
   CalculateFinalStatParams,

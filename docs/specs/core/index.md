@@ -42,6 +42,38 @@ Nanoka 原始数据中的 `stun`、`stun_ratio`、`is_stun`、`stun_damage_taken
 字段覆盖了多个不同概念，而且在中英文数据中保持相同名称。这些字段只由后续数据清洗层解释，不能作为
 core 公开命名的依据，也不能不经语义转换直接作为 core 输入。
 
+### 能量相关术语
+
+能量相关术语以 Nanoka 3.1 中同一路径的中英文游戏文本为依据：
+
+- 邦布技能属性中的 `Energy Generation` 对应“能量回复”，见
+  [英文数据](../../../packages/data/raw/nanoka/3.1/en/bangboo/53012.json#L154)与
+  [中文数据](../../../packages/data/raw/nanoka/3.1/zh/bangboo/53012.json#L154)；
+- `Base Energy Regen` 对应“基础能量自动回复”，见
+  [英文数据](../../../packages/data/raw/nanoka/3.1/en/character/1271.json#L169)与
+  [中文数据](../../../packages/data/raw/nanoka/3.1/zh/character/1271.json#L169)；
+- `Energy Regen` 对应“能量自动回复”，见
+  [英文数据](../../../packages/data/raw/nanoka/3.1/en/weapon/14130.json#L20)与
+  [中文数据](../../../packages/data/raw/nanoka/3.1/zh/weapon/14130.json#L20)；
+- `Energy Generation Rate` 对应“能量获得效率”，见
+  [英文数据](../../../packages/data/raw/nanoka/3.1/en/weapon/13011.json#L362)与
+  [中文数据](../../../packages/data/raw/nanoka/3.1/zh/weapon/13011.json#L362)。
+
+| 中文术语         | 英文标识                 | 规范定义                                                                     | 类别     |
+| ---------------- | ------------------------ | ---------------------------------------------------------------------------- | -------- |
+| 能量             | `Energy`                 | 代理人用于发动强化特殊技及其他效果的资源                                     | 游戏文本 |
+| 能量回复         | `Energy Generation`      | 使代理人当前能量增加的数值；core 公式只计算回复量，不负责写入资源槽          | 游戏文本 |
+| 基础能量自动回复 | `Base Energy Regen`      | 参与计算初始及最终能量自动回复的基础属性，不表示攻击或效果的一次性基础回复值 | 游戏文本 |
+| 能量自动回复     | `Energy Regen`           | 在满足适用条件的时间内按秒产生能量回复的属性                                 | 游戏文本 |
+| 能量获得效率     | `Energy Generation Rate` | 对确认适用该属性的能量回复进行倍率缩放的效率；具体乘区结果包含基础倍率 `1`   | 游戏文本 |
+
+部分中文游戏文本将 `Energy Generation Rate` 写为“能量获取效率”；本规范沿用攻略及上表引用文本中的
+“能量获得效率”。英文描述还可能依句式使用 `recover Energy`、`restore Energy` 或 `Energy Gain`，这些自然
+语言变体不建立额外 core 术语。
+
+Nanoka 原始数据中的 `sp_recovery` 字段在中英文数据中保持相同名称，属于数据层内部标识，不是公开游戏
+术语。数据清洗层必须先解释其资源类型和业务含义，core 不公开 `spRecovery` 输入。
+
 ### 术语边界
 
 - “公式”只表示常规伤害、贯穿伤害、异常伤害、异常积蓄值等由乘区组成的顶层业务计算。乘区内部的
@@ -142,6 +174,10 @@ export interface Formula<FormulaInput extends object> {
   调用方必须提供本次计算的 `BaseAnomalyBuildupFactorInput`；显式传入 `0` 时结果为 `0`。
 - 基础失衡区没有恒等倍率语义，不公开 `DEFAULT_BASE_DAZE_FACTOR_INPUT`。调用方必须提供本次计算的
   `BaseDazeFactorInput`；显式传入空数组时结果为 `0`。
+- 能量回复基础区产生能量点数，没有恒等倍率语义，不公开
+  `DEFAULT_BASE_ENERGY_GENERATION_FACTOR_INPUT`。调用方必须提供本次计算的
+  `BaseEnergyGenerationFactorInput`；显式提供空的一次性回复数组、`0` 最终能量自动回复和 `0` 有效
+  时间时结果为 `0`。
 - 紊乱失衡等级区在合法等级范围内不能产生恒等倍率 `1`，不公开
   `DEFAULT_DISORDER_DAZE_LEVEL_FACTOR_INPUT`。调用方必须提供已经完成加权和向下取整的实际虚拟
   代理人等级。
@@ -295,6 +331,8 @@ export function defineFormula<FormulaInput extends object>(
 - [受到失衡值提升区](factors/daze-taken.md)
 - [紊乱失衡值提升区](factors/disorder-daze-dealt.md)
 - [紊乱失衡等级区](factors/disorder-daze-level.md)
+- [能量回复基础区](factors/base-energy-generation.md)
+- [能量获得效率区](factors/energy-generation-rate.md)
 
 ### 规则边界
 
@@ -310,3 +348,4 @@ export function defineFormula<FormulaInput extends object>(
 - [异常积蓄值](formulas/anomaly-buildup.md)
 - [常规失衡值](formulas/regular-daze.md)
 - [紊乱失衡值](formulas/disorder-daze.md)
+- [能量回复值](formulas/energy-generation.md)
