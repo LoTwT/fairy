@@ -74,6 +74,38 @@ core 公开命名的依据，也不能不经语义转换直接作为 core 输入
 Nanoka 原始数据中的 `sp_recovery` 字段在中英文数据中保持相同名称，属于数据层内部标识，不是公开游戏
 术语。数据清洗层必须先解释其资源类型和业务含义，core 不公开 `spRecovery` 输入。
 
+### 闪能相关术语
+
+闪能相关术语同样以 Nanoka 3.1 中同一路径的中英文游戏文本为依据：
+
+- `Adrenaline` 对应“闪能”，见
+  [英文数据](../../../packages/data/raw/nanoka/3.1/en/character/1051.json#L1075)与
+  [中文数据](../../../packages/data/raw/nanoka/3.1/zh/character/1051.json#L1075)；
+- `Adrenaline Generation Rate` 对应“闪能获得效率”，见
+  [英文数据](../../../packages/data/raw/nanoka/3.1/en/simul/102.json#L104)与
+  [中文数据](../../../packages/data/raw/nanoka/3.1/zh/simul/102.json#L104)。
+
+| 中文术语     | 英文标识                     | 规范定义                                                                   | 类别     |
+| ------------ | ---------------------------- | -------------------------------------------------------------------------- | -------- |
+| 闪能         | `Adrenaline`                 | 部分代理人用于发动技能及其他效果的独立资源                                 | 游戏文本 |
+| 闪能获得效率 | `Adrenaline Generation Rate` | 对确认适用该属性的闪能累积进行倍率缩放的效率；具体乘区结果包含基础倍率 `1` | 游戏文本 |
+
+部分中文角色文本将 `Adrenaline Generation Rate` 写为“闪能回复效率”，见
+[英文数据](../../../packages/data/raw/nanoka/3.1/en/character/1441.json#L2234)与
+[中文数据](../../../packages/data/raw/nanoka/3.1/zh/character/1441.json#L2234)。两种中文描述指向同一个英文
+属性，本规范以攻略使用的“闪能获得效率”为主称，不建立第二个乘区。英文描述还可能依句式使用 `gain`、
+`recover` 或 `restore Adrenaline`，这些自然语言变体不建立额外 core 术语。
+
+Nanoka 3.1 没有提供 `Adrenaline Generation` 作为整体闪能增加量固定标签的直接对照。技能描述中存在
+`Adrenaline regen of 0.5/s` 对应“持续回复闪能，每秒回复 0.5 点”的自然语言用法，见
+[英文数据](../../../packages/data/raw/nanoka/3.1/en/character/1051.json#L2267)与
+[中文数据](../../../packages/data/raw/nanoka/3.1/zh/character/1051.json#L2267)，但这不能证明
+`Adrenaline Regen` 是固定面板属性名称。`AdrenalineGeneration`、`BaseAdrenalineGeneration` 和
+`finalAdrenalineRegen` 是 core 根据攻略公式建立的规范化标识；具体计算语义由对应乘区和公式规范维护。
+
+Nanoka 原始数据中的 `rp_recover`、`rp_recovery` 等字段属于数据层内部标识，不是公开游戏术语。数据
+清洗层必须先解释其资源类型和业务含义，core 不公开同名输入。
+
 ### 术语边界
 
 - “公式”只表示常规伤害、贯穿伤害、异常伤害、异常积蓄值等由乘区组成的顶层业务计算。乘区内部的
@@ -177,6 +209,10 @@ export interface Formula<FormulaInput extends object> {
 - 能量回复基础区产生能量点数，没有恒等倍率语义，不公开
   `DEFAULT_BASE_ENERGY_GENERATION_FACTOR_INPUT`。调用方必须提供本次计算的
   `BaseEnergyGenerationFactorInput`；显式提供空的一次性回复数组、`0` 最终能量自动回复和 `0` 有效
+  时间时结果为 `0`。
+- 闪能累积基础区产生闪能点数，没有恒等倍率语义，不公开
+  `DEFAULT_BASE_ADRENALINE_GENERATION_FACTOR_INPUT`。调用方必须提供本次计算的
+  `BaseAdrenalineGenerationFactorInput`；显式提供空的一次性累积数组、`0` 最终闪能自动累积和 `0` 有效
   时间时结果为 `0`。
 - 紊乱失衡等级区在合法等级范围内不能产生恒等倍率 `1`，不公开
   `DEFAULT_DISORDER_DAZE_LEVEL_FACTOR_INPUT`。调用方必须提供已经完成加权和向下取整的实际虚拟
@@ -334,6 +370,11 @@ export function defineFormula<FormulaInput extends object>(
 - [能量回复基础区](factors/base-energy-generation.md)
 - [能量获得效率区](factors/energy-generation-rate.md)
 
+### 待实现
+
+- [闪能累积基础区](factors/base-adrenaline-generation.md)
+- [闪能获得效率区](factors/adrenaline-generation-rate.md)
+
 ### 规则边界
 
 - [特殊乘区边界](factors/special.md)
@@ -349,3 +390,7 @@ export function defineFormula<FormulaInput extends object>(
 - [常规失衡值](formulas/regular-daze.md)
 - [紊乱失衡值](formulas/disorder-daze.md)
 - [能量回复值](formulas/energy-generation.md)
+
+### 待实现
+
+- [闪能累积值](formulas/adrenaline-generation.md)
