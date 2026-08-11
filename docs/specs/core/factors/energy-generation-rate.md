@@ -86,7 +86,8 @@ export declare const energyGenerationRateFactor: Factor<EnergyGenerationRateFact
 - 保存贡献来源、原始效果文本或分析明细。
 
 `Adrenaline Generation Rate` 是闪能获得效率的独立游戏属性。与能量获得效率数值相同的效果可以分别
-向两个资源提供贡献，但闪能贡献不能直接传给本乘区并把它作为闪能乘区使用。
+向两个资源提供贡献，但闪能贡献不能直接传给本乘区并把它作为闪能乘区使用。闪能贡献由独立的
+[闪能获得效率区](adrenaline-generation-rate.md)处理。
 
 ## 有效性与失败行为
 

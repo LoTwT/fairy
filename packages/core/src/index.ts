@@ -32,6 +32,17 @@ export {
 } from "./factors/energy-generation-rate.ts"
 export type { EnergyGenerationRateFactorInput } from "./factors/energy-generation-rate.ts"
 export {
+  BASE_ADRENALINE_GENERATION_FACTOR_ID,
+  baseAdrenalineGenerationFactor,
+} from "./factors/base-adrenaline-generation.ts"
+export type { BaseAdrenalineGenerationFactorInput } from "./factors/base-adrenaline-generation.ts"
+export {
+  ADRENALINE_GENERATION_RATE_FACTOR_ID,
+  DEFAULT_ADRENALINE_GENERATION_RATE_FACTOR_INPUT,
+  adrenalineGenerationRateFactor,
+} from "./factors/adrenaline-generation-rate.ts"
+export type { AdrenalineGenerationRateFactorInput } from "./factors/adrenaline-generation-rate.ts"
+export {
   DAMAGE_BONUS_FACTOR_ID,
   DEFAULT_DAMAGE_BONUS_FACTOR_INPUT,
   damageBonusFactor,
@@ -180,6 +191,11 @@ export {
   energyGenerationFormula,
 } from "./formulas/energy-generation.ts"
 export type { EnergyGenerationFormulaInput } from "./formulas/energy-generation.ts"
+export {
+  ADRENALINE_GENERATION_FORMULA_ID,
+  adrenalineGenerationFormula,
+} from "./formulas/adrenaline-generation.ts"
+export type { AdrenalineGenerationFormulaInput } from "./formulas/adrenaline-generation.ts"
 export { calculateFinalStat, calculateInitialStat } from "./stat.ts"
 export type {
   CalculateFinalStatParams,
