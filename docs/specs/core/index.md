@@ -369,9 +369,6 @@ export function defineFormula<FormulaInput extends object>(
 - [紊乱失衡等级区](factors/disorder-daze-level.md)
 - [能量回复基础区](factors/base-energy-generation.md)
 - [能量获得效率区](factors/energy-generation-rate.md)
-
-### 待实现
-
 - [闪能累积基础区](factors/base-adrenaline-generation.md)
 - [闪能获得效率区](factors/adrenaline-generation-rate.md)
 
@@ -390,7 +387,4 @@ export function defineFormula<FormulaInput extends object>(
 - [常规失衡值](formulas/regular-daze.md)
 - [紊乱失衡值](formulas/disorder-daze.md)
 - [能量回复值](formulas/energy-generation.md)
-
-### 待实现
-
 - [闪能累积值](formulas/adrenaline-generation.md)

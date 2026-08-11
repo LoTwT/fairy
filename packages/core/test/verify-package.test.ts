@@ -103,6 +103,8 @@ describe("packed package", () => {
       join(consumerDirectory, "smoke.mjs"),
       `import assert from "node:assert/strict"
 import {
+  ADRENALINE_GENERATION_FORMULA_ID,
+  ADRENALINE_GENERATION_RATE_FACTOR_ID,
   ANOMALY_BUILDUP_FORMULA_ID,
   ANOMALY_BUILDUP_RATE_FACTOR_ID,
   ANOMALY_CRITICAL_FACTOR_ID,
@@ -111,6 +113,7 @@ import {
   ANOMALY_DAMAGE_LEVEL_FACTOR_ID,
   ANOMALY_MASTERY_FACTOR_ID,
   ANOMALY_PROFICIENCY_FACTOR_ID,
+  BASE_ADRENALINE_GENERATION_FACTOR_ID,
   BASE_ANOMALY_BUILDUP_FACTOR_ID,
   BASE_DAMAGE_FACTOR_ID,
   BASE_DAZE_FACTOR_ID,
@@ -120,6 +123,7 @@ import {
   DAMAGE_TAKEN_FACTOR_ID,
   DAZE_DEALT_FACTOR_ID,
   DAZE_TAKEN_FACTOR_ID,
+  DEFAULT_ADRENALINE_GENERATION_RATE_FACTOR_INPUT,
   DEFAULT_ANOMALY_BUILDUP_RATE_FACTOR_INPUT,
   DEFAULT_ANOMALY_CRITICAL_FACTOR_INPUT,
   DEFAULT_ANOMALY_DAMAGE_BONUS_FACTOR_INPUT,
@@ -150,6 +154,8 @@ import {
   SHEER_DAMAGE_BONUS_FACTOR_ID,
   SHEER_DAMAGE_FORMULA_ID,
   STUN_DAMAGE_FACTOR_ID,
+  adrenalineGenerationFormula,
+  adrenalineGenerationRateFactor,
   anomalyBuildupFormula,
   anomalyBuildupRateFactor,
   anomalyCriticalFactor,
@@ -158,6 +164,7 @@ import {
   anomalyDamageLevelFactor,
   anomalyMasteryFactor,
   anomalyProficiencyFactor,
+  baseAdrenalineGenerationFactor,
   baseAnomalyBuildupFactor,
   baseDamageFactor,
   baseDazeFactor,
@@ -226,6 +233,45 @@ const finalStat = calculateFinalStat({
 })
 assert.equal(initialStat, 95)
 assert.equal(finalStat, 123)
+assert.equal(
+  BASE_ADRENALINE_GENERATION_FACTOR_ID,
+  "base_adrenaline_generation",
+)
+assert.equal(
+  baseAdrenalineGenerationFactor.factorId,
+  BASE_ADRENALINE_GENERATION_FACTOR_ID,
+)
+assert.equal(
+  baseAdrenalineGenerationFactor.calculate({
+    baseAdrenalineGenerationValues: [2, 3],
+    finalAdrenalineRegen: 4,
+    effectiveAdrenalineRegenDurationInSeconds: 5,
+  }),
+  25,
+)
+assert.equal(
+  ADRENALINE_GENERATION_RATE_FACTOR_ID,
+  "adrenaline_generation_rate",
+)
+assert.equal(
+  adrenalineGenerationRateFactor.factorId,
+  ADRENALINE_GENERATION_RATE_FACTOR_ID,
+)
+assert.equal(adrenalineGenerationRateFactor.calculate([0.25, -0.125]), 1.125)
+assert.equal(
+  adrenalineGenerationRateFactor.calculate(
+    DEFAULT_ADRENALINE_GENERATION_RATE_FACTOR_INPUT,
+  ),
+  1,
+)
+assert.equal(
+  Object.isFrozen(DEFAULT_ADRENALINE_GENERATION_RATE_FACTOR_INPUT),
+  true,
+)
+assert.notEqual(
+  DEFAULT_ADRENALINE_GENERATION_RATE_FACTOR_INPUT,
+  DEFAULT_ENERGY_GENERATION_RATE_FACTOR_INPUT,
+)
 assert.equal(BASE_ANOMALY_BUILDUP_FACTOR_ID, "base_anomaly_buildup")
 assert.equal(
   baseAnomalyBuildupFactor.factorId,
@@ -598,6 +644,26 @@ assert.deepEqual(energyGenerationResult.factorResults, {
 })
 assert.equal(Object.isFrozen(energyGenerationResult), true)
 assert.equal(Object.isFrozen(energyGenerationResult.factorResults), true)
+assert.equal(ADRENALINE_GENERATION_FORMULA_ID, "adrenaline_generation")
+assert.equal(
+  adrenalineGenerationFormula.formulaId,
+  ADRENALINE_GENERATION_FORMULA_ID,
+)
+const adrenalineGenerationResult = adrenalineGenerationFormula.calculate({
+  baseAdrenalineGeneration: {
+    baseAdrenalineGenerationValues: [2, 3],
+    finalAdrenalineRegen: 4,
+    effectiveAdrenalineRegenDurationInSeconds: 5,
+  },
+  adrenalineGenerationRate: [0.25],
+})
+assert.equal(adrenalineGenerationResult.value, 31.25)
+assert.deepEqual(adrenalineGenerationResult.factorResults, {
+  baseAdrenalineGeneration: 25,
+  adrenalineGenerationRate: 1.25,
+})
+assert.equal(Object.isFrozen(adrenalineGenerationResult), true)
+assert.equal(Object.isFrozen(adrenalineGenerationResult.factorResults), true)
 assert.equal(SHEER_DAMAGE_FORMULA_ID, "sheer_damage")
 assert.equal(sheerDamageFormula.formulaId, SHEER_DAMAGE_FORMULA_ID)
 const sheerDamageResult = sheerDamageFormula.calculate({
@@ -672,6 +738,8 @@ assert.equal(Object.isFrozen(anomalyDamageResult.factorResults), true)
     writeFileSync(
       join(consumerDirectory, "smoke.ts"),
       `import {
+  ADRENALINE_GENERATION_FORMULA_ID,
+  ADRENALINE_GENERATION_RATE_FACTOR_ID,
   ANOMALY_BUILDUP_FORMULA_ID,
   ANOMALY_BUILDUP_RATE_FACTOR_ID,
   ANOMALY_CRITICAL_FACTOR_ID,
@@ -680,11 +748,13 @@ assert.equal(Object.isFrozen(anomalyDamageResult.factorResults), true)
   ANOMALY_DAMAGE_LEVEL_FACTOR_ID,
   ANOMALY_MASTERY_FACTOR_ID,
   ANOMALY_PROFICIENCY_FACTOR_ID,
+  BASE_ADRENALINE_GENERATION_FACTOR_ID,
   BASE_ANOMALY_BUILDUP_FACTOR_ID,
   BASE_DAZE_FACTOR_ID,
   BASE_ENERGY_GENERATION_FACTOR_ID,
   DAZE_DEALT_FACTOR_ID,
   DAZE_TAKEN_FACTOR_ID,
+  DEFAULT_ADRENALINE_GENERATION_RATE_FACTOR_INPUT,
   DEFAULT_ANOMALY_BUILDUP_RATE_FACTOR_INPUT,
   DEFAULT_ANOMALY_CRITICAL_FACTOR_INPUT,
   DEFAULT_ANOMALY_DAMAGE_BONUS_FACTOR_INPUT,
@@ -709,6 +779,8 @@ assert.equal(Object.isFrozen(anomalyDamageResult.factorResults), true)
   ENERGY_GENERATION_FORMULA_ID,
   ENERGY_GENERATION_RATE_FACTOR_ID,
   REGULAR_DAZE_FORMULA_ID,
+  adrenalineGenerationFormula,
+  adrenalineGenerationRateFactor,
   anomalyBuildupFormula,
   anomalyBuildupRateFactor,
   anomalyCriticalFactor,
@@ -717,6 +789,7 @@ assert.equal(Object.isFrozen(anomalyDamageResult.factorResults), true)
   anomalyDamageLevelFactor,
   anomalyMasteryFactor,
   anomalyProficiencyFactor,
+  baseAdrenalineGenerationFactor,
   baseAnomalyBuildupFactor,
   baseDamageFactor,
   baseDazeFactor,
@@ -745,6 +818,8 @@ assert.equal(Object.isFrozen(anomalyDamageResult.factorResults), true)
   sheerDamageBonusFactor,
   sheerDamageFormula,
   stunDamageFactor,
+  type AdrenalineGenerationFormulaInput,
+  type AdrenalineGenerationRateFactorInput,
   type AnomalyBuildupFormulaInput,
   type AnomalyBuildupRateFactorInput,
   type AnomalyCriticalFactorInput,
@@ -753,6 +828,7 @@ assert.equal(Object.isFrozen(anomalyDamageResult.factorResults), true)
   type AnomalyDamageLevelFactorInput,
   type AnomalyMasteryFactorInput,
   type AnomalyProficiencyFactorInput,
+  type BaseAdrenalineGenerationFactorInput,
   type BaseAnomalyBuildupFactorInput,
   type BaseDamageFactorInput,
   type BaseDamageFactorInputItem,
@@ -797,6 +873,10 @@ interface ProductFormulaInput {
   readonly right: number
 }
 
+const adrenalineGenerationFormulaId: "adrenaline_generation" =
+  ADRENALINE_GENERATION_FORMULA_ID
+const adrenalineGenerationRateFactorId: "adrenaline_generation_rate" =
+  ADRENALINE_GENERATION_RATE_FACTOR_ID
 const anomalyBuildupFormulaId: "anomaly_buildup" = ANOMALY_BUILDUP_FORMULA_ID
 const anomalyBuildupRateFactorId: "anomaly_buildup_rate" =
   ANOMALY_BUILDUP_RATE_FACTOR_ID
@@ -809,6 +889,8 @@ const anomalyDamageLevelFactorId: "anomaly_damage_level" =
 const anomalyMasteryFactorId: "anomaly_mastery" = ANOMALY_MASTERY_FACTOR_ID
 const anomalyProficiencyFactorId: "anomaly_proficiency" =
   ANOMALY_PROFICIENCY_FACTOR_ID
+const baseAdrenalineGenerationFactorId: "base_adrenaline_generation" =
+  BASE_ADRENALINE_GENERATION_FACTOR_ID
 const baseAnomalyBuildupFactorId: "base_anomaly_buildup" =
   BASE_ANOMALY_BUILDUP_FACTOR_ID
 const baseDazeFactorId: "base_daze" = BASE_DAZE_FACTOR_ID
@@ -878,6 +960,14 @@ const baseEnergyGenerationInput: BaseEnergyGenerationFactorInput = {
   effectiveEnergyRegenDurationInSeconds: 5,
 }
 const energyGenerationRateInput: EnergyGenerationRateFactorInput = [0.25]
+const baseAdrenalineGenerationInput: BaseAdrenalineGenerationFactorInput = {
+  baseAdrenalineGenerationValues: [2, 3],
+  finalAdrenalineRegen: 4,
+  effectiveAdrenalineRegenDurationInSeconds: 5,
+}
+const adrenalineGenerationRateInput: AdrenalineGenerationRateFactorInput = [
+  0.25,
+]
 const baseAnomalyBuildupInput: BaseAnomalyBuildupFactorInput = 123
 const anomalyBuildupRateInputs: AnomalyBuildupRateFactorInput = [0.25, -0.125]
 const anomalyCriticalInput: AnomalyCriticalFactorInput = {
@@ -967,6 +1057,10 @@ const energyGenerationInput: EnergyGenerationFormulaInput = {
   baseEnergyGeneration: baseEnergyGenerationInput,
   energyGenerationRate: energyGenerationRateInput,
 }
+const adrenalineGenerationInput: AdrenalineGenerationFormulaInput = {
+  baseAdrenalineGeneration: baseAdrenalineGenerationInput,
+  adrenalineGenerationRate: adrenalineGenerationRateInput,
+}
 const sheerDamageInput: SheerDamageFormulaInput = {
   baseDamage: baseDamageInputs,
   damageBonus: DEFAULT_DAMAGE_BONUS_FACTOR_INPUT,
@@ -997,6 +1091,8 @@ const anomalyDamageInput: AnomalyDamageFormulaInput = {
 
 factor.calculate({ values: [2, 3] })
 formulaFactorResults.left
+adrenalineGenerationFormulaId
+adrenalineGenerationRateFactorId
 anomalyBuildupFormulaId
 anomalyBuildupRateFactorId
 anomalyCriticalFactorId
@@ -1005,6 +1101,7 @@ anomalyDamageFormulaId
 anomalyDamageLevelFactorId
 anomalyMasteryFactorId
 anomalyProficiencyFactorId
+baseAdrenalineGenerationFactorId
 baseAnomalyBuildupFactorId
 baseDazeFactorId
 baseEnergyGenerationFactorId
@@ -1030,6 +1127,11 @@ anomalyMasteryFactor.calculate(anomalyMasteryInput)
 anomalyMasteryFactor.calculate(DEFAULT_ANOMALY_MASTERY_FACTOR_INPUT)
 anomalyProficiencyFactor.calculate(anomalyProficiencyInput)
 anomalyProficiencyFactor.calculate(DEFAULT_ANOMALY_PROFICIENCY_FACTOR_INPUT)
+baseAdrenalineGenerationFactor.calculate(baseAdrenalineGenerationInput)
+adrenalineGenerationRateFactor.calculate(adrenalineGenerationRateInput)
+adrenalineGenerationRateFactor.calculate(
+  DEFAULT_ADRENALINE_GENERATION_RATE_FACTOR_INPUT,
+)
 baseDamageFactor.calculate(baseDamageInputs)
 baseDazeFactor.calculate(baseDazeInputs)
 baseEnergyGenerationFactor.calculate(baseEnergyGenerationInput)
@@ -1056,6 +1158,7 @@ regularDamageFormula.calculate(regularDamageInput)
 regularDazeFormula.calculate(regularDazeInput)
 disorderDazeFormula.calculate(disorderDazeInput)
 energyGenerationFormula.calculate(energyGenerationInput)
+adrenalineGenerationFormula.calculate(adrenalineGenerationInput)
 sheerDamageFormula.calculate(sheerDamageInput)
 anomalyBuildupFormula.calculate(anomalyBuildupInput)
 anomalyDamageFormula.calculate(anomalyDamageInput)
