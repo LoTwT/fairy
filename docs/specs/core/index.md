@@ -453,9 +453,6 @@ export function defineFormula<FormulaInput extends object>(
 - [基础喧响值回复](factors/base-decibel-generation.md)
 - [喧响获得效率区](factors/decibel-generation-rate.md)
 - [喧响值伴随获得效率](factors/accompanying-decibel-generation-rate.md)
-
-### 待实现
-
 - [基础秽盾削减值](factors/base-miasmic-shield-reduction.md)
 - [秽盾削减效率区](factors/miasmic-shield-reduction-rate.md)
 - [秽盾被削减效率区](factors/miasmic-shield-reduction-taken-rate.md)
@@ -477,7 +474,4 @@ export function defineFormula<FormulaInput extends object>(
 - [能量回复值](formulas/energy-generation.md)
 - [闪能累积值](formulas/adrenaline-generation.md)
 - [喧响值回复](formulas/decibel-generation.md)
-
-### 待实现
-
 - [秽盾削减值](formulas/miasmic-shield-reduction.md)

@@ -23,6 +23,9 @@ Fairy 的确定性计算核心包。
 - 基础喧响值回复：`baseDecibelGenerationFactor`
 - 喧响获得效率区：`decibelGenerationRateFactor`
 - 喧响值伴随获得效率：`accompanyingDecibelGenerationRateFactor`
+- 基础秽盾削减值：`baseMiasmicShieldReductionFactor`
+- 秽盾削减效率区：`miasmicShieldReductionRateFactor`
+- 秽盾被削减效率区：`miasmicShieldReductionTakenRateFactor`
 - 贯穿增伤区：`sheerDamageBonusFactor`
 - 基础异常积蓄值：`baseAnomalyBuildupFactor`
 - 异常掌控区：`anomalyMasteryFactor`
@@ -43,6 +46,7 @@ Fairy 的确定性计算核心包。
 - 能量回复值：`energyGenerationFormula`
 - 闪能累积值：`adrenalineGenerationFormula`
 - 喧响值回复：`decibelGenerationFormula`
+- 秽盾削减值：`miasmicShieldReductionFormula`
 
 调用方也可以分别使用 `defineFactor` 和 `defineFormula` 建立自定义乘区与公式。
 

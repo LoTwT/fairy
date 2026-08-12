@@ -60,6 +60,23 @@ export {
 } from "./factors/accompanying-decibel-generation-rate.ts"
 export type { AccompanyingDecibelGenerationRateFactorInput } from "./factors/accompanying-decibel-generation-rate.ts"
 export {
+  BASE_MIASMIC_SHIELD_REDUCTION_FACTOR_ID,
+  baseMiasmicShieldReductionFactor,
+} from "./factors/base-miasmic-shield-reduction.ts"
+export type { BaseMiasmicShieldReductionFactorInput } from "./factors/base-miasmic-shield-reduction.ts"
+export {
+  DEFAULT_MIASMIC_SHIELD_REDUCTION_RATE_FACTOR_INPUT,
+  MIASMIC_SHIELD_REDUCTION_RATE_FACTOR_ID,
+  miasmicShieldReductionRateFactor,
+} from "./factors/miasmic-shield-reduction-rate.ts"
+export type { MiasmicShieldReductionRateFactorInput } from "./factors/miasmic-shield-reduction-rate.ts"
+export {
+  DEFAULT_MIASMIC_SHIELD_REDUCTION_TAKEN_RATE_FACTOR_INPUT,
+  MIASMIC_SHIELD_REDUCTION_TAKEN_RATE_FACTOR_ID,
+  miasmicShieldReductionTakenRateFactor,
+} from "./factors/miasmic-shield-reduction-taken-rate.ts"
+export type { MiasmicShieldReductionTakenRateFactorInput } from "./factors/miasmic-shield-reduction-taken-rate.ts"
+export {
   DAMAGE_BONUS_FACTOR_ID,
   DEFAULT_DAMAGE_BONUS_FACTOR_INPUT,
   damageBonusFactor,
@@ -218,6 +235,11 @@ export {
   decibelGenerationFormula,
 } from "./formulas/decibel-generation.ts"
 export type { DecibelGenerationFormulaInput } from "./formulas/decibel-generation.ts"
+export {
+  MIASMIC_SHIELD_REDUCTION_FORMULA_ID,
+  miasmicShieldReductionFormula,
+} from "./formulas/miasmic-shield-reduction.ts"
+export type { MiasmicShieldReductionFormulaInput } from "./formulas/miasmic-shield-reduction.ts"
 export { calculateFinalStat, calculateInitialStat } from "./stat.ts"
 export type {
   CalculateFinalStatParams,
