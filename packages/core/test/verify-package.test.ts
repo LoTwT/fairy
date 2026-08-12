@@ -186,6 +186,7 @@ import {
   baseMiasmicShieldReductionFactor,
   calculateFinalStat,
   calculateInitialStat,
+  calculateStandardDisorderDamageMultiplier,
   calculateDefenseLevelBase,
   calculateTargetBaseDefense,
   calculateTargetEffectiveDefense,
@@ -894,6 +895,13 @@ assert.deepEqual(anomalyDamageResult.factorResults, {
 })
 assert.equal(Object.isFrozen(anomalyDamageResult), true)
 assert.equal(Object.isFrozen(anomalyDamageResult.factorResults), true)
+assert.equal(
+  calculateStandardDisorderDamageMultiplier({
+    originalAnomalyAttribute: "fire",
+    remainingAnomalyDurationInSeconds: 10,
+  }),
+  14.5,
+)
 `,
     )
     writeFileSync(
@@ -972,6 +980,7 @@ assert.equal(Object.isFrozen(anomalyDamageResult.factorResults), true)
   baseMiasmicShieldReductionFactor,
   calculateFinalStat,
   calculateInitialStat,
+  calculateStandardDisorderDamageMultiplier,
   calculateDefenseLevelBase,
   calculateTargetBaseDefense,
   calculateTargetEffectiveDefense,
@@ -1021,6 +1030,7 @@ assert.equal(Object.isFrozen(anomalyDamageResult.factorResults), true)
   type BaseMiasmicShieldReductionFactorInput,
   type CalculateFinalStatParams,
   type CalculateInitialStatParams,
+  type CalculateStandardDisorderDamageMultiplierParams,
   type CalculateTargetBaseDefenseParams,
   type CalculateTargetEffectiveDefenseParams,
   type CriticalFactorInput,
@@ -1034,6 +1044,7 @@ assert.equal(Object.isFrozen(anomalyDamageResult.factorResults), true)
   type DisorderDazeDealtFactorInput,
   type DisorderDazeFormulaInput,
   type DisorderDazeLevelFactorInput,
+  type DisorderSourceAttribute,
   type EnergyGenerationFormulaInput,
   type EnergyGenerationRateFactorInput,
   type Factor,
@@ -1082,6 +1093,16 @@ const anomalyDamageLevelFactorId: "anomaly_damage_level" =
 const anomalyMasteryFactorId: "anomaly_mastery" = ANOMALY_MASTERY_FACTOR_ID
 const anomalyProficiencyFactorId: "anomaly_proficiency" =
   ANOMALY_PROFICIENCY_FACTOR_ID
+const disorderSourceAttribute: DisorderSourceAttribute = "fire"
+const standardDisorderDamageMultiplierParams: CalculateStandardDisorderDamageMultiplierParams =
+  {
+    originalAnomalyAttribute: disorderSourceAttribute,
+    remainingAnomalyDurationInSeconds: 10,
+  }
+const standardDisorderDamageMultiplier: number =
+  calculateStandardDisorderDamageMultiplier(
+    standardDisorderDamageMultiplierParams,
+  )
 const baseAdrenalineGenerationFactorId: "base_adrenaline_generation" =
   BASE_ADRENALINE_GENERATION_FACTOR_ID
 const baseAnomalyBuildupFactorId: "base_anomaly_buildup" =
@@ -1336,6 +1357,8 @@ anomalyDamageFormulaId
 anomalyDamageLevelFactorId
 anomalyMasteryFactorId
 anomalyProficiencyFactorId
+disorderSourceAttribute
+standardDisorderDamageMultiplier
 baseAdrenalineGenerationFactorId
 baseAnomalyBuildupFactorId
 baseDazeFactorId

@@ -40,7 +40,11 @@ import {
   type Formula,
   type FormulaFactorResults,
 } from "../formula.ts"
-import { assertNonArrayObject } from "../internal/assert.ts"
+import {
+  assertFiniteResult,
+  assertNonArrayObject,
+  assertNonNegativeFiniteNumber,
+} from "../internal/assert.ts"
 
 export interface AnomalyDamageFormulaInput {
   readonly baseDamage: BaseDamageFactorInput
@@ -55,7 +59,83 @@ export interface AnomalyDamageFormulaInput {
   readonly anomalyCritical: AnomalyCriticalFactorInput
 }
 
+export type DisorderSourceAttribute =
+  | "fire"
+  | "electric"
+  | "ether"
+  | "ice"
+  | "physical"
+  | "auric_ink"
+  | "frost"
+
+export interface CalculateStandardDisorderDamageMultiplierParams {
+  readonly originalAnomalyAttribute: DisorderSourceAttribute
+  readonly remainingAnomalyDurationInSeconds: number
+}
+
 export const ANOMALY_DAMAGE_FORMULA_ID = "anomaly_damage" as const
+
+/** 根据原异常属性与剩余持续时间计算普通紊乱的标准伤害倍率。 */
+export function calculateStandardDisorderDamageMultiplier(
+  params: CalculateStandardDisorderDamageMultiplierParams,
+): number {
+  assertNonArrayObject(
+    params,
+    "calculateStandardDisorderDamageMultiplier params",
+  )
+
+  const { originalAnomalyAttribute, remainingAnomalyDurationInSeconds } = params
+
+  if (typeof originalAnomalyAttribute !== "string") {
+    throw new TypeError("Original anomaly attribute must be a string")
+  }
+
+  assertNonNegativeFiniteNumber(
+    remainingAnomalyDurationInSeconds,
+    "Remaining anomaly duration in seconds",
+  )
+
+  let damageMultiplier: number
+
+  switch (originalAnomalyAttribute) {
+    case "fire":
+      damageMultiplier =
+        4.5 + Math.floor(remainingAnomalyDurationInSeconds / 0.5) * 0.5
+      break
+    case "electric":
+      damageMultiplier =
+        4.5 + Math.floor(remainingAnomalyDurationInSeconds) * 1.25
+      break
+    case "ether":
+      damageMultiplier =
+        4.5 + Math.floor(remainingAnomalyDurationInSeconds / 0.5) * 0.625
+      break
+    case "ice":
+      damageMultiplier =
+        4.5 + Math.floor(remainingAnomalyDurationInSeconds) * 0.075
+      break
+    case "physical":
+      damageMultiplier =
+        4.5 + Math.floor(remainingAnomalyDurationInSeconds) * 0.075
+      break
+    case "auric_ink":
+      damageMultiplier =
+        4.5 + Math.floor(remainingAnomalyDurationInSeconds / 0.5) * 0.625
+      break
+    case "frost":
+      damageMultiplier =
+        6 + Math.floor(remainingAnomalyDurationInSeconds) * 0.75
+      break
+    default:
+      throw new RangeError(
+        `Unsupported original anomaly attribute: ${originalAnomalyAttribute}`,
+      )
+  }
+
+  assertFiniteResult(damageMultiplier, "Standard Disorder damage multiplier")
+
+  return damageMultiplier
+}
 
 export const anomalyDamageFormula: Formula<AnomalyDamageFormulaInput> =
   defineFormula<AnomalyDamageFormulaInput>({
