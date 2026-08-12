@@ -43,6 +43,23 @@ export {
 } from "./factors/adrenaline-generation-rate.ts"
 export type { AdrenalineGenerationRateFactorInput } from "./factors/adrenaline-generation-rate.ts"
 export {
+  BASE_DECIBEL_GENERATION_FACTOR_ID,
+  baseDecibelGenerationFactor,
+} from "./factors/base-decibel-generation.ts"
+export type { BaseDecibelGenerationFactorInput } from "./factors/base-decibel-generation.ts"
+export {
+  DECIBEL_GENERATION_RATE_FACTOR_ID,
+  DEFAULT_DECIBEL_GENERATION_RATE_FACTOR_INPUT,
+  decibelGenerationRateFactor,
+} from "./factors/decibel-generation-rate.ts"
+export type { DecibelGenerationRateFactorInput } from "./factors/decibel-generation-rate.ts"
+export {
+  ACCOMPANYING_DECIBEL_GENERATION_RATE_FACTOR_ID,
+  DEFAULT_ACCOMPANYING_DECIBEL_GENERATION_RATE_FACTOR_INPUT,
+  accompanyingDecibelGenerationRateFactor,
+} from "./factors/accompanying-decibel-generation-rate.ts"
+export type { AccompanyingDecibelGenerationRateFactorInput } from "./factors/accompanying-decibel-generation-rate.ts"
+export {
   DAMAGE_BONUS_FACTOR_ID,
   DEFAULT_DAMAGE_BONUS_FACTOR_INPUT,
   damageBonusFactor,
@@ -196,6 +213,11 @@ export {
   adrenalineGenerationFormula,
 } from "./formulas/adrenaline-generation.ts"
 export type { AdrenalineGenerationFormulaInput } from "./formulas/adrenaline-generation.ts"
+export {
+  DECIBEL_GENERATION_FORMULA_ID,
+  decibelGenerationFormula,
+} from "./formulas/decibel-generation.ts"
+export type { DecibelGenerationFormulaInput } from "./formulas/decibel-generation.ts"
 export { calculateFinalStat, calculateInitialStat } from "./stat.ts"
 export type {
   CalculateFinalStatParams,

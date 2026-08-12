@@ -106,6 +106,34 @@ Nanoka 3.1 没有提供 `Adrenaline Generation` 作为整体闪能增加量固�
 Nanoka 原始数据中的 `rp_recover`、`rp_recovery` 等字段属于数据层内部标识，不是公开游戏术语。数据
 清洗层必须先解释其资源类型和业务含义，core 不公开同名输入。
 
+### 喧响相关术语
+
+喧响相关术语以 Nanoka 3.1 中同一路径的中英文游戏文本为依据：
+
+- 同一段技能描述中的 `Decibel Rating` 对应“喧响等级”，`Decibels` 对应可消耗的“喧响值”，见
+  [英文数据](../../../packages/data/raw/nanoka/3.1/en/character/1051.json#L1415)与
+  [中文数据](../../../packages/data/raw/nanoka/3.1/zh/character/1051.json#L1415)；
+- `Decibel Generation Rate` 对应“喧响值获得效率”，见
+  [英文数据](../../../packages/data/raw/nanoka/3.1/en/boss/69001.json#L863)与
+  [中文数据](../../../packages/data/raw/nanoka/3.1/zh/boss/69001.json#L863)；
+- 部分中文游戏文本将同一个 `Decibel Generation Rate` 属性写为“喧响值获取效率”，见
+  [英文数据](../../../packages/data/raw/nanoka/3.1/en/simul/101.json#L329)与
+  [中文数据](../../../packages/data/raw/nanoka/3.1/zh/simul/101.json#L329)。
+
+| 中文术语           | 英文标识                            | 规范定义                                                                                              | 类别      |
+| ------------------ | ----------------------------------- | ----------------------------------------------------------------------------------------------------- | --------- |
+| 喧响值             | `Decibels`                          | 代理人各自持有的数值资源，可以累积、消耗并具有上限                                                    | 游戏文本  |
+| 喧响等级           | `Decibel Rating`                    | 根据当前喧响值所处阈值显示的等级，不表示喧响值本身                                                    | 游戏文本  |
+| 喧响值获得效率     | `Decibel Generation Rate`           | 对确认适用该属性的喧响值回复进行倍率缩放的效率；具体乘区结果包含基础倍率 `1`                          | 游戏文本  |
+| 基础喧响值回复     | `BaseDecibelGeneration`             | core 对技能、动作或效果产生的基础喧响值建立的规范化标识                                               | core 模型 |
+| 喧响值伴随获得效率 | `AccompanyingDecibelGenerationRate` | core 对其他代理人伴随获得喧响值时采用的比例建立的规范化标识；按触发者与其他代理人区分，不按前后台区分 | core 模型 |
+| 喧响值回复         | `DecibelGeneration`                 | core 对一次喧响值回复最终数值建立的公式标识                                                           | core 模型 |
+
+“喧响值获得效率”和“喧响值获取效率”指向同一个游戏属性，本规范使用前者，不建立第二个乘区。
+`BaseDecibelGeneration`、`AccompanyingDecibelGenerationRate` 和 `DecibelGeneration` 是 core 根据攻略公式
+建立的规范化标识。Nanoka 3.1 没有为整体喧响值回复提供固定英文标签，相关描述会依句式使用 `generate`、
+`gain`、`recover` 或 `restore Decibels`。
+
 ### 术语边界
 
 - “公式”只表示常规伤害、贯穿伤害、异常伤害、异常积蓄值等由乘区组成的顶层业务计算。乘区内部的
@@ -214,6 +242,9 @@ export interface Formula<FormulaInput extends object> {
   `DEFAULT_BASE_ADRENALINE_GENERATION_FACTOR_INPUT`。调用方必须提供本次计算的
   `BaseAdrenalineGenerationFactorInput`；显式提供空的一次性累积数组、`0` 最终闪能自动累积和 `0` 有效
   时间时结果为 `0`。
+- 基础喧响值回复产生喧响值点数，没有恒等倍率语义，不公开
+  `DEFAULT_BASE_DECIBEL_GENERATION_FACTOR_INPUT`。调用方必须提供本次计算的
+  `BaseDecibelGenerationFactorInput`；显式传入 `0` 时结果为 `0`。
 - 紊乱失衡等级区在合法等级范围内不能产生恒等倍率 `1`，不公开
   `DEFAULT_DISORDER_DAZE_LEVEL_FACTOR_INPUT`。调用方必须提供已经完成加权和向下取整的实际虚拟
   代理人等级。
@@ -371,6 +402,9 @@ export function defineFormula<FormulaInput extends object>(
 - [能量获得效率区](factors/energy-generation-rate.md)
 - [闪能累积基础区](factors/base-adrenaline-generation.md)
 - [闪能获得效率区](factors/adrenaline-generation-rate.md)
+- [基础喧响值回复](factors/base-decibel-generation.md)
+- [喧响获得效率区](factors/decibel-generation-rate.md)
+- [喧响值伴随获得效率](factors/accompanying-decibel-generation-rate.md)
 
 ### 规则边界
 
@@ -388,3 +422,4 @@ export function defineFormula<FormulaInput extends object>(
 - [紊乱失衡值](formulas/disorder-daze.md)
 - [能量回复值](formulas/energy-generation.md)
 - [闪能累积值](formulas/adrenaline-generation.md)
+- [喧响值回复](formulas/decibel-generation.md)

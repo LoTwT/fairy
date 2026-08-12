@@ -103,6 +103,7 @@ describe("packed package", () => {
       join(consumerDirectory, "smoke.mjs"),
       `import assert from "node:assert/strict"
 import {
+  ACCOMPANYING_DECIBEL_GENERATION_RATE_FACTOR_ID,
   ADRENALINE_GENERATION_FORMULA_ID,
   ADRENALINE_GENERATION_RATE_FACTOR_ID,
   ANOMALY_BUILDUP_FORMULA_ID,
@@ -117,12 +118,16 @@ import {
   BASE_ANOMALY_BUILDUP_FACTOR_ID,
   BASE_DAMAGE_FACTOR_ID,
   BASE_DAZE_FACTOR_ID,
+  BASE_DECIBEL_GENERATION_FACTOR_ID,
   BASE_ENERGY_GENERATION_FACTOR_ID,
   CRITICAL_FACTOR_ID,
   DAMAGE_BONUS_FACTOR_ID,
   DAMAGE_TAKEN_FACTOR_ID,
   DAZE_DEALT_FACTOR_ID,
   DAZE_TAKEN_FACTOR_ID,
+  DECIBEL_GENERATION_FORMULA_ID,
+  DECIBEL_GENERATION_RATE_FACTOR_ID,
+  DEFAULT_ACCOMPANYING_DECIBEL_GENERATION_RATE_FACTOR_INPUT,
   DEFAULT_ADRENALINE_GENERATION_RATE_FACTOR_INPUT,
   DEFAULT_ANOMALY_BUILDUP_RATE_FACTOR_INPUT,
   DEFAULT_ANOMALY_CRITICAL_FACTOR_INPUT,
@@ -135,6 +140,7 @@ import {
   DEFAULT_DAMAGE_TAKEN_FACTOR_INPUT,
   DEFAULT_DAZE_DEALT_FACTOR_INPUT,
   DEFAULT_DAZE_TAKEN_FACTOR_INPUT,
+  DEFAULT_DECIBEL_GENERATION_RATE_FACTOR_INPUT,
   DEFAULT_DEFENSE_FACTOR_INPUT,
   DEFAULT_DISORDER_DAZE_DEALT_FACTOR_INPUT,
   DEFAULT_DISORDER_DAZE_MULTIPLIER,
@@ -154,6 +160,7 @@ import {
   SHEER_DAMAGE_BONUS_FACTOR_ID,
   SHEER_DAMAGE_FORMULA_ID,
   STUN_DAMAGE_FACTOR_ID,
+  accompanyingDecibelGenerationRateFactor,
   adrenalineGenerationFormula,
   adrenalineGenerationRateFactor,
   anomalyBuildupFormula,
@@ -168,6 +175,7 @@ import {
   baseAnomalyBuildupFactor,
   baseDamageFactor,
   baseDazeFactor,
+  baseDecibelGenerationFactor,
   baseEnergyGenerationFactor,
   calculateFinalStat,
   calculateInitialStat,
@@ -179,6 +187,8 @@ import {
   damageTakenFactor,
   dazeDealtFactor,
   dazeTakenFactor,
+  decibelGenerationFormula,
+  decibelGenerationRateFactor,
   defenseFactor,
   defineFactor,
   defineFormula,
@@ -391,6 +401,51 @@ assert.equal(
 assert.equal(
   Object.isFrozen(DEFAULT_ENERGY_GENERATION_RATE_FACTOR_INPUT),
   true,
+)
+assert.equal(BASE_DECIBEL_GENERATION_FACTOR_ID, "base_decibel_generation")
+assert.equal(
+  baseDecibelGenerationFactor.factorId,
+  BASE_DECIBEL_GENERATION_FACTOR_ID,
+)
+assert.equal(baseDecibelGenerationFactor.calculate(100), 100)
+assert.equal(DECIBEL_GENERATION_RATE_FACTOR_ID, "decibel_generation_rate")
+assert.equal(
+  decibelGenerationRateFactor.factorId,
+  DECIBEL_GENERATION_RATE_FACTOR_ID,
+)
+assert.equal(decibelGenerationRateFactor.calculate([0.25, -0.125]), 1.125)
+assert.equal(
+  decibelGenerationRateFactor.calculate(
+    DEFAULT_DECIBEL_GENERATION_RATE_FACTOR_INPUT,
+  ),
+  1,
+)
+assert.equal(
+  Object.isFrozen(DEFAULT_DECIBEL_GENERATION_RATE_FACTOR_INPUT),
+  true,
+)
+assert.notEqual(
+  DEFAULT_DECIBEL_GENERATION_RATE_FACTOR_INPUT,
+  DEFAULT_ENERGY_GENERATION_RATE_FACTOR_INPUT,
+)
+assert.notEqual(
+  DEFAULT_DECIBEL_GENERATION_RATE_FACTOR_INPUT,
+  DEFAULT_ADRENALINE_GENERATION_RATE_FACTOR_INPUT,
+)
+assert.equal(
+  ACCOMPANYING_DECIBEL_GENERATION_RATE_FACTOR_ID,
+  "accompanying_decibel_generation_rate",
+)
+assert.equal(
+  accompanyingDecibelGenerationRateFactor.factorId,
+  ACCOMPANYING_DECIBEL_GENERATION_RATE_FACTOR_ID,
+)
+assert.equal(DEFAULT_ACCOMPANYING_DECIBEL_GENERATION_RATE_FACTOR_INPUT, 1)
+assert.equal(
+  accompanyingDecibelGenerationRateFactor.calculate(
+    DEFAULT_ACCOMPANYING_DECIBEL_GENERATION_RATE_FACTOR_INPUT,
+  ),
+  1,
 )
 assert.equal(DAMAGE_BONUS_FACTOR_ID, "damage_bonus")
 assert.equal(damageBonusFactor.factorId, DAMAGE_BONUS_FACTOR_ID)
@@ -664,6 +719,24 @@ assert.deepEqual(adrenalineGenerationResult.factorResults, {
 })
 assert.equal(Object.isFrozen(adrenalineGenerationResult), true)
 assert.equal(Object.isFrozen(adrenalineGenerationResult.factorResults), true)
+assert.equal(DECIBEL_GENERATION_FORMULA_ID, "decibel_generation")
+assert.equal(
+  decibelGenerationFormula.formulaId,
+  DECIBEL_GENERATION_FORMULA_ID,
+)
+const decibelGenerationResult = decibelGenerationFormula.calculate({
+  baseDecibelGeneration: 100,
+  decibelGenerationRate: [0.25],
+  accompanyingDecibelGenerationRate: 0.5,
+})
+assert.equal(decibelGenerationResult.value, 62.5)
+assert.deepEqual(decibelGenerationResult.factorResults, {
+  baseDecibelGeneration: 100,
+  decibelGenerationRate: 1.25,
+  accompanyingDecibelGenerationRate: 0.5,
+})
+assert.equal(Object.isFrozen(decibelGenerationResult), true)
+assert.equal(Object.isFrozen(decibelGenerationResult.factorResults), true)
 assert.equal(SHEER_DAMAGE_FORMULA_ID, "sheer_damage")
 assert.equal(sheerDamageFormula.formulaId, SHEER_DAMAGE_FORMULA_ID)
 const sheerDamageResult = sheerDamageFormula.calculate({
@@ -738,6 +811,7 @@ assert.equal(Object.isFrozen(anomalyDamageResult.factorResults), true)
     writeFileSync(
       join(consumerDirectory, "smoke.ts"),
       `import {
+  ACCOMPANYING_DECIBEL_GENERATION_RATE_FACTOR_ID,
   ADRENALINE_GENERATION_FORMULA_ID,
   ADRENALINE_GENERATION_RATE_FACTOR_ID,
   ANOMALY_BUILDUP_FORMULA_ID,
@@ -751,9 +825,13 @@ assert.equal(Object.isFrozen(anomalyDamageResult.factorResults), true)
   BASE_ADRENALINE_GENERATION_FACTOR_ID,
   BASE_ANOMALY_BUILDUP_FACTOR_ID,
   BASE_DAZE_FACTOR_ID,
+  BASE_DECIBEL_GENERATION_FACTOR_ID,
   BASE_ENERGY_GENERATION_FACTOR_ID,
   DAZE_DEALT_FACTOR_ID,
   DAZE_TAKEN_FACTOR_ID,
+  DECIBEL_GENERATION_FORMULA_ID,
+  DECIBEL_GENERATION_RATE_FACTOR_ID,
+  DEFAULT_ACCOMPANYING_DECIBEL_GENERATION_RATE_FACTOR_INPUT,
   DEFAULT_ADRENALINE_GENERATION_RATE_FACTOR_INPUT,
   DEFAULT_ANOMALY_BUILDUP_RATE_FACTOR_INPUT,
   DEFAULT_ANOMALY_CRITICAL_FACTOR_INPUT,
@@ -766,6 +844,7 @@ assert.equal(Object.isFrozen(anomalyDamageResult.factorResults), true)
   DEFAULT_DAMAGE_TAKEN_FACTOR_INPUT,
   DEFAULT_DAZE_DEALT_FACTOR_INPUT,
   DEFAULT_DAZE_TAKEN_FACTOR_INPUT,
+  DEFAULT_DECIBEL_GENERATION_RATE_FACTOR_INPUT,
   DEFAULT_DEFENSE_FACTOR_INPUT,
   DEFAULT_DISORDER_DAZE_DEALT_FACTOR_INPUT,
   DEFAULT_DISORDER_DAZE_MULTIPLIER,
@@ -779,6 +858,7 @@ assert.equal(Object.isFrozen(anomalyDamageResult.factorResults), true)
   ENERGY_GENERATION_FORMULA_ID,
   ENERGY_GENERATION_RATE_FACTOR_ID,
   REGULAR_DAZE_FORMULA_ID,
+  accompanyingDecibelGenerationRateFactor,
   adrenalineGenerationFormula,
   adrenalineGenerationRateFactor,
   anomalyBuildupFormula,
@@ -793,6 +873,7 @@ assert.equal(Object.isFrozen(anomalyDamageResult.factorResults), true)
   baseAnomalyBuildupFactor,
   baseDamageFactor,
   baseDazeFactor,
+  baseDecibelGenerationFactor,
   baseEnergyGenerationFactor,
   calculateFinalStat,
   calculateInitialStat,
@@ -804,6 +885,8 @@ assert.equal(Object.isFrozen(anomalyDamageResult.factorResults), true)
   damageTakenFactor,
   dazeDealtFactor,
   dazeTakenFactor,
+  decibelGenerationFormula,
+  decibelGenerationRateFactor,
   defenseFactor,
   defineFactor,
   defineFormula,
@@ -818,6 +901,7 @@ assert.equal(Object.isFrozen(anomalyDamageResult.factorResults), true)
   sheerDamageBonusFactor,
   sheerDamageFormula,
   stunDamageFactor,
+  type AccompanyingDecibelGenerationRateFactorInput,
   type AdrenalineGenerationFormulaInput,
   type AdrenalineGenerationRateFactorInput,
   type AnomalyBuildupFormulaInput,
@@ -834,6 +918,7 @@ assert.equal(Object.isFrozen(anomalyDamageResult.factorResults), true)
   type BaseDamageFactorInputItem,
   type BaseDazeFactorInput,
   type BaseDazeFactorInputItem,
+  type BaseDecibelGenerationFactorInput,
   type BaseEnergyGenerationFactorInput,
   type CalculateFinalStatParams,
   type CalculateInitialStatParams,
@@ -844,6 +929,8 @@ assert.equal(Object.isFrozen(anomalyDamageResult.factorResults), true)
   type DamageTakenFactorInput,
   type DazeDealtFactorInput,
   type DazeTakenFactorInput,
+  type DecibelGenerationFormulaInput,
+  type DecibelGenerationRateFactorInput,
   type DefenseFactorInput,
   type DisorderDazeDealtFactorInput,
   type DisorderDazeFormulaInput,
@@ -873,6 +960,10 @@ interface ProductFormulaInput {
   readonly right: number
 }
 
+const accompanyingDecibelGenerationRateFactorId: "accompanying_decibel_generation_rate" =
+  ACCOMPANYING_DECIBEL_GENERATION_RATE_FACTOR_ID
+const defaultAccompanyingDecibelGenerationRateFactorInput: AccompanyingDecibelGenerationRateFactorInput =
+  DEFAULT_ACCOMPANYING_DECIBEL_GENERATION_RATE_FACTOR_INPUT
 const adrenalineGenerationFormulaId: "adrenaline_generation" =
   ADRENALINE_GENERATION_FORMULA_ID
 const adrenalineGenerationRateFactorId: "adrenaline_generation_rate" =
@@ -894,10 +985,18 @@ const baseAdrenalineGenerationFactorId: "base_adrenaline_generation" =
 const baseAnomalyBuildupFactorId: "base_anomaly_buildup" =
   BASE_ANOMALY_BUILDUP_FACTOR_ID
 const baseDazeFactorId: "base_daze" = BASE_DAZE_FACTOR_ID
+const baseDecibelGenerationFactorId: "base_decibel_generation" =
+  BASE_DECIBEL_GENERATION_FACTOR_ID
 const baseEnergyGenerationFactorId: "base_energy_generation" =
   BASE_ENERGY_GENERATION_FACTOR_ID
 const dazeDealtFactorId: "daze_dealt" = DAZE_DEALT_FACTOR_ID
 const dazeTakenFactorId: "daze_taken" = DAZE_TAKEN_FACTOR_ID
+const decibelGenerationFormulaId: "decibel_generation" =
+  DECIBEL_GENERATION_FORMULA_ID
+const decibelGenerationRateFactorId: "decibel_generation_rate" =
+  DECIBEL_GENERATION_RATE_FACTOR_ID
+const defaultDecibelGenerationRateFactorInput: DecibelGenerationRateFactorInput =
+  DEFAULT_DECIBEL_GENERATION_RATE_FACTOR_INPUT
 const disorderDazeDealtFactorId: "disorder_daze_dealt" =
   DISORDER_DAZE_DEALT_FACTOR_ID
 const disorderDazeFormulaId: "disorder_daze" = DISORDER_DAZE_FORMULA_ID
@@ -968,6 +1067,10 @@ const baseAdrenalineGenerationInput: BaseAdrenalineGenerationFactorInput = {
 const adrenalineGenerationRateInput: AdrenalineGenerationRateFactorInput = [
   0.25,
 ]
+const baseDecibelGenerationInput: BaseDecibelGenerationFactorInput = 100
+const decibelGenerationRateInput: DecibelGenerationRateFactorInput = [0.25]
+const accompanyingDecibelGenerationRateInput: AccompanyingDecibelGenerationRateFactorInput =
+  0.5
 const baseAnomalyBuildupInput: BaseAnomalyBuildupFactorInput = 123
 const anomalyBuildupRateInputs: AnomalyBuildupRateFactorInput = [0.25, -0.125]
 const anomalyCriticalInput: AnomalyCriticalFactorInput = {
@@ -1061,6 +1164,11 @@ const adrenalineGenerationInput: AdrenalineGenerationFormulaInput = {
   baseAdrenalineGeneration: baseAdrenalineGenerationInput,
   adrenalineGenerationRate: adrenalineGenerationRateInput,
 }
+const decibelGenerationInput: DecibelGenerationFormulaInput = {
+  baseDecibelGeneration: baseDecibelGenerationInput,
+  decibelGenerationRate: decibelGenerationRateInput,
+  accompanyingDecibelGenerationRate: accompanyingDecibelGenerationRateInput,
+}
 const sheerDamageInput: SheerDamageFormulaInput = {
   baseDamage: baseDamageInputs,
   damageBonus: DEFAULT_DAMAGE_BONUS_FACTOR_INPUT,
@@ -1091,6 +1199,8 @@ const anomalyDamageInput: AnomalyDamageFormulaInput = {
 
 factor.calculate({ values: [2, 3] })
 formulaFactorResults.left
+accompanyingDecibelGenerationRateFactorId
+defaultAccompanyingDecibelGenerationRateFactorInput
 adrenalineGenerationFormulaId
 adrenalineGenerationRateFactorId
 anomalyBuildupFormulaId
@@ -1104,9 +1214,13 @@ anomalyProficiencyFactorId
 baseAdrenalineGenerationFactorId
 baseAnomalyBuildupFactorId
 baseDazeFactorId
+baseDecibelGenerationFactorId
 baseEnergyGenerationFactorId
 dazeDealtFactorId
 dazeTakenFactorId
+decibelGenerationFormulaId
+decibelGenerationRateFactorId
+defaultDecibelGenerationRateFactorInput
 disorderDazeDealtFactorId
 disorderDazeFormulaId
 disorderDazeLevelFactorId
@@ -1131,6 +1245,17 @@ baseAdrenalineGenerationFactor.calculate(baseAdrenalineGenerationInput)
 adrenalineGenerationRateFactor.calculate(adrenalineGenerationRateInput)
 adrenalineGenerationRateFactor.calculate(
   DEFAULT_ADRENALINE_GENERATION_RATE_FACTOR_INPUT,
+)
+baseDecibelGenerationFactor.calculate(baseDecibelGenerationInput)
+decibelGenerationRateFactor.calculate(decibelGenerationRateInput)
+decibelGenerationRateFactor.calculate(
+  DEFAULT_DECIBEL_GENERATION_RATE_FACTOR_INPUT,
+)
+accompanyingDecibelGenerationRateFactor.calculate(
+  accompanyingDecibelGenerationRateInput,
+)
+accompanyingDecibelGenerationRateFactor.calculate(
+  DEFAULT_ACCOMPANYING_DECIBEL_GENERATION_RATE_FACTOR_INPUT,
 )
 baseDamageFactor.calculate(baseDamageInputs)
 baseDazeFactor.calculate(baseDazeInputs)
@@ -1159,6 +1284,7 @@ regularDazeFormula.calculate(regularDazeInput)
 disorderDazeFormula.calculate(disorderDazeInput)
 energyGenerationFormula.calculate(energyGenerationInput)
 adrenalineGenerationFormula.calculate(adrenalineGenerationInput)
+decibelGenerationFormula.calculate(decibelGenerationInput)
 sheerDamageFormula.calculate(sheerDamageInput)
 anomalyBuildupFormula.calculate(anomalyBuildupInput)
 anomalyDamageFormula.calculate(anomalyDamageInput)
