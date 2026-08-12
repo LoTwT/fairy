@@ -134,6 +134,51 @@ Nanoka 原始数据中的 `rp_recover`、`rp_recovery` 等字段属于数据层�
 建立的规范化标识。Nanoka 3.1 没有为整体喧响值回复提供固定英文标签，相关描述会依句式使用 `generate`、
 `gain`、`recover` 或 `restore Decibels`。
 
+### 秽盾相关术语
+
+秽盾相关术语以 Nanoka 3.1 中同一路径的中英文游戏文本为依据：
+
+- `Miasmic Shield` 对应“秽盾”，同一段文本还使用 `Miasmic Field` 对应“秽浊流界”，见
+  [英文数据](../../../packages/data/raw/nanoka/3.1/en/monster/40000.json#L1503)与
+  [中文数据](../../../packages/data/raw/nanoka/3.1/zh/monster/40000.json#L1503)；
+- 自由文案中的 `reduces Miasma Shield 30% faster` 对应“造成的秽息盾削减值提升 30%”，见
+  [英文数据](../../../packages/data/raw/nanoka/3.1/en/boss/690431.json#L867)与
+  [中文数据](../../../packages/data/raw/nanoka/3.1/zh/boss/690431.json#L867)；
+- `the reduction efficiency of Miasmic Shield` 对应“秽盾被削减效率”，见
+  [英文数据](../../../packages/data/raw/nanoka/3.1/en/boss/69025.json#L957)与
+  [中文数据](../../../packages/data/raw/nanoka/3.1/zh/boss/69025.json#L957)；
+- `Miasmic Shield Purification` 对应“秽盾净除”，见
+  [英文数据](../../../packages/data/raw/nanoka/3.1/en/boss/69040.json#L886)与
+  [中文数据](../../../packages/data/raw/nanoka/3.1/zh/boss/69040.json#L886)。
+
+| 中文术语       | 英文标识                          | 规范定义                                                                        | 类别      |
+| -------------- | --------------------------------- | ------------------------------------------------------------------------------- | --------- |
+| 秽盾           | `Miasmic Shield`                  | 敌人持有的特殊防护资源或状态；与代理人获得的普通护盾不是同一概念                | 游戏文本  |
+| 基础秽盾削减值 | `BaseMiasmicShieldReduction`      | core 对一次代理人攻击结算事件在应用效率前采用的基础秽盾削减值建立的规范化标识   | core 模型 |
+| 秽盾削减效率   | `MiasmicShieldReductionRate`      | core 对造成侧适用的秽盾削减效率建立的规范化标识；具体乘区结果包含基础倍率 `1`   | core 模型 |
+| 秽盾被削减效率 | `MiasmicShieldReductionTakenRate` | core 对承受侧适用的秽盾被削减效率建立的规范化标识；具体乘区结果包含基础倍率 `1` | core 模型 |
+| 秽盾削减值     | `MiasmicShieldReduction`          | core 对一次代理人攻击结算事件最终产生的秽盾削减值建立的公式标识                 | core 模型 |
+| 秽盾净除       | `Miasmic Shield Purification`     | 秽盾被打破时触发的独立机制，不表示一次攻击、技能或效果的秽盾削减值              | 游戏文本  |
+
+`Miasmic Shield` 是 Nanoka 3.1 明确使用的游戏术语。`Miasma Shield` 与中文“秽息盾”是描述同一机制的
+自由文案变体，本规范统一使用 `Miasmic Shield` 和“秽盾”，不为变体建立第二组术语。表中的四个
+PascalCase 名称都是 core 根据攻略公式和语义边界建立的规范化标识，不能反向视为游戏提供的固定英文标签。
+
+部分游戏文本还使用 `Miasma purification rate` 对应“秽息净化效率”，见
+[英文数据](../../../packages/data/raw/nanoka/3.1/en/character/1431.json#L16)与
+[中文数据](../../../packages/data/raw/nanoka/3.1/zh/character/1431.json#L16)。该词组是造成侧秽盾削减效率的
+自然语言变体，本规范将其归入 `MiasmicShieldReductionRate`，不为“秽息净化效率”建立第二个乘区。它与
+秽盾被打破时触发的 `Miasmic Shield Purification` 不是同一概念。
+
+`Miasmic Field` 只表示“秽浊流界”。它与秽盾关系密切，但不是本次秽盾削减值公式直接使用的乘区，因此
+当前不为其增加公开 core 标识或公式输入。
+
+Nanoka 原始角色技能数据中的 `ether_purify` 是数据层内部数值字段，见
+[英文数据](../../../packages/data/raw/nanoka/3.1/en/character/1011.json#L1306)与
+[中文数据](../../../packages/data/raw/nanoka/3.1/zh/character/1011.json#L1306)。该字段没有独立格式声明，
+还可能随同一技能的不同展示参数重复出现，不能直接作为 `BaseMiasmicShieldReductionFactorInput`。
+其单位和记录语义由 core 之外的上游契约解释；core 不公开 `etherPurify` 输入。
+
 ### 术语边界
 
 - “公式”只表示常规伤害、贯穿伤害、异常伤害、异常积蓄值等由乘区组成的顶层业务计算。乘区内部的
@@ -245,6 +290,9 @@ export interface Formula<FormulaInput extends object> {
 - 基础喧响值回复产生喧响值点数，没有恒等倍率语义，不公开
   `DEFAULT_BASE_DECIBEL_GENERATION_FACTOR_INPUT`。调用方必须提供本次计算的
   `BaseDecibelGenerationFactorInput`；显式传入 `0` 时结果为 `0`。
+- 基础秽盾削减值产生秽盾削减量，没有恒等倍率语义，不公开
+  `DEFAULT_BASE_MIASMIC_SHIELD_REDUCTION_FACTOR_INPUT`。调用方必须提供本次计算的
+  `BaseMiasmicShieldReductionFactorInput`；显式传入 `0` 时结果为 `0`。
 - 紊乱失衡等级区在合法等级范围内不能产生恒等倍率 `1`，不公开
   `DEFAULT_DISORDER_DAZE_LEVEL_FACTOR_INPUT`。调用方必须提供已经完成加权和向下取整的实际虚拟
   代理人等级。
@@ -406,6 +454,12 @@ export function defineFormula<FormulaInput extends object>(
 - [喧响获得效率区](factors/decibel-generation-rate.md)
 - [喧响值伴随获得效率](factors/accompanying-decibel-generation-rate.md)
 
+### 待实现
+
+- [基础秽盾削减值](factors/base-miasmic-shield-reduction.md)
+- [秽盾削减效率区](factors/miasmic-shield-reduction-rate.md)
+- [秽盾被削减效率区](factors/miasmic-shield-reduction-taken-rate.md)
+
 ### 规则边界
 
 - [特殊乘区边界](factors/special.md)
@@ -423,3 +477,7 @@ export function defineFormula<FormulaInput extends object>(
 - [能量回复值](formulas/energy-generation.md)
 - [闪能累积值](formulas/adrenaline-generation.md)
 - [喧响值回复](formulas/decibel-generation.md)
+
+### 待实现
+
+- [秽盾削减值](formulas/miasmic-shield-reduction.md)
