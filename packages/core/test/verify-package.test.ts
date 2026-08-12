@@ -120,6 +120,7 @@ import {
   BASE_DAZE_FACTOR_ID,
   BASE_DECIBEL_GENERATION_FACTOR_ID,
   BASE_ENERGY_GENERATION_FACTOR_ID,
+  BASE_MIASMIC_SHIELD_REDUCTION_FACTOR_ID,
   CRITICAL_FACTOR_ID,
   DAMAGE_BONUS_FACTOR_ID,
   DAMAGE_TAKEN_FACTOR_ID,
@@ -145,6 +146,8 @@ import {
   DEFAULT_DISORDER_DAZE_DEALT_FACTOR_INPUT,
   DEFAULT_DISORDER_DAZE_MULTIPLIER,
   DEFAULT_ENERGY_GENERATION_RATE_FACTOR_INPUT,
+  DEFAULT_MIASMIC_SHIELD_REDUCTION_RATE_FACTOR_INPUT,
+  DEFAULT_MIASMIC_SHIELD_REDUCTION_TAKEN_RATE_FACTOR_INPUT,
   DEFAULT_RESISTANCE_FACTOR_INPUT,
   DEFAULT_SHEER_DAMAGE_BONUS_FACTOR_INPUT,
   DEFAULT_STUN_DAMAGE_FACTOR_INPUT,
@@ -154,6 +157,9 @@ import {
   DISORDER_DAZE_LEVEL_FACTOR_ID,
   ENERGY_GENERATION_FORMULA_ID,
   ENERGY_GENERATION_RATE_FACTOR_ID,
+  MIASMIC_SHIELD_REDUCTION_FORMULA_ID,
+  MIASMIC_SHIELD_REDUCTION_RATE_FACTOR_ID,
+  MIASMIC_SHIELD_REDUCTION_TAKEN_RATE_FACTOR_ID,
   REGULAR_DAMAGE_FORMULA_ID,
   REGULAR_DAZE_FORMULA_ID,
   RESISTANCE_FACTOR_ID,
@@ -177,6 +183,7 @@ import {
   baseDazeFactor,
   baseDecibelGenerationFactor,
   baseEnergyGenerationFactor,
+  baseMiasmicShieldReductionFactor,
   calculateFinalStat,
   calculateInitialStat,
   calculateDefenseLevelBase,
@@ -197,6 +204,9 @@ import {
   disorderDazeLevelFactor,
   energyGenerationFormula,
   energyGenerationRateFactor,
+  miasmicShieldReductionFormula,
+  miasmicShieldReductionRateFactor,
+  miasmicShieldReductionTakenRateFactor,
   regularDamageFormula,
   regularDazeFormula,
   resistanceFactor,
@@ -446,6 +456,60 @@ assert.equal(
     DEFAULT_ACCOMPANYING_DECIBEL_GENERATION_RATE_FACTOR_INPUT,
   ),
   1,
+)
+assert.equal(
+  BASE_MIASMIC_SHIELD_REDUCTION_FACTOR_ID,
+  "base_miasmic_shield_reduction",
+)
+assert.equal(
+  baseMiasmicShieldReductionFactor.factorId,
+  BASE_MIASMIC_SHIELD_REDUCTION_FACTOR_ID,
+)
+assert.equal(baseMiasmicShieldReductionFactor.calculate(100), 100)
+assert.equal(
+  MIASMIC_SHIELD_REDUCTION_RATE_FACTOR_ID,
+  "miasmic_shield_reduction_rate",
+)
+assert.equal(
+  miasmicShieldReductionRateFactor.factorId,
+  MIASMIC_SHIELD_REDUCTION_RATE_FACTOR_ID,
+)
+assert.equal(miasmicShieldReductionRateFactor.calculate([0.25, -0.125]), 1.125)
+assert.equal(
+  miasmicShieldReductionRateFactor.calculate(
+    DEFAULT_MIASMIC_SHIELD_REDUCTION_RATE_FACTOR_INPUT,
+  ),
+  1,
+)
+assert.equal(
+  Object.isFrozen(DEFAULT_MIASMIC_SHIELD_REDUCTION_RATE_FACTOR_INPUT),
+  true,
+)
+assert.equal(
+  MIASMIC_SHIELD_REDUCTION_TAKEN_RATE_FACTOR_ID,
+  "miasmic_shield_reduction_taken_rate",
+)
+assert.equal(
+  miasmicShieldReductionTakenRateFactor.factorId,
+  MIASMIC_SHIELD_REDUCTION_TAKEN_RATE_FACTOR_ID,
+)
+assert.equal(
+  miasmicShieldReductionTakenRateFactor.calculate([0.25, -0.125]),
+  1.125,
+)
+assert.equal(
+  miasmicShieldReductionTakenRateFactor.calculate(
+    DEFAULT_MIASMIC_SHIELD_REDUCTION_TAKEN_RATE_FACTOR_INPUT,
+  ),
+  1,
+)
+assert.equal(
+  Object.isFrozen(DEFAULT_MIASMIC_SHIELD_REDUCTION_TAKEN_RATE_FACTOR_INPUT),
+  true,
+)
+assert.notEqual(
+  DEFAULT_MIASMIC_SHIELD_REDUCTION_RATE_FACTOR_INPUT,
+  DEFAULT_MIASMIC_SHIELD_REDUCTION_TAKEN_RATE_FACTOR_INPUT,
 )
 assert.equal(DAMAGE_BONUS_FACTOR_ID, "damage_bonus")
 assert.equal(damageBonusFactor.factorId, DAMAGE_BONUS_FACTOR_ID)
@@ -737,6 +801,30 @@ assert.deepEqual(decibelGenerationResult.factorResults, {
 })
 assert.equal(Object.isFrozen(decibelGenerationResult), true)
 assert.equal(Object.isFrozen(decibelGenerationResult.factorResults), true)
+assert.equal(
+  MIASMIC_SHIELD_REDUCTION_FORMULA_ID,
+  "miasmic_shield_reduction",
+)
+assert.equal(
+  miasmicShieldReductionFormula.formulaId,
+  MIASMIC_SHIELD_REDUCTION_FORMULA_ID,
+)
+const miasmicShieldReductionResult = miasmicShieldReductionFormula.calculate({
+  baseMiasmicShieldReduction: 100,
+  miasmicShieldReductionRate: [0.25],
+  miasmicShieldReductionTakenRate: [0.5],
+})
+assert.equal(miasmicShieldReductionResult.value, 187.5)
+assert.deepEqual(miasmicShieldReductionResult.factorResults, {
+  baseMiasmicShieldReduction: 100,
+  miasmicShieldReductionRate: 1.25,
+  miasmicShieldReductionTakenRate: 1.5,
+})
+assert.equal(Object.isFrozen(miasmicShieldReductionResult), true)
+assert.equal(
+  Object.isFrozen(miasmicShieldReductionResult.factorResults),
+  true,
+)
 assert.equal(SHEER_DAMAGE_FORMULA_ID, "sheer_damage")
 assert.equal(sheerDamageFormula.formulaId, SHEER_DAMAGE_FORMULA_ID)
 const sheerDamageResult = sheerDamageFormula.calculate({
@@ -827,6 +915,7 @@ assert.equal(Object.isFrozen(anomalyDamageResult.factorResults), true)
   BASE_DAZE_FACTOR_ID,
   BASE_DECIBEL_GENERATION_FACTOR_ID,
   BASE_ENERGY_GENERATION_FACTOR_ID,
+  BASE_MIASMIC_SHIELD_REDUCTION_FACTOR_ID,
   DAZE_DEALT_FACTOR_ID,
   DAZE_TAKEN_FACTOR_ID,
   DECIBEL_GENERATION_FORMULA_ID,
@@ -849,6 +938,8 @@ assert.equal(Object.isFrozen(anomalyDamageResult.factorResults), true)
   DEFAULT_DISORDER_DAZE_DEALT_FACTOR_INPUT,
   DEFAULT_DISORDER_DAZE_MULTIPLIER,
   DEFAULT_ENERGY_GENERATION_RATE_FACTOR_INPUT,
+  DEFAULT_MIASMIC_SHIELD_REDUCTION_RATE_FACTOR_INPUT,
+  DEFAULT_MIASMIC_SHIELD_REDUCTION_TAKEN_RATE_FACTOR_INPUT,
   DEFAULT_RESISTANCE_FACTOR_INPUT,
   DEFAULT_SHEER_DAMAGE_BONUS_FACTOR_INPUT,
   DEFAULT_STUN_DAMAGE_FACTOR_INPUT,
@@ -857,6 +948,9 @@ assert.equal(Object.isFrozen(anomalyDamageResult.factorResults), true)
   DISORDER_DAZE_LEVEL_FACTOR_ID,
   ENERGY_GENERATION_FORMULA_ID,
   ENERGY_GENERATION_RATE_FACTOR_ID,
+  MIASMIC_SHIELD_REDUCTION_FORMULA_ID,
+  MIASMIC_SHIELD_REDUCTION_RATE_FACTOR_ID,
+  MIASMIC_SHIELD_REDUCTION_TAKEN_RATE_FACTOR_ID,
   REGULAR_DAZE_FORMULA_ID,
   accompanyingDecibelGenerationRateFactor,
   adrenalineGenerationFormula,
@@ -875,6 +969,7 @@ assert.equal(Object.isFrozen(anomalyDamageResult.factorResults), true)
   baseDazeFactor,
   baseDecibelGenerationFactor,
   baseEnergyGenerationFactor,
+  baseMiasmicShieldReductionFactor,
   calculateFinalStat,
   calculateInitialStat,
   calculateDefenseLevelBase,
@@ -895,6 +990,9 @@ assert.equal(Object.isFrozen(anomalyDamageResult.factorResults), true)
   disorderDazeLevelFactor,
   energyGenerationFormula,
   energyGenerationRateFactor,
+  miasmicShieldReductionFormula,
+  miasmicShieldReductionRateFactor,
+  miasmicShieldReductionTakenRateFactor,
   regularDamageFormula,
   regularDazeFormula,
   resistanceFactor,
@@ -920,6 +1018,7 @@ assert.equal(Object.isFrozen(anomalyDamageResult.factorResults), true)
   type BaseDazeFactorInputItem,
   type BaseDecibelGenerationFactorInput,
   type BaseEnergyGenerationFactorInput,
+  type BaseMiasmicShieldReductionFactorInput,
   type CalculateFinalStatParams,
   type CalculateInitialStatParams,
   type CalculateTargetBaseDefenseParams,
@@ -943,6 +1042,9 @@ assert.equal(Object.isFrozen(anomalyDamageResult.factorResults), true)
   type FormulaFactorResults,
   type FormulaParams,
   type FormulaResult,
+  type MiasmicShieldReductionFormulaInput,
+  type MiasmicShieldReductionRateFactorInput,
+  type MiasmicShieldReductionTakenRateFactorInput,
   type RegularDamageFormulaInput,
   type RegularDazeFormulaInput,
   type ResistanceFactorInput,
@@ -989,6 +1091,8 @@ const baseDecibelGenerationFactorId: "base_decibel_generation" =
   BASE_DECIBEL_GENERATION_FACTOR_ID
 const baseEnergyGenerationFactorId: "base_energy_generation" =
   BASE_ENERGY_GENERATION_FACTOR_ID
+const baseMiasmicShieldReductionFactorId: "base_miasmic_shield_reduction" =
+  BASE_MIASMIC_SHIELD_REDUCTION_FACTOR_ID
 const dazeDealtFactorId: "daze_dealt" = DAZE_DEALT_FACTOR_ID
 const dazeTakenFactorId: "daze_taken" = DAZE_TAKEN_FACTOR_ID
 const decibelGenerationFormulaId: "decibel_generation" =
@@ -1007,6 +1111,16 @@ const energyGenerationFormulaId: "energy_generation" =
   ENERGY_GENERATION_FORMULA_ID
 const energyGenerationRateFactorId: "energy_generation_rate" =
   ENERGY_GENERATION_RATE_FACTOR_ID
+const miasmicShieldReductionFormulaId: "miasmic_shield_reduction" =
+  MIASMIC_SHIELD_REDUCTION_FORMULA_ID
+const miasmicShieldReductionRateFactorId: "miasmic_shield_reduction_rate" =
+  MIASMIC_SHIELD_REDUCTION_RATE_FACTOR_ID
+const defaultMiasmicShieldReductionRateFactorInput: MiasmicShieldReductionRateFactorInput =
+  DEFAULT_MIASMIC_SHIELD_REDUCTION_RATE_FACTOR_INPUT
+const miasmicShieldReductionTakenRateFactorId: "miasmic_shield_reduction_taken_rate" =
+  MIASMIC_SHIELD_REDUCTION_TAKEN_RATE_FACTOR_ID
+const defaultMiasmicShieldReductionTakenRateFactorInput: MiasmicShieldReductionTakenRateFactorInput =
+  DEFAULT_MIASMIC_SHIELD_REDUCTION_TAKEN_RATE_FACTOR_INPUT
 const regularDazeFormulaId: "regular_daze" = REGULAR_DAZE_FORMULA_ID
 const params: FactorParams<SumFactorInput> = {
   factorId: "draft-sum",
@@ -1071,6 +1185,12 @@ const baseDecibelGenerationInput: BaseDecibelGenerationFactorInput = 100
 const decibelGenerationRateInput: DecibelGenerationRateFactorInput = [0.25]
 const accompanyingDecibelGenerationRateInput: AccompanyingDecibelGenerationRateFactorInput =
   0.5
+const baseMiasmicShieldReductionInput: BaseMiasmicShieldReductionFactorInput =
+  100
+const miasmicShieldReductionRateInput: MiasmicShieldReductionRateFactorInput =
+  [0.25]
+const miasmicShieldReductionTakenRateInput: MiasmicShieldReductionTakenRateFactorInput =
+  [0.5]
 const baseAnomalyBuildupInput: BaseAnomalyBuildupFactorInput = 123
 const anomalyBuildupRateInputs: AnomalyBuildupRateFactorInput = [0.25, -0.125]
 const anomalyCriticalInput: AnomalyCriticalFactorInput = {
@@ -1169,6 +1289,11 @@ const decibelGenerationInput: DecibelGenerationFormulaInput = {
   decibelGenerationRate: decibelGenerationRateInput,
   accompanyingDecibelGenerationRate: accompanyingDecibelGenerationRateInput,
 }
+const miasmicShieldReductionInput: MiasmicShieldReductionFormulaInput = {
+  baseMiasmicShieldReduction: baseMiasmicShieldReductionInput,
+  miasmicShieldReductionRate: miasmicShieldReductionRateInput,
+  miasmicShieldReductionTakenRate: miasmicShieldReductionTakenRateInput,
+}
 const sheerDamageInput: SheerDamageFormulaInput = {
   baseDamage: baseDamageInputs,
   damageBonus: DEFAULT_DAMAGE_BONUS_FACTOR_INPUT,
@@ -1216,6 +1341,7 @@ baseAnomalyBuildupFactorId
 baseDazeFactorId
 baseDecibelGenerationFactorId
 baseEnergyGenerationFactorId
+baseMiasmicShieldReductionFactorId
 dazeDealtFactorId
 dazeTakenFactorId
 decibelGenerationFormulaId
@@ -1227,6 +1353,11 @@ disorderDazeLevelFactorId
 defaultDisorderDazeMultiplier
 energyGenerationFormulaId
 energyGenerationRateFactorId
+miasmicShieldReductionFormulaId
+miasmicShieldReductionRateFactorId
+defaultMiasmicShieldReductionRateFactorInput
+miasmicShieldReductionTakenRateFactorId
+defaultMiasmicShieldReductionTakenRateFactorInput
 regularDazeFormulaId
 baseAnomalyBuildupFactor.calculate(baseAnomalyBuildupInput)
 anomalyBuildupRateFactor.calculate(anomalyBuildupRateInputs)
@@ -1260,9 +1391,20 @@ accompanyingDecibelGenerationRateFactor.calculate(
 baseDamageFactor.calculate(baseDamageInputs)
 baseDazeFactor.calculate(baseDazeInputs)
 baseEnergyGenerationFactor.calculate(baseEnergyGenerationInput)
+baseMiasmicShieldReductionFactor.calculate(baseMiasmicShieldReductionInput)
 energyGenerationRateFactor.calculate(energyGenerationRateInput)
 energyGenerationRateFactor.calculate(
   DEFAULT_ENERGY_GENERATION_RATE_FACTOR_INPUT,
+)
+miasmicShieldReductionRateFactor.calculate(miasmicShieldReductionRateInput)
+miasmicShieldReductionRateFactor.calculate(
+  DEFAULT_MIASMIC_SHIELD_REDUCTION_RATE_FACTOR_INPUT,
+)
+miasmicShieldReductionTakenRateFactor.calculate(
+  miasmicShieldReductionTakenRateInput,
+)
+miasmicShieldReductionTakenRateFactor.calculate(
+  DEFAULT_MIASMIC_SHIELD_REDUCTION_TAKEN_RATE_FACTOR_INPUT,
 )
 criticalFactor.calculate(criticalInputs)
 damageBonusFactor.calculate(damageBonusInputs)
@@ -1285,6 +1427,7 @@ disorderDazeFormula.calculate(disorderDazeInput)
 energyGenerationFormula.calculate(energyGenerationInput)
 adrenalineGenerationFormula.calculate(adrenalineGenerationInput)
 decibelGenerationFormula.calculate(decibelGenerationInput)
+miasmicShieldReductionFormula.calculate(miasmicShieldReductionInput)
 sheerDamageFormula.calculate(sheerDamageInput)
 anomalyBuildupFormula.calculate(anomalyBuildupInput)
 anomalyDamageFormula.calculate(anomalyDamageInput)
