@@ -152,7 +152,9 @@ return { value, factorResults }
 调用方必须在调用公式前完成以下输入准备：
 
 - `baseDamage` 应按本次异常效果的基础伤害表达式建立；普通异常伤害使用虚拟代理人的加权攻击力与
-  对应异常伤害倍率，特殊基础伤害调整仍由调用方在该字段中表达；
+  对应异常伤害倍率，普通紊乱可以使用本规范的
+  [`calculateStandardDisorderDamageMultiplier`](#紊乱标准伤害倍率配套计算) 建立伤害倍率，特殊基础伤害
+  调整仍由调用方在该字段中表达；
 - `damageBonus` 应使增伤区结果等于积蓄时对当次攻击所记录的增伤区加权结果，不使用结算时当前
   代理人的通用增伤；
 - `anomalyProficiency` 使用虚拟代理人的加权异常精通，`anomalyDamageLevel` 使用虚拟代理人加权后
@@ -173,6 +175,169 @@ return { value, factorResults }
 
 攻略还会为其他结算记录冲击力和失衡值提升，但二者不是异常伤害公式的乘区，不能因此向
 `AnomalyDamageFormulaInput` 增加字段。
+
+## 紊乱标准伤害倍率配套计算
+
+[原始攻略中的紊乱伤害倍率规则](../../../references/zzz-data-introduction.txt#L279-L292)根据被覆盖的原异常
+状态所属属性和该状态剩余持续时间，计算普通紊乱基础伤害区采用的标准伤害倍率。该计算具有独立、稳定
+的输入与算法，因此由公开 helper 统一维护，不建立额外 `Factor` 或 `Formula`。
+
+Nanoka 3.1 游戏文本使用 `Disorder DMG Multiplier` 表示“紊乱效果的伤害倍率”，见
+[英文文本](../../../../packages/data/raw/nanoka/3.1/en/character/1411.json#L2153)与
+[中文文本](../../../../packages/data/raw/nanoka/3.1/zh/character/1411.json#L2153)。公开函数名将 `DMG`
+展开为 `Damage`，`StandardDisorderDamageMultiplier` 则是 core 为区分标准倍率与特殊效果调整建立的范围
+标识，不表示游戏文本提供了完整的同名英文词组。
+
+### 公开契约
+
+```ts
+export type DisorderSourceAttribute =
+  "fire" | "electric" | "ether" | "ice" | "physical" | "auric_ink" | "frost"
+
+export interface CalculateStandardDisorderDamageMultiplierParams {
+  readonly originalAnomalyAttribute: DisorderSourceAttribute
+  readonly remainingAnomalyDurationInSeconds: number
+}
+
+/** 根据原异常属性与剩余持续时间计算普通紊乱的标准伤害倍率。 */
+export declare function calculateStandardDisorderDamageMultiplier(
+  params: CalculateStandardDisorderDamageMultiplierParams,
+): number
+```
+
+`DisorderSourceAttribute` 是本 helper 已确认支持的原异常来源属性闭集，不是所有游戏属性的通用枚举。
+各公开值对应以下游戏术语：
+
+| 公开值      | 原异常来源属性    | 原异常状态        | 术语说明                                                             |
+| ----------- | ----------------- | ----------------- | -------------------------------------------------------------------- |
+| `fire`      | Fire / 火属性     | Burn / 灼烧       | 基础属性                                                             |
+| `electric`  | Electric / 电属性 | Shock / 感电      | 基础属性                                                             |
+| `ether`     | Ether / 以太      | Corruption / 侵蚀 | 基础属性                                                             |
+| `ice`       | Ice / 冰属性      | Frostbite / 霜寒  | 基础属性                                                             |
+| `physical`  | Physical / 物理   | Flinch / 畏缩     | 基础属性；本规则按持续状态“畏缩”计算，不使用瞬时“强击”作为判别值     |
+| `auric_ink` | Auric Ink / 玄墨  | Corruption / 侵蚀 | 特殊属性，游戏文本确认其基于以太结算，但仍保留独立公式分支           |
+| `frost`     | Frost / 烈霜      | Frostbite / 霜寒  | 特殊属性，游戏文本确认其基于冰属性结算，但其紊乱倍率公式不同于冰属性 |
+
+`Auric Ink` 和 `Frost` 的游戏中英文对照分别见 Nanoka 3.1 的
+[玄墨英文数据](../../../../packages/data/raw/nanoka/3.1/en/character/1371.json#L14-L16)、
+[玄墨中文数据](../../../../packages/data/raw/nanoka/3.1/zh/character/1371.json#L14-L16)、
+[烈霜英文数据](../../../../packages/data/raw/nanoka/3.1/en/character/1091.json#L14-L16)与
+[烈霜中文数据](../../../../packages/data/raw/nanoka/3.1/zh/character/1091.json#L14-L16)。`auric_ink` 使用不含空格
+和特殊空白字符的稳定机器值，不直接复制原始数据中的富文本或空白形式。
+
+`originalAnomalyAttribute` 表示被新异常覆盖并据此结算紊乱的原异常来源属性，不是触发紊乱的新异常
+属性。不能只传原异常状态名称：以太与玄墨都会产生侵蚀，冰与烈霜都会产生霜寒，但同名状态不一定采用
+相同倍率公式。
+
+`remainingAnomalyDurationInSeconds` 表示原异常状态在紊乱结算时剩余的持续时间，单位为秒。调用方应在
+原异常状态被覆盖前取得该值，并已经计入实际生效的持续时间延长效果；它不是异常的初始持续时间、已经
+经过的时间或紊乱自身持续时间。
+
+### 计算规则
+
+设 `T = remainingAnomalyDurationInSeconds`。百分比常量先转换为小数，按来源属性采用以下规则：
+
+| `originalAnomalyAttribute` | 标准伤害倍率                        |
+| -------------------------- | ----------------------------------- |
+| `fire`                     | `4.5 + Math.floor(T / 0.5) * 0.5`   |
+| `electric`                 | `4.5 + Math.floor(T) * 1.25`        |
+| `ether`                    | `4.5 + Math.floor(T / 0.5) * 0.625` |
+| `ice`                      | `4.5 + Math.floor(T) * 0.075`       |
+| `physical`                 | `4.5 + Math.floor(T) * 0.075`       |
+| `auric_ink`                | `4.5 + Math.floor(T / 0.5) * 0.625` |
+| `frost`                    | `6 + Math.floor(T) * 0.75`          |
+
+返回值已经是可直接参与基础伤害区计算的小数倍率，例如 `450%` 返回 `4.5`，不额外加上基础值 `1`。函数不
+对最终倍率取整、截断或钳制。
+
+计算严格使用 JavaScript `number` 的 IEEE 754 语义和 `Math.floor`。`T / 0.5`、向下取整、乘法和最终
+加法保持表中顺序，不引入 epsilon，不把表达式改写为按帧计算，也不根据显示精度修正结果。
+
+攻略给出的普通异常初始持续时间通常为 `10` 秒，烈霜异常为 `20` 秒，但两者都不是 helper 的默认输入
+或上限。持续时间可以被效果延长，因此函数接收实际剩余时间，不提供默认参数，也不把输入钳制到初始
+持续时间。
+
+按攻略给出的初始持续时间计算时，代表性结果如下：
+
+| 原异常来源属性 | `T` | 标准伤害倍率 |
+| -------------- | --- | ------------ |
+| 火             | 10  | `14.5`       |
+| 电             | 10  | `17`         |
+| 以太           | 10  | `17`         |
+| 冰             | 10  | `5.25`       |
+| 物理           | 10  | `5.25`       |
+| 玄墨           | 10  | `17`         |
+| 烈霜           | 20  | `21`         |
+
+### 与基础伤害区和异常伤害公式的组合
+
+helper 只返回一个 `damageMultiplier` 数值，不建立或返回 `BaseDamageFactorInputItem`。普通紊乱调用方应将
+它与原异常状态虚拟代理人的最终攻击力显式组合，再作为现有异常伤害公式的 `baseDamage` 输入：
+
+```ts
+const damageMultiplier = calculateStandardDisorderDamageMultiplier({
+  originalAnomalyAttribute: "fire",
+  remainingAnomalyDurationInSeconds: 10,
+})
+
+const baseDamage: BaseDamageFactorInput = [
+  { damageMultiplier, finalStat: virtualAgentFinalAttack },
+]
+```
+
+调用方再将 `baseDamage` 与其他九个必填乘区输入组成完整的 `AnomalyDamageFormulaInput`。
+`anomalyDamageFormula.calculate` 不会隐式调用本 helper，也不会从公式输入中读取异常属性或剩余持续
+时间。
+
+游戏文本还存在使 `Disorder DMG Multiplier` 提升的效果。本 helper 只计算攻略表中由来源属性与 `T`
+决定的标准倍率，不接收、汇总或应用这类特殊调整；调用方只有在已经确认调整的叠加方式与适用范围后，
+才能建立最终 `BaseDamageFactorInputItem.damageMultiplier`。特殊紊乱可以在自身规则明确复用普通紊乱标准
+倍率时采用本 helper 的结果，但本 helper 不应用极性紊乱等特殊效果的结算比例或额外基础伤害项。
+
+### 适用边界
+
+本 helper 不负责：
+
+- 判断两种属性异常是否会触发紊乱，或处理原异常覆盖、紊乱冷却与状态生命周期；
+- 读取异常状态对象、计时器、帧数、Nanoka 数据或效果文本；
+- 判断持续时间延长、伤害倍率调整和异常效果标签是否适用于本次结算；
+- 建立虚拟代理人、计算最终攻击力或生成完整 `AnomalyDamageFormulaInput`；
+- 计算极性紊乱、异放或其他特殊效果的完整基础伤害；
+- 计算紊乱失衡值、最终异常伤害或显示取整结果。
+
+### 有效性与失败行为
+
+| 失败条件                                                   | 行为              |
+| ---------------------------------------------------------- | ----------------- |
+| 参数不是非数组对象或为 `null`                              | 抛出 `TypeError`  |
+| `originalAnomalyAttribute` 不是字符串                      | 抛出 `TypeError`  |
+| `originalAnomalyAttribute` 不在七个受支持的公开值中        | 抛出 `RangeError` |
+| `remainingAnomalyDurationInSeconds` 不是 `number`          | 抛出 `TypeError`  |
+| `remainingAnomalyDurationInSeconds` 不是有限数值或小于 `0` | 抛出 `RangeError` |
+| 最终标准伤害倍率不是有限数值                               | 抛出 `RangeError` |
+
+`remainingAnomalyDurationInSeconds: 0` 有效。该值表示原异常在阶梯计算中不再贡献剩余时间项，仍会返回
+对应属性公式的常量部分。参数对象不得被修改。
+
+### 待确认：风属性与凛刃异常的反应边界
+
+Nanoka 3.1 已出现 `Wind Anomaly` / “风属性异常状态”，见
+[英文数据](../../../../packages/data/raw/nanoka/3.1/en/character/1541.json#L1359)与
+[中文数据](../../../../packages/data/raw/nanoka/3.1/zh/character/1541.json#L1359)。另有同路径文本明确写出目标
+处于 `Windswept` / “风化”时，被施加其他属性异常会触发 `Vortex` / “乱流”，见
+[英文数据](../../../../packages/data/raw/nanoka/3.1/en/monster/40005.json#L1006)与
+[中文数据](../../../../packages/data/raw/nanoka/3.1/zh/monster/40005.json#L1006)。当前攻略没有说明风属性异常
+是否还参与普通紊乱，也没有提供对应的紊乱伤害倍率公式。
+
+Nanoka 3.1 还确认 `Honed Edge` / “凛刃属性”基于物理属性结算，并触发 `Assault` / “强击”与
+`Flinch` / “畏缩”，见[英文数据](../../../../packages/data/raw/nanoka/3.1/en/character/1431.json#L14-L16)与
+[中文数据](../../../../packages/data/raw/nanoka/3.1/zh/character/1431.json#L14-L16)。攻略只给出了物理属性造成
+的畏缩公式，没有说明凛刃是否直接采用同一紊乱倍率，因此当前不能把凛刃静默映射为 `physical`。
+
+`DisorderSourceAttribute` 因此暂不包含 `wind` 或 `honed_edge`，运行时传入 `"wind"` 或 `"honed_edge"`
+必须按不受支持的属性抛出 `RangeError`，不能复用其他属性公式进行推断。最终 review 时需要人工确认风属性
+异常与普通紊乱、乱流之间的机制边界，以及凛刃是否采用物理属性的紊乱倍率；只有取得对应普通紊乱适用
+证据与倍率公式后，才能扩展公开联合类型和计算分支。
 
 ## 取整边界
 
@@ -199,8 +364,8 @@ return { value, factorResults }
 
 攻略确认紊乱仍采用同一套异常伤害乘区；异放和极性紊乱也通过调整基础伤害区进行结算。因此调用方
 已经正确建立全部乘区输入时，可以使用同一个 `anomalyDamageFormula`。公式不增加用于区分这些异常
-效果的模式字段或异常类型字段，也不负责根据持续时间、异常类型或效果标签计算基础伤害倍率及结算
-比例。
+效果的模式字段或异常类型字段，也不在 `calculate` 内根据持续时间、异常类型或效果标签隐式计算基础
+伤害倍率及结算比例。普通紊乱的标准伤害倍率可以由本规范的配套 helper 显式计算后传入基础伤害区。
 
 特殊机制是否允许本公式完整计算，统一遵循[特殊乘区规范](../factors/special.md)。
 `AnomalyDamageFormulaInput` 不包含特殊乘区输入或占位字段。
@@ -228,9 +393,10 @@ return { value, factorResults }
 
 ## 代码组织
 
-通用 `Formula` 类型与 `defineFormula` 统一放在 `packages/core/src/formula.ts`。异常伤害公式的生产代码
-放在 `packages/core/src/formulas/anomaly-damage.ts`，只包含身份常量、输入类型和公式定义，不重复实现
-任何乘区算法，也不包含虚拟代理人输入准备逻辑。
+通用 `Formula` 类型与 `defineFormula` 统一放在 `packages/core/src/formula.ts`。异常伤害公式及其紊乱标准
+伤害倍率配套计算的生产代码放在 `packages/core/src/formulas/anomaly-damage.ts`。该文件可以包含 helper
+公开类型、公开函数及其私有分支规则，但不重复实现任何乘区算法，也不包含虚拟代理人输入准备逻辑。
 
-`packages/core/src/index.ts` 只负责重新导出公开 API。异常伤害公式使用独立测试文件，打包验证必须覆盖
-新增的公开输入类型、身份常量和公式定义。
+`packages/core/src/index.ts` 只负责重新导出公开 API。异常伤害公式及其配套 helper 使用同一个独立测试
+文件；测试必须覆盖七个属性分支、阶梯边界、超过初始持续时间的输入、失败行为、与基础伤害区的组合及
+输入不可变性。打包验证必须覆盖公式与 helper 的公开类型和运行时定义。
