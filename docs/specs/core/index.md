@@ -402,9 +402,6 @@ export function defineFormula<FormulaInput extends object>(
 - [能量获得效率区](factors/energy-generation-rate.md)
 - [闪能累积基础区](factors/base-adrenaline-generation.md)
 - [闪能获得效率区](factors/adrenaline-generation-rate.md)
-
-### 待实现
-
 - [基础喧响值回复](factors/base-decibel-generation.md)
 - [喧响获得效率区](factors/decibel-generation-rate.md)
 - [喧响值伴随获得效率](factors/accompanying-decibel-generation-rate.md)
@@ -425,7 +422,4 @@ export function defineFormula<FormulaInput extends object>(
 - [紊乱失衡值](formulas/disorder-daze.md)
 - [能量回复值](formulas/energy-generation.md)
 - [闪能累积值](formulas/adrenaline-generation.md)
-
-### 待实现
-
 - [喧响值回复](formulas/decibel-generation.md)
