@@ -202,8 +202,13 @@ export type { SheerDamageFormulaInput } from "./formulas/sheer-damage.ts"
 export {
   ANOMALY_DAMAGE_FORMULA_ID,
   anomalyDamageFormula,
+  calculateStandardDisorderDamageMultiplier,
 } from "./formulas/anomaly-damage.ts"
-export type { AnomalyDamageFormulaInput } from "./formulas/anomaly-damage.ts"
+export type {
+  AnomalyDamageFormulaInput,
+  CalculateStandardDisorderDamageMultiplierParams,
+  DisorderSourceAttribute,
+} from "./formulas/anomaly-damage.ts"
 export {
   ANOMALY_BUILDUP_FORMULA_ID,
   anomalyBuildupFormula,

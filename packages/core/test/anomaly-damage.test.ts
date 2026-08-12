@@ -11,15 +11,18 @@ import {
   DEFAULT_RESISTANCE_FACTOR_INPUT,
   DEFAULT_STUN_DAMAGE_FACTOR_INPUT,
   anomalyDamageFormula,
+  calculateStandardDisorderDamageMultiplier,
   type AnomalyCriticalFactorInput,
   type AnomalyDamageBonusFactorInput,
   type AnomalyDamageFormulaInput,
   type AnomalyDamageLevelFactorInput,
   type AnomalyProficiencyFactorInput,
   type BaseDamageFactorInput,
+  type CalculateStandardDisorderDamageMultiplierParams,
   type DamageBonusFactorInput,
   type DamageTakenFactorInput,
   type DefenseFactorInput,
+  type DisorderSourceAttribute,
   type Formula,
   type ResistanceFactorInput,
   type StunDamageFactorInput,
@@ -282,5 +285,206 @@ describe("anomalyDamageFormula", () => {
     }
 
     expect(() => anomalyDamageFormula.calculate(input)).toThrow(RangeError)
+  })
+})
+
+describe("calculateStandardDisorderDamageMultiplier", () => {
+  it("exposes its public parameter and function types", () => {
+    expectTypeOf<DisorderSourceAttribute>().toEqualTypeOf<
+      "fire" | "electric" | "ether" | "ice" | "physical" | "auric_ink" | "frost"
+    >()
+    expectTypeOf<CalculateStandardDisorderDamageMultiplierParams>().toEqualTypeOf<{
+      readonly originalAnomalyAttribute: DisorderSourceAttribute
+      readonly remainingAnomalyDurationInSeconds: number
+    }>()
+    expectTypeOf(calculateStandardDisorderDamageMultiplier).toEqualTypeOf<
+      (params: CalculateStandardDisorderDamageMultiplierParams) => number
+    >()
+  })
+
+  it.each([
+    ["fire", 10, 14.5],
+    ["electric", 10, 17],
+    ["ether", 10, 17],
+    ["ice", 10, 5.25],
+    ["physical", 10, 5.25],
+    ["auric_ink", 10, 17],
+    ["frost", 20, 21],
+  ] as const)(
+    "calculates the %s standard multiplier at a representative duration",
+    (originalAnomalyAttribute, remainingAnomalyDurationInSeconds, expected) => {
+      expect(
+        calculateStandardDisorderDamageMultiplier({
+          originalAnomalyAttribute,
+          remainingAnomalyDurationInSeconds,
+        }),
+      ).toBe(expected)
+    },
+  )
+
+  it.each([
+    ["fire", 0.5 - Number.EPSILON, 4.5],
+    ["fire", 0.5, 5],
+    ["electric", 1 - Number.EPSILON, 4.5],
+    ["electric", 1, 5.75],
+    ["ether", 0.5 - Number.EPSILON, 4.5],
+    ["ether", 0.5, 5.125],
+    ["ice", 1 - Number.EPSILON, 4.5],
+    ["ice", 1, 4.575],
+    ["physical", 1 - Number.EPSILON, 4.5],
+    ["physical", 1, 4.575],
+    ["auric_ink", 0.5 - Number.EPSILON, 4.5],
+    ["auric_ink", 0.5, 5.125],
+    ["frost", 1 - Number.EPSILON, 6],
+    ["frost", 1, 6.75],
+  ] as const)(
+    "preserves the %s duration step at %s seconds",
+    (originalAnomalyAttribute, remainingAnomalyDurationInSeconds, expected) => {
+      expect(
+        calculateStandardDisorderDamageMultiplier({
+          originalAnomalyAttribute,
+          remainingAnomalyDurationInSeconds,
+        }),
+      ).toBe(expected)
+    },
+  )
+
+  it.each([
+    ["fire", 4.5],
+    ["electric", 4.5],
+    ["ether", 4.5],
+    ["ice", 4.5],
+    ["physical", 4.5],
+    ["auric_ink", 4.5],
+    ["frost", 6],
+  ] as const)(
+    "returns the %s constant part when no duration remains",
+    (originalAnomalyAttribute, expected) => {
+      expect(
+        calculateStandardDisorderDamageMultiplier({
+          originalAnomalyAttribute,
+          remainingAnomalyDurationInSeconds: 0,
+        }),
+      ).toBe(expected)
+    },
+  )
+
+  it("uses the actual duration without capping it to the initial duration", () => {
+    expect(
+      calculateStandardDisorderDamageMultiplier({
+        originalAnomalyAttribute: "fire",
+        remainingAnomalyDurationInSeconds: 12,
+      }),
+    ).toBe(16.5)
+    expect(
+      calculateStandardDisorderDamageMultiplier({
+        originalAnomalyAttribute: "frost",
+        remainingAnomalyDurationInSeconds: 25,
+      }),
+    ).toBe(24.75)
+  })
+
+  it("produces a multiplier that composes with the base damage factor", () => {
+    const damageMultiplier = calculateStandardDisorderDamageMultiplier({
+      originalAnomalyAttribute: "fire",
+      remainingAnomalyDurationInSeconds: 10,
+    })
+    const result = anomalyDamageFormula.calculate(
+      createAnomalyDamageInput([{ damageMultiplier, finalStat: 100 }]),
+    )
+
+    expect(result.value).toBe(1_450)
+    expect(result.factorResults.baseDamage).toBe(1_450)
+  })
+
+  it("does not modify its parameter object", () => {
+    const params = Object.freeze({
+      originalAnomalyAttribute: "electric" as const,
+      remainingAnomalyDurationInSeconds: 10,
+    })
+
+    expect(calculateStandardDisorderDamageMultiplier(params)).toBe(17)
+    expect(params).toEqual({
+      originalAnomalyAttribute: "electric",
+      remainingAnomalyDurationInSeconds: 10,
+    })
+    expect(Object.isFrozen(params)).toBe(true)
+  })
+
+  it("rejects parameters that are not non-array objects", () => {
+    const fields = {
+      originalAnomalyAttribute: "fire",
+      remainingAnomalyDurationInSeconds: 10,
+    }
+    const invalidParams = [
+      null,
+      Object.assign([], fields),
+      Object.assign(() => undefined, fields),
+    ]
+
+    for (const params of invalidParams) {
+      expect(() =>
+        calculateStandardDisorderDamageMultiplier(
+          params as unknown as CalculateStandardDisorderDamageMultiplierParams,
+        ),
+      ).toThrow(TypeError)
+    }
+  })
+
+  it.each([undefined, null, 1, true])(
+    "rejects the non-string source attribute %s",
+    (originalAnomalyAttribute) => {
+      expect(() =>
+        calculateStandardDisorderDamageMultiplier({
+          originalAnomalyAttribute,
+          remainingAnomalyDurationInSeconds: 10,
+        } as unknown as CalculateStandardDisorderDamageMultiplierParams),
+      ).toThrow(TypeError)
+    },
+  )
+
+  it.each(["", "wind", "honed_edge", "Fire", "unknown"])(
+    "rejects the unsupported source attribute %s",
+    (originalAnomalyAttribute) => {
+      expect(() =>
+        calculateStandardDisorderDamageMultiplier({
+          originalAnomalyAttribute,
+          remainingAnomalyDurationInSeconds: 10,
+        } as CalculateStandardDisorderDamageMultiplierParams),
+      ).toThrow(RangeError)
+    },
+  )
+
+  it.each([undefined, null, "10", true])(
+    "rejects the non-number remaining duration %s",
+    (remainingAnomalyDurationInSeconds) => {
+      expect(() =>
+        calculateStandardDisorderDamageMultiplier({
+          originalAnomalyAttribute: "fire",
+          remainingAnomalyDurationInSeconds,
+        } as unknown as CalculateStandardDisorderDamageMultiplierParams),
+      ).toThrow(TypeError)
+    },
+  )
+
+  it.each([NaN, Infinity, -Infinity, -1])(
+    "rejects the invalid remaining duration %s",
+    (remainingAnomalyDurationInSeconds) => {
+      expect(() =>
+        calculateStandardDisorderDamageMultiplier({
+          originalAnomalyAttribute: "fire",
+          remainingAnomalyDurationInSeconds,
+        }),
+      ).toThrow(RangeError)
+    },
+  )
+
+  it("rejects a non-finite calculated multiplier", () => {
+    expect(() =>
+      calculateStandardDisorderDamageMultiplier({
+        originalAnomalyAttribute: "fire",
+        remainingAnomalyDurationInSeconds: Number.MAX_VALUE,
+      }),
+    ).toThrow(RangeError)
   })
 })
