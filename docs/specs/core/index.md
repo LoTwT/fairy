@@ -479,6 +479,6 @@ export function defineFormula<FormulaInput extends object>(
 
 ## 公开辅助计算
 
-### 待实现
+### 已实现
 
 - [伤害显示总值](helpers/displayed-damage.md)

@@ -185,6 +185,7 @@ import {
   baseEnergyGenerationFactor,
   baseMiasmicShieldReductionFactor,
   calculateAnomalyTriggerThreshold,
+  calculateTotalDisplayedDamage,
   calculateFinalStat,
   calculateInitialStat,
   calculateStandardDisorderDamageMultiplier,
@@ -243,6 +244,7 @@ assert.deepEqual(formulaResult, {
 assert.equal(Object.isFrozen(formula), true)
 assert.equal(Object.isFrozen(formulaResult), true)
 assert.equal(Object.isFrozen(formulaResult.factorResults), true)
+assert.equal(calculateTotalDisplayedDamage([10.2, 20.1]), 32)
 const initialStat = calculateInitialStat({
   baseStat: 80,
   initialStatPercentageAdjustments: [0.25, -0.125],
@@ -990,6 +992,7 @@ assert.equal(
   baseEnergyGenerationFactor,
   baseMiasmicShieldReductionFactor,
   calculateAnomalyTriggerThreshold,
+  calculateTotalDisplayedDamage,
   calculateFinalStat,
   calculateInitialStat,
   calculateStandardDisorderDamageMultiplier,
@@ -1120,6 +1123,10 @@ const anomalyTriggerThresholdParams: CalculateAnomalyTriggerThresholdParams = {
 const anomalyTriggerThreshold: number = calculateAnomalyTriggerThreshold(
   anomalyTriggerThresholdParams,
 )
+const totalDisplayedDamage: number = calculateTotalDisplayedDamage([
+  10.2,
+  20.1,
+] as const)
 const disorderSourceAttribute: DisorderSourceAttribute = "fire"
 const standardDisorderDamageMultiplierParams: CalculateStandardDisorderDamageMultiplierParams =
   {
@@ -1385,6 +1392,7 @@ anomalyDamageLevelFactorId
 anomalyMasteryFactorId
 anomalyProficiencyFactorId
 anomalyTriggerThreshold
+totalDisplayedDamage
 disorderSourceAttribute
 standardDisorderDamageMultiplier
 baseAdrenalineGenerationFactorId
