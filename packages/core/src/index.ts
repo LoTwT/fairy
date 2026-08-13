@@ -212,8 +212,14 @@ export type {
 export {
   ANOMALY_BUILDUP_FORMULA_ID,
   anomalyBuildupFormula,
+  calculateAnomalyTriggerThreshold,
 } from "./formulas/anomaly-buildup.ts"
-export type { AnomalyBuildupFormulaInput } from "./formulas/anomaly-buildup.ts"
+export type {
+  AnomalyBuildupFormulaInput,
+  AnomalyTriggerThresholdKind,
+  AnomalyTriggerThresholdTier,
+  CalculateAnomalyTriggerThresholdParams,
+} from "./formulas/anomaly-buildup.ts"
 export {
   REGULAR_DAZE_FORMULA_ID,
   regularDazeFormula,
