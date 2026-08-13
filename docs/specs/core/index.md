@@ -256,7 +256,8 @@ export interface Formula<FormulaInput extends object> {
   乘区及其完整 `FactorInput`。
 - `FormulaFactorResults<FormulaInput>` 的必填键由 `FormulaInput` 的键映射得到，每个值都是对应乘区
   产生的 `FactorResult`。不增加独立的输出泛型。
-- `FormulaResult.value` 是尚未执行显示取整、分段汇总或其他后处理的公式最终数值。
+- `FormulaResult.value` 是尚未执行显示取整、分段汇总或其他后处理的公式最终数值。伤害显示数值的
+  取整与汇总由[伤害显示总值帮助函数](helpers/displayed-damage.md)统一维护。
 - `Formula.calculate` 必须同步、确定性地完成计算，不得修改 `input` 或其嵌套成员。
 - 相同 `Formula` 和内容相同的 `input` 必须产生内容相同的结果或抛出相同错误。
 - 一次成功的公式计算必须把每个采用的乘区计算一次。不得因为较早的乘区结果为 `0` 而提前返回，
@@ -475,3 +476,9 @@ export function defineFormula<FormulaInput extends object>(
 - [闪能累积值](formulas/adrenaline-generation.md)
 - [喧响值回复](formulas/decibel-generation.md)
 - [秽盾削减值](formulas/miasmic-shield-reduction.md)
+
+## 公开辅助计算
+
+### 已实现
+
+- [伤害显示总值](helpers/displayed-damage.md)

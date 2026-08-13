@@ -251,6 +251,7 @@ export {
   miasmicShieldReductionFormula,
 } from "./formulas/miasmic-shield-reduction.ts"
 export type { MiasmicShieldReductionFormulaInput } from "./formulas/miasmic-shield-reduction.ts"
+export { calculateTotalDisplayedDamage } from "./damage.ts"
 export { calculateFinalStat, calculateInitialStat } from "./stat.ts"
 export type {
   CalculateFinalStatParams,

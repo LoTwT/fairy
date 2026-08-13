@@ -50,8 +50,8 @@ Fairy 的确定性计算核心包。
 
 调用方也可以分别使用 `defineFactor` 和 `defineFormula` 建立自定义乘区与公式。
 
-此外提供 `calculateInitialStat` 和 `calculateFinalStat`，用于计算遵循通用属性公式的初始属性和最终
-属性。
+此外提供 `calculateTotalDisplayedDamage`，用于将各段未显示取整的伤害分别向上取整并汇总为显示总值。
+`calculateInitialStat` 和 `calculateFinalStat` 则用于计算遵循通用属性公式的初始属性和最终属性。
 
 公共契约记录在 [Core 计算规范](https://github.com/LoTwT/fairy/blob/main/docs/specs/core/index.md)。
 

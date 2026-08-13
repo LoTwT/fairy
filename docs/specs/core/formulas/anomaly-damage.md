@@ -303,7 +303,8 @@ const baseDamage: BaseDamageFactorInput = [
 - 判断持续时间延长、伤害倍率调整和异常效果标签是否适用于本次结算；
 - 建立虚拟代理人、计算最终攻击力或生成完整 `AnomalyDamageFormulaInput`；
 - 计算极性紊乱、异放或其他特殊效果的完整基础伤害；
-- 计算紊乱失衡值、最终异常伤害或显示取整结果。
+- 计算紊乱失衡值、最终异常伤害或
+  [伤害显示总值](../helpers/displayed-damage.md)。
 
 ### 有效性与失败行为
 
@@ -345,9 +346,11 @@ Nanoka 3.1 还确认 `Honed Edge` / “凛刃属性”基于物理属性结算�
 
 - 虚拟代理人的加权等级向下取整发生在建立公式输入之前；
 - 异常伤害等级区的四位截断由 `anomalyDamageLevelFactor` 在乘区内部完成；
-- 游戏显示的单段伤害向上取整发生在公式计算完成之后，多段伤害应逐段取整后再汇总。
+- 伤害显示数值的取整与汇总发生在公式计算完成之后，由
+  [伤害显示总值帮助函数](../helpers/displayed-damage.md)统一处理。
 
-`anomalyDamageFormula.calculate` 不执行显示取整或格式化，返回值始终是未显示取整的 `number`。
+`anomalyDamageFormula.calculate` 不执行显示取整或格式化，返回值始终是未显示取整的 `number`。显示
+数值取整、汇总及其失败行为只由伤害显示总值规范维护。
 
 ## 返回结果
 
