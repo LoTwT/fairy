@@ -129,6 +129,154 @@ return { value, factorResults }
 代理人和邦布都可以产生异常积蓄。本公式不区分二者；邦布积蓄不参与后续异常伤害的虚拟代理人加权，
 不影响本公式计算其当次异常积蓄值。
 
+## 异常触发阈值配套计算
+
+[原始攻略中的异常触发阈值规则](../../../references/zzz-data-introduction.txt#L234-L250)根据阈值档位、阈值表类型和
+目标对同一属性已触发异常的次数查询基础阈值，再应用目标固有的基础阈值倍率和当前场景的
+阈值倍率。该计算具有独立、确定的输入与算法，由公开 helper 统一维护，不建立额外 `Factor`
+或 `Formula`。
+
+`AnomalyTriggerThreshold`、`AnomalyTriggerThresholdTier` 和 `AnomalyTriggerThresholdKind` 是 core
+根据攻略建立的规范化标识，不表示游戏文本提供了完整的同名英文词组。
+Nanoka 3.1 中的 `element_abnormal` 和 `*_buildup_curve` 是技术字段，不作为公开 API
+命名来源。
+
+### 公开契约
+
+```ts
+export type AnomalyTriggerThresholdTier = "normal" | "elite" | "boss"
+
+export type AnomalyTriggerThresholdKind = "standard" | "physical"
+
+export interface CalculateAnomalyTriggerThresholdParams {
+  readonly thresholdTier: AnomalyTriggerThresholdTier
+  readonly thresholdKind: AnomalyTriggerThresholdKind
+  readonly previousAnomalyTriggerCountForAttribute: number
+  readonly baseThresholdMultiplier: number
+  readonly scenarioThresholdMultiplier: number
+}
+
+/** 根据已确认的阈值表条件和倍率计算异常触发阈值。 */
+export declare function calculateAnomalyTriggerThreshold(
+  params: CalculateAnomalyTriggerThresholdParams,
+): number
+```
+
+`thresholdTier` 选择攻略中的普通、精英或首领阈值档位。它是调用方已解析的查表条件，
+不表示 core 对目标的图鉴等阶或实体类型进行了分类。
+
+`thresholdKind` 选择攻略已确认的标准表或物理表。`standard` 只表示本规范中的标准阈值表，
+不等同于所有非物理属性。`physical` 表示物理阈值表。调用方必须先确认本次属性应采用哪张表，
+再调用 helper。
+
+`previousAnomalyTriggerCountForAttribute` 是同一目标对同一属性已触发异常的次数。`0`
+表示即将计算第一次触发所需的阈值，`1` 表示该属性已触发一次，以此类推。计数必须
+由调用方从对应属性积蓄槽的状态中取得，只在该属性实际成功触发异常后增加，
+且不会随时间重置。helper 不会读取或更新触发次数。
+
+`baseThresholdMultiplier` 是目标固有的基础异常积蓄阈值倍率，`scenarioThresholdMultiplier`
+是当前战斗或玩法场景应用的阈值倍率。两个字段都接收已经转换为小数的完整倍率，提升
+`20%` 传入 `1.2`，没有对应调整时显式传入 `1`。字段不接收提升贡献值 `0.2`。
+
+当同一语义层存在多个效果时，调用方只能在已确认该层的组合规则后建立最终倍率。helper 不接收
+效果来源数组，也不推测同层调整之间如何组合。
+
+### 固定阈值表
+
+helper 必须直接使用下表固定数值。表头 `0`至`8` 表示
+`previousAnomalyTriggerCountForAttribute`，`9+` 表示计数大于或等于 `9`。
+
+| `thresholdTier` | `thresholdKind` | `0`  | `1`  | `2`  | `3`  | `4`  | `5`  | `6`  | `7`  | `8`  | `9+` |
+| --------------- | --------------- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
+| `normal`        | `standard`      | 600  | 612  | 624  | 636  | 648  | 660  | 673  | 686  | 699  | 712  |
+| `normal`        | `physical`      | 720  | 734  | 748  | 762  | 777  | 792  | 807  | 823  | 839  | 855  |
+| `elite`         | `standard`      | 2250 | 2295 | 2340 | 2386 | 2433 | 2481 | 2530 | 2580 | 2631 | 2683 |
+| `elite`         | `physical`      | 2700 | 2754 | 2809 | 2865 | 2922 | 2980 | 3039 | 3099 | 3160 | 3223 |
+| `boss`          | `standard`      | 3000 | 3060 | 3121 | 3183 | 3246 | 3310 | 3376 | 3443 | 3511 | 3581 |
+| `boss`          | `physical`      | 3600 | 3672 | 3745 | 3819 | 3895 | 3972 | 4051 | 4132 | 4214 | 4298 |
+
+物理表的数值必须逐项保留，不得在运行时通过标准表乘以 `1.2` 推导。攻略已给出经过处理的整数表值，
+后续档位会出现 `612 * 1.2 = 734.4`、但物理表明确记录为 `734` 的差异。
+
+### 计算规则
+
+helper 按以下顺序计算：
+
+```text
+表格索引 = min(previousAnomalyTriggerCountForAttribute, 9)
+
+表格阈值 = 查询 thresholdTier 和 thresholdKind 对应表的表格索引项
+
+异常触发阈值
+= 表格阈值
+  * baseThresholdMultiplier
+  * scenarioThresholdMultiplier
+```
+
+`previousAnomalyTriggerCountForAttribute` 大于 `9` 时始终使用 `9+` 档，不继续外推阈值增长公式。
+
+乘法使用 JavaScript `number` 的 IEEE 754 语义，并严格保留“表格阈值、基础阈值倍率、场景阈值倍率”
+的顺序。helper 不对最终值取整、截断或格式化，也不为了使结果接近攻略展示整数而修正浮点误差。
+
+攻略给出的首次触发示例为：
+
+| `thresholdTier` | `thresholdKind` | `baseThresholdMultiplier` | `scenarioThresholdMultiplier` | 十进制数学结果 |
+| --------------- | --------------- | ------------------------- | ----------------------------- | -------------- |
+| `boss`          | `standard`      | `1.2`                     | `1.1`                         | `3960`         |
+| `boss`          | `physical`      | `1.2`                     | `1.1`                         | `4752`         |
+| `boss`          | `standard`      | `1.1`                     | `1.1`                         | `3630`         |
+| `boss`          | `physical`      | `1.1`                     | `1.1`                         | `4356`         |
+
+表中结果是攻略使用的十进制数学表达。JavaScript 运行时返回的 `number` 可以保留 IEEE 754
+浮点误差，测试不得因此向 helper 加入未经来源确认的取整规则。
+
+### 阈值表选择边界
+
+攻略明确记录，黄金邦布和白金邦布在图鉴中归为 `1` 阶敌人，却采用精英阈值；渔人蟹在图鉴中归为
+`2` 阶敌人，却采用首领阈值。因此 helper 不接收图鉴等阶、敌人 ID 或名称，也不根据这些值推导
+`thresholdTier`。
+
+Nanoka 3.1 技术数据中存在风属性专用的积蓄曲线，引用数据中的目标选择了
+该曲线，可见
+[Nanoka 3.1 敌人数据中的曲线选择](../../../../packages/data/raw/nanoka/3.1/en/monster/10001.json#L1540-L1545)。将
+[同文件中的技术表值](../../../../packages/data/raw/nanoka/3.1/en/monster/10001.json#L2487-L2517)与攻略已知的六组首次触发阈值对照，
+可推断 `10006 / 20006 / 30006` 对应的 `300 / 1150 / 1500` 是另一组普通、精英和首领
+基准值。这是对技术字段的对照推断，不是 Nanoka 提供的公开字段契约。
+
+这组基准值不等于攻略中的标准表，当前规则也没有给出风属性在各次触发后的完整阈值表。
+`AnomalyTriggerThresholdKind` 因此不包含 `wind`，也不将 `standard` 解释为所有非物理属性。
+
+烈霜、玄墨、凛刃等特殊属性应采用哪张阈值表，也必须由调用方根据已确认规则选择。helper 不接收
+属性名、不做属性映射，也不允许使用一个任意表值绕过 `thresholdKind` 的闭集。
+
+helper 只计算一个已选定表的异常触发阈值。它不负责：
+
+- 从 Nanoka 实体、图鉴等阶、敌人标签或属性名建立查表条件；
+- 读取当前异常积蓄值，比较积蓄值与阈值，或计算剩余积蓄量；
+- 判断异常是否在冷却时间内，触发异常状态，或更新异常槽与触发次数；
+- 记录、过滤或分配用于后续虚拟代理人加权的有效异常积蓄；
+- 推导同一语义层内多个阈值调整的组合规则。
+
+### 有效性与失败行为
+
+| 失败条件                                                         | 行为              |
+| ---------------------------------------------------------------- | ----------------- |
+| 参数不是非数组对象或为 `null`                                    | 抛出 `TypeError`  |
+| `thresholdTier` 不是字符串                                       | 抛出 `TypeError`  |
+| `thresholdTier` 不在三个受支持值中                               | 抛出 `RangeError` |
+| `thresholdKind` 不是字符串                                       | 抛出 `TypeError`  |
+| `thresholdKind` 不在 `standard` 或 `physical` 中                 | 抛出 `RangeError` |
+| `previousAnomalyTriggerCountForAttribute` 不是 `number`          | 抛出 `TypeError`  |
+| `previousAnomalyTriggerCountForAttribute` 不是有限整数或小于 `0` | 抛出 `RangeError` |
+| 任一阈值倍率不是 `number`                                        | 抛出 `TypeError`  |
+| 任一阈值倍率不是有限数值或小于 `1`                               | 抛出 `RangeError` |
+| 最终异常触发阈值不是有限数值                                     | 抛出 `RangeError` |
+
+当前来源只确认阈值保持不变或提升，因此两个倍率的有效范围是 `[1, +Infinity)` 中的有限数值。
+如果后续取得阈值降低的可复现规则，应根据新语义修订字段值域，不在当前规范中预留未确认的输入。
+
+参数对象不得被修改。多个失败条件同时存在时，不承诺字段校验错误的优先级。
+
 ## 取整与累计边界
 
 异常掌控向下取整由 `anomalyMasteryFactor` 在乘区内部完成。其他三个乘区和顶层公式不执行取整或
@@ -155,7 +303,7 @@ return { value, factorResults }
 
 - 从游戏文本、Nanoka 数据、技能对象或面板数据建立各乘区输入；
 - 判断代理人、邦布、攻击属性、技能标签、效果条件和持续时间是否适用；
-- 计算或更新异常积蓄槽、积蓄比例、异常触发阈值、触发次数和冷却时间；
+- 自动查询或应用本规范的异常触发阈值 helper，或更新异常积蓄槽、积蓄比例、触发次数和冷却时间；
 - 过滤邦布积蓄或溢出积蓄，建立虚拟代理人，或计算异常伤害；
 - 计算失衡值、常规伤害、贯穿伤害及其他公式。
 
@@ -173,9 +321,11 @@ return { value, factorResults }
 
 ## 代码组织
 
-通用 `Formula` 类型与 `defineFormula` 统一放在 `packages/core/src/formula.ts`。异常积蓄值公式的生产代码
-放在 `packages/core/src/formulas/anomaly-buildup.ts`，只包含身份常量、输入类型和公式定义，不重复实现
-任何乘区算法，也不包含距离衰减、积蓄槽或虚拟代理人逻辑。
+通用 `Formula` 类型与 `defineFormula` 统一放在 `packages/core/src/formula.ts`。异常积蓄值公式及其阈值 helper
+的生产代码放在 `packages/core/src/formulas/anomaly-buildup.ts`。阈值表及其索引逻辑是该 helper 的内部实现，
+不作为可替换配置或独立 API 导出。该文件不重复实现任何乘区算法，也不包含距离衰减、积蓄槽或
+虚拟代理人逻辑。
 
-`packages/core/src/index.ts` 只负责重新导出公开 API。异常积蓄值公式使用独立测试文件，打包验证必须
-覆盖新增的公开输入类型、身份常量和公式定义。
+`packages/core/src/index.ts` 只负责重新导出公开 API。异常积蓄值公式使用独立测试文件，同一测试文件覆盖
+阈值 helper 的公开契约、六组固定表值、`9+` 档、倍率顺序、不可变性和失败行为。打包验证必须覆盖新增的
+公开类型与函数。

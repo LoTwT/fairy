@@ -184,6 +184,7 @@ import {
   baseDecibelGenerationFactor,
   baseEnergyGenerationFactor,
   baseMiasmicShieldReductionFactor,
+  calculateAnomalyTriggerThreshold,
   calculateFinalStat,
   calculateInitialStat,
   calculateStandardDisorderDamageMultiplier,
@@ -866,6 +867,16 @@ assert.deepEqual(anomalyBuildupResult.factorResults, {
 })
 assert.equal(Object.isFrozen(anomalyBuildupResult), true)
 assert.equal(Object.isFrozen(anomalyBuildupResult.factorResults), true)
+assert.equal(
+  calculateAnomalyTriggerThreshold({
+    thresholdTier: "boss",
+    thresholdKind: "physical",
+    previousAnomalyTriggerCountForAttribute: 0,
+    baseThresholdMultiplier: 1.2,
+    scenarioThresholdMultiplier: 1.1,
+  }),
+  4752,
+)
 assert.equal(ANOMALY_DAMAGE_FORMULA_ID, "anomaly_damage")
 assert.equal(anomalyDamageFormula.formulaId, ANOMALY_DAMAGE_FORMULA_ID)
 const anomalyDamageResult = anomalyDamageFormula.calculate({
@@ -978,6 +989,7 @@ assert.equal(
   baseDecibelGenerationFactor,
   baseEnergyGenerationFactor,
   baseMiasmicShieldReductionFactor,
+  calculateAnomalyTriggerThreshold,
   calculateFinalStat,
   calculateInitialStat,
   calculateStandardDisorderDamageMultiplier,
@@ -1019,6 +1031,8 @@ assert.equal(
   type AnomalyDamageLevelFactorInput,
   type AnomalyMasteryFactorInput,
   type AnomalyProficiencyFactorInput,
+  type AnomalyTriggerThresholdKind,
+  type AnomalyTriggerThresholdTier,
   type BaseAdrenalineGenerationFactorInput,
   type BaseAnomalyBuildupFactorInput,
   type BaseDamageFactorInput,
@@ -1028,6 +1042,7 @@ assert.equal(
   type BaseDecibelGenerationFactorInput,
   type BaseEnergyGenerationFactorInput,
   type BaseMiasmicShieldReductionFactorInput,
+  type CalculateAnomalyTriggerThresholdParams,
   type CalculateFinalStatParams,
   type CalculateInitialStatParams,
   type CalculateStandardDisorderDamageMultiplierParams,
@@ -1093,6 +1108,18 @@ const anomalyDamageLevelFactorId: "anomaly_damage_level" =
 const anomalyMasteryFactorId: "anomaly_mastery" = ANOMALY_MASTERY_FACTOR_ID
 const anomalyProficiencyFactorId: "anomaly_proficiency" =
   ANOMALY_PROFICIENCY_FACTOR_ID
+const anomalyTriggerThresholdKind: AnomalyTriggerThresholdKind = "standard"
+const anomalyTriggerThresholdTier: AnomalyTriggerThresholdTier = "normal"
+const anomalyTriggerThresholdParams: CalculateAnomalyTriggerThresholdParams = {
+  thresholdTier: anomalyTriggerThresholdTier,
+  thresholdKind: anomalyTriggerThresholdKind,
+  previousAnomalyTriggerCountForAttribute: 0,
+  baseThresholdMultiplier: 1,
+  scenarioThresholdMultiplier: 1,
+}
+const anomalyTriggerThreshold: number = calculateAnomalyTriggerThreshold(
+  anomalyTriggerThresholdParams,
+)
 const disorderSourceAttribute: DisorderSourceAttribute = "fire"
 const standardDisorderDamageMultiplierParams: CalculateStandardDisorderDamageMultiplierParams =
   {
@@ -1357,6 +1384,7 @@ anomalyDamageFormulaId
 anomalyDamageLevelFactorId
 anomalyMasteryFactorId
 anomalyProficiencyFactorId
+anomalyTriggerThreshold
 disorderSourceAttribute
 standardDisorderDamageMultiplier
 baseAdrenalineGenerationFactorId
