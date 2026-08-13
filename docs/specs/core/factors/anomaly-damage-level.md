@@ -96,7 +96,8 @@ export declare const anomalyDamageLevelFactor: Factor<AnomalyDamageLevelFactorIn
 - 决定顶层公式是否采用异常伤害等级区。
 
 调用方必须先完成虚拟代理人等级的加权和向下取整，再把得到的整数传入本乘区。除公式规定的四位
-截断外，本乘区不负责伤害显示取整、单段取整或多段汇总。
+截断外，本乘区不负责伤害显示数值的取整与汇总；该计算由
+[伤害显示总值帮助函数](../helpers/displayed-damage.md)统一处理。
 
 ## 有效性与失败行为
 
