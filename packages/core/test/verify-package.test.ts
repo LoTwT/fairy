@@ -185,6 +185,7 @@ import {
   baseEnergyGenerationFactor,
   baseMiasmicShieldReductionFactor,
   calculateAnomalyTriggerThreshold,
+  calculateDisplayedDazePercentage,
   calculateTotalDisplayedDamage,
   calculateFinalStat,
   calculateInitialStat,
@@ -244,6 +245,13 @@ assert.deepEqual(formulaResult, {
 assert.equal(Object.isFrozen(formula), true)
 assert.equal(Object.isFrozen(formulaResult), true)
 assert.equal(Object.isFrozen(formulaResult.factorResults), true)
+assert.equal(
+  calculateDisplayedDazePercentage({
+    accumulatedDaze: 995,
+    maximumDaze: 1000,
+  }),
+  99,
+)
 assert.equal(calculateTotalDisplayedDamage([10.2, 20.1]), 32)
 const initialStat = calculateInitialStat({
   baseStat: 80,
@@ -992,6 +1000,7 @@ assert.equal(
   baseEnergyGenerationFactor,
   baseMiasmicShieldReductionFactor,
   calculateAnomalyTriggerThreshold,
+  calculateDisplayedDazePercentage,
   calculateTotalDisplayedDamage,
   calculateFinalStat,
   calculateInitialStat,
@@ -1046,6 +1055,7 @@ assert.equal(
   type BaseEnergyGenerationFactorInput,
   type BaseMiasmicShieldReductionFactorInput,
   type CalculateAnomalyTriggerThresholdParams,
+  type CalculateDisplayedDazePercentageParams,
   type CalculateFinalStatParams,
   type CalculateInitialStatParams,
   type CalculateStandardDisorderDamageMultiplierParams,
@@ -1122,6 +1132,13 @@ const anomalyTriggerThresholdParams: CalculateAnomalyTriggerThresholdParams = {
 }
 const anomalyTriggerThreshold: number = calculateAnomalyTriggerThreshold(
   anomalyTriggerThresholdParams,
+)
+const displayedDazePercentageParams: CalculateDisplayedDazePercentageParams = {
+  accumulatedDaze: 995,
+  maximumDaze: 1000,
+}
+const displayedDazePercentage: number = calculateDisplayedDazePercentage(
+  displayedDazePercentageParams,
 )
 const totalDisplayedDamage: number = calculateTotalDisplayedDamage([
   10.2,
@@ -1392,6 +1409,7 @@ anomalyDamageLevelFactorId
 anomalyMasteryFactorId
 anomalyProficiencyFactorId
 anomalyTriggerThreshold
+displayedDazePercentage
 totalDisplayedDamage
 disorderSourceAttribute
 standardDisorderDamageMultiplier

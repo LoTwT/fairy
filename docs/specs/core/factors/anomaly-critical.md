@@ -100,8 +100,8 @@ export declare const anomalyCriticalFactor: Factor<AnomalyCriticalFactorInput>
 异常暴击区只计算一次已经确定结果的异常伤害，不计算异常暴击期望，也不接收异常暴击率。
 
 攻略中的 `1 + 异常暴击率 * 异常暴击伤害` 是对多次异常伤害结果进行概率加权的期望计算，不是单次
-异常暴击区的归约规则。需要异常暴击期望时必须使用独立的期望计算能力，不得改变
-`anomalyCriticalFactor.calculate` 的输入语义或返回类型。
+异常暴击区的归约规则。异常暴击期望计算不属于 core 包的职责。调用方如需计算异常暴击期望，应在
+core 包之外处理，不得改变 `anomalyCriticalFactor.calculate` 的输入语义或返回类型。
 
 ## 有效性与失败行为
 
