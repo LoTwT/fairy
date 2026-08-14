@@ -482,7 +482,4 @@ export function defineFormula<FormulaInput extends object>(
 ### 已实现
 
 - [伤害显示总值](helpers/displayed-damage.md)
-
-### 待实现
-
 - [失衡比例显示值](helpers/displayed-daze-percentage.md)

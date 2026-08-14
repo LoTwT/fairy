@@ -252,6 +252,8 @@ export {
 } from "./formulas/miasmic-shield-reduction.ts"
 export type { MiasmicShieldReductionFormulaInput } from "./formulas/miasmic-shield-reduction.ts"
 export { calculateTotalDisplayedDamage } from "./damage.ts"
+export { calculateDisplayedDazePercentage } from "./daze.ts"
+export type { CalculateDisplayedDazePercentageParams } from "./daze.ts"
 export { calculateFinalStat, calculateInitialStat } from "./stat.ts"
 export type {
   CalculateFinalStatParams,
