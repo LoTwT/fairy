@@ -99,8 +99,8 @@ export declare const criticalFactor: Factor<CriticalFactorInput>
 `CriticalFactorInput` 的成员，不得将暴击率混入 `criticalDamageContributions`。
 
 `1 + 暴击率 × 暴击伤害` 是对多次伤害结果进行概率加权的期望计算，不是单次暴击区的归约规则。
-需要暴击期望时必须使用独立的期望计算能力，不得通过改变 `criticalFactor.calculate` 的输入语义或返回
-类型实现。
+暴击期望计算不属于 core 包的职责。调用方如需计算暴击期望，应在 core 包之外处理，不得改变
+`criticalFactor.calculate` 的输入语义或返回类型。
 
 ## 有效性与失败行为
 
