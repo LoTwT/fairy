@@ -32,8 +32,9 @@ export declare const anomalyDamageLevelFactor: Factor<AnomalyDamageLevelFactorIn
 `AnomalyDamageLevelFactorInput`，返回 `FactorResult`。
 
 `AnomalyDamageLevelFactorInput` 直接表示本次异常伤害结算采用的等级。主公式只直接使用这一个数值，
-因此不增加只有同名字段的对象包装。输入可能来自实际代理人，也可能来自已经建立完成的虚拟代理人，
-统一不命名为角色等级。
+因此不增加只有同名字段的对象包装。虚拟代理人结算应使用
+[虚拟代理人快照帮助函数](../helpers/virtual-agent-snapshot.md)已经加权并向下取整的 `level`；其他调用路径
+可以提供同样符合本乘区值域的实际等级，输入统一不命名为角色等级。
 
 ## 默认输入
 
@@ -95,8 +96,8 @@ export declare const anomalyDamageLevelFactor: Factor<AnomalyDamageLevelFactorIn
 - 计算防御等级基数或其他等级成长规则；
 - 决定顶层公式是否采用异常伤害等级区。
 
-调用方必须先完成虚拟代理人等级的加权和向下取整，再把得到的整数传入本乘区。除公式规定的四位
-截断外，本乘区不负责伤害显示数值的取整与汇总；该计算由
+调用方使用虚拟代理人时，必须把快照的整数 `level` 传入本乘区。除公式规定的四位截断外，本乘区不
+负责伤害显示数值的取整与汇总；该计算由
 [伤害显示总值帮助函数](../helpers/displayed-damage.md)统一处理。
 
 ## 有效性与失败行为

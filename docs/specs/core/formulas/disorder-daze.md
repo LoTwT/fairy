@@ -82,13 +82,13 @@ export declare const disorderDazeFormula: Formula<DisorderDazeFormulaInput>
 ```ts
 const baseDaze: BaseDazeFactorInput = [
   {
-    finalImpact: virtualImpact,
+    finalImpact: virtualAgentSnapshot.finalImpact,
     dazeMultiplier: DEFAULT_DISORDER_DAZE_MULTIPLIER,
   },
 ]
 ```
 
-该示例只说明输入契约，不建立 `virtualImpact` 的计算 helper，也不要求公式内部重建数组。
+该示例只说明快照与基础失衡区的组合，不要求公式内部重建数组。
 
 ## 计算规则
 
@@ -134,23 +134,22 @@ return { value, factorResults }
 ## 虚拟代理人输入准备
 
 本公式使用原异常状态的虚拟代理人，而不是触发紊乱的新异常来源。虚拟代理人是攻略描述输入加权的
-计算模型，不建立为 `DisorderDazeFormulaInput` 字段或 core 公开对象类型。
+计算模型，不建立为 `DisorderDazeFormulaInput` 字段。调用方必须取得被覆盖原异常状态在触发时保存的
+[虚拟代理人快照](../helpers/virtual-agent-snapshot.md)，不能使用触发紊乱的新异常记录重新建立快照。
 
 调用方必须在调用公式前完成以下准备：
 
-- 按参与原异常状态的每条有效代理人异常积蓄占比，对记录的冲击力执行加权平均，并将结果作为
-  `baseDaze` 中的 `finalImpact`；基础失衡区随后应用冲击力 `[0, 1000]` 有效范围；
-- 按相同权重对每条记录已经结算的失衡值提升区结果执行加权平均，并将结果作为
-  `disorderDazeDealt`；不能对原始提升与降低贡献重新加权后调用 `dazeDealtFactor`；
-- 按相同权重对记录等级执行加权平均并向下取整，再将得到的整数作为 `disorderDazeLevel`；
+- 将快照的 `finalImpact` 作为 `baseDaze` 中的 `finalImpact`；基础失衡区随后应用冲击力
+  `[0, 1000]` 有效范围；
+- 将快照的 `dazeDealtFactorResult` 直接作为 `disorderDazeDealt`；不能对原始提升与降低贡献重新加权
+  后调用 `dazeDealtFactor`；
+- 将快照已经加权并向下取整的 `level` 作为 `disorderDazeLevel`；
 - 使用紊乱结算时目标的实时失衡抗性建立 `resistance`，使用目标实时受到失衡值调整建立
-  `dazeTaken`；
-- 排除邦布造成的异常积蓄和超过本次异常触发阈值的溢出部分。如果排除后没有有效代理人积蓄，不能
-  建立虚拟代理人，也不能调用本公式并声称结果完整。
+  `dazeTaken`。
 
-Nanoka 原始字段解释、异常积蓄记录、权重计算、效果适用性判断和目标抗性属性选择都发生在公式调用
-之前。本公式不直接接收 Nanoka 实体或内部字段，也无法验证不同字段是否来自同一个原异常状态和正确
-结算时点。
+有效积蓄记录、来源排除、溢出裁剪、权重计算、等级取整和无有效记录时的失败行为统一由虚拟代理人
+快照规范维护。Nanoka 原始字段解释、效果适用性判断和目标抗性属性选择仍发生在公式调用之前。本公式
+不直接接收 Nanoka 实体或内部字段，也无法验证不同字段是否来自同一个原异常状态和正确结算时点。
 
 攻略没有确认紊乱失衡值应选择原异常属性还是新触发异常属性对应的失衡抗性。调用方只有在已经从
 其他可靠规则确认属性选择后，才能建立 `resistance` 并把公式结果声明为完整；core 不根据任一异常
@@ -178,8 +177,8 @@ Nanoka 原始字段解释、异常积蓄记录、权重计算、效果适用性�
 
 ## 取整、累积与状态边界
 
-虚拟代理人的加权等级向下取整发生在建立公式输入之前。五个乘区和顶层公式都不执行显示取整、失衡
-条截断或格式化；`disorderDazeFormula.calculate` 返回未取整失衡值。
+虚拟代理人的加权等级由快照帮助函数在建立公式输入之前向下取整。五个乘区和顶层公式都不执行显示
+取整、失衡条截断或格式化；`disorderDazeFormula.calculate` 返回未取整失衡值。
 
 公式不读取或修改当前失衡条，不把结果限制到剩余失衡值上限，也不计算失衡比例。调用方完成失衡条
 状态处理后，可以使用[失衡比例显示值帮助函数](../helpers/displayed-daze-percentage.md)计算显示百分比。
@@ -203,7 +202,7 @@ Nanoka 3.1 游戏文本没有确认 `Polarity Disorder` 等特殊紊乱是否产
 本公式还不负责：
 
 - 判断两种属性异常是否触发紊乱、处理原异常覆盖或紊乱冷却；
-- 建立虚拟代理人或计算异常积蓄权重；
+- 建立或保存虚拟代理人快照；
 - 判断特殊紊乱是否产生失衡值、覆盖默认失衡倍率或采用不同公式；
 - 计算异常伤害、异常积蓄值、常规失衡值或其他公式。
 
@@ -223,7 +222,7 @@ Nanoka 3.1 游戏文本没有确认 `Polarity Disorder` 等特殊紊乱是否产
 
 通用 `Formula` 类型与 `defineFormula` 统一放在 `packages/core/src/formula.ts`。紊乱失衡值公式的生产
 代码放在 `packages/core/src/formulas/disorder-daze.ts`，只包含身份常量、标准失衡倍率常量、输入类型和
-公式定义，不重复实现任何乘区算法，也不包含虚拟代理人输入准备或失衡条状态机逻辑。
+公式定义，不重复实现任何乘区算法，也不包含虚拟代理人快照或失衡条状态机逻辑。
 
 `packages/core/src/index.ts` 只负责重新导出公开 API。紊乱失衡值公式使用独立测试文件，打包验证必须
 覆盖新增的公开输入类型、身份常量、标准失衡倍率常量和公式定义。

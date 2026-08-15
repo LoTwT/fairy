@@ -429,6 +429,7 @@ export function defineFormula<FormulaInput extends object>(
 
 - [基础伤害区](factors/base-damage.md)
 - [增伤区](factors/damage-bonus.md)
+- [已结算增伤区](factors/settled-damage-bonus.md)
 - [暴击区](factors/critical.md)
 - [防御区](factors/defense.md)
 - [抗性区](factors/resistance.md)
@@ -483,3 +484,4 @@ export function defineFormula<FormulaInput extends object>(
 
 - [伤害显示总值](helpers/displayed-damage.md)
 - [失衡比例显示值](helpers/displayed-daze-percentage.md)
+- [虚拟代理人快照](helpers/virtual-agent-snapshot.md)

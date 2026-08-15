@@ -62,8 +62,8 @@ export declare const baseAnomalyBuildupFactor: Factor<BaseAnomalyBuildupFactorIn
 - 计算异常掌控、异常积蓄效率、异常积蓄抗性、距离衰减或异常触发阈值。
 
 攻略确认代理人和邦布技能的异常积蓄值不随等级成长。本乘区不接收等级字段，也不为任何来源增加
-等级修正。邦布造成的异常积蓄可以使用本乘区计算；其积蓄是否参与后续异常伤害的虚拟代理人加权，
-属于独立的输入准备能力。
+等级修正。邦布造成的异常积蓄可以使用本乘区计算；异常触发后哪些积蓄进入
+[虚拟代理人快照](../helpers/virtual-agent-snapshot.md)，由快照规范的有效积蓄边界统一维护。
 
 ## 有效性与失败行为
 

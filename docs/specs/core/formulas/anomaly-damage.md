@@ -20,7 +20,7 @@
 ```ts
 export interface AnomalyDamageFormulaInput {
   readonly baseDamage: BaseDamageFactorInput
-  readonly damageBonus: DamageBonusFactorInput
+  readonly damageBonus: SettledDamageBonusFactorInput
   readonly anomalyProficiency: AnomalyProficiencyFactorInput
   readonly defense: DefenseFactorInput
   readonly resistance: ResistanceFactorInput
@@ -48,7 +48,7 @@ export declare const anomalyDamageFormula: Formula<AnomalyDamageFormulaInput>
 | 字段                 | 对应乘区                                             | 恒等输入                                    |
 | -------------------- | ---------------------------------------------------- | ------------------------------------------- |
 | `baseDamage`         | [基础伤害区](../factors/base-damage.md)              | 无默认值，必须提供本次基础伤害区输入        |
-| `damageBonus`        | [增伤区](../factors/damage-bonus.md)                 | `DEFAULT_DAMAGE_BONUS_FACTOR_INPUT`         |
+| `damageBonus`        | [已结算增伤区](../factors/settled-damage-bonus.md)   | `DEFAULT_SETTLED_DAMAGE_BONUS_FACTOR_INPUT` |
 | `anomalyProficiency` | [异常精通区](../factors/anomaly-proficiency.md)      | `DEFAULT_ANOMALY_PROFICIENCY_FACTOR_INPUT`  |
 | `defense`            | [防御区](../factors/defense.md)                      | `DEFAULT_DEFENSE_FACTOR_INPUT`              |
 | `resistance`         | [抗性区](../factors/resistance.md)                   | `DEFAULT_RESISTANCE_FACTOR_INPUT`           |
@@ -62,6 +62,7 @@ export declare const anomalyDamageFormula: Formula<AnomalyDamageFormulaInput>
 游戏内默认属性、默认状态或默认异常效果。尤其是：
 
 - 异常精通区使用 `100` 作为恒等输入，异常伤害等级区使用等级 `1` 作为恒等输入；
+- 已结算增伤区使用最终倍率 `1` 作为恒等输入，但普通异常路径不能用它替代缺失的虚拟代理人快照；
 - 异常暴击区使用 `isAnomalyCritical: false`，失衡易伤区使用 `isTargetStunned: false`；
 - 基础伤害区不提供默认常量，但调用方仍可按基础伤害区规范显式传入空数组并得到 `0`。
 
@@ -92,7 +93,7 @@ export declare const anomalyDamageFormula: Formula<AnomalyDamageFormulaInput>
 ```ts
 const factorResults = {
   baseDamage: baseDamageFactor.calculate(input.baseDamage),
-  damageBonus: damageBonusFactor.calculate(input.damageBonus),
+  damageBonus: settledDamageBonusFactor.calculate(input.damageBonus),
   anomalyProficiency: anomalyProficiencyFactor.calculate(
     input.anomalyProficiency,
   ),
@@ -133,9 +134,12 @@ return { value, factorResults }
 
 ## 与常规伤害的关系
 
-异常伤害与常规伤害共享基础伤害区、增伤区、防御区、抗性区、减易伤区和失衡易伤区，但乘区组合有
-以下结构性差异：
+异常伤害与常规伤害共享基础伤害区、防御区、抗性区、减易伤区和失衡易伤区，并在同一个乘区位置采用
+增伤区结果，但乘区组合和输入阶段有以下结构性差异：
 
+- 常规伤害从本次攻击的原始增伤贡献计算通用增伤区；异常伤害接收已经按来源规则完成计算的增伤区
+  结果，因此改用已结算增伤区。普通异常伤害在这里使用虚拟代理人加权结果，两个乘区不能互换或
+  同时使用；
 - 异常伤害不采用普通暴击区，`AnomalyDamageFormulaInput` 不包含 `critical` 字段，也不会调用
   `criticalFactor`；
 - 异常暴击区取代普通暴击区，只处理一次已经确定是否异常暴击的结算；
@@ -148,15 +152,16 @@ return { value, factorResults }
 ## 输入准备与结算时点
 
 [原始攻略中的异常伤害计算规则](../../../references/zzz-data-introduction.txt#L267-L272)使用“虚拟代理人”
-建立部分乘区输入。虚拟代理人不是一个额外乘区，也不属于 `AnomalyDamageFormulaInput` 的顶层字段。
-调用方必须在调用公式前完成以下输入准备：
+建立普通异常伤害的部分乘区输入。普通紊乱也使用被覆盖原异常状态保存的同一快照。虚拟代理人不是
+一个额外乘区，也不属于 `AnomalyDamageFormulaInput` 的顶层字段。这两类路径必须先使用
+[虚拟代理人快照帮助函数](../helpers/virtual-agent-snapshot.md)取得快照，再完成以下输入准备：
 
 - `baseDamage` 应按本次异常效果的基础伤害表达式建立；普通异常伤害使用虚拟代理人的加权攻击力与
   对应异常伤害倍率，普通紊乱可以使用本规范的
   [`calculateStandardDisorderDamageMultiplier`](#紊乱标准伤害倍率配套计算) 建立伤害倍率，特殊基础伤害
   调整仍由调用方在该字段中表达；
-- `damageBonus` 应使增伤区结果等于积蓄时对当次攻击所记录的增伤区加权结果，不使用结算时当前
-  代理人的通用增伤；
+- `damageBonus` 直接使用快照的 `damageBonusFactorResult`，由已结算增伤区验证并原样返回；不使用
+  结算时当前代理人的通用增伤，也不把最终倍率伪装为原始增伤贡献数组；
 - `anomalyProficiency` 使用虚拟代理人的加权异常精通，`anomalyDamageLevel` 使用虚拟代理人加权后
   向下取整的等级；
 - `defense.attackerLevelBase` 应由同一个已取整虚拟代理人等级通过 `calculateDefenseLevelBase` 建立；计算
@@ -166,15 +171,36 @@ return { value, factorResults }
   状态；攻击方无视抗性的适用时点由调用方按已确认的效果规则选择；
 - `anomalyDamageBonus` 和 `anomalyCritical` 应反映对应异常效果结算时的实时状态。
 
-这些字段仍须遵循各自 `FactorInput` 的公开契约。上游已经得到某个乘区的最终倍率时，不能把该倍率
-直接传入只接收贡献值或其他主公式参数的乘区输入。
-
-本公式不接收异常积蓄记录，也不按积蓄贡献比例执行加权，不过滤邦布造成的积蓄或溢出积蓄，不建立
-虚拟代理人，不对加权等级向下取整。公式也不验证不同字段是否来自正确且一致的快照；这些职责属于
-独立的输入准备能力。
+这些字段仍须遵循各自 `FactorInput` 的公开契约。本公式不接收异常积蓄记录，也不按积蓄贡献比例执行
+加权，不过滤邦布造成的积蓄或溢出积蓄，不建立虚拟代理人，不对加权等级向下取整。公式也不验证不同
+字段是否来自正确且一致的快照；记录筛选、溢出裁剪、加权和取整只由虚拟代理人快照规范维护。
 
 攻略还会为其他结算记录冲击力和失衡值提升，但二者不是异常伤害公式的乘区，不能因此向
 `AnomalyDamageFormulaInput` 增加字段。
+
+### `damageBonus` 输入迁移
+
+本规范将 `AnomalyDamageFormulaInput.damageBonus` 从 `DamageBonusFactorInput` 调整为
+`SettledDamageBonusFactorInput`。这是对输入计算阶段的修正，不增加新的公式乘区，也不改变字段名、
+`factorResults.damageBonus`、公式身份或乘法顺序。
+
+已有调用方不能再把原始增伤贡献数组直接传给异常伤害公式。调用方应在每次有效代理人异常积蓄发生
+时，先用 `damageBonusFactor.calculate` 得到该次攻击已经求和并钳制的增伤区结果，把结果写入
+`VirtualAgentContributionRecord.damageBonusFactorResult`，再由快照帮助函数完成跨记录加权。旧数组在
+新的异常伤害公式入口属于错误输入，不能为了兼容而隐式转换。
+
+常规伤害与贯穿伤害的 `damageBonus` 字段仍使用 `DamageBonusFactorInput`，不受本次调整影响。
+
+### 无积蓄直接异常效果
+
+Nanoka 3.1 中，爱丽丝的 `Polarity Assault` / “极性强击”会无视异常积蓄进度，按原强击的一定比例直接
+造成伤害，见本地数据缓存 `packages/data/raw/nanoka/3.1/{en,zh}/character/1401.json:344`，同一规则也在
+`:1965` 重复出现。该文本没有说明攻击力、异常精通、等级、增伤区、穿透及后续异常状态快照应使用
+爱丽丝实时值、既有快照还是其他输入。
+
+本规范暂不定义这类无积蓄直接异常效果的完整输入准备。调用方不能伪造一条正数积蓄记录建立快照，
+也不能只向已结算增伤区传入一个合法标量便声称其他公式输入已经确认。只有效果自身规则已经从可靠
+来源明确全部乘区输入时，才能使用本公式组合这些输入；否则该路径必须视为暂不支持。
 
 ## 紊乱标准伤害倍率配套计算
 
@@ -281,7 +307,7 @@ const damageMultiplier = calculateStandardDisorderDamageMultiplier({
 })
 
 const baseDamage: BaseDamageFactorInput = [
-  { damageMultiplier, finalStat: virtualAgentFinalAttack },
+  { damageMultiplier, finalStat: virtualAgentSnapshot.finalAttack },
 ]
 ```
 
@@ -344,7 +370,7 @@ Nanoka 3.1 还确认 `Honed Edge` / “凛刃属性”基于物理属性结算�
 
 异常伤害相关的三个取整阶段必须保持分离：
 
-- 虚拟代理人的加权等级向下取整发生在建立公式输入之前；
+- 虚拟代理人的加权等级由快照帮助函数在建立公式输入之前向下取整；
 - 异常伤害等级区的四位截断由 `anomalyDamageLevelFactor` 在乘区内部完成；
 - 伤害显示数值的取整与汇总发生在公式计算完成之后，由
   [伤害显示总值帮助函数](../helpers/displayed-damage.md)统一处理。
@@ -365,10 +391,11 @@ Nanoka 3.1 还确认 `Honed Edge` / “凛刃属性”基于物理属性结算�
 
 ## 适用边界
 
-攻略确认紊乱仍采用同一套异常伤害乘区；异放和极性紊乱也通过调整基础伤害区进行结算。因此调用方
-已经正确建立全部乘区输入时，可以使用同一个 `anomalyDamageFormula`。公式不增加用于区分这些异常
-效果的模式字段或异常类型字段，也不在 `calculate` 内根据持续时间、异常类型或效果标签隐式计算基础
-伤害倍率及结算比例。普通紊乱的标准伤害倍率可以由本规范的配套 helper 显式计算后传入基础伤害区。
+攻略确认紊乱仍采用同一套异常伤害乘区；异放和极性紊乱也通过调整基础伤害区进行结算。这些路径在
+已经正确建立全部乘区输入时，可以使用同一个 `anomalyDamageFormula`。公式不增加用于区分异常效果的
+模式字段或异常类型字段，也不在 `calculate` 内根据持续时间、异常类型或效果标签隐式计算基础伤害倍率
+及结算比例。普通紊乱的标准伤害倍率可以由本规范的配套 helper 显式计算后传入基础伤害区。无积蓄
+直接异常效果遵循本规范的独立边界，不能从上述复用规则推导其输入。
 
 特殊机制是否允许本公式完整计算，统一遵循[特殊乘区规范](../factors/special.md)。
 `AnomalyDamageFormulaInput` 不包含特殊乘区输入或占位字段。
@@ -397,9 +424,11 @@ Nanoka 3.1 还确认 `Honed Edge` / “凛刃属性”基于物理属性结算�
 ## 代码组织
 
 通用 `Formula` 类型与 `defineFormula` 统一放在 `packages/core/src/formula.ts`。异常伤害公式及其紊乱标准
-伤害倍率配套计算的生产代码放在 `packages/core/src/formulas/anomaly-damage.ts`。该文件可以包含 helper
-公开类型、公开函数及其私有分支规则，但不重复实现任何乘区算法，也不包含虚拟代理人输入准备逻辑。
+伤害倍率配套计算的生产代码放在 `packages/core/src/formulas/anomaly-damage.ts`。该文件可以包含紊乱倍率
+helper 的公开类型、公开函数及其私有分支规则，但不重复实现任何乘区算法，也不包含虚拟代理人快照
+逻辑。快照 helper 的代码组织由对应规范维护。
 
 `packages/core/src/index.ts` 只负责重新导出公开 API。异常伤害公式及其配套 helper 使用同一个独立测试
 文件；测试必须覆盖七个属性分支、阶梯边界、超过初始持续时间的输入、失败行为、与基础伤害区的组合及
-输入不可变性。打包验证必须覆盖公式与 helper 的公开类型和运行时定义。
+输入不可变性。公式测试还必须覆盖已结算增伤区最终倍率、旧贡献数组输入失败以及
+`factorResults.damageBonus` 保持原字段键。打包验证必须覆盖公式、乘区与 helper 的公开类型和运行时定义。

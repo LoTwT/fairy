@@ -149,6 +149,7 @@ import {
   DEFAULT_MIASMIC_SHIELD_REDUCTION_RATE_FACTOR_INPUT,
   DEFAULT_MIASMIC_SHIELD_REDUCTION_TAKEN_RATE_FACTOR_INPUT,
   DEFAULT_RESISTANCE_FACTOR_INPUT,
+  DEFAULT_SETTLED_DAMAGE_BONUS_FACTOR_INPUT,
   DEFAULT_SHEER_DAMAGE_BONUS_FACTOR_INPUT,
   DEFAULT_STUN_DAMAGE_FACTOR_INPUT,
   DEFENSE_FACTOR_ID,
@@ -163,6 +164,7 @@ import {
   REGULAR_DAMAGE_FORMULA_ID,
   REGULAR_DAZE_FORMULA_ID,
   RESISTANCE_FACTOR_ID,
+  SETTLED_DAMAGE_BONUS_FACTOR_ID,
   SHEER_DAMAGE_BONUS_FACTOR_ID,
   SHEER_DAMAGE_FORMULA_ID,
   STUN_DAMAGE_FACTOR_ID,
@@ -190,6 +192,7 @@ import {
   calculateFinalStat,
   calculateInitialStat,
   calculateStandardDisorderDamageMultiplier,
+  calculateVirtualAgentSnapshot,
   calculateDefenseLevelBase,
   calculateTargetBaseDefense,
   calculateTargetEffectiveDefense,
@@ -214,6 +217,7 @@ import {
   regularDamageFormula,
   regularDazeFormula,
   resistanceFactor,
+  settledDamageBonusFactor,
   sheerDamageBonusFactor,
   sheerDamageFormula,
   stunDamageFactor,
@@ -528,6 +532,18 @@ assert.equal(damageBonusFactor.factorId, DAMAGE_BONUS_FACTOR_ID)
 assert.equal(damageBonusFactor.calculate([0.25]), 1.25)
 assert.equal(damageBonusFactor.calculate(DEFAULT_DAMAGE_BONUS_FACTOR_INPUT), 1)
 assert.equal(Object.isFrozen(DEFAULT_DAMAGE_BONUS_FACTOR_INPUT), true)
+assert.equal(SETTLED_DAMAGE_BONUS_FACTOR_ID, "settled_damage_bonus")
+assert.equal(
+  settledDamageBonusFactor.factorId,
+  SETTLED_DAMAGE_BONUS_FACTOR_ID,
+)
+assert.equal(settledDamageBonusFactor.calculate(1.25), 1.25)
+assert.equal(
+  settledDamageBonusFactor.calculate(
+    DEFAULT_SETTLED_DAMAGE_BONUS_FACTOR_INPUT,
+  ),
+  1,
+)
 assert.equal(DAMAGE_TAKEN_FACTOR_ID, "damage_taken")
 assert.equal(damageTakenFactor.factorId, DAMAGE_TAKEN_FACTOR_ID)
 assert.equal(
@@ -891,7 +907,7 @@ assert.equal(ANOMALY_DAMAGE_FORMULA_ID, "anomaly_damage")
 assert.equal(anomalyDamageFormula.formulaId, ANOMALY_DAMAGE_FORMULA_ID)
 const anomalyDamageResult = anomalyDamageFormula.calculate({
   baseDamage: [{ damageMultiplier: 2, finalStat }],
-  damageBonus: DEFAULT_DAMAGE_BONUS_FACTOR_INPUT,
+  damageBonus: DEFAULT_SETTLED_DAMAGE_BONUS_FACTOR_INPUT,
   anomalyProficiency: DEFAULT_ANOMALY_PROFICIENCY_FACTOR_INPUT,
   defense: DEFAULT_DEFENSE_FACTOR_INPUT,
   resistance: DEFAULT_RESISTANCE_FACTOR_INPUT,
@@ -916,6 +932,30 @@ assert.deepEqual(anomalyDamageResult.factorResults, {
 })
 assert.equal(Object.isFrozen(anomalyDamageResult), true)
 assert.equal(Object.isFrozen(anomalyDamageResult.factorResults), true)
+const virtualAgentSnapshot = calculateVirtualAgentSnapshot([
+  {
+    effectiveAnomalyBuildup: 1,
+    level: 42,
+    anomalyProficiency: 100,
+    finalAttack: 123,
+    finalImpact: 100,
+    penetrationRatio: 0.1,
+    penetrationValue: 5,
+    damageBonusFactorResult: 1.25,
+    dazeDealtFactorResult: 1.5,
+  },
+])
+assert.deepEqual(virtualAgentSnapshot, {
+  level: 42,
+  anomalyProficiency: 100,
+  finalAttack: 123,
+  finalImpact: 100,
+  penetrationRatio: 0.1,
+  penetrationValue: 5,
+  damageBonusFactorResult: 1.25,
+  dazeDealtFactorResult: 1.5,
+})
+assert.equal(Object.isFrozen(virtualAgentSnapshot), true)
 assert.equal(
   calculateStandardDisorderDamageMultiplier({
     originalAnomalyAttribute: "fire",
@@ -970,6 +1010,7 @@ assert.equal(
   DEFAULT_MIASMIC_SHIELD_REDUCTION_RATE_FACTOR_INPUT,
   DEFAULT_MIASMIC_SHIELD_REDUCTION_TAKEN_RATE_FACTOR_INPUT,
   DEFAULT_RESISTANCE_FACTOR_INPUT,
+  DEFAULT_SETTLED_DAMAGE_BONUS_FACTOR_INPUT,
   DEFAULT_SHEER_DAMAGE_BONUS_FACTOR_INPUT,
   DEFAULT_STUN_DAMAGE_FACTOR_INPUT,
   DISORDER_DAZE_DEALT_FACTOR_ID,
@@ -981,6 +1022,7 @@ assert.equal(
   MIASMIC_SHIELD_REDUCTION_RATE_FACTOR_ID,
   MIASMIC_SHIELD_REDUCTION_TAKEN_RATE_FACTOR_ID,
   REGULAR_DAZE_FORMULA_ID,
+  SETTLED_DAMAGE_BONUS_FACTOR_ID,
   accompanyingDecibelGenerationRateFactor,
   adrenalineGenerationFormula,
   adrenalineGenerationRateFactor,
@@ -1005,6 +1047,7 @@ assert.equal(
   calculateFinalStat,
   calculateInitialStat,
   calculateStandardDisorderDamageMultiplier,
+  calculateVirtualAgentSnapshot,
   calculateDefenseLevelBase,
   calculateTargetBaseDefense,
   calculateTargetEffectiveDefense,
@@ -1029,6 +1072,7 @@ assert.equal(
   regularDamageFormula,
   regularDazeFormula,
   resistanceFactor,
+  settledDamageBonusFactor,
   sheerDamageBonusFactor,
   sheerDamageFormula,
   stunDamageFactor,
@@ -1087,9 +1131,12 @@ assert.equal(
   type RegularDamageFormulaInput,
   type RegularDazeFormulaInput,
   type ResistanceFactorInput,
+  type SettledDamageBonusFactorInput,
   type SheerDamageBonusFactorInput,
   type SheerDamageFormulaInput,
   type StunDamageFactorInput,
+  type VirtualAgentContributionRecord,
+  type VirtualAgentSnapshot,
 } from "@randomplay/core"
 
 interface SumFactorInput {
@@ -1121,6 +1168,10 @@ const anomalyDamageLevelFactorId: "anomaly_damage_level" =
 const anomalyMasteryFactorId: "anomaly_mastery" = ANOMALY_MASTERY_FACTOR_ID
 const anomalyProficiencyFactorId: "anomaly_proficiency" =
   ANOMALY_PROFICIENCY_FACTOR_ID
+const settledDamageBonusFactorId: "settled_damage_bonus" =
+  SETTLED_DAMAGE_BONUS_FACTOR_ID
+const settledDamageBonusInput: SettledDamageBonusFactorInput =
+  DEFAULT_SETTLED_DAMAGE_BONUS_FACTOR_INPUT
 const anomalyTriggerThresholdKind: AnomalyTriggerThresholdKind = "standard"
 const anomalyTriggerThresholdTier: AnomalyTriggerThresholdTier = "normal"
 const anomalyTriggerThresholdParams: CalculateAnomalyTriggerThresholdParams = {
@@ -1154,6 +1205,19 @@ const standardDisorderDamageMultiplier: number =
   calculateStandardDisorderDamageMultiplier(
     standardDisorderDamageMultiplierParams,
   )
+const virtualAgentContributionRecord: VirtualAgentContributionRecord = {
+  effectiveAnomalyBuildup: 1,
+  level: 42,
+  anomalyProficiency: 100,
+  finalAttack: 123,
+  finalImpact: 100,
+  penetrationRatio: 0.1,
+  penetrationValue: 5,
+  damageBonusFactorResult: 1.25,
+  dazeDealtFactorResult: 1.5,
+}
+const virtualAgentSnapshot: VirtualAgentSnapshot =
+  calculateVirtualAgentSnapshot([virtualAgentContributionRecord])
 const baseAdrenalineGenerationFactorId: "base_adrenaline_generation" =
   BASE_ADRENALINE_GENERATION_FACTOR_ID
 const baseAnomalyBuildupFactorId: "base_anomaly_buildup" =
@@ -1383,7 +1447,7 @@ const anomalyBuildupInput: AnomalyBuildupFormulaInput = {
 }
 const anomalyDamageInput: AnomalyDamageFormulaInput = {
   baseDamage: baseDamageInputs,
-  damageBonus: DEFAULT_DAMAGE_BONUS_FACTOR_INPUT,
+  damageBonus: DEFAULT_SETTLED_DAMAGE_BONUS_FACTOR_INPUT,
   anomalyProficiency: DEFAULT_ANOMALY_PROFICIENCY_FACTOR_INPUT,
   defense: DEFAULT_DEFENSE_FACTOR_INPUT,
   resistance: DEFAULT_RESISTANCE_FACTOR_INPUT,
@@ -1408,11 +1472,14 @@ anomalyDamageFormulaId
 anomalyDamageLevelFactorId
 anomalyMasteryFactorId
 anomalyProficiencyFactorId
+settledDamageBonusFactorId
+settledDamageBonusInput
 anomalyTriggerThreshold
 displayedDazePercentage
 totalDisplayedDamage
 disorderSourceAttribute
 standardDisorderDamageMultiplier
+virtualAgentSnapshot
 baseAdrenalineGenerationFactorId
 baseAnomalyBuildupFactorId
 baseDazeFactorId
@@ -1498,6 +1565,7 @@ resistanceFactor.calculate(resistanceInput)
 sheerDamageBonusFactor.calculate(sheerDamageBonusInputs)
 sheerDamageBonusFactor.calculate(DEFAULT_SHEER_DAMAGE_BONUS_FACTOR_INPUT)
 stunDamageFactor.calculate(stunDamageInput)
+settledDamageBonusFactor.calculate(settledDamageBonusInput)
 regularDamageFormula.calculate(regularDamageInput)
 regularDazeFormula.calculate(regularDazeInput)
 disorderDazeFormula.calculate(disorderDazeInput)
