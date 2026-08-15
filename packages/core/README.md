@@ -6,6 +6,7 @@ Fairy 的确定性计算核心包。
 
 - 基础伤害区：`baseDamageFactor`
 - 增伤区：`damageBonusFactor`
+- 已结算增伤区：`settledDamageBonusFactor`
 - 暴击区：`criticalFactor`
 - 防御区：`defenseFactor`
 - 抗性区：`resistanceFactor`
@@ -52,6 +53,7 @@ Fairy 的确定性计算核心包。
 
 此外提供 `calculateTotalDisplayedDamage`，用于将各段未显示取整的伤害分别向上取整并汇总为显示总值。
 `calculateDisplayedDazePercentage` 用于根据累计失衡值和失衡值上限计算向下取整的失衡比例显示值。
+`calculateVirtualAgentSnapshot` 用于根据已筛选、已裁剪的有效代理人异常积蓄记录计算虚拟代理人快照。
 `calculateInitialStat` 和 `calculateFinalStat` 则用于计算遵循通用属性公式的初始属性和最终属性。
 
 公共契约记录在 [Core 计算规范](https://github.com/LoTwT/fairy/blob/main/docs/specs/core/index.md)。

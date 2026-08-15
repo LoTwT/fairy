@@ -5,10 +5,10 @@ import {
   DEFAULT_ANOMALY_DAMAGE_BONUS_FACTOR_INPUT,
   DEFAULT_ANOMALY_DAMAGE_LEVEL_FACTOR_INPUT,
   DEFAULT_ANOMALY_PROFICIENCY_FACTOR_INPUT,
-  DEFAULT_DAMAGE_BONUS_FACTOR_INPUT,
   DEFAULT_DAMAGE_TAKEN_FACTOR_INPUT,
   DEFAULT_DEFENSE_FACTOR_INPUT,
   DEFAULT_RESISTANCE_FACTOR_INPUT,
+  DEFAULT_SETTLED_DAMAGE_BONUS_FACTOR_INPUT,
   DEFAULT_STUN_DAMAGE_FACTOR_INPUT,
   anomalyDamageFormula,
   calculateStandardDisorderDamageMultiplier,
@@ -19,12 +19,12 @@ import {
   type AnomalyProficiencyFactorInput,
   type BaseDamageFactorInput,
   type CalculateStandardDisorderDamageMultiplierParams,
-  type DamageBonusFactorInput,
   type DamageTakenFactorInput,
   type DefenseFactorInput,
   type DisorderSourceAttribute,
   type Formula,
   type ResistanceFactorInput,
+  type SettledDamageBonusFactorInput,
   type StunDamageFactorInput,
 } from "../src/index.ts"
 
@@ -33,7 +33,7 @@ function createAnomalyDamageInput(
 ): AnomalyDamageFormulaInput {
   return {
     baseDamage,
-    damageBonus: DEFAULT_DAMAGE_BONUS_FACTOR_INPUT,
+    damageBonus: DEFAULT_SETTLED_DAMAGE_BONUS_FACTOR_INPUT,
     anomalyProficiency: DEFAULT_ANOMALY_PROFICIENCY_FACTOR_INPUT,
     defense: DEFAULT_DEFENSE_FACTOR_INPUT,
     resistance: DEFAULT_RESISTANCE_FACTOR_INPUT,
@@ -49,7 +49,7 @@ describe("anomalyDamageFormula", () => {
   it("exposes its public identity and types", () => {
     expectTypeOf<AnomalyDamageFormulaInput>().toEqualTypeOf<{
       readonly baseDamage: BaseDamageFactorInput
-      readonly damageBonus: DamageBonusFactorInput
+      readonly damageBonus: SettledDamageBonusFactorInput
       readonly anomalyProficiency: AnomalyProficiencyFactorInput
       readonly defense: DefenseFactorInput
       readonly resistance: ResistanceFactorInput
@@ -115,7 +115,7 @@ describe("anomalyDamageFormula", () => {
 
   it("calculates and returns every factor result without additional rounding", () => {
     const baseDamage = 2 * 100 + 1.5 * 40
-    const damageBonus = 1 + (0.25 - 0.05)
+    const damageBonus = 1.2
     const anomalyProficiency = 125 / 100
     const defense = 50 / (50 + 50)
     const resistance = 1 - 0.2 + 0.1 + 0.05
@@ -129,7 +129,7 @@ describe("anomalyDamageFormula", () => {
         { damageMultiplier: 2, finalStat: 100 },
         { damageMultiplier: 1.5, finalStat: 40 },
       ],
-      damageBonus: [0.25, -0.05],
+      damageBonus,
       anomalyProficiency: 125,
       defense: {
         attackerLevelBase: 50,
@@ -265,7 +265,7 @@ describe("anomalyDamageFormula", () => {
   it("does not stop validating later factors when an earlier multiplier is zero", () => {
     const input = {
       ...createAnomalyDamageInput([{ damageMultiplier: 2, finalStat: 100 }]),
-      damageBonus: [-1],
+      damageBonus: 0,
       anomalyCritical: {
         isAnomalyCritical: false,
         anomalyCriticalDamageContributions: [NaN],
@@ -275,12 +275,25 @@ describe("anomalyDamageFormula", () => {
     expect(() => anomalyDamageFormula.calculate(input)).toThrow(RangeError)
   })
 
+  it("rejects an unsettled damage bonus contribution array", () => {
+    const input = {
+      ...createAnomalyDamageInput([{ damageMultiplier: 2, finalStat: 100 }]),
+      damageBonus: [0.2],
+    }
+
+    expect(() =>
+      anomalyDamageFormula.calculate(
+        input as unknown as AnomalyDamageFormulaInput,
+      ),
+    ).toThrow(TypeError)
+  })
+
   it("preserves multiplication order and rejects an overflowing final value", () => {
     const input: AnomalyDamageFormulaInput = {
       ...createAnomalyDamageInput([
         { damageMultiplier: 1, finalStat: Number.MAX_VALUE },
       ]),
-      damageBonus: [1],
+      damageBonus: 2,
       anomalyProficiency: 0,
     }
 

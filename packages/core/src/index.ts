@@ -83,6 +83,12 @@ export {
 } from "./factors/damage-bonus.ts"
 export type { DamageBonusFactorInput } from "./factors/damage-bonus.ts"
 export {
+  DEFAULT_SETTLED_DAMAGE_BONUS_FACTOR_INPUT,
+  SETTLED_DAMAGE_BONUS_FACTOR_ID,
+  settledDamageBonusFactor,
+} from "./factors/settled-damage-bonus.ts"
+export type { SettledDamageBonusFactorInput } from "./factors/settled-damage-bonus.ts"
+export {
   CRITICAL_FACTOR_ID,
   DEFAULT_CRITICAL_FACTOR_INPUT,
   criticalFactor,
@@ -254,6 +260,11 @@ export type { MiasmicShieldReductionFormulaInput } from "./formulas/miasmic-shie
 export { calculateTotalDisplayedDamage } from "./damage.ts"
 export { calculateDisplayedDazePercentage } from "./daze.ts"
 export type { CalculateDisplayedDazePercentageParams } from "./daze.ts"
+export { calculateVirtualAgentSnapshot } from "./anomaly.ts"
+export type {
+  VirtualAgentContributionRecord,
+  VirtualAgentSnapshot,
+} from "./anomaly.ts"
 export { calculateFinalStat, calculateInitialStat } from "./stat.ts"
 export type {
   CalculateFinalStatParams,

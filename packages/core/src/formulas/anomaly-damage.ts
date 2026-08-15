@@ -3,9 +3,9 @@ import {
   type BaseDamageFactorInput,
 } from "../factors/base-damage.ts"
 import {
-  damageBonusFactor,
-  type DamageBonusFactorInput,
-} from "../factors/damage-bonus.ts"
+  settledDamageBonusFactor,
+  type SettledDamageBonusFactorInput,
+} from "../factors/settled-damage-bonus.ts"
 import {
   anomalyProficiencyFactor,
   type AnomalyProficiencyFactorInput,
@@ -48,7 +48,7 @@ import {
 
 export interface AnomalyDamageFormulaInput {
   readonly baseDamage: BaseDamageFactorInput
-  readonly damageBonus: DamageBonusFactorInput
+  readonly damageBonus: SettledDamageBonusFactorInput
   readonly anomalyProficiency: AnomalyProficiencyFactorInput
   readonly defense: DefenseFactorInput
   readonly resistance: ResistanceFactorInput
@@ -145,7 +145,7 @@ export const anomalyDamageFormula: Formula<AnomalyDamageFormulaInput> =
 
       const factorResults = {
         baseDamage: baseDamageFactor.calculate(input.baseDamage),
-        damageBonus: damageBonusFactor.calculate(input.damageBonus),
+        damageBonus: settledDamageBonusFactor.calculate(input.damageBonus),
         anomalyProficiency: anomalyProficiencyFactor.calculate(
           input.anomalyProficiency,
         ),
