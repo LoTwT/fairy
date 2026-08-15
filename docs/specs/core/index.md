@@ -458,6 +458,10 @@ export function defineFormula<FormulaInput extends object>(
 - [秽盾削减效率区](factors/miasmic-shield-reduction-rate.md)
 - [秽盾被削减效率区](factors/miasmic-shield-reduction-taken-rate.md)
 
+### 待实现
+
+- [已结算增伤区](factors/settled-damage-bonus.md)
+
 ### 规则边界
 
 - [特殊乘区边界](factors/special.md)
@@ -468,7 +472,6 @@ export function defineFormula<FormulaInput extends object>(
 
 - [常规伤害](formulas/regular-damage.md)
 - [贯穿伤害](formulas/sheer-damage.md)
-- [异常伤害](formulas/anomaly-damage.md)
 - [异常积蓄值](formulas/anomaly-buildup.md)
 - [常规失衡值](formulas/regular-daze.md)
 - [紊乱失衡值](formulas/disorder-daze.md)
@@ -477,9 +480,17 @@ export function defineFormula<FormulaInput extends object>(
 - [喧响值回复](formulas/decibel-generation.md)
 - [秽盾削减值](formulas/miasmic-shield-reduction.md)
 
+### 待按规范调整
+
+- [异常伤害](formulas/anomaly-damage.md)
+
 ## 公开辅助计算
 
 ### 已实现
 
 - [伤害显示总值](helpers/displayed-damage.md)
 - [失衡比例显示值](helpers/displayed-daze-percentage.md)
+
+### 待实现
+
+- [虚拟代理人快照](helpers/virtual-agent-snapshot.md)
