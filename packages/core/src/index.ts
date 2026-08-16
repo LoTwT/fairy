@@ -196,6 +196,21 @@ export {
 } from "./factors/anomaly-critical.ts"
 export type { AnomalyCriticalFactorInput } from "./factors/anomaly-critical.ts"
 export {
+  DEFAULT_REFRINGE_FACTOR_INPUT,
+  REFRINGE_FACTOR_ID,
+  calculateRefringeMultiplier,
+  refringeFactor,
+} from "./factors/refringe.ts"
+export type {
+  CalculateRefringeMultiplierParams,
+  RefringeFactorInput,
+} from "./factors/refringe.ts"
+export {
+  LUMINIZE_MULTIPLIER_FACTOR_ID,
+  luminizeMultiplierFactor,
+} from "./factors/luminize-multiplier.ts"
+export type { LuminizeMultiplierFactorInput } from "./factors/luminize-multiplier.ts"
+export {
   REGULAR_DAMAGE_FORMULA_ID,
   regularDamageFormula,
 } from "./formulas/regular-damage.ts"
@@ -209,12 +224,21 @@ export {
   ANOMALY_DAMAGE_FORMULA_ID,
   anomalyDamageFormula,
   calculateStandardDisorderDamageMultiplier,
+  calculateStandardVortexDamageMultiplier,
 } from "./formulas/anomaly-damage.ts"
 export type {
   AnomalyDamageFormulaInput,
   CalculateStandardDisorderDamageMultiplierParams,
+  CalculateStandardVortexDamageMultiplierParams,
   DisorderSourceAttribute,
+  VortexDamageMultiplierProfile,
 } from "./formulas/anomaly-damage.ts"
+export {
+  LUMINIZE_DAMAGE_FORMULA_ID,
+  calculateSpecialVoidflareDamageBonusMultiplier,
+  luminizeDamageFormula,
+} from "./formulas/luminize-damage.ts"
+export type { LuminizeDamageFormulaInput } from "./formulas/luminize-damage.ts"
 export {
   ANOMALY_BUILDUP_FORMULA_ID,
   anomalyBuildupFormula,

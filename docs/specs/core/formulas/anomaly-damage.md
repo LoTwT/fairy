@@ -1,8 +1,9 @@
 # 异常伤害公式
 
-异常伤害公式按照固定顺序组合基础伤害区及九个倍率乘区，规则来源为
+异常伤害公式按照固定顺序组合基础伤害区及十个倍率乘区，规则来源为
 [原始攻略中的异常伤害公式](../../../references/zzz-data-introduction.txt#L251)。异常伤害不采用普通暴击区，
-而是采用异常暴击区。
+而是采用异常暴击区。Nanoka 3.1 的异化机制还会在原有乘区之后对整个异常伤害采用独立异化区；不适用
+异化的路径显式使用恒等倍率 `1`。
 
 ## 身份与公开契约
 
@@ -29,6 +30,7 @@ export interface AnomalyDamageFormulaInput {
   readonly anomalyDamageLevel: AnomalyDamageLevelFactorInput
   readonly anomalyDamageBonus: AnomalyDamageBonusFactorInput
   readonly anomalyCritical: AnomalyCriticalFactorInput
+  readonly refringe: RefringeFactorInput
 }
 
 export declare const ANOMALY_DAMAGE_FORMULA_ID: "anomaly_damage"
@@ -42,7 +44,7 @@ export declare const anomalyDamageFormula: Formula<AnomalyDamageFormulaInput>
 
 ## 输入与默认值
 
-十个字段全部必填，也不接受 `undefined`。调用方已经确认某个倍率乘区在本次计算中应产生恒等倍率
+十一个字段全部必填，也不接受 `undefined`。调用方已经确认某个倍率乘区在本次计算中应产生恒等倍率
 `1` 时，必须显式传入该乘区公开的默认输入：
 
 | 字段                 | 对应乘区                                             | 恒等输入                                    |
@@ -57,6 +59,7 @@ export declare const anomalyDamageFormula: Formula<AnomalyDamageFormulaInput>
 | `anomalyDamageLevel` | [异常伤害等级区](../factors/anomaly-damage-level.md) | `DEFAULT_ANOMALY_DAMAGE_LEVEL_FACTOR_INPUT` |
 | `anomalyDamageBonus` | [异常增伤区](../factors/anomaly-damage-bonus.md)     | `DEFAULT_ANOMALY_DAMAGE_BONUS_FACTOR_INPUT` |
 | `anomalyCritical`    | [异常暴击区](../factors/anomaly-critical.md)         | `DEFAULT_ANOMALY_CRITICAL_FACTOR_INPUT`     |
+| `refringe`           | [异化区](../factors/refringe.md)                     | `DEFAULT_REFRINGE_FACTOR_INPUT`             |
 
 各常量的精确内容与不可变性由表中对应乘区规范维护。它们只表示产生恒等倍率 `1` 的计算输入，不表示
 游戏内默认属性、默认状态或默认异常效果。尤其是：
@@ -64,6 +67,7 @@ export declare const anomalyDamageFormula: Formula<AnomalyDamageFormulaInput>
 - 异常精通区使用 `100` 作为恒等输入，异常伤害等级区使用等级 `1` 作为恒等输入；
 - 已结算增伤区使用最终倍率 `1` 作为恒等输入，但普通异常路径不能用它替代缺失的虚拟代理人快照；
 - 异常暴击区使用 `isAnomalyCritical: false`，失衡易伤区使用 `isTargetStunned: false`；
+- 异化区使用最终倍率 `1` 作为恒等输入，但已经触发异化的异常状态必须使用其保存结果；
 - 基础伤害区不提供默认常量，但调用方仍可按基础伤害区规范显式传入空数组并得到 `0`。
 
 本次结算存在实际乘区数据时，不得用恒等输入替代该数据并声称结果完整。
@@ -86,9 +90,10 @@ export declare const anomalyDamageFormula: Formula<AnomalyDamageFormulaInput>
   × 异常伤害等级区
   × 异常增伤区
   × 异常暴击区
+  × 异化区
 ```
 
-具体公式的 `calculate` 必须直接调用十个已定义的 `Factor`，再以同一顺序相乘。约束形态如下：
+具体公式的 `calculate` 必须直接调用十一个已定义的 `Factor`，再以同一顺序相乘。约束形态如下：
 
 ```ts
 const factorResults = {
@@ -108,6 +113,7 @@ const factorResults = {
     input.anomalyDamageBonus,
   ),
   anomalyCritical: anomalyCriticalFactor.calculate(input.anomalyCritical),
+  refringe: refringeFactor.calculate(input.refringe),
 } satisfies FormulaFactorResults<AnomalyDamageFormulaInput>
 
 const value =
@@ -120,13 +126,14 @@ const value =
   factorResults.stunDamage *
   factorResults.anomalyDamageLevel *
   factorResults.anomalyDamageBonus *
-  factorResults.anomalyCritical
+  factorResults.anomalyCritical *
+  factorResults.refringe
 
 return { value, factorResults }
 ```
 
 一次成功计算必须调用每个乘区一次。即使基础伤害区或其他较早乘区返回 `0`，也不能提前返回；这样
-`factorResults` 始终包含全部十项结果。任一乘区抛出错误时，公式立即失败并传播原错误，不返回部分
+`factorResults` 始终包含全部十一项结果。任一乘区抛出错误时，公式立即失败并传播原错误，不返回部分
 结果。
 
 乘法使用 JavaScript `number` 的 IEEE 754 语义，并严格保留攻略中的乘区顺序，不进行代数重排。
@@ -144,6 +151,7 @@ return { value, factorResults }
   `criticalFactor`；
 - 异常暴击区取代普通暴击区，只处理一次已经确定是否异常暴击的结算；
 - 异常伤害额外采用异常精通区、异常伤害等级区和异常增伤区；
+- 被异化的异常伤害在原有乘区之后额外采用保存的异化区；未触发异化时该区为恒等倍率；
 - 异常伤害仍采用防御区，不采用贯穿增伤区。
 
 调用方不能通过向普通暴击区传入恒等输入来模拟异常伤害，也不能同时向异常伤害计算应用普通暴击区
@@ -171,6 +179,11 @@ return { value, factorResults }
   状态；攻击方无视抗性的适用时点由调用方按已确认的效果规则选择；
 - `anomalyDamageBonus` 和 `anomalyCritical` 应反映对应异常效果结算时的实时状态。
 
+3.1 的异化区不属于虚拟代理人快照。调用方应在异化触发时根据蕾米埃尔当时的异常精通及适用贡献计算
+`refringe`，并把结果与被异化异常状态一同保存；后续普通异常、异放、乱流或紊乱基于该状态结算时复用
+同一结果。没有触发异化时显式传入 `DEFAULT_REFRINGE_FACTOR_INPUT`。具体规则由
+[异化区规范](../factors/refringe.md)统一维护。
+
 这些字段仍须遵循各自 `FactorInput` 的公开契约。本公式不接收异常积蓄记录，也不按积蓄贡献比例执行
 加权，不过滤邦布造成的积蓄或溢出积蓄，不建立虚拟代理人，不对加权等级向下取整。公式也不验证不同
 字段是否来自正确且一致的快照；记录筛选、溢出裁剪、加权和取整只由虚拟代理人快照规范维护。
@@ -191,6 +204,13 @@ return { value, factorResults }
 
 常规伤害与贯穿伤害的 `damageBonus` 字段仍使用 `DamageBonusFactorInput`，不受本次调整影响。
 
+### `refringe` 输入迁移
+
+3.1 异化机制加入后，`AnomalyDamageFormulaInput` 新增必填的 `refringe: RefringeFactorInput`。该字段追加在
+既有异常暴击区之后，使传入恒等倍率 `1` 的旧结算路径保持原有乘法顺序与 IEEE 754 结果。已有调用方
+必须显式传入 `DEFAULT_REFRINGE_FACTOR_INPUT`，或传入与被异化异常状态一同保存的最终异化倍率；公式
+不会因为字段缺失而自动补 `1`。
+
 ### 无积蓄直接异常效果
 
 Nanoka 3.1 中，爱丽丝的 `Polarity Assault` / “极性强击”会无视异常积蓄进度，按原强击的一定比例直接
@@ -201,6 +221,63 @@ Nanoka 3.1 中，爱丽丝的 `Polarity Assault` / “极性强击”会无视�
 本规范暂不定义这类无积蓄直接异常效果的完整输入准备。调用方不能伪造一条正数积蓄记录建立快照，
 也不能只向已结算增伤区传入一个合法标量便声称其他公式输入已经确认。只有效果自身规则已经从可靠
 来源明确全部乘区输入时，才能使用本公式组合这些输入；否则该路径必须视为暂不支持。
+
+## 异放的 3.1 输入边界
+
+`Abloom` / “异放”的术语由[core 术语表](../index.md#异放相关术语)统一维护。攻略 2.x 已确认异放是
+一次倍率经过调整的原属性异常伤害，基础伤害区的通用结构为：
+
+```text
+异放基础伤害区
+= 原异常虚拟代理人攻击力
+  × 原异常伤害倍率
+  × 效果自身的异放倍率表达式
+```
+
+薇薇安的具体表达式还包含“薇薇安异常精通 ÷ 10 × 对应异常结算比例”，见
+[攻略 L273-L275](../../../references/zzz-data-introduction.txt#L273-L275)。该角色专属表达式不是所有异放的
+全局规则。
+
+Nanoka 3.1 进一步确认异放来源已经出现多种输入形态：
+
+- 柏妮思的 `packages/data/raw/nanoka/3.1/{en,zh}/character/1171.json:1012` 按以太、电、火、物理、冰、风
+  六种原异常分别结算原异常伤害的 `480%`、`240%`、`600%`、`40%`、`60%`、`24%`；
+- 普罗米娅的同一招式会固定结算对应属性异常伤害，例如
+  `packages/data/raw/nanoka/3.1/{en,zh}/character/1541.json:1359` 的连携技为 `100%`，同文件 `:1364` 的
+  终结技为 `250%`，核心被动和影画还会提供其他固定倍率；
+- 爱芮的 `packages/data/raw/nanoka/3.1/{en,zh}/character/1501.json:2195` 明确允许自身触发的异放按独立
+  暴击率和暴击伤害暴击；
+- 维琳娜的 `packages/data/raw/nanoka/3.1/{en,zh}/character/1561.json:1872` 明确存在固定 `680%` 倍率的
+  风属性异放。
+
+这些例子共同确认异放复用属性异常伤害乘区，但不能支持一个全局 `calculateAbloomDamageMultiplier`
+查表：倍率可能按原异常属性、技能、角色面板、核心技、影画、目标失衡状态或其他效果变化。调用方必须
+先按具体效果的可靠来源算出最终基础伤害倍率，再与原异常状态保存的输入组合：
+
+```ts
+const baseDamage: BaseDamageFactorInput = [
+  {
+    damageMultiplier: resolvedAbloomDamageMultiplier,
+    finalStat: sourceAnomalySnapshot.finalAttack,
+  },
+]
+```
+
+其中：
+
+- `resolvedAbloomDamageMultiplier` 包含原异常伤害倍率及该效果明确给出的结算比例或基础倍率调整；不能只
+  因为效果名为异放就套用薇薇安、柏妮思、普罗米娅、爱芮或维琳娜中任一角色的规则；
+- `damageBonus`、`anomalyProficiency`、等级和穿透等来源侧历史输入继续来自原异常状态保存的快照；
+- 原异常已经异化时，`refringe` 复用该状态单独保存的异化区结果；
+- 异放专属增伤与通用异常增伤在 `anomalyDamageBonus` 中按其来源规则建立；异放专属暴击通过
+  `anomalyCritical` 表达，不计算暴击期望；异放专属无视防御通过防御区的输入准备表达；
+- 目标实时抗性、减易伤、失衡易伤及其他目标侧状态仍在异放结算时建立。
+
+因此异放继续使用 `anomalyDamageFormula`，不建立 `abloomDamageFormula`、异放倍率 Factor 或角色规则
+查表。触发条件、技能倍率选择、冷却、资源变化、一次招式触发次数和 3.1 角色专属公式均属于调用方和
+版本化数据层。异放与极性强击都可能不增加异常积蓄，但两者的证据边界不同：异放明确引用一个已有的
+原异常状态，可以复用该状态保存的快照；极性强击目前没有同等完整的输入继承规则，仍遵循上一节的
+暂不支持边界。
 
 ## 紊乱标准伤害倍率配套计算
 
@@ -311,7 +388,7 @@ const baseDamage: BaseDamageFactorInput = [
 ]
 ```
 
-调用方再将 `baseDamage` 与其他九个必填乘区输入组成完整的 `AnomalyDamageFormulaInput`。
+调用方再将 `baseDamage` 与其他十个必填乘区输入组成完整的 `AnomalyDamageFormulaInput`。
 `anomalyDamageFormula.calculate` 不会隐式调用本 helper，也不会从公式输入中读取异常属性或剩余持续
 时间。
 
@@ -346,7 +423,7 @@ const baseDamage: BaseDamageFactorInput = [
 `remainingAnomalyDurationInSeconds: 0` 有效。该值表示原异常在阶梯计算中不再贡献剩余时间项，仍会返回
 对应属性公式的常量部分。参数对象不得被修改。
 
-### 待确认：风属性与凛刃异常的反应边界
+### 待确认：普通紊乱的风属性与凛刃边界
 
 Nanoka 3.1 已出现 `Wind Anomaly` / “风属性异常状态”，见
 [英文数据](../../../../packages/data/raw/nanoka/3.1/en/character/1541.json#L1359)与
@@ -362,9 +439,152 @@ Nanoka 3.1 还确认 `Honed Edge` / “凛刃属性”基于物理属性结算�
 的畏缩公式，没有说明凛刃是否直接采用同一紊乱倍率，因此当前不能把凛刃静默映射为 `physical`。
 
 `DisorderSourceAttribute` 因此暂不包含 `wind` 或 `honed_edge`，运行时传入 `"wind"` 或 `"honed_edge"`
-必须按不受支持的属性抛出 `RangeError`，不能复用其他属性公式进行推断。最终 review 时需要人工确认风属性
-异常与普通紊乱、乱流之间的机制边界，以及凛刃是否采用物理属性的紊乱倍率；只有取得对应普通紊乱适用
-证据与倍率公式后，才能扩展公开联合类型和计算分支。
+必须按不受支持的属性抛出 `RangeError`，不能复用其他属性公式进行推断。乱流使用下方独立 helper，不是
+风属性普通紊乱的替代分支。只有取得对应普通紊乱适用证据与倍率公式后，才能扩展公开联合类型和计算分支。
+
+## 乱流标准伤害倍率配套计算
+
+Nanoka 3.1 本地中英文缓存 `packages/data/raw/nanoka/3.1/{en,zh}/monster/40005.json:1006` 确认
+`Windswept` / “风化”与 `Vortex` / “乱流”的游戏术语及触发关系。同版本本地数据缓存
+`packages/data/raw/nanoka/3.1/{en,zh}/shiyu/62051.json:13` 还分别使用 `Vortex DMG` 和“乱流造成的伤害”
+表达乱流专属伤害调整。
+
+Nanoka 当前公开数据没有乱流基础倍率的结构化字段。六种标准倍率采用
+[HoYoLAB 社区实测文章](https://www.hoyolab.com/article/45484490)中的完整倍率表；该文章明确说明内容来自
+3.0 创作体验服。表中固定倍率、持续时间项与标准时长结果，和 ZZZ-HP 固定提交中的
+[乱流默认参数](https://github.com/Nie7bai/ZZZ-HP/blob/92e87139fd2cdde8d0a6bf114de6dea832a42fca/zzz-hp/src/utils/calculatorUi.ts#L415-L439)
+逐项一致。本文将它们作为 3.1 计算模型的实测依据，不把这些数值描述为 Nanoka 字段或游戏文本直接公开
+的公式。后续版本若出现可核验的结构化规则或反例，应先更新本规范及测试向量，再调整实现。
+
+`StandardVortexDamageMultiplier` 是 core 为标准乱流倍率建立的组合标识，不表示游戏文本存在完整同名英文
+术语。该计算只派生基础伤害区所需的伤害倍率，不建立额外 `Factor` 或 `Formula`。
+
+### 公开契约
+
+```ts
+export type VortexDamageMultiplierProfile =
+  "corruption" | "shock" | "burn" | "assault" | "frostbite" | "frost"
+
+export interface CalculateStandardVortexDamageMultiplierParams {
+  readonly vortexDamageMultiplierProfile: VortexDamageMultiplierProfile
+  readonly sourceAnomalyDurationInSeconds: number
+}
+
+/** 根据被乱流消耗的非风异常及其持续时间计算标准乱流伤害倍率。 */
+export declare function calculateStandardVortexDamageMultiplier(
+  params: CalculateStandardVortexDamageMultiplierParams,
+): number
+```
+
+`VortexDamageMultiplierProfile` 是乱流倍率表的闭集选择器，不是所有属性、异常状态或特殊属性的通用枚举。
+各公开值表示以下已确认的计算分支：
+
+| 公开值       | 倍率表分支        | 说明                                                             |
+| ------------ | ----------------- | ---------------------------------------------------------------- |
+| `corruption` | Corruption / 侵蚀 | 标准以太异常分支                                                 |
+| `shock`      | Shock / 感电      | 标准电属性异常分支                                               |
+| `burn`       | Burn / 灼烧       | 标准火属性异常分支                                               |
+| `assault`    | Assault / 强击    | 标准物理异常分支                                                 |
+| `frostbite`  | Frostbite / 霜寒  | 标准冰属性异常分支，不包含烈霜属性                               |
+| `frost`      | Frost / 烈霜      | 烈霜属性专用分支；它虽基于冰属性结算，但乱流倍率不同于普通冰属性 |
+
+`vortexDamageMultiplierProfile` 由调用方根据本次被乱流消耗的非风异常选择。玄墨、凛刃等特殊属性是否映射到
+某个标准分支，必须由该特殊属性自身的可靠规则确认，helper 不根据基础属性、异常状态名称或富文本标签自动推断。
+风属性不属于这里的被消耗异常，也没有 `wind` 公开值。
+
+`sourceAnomalyDurationInSeconds` 是本次非风异常生效时的完整持续时间，单位为秒，并已包含实际适用的持续
+时间延长。风化与非风异常同时存在的顺序、经过时间和计时器不由 helper 推导。标准乱流在非风异常发生时
+同步结算，因此这里不是普通紊乱使用的“原异常剩余持续时间”。
+
+### 计算规则
+
+设 `T = sourceAnomalyDurationInSeconds`。百分比常量转换为小数后，严格按实测表中的运算结构计算：
+
+| `vortexDamageMultiplierProfile` | 标准乱流伤害倍率      |
+| ------------------------------- | --------------------- |
+| `corruption`                    | `6.5 + 0.625 * T * 2` |
+| `shock`                         | `6.5 + 1.25 * T`      |
+| `burn`                          | `9 + 0.5 * T * 2`     |
+| `assault`                       | `8 + 0.075 * T`       |
+| `frostbite`                     | `13 + 0.075 * T`      |
+| `frost`                         | `0 + 0.75 * T`        |
+
+返回值已经是可直接参与基础伤害区计算的小数倍率，例如 `1900%` 返回 `19`，不额外加上基础值 `1`。函数不
+对 `T` 或最终倍率向下取整、截断或钳制，也不把持续伤害分支的 `* 2` 合并进其他常量。
+
+计算使用 JavaScript `number` 的 IEEE 754 语义。乘法与加法保持表中从左到右的顺序，不引入 epsilon，不按
+帧换算，也不进行代数重排。标准时长和对应结果如下：
+
+| 倍率表分支 | `T` | 标准乱流伤害倍率 |
+| ---------- | --- | ---------------- |
+| 侵蚀       | 10  | `19`             |
+| 感电       | 10  | `19`             |
+| 灼烧       | 10  | `19`             |
+| 强击       | 10  | `8.75`           |
+| 霜寒       | 10  | `13.75`          |
+| 烈霜       | 20  | `15`             |
+
+持续时间不是 helper 的默认输入或上限。比如侵蚀持续时间延长到 `13` 秒时，标准乱流伤害倍率为 `22.75`。
+
+### 与虚拟代理人和异常伤害公式的组合
+
+乱流仍使用现有异常伤害公式，不建立 `vortexDamageFormula`。调用方应先从被乱流消耗的非风异常取得
+[虚拟代理人快照](../helpers/virtual-agent-snapshot.md)，再把 helper 结果与该快照的最终攻击力组成基础伤害区：
+
+```ts
+const damageMultiplier = calculateStandardVortexDamageMultiplier({
+  vortexDamageMultiplierProfile: "corruption",
+  sourceAnomalyDurationInSeconds: 10,
+})
+
+const baseDamage: BaseDamageFactorInput = [
+  { damageMultiplier, finalStat: sourceAnomalySnapshot.finalAttack },
+]
+```
+
+同一份非风异常快照还提供异常精通、等级、穿透及已经结算的增伤区；如果被消耗异常已经异化，调用方
+还须使用该异常状态单独保存的异化区结果。目标防御、抗性、减易伤、失衡易伤和异常专属增伤等结算时
+乘区仍按异常伤害规范实时准备。
+
+乱流在效果归属上视为造成风化的角色所造成的伤害，并按被消耗非风异常的属性异常伤害处理。调用方负责
+据此判断角色限定效果、乱流专属增伤、属性异常增伤和异常暴击是否适用，再建立 `anomalyDamageBonus` 与
+`anomalyCritical`。helper 不接收角色、属性、装备或效果列表，也不替调用方判断这些贡献。
+
+强击与碎冰在触发乱流时还会分别结算自身的瞬时异常伤害。helper 返回的 `8.75` 或 `13.75` 只代表乱流
+伤害倍率，不包含强击或碎冰的倍率；需要展示或汇总两次伤害时，调用方应分别建立公式调用，再使用
+[伤害显示总值帮助函数](../helpers/displayed-damage.md)处理各段显示值。
+
+### 适用边界
+
+本 helper 不负责：
+
+- 判断风化与另一种属性异常是否触发乱流，或更新、清除、保留任何异常状态；
+- 读取异常槽、计时器、角色、装备、Nanoka 数据或效果文本；
+- 建立、筛选或保存非风异常的虚拟代理人快照；
+- 判断特殊属性采用哪个倍率表分支，或计算普通紊乱、极性紊乱和异放；
+- 应用乱流伤害提升、属性异常伤害提升、持续时间延长或异常暴击；
+- 计算强击、碎冰、最终异常伤害或伤害显示总值。
+
+### 有效性与失败行为
+
+| 失败条件                                                | 行为              |
+| ------------------------------------------------------- | ----------------- |
+| 参数不是非数组对象或为 `null`                           | 抛出 `TypeError`  |
+| `vortexDamageMultiplierProfile` 不是字符串              | 抛出 `TypeError`  |
+| `vortexDamageMultiplierProfile` 不在六个公开值中        | 抛出 `RangeError` |
+| `sourceAnomalyDurationInSeconds` 不是 `number`          | 抛出 `TypeError`  |
+| `sourceAnomalyDurationInSeconds` 不是有限数值或小于 `0` | 抛出 `RangeError` |
+| 最终标准乱流伤害倍率不是有限数值                        | 抛出 `RangeError` |
+
+`sourceAnomalyDurationInSeconds: 0` 有效，返回对应分支的固定倍率。参数对象不得被修改。
+
+### 代码组织
+
+- 类型、参数接口和 helper 与异常伤害公式共同维护在 `packages/core/src/formulas/anomaly-damage.ts`；
+- `packages/core/src/index.ts` 从包根导出函数与两个类型；
+- `packages/core/test/anomaly-damage.test.ts` 覆盖六个分支、标准时长、零值、持续时间延长、小数秒、运算顺序、
+  输入不可变性及全部失败行为；
+- `packages/core/test/verify-package.test.ts` 从真实打包产物消费运行时函数与公开类型。
 
 ## 取整边界
 
@@ -382,8 +602,8 @@ Nanoka 3.1 还确认 `Honed Edge` / “凛刃属性”基于物理属性结算�
 
 `anomalyDamageFormula.calculate` 返回 `FormulaResult<AnomalyDamageFormulaInput>`：
 
-- `value` 是十个乘区结果相乘得到的未取整异常伤害；
-- `factorResults` 的键与 `AnomalyDamageFormulaInput` 完全一致，分别保存十个乘区的最终
+- `value` 是十一个乘区结果相乘得到的未取整异常伤害；
+- `factorResults` 的键与 `AnomalyDamageFormulaInput` 完全一致，分别保存十一个乘区的最终
   `FactorResult`。
 
 返回结果只提供公式值和乘区结果，不复制输入，也不提供虚拟代理人快照、贡献拆分、来源追踪或概率
@@ -392,7 +612,8 @@ Nanoka 3.1 还确认 `Honed Edge` / “凛刃属性”基于物理属性结算�
 ## 适用边界
 
 攻略确认紊乱仍采用同一套异常伤害乘区；异放和极性紊乱也通过调整基础伤害区进行结算。这些路径在
-已经正确建立全部乘区输入时，可以使用同一个 `anomalyDamageFormula`。公式不增加用于区分异常效果的
+已经正确建立全部乘区输入时，可以使用同一个 `anomalyDamageFormula`。3.1 中，普通异常、异放、乱流和
+紊乱基于已异化异常状态结算时，还必须复用该状态保存的异化区结果。公式不增加用于区分异常效果的
 模式字段或异常类型字段，也不在 `calculate` 内根据持续时间、异常类型或效果标签隐式计算基础伤害倍率
 及结算比例。普通紊乱的标准伤害倍率可以由本规范的配套 helper 显式计算后传入基础伤害区。无积蓄
 直接异常效果遵循本规范的独立边界，不能从上述复用规则推导其输入。
@@ -431,4 +652,6 @@ helper 的公开类型、公开函数及其私有分支规则，但不重复实�
 `packages/core/src/index.ts` 只负责重新导出公开 API。异常伤害公式及其配套 helper 使用同一个独立测试
 文件；测试必须覆盖七个属性分支、阶梯边界、超过初始持续时间的输入、失败行为、与基础伤害区的组合及
 输入不可变性。公式测试还必须覆盖已结算增伤区最终倍率、旧贡献数组输入失败以及
-`factorResults.damageBonus` 保持原字段键。打包验证必须覆盖公式、乘区与 helper 的公开类型和运行时定义。
+`factorResults.damageBonus` 保持原字段键。异化区加入后，测试还必须覆盖恒等输入不改变旧路径结果、
+保存倍率作用于完整旧结果、字段缺失失败和 `factorResults.refringe`。打包验证必须覆盖公式、乘区与 helper
+的公开类型和运行时定义。

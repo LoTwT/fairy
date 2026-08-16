@@ -35,12 +35,15 @@ Fairy 的确定性计算核心包。
 - 异常伤害等级区：`anomalyDamageLevelFactor`
 - 异常增伤区：`anomalyDamageBonusFactor`
 - 异常暴击区：`anomalyCriticalFactor`
+- 异化区：`refringeFactor`
+- 耀变倍率区：`luminizeMultiplierFactor`
 
 当前内置公式：
 
 - 常规伤害：`regularDamageFormula`
 - 贯穿伤害：`sheerDamageFormula`
 - 异常伤害：`anomalyDamageFormula`
+- 耀变伤害：`luminizeDamageFormula`
 - 异常积蓄值：`anomalyBuildupFormula`
 - 常规失衡值：`regularDazeFormula`
 - 紊乱失衡值：`disorderDazeFormula`
@@ -54,6 +57,8 @@ Fairy 的确定性计算核心包。
 此外提供 `calculateTotalDisplayedDamage`，用于将各段未显示取整的伤害分别向上取整并汇总为显示总值。
 `calculateDisplayedDazePercentage` 用于根据累计失衡值和失衡值上限计算向下取整的失衡比例显示值。
 `calculateVirtualAgentSnapshot` 用于根据已筛选、已裁剪的有效代理人异常积蓄记录计算虚拟代理人快照。
+`calculateRefringeMultiplier` 用于在异化触发时计算应保存的异化倍率；
+`calculateSpecialVoidflareDamageBonusMultiplier` 用于计算特殊虚曜的已结算增伤倍率。
 `calculateInitialStat` 和 `calculateFinalStat` 则用于计算遵循通用属性公式的初始属性和最终属性。
 
 公共契约记录在 [Core 计算规范](https://github.com/LoTwT/fairy/blob/main/docs/specs/core/index.md)。
