@@ -237,13 +237,17 @@ helper 必须新建并使用 `Object.freeze` 冻结返回的 `VirtualAgentSnapsh
 - 目标防御状态、抗性、减易伤、失衡易伤、失衡抗性和受到失衡值提升区仍按结算时状态实时建立；
 - 异常增伤区和异常暴击区按当前结算的异常效果实时建立，不进入快照。
 
+3.1 的[异化区](../factors/refringe.md)也不进入虚拟代理人快照。异化倍率由异化触发时蕾米埃尔的异常精通
+及适用贡献单独计算，并与被异化异常状态一同保存；后续异常伤害、异放、乱流或紊乱使用该独立历史
+结果。它不能按异常积蓄贡献对代理人记录再次加权。
+
 `damageBonusFactorResult` 必须直接传给
 [已结算增伤区](../factors/settled-damage-bonus.md)，不能作为
 `DamageBonusFactorInput` 成员，也不能通过先加权原始增伤贡献来替代。`dazeDealtFactorResult` 可以直接
 作为[紊乱失衡值提升区](../factors/disorder-daze-dealt.md)输入。
 
 helper 不返回完整 `AnomalyDamageFormulaInput` 或 `DisorderDazeFormulaInput`。基础伤害倍率、目标实时
-乘区、异常效果实时乘区、紊乱默认失衡倍率和特殊效果输入仍由对应公式规范及调用方维护。
+乘区、异常效果实时乘区、异化区、紊乱默认失衡倍率和特殊效果输入仍由对应公式规范及调用方维护。
 
 ## 适用边界
 

@@ -8,10 +8,12 @@ import {
   DEFAULT_DAMAGE_TAKEN_FACTOR_INPUT,
   DEFAULT_DEFENSE_FACTOR_INPUT,
   DEFAULT_RESISTANCE_FACTOR_INPUT,
+  DEFAULT_REFRINGE_FACTOR_INPUT,
   DEFAULT_SETTLED_DAMAGE_BONUS_FACTOR_INPUT,
   DEFAULT_STUN_DAMAGE_FACTOR_INPUT,
   anomalyDamageFormula,
   calculateStandardDisorderDamageMultiplier,
+  calculateStandardVortexDamageMultiplier,
   type AnomalyCriticalFactorInput,
   type AnomalyDamageBonusFactorInput,
   type AnomalyDamageFormulaInput,
@@ -19,13 +21,16 @@ import {
   type AnomalyProficiencyFactorInput,
   type BaseDamageFactorInput,
   type CalculateStandardDisorderDamageMultiplierParams,
+  type CalculateStandardVortexDamageMultiplierParams,
   type DamageTakenFactorInput,
   type DefenseFactorInput,
   type DisorderSourceAttribute,
   type Formula,
   type ResistanceFactorInput,
+  type RefringeFactorInput,
   type SettledDamageBonusFactorInput,
   type StunDamageFactorInput,
+  type VortexDamageMultiplierProfile,
 } from "../src/index.ts"
 
 function createAnomalyDamageInput(
@@ -42,6 +47,7 @@ function createAnomalyDamageInput(
     anomalyDamageLevel: DEFAULT_ANOMALY_DAMAGE_LEVEL_FACTOR_INPUT,
     anomalyDamageBonus: DEFAULT_ANOMALY_DAMAGE_BONUS_FACTOR_INPUT,
     anomalyCritical: DEFAULT_ANOMALY_CRITICAL_FACTOR_INPUT,
+    refringe: DEFAULT_REFRINGE_FACTOR_INPUT,
   }
 }
 
@@ -58,6 +64,7 @@ describe("anomalyDamageFormula", () => {
       readonly anomalyDamageLevel: AnomalyDamageLevelFactorInput
       readonly anomalyDamageBonus: AnomalyDamageBonusFactorInput
       readonly anomalyCritical: AnomalyCriticalFactorInput
+      readonly refringe: RefringeFactorInput
     }>()
     expectTypeOf(ANOMALY_DAMAGE_FORMULA_ID).toEqualTypeOf<"anomaly_damage">()
     expectTypeOf(anomalyDamageFormula).toEqualTypeOf<
@@ -87,6 +94,7 @@ describe("anomalyDamageFormula", () => {
         anomalyDamageLevel: 1,
         anomalyDamageBonus: 1,
         anomalyCritical: 1,
+        refringe: 1,
       },
     })
     expect(Object.isFrozen(result)).toBe(true)
@@ -109,6 +117,7 @@ describe("anomalyDamageFormula", () => {
         anomalyDamageLevel: 1,
         anomalyDamageBonus: 1,
         anomalyCritical: 1,
+        refringe: 1,
       },
     })
   })
@@ -124,6 +133,7 @@ describe("anomalyDamageFormula", () => {
     const anomalyDamageLevel = Math.trunc(((50 + 58) * 10_000) / 59) / 10_000
     const anomalyDamageBonus = 1 + (0.5 - 0.125)
     const anomalyCritical = 1 + (0.5 + 0.25)
+    const refringe = 1.38
     const input: AnomalyDamageFormulaInput = {
       baseDamage: [
         { damageMultiplier: 2, finalStat: 100 },
@@ -155,6 +165,7 @@ describe("anomalyDamageFormula", () => {
         isAnomalyCritical: true,
         anomalyCriticalDamageContributions: [0.5, 0.25],
       },
+      refringe,
     }
 
     expect(anomalyDamageFormula.calculate(input)).toEqual({
@@ -168,7 +179,8 @@ describe("anomalyDamageFormula", () => {
         stunDamage *
         anomalyDamageLevel *
         anomalyDamageBonus *
-        anomalyCritical,
+        anomalyCritical *
+        refringe,
       factorResults: {
         baseDamage,
         damageBonus,
@@ -180,6 +192,7 @@ describe("anomalyDamageFormula", () => {
         anomalyDamageLevel,
         anomalyDamageBonus,
         anomalyCritical,
+        refringe,
       },
     })
   })
@@ -227,6 +240,7 @@ describe("anomalyDamageFormula", () => {
     "anomalyDamageLevel",
     "anomalyDamageBonus",
     "anomalyCritical",
+    "refringe",
   ] as const)("rejects a missing or undefined %s input", (field) => {
     const completeInput = createAnomalyDamageInput([
       { damageMultiplier: 2, finalStat: 100 },
@@ -270,6 +284,16 @@ describe("anomalyDamageFormula", () => {
         isAnomalyCritical: false,
         anomalyCriticalDamageContributions: [NaN],
       },
+    }
+
+    expect(() => anomalyDamageFormula.calculate(input)).toThrow(RangeError)
+  })
+
+  it("does not stop validating the appended Refringe factor when an earlier multiplier is zero", () => {
+    const input = {
+      ...createAnomalyDamageInput([{ damageMultiplier: 2, finalStat: 100 }]),
+      damageBonus: 0,
+      refringe: 0.999,
     }
 
     expect(() => anomalyDamageFormula.calculate(input)).toThrow(RangeError)
@@ -497,6 +521,195 @@ describe("calculateStandardDisorderDamageMultiplier", () => {
       calculateStandardDisorderDamageMultiplier({
         originalAnomalyAttribute: "fire",
         remainingAnomalyDurationInSeconds: Number.MAX_VALUE,
+      }),
+    ).toThrow(RangeError)
+  })
+})
+
+describe("calculateStandardVortexDamageMultiplier", () => {
+  it("exposes its public parameter and function types", () => {
+    expectTypeOf<VortexDamageMultiplierProfile>().toEqualTypeOf<
+      "corruption" | "shock" | "burn" | "assault" | "frostbite" | "frost"
+    >()
+    expectTypeOf<CalculateStandardVortexDamageMultiplierParams>().toEqualTypeOf<{
+      readonly vortexDamageMultiplierProfile: VortexDamageMultiplierProfile
+      readonly sourceAnomalyDurationInSeconds: number
+    }>()
+    expectTypeOf(calculateStandardVortexDamageMultiplier).toEqualTypeOf<
+      (params: CalculateStandardVortexDamageMultiplierParams) => number
+    >()
+  })
+
+  it.each([
+    ["corruption", 10, 19],
+    ["shock", 10, 19],
+    ["burn", 10, 19],
+    ["assault", 10, 8.75],
+    ["frostbite", 10, 13.75],
+    ["frost", 20, 15],
+  ] as const)(
+    "calculates the %s standard multiplier at its standard duration",
+    (
+      vortexDamageMultiplierProfile,
+      sourceAnomalyDurationInSeconds,
+      expected,
+    ) => {
+      expect(
+        calculateStandardVortexDamageMultiplier({
+          vortexDamageMultiplierProfile,
+          sourceAnomalyDurationInSeconds,
+        }),
+      ).toBe(expected)
+    },
+  )
+
+  it.each([
+    ["corruption", 6.5],
+    ["shock", 6.5],
+    ["burn", 9],
+    ["assault", 8],
+    ["frostbite", 13],
+    ["frost", 0],
+  ] as const)(
+    "returns the %s fixed multiplier at zero seconds",
+    (vortexDamageMultiplierProfile, expected) => {
+      expect(
+        calculateStandardVortexDamageMultiplier({
+          vortexDamageMultiplierProfile,
+          sourceAnomalyDurationInSeconds: 0,
+        }),
+      ).toBe(expected)
+    },
+  )
+
+  it("uses an extended duration without capping or rounding it", () => {
+    expect(
+      calculateStandardVortexDamageMultiplier({
+        vortexDamageMultiplierProfile: "corruption",
+        sourceAnomalyDurationInSeconds: 13,
+      }),
+    ).toBe(22.75)
+    expect(
+      calculateStandardVortexDamageMultiplier({
+        vortexDamageMultiplierProfile: "assault",
+        sourceAnomalyDurationInSeconds: 0.5,
+      }),
+    ).toBe(8.0375)
+  })
+
+  it("preserves the documented multiplication order", () => {
+    const sourceAnomalyDurationInSeconds = 1e308
+    const expected = 6.5 + 0.625 * sourceAnomalyDurationInSeconds * 2
+
+    expect(Number.isFinite(expected)).toBe(true)
+    expect(
+      calculateStandardVortexDamageMultiplier({
+        vortexDamageMultiplierProfile: "corruption",
+        sourceAnomalyDurationInSeconds,
+      }),
+    ).toBe(expected)
+  })
+
+  it("produces a multiplier that composes with the anomaly damage formula", () => {
+    const damageMultiplier = calculateStandardVortexDamageMultiplier({
+      vortexDamageMultiplierProfile: "corruption",
+      sourceAnomalyDurationInSeconds: 10,
+    })
+    const result = anomalyDamageFormula.calculate(
+      createAnomalyDamageInput([{ damageMultiplier, finalStat: 100 }]),
+    )
+
+    expect(result.value).toBe(1_900)
+    expect(result.factorResults.baseDamage).toBe(1_900)
+  })
+
+  it("does not modify its parameter object", () => {
+    const params = Object.freeze({
+      vortexDamageMultiplierProfile: "shock" as const,
+      sourceAnomalyDurationInSeconds: 10,
+    })
+
+    expect(calculateStandardVortexDamageMultiplier(params)).toBe(19)
+    expect(params).toEqual({
+      vortexDamageMultiplierProfile: "shock",
+      sourceAnomalyDurationInSeconds: 10,
+    })
+    expect(Object.isFrozen(params)).toBe(true)
+  })
+
+  it("rejects parameters that are not non-array objects", () => {
+    const fields = {
+      vortexDamageMultiplierProfile: "burn",
+      sourceAnomalyDurationInSeconds: 10,
+    }
+    const invalidParams = [
+      null,
+      Object.assign([], fields),
+      Object.assign(() => undefined, fields),
+    ]
+
+    for (const params of invalidParams) {
+      expect(() =>
+        calculateStandardVortexDamageMultiplier(
+          params as unknown as CalculateStandardVortexDamageMultiplierParams,
+        ),
+      ).toThrow(TypeError)
+    }
+  })
+
+  it.each([undefined, null, 1, true])(
+    "rejects the non-string profile %s",
+    (vortexDamageMultiplierProfile) => {
+      expect(() =>
+        calculateStandardVortexDamageMultiplier({
+          vortexDamageMultiplierProfile,
+          sourceAnomalyDurationInSeconds: 10,
+        } as unknown as CalculateStandardVortexDamageMultiplierParams),
+      ).toThrow(TypeError)
+    },
+  )
+
+  it.each(["", "wind", "auric_ink", "honed_edge", "unknown"])(
+    "rejects the unsupported profile %s",
+    (vortexDamageMultiplierProfile) => {
+      expect(() =>
+        calculateStandardVortexDamageMultiplier({
+          vortexDamageMultiplierProfile,
+          sourceAnomalyDurationInSeconds: 10,
+        } as CalculateStandardVortexDamageMultiplierParams),
+      ).toThrow(RangeError)
+    },
+  )
+
+  it.each([undefined, null, "10", true])(
+    "rejects the non-number source anomaly duration %s",
+    (sourceAnomalyDurationInSeconds) => {
+      expect(() =>
+        calculateStandardVortexDamageMultiplier({
+          vortexDamageMultiplierProfile: "burn",
+          sourceAnomalyDurationInSeconds,
+        } as unknown as CalculateStandardVortexDamageMultiplierParams),
+      ).toThrow(TypeError)
+    },
+  )
+
+  it.each([NaN, Infinity, -Infinity, -1])(
+    "rejects the invalid source anomaly duration %s",
+    (sourceAnomalyDurationInSeconds) => {
+      expect(() =>
+        calculateStandardVortexDamageMultiplier({
+          vortexDamageMultiplierProfile: "burn",
+          sourceAnomalyDurationInSeconds,
+        }),
+      ).toThrow(RangeError)
+    },
+  )
+
+  it("rejects a non-finite calculated multiplier", () => {
+    expect(() =>
+      calculateStandardVortexDamageMultiplier({
+        vortexDamageMultiplierProfile: "shock",
+        sourceAnomalyDurationInSeconds: Number.MAX_VALUE,
       }),
     ).toThrow(RangeError)
   })

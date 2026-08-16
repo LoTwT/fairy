@@ -179,6 +179,48 @@ Nanoka 原始角色技能数据中的 `ether_purify` 是数据层内部数值字
 还可能随同一技能的不同展示参数重复出现，不能直接作为 `BaseMiasmicShieldReductionFactorInput`。
 其单位和记录语义由 core 之外的上游契约解释；core 不公开 `etherPurify` 输入。
 
+### 异放相关术语
+
+Nanoka 3.1 中，`Abloom` 对应“异放”，表示基于目标已有的属性异常状态额外结算一次对应属性的属性异常
+伤害。代表性中英文同路径文本位于
+`packages/data/raw/nanoka/3.1/{en,zh}/character/1541.json:1359`，该段同时列出冰、以太、电、火、物理和
+风属性异常，并明确使用 `100% Attribute Anomaly DMG` / “100% 倍率的对应属性的属性异常伤害”。
+
+| 中文术语 | 英文标识 | 规范定义                                                                                             | 类别     |
+| -------- | -------- | ---------------------------------------------------------------------------------------------------- | -------- |
+| 异放     | `Abloom` | 由效果明确触发、基于一个已有属性异常状态额外结算的对应属性异常伤害；具体倍率与适用乘区由来源效果决定 | 游戏文本 |
+
+游戏文本也会依句式使用 `Abloom DMG` 表示“异放伤害”，例如
+`packages/data/raw/nanoka/3.1/{en,zh}/character/1561.json:1872`。这不是第二种效果或独立乘区。不同角色文本
+会使用“原属性异常伤害的一定比例”“固定倍率的对应属性异常伤害”或基于角色属性推导的比例，不能从
+`Abloom` 名称反推一个全局固定倍率。具体 2.x 通用结构、3.1 示例和公式输入边界由
+[异常伤害公式的异放小节](formulas/anomaly-damage.md#异放的-31-输入边界)维护。
+
+### 流明、异化与耀变相关术语
+
+Nanoka 3.1 本地中英文数据 `packages/data/raw/nanoka/3.1/{en,zh}/character/1581.json` 在相同路径中使用
+以下术语：
+
+| 中文术语     | 英文标识                  | 规范定义                                                                       | 类别     |
+| ------------ | ------------------------- | ------------------------------------------------------------------------------ | -------- |
+| 流明         | `Lumiflux`                | 不自然积蓄传统属性异常、而是通过流明积蓄点参与异化反应的属性                   | 游戏文本 |
+| 流明积蓄点   | `Lumiflux Buildup`        | 由流明代理人施加、在其他代理人触发属性异常时可被消耗以触发异化的独立层数       | 游戏文本 |
+| 异化         | `Refringe`                | 消耗流明积蓄点后，使本次属性异常伤害整体采用异化系数独立倍率的反应             | 游戏文本 |
+| 异化系数     | `Refringe Coefficient`    | 触发异化时计算并保存的提升比例；异化区最终倍率包含基础倍率 `1`                 | 游戏文本 |
+| 异常效果强度 | `Anomaly Effect Strength` | 虚曜保存的来源异常计算属性集合，不等同于最终异常伤害数字                       | 游戏文本 |
+| 虚曜         | `Voidflare`               | 根据被异化异常的异常效果强度生成并保存、供后续耀变逐枚结算的记录               | 游戏文本 |
+| 耀变         | `Luminize`                | 根据虚曜保存的异常效果强度和本次招式耀变倍率造成的特殊属性异常伤害             | 游戏文本 |
+| 耀变倍率     | `Luminize Multiplier`     | 招式基础倍率与蕾米埃尔实时异常精通换算结果加算后，再采用实际乘法调整得到的倍率 | 游戏文本 |
+
+同文件 `:1952-2036` 同时给出异化、虚曜、异常效果强度与耀变的关系，技能数据 `:725`、`:793`、
+`:1410`、`:1745` 使用 `Luminize Multiplier` / “耀变倍率”。具体数学和历史／实时属性边界分别由
+[异化区](factors/refringe.md)、[耀变倍率区](factors/luminize-multiplier.md)与
+[耀变伤害公式](formulas/luminize-damage.md)维护。
+
+流明积蓄点不是传统属性异常积蓄值，不能作为 `BaseAnomalyBuildupFactorInput` 传入异常积蓄值公式；异化
+系数也不是异常增伤贡献，不能放入 `AnomalyDamageBonusFactorInput`。虚曜是调用方状态层保存的来源记录，
+当前 core 不建立虚曜队列或流明积蓄状态对象。
+
 ### 术语边界
 
 - “公式”只表示常规伤害、贯穿伤害、异常伤害、异常积蓄值等由乘区组成的顶层业务计算。乘区内部的
@@ -297,6 +339,8 @@ export interface Formula<FormulaInput extends object> {
 - 紊乱失衡等级区在合法等级范围内不能产生恒等倍率 `1`，不公开
   `DEFAULT_DISORDER_DAZE_LEVEL_FACTOR_INPUT`。调用方必须提供已经完成加权和向下取整的实际虚拟
   代理人等级。
+- 异化区公开恒等输入 `DEFAULT_REFRINGE_FACTOR_INPUT = 1`，只表示本次异常伤害没有适用异化；耀变倍率
+  区必须包含本次招式倍率，没有恒等默认输入，也不公开 `DEFAULT_LUMINIZE_MULTIPLIER_FACTOR_INPUT`。
 
 ## 运行时校验原则
 
@@ -443,6 +487,8 @@ export function defineFormula<FormulaInput extends object>(
 - [异常伤害等级区](factors/anomaly-damage-level.md)
 - [异常增伤区](factors/anomaly-damage-bonus.md)
 - [异常暴击区](factors/anomaly-critical.md)
+- [异化区](factors/refringe.md)
+- [耀变倍率区](factors/luminize-multiplier.md)
 - [基础失衡区](factors/base-daze.md)
 - [失衡值提升区](factors/daze-dealt.md)
 - [受到失衡值提升区](factors/daze-taken.md)
@@ -470,6 +516,7 @@ export function defineFormula<FormulaInput extends object>(
 - [常规伤害](formulas/regular-damage.md)
 - [贯穿伤害](formulas/sheer-damage.md)
 - [异常伤害](formulas/anomaly-damage.md)
+- [耀变伤害](formulas/luminize-damage.md)
 - [异常积蓄值](formulas/anomaly-buildup.md)
 - [常规失衡值](formulas/regular-daze.md)
 - [紊乱失衡值](formulas/disorder-daze.md)

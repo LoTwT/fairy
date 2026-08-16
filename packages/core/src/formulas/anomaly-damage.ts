@@ -36,6 +36,10 @@ import {
   type AnomalyCriticalFactorInput,
 } from "../factors/anomaly-critical.ts"
 import {
+  refringeFactor,
+  type RefringeFactorInput,
+} from "../factors/refringe.ts"
+import {
   defineFormula,
   type Formula,
   type FormulaFactorResults,
@@ -57,6 +61,7 @@ export interface AnomalyDamageFormulaInput {
   readonly anomalyDamageLevel: AnomalyDamageLevelFactorInput
   readonly anomalyDamageBonus: AnomalyDamageBonusFactorInput
   readonly anomalyCritical: AnomalyCriticalFactorInput
+  readonly refringe: RefringeFactorInput
 }
 
 export type DisorderSourceAttribute =
@@ -71,6 +76,19 @@ export type DisorderSourceAttribute =
 export interface CalculateStandardDisorderDamageMultiplierParams {
   readonly originalAnomalyAttribute: DisorderSourceAttribute
   readonly remainingAnomalyDurationInSeconds: number
+}
+
+export type VortexDamageMultiplierProfile =
+  | "corruption"
+  | "shock"
+  | "burn"
+  | "assault"
+  | "frostbite"
+  | "frost"
+
+export interface CalculateStandardVortexDamageMultiplierParams {
+  readonly vortexDamageMultiplierProfile: VortexDamageMultiplierProfile
+  readonly sourceAnomalyDurationInSeconds: number
 }
 
 export const ANOMALY_DAMAGE_FORMULA_ID = "anomaly_damage" as const
@@ -137,6 +155,56 @@ export function calculateStandardDisorderDamageMultiplier(
   return damageMultiplier
 }
 
+/** 根据被乱流消耗的非风异常及其持续时间计算标准乱流伤害倍率。 */
+export function calculateStandardVortexDamageMultiplier(
+  params: CalculateStandardVortexDamageMultiplierParams,
+): number {
+  assertNonArrayObject(params, "calculateStandardVortexDamageMultiplier params")
+
+  const { vortexDamageMultiplierProfile, sourceAnomalyDurationInSeconds } =
+    params
+
+  if (typeof vortexDamageMultiplierProfile !== "string") {
+    throw new TypeError("Vortex damage multiplier profile must be a string")
+  }
+
+  assertNonNegativeFiniteNumber(
+    sourceAnomalyDurationInSeconds,
+    "Source anomaly duration in seconds",
+  )
+
+  let damageMultiplier: number
+
+  switch (vortexDamageMultiplierProfile) {
+    case "corruption":
+      damageMultiplier = 6.5 + 0.625 * sourceAnomalyDurationInSeconds * 2
+      break
+    case "shock":
+      damageMultiplier = 6.5 + 1.25 * sourceAnomalyDurationInSeconds
+      break
+    case "burn":
+      damageMultiplier = 9 + 0.5 * sourceAnomalyDurationInSeconds * 2
+      break
+    case "assault":
+      damageMultiplier = 8 + 0.075 * sourceAnomalyDurationInSeconds
+      break
+    case "frostbite":
+      damageMultiplier = 13 + 0.075 * sourceAnomalyDurationInSeconds
+      break
+    case "frost":
+      damageMultiplier = 0 + 0.75 * sourceAnomalyDurationInSeconds
+      break
+    default:
+      throw new RangeError(
+        `Unsupported Vortex damage multiplier profile: ${vortexDamageMultiplierProfile}`,
+      )
+  }
+
+  assertFiniteResult(damageMultiplier, "Standard Vortex damage multiplier")
+
+  return damageMultiplier
+}
+
 export const anomalyDamageFormula: Formula<AnomalyDamageFormulaInput> =
   defineFormula<AnomalyDamageFormulaInput>({
     formulaId: ANOMALY_DAMAGE_FORMULA_ID,
@@ -160,6 +228,7 @@ export const anomalyDamageFormula: Formula<AnomalyDamageFormulaInput> =
           input.anomalyDamageBonus,
         ),
         anomalyCritical: anomalyCriticalFactor.calculate(input.anomalyCritical),
+        refringe: refringeFactor.calculate(input.refringe),
       } satisfies FormulaFactorResults<AnomalyDamageFormulaInput>
 
       const value =
@@ -172,7 +241,8 @@ export const anomalyDamageFormula: Formula<AnomalyDamageFormulaInput> =
         factorResults.stunDamage *
         factorResults.anomalyDamageLevel *
         factorResults.anomalyDamageBonus *
-        factorResults.anomalyCritical
+        factorResults.anomalyCritical *
+        factorResults.refringe
 
       return { value, factorResults }
     },
