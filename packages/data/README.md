@@ -14,6 +14,12 @@ pnpm --filter @randomplay/data fetch:nanoka
 
 该命令只用于源码工作区，`@randomplay/data` 不导出 npm CLI。完整参数、缓存语义和验证边界见 [Nanoka 共享来源规范](https://github.com/LoTwT/fairy/blob/main/docs/specs/nanoka/source.md)。
 
+## 目标导入方式
+
+当前公开 API 仍为空。未来的 JSON、TypeScript 和 URL 导入形式由
+[Data 包架构](https://github.com/LoTwT/fairy/blob/main/docs/specs/data/index.md) 统一定义；具体文件名、导出名和
+类型名要等数据结构确定后再补充。
+
 ## 约束
 
 - 本包拥有原始来源、清洗结果和发布数据。
