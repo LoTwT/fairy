@@ -2,5 +2,6 @@ node_modules/
 dist/
 coverage/
 packages/data/raw/
+fairy-nanoka-agents-*/
 .DS_Store
 *.log

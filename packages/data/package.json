@@ -27,6 +27,8 @@
     "build": "tsdown",
     "check": "pnpm typecheck && pnpm test && pnpm verify:pack",
     "fetch:nanoka": "node scripts/nanoka-source.ts fetch",
+    "integrate:nanoka:agents": "node scripts/build-nanoka-agents.ts",
+    "verify:nanoka:agents": "node scripts/verify-nanoka-agents.ts",
     "prepack": "pnpm build",
     "test": "vitest run --exclude test/verify-package.test.ts",
     "test:watch": "vitest --exclude test/verify-package.test.ts",

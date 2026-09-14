@@ -2,7 +2,7 @@
 
 ## 状态与目标
 
-**状态：规则 v4；单代理人纯整合、离线全量新制品构建、确定性字节与摘要、总索引及完整复验已实现。既有数据集的增量更新、事务替换、恢复及公开 API 尚未实现。**
+**状态：规则 v4；单代理人纯整合、离线全量新制品构建、确定性字节与摘要、总索引及完整复验、显式 pnpm 整合与验证命令已实现。既有数据集的增量更新、事务替换、恢复及公开 API 尚未实现。**
 `data.json` 与 `details.{locale}.json` 为已确认的文件名，正式类型与测试使用同一命名。
 
 本阶段把分散的来源记录汇集为可查阅、导出和再次加工的完整资料，尽量保留游戏内原文、数值与展示上下文。
@@ -426,17 +426,37 @@ fairy-nanoka-agents-<独占后缀>/
 工作区显式复跑入口（在仓库根目录执行）：
 
 ```bash
-node packages/data/scripts/build-nanoka-agents.ts packages/data/raw/nanoka 3.1
+pnpm --filter @randomplay/data integrate:nanoka:agents raw/nanoka 3.1
+pnpm --filter @randomplay/data verify:nanoka:agents /absolute/build/integrated/nanoka
 ```
 
-可选第三个参数指定已存在的临时父目录。每次返回新路径；同一输入复跑时比较全部制品文件字节。
-模块调用和独立复验方式见[data README](../../../packages/data/README.md#离线全量构建)。脚本不挂接普通
-`build`、`test`、`pack` 生命周期，不增加 npm `files`、`exports` 或公开 API。
+命令分别接受 `<rawRoot> <version> [temporaryParent]` 和 `<artifactDirectory>`。相对路径以进程工作目录解析；
+上述 filter 调用在 `packages/data` 执行，因此使用 `raw/nanoka`。在 data 包目录执行可省略 filter；绝对路径也可用，
+带空格路径须加引号。第三个参数是已存在且位于 raw 外的父目录，省略时用系统临时目录，不是最终制品目录。
+每次返回新路径；同一输入复跑时比较全部制品文件字节。仓库内任意层级的 `fairy-nanoka-agents-*` 临时目录被 Git 忽略，
+相邻源码、文档与人工维护的数据文件不因该规则被忽略。
+
+仅单独的 `--help` 或 `-h` 输出用法并以 0 退出，不访问输入或创建产物；缺少、多余、空位置参数或未知选项
+在调用构建器或验证器前拒绝。成功时脚本 stdout 输出一个 JSON 对象，退出码为 0；失败时 stdout 不输出回执，
+stderr 使用[共享终端错误规则](../nanoka/source.md#终端错误文本)，退出码为 1。库的结构化异常和来源原值保持完整。
+两个离线入口也将 stdout 的异步错误交给同一错误出口，包含接收端提前关闭产生的 `EPIPE`；帮助和 JSON 回执均适用。
+回执发送失败时保留已经完成的制品，不将输出传输失败视为构建失败而清理数据。
+整合回执保留全部原有路径与计数字段，并包含 `buildDirectory`；验证回执从已验证索引取得 `agentCount`、
+`detailLocales`，连同实际绝对 `artifactDirectory` 与 `verified: true` 返回。机器解析时使用 `pnpm --silent`，
+避免 pnpm 自身的执行信息混入 stdout。
+
+完整命令、回执字段与按确切 `buildDirectory` 清理的方法见[data README](../../../packages/data/README.md#离线全量构建)。
+脚本不挂接普通 `build`、`test`、`check`、`prepack` 生命周期，不增加 npm `bin`、`files`、`exports` 或公开 API。
 
 [全量合成测试](../../../packages/data/test/agent-build.test.ts)覆盖完整输入、非法编码/数值/结构、资源预算、
 路径越界/符号链接/非普通文件、忽略旧缓存、缺失拒绝、输入字节复用、全部摘要、配置语言顺序、重复构建、
 来源排版变化、重新序列化副本与制品篡改；大诊断量测试核对预算内未知字段及维护信息完整保留，
 不把诊断数组展开为调用实参。模拟中途及索引/报告写入失败，核对只清理本次资源。
+[实际命令测试](../../../packages/data/test/agent-cli.test.ts)通过真实 `pnpm --silent` package scripts 串联构建与复验，
+覆盖仓库根目录 filter/data 包目录、相对/绝对/空格路径、实际回执、帮助和参数拒绝、缺失和无效制品、
+来源控制字符及超长 Pointer 的转义与限制、失败清理和已有目录保留，并用 `git check-ignore` 检查实际临时目录及相邻正常文件。
+断管测试先关闭真实 stdout 管道的接收端，再放行命令，检查帮助和回执失败的错误格式、退出码及原始数据和制品保留。
+这些命令测试仅使用合成输入和独占临时目录，禁止网络请求，不触发真实数据生成。
 [独立序列化预期](../../../packages/data/test/agent-serialization.test.ts)使用手写字节检查大整数 key、
 非规范数字 key、特殊自有 key、Unicode 与数组顺序。普通测试不依赖真实 raw 或网络，步骤一类型和整合测试保留。
 
@@ -478,10 +498,10 @@ node packages/data/scripts/build-nanoka-agents.ts packages/data/raw/nanoka 3.1
 4. 导航精确覆盖多 ID、重复用途、纯文本、缺元数据、特殊字符及跨语言独立数组顺序。
 5. 确定性字节、输出摘要、来源摘要、篡改拒绝，以及内容不变时跳过重写。
 6. 新增、修改、规则升级、权威索引移除与失败抓取的区分；多文件更新中断和恢复。
-7. 普通 build、test、pack 保持离线，不读取真实缓存，不触发抓取或整合写入；测试仅对合成输入调用纯函数及文件构建器，输出与维护材料按制品边界分别检查。
+7. 普通 build、test、pack 保持离线，不读取真实缓存，不触发真实数据抓取或写入真实数据集；测试仅使用合成输入，并在独占临时目录中执行构建与验证，输出与维护材料按制品边界分别检查。
 8. `codeName` 的等值、不同拼写、空字符串、缺失和错误类型；按配置顺序选值，读取完成顺序变化不影响结果，
    后续语言不覆盖，且相同豁免不适用于其他共享字段。
 
 本步已将正式类型、单实体整合、离线全量构建、严格解码、确定性摘要与序列化、总索引及制品复验纳入常规检查，
-并提供显式工作区脚本。步骤三仍需实现增量识别与跳过重写、完整索引驱动的成员移除、规则升级、现有数据集的
+并接入显式 pnpm 整合与验证命令。固定当前数据集的更新协议属于步骤三，仍需实现增量识别与跳过重写、完整索引驱动的成员移除、规则升级、现有数据集的
 整组替换、并发读取约束及中断恢复验收。运行时查询 API、制品发布渠道和人工计算模型分别在其对应任务中确定。

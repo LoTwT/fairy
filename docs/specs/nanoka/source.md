@@ -217,6 +217,7 @@ packages/data/raw/nanoka/{version}/
 packages/data/
 ├── source-registry.json
 ├── scripts/
+│   ├── terminal.ts
 │   ├── nanoka-source.ts
 │   └── nanoka/
 │       ├── policy.ts
@@ -230,6 +231,7 @@ packages/data/
 - `http.ts`：节流、并发、超时、有限重试、响应字节读取。
 - `fetch.ts`：通用索引发现、详情抓取和本地缓存写入。
 - `nanoka-source.ts`：CLI、交互选择、进度和结果输出。
+- `terminal.ts`：抓取、整合、验证入口共用的终端错误转义与长度限制，不依赖抓取 CLI 或 HTTP 客户端。
 
 ## 11. CLI
 
@@ -242,7 +244,16 @@ pnpm --filter @randomplay/data fetch:nanoka --version <version>
 pnpm --filter @randomplay/data fetch:nanoka --entity <entity>
 ```
 
-当前不存在 `verify:nanoka`。CLI 成功只表示本次请求范围内的资源已获取并通过第 8 节的轻量检查，不表示本地目录是一份完整或可复现快照。
+当前不存在原始缓存验证命令 `verify:nanoka`；`verify:nanoka:agents` 用于独立整合制品，见[整合规范](../data/integration.md#当前离线全量新制品构建)。抓取 CLI 成功只表示本次请求范围内的资源已获取并通过第 8 节的轻量检查，不表示本地目录是一份完整或可复现快照。
+
+### 终端错误文本
+
+抓取、离线整合与制品验证命令在入口捕获失败，只输出错误 message，不默认展开堆栈或嵌套 cause。
+[共享终端模块](../../../packages/data/scripts/terminal.ts) 将 C0/C1 控制字符、DEL、阿拉伯字母标记、方向标记、
+行/段分隔符及双向控制字符转为可见的 `\u{xxxx}` 文本。每条错误最多处理前 4096 个 Unicode 码点，
+超出时添加 `…`；转义后每个码点最多占 8 个字符。错误保留预算内的资源、实体、语言与字段定位，
+只在 stderr 的命令错误行结尾添加真实换行。该限制仅用于终端显示，不修改 raw、制品、维护报告或库的结构化异常。
+抓取命令继续使用原错误前缀、进度和成功输出方式；离线命令的 JSON 回执契约由整合规范维护。
 
 ## 12. 包边界与再分发
 
