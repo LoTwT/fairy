@@ -6,6 +6,7 @@
     "moduleResolution": "Bundler",
     "allowImportingTsExtensions": true,
     "strict": true,
+    "exactOptionalPropertyTypes": true,
     "declaration": true,
     "declarationMap": false,
     "sourceMap": true,

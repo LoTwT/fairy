@@ -18,6 +18,37 @@ Nanoka 前端直接使用 `static.nanoka.cc` 提供的版本化 JSON：
 
 这些文件无需登录或 API key，但不是上游承诺长期兼容的正式 API。本项目当前只将其作为可重新获取的公开来源，不把本地副本视为权威制品。
 
+### 已确认的图片地址规则
+
+2026-09-14 核对 [Nanoka 站点](https://zzz.nanoka.cc/)加载的前端图片处理与资源前缀定义。
+当时对应的 bundle 标识为 `_app/immutable/chunks/zzz.db75fd6b.js` 和
+`_app/immutable/chunks/zzz.e60bf9a8.js`，仅作为历史定位记录；内容哈希随部署变化，不是稳定引用地址。
+对于已确认的、以 `.png`
+结尾的非空来源图片路径，去掉首尾空白和原目录，将文件扩展名改为 `.webp`，再添加当前站点的固定资源前缀。
+以下是该输入范围内的等价拼接规则，不是包的公开 API：
+
+```ts
+const fileName = sourcePath.trim().split("/").pop()!
+const imageUrl = `https://static.nanoka.cc/assets/zzz/${fileName.replace(/\.png$/i, ".webp")}`
+```
+
+例如，来源值 `UI/Sprite/A1DynamicLoad/IconRoleCircle/UnPacker/IconRoleCircle01.png` 对应
+[IconRoleCircle01.webp](https://static.nanoka.cc/assets/zzz/IconRoleCircle01.webp)。地址不包含原来的
+`UI/Sprite/...` 目录、来源版本号或语言。
+
+同日通过 HTTP HEAD 复核 `IconRoleCircle01.webp`、`IconInterKnotRole0001.webp`、`IconCrit.webp`、
+`IconFrost.webp`，四个地址均返回 `200` 和 `Content-Type: image/webp`。这记录的是这些样例在核对时的结果。
+
+raw 与 integrated 继续保留原始资源值；完整 URL 属于消费时派生的访问地址。上述规则不适用于
+`live2_d` 等无图片扩展名的动画资源标识：例如 `UISpine_Yidhari`，代理人页面将其用于 `.skel`、`.atlas`
+资源并交给 Spine 查看器；当时的代理人前端加载代码位于 `_app/immutable/nodes/9.6a28401a.js`。
+记录资源地址不改变第 3 节的抓取范围。
+
+复核时从站点进入代理人页面，在浏览器开发者工具中查看实际加载的脚本，搜索
+`static.nanoka.cc`、`/assets/zzz` 及 `.webp`，沿调用关系确认资源前缀、取文件名和替换扩展名的处理；
+动画资源另查 `.skel`、`.atlas` 的请求与加载代码。记录核对日期和当次 bundle 标识，并用上述图片样例
+检查实际响应。此过程用于复核当前行为，不能凭新部署的代码重建旧 bundle；本仓库未归档旧脚本正文。
+
 ## 2. 目标
 
 共享抓取器负责：
@@ -32,7 +63,7 @@ Nanoka 前端直接使用 `static.nanoka.cc` 提供的版本化 JSON：
 
 ## 3. 非目标
 
-当前不实现：
+本节非目标限于共享抓取器；独立的[来源资料整合](../data/integration.md)按自身契约执行结构校验与多语言拆分。抓取器当前不实现：
 
 - 完整、不可变或可审计的数据快照；
 - `fetch-manifest.json`、响应哈希、HTTP 元数据归档或 provenance；
@@ -194,7 +225,7 @@ packages/data/
 ```
 
 - `source-registry.json`：URL、allowlist、语言、请求和单次抓取限制。
-- `policy.ts`：登记实体、配置、manifest、版本、URL 和路径策略。
+- `policy.ts`：登记实体、配置、manifest、版本、URL 和路径策略；语言及实体 ID 复用包内 `src/nanoka-identity.ts`，与纯整合模块保持同一来源身份规则。
 - `http.ts`：节流、并发、超时、有限重试、响应字节读取。
 - `fetch.ts`：通用索引发现、详情抓取和本地缓存写入。
 - `nanoka-source.ts`：CLI、交互选择、进度和结果输出。

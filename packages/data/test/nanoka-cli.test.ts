@@ -136,6 +136,9 @@ async function runCli(
   await cp(join(packageDirectory, "scripts"), join(directory, "scripts"), {
     recursive: true,
   })
+  await cp(join(packageDirectory, "src"), join(directory, "src"), {
+    recursive: true,
+  })
   await cp(
     join(packageDirectory, "source-registry.json"),
     join(directory, "source-registry.json"),

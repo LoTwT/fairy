@@ -2,8 +2,16 @@ import { readFile } from "node:fs/promises"
 import { dirname, join } from "node:path"
 import { fileURLToPath } from "node:url"
 
-export const supportedLanguages = ["zh", "en"] as const
-export type SupportedLanguage = (typeof supportedLanguages)[number]
+import {
+  isValidEntityId,
+  supportedLanguages,
+} from "../../src/nanoka-identity.ts"
+import type { SupportedLanguage } from "../../src/nanoka-identity.ts"
+export {
+  isValidEntityId,
+  supportedLanguages,
+} from "../../src/nanoka-identity.ts"
+export type { SupportedLanguage } from "../../src/nanoka-identity.ts"
 export const supportedEntityNames = [
   "character",
   "equipment",
@@ -105,10 +113,6 @@ export async function loadSourcePolicy(): Promise<SourcePolicy> {
   }
 
   return source
-}
-
-export function isValidEntityId(value: string): boolean {
-  return value.length <= 32 && /^(0|[1-9]\d*)$/u.test(value)
 }
 
 export function validateManifest(value: unknown): NanokaManifest {
