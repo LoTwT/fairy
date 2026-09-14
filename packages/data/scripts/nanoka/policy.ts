@@ -79,10 +79,15 @@ export async function loadSourcePolicy(): Promise<SourcePolicy> {
     new Uint8Array(await readFile(registryPath)),
     registryPath,
   ) as RegistryDocument
-  const source = registry.sources?.["nanoka-zzz"] as SourcePolicy | undefined
+  if (registry.schemaVersion !== "fairy-source-registry/v1")
+    throw new Error(`来源配置无效：${registryPath}`)
+  return validateSourcePolicy(registry.sources?.["nanoka-zzz"])
+}
 
+/** 离线构建与抓取共用同一配置校验；保留完整详情语言的配置顺序。 */
+export function validateSourcePolicy(value: unknown): SourcePolicy {
+  const source = value as SourcePolicy | undefined
   if (
-    registry.schemaVersion !== "fairy-source-registry/v1" ||
     source?.sourceId !== "nanoka-zzz" ||
     source.game !== "zzz" ||
     source.manifestUrl !== "https://static.nanoka.cc/manifest.json" ||
@@ -109,10 +114,10 @@ export async function loadSourcePolicy(): Promise<SourcePolicy> {
     typeof source.userAgent !== "string" ||
     source.userAgent.length === 0
   ) {
-    throw new Error(`来源配置无效：${registryPath}`)
+    throw new Error("来源配置无效：nanoka-zzz")
   }
 
-  return source
+  return structuredClone(source)
 }
 
 export function validateManifest(value: unknown): NanokaManifest {

@@ -38,7 +38,7 @@ export interface ExportFileReference {
 }
 
 /**
- * 索引的完整资料导出契约 v2；仅声明后续全量生成的文件契约，本步不生成索引。
+ * 索引的完整资料导出契约 v2；离线全量构建器生成并复验 full-index 制品。
  * index 内 sourceRecord 为原始来源值，其余字段是来源定位或整合元信息。
  * 元信息中的版本不要求 integrated 存放多个版本目录。
  */

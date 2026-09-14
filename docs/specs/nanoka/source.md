@@ -4,7 +4,8 @@
 
 - 状态：轻量本地抓取缓存已实现
 - 当前范围：版本发现与选择、安全 HTTP 请求、实体索引发现、`zh/en` 详情抓取和原始字节缓存
-- 明确不包含：权威快照、运行时数据模型、字段级语义验证、跨实体验证、离线重放和跨机器分发
+- 抓取器明确不包含：权威快照、运行时数据模型、字段级语义验证、跨实体验证、离线重放和跨机器分发
+- 独立的[来源整合器](../data/integration.md#当前离线全量新制品构建)已支持明确本地版本的离线全量新制品构建与验证；不改变抓取缓存语义
 - 适用包：`@randomplay/data`
 - 数据来源：Nanoka ZZZ 静态数据
 - 实体入口：[Nanoka 数据源规范索引](index.md)
@@ -225,7 +226,7 @@ packages/data/
 ```
 
 - `source-registry.json`：URL、allowlist、语言、请求和单次抓取限制。
-- `policy.ts`：登记实体、配置、manifest、版本、URL 和路径策略；语言及实体 ID 复用包内 `src/nanoka-identity.ts`，与纯整合模块保持同一来源身份规则。
+- `policy.ts`：登记实体、配置、manifest、版本、URL 和路径策略；导出 `validateSourcePolicy` 供抓取与离线整合复用同一校验，保留配置语言顺序；语言及实体 ID 复用包内 `src/nanoka-identity.ts`，与纯整合模块保持同一来源身份规则。
 - `http.ts`：节流、并发、超时、有限重试、响应字节读取。
 - `fetch.ts`：通用索引发现、详情抓取和本地缓存写入。
 - `nanoka-source.ts`：CLI、交互选择、进度和结果输出。
